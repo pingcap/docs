@@ -29,128 +29,130 @@ TiUPを使用してクラスターをデプロイする場合、 [初期化設�
 
 次の例では、 `tidb-host-machine-n` `n`番目の TiDB ノードの IP アドレスを表し、 `tikv-host-machine-n` `n`番目の TiKV ノードの IP アドレスを表し、 `tiflash-host-machine-n` `n`番目のTiFlashノードの IP アドレスを表します。
 
-    server_configs:
-      pd:
-        replication.location-labels: ["zone", "host"]
-    tidb_servers:
-    # z1
-      - host: tidb-host-machine-1
-        config:
-          labels:
-            zone: z1
-            host: tidb-host-machine-1
-      - host: tidb-host-machine-2
-        config:
-          labels:
-            zone: z1
-            host: tidb-host-machine-2
-    # z2
-      - host: tidb-host-machine-3
-        config:
-          labels:
-            zone: z2
-            host: tidb-host-machine-3
-      - host: tikv-host-machine-4
-        config:
-          labels:
-            zone: z2
-            host: tidb-host-machine-4
-    # z3
-      - host: tidb-host-machine-5
-        config:
-          labels:
-            zone: z3
-            host: tidb-host-machine-5
-      - host: tidb-host-machine-6
-        config:
-          labels:
-            zone: z3
-            host: tidb-host-machine-6
-    tikv_servers:
-    # z1
-      # machine-1 on z1
-      - host: tikv-host-machine-1
-        port: 20160
-        config:
-          server.labels:
-            zone: z1
-            host: tikv-host-machine-1
-      - host: tikv-host-machine-1
-        port: 20161
-        config:
-          server.labels:
-            zone: z1
-            host: tikv-host-machine-1
-      # machine-2 on z1
-      - host: tikv-host-machine-2
-        port: 20160
-        config:
-          server.labels:
-            zone: z1
-            host: tikv-host-machine-2
-      - host: tikv-host-machine-2
-        port: 20161
-        config:
-          server.labels:
-            zone: z1
-            host: tikv-host-machine-2
-    # z2
-      - host: tikv-host-machine-3
-        config:
-          server.labels:
-            zone: z2
-            host: tikv-host-machine-3
-      - host: tikv-host-machine-4
-        config:
-          server.labels:
-            zone: z2
-            host: tikv-host-machine-4
-    # z3
-      - host: tikv-host-machine-5
-        config:
-          server.labels:
-            zone: z3
-            host: tikv-host-machine-5
-      - host: tikv-host-machine-6
-        config:
-          server.labels:
-            zone: z3
-            host: tikv-host-machine-6
+```
+server_configs:
+  pd:
+    replication.location-labels: ["zone", "host"]
+tidb_servers:
+# z1
+  - host: tidb-host-machine-1
+    config:
+      labels:
+        zone: z1
+        host: tidb-host-machine-1
+  - host: tidb-host-machine-2
+    config:
+      labels:
+        zone: z1
+        host: tidb-host-machine-2
+# z2
+  - host: tidb-host-machine-3
+    config:
+      labels:
+        zone: z2
+        host: tidb-host-machine-3
+  - host: tikv-host-machine-4
+    config:
+      labels:
+        zone: z2
+        host: tidb-host-machine-4
+# z3
+  - host: tidb-host-machine-5
+    config:
+      labels:
+        zone: z3
+        host: tidb-host-machine-5
+  - host: tidb-host-machine-6
+    config:
+      labels:
+        zone: z3
+        host: tidb-host-machine-6
+tikv_servers:
+# z1
+  # machine-1 on z1
+  - host: tikv-host-machine-1
+    port: 20160
+    config:
+      server.labels:
+        zone: z1
+        host: tikv-host-machine-1
+  - host: tikv-host-machine-1
+    port: 20161
+    config:
+      server.labels:
+        zone: z1
+        host: tikv-host-machine-1
+  # machine-2 on z1
+  - host: tikv-host-machine-2
+    port: 20160
+    config:
+      server.labels:
+        zone: z1
+        host: tikv-host-machine-2
+  - host: tikv-host-machine-2
+    port: 20161
+    config:
+      server.labels:
+        zone: z1
+        host: tikv-host-machine-2
+# z2
+  - host: tikv-host-machine-3
+    config:
+      server.labels:
+        zone: z2
+        host: tikv-host-machine-3
+  - host: tikv-host-machine-4
+    config:
+      server.labels:
+        zone: z2
+        host: tikv-host-machine-4
+# z3
+  - host: tikv-host-machine-5
+    config:
+      server.labels:
+        zone: z3
+        host: tikv-host-machine-5
+  - host: tikv-host-machine-6
+    config:
+      server.labels:
+        zone: z3
+        host: tikv-host-machine-6
 
-    tiflash_servers:
-    # z1
-      - host: tiflash-host-machine-1
-        learner_config:
-          server.labels:
-            zone: z1
-            host: tiflash-host-machine-1
-      - host: tiflash-host-machine-2
-        learner_config:
-          server.labels:
-            zone: z1
-            host: tiflash-host-machine-2
-    # z2
-      - host: tiflash-host-machine-3
-        learner_config:
-          server.labels:
-            zone: z2
-            host: tiflash-host-machine-3
-      - host: tiflash-host-machine-4
-        learner_config:
-          server.labels:
-            zone: z2
-            host: tiflash-host-machine-4
-    # z3
-      - host: tiflash-host-machine-5
-        learner_config:
-          server.labels:
-            zone: z3
-            host: tiflash-host-machine-5
-      - host: tiflash-host-machine-6
-        learner_config:
-          server.labels:
-            zone: z3
-            host: tiflash-host-machine-6
+tiflash_servers:
+# z1
+  - host: tiflash-host-machine-1
+    learner_config:
+      server.labels:
+        zone: z1
+        host: tiflash-host-machine-1
+  - host: tiflash-host-machine-2
+    learner_config:
+      server.labels:
+        zone: z1
+        host: tiflash-host-machine-2
+# z2
+  - host: tiflash-host-machine-3
+    learner_config:
+      server.labels:
+        zone: z2
+        host: tiflash-host-machine-3
+  - host: tiflash-host-machine-4
+    learner_config:
+      server.labels:
+        zone: z2
+        host: tiflash-host-machine-4
+# z3
+  - host: tiflash-host-machine-5
+    learner_config:
+      server.labels:
+        zone: z3
+        host: tiflash-host-machine-5
+  - host: tiflash-host-machine-6
+    learner_config:
+      server.labels:
+        zone: z3
+        host: tiflash-host-machine-6
+```
 
 詳細は[地理的に分散した展開トポロジ](/geo-distributed-deployment-topology.md)参照。
 

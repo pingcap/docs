@@ -45,10 +45,12 @@ summary: TiCDC を使用して TiDB データを Apache Kafka および Apache F
 
     Flinkの要件に従い、各テーブルの増分データは独立したトピックに送信され、イベントごとに主キーの値に基づいてパーティションがディスパッチされる必要があります。そのため、以下の内容のchangefeed設定ファイル`changefeed.conf`を作成する必要があります。
 
-        [sink]
-        dispatchers = [
-        {matcher = ['*.*'], topic = "tidb_{schema}_{table}", partition="index-value"},
-        ]
+    ```
+    [sink]
+    dispatchers = [
+    {matcher = ['*.*'], topic = "tidb_{schema}_{table}", partition="index-value"},
+    ]
+    ```
 
     設定ファイルの`dispatchers`の詳細な説明については[Kafka シンクのトピックおよびパーティションディスパッチャーのルールをカスタマイズする](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink)を参照してください。
 

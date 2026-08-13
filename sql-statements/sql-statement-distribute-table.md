@@ -46,11 +46,13 @@ CREATE TABLE t1 (a INT);
 DISTRIBUTE TABLE t1 RULE = "leader-scatter" ENGINE = "tikv" TIMEOUT = "1h";
 ```
 
-    +--------+
-    | JOB_ID |
-    +--------+
-    |    100 |
-    +--------+
+```
++--------+
+| JOB_ID |
++--------+
+|    100 |
++--------+
+```
 
 TiFlash上の表`t2`内のラーナーのリージョンを再分配します。
 
@@ -60,11 +62,13 @@ CREATE TABLE t2 (a INT);
 DISTRIBUTE TABLE t2 RULE = "learner-scatter" ENGINE = "tiflash";
 ```
 
-    +--------+
-    | JOB_ID |
-    +--------+
-    |    101 |
-    +--------+
+```
++--------+
+| JOB_ID |
++--------+
+|    101 |
++--------+
+```
 
 TiKV 上のテーブル`t3`の`p1`および`p2`パーティション内のピアのリージョンを再分配します。
 
@@ -77,11 +81,13 @@ CREATE TABLE t3 ( a INT, b INT, INDEX idx(b)) PARTITION BY RANGE( a ) (
 DISTRIBUTE TABLE t3 PARTITION (p1, p2) RULE = "peer-scatter" ENGINE = "tikv";
 ```
 
-    +--------+
-    | JOB_ID |
-    +--------+
-    |    102 |
-    +--------+
+```
++--------+
+| JOB_ID |
++--------+
+|    102 |
++--------+
+```
 
 TiFlash 上のテーブル`t4`の`p1`および`p2`TiFlashでLearnerの領域を再分配します。
 
@@ -94,11 +100,13 @@ CREATE TABLE t4 ( a INT, b INT, INDEX idx(b)) PARTITION BY RANGE( a ) (
 DISTRIBUTE TABLE t4 PARTITION (p1, p2) RULE = "learner-scatter" ENGINE="tiflash";
 ```
 
-    +--------+
-    | JOB_ID |
-    +--------+
-    |    103 |
-    +--------+
+```
++--------+
+| JOB_ID |
++--------+
+|    103 |
++--------+
+```
 
 ## 注記 {#notes}
 

@@ -28,13 +28,17 @@ TableName ::=
 DROP SEQUENCE seq;
 ```
 
-    Query OK, 0 rows affected (0.10 sec)
+```
+Query OK, 0 rows affected (0.10 sec)
+```
 
 ```sql
 DROP SEQUENCE seq, seq2;
 ```
 
-    Query OK, 0 rows affected (0.03 sec)
+```
+Query OK, 0 rows affected (0.03 sec)
+```
 
 ## MySQLとの互換性 {#mysql-compatibility}
 

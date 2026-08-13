@@ -203,38 +203,40 @@ INSERT INTO t1 (a) VALUES (1);
 SELECT * FROM t1;
 ```
 
-    mysql> drop table if exists t1;
-    Query OK, 0 rows affected (0.23 sec)
+```
+mysql> drop table if exists t1;
+Query OK, 0 rows affected (0.23 sec)
 
-    mysql> CREATE TABLE t1 (a int);
-    Query OK, 0 rows affected (0.09 sec)
+mysql> CREATE TABLE t1 (a int);
+Query OK, 0 rows affected (0.09 sec)
 
-    mysql> DESC t1;
-    +-------+------+------+------+---------+-------+
-    | Field | Type | Null | Key  | Default | Extra |
-    +-------+------+------+------+---------+-------+
-    | a     | int  | YES  |      | NULL    |       |
-    +-------+------+------+------+---------+-------+
-    1 row in set (0.00 sec)
+mysql> DESC t1;
++-------+------+------+------+---------+-------+
+| Field | Type | Null | Key  | Default | Extra |
++-------+------+------+------+---------+-------+
+| a     | int  | YES  |      | NULL    |       |
++-------+------+------+------+---------+-------+
+1 row in set (0.00 sec)
 
-    mysql> SHOW CREATE TABLE t1\G
-    *************************** 1. row ***************************
-           Table: t1
-    Create Table: CREATE TABLE `t1` (
-      `a` int DEFAULT NULL
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
-    1 row in set (0.00 sec)
+mysql> SHOW CREATE TABLE t1\G
+*************************** 1. row ***************************
+       Table: t1
+Create Table: CREATE TABLE `t1` (
+  `a` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
+1 row in set (0.00 sec)
 
-    mysql> INSERT INTO t1 (a) VALUES (1);
-    Query OK, 1 row affected (0.03 sec)
+mysql> INSERT INTO t1 (a) VALUES (1);
+Query OK, 1 row affected (0.03 sec)
 
-    mysql> SELECT * FROM t1;
-    +------+
-    | a    |
-    +------+
-    |    1 |
-    +------+
-    1 row in set (0.00 sec)
+mysql> SELECT * FROM t1;
++------+
+| a    |
++------+
+|    1 |
++------+
+1 row in set (0.00 sec)
+```
 
 テーブルが存在する場合は削除し、存在しない場合は条件付きでテーブルを作成する。
 

@@ -86,7 +86,9 @@ Query OK, 1 row affected (0.02 sec)
 CREATE USER 'newuser5'@'%' ACCOUNT LOCK;
 ```
 
-    Query OK, 1 row affected (0.02 sec)
+```
+Query OK, 1 row affected (0.02 sec)
+```
 
 コメント付きのユーザーを作成します。
 
@@ -95,12 +97,14 @@ CREATE USER 'newuser6'@'%' COMMENT 'This user is created only for test';
 SELECT * FROM information_schema.user_attributes;
 ```
 
-    +-----------+------+---------------------------------------------------+
-    | USER      | HOST | ATTRIBUTE                                         |
-    +-----------+------+---------------------------------------------------+
-    | newuser6  | %    | {"comment": "This user is created only for test"} |
-    +-----------+------+---------------------------------------------------+
-    1 rows in set (0.00 sec)
+```
++-----------+------+---------------------------------------------------+
+| USER      | HOST | ATTRIBUTE                                         |
++-----------+------+---------------------------------------------------+
+| newuser6  | %    | {"comment": "This user is created only for test"} |
++-----------+------+---------------------------------------------------+
+1 rows in set (0.00 sec)
+```
 
 属性が`email`ユーザーを作成します。
 
@@ -124,7 +128,9 @@ SELECT * FROM information_schema.user_attributes;
 CREATE USER 'newuser8'@'%' PASSWORD HISTORY 5;
 ```
 
-    Query OK, 1 row affected (0.02 sec)
+```
+Query OK, 1 row affected (0.02 sec)
+```
 
 パスワードを手動で期限切れにするユーザーを作成します。
 
@@ -132,7 +138,9 @@ CREATE USER 'newuser8'@'%' PASSWORD HISTORY 5;
 CREATE USER 'newuser9'@'%' PASSWORD EXPIRE;
 ```
 
-    Query OK, 1 row affected (0.02 sec)
+```
+Query OK, 1 row affected (0.02 sec)
+```
 
 最大接続数が 3 のユーザーを作成します。
 

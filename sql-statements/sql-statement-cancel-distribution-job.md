@@ -28,7 +28,9 @@ CANCEL DISTRIBUTION JOB 1;
 
 出力は以下のとおりです。
 
-    Query OK, 0 rows affected (0.01 sec)
+```
+Query OK, 0 rows affected (0.01 sec)
+```
 
 ## MySQLとの互換性 {#mysql-compatibility}
 

@@ -104,12 +104,14 @@ TiDBはこの多段階の認可関係をサポートしています。これを�
 SHOW GRANTS FOR 'dev1'@'localhost';
 ```
 
-    +-------------------------------------------------+
-    | Grants for dev1@localhost                       |
-    +-------------------------------------------------+
-    | GRANT USAGE ON *.* TO `dev1`@`localhost`        |
-    | GRANT `app_developer`@`%` TO `dev1`@`localhost` |
-    +-------------------------------------------------+
+```
++-------------------------------------------------+
+| Grants for dev1@localhost                       |
++-------------------------------------------------+
+| GRANT USAGE ON *.* TO `dev1`@`localhost`        |
+| GRANT `app_developer`@`%` TO `dev1`@`localhost` |
++-------------------------------------------------+
+```
 
 `SHOW GRANTS`の`USING`オプションを使用して、ロールの権限を確認できます。
 
@@ -131,25 +133,29 @@ SHOW GRANTS FOR 'dev1'@'localhost' USING 'app_developer';
 SHOW GRANTS FOR 'rw_user1'@'localhost' USING 'app_read', 'app_write';
 ```
 
-    +------------------------------------------------------------------------------+
-    | Grants for rw_user1@localhost                                                |
-    +------------------------------------------------------------------------------+
-    | GRANT USAGE ON *.* TO `rw_user1`@`localhost`                                 |
-    | GRANT SELECT, INSERT, UPDATE, DELETE ON `app_db`.* TO `rw_user1`@`localhost` |
-    | GRANT `app_read`@`%`,`app_write`@`%` TO `rw_user1`@`localhost`               |
-    +------------------------------------------------------------------------------+
+```
++------------------------------------------------------------------------------+
+| Grants for rw_user1@localhost                                                |
++------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `rw_user1`@`localhost`                                 |
+| GRANT SELECT, INSERT, UPDATE, DELETE ON `app_db`.* TO `rw_user1`@`localhost` |
+| GRANT `app_read`@`%`,`app_write`@`%` TO `rw_user1`@`localhost`               |
++------------------------------------------------------------------------------+
+```
 
 ```sql
 SHOW GRANTS FOR 'read_user1'@'localhost' USING 'app_read';
 ```
 
-    +--------------------------------------------------------+
-    | Grants for read_user1@localhost                        |
-    +--------------------------------------------------------+
-    | GRANT USAGE ON *.* TO `read_user1`@`localhost`         |
-    | GRANT SELECT ON `app_db`.* TO `read_user1`@`localhost` |
-    | GRANT `app_read`@`%` TO `read_user1`@`localhost`       |
-    +--------------------------------------------------------+
+```
++--------------------------------------------------------+
+| Grants for read_user1@localhost                        |
++--------------------------------------------------------+
+| GRANT USAGE ON *.* TO `read_user1`@`localhost`         |
+| GRANT SELECT ON `app_db`.* TO `read_user1`@`localhost` |
+| GRANT `app_read`@`%` TO `read_user1`@`localhost`       |
++--------------------------------------------------------+
+```
 
 現在のユーザーの権限を確認するには、 `SHOW GRANTS`または`SHOW GRANTS FOR CURRENT_USER()`を使用します。`SHOW GRANTS`と`SHOW GRANTS FOR CURRENT_USER()`は次の点で異なります。
 
@@ -254,21 +260,25 @@ SET DEFAULT ROLE ALL TO 'rw_user1'@'localhost';
 SELECT CURRENT_ROLE();
 ```
 
-    +--------------------------------+
-    | CURRENT_ROLE()                 |
-    +--------------------------------+
-    | `app_read`@`%`,`app_write`@`%` |
-    +--------------------------------+
+```
++--------------------------------+
+| CURRENT_ROLE()                 |
++--------------------------------+
+| `app_read`@`%`,`app_write`@`%` |
++--------------------------------+
+```
 
 ```sql
 SET ROLE 'app_read'; SELECT CURRENT_ROLE();
 ```
 
-    +----------------+
-    | CURRENT_ROLE() |
-    +----------------+
-    | `app_read`@`%` |
-    +----------------+
+```
++----------------+
+| CURRENT_ROLE() |
++----------------+
+| `app_read`@`%` |
++----------------+
+```
 
 ### 役割を取り消す {#revoke-a-role}
 
@@ -323,12 +333,14 @@ DROP ROLE 'app_read', 'app_write';
 SELECT * FROM mysql.role_edges;
 ```
 
-    +-----------+-----------+---------+---------+-------------------+
-    | FROM_HOST | FROM_USER | TO_HOST | TO_USER | WITH_ADMIN_OPTION |
-    +-----------+-----------+---------+---------+-------------------+
-    | %         | r_1       | %       | u_1     | N                 |
-    +-----------+-----------+---------+---------+-------------------+
-    1 row in set (0.00 sec)
+```
++-----------+-----------+---------+---------+-------------------+
+| FROM_HOST | FROM_USER | TO_HOST | TO_USER | WITH_ADMIN_OPTION |
++-----------+-----------+---------+---------+-------------------+
+| %         | r_1       | %       | u_1     | N                 |
++-----------+-----------+---------+---------+-------------------+
+1 row in set (0.00 sec)
+```
 
 -   `FROM_HOST`と`FROM_USER`それぞれロールのホスト名とユーザー名を示します。
 -   `TO_HOST`と`TO_USER` 、ロールが付与されるユーザーのホスト名とユーザー名を示します。
@@ -341,13 +353,15 @@ SELECT * FROM mysql.role_edges;
 SELECT * FROM mysql.default_roles;
 ```
 
-    +------+------+-------------------+-------------------+
-    | HOST | USER | DEFAULT_ROLE_HOST | DEFAULT_ROLE_USER |
-    +------+------+-------------------+-------------------+
-    | %    | u_1  | %                 | r_1               |
-    | %    | u_1  | %                 | r_2               |
-    +------+------+-------------------+-------------------+
-    2 rows in set (0.00 sec)
+```
++------+------+-------------------+-------------------+
+| HOST | USER | DEFAULT_ROLE_HOST | DEFAULT_ROLE_USER |
++------+------+-------------------+-------------------+
+| %    | u_1  | %                 | r_1               |
+| %    | u_1  | %                 | r_2               |
++------+------+-------------------+-------------------+
+2 rows in set (0.00 sec)
+```
 
 -   `HOST`と`USER`それぞれユーザーのホスト名とユーザー名を示します。
 -   `DEFAULT_ROLE_HOST`と`DEFAULT_ROLE_USER` 、それぞれデフォルト ロールのホスト名とユーザー名を示します。

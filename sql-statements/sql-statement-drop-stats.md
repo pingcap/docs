@@ -25,7 +25,9 @@ TableName ::=
 DROP STATS TableName
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 次のステートメントは、 `PartitionNameList`内の指定されたパーティションの統計のみを削除します。
 
@@ -33,7 +35,9 @@ DROP STATS TableName
 DROP STATS TableName PARTITION PartitionNameList;
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 次のステートメントは、指定されたテーブルの動的プルーニング モードで生成されたグローバル統計のみを削除します。
 
@@ -41,7 +45,9 @@ DROP STATS TableName PARTITION PartitionNameList;
 DROP STATS TableName GLOBAL;
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 ## 例 {#examples}
 
@@ -49,30 +55,38 @@ DROP STATS TableName GLOBAL;
 CREATE TABLE t(a INT);
 ```
 
-    Query OK, 0 rows affected (0.01 sec)
+```
+Query OK, 0 rows affected (0.01 sec)
+```
 
 ```sql
 SHOW STATS_META WHERE db_name='test' and table_name='t';
 ```
 
-    +---------+------------+----------------+---------------------+--------------+-----------+
-    | Db_name | Table_name | Partition_name | Update_time         | Modify_count | Row_count |
-    +---------+------------+----------------+---------------------+--------------+-----------+
-    | test    | t          |                | 2020-05-25 20:34:33 |            0 |         0 |
-    +---------+------------+----------------+---------------------+--------------+-----------+
-    1 row in set (0.00 sec)
+```
++---------+------------+----------------+---------------------+--------------+-----------+
+| Db_name | Table_name | Partition_name | Update_time         | Modify_count | Row_count |
++---------+------------+----------------+---------------------+--------------+-----------+
+| test    | t          |                | 2020-05-25 20:34:33 |            0 |         0 |
++---------+------------+----------------+---------------------+--------------+-----------+
+1 row in set (0.00 sec)
+```
 
 ```sql
 DROP STATS t;
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 ```sql
 SHOW STATS_META WHERE db_name='test' and table_name='t';
 ```
 
-    Empty set (0.00 sec)
+```
+Empty set (0.00 sec)
+```
 
 ## MySQLとの互換性 {#mysql-compatibility}
 

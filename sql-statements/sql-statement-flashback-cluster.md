@@ -180,7 +180,9 @@ ERROR 1105 (HY000): Detected another DDL job at 2023-01-29 14:33:12 +0800 CST, c
 
 ログを通して、 `FLASHBACK`の実行状況を取得できます。以下に例を示します。
 
-    [2022/10/09 17:25:59.316 +08:00] [INFO] [cluster.go:463] ["flashback cluster stats"] ["complete regions"=9] ["total regions"=10] []
+```
+[2022/10/09 17:25:59.316 +08:00] [INFO] [cluster.go:463] ["flashback cluster stats"] ["complete regions"=9] ["total regions"=10] []
+```
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
