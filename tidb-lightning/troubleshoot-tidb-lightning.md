@@ -42,7 +42,9 @@ strict-format = true
 
 これは、 `tidb-lightning`が正しく起動されていないためにシステムが SIGHUP シグナルを送信し、 `tidb-lightning`プロセスを停止したことが原因である可能性があります。この場合、 `tidb-lightning.log`は通常、次のログを出力します。
 
-    [2018/08/10 07:29:08.310 +08:00] [INFO] [main.go:41] ["got signal to exit"] [signal=hangup]
+```
+[2018/08/10 07:29:08.310 +08:00] [INFO] [main.go:41] ["got signal to exit"] [signal=hangup]
+```
 
 コマンドラインで直接`nohup`を使用して`tidb-lightning`起動することは推奨されません。スクリプトを実行することで[`tidb-lightning`を起動する](/get-started-with-tidb-lightning.md#step-4-start-tidb-lightning)起動できます。
 
@@ -169,8 +171,10 @@ TiDB Lightning Local-backend は、v4.0.0 以降のバージョンの TiDB ク�
 
 このエラーは通常、CSVデータファイルにヘッダーが含まれていないこと（最初の行が列名ではなくデータである）が原因で発生します。そのため、 TiDB Lightning設定ファイルに以下の設定を追加する必要があります。
 
-    [mydumper.csv]
-    header = false
+```
+[mydumper.csv]
+header = false
+```
 
 ### `Unknown character set` {#unknown-character-set}
 

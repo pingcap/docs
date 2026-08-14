@@ -242,23 +242,25 @@ TPCCを使用してオンラインアプリケーションをシミュレート�
 
 TiDB Lightningは、物理インポートモードでのインポートパフォーマンスに影響を与える同時実行性関連の設定項目をいくつか提供しています。しかし、長年の経験から、以下の4つの設定項目はデフォルト値のままにしておくことをお勧めします。これらの設定項目を調整しても、パフォーマンスが大幅に向上することはありません。
 
-    [lightning]
-    # The maximum concurrency of engine files.
-    # Each table is split into one "index engine" to store indices, and multiple
-    # "data engines" to store row data. These settings control the maximum
-    # concurrent number for each type of engines.
-    # The two settings controls the maximum concurrency of the two engine files.
-    index-concurrency = 2
-    table-concurrency = 6
+```
+[lightning]
+# The maximum concurrency of engine files.
+# Each table is split into one "index engine" to store indices, and multiple
+# "data engines" to store row data. These settings control the maximum
+# concurrent number for each type of engines.
+# The two settings controls the maximum concurrency of the two engine files.
+index-concurrency = 2
+table-concurrency = 6
 
-    # The concurrency of data. The default value is the number of logical CPUs.
-    region-concurrency =
+# The concurrency of data. The default value is the number of logical CPUs.
+region-concurrency =
 
-    # The maximum concurrency of I/O. When the concurrency is too high, the disk
-    # cache may be frequently refreshed, causing the cache miss and read speed
-    # to slow down. For different storage mediums, this parameter may need to be
-    # adjusted to achieve the best performance.
-    io-concurrency = 5
+# The maximum concurrency of I/O. When the concurrency is too high, the disk
+# cache may be frequently refreshed, causing the cache miss and read speed
+# to slow down. For different storage mediums, this parameter may need to be
+# adjusted to achieve the best performance.
+io-concurrency = 5
+```
 
 インポート処理中、各テーブルはインデックスを格納するための「インデックスエンジン」1つと、行データを格納するための複数の「データエンジン」に分割されます。
 

@@ -210,24 +210,26 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
 
 1.  クラスター構成ファイルでTiFlashノードのラベルを指定します。
 
-        tiflash_servers:
-          - host: 172.16.5.81
-              logger.level: "info"
-            learner_config:
-              server.labels:
-                zone: "z1"
-          - host: 172.16.5.82
-            config:
-              logger.level: "info"
-            learner_config:
-              server.labels:
-                zone: "z1"
-          - host: 172.16.5.85
-            config:
-              logger.level: "info"
-            learner_config:
-              server.labels:
-                zone: "z2"
+    ```
+    tiflash_servers:
+      - host: 172.16.5.81
+          logger.level: "info"
+        learner_config:
+          server.labels:
+            zone: "z1"
+      - host: 172.16.5.82
+        config:
+          logger.level: "info"
+        learner_config:
+          server.labels:
+            zone: "z1"
+      - host: 172.16.5.85
+        config:
+          logger.level: "info"
+        learner_config:
+          server.labels:
+            zone: "z2"
+    ```
 
     以前のバージョンでは、 `flash.proxy.labels`設定では、利用可能なゾーン名に含まれる特殊文字を正しく処理できないことに注意してください。利用可能なゾーン名を設定するには、 `learner_config`の`server.labels`を使用することをお勧めします。
 

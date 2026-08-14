@@ -23,7 +23,9 @@ TiFlash のバージョンを確認するには、次の 2 つの方法があり
 
 -   TiFlash のログを参照して、 TiFlash のバージョンを確認してください。ログのパスについては、 [`tiflash.toml`ファイル](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)の`[logger]`部分を参照してください。例えば、以下のようになります。
 
-        <information>: TiFlash version: TiFlash 0.2.0 master-375035282451103999f3863c691e2fc2
+    ```
+    <information>: TiFlash version: TiFlash 0.2.0 master-375035282451103999f3863c691e2fc2
+    ```
 
 ## TiFlashの重要なログ {#tiflash-critical-logs}
 
