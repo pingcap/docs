@@ -93,7 +93,7 @@ TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access
 
 2.  左側のペインで、対象のデータアプリの名前をクリックすると、その詳細が表示されます。
 
-3.  **認証**エリアで、 **Create API Key**クリックします。
+3.  **認証**エリアで、 **Create API Key**をクリックします。
 
 4.  **Create API Key**ダイアログボックスで、以下の操作を行います。
 

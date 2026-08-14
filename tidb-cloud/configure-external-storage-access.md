@@ -77,7 +77,7 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
 <details><summary>詳細はこちらをクリックしてください</summary>
 
-1.  前の手順で説明した**Add New ARN**ダイアログで、 **「問題が発生しましたか？ロール ARN を手動で作成します」**をクリックします。TiDB **TiDB Cloud Account ID**と**TiDB Cloud External ID**が取得されます。
+1.  前の手順で説明した**Add New ARN**ダイアログで、 **「問題が発生しましたか？ロール ARN を手動で作成します」**をクリックします。**TiDB Cloud Account ID**と**TiDB Cloud External ID**が取得されます。
 
 2.  AWS マネジメントコンソールで、Amazon S3 バケット用のマネージドポリシーを作成します。
 

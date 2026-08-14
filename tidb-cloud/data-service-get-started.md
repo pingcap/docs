@@ -29,7 +29,7 @@ Data Serviceを使い始めるには、サンプルデータアプリを作成�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページの**[プロジェクト ビュー]**タブをクリックし、プロジェクトの [ **...]**をクリックして、 **[Data Service]**をクリックします。
 
-2.  **Data Service**ページで、 **Create Sample Data App**クリックします。ダイアログが表示されます。
+2.  **Data Service**ページで、 **Create Sample Data App**をクリックします。ダイアログが表示されます。
 
 3.  ダイアログで、必要に応じてアプリ名を更新し、データアプリがアクセスするTiDB Cloud Starterインスタンスを選択して、 **[作成]**をクリックします。
 
@@ -67,7 +67,7 @@ Data Serviceの利用を開始するには、独自のデータアプリを作�
 
 4.  （オプション）データアプリのエンドポイントを、お好みのGitHubリポジトリとブランチに自動的にデプロイするには、 **Connect to GitHub**を有効にしてから、以下の手順を実行してください。
 
-    1.  **Install on GitHub**をクリックし、画面の指示に従って、 **TiDB Cloud Data Service**アプリケーションとして対象のリポジトリにインストールしてください。
+    1.  **Install on GitHub**をクリックし、画面の指示に従って、 **TiDB Cloud Data Service**をアプリケーションとして対象のリポジトリにインストールしてください。
 
     2.  TiDB Cloudコンソールに戻り、 **「承認」**をクリックしてGitHub上のアプリケーションへのアクセスを承認してください。
 
@@ -78,11 +78,11 @@ Data Serviceの利用を開始するには、独自のデータアプリを作�
     > -   ディレクトリ名はスラッシュ（ `/` ）で始まる必要があります。例えば、 `/mydata`のようになります。指定したディレクトリが対象のリポジトリとブランチに存在しない場合は、自動的に作成されます。
     > -   リポジトリ、ブランチ、ディレクトリの組み合わせによって構成ファイルのパスが識別されます。このパスはデータアプリ間で一意である必要があります。指定したパスが既に他のデータアプリで使用されている場合は、新しいパスを指定する必要があります。そうしないと、現在のデータアプリ用にTiDB Cloudコンソールで構成されたエンドポイントによって、指定したパス内のファイルが上書きされます。
 
-5.  **Create Data App**クリックします。 [**Data Service**](https://tidbcloud.com/project/data-service)の詳細ページが表示されます。
+5.  **Create Data App**をクリックします。 [**Data Service**](https://tidbcloud.com/project/data-service)の詳細ページが表示されます。
 
 6.  データ アプリを GitHub に接続するように構成している場合は、指定した GitHub ディレクトリを確認してください。データ[データアプリの設定ファイル](/tidb-cloud/data-service-app-config-files.md)`tidb-cloud-data-service`によってディレクトリにコミットされていることがわかります。これは、データアプリが GitHub に正常に接続されていることを意味します。
 
-    新しいデータ アプリでは、**Auto Sync & Deployment**および**ドラフトのレビューが**デフォルトで有効になっているため、 TiDB Cloudコンソールと GitHub の間でデータ アプリの変更を簡単に同期し、デプロイメント前に変更をレビューできます。 GitHub 統合の詳細については、 [GitHub を使用してデータ アプリの変更を自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
+    新しいデータ アプリでは、**Auto Sync & Deployment**および**ドラフトのレビュー**がデフォルトで有効になっているため、 TiDB Cloudコンソールと GitHub の間でデータ アプリの変更を簡単に同期し、デプロイメント前に変更をレビューできます。 GitHub 統合の詳細については、 [GitHub を使用してデータ アプリの変更を自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
 
 ### ステップ2. エンドポイントを開発する {#step-2-develop-an-endpoint}
 
@@ -193,7 +193,7 @@ HTTPSリクエストを送信することでエンドポイントを呼び出す
 
 1.  [**Data Service**](https://tidbcloud.com/project/data-service)ページの左側のペインで、データ アプリの名前をクリックして詳細を表示します。
 
-2.  **認証**エリアで、 **Create API Key**クリックします。
+2.  **認証**エリアで、 **Create API Key**をクリックします。
 
 3.  **Create API Key**ダイアログボックスで、以下の操作を行います。
 
