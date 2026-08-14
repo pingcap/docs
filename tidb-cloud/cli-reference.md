@@ -70,10 +70,12 @@ TiDB Cloud CLI では、ユーザープロファイルとは、プロファイ�
 
 出力例は以下のとおりです。
 
-    Profile Name
-    default (active)
-    dev
-    staging
+```
+Profile Name
+default (active)
+dev
+staging
+```
 
 この出力例では、ユーザープロファイル`default`が現在アクティブです。
 
@@ -100,7 +102,9 @@ TiDB Cloud CLI では、ユーザープロファイルとは、プロファイ�
 
 出力例は以下のとおりです。
 
-    Current profile has been changed to default
+```
+Current profile has been changed to default
+```
 
 ### 設定ファイルを編集する {#edit-the-config-file}
 

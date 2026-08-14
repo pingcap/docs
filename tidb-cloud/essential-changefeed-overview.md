@@ -101,7 +101,9 @@ ticloud serverless changefeed pause --cluster-id <cluster-id> --changefeed-id <c
 
 変更フィードを再開するには：
 
-    ticloud serverless changefeed resume -c <cluster-id> --changefeed-id <changefeed-id>
+```
+ticloud serverless changefeed resume -c <cluster-id> --changefeed-id <changefeed-id>
+```
 
 </div>
 </SimpleTab>

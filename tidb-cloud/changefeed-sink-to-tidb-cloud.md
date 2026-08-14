@@ -53,11 +53,13 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
     以下はメタデータファイルの例の一部です。 `Pos`の`SHOW MASTER STATUS`は、既存データの TSO であり、 TiDB Cloudシンクの開始位置でもあります。
 
-        Started dump at: 2023-03-28 10:40:19
-        SHOW MASTER STATUS:
-                Log: tidb-binlog
-                Pos: 420747102018863124
-        Finished dump at: 2023-03-28 10:40:20
+    ```
+    Started dump at: 2023-03-28 10:40:19
+    SHOW MASTER STATUS:
+            Log: tidb-binlog
+            Pos: 420747102018863124
+    Finished dump at: 2023-03-28 10:40:20
+    ```
 
 ## TiDB Cloudシンクを作成する {#create-a-tidb-cloud-sink}
 

@@ -115,11 +115,13 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
 
     以下はメタデータファイルの例の一部です。 `Pos`の`SHOW MASTER STATUS`は、既存データの TSO であり、MySQL シンクの開始位置でもあります。
 
-        Started dump at: 2020-11-10 10:40:19
-        SHOW MASTER STATUS:
-                Log: tidb-binlog
-                Pos: 420747102018863124
-        Finished dump at: 2020-11-10 10:40:20
+    ```
+    Started dump at: 2020-11-10 10:40:19
+    SHOW MASTER STATUS:
+            Log: tidb-binlog
+            Pos: 420747102018863124
+    Finished dump at: 2020-11-10 10:40:20
+    ```
 
 ### MySQLでターゲットテーブルを作成する {#create-target-tables-in-mysql}
 

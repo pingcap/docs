@@ -137,14 +137,16 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
         -   AWS Key Management Service キー (SSE-KMS) を顧客管理キー暗号化で有効にしている場合は、ポリシーに次の設定が含まれていることを確認してください。 `"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"`は、バケットの KMS キーの例です。
 
-                {
-                    "Sid": "AllowKMSkey",
-                    "Effect": "Allow",
-                    "Action": [
-                        "kms:Decrypt"
-                    ],
-                    "Resource": "arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"
-                }
+            ```
+            {
+                "Sid": "AllowKMSkey",
+                "Effect": "Allow",
+                "Action": [
+                    "kms:Decrypt"
+                ],
+                "Resource": "arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"
+            }
+            ```
 
         -   バケット内のオブジェクトが別の暗号化されたバケットからコピーされた場合、KMS キー値には両方のバケットのキーを含める必要があります。たとえば、 `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]`のようになります。
 
