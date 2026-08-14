@@ -29,14 +29,16 @@ CREATE TABLE t1 (a INT) PLACEMENT POLICY=p1;
 SHOW CREATE PLACEMENT POLICY p1\G
 ```
 
-    Query OK, 0 rows affected (0.08 sec)
+```
+Query OK, 0 rows affected (0.08 sec)
 
-    Query OK, 0 rows affected (0.10 sec)
+Query OK, 0 rows affected (0.10 sec)
 
-    ***************************[ 1. row ]***************************
-    Policy        | p1
-    Create Policy | CREATE PLACEMENT POLICY `p1` PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4
-    1 row in set (0.00 sec)
+***************************[ 1. row ]***************************
+Policy        | p1
+Create Policy | CREATE PLACEMENT POLICY `p1` PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4
+1 row in set (0.00 sec)
+```
 
 ## MySQLとの互換性 {#mysql-compatibility}
 

@@ -32,18 +32,20 @@ CREATE TABLE t1 (a INT) PLACEMENT POLICY=p1;
 SHOW PLACEMENT;
 ```
 
-    Query OK, 0 rows affected (0.01 sec)
+```
+Query OK, 0 rows affected (0.01 sec)
 
-    Query OK, 0 rows affected (0.00 sec)
+Query OK, 0 rows affected (0.00 sec)
 
-    +---------------+----------------------------------------------------------------------+------------------+
-    | Target        | Placement                                                            | Scheduling_State |
-    +---------------+----------------------------------------------------------------------+------------------+
-    | POLICY p1     | PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4 | NULL             |
-    | DATABASE test | PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4 | INPROGRESS       |
-    | TABLE test.t1 | PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4 | INPROGRESS       |
-    +---------------+----------------------------------------------------------------------+------------------+
-    4 rows in set (0.00 sec)
++---------------+----------------------------------------------------------------------+------------------+
+| Target        | Placement                                                            | Scheduling_State |
++---------------+----------------------------------------------------------------------+------------------+
+| POLICY p1     | PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4 | NULL             |
+| DATABASE test | PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4 | INPROGRESS       |
+| TABLE test.t1 | PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4 | INPROGRESS       |
++---------------+----------------------------------------------------------------------+------------------+
+4 rows in set (0.00 sec)
+```
 
 ## MySQLとの互換性 {#mysql-compatibility}
 

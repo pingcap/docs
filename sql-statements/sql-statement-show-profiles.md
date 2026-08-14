@@ -24,7 +24,9 @@ ShowLikeOrWhere ::=
 SHOW PROFILES;
 ```
 
-    Empty set (0.00 sec)
+```
+Empty set (0.00 sec)
+```
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
