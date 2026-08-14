@@ -131,17 +131,19 @@ TiDB Cloudは、組織、プロジェクト、リソースという階層構造�
 
 ### 例となる構造 {#example-structure}
 
-    - Your organization
-        - TiDB X instances out of any project
-            - TiDB Cloud Starter instance 1
-            - TiDB Cloud Essential instance 1
-        - TiDB X project 1
-            - TiDB Cloud Starter instance 2
-            - TiDB Cloud Starter instance 3
-            - TiDB Cloud Essential instance 2
-        - TiDB Dedicated project 1
-            - TiDB Cloud Dedicated cluster 1
-            - TiDB Cloud Dedicated cluster 2
+```
+- Your organization
+    - TiDB X instances out of any project
+        - TiDB Cloud Starter instance 1
+        - TiDB Cloud Essential instance 1
+    - TiDB X project 1
+        - TiDB Cloud Starter instance 2
+        - TiDB Cloud Starter instance 3
+        - TiDB Cloud Essential instance 2
+    - TiDB Dedicated project 1
+        - TiDB Cloud Dedicated cluster 1
+        - TiDB Cloud Dedicated cluster 2
+```
 
 ### 主な機能 {#key-features}
 

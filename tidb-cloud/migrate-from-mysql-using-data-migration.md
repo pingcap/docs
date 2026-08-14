@@ -219,16 +219,20 @@ SHOW VARIABLES WHERE Variable_name IN
 
 1.  `/etc/my.cnf`を開いて、以下を追加します。
 
-        [mysqld]
-        log_bin = mysql-bin
-        binlog_format = ROW
-        binlog_row_image = FULL
-        binlog_expire_logs_seconds = 604800   # 7 days retention
-        binlog_transaction_compression = OFF
+    ```
+    [mysqld]
+    log_bin = mysql-bin
+    binlog_format = ROW
+    binlog_row_image = FULL
+    binlog_expire_logs_seconds = 604800   # 7 days retention
+    binlog_transaction_compression = OFF
+    ```
 
 2.  変更を適用するには、MySQLサービスを再起動してください。
 
-        sudo systemctl restart mysqld
+    ```
+    sudo systemctl restart mysqld
+    ```
 
 3.  設定が有効になっていることを確認するには、 `SHOW VARIABLES`ステートメントを再度実行してください。
 

@@ -28,7 +28,9 @@ summary: TiDB Cloudで SQL パフォーマンスを分析および調整する�
 
 ユーザー応答時間は、サービス時間、キュー時間、およびユーザー要求を完了するための同時待機時間で構成されます。
 
-    User Response time = Service time + Queuing delay + Coherency delay
+```
+User Response time = Service time + Queuing delay + Coherency delay
+```
 
 -   サービス時間: リクエストを処理するときにシステムが特定のリソースに消費する時間。たとえば、データベースが SQL リクエストを完了するために消費する CPU 時間など。
 -   キューイング遅延: システムが要求を処理するときに、特定のリソースのサービスをキューで待機する時間。
@@ -61,7 +63,9 @@ TiDB Cloudコンソールには、ユーザー応答時間のトラブルシュ�
 2.  必要に応じて、TiDB トークンの制限を増やしてスループットを向上させることができます。
 3.  プリペアドプランキャッシュ機能が有効になっていて、ユーザー側で JDBC を使用する場合は、次の構成を使用することをお勧めします。
 
-        useServerPrepStmts=true&cachePrepStmts=true& prepStmtCacheSize=1000&prepStmtCacheSqlLimit=20480&useConfigs=maxPerformance
+    ```
+    useServerPrepStmts=true&cachePrepStmts=true& prepStmtCacheSize=1000&prepStmtCacheSqlLimit=20480&useConfigs=maxPerformance
+    ```
 
     JDBC を使用せず、現在の TiDB クラスターのプリペアドプランキャッシュ機能を最大限に活用したい場合は、クライアント側でプリペアドステートメントオブジェクトをキャッシュする必要があります。StmtPrepare および StmtClose の呼び出しをリセットする必要はありません。クエリごとに呼び出されるコマンドの数を 3 から 1 に減らします。パフォーマンス要件とクライアント側の変更の量によっては、ある程度の開発作業が必要になります。[PingCAPサポートチーム](/tidb-cloud/tidb-cloud-support.md)に問い合わせてください。
 

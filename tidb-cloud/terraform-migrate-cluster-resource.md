@@ -45,19 +45,23 @@ terraform state rm ${your_target_cluster_resource}
 
 -   ターゲット クラスターがTiDB Cloud Starter の場合は、次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` [ステップ1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate)から取得したクラスター ID に置き換えます。
 
-        # TiDB Cloud Starter
-        import {
-          to = tidbcloud_serverless_cluster.example
-          id = "${id}"
-        }
+    ```
+    # TiDB Cloud Starter
+    import {
+      to = tidbcloud_serverless_cluster.example
+      id = "${id}"
+    }
+    ```
 
 -   ターゲット クラスターがTiDB Cloud Dedicated の場合は、次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` [ステップ1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate)から取得したクラスター ID に置き換えます。
 
-        # TiDB Cloud Dedicated
-        import {
-          to = tidbcloud_dedicated_cluster.example
-          id = "${id}"
-        }
+    ```
+    # TiDB Cloud Dedicated
+    import {
+      to = tidbcloud_dedicated_cluster.example
+      id = "${id}"
+    }
+    ```
 
 ## ステップ5. 新しい構成ファイルを生成する {#step-5-generate-the-new-configuration-file}
 

@@ -23,23 +23,25 @@ TiDB Cloudコンソールの**「データインポート」**ページで**「�
 
 以下は信頼エンティティのサンプルです。
 
-    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Effect": "Allow",
-                "Principal": {
-                    "AWS": "arn:aws:iam::380838443567:root"
-                },
-                "Action": "sts:AssumeRole",
-                "Condition": {
-                    "StringEquals": {
-                        "sts:ExternalId": "696e6672612d617069a79c22fa5740944bf8bb32e4a0c4e3fe"
-                    }
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::380838443567:root"
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {
+                "StringEquals": {
+                    "sts:ExternalId": "696e6672612d617069a79c22fa5740944bf8bb32e4a0c4e3fe"
                 }
             }
-        ]
-    }
+        }
+    ]
+}
+```
 
 サンプル信頼エンティティの場合:
 
@@ -80,27 +82,29 @@ IAMユーザーのポリシーを確認するには、次の手順を実行し�
 
 以下にサンプルポリシーを示します。
 
-    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Sid": "VisualEditor0",
-                "Effect": "Allow",
-                "Action": [
-                    "s3:GetObject"
-                ],
-                "Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"
-            },
-            {
-                "Sid": "VisualEditor1",
-                "Effect": "Allow",
-                "Action": [
-                    "s3:ListBucket",
-                    "s3:GetBucketLocation"
-                ],
-                "Resource": "arn:aws:s3:::tidb-cloud-source-data"
-            },
-    }
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetBucketLocation"
+            ],
+            "Resource": "arn:aws:s3:::tidb-cloud-source-data"
+        },
+}
+```
 
 ユーザーに権限を付与してテストする方法の詳細については、 [ユーザーポリシーによるバケットへのアクセスの制御](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html)を参照してください。
 
@@ -114,37 +118,39 @@ IAMユーザーのポリシーを確認するには、次の手順を実行し�
 
 以下はサンプルポリシーです。
 
-    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Sid": "VisualEditor0",
-                "Effect": "Allow",
-                "Action": [
-                    "s3:GetObject",
-                    "s3:GetObjectVersion"
-                ],
-                "Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"
-            },
-            {
-                "Sid": "VisualEditor1",
-                "Effect": "Allow",
-                "Action": [
-                    "s3:ListBucket",
-                    "s3:GetBucketLocation"
-                ],
-                "Resource": "arn:aws:s3:::tidb-cloud-source-data"
-            },
-            {
-                "Sid": "AllowKMSkey",
-                "Effect": "Allow",
-                "Action": [
-                    "kms:Decrypt"
-                ],
-                "Resource": "arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"
-            }
-        ]
-    }
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:GetObjectVersion"
+            ],
+            "Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetBucketLocation"
+            ],
+            "Resource": "arn:aws:s3:::tidb-cloud-source-data"
+        },
+        {
+            "Sid": "AllowKMSkey",
+            "Effect": "Allow",
+            "Action": [
+                "kms:Decrypt"
+            ],
+            "Resource": "arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"
+        }
+    ]
+}
+```
 
 このサンプル ポリシーでは、次の点に注意してください。
 
@@ -152,14 +158,16 @@ IAMユーザーのポリシーを確認するには、次の手順を実行し�
 
 -   カスタマー管理のキー暗号化で AWS Key Management Service キー (SSE-KMS) を有効にしている場合は、次の設定がポリシーに含まれていることを確認してください。`"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"`はバケットのサンプル KMS キーです。
 
-            {
-                "Sid": "AllowKMSkey",
-                "Effect": "Allow",
-                "Action": [
-                    "kms:Decrypt"
-                ],
-                "Resource": "arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"
-            }
+    ```
+        {
+            "Sid": "AllowKMSkey",
+            "Effect": "Allow",
+            "Action": [
+                "kms:Decrypt"
+            ],
+            "Resource": "arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"
+        }
+    ```
 
     バケット内のオブジェクトが別の暗号化バケットからコピーされた場合、KMSキーの値には両方のバケットのキーを含める必要があります。例： `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]` 。
 

@@ -32,24 +32,26 @@ summary: tidbcloud_dedicated_private_endpoint_connection` リソースを使用�
 
 2.  `private_endpoint_connection.tf`ファイルを作成します。
 
-        terraform {
-          required_providers {
-            tidbcloud = {
-              source = "tidbcloud/tidbcloud"
-            }
-          }
+    ```
+    terraform {
+      required_providers {
+        tidbcloud = {
+          source = "tidbcloud/tidbcloud"
         }
+      }
+    }
 
-        provider "tidbcloud" {
-          public_key = "your_public_key"
-          private_key = "your_private_key"
-        }
+    provider "tidbcloud" {
+      public_key = "your_public_key"
+      private_key = "your_private_key"
+    }
 
-        resource "tidbcloud_dedicated_private_endpoint_connection" "example" {
-          cluster_id = "your_cluster_id"
-          node_group_id = "your_node_group_id"
-          endpoint_id = "your_endpoint_id"
-        }
+    resource "tidbcloud_dedicated_private_endpoint_connection" "example" {
+      cluster_id = "your_cluster_id"
+      node_group_id = "your_node_group_id"
+      endpoint_id = "your_endpoint_id"
+    }
+    ```
 
     `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
@@ -150,10 +152,12 @@ Terraform によって管理されていないTiDB Cloud Dedicated プライベ�
 
     次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` `cluster_id,dedicated_private_endpoint_connection_id`の形式に置き換えます。
 
-        import {
-          to = tidbcloud_dedicated_private_endpoint_connection.example
-          id = "${id}"
-        }
+    ```
+    import {
+      to = tidbcloud_dedicated_private_endpoint_connection.example
+      id = "${id}"
+    }
+    ```
 
 2.  新しい構成ファイルを生成します。
 
@@ -232,4 +236,6 @@ TiDB Cloud Dedicated プライベート エンドポイント接続を削除す�
 
 ここで、コマンド`terraform show`を実行すると、リソースがクリアされているため何も表示されません。
 
-    $ terraform show
+```
+$ terraform show
+```
