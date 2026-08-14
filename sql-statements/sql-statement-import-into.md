@@ -271,9 +271,11 @@ IMPORT INTO t FROM '/path/to/file.csv' WITH DETACHED;
 
 データファイルがCSV形式で、その内容が以下のようになっていると仮定します。
 
-    id,name,age
-    1,Tom,23
-    2,Jack,44
+```
+id,name,age
+1,Tom,23
+2,Jack,44
+```
 
 インポート対象のテーブルスキーマが`CREATE TABLE t(id int primary key, name varchar(100))`であると仮定します。データファイル内の`age`フィールドをテーブル`t`にインポートしないようにするには、次の SQL ステートメントを実行します。
 
@@ -315,9 +317,11 @@ Amazon S3 または GCS の URI パス設定の詳細については、[外部�
 
 データファイルがCSV形式で、その内容が以下のようになっていると仮定します。
 
-    id,name,val
-    1,phone,230
-    2,book,440
+```
+id,name,val
+1,phone,230
+2,book,440
+```
 
 インポート対象のテーブルスキーマが`CREATE TABLE t(id int primary key, name varchar(100), val int)`であると仮定します。インポート中に`val`列の値を 100 倍にしたい場合は、次の SQL ステートメントを実行できます。
 

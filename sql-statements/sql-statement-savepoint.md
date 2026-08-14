@@ -23,11 +23,15 @@ RELEASE SAVEPOINT identifier
 
     `ROLLBACK TO SAVEPOINT`のステートメントで指定されたセーブポイントが存在しない場合は、ステートメントは次のエラーを返します。
 
-        ERROR 1305 (42000): SAVEPOINT identifier does not exist
+    ```
+    ERROR 1305 (42000): SAVEPOINT identifier does not exist
+    ```
 
 -   `RELEASE SAVEPOINT`文は、現在のトランザクションをコミットまたはロールバックせずに、指定されたセーブポイントとそれ以降の**すべてのセーブポイントを**現在のトランザクションから削除します。指定された名前のセーブポイントが存在しない場合は、次のエラーが返されます。
 
-        ERROR 1305 (42000): SAVEPOINT identifier does not exist
+    ```
+    ERROR 1305 (42000): SAVEPOINT identifier does not exist
+    ```
 
     トランザクションがコミットまたはロールバックされると、トランザクション内のすべてのセーブポイントが削除されます。
 
