@@ -267,7 +267,7 @@ listener.security.protocol.map=INTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT,EXTERNAL:
 log.dirs=./data
 ```
 
-**2.4.3 Start Kafka brokers**
+**2.4.3 Kafkaブローカーを起動する**
 
 スクリプトを作成し、それを実行して各ブローカー ノードで Kafka ブローカーを起動します。
 
