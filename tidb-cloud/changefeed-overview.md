@@ -56,24 +56,24 @@ TiDB Cloud changefeed を使用すると、 TiDB Cloudから他のデータサ�
 
 </CustomContent>
 
-## クエリ変更フィード容量 {#query-changefeed-capacity}
+## 変更フィードの容量をクエリする {#query-changefeed-capacity}
 
 <CustomContent plan="dedicated">
 
 TiDB Cloud Dedicatedでは、変更フィードの TiCDC レプリケーション容量ユニット (RCU) を照会できます。
 
 1.  ターゲットのTiDB Cloud Dedicatedクラスターの[**変更フィード**](#view-the-changefeed-page)ページに移動します。
-2.  クエリを実行したい対応する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[ビュー]**をクリックします。
+2.  確認したい対応する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[ビュー]**をクリックします。
 3.  現在のTiCDCレプリケーション容量ユニット（RCU）は、ページの**仕様**欄で確認できます。
 
 </CustomContent>
 <CustomContent plan="premium">
 
-TiDB Cloud Premiumでは、チェンジフィードのTiCDC Changefeed容量ユニット（CCU）を照会できます。
+TiDB Cloud Premiumでは、チェンジフィードのTiCDC 変更フィード容量ユニット（CCU）を照会できます。
 
 1.  ターゲットのTiDB Cloud Premium インスタンスの[**変更フィード**](#view-the-changefeed-page)ページに移動します。
-2.  クエリを実行したい対応する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[ビュー]**をクリックします。
-3.  TiCDC Changefeedの現在の容量ユニット（CCU）は、ページの**仕様**欄で確認できます。
+2.  確認したい対応する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[ビュー]**をクリックします。
+3.  TiCDC 変更フィードの現在の容量ユニット（CCU）は、ページの**仕様**欄で確認できます。
 
 </CustomContent>
 
@@ -91,7 +91,7 @@ TiDB Cloud Premiumでは、チェンジフィードのTiCDC Changefeed容量ユ�
 </CustomContent>
 <CustomContent plan="premium">
 
-チェンジフィードのTiCDC Changefeed容量ユニット（CCU）は、チェンジフィードのスケールアップまたはスケールダウンによって変更できます。
+チェンジフィードのTiCDC 変更フィード容量ユニット（CCU）は、チェンジフィードのスケールアップまたはスケールダウンによって変更できます。
 
 </CustomContent>
 
@@ -158,7 +158,7 @@ TiDB Cloudでの変更フィードの請求については、[Changefeedの請�
 
 レプリケーションタスクの状態は、その実行中の状態を表します。実行中に、レプリケーションタスクはエラーで失敗したり、手動で一時停止または再開されたりすることがあります。これらの動作によって、レプリケーションタスクの状態が変化する可能性があります。
 
-各州は以下のように説明されます。
+状態は以下のように説明されます。
 
 -   `CREATING` : レプリケーションタスクが作成されています。
 -   `RUNNING` : レプリケーション タスクは正常に実行され、チェックポイント ts も正常に進行します。
