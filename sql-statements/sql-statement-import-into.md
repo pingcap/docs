@@ -132,7 +132,7 @@ In the `fileLocation` parameter, you can specify a single file, or use the `*` a
 
 ### Format
 
-The `IMPORT INTO` statement supports three data file formats: `CSV`, `SQL`, and `PARQUET`. When you specify the `FORMAT` clause, TiDB uses that format regardless of the file extension.
+The `IMPORT INTO` statement supports three data file formats: `CSV`, `SQL`, and `PARQUET`. When you specify the `FORMAT` clause, TiDB uses that format for parsing instead of detecting it from the file extension. For TiDB local file paths, the final suffix validation described above still applies.
 
 <CustomContent platform="tidb">
 
