@@ -343,7 +343,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 
 3.  **DB Audit Logging**ページで、削除するフィルタルールを見つけて、 **...**をクリックします。
 
-4.  **「削除」**をクリックし、次に**I understand, Delete it**をクリックしてください。
+4.  **「削除」**をクリックし、次に**I understand. Delete it**をクリックしてください。
 
 </div>
 

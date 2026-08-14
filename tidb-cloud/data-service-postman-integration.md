@@ -44,7 +44,7 @@ Postmanにデータアプリをインポートする前に、以下のものを�
 
 4.  データアプリのインポートに関するダイアログに表示される手順に従ってください。
 
-    1.  お好みに応じて、 **「Postman for Webで実行」**または**Run in Postman Desktop**を選択してPostmanワークスペースを開き、次に目的のワークスペースを選択してください。
+    1.  お好みに応じて、 **Run in Postman for Web**または**Run in Postman Desktop**を選択してPostmanワークスペースを開き、次に目的のワークスペースを選択してください。
 
         -   Postmanにログインしていない場合は、画面の指示に従ってまずPostmanにログインしてください。
         -   **Run in Postman Desktop**をクリックした場合は、画面の指示に従ってPostmanデスクトップアプリを起動してください。
