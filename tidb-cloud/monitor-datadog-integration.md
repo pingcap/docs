@@ -19,7 +19,7 @@ TiDB CloudはDatadogとの連携をサポートしています。TiDB Cloudを�
 
 TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合（ベータ版）をサポートしてきました。2025年7月31日より、TiDB CloudレベルのDatadog統合（PREVIEW）を導入します。2025年9月30日より、クラスターレベルのDatadog統合が一般提供（GA）となります。
 
--   **Cluster-level Datadog integration**：2025年7月31日までに組織内に削除されていない従来のプロジェクトレベルのDatadogまたはNew Relic統合が残っていない場合、 TiDB Cloudは組織が最新の機能強化を体験できるように、クラスタレベルのDatadog統合を提供します。
+-   **クラスタレベルのDatadog統合**：2025年7月31日までに組織内に削除されていない従来のプロジェクトレベルのDatadogまたはNew Relic統合が残っていない場合、 TiDB Cloudは組織が最新の機能強化を体験できるように、クラスタレベルのDatadog統合を提供します。
 -   **従来のプロジェクトレベルの Datadog 統合 (ベータ版)** : 2025 年 7 月 31 日時点で組織内に少なくとも 1 つの従来のプロジェクトレベルの Datadog または New Relic 統合が削除されずに残っている場合、 TiDB Cloudは、現在のダッシュボードへの影響を回避するために、組織向けにプロジェクトレベルで既存および新規の統合の両方を保持します。従来のプロジェクトレベルの Datadog 統合は、2025 年 10 月 31 日に廃止されました。組織がこれらの従来の統合をまだ使用している場合は、[DatadogとNew Relicの統合を移行する](/tidb-cloud/migrate-metrics-integrations.md)手順に従って、新しいクラスタレベルの統合に移行し、メトリクス関連サービスへの影響を最小限に抑えてください。
 
 ## 前提条件 {#prerequisites}
@@ -92,7 +92,7 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 > Datadog にTiDB Cloud統合をすでにインストールしている場合は、このセクションの次の手順をスキップできます。 [**TiDB Cloud Dynamic Tracker**](https://app.datadoghq.com/dash/integration/32021/tidb-cloud-dynamic-tracker)または[**TiDB Cloud Cluster Overview**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview)ダッシュボードは、Datadog [**ダッシュボード一覧**](https://app.datadoghq.com/dashboard/lists)で自動的に利用可能になります。
 
 1.  [Datadog](https://app.datadoghq.com)にログインします。
-2.  Datadog の[**TiDB Cloud Integration**ページ](https://app.datadoghq.com/account/settings#integrations/tidb-cloud)に移動します。
+2.  Datadog の[**TiDB Cloud統合**ページ](https://app.datadoghq.com/account/settings#integrations/tidb-cloud)に移動します。
 3.  **「コンフィグレーション」**タブで、 **「統合のインストール」を**クリックします。
 
     -   クラスターレベルの Datadog 統合の場合、 [**TiDB Cloud Dynamic Tracker**](https://app.datadoghq.com/dash/integration/32021/tidb-cloud-dynamic-tracker)ダッシュボードが[**ダッシュボード一覧**](https://app.datadoghq.com/dashboard/lists)に表示されます。

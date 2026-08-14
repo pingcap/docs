@@ -204,7 +204,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     -   **ユーザー名**: ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>のユーザー名を入力します。
     -   **パスワード**： TiDB Cloudのユーザー名のパスワードを入力してください。
 
-4.  入力した情報を検証するには、 **Validate Connection and Next**クリックしてください。
+4.  入力した情報を検証するには、 **Validate Connection and Next**をクリックしてください。
 
 5.  表示されたメッセージに従って行動してください。
 
@@ -289,7 +289,7 @@ SHOW MASTER STATUS;
 
 ## ステップ6：移行の進捗状況を確認する {#step-6-view-the-migration-progress}
 
-移行ジョブが作成されると、**Migration Job Details**ページで移行の進行状況を確認できます。移行の進行状況は、 **Stage and Status**領域に表示されます。
+移行ジョブが作成されると、**Migration Job Details**ページで移行の進行状況を確認できます。移行の進行状況は、 **Stage and Status**の領域に表示されます。
 
 移行ジョブは、実行中でも一時停止または削除できます。
 
@@ -307,11 +307,11 @@ SHOW MASTER STATUS;
 
 **「仕様を選択して移行を開始」**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [データ移行の仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)を参照してください。
 
-仕様を選択したら、 **Create Job and Start**クリックして移行を開始します。
+仕様を選択したら、 **Create Job and Start**をクリックして移行を開始します。
 
 ## ステップ7：移行の進捗状況を確認する {#step-7-view-the-migration-progress}
 
-移行ジョブが作成されると、**Migration Job Details**ページで移行の進行状況を確認できます。移行の進行状況は、 **Stage and Status**領域に表示されます。
+移行ジョブが作成されると、**Migration Job Details**ページで移行の進行状況を確認できます。移行の進行状況は、 **Stage and Status**の領域に表示されます。
 
 移行ジョブは、実行中でも一時停止または削除できます。
 

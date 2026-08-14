@@ -405,7 +405,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
 
 2.  [Amazon VPC コンソール](https://console.aws.amazon.com/vpc/)で、左側のナビゲーションペインの**[エンドポイント サービス]**をクリックし、 **Create endpoint service**をクリックします。次の設定を構成します。
 
-    -   **Load balancer type****「ネットワーク」**に設定し、前の手順で作成したNLBを選択します。**Available load balancers**リストが空の場合は、NLBが**アクティブ**状態になるまで待ってから、リストの横にある更新アイコンをクリックします。
+    -   **Load balancer type**を**「ネットワーク」**に設定し、前の手順で作成したNLBを選択します。**Available load balancers**リストが空の場合は、NLBが**アクティブ**状態になるまで待ってから、リストの横にある更新アイコンをクリックします。
     -   **承認が必要**：有効（デフォルト）。
     -   **Supported IP address types**： **IPv4**を選択してください。
 
@@ -443,7 +443,7 @@ Azure Database for MySQL - Flexible Server は、ネイティブのプライベ�
 
 2.  **ネットワーク設定**ページで、**プライベートエンドポイントの**セクションまでスクロールダウンし、 **+ Create private endpoint**をクリックして、画面の指示に従ってプライベートエンドポイントを設定します。
 
-    セットアップ中に、**Virtual Network**タブでTiDB Cloud がアクセスできる仮想ネットワークとサブネットを選択し、 **DNS**タブで**Private DNS integration**を有効にします。プライベートエンドポイントが作成されてデプロイされたら、 **Go to resource**クリックし、左側のナビゲーション ペインで**[設定]** &gt; **[DNS 構成] を**クリックして、**Customer Visible FQDNs**セクションでインスタンスへの接続に使用するホスト名を見つけます。通常、ホスト名は`<your-instance-name>.mysql.database.azure.com`形式です。
+    セットアップ中に、**Virtual Network**タブでTiDB Cloud がアクセスできる仮想ネットワークとサブネットを選択し、 **DNS**タブで**Private DNS Integration**を有効にします。プライベートエンドポイントが作成されてデプロイされたら、 **Go to resource**をクリックし、左側のナビゲーション ペインで**[設定]** &gt; **[DNS 構成] を**クリックして、**Customer Visible FQDNs**セクションでインスタンスへの接続に使用するホスト名を見つけます。通常、ホスト名は`<your-instance-name>.mysql.database.azure.com`形式です。
 
     詳細な手順については、Azure ドキュメントの[プライベートリンクセンターを使用してプライベートエンドポイントを作成します](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-networking-private-link-portal#create-a-private-endpoint-via-private-link-center)を参照してください。
 
@@ -491,7 +491,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
 
 2.  [Amazon VPC コンソール](https://console.aws.amazon.com/vpc/)で、左側のナビゲーションペインの**[エンドポイント サービス]**をクリックし、 **Create endpoint service**をクリックします。次の設定を構成します。
 
-    -   **Load balancer type****「ネットワーク」**に設定し、前の手順で作成したNLBを選択します。**Available load balancers**リストが空の場合は、NLBが**アクティブ**状態になるまで待ってから、リストの横にある更新アイコンをクリックします。
+    -   **Load balancer type**を**「ネットワーク」**に設定し、前の手順で作成したNLBを選択します。**Available load balancers**リストが空の場合は、NLBが**アクティブ**状態になるまで待ってから、リストの横にある更新アイコンをクリックします。
     -   **承認が必要**：有効（デフォルト）。
     -   **Supported IP address types**： **IPv4**を選択してください。
 
@@ -759,7 +759,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
     -   **ユーザー名**: <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>TiDB Cloud<CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent>TiDB Cloud<CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>のユーザー名を入力します。
     -   **パスワード**： TiDB Cloudのユーザー名のパスワードを入力してください。
 
-4.  入力した情報を検証するには、 **Validate Connection and Next**クリックしてください。
+4.  入力した情報を検証するには、 **Validate Connection and Next**をクリックしてください。
 
 5.  表示されたメッセージに従って行動してください。
 
@@ -832,7 +832,7 @@ TiDB Cloudへのデータ移行を一度で完了させるには、 **Existing d
 </CustomContent>
 <CustomContent plan="essential">
 
-TiDB Cloudへのデータ移行を一度で完了させるには、ソースデータベースとターゲットデータベース間のデータの一貫性を確保するため、 **Full + Incremental**と**Incremental data migration**選択してください。
+TiDB Cloudへのデータ移行を一度で完了させるには、ソースデータベースとターゲットデータベース間のデータの一貫性を確保するため、 **Full + Incremental**と**Incremental data migration**を選択してください。
 
 現在、**既存データの**移行には**論理モード**のみを使用できます。このモードでは、MySQLソースデータベースからSQLステートメントとしてデータをエクスポートし、TiDB上で実行します。このモードでは、移行前のターゲットテーブルは空でも空でなくても構いません。
 
@@ -842,7 +842,7 @@ TiDB Cloudへのデータ移行を一度で完了させるには、ソースデ�
 
 TiDB Cloud Premiumへのデータ移行を一度で完了させるには、 **Full + Incremental**を選択してください。これにより、ソースデータベースとターゲットデータベース間のデータの一貫性が確保されます。
 
-**既存データの移行**には、**物理​​モード**または**existing data migration**いずれかを使用できます。
+**既存データの移行**には、**物理​​モード**または**論理モードの**いずれかを使用できます。
 
 -   デフォルトモードは**論理モード**です。このモードでは、MySQLソースデータベースからSQLステートメントとしてデータをエクスポートし、ターゲットのTiDB Cloud Premiumインスタンス上で実行します。このモードでは、移行前にターゲットテーブルが空でも空でなくても構いませんが、物理モードよりもパフォーマンスが低下します。
 
@@ -859,7 +859,7 @@ TiDB Cloud Premiumへのデータ移行を一度で完了させるには、 **Fu
 
 ### 既存データのみを移行する {#migrate-only-existing-data}
 
-ソースデータベースの既存データのみをTiDB Cloudに移行するには、 **Existing data migration**選択します。
+ソースデータベースの既存データのみをTiDB Cloudに移行するには、 **Existing data migration**を選択します。
 
 物理モードまたは論理モードを使用して、既存のデータを移行できます。詳細については、[既存データと増分データを移行する](#migrate-existing-data-and-incremental-data)を参照してください。
 
@@ -897,7 +897,7 @@ TiDB Cloud Premiumへのデータ移行を一度で完了させるには、 **Fu
 
 ## ステップ6：移行の進捗状況を確認する {#step-6-view-the-migration-progress}
 
-移行ジョブが作成されると、**Migration Job Details**ページで移行の進行状況を確認できます。移行の進行状況は、 **Stage and Status**領域に表示されます。
+移行ジョブが作成されると、**Migration Job Details**ページで移行の進行状況を確認できます。移行の進行状況は、 **Stage and Status**の領域に表示されます。
 
 移行ジョブは、実行中でも一時停止または削除できます。
 
@@ -913,7 +913,7 @@ TiDB Cloud Premiumへのデータ移行を一度で完了させるには、 **Fu
 
 ## ステップ6：移行の進捗状況を監視する {#step-6-monitor-the-migration-progress}
 
-移行ジョブが作成されると、**Migration Job Details**ページで移行の進行状況を確認できます。移行の進行状況は、 **Stage and Status**領域に表示されます。
+移行ジョブが作成されると、**Migration Job Details**ページで移行の進行状況を確認できます。移行の進行状況は、 **Stage and Status**の領域に表示されます。
 
 移行ジョブは、実行中でも一時停止または削除できます。移行ジョブが失敗した場合は、問題を解決した後に再開できます。移行ジョブは、どの状態でも削除できます。
 
@@ -931,11 +931,11 @@ TiDB Cloud Premiumへのデータ移行を一度で完了させるには、 **Fu
 
 **「仕様を選択して移行を開始」**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [データ移行の仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)を参照してください。
 
-仕様を選択したら、 **Create Job and Start**クリックして移行を開始します。
+仕様を選択したら、 **Create Job and Start**をクリックして移行を開始します。
 
 ## ステップ7：移行の進捗状況を確認する {#step-7-view-the-migration-progress}
 
-移行ジョブが作成されると、**Migration Job Details**ページで移行の進行状況を確認できます。移行の進行状況は、 **Stage and Status**領域に表示されます。
+移行ジョブが作成されると、**Migration Job Details**ページで移行の進行状況を確認できます。移行の進行状況は、 **Stage and Status**の領域に表示されます。
 
 移行ジョブは、実行中でも一時停止または削除できます。
 

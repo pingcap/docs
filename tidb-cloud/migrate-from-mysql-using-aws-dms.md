@@ -35,7 +35,7 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 
 1.  AWS DMS コンソールの[レプリケーションインスタンス](https://console.aws.amazon.com/dms/v2/home#replicationInstances)ページに移動し、対応するリージョンに切り替えます。 AWS DMS にはTiDB Cloudと同じリージョンを使用することをお勧めします。このドキュメントでは、アップストリームおよびダウンストリームのデータベースと DMS インスタンスはすべて**us-west-2**リージョンにあります。
 
-2.  **Create replication instance**クリックします。
+2.  **Create replication instance**をクリックします。
 
     ![Create replication instance](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-create-instance.png)
 
@@ -49,12 +49,12 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 5.  ストレージは**Allocated storage (GiB)**フィールドで設定します。デフォルト設定を使用してください。
 
 6.  接続性とセキュリティを設定します。
-    -   **Network type - new**: **IPv4**を選択してください。
+    -   **Network type** - 新規: **IPv4**を選択してください。
     -   **IPv4 用仮想プライベートクラウド (VPC)** ：必要な VPC を選択してください。ネットワーク構成を簡素化するため、アップストリームデータベースと同じ VPC を使用することをお勧めします。
     -   **Replication subnet group**：レプリケーションインスタンスに使用するサブネットグループを選択してください。
     -   **一般公開**：デフォルト設定を使用します。
 
-7.  必要に応じて、**詳細設定**、**メンテナンス**、および**タグ**を設定します。 **Create replication instance**クリックして、インスタンスの作成を完了します。
+7.  必要に応じて、**詳細設定**、**メンテナンス**、および**タグ**を設定します。 **Create replication instance**をクリックして、インスタンスの作成を完了します。
 
 ## ステップ2. ソースデータベースエンドポイントを作成する {#step-2-create-the-source-database-endpoint}
 
@@ -70,7 +70,7 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 
     ![Click Create endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-endpoint.png)
 
-4.  この例では、 **Select RDS DB instance**クリックし、ソースとなるRDSインスタンスを選択します。ソースデータベースがセルフホスト型のMySQLの場合は、この手順をスキップして、次の手順で情報を入力できます。
+4.  この例では、 **Select RDS DB instance**をクリックし、ソースとなるRDSインスタンスを選択します。ソースデータベースがセルフホスト型のMySQLの場合は、この手順をスキップして、次の手順で情報を入力できます。
 
     ![Select RDS DB instance](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-select-rds.png)
 
@@ -79,7 +79,7 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
     -   **エンドポイント識別子**：後続のタスク構成で識別しやすくするために、ソースエンドポイントにラベルを作成します。
     -   **記述的な Amazon リソース名 (ARN) - オプション**: デフォルトの DMS ARN に分かりやすい名前を作成します。
     -   **ソースエンジン**: **MySQL**を選択してください。
-    -   **Access to endpoint database**:**Provide access information manually**選択します。
+    -   **Access to endpoint database**:**Provide access information manually**を選択します。
     -   **サーバー名**：データプロバイダーのデータサーバー名を入力してください。データベースコンソールからコピーできます。アップストリームがAmazon RDSまたはAmazon Auroraの場合は、名前が自動的に入力されます。ドメイン名のないセルフホスト型MySQLの場合は、IPアドレスを入力してください。
     -   ソースデータベースの**ポート番号**、**ユーザー名**、**パスワード**を入力してください。
     -   **セキュリティソケットレイヤー（SSL）モード**：必要に応じてSSLモードを有効にできます。
@@ -124,7 +124,7 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
     -   **ユーザー名**: TiDB クラスターのユーザー名を入力してください。これは、記録した`-u`情報です。
     -   **パスワード**：TiDBクラスタのパスワードを入力してください。
     -   **セキュリティソケットレイヤー（SSL）モード**： **Verify-ca**を選択します。
-    -   **Add new CA certificate**クリックして、前の手順でTiDB CloudコンソールからダウンロードしたCAファイルをインポートします。
+    -   **Add new CA certificate**をクリックして、前の手順でTiDB CloudコンソールからダウンロードしたCAファイルをインポートします。
 
     ![Fill in the target endpoint information](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-target-endpoint2.png)
 
