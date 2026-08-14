@@ -181,7 +181,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     <CustomContent plan="essential">
 
     -   **Hostname or IP address**（パブリックIPの場合）：データソースのホスト名またはIPアドレス。
-    -   **Private Link Connection**(プライベート リンク用): プライベートリンク[プライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md)セクションで作成したプライベート リンク接続。
+    -   **Private Link Connection**(プライベート リンク用): [プライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md)セクションで作成したプライベート リンク接続。
 
     </CustomContent>
     <CustomContent plan="premium">
@@ -269,7 +269,7 @@ SHOW MASTER STATUS;
 
 ## ステップ4：移行するオブジェクトを選択する {#step-4-choose-the-objects-to-be-migrated}
 
-1.  **Choose Objects to Migrate**ページで、移行するオブジェクトを選択します。 **「すべて**」をクリックするとすべてのオブジェクトを選択できます。 **「カスタマイズ」**をクリックしてから、オブジェクト名の横にあるチェックボックスをクリックしてオブジェクトを選択することもできます。
+1.  **Choose Objects to Migrate**ページで、移行するオブジェクトを選択します。 **「すべて」**をクリックするとすべてのオブジェクトを選択できます。 **「カスタマイズ」**をクリックしてから、オブジェクト名の横にあるチェックボックスをクリックしてオブジェクトを選択することもできます。
 
 2.  **「次へ」**をクリックしてください。
 

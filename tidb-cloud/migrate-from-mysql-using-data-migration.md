@@ -443,7 +443,7 @@ Azure Database for MySQL - Flexible Server は、ネイティブのプライベ�
 
 2.  **ネットワーク設定**ページで、**プライベートエンドポイントの**セクションまでスクロールダウンし、 **+ Create private endpoint**をクリックして、画面の指示に従ってプライベートエンドポイントを設定します。
 
-    セットアップ中に、**Virtual Network**タブでTiDB Cloud がアクセスできる仮想ネットワークとサブネットを選択し、 **DNS**タブで**Private DNS Integration**を有効にします。プライベートエンドポイントが作成されてデプロイされたら、 **Go to resource**をクリックし、左側のナビゲーション ペインで**[設定]** &gt; **[DNS 構成] を**クリックして、**Customer Visible FQDNs**セクションでインスタンスへの接続に使用するホスト名を見つけます。通常、ホスト名は`<your-instance-name>.mysql.database.azure.com`形式です。
+    セットアップ中に、**Virtual Network**タブでTiDB Cloud がアクセスできる仮想ネットワークとサブネットを選択し、 **DNS**タブで**Private DNS integration**を有効にします。プライベートエンドポイントが作成されてデプロイされたら、 **Go to resource**をクリックし、左側のナビゲーション ペインで**[設定]** &gt; **[DNS 構成] を**クリックして、**Customer Visible FQDNs**セクションでインスタンスへの接続に使用するホスト名を見つけます。通常、ホスト名は`<your-instance-name>.mysql.database.azure.com`形式です。
 
     詳細な手順については、Azure ドキュメントの[プライベートリンクセンターを使用してプライベートエンドポイントを作成します](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-networking-private-link-portal#create-a-private-endpoint-via-private-link-center)を参照してください。
 
@@ -700,9 +700,9 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
     -   選択した**接続方法**に基づいて、以下の手順を実行してください。
 
-        -   **パブリックIP**または**VPCピアリングを**選択した場合は、**Hostname or IP address**フィールドにデータソースのホスト名またはIPアドレスを入力してください。
+        -   **パブリックIP**または**VPCピアリング**を選択した場合は、**Hostname or IP address**フィールドにデータソースのホスト名またはIPアドレスを入力してください。
         -   **「プライベートリンク」**を選択した場合は、以下の情報を入力してください。
-            -   **Endpoint Service Name**(**データ ソースが**AWS の場合に利用可能): RDS または Aurora インスタンス用に作成した VPC エンドAuroraサービス名 (形式: `com.amazonaws.vpce.<region>.vpce-svc-<id>` 、例: `com.amazonaws.vpce.us-east-1.vpce-svc-0123456789abcdef0` ) を入力します。
+            -   **Endpoint Service Name**(**データソース**がAWS の場合に利用可能): RDS または Aurora インスタンス用に作成した VPC エンドAuroraサービス名 (形式: `com.amazonaws.vpce.<region>.vpce-svc-<id>` 、例: `com.amazonaws.vpce.us-east-1.vpce-svc-0123456789abcdef0` ) を入力します。
             -   **Private Endpoint Resource ID** （**データソース**がAzureの場合に利用可能）：MySQL Flexible ServerインスタンスのリソースIDを入力します（形式： `/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>` ）。
 
     </CustomContent>
@@ -799,7 +799,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
 <CustomContent plan="premium">
 
-**移行タイプの**ステップでは、既存データと増分データの両方を移行する場合は**Full + Incremental**、増分データのみを移行する場合は**「増分のみ」**を選択できます。
+**移行タイプ**のステップでは、既存データと増分データの両方を移行する場合は**Full + Incremental**、増分データのみを移行する場合は**「増分のみ」**を選択できます。
 
 </CustomContent>
 
@@ -807,7 +807,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
 <CustomContent plan="dedicated">
 
-TiDB Cloudへのデータ移行を一度で完了させるには、 **Existing data migration**と**Incremental data migration**両方を選択してください。これにより、ソースデータベースとターゲットデータベース間のデータの一貫性が確保されます。
+TiDB Cloudへのデータ移行を一度で完了させるには、 **Existing data migration**と**Incremental data migration**の両方を選択してください。これにより、ソースデータベースとターゲットデータベース間のデータの一貫性が確保されます。
 
 **既存データ**と**増分データの**移行には**、物理​​モード**または**論理モード**を使用できます。
 
@@ -873,7 +873,7 @@ TiDB Cloud Premiumへのデータ移行を一度で完了させるには、 **Fu
 
 ## ステップ4：移行するオブジェクトを選択する {#step-4-choose-the-objects-to-be-migrated}
 
-1.  **Choose Objects to Migrate**ページで、移行するオブジェクトを選択します。 **「すべて**」をクリックするとすべてのオブジェクトを選択できます。 **「カスタマイズ」**をクリックしてから、オブジェクト名の横にあるチェックボックスをクリックしてオブジェクトを選択することもできます。
+1.  **Choose Objects to Migrate**ページで、移行するオブジェクトを選択します。 **「すべて」**をクリックするとすべてのオブジェクトを選択できます。 **「カスタマイズ」**をクリックしてから、オブジェクト名の横にあるチェックボックスをクリックしてオブジェクトを選択することもできます。
 
     -   **「すべて」**をクリックすると、移行ジョブはソースデータベースインスタンス全体から既存のデータをTiDB Cloudに移行し、完全移行後に進行中の変更も移行します。ただし、これは前の手順で**Existing data migration**と**Incremental data migration**のチェックボックスを選択した場合にのみ実行されます。
     -   **「カスタマイズ」**をクリックしてデータベースを選択すると、移行ジョブによって既存のデータと選択したデータベースの進行中の変更がTiDB Cloudに移行されます。ただし、これは前の手順で**Existing data migration**と**Incremental data migration**のチェックボックスを選択した場合にのみ実行されます。

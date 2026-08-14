@@ -123,7 +123,7 @@ TiDB Cloudのリソースをプロジェクトごとにグループ化して表�
 
         </CustomContent>
 
-    -   プロジェクトがTiDB Cloud Dedicatedクラスター用に作成されている場合は、 **Create for Dedicated Clusters**オプションを選択し、プロジェクトの [顧客管理型暗号化キー（CMEK）](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)と[メンテナンスウィンドウ](/tidb-cloud/configure-maintenance-window.md)を構成して、 **「確認」**をクリックします。
+    -   プロジェクトがTiDB Cloud Dedicatedクラスター用に作成されている場合は、 **Create for Dedicated Cluster**オプションを選択し、プロジェクトの [顧客管理型暗号化キー（CMEK）](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)と[メンテナンスウィンドウ](/tidb-cloud/configure-maintenance-window.md)を構成して、 **「確認」**をクリックします。
 
 ### プロジェクトを管理する {#manage-a-project}
 
