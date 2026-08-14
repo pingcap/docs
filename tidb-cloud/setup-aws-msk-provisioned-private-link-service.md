@@ -22,7 +22,7 @@ TiDB Cloud で Amazon MSK Provisioned のダウンストリームサービス用
     2. **Private Link Endpoint For External Services** エリアで、**Create Private Endpoint for External Services** をクリックします。
     3. ダイアログで **Connection Type** を **AWS MSK Provisioned** に切り替え、**AWS Account ID** と **availability zone IDs**（例: `use1-az1`）を確認します。
 
-    **Important about AZ alignment**: AWS アカウント間で availability zone の整合性を確認する際は、AZ 名（例: `us-east-1a`）ではなく AZ ID（例: `use1-az1`）を使用してください。同じ AZ 名でも、アカウントによって異なる物理ゾーンに対応している場合があります。MSK クラスターは、TiDB Cloud Premium インスタンスと同じ AZ ID を使用する必要があります。
+    **AZ の整合性に関する重要事項**: AWS アカウント間で availability zone の整合性を確認する際は、AZ 名（例: `us-east-1a`）ではなく AZ ID（例: `use1-az1`）を使用してください。同じ AZ 名でも、アカウントによって異なる物理ゾーンに対応している場合があります。MSK クラスターは、TiDB Cloud Premium インスタンスと同じ AZ ID を使用する必要があります。
 
 ## ステップ 1. Amazon VPC とサブネットをセットアップする {#step-1-set-up-the-amazon-vpc-and-subnets}
 

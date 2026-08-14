@@ -103,7 +103,7 @@ Google Cloud Private Service Connect のアーキテクチャは以下のとお�
 
 2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 
-3.  **「接続タイプ」**ドロップダウンリストで**「プライベートエンドポイント」**を選択し、 **Create Private Endpoint Connection**クリックします。
+3.  **「接続タイプ」**ドロップダウンリストで**「プライベートエンドポイント」**を選択し、 **Create Private Endpoint Connection**をクリックします。
 
     > **Note:**
     >

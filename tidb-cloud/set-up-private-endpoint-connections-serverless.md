@@ -39,8 +39,8 @@ AWS VPC 設定で DNS ホスト名と DNS 解決の両方が有効になって�
 
 TiDB Cloudプランに応じて、適切なプライベートエンドポイントモデルを選択してください。
 
-- {{{ .starter }}} インスタンス、または2026年7月1日より前に作成された {{{ .essential }}} インスタンスの場合は、[**endpoint shared model**](#set-up-a-private-endpoint-with-aws-endpoint-shared-model) を使用します。このモデルでは、同じAWSリージョンおよびVPC内の複数の {{{ .starter }}} または {{{ .essential }}} インスタンスで、1つのプライベートエンドポイントを共有できます。
-- 2026年7月1日以降に作成された {{{ .essential }}} インスタンスの場合は、[**endpoint exclusive model**](#set-up-a-private-endpoint-with-aws-endpoint-exclusive-model) を使用します。このモデルでは、各 {{{ .essential }}} インスタンスが専用のスタンドアロンプライベートエンドポイントを使用します。このモデルでは接続時に [アカウントプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix) を含める必要がありませんが、各 {{{ .essential }}} インスタンスごとに設定手順を繰り返す必要があります。
+- {{{ .starter }}} インスタンス、または2026年7月1日より前に作成された {{{ .essential }}} インスタンスの場合は、[**エンドポイント共有モデル**](#set-up-a-private-endpoint-with-aws-endpoint-shared-model) を使用します。このモデルでは、同じAWSリージョンおよびVPC内の複数の {{{ .starter }}} または {{{ .essential }}} インスタンスで、1つのプライベートエンドポイントを共有できます。
+- 2026年7月1日以降に作成された {{{ .essential }}} インスタンスの場合は、[**エンドポイント占有モデル**](#set-up-a-private-endpoint-with-aws-endpoint-exclusive-model) を使用します。このモデルでは、各 {{{ .essential }}} インスタンスが専用のスタンドアロンプライベートエンドポイントを使用します。このモデルでは接続時に [アカウントプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix) を含める必要がありませんが、各 {{{ .essential }}} インスタンスごとに設定手順を繰り返す必要があります。
 
 ## AWSでプライベートエンドポイントを設定する（エンドポイント共有モデル） {#set-up-a-private-endpoint-with-aws-endpoint-shared-model}
 

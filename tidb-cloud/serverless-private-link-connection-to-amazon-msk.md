@@ -24,7 +24,7 @@ AWS アカウント ID とアベイラビリティーゾーンを表示するに
 
 始める前に、Amazon MSK プロビジョニングされたクラスターについて次の点を確認してください。
 
--   **Region and AZ** : Amazon MSK プロビジョニングされたクラスターは、 TiDB Cloud Essentialクラスターと同じ AWS リージョンにあり、MSK クラスターのアベイラビリティーゾーンはTiDB Cloudクラスターと同じです。
+-   **リージョンと AZ** : Amazon MSK プロビジョニングされたクラスターは、 TiDB Cloud Essentialクラスターと同じ AWS リージョンにあり、MSK クラスターのアベイラビリティーゾーンはTiDB Cloudクラスターと同じです。
 -   MSK クラスターには**認証**: [SASL/SCRAM認証](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html)が必要です。
 -   **ブローカータイプ**: ブローカー`t4.small`タイプは使用しないでください。プライベートリンクをサポートしていません。
 

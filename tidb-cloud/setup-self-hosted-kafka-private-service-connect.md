@@ -42,11 +42,11 @@ Google Cloud でセルフホスト型 Kafka に Private Service Connect を設�
     3.  左側のナビゲーション ペインで**[データ]** &gt; **[Changefeed] を**クリックし、右上隅の**[Changefeed の作成]**をクリックして、次の情報を入力します。
         1.  **宛先**で、 **Kafka**を選択します。
         2.  **[接続方法]**で、 **Private Service Connect**を選択します。
-    4.  **Reminders before proceeding**に書き留めておいてください。このプロジェクトは、 TiDB Cloudからのエンドポイント作成リクエストの自動承認を承認するために使用します。
+    4.  **先に進む前に、Google Cloud プロジェクトをリマインダー**に書き留めておいてください。このプロジェクトは、 TiDB Cloudからのエンドポイント作成リクエストの自動承認を承認するために使用します。
     5.  **Zones of TiDB Cluster**をメモしておいてください。これらのゾーンに TiDB クラスターをデプロイします。ゾーン間のトラフィックを削減するため、これらのゾーンに Kafka をデプロイすることをお勧めします。
     6.  Kafka プライベート サービス接続サービスに固有の**Kafka Advertised Listener Pattern**を選択します。
-        1.  一意のランダム文字列を入力してください。数字または小文字のみ使用できます。この文字列は、後ほど**Kafka Advertised Listener Pattern**生成する際に使用します。
-        2.  **Check usage and generate**クリックすると、ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズ リスナーを組み立てるために使用される**Kafka Advertised Listener Pattern**生成されるか、Kafka プロキシが構成されます。
+        1.  一意のランダム文字列を入力してください。数字または小文字のみ使用できます。この文字列は、後ほど**Kafka Advertised Listener Pattern**を生成する際に使用します。
+        2.  **「使用状況を確認して生成」を**クリックすると、ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズ リスナーを組み立てるために使用される**Kafka Advertised Listener Pattern**が生成されるか、Kafka プロキシが構成されます。
 
 すべてのデプロイメント情報をメモしてください。後でKafka Private Service Connectサービスを設定する際に必要になります。
 
@@ -87,7 +87,7 @@ Kafka クラスターを簡単に構成できるように、Kafka VPC 用に 2 �
     -   `kafka-vpc-allow-custom`
     -   `kafka-vpc-allow-ssh`
 
-**2. Provisioning VMs**
+**2. VMのプロビジョニング**
 
 VM をプロビジョニングするには、 [VMインスタンス](https://console.cloud.google.com/compute/instances)ページに移動します。
 
@@ -163,7 +163,7 @@ VM をプロビジョニングするには、 [VMインスタンス](https://con
     gcloud compute ssh broker-node3 --zone=us-west1-c --command="tar -zxf kafka_2.13-3.7.1.tgz && tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz"
     ```
 
-**4. Configure Kafka brokers**
+**4. Kafkaブローカーを構成する**
 
 1.  3つのノードでKRaft Kafkaクラスターをセットアップします。各ノードはブローカーとコントローラーの役割を持ちます。各ブローカーに対して、以下の手順を実行します。
 
