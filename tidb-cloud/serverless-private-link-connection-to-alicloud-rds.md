@@ -78,7 +78,7 @@ ApsaraDB RDS for MySQL と同じリージョンにエンドポイント サー�
 
 1.  エンドポイントサービスを作成するには、 [エンドポイントサービス](https://vpc.console.alibabacloud.com/endpointservice)に進んでください。以下の情報を入力してください。
 
-    -   **Service Resource Type**: `NLB`選択
+    -   **Service Resource Type**: `NLB`を選択
     -   **Select Service Resource**: NLB が含まれるすべてのゾーンを選択し、前の手順で作成した NLB を選択します。
     -   **Automatically Accept Endpoint Connections**: `No`選択することをお勧めします
 
