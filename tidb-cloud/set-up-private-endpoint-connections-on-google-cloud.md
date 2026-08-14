@@ -114,7 +114,7 @@ Google Cloud Private Service Connect のアーキテクチャは以下のとお�
 1.  プライベートエンドポイント作成用のコマンドを生成するには、以下の情報を提供してください。
     -   **Google Cloud Project ID** ：Google Cloud アカウントに関連付けられたプロジェクト ID です。この ID は[Google Cloud **Dashboard**ページ](https://console.cloud.google.com/home/dashboard)で確認できます。
     -   **Google Cloud VPC Name** : 指定したプロジェクト内の VPC の名前。 [Google Cloud **VPC ネットワークの**ページ](https://console.cloud.google.com/networking/networks/list)にあります。
-    -   **Google Cloud Subnet Name**：指定された VPC 内のサブネットの名前です。VPC**VPC network details**ページで確認できます。
+    -   **Google Cloud Subnet Name**：指定された VPC 内のサブネットの名前です。**VPC network details**ページで確認できます。
     -   **プライベートサービス接続エンドポイント名**：作成されるプライベートエンドポイントの一意の名前を入力してください。
 2.  情報を入力したら、 **「コマンド生成」**をクリックしてください。
 3.  Google Cloud CLI または Google Cloud コンソールを使用して、プライベートエンドポイントを作成します。
