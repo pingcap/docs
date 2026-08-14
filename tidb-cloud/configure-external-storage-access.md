@@ -42,7 +42,7 @@ TiDB Cloud Starter、 Essential、またはPremiumインスタンスがAmazon S3
 
     -   データをAmazon S3にエクスポートする場合は、次のように**Add New ARN**ダイアログを開きます。
 
-        1.  **Export data to...** &gt; **「Amazon S3」**をクリックします。TiDB Cloud StarterまたはEssentialインスタンスでこれまでデータのインポートまたはエクスポートが行われていない場合は、ページ下部の**「ここをクリックしてデータをエクスポート...」** &gt; **「Amazon S3」**をクリックしてください。
+        1.  **Export data to...** &gt; **Amazon S3**をクリックします。TiDB Cloud StarterまたはEssentialインスタンスでこれまでデータのインポートまたはエクスポートが行われていない場合は、ページ下部の**「ここをクリックしてデータをエクスポート...」** &gt; **Amazon S3**をクリックしてください。
         2.  **フォルダURI**欄に入力してください。
         3.  **AWS Role ARN**を選択し、[**ここをクリックして AWS CloudFormation を使用して新しいロールを作成します] をクリックします**。
 

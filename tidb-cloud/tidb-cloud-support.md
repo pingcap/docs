@@ -42,7 +42,7 @@ PingCAP ヘルプ センターには、 [https://tidb.support.pingcap.com/servic
 -   [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**[?]**をクリックし、 **[サポート チケット]**をクリックします。
 -   [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある**[サポート] を**クリックし、サポート プランに応じて次のいずれかを実行します。
     -   **基本**: **[Account & Billing]**領域で、 **[アカウント/請求の問題]**をクリックします。
-    -   **Developer** 、 **Enterprise** 、または**Premium** : **「Talk to an expert」**エリアで、 **PingCAP Help Center**をクリックします。
+    -   **Developer** 、 **Enterprise** 、または**Premium** : **Talk to an expert**エリアで、 **PingCAP Help Center**をクリックします。
 -   プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページで、クラスターの行にある**[...]**をクリックし、 **[サポートを受ける]**を選択します。
 -   クラスターの概要ページで、右上隅の**[...]**をクリックし、 **[サポートを受ける]**を選択します。
 

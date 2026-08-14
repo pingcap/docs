@@ -35,7 +35,7 @@ summary: TiDB Cloudクラスタ間でデータベースのフェイルオーバ�
 
 5.  プライマリコピーに昇格させるセカンダリTiDB Cloudクラスタを選択します。選択したクラスタが正常な状態であることを確認してください。
 
-6.  確認画面に**「Failover」**と入力し、 **I understand, failover group**をクリックしてフェイルオーバーを開始し、フェイルオーバーが引き起こす可能性のある混乱について理解していることを確認してください。
+6.  確認画面に**Failover**と入力し、 **I understand, failover group**をクリックしてフェイルオーバーを開始し、フェイルオーバーが引き起こす可能性のある混乱について理解していることを確認してください。
 
     ![Fail Over Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-failover.png)
 

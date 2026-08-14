@@ -85,7 +85,7 @@ TiDB クラスター CA をダウンロードした後、それをオペレー�
 jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=root&password=<your_password>&sslMode=VERIFY_IDENTITY&tlsVersions=TLSv1.2&trustCertificateKeyStoreUrl=file:<your_custom_truststore_path>&trustCertificateKeyStorePassword=<your_truststore_password>
 ```
 
-詳細なコード例を表示するには、 **「show example usage」**をクリックします。
+詳細なコード例を表示するには、 **show example usage**をクリックします。
 
     import com.mysql.jdbc.Driver;
     import java.sql.*;
@@ -125,7 +125,7 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 
     host="tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com", user="root", password="<your_password>", port=4000, database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "ca.pem"}
 
-詳細なコード例を表示するには、 **「show example usage」**をクリックします。
+詳細なコード例を表示するには、 **show example usage**をクリックします。
 
     import MySQLdb
 
@@ -164,7 +164,7 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 
     db, err := sql.Open("mysql", "root:<your_password>@tcp(tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000)/test?tls=tidb")
 
-詳細なコード例を表示するには、 **「show example usage」**をクリックします。
+詳細なコード例を表示するには、 **show example usage**をクリックします。
 
     package main
     import (
@@ -231,7 +231,7 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
       }
     });
 
-詳細なコード例を表示するには、 **「show example usage」**をクリックします。
+詳細なコード例を表示するには、 **show example usage**をクリックします。
 
     var mysql = require('mysql2');
     var fs = require('fs');
