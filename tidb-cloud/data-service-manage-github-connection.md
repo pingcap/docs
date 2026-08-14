@@ -9,7 +9,7 @@ TiDB Cloudは、 JSON構文を使用してデータアプリの構成全体を�
 
 データアプリをGitHubに接続することで、 TiDB CloudはCaC方式を使用し、データアプリの設定を[設定ファイル](/tidb-cloud/data-service-app-config-files.md)として、指定したGitHubリポジトリとブランチにプッシュできます。
 
-GitHub接続で**Auto Sync & Deployment**有効になっている場合、GitHub上の設定ファイルを更新することでデータアプリを変更することもできます。設定ファイルの変更をGitHubにプッシュすると、新しい設定がTiDB Cloudに自動的にデプロイされます。
+GitHub接続で**Auto Sync & Deployment**が有効になっている場合、GitHub上の設定ファイルを更新することでデータアプリを変更することもできます。設定ファイルの変更をGitHubにプッシュすると、新しい設定がTiDB Cloudに自動的にデプロイされます。
 
 このドキュメントでは、GitHub を使用してデータ アプリを自動的にデプロイする方法と、GitHub 接続を管理する方法について説明します。
 
@@ -34,11 +34,11 @@ GitHub接続で**Auto Sync & Deployment**有効になっている場合、GitHub
 
 2.  左側のペインで、対象のデータアプリの名前をクリックすると、その詳細が表示されます。
 
-3.  **「設定」**タブで、 **「GitHubに接続」**エリアの**Connect to GitHub**をクリックします。接続設定用のダイアログボックスが表示されます。
+3.  **「設定」**タブで、 **「GitHubに接続」**エリアの**Connect**をクリックします。接続設定用のダイアログボックスが表示されます。
 
 4.  ダイアログボックスで、以下の手順を実行してください。
 
-    1.  **Install on GitHub**クリックし、画面の指示に従って、 **TiDB Cloud Data Service**アプリケーションとして対象のリポジトリにインストールしてください。
+    1.  **Install on GitHub**をクリックし、画面の指示に従って、 **TiDB Cloud Data Service**をアプリケーションとして対象のリポジトリにインストールしてください。
 
     2.  **「承認」**をクリックして、GitHub上のアプリケーションへのアクセスを承認してください。
 
@@ -78,7 +78,7 @@ GitHub接続で**Auto Sync & Deployment**有効になっている場合、GitHub
 
 ## ステップ3．データアプリを変更する {#step-3-modify-your-data-app}
 
-**Auto Sync & Deployment**有効になっている場合、GitHubまたはTiDB Cloudコンソールのいずれかを使用してデータアプリを変更できます。
+**Auto Sync & Deployment**が有効になっている場合、GitHubまたはTiDB Cloudコンソールのいずれかを使用してデータアプリを変更できます。
 
 -   [オプション1：GitHub上のファイルを更新してデータアプリを修正する](#option-1-modify-your-data-app-by-updating-files-on-github)
 -   [オプション2： TiDB Cloudコンソールでデータアプリを変更する](#option-2-modify-your-data-app-in-the-tidb-cloud-console)
@@ -166,7 +166,7 @@ TiDB Cloudコンソールでデータアプリのエンドポイント[データ
 
 1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 2.  左側のペインで、対象のデータアプリの名前をクリックすると、その詳細が表示されます。
-3.  **「設定」**タブで、 **「GitHubに接続」**エリアの**Connect to GitHub**をクリックします。
+3.  **「設定」**タブで、 **「GitHubに接続」**エリアの**Disconnect**をクリックします。
 4.  切断を確定するには、 **「切断」**をクリックしてください。
 
 接続解除操作後、データ アプリの設定ファイルは GitHub ディレクトリに残りますが、 `tidb-cloud-data-service`によって同期されなくなります。

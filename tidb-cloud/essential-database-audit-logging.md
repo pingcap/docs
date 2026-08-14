@@ -14,7 +14,7 @@ TiDB Cloud Essentialは、実行されたSQLステートメントなど、デー
 
 組織のユーザーアクセスポリシーやその他の情報セキュリティ対策の有効性を評価するには、データベース監査ログを定期的に分析することがセキュリティ上のベストプラクティスです。
 
-監査ログ機能は**disabled by default**。TiDB Cloud Essentialインスタンスの監査を行うには、監査ログを有効にする必要があります。
+監査ログ機能は**デフォルトでは無効になっています**。TiDB Cloud Essentialインスタンスの監査を行うには、監査ログを有効にする必要があります。
 
 ## 監査ログの設定 {#audit-logging-configurations}
 
@@ -343,7 +343,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 
 3.  **DB Audit Logging**ページで、削除するフィルタルールを見つけて、 **...**をクリックします。
 
-4.  **「削除」**をクリックし、次に**I understand. Delete it**クリックしてください。
+4.  **「削除」**をクリックし、次に**I understand, Delete it**をクリックしてください。
 
 </div>
 

@@ -116,7 +116,7 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`s3://[bucket_name]/[data_source_folder]/[file_name].csv`の形式で入力してください。例: `s3://mybucket/myfolder/TableName.01.csv` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`s3://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `s3://mybucket/myfolder/` 。
     -   **認証情報**: AWS ロール ARN または AWS アクセス キーを使用してバケットにアクセスできます。詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)を参照してください。
-        -   **AWS Role ARN** (推奨): AWS ロール ARN の値を入力します。まだロール ARN がない場合は、 **[ここをクリックして AWS CloudFormation を使用して新しいロール ARN を作成する] を**クリックし、画面の指示に従うか、 **[問題が発生しましたか?] ダイアログでロール ARN を手動で作成して、**クラスター**TiDB Cloud Account ID**と**TiDB Cloud External ID**を取得し、 IAMロールを手動で作成します。
+        -   **AWS Role ARN** (推奨): AWS ロール ARN の値を入力します。まだロール ARN がない場合は、 **[ここをクリックして AWS CloudFormation を使用して新しいロール ARN を作成する] を**クリックし、画面の指示に従うか、 **[問題が発生しましたか?] ダイアログでロール ARN を手動で作成して、**クラスターの**TiDB Cloud Account ID**と**TiDB Cloud External ID**を取得し、 IAMロールを手動で作成します。
         -   **AWS Access Key**：AWSアクセスキーIDとAWSシークレットアクセスキーを入力してください。
 
 4.  **「次へ」**をクリックしてください。
@@ -166,7 +166,7 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
 
 3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
 
-    -   **ストレージプロバイダー**： **Google Cloud Storage**選択してください。
+    -   **ストレージプロバイダー**： **Google Cloud Storage**を選択してください。
     -   **ソースURI** ：
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`gs://[bucket_name]/[data_source_folder]/[file_name].csv`の形式で入力します。例: `gs://mybucket/myfolder/TableName.01.csv` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`gs://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `gs://mybucket/myfolder/` 。
@@ -219,7 +219,7 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
 
 3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
 
-    -   **ストレージプロバイダー**： **Azure Blob Storage**選択します。
+    -   **ストレージプロバイダー**： **Azure Blob Storage**を選択します。
 
     -   **ソースURI** ：
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/[file_name].csv`の形式で入力してください。例: `https://myaccount.blob.core.windows.net/mycontainer/myfolder/TableName.01.csv` 。

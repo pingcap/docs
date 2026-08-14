@@ -80,7 +80,7 @@ TiDB Cloud Vercel 統合経由で接続するには、 [Vercelの統合マーケ
 <SimpleTab>
 <div label="Cluster">
 
-1.  [TiDB Cloud Vercelとの統合](https://vercel.com/integrations/tidb-cloud)ページの右上領域にある**[統合の追加] を**クリックします。 **Add TiDB Cloud**ダイアログが表示されます。
+1.  [TiDB Cloud Vercelとの統合](https://vercel.com/integrations/tidb-cloud)ページの右上領域にある**[統合の追加] を**クリックします。 **[TiDB Cloudの追加]**ダイアログが表示されます。
 2.  ドロップダウンリストから統合の範囲を選択し、 **「続行」**をクリックしてください。
 3.  統合を追加するVercelプロジェクトを選択し、 **「続行」**をクリックします。
 4.  統合に必要な権限を確認し、 **「統合を追加」**をクリックしてください。すると、 TiDB Cloudコンソールの統合ページに移動します。
@@ -123,7 +123,7 @@ TiDB Cloud Vercel 統合経由で接続するには、 [Vercelの統合マーケ
 
 <div label="Data App">
 
-1.  [TiDB Cloud Vercelとの統合](https://vercel.com/integrations/tidb-cloud)ページの右上領域にある**[統合の追加] を**クリックします。 **Add TiDB Cloud**ダイアログが表示されます。
+1.  [TiDB Cloud Vercelとの統合](https://vercel.com/integrations/tidb-cloud)ページの右上領域にある**[統合の追加] を**クリックします。 **[TiDB Cloudの追加]**ダイアログが表示されます。
 2.  ドロップダウンリストから統合の範囲を選択し、 **「続行」**をクリックしてください。
 3.  統合を追加するVercelプロジェクトを選択し、 **「続行」**をクリックします。
 4.  統合に必要な権限を確認し、 **「統合を追加」**をクリックしてください。すると、 TiDB Cloudコンソールの統合ページに移動します。

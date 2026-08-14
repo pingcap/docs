@@ -56,7 +56,7 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
 
 3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
 
-    -   **ストレージプロバイダー**： **Google Cloud Storage**選択してください。
+    -   **ストレージプロバイダー**： **Google Cloud Storage**を選択してください。
     -   **ソースURI** ：サンプルデータURI `gs://tidbcloud-samples-us-west1/`を入力してください。
     -   **Google CloudサービスアカウントID** ： TiDB Cloudは、このページにGoogle CloudサービスアカウントIDを表示します。サンプルデータURIを使用する場合は、そのまま続行できます。
 
@@ -88,7 +88,7 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
 
 3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
 
-    -   **ストレージプロバイダー**： **Azure Blob Storage**選択します。
+    -   **ストレージプロバイダー**： **Azure Blob Storage**を選択します。
 
     -   **ソースURI** ：サンプルデータURI `https://tcidmsampledata.blob.core.windows.net/sql/`を入力してください。
 

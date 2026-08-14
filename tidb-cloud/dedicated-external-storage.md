@@ -204,7 +204,7 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
 
     -   **「新しいプリンシパル」**フィールドに、対象のTiDBクラスターのGoogle Cloud ServiceアカウントIDを貼り付けます。
 
-    -   **Select a role**ダウンリストに、先ほど作成したIAMロールの名前を入力し、フィルター結果からその名前を選択します。
+    -   **Select a role**ドロップダウンリストに、先ほど作成したIAMロールの名前を入力し、フィルター結果からその名前を選択します。
 
     > **Note:**
     >
@@ -212,7 +212,7 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
 
 6.  **バケットの詳細**ページで、「**オブジェクト」**タブをクリックします。
 
-    ファイルの gsutil URI をコピーするには、ファイルを選択し、 **Open object overflow menu**をクリックして、 **Copy gsutil URI**クリックします。
+    ファイルの gsutil URI をコピーするには、ファイルを選択し、 **[オブジェクトを開く] オーバーフロー メニュー**をクリックして、 **Copy gsutil URI**をクリックします。
 
     ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri01.png)
 
@@ -222,7 +222,7 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
 
     ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri02.png)
 
-7.  TiDB Cloudコンソールで、Google Cloud Service アカウント ID を取得する**データインポート**ページに移動し、GCS バケットの gsutil URI を**Bucket gsutil URI**フィールドに貼り付けます。たとえば、 `gs://tidb-cloud-source-data/`を貼り付けます。
+7.  TiDB Cloudコンソールで、Google Cloud Service アカウント ID を取得する**データインポート**ページに移動し、GCS バケットの gsutil URI を**バケット gsutil URI**フィールドに貼り付けます。たとえば、 `gs://tidb-cloud-source-data/`を貼り付けます。
 
 ## Azure Blob Storageへのアクセスを構成する {#configure-azure-blob-storage-access}
 
@@ -239,7 +239,7 @@ TiDB Cloud DedicatedがAzure Blobコンテナにアクセスできるように�
     1.  **「許可されたサービス」**で**「Blob」**を選択します。
     2.  **Allowed resource types**で、 **「コンテナ」**と**「オブジェクト」**を選択します。
     3.  **「許可された権限」**で、必要な権限を選択します。たとえば、 TiDB Cloud Dedicatedにデータをインポートするには、 **「読み取り」**と**「一覧表示」の**権限が必要です。
-    4.  必要に応じて**Start and expiry date/time**を調整してください。セキュリティ上の理由から、有効期限はデータインポートのスケジュールに合わせて設定することをお勧めします。
+    4.  必要に応じて**開始日時と有効期限日時**を調整してください。セキュリティ上の理由から、有効期限はデータインポートのスケジュールに合わせて設定することをお勧めします。
     5.  その他の設定については、デフォルト値を維持してください。
 
     ![sas-create](/media/tidb-cloud/dedicated-external-storage/azure-sas-create.png)

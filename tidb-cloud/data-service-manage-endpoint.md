@@ -130,7 +130,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 
 > **Note:**
 >
-> データアプリをGitHubに接続し、**Auto Sync & Deployment**有効にしている場合は、GitHubを使用してエンドポイント構成を更新することもできます。GitHubで行った変更はすべて、 TiDB Cloud Data Serviceに自動的にデプロイされます。詳細については、 [GitHubで自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
+> データアプリをGitHubに接続し、**Auto Sync & Deployment**を有効にしている場合は、GitHubを使用してエンドポイント構成を更新することもできます。GitHubで行った変更はすべて、 TiDB Cloud Data Serviceに自動的にデプロイされます。詳細については、 [GitHubで自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
 
 ### プロパティを構成する {#configure-properties}
 
@@ -362,7 +362,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 2.  左側のペインで、対象のデータアプリの名前をクリックすると、そのエンドポイントが表示されます。
 3.  デプロイしたいエンドポイントを見つけ、エンドポイント名をクリックして詳細を表示し、右上隅の**「デプロイ」**をクリックします。
 4.  データアプリで**「下書きの確認」**が有効になっている場合、変更内容を確認するためのダイアログが表示されます。確認結果に基づいて、変更を破棄するかどうかを選択できます。
-5.  デプロイを確定するには、 **「デプロイ」**をクリックしてください。エンドポイントが正常にデプロイされると、 **Endpoint has been deployed**というメッセージが表示されます。
+5.  デプロイを確定するには、 **「デプロイ」**をクリックしてください。エンドポイントが正常にデプロイされると、 **「エンドポイントがデプロイされました」**というメッセージが表示されます。
 
     エンドポイント詳細ページの右側のペインで、「**デプロイメント」**タブをクリックすると、デプロイ履歴を表示できます。
 
@@ -480,7 +480,7 @@ TiDB Cloud Data Serviceは、エンドポイントを呼び出すのに役立つ
 
 > **Note:**
 >
-> データ アプリ[データアプリをGitHubに接続しました](/tidb-cloud/data-service-manage-github-connection.md)**Auto Sync & Deployment**有効にしている場合、このデータ アプリのエンドポイントのデプロイを解除すると、GitHub 上のこのエンドポイントの構成も削除されます。
+> データ アプリ[データアプリをGitHubに接続しました](/tidb-cloud/data-service-manage-github-connection.md)**Auto Sync & Deployment**を有効にしている場合、このデータ アプリのエンドポイントのデプロイを解除すると、GitHub 上のこのエンドポイントの構成も削除されます。
 
 エンドポイントをアンデプロイするには、以下の手順を実行します。
 

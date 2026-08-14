@@ -23,11 +23,11 @@ Data Service（プレビュー版）のデータアプリは、特定のアプ�
 
     > **Note:**
     >
-    > デフォルトでは、データアプリの種類は**Standard Data App**です。Chat2Query**Chat2Query Data App**を作成する場合は、このドキュメントではなく[Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)を参照してください。
+    > デフォルトでは、データアプリの種類は**Standard Data App**です。**Chat2Query Data App**を作成する場合は、このドキュメントではなく[Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)を参照してください。
 
-3.  (オプション) データ アプリのエンドポイントを優先 GitHub リポジトリとブランチに自動的にデプロイするには、 **Connect to GitHub**有効にして、次の操作を行います。
+3.  (オプション) データ アプリのエンドポイントを優先 GitHub リポジトリとブランチに自動的にデプロイするには、 **Connect to GitHub**を有効にして、次の操作を行います。
 
-    1.  **Install on GitHub**クリックし、画面の指示に従って、 **TiDB Cloud Data Service**アプリケーションとしてターゲット リポジトリにインストールします。
+    1.  **Install on GitHub**をクリックし、画面の指示に従って、 **TiDB Cloud Data Service**をアプリケーションとしてターゲット リポジトリにインストールします。
     2.  **「承認」**をクリックして、GitHub 上のアプリケーションへのアクセスを承認します。
     3.  データ アプリの構成ファイルを保存するターゲット リポジトリ、ブランチ、ディレクトリを指定します。
 
@@ -37,13 +37,13 @@ Data Service（プレビュー版）のデータアプリは、特定のアプ�
         > -   リポジトリ、ブランチ、ディレクトリの組み合わせは、設定ファイルのパスを識別します。このパスはデータアプリ間で一意である必要があります。指定したパスが既に別のデータアプリで使用されている場合は、新しいパスを指定する必要があります。そうしないと、 TiDB Cloudコンソールで現在のデータアプリ用に設定されたエンドポイントによって、指定したパス内のファイルが上書きされます。
         > -   指定したパスに別のデータ アプリからコピーされた構成ファイルが含まれており、これらのファイルを現在のデータ アプリにインポートする場合は、 [既存のデータアプリの構成をインポートする](/tidb-cloud/data-service-manage-github-connection.md#import-configurations-of-an-existing-data-app)を参照してください。
 
-4.  **Create Data App**クリックします。
+4.  **Create Data App**をクリックします。
 
     新しく作成されたデータアプリがリストの一番上に追加されます。新しいデータアプリにはデフォルトで「 `untitled endpoint`が作成されます。
 
 5.  データアプリをGitHubに接続するように設定している場合は、指定したGitHubディレクトリを確認してください`tidb-cloud-data-service`までに[データアプリの構成ファイル](/tidb-cloud/data-service-app-config-files.md)ディレクトリにコミットされていることがわかります。これは、データアプリがGitHubに正常に接続されていることを意味します。
 
-    新しいデータアプリでは、**Auto Sync & Deployment**および**ドラフトのレビューが**デフォルトで有効になっているため、 TiDB Cloudコンソールと GitHub 間でデータアプリの変更を簡単に同期し、デプロイ前に変更を確認できます。GitHub との統合の詳細については、 [データアプリの変更を GitHub で自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)ご覧ください。
+    新しいデータアプリでは、**Auto Sync & Deployment**、および**ドラフトのレビューが**デフォルトで有効になっているため、 TiDB Cloudコンソールと GitHub 間でデータアプリの変更を簡単に同期し、デプロイ前に変更を確認できます。GitHub との統合の詳細については、 [データアプリの変更を GitHub で自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)ご覧ください。
 
 ## データアプリを構成する {#configure-a-data-app}
 
@@ -146,7 +146,7 @@ OpenAPI ドキュメントにアクセスするには、次の手順を実行し
 
 2.  左側のペインで、対象のデータ アプリの名前をクリックして詳細を表示します。
 
-3.  ページの右上隅にある**View API Docs**クリックします。
+3.  ページの右上隅にある**View API Docs**をクリックします。
 
     OpenAPI 仕様を初めて使用する場合は、プロンプトが表示されたらリクエストを承認する必要があります。
 
@@ -176,7 +176,7 @@ OpenAPI ドキュメントの使用方法の詳細については、 [スワッ�
 1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 2.  左側のペインで、対象のデータ アプリを見つけ、対象のデータ アプリの名前をクリックして詳細を表示します。
 3.  **危険ゾーン**エリアで、 **Delete Data App**をクリックします。確認のダイアログボックスが表示されます。
-4.  `<organization name>/<project name>/<data app name>`を入力し、 **I understand, delete**クリックします。
+4.  `<organization name>/<project name>/<data app name>`を入力し、 **I understand, delete**をクリックします。
 
     データアプリを削除すると、データアプリ内の既存のエンドポイントとAPIキーも削除されます。このデータアプリがGitHubに接続されている場合、アプリを削除しても、対応するGitHubリポジトリ内のファイルは削除されません。
 
