@@ -1198,51 +1198,51 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   指定可能な値: "json,blob,mediumblob,longblob,text,mediumtext,longtext"
 -   この変数は、統計情報を収集するために`ANALYZE`コマンドを実行する際に、統計収集からスキップされる列の種類を制御します。この変数は`tidb_analyze_version = 2`にのみ適用されます。 `ANALYZE TABLE t COLUMNS c1, ... , cn`を使用して列を指定した場合でも、その列の型が`tidb_analyze_skip_column_types`に含まれる場合は、指定された列の統計情報は収集されません。
 
-<!---->
+```
+mysql> SHOW CREATE TABLE t;
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                                                                                             |
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| t     | CREATE TABLE `t` (
+  `a` int DEFAULT NULL,
+  `b` varchar(10) DEFAULT NULL,
+  `c` json DEFAULT NULL,
+  `d` blob DEFAULT NULL,
+  `e` longblob DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin |
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
 
-    mysql> SHOW CREATE TABLE t;
-    +-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | Table | Create Table                                                                                                                                                                                                             |
-    +-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | t     | CREATE TABLE `t` (
-      `a` int DEFAULT NULL,
-      `b` varchar(10) DEFAULT NULL,
-      `c` json DEFAULT NULL,
-      `d` blob DEFAULT NULL,
-      `e` longblob DEFAULT NULL
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin |
-    +-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    1 row in set (0.00 sec)
+mysql> SELECT @@tidb_analyze_skip_column_types;
++----------------------------------+
+| @@tidb_analyze_skip_column_types |
++----------------------------------+
+| json,blob,mediumblob,longblob,mediumtext,longtext        |
++----------------------------------+
+1 row in set (0.00 sec)
 
-    mysql> SELECT @@tidb_analyze_skip_column_types;
-    +----------------------------------+
-    | @@tidb_analyze_skip_column_types |
-    +----------------------------------+
-    | json,blob,mediumblob,longblob,mediumtext,longtext        |
-    +----------------------------------+
-    1 row in set (0.00 sec)
+mysql> ANALYZE TABLE t;
+Query OK, 0 rows affected, 1 warning (0.05 sec)
 
-    mysql> ANALYZE TABLE t;
-    Query OK, 0 rows affected, 1 warning (0.05 sec)
+mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
++---------------------------------------------------------------------+
+| job_info                                                            |
++---------------------------------------------------------------------+
+| analyze table columns a, b with 256 buckets, 500 topn, 1 samplerate |
++---------------------------------------------------------------------+
+1 row in set (0.00 sec)
 
-    mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
-    +---------------------------------------------------------------------+
-    | job_info                                                            |
-    +---------------------------------------------------------------------+
-    | analyze table columns a, b with 256 buckets, 500 topn, 1 samplerate |
-    +---------------------------------------------------------------------+
-    1 row in set (0.00 sec)
+mysql> ANALYZE TABLE t COLUMNS a, c;
+Query OK, 0 rows affected, 1 warning (0.04 sec)
 
-    mysql> ANALYZE TABLE t COLUMNS a, c;
-    Query OK, 0 rows affected, 1 warning (0.04 sec)
-
-    mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
-    +------------------------------------------------------------------+
-    | job_info                                                         |
-    +------------------------------------------------------------------+
-    | analyze table columns a with 256 buckets, 500 topn, 1 samplerate |
-    +------------------------------------------------------------------+
-    1 row in set (0.00 sec)
+mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
++------------------------------------------------------------------+
+| job_info                                                         |
++------------------------------------------------------------------+
+| analyze table columns a with 256 buckets, 500 topn, 1 samplerate |
++------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ### tidb_auto_analyze_concurrency <span class="version-mark">New in v8.4.0</span>
 
@@ -1594,13 +1594,17 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
         insert into t values (1);
         ```
 
-            Query OK, 1 row affected
+        ```
+        Query OK, 1 row affected
+        ```
 
         ```sql
         tidb> commit; -- Check only when a transaction is committed.
         ```
 
-            ERROR 1062 : Duplicate entry '1' for key 't.PRIMARY'
+        ```
+        ERROR 1062 : Duplicate entry '1' for key 't.PRIMARY'
+        ```
 
     -   `tidb_constraint_check_in_place_pessimistic`を`ON`に設定し、悲観的トランザクションを使用する場合：
 
@@ -1610,7 +1614,9 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
         insert into t values (1);
         ```
 
-            ERROR 1062 : Duplicate entry '1' for key 't.PRIMARY'
+        ```
+        ERROR 1062 : Duplicate entry '1' for key 't.PRIMARY'
+        ```
 
 ### tidb_cost_model_version <span class="version-mark">New in v6.2.0</span>
 

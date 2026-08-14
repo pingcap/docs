@@ -48,14 +48,16 @@ TiCDCにおけるChangefeedとTaskは、2つの論理的な概念です。具体
 
 例えば：
 
-    cdc cli changefeed create --server="http://127.0.0.1:8300" --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1"
-    cat changefeed.toml
-    ......
-    [sink]
-    dispatchers = [
-        {matcher = ['test1.tab1', 'test2.tab2'], topic = "{schema}_{table}"},
-        {matcher = ['test3.tab3', 'test4.tab4'], topic = "{schema}_{table}"},
-    ]
+```
+cdc cli changefeed create --server="http://127.0.0.1:8300" --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1"
+cat changefeed.toml
+......
+[sink]
+dispatchers = [
+    {matcher = ['test1.tab1', 'test2.tab2'], topic = "{schema}_{table}"},
+    {matcher = ['test3.tab3', 'test4.tab4'], topic = "{schema}_{table}"},
+]
+```
 
 前述の`cdc cli changefeed create`コマンドのパラメータの詳細については、 [TiCDC Changefeedコンフィグレーションパラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
@@ -112,7 +114,9 @@ TiCDCは、データ複製の状態を示すために、一連のタイムスタ
 
     TiCDCの場合、TiKVから送信されるResolvedTSは`<resolvedTS: timestamp>`形式の特別なイベントです。一般に、ResolvedTSは以下の制約を満たします。
 
-        table ResolvedTS >= global ResolvedTS
+    ```
+    table ResolvedTS >= global ResolvedTS
+    ```
 
 #### チェックポイントTS {#checkpointts}
 
@@ -124,11 +128,15 @@ TiCDCは、データ複製の状態を示すために、一連のタイムスタ
 
 一般に、チェックポイントTS は次の制約を満たします。
 
-    table CheckpointTS >= global CheckpointTS
+```
+table CheckpointTS >= global CheckpointTS
+```
 
 TiCDC はグローバル ResolvedTS よりも小さいデータのみをダウンストリームに複製するため、完全な制約は次のようになります。
 
-    table ResolvedTS >= global ResolvedTS >= table CheckpointTS >= global CheckpointTS
+```
+table ResolvedTS >= global ResolvedTS >= table CheckpointTS >= global CheckpointTS
+```
 
 データの変更とトランザクションがコミットされた後、TiKVノードのResolvedTSは引き続き進み、TiCDCノードのPullerモジュールはTiKVからプッシュされたデータを受信し続けます。Pullerモジュールは受信したデータの変更に基づいて増分データをスキャンするかどうかも決定し、すべてのデータ変更がTiCDCノードに送信されるようにします。
 

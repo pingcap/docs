@@ -503,38 +503,40 @@ v5.4.0 から、 `Delete`イベントのうち`old`フィールドが変更さ�
 
 以下はイベントメッセージ`Delete`です。v5.4.0より前のバージョンでは、フィールド`old`は「data」フィールドと同じ内容です。v5.4.0以降のバージョンでは、フィールド`old` nullに設定されます。「data」フィールドを使用することで、削除されたデータを取得できます。
 
-    {
-        "id": 0,
-        "database": "test",
+```
+{
+    "id": 0,
+    "database": "test",
+    ...
+    "type": "DELETE",
+    ...
+    "sqlType": {
         ...
-        "type": "DELETE",
+    },
+    "mysqlType": {
         ...
-        "sqlType": {
-            ...
-        },
-        "mysqlType": {
-            ...
-        },
-        "data": [
-            {
-                "c_bigint": "9223372036854775807",
-                "c_int": "0",
-                "c_mediumint": "8388607",
-                "c_smallint": "32767",
-                "c_tinyint": "0",
-                "id": "2"
-            }
-        ],
-        "old": null,
-        // The following is an example before v5.4.0. The `old` field contains the same content as the "data" field.
-        "old": [
-            {
-                "c_bigint": "9223372036854775807",
-                "c_int": "0",
-                "c_mediumint": "8388607",
-                "c_smallint": "32767",
-                "c_tinyint": "0",
-                "id": "2"
-            }
-        ]
-    }
+    },
+    "data": [
+        {
+            "c_bigint": "9223372036854775807",
+            "c_int": "0",
+            "c_mediumint": "8388607",
+            "c_smallint": "32767",
+            "c_tinyint": "0",
+            "id": "2"
+        }
+    ],
+    "old": null,
+    // The following is an example before v5.4.0. The `old` field contains the same content as the "data" field.
+    "old": [
+        {
+            "c_bigint": "9223372036854775807",
+            "c_int": "0",
+            "c_mediumint": "8388607",
+            "c_smallint": "32767",
+            "c_tinyint": "0",
+            "id": "2"
+        }
+    ]
+}
+```

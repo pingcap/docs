@@ -124,7 +124,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 -   SASL/プレーン
 
     ```shell
-    --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-user=alice-user&sasl-password=alice-secret&sasl-mechanism=plain"
+  --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-user=alice-user&sasl-password=alice-secret&sasl-mechanism=plain"
     ```
 
 -   SASL/スクラム
@@ -136,7 +136,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
     SASL/GSSAPI `user`認証:
 
     ```shell
-    --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-mechanism=gssapi&sasl-gssapi-auth-type=user&sasl-gssapi-kerberos-config-path=/etc/krb5.conf&sasl-gssapi-service-name=kafka&sasl-gssapi-user=alice/for-kafka&sasl-gssapi-password=alice-secret&sasl-gssapi-realm=example.com"
+  --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-mechanism=gssapi&sasl-gssapi-auth-type=user&sasl-gssapi-kerberos-config-path=/etc/krb5.conf&sasl-gssapi-service-name=kafka&sasl-gssapi-user=alice/for-kafka&sasl-gssapi-password=alice-secret&sasl-gssapi-realm=example.com"
     ```
 
     `sasl-gssapi-user`と`sasl-gssapi-realm`の値は、Kerberos で指定されている[原理](https://web.mit.edu/kerberos/krb5-1.5/krb5-1.5.4/doc/krb5-user/What-is-a-Kerberos-Principal_003f.html)と関連しています。例えば、プリンシパルが`alice/for-kafka@example.com`に設定されている場合、 `sasl-gssapi-user`と`sasl-gssapi-realm`はそれぞれ`alice/for-kafka`と`example.com`として指定されます。
@@ -144,7 +144,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
     SASL/GSSAPI `keytab`認証:
 
     ```shell
-    --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-mechanism=gssapi&sasl-gssapi-auth-type=keytab&sasl-gssapi-kerberos-config-path=/etc/krb5.conf&sasl-gssapi-service-name=kafka&sasl-gssapi-user=alice/for-kafka&sasl-gssapi-keytab-path=/var/lib/secret/alice.key&sasl-gssapi-realm=example.com"
+  --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-mechanism=gssapi&sasl-gssapi-auth-type=keytab&sasl-gssapi-kerberos-config-path=/etc/krb5.conf&sasl-gssapi-service-name=kafka&sasl-gssapi-user=alice/for-kafka&sasl-gssapi-keytab-path=/var/lib/secret/alice.key&sasl-gssapi-realm=example.com"
     ```
 
     SASL/GSSAPI 認証方式の詳細については、 [GSSAPIの設定](https://docs.confluent.io/platform/current/kafka/authentication_sasl/authentication_sasl_gssapi.html)を参照してください。
@@ -309,15 +309,19 @@ dispatchers = [
 >
 > バージョン6.1.0以降、設定の意味を明確にするため、パーティションディスパッチャを指定するための設定が`dispatcher`から`partition`に変更されました。`partition`は`dispatcher`の別名です。例えば、次の2つのルールは全く同じ意味です。
 >
->     [sink]
->     dispatchers = [
->        {matcher = ['*.*'], dispatcher = "index-value"},
->        {matcher = ['*.*'], partition = "index-value"},
->     ]
+> ```
+> [sink]
+> dispatchers = [
+>    {matcher = ['*.*'], dispatcher = "index-value"},
+>    {matcher = ['*.*'], partition = "index-value"},
+> ]
+> ```
 >
 > ただし、 `dispatcher`と`partition`同じルール内に出現させることはできません。例えば、次のルールは無効です。
 >
->     {matcher = ['*.*'], dispatcher = "index-value", partition = "table"},
+> ```
+> {matcher = ['*.*'], dispatcher = "index-value", partition = "table"},
+> ```
 
 ## カラムセレクター {#column-selectors}
 

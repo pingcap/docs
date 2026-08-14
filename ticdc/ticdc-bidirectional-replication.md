@@ -108,15 +108,17 @@ BDRロールが設定されていない場合、任意のDDLを実行できま�
     ADMIN SET BDR ROLE PRIMARY;
     ```
 
-        Query OK, 0 rows affected
-        Time: 0.003s
+    ```
+    Query OK, 0 rows affected
+    Time: 0.003s
 
-        ADMIN SHOW BDR ROLE;
-        +----------+
-        | BDR_ROLE |
-        +----------+
-        | primary  |
-        +----------+
+    ADMIN SHOW BDR ROLE;
+    +----------+
+    | BDR_ROLE |
+    +----------+
+    | primary  |
+    +----------+
+    ```
 
 2.  他の TiDB クラスターで`ADMIN SET BDR ROLE SECONDARY`を実行して、それらをセカンダリ クラスターとして設定します。
 
