@@ -80,7 +80,7 @@ ApsaraDB RDS for MySQL と同じリージョンにエンドポイント サー�
 
     -   **Service Resource Type**: `NLB`を選択
     -   **Select Service Resource**: NLB が含まれるすべてのゾーンを選択し、前の手順で作成した NLB を選択します。
-    -   **Automatically Accept Endpoint Connections**: `No`選択することをお勧めします
+    -   **Automatically Accept Endpoint Connections**: `No`を選択することをお勧めします
 
 2.  エンドポイントサービスの詳細ページに移動し、**Endpoint Service Name**（例： `com.aliyuncs.privatelink.<region>.xxxxx` ）をコピーします。これは後でTiDB Cloudで使用する必要があります。
 

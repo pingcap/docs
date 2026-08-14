@@ -130,8 +130,8 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 -   vSwitch `broker-ap-southeast-1c`のブローカー 3
 
-    -   **Network and Zone**: `Kafka VPC`および`broker-ap-southeast-1c` vSwitch
-    -   **Instance and Image**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
+    -   **ネットワークとゾーン**: `Kafka VPC`および`broker-ap-southeast-1c` vSwitch
+    -   **インスタンスとイメージ**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
     -   **キーペア**:再利用`kafka-vpc-key-pair` 。
     -   **インスタンス名**: `broker-node3`
     -   **セキュリティグループ**: Kafka VPCからのすべてのTCPを許可する新しいセキュリティグループを作成します。本番環境では、安全性を考慮してルールを絞り込むことができます。インバウンドルール: -**プロトコル**: `TCP` -**ポート範囲**: `All` -**ソース**: `10.0.0.0/16`
@@ -640,7 +640,7 @@ b3.ap-southeast-1c.unique_name.alicloud.plc.tidbcloud.com:9095 (id: 3 rack: null
 
     -   **Service Resource Type**: `NLB`を選択
     -   **Select Service Resource**: NLB が含まれるすべてのゾーンを選択し、前の手順で作成した NLB を選択します。
-    -   **Automatically Accept Endpoint Connections**: `No`選択することをお勧めします
+    -   **Automatically Accept Endpoint Connections**: `No`を選択することをお勧めします
 
 2.  エンドポイントサービスの詳細ページに移動し、**Endpoint Service Name**（例： `com.aliyuncs.privatelink.<region>.xxxxx` ）をコピーします。これは後でTiDB Cloudで使用する必要があります。
 
