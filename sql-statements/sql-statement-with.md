@@ -47,12 +47,14 @@ IdentListWithParenOpt ::=
 WITH cte AS (SELECT 1, 2) SELECT * FROM cte t1, cte t2;
 ```
 
-    +---+---+---+---+
-    | 1 | 2 | 1 | 2 |
-    +---+---+---+---+
-    | 1 | 2 | 1 | 2 |
-    +---+---+---+---+
-    1 row in set (0.00 sec)
+```
++---+---+---+---+
+| 1 | 2 | 1 | 2 |
++---+---+---+---+
+| 1 | 2 | 1 | 2 |
++---+---+---+---+
+1 row in set (0.00 sec)
+```
 
 再帰CTE:
 
@@ -60,16 +62,18 @@ WITH cte AS (SELECT 1, 2) SELECT * FROM cte t1, cte t2;
 WITH RECURSIVE cte(a) AS (SELECT 1 UNION SELECT a+1 FROM cte WHERE a < 5) SELECT * FROM cte;
 ```
 
-    +---+
-    | a |
-    +---+
-    | 1 |
-    | 2 |
-    | 3 |
-    | 4 |
-    | 5 |
-    +---+
-    5 rows in set (0.00 sec)
+```
++---+
+| a |
++---+
+| 1 |
+| 2 |
+| 3 |
+| 4 |
+| 5 |
++---+
+5 rows in set (0.00 sec)
+```
 
 ## MySQLとの互換性 {#mysql-compatibility}
 

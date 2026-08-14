@@ -24,7 +24,9 @@ ShutdownStmt ::=
 SHUTDOWN;
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 ## MySQLとの互換性 {#mysql-compatibility}
 

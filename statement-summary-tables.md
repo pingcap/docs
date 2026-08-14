@@ -46,36 +46,38 @@ select * from employee where id in (...) and salary between ? and ?;
 
 以下は`statements_summary`をクエリした際の出力例です。
 
-       SUMMARY_BEGIN_TIME: 2020-01-02 11:00:00
-         SUMMARY_END_TIME: 2020-01-02 11:30:00
-                STMT_TYPE: Select
-              SCHEMA_NAME: test
-                   DIGEST: 0611cc2fe792f8c146cc97d39b31d9562014cf15f8d41f23a4938ca341f54182
-              DIGEST_TEXT: select * from employee where id = ?
-              TABLE_NAMES: test.employee
-              INDEX_NAMES: NULL
-              SAMPLE_USER: root
-               EXEC_COUNT: 3
-              SUM_LATENCY: 1035161
-              MAX_LATENCY: 399594
-              MIN_LATENCY: 301353
-              AVG_LATENCY: 345053
-        AVG_PARSE_LATENCY: 57000
-        MAX_PARSE_LATENCY: 57000
-      AVG_COMPILE_LATENCY: 175458
-      MAX_COMPILE_LATENCY: 175458
-      ...........
-                  AVG_MEM: 103
-                  MAX_MEM: 103
-                  AVG_DISK: 65535
-                  MAX_DISK: 65535
-        AVG_AFFECTED_ROWS: 0
-               FIRST_SEEN: 2020-01-02 11:12:54
-                LAST_SEEN: 2020-01-02 11:25:24
-        QUERY_SAMPLE_TEXT: select * from employee where id=3100
-         PREV_SAMPLE_TEXT:
-              PLAN_DIGEST: f415b8d52640b535b9b12a9c148a8630d2c6d59e419aad29397842e32e8e5de3
-                     PLAN:  Point_Get_1     root    1       table:employee, handle:3100
+```
+   SUMMARY_BEGIN_TIME: 2020-01-02 11:00:00
+     SUMMARY_END_TIME: 2020-01-02 11:30:00
+            STMT_TYPE: Select
+          SCHEMA_NAME: test
+               DIGEST: 0611cc2fe792f8c146cc97d39b31d9562014cf15f8d41f23a4938ca341f54182
+          DIGEST_TEXT: select * from employee where id = ?
+          TABLE_NAMES: test.employee
+          INDEX_NAMES: NULL
+          SAMPLE_USER: root
+           EXEC_COUNT: 3
+          SUM_LATENCY: 1035161
+          MAX_LATENCY: 399594
+          MIN_LATENCY: 301353
+          AVG_LATENCY: 345053
+    AVG_PARSE_LATENCY: 57000
+    MAX_PARSE_LATENCY: 57000
+  AVG_COMPILE_LATENCY: 175458
+  MAX_COMPILE_LATENCY: 175458
+  ...........
+              AVG_MEM: 103
+              MAX_MEM: 103
+              AVG_DISK: 65535
+              MAX_DISK: 65535
+    AVG_AFFECTED_ROWS: 0
+           FIRST_SEEN: 2020-01-02 11:12:54
+            LAST_SEEN: 2020-01-02 11:25:24
+    QUERY_SAMPLE_TEXT: select * from employee where id=3100
+     PREV_SAMPLE_TEXT:
+          PLAN_DIGEST: f415b8d52640b535b9b12a9c148a8630d2c6d59e419aad29397842e32e8e5de3
+                 PLAN:  Point_Get_1     root    1       table:employee, handle:3100
+```
 
 > **Note:**
 >

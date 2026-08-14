@@ -516,7 +516,9 @@ TiDBの起動時、初期統計情報が完全にロードされる前に実行�
 
 -   `${db_name}`データベース内の`${table_name}`テーブルの JSON 形式の統計情報を取得するには：
 
-        http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}
+    ```
+    http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}
+    ```
 
     例えば：
 
@@ -526,7 +528,9 @@ TiDBの起動時、初期統計情報が完全にロードされる前に実行�
 
 -   `${db_name}`データベース内の`${table_name}`テーブルの特定の時刻における JSON 形式の統計情報を取得するには：
 
-        http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}/${yyyyMMddHHmmss}
+    ```
+    http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}/${yyyyMMddHHmmss}
+    ```
 
 ### 統計のインポート {#import-statistics}
 

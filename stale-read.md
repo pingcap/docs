@@ -84,6 +84,8 @@ select * from t1 as of timestamp NOW() - INTERVAL 1 minute;
 
 TiFlash は次のようなエラーを報告します。
 
-    ERROR 1105 (HY000): other error for mpp stream: From MPP<query:<query_ts:1673950975508472943, local_query_id:18, server_id:111947, start_ts:438816196526080000>,task_id:1>: Code: 0, e.displayText() = DB::TiFlashException: Table 323 schema version 104 newer than query schema version 100, e.what() = DB::TiFlashException,
+```
+ERROR 1105 (HY000): other error for mpp stream: From MPP<query:<query_ts:1673950975508472943, local_query_id:18, server_id:111947, start_ts:438816196526080000>,task_id:1>: Code: 0, e.displayText() = DB::TiFlashException: Table 323 schema version 104 newer than query schema version 100, e.what() = DB::TiFlashException,
+```
 
 このエラーを回避するには、 ステイル読み取りで指定された読み取りタイムスタンプを DDL 操作後の時間に変更できます。
