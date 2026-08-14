@@ -208,7 +208,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
     3.  **「クラウドストレージからデータをインポート」** &gt; **「Amazon S3」**を選択します。
     4.  ウィザードに表示される**アカウントID**と**外部ID**をメモしておいてください。これらの値はCloudFormationテンプレートに埋め込まれています。
 
-2.  **[ソース接続]**ダイアログで、 **AWS Role ARN**を選択し、 **[AWS CloudFormation で新しいものを作成するにはここをクリック**してください] をクリックし、画面上のガイダンスに従います。組織が CloudFormation スタックを起動できない場合は、 [IAMロールを手動で作成する](#manually-create-the-iam-role-optional)を参照してください。
+2.  **[ソース接続]**ダイアログで、 **AWS Role ARN**を選択し、 **[AWS CloudFormation で新しいものを作成するにはここをクリックしてください]**をクリックし、画面上のガイダンスに従います。組織が CloudFormation スタックを起動できない場合は、 [IAMロールを手動で作成する](#manually-create-the-iam-role-optional)を参照してください。
 
     1.  AWSコンソールで、あらかじめ入力済みのCloudFormationテンプレートを開きます。
     2.  役割名を入力し、権限を確認し、 IAM警告を承認してください。
