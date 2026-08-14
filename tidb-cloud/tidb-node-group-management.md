@@ -73,7 +73,7 @@ TiDBノードグループを作成しても、デフォルトグループのエ�
 
 3.  **「TiDB Node Group」**リストから TiDB ノード グループを選択し、 **「接続タイプ」**リストから**「パブリック」**を選択します。
 
-    IP アクセス リストをまだ設定していない場合は、 **「Configure IP Access List」**をクリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
+    IP アクセス リストをまだ設定していない場合は、 **Configure IP Access List**をクリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
 4.  左側のナビゲーション ペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
 
