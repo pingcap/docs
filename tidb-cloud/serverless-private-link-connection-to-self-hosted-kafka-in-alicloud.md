@@ -101,29 +101,29 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 [ECSコンソール](https://ecs.console.alibabacloud.com/home#/)に進みます。要塞 vSwitch に要塞ノードを作成します。
 
--   **Network and Zone**: `Kafka VPC`および`bastion` vSwitch。
--   **Instance and Image**: インスタンス タイプが`ecs.t5-lc1m2.small` 、イメージが`Alibaba Cloud Linux` 。
--   **Network and Security Groups**: `Assign Public IPv4 Address`を選択します。
+-   **ネットワークとゾーン**: `Kafka VPC`および`bastion` vSwitch。
+-   **インスタンスとイメージ**: インスタンス タイプが`ecs.t5-lc1m2.small` 、イメージが`Alibaba Cloud Linux` 。
+-   **ネットワークとセキュリティグループ**: `Assign Public IPv4 Address`を選択します。
 -   **キーペア**: `kafka-vpc-key-pair` 。 `kafka-vpc-key-pair`という名前の新しいキーペアを作成します。 `kafka-vpc-key-pair.pem`ローカルマシンにダウンロードして、後で設定します。
 -   **セキュリティグループ**：どこからでもSSHログインを許可する新しいセキュリティグループを作成します。本番環境の安全性を確保するために、ルールを絞り込むことができます。
 -   **インスタンス名**: `bastion-node` 。
 
-**2.2. Create broker nodes**
+**2.2. ブローカーノードを作成する**
 
 [ECSコンソール](https://ecs.console.alibabacloud.com/home#/)に進みます。vSwitch に 3 つのブローカー ノード (AZ ごとに 1 つ) を作成します。
 
 -   vSwitch `broker-ap-southeast-1a`のブローカー 1
 
-    -   **Network and Zone**: `Kafka VPC`および`broker-ap-southeast-1a` vSwitch
-    -   **Instance and Image**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
+    -   **ネットワークとゾーン**: `Kafka VPC`および`broker-ap-southeast-1a` vSwitch
+    -   **インスタンスとイメージ**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
     -   **キーペア**:再利用`kafka-vpc-key-pair` 。
     -   **インスタンス名**: `broker-node1`
     -   **セキュリティグループ**: Kafka VPCからのすべてのTCPを許可する新しいセキュリティグループを作成します。本番環境では、安全性を考慮してルールを絞り込むことができます。インバウンドルール: -**プロトコル**: `TCP` -**ポート範囲**: `All` -**ソース**: `10.0.0.0/16`
 
 -   vSwitch `broker-ap-southeast-1b`のブローカー 2
 
-    -   **Network and Zone**: `Kafka VPC`および`broker-ap-southeast-1b` vSwitch
-    -   **Instance and Image**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
+    -   **ネットワークとゾーン**: `Kafka VPC`および`broker-ap-southeast-1b` vSwitch
+    -   **インスタンスとイメージ**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
     -   **キーペア**:再利用`kafka-vpc-key-pair` 。
     -   **インスタンス名**: `broker-node2`
     -   **セキュリティグループ**: Kafka VPCからのすべてのTCPを許可する新しいセキュリティグループを作成します。本番環境では、安全性を考慮してルールを絞り込むことができます。インバウンドルール: -**プロトコル**: `TCP` -**ポート範囲**: `All` -**ソース**: `10.0.0.0/16`

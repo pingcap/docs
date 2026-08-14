@@ -39,10 +39,10 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     3.  **Changefeed**ページで、右上隅の**Changefeed の作成を**クリックし、次の情報を入力します。
         1.  **宛先**で、 **Kafka**を選択します。
         2.  **[接続方法]**で**[プライベート リンク]**を選択します。
-    4.  続行する前に、 TiDB Cloud Azureアカウントのリージョン情報とサブスクリプションを**Reminders before proceeding**に書き留めておいてください。この情報は、TiDB CloudがKafka Private Linkサービスにアクセスできるように承認する際に使用します。
+    4.  続行する前に、 TiDB Cloud Azureアカウントのリージョン情報とサブスクリプションを**リマインダー**に書き留めておいてください。この情報は、TiDB CloudがKafka Private Linkサービスにアクセスできるように承認する際に使用します。
     5.  一意のランダム文字列を指定して、Kafka プライベート リンク サービス用の**Kafka Advertised Listener Pattern**を生成します。
-        1.  一意のランダム文字列を入力してください。数字または小文字のみ使用できます。この文字列は、後ほど**Kafka Advertised Listener Pattern**生成する際に使用します。
-        2.  **Check usage and generate**ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズ リスナーを組み立てるために使用される**Kafka Advertised Listener Pattern**生成されます。
+        1.  一意のランダム文字列を入力してください。数字または小文字のみ使用できます。この文字列は、後ほど**Kafka Advertised Listener Pattern**を生成する際に使用します。
+        2.  **「使用状況を確認して生成」をクリックすると、**ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズ リスナーを組み立てるために使用される**Kafka Advertised Listener Pattern**が生成されます。
 
 すべてのデプロイメント情報をメモしてください。後でKafka Private Linkサービスを設定する際に必要になります。
 
@@ -66,32 +66,32 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 
 1.  [Azureポータル](https://portal.azure.com/)にログインし、 [仮想ネットワーク](https://portal.azure.com/#browse/Microsoft.Network%2FvirtualNetworks)ページに移動して、 **「+ 作成」**をクリックして仮想ネットワークを作成します。
 
-2.  **[基本]**タブで、 **[サブスクリプション]** 、 **[リソース グループ]** 、および**[リージョン]**を選択し、 **Virtual network name**フィールドに名前 (たとえば、 `kafka-pls-vnet` ) を入力して、 **[次へ]**をクリックします。
+2.  **[基本]**タブで、 **[サブスクリプション]** 、 **[リソース グループ]** 、および**[リージョン]**を選択し、 **[仮想ネットワーク名]**フィールドに名前 (たとえば、 `kafka-pls-vnet` ) を入力して、 **[次へ]**をクリックします。
 
 3.  **[セキュリティ]**タブで、Azure Bastion を有効にし、 **[次へ]**をクリックします。
 
 4.  **[IP アドレス]**タブで、次の操作を行います。
 
     1.  仮想ネットワークのアドレス空間を設定します (例: `10.0.0.0/16` )。
-    2.  ブローカーのサブネットを作成するには、 **Add a subnet**をクリックし、次の情報を入力して、 **[追加]**をクリックします。
+    2.  ブローカーのサブネットを作成するには、 **[サブネットの追加]**をクリックし、次の情報を入力して、 **[追加]**をクリックします。
 
         -   **名前**: `brokers-subnet`
-        -   **IP address range**: `10.0.0.0/24`
+        -   **IPアドレス範囲**: `10.0.0.0/24`
         -   **サイズ**: `/24 (256 addresses)`
 
         デフォルトでは`AzureBastionSubnet`が作成されます。
 
-5.  情報を確認するには、 **Review + create**をクリックします。
+5.  情報を確認するには、 **「確認 + 作成」**をクリックします。
 
 6.  **[作成]を**クリックします。
 
 #### 2. Kafkaブローカーを設定する {#2-set-up-kafka-brokers}
 
-**2.1. Create broker nodes**
+**2.1. ブローカーノードを作成する**
 
-1.  [Azureポータル](https://portal.azure.com/)にログインし、 [仮想マシン](https://portal.azure.com/#view/Microsoft_Azure_ComputeHub/ComputeHubMenuBlade/~/virtualMachinesBrowse)ページに移動して**[+ 作成]**をクリックし、 **Azure virtual machine**を選択します。
-2.  **[基本]**タブで、**サブスクリプション**、**リソース グループ**、**リージョン**を選択し、次の情報を入力して、 **Next : Disks**をクリックします。
-    -   **Virtual machine name**: `broker-node`
+1.  [Azureポータル](https://portal.azure.com/)にログインし、 [仮想マシン](https://portal.azure.com/#view/Microsoft_Azure_ComputeHub/ComputeHubMenuBlade/~/virtualMachinesBrowse)ページに移動して**[+ 作成]**をクリックし、 **[Azure 仮想マシン]**を選択します。
+2.  **[基本]**タブで、**サブスクリプション**、**リソース グループ**、**リージョン**を選択し、次の情報を入力して、 **[次へ: ディスク]**をクリックします。
+    -   **仮想マシン名**: `broker-node`
     -   **利用可能オプション**: `Availability zone`
     -   **ゾーンオプション**: `Self-selected zone`
     -   `Zone 3` `Zone 2`**ゾーン**: `Zone 1`
@@ -112,7 +112,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     -   **Public inbound ports**: `Allow selected ports`
     -   受信ポートを選択: `SSH (22)`
     -   **Load balancing options**: `None`
-4.  情報を確認するには、 **Review + create**をクリックします。
+4.  情報を確認するには、 **「確認 + 作成」**をクリックします。
 5.  **「作成」**をクリックします。**Generate new key pair**メッセージが表示されます。
 6.  **「秘密鍵をダウンロードしてリソースを作成」をクリックして、**秘密鍵をローカルマシンにダウンロードします。仮想マシンの作成の進行状況を確認できます。
 
