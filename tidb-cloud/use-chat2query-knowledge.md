@@ -32,7 +32,7 @@ Chat2Queryデータアプリでは、エンドポイント`/v3/knowledgeBases`�
 
 > **Tip:**
 >
-> エンドポイントの具体的なコード例を取得するには、データアプリの左側のペインでエンドポイント名をクリックし、 **Show Code Example**をクリックします。詳細については、 [エンドポイントのサンプルコードを取得する](/tidb-cloud/use-chat2query-api.md#get-the-code-example-of-an-endpoint)を参照してください。
+> エンドポイントの具体的なコード例を取得するには、データアプリの左側のペインでエンドポイント名をクリックし、 **「Show Code Example」**をクリックします。詳細については、 [エンドポイントのサンプルコードを取得する](/tidb-cloud/use-chat2query-api.md#get-the-code-example-of-an-endpoint)を参照してください。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/knowledgeBases'\
@@ -154,8 +154,8 @@ Few-Shot の例を使用すると、次のようなさまざまなシナリオ�
 
 指示はさまざまなシナリオで使用でき、Chat2Query が要件に応じて出力するようにガイドできます。これには次のものが含まれますが、これらに限定されません。
 
--   **Limiting query scope**: SQL で特定のテーブルまたは列のみを考慮する場合は、これを指定する命令を使用します。
--   **Guiding SQL structure**: SQL 構造に特定の要件がある場合は、Chat2Query をガイドする指示を使用します。
+-   **クエリ範囲の制限**: SQL で特定のテーブルまたは列のみを考慮する場合は、これを指定する命令を使用します。
+-   **SQL 構造のガイド**: SQL 構造に特定の要件がある場合は、Chat2Query をガイドする指示を使用します。
 
 ## ステップ3. 新しく作成したナレッジベースに知識を追加する {#step-3-add-knowledge-to-the-newly-created-knowledge-base}
 

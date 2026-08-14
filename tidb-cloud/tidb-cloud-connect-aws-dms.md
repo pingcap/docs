@@ -85,7 +85,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
     ![Create replication instance](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-replication-instances.png)
 
-2.  **Create replication instance**クリックします。
+2.  **Create replication instance**をクリックします。
 
 3.  インスタンス名、ARN、説明を入力します。
 
@@ -105,7 +105,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
     ![Connectivity and security](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-connectivity-security.png)
 
-7.  必要に応じて、 **[詳細設定]** 、 **[メンテナンス]** 、 **[タグ]**セクションを構成し、 **Create replication instance**をクリックしてインスタンスの作成を完了します。
+7.  必要に応じて、 **[詳細設定]** 、 **[メンテナンス]** 、 **[タグ]**セクションを構成し、 **[Create replication instance]**をクリックしてインスタンスの作成を完了します。
 
 > **Note:**
 >
@@ -125,7 +125,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
 4.  **エンドポイント設定**セクションで、**エンドポイント識別子**とARNフィールドに入力します。次に、**ソースエンジン**または**ターゲットエンジン**として**MySQLを**選択します。
 
-5.  **Access to endpoint database**フィールドで、 **Provide access information manually**チェックボックスをオンにし、次のようにクラスター情報を入力します。
+5.  **[Access to endpoint database]**フィールドで、 **[Provide access information manually]**チェックボックスをオンにし、次のようにクラスター情報を入力します。
 
     <SimpleTab>
 
@@ -154,6 +154,6 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
     ![Provide access information manually](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-configure-endpoint.png)
 
-6.  エンドポイントを**ターゲット エンドポイント**として作成する場合は、**エンドポイント設定**セクションを展開し、**Use endpoint connection attributes**チェックボックスをオンにして、**Extra connection attributes**`Initstmt=SET FOREIGN_KEY_CHECKS=0;`に設定します。
+6.  エンドポイントを**ターゲット エンドポイント**として作成する場合は、**エンドポイント設定**セクションを展開し、**Use endpoint connection attributes**チェックボックスをオンにして、**Extra connection attributes**を`Initstmt=SET FOREIGN_KEY_CHECKS=0;`に設定します。
 
 7.  必要に応じて、 **KMSキー**と**タグの**セクションを設定します。 **「エンドポイントの作成」**をクリックしてインスタンスの作成を完了します。

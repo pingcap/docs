@@ -41,8 +41,8 @@ PingCAP ヘルプ センターには、 [https://tidb.support.pingcap.com/servic
 
 -   [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**[?]**をクリックし、 **[サポート チケット]**をクリックします。
 -   [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある**[サポート] を**クリックし、サポート プランに応じて次のいずれかを実行します。
-    -   **基本**: **Account & Billing**領域で、 **[アカウント/請求の問題]**をクリックします。
-    -   **Developer** 、 **Enterprise** 、または**Premium** : **Talk to an expert**エリアで、 **PingCAP Help Center**をクリックします。
+    -   **基本**: **[Account & Billing]**領域で、 **[アカウント/請求の問題]**をクリックします。
+    -   **Developer** 、 **Enterprise** 、または**Premium** : **「Talk to an expert」**エリアで、 **PingCAP Help Center**をクリックします。
 -   プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページで、クラスターの行にある**[...]**をクリックし、 **[サポートを受ける]**を選択します。
 -   クラスターの概要ページで、右上隅の**[...]**をクリックし、 **[サポートを受ける]**を選択します。
 
@@ -52,7 +52,7 @@ TiDB Cloudのすべてのユーザーは、請求およびアカウント関連�
 
 1.  [PingCAP ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)にログインし、 [TiDB Cloudアカウント/請求サポート](https://tidb.support.pingcap.com/servicedesk/customer/portal/16)をクリックします。
 
-2.  **Submit a request**をクリックします。
+2.  **[Submit a request]**をクリックします。
 
 3.  次のフィールドに入力します。
 
@@ -74,7 +74,7 @@ TiDB Cloudのすべてのユーザーは、請求およびアカウント関連�
     >
     > [TiDB Cloudテクニカルサポート](https://tidb.support.pingcap.com/servicedesk/customer/portal/6)エントリーは、 **Developer** 、 **Enterprise** 、または**Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)でのみご利用いただけます。Basic**プラン**をご利用の場合は、 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)または[Discord](https://discord.com/invite/KVRZBR2DrG)のコミュニティチャンネルを通じて技術的な質問を投稿できます。PingCAPのエンジニアやコミュニティメンバーがサポートいたします。
 
-2.  **Submit a request**をクリックします。
+2.  **[Submit a request]**をクリックします。
 
 3.  次のフィールドに入力します。
 

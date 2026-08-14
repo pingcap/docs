@@ -56,7 +56,7 @@ AWS でホストされているTiDB Cloud Starter クラスターでは、 TiDB 
 
 1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページで、クラスター名をクリックして概要ページに移動し、左側のナビゲーション ペインで**[SQL エディター] を**クリックします。
 
-2.  TiDB Cloudの AI 機能を試すには、画面上の指示に従って、PingCAP と AWS Bedrock が研究とサービスの改善のためにコードスニペットを使用することを許可し、 **Save and Get Started**クリックします。
+2.  TiDB Cloudの AI 機能を試すには、画面上の指示に従って、PingCAP と AWS Bedrock が研究とサービスの改善のためにコードスニペットを使用することを許可し、 **[Save and Get Started]** をクリックします。
 
 3.  SQL エディターで、macOS の場合は<kbd>⌘</kbd> + <kbd>I</kbd> (Windows または Linux の場合は<kbd>Control</kbd> + <kbd>I</kbd> ) を押して、 [Chat2Query（PREVIEW）](/tidb-cloud/tidb-cloud-glossary.md#chat2query)に SQL クエリを自動的に生成するように指示します。
 

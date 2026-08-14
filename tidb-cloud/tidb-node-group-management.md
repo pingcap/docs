@@ -71,15 +71,15 @@ TiDBノードグループを作成しても、デフォルトグループのエ�
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3.  **TiDB Node Group**リストから TiDB ノード グループを選択し、 **「接続タイプ」**リストから**「パブリック」**を選択します。
+3.  **「TiDB Node Group」**リストから TiDB ノード グループを選択し、 **「接続タイプ」**リストから**「パブリック」**を選択します。
 
-    IP アクセス リストをまだ設定していない場合は、 **Configure IP Access List**をクリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
+    IP アクセス リストをまだ設定していない場合は、 **「Configure IP Access List」**をクリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
 4.  左側のナビゲーション ペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
 
-5.  **[ネットワーク]**ページで、右上隅の**TiDB Node Group**リストから TiDB ノード グループを選択します。
+5.  **[ネットワーク]**ページで、右上隅の**[TiDB Node Group]**リストから TiDB ノード グループを選択します。
 
-6.  **[パブリック エンドポイント]**セクションで**[有効にする]**をクリックし、 **Add IP Address**セクションで**IP Access List**をクリックします。
+6.  **[パブリック エンドポイント]**セクションで**[有効にする]**をクリックし、 **[IP Access List]**セクションで**[Add IP Address]**をクリックします。
 
 7.  **[ネットワーク]**ページの右上隅にある**[接続]**をクリックして、接続文字列を取得します。
 
@@ -97,9 +97,9 @@ TiDBノードグループを作成しても、デフォルトグループのエ�
 
 4.  左側のナビゲーション ペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
 
-5.  **[ネットワーク]**ページで、右上隅の**TiDB Node Group**リストから TiDB ノード グループを選択します。
+5.  **[ネットワーク]**ページで、右上隅の**[TiDB Node Group]**リストから TiDB ノード グループを選択します。
 
-6.  このノード グループの新しい接続を作成するには、 **Create Private Endpoint Connection**をクリックします。
+6.  このノード グループの新しい接続を作成するには、 **[Create Private Endpoint Connection]**をクリックします。
 
     -   AWS にデプロイされたクラスターについては、 [AWS PrivateLink 経由でTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
 
