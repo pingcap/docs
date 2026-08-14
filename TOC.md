@@ -27,7 +27,7 @@
     - [ハイブリッドトポロジー](/hybrid-deployment-topology.md)
   - [TiUPを使用してデプロイ](/production-deployment-using-tiup.md)
   - [Kubernetesにデプロイ](/tidb-in-kubernetes.md)
-  - [クラスタの状態を確認する](/post-installation-check.md)
+  - [クラスタのステータスを確認する](/post-installation-check.md)
   - テストクラスタのパフォーマンス
     - [Sysbenchを使用してTiDBをテストする](/benchmark/benchmark-tidb-using-sysbench.md)
     - [TPC-Cを使用してTiDBをテストする](/benchmark/benchmark-tidb-using-tpcc.md)
@@ -601,7 +601,7 @@
     - [TiDB グローバルソート](/tidb-global-sort.md)
   - [システム変数](/system-variables.md)
   - [システム変数リファレンス](/system-variable-reference.md)
-  - [サーバー状態変数](/status-variables.md)
+  - [サーバーステータス変数](/status-variables.md)
   - コンフィグレーションファイルパラメータ
     - [tidb-server](/tidb-configuration-file.md)
     - [tikvサーバー](/tikv-configuration-file.md)

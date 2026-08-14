@@ -613,7 +613,7 @@
       - [TPC-C性能試験報告書](/tidb-cloud/v6.5-performance-benchmarking-with-tpcc.md)
       - [Sysbenchパフォーマンステストレポート](/tidb-cloud/v6.5-performance-benchmarking-with-sysbench.md)
   - [システム変数](/system-variables.md)
-  - [サーバー状態変数](/status-variables.md)
+  - [サーバーステータス変数](/status-variables.md)
   - [テーブルフィルター](/table-filter.md)
   - [外部ストレージサービスのURI形式](/external-storage-uri.md)
   - [DDLステートメントに埋め込まれた`ANALYZE`](/ddl_embedded_analyze.md)
