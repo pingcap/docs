@@ -34,7 +34,7 @@ TiDB Cloud Starter、 Essential、またはPremiumインスタンスがAmazon S3
 
     -   Amazon S3からデータをインポートする場合は、次のようにして**Add New ARN**ダイアログを開きます。
 
-        1.  **Import from S3**クリックします。
+        1.  **Import from S3**をクリックします。
         2.  **ファイルURI**欄に入力してください。
         3.  **AWS Role ARN**を選択し、[**ここをクリックして AWS CloudFormation を使用して新しいロールを作成します] をクリックします**。
 
@@ -255,7 +255,7 @@ Azure ARMテンプレートを使用してSASトークンを作成するには�
 
     -   データをAzure Blob Storageにエクスポートする場合：
 
-        1.  **Export data to...** &gt; **Azure Blob Storage**をクリックします。TiDB Cloud StarterまたはEssentialインスタンスでこれまでデータのインポートまたはエクスポートが行われていない場合は、ページ下部の**「データのエクスポート先...」** &gt; **Azure Blob Storage**クリックしてください。
+        1.  **Export data to...** &gt; **Azure Blob Storage**をクリックします。TiDB Cloud StarterまたはEssentialインスタンスでこれまでデータのインポートまたはエクスポートが行われていない場合は、ページ下部の**「データのエクスポート先...」** &gt; **Azure Blob Storage**をクリックしてください。
         2.  **Azure Blob Storage Settings**エリアまでスクロールダウンし、SAS トークンフィールドの下にある**[ここをクリックして、Azure ARM テンプレートを使用して新しいものを作成する] をクリックします**。
 
     </CustomContent>
