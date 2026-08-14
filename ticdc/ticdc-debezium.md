@@ -16,7 +16,7 @@ When you use Kafka as the downstream sink, specify the `protocol` field as `debe
 
 To use the new TiCDC architecture, set the TiCDC configuration item [`newarch`](/ticdc/ticdc-server-config.md#newarch-new-in-v854-release1) to `true`.
 
-The Debezium protocol supports the following types of events:
+For the new TiCDC architecture, the Debezium protocol supports the following types of events:
 
 - DDL event: represents a DDL change record. After the upstream DDL statement is successfully executed, the DDL event is sent to every Message Queue (MQ) partition.
 
@@ -27,7 +27,7 @@ The Debezium protocol supports the following types of events:
 </div>
 <div label="Classic TiCDC architecture">
 
-The Debezium protocol only supports Row Changed events and directly ignores DDL events and WATERMARK events. A Row changed event represents a data change in a row. When a row changes, the Row Changed event is sent, including relevant information about the row both before and after the change. A WATERMARK event marks the replication progress of a table, indicating that all events earlier than the watermark have been sent to the downstream.
+For the classic TiCDC architecture, the Debezium protocol only supports Row Changed events and directly ignores DDL events and WATERMARK events. A Row changed event represents a data change in a row. When a row changes, the Row Changed event is sent, including relevant information about the row both before and after the change. A WATERMARK event marks the replication progress of a table, indicating that all events earlier than the watermark have been sent to the downstream.
 
 </div>
 </SimpleTab>
