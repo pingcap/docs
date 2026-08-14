@@ -59,7 +59,7 @@ Alibaba Cloud管理コンソールを使用してVPCインターフェースエ�
 
 2.  先ほどコピーした*エンドポイントリソースID*と*ドメイン名*を、それぞれのフィールドに貼り付けてください。
 
-3.  プライベートエンドポイントからの接続を受け入れるには、 **Create Private Endpoint Connection**クリックしてください。
+3.  プライベートエンドポイントからの接続を受け入れるには、 **Create Private Endpoint Connection**をクリックしてください。
 
 ### ステップ4. TiDB Cloud Premiumインスタンスに接続します {#step-4-connect-to-your-tidb-cloud-premium-instance}
 

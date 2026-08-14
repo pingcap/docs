@@ -96,7 +96,7 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 3.  **「コンフィグレーション」**タブで、 **「統合のインストール」を**クリックします。
 
     -   クラスターレベルの Datadog 統合の場合、 [**TiDB Cloud Dynamic Tracker**](https://app.datadoghq.com/dash/integration/32021/tidb-cloud-dynamic-tracker)ダッシュボードが[**ダッシュボード一覧**](https://app.datadoghq.com/dashboard/lists)に表示されます。
-    -   従来のプロジェクト レベルの Datadog 統合 (ベータ版) の場合、 [**TiDB Cloud Cluster Overview**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview)ボード[**ダッシュボード一覧**](https://app.datadoghq.com/dashboard/lists)に表示されます。
+    -   従来のプロジェクト レベルの Datadog 統合 (ベータ版) の場合、 [**TiDB Cloud Cluster Overview**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview)ダッシュボードが[**ダッシュボード一覧**](https://app.datadoghq.com/dashboard/lists)に表示されます。
 
 ## 事前に構築されたダッシュボードを確認する {#view-the-pre-built-dashboard}
 
