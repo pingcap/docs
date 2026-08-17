@@ -5,7 +5,7 @@ summary: Learn how to use Statement Insight to analyze historical RU consumption
 
 # Statement Insight(Preview)
 
-**Statement Insight** provides multi-dimensional analysis of SQL resource consumption for your {{{ .premium }}}, {{{ .byoc }}}, {{{ .essential }}} instances. It breaks down Request Unit (RU) consumption, latency, and execution counts by **DB User**, **DB**, **Table**, **SQL Type**, or **SQL Digest**, with leaderboards and trend charts that surface your top contributors at a glance. Use Statement Insight(Preview) to establish RU and performance baselines from historical data and pinpoint what is driving RU consumptions or slowdowns.
+**Statement Insight** provides multi-dimensional analysis of SQL resource consumption for your {{{ .premium }}}, {{{ .byoc }}}, {{{ .essential }}} instances. It breaks down Request Unit (RU) consumption, latency, and execution counts by **DB User**, **DB**, **Table**, **SQL Type**, or **SQL Digest**, with leaderboards and trend charts that surface your top contributors at a glance. Use Statement Insight to establish RU and performance baselines from historical data and pinpoint what is driving RU consumptions or slowdowns.
 
 Statement Insight is a historical, baseline-oriented view. 
 
@@ -63,7 +63,7 @@ The trend chart shows how the selected metric changes over time for the dimensio
 
 ## Limitations
 
-- Statement Insight is intended for historical analysis and RU or performance baselining. The displayed RU might differ slightly from the RU usage reported on your TiDB Cloud invoice due to differences in collection and aggregation. Do not use Statement Insight data for billing reconciliation.
+- Statement Insight is intended for historical analysis and RU or performance baselining. The displayed RU might differ slightly from the RU usage reported on your TiDB Cloud invoice due to differences in collection and aggregation（cumulative RU consumption）. Do not use Statement Insight data for billing reconciliation.
 - Data freshness is up to **10 minutes**, matching the underlying collection cycle.
 
 ## FAQ
