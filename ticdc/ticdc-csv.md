@@ -82,13 +82,15 @@ CREATE TABLE `employee` (
 
 `include-commit-ts = true`と`output-old-value = true`の場合、このテーブルの DML イベントは、次のように CSV 形式で保存されます。
 
-    "I","employee","hr",433305438660591626,false,101,"Smith","Bob","2014-06-04","New York"
-    "D","employee","hr",433305438660591627,true,101,"Smith","Bob","2015-10-08","Shanghai"
-    "I","employee","hr",433305438660591627,true,101,"Smith","Bob","2015-10-08","Los Angeles"
-    "D","employee","hr",433305438660591629,false,101,"Smith","Bob","2017-03-13","Dallas"
-    "I","employee","hr",433305438660591630,false,102,"Alex","Alice","2017-03-14","Shanghai"
-    "D","employee","hr",433305438660591630,true,102,"Alex","Alice","2017-03-14","Beijing"
-    "I","employee","hr",433305438660591630,true,102,"Alex","Alice","2018-06-15","Beijing"
+```
+"I","employee","hr",433305438660591626,false,101,"Smith","Bob","2014-06-04","New York"
+"D","employee","hr",433305438660591627,true,101,"Smith","Bob","2015-10-08","Shanghai"
+"I","employee","hr",433305438660591627,true,101,"Smith","Bob","2015-10-08","Los Angeles"
+"D","employee","hr",433305438660591629,false,101,"Smith","Bob","2017-03-13","Dallas"
+"I","employee","hr",433305438660591630,false,102,"Alex","Alice","2017-03-14","Shanghai"
+"D","employee","hr",433305438660591630,true,102,"Alex","Alice","2017-03-14","Beijing"
+"I","employee","hr",433305438660591630,true,102,"Alex","Alice","2018-06-15","Beijing"
+```
 
 `include-commit-ts = true` 、 `output-old-value = true` 、および`output-field-header = true`の場合、このテーブルのDMLイベントは、次のようにCSV形式で保存されます。
 

@@ -79,13 +79,15 @@ For clusters created in v8.4.0 or later, or clusters upgraded to v8.4.0 or later
 
 チェックサム計算アルゴリズムの疑似コードは次のとおりです。
 
-    fn checksum(columns) {
-        let result = 0
-        for column in sort_by_schema_order(columns) {
-            result = crc32.update(result, encode(column))
-        }
-        return result
+```
+fn checksum(columns) {
+    let result = 0
+    for column in sort_by_schema_order(columns) {
+        result = crc32.update(result, encode(column))
     }
+    return result
+}
+```
 
 -   `columns`列IDでソートする必要があります。Avroスキーマでは、フィールドは既に列IDでソートされているため、 `columns`の順序をそのまま使用できます。
 

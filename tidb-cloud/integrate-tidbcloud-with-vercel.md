@@ -113,11 +113,15 @@ TiDB Cloud Vercel 統合経由で接続するには、 [Vercelの統合マーケ
 
     **Prisma**
 
-        DATABASE_URL
+    ```
+    DATABASE_URL
+    ```
 
     **TiDB Cloud Serverless Driver**
 
-        DATABASE_URL
+    ```
+    DATABASE_URL
+    ```
 
 </div>
 
@@ -226,10 +230,12 @@ Gitリポジトリに変更をプッシュすると、Vercelがプレビュー�
 
 ここでは例として、PrismaアプリケーションとTiDB Cloud Starterインスタンスを使用します。以下は、 TiDB Cloud StarterインスタンスのPrismaスキーマファイルにおけるデータソース設定です。
 
-    datasource db {
-        provider = "mysql"
-        url      = env("DATABASE_URL")
-    }
+```
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+```
 
 Vercelでは、環境変数を次のように宣言できます。
 

@@ -9,24 +9,28 @@ summary: このドキュメントでは、TiDB Cloudのデータ アプリの構
 
 データ[データアプリをGitHubに接続しました](/tidb-cloud/data-service-manage-github-connection.md)た場合は、次のように GitHub の指定したディレクトリでデータアプリの構成ファイルを見つけることができます。
 
-    ├── <Your Data App directory>
-    │   ├── data_sources
-    │   │   └── cluster.json
-    │   ├── dataapp_config.json
-    │   ├── http_endpoints
-    │   │   ├── config.json
-    │   │   └── sql
-    │   │       ├── <method>-<endpoint-path1>.sql
-    │   │       ├── <method>-<endpoint-path2>.sql
-    │   │       └── <method>-<endpoint-path3>.sql
+```
+├── <Your Data App directory>
+│   ├── data_sources
+│   │   └── cluster.json
+│   ├── dataapp_config.json
+│   ├── http_endpoints
+│   │   ├── config.json
+│   │   └── sql
+│   │       ├── <method>-<endpoint-path1>.sql
+│   │       ├── <method>-<endpoint-path2>.sql
+│   │       └── <method>-<endpoint-path3>.sql
+```
 
 ## データソース構成 {#data-source-configuration}
 
 データアプリのデータソースは、リンクされた TiDB クラスターから取得されます。データソースの設定は`data_sources/cluster.json`で確認できます。
 
-    ├── <Your Data App directory>
-    │   ├── data_sources
-    │   │   └── cluster.json
+```
+├── <Your Data App directory>
+│   ├── data_sources
+│   │   └── cluster.json
+```
 
 各データアプリは、1つまたは複数のTiDBクラスターにリンクできます。
 
@@ -53,8 +57,10 @@ summary: このドキュメントでは、TiDB Cloudのデータ アプリの構
 
 データアプリのプロパティには、アプリID、名前、およびタイプが含まれます。これらのプロパティは`dataapp_config.json`ファイルで確認できます。
 
-    ├── <Your Data App directory>
-    │   ├── dataapp_config.json
+```
+├── <Your Data App directory>
+│   ├── dataapp_config.json
+```
 
 以下は`dataapp_config.json`の構成例です。
 
@@ -82,13 +88,15 @@ summary: このドキュメントでは、TiDB Cloudのデータ アプリの構
 
 データアプリのディレクトリには、 `http_endpoints/config.json`にエンドポイント構成があり、 `http_endpoints/sql/<method>-<endpoint-name>.sql`に SQL ファイルが見つかります。
 
-    ├── <Your Data App directory>
-    │   ├── http_endpoints
-    │   │   ├── config.json
-    │   │   └── sql
-    │   │       ├── <method>-<endpoint-path1>.sql
-    │   │       ├── <method>-<endpoint-path2>.sql
-    │   │       └── <method>-<endpoint-path3>.sql
+```
+├── <Your Data App directory>
+│   ├── http_endpoints
+│   │   ├── config.json
+│   │   └── sql
+│   │       ├── <method>-<endpoint-path1>.sql
+│   │       ├── <method>-<endpoint-path2>.sql
+│   │       └── <method>-<endpoint-path3>.sql
+```
 
 ### エンドポイント構成 {#endpoint-configuration}
 

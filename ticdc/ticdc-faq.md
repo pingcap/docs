@@ -508,7 +508,9 @@ UPDATE data_table SET value = 'v1' WHERE id = 2;
 
 `CDC:ErrMySQLDuplicateEntryCDC`エラーが頻繁に発生する場合は、 [`sink-uri`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)構成で`safe-mode=true`パラメータを設定することで TiCDC セーフ モードを有効にすることができます。
 
-    mysql://user:password@host:port/?safe-mode=true
+```
+mysql://user:password@host:port/?safe-mode=true
+```
 
 セーフ モードでは、TiCDC は`UPDATE`操作を`DELETE + REPLACE INTO`に分割して実行し、一意のキーの競合エラーを回避します。
 

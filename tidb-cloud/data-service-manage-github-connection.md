@@ -65,16 +65,18 @@ GitHub接続で**Auto Sync & Deployment**が有効になっている場合、Git
 
 デプロイ操作後、指定したGitHubディレクトリを確認してください。 `tidb-cloud-data-service`によってData Appの設定ファイルがディレクトリにコミットされていることが確認できます。これは、Data AppがGitHubに正常に接続されたことを意味します。ディレクトリ構造は以下のとおりです。
 
-    ├── <Your Data App directory on GitHub>
-    │   ├── data_sources
-    │   │   └── cluster.json  # specifies the linked TiDB Cloud Starter instances or TiDB Cloud Dedicated clusters.
-    │   ├── dataapp_config.json # specifies the Data APP ID, name, type, version, and description.
-    │   ├── http_endpoints
-    │   │   ├── config.json # specifies the endpoints.
-    │   │   └── sql # contains SQL files of the endpoints.
-    │   │       ├── <method>-<endpoint-path1>.sql
-    │   │       ├── <method>-<endpoint-path2>.sql
-    │   │       └── <method>-<endpoint-path3>.sql
+```
+├── <Your Data App directory on GitHub>
+│   ├── data_sources
+│   │   └── cluster.json  # specifies the linked TiDB Cloud Starter instances or TiDB Cloud Dedicated clusters.
+│   ├── dataapp_config.json # specifies the Data APP ID, name, type, version, and description.
+│   ├── http_endpoints
+│   │   ├── config.json # specifies the endpoints.
+│   │   └── sql # contains SQL files of the endpoints.
+│   │       ├── <method>-<endpoint-path1>.sql
+│   │       ├── <method>-<endpoint-path2>.sql
+│   │       └── <method>-<endpoint-path3>.sql
+```
 
 ## ステップ3．データアプリを変更する {#step-3-modify-your-data-app}
 

@@ -71,12 +71,14 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
 
 2.  プロンプトに従って、 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンス、クライアント、およびオペレーティングシステムを選択してください。なお、このドキュメントで使用されているクライアントは`Prisma`です。
 
-        Choose the cluster
-        > [x] Cluster0(13796194496)
-        Choose the client
-        > [x] Prisma
-        Choose the operating system
-        > [x] macOS/Alpine (Detected)
+    ```
+    Choose the cluster
+    > [x] Cluster0(13796194496)
+    Choose the client
+    > [x] Prisma
+    Choose the operating system
+    > [x] macOS/Alpine (Detected)
+    ```
 
     出力は以下のとおりです。 `url`の値の中に Prisma の接続文字列があります。
 

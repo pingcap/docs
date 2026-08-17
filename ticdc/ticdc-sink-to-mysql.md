@@ -40,7 +40,9 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 
 シンクURIは、TiCDCターゲットシステムの接続情報を指定するために使用されます。フォーマットは以下のとおりです。
 
-    [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
+```
+[scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
+```
 
 > **Note:**
 >

@@ -64,11 +64,13 @@ mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql -p
 
 上記のコマンドの出力が次のようなものであれば、インポートは成功しています。
 
-    Enter password:
-    Warning: Unable to load '/usr/share/zoneinfo/iso3166.tab' as time zone. Skipping it.
-    Warning: Unable to load '/usr/share/zoneinfo/leap-seconds.list' as time zone. Skipping it.
-    Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it.
-    Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
+```
+Enter password:
+Warning: Unable to load '/usr/share/zoneinfo/iso3166.tab' as time zone. Skipping it.
+Warning: Unable to load '/usr/share/zoneinfo/leap-seconds.list' as time zone. Skipping it.
+Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it.
+Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
+```
 
 ダウンストリームが特殊なMySQL環境（パブリッククラウドRDSまたは一部のMySQL派生バージョン）であり、前述の方法によるタイムゾーンのインポートに失敗した場合は、シンクURIの`time-zone`を空の値（例： `time-zone=""` ）に設定することで、ダウンストリームのデフォルトのタイムゾーンを使用できます。`time-zone` `mysql`と`tidb`シンクにのみ有効であることに注意してください。
 
@@ -103,12 +105,14 @@ v4.0.9 以降では、レプリケーション タスクで統合ソーター機
 
 TiCDC が Kafka に送信するメッセージのサイズを制御するには、Sink URI で`max-message-bytes`パラメータを設定します。ただし、Kafkaサーバーがそのサイズのメッセージを受け入れるように設定されていることも確認する必要があります。TiCDC からのメッセージが Kafka サーバーの制限を超えた場合、Kafka は`Message was too large`エラーを返します。Kafkaサーバーの設定ファイルに追加してください。
 
-    # The maximum byte number of a message that the broker receives
-    message.max.bytes=2147483648
-    # The maximum byte number of a message that the broker copies
-    replica.fetch.max.bytes=2147483648
-    # The maximum message byte number that the consumer side reads
-    fetch.message.max.bytes=2147483648
+```
+# The maximum byte number of a message that the broker receives
+message.max.bytes=2147483648
+# The maximum byte number of a message that the broker copies
+replica.fetch.max.bytes=2147483648
+# The maximum message byte number that the consumer side reads
+fetch.message.max.bytes=2147483648
+```
 
 ## TiCDC レプリケーション中に、ダウンストリームで DDL ステートメントの実行が失敗したかどうかを確認するにはどうすればよいでしょうか? レプリケーションを再開するにはどうすればよいでしょうか? {#how-can-i-find-out-whether-a-ddl-statement-fails-to-execute-in-downstream-during-ticdc-replication-how-to-resume-the-replication}
 

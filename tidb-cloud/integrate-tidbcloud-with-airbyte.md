@@ -28,15 +28,17 @@ Airbyteは、わずか数ステップでローカル環境にデプロイでき�
 
 Airbyteのバナーが表示されたら、ユーザー名（ `airbyte` ）とパスワード（`password`）を使用して[http://localhost:8000](http://localhost:8000) `password`アクセスし、UIにアクセスできます。
 
-    airbyte-server      |     ___    _      __          __
-    airbyte-server      |    /   |  (_)____/ /_  __  __/ /____
-    airbyte-server      |   / /| | / / ___/ __ \/ / / / __/ _ \
-    airbyte-server      |  / ___ |/ / /  / /_/ / /_/ / /_/  __/
-    airbyte-server      | /_/  |_/_/_/  /_.___/\__, /\__/\___/
-    airbyte-server      |                     /____/
-    airbyte-server      | --------------------------------------
-    airbyte-server      |  Now ready at http://localhost:8000/
-    airbyte-server      | --------------------------------------
+```
+airbyte-server      |     ___    _      __          __
+airbyte-server      |    /   |  (_)____/ /_  __  __/ /____
+airbyte-server      |   / /| | / / ___/ __ \/ / / / __/ _ \
+airbyte-server      |  / ___ |/ / /  / /_/ / /_/ / /_/  __/
+airbyte-server      | /_/  |_/_/_/  /_.___/\__, /\__/\___/
+airbyte-server      |                     /____/
+airbyte-server      | --------------------------------------
+airbyte-server      |  Now ready at http://localhost:8000/
+airbyte-server      | --------------------------------------
+```
 
 ## TiDBコネクタを設定する {#set-up-the-tidb-connector}
 
