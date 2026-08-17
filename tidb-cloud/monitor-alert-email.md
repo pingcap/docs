@@ -58,7 +58,7 @@ TiDB Cloud、電子メール、[Slack](/tidb-cloud/monitor-alert-slack.md)、[Zo
 
 8.  購読を完了するには、 **「保存」**をクリックしてください。
 
-または、 TiDB Cloud Dedicatedクラスタの[**警告**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts)ページの右上隅にある**「購読」を**クリックすることもできます。**アラート購読**ページに移動します。
+または、 TiDB Cloud Dedicatedクラスタの[**Alert**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts)ページの右上隅にある**「購読」を**クリックすることもできます。**アラート購読**ページに移動します。
 
 </CustomContent>
 
@@ -85,7 +85,7 @@ TiDB Cloud、電子メール、[Slack](/tidb-cloud/monitor-alert-slack.md)、[Zo
 
 7.  購読を完了するには、 **「保存」**をクリックしてください。
 
-または、 TiDB Cloud Essentialインスタンスの[**警告**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts)ページの右上隅にある**「購読」を**クリックすることもできます。**アラート購読**ページに移動します。
+または、 TiDB Cloud Essentialインスタンスの[**Alert**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts)ページの右上隅にある**「購読」を**クリックすることもできます。**アラート購読**ページに移動します。
 
 </CustomContent>
 
@@ -112,7 +112,7 @@ TiDB Cloud、電子メール、[Slack](/tidb-cloud/monitor-alert-slack.md)、[Zo
 
 7.  購読を完了するには、 **「保存」**をクリックしてください。
 
-または、 TiDB Cloud Premiumインスタンスの[**警告**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts)ページの右上隅にある**「購読」を**クリックすることもできます。**アラート購読**ページに移動します。
+または、 TiDB Cloud Premiumインスタンスの[**Alert**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts)ページの右上隅にある**「購読」を**クリックすることもできます。**アラート購読**ページに移動します。
 
 </CustomContent>
 

@@ -14,7 +14,7 @@ TiDBはMySQL互換のデータベースであり、 [TypeORM](https://github.com
 -   TypeORMを使用してTiDBに接続します。
 -   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
 
-> **注記**
+> **Note**
 >
 > このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 
@@ -107,7 +107,7 @@ npm install @types/node ts-node typescript --save-dev
     TIDB_ENABLE_SSL=true
     ```
 
-    > **注記**
+    > **Note**
     >
     > TiDB Cloud StarterおよびTiDB Cloud Essentialの場合、パブリック エンドポイントを使用する際には`TIDB_ENABLE_SSL`を介して TLS 接続を有効にする**必要があります**。
 
@@ -185,7 +185,7 @@ npm install @types/node ts-node typescript --save-dev
     TIDB_CA_PATH={downloaded_ssl_ca_path}
     ```
 
-    > **注記**
+    > **Note**
     >
     > TiDB Cloud Dedicatedの場合、パブリックエンドポイントを使用する際には`TIDB_ENABLE_SSL`を介して TLS 接続を有効にすることをお**勧め**します。 `TIDB_ENABLE_SSL=true`を設定する際には、 `TIDB_CA_PATH=/path/to/ca.pem`を介して接続ダイアログからダウンロードした CA 証明書のパスを指定する**必要があります**。
 
@@ -304,7 +304,7 @@ export const AppDataSource = new DataSource({
 });
 ```
 
-> **注記**
+> **Note**
 >
 > TiDB Cloud StarterおよびTiDB Cloud Essentialでは、パブリックエンドポイントを使用する際に TLS 接続を有効にする必要があります。このサンプルコードでは、 `TIDB_ENABLE_SSL` `.env` } を`true`に設定してください。
 >

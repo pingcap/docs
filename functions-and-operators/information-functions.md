@@ -212,7 +212,7 @@ TABLE t1;
 2 rows in set (0.00 sec)
 ```
 
-> **注記**
+> **Note**
 >
 > -   TiDBでは、 [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache)を指定するとMySQLが返す結果と異なる結果になる可能性があります。この不一致は、TiDBが各ノードにIDをキャッシュするため、IDの順序が乱れたり、IDに空白が生じたりする可能性があるためです。アプリケーションで厳密なID順序の維持が不可欠な場合は、 [MySQL互換モード](/auto-increment.md#mysql-compatibility-mode)を有効にすることができます。
 >

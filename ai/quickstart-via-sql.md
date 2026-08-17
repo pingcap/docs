@@ -112,7 +112,7 @@ Query OK, 3 rows affected (0.15 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 ```
 
-> **注記**
+> **Note**
 >
 > この例では、ベクトル埋め込みの次元を簡略化し、説明のために3次元ベクトルのみを使用しています。
 >
