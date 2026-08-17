@@ -1,39 +1,46 @@
 ---
 title: ALTER FUNCTION
-summary: Alters an external function.
+summary: Learn how to change the handler, return schema, description, or HTTPS UDF Server endpoint of an external function in TiDB Cloud Lake.
 ---
 
 # ALTER FUNCTION
 
-Alters an external function.
+The `ALTER FUNCTION` statement changes an external function registration.
 
-## Syntax
-
-```sql
-ALTER FUNCTION [ IF NOT EXISTS ] <function_name>
-    AS ( <input_param_types> ) RETURNS <return_type> LANGUAGE <language_name>
-    HANDLER = '<handler_name>' ADDRESS = '<udf_server_address>'
-    [DESC='<description>']
-```
-
-| Parameter             | Description                                                                                       |
-|-----------------------|---------------------------------------------------------------------------------------------------|
-| `<function_name>`     | The name of the function.                                                                        |
-| `<lambda_expression>` | The lambda expression or code snippet defining the function's behavior.                          |
-| `DESC='<description>'`  | Description of the UDF.|
-| `<<input_param_names>`| A list of input parameter names. Separated by comma.|
-| `<<input_param_types>`| A list of input parameter types. Separated by comma.|
-| `<return_type>`       | The return type of the function.                                                                  |
-| `LANGUAGE`            | Specifies the language used to write the function. Available values: `python`.                    |
-| `HANDLER = '<handler_name>'` | Specifies the name of the function's handler.                                               |
-| `ADDRESS = '<udf_server_address>'` | Specifies the address of the UDF server.                                             |
-
-## Examples
+## Scalar function syntax
 
 ```sql
--- Create an external function
-CREATE FUNCTION gcd (INT, INT) RETURNS INT LANGUAGE python HANDLER = 'gcd' ADDRESS = 'http://0.0.0.0:8815';
-
--- Modify the handler of the external function
-ALTER FUNCTION gcd (INT, INT) RETURNS INT LANGUAGE python HANDLER = 'gcd_new' ADDRESS = 'http://0.0.0.0:8815';
+ALTER FUNCTION [ IF EXISTS ] <function_name>
+    ( [<parameter_list>] )
+    RETURNS <return_type>
+    LANGUAGE python
+    HANDLER = '<handler_name>'
+    ADDRESS = '<https_udf_server_endpoint>'
+    [ DESC='<description>' ]
 ```
+
+## Table function syntax
+
+```sql
+ALTER FUNCTION [ IF EXISTS ] <function_name>
+    ( [<parameter_list>] )
+    RETURNS TABLE ( <column_definition_list> )
+    LANGUAGE python
+    HANDLER = '<handler_name>'
+    ADDRESS = '<https_udf_server_endpoint>'
+    [ DESC='<description>' ]
+```
+
+The endpoint hostname must be in your tenant UDF server allowlist.
+
+## Example
+
+```sql
+ALTER FUNCTION external_add(left INT, right INT)
+RETURNS BIGINT
+LANGUAGE python
+HANDLER = 'add_bigint'
+ADDRESS = 'https://udf.example.com';
+```
+
+To change a SQL scalar or table UDF, use [ALTER FUNCTION for UDFs](/tidb-cloud-lake/sql/alter-function.md).
