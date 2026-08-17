@@ -1,17 +1,18 @@
 ---
-title: Statement Insight
-summary: Learn how to use Statement Insight to analyze historical RU consumption, latency, and execution counts by DB User, SQL Type, or SQL Digest, and to build RU and performance baselines for your TiDB Cloud Premium instances.
+title: Statement Insight(Preview)
+summary: Learn how to use Statement Insight to analyze historical RU consumption, latency, and execution counts by DB User, SQL Type, or SQL Digest, and to build RU and performance baselines for your TiDB Cloud instances.
 ---
 
-# Statement Insight
+# Statement Insight(Preview)
 
-**Statement Insight** provides multi-dimensional analysis of SQL resource consumption for your {{{ .premium }}}, {{{ .byoc }}}, {{{ .essential }}} instance. It breaks down Request Unit (RU) consumption, latency, and execution counts by **DB User**, **DB**, **Table**, **SQL Type**, or **SQL Digest**, with leaderboards and trend charts that surface your top contributors at a glance. Use Statement Insight to establish RU and performance baselines from historical data and pinpoint what is driving RU consumptions or slowdowns.
+**Statement Insight** provides multi-dimensional analysis of SQL resource consumption for your {{{ .premium }}}, {{{ .byoc }}}, {{{ .essential }}} instances. It breaks down Request Unit (RU) consumption, latency, and execution counts by **DB User**, **DB**, **Table**, **SQL Type**, or **SQL Digest**, with leaderboards and trend charts that surface your top contributors at a glance. Use Statement Insight(Preview) to establish RU and performance baselines from historical data and pinpoint what is driving RU consumptions or slowdowns.
 
 Statement Insight is a historical, baseline-oriented view. 
 
 > **Note:**
 >
 > Statement Insight is in public preview and available only for a limited number of {{{ .premium }}}, {{{ .byoc }}}, {{{ .essential }}} instances, with broader rollout planned in a subsequent release. To request early access, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> For instances where Statement Insight is not yet available, you can continue to use SQL Statement in the meantime.
 
 ## Before you begin
 
