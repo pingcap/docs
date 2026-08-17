@@ -88,7 +88,7 @@ TiDB コネクタの詳細については、 [TiDBソース](https://docs.airbyt
 
 5.  **Destination Namespace**を**Custom format**に設定し、**Namespace Custom Format**を**test**に設定して、すべてのデータを`test`データベースに保存します。
 
-6.  **Sync mode**を**Full refresh | Overwrite**に選択してください。
+6.  **Sync mode**で**Full refresh | Overwrite**を選択してください。
 
     > **Tip:**
     >
