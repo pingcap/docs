@@ -5,7 +5,7 @@ summary: TiDB Cloudの SQL プロキシ アカウントについて説明しま�
 
 # SQL プロキシアカウント {#sql-proxy-account}
 
-SQLプロキシアカウントは、 TiDB Cloudによって自動的に作成されるSQLユーザーアカウントで、 TiDB Cloudユーザーに代わって[SQLエディター](/tidb-cloud/explore-data-with-chat2query.md)または[Data Service](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)を介してデータベースにアクセスするために作成されます。たとえば、 `testuser@pingcap.com` TiDB Cloudユーザーアカウントで、 `3jhEcSimm7keKP8.testuser._41mqK6H4`それに対応するSQLプロキシアカウントです。
+SQLプロキシアカウントは、 TiDB Cloudによって自動的に作成されるSQLユーザーアカウントで、 TiDB Cloudユーザーに代わって[SQLエディター](/tidb-cloud/explore-data-with-chat2query.md)または[Data Service](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)を介してデータベースにアクセスするために作成されます。たとえば、 `testuser@pingcap.com`が TiDB Cloudユーザーアカウントで、 `3jhEcSimm7keKP8.testuser._41mqK6H4`がそれに対応するSQLプロキシアカウントです。
 
 SQLプロキシアカウントは、 TiDB Cloud内のデータベースにアクセスするための安全なトークンベースの認証メカニズムを提供します。従来のユーザー名とパスワードによる認証が不要になるため、SQLプロキシアカウントはセキュリティを強化し、アクセス管理を簡素化します。
 
@@ -76,7 +76,7 @@ SQL プロキシ アカウントのロールは、 TiDB CloudユーザーのIAM�
 
 -   組織レベル:
     -   組織の所有者: role_admin
-    -   組織の請求管理者: 代理アカウントなし
+    -   組織の請求管理者: プロキシアカウントなし
     -   組織閲覧者: プロキシアカウントなし
     -   組織コンソール監査マネージャ: プロキシアカウントなし
 
