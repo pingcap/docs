@@ -91,7 +91,7 @@ Kafka クラスターを簡単に構成できるように、Kafka VPC 用に 2 �
 
 VM をプロビジョニングするには、 [VMインスタンス](https://console.cloud.google.com/compute/instances)ページに移動します。
 
-1.  バスティオンノード
+1.  要塞ノード
 
     -   **名前**: `bastion-node`
     -   **リージョン**: `us-west1`
