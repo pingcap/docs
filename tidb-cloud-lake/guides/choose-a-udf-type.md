@@ -351,4 +351,3 @@ Choose the next step based on the required output:
 - [User-Defined Function](/tidb-cloud-lake/sql/user-defined-function.md)
 - [External Function](/tidb-cloud-lake/sql/external-function.md)
 - [`tidbcloud/lake-udf` on GitHub](https://github.com/tidbcloud/lake-udf)
-- [Deep Dive into Databend UDF](https://www.databend.com/blog/category-product/Databend_UDF/), the source article adapted and technically revalidated for this guide
