@@ -72,7 +72,7 @@ summary: ローカル ファイルをTiDB Cloud Starter にインポートする
 
 7.  必要に応じて CSV 構成を編集します。
 
-    **Edit CSV configuration**をクリックすると、バックスラッシュエスケープ、セパレーター、区切り文字を設定して、よりきめ細かな制御を行うことができます。CSV設定の詳細については、 [データのインポートのためのCSV構成](/tidb-cloud/csv-config-for-import-data.md)を参照してください。
+    **Edit CSV configuration**をクリックすると、Backslash Escape、Separator、Delimiterを設定して、よりきめ細かな制御を行うことができます。CSV設定の詳細については、 [データのインポートのためのCSV構成](/tidb-cloud/csv-config-for-import-data.md)を参照してください。
 
 8.  **Start Import**をクリックします。
 
