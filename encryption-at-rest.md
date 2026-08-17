@@ -242,7 +242,7 @@ path = "/path/to/key/file"
 3b5896b5be691006e0f71c3040a29495ddcad20b14aff61806940ebd780d3c62
 ```
 
-### マスターキーを回転させる {#rotate-the-master-key}
+### マスターキーをローテーションする {#rotate-the-master-key}
 
 マスターキーをローテーションするには、設定で新しいマスターキーと古いマスターキーの両方を指定し、TiKVを再起動する必要があります。新しいマスターキーを指定するには`security.encryption.master-key`を使用し、古いマスターキーを指定するには`security.encryption.previous-master-key`を使用します。 `security.encryption.previous-master-key`の設定形式は`encryption.master-key`と同じです。再起動後、TiKVは新しいマスターキーと古いマスターキーの両方にアクセスする必要がありますが、TiKVが起動して実行されると、TiKVは新しいキーのみにアクセスする必要があります。それ以降は、設定ファイルに`encryption.previous-master-key`設定を残しておいても問題ありません。再起動後も、TiKVは新しいマスターキーを使用して既存のデータを復号化できなかった場合にのみ、古いキーを使用しようとします。
 
@@ -367,7 +367,7 @@ server_configs:
 
 上記の設定項目の意味やキーファイルの内容形式は TiKV と同様です。
 
-### マスターキーを回転させる {#rotate-the-master-key}
+### マスターキーをローテーションする {#rotate-the-master-key}
 
 TiFlashのマスターキーをローテーションするには、TiKV のマスターキーをローテーションする手順に従ってください。現在、 TiFlash はオンラインでのマスターキーのローテーションもサポートしていません。そのため、ローテーションを有効にするにはTiFlashを再起動する必要があります。オンラインクエリを処理している稼働中のTiFlashクラスターに対して、ローリング再起動を実行することをお勧めします。
 
@@ -410,7 +410,7 @@ TiFlashもv4.0.9で暗号化メタデータ操作を最適化しており、そ�
 
 ## BR S3 サーバー側暗号化 {#br-s3-server-side-encryption}
 
-BRを使用して S3 にバックアップする際に S3 サーバー側の暗号化を有効にするには、引数を`--s3.sse`渡し、値を "aws:kms" に設定します。S3 は暗号化に独自の KMS キーを使用します。例:
+BRを使用して S3 にバックアップする際に S3 サーバー側の暗号化を有効にするには、 `--s3.sse`引数を渡し、値を "aws:kms" に設定します。S3 は暗号化に独自の KMS キーを使用します。例:
 
 ```
 tiup br backup full --pd <pd-address> --storage "s3://<bucket>/<prefix>" --s3.sse aws:kms

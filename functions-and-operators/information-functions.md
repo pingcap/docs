@@ -25,7 +25,7 @@ TiDB は、MySQL 8.0 で利用可能な[情報関数](https://dev.mysql.com/doc/
 | [`USER()`](#user)                                  | クライアントから提供されたユーザー名とホスト名を返します                  |
 | [`VERSION()`](#version)                            | MySQLサーバーのバージョンを示す文字列を返します                    |
 
-### ベンチマーク（） {#benchmark}
+### BENCHMARK() {#benchmark}
 
 `BENCHMARK()`関数は、指定された回数、指定された式を実行します。
 
@@ -53,7 +53,7 @@ SELECT BENCHMARK(5, SLEEP(2));
 1 row in set (10.00 sec)
 ```
 
-### 接続ID() {#connection_id}
+### CONNECTION_ID() {#connection_id}
 
 <CustomContent platform="tidb">
 
@@ -84,7 +84,7 @@ SELECT CONNECTION_ID();
 1 row in set (0.00 sec)
 ```
 
-### 現在のロール() {#current_role}
+### CURRENT_ROLE() {#current_role}
 
 <CustomContent platform="tidb">
 
@@ -111,7 +111,7 @@ SELECT CURRENT_ROLE();
 1 row in set (0.00 sec)
 ```
 
-### 現在のユーザー() {#current_user}
+### CURRENT_USER() {#current_user}
 
 `CURRENT_USER()`関数は、現在のセッションで使用されているアカウントを返します。
 
@@ -128,7 +128,7 @@ SELECT CURRENT_USER();
 1 row in set (0.00 sec)
 ```
 
-### データベース() {#database}
+### DATABASE() {#database}
 
 `DATABASE()`関数は、現在のセッションで使用されているデータベース スキーマを返します。
 
@@ -145,7 +145,7 @@ SELECT DATABASE();
 1 row in set (0.00 sec)
 ```
 
-### 見つかった行() {#found_rows}
+### FOUND_ROWS() {#found_rows}
 
 `FOUND_ROWS()`関数は、最後に実行された`SELECT`ステートメントの結果セット内の行数を返します。
 
@@ -180,7 +180,7 @@ SELECT FOUND_ROWS();
 >
 > クエリ修飾子`SQL_CALC_FOUND_ROWS`は、`LIMIT`句を考慮せずに結果セットの合計行数を計算しますが、[`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)が有効な場合にのみ使用できます。このクエリ修飾子は、MySQL 8.0.17 以降では非推奨です。代わりに`COUNT(*)`を使用することをお勧めします。
 
-### 最終挿入ID() {#last_insert_id}
+### LAST_INSERT_ID() {#last_insert_id}
 
 `LAST_INSERT_ID()`関数は、 [`AUTO_INCREMENT`](/auto-increment.md)または[`AUTO_RANDOM`](/auto-random.md)列を含むテーブルに最後に挿入された行の ID を返します。
 
@@ -241,11 +241,11 @@ SELECT ROW_COUNT();
 1 row in set (0.00 sec)
 ```
 
-### スキーマ() {#schema}
+### SCHEMA() {#schema}
 
 `SCHEMA()`関数は[`DATABASE()`](#database)の同義語です。
 
-### セッションユーザー() {#session_user}
+### SESSION_USER() {#session_user}
 
 `SESSION_USER()`関数は[`USER()`](#user)の同義語です。
 
@@ -253,7 +253,7 @@ SELECT ROW_COUNT();
 
 `SYSTEM_USER()`関数は[`USER()`](#user)の同義語です。
 
-### ユーザー（） {#user}
+### USER() {#user}
 
 `USER()`関数は現在の接続のユーザーを返します。`USER()`はワイルドカードではなく実際のIPアドレスを表示するため、 `CURRENT_USER()`の出力とは若干異なる場合があります。
 
@@ -270,7 +270,7 @@ SELECT USER(), CURRENT_USER();
 1 row in set (0.00 sec)
 ```
 
-### バージョン() {#version}
+### VERSION() {#version}
 
 `VERSION()`関数は、MySQLと互換性のある形式でTiDBのバージョンを返します。より詳細な結果を取得するには、 [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version)関数を使用します。
 

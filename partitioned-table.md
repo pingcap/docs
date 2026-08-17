@@ -1108,9 +1108,9 @@ ALTER TABLE example TRUNCATE PARTITION p0;
 Query OK, 0 rows affected (0.03 sec)
 ```
 
-### パーティションテーブルをパーティションテーブルに変換する {#convert-a-partitioned-table-to-a-non-partitioned-table}
+### パーティションテーブルを非パーティションテーブルに変換する {#convert-a-partitioned-table-to-a-non-partitioned-table}
 
-パーティションテーブルをパーティションテーブルに変換するには、次のステートメントを使用できます。このステートメントは、パーティション化を削除し、テーブルのすべての行をコピーし、テーブルのインデックスをオンラインで再作成します。
+パーティションテーブルを非パーティションテーブルに変換するには、次のステートメントを使用できます。このステートメントは、パーティション化を削除し、テーブルのすべての行をコピーし、テーブルのインデックスをオンラインで再作成します。
 
 ```sql
 ALTER TABLE <table_name> REMOVE PARTITIONING
@@ -1753,7 +1753,7 @@ show stats_meta where table_name like "t";
 3 rows in set (0.01 sec)
 ```
 
-グローバルな`dynamic`プルーニングモードを有効にした後、SQLステートメントで使用される統計情報が正しいことを確認するには、テーブルまたはテーブルのパーティションで`analyze`手動でトリガーして、グローバル統計情報を取得する必要があります。
+グローバルな`dynamic`プルーニングモードを有効にした後、SQLステートメントで使用される統計情報が正しいことを確認するには、テーブルまたはテーブルのパーティションで`analyze`を手動でトリガーして、グローバル統計情報を取得する必要があります。
 
 ```sql
 analyze table t partition p1;
