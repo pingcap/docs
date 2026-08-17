@@ -78,25 +78,29 @@ TiKVは、マルチバージョン同時実行制御（MVCC）をサポートし
 
 TiKV MVCCは、キーにバージョン番号を付加することで実装されます。MVCCがない場合、TiKVのキーと値のペアは次のようになります。
 
-    Key1 -> Value
-    Key2 -> Value
-    ……
-    KeyN -> Value
+```
+Key1 -> Value
+Key2 -> Value
+……
+KeyN -> Value
+```
 
 MVCC では、TiKV のキーと値のペアは次のようになります。
 
-    Key1_Version3 -> Value
-    Key1_Version2 -> Value
-    Key1_Version1 -> Value
-    ……
-    Key2_Version4 -> Value
-    Key2_Version3 -> Value
-    Key2_Version2 -> Value
-    Key2_Version1 -> Value
-    ……
-    KeyN_Version2 -> Value
-    KeyN_Version1 -> Value
-    ……
+```
+Key1_Version3 -> Value
+Key1_Version2 -> Value
+Key1_Version1 -> Value
+……
+Key2_Version4 -> Value
+Key2_Version3 -> Value
+Key2_Version2 -> Value
+Key2_Version1 -> Value
+……
+KeyN_Version2 -> Value
+KeyN_Version1 -> Value
+……
+```
 
 同じキーに複数のバージョンがある場合、番号の大きいバージョンが先頭に配置されます（キーの順序については[キーバリュー](#key-value-pairs)セクションを参照）。そのため、Key + VersionでValueを取得すると、MVCCのKeyはKeyとVersionで構築でき、 `Key_Version`になります。その後、RocksDBの`SeekPrefix(Key_Version)` APIを使用して、この`Key_Version`以上の最初の位置を直接見つけることができます。
 

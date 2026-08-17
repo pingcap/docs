@@ -35,24 +35,26 @@ summary: tidbcloud_dedicated_network_container` リソースを使用して、 T
 
 2.  `network_container.tf`ファイルを作成します。
 
-        terraform {
-          required_providers {
-            tidbcloud = {
-              source = "tidbcloud/tidbcloud"
-            }
-          }
+    ```
+    terraform {
+      required_providers {
+        tidbcloud = {
+          source = "tidbcloud/tidbcloud"
         }
+      }
+    }
 
-        provider "tidbcloud" {
-          public_key = "your_public_key"
-          private_key = "your_private_key"
-        }
+    provider "tidbcloud" {
+      public_key = "your_public_key"
+      private_key = "your_private_key"
+    }
 
-        resource "tidbcloud_dedicated_network_container" "example" {
-          project_id = "1372813089454000000"
-          region_id = "aws-ap-northeast-2"
-          cidr_notation = "172.16.16.0/21"
-        }
+    resource "tidbcloud_dedicated_network_container" "example" {
+      project_id = "1372813089454000000"
+      region_id = "aws-ap-northeast-2"
+      cidr_notation = "172.16.16.0/21"
+    }
+    ```
 
     `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
@@ -144,10 +146,12 @@ Terraform によって管理されていないTiDB Cloud Dedicated ネットワ�
 
     次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` `cluster_id,network_container_id`の形式に置き換えます。
 
-        import {
-          to = tidbcloud_dedicated_network_container.example
-          id = "${id}"
-        }
+    ```
+    import {
+      to = tidbcloud_dedicated_network_container.example
+      id = "${id}"
+    }
+    ```
 
 2.  新しい構成ファイルを生成します。
 
@@ -223,4 +227,6 @@ TiDB Cloud Dedicated クラスターを削除するには、 `tidbcloud_dedicate
 
 ここで、 `terraform show`コマンドを実行すると、リソースがクリアされているため、管理対象リソースは表示されません。
 
-    $ terraform show
+```
+$ terraform show
+```

@@ -32,24 +32,26 @@ summary: サーバーレス ブランチ リソースを使用して、 TiDB Clo
 
 2.  `branch.tf`ファイルを作成します。
 
-        terraform {
-          required_providers {
-            tidbcloud = {
-              source = "tidbcloud/tidbcloud"
-            }
-          }
+    ```
+    terraform {
+      required_providers {
+        tidbcloud = {
+          source = "tidbcloud/tidbcloud"
         }
+      }
+    }
 
-        provider "tidbcloud" {
-          public_key = "your_public_key"
-          private_key = "your_private_key"
-        }
+    provider "tidbcloud" {
+      public_key = "your_public_key"
+      private_key = "your_private_key"
+    }
 
-        resource "tidbcloud_serverless_branch" "example" {
-          cluster_id   = 10581524018573000000
-          display_name = "example"
-          parent_id = 10581524018573000000
-        }
+    resource "tidbcloud_serverless_branch" "example" {
+      cluster_id   = 10581524018573000000
+      display_name = "example"
+      parent_id = 10581524018573000000
+    }
+    ```
 
     `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
@@ -166,17 +168,19 @@ Terraform によって管理されていないTiDB Cloud Starter またはTiDB C
 
     次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` `cluster_id,branch_id`の形式に置き換えます。
 
-        import {
-          to = tidbcloud_serverless_branch.example
-          id = "${id}"
-        }
+    ```
+    import {
+      to = tidbcloud_serverless_branch.example
+      id = "${id}"
+    }
+    ```
 
 2.  新しい構成ファイルを生成します。
 
     インポート ブロックに従って、新しい`tidbcloud_serverless_branch`リソースの新しい構成ファイルを生成します。
 
     ```shell
-    terraform plan -generate-config-out=generated.tf
+      terraform plan -generate-config-out=generated.tf
     ```
 
     上記のコマンドでは、既存の`.tf`名を指定しないでください。指定した場合、Terraform はエラーを返します。
@@ -261,4 +265,6 @@ Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
 
 ここで、 `terraform show`コマンドを実行すると、リソースがクリアされているため、管理対象リソースは表示されません。
 
-    $ terraform show
+```
+$ terraform show
+```

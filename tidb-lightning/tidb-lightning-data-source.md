@@ -289,11 +289,13 @@ backslash-escape = true
 
 コンテンツの例:
 
-    ID,Region,Count
-    1,"East",32
-    2,"South",\N
-    3,"West",10
-    4,"North",39
+```
+ID,Region,Count
+1,"East",32
+2,"South",\N
+3,"West",10
+4,"North",39
+```
 
 #### TSV {#tsv}
 
@@ -309,11 +311,13 @@ backslash-escape = false
 
 コンテンツの例:
 
-    ID    Region    Count
-    1     East      32
-    2     South     NULL
-    3     West      10
-    4     North     39
+```
+ID    Region    Count
+1     East      32
+2     South     NULL
+3     West      10
+4     North     39
+```
 
 #### TPC-H DBGEN {#tpc-h-dbgen}
 
@@ -329,10 +333,12 @@ backslash-escape = false
 
 コンテンツの例:
 
-    1|East|32|
-    2|South|0|
-    3|West|10|
-    4|North|39|
+```
+1|East|32|
+2|South|0|
+3|West|10|
+4|North|39|
+```
 
 ## SQL {#sql}
 
@@ -342,12 +348,14 @@ TiDB LightningはSQLファイルを処理する際に、単一のSQLファイル
 
 TiDB Lightningは現在、Amazon Aurora、Apache Hive、Snowflakeによって生成されたParquetファイルのみをサポートしています。S3内のファイル構造を識別するには、以下の設定を使用してすべてのデータファイルを一致させてください。
 
-    [[mydumper.files]]
-    # The expression needed for parsing Amazon Aurora parquet files
-    pattern = '(?i)^(?:[^/]*/)*([a-z0-9\-_]+).([a-z0-9\-_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
-    schema = '$1'
-    table = '$2'
-    type = '$3'
+```
+[[mydumper.files]]
+# The expression needed for parsing Amazon Aurora parquet files
+pattern = '(?i)^(?:[^/]*/)*([a-z0-9\-_]+).([a-z0-9\-_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
+schema = '$1'
+table = '$2'
+type = '$3'
+```
 
 この設定は、 Auroraスナップショットによってエクスポートされた parquet ファイルを一致させる方法のみを示しています。スキーマファイルは別途エクスポートして処理する必要があります。
 

@@ -22,13 +22,15 @@ OLAPシナリオにおける特定のクエリのパフォーマンスを向上�
 EXPLAIN SELECT a, b, c FROM t1 WHERE a < 1;
 ```
 
-    +-------------------------+----------+--------------+---------------+-------------------------------------------------------+
-    | id                      | estRows  | task         | access object | operator info                                         |
-    +-------------------------+----------+--------------+---------------+-------------------------------------------------------+
-    | TableReader_12          | 12288.00 | root         |               | MppVersion: 1, data:ExchangeSender_11                 |
-    | └─ExchangeSender_11     | 12288.00 | mpp[tiflash] |               | ExchangeType: PassThrough                             |
-    |   └─TableFullScan_9     | 12288.00 | mpp[tiflash] | table:t1      | pushed down filter:lt(test.t1.a, 1), keep order:false |
-    +-------------------------+----------+--------------+---------------+-------------------------------------------------------+
+```
++-------------------------+----------+--------------+---------------+-------------------------------------------------------+
+| id                      | estRows  | task         | access object | operator info                                         |
++-------------------------+----------+--------------+---------------+-------------------------------------------------------+
+| TableReader_12          | 12288.00 | root         |               | MppVersion: 1, data:ExchangeSender_11                 |
+| └─ExchangeSender_11     | 12288.00 | mpp[tiflash] |               | ExchangeType: PassThrough                             |
+|   └─TableFullScan_9     | 12288.00 | mpp[tiflash] | table:t1      | pushed down filter:lt(test.t1.a, 1), keep order:false |
++-------------------------+----------+--------------+---------------+-------------------------------------------------------+
+```
 
 この例では、フィルタ条件`a < 1`は TableScan演算子にプッシュダウンされます。TiFlashはまず列`a`からすべてのデータを読み取り、次に条件`a < 1`を満たす行をフィルタリングします。次に、 TiFlashはフィルタリングされた行から列`b`と`c`を読み取ります。
 
@@ -40,21 +42,25 @@ EXPLAIN SELECT a, b, c FROM t1 WHERE a < 1;
 SHOW VARIABLES LIKE 'tidb_opt_enable_late_materialization';
 ```
 
-    +--------------------------------------+-------+
-    | Variable_name                        | Value |
-    +--------------------------------------+-------+
-    | tidb_opt_enable_late_materialization | ON    |
-    +--------------------------------------+-------+
+```
++--------------------------------------+-------+
+| Variable_name                        | Value |
++--------------------------------------+-------+
+| tidb_opt_enable_late_materialization | ON    |
++--------------------------------------+-------+
+```
 
 ```sql
 SHOW GLOBAL VARIABLES LIKE 'tidb_opt_enable_late_materialization';
 ```
 
-    +--------------------------------------+-------+
-    | Variable_name                        | Value |
-    +--------------------------------------+-------+
-    | tidb_opt_enable_late_materialization | ON    |
-    +--------------------------------------+-------+
+```
++--------------------------------------+-------+
+| Variable_name                        | Value |
++--------------------------------------+-------+
+| tidb_opt_enable_late_materialization | ON    |
++--------------------------------------+-------+
+```
 
 `tidb_opt_enable_late_materialization`変数は、セッション レベルまたはグローバル レベルで変更できます。
 

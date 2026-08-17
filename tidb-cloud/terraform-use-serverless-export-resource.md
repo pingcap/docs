@@ -32,22 +32,24 @@ summary: tidbcloud_serverless_export` リソースを使用して、 TiDB Cloud 
 
     以下は`export.tf`ファイルの例です。
 
-        terraform {
-          required_providers {
-            tidbcloud = {
-              source = "tidbcloud/tidbcloud"
-            }
-          }
+    ```
+    terraform {
+      required_providers {
+        tidbcloud = {
+          source = "tidbcloud/tidbcloud"
         }
+      }
+    }
 
-        provider "tidbcloud" {
-          public_key = "your_public_key"
-          private_key = "your_private_key"
-        }
+    provider "tidbcloud" {
+      public_key = "your_public_key"
+      private_key = "your_private_key"
+    }
 
-        resource "tidbcloud_serverless_export" "example" {
-          cluster_id   = 10476959660988000000
-        }
+    resource "tidbcloud_serverless_export" "example" {
+      cluster_id   = 10476959660988000000
+    }
+    ```
 
     `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
@@ -148,17 +150,19 @@ TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータ エ
 
     次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` `cluster_id,export_id`の形式に置き換えます。
 
-        import {
-          to = tidbcloud_serverless_export.example
-          id = "${id}"
-        }
+    ```
+    import {
+      to = tidbcloud_serverless_export.example
+      id = "${id}"
+    }
+    ```
 
 2.  新しい構成ファイルを生成します。
 
     インポート ブロックに従って、新しいサーバーレス エクスポート リソースの新しい構成ファイルを生成します。
 
     ```shell
-    terraform plan -generate-config-out=generated.tf
+      terraform plan -generate-config-out=generated.tf
     ```
 
     上記のコマンドでは、既存の`.tf`名を指定しないでください。指定した場合、Terraform はエラーを返します。
@@ -226,4 +230,6 @@ Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
 
 ここで、 `terraform show`コマンドを実行すると、リソースがクリアされているため、管理対象リソースは表示されません。
 
-    $ terraform show
+```
+$ terraform show
+```

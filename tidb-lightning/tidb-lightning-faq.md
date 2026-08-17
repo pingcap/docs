@@ -38,12 +38,14 @@ TiDB Lightningはデフォルトで、ローカルデータソースとインポ
 ADMIN CHECKSUM TABLE `schema`.`table`;
 ```
 
-    +---------+------------+---------------------+-----------+-------------+
-    | Db_name | Table_name | Checksum_crc64_xor  | Total_kvs | Total_bytes |
-    +---------+------------+---------------------+-----------+-------------+
-    | schema  | table      | 5505282386844578743 |         3 |          96 |
-    +---------+------------+---------------------+-----------+-------------+
-    1 row in set (0.01 sec)
+```
++---------+------------+---------------------+-----------+-------------+
+| Db_name | Table_name | Checksum_crc64_xor  | Total_kvs | Total_bytes |
++---------+------------+---------------------+-----------+-------------+
+| schema  | table      | 5505282386844578743 |         3 |          96 |
++---------+------------+---------------------+-----------+-------------+
+1 row in set (0.01 sec)
+```
 
 ## TiDB Lightningではどのようなデータ ソース形式がサポートされていますか? {#what-kinds-of-data-source-formats-are-supported-by-tidb-lightning}
 
@@ -172,7 +174,9 @@ TiDB LightningでSQLの配置ルールを使用するには、データをター
 
 1.  必要なスキーマのみを選択するには、 `-B test`を使用して元のスキーマのバックアップを作成します。
 
-        tiup dumpling -B test -o /tmp/bck1
+    ```
+    tiup dumpling -B test -o /tmp/bck1
+    ```
 
 2.  次の内容のファイルを`/tmp/tidb-lightning.toml`に作成します。
 
@@ -205,4 +209,6 @@ TiDB LightningでSQLの配置ルールを使用するには、データをター
 
 3.  この構成ファイルを使用してインポートを実行します。
 
-        tiup tidb-lightning -config /tmp/tidb-lightning.toml
+    ```
+    tiup tidb-lightning -config /tmp/tidb-lightning.toml
+    ```
