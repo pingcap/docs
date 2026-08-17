@@ -1,9 +1,9 @@
 ---
-title: Load Data wih dbt
+title: Load Data with dbt
 summary: dbt is a transformation workflow that helps you get more work done while producing higher quality results. You can use dbt to modularize and centralize your analytics code, while also providing your data team with guardrails typically found in software engineering workflows. Collaborate on data models, version them, and test and document your queries before safely deploying them to production, with monitoring and visibility.
 ---
 
-# Load Data wih dbt
+# Load Data with dbt
 
 [dbt](https://www.getdbt.com/) is a transformation workflow that helps you get more work done while producing higher quality results. You can use dbt to modularize and centralize your analytics code, while also providing your data team with guardrails typically found in software engineering workflows. Collaborate on data models, version them, and test and document your queries before safely deploying them to production, with monitoring and visibility.
 
