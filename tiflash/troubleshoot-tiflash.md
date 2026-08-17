@@ -79,26 +79,28 @@ TiFlashのワークロードが大きすぎてTiFlashデータのレプリケー
         curl http://<pd_ip>:<pd_port>/pd/api/v1/config/rules/group/tiflash
         ```
 
-            [
+        ```
+        [
+          {
+            "group_id": "tiflash",
+            "id": "table-45-r",
+            "override": true,
+            "start_key": "7480000000000000FF2D5F720000000000FA",
+            "end_key": "7480000000000000FF2E00000000000000F8",
+            "role": "learner",
+            "count": 1,
+            "label_constraints": [
               {
-                "group_id": "tiflash",
-                "id": "table-45-r",
-                "override": true,
-                "start_key": "7480000000000000FF2D5F720000000000FA",
-                "end_key": "7480000000000000FF2E00000000000000F8",
-                "role": "learner",
-                "count": 1,
-                "label_constraints": [
-                  {
-                    "key": "engine",
-                    "op": "in",
-                    "values": [
-                      "tiflash"
-                    ]
-                  }
+                "key": "engine",
+                "op": "in",
+                "values": [
+                  "tiflash"
                 ]
               }
             ]
+          }
+        ]
+        ```
 
     2.  TiFlashに関連するすべてのデータ複製ルールを削除します。例えば、 `id`が`table-45-r`であるルールを例に挙げます。以下のコマンドで削除します。
 
@@ -121,11 +123,13 @@ show warnings;
 
 この例では、警告メッセージは、TiDB 5.4 以前のバージョンでは`subtime`関数がサポートされていないため、TiDB が MPP モードを選択しないことを示しています。
 
-    +---------+------+-----------------------------------------------------------------------------+
-    | Level   | Code | Message                                                                     |
-    +---------+------+-----------------------------------------------------------------------------+
-    | Warning | 1105 | Scalar function 'subtime'(signature: SubDatetimeAndString, return type: datetime) is not supported to push down to tiflash now.       |
-    +---------+------+-----------------------------------------------------------------------------+
+```
++---------+------+-----------------------------------------------------------------------------+
+| Level   | Code | Message                                                                     |
++---------+------+-----------------------------------------------------------------------------+
+| Warning | 1105 | Scalar function 'subtime'(signature: SubDatetimeAndString, return type: datetime) is not supported to push down to tiflash now.       |
++---------+------+-----------------------------------------------------------------------------+
+```
 
 ## TiFlashレプリカは常に利用できません {#tiflash-replica-is-always-unavailable}
 
@@ -186,7 +190,9 @@ TiDB クラスターを展開した後、 TiFlashレプリカの作成が継続�
 
         -   値を`low-space-ratio`に変更すると、PD は新しいしきい値に達するまでTiFlashノードへのリージョンのスケジュールを再開できるようになります。
 
-                tiup ctl:nightly pd -u http://${pd-ip}:${pd-port} config set low-space-ratio 0.9
+            ```
+            tiup ctl:nightly pd -u http://${pd-ip}:${pd-port} config set low-space-ratio 0.9
+            ```
 
         -   新しいTiFlashノードをスケールアウトします。PD はTiFlashノード間でリージョンのバランスを自動的に取り、十分なディスク容量を持つTiFlashノードへのリージョンのスケジュールを再開します。
 

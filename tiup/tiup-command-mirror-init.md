@@ -7,16 +7,18 @@ summary: tiup mirror init` コマンドは空のミラーを初期化し、root.
 
 コマンド`tiup mirror init`空のミラーを初期化するために使用されます。初期化されたミラーには、コンポーネントやコンポーネントの所有者は含まれません。このコマンドは、初期化されたミラーに対して以下のファイルのみを生成します。
 
-    + <mirror-dir>                                  # Mirror's root directory
-    |-- root.json                                   # Mirror's root certificate
-    |-- 1.index.json                                # Component/user index
-    |-- snapshot.json                               # Mirror's latest snapshot
-    |-- timestamp.json                              # Mirror's latest timestamp
-    |--+ keys                                       # Mirror's private key (can be moved to other locations)
-       |-- {hash1..hashN}-root.json                 # Private key of the root certificate
-       |-- {hash}-index.json                        # Private key of the indexes
-       |-- {hash}-snapshot.json                     # Private key of the snapshots
-       |-- {hash}-timestamp.json                    # Private key of the timestamps
+```
++ <mirror-dir>                                  # Mirror's root directory
+|-- root.json                                   # Mirror's root certificate
+|-- 1.index.json                                # Component/user index
+|-- snapshot.json                               # Mirror's latest snapshot
+|-- timestamp.json                              # Mirror's latest timestamp
+|--+ keys                                       # Mirror's private key (can be moved to other locations)
+   |-- {hash1..hashN}-root.json                 # Private key of the root certificate
+   |-- {hash}-index.json                        # Private key of the indexes
+   |-- {hash}-snapshot.json                     # Private key of the snapshots
+   |-- {hash}-timestamp.json                    # Private key of the timestamps
+```
 
 上記ファイルの具体的な使用方法や内容の形式については、 [TiUPミラーリファレンスガイド](/tiup/tiup-mirror-reference.md)を参照してください。
 

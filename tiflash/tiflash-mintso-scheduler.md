@@ -27,22 +27,24 @@ MPPクエリを処理する際、TiDBはクエリを1つ以上のMPPタスクに
 EXPLAIN SELECT count(*) FROM t0 a JOIN t0 b ON a.id = b.id;
 ```
 
-    +--------------------------------------------+----------+--------------+---------------+----------------------------------------------------------+
-    | id                                         | estRows  | task         | access object | operator info                                            |
-    +--------------------------------------------+----------+--------------+---------------+----------------------------------------------------------+
-    | HashAgg_44                                 | 1.00     | root         |               | funcs:count(Column#8)->Column#7                          |
-    | └─TableReader_46                           | 1.00     | root         |               | MppVersion: 2, data:ExchangeSender_45                    |
-    |   └─ExchangeSender_45                      | 1.00     | mpp[tiflash] |               | ExchangeType: PassThrough                                |
-    |     └─HashAgg_13                           | 1.00     | mpp[tiflash] |               | funcs:count(1)->Column#8                                 |
-    |       └─Projection_43                      | 12487.50 | mpp[tiflash] |               | test.t0.id                                               |
-    |         └─HashJoin_42                      | 12487.50 | mpp[tiflash] |               | inner join, equal:[eq(test.t0.id, test.t0.id)]           |
-    |           ├─ExchangeReceiver_22(Build)     | 9990.00  | mpp[tiflash] |               |                                                          |
-    |           │ └─ExchangeSender_21            | 9990.00  | mpp[tiflash] |               | ExchangeType: Broadcast, Compression: FAST               |
-    |           │   └─Selection_20               | 9990.00  | mpp[tiflash] |               | not(isnull(test.t0.id))                                  |
-    |           │     └─TableFullScan_19         | 10000.00 | mpp[tiflash] | table:a       | pushed down filter:empty, keep order:false, stats:pseudo |
-    |           └─Selection_24(Probe)            | 9990.00  | mpp[tiflash] |               | not(isnull(test.t0.id))                                  |
-    |             └─TableFullScan_23             | 10000.00 | mpp[tiflash] | table:b       | pushed down filter:empty, keep order:false, stats:pseudo |
-    +--------------------------------------------+----------+--------------+---------------+----------------------------------------------------------+
+```
++--------------------------------------------+----------+--------------+---------------+----------------------------------------------------------+
+| id                                         | estRows  | task         | access object | operator info                                            |
++--------------------------------------------+----------+--------------+---------------+----------------------------------------------------------+
+| HashAgg_44                                 | 1.00     | root         |               | funcs:count(Column#8)->Column#7                          |
+| └─TableReader_46                           | 1.00     | root         |               | MppVersion: 2, data:ExchangeSender_45                    |
+|   └─ExchangeSender_45                      | 1.00     | mpp[tiflash] |               | ExchangeType: PassThrough                                |
+|     └─HashAgg_13                           | 1.00     | mpp[tiflash] |               | funcs:count(1)->Column#8                                 |
+|       └─Projection_43                      | 12487.50 | mpp[tiflash] |               | test.t0.id                                               |
+|         └─HashJoin_42                      | 12487.50 | mpp[tiflash] |               | inner join, equal:[eq(test.t0.id, test.t0.id)]           |
+|           ├─ExchangeReceiver_22(Build)     | 9990.00  | mpp[tiflash] |               |                                                          |
+|           │ └─ExchangeSender_21            | 9990.00  | mpp[tiflash] |               | ExchangeType: Broadcast, Compression: FAST               |
+|           │   └─Selection_20               | 9990.00  | mpp[tiflash] |               | not(isnull(test.t0.id))                                  |
+|           │     └─TableFullScan_19         | 10000.00 | mpp[tiflash] | table:a       | pushed down filter:empty, keep order:false, stats:pseudo |
+|           └─Selection_24(Probe)            | 9990.00  | mpp[tiflash] |               | not(isnull(test.t0.id))                                  |
+|             └─TableFullScan_23             | 10000.00 | mpp[tiflash] | table:b       | pushed down filter:empty, keep order:false, stats:pseudo |
++--------------------------------------------+----------+--------------+---------------+----------------------------------------------------------+
+```
 
 例えば、上記のクエリは各TiFlashノードに2つのMPPタスクを生成しますが、 `ExchangeSender_45`のエグゼキューターを含むMPPタスクは`ExchangeSender_21`エグゼキューターを含むMPPタスクに依存しています。同時実行性の高いシナリオでは、スケジューラーが各クエリに対して`ExchangeSender_45`のエグゼキューターを含むMPPタスクをスケジュールすると、システムはデッドロック状態になります。
 

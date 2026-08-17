@@ -27,7 +27,9 @@ summary: TiUPを使用してTiDBをアップグレードする方法を学びま
 >
 >     -   `performance.force-init-stats`設定項目の値を確認してください。
 >
->             SHOW CONFIG WHERE type = 'tidb' AND name = 'performance.force-init-stats';
+>         ```
+>         SHOW CONFIG WHERE type = 'tidb' AND name = 'performance.force-init-stats';
+>         ```
 >
 >     -   TiUPの待機タイムアウトは、コマンドラインオプション[`--wait-timeout`](/tiup/tiup-component-cluster.md#--wait-timeout)を追加することで延長できます。例えば、以下のコマンドを実行すると、待機タイムアウトを1200秒（20分）に設定できます。
 >
@@ -37,7 +39,9 @@ summary: TiUPを使用してTiDBをアップグレードする方法を学びま
 >
 >         一般的に、ほとんどのシナリオでは20分の待機タイムアウトで十分です。より正確な見積もりについては、TiDBログで`init stats info time`を検索して、前回の起動時の統計読み込み時間を参考にしてください。例：
 >
->             [domain.go:2271] ["init stats info time"] [lite=true] ["take time"=2.151333ms]
+>         ```
+>         [domain.go:2271] ["init stats info time"] [lite=true] ["take time"=2.151333ms]
+>         ```
 >
 >         元のクラスターが v7.1.0 以前の場合、v7.2.0 以降にアップグレードすると、 [`performance.lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)の導入により、統計情報の読み込み時間が大幅に短縮されます。この場合、アップグレード前の`init stats info time`は、アップグレード後の読み込み時間よりも長くなります。
 >
@@ -258,9 +262,11 @@ tiup cluster upgrade -h | grep "version"
 tiup cluster display <cluster-name>
 ```
 
-    Cluster type:       tidb
-    Cluster name:       <cluster-name>
-    Cluster version:    v8.5.4
+```
+Cluster type:       tidb
+Cluster name:       <cluster-name>
+Cluster version:    v8.5.4
+```
 
 ## FAQ {#faq}
 

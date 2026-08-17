@@ -179,25 +179,27 @@ TiDBはTTLに関する実行時情報を定期的に収集し、Grafanaでこれ
     TABLE mysql.tidb_ttl_table_status LIMIT 1\G
     ```
 
-        *************************** 1. row ***************************
-                              table_id: 85
-                       parent_table_id: 85
-                      table_statistics: NULL
-                           last_job_id: 0b4a6d50-3041-4664-9516-5525ee6d9f90
-                   last_job_start_time: 2023-02-15 20:43:46
-                  last_job_finish_time: 2023-02-15 20:44:46
-                   last_job_ttl_expire: 2023-02-15 19:43:46
-                      last_job_summary: {"total_rows":4369519,"success_rows":4369519,"error_rows":0,"total_scan_task":64,"scheduled_scan_task":64,"finished_scan_task":64}
-                        current_job_id: NULL
-                  current_job_owner_id: NULL
-                current_job_owner_addr: NULL
-             current_job_owner_hb_time: NULL
-                current_job_start_time: NULL
-                current_job_ttl_expire: NULL
-                     current_job_state: NULL
-                    current_job_status: NULL
-        current_job_status_update_time: NULL
-        1 row in set (0.040 sec)
+    ```
+    *************************** 1. row ***************************
+                          table_id: 85
+                   parent_table_id: 85
+                  table_statistics: NULL
+                       last_job_id: 0b4a6d50-3041-4664-9516-5525ee6d9f90
+               last_job_start_time: 2023-02-15 20:43:46
+              last_job_finish_time: 2023-02-15 20:44:46
+               last_job_ttl_expire: 2023-02-15 19:43:46
+                  last_job_summary: {"total_rows":4369519,"success_rows":4369519,"error_rows":0,"total_scan_task":64,"scheduled_scan_task":64,"finished_scan_task":64}
+                    current_job_id: NULL
+              current_job_owner_id: NULL
+            current_job_owner_addr: NULL
+         current_job_owner_hb_time: NULL
+            current_job_start_time: NULL
+            current_job_ttl_expire: NULL
+                 current_job_state: NULL
+                current_job_status: NULL
+    current_job_status_update_time: NULL
+    1 row in set (0.040 sec)
+    ```
 
     列`table_id`はパーティションテーブルの ID であり、列`parent_table_id`はテーブルの ID で、列[`information_schema.tables`](/information-schema/information-schema-tables.md)の ID に対応します。テーブルがパーティションテーブルでない場合、2 つの ID は同じになります。
 
@@ -211,21 +213,23 @@ TiDBはTTLに関する実行時情報を定期的に収集し、Grafanaでこれ
     TABLE mysql.tidb_ttl_job_history LIMIT 1\G
     ```
 
-        *************************** 1. row ***************************
-                   job_id: f221620c-ab84-4a28-9d24-b47ca2b5a301
-                 table_id: 85
-          parent_table_id: 85
-             table_schema: test_schema
-               table_name: TestTable
-           partition_name: NULL
-              create_time: 2023-02-15 17:43:46
-              finish_time: 2023-02-15 17:45:46
-               ttl_expire: 2023-02-15 16:43:46
-             summary_text: {"total_rows":9588419,"success_rows":9588419,"error_rows":0,"total_scan_task":63,"scheduled_scan_task":63,"finished_scan_task":63}
-             expired_rows: 9588419
-             deleted_rows: 9588419
-        error_delete_rows: 0
-                   status: finished
+    ```
+    *************************** 1. row ***************************
+               job_id: f221620c-ab84-4a28-9d24-b47ca2b5a301
+             table_id: 85
+      parent_table_id: 85
+         table_schema: test_schema
+           table_name: TestTable
+       partition_name: NULL
+          create_time: 2023-02-15 17:43:46
+          finish_time: 2023-02-15 17:45:46
+           ttl_expire: 2023-02-15 16:43:46
+         summary_text: {"total_rows":9588419,"success_rows":9588419,"error_rows":0,"total_scan_task":63,"scheduled_scan_task":63,"finished_scan_task":63}
+         expired_rows: 9588419
+         deleted_rows: 9588419
+    error_delete_rows: 0
+               status: finished
+    ```
 
     列`table_id`はパーティションテーブルの ID であり、 `parent_table_id`はテーブルの ID で、 `information_schema.tables`の ID に対応します。 `table_schema` 、 `table_name` 、および`partition_name` 、データベース、テーブル名、およびパーティション名に対応します。 `create_time` 、 `finish_time` 、および`ttl_expire` 、TTL タスクの作成時刻、終了時刻、および有効期限を示します。 `expired_rows`と`deleted_rows` 、期限切れの行数と正常に削除された行数を示します。
 

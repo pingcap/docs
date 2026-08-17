@@ -17,26 +17,30 @@ TiFlashレプリカを持つテーブルの場合、TiDBオプティマイザー
 desc select count(*) from test.t;
 ```
 
-    +--------------------------+---------+--------------+---------------+--------------------------------+
-    | id                       | estRows | task         | access object | operator info                  |
-    +--------------------------+---------+--------------+---------------+--------------------------------+
-    | StreamAgg_9              | 1.00    | root         |               | funcs:count(1)->Column#4       |
-    | └─TableReader_17         | 1.00    | root         |               | data:TableFullScan_16          |
-    |   └─TableFullScan_16     | 1.00    | cop[tiflash] | table:t       | keep order:false, stats:pseudo |
-    +--------------------------+---------+--------------+---------------+--------------------------------+
-    3 rows in set (0.00 sec)
+```
++--------------------------+---------+--------------+---------------+--------------------------------+
+| id                       | estRows | task         | access object | operator info                  |
++--------------------------+---------+--------------+---------------+--------------------------------+
+| StreamAgg_9              | 1.00    | root         |               | funcs:count(1)->Column#4       |
+| └─TableReader_17         | 1.00    | root         |               | data:TableFullScan_16          |
+|   └─TableFullScan_16     | 1.00    | cop[tiflash] | table:t       | keep order:false, stats:pseudo |
++--------------------------+---------+--------------+---------------+--------------------------------+
+3 rows in set (0.00 sec)
+```
 
 ```sql
 explain analyze select count(*) from test.t;
 ```
 
-    +--------------------------+---------+---------+--------------+---------------+----------------------------------------------------------------------+--------------------------------+-----------+------+
-    | id                       | estRows | actRows | task         | access object | execution info                                                       | operator info                  | memory    | disk |
-    +--------------------------+---------+---------+--------------+---------------+----------------------------------------------------------------------+--------------------------------+-----------+------+
-    | StreamAgg_9              | 1.00    | 1       | root         |               | time:83.8372ms, loops:2                                              | funcs:count(1)->Column#4       | 372 Bytes | N/A  |
-    | └─TableReader_17         | 1.00    | 1       | root         |               | time:83.7776ms, loops:2, rpc num: 1, rpc time:83.5701ms, proc keys:0 | data:TableFullScan_16          | 152 Bytes | N/A  |
-    |   └─TableFullScan_16     | 1.00    | 1       | cop[tiflash] | table:t       | tiflash_task:{time:43ms, loops:1, threads:1}, tiflash_scan:{...}     | keep order:false, stats:pseudo | N/A       | N/A  |
-    +--------------------------+---------+---------+--------------+---------------+----------------------------------------------------------------------+--------------------------------+-----------+------+
+```
++--------------------------+---------+---------+--------------+---------------+----------------------------------------------------------------------+--------------------------------+-----------+------+
+| id                       | estRows | actRows | task         | access object | execution info                                                       | operator info                  | memory    | disk |
++--------------------------+---------+---------+--------------+---------------+----------------------------------------------------------------------+--------------------------------+-----------+------+
+| StreamAgg_9              | 1.00    | 1       | root         |               | time:83.8372ms, loops:2                                              | funcs:count(1)->Column#4       | 372 Bytes | N/A  |
+| └─TableReader_17         | 1.00    | 1       | root         |               | time:83.7776ms, loops:2, rpc num: 1, rpc time:83.5701ms, proc keys:0 | data:TableFullScan_16          | 152 Bytes | N/A  |
+|   └─TableFullScan_16     | 1.00    | 1       | cop[tiflash] | table:t       | tiflash_task:{time:43ms, loops:1, threads:1}, tiflash_scan:{...}     | keep order:false, stats:pseudo | N/A       | N/A  |
++--------------------------+---------+---------+--------------+---------------+----------------------------------------------------------------------+--------------------------------+-----------+------+
+```
 
 `cop[tiflash]`は、タスクが処理のためにTiFlashに送信されることを意味します。TiFlash レプリカを選択していない場合は、 `analyze table`ステートメントを使用して統計情報を更新し、 `explain analyze`ステートメントを使用して結果を確認できます。
 
@@ -52,8 +56,10 @@ explain analyze select count(*) from test.t;
 
 -   TiDBインスタンスレベル、つまりINSTANCEレベル。TiDB設定ファイルに以下の設定項目を追加します。
 
-        [isolation-read]
-        engines = ["tikv", "tidb", "tiflash"]
+    ```
+    [isolation-read]
+    engines = ["tikv", "tidb", "tiflash"]
+    ```
 
     **INSTANCE レベルのデフォルト設定は`["tikv", "tidb", "tiflash"]`です。**
 

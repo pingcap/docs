@@ -28,11 +28,15 @@ tiup mirror set <mirror-addr> [flags]
 
 ミラーセキュリティにおいて最も重要な要素として、各ミラーのルート証明書は互いに異なります。ネットワークミラーを使用すると、中間者攻撃の被害を受ける可能性があります。このような攻撃を回避するには、ルートネットワークミラーのルート証明書を手動でローカルにダウンロードすることをお勧めします。
 
-    wget <mirror-addr>/root.json -O /path/to/local/root.json
+```
+wget <mirror-addr>/root.json -O /path/to/local/root.json
+```
 
 手動でチェックを実行してルート証明書が正しいことを確認し、ルート証明書を手動で指定してミラーを切り替えます。
 
-    tiup mirror set <mirror-addr> -r /path/to/local/root.json
+```
+tiup mirror set <mirror-addr> -r /path/to/local/root.json
+```
 
 上記の手順では、 `wget`コマンドの前にミラーが攻撃された場合、ルート証明書が正しくないことが分かります。`wget`コマンドの後にミラーが攻撃された場合、 TiUPはミラーがルート証明書と一致しないことを検出します。
 

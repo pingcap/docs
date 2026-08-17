@@ -46,54 +46,56 @@ TiUPエコシステムでは、任意のコマンドに`--help`を追加する�
 tiup --help
 ```
 
-    TiUP is a command-line component management tool that can help to download and install
-    TiDB platform components to the local system. You can run a specific version of a component via
-    "tiup <component>[:version]". If no version number is specified, the latest version installed
-    locally will be used. If the specified component does not have any version installed locally,
-    the latest stable version will be downloaded from the repository.
+```
+TiUP is a command-line component management tool that can help to download and install
+TiDB platform components to the local system. You can run a specific version of a component via
+"tiup <component>[:version]". If no version number is specified, the latest version installed
+locally will be used. If the specified component does not have any version installed locally,
+the latest stable version will be downloaded from the repository.
 
-    Usage:
-      tiup [flags] <command> [args...]
-      tiup [flags] <component> [args...]
-      tiup [command]
+Usage:
+  tiup [flags] <command> [args...]
+  tiup [flags] <component> [args...]
+  tiup [command]
 
-    Examples:
-      $ tiup playground                    # Quick start
-      $ tiup playground nightly            # Start a playground with the latest nightly version
-      $ tiup install <component>[:version] # Install a component of specific version
-      $ tiup update --all                  # Update all installed components to the latest version
-      $ tiup update --nightly              # Update all installed components to the nightly version
-      $ tiup update --self                 # Update the "tiup" to the latest version
-      $ tiup list                          # Fetch the latest supported components list
-      $ tiup status                        # Display all running/terminated instances
-      $ tiup clean <name>                  # Clean the data of running/terminated instance (Kill process if it's running)
-      $ tiup clean --all                   # Clean the data of all running/terminated instances
+Examples:
+  $ tiup playground                    # Quick start
+  $ tiup playground nightly            # Start a playground with the latest nightly version
+  $ tiup install <component>[:version] # Install a component of specific version
+  $ tiup update --all                  # Update all installed components to the latest version
+  $ tiup update --nightly              # Update all installed components to the nightly version
+  $ tiup update --self                 # Update the "tiup" to the latest version
+  $ tiup list                          # Fetch the latest supported components list
+  $ tiup status                        # Display all running/terminated instances
+  $ tiup clean <name>                  # Clean the data of running/terminated instance (Kill process if it's running)
+  $ tiup clean --all                   # Clean the data of all running/terminated instances
 
-    Available Commands:
-      install     Install a specific version of a component
-      list        List the available TiDB components or versions
-      uninstall   Uninstall components or versions of a component
-      update      Update tiup components to the latest version
-      status      List the status of instantiated components
-      clean       Clean the data of instantiated components
-      mirror      Manage a repository mirror for TiUP components
-      telemetry   Controls things about telemetry
-      env         Show the list of system environment variable that related to TiUP
-      history     Display the historical execution record of TiUP, displays 100 lines by default
-      link        Link component binary to $TIUP_HOME/bin/
-      unlink      Unlink component binary to $TIUP_HOME/bin/
-      help        Help about any command
-      completion  Generate the autocompletion script for the specified shell
+Available Commands:
+  install     Install a specific version of a component
+  list        List the available TiDB components or versions
+  uninstall   Uninstall components or versions of a component
+  update      Update tiup components to the latest version
+  status      List the status of instantiated components
+  clean       Clean the data of instantiated components
+  mirror      Manage a repository mirror for TiUP components
+  telemetry   Controls things about telemetry
+  env         Show the list of system environment variable that related to TiUP
+  history     Display the historical execution record of TiUP, displays 100 lines by default
+  link        Link component binary to $TIUP_HOME/bin/
+  unlink      Unlink component binary to $TIUP_HOME/bin/
+  help        Help about any command
+  completion  Generate the autocompletion script for the specified shell
 
-    Flags:
-          --binary <component>[:version]   Print binary path of a specific version of a component <component>[:version]
-                                           and the latest version installed will be selected if no version specified
-          --binpath string                 Specify the binary path of component instance
-      -h, --help                           help for tiup
-      -T, --tag string                     [Deprecated] Specify a tag for component instance
-      -v, --version                        Print the version of tiup
+Flags:
+      --binary <component>[:version]   Print binary path of a specific version of a component <component>[:version]
+                                       and the latest version installed will be selected if no version specified
+      --binpath string                 Specify the binary path of component instance
+  -h, --help                           help for tiup
+  -T, --tag string                     [Deprecated] Specify a tag for component instance
+  -v, --version                        Print the version of tiup
 
-    Use "tiup [command] --help" for more information about a command.
+Use "tiup [command] --help" for more information about a command.
+```
 
 出力は長くなりますが、次の 2 つの部分だけに注目してください。
 

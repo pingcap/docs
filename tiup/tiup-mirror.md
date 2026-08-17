@@ -187,9 +187,11 @@ tiup mirror grant jdoe
     $ tiup hello
     ```
 
-        The component `hello` version  is not installed; downloading from repository.
-        Starting component `hello`: /home/dvaneeden/.tiup/components/hello/v0.0.1/hello
-        hello
+    ```
+    The component `hello` version  is not installed; downloading from repository.
+    Starting component `hello`: /home/dvaneeden/.tiup/components/hello/v0.0.1/hello
+    hello
+    ```
 
     `tiup mirror merge`を使用すると、カスタムコンポーネントを含むリポジトリを別のリポジトリにマージできます。これは、 `/data/my_custom_components`内のすべてのコンポーネントが現在の`$USER`によって署名されていることを前提としています。
 

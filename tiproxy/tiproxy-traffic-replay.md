@@ -98,15 +98,17 @@ TiProxy v1.3.0以降では、TiProxyを使用してTiDB本番クラスタのア�
     SELECT * FROM tiproxy_traffic_replay.fail LIMIT 1\G
     ```
 
-        *************************** 1. row ***************************
-                   cmd_type: StmtExecute
-                     digest: 89c5c505772b8b7e8d5d1eb49f4d47ed914daa2663ed24a85f762daa3cdff43c
-                sample_stmt: INSERT INTO new_order (no_o_id, no_d_id, no_w_id) VALUES (?, ?, ?) params=[3077 6 1]
-             sample_err_msg: ERROR 1062 (23000): Duplicate entry '1-6-3077' for key 'new_order.PRIMARY'
-             sample_conn_id: 1356
-        sample_capture_time: 2024-10-17 12:59:15
-         sample_replay_time: 2024-10-17 13:05:05
-                      count: 4
+    ```
+    *************************** 1. row ***************************
+               cmd_type: StmtExecute
+                 digest: 89c5c505772b8b7e8d5d1eb49f4d47ed914daa2663ed24a85f762daa3cdff43c
+            sample_stmt: INSERT INTO new_order (no_o_id, no_d_id, no_w_id) VALUES (?, ?, ?) params=[3077 6 1]
+         sample_err_msg: ERROR 1062 (23000): Duplicate entry '1-6-3077' for key 'new_order.PRIMARY'
+         sample_conn_id: 1356
+    sample_capture_time: 2024-10-17 12:59:15
+     sample_replay_time: 2024-10-17 13:05:05
+                  count: 4
+    ```
 
     `other_errors`テーブルには、ネットワーク エラーやデータベース接続エラーなどの予期しないエラーが次のフィールドに格納されます。
 
@@ -121,11 +123,13 @@ TiProxy v1.3.0以降では、TiProxyを使用してTiDB本番クラスタのア�
     SELECT * FROM tiproxy_traffic_replay.other_errors LIMIT 1\G
     ```
 
-        *************************** 1. row ***************************
-                  err_type: failed to read the connection: EOF
-            sample_err_msg: this is an error from the backend connection: failed to read the connection: EOF
-        sample_replay_time: 2024-10-17 12:57:39
-                     count: 1
+    ```
+    *************************** 1. row ***************************
+              err_type: failed to read the connection: EOF
+        sample_err_msg: this is an error from the backend connection: failed to read the connection: EOF
+    sample_replay_time: 2024-10-17 12:57:39
+                 count: 1
+    ```
 
     > **Note:**
     >

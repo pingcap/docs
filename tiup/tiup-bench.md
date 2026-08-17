@@ -17,28 +17,30 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
 
 `tpcc` 、 `tpch` 、 `ch` 、 `rawsql`は以下の共通コマンドフラグを共有します。ただし、 `ycsb`は主に`.properties`ファイルによって設定され、その[使用ガイド](https://github.com/pingcap/go-ycsb#usage)に記述されています。
 
-      -t, --acThreads int         OLAP client concurrency, only for CH-benCHmark (default to 1)
-          --conn-params string    Session variables, such as setting `--conn-params tidb_isolation_read_engines='tiflash'` for TiDB queries and setting `--conn-params sslmode=disable` for PostgreSQL connections
-          --count int             Total execution count (0 means infinite count)
-      -D, --db string             Database name (default to "test")
-      -d, --driver string         Database driver: mysql, postgres (default to "mysql")
-          --dropdata              Clean up historical data before preparing
-      -H, --host strings          Database host (default to [127.0.0.1])
-          --ignore-error          Ignore errors when running workload
-          --interval duration     Output interval time (default to 10s)
-          --isolation int         Isolation Level (0: Default; 1: ReadUncommitted;
-                                  2: ReadCommitted; 3: WriteCommitted; 4: RepeatableRead;
-                                  5: Snapshot; 6: Serializable; 7: Linerizable)
-          --max-procs int         runtime.GOMAXPROCS of golang, the limits of how many cores can be used
-          --output string         Output style. Valid values can be { plain | table | json } (default to "plain")
-      -p, --password string       Database password
-      -P, --port ints             Database port (default to [4000])
-          --pprof string          Address of pprof endpoint
-          --silence               Don't print errors when running workload
-      -S, --statusPort int        Database status port (default to 10080)
-      -T, --threads int           Thread concurrency (default to 1)
-          --time duration         Total execution time (default to 2562047h47m16.854775807s)
-      -U, --user string           Database user (default to "root")
+```
+  -t, --acThreads int         OLAP client concurrency, only for CH-benCHmark (default to 1)
+      --conn-params string    Session variables, such as setting `--conn-params tidb_isolation_read_engines='tiflash'` for TiDB queries and setting `--conn-params sslmode=disable` for PostgreSQL connections
+      --count int             Total execution count (0 means infinite count)
+  -D, --db string             Database name (default to "test")
+  -d, --driver string         Database driver: mysql, postgres (default to "mysql")
+      --dropdata              Clean up historical data before preparing
+  -H, --host strings          Database host (default to [127.0.0.1])
+      --ignore-error          Ignore errors when running workload
+      --interval duration     Output interval time (default to 10s)
+      --isolation int         Isolation Level (0: Default; 1: ReadUncommitted;
+                              2: ReadCommitted; 3: WriteCommitted; 4: RepeatableRead;
+                              5: Snapshot; 6: Serializable; 7: Linerizable)
+      --max-procs int         runtime.GOMAXPROCS of golang, the limits of how many cores can be used
+      --output string         Output style. Valid values can be { plain | table | json } (default to "plain")
+  -p, --password string       Database password
+  -P, --port ints             Database port (default to [4000])
+      --pprof string          Address of pprof endpoint
+      --silence               Don't print errors when running workload
+  -S, --statusPort int        Database status port (default to 10080)
+  -T, --threads int           Thread concurrency (default to 1)
+      --time duration         Total execution time (default to 2562047h47m16.854775807s)
+  -U, --user string           Database user (default to "root")
+```
 
 -   `--host`と`--port`にカンマ区切りの値を指定すると、クライアント側の負荷分散が有効になります。例えば`--host 172.16.4.1,172.16.4.2 --port 4000,4001`を指定すると、プログラムはラウンドロビン方式で選択された 172.16.4.1:4000、172.16.4.1:4001、172.16.4.2:4000、172.16.4.2:4001 に接続します。
 -   ローカルデプロイメントの場合、デフォルトのデータベースホストアドレスは`127.0.0.1`です。リモートデータベースに接続する場合は、ホストとその他の関連パラメータを指定する必要があります。例: `tiup bench tpcc -H 192.168.169.31 -P 4000 -D tpcc -U root -p tidb --warehouses 4 --parts 4 prepare`

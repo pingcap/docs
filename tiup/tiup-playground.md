@@ -125,12 +125,14 @@ tiup playground display
 
 上記のコマンドを実行すると、以下の結果が返されます。
 
-    Pid    Role     Uptime
-    ---    ----     ------
-    84518  pd       35m22.929404512s
-    84519  tikv     35m22.927757153s
-    86189  tidb     exited
-    86526  tidb     34m28.293148663s
+```
+Pid    Role     Uptime
+---    ----     ------
+84518  pd       35m22.929404512s
+84519  tikv     35m22.927757153s
+86189  tidb     exited
+86526  tidb     34m28.293148663s
+```
 
 ## クラスターをスケールアウトする {#scale-out-a-cluster}
 
@@ -156,7 +158,9 @@ TiUP v1.15.0以降では、 TiUP Playgroundを使用してクラスターにTiPr
 
 1.  ファイル`tidb.toml`を作成し、以下の設定を追加してください。
 
-        graceful-wait-before-shutdown=15
+    ```
+    graceful-wait-before-shutdown=15
+    ```
 
     この設定項目は、TiDBがサーバーをシャットダウンするまでの待機時間（秒単位）を制御し、クラスタのスケールイン操作中にクライアントが切断されるのを防ぎます。
 

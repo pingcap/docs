@@ -91,82 +91,84 @@ alertmanager_servers:
 
 計画されたトポロジに基づいてクラスターをデプロイするには、 [配置ルール](/configure-placement-rules.md)を使用してクラスターレプリカの配置場所を決定する必要があります。4 つのレプリカ（Voter レプリカ 2 つをプライマリ AZ、Voter レプリカ 1 つをディザスタリカバリ AZ に、 Learnerレプリカ 1 つをディザスタリカバリ AZ に配置）のデプロイを例に挙げると、配置ルールを使用してレプリカを次のように設定できます。
 
-    cat rule.json
-    [
+```
+cat rule.json
+[
+  {
+    "group_id": "pd",
+    "group_index": 0,
+    "group_override": false,
+    "rules": [
       {
         "group_id": "pd",
-        "group_index": 0,
-        "group_override": false,
-        "rules": [
+        "id": "az-east",
+        "start_key": "",
+        "end_key": "",
+        "role": "voter",
+        "count": 3,
+        "label_constraints": [
           {
-            "group_id": "pd",
-            "id": "az-east",
-            "start_key": "",
-            "end_key": "",
-            "role": "voter",
-            "count": 3,
-            "label_constraints": [
-              {
-                "key": "az",
-                "op": "in",
-                "values": [
-                  "east"
-                ]
-              }
-            ],
-            "location_labels": [
-              "az",
-              "rack",
-              "host"
-            ]
-          },
-          {
-            "group_id": "pd",
-            "id": "az-west-1",
-            "start_key": "",
-            "end_key": "",
-            "role": "follower",
-            "count": 2,
-            "label_constraints": [
-              {
-                "key": "az",
-                "op": "in",
-                "values": [
-                  "west"
-                ]
-              }
-            ],
-            "location_labels": [
-              "az",
-              "rack",
-              "host"
-            ]
-          },
-          {
-            "group_id": "pd",
-            "id": "az-west-2",
-            "start_key": "",
-            "end_key": "",
-            "role": "learner",
-            "count": 1,
-            "label_constraints": [
-              {
-                "key": "az",
-                "op": "in",
-                "values": [
-                  "west"
-                ]
-              }
-            ],
-            "location_labels": [
-              "az",
-              "rack",
-              "host"
+            "key": "az",
+            "op": "in",
+            "values": [
+              "east"
             ]
           }
+        ],
+        "location_labels": [
+          "az",
+          "rack",
+          "host"
+        ]
+      },
+      {
+        "group_id": "pd",
+        "id": "az-west-1",
+        "start_key": "",
+        "end_key": "",
+        "role": "follower",
+        "count": 2,
+        "label_constraints": [
+          {
+            "key": "az",
+            "op": "in",
+            "values": [
+              "west"
+            ]
+          }
+        ],
+        "location_labels": [
+          "az",
+          "rack",
+          "host"
+        ]
+      },
+      {
+        "group_id": "pd",
+        "id": "az-west-2",
+        "start_key": "",
+        "end_key": "",
+        "role": "learner",
+        "count": 1,
+        "label_constraints": [
+          {
+            "key": "az",
+            "op": "in",
+            "values": [
+              "west"
+            ]
+          }
+        ],
+        "location_labels": [
+          "az",
+          "rack",
+          "host"
         ]
       }
     ]
+  }
+]
+```
 
 `rule.json`の構成を使用するには、次のコマンドを実行して既存の構成を`default.json`ファイルにバックアップし、既存の構成を`rule.json`で上書きします。
 
@@ -177,24 +179,26 @@ pd-ctl config placement-rules rule-bundle save --in="rule.json"
 
 以前の構成にロールバックする必要がある場合は、バックアップ ファイル`default.json`を復元するか、次の JSON ファイルを手動で作成し、この JSON ファイルで現在の構成を上書きします。
 
-    cat default.json
-    [
+```
+cat default.json
+[
+  {
+    "group_id": "pd",
+    "group_index": 0,
+    "group_override": false,
+    "rules": [
       {
         "group_id": "pd",
-        "group_index": 0,
-        "group_override": false,
-        "rules": [
-          {
-            "group_id": "pd",
-            "id": "default",
-            "start_key": "",
-            "end_key": "",
-            "role": "voter",
-            "count": 5
-          }
-        ]
+        "id": "default",
+        "start_key": "",
+        "end_key": "",
+        "role": "voter",
+        "count": 5
       }
     ]
+  }
+]
+```
 
 ### DR自動同期モードを有効にする {#enable-the-dr-auto-sync-mode}
 

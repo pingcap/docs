@@ -25,6 +25,8 @@ tiup clean [name] [flags]
 
 ## 出力 {#output}
 
-    Clean instance of `%s`, directory: %s
+```
+Clean instance of `%s`, directory: %s
+```
 
 [&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)
