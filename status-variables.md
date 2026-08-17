@@ -7,9 +7,9 @@ summary: ステータス変数を使用してシステムとセッションの�
 
 サーバーステータス変数は、サーバーのグローバルステータスとTiDBの現在のセッションステータスに関する情報を提供します。これらの変数のほとんどはMySQLと互換性があるように設計されています。
 
-[グローバルステータスを表示](/sql-statements/sql-statement-show-status.md)コマンドを使用してグローバル ステータスを取得し、 [セッションステータスを表示](/sql-statements/sql-statement-show-status.md)コマンドを使用して現在のセッションのステータスを取得できます。
+[SHOW GLOBAL STATUS](/sql-statements/sql-statement-show-status.md)コマンドを使用してグローバル ステータスを取得し、 [SHOW SESSION STATUS](/sql-statements/sql-statement-show-status.md)コマンドを使用して現在のセッションのステータスを取得できます。
 
-さらに、MySQL との互換性のために[フラッシュステータス](/sql-statements/sql-statement-flush-status.md)コマンドがサポートされています。
+さらに、MySQL との互換性のために[FLUSH STATUS](/sql-statements/sql-statement-flush-status.md)コマンドがサポートされています。
 
 ## 変数参照 {#variable-reference}
 
