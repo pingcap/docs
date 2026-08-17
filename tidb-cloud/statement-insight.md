@@ -63,7 +63,7 @@ The trend chart shows how the selected metric changes over time for the dimensio
 
 ## Limitations
 
-- Statement Insight is intended for historical analysis and RU or performance baselining. The displayed RU might differ slightly from the RU usage reported on your TiDB Cloud invoice due to differences in collection and aggregation（cumulative RU consumption）. Do not use Statement Insight data for billing reconciliation.
+- Statement Insight is intended for historical analysis and RU or performance baselining. The displayed RU differs from the RU usage reported on your TiDB Cloud invoice due to differences in collection and aggregation（Statement Insight displays cumulative RU consumption）. Do not use Statement Insight data for billing reconciliation.
 - Data freshness is up to **10 minutes**, matching the underlying collection cycle.
 
 ## FAQ
@@ -74,9 +74,9 @@ Statement Insight does not backfill historical data. Data starts accumulating fr
 
 ### What is the difference between Statement Insight and Top RU?
 
-[Top RU](/tidb-cloud/top-ru.md) is a near-real-time tool for diagnosing an ongoing RU spike: it ranks SQL statements by cumulative RU consumption, including statements that are still executing, over a short, recent time window.
+[Top RU](/tidb-cloud/top-ru.md) is a near-real-time tool for diagnosing an ongoing RU spike: it ranks SQL statements by cumulative RU consumption and only collects and displays Top SQLs and major fields, including statements that are still executing, over a short, recent time window.
 
-Statement Insight is a historical analysis tool. It helps you understand RU consumption, latency, and execution count trends over a longer time range and brings more detailed fields, broken down by DB User, SQL Type, SQL Digest, DB or Table, so that you can establish RU and performance baselines and identify sustained optimization opportunities.
+Statement Insight is a historical analysis tool. It collects and displays a larger volume of SQL statements (up to 3,000 SQL digests per collection interval) along with more detailed fields, and helps you understand RU consumption, latency, and execution count trends over a longer time range, broken down by DB User, SQL Type, SQL Digest, DB, or Table, so that you can establish RU and performance baselines and identify sustained optimization opportunities.
 
 ### Is the RU shown in Statement Insight the same as the billed RU?
 
