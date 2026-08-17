@@ -35,12 +35,11 @@ aliases: ['/ja/tidbcloud/tidb-cloud-encrypt-cmek']
 
 CMEK 対応プロジェクトを作成するには、次の手順に従います。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用して対象の組織に切り替えます。
-2.  左側のナビゲーション ペインで、 **[プロジェクト]**をクリックします。
-3.  **「プロジェクト」**ページで、右上隅の**「新しいプロジェクトの作成」を**クリックします。
-4.  プロジェクト名を入力してください。
-5.  プロジェクトの CMEK 機能を有効にすることを選択します。
-6.  **「確認」**をクリックしてプロジェクトの作成を完了します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、**Create Project**をクリックします。
+2.  表示されたダイアログで、プロジェクト名を入力します。
+3.  **Create for Dedicated Cluster**オプションを選択します。
+4.  プロジェクトの CMEK 機能を有効にすることを選択します。
+5.  **Confirm**をクリックしてプロジェクトの作成を完了します。
 
 </div>
 <div label="Use API" value="api">
@@ -65,14 +64,15 @@ TiDB Cloudコンソールまたは API を使用して、プロジェクトの C
 
 プロジェクトの CMEK 構成を完了するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用してターゲット プロジェクトに切り替えます。
-2.  左側のナビゲーション ペインで、 **[プロジェクト設定]** &gt; **[暗号化アクセス]**をクリックします。
-3.  **「暗号化アクセス」**ページで、 **「暗号化キーの作成」**をクリックして、キー作成ページに入ります。
-4.  キープロバイダーはAWS KMSのみをサポートしています。暗号化キーを使用できるリージョンを選択できます。
-5.  JSONファイルをコピーして`ROLE-TRUST-POLICY.JSON`として保存します。このファイルは信頼関係を記述します。
-6.  この信頼関係をAWS KMSのキーポリシーに追加します。詳細については、 [AWS KMS のキーポリシー](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)を参照してください。
-7.  TiDB Cloudコンソールで、キー作成ページの一番下までスクロールし、AWS KMS から取得した**KMS キー ARN**を入力します。
-8.  **「作成」**をクリックしてキーを作成します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、**Project view** タブをクリックします。
+2.  プロジェクトビューで対象のプロジェクトを見つけ、そのプロジェクトの <MDSvgIcon name="icon-project-settings" /> をクリックします。
+3.  左側のナビゲーション ペインで、**Project Settings** の下にある **Encryption Access** をクリックします。
+4.  **Encryption Access**ページで、**Create Encryption Key**をクリックして、キー作成ページに入ります。
+5.  キープロバイダーはAWS KMSのみをサポートしています。暗号化キーを使用できるリージョンを選択できます。
+6.  JSONファイルをコピーして`ROLE-TRUST-POLICY.JSON`として保存します。このファイルは信頼関係を記述します。
+7.  この信頼関係をAWS KMSのキーポリシーに追加します。詳細については、 [AWS KMS のキーポリシー](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)を参照してください。
+8.  TiDB Cloudコンソールで、キー作成ページの一番下までスクロールし、AWS KMS から取得した**KMS Key ARN**を入力します。
+9.  **Create**をクリックしてキーを作成します。
 
 </div>
 <div label="Use API" value="api">
@@ -151,7 +151,7 @@ TiDB Cloudコンソールまたは API を使用して、プロジェクトの C
 
 ## CMEKを回転させる {#rotate-cmek}
 
-AWS KMS で[自動CMEKローテーション](http://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html)設定できます。このローテーションを有効にすると、 TiDB Cloudのプロジェクト設定で CMEK ID を含む**暗号化アクセス**を更新する必要はありません。
+AWS KMS で[自動CMEKローテーション](http://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html)設定できます。このローテーションを有効にすると、 TiDB Cloudのプロジェクト設定で CMEK ID を含む**Encryption Access**を更新する必要はありません。
 
 ## CMEK を取り消して復元する {#revoke-and-restore-cmek}
 
