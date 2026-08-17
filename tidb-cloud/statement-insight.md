@@ -5,24 +5,24 @@ summary: Learn how to use Statement Insight to analyze historical RU consumption
 
 # Statement Insight
 
-**Statement Insight** provides multi-dimensional analysis of SQL resource consumption for your {{{ .premium }}} instance. It breaks down Request Unit (RU) consumption, latency, and execution counts by **DB User**, **DB**, **Table**, **SQL Type**, or **SQL Digest**, with leaderboards and trend charts that surface your top contributors at a glance. Use Statement Insight to establish RU and performance baselines from historical data and pinpoint what is driving RU consumptions or slowdowns.
+**Statement Insight** provides multi-dimensional analysis of SQL resource consumption for your {{{ .premium }}}, {{{ .byoc }}}, {{{ .essential }}} instance. It breaks down Request Unit (RU) consumption, latency, and execution counts by **DB User**, **DB**, **Table**, **SQL Type**, or **SQL Digest**, with leaderboards and trend charts that surface your top contributors at a glance. Use Statement Insight to establish RU and performance baselines from historical data and pinpoint what is driving RU consumptions or slowdowns.
 
 Statement Insight is a historical, baseline-oriented view. 
 
 > **Note:**
 >
-> Statement Insight is in public preview and available only for a limited number of {{{ .premium }}} instances, with broader rollout to {{{ .premium }}} instances planned in a subsequent release. To request early access, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> Statement Insight is in public preview and available only for a limited number of {{{ .premium }}}, {{{ .byoc }}}, {{{ .essential }}} instances, with broader rollout planned in a subsequent release. To request early access, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Before you begin
 
 Because Statement Insight only starts collecting data after it is enabled for your instance, keep the following in mind when you first open the page:
 
 - No historical data is backfilled. You only see data from the time the feature was activated on your instance.
-- The available time range grows day by day. For example, you see about one week of data after the feature has been running for a week.
+- The available time range grows day by day. For example, you see about one day of data after the feature has been running for a day.
 
 ## Open Statement Insight
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to your {{{ .premium }}} instance.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to your {{{ .premium }}}, {{{ .byoc }}}, {{{ .essential }}} instance.
 2. In the left navigation pane, click **Monitoring** > **Diagnosis** > **Statement Insight**.
 
 ## Set filters
@@ -30,9 +30,10 @@ Because Statement Insight only starts collecting data after it is enabled for yo
 Use the filters at the top of the page to narrow down the data:
 
 - **Time range**: select a preset interval or a custom range.
-- **DB User**: filter by the database user that executed the SQL statements. In the current preview, this filter supports selecting a single user; support for selecting multiple users is planned for a future release.
+- **DB User**: filter by the database user that executed the SQL statements. 
 - **SQL Type**: filter by SQL statement type, such as `SELECT`, `INSERT`, or `UPDATE`.
 - **Database**: filter by the database that the SQL statements ran against.
+- **Table**: filter by the table that the SQL statements ran against.
 - **SQL Digest**: filter by a specific SQL digest.
 
 All filters can be combined to narrow the analysis to the SQL statements you care about.
@@ -47,7 +48,7 @@ The **SQL Overview** panel summarizes the SQL statements that match your filters
 - **Mean latency**: total latency divided by execution count.
 - **Execution count**: the number of times the SQL statements were executed.
 
-### DB Users, SQL Types, SQL Digests, DBs and Tables summary
+### Top Contributors of DB Users, SQL Types, SQL Digests, DBs and Tables
 
 For each dimension (DB User, SQL Type, SQL Digest, DB or Table), the panel shows:
 
@@ -56,13 +57,12 @@ For each dimension (DB User, SQL Type, SQL Digest, DB or Table), the panel shows
 
 ### Trend charts
 
-The trend chart shows how the selected metric changes over time for the dimension you are viewing. To keep the chart readable, only the top values (by the selected metric) are shown as individual lines.
+The trend chart shows how the selected metric changes over time for the dimension you are viewing.
 
 ## Limitations
 
 - Statement Insight is intended for historical analysis and RU or performance baselining. The displayed RU might differ slightly from the RU usage reported on your TiDB Cloud invoice due to differences in collection and aggregation. Do not use Statement Insight data for billing reconciliation.
 - Data freshness is up to **10 minutes**, matching the underlying collection cycle.
-- Only the top values per dimension are shown as individual trend lines. The rest are aggregated into **Others**.
 
 ## FAQ
 
@@ -74,8 +74,8 @@ Statement Insight does not backfill historical data. Data starts accumulating fr
 
 [Top RU](/tidb-cloud/top-ru.md) is a near-real-time tool for diagnosing an ongoing RU spike: it ranks SQL statements by cumulative RU consumption, including statements that are still executing, over a short, recent time window.
 
-Statement Insight is a historical analysis tool. It helps you understand RU consumption, latency, and execution count trends over a longer time range, broken down by DB User, SQL Type, SQL Digest, DB or Table, so that you can establish RU and performance baselines and identify sustained optimization opportunities.
+Statement Insight is a historical analysis tool. It helps you understand RU consumption, latency, and execution count trends over a longer time range and brings more detailed fields, broken down by DB User, SQL Type, SQL Digest, DB or Table, so that you can establish RU and performance baselines and identify sustained optimization opportunities.
 
 ### Is the RU shown in Statement Insight the same as the billed RU?
 
-No. Statement Insight is intended for observability and optimization, not billing. For billing and cost management, refer to the RU usage in your TiDB Cloud billing console.
+No. Statement Insight is intended for observability and optimization, not billing. For billing and cost management, refer to your TiDB Cloud billing console.
