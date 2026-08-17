@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/connected-care-announcement']
 
 # Connected Careの概要 {#connected-care-overview}
 
-あらゆる規模のお客様がTiDB Cloud上でユースケースと運用を拡大し続けていることを受け、 TiDB Cloud は、進化するニーズに対応するためにサポートサービスを再構築することに注力しています。さらに高い価値とシームレスなエクスペリエンスを提供するために、 TiDB Cloud は**2025年2月17日**に新しいサポートサービス**「Connected Care」**の提供を開始することを発表いたします。
+あらゆる規模のお客様がTiDB Cloud上でユースケースと運用を拡大し続けていることを受け、 TiDB Cloud は、進化するニーズに対応するためにサポートサービスを再構築することに注力しています。さらに高い価値とシームレスなエクスペリエンスを提供するために、 TiDB Cloud は**2025年2月17日**に新しいサポートサービス**Connected Care**の提供を開始することを発表いたします。
 
 この移行の一環として、現在のサポートプランは**2025年2月17日**以降、購入できなくなり、レガシーサポートプランとして分類されます。ただし、 TiDB Cloudは、レガシープランにご加入のお客様には、それぞれの[退職日](#transition-to-connected-care)月間、引き続き完全なサポートを提供します。
 
@@ -49,7 +49,7 @@ Connected Care サービスのサポート プランでは、次のようなま�
 
     この機能は、高度な監視および診断サービスであるClinicを提供します。このサービスは、詳細な分析と実用的な洞察に基づいて、パフォーマンスの問題を迅速に特定し、データベースを最適化し、全体的なパフォーマンスを向上させるように設計されています。詳細については、 [Connected: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)をご覧ください。
 
--   接続：IMでのAIチャット
+-   Connected: IMでのAIチャット
 
     この機能を使用すると、インスタントメッセージ（IM）ツールを介してAIアシスタントとチャットし、質問への回答をすぐに受け取ることができます。詳細については、 [Connected: IMでのAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)をご覧ください。
 
@@ -57,11 +57,11 @@ Connected Care サービスのサポート プランでは、次のようなま�
 
     この機能を使用すると、IMツール経由でアラート通知を簡単に購読でき、重要な更新情報を常に把握できます。詳細については、 [Slackで登録する](/tidb-cloud/monitor-alert-slack.md)、[Zoomで登録する](/tidb-cloud/monitor-alert-zoom.md)、[Flashdutyで登録する](/tidb-cloud/monitor-alert-flashduty.md)、[PagerDutyで登録する](/tidb-cloud/monitor-alert-pagerduty.md)、[Webhookで登録する](/tidb-cloud/monitor-alert-webhook.md)、および[Larkで登録する](/tidb-cloud/monitor-alert-lark.md)をご覧ください。
 
--   接続: IMチケットの作成とサブスクリプションの更新
+-   Connected: IMチケットの作成とサブスクリプションの更新
 
     この機能を使用すると、IMツールを通じてサポートチケットを作成し、サポートチケットの更新情報を購読できます。詳細については、 [Slack 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-slack-ticket-creation.md)と[Larkでチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-lark-ticket-creation.md)ご覧ください。
 
--   接続: サポートチケットの IM によるやり取り
+-   Connected: サポートチケットの IM によるやり取り
 
     この機能により、IMツールを介してサポートチケットを迅速に作成し、やり取りすることで、効率的なコミュニケーションを実現できます。詳細については、 [Slack経由でサポートチケットとやり取りする](/tidb-cloud/connected-slack-ticket-interaction.md)と[Lark経由でサポートチケットとやり取りする](/tidb-cloud/connected-lark-ticket-interaction.md)ご覧ください。
 
@@ -89,14 +89,14 @@ Connected Care サービスのサポート プランでは、次のようなま�
 
 ### 現在のサポート プランを確認または変更するにはどうすればよいですか? {#how-do-i-check-or-make-changes-to-my-current-support-plan}
 
-[TiDB Cloudコンソール](https://tidbcloud.com/)で、左下隅の**「サポート」を**クリックします。 **「サポート」**ページが表示され、現在のサポートプランが**「CURRENT」**タグで強調表示されます。
+[TiDB Cloudコンソール](https://tidbcloud.com/)で、左下隅の**Support**をクリックします。**Support** ページが表示され、現在のサポートプランが**CURRENT**タグで強調表示されます。
 
-**Premium**サポートプランを除き、**サポート**ページから新しいサポートプランに移行できます。**Premium**プランにアップグレードするには、 [営業担当者に問い合わせる](https://www.pingcap.com/contact-us)クリックしてください。
+**Premium**サポートプランを除き、**Support** ページから新しいサポートプランに移行できます。**Premium**プランにアップグレードするには、 [営業担当者に問い合わせる](https://www.pingcap.com/contact-us)をクリックしてください。
 
 ### 同様のサービスには追加料金を支払う必要がありますか? {#do-i-need-to-pay-more-for-similar-services}
 
 新しいConnected Careサービスは、より包括的で豊富な機能を備えたサポートエクスペリエンスを提供しますが、価格は従来のサービスとほぼ同等です。TiDB Cloudは、お客様のビジネスをより良くサポートするために、付加価値の提供に引き続き尽力してまいります。
 
-### 従来の<strong>Basic</strong>プランが終了した後、テクニカル サポートを受けるにはどうすればよいですか? {#how-can-i-get-technical-support-after-the-legacy-strong-basic-strong-plan-shuts-down}
+### 従来の**Basic**プランが終了した後、テクニカル サポートを受けるにはどうすればよいですか? {#how-can-i-get-technical-support-after-the-legacy-basic-plan-shuts-down}
 
 [請求とアカウントサポート](/tidb-cloud/tidb-cloud-support.md#create-an-account-or-billing-support-ticket)には引き続きアクセスできます。テクニカルサポートをご希望の場合は、Connected Care サービスのサポートプランのご購入をご検討ください。1ヶ月の無料トライアルが含まれる**Developer**プランから始めることをお勧めします。
