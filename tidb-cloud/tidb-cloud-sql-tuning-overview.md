@@ -29,7 +29,7 @@ TiDB Cloudコンソールには、 [**SQL Statement**](/tidb-cloud/tune-performa
 
 **SQL Statement**でいくつかの重要な情報を確認できます。
 
--   **SQLテンプレート**：SQLダイジェスト、SQLテンプレートID、現在表示されている時間範囲、実行計画の数、および実行が行われるデータベースが含まれます。
+-   **SQL Template**：SQLダイジェスト、SQLテンプレートID、現在表示されている時間範囲、実行計画の数、および実行が行われるデータベースが含まれます。
 
     ![Details0](/media/dashboard/dashboard-statement-detail0.png)
 

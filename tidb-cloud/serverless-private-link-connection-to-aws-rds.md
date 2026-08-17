@@ -59,11 +59,11 @@ AWSコンソールでロードバランサーとAWSエンドポイントサー�
 
 1.  [対象グループ](https://console.aws.amazon.com/ec2/home#CreateTargetGroup)に移動して、対象グループを作成します。次の情報を入力してください。
 
-    -   **対象タイプ**: `IP addresses`を選択してください。
+    -   **Target type**: `IP addresses`を選択してください。
     -   **Protocol and Port**: プロトコルを`TCP`に、ポートをデータベースのポートに設定します。たとえば、MySQL の場合は`3306`です。
     -   **IP address type**： `IPv4`を選択してください。
     -   **VPC** ：RDSが配置されているVPCを選択してください。
-    -   **ターゲットの登録**：Amazon RDSインスタンスのIPアドレスを登録します。RDSエンドポイントにpingを実行すると、IPアドレスを取得できます。
+    -   **Register targets**：Amazon RDSインスタンスのIPアドレスを登録します。RDSエンドポイントにpingを実行すると、IPアドレスを取得できます。
 
     詳細については、 [ネットワークロードバランサーのターゲットグループを作成する](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-target-group.html)を参照してください。
 
@@ -77,7 +77,7 @@ AWSコンソールでロードバランサーとAWSエンドポイントサー�
 
     -   **Availability Zones**： TiDB Cloud Essentialインスタンスと重複するアベイラビリティゾーンを選択してください。
 
-    -   **セキュリティグループ**：以下のルールで新しいセキュリティグループを作成します。
+    -   **Security groups**：以下のルールで新しいセキュリティグループを作成します。
         -   MySQL/ Auroraを許可する受信ルール：
             -   タイプ: `MySQL/Aurora`
             -   ソース: `Anywhere-IPv4`
@@ -88,7 +88,7 @@ AWSコンソールでロードバランサーとAWSエンドポイントサー�
 
     -   **Listeners and routing**：
         -   **Protocol and Port**：プロトコルを`TCP`に、ポートをデータベースのポート番号に設定します。例えば、MySQLの場合は`3306`です。
-        -   **対象グループ**：前の手順で作成した対象グループを選択してください。
+        -   **Target group**: 前の手順で作成した対象グループを選択してください。
 
 詳細については、 [ネットワークロードバランサーを作成する](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html)を参照してください。
 
@@ -106,7 +106,7 @@ AWSコンソールでロードバランサーとAWSエンドポイントサー�
 
 2.  エンドポイントサービスの詳細ページに移動し、 `com.amazonaws.vpce.<region>.vpce-svc-xxxxxxxxxxxxxxxxx`の形式でエンドポイントサービス名をコピーしてください。この名前をTiDB Cloudに提供する必要があります。
 
-3.  エンドポイントサービスの詳細ページで、 **[プリンシパルを許可]**タブをクリックし、[前提条件](#prerequisites)で取得したAWSアカウントIDを許可リストに追加します。例えば、 `arn:aws:iam::<account_id>:root`のように追加します。
+3.  エンドポイントサービスの詳細ページで、 **Allow principals**タブをクリックし、[前提条件](#prerequisites)で取得したAWSアカウントIDを許可リストに追加します。例えば、 `arn:aws:iam::<account_id>:root`のように追加します。
 
 ## ステップ3. TiDB CloudでAWSエンドポイントサービスのプライベートリンク接続を作成します。 {#step-3-create-an-aws-endpoint-service-private-link-connection-in-tidb-cloud}
 

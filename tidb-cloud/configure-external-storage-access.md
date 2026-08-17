@@ -83,15 +83,15 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
     1.  [AWS マネジメントコンソール](https://console.aws.amazon.com/)コンソールにサインインし、 [Amazon S3コンソール](https://console.aws.amazon.com/s3/)を開きます。
 
-    2.  **バケット**一覧から対象バケットの名前を選択し、 **「ARNをコピー」**をクリックしてS3バケットのARNを取得します（例： `arn:aws:s3:::tidb-cloud-source-data` ）。後で使用するために、バケットのARNをメモしておいてください。
+    2.  **バケット**一覧から対象バケットの名前を選択し、 **Copy ARN**をクリックしてS3バケットのARNを取得します（例： `arn:aws:s3:::tidb-cloud-source-data` ）。後で使用するために、バケットのARNをメモしておいてください。
 
         ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
 
-    3.  [IAMコンソール](https://console.aws.amazon.com/iam/)を開き、左側のナビゲーションペインで**「ポリシー」**をクリックし、 **「ポリシーの作成」を**クリックします。
+    3.  [IAMコンソール](https://console.aws.amazon.com/iam/)を開き、左側のナビゲーションペインで**「ポリシー」**をクリックし、 **Create Policy**をクリックします。
 
         ![Create a policy](/media/tidb-cloud/aws-create-policy.png)
 
-    4.  **ポリシー作成**ページで、 **「JSON」**タブをクリックします。
+    4.  **Create policy**ページで、 **「JSON」**タブをクリックします。
 
     5.  ポリシーテキストフィールドで、必要に応じてポリシーを設定してください。以下は、 TiDB Cloud Starter、 Essential、またはPremiumインスタンスからデータをエクスポートしたり、これらのインスタンスにデータをインポートしたりする際に使用できる例です。
 
@@ -152,7 +152,7 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
     6.  **「次へ」**をクリックしてください。
 
-    7.  ポリシー名を設定し、ポリシーのタグを追加（任意）してから、 **「ポリシーの作成」を**クリックします。
+    7.  ポリシー名を設定し、ポリシーのタグを追加（任意）してから、 **Create policy**をクリックします。
 
 3.  AWS マネジメントコンソールで、 TiDB Cloudのアクセスロールを作成し、ロール ARN を取得します。
 
@@ -168,7 +168,7 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
     3.  **「次へ」**をクリックしてポリシー一覧を開き、先ほど作成したポリシーを選択してから**「次へ」**をクリックします。
 
-    4.  **「役割の詳細」**で役割の名前を設定し、右下隅の**Create role**をクリックします。役割が作成されると、役割の一覧が表示されます。
+    4.  **Role details**で役割の名前を設定し、右下隅の**Create role**をクリックします。役割が作成されると、役割の一覧が表示されます。
 
     5.  役割の一覧から、先ほど作成した役割の名前をクリックして概要ページに移動すると、役割のARNを取得できます。
 
@@ -221,7 +221,7 @@ TiDB Cloud StarterまたはEssentialインスタンスがGCSバケットにア�
 
     ![service-account](/media/tidb-cloud/serverless-external-storage/gcs-service-account.png)
 
-2.  サービスアカウントをクリックし、 `KEYS`ページで**[キーの追加]**をクリックして、サービスアカウントキーを作成します。
+2.  サービスアカウントをクリックし、 `KEYS`ページで**ADD KEY**をクリックして、サービスアカウントキーを作成します。
 
     ![service-account-key](/media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
 
@@ -276,7 +276,7 @@ Azure ARMテンプレートを使用してSASトークンを作成するには�
 
     1.  **「ARM テンプレート展開による新しい SAS トークンの生成」**ダイアログで、[クリック**] をクリックして、事前構成済みの ARM テンプレートを含む Azure ポータルを開きます**。
 
-    2.  Azureにログインすると、Azure**カスタムデプロイ**ページにリダイレクトされます。
+    2.  Azureにログインすると、Azure**Custom deployment**ページにリダイレクトされます。
 
     3.  **Resource group**ページで、**リソースグループ**と**ストレージアカウント名**を入力してください。コンテナが配置されているストレージアカウントの概要ページから、すべての情報を取得できます。
 
@@ -298,11 +298,11 @@ Azure ARMテンプレートを使用してSASトークンを作成する際に�
 
 3.  **Shared access signature**ページで、次のように必要なアクセス許可を持つサービス SAS トークンを作成します。詳細については、 [サービスSASトークンを作成します](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)を参照してください。
 
-    1.  **「許可されたサービス」**セクションで、 **「Blob」**サービスを選択します。
+    1.  **Allowed services**セクションで、 **「Blob」**サービスを選択します。
 
     2.  **Allowed Resource types**セクションで、 **「コンテナ」**と**「オブジェクト」**を選択します。
 
-    3.  **「許可された権限」**セクションで、必要に応じて権限を選択してください。
+    3.  **Allowed permissions**セクションで、必要に応じて権限を選択してください。
 
         -   TiDB Cloud StarterまたはEssentialインスタンスからデータをエクスポートするには、**読み取り**権限と**書き込み**権限が必要です。
         -   TiDB Cloud StarterまたはEssentialインスタンスにデータをインポートするには、**読み取り**権限と**一覧表示**権限が必要です。
@@ -327,7 +327,7 @@ TiDB CloudがAlibaba Cloud OSSバケットにアクセスできるようにす�
 
 1.  RAM ユーザーを作成し、AccessKey ペアを取得します。詳細については、 [RAMユーザーを作成する](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-ram-user)を参照してください。
 
-    **アクセスモードの**セクションで、 **「永続的なアクセスキーを使用してアクセスする」を**選択します。
+    **Access Mode**セクションで、 **「永続的なアクセスキーを使用してアクセスする」を**選択します。
 
 2.  必要な権限を持つカスタム ポリシーを作成します。詳細については、 [カスタムポリシーを作成する](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy)を参照してください。
 

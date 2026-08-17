@@ -26,13 +26,13 @@ AWS アカウント ID とアベイラビリティーゾーンを表示するに
 
 -   **リージョンと AZ** : Amazon MSK プロビジョニングされたクラスターは、 TiDB Cloud Essentialクラスターと同じ AWS リージョンにあり、MSK クラスターのアベイラビリティーゾーンはTiDB Cloudクラスターと同じです。
 -   MSK クラスターには**認証**: [SASL/SCRAM認証](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html)が必要です。
--   **ブローカータイプ**: ブローカー`t4.small`タイプは使用しないでください。プライベートリンクをサポートしていません。
+-   **Broker type**: ブローカー`t4.small`タイプは使用しないでください。プライベートリンクをサポートしていません。
 
 詳細な要件については、 [単一リージョンでの Amazon MSK マルチ VPC プライベート接続](https://docs.aws.amazon.com/msk/latest/developerguide/aws-access-mult-vpc.html#mvpc-requirements)を参照してください。
 
 Amazon MSK プロビジョニングされたクラスターがない場合は、 TiDB Cloud Essentialクラスターと同じリージョンおよび同じアベイラビリティーゾーンに[1つ作成する](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html) 、作成されたクラスターに[SASL/SCRAM認証を設定する](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html) 。
 
--   **シークレット名**: シークレット名は`AmazonMSK_`で始まる必要があります。
+-   **Secret name**: シークレット名は`AmazonMSK_`で始まる必要があります。
 -   **暗号化**：デフォルトの暗号化キーは使用しないでください。シークレット用に新しいカスタムAWS KMSキーを作成してください。
 
 ## ステップ1. TiDB Cloudアクセス用にKafka ACLを設定する {#step-1-set-up-kafka-acls-for-tidb-cloud-access}

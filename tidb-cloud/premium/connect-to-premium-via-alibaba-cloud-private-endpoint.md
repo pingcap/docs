@@ -33,7 +33,7 @@ Alibaba Cloud管理コンソールを使用してVPCインターフェースエ�
 
 1.  [Alibaba Cloud管理コンソール](https://account.alibabacloud.com/login/login.htm)にサインインします。
 2.  **VPC** &gt;**エンドポイント**に移動します。
-3.  **「インターフェースエンドポイント」**タブをクリックし、 **Create Endpoint**をクリックします。
+3.  **Interface Endpoints**タブをクリックし、 **Create Endpoint**をクリックします。
 4.  エンドポイントの詳細を入力してください。
     -   **リージョン**： TiDB Cloud Premiumインスタンスと同じリージョンを選択してください。
     -   **Endpoint Name**：エンドポイントの名前を入力してください。

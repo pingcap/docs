@@ -81,8 +81,8 @@ Kafka クラスターを簡単に構成できるように、Kafka VPC 用に 2 �
 
 -   **名前**: `kafka-vpc`
 -   サブネット
-    -   **名前**: `bastion-subnet` ;**リージョン**: `us-west1` ; **IPv4範囲**: `10.0.0.0/18`
-    -   **名前**: `brokers-subnet` ;**リージョン**: `us-west1` ; **IPv4範囲**: `10.64.0.0/18`
+    -   **名前**: `bastion-subnet` ;**リージョン**: `us-west1` ; **IPv4 range**: `10.0.0.0/18`
+    -   **名前**: `brokers-subnet` ;**リージョン**: `us-west1` ; **IPv4 range**: `10.64.0.0/18`
 -   ファイアウォールルール
     -   `kafka-vpc-allow-custom`
     -   `kafka-vpc-allow-ssh`
@@ -478,16 +478,16 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
     1.  ネットワークエンドポイント1
         -   **インスタンス**: `broker-node1`
-        -   **VMポート**: `39092`
-        -   **クライアントポート**: `9093`
+        -   **VM Port**: `39092`
+        -   **Client Port**: `9093`
     2.  ネットワークエンドポイント2
         -   **インスタンス**: `broker-node2`
-        -   **VMポート**: `39092`
-        -   **クライアントポート**: `9094`
+        -   **VM Port**: `39092`
+        -   **Client Port**: `9094`
     3.  ネットワークエンドポイント3
         -   **インスタンス**: `broker-node3`
-        -   **VMポート**: `39092`
-        -   **クライアントポート**: `9095`
+        -   **VM Port**: `39092`
+        -   **Client Port**: `9095`
 
 3.  [負荷分散](https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers)ページに移動します。以下の手順でロードバランサーを作成します。
 
@@ -498,14 +498,14 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
     -   **リージョン**: `us-west1`
     -   **ネットワーク**: `kafka-vpc`
     -   バックエンド構成
-        -   **バックエンドタイプ**： `Port mapping network endpoint group`
+        -   **Backend type**： `Port mapping network endpoint group`
         -   **プロトコル**： `TCP`
         -   **ポートマッピングネットワークエンドポイントグループ**: `kafka-neg`
     -   フロントエンド構成
         -   **サブネットワーク**: `brokers-subnet`
         -   **ポート**: `All`
 
-4.  [**Private Service Connect**&gt;**公開サービス**](https://console.cloud.google.com/net-services/psc/list/producers)に進みます。
+4.  [**Private Service Connect** &gt; **PUBLISH SERVICE**](https://console.cloud.google.com/net-services/psc/list/producers)に進みます。
 
     -   **Load Balancer Type**: `Internal passthrough Network Load Balancer`
     -   **Internal load balancer**： `kafka-lb`
@@ -514,8 +514,8 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
         -   **名前**: `psc-subnet`
         -   **VPC Network**: `kafka-vpc`
         -   **リージョン**: `us-west1`
-        -   **IPv4範囲**: `10.128.0.0/18`
-    -   **承認されたプロジェクト**: [前提条件](#prerequisites)で取得したTiDB Cloudの Google Cloud プロジェクト (例: `tidbcloud-prod-000` )。
+        -   **IPv4 range**: `10.128.0.0/18`
+    -   **Accepted projects**: [前提条件](#prerequisites)で取得したTiDB Cloudの Google Cloud プロジェクト (例: `tidbcloud-prod-000` )。
 
 5.  `kafka-psc`の詳細ページに移動します。**Service attachment**（例： `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-psc` ）を書き留めます。TiDB Cloudでこの PSC に接続する際に使用します。
 
@@ -525,7 +525,7 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
     -   **Direction of traffic**： `Ingress`
     -   **Action on match**： `Allow`
     -   **ターゲット**： `All instances in the network`
-    -   **ソースフィルター**: `IPv4 ranges`
+    -   **Source filter**: `IPv4 ranges`
     -   **Source IPv4 ranges**: `10.128.0.0/18` -subnetの範囲。
     -   **Protocols and ports**: すべて許可
 
@@ -565,7 +565,7 @@ TiDB クラスターと同じリージョンで既に Kafka クラスターが�
     -   **場所**： `Single zone`
     -   **リージョン**: `us-west1`
     -   **ゾーン**: ブローカーのゾーンの 1 つを選択します。
-    -   **自動スケーリングモード**: `Off`
+    -   **Autoscaling mode**: `Off`
     -   **Minimum number of instances**: `1`
     -   **Maximum number of instances**: `1` 。Kafkaプロキシはクラスターモードをサポートしていないため、デプロイできるインスタンスは1つだけです。各Kafkaプロキシはローカルポートをブローカーのポートにランダムにマッピングするため、プロキシごとにマッピングが異なります。ロードバランサーの背後に複数のKafkaプロキシをデプロイすると、問題が発生する可能性があります。Kafkaクライアントが1つのプロキシに接続し、別のプロキシを経由してブローカーにアクセスすると、リクエストが誤ったブローカーにルーティングされる可能性があります。
 
@@ -633,9 +633,9 @@ TiDB クラスターと同じリージョンで既に Kafka クラスターが�
     -   **リージョン**: `us-west1`
     -   **ネットワーク**: あなたのネットワーク
     -   バックエンド構成
-        -   **バックエンドタイプ**： `Instance group`
+        -   **Backend type**： `Instance group`
         -   **プロトコル**： `TCP`
-        -   **インスタンスグループ**: `kafka-proxy-ig`
+        -   **Instance group**: `kafka-proxy-ig`
     -   フロントエンド構成
         -   **サブネットワーク**: サブネット
         -   **ポート**: `All`
@@ -645,7 +645,7 @@ TiDB クラスターと同じリージョンで既に Kafka クラスターが�
             -   **プロトコル**： `TCP`
             -   **ポート**: `9092` -proxy でブートストラップ ポートの 1 つを選択できます。
 
-2.  [**Private Service Connect**&gt;**公開サービス**](https://console.cloud.google.com/net-services/psc/list/producers)に進みます。
+2.  [**Private Service Connect** &gt; **PUBLISH SERVICE**](https://console.cloud.google.com/net-services/psc/list/producers)に進みます。
 
     -   **Load Balancer Type**: `Internal passthrough Network Load Balancer`
     -   **Internal load balancer**： `kafka-proxy-lb`
@@ -654,8 +654,8 @@ TiDB クラスターと同じリージョンで既に Kafka クラスターが�
         -   **名前**: `proxy-psc-subnet`
         -   **VPC Network**: あなたのネットワーク
         -   **リージョン**: `us-west1`
-        -   **IPv4 範囲**: ネットワーク計画に基づいて CIDR を設定します
-    -   **承認されたプロジェクト**: [前提条件](#prerequisites)で取得したTiDB Cloudの Google Cloud プロジェクト (例: `tidbcloud-prod-000` )。
+        -   **IPv4 range**: ネットワーク計画に基づいて CIDR を設定します
+    -   **Accepted projects**: [前提条件](#prerequisites)で取得したTiDB Cloudの Google Cloud プロジェクト (例: `tidbcloud-prod-000` )。
 
 3.  **kafka-proxy-psc**の詳細ページに移動します。 `Service attachment` （例： `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-proxy-psc` ）をメモします。これは、 TiDB Cloudがこの PSC に接続する際に使用されます。
 
@@ -665,7 +665,7 @@ TiDB クラスターと同じリージョンで既に Kafka クラスターが�
     -   **Direction of traffic**： `Ingress`
     -   **Action on match**： `Allow`
     -   **対象**: ネットワーク内のすべてのインスタンス
-    -   **ソースフィルター**: `IPv4 ranges`
+    -   **Source filter**: `IPv4 ranges`
     -   **Source IPv4 ranges**: proxy-psc-subnet の CIDR
     -   **Protocols and ports**: すべて許可
 

@@ -242,7 +242,7 @@ SHOW VARIABLES WHERE Variable_name IN
 
 <details><summary>AWS RDSまたはAurora MySQLの設定</summary>
 
-1.  AWS マネジメント コンソールで、 [Amazon RDS コンソール](https://console.aws.amazon.com/rds/)を開き、左側のナビゲーション ペインで**[パラメータ グループ]**をクリックし、カスタム パラメータ グループを作成または編集します。
+1.  AWS マネジメント コンソールで、 [Amazon RDS コンソール](https://console.aws.amazon.com/rds/)を開き、左側のナビゲーション ペインで**Parameter groups**をクリックし、カスタム パラメータ グループを作成または編集します。
 2.  上記の4つのパラメータを必要な値に設定してください。
 3.  パラメータグループをインスタンスまたはクラスターにアタッチし、再起動して変更を適用してください。
 4.  再起動後、インスタンスに接続し、 `SHOW VARIABLES`ステートメントを実行して構成を確認します。
@@ -253,7 +253,7 @@ SHOW VARIABLES WHERE Variable_name IN
 
 <details><summary>Azure Database for MySQL の構成 - Flexible Server</summary>
 
-1.  [Azureポータル](https://portal.azure.com/)で、 **Azure Database for MySQL サーバー**を検索して選択し、インスタンス名をクリックしてから、左側のナビゲーション ペインで**[設定]** &gt; **[サーバー パラメーター]**をクリックします。
+1.  [Azureポータル](https://portal.azure.com/)で、 **Azure Database for MySQL サーバー**を検索して選択し、インスタンス名をクリックしてから、左側のナビゲーション ペインで**[設定]** &gt; **Server parameters**をクリックします。
 
 2.  各パラメータを検索し、その値を更新します。
 
@@ -284,7 +284,7 @@ SHOW VARIABLES WHERE Variable_name IN
 
     -   `binlog_row_image` : `FULL`
 
-3.  左側のナビゲーション ペインで、 **Backup and Restoration**をクリックし、 **[バックアップ戦略]**を選択します。移行中に DM が連続するbinlogファイルにアクセスできるようにするには、バックアップ戦略を次の制約で構成します。
+3.  左側のナビゲーション ペインで、 **Backup and Restoration**をクリックし、 **Backup Strategy**を選択します。移行中に DM が連続するbinlogファイルにアクセスできるようにするには、バックアップ戦略を次の制約で構成します。
 
     -   保存期間：最低3日間（推奨7日間）に設定してください。
 
@@ -396,10 +396,10 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
     -   **スキーム**:**内部**。ロードバランサーはVPC内に留まります。次のステップのエンドポイントサービスのみが、ロードバランサーをTiDB Cloudに公開します。
     -   **VPC** ：RDSまたはAuroraインスタンスと同じVPCを指定します。フォームはデフォルトでアカウントのデフォルトVPCを選択しますが、データベースが配置されている場所は通常このVPCではないため、続行する前に**VPC**のドロップダウンリストを変更してください。
     -   **Availability Zones**：**少なくとも2つのアベイラビリティゾーン**でサブネットを選択してください。NLBでは、エンドポイントサービスの可用性を確保するためにマルチAZ構成が必要です。RDSがシングルAZ構成の場合でも、同じVPC内の別のAZに2つ目のサブネットが必要になります。
-    -   **リスナーポート**： `3306` 。ウィザードのデフォルト値は`80`です。リスナーを作成する前に変更してください。
-    -   **対象グループ**：対象タイプは**IP addresses**、プロトコルは**TCP** 、ポートは**3306** 、データベースと同じVPC内。RDSエンドポイントを直接登録することはできないため、代わりにデータベースのプライベートIPアドレスを登録してください。
+    -   **Listener port**： `3306` 。ウィザードのデフォルト値は`80`です。リスナーを作成する前に変更してください。
+    -   **Target group**：対象タイプは**IP addresses**、プロトコルは**TCP** 、ポートは**3306** 、データベースと同じVPC内。RDSエンドポイントを直接登録することはできないため、代わりにデータベースのプライベートIPアドレスを登録してください。
 
-        [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、 左側のナビゲーション ペインで**「ネットワーク インターフェイス」**をクリックし、 **「説明**= `RDSNetworkInterface`と**「VPC** = ご使用の VPC」でフィルタリングします。一致するネットワーク インターフェイスに表示されている**Primary private IPv4 address**を使用します。
+        [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、 左側のナビゲーション ペインで**Network Interfaces**をクリックし、 **「説明**= `RDSNetworkInterface`と**「VPC** = ご使用の VPC」でフィルタリングします。一致するネットワーク インターフェイスに表示されている**Primary private IPv4 address**を使用します。
 
         > **Note:**
         >
@@ -407,17 +407,17 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
 
     詳細な手順については、AWS ドキュメントの[ネットワークロードバランサーを作成する](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html)を参照してください。
 
-2.  [Amazon VPC コンソール](https://console.aws.amazon.com/vpc/)で、左側のナビゲーションペインの**[エンドポイント サービス]**をクリックし、 **Create endpoint service**をクリックします。次の設定を構成します。
+2.  [Amazon VPC コンソール](https://console.aws.amazon.com/vpc/)で、左側のナビゲーションペインの**Endpoint Services**をクリックし、 **Create endpoint service**をクリックします。次の設定を構成します。
 
     -   **Load balancer type**を**Network**に設定し、前の手順で作成したNLBを選択します。**Available load balancers**リストが空の場合は、NLBが**アクティブ**状態になるまで待ってから、リストの横にある更新アイコンをクリックします。
-    -   **承認が必要**：有効（デフォルト）。
+    -   **Acceptance required**：有効（デフォルト）。
     -   **Supported IP address types**： **IPv4**を選択してください。
 
     エンドポイントサービスが作成されたら、後で使用するためにサービス名をコピーしてください。サービス名は`com.amazonaws.vpce.<region>.vpce-svc-<id>`の形式です。たとえば、 `com.amazonaws.vpce.us-east-1.vpce-svc-0123456789abcdef0`ようになります。
 
     詳細な手順については、AWS ドキュメントの[エンドポイントサービスを作成します](https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html)を参照してください。
 
-3.  TiDB CloudのAWSプリンシパルがエンドポイントサービスを使用できるように承認します。Amazon [Amazon VPC コンソール](https://console.aws.amazon.com/vpc/)のエンドポイントサービスの詳細ページで、 **[プリンシパルの許可]**タブを開き、 **[プリンシパルの許可]**をクリックして、次のARNを追加します。
+3.  TiDB CloudのAWSプリンシパルがエンドポイントサービスを使用できるように承認します。Amazon [Amazon VPC コンソール](https://console.aws.amazon.com/vpc/)のエンドポイントサービスの詳細ページで、 **Allow principals**タブを開き、 **Allow principals**をクリックして、次のARNを追加します。
 
     ```text
     arn:aws:iam::886436925895:root
@@ -482,10 +482,10 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
     -   **スキーム**:**内部**。ロードバランサーはVPC内に留まります。次のステップのエンドポイントサービスのみが、ロードバランサーをTiDB Cloudに公開します。
     -   **VPC** ：RDSまたはAuroraインスタンスと同じVPCを指定します。フォームはデフォルトでアカウントのデフォルトVPCを選択しますが、データベースが配置されている場所は通常このVPCではないため、続行する前に**VPC**のドロップダウンリストを変更してください。
     -   **Availability Zones**：**少なくとも2つのアベイラビリティゾーン**でサブネットを選択してください。NLBでは、エンドポイントサービスの可用性を確保するためにマルチAZ構成が必要です。RDSがシングルAZ構成の場合でも、同じVPC内の別のAZに2つ目のサブネットが必要になります。
-    -   **リスナーポート**： `3306` 。ウィザードのデフォルト値は`80`です。リスナーを作成する前に変更してください。
-    -   **対象グループ**：対象タイプは**IP addresses**、プロトコルは**TCP** 、ポートは**3306** 、データベースと同じVPC内。RDSエンドポイントを直接登録することはできないため、代わりにデータベースのプライベートIPアドレスを登録してください。
+    -   **Listener port**： `3306` 。ウィザードのデフォルト値は`80`です。リスナーを作成する前に変更してください。
+    -   **Target group**：対象タイプは**IP addresses**、プロトコルは**TCP** 、ポートは**3306** 、データベースと同じVPC内。RDSエンドポイントを直接登録することはできないため、代わりにデータベースのプライベートIPアドレスを登録してください。
 
-        [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、 左側のナビゲーション ペインで**「ネットワーク インターフェイス」**をクリックし、 **「説明**= `RDSNetworkInterface`と**「VPC** = ご使用の VPC」でフィルタリングします。一致するネットワーク インターフェイスに表示されている**Primary private IPv4 address**を使用します。
+        [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、 左側のナビゲーション ペインで**Network Interfaces**をクリックし、 **「説明**= `RDSNetworkInterface`と**「VPC** = ご使用の VPC」でフィルタリングします。一致するネットワーク インターフェイスに表示されている**Primary private IPv4 address**を使用します。
 
         > **Note:**
         >
@@ -493,17 +493,17 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
 
     詳細な手順については、AWS ドキュメントの[ネットワークロードバランサーを作成する](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html)を参照してください。
 
-2.  [Amazon VPC コンソール](https://console.aws.amazon.com/vpc/)で、左側のナビゲーションペインの**[エンドポイント サービス]**をクリックし、 **Create endpoint service**をクリックします。次の設定を構成します。
+2.  [Amazon VPC コンソール](https://console.aws.amazon.com/vpc/)で、左側のナビゲーションペインの**Endpoint Services**をクリックし、 **Create endpoint service**をクリックします。次の設定を構成します。
 
     -   **Load balancer type**を**Network**に設定し、前の手順で作成したNLBを選択します。**Available load balancers**リストが空の場合は、NLBが**アクティブ**状態になるまで待ってから、リストの横にある更新アイコンをクリックします。
-    -   **承認が必要**：有効（デフォルト）。
+    -   **Acceptance required**：有効（デフォルト）。
     -   **Supported IP address types**： **IPv4**を選択してください。
 
     エンドポイントサービスが作成されたら、後で使用するためにサービス名をコピーしてください。サービス名は`com.amazonaws.vpce.<region>.vpce-svc-<id>`の形式です。たとえば、 `com.amazonaws.vpce.us-east-1.vpce-svc-0123456789abcdef0`ようになります。
 
     詳細な手順については、AWS ドキュメントの[エンドポイントサービスを作成します](https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html)を参照してください。
 
-3.  TiDB CloudのAWSプリンシパルがエンドポイントサービスを使用できるように承認します。Amazon [Amazon VPC コンソール](https://console.aws.amazon.com/vpc/)のエンドポイントサービスの詳細ページで、 **[プリンシパルの許可]**タブを開き、 **[プリンシパルの許可]**をクリックして、次のARNを追加します。
+3.  TiDB CloudのAWSプリンシパルがエンドポイントサービスを使用できるように承認します。Amazon [Amazon VPC コンソール](https://console.aws.amazon.com/vpc/)のエンドポイントサービスの詳細ページで、 **Allow principals**タブを開き、 **Allow principals**をクリックして、次のARNを追加します。
 
     ```text
     arn:aws:iam::886436925895:root
@@ -769,9 +769,9 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
     <CustomContent plan="dedicated">
 
-    -   接続方法として**Public IP**または**VPC Peering**使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
+    -   接続方法として**Public IP**または**VPC Peering**を使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
     -   接続方法として**Private Link**を使用する場合、エンドポイント要求を承認するよう求められます。
-        -   AWSの場合： [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)で、エンドポイントサービスを作成したAWSリージョンに切り替え、 **[エンドポイントサービス]**をクリックし、 TiDB Cloudからのエンドポイントリクエストを承認します。
+        -   AWSの場合： [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)で、エンドポイントサービスを作成したAWSリージョンに切り替え、 **Endpoint services**をクリックし、 TiDB Cloudからのエンドポイントリクエストを承認します。
         -   Azure の場合: [Azureポータル](https://portal.azure.com)に移動し、MySQL Flexible Server を名前で検索し、左側のナビゲーション ペインで**[設定]** &gt; **[ネットワーク]**をクリックし、右側の**Private endpoint**セクションを見つけて、 TiDB Cloudからの保留中の接続要求を承認します。
 
     </CustomContent>
@@ -783,7 +783,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
     <CustomContent plan="premium">
 
     -   接続方法として**パブリックを**使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
-    -   **Private Link**を使用しており、選択したプライベートエンドポイントがAWSでまだ承認されていない場合は、 [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)でエンドポイントサービスを作成したAWSリージョンに切り替え、 **[エンドポイントサービス]**を選択し、 TiDB Cloudからのエンドポイント接続要求を承認してください。
+    -   **Private Link**を使用しており、選択したプライベートエンドポイントがAWSでまだ承認されていない場合は、 [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)でエンドポイントサービスを作成したAWSリージョンに切り替え、 **Endpoint services**を選択し、 TiDB Cloudからのエンドポイント接続要求を承認してください。
 
     </CustomContent>
 

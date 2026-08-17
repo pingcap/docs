@@ -125,11 +125,11 @@ AWS Schema Conversion Tool を使用してスキーマを移行する場合は�
 
 ## ステップ8. データベース移行タスクを作成する {#step-8-create-a-database-migration-task}
 
-1.  AWS DMS コンソールで、 [データ移行タスク](https://console.aws.amazon.com/dms/v2/home#tasks)ページに移動します。お住まいの地域に切り替えてください。次に、ウィンドウの右上隅にある**「タスクの作成」を**クリックします。
+1.  AWS DMS コンソールで、 [データ移行タスク](https://console.aws.amazon.com/dms/v2/home#tasks)ページに移動します。お住まいの地域に切り替えてください。次に、ウィンドウの右上隅にある**Create task**をクリックします。
 
     ![Create task](/media/tidb-cloud/aws-dms-to-tidb-cloud-create-task.png)
 
-2.  データベース移行タスクを作成し、**選択ルール**を指定します。
+2.  データベース移行タスクを作成し、**Selection rules**を指定します。
 
     ![Create AWS DMS migration task](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-11.png)
 
@@ -137,7 +137,7 @@ AWS Schema Conversion Tool を使用してスキーマを移行する場合は�
 
 3.  タスクを作成し、開始し、タスクが完了するまで待ちます。
 
-4.  **テーブル統計**をクリックしてテーブルを確認してください。スキーマ名は`ADMIN`です。
+4.  **Table statistics**をクリックしてテーブルを確認してください。スキーマ名は`ADMIN`です。
 
     ![Check AWS DMS migration task](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-13.png)
 

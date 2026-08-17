@@ -21,11 +21,11 @@ Slack でサポート チケットに直接返信することもできます。
 
 ## サポートチケットでやり取りする {#interact-with-support-tickets}
 
-Slackのサポートチャンネルで、 **PingCAP Support Bot**をメンションし、メッセージで問題を説明してください。すると、ボットから**「リクエストを送信」**ボタン付きのメッセージが送信されます。
+Slackのサポートチャンネルで、 **PingCAP Support Bot**をメンションし、メッセージで問題を説明してください。すると、ボットから**Raise request**ボタン付きのメッセージが送信されます。
 
 ![slack-ticket-interaction-1](/media/tidb-cloud/connected-slack-ticket-interaction-1.png)
 
-**「リクエストを送信」**をクリックしてフォームを開き、問題に応じて入力し、 **「作成」**をクリックしてチケットを送信します。
+**Raise request**をクリックしてフォームを開き、問題に応じて入力し、 **「作成」**をクリックしてチケットを送信します。
 
 ![slack-ticket-interaction-2](/media/tidb-cloud/connected-slack-ticket-interaction-2.png)
 

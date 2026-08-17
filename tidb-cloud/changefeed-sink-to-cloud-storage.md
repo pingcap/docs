@@ -67,7 +67,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 </div>
 <div label="GCS">
 
-**GCS**の場合、 **GCSエンドポイント**を入力する前に、まずGCSバケットへのアクセス権を付与する必要があります。以下の手順に従ってください。
+**GCS**の場合、 **GCS Endpoint**を入力する前に、まずGCSバケットへのアクセス権を付与する必要があります。以下の手順に従ってください。
 
 1.  TiDB Cloudコンソールで、**Service Account ID**を記録してください。このIDは、 TiDB CloudにGCSバケットへのアクセス権を付与するために使用されます。
 
@@ -83,7 +83,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
     3.  役割の名前、説明、ID、および役割の起動ステージを入力してください。役割名は、作成後に変更することはできません。
 
-    4.  **「権限の追加」**をクリックします。役割に以下の権限を追加し、 **「追加」**をクリックします。
+    4.  **Add permissions**をクリックします。役割に以下の権限を追加し、 **「追加」**をクリックします。
 
         -   storage.buckets.get
         -   storage.オブジェクト.作成
@@ -96,13 +96,13 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
 3.  [バケツ](https://console.cloud.google.com/storage/browser)ページに移動し、 TiDB CloudがアクセスするGCSバケットを選択してください。GCSバケットは、TiDBクラスタと同じリージョンにある必要があります。
 
-4.  **バケットの詳細**ページで、 **[権限]**タブをクリックし、 **[アクセスを許可]**をクリックします。
+4.  **Bucket details**ページで、 **[権限]**タブをクリックし、 **Grant access**をクリックします。
 
     ![Grant Access to the bucket ](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-grant-access-1.png)
 
 5.  バケットへのアクセスを許可するには、以下の情報を入力し、 **「保存」**をクリックしてください。
 
-    -   **「新しいプリンシパル」**フィールドに、以前に記録した対象のTiDBクラスタの**Service Account ID**を貼り付けます。
+    -   **New Principals**フィールドに、以前に記録した対象のTiDBクラスタの**Service Account ID**を貼り付けます。
 
     -   **「役割を選択」**ドロップダウンリストに、先ほど作成したIAMロールの名前を入力し、フィルター結果からその名前を選択します。
 
@@ -110,7 +110,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
     >
     > TiDB Cloudへのアクセス権を削除するには、付与したアクセス権を削除するだけです。
 
-6.  **バケットの詳細**ページで、「**オブジェクト」**タブをクリックします。
+6.  **Bucket details**ページで、「**オブジェクト」**タブをクリックします。
 
     -   バケットの gsutil URI を取得するには、[コピー] ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs`の場合、URI は`gs://test-sink-gcs/`になります。
 
@@ -129,25 +129,25 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
 1.  [Azureポータル](https://portal.azure.com/)で、変更フィード データを保存するコンテナーを作成します。
 
-    1.  左側のナビゲーションペインで**「ストレージアカウント」**をクリックし、ストレージアカウントを選択します。
-    2.  ストレージアカウントのナビゲーションメニューで、 **[データストレージ]** &gt; **[コンテナー]**を選択し、 **[+コンテナー]**をクリックします。
+    1.  左側のナビゲーションペインで**Storage Accounts**をクリックし、ストレージアカウントを選択します。
+    2.  ストレージアカウントのナビゲーションメニューで、 **Data storage** &gt; **[コンテナー]**を選択し、 **+ Container**をクリックします。
     3.  新しいコンテナの名前を入力し、匿名アクセスレベルを設定します（推奨レベルは**プライベート**です）。次に、 **[作成]**をクリックします。
 
 2.  対象コンテナのURLを取得します。
 
     1.  コンテナ一覧から、対象のコンテナを選択してください。
-    2.  コンテナの**「…」**をクリックし、次に**「コンテナのプロパティ」**を選択します。
+    2.  コンテナの**「…」**をクリックし、次に**Container properties**を選択します。
     3.  **URL**値を後で使用するために保存します。たとえば`https://<storage_account>.blob.core.windows.net/<container>`のように保存します。
 
 3.  SASトークンを生成します。
 
     1.  ストレージアカウントのナビゲーション メニューで、 **Security + networking** &gt; **Shared access signature**を選択します。
 
-    2.  **「許可されたサービス」**セクションで、 **「Blob」**を選択します。
+    2.  **Allowed services**セクションで、 **「Blob」**を選択します。
 
     3.  **Allowed resource types**セクションで、 **「コンテナ」**と**「オブジェクト」**を選択します。
 
-    4.  **「許可されたアクセス許可」**セクションで、 **「読み取り」** 、 **「書き込み」** 、 **「削除」** 、 **「一覧表示」** 、 **「作成」**を選択します。
+    4.  **Allowed permissions**セクションで、 **「読み取り」** 、 **「書き込み」** 、 **「削除」** 、 **「一覧表示」** 、 **「作成」**を選択します。
 
     5.  SASトークンの有効期間を、ニーズを満たすのに十分な長さに指定してください。
 
@@ -189,8 +189,8 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
     -   **Tables matching**：この列では、イベントフィルターを適用するテーブルを設定できます。ルールの構文は、前の**Table Filter**領域で使用されているものと同じです。変更フィードごとに最大10個のイベントフィルタールールを追加できます。
     -   **Event Filter**：以下のイベントフィルターを使用して、変更フィードから特定のイベントを除外できます。
-        -   **イベントを無視する**：指定されたイベントタイプを除外します。
-        -   **SQL を無視**: 指定された式に一致する DDL イベントを除外します。たとえば、 `^drop` `DROP`で始まるステートメントを除外し、 `add column`は`ADD COLUMN`を含むステートメントを除外します。
+        -   **Ignore event**：指定されたイベントタイプを除外します。
+        -   **Ignore SQL**: 指定された式に一致する DDL イベントを除外します。たとえば、 `^drop` `DROP`で始まるステートメントを除外し、 `add column`は`ADD COLUMN`を含むステートメントを除外します。
         -   **Ignore insert value expression**: 特定の条件を満たす`INSERT`ステートメントを除外します。たとえば、 `id >= 100`は、 `INSERT`が 100 以上である`id`ステートメントを除外します。
         -   **新しい値の更新式を無視する**: 新しい値が指定された条件に一致する`UPDATE`ステートメントを除外します。たとえば、 `gender = 'male'`は`gender`が`male`になるような更新を除外します。
         -   **古い値の更新を無視する式**: 古い値が指定された条件に一致する`UPDATE`ステートメントを除外します。たとえば、 `age < 18` `age`の古い値が 18 未満である場合の更新を除外します。
@@ -213,7 +213,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
     -   **Date Separator**：年、月、日に基づいてデータをローテーションするか、ローテーションしないかを選択します。
     -   **区切り文字**：CSVファイル内の値を区切る文字を指定します。最も一般的に使用される区切り文字はカンマ（ `,` ）です。
     -   **引用符**：区切り文字または特殊文字を含む値を囲むために使用する文字を指定します。通常、引用符には二重引用符（ `"` ）が使用されます。
-    -   **null/空値**：CSVファイル内でnull値または空値がどのように表現されるかを指定します。これは、データの適切な処理と解釈のために重要です。
+    -   **Null/Empty Values**：CSVファイル内でnull値または空値がどのように表現されるかを指定します。これは、データの適切な処理と解釈のために重要です。
     -   **Include Commit Ts**：CSV行に[`commit-ts`](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#replicate-change-data-to-storage-services)を含めるかどうかを制御します。
 
     </div>
@@ -238,13 +238,13 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
     >
     > これら2つのパラメータは、各データベーステーブルごとにクラウドストレージに生成されるオブジェクトの数に影響します。テーブル数が多い場合、同じ設定を使用すると生成されるオブジェクトの数が増加し、結果としてクラウドストレージAPIの呼び出しコストが上昇します。そのため、リカバリポイント目標（RPO）とコスト要件に基づいて、これらのパラメータを適切に設定することをお勧めします。
 
-6.  **[イベントの分割]**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクにおける、主キーまたは一意キーを分割したUPDATEイベント](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
+6.  **Split Event**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクにおける、主キーまたは一意キーを分割したUPDATEイベント](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
 
 ## ステップ3．仕様の設定 {#step-3-configure-specification}
 
 **「次へ」**をクリックして、変更フィードの仕様を設定してください。
 
-1.  **変更フィード仕様**領域で、変更フィードで使用するレプリケーション容量ユニット（RCU）の数を指定します。
+1.  **Changefeed Specification**領域で、変更フィードで使用するレプリケーション容量ユニット（RCU）の数を指定します。
 2.  **Changefeed Name**欄に、変更フィードの名前を指定します。
 
 ## ステップ4．構成を確認し、レプリケーションを開始する {#step-4-review-the-configuration-and-start-replication}
