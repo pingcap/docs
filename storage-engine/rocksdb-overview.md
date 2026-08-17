@@ -43,7 +43,7 @@ RocksDBに書き込まれるデータは、まずMemTableに書き込まれま�
 
 RocksDBでは、 MemTableをSSTファイルに変換したり、様々なレベルでSSTファイルをマージしたりする操作は、バックグラウンドスレッドプールで実行されます。バックグラウンドスレッドプールのデフォルトサイズは8です。マシンのCPU数が8以下の場合、バックグラウンドスレッドプールのデフォルトサイズはCPU数から1を引いたサイズになります。
 
-通常、この設定を変更する必要はありません。マシンに複数のTiKVインスタンスを展開している場合、またはマシンの読み取り負荷が比較的高く書き込み負荷が低い場合は、必要に応じて`rocksdb/max-background-jobs` ～3または4を調整してください。
+通常、この設定を変更する必要はありません。マシンに複数のTiKVインスタンスを展開している場合、またはマシンの読み取り負荷が比較的高く書き込み負荷が低い場合は、必要に応じて`rocksdb/max-background-jobs`を3または4に調整してください。
 
 ## 書き込み停止 {#writestall}
 
@@ -59,9 +59,11 @@ RocksDBのL0は他のレベルとは異なります。L0のSSTは生成順に並
 
 書き込み遅延が急激に増加した場合は、まずGrafana RocksDB KVパネルの**WriteStall Reason**メトリックを確認してください。L0ファイルの数が多すぎることがWriteStallの原因である場合は、以下の設定を64に調整してください。
 
-    rocksdb.defaultcf.level0-slowdown-writes-trigger
-    rocksdb.writecf.level0-slowdown-writes-trigger
-    rocksdb.lockcf.level0-slowdown-writes-trigger
-    rocksdb.defaultcf.level0-stop-writes-trigger
-    rocksdb.writecf.level0-stop-writes-trigger
-    rocksdb.lockcf.level0-stop-writes-trigger
+```
+rocksdb.defaultcf.level0-slowdown-writes-trigger
+rocksdb.writecf.level0-slowdown-writes-trigger
+rocksdb.lockcf.level0-slowdown-writes-trigger
+rocksdb.defaultcf.level0-stop-writes-trigger
+rocksdb.writecf.level0-stop-writes-trigger
+rocksdb.lockcf.level0-stop-writes-trigger
+```

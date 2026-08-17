@@ -30,7 +30,9 @@ TiDBインスタンスの統計情報をダウンロードするには、アド�
 LOAD STATS '/tmp/stats.json';
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 ## MySQLとの互換性 {#mysql-compatibility}
 

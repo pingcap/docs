@@ -52,11 +52,15 @@ TiDB Cloudを使用している場合、 `LOAD DATA`ステートメントを使�
 
 -   以下は、 TiDB Cloud Starter の接続文字列の例です。
 
-        mysql --connect-timeout 15 -u '<user_name>' -h <host_name> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p<your_password> --local-infile
+    ```
+    mysql --connect-timeout 15 -u '<user_name>' -h <host_name> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p<your_password> --local-infile
+    ```
 
 -   以下は、 TiDB Cloud Dedicated の接続文字列の例です。
 
-        mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_path> --tls-version="TLSv1.2" -u root -h <host_name> -P 4000 -D test -p<your_password> --local-infile
+    ```
+    mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_path> --tls-version="TLSv1.2" -u root -h <host_name> -P 4000 -D test -p<your_password> --local-infile
+    ```
 
 ### `REPLACE`と`IGNORE` {#replace-and-ignore}
 
@@ -107,8 +111,10 @@ TiDB Cloudを使用している場合、 `LOAD DATA`ステートメントを使�
 
 次のデータ形式を例に挙げます。
 
-    "bob","20","street 1"\r\n
-    "alice","33","street 1"\r\n
+```
+"bob","20","street 1"\r\n
+"alice","33","street 1"\r\n
+```
 
 `bob` 、 `20` 、 `street 1`抽出する場合は、フィールド区切り文字を`','` 、囲み文字を`'\"'`に指定します。
 

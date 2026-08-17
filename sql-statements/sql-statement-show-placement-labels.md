@@ -24,13 +24,15 @@ ShowStmt ::=
 SHOW PLACEMENT LABELS;
 ```
 
-    +--------+----------------+
-    | Key    | Values         |
-    +--------+----------------+
-    | region | ["us-east-1"]  |
-    | zone   | ["us-east-1a"] |
-    +--------+----------------+
-    2 rows in set (0.00 sec)
+```
++--------+----------------+
+| Key    | Values         |
++--------+----------------+
+| region | ["us-east-1"]  |
+| zone   | ["us-east-1a"] |
++--------+----------------+
+2 rows in set (0.00 sec)
+```
 
 ## MySQLとの互換性 {#mysql-compatibility}
 

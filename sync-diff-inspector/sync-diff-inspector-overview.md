@@ -209,52 +209,56 @@ sync-diff-inspector は実行時に`stdout`に進行状況情報を送信しま�
 >
 > 表示効果を確保するため、表示ウィンドウの幅は80文字以上にしてください。
 
-    A total of 2 tables need to be compared
+```
+A total of 2 tables need to be compared
 
-    Comparing the table structure of ``sbtest`.`sbtest96`` ... equivalent
-    Comparing the table structure of ``sbtest`.`sbtest99`` ... equivalent
-    Comparing the table data of ``sbtest`.`sbtest96`` ... failure
-    Comparing the table data of ``sbtest`.`sbtest99`` ...
-    _____________________________________________________________________________
-    Progress [==========================================================>--] 98% 193/200
+Comparing the table structure of ``sbtest`.`sbtest96`` ... equivalent
+Comparing the table structure of ``sbtest`.`sbtest99`` ... equivalent
+Comparing the table data of ``sbtest`.`sbtest96`` ... failure
+Comparing the table data of ``sbtest`.`sbtest99`` ...
+_____________________________________________________________________________
+Progress [==========================================================>--] 98% 193/200
+```
 
-<!---->
+```
+A total of 2 tables need to be compared
 
-    A total of 2 tables need to be compared
+Comparing the table structure of ``sbtest`.`sbtest96`` ... equivalent
+Comparing the table structure of ``sbtest`.`sbtest99`` ... equivalent
+Comparing the table data of ``sbtest`.`sbtest96`` ... failure
+Comparing the table data of ``sbtest`.`sbtest99`` ... failure
+_____________________________________________________________________________
+Progress [============================================================>] 100% 0/0
+The data of `sbtest`.`sbtest99` is not equal
+The data of `sbtest`.`sbtest96` is not equal
 
-    Comparing the table structure of ``sbtest`.`sbtest96`` ... equivalent
-    Comparing the table structure of ``sbtest`.`sbtest99`` ... equivalent
-    Comparing the table data of ``sbtest`.`sbtest96`` ... failure
-    Comparing the table data of ``sbtest`.`sbtest99`` ... failure
-    _____________________________________________________________________________
-    Progress [============================================================>] 100% 0/0
-    The data of `sbtest`.`sbtest99` is not equal
-    The data of `sbtest`.`sbtest96` is not equal
+The rest of tables are all equal.
 
-    The rest of tables are all equal.
-
-    A total of 2 tables have been compared, 0 tables finished, 2 tables failed, 0 tables skipped.
-    The patch file has been generated in
-            'output/fix-on-tidb2/'
-    You can view the comparison details through 'output/sync_diff.log'
+A total of 2 tables have been compared, 0 tables finished, 2 tables failed, 0 tables skipped.
+The patch file has been generated in
+        'output/fix-on-tidb2/'
+You can view the comparison details through 'output/sync_diff.log'
+```
 
 ### 出力ファイル {#output-file}
 
 出力ファイルのディレクトリ構造は以下のとおりです。
 
-    output/
-    |-- checkpoint # Saves the breakpoint information
-    | |-- bbfec8cc8d1f58a5800e63aa73e5 # Config hash. The placeholder file which identifies the configuration file corresponding to the output directory (output/)
-    │ |-- DO_NOT_EDIT_THIS_DIR
-    │ └-- sync_diff_checkpoints.pb # The breakpoint information
-    |
-    |-- fix-on-target # Saves SQL files to fix data inconsistency
-    | |-- xxx.sql
-    | |-- xxx.sql
-    | └-- xxx.sql
-    |
-    |-- summary.txt # Saves the summary of the check results
-    └-- sync_diff.log # Saves the output log information when sync-diff-inspector is running
+```
+output/
+|-- checkpoint # Saves the breakpoint information
+| |-- bbfec8cc8d1f58a5800e63aa73e5 # Config hash. The placeholder file which identifies the configuration file corresponding to the output directory (output/)
+│ |-- DO_NOT_EDIT_THIS_DIR
+│ └-- sync_diff_checkpoints.pb # The breakpoint information
+|
+|-- fix-on-target # Saves SQL files to fix data inconsistency
+| |-- xxx.sql
+| |-- xxx.sql
+| └-- xxx.sql
+|
+|-- summary.txt # Saves the summary of the check results
+└-- sync_diff.log # Saves the output log information when sync-diff-inspector is running
+```
 
 ### ログ {#log}
 
@@ -268,14 +272,16 @@ sync-diff-inspector のログは`${output}/sync_diff.log`に保存され、そ�
 
 チェックが完了すると、sync-diff-inspector はレポートを出力します。レポートは`${output}/summary.txt`にあり、 `${output}`は`output-dir`ファイル内の`config.toml` } の値です。
 
-    +---------------------+--------------------+----------------+---------+-----------+
-    |        TABLE        | STRUCTURE EQUALITY | DATA DIFF ROWS | UPCOUNT | DOWNCOUNT |
-    +---------------------+--------------------+----------------+---------+-----------+
-    | `sbtest`.`sbtest99` | true               | +97/-97        |  999999 |    999999 |
-    | `sbtest`.`sbtest96` | true               | +0/-101        |  999999 |   1000100 |
-    +---------------------+--------------------+----------------+---------+-----------+
-    Time Cost: 16.75370462s
-    Average Speed: 113.277149MB/s
+```
++---------------------+--------------------+----------------+---------+-----------+
+|        TABLE        | STRUCTURE EQUALITY | DATA DIFF ROWS | UPCOUNT | DOWNCOUNT |
++---------------------+--------------------+----------------+---------+-----------+
+| `sbtest`.`sbtest99` | true               | +97/-97        |  999999 |    999999 |
+| `sbtest`.`sbtest96` | true               | +0/-101        |  999999 |   1000100 |
++---------------------+--------------------+----------------+---------+-----------+
+Time Cost: 16.75370462s
+Average Speed: 113.277149MB/s
+```
 
 -   `TABLE` : 対応するデータベース名とテーブル名
 -   `RESULT` : チェックが完了したかどうか。 `skip-non-existing-table = true`を設定している場合、上流または下流に存在しないテーブルでは、この列の値は`skipped`になります。

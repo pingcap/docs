@@ -47,12 +47,14 @@ ALTER USER 'user1' RESOURCE GROUP `rg1`;
 SELECT CURRENT_RESOURCE_GROUP();
 ```
 
-    +--------------------------+
-    | CURRENT_RESOURCE_GROUP() |
-    +--------------------------+
-    | rg1                      |
-    +--------------------------+
-    1 row in set (0.00 sec)
+```
++--------------------------+
+| CURRENT_RESOURCE_GROUP() |
++--------------------------+
+| rg1                      |
++--------------------------+
+1 row in set (0.00 sec)
+```
 
 `SET RESOURCE GROUP`を実行して、現在のセッションのリソース グループを`rg2`に設定します。
 
@@ -61,12 +63,14 @@ SET RESOURCE GROUP `rg2`;
 SELECT CURRENT_RESOURCE_GROUP();
 ```
 
-    +--------------------------+
-    | CURRENT_RESOURCE_GROUP() |
-    +--------------------------+
-    | rg2                      |
-    +--------------------------+
-    1 row in set (0.00 sec)
+```
++--------------------------+
+| CURRENT_RESOURCE_GROUP() |
++--------------------------+
+| rg2                      |
++--------------------------+
+1 row in set (0.00 sec)
+```
 
 `SET RESOURCE GROUP`を実行して、現在のセッションでデフォルトのリソース グループを使用するように指定します。
 
