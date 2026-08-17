@@ -23,8 +23,6 @@ Build powerful AI/ML capabilities by connecting {{{ .lake }}} with your own infr
 2. **Register Function**: Connect your server to {{{ .lake }}} with `CREATE FUNCTION`
 3. **Use in SQL**: Call your custom AI functions directly in SQL queries
 
-External UDF Servers communicate with {{{ .lake }}} through Apache Arrow Flight over gRPC/HTTP2. Deploy the server behind a public HTTPS endpoint, and contact TiDB Cloud Support to add the endpoint hostname to your tenant UDF server allowlist.
-
 ## Example: Text Embedding Function
 
 ```python

@@ -17,4 +17,4 @@ This page provides a comprehensive overview of External Function operations in {
 
 > **Note:**
 >
-> External Functions in {{{ .lake }}} allow you to extend functionality by integrating with external services through Apache Arrow Flight over gRPC/HTTP2.
+> External Functions in {{{ .lake }}} allow you to extend functionality by integrating with external services through HTTP/HTTPS endpoints, enabling you to leverage external processing capabilities.

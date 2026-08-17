@@ -71,8 +71,6 @@ Start the server:
 python udf_server.py
 ```
 
-Deploy the UDF Server behind a public HTTPS endpoint that supports Apache Arrow Flight over gRPC/HTTP2. Contact TiDB Cloud Support to add the endpoint hostname to your tenant UDF server allowlist.
-
 ### Step 2: Register the Function in {{{ .lake }}}
 
 ```sql

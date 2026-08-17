@@ -224,7 +224,7 @@ For complete syntax, see [CREATE TABLE FUNCTION](/tidb-cloud-lake/sql/create-tab
 
 ## Use external Python UDFs for specialized logic
 
-The [`tidbcloudlake-udf`](https://pypi.org/project/tidbcloudlake-udf/) package provides an Apache Arrow Flight server for external Python scalar and table UDFs. The Python process runs on your infrastructure, which lets you use custom packages, proprietary code, GPU compute, and independent scaling.
+The [`tidbcloudlake-udf`](https://pypi.org/project/tidbcloudlake-udf/) package provides a Python UDF Server for external scalar and table UDFs. The Python process runs on your infrastructure, which lets you use custom packages, proprietary code, GPU compute, and independent scaling.
 
 ### Normalize addresses with Python
 
@@ -295,11 +295,9 @@ For a complete server, deployment, concurrency, and registration workflow, see [
 
 ## Deploy external UDFs securely
 
-External functions communicate through Apache Arrow Flight over gRPC/HTTP2, not through a REST endpoint.
-
 Before registering an external function:
 
-- Deploy the UDF Server at a public HTTPS endpoint that supports gRPC over HTTP/2.
+- Deploy the UDF Server at a public HTTPS endpoint.
 - Contact TiDB Cloud Support to add the endpoint hostname to your tenant UDF server allowlist.
 - Configure authentication at the gateway, capacity, timeouts, high availability, upgrades, and monitoring.
 - Keep credentials in the server deployment environment instead of SQL function definitions.
