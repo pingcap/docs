@@ -60,8 +60,8 @@ AWSコンソールでロードバランサーとAWSエンドポイントサー�
 1.  [対象グループ](https://console.aws.amazon.com/ec2/home#CreateTargetGroup)に移動して、対象グループを作成します。次の情報を入力してください。
 
     -   **対象タイプ**: `IP addresses`を選択してください。
-    -   **プロトコルとポート**: プロトコルを`TCP`に、ポートをデータベースのポートに設定します。たとえば、MySQL の場合は`3306`です。
-    -   **IPアドレスタイプ**： `IPv4`を選択してください。
+    -   **Protocol and Port**: プロトコルを`TCP`に、ポートをデータベースのポートに設定します。たとえば、MySQL の場合は`3306`です。
+    -   **IP address type**： `IPv4`を選択してください。
     -   **VPC** ：RDSが配置されているVPCを選択してください。
     -   **ターゲットの登録**：Amazon RDSインスタンスのIPアドレスを登録します。RDSエンドポイントにpingを実行すると、IPアドレスを取得できます。
 
@@ -86,8 +86,8 @@ AWSコンソールでロードバランサーとAWSエンドポイントサー�
             -   タイプ: `MySQL/Aurora`
             -   宛先: `Anywhere-IPv4`
 
-    -   **リスナーとルーティング**：
-        -   **プロトコルとポート**：プロトコルを`TCP`に、ポートをデータベースのポート番号に設定します。例えば、MySQLの場合は`3306`です。
+    -   **Listeners and routing**：
+        -   **Protocol and Port**：プロトコルを`TCP`に、ポートをデータベースのポート番号に設定します。例えば、MySQLの場合は`3306`です。
         -   **対象グループ**：前の手順で作成した対象グループを選択してください。
 
 詳細については、 [ネットワークロードバランサーを作成する](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html)を参照してください。
@@ -98,11 +98,11 @@ AWSコンソールでロードバランサーとAWSエンドポイントサー�
 
 1.  [エンドポイントサービス](https://console.aws.amazon.com/vpcconsole/home#EndpointServices)に移動して、エンドポイントサービスを作成します。次の情報を入力してください。
 
-    -   **ロードバランサータイプ**： `Network`を選択
-    -   **利用可能なロードバランサー**：前の手順で作成したロードバランサーを入力してください。
+    -   **Load balancer type**： `Network`を選択
+    -   **Available load balancers**：前の手順で作成したロードバランサーを入力してください。
     -   **サポート対象地域**：地域をまたぐ要件がない場合は空欄のままにしてください。
-    -   **エンドポイントの承認を必須にする**： `Acceptance required`を選択することをお勧めします
-    -   **サポートされているIPアドレスタイプ**： `IPv4`を選択してください
+    -   **Require acceptance for endpoint**： `Acceptance required`を選択することをお勧めします
+    -   **Supported IP address types**： `IPv4`を選択してください
 
 2.  エンドポイントサービスの詳細ページに移動し、 `com.amazonaws.vpce.<region>.vpce-svc-xxxxxxxxxxxxxxxxx`の形式でエンドポイントサービス名をコピーしてください。この名前をTiDB Cloudに提供する必要があります。
 

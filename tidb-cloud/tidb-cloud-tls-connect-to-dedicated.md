@@ -28,7 +28,7 @@ TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択します。
 
-    IPアクセスリストを設定していない場合は、初回接続前に**「IPアクセスリストの設定**」をクリックして設定してください。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
+    IPアクセスリストを設定していない場合は、初回接続前に**Configure IP Access List**をクリックして設定してください。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
 
 4.  **「CA証明書」**をクリックして、TiDBクラスタへのTLS接続用のCA証明書をダウンロードしてください。CA証明書はデフォルトでTLS 1.2バージョンをサポートしています。
 
@@ -85,7 +85,7 @@ TiDB クラスター CA をダウンロードした後、それをオペレー�
 jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=root&password=<your_password>&sslMode=VERIFY_IDENTITY&tlsVersions=TLSv1.2&trustCertificateKeyStoreUrl=file:<your_custom_truststore_path>&trustCertificateKeyStorePassword=<your_truststore_password>
 ```
 
-詳細なコード例を表示するには、 **「使用例を表示」**をクリックします。
+詳細なコード例を表示するには、 **show example usage**をクリックします。
 
     import com.mysql.jdbc.Driver;
     import java.sql.*;
@@ -125,7 +125,7 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 
     host="tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com", user="root", password="<your_password>", port=4000, database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "ca.pem"}
 
-詳細なコード例を表示するには、 **「使用例を表示」**をクリックします。
+詳細なコード例を表示するには、 **show example usage**をクリックします。
 
     import MySQLdb
 
@@ -164,7 +164,7 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 
     db, err := sql.Open("mysql", "root:<your_password>@tcp(tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000)/test?tls=tidb")
 
-詳細なコード例を表示するには、 **「使用例を表示」**をクリックします。
+詳細なコード例を表示するには、 **show example usage**をクリックします。
 
     package main
     import (
@@ -231,7 +231,7 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
       }
     });
 
-詳細なコード例を表示するには、 **「使用例を表示」**をクリックします。
+詳細なコード例を表示するには、 **show example usage**をクリックします。
 
     var mysql = require('mysql2');
     var fs = require('fs');

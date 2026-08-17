@@ -19,7 +19,7 @@ Google アカウントでサインインするには、次の手順に従いま�
 
 1.  TiDB Cloud [ログイン](https://tidbcloud.com/)ページに移動します。
 
-2.  **「Googleでサインイン」**をクリックします。Googleのログインページに移動します。
+2.  **Sign in with Google**をクリックします。Googleのログインページに移動します。
 
 3.  画面の指示に従って、Google のユーザー名とパスワードを入力します。
 
@@ -36,7 +36,7 @@ GitHub アカウントでサインインするには、次の手順を実行し�
 
 1.  TiDB Cloud [ログイン](https://tidbcloud.com/)ページに移動します。
 
-2.  **「GitHubでサインイン」**をクリックします。GitHubのログインページに移動します。
+2.  **Sign in with GitHub**をクリックします。GitHubのログインページに移動します。
 
 3.  画面上の指示に従って、GitHub のユーザー名とパスワードを入力します。
 
@@ -53,7 +53,7 @@ Microsoft アカウントでサインインするには、次の手順を実行�
 
 1.  TiDB Cloud [ログイン](https://tidbcloud.com/)ページに移動します。
 
-2.  **「Microsoftでサインイン」**をクリックします。Microsoftのログインページに移動します。
+2.  **Sign in with Microsoft**をクリックします。Microsoftのログインページに移動します。
 
 3.  画面の指示に従って、Microsoft のユーザー名とパスワードを入力します。
 

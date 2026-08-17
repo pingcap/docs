@@ -26,10 +26,10 @@ summary: TiDB Cloud StarterまたはTiDB Cloud EssentialにUI経由でサンプ�
 3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
 
     -   **ストレージプロバイダー**： **Amazon S3**を選択してください。
-    -   **ソースファイルURI** ：サンプルデータURI `s3://tidbcloud-sample-data/data-ingestion/`を入力してください。
+    -   **Source Files URI** ：サンプルデータURI `s3://tidbcloud-sample-data/data-ingestion/`を入力してください。
     -   **資格情報**：
-        -   **AWS ロール ARN** : `arn:aws:iam::801626783489:role/import-sample-access`を入力してください。
-        -   **AWSアクセスキー**：サンプルデータの場合はこのオプションをスキップしてください。
+        -   **AWS Role ARN** : `arn:aws:iam::801626783489:role/import-sample-access`を入力してください。
+        -   **AWS Access Key**：サンプルデータの場合はこのオプションをスキップしてください。
 
 4.  **「次へ」**をクリックしてください。
 

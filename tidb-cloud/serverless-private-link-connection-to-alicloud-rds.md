@@ -51,9 +51,9 @@ Alibaba Cloud コンソールでロードバランサーとエンドポイント
 
 1.  [サーバーグループ](https://slb.console.alibabacloud.com/nlb/ap-southeast-1/server-groups)に進み、サーバーグループを作成します。以下の情報を入力してください。
 
-    -   **サーバーグループタイプ**: `IP`を選択
+    -   **Server Group Type**: `IP`を選択
     -   **VPC** : ApsaraDB RDS for MySQL が配置されている VPC を入力します。
-    -   **バックエンドサーバープロトコル**: `TCP`を選択
+    -   **Backend Server Protocol**: `TCP`を選択
 
 2.  作成されたサーバーグループをクリックしてバックエンド サーバーを追加し、ApsaraDB RDS for MySQL インスタンスの IP アドレスを追加します。
 
@@ -78,13 +78,13 @@ ApsaraDB RDS for MySQL と同じリージョンにエンドポイント サー�
 
 1.  エンドポイントサービスを作成するには、 [エンドポイントサービス](https://vpc.console.alibabacloud.com/endpointservice)に進んでください。以下の情報を入力してください。
 
-    -   **サービスリソースタイプ**: `NLB`選択
-    -   **サービス リソースの選択**: NLB が含まれるすべてのゾーンを選択し、前の手順で作成した NLB を選択します。
-    -   **エンドポイント接続を自動的に受け入れる**: `No`選択することをお勧めします
+    -   **Service Resource Type**: `NLB`を選択
+    -   **Select Service Resource**: NLB が含まれるすべてのゾーンを選択し、前の手順で作成した NLB を選択します。
+    -   **Automatically Accept Endpoint Connections**: `No`を選択することをお勧めします
 
-2.  エンドポイントサービスの詳細ページに移動し、**エンドポイントサービス名**（例： `com.aliyuncs.privatelink.<region>.xxxxx` ）をコピーします。これは後でTiDB Cloudで使用する必要があります。
+2.  エンドポイントサービスの詳細ページに移動し、**Endpoint Service Name**（例： `com.aliyuncs.privatelink.<region>.xxxxx` ）をコピーします。これは後でTiDB Cloudで使用する必要があります。
 
-3.  エンドポイントサービスの詳細ページで、「**サービスホワイトリスト」**タブをクリックし、 **「ホワイトリストに追加」**をクリックして、 [前提条件](#prerequisites)で取得したAlibaba CloudアカウントIDを入力します。
+3.  エンドポイントサービスの詳細ページで、「**サービスホワイトリスト」**タブをクリックし、 **Add to Whitelist**をクリックして、 [前提条件](#prerequisites)で取得したAlibaba CloudアカウントIDを入力します。
 
 ## ステップ3. TiDB Cloudでプライベートリンク接続を作成する {#step-3-create-a-private-link-connection-in-tidb-cloud}
 

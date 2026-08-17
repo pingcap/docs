@@ -33,7 +33,7 @@ TiDB Cloud は、PagerDuty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メ�
 
 ### ステップ1. PagerDutyの統合キーを生成する {#step-1-generate-a-pagerduty-integration-key}
 
-1.  [PagerDutyイベントAPI v2の概要](https://developer.pagerduty.com/docs/events-api-v2-overview#getting-started)の概要の手順に従って、**イベント API v2**タイプの統合キーを生成します。
+1.  [PagerDutyイベントAPI v2の概要](https://developer.pagerduty.com/docs/events-api-v2-overview#getting-started)の概要の手順に従って、**Events API v2**タイプの統合キーを生成します。
 2.  生成された統合キーを保存して、次のステップで使用してください。
 
 ### ステップ2. TiDB Cloudから購読する {#step-2-subscribe-from-tidb-cloud}

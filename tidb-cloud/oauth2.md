@@ -34,7 +34,7 @@ OAuth 2.0 デバイスコード付与タイプを使用して、 TiDB Cloud CLI 
 -   [ticloud認証ログイン](/tidb-cloud/ticloud-auth-login.md) : TiDB Cloudで認証する
 -   [ticloud 認証ログアウト](/tidb-cloud/ticloud-auth-logout.md) : TiDB Cloudからログアウト
 
-アプリがOAuthを使用してTiDB Cloudにアクセスする必要がある場合は、 [クラウド＆テクノロジーパートナーになる](https://www.pingcap.com/partners/become-a-partner/) （**パートナープログラム**で**クラウド＆テクノロジーパートナー**を選択）にリクエストを送信してください。担当者からご連絡いたします。
+アプリがOAuthを使用してTiDB Cloudにアクセスする必要がある場合は、 [クラウド＆テクノロジーパートナーになる](https://www.pingcap.com/partners/become-a-partner/) （**パートナープログラム**で**Cloud & Technology Partner**を選択）にリクエストを送信してください。担当者からご連絡いたします。
 
 ## 承認された OAuth アプリのビューと取り消し {#view-and-revoke-authorized-oauth-apps}
 
@@ -42,6 +42,6 @@ OAuth 2.0 デバイスコード付与タイプを使用して、 TiDB Cloud CLI 
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、<mdsvgicon name="icon-top-account-settings">左下隅にあります。</mdsvgicon>
 2.  **[アカウント設定]**をクリックします。
-3.  **「承認済みOAuthアプリ」**タブをクリックします。承認済みのOAuthアプリケーションが表示されます。
+3.  **Authorized OAuth Apps**タブをクリックします。承認済みのOAuthアプリケーションが表示されます。
 
 **「取り消し」**をクリックすると、いつでも承認を取り消すことができます。

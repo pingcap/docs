@@ -25,7 +25,7 @@ summary: Alibaba Cloud上のプライベートエンドポイントを介してT
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Premiumインスタンスの名前をクリックすると、その概要ページに移動します。
 2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 3.  **「接続タイプ」**ドロップダウンリストで、 **「プライベートエンドポイント」**を選択します。
-4.  **サービス名**、**アベイラビリティゾーンID** 、**リージョンID**をメモしておいてください。
+4.  **サービス名**、**Availability Zone ID** 、**リージョンID**をメモしておいてください。
 
 ### ステップ2. Alibaba Cloud上にプライベートエンドポイントを作成する {#step-2-create-a-private-endpoint-on-alibaba-cloud}
 
@@ -59,7 +59,7 @@ Alibaba Cloud管理コンソールを使用してVPCインターフェースエ�
 
 2.  先ほどコピーした*エンドポイントリソースID*と*ドメイン名*を、それぞれのフィールドに貼り付けてください。
 
-3.  プライベートエンドポイントからの接続を受け入れるには、 **「プライベートエンドポイント接続の作成」を**クリックしてください。
+3.  プライベートエンドポイントからの接続を受け入れるには、 **Create Private Endpoint Connection**をクリックしてください。
 
 ### ステップ4. TiDB Cloud Premiumインスタンスに接続します {#step-4-connect-to-your-tidb-cloud-premium-instance}
 

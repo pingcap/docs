@@ -21,7 +21,7 @@ TiDB Cloud Clinic は、**Enterprise**または**Premium**サポート プラン
 
 **クラスタ**ページを表示するには、次の手順を実行します。
 
-1.  [TiDB Cloud Clinic コンソール](https://clinic.pingcap.com/)にログインし、 **「TiDB アカウントで続行」**を選択して、 TiDB Cloudログイン ページに入ります。
+1.  [TiDB Cloud Clinic コンソール](https://clinic.pingcap.com/)にログインし、 **Continue with TiDB Account**を選択して、 TiDB Cloudログイン ページに入ります。
 
 2.  組織リストから対象の組織を選択します。選択したプロジェクト内のクラスターが表示されます。
 

@@ -13,7 +13,7 @@ summary: サポートチケットのLarkインタラクションに関する詳�
 
 ## サポートチケットでやり取りする {#interact-with-support-tickets}
 
-Lark の**PingCAP サポート グループ**に[サポートチケットを作成する](/tidb-cloud/connected-lark-ticket-creation.md#create-a-support-ticket)すると、ボットがメッセージ スレッドにチケット リンクを付けて返信します。
+Lark の**PingCAP Support Group**に[サポートチケットを作成する](/tidb-cloud/connected-lark-ticket-creation.md#create-a-support-ticket)すると、ボットがメッセージ スレッドにチケット リンクを付けて返信します。
 
 ![lark-ticket-interaction-1](/media/tidb-cloud/connected-lark-ticket-interaction-1.png)
 

@@ -110,8 +110,8 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
         - **ストレージプロバイダー**：Amazon S3を選択してください。
         - **フォルダURI**：`s3://<bucket-name>/<folder-path>/`形式でAmazon S3のURIを入力してください。
         - **バケットへのアクセス**：以下のアクセス認証情報から1つを選択し、認証情報を入力してください。
-            - **AWS ロール ARN**：バケットにアクセスする権限を持つロール ARN を入力します。AWS CloudFormation を使用してロール ARN を作成することをお勧めします。詳細については、[外部ストレージへのアクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
-            - **AWSアクセスキー**：バケットへのアクセス権限を持つアクセスキーIDとアクセスキーシークレットを入力してください。
+            - **AWS Role ARN**：バケットにアクセスする権限を持つロール ARN を入力します。AWS CloudFormation を使用してロール ARN を作成することをお勧めします。詳細については、[外部ストレージへのアクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
+            - **AWS Access Key**：バケットへのアクセス権限を持つアクセスキーIDとアクセスキーシークレットを入力してください。
     - **エクスポートするデータ**：エクスポートするデータベースまたはテーブルを選択してください。
     - **データ形式**：**SQL**または**CSV**を選択してください。
     - **圧縮**：**Gzip**、**Snappy**、**Zstd**、または**None**を選択してください。

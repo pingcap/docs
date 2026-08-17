@@ -11,16 +11,16 @@ TiDB Xインスタンスは、 [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-
 
 ## TiDB Cloudコンソールで、TiDB Cloud StarterとEssentialインスタンスを移動するように促されるのはなぜですか？ {#why-does-the-tidb-cloud-console-prompt-me-to-move-my-tidb-cloud-starter-and-essential-instances}
 
-2026年4月15日以前は、 TiDB Cloudは単一の**TiDB専用プロジェクト**タイプを使用してすべてのTiDB Cloudリソースを管理していました。このようなプロジェクトには、TiDB Cloud DedicatedクラスタとTiDB Xインスタンスが混在することができました。しかし、1つのプロジェクトに異なるリソースタイプを混在させると、次のような理由で管理が複雑化しました。
+2026年4月15日以前は、 TiDB Cloudは単一の**TiDB dedicated project**タイプを使用してすべてのTiDB Cloudリソースを管理していました。このようなプロジェクトには、TiDB Cloud DedicatedクラスタとTiDB Xインスタンスが混在することができました。しかし、1つのプロジェクトに異なるリソースタイプを混在させると、次のような理由で管理が複雑化しました。
 
 -   TiDB専用プロジェクトは、元々 TiDB Cloud Dedicatedクラスター向けに設計されたものです。
 -   TiDB XインスタンスとTiDB Cloud Dedicatedクラスタは、動作と管理モデルが異なります。
 
 2026年4月15日より、 TiDB Cloudは異なるリソースタイプを明確に区別するために、個別のプロジェクトタイプを導入します。各プロジェクトタイプは、それぞれ独自のリソースタイプをホストするようになります。
 
--   **TiDB専用プロジェクト**： TiDB Cloud Dedicatedクラスター向け
--   **TiDB Xプロジェクト**：TiDB Xインスタンス向け
--   **TiDB X仮想プロジェクト**：どのTiDB Xプロジェクトにもグループ化されていないTiDB Xインスタンス用
+-   **TiDB dedicated project**： TiDB Cloud Dedicatedクラスター向け
+-   **TiDB X project**：TiDB Xインスタンス向け
+-   **TiDB X virtual project**：どのTiDB Xプロジェクトにもグループ化されていないTiDB Xインスタンス用
 
 TiDB Xプロジェクトは軽量で、TiDB Xインスタンスではオプションですが、 TiDB Cloud Dedicatedクラスタでは専用プロジェクトが必須です。これらのリソースを分離することで、より一貫性のあるユーザーエクスペリエンスが実現し、どのプロジェクト機能が適用されるかについての混乱が解消されます。
 
@@ -30,20 +30,20 @@ TiDB Xプロジェクトは軽量で、TiDB Xインスタンスではオプシ�
 
 TiDB Cloudは、異なるリソースタイプとユースケースに対応するため、3種類のプロジェクトタイプを提供しています。
 
--   **TiDB専用プロジェクト**：このプロジェクトタイプは、 TiDB Cloud Dedicatedクラスターでのみ使用されます。
+-   **TiDB dedicated project**：このプロジェクトタイプは、 TiDB Cloud Dedicatedクラスターでのみ使用されます。
 
     -   この機能を使うと、RBAC、ネットワーク、メンテナンス、アラート購読、暗号化アクセスなど、 TiDB Cloud Dedicatedクラスタの設定をプロジェクトごとに個別に管理できます。
     -   各TiDB Cloud Dedicatedクラスターは、専用プロジェクトに属していなければなりません。
     -   TiDB Cloud Dedicatedクラスターは、インフラストラクチャの結合により、プロジェクト間で移動することはできません。
 
--   **TiDB Xプロジェクト**：このプロジェクトタイプは、TiDB Xインスタンスでのみ使用されます。
+-   **TiDB X project**：このプロジェクトタイプは、TiDB Xインスタンスでのみ使用されます。
 
     -   これは、プロジェクトごとにTiDB XインスタンスのRBAC（ロールベースアクセス制御）を管理するのに役立ちます。
     -   TiDB Xプロジェクトは軽量でオプションなので、プロジェクトに割り当てずにTiDB Xインスタンスを作成することもできます。
     -   プロジェクトは、TiDB Xインスタンスを整理したりグループ化したりする場合に役立ちますが、必須ではありません。
     -   TiDB Xインスタンスは、TiDB Xプロジェクト間、または組織レベルに戻して移動できます。
 
--   **TiDB X仮想プロジェクト**：このプロジェクトは仮想プロジェクトであり、管理機能は提供していません。
+-   **TiDB X virtual project**：このプロジェクトは仮想プロジェクトであり、管理機能は提供していません。
 
     -   これは、どのプロジェクトにも属さないTiDB Xインスタンスの論理コンテナとして機能するため、プロジェクトIDを使用することで、 TiDB Cloud APIを介してこれらのインスタンスにアクセスできます。
     -   各組織には固有の仮想プロジェクトIDが付与されています。
@@ -68,7 +68,7 @@ TiDB Cloudは、異なるリソースタイプとユースケースに対応す�
 それは、現在のプロジェクトの構造によって異なります。
 
 -   プロジェクトにTiDB Cloud StarterおよびEssentialインスタンスのみが含まれている場合、 TiDB Cloudは2026年4月15日に自動的にプロジェクトをTiDB Xプロジェクトに変換します。追加の操作は必要ありません。
--   プロジェクトにTiDB Cloud DedicatedクラスターとTiDB Cloud StarterまたはEssentialインスタンスの両方が含まれている場合、 TiDB Cloudコンソールは、上部のバナーにある**[移動とロック解除]**をクリックして、 TiDB Cloud StarterおよびEssentialインスタンスを新しい TiDB X プロジェクトに移動するように促します。
+-   プロジェクトにTiDB Cloud DedicatedクラスターとTiDB Cloud StarterまたはEssentialインスタンスの両方が含まれている場合、 TiDB Cloudコンソールは、上部のバナーにある**[Move & Unlock]**をクリックして、 TiDB Cloud StarterおよびEssentialインスタンスを新しい TiDB X プロジェクトに移動するように促します。
 
 ## 誰が移行作業を実行できますか？ {#who-can-perform-the-migration}
 
@@ -93,13 +93,13 @@ TiDB Cloud StarterおよびEssentialインスタンスのみを含むプロジ�
 
 TiDB Cloudのリソースごとに異なるプロジェクトタイプが導入されたことにより、専用プロジェクトではTiDB Xインスタンスをホストできなくなりました。
 
-プロジェクトにTiDB Cloud DedicatedクラスターとTiDB Cloud StarterまたはEssentialインスタンスの両方が含まれている場合、 TiDB Cloud は上部のバナーで、プロジェクト内のTiDB Cloud StarterおよびEssentialインスタンスを新しい**TiDB X プロジェクト**に移動するように促します。
+プロジェクトにTiDB Cloud DedicatedクラスターとTiDB Cloud StarterまたはEssentialインスタンスの両方が含まれている場合、 TiDB Cloud は上部のバナーで、プロジェクト内のTiDB Cloud StarterおよびEssentialインスタンスを新しい**TiDB X project**に移動するように促します。
 
 > **Note:**
 >
 > TiDB Cloud Dedicatedクラスターは、移行後も元のプロジェクト内に残ります。したがって、この移行はTiDB Cloud Dedicatedクラスターに影響を与えません。
 
-あなたが`Organization Owner`の場合は、上部のバナーにある**[移動とロック解除]**をクリックし、移行ウィザードに従って移行を完了してください。
+あなたが`Organization Owner`の場合は、上部のバナーにある**[Move & Unlock]**をクリックし、移行ウィザードに従って移行を完了してください。
 
 移行ウィザードには、移行対象となるTiDB Cloud StarterおよびEssentialインスタンスのリストが表示され、新しい TiDB X プロジェクトの新しい名前を指定できます。
 

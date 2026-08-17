@@ -158,11 +158,11 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[データ移行]**をクリックします。
 
-3.  **データ移行**ページで、右上隅にある**「移行ジョブの作成」**をクリックします。**移行ジョブの作成**ページが表示されます。
+3.  **データ移行**ページで、右上隅にある**Create Migration Job**をクリックします。**Create Migration Job**ページが表示されます。
 
 ## ステップ2：ソース接続とターゲット接続を設定する {#step-2-configure-the-source-and-target-connection}
 
-**「移行ジョブの作成」**ページで、ソースとターゲットの接続を設定します。
+**Create Migration Job**ページで、ソースとターゲットの接続を設定します。
 
 1.  職名を入力してください。職名は文字で始まり、60文字以内である必要があります。文字（AZ、az）、数字（0～9）、アンダースコア（_）、ハイフン（-）が使用可能です。
 
@@ -174,19 +174,19 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
     <CustomContent plan="dedicated">
 
-    -   **ホスト名またはIPアドレス**（パブリックIPおよびVPCピアリングの場合）：データソースのホスト名またはIPアドレス。
+    -   **Hostname or IP address**（パブリックIPおよびVPCピアリングの場合）：データソースのホスト名またはIPアドレス。
     -   **サービス名**（プライベートリンクの場合）：エンドポイントのサービス名。
 
     </CustomContent>
     <CustomContent plan="essential">
 
-    -   **ホスト名またはIPアドレス**（パブリックIPの場合）：データソースのホスト名またはIPアドレス。
-    -   **プライベート リンク接続**(プライベート リンク用): プライベートリンク[プライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md)セクションで作成したプライベート リンク接続。
+    -   **Hostname or IP address**（パブリックIPの場合）：データソースのホスト名またはIPアドレス。
+    -   **Private Link Connection**(プライベート リンク用): [プライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md)セクションで作成したプライベート リンク接続。
 
     </CustomContent>
     <CustomContent plan="premium">
 
-    -   **ホスト名またはIPアドレス**（公開の場合）：データソースのホスト名またはIPアドレス。
+    -   **Hostname or IP address**（公開の場合）：データソースのホスト名またはIPアドレス。
     -   **プライベート エンドポイント**(プライベート リンク用): TiDB Cloud Premium インスタンスの**[ネットワーキング]** &gt; **[外部サービス向け AWS プライベート エンドポイント]**で作成したプライベート エンドポイント。または、**ここで [プライベート エンドポイントの作成] をクリックしてプライベート エンドポイント**を作成します。セットアップの詳細については、データ移行ガイドの[プライベートリンクまたはプライベートエンドポイント](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint)セクションを参照してください。
 
     </CustomContent>
@@ -204,7 +204,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     -   **ユーザー名**: ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>のユーザー名を入力します。
     -   **パスワード**： TiDB Cloudのユーザー名のパスワードを入力してください。
 
-4.  入力した情報を検証するには、 **「接続を検証」をクリックし、「次へ」を**クリックしてください。
+4.  入力した情報を検証するには、 **Validate Connection and Next**をクリックしてください。
 
 5.  表示されたメッセージに従って行動してください。
 
@@ -229,7 +229,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 ## ステップ3：移行ジョブの種類を選択する {#step-3-choose-migration-job-type}
 
-ソースデータベースの増分データのみをTiDB Cloudに移行するには、 **「増分データ移行」**を選択し、 **「既存データ移行」**は選択しないでください。こうすることで、移行ジョブはソースデータベースの進行中の変更のみをTiDB Cloudに移行します。
+ソースデータベースの増分データのみをTiDB Cloudに移行するには、 **Incremental data migration**を選択し、 **Existing data migration**は選択しないでください。こうすることで、移行ジョブはソースデータベースの進行中の変更のみをTiDB Cloudに移行します。
 
 **「開始位置」**領域では、増分データ移行の開始位置として、以下のいずれかのタイプを指定できます。
 
@@ -269,7 +269,7 @@ SHOW MASTER STATUS;
 
 ## ステップ4：移行するオブジェクトを選択する {#step-4-choose-the-objects-to-be-migrated}
 
-1.  **「移行するオブジェクトの選択」**ページで、移行するオブジェクトを選択します。 **「すべて**」をクリックするとすべてのオブジェクトを選択できます。 **「カスタマイズ」**をクリックしてから、オブジェクト名の横にあるチェックボックスをクリックしてオブジェクトを選択することもできます。
+1.  **Choose Objects to Migrate**ページで、移行するオブジェクトを選択します。 **「すべて」**をクリックするとすべてのオブジェクトを選択できます。 **「カスタマイズ」**をクリックしてから、オブジェクト名の横にあるチェックボックスをクリックしてオブジェクトを選択することもできます。
 
 2.  **「次へ」**をクリックしてください。
 
@@ -289,7 +289,7 @@ SHOW MASTER STATUS;
 
 ## ステップ6：移行の進捗状況を確認する {#step-6-view-the-migration-progress}
 
-移行ジョブが作成されると、**移行ジョブの詳細**ページで移行の進行状況を確認できます。移行の進行状況は、 **「ステージ」と「ステータス」の**領域に表示されます。
+移行ジョブが作成されると、**Migration Job Details**ページで移行の進行状況を確認できます。移行の進行状況は、 **Stage and Status**の領域に表示されます。
 
 移行ジョブは、実行中でも一時停止または削除できます。
 
@@ -307,11 +307,11 @@ SHOW MASTER STATUS;
 
 **「仕様を選択して移行を開始」**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [データ移行の仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)を参照してください。
 
-仕様を選択したら、 **「ジョブの作成」をクリックし、「開始」を**クリックして移行を開始します。
+仕様を選択したら、 **Create Job and Start**をクリックして移行を開始します。
 
 ## ステップ7：移行の進捗状況を確認する {#step-7-view-the-migration-progress}
 
-移行ジョブが作成されると、**移行ジョブの詳細**ページで移行の進行状況を確認できます。移行の進行状況は、 **「ステージ」と「ステータス」の**領域に表示されます。
+移行ジョブが作成されると、**Migration Job Details**ページで移行の進行状況を確認できます。移行の進行状況は、 **Stage and Status**の領域に表示されます。
 
 移行ジョブは、実行中でも一時停止または削除できます。
 

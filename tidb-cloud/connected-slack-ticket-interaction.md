@@ -11,7 +11,7 @@ summary: サポート チケットの Slack でのやり取りに関する詳細
 >
 > Slackのチケットサポート機能はリクエストに応じてご利用いただけます。この機能をご利用になりたい場合は、 TiDB Cloudサポート<a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>までご連絡いただくか、担当のテクニカルアカウントマネージャー（TAM）までお問い合わせください。
 
-**PingCAP サポート ボット**を使用して Slack でサポート チケットを作成できます。
+**PingCAP Support Bot**を使用して Slack でサポート チケットを作成できます。
 
 ![Create a support ticket in Slack](/media/tidb-cloud/connected-slack-ticket-interaction-creation.gif)
 

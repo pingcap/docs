@@ -85,7 +85,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
     ![Create replication instance](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-replication-instances.png)
 
-2.  **レプリケーションインスタンスの作成を**クリックします。
+2.  **Create replication instance**をクリックします。
 
 3.  インスタンス名、ARN、説明を入力します。
 
@@ -94,18 +94,18 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
     -   **エンジン バージョン**: デフォルト構成を維持します。
     -   **高可用性**: ビジネス ニーズに応じて、**マルチ AZ**または**シングル AZ**を選択します。
 
-5.  **割り当てられたストレージ(GiB)**フィールドでストレージを構成します。
+5.  **Allocated storage (GiB)**フィールドでストレージを構成します。
 
 6.  接続とセキュリティを設定します。ネットワーク設定については[前のセクション](#configure-network)を参照してください。
 
-    -   **ネットワーク タイプ - 新規**: **IPv4**を選択します。
+    -   **Network type - new**: **IPv4**を選択します。
     -   **IPv4 用の仮想プライベート クラウド (VPC)** : 必要な VPC を選択します。
-    -   **レプリケーション サブネット グループ**: レプリケーション インスタンスのサブネット グループを選択します。
+    -   **Replication subnet group**: レプリケーション インスタンスのサブネット グループを選択します。
     -   **パブリックアクセス可能**: ネットワーク構成に基づいて設定します。
 
     ![Connectivity and security](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-connectivity-security.png)
 
-7.  必要に応じて、 **[詳細設定]** 、 **[メンテナンス]** 、 **[タグ]**セクションを構成し、 **[レプリケーション インスタンスの作成]**をクリックしてインスタンスの作成を完了します。
+7.  必要に応じて、 **[詳細設定]** 、 **[メンテナンス]** 、 **[タグ]**セクションを構成し、 **[Create replication instance]**をクリックしてインスタンスの作成を完了します。
 
 > **Note:**
 >
@@ -113,7 +113,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
 ## TiDB Cloud DMSエンドポイントを作成する {#create-tidb-cloud-dms-endpoints}
 
-接続に関しては、 TiDB Cloudクラスターをソースとして使用する場合とターゲットとして使用する場合の手順は似ていますが、DMS ではソースとターゲットでデータベース設定要件が異なります。詳細については、 [MySQLをソースとして使用する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.html)または[MySQLをターゲットとして使用する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.html)を参照してください。TiDB Cloudクラスターをソースとして使用する場合、TiDB は MySQL binlogをサポートしていないため、**既存のデータの移行**のみが可能です。
+接続に関しては、 TiDB Cloudクラスターをソースとして使用する場合とターゲットとして使用する場合の手順は似ていますが、DMS ではソースとターゲットでデータベース設定要件が異なります。詳細については、 [MySQLをソースとして使用する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.html)または[MySQLをターゲットとして使用する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.html)を参照してください。TiDB Cloudクラスターをソースとして使用する場合、TiDB は MySQL binlogをサポートしていないため、**Migrate existing data**のみが可能です。
 
 1.  AWS DMS コンソールで、 [**エンドポイント**](https://console.aws.amazon.com/dms/v2/home#endpointList)ページに移動し、対応するリージョンに切り替えます。
 
@@ -125,7 +125,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
 4.  **エンドポイント設定**セクションで、**エンドポイント識別子**とARNフィールドに入力します。次に、**ソースエンジン**または**ターゲットエンジン**として**MySQLを**選択します。
 
-5.  **[エンドポイント データベースへのアクセス]**フィールドで、 **[アクセス情報を手動で提供する**] チェックボックスをオンにし、次のようにクラスター情報を入力します。
+5.  **[Access to endpoint database]**フィールドで、 **[Provide access information manually]**チェックボックスをオンにし、次のようにクラスター情報を入力します。
 
     <SimpleTab>
 
@@ -154,6 +154,6 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
     ![Provide access information manually](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-configure-endpoint.png)
 
-6.  エンドポイントを**ターゲット エンドポイント**として作成する場合は、**エンドポイント設定**セクションを展開し、**エンドポイント接続属性を使用する**チェックボックスをオンにして、**追加の接続属性を**`Initstmt=SET FOREIGN_KEY_CHECKS=0;`に設定します。
+6.  エンドポイントを**ターゲット エンドポイント**として作成する場合は、**エンドポイント設定**セクションを展開し、**Use endpoint connection attributes**チェックボックスをオンにして、**Extra connection attributes**を`Initstmt=SET FOREIGN_KEY_CHECKS=0;`に設定します。
 
 7.  必要に応じて、 **KMSキー**と**タグの**セクションを設定します。 **「エンドポイントの作成」**をクリックしてインスタンスの作成を完了します。

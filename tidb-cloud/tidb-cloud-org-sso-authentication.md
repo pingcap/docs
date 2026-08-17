@@ -89,7 +89,7 @@ Cloud Organization SSO を有効にするには、次の手順を実行します
     >
     > Cloud Organization SSO を有効にすると、URL を変更できなくなります。組織のメンバーは、カスタム URL を使用してのみTiDB Cloudにログインできるようになります。後で設定済みの URL を変更する必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-5.  **[理解して確認します]**チェックボックスをクリックし、 **[有効にする]**をクリックします。
+5.  **[I understand and confirm]**チェックボックスをクリックし、 **[有効にする]**をクリックします。
 
     > **Note:**
     >
@@ -113,7 +113,7 @@ Cloud Organization SSO を有効にした後、次のようにユーザー名と
 
         デフォルトでは無効になっています。必要に応じて有効にすることができます。セキュリティ上の理由から、自動プロビジョニングを有効にする場合は、認証に許可するメールドメインを制限することをお勧めします。
 
-    -   **許可されたメールドメイン**
+    -   **Allowed Email Domains**
 
         このフィールドを設定すると、この認証方法で指定されたメールドメインのユーザーのみが、カスタムURLを使用してTiDB Cloudにログインできるようになります。ドメイン名を入力する際は、 `@`記号を除外し、カンマで区切る必要があります。例： `company1.com,company2.com`
 
@@ -170,7 +170,7 @@ TiDB Cloudでは、OIDC認証方式はデフォルトで無効になっていま
 
         デフォルトでは無効になっています。必要に応じて有効にすることができます。
 
-    -   **許可されたメールドメイン**
+    -   **Allowed Email Domains**
 
         OIDC で **Auto-provision Accounts** を有効にする場合、このフィールドは必須です。 **Domains** で検証済みのドメインのみを入力してください。これらのメールドメインを持つユーザーのみが、カスタムURLを使用してTiDB Cloudにログインし、組織に自動プロビジョニングされます。 `@`記号を除外し、複数のドメインはカンマで区切ります。例： `company1.com,company2.com`
 
@@ -205,7 +205,7 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
 
         カスタム ログイン ページに表示される SAML 認証方法の名前を指定します。
 
-    -   **サインオンURL**
+    -   **Sign on URL**
 
         IdP から取得した URL を貼り付けます。
 
@@ -217,7 +217,7 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
 
         デフォルトでは無効になっています。必要に応じて有効にすることができます。
 
-    -   **許可されたメールドメイン**
+    -   **Allowed Email Domains**
 
         SAML で **Auto-provision Accounts** または **SCIM Provisioning Accounts** を有効にする場合、このフィールドは必須です。 **Domains** で検証済みのドメインのみを入力してください。これらのメールドメインを持つユーザーのみが、カスタムURLを使用してTiDB Cloudにログインし、組織にプロビジョニングされます。 `@`記号を除外し、複数のドメインはカンマで区切ります。例： `company1.com,company2.com` 。
 
@@ -227,7 +227,7 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
         >
         > 設定を保存する前に、TiDB Cloud からロックアウトされないように、現在ログインに使用している検証済みのメールドメインを必ず含めてください。
 
-    -   **SCIMプロビジョニングアカウント**
+    -   **SCIM Provisioning Accounts**
 
         デフォルトでは無効になっています。TiDB Cloud組織のユーザーとグループのプロビジョニング、デプロビジョニング、およびID管理をIDプロバイダから一元化・自動化したい場合は、有効にすることができます。詳細な設定手順については、 [SCIMプロビジョニングを構成する](#configure-scim-provisioning)をご覧ください。
 
@@ -243,7 +243,7 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
 >
 > SCIM プロビジョニングは[SAML認証方法](#configure-the-saml-authentication-method)でのみ有効にできます。
 
-1.  TiDB Cloudで、 [SAML認証方法](#configure-the-saml-authentication-method)の**SCIM プロビジョニング アカウント**オプションを有効にし、後で使用するために次の情報を記録します。
+1.  TiDB Cloudで、 [SAML認証方法](#configure-the-saml-authentication-method)の**SCIM Provisioning Accounts**オプションを有効にし、後で使用するために次の情報を記録します。
 
     -   SCIMコネクタのベースURL
     -   ユーザーの一意の識別子フィールド

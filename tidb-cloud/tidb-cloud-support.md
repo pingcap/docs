@@ -41,8 +41,8 @@ PingCAP ヘルプ センターには、 [https://tidb.support.pingcap.com/servic
 
 -   [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**[?]**をクリックし、 **[サポート チケット]**をクリックします。
 -   [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある**[サポート] を**クリックし、サポート プランに応じて次のいずれかを実行します。
-    -   **基本**: **[アカウントと請求]**領域で、 **[アカウント/請求の問題]**をクリックします。
-    -   **Developer** 、 **Enterprise** 、または**Premium** : **「専門家に相談」**エリアで、 **PingCAP ヘルプ センター**をクリックします。
+    -   **基本**: **[Account & Billing]**領域で、 **[アカウント/請求の問題]**をクリックします。
+    -   **Developer** 、 **Enterprise** 、または**Premium** : **Talk to an expert**エリアで、 **PingCAP Help Center**をクリックします。
 -   プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページで、クラスターの行にある**[...]**をクリックし、 **[サポートを受ける]**を選択します。
 -   クラスターの概要ページで、右上隅の**[...]**をクリックし、 **[サポートを受ける]**を選択します。
 
@@ -52,13 +52,13 @@ TiDB Cloudのすべてのユーザーは、請求およびアカウント関連�
 
 1.  [PingCAP ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)にログインし、 [TiDB Cloudアカウント/請求サポート](https://tidb.support.pingcap.com/servicedesk/customer/portal/16)をクリックします。
 
-2.  **[リクエストを送信]**をクリックします。
+2.  **[Submit a request]**をクリックします。
 
 3.  次のフィールドに入力します。
 
     -   **概要**: 質問の簡単な概要を記入します。
     -   **TiDB Cloud Org** : 該当する場合は、関連するTiDB Cloud組織を選択します。
-    -   **TiDB Cloudクラスタ**: 該当する場合は、関連するTiDB Cloudクラスターを選択します。
+    -   **TiDB Cloud Resource**: 該当する場合は、関連するTiDB Cloudクラスターを選択します。
     -   **説明**: 問題に関する詳細を提供します。
     -   **重大度**: 問題のビジネスへの影響を見積もり、適切な重大度を選択します。(S1 は請求やアカウントの問題には適用されません。)
 
@@ -74,7 +74,7 @@ TiDB Cloudのすべてのユーザーは、請求およびアカウント関連�
     >
     > [TiDB Cloudテクニカルサポート](https://tidb.support.pingcap.com/servicedesk/customer/portal/6)エントリーは、 **Developer** 、 **Enterprise** 、または**Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)でのみご利用いただけます。Basic**プラン**をご利用の場合は、 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)または[Discord](https://discord.com/invite/KVRZBR2DrG)のコミュニティチャンネルを通じて技術的な質問を投稿できます。PingCAPのエンジニアやコミュニティメンバーがサポートいたします。
 
-2.  **[リクエストを送信]**をクリックします。
+2.  **[Submit a request]**をクリックします。
 
 3.  次のフィールドに入力します。
 
@@ -82,7 +82,7 @@ TiDB Cloudのすべてのユーザーは、請求およびアカウント関連�
 
     -   **TiDB Cloud Org** : 問題に関連するTiDB Cloud組織を選択します。
 
-    -   **TiDB Cloudクラスタ**: 該当する場合は、関連するTiDB Cloudクラスターを選択します。
+    -   **TiDB Cloud Resource**: 該当する場合は、関連するTiDB Cloudクラスターを選択します。
 
     -   **環境**: TiDB Cloudクラスターを使用する対応する環境を選択します。
 

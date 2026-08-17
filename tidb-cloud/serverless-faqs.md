@@ -114,7 +114,7 @@ TiDB Cloud Starter クラスターに月間使用制限が設定されている�
 
 個々のSQL文のRU消費量を取得するには、SQL文[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption)を使用できます。ただし、 `EXPLAIN ANALYZE`で返されるRU使用量には、出力RUは含まれていないことに注意してください。出力使用量はゲートウェイで個別に測定され、TiDBサーバーには認識されないためです。
 
-クラスターで使用されているRUとストレージを確認するには、クラスターの概要ページの**「今月の使用量」**ペインをご覧ください。このペインに表示される過去のリソース使用量データとリアルタイムのリソース使用量を参考に、クラスターのリソース消費量を追跡し、適切な使用制限を見積もることができます。無料割り当てで要件を満たせない場合は、追加リソースの使用制限を編集できます。詳細については、 [TiDB Cloud Starter の使用割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)ご覧ください。
+クラスターで使用されているRUとストレージを確認するには、クラスターの概要ページの**Usage this month**ペインをご覧ください。このペインに表示される過去のリソース使用量データとリアルタイムのリソース使用量を参考に、クラスターのリソース消費量を追跡し、適切な使用制限を見積もることができます。無料割り当てで要件を満たせない場合は、追加リソースの使用制限を編集できます。詳細については、 [TiDB Cloud Starter の使用割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)ご覧ください。
 
 ### 消費される RU の数を最小限に抑えるためにワークロードを最適化するにはどうすればよいでしょうか? {#how-can-i-optimize-my-workload-to-minimize-the-number-of-rus-consumed}
 

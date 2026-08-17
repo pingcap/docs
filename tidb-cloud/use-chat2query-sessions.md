@@ -23,7 +23,7 @@ Chat2Query API v3以降では、セッション関連のエンドポイントを
 
 > **Tip:**
 >
-> エンドポイントの具体的なコード例を取得するには、データアプリの左側のペインでエンドポイント名をクリックし、 **「コード例を表示」**をクリックします。詳細については、 [エンドポイントのサンプルコードを取得する](/tidb-cloud/use-chat2query-api.md#get-the-code-example-of-an-endpoint)を参照してください。
+> エンドポイントの具体的なコード例を取得するには、データアプリの左側のペインでエンドポイント名をクリックし、 **Show Code Example**をクリックします。詳細については、 [エンドポイントのサンプルコードを取得する](/tidb-cloud/use-chat2query-api.md#get-the-code-example-of-an-endpoint)を参照してください。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/sessions'\

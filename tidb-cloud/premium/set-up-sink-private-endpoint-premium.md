@@ -88,9 +88,9 @@ AWS では、ダウンストリームサービスに応じて接続タイプを�
 
 3.  リマインダーに従って、 TiDB Cloudの[AWSプリンシパル](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts)にエンドポイントを作成する権限を与えます。
 
-4.  [ネットワーク](#network)セクションで収集した**エンドポイント サービス名**を入力し、接続タイプとして**AWS Endpoint Service**を選択します。
+4.  [ネットワーク](#network)セクションで収集した**Endpoint Service Name**を入力し、接続タイプとして**AWS Endpoint Service**を選択します。
 
-5.  **AZの数**を選択してください。AZの数とAZ IDが、Kafkaのデプロイメントと一致していることを確認してください。
+5.  **Number of AZs**を選択してください。AZの数とAZ IDが、Kafkaのデプロイメントと一致していることを確認してください。
 
 6.  このプライベートエンドポイントがApache Kafka用に作成された場合は、 **「Kafka 用のアドバタイズドリスナーを設定する」**チェックボックスを選択します。
 
@@ -123,9 +123,9 @@ AWS では、ダウンストリームサービスに応じて接続タイプを�
 
 3.  リマインダーに従って、TiDB Cloud の Alibaba Cloud アカウント ID をエンドポイント サービスのホワイトリストに追加して、 TiDB Cloud VPC アクセスを許可します。詳細については、 [エンドポイントサービスの許可リストにおけるアカウントIDの管理](https://www.alibabacloud.com/help/en/privatelink/user-guide/add-and-manage-service-whitelists)を参照してください。
 
-4.  [ネットワーク](#network)セクションで収集した**エンドポイント サービス名**を入力します。
+4.  [ネットワーク](#network)セクションで収集した**Endpoint Service Name**を入力します。
 
-5.  **AZの数**を選択してください。AZの数とAZ IDが、Kafkaのデプロイメントと一致していることを確認してください。
+5.  **Number of AZs**を選択してください。AZの数とAZ IDが、Kafkaのデプロイメントと一致していることを確認してください。
 
 6.  このプライベートエンドポイントがApache Kafka用に作成された場合は、 **「Kafka 用のアドバタイズドリスナーを設定する」**チェックボックスを選択します。
 

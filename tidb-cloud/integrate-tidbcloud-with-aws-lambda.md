@@ -114,12 +114,12 @@ AWS リソースを作成する際に`us-east-1`以外の別の AWS リージョ
 AWS CloudFormation を使用して書店プロジェクトを設定するには、次の手順を実行します。
 
 1.  AWS マネジメントコンソールに移動し、 [AWS CloudFormationサービス](https://console.aws.amazon.com/cloudformation)にアクセスします。
-2.  **[スタックの作成]** &gt; **[新しいリソースを使用 (標準)]**をクリックします。
+2.  **[スタックの作成]** &gt; **With new resources (standard)**をクリックします。
 3.  「**スタックの作成」**ページで、スタックの作成プロセスを完了します。
 
-    1.  **前提条件の**領域で、 **「既存のテンプレートを選択」**を選択します。
+    1.  **前提条件**の領域で、 **Choose an existing template**を選択します。
 
-    2.  **テンプレート指定**領域で、 **[テンプレート ファイルをアップロード]**を選択し、 **[ファイルを選択]**をクリックしてテンプレート ファイル (YAML または JSON) をアップロードし、 **[次へ]**をクリックします。
+    2.  **テンプレート指定**領域で、 **Upload a template file**を選択し、 **[ファイルを選択]**をクリックしてテンプレート ファイル (YAML または JSON) をアップロードし、 **[次へ]**をクリックします。
 
         まだファイルをお持ちでない場合は、 [GitHub](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest)からダウンロードしてください。このファイルには、プロジェクトに必要なリソースを作成するAWS CloudFormationテンプレートが含まれています。
 

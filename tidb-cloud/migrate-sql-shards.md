@@ -189,11 +189,11 @@ Amazon S3へのアクセスを設定した後、 TiDB Cloudコンソールで次
 
 3.  **Amazon S3からデータをインポートする**ページで、以下の情報を入力してください。
 
-    -   **インポートするファイル数**： TiDB Cloud StarterまたはTiDB Cloud Essentialの場合は、 **「複数のファイル」**を選択してください。このフィールドはTiDB Cloud Dedicatedでは利用できません。
-    -   **含まれるスキーマ ファイル**:**いいえ**を選択します。
+    -   **Import File Count**： TiDB Cloud StarterまたはTiDB Cloud Essentialの場合は、 **「複数のファイル」**を選択してください。このフィールドはTiDB Cloud Dedicatedでは利用できません。
+    -   **Included Schema Files**:**いいえ**を選択します。
     -   **データ形式**： **CSV**を選択してください。
     -   **フォルダー URI** : ソース データのバケット URI を入力してください。この例では、テーブルに対応する第 2 階層のディレクトリ`s3://dumpling-s3/store/sales/`を使用することで、 TiDB Cloud はすべての MySQL インスタンスのデータを`store.sales`に一度にインポートしてマージできます。
-    -   **バケットアクセス**&gt; **AWSロールARN** ：取得したロールARNを入力してください。
+    -   **バケットアクセス**&gt; **AWS Role ARN** ：取得したロールARNを入力してください。
 
     バケットの場所が<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>クラスターと異なる場合は、クロスリージョンのコンプライアンスを確認してください。
 
@@ -221,7 +221,7 @@ Amazon S3へのアクセスを設定した後、 TiDB Cloudコンソールで次
 
 6.  必要に応じてCSV設定を編集してください。
 
-    また、 **「CSV設定の編集」を**クリックすると、バックスラッシュエスケープ、セパレータ、区切り文字を設定して、より詳細な制御を行うことができます。
+    また、 **Edit CSV configuration**をクリックすると、バックスラッシュエスケープ、セパレータ、区切り文字を設定して、より詳細な制御を行うことができます。
 
     > **Note:**
     >
