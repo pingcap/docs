@@ -1,11 +1,11 @@
 ---
 title: DROP FUNCTION
-summary: Learn how to remove an external scalar or table function registration from TiDB Cloud Lake and verify that it is no longer callable.
+summary: Drops an external function.
 ---
 
 # DROP FUNCTION
 
-Removes an external scalar or table function registration. This statement does not stop or delete the external UDF Server.
+Drops an external function.
 
 ## Syntax
 
