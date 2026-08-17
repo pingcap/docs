@@ -77,7 +77,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
     1.  [Google Cloud Console](https://console.cloud.google.com/)にサインインしてください。
 
-    2.  に移動して、 [役割](https://console.cloud.google.com/iam-admin/roles)**Create role**をクリックします。
+    2.  [役割](https://console.cloud.google.com/iam-admin/roles)ページに移動して、 **Create role**をクリックします。
 
         ![Create a role](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-create-role.png)
 

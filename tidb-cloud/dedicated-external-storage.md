@@ -176,7 +176,7 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
 
     1.  [Google Cloud Console](https://console.cloud.google.com/)にサインインしてください。
 
-    2.  [役割](https://console.cloud.google.com/iam-admin/roles)ページに移動し、「役割**CREATE ROLE**をクリックしてください。
+    2.  [役割](https://console.cloud.google.com/iam-admin/roles)ページに移動し、**CREATE ROLE**をクリックしてください。
 
         ![Create a role](/media/tidb-cloud/gcp-create-role.png)
 
