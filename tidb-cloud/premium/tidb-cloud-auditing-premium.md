@@ -251,7 +251,25 @@ In the TiDB Cloud console, go back to the **Database Audit Log Storage Configura
 
 </CustomContent>
 
-## Specify auditing filter rules
+## Configure database audit logging settings
+
+After configuring storage for your cloud provider, complete the step for database audit logging settings:
+
+1. Set the log file rotation policy.
+
+    You can rotate audit log files based on either file size or time interval. When either condition is met, TiDB Cloud generates a new audit log file.
+
+2. Configure log redaction.
+
+    Log redaction is enabled by default. When enabled, sensitive information in the SQL text is replaced with `?` in audit logs.
+
+3. Click **Save and Enable** to apply the settings and enable audit logging.
+
+> **Note:**
+>
+> If you disable log redaction, audit log files written to your cloud storage might contain sensitive information. This configuration is not recommended due to potential security risks.
+
+## Specify audit filter rules
 
 After enabling audit logging, you must specify auditing filter rules to control which user access events to capture and write to audit logs. If no filter rules are specified, TiDB Cloud does not log anything.
 
@@ -259,14 +277,17 @@ To specify auditing filter rules for an instance, take the following steps:
 
 1. On the **DB Audit Logging** page, click **Add Filter Rule** in the **Log Filter Rules** section to add an audit filter rule.
 
-    You can add one audit rule at a time. Each rule specifies a user expression, database expression, table expression, and access type. You can add multiple audit rules to meet your auditing requirements.
+2. In the **Add Filter Rule** dialog, configure the following items:
 
-2. In the **Log Filter Rules** section, click **>** to expand and view the list of audit rules you have added.
+    - **Filter Name**: Enter a name for the filter rule.
+    - **SQL User**: Enter the SQL user in the `<user>@<host>` format. The username and hostname can use `%` to match zero or more characters or `_` to match exactly one character. The `@` symbol and `<host>` are optional.
+    - **Filter Events**: Select the events to log. For the supported filter events, see [Audit filter events](#audit-filter-events).
+
+3. Click **Confirm** to add the filter rule.
 
 > **Note:**
 >
-> - The filter rules are regular expressions and case-sensitive. If you use the wildcard rule `.*`, all users, databases, or table events in the instance are logged.
-> - Because audit logging consumes instance resources, be prudent when specifying filter rules. To minimize the consumption, it is recommended that you specify filter rules to limit the scope of audit logging to specific database objects, users, and actions, where possible.
+> - Because audit logging consumes instance resources, be prudent when specifying filter rules. To minimize resource usage, specify filter rules to limit audit logging to specific users and events where possible.
 
 ## View audit logs
 
@@ -283,6 +304,31 @@ If you no longer want to audit an instance, go to the page of the instance, clic
 > **Note:**
 >
 > Each time the size of the log file reaches 10 MiB, the log file is pushed to the cloud storage bucket. Therefore, after audit logging is disabled, the log file whose size is smaller than 10 MiB will not be automatically pushed to the cloud storage bucket. To get the log file in this situation, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+## Audit filter events
+
+The following table shows all event classes in database audit logging:
+
+| Event class   | Description                                                                                      | Parent-class   |
+|---------------|--------------------------------------------------------------------------------------------------|---------------|
+| `CONNECTION`    | Records all operations related to connections, such as connection handshakes, connections, disconnections, connection resets, and user changes | -             |
+| `CONNECT`       | Records all connection handshake operations                                          | `CONNECTION`    |
+| `DISCONNECT`    | Records all disconnection operations                                                      | `CONNECTION`    |
+| `CHANGE_USER`   | Records all operations of changing users                                                          | `CONNECTION`    |
+| `QUERY`         | Records all SQL statement operations, including errors that occur when querying or modifying data  | -               |
+| `TRANSACTION`   | Records all operations related to transactions, such as `BEGIN`, `COMMIT`, and `ROLLBACK`         | `QUERY`         |
+| `EXECUTE`       | Records all operations of the `EXECUTE` statements                                                | `QUERY`         |
+| `QUERY_DML`     | Records all operations of the DML statements, including `INSERT`, `REPLACE`, `UPDATE`, `DELETE`, and `LOAD DATA`    | `QUERY`     |
+| `INSERT`        | Records all operations of the `INSERT` statements                                                   | `QUERY_DML`   |
+| `REPLACE`       | Records all operations of the `REPLACE` statements                                                  | `QUERY_DML`   |
+| `UPDATE`        | Records all operations of the `UPDATE` statements                                                   | `QUERY_DML`   |
+| `DELETE`        | Records all operations of the `DELETE` statements                                                   | `QUERY_DML`   |
+| `LOAD DATA`     | Records all operations of the `LOAD DATA` statements                                                | `QUERY_DML`   |
+| `SELECT`        | Records all operations of the `SELECT` statements                                                   | `QUERY`       |
+| `QUERY_DDL`     | Records all operations of the DDL statements                                                        | `QUERY`       |
+| `AUDIT`         | Records all operations related to configuring TiDB Cloud database auditing, including setting system variables and calling system functions | -                   |
+| `AUDIT_FUNC_CALL` | Records all operations of calling system functions related to TiDB Cloud database auditing        | `AUDIT`       |
+| `AUDIT_SET_SYS_VAR` | Records all operations of setting system variables        | `AUDIT`       |
 
 ## Audit logging fields
 

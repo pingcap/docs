@@ -308,7 +308,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">🔒</td>
     <td style="text-align:center;">✅</td>
-    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
   </tr>
   <tr>
     <td>Console audit logging</td>
