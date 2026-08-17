@@ -5,7 +5,7 @@ summary: Learn the concept of the TiCDC Debezium Protocol and how to use it.
 
 # TiCDC Debezium Protocol
 
-[Debezium](https://debezium.io/) is a tool for capturing database changes. It converts each captured database change into a message called an "event" and sends these events to Kafka. Starting from v8.0.0, TiCDC supports sending TiDB changes to Kafka using a Debezium style output format, simplifying migration from MySQL databases for users who had previously been using Debezium's MySQL integration. Starting from v9.0.0, TiCDC supports DDL events and WATERMARK events.
+[Debezium](https://debezium.io/) is a tool for capturing database changes. It converts each captured database change into a message called an "event" and sends these events to Kafka. Starting from v8.0.0, TiCDC supports directly sending TiDB row data changes (DML events) to Kafka in the Debezium format, simplifying the migration from MySQL databases for users who previously used the Debezium MySQL integration. Starting from [TiCDC v8.5.4-release.1](https://github.com/pingcap/ticdc/releases/tag/v8.5.4-release.1) ([new TiCDC architecture](/ticdc/ticdc-architecture.md)) and v9.0.0, TiCDC also supports sending DDL and WATERMARK events in the Debezium format.
 
 ## Use the Debezium message format
 
