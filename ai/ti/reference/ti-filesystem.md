@@ -60,7 +60,7 @@ ti fs
 
 | Command | Purpose and key inputs | Example |
 | --- | --- | --- |
-| `create-file-system` | Provisions a Filesystem with a server-assigned ID; `--wait` waits until data-plane access is ready. | `ti fs create-file-system --wait` |
+| `create-file-system` | Provisions a Filesystem with a server-assigned ID and optional display metadata; `--wait` waits until data-plane access is ready. | `ti fs create-file-system --display-name agent-workspace --wait` |
 | `import-file-system-token` | Validates and stores an existing token under its embedded file system ID. | `ti fs import-file-system-token --from-file ./fs-token --region aws-us-east-1` |
 | `generate-file-system-token` | Generates an additional owner token and returns its plaintext once. | `ti fs generate-file-system-token --file-system-id <file-system-id> --token-name ci --ttl 24h` |
 | `generate-file-system-scoped-token` | Uses an owner token to generate a finite path-and-operation-limited token. | `ti fs generate-file-system-scoped-token --ttl 24h --allow /workspace:read,list` |
@@ -69,8 +69,8 @@ ti fs
 | `disable-file-system-token` | Temporarily disables a token by immutable token ID. | `ti fs disable-file-system-token --file-system-id <file-system-id> --token-id <token-id>` |
 | `delete-file-system-token` | Permanently revokes a token by immutable token ID. | `ti fs delete-file-system-token --file-system-id <file-system-id> --token-id <token-id>` |
 | `refresh-file-system-token` | Rotates the supplied token and returns its replacement plaintext once. | `ti fs refresh-file-system-token --file-system-id <file-system-id>` |
-| `list-file-systems` | Lists remote resources available to the TiDB Cloud credentials in the effective region. | `ti fs list-file-systems --output text` |
-| `describe-file-system` | Reads one remote resource by ID without requiring its FS token. | `ti fs describe-file-system --file-system-id <file-system-id>` |
+| `list-file-systems` | Lists authoritative remote metadata and quota information, optionally filtered by display-name substring and one exact label. | `ti fs list-file-systems --output text` |
+| `describe-file-system` | Reads authoritative remote metadata and quota information by ID without requiring its FS token. | `ti fs describe-file-system --file-system-id <file-system-id>` |
 | `check-file-system` | Verifies resource selection, endpoint resolution, credentials, and companion access. | `ti fs check-file-system --file-system-id <file-system-id>` |
 | `delete-file-system` | Requests asynchronous deletion by ID and removes a matching local credential after acceptance. | `ti fs delete-file-system --file-system-id <file-system-id>` |
 
@@ -128,14 +128,17 @@ Create a resource, wait until data-plane access is ready, and save the server-as
 
 ```bash
 umask 077
-ti fs create-file-system --wait > ./filesystem.json
+ti fs create-file-system \
+  --display-name agent-workspace \
+  --label environment=development \
+  --wait > ./filesystem.json
 export TI_FS_FILE_SYSTEM_ID="$(jq -r '.file_system_id' ./filesystem.json)"
 export TI_FS_TOKEN="$(jq -r '.fs_token' ./filesystem.json)"
 ```
 
 Without `--wait`, `ti` returns after Drive9 accepts provisioning. With the flag, `ti` waits up to 10 minutes until the root is readable through the public Drive9 data-plane CLI. A failed wait leaves the resource and locally stored credential intact.
 
-The JSON response includes `fs_token` exactly once. Store it in a secret manager, then delete `filesystem.json`. A configured machine can use the locally stored credential by ID without exporting the token.
+The JSON response includes `fs_token` exactly once. Store it in a secret manager, then delete `filesystem.json`. A configured machine can use the locally stored credential by ID without exporting the token. Display names and labels are organization-visible inventory metadata, not resource selectors. Do not store credentials, connection strings, private paths, personal data, or other secrets in labels.
 
 List remote resources in the effective region and describe one by ID:
 
@@ -143,6 +146,16 @@ List remote resources in the effective region and describe one by ID:
 ti fs list-file-systems
 ti fs describe-file-system --file-system-id <file-system-id>
 ```
+
+Filter the inventory by a display-name substring and one exact label:
+
+```bash
+ti fs list-file-systems \
+  --display-name workspace \
+  --label environment=development
+```
+
+List and describe results include authoritative display metadata, status, region, quota and usage. `has_local_token` reports only whether the selected local profile has a matching token; token values are never included.
 
 Select a resource for subsequent commands in the current shell:
 

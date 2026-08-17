@@ -5,7 +5,7 @@ summary: Describe a remote TiDB Cloud Filesystem.
 
 # ti fs describe-file-system
 
-Describes one remote Filesystem by its server-assigned ID. The command does not require a locally stored FS token.
+Describes one remote Filesystem by its server-assigned ID. The response includes its authoritative display name, labels, placement, status, quota and usage, and the non-secret `has_local_token` hint. The command does not require a locally stored FS token.
 
 > **Note:**
 >
