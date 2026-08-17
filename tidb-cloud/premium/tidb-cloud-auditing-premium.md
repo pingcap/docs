@@ -287,7 +287,7 @@ To specify auditing filter rules for an instance, take the following steps:
 
 > **Note:**
 >
-> - Because audit logging consumes instance resources, be prudent when specifying filter rules. To minimize the consumption, it is recommended that you specify filter rules to limit the scope of audit logging to specific users and events, where possible.
+> - Because audit logging consumes instance resources, be prudent when specifying filter rules. To minimize resource usage, specify filter rules to limit audit logging to specific users and events where possible.
 
 ## View audit logs
 
