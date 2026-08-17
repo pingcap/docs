@@ -51,7 +51,7 @@ TiDB Cloudプランに応じて、適切なエンドポイントモデルを選�
 
 4.  TiDB Cloudでは、TiDB Cloud Starterインスタンス用に[ブランチ](https://docs.pingcap.com/tidbcloud/branch-overview/?plan=starter)を作成できます。ブランチが作成されると、**ブランチの**ドロップダウン リストからブランチに接続できます。 `main` TiDB Cloud Starterインスタンス自体を表します。
 
-5.  まだパスワードを設定していない場合は、 **Generate Password**を生成してください。生成されたパスワードは二度と表示されませんので、安全な場所に保存してください。
+5.  まだパスワードを設定していない場合は、 **Generate Password**をクリックしてランダムなパスワードを生成してください。生成されたパスワードは二度と表示されませんので、安全な場所に保存してください。
 
 6.  接続文字列を使用して、 TiDB Cloud StarterまたはEssentialインスタンスに接続します。
 

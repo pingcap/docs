@@ -267,7 +267,7 @@ Azure ARMテンプレートを使用してSASトークンを作成するには�
     -   データをAzure Blob Storageにエクスポートする場合：
 
         1.  **Export Data**をクリックします。
-        2.  **ターゲット接続**で**Target Connection**を選択してください。
+        2.  **Target Connection**で**Azure Blob Storage**を選択してください。
         3.  SASトークンフィールドの下にある**「ここをクリックして、Azure ARMテンプレートを使用して新しいものを作成してください」をクリックしてください**。
 
     </CustomContent>

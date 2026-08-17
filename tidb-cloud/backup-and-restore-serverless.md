@@ -30,11 +30,11 @@ TiDB Cloudはデータを自動的にバックアップするため、災害発�
 
 自動バックアップの設定は、 TiDB Cloud StarterインスタンスとTiDB Cloud Essentialインスタンスで異なり、以下の表に示されています。
 
-| バックアップ設定   | TiDB Cloud Starter （無料） | TiDB Cloud Starter （利用限度額 &gt; 0） | TiDB Cloud Essential |
+| Backup setting   | TiDB Cloud Starter （無料） | TiDB Cloud Starter （利用限度額 &gt; 0） | TiDB Cloud Essential |
 | ---------- | ----------------------- | --------------------------------- | -------------------- |
-| バックアップサイクル | 毎日                      | 毎日                                | 毎日                   |
-| バックアップ保持   | 1日                      | 最大30日間                            | 最大30日間               |
-| バックアップ時間   | 固定時間                    | 設定可能                              | 設定可能                 |
+| Backup Cycle | 毎日                      | 毎日                                | 毎日                   |
+| Backup Retention   | 1日                      | 最大30日間                            | 最大30日間               |
+| Backup Time   | 固定時間                    | 設定可能                              | 設定可能                 |
 
 -   **Backup Cycle**とは、バックアップが実行される頻度のことです。
 

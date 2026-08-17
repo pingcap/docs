@@ -37,7 +37,7 @@ aliases: ['/ja/tidbcloud/migrate-from-amazon-s3-or-gcs','/ja/tidbcloud/migrate-f
     > -   データファイルのみを圧縮すればよく、データベースファイルやテーブルスキーマファイルを圧縮する必要はありません。
     > -   パフォーマンスを向上させるためには、各圧縮ファイルのサイズを100MiBに制限することをお勧めします。
     > -   Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
-    > -   圧縮されていないファイルの場合、前述のルールに従って CSV ファイル名を更新できない場合 (たとえば、CSV ファイル リンクが他のプログラムでも使用されている場合)、ファイル名を変更せずに、[ステップ4](#step-4-import-csv-files-to-tidb-cloud)の**宛先マッピング**手順で**Destination Mapping**を選択を解除して、ソース ファイルを単一のターゲット テーブルに手動でマッピングできます。
+    > -   圧縮されていないファイルの場合、前述のルールに従って CSV ファイル名を更新できない場合 (たとえば、CSV ファイル リンクが他のプログラムでも使用されている場合)、ファイル名を変更せずに、[ステップ4](#step-4-import-csv-files-to-tidb-cloud)の**Destination Mapping**手順で**<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDB ファイル命名規則</a>を使用して自動マッピングを行う」の**選択を解除して、ソース ファイルを単一のターゲット テーブルに手動でマッピングできます。
 
 ## ステップ2．対象テーブルのスキーマを作成する {#step-2-create-the-target-table-schemas}
 
