@@ -269,7 +269,7 @@ After configuring storage for your cloud provider, complete the step for databas
 >
 > If you disable log redaction, audit log files written to your cloud storage might contain sensitive information. This configuration is not recommended due to potential security risks.
 
-## Specify auditing filter rules
+## Specify audit filter rules
 
 After enabling audit logging, you must specify auditing filter rules to control which user access events to capture and write to audit logs. If no filter rules are specified, TiDB Cloud does not log anything.
 
