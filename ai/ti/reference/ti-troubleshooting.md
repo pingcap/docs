@@ -106,7 +106,7 @@ The TiDB Cloud CLI intentionally does not infer a Filesystem from local credenti
 
 ## Filesystem region is unsupported
 
-The configured TiDB Cloud region might not have a `tidb_cloud_native` Filesystem endpoint. Compare it with [current Filesystem regions](/ai/ti/reference/ti-regions-security-and-limitations.md#filesystem-regions). Change placement with a valid profile or command-scoped `--region`; do not configure a raw server URL.
+The configured TiDB Cloud region might not be one of the Filesystem endpoints built into the installed TiDB Cloud CLI release. Compare it with [current Filesystem regions](/ai/ti/reference/ti-regions-security-and-limitations.md#filesystem-regions). Change placement with a valid profile or command-scoped `--region`; do not configure a raw server URL.
 
 ## Companion is missing or incompatible
 
@@ -157,7 +157,7 @@ Deleting `~/.ti/db_users/<cluster-id>/credentials` removes local passwords. Run 
 
 ## Mount does not become ready
 
-Inspect the log path printed by the timeout error. Confirm:
+Background mount success prints the TiDB Cloud CLI result without Drive9 startup messages. If startup fails or times out, inspect the companion log path in the error. Confirm:
 
 - the mount path exists and is writable;
 - no existing mount covers the path;

@@ -7,6 +7,8 @@ summary: Mount a TiDB Cloud Filesystem.
 
 Mounts a Filesystem through automatic, FUSE, or WebDAV mode. The command alias is `ti fs mount`.
 
+In the default background mode, the command waits for the mount to become ready and then prints the TiDB Cloud CLI mount result. It suppresses companion startup messages, including Drive9-specific unmount guidance. If startup fails, the error includes the companion log path for diagnosis. With `--foreground`, companion runtime output remains attached to the terminal.
+
 > **Note:**
 >
 > The TiDB Cloud Command Line Interface — `ti` — is currently in preview. Its features and command-line interface might change without prior notice.

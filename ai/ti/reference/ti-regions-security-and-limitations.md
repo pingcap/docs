@@ -22,22 +22,22 @@ The TiDB Cloud CLI accepts one canonical region code:
 | `aws-eu-central-1` | AWS | Frankfurt |
 | `aws-ap-northeast-1` | AWS | Tokyo |
 | `aws-ap-southeast-1` | AWS | Singapore |
-| `ali-ap-southeast-1` | Alibaba Cloud | Singapore |
+| `alicloud-ap-southeast-1` | Alibaba Cloud | Singapore |
 
 Alibaba Cloud currently supports only the Singapore region in the TiDB Cloud CLI. Users cannot configure raw service URLs.
 
 ## Filesystem regions
 
-Filesystem endpoint availability is resolved from the hosted Drive9 region manifest. At publication time, TiDB Cloud native Filesystem mode is available in:
+The TiDB Cloud CLI includes endpoint mappings for the following TiDB Cloud Filesystem regions:
 
 | Cloud provider | Canonical region code |
 | --- | --- |
 | AWS | `aws-ap-southeast-1` |
 | AWS | `aws-us-east-1` |
 | AWS | `aws-us-west-2` |
-| Alibaba Cloud | `ali-ap-southeast-1` |
+| Alibaba Cloud | `alicloud-ap-southeast-1` |
 
-The hosted manifest is authoritative and can change during preview. A profile in another TiDB Cloud region can manage Starter databases but receives an unsupported Filesystem endpoint error until that placement appears in the manifest.
+The TiDB Cloud CLI does not download a Drive9 region manifest at runtime. A profile in another TiDB Cloud region can manage Starter databases but receives an unsupported Filesystem endpoint error until that placement is included in a TiDB Cloud CLI release.
 
 ## Credential requirements
 
