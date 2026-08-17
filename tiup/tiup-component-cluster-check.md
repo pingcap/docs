@@ -54,7 +54,9 @@ summary: TiUP クラスタは、ハードウェアとソフトウェア環境が
 
 THP が有効になっているかどうかを確認するには、次のコマンドを実行します。
 
-    cat /sys/kernel/mm/transparent_hugepage/enabled
+```
+cat /sys/kernel/mm/transparent_hugepage/enabled
+```
 
 `never`に設定されていない場合は`grubby --update-kernel=ALL --args="transparent_hugepage=never"`に変更できます。
 
@@ -64,9 +66,11 @@ THP が有効になっているかどうかを確認するには、次のコマ�
 
 `/etc/security/limits.conf`ファイル内の制限値を確認します。
 
-    <deploy-user> soft nofile 1000000
-    <deploy-user> hard nofile 1000000
-    <deploy-user> soft stack 10240
+```
+<deploy-user> soft nofile 1000000
+<deploy-user> hard nofile 1000000
+<deploy-user> soft stack 10240
+```
 
 `<deploy-user>`は TiDB クラスターを展開して実行するユーザーであり、最後の列はシステムに必要な最小値です。
 

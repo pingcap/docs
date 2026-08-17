@@ -21,23 +21,29 @@ TiDBは各テーブルにTableID、各インデックスにIndexID、各行にRo
 
 各データ行は、次の規則に従ってキーと値のペアとしてエンコードされます。
 
-    Key: tablePrefix{TableID}_recordPrefixSep{RowID}
-    Value: [col1, col2, col3, col4]
+```
+Key: tablePrefix{TableID}_recordPrefixSep{RowID}
+Value: [col1, col2, col3, col4]
+```
 
 キーの`tablePrefix`と`recordPrefixSep`は特定の文字列定数であり、KV 空間内の他のデータと区別するために使用されます。
 
 インデックス データの場合、キーと値のペアは次の規則に従ってエンコードされます。
 
-    Key: tablePrefix{TableID}_indexPrefixSep{IndexID}_indexedColumnsValue
-    Value: rowID
+```
+Key: tablePrefix{TableID}_indexPrefixSep{IndexID}_indexedColumnsValue
+Value: rowID
+```
 
 インデックス データには、一意インデックスと非一意インデックスの 2 種類があります。
 
 -   一意インデックスの場合は、上記のコーディング規則に従うことができます。
 -   非一意インデックスの場合、このエンコーディングでは一意キーを構築できません。これは、同じインデックスの`tablePrefix{TableID}_indexPrefixSep{IndexID}`は同じですが、複数の行の`ColumnsValue`は同じになる可能性があるためです。非一意インデックスのエンコーディング規則は次のとおりです。
 
-        Key: tablePrefix{TableID}_indexPrefixSep{IndexID}_indexedColumnsValue_rowID
-        Value: null
+    ```
+    Key: tablePrefix{TableID}_indexPrefixSep{IndexID}_indexedColumnsValue_rowID
+    Value: null
+    ```
 
 ### テーブルホットスポット {#table-hotspots}
 
@@ -85,9 +91,11 @@ TiDBのコーディングルールによれば、同一テーブルのデータ�
 
 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を設定すると、行 ID が分散されて複数のリージョンに書き込まれるため、書き込みホットスポットの問題を軽減できます。
 
-    SHARD_ROW_ID_BITS = 4 # Represents 16 shards.
-    SHARD_ROW_ID_BITS = 6 # Represents 64 shards.
-    SHARD_ROW_ID_BITS = 0 # Represents the default 1 shard.
+```
+SHARD_ROW_ID_BITS = 4 # Represents 16 shards.
+SHARD_ROW_ID_BITS = 6 # Represents 64 shards.
+SHARD_ROW_ID_BITS = 0 # Represents the default 1 shard.
+```
 
 ステートメントの例:
 

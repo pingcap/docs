@@ -106,11 +106,13 @@ CREATE USER 'dummy'@'localhost';
 SHOW GRANTS FOR 'admin'@'localhost';
 ```
 
-    +-----------------------------------------------------+
-    | Grants for admin@localhost                          |
-    +-----------------------------------------------------+
-    | GRANT RELOAD, PROCESS ON *.* TO 'admin'@'localhost' |
-    +-----------------------------------------------------+
+```
++-----------------------------------------------------+
+| Grants for admin@localhost                          |
++-----------------------------------------------------+
+| GRANT RELOAD, PROCESS ON *.* TO 'admin'@'localhost' |
++-----------------------------------------------------+
+```
 
 To see the account definition for an account, use the [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md) statement:
 
@@ -118,12 +120,14 @@ To see the account definition for an account, use the [`SHOW CREATE USER`](/sql-
 SHOW CREATE USER 'admin'@'localhost';
 ```
 
-    +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | CREATE USER for admin@localhost                                                                                                                                                                                                      |
-    +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | CREATE USER 'admin'@'localhost' IDENTIFIED WITH 'mysql_native_password' AS '*14E65567ABDB5135D0CFD9A70B3032C179A49EE7' REQUIRE NONE PASSWORD EXPIRE DEFAULT ACCOUNT UNLOCK PASSWORD HISTORY DEFAULT PASSWORD REUSE INTERVAL DEFAULT  |
-    +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    1 row in set (0.00 sec)
+```
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| CREATE USER for admin@localhost                                                                                                                                                                                                      |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| CREATE USER 'admin'@'localhost' IDENTIFIED WITH 'mysql_native_password' AS '*14E65567ABDB5135D0CFD9A70B3032C179A49EE7' REQUIRE NONE PASSWORD EXPIRE DEFAULT ACCOUNT UNLOCK PASSWORD HISTORY DEFAULT PASSWORD REUSE INTERVAL DEFAULT  |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ## ユーザーアカウントを削除する {#remove-user-accounts}
 
@@ -173,8 +177,10 @@ TiDBはパスワードを[`mysql.user`](/mysql-schema/mysql-schema-user.md)シ�
     2.  TiDB ノードのデプロイメント ディレクトリの下の`conf`ディレクトリに入り、 `tidb.toml`構成ファイルを見つけます。
     3.  設定ファイルの[`security`](/tidb-configuration-file.md#security)セクションに設定項目[`skip-grant-table`](/tidb-configuration-file.md)を追加します。`security`がない場合は、 `tidb.toml`設定ファイルの末尾に次の2行を追加します。
 
-            [security]
-            skip-grant-table = true
+        ```
+        [security]
+        skip-grant-table = true
+        ```
 
 2.  tidb-server プロセスを停止します。
 

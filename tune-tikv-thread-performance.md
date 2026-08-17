@@ -96,9 +96,11 @@ TiKV v5.0以降、すべての読み取りリクエストはデフォルトで�
         -   理由が memtable 数に関連している場合は、すべての列の`max-write-buffer-number` (デフォルトでは`5` ) を増やすことをお勧めします。
         -   理由がレベル 0 のファイル制限に関連している場合は、次のパラメータの値を`64`以上に増やすことをお勧めします。
 
-                rocksdb.defaultcf.level0-slowdown-writes-trigger
-                rocksdb.writecf.level0-slowdown-writes-trigger
-                rocksdb.lockcf.level0-slowdown-writes-trigger
-                rocksdb.defaultcf.level0-stop-writes-trigger
-                rocksdb.writecf.level0-stop-writes-trigger
-                rocksdb.lockcf.level0-stop-writes-trigger
+            ```
+            rocksdb.defaultcf.level0-slowdown-writes-trigger
+            rocksdb.writecf.level0-slowdown-writes-trigger
+            rocksdb.lockcf.level0-slowdown-writes-trigger
+            rocksdb.defaultcf.level0-stop-writes-trigger
+            rocksdb.writecf.level0-stop-writes-trigger
+            rocksdb.lockcf.level0-stop-writes-trigger
+            ```

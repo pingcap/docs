@@ -52,7 +52,9 @@ TiFlash は、データをディスクに書き出すための 2 つのトリガ
 
 3.  TiFlashのログから、クエリは単一のTiFlashノードで 29.55 GiB のメモリを消費する必要があることがわかります。
 
-        [DEBUG] [MemoryTracker.cpp:69] ["Peak memory usage (total): 29.55 GiB."] [source=MemoryTracker] [thread_id=468]
+    ```
+    [DEBUG] [MemoryTracker.cpp:69] ["Peak memory usage (total): 29.55 GiB."] [source=MemoryTracker] [thread_id=468]
+    ```
 
 4.  次のステートメントを実行します。このステートメントは、キーが`GROUP BY`ハッシュ集計子のメモリ使用量を10737418240（10 GiB）に制限します。
 
@@ -72,7 +74,9 @@ TiFlash は、データをディスクに書き出すための 2 つのトリガ
 
 5.  TiFlashのログを見ると、 `tidb_max_bytes_before_tiflash_external_group_by`設定するとTiFlash が中間結果のスピルをトリガーし、クエリで使用されるメモリが大幅に削減されることがわかります。
 
-        [DEBUG] [MemoryTracker.cpp:69] ["Peak memory usage (total): 12.80 GiB."] [source=MemoryTracker] [thread_id=110]
+    ```
+    [DEBUG] [MemoryTracker.cpp:69] ["Peak memory usage (total): 12.80 GiB."] [source=MemoryTracker] [thread_id=110]
+    ```
 
 ### クエリレベルのスピル {#query-level-spilling}
 
@@ -109,7 +113,9 @@ TiFlash v7.4.0以降、クエリレベルでの自動スピルをサポートし
 
 3.  TiFlashのログから、クエリが単一のTiFlashノードで 29.55 GiB のメモリを消費していることがわかります。
 
-        [DEBUG] [MemoryTracker.cpp:69] ["Peak memory usage (total): 29.55 GiB."] [source=MemoryTracker] [thread_id=468]
+    ```
+    [DEBUG] [MemoryTracker.cpp:69] ["Peak memory usage (total): 29.55 GiB."] [source=MemoryTracker] [thread_id=468]
+    ```
 
 4.  以下のステートメントを実行します。これらのステートメントは、 TiFlashノード上のクエリの最大メモリ使用量を5GiBに制限します。
 
@@ -130,7 +136,9 @@ TiFlash v7.4.0以降、クエリレベルでの自動スピルをサポートし
 
 5.  TiFlashのログから、クエリ レベルのスピルを構成すると、 TiFlash中間結果のスピルがトリガーされ、クエリで使用されるメモリが大幅に削減されることがわかります。
 
-        [DEBUG] [MemoryTracker.cpp:101] ["Peak memory usage (for query): 3.94 GiB."] [source=MemoryTracker] [thread_id=1547]
+    ```
+    [DEBUG] [MemoryTracker.cpp:101] ["Peak memory usage (for query): 3.94 GiB."] [source=MemoryTracker] [thread_id=1547]
+    ```
 
 ## 注記 {#notes}
 

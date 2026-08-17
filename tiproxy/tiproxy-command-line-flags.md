@@ -65,11 +65,15 @@ ls bin/tiproxyctl
 
 ### 構文 {#syntax}
 
-    tiproxyctl [flags] [command]
+```
+tiproxyctl [flags] [command]
+```
 
 例えば：
 
-    tiproxyctl --host 127.0.0.1 --port 3080 config get
+```
+tiproxyctl --host 127.0.0.1 --port 3080 config get
+```
 
 ### オプション {#options}
 

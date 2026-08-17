@@ -30,7 +30,9 @@ TiDBとの互換性を高めるため、TiDBインストールパッケージに
 
 1.  TiDBサーバーパッケージをダウンロードし、解凍してください。ダウンロードすることにより、 [プライバシーポリシー](https://www.pingcap.com/privacy-policy/)に同意したことになります。
 
-        https://download.pingcap.com/tidb-community-server-{version}-linux-{arch}.tar.gz
+    ```
+    https://download.pingcap.com/tidb-community-server-{version}-linux-{arch}.tar.gz
+    ```
 
     > **Tip:**
     >
@@ -77,7 +79,9 @@ TiDBとの互換性を高めるため、TiDBインストールパッケージに
 
 1.  TiDBサーバーパッケージをダウンロードし、解凍してください。ダウンロードすることにより、 [プライバシーポリシー](https://www.pingcap.com/privacy-policy/)に同意したことになります。
 
-        https://download.pingcap.com/tidb-community-server-{version}-linux-{arch}.tar.gz
+    ```
+    https://download.pingcap.com/tidb-community-server-{version}-linux-{arch}.tar.gz
+    ```
 
     > **Tip:**
     >
