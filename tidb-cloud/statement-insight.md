@@ -41,7 +41,7 @@ All filters can be combined to narrow the analysis to the SQL statements you car
 
 ## Analyze RU consumption, latency, and execution counts
 
-The **SQL Overview** panel summarizes the SQL statements that match your filters, sliced by multiple dimensions. For each dimension, you can switch the **Measured by** control to change which metric drives both the leaderboard and the trend chart:
+The **Top Contributors** panel summarizes the SQL statements that match your filters, sliced by multiple dimensions. For each dimension, you can switch the **Measured by** control to change which metric drives both the leaderboard and the trend chart:
 
 - **Total RU**: the sum of RU consumed.
 - **Mean RU**: total RU divided by execution count.
