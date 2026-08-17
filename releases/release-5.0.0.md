@@ -84,7 +84,7 @@ TiDB バージョン: 5.0.0
 
 ### SQL {#sql}
 
-#### List パーティショニング（<strong>Experimental</strong>） {#list-partitioning-strong-experimental-strong}
+#### List パーティショニング（**Experimental**） {#list-partitioning-experimental}
 
 [ユーザー向けドキュメント](/partitioned-table.md#list-partitioning)
 
@@ -94,7 +94,7 @@ TiDB バージョン: 5.0.0
 
 リストパーティショニングを有効にするには、セッション変数[`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50) `ON`に設定します。
 
-#### List COLUMNS パーティショニング（<strong>Experimental</strong>） {#list-columns-partitioning-strong-experimental-strong}
+#### List COLUMNS パーティショニング（**Experimental**） {#list-columns-partitioning-experimental}
 
 [ユーザー向けドキュメント](/partitioned-table.md#list-columns-partitioning)
 
@@ -318,7 +318,7 @@ TiDBがガベージコレクション（GC）とデータ圧縮を実行する�
 
 GC の CPU および I/O リソースの消費を削減するために、GC コンパクション フィルタ機能は、これら 2 つのタスクを 1 つに結合し、同じタスクで実行します。この機能はデフォルトで有効になっています。 `gc.enable-compaction-filter = false`を設定することで無効にできます。
 
-#### TiFlashは、圧縮とデータソートにおけるI/Oリソースの使用を制限します（<strong>実験的機能</strong>）。 {#tiflash-limits-the-compression-and-data-sorting-s-use-of-i-o-resources-strong-experimental-feature-strong}
+#### TiFlashは、圧縮とデータソートにおけるI/Oリソースの使用を制限します（**実験的機能**）。 {#tiflash-limits-the-compression-and-data-sorting-s-use-of-i-o-resources-experimental-feature}
 
 この機能は、バックグラウンドタスクとフォアグラウンドの読み書き処理の間で発生するI/Oリソースの競合を軽減します。
 
@@ -398,7 +398,7 @@ TiDB Lightningは、特にAWS T1.standard構成（または同等の構成）の
 
 ## データ共有と購読 {#data-sharing-and-subscription}
 
-### TiCDCを使用してTiDBをKafka Connect（Confluent Platform）に統合する（<strong>実験的機能</strong>） {#integrate-tidb-to-kafka-connect-confluent-platform-using-ticdc-strong-experimental-feature-strong}
+### TiCDCを使用してTiDBをKafka Connect（Confluent Platform）に統合する（**実験的機能**） {#integrate-tidb-to-kafka-connect-confluent-platform-using-ticdc-experimental-feature}
 
 [ユーザー向けドキュメント](/ticdc/integrate-confluent-using-ticdc.md) [#660](https://github.com/pingcap/tiflow/issues/660)
 
