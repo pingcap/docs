@@ -3,7 +3,7 @@ title: Statement Insight (PREVIEW)
 summary: Learn how to use Statement Insight to analyze historical RU consumption, latency, and execution counts by DB User, SQL Type, or SQL Digest, and to build RU and performance baselines for your TiDB Cloud instances.
 ---
 
-# Statement Insight(Preview)
+# Statement Insight (PREVIEW)
 
 **Statement Insight** provides multi-dimensional analysis of SQL resource consumption for your {{{ .premium }}}, {{{ .byoc }}}, {{{ .essential }}} instances. It breaks down Request Unit (RU) consumption, latency, and execution counts by **DB User**, **DB**, **Table**, **SQL Type**, or **SQL Digest**, with leaderboards and trend charts that surface your top contributors at a glance. Use Statement Insight to establish RU and performance baselines from historical data and pinpoint what is driving RU consumptions or slowdowns.
 
