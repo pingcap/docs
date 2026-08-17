@@ -813,7 +813,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
 TiDB Cloudへのデータ移行を一度で完了させるには、 **Existing data migration**と**Incremental data migration**の両方を選択してください。これにより、ソースデータベースとターゲットデータベース間のデータの一貫性が確保されます。
 
-**physical mode**と**logical mode**移行には**existing data**または**incremental data**を使用できます。
+**既存データ**と**増分データ**の移行には、**physical mode**または**logical mode**を使用できます。
 
 -   デフォルトモードは**logical mode**です。このモードでは、MySQLソースデータベースからSQLステートメントとしてデータをエクスポートし、TiDB上で実行します。このモードでは、移行前のターゲットテーブルは空でも空でなくても構いません。ただし、物理モードよりもパフォーマンスは低下します。
 
@@ -838,7 +838,7 @@ TiDB Cloudへのデータ移行を一度で完了させるには、 **Existing d
 
 TiDB Cloudへのデータ移行を一度で完了させるには、ソースデータベースとターゲットデータベース間のデータの一貫性を確保するため、 **Full + Incremental**と**Incremental data migration**を選択してください。
 
-現在、**logical mode**移行には**existing data**のみを使用できます。このモードでは、MySQLソースデータベースからSQLステートメントとしてデータをエクスポートし、TiDB上で実行します。このモードでは、移行前のターゲットテーブルは空でも空でなくても構いません。
+現在、**既存データ**の移行には**logical mode**のみを使用できます。このモードでは、MySQLソースデータベースからSQLステートメントとしてデータをエクスポートし、TiDB上で実行します。このモードでは、移行前のターゲットテーブルは空でも空でなくても構いません。
 
 </CustomContent>
 
@@ -846,7 +846,7 @@ TiDB Cloudへのデータ移行を一度で完了させるには、ソースデ�
 
 TiDB Cloud Premiumへのデータ移行を一度で完了させるには、 **Full + Incremental**を選択してください。これにより、ソースデータベースとターゲットデータベース間のデータの一貫性が確保されます。
 
-**physical mode**には、**logical mode**または**論理モードの**いずれかを使用できます。
+**既存データの移行**には、**physical mode**または**logical mode**のいずれかを使用できます。
 
 -   デフォルトモードは**logical mode**です。このモードでは、MySQLソースデータベースからSQLステートメントとしてデータをエクスポートし、ターゲットのTiDB Cloud Premiumインスタンス上で実行します。このモードでは、移行前にターゲットテーブルが空でも空でなくても構いませんが、物理モードよりもパフォーマンスが低下します。
 

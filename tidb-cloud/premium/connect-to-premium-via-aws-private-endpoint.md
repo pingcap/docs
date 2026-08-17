@@ -27,7 +27,7 @@ AWS PrivateLink を利用したエンドポイント接続は、安全かつプ�
 ## 制限 {#restrictions}
 
 -   対象インスタンスの `Organization Owner`、`Project Owner`、または `Instance Owner` ロールを持つユーザーのみがプライベートエンドポイント接続を作成できます。
--   接続先のプライベートエンドポイントと {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスは、**same region** に配置されている必要があります。
+-   接続先のプライベートエンドポイントと {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスは、**同じリージョン** に配置されている必要があります。
 
 ## 前提条件 {#prerequisites}
 

@@ -21,7 +21,7 @@ TiDB Cloud StarterまたはEssentialインスタンスでパブリック アク�
     -   デフォルトでは、すべてのIPアドレス（ `0.0.0.0 - 255.255.255.255` ）が許可されます。
     -   TiDB Cloud StarterまたはEssentialインスタンスの作成後、許可するIPアドレスを更新できます。
 -   TiDB Cloud StarterまたはEssentialインスタンスには、公開解決可能なDNS名が割り当てられています。
--   TiDB Cloud StarterまたはEssentialインスタンスとの間のネットワークトラフィックは、プライベートネットワークではなく、**public internet**を経由してルーティングされます。
+-   TiDB Cloud StarterまたはEssentialインスタンスとの間のネットワークトラフィックは、プライベートネットワークではなく、**パブリックインターネット**を経由してルーティングされます。
 
 ### ファイアウォールルール {#firewall-rules}
 
