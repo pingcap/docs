@@ -13,7 +13,7 @@ Data Service（プレビュー版）のデータアプリは、特定のアプ�
 
 プロジェクトのデータ アプリを作成するには、次の手順を実行します。
 
-1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページで、<mdsvgicon name="icon-create-data-app">左側のペインで**DataApp を作成します**。</mdsvgicon>
+1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページで、<mdsvgicon name="icon-create-data-app">左側のペインで**Create DataApp**。</mdsvgicon>
 
     > **Tip:**
     >
@@ -43,7 +43,7 @@ Data Service（プレビュー版）のデータアプリは、特定のアプ�
 
 5.  データアプリをGitHubに接続するように設定している場合は、指定したGitHubディレクトリを確認してください`tidb-cloud-data-service`までに[データアプリの構成ファイル](/tidb-cloud/data-service-app-config-files.md)ディレクトリにコミットされていることがわかります。これは、データアプリがGitHubに正常に接続されていることを意味します。
 
-    新しいデータアプリでは、**Auto Sync & Deployment**、および**ドラフトのレビューが**デフォルトで有効になっているため、 TiDB Cloudコンソールと GitHub 間でデータアプリの変更を簡単に同期し、デプロイ前に変更を確認できます。GitHub との統合の詳細については、 [データアプリの変更を GitHub で自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)ご覧ください。
+    新しいデータアプリでは、**Auto Sync & Deployment**、および**Review Draft**がデフォルトで有効になっているため、 TiDB Cloudコンソールと GitHub 間でデータアプリの変更を簡単に同期し、デプロイ前に変更を確認できます。GitHub との統合の詳細については、 [データアプリの変更を GitHub で自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)ご覧ください。
 
 ## データアプリを構成する {#configure-a-data-app}
 
@@ -69,7 +69,7 @@ Data Service（プレビュー版）のデータアプリは、特定のアプ�
 
 1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 2.  左側のペインで、対象のデータ アプリを見つけ、対象のデータ アプリの名前をクリックして詳細を表示します。
-3.  **Linked Data Sources**領域で、 **[クラスタの追加] を**クリックします。
+3.  **Linked Data Sources**領域で、 **Add Cluster**をクリックします。
 4.  表示されたダイアログボックスで、リストからクラスターを選択し、 **「追加」**をクリックします。
 
 データ アプリからリンクされたクラスターを削除するには、次の手順を実行します。
@@ -101,9 +101,9 @@ Data Service（プレビュー版）のデータアプリは、特定のアプ�
 
 2.  左側のペインで、対象のデータ アプリを見つけ、対象のデータ アプリの名前をクリックして詳細を表示します。
 
-3.  **「デプロイメントコンフィグレーション」**領域で、 **「構成」**をクリックします。デプロイメント構成のダイアログが表示されます。
+3.  **Deployment Configuration**領域で、 **「構成」**をクリックします。デプロイメント構成のダイアログが表示されます。
 
-4.  ダイアログで、**Auto Sync & Deployment**と**ドラフトの確認**の希望の設定を選択します。
+4.  ダイアログで、**Auto Sync & Deployment**と**Review Draft**の希望の設定を選択します。
 
     -   **Auto Sync & Deployment**
 
@@ -111,7 +111,7 @@ Data Service（プレビュー版）のデータアプリは、特定のアプ�
         -   有効にすると、指定したGitHubディレクトリに加えられた変更がTiDB Cloudに自動的にデプロイされ、 TiDB Cloudコンソールに加えられた変更もGitHubにプッシュされます。対応するデプロイ情報とコミット情報は、データアプリのデプロイ履歴で確認できます。
         -   無効にすると、指定した GitHub ディレクトリで行われた変更はTiDB Cloudにデプロイ**されず**、 TiDB Cloudコンソールで行われた変更も GitHub にプッシュされ**ません**。
 
-    -   **レビュー草稿**
+    -   **Review Draft**
 
         -   有効にすると、デプロイ前にTiDB Cloudコンソールでデータアプリに加えた変更を確認できます。確認結果に基づいて、変更をデプロイするか破棄するかを選択できます。
         -   無効にすると、 TiDB Cloudコンソールで行ったデータ アプリの変更が直接デプロイされます。
@@ -130,7 +130,7 @@ Data Service（プレビュー版）は、各データアプリ向けのOpenAPI�
 
 2.  左側のペインで、対象のデータ アプリの名前をクリックして詳細を表示します。
 
-3.  **API 仕様**領域で、 **「ダウンロード」**をクリックし、 **JSON**または**YAML**を選択します。
+3.  **API Specification**領域で、 **「ダウンロード」**をクリックし、 **JSON**または**YAML**を選択します。
 
     OpenAPI 仕様を初めてダウンロードする場合は、プロンプトが表示されたらリクエストを承認する必要があります。
 
@@ -161,7 +161,7 @@ OpenAPI ドキュメントにアクセスするには、次の手順を実行し
 
         詳細については[APIキーを管理する](/tidb-cloud/data-service-api-key.md)を参照してください。
 
-    2.  ターゲットエンドポイントを見つけ、必要なパラメータを入力して**Try it out**をクリックします。レスポンスは**「レスポンス本文」**領域に表示されます。
+    2.  ターゲットエンドポイントを見つけ、必要なパラメータを入力して**Try it out**をクリックします。レスポンスは**Response body**領域に表示されます。
 
 OpenAPI ドキュメントの使用方法の詳細については、 [スワッガーUI](https://swagger.io/tools/swagger-ui/)を参照してください。
 
@@ -175,7 +175,7 @@ OpenAPI ドキュメントの使用方法の詳細については、 [スワッ�
 
 1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 2.  左側のペインで、対象のデータ アプリを見つけ、対象のデータ アプリの名前をクリックして詳細を表示します。
-3.  **危険ゾーン**エリアで、 **Delete Data App**をクリックします。確認のダイアログボックスが表示されます。
+3.  **Danger Zone**エリアで、 **Delete Data App**をクリックします。確認のダイアログボックスが表示されます。
 4.  `<organization name>/<project name>/<data app name>`を入力し、 **I understand, delete**をクリックします。
 
     データアプリを削除すると、データアプリ内の既存のエンドポイントとAPIキーも削除されます。このデータアプリがGitHubに接続されている場合、アプリを削除しても、対応するGitHubリポジトリ内のファイルは削除されません。

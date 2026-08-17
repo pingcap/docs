@@ -49,7 +49,7 @@ TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー�
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用して対象の組織に切り替えます。
 2.  左側のナビゲーション ペインで、 **[Console Audit Logging]**をクリックします。
 3.  （オプション）コンソール監査ログの特定の部分をエクスポートする必要がある場合は、さまざまな条件でフィルタリングできます。それ以外の場合は、この手順をスキップしてください。
-4.  **「ログのダウンロード」**をクリックし、JSON または CSV で希望のエクスポート形式を選択します。
+4.  **Download logs**をクリックし、JSON または CSV で希望のエクスポート形式を選択します。
 
 ## コンソール監査ログストレージポリシー {#console-audit-log-storage-policy}
 

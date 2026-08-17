@@ -9,7 +9,7 @@ summary: TiDB Cloud Premiumインスタンスでデュアルレイヤーデー�
 
 > **Note:**
 >
-> 現在、デュアルレイヤーデータ暗号化機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)**？」**をクリックし、 次に**「サポートチケット」**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **「説明」**フィールドに「デュアルレイヤーデータ暗号化の申請」と入力して、 **「送信」**をクリックします。
+> 現在、デュアルレイヤーデータ暗号化機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)**？」**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **「説明」**フィールドに「デュアルレイヤーデータ暗号化の申請」と入力して、 **「送信」**をクリックします。
 
 ## 概要 {#overview}
 
@@ -82,14 +82,14 @@ TiDB Cloud Premiumインスタンスを作成する際に、二重層データ�
 
 1.  クラウドプロバイダーのKMSで対称暗号化キーを作成してください。
 
-    キーは、計画されているTiDB Cloud Premium インスタンスと**同じリージョン**に存在する必要があります。
+    キーは、計画されているTiDB Cloud Premium インスタンスと**same region**に存在する必要があります。
 
     -   AWS については、 [対称暗号化KMSキーを作成します](https://docs.aws.amazon.com/kms/latest/developerguide/create-symmetric-cmk.html)を参照してください。
     -   Alibaba Cloud については、 [KMSキーの理解](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/overview-of-key-management)を参照してください。
 
 2.  [TiDB Cloudコンソール](https://tidbcloud.com)で CMEK を構成します。
 
-    1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、 **「リソースの作成」**をクリックします。
+    1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、 **Create Resource**をクリックします。
 
     2.  TiDB Cloud Premiumプランを選択し、基本設定を完了してください。
 
@@ -114,7 +114,7 @@ TiDB Cloud Premiumインスタンスを作成する際に、二重層データ�
 
 TiDB Cloudに暗号化キーの管理を代行させるには、以下の手順に従ってください。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、 **「リソースの作成」**をクリックします。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、 **Create Resource**をクリックします。
 2.  TiDB Cloud Premiumプランを選択し、基本設定を完了してください。
 3.  **Dual-Layer Data Encryption**セクションで、 **「有効にする」**をクリックします。
 4.  **Service-Managed Encryption Key**を選択してください。
@@ -168,7 +168,7 @@ TiDB Cloudに暗号化キーの管理を代行させるには、以下の手順�
 
 > **Warning:**
 >
-> -   現在、暗号化されたバックアップは、元のインスタンスと同じ**アカウント**および**リージョン**にのみ復元できます。リージョン間およびアカウント間の復元操作はサポートされていません。
+> -   現在、暗号化されたバックアップは、元のインスタンスと同じ**アカウント**および**same region**にのみ復元できます。リージョン間およびアカウント間の復元操作はサポートされていません。
 > -   キーのセキュリティと可用性を維持する責任はあなたにあります。CMEKが削除されたり、完全に破損したりした場合、このキーに関連付けられたバックアップデータもすべて復元できなくなります。
 
 ### CMEKで暗号化されたバックアップを復元する {#restore-a-backup-encrypted-with-a-cmek}

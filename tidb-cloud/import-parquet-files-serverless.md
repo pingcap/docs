@@ -37,7 +37,7 @@ TiDB Cloud StarterまたはTiDB Cloud Essential[Apache Parquet](https://parquet.
 
     > **Note:**
     >
-    > 場合によっては、前述のルールに従って Parquet ファイル名を更新できないことがあります (たとえば、Parquet ファイル リンクが他のプログラムでも使用されている場合)。その場合は、ファイル名を変更せずに、[ステップ4](#step-4-import-parquet-files)の**マッピング設定**を使用してソース データを単一のターゲット テーブルにインポートできます。
+    > 場合によっては、前述のルールに従って Parquet ファイル名を更新できないことがあります (たとえば、Parquet ファイル リンクが他のプログラムでも使用されている場合)。その場合は、ファイル名を変更せずに、[ステップ4](#step-4-import-parquet-files)の**Mapping Settings**を使用してソース データを単一のターゲット テーブルにインポートできます。
 
 ## ステップ2．対象テーブルのスキーマを作成する {#step-2-create-the-target-table-schemas}
 
@@ -113,7 +113,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
 3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
 
-    -   **ストレージプロバイダー**： **Amazon S3**を選択してください。
+    -   **Storage Provider**： **Amazon S3**を選択してください。
     -   **Source Files URI** ：
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`s3://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `s3://sampledata/ingest/TableName.01.parquet` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`s3://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `s3://sampledata/ingest/` 。
@@ -123,7 +123,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
 4.  **「次へ」**をクリックしてください。
 
-5.  **「宛先マッピング」**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
+5.  **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
     **Source Files URI**でディレクトリが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションがデフォルトで選択されます。
 
@@ -140,11 +140,11 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
             -   `my-data?.parquet` : `my-data` `my-data1.parquet`や`my-data2.parquet`のような 1 文字が続くすべての Parquet ファイルに一致します。
             -   `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data-2023.parquet`や`my-data-final.parquet`などです。
 
-        -   **対象データベース**と**対象テーブル**：データをインポートする対象データベースとテーブルを選択します。
+        -   **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
 
 6.  **「次へ」**をクリックしてください。TiDB Cloudがソースファイルを適切にスキャンします。
 
-7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **「インポート開始」を**クリックします。
+7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
 8.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。
 
@@ -166,7 +166,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
 3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
 
-    -   **ストレージプロバイダー**： **Google Cloud Storage**を選択してください。
+    -   **Storage Provider**： **Google Cloud Storage**を選択してください。
     -   **Source Files URI** ：
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `[gcs|gs]://sampledata/ingest/TableName.01.parquet` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`[gcs|gs]://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `[gcs|gs]://sampledata/ingest/` 。
@@ -174,7 +174,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
 4.  **「次へ」**をクリックしてください。
 
-5.  **「宛先マッピング」**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
+5.  **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
     **Source Files URI**でディレクトリが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションがデフォルトで選択されます。
 
@@ -191,11 +191,11 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
             -   `my-data?.parquet` : `my-data` `my-data1.parquet`や`my-data2.parquet`のような 1 文字が続くすべての Parquet ファイルに一致します。
             -   `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data-2023.parquet`や`my-data-final.parquet`などです。
 
-        -   **対象データベース**と**対象テーブル**：データをインポートする対象データベースとテーブルを選択します。
+        -   **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
 
 6.  **「次へ」**をクリックしてください。TiDB Cloudがソースファイルを適切にスキャンします。
 
-7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **「インポート開始」を**クリックします。
+7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
 8.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。
 
@@ -217,7 +217,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
 3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
 
-    -   **ストレージプロバイダー**： **Azure Blob Storage**を選択します。
+    -   **Storage Provider**： **Azure Blob Storage**を選択します。
     -   **Source Files URI** ：
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`[azure|https]://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `[azure|https]://sampledata/ingest/TableName.01.parquet` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`[azure|https]://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `[azure|https]://sampledata/ingest/` 。
@@ -225,7 +225,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
 4.  **「次へ」**をクリックしてください。
 
-5.  **「宛先マッピング」**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
+5.  **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
     **Source Files URI**でディレクトリが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションがデフォルトで選択されます。
 
@@ -242,11 +242,11 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
             -   `my-data?.parquet` : `my-data` `my-data1.parquet`や`my-data2.parquet`のような 1 文字が続くすべての Parquet ファイルに一致します。
             -   `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data-2023.parquet`や`my-data-final.parquet`などです。
 
-        -   **対象データベース**と**対象テーブル**：データをインポートする対象データベースとテーブルを選択します。
+        -   **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
 
 6.  **「次へ」**をクリックしてください。TiDB Cloudがソースファイルを適切にスキャンします。
 
-7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **「インポート開始」を**クリックします。
+7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
 8.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。
 
@@ -268,7 +268,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
 3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
 
-    -   **ストレージプロバイダー**： **Alibaba Cloud OSS**を選択してください。
+    -   **Storage Provider**： **Alibaba Cloud OSS**を選択してください。
     -   **Source Files URI** ：
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`oss://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `oss://sampledata/ingest/TableName.01.parquet` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`oss://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `oss://sampledata/ingest/` 。
@@ -276,7 +276,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
 4.  **「次へ」**をクリックしてください。
 
-5.  **「宛先マッピング」**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
+5.  **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
     **Source Files URI**でディレクトリが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションがデフォルトで選択されます。
 
@@ -293,11 +293,11 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
             -   `my-data?.parquet` : `my-data` `my-data1.parquet`や`my-data2.parquet`のような 1 文字が続くすべての Parquet ファイルに一致します。
             -   `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data-2023.parquet`や`my-data-final.parquet`などです。
 
-        -   **対象データベース**と**対象テーブル**：データをインポートする対象データベースとテーブルを選択します。
+        -   **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
 
 6.  **「次へ」**をクリックしてください。TiDB Cloudがソースファイルを適切にスキャンします。
 
-7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **「インポート開始」を**クリックします。
+7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
 8.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。
 
@@ -344,10 +344,10 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
 ### データインポート中の警告を解決する {#resolve-warnings-during-data-import}
 
-**[インポートの開始]**をクリックした後、 `can't find the corresponding source files`などの警告メッセージが表示された場合は、正しいソース ファイルを提供するか、 [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って既存のファイルの名前を変更するか、**詳細設定**を使用して変更することで問題を解決します。
+**Start Import**をクリックした後、 `can't find the corresponding source files`などの警告メッセージが表示された場合は、正しいソース ファイルを提供するか、 [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って既存のファイルの名前を変更するか、**Advanced Settings**を使用して変更することで問題を解決します。
 
 これらの問題を解決した後、データを再度インポートする必要があります。
 
 ### インポートされたテーブルに行が0件あります {#zero-rows-in-the-imported-tables}
 
-インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。行数がゼロの場合は、入力したバケットURIに一致するデータファイルがなかったことを意味します。この場合は、正しいソースファイルを指定するか、既存のファイルを[データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って名前変更するか、または**詳細設定**を使用して変更することで問題を解決してください。その後、再度テーブルをインポートしてください。
+インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。行数がゼロの場合は、入力したバケットURIに一致するデータファイルがなかったことを意味します。この場合は、正しいソースファイルを指定するか、既存のファイルを[データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って名前変更するか、または**Advanced Settings**を使用して変更することで問題を解決してください。その後、再度テーブルをインポートしてください。

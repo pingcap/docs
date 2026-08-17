@@ -53,7 +53,7 @@ Data Serviceの利用を開始するには、独自のデータアプリを作�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページの**[プロジェクト ビュー]**タブをクリックし、プロジェクトの [ **...]**をクリックして、 **[Data Service]**をクリックします。
 
-2.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページで、左側のペインで<MDSvgIcon name="icon-create-data-app" /> **DataApp の作成を**クリックします。
+2.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページで、左側のペインで<MDSvgIcon name="icon-create-data-app" /> **Create DataApp**をクリックします。
 
     > **Tip:**
     >
@@ -82,13 +82,13 @@ Data Serviceの利用を開始するには、独自のデータアプリを作�
 
 6.  データ アプリを GitHub に接続するように構成している場合は、指定した GitHub ディレクトリを確認してください。データ[データアプリの設定ファイル](/tidb-cloud/data-service-app-config-files.md)`tidb-cloud-data-service`によってディレクトリにコミットされていることがわかります。これは、データアプリが GitHub に正常に接続されていることを意味します。
 
-    新しいデータ アプリでは、**Auto Sync & Deployment**および**ドラフトのレビュー**がデフォルトで有効になっているため、 TiDB Cloudコンソールと GitHub の間でデータ アプリの変更を簡単に同期し、デプロイメント前に変更をレビューできます。 GitHub 統合の詳細については、 [GitHub を使用してデータ アプリの変更を自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
+    新しいデータ アプリでは、**Auto Sync & Deployment**および**Review Draft**がデフォルトで有効になっているため、 TiDB Cloudコンソールと GitHub の間でデータ アプリの変更を簡単に同期し、デプロイメント前に変更をレビューできます。 GitHub 統合の詳細については、 [GitHub を使用してデータ アプリの変更を自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
 
 ### ステップ2. エンドポイントを開発する {#step-2-develop-an-endpoint}
 
 エンドポイントとは、SQL文を実行するようにカスタマイズできるWeb APIのことです。
 
-新しいエンドポイントを作成するには、新しく作成したデータアプリを見つけて、アプリ名の右側にある**「+****エンドポイントの作成」**をクリックします。
+新しいエンドポイントを作成するには、新しく作成したデータアプリを見つけて、アプリ名の右側にある**+** **Create Endpoint**をクリックします。
 
 #### プロパティを構成する {#configure-properties}
 
@@ -96,9 +96,9 @@ Data Serviceの利用を開始するには、独自のデータアプリを作�
 
 -   **パス**：ユーザーがエンドポイントにアクセスするために使用するパス。リクエストメソッドとパスの組み合わせは、データアプリ内で一意である必要があります。
 
--   **エンドポイント URL** : (読み取り専用) URL は、対応するTiDB Cloud Starterインスタンスが配置されているリージョン、データ アプリのサービス URL、およびエンドポイントのパスに基づいて自動的に生成されます。たとえば、エンドポイントのパスが`/my_endpoint/get_id`の場合、エンドポイント URL は`https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`になります。
+-   **Endpoint URL** : (読み取り専用) URL は、対応するTiDB Cloud Starterインスタンスが配置されているリージョン、データ アプリのサービス URL、およびエンドポイントのパスに基づいて自動的に生成されます。たとえば、エンドポイントのパスが`/my_endpoint/get_id`の場合、エンドポイント URL は`https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`になります。
 
--   **リクエストメソッド**：エンドポイントの HTTP メソッド。 `GET`を使用してデータを取得し、 `POST`を使用してデータを作成または挿入し、 `PUT`を使用してデータを更新または変更し、 `DELETE`を使用してデータを削除できます。
+-   **Request Method**：エンドポイントの HTTP メソッド。 `GET`を使用してデータを取得し、 `POST`を使用してデータを作成または挿入し、 `PUT`を使用してデータを更新または変更し、 `DELETE`を使用してデータを削除できます。
 
 エンドポイントのプロパティの詳細については、 [プロパティを構成する](/tidb-cloud/data-service-manage-endpoint.md#configure-properties)を参照してください。
 
@@ -132,7 +132,7 @@ Data Serviceの利用を開始するには、独自のデータアプリを作�
     > -   このパラメータは、テーブル名または列名として使用することはできません。
 
     -   **定義**セクションでは、クライアントがエンドポイントを呼び出す際にパラメータが必須かどうか、データ型、およびパラメータのデフォルト値を指定できます。
-    -   **「テスト値」**セクションでは、パラメーターのテスト値を設定できます。テスト値は、SQLステートメントの実行時やエンドポイントのテスト時に使用されます。テスト値を設定しない場合は、デフォルト値が使用されます。
+    -   **Test Values**セクションでは、パラメーターのテスト値を設定できます。テスト値は、SQLステートメントの実行時やエンドポイントのテスト時に使用されます。テスト値を設定しない場合は、デフォルト値が使用されます。
     -   詳細については、 [パラメータを設定する](/tidb-cloud/data-service-manage-endpoint.md#configure-parameters)を参照してください。
 
 3.  SQL文を実行します。
@@ -173,7 +173,7 @@ Data Serviceの利用を開始するには、独自のデータアプリを作�
 
 エンドポイントをテストするには、右上隅の**「テスト」**をクリックするか、 **F5**キーを押してください。
 
-その後、ページの下部にある**[HTTP 応答]**タブで応答を確認できます。応答の詳細については、 [エンドポイントの応答](/tidb-cloud/data-service-manage-endpoint.md#response)を参照してください。
+その後、ページの下部にある**HTTP Response**タブで応答を確認できます。応答の詳細については、 [エンドポイントの応答](/tidb-cloud/data-service-manage-endpoint.md#response)を参照してください。
 
 ### ステップ4. エンドポイントをデプロイ {#step-4-deploy-the-endpoint}
 
@@ -220,7 +220,7 @@ API キーの詳細については、[Data ServiceのAPIキー](/tidb-cloud/data
 
 TiDB Cloudは、エンドポイントを呼び出すのに役立つコード例を生成します。コード例を取得するには、以下の手順を実行してください。
 
-1.  [**Data Service**](https://tidbcloud.com/project/data-service)ページの左側のペインで、エンドポイントの名前をクリックし、右上隅の**「...」** &gt; **「コード例」**をクリックします。「**コード例」**ダイアログボックスが表示されます。
+1.  [**Data Service**](https://tidbcloud.com/project/data-service)ページの左側のペインで、エンドポイントの名前をクリックし、右上隅の**「...」** &gt; **Code Example**をクリックします。「**Code Example**ダイアログボックスが表示されます。
 
 2.  ダイアログボックスで、エンドポイントを呼び出すために使用するTiDB Cloud Starterインスタンスとデータベースを選択し、コード例をコピーします。
 

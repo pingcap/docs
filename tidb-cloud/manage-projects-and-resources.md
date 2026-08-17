@@ -43,7 +43,7 @@ TiDB Cloudリソースの詳細情報を表示するには、対象のリソー�
 
 ### TiDB Cloudリソースを作成する {#create-tidb-cloud-resources}
 
-TiDB Cloudリソースを作成するには、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **[リソースの作成] を**クリックします。
+TiDB Cloudリソースを作成するには、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Create Resource**をクリックします。
 
 詳細については、以下の資料を参照してください。
 
@@ -94,7 +94,7 @@ TiDB Cloudのリソースをプロジェクトごとにグループ化して表�
 
 新しいプロジェクトを作成するには、以下の手順に従ってください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **「プロジェクトの作成」を**クリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Create Project**をクリックします。
 
     > **Tip:**
     >
@@ -131,7 +131,7 @@ TiDB Cloudのリソースをプロジェクトごとにグループ化して表�
 
 プロジェクトを管理するには、以下の手順に従ってください。
 
-1.  TiDB Cloudコンソールで、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **[プロジェクト ビュー]**タブをクリックします。
+1.  TiDB Cloudコンソールで、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
     > **Tip:**
     >
@@ -152,7 +152,7 @@ TiDB Cloudのリソースをプロジェクトごとにグループ化して表�
 
 TiDB Xインスタンスを移動するには、以下の手順を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **[プロジェクト ビュー]**タブをクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
 2.  プロジェクトビューで、移動する TiDB X インスタンスを含むプロジェクトフォルダーを展開し、対象の TiDB X インスタンスの**...**をクリックしてから、 **[移動]**をクリックします。
 

@@ -39,12 +39,12 @@ TiDB Cloudは複数のサポートチャネルを提供しています。利用�
 
 PingCAP ヘルプ センターには、 [https://tidb.support.pingcap.com/servicedesk/customer/portals](https://tidb.support.pingcap.com/servicedesk/customer/portals)から直接アクセスすることも、次の[TiDB Cloudコンソール](https://tidbcloud.com/)の方法でアクセスすることもできます。
 
--   [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**[?]**をクリックし、 **[サポート チケット]**をクリックします。
+-   [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**[?]**をクリックし、 **Support Tickets**をクリックします。
 -   [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある**[サポート] を**クリックし、サポート プランに応じて次のいずれかを実行します。
     -   **基本**: **[Account & Billing]**領域で、 **[アカウント/請求の問題]**をクリックします。
     -   **Developer** 、 **Enterprise** 、または**Premium** : **Talk to an expert**エリアで、 **PingCAP Help Center**をクリックします。
--   プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページで、クラスターの行にある**[...]**をクリックし、 **[サポートを受ける]**を選択します。
--   クラスターの概要ページで、右上隅の**[...]**をクリックし、 **[サポートを受ける]**を選択します。
+-   プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページで、クラスターの行にある**[...]**をクリックし、 **Get Support**を選択します。
+-   クラスターの概要ページで、右上隅の**[...]**をクリックし、 **Get Support**を選択します。
 
 ## アカウントまたは請求サポートチケットを作成する {#create-an-account-or-billing-support-ticket}
 

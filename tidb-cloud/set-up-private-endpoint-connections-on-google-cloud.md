@@ -103,7 +103,7 @@ Google Cloud Private Service Connect のアーキテクチャは以下のとお�
 
 2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 
-3.  **「接続タイプ」**ドロップダウンリストで**「プライベートエンドポイント」**を選択し、 **Create Private Endpoint Connection**をクリックします。
+3.  **Connection Type**ドロップダウンリストで**Private Endpoint**を選択し、 **Create Private Endpoint Connection**をクリックします。
 
     > **Note:**
     >
@@ -113,10 +113,10 @@ Google Cloud Private Service Connect のアーキテクチャは以下のとお�
 
 1.  プライベートエンドポイント作成用のコマンドを生成するには、以下の情報を提供してください。
     -   **Google Cloud Project ID** ：Google Cloud アカウントに関連付けられたプロジェクト ID です。この ID は[Google Cloud **Dashboard**ページ](https://console.cloud.google.com/home/dashboard)で確認できます。
-    -   **Google Cloud VPC Name** : 指定したプロジェクト内の VPC の名前。 [Google Cloud **VPC ネットワークの**ページ](https://console.cloud.google.com/networking/networks/list)にあります。
+    -   **Google Cloud VPC Name** : 指定したプロジェクト内の VPC の名前。 [Google Cloud **VPC networks**ページ](https://console.cloud.google.com/networking/networks/list)にあります。
     -   **Google Cloud Subnet Name**：指定された VPC 内のサブネットの名前です。**VPC network details**ページで確認できます。
     -   **プライベートサービス接続エンドポイント名**：作成されるプライベートエンドポイントの一意の名前を入力してください。
-2.  情報を入力したら、 **「コマンド生成」**をクリックしてください。
+2.  情報を入力したら、 **Generate Command**をクリックしてください。
 3.  Google Cloud CLI または Google Cloud コンソールを使用して、プライベートエンドポイントを作成します。
 
 <SimpleTab>
@@ -129,9 +129,9 @@ Google Cloud Private Service Connect のアーキテクチャは以下のとお�
 <div label="Use Google Cloud console">
 
 1.  [Google Cloud Console](https://console.cloud.google.com/)で、現在のプロジェクトがTiDB Cloudに入力した**Google Cloud Project ID**と同じであることを確認してください。
-2.  **VPC ネットワーク**&gt;**Private Service Connect**&gt;**接続済みエンドポイント**に移動し、 **[エンドポイントに接続]**をクリックします。
+2.  **VPC network**&gt;**Private Service Connect**&gt;**接続済みエンドポイント**に移動し、 **Connect endpoint**をクリックします。
 3.  TiDB Cloudで生成されたコマンドの値を使用してエンドポイントを設定します。
-    -   **エンドポイント名**：コマンドで指定した転送ルール名を使用します。
+    -   **Endpoint name**：コマンドで指定した転送ルール名を使用します。
     -   **対象**: **[公開サービス]**を選択し、 `--target-service-attachment`からサービス添付ファイル URI を入力します。
     -   **リージョン**：コマンドから地域を選択してください。
     -   **ネットワーク**: `--network`から VPC ネットワークを選択してください。
@@ -152,13 +152,13 @@ Google Cloudでエンドポイントを正常に作成したら、 TiDB Cloudコ
 
 プライベートエンドポイントへの接続を承認すると、接続ダイアログにリダイレクトされます。
 
-1.  プライベートエンドポイントの接続ステータスが**「システムチェック中**」から**「アクティブ」**に変わるまでお待ちください（約5分）。
-2.  **「接続**方法」ドロップダウンリストから、希望する接続方法を選択してください。対応する接続​​文字列がダイアログの下部に表示されます。
+1.  プライベートエンドポイントの接続ステータスが**System Checking**から**「アクティブ」**に変わるまでお待ちください（約5分）。
+2.  **Connect With**ドロップダウンリストから、希望する接続方法を選択してください。対応する接続​​文字列がダイアログの下部に表示されます。
 3.  接続文字列を使用してクラスターに接続してください。
 
 ### プライベートエンドポイントの状態参照 {#private-endpoint-status-reference}
 
-プライベート エンドポイント接続を使用すると、プライベート エンドポイントまたはプライベート エンドポイント サービスのステータスが[**プライベートエンドポイント**ページ](#prerequisites)ページに表示されます。
+プライベート エンドポイント接続を使用すると、プライベート エンドポイントまたはプライベート エンドポイント サービスのステータスが[**Private Endpoint**ページ](#prerequisites)ページに表示されます。
 
 プライベートエンドポイントの可能なステータスは、以下のように説明されます。
 

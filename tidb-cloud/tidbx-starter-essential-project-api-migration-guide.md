@@ -11,7 +11,7 @@ summary: TiDB Cloud が TiDB X インスタンス向けに個別のプロジェ�
 
 これらのプロジェクトモデルの変更により、以下の API 変更に注意してください。
 
-- {{{ .starter }}} と Essential インスタンスの `project_id` 値は、TiDB Cloud コンソールでこれらのインスタンスをプロジェクト間で移動できるため、**変更される可能性があります**。`project_id` の値をハードコードしないでください。
+- {{{ .starter }}} と Essential インスタンスの `project_id` 値は、TiDB Cloud コンソールでこれらのインスタンスをプロジェクト間で移動できるため、**can change**。`project_id` の値をハードコードしないでください。
 - プロジェクトのレスポンスには `type` フィールドが含まれるようになりました。指定可能な値については、[Project type values](#project-type-values) を参照してください。
 
 ## Project API の変更 {#project-api-changes}

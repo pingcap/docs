@@ -105,7 +105,7 @@ TiDB Cloud CLI を使用して TiDB Cloud Starterインスタンスを作成す�
 
     > **Warning:**
     >
-    > プロファイル名には`.`を含めて**はいけません**。
+    > プロファイル名には`.`を含めて**MUST NOT**。
 
 -   TiDB Cloudに認証情報を使用してログインしてください。
 

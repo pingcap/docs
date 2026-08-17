@@ -75,7 +75,7 @@ AWSコンソールでロードバランサーとAWSエンドポイントサー�
 
     -   **VPC** ：RDSが配置されているVPCを選択してください。
 
-    -   **アベイラビリティゾーン**： TiDB Cloud Essentialインスタンスと重複するアベイラビリティゾーンを選択してください。
+    -   **Availability Zones**： TiDB Cloud Essentialインスタンスと重複するアベイラビリティゾーンを選択してください。
 
     -   **セキュリティグループ**：以下のルールで新しいセキュリティグループを作成します。
         -   MySQL/ Auroraを許可する受信ルール：
@@ -100,7 +100,7 @@ AWSコンソールでロードバランサーとAWSエンドポイントサー�
 
     -   **Load balancer type**： `Network`を選択
     -   **Available load balancers**：前の手順で作成したロードバランサーを入力してください。
-    -   **サポート対象地域**：地域をまたぐ要件がない場合は空欄のままにしてください。
+    -   **Supported Regions**：地域をまたぐ要件がない場合は空欄のままにしてください。
     -   **Require acceptance for endpoint**： `Acceptance required`を選択することをお勧めします
     -   **Supported IP address types**： `IPv4`を選択してください
 

@@ -62,7 +62,7 @@ PoC 用の[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-d
 
 1.  PoC申請フォームにご記入ください。
 
-    [TiDB Cloudコンソール](https://tidbcloud.com/)で、右下隅の**[?]**をクリックし、 **[営業担当者に問い合わせ]**をクリックして、 **[Apply for PoC]** を選択して申請フォームに入力します。
+    [TiDB Cloudコンソール](https://tidbcloud.com/)で、右下隅の**[?]**をクリックし、 **Contact Sales**をクリックして、 **[Apply for PoC]** を選択して申請フォームに入力します。
 
     フォームを送信すると、 TiDB Cloudサポートチームが申請内容を確認し、ご連絡いたします。申請が承認され次第、アカウントにクレジットが付与されます。また、PingCAP サポートエンジニアにご連絡いただければ、PoC の手順をサポートし、PoC がスムーズに実行されるようサポートいたします。
 
@@ -89,7 +89,7 @@ PoC 用の[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-d
 
 新しく作成されたクラスターの場合は、次の構成に注意してください。
 
--   デフォルトのタイムゾーン（ダッシュボードの**「作成時刻」**列）はUTCです。以下の手順[ローカルタイムゾーンを設定する](/tidb-cloud/manage-user-access.md#set-the-time-zone-for-your-organization)で、ローカルタイムゾーンに変更できます。
+-   デフォルトのタイムゾーン（ダッシュボードの**Create Time**列）はUTCです。以下の手順[ローカルタイムゾーンを設定する](/tidb-cloud/manage-user-access.md#set-the-time-zone-for-your-organization)で、ローカルタイムゾーンに変更できます。
 -   新しいクラスタのデフォルトのバックアップ設定は、毎日データベース全体のバックアップです。希望するバックアップ時間を指定するか、手動でデータをバックアップすることもできます。デフォルトのバックアップ時間および詳細については、 [TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)を参照してください。
 
 ## ステップ4. スキーマとSQLを適応させる {#step-4-adapt-your-schemas-and-sql}
@@ -144,7 +144,7 @@ TiDB Cloudにはさまざまな形式のデータをインポートできます�
 ワークロードを開始した後、次の方法を使用してシステムを観察できます。
 
 -   クラスターの一般的なメトリクスは、クラスター概要ページで確認できます。これには、合計QPS、レイテンシ、接続数、 TiFlashリクエストQPS、 TiFlashリクエスト期間、 TiFlashストレージサイズ、TiKVストレージサイズ、TiDB CPU、TiKV CPU、TiKV IO読み取り、TiKV IO書き込みが含まれます。詳細は[TiDBクラスタを監視する](/tidb-cloud/monitor-tidb-cluster.md)を参照してください。
--   クラスターの[**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **「SQLステートメント」**タブを確認してください。ここでは、システムテーブルをクエリすることなく、SQL実行を監視し、パフォーマンスの問題を簡単に特定できます。詳細は[ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)を参照してください。
+-   クラスターの[**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **SQL Statement**タブを確認してください。ここでは、システムテーブルをクエリすることなく、SQL実行を監視し、パフォーマンスの問題を簡単に特定できます。詳細は[ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)を参照してください。
 -   クラスターの[**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **「Key Visualizer」**タブでTiDBのデータアクセスパターンとデータホットスポットを確認できます。詳細は[Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)を参照してください。
 -   これらのメトリクスを独自のDatadogおよびPrometheusに統合することもできます。詳細は[サードパーティの監視統合](/tidb-cloud/third-party-monitoring-integrations.md)を参照してください。
 
@@ -169,8 +169,8 @@ TiDB Cloudにはさまざまな形式のデータをインポートできます�
 
 -   クエリパフォーマンスの向上
 
-    -   [**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページの[**SQL文**](/tidb-cloud/tune-performance.md#statement-analysis)タブで SQL 実行計画を確認します。
-    -   [**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページの[**Key Visualizer**](/tidb-cloud/tune-performance.md#key-visualizer)タブでホットスポットの問題を確認します。
+    -   [**SQL Statement**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページの[**SQL文**](/tidb-cloud/tune-performance.md#statement-analysis)タブで SQL 実行計画を確認します。
+    -   [**Key Visualizer**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページの[**Key Visualizer**](/tidb-cloud/tune-performance.md#key-visualizer)タブでホットスポットの問題を確認します。
     -   [**メトリクス**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページで TiDB クラスターの容量が不足していないかどうかを監視します。
     -   TiFlash機能を使用して分析処理を最適化します。[HTAPクラスタを使用する](/tiflash/tiflash-overview.md)を参照してください。
 

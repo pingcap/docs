@@ -33,7 +33,7 @@ summary: Amazon S3、GCS、Azure Blob Storage、またはAlibaba Cloud Object St
     >
     > -   パフォーマンスを向上させるためには、各圧縮ファイルのサイズを100MiBに制限することをお勧めします。
     > -   Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
-    > -   非圧縮ファイルの場合、場合によっては前述のルールに従ってCSVファイル名を更新できない場合（たとえば、CSVファイルリンクが他のプログラムでも使用されている場合）、ファイル名を変更せずに、[ステップ4](#step-4-import-csv-files)の**マッピング設定**を使用してソースデータを単一のターゲットテーブルにインポートできます。
+    > -   非圧縮ファイルの場合、場合によっては前述のルールに従ってCSVファイル名を更新できない場合（たとえば、CSVファイルリンクが他のプログラムでも使用されている場合）、ファイル名を変更せずに、[ステップ4](#step-4-import-csv-files)の**Mapping Settings**を使用してソースデータを単一のターゲットテーブルにインポートできます。
 
 ## ステップ2．対象テーブルのスキーマを作成する {#step-2-create-the-target-table-schemas}
 
@@ -109,7 +109,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
 3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
 
-    -   **ストレージプロバイダー**： **Amazon S3**を選択してください。
+    -   **Storage Provider**： **Amazon S3**を選択してください。
     -   **Source Files URI** ：
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`s3://[bucket_name]/[data_source_folder]/[file_name].csv`の形式で入力します。例: `s3://sampledata/ingest/TableName.01.csv` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`s3://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `s3://sampledata/ingest/` 。
@@ -119,7 +119,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
 4.  **「次へ」**をクリックしてください。
 
-5.  **「宛先マッピング」**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
+5.  **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
     **Source Files URI**でディレクトリが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションがデフォルトで選択されます。
 
@@ -136,11 +136,11 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
             -   `my-data?.csv` : `my-data` `my-data1.csv`や`my-data2.csv`のような 1 文字が続くすべての CSV ファイルに一致します。
             -   `my-data*.csv` : `my-data`で始まるすべての CSV ファイルに一致します。たとえば`my-data-2023.csv`や`my-data-final.csv`などです。
 
-        -   **対象データベース**と**対象テーブル**：データをインポートする対象データベースとテーブルを選択します。
+        -   **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
 
 6.  **「次へ」**をクリックしてください。TiDB Cloudがソースファイルを適切にスキャンします。
 
-7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **「インポート開始」を**クリックします。
+7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
 8.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。
 
@@ -162,7 +162,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
 3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
 
-    -   **ストレージプロバイダー**： **Google Cloud Storage**を選択してください。
+    -   **Storage Provider**： **Google Cloud Storage**を選択してください。
     -   **Source Files URI** ：
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].csv`の形式で入力します。例: `[gcs|gs]://sampledata/ingest/TableName.01.csv` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`[gcs|gs]://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `[gcs|gs]://sampledata/ingest/` 。
@@ -170,7 +170,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
 4.  **「次へ」**をクリックしてください。
 
-5.  **「宛先マッピング」**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
+5.  **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
     **Source Files URI**でディレクトリが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションがデフォルトで選択されます。
 
@@ -187,11 +187,11 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
             -   `my-data?.csv` : `my-data` `my-data1.csv`や`my-data2.csv`のような 1 文字が続くすべての CSV ファイルに一致します。
             -   `my-data*.csv` : `my-data`で始まるすべての CSV ファイルに一致します。たとえば`my-data-2023.csv`や`my-data-final.csv`などです。
 
-        -   **対象データベース**と**対象テーブル**：データをインポートする対象データベースとテーブルを選択します。
+        -   **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
 
 6.  **「次へ」**をクリックしてください。TiDB Cloudがソースファイルを適切にスキャンします。
 
-7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **「インポート開始」を**クリックします。
+7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
 8.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。
 
@@ -213,7 +213,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
 3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
 
-    -   **ストレージプロバイダー**： **Azure Blob Storage**を選択します。
+    -   **Storage Provider**： **Azure Blob Storage**を選択します。
     -   **Source Files URI** ：
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`[azure|https]://[bucket_name]/[data_source_folder]/[file_name].csv`の形式で入力します。例: `[azure|https]://sampledata/ingest/TableName.01.csv` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`[azure|https]://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `[azure|https]://sampledata/ingest/` 。
@@ -221,7 +221,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
 4.  **「次へ」**をクリックしてください。
 
-5.  **「宛先マッピング」**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
+5.  **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
     **Source Files URI**でディレクトリが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションがデフォルトで選択されます。
 
@@ -238,11 +238,11 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
             -   `my-data?.csv` : `my-data` `my-data1.csv`や`my-data2.csv`のような 1 文字が続くすべての CSV ファイルに一致します。
             -   `my-data*.csv` : `my-data`で始まるすべての CSV ファイルに一致します。たとえば`my-data-2023.csv`や`my-data-final.csv`などです。
 
-        -   **対象データベース**と**対象テーブル**：データをインポートする対象データベースとテーブルを選択します。
+        -   **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
 
 6.  **「次へ」**をクリックしてください。TiDB Cloudがソースファイルを適切にスキャンします。
 
-7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **「インポート開始」を**クリックします。
+7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
 8.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。
 
@@ -264,7 +264,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
 3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
 
-    -   **ストレージプロバイダー**： **Alibaba Cloud OSS**を選択してください。
+    -   **Storage Provider**： **Alibaba Cloud OSS**を選択してください。
     -   **Source Files URI** ：
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`oss://[bucket_name]/[data_source_folder]/[file_name].csv`の形式で入力します。例: `oss://sampledata/ingest/TableName.01.csv` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`oss://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `oss://sampledata/ingest/` 。
@@ -272,7 +272,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
 4.  **「次へ」**をクリックしてください。
 
-5.  **「宛先マッピング」**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
+5.  **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
     **Source Files URI**でディレクトリが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションがデフォルトで選択されます。
 
@@ -289,11 +289,11 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
             -   `my-data?.csv` : `my-data` `my-data1.csv`や`my-data2.csv`のような 1 文字が続くすべての CSV ファイルに一致します。
             -   `my-data*.csv` : `my-data`で始まるすべての CSV ファイルに一致します。たとえば`my-data-2023.csv`や`my-data-final.csv`などです。
 
-        -   **対象データベース**と**対象テーブル**：データをインポートする対象データベースとテーブルを選択します。
+        -   **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
 
 6.  **「次へ」**をクリックしてください。TiDB Cloudがソースファイルを適切にスキャンします。
 
-7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **「インポート開始」を**クリックします。
+7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
 8.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。
 
@@ -314,10 +314,10 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
 ### データインポート中の警告を解決する {#resolve-warnings-during-data-import}
 
-**[インポートの開始]**をクリックした後、 `can't find the corresponding source files`などの警告メッセージが表示された場合は、正しいソース ファイルを提供するか、 [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って既存のファイルの名前を変更するか、**詳細設定**を使用して変更することで問題を解決します。
+**Start Import**をクリックした後、 `can't find the corresponding source files`などの警告メッセージが表示された場合は、正しいソース ファイルを提供するか、 [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って既存のファイルの名前を変更するか、**Advanced Settings**を使用して変更することで問題を解決します。
 
 これらの問題を解決した後、データを再度インポートする必要があります。
 
 ### インポートされたテーブルに行が0件あります {#zero-rows-in-the-imported-tables}
 
-インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。行数がゼロの場合は、入力したバケットURIに一致するデータファイルがなかったことを意味します。この場合は、正しいソースファイルを指定するか、既存のファイルを[データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って名前変更するか、または**詳細設定**を使用して変更することで問題を解決してください。その後、再度テーブルをインポートしてください。
+インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。行数がゼロの場合は、入力したバケットURIに一致するデータファイルがなかったことを意味します。この場合は、正しいソースファイルを指定するか、既存のファイルを[データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って名前変更するか、または**Advanced Settings**を使用して変更することで問題を解決してください。その後、再度テーブルをインポートしてください。

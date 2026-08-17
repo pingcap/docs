@@ -12,7 +12,7 @@ TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサー
 > -   現在、 TiDB Cloud Essentialの変更フィード機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、以下の手順に従ってください。
 >
 >     1.  [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある?をクリックします**。** 。
->     2.  **「サポート チケット」**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。
+>     2.  **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。
 >     3.  チケットを作成します。「説明」欄に「changefeedへの申請」と入力します。
 >     4.  **「送信」**をクリックしてください。
 > -   TiDB Cloud Essentialインスタンスごとに最大10個の変更フィードが許可されています。
@@ -127,8 +127,8 @@ ticloud serverless changefeed resume -c <cluster-id> --changefeed-id <changefeed
 
     TiDB Cloudはデフォルトで変更フィードの設定を自動的に行います。以下の設定を変更できます。
 
-    -   Apache Kafkaシンク：**宛先**、**接続**、**開始位置**を除くすべての設定
-    -   MySQLシンク：**宛先**、**接続**、**開始位置**を除くすべての設定
+    -   Apache Kafkaシンク：**宛先**、**接続**、**Start Position**を除くすべての設定
+    -   MySQLシンク：**宛先**、**接続**、**Start Position**を除くすべての設定
 
 4.  設定を編集した後、 **[...]** &gt; **[再開]**をクリックして、対応する変更フィードを再開します。
 

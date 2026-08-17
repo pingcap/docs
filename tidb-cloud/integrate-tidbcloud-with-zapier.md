@@ -61,7 +61,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 2.  アカウントを選択
 
-    1.  「**サインイン」**ボタンをクリックすると、新しいログインページにリダイレクトされます。
+    1.  **Sign in**ボタンをクリックすると、新しいログインページにリダイレクトされます。
     2.  ログイン ページで、公開キーと秘密キーを入力します。 TiDB Cloud API キーを取得するには、 [TiDB Cloud APIドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)ドキュメントの手順に従ってください。
     3.  **「続行」**をクリックしてください。
 
@@ -105,9 +105,9 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 3.  アクションを設定する
 
-    1.  前の手順と同様に、**プロジェクト名**、**クラスタ名**、 **TiDBパスワード**、**データベース名**を入力してください。
+    1.  前の手順と同様に、**Project Name**、**Cluster Name**、 **TiDBパスワード**、**Database Name**を入力してください。
 
-    2.  「**テーブル名」**で、ドロップダウンリストから「 **github_global_event」**テーブルを選択します。テーブルの列が表示されます。
+    2.  **Table Name**で、ドロップダウンリストから**github_global_event**テーブルを選択します。テーブルの列が表示されます。
 
         ![Table columns](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-columns.png)
 

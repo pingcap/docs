@@ -16,8 +16,8 @@ summary: n8nにおけるTiDB Cloudノードの使い方を学びましょう。
 ## 前提条件： TiDB Cloud APIキーを取得する {#prerequisites-get-tidb-cloud-api-key}
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)では、左上隅のコンボボックスを使用して、対象の組織に切り替えてください。
-2.  左側のナビゲーションペインで、 **[組織設定]** &gt; **[APIキー]**をクリックします。
-3.  **APIキー**のページで、 **Create API Key**をクリックします。
+2.  左側のナビゲーションペインで、 **Organization Settings** &gt; **API Keys**をクリックします。
+3.  **API Keys**ページで、 **Create API Key**をクリックします。
 4.  APIキーの説明を入力し、 **「次へ」**をクリックしてください。
 5.  作成したAPIキーをコピーしてn8nで後で使用するようにし、 **「完了」**をクリックしてください。
 
@@ -62,7 +62,7 @@ TiDB Cloudノードは、npmリポジトリでは`n8n-nodes-tidb-cloud`という
 4.  **npm Package Name**フィールドに`n8n-nodes-tidb-cloud`と入力します。
 5.  **「インストール」**をクリックしてください。
 
-その後、**ワークフロー**の検索バーで**TiDB Cloud**ノードを検索し、ワークスペースにドラッグすることでTiDB Cloudノードを使用できます。
+その後、**TiDB Cloud**の検索バーで**TiDB Cloud**ノードを検索し、ワークスペースにドラッグすることでTiDB Cloudノードを使用できます。
 
 ## ステップ3：ワークフローを構築する {#step-3-build-your-workflow}
 
@@ -90,7 +90,7 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、このノ�
 4.  TiDB Cloudノードの認証情報（TiDB Cloud APIキー）を入力してください。
 5.  **プロジェクト**一覧から、プロジェクトを選択してください。
 6.  **操作**リストで、 `Create Serverless Cluster`を選択します。
-7.  **「クラスタ名」**ボックスに、 TiDB Cloud Starterインスタンスの名前を入力します。
+7.  **Cluster Name**ボックスに、 TiDB Cloud Starterインスタンスの名前を入力します。
 8.  **リージョン**リストから地域を選択してください。
 9.  **パスワード**欄に、 TiDB Cloud Starterインスタンスへのログインに使用するパスワードを入力してください。
 10. ノードを実行するには、 **「ノードを実行」**をクリックしてください。
@@ -227,7 +227,7 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、このノ�
 TiDB Cloudノードは[通常のノード](https://docs.n8n.io/workflows/nodes/#regular-nodes)として機能し、次の 5 つの操作のみをサポートします。
 
 -   **Create Serverless Cluster**: TiDB Cloud Starterインスタンスを作成します。
--   **SQLの実行**：TiDBでSQL文を実行します。
+-   **Execute SQL**：TiDBでSQL文を実行します。
 -   **削除**：TiDB内の行を削除します。
 -   **Insert** ：TiDBに行を挿入します。
 -   **更新**: TiDB の行を更新します。
@@ -303,6 +303,6 @@ TiDB Cloudノードは[通常のノード](https://docs.n8n.io/workflows/nodes/#
 
 ### 制限事項 {#limitations}
 
--   通常、 **SQL実行**操作では1つのSQLステートメントしか実行できません。1つの操作で複数のステートメントを実行する場合は、 [`tidb_multi_statement_mode`](https://docs.pingcap.com/tidbcloud/system-variables#tidb_multi_statement_mode-new-in-v4011)手動で有効にする必要があります。
+-   通常、 **Execute SQL**操作では1つのSQLステートメントしか実行できません。1つの操作で複数のステートメントを実行する場合は、 [`tidb_multi_statement_mode`](https://docs.pingcap.com/tidbcloud/system-variables#tidb_multi_statement_mode-new-in-v4011)手動で有効にする必要があります。
 -   **削除**および**更新**操作では、キーとして1つのフィールドを指定する必要があります。たとえば、 `Delete Key`を`id`に設定すると、 `DELETE FROM table WHERE id = ${item.id}`を実行するのと同等になります。現在、**削除**および**更新**操作では、キーを1つだけ指定できます。
 -   **挿入**および**更新**操作の場合、**列**フィールドにカンマ区切りのリストを指定する必要があり、フィールド名は入力項目のプロパティ名と同じでなければなりません。

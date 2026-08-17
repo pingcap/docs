@@ -21,7 +21,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
 ## ステップ1. 宛先を設定する {#step-1-configure-destination}
 
-対象のTiDB Cloud Dedicatedクラスターの概要ページに移動します。左側のナビゲーション ペインで**[データ]** &gt; **[変更フィード]**をクリックし、 **[変更フィードの作成]**をクリックして**[宛先]**ページに移動します。次に、 TiDB Cloud Dedicatedクラスターがホストされているクラウド プロバイダーに応じて、宛先として**Amazon S3** 、 **GCS** 、または**Azure Blob Storage**を選択します。構成プロセスは、選択した宛先によって異なります。
+対象のTiDB Cloud Dedicatedクラスターの概要ページに移動します。左側のナビゲーション ペインで**[データ]** &gt; **[変更フィード]**をクリックし、 **Create Changefeed**をクリックして**[宛先]**ページに移動します。次に、 TiDB Cloud Dedicatedクラスターがホストされているクラウド プロバイダーに応じて、宛先として**Amazon S3** 、 **GCS** 、または**Azure Blob Storage**を選択します。構成プロセスは、選択した宛先によって異なります。
 
 <SimpleTab>
 <div label="Amazon S3">
@@ -34,7 +34,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
 1.  Amazon S3 の**宛先**ページで、 **S3 URI**を入力します。S3 バケットが TiDB クラスターと同じ AWS リージョンにあることを確認してください。
 
-2.  **バケットアクセス**で、 **AWS Role ARN**を選択します。
+2.  **Bucket Access**で、 **AWS Role ARN**を選択します。
 
 3.  新しいロールARNを作成するには、**こちらをクリックしてAWS CloudFormationで新しいロールARNを作成してください**。このテンプレートは必要な権限を自動的に構成します。
 
@@ -47,7 +47,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
     -   `s3:GetObject`
     -   `s3:DeleteObject`
 
-5.  生成された**ロールARNを**対応するフィールドに貼り付けてください。
+5.  生成された**Role ARN**対応するフィールドに貼り付けてください。
 
 **オプション2：AWSアクセスキー**
 
@@ -58,7 +58,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 アクセスキーを使用して認証を行うには、以下の手順に従ってください。
 
 1.  Amazon S3 の**宛先**ページで、 **S3 URI**を入力します。S3 バケットが TiDB クラスターと同じ AWS リージョンにあることを確認してください。
-2.  **「バケットアクセス」**で**AWS Access Key**を選択します。
+2.  **Bucket Access**で**AWS Access Key**を選択します。
 3.  以下の項目を入力してください。
 
     -   **Access Key ID**
@@ -77,7 +77,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
     1.  [Google Cloud Console](https://console.cloud.google.com/)にサインインしてください。
 
-    2.  に移動して、 [役割](https://console.cloud.google.com/iam-admin/roles)**の作成]**をクリックします。
+    2.  に移動して、 [役割](https://console.cloud.google.com/iam-admin/roles)**Create role**をクリックします。
 
         ![Create a role](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-create-role.png)
 
@@ -157,14 +157,14 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
         > -   生成されたSASトークンは取り消すことができないため、有効期間を慎重に設定してください。
         > -   継続的な可用性を確保するため、SASトークンの有効期限が切れる前に再生成および更新してください。
 
-    6.  **「SASと接続文字列を生成」**をクリックし、 **SASトークン**を保存します。
+    6.  **「SASと接続文字列を生成」**をクリックし、 **SAS token**を保存します。
 
         ![Generate a SAS token](/media/tidb-cloud/changefeed/sink-to-cloud-storage-azure-signature.png)
 
 4.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、Changefeed の**宛先**ページに移動し、次のフィールドに入力します。
 
     -   **Blob URL** ：手順2で取得したコンテナURLを入力してください。必要に応じてプレフィックスを追加できます。
-    -   **SASトークン**：ステップ3で取得した生成済みのSASトークンを入力してください。
+    -   **SAS Token**：ステップ3で取得した生成済みのSASトークンを入力してください。
 
 </div>
 </SimpleTab>
@@ -176,19 +176,19 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
 ## ステップ2. レプリケーションの設定 {#step-2-configure-replication}
 
-1.  **テーブル フィルターを**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [テーブルフィルタルール](https://docs.pingcap.com/tidb/stable/ticdc-filter#changefeed-log-filters)を参照してください。
+1.  **Table Filter**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [テーブルフィルタルール](https://docs.pingcap.com/tidb/stable/ticdc-filter#changefeed-log-filters)を参照してください。
 
     ![the table filter of changefeed](/media/tidb-cloud/changefeed/sink-to-s3-02-table-filter.jpg)
 
-    -   **大文字小文字の区別**：フィルタルールにおけるデータベース名とテーブル名の照合において、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
-    -   **フィルタルール**：この列でフィルタルールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加すると、 TiDB Cloud はTiDB 内のすべてのテーブルをクエリし、右側のボックスにルールに一致するテーブルのみを表示します。フィルタルールは最大 100 個まで追加できます。
+    -   **Case Sensitive**：フィルタルールにおけるデータベース名とテーブル名の照合において、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
+    -   **Filter Rules**：この列でフィルタルールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加すると、 TiDB Cloud はTiDB 内のすべてのテーブルをクエリし、右側のボックスにルールに一致するテーブルのみを表示します。フィルタルールは最大 100 個まで追加できます。
     -   **Tables with valid keys**：この列には、主キーや一意インデックスなど、有効なキーを持つテーブルが表示されます。
     -   **Tables without valid keys**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、下流で重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタルールを使用してこれらのテーブルを除外することもできます。たとえば、ルール`test.tbl1`を使用して、テーブル`"!test.tbl1"` 。
 
-2.  **イベントフィルター**をカスタマイズして、複製したいイベントを絞り込みます。
+2.  **Event Filter**をカスタマイズして、複製したいイベントを絞り込みます。
 
-    -   **一致するテーブル**：この列では、イベントフィルターを適用するテーブルを設定できます。ルールの構文は、前の**テーブルフィルター**領域で使用されているものと同じです。変更フィードごとに最大10個のイベントフィルタールールを追加できます。
-    -   **イベントフィルター**：以下のイベントフィルターを使用して、変更フィードから特定のイベントを除外できます。
+    -   **Tables matching**：この列では、イベントフィルターを適用するテーブルを設定できます。ルールの構文は、前の**Table Filter**領域で使用されているものと同じです。変更フィードごとに最大10個のイベントフィルタールールを追加できます。
+    -   **Event Filter**：以下のイベントフィルターを使用して、変更フィードから特定のイベントを除外できます。
         -   **イベントを無視する**：指定されたイベントタイプを除外します。
         -   **SQL を無視**: 指定された式に一致する DDL イベントを除外します。たとえば、 `^drop` `DROP`で始まるステートメントを除外し、 `add column`は`ADD COLUMN`を含むステートメントを除外します。
         -   **Ignore insert value expression**: 特定の条件を満たす`INSERT`ステートメントを除外します。たとえば、 `id >= 100`は、 `INSERT`が 100 以上である`id`ステートメントを除外します。
@@ -202,7 +202,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
     -   特定の[TSO](https://docs.pingcap.com/tidb/stable/glossary#tso)からレプリケーションを開始する
     -   特定の時間からレプリケーションを開始する
 
-4.  **データ形式の**領域で、 **CSV形式**または**Canal-JSON**形式のいずれかを選択してください。
+4.  **Data Format**領域で、 **CSV形式**または**Canal-JSON**形式のいずれかを選択してください。
 
      <SimpleTab>
      <div label="Configure CSV format">
@@ -210,7 +210,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
     **CSV**形式を設定するには、以下の項目を入力してください。
 
     -   **Binary Encode Method**：バイナリデータのエンコード方式。base64（デフォルト）または**hex**を選択できます。AWS DMSと連携する場合は、 **hex**を使用してください。
-    -   **日付区切り文字**：年、月、日に基づいてデータをローテーションするか、ローテーションしないかを選択します。
+    -   **Date Separator**：年、月、日に基づいてデータをローテーションするか、ローテーションしないかを選択します。
     -   **区切り文字**：CSVファイル内の値を区切る文字を指定します。最も一般的に使用される区切り文字はカンマ（ `,` ）です。
     -   **引用符**：区切り文字または特殊文字を含む値を囲むために使用する文字を指定します。通常、引用符には二重引用符（ `"` ）が使用されます。
     -   **null/空値**：CSVファイル内でnull値または空値がどのように表現されるかを指定します。これは、データの適切な処理と解釈のために重要です。
@@ -221,16 +221,16 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
     Canal-JSONは、プレーンなJSONテキスト形式です。設定するには、以下のフィールドに入力してください。
 
-    -   **日付区切り文字**：年、月、日に基づいてデータをローテーションするか、ローテーションしないかを選択します。
+    -   **Date Separator**：年、月、日に基づいてデータをローテーションするか、ローテーションしないかを選択します。
     -   **Enable TiDB Extension**: このオプションを有効にすると、TiCDC は[ウォーターマークイベント](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#watermark-event)を送信し、 [TiDB拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field)Canal-JSON メッセージに追加します。
 
     </div>
      </SimpleTab>
 
-5.  **フラッシュパラメータ**領域では、次の2つの項目を設定できます。
+5.  **Flush Parameters**領域では、次の2つの項目を設定できます。
 
-    -   **洗浄間隔**：デフォルトでは60秒に設定されていますが、2秒から10分の範囲で調整可能です。
-    -   **ファイルサイズ**：デフォルトでは64MBに設定されていますが、1MBから512MBの範囲で調整可能です。
+    -   **Flush Interval**：デフォルトでは60秒に設定されていますが、2秒から10分の範囲で調整可能です。
+    -   **File Size**：デフォルトでは64MBに設定されていますが、1MBから512MBの範囲で調整可能です。
 
     ![Flush Parameters](/media/tidb-cloud/changefeed/sink-to-cloud-storage-flush-parameters.jpg)
 
@@ -245,7 +245,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 **「次へ」**をクリックして、変更フィードの仕様を設定してください。
 
 1.  **変更フィード仕様**領域で、変更フィードで使用するレプリケーション容量ユニット（RCU）の数を指定します。
-2.  **変更フィード名**欄に、変更フィードの名前を指定します。
+2.  **Changefeed Name**欄に、変更フィードの名前を指定します。
 
 ## ステップ4．構成を確認し、レプリケーションを開始する {#step-4-review-the-configuration-and-start-replication}
 
