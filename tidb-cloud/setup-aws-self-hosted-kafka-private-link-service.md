@@ -776,10 +776,10 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 
 2.  **Configure the changefeed target > Connectivity Method > Private Link**に進むときは、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
 
-    -   **Kafka Type**: `3 AZs`クラスターが同じ 3 つの AZ にデプロイされていることを確認します。
+    -   **Kafka Type**: `3 AZs`。クラスターが同じ 3 つの AZ にデプロイされていることを確認します。
     -   **Kafka Advertised Listener Pattern**: `abc` 。これは、 [前提条件](#prerequisites)で**Kafka Advertised Listener Pattern**を生成するために使用する一意のランダム文字列と同じです。
     -   **Endpoint Service Name**: Kafka サービス名。
-    -   **Bootstrap Ports**: `9092`背後に専用のブートストラップ ターゲット グループを構成するため、1 つのポートで十分です。
+    -   **Bootstrap Ports**: `9092`。背後に専用のブートストラップ ターゲット グループを構成するため、1 つのポートで十分です。
 
 3.  [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)の手順に進みます。
 
