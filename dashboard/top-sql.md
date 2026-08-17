@@ -91,6 +91,8 @@ For more information about TiUP topology configuration, see [TiUP cluster topolo
 
 After you enable **TiKV Network IO collection (multi-dimensional)**, the **Enable detailed TiKV IO dimensions** switch appears in the settings panel. Enable this switch and save the settings to collect and select logical reads, logical writes, and Read IOPS as independent Top SQL dimensions:
 
+![Enable detailed TiKV IO dimensions](/media/dashboard/v9.0-top-sql-settings-enable-detailed-io.png)
+
 - **Order By Logical Read**: Sorts by the number of logical bytes read or processed by TiKV requests at the storage layer.
 - **Order By Logical Write**: Sorts by the number of logical bytes written by TiKV write requests.
 - **Order By Read IOPS**: Sorts by the number of RocksDB block reads triggered by foreground TiKV requests.
@@ -130,9 +132,11 @@ The following are the common steps to use Top SQL.
     - Use `Limit` to display the Top `5`, `20`, or `100` SQL queries.
     - The default aggregation dimension is `By Query`. If you select a TiKV node, you can also aggregate in dimensions of `By Table`, `By DB`, or `By Region`.
 
-        ![Select aggregation dimension](/media/dashboard/v8.5-top-sql-usage-select-agg-by.png)
+        ![Select aggregation dimension](/media/dashboard/v9.0-top-sql-usage-select-agg-by.png)
 
     - The default sort order is `Order By CPU` (sorted by CPU time). If you select a TiKV node and have [enabled TiKV Network IO collection (multi-dimensional)](#optional-enable-tikv-network-io-collection-new-in-v857-and-v900), you can also select `Order By Network` (sorted by network bytes). If [detailed TiKV IO dimensions](#optional-enable-detailed-tikv-io-dimensions) are disabled, you can also select `Order By Logical IO` (sorted by logical I/O bytes). After you enable detailed IO dimensions, `Order By Logical IO` is replaced by `Order By Logical Read`, `Order By Logical Write`, and `Order By Read IOPS`.
+
+        ![Select sort dimension](/media/dashboard/v9.0-top-sql-usage-select-order-by.png)
 
     > **Note:**
     >
@@ -140,13 +144,13 @@ The following are the common steps to use Top SQL.
 
 5. Observe the resource consumption hotspot records in the chart and table.
 
-    ![Chart and Table](/media/dashboard/v8.5-top-sql-usage-chart.png)
+    ![Chart and Table](/media/dashboard/v9.0-top-sql-usage-chart.png)
 
     The bar chart shows resource consumption under the current sort dimension, with different colors representing different records. The table displays cumulative values according to the current sort dimension, and provides an `Others` row at the end to summarize all non-Top N records.
 
 6. In the `By Query` view, click a row in the table to view the execution plan details for that type of SQL.
 
-    ![Details](/media/dashboard/v8.5-top-sql-details.png)
+    ![Details](/media/dashboard/v9.0-top-sql-details.png)
 
     In the SQL statement details, you can view the corresponding SQL template, Query template ID, Plan template ID, and execution plan text. The SQL statement details table displays different metrics depending on the node type:
 
@@ -161,7 +165,7 @@ The following are the common steps to use Top SQL.
 
 7. On TiKV nodes, if you need to locate hotspots from a higher dimension, you can switch to `By Table`, `By DB`, or `By Region` to view the aggregated results.
 
-    ![Aggregated results at DB level](/media/dashboard/v8.5-top-sql-usage-agg-by-db-detail.png)
+    ![Aggregated results at DB level](/media/dashboard/v9.0-top-sql-usage-agg-by-db-detail.png)
 
 8. Based on these initial clues, you can further analyze the root cause using the [SQL Statement](/dashboard/dashboard-statement-list.md) or [Slow Queries](/dashboard/dashboard-slow-query.md) page.
 
