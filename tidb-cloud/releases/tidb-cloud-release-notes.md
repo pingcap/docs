@@ -30,7 +30,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         For more supported regions, see [Platforms & Regions](https://docs.pingcap.com/tidbcloudlake/platforms-regions/).
 
-    - Expand Python extensibility and analytics engineering workflows for [TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/) with the new external Python UDF SDK and dbt adapter.
+    - Expand Python extensibility and analytics engineering workflows for TiDB Cloud Lake with the new external Python UDF SDK and dbt adapter.
 
         - With the new external Python UDF SDK, you can implement custom scalar and table functions in Python, deploy them on a UDF server, register the endpoint in TiDB Cloud Lake, and call the functions directly from SQL. The SDK supports common and complex data types, NULL handling, I/O parallelism, and per-function concurrency controls.
         - With the new dbt adapter, you can connect dbt to TiDB Cloud Lake to build, test, and document data transformation workflows. The adapter supports table, view, and incremental materializations, as well as seeds, sources, custom data tests, documentation generation, snapshots, and connection retries.
