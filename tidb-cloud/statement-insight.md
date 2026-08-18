@@ -50,7 +50,7 @@ The **Top Contributors** panel summarizes the SQL statements that match your fil
 - **Mean latency**: total latency divided by execution count.
 - **Execution count**: the number of times the SQL statements were executed.
 
-### Top Contributors of DB Users, SQL Types, SQL Digests, DBs and Tables
+### Top contributors by DB user, SQL type, SQL digest, DB, and table
 
 For each dimension (DB User, SQL Type, SQL Digest, DB or Table), the panel shows:
 
