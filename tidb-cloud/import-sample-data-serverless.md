@@ -11,7 +11,7 @@ summary: TiDB Cloud StarterまたはTiDB Cloud EssentialにUI経由でサンプ�
 >
 > この文書で使用されているサンプルデータは、Amazon S3 から取得したものです。
 
-1.  対象のTiDB Cloud StarterまたはEssentialインスタンスの**インポート**ページを開きます。
+1.  対象のTiDB Cloud StarterまたはEssentialインスタンスの**Import**ページを開きます。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
@@ -19,7 +19,7 @@ summary: TiDB Cloud StarterまたはTiDB Cloud EssentialにUI経由でサンプ�
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「インポート」**をクリックします。
+    2.  対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
 2.  **「クラウドストレージからデータをインポート」**をクリックします。
 
@@ -27,19 +27,19 @@ summary: TiDB Cloud StarterまたはTiDB Cloud EssentialにUI経由でサンプ�
 
     -   **Storage Provider**： **Amazon S3**を選択してください。
     -   **Source Files URI** ：サンプルデータURI `s3://tidbcloud-sample-data/data-ingestion/`を入力してください。
-    -   **資格情報**：
+    -   **Credential**：
         -   **AWS Role ARN** : `arn:aws:iam::801626783489:role/import-sample-access`を入力してください。
         -   **AWS Access Key**：サンプルデータの場合はこのオプションをスキップしてください。
 
-4.  **「次へ」**をクリックしてください。
+4.  **Next**をクリックしてください。
 
 5.  **Destination Mapping**セクションで、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションが選択されたままになっていることを確認し、データ形式として**SQL**を選択します。
 
-6.  **「次へ」**をクリックしてください。
+6.  **Next**をクリックしてください。
 
 7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
-8.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。
+8.  インポートの進行状況が**Completed**と表示されたら、インポートされたテーブルを確認してください。
 
 TiDB Cloud StarterまたはEssentialインスタンスに接続した後、ターミナルでいくつかのクエリを実行して結果を確認できます。例：
 

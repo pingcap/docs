@@ -14,7 +14,7 @@ TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサー
 >     1.  [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある?をクリックします**。** 。
 >     2.  **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。
 >     3.  チケットを作成します。「説明」欄に「changefeedへの申請」と入力します。
->     4.  **「送信」**をクリックしてください。
+>     4.  **Submit**をクリックしてください。
 > -   TiDB Cloud Essentialインスタンスごとに最大10個の変更フィードが許可されています。
 > -   [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは、変更フィード機能は利用できません。
 
@@ -44,7 +44,7 @@ TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサー
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「変更フィード」**をクリックします。変更フィードページが表示されます。
+2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Changefeed**をクリックします。変更フィードページが表示されます。
 
 **変更フィード**ページでは、変更フィードの作成、既存の変更フィードの一覧表示、および既存の変更フィードの操作（変更フィードの一時停止、再開、編集、削除など）を行うことができます。
 
@@ -123,12 +123,12 @@ ticloud serverless changefeed resume -c <cluster-id> --changefeed-id <changefeed
 
 2.  一時停止したい変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[一時停止]**をクリックします。
 
-3.  変更フィードのステータスが`Paused`に変更されたら、 **[...]** &gt; **[編集]**をクリックして、対応する変更フィードを編集します。
+3.  変更フィードのステータスが`Paused`に変更されたら、 **[...]** &gt; **Edit**をクリックして、対応する変更フィードを編集します。
 
     TiDB Cloudはデフォルトで変更フィードの設定を自動的に行います。以下の設定を変更できます。
 
-    -   Apache Kafkaシンク：**宛先**、**接続**、**Start Position**を除くすべての設定
-    -   MySQLシンク：**宛先**、**接続**、**Start Position**を除くすべての設定
+    -   Apache Kafkaシンク：**Destination**、**Connection**、**Start Position**を除くすべての設定
+    -   MySQLシンク：**Destination**、**Connection**、**Start Position**を除くすべての設定
 
 4.  設定を編集した後、 **[...]** &gt; **[再開]**をクリックして、対応する変更フィードを再開します。
 
@@ -154,9 +154,9 @@ ticloud serverless changefeed edit --cluster-id <cluster-id> --changefeed-id <ch
 ## 変更フィードを複製する {#duplicate-a-changefeed}
 
 1.  ターゲットのTiDB Cloud Essentialインスタンスの[**変更フィード**](#view-the-changefeed-page)ページに移動します。
-2.  複製したい変更フィードを探します。**アクション**列で、 **...** &gt;**複製を**クリックします。
+2.  複製したい変更フィードを探します。**Action**列で、 **...** &gt;**Duplicate**をクリックします。
 3.  TiDB Cloudは、新しい変更フィード設定に元の設定を自動的に反映します。必要に応じて設定を確認および変更できます。
-4.  設定を確認後、 **「送信」**をクリックして新しい変更フィードを作成して開始します。
+4.  設定を確認後、 **Submit**をクリックして新しい変更フィードを作成して開始します。
 
 ## 変更フィードを削除する {#delete-a-changefeed}
 

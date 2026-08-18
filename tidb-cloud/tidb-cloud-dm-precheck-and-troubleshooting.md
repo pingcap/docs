@@ -9,7 +9,7 @@ summary: データ移行時に発生する事前チェックエラー、移行�
 
 ## 事前チェックのエラーと解決策 {#precheck-errors-and-solutions}
 
-このセクションでは、データ移行時の事前チェック エラーと対応する解決策について説明します。これらのエラーは[データ移行を使用してデータを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)ときに**[事前チェック]**ページに表示されます。
+このセクションでは、データ移行時の事前チェック エラーと対応する解決策について説明します。これらのエラーは[データ移行を使用してデータを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)ときに**Precheck**ページに表示されます。
 
 解決策は、使用している上位データベースによって異なります。
 

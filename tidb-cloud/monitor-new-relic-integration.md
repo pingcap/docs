@@ -26,7 +26,7 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 
 -   New Relicとの連携機能は、現在[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでのみ利用可能です。
 
--   クラスターの状態が**「作成中」** 、 **「復元中」** 、 **「一時停止中」** 、 **「再開中」**の場合は、New Relic の統合は利用できません。
+-   クラスターの状態が**CREATING** 、 **「復元中」** 、 **PAUSED** 、 **RESUMING**の場合は、New Relic の統合は利用できません。
 
 -   New Relicとの連携が確立されたクラスターが削除されると、それに関連付けられた連携サービスも削除されます。
 
@@ -41,7 +41,7 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[統合]**をクリックします。
+2.  左側のナビゲーションペインで、 **Settings** &gt; **Integrations**をクリックします。
 
 3.  **統合**ページで、 **Integration to New Relic**をクリックします。
 
@@ -49,10 +49,10 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 
 5.  **Test Integration**をクリックします。
 
-    -   テストが成功すると、 **「確認」**ボタンが表示されます。
+    -   テストが成功すると、 **Confirm**ボタンが表示されます。
     -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、統合を再試行してください。
 
-6.  統合を完了するには、 **「確認」**をクリックしてください。
+6.  統合を完了するには、 **Confirm**をクリックしてください。
 
 </div>
 <div label="Legacy project-level New Relic integration (Beta)">
@@ -69,10 +69,10 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 
 6.  **Test Integration**をクリックします。
 
-    -   テストが成功すると、 **「確認」**ボタンが表示されます。
+    -   テストが成功すると、 **Confirm**ボタンが表示されます。
     -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、統合を再試行してください。
 
-7.  統合を完了するには、 **「確認」**をクリックしてください。
+7.  統合を完了するには、 **Confirm**をクリックしてください。
 
 </div>
 </SimpleTab>
@@ -115,7 +115,7 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
         >
         > 統合エラーを回避するために、JSON ファイル内のすべての`"accountIds"`フィールドにアカウント ID が追加されていることを確認してください。
 
-2.  [New Relic](https://one.newrelic.com/)にログインし、左側のナビゲーションバーの**「ダッシュボード」**をクリックし、右上隅の**「ダッシュボードのインポート」**をクリックします。
+2.  [New Relic](https://one.newrelic.com/)にログインし、左側のナビゲーションバーの**Dashboards**をクリックし、右上隅の**「ダッシュボードのインポート」**をクリックします。
 
 3.  表示されたダイアログで、準備した JSON ファイルの内容をすべてテキスト エリアに貼り付け、次に**「ダッシュボードのインポート」**をクリックします。
 
@@ -131,7 +131,7 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 
 ## 事前に構築されたダッシュボードを確認する {#view-the-pre-built-dashboard}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、 **「統合」**ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、 **Integrations**ページに移動します。
 
 2.  **New Relic**セクションの**New Relic**リンクをクリックすると、TiDBクラスターの事前構築済みダッシュボードが表示されます。
 

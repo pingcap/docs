@@ -54,7 +54,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
     >
     > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[ネットワーク]**をクリックします。
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Settings** &gt; **Networking**をクリックします。
 
 3.  **[AWS Private Endpoints for External Services]**領域で、**Create Private Endpoint for External Services**をクリックします。
 
@@ -69,7 +69,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
     -   **Connection Type**： **AWS Endpoint Service**を選択します。このオプションが表示されない場合は、クラスターがAWS上に作成されていることを確認してください。
     -   **Endpoint Service Name**: AWS エンドポイント サービス名を入力します (例: `com.amazonaws.vpce.<region>.vpce-svc-xxxxxxxxxxxxxxxxx` )。
 
-5.  **[作成]**をクリックします。
+5.  **Create**をクリックします。
 
 6.  [AWSコンソール](https://console.aws.amazon.com)のエンドポイント サービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を承認します。
 
@@ -102,7 +102,7 @@ Amazon MSK プロビジョニングプライベートリンク接続を作成す
     >
     > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[ネットワーク]**をクリックします。
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Settings** &gt; **Networking**をクリックします。
 
 3.  **[AWS Private Endpoints for External Services]**領域で、**Create Private Endpoint for External Services**をクリックします。
 
@@ -117,7 +117,7 @@ Amazon MSK プロビジョニングプライベートリンク接続を作成す
     -   **Connection Type**： **Amazon MSK Provisioned**を選択します。このオプションが表示されない場合は、クラスターがAWS上に作成されていることを確認してください。
     -   **MSK Cluster ARN** : Amazon MSK プロビジョニングされたクラスターの ARN を入力します (例: `arn:aws:kafka:us-east-1:385595570414:cluster/<msk-name>/xxxx` )。
 
-5.  **[作成]**をクリックします。
+5.  **Create**をクリックします。
 
 ## Alibaba Cloud Endpoint Service のプライベートリンク接続を作成する {#create-an-alibaba-cloud-endpoint-service-private-link-connection}
 
@@ -144,7 +144,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
     >
     > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[ネットワーク]**をクリックします。
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Settings** &gt; **Networking**をクリックします。
 
 3.  **[Alibaba Cloud Private Endpoints for External Services]**領域で、**Create Private Endpoint for External Services**をクリックします。
 
@@ -159,7 +159,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
     -   **Connection Type**： **Alibaba Cloud Endpoint Service**を選択します。このオプションが表示されない場合は、クラスターがAlibaba Cloud上に作成されていることを確認してください。
     -   **Endpoint Service Name**: Alibaba Cloud エンドポイント サービス名を入力します (例: `com.aliyuncs.privatelink.<region>.epsrv-xxxxxxxxxxxxxxxxx` )。
 
-5.  **[作成]**をクリックします。
+5.  **Create**をクリックします。
 
 6.  [Alibaba Cloudコンソール](https://console.alibabacloud.com)のエンドポイント サービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を許可します。
 
@@ -207,7 +207,7 @@ TiDB Cloudコンソールを使用してドメインをプライベート リン
     >
     > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[ネットワーク]**をクリックします。
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Settings** &gt; **Networking**をクリックします。
 
 3.  クラウドプロバイダーの**[外部サービス用プライベートエンドポイント]**領域で、対象のプライベート リンク接続を選択し、 **[...]**をクリックします。
 
@@ -260,7 +260,7 @@ TiDB Cloudコンソールを使用してプライベート リンク接続から
     >
     > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[ネットワーク]**をクリックします。
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Settings** &gt; **Networking**をクリックします。
 
 3.  クラウドプロバイダーの**[外部サービス用プライベートエンドポイント]**領域で、対象のプライベート リンク接続を選択し、 **[...]**をクリックします。
 
@@ -302,11 +302,11 @@ TiDB Cloudコンソールを使用してプライベート リンク接続を削
     >
     > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[ネットワーク]**をクリックします。
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Settings** &gt; **Networking**をクリックします。
 
 3.  クラウドプロバイダーの**[外部サービス用プライベートエンドポイント]**領域で、対象のプライベート リンク接続を選択し、 **[...]**をクリックします。
 
-4.  **[削除]**をクリックし、削除を確認します。
+4.  **Delete**をクリックし、削除を確認します。
 
 </div>
 

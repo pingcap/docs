@@ -9,7 +9,7 @@ summary: TiDB Cloud Premiumインスタンスでデュアルレイヤーデー�
 
 > **Note:**
 >
-> 現在、デュアルレイヤーデータ暗号化機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)**？」**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **「説明」**フィールドに「デュアルレイヤーデータ暗号化の申請」と入力して、 **「送信」**をクリックします。
+> 現在、デュアルレイヤーデータ暗号化機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)**？**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **Description**フィールドに「デュアルレイヤーデータ暗号化の申請」と入力して、 **Submit**をクリックします。
 
 ## 概要 {#overview}
 
@@ -93,7 +93,7 @@ TiDB Cloud Premiumインスタンスを作成する際に、二重層データ�
 
     2.  TiDB Cloud Premiumプランを選択し、基本設定を完了してください。
 
-    3.  **Dual-Layer Data Encryption**セクションで、 **「有効にする」**をクリックします。
+    3.  **Dual-Layer Data Encryption**セクションで、 **Enable**をクリックします。
 
     4.  **Customer-Managed Encryption Key (CMEK)**を選択し、 **Add KMS Key ARN**をクリックします。
 
@@ -108,7 +108,7 @@ TiDB Cloud Premiumインスタンスを作成する際に、二重層データ�
 
     8.  信頼関係を確認するには、 **「テスト」をクリックし、「KMSキーARNを追加」を**クリックします。
 
-    9.  検証が成功したら、 **「作成」**をクリックして、 TiDB Cloud Premiumインスタンスの作成を完了してください。
+    9.  検証が成功したら、 **Create**をクリックして、 TiDB Cloud Premiumインスタンスの作成を完了してください。
 
 #### オプション2：サービス管理型暗号化キー {#option-2-service-managed-encryption-key}
 
@@ -116,9 +116,9 @@ TiDB Cloudに暗号化キーの管理を代行させるには、以下の手順�
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、 **Create Resource**をクリックします。
 2.  TiDB Cloud Premiumプランを選択し、基本設定を完了してください。
-3.  **Dual-Layer Data Encryption**セクションで、 **「有効にする」**をクリックします。
+3.  **Dual-Layer Data Encryption**セクションで、 **Enable**をクリックします。
 4.  **Service-Managed Encryption Key**を選択してください。
-5.  **「作成」**をクリックして、 TiDB Cloud Premiumインスタンスの作成を完了してください。
+5.  **Create**をクリックして、 TiDB Cloud Premiumインスタンスの作成を完了してください。
 
 ### 既存のインスタンスで暗号化を有効にする {#enable-encryption-for-an-existing-instance}
 
@@ -132,7 +132,7 @@ TiDB Cloudに暗号化キーの管理を代行させるには、以下の手順�
 
 開始する前に、クラウドプロバイダーのKMSで対称暗号化キーを作成済みであることを確認してください。次に、以下の手順を実行してください。
 
-1.  TiDB Cloud Premiumインスタンスの**セキュリティ**ページで、 **「二重層データ暗号化」**セクションの**「有効にする」**をクリックします。
+1.  TiDB Cloud Premiumインスタンスの**Security**ページで、 **「二重層データ暗号化」**セクションの**「有効にする」**をクリックします。
 
 2.  **Customer-Managed Encryption Key (CMEK)**を選択し、 **Add KMS Key ARN**をクリックします。
 
@@ -151,16 +151,16 @@ TiDB Cloudに暗号化キーの管理を代行させるには、以下の手順�
 
 TiDB Cloudに暗号化キーの管理を代行させるには、以下の手順に従ってください。
 
-1.  TiDB Cloud Premiumインスタンスの**セキュリティ**ページで、 **「二重層データ暗号化」**セクションの**「有効にする」**をクリックします。
+1.  TiDB Cloud Premiumインスタンスの**Security**ページで、 **「二重層データ暗号化」**セクションの**「有効にする」**をクリックします。
 2.  **Service-Managed Encryption Key**を選択してください。
-3.  **「有効にする」**をクリックしてください。
+3.  **Enable**をクリックしてください。
 
 ## 暗号化ステータスを確認する {#view-encryption-status}
 
 暗号化を有効にした後、以下の場所でステータスを確認してください。
 
--   TiDB Cloud Premiumインスタンスの**概要**ページでは、 **[暗号化]**フィールドにアクティブなキー管理方法が表示されます。これは、 **[顧客管理暗号化キー（CMEK）で有効]**または**[サービス管理暗号化キーで有効]**のいずれかです。
--   **セキュリティ**ページでは、二重層データ暗号化の詳細な設定を確認できます。
+-   TiDB Cloud Premiumインスタンスの**Overview**ページでは、 **[暗号化]**フィールドにアクティブなキー管理方法が表示されます。これは、 **[顧客管理暗号化キー（CMEK）で有効]**または**[サービス管理暗号化キーで有効]**のいずれかです。
+-   **Security**ページでは、二重層データ暗号化の詳細な設定を確認できます。
 
 ## 暗号化されたバックアップから復元する {#restore-from-an-encrypted-backup}
 

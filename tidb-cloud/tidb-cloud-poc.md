@@ -133,7 +133,7 @@ TiDB Cloudにはさまざまな形式のデータをインポートできます�
 
 > **Note:**
 >
-> **「インポート」**ページでのデータのインポートでは追加の請求料金は発生しません。
+> **Import**ページでのデータのインポートでは追加の請求料金は発生しません。
 
 ## ステップ6. ワークロードを実行して結果を評価する {#step-6-run-your-workload-and-evaluate-results}
 
@@ -144,8 +144,8 @@ TiDB Cloudにはさまざまな形式のデータをインポートできます�
 ワークロードを開始した後、次の方法を使用してシステムを観察できます。
 
 -   クラスターの一般的なメトリクスは、クラスター概要ページで確認できます。これには、合計QPS、レイテンシ、接続数、 TiFlashリクエストQPS、 TiFlashリクエスト期間、 TiFlashストレージサイズ、TiKVストレージサイズ、TiDB CPU、TiKV CPU、TiKV IO読み取り、TiKV IO書き込みが含まれます。詳細は[TiDBクラスタを監視する](/tidb-cloud/monitor-tidb-cluster.md)を参照してください。
--   クラスターの[**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **SQL Statement**タブを確認してください。ここでは、システムテーブルをクエリすることなく、SQL実行を監視し、パフォーマンスの問題を簡単に特定できます。詳細は[ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)を参照してください。
--   クラスターの[**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **Key Visualizer**タブでTiDBのデータアクセスパターンとデータホットスポットを確認できます。詳細は[Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)を参照してください。
+-   クラスターの[**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **SQL Statement**タブを確認してください。ここでは、システムテーブルをクエリすることなく、SQL実行を監視し、パフォーマンスの問題を簡単に特定できます。詳細は[ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)を参照してください。
+-   クラスターの[**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **Key Visualizer**タブでTiDBのデータアクセスパターンとデータホットスポットを確認できます。詳細は[Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)を参照してください。
 -   これらのメトリクスを独自のDatadogおよびPrometheusに統合することもできます。詳細は[サードパーティの監視統合](/tidb-cloud/third-party-monitoring-integrations.md)を参照してください。
 
 次はテスト結果を評価する時です。
@@ -169,9 +169,9 @@ TiDB Cloudにはさまざまな形式のデータをインポートできます�
 
 -   クエリパフォーマンスの向上
 
-    -   [**SQL Statement**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページの[**SQL文**](/tidb-cloud/tune-performance.md#statement-analysis)タブで SQL 実行計画を確認します。
-    -   [**Key Visualizer**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページの[**Key Visualizer**](/tidb-cloud/tune-performance.md#key-visualizer)タブでホットスポットの問題を確認します。
-    -   [**メトリクス**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページで TiDB クラスターの容量が不足していないかどうかを監視します。
+    -   [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページの[**SQL Statement**](/tidb-cloud/tune-performance.md#statement-analysis)タブで SQL 実行計画を確認します。
+    -   [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページの[**Key Visualizer**](/tidb-cloud/tune-performance.md#key-visualizer)タブでホットスポットの問題を確認します。
+    -   [**Metrics**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページで TiDB クラスターの容量が不足していないかどうかを監視します。
     -   TiFlash機能を使用して分析処理を最適化します。[HTAPクラスタを使用する](/tiflash/tiflash-overview.md)を参照してください。
 
 ## ステップ7. その他の機能を調べる {#step-7-explore-more-features}
@@ -219,7 +219,7 @@ TiDB Cloud は、自動バックアップと手動バックアップの 2 種類
 
 PoCの申請が承認されると、アカウントにクレジットが付与されます。通常、このクレジットは14日間のPoCに十分な量です。クレジットは、ノードの種類と数に応じて、時間単位で課金されます。詳細については、 [TiDB Cloud課金](/tidb-cloud/tidb-cloud-billing.md#credits)をご覧ください。
 
-PoC の合計クレジット数、利用可能なクレジット数、現在のクレジット使用量を確認するには、 TiDB Cloudコンソールの左上隅にあるコンボ ボックスを使用して対象組織に切り替え、左側のナビゲーション ペインで**[請求] を**クリックして、 **[クレジット]**タブをクリックします。
+PoC の合計クレジット数、利用可能なクレジット数、現在のクレジット使用量を確認するには、 TiDB Cloudコンソールの左上隅にあるコンボ ボックスを使用して対象組織に切り替え、左側のナビゲーション ペインで**Billing**をクリックして、 **Credits**タブをクリックします。
 
 クレジットを節約するには、使用していないクラスターを削除してください。現在、クラスターを停止することはできません。クラスターを削除する前に、バックアップが最新であることを確認してください。そうすれば、後でPoCを再開する際にクラスターを復元できます。
 

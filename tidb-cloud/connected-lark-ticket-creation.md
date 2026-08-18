@@ -17,7 +17,7 @@ TiDB Cloud **Enterprise** [サポートプラン](/tidb-cloud/connected-care-det
 
     ![lark-ticket-creation-1](/media/tidb-cloud/connected-lark-ticket-creation-1.png)
 
-2.  カードの**「報告者」**フィールドに[TiDB Cloudコンソール](https://tidbcloud.com/)に使用するメール アドレスを入力し、必要に応じて他のフィールドに入力して、 **「送信」**をクリックしてチケットを作成します。
+2.  カードの**Reporter**フィールドに[TiDB Cloudコンソール](https://tidbcloud.com/)に使用するメール アドレスを入力し、必要に応じて他のフィールドに入力して、 **Submit**をクリックしてチケットを作成します。
 
     ![lark-ticket-creation-2](/media/tidb-cloud/connected-lark-ticket-creation-2.png)
 

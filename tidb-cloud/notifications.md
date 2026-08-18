@@ -53,6 +53,6 @@ TiDB Cloudコンソールでは、次のようなさまざまな種類の通知�
 
 ## 通知を確認する {#view-notifications}
 
-通知を表示するには、 [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある**「通知」**をクリックします。
+通知を表示するには、 [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある**Notification**をクリックします。
 
-新しい通知が届くと、**通知の**横に未読の通知の数を示す数字が表示されます。
+新しい通知が届くと、**Notification**の横に未読の通知の数を示す数字が表示されます。

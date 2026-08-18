@@ -43,7 +43,7 @@ TiDB Cloudコンソールには、 [**SQL Statement**](/tidb-cloud/tune-performa
 
 -   関連するスロークエリ
 
-**ステートメント**ダッシュボードの情報に加えて、 TiDB CloudにはSQLのベストプラクティスもいくつかあり、以下のセクションで説明します。
+**Statement**ダッシュボードの情報に加えて、 TiDB CloudにはSQLのベストプラクティスもいくつかあり、以下のセクションで説明します。
 
 ### 実行計画を確認する {#check-the-execution-plan}
 

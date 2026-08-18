@@ -44,12 +44,12 @@ User Response time = Service time + Queuing delay + Coherency delay
 
 TiDB Cloudコンソールには、ユーザー応答時間のトラブルシューティングに役立つページがいくつかあります。
 
--   [**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) :
+-   [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) :
 
     -   **SQL Statement**を使用すると、ページ上のSQL実行を直接観察し、システムテーブルをクエリすることなくパフォーマンスの問題を簡単に特定できます。SQL文をクリックすると、クエリの実行計画をさらに詳しく表示して、トラブルシューティングや分析を行うことができます。SQLパフォーマンスチューニングの詳細については、 [SQLチューニングの概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)を参照してください。
     -   **Key Visualizer**を使用すると、TiDB のデータ アクセス パターンとデータ ホットスポットを観察できます。
 
--   [**メトリクス**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) : このページでは、リクエスト単位、使用済みストレージサイズ、1 秒あたりのクエリ数、平均クエリ実行時間などのメトリックを表示できます。
+-   [**Metrics**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) : このページでは、リクエスト単位、使用済みストレージサイズ、1 秒あたりのクエリ数、平均クエリ実行時間などのメトリックを表示できます。
 
 追加のメトリックをリクエストするには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
@@ -57,7 +57,7 @@ TiDB Cloudコンソールには、ユーザー応答時間のトラブルシュ�
 
 ### TiDB クラスタ外部のボトルネック {#bottlenecks-outside-the-tidb-cluster}
 
-**「概要」**タブでレイテンシ(P80)を確認します。この値がユーザー応答時間のP80値よりも大幅に低い場合、主なボトルネックはTiDBクラスター外にある可能性があると判断できます。この場合、以下の手順に従ってボトルネックをトラブルシューティングできます。
+**Overview**タブでレイテンシ(P80)を確認します。この値がユーザー応答時間のP80値よりも大幅に低い場合、主なボトルネックはTiDBクラスター外にある可能性があると判断できます。この場合、以下の手順に従ってボトルネックをトラブルシューティングできます。
 
 1.  [概要タブ](/tidb-cloud/monitor-tidb-cluster.md)の左側にある TiDB のバージョンを確認してください。v6.0.0 以前のバージョンの場合は、 [PingCAPサポートチーム](/tidb-cloud/tidb-cloud-support.md)に問い合わせて、Prepared plan cache、Raft エンジン、TiKV AsyncIO 機能を有効にできるかどうかを確認することをお勧めします。これらの機能を有効にし、アプリケーション側のチューニングを行うことで、スループット性能を大幅に向上させ、レイテンシーとリソース使用率を削減できます。
 2.  必要に応じて、TiDB トークンの制限を増やしてスループットを向上させることができます。

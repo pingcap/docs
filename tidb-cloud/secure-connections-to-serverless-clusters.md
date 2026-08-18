@@ -23,7 +23,7 @@ aliases: ['/ja/tidbcloud/secure-connections-to-serverless-tier-clusters']
 
 1.  プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、クラスターの名前をクリックして概要ページに移動します。
 
-2.  右上隅の**「接続」**をクリックします。ダイアログが表示されます。
+2.  右上隅の**Connect**をクリックします。ダイアログが表示されます。
 
 3.  ダイアログでは、接続タイプのデフォルト設定を`Public`のままにして、希望する接続方法とオペレーティング システムを選択します。
 
@@ -67,7 +67,7 @@ JavaやGoなど、クライアントがシステムのルートCAストアをデ
 
     /etc/pki/tls/certs/ca-bundle.crt
 
-**高山**
+**Alpine**
 
     /etc/ssl/cert.pem
 

@@ -23,7 +23,7 @@ TiDB Cloudでは、TLS接続の確立は、 TiDB Cloud Premiumインスタンス
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 TiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動してください。
 
-2.  右上隅の**「接続」**をクリックしてください。ダイアログが表示されます。
+2.  右上隅の**Connect**をクリックしてください。ダイアログが表示されます。
 
 3.  接続ダイアログで、 **「接続タイプ」**ドロップダウンリストから**Connection Type**を選択します。
 

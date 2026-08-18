@@ -30,7 +30,7 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  左側のナビゲーションペインで、 **[データ]** &gt; **[バックアップ]**をクリックします。
+2.  左側のナビゲーションペインで、 **Data** &gt; **Backup**をクリックします。
 
 ### 自動バックアップを有効にする {#turn-on-auto-backup}
 
@@ -52,19 +52,19 @@ TiDB Cloud Dedicated は、 [スナップショットバックアップ](https:/
 
 TiDB Cloud Dedicatedクラスターでこの機能を有効にするには、以下の手順を実行してください。
 
-1.  TiDB Cloud Dedicatedクラスターの[**バックアップ**](#view-the-backup-page)ページに移動します。
+1.  TiDB Cloud Dedicatedクラスターの[**Backup**](#view-the-backup-page)ページに移動します。
 
 2.  **Backup Setting**をクリックします。
 
-3.  **Auto Backup**スイッチを**オン**に切り替えます。
+3.  **Auto Backup**スイッチを**On**に切り替えます。
 
-4.  **Point-in-time Restore**スイッチを**オン**に切り替えます。
+4.  **Point-in-time Restore**スイッチを**On**に切り替えます。
 
     > **Warning**
     >
     > ポイントインタイム リストアは、次のバックアップ タスクが完了した後にのみ有効になります。より早く有効にするには、有効にした後に[手動でバックアップを実行する](#perform-a-manual-backup)ことができます。
 
-5.  変更を保存するには、 **「保存」**をクリックしてください。
+5.  変更を保存するには、 **Save**をクリックしてください。
 
 #### バックアップスケジュールを設定する {#configure-backup-schedule}
 
@@ -72,11 +72,11 @@ TiDB Cloud Dedicatedは、日次および週次のバックアップスケジュ
 
 TiDB Cloud Dedicatedクラスターのバックアップ スケジュールを設定するには、次の手順を実行します。
 
-1.  TiDB Cloud Dedicatedクラスターの[**バックアップ**](#view-the-backup-page)ページに移動します。
+1.  TiDB Cloud Dedicatedクラスターの[**Backup**](#view-the-backup-page)ページに移動します。
 
 2.  **Backup Setting**をクリックします。
 
-3.  **Auto Backup**スイッチを**オン**に切り替えます。
+3.  **Auto Backup**スイッチを**On**に切り替えます。
 
 4.  バックアップスケジュールは以下のように設定してください。
 
@@ -116,15 +116,15 @@ TiDB Cloud Dedicatedは、クラスタリージョンから別のリージョン
 
 TiDB Cloud Dedicatedクラスターでデュアルリージョンバックアップを有効にするには、次の手順を実行します。
 
-1.  TiDB Cloud Dedicatedクラスターの[**バックアップ**](#view-the-backup-page)ページに移動します。
+1.  TiDB Cloud Dedicatedクラスターの[**Backup**](#view-the-backup-page)ページに移動します。
 
 2.  **Backup Setting**をクリックします。
 
-3.  **Dual Region Backup**スイッチを**オン**に切り替えます。
+3.  **Dual Region Backup**スイッチを**On**に切り替えます。
 
 4.  **Secondary Region**ドロップダウンリストから、バックアップファイルを保存するリージョンを選択します。
 
-5.  変更を保存するには、 **「保存」**をクリックしてください。
+5.  変更を保存するには、 **Save**をクリックしてください。
 
 ### 自動バックアップをオフにする {#turn-off-auto-backup}
 
@@ -134,13 +134,13 @@ TiDB Cloud Dedicatedクラスターでデュアルリージョンバックアッ
 
 TiDB Cloud Dedicatedクラスターの自動バックアップを無効にするには、以下の手順を実行してください。
 
-1.  TiDB Cloud Dedicatedクラスターの[**バックアップ**](#view-the-backup-page)ページに移動します。
+1.  TiDB Cloud Dedicatedクラスターの[**Backup**](#view-the-backup-page)ページに移動します。
 
 2.  **Backup Setting**をクリックします。
 
-3.  **Auto Backup**スイッチを**オフ**に切り替えてください。
+3.  **Auto Backup**スイッチを**Off**に切り替えてください。
 
-4.  変更を保存するには、 **「保存」**をクリックしてください。
+4.  変更を保存するには、 **Save**をクリックしてください。
 
 ### デュアルリージョンバックアップを無効にする {#turn-off-dual-region-backup}
 
@@ -150,13 +150,13 @@ TiDB Cloud Dedicatedクラスターの自動バックアップを無効にする
 
 TiDB Cloud Dedicatedクラスターのデュアルリージョンバックアップを無効にするには、次の手順を実行します。
 
-1.  TiDB Cloud Dedicatedクラスターの[**バックアップ**](#view-the-backup-page)ページに移動します。
+1.  TiDB Cloud Dedicatedクラスターの[**Backup**](#view-the-backup-page)ページに移動します。
 
 2.  **Backup Setting**をクリックします。
 
-3.  **Dual Region Backup**スイッチを**オフ**に切り替えます。
+3.  **Dual Region Backup**スイッチを**Off**に切り替えます。
 
-4.  変更を保存するには、 **「保存」**をクリックしてください。
+4.  変更を保存するには、 **Save**をクリックしてください。
 
 ### 手動バックアップを実行する {#perform-a-manual-backup}
 
@@ -169,13 +169,13 @@ TiDB Cloud Dedicatedクラスターのデュアルリージョンバックアッ
 
 TiDB Cloud Dedicatedクラスターに手動バックアップを適用するには、次の手順を実行します。
 
-1.  TiDB Cloud Dedicatedクラスターの[**バックアップ**](#view-the-backup-page)ページに移動します。
+1.  TiDB Cloud Dedicatedクラスターの[**Backup**](#view-the-backup-page)ページに移動します。
 
 2.  右上隅で、 **…** &gt;**Manual Backup**をクリックします。
 
-3.  表示されたダイアログに**名前**を入力してください。
+3.  表示されたダイアログに**Name**を入力してください。
 
-4.  **「確認」**をクリックしてください。これでクラスターデータのバックアップが完了します。
+4.  **Confirm**をクリックしてください。これでクラスターデータのバックアップが完了します。
 
 ### バックアップのエクスポート {#export-backups}
 
@@ -183,7 +183,7 @@ TiDB Cloud Dedicatedクラスターに手動バックアップを適用するに
 
 > **Note:**
 >
-> 現在、この機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**「？」**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、「**説明」**フィールドに「バックアップのエクスポート機能の申請」と入力して、 **「送信」を**クリックします。
+> 現在、この機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**？**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、**Description**フィールドに「バックアップのエクスポート機能の申請」と入力して、 **Submit**をクリックします。
 
 <SimpleTab>
 
@@ -191,7 +191,7 @@ TiDB Cloud Dedicatedクラスターに手動バックアップを適用するに
 
 バックアップをAmazon S3にエクスポートするには、以下の手順を実行してください。
 
-1.  TiDB Cloud Dedicatedクラスターの[**バックアップ**](#view-the-backup-page)ページに移動します。
+1.  TiDB Cloud Dedicatedクラスターの[**Backup**](#view-the-backup-page)ページに移動します。
 
 2.  エクスポートしたいバックアップファイルを見つけて、 **[アクション]**列の**[...]** &gt; **[エクスポート]**をクリックします。
 
@@ -206,12 +206,12 @@ TiDB Cloud Dedicatedクラスターに手動バックアップを適用するに
     -   **AWSコンソールを使用する場合**：
 
         1.  [Amazon S3コンソール](https://console.aws.amazon.com/s3/)に移動します。
-        2.  対象のバケットの詳細ページを開き、「**アクセス許可」**タブをクリックします。
-        3.  **Bucket policy**までスクロールし、**編集**をクリックします。
+        2.  対象のバケットの詳細ページを開き、**Permissions**タブをクリックします。
+        3.  **Bucket policy**までスクロールし、**Edit**をクリックします。
         4.  生成されたコマンドからポリシーの内容をコピーし、ポリシーエディタに貼り付けてください。
         5.  **Save changes**をクリックしてください。
 
-5.  エクスポートを開始するには、 **「エクスポート」**をクリックしてください。
+5.  エクスポートを開始するには、 **Export**をクリックしてください。
 
 </div>
 
@@ -219,7 +219,7 @@ TiDB Cloud Dedicatedクラスターに手動バックアップを適用するに
 
 バックアップを Google Cloud Storage にエクスポートするには、次の手順を実行します。
 
-1.  TiDB Cloud Dedicatedクラスターの[**バックアップ**](#view-the-backup-page)ページに移動します。
+1.  TiDB Cloud Dedicatedクラスターの[**Backup**](#view-the-backup-page)ページに移動します。
 
 2.  エクスポートしたいバックアップファイルを見つけて、 **[アクション]**列の**[...]** &gt; **[エクスポート]**をクリックします。
 
@@ -232,13 +232,13 @@ TiDB Cloud Dedicatedクラスターに手動バックアップを適用するに
     -   `storage.objects.create`
     -   `storage.objects.delete`
 
-5.  **Cloud Storage**&gt;**バケット**に移動し、対象のバケットを選択してから、**アクセス許可**&gt;**Grant Access**をクリックします。
+5.  **Cloud Storage**&gt;**バケット**に移動し、対象のバケットを選択してから、**Permissions**&gt;**Grant Access**をクリックします。
 
-6.  **New principals**で、手順3の**Service Account ID**を入力し、手順4の役割を割り当ててから、 **「保存」**をクリックします。
+6.  **New principals**で、手順3の**Service Account ID**を入力し、手順4の役割を割り当ててから、 **Save**をクリックします。
 
 7.  **Configuration**タブを開き、 **gsutil URI**をコピーして、 **Export Backup to Google Cloud Storage**ダイアログの**Export Path**フィールドに貼り付けます。サブディレクトリにエクスポートする場合は、URIにパスサフィックスを追加します。
 
-8.  エクスポートを開始するには、 **「エクスポート」**をクリックしてください。
+8.  エクスポートを開始するには、 **Export**をクリックしてください。
 
 </div>
 
@@ -250,7 +250,7 @@ TiDB Cloud Dedicatedクラスターに手動バックアップを適用するに
 
 TiDB Cloud Dedicatedクラスターの既存のバックアップ ファイルを削除するには、次の手順を実行します。
 
-1.  TiDB Cloud Dedicatedクラスターの[**バックアップ**](#view-the-backup-page)ページに移動します。
+1.  TiDB Cloud Dedicatedクラスターの[**Backup**](#view-the-backup-page)ページに移動します。
 
 2.  削除したいバックアップファイルを見つけて、 **[アクション]**列の**[...]** &gt; **[削除]**をクリックします。
 
@@ -258,9 +258,9 @@ TiDB Cloud Dedicatedクラスターの既存のバックアップ ファイル�
 
 TiDB Cloud Dedicatedクラスターの実行中のバックアップ ジョブを削除するには、[**バックアップファイルを削除する**](#delete-backup-files)と同様のプロセスに従います。
 
-1.  TiDB Cloud Dedicatedクラスターの[**バックアップ**](#view-the-backup-page)ページに移動します。
+1.  TiDB Cloud Dedicatedクラスターの[**Backup**](#view-the-backup-page)ページに移動します。
 
-2.  **保留中**または**実行**中のバックアップ ジョブを見つけて、 **[アクション]**列の**[...]** &gt; **[削除]**をクリックします。
+2.  **保留中**または**Running**中のバックアップ ジョブを見つけて、 **[アクション]**列の**[...]** &gt; **[削除]**をクリックします。
 
 ## 復元する {#restore}
 
@@ -272,9 +272,9 @@ TiDB Cloud Dedicatedクラスターの実行中のバックアップ ジョブ�
 
 TiDB Cloud Dedicatedクラスタのデータをバックアップから新しいクラスタに復元するには、以下の手順を実行してください。
 
-1.  TiDB Cloud Dedicatedクラスターの[**バックアップ**](#view-the-backup-page)ページに移動します。
+1.  TiDB Cloud Dedicatedクラスターの[**Backup**](#view-the-backup-page)ページに移動します。
 
-2.  **「復元」**をクリックします。設定ウィンドウが表示されます。
+2.  **Restore**をクリックします。設定ウィンドウが表示されます。
 
 3.  **Restore Mode**では、任意の時点のデータ、または選択したバックアップを新しいクラスターに復元するかどうかを選択できます。
 
@@ -305,17 +305,17 @@ TiDB Cloud Dedicatedクラスタのデータをバックアップから新しい
     > -   デフォルトでは、新しいクラスターはソースクラスターと同じリージョンに復元されます。
     > -   **バックアップ設定**で [**Dual Region Backup**](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup) が有効になっている場合は、デュアルリージョンバックアップ用に構成された**Secondary Region**に新しいクラスターを復元することもできます。
 
-5.  **復元**ウィンドウでは、必要に応じて以下の変更を行うこともできます。
+5.  **Restore**ウィンドウでは、必要に応じて以下の変更を行うこともできます。
 
     -   クラスター名を設定します。
     -   クラスターのポート番号を更新してください。
     -   クラスターのノード数、vCPU、RAM、およびストレージを増やす。
 
-6.  **「復元」**をクリックしてください。
+6.  **Restore**をクリックしてください。
 
     クラスター復元プロセスが開始され、**Password Settings**ダイアログボックスが表示されます。
 
-7.  **Password Settings**ダイアログボックスで、 TiDB Cloud Dedicatedクラスタに接続するためのrootパスワードを設定し、 **[保存]**をクリックします。
+7.  **Password Settings**ダイアログボックスで、 TiDB Cloud Dedicatedクラスタに接続するためのrootパスワードを設定し、 **Save**をクリックします。
 
 ### 削除されたクラスターを復元する {#restore-a-deleted-cluster}
 
@@ -335,15 +335,15 @@ TiDB Cloud Dedicatedクラスタのデータをバックアップから新しい
 
 3.  復元したいクラスターを見つけてから、 **[&gt;]**ボタンをクリックして、そのクラスターで使用可能なバックアップを展開します。
 
-4.  復元したいバックアップの行で、 **...**をクリックし、次に**「復元」**を選択します。
+4.  復元したいバックアップの行で、 **...**をクリックし、次に**Restore**を選択します。
 
-5.  **復元**ページで、新しいクラスターの名前を指定し、必要に応じて以下の変更を行います。
+5.  **Restore**ページで、新しいクラスターの名前を指定し、必要に応じて以下の変更を行います。
 
     -   クラスターのポート番号を更新してください。
     -   クラスターのノード数、vCPU、RAM、およびストレージを増やしてください。
 
-6.  **概要**セクションで復元情報を確認し、 **「復元」**をクリックします。
+6.  **Summary**セクションで復元情報を確認し、 **Restore**をクリックします。
 
     クラスター復元プロセスが開始され、**Password Settings**ダイアログボックスが表示されます。
 
-7.  **Password Settings**ダイアログボックスで、 TiDB Cloud Dedicatedクラスタに接続するためのrootパスワードを設定し、 **[保存]**をクリックします。
+7.  **Password Settings**ダイアログボックスで、 TiDB Cloud Dedicatedクラスタに接続するためのrootパスワードを設定し、 **Save**をクリックします。

@@ -92,7 +92,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 4.  **Instance configuration**セクションで、インスタンスを構成します。
     -   **Instance class**: 適切なインスタンスクラスを選択します。詳細については、 [レプリケーションインスタンスタイプの選択](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Types.html)を参照してください。
     -   **Engine version**: デフォルト構成を維持します。
-    -   **High Availability**: ビジネス ニーズに応じて、**マルチ AZ**または**シングル AZ**を選択します。
+    -   **High Availability**: ビジネス ニーズに応じて、**マルチ AZ**または**Single-AZ**を選択します。
 
 5.  **Allocated storage (GiB)**フィールドでストレージを構成します。
 
@@ -105,7 +105,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
     ![Connectivity and security](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-connectivity-security.png)
 
-7.  必要に応じて、 **Advanced settings** 、 **[メンテナンス]** 、 **[タグ]**セクションを構成し、 **[Create replication instance]**をクリックしてインスタンスの作成を完了します。
+7.  必要に応じて、 **Advanced settings** 、 **Maintenance** 、 **Tags**セクションを構成し、 **[Create replication instance]**をクリックしてインスタンスの作成を完了します。
 
 > **Note:**
 >
@@ -115,7 +115,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
 接続に関しては、 TiDB Cloudクラスターをソースとして使用する場合とターゲットとして使用する場合の手順は似ていますが、DMS ではソースとターゲットでデータベース設定要件が異なります。詳細については、 [MySQLをソースとして使用する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.html)または[MySQLをターゲットとして使用する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.html)を参照してください。TiDB Cloudクラスターをソースとして使用する場合、TiDB は MySQL binlogをサポートしていないため、**Migrate existing data**のみが可能です。
 
-1.  AWS DMS コンソールで、 [**エンドポイント**](https://console.aws.amazon.com/dms/v2/home#endpointList)ページに移動し、対応するリージョンに切り替えます。
+1.  AWS DMS コンソールで、 [**Endpoints**](https://console.aws.amazon.com/dms/v2/home#endpointList)ページに移動し、対応するリージョンに切り替えます。
 
     ![Create endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-create-endpoint.png)
 
@@ -132,9 +132,9 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
     <div label="TiDB Cloud Starter or Essential">
 
     -   **Server name**: クラスターの`HOST` 。
-    -   **ポート**: クラスターの`PORT` 。
+    -   **Port**: クラスターの`PORT` 。
     -   **User name**: 移行先クラスターのユーザー。DMSの要件を満たしていることを確認してください。
-    -   **パスワード**: クラスター ユーザーのパスワード。
+    -   **Password**: クラスター ユーザーのパスワード。
     -   **セキュリティ Socket Layer (SSL) モード**：パブリックエンドポイント経由で接続する場合は、トランスポートセキュリティを確保するために、モードを**verify-full**に設定することを強くお勧めします。プライベートエンドポイント経由で接続する場合は、モードを**none**に設定できます。
     -   （オプション） **CA certificate**： [ISRGルートX1証明書](https://letsencrypt.org/certs/isrgrootx1.pem)を使用します。詳細については、 [TiDB Cloud Starter または Essential への TLS 接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を参照してください。
 
@@ -143,9 +143,9 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
     <div label="TiDB Cloud Dedicated">
 
     -   **Server name**: TiDB Cloud Dedicatedクラスターの`HOST` 。
-    -   **ポート**: TiDB Cloud Dedicated クラスターの`PORT` 。
+    -   **Port**: TiDB Cloud Dedicated クラスターの`PORT` 。
     -   **User name**：移行用のTiDB Cloud Dedicatedクラスタのユーザー。DMS要件を満たしていることを確認してください。
-    -   **パスワード**: TiDB Cloud Dedicated クラスター ユーザーのパスワード。
+    -   **Password**: TiDB Cloud Dedicated クラスター ユーザーのパスワード。
     -   **セキュリティ Socket Layer (SSL) モード**：パブリックエンドポイント経由で接続する場合は、トランスポートセキュリティを確保するために、モードを**verify-full**に設定することを強くお勧めします。プライベートエンドポイント経由で接続する場合は、 **none**に設定できます。
     -   (オプション) **CA certificate**: [TiDB Cloud DedicatedへのTLS接続](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)に従って CA 証明書を取得します。
 
@@ -156,4 +156,4 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
 6.  エンドポイントを**Target endpoint**として作成する場合は、**Endpoint settings**セクションを展開し、**Use endpoint connection attributes**チェックボックスをオンにして、**Extra connection attributes**を`Initstmt=SET FOREIGN_KEY_CHECKS=0;`に設定します。
 
-7.  必要に応じて、 **KMS Key**と**タグの**セクションを設定します。 **Create endpoint**をクリックしてインスタンスの作成を完了します。
+7.  必要に応じて、 **KMS Key**と**Tags**のセクションを設定します。 **Create endpoint**をクリックしてインスタンスの作成を完了します。

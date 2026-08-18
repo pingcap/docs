@@ -45,7 +45,7 @@ TiProxyノードのサイズと数は、 TiDB Cloud DedicatedクラスタのQPS�
 既存のクラスタで TiProxy を有効にするには、次の手順を実行します。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
-2.  右上隅の**「…」**をクリックし、ドロップダウンメニューから**「変更」**をクリックします。 **Modify Cluster**ページが表示されます。
+2.  右上隅の**「…」**をクリックし、ドロップダウンメニューから**Modify**をクリックします。 **Modify Cluster**ページが表示されます。
 3.  **Modify Cluster**ページで、TiProxyのトグルをクリックし、TiProxyのサイズと数を選択します。
 
 ![Enable TiProxy](/media/tidb-cloud/tiproxy-enable-tiproxy.png)
@@ -66,7 +66,7 @@ TiProxyノードのサイズと数は、 TiDB Cloud DedicatedクラスタのQPS�
 TiProxyを無効にするには、以下の手順を実行してください。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
-2.  右上隅の**「…」**をクリックし、ドロップダウンメニューから**「変更」**をクリックします。 **Modify Cluster**ページが表示されます。
+2.  右上隅の**「…」**をクリックし、ドロップダウンメニューから**Modify**をクリックします。 **Modify Cluster**ページが表示されます。
 3.  **Modify Cluster**ページで、TiProxyのトグルをクリックしてTiProxyを無効にします。
 
 ![Disable TiProxy](/media/tidb-cloud/tiproxy-disable-tiproxy.png)
@@ -88,8 +88,8 @@ TiProxyのトポロジーを表示するには、以下の手順を実行して�
 TiProxyのメトリクスを表示するには、以下の手順を実行してください。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで、 **Monitoring > Metrics**をクリックします。**[メトリクス]**ページが表示されます。
-3.  **メトリクス**ページで、 **[サーバー]**をクリックし、TiProxy関連のメトリクスまでスクロールします。特定のTiDBノードグループのTiProxyメトリクスを表示するには、 **TiDB Node Group View**をクリックし、TiDBノードグループを選択してから、TiProxy関連のメトリクスまでスクロールします。
+2.  左側のナビゲーションペインで、 **Monitoring > Metrics**をクリックします。**Metrics**ページが表示されます。
+3.  **Metrics**ページで、 **Server**をクリックし、TiProxy関連のメトリクスまでスクロールします。特定のTiDBノードグループのTiProxyメトリクスを表示するには、 **TiDB Node Group View**をクリックし、TiDBノードグループを選択してから、TiProxy関連のメトリクスまでスクロールします。
 
 指標には以下が含まれます。
 
@@ -103,7 +103,7 @@ TiProxyのメトリクスを表示するには、以下の手順を実行して�
 TiProxyの請求書を表示するには、以下の手順を実行してください。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)では、左上隅のコンボボックスを使用して、対象の組織に切り替えてください。
-2.  左側のナビゲーションペインで**「請求」**をクリックします。 **「請求」**ページでは、デフォルトで**「請求書」**タブが表示されます。
+2.  左側のナビゲーションペインで**Billing**をクリックします。 **Billing**ページでは、デフォルトで**Bills**タブが表示されます。
 3.  **Summary by Service**セクションでは、TiProxy ノードのコストは**TiDB Dedicated**の下に表示され、TiProxy のデータ転送コストは**データ転送 &gt; 同一リージョン**に含まれています。
 
 ![TiProxy Billing](/media/tidb-cloud/tiproxy-billing.png)
@@ -118,7 +118,7 @@ TiProxyの請求書を表示するには、以下の手順を実行してくだ�
 TiProxyをスケールインまたはスケールアウトするには、以下の手順を実行します。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
-2.  右上隅の**「…」**をクリックし、ドロップダウンメニューから**「変更」**をクリックします。 **Modify Cluster**ページが表示されます。
+2.  右上隅の**「…」**をクリックし、ドロップダウンメニューから**Modify**をクリックします。 **Modify Cluster**ページが表示されます。
 3.  **Modify Cluster**ページで、TiProxyノードの数を変更します。
 
 ![Modify TiProxy](/media/tidb-cloud/tiproxy-enable-tiproxy.png)

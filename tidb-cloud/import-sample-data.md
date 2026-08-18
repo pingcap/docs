@@ -10,7 +10,7 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
 <SimpleTab>
 <div label="Amazon S3">
 
-1.  対象のTiDB Cloud Dedicatedクラスタの**インポート**ページを開きます。
+1.  対象のTiDB Cloud Dedicatedクラスタの**Import**ページを開きます。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
@@ -18,7 +18,7 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「インポート」**をクリックします。
+    2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
 2.  **「クラウドストレージからデータをインポート」**をクリックします。
 
@@ -26,23 +26,23 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
 
     -   **Storage Provider**： **Amazon S3**を選択してください。
     -   **Source URI** ：サンプルデータURI `s3://tidbcloud-sample-data/data-ingestion/`を入力してください。
-    -   **認証情報**: **AWS Role ARN**を選択し、 `arn:aws:iam::801626783489:role/import-sample-access`を入力します。
+    -   **Credentials**: **AWS Role ARN**を選択し、 `arn:aws:iam::801626783489:role/import-sample-access`を入力します。
         -   **AWS Access Key**：サンプルデータの場合はこのオプションをスキップしてください。
 
-4.  **「次へ」**をクリックしてください。
+4.  **Next**をクリックしてください。
 
 5.  **Destination Mapping**セクションで、 **<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDBファイル命名規則</a>を使用して自動マッピングを行う」**を選択したまま、データ形式として**SQL**を選択します。
 
-6.  **「次へ」**をクリックします。TiDB Cloudがソースファイルをスキャンします。
+6.  **Next**をクリックします。TiDB Cloudがソースファイルをスキャンします。
 
 7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
-8.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。
+8.  インポートの進行状況が**Completed**と表示されたら、インポートされたテーブルを確認してください。
 
 </div>
 <div label="Google Cloud">
 
-1.  対象のTiDB Cloud Dedicatedクラスタの**インポート**ページを開きます。
+1.  対象のTiDB Cloud Dedicatedクラスタの**Import**ページを開きます。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
@@ -50,7 +50,7 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「インポート」**をクリックします。
+    2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
 2.  **「クラウドストレージからデータをインポート」**をクリックします。
 
@@ -60,21 +60,21 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
     -   **Source URI** ：サンプルデータURI `gs://tidbcloud-samples-us-west1/`を入力してください。
     -   **Google CloudサービスアカウントID** ： TiDB Cloudは、このページにGoogle CloudサービスアカウントIDを表示します。サンプルデータURIを使用する場合は、そのまま続行できます。
 
-4.  **「次へ」**をクリックしてください。
+4.  **Next**をクリックしてください。
 
 5.  **Destination Mapping**セクションで、 **<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDBファイル命名規則</a>を使用して自動マッピングを行う」**を選択したまま、データ形式として**SQL**を選択します。
 
-6.  **「次へ」**をクリックします。TiDB Cloudがソースファイルをスキャンします。
+6.  **Next**をクリックします。TiDB Cloudがソースファイルをスキャンします。
 
 7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
-8.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。
+8.  インポートの進行状況が**Completed**と表示されたら、インポートされたテーブルを確認してください。
 
 </div>
 
 <div label="Azure Blob Storage">
 
-1.  対象のTiDB Cloud Dedicatedクラスタの**インポート**ページを開きます。
+1.  対象のTiDB Cloud Dedicatedクラスタの**Import**ページを開きます。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
@@ -82,7 +82,7 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「インポート」**をクリックします。
+    2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
 2.  **「クラウドストレージからデータをインポート」**をクリックします。
 
@@ -98,7 +98,7 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
         -   **Private Link**：Azure プライベートエンドポイント経由で接続し、ネットワークから隔離されたアクセスを実現します。ストレージアカウントがパブリックアクセスをブロックしている場合、またはセキュリティポリシーでプライベート接続が必要な場合にこのオプションを使用します。**Private Link**を選択した場合は、追加フィールド**「Azure Blob Storage リソース ID」**も入力する必要があります。リソース ID を確認するには：
 
             1.  [Azureポータル](https://portal.azure.com/)にアクセスします。
-            2.  ストレージアカウントに移動し、 **[概要]** &gt; **JSON View**をクリックします。
+            2.  ストレージアカウントに移動し、 **Overview** &gt; **JSON View**をクリックします。
             3.  `id`プロパティの値をコピーします。リソース ID は`/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Storage/storageAccounts/<account_name>`の形式です。
 
     -   **SAS Token**：
@@ -106,13 +106,13 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
         -   サンプルデータには、次の**SAS Token**を使用してください： `sv=2015-04-05&ss=b&srt=co&sp=rl&se=2099-03-01T00%3A00%3A01.0000000Z&sig=cQHvaofmVsUJEbgyf4JFkAwTJGsFOmbQHx03GvVMrNc%3D` 。
         -   自分のデータについては、SAS トークンを使用して Azure Blob Storage にアクセスできます。詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access)を参照してください。
 
-4.  **「次へ」**をクリックしてください。
+4.  **Next**をクリックしてください。
 
     接続方法として**Private Link**を選択した場合、 TiDB Cloudはストレージアカウント用のプライベートエンドポイントを作成します。接続を開始するには、Azureポータルでこのエンドポイント要求を承認する必要があります。
 
     1.  [Azureポータル](https://portal.azure.com/)に移動し、ストレージアカウントに移動します。
 
-    2.  **「ネットワーク」** &gt; **Private endpoint connections**をクリックします。
+    2.  **Networking** &gt; **Private endpoint connections**をクリックします。
 
     3.  TiDB Cloudからの保留中の接続要求を見つけて、 **「承認」**をクリックします。
 
@@ -124,16 +124,16 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
 
 5.  **Destination Mapping**セクションで、 **<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDBファイル命名規則</a>を使用して自動マッピングを行う」**を選択したまま、データ形式として**SQL**を選択します。
 
-6.  **「次へ」**をクリックします。TiDB Cloudがソースファイルをスキャンします。
+6.  **Next**をクリックします。TiDB Cloudがソースファイルをスキャンします。
 
 7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
-8.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。
+8.  インポートの進行状況が**Completed**と表示されたら、インポートされたテーブルを確認してください。
 
 </div>
 </SimpleTab>
 
-データインポートの進行状況が**「完了」**と表示されたら、サンプルデータとデータベーススキーマがTiDB Cloudのデータベースに正常にインポートされたことを意味します。
+データインポートの進行状況が**Completed**と表示されたら、サンプルデータとデータベーススキーマがTiDB Cloudのデータベースに正常にインポートされたことを意味します。
 
 クラスターに接続した後、ターミナルでいくつかのクエリを実行して結果を確認できます。例えば、次のようになります。
 

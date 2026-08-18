@@ -104,7 +104,7 @@ TiDB Cloudのリソースをプロジェクトごとにグループ化して表�
 
 3.  プロジェクトを作成する対象となるTiDB Cloudリソースの種類に応じて、次のいずれかの操作を行います。
 
-    -   プロジェクトが TiDB X インスタンス用に作成されている場合は、 **[確認]**をクリックします。
+    -   プロジェクトが TiDB X インスタンス用に作成されている場合は、 **Confirm**をクリックします。
 
         <CustomContent plan="starter,essential,premium,dedicated">
 
@@ -123,7 +123,7 @@ TiDB Cloudのリソースをプロジェクトごとにグループ化して表�
 
         </CustomContent>
 
-    -   プロジェクトがTiDB Cloud Dedicatedクラスター用に作成されている場合は、 **Create for Dedicated Cluster**オプションを選択し、プロジェクトの [顧客管理型暗号化キー（CMEK）](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)と[メンテナンスウィンドウ](/tidb-cloud/configure-maintenance-window.md)を構成して、 **「確認」**をクリックします。
+    -   プロジェクトがTiDB Cloud Dedicatedクラスター用に作成されている場合は、 **Create for Dedicated Cluster**オプションを選択し、プロジェクトの [顧客管理型暗号化キー（CMEK）](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)と[メンテナンスウィンドウ](/tidb-cloud/configure-maintenance-window.md)を構成して、 **Confirm**をクリックします。
 
 ### プロジェクトを管理する {#manage-a-project}
 
@@ -154,7 +154,7 @@ TiDB Xインスタンスを移動するには、以下の手順を実行して�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
-2.  プロジェクトビューで、移動する TiDB X インスタンスを含むプロジェクトフォルダーを展開し、対象の TiDB X インスタンスの**...**をクリックしてから、 **[移動]**をクリックします。
+2.  プロジェクトビューで、移動する TiDB X インスタンスを含むプロジェクトフォルダーを展開し、対象の TiDB X インスタンスの**...**をクリックしてから、 **Move**をクリックします。
 
     > **Tip:**
     >
@@ -165,4 +165,4 @@ TiDB Xインスタンスを移動するには、以下の手順を実行して�
     -   TiDB Xインスタンスをプロジェクトに移動するには、 **To a project**を選択し、ドロップダウンリストから対象のプロジェクトを選択します。
     -   TiDB X インスタンスをどのプロジェクトからも移動するには、 **Outside any project**を選択します。
 
-4.  **「移動」**をクリックします。
+4.  **Move**をクリックします。
