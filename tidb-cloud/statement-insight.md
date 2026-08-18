@@ -70,7 +70,7 @@ The **Resource Usage Over Time** trend chart shows how the selected metric chang
 
 ### Why is there no data, or only a short time range of data, in Statement Insight?
 
-Statement Insight does not backfill historical data. Data starts accumulating from the moment the feature is enabled on your instance, and the available time range grows over time. If you enabled the feature recently, this is expected behavior, not a sign of missing or broken data.
+Statement Insight does not backfill historical data. Data starts accumulating from the moment the feature is enabled on your instance, and the available time range grows over time. If the feature was enabled for your instance recently, this is expected behavior, not a sign of missing or broken data.
 
 ### What is the difference between Statement Insight and Top RU?
 
