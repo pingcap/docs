@@ -81,12 +81,21 @@ DROP STATS t;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
+After `DROP STATS`, `SHOW STATS_META` still returns the table's row count
+and modify count. `DROP STATS` clears histogram-related statistics such as
+TopN and buckets, but does not delete the `STATS_META` row.
+
 ```sql
 SHOW STATS_META WHERE db_name='test' and table_name='t';
 ```
 
 ```
-Empty set (0.00 sec)
++---------+------------+----------------+---------------------+--------------+-----------+
+| Db_name | Table_name | Partition_name | Update_time         | Modify_count | Row_count |
++---------+------------+----------------+---------------------+--------------+-----------+
+| test    | t          |                | 2020-05-25 20:34:33 |            0 |         0 |
++---------+------------+----------------+---------------------+--------------+-----------+
+1 row in set (0.00 sec)
 ```
 
 ## MySQL compatibility
