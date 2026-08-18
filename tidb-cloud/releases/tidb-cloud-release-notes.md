@@ -26,6 +26,10 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Lake**
 
+    - [TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/) is now available on Alibaba Cloud in Japan (Tokyo) (`ap-northeast-1`). 
+
+        For more supported regions, see [Platforms & Regions](https://docs.pingcap.com/tidbcloudlake/platforms-regions/).
+
     - Expand Python extensibility and analytics engineering workflows for [TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/) with the new external Python UDF SDK and dbt adapter.
 
         - With the new external Python UDF SDK, you can implement custom scalar and table functions in Python, deploy them on a UDF server, register the endpoint in TiDB Cloud Lake, and call the functions directly from SQL. The SDK supports common and complex data types, NULL handling, I/O parallelism, and per-function concurrency controls.
