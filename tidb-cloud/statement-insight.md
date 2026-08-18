@@ -23,7 +23,7 @@ Because Statement Insight only starts collecting data after it is enabled for yo
 
 ## Open Statement Insight
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to your {{{ .premium }}}, {{{ .byoc }}}, {{{ .essential }}} instance.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to your <CustomContent plan="essential,premium">{{{ .essential }}} or {{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .essential }}}, {{{ .premium }}}, or {{{ .byoc }}}</CustomContent> instance.
 2. In the left navigation pane, click **Monitoring** > **Diagnosis**.
 3. On the **Diagnosis** page, click the **Statement Insight** tab.
 
