@@ -42,11 +42,11 @@ TiDB Cloud BranchingをGitHubリポジトリと統合するには、以下の手
 
     <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/branch/github-authorize.png" width="80%" />
 
-4.  **Connect to GitHub**ダイアログで、 **「GitHubアカウント」**ドロップダウンリストからGitHubアカウントを選択します。
+4.  **Connect to GitHub**ダイアログで、 **GitHub Account**ドロップダウンリストからGitHubアカウントを選択します。
 
     リストにあなたのアカウントが存在しない場合は、 **Install Other Account**をクリックし、画面の指示に従ってアカウントをインストールしてください。
 
-5.  **GitHubリポジトリの**ドロップダウンリストから、対象のリポジトリを選択してください。リストが長い場合は、リポジトリ名を入力して検索することもできます。
+5.  **GitHub Repository**ドロップダウンリストから、対象のリポジトリを選択してください。リストが長い場合は、リポジトリ名を入力して検索することもできます。
 
 6.  **「接続」**をクリックすると、 TiDB Cloud StarterインスタンスとGitHubリポジトリが接続されます。
 

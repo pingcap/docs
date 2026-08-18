@@ -124,15 +124,15 @@ TiDB Cloud Premiumでは、チェンジフィードのTiCDC 変更フィード�
     <CustomContent plan="premium">
 
     -   Apache Kafkaシンク：すべての設定。
-    -   MySQLシンク： **MySQL接続**、**テーブルフィルタ**、および**イベントフィルタ**。
+    -   MySQLシンク： **MySQL接続**、**Table Filter**、および**Event Filter**。
 
     </CustomContent>
     <CustomContent plan="dedicated">
 
     -   Apache Kafkaシンク：すべての設定。
-    -   MySQLシンク： **MySQL接続**、**テーブルフィルタ**、および**イベントフィルタ**。
-    -   TiDB Cloudシンク: **TiDB Cloud Connection**、**テーブルフィルタ**、および**イベントフィルタ**。
-    -   クラウドストレージシンク：**ストレージエンドポイント**、**テーブルフィルタ**、および**イベントフィルタ**。
+    -   MySQLシンク： **MySQL接続**、**Table Filter**、および**Event Filter**。
+    -   TiDB Cloudシンク: **TiDB Cloud Connection**、**Table Filter**、および**Event Filter**。
+    -   クラウドストレージシンク：**Storage Endpoint**、**Table Filter**、および**Event Filter**。
 
     </CustomContent>
 

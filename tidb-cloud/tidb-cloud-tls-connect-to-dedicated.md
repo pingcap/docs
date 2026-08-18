@@ -16,7 +16,7 @@ TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの
 
 -   安全な設定でクラスターにアクセスするためのパスワードを設定します。
 
-    これを行うには、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、 TiDB Cloud Dedicatedクラスターの行にある**「...」**をクリックし、 **「パスワード設定」**を選択します。パスワード設定で「パスワードの**自動生成」**をクリックすると、数字、大文字、小文字、特殊文字を含む16文字のルートパスワードが自動的に生成されます。
+    これを行うには、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、 TiDB Cloud Dedicatedクラスターの行にある**「...」**をクリックし、 **Password Settings**を選択します。パスワード設定で「パスワードの**Auto-generate Password**をクリックすると、数字、大文字、小文字、特殊文字を含む16文字のルートパスワードが自動的に生成されます。
 
 ## TiDB Cloud Dedicatedクラスタへのセキュリティ接続 {#secure-connection-to-a-tidb-cloud-dedicated-cluster}
 
@@ -26,11 +26,11 @@ TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの
 
 2.  右上隅の**「接続」**をクリックします。ダイアログが表示されます。
 
-3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択します。
+3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**Connection Type**を選択します。
 
     IPアクセスリストを設定していない場合は、初回接続前に**Configure IP Access List**をクリックして設定してください。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
 
-4.  **「CA証明書」**をクリックして、TiDBクラスタへのTLS接続用のCA証明書をダウンロードしてください。CA証明書はデフォルトでTLS 1.2バージョンをサポートしています。
+4.  **CA cert**をクリックして、TiDBクラスタへのTLS接続用のCA証明書をダウンロードしてください。CA証明書はデフォルトでTLS 1.2バージョンをサポートしています。
 
     > **Note:**
     >

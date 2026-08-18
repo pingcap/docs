@@ -15,7 +15,7 @@ TiDB Cloudは、DatadogおよびNew Relicとの連携をクラスタレベルで
 
 ### ステップ1：従来のプロジェクトレベルのDatadogおよびNew Relic統合を削除します。 {#step-1-delete-the-legacy-project-level-datadog-and-new-relic-integrations}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **[プロジェクト ビュー]**タブをクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
     > **Tip:**
     >
@@ -23,7 +23,7 @@ TiDB Cloudは、DatadogおよびNew Relicとの連携をクラスタレベルで
 
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  左側のナビゲーションパネルで、 **「プロジェクト設定」**の下にある**「統合」**をクリックします。
+3.  左側のナビゲーションパネルで、 **「プロジェクト設定」**の下にある**Project Settings**をクリックします。
 
 4.  **統合**ページで、 **Integration to Datadog**または**Integration to New Relic**の横にある**Delete**をクリックします。
 

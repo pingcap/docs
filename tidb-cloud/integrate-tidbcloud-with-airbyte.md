@@ -78,15 +78,15 @@ TiDB コネクタの詳細については、 [TiDBソース](https://docs.airbyt
 
 以下の手順では、TiDBをソースと宛先の両方として使用します。他のコネクタでは、パラメータが異なる場合があります。
 
-1.  サイドバーの**「接続」**をクリックし、次に**「新しい接続」**をクリックします。
+1.  サイドバーの**「接続」**をクリックし、次に**New Connection**をクリックします。
 
 2.  事前に設定した送信元と送信先を選択してください。
 
-3.  接続**設定**パネルに移動し、 `${source_name} - ${destination-name}`などの接続名を作成します。
+3.  接続**Set up**パネルに移動し、 `${source_name} - ${destination-name}`などの接続名を作成します。
 
 4.  **レプリケーション頻度**を**Every 24 hours**に設定すると、接続は1日に1回データを複製します。
 
-5.  **宛先名前空間**を**カスタム形式**に設定し、**Namespace Custom Format**を**テスト**に設定して、すべてのデータを`test`データベースに保存します。
+5.  **Destination Namespace**を**Custom format**に設定し、**Namespace Custom Format**を**test**に設定して、すべてのデータを`test`データベースに保存します。
 
 6.  **同期モード**を**Full refresh | Overwrite**に選択してください。
 

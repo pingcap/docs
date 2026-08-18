@@ -43,6 +43,6 @@ TiDB Cloud Dedicatedは、[チェンジフィード](/tidb-cloud/changefeed-over
 
 ## プライベートデータリンクのコスト {#private-data-link-cost}
 
-**プライベートリンク**または**Private Service Connect**のネットワーク接続方法を選択した場合、追加の**Private Data Link**料金が発生します。これらの料金は[データ転送コスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#data-transfer-cost)カテゴリに該当します。
+**Private Link**または**Private Service Connect**のネットワーク接続方法を選択した場合、追加の**Private Data Link**料金が発生します。これらの料金は[データ転送コスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#data-transfer-cost)カテゴリに該当します。
 
 **Private Data Link**の料金は**$0.01/GiB**で、**データ処理量**[AWS インターフェースエンドポイントの料金](https://aws.amazon.com/privatelink/pricing/#Interface_Endpoint_pricing) 、**Consumer data processing**量[Google Cloud プライベート サービス コネクトの料金](https://cloud.google.com/vpc/pricing#psc-forwarding-rules) 、**Inbound/Outbound Data Processed**量[Azure Private Link の料金](https://azure.microsoft.com/en-us/pricing/details/private-link/)と同じです。

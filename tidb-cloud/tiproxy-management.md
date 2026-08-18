@@ -45,8 +45,8 @@ TiProxyノードのサイズと数は、 TiDB Cloud DedicatedクラスタのQPS�
 既存のクラスタで TiProxy を有効にするには、次の手順を実行します。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
-2.  右上隅の**「…」**をクリックし、ドロップダウンメニューから**「変更」**をクリックします。 **「クラスタの変更」**ページが表示されます。
-3.  **「クラスタの変更」**ページで、TiProxyのトグルをクリックし、TiProxyのサイズと数を選択します。
+2.  右上隅の**「…」**をクリックし、ドロップダウンメニューから**「変更」**をクリックします。 **Modify Cluster**ページが表示されます。
+3.  **Modify Cluster**ページで、TiProxyのトグルをクリックし、TiProxyのサイズと数を選択します。
 
 ![Enable TiProxy](/media/tidb-cloud/tiproxy-enable-tiproxy.png)
 
@@ -66,8 +66,8 @@ TiProxyノードのサイズと数は、 TiDB Cloud DedicatedクラスタのQPS�
 TiProxyを無効にするには、以下の手順を実行してください。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
-2.  右上隅の**「…」**をクリックし、ドロップダウンメニューから**「変更」**をクリックします。 **「クラスタの変更」**ページが表示されます。
-3.  **「クラスタの変更」**ページで、TiProxyのトグルをクリックしてTiProxyを無効にします。
+2.  右上隅の**「…」**をクリックし、ドロップダウンメニューから**「変更」**をクリックします。 **Modify Cluster**ページが表示されます。
+3.  **Modify Cluster**ページで、TiProxyのトグルをクリックしてTiProxyを無効にします。
 
 ![Disable TiProxy](/media/tidb-cloud/tiproxy-disable-tiproxy.png)
 
@@ -78,8 +78,8 @@ TiProxyを無効にするには、以下の手順を実行してください。
 TiProxyのトポロジーを表示するには、以下の手順を実行してください。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで、 **Monitoring > Nodes**をクリックします。**ノードマップ**ページが表示されます。
-3.  **ノードマップ**ページでは、TiProxyのトポロジーが**TiDB**ペインに表示されます。
+2.  左側のナビゲーションペインで、 **Monitoring > Nodes**をクリックします。**Node Map**ページが表示されます。
+3.  **Node Map**ページでは、TiProxyのトポロジーが**TiDB**ペインに表示されます。
 
 ![TiProxy Topology](/media/tidb-cloud/tiproxy-topology.png)
 
@@ -94,8 +94,8 @@ TiProxyのメトリクスを表示するには、以下の手順を実行して�
 指標には以下が含まれます。
 
 -   **TiProxy CPU Usage**：各TiProxyノードのCPU使用率統計情報。上限は100%です。CPU使用率が80%を超える場合は、TiProxyのスケールアウトをお勧めします。
--   **TiProxy接続数**：各TiProxyノード上の接続数。
--   **TiProxy スループット**: 各 TiProxy ノードで 1 秒あたりに転送されるバイト数。最大スループットが最大ネットワーク帯域幅に達した場合は、TiProxy をスケールアウトすることをお勧めします。最大ネットワーク帯域幅の詳細については、 [TiProxyノードのサイズと数を決定する](#decide-the-size-and-number-of-tiproxy-nodes)を参照してください。
+-   **TiProxy Connections**：各TiProxyノード上の接続数。
+-   **TiProxy Throughput**: 各 TiProxy ノードで 1 秒あたりに転送されるバイト数。最大スループットが最大ネットワーク帯域幅に達した場合は、TiProxy をスケールアウトすることをお勧めします。最大ネットワーク帯域幅の詳細については、 [TiProxyノードのサイズと数を決定する](#decide-the-size-and-number-of-tiproxy-nodes)を参照してください。
 -   **TiProxy Sessions Migration Reasons**：1分ごとに発生するセッション移行の数とその理由。たとえば、TiDBがスケールインし、TiProxyがセッションを他のTiDBノードに移行する場合、理由は`status`です。その他の移行理由については、 [TiProxyのモニタリング指標](https://docs.pingcap.com/tidb/stable/tiproxy-grafana#balance)を参照してください。
 
 ### TiProxyの請求書を確認する {#view-tiproxy-bills}
@@ -118,8 +118,8 @@ TiProxyの請求書を表示するには、以下の手順を実行してくだ�
 TiProxyをスケールインまたはスケールアウトするには、以下の手順を実行します。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
-2.  右上隅の**「…」**をクリックし、ドロップダウンメニューから**「変更」**をクリックします。 **「クラスタの変更」**ページが表示されます。
-3.  **「クラスタの変更」**ページで、TiProxyノードの数を変更します。
+2.  右上隅の**「…」**をクリックし、ドロップダウンメニューから**「変更」**をクリックします。 **Modify Cluster**ページが表示されます。
+3.  **Modify Cluster**ページで、TiProxyノードの数を変更します。
 
 ![Modify TiProxy](/media/tidb-cloud/tiproxy-enable-tiproxy.png)
 

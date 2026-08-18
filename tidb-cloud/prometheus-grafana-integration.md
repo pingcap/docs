@@ -30,7 +30,7 @@ Prometheus サービスでTiDB Cloudのメトリクスを読み取るように�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
 2.  左側のナビゲーションペインで、 **[統合]** &gt; **Integration to Prometheus(PREVIEW)**をクリックします。
-3.  **「ファイルを追加」を**クリックすると、現在のTiDB Cloud Essentialインスタンス用の`scrape_config`ファイルが生成されて表示されます。
+3.  **Add File**をクリックすると、現在のTiDB Cloud Essentialインスタンス用の`scrape_config`ファイルが生成されて表示されます。
 4.  `scrape_config`ファイルの内容のコピーを作成して、後で使用してください。
 
 </CustomContent>
@@ -39,7 +39,7 @@ Prometheus サービスでTiDB Cloudのメトリクスを読み取るように�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
 2.  左側のナビゲーション ペインで、 **[設定]** &gt; **[統合]** &gt; **Integration to Prometheus(PREVIEW)**をクリックします。
-3.  **「ファイルを追加」を**クリックすると、現在のTiDB Cloud Premium インスタンス用の`scrape_config`ファイルが生成されて表示されます。
+3.  **Add File**をクリックすると、現在のTiDB Cloud Premium インスタンス用の`scrape_config`ファイルが生成されて表示されます。
 4.  `scrape_config`ファイルの内容のコピーを作成して、後で使用してください。
 
 </CustomContent>

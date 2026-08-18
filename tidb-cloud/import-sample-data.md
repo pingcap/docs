@@ -24,18 +24,18 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
 
 3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
 
-    -   **ストレージプロバイダー**： **Amazon S3**を選択してください。
-    -   **ソースURI** ：サンプルデータURI `s3://tidbcloud-sample-data/data-ingestion/`を入力してください。
+    -   **Storage Provider**： **Amazon S3**を選択してください。
+    -   **Source URI** ：サンプルデータURI `s3://tidbcloud-sample-data/data-ingestion/`を入力してください。
     -   **認証情報**: **AWS Role ARN**を選択し、 `arn:aws:iam::801626783489:role/import-sample-access`を入力します。
         -   **AWS Access Key**：サンプルデータの場合はこのオプションをスキップしてください。
 
 4.  **「次へ」**をクリックしてください。
 
-5.  **「宛先マッピング」**セクションで、 **<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDBファイル命名規則</a>を使用して自動マッピングを行う」**を選択したまま、データ形式として**「SQL」**を選択します。
+5.  **Destination Mapping**セクションで、 **<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDBファイル命名規則</a>を使用して自動マッピングを行う」**を選択したまま、データ形式として**「SQL」**を選択します。
 
 6.  **「次へ」**をクリックします。TiDB Cloudがソースファイルをスキャンします。
 
-7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **「インポート開始」を**クリックします。
+7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
 8.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。
 
@@ -56,17 +56,17 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
 
 3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
 
-    -   **ストレージプロバイダー**： **Google Cloud Storage**を選択してください。
-    -   **ソースURI** ：サンプルデータURI `gs://tidbcloud-samples-us-west1/`を入力してください。
+    -   **Storage Provider**： **Google Cloud Storage**を選択してください。
+    -   **Source URI** ：サンプルデータURI `gs://tidbcloud-samples-us-west1/`を入力してください。
     -   **Google CloudサービスアカウントID** ： TiDB Cloudは、このページにGoogle CloudサービスアカウントIDを表示します。サンプルデータURIを使用する場合は、そのまま続行できます。
 
 4.  **「次へ」**をクリックしてください。
 
-5.  **「宛先マッピング」**セクションで、 **<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDBファイル命名規則</a>を使用して自動マッピングを行う」**を選択したまま、データ形式として**「SQL」**を選択します。
+5.  **Destination Mapping**セクションで、 **<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDBファイル命名規則</a>を使用して自動マッピングを行う」**を選択したまま、データ形式として**「SQL」**を選択します。
 
 6.  **「次へ」**をクリックします。TiDB Cloudがソースファイルをスキャンします。
 
-7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **「インポート開始」を**クリックします。
+7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
 8.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。
 
@@ -88,27 +88,27 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
 
 3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
 
-    -   **ストレージプロバイダー**： **Azure Blob Storage**を選択します。
+    -   **Storage Provider**： **Azure Blob Storage**を選択します。
 
-    -   **ソースURI** ：サンプルデータURI `https://tcidmsampledata.blob.core.windows.net/sql/`を入力してください。
+    -   **Source URI** ：サンプルデータURI `https://tcidmsampledata.blob.core.windows.net/sql/`を入力してください。
 
-    -   **接続方法**： TiDB CloudがAzure Blob Storageに接続する方法を選択します。サンプルデータをインポートするには、デフォルトの接続方法を使用できます。
+    -   **Connectivity Method**： TiDB CloudがAzure Blob Storageに接続する方法を選択します。サンプルデータをインポートするには、デフォルトの接続方法を使用できます。
 
         -   **パブリック**（デフォルト）：パブリックインターネット経由で接続します。ストレージアカウントがパブリックネットワークへのアクセスを許可している場合にこのオプションを使用してください。
-        -   **プライベートリンク**：Azure プライベートエンドポイント経由で接続し、ネットワークから隔離されたアクセスを実現します。ストレージアカウントがパブリックアクセスをブロックしている場合、またはセキュリティポリシーでプライベート接続が必要な場合にこのオプションを使用します。**プライベートリンク**を選択した場合は、追加フィールド**「Azure Blob Storage リソース ID」**も入力する必要があります。リソース ID を確認するには：
+        -   **Private Link**：Azure プライベートエンドポイント経由で接続し、ネットワークから隔離されたアクセスを実現します。ストレージアカウントがパブリックアクセスをブロックしている場合、またはセキュリティポリシーでプライベート接続が必要な場合にこのオプションを使用します。**Private Link**を選択した場合は、追加フィールド**「Azure Blob Storage リソース ID」**も入力する必要があります。リソース ID を確認するには：
 
             1.  [Azureポータル](https://portal.azure.com/)にアクセスします。
-            2.  ストレージアカウントに移動し、 **[概要]** &gt; **[JSONビュー]**をクリックします。
+            2.  ストレージアカウントに移動し、 **[概要]** &gt; **JSON View**をクリックします。
             3.  `id`プロパティの値をコピーします。リソース ID は`/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Storage/storageAccounts/<account_name>`の形式です。
 
-    -   **SASトークン**：
+    -   **SAS Token**：
 
-        -   サンプルデータには、次の**SASトークン**を使用してください： `sv=2015-04-05&ss=b&srt=co&sp=rl&se=2099-03-01T00%3A00%3A01.0000000Z&sig=cQHvaofmVsUJEbgyf4JFkAwTJGsFOmbQHx03GvVMrNc%3D` 。
+        -   サンプルデータには、次の**SAS Token**を使用してください： `sv=2015-04-05&ss=b&srt=co&sp=rl&se=2099-03-01T00%3A00%3A01.0000000Z&sig=cQHvaofmVsUJEbgyf4JFkAwTJGsFOmbQHx03GvVMrNc%3D` 。
         -   自分のデータについては、SAS トークンを使用して Azure Blob Storage にアクセスできます。詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access)を参照してください。
 
 4.  **「次へ」**をクリックしてください。
 
-    接続方法として**プライベートリンク**を選択した場合、 TiDB Cloudはストレージアカウント用のプライベートエンドポイントを作成します。接続を開始するには、Azureポータルでこのエンドポイント要求を承認する必要があります。
+    接続方法として**Private Link**を選択した場合、 TiDB Cloudはストレージアカウント用のプライベートエンドポイントを作成します。接続を開始するには、Azureポータルでこのエンドポイント要求を承認する必要があります。
 
     1.  [Azureポータル](https://portal.azure.com/)に移動し、ストレージアカウントに移動します。
 
@@ -122,11 +122,11 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
     >
     > エンドポイントがまだ承認されていない場合、 TiDB Cloud は接続が承認待ちであることを示すメッセージを表示します。Azure でリクエスト[Azureポータル](https://portal.azure.com/)承認してから、再試行してください。
 
-5.  **「宛先マッピング」**セクションで、 **<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDBファイル命名規則</a>を使用して自動マッピングを行う」**を選択したまま、データ形式として**「SQL」**を選択します。
+5.  **Destination Mapping**セクションで、 **<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDBファイル命名規則</a>を使用して自動マッピングを行う」**を選択したまま、データ形式として**「SQL」**を選択します。
 
 6.  **「次へ」**をクリックします。TiDB Cloudがソースファイルをスキャンします。
 
-7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **「インポート開始」を**クリックします。
+7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
 8.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。
 

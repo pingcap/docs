@@ -17,7 +17,7 @@ Prometheusとの連携を移行するには、以下の手順を実行してく�
 
 ### ステップ1. 従来のプロジェクトレベルのPrometheus統合を削除します（ベータ版） {#step-1-delete-the-legacy-project-level-prometheus-integrations-beta}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **[プロジェクト ビュー]**タブをクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
     > **Tip:**
     >
@@ -25,7 +25,7 @@ Prometheusとの連携を移行するには、以下の手順を実行してく�
 
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  左側のナビゲーションパネルで、 **「プロジェクト設定」**の下にある**「統合」**をクリックします。
+3.  左側のナビゲーションパネルで、 **「プロジェクト設定」**の下にある**Project Settings**をクリックします。
 
 4.  **[統合]** &gt; **Integration to Prometheus (BETA)**モジュールで、 **[Scrape_config Files]**を選択し、 **[削除]**をクリックします。
 

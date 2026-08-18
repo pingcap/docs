@@ -40,7 +40,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-2.  **「リソースの作成」を**クリックします。
+2.  **Create Resource**をクリックします。
 
 3.  プランを選択してください。
 

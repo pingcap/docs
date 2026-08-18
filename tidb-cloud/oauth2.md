@@ -41,7 +41,7 @@ OAuth 2.0 デバイスコード付与タイプを使用して、 TiDB Cloud CLI 
 次のように、 TiDB Cloudコンソールで承認された OAuth アプリケーションのレコードを表示できます。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、<mdsvgicon name="icon-top-account-settings">左下隅にあります。</mdsvgicon>
-2.  **[アカウント設定]**をクリックします。
+2.  **Account Settings**をクリックします。
 3.  **Authorized OAuth Apps**タブをクリックします。承認済みのOAuthアプリケーションが表示されます。
 
 **「取り消し」**をクリックすると、いつでも承認を取り消すことができます。

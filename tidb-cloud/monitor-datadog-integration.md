@@ -55,7 +55,7 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 
 4.  Datadog APIキーを入力し、Datadogサイトを選択してください。
 
-5.  **「統合テスト」**をクリックします。
+5.  **Test Integration**をクリックします。
 
     -   テストが成功すると、 **「確認」**ボタンが表示されます。
     -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、統合を再試行してください。
@@ -65,17 +65,17 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 </div>
 <div label="Datadog integration (Beta)">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **[プロジェクト ビュー]**タブをクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  左側のナビゲーションペインで、 **「プロジェクト設定」**の下にある**「統合」**をクリックします。
+3.  左側のナビゲーションペインで、 **「プロジェクト設定」**の下にある**Project Settings**をクリックします。
 
 4.  **統合**ページで、 **Integration to Datadog (BETA)**をクリックします。
 
 5.  Datadog APIキーを入力し、Datadogサイトを選択してください。
 
-6.  **「統合テスト」**をクリックします。
+6.  **Test Integration**をクリックします。
 
     -   テストが成功すると、 **「確認」**ボタンが表示されます。
     -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、統合を再試行してください。

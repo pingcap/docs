@@ -35,7 +35,7 @@ TiDB Cloud、電子メール、[Slack](/tidb-cloud/monitor-alert-slack.md)、[Zo
 >
 > TiDB Cloud Dedicatedの場合、アラートの購読は現在のプロジェクト内のすべてのアラートに適用されます。プロジェクト内に複数のTiDB Cloud Dedicatedクラスタがある場合でも、購読は一度だけで済みます。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **[プロジェクト ビュー]**タブをクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
     > **Tip:**
     >
@@ -43,22 +43,22 @@ TiDB Cloud、電子メール、[Slack](/tidb-cloud/monitor-alert-slack.md)、[Zo
 
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  左側のナビゲーションペインで、 **「プロジェクト設定」**の下にある**「アラート購読」**をクリックします。
+3.  左側のナビゲーションペインで、 **Alert Subscription**の下にある**Project Settings**をクリックします。
 
-4.  **アラート購読**ページで、右上隅にある**「購読者を追加」**をクリックします。
+4.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-5.  **購読者タイプの**ドロップダウンリストから**「メール」**を選択してください。
+5.  **購読者タイプの**ドロップダウンリストから**Subscriber Type**を選択してください。
 
 6.  メールアドレスを入力してください。
 
-7.  **「接続テスト」**をクリックしてください。
+7.  **Test Connection**をクリックしてください。
 
     -   テストが成功すると、「**保存」**ボタンが表示されます。
     -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージの指示に従って問題を解決し、接続を再試行してください。
 
 8.  購読を完了するには、 **「保存」**をクリックしてください。
 
-または、 TiDB Cloud Dedicatedクラスタの[**Alert**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts)ページの右上隅にある**「購読」を**クリックすることもできます。**アラート購読**ページに移動します。
+または、 TiDB Cloud Dedicatedクラスタの[**Alert**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts)ページの右上隅にある**「購読」を**クリックすることもできます。**Alert Subscription**ページに移動します。
 
 </CustomContent>
 
@@ -70,22 +70,22 @@ TiDB Cloud、電子メール、[Slack](/tidb-cloud/monitor-alert-slack.md)、[Zo
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[アラートの購読]**をクリックします。
+2.  左側のナビゲーションペインで、 **[設定]** &gt; **Alert Subscription**をクリックします。
 
-3.  **アラート購読**ページで、右上隅にある**「購読者を追加」**をクリックします。
+3.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-4.  **購読者タイプの**ドロップダウンリストから**「メール」**を選択してください。
+4.  **購読者タイプの**ドロップダウンリストから**Subscriber Type**を選択してください。
 
 5.  メールアドレスを入力してください。
 
-6.  **「接続テスト」**をクリックしてください。
+6.  **Test Connection**をクリックしてください。
 
     -   テストが成功すると、「**保存」**ボタンが表示されます。
     -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージの指示に従って問題を解決し、接続を再試行してください。
 
 7.  購読を完了するには、 **「保存」**をクリックしてください。
 
-または、 TiDB Cloud Essentialインスタンスの[**Alert**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts)ページの右上隅にある**「購読」を**クリックすることもできます。**アラート購読**ページに移動します。
+または、 TiDB Cloud Essentialインスタンスの[**Alert**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts)ページの右上隅にある**「購読」を**クリックすることもできます。**Alert Subscription**ページに移動します。
 
 </CustomContent>
 
@@ -97,22 +97,22 @@ TiDB Cloud、電子メール、[Slack](/tidb-cloud/monitor-alert-slack.md)、[Zo
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[アラートの購読]**をクリックします。
+2.  左側のナビゲーションペインで、 **[設定]** &gt; **Alert Subscription**をクリックします。
 
-3.  **アラート購読**ページで、右上隅にある**「購読者を追加」**をクリックします。
+3.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-4.  **購読者タイプの**ドロップダウンリストから**「メール」**を選択してください。
+4.  **購読者タイプの**ドロップダウンリストから**Subscriber Type**を選択してください。
 
 5.  メールアドレスを入力してください。
 
-6.  **「接続テスト」**をクリックしてください。
+6.  **Test Connection**をクリックしてください。
 
     -   テストが成功すると、「**保存」**ボタンが表示されます。
     -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージの指示に従って問題を解決し、接続を再試行してください。
 
 7.  購読を完了するには、 **「保存」**をクリックしてください。
 
-または、 TiDB Cloud Premiumインスタンスの[**Alert**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts)ページの右上隅にある**「購読」を**クリックすることもできます。**アラート購読**ページに移動します。
+または、 TiDB Cloud Premiumインスタンスの[**Alert**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts)ページの右上隅にある**「購読」を**クリックすることもできます。**Alert Subscription**ページに移動します。
 
 </CustomContent>
 
@@ -124,10 +124,10 @@ TiDB Cloud、電子メール、[Slack](/tidb-cloud/monitor-alert-slack.md)、[Zo
 
 <CustomContent plan="dedicated">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **[プロジェクト ビュー]**タブをクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
-3.  左側のナビゲーションペインで、 **「プロジェクト設定」**の下にある**「アラート購読」**をクリックします。
-4.  **アラート購読**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **[購読解除]**をクリックします。
+3.  左側のナビゲーションペインで、 **Alert Subscription**の下にある**Project Settings**をクリックします。
+4.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **[購読解除]**をクリックします。
 5.  購読解除を確定するには、 **「購読解除」**をクリックしてください。
 
 </CustomContent>
@@ -135,8 +135,8 @@ TiDB Cloud、電子メール、[Slack](/tidb-cloud/monitor-alert-slack.md)、[Zo
 <CustomContent plan="essential">
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[アラートの購読]**をクリックします。
-3.  **アラート購読**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **[購読解除]**をクリックします。
+2.  左側のナビゲーションペインで、 **[設定]** &gt; **Alert Subscription**をクリックします。
+3.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **[購読解除]**をクリックします。
 4.  購読解除を確定するには、 **「購読解除」**をクリックしてください。
 
 </CustomContent>
@@ -144,8 +144,8 @@ TiDB Cloud、電子メール、[Slack](/tidb-cloud/monitor-alert-slack.md)、[Zo
 <CustomContent plan="premium">
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[アラートの購読]**をクリックします。
-3.  **アラート購読**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **[購読解除]**をクリックします。
+2.  左側のナビゲーションペインで、 **[設定]** &gt; **Alert Subscription**をクリックします。
+3.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **[購読解除]**をクリックします。
 4.  購読解除を確定するには、 **「購読解除」**をクリックしてください。
 
 </CustomContent>

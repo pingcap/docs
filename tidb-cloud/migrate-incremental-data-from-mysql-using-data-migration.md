@@ -156,9 +156,9 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[データ移行]**をクリックします。
+2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **Data Migration**をクリックします。
 
-3.  **データ移行**ページで、右上隅にある**Create Migration Job**をクリックします。**Create Migration Job**ページが表示されます。
+3.  **Data Migration**ページで、右上隅にある**Create Migration Job**をクリックします。**Create Migration Job**ページが表示されます。
 
 ## ステップ2：ソース接続とターゲット接続を設定する {#step-2-configure-the-source-and-target-connection}
 
@@ -168,14 +168,14 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 2.  ソース接続プロファイルを入力してください。
 
-    -   **データソース**：データソースの種類。
+    -   **Data source**：データソースの種類。
     -   **リージョン**：データソースのリージョン。クラウドデータベースの場合のみ必要です。
-    -   **接続方法**: データ ソースの接続方法。<CustomContent plan="dedicated">現在、接続方法に応じて、パブリックIP、VPCピアリング、またはプライベートリンクを選択できます。</CustomContent><CustomContent plan="essential">接続方法に応じて、パブリックIPまたはプライベートリンクを選択できます。</CustomContent><CustomContent plan="premium">接続方法に応じて、パブリックリンクまたはプライベートリンク（AWSのみ）を選択できます。</CustomContent>
+    -   **Connectivity method**: データ ソースの接続方法。<CustomContent plan="dedicated">現在、接続方法に応じて、パブリックIP、VPCピアリング、またはプライベートリンクを選択できます。</CustomContent><CustomContent plan="essential">接続方法に応じて、パブリックIPまたはプライベートリンクを選択できます。</CustomContent><CustomContent plan="premium">接続方法に応じて、パブリックリンクまたはプライベートリンク（AWSのみ）を選択できます。</CustomContent>
 
     <CustomContent plan="dedicated">
 
     -   **Hostname or IP address**（パブリックIPおよびVPCピアリングの場合）：データソースのホスト名またはIPアドレス。
-    -   **サービス名**（プライベートリンクの場合）：エンドポイントのサービス名。
+    -   **Service Name**（プライベートリンクの場合）：エンドポイントのサービス名。
 
     </CustomContent>
     <CustomContent plan="essential">
@@ -187,7 +187,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     <CustomContent plan="premium">
 
     -   **Hostname or IP address**（公開の場合）：データソースのホスト名またはIPアドレス。
-    -   **プライベート エンドポイント**(プライベート リンク用): TiDB Cloud Premium インスタンスの**[ネットワーキング]** &gt; **[外部サービス向け AWS プライベート エンドポイント]**で作成したプライベート エンドポイント。または、**ここで [プライベート エンドポイントの作成] をクリックしてプライベート エンドポイント**を作成します。セットアップの詳細については、データ移行ガイドの[プライベートリンクまたはプライベートエンドポイント](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint)セクションを参照してください。
+    -   **Private Endpoint**(プライベート リンク用): TiDB Cloud Premium インスタンスの**[ネットワーキング]** &gt; **[外部サービス向け AWS プライベート エンドポイント]**で作成したプライベート エンドポイント。または、**ここで [プライベート エンドポイントの作成] をクリックしてプライベート エンドポイント**を作成します。セットアップの詳細については、データ移行ガイドの[プライベートリンクまたはプライベートエンドポイント](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint)セクションを参照してください。
 
     </CustomContent>
 
@@ -231,7 +231,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 ソースデータベースの増分データのみをTiDB Cloudに移行するには、 **Incremental data migration**を選択し、 **Existing data migration**は選択しないでください。こうすることで、移行ジョブはソースデータベースの進行中の変更のみをTiDB Cloudに移行します。
 
-**「開始位置」**領域では、増分データ移行の開始位置として、以下のいずれかのタイプを指定できます。
+**Start Position**領域では、増分データ移行の開始位置として、以下のいずれかのタイプを指定できます。
 
 -   増分移行ジョブが開始される時間
 -   GTID
@@ -275,7 +275,7 @@ SHOW MASTER STATUS;
 
 ## ステップ5：事前チェック {#step-5-precheck}
 
-**事前チェック**ページでは、事前チェックの結果を確認できます。事前チェックが失敗した場合は、 **「失敗」**または**「警告」の**詳細に従って操作を行い、再度**「チェック」をクリックして再**チェックしてください。
+**事前チェック**ページでは、事前チェックの結果を確認できます。事前チェックが失敗した場合は、 **「失敗」**または**「警告」の**詳細に従って操作を行い、再度**Check again**チェックしてください。
 
 チェック項目の一部にのみ警告が表示されている場合は、リスクを評価し、警告を無視するかどうかを検討できます。すべての警告を無視した場合、移行ジョブは自動的に次のステップに進みます。
 

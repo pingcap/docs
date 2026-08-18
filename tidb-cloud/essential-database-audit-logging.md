@@ -10,7 +10,7 @@ TiDB Cloud Essentialは、実行されたSQLステートメントなど、デー
 
 > **Note:**
 >
-> 現在、データベース監査ログ機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)**？」**をクリックし、 次に**「サポートチケット」**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **「説明」**フィールドに「 TiDB Cloud Essentialデータベース監査ログの申請」と入力して、 **「送信」を**クリックします。
+> 現在、データベース監査ログ機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)**？」**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **「説明」**フィールドに「 TiDB Cloud Essentialデータベース監査ログの申請」と入力して、 **「送信」を**クリックします。
 
 組織のユーザーアクセスポリシーやその他の情報セキュリティ対策の有効性を評価するには、データベース監査ログを定期的に分析することがセキュリティ上のベストプラクティスです。
 
@@ -255,7 +255,7 @@ ticloud serverless audit-log config update -c <cluster-id> --disabled=true
 
 3.  **DB Audit Logging**ページで、 **Add Filter Rule**をクリックします。
 
-4.  **Add Filter Rule**ダイアログで、 **[フィルター名]** 、 **[SQL ユーザー]** 、および**[フィルター ルール]**フィールドに入力し、 **[確認]**をクリックします。これらのフィールドの詳細については、[監査ログフィルタルール](#audit-logging-filter-rules)を参照してください。
+4.  **Add Filter Rule**ダイアログで、 **Filter Name** 、 **SQL Users** 、および**Filter Rule**フィールドに入力し、 **[確認]**をクリックします。これらのフィールドの詳細については、[監査ログフィルタルール](#audit-logging-filter-rules)を参照してください。
 
 </div>
 
@@ -285,7 +285,7 @@ ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-n
 
 3.  **DB Audit Logging**ページで、編集するフィルタルールを見つけ、その行の**...**をクリックしてから、 **[編集]**をクリックします。
 
-4.  **Edit Filter Rule**ダイアログで、 **「フィルター名」**または**「フィルタールール」**フィールドを更新し、 **「確認」**をクリックします。
+4.  **Edit Filter Rule**ダイアログで、 **Filter Name**または**Filter Rule**フィールドを更新し、 **「確認」**をクリックします。
 
 </div>
 

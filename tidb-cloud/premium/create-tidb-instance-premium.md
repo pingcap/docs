@@ -38,9 +38,9 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 `Organization Owner`ロールをお持ちの場合は、次のようにしてTiDB Cloud Premium インスタンスを作成できます。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、右上隅の**「リソースの作成」**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、右上隅の**Create Resource**をクリックします。
 
-2.  **リソース作成**ページで、プランとして**「Premium」**を選択してください。
+2.  **Create Resource**ページで、プランとして**「Premium」**を選択してください。
 
 3.  TiDB Cloud Premiumインスタンスの名前を入力し、インスタンスをホストするクラウドプロバイダーとリージョンを選択してください。
 

@@ -9,7 +9,7 @@ summary: TiDB Cloud Premiumインスタンスでデュアルレイヤーデー�
 
 > **Note:**
 >
-> 現在、デュアルレイヤーデータ暗号化機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)**？」**をクリックし、 次に**「サポートチケット」**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **「説明」**フィールドに「デュアルレイヤーデータ暗号化の申請」と入力して、 **「送信」**をクリックします。
+> 現在、デュアルレイヤーデータ暗号化機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)**？」**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **「説明」**フィールドに「デュアルレイヤーデータ暗号化の申請」と入力して、 **「送信」**をクリックします。
 
 ## 概要 {#overview}
 
@@ -89,7 +89,7 @@ TiDB Cloud Premiumインスタンスを作成する際に、二重層データ�
 
 2.  [TiDB Cloudコンソール](https://tidbcloud.com)で CMEK を構成します。
 
-    1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、 **「リソースの作成」**をクリックします。
+    1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、 **Create Resource**をクリックします。
 
     2.  TiDB Cloud Premiumプランを選択し、基本設定を完了してください。
 
@@ -114,7 +114,7 @@ TiDB Cloud Premiumインスタンスを作成する際に、二重層データ�
 
 TiDB Cloudに暗号化キーの管理を代行させるには、以下の手順に従ってください。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、 **「リソースの作成」**をクリックします。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、 **Create Resource**をクリックします。
 2.  TiDB Cloud Premiumプランを選択し、基本設定を完了してください。
 3.  **Dual-Layer Data Encryption**セクションで、 **「有効にする」**をクリックします。
 4.  **Service-Managed Encryption Key**を選択してください。

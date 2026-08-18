@@ -47,7 +47,7 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 
 4.  New RelicのAPIキーを入力し、New Relicのサイトを選択してください。
 
-5.  **「統合テスト」**をクリックします。
+5.  **Test Integration**をクリックします。
 
     -   テストが成功すると、 **「確認」**ボタンが表示されます。
     -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、統合を再試行してください。
@@ -57,17 +57,17 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 </div>
 <div label="Legacy project-level New Relic integration (Beta)">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **[プロジェクト ビュー]**タブをクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  左側のナビゲーションペインで、 **「プロジェクト設定」**の下にある**「統合」**をクリックします。
+3.  左側のナビゲーションペインで、 **「プロジェクト設定」**の下にある**Project Settings**をクリックします。
 
 4.  **統合**ページで、 **[New Relic との統合 (ベータ版)]**をクリックします。
 
 5.  New RelicのAPIキーを入力し、New Relicのサイトを選択してください。
 
-6.  **「統合テスト」**をクリックします。
+6.  **Test Integration**をクリックします。
 
     -   テストが成功すると、 **「確認」**ボタンが表示されます。
     -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、統合を再試行してください。
@@ -133,7 +133,7 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、 **「統合」**ページに移動します。
 
-2.  **New Relic**セクションの**「ダッシュボード」**リンクをクリックすると、TiDBクラスターの事前構築済みダッシュボードが表示されます。
+2.  **New Relic**セクションの**New Relic**リンクをクリックすると、TiDBクラスターの事前構築済みダッシュボードが表示されます。
 
 3.  [新しいRelic統合バージョン](#new-relic-integration-version)に応じて、次のいずれかを実行します。
 

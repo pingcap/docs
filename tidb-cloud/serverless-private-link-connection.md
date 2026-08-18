@@ -66,12 +66,12 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 4.  **[外部サービス用プライベートエンドポイントの作成]**ダイアログで、必要な情報を入力します。
 
     -   **Private Link Connection Name**: プライベート リンク接続の名前を入力します。
-    -   **接続タイプ**： **AWS Endpoint Service**を選択します。このオプションが表示されない場合は、クラスターがAWS上に作成されていることを確認してください。
+    -   **Connection Type**： **AWS Endpoint Service**を選択します。このオプションが表示されない場合は、クラスターがAWS上に作成されていることを確認してください。
     -   **Endpoint Service Name**: AWS エンドポイント サービス名を入力します (例: `com.amazonaws.vpce.<region>.vpce-svc-xxxxxxxxxxxxxxxxx` )。
 
 5.  **[作成]**をクリックします。
 
-6.  [AWSコンソール](https://console.aws.amazon.com)のエンドポイント サービスの詳細ページに移動します。**エンドポイント接続**タブで、 TiDB Cloudからのエンドポイント接続要求を承認します。
+6.  [AWSコンソール](https://console.aws.amazon.com)のエンドポイント サービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を承認します。
 
 </div>
 
@@ -85,7 +85,7 @@ TiDB Cloud CLI を使用してプライベート リンク接続を作成する�
     ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type AWS_ENDPOINT_SERVICE --aws.endpoint-service-name <endpoint-service-name>
     ```
 
-2.  [AWSコンソール](https://console.aws.amazon.com)のエンドポイント サービスの詳細ページに移動します。**エンドポイント接続**タブで、 TiDB Cloudからのエンドポイント接続要求を承認します。
+2.  [AWSコンソール](https://console.aws.amazon.com)のエンドポイント サービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を承認します。
 
 </div>
 </SimpleTab>
@@ -114,7 +114,7 @@ Amazon MSK プロビジョニングプライベートリンク接続を作成す
 4.  **[外部サービス用プライベートエンドポイントの作成]**ダイアログで、必要な情報を入力します。
 
     -   **Private Link Connection Name**: プライベート リンク接続の名前を入力します。
-    -   **接続タイプ**： **Amazon MSK Provisioned**を選択します。このオプションが表示されない場合は、クラスターがAWS上に作成されていることを確認してください。
+    -   **Connection Type**： **Amazon MSK Provisioned**を選択します。このオプションが表示されない場合は、クラスターがAWS上に作成されていることを確認してください。
     -   **MSK Cluster ARN** : Amazon MSK プロビジョニングされたクラスターの ARN を入力します (例: `arn:aws:kafka:us-east-1:385595570414:cluster/<msk-name>/xxxx` )。
 
 5.  **[作成]**をクリックします。
@@ -156,12 +156,12 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 4.  **[外部サービス用プライベートエンドポイントの作成]**ダイアログで、必要な情報を入力します。
 
     -   **Private Link Connection Name**: プライベート リンク接続の名前を入力します。
-    -   **接続タイプ**： **Alibaba Cloud Endpoint Service**を選択します。このオプションが表示されない場合は、クラスターがAlibaba Cloud上に作成されていることを確認してください。
+    -   **Connection Type**： **Alibaba Cloud Endpoint Service**を選択します。このオプションが表示されない場合は、クラスターがAlibaba Cloud上に作成されていることを確認してください。
     -   **Endpoint Service Name**: Alibaba Cloud エンドポイント サービス名を入力します (例: `com.aliyuncs.privatelink.<region>.epsrv-xxxxxxxxxxxxxxxxx` )。
 
 5.  **[作成]**をクリックします。
 
-6.  [Alibaba Cloudコンソール](https://console.alibabacloud.com)のエンドポイント サービスの詳細ページに移動します。**エンドポイント接続**タブで、 TiDB Cloudからのエンドポイント接続要求を許可します。
+6.  [Alibaba Cloudコンソール](https://console.alibabacloud.com)のエンドポイント サービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を許可します。
 
 </div>
 
@@ -175,7 +175,7 @@ TiDB Cloud CLI を使用してプライベート リンク接続を作成する�
     ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type ALICLOUD_ENDPOINT_SERVICE --alicloud.endpoint-service-name <endpoint-service-name>
     ```
 
-2.  [Alibaba Cloudコンソール](https://console.alibabacloud.com)のエンドポイント サービスの詳細ページに移動します。**エンドポイント接続**タブで、 TiDB Cloudからのエンドポイント接続要求を許可します。
+2.  [Alibaba Cloudコンソール](https://console.alibabacloud.com)のエンドポイント サービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を許可します。
 
 </div>
 </SimpleTab>
@@ -211,12 +211,12 @@ TiDB Cloudコンソールを使用してドメインをプライベート リン
 
 3.  クラウドプロバイダーの**[外部サービス用プライベートエンドポイント]**領域で、対象のプライベート リンク接続を選択し、 **[...]**をクリックします。
 
-4.  **[ドメインの接続]**をクリックします。
+4.  **Attach Domains**をクリックします。
 
-5.  **[ドメインの接続]**ダイアログで、ドメインの種類を選択します。
+5.  **Attach Domains**ダイアログで、ドメインの種類を選択します。
 
-    -   **TiDB Cloud Managed**：ドメインはTiDB Cloudによって自動的に生成されます。生成されたドメインの名前には、そのドメインの一意の名前が付与されます。例えば、生成されたドメインが`*.use1-az1.dvs6nl5jgveztmla3pxkxgh76i.aws.plc.tidbcloud.com`の場合、一意の名前は`dvs6nl5jgveztmla3pxkxgh76i`になります。 **「ドメインをアタッチ」**をクリックして確定します。
-    -   **Confluent Cloud** : Confluent Cloud Dedicatedクラスタからドメインを生成するために提供された一意の名前を入力し、 **「ドメインをアタッチ」を**クリックして確定します。一意の名前の取得方法の詳細については、 [プライベートリンク接続を介してConfluent Cloudに接続する](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md#step-1-set-up-a-confluent-cloud-network)を参照してください。
+    -   **TiDB Cloud Managed**：ドメインはTiDB Cloudによって自動的に生成されます。生成されたドメインの名前には、そのドメインの一意の名前が付与されます。例えば、生成されたドメインが`*.use1-az1.dvs6nl5jgveztmla3pxkxgh76i.aws.plc.tidbcloud.com`の場合、一意の名前は`dvs6nl5jgveztmla3pxkxgh76i`になります。 **Attach Domains**をクリックして確定します。
+    -   **Confluent Cloud** : Confluent Cloud Dedicatedクラスタからドメインを生成するために提供された一意の名前を入力し、 **Attach Domains**をクリックして確定します。一意の名前の取得方法の詳細については、 [プライベートリンク接続を介してConfluent Cloudに接続する](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md#step-1-set-up-a-confluent-cloud-network)を参照してください。
 
 </div>
 

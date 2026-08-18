@@ -21,11 +21,11 @@ Chat2Query エンドポイントを呼び出す前に、Chat2Query データ ア
 
 プロジェクトのデータ アプリを作成するには、次の手順を実行します。
 
-1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページで、<mdsvgicon name="icon-create-data-app">左ペインで**「データアプリを作成」**をクリックします。データアプリ作成ダイアログが表示されます。</mdsvgicon>
+1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページで、<mdsvgicon name="icon-create-data-app">左ペインで**Create DataApp**をクリックします。データアプリ作成ダイアログが表示されます。</mdsvgicon>
 
     > **Tip:**
     >
-    > クラスターの**SQL エディター**ページが表示されている場合は、右上隅の**...**をクリックし、 **Access Chat2Query via API**を選択して、**New Chat2Query Data App**をクリックすることで、データ アプリ作成ダイアログを開くこともできます。
+    > クラスターの**SQL Editor**ページが表示されている場合は、右上隅の**...**をクリックし、 **Access Chat2Query via API**を選択して、**New Chat2Query Data App**をクリックすることで、データ アプリ作成ダイアログを開くこともできます。
 
 2.  ダイアログで、データアプリの名前を定義し、データソースとして必要なクラスターを選択し、**Data App**の種類として**Chat2Query Data App**を選択します。必要に応じて、アプリの説明を記入することもできます。
 
@@ -57,7 +57,7 @@ API キーを作成するには、次の手順を実行します。
 
     -   `Chat2Query SQL ReadWrite` : API キーが提供された指示に基づいて SQL ステートメントを生成し、任意の SQL ステートメントを実行することを許可します。
 
-4.  デフォルトでは、APIキーに有効期限はありません。キーの有効期限を設定する場合は、 **「有効期限」**をクリックし、時間単位（ `Minutes` 、 `Days` 、または`Months` ）を選択して、希望する数値を入力してください。
+4.  デフォルトでは、APIキーに有効期限はありません。キーの有効期限を設定する場合は、 **Expires in**をクリックし、時間単位（ `Minutes` 、 `Days` 、または`Months` ）を選択して、希望する数値を入力してください。
 
 5.  **「次へ」**をクリックします。公開鍵と秘密鍵が表示されます。
 

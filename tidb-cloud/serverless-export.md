@@ -189,13 +189,13 @@ Alibaba Cloud OSS にデータをエクスポートするには、次の情報�
 
 2.  ターゲット {{{ .starter }}} インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート] を**クリックします。
 
-3.  **インポート**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**「ローカルファイル」**を選択します。以下のパラメータを入力します。
+3.  **インポート**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**Local File**を選択します。以下のパラメータを入力します。
 
-    -   **タスク名**: エクスポートタスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
+    -   **Task Name**: エクスポートタスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
 
-    -   **エクスポートされたデータ**: エクスポートするデータベースとテーブルを選択します。
+    -   **Exported Data**: エクスポートするデータベースとテーブルを選択します。
 
-    -   **データ形式**: **SQL** 、 **CSV** 、または**Parquet を**選択します。
+    -   **Data Format**: **SQL** 、 **CSV** 、または**Parquet を**選択します。
 
     -   **圧縮**: **Gzip** 、 **Snappy** 、 **Zstd** 、または**None**を選択します。
 
@@ -245,12 +245,12 @@ Alibaba Cloud OSS にデータをエクスポートするには、次の情報�
 
 3.  **インポート**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**Amazon S3**を選択します。以下のパラメータを入力します。
 
-    -   **タスク名**: エクスポートタスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
-    -   **エクスポートされたデータ**: エクスポートするデータベースとテーブルを選択します。
-    -   **データ形式**: **SQL** 、 **CSV** 、または**Parquet を**選択します。
+    -   **Task Name**: エクスポートタスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
+    -   **Exported Data**: エクスポートするデータベースとテーブルを選択します。
+    -   **Data Format**: **SQL** 、 **CSV** 、または**Parquet を**選択します。
     -   **圧縮**: **Gzip** 、 **Snappy** 、 **Zstd** 、または**None**を選択します。
-    -   **フォルダー URI** : `s3://<bucket-name>/<folder-path>/`形式で Amazon S3 の URI を入力します。
-    -   **バケット アクセス**: 次のアクセス資格情報のいずれかを選択し、資格情報を入力します。
+    -   **Folder URI** : `s3://<bucket-name>/<folder-path>/`形式で Amazon S3 の URI を入力します。
+    -   **Bucket Access**: 次のアクセス資格情報のいずれかを選択し、資格情報を入力します。
         -   **AWS Role ARN** : バケットへのアクセス権を持つロール ARN を入力します。AWS CloudFormation を使用してロール ARN を作成することをお勧めします。詳細については、 [Amazon S3 アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
         -   **AWS Access Key**: バケットにアクセスする権限を持つアクセスキー ID とアクセスキーシークレットを入力します。
 
@@ -289,12 +289,12 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 
 3.  **インポート**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**Google Cloud Storage**を選択します。以下のパラメータを入力します。
 
-    -   **タスク名**: エクスポートタスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
-    -   **エクスポートされたデータ**: エクスポートするデータベースとテーブルを選択します。
-    -   **データ形式**: **SQL** 、 **CSV** 、または**Parquet を**選択します。
+    -   **Task Name**: エクスポートタスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
+    -   **Exported Data**: エクスポートするデータベースとテーブルを選択します。
+    -   **Data Format**: **SQL** 、 **CSV** 、または**Parquet を**選択します。
     -   **圧縮**: **Gzip** 、 **Snappy** 、 **Zstd** 、または**None**を選択します。
-    -   **フォルダ URI** : Google Cloud Storage の URI を`gs://<bucket-name>/<folder-path>/`形式で入力します。
-    -   **バケット アクセス**: バケットにアクセスする権限を持つ Google Cloud 認証情報ファイルをアップロードします。
+    -   **Folder URI** : Google Cloud Storage の URI を`gs://<bucket-name>/<folder-path>/`形式で入力します。
+    -   **Bucket Access**: バケットにアクセスする権限を持つ Google Cloud 認証情報ファイルをアップロードします。
 
 4.  **［エクスポート］**をクリックします。
 
@@ -327,12 +327,12 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
 
 3.  **インポート**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**Azure Blob Storage**を選択します。以下のパラメータを入力します。
 
-    -   **タスク名**: エクスポートタスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
-    -   **エクスポートされたデータ**: エクスポートするデータベースとテーブルを選択します。
-    -   **データ形式**: **SQL** 、 **CSV** 、または**Parquet を**選択します。
+    -   **Task Name**: エクスポートタスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
+    -   **Exported Data**: エクスポートするデータベースとテーブルを選択します。
+    -   **Data Format**: **SQL** 、 **CSV** 、または**Parquet を**選択します。
     -   **圧縮**: **Gzip** 、 **Snappy** 、 **Zstd** 、または**None**を選択します。
-    -   **フォルダー URI** : `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`形式で Azure Blob Storage の URI を入力します。
-    -   **SASトークン**: コンテナへのアクセス権を持つSASトークンを入力します。[Azure ARM テンプレート](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)を使用してSASトークンを作成することをお勧めします。詳細については、 [Azure Blob Storage アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)を参照してください。
+    -   **Folder URI** : `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`形式で Azure Blob Storage の URI を入力します。
+    -   **SAS Token**: コンテナへのアクセス権を持つSASトークンを入力します。[Azure ARM テンプレート](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)を使用してSASトークンを作成することをお勧めします。詳細については、 [Azure Blob Storage アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)を参照してください。
 
 4.  **［エクスポート］**をクリックします。
 
@@ -367,11 +367,11 @@ ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azbl
 
 4.  次のパラメータを入力してください。
 
-    -   **タスク名**: エクスポートタスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
-    -   **エクスポートされたデータ**: エクスポートするデータベースとテーブルを選択します。
-    -   **データ形式**: **SQL** 、 **CSV** 、または**Parquet を**選択します。
+    -   **Task Name**: エクスポートタスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
+    -   **Exported Data**: エクスポートするデータベースとテーブルを選択します。
+    -   **Data Format**: **SQL** 、 **CSV** 、または**Parquet を**選択します。
     -   **圧縮**: **Gzip** 、 **Snappy** 、 **Zstd** 、または**None**を選択します。
-    -   **フォルダー URI** : データをエクスポートする Alibaba Cloud OSS URI を`oss://<bucket-name>/<folder-path>/`形式で入力します。
+    -   **Folder URI** : データをエクスポートする Alibaba Cloud OSS URI を`oss://<bucket-name>/<folder-path>/`形式で入力します。
     -   **AccessKey ID**と**AccessKey Secret** : バケットにアクセスする権限を持つ AccessKey ID と AccessKey Secret を入力します。
 
 5.  **［エクスポート］**をクリックします。

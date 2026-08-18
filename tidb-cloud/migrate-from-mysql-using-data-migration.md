@@ -395,9 +395,9 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
 
     -   **スキーム**:**内部**。ロードバランサーはVPC内に留まります。次のステップのエンドポイントサービスのみが、ロードバランサーをTiDB Cloudに公開します。
     -   **VPC** ：RDSまたはAuroraインスタンスと同じVPCを指定します。フォームはデフォルトでアカウントのデフォルトVPCを選択しますが、データベースが配置されている場所は通常このVPCではないため、続行する前に**VPC**のドロップダウンリストを変更してください。
-    -   **アベイラビリティゾーン**：**少なくとも2つのアベイラビリティゾーン**でサブネットを選択してください。NLBでは、エンドポイントサービスの可用性を確保するためにマルチAZ構成が必要です。RDSがシングルAZ構成の場合でも、同じVPC内の別のAZに2つ目のサブネットが必要になります。
+    -   **Availability Zones**：**少なくとも2つのアベイラビリティゾーン**でサブネットを選択してください。NLBでは、エンドポイントサービスの可用性を確保するためにマルチAZ構成が必要です。RDSがシングルAZ構成の場合でも、同じVPC内の別のAZに2つ目のサブネットが必要になります。
     -   **リスナーポート**： `3306` 。ウィザードのデフォルト値は`80`です。リスナーを作成する前に変更してください。
-    -   **対象グループ**：対象タイプは**IPアドレス**、プロトコルは**TCP** 、ポートは**3306** 、データベースと同じVPC内。RDSエンドポイントを直接登録することはできないため、代わりにデータベースのプライベートIPアドレスを登録してください。
+    -   **対象グループ**：対象タイプは**IP addresses**、プロトコルは**TCP** 、ポートは**3306** 、データベースと同じVPC内。RDSエンドポイントを直接登録することはできないため、代わりにデータベースのプライベートIPアドレスを登録してください。
 
         [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、 左側のナビゲーション ペインで**「ネットワーク インターフェイス」**をクリックし、 **「説明**= `RDSNetworkInterface`と**「VPC** = ご使用の VPC」でフィルタリングします。一致するネットワーク インターフェイスに表示されている**Primary private IPv4 address**を使用します。
 
@@ -445,9 +445,9 @@ Azure Database for MySQL - Flexible Server は、ネイティブのプライベ�
 
 1.  [Azureポータル](https://portal.azure.com/)で、 **「Azure Database for MySQL サーバー」**を検索して選択し、インスタンス名をクリックしてから、左側のナビゲーション ペインで**「設定」** &gt; **「ネットワーク」**をクリックします。
 
-2.  **ネットワーク設定**ページで、**プライベートエンドポイントの**セクションまでスクロールダウンし、 **+ Create private endpoint**をクリックして、画面の指示に従ってプライベートエンドポイントを設定します。
+2.  **ネットワーク設定**ページで、**Private endpoints**セクションまでスクロールダウンし、 **+ Create private endpoint**をクリックして、画面の指示に従ってプライベートエンドポイントを設定します。
 
-    セットアップ中に、**Virtual Network**タブでTiDB Cloud がアクセスできる仮想ネットワークとサブネットを選択し、 **DNS**タブで**Private DNS integration**を有効にします。プライベートエンドポイントが作成されてデプロイされたら、 **Go to resource**をクリックし、左側のナビゲーション ペインで**[設定]** &gt; **[DNS 構成] を**クリックして、**Customer Visible FQDNs**セクションでインスタンスへの接続に使用するホスト名を見つけます。通常、ホスト名は`<your-instance-name>.mysql.database.azure.com`形式です。
+    セットアップ中に、**Virtual Network**タブでTiDB Cloud がアクセスできる仮想ネットワークとサブネットを選択し、 **DNS**タブで**Private DNS integration**を有効にします。プライベートエンドポイントが作成されてデプロイされたら、 **Go to resource**をクリックし、左側のナビゲーション ペインで**[設定]** &gt; **DNS configuration**をクリックして、**Customer Visible FQDNs**セクションでインスタンスへの接続に使用するホスト名を見つけます。通常、ホスト名は`<your-instance-name>.mysql.database.azure.com`形式です。
 
     詳細な手順については、Azure ドキュメントの[プライベートリンクセンターを使用してプライベートエンドポイントを作成します](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-networking-private-link-portal#create-a-private-endpoint-via-private-link-center)を参照してください。
 
@@ -481,9 +481,9 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
 
     -   **スキーム**:**内部**。ロードバランサーはVPC内に留まります。次のステップのエンドポイントサービスのみが、ロードバランサーをTiDB Cloudに公開します。
     -   **VPC** ：RDSまたはAuroraインスタンスと同じVPCを指定します。フォームはデフォルトでアカウントのデフォルトVPCを選択しますが、データベースが配置されている場所は通常このVPCではないため、続行する前に**VPC**のドロップダウンリストを変更してください。
-    -   **アベイラビリティゾーン**：**少なくとも2つのアベイラビリティゾーン**でサブネットを選択してください。NLBでは、エンドポイントサービスの可用性を確保するためにマルチAZ構成が必要です。RDSがシングルAZ構成の場合でも、同じVPC内の別のAZに2つ目のサブネットが必要になります。
+    -   **Availability Zones**：**少なくとも2つのアベイラビリティゾーン**でサブネットを選択してください。NLBでは、エンドポイントサービスの可用性を確保するためにマルチAZ構成が必要です。RDSがシングルAZ構成の場合でも、同じVPC内の別のAZに2つ目のサブネットが必要になります。
     -   **リスナーポート**： `3306` 。ウィザードのデフォルト値は`80`です。リスナーを作成する前に変更してください。
-    -   **対象グループ**：対象タイプは**IPアドレス**、プロトコルは**TCP** 、ポートは**3306** 、データベースと同じVPC内。RDSエンドポイントを直接登録することはできないため、代わりにデータベースのプライベートIPアドレスを登録してください。
+    -   **対象グループ**：対象タイプは**IP addresses**、プロトコルは**TCP** 、ポートは**3306** 、データベースと同じVPC内。RDSエンドポイントを直接登録することはできないため、代わりにデータベースのプライベートIPアドレスを登録してください。
 
         [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、 左側のナビゲーション ペインで**「ネットワーク インターフェイス」**をクリックし、 **「説明**= `RDSNetworkInterface`と**「VPC** = ご使用の VPC」でフィルタリングします。一致するネットワーク インターフェイスに表示されている**Primary private IPv4 address**を使用します。
 
@@ -660,9 +660,9 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[データ移行]**をクリックします。
+2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **Data Migration**をクリックします。
 
-3.  **データ移行**ページで、右上隅にある**Create Migration Job**をクリックします。**Create Migration Job**ページが表示されます。
+3.  **Data Migration**ページで、右上隅にある**Create Migration Job**をクリックします。**Create Migration Job**ページが表示されます。
 
 ## ステップ2：ソース接続とターゲット接続を設定する {#step-2-configure-the-source-and-target-connections}
 
@@ -672,63 +672,63 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
 2.  ソース接続プロファイルを入力してください。
 
-    -   **データソース**：データソースの種類。
+    -   **Data source**：データソースの種類。
 
     <CustomContent plan="dedicated">
 
-    -   **接続方法**：セキュリティ要件とクラウドプロバイダーに基づいて、データソースの接続方法を選択してください。
+    -   **Connectivity method**：セキュリティ要件とクラウドプロバイダーに基づいて、データソースの接続方法を選択してください。
 
-        -   **パブリックIP** ：すべてのクラウドプロバイダーで利用可能（テストおよび概念実証移行に推奨）。
-        -   **プライベートリンク**：AWSおよびAzureでのみ利用可能（プライベート接続を必要とする本番ワークロードに推奨）。
-        -   **VPCピアリング**：AWSとGoogle Cloudでのみ利用可能です（低遅延でリージョン内接続が必要で、VPC/VNet CIDRが重複しない本番ロードに推奨されます）。
+        -   **Public IP** ：すべてのクラウドプロバイダーで利用可能（テストおよび概念実証移行に推奨）。
+        -   **Private Link**：AWSおよびAzureでのみ利用可能（プライベート接続を必要とする本番ワークロードに推奨）。
+        -   **VPC Peering**：AWSとGoogle Cloudでのみ利用可能です（低遅延でリージョン内接続が必要で、VPC/VNet CIDRが重複しない本番ロードに推奨されます）。
 
     </CustomContent>
     <CustomContent plan="essential">
 
-    -   **接続方法**：セキュリティ要件とクラウドプロバイダーに基づいて、データソースの接続方法を選択してください。
+    -   **Connectivity method**：セキュリティ要件とクラウドプロバイダーに基づいて、データソースの接続方法を選択してください。
 
         -   **公開**：すべてのクラウドプロバイダーで利用可能（テストおよび概念実証のための移行に推奨）。
-        -   **プライベートリンク**：AWSおよびAlibaba Cloudでのみ利用可能です（プライベート接続を必要とする本番のワークロードに推奨）。
+        -   **Private Link**：AWSおよびAlibaba Cloudでのみ利用可能です（プライベート接続を必要とする本番のワークロードに推奨）。
 
     </CustomContent>
     <CustomContent plan="premium">
 
-    -   **接続方法**：セキュリティ要件とクラウドプロバイダーに基づいて、データソースの接続方法を選択してください。
+    -   **Connectivity method**：セキュリティ要件とクラウドプロバイダーに基づいて、データソースの接続方法を選択してください。
 
         -   **公開**： TiDB Cloud Premiumがサポートするすべてのクラウドプロバイダーで利用可能（テストおよび概念実証移行に推奨）。
-        -   **プライベートリンク**：AWSのみで利用可能（プライベート接続を必要とする本番のワークロードに推奨）。
+        -   **Private Link**：AWSのみで利用可能（プライベート接続を必要とする本番のワークロードに推奨）。
 
     </CustomContent>
 
     <CustomContent plan="dedicated">
 
-    -   選択した**接続方法**に基づいて、以下の手順を実行してください。
+    -   選択した**Connectivity method**に基づいて、以下の手順を実行してください。
 
-        -   **パブリックIP**または**VPCピアリング**を選択した場合は、**Hostname or IP address**フィールドにデータソースのホスト名またはIPアドレスを入力してください。
-        -   **「プライベートリンク」**を選択した場合は、以下の情報を入力してください。
-            -   **Endpoint Service Name**(**データソース**がAWS の場合に利用可能): RDS または Aurora インスタンス用に作成した VPC エンドAuroraサービス名 (形式: `com.amazonaws.vpce.<region>.vpce-svc-<id>` 、例: `com.amazonaws.vpce.us-east-1.vpce-svc-0123456789abcdef0` ) を入力します。
-            -   **Private Endpoint Resource ID** （**データソース**がAzureの場合に利用可能）：MySQL Flexible ServerインスタンスのリソースIDを入力します（形式： `/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>` ）。
+        -   **Public IP**または**VPC Peering**を選択した場合は、**Hostname or IP address**フィールドにデータソースのホスト名またはIPアドレスを入力してください。
+        -   **Private Link**を選択した場合は、以下の情報を入力してください。
+            -   **Endpoint Service Name**(**Data source**がAWS の場合に利用可能): RDS または Aurora インスタンス用に作成した VPC エンドAuroraサービス名 (形式: `com.amazonaws.vpce.<region>.vpce-svc-<id>` 、例: `com.amazonaws.vpce.us-east-1.vpce-svc-0123456789abcdef0` ) を入力します。
+            -   **Private Endpoint Resource ID** （**Data source**がAzureの場合に利用可能）：MySQL Flexible ServerインスタンスのリソースIDを入力します（形式： `/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>` ）。
 
     </CustomContent>
     <CustomContent plan="essential">
 
-    -   選択した**接続方法**に基づいて、以下の手順を実行してください。
+    -   選択した**Connectivity method**に基づいて、以下の手順を実行してください。
 
         -   **「公開」**を選択した場合は、 **Hostname or IP address**フィールドにデータソースのホスト名またはIPアドレスを入力してください。
-        -   **[プライベート リンク]**が選択されている場合は、[プライベートリンク[プライベートリンクまたはプライベートエンドポイント](#private-link-or-private-endpoint)セクションで作成したプライベート リンク接続を選択します。
+        -   **Private Link**が選択されている場合は、[プライベートリンク[プライベートリンクまたはプライベートエンドポイント](#private-link-or-private-endpoint)セクションで作成したプライベート リンク接続を選択します。
 
     </CustomContent>
     <CustomContent plan="premium">
 
-    -   選択した**接続方法**に基づいて、以下の手順を実行してください。
+    -   選択した**Connectivity method**に基づいて、以下の手順を実行してください。
 
         -   **「公開」**を選択した場合は、 **Hostname or IP address**フィールドにデータソースのホスト名またはIPアドレスを入力してください。
-        -   **[プライベート リンク]**が選択されている場合は、 **[プライベート エンドポイント]**フィールドで既存のプライベート エンドポイントを選択するか、 **[ここでプライベート エンドポイントを作成] をクリックしてプライベート エンドポイント**を作成します。プライベート エンドポイントは、 TiDB Cloud Premium インスタンスの**[ネットワーキング]** &gt; **[AWS 外部サービス用プライベートエンドポイント]**で管理されます。プライベート エンドポイントは、複数のデータ移行ジョブおよび変更フィード間で再利用できます。設定の詳細については、[プライベートリンクまたはプライベートエンドポイント](#private-link-or-private-endpoint)をご覧ください。
+        -   **Private Link**が選択されている場合は、 **Private Endpoint**フィールドで既存のプライベート エンドポイントを選択するか、 **[ここでプライベート エンドポイントを作成] をクリックしてプライベート エンドポイント**を作成します。プライベート エンドポイントは、 TiDB Cloud Premium インスタンスの**[ネットワーキング]** &gt; **[AWS 外部サービス用プライベートエンドポイント]**で管理されます。プライベート エンドポイントは、複数のデータ移行ジョブおよび変更フィード間で再利用できます。設定の詳細については、[プライベートリンクまたはプライベートエンドポイント](#private-link-or-private-endpoint)をご覧ください。
 
     </CustomContent>
 
     -   **ポート**：データソースのポート番号。
-    -   **ユーザー名**：データソースのユーザー名。
+    -   **User Name**：データソースのユーザー名。
     -   **パスワード**：ユーザー名のパスワード。
     -   **SSL/TLS** ：エンドツーエンドのデータ暗号化のためにSSL/TLSを有効にします（すべての移行作業で強く推奨）。MySQLサーバーのSSL構成に基づいて、適切な証明書をアップロードしてください。
 
@@ -736,20 +736,20 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
         -   オプション1：サーバー認証のみ
 
-            -   MySQLサーバーがサーバー認証のみに設定されている場合は、 **CA証明書**のみをアップロードしてください。
+            -   MySQLサーバーがサーバー認証のみに設定されている場合は、 **CA Certificate**のみをアップロードしてください。
             -   このオプションでは、MySQLサーバーが自身の証明書を提示して身元を証明し、 TiDB Cloudが認証局（CA）に対してサーバー証明書を検証します。
             -   CA証明書は中間者攻撃から保護し、MySQLサーバーを`require_secure_transport = ON`で起動する場合に必要です。
 
         -   オプション2：クライアント証明書認証
 
-            -   MySQLサーバーがクライアント証明書認証用に構成されている場合は、**クライアント証明書**と**Client private key**をアップロードしてください。
+            -   MySQLサーバーがクライアント証明書認証用に構成されている場合は、**Client Certificate**と**Client private key**をアップロードしてください。
             -   このオプションでは、 TiDB Cloudは認証のためにMySQLサーバーに証明書を提示しますが、 TiDB Cloudサーバーの証明書を検証しません。
             -   このオプションは通常、MySQLサーバーが`REQUIRE SUBJECT '...'`や`REQUIRE ISSUER '...'`などのオプションで構成されているが、 `REQUIRE X509`含まれていない場合に使用され、クライアント証明書の完全な CA 検証を行わずに、クライアント証明書の特定の属性をチェックできるようにします。
             -   このオプションは、MySQLサーバーが自己署名証明書またはカスタムPKI環境でクライアント証明書を受け入れる場合によく使用されます。ただし、この構成は中間者攻撃に対して脆弱であるため、他のネットワークレベルの制御によってサーバーの信頼性が保証されない限り、本番環境での本番は推奨されません。
 
         -   オプション3：相互TLS（mTLS） - 最高レベルのセキュリティ
 
-            -   MySQLサーバーが相互TLS（mTLS）認証用に構成されている場合は、 **CA証明書**、**クライアント証明書**、および**Client private key**をアップロードしてください。
+            -   MySQLサーバーが相互TLS（mTLS）認証用に構成されている場合は、 **CA Certificate**、**Client Certificate**、および**Client private key**をアップロードしてください。
             -   このオプションでは、MySQLサーバーはクライアント証明書を使用してTiDB Cloudの身元を検証し、 TiDB CloudはCA証明書を使用してMySQLサーバーの身元を検証します。
             -   このオプションは、MySQLサーバーで移行ユーザーに対して`REQUIRE X509`または`REQUIRE SSL`が設定されている場合に必要です。
             -   このオプションは、MySQLサーバーが認証のためにクライアント証明書を必要とする場合に使用されます。
@@ -760,7 +760,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
 3.  ターゲット接続プロファイルを入力してください。
 
-    -   **ユーザー名**: <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>TiDB Cloud<CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent>TiDB Cloud<CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>のユーザー名を入力します。
+    -   **User Name**: <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>TiDB Cloud<CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent>TiDB Cloud<CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>のユーザー名を入力します。
     -   **パスワード**： TiDB Cloudのユーザー名のパスワードを入力してください。
 
 4.  入力した情報を検証するには、 **Validate Connection and Next**をクリックしてください。
@@ -769,10 +769,10 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
     <CustomContent plan="dedicated">
 
-    -   接続方法として**パブリックIP**または**VPCピアリングを**使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
-    -   接続方法として**プライベートリンク**を使用する場合、エンドポイント要求を承認するよう求められます。
+    -   接続方法として**Public IP**または**VPC Peering**使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
+    -   接続方法として**Private Link**を使用する場合、エンドポイント要求を承認するよう求められます。
         -   AWSの場合： [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)で、エンドポイントサービスを作成したAWSリージョンに切り替え、 **[エンドポイントサービス]**をクリックし、 TiDB Cloudからのエンドポイントリクエストを承認します。
-        -   Azure の場合: [Azureポータル](https://portal.azure.com)に移動し、MySQL Flexible Server を名前で検索し、左側のナビゲーション ペインで**[設定]** &gt; **[ネットワーク]**をクリックし、右側の**[プライベート エンドポイント]**セクションを見つけて、 TiDB Cloudからの保留中の接続要求を承認します。
+        -   Azure の場合: [Azureポータル](https://portal.azure.com)に移動し、MySQL Flexible Server を名前で検索し、左側のナビゲーション ペインで**[設定]** &gt; **[ネットワーク]**をクリックし、右側の**Private endpoint**セクションを見つけて、 TiDB Cloudからの保留中の接続要求を承認します。
 
     </CustomContent>
     <CustomContent plan="essential">
@@ -803,7 +803,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
 <CustomContent plan="premium">
 
-**移行タイプ**のステップでは、既存データと増分データの両方を移行する場合は**Full + Incremental**、増分データのみを移行する場合は**「増分のみ」**を選択できます。
+**Migration Type**ステップでは、既存データと増分データの両方を移行する場合は**Full + Incremental**、増分データのみを移行する場合は**Incremental only**を選択できます。
 
 </CustomContent>
 
@@ -813,11 +813,11 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
 TiDB Cloudへのデータ移行を一度で完了させるには、 **Existing data migration**と**Incremental data migration**の両方を選択してください。これにより、ソースデータベースとターゲットデータベース間のデータの一貫性が確保されます。
 
-**既存データ**と**増分データの**移行には**、物理​​モード**または**論理モード**を使用できます。
+**既存データ**と**増分データ**の移行には、**physical mode**または**logical mode**を使用できます。
 
--   デフォルトモードは**論理モード**です。このモードでは、MySQLソースデータベースからSQLステートメントとしてデータをエクスポートし、TiDB上で実行します。このモードでは、移行前のターゲットテーブルは空でも空でなくても構いません。ただし、物理モードよりもパフォーマンスは低下します。
+-   デフォルトモードは**logical mode**です。このモードでは、MySQLソースデータベースからSQLステートメントとしてデータをエクスポートし、TiDB上で実行します。このモードでは、移行前のターゲットテーブルは空でも空でなくても構いません。ただし、物理モードよりもパフォーマンスは低下します。
 
--   大規模なデータセットの場合は、**物理モード**の使用をお勧めします。このモードでは、MySQLソースデータベースからデータをエクスポートし、KVペアとしてエンコードしてTiKVに直接書き込むことで、パフォーマンスを向上させます。このモードでは、移行前にターゲットテーブルが空である必要があります。16 RCU（レプリケーション容量ユニット）の仕様の場合、パフォーマンスは論理モードの約2.5倍高速です。その他の仕様では、論理モードと比較してパフォーマンスが20%～50%向上する可能性があります。なお、パフォーマンスデータは参考値であり、シナリオによって異なる場合がありますのでご注意ください。
+-   大規模なデータセットの場合は、**physical mode**の使用をお勧めします。このモードでは、MySQLソースデータベースからデータをエクスポートし、KVペアとしてエンコードしてTiKVに直接書き込むことで、パフォーマンスを向上させます。このモードでは、移行前にターゲットテーブルが空である必要があります。16 RCU（レプリケーション容量ユニット）の仕様の場合、パフォーマンスは論理モードの約2.5倍高速です。その他の仕様では、論理モードと比較してパフォーマンスが20%～50%向上する可能性があります。なお、パフォーマンスデータは参考値であり、シナリオによって異なる場合がありますのでご注意ください。
 
 > **Note:**
 >
@@ -838,7 +838,7 @@ TiDB Cloudへのデータ移行を一度で完了させるには、 **Existing d
 
 TiDB Cloudへのデータ移行を一度で完了させるには、ソースデータベースとターゲットデータベース間のデータの一貫性を確保するため、 **Full + Incremental**と**Incremental data migration**を選択してください。
 
-現在、**既存データの**移行には**論理モード**のみを使用できます。このモードでは、MySQLソースデータベースからSQLステートメントとしてデータをエクスポートし、TiDB上で実行します。このモードでは、移行前のターゲットテーブルは空でも空でなくても構いません。
+現在、**既存データ**の移行には**logical mode**のみを使用できます。このモードでは、MySQLソースデータベースからSQLステートメントとしてデータをエクスポートし、TiDB上で実行します。このモードでは、移行前のターゲットテーブルは空でも空でなくても構いません。
 
 </CustomContent>
 
@@ -846,11 +846,11 @@ TiDB Cloudへのデータ移行を一度で完了させるには、ソースデ�
 
 TiDB Cloud Premiumへのデータ移行を一度で完了させるには、 **Full + Incremental**を選択してください。これにより、ソースデータベースとターゲットデータベース間のデータの一貫性が確保されます。
 
-**既存データの移行**には、**物理​​モード**または**論理モードの**いずれかを使用できます。
+**既存データの移行**には、**physical mode**または**logical mode**のいずれかを使用できます。
 
--   デフォルトモードは**論理モード**です。このモードでは、MySQLソースデータベースからSQLステートメントとしてデータをエクスポートし、ターゲットのTiDB Cloud Premiumインスタンス上で実行します。このモードでは、移行前にターゲットテーブルが空でも空でなくても構いませんが、物理モードよりもパフォーマンスが低下します。
+-   デフォルトモードは**logical mode**です。このモードでは、MySQLソースデータベースからSQLステートメントとしてデータをエクスポートし、ターゲットのTiDB Cloud Premiumインスタンス上で実行します。このモードでは、移行前にターゲットテーブルが空でも空でなくても構いませんが、物理モードよりもパフォーマンスが低下します。
 
--   大規模なデータセットの場合は、**物理モード**を選択できます。このモードでは、ターゲットのTiDB Cloud Premium インスタンスで`IMPORT INTO`を使用してロードを高速化します。物理モードでは、移行前にターゲットテーブルが空である必要があります。事前チェックで選択したターゲットテーブルが空でないことが検出された場合、移行ジョブは自動的に論理モードに切り替わります。
+-   大規模なデータセットの場合は、**physical mode**を選択できます。このモードでは、ターゲットのTiDB Cloud Premium インスタンスで`IMPORT INTO`を使用してロードを高速化します。物理モードでは、移行前にターゲットテーブルが空である必要があります。事前チェックで選択したターゲットテーブルが空でないことが検出された場合、移行ジョブは自動的に論理モードに切り替わります。
 
 > **Note:**
 >
@@ -887,7 +887,7 @@ TiDB Cloud Premiumへのデータ移行を一度で完了させるには、 **Fu
 
 ## ステップ5：事前チェック {#step-5-precheck}
 
-**事前チェック**ページでは、事前チェックの結果を確認できます。事前チェックが失敗した場合は、 **「失敗」**または**「警告」の**詳細に従って問題を解決し、再度**「チェック」**をクリックして再チェックしてください。
+**事前チェック**ページでは、事前チェックの結果を確認できます。事前チェックが失敗した場合は、 **「失敗」**または**「警告」の**詳細に従って問題を解決し、再度**Check again**をクリックして再チェックしてください。
 
 チェック項目の一部にのみ警告が表示されている場合は、リスクを評価し、警告を無視するかどうかを検討できます。すべての警告を無視した場合、移行ジョブは自動的に次のステップに進みます。
 
@@ -971,10 +971,10 @@ TiDB Cloud Dedicatedは、さまざまなシナリオにおけるパフォーマ
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-2.  対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「データ移行」**をクリックします。
+2.  対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **Data Migration**をクリックします。
 
-3.  **データ移行**ページで、スケールアップする移行ジョブを探します。**アクション**列で、 **[...]** &gt; **[スケールアップ/スケールダウン]**をクリックします。
+3.  **Data Migration**ページで、スケールアップする移行ジョブを探します。**アクション**列で、 **[...]** &gt; **Scale Up/Down**をクリックします。
 
-4.  **「スケールアップ／スケールダウン」**ウィンドウで、使用する新しい仕様を選択し、 **「送信」**をクリックします。ウィンドウの下部に、その仕様の新しい価格が表示されます。
+4.  **Scale Up/Down**ウィンドウで、使用する新しい仕様を選択し、 **「送信」**をクリックします。ウィンドウの下部に、その仕様の新しい価格が表示されます。
 
 </CustomContent>

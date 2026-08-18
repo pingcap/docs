@@ -83,7 +83,7 @@ CSVファイルの名前は以下のようにしてください。
 
 > **Note:**
 >
-> 場合によっては、前述のルールに従ってCSVファイル名を更新できない場合（たとえば、CSVファイルリンクが他のプログラムでも使用されている場合）、ファイル名を変更せずに、[ステップ5](#step-5-perform-the-data-import-task)の**マッピング設定**を使用してソースデータを単一のターゲットテーブルにインポートできます。
+> 場合によっては、前述のルールに従ってCSVファイル名を更新できない場合（たとえば、CSVファイルリンクが他のプログラムでも使用されている場合）、ファイル名を変更せずに、[ステップ5](#step-5-perform-the-data-import-task)の**Mapping Settings**を使用してソースデータを単一のターゲットテーブルにインポートできます。
 
 データをAmazon S3にエクスポートするには、以下の手順を実行してください。
 
@@ -189,11 +189,11 @@ Amazon S3へのアクセスを設定した後、 TiDB Cloudコンソールで次
 
 3.  **Amazon S3からデータをインポートする**ページで、以下の情報を入力してください。
 
-    -   **Import File Count**： TiDB Cloud StarterまたはTiDB Cloud Essentialの場合は、 **「複数のファイル」**を選択してください。このフィールドはTiDB Cloud Dedicatedでは利用できません。
+    -   **Import File Count**： TiDB Cloud StarterまたはTiDB Cloud Essentialの場合は、 **Multiple files**を選択してください。このフィールドはTiDB Cloud Dedicatedでは利用できません。
     -   **Included Schema Files**:**いいえ**を選択します。
-    -   **データ形式**： **CSV**を選択してください。
-    -   **フォルダー URI** : ソース データのバケット URI を入力してください。この例では、テーブルに対応する第 2 階層のディレクトリ`s3://dumpling-s3/store/sales/`を使用することで、 TiDB Cloud はすべての MySQL インスタンスのデータを`store.sales`に一度にインポートしてマージできます。
-    -   **バケットアクセス**&gt; **AWS Role ARN** ：取得したロールARNを入力してください。
+    -   **Data Format**： **CSV**を選択してください。
+    -   **Folder URI** : ソース データのバケット URI を入力してください。この例では、テーブルに対応する第 2 階層のディレクトリ`s3://dumpling-s3/store/sales/`を使用することで、 TiDB Cloud はすべての MySQL インスタンスのデータを`store.sales`に一度にインポートしてマージできます。
+    -   **Bucket Access**&gt; **AWS Role ARN** ：取得したロールARNを入力してください。
 
     バケットの場所が<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>クラスターと異なる場合は、クロスリージョンのコンプライアンスを確認してください。
 
@@ -203,7 +203,7 @@ Amazon S3へのアクセスを設定した後、 TiDB Cloudコンソールで次
 
 5.  **「宛先」**セクションで、対象のデータベースとテーブルを選択します。
 
-    複数のファイルをインポートする場合、 **「詳細設定」** ＞ **「マッピング設定」**を使用して、各ターゲットテーブルとその対応するCSVファイルごとにカスタムマッピングルールを定義できます。その後、データソースファイルは、指定されたカスタムマッピングルールを使用して再スキャンされます。
+    複数のファイルをインポートする場合、 **Advanced Settings** ＞ **Mapping Settings**を使用して、各ターゲットテーブルとその対応するCSVファイルごとにカスタムマッピングルールを定義できます。その後、データソースファイルは、指定されたカスタムマッピングルールを使用して再スキャンされます。
 
     ソースファイルURIと名前を**「ソースファイルURIと名前」**に入力する際は、 `s3://[bucket_name]/[data_source_folder]/[file_name].csv`の形式になっていることを確認してください。例: `s3://sampledata/ingest/TableName.01.csv` 。
 
@@ -227,7 +227,7 @@ Amazon S3へのアクセスを設定した後、 TiDB Cloudコンソールで次
     >
     > セパレータ、デリミタ、およびヌルの設定には、英数字と特定の特殊文字の両方を使用できます。サポートされている特殊文字には、 `\t` 、 `\b` 、 `\n` 、 `\r` 、 `\f` 、および`\u0001`が含まれます。
 
-7.  **「インポート開始」**をクリックしてください。
+7.  **Start Import**をクリックしてください。
 
 8.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。
 

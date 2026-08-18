@@ -92,7 +92,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 4.  **インスタンス構成**セクションで、インスタンスを構成します。
     -   **インスタンスクラス**: 適切なインスタンスクラスを選択します。詳細については、 [レプリケーションインスタンスタイプの選択](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Types.html)を参照してください。
     -   **エンジン バージョン**: デフォルト構成を維持します。
-    -   **高可用性**: ビジネス ニーズに応じて、**マルチ AZ**または**シングル AZ**を選択します。
+    -   **High Availability**: ビジネス ニーズに応じて、**マルチ AZ**または**シングル AZ**を選択します。
 
 5.  **Allocated storage (GiB)**フィールドでストレージを構成します。
 
@@ -105,7 +105,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
     ![Connectivity and security](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-connectivity-security.png)
 
-7.  必要に応じて、 **[詳細設定]** 、 **[メンテナンス]** 、 **[タグ]**セクションを構成し、 **[Create replication instance]**をクリックしてインスタンスの作成を完了します。
+7.  必要に応じて、 **Advanced settings** 、 **[メンテナンス]** 、 **[タグ]**セクションを構成し、 **[Create replication instance]**をクリックしてインスタンスの作成を完了します。
 
 > **Note:**
 >
@@ -119,9 +119,9 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
     ![Create endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-create-endpoint.png)
 
-2.  **[エンドポイントの作成]**をクリックして、ターゲット データベース エンドポイントを作成します。
+2.  **Create endpoint**をクリックして、ターゲット データベース エンドポイントを作成します。
 
-3.  **[エンドポイント タイプ]**セクションで、 **[ソース エンドポイント]**または**[ターゲット エンドポイント]**を選択します。
+3.  **Endpoint type**セクションで、 **[ソース エンドポイント]**または**Target endpoint**を選択します。
 
 4.  **エンドポイント設定**セクションで、**エンドポイント識別子**とARNフィールドに入力します。次に、**ソースエンジン**または**ターゲットエンジン**として**MySQLを**選択します。
 
@@ -131,29 +131,29 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
     <div label="TiDB Cloud Starter or Essential">
 
-    -   **サーバー名**: クラスターの`HOST` 。
+    -   **Server name**: クラスターの`HOST` 。
     -   **ポート**: クラスターの`PORT` 。
-    -   **ユーザー名**: 移行先クラスターのユーザー。DMSの要件を満たしていることを確認してください。
+    -   **User name**: 移行先クラスターのユーザー。DMSの要件を満たしていることを確認してください。
     -   **パスワード**: クラスター ユーザーのパスワード。
     -   **セキュリティ Socket Layer (SSL) モード**：パブリックエンドポイント経由で接続する場合は、トランスポートセキュリティを確保するために、モードを**verify-full**に設定することを強くお勧めします。プライベートエンドポイント経由で接続する場合は、モードを**none**に設定できます。
-    -   （オプション） **CA証明書**： [ISRGルートX1証明書](https://letsencrypt.org/certs/isrgrootx1.pem)を使用します。詳細については、 [TiDB Cloud Starter または Essential への TLS 接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を参照してください。
+    -   （オプション） **CA certificate**： [ISRGルートX1証明書](https://letsencrypt.org/certs/isrgrootx1.pem)を使用します。詳細については、 [TiDB Cloud Starter または Essential への TLS 接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を参照してください。
 
     </div>
 
     <div label="TiDB Cloud Dedicated">
 
-    -   **サーバー名**: TiDB Cloud Dedicatedクラスターの`HOST` 。
+    -   **Server name**: TiDB Cloud Dedicatedクラスターの`HOST` 。
     -   **ポート**: TiDB Cloud Dedicated クラスターの`PORT` 。
-    -   **ユーザー名**：移行用のTiDB Cloud Dedicatedクラスタのユーザー。DMS要件を満たしていることを確認してください。
+    -   **User name**：移行用のTiDB Cloud Dedicatedクラスタのユーザー。DMS要件を満たしていることを確認してください。
     -   **パスワード**: TiDB Cloud Dedicated クラスター ユーザーのパスワード。
     -   **セキュリティ Socket Layer (SSL) モード**：パブリックエンドポイント経由で接続する場合は、トランスポートセキュリティを確保するために、モードを**verify-full**に設定することを強くお勧めします。プライベートエンドポイント経由で接続する場合は、 **none**に設定できます。
-    -   (オプション) **CA 証明書**: [TiDB Cloud DedicatedへのTLS接続](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)に従って CA 証明書を取得します。
+    -   (オプション) **CA certificate**: [TiDB Cloud DedicatedへのTLS接続](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)に従って CA 証明書を取得します。
 
     </div>
      </SimpleTab>
 
     ![Provide access information manually](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-configure-endpoint.png)
 
-6.  エンドポイントを**ターゲット エンドポイント**として作成する場合は、**エンドポイント設定**セクションを展開し、**Use endpoint connection attributes**チェックボックスをオンにして、**Extra connection attributes**を`Initstmt=SET FOREIGN_KEY_CHECKS=0;`に設定します。
+6.  エンドポイントを**Target endpoint**として作成する場合は、**エンドポイント設定**セクションを展開し、**Use endpoint connection attributes**チェックボックスをオンにして、**Extra connection attributes**を`Initstmt=SET FOREIGN_KEY_CHECKS=0;`に設定します。
 
-7.  必要に応じて、 **KMSキー**と**タグの**セクションを設定します。 **「エンドポイントの作成」**をクリックしてインスタンスの作成を完了します。
+7.  必要に応じて、 **KMS Key**と**タグの**セクションを設定します。 **Create endpoint**をクリックしてインスタンスの作成を完了します。

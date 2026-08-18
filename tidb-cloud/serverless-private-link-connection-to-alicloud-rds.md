@@ -61,7 +61,7 @@ Alibaba Cloud コンソールでロードバランサーとエンドポイント
 
 3.  [NLB](https://slb.console.alibabacloud.com/nlb)に進み、ネットワークロードバランサーを作成します。以下の情報を入力してください。
 
-    -   **ネットワークタイプ**: `Internal-facing`を選択
+    -   **Network Type**: `Internal-facing`を選択
     -   **VPC** : ApsaraDB RDS for MySQL が配置されている VPC を選択します。
     -   **ゾーン**: TiDB Cloud Essential クラスタと重複する必要があります
     -   **IPバージョン**: `IPv4`を選択
