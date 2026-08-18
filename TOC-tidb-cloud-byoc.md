@@ -59,6 +59,11 @@
     - [TiFlash Late Materialization](/tiflash/tiflash-late-materialization.md)
     - [Compatibility](/tiflash/tiflash-compatibility.md)
     - [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md)
+  - Use Tiered Storage
+    - [Overview](/tidb-cloud/tiered-storage-overview.md)
+    - [Operations](/tidb-cloud/tiered-storage-operations.md)
+    - [Limitations](/tidb-cloud/tiered-storage-limitations.md)
+    - [FAQ](/tidb-cloud/tiered-storage-faq.md)
   - Monitor and Alert
     - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
     - [Built-in Metrics](/tidb-cloud/premium/built-in-monitoring-premium.md)
@@ -69,11 +74,6 @@
       - [Subscribe via Email](/tidb-cloud/monitor-alert-email.md)
       - [Subscribe via Slack](/tidb-cloud/monitor-alert-slack.md)
       - [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
-  - Tiered Storage
-    - [Overview](/tidb-cloud/tiered-storage-overview.md)
-    - [Operations](/tidb-cloud/tiered-storage-operations.md)
-    - [Limitations](/tidb-cloud/tiered-storage-limitations.md)
-    - [FAQ](/tidb-cloud/tiered-storage-faq.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [Analyze Performance](/tidb-cloud/tune-performance.md)
