@@ -181,7 +181,7 @@ npm install prisma typescript ts-node @types/node --save-dev
 
     > **Note**
     >
-    > TiDB Cloud Starterの場合、パブリックエンドポイントを使用する際には`sslaccept=strict`を設定して TLS 接続を有効にすることをお**勧め****します**。 `sslaccept=strict`を設定して TLS 接続を有効にする場合は、 `sslcert=/path/to/ca.pem`を介して接続ダイアログからダウンロードした CA 証明書のファイルパスを指定する必要があります。
+    > TiDB Cloud Starterの場合、パブリックエンドポイントを使用する際には`sslaccept=strict`を設定して TLS 接続を有効にすることを**お勧めします**。 `sslaccept=strict`を設定して TLS 接続を有効にする場合は、 `sslcert=/path/to/ca.pem`を介して接続ダイアログからダウンロードした CA 証明書のファイルパスを指定する必要があります。
 
 6.  `.env`ファイルを保存します。
 
