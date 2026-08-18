@@ -74,7 +74,7 @@ Statement Insight does not backfill historical data. Data starts accumulating fr
 
 ### What is the difference between Statement Insight and Top RU?
 
-[Top RU](/tidb-cloud/top-ru.md) is a near-real-time tool for diagnosing an ongoing RU spike: it ranks SQL statements by cumulative RU consumption and only collects and displays Top SQLs and major fields, including statements that are still executing, over a short, recent time window.
+[Top RU](/tidb-cloud/top-ru.md) is a near-real-time tool for diagnosing an ongoing RU spike: it ranks SQL statements by cumulative RU consumption and focuses on the top RU-consuming SQL statements and key fields, including statements that are still executing, over a short, recent time window.
 
 Statement Insight is a historical analysis tool. It collects and displays a larger volume of SQL statements (up to 3,000 SQL digests per collection interval) along with more detailed fields, and helps you understand RU consumption, latency, and execution count trends over a longer time range, broken down by DB User, SQL Type, SQL Digest, DB, or Table, so that you can establish RU and performance baselines and identify sustained optimization opportunities.
 
