@@ -59,7 +59,7 @@ For each dimension (DB User, SQL Type, SQL Digest, DB, or Table), the panel show
 
 ### Trend charts
 
-The trend chart shows how the selected metric changes over time for the dimension you are viewing.
+The **Resource Usage Over Time** trend chart shows how the selected metric changes over time for the dimension you are viewing.
 
 ## Limitations
 
