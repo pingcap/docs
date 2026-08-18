@@ -55,7 +55,7 @@ The **Top Contributors** panel summarizes the SQL statements that match your fil
 For each dimension (DB User, SQL Type, SQL Digest, DB, or Table), the panel shows:
 
 - **Total count**: the total number of distinct values for the dimension among the selected SQL statements. For example, the total number of distinct DB users that ran the selected SQL statements.
-- **Top values**: the top values ranked by the metric selected in **Measured by**. For example, if **Measured by** is set to **Total RU**, the panel shows the top DB users, SQL types, SQL digests, DBs or Tables that consumed the most RU.
+- **Top values**: the top values ranked by the metric selected in **Measured by**. For example, if **Measured by** is set to **Total RU**, the panel shows the top DB users, SQL types, SQL digests, DBs, or Tables that consumed the most RU.
 
 ### Trend charts
 
