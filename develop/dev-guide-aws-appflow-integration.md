@@ -135,7 +135,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     >
     > 会社がすでに Salesforce の Professional Edition を使用している場合、REST API はデフォルトでは有効になっていません。 REST API を使用するには、新しい Developer Edition の登録が必要になる場合があります。詳細については、 [Salesforceフォーラムトピック](https://developer.salesforce.com/forums/?id=906F0000000D9Y2IAK)を参照してください。
 
-3.  **「接続先の詳細」**エリアで、接続先として**TiDB-Connector**を選択します。「**接続」**ボタンが表示されます。
+3.  **「接続先の詳細」**エリアで、接続先として**TiDB-Connector**を選択します。**接続**ボタンが表示されます。
 
     ![tidb dest](/media/develop/aws-appflow-step-tidb-dest.png)
 
@@ -167,7 +167,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
     ![complete flow](/media/develop/aws-appflow-step-complete-flow.png)
 
-8.  **エラー処理**領域で、 **「現在のフロー実行を停止する」**を選択します。**フローのトリガー**領域で、 **「オンデマンドで実行**」トリガータイプを選択します。これは、フローを手動で実行する必要があることを意味します。次に、 **「次へ」**をクリックします。
+8.  **エラー処理**領域で、 **「現在のフロー実行を停止する」**を選択します。**フローのトリガー**領域で、 **オンデマンドで実行**トリガータイプを選択します。これは、フローを手動で実行する必要があることを意味します。次に、 **「次へ」**をクリックします。
 
     ![complete step1](/media/develop/aws-appflow-step-complete-step1.png)
 

@@ -183,7 +183,7 @@ TiDB Cloud Dedicatedクラスターに手動バックアップを適用するに
 
 > **Note:**
 >
-> 現在、この機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**「？」**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、「**説明」**フィールドに「バックアップのエクスポート機能の申請」と入力して、 **「送信」を**クリックします。
+> 現在、この機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**？**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、**Description**フィールドに「バックアップのエクスポート機能の申請」と入力して、 **Submit**をクリックします。
 
 <SimpleTab>
 
@@ -206,8 +206,8 @@ TiDB Cloud Dedicatedクラスターに手動バックアップを適用するに
     -   **AWSコンソールを使用する場合**：
 
         1.  [Amazon S3コンソール](https://console.aws.amazon.com/s3/)に移動します。
-        2.  対象のバケットの詳細ページを開き、「**アクセス許可」**タブをクリックします。
-        3.  **Bucket policy**までスクロールし、**編集**をクリックします。
+        2.  対象のバケットの詳細ページを開き、**Permissions**タブをクリックします。
+        3.  **Bucket policy**までスクロールし、**Edit**をクリックします。
         4.  生成されたコマンドからポリシーの内容をコピーし、ポリシーエディタに貼り付けてください。
         5.  **Save changes**をクリックしてください。
 

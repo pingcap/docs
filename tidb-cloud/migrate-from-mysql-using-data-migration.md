@@ -399,7 +399,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
     -   **Listener port**： `3306` 。ウィザードのデフォルト値は`80`です。リスナーを作成する前に変更してください。
     -   **Target group**：対象タイプは**IP addresses**、プロトコルは**TCP** 、ポートは**3306** 、データベースと同じVPC内。RDSエンドポイントを直接登録することはできないため、代わりにデータベースのプライベートIPアドレスを登録してください。
 
-        [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、 左側のナビゲーション ペインで**Network Interfaces**をクリックし、 **「説明**= `RDSNetworkInterface`と**「VPC** = ご使用の VPC」でフィルタリングします。一致するネットワーク インターフェイスに表示されている**Primary private IPv4 address**を使用します。
+        [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、 左側のナビゲーション ペインで**Network Interfaces**をクリックし、 **Description** = `RDSNetworkInterface`と**VPC** = ご使用の VPC でフィルタリングします。一致するネットワーク インターフェイスに表示されている**Primary private IPv4 address**を使用します。
 
         > **Note:**
         >
@@ -485,7 +485,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
     -   **Listener port**： `3306` 。ウィザードのデフォルト値は`80`です。リスナーを作成する前に変更してください。
     -   **Target group**：対象タイプは**IP addresses**、プロトコルは**TCP** 、ポートは**3306** 、データベースと同じVPC内。RDSエンドポイントを直接登録することはできないため、代わりにデータベースのプライベートIPアドレスを登録してください。
 
-        [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、 左側のナビゲーション ペインで**Network Interfaces**をクリックし、 **「説明**= `RDSNetworkInterface`と**「VPC** = ご使用の VPC」でフィルタリングします。一致するネットワーク インターフェイスに表示されている**Primary private IPv4 address**を使用します。
+        [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、 左側のナビゲーション ペインで**Network Interfaces**をクリックし、 **Description** = `RDSNetworkInterface`と**VPC** = ご使用の VPC でフィルタリングします。一致するネットワーク インターフェイスに表示されている**Primary private IPv4 address**を使用します。
 
         > **Note:**
         >

@@ -55,7 +55,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
-6.  「**新規接続（TiDB）」**ダイアログで、以下の接続パラメータを設定します。
+6.  **新規接続（TiDB）**ダイアログで、以下の接続パラメータを設定します。
 
     -   **接続名**：この接続に分かりやすい名前を付けてください。
     -   **ホスト**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
@@ -97,7 +97,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
 7.  Navicat Premiumを起動し、左上隅の**「接続」**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDBを**ダブルクリックします。
 
-8.  「**新規接続（TiDB）」**ダイアログで、以下の接続パラメータを設定します。
+8.  **新規接続（TiDB）**ダイアログで、以下の接続パラメータを設定します。
 
     -   **接続名**：この接続に分かりやすい名前を付けてください。
     -   **ホスト**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
@@ -130,7 +130,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
-6.  「**新規接続（TiDB）」**ダイアログで、以下の接続パラメータを設定します。
+6.  **新規接続（TiDB）**ダイアログで、以下の接続パラメータを設定します。
 
     -   **接続名**：この接続に分かりやすい名前を付けてください。
     -   **ホスト**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
@@ -140,7 +140,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
     ![Navicat: configure connection general panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-general.png)
 
-7.  **SSL**タブをクリックし、 **「SSLを使用する」** 、 **「認証を使用する**」、 **「CAに対してサーバー証明書を検証する」の**チェックボックスをオンにします。次に、手順4でダウンロードしたCAファイルを**「CA証明書」**フィールドに選択します。
+7.  **SSL**タブをクリックし、 **「SSLを使用する」** 、 **「認証を使用する」**、 **「CAに対してサーバー証明書を検証する」の**チェックボックスをオンにします。次に、手順4でダウンロードしたCAファイルを**「CA証明書」**フィールドに選択します。
 
     ![Navicat: configure connection SSL panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-ssl.png)
 
@@ -155,7 +155,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
-2.  「**新規接続（TiDB）」**ダイアログで、以下の接続パラメータを設定します。
+2.  **新規接続（TiDB）**ダイアログで、以下の接続パラメータを設定します。
 
     -   **接続名**：この接続に分かりやすい名前を付けてください。
     -   **ホスト**：TiDB Self-ManagedクラスタのIPアドレスまたはドメイン名を入力してください。

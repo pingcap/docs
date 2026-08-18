@@ -21,7 +21,7 @@ TiDB v6.6.0以降、高速プランバインディング機能が導入されま
 
 #### 実行計画をバインドする {#bind-an-execution-plan}
 
-1.  **「プランのバインド」**をクリックします。「**プランのバインド」**ダイアログボックスが表示されます。
+1.  **プランのバインド**をクリックします。**プランのバインド**ダイアログボックスが表示されます。
 
     ![Fast plan binding - not bound - entry](/media/dashboard/dashboard-quick-binding-entry-notbound.png)
 

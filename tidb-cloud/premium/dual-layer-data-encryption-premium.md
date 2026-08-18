@@ -9,7 +9,7 @@ summary: TiDB Cloud Premiumインスタンスでデュアルレイヤーデー�
 
 > **Note:**
 >
-> 現在、デュアルレイヤーデータ暗号化機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)**？」**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **「説明」**フィールドに「デュアルレイヤーデータ暗号化の申請」と入力して、 **「送信」**をクリックします。
+> 現在、デュアルレイヤーデータ暗号化機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)**？**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **Description**フィールドに「デュアルレイヤーデータ暗号化の申請」と入力して、 **Submit**をクリックします。
 
 ## 概要 {#overview}
 

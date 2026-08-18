@@ -59,7 +59,7 @@ tidb_executor_statement_total{type="Use"} 466016
 -   `Legend format` : メトリック名の形式。
 -   `Resolution` : ステップ幅はデフォルトで15秒です。解像度は、複数のピクセルに対して1つのデータポイントを生成するかどうかを指定します。
 
-「**メトリック」**タブのクエリ式は次のとおりです。
+**メトリック**タブのクエリ式は次のとおりです。
 
 ![The query expression on the Metrics tab](/media/best-practices/metric-board-expression.jpeg)
 

@@ -59,7 +59,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
     ![MySQL Workbench: add new connection](/media/develop/mysql-workbench-add-new-connection.png)
 
-6.  **「新しい接続の設定**」ダイアログで、以下の接続パラメータを設定します。
+6.  **新しい接続の設定**ダイアログで、以下の接続パラメータを設定します。
 
     -   **接続名**：この接続に分かりやすい名前を付けてください。
     -   **ホスト名**： TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
@@ -101,7 +101,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
 7.  MySQL Workbenchを起動し、 **「MySQL接続」**タイトルの横にある**「+」**をクリックします。
 
-8.  **「新しい接続の設定**」ダイアログで、以下の接続パラメータを設定します。
+8.  **新しい接続の設定**ダイアログで、以下の接続パラメータを設定します。
 
     -   **接続名**：この接続に分かりやすい名前を付けてください。
     -   **ホスト名**： TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
@@ -120,7 +120,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
 2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、「**接続タイプ」**ドロップダウンリストから**「パブリック」**を選択し、 **「CA証明書」**をクリックしてCA証明書をダウンロードします。
+3.  接続ダイアログで、**接続タイプ**ドロップダウンリストから**「パブリック」**を選択し、 **「CA証明書」**をクリックしてCA証明書をダウンロードします。
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **[IP アクセス リストの設定] をクリックするか、「IP アクセス リストを設定する」**の手順に従って[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
 
@@ -130,7 +130,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
     ![MySQL Workbench: add new connection](/media/develop/mysql-workbench-add-new-connection.png)
 
-5.  **「新しい接続の設定**」ダイアログで、以下の接続パラメータを設定します。
+5.  **新しい接続の設定**ダイアログで、以下の接続パラメータを設定します。
 
     -   **接続名**：この接続に分かりやすい名前を付けてください。
     -   **ホスト名**： TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
@@ -155,7 +155,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
     ![MySQL Workbench: add new connection](/media/develop/mysql-workbench-add-new-connection.png)
 
-2.  **「新しい接続の設定**」ダイアログで、以下の接続パラメータを設定します。
+2.  **新しい接続の設定**ダイアログで、以下の接続パラメータを設定します。
 
     -   **接続名**：この接続に分かりやすい名前を付けてください。
     -   **ホスト名**：TiDB Self-ManagedクラスタのIPアドレスまたはドメイン名を入力してください。

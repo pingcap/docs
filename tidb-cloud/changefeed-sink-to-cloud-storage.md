@@ -110,7 +110,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
     >
     > TiDB Cloudへのアクセス権を削除するには、付与したアクセス権を削除するだけです。
 
-6.  **Bucket details**ページで、「**オブジェクト」**タブをクリックします。
+6.  **Bucket details**ページで、 **「オブジェクト」**タブをクリックします。
 
     -   バケットの gsutil URI を取得するには、[コピー] ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs`の場合、URI は`gs://test-sink-gcs/`になります。
 
