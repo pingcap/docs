@@ -187,7 +187,7 @@ npm install @types/node ts-node typescript --save-dev
 
     > **Note**
     >
-    > TiDB Cloud Dedicatedの場合、パブリックエンドポイントを使用する際には`TIDB_ENABLE_SSL`を介して TLS 接続を有効にすることをお**勧め**します。 `TIDB_ENABLE_SSL=true`を設定する際には、 `TIDB_CA_PATH=/path/to/ca.pem`を介して接続ダイアログからダウンロードした CA 証明書のパスを指定する**必要があります**。
+    > TiDB Cloud Dedicatedの場合、パブリックエンドポイントを使用する際には`TIDB_ENABLE_SSL`を介して TLS 接続を有効にすることを**お勧めします**。 `TIDB_ENABLE_SSL=true`を設定する際には、 `TIDB_CA_PATH=/path/to/ca.pem`を介して接続ダイアログからダウンロードした CA 証明書のパスを指定する**必要があります**。
 
 6.  `.env`ファイルを保存します。
 
