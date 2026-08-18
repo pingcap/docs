@@ -58,9 +58,9 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 
 4.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-5.  **加入者タイプの**ドロップダウンリストから**「Flashduty」**を選択してください。
+5.  **加入者タイプの**ドロップダウンリストから**Flashduty**を選択してください。
 
-6.  **「名前」**欄に名前を入力し、 **「Webhook URL」**欄にFlashdutyのWebhook URLを入力してください。
+6.  **「名前」**欄に名前を入力し、 **Webhook URL**欄にFlashdutyのWebhook URLを入力してください。
 
 7.  **Test Connection**をクリックしてください。
 
@@ -87,9 +87,9 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 
 3.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-4.  **加入者タイプの**ドロップダウンリストから**「Flashduty」**を選択してください。
+4.  **加入者タイプの**ドロップダウンリストから**Flashduty**を選択してください。
 
-5.  **「名前」**欄に名前を入力し、 **「Webhook URL」**欄にFlashdutyのWebhook URLを入力してください。
+5.  **「名前」**欄に名前を入力し、 **Webhook URL**欄にFlashdutyのWebhook URLを入力してください。
 
 6.  **Test Connection**をクリックしてください。
 
@@ -114,9 +114,9 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 
 3.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-4.  **加入者タイプの**ドロップダウンリストから**「Flashduty」**を選択してください。
+4.  **加入者タイプの**ドロップダウンリストから**Flashduty**を選択してください。
 
-5.  **「名前」**欄に名前を入力し、 **「Webhook URL」**欄にFlashdutyのWebhook URLを入力してください。
+5.  **「名前」**欄に名前を入力し、 **Webhook URL**欄にFlashdutyのWebhook URLを入力してください。
 
 6.  **Test Connection**をクリックしてください。
 

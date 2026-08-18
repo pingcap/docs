@@ -40,7 +40,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、右上隅の**Create Resource**をクリックします。
 
-2.  **Create Resource**ページで、プランとして**「Premium」**を選択してください。
+2.  **Create Resource**ページで、プランとして**Premium**を選択してください。
 
 3.  TiDB Cloud Premiumインスタンスの名前を入力し、インスタンスをホストするクラウドプロバイダーとリージョンを選択してください。
 

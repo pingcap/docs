@@ -143,7 +143,7 @@ TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンス�
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  **Recycle Bin**ページで、 **「Essential」**タブをクリックすると、 TiDB Cloud Essentialインスタンスのごみ箱に移動します。
+2.  **Recycle Bin**ページで、 **Essential**タブをクリックすると、 TiDB Cloud Essentialインスタンスのごみ箱に移動します。
 
 3.  復元したいTiDB Cloud Essentialインスタンスを見つけて、 **[&gt;]**ボタンをクリックして、そのインスタンスで使用可能なバックアップを展開します。
 

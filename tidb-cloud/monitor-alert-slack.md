@@ -37,7 +37,7 @@ TiDB Cloud、Slack、[メール](/tidb-cloud/monitor-alert-email.md)、[Zoom](/t
 4.  **「ワークスペースに新しいWebhookを追加」**をクリックします。
 5.  アラート通知を受信するチャネルを選択し、 **「承認」**を選択してください。受信Webhookをプライベートチャネルに追加する必要がある場合は、まずそのチャネルに参加している必要があります。
 
-**「ワークスペースの Webhook URL」**セクションに、次の形式で新しいエントリが表示されます: `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX` 。
+**ワークスペースの Webhook URL**セクションに、次の形式で新しいエントリが表示されます: `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX` 。
 
 ### ステップ2. TiDB Cloudから購読する {#step-2-subscribe-from-tidb-cloud}
 
@@ -59,9 +59,9 @@ TiDB Cloud Dedicatedクラスターのアラート通知を購読するには、
 
 4.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-5.  **購読者タイプの**ドロップダウンリストから**「Slack」**を選択してください。
+5.  **購読者タイプの**ドロップダウンリストから**Slack**を選択してください。
 
-6.  **「名前」**欄に名前を、「 **URL」**欄にSlackのWebhook URLを入力してください。
+6.  **「名前」**欄に名前を、**URL**欄にSlackのWebhook URLを入力してください。
 
 7.  **Test Connection**をクリックしてください。
 
@@ -88,9 +88,9 @@ TiDB Cloud Dedicatedクラスターのアラート通知を購読するには、
 
 3.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-4.  **購読者タイプの**ドロップダウンリストから**「Slack」**を選択してください。
+4.  **購読者タイプの**ドロップダウンリストから**Slack**を選択してください。
 
-5.  **「名前」**欄に名前を、「 **URL」**欄にSlackのWebhook URLを入力してください。
+5.  **「名前」**欄に名前を、**URL**欄にSlackのWebhook URLを入力してください。
 
 6.  **Test Connection**をクリックしてください。
 
@@ -115,9 +115,9 @@ TiDB Cloud Dedicatedクラスターのアラート通知を購読するには、
 
 3.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-4.  **購読者タイプの**ドロップダウンリストから**「Slack」**を選択してください。
+4.  **購読者タイプの**ドロップダウンリストから**Slack**を選択してください。
 
-5.  **「名前」**欄に名前を、「 **URL」**欄にSlackのWebhook URLを入力してください。
+5.  **「名前」**欄に名前を、**URL**欄にSlackのWebhook URLを入力してください。
 
 6.  **Test Connection**をクリックしてください。
 

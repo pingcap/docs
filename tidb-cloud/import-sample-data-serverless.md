@@ -33,7 +33,7 @@ summary: TiDB Cloud StarterまたはTiDB Cloud EssentialにUI経由でサンプ�
 
 4.  **「次へ」**をクリックしてください。
 
-5.  **Destination Mapping**セクションで、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションが選択されたままになっていることを確認し、データ形式として**「SQL」**を選択します。
+5.  **Destination Mapping**セクションで、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションが選択されたままになっていることを確認し、データ形式として**SQL**を選択します。
 
 6.  **「次へ」**をクリックしてください。
 

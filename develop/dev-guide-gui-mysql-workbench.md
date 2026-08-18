@@ -55,7 +55,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードをリセット」**をクリックして新しいパスワードを生成できます。
 
-5.  MySQL Workbenchを起動し、 **「MySQL Connections」**タイトルの横にある**「+」**をクリックします。
+5.  MySQL Workbenchを起動し、 **MySQL Connections**タイトルの横にある**+**をクリックします。
 
     ![MySQL Workbench: add new connection](/media/develop/mysql-workbench-add-new-connection.png)
 
@@ -75,7 +75,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
 7.  **「接続テスト」**をクリックして、対象のTiDB Cloud StarterまたはEssentialインスタンスへの接続を検証してください。
 
-8.  接続テストが成功すると、 **「MySQL接続が正常に確立されました」という**メッセージが表示されます。 **「OK」**をクリックして接続設定を保存してください。
+8.  接続テストが成功すると、 **「MySQL接続が正常に確立されました」という**メッセージが表示されます。 **OK**をクリックして接続設定を保存してください。
 
 </div>
 <div label="TiDB Cloud Premium">
@@ -111,7 +111,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
 9.  **「接続テスト」**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
 
-10. 接続テストが成功すると、 **「MySQL接続が正常に確立されました」という**メッセージが表示されます。 **「OK」**をクリックして接続設定を保存してください。
+10. 接続テストが成功すると、 **「MySQL接続が正常に確立されました」という**メッセージが表示されます。 **OK**をクリックして接続設定を保存してください。
 
 </div>
 <div label="TiDB Cloud Dedicated">
@@ -126,7 +126,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
     TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
-4.  MySQL Workbenchを起動し、 **「MySQL Connections」**タイトルの横にある**「+」**をクリックします。
+4.  MySQL Workbenchを起動し、 **MySQL Connections**タイトルの横にある**+**をクリックします。
 
     ![MySQL Workbench: add new connection](/media/develop/mysql-workbench-add-new-connection.png)
 
@@ -146,12 +146,12 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
 6.  **「接続テスト」**をクリックして、 TiDB Cloud Dedicatedクラスターへの接続を検証してください。
 
-7.  接続テストが成功すると、 **「MySQL接続が正常に確立されました」という**メッセージが表示されます。 **「OK」**をクリックして接続設定を保存してください。
+7.  接続テストが成功すると、 **「MySQL接続が正常に確立されました」という**メッセージが表示されます。 **OK**をクリックして接続設定を保存してください。
 
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
-1.  MySQL Workbenchを起動し、 **「MySQL Connections」**タイトルの横にある**「+」**をクリックします。
+1.  MySQL Workbenchを起動し、 **MySQL Connections**タイトルの横にある**+**をクリックします。
 
     ![MySQL Workbench: add new connection](/media/develop/mysql-workbench-add-new-connection.png)
 
@@ -171,7 +171,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
 3.  **「接続テスト」**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
 
-4.  接続テストが成功すると、 **「MySQL接続が正常に確立されました」という**メッセージが表示されます。 **「OK」**をクリックして接続設定を保存してください。
+4.  接続テストが成功すると、 **「MySQL接続が正常に確立されました」という**メッセージが表示されます。 **OK**をクリックして接続設定を保存してください。
 
 </div>
 </SimpleTab>

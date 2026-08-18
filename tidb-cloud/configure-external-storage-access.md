@@ -91,7 +91,7 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
         ![Create a policy](/media/tidb-cloud/aws-create-policy.png)
 
-    4.  **Create policy**ページで、 **「JSON」**タブをクリックします。
+    4.  **Create policy**ページで、 **JSON**タブをクリックします。
 
     5.  ポリシーテキストフィールドで、必要に応じてポリシーを設定してください。以下は、 TiDB Cloud Starter、 Essential、またはPremiumインスタンスからデータをエクスポートしたり、これらのインスタンスにデータをインポートしたりする際に使用できる例です。
 
@@ -298,7 +298,7 @@ Azure ARMテンプレートを使用してSASトークンを作成する際に�
 
 3.  **Shared access signature**ページで、次のように必要なアクセス許可を持つサービス SAS トークンを作成します。詳細については、 [サービスSASトークンを作成します](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)を参照してください。
 
-    1.  **Allowed services**セクションで、 **「Blob」**サービスを選択します。
+    1.  **Allowed services**セクションで、 **Blob**サービスを選択します。
 
     2.  **Allowed Resource types**セクションで、 **「コンテナ」**と**「オブジェクト」**を選択します。
 

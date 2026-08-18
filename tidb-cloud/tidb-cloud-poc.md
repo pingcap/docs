@@ -145,7 +145,7 @@ TiDB Cloudにはさまざまな形式のデータをインポートできます�
 
 -   クラスターの一般的なメトリクスは、クラスター概要ページで確認できます。これには、合計QPS、レイテンシ、接続数、 TiFlashリクエストQPS、 TiFlashリクエスト期間、 TiFlashストレージサイズ、TiKVストレージサイズ、TiDB CPU、TiKV CPU、TiKV IO読み取り、TiKV IO書き込みが含まれます。詳細は[TiDBクラスタを監視する](/tidb-cloud/monitor-tidb-cluster.md)を参照してください。
 -   クラスターの[**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **SQL Statement**タブを確認してください。ここでは、システムテーブルをクエリすることなく、SQL実行を監視し、パフォーマンスの問題を簡単に特定できます。詳細は[ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)を参照してください。
--   クラスターの[**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **「Key Visualizer」**タブでTiDBのデータアクセスパターンとデータホットスポットを確認できます。詳細は[Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)を参照してください。
+-   クラスターの[**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **Key Visualizer**タブでTiDBのデータアクセスパターンとデータホットスポットを確認できます。詳細は[Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)を参照してください。
 -   これらのメトリクスを独自のDatadogおよびPrometheusに統合することもできます。詳細は[サードパーティの監視統合](/tidb-cloud/third-party-monitoring-integrations.md)を参照してください。
 
 次はテスト結果を評価する時です。
