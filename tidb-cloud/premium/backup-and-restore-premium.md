@@ -177,7 +177,7 @@ TiDB Cloud Premiumは、自動バックアップに加えて、手動バック�
 
 -   **制限事項**：手動バックアップは、ポイントインタイムリカバリ（PITR）や部分バックアップ（テーブルレベルまたはデータベースレベルのバックアップなど）をサポートしていません。手動バックアップを既存のインスタンスに復元することはできません。復元操作ごとに新しいインスタンスが作成されます。
 
--   **Permissions**： `Organization Owner`と`Instance Manager`の両方が手動バックアップを作成できます。システム管理の手動バックアップを復元できるのは`Organization Owner`のみです。
+-   **権限**： `Organization Owner`と`Instance Manager`の両方が手動バックアップを作成できます。システム管理の手動バックアップを復元できるのは`Organization Owner`のみです。
 
 ### 手動バックアップを作成する {#create-a-manual-backup}
 
