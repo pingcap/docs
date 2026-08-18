@@ -5,7 +5,7 @@ summary: Learn how to use Statement Insight to analyze historical RU consumption
 
 # Statement Insight (PREVIEW)
 
-**Statement Insight** provides multi-dimensional analysis of SQL resource consumption for your {{{ .premium }}}, {{{ .byoc }}}, {{{ .essential }}} instances. It breaks down Request Unit (RU) consumption, latency, and execution counts by **DB User**, **DB**, **Table**, **SQL Type**, or **SQL Digest**, with leaderboards and trend charts that surface your top contributors at a glance. Use Statement Insight to establish RU and performance baselines from historical data and pinpoint what is driving RU consumptions or slowdowns.
+**Statement Insight** provides multi-dimensional analysis of SQL resource consumption for your <CustomContent plan="essential,premium">{{{ .essential }}} and {{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .essential }}}, {{{ .premium }}}, and {{{ .byoc }}}</CustomContent> instances. It breaks down Request Unit (RU) consumption, latency, and execution counts by **DB User**, **DB**, **Table**, **SQL Type**, or **SQL Digest**, with leaderboards and trend charts that surface your top contributors at a glance. Use Statement Insight to establish RU and performance baselines from historical data and pinpoint what is driving RU consumption or slowdowns.
 
 Statement Insight is a historical, baseline-oriented view. 
 
