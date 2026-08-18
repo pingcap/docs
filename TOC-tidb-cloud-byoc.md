@@ -59,7 +59,7 @@
     - [TiFlash Late Materialization](/tiflash/tiflash-late-materialization.md)
     - [Compatibility](/tiflash/tiflash-compatibility.md)
     - [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md)
-  - Use Tiered Storage
+  - Use Tiered Storage ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [Overview](/tidb-cloud/tiered-storage-overview.md)
     - [Operations](/tidb-cloud/tiered-storage-operations.md)
     - [Limitations](/tidb-cloud/tiered-storage-limitations.md)
