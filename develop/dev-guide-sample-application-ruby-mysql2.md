@@ -262,7 +262,7 @@ client = Mysql2::Client.new(options)
 
 > **Note**
 >
-> [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、パブリック エンドポイントを使用する際には`DATABASE_ENABLE_SSL`を介して TLS 接続を有効にする**必要があります****が**、mysql2 gem が特定の順序で既存の CA 証明書を検索してファイルが見つかるまで検索するため、 `DATABASE_SSL_CA`を介して SSL CA 証明書を指定する必要はありません。
+> [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、パブリック エンドポイントを使用する際には`DATABASE_ENABLE_SSL`を介して TLS 接続を有効にする**必要があります**が、mysql2 gem が特定の順序で既存の CA 証明書を検索してファイルが見つかるまで検索するため、 `DATABASE_SSL_CA`を介して SSL CA 証明書を指定する必要はありません。
 
 ### データを挿入する {#insert-data}
 

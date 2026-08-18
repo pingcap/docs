@@ -196,7 +196,7 @@ Oktaと同様に、 [オーソ0](https://auth0.com/)もOIDC SSOアイデンテ�
 
 ### ステップ2: OIDC情報を取得し、TiDB Dashboardに入力します {#step-2-obtain-oidc-information-and-fill-in-tidb-dashboard}
 
-1.  Auth0 の**[設定]**タブの**基本情報**の**クライアント****ID を、TiDB Dashboardの OIDC クライアント**ID に入力します。
+1.  Auth0 の**[設定]**タブの**基本情報**にある**クライアント ID**を、TiDB Dashboardの**OIDC クライアント ID**に入力します。
 
 2.  **OIDC検出URL**に、**ドメイン**フィールドの値の先頭に`https://` 、末尾に`/`入力します（例： `https://example.us.auth0.com/` ）。認証を完了し、設定を保存します。
 

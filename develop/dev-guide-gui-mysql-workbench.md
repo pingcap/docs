@@ -183,7 +183,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 このエラーは、クエリの実行時間がタイムアウト制限を超えたことを示しています。この問題を解決するには、以下の手順でタイムアウト設定を調整してください。
 
 1.  MySQL Workbenchを起動し、 **Workbenchの設定**ページに移動します。
-2.  **SQLエディタの****「MySQLセッション」**セクションで、 **「DBMS接続読み取りタイムアウト間隔（秒）」**オプションを設定します。これは、MySQL Workbenchがサーバーから切断されるまでにクエリが実行できる最大時間（秒単位）を設定します。
+2.  **SQL Editor** > **MySQL Session**セクションで、 **「DBMS接続読み取りタイムアウト間隔（秒）」**オプションを設定します。これは、MySQL Workbenchがサーバーから切断されるまでにクエリが実行できる最大時間（秒単位）を設定します。
 
     ![MySQL Workbench: adjust timeout option in SQL Editor settings](/media/develop/mysql-workbench-adjust-sqleditor-read-timeout.jpg)
 
