@@ -146,7 +146,7 @@ For more information, see [Event filter rules](/ticdc/ticdc-filter.md#event-filt
 
 - `ignore-update-new-value-expr = "gender = 'male'"` ignores `UPDATE` DMLs whose new value contains `gender = 'male'`
 
-##### `ignore-update-only-columns` <span class="version-mark">Introduced in v8.5.8</span>
+##### `ignore-update-only-columns` <span class="version-mark">Introduced in v8.5.9</span>
 
 - This configuration item is an array of column names and applies only to Kafka downstreams.
 - `ignore-update-only-columns = ["version", "updated_at"]` filters out an `UPDATE` DML event when the event changes only the `version` column, the `updated_at` column, or both. If the event also changes a column that is not in the list, TiCDC sends the event to the downstream.

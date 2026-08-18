@@ -123,7 +123,7 @@ Description of configuration parameters:
 - `ignore-insert-value-expr`: this parameter accepts a SQL expression that follows the default SQL mode, used to filter out the `INSERT` type of DML events with a specified value.
 - `ignore-update-old-value-expr`: this parameter accepts a SQL expression that follows the default SQL mode, used to filter out the `UPDATE` type of DML events with a specified old value.
 - `ignore-update-new-value-expr`: this parameter accepts a SQL expression that follows the default SQL mode, used to filter out the `UPDATE` DML events with a specified new value.
-- `ignore-update-only-columns` <span class="version-mark">Introduced in v8.5.8</span>: specifies a set of column names. For tables matching `matcher`, if all columns whose values are changed in an `UPDATE` event are included in this list, TiCDC filters out the event. If any changed column is not included in the list, TiCDC sends the event to the downstream. This configuration applies only to Kafka downstreams and does not affect `INSERT` or `DELETE` events.
+- `ignore-update-only-columns`: specifies a set of column names. Introduced in v8.5.9. For tables matching `matcher`, if all columns whose values are changed in an `UPDATE` event are included in this list, TiCDC filters out the event. If any changed column is not included in the list, TiCDC sends the event to the downstream. This configuration applies only to Kafka downstreams and does not affect `INSERT` or `DELETE` events.
 
     When using this configuration, note the following:
 
