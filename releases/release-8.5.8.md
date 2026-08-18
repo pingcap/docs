@@ -20,7 +20,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + TiKV
 
-    - Add the optional TiKV configuration parameter `server.end-point-max-bg-concurrency` to limit background `ANALYZE` task concurrency independently of ordinary coprocessor requests, preventing `ANALYZE` from occupying shared coprocessor concurrency and reducing performance degradation and request latency under high concurrency [#19623](https://github.com/tikv/tikv/issues/19623) [#19969](https://github.com/tikv/tikv/issues/19969) @[LykxSassinator](https://github.com/LykxSassinator) <!-- component: tikv --> <!-- pr: https://github.com/tikv/tikv/pull/19973 --> <!-- pr: https://github.com/tikv/tikv/pull/19926 -->
     - Reduce CPU overhead in TiKV raftstore peer and store FSM message handling by avoiding eager slow-log message formatting for fast message batches [#19861](https://github.com/tikv/tikv/issues/19861) @[pingyu](https://github.com/pingyu) <!-- component: tikv --> <!-- pr: https://github.com/tikv/tikv/pull/19910 -->
 
 + Tools
