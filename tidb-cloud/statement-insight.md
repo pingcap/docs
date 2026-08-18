@@ -12,7 +12,7 @@ Statement Insight is a historical, baseline-oriented view.
 > **Note:**
 >
 > Statement Insight is in public preview and available only for a limited number of <CustomContent plan="essential,premium">{{{ .essential }}} and {{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .essential }}}, {{{ .premium }}}, and {{{ .byoc }}}</CustomContent> instances created on or after August 19, with broader rollout planned in a subsequent release. To request early access, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
-> For instances where Statement Insight is not yet available, you can continue to use SQL Statement in the meantime.
+> For instances where Statement Insight is not yet available, you can continue to use the [SQL Statement](/tidb-cloud/tune-performance.md#statement-analysis) tab for statement analysis in the meantime.
 
 ## Before you begin
 
