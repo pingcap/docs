@@ -34,7 +34,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
       For more information, see the following documentation:
 
         - [External Function](https://docs.pingcap.com/tidbcloudlake/external-function/)
-        - dbt
+        - [dbt](https://docs.pingcap.com/tidbcloudlake/load-with-dbt)
 
 ## August 11, 2026
 
