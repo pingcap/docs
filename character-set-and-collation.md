@@ -451,6 +451,20 @@ To disable this error reporting, use `set @@tidb_skip_utf8_check=1;` to skip the
 >
 > If the character check is skipped, TiDB might fail to detect illegal UTF-8 characters written by the application, cause decoding errors when `ANALYZE` is executed, and introduce other unknown encoding issues. If your application cannot guarantee the validity of the written string, it is not recommended to skip the character check.
 
+In certain SQL statements, comparisons might involve invalid UTF-8 characters. For example:
+
+```sql
+SELECT * FROM `t` WHERE `id` > 'a" + string([]byte{0xff}) + "a';
+```
+
+In the preceding statement, `0xff` is an invalid UTF-8 byte. When handling such characters, TiDB behaves differently depending on the collation <span class="version-mark">New in v9.0.0</span>:
+
+* Non-binary collations (such as `utf8mb4_general_ci`): TiDB truncates the string at the invalid byte. The truncated part is excluded from the comparison.
+
+* `gbk_bin` and `gb18030_bin` collations: TiDB replaces invalid bytes with the character `?` and continues with the comparison.
+
+* Other binary collations (such as `utf8_bin`): TiDB treats invalid bytes as ordinary bytes and compares them based on their original binary values.
+
 ## Collation support framework
 
 <CustomContent platform="tidb">
