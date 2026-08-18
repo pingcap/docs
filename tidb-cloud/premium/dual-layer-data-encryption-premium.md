@@ -132,7 +132,7 @@ TiDB Cloudに暗号化キーの管理を代行させるには、以下の手順�
 
 開始する前に、クラウドプロバイダーのKMSで対称暗号化キーを作成済みであることを確認してください。次に、以下の手順を実行してください。
 
-1.  TiDB Cloud Premiumインスタンスの**Security**ページで、 **「二重層データ暗号化」**セクションの**「有効にする」**をクリックします。
+1.  TiDB Cloud Premiumインスタンスの**Security**ページで、 **「二重層データ暗号化」**セクションの**Enable**をクリックします。
 
 2.  **Customer-Managed Encryption Key (CMEK)**を選択し、 **Add KMS Key ARN**をクリックします。
 
@@ -151,7 +151,7 @@ TiDB Cloudに暗号化キーの管理を代行させるには、以下の手順�
 
 TiDB Cloudに暗号化キーの管理を代行させるには、以下の手順に従ってください。
 
-1.  TiDB Cloud Premiumインスタンスの**Security**ページで、 **「二重層データ暗号化」**セクションの**「有効にする」**をクリックします。
+1.  TiDB Cloud Premiumインスタンスの**Security**ページで、 **「二重層データ暗号化」**セクションの**Enable**をクリックします。
 2.  **Service-Managed Encryption Key**を選択してください。
 3.  **Enable**をクリックしてください。
 
