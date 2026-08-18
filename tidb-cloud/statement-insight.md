@@ -36,7 +36,7 @@ Use the filters at the top of the page to narrow down the data:
 - **SQL Type**: filter by SQL statement type, such as `SELECT`, `INSERT`, or `UPDATE`.
 - **Database**: filter by the database that the SQL statements ran against.
 - **Table**: filter by the table that the SQL statements ran against.
-- **SQL Digest**: filter by a specific SQL digest.
+- **Keyword**: filter by a keyword that matches the SQL digest text.
 
 All filters can be combined to narrow the analysis to the SQL statements you care about.
 
