@@ -409,7 +409,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
 
 2.  [Amazon VPC コンソール](https://console.aws.amazon.com/vpc/)で、左側のナビゲーションペインの**[エンドポイント サービス]**をクリックし、 **Create endpoint service**をクリックします。次の設定を構成します。
 
-    -   **Load balancer type**を**「ネットワーク」**に設定し、前の手順で作成したNLBを選択します。**Available load balancers**リストが空の場合は、NLBが**アクティブ**状態になるまで待ってから、リストの横にある更新アイコンをクリックします。
+    -   **Load balancer type**を**Network**に設定し、前の手順で作成したNLBを選択します。**Available load balancers**リストが空の場合は、NLBが**アクティブ**状態になるまで待ってから、リストの横にある更新アイコンをクリックします。
     -   **承認が必要**：有効（デフォルト）。
     -   **Supported IP address types**： **IPv4**を選択してください。
 
@@ -495,7 +495,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
 
 2.  [Amazon VPC コンソール](https://console.aws.amazon.com/vpc/)で、左側のナビゲーションペインの**[エンドポイント サービス]**をクリックし、 **Create endpoint service**をクリックします。次の設定を構成します。
 
-    -   **Load balancer type**を**「ネットワーク」**に設定し、前の手順で作成したNLBを選択します。**Available load balancers**リストが空の場合は、NLBが**アクティブ**状態になるまで待ってから、リストの横にある更新アイコンをクリックします。
+    -   **Load balancer type**を**Network**に設定し、前の手順で作成したNLBを選択します。**Available load balancers**リストが空の場合は、NLBが**アクティブ**状態になるまで待ってから、リストの横にある更新アイコンをクリックします。
     -   **承認が必要**：有効（デフォルト）。
     -   **Supported IP address types**： **IPv4**を選択してください。
 
