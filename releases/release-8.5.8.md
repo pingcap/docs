@@ -28,10 +28,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     + TiCDC
 
         - Improve TiCDC changefeed scan performance when delete events are ignored, reducing unnecessary DML decoding during historical catch-up for delete-heavy workloads [#5430](https://github.com/pingcap/ticdc/issues/5430) @[asddongmen](https://github.com/asddongmen) <!-- component: cdc --> <!-- pr: https://github.com/pingcap/ticdc/pull/5767 -->
-        - Improve TiCDC Kafka sink behavior by separating the changefeed `max-message-bytes` batching threshold from Kafka's actual message size limit, so large row events that are within the Kafka topic or broker limit can be sent without changing the changefeed configuration [#1405](https://github.com/pingcap/ticdc/issues/1405) @[3AceShowHand](https://github.com/3AceShowHand) <!-- component: cdc --> <!-- pr: https://github.com/pingcap/ticdc/pull/5772 -->
         - Support configuring TiCDC event collector batching by both event count and total bytes for changefeeds, so you can tune batch size more consistently across different workloads and sinks [#3237](https://github.com/pingcap/ticdc/issues/3237) @[3AceShowHand](https://github.com/3AceShowHand) <!-- component: cdc --> <!-- pr: https://github.com/pingcap/ticdc/pull/5942 -->
         - Improve TiCDC event service stability and throughput under memory pressure by introducing an adaptive scan window algorithm, reducing dispatcher starvation and reset events during DDL and sync point workloads [#4172](https://github.com/pingcap/ticdc/issues/4172) @[asddongmen](https://github.com/asddongmen) <!-- component: cdc --> <!-- pr: https://github.com/pingcap/ticdc/pull/5761 -->
-        - Add the `ignore-update-only-columns` event filter option for TiCDC Kafka sinks to skip `UPDATE` events when only the specified columns change, reducing unnecessary downstream traffic [#5269](https://github.com/pingcap/ticdc/issues/5269) @[lidezhu](https://github.com/lidezhu) <!-- component: cdc --> <!-- pr: https://github.com/pingcap/ticdc/pull/5738 -->
 
 ## Bug fixes
 
