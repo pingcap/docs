@@ -63,7 +63,7 @@ The **Resource Usage Over Time** trend chart shows how the selected metric chang
 
 ## Limitations
 
-- Statement Insight is intended for historical analysis and RU or performance baselining. The displayed RU differs from the RU usage reported on your TiDB Cloud invoice due to differences in collection and aggregation（Statement Insight displays cumulative RU consumption）. Do not use Statement Insight data for billing reconciliation.
+- Statement Insight is intended for historical analysis and RU or performance baselining. The displayed RU differs from the RU usage reported on your TiDB Cloud invoice due to differences in data collection and aggregation (Statement Insight displays cumulative RU consumption). Do not use Statement Insight data for billing reconciliation.
 - Data freshness is up to **10 minutes**, matching the underlying collection cycle.
 
 ## FAQ
