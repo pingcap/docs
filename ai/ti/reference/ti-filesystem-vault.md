@@ -148,7 +148,7 @@ ti fs-vault mount-vault \
   --vault-token "$TI_VAULT_TOKEN"
 ```
 
-The mount is read-only. `--foreground` keeps it attached to the terminal, and `--ready-timeout` changes the background readiness wait.
+The mount is read-only. The command starts the runtime in the background, waits until it is ready, and then returns. `--ready-timeout` changes the readiness wait.
 
 Unmount:
 

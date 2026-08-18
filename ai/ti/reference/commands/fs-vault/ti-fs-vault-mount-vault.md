@@ -18,7 +18,6 @@ ti fs-vault mount-vault
   --mount-path <string>
   [--dry-run]
   [--file-system-id <string>]
-  [--foreground]
   [--fs-token <string>]
   [--help]
   [--ready-timeout <duration>]
@@ -31,7 +30,6 @@ ti fs-vault mount-vault
 - `--mount-path <string>`: Local mount path. \[required]
 - `--dry-run`: Validate the request without applying changes.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--foreground`: Run mount runtime in the foreground until interrupted.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TI_FS_TOKEN`.
 - `--help`: Display help information.
 - `--ready-timeout <duration>`: Time to wait for a background mount to become ready. \[default: `30s`]
@@ -49,11 +47,11 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
     ti fs-vault mount-vault --file-system-id <file-system-id> --mount-path ./vault --vault-token "$TI_VAULT_TOKEN"
     ```
 
-- Run the Vault mount in the foreground:
+- Allow more time for the Vault mount to become ready:
 
     ```bash
-    # Keep the runtime attached for containers or process supervisors.
-    ti fs-vault mount-vault --file-system-id <file-system-id> --mount-path ./vault --foreground --ready-timeout 60s
+    # Increase the readiness timeout on a slower host or network.
+    ti fs-vault mount-vault --file-system-id <file-system-id> --mount-path ./vault --ready-timeout 60s
     ```
 
 ## Related documentation

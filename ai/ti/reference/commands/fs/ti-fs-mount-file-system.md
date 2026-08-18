@@ -7,7 +7,7 @@ summary: Mount a TiDB Cloud Filesystem.
 
 Mounts a Filesystem through automatic, FUSE, or WebDAV mode. The command alias is `ti fs mount`.
 
-In the default background mode, the command waits for the mount to become ready and then prints the TiDB Cloud CLI mount result. It suppresses companion startup messages, including Drive9-specific unmount guidance. If startup fails, the error includes the companion log path for diagnosis. With `--foreground`, companion runtime output remains attached to the terminal.
+The command starts the mount runtime in the background, waits for the mount to become ready, and then prints the TiDB Cloud CLI mount result. It suppresses companion startup messages, including Drive9-specific unmount guidance. If startup fails, the error includes the companion log path for diagnosis. Use `ti fs unmount-file-system` to end the mount.
 
 > **Note:**
 >
@@ -22,7 +22,6 @@ ti fs mount-file-system
   [--driver <string>]
   [--dry-run]
   [--file-system-id <string>]
-  [--foreground]
   [--fs-token <string>]
   [--help]
   [--local-root <string>]
@@ -47,7 +46,6 @@ ti fs mount-file-system
 - `--driver <string>`: Mount driver: `auto`, `fuse`, or `webdav`. \[default: auto]
 - `--dry-run`: Validate the request without applying changes.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--foreground`: Run the mount runtime in the foreground until interrupted.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TI_FS_TOKEN`.
 - `--help`: Display help information.
 - `--local-root <string>`: Local overlay root. If omitted, uses `~/.ti/local/fs/<mount-hash>`.

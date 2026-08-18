@@ -361,7 +361,7 @@ ti fs mount-file-system \
   --mount-path /path/to/workspace
 ```
 
-The default `--driver auto` is platform-specific. `--remote-path` exposes a subtree, `--read-only` prevents writes, and `--foreground` keeps the runtime attached to the terminal.
+The default `--driver auto` is platform-specific. `--remote-path` exposes a subtree, and `--read-only` prevents writes. The command starts the mount runtime in the background, waits until it is ready, and then returns. Use `ti fs unmount-file-system` to end the mount.
 
 ### Platform behavior
 
