@@ -784,8 +784,8 @@ TiDB v6.0以降、TiDBは`KILL`ステートメントを使用して、バック�
 -   [ロード統計](/sql-statements/sql-statement-load-stats.md)
 -   [ドロップ統計](/sql-statements/sql-statement-drop-stats.md)
 -   [ロック統計](/sql-statements/sql-statement-lock-stats.md)
--   [統計情報をアンロックする](/sql-statements/sql-statement-unlock-stats.md)
--   [統計情報ロックを表示](/sql-statements/sql-statement-show-stats-locked.md)
+-   [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
+-   [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
 
 </CustomContent>
 
@@ -793,7 +793,7 @@ TiDB v6.0以降、TiDBは`KILL`ステートメントを使用して、バック�
 
 -   [ロード統計](/sql-statements/sql-statement-load-stats.md)
 -   [ロック統計](/sql-statements/sql-statement-lock-stats.md)
--   [統計情報をアンロックする](/sql-statements/sql-statement-unlock-stats.md)
--   [統計情報ロックを表示](/sql-statements/sql-statement-show-stats-locked.md)
+-   [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
+-   [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
 
 </CustomContent>
