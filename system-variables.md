@@ -651,7 +651,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential). TiDB Cloud controls its effective value.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -661,6 +661,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - The value should be an integer multiple of 1024. If the value is not divisible by 1024, a warning will be prompted and the value will be rounded down. For example, when the value is set to 1025, the actual value in TiDB is 1024.
 - The maximum packet size allowed by the server and the client in one transmission of packets.
 - In the `SESSION` scope, this variable is read-only.
+- In Starter deployment mode, [`max-allowed-packet`](/tidb-configuration-file.md#max-allowed-packet-new-in-v900) configures the effective value. TiDB uses this value when initializing sessions and when reporting the global `max_allowed_packet` value.
 - This variable is compatible with MySQL.
 
 ### max_connections
@@ -889,6 +890,8 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 > **Note:**
 >
 > Currently, this variable is not supported on [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). DO **NOT** enable this variable for TiDB Cloud Dedicated clusters. Otherwise, you might get SQL client connection failures. This restriction is a temporary control measure and will be resolved in a future release.
+>
+> For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), this variable is read-only and always returns `ON`.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -904,11 +907,11 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 <CustomContent platform="tidb-cloud">
 
-- This variable ensures that all connections to TiDB are either on a local socket, or using TLS.
+- For TiDB Cloud, the service manages secure connection behavior. For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), this variable is exposed as `ON` and cannot be changed by SQL statements.
 
 </CustomContent>
 
-- Setting this variable to `ON` requires you to connect to TiDB from a session that has TLS enabled. This helps prevent lock-out scenarios when TLS is not configured correctly.
+- For TiDB Self-Managed, setting this variable to `ON` requires you to connect to TiDB from a session that has TLS enabled. This helps prevent lock-out scenarios when TLS is not configured correctly.
 - This setting was previously a `tidb.toml` option (`security.require-secure-transport`), but changed to a system variable starting from TiDB v6.1.0.
 - Starting from v6.5.6, v7.1.2, v7.5.1, and v8.0.0, when Security Enhanced Mode (SEM) is enabled, setting this variable to `ON` is prohibited to avoid potential connectivity issues for users.
 
@@ -3154,6 +3157,77 @@ This variable is used to set the concurrency of the following SQL operators (to 
 Since v5.0, you can still separately modify the system variables listed above (with a deprecation warning returned) and your modification only affects the corresponding single operators. After that, if you use `tidb_executor_concurrency` to modify the operator concurrency, the separately modified operators will not be affected. If you want to use `tidb_executor_concurrency` to modify the concurrency of all operators, you can set the values of all variables listed above to `-1`.
 
 For a system upgraded to v5.0 from an earlier version, if you have not modified any value of the variables listed above (which means that the `tidb_hash_join_concurrency` value is `5` and the values of the rest are `4`), the operator concurrency previously managed by these variables will automatically be managed by `tidb_executor_concurrency`. If you have modified any of these variables, the concurrency of the corresponding operators will still be controlled by the modified variables.
+
+### tidb_exp_embed_cohere_api_key
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: String
+- Default value: `""`
+- This variable specifies the API key that [`EMBED_TEXT()`](/ai/reference/vector-search-functions-and-operators.md#embed_text) uses for models with the `cohere/` prefix in Starter deployment mode. For usage information, see [Cohere Embeddings](/ai/integrations/vector-search-auto-embedding-cohere.md).
+- When you read this variable, TiDB returns a masked value. TiDB fully redacts the key value from `SET` statements in logs and the process list.
+
+### tidb_exp_embed_gemini_api_key
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: String
+- Default value: `""`
+- This variable specifies the API key that [`EMBED_TEXT()`](/ai/reference/vector-search-functions-and-operators.md#embed_text) uses for models with the `gemini/` prefix in Starter deployment mode. For usage information, see [Gemini Embeddings](/ai/integrations/vector-search-auto-embedding-gemini.md).
+- When you read this variable, TiDB returns a masked value. TiDB fully redacts the key value from `SET` statements in logs and the process list.
+
+### tidb_exp_embed_huggingface_api_key
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: String
+- Default value: `""`
+- This variable specifies the API key that [`EMBED_TEXT()`](/ai/reference/vector-search-functions-and-operators.md#embed_text) uses for models with the `huggingface/` prefix in Starter deployment mode. For usage information, see [Hugging Face Embeddings](/ai/integrations/vector-search-auto-embedding-huggingface.md).
+- When you read this variable, TiDB returns a masked value. TiDB fully redacts the key value from `SET` statements in logs and the process list.
+
+### tidb_exp_embed_jina_ai_api_key
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: String
+- Default value: `""`
+- This variable specifies the API key that [`EMBED_TEXT()`](/ai/reference/vector-search-functions-and-operators.md#embed_text) uses for models with the `jina_ai/` prefix in Starter deployment mode. For usage information, see [Jina AI Embeddings](/ai/integrations/vector-search-auto-embedding-jina-ai.md).
+- When you read this variable, TiDB returns a masked value. TiDB fully redacts the key value from `SET` statements in logs and the process list.
+
+### tidb_exp_embed_nvidia_nim_api_key
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: String
+- Default value: `""`
+- This variable specifies the API key that [`EMBED_TEXT()`](/ai/reference/vector-search-functions-and-operators.md#embed_text) uses for models with the `nvidia_nim/` prefix in Starter deployment mode. For usage information, see [NVIDIA NIM Embeddings](/ai/integrations/vector-search-auto-embedding-nvidia-nim.md).
+- When you read this variable, TiDB returns a masked value. TiDB fully redacts the key value from `SET` statements in logs and the process list.
+
+### tidb_exp_embed_openai_api_base
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: String
+- Default value: `"https://api.openai.com/v1"`
+- This variable specifies the base URL that [`EMBED_TEXT()`](/ai/reference/vector-search-functions-and-operators.md#embed_text) uses for models with the `openai/` prefix in Starter deployment mode. Setting the value to an empty string restores the default URL.
+- The value must be an absolute HTTPS URL without query parameters or a fragment. The host must be OpenAI (`api.openai.com`), Azure OpenAI (`*.openai.azure.com`), or an Alibaba Cloud DashScope endpoint (`dashscope.aliyuncs.com`, `dashscope-intl.aliyuncs.com`, or `dashscope-us.aliyuncs.com`).
+- For usage information, see [OpenAI Embeddings](/ai/integrations/vector-search-auto-embedding-openai.md).
+
+### tidb_exp_embed_openai_api_key
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: String
+- Default value: `""`
+- This variable specifies the API key that [`EMBED_TEXT()`](/ai/reference/vector-search-functions-and-operators.md#embed_text) uses for models with the `openai/` prefix in Starter deployment mode. For usage information, see [OpenAI Embeddings](/ai/integrations/vector-search-auto-embedding-openai.md).
+- When you read this variable, TiDB returns a masked value. TiDB fully redacts the key value from `SET` statements in logs and the process list.
 
 ### tidb_expensive_query_time_threshold
 

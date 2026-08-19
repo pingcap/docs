@@ -15,6 +15,37 @@ The TiDB configuration file supports more options than command-line parameters. 
 >
 > If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
 
+### `deploy-mode`
+
+- Specifies the deployment mode of a NextGen TiDB instance.
+- Default value: `"premium"`
+- Possible values: `"premium"`, `"premium_reserved"`, and `"starter"`
+- This configuration item is initialized when TiDB starts and cannot be changed at runtime.
+- This configuration item is supported only by NextGen TiDB. For Starter deployment mode, set the value to `"starter"`.
+
+### `keyspace-activate`
+
+- Controls whether TiDB exits after activating the specified keyspace.
+- Default value: `false`
+- This configuration item takes effect only in Starter deployment mode.
+- You cannot enable `keyspace-activate` and [`standby.standby-mode`](#standby-mode) at the same time.
+
+### `error-msg-extension`
+
+- Appends a configured suffix to a SQL error when the error message matches a regular expression.
+- Default value: `[]`
+- This configuration item takes effect only in Starter deployment mode.
+- Each array element contains a `pattern` field and a `suffix` field. TiDB removes trailing periods from the original error and the suffix, and then returns the extended error in the format `<original error>, <suffix>.`.
+- If multiple patterns match an error, TiDB applies only the first match after sorting patterns by length in descending order. To avoid matching unrelated errors, use anchored and specific patterns.
+
+For example:
+
+```toml
+error-msg-extension = [
+  { pattern = "^Feature '.+' is not supported$", suffix = "see the feature limitations for more details" },
+]
+```
+
 ### `split-table`
 
 - Determines whether to create a separate Region for each table.
@@ -42,6 +73,15 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Default value: `1000`
 + Minimum value: `1`
 + Maximum value: `1048576`
+
+### `max-allowed-packet` <span class="version-mark">New in v9.0.0</span>
+
++ Configures the effective value of [`max_allowed_packet`](/system-variables.md#max_allowed_packet-new-in-v610) in Starter deployment mode.
++ Default value: `67108864` (64 MiB)
++ Minimum value: `1024`
++ Maximum value: `1073741824`
++ The value must be an integer multiple of `1024`.
++ This configuration item takes effect only in Starter deployment mode. In other deployment modes, configure the packet size using the [`max_allowed_packet`](/system-variables.md#max_allowed_packet-new-in-v610) system variable where it is writable. On TiDB Cloud Essential, the variable is read-only and controlled by TiDB Cloud.
 
 ### `temp-dir` <span class="version-mark">New in v6.3.0</span>
 
@@ -522,7 +562,7 @@ Configuration items related to performance.
 - The size limit of a single key-value record in a transaction. If the size limit is exceeded, TiDB returns the `entry too large` error. The maximum value of this configuration item does not exceed `125829120` (120 MB).
 - Starting from v7.6.0, you can use the system variable [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760) to dynamically modify the value of this configuration item.
 - Note that TiKV has a similar limit. If the data size of a single write request exceeds [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size), which is 8 MB by default, TiKV refuses to process this request. When a table has a row of large size, you need to modify both configurations at the same time.
-- The default value of [`max_allowed_packet`](/system-variables.md#max_allowed_packet-new-in-v610) (the maximum size of a packet for the MySQL protocol) is 67108864 (64 MiB). If a row is larger than `max_allowed_packet`, the row gets truncated.
+- The default value of [`max_allowed_packet`](/system-variables.md#max_allowed_packet-new-in-v610) (the maximum size of a packet for the MySQL protocol) is 67108864 (64 MiB). In Starter deployment mode, [`max-allowed-packet`](#max-allowed-packet-new-in-v900) configures its effective value. If a row is larger than `max_allowed_packet`, the row gets truncated.
 - The default value of [`txn-total-size-limit`](#txn-total-size-limit) (the size limit of a single transaction in TiDB) is 100 MiB. If you increase the `txn-entry-size-limit` value to be over 100 MiB, you need to increase the `txn-total-size-limit` value accordingly.
 
 ### `txn-total-size-limit`
@@ -1076,3 +1116,75 @@ The `experimental` section, introduced in v3.1.0, describes the configurations r
 
 + Controls whether an expression index can be created. Since TiDB v5.2.0, if the function in an expression is safe, you can create an expression index directly based on this function without enabling this configuration. If you want to create an expression index based on other functions, you can enable this configuration, but correctness issues might exist. By querying the `tidb_allow_function_for_expression_index` variable, you can get the functions that are safe to be directly used for creating an expression.
 + Default value: `false`
+
+## standby
+
+Configuration items related to the standby and idle shutdown behavior of NextGen TiDB.
+
+### `standby-mode`
+
+- Controls whether TiDB starts in standby mode and waits for a keyspace activation request before starting SQL service.
+- Default value: `false`
+- You cannot enable `standby-mode` and [`keyspace-activate`](#keyspace-activate) at the same time.
+
+### `activation-timeout`
+
+- Specifies the maximum time that TiDB waits for activation to complete after receiving an activation request in standby mode.
+- Default value: `0`, which means that there is no timeout.
+- Unit: seconds
+
+### `max-idle-seconds`
+
+- Specifies the maximum idle time of an activated TiDB instance. When the instance remains idle for longer than this value and has no active transaction or query that prevents shutdown, TiDB exits.
+- Default value: `0`, which means that the idle timeout is disabled.
+- Unit: seconds
+
+### `enable-zero-backend`
+
+- Controls the idle shutdown behavior in Starter deployment mode.
+- Default value: `false`. In Starter deployment mode, if you do not explicitly configure this item, TiDB changes its effective default value to `true`.
+- When the value is `true`, TiDB does not wait for session migration during idle shutdown and does not treat interactive client connections as active work that prevents shutdown. Active queries and transactions still prevent idle shutdown.
+
+## starter-params
+
+Configuration items that take effect only in Starter deployment mode.
+
+### `bootstrap-file`
+
+- Specifies the path to a JSON manifest that initializes and upgrades Starter-specific SQL state.
+- Default value: `""`, which disables the manifest.
+- The manifest must contain exactly one JSON object and cannot contain unknown fields. The top-level `version` must be greater than `0`.
+- The `bootstrap` array defines the complete state for a keyspace that does not have a recorded Starter bootstrap version. It must contain at least one statement when the manifest initializes such a keyspace. The `upgrades` array defines migrations for keyspaces with an earlier recorded version.
+- Each upgrade version must be greater than `0`, no greater than the top-level `version`, and unique within the manifest.
+- Each element in a SQL array must contain exactly one statement. `<keyspace>` is the only supported placeholder and is replaced with the current keyspace name.
+- The statements in `bootstrap` must be `INSERT`, `REPLACE`, `UPDATE`, or `DELETE` statements. Together, they must create the `<keyspace>.root` account with host `%`.
+- For a keyspace without a recorded Starter bootstrap version, TiDB executes `bootstrap` directly and records the top-level version without replaying `upgrades`. For an existing keyspace, TiDB applies upgrade entries in version order.
+- Make every statement retry-safe and idempotent because TiDB might retry initialization or an upgrade after a startup failure.
+
+The following is an example manifest:
+
+```json
+{
+  "version": 2,
+  "bootstrap": [
+    "INSERT INTO mysql.user (Host, User, authentication_string, plugin) VALUES ('%', '<keyspace>.root', '', 'mysql_native_password') ON DUPLICATE KEY UPDATE authentication_string = VALUES(authentication_string), plugin = VALUES(plugin)",
+    "INSERT INTO mysql.global_grants (User, Host, Priv) VALUES ('<keyspace>.root', '%', 'SYSTEM_VARIABLES_ADMIN') ON DUPLICATE KEY UPDATE WITH_GRANT_OPTION = 'N'"
+  ],
+  "upgrades": [
+    {
+      "version": 2,
+      "sql": [
+        "INSERT INTO mysql.global_grants (User, Host, Priv) VALUES ('<keyspace>.root', '%', 'SYSTEM_VARIABLES_ADMIN') ON DUPLICATE KEY UPDATE WITH_GRANT_OPTION = 'N'"
+      ]
+    }
+  ]
+}
+```
+
+### `max-import-data-size`
+
+- Specifies the maximum total real size of source data that one [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statement can import.
+- Default value: `"25GiB"` when this configuration item is not explicitly configured.
+- To disable the data size limit, explicitly set this configuration item to `"0B"`.
+- This configuration item accepts byte-size values such as `"1MiB"`.
+- When the source data exceeds the limit, `IMPORT INTO` returns an error during the synchronous pre-check phase before creating an import job.
