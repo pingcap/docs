@@ -108,48 +108,24 @@ TiDB Cloud 根据你所消耗的资源进行收费。
 > - 月账单中的总金额会四舍五入到小数点后第 2 位。
 > - 每日使用明细中的总金额精确到小数点后第 6 位。
 
-### 行存储 {#row-based-storage}
+以下是与存储相关的计费说明：
 
-TiDB 表默认使用行存储，数据存储在 **TiKV** 中。
+- **Row-based storage**：TiDB 表默认使用行存储，数据存储在 **TiKV** 中。 <!--**Use case:** Core online transactional processing (OLTP) workloads that require low-latency reads and writes.-->
 
-<!--**Use case:** 需要低延时读写的核心在线事务处理 (OLTP) 负载。-->
+- **Row-based storage with IA**：带 Infrequent Access (IA) 的行存储将数据存储在**远程对象存储**中，适用于很少访问但仍需可用于在线查询的数据。 <!--**Use case:** Historical or archival data that is accessed infrequently but still needs to remain queryable while reducing storage costs.-->
 
-### 使用 IA 的行存储 {#row-based-storage-with-ia}
+    > **注意：**
+    >
+    > Infrequent Access 目前对 {{{ .essential }}} 处于私有预览阶段，仅可按请求提供。
 
-使用低频访问 (IA) 的行存储将数据存储在**远程对象存储**中。你可以使用以下 SQL 语句将表的 **Storage Class** 设置为 `IA`：
+- **Columnar storage**：列存储由 **TiFlash** 引擎提供支持。 <!--**Use case:** Online analytical processing (OLAP) workloads that benefit from real-time columnar acceleration without requiring additional ETL.-->
 
-```sql
-ALTER TABLE t1 STORAGE_CLASS='IA';
-```
+- **Dual-layer encryption**：行存储和列存储都支持双层加密。该机制通过两层独立的加密来保护你的数据，确保即使其中一层被破坏，数据仍然受到保护。
 
-> **警告：**
->
-> 低频访问当前是一个**实验特性**，仅在部分区域可用。目前仅支持 {{{ .essential }}}。
+    - 存储层加密：底层云服务提供商使用其原生存储加密机制对所有静态数据进行加密。
+    - 数据库层加密：在云服务提供商加密的基础上，TiDB Cloud 会使用客户管理的加密密钥 (CMEK) 或托管密钥自动应用第二层加密。
 
-<!--**Use case:** 访问频率较低但仍需保持可查询，同时希望降低存储成本的历史或归档数据。-->
-
-> **注意：**
->
-> 低频访问专为很少访问但仍需可用于在线查询的数据而设计。
-
-### 列存储 {#columnar-storage}
-
-列存储由 **TiFlash** 引擎提供支持。要为表启用列存储，请使用以下 SQL 语句添加 TiFlash 副本：
-
-```sql
-ALTER TABLE table_name SET TIFLASH REPLICA n;
-```
-
-<!--**Use case:** 受益于实时列式加速且无需额外 ETL 的在线分析处理 (OLAP) 负载。-->
-
-### 双层加密 {#dual-layer-encryption}
-
-**行存储**和**列存储**都支持双层加密。该机制通过两层独立的加密来保护你的数据，确保即使其中一层被破坏，数据仍然受到保护。
-
-- **基础设施级别加密：**底层云服务提供商使用其原生存储加密机制对所有静态数据进行加密。
-- **TiDB Cloud 级别加密：**在云服务提供商加密的基础上，TiDB Cloud 会使用客户管理的加密密钥 (CMEK) 或托管密钥自动应用第二层加密。
-
-<!--**Use case:** 具有严格安全和合规要求的负载，例如金融服务、政府和医疗保健行业中的负载。-->
+<!--**Use case:** Workloads with strict security and compliance requirements, such as those in the financial services, government, and healthcare industries.-->
 
 ## 成本分析器 {#cost-explorer}
 

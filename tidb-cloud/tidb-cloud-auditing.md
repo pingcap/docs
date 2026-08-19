@@ -272,7 +272,7 @@ TiDB Cloud 支持将 TiDB Cloud Dedicated 集群的审计日志写入你的云�
 2. 在 **Add Filter Rule** 对话框中，配置以下项：
 
     - **Filter Name**：输入过滤规则的名称。
-    - **SQL User**：以 `<user>@<host>` 格式输入 SQL 用户。用户名和主机名可以使用 `%` 匹配任意值，或使用 `_` 匹配任意单个字符。`@` 符号和 `<host>` 为可选项。
+    - **SQL User**：以 `<user>@<host>` 格式输入 SQL 用户。用户名和主机名可以使用 `%` 匹配零个或多个字符，或使用 `_` 匹配恰好一个字符。`@` 符号和 `<host>` 为可选项。
     - **Filter Events**：选择要记录的事件。支持的过滤事件，参见[审计过滤事件](#audit-filter-events)。
 
 3. 点击 **Confirm** 添加过滤规则。

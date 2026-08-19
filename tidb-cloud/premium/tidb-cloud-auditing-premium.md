@@ -251,7 +251,7 @@ TiDB Cloud 支持将 {{{ .premium }}} 实例的审计日志记录到你的云存
 
 </CustomContent>
 
-## 指定审计过滤规则 {#specify-auditing-filter-rules}
+## 配置数据库审计日志记录设置 {#configure-database-audit-logging-settings}
 
 启用审计日志后，你必须指定审计过滤规则，以控制要捕获并写入审计日志的用户访问事件。如果未指定过滤规则，TiDB Cloud 不会记录任何内容。
 
@@ -259,14 +259,37 @@ TiDB Cloud 支持将 {{{ .premium }}} 实例的审计日志记录到你的云存
 
 1. 在 **DB Audit Logging** 页面中，点击 **Log Filter Rules** 部分中的 **Add Filter Rule** 以添加审计过滤规则。
 
-    你一次只能添加一条审计规则。每条规则指定一个用户表达式、数据库表达式、表表达式和访问类型。你可以添加多条审计规则以满足你的审计需求。
+2. 在 **Add Filter Rule** 对话框中，配置以下项目：
 
-2. 在 **Log Filter Rules** 部分中，点击 **>** 以展开并查看你已添加的审计规则列表。
+    - **Filter Name**：输入过滤规则的名称。
+    - **SQL User**：以 `<user>@<host>` 格式输入 SQL 用户。用户名和主机名可以使用 `%` 匹配零个或多个字符，或使用 `_` 精确匹配一个字符。`@` 符号和 `<host>` 是可选的。
+    - **Filter Events**：选择要记录的事件。有关支持的过滤事件，请参见[审计过滤事件](#audit-filter-events)。
+
+3. 点击 **Confirm** 以添加过滤规则。
 
 > **Note:**
 >
-> - 过滤规则是正则表达式，并且区分大小写。如果你使用通配规则 `.*`，则会记录该实例中的所有用户、数据库或表事件。
-> - 由于审计日志会消耗实例资源，因此在指定过滤规则时请谨慎。为尽量减少资源消耗，建议尽可能通过过滤规则将审计日志的范围限制为特定数据库对象、用户和操作。
+> - 由于审计日志会消耗实例资源，因此在指定过滤规则时请谨慎。为尽量减少资源使用，请尽可能通过过滤规则将审计日志限制为特定用户和事件。
+
+## 指定审计过滤规则 {#specify-audit-filter-rules}
+
+启用审计日志后，你必须指定审计过滤规则，以控制要捕获并写入审计日志的用户访问事件。如果未指定过滤规则，TiDB Cloud 不会记录任何内容。
+
+要为实例指定审计过滤规则，请执行以下步骤：
+
+1. 在 **DB Audit Logging** 页面中，点击 **Log Filter Rules** 部分中的 **Add Filter Rule** 以添加审计过滤规则。
+
+2. 在 **Add Filter Rule** 对话框中，配置以下项目：
+
+    - **Filter Name**：输入过滤规则的名称。
+    - **SQL User**：以 `<user>@<host>` 格式输入 SQL 用户。用户名和主机名可以使用 `%` 匹配零个或多个字符，或使用 `_` 精确匹配一个字符。`@` 符号和 `<host>` 是可选的。
+    - **Filter Events**：选择要记录的事件。有关支持的过滤事件，请参见[审计过滤事件](#audit-filter-events)。
+
+3. 点击 **Confirm** 以添加过滤规则。
+
+> **Note:**
+>
+> - 由于审计日志会消耗实例资源，因此在指定过滤规则时请谨慎。为尽量减少资源使用，请尽可能通过过滤规则将审计日志限制为特定用户和事件。
 
 ## 查看审计日志 {#view-audit-logs}
 
@@ -283,6 +306,31 @@ TiDB Cloud 审计日志是可读的文本文件，其完整文件名中包含实
 > **Note:**
 >
 > 每当日志文件大小达到 10 MiB 时，该日志文件就会被推送到云存储 bucket。因此，在禁用审计日志后，大小小于 10 MiB 的日志文件不会自动推送到云存储 bucket。若要获取这种情况下的日志文件，请联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。
+
+## 审计过滤事件 {#audit-filter-events}
+
+下表显示了数据库审计日志中的所有事件类：
+
+| 事件类 | 描述 | 父类 |
+|---------------|--------------------------------------------------------------------------------------------------|---------------|
+| `CONNECTION`    | 记录所有与连接相关的操作，例如连接握手、连接、断开连接、连接重置和用户变更 | -             |
+| `CONNECT`       | 记录所有连接握手操作                                          | `CONNECTION`    |
+| `DISCONNECT`    | 记录所有断开连接操作                                                      | `CONNECTION`    |
+| `CHANGE_USER`   | 记录所有变更用户的操作                                                          | `CONNECTION`    |
+| `QUERY`         | 记录所有 SQL 语句操作，包括查询或修改数据时发生的错误  | -               |
+| `TRANSACTION`   | 记录所有与事务相关的操作，例如 `BEGIN`、`COMMIT` 和 `ROLLBACK`         | `QUERY`         |
+| `EXECUTE`       | 记录所有 `EXECUTE` 语句操作                                                | `QUERY`         |
+| `QUERY_DML`     | 记录所有 DML 语句操作，包括 `INSERT`、`REPLACE`、`UPDATE`、`DELETE` 和 `LOAD DATA`    | `QUERY`     |
+| `INSERT`        | 记录所有 `INSERT` 语句操作                                                   | `QUERY_DML`   |
+| `REPLACE`       | 记录所有 `REPLACE` 语句操作                                                  | `QUERY_DML`   |
+| `UPDATE`        | 记录所有 `UPDATE` 语句操作                                                   | `QUERY_DML`   |
+| `DELETE`        | 记录所有 `DELETE` 语句操作                                                   | `QUERY_DML`   |
+| `LOAD DATA`     | 记录所有 `LOAD DATA` 语句操作                                                | `QUERY_DML`   |
+| `SELECT`        | 记录所有 `SELECT` 语句操作                                                   | `QUERY`       |
+| `QUERY_DDL`     | 记录所有 DDL 语句操作                                                        | `QUERY`       |
+| `AUDIT`         | 记录所有与配置 TiDB Cloud 数据库审计相关的操作，包括设置系统变量和调用系统函数 | -                   |
+| `AUDIT_FUNC_CALL` | 记录所有调用与 TiDB Cloud 数据库审计相关的系统函数的操作        | `AUDIT`       |
+| `AUDIT_SET_SYS_VAR` | 记录所有设置系统变量的操作        | `AUDIT`       |
 
 ## 审计日志字段 {#audit-logging-fields}
 
