@@ -196,7 +196,7 @@ There are some restrictions on using the relay log. DM supports high availabilit
 
 #### Use pt-osc/gh-ost in upstream
 
-In daily MySQL operation and maintenance, usually you use tools such as pt-osc/gh-ost to change the schema online to minimize impact on the business. However, the whole process will be logged to MySQL Binlog. Migrating such data to TiDB downstream will result in a lot of unnecessary write operations, which is neither efficient nor economical.
+In daily MySQL operation and maintenance, usually you use tools such as pt-osc/gh-ost to change the schema online to minimize impact on the business. However, the whole process will be logged to MySQL Binlog. Migrating such data to TiDB downstream will result in many unnecessary write operations, which is neither efficient nor economical.
 
 To resolve this issue, DM supports third-party data tools such as pt-osc and gh-ost when you configure the migration task. When you use such tools, DM does not migrate redundant data and ensure data consistency. For details, see [Migrate from Databases that Use gh-ost/pt-osc](/dm/feature-online-ddl.md).
 
