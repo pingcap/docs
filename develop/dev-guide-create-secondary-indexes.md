@@ -27,7 +27,7 @@ TiDB では、[既存のテーブルにセカンダリインデックスを追�
 
 ## 既存のテーブルにセカンダリインデックスを追加する {#add-a-secondary-index-to-an-existing-table}
 
-既存のテーブルにセカンダリ インデックスを追加するには、次のようにインデックス[CREATE INDEX](/sql-statements/sql-statement-create-index.md)ステートメントを使用できます。
+既存のテーブルにセカンダリ インデックスを追加するには、次のように[CREATE INDEX](/sql-statements/sql-statement-create-index.md)ステートメントを使用できます。
 
 ```sql
 CREATE INDEX {index_name} ON {table_name} ({column_names});
@@ -41,7 +41,7 @@ CREATE INDEX {index_name} ON {table_name} ({column_names});
 
 ## 新しいテーブルを作成する際にセカンダリインデックスを作成する {#create-a-secondary-index-when-creating-a-new-table}
 
-テーブルの作成と同時にセカンダリ インデックスを作成するには、テーブルを作成する[CREATE TABLE](/sql-statements/sql-statement-create-table.md)の末尾に`KEY`キーワードを含む句を追加します。
+テーブルの作成と同時にセカンダリ インデックスを作成するには、[CREATE TABLE](/sql-statements/sql-statement-create-table.md)の末尾に`KEY`キーワードを含む句を追加します。
 
 ```sql
 KEY `{index_name}` (`{column_names}`)
