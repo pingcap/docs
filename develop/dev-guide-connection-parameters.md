@@ -182,7 +182,7 @@ JDBCでは通常、以下の2つの処理方法が使用されます。
 
 -   2つ目の方法：まず正の整数として[`FetchSize`を設定](http://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html)し、次にJDBC URLで`useCursorFetch = true`を設定することで、カーソルフェッチを使用します。
 
-TiDBは両方の方法をサポートしていますが、実装がよりシンプルで実行効率も優れているため、 `FetchSize`から`Integer.MIN_VALUE`に設定する最初の方法を使用することをお勧めします。
+TiDBは両方の方法をサポートしていますが、実装がよりシンプルで実行効率も優れているため、 `FetchSize`を`Integer.MIN_VALUE`に設定する最初の方法を使用することをお勧めします。
 
 2番目の方法では、TiDBはまずすべてのデータをTiDBノードにロードし、次に`FetchSize`に従ってクライアントにデータを返します。そのため、通常は最初の方法よりも多くのメモリを消費します。[`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom)が`ON`に設定されている場合、TiDBは結果を一時的にハードディスクに書き込む可能性があります。
 
