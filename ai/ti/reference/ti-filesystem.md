@@ -42,9 +42,12 @@ ti fs
 ├── find-files
 ├── create-layer
 ├── list-layers
+├── fork-layer
+├── list-layer-chain
 ├── describe-layer
 ├── diff-layer
 ├── create-layer-checkpoint
+├── delete-layer
 ├── rollback-layer
 ├── commit-layer
 ├── pack-file-system
@@ -97,9 +100,12 @@ ti fs
 | --- | --- | --- |
 | `create-layer` | Creates an isolated change layer over `--base-root-path`; returns a generated layer ID when one is not supplied. | `ti fs create-layer --base-root-path /workspace --layer-name task` |
 | `list-layers` | Lists layers for the selected Filesystem. | `ti fs list-layers --output text` |
+| `fork-layer` | Forks a copy-on-write child from a parent tip or checkpoint. | `ti fs fork-layer --parent-layer-ref research-base --layer-name experiment --checkpoint-id seed` |
+| `list-layer-chain` | Lists pinned ancestry from the root layer to a selected child. | `ti fs list-layer-chain --layer-ref experiment --output text` |
 | `describe-layer` | Reads one layer by ID. | `ti fs describe-layer --layer-id "<layer-id>"` |
 | `diff-layer` | Lists changes recorded in one layer. | `ti fs diff-layer --layer-id "<layer-id>"` |
 | `create-layer-checkpoint` | Records a named checkpoint for a layer. | `ti fs create-layer-checkpoint --layer-id "<layer-id>" --checkpoint-id before-review` |
+| `delete-layer` | Logically abandons a leaf layer, or explicitly abandons its descendants with `--cascade`. | `ti fs delete-layer --layer-ref experiment` |
 | `rollback-layer` | Restores a layer to its rollback state without committing it to the base. | `ti fs rollback-layer --layer-id "<layer-id>"` |
 | `commit-layer` | Applies a layer's changes to the base Filesystem. | `ti fs commit-layer --layer-id "<layer-id>"` |
 | `pack-file-system` | Stores selected local overlay state in a remote archive. | `ti fs pack-file-system --mount-path /path/to/workspace` |
@@ -109,7 +115,7 @@ ti fs
 
 | Command | Purpose and key inputs | Example |
 | --- | --- | --- |
-| `mount-file-system` | Mounts a resource through automatic, FUSE, or WebDAV mode. Requires `--mount-path`; select the resource with a flag or environment variable. | `ti fs mount-file-system --file-system-id <file-system-id> --mount-path /path/to/workspace` |
+| `mount-file-system` | Mounts a flat Filesystem, writable layer, or read-only checkpoint. Layer views require FUSE. | `ti fs mount-file-system --file-system-id <file-system-id> --mount-path /path/to/workspace --driver fuse --layer-ref experiment` |
 | `drain-file-system` | Flushes pending FUSE work while leaving the mount online. | `ti fs drain-file-system --mount-path /path/to/workspace --timeout 30s` |
 | `unmount-file-system` | Gracefully flushes and unmounts a background FUSE or WebDAV mount. | `ti fs unmount-file-system --mount-path /path/to/workspace` |
 
@@ -305,7 +311,7 @@ ti fs find-files --path /workspace --file-name-pattern "*.md" --tag stage=review
 
 ## Use layers and checkpoints
 
-A layer records changes over a base root before you commit or discard them:
+A layer records changes over a base root before you commit or discard them. Use `copy-file --layer-id` for individual files. Recursive copy and `--layer-id` are mutually exclusive; seed a directory tree through a writable FUSE layer mount instead.
 
 ```bash
 ti fs create-layer \
@@ -315,7 +321,7 @@ ti fs create-layer \
   --tag task=review
 ```
 
-Use the returned layer ID:
+Use the returned layer ID for individual file writes and inspection:
 
 ```bash
 ti fs copy-file \
@@ -328,11 +334,28 @@ ti fs describe-layer --layer-id "<layer-id>"
 ti fs diff-layer --layer-id "<layer-id>"
 ti fs create-layer-checkpoint \
   --layer-id "<layer-id>" \
-  --checkpoint-id before-review \
+  --checkpoint-id seed \
   --label "before review"
 ```
 
-Finish the layer by rolling it back or committing it:
+Fork independent copy-on-write timelines from the checkpoint, inspect their ancestry, and mount a child through FUSE:
+
+```bash
+ti fs fork-layer \
+  --parent-layer-ref "<layer-id>" \
+  --layer-name experiment \
+  --checkpoint-id seed
+
+ti fs list-layer-chain --layer-ref experiment
+ti fs mount-file-system \
+  --file-system-id <file-system-id> \
+  --mount-path /path/to/experiment \
+  --remote-path /workspace \
+  --driver fuse \
+  --layer-ref experiment
+```
+
+Drain and unmount a writable layer before creating a checkpoint, rolling it back, or committing it. Finish the layer by rolling it back or committing it:
 
 ```bash
 ti fs rollback-layer --layer-id "<layer-id>"

@@ -48,9 +48,9 @@ ti fs copy-file
 - `--from-stdin`: Read from stdin and write to `--to-remote`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TI_FS_TOKEN`.
 - `--help`: Display help information.
-- `--layer-id <string>`: Write the copied file content into a file system layer instead of the base file system.
+- `--layer-id <string>`: Write one copied file into a file system layer instead of the base file system. Cannot be combined with `--recursive`.
 - `--overwrite`: Replace an existing destination file.
-- `--recursive`: Copy directory structure recursively.
+- `--recursive`: Copy directory structure recursively. Cannot be combined with `--layer-id`; seed a layer directory through a writable FUSE mount instead.
 - `--resume`: Resume an active copy operation.
 - `--tag <string>`: Create tags `key=value` for `--to-remote` operation; repeatable.
 - `--to-local <string>`: The local destination path.

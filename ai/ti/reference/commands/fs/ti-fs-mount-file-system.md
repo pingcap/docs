@@ -19,11 +19,13 @@ The command starts the mount runtime in the background, waits for the mount to b
 ti fs mount-file-system
   --mount-path <string>
   [--cache-dir <string>]
+  [--checkpoint-id <string>]
   [--driver <string>]
   [--dry-run]
   [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
+  [--layer-ref <string>]
   [--local-root <string>]
   [--mount-profile <string>]
   [--no-auto-unpack]
@@ -43,11 +45,13 @@ ti fs mount-file-system
 
 - `--mount-path <string>`: Local mount path. \[required]
 - `--cache-dir <string>`: Local FUSE cache directory. If omitted, uses `~/.ti/cache/mounts/<mount-hash>`.
+- `--checkpoint-id <string>`: Mount this checkpoint of `--layer-ref` read-only. Requires FUSE.
 - `--driver <string>`: Mount driver: `auto`, `fuse`, or `webdav`. \[default: auto]
 - `--dry-run`: Validate the request without applying changes.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TI_FS_TOKEN`.
 - `--help`: Display help information.
+- `--layer-ref <string>`: Mount through a writable layer ID, unique name, or supported tag reference. Requires FUSE.
 - `--local-root <string>`: Local overlay root. If omitted, uses `~/.ti/local/fs/<mount-hash>`.
 - `--mount-profile <string>`: Mount profile: `coding-agent`, `portable`, or `none`. If omitted, uses `none`.
 - `--no-auto-unpack`: Skip default auto-unpack for portable mount profile before mounting.
@@ -60,7 +64,7 @@ ti fs mount-file-system
 - `--remote-path <string>`: The TiDB Cloud file system root path to mount. \[default: /]
 - `--unpack-archive-path <string>`: Restore the pack archive before mounting.
 - `--version`: Display version information.
-- `--write-back-cache`: Persist FUSE writes locally before writing them to the file system on flush. \[default: true]
+- `--write-back-cache`: Persist FUSE writes locally before writing them to the file system on flush. Unavailable for checkpoint mounts, which are always read-only. \[default: true]
 
 For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli-reference.md#global-options).
 
@@ -92,6 +96,20 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
     ```bash
     # Increase cache capacity for repeated reads of medium-sized files.
     ti fs mount-file-system --file-system-id <file-system-id> --mount-path /path/to/workspace --driver fuse --read-cache-size-mb 256 --read-cache-max-file-mb 16
+    ```
+
+- Mount a writable child layer:
+
+    ```bash
+    # Expose only the selected copy-on-write timeline at the local path.
+    ti fs mount-file-system --file-system-id <file-system-id> --mount-path /path/to/experiment --remote-path /workspace --driver fuse --layer-ref experiment
+    ```
+
+- Compare an immutable historical checkpoint:
+
+    ```bash
+    # A checkpoint mount is always read-only.
+    ti fs mount-file-system --file-system-id <file-system-id> --mount-path /path/to/checkpoint --remote-path /workspace --driver fuse --layer-ref experiment --checkpoint-id v5
     ```
 
 ## Related documentation

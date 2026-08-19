@@ -66,9 +66,12 @@ ti
 │   ├── find-files
 │   ├── create-layer
 │   ├── list-layers
+│   ├── fork-layer
+│   ├── list-layer-chain
 │   ├── describe-layer
 │   ├── diff-layer
 │   ├── create-layer-checkpoint
+│   ├── delete-layer
 │   ├── rollback-layer
 │   ├── commit-layer
 │   ├── pack-file-system
