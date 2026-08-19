@@ -140,7 +140,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
     ![Navicat: configure connection general panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-general.png)
 
-7.  **SSL**タブをクリックし、 **「SSLを使用する」** 、 **「認証を使用する」**、 **「CAに対してサーバー証明書を検証する」の**チェックボックスをオンにします。次に、手順4でダウンロードしたCAファイルを**「CA証明書」**フィールドに選択します。
+7.  **SSL**タブをクリックし、 **「SSLを使用する」** 、 **「認証を使用する」**、 **「CAに対してサーバー証明書を検証する」**のチェックボックスをオンにします。次に、手順4でダウンロードしたCAファイルを**「CA証明書」**フィールドで選択します。
 
     ![Navicat: configure connection SSL panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-ssl.png)
 
