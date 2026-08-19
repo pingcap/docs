@@ -20,7 +20,7 @@ Connected Care サービスには、 **Basic** 、 **Developer** (従来の**Sta
 
 > **Note**
 >
-> **Basic** 、 **Enterprise** 、および**Premium**のサポート プランでは、従来のプランと同じプラン名が使用されていますが、サービス コミットメントが異なる異なるプランを指します。
+> **Basic** 、 **Enterprise** 、および**Premium**のサポート プランでは、従来のプランと同じプラン名が使用されていますが、サービス コミットメントが異なるプランを指します。
 
 以下の表は、Connected Careサービスの各サポートプランの概要を示しています。詳細については、 [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)をご覧ください。
 
