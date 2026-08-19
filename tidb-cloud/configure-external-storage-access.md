@@ -243,7 +243,7 @@ Azure ARMテンプレートを使用してSASトークンを作成するには�
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-    2.  対象のTiDB Cloudリソースの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**」または**Data** &gt; **Export**をクリックします。
+    2.  対象のTiDB Cloudリソースの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**または**Data** &gt; **Export**をクリックします。
 
 2.  **「ARMテンプレート展開による新しいSASトークンの生成」**ダイアログを開きます。
 
@@ -333,9 +333,9 @@ TiDB CloudがAlibaba Cloud OSSバケットにアクセスできるようにす�
 
     -   **Effect**セクションで**「許可」**を選択します。
 
-    -   「**Service**セクションで、 **Object Storage Service**を選択します。
+    -   **Service**セクションで、 **Object Storage Service**を選択します。
 
-    -   「**Action**セクションで、必要に応じて権限を選択してください。
+    -   **Action**セクションで、必要に応じて権限を選択してください。
 
         TiDB Cloud Starter、 Essential、またはPremiumインスタンスにデータをインポートするには、 **oss:GetObject** 、 **oss:GetBucketInfo** 、および**oss:ListObjectsの**権限を付与してください。
 

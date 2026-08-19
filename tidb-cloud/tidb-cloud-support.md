@@ -72,7 +72,7 @@ TiDB Cloudのすべてのユーザーは、請求およびアカウント関連�
 
     > **Note:**
     >
-    > [TiDB Cloudテクニカルサポート](https://tidb.support.pingcap.com/servicedesk/customer/portal/6)エントリーは、 **Developer** 、 **Enterprise** 、または**Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)でのみご利用いただけます。Basic**Basic**をご利用の場合は、 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)または[Discord](https://discord.com/invite/KVRZBR2DrG)のコミュニティチャンネルを通じて技術的な質問を投稿できます。PingCAPのエンジニアやコミュニティメンバーがサポートいたします。
+    > [TiDB Cloudテクニカルサポート](https://tidb.support.pingcap.com/servicedesk/customer/portal/6)エントリーは、 **Developer** 、 **Enterprise** 、または**Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)でのみご利用いただけます。**Basic**プランをご利用の場合は、 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)または[Discord](https://discord.com/invite/KVRZBR2DrG)のコミュニティチャンネルを通じて技術的な質問を投稿できます。PingCAPのエンジニアやコミュニティメンバーがサポートいたします。
 
 2.  **[Submit a request]**をクリックします。
 
