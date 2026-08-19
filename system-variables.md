@@ -5499,6 +5499,18 @@ SHOW WARNINGS;
 - Range: `[0, 2147483647]`
 - This variable controls the iteration of the optimizer's estimation logic. After changing the value of this variable, the estimation logic of the optimizer will change greatly. Currently, `0` is the only valid value. It is not recommended to set it to other values.
 
+### `tidb_paging_size_bytes` <span class="version-mark">New in v9.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 9223372036854775807]`
+- Unit: bytes
+- Controls the upper limit on the number of bytes in a single paged response in the coprocessor protocol, providing additional pagination by byte count beyond the row-count-based pagination mechanism provided by [`tidb_max_paging_size`](#tidb_max_paging_size-new-in-v630). The default value is `0`, which means pagination by byte count is disabled. This feature takes effect only when [resource control](/tidb-resource-control-ru-groups.md) is enabled and the resource group to which the current statement belongs has a fixed RU quota. It is used by PD's resource control module to estimate and pre-deduct RU based on the amount of scanned data before executing the statement. If you need to enable it, consider setting it to `4194304` (that is, 4 MiB).
+- This variable is an internal TiDB variable. It is **not recommended** to modify its value.
+
 ### tidb_partition_prune_mode <span class="version-mark">New in v5.1</span>
 
 > **Warning:**
