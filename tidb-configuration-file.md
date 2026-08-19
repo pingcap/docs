@@ -1187,4 +1187,4 @@ The following is an example manifest:
 - Default value: `"25GiB"` when this configuration item is not explicitly configured.
 - To disable the data size limit, explicitly set this configuration item to `"0B"`.
 - This configuration item accepts byte-size values such as `"1MiB"`.
-- When the source data exceeds the limit, `IMPORT INTO` fails during the precheck phase before importing data.
+- When the source data exceeds the limit, `IMPORT INTO` returns an error during the synchronous pre-check phase before creating an import job.
