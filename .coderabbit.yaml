@@ -25,7 +25,7 @@ reviews:
     base_branches:
       - '^master$'
       - '^release-8\.5$'
-      - '^ja/update-pr-template$'
+      - '^i18n-ja-release-8\.5$'
 
   path_instructions:
     - path: '**/*.md'
