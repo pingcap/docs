@@ -12,17 +12,17 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- **TiDB Cloud Essential and Premium**
+- **TiDB Cloud Premium**
 
-    - Introduce **Statement Insight** (PREVIEW) for TiDB Cloud Premium and Essential instances.
+    - Introduce **Statement Insight** (PREVIEW) for TiDB Cloud Premium instances.
 
-        This feature provides an actionable view into SQL resource consumption in your TiDB Cloud Essential or Premium instances.
+        This feature provides an actionable view into SQL resource consumption in your TiDB Cloud Premium instances.
 
         Now you can analyze RU consumption, latency, and execution counts of SQL statements in multiple dimensions, such as DB User, SQL type, DB, table, or SQL digest. In addition, you can see top contributors at a glance, making it easier to identify the sources of high resource consumption or slowdowns.
 
-        Currently, this feature is in public preview and is available for TiDB Cloud Essential and Premium instances created on or after August 19.
+        Currently, this feature is in public preview and is available for TiDB Cloud Premium instances created on or after August 19.
 
-        For more information, see Statement Insight (PREVIEW).
+        For more information, see [Statement Insight (PREVIEW)](https://docs.pingcap.com/tidbcloud/statement-insight/?plan=premium).
 
 - **TiDB Cloud Lake**
 
