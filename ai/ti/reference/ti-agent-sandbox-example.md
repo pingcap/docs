@@ -5,6 +5,10 @@ summary: Provision a Filesystem on a trusted machine and give a clean agent sand
 
 # Use TiDB Cloud Filesystem in an Agent Sandbox
 
+> **Note:**
+>
+> For a hands-on version of this workflow, open the [TiDB Cloud Filesystem for Agent Sandbox Lab](https://labs.tidb.io/labs/demo_901). This interactive Lab Guide walks you through using a persistent Filesystem in an agent sandbox.
+
 This example gives an ephemeral coding agent a durable workspace without copying a user's complete TiDB Cloud CLI configuration into the sandbox.
 
 > **Note:**
