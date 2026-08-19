@@ -8,6 +8,39 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes','/ai/v
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## August 18, 2026
+
+**General changes**
+
+- **TiDB Cloud Premium**
+
+    - Introduce **Statement Insight** (PREVIEW) for TiDB Cloud Premium instances.
+
+        This feature provides an actionable view into SQL resource consumption in your TiDB Cloud Premium instances.
+
+        Now you can analyze RU consumption, latency, and execution counts of SQL statements in multiple dimensions, such as DB User, SQL type, DB, table, or SQL digest. In addition, you can see top contributors at a glance, making it easier to identify the sources of high resource consumption or slowdowns.
+
+        Currently, this feature is in public preview and available only for a limited number of TiDB Cloud Premium instances created on or after August 19.
+
+        For more information, see [Statement Insight (PREVIEW)](https://docs.pingcap.com/tidbcloud/statement-insight/?plan=premium).
+
+- **TiDB Cloud Lake**
+
+    - [TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/) is now available on Alibaba Cloud in Japan (Tokyo) (`ap-northeast-1`). 
+
+        For more supported regions, see [Platforms & Regions](https://docs.pingcap.com/tidbcloudlake/platforms-regions/).
+
+    - Expand Python extensibility and analytics engineering workflows for TiDB Cloud Lake with the new external Python UDF SDK and dbt adapter.
+
+        - With the new external Python UDF SDK, you can implement custom scalar and table functions in Python, deploy them on a UDF server, register the endpoint in TiDB Cloud Lake, and call the functions directly from SQL. The SDK supports common and complex data types, NULL handling, I/O parallelism, and per-function concurrency controls.
+        - With the new dbt adapter, you can connect dbt to TiDB Cloud Lake to build, test, and document data transformation workflows. The adapter supports table, view, and incremental materializations, as well as seeds, sources, custom data tests, documentation generation, snapshots, and connection retries.
+
+      For more information, see the following documentation:
+
+        - [External Function](https://docs.pingcap.com/tidbcloudlake/external-function/)
+        - [Choose a User-Defined Function Type](https://docs.pingcap.com/tidbcloudlake/choose-a-udf-type/)
+        - [Load Data with dbt](https://docs.pingcap.com/tidbcloudlake/load-with-dbt/)
+
 ## August 11, 2026
 
 **General changes**
