@@ -37,7 +37,7 @@ DM supports migrating data from different sources to TiDB clusters. Based on the
 - For MariaDB **10.5.11 and later**, the DM **precheck fails** due to privilege name changes (for example, `BINLOG MONITOR`, `REPLICATION SLAVE ADMIN`, `REPLICATION MASTER ADMIN`). The error appears as `[code=26005] fail to check synchronization configuration` in the replication privilege, dump privilege, and dump connection number checkers.
 - You can **bypass the precheck** by adding `ignore-checking-items: ["all"]` in the DM task. See [DM precheck](/dm/dm-precheck.md) for details.
 - For MariaDB 11.4 and later, you must set the [`binlog_legacy_event_pos`](https://mariadb.com/docs/server/ha-and-performance/standard-replication/replication-and-binary-log-system-variables#binlog_legacy_event_pos) variable to `ON`.
-- Starting DM on a new/fresh MariaDB instance with an empty `gtid_binlog_pos` can cause issues, avoid this by creating at least one transaction. See [GitHub pingcap/tiflow#12423](https://github.com/pingcap/tiflow/issues/12423).
+- Before you start DM on a new MariaDB instance, verify that `gtid_binlog_pos` is not empty. If it is empty, execute at least one transaction to initialize it. Otherwise, DM might fail to track MariaDB GTIDs. For details, see [pingcap/tiflow#12423](https://github.com/pingcap/tiflow/issues/12423).
 
 ## Target databases
 
