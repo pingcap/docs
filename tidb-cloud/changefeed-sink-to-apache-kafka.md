@@ -143,7 +143,7 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
 2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[変更フィード]**をクリックします。
-3.  **Create Changefeed**をクリックし、**宛先**として**「Kafka」**を選択します。
+3.  **Create Changefeed**をクリックし、**宛先**として**Kafka**を選択します。
 
 ## ステップ2. changefeedターゲットを設定する {#step-2-configure-the-changefeed-target}
 
@@ -285,8 +285,8 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
 6.  データ形式として**Avroを**選択すると、ページにAvro固有の設定項目が表示されます。これらの設定項目は、以下のように入力できます。
 
-    -   **「Decimal」**および**Unsigned BigInt**設定では、 TiDB CloudがKafkaメッセージ内のdecimal型およびunsigned bigint型データ型をどのように処理するかを指定します。
-    -   **Schema Registry**領域で、スキーマレジストリエンドポイントを入力します。HTTP**HTTP Authentication**を有効にすると、ユーザー名とパスワードのフィールドが表示され、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>のエンドポイントとパスワードが自動的に入力されます。TiDB <CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>。
+    -   **Decimal**および**Unsigned BigInt**の設定では、 TiDB CloudがKafkaメッセージ内のdecimal型およびunsigned bigint型データ型をどのように処理するかを指定します。
+    -   **Schema Registry**領域で、スキーマレジストリエンドポイントを入力します。**HTTP Authentication**を有効にすると、ユーザー名とパスワードのフィールドが表示され、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>のエンドポイントとパスワードが自動的に入力されます。TiDB <CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>。
 
 7.  **Topic Distribution**エリアで配信モードを選択し、選択したモードに応じてトピック名の設定を入力します。
 

@@ -32,7 +32,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 2.  **Create Resource**をクリックします。
 
-3.  **Create Resource**ページで**「Dedicated」**を選択し、クラスタ情報を次のように構成します。
+3.  **Create Resource**ページで**Dedicated**を選択し、クラスタ情報を次のように構成します。
 
     1.  TiDB Cloud Dedicatedクラスターのプロジェクトを選択してください。組織内にプロジェクトがない場合は、 **Create a Project**をクリックして作成できます。
 

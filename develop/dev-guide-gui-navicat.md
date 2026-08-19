@@ -71,7 +71,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
 8.  **「接続テスト」**をクリックして、対象のTiDB Cloud StarterまたはEssentialインスタンスへの接続を検証してください。
 
-9.  接続テストが成功すると、 **「接続成功」という**メッセージが表示されます。 **「OK」**をクリックして接続設定を完了してください。
+9.  接続テストが成功すると、 **「接続成功」という**メッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
 
 </div>
 <div label="TiDB Cloud Premium">
@@ -109,7 +109,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
 10. **「接続テスト」**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
 
-11. 接続テストが成功すると、 **「接続成功」という**メッセージが表示されます。 **「OK」**をクリックして接続設定を完了してください。
+11. 接続テストが成功すると、 **「接続成功」という**メッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
 
 </div>
 <div label="TiDB Cloud Dedicated">
@@ -140,13 +140,13 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
     ![Navicat: configure connection general panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-general.png)
 
-7.  **「SSL」**タブをクリックし、 **「SSLを使用する」** 、 **「認証を使用する**」、 **「CAに対してサーバー証明書を検証する」の**チェックボックスをオンにします。次に、手順4でダウンロードしたCAファイルを**「CA証明書」**フィールドに選択します。
+7.  **SSL**タブをクリックし、 **「SSLを使用する」** 、 **「認証を使用する**」、 **「CAに対してサーバー証明書を検証する」の**チェックボックスをオンにします。次に、手順4でダウンロードしたCAファイルを**「CA証明書」**フィールドに選択します。
 
     ![Navicat: configure connection SSL panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-ssl.png)
 
 8.  TiDB Cloud Dedicatedクラスターへの接続を検証するために、**接続テストを実行します**。
 
-9.  接続テストが成功すると、 **「接続成功」という**メッセージが表示されます。 **「OK」**をクリックして接続設定を完了してください。
+9.  接続テストが成功すると、 **「接続成功」という**メッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
 
 </div>
 <div label="TiDB Self-Managed" value="tidb">
@@ -167,7 +167,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
 3.  **「接続テスト」**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
 
-4.  接続テストが成功すると、 **「接続成功」という**メッセージが表示されます。 **「OK」**をクリックして接続設定を完了してください。
+4.  接続テストが成功すると、 **「接続成功」という**メッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
 
 </div>
 </SimpleTab>

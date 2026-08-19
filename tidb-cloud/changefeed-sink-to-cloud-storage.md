@@ -143,7 +143,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
     1.  ストレージアカウントのナビゲーション メニューで、 **Security + networking** &gt; **Shared access signature**を選択します。
 
-    2.  **Allowed services**セクションで、 **「Blob」**を選択します。
+    2.  **Allowed services**セクションで、 **Blob**を選択します。
 
     3.  **Allowed resource types**セクションで、 **「コンテナ」**と**「オブジェクト」**を選択します。
 

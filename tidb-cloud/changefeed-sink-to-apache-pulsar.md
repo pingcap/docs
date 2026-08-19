@@ -89,7 +89,7 @@ Apache PulsarサービスにパブリックIPアクセスを提供する場合�
 
 ## ステップ2. changefeedの送信先を設定します {#step-2-configure-the-changefeed-destination}
 
-1.  「**目的地」**セクションで**「Pulsar」**を選択してください。
+1.  **「目的地」**セクションで**Pulsar**を選択してください。
 
 2.  **接続**セクションに、以下の情報を入力してください。
 

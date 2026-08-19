@@ -49,7 +49,7 @@ TiDB Cloudのバケットアクセスを設定し、以下の手順でロールA
 
         ![Create a policy](/media/tidb-cloud/aws-create-policy.png)
 
-    4.  **Create policy**ページで、 **「JSON」**タブをクリックします。
+    4.  **Create policy**ページで、 **JSON**タブをクリックします。
 
     5.  以下のアクセス ポリシー テンプレートをコピーして、ポリシー テキスト フィールドに貼り付けてください。
 
@@ -236,7 +236,7 @@ TiDB Cloud DedicatedがAzure Blobコンテナにアクセスできるように�
 
 3.  **Shared access signature**ページで、次のように必要な権限を持つ[アカウントSASトークン](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)を作成します。
 
-    1.  **Allowed services**で**「Blob」**を選択します。
+    1.  **Allowed services**で**Blob**を選択します。
     2.  **Allowed resource types**で、 **「コンテナ」**と**「オブジェクト」**を選択します。
     3.  **Allowed permissions**で、必要な権限を選択します。たとえば、 TiDB Cloud Dedicatedにデータをインポートするには、 **「読み取り」**と**「一覧表示」の**権限が必要です。
     4.  必要に応じて**開始日時と有効期限日時**を調整してください。セキュリティ上の理由から、有効期限はデータインポートのスケジュールに合わせて設定することをお勧めします。

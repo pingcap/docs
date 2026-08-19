@@ -53,7 +53,7 @@ TiDB 英語ドキュメントリポジトリ: [https://github.com/pingcap/docs](
 
         1.  [GitHubデスクトップ](https://desktop.github.com/)をインストールして起動します。
         2.  GitHub Desktop で、 **「ファイル」** &gt; **「リポジトリのクローン」**をクリックします。
-        3.  **GitHub.com**タブをクリックし、 **「Your Repositories」**でフォークしたリポジトリを選択して、右下隅の**「Clone」を**クリックします。
+        3.  **GitHub.com**タブをクリックし、 **Your Repositories**でフォークしたリポジトリを選択して、右下隅の**Clone**をクリックします。
 
     -   方法 2: 次の Git コマンドを使用します。
 

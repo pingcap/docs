@@ -67,7 +67,7 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
 1.  対象のTiDBクラスタのクラスタ概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「変更フィード」**をクリックします。
 
-2.  **Create Changefeed**をクリックし、宛先として**「TiDB Cloud」**を選択します。
+2.  **Create Changefeed**をクリックし、宛先として**TiDB Cloud**を選択します。
 
 3.  **TiDB Cloud Connection**エリアで、接続先のTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを選択し、接続先のインスタンスのユーザー名とパスワードを入力します。
 

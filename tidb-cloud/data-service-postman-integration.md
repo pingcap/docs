@@ -55,7 +55,7 @@ Postmanにデータアプリをインポートする前に、以下のものを�
 
 5.  URLを貼り付けると、Postmanはデータアプリを新しい[コレクション](https://learning.postman.com/docs/collections/collections-overview)として自動的にインポートします。コレクション名は`TiDB Data Service - <Your App Name>`形式です。
 
-    コレクション内では、デプロイ済みのエンドポイントは**「Deployed」**フォルダーに、デプロイされていないエンドポイントは**「Draft」**フォルダーにグループ化されます。
+    コレクション内では、デプロイ済みのエンドポイントは**Deployed**フォルダーに、デプロイされていないエンドポイントは**Draft**フォルダーにグループ化されます。
 
 ## ステップ2. PostmanでデータアプリAPIキーを設定します {#step-2-configure-your-data-app-api-key-in-postman}
 

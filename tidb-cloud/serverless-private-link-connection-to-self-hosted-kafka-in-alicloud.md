@@ -91,7 +91,7 @@ Kafka VPC を作成するには、次の手順を実行します。
         -   broker-ap-southeast-1c vSwitch `ap-southeast-1c` : 10.0.128.0/18
         -   `ap-southeast-1a`の bastion vSwitch: 10.0.192.0/18
 
-    5.  その他のオプションはデフォルト値を使用します。 **「OK」**をクリックします。
+    5.  その他のオプションはデフォルト値を使用します。 **OK**をクリックします。
 
 3.  VPC の詳細ページで、VPC ID (例: `vpc-t4nfx2vcqazc862e9fg06` ) をメモします。
 

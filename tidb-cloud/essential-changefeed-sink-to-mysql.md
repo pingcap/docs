@@ -85,7 +85,7 @@ MySQLサービスがパブリックネットワーク経由でアクセスでき
 
 1.  対象のTiDB Cloud Essentialインスタンスの概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「変更フィード」**をクリックします。
 
-2.  **Create Changefeed**をクリックし、**宛先**として**「MySQL」**を選択します。
+2.  **Create Changefeed**をクリックし、**宛先**として**MySQL**を選択します。
 
 3.  **Connectivity Method**で、MySQLサービスへの接続方法を選択してください。
 

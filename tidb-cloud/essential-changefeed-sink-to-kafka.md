@@ -75,7 +75,7 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
 2.  対象のTiDB Cloud Essentialインスタンスの概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「変更フィード」**をクリックします。
-3.  **Create Changefeed**をクリックし、次に**「宛先」**として**「Kafka」**を選択します。
+3.  **Create Changefeed**をクリックし、次に**「宛先」**として**Kafka**を選択します。
 
 ## ステップ2. changefeedターゲットを設定する {#step-2-configure-the-changefeed-target}
 
@@ -161,8 +161,8 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 
 6.  データ形式として**Avroを**選択すると、ページにAvro固有の設定項目が表示されます。これらの設定項目は、以下のように入力できます。
 
-    -   **「Decimal」**および**Unsigned BigInt**設定では、 TiDB CloudがKafkaメッセージ内のdecimal型およびunsigned bigint型のデータ型をどのように処理するかを指定します。
-    -   **Schema Registry**領域で、スキーマレジストリのエンドポイントを入力します。HTTP**HTTP Authentication**を有効にする場合は、ユーザー名とパスワードを入力します。
+    -   **Decimal**および**Unsigned BigInt**の設定では、 TiDB CloudがKafkaメッセージ内のdecimal型およびunsigned bigint型のデータ型をどのように処理するかを指定します。
+    -   **Schema Registry**領域で、スキーマレジストリのエンドポイントを入力します。**HTTP Authentication**を有効にする場合は、ユーザー名とパスワードを入力します。
 
 7.  **Topic Distribution**エリアで配信モードを選択し、選択したモードに応じてトピック名の設定を入力します。
 

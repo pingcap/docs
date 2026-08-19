@@ -59,7 +59,7 @@ DataGripは2つの方法で使用できます。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-6.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**「+」**をクリックし、 **「データソース」** &gt; **「その他」** &gt; **「TiDB」**を選択します。
+6.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**+**をクリックし、 **「データソース」** &gt; **「その他」** &gt; **TiDB**を選択します。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
@@ -73,7 +73,7 @@ DataGripは2つの方法で使用できます。
 
     ![Test the connection to a TiDB Cloud Starter instance](/media/develop/datagrip-test-connection.jpg)
 
-9.  接続設定を保存するには、 **「OK」**をクリックしてください。
+9.  接続設定を保存するには、 **OK**をクリックしてください。
 
 </div>
 <div label="TiDB Cloud Premium">
@@ -99,7 +99,7 @@ DataGripは2つの方法で使用できます。
 
 7.  DataGripを起動し、接続を管理するためのプロジェクトを作成します。
 
-8.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**「+」**をクリックし、 **「データソース」** &gt; **「その他」** &gt; **「TiDB」**を選択します。
+8.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**+**をクリックし、 **「データソース」** &gt; **「その他」** &gt; **TiDB**を選択します。
 
 9.  適切な接続文字列をコピーして、DataGrip の [**データ ソースとドライバー]**ウィンドウに貼り付けてください。DataGrip のフィールドとTiDB Cloud Premium の接続文字列のマッピングは以下のとおりです。
 
@@ -115,7 +115,7 @@ DataGripは2つの方法で使用できます。
 
 10. **「接続テスト」**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
 
-11. 接続設定を保存するには、 **「OK」**をクリックしてください。
+11. 接続設定を保存するには、 **OK**をクリックしてください。
 
 </div>
 <div label="TiDB Cloud Dedicated">
@@ -134,7 +134,7 @@ DataGripは2つの方法で使用できます。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-5.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**「+」**をクリックし、 **「データソース」** &gt; **「その他」** &gt; **「TiDB」**を選択します。
+5.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**+**をクリックし、 **「データソース」** &gt; **「その他」** &gt; **TiDB**を選択します。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
@@ -165,7 +165,7 @@ DataGripは2つの方法で使用できます。
 
     ![Test the connection to a TiDB Cloud Dedicated cluster](/media/develop/datagrip-dedicated-test-connection.jpg)
 
-10. 接続設定を保存するには、 **「OK」**をクリックしてください。
+10. 接続設定を保存するには、 **OK**をクリックしてください。
 
 </div>
 <div label="TiDB Self-Managed" value="tidb">
@@ -174,7 +174,7 @@ DataGripは2つの方法で使用できます。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-2.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**「+」**をクリックし、 **「データソース」** &gt; **「その他」** &gt; **「TiDB」**を選択します。
+2.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**+**をクリックし、 **「データソース」** &gt; **「その他」** &gt; **TiDB**を選択します。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
@@ -195,7 +195,7 @@ DataGripは2つの方法で使用できます。
 
     ![Test the connection to a TiDB Self-Managed cluster](/media/develop/datagrip-self-hosted-test-connection.jpg)
 
-5.  接続設定を保存するには、 **「OK」**をクリックしてください。
+5.  接続設定を保存するには、 **OK**をクリックしてください。
 
 </div>
 </SimpleTab>

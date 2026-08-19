@@ -68,7 +68,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
     ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
-6.  TiDB Cloud接続ダイアログから接続文字列をコピーします。DBeaverで、 **「接続方法**」に**「URL」**を選択し、 **URL**フィールドに接続文字列を貼り付けます。
+6.  TiDB Cloud接続ダイアログから接続文字列をコピーします。DBeaverで、 **「接続方法**」に**URL**を選択し、 **URL**フィールドに接続文字列を貼り付けます。
 
 7.  **「認証（データベースネイティブ）」**セクションで、**ユーザー名**と**パスワード**を入力してください。例は以下のとおりです。
 
@@ -80,7 +80,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
     ![Download driver files](/media/develop/dbeaver-download-driver.jpg)
 
-    接続テストが成功すると、以下のように**接続テスト**ダイアログが表示されます。 **「OK」**をクリックして閉じます。
+    接続テストが成功すると、以下のように**接続テスト**ダイアログが表示されます。 **OK**をクリックして閉じます。
 
     ![Connection test result](/media/develop/dbeaver-connection-test.jpg)
 
@@ -161,7 +161,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
     ![Download driver files](/media/develop/dbeaver-download-driver.jpg)
 
-    接続テストが成功すると、以下のように**接続テスト**ダイアログが表示されます。 **「OK」**をクリックして閉じます。
+    接続テストが成功すると、以下のように**接続テスト**ダイアログが表示されます。 **OK**をクリックして閉じます。
 
     ![Connection test result](/media/develop/dbeaver-connection-test.jpg)
 
@@ -191,7 +191,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
     ![Download driver files](/media/develop/dbeaver-download-driver.jpg)
 
-    接続テストが成功すると、以下のように**接続テスト**ダイアログが表示されます。 **「OK」**をクリックして閉じます。
+    接続テストが成功すると、以下のように**接続テスト**ダイアログが表示されます。 **OK**をクリックして閉じます。
 
     ![Connection test result](/media/develop/dbeaver-connection-test.jpg)
 

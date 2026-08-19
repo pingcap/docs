@@ -133,7 +133,7 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
 
 1.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[変更フィード]**をクリックします。
 
-2.  **Create Changefeed**をクリックし、**宛先**として**「MySQL」**を選択します。
+2.  **Create Changefeed**をクリックし、**宛先**として**MySQL**を選択します。
 
 3.  **Connectivity Method**で、MySQLサービスへの接続方法を選択してください。
 

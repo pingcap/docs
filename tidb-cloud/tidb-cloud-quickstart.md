@@ -30,7 +30,7 @@ category: quick start
     -   独自に新しいTiDB Cloud Starter クラスターを作成するには、次の手順に従います。
 
         1.  **Create Resource**をクリックします。
-        2.  **Create Resource**ページでは、デフォルトで**「Starter」**が選択されています。クラスターのクラウドプロバイダーとターゲットリージョンを選択し、必要に応じてデフォルトのクラスター名を更新して、 **「作成」を**クリックします。TiDB Cloud Starterクラスターは約30秒で作成されます。
+        2.  **Create Resource**ページでは、デフォルトで**Starter**が選択されています。クラスターのクラウドプロバイダーとターゲットリージョンを選択し、必要に応じてデフォルトのクラスター名を更新して、 **Create**をクリックします。TiDB Cloud Starterクラスターは約30秒で作成されます。
 
         <CustomContent language="en,zh">
 
