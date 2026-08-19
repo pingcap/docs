@@ -454,7 +454,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [AUTO_RANDOM](/auto-random.md)
 -   [mysql2でTiDBに接続する](/develop/dev-guide-sample-application-ruby-mysql2.md)
--   [情報機能](/functions-and-operators/information-functions.md)
+-   [情報関数](/functions-and-operators/information-functions.md)
 -   [SHOW BUILTINS](/sql-statements/sql-statement-show-builtins.md)
 -   [SQL プリペアド実行プランキャッシュ](/sql-prepared-plan-cache.md)
 -   [システム変数](/system-variables.md#last_insert_id)
@@ -1171,7 +1171,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [ADD INDEX](/sql-statements/sql-statement-add-index.md)
--   [管理者 SHOW DDL [ジョブ|ジョブクエリ]](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
 -   [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 -   [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
@@ -1215,7 +1215,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [ADMIN ALTER DDL JOBS](/sql-statements/sql-statement-admin-alter-ddl.md)
--   [管理者 SHOW DDL [ジョブ|ジョブクエリ]](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
 -   [TiDB における DDL 実行のベストプラクティス](/best-practices/ddl-introduction.md)
 -   [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 -   [オンラインワークロードと`ADD INDEX`操作のインタラクションテスト](/benchmark/online-workloads-and-add-index-operations.md)
@@ -1237,7 +1237,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [ADMIN ALTER DDL JOBS](/sql-statements/sql-statement-admin-alter-ddl.md)
--   [管理者 SHOW DDL [ジョブ|ジョブクエリ]](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
 -   [システム変数](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850)
 -   [TiDB 8.5.0 リリースノート](/releases/release-8.5.0.md)
 -   [TiDB 7.5.5 リリースノート](/releases/release-7.5.5.md)
@@ -1261,7 +1261,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [ADMIN ALTER DDL JOBS](/sql-statements/sql-statement-admin-alter-ddl.md)
--   [管理者 SHOW DDL [ジョブ|ジョブクエリ]](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
 -   [TiDB における DDL 実行のベストプラクティス](/best-practices/ddl-introduction.md)
 -   [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 -   [オンラインワークロードと`ADD INDEX`操作のインタラクションテスト](/benchmark/online-workloads-and-add-index-operations.md)
@@ -1517,7 +1517,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [ADMIN ALTER DDL JOBS](/sql-statements/sql-statement-admin-alter-ddl.md)
--   [管理者 SHOW DDL [ジョブ|ジョブクエリ]](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
 -   [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
 -   [システム変数](/system-variables.md#tidb_enable_dist_task-new-in-v710)
 -   [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)
@@ -1771,7 +1771,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [情報機能](/functions-and-operators/information-functions.md)
+-   [情報関数](/functions-and-operators/information-functions.md)
 -   [SELECT](/sql-statements/sql-statement-select.md)
 -   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_enable_noop_functions-new-in-v40)
@@ -3708,7 +3708,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [管理者 SHOW DDL [ジョブ|ジョブクエリ]](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
 -   [コンフィグレーションオプション](/command-line-flags-for-tidb-configuration.md)
 -   [IMPORT INTO とTiDB Lightning](/tidb-lightning/import-into-vs-tidb-lightning.md)
 -   [システム変数](/system-variables.md#tidb_service_scope-new-in-v740)

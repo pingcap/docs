@@ -9,7 +9,7 @@ aliases: ['/ja/tidb/stable/dev-guide-update-data/','/ja/tidb/dev/dev-guide-updat
 このドキュメントでは、さまざまなプログラミング言語を使用して、以下のSQL文でTiDBのデータを更新する方法について説明します。
 
 -   [UPDATE](/sql-statements/sql-statement-update.md): 指定されたテーブル内のデータを変更するために使用されます。
--   キー[INSERT ON DUPLICATE KEY UPDATE](/sql-statements/sql-statement-insert.md): データの挿入、および主キーまたは一意キーの競合が発生した場合のデータの更新に使用します。複数の一意キー（主キーを含む）がある場合は、このステートメントの使用は**推奨されません**。これは、このステートメントが一意キー（主キーを含む）の競合を検出するとすぐにデータを更新するためです。複数の行で競合が発生した場合、更新されるのは1行のみです。
+-   [INSERT ON DUPLICATE KEY UPDATE](/sql-statements/sql-statement-insert.md): データの挿入、および主キーまたは一意キーの競合が発生した場合のデータの更新に使用します。複数の一意キー（主キーを含む）がある場合は、このステートメントの使用は**推奨されません**。これは、このステートメントが一意キー（主キーを含む）の競合を検出するとすぐにデータを更新するためです。複数の行で競合が発生した場合、更新されるのは1行のみです。
 
 ## 始める前に {#before-you-start}
 

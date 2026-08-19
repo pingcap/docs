@@ -148,7 +148,7 @@ SQLパフォーマンスチューニングの詳細については、以下の�
 >
 > TiDB はクエリ時のインデックスの明示的な使用もサポートしており、[オプティマイザのヒント](/optimizer-hints.md)や[SQLプラン管理（SPM）](/sql-plan-management.md)を使用してインデックスの使用を人為的に制御できます。ただし、インデックス、オプティマイザ ヒント、または SPM についてよく知らない場合は、予期しない結果を避けるためにこの機能を使用**しないでください**。
 
-テーブルのインデックスをクエリするには、インデックス[SHOW INDEXES](/sql-statements/sql-statement-show-indexes.md)ステートメントを使用できます。
+テーブルのインデックスをクエリするには、[SHOW INDEXES](/sql-statements/sql-statement-show-indexes.md)ステートメントを使用できます。
 
 ```sql
 SHOW INDEXES FROM `bookshop`.`books`;
