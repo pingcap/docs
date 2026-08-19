@@ -107,7 +107,7 @@ Google Cloud Private Service Connect のアーキテクチャは以下のとお�
 
     > **Note:**
     >
-    > 既にプライベートエンドポイント接続を作成済みの場合、アクティブなエンドポイントが接続ダイアログに表示されます。追加のプライベートエンドポイント接続を作成するには、左側のナビゲーションペインで**「設定」** &gt; **「ネットワーク」**をクリックして、 **「ネットワーク」**ページに移動します。
+    > 既にプライベートエンドポイント接続を作成済みの場合、アクティブなエンドポイントが接続ダイアログに表示されます。追加のプライベートエンドポイント接続を作成するには、左側のナビゲーションペインで**「設定」** > **「ネットワーク」**をクリックして、 **「ネットワーク」**ページに移動します。
 
 ### ステップ2. Google Cloudプライベートエンドポイントを作成する {#step-2-create-a-google-cloud-private-endpoint}
 
@@ -129,7 +129,7 @@ Google Cloud Private Service Connect のアーキテクチャは以下のとお�
 <div label="Use Google Cloud console">
 
 1.  [Google Cloud Console](https://console.cloud.google.com/)で、現在のプロジェクトがTiDB Cloudに入力した**Google Cloud Project ID**と同じであることを確認してください。
-2.  **VPC network**&gt;**Private Service Connect**&gt;**Connected endpoints**に移動し、 **Connect endpoint**をクリックします。
+2.  **VPC network**>**Private Service Connect**>**Connected endpoints**に移動し、 **Connect endpoint**をクリックします。
 3.  TiDB Cloudで生成されたコマンドの値を使用してエンドポイントを設定します。
     -   **Endpoint name**：コマンドで指定した転送ルール名を使用します。
     -   **対象**: **Published service**を選択し、 `--target-service-attachment`からサービス添付ファイル URI を入力します。

@@ -67,8 +67,8 @@ CentOS 7の新規インスタンスの使用をお勧めします。仮想マシ
 
 ### バージョン要件 {#version-requirements}
 
--   TiDB Lightning &gt;= v4.0.3。
--   TiDB &gt;= v4.0.0。
+-   TiDB Lightning >= v4.0.3。
+-   TiDB >= v4.0.0。
 
 ### 制限事項 {#limitations}
 

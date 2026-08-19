@@ -363,7 +363,7 @@ SELECT * FROM request_unit_by_group LIMIT 5;
 
 <CustomContent platform="tidb">
 
-TiDB はリソース制御に関する実行時情報を定期的に収集し、Grafana の**[TiDB]** &gt; **[リソース制御]**ダッシュボードにメトリクスの視覚的なグラフを提供します。メトリクスについては[TiDBの重要な監視指標](/grafana-tidb-dashboard.md)の**リソース制御**セクションで詳しく説明されています。
+TiDB はリソース制御に関する実行時情報を定期的に収集し、Grafana の**[TiDB]** > **[リソース制御]**ダッシュボードにメトリクスの視覚的なグラフを提供します。メトリクスについては[TiDBの重要な監視指標](/grafana-tidb-dashboard.md)の**リソース制御**セクションで詳しく説明されています。
 
 TiKV は、さまざまなリソース グループからのリクエスト QPS も記録します。詳細については、 [TiKVモニタリング指標の詳細](/grafana-tikv-dashboard.md#grpc)を参照してください。
 
@@ -377,7 +377,7 @@ TiDB Dashboardの現在の[`RESOURCE_GROUPS`](/information-schema/information-sc
 >
 > このセクションでは、TiDB Self-Managed でのみ利用可能な Grafana ダッシュボードについて説明します。TiDB Cloud Dedicated では、TiDB Cloud コンソールの [Calibrate Resource](/tidb-cloud/calibrate-resource.md) ページで、**Total RU Consumed** や **RU Consumed by Resource Groups** などのリソース制御メトリクスを表示できます。
 
-TiDBは、リソース制御に関するランタイム情報を定期的に収集し、Grafanaの**TiDB** &gt;**リソース制御**ダッシュボードでそのメトリクスの視覚的なグラフを提供します。
+TiDBは、リソース制御に関するランタイム情報を定期的に収集し、Grafanaの**TiDB** >**リソース制御**ダッシュボードでそのメトリクスの視覚的なグラフを提供します。
 
 TiKVは、Grafanaの**TiKV**ダッシュボードに、さまざまなリソースグループからのリクエストQPSも記録します。
 

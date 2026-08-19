@@ -206,7 +206,7 @@ TiDB バージョン: 8.2.0
     -   Azure Identity LibrariesとMicrosoft Authentication Libraryのバージョンをアップグレードしてセキュリティを強化する [#53990](https://github.com/pingcap/tidb/issues/53990) @[hawkingrei](https://github.com/hawkingrei)
     -   TiDB Server のメモリ不足エラー（OOM）が発生しないように、 `token-limit`の最大値に`1048576`を設定してください。 [#53312](https://github.com/pingcap/tidb/issues/53312) @[djshow832](https://github.com/djshow832)
     -   TiFlash MPP実行パフォーマンスを向上させるため、MPP実行計画の列剪定を改善しました [#52133](https://github.com/pingcap/tidb/issues/52133) @[yibin87](https://github.com/yibin87)
-    -   大量のデータ（&gt;1024行）を含むテーブルを検索する際の`IndexLookUp`演算子のパフォーマンスオーバーヘッドを最適化する [#53871](https://github.com/pingcap/tidb/issues/53871) @[crazycs520](https://github.com/crazycs520)
+    -   大量のデータ（>1024行）を含むテーブルを検索する際の`IndexLookUp`演算子のパフォーマンスオーバーヘッドを最適化する [#53871](https://github.com/pingcap/tidb/issues/53871) @[crazycs520](https://github.com/crazycs520)
     -   MPPロードバランシング中にリージョンを持たないストアを削除する [#52313](https://github.com/pingcap/tidb/issues/52313) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
 -   TiKV

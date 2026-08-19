@@ -21,7 +21,7 @@ tiup cluster list
 
 TiDB クラスター内のコンポーネントは次の順序で起動されます。
 
-**PD &gt; TiKV &gt; TiDB &gt; TiFlash &gt; TiCDC &gt; Prometheus &gt; Grafana &gt; Alertmanager**
+**PD > TiKV > TiDB > TiFlash > TiCDC > Prometheus > Grafana > Alertmanager**
 
 クラスターを起動するには、次のコマンドを実行します。
 
@@ -171,7 +171,7 @@ tiup cluster rename ${cluster-name} ${new-name}
 
 TiDB クラスター内のコンポーネントは次の順序で停止されます (監視コンポーネントも停止されます)。
 
-**Alertmanager &gt; Grafana &gt; Prometheus &gt; TiCDC &gt; TiFlash &gt; TiDB &gt; TiKV &gt; PD**
+**Alertmanager > Grafana > Prometheus > TiCDC > TiFlash > TiDB > TiKV > PD**
 
 クラスターを停止するには、次のコマンドを実行します。
 

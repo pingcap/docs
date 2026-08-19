@@ -61,7 +61,7 @@ AWS VPC設定でDNSホスト名とDNS解決の両方が有効になっている�
 
 > **Note:**
 >
-> プライベートエンドポイント接続を既に作成している場合は、アクティブなエンドポイントが接続ダイアログに表示されます。追加のプライベートエンドポイント接続を作成するには、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックして**Networking**ページに移動します。
+> プライベートエンドポイント接続を既に作成している場合は、アクティブなエンドポイントが接続ダイアログに表示されます。追加のプライベートエンドポイント接続を作成するには、左側のナビゲーションペインで**Settings** > **Networking**をクリックして**Networking**ページに移動します。
 
 ### ステップ2. AWSインターフェースエンドポイントを作成する {#step-2-create-an-aws-interface-endpoint}
 
@@ -142,7 +142,7 @@ AWS マネジメントコンソールを使用して VPC インターフェイ�
 >
 > プライベート エンドポイント接続は、次の 2 つのページで表示および管理できます。
 >
-> -   クラスター レベルの**Networking**ページ: 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Settings** &gt; **Networking**をクリックします。
+> -   クラスター レベルの**Networking**ページ: 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Settings** > **Networking**をクリックします。
 > -   プロジェクト レベルの**Network Access**ページ: 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、**Project view** タブをクリックして対象のプロジェクトを見つけ、そのプロジェクトの <MDSvgIcon name="icon-project-settings" /> をクリックし、**Project Settings** の下にある **Network Access** をクリックします。
 
 ### ステップ4. プライベートDNSを有効にする {#step-4-enable-private-dns}
@@ -158,14 +158,14 @@ AWS CLI を使用してプライベート DNS を有効にするには、 **Crea
 aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-dns-enabled
 ```
 
-または、クラスターの**Networking**ページでコマンドを見つけることもできます。プライベートエンドポイントを探し、 **Action**列の**...** &gt; **Enable DNS**をクリックします。
+または、クラスターの**Networking**ページでコマンドを見つけることもできます。プライベートエンドポイントを探し、 **Action**列の**...** > **Enable DNS**をクリックします。
 
 </div>
 <div label="Use AWS Console">
 
 AWS マネジメントコンソールでプライベート DNS を有効にするには:
 
-1.  **VPC** &gt; **Endpoints**に移動します。
+1.  **VPC** > **Endpoints**に移動します。
 2.  エンドポイント ID を右クリックし、 **Modify private DNS name**を選択します。
 3.  **Enable for this endpoint**チェックボックスをオンにします。
 4.  **Save changes**をクリックします。
@@ -191,7 +191,7 @@ AWS マネジメントコンソールでプライベート DNS を有効にす�
 
 プライベート エンドポイント接続を使用すると、プライベート エンドポイントとプライベート エンドポイント サービスの状態が次のページに表示されます。
 
--   クラスター レベルの**Networking**ページ: 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Settings** &gt; **Networking**をクリックします。
+-   クラスター レベルの**Networking**ページ: 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Settings** > **Networking**をクリックします。
 -   プロジェクト レベルの**Network Access**ページ: 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、**Project view** タブをクリックして対象のプロジェクトを見つけ、そのプロジェクトの <MDSvgIcon name="icon-project-settings" /> をクリックし、**Project Settings** の下にある **Network Access** をクリックします。
 
 プライベート エンドポイントの可能なステータスについては、次のように説明されます。
@@ -212,6 +212,6 @@ AWS マネジメントコンソールでプライベート DNS を有効にす�
 
 ### プライベートDNSを有効にした後、プライベートエンドポイント経由でTiDBクラスターに接続できません。なぜですか？ {#i-cannot-connect-to-a-tidb-cluster-via-a-private-endpoint-after-enabling-private-dns-why}
 
-AWSマネジメントコンソールで、VPCエンドポイントのセキュリティグループを適切に設定する必要がある場合があります。**VPC** &gt; **Endpoints**に移動します。これを行うには、 **VPC** &gt; **Endpoints**に移動し、VPCエンドポイントを右クリックして**Manage security groups**を選択します。選択したセキュリティグループが、ポート`4000`またはお客様定義のポートでEC2インスタンスからのインバウンドアクセスを許可していることを確認してください。
+AWSマネジメントコンソールで、VPCエンドポイントのセキュリティグループを適切に設定する必要がある場合があります。**VPC** > **Endpoints**に移動します。これを行うには、 **VPC** > **Endpoints**に移動し、VPCエンドポイントを右クリックして**Manage security groups**を選択します。選択したセキュリティグループが、ポート`4000`またはお客様定義のポートでEC2インスタンスからのインバウンドアクセスを許可していることを確認してください。
 
 ![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)

@@ -9,7 +9,7 @@ summary: DM クラスターのパフォーマンスをテストする方法を�
 
 ## 移行データフロー {#migration-data-flow}
 
-MySQL -&gt; DM -&gt; TiDB という単純な移行データフローを使用して、DM クラスターのデータ移行パフォーマンスをテストできます。
+MySQL -> DM -> TiDB という単純な移行データフローを使用して、DM クラスターのデータ移行パフォーマンスをテストできます。
 
 ## テスト環境をデプロイ {#deploy-test-environment}
 

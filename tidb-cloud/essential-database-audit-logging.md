@@ -147,7 +147,7 @@ TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、 TiDB Cloud Es
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **DB Audit Logging**をクリックします。
+2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** > **DB Audit Logging**をクリックします。
 
 3.  **DB Audit Logging**ページで、 **[有効にする]**をクリックします。
 
@@ -183,7 +183,7 @@ TiDB Cloud Essentialインスタンスの監査ログは、有効化後に編集
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **DB Audit Logging**をクリックします。
+2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** > **DB Audit Logging**をクリックします。
 
 3.  **DB Audit Logging**ページで、 **[設定]**をクリックします。
 
@@ -215,7 +215,7 @@ TiDB Cloud Essentialインスタンスの監査ログを無効にすることが
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **DB Audit Logging**をクリックします。
+2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** > **DB Audit Logging**をクリックします。
 
 3.  **DB Audit Logging**ページで、右上隅の**...**をクリックし、次に**無効に**します。
 
@@ -251,7 +251,7 @@ ticloud serverless audit-log config update -c <cluster-id> --disabled=true
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **DB Audit Logging**をクリックします。
+2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** > **DB Audit Logging**をクリックします。
 
 3.  **DB Audit Logging**ページで、 **Add Filter Rule**をクリックします。
 
@@ -281,7 +281,7 @@ ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-n
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **DB Audit Logging**をクリックします。
+2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** > **DB Audit Logging**をクリックします。
 
 3.  **DB Audit Logging**ページで、編集するフィルタルールを見つけ、その行の**...**をクリックしてから、 **[編集]**をクリックします。
 
@@ -311,7 +311,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **DB Audit Logging**をクリックします。
+2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** > **DB Audit Logging**をクリックします。
 
 3.  **DB Audit Logging**ページで、無効にしたいフィルタルールを見つけ、トグルをオフにしてフィルタルールを無効にします。
 
@@ -339,7 +339,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **DB Audit Logging**をクリックします。
+2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** > **DB Audit Logging**をクリックします。
 
 3.  **DB Audit Logging**ページで、削除するフィルタルールを見つけて、 **...**をクリックします。
 

@@ -22,7 +22,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 このチュートリアルを完了するには、以下のものが必要です。
 
--   [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
+-   [Node.js](https://nodejs.org/en) >= 18.0.0。
 -   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 、またはお好みのパッケージマネージャーを使用してください。
 -   TiDB Cloud Starterインスタンス。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 

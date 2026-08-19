@@ -8,7 +8,7 @@ aliases: ['/ja/tidbcloud/vector-search-changelogs/']
 
 ## 2025年7月15日 {#july-15-2025}
 
--   TiDB Vector Search (ベータ版) が、 TiDB Cloud Dedicated (TiDB &gt;= v8.4) クラスターで利用できるようになりました。
+-   TiDB Vector Search (ベータ版) が、 TiDB Cloud Dedicated (TiDB >= v8.4) クラスターで利用できるようになりました。
 
 ## 2024年6月25日 {#june-25-2024}
 

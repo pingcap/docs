@@ -98,7 +98,7 @@ TiFlash v6.2.0はデフォルトでPageStorage V3バージョン[`format_version
 
     2.  TiFlashノードを再起動します。
 
-テーブルがまだ古いデータ形式を使用しているかどうかを Grafana で確認できます: **TiFlash-Summary** &gt; **Storage Pool** &gt; **Storage Pool Run Mode** 。
+テーブルがまだ古いデータ形式を使用しているかどうかを Grafana で確認できます: **TiFlash-Summary** > **Storage Pool** > **Storage Pool Run Mode** 。
 
 -   V2のみ: PageStorage V2を使用しているテーブルの数（パーティションを含む）
 -   V3のみ: PageStorage V3を使用しているテーブルの数（パーティションを含む）

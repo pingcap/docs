@@ -39,7 +39,7 @@ Google Cloud でセルフホスト型 Kafka に Private Service Connect を設�
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com)で[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
     2.  概要ページで、TiDB クラスターのリージョンを確認します。Kafka クラスターが同じリージョンにデプロイされることを確認してください。
-    3.  左側のナビゲーション ペインで**[データ]** &gt; **[Changefeed] を**クリックし、右上隅の**Create Changefeed**をクリックして、次の情報を入力します。
+    3.  左側のナビゲーション ペインで**[データ]** > **[Changefeed] を**クリックし、右上隅の**Create Changefeed**をクリックして、次の情報を入力します。
         1.  **宛先**で、 **Kafka**を選択します。
         2.  **Connectivity Method**で、 **Private Service Connect**を選択します。
     4.  **先に進む前に、Google Cloud プロジェクトをリマインダー**に書き留めておいてください。このプロジェクトは、 TiDB Cloudからのエンドポイント作成リクエストの自動承認を承認するために使用します。
@@ -505,7 +505,7 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
         -   **サブネットワーク**: `brokers-subnet`
         -   **ポート**: `All`
 
-4.  [**Private Service Connect** &gt; **PUBLISH SERVICE**](https://console.cloud.google.com/net-services/psc/list/producers)に進みます。
+4.  [**Private Service Connect** > **PUBLISH SERVICE**](https://console.cloud.google.com/net-services/psc/list/producers)に進みます。
 
     -   **Load Balancer Type**: `Internal passthrough Network Load Balancer`
     -   **Internal load balancer**： `kafka-lb`
@@ -533,7 +533,7 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、クラスターが**Private Service Connect**経由で Kafka クラスターに接続するための changefeed を作成します。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)を参照してください。
 
-2.  **「ChangeFeed ターゲットの構成」&gt;「接続方法」&gt;「プライベート サービス接続」**に進むときは、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
+2.  **「ChangeFeed ターゲットの構成」>「接続方法」>「プライベート サービス接続」**に進むときは、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
 
     -   **Kafka Advertised Listener Pattern**: `abc` 。これは、 [前提条件](#prerequisites)で**Kafka Advertised Listener Pattern**を生成するために使用する一意のランダム文字列と同じです。
     -   **Service Attachment**: PSC の Kafka サービス アタッチメント (例: `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-psc` )。
@@ -645,7 +645,7 @@ TiDB クラスターと同じリージョンで既に Kafka クラスターが�
             -   **プロトコル**： `TCP`
             -   **ポート**: `9092` -proxy でブートストラップ ポートの 1 つを選択できます。
 
-2.  [**Private Service Connect** &gt; **PUBLISH SERVICE**](https://console.cloud.google.com/net-services/psc/list/producers)に進みます。
+2.  [**Private Service Connect** > **PUBLISH SERVICE**](https://console.cloud.google.com/net-services/psc/list/producers)に進みます。
 
     -   **Load Balancer Type**: `Internal passthrough Network Load Balancer`
     -   **Internal load balancer**： `kafka-proxy-lb`
@@ -673,7 +673,7 @@ TiDB クラスターと同じリージョンで既に Kafka クラスターが�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、クラスターが**Private Service Connect**経由で Kafka クラスターに接続するための changefeed を作成します。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)を参照してください。
 
-2.  **Configure the changefeed target** &gt; **Connectivity Method** &gt; **Private Service Connect**に進んだ後、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
+2.  **Configure the changefeed target** > **Connectivity Method** > **Private Service Connect**に進んだ後、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
 
     -   **Kafka Advertised Listener Pattern**: `abc` . [前提条件](#prerequisites)で**Kafka Advertised Listener Pattern**を生成するために使用する一意のランダム文字列と同じです。
     -   **Service Attachment**: PSC の kafka-proxy サービス アタッチメント (例: `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-proxy-psc` )。

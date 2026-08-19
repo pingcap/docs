@@ -42,7 +42,7 @@ summary: Alibaba Cloud Endpoint Service のプライベート リンク接続を
 
 Alibaba Cloud アカウント ID とアベイラビリティーゾーンを表示するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[ネットワーク]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[設定]** > **[ネットワーク]**をクリックします。
 2.  **[外部サービス向け Alibaba Cloud プライベートエンドポイント]**領域で、**[外部サービス向けプライベートエンドポイントの作成]**をクリックします。
 3.  表示されたダイアログで、Alibaba Cloud アカウント ID とアベイラビリティーゾーンを見つけることができます。
 
@@ -74,7 +74,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 **1.1. Kafka VPCを作成する**
 
-1.  [Alibaba Cloud コンソール &gt; VPC ダッシュボード](https://vpc.console.alibabacloud.com/vpc)に進み、Kafka をデプロイするリージョンに切り替えます。
+1.  [Alibaba Cloud コンソール > VPC ダッシュボード](https://vpc.console.alibabacloud.com/vpc)に進み、Kafka をデプロイするリージョンに切り替えます。
 
 2.  **Create VPC**をクリックします。**VPC settings**ページで以下の情報を入力します。
 
@@ -538,10 +538,10 @@ b3.ap-southeast-1c.unique_name.alicloud.plc.tidbcloud.com:9095 (id: 3 rack: null
 
 異なるポートを持つ4つのサーバーグループを持つネットワークロードバランサーを作成します。1つのサーバーグループはブートストラップ用で、他のサーバーグループは異なるブローカーにマッピングされます。
 
-1.  ブートストラップサーバーグループ =&gt; 9092 =&gt; broker-node1:39092、broker-node2:39092、broker-node3:39092
-2.  ブローカーサーバーグループ 1 =&gt; 9093 =&gt; broker-node1:39092
-3.  ブローカーサーバーグループ 2 =&gt; 9094 =&gt; broker-node2:39092
-4.  ブローカーサーバーグループ 3 =&gt; 9095 =&gt; broker-node3:39092
+1.  ブートストラップサーバーグループ => 9092 => broker-node1:39092、broker-node2:39092、broker-node3:39092
+2.  ブローカーサーバーグループ 1 => 9093 => broker-node1:39092
+3.  ブローカーサーバーグループ 2 => 9094 => broker-node2:39092
+4.  ブローカーサーバーグループ 3 => 9095 => broker-node3:39092
 
 ブローカーロールノードが複数ある場合は、マッピングを追加する必要があります。ブートストラップターゲットグループに少なくとも1つのノードがあることを確認してください。耐障害性を確保するため、各AZに1つずつ、合計3つのノードを追加することをお勧めします。
 

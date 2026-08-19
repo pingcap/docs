@@ -12,7 +12,7 @@ summary: このガイドでは、Visual Studio CodeでTiDB MCPサーバーを設
 始める前に、以下のものを用意してください。
 
 -   **Visual Studio Code** : [code.visualstudio.com](https://code.visualstudio.com)からVS Codeをダウンロードしてインストールしてください。
--   **Python (&gt;=3.10) と uv** : Python (3.10 以降) と`uv`がインストールされていることを確認します。 [インストールガイド](https://docs.astral.sh/uv/getting-started/installation/)に従って`uv`をインストールします。
+-   **Python (>=3.10) と uv** : Python (3.10 以降) と`uv`がインストールされていることを確認します。 [インストールガイド](https://docs.astral.sh/uv/getting-started/installation/)に従って`uv`をインストールします。
 -   **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
 
 ## TiDB Cloud Starterに接続する（推奨） {#connect-to-tidb-cloud-starter-recommended}

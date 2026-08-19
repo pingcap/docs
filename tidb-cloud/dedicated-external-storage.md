@@ -29,7 +29,7 @@ TiDB Cloudのバケットアクセスを設定し、以下の手順でロールA
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「インポート」**をクリックします。
+    2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** > **「インポート」**をクリックします。
 
     3.  **「クラウドストレージからデータをインポート」**をクリックします。
 
@@ -166,7 +166,7 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「インポート」**をクリックします。
+    2.  対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** > **「インポート」**をクリックします。
 
     3.  **「クラウドストレージからデータをインポート」**をクリックします。
 
@@ -230,7 +230,7 @@ TiDB Cloud DedicatedがAzure Blobコンテナにアクセスできるように�
 
 1.  [Azureストレージアカウント](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts)ページで、コンテナーが属するストレージアカウントをクリックします。
 
-2.  ストレージアカウントのナビゲーション ペインで、 **Security + networking** &gt; **Shared access signature**をクリックします。
+2.  ストレージアカウントのナビゲーション ペインで、 **Security + networking** > **Shared access signature**をクリックします。
 
     ![sas-position](/media/tidb-cloud/dedicated-external-storage/azure-sas-position.png)
 

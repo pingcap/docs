@@ -257,7 +257,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
         SELECT * FROM INFORMATION_SCHEMA.CLUSTER_INFO;
         ```
 
-    -   Grafana を使用してサービスの状態を監視します[**概要 &gt; サービスポートステータス**](/grafana-overview-dashboard.md)に移動し、すべてのサービスが**Up**状態であることを確認します。
+    -   Grafana を使用してサービスの状態を監視します[**概要 > サービスポートステータス**](/grafana-overview-dashboard.md)に移動し、すべてのサービスが**Up**状態であることを確認します。
 
 7.  新しいクラスターから古いクラスターへのリバースレプリケーションを設定します。
 
@@ -289,8 +289,8 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 
 9.  次の Grafana パネルを使用して、新しいクラスターの負荷と動作ステータスを監視します。
 
-    -   [**TiDBダッシュボード &gt; クエリサマリー**](/grafana-tidb-dashboard.md#query-summary) : 期間、QPS、失敗したクエリ OPM メトリックを確認します。
-    -   [**TiDBダッシュボード &gt; サーバー**](/grafana-tidb-dashboard.md#server) :**接続数**メトリックを監視して、ノード間で接続が均等に分散されていることを確認します。
+    -   [**TiDBダッシュボード > クエリサマリー**](/grafana-tidb-dashboard.md#query-summary) : 期間、QPS、失敗したクエリ OPM メトリックを確認します。
+    -   [**TiDBダッシュボード > サーバー**](/grafana-tidb-dashboard.md#server) :**接続数**メトリックを監視して、ノード間で接続が均等に分散されていることを確認します。
 
 この時点で、ビジネス トラフィックは新しいクラスターに正常に切り替えられ、TiCDC リバース レプリケーション チャネルが確立されます。
 

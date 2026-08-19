@@ -39,7 +39,7 @@ resolved-ts は、この値より小さいタイムスタンプを持つすべ�
 
 ### 問題を特定する {#identify-issues}
 
-[Grafana &gt; TiDBダッシュボード &gt; **KVリクエスト**ダッシュボード](/grafana-tidb-dashboard.md#kv-request)では、次のパネルにステイル読み取りのヒット率、OPS、トラフィックが表示されます。
+[Grafana > TiDBダッシュボード > **KVリクエスト**ダッシュボード](/grafana-tidb-dashboard.md#kv-request)では、次のパネルにステイル読み取りのヒット率、OPS、トラフィックが表示されます。
 
 ![Stale Read Hit/Miss OPS](/media/stale-read/metrics-hit-miss.png)
 
@@ -61,7 +61,7 @@ resolved-ts は、この値より小さいタイムスタンプを持つすべ�
 
 ### Grafanaを使って診断する {#use-grafana-to-diagnose}
 
-[**TiKV詳細**&gt;**解決済みTS**ダッシュボード](/grafana-tikv-dashboard.md#resolved-ts)では、各TiKVのresolved-tsとsafe-tsが最も小さいリージョンを特定できます。これらのタイムスタンプが実時間より大幅に遅れている場合は、 `tikv-ctl`を使用してこれらのリージョンの詳細を確認する必要があります。
+[**TiKV詳細**>**解決済みTS**ダッシュボード](/grafana-tikv-dashboard.md#resolved-ts)では、各TiKVのresolved-tsとsafe-tsが最も小さいリージョンを特定できます。これらのタイムスタンプが実時間より大幅に遅れている場合は、 `tikv-ctl`を使用してこれらのリージョンの詳細を確認する必要があります。
 
 ### `tikv-ctl`を使用して診断する {#use-tikv-ctl-to-diagnose}
 
@@ -162,7 +162,7 @@ TiKV は 10 秒ごとに次のメトリックをチェックします。
 
 ### CheckLeaderの問題に対処する {#address-checkleader-issues}
 
-CheckLeader の問題に対処するには、 [**TiKV詳細**&gt;**解決済みTS**ダッシュボード](/grafana-tikv-dashboard.md#resolved-ts)でネットワークと**Check Leader Duration**メトリックを確認します。
+CheckLeader の問題に対処するには、 [**TiKV詳細**>**解決済みTS**ダッシュボード](/grafana-tikv-dashboard.md#resolved-ts)でネットワークと**Check Leader Duration**メトリックを確認します。
 
 ## 例 {#example}
 
@@ -170,7 +170,7 @@ CheckLeader の問題に対処するには、 [**TiKV詳細**&gt;**解決済みT
 
 ![Example: Stale Read OPS](/media/stale-read/example-ops.png)
 
-まず、次の[**TiKV詳細**&gt;**解決済みTS**ダッシュボード](/grafana-tikv-dashboard.md#resolved-ts)の**最大解決 TS ギャップ**と**最小解決 TSリージョン**メトリックを確認します。
+まず、次の[**TiKV詳細**>**解決済みTS**ダッシュボード](/grafana-tikv-dashboard.md#resolved-ts)の**最大解決 TS ギャップ**と**最小解決 TSリージョン**メトリックを確認します。
 
 ![Example: Max Resolved TS gap](/media/stale-read/example-ts-gap.png)
 

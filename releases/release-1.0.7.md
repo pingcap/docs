@@ -36,4 +36,4 @@ summary: TiDB 1.0.7がリリースされました。コマンドの最適化、�
 -   [PDからのスケジュールコマンドの消失を修正](https://github.com/pingcap/tikv/pull/2669)
 -   [プッシュメトリックにタイムアウトを追加する](https://github.com/pingcap/tikv/pull/2686)
 
-1.0.6 から 1.0.7 にアップグレードするには、PD -&gt; TiKV -&gt; TiDB のローリング アップグレード順序に従います。
+1.0.6 から 1.0.7 にアップグレードするには、PD -> TiKV -> TiDB のローリング アップグレード順序に従います。

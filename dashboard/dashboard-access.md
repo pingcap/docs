@@ -23,9 +23,9 @@ TiDB Dashboardにアクセスするには、ブラウザから[http://127.0.0.1:
 
 TiDB Dashboardは、比較的新しいバージョンの次の一般的なデスクトップ ブラウザーで使用できます。
 
--   Chrome &gt;= 77
--   Firefox &gt;= 68
--   Edge &gt;= 17
+-   Chrome >= 77
+-   Firefox >= 68
+-   Edge >= 17
 
 > **Note:**
 >

@@ -33,7 +33,7 @@ SM4暗号化はTiKVバージョン6.3.0以降でのみサポートされます�
 
 TiFlash は保存時の暗号化をサポートします。データキーはTiFlashによって生成されます。TiFlash（ TiFlash Proxy を含む）に書き込まれるすべてのファイル（データファイル、スキーマファイル、一時ファイルを含む）は、現在のデータキーを使用して暗号化されます。暗号化アルゴリズム、暗号化設定（ TiFlashでサポートされる[`tiflash-learner.toml`ファイル](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) ）、および監視メトリックの意味は、TiKV のものと一致しています。
 
-Grafana を使用してTiFlash を展開した場合は、 **TiFlash-Proxy-Details** -&gt; **Encryption**パネルを確認できます。
+Grafana を使用してTiFlash を展開した場合は、 **TiFlash-Proxy-Details** -> **Encryption**パネルを確認できます。
 
 SM4 暗号化は、 TiFlashの v6.4.0 以降のバージョンでのみサポートされます。TiFlashのv6.4.0 より前のバージョンでは、AES 暗号化のみがサポートされます。
 

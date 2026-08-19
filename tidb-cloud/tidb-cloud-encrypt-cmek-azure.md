@@ -73,7 +73,7 @@ TiDB Cloudコンソールと Azure ポータルを使用して CMEK を構成す
 9.  現在のユーザーに**Key Vault Crypto Officer**ロールを割り当てます。
 
     1.  [Azureポータル](https://portal.azure.com/)で、Key Vault に移動します。
-    2.  **Access control (IAM)**をクリックし、 **Add** &gt; **Add role assignment**をクリックします。
+    2.  **Access control (IAM)**をクリックし、 **Add** > **Add role assignment**をクリックします。
     3.  **Key Vault Crypto Officer**ロールを検索して選択し、 **Next**をクリックします。
     4.  **Members**タブで、 **Assign access to**を**User, group, or service principal**に設定します。
     5.  **+ Select members**をクリックし、現在のユーザーを検索してメンバーとして選択します。次に、 **Select**をクリックします。
@@ -82,7 +82,7 @@ TiDB Cloudコンソールと Azure ポータルを使用して CMEK を構成す
 10. 暗号化キー用の TiDB 提供エンタープライズ アプリケーションに**Key Vault Crypto Service Encryption User**ロールを割り当てます。
 
     1.  Key Vault で、作成した暗号化キー オブジェクトに移動します。
-    2.  **Add** &gt; **Add role assignment**をクリックします。
+    2.  **Add** > **Add role assignment**をクリックします。
     3.  **Key Vault Crypto Service Encryption User**ロールを検索して選択し、 **Next**をクリックします。
     4.  **Members**タブで、 **Assign access to**を**User, group, or service principal**に設定します。
     5.  **+ Select members**をクリックし、TiDB が提供する**Enterprise Application Name**を入力して、メンバーとして選択します。次に、 **Select**をクリックします。

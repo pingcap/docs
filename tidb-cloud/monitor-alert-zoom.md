@@ -103,7 +103,7 @@ TiDB Cloud Essentialインスタンスのアラート通知を購読するには
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **Alert Subscription**をクリックします。
+2.  左側のナビゲーションペインで、 **[設定]** > **Alert Subscription**をクリックします。
 
 3.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
@@ -132,7 +132,7 @@ TiDB Cloud Premiumインスタンスのアラート通知を購読するには�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **Alert Subscription**をクリックします。
+2.  左側のナビゲーションペインで、 **[設定]** > **Alert Subscription**をクリックします。
 
 3.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
@@ -162,7 +162,7 @@ TiDB Cloud Premiumインスタンスのアラート通知を購読するには�
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 3.  左側のナビゲーションペインで、 **Alert Subscription**の下にある**Project Settings**をクリックします。
-4.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **[購読解除]**をクリックします。
+4.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** > **[購読解除]**をクリックします。
 5.  購読解除を確定するには、 **「購読解除」**をクリックしてください。
 
 </CustomContent>
@@ -170,8 +170,8 @@ TiDB Cloud Premiumインスタンスのアラート通知を購読するには�
 <CustomContent plan="essential">
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **Alert Subscription**をクリックします。
-3.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **[購読解除]**をクリックします。
+2.  左側のナビゲーションペインで、 **[設定]** > **Alert Subscription**をクリックします。
+3.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** > **[購読解除]**をクリックします。
 4.  購読解除を確定するには、 **「購読解除」**をクリックしてください。
 
 </CustomContent>
@@ -179,8 +179,8 @@ TiDB Cloud Premiumインスタンスのアラート通知を購読するには�
 <CustomContent plan="premium">
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **Alert Subscription**をクリックします。
-3.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **[購読解除]**をクリックします。
+2.  左側のナビゲーションペインで、 **[設定]** > **Alert Subscription**をクリックします。
+3.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** > **[購読解除]**をクリックします。
 4.  購読解除を確定するには、 **「購読解除」**をクリックしてください。
 
 </CustomContent>

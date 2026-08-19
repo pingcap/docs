@@ -429,7 +429,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 ## 文字セットと照合順序の選択優先順位 {#selection-priorities-of-character-sets-and-collations}
 
-文字列 &gt;カラム&gt; テーブル &gt; データベース &gt; サーバー
+文字列 >カラム> テーブル > データベース > サーバー
 
 ## 文字セットと照合順序の選択に関する一般的なルール {#general-rules-on-selecting-character-sets-and-collation}
 
@@ -588,7 +588,7 @@ ERROR 1062 (23000): Duplicate entry 'a ' for key 't.PRIMARY' -- TiDB modifies th
 
 TiDBは照合順序を推論する際に、強制性値の低い式の照合順序を優先的に使用します。2つの句の強制性値が同じ場合、以下の優先順位に従って照合順序が決定されます。
 
-バイナリ &gt; utf8mb4_bin &gt; (utf8mb4_general_ci = utf8mb4_unicode_ci) &gt; utf8_bin &gt; (utf8_general_ci = utf8_unicode_ci) &gt; latin1_bin &gt; ascii_bin
+バイナリ > utf8mb4_bin > (utf8mb4_general_ci = utf8mb4_unicode_ci) > utf8_bin > (utf8_general_ci = utf8_unicode_ci) > latin1_bin > ascii_bin
 
 次の状況では、TiDB は照合順序を推測できず、エラーを報告します。
 

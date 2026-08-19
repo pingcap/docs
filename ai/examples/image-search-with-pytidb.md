@@ -18,7 +18,7 @@ summary: テキストから画像への検索と画像から画像への検索�
 
 始める前に、以下のものを用意してください。
 
--   **Python (&gt;=3.10)** : [Python](https://www.python.org/downloads/) 3.10以降のバージョンをインストールしてください。
+-   **Python (>=3.10)** : [Python](https://www.python.org/downloads/) 3.10以降のバージョンをインストールしてください。
 -   **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
 -   **Jina AI API キー**: [Jina AI埋め込み](https://jina.ai/embeddings/)から無料の API キーを取得できます。
 

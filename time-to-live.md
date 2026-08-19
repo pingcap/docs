@@ -163,7 +163,7 @@ SET @@global.tidb_ttl_job_schedule_window_end_time = '05:00 +0000';
 
 </CustomContent>
 
-TiDBはTTLに関する実行時情報を定期的に収集し、Grafanaでこれらのメトリクスの視覚化されたチャートを提供します。これらのメトリクスは、GrafanaのTiDB -&gt; TTLパネルで確認できます。
+TiDBはTTLに関する実行時情報を定期的に収集し、Grafanaでこれらのメトリクスの視覚化されたチャートを提供します。これらのメトリクスは、GrafanaのTiDB -> TTLパネルで確認できます。
 
 <CustomContent platform="tidb">
 

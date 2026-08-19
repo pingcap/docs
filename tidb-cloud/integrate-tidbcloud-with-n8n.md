@@ -16,7 +16,7 @@ summary: n8nにおけるTiDB Cloudノードの使い方を学びましょう。
 ## 前提条件： TiDB Cloud APIキーを取得する {#prerequisites-get-tidb-cloud-api-key}
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)では、左上隅のコンボボックスを使用して、対象の組織に切り替えてください。
-2.  左側のナビゲーションペインで、 **Organization Settings** &gt; **API Keys**をクリックします。
+2.  左側のナビゲーションペインで、 **Organization Settings** > **API Keys**をクリックします。
 3.  **API Keys**ページで、 **Create API Key**をクリックします。
 4.  APIキーの説明を入力し、 **「次へ」**をクリックしてください。
 5.  作成したAPIキーをコピーしてn8nで後で使用するようにし、 **「完了」**をクリックしてください。
@@ -57,7 +57,7 @@ n8nを起動したら、 [localhost:5678](http://localhost:5678)にアクセス�
 TiDB Cloudノードは、npmリポジトリでは`n8n-nodes-tidb-cloud`という名前です。n8nでTiDB Cloudを制御するには、このノードを手動でインストールする必要があります。
 
 1.  [localhost:5678](http://localhost:5678)ページで、n8nをセルフホスティングするためのオーナーアカウントを作成します。
-2.  **設定**&gt;**Community nodes**に移動してください。
+2.  **設定**>**Community nodes**に移動してください。
 3.  **Install a community node**をクリックしてください。
 4.  **npm Package Name**フィールドに`n8n-nodes-tidb-cloud`と入力します。
 5.  **「インストール」**をクリックしてください。

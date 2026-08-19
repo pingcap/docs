@@ -84,7 +84,7 @@ Apache PulsarサービスにパブリックIPアクセスを提供する場合�
 ## ステップ1. Apache PulsarのChangefeedページを開きます。 {#step-1-open-the-changefeed-page-for-apache-pulsar}
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
-2.  変更フィードイベントの発生源となるTiDBクラスタのクラスタ概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「変更フィード」**をクリックします。
+2.  変更フィードイベントの発生源となるTiDBクラスタのクラスタ概要ページに移動し、左側のナビゲーションペインで**「データ」** > **「変更フィード」**をクリックします。
 3.  **Create Changefeed**をクリックします。
 
 ## ステップ2. changefeedの送信先を設定します {#step-2-configure-the-changefeed-destination}

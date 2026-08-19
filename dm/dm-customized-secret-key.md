@@ -34,4 +34,4 @@ DM はバージョン 8.0.0 以降では固定秘密キーを使用しなくな�
 
 2.  DM マスターのローリング再起動を実行します。
 
-3.  新しい[データソース構成ファイル](/dm/dm-source-configuration-file.md)と[移行タスク構成ファイル](/dm/task-configuration-file-full.md)を作成するときは、 `tiup dmctl encrypt` (dmctl バージョン &gt;= v8.0.0) で暗号化されたパスワードを使用します。
+3.  新しい[データソース構成ファイル](/dm/dm-source-configuration-file.md)と[移行タスク構成ファイル](/dm/task-configuration-file-full.md)を作成するときは、 `tiup dmctl encrypt` (dmctl バージョン >= v8.0.0) で暗号化されたパスワードを使用します。

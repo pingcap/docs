@@ -156,7 +156,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **Data Migration**をクリックします。
+2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** > **Data Migration**をクリックします。
 
 3.  **Data Migration**ページで、右上隅にある**Create Migration Job**をクリックします。**Create Migration Job**ページが表示されます。
 
@@ -187,7 +187,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     <CustomContent plan="premium">
 
     -   **Hostname or IP address**（公開の場合）：データソースのホスト名またはIPアドレス。
-    -   **Private Endpoint**(プライベート リンク用): TiDB Cloud Premium インスタンスの**[ネットワーキング]** &gt; **[外部サービス向け AWS プライベート エンドポイント]**で作成したプライベート エンドポイント。または、**ここで [プライベート エンドポイントの作成] をクリックしてプライベート エンドポイント**を作成します。セットアップの詳細については、データ移行ガイドの[プライベートリンクまたはプライベートエンドポイント](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint)セクションを参照してください。
+    -   **Private Endpoint**(プライベート リンク用): TiDB Cloud Premium インスタンスの**[ネットワーキング]** > **[外部サービス向け AWS プライベート エンドポイント]**で作成したプライベート エンドポイント。または、**ここで [プライベート エンドポイントの作成] をクリックしてプライベート エンドポイント**を作成します。セットアップの詳細については、データ移行ガイドの[プライベートリンクまたはプライベートエンドポイント](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint)セクションを参照してください。
 
     </CustomContent>
 

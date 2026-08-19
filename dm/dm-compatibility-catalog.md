@@ -25,7 +25,7 @@ DMは、さまざまなソースからTiDBクラスタへのデータ移行を�
 | MySQL 9.x                | テストされていません                       |                                                                                                                                              |
 | MariaDB &lt; 10.1.2      | 互換性がない                           | 時間型のbinlogとは互換性がありません。                                                                                                                       |
 | MariaDB 10.1.2 ～ 10.5.10 | Experimental                     |                                                                                                                                              |
-| MariaDB &gt; 10.5.10     | テストされていません                       | [事前チェック](/dm/dm-precheck.md)をバイパスした後は、ほとんどの場合に機能すると予想されます。 [MariaDBに関する注記](#mariadb-notes)を参照してください。                                          |
+| MariaDB > 10.5.10     | テストされていません                       | [事前チェック](/dm/dm-precheck.md)をバイパスした後は、ほとんどの場合に機能すると予想されます。 [MariaDBに関する注記](#mariadb-notes)を参照してください。                                          |
 
 ### 外部キーの`CASCADE`操作 {#foreign-key-cascade-operations}
 

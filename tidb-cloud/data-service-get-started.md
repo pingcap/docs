@@ -220,7 +220,7 @@ API キーの詳細については、[Data ServiceのAPIキー](/tidb-cloud/data
 
 TiDB Cloudは、エンドポイントを呼び出すのに役立つコード例を生成します。コード例を取得するには、以下の手順を実行してください。
 
-1.  [**Data Service**](https://tidbcloud.com/project/data-service)ページの左側のペインで、エンドポイントの名前をクリックし、右上隅の**「...」** &gt; **Code Example**をクリックします。「**Code Example**ダイアログボックスが表示されます。
+1.  [**Data Service**](https://tidbcloud.com/project/data-service)ページの左側のペインで、エンドポイントの名前をクリックし、右上隅の**「...」** > **Code Example**をクリックします。「**Code Example**ダイアログボックスが表示されます。
 
 2.  ダイアログボックスで、エンドポイントを呼び出すために使用するTiDB Cloud Starterインスタンスとデータベースを選択し、コード例をコピーします。
 

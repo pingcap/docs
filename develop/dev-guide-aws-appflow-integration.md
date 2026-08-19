@@ -87,7 +87,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 ### Lambdaを使用してコネクタを登録します {#use-lambda-to-register-a-connector}
 
-1.  [AWS マネジメントコンソール](https://console.aws.amazon.com)コンソールで、 [Amazon AppFlow &gt; コネクタ](https://console.aws.amazon.com/appflow/home#/gallery)クリックし、 **[新しいコネクタの登録] を**クリックします。
+1.  [AWS マネジメントコンソール](https://console.aws.amazon.com)コンソールで、 [Amazon AppFlow > コネクタ](https://console.aws.amazon.com/appflow/home#/gallery)クリックし、 **[新しいコネクタの登録] を**クリックします。
 
     ![register connector](/media/develop/aws-appflow-step-register-connector.png)
 
@@ -99,7 +99,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 ## ステップ2. フローを作成する {#step-2-create-a-flow}
 
-[Amazon AppFlow &gt; フロー](https://console.aws.amazon.com/appflow/home#/list)し、 **[フローの作成] を**クリックします。
+[Amazon AppFlow > フロー](https://console.aws.amazon.com/appflow/home#/list)し、 **[フローの作成] を**クリックします。
 
 ![create flow](/media/develop/aws-appflow-step-create-flow.png)
 
@@ -191,12 +191,12 @@ Salesforce の**Account**オブジェクトのフィールドを TiDB の`sf_acc
 
 -   このドキュメントでは、以下のマッピングルール（ソースフィールド名→宛先フィールド名）が必要です。
 
-    -   アカウントID -&gt; id
-    -   アカウント名 -&gt; 名前
-    -   アカウントタイプ -&gt; タイプ
-    -   請求先州/都道府県 -&gt; billing_state
-    -   アカウント評価 -&gt; 評価
-    -   産業 -&gt; 産業
+    -   アカウントID -> id
+    -   アカウント名 -> 名前
+    -   アカウントタイプ -> タイプ
+    -   請求先州/都道府県 -> billing_state
+    -   アカウント評価 -> 評価
+    -   産業 -> 産業
 
     ![mapping a rule](/media/develop/aws-appflow-step-mapping-a-rule.png)
 

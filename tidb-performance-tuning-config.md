@@ -333,7 +333,7 @@ go-ycsb run mysql -P /ycsb/workloads/workloada -p {host} -p mysql.port={port} -p
 
 #### トラブルシューティング {#troubleshooting}
 
-ワークロードに頻繁に発生する小規模なトランザクションや、タイムスタンプを頻繁に要求するクエリが含まれる場合、 [TSO（タイムスタンプオラクル）](/glossary.md#timestamp-oracle-tso)がパフォーマンスのボトルネックになる可能性があります。TSO の待機時間がシステムに影響を与えているかどうかを確認するには、 [**パフォーマンス概要 &gt; SQL実行時間概要**](/grafana-performance-overview-dashboard.md#sql-execute-time-overview)パネルを確認してください。TSO の待機時間が SQL 実行時間の大部分を占める場合は、次の最適化を検討してください。
+ワークロードに頻繁に発生する小規模なトランザクションや、タイムスタンプを頻繁に要求するクエリが含まれる場合、 [TSO（タイムスタンプオラクル）](/glossary.md#timestamp-oracle-tso)がパフォーマンスのボトルネックになる可能性があります。TSO の待機時間がシステムに影響を与えているかどうかを確認するには、 [**パフォーマンス概要 > SQL実行時間概要**](/grafana-performance-overview-dashboard.md#sql-execute-time-overview)パネルを確認してください。TSO の待機時間が SQL 実行時間の大部分を占める場合は、次の最適化を検討してください。
 
 -   厳密な一貫性を必要としない読み取り操作には、低精度TSO（ [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso)を有効にする）を使用します。詳細については、 [解決策1：低精度TSOを使用する](#solution-1-low-precision-tso)を参照してください。
 -   可能な場合は、小さなトランザクションをまとめて大きなトランザクションにします。詳細については、 [解決策2：TSO要求の並列モード](#solution-2-parallel-mode-for-tso-requests)を参照してください。

@@ -59,7 +59,7 @@ DataGripは2つの方法で使用できます。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-6.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**+**をクリックし、 **「データソース」** &gt; **「その他」** &gt; **TiDB**を選択します。
+6.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**+**をクリックし、 **「データソース」** > **「その他」** > **TiDB**を選択します。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
@@ -80,7 +80,7 @@ DataGripは2つの方法で使用できます。
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+2.  左側のナビゲーションペインで、 **[設定]** > **[ネットワーク]**をクリックします。
 
 3.  **Networking**ページで、**Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
 
@@ -99,7 +99,7 @@ DataGripは2つの方法で使用できます。
 
 7.  DataGripを起動し、接続を管理するためのプロジェクトを作成します。
 
-8.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**+**をクリックし、 **「データソース」** &gt; **「その他」** &gt; **TiDB**を選択します。
+8.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**+**をクリックし、 **「データソース」** > **「その他」** > **TiDB**を選択します。
 
 9.  適切な接続文字列をコピーして、DataGrip の [**データ ソースとドライバー]**ウィンドウに貼り付けてください。DataGrip のフィールドとTiDB Cloud Premium の接続文字列のマッピングは以下のとおりです。
 
@@ -134,7 +134,7 @@ DataGripは2つの方法で使用できます。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-5.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**+**をクリックし、 **「データソース」** &gt; **「その他」** &gt; **TiDB**を選択します。
+5.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**+**をクリックし、 **「データソース」** > **「その他」** > **TiDB**を選択します。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
@@ -174,7 +174,7 @@ DataGripは2つの方法で使用できます。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-2.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**+**をクリックし、 **「データソース」** &gt; **「その他」** &gt; **TiDB**を選択します。
+2.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**+**をクリックし、 **「データソース」** > **「その他」** > **TiDB**を選択します。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
