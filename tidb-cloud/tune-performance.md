@@ -14,7 +14,7 @@ TiDB Cloud 提供了 [慢查询](#slow-query)、[语句分析](#statement-analys
 
 <CustomContent plan="premium">
 
-TiDB Cloud 提供了 [慢查询](#slow-query) 和 [SQL 语句](#sql-statement) 用于分析性能。
+TiDB Cloud 提供了 [慢查询](#slow-query) 和 [语句分析](#statement-analysis) 用于分析性能。
 
 </CustomContent>
 
@@ -48,8 +48,6 @@ TiDB Cloud 提供了 [慢查询](#slow-query) 和 [SQL 语句](#sql-statement) �
 
 要在 <CustomContent plan="starter">{{{ .starter }}} 实例</CustomContent><CustomContent plan="essential">{{{ .essential }}} 实例</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent> 中查看慢查询，请执行以下步骤：
 
-<CustomContent plan="starter,essential,dedicated">
-
 1. [进入 **Diagnosis** 页面](#view-the-diagnosis-page)。
 
 2. 点击 **Slow Query** 标签页。
@@ -57,18 +55,6 @@ TiDB Cloud 提供了 [慢查询](#slow-query) 和 [SQL 语句](#sql-statement) �
 3. 点击列表中的任意慢查询以显示其详细执行信息。
 
 4. （可选）你可以根据目标时间范围、相关数据库和 SQL 关键字筛选慢查询，也可以限制显示的慢查询数量。
-
-</CustomContent>
-
-<CustomContent plan="premium">
-
-1. 进入 {{{ .premium }}} 实例的概览页面，然后在左侧导航栏点击 **Monitoring** > **Slow Query**。
-
-2. 从列表中选择一个慢查询以查看其详细执行信息。
-
-3. （可选）你可以根据目标时间范围和 SQL 关键字筛选慢查询，也可以限制显示的慢查询数量。
-
-</CustomContent>
 
 结果以表格形式展示，你可以按不同列进行排序。
 
@@ -85,7 +71,7 @@ TiDB Cloud 提供了 [慢查询](#slow-query) 和 [SQL 语句](#sql-statement) �
 
 </CustomContent>
 
-<CustomContent plan="starter,essential,dedicated">
+<CustomContent plan="starter,essential,dedicated,premium">
 
 ## 语句分析
 
@@ -94,22 +80,6 @@ TiDB Cloud 提供了 [慢查询](#slow-query) 和 [SQL 语句](#sql-statement) �
 1. [进入 **Diagnosis** 页面](#view-the-diagnosis-page)。
 
 2. 点击 **SQL Statement** 标签页。
-
-3. 在时间区间框中选择要分析的时间段，即可获得该时间段内所有数据库的 SQL 语句执行统计信息。
-
-4. （可选）如果你只关注某些数据库，可以在下一个框中选择相应的 schema 进行结果筛选。
-
-</CustomContent>
-
-<CustomContent plan="premium">
-
-## SQL 语句
-
-要使用 **SQL Statement** 页面，请执行以下步骤：
-
-1. 进入 {{{ .premium }}} 实例的概览页面，然后在左侧导航栏点击 **Monitoring** > **SQL Statement**。
-
-2. 点击列表中的某条 SQL 语句以查看其详细执行信息。
 
 3. 在时间区间框中选择要分析的时间段，即可获得该时间段内所有数据库的 SQL 语句执行统计信息。
 
