@@ -7,6 +7,14 @@ summary: 了解如何通过公共连接连接到你的 {{{ .premium }}}。
 
 本文档介绍如何通过公共连接连接到你的 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例。公共连接会暴露一个带有流量过滤器的公共端点，因此你可以通过笔记本电脑上的 SQL 客户端连接到你的 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例。
 
+<CustomContent plan="byoc">
+
+> **Note:**
+>
+> 仅当你在 BYOC 部署期间提供了公共托管 zone 时，公共连接才可用。如果你提供的是私有托管 zone，请使用私有连接连接到你的实例。
+
+</CustomContent>
+
 > **Tip:**
 >
 > - 如需了解如何通过公共连接连接到 {{{ .starter }}} 或 {{{ .essential }}} 实例，请参见 [通过公共端点连接到 {{{ .starter }}} 或 Essential](/tidb-cloud/connect-via-standard-connection-serverless.md)。

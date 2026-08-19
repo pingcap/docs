@@ -308,7 +308,7 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">🔒</td>
     <td style="text-align:center;">✅</td>
-    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
   </tr>
   <tr>
     <td>控制台审计日志</td>
