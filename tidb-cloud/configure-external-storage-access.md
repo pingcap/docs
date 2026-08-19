@@ -95,8 +95,8 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
     5.  ポリシーテキストフィールドで、必要に応じてポリシーを設定してください。以下は、 TiDB Cloud Starter、 Essential、またはPremiumインスタンスからデータをエクスポートしたり、これらのインスタンスにデータをインポートしたりする際に使用できる例です。
 
-        -   TiDB Cloud Starter、 Essential、またはPremiumインスタンスからデータをエクスポートするには**、s3:PutObject**および**s3:ListBucket**の権限が必要です。
-        -   TiDB Cloud Starter、 Essential、またはPremiumインスタンスにデータをインポートするには**、s3:GetObject** 、 **s3:GetObjectVersion** 、および**s3:ListBucket**の権限が必要です。
+        -   TiDB Cloud Starter、 Essential、またはPremiumインスタンスからデータをエクスポートするには、**s3:PutObject**および**s3:ListBucket**の権限が必要です。
+        -   TiDB Cloud Starter、 Essential、またはPremiumインスタンスにデータをインポートするには、**s3:GetObject**、**s3:GetObjectVersion**、および**s3:ListBucket**の権限が必要です。
 
         ```json
         {
@@ -337,7 +337,7 @@ TiDB CloudがAlibaba Cloud OSSバケットにアクセスできるようにす�
 
     -   「**アクション」**セクションで、必要に応じて権限を選択してください。
 
-        TiDB Cloud Starter、 Essential、またはPremiumインスタンスにデータをインポートするには、 **oss:GetObject** 、 **oss:GetBucketInfo** 、および**oss:ListObjects**の権限を付与してください。
+        TiDB Cloud Starter、 Essential、またはPremiumインスタンスにデータをインポートするには、**oss:GetObject**、**oss:GetBucketInfo**、および**oss:ListObjects**の権限を付与してください。
 
         TiDB Cloud Starter、 Essential、またはPremiumインスタンスからデータをエクスポートするには、 `oss:PutObject`と`oss:GetBucketInfo`の権限を付与してください。
 

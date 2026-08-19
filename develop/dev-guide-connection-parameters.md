@@ -118,8 +118,8 @@ connections = ((core_count * 2) + effective_spindle_count)
 
 このメモは以下を示しています。
 
--   **core_count**は、 [ハイパースレッディング](https://en.wikipedia.org/wiki/Hyper-threading)有効にするかどうかに関わらず、物理コアの数です。
--   データが完全にキャッシュされると、 **effective_spindle_count**を`0`に設定する必要があります。キャッシュのヒット率が低下すると、カウントは実際の数値である`HDD`に近づきます。
+-   **core_count**は、 [ハイパースレッディング](https://en.wikipedia.org/wiki/Hyper-threading)を有効にするかどうかに関わらず、物理コアの数です。
+-   データが完全にキャッシュされると、 **effective_spindle_count**を`0`に設定する必要があります。キャッシュのヒット率が低下すると、カウントは実際の`HDD`の数に近づきます。
 -   **この計算式が*SSD*にも有効かどうかは検証されておらず、不明である。**
 
 SSDを使用する場合は、経験に基づき、以下の式を使用することをお勧めします。
