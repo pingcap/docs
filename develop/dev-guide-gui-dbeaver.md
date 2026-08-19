@@ -55,16 +55,16 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
     -   **接続タイプ**は`Public`に設定されています。
     -   **ブランチ**は`main`に設定されています。
-    -   **Connect With は**`DBeaver`に設定されています。
+    -   **Connect With**は`DBeaver`に設定されています。
     -   お使いの環境に合った**オペレーティングシステム**を選択してください。
 
-4.  **「パスワードを生成」を**クリックすると、ランダムなパスワードが生成されます。
+4.  **「パスワードを生成」**をクリックすると、ランダムなパスワードが生成されます。
 
     > **Tip:**
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードをリセット」**をクリックして新しいパスワードを生成できます。
 
-5.  DBeaverを起動し、左上隅の**「新しいデータベース接続」**をクリックします。 **「データベースへの接続**」ダイアログで、リストから**TiDBを**選択し、 **「次へ」**をクリックします。
+5.  DBeaverを起動し、左上隅の**「新しいデータベース接続」**をクリックします。 **「データベースへの接続**」ダイアログで、リストから**TiDB**を選択し、 **「次へ」**をクリックします。
 
     ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
@@ -108,7 +108,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
     -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **「CA証明書」**をクリックしてダウンロードしてください。
     -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
-7.  DBeaverを起動し、左上隅の**「新しいデータベース接続」**をクリックします。 **「データベースへの接続**」ダイアログで、リストから**TiDBを**選択し、 **「次へ」**をクリックします。
+7.  DBeaverを起動し、左上隅の**「新しいデータベース接続」**をクリックします。 **「データベースへの接続**」ダイアログで、リストから**TiDB**を選択し、 **「次へ」**をクリックします。
 
 8.  適切な接続文字列をコピーして、DBeaverの接続パネルに貼り付けてください。DBeaverのフィールドとTiDB Cloud Premiumの接続文字列のマッピングは以下のとおりです。
 
@@ -138,7 +138,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
     TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
-4.  DBeaverを起動し、左上隅の**「新しいデータベース接続」**をクリックします。 **「データベースへの接続**」ダイアログで、リストから**TiDBを**選択し、 **「次へ」**をクリックします。
+4.  DBeaverを起動し、左上隅の**「新しいデータベース接続」**をクリックします。 **「データベースへの接続**」ダイアログで、リストから**TiDB**を選択し、 **「次へ」**をクリックします。
 
     ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
@@ -170,7 +170,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
-1.  DBeaverを起動し、左上隅の**「新しいデータベース接続」**をクリックします。 **「データベースへの接続**」ダイアログで、リストから**TiDBを**選択し、 **「次へ」**をクリックします。
+1.  DBeaverを起動し、左上隅の**「新しいデータベース接続」**をクリックします。 **「データベースへの接続**」ダイアログで、リストから**TiDB**を選択し、 **「次へ」**をクリックします。
 
     ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 

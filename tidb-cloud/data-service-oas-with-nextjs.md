@@ -192,7 +192,7 @@ SELECT * FROM test.repository;
     >   });
     > ```
     >
-    > `basePath`データアプリの実際のエンドポイントパスに置き換えてください。 `${YOUR_REGION}`と`{YOUR_DATA_APP_ID}`を取得するには、エンドポイントの**Endpoint URL**パネルで**エンドポイント URL を**確認してください。
+    > `basePath`データアプリの実際のエンドポイントパスに置き換えてください。 `${YOUR_REGION}`と`{YOUR_DATA_APP_ID}`を取得するには、エンドポイントの**Endpoint URL**パネルで**エンドポイント URL**を確認してください。
 
 ## ステップ5．Next.jsアプリケーションをプレビューする {#step-5-preview-your-next-js-application}
 

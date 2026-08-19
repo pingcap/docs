@@ -69,7 +69,7 @@ pip install -r requirements.txt
 
     -   **ブランチ**は`main`に設定されています。
 
-    -   **Connect With は**`General`に設定されています。
+    -   **Connect With**は`General`に設定されています。
 
     -   お使いの環境に合った**オペレーティングシステム**を選択してください。
 
@@ -77,7 +77,7 @@ pip install -r requirements.txt
     >
     > プログラムがWindows Subsystem for Linux（WSL）上で実行されている場合は、対応するLinuxディストリビューションに切り替えてください。
 
-4.  **「パスワードを生成」を**クリックすると、ランダムなパスワードが生成されます。
+4.  **「パスワードを生成」**をクリックすると、ランダムなパスワードが生成されます。
 
     > **Tip:**
     >

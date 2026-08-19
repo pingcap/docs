@@ -87,9 +87,9 @@ TiDB Cloud Dedicatedクラスターのアラート通知を購読するには、
 
 8.  購読を完了するには、 **「保存」**をクリックしてください。
 
-または、対象のTiDB Cloud Dedicatedクラスタの**アラート**ページの右上にある**「購読」を**クリックすることもできます。**Alert Subscription**ページに移動します。
+または、対象のTiDB Cloud Dedicatedクラスタの**アラート**ページの右上にある**「購読」**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
-または、クラスターの**アラート**ページの右上隅にある**「購読」を**クリックすることもできます。**Alert Subscription**ページに移動します。
+または、クラスターの**アラート**ページの右上隅にある**「購読」**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
 </CustomContent>
 
@@ -118,7 +118,7 @@ TiDB Cloud Essentialインスタンスのアラート通知を購読するには
 
 7.  購読を完了するには、 **「保存」**をクリックしてください。
 
-または、対象のTiDB Cloud Essentialインスタンスの**アラート**ページの右上隅にある**「購読」を**クリックすることもできます。**Alert Subscription**ページに移動します。
+または、対象のTiDB Cloud Essentialインスタンスの**アラート**ページの右上隅にある**「購読」**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
 </CustomContent>
 
@@ -147,7 +147,7 @@ TiDB Cloud Premiumインスタンスのアラート通知を購読するには�
 
 7.  購読を完了するには、 **「保存」**をクリックしてください。
 
-または、対象のTiDB Cloud Premiumインスタンスの**アラート**ページの右上にある**「購読」を**クリックすることもできます。**Alert Subscription**ページに移動します。
+または、対象のTiDB Cloud Premiumインスタンスの**アラート**ページの右上にある**「購読」**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
 </CustomContent>
 

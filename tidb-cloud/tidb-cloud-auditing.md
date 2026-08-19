@@ -14,7 +14,7 @@ TiDB Cloud は、実行された SQL ステートメントなど、データベ�
 > - AWS および Google Cloud でホストされるクラスターの場合: TiDB バージョンが v7.5.6 以降、または v8.5.2 以降である必要があります。
 > - Azure でホストされるクラスターの場合: TiDB バージョンが v7.5.6 以降、または v8.5.2 以降であり、クラスターが 2026 年 4 月 15 日以降に作成されている必要があります。
 >
-> その他のすべての TiDB バージョンまたはクラスター構成では、データベース監査ログはリクエストに応じて利用できます。対象外のクラスターへのアクセスをリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **「説明」**欄に「データベース監査ログの申請」と入力して、 **「送信」を**クリックしてください。
+> その他のすべての TiDB バージョンまたはクラスター構成では、データベース監査ログはリクエストに応じて利用できます。対象外のクラスターへのアクセスをリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **「説明」**欄に「データベース監査ログの申請」と入力して、 **「送信」**をクリックしてください。
 >
 > このドキュメントは、監査ログ機能のパブリックプレビュー版にのみ適用されます。以前のバージョンのデータベース監査ログを使用している場合は、 [TiDB Cloud Database Audit Logging (Legacy)](/tidb-cloud/tidb-cloud-auditing-legacy.md)を参照してください。
 
@@ -43,7 +43,7 @@ TiDB Cloudは、 TiDB Cloud Dedicatedクラスタの監査ログをクラウド�
 
 > **Note:**
 >
-> AWS にデプロイされた TiDB クラスターでは、データベース監査ログを有効にする際に、監査ログファイルをTiDB Cloudに保存することを選択できます。現在、この機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**[?]**をクリックし、 **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **[説明]**フィールドに「監査ログファイルをTiDB Cloudに保存する申請」と入力して、 **[送信] を**クリックします。
+> AWS にデプロイされた TiDB クラスターでは、データベース監査ログを有効にする際に、監査ログファイルをTiDB Cloudに保存することを選択できます。現在、この機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**[?]**をクリックし、 **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **[説明]**フィールドに「監査ログファイルをTiDB Cloudに保存する申請」と入力して、 **[送信]**をクリックします。
 
 ### AWSの監査ログを有効にする {#enable-audit-logging-for-aws}
 

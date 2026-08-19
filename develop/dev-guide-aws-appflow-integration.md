@@ -87,7 +87,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 ### Lambdaを使用してコネクタを登録します {#use-lambda-to-register-a-connector}
 
-1.  [AWS マネジメントコンソール](https://console.aws.amazon.com)コンソールで、 [Amazon AppFlow &gt; コネクタ](https://console.aws.amazon.com/appflow/home#/gallery)クリックし、 **[新しいコネクタの登録] を**クリックします。
+1.  [AWS マネジメントコンソール](https://console.aws.amazon.com)コンソールで、 [Amazon AppFlow &gt; コネクタ](https://console.aws.amazon.com/appflow/home#/gallery)クリックし、 **[新しいコネクタの登録]**をクリックします。
 
     ![register connector](/media/develop/aws-appflow-step-register-connector.png)
 
@@ -99,7 +99,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 ## ステップ2. フローを作成する {#step-2-create-a-flow}
 
-[Amazon AppFlow &gt; フロー](https://console.aws.amazon.com/appflow/home#/list)し、 **[フローの作成] を**クリックします。
+[Amazon AppFlow &gt; フロー](https://console.aws.amazon.com/appflow/home#/list)し、 **[フローの作成]**をクリックします。
 
 ![create flow](/media/develop/aws-appflow-step-create-flow.png)
 
@@ -113,7 +113,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 **ソースの詳細**と**宛先の詳細**を選択してください。TiDBコネクタはどちらにも使用できます。
 
-1.  ソース名を選択してください。このドキュメントでは、例として**Salesforceを**ソースとして使用します。
+1.  ソース名を選択してください。このドキュメントでは、例として**Salesforce**をソースとして使用します。
 
     ![salesforce source](/media/develop/aws-appflow-step-salesforce-source.png)
 
@@ -210,7 +210,7 @@ Salesforce の**Account**オブジェクトのフィールドを TiDB の`sf_acc
 
 ### フローを確認して作成する {#confirm-and-create-the-flow}
 
-作成するフローの情報を確認してください。問題がなければ、 **「フローを作成」を**クリックします。
+作成するフローの情報を確認してください。問題がなければ、 **「フローを作成」**をクリックします。
 
 ![review](/media/develop/aws-appflow-step-review.png)
 

@@ -88,7 +88,7 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 
 2.  Kafkaの認証設定に応じて、**認証**オプションを選択してください。
 
-    -   Kafkaで認証が必要ない場合は、デフォルトオプションの**「無効」の**ままにしてください。
+    -   Kafkaで認証が必要ない場合は、デフォルトオプションの**「無効」**のままにしてください。
     -   Kafkaで認証が必要な場合は、該当する認証タイプを選択し、認証に使用するKafkaアカウントの**user name**と**パスワード**を入力してください。
 
 3.  **Kafka Version**については、ご使用のKafkaのバージョンに基づいて、 **Kafka v2**または**Kafka v3**を選択してください。
@@ -110,7 +110,7 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 
 4.  Kafkaの認証設定に応じて、**認証**オプションを選択してください。
 
-    -   Kafkaで認証が必要ない場合は、デフォルトオプションの**「無効」の**ままにしてください。
+    -   Kafkaで認証が必要ない場合は、デフォルトオプションの**「無効」**のままにしてください。
     -   Kafkaで認証が必要な場合は、該当する認証タイプを選択し、認証に使用するKafkaアカウントの**user name**と**パスワード**を入力してください。
 
 5.  **Kafka Version**については、ご使用のKafkaのバージョンに基づいて、 **Kafka v2**または**Kafka v3**を選択してください。
@@ -159,14 +159,14 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 
     TiDB 拡張フィールドの詳細については、 [Avroデータ形式のTiDB拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields)フィールド」および[Canal-JSONデータ形式のTiDB拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field)を参照してください。
 
-6.  データ形式として**Avroを**選択すると、ページにAvro固有の設定項目が表示されます。これらの設定項目は、以下のように入力できます。
+6.  データ形式として**Avro**を選択すると、ページにAvro固有の設定項目が表示されます。これらの設定項目は、以下のように入力できます。
 
     -   **Decimal**および**Unsigned BigInt**の設定では、 TiDB CloudがKafkaメッセージ内のdecimal型およびunsigned bigint型のデータ型をどのように処理するかを指定します。
     -   **Schema Registry**領域で、スキーマレジストリのエンドポイントを入力します。**HTTP Authentication**を有効にする場合は、ユーザー名とパスワードを入力します。
 
 7.  **Topic Distribution**エリアで配信モードを選択し、選択したモードに応じてトピック名の設定を入力します。
 
-    データ形式として**Avroを**選択した場合、 **Distribution Mode**ドロップダウンリストでは**[テーブルごとの変更ログをKafkaトピックに配信する]**モードのみを選択できます。
+    データ形式として**Avro**を選択した場合、 **Distribution Mode**ドロップダウンリストでは**[テーブルごとの変更ログをKafkaトピックに配信する]**モードのみを選択できます。
 
     配信モードは、変更フィードがKafkaトピックを作成する方法を制御します。テーブルごと、データベースごと、またはすべての変更ログに対して1つのトピックを作成するかを選択できます。
 

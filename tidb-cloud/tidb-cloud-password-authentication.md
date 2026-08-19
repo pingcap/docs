@@ -114,7 +114,7 @@ TiDB Cloudは、登録ユーザーに対してデフォルトのパスワード�
 
 2.  **Account Settings**をクリックします。
 
-3.  **Multi-Factor Authentication**セクションで、 **「無効にする」を**クリックします。
+3.  **Multi-Factor Authentication**セクションで、 **「無効にする」**をクリックします。
 
 4.  操作を確認するには、アカウントのパスワードと MFA 認証コードを入力します。
 

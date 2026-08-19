@@ -118,8 +118,8 @@ connections = ((core_count * 2) + effective_spindle_count)
 
 このメモは以下を示しています。
 
--   **core_countは**、 [ハイパースレッディング](https://en.wikipedia.org/wiki/Hyper-threading)有効にするかどうかに関わらず、物理コアの数です。
--   データが完全にキャッシュされると、 **effective_spindle_count を**`0`に設定する必要があります。キャッシュのヒット率が低下すると、カウントは実際の数値である`HDD`に近づきます。
+-   **core_count**は、 [ハイパースレッディング](https://en.wikipedia.org/wiki/Hyper-threading)有効にするかどうかに関わらず、物理コアの数です。
+-   データが完全にキャッシュされると、 **effective_spindle_count**を`0`に設定する必要があります。キャッシュのヒット率が低下すると、カウントは実際の数値である`HDD`に近づきます。
 -   **この計算式が*SSD*にも有効かどうかは検証されておらず、不明である。**
 
 SSDを使用する場合は、経験に基づき、以下の式を使用することをお勧めします。
@@ -174,7 +174,7 @@ OLTP（オンライン・トランザクション処理）シナリオでは、�
 
 JDBCでは通常、以下の2つの処理方法が使用されます。
 
--   最初の方法: [**FetchSizeを**`Integer.MIN_VALUE`に設定します](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-implementation-notes.html#ResultSet)クライアントがキャッシュしないようにします。クライアントは`StreamingResult`を介してネットワーク接続から実行結果を読み取ります。
+-   最初の方法: [**FetchSize**を`Integer.MIN_VALUE`に設定します](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-implementation-notes.html#ResultSet)クライアントがキャッシュしないようにします。クライアントは`StreamingResult`を介してネットワーク接続から実行結果を読み取ります。
 
     クライアントがストリーミング読み取り方式を使用する場合、クエリを実行するためにステートメントを引き続き使用する前に、読み取りを完了するか、 `resultset`閉じる必要があります。そうしないと、エラー`No statements may be issued when any streaming result sets are open and in use on a given connection. Ensure that you have called .close() on any active streaming result sets before attempting more queries.`が返されます。
 
@@ -198,7 +198,7 @@ JDBCは通常、JDBC URLパラメータの形式で実装関連の設定を提�
 
 -   **useServerPrepStmts**
 
-    **useServerPrepStmts は**デフォルトで`false`に設定されています。つまり、Prepare API を使用する場合でも、「prepare」操作はクライアント側でのみ実行されます。サーバーの解析オーバーヘッドを回避するため、同じ SQL ステートメントで Prepare API を複数回使用する場合は、この設定を`true`に設定することをお勧めします。
+    **useServerPrepStmts**はデフォルトで`false`に設定されています。つまり、Prepare API を使用する場合でも、「prepare」操作はクライアント側でのみ実行されます。サーバーの解析オーバーヘッドを回避するため、同じ SQL ステートメントで Prepare API を複数回使用する場合は、この設定を`true`に設定することをお勧めします。
 
     この設定が既に有効になっていることを確認するには、次の操作を実行してください。
 
@@ -229,7 +229,7 @@ JDBCは通常、JDBC URLパラメータの形式で実装関連の設定を提�
 
 -   **prepStmtCacheSize**
 
-    **prepStmtCacheSize は**、キャッシュされるプリペアドステートメントの数を制御します（デフォルト値は`25`です）。アプリケーションで多くの種類の SQL ステートメントを「準備」する必要があり、プリペアドステートメントを再利用したい場合は、この値を増やすことができます。
+    **prepStmtCacheSize**は、キャッシュされるプリペアドステートメントの数を制御します（デフォルト値は`25`です）。アプリケーションで多くの種類の SQL ステートメントを「準備」する必要があり、プリペアドステートメントを再利用したい場合は、この値を増やすことができます。
 
     この設定が既に有効になっていることを確認するには、次の操作を実行してください。
 

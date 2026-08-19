@@ -35,7 +35,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 3.  [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターから Kafka デプロイメント情報を取得します。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com)で[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
-    2.  左側のナビゲーション ペインで、 **[データ]** &gt; **[Changefeed] を**クリックします。
+    2.  左側のナビゲーション ペインで、 **[データ]** &gt; **[Changefeed]**をクリックします。
     3.  **Changefeed**ページで、右上隅の**Create Changefeed**をクリックし、次の情報を入力します。
         1.  **宛先**で、 **Kafka**を選択します。
         2.  **Connectivity Method**で**Private Link**を選択します。
@@ -83,7 +83,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 
 5.  情報を確認するには、 **「確認 + 作成」**をクリックします。
 
-6.  **[作成]を**クリックします。
+6.  **[作成]**をクリックします。
 
 #### 2. Kafkaブローカーを設定する {#2-set-up-kafka-brokers}
 
@@ -496,7 +496,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 6.  **Next : Outbound rule**をクリックし、 **Next : Tags >**をクリックしてから、 **[次へ: 確認と作成]**をクリックして情報を確認します。
 
-7.  **[作成]を**クリックします。
+7.  **[作成]**をクリックします。
 
 ### 2. プライベートリンクサービスを設定する {#2-set-up-private-link-service}
 

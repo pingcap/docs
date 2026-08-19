@@ -75,7 +75,7 @@ TiDB Cloud Starterインスタンスの場合、接続文字列を取得し、�
 
     -   **ブランチ**は`main`に設定されています。
 
-    -   **Connect With は**`SQLAlchemy`に設定されています。
+    -   **Connect With**は`SQLAlchemy`に設定されています。
 
     -   お使いの環境に合った**オペレーティングシステム**を選択してください。
 

@@ -42,7 +42,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
     -   **接続タイプ**は`Public`に設定されています。
     -   **ブランチ**は`main`に設定されています。
-    -   **「接続」は**`Navicat`に設定されています。
+    -   **「接続」**は`Navicat`に設定されています。
     -   お使いの環境に合った**オペレーティングシステム**を選択してください。
 
 4.  **「パスワード生成」をクリックすると、ランダムなパスワード**が生成されます。
@@ -51,7 +51,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードをリセット」**をクリックして新しいパスワードを生成できます。
 
-5.  Navicat Premiumを起動し、左上隅の**「接続」**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDBを**ダブルクリックします。
+5.  Navicat Premiumを起動し、左上隅の**「接続」**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDB**をダブルクリックします。
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
@@ -95,7 +95,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
     -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **「CA証明書」**をクリックしてダウンロードしてください。
     -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
-7.  Navicat Premiumを起動し、左上隅の**「接続」**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDBを**ダブルクリックします。
+7.  Navicat Premiumを起動し、左上隅の**「接続」**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDB**をダブルクリックします。
 
 8.  「**新規接続（TiDB）」**ダイアログで、以下の接続パラメータを設定します。
 
@@ -126,7 +126,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
 4.  **CA証明書をダウンロードするには、「CA証明書**」をクリックしてください。
 
-5.  Navicat Premiumを起動し、左上隅の**「接続」**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDBを**ダブルクリックします。
+5.  Navicat Premiumを起動し、左上隅の**「接続」**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDB**をダブルクリックします。
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
@@ -151,7 +151,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
-1.  Navicat Premiumを起動し、左上隅の**「接続」**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDBを**ダブルクリックします。
+1.  Navicat Premiumを起動し、左上隅の**「接続」**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDB**をダブルクリックします。
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 

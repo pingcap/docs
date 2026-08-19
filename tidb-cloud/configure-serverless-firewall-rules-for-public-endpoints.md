@@ -47,7 +47,7 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにファイア
 
 3.  **ネットワーク設定**ページで、**Public Endpoint**が無効になっている場合は有効にしてください。
 
-4.  （オプション）新しく作成したTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスでは、 TiDB Cloud はデフォルトで**Allow_all_public_connections を**有効にします。特定の IP アドレスまたは範囲へのアクセスを制限するには、 **Allow_all_public_connections**の行にある**...**をクリックし、次に**Delete を**クリックします。
+4.  （オプション）新しく作成したTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスでは、 TiDB Cloud はデフォルトで**Allow_all_public_connections**を有効にします。特定の IP アドレスまたは範囲へのアクセスを制限するには、 **Allow_all_public_connections**の行にある**...**をクリックし、次に**Delete**をクリックします。
 
 5.  **Authorized Networks**セクションで、 **Add rule**をクリックし、許可するIPアドレスまたはIPアドレス範囲を追加します。
 

@@ -23,7 +23,7 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 -   [SQLTools MySQL/MariaDB/TiDB](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql)拡張機能です。インストールするには、以下のいずれかの方法を使用できます。
     -   <a href="vscode:extension/mtxr.sqltools-driver-mysql">このリンク</a>をクリックするとVS Codeが起動し、拡張機能を直接インストールできます。
     -   [VS Code マーケットプレイス](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql)に移動し、 **[インストール]**をクリックします。
-    -   VS Code の**[拡張機能]**タブで`mtxr.sqltools-driver-mysql`を検索して**SQLTools MySQL/MariaDB/TiDB**拡張機能を取得し、 **[インストール] を**クリックします。
+    -   VS Code の**[拡張機能]**タブで`mtxr.sqltools-driver-mysql`を検索して**SQLTools MySQL/MariaDB/TiDB**拡張機能を取得し、 **[インストール]**をクリックします。
 -   TiDBクラスタ。
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
@@ -48,7 +48,7 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
     -   **ブランチ**は`main`に設定されています。
 
-    -   **「接続」は**`VS Code`に設定されています。
+    -   **「接続」**は`VS Code`に設定されています。
 
     -   お使いの環境に合った**オペレーティングシステム**を選択してください。
 
@@ -56,7 +56,7 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
     >
     > VS Code をリモート開発環境で実行している場合は、リストからリモートのオペレーティングシステムを選択してください。たとえば、Windows Subsystem for Linux (WSL) を使用している場合は、対応する Linux ディストリビューションに切り替えてください。GitHub Codespaces を使用している場合は、この操作は不要です。
 
-4.  **「パスワードを生成」を**クリックすると、ランダムなパスワードが生成されます。
+4.  **「パスワードを生成」**をクリックすると、ランダムなパスワードが生成されます。
 
     > **Tip:**
     >

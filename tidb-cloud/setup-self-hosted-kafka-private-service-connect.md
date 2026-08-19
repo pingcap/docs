@@ -39,14 +39,14 @@ Google Cloud でセルフホスト型 Kafka に Private Service Connect を設�
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com)で[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
     2.  概要ページで、TiDB クラスターのリージョンを確認します。Kafka クラスターが同じリージョンにデプロイされることを確認してください。
-    3.  左側のナビゲーション ペインで**[データ]** &gt; **[Changefeed] を**クリックし、右上隅の**Create Changefeed**をクリックして、次の情報を入力します。
+    3.  左側のナビゲーション ペインで**[データ]** &gt; **[Changefeed]**をクリックし、右上隅の**Create Changefeed**をクリックして、次の情報を入力します。
         1.  **宛先**で、 **Kafka**を選択します。
         2.  **Connectivity Method**で、 **Private Service Connect**を選択します。
     4.  **先に進む前に、Google Cloud プロジェクトをリマインダー**に書き留めておいてください。このプロジェクトは、 TiDB Cloudからのエンドポイント作成リクエストの自動承認を承認するために使用します。
     5.  **Zones of TiDB Cluster**をメモしておいてください。これらのゾーンに TiDB クラスターをデプロイします。ゾーン間のトラフィックを削減するため、これらのゾーンに Kafka をデプロイすることをお勧めします。
     6.  Kafka プライベート サービス接続サービスに固有の**Kafka Advertised Listener Pattern**を選択します。
         1.  一意のランダム文字列を入力してください。数字または小文字のみ使用できます。この文字列は、後ほど**Kafka Advertised Listener Pattern**を生成する際に使用します。
-        2.  **「使用状況を確認して生成」を**クリックすると、ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズ リスナーを組み立てるために使用される**Kafka Advertised Listener Pattern**が生成されるか、Kafka プロキシが構成されます。
+        2.  **「使用状況を確認して生成」**をクリックすると、ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズ リスナーを組み立てるために使用される**Kafka Advertised Listener Pattern**が生成されるか、Kafka プロキシが構成されます。
 
 すべてのデプロイメント情報をメモしてください。後でKafka Private Service Connectサービスを設定する際に必要になります。
 

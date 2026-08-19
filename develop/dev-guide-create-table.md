@@ -251,7 +251,7 @@ ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 -   `{table_name}` : テーブル名。
 -   `{count}` : 複製されたレプリカの数。0 の場合、複製されたレプリカは削除されます。
 
-**TiFlash は**テーブルを複製します。クエリが実行されると、TiDB はコストの最適化に基づいてクエリに対して TiKV (行ベース) またはTiFlash (列ベース) を自動的に選択します。あるいは、クエリで**TiFlash**レプリカを使用するかどうかを手動で指定できます。指定方法については、 [TiDBを使用してTiFlashレプリカを読み取ります](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
+**TiFlash**はテーブルを複製します。クエリが実行されると、TiDB はコストの最適化に基づいてクエリに対して TiKV (行ベース) またはTiFlash (列ベース) を自動的に選択します。あるいは、クエリで**TiFlash**レプリカを使用するかどうかを手動で指定できます。指定方法については、 [TiDBを使用してTiFlashレプリカを読み取ります](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
 
 ### HTAP機能の使用例 {#an-example-of-using-htap-capabilities}
 

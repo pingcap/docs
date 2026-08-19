@@ -27,7 +27,7 @@ TiDB Dashboardの現在のセッションを他のユーザーと共有して、
 
     -   読み取り専用権限として共有: 共有セッションでは読み取り操作のみが許可され、書き込み操作 (構成の変更など) は許可されません。
 
-5.  **[認証コードの生成]を**クリックします。
+5.  **[認証コードの生成]**をクリックします。
 
     ![Sample Step](/media/dashboard/dashboard-session-share-settings-2-v650.png)
 
@@ -41,7 +41,7 @@ TiDB Dashboardの現在のセッションを他のユーザーと共有して、
 
 ## 招待された人の手順 {#steps-for-the-invitee}
 
-1.  TiDB Dashboardのサインイン ページで、 **[代替認証の使用] を**クリックします。
+1.  TiDB Dashboardのサインイン ページで、 **[代替認証の使用]**をクリックします。
 
     ![Sample Step](/media/dashboard/dashboard-session-share-signin-1-v650.png)
 
@@ -51,6 +51,6 @@ TiDB Dashboardの現在のセッションを他のユーザーと共有して、
 
 3.  招待者から受け取った認証コードを入力します。
 
-4.  **[サインイン]を**クリックします。
+4.  **[サインイン]**をクリックします。
 
     ![Sample Step](/media/dashboard/dashboard-session-share-signin-3-v650.png)

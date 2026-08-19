@@ -95,8 +95,8 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
     5.  ポリシーテキストフィールドで、必要に応じてポリシーを設定してください。以下は、 TiDB Cloud Starter、 Essential、またはPremiumインスタンスからデータをエクスポートしたり、これらのインスタンスにデータをインポートしたりする際に使用できる例です。
 
-        -   TiDB Cloud Starter、 Essential、またはPremiumインスタンスからデータをエクスポートするには**、s3:PutObject**および**s3:ListBucketの**権限が必要です。
-        -   TiDB Cloud Starter、 Essential、またはPremiumインスタンスにデータをインポートするには**、s3:GetObject** 、 **s3:GetObjectVersion** 、および**s3:ListBucketの**権限が必要です。
+        -   TiDB Cloud Starter、 Essential、またはPremiumインスタンスからデータをエクスポートするには**、s3:PutObject**および**s3:ListBucket**の権限が必要です。
+        -   TiDB Cloud Starter、 Essential、またはPremiumインスタンスにデータをインポートするには**、s3:GetObject** 、 **s3:GetObjectVersion** 、および**s3:ListBucket**の権限が必要です。
 
         ```json
         {
@@ -249,7 +249,7 @@ Azure ARMテンプレートを使用してSASトークンを作成するには�
 
     -   Azure Blob Storage からデータをインポートする場合：
 
-        1.  **「Azure Blob Storage からインポート」を**クリックします。
+        1.  **「Azure Blob Storage からインポート」**をクリックします。
         2.  **Folder URI**欄に入力してください。
         3.  **SAS Token**フィールドで、 **[Azure ARMテンプレートを使用して新しいトークンを作成するには、ここをクリックしてください]をクリックします**。
 
@@ -313,7 +313,7 @@ Azure ARMテンプレートを使用してSASトークンを作成する際に�
 
     ![sas-create](/media/tidb-cloud/serverless-external-storage/azure-sas-create.png)
 
-4.  SASトークンを生成するには、 **「SASと接続文字列の生成」を**クリックしてください。
+4.  SASトークンを生成するには、 **「SASと接続文字列の生成」**をクリックしてください。
 
 </details>
 
@@ -337,7 +337,7 @@ TiDB CloudがAlibaba Cloud OSSバケットにアクセスできるようにす�
 
     -   「**アクション」**セクションで、必要に応じて権限を選択してください。
 
-        TiDB Cloud Starter、 Essential、またはPremiumインスタンスにデータをインポートするには、 **oss:GetObject** 、 **oss:GetBucketInfo** 、および**oss:ListObjectsの**権限を付与してください。
+        TiDB Cloud Starter、 Essential、またはPremiumインスタンスにデータをインポートするには、 **oss:GetObject** 、 **oss:GetBucketInfo** 、および**oss:ListObjects**の権限を付与してください。
 
         TiDB Cloud Starter、 Essential、またはPremiumインスタンスからデータをエクスポートするには、 `oss:PutObject`と`oss:GetBucketInfo`の権限を付与してください。
 

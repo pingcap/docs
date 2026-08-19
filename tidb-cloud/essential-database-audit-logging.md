@@ -10,7 +10,7 @@ TiDB Cloud Essentialは、実行されたSQLステートメントなど、デー
 
 > **Note:**
 >
-> 現在、データベース監査ログ機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)**？」**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **「説明」**フィールドに「 TiDB Cloud Essentialデータベース監査ログの申請」と入力して、 **「送信」を**クリックします。
+> 現在、データベース監査ログ機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)**？」**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **「説明」**フィールドに「 TiDB Cloud Essentialデータベース監査ログの申請」と入力して、 **「送信」**をクリックします。
 
 組織のユーザーアクセスポリシーやその他の情報セキュリティ対策の有効性を評価するには、データベース監査ログを定期的に分析することがセキュリティ上のベストプラクティスです。
 
@@ -151,7 +151,7 @@ TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、 TiDB Cloud Es
 
 3.  **DB Audit Logging**ページで、 **[有効にする]**をクリックします。
 
-4.  監査ログのストレージの場所を選択し、必要な情報を入力します。次に、 **Test Connection and Next**または**「次へ」を**クリックします。利用可能なストレージの場所の詳細については、[監査ログの場所](#audit-logging-locations)を参照してください。
+4.  監査ログのストレージの場所を選択し、必要な情報を入力します。次に、 **Test Connection and Next**または**「次へ」**をクリックします。利用可能なストレージの場所の詳細については、[監査ログの場所](#audit-logging-locations)を参照してください。
 
 5.  **Database Audit Logging Settings**ダイアログで、ログファイルのローテーションとログのマスキング設定を入力し、 **[保存]**をクリックします。
 
