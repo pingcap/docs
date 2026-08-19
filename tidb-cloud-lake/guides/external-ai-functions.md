@@ -19,7 +19,7 @@ Build powerful AI/ML capabilities by connecting {{{ .lake }}} with your own infr
 
 ## How It Works
 
-1. **Create AI Server**: Build your AI/ML server using Python and [databend-udf](https://pypi.org/project/databend-udf)
+1. **Create AI Server**: Build your AI/ML server using Python and [`tidbcloudlake-udf`](https://pypi.org/project/tidbcloudlake-udf/)
 2. **Register Function**: Connect your server to {{{ .lake }}} with `CREATE FUNCTION`
 3. **Use in SQL**: Call your custom AI functions directly in SQL queries
 
@@ -27,7 +27,7 @@ Build powerful AI/ML capabilities by connecting {{{ .lake }}} with your own infr
 
 ```python
 # Simple embedding UDF server demo
-from databend_udf import udf, UDFServer
+from tidbcloudlake_udf import udf, UDFServer
 from sentence_transformers import SentenceTransformer
 
 # Load pre-trained model

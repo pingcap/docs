@@ -22,6 +22,7 @@
     - [Python](/tidb-cloud-lake/guides/connect-using-python.md)
     - [Rust](/tidb-cloud-lake/guides/connect-using-rust.md)
   - AI Tools
+    - [External AI Functions](/tidb-cloud-lake/guides/external-ai-functions.md)
     - [MCP Client Integration](/tidb-cloud-lake/guides/mcp-client-integration.md)
     - [MCP Server](/tidb-cloud-lake/guides/mcp-server.md)
   - Visualization
@@ -370,6 +371,7 @@
         - [SHOW VIRTUAL COLUMNS](/tidb-cloud-lake/sql/show-virtual-columns.md)
       - User-Defined Function
         - [User-Defined Function](/tidb-cloud-lake/sql/user-defined-function.md)
+        - [Choose a User-Defined Function Type](/tidb-cloud-lake/guides/choose-a-udf-type.md)
         - [ALTER FUNCTION](/tidb-cloud-lake/sql/alter-function.md)
         - [CREATE AGGREGATE FUNCTION](/tidb-cloud-lake/sql/create-aggregate-function.md)
         - [CREATE SCALAR FUNCTION](/tidb-cloud-lake/sql/create-scalar-function.md)
@@ -377,9 +379,10 @@
         - [DROP FUNCTION](/tidb-cloud-lake/sql/drop-function.md)
         - [SHOW USER FUNCTIONS](/tidb-cloud-lake/sql/show-user-functions.md)
       - External Function
+        - [External Function](/tidb-cloud-lake/sql/external-function.md)
+        - [CREATE FUNCTION](/tidb-cloud-lake/sql/create-function.md)
         - [ALTER FUNCTION](/tidb-cloud-lake/sql/alter-function-sql.md)
         - [DROP FUNCTION](/tidb-cloud-lake/sql/drop-function-sql.md)
-        - [External Function](/tidb-cloud-lake/sql/external-function.md)
       - Masking Policy
         - [Overview](/tidb-cloud-lake/sql/masking-policy-sql.md)
         - [CREATE MASKING POLICY](/tidb-cloud-lake/sql/create-masking-policy.md)
