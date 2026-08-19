@@ -111,7 +111,7 @@ Top RUは、SQL文が持つ実行計画の数と、プランデータが利用�
 
 #### プランは利用できません {#plans-not-available}
 
-プランデータが利用できない場合、Top RUには**Plan digest**、 **SQL RUトレンド（プラン**別）、**Execution Plan**表示されません。その他のフィールドは引き続き表示されます。
+プランデータが利用できない場合、Top RUには**Plan digest**、 **SQL RU Trend by Plan**、または**Execution Plan**は表示されません。その他のフィールドは引き続き表示されます。
 
 #### 複数のプラン {#multiple-plans}
 

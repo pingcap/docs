@@ -24,7 +24,7 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 
 ## 前提条件 {#prerequisites}
 
--   TiDB CloudをDatadogと連携させるには、Datadogアカウントと[Datadog APIキー](https://app.datadoghq.com/organization-settings/api-keys)必要です。Datadogアカウントを初めて作成すると、DatadogからAPIキーが発行されます。
+-   TiDB CloudをDatadogと連携させるには、Datadogアカウントと[Datadog APIキー](https://app.datadoghq.com/organization-settings/api-keys)が必要です。Datadogアカウントを初めて作成すると、DatadogからAPIキーが発行されます。
 
     Datadogアカウントをお持ちでない場合は、 [https://app.datadoghq.com/signup](https://app.datadoghq.com/signup)でサインアップしてください。
 

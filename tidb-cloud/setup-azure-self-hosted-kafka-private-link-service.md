@@ -94,7 +94,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     -   **仮想マシン名**: `broker-node`
     -   **Availability options**: `Availability zone`
     -   **Zone options**: `Self-selected zone`
-    -   `Zone 3` `Zone 2`**Availability zone**: `Zone 1`
+    -   **Availability zone**: `Zone 1` 、 `Zone 2` 、 `Zone 3`
     -   **画像**： `Ubuntu Server 24.04 LTS - x64 Gen2`
     -   **VM architecture:** `x64`
     -   **サイズ**: `Standard_D2s_v3`

@@ -176,7 +176,7 @@ Google Cloudでエンドポイントを正常に作成したら、 TiDB Cloudコ
 
 ### TiDB Cloudでエンドポイントサービスの作成に失敗しました。どうすればよいですか？ {#tidb-cloud-fails-to-create-an-endpoint-service-what-should-i-do}
 
-エンドポイント サービスは、 **[Google Cloud Private エンドポイント接続の作成]**ページを開いて TiDB クラスターを選択すると自動的に作成されます。作成が失敗と表示される場合、または[サポートチケット](/tidb-cloud/tidb-cloud-support.md)**作成中**の状態が長時間続く場合は、サポートに問い合わせてください。
+エンドポイント サービスは、 **[Google Cloud Private エンドポイント接続の作成]**ページを開いて TiDB クラスターを選択すると自動的に作成されます。作成が失敗と表示される場合、または**作成中**の状態が長時間続く場合は、 [サポートチケット](/tidb-cloud/tidb-cloud-support.md)を送信してサポートにお問い合わせください。
 
 ### Google Cloudでエンドポイントを作成できませんでした。どうすればよいですか？ {#fail-to-create-an-endpoint-in-google-cloud-what-should-i-do}
 

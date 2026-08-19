@@ -41,7 +41,7 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、 [TiDB Clou
 
 ### コードを複製する {#clone-the-code}
 
-TiDB と Amazon AppFlow の[統合例のコードリポジトリ](https://github.com/pingcap-inc/tidb-appflow-integration)クローンを作成します。
+TiDB と Amazon AppFlow の[統合例のコードリポジトリ](https://github.com/pingcap-inc/tidb-appflow-integration)のクローンを作成します。
 
 ```bash
 git clone https://github.com/pingcap-inc/tidb-appflow-integration
@@ -87,7 +87,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 ### Lambdaを使用してコネクタを登録します {#use-lambda-to-register-a-connector}
 
-1.  [AWS マネジメントコンソール](https://console.aws.amazon.com)コンソールで、 [Amazon AppFlow &gt; コネクタ](https://console.aws.amazon.com/appflow/home#/gallery)クリックし、 **[新しいコネクタの登録]**をクリックします。
+1.  [AWS マネジメントコンソール](https://console.aws.amazon.com)コンソールで、 [Amazon AppFlow &gt; コネクタ](https://console.aws.amazon.com/appflow/home#/gallery)に移動し、 **[新しいコネクタの登録]**をクリックします。
 
     ![register connector](/media/develop/aws-appflow-step-register-connector.png)
 
@@ -99,7 +99,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 ## ステップ2. フローを作成する {#step-2-create-a-flow}
 
-[Amazon AppFlow &gt; フロー](https://console.aws.amazon.com/appflow/home#/list)し、 **[フローの作成]**をクリックします。
+[Amazon AppFlow &gt; フロー](https://console.aws.amazon.com/appflow/home#/list)に移動し、 **[フローの作成]**をクリックします。
 
 ![create flow](/media/develop/aws-appflow-step-create-flow.png)
 

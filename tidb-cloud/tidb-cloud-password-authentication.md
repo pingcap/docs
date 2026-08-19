@@ -40,7 +40,7 @@ TiDB Cloudの確認メールが届きます。登録プロセス全体を完了�
 
 ### サインアウト {#sign-out}
 
-TiDB Cloudコンソールの左下隅で、<mdsvgicon name="icon-top-account-settings">**ログアウト**を選択します。</mdsvgicon>
+TiDB Cloudコンソールの左下隅で<MDSvgIcon name="icon-top-account-settings" />をクリックし、 **ログアウト**を選択します。
 
 ## パスワードポリシー {#password-policy}
 
@@ -72,7 +72,7 @@ TiDB Cloudは、登録ユーザーに対してデフォルトのパスワード�
 >
 > メールアドレスとパスワードでTiDB Cloudにサインアップする場合は、90日ごとにパスワードをリセットすることをお勧めします。リセットしない場合、 TiDB Cloudにログインする際に、パスワードの有効期限切れを知らせるリマインダーが表示されます。
 
-1.  クリック<mdsvgicon name="icon-top-account-settings">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
+1.  TiDB Cloudコンソールの左下隅にある<MDSvgIcon name="icon-top-account-settings" />をクリックします。
 
 2.  **Account Settings**をクリックします。
 
@@ -89,7 +89,7 @@ TiDB Cloudは、登録ユーザーに対してデフォルトのパスワード�
 
 ### MFAを有効にする {#enable-mfa}
 
-1.  クリック<mdsvgicon name="icon-top-account-settings">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
+1.  TiDB Cloudコンソールの左下隅にある<MDSvgIcon name="icon-top-account-settings" />をクリックします。
 
 2.  **Account Settings**をクリックします。
 
@@ -110,7 +110,7 @@ TiDB Cloudは、登録ユーザーに対してデフォルトのパスワード�
 
 ### MFAを無効にする {#disable-mfa}
 
-1.  クリック<mdsvgicon name="icon-top-account-settings">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
+1.  TiDB Cloudコンソールの左下隅にある<MDSvgIcon name="icon-top-account-settings" />をクリックします。
 
 2.  **Account Settings**をクリックします。
 

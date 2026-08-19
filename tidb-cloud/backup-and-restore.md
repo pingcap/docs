@@ -183,7 +183,7 @@ TiDB Cloud Dedicatedクラスターに手動バックアップを適用するに
 
 > **Note:**
 >
-> 現在、この機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**「？」**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、「**説明」**フィールドに「バックアップのエクスポート機能の申請」と入力して、 **「送信」**をクリックします。
+> 現在、この機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**「？」**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **「説明」**フィールドに「バックアップのエクスポート機能の申請」と入力して、 **「送信」**をクリックします。
 
 <SimpleTab>
 

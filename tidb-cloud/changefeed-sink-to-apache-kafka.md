@@ -281,12 +281,12 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
 5.  TiDB拡張フィールドをKafkaメッセージ本文に追加する場合は、 **TiDB Extension**オプションを有効にしてください。
 
-    TiDB 拡張フィールドの詳細については、 [Avroデータ形式のTiDB拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields)フィールド」および[Canal-JSONデータ形式のTiDB拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field)を参照してください。
+    TiDB 拡張フィールドの詳細については、 [Avroデータ形式のTiDB拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields)および[Canal-JSONデータ形式のTiDB拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field)を参照してください。
 
 6.  データ形式として**Avro**を選択すると、ページにAvro固有の設定項目が表示されます。これらの設定項目は、以下のように入力できます。
 
     -   **Decimal**および**Unsigned BigInt**の設定では、 TiDB CloudがKafkaメッセージ内のdecimal型およびunsigned bigint型データ型をどのように処理するかを指定します。
-    -   **Schema Registry**領域で、スキーマレジストリエンドポイントを入力します。**HTTP Authentication**を有効にすると、ユーザー名とパスワードのフィールドが表示され、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>のエンドポイントとパスワードが自動的に入力されます。TiDB <CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>。
+    -   **Schema Registry**領域で、スキーマレジストリエンドポイントを入力します。**HTTP Authentication**を有効にすると、ユーザー名とパスワードのフィールドが表示され、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>のエンドポイントとパスワードが自動的に入力されます。
 
 7.  **Topic Distribution**エリアで配信モードを選択し、選択したモードに応じてトピック名の設定を入力します。
 

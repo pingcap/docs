@@ -60,7 +60,7 @@ v6.1.0 以降では、 [`enable-global-kill`](/tidb-configuration-file.md#enable
 
 > **Note:**
 >
-> TiDBのバージョンがv6.1.0より前の場合、または[`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610) `false`に設定されている場合、 `setQueryTimeout()` TiDBでは機能しません。これは、クライアントがクエリタイムアウトを検出すると、データベースに`KILL`コマンドを送信するためです。ただし、TiDBサービスは負荷分散されているため、間違ったTiDBノードで接続が切断されるのを防ぐため、 `KILL`コマンドは実行されません。このような場合は、 `max_execution_time`を使用してクエリタイムアウトを制御できます。
+> TiDBのバージョンがv6.1.0より前の場合、または[`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が`false`に設定されている場合、 `setQueryTimeout()`はTiDBでは機能しません。これは、クライアントがクエリタイムアウトを検出すると、データベースに`KILL`コマンドを送信するためです。ただし、TiDBサービスは負荷分散されているため、間違ったTiDBノードで接続が切断されるのを防ぐため、 `KILL`コマンドは実行されません。このような場合は、 `max_execution_time`を使用してクエリタイムアウトを制御できます。
 
 TiDB は、次の MySQL 互換のタイムアウト制御パラメータを提供します。
 

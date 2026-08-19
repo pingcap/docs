@@ -8,13 +8,13 @@ aliases: ['/ja/tidb/stable/dev-guide-schema-design-overview/','/ja/tidb/dev/dev-
 
 このドキュメントでは、TiDBのオブジェクト、アクセス制御、データベーススキーマの変更、オブジェクトの制限など、TiDBデータベーススキーマ設計の基本について説明します。
 
-以降の[書店](/develop/dev-guide-bookshop-schema-design.md)では、を例として、データベースの設計方法、およびデータベース内でのデータ読み書き操作の実行方法を示します。
+以降のドキュメントでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)を例として、データベースの設計方法、およびデータベース内でのデータ読み書き操作の実行方法を示します。
 
 ## TiDB内のオブジェクト {#objects-in-tidb}
 
 一般的な用語を区別するために、TiDBで使用される用語に関する簡単な合意事項を以下に示します。
 
--   一般的な用語との混同を避けるため 本ドキュメントでは、**データベース**とは論理オブジェクトを指し、 **TiDB**と[データベース](https://en.wikipedia.org/wiki/Database)TiDB自体を指し、**クラスターとは**実行中のTiDBデプロイメントを指します。
+-   一般的な用語である[データベース](https://en.wikipedia.org/wiki/Database)との混同を避けるため、本ドキュメントでは、**データベース**とは論理オブジェクトを指し、 **TiDB**とはTiDB自体を指し、**クラスター**とは実行中のTiDBデプロイメントを指します。
 
 -   TiDB は MySQL 互換の構文を使用します。この**構文**では、スキーマはデータベース内の論理オブジェクトの代わりに一般用語[スキーマ](https://en.wiktionary.org/wiki/schema)を意味します。詳細については、 [MySQLドキュメント](https://dev.mysql.com/doc/refman/8.0/en/create-database.html)を参照してください。スキーマを論理オブジェクトとして持つデータベース (たとえば、 [PostgreSQL](https://www.postgresql.org/docs/current/ddl-schemas.html) 、 [オラクル](https://docs.oracle.com/en/database/oracle/oracle-database/21/tdddg/creating-managing-schema-objects.html)、 [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-schema?view=sql-server-ver15) ) から移行する場合は、この違いに必ず注意してください。
 

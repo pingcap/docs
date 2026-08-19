@@ -235,7 +235,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 ### 4.3 クライアントが`server is busy`と報告するエラー {#43-the-client-reports-the-server-is-busy-error}
 
-ビジー状態の具体的な原因を確認するには、モニター**Grafana** -&gt; **TiKV** -&gt; **errors**を確認してください。 `server is busy` 、TiKV のフロー制御メカニズムが原因で発生しており、TiKV が現在過負荷状態にあるため後で再試行することを`tidb/ti-client`に通知します。
+ビジー状態の具体的な原因を確認するには、モニター**Grafana** -&gt; **TiKV** -&gt; **errors**を確認してください。 `server is busy`は、TiKV のフロー制御メカニズムが原因で発生しており、TiKV が現在過負荷状態にあるため後で再試行することを`tidb/ti-client`に通知します。
 
 -   4.3.1 TiKV RocksDB は`write stall`を検出します。
 
