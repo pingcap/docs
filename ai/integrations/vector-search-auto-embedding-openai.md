@@ -266,7 +266,7 @@ SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_BASE = '';
 
 > **Note:**
 >
-> - For security reasons, you can only set the API base to an Azure OpenAI URL or the OpenAI URL. Arbitrary base URLs are not allowed.
+> - For security reasons, you can only set the API base to an OpenAI, Azure OpenAI, or Alibaba Cloud DashScope URL. Arbitrary base URLs are not allowed.
 > - To use another OpenAI-compatible embedding service, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Options

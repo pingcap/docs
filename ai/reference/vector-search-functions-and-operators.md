@@ -34,6 +34,7 @@ The following functions are designed specifically for [Vector data types](/ai/re
 | [`VEC_L2_NORM`](#vec_l2_norm)     | Calculates the L2 norm (Euclidean norm) of a vector |
 | [`VEC_FROM_TEXT`](#vec_from_text) | Converts a string into a vector                     |
 | [`VEC_AS_TEXT`](#vec_as_text)     | Converts a vector into a string                     |
+| [`EMBED_TEXT`](#embed_text)       | Converts text into a vector embedding               |
 
 ## Extended built-in functions and operators
 
@@ -99,6 +100,25 @@ For more information about how vectors are compared, see [Vector Data Type | Com
 For more information about how to use `CAST()`, see [Vector Data Type | Cast](/ai/reference/vector-search-data-types.md#cast).
 
 ## Full references
+
+### EMBED_TEXT
+
+```sql
+EMBED_TEXT(model, text[, options])
+```
+
+Uses an embedding provider to convert `text` into a `VECTOR` value. `model` must use the `<provider>/<model>` format. The optional `options` argument must be a JSON object; an empty string or `NULL` means that no additional options are provided.
+
+`EMBED_TEXT()` is available only in Starter deployment mode. You can call it directly in a query or use it as the direct expression of a `STORED` generated column. Generated-column usage has additional DDL restrictions. For supported providers, examples, and the complete list of restrictions, see [Auto Embedding Overview](/ai/integrations/vector-search-auto-embedding-overview.md#embed_text).
+
+Example:
+
+```sql
+SELECT EMBED_TEXT(
+    'openai/text-embedding-3-small',
+    'TiDB is a distributed SQL database.'
+);
+```
 
 ### VEC_L2_DISTANCE
 
