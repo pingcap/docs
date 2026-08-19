@@ -10,7 +10,7 @@ aliases: ['/ja/docs/dev/releases/release-notes/','/ja/docs/dev/releases/rn/','/j
 
 このドキュメントには、リリース済みのすべてのTiDBバージョンが、バージョン番号の降順で一覧表示されています。
 
-TiDB の長期サポート (LTS) バージョンのサポート タイムラインについては、 [TiDBリリースサポートポリシー](https://pingcap.com/tidb-release-support-policy/)サポート ポリシーを参照してください。
+TiDB の長期サポート (LTS) バージョンのサポート タイムラインについては、 [TiDBリリースサポートポリシー](https://pingcap.com/tidb-release-support-policy/)を参照してください。
 
 ## 8.5 {#8-5}
 

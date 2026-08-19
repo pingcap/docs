@@ -118,7 +118,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 
 ## 非推奨機能 {#deprecated-features}
 
--   v8.5.6 以降、統計バージョン 1 ( `tidb_analyze_version = 1` ) は非推奨となり、将来のリリースでは削除される予定です。より正確な統計を得るには、統計バージョン 2 ( `tidb_analyze_version = 2` ) および[統計情報を使用する既存のオブジェクトをバージョン1からバージョン2に移行する](https://docs.pingcap.com/tidb/v8.5/statistics#switch-between-statistics-versions)お勧めします。
+-   v8.5.6 以降、統計バージョン 1 ( `tidb_analyze_version = 1` ) は非推奨となり、将来のリリースでは削除される予定です。より正確な統計を得るには、統計バージョン 2 ( `tidb_analyze_version = 2` ) および[統計情報を使用する既存のオブジェクトをバージョン1からバージョン2に移行する](https://docs.pingcap.com/tidb/v8.5/statistics#switch-between-statistics-versions)ことをお勧めします。
 -   バージョン8.5.6以降、 TiDB Lightning Webインターフェースは非推奨となり、バージョン8.5.7で削除されます。Web UIビルドはバージョン8.4.0以降、不具合が発生しています。代わりに[CLI](/tidb-lightning/tidb-lightning-overview.md)または[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)ステートメントを使用してください。この変更がワークフローに影響する場合は、 [#67697](https://github.com/pingcap/tidb/issues/67697)にコメントしてください。
 
 ## 改善点 {#improvements}

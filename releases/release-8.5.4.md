@@ -55,7 +55,7 @@ TiDBバージョン：8.5.4
 
     この新しいアーキテクチャを使用するように構成すると、TiCDC はほぼ線形のスケーラビリティを実現し、より低いリソース消費で数百万のテーブルを複製できます。また、変更フィードのレイテンシーを削減し、書き込みワークロードが高いシナリオ、頻繁な DDL 操作、クラスタのスケーリングにおいて、より安定したパフォーマンスを提供します。なお、この新しいアーキテクチャには現在、いくつか[初期の制約](https://docs.pingcap.com/tidb/v8.5/ticdc-architecture#limitations)があります。
 
-    新しいアーキテクチャを使用するには、TiCDC 構成項目[`newarch`](https://docs.pingcap.com/tidb/v8.5/ticdc-server-config#newarch-new-in-v854-release1) `true`に設定します。
+    新しいアーキテクチャを使用するには、TiCDC 構成項目[`newarch`](https://docs.pingcap.com/tidb/v8.5/ticdc-server-config#newarch-new-in-v854-release1)を`true`に設定します。
 
     詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/ticdc-architecture)を参照してください。
 
