@@ -5,7 +5,7 @@ summary: Generate an additional owner token for one TiDB Cloud Filesystem.
 
 # ti fs generate-file-system-token
 
-Generates an owner token for one Filesystem. The plaintext `fs_token` appears only in the successful response and cannot be recovered through the list command.
+Generates an owner token for one Filesystem by using TiDB Cloud API credentials. An existing FS token cannot authorize owner-token generation. The plaintext `fs_token` appears only in the successful response and cannot be recovered through the list command.
 
 > **Note:**
 >
@@ -25,7 +25,7 @@ ti fs generate-file-system-token
 
 ## Options
 
-- `--file-system-id <string>`: Specify the Filesystem that owns the token. This option is required.
+- `--file-system-id <string>`: Specify the Filesystem that owns the token. FS tokens cannot replace this option or authorize owner-token generation. This option is required.
 - `--token-name <string>`: Set an operational token name of at most 64 bytes. Names are not unique. This option is required.
 - `--ttl <duration>`: Set a positive lifetime in whole seconds, up to 365 days. Specify exactly one of `--ttl` and `--no-expiration`.
 - `--no-expiration`: Create a token without an expiry. Specify exactly one of `--ttl` and `--no-expiration`.

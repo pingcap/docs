@@ -5,7 +5,7 @@ summary: Delete a TiDB Cloud Filesystem.
 
 # ti fs delete-file-system
 
-Requests asynchronous Filesystem deletion by immutable ID. Display names and labels cannot select a resource for deletion. A locally stored FS token is not required.
+Requests asynchronous Filesystem deletion by immutable ID. Display names, labels, and FS tokens cannot select or authorize a resource for deletion. This command requires TiDB Cloud API credentials and an explicit `--file-system-id`.
 
 > **Note:**
 >
@@ -23,7 +23,7 @@ ti fs delete-file-system
 
 ## Options
 
-- `--file-system-id <string>`: Set the file system ID. \[required]
+- `--file-system-id <string>`: Set the immutable Filesystem ID. FS tokens cannot replace this option or authorize Filesystem deletion. \[required]
 - `--dry-run`: Validate the request without applying changes.
 - `--help`: Display help information.
 - `--version`: Display version information.

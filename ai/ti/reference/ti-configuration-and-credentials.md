@@ -92,6 +92,8 @@ One remote Filesystem can have multiple tokens, but each profile stores at most 
 
 `ti fs generate-file-system-scoped-token` accepts only an owner token and can store its authoritative path scopes locally. The token JWT itself contains the Filesystem ID but not the token kind, token ID, or scopes. Therefore, an explicit or environment token is passed to the service for authorization instead of being classified locally. `TI_FS_TOKEN` can contain either an owner token or a scoped token; available operations depend on its server-side capability.
 
+Owner FS tokens authorize Filesystem data access and token inventory or lifecycle operations. They do not authorize TiDB Cloud Filesystem resource creation, listing, description, or deletion, and they cannot generate another owner token. Those operations require TiDB Cloud API credentials. `ti fs delete-file-system` additionally requires an explicit `--file-system-id`; the ID embedded in `TI_FS_TOKEN` is never used to select a Filesystem for deletion.
+
 Resource selection is:
 
 1. explicit `--file-system-id`;
@@ -118,7 +120,7 @@ export TI_FS_TOKEN="<owner-token>"
 export TI_REGION_CODE="aws-us-east-1"
 ```
 
-These values form an in-memory namespace only. `ti` derives the ID from the token and does not write either value to `~/.ti/`. `TI_FS_FILE_SYSTEM_ID` is optional and, when present, must match the token. Remote list, describe, provisioning, and deletion require TiDB Cloud API credentials; deletion does not require a local FS token.
+These values form an in-memory namespace only. `ti` derives the ID from the token and does not write either value to `~/.ti/`. `TI_FS_FILE_SYSTEM_ID` is optional and, when present, must match the token. Remote Filesystem inventory, description, provisioning, and deletion require TiDB Cloud API credentials. An FS token is neither required nor accepted as authorization for Filesystem deletion.
 
 ## DB SQL credentials
 

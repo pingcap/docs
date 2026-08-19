@@ -15,7 +15,7 @@ Lists non-secret token metadata for one Filesystem. The response never contains 
 
 ```text
 ti fs list-file-system-tokens
-  --file-system-id <string>
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--include-expired]
   [--limit <int32>]
@@ -24,7 +24,7 @@ ti fs list-file-system-tokens
 
 ## Options
 
-- `--file-system-id <string>`: Specify the Filesystem whose tokens are listed. This option is required.
+- `--file-system-id <string>`: Specify the Filesystem whose tokens are listed. Required when using TiDB Cloud API credentials; optional when `--fs-token` or `TI_FS_TOKEN` supplies an owner token, because `ti` derives the ID from that token.
 - `--fs-token <string>`: Authorize the request with an owner FS token. Defaults to `TI_FS_TOKEN`; when neither is present, the command uses configured TiDB Cloud API keys. Scoped tokens cannot list token metadata.
 - `--include-expired`: Include expired token metadata. Revoked tokens are not returned by the service.
 - `--offset <int32>`: Set the zero-based token offset [default: 0].
@@ -52,6 +52,13 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
       --include-expired \
       --offset 0 \
       --limit 100
+    ```
+
+- List token metadata with an owner token:
+
+    ```bash
+    # The owner token identifies the Filesystem, so --file-system-id is not needed.
+    TI_FS_TOKEN="<owner-fs-token>" ti fs list-file-system-tokens --output text
     ```
 
 ## Related documentation

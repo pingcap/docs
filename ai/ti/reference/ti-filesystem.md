@@ -62,7 +62,7 @@ ti fs
 | --- | --- | --- |
 | `create-file-system` | Provisions a Filesystem with a server-assigned ID and optional display metadata; `--wait` waits until data-plane access is ready. | `ti fs create-file-system --display-name agent-workspace --wait` |
 | `import-file-system-token` | Validates and stores an existing token under its embedded file system ID. | `ti fs import-file-system-token --from-file ./fs-token --region aws-us-east-1` |
-| `generate-file-system-token` | Generates an additional owner token and returns its plaintext once. | `ti fs generate-file-system-token --file-system-id <file-system-id> --token-name ci --ttl 24h` |
+| `generate-file-system-token` | Uses TiDB Cloud API credentials to generate an additional owner token and returns its plaintext once. | `ti fs generate-file-system-token --file-system-id <file-system-id> --token-name ci --ttl 24h` |
 | `generate-file-system-scoped-token` | Uses an owner token to generate a finite path-and-operation-limited token. | `ti fs generate-file-system-scoped-token --ttl 24h --allow /workspace:read,list` |
 | `list-file-system-tokens` | Lists non-secret token metadata for one Filesystem. | `ti fs list-file-system-tokens --file-system-id <file-system-id>` |
 | `enable-file-system-token` | Re-enables a disabled token by immutable token ID. | `ti fs enable-file-system-token --file-system-id <file-system-id> --token-id <token-id>` |
@@ -72,7 +72,7 @@ ti fs
 | `list-file-systems` | Lists authoritative remote metadata and quota information, optionally filtered by display-name substring and one exact label. | `ti fs list-file-systems --output text` |
 | `describe-file-system` | Reads authoritative remote metadata and quota information by ID without requiring its FS token. | `ti fs describe-file-system --file-system-id <file-system-id>` |
 | `check-file-system` | Verifies resource selection, endpoint resolution, credentials, and companion access. | `ti fs check-file-system --file-system-id <file-system-id>` |
-| `delete-file-system` | Requests asynchronous deletion by ID and removes a matching local credential after acceptance. | `ti fs delete-file-system --file-system-id <file-system-id>` |
+| `delete-file-system` | Uses TiDB Cloud API credentials to request asynchronous deletion by explicit ID and removes a matching local credential after acceptance. | `ti fs delete-file-system --file-system-id <file-system-id>` |
 
 ### Data and namespace commands
 
@@ -181,6 +181,8 @@ Create and delete support `--dry-run`. Deletion requires TiDB Cloud API keys and
 ## Manage Filesystem tokens
 
 One Filesystem can have multiple owner or scoped tokens. The remote service is authoritative for token inventory and lifecycle state. Each local profile stores only one selected operational token per Filesystem; it does not mirror every remote token.
+
+An owner FS token grants Filesystem use and token-management capabilities, but it does not grant TiDB Cloud resource administration. Generating another owner token requires TiDB Cloud API credentials and an explicit Filesystem ID. Listing, enabling, disabling, and deleting tokens can instead use an owner token; in that mode, `ti` derives the Filesystem ID from the token and `--file-system-id` is optional. Creating, listing, describing, and deleting Filesystem resources always require TiDB Cloud API credentials, and Filesystem deletion always requires an explicit `--file-system-id`.
 
 Generate an additional owner token for CI and save its one-time plaintext response securely:
 

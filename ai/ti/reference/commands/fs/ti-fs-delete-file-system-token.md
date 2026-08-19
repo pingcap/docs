@@ -15,15 +15,15 @@ Permanently revokes a token by immutable token ID. Revocation is terminal and th
 
 ```text
 ti fs delete-file-system-token
-  --file-system-id <string>
   --token-id <string>
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--dry-run]
 ```
 
 ## Options
 
-- `--file-system-id <string>`: Specify the Filesystem that owns the token. This option is required.
+- `--file-system-id <string>`: Specify the Filesystem that owns the token. Required when using TiDB Cloud API credentials; optional when an owner token supplies the ID.
 - `--token-id <string>`: Specify the immutable token ID returned by the list command. This option is required.
 - `--fs-token <string>`: Authorize the request with an owner FS token. Defaults to `TI_FS_TOKEN`; when neither is present, the command uses configured TiDB Cloud API keys.
 - `--dry-run`: Validate credentials, identifiers, and known local mount conflicts without revoking the token.
@@ -38,6 +38,14 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
     # Revocation is permanent; use disable first when you need a reversible rollout.
     ti fs delete-file-system-token \
       --file-system-id "<file-system-id>" \
+      --token-id "<old-token-id>"
+    ```
+
+- Revoke a token by using an owner token:
+
+    ```bash
+    # The owner token identifies the Filesystem; use the immutable ID of the token being revoked.
+    TI_FS_TOKEN="<owner-fs-token>" ti fs delete-file-system-token \
       --token-id "<old-token-id>"
     ```
 
