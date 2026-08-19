@@ -5,13 +5,13 @@ summary: Learn how to use Statement Insight to analyze historical RU consumption
 
 # Statement Insight (PREVIEW)
 
-**Statement Insight** provides multi-dimensional analysis of SQL resource consumption for your <CustomContent plan="essential,premium">{{{ .essential }}} and {{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .essential }}}, {{{ .premium }}}, and {{{ .byoc }}}</CustomContent> instances. It breaks down Request Unit (RU) consumption, latency, and execution counts by **DB User**, **DB**, **Table**, **SQL Type**, or **SQL Digest**, with leaderboards and trend charts that surface your top contributors at a glance. Use Statement Insight to establish RU and performance baselines from historical data and pinpoint what is driving RU consumption or slowdowns.
+**Statement Insight** provides multi-dimensional analysis of SQL resource consumption for your <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .premium }}} and {{{ .byoc }}}</CustomContent> instances. It breaks down Request Unit (RU) consumption, latency, and execution counts by **DB User**, **DB**, **Table**, **SQL Type**, or **SQL Digest**, with leaderboards and trend charts that surface your top contributors at a glance. Use Statement Insight to establish RU and performance baselines from historical data and pinpoint what is driving RU consumption or slowdowns.
 
 Statement Insight is a historical, baseline-oriented view. 
 
 > **Note:**
 >
-> Statement Insight is in public preview and available only for a limited number of <CustomContent plan="essential,premium">{{{ .essential }}} and {{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .essential }}}, {{{ .premium }}}, and {{{ .byoc }}}</CustomContent> instances created on or after August 19, with broader rollout planned in a subsequent release. To request early access, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> Statement Insight is in public preview and available only for a limited number of <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .premium }}} and {{{ .byoc }}}</CustomContent> instances created on or after August 19, with broader rollout planned in a subsequent release. To request early access, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 > For instances where Statement Insight is not yet available, you can continue to use the [SQL Statement](/tidb-cloud/tune-performance.md#statement-analysis) tab for statement analysis in the meantime.
 
 ## Before you begin
