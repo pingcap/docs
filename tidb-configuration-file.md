@@ -81,7 +81,7 @@ error-msg-extension = [
 + Minimum value: `1024`
 + Maximum value: `1073741824`
 + The value must be an integer multiple of `1024`.
-+ This configuration item takes effect only in Starter deployment mode. In other deployment modes, configure the packet size by using the `max_allowed_packet` system variable.
++ This configuration item takes effect only in Starter deployment mode. In other deployment modes, configure the packet size using the [`max_allowed_packet`](/system-variables.md#max_allowed_packet-new-in-v610) system variable where it is writable. On TiDB Cloud Essential, the variable is read-only and controlled by TiDB Cloud.
 
 ### `temp-dir` <span class="version-mark">New in v6.3.0</span>
 
@@ -562,7 +562,7 @@ Configuration items related to performance.
 - The size limit of a single key-value record in a transaction. If the size limit is exceeded, TiDB returns the `entry too large` error. The maximum value of this configuration item does not exceed `125829120` (120 MB).
 - Starting from v7.6.0, you can use the system variable [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760) to dynamically modify the value of this configuration item.
 - Note that TiKV has a similar limit. If the data size of a single write request exceeds [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size), which is 8 MB by default, TiKV refuses to process this request. When a table has a row of large size, you need to modify both configurations at the same time.
-- The default value of [`max_allowed_packet`](/system-variables.md#max_allowed_packet-new-in-v610) (the maximum size of a packet for the MySQL protocol) is 67108864 (64 MiB). In Starter deployment mode, its effective value is configured by [`max-allowed-packet`](#max-allowed-packet-new-in-v900). If a row is larger than `max_allowed_packet`, the row gets truncated.
+- The default value of [`max_allowed_packet`](/system-variables.md#max_allowed_packet-new-in-v610) (the maximum size of a packet for the MySQL protocol) is 67108864 (64 MiB). In Starter deployment mode, [`max-allowed-packet`](#max-allowed-packet-new-in-v900) configures its effective value. If a row is larger than `max_allowed_packet`, the row gets truncated.
 - The default value of [`txn-total-size-limit`](#txn-total-size-limit) (the size limit of a single transaction in TiDB) is 100 MiB. If you increase the `txn-entry-size-limit` value to be over 100 MiB, you need to increase the `txn-total-size-limit` value accordingly.
 
 ### `txn-total-size-limit`
@@ -1157,7 +1157,7 @@ Configuration items that take effect only in Starter deployment mode.
 - The `bootstrap` array defines the complete state for a keyspace that does not have a recorded Starter bootstrap version. It must contain at least one statement when the manifest initializes such a keyspace. The `upgrades` array defines migrations for keyspaces with an earlier recorded version.
 - Each upgrade version must be greater than `0`, no greater than the top-level `version`, and unique within the manifest.
 - Each element in a SQL array must contain exactly one statement. `<keyspace>` is the only supported placeholder and is replaced with the current keyspace name.
-- Statements in `bootstrap` must be `INSERT`, `REPLACE`, `UPDATE`, or `DELETE` statements and must create the `<keyspace>.root` account with host `%`.
+- The statements in `bootstrap` must be `INSERT`, `REPLACE`, `UPDATE`, or `DELETE` statements. Together, they must create the `<keyspace>.root` account with host `%`.
 - For a keyspace without a recorded Starter bootstrap version, TiDB executes `bootstrap` directly and records the top-level version without replaying `upgrades`. For an existing keyspace, TiDB applies upgrade entries in version order.
 - Make every statement retry-safe and idempotent because TiDB might retry initialization or an upgrade after a startup failure.
 

@@ -651,7 +651,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential). Its effective value is controlled by TiDB Cloud.
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential). TiDB Cloud controls its effective value.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -661,7 +661,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - The value should be an integer multiple of 1024. If the value is not divisible by 1024, a warning will be prompted and the value will be rounded down. For example, when the value is set to 1025, the actual value in TiDB is 1024.
 - The maximum packet size allowed by the server and the client in one transmission of packets.
 - In the `SESSION` scope, this variable is read-only.
-- In Starter deployment mode, the effective value is configured by [`max-allowed-packet`](/tidb-configuration-file.md#max-allowed-packet-new-in-v900). TiDB uses the configured value when initializing sessions and when reporting the global `max_allowed_packet` value.
+- In Starter deployment mode, [`max-allowed-packet`](/tidb-configuration-file.md#max-allowed-packet-new-in-v900) configures the effective value. TiDB uses this value when initializing sessions and when reporting the global `max_allowed_packet` value.
 - This variable is compatible with MySQL.
 
 ### max_connections
@@ -907,7 +907,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 <CustomContent platform="tidb-cloud">
 
-- For TiDB Cloud, secure connection behavior is managed by the service. For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), this variable is exposed as `ON` and cannot be changed by SQL statements.
+- For TiDB Cloud, the service manages secure connection behavior. For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), this variable is exposed as `ON` and cannot be changed by SQL statements.
 
 </CustomContent>
 
