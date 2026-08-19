@@ -85,7 +85,7 @@ Azure Private Link のアーキテクチャは次のとおりです: [^1]
 1.  [Azureポータル](https://portal.azure.com/)にログインします。
 2.  **Private endpoints**を検索し、検索結果から**Private endpoints**を選択してください。
 3.  **Private endpoint**ページで、 **+ Create**をクリックします。
-4.  **「基本」**タブで、プロジェクトとインスタンスの情報を入力し、 **「次へ: リソース」**をクリックします。
+4.  **「基本」**タブで、プロジェクトとインスタンスの情報を入力し、 **Next: Resource**をクリックします。
 5.  **「リソース」**タブで、**接続方法**として**「リソース ID またはエイリアスを使用して Azure リソースに接続する」**を選択し、コピーしたTiDB Cloudリソース ID を**Resource ID or alias**フィールドに貼り付けます。
 6.  引き続き**「次へ」**をクリックして残りの構成タブに進み、必要な設定を完了します。次に、 **[作成]**をクリックしてプライベート エンドポイントを作成してデプロイします。 Azure のデプロイが完了するまでに数秒かかる場合があります。詳細については、Azure ドキュメントの[プライベートエンドポイントを作成する](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip#create-a-private-endpoint)を参照してください。
 7.  プライベートエンドポイントの作成とデプロイが完了したら、 **Go to resource**をクリックし、以下の手順を実行してください。

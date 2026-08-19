@@ -64,13 +64,13 @@ Alibaba Cloud コンソールでロードバランサーとエンドポイント
     -   **Network Type**: `Internal-facing`を選択
     -   **VPC** : ApsaraDB RDS for MySQL が配置されている VPC を選択します。
     -   **ゾーン**: TiDB Cloud Essential クラスタと重複する必要があります
-    -   **IPバージョン**: `IPv4`を選択
+    -   **IP Version**: `IPv4`を選択
 
-4.  作成したロードバランサーを見つけて、 **「リスナーの作成」**をクリックします。以下の情報を入力します。
+4.  作成したロードバランサーを見つけて、 **Create Listener**をクリックします。以下の情報を入力します。
 
-    -   **リスナープロトコル**: `TCP`を選択
-    -   **リスナーポート**: データベースポートを入力します。例: MySQLの場合は`3306`
-    -   **サーバーグループ**: 前の手順で作成したサーバーグループを選択します
+    -   **Listener Protocol**: `TCP`を選択
+    -   **Listener Port**: データベースポートを入力します。例: MySQLの場合は`3306`
+    -   **Server Group**: 前の手順で作成したサーバーグループを選択します
 
 ### ステップ2.2. エンドポイントサービスを設定する {#step-2-2-set-up-an-endpoint-service}
 
@@ -84,7 +84,7 @@ ApsaraDB RDS for MySQL と同じリージョンにエンドポイント サー�
 
 2.  エンドポイントサービスの詳細ページに移動し、**Endpoint Service Name**（例： `com.aliyuncs.privatelink.<region>.xxxxx` ）をコピーします。これは後でTiDB Cloudで使用する必要があります。
 
-3.  エンドポイントサービスの詳細ページで、「**サービスホワイトリスト」**タブをクリックし、 **Add to Whitelist**をクリックして、 [前提条件](#prerequisites)で取得したAlibaba CloudアカウントIDを入力します。
+3.  エンドポイントサービスの詳細ページで、**Service Whitelist**タブをクリックし、 **Add to Whitelist**をクリックして、 [前提条件](#prerequisites)で取得したAlibaba CloudアカウントIDを入力します。
 
 ## ステップ3. TiDB Cloudでプライベートリンク接続を作成する {#step-3-create-a-private-link-connection-in-tidb-cloud}
 

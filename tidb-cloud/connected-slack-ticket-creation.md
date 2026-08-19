@@ -13,11 +13,11 @@ summary: Slack チケットの作成と更新サブスクリプションに関�
 
 ## サポートチケットを作成する {#create-a-support-ticket}
 
-Slackのサポートチャンネルで、 **PingCAP Support Bot**をメンションし、メッセージで問題を説明してください。すると、チケットボットが**「リクエストを送信」**ボタン付きのメッセージを送信します。
+Slackのサポートチャンネルで、 **PingCAP Support Bot**をメンションし、メッセージで問題を説明してください。すると、チケットボットが**Raise request**ボタン付きのメッセージを送信します。
 
 ![slack-ticket-creation-1](/media/tidb-cloud/connected-slack-ticket-creation-1.png)
 
-**「リクエストを送信」**をクリックしてフォームを開き、問題に応じて入力し、 **「作成」**をクリックしてチケットを送信します。
+**Raise request**をクリックしてフォームを開き、問題に応じて入力し、 **「作成」**をクリックしてチケットを送信します。
 
 ![slack-ticket-creation-2](/media/tidb-cloud/connected-slack-ticket-creation-2.png)
 

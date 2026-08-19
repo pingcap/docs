@@ -37,7 +37,7 @@ TiDB Cloud Starter またはTiDB Cloud Essential の場合、クライアント�
 
 -   [パブリックエンドポイント経由でTiDB Cloud Starter または Essential クラスターに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)場合、次のいずれかを実行して、DMS レプリケーション インスタンスがインターネットにアクセスできることを確認します。
 
-    -   レプリケーションインスタンスをパブリックサブネットにデプロイし、 **「パブリックアクセス**可能」を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)を参照してください。
+    -   レプリケーションインスタンスをパブリックサブネットにデプロイし、 **Public accessible**を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)を参照してください。
 
     -   レプリケーションインスタンスをプライベートサブネットにデプロイし、プライベートサブネット内のトラフィックをパブリックサブネットにルーティングします。この場合、少なくとも3つのサブネット（プライベートサブネット2つとパブリックサブネット1つ）が必要です。2つのプライベートサブネットは、レプリケーションインスタンスが存在するサブネットグループを形成します。次に、パブリックサブネットにNATゲートウェイを作成し、2つのプライベートサブネットのトラフィックをNATゲートウェイにルーティングする必要があります。詳細については、 [プライベートサブネットからインターネットにアクセスする](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)を参照してください。
 
@@ -52,7 +52,7 @@ TiDB Cloud Starter またはTiDB Cloud Essential の場合、クライアント�
 
 -   [パブリックエンドポイント経由でTiDB Cloud Starter または Essential クラスターに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)場合、次のいずれかを実行して、DMS レプリケーション インスタンスがインターネットにアクセスできることを確認します。
 
-    -   レプリケーションインスタンスをパブリックサブネットにデプロイし、 **「パブリックアクセス**可能」を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)を参照してください。
+    -   レプリケーションインスタンスをパブリックサブネットにデプロイし、 **Public accessible**を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)を参照してください。
 
     -   レプリケーションインスタンスをプライベートサブネットにデプロイし、プライベートサブネット内のトラフィックをパブリックサブネットにルーティングします。この場合、少なくとも3つのサブネット（プライベートサブネット2つとパブリックサブネット1つ）が必要です。2つのプライベートサブネットは、レプリケーションインスタンスが存在するサブネットグループを形成します。次に、パブリックサブネットにNATゲートウェイを作成し、2つのプライベートサブネットのトラフィックをNATゲートウェイにルーティングする必要があります。詳細については、 [プライベートサブネットからインターネットにアクセスする](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)を参照してください。
 
@@ -68,7 +68,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
 -   [パブリックエンドポイント経由でTiDB Cloud Dedicated クラスターに接続する](/tidb-cloud/connect-via-standard-connection.md)については、DMS レプリケーションインスタンスがインターネットにアクセスできることを確認するために、次のいずれかを実行します。さらに、レプリケーションインスタンスまたは NAT ゲートウェイのパブリック IP アドレスをクラスターの[IPアクセスリスト](/tidb-cloud/configure-ip-access-list.md)に追加する必要があります。
 
-    -   レプリケーションインスタンスをパブリックサブネットにデプロイし、 **「パブリックアクセス**可能」を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)を参照してください。
+    -   レプリケーションインスタンスをパブリックサブネットにデプロイし、 **Public accessible**を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)を参照してください。
 
     -   レプリケーションインスタンスをプライベートサブネットにデプロイし、プライベートサブネット内のトラフィックをパブリックサブネットにルーティングします。この場合、少なくとも3つのサブネット（プライベートサブネット2つとパブリックサブネット1つ）が必要です。2つのプライベートサブネットは、レプリケーションインスタンスが存在するサブネットグループを形成します。次に、パブリックサブネットにNATゲートウェイを作成し、2つのプライベートサブネットのトラフィックをNATゲートウェイにルーティングする必要があります。詳細については、 [プライベートサブネットからインターネットにアクセスする](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)を参照してください。
 
@@ -81,7 +81,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
 ## AWS DMS レプリケーションインスタンスを作成する {#create-an-aws-dms-replication-instance}
 
-1.  AWS DMSコンソールの[**レプリケーションインスタンス**](https://console.aws.amazon.com/dms/v2/home#replicationInstances)ページに移動し、対応するリージョンに切り替えます。AWS DMSでは、 TiDB Cloudと同じリージョンを使用することをお勧めします。
+1.  AWS DMSコンソールの[**Replication instances**](https://console.aws.amazon.com/dms/v2/home#replicationInstances)ページに移動し、対応するリージョンに切り替えます。AWS DMSでは、 TiDB Cloudと同じリージョンを使用することをお勧めします。
 
     ![Create replication instance](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-replication-instances.png)
 
@@ -89,9 +89,9 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
 3.  インスタンス名、ARN、説明を入力します。
 
-4.  **インスタンス構成**セクションで、インスタンスを構成します。
-    -   **インスタンスクラス**: 適切なインスタンスクラスを選択します。詳細については、 [レプリケーションインスタンスタイプの選択](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Types.html)を参照してください。
-    -   **エンジン バージョン**: デフォルト構成を維持します。
+4.  **Instance configuration**セクションで、インスタンスを構成します。
+    -   **Instance class**: 適切なインスタンスクラスを選択します。詳細については、 [レプリケーションインスタンスタイプの選択](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Types.html)を参照してください。
+    -   **Engine version**: デフォルト構成を維持します。
     -   **High Availability**: ビジネス ニーズに応じて、**マルチ AZ**または**シングル AZ**を選択します。
 
 5.  **Allocated storage (GiB)**フィールドでストレージを構成します。
@@ -101,7 +101,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
     -   **Network type - new**: **IPv4**を選択します。
     -   **IPv4 用の仮想プライベート クラウド (VPC)** : 必要な VPC を選択します。
     -   **Replication subnet group**: レプリケーション インスタンスのサブネット グループを選択します。
-    -   **パブリックアクセス可能**: ネットワーク構成に基づいて設定します。
+    -   **Public accessible**: ネットワーク構成に基づいて設定します。
 
     ![Connectivity and security](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-connectivity-security.png)
 
@@ -109,7 +109,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
 > **Note:**
 >
-> AWS DMS はサーバーレスレプリケーションもサポートしています。詳細な手順については、 [サーバーレスレプリケーションの作成](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Serverless.Components.html#CHAP_Serverless.create)をご覧ください。レプリケーションインスタンスとは異なり、AWS DMS のサーバーレスレプリケーションでは「**パブリックアクセス可能」**オプションは提供されません。
+> AWS DMS はサーバーレスレプリケーションもサポートしています。詳細な手順については、 [サーバーレスレプリケーションの作成](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Serverless.Components.html#CHAP_Serverless.create)をご覧ください。レプリケーションインスタンスとは異なり、AWS DMS のサーバーレスレプリケーションでは**Public accessible**オプションは提供されません。
 
 ## TiDB Cloud DMSエンドポイントを作成する {#create-tidb-cloud-dms-endpoints}
 
@@ -121,9 +121,9 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
 2.  **Create endpoint**をクリックして、ターゲット データベース エンドポイントを作成します。
 
-3.  **Endpoint type**セクションで、 **[ソース エンドポイント]**または**Target endpoint**を選択します。
+3.  **Endpoint type**セクションで、 **Source endpoint**または**Target endpoint**を選択します。
 
-4.  **エンドポイント設定**セクションで、**エンドポイント識別子**とARNフィールドに入力します。次に、**ソースエンジン**または**ターゲットエンジン**として**MySQLを**選択します。
+4.  **Endpoint configuration**セクションで、**Endpoint identifier**とARNフィールドに入力します。次に、**Source engine**または**Target engine**として**MySQL**を選択します。
 
 5.  **[Access to endpoint database]**フィールドで、 **[Provide access information manually]**チェックボックスをオンにし、次のようにクラスター情報を入力します。
 
@@ -154,6 +154,6 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
     ![Provide access information manually](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-configure-endpoint.png)
 
-6.  エンドポイントを**Target endpoint**として作成する場合は、**エンドポイント設定**セクションを展開し、**Use endpoint connection attributes**チェックボックスをオンにして、**Extra connection attributes**を`Initstmt=SET FOREIGN_KEY_CHECKS=0;`に設定します。
+6.  エンドポイントを**Target endpoint**として作成する場合は、**Endpoint settings**セクションを展開し、**Use endpoint connection attributes**チェックボックスをオンにして、**Extra connection attributes**を`Initstmt=SET FOREIGN_KEY_CHECKS=0;`に設定します。
 
 7.  必要に応じて、 **KMS Key**と**タグの**セクションを設定します。 **Create endpoint**をクリックしてインスタンスの作成を完了します。

@@ -51,7 +51,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 4.  テストトリガー
 
-    **「トリガーをテスト」を**クリックします。トリガーが正常に設定されると、GitHubアカウントから新しいグローバルイベントのデータが表示されます。 **「続行」**をクリックします。
+    **Test trigger**をクリックします。トリガーが正常に設定されると、GitHubアカウントから新しいグローバルイベントのデータが表示されます。 **「続行」**をクリックします。
 
 ### ステップ3： `Find Table in TiDB Cloud`アクションを設定する {#step-3-set-up-the-find-table-in-tidb-cloud-action}
 
@@ -89,7 +89,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 4.  テストアクション
 
-    **「テスト」アクション**をクリックすると、Zapierがテーブルを作成します。テストをスキップすることも可能で、その場合はワークフローが初めて実行されるときにテーブルが作成されます。
+    **Test action**をクリックすると、Zapierがテーブルを作成します。テストをスキップすることも可能で、その場合はワークフローが初めて実行されるときにテーブルが作成されます。
 
 ### ステップ4： `Create Row in TiDB Cloud`設定する {#step-4-set-up-the-create-row-in-tidb-cloud-action}
 
@@ -105,7 +105,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 3.  アクションを設定する
 
-    1.  前の手順と同様に、**Project Name**、**Cluster Name**、 **TiDBパスワード**、**Database Name**を入力してください。
+    1.  前の手順と同様に、**Project Name**、**Cluster Name**、 **TiDB Password**、**Database Name**を入力してください。
 
     2.  **Table Name**で、ドロップダウンリストから**github_global_event**テーブルを選択します。テーブルの列が表示されます。
 
@@ -117,7 +117,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 4.  テストアクション
 
-    **「テスト」アクション**をクリックして、テーブルに新しい行を作成します。TiDB Cloud Starterインスタンスを確認すると、データが正常に書き込まれていることが確認できます。
+    **Test action**をクリックして、テーブルに新しい行を作成します。TiDB Cloud Starterインスタンスを確認すると、データが正常に書き込まれていることが確認できます。
 
     ```sql
     mysql> SELECT * FROM test.github_global_event;

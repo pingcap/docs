@@ -211,7 +211,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     <CustomContent plan="dedicated">
 
     -   パブリックIPまたはVPCピアリングを使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
-    -   AWS Private Link を使用している場合、エンドポイント要求を承認するよう求められます。AWS [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)で、エンドポイントサービスを作成した AWS リージョンに切り替え、 **[エンドポイントサービス]**をクリックしてエンドポイント要求を承認してください。
+    -   AWS Private Link を使用している場合、エンドポイント要求を承認するよう求められます。AWS [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)で、エンドポイントサービスを作成した AWS リージョンに切り替え、 **Endpoint services**をクリックしてエンドポイント要求を承認してください。
 
     </CustomContent>
     <CustomContent plan="essential">
@@ -223,7 +223,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     <CustomContent plan="premium">
 
     -   接続方法として**パブリックを**使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
-    -   **Private Link**を使用しており、選択したプライベートエンドポイントがAWSでまだ承認されていない場合は、 [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)で、エンドポイントサービスを作成したAWSリージョンに切り替え、 **[エンドポイントサービス]**をクリックして、 TiDB Cloudからのエンドポイント接続要求を承認してください。
+    -   **Private Link**を使用しており、選択したプライベートエンドポイントがAWSでまだ承認されていない場合は、 [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)で、エンドポイントサービスを作成したAWSリージョンに切り替え、 **Endpoint services**をクリックして、 TiDB Cloudからのエンドポイント接続要求を承認してください。
 
     </CustomContent>
 

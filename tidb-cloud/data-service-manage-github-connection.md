@@ -55,7 +55,7 @@ GitHub接続で**Auto Sync & Deployment**が有効になっている場合、Git
         -   この機能を有効にすると、指定したGitHubディレクトリで行われた変更がTiDB Cloudに自動的にデプロイされ、 TiDB Cloudコンソールで行われた変更もGitHubにプッシュされます。関連するデプロイおよびコミット情報は、データアプリのデプロイ履歴で確認できます。
         -   この機能を無効にすると、指定したGitHubディレクトリで行われた変更はTiDB Cloudにデプロイさ**れず**、 TiDB Cloudコンソールで行われた変更もGitHubにプッシュされ**ません**。
 
-5.  **「接続確認」**をクリックしてください。
+5.  **Confirm Connect**をクリックしてください。
 
 ## ステップ2. データアプリの設定をGitHubと同期する {#step-2-synchronize-data-app-configurations-with-github}
 
@@ -160,7 +160,7 @@ TiDB Cloudコンソールでデータアプリのエンドポイント[データ
     -   この機能を有効にすると、指定したGitHubディレクトリで行われた変更がTiDB Cloudに自動的にデプロイされ、 TiDB Cloudコンソールで行われた変更もGitHubにプッシュされます。関連するデプロイおよびコミット情報は、データアプリのデプロイ履歴で確認できます。
     -   この機能を無効にすると、指定したGitHubディレクトリで行われた変更はTiDB Cloudにデプロイさ**れず**、 TiDB Cloudコンソールで行われた変更もGitHubにプッシュされ**ません**。
 
-6.  **「接続確認」**をクリックしてください。
+6.  **Confirm Connect**をクリックしてください。
 
 ## GitHub接続を削除 {#remove-github-connection}
 

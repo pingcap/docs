@@ -119,7 +119,7 @@ AWS CloudFormation を使用して書店プロジェクトを設定するには�
 
     1.  **前提条件**の領域で、 **Choose an existing template**を選択します。
 
-    2.  **テンプレート指定**領域で、 **Upload a template file**を選択し、 **[ファイルを選択]**をクリックしてテンプレート ファイル (YAML または JSON) をアップロードし、 **[次へ]**をクリックします。
+    2.  **Specify template**領域で、 **Upload a template file**を選択し、 **Choose file**をクリックしてテンプレート ファイル (YAML または JSON) をアップロードし、 **[次へ]**をクリックします。
 
         まだファイルをお持ちでない場合は、 [GitHub](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest)からダウンロードしてください。このファイルには、プロジェクトに必要なリソースを作成するAWS CloudFormationテンプレートが含まれています。
 
@@ -131,7 +131,7 @@ AWS CloudFormation を使用して書店プロジェクトを設定するには�
 
             ![Specify AWS Lambda stack details](/media/develop/aws-lambda-cf-stack-config.png)
 
-            -   **スタック名**：スタック名を入力してください。
+            -   **Stack name**：スタック名を入力してください。
             -   **S3Bucket** ：zipファイルを保存しているS3バケットを入力してください。
             -   **S3Key** ：S3キーを入力してください。
             -   **TiDBDatabase** ： TiDB Cloud Starterインスタンス名を入力してください。
