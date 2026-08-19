@@ -8,6 +8,39 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年8月18日 {#august-18-2026}
+
+**General changes**
+
+- **TiDB Cloud Premium**
+
+    - TiDB Cloud Premium インスタンス向けに **Statement Insight** (PREVIEW) を導入しました。
+
+        この機能は、TiDB Cloud Premium インスタンスにおける SQL のリソース消費を実用的に把握できるビューを提供します。
+
+        これにより、DB User、SQL type、DB、table、SQL digest などの複数の次元で、SQL ステートメントの RU 消費量、レイテンシー、実行回数を分析できるようになりました。さらに、主要な寄与要因をひと目で確認できるため、高いリソース消費や処理遅延の原因を特定しやすくなります。
+
+        現在、この機能はパブリックプレビュー段階であり、8 月 19 日以降に作成された一部の TiDB Cloud Premium インスタンスでのみ利用できます。
+
+        詳細については、[Statement Insight (PREVIEW)](https://docs.pingcap.com/tidbcloud/statement-insight/?plan=premium) を参照してください。
+
+- **TiDB Cloud Lake**
+
+    - [TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/) が、日本 (Tokyo) の Alibaba Cloud (`ap-northeast-1`) で利用可能になりました。
+
+        サポートされているその他のリージョンについては、[Platforms & Regions](https://docs.pingcap.com/tidbcloudlake/platforms-regions/) を参照してください。
+
+    - 新しい external Python UDF SDK と dbt adapter により、TiDB Cloud Lake の Python 拡張性と analytics engineering ワークフローを拡張しました。
+
+        - 新しい external Python UDF SDK を使用すると、Python でカスタムのスカラー関数およびテーブル関数を実装し、それらを UDF サーバーにデプロイし、TiDB Cloud Lake にエンドポイントを登録して、SQL から直接これらの関数を呼び出すことができます。この SDK は、一般的なデータ型と複雑なデータ型、NULL 処理、I/O 並列処理、および関数ごとの同時実行制御をサポートします。
+        - 新しい dbt adapter を使用すると、dbt を TiDB Cloud Lake に接続して、データ変換ワークフローの構築、テスト、ドキュメント化を行うことができます。この adapter は、table、view、incremental materialization に加え、seeds、sources、カスタムデータテスト、ドキュメント生成、snapshots、接続の再試行をサポートします。
+
+      詳細については、以下のドキュメントを参照してください。
+
+        - [External Function](https://docs.pingcap.com/tidbcloudlake/external-function/)
+        - [Choose a User-Defined Function Type](https://docs.pingcap.com/tidbcloudlake/choose-a-udf-type/)
+        - [Load Data with dbt](https://docs.pingcap.com/tidbcloudlake/load-with-dbt/)
+
 ## 2026年8月11日 {#august-11-2026}
 
 **全般的な変更**
