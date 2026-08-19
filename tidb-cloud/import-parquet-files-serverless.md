@@ -125,11 +125,11 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
 5.  **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
-    **Source Files URI**でディレクトリが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションがデフォルトで選択されます。
+    **Source Files URI**でディレクトリが指定されている場合、 **Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">File naming conventions</a> for automatic mapping**オプションがデフォルトで選択されます。
 
     > **Note:**
     >
-    > **Source Files URI**で単一のファイルが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションは表示されず、 TiDB Cloudは**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
+    > **Source Files URI**で単一のファイルが指定されている場合、 **Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">File naming conventions</a> for automatic mapping**オプションは表示されず、 TiDB Cloudは**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
     -   TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソース ファイルを対応するテーブルに自動的にマップできるようにするには、このオプションを選択したままにして、データ形式として**Parquet を**選択します。
 
@@ -176,11 +176,11 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
 5.  **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
-    **Source Files URI**でディレクトリが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションがデフォルトで選択されます。
+    **Source Files URI**でディレクトリが指定されている場合、 **Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">File naming conventions</a> for automatic mapping**オプションがデフォルトで選択されます。
 
     > **Note:**
     >
-    > **Source Files URI**で単一のファイルが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションは表示されず、 TiDB Cloudは**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
+    > **Source Files URI**で単一のファイルが指定されている場合、 **Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">File naming conventions</a> for automatic mapping**オプションは表示されず、 TiDB Cloudは**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
     -   TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソース ファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**Parquet を**選択します。
 
@@ -227,11 +227,11 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
 5.  **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
-    **Source Files URI**でディレクトリが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションがデフォルトで選択されます。
+    **Source Files URI**でディレクトリが指定されている場合、 **Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">File naming conventions</a> for automatic mapping**オプションがデフォルトで選択されます。
 
     > **Note:**
     >
-    > **Source Files URI**で単一のファイルが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションは表示されず、 TiDB Cloudは**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
+    > **Source Files URI**で単一のファイルが指定されている場合、 **Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">File naming conventions</a> for automatic mapping**オプションは表示されず、 TiDB Cloudは**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
     -   TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソース ファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**Parquet を**選択します。
 
@@ -278,11 +278,11 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
 5.  **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
-    **Source Files URI**でディレクトリが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションがデフォルトで選択されます。
+    **Source Files URI**でディレクトリが指定されている場合、 **Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">File naming conventions</a> for automatic mapping**オプションがデフォルトで選択されます。
 
     > **Note:**
     >
-    > **Source Files URI**で単一のファイルが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションは表示されず、 TiDB Cloudは**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
+    > **Source Files URI**で単一のファイルが指定されている場合、 **Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">File naming conventions</a> for automatic mapping**オプションは表示されず、 TiDB Cloudは**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
     -   TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソース ファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**Parquet を**選択します。
 

@@ -31,7 +31,7 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
 
 4.  **「次へ」**をクリックしてください。
 
-5.  **Destination Mapping**セクションで、 **<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDBファイル命名規則</a>を使用して自動マッピングを行う」**を選択したまま、データ形式として**SQL**を選択します。
+5.  **Destination Mapping**セクションで、 **Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDB file naming conventions</a> for automatic mapping**を選択したまま、データ形式として**SQL**を選択します。
 
 6.  **「次へ」**をクリックします。TiDB Cloudがソースファイルをスキャンします。
 
@@ -62,7 +62,7 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
 
 4.  **「次へ」**をクリックしてください。
 
-5.  **Destination Mapping**セクションで、 **<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDBファイル命名規則</a>を使用して自動マッピングを行う」**を選択したまま、データ形式として**SQL**を選択します。
+5.  **Destination Mapping**セクションで、 **Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDB file naming conventions</a> for automatic mapping**を選択したまま、データ形式として**SQL**を選択します。
 
 6.  **「次へ」**をクリックします。TiDB Cloudがソースファイルをスキャンします。
 
@@ -122,7 +122,7 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
     >
     > エンドポイントがまだ承認されていない場合、 TiDB Cloud は接続が承認待ちであることを示すメッセージを表示します。Azure でリクエスト[Azureポータル](https://portal.azure.com/)承認してから、再試行してください。
 
-5.  **Destination Mapping**セクションで、 **<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDBファイル命名規則</a>を使用して自動マッピングを行う」**を選択したまま、データ形式として**SQL**を選択します。
+5.  **Destination Mapping**セクションで、 **Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDB file naming conventions</a> for automatic mapping**を選択したまま、データ形式として**SQL**を選択します。
 
 6.  **「次へ」**をクリックします。TiDB Cloudがソースファイルをスキャンします。
 

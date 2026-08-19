@@ -120,13 +120,13 @@ CSVファイルをTiDB Cloud Premiumにインポートするには、以下の�
 
 5.  **Source Files Mapping**セクションでは、 TiDB Cloud Premiumがバケットをスキャンし、ソースファイルと宛先テーブル間のマッピングを提案します。
 
-    **Source Files URI**でディレクトリが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションがデフォルトで選択されます。
+    **Source Files URI**でディレクトリが指定されている場合、 **Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">File naming conventions</a> for automatic mapping**オプションがデフォルトで選択されます。
 
     > **Note:**
     >
-    > **Source Files URI**で単一のファイルが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションは表示されず、 TiDB Cloud Premiumは**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
+    > **Source Files URI**で単一のファイルが指定されている場合、 **Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">File naming conventions</a> for automatic mapping**オプションは表示されず、 TiDB Cloud Premiumは**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
-    -   [ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)ソース ファイルとターゲット テーブルに適用するには、自動マッピングを有効のままにしておきます。データ形式として**CSV**を選択したままにしておきます。
+    -   [ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)をソース ファイルとターゲット テーブルに適用するには、自動マッピングを有効のままにしておきます。データ形式として**CSV**を選択したままにしておきます。
 
     -   **Advanced options**：パネルを展開して`Ignore compatibility checks (advanced)`の切り替えボタンを表示します。スキーマ互換性検証を意図的にバイパスしたい場合を除き、無効のままにしておいてください。
 
@@ -173,13 +173,13 @@ CSVファイルをTiDB Cloud Premiumにインポートするには、以下の�
 
 5.  **Source Files Mapping**セクションでは、 TiDB Cloud Premiumがバケットをスキャンし、ソースファイルと宛先テーブル間のマッピングを提案します。
 
-    **Source Files URI**でディレクトリが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションがデフォルトで選択されます。
+    **Source Files URI**でディレクトリが指定されている場合、 **Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">File naming conventions</a> for automatic mapping**オプションがデフォルトで選択されます。
 
     > **Note:**
     >
-    > **Source Files URI**で単一のファイルが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションは表示されず、 TiDB Cloud Premiumは**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
+    > **Source Files URI**で単一のファイルが指定されている場合、 **Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">File naming conventions</a> for automatic mapping**オプションは表示されず、 TiDB Cloud Premiumは**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
-    -   [ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)ソース ファイルとターゲット テーブルに適用するには、自動マッピングを有効のままにしておきます。データ形式として**CSV**を選択したままにしておきます。
+    -   [ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)をソース ファイルとターゲット テーブルに適用するには、自動マッピングを有効のままにしておきます。データ形式として**CSV**を選択したままにしておきます。
 
     -   **Advanced options**：パネルを展開して`Ignore compatibility checks (advanced)`の切り替えボタンを表示します。スキーマ互換性検証を意図的にバイパスしたい場合を除き、無効のままにしておいてください。
 
