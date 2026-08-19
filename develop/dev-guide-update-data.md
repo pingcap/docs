@@ -54,7 +54,7 @@ UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {fil
 
 ### `UPDATE`例 {#update-example}
 
-[著者](/develop/dev-guide-bookshop-schema-design.md#authors-table)が名前を**Helen Haruki**に変更したとします。テーブルを変更する必要があります。彼女の固有の`id`が**1で**あると仮定すると、フィルターは`id = 1`になります。
+[authors](/develop/dev-guide-bookshop-schema-design.md#authors-table)が名前を**Helen Haruki**に変更したとします。テーブルを変更する必要があります。彼女の固有の`id`が**1で**あると仮定すると、フィルターは`id = 1`になります。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
