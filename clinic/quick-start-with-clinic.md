@@ -66,14 +66,14 @@ PingCAP Clinicを使用する前に、Diag をインストールし、データ�
         tiup diag config clinic.token ${token-value}
         ```
 
-    -   `clinic.region`設定するには、次のコマンドを実行します。
+    -   `clinic.region`を設定するには、次のコマンドを実行します。
 
-    `region` 、データの圧縮に使用する暗号化証明書と、データのアップロード時に使用する対象サービスを決定します。例:
+    `region`は、データの圧縮に使用する暗号化証明書と、データのアップロード時に使用する対象サービスを決定します。例:
 
     > **Note:**
     >
-    > -   Diag v0.9.0 以降のバージョンでは設定`region`サポートされます。
-    > -   Diag v0.9.0より前のバージョンでは、データはデフォルトで中国リージョンのClinic Serverにアップロードされます。これらのバージョンで`region`設定するには、 `tiup update diag`コマンドを実行してDiagを最新バージョンにアップグレードし、その後Diagで`region`を設定してください。
+    > -   Diag v0.9.0 以降のバージョンでは`region`の設定がサポートされます。
+    > -   Diag v0.9.0より前のバージョンでは、データはデフォルトで中国リージョンのClinic Serverにアップロードされます。これらのバージョンで`region`を設定するには、 `tiup update diag`コマンドを実行してDiagを最新バージョンにアップグレードし、その後Diagで`region`を設定してください。
 
     <SimpleTab groupId="clinicServer">
      <div label="Clinic Server for international users" value="clinic-us">

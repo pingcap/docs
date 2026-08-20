@@ -128,7 +128,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
 
 -   sync-diff-inspector
     -   チェックポイントをサポートし、検証ステータスを記録し、再起動後に最後に保存したポイントから検証を続行します[＃224](https://github.com/pingcap/tidb-tools/pull/224)
-    -   チェックサム計算してデータの整合性をチェックするための構成項目`only-use-checksum`を追加します [＃215](https://github.com/pingcap/tidb-tools/pull/215)
+    -   チェックサムを計算してデータの整合性をチェックするための構成項目`only-use-checksum`を追加します [＃215](https://github.com/pingcap/tidb-tools/pull/215)
 
 ## TiDB Ansible {#tidb-ansible}
 

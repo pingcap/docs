@@ -20,7 +20,7 @@ TiDB クラスターのサイズを決定する方法については、 [TiDBの
 
 > **Note:**
 >
-> TiDBまたはTiKVのvCPUとRAMサイズが**4 vCPU、16 GiB**に設定されている場合、以下の制限事項にご注意ください。これらの制限を回避するには、まず[vCPUとRAMを増やす](#change-vcpu-and-ram)を設定してください。
+> TiDBまたはTiKVのvCPUとRAMサイズが**4 vCPU、16 GiB**に設定されている場合、以下の制限事項にご注意ください。これらの制限を回避するには、まず[vCPUとRAMを増やす](#change-vcpu-and-ram)必要があります。
 >
 > -   TiDB のノード数は 1 または 2 にのみ設定でき、TiKV のノード数は 3 に固定されています。
 > -   4 vCPU TiDB は 4 vCPU TiKV でのみ使用でき、4 vCPU TiKV は 4 vCPU TiDB でのみ使用できます。

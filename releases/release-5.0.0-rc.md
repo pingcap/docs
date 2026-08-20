@@ -85,7 +85,7 @@ TiDB では、ID 情報やクレジットカード番号などの機密情報の
 -   TiDB 側では、tidb-server で SQL ステートメントを使用して`tidb_redact_log=1`変数を設定します。
 -   TiKV 側では、tikv-server で`security.redact-info-log = true`構成を設定します。
 -   PD側ではpd-serverに`security.redact-info-log = true`設定をします[＃2852](https://github.com/tikv/pd/issues/2852) [＃3011](https://github.com/tikv/pd/pull/3011)
--   TiFlash側では、tiflash-server に`security.redact_info_log = true`設定を設定し、tiflash-learner に`security.redact-info-log = true`を設定します。
+-   TiFlash側では、tiflash-server に`security.redact_info_log = true`を設定し、tiflash-learner に`security.redact-info-log = true`を設定します。
 
 [ユーザードキュメント](/log-redaction.md)
 

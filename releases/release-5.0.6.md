@@ -46,7 +46,7 @@ TiDB バージョン: 5.0.6
         -   頻繁な etcd 書き込みが PD サービスに影響を与えないように、EtcdWorker にティック頻度制限を追加します[＃3112](https://github.com/pingcap/ticdc/issues/3112)
         -   Kafkaシンクの`config.Metadata.Timeout`デフォルト設定を追加する [＃3352](https://github.com/pingcap/tiflow/issues/3352)
         -   デフォルト値の`max-message-bytes`を`10M`に設定すると、Kafkaメッセージが送信されない可能性が減ります。 [＃3081](https://github.com/pingcap/tiflow/issues/3081)
-        -   `no owner alert` 含む`mounter row` Prometheusとの監視メトリックとアラート`table sink total row`を追加します`buffer sink total row` [＃1606](https://github.com/pingcap/tiflow/issues/1606) [＃4054](https://github.com/pingcap/tiflow/issues/4054)
+        -   `no owner alert`、`mounter row`、`table sink total row`、`buffer sink total row`を含む Prometheus と Grafana の監視メトリックとアラートを追加します。 [＃1606](https://github.com/pingcap/tiflow/issues/1606) [＃4054](https://github.com/pingcap/tiflow/issues/4054)
 
     -   Backup & Restore (BR)
 
