@@ -82,7 +82,7 @@ If issues arise with IA tables, you and the TiDB Cloud team can use the followin
 
 ## IA local cache and query performance uncertainty
 
-Tiered Storage maintains a local IA data cache (managed by IaManager) to accelerate repeated access to recently accessed cold data. However, the following key facts should be understood:
+Tiered storage maintains a local IA data cache (managed by IaManager) to accelerate repeated access to recently accessed cold data. However, the following key facts should be understood:
 
 - **Cache behavior is system-controlled, not user-configurable**: Cache size and eviction policies are managed uniformly by the system. You cannot adjust cache capacity or specify which data stays in the cache. Cache hit rates depend on actual access patterns, concentrated access can exceed 90%, while scattered access may fall below 90%. Even if only one partition is set to IA, its local cache behavior is still system-managed. You cannot exercise fine-grained control.
 - **IA query response time is non-deterministic**: When a query hits the local cache, performance is close to Standard tables. However, when data must be loaded from remote object storage (cache miss), each remote request adds approximately 500ms~2s of latency. A single SQL execution may involve multiple remote loads, causing latency to accumulate. Therefore, IA table query response times are not as predictable as Standard tables — the business side should plan accordingly.
