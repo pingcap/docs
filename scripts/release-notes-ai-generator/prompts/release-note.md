@@ -30,7 +30,11 @@ Return a no-release-note verdict for internal-only changes, including:
 
 If a PR is mostly internal but the outcome is user-visible, describe the outcome and omit implementation details. If the only user-facing effect is indirect or speculative, lean toward `not_needed`.
 
-Use `issue_type_from_excel` as a strong signal, but determine the final type from all available context.
+First, use all available context to decide whether the change needs a release note. If it does, classify it as follows:
+
+- When `issue_type_from_excel` is non-empty, use it as the primary basis for choosing between `bug_fix` and `improvement`. Map values containing `bug` or `fix` to `bug_fix`, and values containing `improvement` or `enhancement` to `improvement`, case-insensitively. Use the issue, PR, changed-file summary, and Excel draft only as supporting context for understanding the user impact and writing an accurate entry. Do not override a type that maps clearly from `issue_type_from_excel` merely because the other context could support another classification.
+- When `issue_type_from_excel` is empty, determine the type from all available context. Use `bug_fix` for a correction to broken, incorrect, or unexpected existing behavior. Use `improvement` for a new capability or an optimization, enhancement, or other beneficial change that does not correct a defect.
+- When a non-empty `issue_type_from_excel` does not map clearly to either type, interpret that value first and use the other context only to resolve the ambiguity. Set `needs_review` to `true` if the type remains uncertain.
 
 ## Writing style
 
@@ -56,6 +60,8 @@ Examples:
 ```
 
 ### Bug fixes style
+
+Focus bug-fix entries on user-visible symptoms or error messages, trigger conditions, and impact, and avoid including internal implementation details unless they are necessary to explain the user-visible behavior.
 
 Lead with a fix verb phrase. Accepted patterns include:
 

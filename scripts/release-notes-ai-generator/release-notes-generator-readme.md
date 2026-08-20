@@ -349,6 +349,8 @@ The prompt includes:
 - The repository-local writing references for improvements and bug fixes.
 - The shared prompt template in `scripts/release-notes-ai-generator/prompts/generation.md` and the active task instructions in `prompts/release-note.md` and/or `prompts/doc-impact.md`.
 
+For a change that needs a release note, a non-empty `issue_type` is the primary basis for choosing between `improvement` and `bug_fix`. The GitHub issue, PR, changed-file summary, and Excel draft provide supporting context for the user impact and wording. When `issue_type` is empty, the AI determines the type from all available context. The release-note necessity decision remains based on whether the change is visible to users or operators.
+
 The two AI decisions are independent. A row can have a `not_needed` release-note verdict and a `Detected` documentation impact.
 
 The generator sends only the instructions and JSON Schema fields needed for the missing result. For example, when a row in `release_note_not_needed` only needs documentation-impact analysis, the request omits the release-note instructions and output fields.

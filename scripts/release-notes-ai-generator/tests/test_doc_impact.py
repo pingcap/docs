@@ -381,6 +381,23 @@ class DocImpactValidationTest(unittest.TestCase):
         self.assertNotIn("Variable or configuration documentation-impact task", prompt)
         self.assertIn("Expected links to include", prompt)
         self.assertIn("formatted_release_note_from_excel", prompt)
+        self.assertIn(
+            "use it as the primary basis for choosing between `bug_fix` and "
+            "`improvement`",
+            prompt,
+        )
+        self.assertIn(
+            "When `issue_type_from_excel` is empty, determine the type from all "
+            "available context",
+            prompt,
+        )
+        self.assertIn(
+            "Focus bug-fix entries on user-visible symptoms or error messages, "
+            "trigger conditions, and impact, and avoid including internal "
+            "implementation details unless they are necessary to explain the "
+            "user-visible behavior",
+            prompt,
+        )
         self.assertNotIn("variable_or_config_doc_impact", schema["properties"])
         self.assertEqual(
             {"type", "release_note", "needs_review", "reason"},
