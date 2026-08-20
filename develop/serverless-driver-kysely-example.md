@@ -297,4 +297,4 @@ mysql://[username]:[password]@[host]/[database]
 ## 次は？ {#what-s-next}
 
 -   [Kysely](https://kysely.dev/docs/intro)と[@tidbcloud/kysely](https://github.com/tidbcloud/kysely)についてもっと詳しく知りたい方はこちらをご覧ください。
--   [TiDB CloudとVercelを統合する](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)方法を学ぶ
+-   [TiDB CloudとVercelを統合する](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)方法を学びます。

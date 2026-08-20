@@ -56,7 +56,7 @@ ParquetファイルからTiDBにデータをインポートする前に、ター
     -   `CREATE DATABASE`ファイルに`${db_name}-schema-create.sql` } ステートメントを追加します。
     -   `CREATE TABLE`ファイルに`${db_name}.${table_name}-schema.sql` } ステートメントを追加します。
 
--   **方法2** ：対象テーブルのスキーマを手動で作成する。
+-   **方法2** ：対象テーブルのスキーマを手動で作成します。
 
 ## ステップ3．設定ファイルを作成する {#step-3-create-the-configuration-file}
 

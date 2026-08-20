@@ -407,7 +407,7 @@ gRPC API リクエストの最大同時実行数（ `GetRegion` API リクエス
 config set service-middleware grpc-rate-limit GetRegion concurrency 10
 ```
 
-変更された構成を表示する。
+変更された構成を表示します。
 
 ```bash
 config show service-middleware

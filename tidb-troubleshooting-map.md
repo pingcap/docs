@@ -66,7 +66,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
     -   原因4：初期バージョン（v2.1.15およびv3.0.0-rc1未満のバージョン）では、PDインスタンスがTiDBキーを削除できず、すべてのDDL変更が2リース分待機することになります。
 
-    -   その他の原因不明の場合は[バグを報告する](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&template=bug-report.md)。
+    -   その他の原因不明の場合は[バグを報告してください](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&template=bug-report.md)。
 
     -   解決：
 
@@ -163,7 +163,7 @@ OOM のトラブルシューティングの詳細については、 [TiDBのメ�
 
     -   統計情報を更新します。問題の原因が統計情報にあるとおおよそ確信できる場合は、[統計情報を捨てる](/statistics.md#export-statistics)。原因が古い統計情報である場合、例えば`modify count/row count`の`show stats_meta`が特定の値 (例えば 0.3) より大きい場合、またはテーブルに時間列のインデックスがある場合、 `analyze table`を使用して復旧を試みることもできます。 `auto analyze`が設定されている場合は、 `tidb_auto_analyze_ratio`システム変数が大きすぎる (例えば 0.3 より大きい) かどうか、および現在時刻が`tidb_auto_analyze_start_time`と`tidb_auto_analyze_end_time`の間にあるかどうかを確認してください。
 
-    -   その他の状況については、 [バグを報告する](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&template=bug-report.md)。
+    -   その他の状況については、 [バグを報告してください](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&template=bug-report.md)。
 
 ### 3.4 SQL実行エラー {#34-sql-execution-error}
 
@@ -215,7 +215,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     この問題は想定内のものです。仮想マシンの`fsync`は信頼性が低いため、 `tikv-ctl`を使用してリージョンを復元する必要があります。
 
--   4.1.2 その他の予期せぬ原因については、 [バグを報告する](https://github.com/tikv/tikv/issues/new?template=bug-report.md)。
+-   4.1.2 その他の予期せぬ原因については、 [バグを報告してください](https://github.com/tikv/tikv/issues/new?template=bug-report.md)。
 
 ### 4.2 TiKV OOM {#42-tikv-oom}
 
@@ -273,7 +273,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 -   4.4.1 TiKVが再起動されたため再選が行われる
 
-    -   TiKVがパニックを起こした後、systemdによって起動され、正常に動作します。TiKVログを確認することで[バグを報告する](https://github.com/tikv/tikv/issues/new?template=bug-report.md)panicが発生したかどうかを確認できます。この問題は予期しないため、発生した場合。
+    -   TiKVがパニックを起こした後、systemdによって起動され、正常に動作します。TiKVログを確認することで、panicが発生したかどうかを確認できます。この問題は予期しないものであるため、発生した場合は[バグを報告してください](https://github.com/tikv/tikv/issues/new?template=bug-report.md)。
 
     -   TiKV が第三者によって停止または強制終了され、その後 systemd によって起動されました。原因を確認するには`dmesg`と TiKV ログを参照してください。
 
@@ -293,13 +293,13 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     prewrite/commit の`scheduler command duration`が`scheduler latch wait duration`と`storage async write duration`の合計よりも長くなっています。スケジューラワーカーの CPU 要求が高く、例えば`scheduler-worker-pool-size` * 100% の 80% を超えているか、マシン全体の CPU リソースが比較的限られています。書き込みワークロードが大きい場合は、 `[storage] scheduler-worker-pool-size`の設定が小さすぎないか確認してください。
 
-    その他の状況については、 [バグを報告する](https://github.com/tikv/tikv/issues/new?template=bug-report.md)。
+    その他の状況については、 [バグを報告してください](https://github.com/tikv/tikv/issues/new?template=bug-report.md)。
 
 -   4.5.3 ログの追加処理が遅いです。
 
     TiKV Grafana の**Raft IO** / `append log duration`値が高い場合、通常はディスク書き込み操作が遅いことが原因です。RocksDB - raft の`WAL Sync Duration max`の値を確認することで原因を特定できます。
 
-    その他の状況については、 [バグを報告する](https://github.com/tikv/tikv/issues/new?template=bug-report.md)。
+    その他の状況については、 [バグを報告してください](https://github.com/tikv/tikv/issues/new?template=bug-report.md)。
 
 -   4.5.4 raftstore スレッドがビジー状態です。
 
@@ -320,7 +320,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     -   RocksDBへの書き込みが遅いです。RocksDB**のkv** / `max write duration`が高いです。1つのRaftログに複数のKVが含まれる可能性があります。RocksDBへの書き込み時には、1回の書き込みバッチで128個のKVがRocksDBに書き込まれます。そのため、適用ログはRocksDBへの複数の書き込みに関連付けられる可能性があります。
 
-    -   その他の状況については、 [バグを報告する](https://github.com/tikv/tikv/issues/new?template=bug-report.md)。
+    -   その他の状況については、 [バグを報告してください](https://github.com/tikv/tikv/issues/new?template=bug-report.md)。
 
 -   4.5.6 Raftのコミットログが遅いです。
 
@@ -370,17 +370,17 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     -   ネットワークの問題です。Grafana -&gt; **blackbox_exporter** -&gt; **ping レイテンシー**モニターにアクセスして、 **TiDB**から PD Leaderへのネットワークが正常に動作しているかどうかを確認してください。
 
-    -   PD パニック。 [バグを報告する](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&template=bug-report.md)。
+    -   PD パニック。 [バグを報告してください](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&template=bug-report.md)。
 
     -   PDはOOMです[5.3](#53-pd-oom)を参照してください。
 
-    -   問題に他の原因がある場合は、 `curl http://127.0.0.1:2379/debug/pprof/goroutine?debug=2`を実行して goroutine を取得し、 [バグを報告する](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&template=bug-report.md)。
+    -   問題に他の原因がある場合は、 `curl http://127.0.0.1:2379/debug/pprof/goroutine?debug=2`を実行して goroutine を取得し、 [バグを報告してください](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&template=bug-report.md)。
 
 -   5.2.4 その他の問題
 
     -   PD は`FATAL`エラーを報告し、ログには`range failed to find revision pair`と表示されます。この問題は v3.0.8 ( [#2040](https://github.com/pingcap/pd/pull/2040) ) で修正されました。詳細は、中国語の[ケース947](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case947.md)を参照してください。
 
-    -   その他の状況については、 [バグを報告する](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&template=bug-report.md)。
+    -   その他の状況については、 [バグを報告してください](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&template=bug-report.md)。
 
 ### 5.3 PD OOM {#53-pd-oom}
 
@@ -518,7 +518,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 -   7.1.4 `distsql.go`は`inconsistent index`を報告します。
 
-    データインデックスに矛盾があるようです。報告されたインデックスが存在するテーブルで`admin check table <TableName>`コマンドを実行してください。チェックが失敗した場合は、次のコマンドを実行して[バグを報告する](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&template=bug-report.md)ガベージコレクションを無効にしてください。:
+    データインデックスに矛盾があるようです。報告されたインデックスが存在するテーブルで`admin check table <TableName>`コマンドを実行してください。チェックが失敗した場合は、次のコマンドを実行してガベージコレクションを無効にし、[バグを報告してください](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&template=bug-report.md):
 
     ```sql
     SET GLOBAL tidb_gc_enable = 0;

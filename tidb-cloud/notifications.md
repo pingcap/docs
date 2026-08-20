@@ -48,7 +48,7 @@ TiDB Cloudコンソールでは、次のようなさまざまな種類の通知�
 | Starterインスタンスの支出制限しきい値アラート    | 組織内のTiDB Cloud Starterインスタンスの[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)に達しました。    | `Organization Owner` 、 `Organization Billing Manager` 、 `Organization Billing Viewer` 、および`Project Owner` |
 | クレジットの更新                      | 組織の [クレジット](/tidb-cloud/tidb-cloud-billing.md#credits)が適用、完全に使用、回収、または期限切れになります。             | `Organization Owner` 、 `Organization Billing Manager` 、および`Organization Billing Viewer`                   |
 | 割引情報                          | 組織向けの[割引](/tidb-cloud/tidb-cloud-billing.md#discounts)は、適用、回収、または期限切れとなります。                  | `Organization Owner` 、 `Organization Billing Manager` 、および`Organization Billing Viewer`                   |
-| マーケットプレイスのアップデート              | 組織は、クラウドプロバイダーのマーケットプレイスを通じて、サブスクリプション契約またはサブスクリプション解除契約を締結している。                             | 組織のすべてのメンバー                                                                                               |
+| マーケットプレイスのアップデート              | 組織は、クラウドプロバイダーのマーケットプレイスを通じて、サブスクリプション契約またはサブスクリプション解除契約を締結しています。                             | 組織のすべてのメンバー                                                                                               |
 | サポートプランの更新                    | 組織のサポートプランの契約内容が変更されました。                                                                     | 組織のすべてのメンバー                                                                                               |
 
 ## 通知を確認する {#view-notifications}

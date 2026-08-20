@@ -37,7 +37,7 @@ summary: tidb_external_ts` 変数を使用して履歴データを読み取る�
 
         Query OK, 3 rows affected (0.00 sec)
 
-2.  表内のデータを表示する。
+2.  表内のデータを表示します。
 
     ```sql
     SELECT * FROM t;
