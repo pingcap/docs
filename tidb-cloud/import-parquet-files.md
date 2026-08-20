@@ -141,10 +141,11 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
     - To manually configure the mapping rules to associate your source Parquet files with the target database and table, deselect this option, and then fill in the following fields:
 
-        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example, `TableName.01.parquet`. You can also use wildcards to match multiple files. TiDB Cloud only supports the `*` and `?` wildcards.
+        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example, `TableName.01.parquet`. You can also use the `*`, `?`, and `[]` wildcards to match multiple files.
 
             - `my-data?.parquet`: matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
             - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data10.parquet` and `my-data100.parquet`.
+            - `my-data[1-4].parquet`: matches Parquet files named `my-data1.parquet` through `my-data4.parquet`.
 
         - **Target Database** and **Target Table**: enter the target database and table to import the data to.
 
@@ -192,10 +193,11 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
     - To manually configure the mapping rules to associate your source Parquet files with the target database and table, deselect this option, and then fill in the following fields:
 
-        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example, `TableName.01.parquet`. You can also use wildcards to match multiple files. TiDB Cloud only supports the `*` and `?` wildcards.
+        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example, `TableName.01.parquet`. You can also use the `*`, `?`, and `[]` wildcards to match multiple files.
 
             - `my-data?.parquet`: matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
             - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data10.parquet` and `my-data100.parquet`.
+            - `my-data[1-4].parquet`: matches Parquet files named `my-data1.parquet` through `my-data4.parquet`.
 
         - **Target Database** and **Target Table**: enter the target database and table to import the data to.
 
@@ -263,10 +265,11 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
     - To manually configure the mapping rules to associate your source Parquet files with the target database and table, deselect this option, and then fill in the following fields:
 
-        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example, `TableName.01.parquet`. You can also use wildcards to match multiple files. TiDB Cloud only supports the `*` and `?` wildcards.
+        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example, `TableName.01.parquet`. You can also use the `*`, `?`, and `[]` wildcards to match multiple files.
 
             - `my-data?.parquet`: matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
             - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data10.parquet` and `my-data100.parquet`.
+            - `my-data[1-4].parquet`: matches Parquet files named `my-data1.parquet` through `my-data4.parquet`.
 
         - **Target Database** and **Target Table**: enter the target database and table to import the data to.
 

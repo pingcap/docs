@@ -106,15 +106,15 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
 
     - **Storage Provider**: select **Amazon S3**.
     - **Source Files URI**: enter the URI of the top-level folder that contains the source files. For example, `s3://sampledata/ingest/`.
-    - **Credential**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access).
-        - **AWS Role ARN**: enter the AWS Role ARN value. If you need to create a new role, click **Click here to create a new one with AWS CloudFormation** and follow the guided steps to launch the provided template, acknowledge the IAM warning, create the stack, and copy the generated ARN back into {{{ .premium }}}.
-        - **AWS Access Key**: enter the AWS access key ID and AWS secret access key.
+    - **Credentials**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access).
+        - **AWS Role ARN**: enter the AWS Role ARN value. If you need to create a new role, click **Click here to create new one with AWS CloudFormation** and follow the guided steps to launch the provided template, acknowledge the IAM warning, create the stack, and copy the generated ARN back into {{{ .premium }}}.
+        - **AWS Access Key**: enter the **Access Key ID** and **Secret Access Key**.
     - **Test Bucket Access**: click this button after the credentials are in place to confirm that {{{ .premium }}} can reach the bucket.
     - **Target Connection**: provide the TiDB username and password that will run the import. Optionally, click **Test Connection** to validate the credentials.
 
 4. Click **Next**.
 
-5. In the **Source Files Mapping** section, specify how source files are mapped to target tables.
+5. In the **Mapping and Job Configuration** step, use **Source Files Mapping** to specify how source files are mapped to target tables.
 
     The **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
@@ -122,11 +122,18 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
 
     - To configure mappings manually, deselect the automatic mapping option, and then configure a mapping for each target table:
 
-        - **Source**: enter a source file pattern relative to the **Source Files URI**. The pattern supports `*` and `?` wildcards. For example, `my-data*.csv` matches all CSV files whose names start with `my-data`.
+        - **Source**: enter a source file pattern relative to the **Source Files URI**. The pattern supports `*` and `[]` wildcards. For example, `my-data*.csv` matches all CSV files whose names start with `my-data`, and `my-data-[1-4].csv` matches `my-data-1.csv` through `my-data-4.csv`.
         - **Target Database** and **Target Table**: enter the target database and table for the matched files.
         - To add another mapping, click **+**.
 
+    In the **Job Configuration** section, review the following settings:
+
+    - **Job Name**: keep the generated name or enter a name for the import job.
+    - **Advanced Options**: expand this section to view **Ignore compatibility checks (advanced)**. Leave this option disabled unless you intentionally need to bypass the pre-import compatibility checks.
+
 6. Click **Next** to run the pre-check. Review the scan results and verify the source files and target tables.
+
+    By default, **Skip first** is `0`. If each source CSV file contains a header row, click **edit CSV configuration here** and set **Skip first** to `1`. This setting applies to every matched CSV file.
 
 7. Click **Start Import**.
 
@@ -152,13 +159,13 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
 
     - **Storage Provider**: select **Alibaba Cloud OSS**.
     - **Source Files URI**: enter the URI of the top-level folder that contains the source files. For example, `oss://sampledata/ingest/`.
-    - **Credential**: you can use an AccessKey pair to access your bucket. For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access).
+    - **AccessKey ID** and **AccessKey Secret**: enter an AccessKey pair to access your bucket. For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access).
     - **Test Bucket Access**: click this button after the credentials are in place to confirm that {{{ .premium }}} can reach the bucket.
     - **Target Connection**: provide the TiDB username and password that will run the import. Optionally, click **Test Connection** to validate the credentials.
 
 4. Click **Next**.
 
-5. In the **Source Files Mapping** section, specify how source files are mapped to target tables.
+5. In the **Mapping and Job Configuration** step, use **Source Files Mapping** to specify how source files are mapped to target tables.
 
     The **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
@@ -166,11 +173,18 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
 
     - To configure mappings manually, deselect the automatic mapping option, and then configure a mapping for each target table:
 
-        - **Source**: enter a source file pattern relative to the **Source Files URI**. The pattern supports `*` and `?` wildcards. For example, `my-data*.csv` matches all CSV files whose names start with `my-data`.
+        - **Source**: enter a source file pattern relative to the **Source Files URI**. The pattern supports `*` and `[]` wildcards. For example, `my-data*.csv` matches all CSV files whose names start with `my-data`, and `my-data-[1-4].csv` matches `my-data-1.csv` through `my-data-4.csv`.
         - **Target Database** and **Target Table**: enter the target database and table for the matched files.
         - To add another mapping, click **+**.
 
+    In the **Job Configuration** section, review the following settings:
+
+    - **Job Name**: keep the generated name or enter a name for the import job.
+    - **Advanced Options**: expand this section to view **Ignore compatibility checks (advanced)**. Leave this option disabled unless you intentionally need to bypass the pre-import compatibility checks.
+
 6. Click **Next** to run the pre-check. Review the scan results and verify the source files and target tables.
+
+    By default, **Skip first** is `0`. If each source CSV file contains a header row, click **edit CSV configuration here** and set **Skip first** to `1`. This setting applies to every matched CSV file.
 
 7. Click **Start Import**.
 

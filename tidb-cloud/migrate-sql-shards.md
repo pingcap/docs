@@ -205,19 +205,17 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 
     When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding CSV file. After that, the data source files will be re-scanned using the provided custom mapping rule.
 
-    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `s3://sampledata/ingest/TableName.01.csv`.
+    The source-pattern field and supported wildcards depend on the service plan:
 
-    You can also use wildcards to match the source files. For example:
+    - For {{{ .starter }}} and {{{ .essential }}} instances that display **Destination Mapping**, enter a file name pattern relative to the top-level source URI. Use `*`, `?`, or `[]`. For example, `my-data?.csv` matches files such as `my-data1.csv` and `my-data2.csv`, `my-data[1-4].csv` matches `my-data1.csv` through `my-data4.csv`, and `my-data*.csv` matches all CSV files whose names start with `my-data`.
 
-    - `s3://[bucket_name]/[data_source_folder]/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in that folder will be imported into the same target table.
+    - For {{{ .essential }}} and {{{ .premium }}} instances that display **Mapping and Job Configuration**, deselect **Use TiDB file naming conventions for automatic mapping**. In **Source**, enter a file name pattern relative to the **Source Files URI**. Use `[]` to match a character range and `*` to match multiple characters. For example, `my-data[1-4].csv` matches `my-data1.csv` through `my-data4.csv`, and `my-data*.csv` matches all CSV files whose names start with `my-data`.
 
-    - `s3://[bucket_name]/[data_source_folder]/my-data*.csv`: all CSV files in the folder starting with `my-data` will be imported into the same target table.
-
-    Note that only `?` and `*` are supported.
+    - For {{{ .dedicated }}}, enter the full source file URI in **Source File URIs and Names**. Use `?` to match one character, `*` to match multiple characters, and `[]` to match a character range. For example, `s3://[bucket_name]/[data_source_folder]/my-data?.csv` matches files such as `my-data1.csv` and `my-data2.csv`, `s3://[bucket_name]/[data_source_folder]/my-data[1-4].csv` matches `my-data1.csv` through `my-data4.csv`, and `s3://[bucket_name]/[data_source_folder]/my-data*.csv` matches all CSV files in the folder whose names start with `my-data`.
 
     > **Note:**
     >
-    > The URI must contain the data source folder.
+    > In the **Destination Mapping** and **Source Files Mapping** workflows, configure the top-level folder in the source URI field, and enter only the relative file name pattern in each mapping. For {{{ .dedicated }}}, the URI in each mapping must contain the data source folder.
 
 6. Edit the CSV configuration if needed.
 

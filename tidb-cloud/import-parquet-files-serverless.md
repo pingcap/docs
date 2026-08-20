@@ -134,9 +134,10 @@ To import the Parquet files to {{{ .starter }}} or {{{ .essential }}}, take the 
 
     - To manually configure the mapping rules to associate your source Parquet files with the target database and table, unselect this option, and then fill in the following fields:
 
-        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example: `TableName.01.parquet`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
+        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example: `TableName.01.parquet`. You can also use wildcards to match multiple files. For {{{ .starter }}} and {{{ .essential }}} instances that use **Destination Mapping**, use `*`, `?`, and `[]`. For {{{ .essential }}} and {{{ .premium }}} instances that use **Source Files Mapping** under **Mapping and Job Configuration**, use `*` and `[]`.
 
-            - `my-data?.parquet`: matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
+            - For {{{ .starter }}} and {{{ .essential }}} instances that use **Destination Mapping**, `my-data?.parquet` matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
+            - `my-data[1-4].parquet` matches `my-data1.parquet` through `my-data4.parquet`.
             - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data-2023.parquet` and `my-data-final.parquet`.
 
         - **Target Database** and **Target Table**: select the target database and table to import the data to.
@@ -185,9 +186,10 @@ To import the Parquet files to {{{ .starter }}} or {{{ .essential }}}, take the 
 
     - To manually configure the mapping rules to associate your source Parquet files with the target database and table, unselect this option, and then fill in the following fields:
 
-        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example: `TableName.01.parquet`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
+        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example: `TableName.01.parquet`. You can also use wildcards to match multiple files. For {{{ .starter }}} and {{{ .essential }}} instances that use **Destination Mapping**, use `*`, `?`, and `[]`. For {{{ .essential }}} and {{{ .premium }}} instances that use **Source Files Mapping** under **Mapping and Job Configuration**, use `*` and `[]`.
 
-            - `my-data?.parquet`: matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
+            - For {{{ .starter }}} and {{{ .essential }}} instances that use **Destination Mapping**, `my-data?.parquet` matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
+            - `my-data[1-4].parquet` matches `my-data1.parquet` through `my-data4.parquet`.
             - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data-2023.parquet` and `my-data-final.parquet`.
 
         - **Target Database** and **Target Table**: select the target database and table to import the data to.
@@ -236,9 +238,10 @@ To import the Parquet files to {{{ .starter }}} or {{{ .essential }}}, take the 
 
     - To manually configure the mapping rules to associate your source Parquet files with the target database and table, unselect this option, and then fill in the following fields:
 
-        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example: `TableName.01.parquet`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
+        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example: `TableName.01.parquet`. You can also use wildcards to match multiple files. For {{{ .starter }}} and {{{ .essential }}} instances that use **Destination Mapping**, use `*`, `?`, and `[]`. For {{{ .essential }}} and {{{ .premium }}} instances that use **Source Files Mapping** under **Mapping and Job Configuration**, use `*` and `[]`.
 
-            - `my-data?.parquet`: matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
+            - For {{{ .starter }}} and {{{ .essential }}} instances that use **Destination Mapping**, `my-data?.parquet` matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
+            - `my-data[1-4].parquet` matches `my-data1.parquet` through `my-data4.parquet`.
             - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data-2023.parquet` and `my-data-final.parquet`.
 
         - **Target Database** and **Target Table**: select the target database and table to import the data to.
@@ -287,9 +290,10 @@ To import the Parquet files to {{{ .starter }}} or {{{ .essential }}}, take the 
 
     - To manually configure the mapping rules to associate your source Parquet files with the target database and table, unselect this option, and then fill in the following fields:
 
-        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example: `TableName.01.parquet`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
+        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example: `TableName.01.parquet`. You can also use wildcards to match multiple files. For {{{ .starter }}} and {{{ .essential }}} instances that use **Destination Mapping**, use `*`, `?`, and `[]`. For {{{ .essential }}} and {{{ .premium }}} instances that use **Source Files Mapping** under **Mapping and Job Configuration**, use `*` and `[]`.
 
-            - `my-data?.parquet`: matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
+            - For {{{ .starter }}} and {{{ .essential }}} instances that use **Destination Mapping**, `my-data?.parquet` matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
+            - `my-data[1-4].parquet` matches `my-data1.parquet` through `my-data4.parquet`.
             - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data-2023.parquet` and `my-data-final.parquet`.
 
         - **Target Database** and **Target Table**: select the target database and table to import the data to.

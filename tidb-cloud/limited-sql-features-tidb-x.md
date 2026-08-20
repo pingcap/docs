@@ -76,7 +76,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `CHANGE DRAINER` | Not supported [^7] | Not supported [^7] |
 | `CHANGE PUMP` | Not supported [^7] | Not supported [^7] |
 | `FLASHBACK CLUSTER` | Not supported [^3] | Not supported [^3] |
-| `IMPORT INTO` | Supported, but blocks IMPORT INTO statements that use a local file path or an S3 EXTERNAL_ID. | Not supported |
+| `IMPORT INTO` | Supported, but blocks `IMPORT INTO` statements that use a local file path or an S3 `EXTERNAL_ID`. | Supported on {{{ .starter }}} and Essential with the same restrictions as Premium. |
 | `LOAD DATA INFILE` | Blocks `LOAD DATA LOCAL INFILE` from a local file path. | Only supports `LOAD DATA LOCAL INFILE` |
 | `LOAD STATS` | Not supported | Not supported |
 | `SELECT ... INTO OUTFILE` | Not supported [^4] | Not supported [^4] |

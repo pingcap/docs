@@ -20,15 +20,14 @@ This document describes how to import CSV files from Amazon Simple Storage Servi
 ## Step 1. Prepare the CSV files
 
 1. If a CSV file is larger than 256 MiB, consider splitting it into smaller files around 256 MiB so {{{ .premium }}} can process them in parallel.
-2. Name your CSV files according to the Dumpling naming conventions:
+2. If you plan to use automatic mapping, name your CSV files according to the [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md):
    - Full-table files: use the `${db_name}.${table_name}.csv` format.
    - Sharded files: append numeric suffixes, such as `${db_name}.${table_name}.000001.csv`.
    - Compressed files: use the `${db_name}.${table_name}.${suffix}.csv.${compress}` format.
-3. Optional schema files (`${db_name}-schema-create.sql`, `${db_name}.${table_name}-schema.sql`) help {{{ .premium }}} create databases and tables automatically.
 
-<!--Todo
-These naming conventions are identical to the TiDB Cloud Serverless workflow. Update this section after we validate the Premium defaults.
--->
+   If you plan to configure mappings manually, you can keep the existing file names and specify source patterns in [Step 4](#step-4-import-csv-files-from-amazon-s3).
+
+3. Optional schema files (`${db_name}-schema-create.sql`, `${db_name}.${table_name}-schema.sql`) help {{{ .premium }}} create databases and tables automatically.
 
 ## Step 2. Create target schemas (optional)
 
@@ -41,29 +40,39 @@ To allow {{{ .premium }}} to read your bucket, use either of the following metho
 - Provide an AWS Role ARN that trusts TiDB Cloud and grants the `s3:GetObject` and `s3:ListBucket` permissions on the relevant paths.
 - Provide an AWS access key (access key ID and secret access key) with equivalent permissions.
 
-The wizard includes a helper link labeled **Click here to create a new one with AWS CloudFormation**. Follow this link if you need {{{ .premium }}} to pre-fill a CloudFormation stack that creates the role for you.
+The wizard includes a helper link labeled **Click here to create new one with AWS CloudFormation**. Follow this link if you need {{{ .premium }}} to pre-fill a CloudFormation stack that creates the role for you.
 
 ## Step 4. Import CSV files from Amazon S3
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your {{{ .premium }}} instance.
 2. In the left navigation pane, click **Data** > **Import**, and choose **Import data from Cloud Storage**.
-3. In the **Source Connection** dialog:
+3. In the **Source and Target Connection** step:
     - Set **Storage Provider** to **Amazon S3**.
     - Enter the **Source Files URI** for the top-level folder that contains the source files, for example, `s3://bucket/path/`.
-    - Choose **AWS Role ARN** or **AWS Access Key** and provide the credentials.
+    - Under **Credentials**, choose **AWS Role ARN** and enter the role ARN, or choose **AWS Access Key** and enter the **Access Key ID** and **Secret Access Key**.
     - Click **Test Bucket Access** to validate connectivity.
+    - Under **Target Connection**, provide the TiDB SQL username and password for the import job. Optionally, click **Test Connection**.
 
-4. Click **Next** and provide the TiDB SQL username and password for the import job. Optionally, test the connection.
-5. Configure the source-to-target mapping:
+4. Click **Next**.
+5. In the **Mapping and Job Configuration** step, use **Source Files Mapping** to configure the source-to-target mapping:
     - To use automatic mapping, leave **Use TiDB file naming conventions for automatic mapping** selected.
-    - To configure mappings manually, deselect the automatic mapping option. For each target table, enter a source file pattern relative to the **Source Files URI**, and then enter the target database and table. The source pattern supports `*` and `?` wildcards. To add another mapping, click **+**.
+    - To configure mappings manually, deselect the automatic mapping option. For each target table, enter a source file pattern relative to the **Source Files URI**, and then enter the target database and table. The source pattern supports `*` and `[]` wildcards. For example, `my-data-[1-4].csv` matches `my-data-1.csv` through `my-data-4.csv`. To add another mapping, click **+**.
+
+    In the **Job Configuration** section:
+
+    - Keep the generated **Job Name** or enter a name for the import job.
+    - Expand **Advanced Options** to view **Ignore compatibility checks (advanced)**. Leave this option disabled unless you intentionally need to bypass the pre-import compatibility checks.
+
 6. Click **Next** to run the pre-check. Resolve any warnings about missing files or incompatible schemas.
+
+    By default, **Skip first** is `0`. If each source CSV file contains a header row, click **edit CSV configuration here** and set **Skip first** to `1`. This setting applies to every matched CSV file.
+
 7. Click **Start Import** to launch the job group.
 8. Monitor the job statuses until they show **Completed**, then verify the imported data in TiDB Cloud.
 
 ## Troubleshooting
 
-- If the pre-check reports zero files, verify the S3 path and IAM permissions.
+- If the pre-check reports zero files, verify the **Source Files URI**, IAM permissions, and manual source patterns.
 - If jobs remain in **Preparing**, ensure that the destination tables are empty and the required schema files exist.
 - Use the **Cancel** action to stop a job group if you need to adjust mappings or credentials.
 
