@@ -319,10 +319,10 @@ public void deletePlayer(String id) throws SQLException {
 
 ### ドライバーまたはORMフレームワークを使用していますか？ {#using-driver-or-orm-framework}
 
-Javaドライバはデータベースへの低レベルアクセスを提供するが、開発者には以下のことが必要となる。
+Javaドライバはデータベースへの低レベルアクセスを提供するが、開発者には以下のことが必要となります。
 
 -   データベース接続を手動で確立および解放します。
--   データベースのトランザクションを手動で管理する。
+-   データベースのトランザクションを手動で管理します。
 -   データ行をデータオブジェクトに手動でマッピングします。
 
 複雑なSQL文を書く必要がない限り、 [Hibernate](/develop/dev-guide-sample-application-java-hibernate.md)、 [MyBatis](/develop/dev-guide-sample-application-java-mybatis.md) 、 [Spring Data JPA](/develop/dev-guide-sample-application-java-spring-boot.md)などの[ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping)フレームワークを開発に利用することをお勧めします。これにより、以下のようなメリットが得られます。

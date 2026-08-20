@@ -310,10 +310,10 @@ openDB("mysql", func(db *sql.DB) {
 
 ### ドライバーまたはORMフレームワークを使用していますか？ {#using-driver-or-orm-framework}
 
-Golangドライバはデータベースへの低レベルアクセスを提供するが、開発者には以下のことが必要となる。
+Golangドライバはデータベースへの低レベルアクセスを提供するが、開発者には以下のことが必要となります。
 
 -   データベース接続を手動で確立および解放します。
--   データベースのトランザクションを手動で管理する。
+-   データベースのトランザクションを手動で管理します。
 -   データ行をデータオブジェクトに手動でマッピングします。
 
 複雑なSQL文を書く必要がない限り、 [GORM](/develop/dev-guide-sample-application-golang-gorm.md)などの[ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping)フレームワークを使用して開発することをお勧めします。ORMフレームワークは、次のような点で役立ちます。
