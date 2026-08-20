@@ -72,11 +72,13 @@ Before setting IA, verify each item:
 
 ## Implementation principles
 
+This section describes the architecture, data storage hierarchy, read amplification analysis, and LSM-Tree write path of tiered storage.
+
 ### Architecture overview
 
-Tiered Storage implementation spans the TiDB → TiKV → Object Store three-layer architecture:
+Tiered storage implementation spans the TiDB → TiKV → Object Store three-layer architecture:
 
-```Plaintext
+```
 ┌──────────────────────────────────────────────────────────────────┐
 │ TiDB Schema Layer                                                 │
 │ · STORAGE_CLASS / ENGINE_ATTRIBUTE written to TiDB schema         │
@@ -105,7 +107,7 @@ Tiered Storage implementation spans the TiDB → TiKV → Object Store three-lay
 
 The internal hierarchy of an SSTable from top to bottom:
 
-```Plaintext
+```
 SSTable ──→ Segment ──→ Block ──→ KV Pair
 (file)      (1 MiB)     (32 KiB)    (single record)
 ```
@@ -134,7 +136,7 @@ This amplification manifests differently in two scenarios:
 - **With subsequent reuse**: The loaded segment stays in the IA cache; subsequent hits become hot reads, amortizing the initial amplification cost
 - **One-time query**: e.g., an ad-hoc analysis running a large-range scan — the loaded data is never reused, making the read cost very high. Additionally, newly loaded data evicts "old data" from the local cache — this old data might be real hot spots, and their eviction can trigger new cache misses, creating a cascading performance impact
 
-Therefore, Tiered Storage is best suited for **small, concentrated query patterns** rather than frequent large-range scans.
+Therefore, tiered storage is best suited for **small, concentrated query patterns** rather than frequent large-range scans.
 
 ### LSM-Tree write path
 
@@ -152,16 +154,14 @@ INSERT/UPDATE/DELETE
 - Hot write paths like `memtable` and `L0` do not directly enter IA
 - The primary IA target is the Write CF L1+ layer
 
----
-
 ## Conversion efficiency
 
 ### Standard → IA
 
 Test reference: Approximately 1 TB of logical data (including indexes) completed conversion within 5 minutes, with negligible impact on QPS and latency during the process. Single TiKV CPU increased by about 0.5c and recovered within approximately 5 minutes.
 
-```Plaintext
-TiDB schema takes effect → Schema Manager sync (30s) → TiKV broadcast 
+```
+TiDB schema takes effect → Schema Manager sync (30s) → TiKV broadcast
 → Region alignment / Split → ChangeSet updates Shard → Reload files
 ```
 
