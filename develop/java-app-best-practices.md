@@ -284,7 +284,7 @@ The last packet sent successfully to the server was 3600000 milliseconds ago. Th
 
 ## データアクセスフレームワーク {#data-access-framework}
 
-アプリケーションは、データベースへのアクセスを簡素化するために、何らかのデータアクセスフレームワークを使用することが多い。
+アプリケーションは、データベースへのアクセスを簡素化するために、何らかのデータアクセスフレームワークを使用することが多いです。
 
 ### MyBatis {#mybatis}
 

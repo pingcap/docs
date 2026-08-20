@@ -65,7 +65,7 @@ LIMIT
 ターゲットの TiKV クラスターには、インポートされたデータを保存するのに十分なディスク容量が必要です。[標準ハードウェア要件](/hardware-and-software-requirements.md)に加えて、ターゲットの TiKV クラスターのストレージ容量は**、データソースのサイズ × <a href="/faq/manage-cluster-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it">レプリカ数</a>× 2**よりも大きくなければなりません。たとえば、クラスターがデフォルトで 3 つのレプリカを使用する場合、ターゲットの TiKV クラスターは、データソースのサイズの 6 倍よりも大きなストレージ容量が必要です。この式に`x 2`が含まれている理由は次のとおりです。
 
 -   インデックスには余分な容量が必要になる場合があります。
--   RocksDBには空間増幅がある。
+-   RocksDBには空間増幅があります。
 
 ## ステップ1. MySQLからすべてのデータをエクスポートする {#step-1-export-all-data-from-mysql}
 

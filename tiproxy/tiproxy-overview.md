@@ -189,7 +189,7 @@ TiProxyがデプロイされていないクラスターの場合、TiProxyイン
         status_port: 3080
     ```
 
-2.  TiProxyをスケールアウトする。
+2.  TiProxyをスケールアウトします。
 
     TiProxyインスタンスをスケールアウトするには、 [`tiup cluster scale-out`](/tiup/tiup-component-cluster-scale-out.md)コマンドを使用します。例：
 

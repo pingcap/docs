@@ -380,7 +380,7 @@ ALTER TABLE t ADD PARTITION (PARTITION pDef DEFAULT);
 ALTER TABLE t ADD PARTITION (PARTITION pDef VALUES IN (DEFAULT));
 ```
 
-このようにすることで、どのパーティションの値セットにも一致しない新規挿入値は、自動的にデフォルトパーティションに格納される。
+このようにすることで、どのパーティションの値セットにも一致しない新規挿入値は、自動的にデフォルトパーティションに格納されます。
 
 ```sql
 INSERT INTO t VALUES (7, 7);

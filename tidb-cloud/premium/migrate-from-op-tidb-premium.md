@@ -9,7 +9,7 @@ summary: TiDB Self-ManagedからTiDB Cloud Premiumへのデータ移行方法を
 
 全体の手順は以下のとおりです。
 
-1.  環境を構築し、ツールを準備する。
+1.  環境を構築し、ツールを準備します。
 2.  全データを移行します。手順は以下のとおりです。
     1.  Dumplingを使用して、TiDB Self-ManagedからAmazon S3にデータをエクスポートします。
     2.  Amazon S3からTiDB Cloud Premiumにデータをインポートします。

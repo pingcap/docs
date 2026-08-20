@@ -302,10 +302,10 @@ with get_connection(autocommit=True) as conn:
 
 ### ドライバーまたはORMフレームワークを使用していますか？ {#using-driver-or-orm-framework}
 
-Pythonドライバはデータベースへの低レベルアクセスを提供するが、開発者には以下のことが必要となる。
+Pythonドライバはデータベースへの低レベルアクセスを提供するが、開発者には以下のことが必要となります。
 
 -   データベース接続を手動で確立および解放します。
--   データベースのトランザクションを手動で管理する。
+-   データベースのトランザクションを手動で管理します。
 -   データ行（ `pymysql`ではタプルまたは辞書として表現されます）をデータオブジェクトに手動でマッピングします。
 
 複雑なSQL文を書く必要がない限り、 [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md) 、 [Peewee](/develop/dev-guide-sample-application-python-peewee.md)、Django ORMなどの[ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping)フレームワークを開発に使用することをお勧めします。これにより、次のようなメリットが得られます。

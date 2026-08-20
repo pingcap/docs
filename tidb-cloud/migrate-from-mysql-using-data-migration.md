@@ -574,7 +574,7 @@ MySQLサービスがAWS VPC内にある場合は、以下の手順を実行し�
 3.  MySQLのURLにDNSホスト名が含まれている場合、 TiDB CloudがMySQLサービスのホスト名を解決できるようにする必要があります。
 
     1.  [VPCピアリング接続のDNS解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
-    2.  **Accepter DNS resolution**オプションを有効にする。
+    2.  **Accepter DNS resolution**オプションを有効にします。
 
 </details>
 

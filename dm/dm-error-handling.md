@@ -170,7 +170,7 @@ binlogレプリケーション処理ユニットの場合は、次のソリュ�
 
 5.  `start-task`を使用して移行タスクを開始します。
 
-6.  `query-status`を使用して移行タスクのステータスを確認する。元のエラーの原因となったリレーログファイルの移行が完了したら、 `safe-mode`元の値に戻して移行タスクを再開できます。
+6.  `query-status`を使用して移行タスクのステータスを確認します。元のエラーの原因となったリレーログファイルの移行が完了したら、 `safe-mode`元の値に戻して移行タスクを再開できます。
 
 ### タスクをクエリするかログを確認すると、 `Access denied for user 'root'@'172.31.43.27' (using password: YES)`表示されます。 {#access-denied-for-user-root172314327-using-password-yes-shows-when-you-query-the-task-or-check-the-log}
 

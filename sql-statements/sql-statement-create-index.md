@@ -300,7 +300,7 @@ mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": [2,3]}');
 ERROR 1062 (23000): Duplicate entry '2' for key 'customers.zips'
 ```
 
-同じレコード内に重複する値が存在することは許容されるが、異なるレコード内に重複する値が存在する場合はエラーが報告される。
+同じレコード内に重複する値が存在することは許容されるが、異なるレコード内に重複する値が存在する場合はエラーが報告されます。
 
 ```sql
 -- Insert succeeded

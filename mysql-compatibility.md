@@ -299,7 +299,7 @@ TiDBは、以下の点を考慮して、名前付きタイムゾーンをサポ�
 
 TiDBは、MySQLで非推奨となった特定の機能を実装していません。例えば、以下の機能などです。
 
--   浮動小数点型の精度を指定する。MySQL 8.0 ではこの機能[非推奨](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html)、代わりに`DECIMAL`型を使用することをお勧めします。
+-   浮動小数点型の精度を指定します。MySQL 8.0 ではこの機能[非推奨](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html)、代わりに`DECIMAL`型を使用することをお勧めします。
 -   `ZEROFILL`属性。MySQL 8.0ではこの機能[非推奨](https://dev.mysql.com/doc/refman/8.0/en/numeric-type-attributes.html)、代わりにアプリケーションで数値をパディングすることをお勧めします。
 
 ### `CREATE RESOURCE GROUP` 、 `DROP RESOURCE GROUP` 、および`ALTER RESOURCE GROUP`ステートメント {#create-resource-group-drop-resource-group-and-alter-resource-group-statements}

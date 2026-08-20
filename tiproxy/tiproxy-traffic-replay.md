@@ -77,7 +77,7 @@ TiProxy v1.3.0以降では、TiProxyを使用してTiDB本番クラスタのア�
 
     詳細については[`tiproxyctl traffic replay`](/tiproxy/tiproxy-command-line-flags.md#traffic-replay)を参照してください。
 
-5.  リプレイレポートを確認する。
+5.  リプレイレポートを確認します。
 
     再生が完了すると、レポートはテストクラスターのデータベース`tiproxy_traffic_replay`に保存されます。このデータベースには、テーブル`fail`と`other_errors` 2つのテーブルが含まれています。
 

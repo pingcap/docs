@@ -102,7 +102,7 @@ TiCDCクラスタをアップグレードする際には、以下の点に注意
 
     -   TiCDCはバージョン6.3.0以降です。
     -   TiUPはバージョン1.11.3以降です。
-    -   クラスター内では、少なくとも2つのTiCDCインスタンスが稼働している。
+    -   クラスター内では、少なくとも2つのTiCDCインスタンスが稼働しています。
 
 ## TiUPを使用してTiCDCクラスタ構成を変更します。 {#modify-ticdc-cluster-configurations-using-tiup}
 

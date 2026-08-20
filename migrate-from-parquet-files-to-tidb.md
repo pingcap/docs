@@ -56,7 +56,7 @@ ParquetファイルからTiDBにデータをインポートする前に、ター
     -   `CREATE DATABASE`ファイルに`${db_name}-schema-create.sql` } ステートメントを追加します。
     -   `CREATE TABLE`ファイルに`${db_name}.${table_name}-schema.sql` } ステートメントを追加します。
 
--   **方法2** ：対象テーブルのスキーマを手動で作成する。
+-   **方法2** ：対象テーブルのスキーマを手動で作成します。
 
 ## ステップ3．設定ファイルを作成する {#step-3-create-the-configuration-file}
 
@@ -114,7 +114,7 @@ pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:237
 2.  インポートが開始された後、以下のいずれかの方法でインポートの進行状況を確認できます。
 
     -   ログ内のキーワード`progress`を`grep`することで、インポートの進行状況を確認できます。進行状況は、デフォルトでは 5 分ごとに更新されます。
-    -   [モニタリングダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進捗状況を確認してください。
+    -   [モニタリングダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進捗状況を確認します。
 
     TiDB Lightningはインポートが完了すると自動的に終了します。
 

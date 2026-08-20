@@ -184,7 +184,7 @@ TiDBはパスワードを[`mysql.user`](/mysql-schema/mysql-schema-user.md)シ�
 
 2.  tidb-server プロセスを停止します。
 
-    1.  tidb-server プロセスを表示する。
+    1.  tidb-server プロセスを表示します。
 
         ```bash
         ps aux | grep tidb-server

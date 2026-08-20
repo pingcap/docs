@@ -49,7 +49,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   解決：
 
-    リーダーのバランスが取れているかどうかを確認するには、[**TiKV詳細**&gt;**クラスタ**ダッシュボード](/grafana-tikv-dashboard.md#cluster)を確認する。
+    リーダーのバランスが取れているかどうかを確認するには、[**TiKV詳細**&gt;**クラスタ**ダッシュボード](/grafana-tikv-dashboard.md#cluster)を確認します。
 
 #### `TiDB_domain_load_schema_total` {#tidb_domain_load_schema_total}
 
@@ -140,7 +140,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   解決：
 
-    TiKV の監視ステータスを確認する。
+    TiKV の監視ステータスを確認します。
 
 #### `TiDB_monitor_time_jump_back_error` {#tidb_monitor_time_jump_back_error}
 

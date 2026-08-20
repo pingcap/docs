@@ -50,7 +50,7 @@ Apache PulsarサービスがインターネットにアクセスできないAWS 
 3.  Apache PulsarのURLにホスト名が含まれている場合、 TiDB CloudがApache PulsarブローカーのDNSホスト名を解決できるようにする必要があります。
 
     1.  [VPCピアリング接続のDNS解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-dns.html)の手順に従います。
-    2.  **Accepter DNS resolution**オプションを有効にする。
+    2.  **Accepter DNS resolution**オプションを有効にします。
 
 Apache Pulsar サービスがインターネットにアクセスできない Google Cloud VPC 内にある場合は、以下の手順を実行してください。
 

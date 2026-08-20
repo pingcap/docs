@@ -253,7 +253,7 @@ SHOW VARIABLES LIKE 'tidb\_auto\_analyze%';
 
 -   表の統計はすでにデータを適切に表しています。
 -   テーブルが非常に大きいため、統計の収集には時間がかかります。
--   特定の時間枠内でのみ統計を維持したい。
+-   特定の時間枠内でのみ統計を維持したい場合があります。
 
 テーブルの統計をロックするには、 [`LOCK STATS table_name`](/sql-statements/sql-statement-lock-stats.md)ステートメントを使用できます。
 
