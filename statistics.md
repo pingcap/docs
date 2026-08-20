@@ -440,7 +440,7 @@ mysql> SHOW ANALYZE STATUS [ShowLikeOrWhere];
 
 ### テーブルの健康状態 {#health-state-of-tables}
 
-[`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)ステートメントを使用すると、テーブルの健全性状態を確認し、統計情報の精度を概算できます。 `modify_count` &gt;= `row_count`の場合、健全性状態は 0 です。 `modify_count` &lt; `row_count`の場合、健全性状態は (1 - `modify_count` / `row_count` ) * 100 です。
+[`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)ステートメントを使用すると、テーブルの健全性状態を確認し、統計情報の精度を概算できます。 `modify_count` >= `row_count`の場合、健全性状態は 0 です。 `modify_count` &lt; `row_count`の場合、健全性状態は (1 - `modify_count` / `row_count` ) * 100 です。
 
 ### 列のメタデータ {#metadata-of-columns}
 

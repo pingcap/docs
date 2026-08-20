@@ -38,9 +38,9 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
 -   2.2.1 TiKVシングルスレッドのボトルネック
 
-    -   TiKVインスタンス内のリージョンが多すぎると、単一のgRPCスレッドがボトルネックになります（ **Grafana** -&gt; **TiKV-details** -&gt; **Thread CPU/gRPC CPU Per Thread**メトリックを確認してください）。v3.x以降のバージョンでは、 `Hibernate Region`を有効にすることでこの問題を解決できます。中国語の[ケース612](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case612.md)を参照してください。
+    -   TiKVインスタンス内のリージョンが多すぎると、単一のgRPCスレッドがボトルネックになります（ **Grafana** -> **TiKV-details** -> **Thread CPU/gRPC CPU Per Thread**メトリックを確認してください）。v3.x以降のバージョンでは、 `Hibernate Region`を有効にすることでこの問題を解決できます。中国語の[ケース612](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case612.md)を参照してください。
 
-    -   v3.0より前のバージョンでは、raftstoreスレッドまたはapplyスレッドがボトルネックになった場合（ **Grafana** -&gt; **TiKV-details** -&gt; **Thread CPU/raft store CPU**および**Async apply CPU**メトリクスが`80%`を超える場合）、TiKV（v2.x）インスタンスをスケールアウトするか、マルチスレッド対応のv3.xにアップグレードできます。 <!-- See [case-517](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese. -->
+    -   v3.0より前のバージョンでは、raftstoreスレッドまたはapplyスレッドがボトルネックになった場合（ **Grafana** -> **TiKV-details** -> **Thread CPU/raft store CPU**および**Async apply CPU**メトリクスが`80%`を超える場合）、TiKV（v2.x）インスタンスをスケールアウトするか、マルチスレッド対応のv3.xにアップグレードできます。 <!-- See [case-517](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese. -->
 
 -   2.2.2 CPU負荷が増加する。
 
@@ -91,7 +91,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
     -   原因2：TiDBサーバーがDMLステートメントの実行中にPDまたはTiKVに接続できません。その結果、TiDBサーバーは1つのDDLリース（デフォルトでは`45s`内に新しいスキーマをロードできなかったか、TiDBサーバーが`keep alive`設定でPDから切断されました。
 
-    -   原因3：TiKVの負荷が高いか、ネットワークがタイムアウトしました。Grafana -&gt; **TiDB**と**TiKV**でノードの負荷を確認してください。
+    -   原因3：TiKVの負荷が高いか、ネットワークがタイムアウトしました。Grafana -> **TiDB**と**TiKV**でノードの負荷を確認してください。
 
     -   解決：
 
@@ -221,13 +221,13 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 -   4.2.1 `block-cache`の設定が大きすぎると、メモリ不足が発生する可能性があります。
 
-    問題の原因を確認するには、モニター**Grafana** -&gt; **TiKV-details**で該当するインスタンスを選択して RocksDB の`block cache size`を確認してください。
+    問題の原因を確認するには、モニター**Grafana** -> **TiKV-details**で該当するインスタンスを選択して RocksDB の`block cache size`を確認してください。
 
     一方、 `[storage.block-cache] capacity = # "1GB"`パラメータが正しく設定されているか確認してください。デフォルトでは、TiKV の`block-cache`はマシンの総メモリの`45%`に設定されています。TiKV は物理マシンのメモリを取得するため、コンテナのメモリ制限を超える可能性があるため、コンテナに TiKV をデプロイする際にはこのパラメータを明示的に指定する必要があります。
 
 -   4.2.2コプロセッサーが多数の大きなクエリを受信し、大量のデータを返します。gRPC は、コプロセッサがデータを返す速度に追いつかず、結果としてメモリ不足エラーが発生します。
 
-    原因を確認するには、モニター**Grafana** -&gt; **TiKV-details** -&gt; coprocessor overview を表示して`response size`が`network outbound`のトラフィックを超えているかどうかを確認でき**ます**。
+    原因を確認するには、モニター**Grafana** -> **TiKV-details** -> coprocessor overview を表示して`response size`が`network outbound`のトラフィックを超えているかどうかを確認でき**ます**。
 
 -   4.2.3 他のコンポーネントがメモリを過剰に消費している。
 
@@ -235,7 +235,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 ### 4.3 クライアントが`server is busy`と報告するエラー {#43-the-client-reports-the-server-is-busy-error}
 
-ビジー状態の具体的な原因を確認するには、モニター**Grafana** -&gt; **TiKV** -&gt; **errors を**確認してください。 `server is busy` 、TiKV のフロー制御メカニズムが原因で発生しており、TiKV が現在過負荷状態にあるため後で再試行することを`tidb/ti-client`に通知します。
+ビジー状態の具体的な原因を確認するには、モニター**Grafana** -> **TiKV** -> **errors を**確認してください。 `server is busy` 、TiKV のフロー制御メカニズムが原因で発生しており、TiKV が現在過負荷状態にあるため後で再試行することを`tidb/ti-client`に通知します。
 
 -   4.3.1 TiKV RocksDB は`write stall`を検出します。
 
@@ -257,7 +257,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 -   4.3.2 `scheduler too busy`
 
-    -   深刻な書き込み競合が発生しています。 `latch wait duration`値が高くなります。モニター**Grafana** -&gt; **TiKV-details** -&gt; **scheduler prewrite** / **scheduler commit**で`latch wait duration`を確認できます。スケジューラで書き込みタスクが蓄積されると、保留中の書き込みタスクが`[storage] scheduler-pending-write-threshold` (100MB) で設定されたしきい値を超えます。 `MVCC_CONFLICT_COUNTER`に対応するメトリックを確認することで、原因を検証できます。
+    -   深刻な書き込み競合が発生しています。 `latch wait duration`値が高くなります。モニター**Grafana** -> **TiKV-details** -> **scheduler prewrite** / **scheduler commit**で`latch wait duration`を確認できます。スケジューラで書き込みタスクが蓄積されると、保留中の書き込みタスクが`[storage] scheduler-pending-write-threshold` (100MB) で設定されたしきい値を超えます。 `MVCC_CONFLICT_COUNTER`に対応するメトリックを確認することで、原因を検証できます。
 
     -   書き込み速度が遅いと、書き込みタスクが蓄積されます。TiKV に書き込まれるデータが`[storage] scheduler-pending-write-threshold` (100MB) で設定されたしきい値を超えています[4.5](#45-tikv-write-is-slow)を参照してください。
 
@@ -281,7 +281,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     -   TiKV は、 `THP` (透明巨大ページ) の動的な調整が原因でハングアップしています。中国語の[ケース500](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case500.md)を参照してください。
 
--   4.4.2 TiKV RocksDB で書き込み停止が発生し、再選出が行われます。モニター**Grafana** -&gt; **TiKV-details** -&gt; **errors**に`server is busy`が表示されているかどうかを確認してください[4.3.1](#43-the-client-reports-the-server-is-busy-error)を参照してください。
+-   4.4.2 TiKV RocksDB で書き込み停止が発生し、再選出が行われます。モニター**Grafana** -> **TiKV-details** -> **errors**に`server is busy`が表示されているかどうかを確認してください[4.3.1](#43-the-client-reports-the-server-is-busy-error)を参照してください。
 
 -   4.4.3 ネットワークの孤立による再選出。
 
@@ -336,7 +336,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     -   テーブルをまたいで空のリージョンはマージできません。TiKV の`[coprocessor] split-region-on-table`パラメータを変更する必要があります。このパラメータは、v4.x ではデフォルトで`false`に設定されています。詳細は中国語の[ケース896](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case896.md)を参照してください。
 
-    -   リージョンのマージは遅いです。マージされたオペレーターが生成されているかどうかは、 **Grafana** -&gt; **PD** -&gt; **operator**のモニターダッシュボードにアクセスして確認できます。マージを高速化するには、 `merge-schedule-limit`の値を増やしてください。
+    -   リージョンのマージは遅いです。マージされたオペレーターが生成されているかどうかは、 **Grafana** -> **PD** -> **operator**のモニターダッシュボードにアクセスして確認できます。マージを高速化するには、 `merge-schedule-limit`の値を増やしてください。
 
 -   5.1.2 レプリカの追加またはオンライン/オフラインでのレプリカの削除
 
@@ -354,7 +354,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     -   原因1：ディスク。PDノードが配置されているディスクのI/O負荷が最大になっています。PDがI/O負荷の高い他のコンポーネントと一緒にデプロイされているかどうか、およびディスクの状態を調査してください。Grafana**の**「**ディスクパフォ​​ーマンス**」→ **「レイテンシー**/**負荷」**でモニターメトリックを確認することで原因を特定できます。必要に応じて、FIOツールを使用してディスクのチェックを実行することもできます。中国語の[ケース292](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case292.md)を参照してください。
 
-    -   原因 2: ネットワーク。PD ログに`lost the TCP streaming connection`が表示されます。PD ノード間のネットワークに問題がないか確認し、モニター**Grafana** -&gt; **PD** -&gt; **etcd**で`round trip`を表示して原因を検証する必要があります。中国語の[ケース177](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case177.md)を参照してください。
+    -   原因 2: ネットワーク。PD ログに`lost the TCP streaming connection`が表示されます。PD ノード間のネットワークに問題がないか確認し、モニター**Grafana** -> **PD** -> **etcd**で`round trip`を表示して原因を検証する必要があります。中国語の[ケース177](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case177.md)を参照してください。
 
     -   原因3：システム負荷が高い。ログには`server is likely overloaded`と表示されます。中国語の[ケース214](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case214.md)を参照してください。
 
@@ -368,7 +368,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     -   PDにはLeaderが存在しない、またはLeaderが切り替わります[5.2.1](#52-pd-election)および[5.2.2](#52-pd-election)を参照してください。
 
-    -   ネットワークの問題です。Grafana -&gt; **blackbox_exporter** -&gt; **ping レイテンシー**モニターにアクセスして、 **TiDB**から PD Leaderへのネットワークが正常に動作しているかどうかを確認してください。
+    -   ネットワークの問題です。Grafana -> **blackbox_exporter** -> **ping レイテンシー**モニターにアクセスして、 **TiDB**から PD Leaderへのネットワークが正常に動作しているかどうかを確認してください。
 
     -   PD パニック。 [バグを報告する](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&template=bug-report.md)。
 
@@ -390,7 +390,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 ### 5.4 Grafanaの表示 {#54-grafana-display}
 
--   5.4.1 **Grafana** -&gt; **PD** -&gt; **cluster** -&gt; **role**のモニターにフォロワーが表示されます。Grafana の式に関する問題は v3.0.8 で修正されました。
+-   5.4.1 **Grafana** -> **PD** -> **cluster** -> **role**のモニターにフォロワーが表示されます。Grafana の式に関する問題は v3.0.8 で修正されました。
 
 ## 6. エコシステムツール {#6-ecosystem-tools}
 
@@ -509,7 +509,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     TiKV へのリクエストがタイムアウトし、リージョン キャッシュがリクエストを他のノードに切り替えるようにトリガーされました。ログの`grep "<addr> cancelled`フィールドで`addr`コマンドを引き続き実行し、 `grep`の結果に応じて以下の手順を実行してください。
 
-    -   `send request is cancelled` : 送信フェーズ中にリクエストがタイムアウトしました。Grafana -&gt; **TiDB** -&gt; **Batch Client** / `Pending Request Count by TiKV`の監視**画面**で、保留中のリクエスト数が 128 を超えているかどうかを確認してください。
+    -   `send request is cancelled` : 送信フェーズ中にリクエストがタイムアウトしました。Grafana -> **TiDB** -> **Batch Client** / `Pending Request Count by TiKV`の監視**画面**で、保留中のリクエスト数が 128 を超えているかどうかを確認してください。
 
         -   値が128より大きい場合、送信はKVの処理能力を超え、送信が蓄積されます。
         -   値が128を超えない場合は、ログを確認して、レポートが該当するKVの運用および保守の変更によって発生したかどうかを確認してください。そうでない場合は、このエラーは予期しないものであり、 [バグを報告する](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&template=bug-report.md)必要があります。

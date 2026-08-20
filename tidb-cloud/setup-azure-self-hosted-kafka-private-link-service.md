@@ -35,7 +35,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 3.  [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターから Kafka デプロイメント情報を取得します。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com)で[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
-    2.  左側のナビゲーション ペインで、 **[データ]** &gt; **[Changefeed] を**クリックします。
+    2.  左側のナビゲーション ペインで、 **[データ]** > **[Changefeed] を**クリックします。
     3.  **Changefeed**ページで、右上隅の**Create Changefeed**をクリックし、次の情報を入力します。
         1.  **宛先**で、 **Kafka**を選択します。
         2.  **Connectivity Method**で**Private Link**を選択します。
@@ -428,14 +428,14 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 1.  [Azureポータル](https://portal.azure.com/)にログインし、 [負荷分散](https://portal.azure.com/#view/Microsoft_Azure_Network/LoadBalancingHubMenuBlade/~/loadBalancers)ページに移動して、 **+ Create**をクリックしてロードバランサーを作成します。
 
-2.  **[基本]**タブで、**サブスクリプション**、**Resource group**、**リージョン**を選択し、次のインスタンス情報を入力して、 **[次へ: フロントエンド IP 構成 &gt;]**をクリックします。
+2.  **[基本]**タブで、**サブスクリプション**、**Resource group**、**リージョン**を選択し、次のインスタンス情報を入力して、 **[次へ: フロントエンド IP 構成 >]**をクリックします。
 
     -   **名前**: `kafka-lb`
     -   **SKU** : `Standard`
     -   **タイプ**: `Internal`
     -   **ティア**: `Regional`
 
-3.  **Frontend IP configuration**タブで、 **[+ フロントエンド IP 構成の追加]**をクリックし、次の情報を入力して**[保存]**をクリックし、 **[次へ: バックエンド プール &gt;]**をクリックします。
+3.  **Frontend IP configuration**タブで、 **[+ フロントエンド IP 構成の追加]**をクリックし、次の情報を入力して**[保存]**をクリックし、 **[次へ: バックエンド プール >]**をクリックします。
 
     -   **名前**: `kafka-lb-ip`
     -   **IP version**: `IPv4`
@@ -502,9 +502,9 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 1.  [Azureポータル](https://portal.azure.com/)にログインし、 [プライベートリンクサービス](https://portal.azure.com/#view/Microsoft_Azure_Network/PrivateLinkCenterBlade/~/privatelinkservices)ページに移動して、 **+ Create**をクリックし、Kafka ロードバランサーのプライベートリンク サービスを作成します。
 
-2.  **[基本]**タブで、 **[サブスクリプ**ション]、 **Resource group** 、 **[リージョン]**を選択し、[**名前]**フィールドに`kafka-pls`入力して、 **[次へ: 送信設定 &gt;]**をクリックします。
+2.  **[基本]**タブで、 **[サブスクリプ**ション]、 **Resource group** 、 **[リージョン]**を選択し、[**名前]**フィールドに`kafka-pls`入力して、 **[次へ: 送信設定 >]**をクリックします。
 
-3.  **Outbound settings**タブで、次のようにパラメータを入力し、 **Next : Access security &gt;**をクリックします。
+3.  **Outbound settings**タブで、次のようにパラメータを入力し、 **Next : Access security >**をクリックします。
 
     -   **Load balancer**： `kafka-lb`
     -   **ロードバランサのフロントエンド IP アドレス**: `kafka-lb-ip`
@@ -515,7 +515,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
     -   **表示**については、 **Restricted by subscription**または**Anyone with your alias**を選択します。
     -   **Subscription-level access and auto-approval**については、**Add subscriptions**をクリックして、 [前提条件](#prerequisites)で取得したTiDB Cloud Azure アカウントのサブスクリプションを追加します。
 
-5.  **Next : Tags >**をクリックし、 **「次へ: 確認と作成 &gt;」**をクリックして情報を確認します。
+5.  **Next : Tags >**をクリックし、 **「次へ: 確認と作成 >」**をクリックして情報を確認します。
 
 6.  **「作成」**をクリックします。操作が完了したら、後で使用するためにプライベートリンクサービスのエイリアスを書き留めておきます。
 
@@ -523,7 +523,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、クラスターが**Private Link**経由で Kafka クラスターに接続するための変更フィードを作成します。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)を参照してください。
 
-2.  **「ChangeFeed ターゲットの構成」&gt;「接続方法」&gt;「プライベート リンク」**に進むときは、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
+2.  **「ChangeFeed ターゲットの構成」>「接続方法」>「プライベート リンク」**に進むときは、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
 
     -   **Kafka Advertised Listener Pattern**: [前提条件](#prerequisites)で**Kafka Advertised Listener Pattern**を生成するために使用する一意のランダム文字列。
     -   **プライベート リンク サービスのエイリアス**: [2. プライベートリンクサービスを設定する](#2-set-up-private-link-service)で取得したプライベート リンク サービスのエイリアス。

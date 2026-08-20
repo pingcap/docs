@@ -13,7 +13,7 @@ summary: TiUPの使用中に問題が発生した場合のトラブルシュー�
 
 TiUPはミラーサーバーから最新のコンポーネントリストを毎回更新するわけではありません。`tiup list`を実行することで、コンポーネントリストを強制的に更新できます。
 
-### `tiup list &lt;component&gt;`を使用してコンポーネントの最新バージョン情報を表示できません {#cant-see-the-latest-version-information-of-a-component-using-tiup-list-component}
+### `tiup list <component>`を使用してコンポーネントの最新バージョン情報を表示できません {#cant-see-the-latest-version-information-of-a-component-using-tiup-list-component}
 
 前回の問題と同様に、コンポーネントのバージョン情報は、ローカルキャッシュが存在しない場合にのみミラーサーバーから取得されます。`tiup list <component>`を実行することでコンポーネントリストを更新できます。
 

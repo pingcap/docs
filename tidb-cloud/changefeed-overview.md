@@ -33,7 +33,7 @@ TiDB Cloud changefeed を使用すると、 TiDB Cloudから他のデータサ�
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[変更フィード]**をクリックします。チェンジフィードページが表示されます。
+2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** > **[変更フィード]**をクリックします。チェンジフィードページが表示されます。
 
 **変更フィード**ページでは、変更フィードの作成、既存の変更フィードの一覧表示、および既存の変更フィードの操作（変更フィードの拡大縮小、一時停止、再開、編集、削除など）を行うことができます。
 
@@ -63,7 +63,7 @@ TiDB Cloud changefeed を使用すると、 TiDB Cloudから他のデータサ�
 TiDB Cloud Dedicatedでは、変更フィードの TiCDC レプリケーション容量ユニット (RCU) を照会できます。
 
 1.  ターゲットのTiDB Cloud Dedicatedクラスターの[**変更フィード**](#view-the-changefeed-page)ページに移動します。
-2.  確認したい対応する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[ビュー]**をクリックします。
+2.  確認したい対応する変更フィードを見つけて、 **[アクション]**列の**[...]** > **[ビュー]**をクリックします。
 3.  現在のTiCDCレプリケーション容量ユニット（RCU）は、ページの**仕様**欄で確認できます。
 
 </CustomContent>
@@ -72,7 +72,7 @@ TiDB Cloud Dedicatedでは、変更フィードの TiCDC レプリケーショ�
 TiDB Cloud Premiumでは、チェンジフィードのTiCDC 変更フィード容量ユニット（CCU）を照会できます。
 
 1.  ターゲットのTiDB Cloud Premium インスタンスの[**変更フィード**](#view-the-changefeed-page)ページに移動します。
-2.  確認したい対応する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[ビュー]**をクリックします。
+2.  確認したい対応する変更フィードを見つけて、 **[アクション]**列の**[...]** > **[ビュー]**をクリックします。
 3.  TiCDC 変更フィードの現在の容量ユニット（CCU）は、ページの**仕様**欄で確認できます。
 
 </CustomContent>
@@ -96,7 +96,7 @@ TiDB Cloud Premiumでは、チェンジフィードのTiCDC 変更フィード�
 </CustomContent>
 
 1.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**変更フィード**](#view-the-changefeed-page)ページに移動します。
-2.  拡大縮小したい対応する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[拡大/縮小]**をクリックします。
+2.  拡大縮小したい対応する変更フィードを見つけて、 **[アクション]**列の**[...]** > **[拡大/縮小]**をクリックします。
 3.  新しい仕様を選択してください。
 4.  **「送信」**をクリックしてください。
 
@@ -105,7 +105,7 @@ TiDB Cloud Premiumでは、チェンジフィードのTiCDC 変更フィード�
 ## 変更フィードを一時停止または再開する {#pause-or-resume-a-changefeed}
 
 1.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**変更フィード**](#view-the-changefeed-page)ページに移動します。
-2.  一時停止または再開したい該当する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[一時停止/再開]**をクリックします。
+2.  一時停止または再開したい該当する変更フィードを見つけて、 **[アクション]**列の**[...]** > **[一時停止/再開]**をクリックします。
 
 ## 変更フィードを編集する {#edit-a-changefeed}
 
@@ -115,9 +115,9 @@ TiDB Cloud Premiumでは、チェンジフィードのTiCDC 変更フィード�
 
 1.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**変更フィード**](#view-the-changefeed-page)ページに移動します。
 
-2.  一時停止したい変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[一時停止]**をクリックします。
+2.  一時停止したい変更フィードを見つけて、 **[アクション]**列の**[...]** > **[一時停止]**をクリックします。
 
-3.  変更フィードのステータスが`Paused`に変更されたら、 **[...]** &gt; **[編集]**をクリックして、対応する変更フィードを編集します。
+3.  変更フィードのステータスが`Paused`に変更されたら、 **[...]** > **[編集]**をクリックして、対応する変更フィードを編集します。
 
     TiDB Cloudはデフォルトで変更フィードの設定を自動的に行います。以下の設定を変更できます。
 
@@ -136,19 +136,19 @@ TiDB Cloud Premiumでは、チェンジフィードのTiCDC 変更フィード�
 
     </CustomContent>
 
-4.  設定を編集した後、 **[...]** &gt; **[再開]**をクリックして、対応する変更フィードを再開します。
+4.  設定を編集した後、 **[...]** > **[再開]**をクリックして、対応する変更フィードを再開します。
 
 ## 変更フィードを複製する {#duplicate-a-changefeed}
 
 1.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**変更フィード**](#view-the-changefeed-page)ページに移動します。
-2.  複製したい変更フィードを探します。**アクション**列で、 **...** &gt;**複製を**クリックします。
+2.  複製したい変更フィードを探します。**アクション**列で、 **...** >**複製を**クリックします。
 3.  TiDB Cloudは、新しい変更フィード設定に元の設定を自動的に反映します。必要に応じて設定を確認および変更できます。
 4.  設定を確認後、 **「送信」**をクリックして新しい変更フィードを作成して開始します。
 
 ## 変更フィードを削除する {#delete-a-changefeed}
 
 1.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**変更フィード**](#view-the-changefeed-page)ページに移動します。
-2.  削除したい該当する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[削除]**をクリックします。
+2.  削除したい該当する変更フィードを見つけて、 **[アクション]**列の**[...]** > **[削除]**をクリックします。
 
 ## Changefeedの請求 {#changefeed-billing}
 

@@ -97,7 +97,7 @@ TiDB Cloud Vercel 統合経由で接続するには、 [Vercelの統合マーケ
 
 ![Vercel Integration Page](/media/tidb-cloud/vercel/integration-link-cluster-page.png)
 
-6.  Vercelダッシュボードに戻り、Vercelプロジェクトに移動して、 **[設定]** &gt; **Environment Variables**をクリックし、対象のTiDBクラスタの環境変数が自動的に追加されているかどうかを確認してください。
+6.  Vercelダッシュボードに戻り、Vercelプロジェクトに移動して、 **[設定]** > **Environment Variables**をクリックし、対象のTiDBクラスタの環境変数が自動的に追加されているかどうかを確認してください。
 
     以下の変数が追加された場合、積分は完了です。
 
@@ -141,7 +141,7 @@ TiDB Cloud Vercel 統合経由で接続するには、 [Vercelの統合マーケ
 
 ![Vercel Integration Page](/media/tidb-cloud/vercel/integration-link-data-app-page.png)
 
-6.  Vercelダッシュボードに戻り、Vercelプロジェクトに移動して、 **[設定]** &gt; **Environment Variables**をクリックし、対象のデータアプリの環境変数が自動的に追加されているかどうかを確認してください。
+6.  Vercelダッシュボードに戻り、Vercelプロジェクトに移動して、 **[設定]** > **Environment Variables**をクリックし、対象のデータアプリの環境変数が自動的に追加されているかどうかを確認してください。
 
     以下の変数が追加された場合、積分は完了です。
 
@@ -224,7 +224,7 @@ Gitリポジトリに変更をプッシュすると、Vercelがプレビュー�
 
     接続情報は、クラスタの接続ダイアログから取得できます。ダイアログを開くには、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象リソースの名前をクリックして概要ページを開き、右上隅の**[接続]**をクリックします。
 
-2.  Vercel ダッシュボード &gt; Vercel プロジェクト &gt;**設定**&gt;**Environment Variables**に移動し、TiDB クラスターの接続情報に従って[各環境変数の値を宣言する](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable)。
+2.  Vercel ダッシュボード > Vercel プロジェクト >**設定**>**Environment Variables**に移動し、TiDB クラスターの接続情報に従って[各環境変数の値を宣言する](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable)。
 
     ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
 
@@ -249,7 +249,7 @@ TiDB Cloud コンソールでは、 `<User>` 、 `<Password>` 、 `<Endpoint>` �
 
 1.  データ アプリとそのエンドポイントをまだ作成していない場合は、「データ アプリ[データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)と[エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)の手順に従ってデータ アプリとそのエンドポイントを作成します。
 
-2.  Vercel ダッシュボード &gt; Vercel プロジェクト &gt;**設定**&gt;**Environment Variables**に移動し、データ アプリの接続情報に従って[各環境変数の値を宣言する](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable)。
+2.  Vercel ダッシュボード > Vercel プロジェクト >**設定**>**Environment Variables**に移動し、データ アプリの接続情報に従って[各環境変数の値を宣言する](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable)。
 
     ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
 

@@ -114,7 +114,7 @@ AWS リソースを作成する際に`us-east-1`以外の別の AWS リージョ
 AWS CloudFormation を使用して書店プロジェクトを設定するには、次の手順を実行します。
 
 1.  AWS マネジメントコンソールに移動し、 [AWS CloudFormationサービス](https://console.aws.amazon.com/cloudformation)にアクセスします。
-2.  **Create Stack** &gt; **With new resources (standard)**をクリックします。
+2.  **Create Stack** > **With new resources (standard)**をクリックします。
 3.  **Create Stack**ページで、スタックの作成プロセスを完了します。
 
     1.  **前提条件**の領域で、 **Choose an existing template**を選択します。

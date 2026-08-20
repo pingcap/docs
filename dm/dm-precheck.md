@@ -39,9 +39,9 @@ tiup dmctl check-task ./task.yaml
 
 -   データベースバージョン
 
-    -   MySQLバージョン &gt; 5.5
+    -   MySQLバージョン > 5.5
 
-    -   MariaDB バージョン &gt;= 10.1.2
+    -   MariaDB バージョン >= 10.1.2
 
     > **Warning:**
     >

@@ -41,7 +41,7 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[統合]**をクリックします。
+2.  左側のナビゲーションペインで、 **[設定]** > **[統合]**をクリックします。
 
 3.  **統合**ページで、 **Integration to New Relic**をクリックします。
 

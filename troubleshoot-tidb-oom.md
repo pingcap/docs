@@ -14,9 +14,9 @@ summary: TiDB OOM (メモリ不足) の問題を診断して解決する方法�
 -   クライアント側で次のエラーが報告されます: `SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server during query` 。
 
 -   Grafana ダッシュボードには次の内容が表示されます。
-    -   **TiDB** &gt;**サーバー**&gt;**メモリ使用量**では、 `process/heapInUse`メトリックが上昇し続け、しきい値に達した後、突然 0 に低下することが示されています。
-    -   **TiDB** &gt;**サーバー**&gt;**稼働時間**が突然ゼロに低下します。
-    -   **TiDB-Runtime** &gt;**メモリ使用量**では、 `estimate-inuse`メトリックが上昇し続けていることがわかります。
+    -   **TiDB** >**サーバー**>**メモリ使用量**では、 `process/heapInUse`メトリックが上昇し続け、しきい値に達した後、突然 0 に低下することが示されています。
+    -   **TiDB** >**サーバー**>**稼働時間**が突然ゼロに低下します。
+    -   **TiDB-Runtime** >**メモリ使用量**では、 `estimate-inuse`メトリックが上昇し続けていることがわかります。
 
 -   `tidb.log`を確認すると、次のログ エントリが見つかります。
     -   OOMに関するアラーム: `[WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"]` 。詳細については、 [`memory-usage-alarm-ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)を参照してください。
@@ -139,7 +139,7 @@ TiDBノードは起動後、統計情報をメモリに読み込む必要があ�
 
 クライアント側で OOM が発生した場合は、次の点を調査します。
 
--   **Grafana TiDB の「詳細」** &gt; **「サーバー」** &gt; **「クライアント データ トラフィック」**で傾向と速度を確認し、ネットワークのブロックがあるかどうかを確認します。
+-   **Grafana TiDB の「詳細」** > **「サーバー」** > **「クライアント データ トラフィック」**で傾向と速度を確認し、ネットワークのブロックがあるかどうかを確認します。
 -   誤ったJDBC設定パラメータによってアプリケーションのOOMが発生していないか確認してください。例えば、ストリーミング読み取りのパラメータ`defaultFetchSize`が正しく設定されていない場合、クライアント側に大量のデータが蓄積される可能性があります。
 
 ## OOM の問題をトラブルシューティングするために収集される診断情報 {#diagnostic-information-to-be-collected-to-troubleshoot-oom-issues}
@@ -168,7 +168,7 @@ OOM 問題の根本原因を特定するには、次の情報を収集する必�
     -   `tmp-storage-quota`
     -   `tidb_analyze_version`
 
--   Grafana ダッシュボードで TiDBメモリの毎日の使用量を確認します: **TiDB** &gt; **Server** &gt; **Memory Usage** 。
+-   Grafana ダッシュボードで TiDBメモリの毎日の使用量を確認します: **TiDB** > **Server** > **Memory Usage** 。
 
 -   より多くのメモリを消費する SQL ステートメントを確認します。
 

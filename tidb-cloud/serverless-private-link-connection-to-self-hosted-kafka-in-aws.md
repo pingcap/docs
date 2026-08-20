@@ -36,7 +36,7 @@ summary: AWS エンドポイントサービスプライベートリンク接続�
 
 AWS アカウント ID とアベイラビリティーゾーンを表示するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**Settings** &gt; **Networking**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**Settings** > **Networking**をクリックします。
 2.  **AWS Private Endpoints for External Services**領域で、 **Create Private Endpoint for External Services**をクリックします。
 3.  表示されたダイアログで、AWS アカウント ID とアベイラビリティーゾーンを見つけることができます。
 
@@ -46,8 +46,8 @@ AWS アカウント ID とアベイラビリティーゾーンを表示するに
 | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | リージョン                       | オレゴン州 ( `us-west-2` )                                                                                                                                                                                                                                                                                                                              | 該当なし                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | TiDB Cloud AWS アカウントのプリンシパル | `arn:aws:iam::<account_id>:root`                                                                                                                                                                                                                                                                                                                   | 該当なし                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| AZ ID                       | <ul><li>`usw2-az1` </li><li>`usw2-az2` </li><li> `usw2-az3`</li></ul>                                                                                                                                                                                                                                                                                       | AZ ID を AWS アカウントの AZ 名に合わせます。<br/>例：<ul><li> `usw2-az1` =&gt; `us-west-2a`</li><li> `usw2-az2` =&gt; `us-west-2c`</li><li> `usw2-az3` =&gt; `us-west-2b`</li></ul>                                                                                                                                                                                                                                                                                                                                  |
-| Kafka アドバタイズドリスナーパターン       | <ul><li> `usw2-az1` =&gt; &lt;broker_id&gt;.usw2-az1.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li><li> `usw2-az2` =&gt; &lt;broker_id&gt;.usw2-az2.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li><li> `usw2-az3` =&gt; &lt;broker_id&gt;.usw2-az3.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li></ul> | AZ 名を AZ 指定のパターンにマッピングします。後で、特定の AZ のブローカーに適切なパターンを設定してください。<ul><li> `us-west-2a` =&gt; &lt;broker_id&gt;.usw2-az1.unique_name.aws.plc.tidbcloud.com:&lt;port&gt;</li><li> `us-west-2c` =&gt; &lt;broker_id&gt;.usw2-az2.unique_name.aws.plc.tidbcloud.com:&lt;port&gt;</li><li> `us-west-2b` =&gt; &lt;broker_id&gt;.usw2-az3.unique_name.aws.plc.tidbcloud.com:&lt;port&gt;</li></ul> `unique_name`はプレースホルダーであり、 [ステップ4](#step-4-replace-the-unique-name-placeholder-in-kafka-configuration)の実際の値に置き換えられます。 |
+| AZ ID                       | <ul><li>`usw2-az1` </li><li>`usw2-az2` </li><li> `usw2-az3`</li></ul>                                                                                                                                                                                                                                                                                       | AZ ID を AWS アカウントの AZ 名に合わせます。<br/>例：<ul><li> `usw2-az1` => `us-west-2a`</li><li> `usw2-az2` => `us-west-2c`</li><li> `usw2-az3` => `us-west-2b`</li></ul>                                                                                                                                                                                                                                                                                                                                  |
+| Kafka アドバタイズドリスナーパターン       | <ul><li> `usw2-az1` => &lt;broker_id&gt;.usw2-az1.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li><li> `usw2-az2` => &lt;broker_id&gt;.usw2-az2.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li><li> `usw2-az3` => &lt;broker_id&gt;.usw2-az3.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li></ul> | AZ 名を AZ 指定のパターンにマッピングします。後で、特定の AZ のブローカーに適切なパターンを設定してください。<ul><li> `us-west-2a` => &lt;broker_id&gt;.usw2-az1.unique_name.aws.plc.tidbcloud.com:&lt;port&gt;</li><li> `us-west-2c` => &lt;broker_id&gt;.usw2-az2.unique_name.aws.plc.tidbcloud.com:&lt;port&gt;</li><li> `us-west-2b` => &lt;broker_id&gt;.usw2-az3.unique_name.aws.plc.tidbcloud.com:&lt;port&gt;</li></ul> `unique_name`はプレースホルダーであり、 [ステップ4](#step-4-replace-the-unique-name-placeholder-in-kafka-configuration)の実際の値に置き換えられます。 |
 
 ## ステップ1. Kafkaクラスターをセットアップする {#step-1-set-up-a-kafka-cluster}
 
@@ -66,9 +66,9 @@ Kafka VPC には次のものが必要です。
 
 サブネットを作成する前に、AZ IDとAZ名のマッピングに基づいてAZ内にサブネットを作成します。以下のマッピングを例に挙げます。
 
--   `usw2-az1` =&gt; `us-west-2a`
--   `usw2-az2` =&gt; `us-west-2c`
--   `usw2-az3` =&gt; `us-west-2b`
+-   `usw2-az1` => `us-west-2a`
+-   `usw2-az2` => `us-west-2c`
+-   `usw2-az3` => `us-west-2b`
 
 次の AZ にプライベート サブネットを作成します。
 
@@ -80,7 +80,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 **1.1. Kafka VPCを作成する**
 
-1.  [AWSコンソール &gt; VPCダッシュボード](https://console.aws.amazon.com/vpcconsole/home?#vpcs:)に進み、Kafka をデプロイするリージョンに切り替えます。
+1.  [AWSコンソール > VPCダッシュボード](https://console.aws.amazon.com/vpcconsole/home?#vpcs:)に進み、Kafka をデプロイするリージョンに切り替えます。
 
 2.  **Create VPC**をクリックします。**VPC settings**ページで以下の情報を入力します。
 
@@ -130,11 +130,11 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 4.  要塞サブネットをパブリック サブネットに構成します。
 
-    1.  [VPCダッシュボード &gt; インターネットゲートウェイ](https://console.aws.amazon.com/vpcconsole/home#igws:)に進みます。`kafka-vpc-igw`名前のインターネットゲートウェイを作成します。
+    1.  [VPCダッシュボード > インターネットゲートウェイ](https://console.aws.amazon.com/vpcconsole/home#igws:)に進みます。`kafka-vpc-igw`名前のインターネットゲートウェイを作成します。
 
     2.  **Internet gateways Detail**ページの**Actions**で、 **Attach to VPC**をクリックして、インターネット ゲートウェイを Kafka VPC に接続します。
 
-    3.  [VPCダッシュボード &gt; ルートテーブル](https://console.aws.amazon.com/vpcconsole/home#CreateRouteTable:)に進みます。Kafka VPC のインターネット ゲートウェイへのルート テーブルを作成し、次の情報を含む新しいルートを追加します。
+    3.  [VPCダッシュボード > ルートテーブル](https://console.aws.amazon.com/vpcconsole/home#CreateRouteTable:)に進みます。Kafka VPC のインターネット ゲートウェイへのルート テーブルを作成し、次の情報を含む新しいルートを追加します。
 
         -   **Name**: `kafka-vpc-igw-route-table`
         -   **VPC** : `Kafka VPC`
@@ -619,10 +619,10 @@ b3.usw2-az3.unique_name.aws.plc.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: 
 
 異なるポートを持つ4つのターゲットグループを持つネットワークロードバランサーを作成します。1つのターゲットグループはブートストラップ用で、他のターゲットグループは異なるブローカーにマッピングされます。
 
-1.  ブートストラップターゲットグループ =&gt; 9092 =&gt; broker-node1:39092、broker-node2:39092、broker-node3:39092
-2.  ブローカーターゲットグループ1 =&gt; 9093 =&gt; broker-node1:39092
-3.  ブローカーターゲットグループ2 =&gt; 9094 =&gt; broker-node2:39092
-4.  ブローカーターゲットグループ3 =&gt; 9095 =&gt; broker-node3:39092
+1.  ブートストラップターゲットグループ => 9092 => broker-node1:39092、broker-node2:39092、broker-node3:39092
+2.  ブローカーターゲットグループ1 => 9093 => broker-node1:39092
+3.  ブローカーターゲットグループ2 => 9094 => broker-node2:39092
+4.  ブローカーターゲットグループ3 => 9095 => broker-node3:39092
 
 ブローカーロールノードが複数ある場合は、マッピングを追加する必要があります。ブートストラップターゲットグループに少なくとも1つのノードがあることを確認してください。耐障害性を確保するため、各AZに1つずつ、合計3つのノードを追加することをお勧めします。
 

@@ -13,7 +13,7 @@ summary: TiDB Cloud Terraform Provider を取得する方法を学びます。
 
 ## ステップ1. Terraformをインストールする {#step-1-install-terraform}
 
-TiDB Cloud Terraform Provider が[Terraform レジストリ](https://registry.terraform.io/)にリリースされました。Terraform (&gt;=1.0) をインストールするだけです。
+TiDB Cloud Terraform Provider が[Terraform レジストリ](https://registry.terraform.io/)にリリースされました。Terraform (>=1.0) をインストールするだけです。
 
 macOS の場合、次の手順に従ってHomebrewを使用して Terraform をインストールできます。
 
@@ -103,7 +103,7 @@ TiDB Cloud APIはHTTPダイジェスト認証を使用します。これによ�
 
 ## ステップ5. 同期構成でTiDB Cloud Terraform Providerを構成する {#step-5-configure-tidb-cloud-terraform-provider-with-sync-configuration}
 
-Terraform プロバイダー (&gt;= 0.3.0) は、オプションのパラメーター`sync`サポートします。
+Terraform プロバイダー (>= 0.3.0) は、オプションのパラメーター`sync`サポートします。
 
 `sync`を`true`に設定すると、リソースを同期的に作成、更新、削除できます。以下に例を示します。
 

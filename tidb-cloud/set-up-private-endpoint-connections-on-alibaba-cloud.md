@@ -38,7 +38,7 @@ Alibaba Cloud管理コンソールを使用してVPCインターフェースエ�
 
 1.  [Alibaba Cloud管理コンソール](https://account.alibabacloud.com/login/login.htm)にサインインします。
 
-2.  **VPC** &gt;**エンドポイント**に移動します。
+2.  **VPC** >**エンドポイント**に移動します。
 
 3.  **Interface Endpoints**タブで、 **Create Endpoint**をクリックします。
 
@@ -68,7 +68,7 @@ Alibaba Cloud上にインターフェースエンドポイントを作成した�
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの名前をクリックすると、その概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+2.  左側のナビゲーションペインで、 **[設定]** > **[ネットワーク]**をクリックします。
 
 3.  **Private Endpoint**セクションまでスクロールダウンし、**Authorized Networks**表を探してください。
 

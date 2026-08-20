@@ -9,7 +9,7 @@ summary: このドキュメントでは、ログバックアップの監視、�
 
 ## スナップショットのバックアップと復元の監視 {#snapshot-backup-and-restore-monitoring}
 
-スナップショットのバックアップと復元のメトリックを表示するには、Grafana の[**TiKV詳細**&gt;**バックアップとインポート**ダッシュボード](/grafana-tikv-dashboard.md#backup--import)に移動します。
+スナップショットのバックアップと復元のメトリックを表示するには、Grafana の[**TiKV詳細**>**バックアップとインポート**ダッシュボード](/grafana-tikv-dashboard.md#backup--import)に移動します。
 
 ## ログバックアップ監視 {#log-backup-monitoring}
 

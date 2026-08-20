@@ -252,7 +252,7 @@ TiDBバージョン：8.3.0
 -   PD
 
     -   `batch`を介して`evict-leader-scheduler`の`pd-ctl`構成を変更してリーダー退去プロセスを加速するサポート [#8265](https://github.com/tikv/pd/issues/8265) @[rleungx](https://github.com/rleungx)
-    -   Grafana の**クラスタ &gt; Label 配信**パネルに`store_id`モニタリングメトリックを追加して、異なるラベルに対応するストア ID を表示します [#8337](https://github.com/tikv/pd/issues/8337) @[HuSharp](https://github.com/HuSharp)
+    -   Grafana の**クラスタ > Label 配信**パネルに`store_id`モニタリングメトリックを追加して、異なるラベルに対応するストア ID を表示します [#8337](https://github.com/tikv/pd/issues/8337) @[HuSharp](https://github.com/HuSharp)
     -   指定されたリソースグループが存在しない場合、デフォルトのリソースグループへのフォールバックをサポートする [#8388](https://github.com/tikv/pd/issues/8388) @[JmPotato](https://github.com/JmPotato)
     -   `approximate_kv_size`の`region`コマンドが出力するリージョン情報に`pd-ctl`フィールドを追加します。 [#8412](https://github.com/tikv/pd/issues/8412) @[zeminzhou](https://github.com/zeminzhou)
     -   PD APIを呼び出してTTL設定を削除したときに返されるメッセージを最適化します [#8450](https://github.com/tikv/pd/issues/8450) @[lhy1024](https://github.com/lhy1024)

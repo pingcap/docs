@@ -28,7 +28,7 @@ TiDB Cloud Starter、 Essential、またはPremiumインスタンスがAmazon S3
 1.  対象のTiDB Cloud Starter、 Essential、またはPremiumインスタンスの**インポート**ページを開きます。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
-    2.  対象のTiDB Cloud Starter、 Essential、または Premium インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
+    2.  対象のTiDB Cloud Starter、 Essential、または Premium インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** > **[インポート]**をクリックします。
 
 2.  **Add New ARN**ダイアログを開きます。
 
@@ -42,7 +42,7 @@ TiDB Cloud Starter、 Essential、またはPremiumインスタンスがAmazon S3
 
     -   データをAmazon S3にエクスポートする場合は、次のように**Add New ARN**ダイアログを開きます。
 
-        1.  **Export data to...** &gt; **Amazon S3**をクリックします。TiDB Cloud StarterまたはEssentialインスタンスでこれまでデータのインポートまたはエクスポートが行われていない場合は、ページ下部の**「ここをクリックしてデータをエクスポート...」** &gt; **Amazon S3**をクリックしてください。
+        1.  **Export data to...** > **Amazon S3**をクリックします。TiDB Cloud StarterまたはEssentialインスタンスでこれまでデータのインポートまたはエクスポートが行われていない場合は、ページ下部の**「ここをクリックしてデータをエクスポート...」** > **Amazon S3**をクリックしてください。
         2.  **Folder URI**欄に入力してください。
         3.  **AWS Role ARN**を選択し、[**ここをクリックして AWS CloudFormation を使用して新しいロールを作成します] をクリックします**。
 
@@ -243,7 +243,7 @@ Azure ARMテンプレートを使用してSASトークンを作成するには�
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-    2.  対象のTiDB Cloudリソースの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「インポート**」または**「データ」** &gt; **「エクスポート」**をクリックします。
+    2.  対象のTiDB Cloudリソースの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** > **「インポート**」または**「データ」** > **「エクスポート」**をクリックします。
 
 2.  **「ARMテンプレート展開による新しいSASトークンの生成」**ダイアログを開きます。
 
@@ -257,7 +257,7 @@ Azure ARMテンプレートを使用してSASトークンを作成するには�
 
     -   データをAzure Blob Storageにエクスポートする場合：
 
-        1.  **Export data to...** &gt; **Azure Blob Storage**をクリックします。TiDB Cloud StarterまたはEssentialインスタンスでこれまでデータのインポートまたはエクスポートが行われていない場合は、ページ下部の**「データのエクスポート先...」** &gt; **Azure Blob Storage**をクリックしてください。
+        1.  **Export data to...** > **Azure Blob Storage**をクリックします。TiDB Cloud StarterまたはEssentialインスタンスでこれまでデータのインポートまたはエクスポートが行われていない場合は、ページ下部の**「データのエクスポート先...」** > **Azure Blob Storage**をクリックしてください。
         2.  **Azure Blob Storage Settings**エリアまでスクロールダウンし、SAS トークンフィールドの下にある**[ここをクリックして、Azure ARM テンプレートを使用して新しいものを作成する] をクリックします**。
 
     </CustomContent>

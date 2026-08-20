@@ -35,7 +35,7 @@ summary: 手動プロファイリングを使用すると、TiDB、TiKV、PD、 
 
 次のいずれかの方法でインスタンス プロファイリング ページにアクセスできます。
 
--   TiDB Dashboardにログインしたら、左側のナビゲーション メニューで**[高度なデバッグ]** &gt; **[インスタンスのプロファイリング]** &gt; **[手動プロファイリング]**をクリックします。
+-   TiDB Dashboardにログインしたら、左側のナビゲーション メニューで**[高度なデバッグ]** > **[インスタンスのプロファイリング]** > **[手動プロファイリング]**をクリックします。
 
     ![Access instance profiling page](/media/dashboard/dashboard-profiling-access.png)
 

@@ -102,7 +102,7 @@ TiDBバージョン：8.5.4
     -   一意の値の数が少ない列（NDV）のクエリ推定ロジックを最適化する [#61792](https://github.com/pingcap/tidb/issues/61792) @[terry1purcell](https://github.com/terry1purcell)
     -   `LIMIT OFFSET`を含む Index Join クエリの推定戦略を最適化する [#45077](https://github.com/pingcap/tidb/issues/45077) @[qw4990](https://github.com/qw4990)
     -   統計情報が時間内に収集されない場合の範囲外推定戦略を最適化する [#58068](https://github.com/pingcap/tidb/issues/58068) @[terry1purcell](https://github.com/terry1purcell)
-    -   Grafana の**パフォーマンス概要**&gt; **SQL 実行時間概要**パネルに`backoff`メトリックを追加してデバッグを容易にします [#61441](https://github.com/pingcap/tidb/issues/61441) @[dbsid](https://github.com/dbsid)
+    -   Grafana の**パフォーマンス概要**> **SQL 実行時間概要**パネルに`backoff`メトリックを追加してデバッグを容易にします [#61441](https://github.com/pingcap/tidb/issues/61441) @[dbsid](https://github.com/dbsid)
     -   監査ログ プラグインにステートメント ID 情報を追加 [#63525](https://github.com/pingcap/tidb/issues/63525) @[YangKeao](https://github.com/YangKeao)
 
 -   TiKV

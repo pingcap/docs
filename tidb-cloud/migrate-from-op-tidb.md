@@ -217,7 +217,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
     -   kms:復号化
 
-3.  アクセスポリシーを設定します。 [AWSコンソール &gt; IAM &gt; アクセス管理 &gt; ポリシー](https://console.aws.amazon.com/iamv2/home#/policies)してリージョンに切り替えて、 TiDB Cloudのアクセス ポリシーが既に存在するかどうかを確認します。存在しない場合は、このドキュメントに従ってポリシーを作成します。 [JSONタブでポリシーを作成する](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html)。
+3.  アクセスポリシーを設定します。 [AWSコンソール > IAM > アクセス管理 > ポリシー](https://console.aws.amazon.com/iamv2/home#/policies)してリージョンに切り替えて、 TiDB Cloudのアクセス ポリシーが既に存在するかどうかを確認します。存在しない場合は、このドキュメントに従ってポリシーを作成します。 [JSONタブでポリシーを作成する](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html)。
 
     以下は、JSONポリシーのテンプレート例です。
 
@@ -266,7 +266,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
 4.  ロールを設定します。 [IAMロールの作成（コンソール）](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html)を参照してください。 「アカウント ID」フィールドに、ステップ 1 で書き留めたTiDB Cloudアカウント ID とTiDB Cloud外部 ID を入力します。
 
-5.  ロール ARN を取得します。 [AWSコンソール &gt; IAM &gt; アクセス管理 &gt; ロール](https://console.aws.amazon.com/iamv2/home#/roles)。お住まいの地域に切り替えてください。作成したロールをクリックし、ARN をメモします。これは、データをTiDB Cloudにインポートするときに使用します。
+5.  ロール ARN を取得します。 [AWSコンソール > IAM > アクセス管理 > ロール](https://console.aws.amazon.com/iamv2/home#/roles)。お住まいの地域に切り替えてください。作成したロールをクリックし、ARN をメモします。これは、データをTiDB Cloudにインポートするときに使用します。
 
 6.  TiDB Cloudにデータをインポートします。
 
@@ -284,7 +284,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 2.  TiCDCがTiDB Cloudに接続できるようにします。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲット リソースの名前をクリックして、その概要ページに移動します。
-    2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+    2.  左側のナビゲーションペインで、 **[設定]** > **[ネットワーク]**をクリックします。
     3.  TiDB Cloudのプランに応じて、TiCDCがTiDB Cloudに接続できるようにするために、以下のいずれかの操作を行ってください。
 
         -   TiDB Cloud StarterまたはEssentialの場合は、 **Authorized Networks**セクションで**Add rule**をクリックします。表示されたダイアログで、TiCDCコンポーネントのパブリック IP アドレスを使用するファイアウォール ルールを追加し、 **[保存]**をクリックします。詳細については、 [パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md#create-and-manage-a-firewall-rule)を参照してください。

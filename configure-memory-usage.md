@@ -200,7 +200,7 @@ TiDBは、実行演算子のディスクへの書き込みをサポートして�
 
 GO 1.19 では、GC をトリガーするメモリ制限を設定するための環境変数[`GOMEMLIMIT`](https://pkg.go.dev/runtime@go1.19#hdr-Environment_Variables)導入されています。
 
-v6.1.3 &lt;= TiDB &lt; v6.5.0 の場合、手動で`GOMEMLIMIT`を設定することで、OOM 問題の典型的なカテゴリを軽減できます。OOM 問題の典型的なカテゴリは、OOM が発生する前に、Grafana で推定される使用メモリが全体のメモリの半分しか占めていないというものです (TiDB-Runtime &gt; Memory Usage &gt; estimate-inuse)。次の図に示されています。
+v6.1.3 &lt;= TiDB &lt; v6.5.0 の場合、手動で`GOMEMLIMIT`を設定することで、OOM 問題の典型的なカテゴリを軽減できます。OOM 問題の典型的なカテゴリは、OOM が発生する前に、Grafana で推定される使用メモリが全体のメモリの半分しか占めていないというものです (TiDB-Runtime > Memory Usage > estimate-inuse)。次の図に示されています。
 
 ![normal OOM case example](/media/configure-memory-usage-oom-example.png)
 

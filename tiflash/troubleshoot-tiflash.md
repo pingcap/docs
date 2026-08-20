@@ -276,10 +276,10 @@ TiFlashノードをデプロイし、 `ALTER TABLE ... SET TIFLASH REPLICA ...`�
 
     TiFlashへの負荷が高すぎると、レプリケーションが遅くなる場合があります。Grafanaの**TiFlash -Summary**パネルで、 TiFlashインジケーターの負荷を確認できます。
 
-    -   `Applying snapshots Count` ： `TiFlash-summary` &gt; `raft` &gt; `Applying snapshots Count`
-    -   `Snapshot Predecode Duration` ： `TiFlash-summary` &gt; `raft` &gt; `Snapshot Predecode Duration`
-    -   `Snapshot Flush Duration` ： `TiFlash-summary` &gt; `raft` &gt; `Snapshot Flush Duration`
-    -   `Write Stall Duration` ： `TiFlash-summary` &gt; `Storage Write Stall` &gt; `Write Stall Duration`
-    -   `generate snapshot CPU` ： `TiFlash-Proxy-Details` &gt; `Thread CPU` &gt; `Region task worker pre-handle/generate snapshot CPU`
+    -   `Applying snapshots Count` ： `TiFlash-summary` > `raft` > `Applying snapshots Count`
+    -   `Snapshot Predecode Duration` ： `TiFlash-summary` > `raft` > `Snapshot Predecode Duration`
+    -   `Snapshot Flush Duration` ： `TiFlash-summary` > `raft` > `Snapshot Flush Duration`
+    -   `Write Stall Duration` ： `TiFlash-summary` > `Storage Write Stall` > `Write Stall Duration`
+    -   `generate snapshot CPU` ： `TiFlash-Proxy-Details` > `Thread CPU` > `Region task worker pre-handle/generate snapshot CPU`
 
     サービスの優先順位に基づいて負荷を調整し、最適なパフォーマンスを実現します。

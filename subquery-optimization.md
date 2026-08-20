@@ -20,7 +20,7 @@ summary: サブクエリに関連する最適化を理解します。
 
 デフォルトでは、サブクエリは[セミ結合（相関サブクエリ）](/explain-subqueries.md#semi-join-correlated-subquery)で述べた`semi join`実行方法として使用します。一部の特殊なサブクエリについては、TiDBはパフォーマンス向上のために論理的な書き換えを実行します。
 
-## `... &lt; ALL (SELECT ... FROM ...)`または`... &gt; ANY (SELECT ... FROM ...)` {#x3c-all-select-from-or-any-select-from}
+## `... &lt; ALL (SELECT ... FROM ...)`または`... > ANY (SELECT ... FROM ...)` {#x3c-all-select-from-or-any-select-from}
 
 この場合、 `ALL`と`ANY` `MAX`と`MIN`に置き換えることができます。テーブルが空の場合、 `MAX(EXPR)`と`MIN(EXPR)`の結果は NULL になります。 `EXPR`の結果に`NULL`含まれる場合も同様です。 `EXPR`の結果に`NULL`が含まれるかどうかは式の最終結果に影響を与える可能性があるため、完全な書き換えは次のようになります。
 
@@ -64,7 +64,7 @@ explain select * from t1 where t1.a in (select t2.a from t2);
 
 この書き換えは、 `IN`サブクエリが比較的小さく、外部クエリが比較的大きい場合にパフォーマンスが向上します。これは、書き換えを行わないと、t2を駆動テーブルとして`index join`のサブクエリを使用することが不可能になるためです。ただし、書き換え中に集計を自動的に削除できず、 `t2`テーブルが比較的大きい場合、この書き換えがクエリのパフォーマンスに影響を与えるという欠点があります。現在、この最適化を制御するために変数[tidb_opt_insubq_to_join_and_agg](/system-variables.md#tidb_opt_insubq_to_join_and_agg)が使用されています。この最適化が適切でない場合は、手動で無効にすることができます。
 
-## `EXISTS`サブクエリと`... &gt;/&gt;=/&lt;/&lt;=/=/!= (SELECT ... FROM ...)` {#exists-subquery-and---select--from-}
+## `EXISTS`サブクエリと`... >/>=/&lt;/&lt;=/=/!= (SELECT ... FROM ...)` {#exists-subquery-and---select--from-}
 
 現在、このようなシナリオにおけるサブクエリについては、相関サブクエリでない場合、TiDBは最適化段階で事前に評価し、結果セットに直接置き換えます。下図に示すように、 `EXISTS`サブクエリは最適化段階で事前に`TRUE`のサブクエリとして評価されるため、最終的な実行結果には反映されません。
 

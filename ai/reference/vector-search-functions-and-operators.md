@@ -75,7 +75,7 @@ aliases: ['/ja/tidb/stable/vector-search-functions-and-operators/','/ja/tidbclou
 | [`<`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_less-than)                    | 小なり演算子               |
 | [`<=`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_less-than-or-equal)          | 以下演算子                |
 | [`NOT BETWEEN ... AND ...`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-between) | 値が範囲内にないか確認する        |
-| [`!=` 、 `&lt;&gt;`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-equal)           | 等しくない演算子             |
+| [`!=` 、 `<>`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-equal)           | 等しくない演算子             |
 | [`NOT IN()`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-in)                     | 値が値のセット内にないかどうかを確認する |
 
 ベクトルの比較方法の詳細については、 [ベクトルデータ型 | 比較](/ai/reference/vector-search-data-types.md#comparison)を参照してください。

@@ -46,7 +46,7 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 
 -   ディスクの問題です。PDノードが配置されているディスクのI/O負荷が最大になっています。PDノードが、I/O需要の高い他のコンポーネントと同時にデプロイされていないか、またディスクの健全性を確認してください。Grafanaのモニターメトリクス（**ディスクパフォーマンス**、**レイテンシー**/**負荷**）を確認することで原因を確認できます。必要に応じて、FIOツールを使用してディスクのチェックを実行することもできます。
 
--   PDピア間のネットワークに問題が発生しています。PDログには`lost the TCP streaming connection`が表示されています。Grafana -&gt; **PD** -&gt; **etcd**モニターの`round trip`を確認して、PDノード間のネットワークに問題が発生し**て**いないか確認し、原因を検証する必要があります。
+-   PDピア間のネットワークに問題が発生しています。PDログには`lost the TCP streaming connection`が表示されています。Grafana -> **PD** -> **etcd**モニターの`round trip`を確認して、PDノード間のネットワークに問題が発生し**て**いないか確認し、原因を検証する必要があります。
 
 -   サーバーの負荷が高いです。ログには`server is likely overloaded`が表示されています。
 
@@ -54,7 +54,7 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 
 -   リーダー選出が遅い。リージョンの読み込み時間が長い。この問題は、PDログで`grep "regions cost"`を実行することで確認できます。結果が`load 460927 regions cost 11.77099s`秒など秒単位の場合、リージョンの読み込みが遅いことを意味します。v3.0では、 `use-region-storage`を`true`に設定することで`region storage`機能を有効にでき、リージョンの読み込み時間を大幅に短縮できます。
 
--   TiDBとPD間のネットワークに問題があります。Grafana -&gt; **blackbox_exporter** -&gt; **ping レイテンシー**モニターにアクセスして、TiDBからPD Leaderへのネットワークが正常に動作しているかどうかを確認してください。
+-   TiDBとPD間のネットワークに問題があります。Grafana -> **blackbox_exporter** -> **ping レイテンシー**モニターにアクセスして、TiDBからPD Leaderへのネットワークが正常に動作しているかどうかを確認してください。
 
 -   PDは`FATAL`エラーを報告しますが、ログには`range failed to find revision pair`が表示されます。この問題はv3.0.8（ [＃2040](https://github.com/pingcap/pd/pull/2040) ）で修正されました。
 
@@ -82,20 +82,20 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
     -   TiKV は OOM であり、再起動を引き起こします。
     -   `THP` (Transparent Hugepage) を動的に調整しているため、TiKV がハングします。
 
--   モニターを確認してください：TiKV RocksDB が書き込みストールに遭遇し、再選出が行われます。モニター**Grafana** -&gt; **TiKV-details** -&gt; **errors**に`server is busy`が表示されているかどうかを確認してください。
+-   モニターを確認してください：TiKV RocksDB が書き込みストールに遭遇し、再選出が行われます。モニター**Grafana** -> **TiKV-details** -> **errors**に`server is busy`が表示されているかどうかを確認してください。
 
 -   ネットワーク分離のため再選。
 
 -   `block-cache`設定が大きすぎる場合、TiKV OOM が発生する可能性があります。問題の原因を確認するには、 **Grafana**モニターで該当するインスタンスを選択し、RocksDB の`block cache size`を確認してください。同時に、 `[storage.block-cache] capacity = # "1GB"`パラメータが正しく設定されているかどうかを確認してください。デフォルトでは、 **TiKV**の`block-cache`マシンの総メモリの`45%`に設定されています。コンテナに TiKV をデプロイする際には、このパラメータを明示的に指定する必要があります。TiKV は物理マシンのメモリを取得するため、コンテナのメモリ制限を超える可能性があります。
 
--   コプロセッサーは大量の大きなクエリを受信し、大量のデータを返します。gRPCはコプロセッサがデータを返すのに間に合うようにデータを送信できず、OOMが発生します。原因を確認するには、モニター**Grafana** -&gt; **TiKV詳細**-&gt;**コプロセッサ概要**で、 `response size` `network outbound`トラフィックを超えているかどうかを確認してください。
+-   コプロセッサーは大量の大きなクエリを受信し、大量のデータを返します。gRPCはコプロセッサがデータを返すのに間に合うようにデータを送信できず、OOMが発生します。原因を確認するには、モニター**Grafana** -> **TiKV詳細**->**コプロセッサ概要**で、 `response size` `network outbound`トラフィックを超えているかどうかを確認してください。
 
 ### 単一の TiKV スレッドのボトルネック {#bottleneck-of-a-single-tikv-thread}
 
 TiKV にはボトルネックになる可能性のある単一スレッドがいくつかあります。
 
--   TiKVインスタンス内のリージョンが多すぎると、単一のgRPCスレッドがボトルネックになります（ **Grafana** -&gt; **TiKV詳細**-&gt;**スレッドCPU/gRPC CPU Per Thread**メトリックを確認してください）。v3.x以降のバージョンでは、 `Hibernate Region`有効にするとこの問題を解決できます。
--   v3.0 より前のバージョンでは、raftstore スレッドまたは apply スレッドがボトルネックになる場合 ( **Grafana** -&gt; **TiKV-details** -&gt; **Thread CPU/raft store CPU**および**Async apply CPU**メトリックが`80%`超える)、TiKV (v2.x) インスタンスをスケールアウトするか、マルチスレッド対応の v3.x にアップグレードできます。
+-   TiKVインスタンス内のリージョンが多すぎると、単一のgRPCスレッドがボトルネックになります（ **Grafana** -> **TiKV詳細**->**スレッドCPU/gRPC CPU Per Thread**メトリックを確認してください）。v3.x以降のバージョンでは、 `Hibernate Region`有効にするとこの問題を解決できます。
+-   v3.0 より前のバージョンでは、raftstore スレッドまたは apply スレッドがボトルネックになる場合 ( **Grafana** -> **TiKV-details** -> **Thread CPU/raft store CPU**および**Async apply CPU**メトリックが`80%`超える)、TiKV (v2.x) インスタンスをスケールアウトするか、マルチスレッド対応の v3.x にアップグレードできます。
 
 ### CPU負荷が増加する {#cpu-load-increases}
 

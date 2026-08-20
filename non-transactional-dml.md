@@ -357,7 +357,7 @@ SELECT t2.id, t2.v, t3.id FROM t2 JOIN t3 ON t2.id = t3.id
 +----------------+---------------+
 ```
 
-### 非トランザクションDML文でテーブルエイリアスを使用すると、 `Unknown column '&lt;alias&gt;.&lt;column&gt;' in 'where clause'`エラーが発生します。 {#the-unknown-column-aliascolumn-in-where-clause-error-occurs-when-using-table-aliases-in-non-transactional-dml-statements}
+### 非トランザクションDML文でテーブルエイリアスを使用すると、 `Unknown column '<alias>.<column>' in 'where clause'`エラーが発生します。 {#the-unknown-column-aliascolumn-in-where-clause-error-occurs-when-using-table-aliases-in-non-transactional-dml-statements}
 
 非トランザクションDML文を実行すると、TiDBは内部的にバッチを分割するためのクエリを構築し、実際の分割実行文を生成します。これらの2種類の文は、それぞれ[`DRY RUN QUERY`](/non-transactional-dml.md#query-the-batch-dividing-statement)と[`DRY RUN`](/non-transactional-dml.md#query-the-statements-corresponding-to-the-first-and-the-last-batches)で確認できます。
 

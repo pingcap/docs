@@ -13,7 +13,7 @@ summary: TiDBの全文検索を使用して、従来型のテキスト検索を�
 
 始める前に、以下のものを用意してください。
 
--   **Python (&gt;=3.10)** : [Python](https://www.python.org/downloads/) 3.10以降のバージョンをインストールしてください。
+-   **Python (>=3.10)** : [Python](https://www.python.org/downloads/) 3.10以降のバージョンをインストールしてください。
 -   **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
 
 ## 実行方法 {#how-to-run}

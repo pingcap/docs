@@ -51,16 +51,16 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
     1.  TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-    2.  対象インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **DB Audit Logging**をクリックします。
+    2.  対象インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** > **DB Audit Logging**をクリックします。
 
     3.  **DB Audit Logging**ページで、右上隅にある**「有効にする」**をクリックします。
 
     4.  **データベース監査ログストレージコンフィグレーション**ダイアログで、 **AWS IAM Policy Settings**セクションを探し、後で使用するために**TiDB Cloud Account ID**と**TiDB Cloud External ID**を記録してください。
 
-2.  AWS マネジメント コンソールで、 **IAM** &gt; **Access Management** &gt; **Policies**に移動し、 `s3:PutObject`書き込み専用権限を持つストレージバケット ポリシーが存在するかどうかを確認します。
+2.  AWS マネジメント コンソールで、 **IAM** > **Access Management** > **Policies**に移動し、 `s3:PutObject`書き込み専用権限を持つストレージバケット ポリシーが存在するかどうかを確認します。
 
     -   はいの場合、後で使用するために、一致したストレージバケットポリシーを記録してください。
-    -   そうでない場合は、 **IAM** &gt; **Access Management** &gt; **Policies** &gt; **Create Policy**に移動し、次のポリシー テンプレートに従ってバケット ポリシーを定義します。
+    -   そうでない場合は、 **IAM** > **Access Management** > **Policies** > **Create Policy**に移動し、次のポリシー テンプレートに従ってバケット ポリシーを定義します。
 
         ```json
         {
@@ -77,12 +77,12 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
         テンプレートでは、 `<Your S3 bucket ARN>`は監査ログファイルが書き込まれる S3 バケットの Amazon リソース ネーム (ARN) です。S3 バケットの**[プロパティ]**タブに移動し、 **Bucket Overview**領域で ARN の値を取得できます。 `"Resource"`フィールドでは、ARN の後に`/*`を追加する必要があります。たとえば、ARN が`arn:aws:s3:::tidb-cloud-test`の場合、 `"Resource"`フィールドの値を`"arn:aws:s3:::tidb-cloud-test/*"`に設定する必要があります。
 
-3.  **IAM** &gt; **Access Management** &gt; **Roles**に移動し、以前に記録したTiDB Cloudアカウント ID と外部 ID に対応する信頼エンティティを持つロールが既に存在するかどうかを確認します。
+3.  **IAM** > **Access Management** > **Roles**に移動し、以前に記録したTiDB Cloudアカウント ID と外部 ID に対応する信頼エンティティを持つロールが既に存在するかどうかを確認します。
 
     -   はいの場合、後で使用するために一致した役割を記録してください。
     -   そうでない場合は、 **Create role**をクリックし、信頼エンティティタイプとして**Another AWS account**を選択してから、 **Account ID**フィールドにTiDB CloudアカウントIDの値を入力します。次に、 **Require External ID**オプションを選択し、**External ID**フィールドにTiDB Cloud外部IDの値を入力します。
 
-4.  **IAM** &gt; **Access Management** &gt; **Roles**で、前の手順で確認したロール名をクリックして**概要**ページに移動し、以下の手順を実行します。
+4.  **IAM** > **Access Management** > **Roles**で、前の手順で確認したロール名をクリックして**概要**ページに移動し、以下の手順を実行します。
 
     1.  **「アクセス許可」**タブで、 `s3:PutObject`書き込み専用アクセス許可を持つ記録済みポリシーがロールに添付されているかどうかを確認します。添付されていない場合は、 **Attach Policies**を選択し、必要なポリシーを検索して、 **Attach Policy**をクリックします。
     2.  **概要**ページに戻り、**Role ARN**値をクリップボードにコピーしてください。
@@ -133,11 +133,11 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 1.  監査ログを有効にしたいTiDB Cloud PremiumインスタンスのAlibaba CloudサービスアカウントIDを取得してください。
 
     1.  TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
-    2.  対象インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **DB Audit Logging**をクリックします。
+    2.  対象インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** > **DB Audit Logging**をクリックします。
     3.  **DB Audit Logging**ページで、右上隅にある**「有効にする」**をクリックします。
     4.  **データベース監査ログストレージコンフィグレーション**ダイアログで、 **Alibaba Cloud RAM Policy Settings**セクションを探し、後で使用するために**TiDB Cloud Account ID**と**TiDB Cloud External ID**を記録してください。
 
-2.  Alibaba Cloud コンソールで、 **[RAM]** &gt; **[権限]** &gt; **[ポリシー]**に移動し、監査ログ OSS バケットに対して`oss:PutObject`書き込み専用権限を持つポリシーが既に存在するかどうかを確認します。
+2.  Alibaba Cloud コンソールで、 **[RAM]** > **[権限]** > **[ポリシー]**に移動し、監査ログ OSS バケットに対して`oss:PutObject`書き込み専用権限を持つポリシーが既に存在するかどうかを確認します。
 
     -   はいの場合、後で使用するためにポリシー名を記録してください。
 
@@ -160,7 +160,7 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
     `<Your-Bucket-Name>` TiDB Cloud が監査ログを書き込む OSS バケットの名前に置き換えてください。たとえば、バケット名が`auditlog-bucket`の場合は、 `"Resource": "acs:oss:*:*:auditlog-bucket/*"`を使用します。
 
-3.  Alibaba Cloudコンソールで、 **[RAM]** &gt; **[ID]** &gt; **[ロール]**に移動し、**trusted entity**が以前に記録したTiDB CloudアカウントIDと外部IDに一致するロールが既に存在するかどうかを確認します。
+3.  Alibaba Cloudコンソールで、 **[RAM]** > **[ID]** > **[ロール]**に移動し、**trusted entity**が以前に記録したTiDB CloudアカウントIDと外部IDに一致するロールが既に存在するかどうかを確認します。
 
     -   はいの場合、後で使用するために役割名を記録してください。
 
@@ -305,7 +305,7 @@ TiDB Cloudの監査ログは、インスタンスID、内部ID、およびログ
 
 ## 監査ログを無効にする {#disable-audit-logging}
 
-インスタンスの監査を停止したい場合は、インスタンスのページに移動し、 **[設定]** &gt; **Audit Settings**をクリックして、右上隅の監査設定を**[無効]**に切り替えます。
+インスタンスの監査を停止したい場合は、インスタンスのページに移動し、 **[設定]** > **Audit Settings**をクリックして、右上隅の監査設定を**[無効]**に切り替えます。
 
 > **Note:**
 >

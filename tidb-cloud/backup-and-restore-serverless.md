@@ -20,7 +20,7 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  左側のナビゲーションペインで、 **[データ]** &gt; **[バックアップ]**をクリックします。
+2.  左側のナビゲーションペインで、 **[データ]** > **[バックアップ]**をクリックします。
 
 ## 自動バックアップ {#automatic-backups}
 
@@ -30,7 +30,7 @@ TiDB Cloudはデータを自動的にバックアップするため、災害発�
 
 自動バックアップの設定は、 TiDB Cloud StarterインスタンスとTiDB Cloud Essentialインスタンスで異なり、以下の表に示されています。
 
-| Backup setting   | TiDB Cloud Starter （無料） | TiDB Cloud Starter （利用限度額 &gt; 0） | TiDB Cloud Essential |
+| Backup setting   | TiDB Cloud Starter （無料） | TiDB Cloud Starter （利用限度額 > 0） | TiDB Cloud Essential |
 | ---------- | ----------------------- | --------------------------------- | -------------------- |
 | Backup Cycle | 毎日                      | 毎日                                | 毎日                   |
 | Backup Retention   | 1日                      | 最大30日間                            | 最大30日間               |
@@ -145,7 +145,7 @@ TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンス�
 
 2.  **Recycle Bin**ページで、 **Essential**タブをクリックすると、 TiDB Cloud Essentialインスタンスのごみ箱に移動します。
 
-3.  復元したいTiDB Cloud Essentialインスタンスを見つけて、 **[&gt;]**ボタンをクリックして、そのインスタンスで使用可能なバックアップを展開します。
+3.  復元したいTiDB Cloud Essentialインスタンスを見つけて、 **[>]**ボタンをクリックして、そのインスタンスで使用可能なバックアップを展開します。
 
     > **Note:**
     >

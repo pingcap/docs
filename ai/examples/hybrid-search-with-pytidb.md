@@ -13,7 +13,7 @@ summary: より包括的な結果を得るには、ベクトル検索と全文�
 
 始める前に、以下のものを用意してください。
 
--   **Python (&gt;=3.10)** : [Python](https://www.python.org/downloads/) 3.10以降のバージョンをインストールしてください。
+-   **Python (>=3.10)** : [Python](https://www.python.org/downloads/) 3.10以降のバージョンをインストールしてください。
 -   **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
 -   **OpenAI API キー**: [OpenAI](https://platform.openai.com/api-keys)から OpenAI API キーを取得します。
 

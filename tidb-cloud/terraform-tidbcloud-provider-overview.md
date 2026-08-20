@@ -20,8 +20,8 @@ summary: Terraform を使用してTiDB Cloudリソースを作成、管理、更
 ## 要件 {#requirements}
 
 -   [TiDB Cloudアカウント](https://tidbcloud.com/free-trial)
--   [Terraformバージョン](https://www.terraform.io/downloads.html) &gt;= 1.0
--   [Goバージョン](https://golang.org/doc/install) &gt;= 1.18 (ローカルで[TiDB Cloud Terraform プロバイダー](https://github.com/tidbcloud/terraform-provider-tidbcloud)ビルドする場合にのみ必要)
+-   [Terraformバージョン](https://www.terraform.io/downloads.html) >= 1.0
+-   [Goバージョン](https://golang.org/doc/install) >= 1.18 (ローカルで[TiDB Cloud Terraform プロバイダー](https://github.com/tidbcloud/terraform-provider-tidbcloud)ビルドする場合にのみ必要)
 
 ## サポートされているリソースとデータソース {#supported-resources-and-data-sources}
 

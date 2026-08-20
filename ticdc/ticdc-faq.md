@@ -324,10 +324,10 @@ TiCDC v6.2以降、単一テーブルトランザクションを複数のトラ�
 
 非可逆DDLとは、TiDBで実行された際にデータ変更を引き起こす可能性のあるDDLを指します。一般的な非可逆DDL操作には、以下のものがあります。
 
--   列の型を変更する（例：INT -&gt; VARCHAR）
--   列の長さを変更する（例：VARCHAR(20) -&gt; VARCHAR(10)）
--   列の精度を変更する（例：DECIMAL(10, 3) -&gt; DECIMAL(10, 2)）
--   列の UNSIGNED または SIGNED 属性の変更 (例: INT UNSIGNED -&gt; INT SIGNED)
+-   列の型を変更する（例：INT -> VARCHAR）
+-   列の長さを変更する（例：VARCHAR(20) -> VARCHAR(10)）
+-   列の精度を変更する（例：DECIMAL(10, 3) -> DECIMAL(10, 2)）
+-   列の UNSIGNED または SIGNED 属性の変更 (例: INT UNSIGNED -> INT SIGNED)
 
 TiDB v7.1.0より前のバージョンでは、TiCDCは新旧のデータが同一のDMLイベントを下流に複製します。下流がMySQLの場合、これらのDMLイベントは、下流がDDL文を受信して​​実行するまでデータの変更を引き起こしません。しかし、下流がKafkaまたはクラウドストレージサービスの場合、TiCDCは冗長データの行を下流に書き込みます。
 

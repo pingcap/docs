@@ -21,7 +21,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
 ## ステップ1. 宛先を設定する {#step-1-configure-destination}
 
-対象のTiDB Cloud Dedicatedクラスターの概要ページに移動します。左側のナビゲーション ペインで**[データ]** &gt; **[変更フィード]**をクリックし、 **Create Changefeed**をクリックして**[宛先]**ページに移動します。次に、 TiDB Cloud Dedicatedクラスターがホストされているクラウド プロバイダーに応じて、宛先として**Amazon S3** 、 **GCS** 、または**Azure Blob Storage**を選択します。構成プロセスは、選択した宛先によって異なります。
+対象のTiDB Cloud Dedicatedクラスターの概要ページに移動します。左側のナビゲーション ペインで**[データ]** > **[変更フィード]**をクリックし、 **Create Changefeed**をクリックして**[宛先]**ページに移動します。次に、 TiDB Cloud Dedicatedクラスターがホストされているクラウド プロバイダーに応じて、宛先として**Amazon S3** 、 **GCS** 、または**Azure Blob Storage**を選択します。構成プロセスは、選択した宛先によって異なります。
 
 <SimpleTab>
 <div label="Amazon S3">
@@ -130,7 +130,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 1.  [Azureポータル](https://portal.azure.com/)で、変更フィード データを保存するコンテナーを作成します。
 
     1.  左側のナビゲーションペインで**Storage Accounts**をクリックし、ストレージアカウントを選択します。
-    2.  ストレージアカウントのナビゲーションメニューで、 **Data storage** &gt; **[コンテナー]**を選択し、 **+ Container**をクリックします。
+    2.  ストレージアカウントのナビゲーションメニューで、 **Data storage** > **[コンテナー]**を選択し、 **+ Container**をクリックします。
     3.  新しいコンテナの名前を入力し、匿名アクセスレベルを設定します（推奨レベルは**プライベート**です）。次に、 **[作成]**をクリックします。
 
 2.  対象コンテナのURLを取得します。
@@ -141,7 +141,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
 3.  SASトークンを生成します。
 
-    1.  ストレージアカウントのナビゲーション メニューで、 **Security + networking** &gt; **Shared access signature**を選択します。
+    1.  ストレージアカウントのナビゲーション メニューで、 **Security + networking** > **Shared access signature**を選択します。
 
     2.  **Allowed services**セクションで、 **Blob**を選択します。
 

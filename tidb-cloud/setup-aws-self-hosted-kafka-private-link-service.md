@@ -39,7 +39,7 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
 
 3.  TiDB Cloud Dedicated クラスターから Kafka デプロイメント情報を取得します。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**Data** &gt; **Changefeed**をクリックします。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**Data** > **Changefeed**をクリックします。
     2.  概要ページで、TiDB クラスターのリージョンを確認します。Kafka クラスターが同じリージョンにデプロイされることを確認してください。
     3.  **Create Changefeed**をクリックします。
         1.  **Destination**で、 **Kafka**を選択します。
@@ -67,7 +67,7 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
 
 3.  TiDB Cloud Premium インスタンスから Kafka デプロイメント情報を取得します。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB インスタンスのインスタンス概要ページに移動し、左側のナビゲーション ペインで**Data** &gt; **Changefeed**をクリックします。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB インスタンスのインスタンス概要ページに移動し、左側のナビゲーション ペインで**Data** > **Changefeed**をクリックします。
     2.  概要ページで、TiDBインスタンスのリージョンを確認します。Kafkaクラスターが同じリージョンにデプロイされることを確認してください。
     3.  チェンジフィードを作成するには、チュートリアルを参照してください。
 
@@ -83,8 +83,8 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
 | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | リージョン                       | オレゴン州 ( `us-west-2` )                                                                                                                                                                                                                                                                                                                                                | 該当なし                                                                                                                                                                                                                                                                                                                                                                                             |
 | TiDB Cloud AWS アカウントのプリンシパル | `arn:aws:iam::<account_id>:root`                                                                                                                                                                                                                                                                                                                                     | 該当なし                                                                                                                                                                                                                                                                                                                                                                                             |
-| AZ ID                       | <ul><li>`usw2-az1` </li><li>`usw2-az2` </li><li> `usw2-az3`</li></ul>                                                                                                                                                                                                                                                                                                         | AZ ID を AWS アカウントの AZ 名に合わせます。<br/>例：<ul><li> `usw2-az1` =&gt; `us-west-2a`</li><li> `usw2-az2` =&gt; `us-west-2c`</li><li> `usw2-az3` =&gt; `us-west-2b`</li></ul>                                                                                                                                                                                                                              |
-| Kafka Advertised Listener Pattern       | 一意のランダム文字列: `abc`<br/> AZ 用に生成されたパターン:<ul><li> `usw2-az1` =&gt; &lt;broker_id&gt;.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li><li> `usw2-az2` =&gt; &lt;broker_id&gt;.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li><li> `usw2-az3` =&gt; &lt;broker_id&gt;.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li></ul> | AZ 名を AZ 指定のパターンにマッピングします。後で、特定の AZ のブローカーに適切なパターンを設定してください。<ul><li> `us-west-2a` =&gt; &lt;broker_id&gt;.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li><li> `us-west-2c` =&gt; &lt;broker_id&gt;.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li><li> `us-west-2b` =&gt; &lt;broker_id&gt;.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li></ul> |
+| AZ ID                       | <ul><li>`usw2-az1` </li><li>`usw2-az2` </li><li> `usw2-az3`</li></ul>                                                                                                                                                                                                                                                                                                         | AZ ID を AWS アカウントの AZ 名に合わせます。<br/>例：<ul><li> `usw2-az1` => `us-west-2a`</li><li> `usw2-az2` => `us-west-2c`</li><li> `usw2-az3` => `us-west-2b`</li></ul>                                                                                                                                                                                                                              |
+| Kafka Advertised Listener Pattern       | 一意のランダム文字列: `abc`<br/> AZ 用に生成されたパターン:<ul><li> `usw2-az1` => &lt;broker_id&gt;.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li><li> `usw2-az2` => &lt;broker_id&gt;.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li><li> `usw2-az3` => &lt;broker_id&gt;.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li></ul> | AZ 名を AZ 指定のパターンにマッピングします。後で、特定の AZ のブローカーに適切なパターンを設定してください。<ul><li> `us-west-2a` => &lt;broker_id&gt;.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li><li> `us-west-2c` => &lt;broker_id&gt;.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li><li> `us-west-2b` => &lt;broker_id&gt;.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li></ul> |
 
 ## ステップ1. Kafkaクラスターをセットアップする {#step-1-set-up-a-kafka-cluster}
 
@@ -103,9 +103,9 @@ Kafka VPC には次のものが必要です。
 
 サブネットを作成する前に、AZ IDとAZ名のマッピングに基づいてAZ内にサブネットを作成します。以下のマッピングを例に挙げます。
 
--   `usw2-az1` =&gt; `us-west-2a`
--   `usw2-az2` =&gt; `us-west-2c`
--   `usw2-az3` =&gt; `us-west-2b`
+-   `usw2-az1` => `us-west-2a`
+-   `usw2-az2` => `us-west-2c`
+-   `usw2-az3` => `us-west-2b`
 
 次の AZ にプライベート サブネットを作成します。
 
@@ -117,7 +117,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 **1.1. Kafka VPCを作成する**
 
-1.  [AWSコンソール &gt; VPCダッシュボード](https://console.aws.amazon.com/vpcconsole/home?#vpcs:)に進み、Kafka をデプロイするリージョンに切り替えます。
+1.  [AWSコンソール > VPCダッシュボード](https://console.aws.amazon.com/vpcconsole/home?#vpcs:)に進み、Kafka をデプロイするリージョンに切り替えます。
 
 2.  **Create VPC**をクリックします。**VPC settings**ページで以下の情報を入力します。
 
@@ -167,11 +167,11 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 4.  要塞サブネットをパブリック サブネットに構成します。
 
-    1.  [VPCダッシュボード &gt; インターネットゲートウェイ](https://console.aws.amazon.com/vpcconsole/home#igws:)に進みます。`kafka-vpc-igw`名前のインターネットゲートウェイを作成します。
+    1.  [VPCダッシュボード > インターネットゲートウェイ](https://console.aws.amazon.com/vpcconsole/home#igws:)に進みます。`kafka-vpc-igw`名前のインターネットゲートウェイを作成します。
 
     2.  **Internet gateways Detail**ページの**Actions**で、 **Attach to VPC**をクリックして、インターネット ゲートウェイを Kafka VPC に接続します。
 
-    3.  [VPCダッシュボード &gt; ルートテーブル](https://console.aws.amazon.com/vpcconsole/home#CreateRouteTable:)に進みます。Kafka VPC のインターネット ゲートウェイへのルート テーブルを作成し、次の情報を含む新しいルートを追加します。
+    3.  [VPCダッシュボード > ルートテーブル](https://console.aws.amazon.com/vpcconsole/home#CreateRouteTable:)に進みます。Kafka VPC のインターネット ゲートウェイへのルート テーブルを作成し、次の情報を含む新しいルートを追加します。
 
         -   **Name**: `kafka-vpc-igw-route-table`
         -   **VPC** : `Kafka VPC`
@@ -665,10 +665,10 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 
 異なるポートを持つ4つのターゲットグループを持つネットワークロードバランサーを作成します。1つのターゲットグループはブートストラップ用で、他のターゲットグループは異なるブローカーにマッピングされます。
 
-1.  ブートストラップターゲットグループ =&gt; 9092 =&gt; broker-node1:39092、broker-node2:39092、broker-node3:39092
-2.  ブローカーターゲットグループ1 =&gt; 9093 =&gt; broker-node1:39092
-3.  ブローカーターゲットグループ2 =&gt; 9094 =&gt; broker-node2:39092
-4.  ブローカーターゲットグループ3 =&gt; 9095 =&gt; broker-node3:39092
+1.  ブートストラップターゲットグループ => 9092 => broker-node1:39092、broker-node2:39092、broker-node3:39092
+2.  ブローカーターゲットグループ1 => 9093 => broker-node1:39092
+3.  ブローカーターゲットグループ2 => 9094 => broker-node2:39092
+4.  ブローカーターゲットグループ3 => 9095 => broker-node3:39092
 
 ブローカーロールノードが複数ある場合は、マッピングを追加する必要があります。ブートストラップターゲットグループに少なくとも1つのノードがあることを確認してください。耐障害性を確保するため、各AZに1つずつ、合計3つのノードを追加することをお勧めします。
 
@@ -731,7 +731,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
         -   `usw2-az2`と`broker-usw2-az2 subnet`
         -   `usw2-az3`と`broker-usw2-az3 subnet`
     -   **Security groups**: 次のルールで新しいセキュリティ グループを作成します。
-        -   受信ルールは、Kafka VPCからのすべてのTCPを許可します：タイプ - `{ports of target groups}` （例： `9092-9095` ）、ソース - `{CIDR of TiDB Cloud}` 。リージョン内のTiDB CloudのCIDRを取得するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の左上隅にあるコンボボックスを使用してターゲットプロジェクトに切り替え、左側のナビゲーションペインで**Project Settings** &gt; **Network Access**をクリックし、 **Project CIDR** &gt; **AWS**をクリックします。
+        -   受信ルールは、Kafka VPCからのすべてのTCPを許可します：タイプ - `{ports of target groups}` （例： `9092-9095` ）、ソース - `{CIDR of TiDB Cloud}` 。リージョン内のTiDB CloudのCIDRを取得するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の左上隅にあるコンボボックスを使用してターゲットプロジェクトに切り替え、左側のナビゲーションペインで**Project Settings** > **Network Access**をクリックし、 **Project CIDR** > **AWS**をクリックします。
         -   アウトバウンドルールは、Kafka VPC へのすべての TCP を許可します: タイプ - `All TCP` 、宛先 - `Anywhere-IPv4`
     -   リスナーとルーティング:
         -   プロトコル: `TCP` ; ポート: `9092` ; 転送先: `bootstrap-target-group`

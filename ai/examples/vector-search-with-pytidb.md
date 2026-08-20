@@ -15,7 +15,7 @@ summary: ベクトル埋め込みを用いたセマンティック検索を実�
 
 始める前に、以下のものを用意してください。
 
--   **Python (&gt;=3.10)** : [Python](https://www.python.org/downloads/) 3.10以降のバージョンをインストールしてください。
+-   **Python (>=3.10)** : [Python](https://www.python.org/downloads/) 3.10以降のバージョンをインストールしてください。
 -   **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
 -   **Ollama** :[Ollama](https://ollama.com/download)からインストールします。
 
