@@ -1,6 +1,6 @@
 ---
 title: Tiered Storage FAQ
-summary: Learn about common Tiered Storage questions on TiDB Cloud BYOC/Premium/Essential, including DML, replicas, and object storage outages.
+summary: Learn about common tiered storage questions on TiDB Cloud BYOC/Premium/Essential, including DML, replicas, and object storage outages.
 ---
 
 # Tiered Storage FAQ
