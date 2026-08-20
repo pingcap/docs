@@ -18,7 +18,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         この機能は、TiDB Cloud Premium インスタンスにおける SQL のリソース消費を実用的に把握できるビューを提供します。
 
-        これにより、DB User、SQL type、DB、table、SQL digest などの複数の次元で、SQL ステートメントの RU 消費量、レイテンシー、実行回数を分析できるようになりました。さらに、主要な寄与要因をひと目で確認できるため、高いリソース消費や処理遅延の原因を特定しやすくなります。
+        これにより、DB User、SQL type、DB、table、SQL digest などの複数の次元で、SQL ステートメントの RU 消費量、レイテンシー、実行回数を分析できるようになりました。さらに、主な要因をひと目で確認できるため、高いリソース消費や処理遅延の原因を特定しやすくなります。
 
         現在、この機能はパブリックプレビュー段階であり、8 月 19 日以降に作成された一部の TiDB Cloud Premium インスタンスでのみ利用できます。
 
