@@ -1,9 +1,9 @@
 ---
-title: Tiered Storage Limitations and Impact
-summary: Learn about limitations, throttling, compatibility, and query performance uncertainty of Tiered Storage on TiDB Cloud BYOC/Premium/Essential.
+title: Tiered Storage Limitations
+summary: Learn about limitations, throttling, compatibility, and query performance uncertainty of tiered storage on TiDB Cloud BYOC, Premium, or Essential.
 ---
 
-# Tiered Storage Limitations and Impact
+# Tiered Storage Limitations
 
 This document describes the current limitations and operational impact of Infrequent Access (IA) storage, including feature constraints, cold-read throttling, tool compatibility, and query performance uncertainty.
 
@@ -22,25 +22,23 @@ This document describes the current limitations and operational impact of Infreq
 | Partition selector mixing | `names_in` / `less_than` / `values_in` cannot be used simultaneously |
 | TiFlash | Does not follow IA; data always remains local |
 
----
-
 ## Access throttling constraints
 
 Since shared physical clusters have limited object storage bandwidth, IA cold storage access must comply with the following limits:
 
-| Constraint Dimension | Limit | Reason |
+| Constraint dimension | Limit | Reason |
 |-|-|-|
 | Single SQL cold read throughput | ≤ 100 MiB/s | Prevents one query from consuming excessive bandwidth |
 | Total concurrent cold read throughput | ≤ 1 GiB/s (≤ 10 concurrent) | Protects other tenants in the cluster |
 | TiKV single miss load size | ≤ ~3 MiB (estimated) | Segments from 3 LSM levels |
 
-**Note**: A single TiKV miss does not represent a single query miss! For example, a query may involve multiple (e.g., 1000) TiKV misses. If 5 TiKV nodes serve the query, each TiKV averages 200 misses, leading to 200 remote cold data queries. Although concurrent within each TiKV, 200 misses take a very long time, so the final query latency can be extremely high.
+> **Note:**
+>
+> A single TiKV miss does not represent a single query miss! For example, a query may involve multiple (e.g., 1000) TiKV misses. If 5 TiKV nodes serve the query, each TiKV averages 200 misses, leading to 200 remote cold data queries. Although concurrent within each TiKV, 200 misses take a very long time, so the final query latency can be extremely high.
 
 **If your business involves sustained heavy access to cold data, IA is not recommended; revert the table to Standard storage.** To ensure system stability, hard throttling for cold data access will be added in a future technical release. For now, you must comply with the constraints above.
 
 You can monitor single SQL cold data access volume via the `IA Remote Read Segment Size` panel in Cloud Console → Monitoring → Diagnosis → Slow Query → Coprocessor.
-
----
 
 ## Impact on peripheral tools
 
@@ -51,29 +49,27 @@ You can monitor single SQL cold data access volume via the `IA Remote Read Segme
 | **IMPORT INTO** | Imported data transitions to IA via flush/compaction; large-range validation after import may encounter cold cache | Compatible |
 | **PITR** | Preserves storage class metadata; schema manager re-syncs after restore | Compatible |
 
----
-
 ## Risk isolation mechanisms
 
 After setting IA on a table, the system uses the following measures to isolate IA and non-IA tables:
 
-**Region Level**:
+**Region level**:
 
 - IA tables/partitions occupy dedicated regions, triggering necessary splits
 - Adjacent regions with different storage classes are restricted from merging, preventing hot/cold data mixing
 - A single region is either entirely IA or entirely non-IA
 
-**Compute Layer**:
+**Compute layer**:
 
 - Standard and IA tables have no isolation at the compute layer — TiDB does not have separate isolation strategies for the two table types
 
-**Storage Layer**:
+**Storage layer**:
 
 - Cold read rate limiting
 
+> **Note:**
+>
 > Shared resources (CPU, network, local disk, object storage bandwidth) cannot be fully isolated. In extreme cases, a large IA scan may still affect other tenants. This is the fundamental reason for the access throttling constraints.
-
----
 
 ## Emergency recovery methods
 
@@ -83,8 +79,6 @@ If issues arise with IA tables, you and the TiDB Cloud team can use the followin
 |-|-|-|-|
 | IA → Standard switch-back | You find performance unacceptable | **Your primary choice** | System reloads data locally, bypassing the remote path |
 | **Flow Control (already available)** | Control traffic between IA tables and object storage | TiDB Cloud team's choice | Rate-limiting protects cluster stability; managed by the TiDB Cloud team |
-
----
 
 ## IA local cache and query performance uncertainty
 
