@@ -734,7 +734,7 @@ SSH相互信頼を設定する際は、すべてのターゲットノードで`t
     passwd tidb
     ```
 
-2.  パスワードなしで sudo を設定するには、次のコマンドを実行し、ファイルの末尾に`tidb ALL=(ALL) NOPASSWD: ALL`追加します。
+2.  パスワードなしで sudo を設定するには、次のコマンドを実行し、ファイルの末尾に`tidb ALL=(ALL) NOPASSWD: ALL`を追加します。
 
     ```bash
     visudo

@@ -13,7 +13,7 @@ TiDB バージョン: 6.5.9
 
 ## 互換性の変更 {#compatibility-changes}
 
--   RocksDB の TiKV 構成項目[`track-and-verify-wals-in-manifest`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#track-and-verify-wals-in-manifest-new-in-v659)追加します。これは、Write Ahead Log (WAL) の破損の可能性を調査するのに役立ちます。 [＃16549](https://github.com/tikv/tikv/issues/16549) @[v01dstar](https://github.com/v01dstar)
+-   RocksDB の TiKV 構成項目[`track-and-verify-wals-in-manifest`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#track-and-verify-wals-in-manifest-new-in-v659)を追加します。これは、Write Ahead Log (WAL) の破損の可能性を調査するのに役立ちます。 [＃16549](https://github.com/tikv/tikv/issues/16549) @[v01dstar](https://github.com/v01dstar)
 -   DR自動同期は[`wait-recover-timeout`](https://docs.pingcap.com/tidb/v6.5/two-data-centers-in-one-city-deployment#enable-the-dr-auto-sync-mode)設定をサポートしており、ネットワークが回復した後、 `sync-recover`状態に戻るまでの待機時間を制御できます[＃6295](https://github.com/tikv/pd/issues/6295) @[disksing](https://github.com/disksing)
 
 ## 改善点 {#improvements}

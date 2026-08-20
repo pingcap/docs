@@ -33,7 +33,7 @@ v8.1.0 以降、TiCDC は Mutual Transport Layer Security (mTLS) または TiDB 
 
     [TiCDC コマンドラインツール](/ticdc/ticdc-manage-changefeed.md)を使用する場合、以下の方法でクライアント証明書を指定できます。TiCDC は以下の順序でクライアント証明書の読み取りを試みます。
 
-    1.  コマンドラインパラメータ`--cert`と`--key`使用して、証明書と秘密鍵を指定します。サーバーが自己署名証明書を使用している場合は、パラメータ`--ca`を使用して信頼できる CA 証明書も指定する必要があります。
+    1.  コマンドラインパラメータ`--cert`と`--key`を使用して、証明書と秘密鍵を指定します。サーバーが自己署名証明書を使用している場合は、パラメータ`--ca`を使用して信頼できる CA 証明書も指定する必要があります。
 
         ```bash
         cdc cli changefeed list --cert client.crt --key client.key --ca ca.crt
@@ -70,7 +70,7 @@ v8.1.0 以降、TiCDC は Mutual Transport Layer Security (mTLS) または TiDB 
     CREATE USER 'test'@'ticdc_ip_address' IDENTIFIED BY 'password';
     ```
 
-2.  TiCDCサーバーで、ユーザー名とパスワードの認証を有効にするために`security.client-user-required`と`security.client-allowed-user`設定します。
+2.  TiCDCサーバーで、ユーザー名とパスワードの認証を有効にするために`security.client-user-required`と`security.client-allowed-user`を設定します。
 
     ```toml
     [security]

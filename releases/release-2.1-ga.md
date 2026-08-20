@@ -169,13 +169,13 @@ summary: TiDB 2.1 GA は 2018 年 11 月 30 日にリリースされ、安定性
 
 -   APIと操作ツール
 
-    -   `TiDB reverse scan`機能をサポートするには[`GetPrevRegion`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L40)追加します
+    -   `TiDB reverse scan`機能をサポートするには[`GetPrevRegion`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L40)を追加します
 
     -   [`BatchSplitRegion`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L54)追加すると TiKVリージョン分割が高速化されます
 
-    -   TiDBで分散GCをサポートするには[`GCSafePoint`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L64-L66)追加します
+    -   TiDBで分散GCをサポートするには[`GCSafePoint`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L64-L66)を追加します
 
-    -   TiDBで分散GCをサポートするには、 [`GetAllStores`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L32)追加します。
+    -   TiDBで分散GCをサポートするには、 [`GetAllStores`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L32)を追加します。
 
     <!---->
 

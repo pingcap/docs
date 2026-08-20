@@ -586,7 +586,7 @@ v4.0.9以降のバージョンのTiDBクラスターでは、 TiFlashはスト�
 
 TiFlashノード上に類似したI/Oメトリックを持つ複数のディスクがある場合は、リスト`storage.main.dir`で対応するディレクトリを指定し、リスト`storage.latest.dir`空のままにすることをお勧めします。TiFlashはI/O負荷とデータをすべてのディレクトリに分散します。
 
-TiFlashノード上にI/Oメトリックが異なる複数のディスクがある場合は、 `storage.latest.dir`リストにメトリックの高いディレクトリを指定し、 `storage.main.dir`リストにメトリックの低いディレクトリを指定することをお勧めします。例えば、NVMe-SSDが1台とSATA-SSDが2台の場合、 `storage.latest.dir`を`["/nvme_ssd_a/data/tiflash"]`を`storage.main.dir` `["/sata_ssd_b/data/tiflash", "/sata_ssd_c/data/tiflash"]`設定します。TiFlashは、これらの2つのディレクトリリストにそれぞれI/O負荷とデータを分散します。この場合、 `storage.latest.dir`という容量は、計画容量全体の10%として計画する必要があることに注意してください。
+TiFlashノード上にI/Oメトリックが異なる複数のディスクがある場合は、 `storage.latest.dir`リストにメトリックの高いディレクトリを指定し、 `storage.main.dir`リストにメトリックの低いディレクトリを指定することをお勧めします。例えば、NVMe-SSDが1台とSATA-SSDが2台の場合、 `storage.latest.dir`を`["/nvme_ssd_a/data/tiflash"]`を`storage.main.dir` `["/sata_ssd_b/data/tiflash", "/sata_ssd_c/data/tiflash"]`を設定します。TiFlashは、これらの2つのディレクトリリストにそれぞれI/O負荷とデータを分散します。この場合、 `storage.latest.dir`という容量は、計画容量全体の10%として計画する必要があることに注意してください。
 
 > **Warning:**
 >

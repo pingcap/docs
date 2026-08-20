@@ -70,7 +70,7 @@ summary: tidbcloud_restore` リソースを使用して復元タスクを作成�
     }
     ```
 
-3.  `terraform apply`コマンドを実行し、確認のために`yes`入力します。
+3.  `terraform apply`コマンドを実行し、確認のために`yes`を入力します。
 
     ```
     $ terraform apply

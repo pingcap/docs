@@ -90,7 +90,7 @@ summary: 単一クラスターのマルチレプリカ災害復旧ソリュー�
     上記の構成では、次のオプションを使用して、リージョン間 DR を最適化します。
 
     -   `server.grpc-compression-type: gzip`設定すると、TiKV での gRPC メッセージ圧縮が有効になり、ネットワーク トラフィックが削減されます。
-    -   `raftstore.raft-min-election-timeout-ticks`と`raftstore.raft-max-election-timeout-ticks`設定して、リージョン 3 が選挙に参加するまでの時間を延長し、このリージョン内のレプリカがリーダーとして投票されるのを防ぎます。
+    -   `raftstore.raft-min-election-timeout-ticks`と`raftstore.raft-max-election-timeout-ticks`を設定して、リージョン 3 が選挙に参加するまでの時間を延長し、このリージョン内のレプリカがリーダーとして投票されるのを防ぎます。
 
 2.  上記の構成ファイルを使用してクラスターを作成します。
 

@@ -104,8 +104,8 @@ TiDBは、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-st
 
 トランザクション実行時に報告される次のエラーについては、対応するチェックをバイパスできます。
 
--   エラー 8138、8139、および 8140 のチェックをバイパスするには、 `set @@tidb_enable_mutation_checker=0`設定します。
--   エラー 8141 のチェックをバイパスするには、 `set @@tidb_txn_assertion_level=OFF`設定します。
+-   エラー 8138、8139、および 8140 のチェックをバイパスするには、 `set @@tidb_enable_mutation_checker=0`を設定します。
+-   エラー 8141 のチェックをバイパスするには、 `set @@tidb_txn_assertion_level=OFF`を設定します。
 
 > **Note:**
 >

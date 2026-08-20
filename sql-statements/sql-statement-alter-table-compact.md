@@ -83,7 +83,7 @@ ALTER TABLE employees COMPACT PARTITION pNorth, pEast TIFLASH REPLICA;
 
 <CustomContent platform="tidb">
 
-リソース使用率を高めながらテーブルレベルの同時実行性を高めるには、 TiFlash構成[`manual_compact_pool_size`](/tiflash/tiflash-configuration.md)変更します。例えば、 `manual_compact_pool_size` 2に設定すると、2つのテーブルのコンパクションを同時に処理できます。
+リソース使用率を高めながらテーブルレベルの同時実行性を高めるには、 TiFlash構成[`manual_compact_pool_size`](/tiflash/tiflash-configuration.md)を変更します。例えば、 `manual_compact_pool_size` 2に設定すると、2つのテーブルのコンパクションを同時に処理できます。
 
 </CustomContent>
 

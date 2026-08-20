@@ -37,7 +37,7 @@ TiDBサービスにローリングアップデートを適用すると、実行�
 
 ### TiDBのアップグレード後にJDBC接続の照合順序が変更される {#the-collation-in-jdbc-connections-changes-after-upgrading-tidb}
 
-以前のバージョンからv7.4以降にアップグレードする際、JDBC URLで`connectionCollation`が設定されておらず、かつ`characterEncoding`が設定されていないか`UTF-8`に設定されている場合、アップグレード後にJDBC接続のデフォルトの照合順序が`utf8mb4_bin`から`utf8mb4_0900_ai_ci`に変更される可能性があります。照合順序を`utf8mb4_bin`に維持する必要がある場合は、JDBC URLで`connectionCollation=utf8mb4_bin`設定してください。
+以前のバージョンからv7.4以降にアップグレードする際、JDBC URLで`connectionCollation`が設定されておらず、かつ`characterEncoding`が設定されていないか`UTF-8`に設定されている場合、アップグレード後にJDBC接続のデフォルトの照合順序が`utf8mb4_bin`から`utf8mb4_0900_ai_ci`に変更される可能性があります。照合順序を`utf8mb4_bin`に維持する必要がある場合は、JDBC URLで`connectionCollation=utf8mb4_bin`を設定してください。
 
 詳細については[JDBC接続で使用される照合順序](/faq/sql-faq.md#collation-used-in-jdbc-connections)を参照してください。
 
@@ -283,7 +283,7 @@ TiDB v2.1.1以前のバージョンでは、文字セットがUTF-8の場合、�
 
     具体的には、変数`tidb_skip_utf8_check`を使用すると、データのUTF-8およびUTF8MB4の有効性チェックをスキップできます。ただし、チェックをスキップしても、MySQL側ではチェックが実行されるため、TiDBからMySQLへのデータのレプリケーションに失敗する可能性があります。
 
-    UTF-8チェックのみをスキップしたい場合は、 `tidb_check_mb4_value_in_utf8`設定できます。この変数はv2.1.3で`config.toml`ファイルに追加され、設定ファイルの`check-mb4-value-in-utf8`変更してクラスターを再起動することで有効になります。
+    UTF-8チェックのみをスキップしたい場合は、 `tidb_check_mb4_value_in_utf8`設定できます。この変数はv2.1.3で`config.toml`ファイルに追加され、設定ファイルの`check-mb4-value-in-utf8`を変更してクラスターを再起動することで有効になります。
 
     v2.1.5 以降では、HTTP API とセッション変数を通じて`tidb_check_mb4_value_in_utf8`設定できます。
 

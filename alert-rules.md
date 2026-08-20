@@ -659,7 +659,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 -   解決：
 
     1.  `warn`や`error`などの上位レベルのログの使用を検討してください。
-    2.  `[raftstore]`構成の下に`raft-base-tick-interval = "2s"`追加します。
+    2.  `[raftstore]`構成の下に`raft-base-tick-interval = "2s"`を追加します。
 
 #### `TiKV_scheduler_context_total` {#tikv_scheduler_context_total}
 

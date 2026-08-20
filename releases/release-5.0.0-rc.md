@@ -85,7 +85,7 @@ TiDB では、ID 情報やクレジットカード番号などの機密情報の
 -   TiDB 側では、tidb-server で SQL ステートメントを使用して`tidb_redact_log=1`変数を設定します。
 -   TiKV 側では、tikv-server で`security.redact-info-log = true`構成を設定します。
 -   PD側ではpd-serverに`security.redact-info-log = true`設定をします[＃2852](https://github.com/tikv/pd/issues/2852) [＃3011](https://github.com/tikv/pd/pull/3011)
--   TiFlash側では、tiflash-server に`security.redact_info_log = true`設定を設定し、tiflash-learner に`security.redact-info-log = true`設定します。
+-   TiFlash側では、tiflash-server に`security.redact_info_log = true`設定を設定し、tiflash-learner に`security.redact-info-log = true`を設定します。
 
 [ユーザードキュメント](/log-redaction.md)
 
@@ -123,7 +123,7 @@ TiDB では、ID 情報やクレジットカード番号などの機密情報の
 TiDBのスケジューリングプロセスは、I/O、ネットワーク、CPU、メモリなどのリソースを占有します。TiDBがスケジュールされたタスクを制御しない場合、リソースのプリエンプションによりQPSと遅延がパフォーマンスジッターを引き起こす可能性があります。以下の最適化を行った後、72時間テストにおいて、Sysbench TPSジッターの標準偏差は11.09%から3.36%に減少しました。
 
 -   ノード容量の変動（常にウォーターライン付近）やPDの`store-limit`設定値が大きすぎることによって引き起こされる冗長なスケジューリングの問題を軽減します。これは、 `region-score-formula-version = v2`設定項目で有効化できる新しいスケジューリング計算式を導入することで実現します[＃3269](https://github.com/tikv/pd/pull/3269)
--   `enable-cross-table-merge = true`変更して、空のリージョンの数を減らし、リージョン間のマージ機能を有効にします[＃3129](https://github.com/tikv/pd/pull/3129)
+-   `enable-cross-table-merge = true`を変更して、空のリージョンの数を減らし、リージョン間のマージ機能を有効にします[＃3129](https://github.com/tikv/pd/pull/3129)
 -   TiKVバックグラウンドでのデータ圧縮は、多くのI/Oリソースを消費します。システムは、バックグラウンドタスクとフォアグラウンドの読み取り・書き込み間のI/Oリソースの競合をバランスさせるために、圧縮率を自動的に調整します。この機能を`rate-limiter-auto-tuned`設定項目で有効にすると、遅延ジッターが大幅に減少します[＃18011](https://github.com/pingcap/tidb/issues/18011)
 -   TiKVがガベージコレクション（GC）とデータ圧縮を実行する際、パーティションはCPUとI/Oリソースを占有します。これらの2つのタスクの実行中は、データが重複する状態になります。I/O使用量を削減するため、GC圧縮フィルタ機能はこれらの2つのタスクを1つに統合し、同じタスク内で実行します。この機能はまだ実験的であり、 `gc.enable-compaction-filter = true` . から有効化できます。 [＃18009](https://github.com/pingcap/tidb/issues/18009)
 -   TiFlash がデータを圧縮またはソートすると、大量の I/O リソースが消費されます。システムは、圧縮とデータソートによる I/O リソースの使用を制限することで、リソースの競合を軽減します。この機能はまだ実験的であり、 `bg_task_io_rate_limit`で有効化できます。

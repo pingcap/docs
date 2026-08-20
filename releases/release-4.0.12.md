@@ -25,7 +25,7 @@ TiDB バージョン: 4.0.12
     -   DDLパッケージコードの一部を`Execute` `ExecRestricted`安全なAPIに移行する（1） [＃22929](https://github.com/pingcap/tidb/pull/22929)
     -   `optimization-time`と`wait-TS-time`スローログに加える [＃22918](https://github.com/pingcap/tidb/pull/22918)
     -   `infoschema.partitions`テーブルから`partition_id`クエリをサポート [＃22489](https://github.com/pingcap/tidb/pull/22489)
-    -   SQL文の実行計画がバインディングヒントと一致しているかどうかをユーザーが知ることができるように`last_plan_from_binding`追加します。 [＃21430](https://github.com/pingcap/tidb/pull/21430)
+    -   SQL文の実行計画がバインディングヒントと一致しているかどうかをユーザーが知ることができるように`last_plan_from_binding`を追加します。 [＃21430](https://github.com/pingcap/tidb/pull/21430)
     -   `pre-split`オプションなしで切り捨てられたテーブルを散布する [＃22872](https://github.com/pingcap/tidb/pull/22872)
     -   `str_to_date`式に 3 つの書式指定子を追加します [＃22812](https://github.com/pingcap/tidb/pull/22812)
     -   メトリクスモニターで`PREPARE`実行失敗を`Failed Query OPM`として記録する [＃22672](https://github.com/pingcap/tidb/pull/22672)
