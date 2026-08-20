@@ -19,7 +19,7 @@ TiDB Dashboardは、SQLベースの[OIDC](https://openid.net/connect/)サイン�
 
     > **Note:**
     >
-    > アカウントに`SYSTEM_VARIABLES_ADMIN`権限がない場合、 **「TiDB Dashboardへのサインイン時にSSOを有効にする」**オプションは無効になります。権限の詳細については、 [TiDB Dashboardのユーザー管理](/dashboard/dashboard-user.md)ご覧ください。
+    > アカウントに`SYSTEM_VARIABLES_ADMIN`権限がない場合、 **TiDB Dashboardへのサインイン時にSSOを有効にする**オプションは無効になります。権限の詳細については、 [TiDB Dashboardのユーザー管理](/dashboard/dashboard-user.md)ご覧ください。
 
 4.  フォームの**OIDC クライアント ID**と**OIDC 検出 URL**フィールドに入力します。
 
@@ -28,7 +28,7 @@ TiDB Dashboardは、SQLベースの[OIDC](https://openid.net/connect/)サイン�
     -   OIDC クライアント ID は、OIDC トークン発行者とも呼ばれます。
     -   OIDC Discovery URL は、OIDC Token Audience とも呼ばれます。
 
-5.  **「偽装の承認」**をクリックし、SQL パスワードを入力します。
+5.  **偽装の承認**をクリックし、SQL パスワードを入力します。
 
     TiDB Dashboardはこの SQL パスワードを保存し、SSO サインインが完了した後に通常の SQL サインインを偽装するために使用します。
 
@@ -38,7 +38,7 @@ TiDB Dashboardは、SQLベースの[OIDC](https://openid.net/connect/)サイン�
     >
     > 入力したパスワードは暗号化されて保存されます。SQLユーザーのパスワードを変更すると、SSOサインインが失敗します。その場合は、パスワードを再入力することでSSOを復旧できます。
 
-6.  **[承認して保存]を**クリックします。
+6.  **[承認して保存]**をクリックします。
 
     ![Sample Step](/media/dashboard/dashboard-session-sso-enable-2.png)
 
@@ -60,7 +60,7 @@ SSO を無効にすると、保存されている SQL パスワードが完全�
 
 2.  左側のサイドバーにあるユーザー名をクリックして、設定ページにアクセスします。
 
-3.  **[シングル サインオン]**セクションで、 **[TiDB Dashboardにサインインするときに SSO を使用する] の**選択を解除します。
+3.  **[シングル サインオン]**セクションで、 **[TiDB Dashboardにサインインするときに SSO を使用する]**の選択を解除します。
 
 4.  設定を保存するには、 **[**更新] (Update) をクリックします。
 
@@ -78,13 +78,13 @@ SQLユーザーのパスワードを変更すると、SSOサインインは失�
 
     ![Sample Step](/media/dashboard/dashboard-session-sso-reauthorize.png)
 
-4.  **[承認して保存]を**クリックします。
+4.  **[承認して保存]**をクリックします。
 
 ## SSO経由でサインイン {#sign-in-via-sso}
 
 TiDB Dashboardに SSO が設定されると、次の手順に従って SSO 経由でサインインできます。
 
-1.  TiDB Dashboardのサインイン ページで、 **[会社アカウントでサインイン] を**クリックします。
+1.  TiDB Dashboardのサインイン ページで、 **[会社アカウントでサインイン]**をクリックします。
 
     ![Sample Step](/media/dashboard/dashboard-session-sso-signin.png)
 
@@ -102,9 +102,9 @@ TiDB Dashboardに SSO が設定されると、次の手順に従って SSO 経�
 
 1.  Okta 管理サイトにアクセスします。
 
-2.  左側のサイドバーから**「アプリケーション」** &gt; **「アプリケーション」に**移動します。
+2.  左側のサイドバーから**アプリケーション** &gt; **アプリケーション**に移動します。
 
-3.  **「アプリ統合の作成」を**クリックします。
+3.  **アプリ統合の作成**をクリックします。
 
     ![Sample Step](/media/dashboard/dashboard-session-sso-okta-1.png)
 
@@ -112,11 +112,11 @@ TiDB Dashboardに SSO が設定されると、次の手順に従って SSO 経�
 
 5.  **アプリケーションの種類**で**シングルページ アプリケーション**を選択します。
 
-6.  **「次へ」**ボタンをクリックします。
+6.  **次へ**ボタンをクリックします。
 
     ![Sample Step](/media/dashboard/dashboard-session-sso-okta-2.png)
 
-7.  **サインイン リダイレクト URI を**次のように入力します。
+7.  **サインイン リダイレクト URI**を次のように入力します。
 
     ```
     http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
@@ -124,7 +124,7 @@ TiDB Dashboardに SSO が設定されると、次の手順に従って SSO 経�
 
     `DASHBOARD_IP:PORT` 、ブラウザで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
 
-8.  **サインアウトリダイレクト URI を**次のように入力します。
+8.  **サインアウトリダイレクト URI**を次のように入力します。
 
     ```
     http://DASHBOARD_IP:PORT/dashboard/
@@ -162,13 +162,13 @@ Oktaと同様に、 [オーソ0](https://auth0.com/)もOIDC SSOアイデンテ�
 
 1.  Auth0 管理サイトにアクセスします。
 
-2.  左側のサイドバーで**「アプリケーション」** &gt; **「アプリケーション」**に移動します。
+2.  左側のサイドバーで**アプリケーション** &gt; **アプリケーション**に移動します。
 
-3.  **「アプリ統合の作成」を**クリックします。
+3.  **アプリ統合の作成**をクリックします。
 
     ![Create Application](/media/dashboard/dashboard-session-sso-auth0-create-app.png)
 
-    ポップアップダイアログで、**名前**を入力します（例：「TiDB Dashboard」）。**アプリケーションの種類を選択**で**「シングルページWebアプリケーション」を**選択します。 **「作成」**をクリックします。
+    ポップアップダイアログで、**名前**を入力します（例：「TiDB Dashboard」）。**アプリケーションの種類を選択**で**シングルページWebアプリケーション**を選択します。 **作成**をクリックします。
 
 4.  **[設定]**をクリックします。
 
@@ -192,7 +192,7 @@ Oktaと同様に、 [オーソ0](https://auth0.com/)もOIDC SSOアイデンテ�
 
     ![Settings](/media/dashboard/dashboard-session-sso-auth0-settings-2.png)
 
-7.  その他の設定はデフォルト値のままにして、 **「変更を保存」**をクリックします。
+7.  その他の設定はデフォルト値のままにして、 **変更を保存**をクリックします。
 
 ### ステップ2: OIDC情報を取得し、TiDB Dashboardに入力します {#step-2-obtain-oidc-information-and-fill-in-tidb-dashboard}
 
@@ -212,7 +212,7 @@ Oktaと同様に、 [オーソ0](https://auth0.com/)もOIDC SSOアイデンテ�
 
 1.  Casdoor 管理サイトをデプロイてアクセスします。
 
-2.  上部のサイドバーの**「アプリケーション」**から移動します。
+2.  上部のサイドバーの**アプリケーション**から移動します。
 
 3.  **アプリケーション - 追加を**クリックします![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-1.png)
 
@@ -228,7 +228,7 @@ Oktaと同様に、 [オーソ0](https://auth0.com/)もOIDC SSOアイデンテ�
 
     ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-2.png)
 
-6.  その他の設定はデフォルト値のままにして、 **「保存して終了」**をクリックします。
+6.  その他の設定はデフォルト値のままにして、 **保存して終了**をクリックします。
 
 7.  ページに表示されている**クライアント ID**を保存します。
 

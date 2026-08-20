@@ -110,7 +110,7 @@ TiKV のノード数、vCPU と RAM、ストレージを構成できます。
 
 ### TiKVノード数 {#tikv-node-count}
 
-TiKV ノードの数は**少なくとも 1 セット (3 つの異なる利用可能ゾーン内の 3 つのノード) で**ある必要があります。
+TiKV ノードの数は**少なくとも 1 セット (3 つの異なる利用可能ゾーン内の 3 つのノード)**である必要があります。
 
 TiDB Cloudは、耐久性と高可用性を実現するために、選択したリージョン内のすべてのアベイラビリティゾーン（少なくとも3つ）にTiKVノードを均等にデプロイします。典型的な3レプリカ構成では、データはすべてのアベイラビリティゾーンのTiKVノードに均等に分散され、各TiKVノードのディスクに永続化されます。
 
@@ -118,7 +118,7 @@ TiDB Cloudは、耐久性と高可用性を実現するために、選択した�
 >
 > TiDB クラスターをスケールすると、3 つのアベイラビリティゾーンのノードが同時に増減します。ニーズに応じて TiDB クラスターをスケールインまたはスケールアウトする方法については、 [TiDBクラスタのスケール](/tidb-cloud/scale-tidb-cluster.md)を参照してください。
 
-TiKVは主にデータストレージに使用されますが、TiKVノードのパフォーマンスはワークロードによって異なります。そのため、TiKVノードの数を計画する際には、 [**データ量**](#estimate-tikv-node-count-according-to-data-volume)と[期待されるパフォーマンス](#estimate-tikv-node-count-according-to-expected-performance)両方に基づいて見積もり、そのうち大きい方の見積もりを推奨ノード数とする必要があります。
+TiKVは主にデータストレージに使用されますが、TiKVノードのパフォーマンスはワークロードによって異なります。そのため、TiKVノードの数を計画する際には、 [**データ量**](#estimate-tikv-node-count-according-to-data-volume)と[期待されるパフォーマンス](#estimate-tikv-node-count-according-to-expected-performance)の両方に基づいて見積もり、そのうち大きい方の見積もりを推奨ノード数とする必要があります。
 
 #### データ量に応じて TiKV ノード数を推定する {#estimate-tikv-node-count-according-to-data-volume}
 
@@ -211,7 +211,7 @@ Standardストレージタイプは、AWS でホストされ、TiDB バージョ
 
 #### PerformanceストレージとPlusストレージ {#performance-and-plus-storage}
 
-PerformanceストレージとPlusストレージは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、これらの2つのストレージタイプは、AWSにデプロイされたクラスターに対してのみ、リクエストに応じて利用可能です。PerformanceストレージまたはPlusストレージをリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **Support Tickets**」をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、「**説明」**フィールドに「TiKVストレージタイプを申請」と入力して、 **「送信」**をクリックします。
+PerformanceストレージとPlusストレージは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、これらの2つのストレージタイプは、AWSにデプロイされたクラスターに対してのみ、リクエストに応じて利用可能です。PerformanceストレージまたはPlusストレージをリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**？**をクリックし、 **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **説明**フィールドに「TiKVストレージタイプを申請」と入力して、 **送信**をクリックします。
 
 ## サイズTiFlash {#size-tiflash}
 
@@ -269,4 +269,4 @@ Basicストレージは、パフォーマンスとコスト効率のバランス
 
 #### Plusストレージ {#plus-storage}
 
-Plusストレージは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、このストレージタイプは、AWSにデプロイされたクラスターに対してのみ、リクエストに応じて利用可能です。リクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **「説明」**フィールドに「 TiFlashストレージタイプを申請」と入力して、 **「送信」を**クリックしてください。
+Plusストレージは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、このストレージタイプは、AWSにデプロイされたクラスターに対してのみ、リクエストに応じて利用可能です。リクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**？**をクリックし、 **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **説明**フィールドに「 TiFlashストレージタイプを申請」と入力して、 **送信**をクリックしてください。

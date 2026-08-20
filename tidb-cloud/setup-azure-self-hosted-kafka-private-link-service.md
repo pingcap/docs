@@ -35,7 +35,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 3.  [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターから Kafka デプロイメント情報を取得します。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com)で[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
-    2.  左側のナビゲーション ペインで、 **[データ]** &gt; **[Changefeed] を**クリックします。
+    2.  左側のナビゲーション ペインで、 **[データ]** &gt; **[Changefeed]**をクリックします。
     3.  **Changefeed**ページで、右上隅の**Create Changefeed**をクリックし、次の情報を入力します。
         1.  **宛先**で、 **Kafka**を選択します。
         2.  **Connectivity Method**で**Private Link**を選択します。
@@ -81,9 +81,9 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 
         デフォルトでは`AzureBastionSubnet`が作成されます。
 
-5.  情報を確認するには、 **「確認 + 作成」**をクリックします。
+5.  情報を確認するには、 **確認 + 作成**をクリックします。
 
-6.  **[作成]を**クリックします。
+6.  **[作成]**をクリックします。
 
 #### 2. Kafkaブローカーを設定する {#2-set-up-kafka-brokers}
 
@@ -94,7 +94,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     -   **仮想マシン名**: `broker-node`
     -   **Availability options**: `Availability zone`
     -   **Zone options**: `Self-selected zone`
-    -   `Zone 3` `Zone 2`**Availability zone**: `Zone 1`
+    -   **Availability zone**: `Zone 1` 、 `Zone 2` 、 `Zone 3`
     -   **画像**： `Ubuntu Server 24.04 LTS - x64 Gen2`
     -   **VM architecture:** `x64`
     -   **サイズ**: `Standard_D2s_v3`
@@ -112,8 +112,8 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     -   **Public inbound ports**: `Allow selected ports`
     -   受信ポートを選択: `SSH (22)`
     -   **Load balancing options**: `None`
-4.  情報を確認するには、 **「確認 + 作成」**をクリックします。
-5.  **「作成」**をクリックします。**Generate new key pair**メッセージが表示されます。
+4.  情報を確認するには、 **確認 + 作成**をクリックします。
+5.  **作成**をクリックします。**Generate new key pair**メッセージが表示されます。
 6.  **「秘密鍵をダウンロードしてリソースを作成」をクリックして、**秘密鍵をローカルマシンにダウンロードします。仮想マシンの作成の進行状況を確認できます。
 
 **2.2. Kafka ランタイムバイナリの準備**
@@ -127,9 +127,9 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     -   **Authentication Type**: `SSH Private Key from Local File`
     -   **ユーザー名**: `azureuser`
     -   **Local File**: 以前にダウンロードした秘密鍵ファイルを選択します
-    -   **「新しいブラウザタブで開く」**オプションを選択します
+    -   **新しいブラウザタブで開く**オプションを選択します
 
-3.  ブローカーノードの各ページで**「接続」**をクリックすると、Linuxターミナルで新しいブラウザタブが開きます。3つのブローカーノードごとに、Linuxターミナルで3つのブラウザタブを開く必要があります。
+3.  ブローカーノードの各ページで**接続**をクリックすると、Linuxターミナルで新しいブラウザタブが開きます。3つのブローカーノードごとに、Linuxターミナルで3つのブラウザタブを開く必要があります。
 
 4.  各 Linux ターミナルで次のコマンドを実行して、各ブローカー ノードにバイナリをダウンロードします。
 
@@ -496,7 +496,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 6.  **Next : Outbound rule**をクリックし、 **Next : Tags >**をクリックしてから、 **[次へ: 確認と作成]**をクリックして情報を確認します。
 
-7.  **[作成]を**クリックします。
+7.  **[作成]**をクリックします。
 
 ### 2. プライベートリンクサービスを設定する {#2-set-up-private-link-service}
 
@@ -515,9 +515,9 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
     -   **表示**については、 **Restricted by subscription**または**Anyone with your alias**を選択します。
     -   **Subscription-level access and auto-approval**については、**Add subscriptions**をクリックして、 [前提条件](#prerequisites)で取得したTiDB Cloud Azure アカウントのサブスクリプションを追加します。
 
-5.  **Next : Tags >**をクリックし、 **「次へ: 確認と作成 &gt;」**をクリックして情報を確認します。
+5.  **Next : Tags >**をクリックし、 **次へ: 確認と作成 &gt;**をクリックして情報を確認します。
 
-6.  **「作成」**をクリックします。操作が完了したら、後で使用するためにプライベートリンクサービスのエイリアスを書き留めておきます。
+6.  **作成**をクリックします。操作が完了したら、後で使用するためにプライベートリンクサービスのエイリアスを書き留めておきます。
 
 ## ステップ3. TiDB Cloudから接続する {#step-3-connect-from-tidb-cloud}
 

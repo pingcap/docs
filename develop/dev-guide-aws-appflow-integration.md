@@ -41,7 +41,7 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、 [TiDB Clou
 
 ### コードを複製する {#clone-the-code}
 
-TiDB と Amazon AppFlow の[統合例のコードリポジトリ](https://github.com/pingcap-inc/tidb-appflow-integration)クローンを作成します。
+TiDB と Amazon AppFlow の[統合例のコードリポジトリ](https://github.com/pingcap-inc/tidb-appflow-integration)のクローンを作成します。
 
 ```bash
 git clone https://github.com/pingcap-inc/tidb-appflow-integration
@@ -87,7 +87,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 ### Lambdaを使用してコネクタを登録します {#use-lambda-to-register-a-connector}
 
-1.  [AWS マネジメントコンソール](https://console.aws.amazon.com)コンソールで、 [Amazon AppFlow &gt; コネクタ](https://console.aws.amazon.com/appflow/home#/gallery)クリックし、 **[新しいコネクタの登録] を**クリックします。
+1.  [AWS マネジメントコンソール](https://console.aws.amazon.com)で、 [Amazon AppFlow &gt; コネクタ](https://console.aws.amazon.com/appflow/home#/gallery)に移動し、 **[新しいコネクタの登録]**をクリックします。
 
     ![register connector](/media/develop/aws-appflow-step-register-connector.png)
 
@@ -95,17 +95,17 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
     ![register connector dialog](/media/develop/aws-appflow-step-register-connector-dialog.png)
 
-3.  **「登録」**をクリックします。すると、TiDBコネクタが正常に登録されます。
+3.  **登録**をクリックします。すると、TiDBコネクタが正常に登録されます。
 
 ## ステップ2. フローを作成する {#step-2-create-a-flow}
 
-[Amazon AppFlow &gt; フロー](https://console.aws.amazon.com/appflow/home#/list)し、 **[フローの作成] を**クリックします。
+[Amazon AppFlow &gt; フロー](https://console.aws.amazon.com/appflow/home#/list)に移動し、 **[フローの作成]**をクリックします。
 
 ![create flow](/media/develop/aws-appflow-step-create-flow.png)
 
 ### フロー名を設定します {#set-the-flow-name}
 
-フロー名を入力し、 **「次へ」**をクリックします。
+フロー名を入力し、 **次へ**をクリックします。
 
 ![name flow](/media/develop/aws-appflow-step-name-flow.png)
 
@@ -113,7 +113,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 **ソースの詳細**と**宛先の詳細**を選択してください。TiDBコネクタはどちらにも使用できます。
 
-1.  ソース名を選択してください。このドキュメントでは、例として**Salesforceを**ソースとして使用します。
+1.  ソース名を選択してください。このドキュメントでは、例として**Salesforce**をソースとして使用します。
 
     ![salesforce source](/media/develop/aws-appflow-step-salesforce-source.png)
 
@@ -121,9 +121,9 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
     ![salesforce data](/media/develop/aws-appflow-step-salesforce-data.png)
 
-2.  **「接続」**をクリックしてください。
+2.  **接続**をクリックしてください。
 
-    1.  **「Salesforceに接続」**ダイアログで、この接続の名前を指定し、 **「続行」**をクリックします。
+    1.  **Salesforceに接続**ダイアログで、この接続の名前を指定し、 **続行**をクリックします。
 
         ![connect to salesforce](/media/develop/aws-appflow-step-connect-to-salesforce.png)
 
@@ -135,11 +135,11 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     >
     > 会社がすでに Salesforce の Professional Edition を使用している場合、REST API はデフォルトでは有効になっていません。 REST API を使用するには、新しい Developer Edition の登録が必要になる場合があります。詳細については、 [Salesforceフォーラムトピック](https://developer.salesforce.com/forums/?id=906F0000000D9Y2IAK)を参照してください。
 
-3.  **「接続先の詳細」**エリアで、接続先として**TiDB-Connector**を選択します。「**接続」**ボタンが表示されます。
+3.  **接続先の詳細**エリアで、接続先として**TiDB-Connector**を選択します。「**接続」**ボタンが表示されます。
 
     ![tidb dest](/media/develop/aws-appflow-step-tidb-dest.png)
 
-4.  **「接続」**をクリックする前に、Salesforce **Account**オブジェクト用に TiDB に`sf_account`テーブルを作成する必要があります。このテーブルスキーマは[Amazon AppFlow のチュートリアル](https://docs.aws.amazon.com/appflow/latest/userguide/flow-tutorial-set-up-source.html)にあるサンプルデータとは異なることに注意してください。
+4.  **接続**をクリックする前に、Salesforce **Account**オブジェクト用に TiDB に`sf_account`テーブルを作成する必要があります。このテーブルスキーマは[Amazon AppFlow のチュートリアル](https://docs.aws.amazon.com/appflow/latest/userguide/flow-tutorial-set-up-source.html)にあるサンプルデータとは異なることに注意してください。
 
     ```sql
     CREATE TABLE `sf_account` (
@@ -167,7 +167,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
     ![complete flow](/media/develop/aws-appflow-step-complete-flow.png)
 
-8.  **エラー処理**領域で、 **「現在のフロー実行を停止する」**を選択します。**フローのトリガー**領域で、 **「オンデマンドで実行**」トリガータイプを選択します。これは、フローを手動で実行する必要があることを意味します。次に、 **「次へ」**をクリックします。
+8.  **エラー処理**領域で、 **現在のフロー実行を停止する**を選択します。**フローのトリガー**領域で、 **「オンデマンドで実行**」トリガータイプを選択します。これは、フローを手動で実行する必要があることを意味します。次に、 **次へ**をクリックします。
 
     ![complete step1](/media/develop/aws-appflow-step-complete-step1.png)
 
@@ -185,7 +185,7 @@ Salesforce の**Account**オブジェクトのフィールドを TiDB の`sf_acc
     +----+------+------+---------------+--------+----------+
     ```
 
--   マッピングルールを設定するには、左側でソースフィールド名を選択し、右側で宛先フィールド名を選択します。次に、 **「フィールドのマッピング」**をクリックすると、ルールが設定されます。
+-   マッピングルールを設定するには、左側でソースフィールド名を選択し、右側で宛先フィールド名を選択します。次に、 **フィールドのマッピング**をクリックすると、ルールが設定されます。
 
     ![add mapping rule](/media/develop/aws-appflow-step-add-mapping-rule.png)
 
@@ -204,19 +204,19 @@ Salesforce の**Account**オブジェクトのフィールドを TiDB の`sf_acc
 
 ### （オプション）フィルターを設定する {#optional-set-filters}
 
-データフィールドにフィルターを追加したい場合は、ここで設定できます。そうでない場合は、この手順をスキップして**「次へ」**をクリックしてください。
+データフィールドにフィルターを追加したい場合は、ここで設定できます。そうでない場合は、この手順をスキップして**次へ**をクリックしてください。
 
 ![filters](/media/develop/aws-appflow-step-filters.png)
 
 ### フローを確認して作成する {#confirm-and-create-the-flow}
 
-作成するフローの情報を確認してください。問題がなければ、 **「フローを作成」を**クリックします。
+作成するフローの情報を確認してください。問題がなければ、 **フローを作成**をクリックします。
 
 ![review](/media/develop/aws-appflow-step-review.png)
 
 ## ステップ3. フローを実行する {#step-3-run-the-flow}
 
-新しく作成したフローのページで、右上隅にある**「フローを実行」**をクリックします。
+新しく作成したフローのページで、右上隅にある**フローを実行**をクリックします。
 
 ![run flow](/media/develop/aws-appflow-step-run-flow.png)
 

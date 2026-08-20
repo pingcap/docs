@@ -13,7 +13,7 @@ TiDB バージョンが低すぎる場合、 TiDB Cloud は定期的に均一に
 
 ## アップグレードするにはサポートにお問い合わせください {#contact-support-to-upgrade}
 
-アップグレードリクエストを送信するには、手順[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)に従ってサポートチームにお問い合わせください。 **「説明」**欄に以下の情報をご記入ください。
+アップグレードリクエストを送信するには、手順[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)に従ってサポートチームにお問い合わせください。 **説明**欄に以下の情報をご記入ください。
 
 <CustomContent language="en,zh">
 

@@ -16,13 +16,13 @@ aliases: ['/ja/tidbcloud/connected-care-announcement']
 
 Connected Care サービスは、最新のコミュニケーション ツール、プロアクティブなサポート、高度な AI 機能を通じてTiDB Cloudとの接続を強化し、シームレスで顧客中心のエクスペリエンスを実現するように設計されています。
 
-Connected Care サービスには、 **Basic** 、 **Developer** (従来の**Standard**プランに相当)、 **Enterprise** 、 **Premium の**4 つのサポート プランがあります。
+Connected Care サービスには、 **Basic** 、 **Developer** (従来の**Standard**プランに相当)、 **Enterprise** 、 **Premium**の4 つのサポート プランがあります。
 
 > **Note**
 >
-> **Basic** 、 **Enterprise** 、および**Premium の**サポート プランでは、従来のプランと同じプラン名が使用されていますが、サービス コミットメントが異なる異なるプランを指します。
+> **Basic** 、 **Enterprise** 、および**Premium**のサポート プランでは、従来のプランと同じプラン名が使用されていますが、サービス コミットメントが異なるプランを指します。
 
-以下の表は、Connected Careサービスの各サポートプランの概要を示しています。詳細については、 [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)ご覧ください。
+以下の表は、Connected Careサービスの各サポートプランの概要を示しています。詳細については、 [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)をご覧ください。
 
 | サポートプラン                                                                                                                                           | Basic | Developer | Enterprise | Premium                 |
 | :------------------------------------------------------------------------------------------------------------------------------------------------ | :--------------- | :--------- | :--------- | :-------------------- |

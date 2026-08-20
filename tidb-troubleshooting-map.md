@@ -235,7 +235,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 ### 4.3 クライアントが`server is busy`と報告するエラー {#43-the-client-reports-the-server-is-busy-error}
 
-ビジー状態の具体的な原因を確認するには、モニター**Grafana** -&gt; **TiKV** -&gt; **errors を**確認してください。 `server is busy` 、TiKV のフロー制御メカニズムが原因で発生しており、TiKV が現在過負荷状態にあるため後で再試行することを`tidb/ti-client`に通知します。
+ビジー状態の具体的な原因を確認するには、モニター**Grafana** -&gt; **TiKV** -&gt; **errors**を確認してください。 `server is busy`は、TiKV のフロー制御メカニズムが原因で発生しており、TiKV が現在過負荷状態にあるため後で再試行することを`tidb/ti-client`に通知します。
 
 -   4.3.1 TiKV RocksDB は`write stall`を検出します。
 
@@ -352,7 +352,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 -   5.2.1 PD スイッチLeader。
 
-    -   原因1：ディスク。PDノードが配置されているディスクのI/O負荷が最大になっています。PDがI/O負荷の高い他のコンポーネントと一緒にデプロイされているかどうか、およびディスクの状態を調査してください。Grafana**の**「**ディスクパフォ​​ーマンス**」→ **「レイテンシー**/**負荷」**でモニターメトリックを確認することで原因を特定できます。必要に応じて、FIOツールを使用してディスクのチェックを実行することもできます。中国語の[ケース292](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case292.md)を参照してください。
+    -   原因1：ディスク。PDノードが配置されているディスクのI/O負荷が最大になっています。PDがI/O負荷の高い他のコンポーネントと一緒にデプロイされているかどうか、およびディスクの状態を調査してください。Grafana**の**「**ディスクパフォ​​ーマンス**」→ **レイテンシー**/**負荷**でモニターメトリックを確認することで原因を特定できます。必要に応じて、FIOツールを使用してディスクのチェックを実行することもできます。中国語の[ケース292](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case292.md)を参照してください。
 
     -   原因 2: ネットワーク。PD ログに`lost the TCP streaming connection`が表示されます。PD ノード間のネットワークに問題がないか確認し、モニター**Grafana** -&gt; **PD** -&gt; **etcd**で`round trip`を表示して原因を検証する必要があります。中国語の[ケース177](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case177.md)を参照してください。
 

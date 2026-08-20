@@ -64,7 +64,7 @@ TiKV v5.0以降、すべての読み取りリクエストはデフォルトで�
 
     -   StoreWriterスレッドプールのサイズが0の場合、すべての書き込みリクエストはRaftstoreスレッドによって`fsync`としてRocksDBに書き込まれます。この場合、以下の方法でパフォーマンスをチューニングすることをお勧めします。
 
-        -   Raftstoreスレッド全体の CPU 使用率を 60% 未満に保ちます。Raftstoreスレッド数が 2 の場合、Grafana 上の**TiKV-Details** 、 **Thread CPU** 、 **Raft store CPU を**120% 未満に保ちます。I/O リクエストにより、 Raftstoreスレッドの CPU 使用率は理論上は常に 100% 未満になります。
+        -   Raftstoreスレッド全体の CPU 使用率を 60% 未満に保ちます。Raftstoreスレッド数が 2 の場合、Grafana 上の**TiKV-Details** 、 **Thread CPU** 、 **Raft store CPU**を120% 未満に保ちます。I/O リクエストにより、 Raftstoreスレッドの CPU 使用率は理論上は常に 100% 未満になります。
         -   書き込みパフォーマンスを向上させるために、 Raftstoreスレッド プールのサイズを慎重に検討せずに増やさないでください。そうすると、ディスクの負荷が増加し、パフォーマンスが低下する可能性があります。
 
     -   StoreWriterスレッドプールのサイズが0でない場合、すべての書き込みリクエストはStoreWriterスレッドによって`fsync`としてRocksDBに書き込まれます。この場合、以下の方法でパフォーマンスをチューニングすることをお勧めします。
