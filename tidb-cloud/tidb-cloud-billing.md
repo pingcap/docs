@@ -108,48 +108,24 @@ TiDB Cloud Lake の料金は、ウェアハウス、ストレージ、クラウ�
 > -   月額請求額の合計は、小数点以下第2位で四捨五入されます。
 > -   日ごとの利用明細に記載されている合計金額は、小数点以下第6位まで正確です。
 
-### 行ベースのストレージ
+ストレージに関連する請求の説明は次のとおりです。
 
-TiDB テーブルはデフォルトで行ベースのストレージを使用し、データは **TiKV** に保存されます。
+- **Row-based storage**: TiDB テーブルはデフォルトで行ベースのストレージを使用し、データは **TiKV** に保存されます。 <!--**Use case:** Core online transactional processing (OLTP) workloads that require low-latency reads and writes.-->
 
-<!--**Use case:** 低レイテンシーの読み取りと書き込みを必要とする中核的なオンライン トランザクション処理 (OLTP) ワークロード。-->
+- **Row-based storage with IA**: Infrequent Access (IA) を使用する行ベースのストレージでは、データは **外部オブジェクトストレージ** に保存され、アクセス頻度は低いもののオンラインクエリで利用可能である必要があるデータ向けに設計されています。 <!--**Use case:** Historical or archival data that is accessed infrequently but still needs to remain queryable while reducing storage costs.-->
 
-### IA を使用した行ベースのストレージ
+    > **Note:**
+    >
+    > Infrequent Access は現在 {{{ .essential }}} 向けのプライベートプレビューであり、リクエストがあった場合にのみ利用できます。
 
-Infrequent Access (IA) を使用した行ベースのストレージでは、データは **リモートオブジェクトストレージ** に保存されます。次の SQL ステートメントを使用して、テーブルの **Storage Class** を `IA` に設定できます。
+- **Columnar storage**: カラム型ストレージは **TiFlash** エンジンによって提供されます。 <!--**Use case:** Online analytical processing (OLAP) workloads that benefit from real-time columnar acceleration without requiring additional ETL.-->
 
-```sql
-ALTER TABLE t1 STORAGE_CLASS='IA';
-```
+- **Dual-layer encryption**: 行ベースのストレージとカラム型ストレージはどちらもデュアルレイヤー暗号化をサポートしています。このメカニズムは、2 つの独立した暗号化レイヤーでデータを保護し、1 つのレイヤーが侵害された場合でもデータが保護された状態を維持できるようにします。
 
-> **Warning:**
->
-> Infrequent Access は現在 **実験的** な機能であり、一部のリージョンでのみ利用できます。現在は {{{ .essential }}} でのみサポートされています。
+    - Storage-layer encryption: 基盤となるクラウドプロバイダーは、ネイティブのストレージ暗号化メカニズムを使用して、保存中のすべてのデータを暗号化します。
+    - Database-layer encryption: クラウドプロバイダーの暗号化に加えて、TiDB Cloud は顧客管理暗号化キー (CMEK) またはエスクロー鍵のいずれかを使用して、自動的に第 2 の暗号化レイヤーを適用します。
 
-<!--**Use case:** アクセス頻度は低いものの、ストレージコストを削減しながら引き続きクエリ可能な状態を維持する必要がある履歴データまたはアーカイブデータ。-->
-
-> **Note:**
->
-> Infrequent Access は、アクセス頻度は低いものの、オンラインクエリで引き続き利用可能である必要があるデータ向けに設計されています。
-
-### カラム型ストレージ
-
-カラム型ストレージは **TiFlash** エンジンによって提供されます。テーブルでカラム型ストレージを有効にするには、次の SQL ステートメントを使用して TiFlash レプリカを追加します。
-
-```sql
-ALTER TABLE table_name SET TIFLASH REPLICA n;
-```
-
-<!--**Use case:** 追加の ETL を必要とせず、リアルタイムのカラム型高速化の恩恵を受けるオンライン分析処理 (OLAP) ワークロード。-->
-
-### 二重レイヤー暗号化
-
-**row-based storage** と **columnar storage** はどちらも二重レイヤー暗号化をサポートしています。このメカニズムは 2 つの独立した暗号化レイヤーでデータを保護し、1 つのレイヤーが侵害された場合でもデータが保護された状態を維持できるようにします。
-
-- **インフラストラクチャレベルの暗号化:** 基盤となるクラウドプロバイダーは、ネイティブのストレージ暗号化メカニズムを使用して、保存中のすべてのデータを暗号化します。
-- **TiDB Cloud レベルの暗号化:** クラウドプロバイダーの暗号化に加えて、TiDB Cloud は顧客管理暗号化キー (CMEK) またはエスクローキーを使用して、自動的に第 2 の暗号化レイヤーを適用します。
-
-<!--**Use case:** 金融サービス、政府、医療業界など、厳格なセキュリティおよびコンプライアンス要件があるワークロード。-->
+<!--**Use case:** Workloads with strict security and compliance requirements, such as those in the financial services, government, and healthcare industries.-->
 
 ## コストエクスプローラー {#cost-explorer}
 

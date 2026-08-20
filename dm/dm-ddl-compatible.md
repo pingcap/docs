@@ -31,4 +31,4 @@ DMが悲観的モードまたは楽観的モードでテーブルをマージお
 
 ## オンラインDDL {#online-ddl}
 
-オンラインDDL機能は、DDLイベントを特別な方法で処理します。詳細については、 [GH-ost/PT-osc を使用するデータベースからの移行](/dm/feature-online-ddl.md)を参照してください。
+オンラインDDL機能は、DDLイベントを特別な方法で処理します。詳細については、 [gh-ost/pt-osc を使用するデータベースからの移行](/dm/feature-online-ddl.md)を参照してください。
