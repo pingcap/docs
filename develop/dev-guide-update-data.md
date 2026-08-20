@@ -8,8 +8,8 @@ aliases: ['/ja/tidb/stable/dev-guide-update-data/','/ja/tidb/dev/dev-guide-updat
 
 このドキュメントでは、さまざまなプログラミング言語を使用して、以下のSQL文でTiDBのデータを更新する方法について説明します。
 
--   [アップデート](/sql-statements/sql-statement-update.md): 指定されたテーブル内のデータを変更するために使用されます。
--   キー[重複キー更新時に挿入](/sql-statements/sql-statement-insert.md): データの挿入、および主キーまたは一意キーの競合が発生した場合のデータの更新に使用します。複数の一意キー（主キーを含む）がある場合は、このステートメントの使用は**推奨されません**。これは、このステートメントが一意キー（主キーを含む）の競合を検出するとすぐにデータを更新するためです。複数の行で競合が発生した場合、更新されるのは1行のみです。
+-   [UPDATE](/sql-statements/sql-statement-update.md): 指定されたテーブル内のデータを変更するために使用されます。
+-   [INSERT ON DUPLICATE KEY UPDATE](/sql-statements/sql-statement-insert.md): データの挿入、および主キーまたは一意キーの競合が発生した場合のデータの更新に使用します。複数の一意キー（主キーを含む）がある場合は、このステートメントの使用は**推奨されません**。これは、このステートメントが一意キー（主キーを含む）の競合を検出するとすぐにデータを更新するためです。複数の行で競合が発生した場合、更新されるのは1行のみです。
 
 ## 始める前に {#before-you-start}
 
@@ -174,7 +174,7 @@ ALTER TABLE `bookshop`.`ratings` ADD COLUMN `ten_point` BOOL NOT NULL DEFAULT FA
 
 > **Note:**
 >
-> この一括更新アプリケーションは、 **DDL**ステートメントを使用してデータテーブルのスキーマを変更します。TiDB のすべての DDL 変更操作はオンラインで実行されます。詳細については、[列を追加](/sql-statements/sql-statement-add-column.md)を参照してください。
+> この一括更新アプリケーションは、 **DDL**ステートメントを使用してデータテーブルのスキーマを変更します。TiDB のすべての DDL 変更操作はオンラインで実行されます。詳細については、[ADD COLUMN](/sql-statements/sql-statement-add-column.md)を参照してください。
 
 <SimpleTab groupId="language">
 <div label="Golang" value="golang">

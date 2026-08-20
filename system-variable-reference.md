@@ -454,8 +454,8 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [AUTO_RANDOM](/auto-random.md)
 -   [mysql2でTiDBに接続する](/develop/dev-guide-sample-application-ruby-mysql2.md)
--   [情報機能](/functions-and-operators/information-functions.md)
--   [ショービルド](/sql-statements/sql-statement-show-builtins.md)
+-   [情報関数](/functions-and-operators/information-functions.md)
+-   [SHOW BUILTINS](/sql-statements/sql-statement-show-builtins.md)
 -   [SQL プリペアド実行プランキャッシュ](/sql-prepared-plan-cache.md)
 -   [システム変数](/system-variables.md#last_insert_id)
 -   [TiDB 7.2.0 リリースノート](/releases/release-7.2.0.md)
@@ -544,7 +544,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [準備する](/sql-statements/sql-statement-prepare.md)
+-   [PREPARE](/sql-statements/sql-statement-prepare.md)
 -   [システム変数](/system-variables.md#max_prepared_stmt_count)
 -   [TiDB OOM の問題のトラブルシューティング](/troubleshoot-tidb-oom.md)
 -   [TiDB 6.5.2 リリースノート](/releases/release-6.5.2.md)
@@ -674,8 +674,8 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [パーティショニング](/partitioned-table.md)
 -   [精密計算](/functions-and-operators/precision-math.md)
 -   [権限管理](/privilege-management.md)
--   [エラーを表示](/sql-statements/sql-statement-show-errors.md)
--   [警告を表示](/sql-statements/sql-statement-show-warnings.md)
+-   [SHOW ERRORS](/sql-statements/sql-statement-show-errors.md)
+-   [SHOW WARNINGS](/sql-statements/sql-statement-show-warnings.md)
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
 -   [SQLモード](/sql-mode.md)
 -   [スキーマオブジェクト名](/schema-object-names.md)
@@ -787,7 +787,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
+-   [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 -   [システム変数](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 -   [TiDBの機能](/basic-features.md)
@@ -918,7 +918,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [SQLチューニングの実践ガイド](/sql-tuning-best-practice.md)
 -   [統計入門](/statistics.md)
--   [統計情報を表示_健康](/sql-statements/sql-statement-show-stats-healthy.md)
+-   [SHOW STATS_HEALTHY](/sql-statements/sql-statement-show-stats-healthy.md)
 -   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
 -   [システム変数](/system-variables.md#tidb_auto_analyze_ratio)
@@ -1081,7 +1081,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [インポート先](/sql-statements/sql-statement-import-into.md)
+-   [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
 -   [システム変数](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)
 -   [TiDBグローバルソート](/tidb-global-sort.md)
 -   [TiDB 8.1.1 リリースノート](/releases/release-8.1.1.md)
@@ -1125,7 +1125,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [制約](/constraints.md)
 -   [エラーコードとトラブルシューティング](/error-codes.md)
 -   [コンフィグレーションを動的に変更する](/dynamic-config.md)
--   [セーブポイント](/sql-statements/sql-statement-savepoint.md)
+-   [SAVEPOINT](/sql-statements/sql-statement-savepoint.md)
 -   [システム変数](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 -   [TiDB 悲観的トランザクションモード](/pessimistic-transaction.md)
@@ -1170,10 +1170,10 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
--   [管理者 SHOW DDL [ジョブ|ジョブクエリ]](/sql-statements/sql-statement-admin-show-ddl.md)
--   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
--   [インポート先](/sql-statements/sql-statement-import-into.md)
+-   [ADD INDEX](/sql-statements/sql-statement-add-index.md)
+-   [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
+-   [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
@@ -1214,10 +1214,10 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [管理者による DDL ジョブの変更](/sql-statements/sql-statement-admin-alter-ddl.md)
--   [管理者 SHOW DDL [ジョブ|ジョブクエリ]](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [ADMIN ALTER DDL JOBS](/sql-statements/sql-statement-admin-alter-ddl.md)
+-   [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
 -   [TiDB における DDL 実行のベストプラクティス](/best-practices/ddl-introduction.md)
--   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
+-   [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 -   [オンラインワークロードと`ADD INDEX`操作のインタラクションテスト](/benchmark/online-workloads-and-add-index-operations.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [性能チューニングのベストプラクティス](/develop/dev-guide-optimize-sql-best-practices.md)
@@ -1236,8 +1236,8 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [管理者による DDL ジョブの変更](/sql-statements/sql-statement-admin-alter-ddl.md)
--   [管理者 SHOW DDL [ジョブ|ジョブクエリ]](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [ADMIN ALTER DDL JOBS](/sql-statements/sql-statement-admin-alter-ddl.md)
+-   [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
 -   [システム変数](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850)
 -   [TiDB 8.5.0 リリースノート](/releases/release-8.5.0.md)
 -   [TiDB 7.5.5 リリースノート](/releases/release-7.5.5.md)
@@ -1247,7 +1247,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
+-   [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
@@ -1260,10 +1260,10 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [管理者による DDL ジョブの変更](/sql-statements/sql-statement-admin-alter-ddl.md)
--   [管理者 SHOW DDL [ジョブ|ジョブクエリ]](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [ADMIN ALTER DDL JOBS](/sql-statements/sql-statement-admin-alter-ddl.md)
+-   [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
 -   [TiDB における DDL 実行のベストプラクティス](/best-practices/ddl-introduction.md)
--   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
+-   [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 -   [オンラインワークロードと`ADD INDEX`操作のインタラクションテスト](/benchmark/online-workloads-and-add-index-operations.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [性能チューニングのベストプラクティス](/develop/dev-guide-optimize-sql-best-practices.md)
@@ -1328,7 +1328,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [バッチ処理](/batch-processing.md)
--   [データをロード](/sql-statements/sql-statement-load-data.md)
+-   [LOAD DATA](/sql-statements/sql-statement-load-data.md)
 -   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_dml_batch_size)
 -   [TiDB 7.6.0 リリースノート](/releases/release-7.6.0.md)
@@ -1424,7 +1424,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
+-   [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 -   [システム変数](/system-variables.md#tidb_enable_auto_increment_in_generated)
 -   [TiDB 5.2 リリースノート](/releases/release-5.2.0.md)
 
@@ -1516,9 +1516,9 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [管理者による DDL ジョブの変更](/sql-statements/sql-statement-admin-alter-ddl.md)
--   [管理者 SHOW DDL [ジョブ|ジョブクエリ]](/sql-statements/sql-statement-admin-show-ddl.md)
--   [インポート先](/sql-statements/sql-statement-import-into.md)
+-   [ADMIN ALTER DDL JOBS](/sql-statements/sql-statement-admin-alter-ddl.md)
+-   [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
 -   [システム変数](/system-variables.md#tidb_enable_dist_task-new-in-v710)
 -   [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)
 -   [TiDBグローバルソート](/tidb-global-sort.md)
@@ -1533,9 +1533,9 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [バックアップ](/sql-statements/sql-statement-backup.md)
+-   [BACKUP](/sql-statements/sql-statement-backup.md)
 -   [用語集](/glossary.md)
--   [インポート先](/sql-statements/sql-statement-import-into.md)
+-   [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_enable_enhanced_security)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
@@ -1771,8 +1771,8 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [情報機能](/functions-and-operators/information-functions.md)
--   [選択](/sql-statements/sql-statement-select.md)
+-   [情報関数](/functions-and-operators/information-functions.md)
+-   [SELECT](/sql-statements/sql-statement-select.md)
 -   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_enable_noop_functions-new-in-v40)
 -   [TiDB 悲観的トランザクションモード](/pessimistic-transaction.md)
@@ -1936,12 +1936,12 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [リソースグループの変更](/sql-statements/sql-statement-alter-resource-group.md)
--   [リソースグループの作成](/sql-statements/sql-statement-create-resource-group.md)
--   [リソースグループの削除](/sql-statements/sql-statement-drop-resource-group.md)
+-   [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
+-   [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
+-   [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
 -   [エラーコードとトラブルシューティング](/error-codes.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [リソースグループの設定](/sql-statements/sql-statement-set-resource-group.md)
+-   [SET RESOURCE GROUP](/sql-statements/sql-statement-set-resource-group.md)
 -   [システム変数](/system-variables.md#tidb_enable_resource_control-new-in-v660)
 -   [TiKVコンフィグレーションファイル](/tikv-configuration-file.md)
 -   [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)
@@ -2249,7 +2249,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [エラーコードとトラブルシューティング](/error-codes.md)
 -   [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)
 -   [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)
--   [フラッシュバックテーブル](/sql-statements/sql-statement-flashback-table.md)
+-   [FLASHBACK TABLE](/sql-statements/sql-statement-flashback-table.md)
 -   [ガベージコレクションのコンフィグレーション](/garbage-collection-configuration.md)
 -   [TiDBクラスタの移行とアップグレード](/tidb-upgrade-migration-guide.md)
 -   [システム変数`tidb_snapshot`を使用して履歴データを読み取る](/read-historical-data.md)
@@ -3318,8 +3318,8 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)
--   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
+-   [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
+-   [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 -   [データベーススキーマ](https://docs.pingcap.com/tidbcloud/database-schema-concepts)
 -   [システム変数](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)
 -   [TiDB 8.0.0 リリースノート](/releases/release-8.0.0.md)
@@ -3574,7 +3574,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [オプティマイザヒント](/optimizer-hints.md)
 -   [権限管理](/privilege-management.md)
--   [リソースグループの設定](/sql-statements/sql-statement-set-resource-group.md)
+-   [SET RESOURCE GROUP](/sql-statements/sql-statement-set-resource-group.md)
 -   [システム変数](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820)
 -   [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)
 -   [TiDB 8.2.0 リリースノート](/releases/release-8.2.0.md)
@@ -3667,7 +3667,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [インポート先](/sql-statements/sql-statement-import-into.md)
+-   [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [MEMORY_USAGE](/information-schema/information-schema-memory-usage.md)
 -   [MEMORY_USAGE_OPS_HISTORY](/information-schema/information-schema-memory-usage-ops-history.md)
@@ -3689,7 +3689,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [インポート先](/sql-statements/sql-statement-import-into.md)
+-   [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)
 -   [TiDB メモリ制御](/configure-memory-usage.md)
@@ -3708,7 +3708,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [管理者 SHOW DDL [ジョブ|ジョブクエリ]](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
 -   [コンフィグレーションオプション](/command-line-flags-for-tidb-configuration.md)
 -   [IMPORT INTO とTiDB Lightning](/tidb-lightning/import-into-vs-tidb-lightning.md)
 -   [システム変数](/system-variables.md#tidb_service_scope-new-in-v740)
@@ -3839,8 +3839,8 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [キャッシュされたテーブル](/cached-tables.md)
 -   [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)
--   [フラッシュテーブル](/sql-statements/sql-statement-flush-tables.md)
--   [インポート先](/sql-statements/sql-statement-import-into.md)
+-   [FLUSH TABLES](/sql-statements/sql-statement-flush-tables.md)
+-   [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
 -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
 -   [システム変数`tidb_snapshot`を使用して履歴データを読み取る](/read-historical-data.md)
 -   [Kafka にデータを複製する](/ticdc/ticdc-sink-to-kafka.md)
@@ -4366,7 +4366,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [サードパーティ製ツールとの既知の非互換性の問題](/develop/dev-guide-third-party-tools-compatibility.md)
--   [トランザクションの設定](/sql-statements/sql-statement-set-transaction.md)
+-   [SET TRANSACTION](/sql-statements/sql-statement-set-transaction.md)
 -   [システム変数](/system-variables.md#transaction_isolation)
 -   [TiDBトランザクション分離レベル](/transaction-isolation-levels.md)
 -   [TiDB 6.0.0 リリースノート](/releases/release-6.0.0-dmr.md)

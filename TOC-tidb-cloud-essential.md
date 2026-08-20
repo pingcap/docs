@@ -365,7 +365,7 @@
     - [キャスト関数と演算子](/functions-and-operators/cast-functions-and-operators.md)
     - [暗号化および圧縮機能](/functions-and-operators/encryption-and-compression-functions.md)
     - [ロック機能](/functions-and-operators/locking-functions.md)
-    - [情報機能](/functions-and-operators/information-functions.md)
+    - [情報関数](/functions-and-operators/information-functions.md)
     - JSON関数
       - [概要](/functions-and-operators/json-functions.md)
       - [JSONを作成する関数](/functions-and-operators/json-functions/json-functions-create.md)

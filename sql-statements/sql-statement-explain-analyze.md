@@ -339,5 +339,5 @@ after key/value request is processed:
 
 -   [クエリ実行計画を理解する](/explain-overview.md)
 -   [EXPLAIN](/sql-statements/sql-statement-explain.md)
--   [ANALYZE](/sql-statements/sql-statement-analyze-table.md)
+-   [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
 -   [TRACE](/sql-statements/sql-statement-trace.md)
