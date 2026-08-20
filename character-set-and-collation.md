@@ -319,7 +319,7 @@ SELECT @@character_set_database, @@collation_database;
 1 row in set (0.00 sec)
 ```
 
-`INFORMATION_SCHEMA`には次の 2つの値も表示されます。
+`INFORMATION_SCHEMA`には次の2つの値も表示されます。
 
 ```sql
 SELECT DEFAULT_CHARACTER_SET_NAME, DEFAULT_COLLATION_NAME

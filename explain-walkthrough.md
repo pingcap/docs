@@ -93,7 +93,7 @@ Query OK, 0 rows affected (10.22 sec)
 5 rows in set (0.93 sec)
 ```
 
-`ANALYZE TABLE`を実行すると、演算子`└─TableFullScan_18`推定行数が正確であり、演算子`└─Selection_19`の推定行数も大幅に近づいたことがわかります。上記の 2つのケースでは、実行計画（TiDB がこのクエリを実行するために使用する演算子セット）は変更されていませんが、統計情報が古くなっているために、最適ではないプランが頻繁に発生します。
+`ANALYZE TABLE`を実行すると、演算子`└─TableFullScan_18`推定行数が正確であり、演算子`└─Selection_19`の推定行数も大幅に近づいたことがわかります。上記の2つのケースでは、実行計画（TiDB がこのクエリを実行するために使用する演算子セット）は変更されていませんが、統計情報が古くなっているために、最適ではないプランが頻繁に発生します。
 
 `ANALYZE TABLE`に加えて、TiDB はしきい値[`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)に達した後、バックグラウンド操作として統計情報を自動的に再生成します。[`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)ステートメントを実行すると、TiDB がこのしきい値にどれだけ近いか（TiDB が統計情報をどの程度健全であると見なしているか）を確認できます。
 

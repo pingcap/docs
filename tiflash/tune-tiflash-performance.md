@@ -304,7 +304,7 @@ mysql> explain analyze select max(l_shipdate), max(l_commitdate), max(l_receiptd
 set @@tidb_max_tiflash_threads = 20;
 ```
 
-以下の例は、 `tidb_max_tiflash_threads`を再設定する前後のクエリ結果を示しています。`tidb_max_tiflash_threads`を設定する前は、単一のTiFlashインスタンスに対するリクエスト実行の同時実行数は 8 スレッドです。クラスターには合計 3つのTiFlashインスタンスがあるため、すべてのTiFlashインスタンスにおけるリクエスト実行のスレッド数の合計は 24 (8 × 3) です。`tidb_max_tiflash_threads`を`20`に設定すると、すべてのTiFlashインスタンスにおけるリクエスト実行のスレッド数の合計は 60 (20 × 3) になります。
+以下の例は、 `tidb_max_tiflash_threads`を再設定する前後のクエリ結果を示しています。`tidb_max_tiflash_threads`を設定する前は、単一のTiFlashインスタンスに対するリクエスト実行の同時実行数は 8 スレッドです。クラスターには合計3つのTiFlashインスタンスがあるため、すべてのTiFlashインスタンスにおけるリクエスト実行のスレッド数の合計は 24 (8 × 3) です。`tidb_max_tiflash_threads`を`20`に設定すると、すべてのTiFlashインスタンスにおけるリクエスト実行のスレッド数の合計は 60 (20 × 3) になります。
 
 `tidb_max_tiflash_threads`が再構成される前:
 

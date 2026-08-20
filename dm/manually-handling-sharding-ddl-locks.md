@@ -147,7 +147,7 @@ shard-ddl-lock unlock test-`shard_db`.`shard_table`
 
 ## サポートされているシナリオ {#supported-scenarios}
 
-現在、 `shard-ddl-lock unlock`コマンドは、次の 2つの異常なシナリオでのシャーディング DDL ロックの処理のみをサポートしています。
+現在、 `shard-ddl-lock unlock`コマンドは、次の2つの異常なシナリオでのシャーディング DDL ロックの処理のみをサポートしています。
 
 ### シナリオ1: MySQLソースの一部が削除される {#scenario-1-some-mysql-sources-are-removed}
 

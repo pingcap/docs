@@ -9,7 +9,7 @@ TiDB DashboardのKey Visualizerページは、TiDBの使用状況を分析し、
 
 ## Key Visualizerページにアクセスする {#access-key-visualizer-page}
 
-Key Visualizer ページにアクセスするには、次の 2つの方法のいずれかを使用できます。
+Key Visualizer ページにアクセスするには、次の2つの方法のいずれかを使用できます。
 
 -   TiDB Dashboardにログインしたら、左側のナビゲーション メニューで**Key Visualizer**をクリックします。
 

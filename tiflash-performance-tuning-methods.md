@@ -9,7 +9,7 @@ summary: パフォーマンス概要ダッシュボードにTiFlashメトリッ�
 
 ## TiFlashクラスタのリソース利用率 {#resource-utilization-of-a-tiflash-cluster}
 
-次の 3つのメトリックを使用すると、 TiFlashクラスターのリソース使用率を簡単に取得できます。
+次の3つのメトリックを使用すると、 TiFlashクラスターのリソース使用率を簡単に取得できます。
 
 -   CPU: TiFlashインスタンスごとの CPU 使用率。
 -   メモリ: TiFlashインスタンスごとのメモリ使用量。

@@ -18,7 +18,7 @@ summary: 単一クラスターのマルチレプリカ災害復旧ソリュー�
 
 > **Note:**
 >
-> [TiKVの「リージョン」](/glossary.md#regionpeerraft-group)データの範囲を意味し、「リージョン」という用語は物理的な場所を意味します。この 2つの用語は互換性がありません。
+> [TiKVの「リージョン」](/glossary.md#regionpeerraft-group)データの範囲を意味し、「リージョン」という用語は物理的な場所を意味します。この2つの用語は互換性がありません。
 
 ## クラスターをセットアップしてレプリカを構成する {#set-up-a-cluster-and-configure-replicas}
 

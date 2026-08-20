@@ -434,7 +434,7 @@ BRを使用して Azure Blob Storage にデータをバックアップする場�
 
 ### 方法1: 暗号化スコープを使用する {#method-1-use-an-encryption-scope}
 
-バックアップ データの暗号化範囲を指定するには、次の 2つの方法のいずれかを使用できます。
+バックアップ データの暗号化範囲を指定するには、次の2つの方法のいずれかを使用できます。
 
 -   `backup`コマンドに`--azblob.encryption-scope`オプションを含め、スコープ名に設定します。
 
@@ -458,7 +458,7 @@ tiup br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>"
 
 ### 方法2: 暗号化キーを使用する {#method-2-use-an-encryption-key}
 
-バックアップ データの暗号化キーを指定するには、次の 3つの方法のいずれかを使用できます。
+バックアップ データの暗号化キーを指定するには、次の3つの方法のいずれかを使用できます。
 
 -   `backup`コマンドに`--azblob.encryption-key`オプションを含め、AES256 暗号化キーを設定します。
 

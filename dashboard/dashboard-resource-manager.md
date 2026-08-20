@@ -9,7 +9,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
 ## ページにアクセスする {#access-the-page}
 
-リソース マネージャー ページにアクセスするには、次の 2つの方法のいずれかを使用できます。
+リソース マネージャー ページにアクセスするには、次の2つの方法のいずれかを使用できます。
 
 -   TiDB Dashboardにログインしたら、左側のナビゲーション メニューで**[リソース マネージャー] を**クリックします。
 
@@ -21,7 +21,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
 ![TiDB Dashboard: Resource Manager](/media/dashboard/dashboard-resource-manager-info.png)
 
-リソース マネージャー ページには、次の 3つのセクションがあります。
+リソース マネージャー ページには、次の3つのセクションがあります。
 
 -   コンフィグレーション: このセクションには、TiDBの`RESOURCE_GROUPS`テーブルから取得したデータが表示されます。すべてのリソースグループに関する情報が含まれています。詳細については、 [`RESOURCE_GROUPS`](/information-schema/information-schema-resource-groups.md)を参照してください。
 

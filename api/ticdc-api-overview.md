@@ -7,7 +7,7 @@ summary: TiCDC の API を学習します。
 
 [TiCDC](/ticdc/ticdc-overview.md) 、TiDBから増分データを複製するために使用されるツールです。具体的には、TiCDCはTiKVの変更ログを取得し、キャプチャしたデータをソートし、行ベースの増分データを下流のデータベースにエクスポートします。
 
-TiCDC は、TiCDC クラスターのクエリと操作用に次の 2つのバージョンの API を提供します。
+TiCDC は、TiCDC クラスターのクエリと操作用に次の2つのバージョンの API を提供します。
 
 -   [TiCDC OpenAPI v1](/ticdc/ticdc-open-api.md)
 -   [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md)

@@ -27,7 +27,7 @@ TiDBトランザクションモデルは[GoogleのPercolator](https://ai.google/
 
 「ロックの解決」ステップは、セーフポイントの前のロックをクリアします。つまり、ロックの主キーがコミットされている場合は、このロックもコミットする必要があります。そうでない場合は、ロールバックする必要があります。主キーがまだロックされている場合（コミットもロールバックもされていない場合）、このトランザクションはタイムアウトと見なされ、ロールバックされます。
 
-ロックの解決ステップは、システム変数[`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50)を使用して構成できる次の 2つの方法のいずれかで実装されます。
+ロックの解決ステップは、システム変数[`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50)を使用して構成できる次の2つの方法のいずれかで実装されます。
 
 > **Warning:**
 >

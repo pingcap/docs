@@ -14,7 +14,7 @@ summary: このドキュメントでは、Google Cloud でセルフホスト型 
 3.  各 Kafka ブローカーは、 TiDB Cloud VPC 内の一意のポートにマッピングされます。
 4.  マッピングを実現するには、Kafka ブートストラップ メカニズムと Google Cloud リソースを活用します。
 
-Google Cloud でセルフホスト型 Kafka に Private Service Connect を設定するには、次の 2つの方法があります。
+Google Cloud でセルフホスト型 Kafka に Private Service Connect を設定するには、次の2つの方法があります。
 
 -   Private Service Connect（PSC）ポートマッピングメカニズムを使用します。この方法では、静的なポートブローカーマッピング設定が必要です。EXTERNALリスナーとアドバタイズリスナーのグループを追加するには、既存のKafkaクラスターを再構成する必要があります。詳細は[PSC ポート マッピングによるセルフホスト型 Kafka Private Service Connect サービスの設定](#set-up-self-hosted-kafka-private-service-connect-service-by-psc-port-mapping)を参照してください。
 

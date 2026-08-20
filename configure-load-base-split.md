@@ -42,7 +42,7 @@ Load Base Splitによって分割されたリージョンは、すぐにはマ�
 
 ロードベーススプリットはデフォルトで有効になっていますが、パラメータがかなり高い値に設定されています。この機能を無効にするには、 `split.qps-threshold`と`split.byte-threshold`十分に高い値に設定し、同時に`split.region-cpu-overload-threshold-ratio`を`0`に設定してください。
 
-パラメータを変更するには、次の 2つの方法のいずれかを実行します。
+パラメータを変更するには、次の2つの方法のいずれかを実行します。
 
 -   SQL ステートメントを使用します。
 
@@ -63,7 +63,7 @@ Load Base Splitによって分割されたリージョンは、すぐにはマ�
     curl -X POST "http://ip:status_port/config" -H "accept: application/json" -d '{"split.region-cpu-overload-threshold-ratio":"0.5"}'
     ```
 
-したがって、次の 2つの方法のいずれかで構成を表示できます。
+したがって、次の2つの方法のいずれかで構成を表示できます。
 
 -   SQL ステートメントを使用します。
 

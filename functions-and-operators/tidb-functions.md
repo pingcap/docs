@@ -398,7 +398,7 @@ SELECT TIDB_IS_DDL_OWNER();
 
 `TIDB_PARSE_TSO()`関数は、TiDB TSO タイムスタンプから物理タイムスタンプを抽出します。[TSO](/tso.md)は Time Stamp Oracle を表し、PD (Placement Driver) によってトランザクションごとに発行される単調に増加するタイムスタンプです。
 
-TSO は次の 2つの部分で構成される数値です。
+TSO は次の2つの部分で構成される数値です。
 
 -   物理的なタイムスタンプ
 -   論理的なカウンター

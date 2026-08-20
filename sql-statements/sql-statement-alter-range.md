@@ -18,7 +18,7 @@ AlterRangeStmt ::=
     'ALTER' 'RANGE' Identifier PlacementPolicyOption
 ```
 
-`ALTER RANGE` 、以下の 2つのパラメータをサポートしています。
+`ALTER RANGE` 、以下の2つのパラメータをサポートしています。
 
 -   `global` : クラスター内のすべてのデータの範囲を示します。
 -   `meta` : TiDB に格納されている内部メタデータの範囲を示します。

@@ -31,7 +31,7 @@ summary: TiProxy のコマンドライン起動フラグについて学習しま
 
 ### TiProxyコントロールをインストールする {#install-tiproxy-control}
 
-TiProxy Control は、次の 2つの方法のいずれかを使用してインストールできます。
+TiProxy Control は、次の2つの方法のいずれかを使用してインストールできます。
 
 > **Note:**
 >

@@ -7,7 +7,7 @@ summary: PingCAP Clinicは、 TiUPまたはTiDB Operatorを使用して導入さ
 
 PingCAP Clinic診断サービス（PingCAP Clinic）は、 TiUPまたはTiDB Operatorを使用して導入されたTiDBクラスタ向けにPingCAPが提供する診断サービスです。このサービスは、クラスタの問題をリモートでトラブルシューティングし、ローカルでクラスタの状態を迅速に確認するのに役立ちます。PingCAP Clinicを利用することで、TiDBクラスタのライフサイクル全体にわたる安定した運用を確保し、潜在的な問題を予測し、問題発生の可能性を低減し、クラスタの問題を迅速にトラブルシューティングして修復することができます。
 
-PingCAP Clinic は、クラスターの問題を診断するために次の 2つのコンポーネントを提供します。
+PingCAP Clinic は、クラスターの問題を診断するために次の2つのコンポーネントを提供します。
 
 -   [Diagクライアント](https://github.com/pingcap/diag) :
 

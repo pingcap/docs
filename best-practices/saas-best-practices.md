@@ -64,7 +64,7 @@ TiKV および PD に推奨されるハードウェア構成は次のとおり�
     SELECT COUNT(*) FROM information_schema.tables;
     ```
 
--   次の SQL ステートメントの実行には約 20分かかります。
+-   次の SQL ステートメントの実行には約20分かかります。
 
     ```sql
     SELECT COUNT(*) FROM information_schema.views;

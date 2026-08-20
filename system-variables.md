@@ -1860,7 +1860,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 -   この変数は、行数を推定する際のフィルタ条件における`like` 、 `rlike` 、および`regexp`関数のデフォルトの選択性を設定するために使用されます。また、この変数は、これらの関数の推定を支援するために TopN を有効にするかどうかも制御します。
 -   TiDB は統計情報を使用してフィルタ条件`like`を推定しようとします。しかし、 `like`が複雑な文字列に一致する場合、または`rlike`や`regexp`を使用する場合、TiDB は統計情報を十分に使用できないことが多く、代わりにデフォルト値`0.8`が選択率として設定され、推定が不正確になります。
 -   この変数は、前述の動作を変更するために使用されます。変数が`0`以外の値に設定されている場合、選択率は`0.8`ではなく、指定された変数の値になります。
--   変数が`0`に設定されている場合、TiDB は統計情報で TopN を使用して評価し、精度を向上させ、前述の 3つの関数を推定する際に統計情報で NULL の数を考慮します。前提条件として、 [`tidb_analyze_version`](#tidb_analyze_version-new-in-v510)が`2`に設定されているときに統計情報が収集されます。このような評価は、パフォーマンスに若干影響を与える可能性があります。
+-   変数が`0`に設定されている場合、TiDB は統計情報で TopN を使用して評価し、精度を向上させ、前述の3つの関数を推定する際に統計情報で NULL の数を考慮します。前提条件として、 [`tidb_analyze_version`](#tidb_analyze_version-new-in-v510)が`2`に設定されているときに統計情報が収集されます。このような評価は、パフォーマンスに若干影響を与える可能性があります。
 -   変数が`0.8`以外の値に設定されている場合、TiDB は`not like` 、 `not rlike` 、および`not regexp`の推定値をそれに応じて調整します。
 
 ### tidb_disable_txn_auto_retry
@@ -2052,7 +2052,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) への適用: No
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、Batch Query Region 機能を有効にするかどうかを制御します。TiDB がデータにアクセスする際、ローカルの Region キャッシュを更新するために、Region のルーティング情報を PD に問い合わせます。デフォルトでは、`GetRegion`（キーを含む Region を問い合わせる）、`GetPrevRegion`（キーに基づいて直前に隣接する Region を問い合わせる）、`GetRegionByID`（Region ID によって問い合わせる）などのポイントクエリリクエストは、それぞれ独立した unary gRPC リクエストです。Batch Query Region 機能は、これら 3種類のリクエストをバッチ化してマージします。
+- この変数は、Batch Query Region 機能を有効にするかどうかを制御します。TiDB がデータにアクセスする際、ローカルの Region キャッシュを更新するために、Region のルーティング情報を PD に問い合わせます。デフォルトでは、`GetRegion`（キーを含む Region を問い合わせる）、`GetPrevRegion`（キーに基づいて直前に隣接する Region を問い合わせる）、`GetRegionByID`（Region ID によって問い合わせる）などのポイントクエリリクエストは、それぞれ独立した unary gRPC リクエストです。Batch Query Region 機能は、これら3種類のリクエストをバッチ化してマージします。
     - この変数が `OFF` の場合、TiDB は Region 情報に対する各ポイントクエリを、独立した unary gRPC リクエストとして PD に送信します。
     - この変数が `ON` の場合、TiDB は短時間内に同時発生した Region 情報へのポイントクエリリクエストを `QueryRegion` gRPC stream を通じてバッチ化し、まとめて PD に送信します。PD はそれらを処理して結果を返します。TSO リクエストのバッチ化メカニズムと同様に、この機能により gRPC リクエスト数を大幅に削減でき、その結果、大量の Region クエリリクエストを処理する際の PD leader の CPU オーバーヘッドを低減できます。
 - この変数は、`BatchScanRegions` のような scan リクエストには影響しません。`BatchScanRegions` は複数のキー範囲に対するクエリを 1つのリクエストにマージできますが、これは独立した unary gRPC リクエストであり、`QueryRegion` のバッチ処理経路は通りません。
@@ -3795,7 +3795,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   この変数は、以下のシナリオで特定のキーをロックするかどうかを制御するために使用されます。値が`ON`に設定されている場合、これらのキーはロックされます。値が`OFF`に設定されている場合、これらのキーはロックされません。
     -   `INSERT IGNORE`および`REPLACE`ステートメントに重複するキーがあります。v6.1.6 より前は、これらのキーはロックされていませんでした。この問題は[#42121](https://github.com/pingcap/tidb/issues/42121)で修正されました。
     -   `UPDATE`ステートメント内の一意キーは、キーの値が変更されない場合にロックされます。v6.5.2 より前は、これらのキーはロックされていませんでした。この問題は[#36438](https://github.com/pingcap/tidb/issues/36438)で修正されました。
--   トランザクションの一貫性と合理性を維持するため、この値を変更することは推奨されません。TiDB のアップグレードによってこれら 2つの修正が原因で深刻なパフォーマンスの問題が発生し、ロックなしの動作が許容できる場合 (前述の問題を参照)、この変数を`OFF`に設定できます。
+-   トランザクションの一貫性と合理性を維持するため、この値を変更することは推奨されません。TiDB のアップグレードによってこれら2つの修正が原因で深刻なパフォーマンスの問題が発生し、ロックなしの動作が許容できる場合 (前述の問題を参照)、この変数を`OFF`に設定できます。
 
 ### tidb_log_file_max_days <span class="version-mark">New in v5.3.0</span>
 
@@ -4991,7 +4991,7 @@ EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 -   型: Boolean
 -   デフォルト値: `ON` 。v8.3.0 より前のバージョンでは、デフォルト値は`OFF`です。
--   オプティマイザが`Projection`演算子を TiKV コプロセッサにプッシュダウンすることを許可するかどうかを指定します。有効にすると、オプティマイザは次の 3種類の`Projection`演算子を TiKV にプッシュダウンする可能性があります。
+-   オプティマイザが`Projection`演算子を TiKV コプロセッサにプッシュダウンすることを許可するかどうかを指定します。有効にすると、オプティマイザは次の3種類の`Projection`演算子を TiKV にプッシュダウンする可能性があります。
     -   演算子のトップレベル式はすべて[JSONクエリ関数](/functions-and-operators/json-functions/json-functions-search.md)または[JSON値属性関数](/functions-and-operators/json-functions/json-functions-return.md)です。例: `SELECT JSON_EXTRACT(data, '$.name') FROM users;` 。
     -   演算子の最上位式には、JSON クエリ関数または JSON 値属性関数と、直接列読み取りが混在しています。例: `SELECT JSON_DEPTH(data), name FROM users;` 。
     -   演算子の最上位式はすべて直接列読み取りであり、出力列の数は入力列の数よりも少ないです。例: `SELECT name FROM users;` 。

@@ -70,7 +70,7 @@ MySQLでは、クエリが単一スレッドで実行されるため、結果の
 
 > `<order by clause>`が指定されていない場合、 `<cursor specification>`によって指定されたテーブルは T であり、T 内の行の順序は実装に依存します。
 
-次の 2つのクエリでは、両方の結果が正当であると見なされます。
+次の2つのクエリでは、両方の結果が正当であると見なされます。
 
 ```sql
 > select * from t;
@@ -340,7 +340,7 @@ TiDB v6.2.0以降、TiDB DDLモジュールは並列フレームワークを採�
 
 ### JDBC URL で`connectionCollation`が構成されていない場合、JDBC 接続ではどの照合順序が使用されますか? {#what-collation-is-used-in-a-jdbc-connection-when-connectioncollation-is-not-configured-in-the-jdbc-url}
 
-JDBC URL に`connectionCollation`が設定されていない場合、次の 2つのシナリオが考えられます。
+JDBC URL に`connectionCollation`が設定されていない場合、次の2つのシナリオが考えられます。
 
 **シナリオ 1** : JDBC URL に`connectionCollation`も`characterEncoding`も設定されていない
 

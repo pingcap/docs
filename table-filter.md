@@ -131,7 +131,7 @@ TOMLファイル内のテーブルフィルターは[文字列の配列](https:/
     employees.*
     *.WorkOrder
 
-次の 2つの呼び出しは同等です。
+次の2つの呼び出しは同等です。
 
 ```bash
 tiup dumpling -f '@config/filter.txt'

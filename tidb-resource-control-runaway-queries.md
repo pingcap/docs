@@ -65,7 +65,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
     CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=COOLDOWN);
     ```
 
-2.  `rg1`リソース グループを変更して、ランナウェイ クエリを終了し、次の 10分以内に、同じパターンのクエリをランナウェイ クエリとして直ちにマークします。
+2.  `rg1`リソース グループを変更して、ランナウェイ クエリを終了し、次の10分以内に、同じパターンのクエリをランナウェイ クエリとして直ちにマークします。
 
     ```sql
     ALTER RESOURCE GROUP rg1 QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=SIMILAR DURATION='10m');

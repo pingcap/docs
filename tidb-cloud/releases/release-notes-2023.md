@@ -516,7 +516,7 @@ summary: 2023年のTiDB Cloudのリリース ノートについて説明しま�
 
     新しいナビゲーションにより、機能エントリをより簡単に、より直感的に見つけられるようになりました。新しいナビゲーションを表示するには、クラスターの概要ページにアクセスしてください。
 
--   Dedicated Tierクラスターの**診断**ページの次の 2つのタブに新しいネイティブ Web インフラストラクチャをリリースします。
+-   Dedicated Tierクラスターの**診断**ページの次の2つのタブに新しいネイティブ Web インフラストラクチャをリリースします。
 
     -   [スロークエリ](/tidb-cloud/tune-performance.md#slow-query)
     -   [SQL文](/tidb-cloud/tune-performance.md#statement-analysis)
@@ -678,7 +678,7 @@ summary: 2023年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   誤検知を防ぐため、 [TiDB Cloud組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md#tidb-cloud-built-in-alert-conditions)から以下の 2つのアラートを削除します。これは、ノードの 1つで一時的なオフラインまたはメモリ不足 (OOM) が発生しても、クラスター全体の健全性に大きな影響を与えないためです。
+-   誤検知を防ぐため、 [TiDB Cloud組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md#tidb-cloud-built-in-alert-conditions)から以下の2つのアラートを削除します。これは、ノードの 1つで一時的なオフラインまたはメモリ不足 (OOM) が発生しても、クラスター全体の健全性に大きな影響を与えないためです。
 
     -   クラスター内の少なくとも 1つの TiDB ノードでメモリが発生しました。
     -   1つ以上のクラスター ノードがオフラインです。

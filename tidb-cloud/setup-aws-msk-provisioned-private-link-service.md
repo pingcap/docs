@@ -28,7 +28,7 @@ TiDB Cloud で Amazon MSK Provisioned のダウンストリームサービス用
 
 必要な availability zone にまたがる少なくとも 3つのプライベートサブネットを持つ Amazon VPC がすでにある場合は、このステップをスキップできます。
 
-1. [Amazon VPC コンソール](https://console.aws.amazon.com/vpc/)で、TiDB Cloud Premium インスタンスが稼働する各 availability zone に 1つずつ、合計 3つのプライベートサブネットを持つ [VPC を作成](https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html)します。これらのサブネットは同じ AZ に存在し、AZ 名ではなく AZ ID で一致している必要があります。
+1. [Amazon VPC コンソール](https://console.aws.amazon.com/vpc/)で、TiDB Cloud Premium インスタンスが稼働する各 availability zone に 1つずつ、合計3つのプライベートサブネットを持つ [VPC を作成](https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html)します。これらのサブネットは同じ AZ に存在し、AZ 名ではなく AZ ID で一致している必要があります。
 2. VPC ダッシュボードで、後から起動するクライアント EC2 インスタンスがプライベートネットワーク経由で MSK クラスターと通信できるように、ルートテーブルとセキュリティグループを設定します。
 3. サブネットの AZ ID を記録します。これらのサブネットは、[MSK クラスターを作成する](#step-3-create-an-amazon-msk-provisioned-cluster)際に選択します。
 
@@ -74,7 +74,7 @@ TiDB Cloud で Amazon MSK Provisioned のダウンストリームサービス用
 1. [Amazon MSK コンソール](https://console.aws.amazon.com/msk/)で、MSK クラスターの **Properties** タブに移動し、**SASL/SCRAM authentication** セクションを見つけます。
 2. [ステップ 2](#step-2-create-a-scram-secret-in-aws-secrets-manager) で作成したシークレットをクラスターに[関連付け](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html)ます。
 
-関連付けが完了したら、ACL セットアップに進む前に、認証情報が反映されるまで約 30秒待ってください。
+関連付けが完了したら、ACL セットアップに進む前に、認証情報が反映されるまで約30秒待ってください。
 
 ## ステップ 5. Kafka ACL をセットアップする {#step-5-set-up-kafka-acls}
 

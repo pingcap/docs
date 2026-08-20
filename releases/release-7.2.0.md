@@ -19,7 +19,7 @@ TiDB バージョン: 7.2.0
 
 ### パフォーマンス {#performance}
 
--   TiFlash への次の 2つの[ウィンドウ関数](/tiflash/tiflash-supported-pushdown-calculations.md)プッシュダウンをサポートします。 [#7427](https://github.com/pingcap/tiflash/issues/7427) @[xzhangxian1008](https://github.com/xzhangxian1008)
+-   TiFlash への次の2つの[ウィンドウ関数](/tiflash/tiflash-supported-pushdown-calculations.md)プッシュダウンをサポートします。 [#7427](https://github.com/pingcap/tiflash/issues/7427) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
     -   `FIRST_VALUE`
     -   `LAST_VALUE`

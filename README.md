@@ -8,7 +8,7 @@ TiDB ドキュメントへようこそ!
 
 TiDB ドキュメント内の特定のコンテンツを自由に並べ替えたり削除したりするなど、特定のシナリオのニーズに合わせて TiDB ドキュメントをローカルでカスタマイズして PDF 形式で出力する場合は、 [TiDBドキュメントPDF生成チュートリアル](/resources/tidb-pdf-generation-tutorial.md)を参照してください。
 
-現在、公式ドキュメントは次の 2つの言語をサポートしています。
+現在、公式ドキュメントは次の2つの言語をサポートしています。
 
 -   `en` : [英語のドキュメント](https://docs.pingcap.com/tidb/stable)
 -   `zh` : [中国語のドキュメント](https://docs.pingcap.com/zh/tidb/stable)

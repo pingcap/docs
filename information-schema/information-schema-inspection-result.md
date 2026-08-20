@@ -175,7 +175,7 @@ select * from information_schema.inspection_rules where type='inspection';
 
 ### `config`診断ルール {#config-diagnostic-rule}
 
-`config`診断ルールでは、 `CLUSTER_CONFIG`のシステム テーブルをクエリすることによって、次の 2つの診断ルールが実行されます。
+`config`診断ルールでは、 `CLUSTER_CONFIG`のシステム テーブルをクエリすることによって、次の2つの診断ルールが実行されます。
 
 -   同じコンポーネントの設定値が一貫しているかどうかを確認します。すべての設定項目でこの整合性チェックが実行されるわけではありません。整合性チェックの許可リストは次のとおりです。
 
@@ -240,7 +240,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
 ### `critical-error`診断ルール {#critical-error-diagnostic-rule}
 
-`critical-error`診断ルールでは、次の 2つの診断ルールが実行されます。
+`critical-error`診断ルールでは、次の2つの診断ルールが実行されます。
 
 -   メトリック スキーマ内の関連する監視システム テーブルをクエリして、クラスターに次のエラーがあるかどうかを検出します。
 

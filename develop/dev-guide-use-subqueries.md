@@ -16,7 +16,7 @@ aliases: ['/ja/tidb/stable/dev-guide-use-subqueries/','/ja/tidbcloud/dev-guide-u
 
 ## サブクエリステートメント {#subquery-statement}
 
-ほとんどの場合、サブクエリには次の 5つの種類があります。
+ほとんどの場合、サブクエリには次の5つの種類があります。
 
 -   スカラーサブクエリ (例: `SELECT (SELECT s1 FROM t2) FROM t1` )。
 -   派生テーブル (例: `SELECT t1.s1 FROM (SELECT s1 FROM t2) t1` )。

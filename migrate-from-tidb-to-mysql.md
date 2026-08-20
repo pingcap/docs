@@ -5,7 +5,7 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
 
 # TiDB から MySQL 互換データベースへのデータ移行 {#migrate-data-from-tidb-to-mysql-compatible-databases}
 
-このドキュメントでは、TiDB クラスターからAurora、MySQL、MariaDB などの MySQL 互換データベースへのデータ移行方法について説明します。プロセス全体は以下の 4つのステップで構成されます。
+このドキュメントでは、TiDB クラスターからAurora、MySQL、MariaDB などの MySQL 互換データベースへのデータ移行方法について説明します。プロセス全体は以下の4つのステップで構成されます。
 
 1.  環境を設定します。
 2.  全データを移行します。

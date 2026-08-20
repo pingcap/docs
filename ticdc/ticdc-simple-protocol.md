@@ -508,7 +508,7 @@ TiCDC SimpleプロトコルはDMLメッセージの送信時にテーブルの�
 -   各 DDL メッセージには、DDL イベントの前後のテーブルのスキーマ情報をマークするための`tableSchema`フィールドと`preTableSchema`フィールドが含まれています。
 -   各 BOOTSTRAP メッセージには、BOOTSTRAP メッセージに対応するテーブルのスキーマ情報をマークするための`tableSchema`フィールドが含まれています。
 
-消費方法を次の 2つのシナリオで紹介します。
+消費方法を次の2つのシナリオで紹介します。
 
 ### シナリオ1: コンシューマーが最初から消費を始める {#scenario-1-the-consumer-starts-consuming-from-the-beginning}
 

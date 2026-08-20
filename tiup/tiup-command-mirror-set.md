@@ -15,7 +15,7 @@ summary: tiup mirror set コマンドは、現在のミラーをローカルフ�
 tiup mirror set <mirror-addr> [flags]
 ```
 
-`<mirror-addr>`はミラー アドレスであり、次の 2つの形式があります。
+`<mirror-addr>`はミラー アドレスであり、次の2つの形式があります。
 
 -   ネットワークアドレス: `http`または`https`で始まります。例: `http://172.16.5.5:8080` 、 `https://tiup-mirrors.pingcap.com` 。
 -   ローカルファイルパス: ミラーディレクトリの絶対パス。例: `/path/to/local-tiup-mirror` 。

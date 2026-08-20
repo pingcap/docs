@@ -224,7 +224,7 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、このノ�
 
 ### サポート対象のオペレーション {#supported-operations}
 
-TiDB Cloudノードは[通常のノード](https://docs.n8n.io/workflows/nodes/#regular-nodes)として機能し、次の 5つの操作のみをサポートします。
+TiDB Cloudノードは[通常のノード](https://docs.n8n.io/workflows/nodes/#regular-nodes)として機能し、次の5つの操作のみをサポートします。
 
 -   **Create Serverless Cluster**: TiDB Cloud Starterインスタンスを作成します。
 -   **Execute SQL**：TiDBでSQL文を実行します。

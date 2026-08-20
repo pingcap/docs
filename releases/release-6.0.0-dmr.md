@@ -34,7 +34,7 @@ TiDB バージョン: 6.0.0-DMR
 
 ## リリース戦略の変更 {#release-strategy-changes}
 
-TiDB v6.0.0 以降、TiDB は次の 2種類のリリースを提供します。
+TiDB v6.0.0 以降、TiDB は次の2種類のリリースを提供します。
 
 -   長期サポートリリース
 

@@ -141,7 +141,7 @@ TiDBは、SQL処理パスとデータベース時間を継続的に測定・収�
 
 #### 1秒あたりのクエリ数、1秒あたりのコマンド数、プリペアドプランキャッシュ {#query-per-second-command-per-second-and-prepared-plan-cache}
 
-パフォーマンス概要の次の 3つのパネルを確認することで、アプリケーションのワークロード タイプ、アプリケーションが TiDB と対話する方法、アプリケーションが TiDB [プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)を最大限に活用しているかどうかを知ることができます。
+パフォーマンス概要の次の3つのパネルを確認することで、アプリケーションのワークロード タイプ、アプリケーションが TiDB と対話する方法、アプリケーションが TiDB [プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)を最大限に活用しているかどうかを知ることができます。
 
 -   QPS: Query Per Second（1秒あたりのクエリ数）の略。アプリケーションによって実行されたSQL文の数を示します。
 -   CPSタイプ別：Command Per Secondの略。コマンドはMySQLプロトコル固有のコマンドを示します。クエリ文は、クエリコマンドまたはプリペアドステートメントのいずれかによってTiDBに送信できます。
@@ -398,7 +398,7 @@ avg Query Duration = avg Get Token + avg Parse Duration + avg Compile Duration +
 
 #### KVおよびTSOリクエスト期間 {#kv-and-tso-request-duration}
 
-TiDB はフェーズ`execute`で PD および TiKV と連携します。次の図に示すように、SQL 要求を処理する際、TiDB はフェーズ`parse`および`compile`入る前に TSO を要求します。PD クライアントは呼び出し元をブロックせず、 `TSFuture`を返し、バックグラウンドで非同期的に TSO 要求を送受信します。PD クライアントは TSO 要求の処理を完了すると、 `TSFuture`を返します。 `TSFuture`の所有者は、最後の TSO を取得するために Wait メソッドを呼び出す必要があります。TiDB はフェーズ`parse`および`compile`を完了するとフェーズ`execute`に入り、このフェーズでは次の 2つの状況が発生する可能性があります。
+TiDB はフェーズ`execute`で PD および TiKV と連携します。次の図に示すように、SQL 要求を処理する際、TiDB はフェーズ`parse`および`compile`入る前に TSO を要求します。PD クライアントは呼び出し元をブロックせず、 `TSFuture`を返し、バックグラウンドで非同期的に TSO 要求を送受信します。PD クライアントは TSO 要求の処理を完了すると、 `TSFuture`を返します。 `TSFuture`の所有者は、最後の TSO を取得するために Wait メソッドを呼び出す必要があります。TiDB はフェーズ`parse`および`compile`を完了するとフェーズ`execute`に入り、このフェーズでは次の2つの状況が発生する可能性があります。
 
 -   TSO要求が完了した場合、Waitメソッドは利用可能なTSOまたはエラーを直ちに返します。
 -   TSO 要求がまだ完了していない場合、TSO が利用可能になるかエラーが表示されるまで (gRPC 要求は送信されたが結果が返されず、ネットワークレイテンシーが高くなる)、Wait メソッドはブロックされます。
@@ -410,7 +410,7 @@ TSO待機時間は`TSO WAIT`と記録され、TSO要求のネットワーク時�
 
 ![Execute](/media/performance/execute_phase.png)
 
-このセクションのインジケーターは、次の 3つのパネルに対応しています。
+このセクションのインジケーターは、次の3つのパネルに対応しています。
 
 -   平均 TiDB KV リクエスト期間: TiDB によって測定された KV リクエストの平均レイテンシー
 -   平均 TiKV GRPC 期間: TiKV での gPRC メッセージの処理にかかる平均レイテンシー

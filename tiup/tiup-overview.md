@@ -97,7 +97,7 @@ Flags:
 Use "tiup [command] --help" for more information about a command.
 ```
 
-出力は長くなりますが、次の 2つの部分だけに注目してください。
+出力は長くなりますが、次の2つの部分だけに注目してください。
 
 -   利用可能なコマンド
     -   install:コンポーネントの特定のバージョンをインストールするために使用されます

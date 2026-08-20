@@ -414,7 +414,7 @@ large-message-handle-compression = "none"
 
 `large-message-handle-compression`を設定した場合、TiCDC はメッセージを受信すると、まずメッセージサイズ制限パラメータの値と比較し、サイズ制限を超えるメッセージを圧縮します。[`sink-uri`](#configure-sink-uri-for-kafka)に`compression`も設定した場合、TiCDC は`sink-uri`設定に基づいて、送信データ要求全体をシンクレベルで再度圧縮します。
 
-前述の 2つの圧縮方法の圧縮率は次のように計算されます`compression ratio = size before compression / size after compression * 100` 。
+前述の2つの圧縮方法の圧縮率は次のように計算されます`compression ratio = size before compression / size after compression * 100` 。
 
 ### ハンドルキーのみ送信 {#send-handle-keys-only}
 

@@ -321,7 +321,7 @@ gcloud beta compute networks peerings create <your-peer-name> --project <your-pr
 
 2.  右上隅の**Connect**をクリックし、 **Connection Type**ドロップダウン リストから**VPC Peering**を選択します。
 
-    VPC ピアリング接続ステータスが**システムチェック**から**アクティブ**に変わるまで待ちます (約 5分)。
+    VPC ピアリング接続ステータスが**システムチェック**から**アクティブ**に変わるまで待ちます (約5分)。
 
 3.  **Connect With**ドロップダウンリストで、希望する接続方法を選択します。対応する接続文字列がダイアログの下部に表示されます。
 

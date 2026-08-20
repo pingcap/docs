@@ -117,7 +117,7 @@ DESC deadlocks;
 UPDATE t SET v = v + 1 WHERE id = 1 OR id = 2;
 ```
 
-トランザクションB は次の 2つのステートメントを連続して実行します。
+トランザクションB は次の2つのステートメントを連続して実行します。
 
 ```sql
 UPDATE t SET v = 4 WHERE id = 2;

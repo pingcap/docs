@@ -370,7 +370,7 @@ SELECT /*+ USE_INDEX(t1, idx1, idx2) */ * FROM t1;
 
 `FORCE_INDEX(t1_name, idx1_name [, idx2_name ...])`の使い方と効果は`USE_INDEX(t1_name, idx1_name [, idx2_name ...])`の使い方と効果と同じです。
 
-次の 4つのクエリは同じ効果があります。
+次の4つのクエリは同じ効果があります。
 
 ```sql
 SELECT /*+ USE_INDEX(t, idx1) */ * FROM t;

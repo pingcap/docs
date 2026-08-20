@@ -83,7 +83,7 @@ DMは、シャーディングDDLと呼ばれるシャーディングテーブル
 
 ### 例 {#example}
 
-次の 3つのシャード テーブルをマージして TiDB に移行します。
+次の3つのシャード テーブルをマージして TiDB に移行します。
 
 ![optimistic-ddl-fail-example-1](/media/dm/optimistic-ddl-fail-example-1.png)
 

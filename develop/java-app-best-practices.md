@@ -174,7 +174,7 @@ insert into t (a) values (11) on duplicate key update a = values(a);
 insert into t (a) values (12) on duplicate key update a = values(a);
 ```
 
-すると、書き換え要件を満たします。上記の`INSERT`文は、次の 1つの文に書き換えられます。
+すると、書き換え要件を満たします。上記の`INSERT`文は、次の1つの文に書き換えられます。
 
 ```sql
 insert into t (a) values (10), (11), (12) on duplicate key update a = values(a);
@@ -208,7 +208,7 @@ TiDBは、以下のMySQL互換のタイムアウト制御パラメータを提�
 -   `interactive_timeout` : Javaアプリケーションへの接続における対話型アイドルタイムアウトを制御します。デフォルト値は8時間です。
 -   `max_execution_time` : 接続における SQL 実行のタイムアウトを制御します。これは`SELECT`ステートメント ( `SELECT ... FOR UPDATE`を含む) にのみ有効です。デフォルト値は`0`で、接続が無限にビジー状態になることを許可します。つまり、SQL ステートメントが無限に長い時間実行されます。
 
-しかし、実際の本番環境では、アイドル状態の接続や実行時間が長すぎる SQL ステートメントは、データベースやアプリケーションに悪影響を及ぼします。アイドル状態の接続や実行時間が長すぎる SQL ステートメントを回避するには、アプリケーションの接続文字列で次の 2つのパラメータを設定できます。たとえば、 `sessionVariables=wait_timeout=3600` (1時間) と`sessionVariables=max_execution_time=300000` (5分) を設定します。
+しかし、実際の本番環境では、アイドル状態の接続や実行時間が長すぎる SQL ステートメントは、データベースやアプリケーションに悪影響を及ぼします。アイドル状態の接続や実行時間が長すぎる SQL ステートメントを回避するには、アプリケーションの接続文字列で次の2つのパラメータを設定できます。たとえば、 `sessionVariables=wait_timeout=3600` (1時間) と`sessionVariables=max_execution_time=300000` (5分) を設定します。
 
 #### 一般的なJDBC接続文字列パラメータ {#typical-jdbc-connection-string-parameters}
 

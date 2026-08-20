@@ -44,7 +44,7 @@ TiDBは、 [ステートメント`Prepare` / `Execute`](/sql-prepared-plan-cache
     SET tidb_enable_non_prepared_plan_cache = ON;
     ```
 
-3.  次の 2つのクエリを実行します。
+3.  次の2つのクエリを実行します。
 
     ```sql
     SELECT * FROM t WHERE b < 10 AND a = 1;
@@ -160,7 +160,7 @@ SHOW warnings;
     SET @@tidb_enable_non_prepared_plan_cache=ON;
     ```
 
-3.  次の 3つのクエリを実行します。
+3.  次の3つのクエリを実行します。
 
     ```sql
     SELECT * FROM t WHERE a<1;

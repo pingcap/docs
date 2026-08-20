@@ -13,7 +13,7 @@ summary: tiup mirror sign` コマンドは、 TiUPミラー内のメタデータ
 tiup mirror sign <manifest-file> [flags]
 ```
 
-`<manifest-file>`は署名するファイルのアドレスであり、次の 2つの形式があります。
+`<manifest-file>`は署名するファイルのアドレスであり、次の2つの形式があります。
 
 -   HTTPまたはHTTPSで始まるネットワークアドレス（例： `http://172.16.5.5:8080/rotate/root.json`
 -   ローカルファイルパス（相対パスまたは絶対パス）

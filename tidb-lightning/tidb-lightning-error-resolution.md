@@ -229,7 +229,7 @@ CREATE VIEW conflict_view AS
     tiup tidb-lightning -c config.toml
     ```
 
-5.  インポートされたテーブルに次の 2つの通常の行のみが含まれていることを確認します。
+5.  インポートされたテーブルに次の2つの通常の行のみが含まれていることを確認します。
 
     ```sql
     $ mysql -u root -h 127.0.0.1 -P 4000 -e 'select * from example.t'

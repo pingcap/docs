@@ -163,7 +163,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 **2.2. ブローカーノードを作成する**
 
-[EC2 リストページ](https://console.aws.amazon.com/ec2/home#Instances:)に進みます。ブローカー サブネットに、各 AZ に 1つずつ、合計 3つのブローカー ノードを作成します。
+[EC2 リストページ](https://console.aws.amazon.com/ec2/home#Instances:)に進みます。ブローカー サブネットに、各 AZ に 1つずつ、合計3つのブローカー ノードを作成します。
 
 -   サブネット`broker-usw2-az1`のブローカー 1
 

@@ -9,7 +9,7 @@ summary: パフォーマンス概要ダッシュボードに TiCDC メトリッ�
 
 ## TiCDC クラスターのリソース利用率 {#resource-utilization-of-a-ticdc-cluster}
 
-次の 3つのメトリックを使用すると、TiCDC クラスターのリソース使用率を簡単に取得できます。
+次の3つのメトリックを使用すると、TiCDC クラスターのリソース使用率を簡単に取得できます。
 
 -   CPU 使用率: TiCDC ノードごとの CPU 使用率。
 -   メモリ使用量: TiCDC ノードごとのメモリ使用量。

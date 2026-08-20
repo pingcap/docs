@@ -15,7 +15,7 @@ TiDBは、特別なクライアントやドライバーを必要とせず、標�
 
 ## 構文 {#syntax}
 
-`AS OF TIMESTAMP`句は次の 3つの方法で使用できます。
+`AS OF TIMESTAMP`句は次の3つの方法で使用できます。
 
 -   [`SELECT ... FROM ... AS OF TIMESTAMP`](/sql-statements/sql-statement-select.md)
 -   [`START TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-start-transaction.md)
