@@ -46,7 +46,7 @@ TiDB Dashboardにログインすると、デフォルトで概要ページが表
 
 ![Top SQL](/media/dashboard/dashboard-overview-top-statements.png)
 
-この領域に表示される情報は、より詳細な[SQL文ページ](/dashboard/dashboard-statement-list.md)と一致しています。 **「Top SQL文」**の見出しをクリックすると、完全なリストが表示されます。この表の列の詳細については、 [SQL文ページ](/dashboard/dashboard-statement-list.md)を参照してください。
+この領域に表示される情報は、より詳細な[SQL文ページ](/dashboard/dashboard-statement-list.md)と一致しています。 **Top SQL文**の見出しをクリックすると、完全なリストが表示されます。この表の列の詳細については、 [SQL文ページ](/dashboard/dashboard-statement-list.md)を参照してください。
 
 > **Note:**
 >
@@ -60,7 +60,7 @@ TiDB Dashboardにログインすると、デフォルトで概要ページが表
 
 デフォルトでは、実行時間が300ミリ秒を超えるSQLクエリはスロークエリとしてカウントされ、テーブルに表示されます。このしきい値は、 [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)変数または[`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold) TiDBパラメータを変更することで変更できます。
 
-この領域に表示される内容は、より詳細な[スロークエリページ](/dashboard/dashboard-slow-query.md)内容と一致しています。 **「最近のスロークエリ」**というタイトルをクリックすると、完全なリストが表示されます。この表の列の詳細については、 [スロークエリページ](/dashboard/dashboard-slow-query.md)をご覧ください。
+この領域に表示される内容は、より詳細な[スロークエリページ](/dashboard/dashboard-slow-query.md)内容と一致しています。 **最近のスロークエリ**というタイトルをクリックすると、完全なリストが表示されます。この表の列の詳細については、 [スロークエリページ](/dashboard/dashboard-slow-query.md)をご覧ください。
 
 > **Note:**
 >
@@ -91,4 +91,4 @@ TiDB Dashboardにログインすると、デフォルトで概要ページが表
 
 > **Note:**
 >
-> **「メトリックの表示**」リンクは、Grafanaノードがデプロイされているクラスターでのみ使用できます。 **「アラートの表示」**リンクは、AlertManagerノードがデプロイされているクラスターでのみ使用できます。
+> **「メトリックの表示**」リンクは、Grafanaノードがデプロイされているクラスターでのみ使用できます。 **アラートの表示**リンクは、AlertManagerノードがデプロイされているクラスターでのみ使用できます。

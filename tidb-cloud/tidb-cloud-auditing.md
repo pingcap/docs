@@ -14,7 +14,7 @@ TiDB Cloud は、実行された SQL ステートメントなど、データベ�
 > - AWS および Google Cloud でホストされるクラスターの場合: TiDB バージョンが v7.5.6 以降、または v8.5.2 以降である必要があります。
 > - Azure でホストされるクラスターの場合: TiDB バージョンが v7.5.6 以降、または v8.5.2 以降であり、クラスターが 2026 年 4 月 15 日以降に作成されている必要があります。
 >
-> その他のすべての TiDB バージョンまたはクラスター構成では、データベース監査ログはリクエストに応じて利用できます。対象外のクラスターへのアクセスをリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **「説明」**欄に「データベース監査ログの申請」と入力して、 **「送信」を**クリックしてください。
+> その他のすべての TiDB バージョンまたはクラスター構成では、データベース監査ログはリクエストに応じて利用できます。対象外のクラスターへのアクセスをリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**？**をクリックし、 **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **説明**欄に「データベース監査ログの申請」と入力して、 **「送信」を**クリックしてください。
 >
 > このドキュメントは、監査ログ機能のパブリックプレビュー版にのみ適用されます。以前のバージョンのデータベース監査ログを使用している場合は、 [TiDB Cloud Database Audit Logging (Legacy)](/tidb-cloud/tidb-cloud-auditing-legacy.md)を参照してください。
 
@@ -73,7 +73,7 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の AWS �
 
     3.  **DB Audit Logging**ページで、右上隅の**[有効化]**をクリックします。
 
-    4.  **「データベース監査ログストレージ設定」**ダイアログで、 **AWS IAM Policy Settings**セクションを見つけて、後で使用するために**TiDB Cloud Account ID**と**TiDB Cloud External ID**を記録します。
+    4.  **データベース監査ログストレージ設定**ダイアログで、 **AWS IAM Policy Settings**セクションを見つけて、後で使用するために**TiDB Cloud Account ID**と**TiDB Cloud External ID**を記録します。
 
 2.  [AWS Management Console](https://console.aws.amazon.com/)で、 **IAM** &gt; **Access Management** &gt; **Policies**に移動し、書き込み専用権限`s3:PutObject`を持つIAMポリシーがあるかどうかを確認します。
 
@@ -93,7 +93,7 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の AWS �
         }
         ```
 
-        テンプレート内の`<Your S3 bucket ARN>`は、監査ログファイルが書き込まれるS3バケットのAmazonリソースネーム（ARN）です。S3バケットの**「プロパティ」**タブに移動し、 **Bucket Overview**エリアでARN値を確認できます。「 `"Resource"`フィールドでは、ARNの後に`/*`を追加する必要があります。例えば、ARNが`arn:aws:s3:::tidb-cloud-test`の場合、 `"Resource"`フィールドの値を`"arn:aws:s3:::tidb-cloud-test/*"`に設定する必要があります。
+        テンプレート内の`<Your S3 bucket ARN>`は、監査ログファイルが書き込まれるS3バケットのAmazonリソースネーム（ARN）です。S3バケットの**プロパティ**タブに移動し、 **Bucket Overview**エリアでARN値を確認できます。「 `"Resource"`フィールドでは、ARNの後に`/*`を追加する必要があります。例えば、ARNが`arn:aws:s3:::tidb-cloud-test`の場合、 `"Resource"`フィールドの値を`"arn:aws:s3:::tidb-cloud-test/*"`に設定する必要があります。
 
 3.  **IAM** &gt; **Access Management** &gt; **Roles**に移動し、前に記録したTiDB Cloudアカウント ID と外部 ID に対応する信頼エンティティを持つロールがすでに存在するかどうかを確認します。
 
@@ -102,7 +102,7 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の AWS �
 
 4.  **IAM** &gt; **Access Management** &gt; **Roles**で、前の手順のロール名をクリックして**概要**ページに移動し、次の手順を実行します。
 
-    1.  **「権限」**タブで、書き込み専用権限`s3:PutObject`を持つ記録済みのポリシーがロールにアタッチされているかどうかを確認します。アタッチされていない場合は、 **Attach Policies**を選択し、必要なポリシーを検索して**Attach Policy**をクリックします。
+    1.  **権限**タブで、書き込み専用権限`s3:PutObject`を持つ記録済みのポリシーがロールにアタッチされているかどうかを確認します。アタッチされていない場合は、 **Attach Policies**を選択し、必要なポリシーを検索して**Attach Policy**をクリックします。
     2.  **概要**ページに戻り、**Role ARN**値をクリップボードにコピーします。
 
 #### ステップ3. 監査ログを有効にする {#step-3-enable-audit-logging}
@@ -153,7 +153,7 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の Googl
     -   storage.objects.create
     -   storage.objects.delete
 
-    はいの場合は、後で使用するためにTiDBクラスターの一致したロールを記録してください。いいえの場合は、 **IAM & Admin** &gt; **「ロール」** &gt; **CREATE ROLE**に移動して、TiDBクラスターのロールを定義してください。
+    はいの場合は、後で使用するためにTiDBクラスターの一致したロールを記録してください。いいえの場合は、 **IAM & Admin** &gt; **ロール** &gt; **CREATE ROLE**に移動して、TiDBクラスターのロールを定義してください。
 
 3.  **[Cloud Storage]** &gt; **[ブラウザ]**に移動し、 TiDB Cloudがアクセスする GCS バケットを選択して、 **SHOW INFO PANEL**をクリックします。
 
@@ -206,7 +206,7 @@ TiDB Cloudがデータベース監査ログを書き込む宛先として、組�
 
     2.  選択したストレージアカウントのナビゲーション ウィンドウで、 **Data storage > Containers**をクリックし、 **+ Container**をクリックして**New container**ウィンドウを開きます。
 
-    3.  **New container**ペインで、新しいコンテナの名前を入力し、匿名アクセスレベル（推奨レベルは**「プライベート」** （匿名アクセスなし））を設定して、 **「作成」**をクリックします。数秒以内に新しいコンテナが作成され、コンテナリストに表示されます。
+    3.  **New container**ペインで、新しいコンテナの名前を入力し、匿名アクセスレベル（推奨レベルは**プライベート** （匿名アクセスなし））を設定して、 **作成**をクリックします。数秒以内に新しいコンテナが作成され、コンテナリストに表示されます。
 
 2.  ターゲット コンテナの URL を取得します。
 
@@ -292,7 +292,7 @@ TiDB Cloudがデータベース監査ログを書き込む宛先として、組�
     -   **SQL User**: `<user>@<host>` 形式で SQL ユーザーを入力します。ユーザー名とホスト名では、任意の値に一致させるために `%`、任意の 1 文字に一致させるために `_` を使用できます。`@` 記号と `<host>` は省略可能です。
     -   **Filter Events**: ログに記録するイベントを選択します。サポートされているフィルタイベントについては、[監査フィルタイベント](#audit-filter-events)を参照してください。
 
-3.  **「確認」**をクリックしてフィルタルールを追加します。
+3.  **確認**をクリックしてフィルタルールを追加します。
 
 > **Note:**
 >

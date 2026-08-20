@@ -37,7 +37,7 @@ aliases: ['/ja/tidbcloud/migrate-from-amazon-s3-or-gcs','/ja/tidbcloud/migrate-f
     > -   データファイルのみを圧縮すればよく、データベースファイルやテーブルスキーマファイルを圧縮する必要はありません。
     > -   パフォーマンスを向上させるためには、各圧縮ファイルのサイズを100MiBに制限することをお勧めします。
     > -   Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
-    > -   圧縮されていないファイルの場合、前述のルールに従って CSV ファイル名を更新できない場合 (たとえば、CSV ファイル リンクが他のプログラムでも使用されている場合)、ファイル名を変更せずに、[ステップ4](#step-4-import-csv-files-to-tidb-cloud)の**Destination Mapping**手順で**<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDB ファイル命名規則</a>を使用して自動マッピングを行う」の**選択を解除して、ソース ファイルを単一のターゲット テーブルに手動でマッピングできます。
+    > -   圧縮されていないファイルの場合、前述のルールに従って CSV ファイル名を更新できない場合 (たとえば、CSV ファイル リンクが他のプログラムでも使用されている場合)、ファイル名を変更せずに、[ステップ4](#step-4-import-csv-files-to-tidb-cloud)の**Destination Mapping**手順で**Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDB file naming conventions</a> for automatic mapping**の選択を解除して、ソース ファイルを単一のターゲット テーブルに手動でマッピングできます。
 
 ## ステップ2．対象テーブルのスキーマを作成する {#step-2-create-the-target-table-schemas}
 
@@ -105,11 +105,11 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「インポート」**をクリックします。
+    2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**データ** &gt; **インポート**をクリックします。
 
-2.  **「クラウドストレージからデータをインポート」**をクリックします。
+2.  **クラウドストレージからデータをインポート**をクリックします。
 
-3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
+3.  **クラウドストレージからデータをインポート**ページで、以下の情報を入力してください。
 
     -   **Storage Provider**： **Amazon S3**を選択してください。
     -   **Source URI** ：
@@ -119,15 +119,15 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
         -   **AWS Role ARN** (推奨): AWS ロール ARN の値を入力します。まだロール ARN がない場合は、 **[ここをクリックして AWS CloudFormation を使用して新しいロール ARN を作成する]**をクリックし、画面の指示に従うか、 **[問題が発生しましたか?] ダイアログでロール ARN を手動で作成して、**クラスターの**TiDB Cloud Account ID**と**TiDB Cloud External ID**を取得し、 IAMロールを手動で作成します。
         -   **AWS Access Key**：AWSアクセスキーIDとAWSシークレットアクセスキーを入力してください。
 
-4.  **「次へ」**をクリックしてください。
+4.  **次へ**をクリックしてください。
 
 5.  **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
-    **Source URI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則を</a>使用する」**オプションを選択します。
+    **Source URI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDB file naming conventions</a> for automatic mapping**オプションを選択します。
 
     > **Note:**
     >
-    > **Source URI**で単一のファイルを指定すると、 TiDB Cloudは**「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する」**オプションを表示せず、**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
+    > **Source URI**で単一のファイルを指定すると、 TiDB Cloudは**Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDB file naming conventions</a> for automatic mapping**オプションを表示せず、**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
 
     -   TiDB Cloud が[TiDBファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**CSV**を選択します。ソースフォルダにスキーマファイル ( `${db_name}-schema-create.sql`や`${db_name}.${table_name}-schema.sql`など) が含まれている場合、 TiDB Cloud は、ターゲットデータベースとテーブルがまだ存在しない場合に、それらを使用して作成します。
 
@@ -142,11 +142,11 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
 
     必要に応じて、 **Edit CSV Configuration**をクリックして、CSVファイルに合わせてオプションを設定してください。区切り文字や区切り記号の設定、エスケープ文字にバックスラッシュを使用するかどうかの指定、ファイルにヘッダー行が含まれているかどうかの指定が可能です。
 
-6.  **「次へ」**をクリックします。TiDB Cloudがソースファイルをスキャンします。
+6.  **次へ**をクリックします。TiDB Cloudがソースファイルをスキャンします。
 
 7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
-8.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。
+8.  インポートの進行状況が**完了**と表示されたら、インポートされたテーブルを確認してください。
 
 </div>
 
@@ -160,11 +160,11 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「インポート」**をクリックします。
+    2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**データ** &gt; **インポート**をクリックします。
 
-2.  **「クラウドストレージからデータをインポート」**をクリックします。
+2.  **クラウドストレージからデータをインポート**をクリックします。
 
-3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
+3.  **クラウドストレージからデータをインポート**ページで、以下の情報を入力してください。
 
     -   **Storage Provider**： **Google Cloud Storage**を選択してください。
     -   **Source URI** ：
@@ -172,15 +172,15 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`gs://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `gs://mybucket/myfolder/` 。
     -   **Google Cloud サービス アカウント ID** : TiDB Cloud は、このページで一意の Google Cloud サービス アカウント ID ( `example-service-account@your-project.iam.gserviceaccount.com`など) を提供します。このサービス アカウント ID に、Google Cloud プロジェクト内の GCS バケットに対して必要なIAM権限（ `Storage Object Viewer`など）を付与します。詳細については、 [GCSへのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access)を参照してください。
 
-4.  **「次へ」**をクリックしてください。
+4.  **次へ**をクリックしてください。
 
 5.  **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
-    **Source URI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則を</a>使用する」**オプションを選択します。
+    **Source URI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDB file naming conventions</a> for automatic mapping**オプションを選択します。
 
     > **Note:**
     >
-    > **Source URI**で単一のファイルを指定すると、 TiDB Cloudは**「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する」**オプションを表示せず、**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
+    > **Source URI**で単一のファイルを指定すると、 TiDB Cloudは**Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDB file naming conventions</a> for automatic mapping**オプションを表示せず、**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
 
     -   TiDB Cloud が[TiDBファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**CSV**を選択します。ソースフォルダにスキーマファイル ( `${db_name}-schema-create.sql`や`${db_name}.${table_name}-schema.sql`など) が含まれている場合、 TiDB Cloud は、ターゲットデータベースとテーブルがまだ存在しない場合に、それらを使用して作成します。
 
@@ -195,11 +195,11 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
 
     必要に応じて、 **Edit CSV Configuration**をクリックして、CSVファイルに合わせてオプションを設定してください。区切り文字や区切り記号の設定、エスケープ文字にバックスラッシュを使用するかどうかの指定、ファイルにヘッダー行が含まれているかどうかの指定が可能です。
 
-6.  **「次へ」**をクリックします。TiDB Cloudがソースファイルをスキャンします。
+6.  **次へ**をクリックします。TiDB Cloudがソースファイルをスキャンします。
 
 7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
-8.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。
+8.  インポートの進行状況が**完了**と表示されたら、インポートされたテーブルを確認してください。
 
 </div>
 
@@ -213,11 +213,11 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「インポート」**をクリックします。
+    2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**データ** &gt; **インポート**をクリックします。
 
-2.  **「クラウドストレージからデータをインポート」**をクリックします。
+2.  **クラウドストレージからデータをインポート**をクリックします。
 
-3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
+3.  **クラウドストレージからデータをインポート**ページで、以下の情報を入力してください。
 
     -   **Storage Provider**： **Azure Blob Storage**を選択します。
 
@@ -228,7 +228,7 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
     -   **Connectivity Method**： TiDB CloudがAzure Blob Storageに接続する方法を選択してください。
 
         -   **パブリック**（デフォルト）：パブリックインターネット経由で接続します。ストレージアカウントがパブリックネットワークへのアクセスを許可している場合にこのオプションを使用してください。
-        -   **Private Link**：Azure プライベートエンドポイント経由で接続し、ネットワークから隔離されたアクセスを実現します。ストレージアカウントがパブリックアクセスをブロックしている場合、またはセキュリティポリシーでプライベート接続が必要な場合にこのオプションを使用します。**Private Link**を選択した場合は、追加フィールド**「Azure Blob Storage リソース ID」**も入力する必要があります。リソース ID を確認するには：
+        -   **Private Link**：Azure プライベートエンドポイント経由で接続し、ネットワークから隔離されたアクセスを実現します。ストレージアカウントがパブリックアクセスをブロックしている場合、またはセキュリティポリシーでプライベート接続が必要な場合にこのオプションを使用します。**Private Link**を選択した場合は、追加フィールド**Azure Blob Storage リソース ID**も入力する必要があります。リソース ID を確認するには：
 
             1.  [Azureポータル](https://portal.azure.com/)にアクセスします。
             2.  ストレージアカウントに移動し、 **[概要]** &gt; **JSON View**をクリックします。
@@ -236,15 +236,15 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
 
     -   **SAS Token**: TiDB Cloud がAzure Blob Storage コンテナー内のソース ファイルにアクセスできるようにするアカウント SAS トークンを入力します。まだお持ちでない場合は、 **「ここをクリックして Azure ARM テンプレートを使用して新しいものを作成します」を**クリックし、画面の指示に従うか、アカウント SAS トークンを手動で作成します。詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access)を参照してください。
 
-4.  **「次へ」**をクリックしてください。
+4.  **次へ**をクリックしてください。
 
     接続方法として**Private Link**を選択した場合、 TiDB Cloudはストレージアカウント用のプライベートエンドポイントを作成します。ウィザードを続行するには、Azureポータルでこのエンドポイント要求を承認する必要があります。
 
     1.  [Azureポータル](https://portal.azure.com/)に移動し、ストレージアカウントに移動します。
 
-    2.  **「ネットワーク」** &gt; **Private endpoint connections**をクリックします。
+    2.  **ネットワーク** &gt; **Private endpoint connections**をクリックします。
 
-    3.  TiDB Cloudからの保留中の接続要求を見つけて、 **「承認」**をクリックします。
+    3.  TiDB Cloudからの保留中の接続要求を見つけて、 **承認**をクリックします。
 
     4.  [TiDB Cloudコンソール](https://tidbcloud.com/)に戻ります。エンドポイントが承認されると、インポート ウィザードが自動的に続行されます。
 
@@ -254,11 +254,11 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
 
 5.  **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
-    **Source URI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則を</a>使用する」**オプションを選択します。
+    **Source URI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDB file naming conventions</a> for automatic mapping**オプションを選択します。
 
     > **Note:**
     >
-    > **Source URI**で単一のファイルを指定すると、 TiDB Cloudは**「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する」**オプションを表示せず、**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
+    > **Source URI**で単一のファイルを指定すると、 TiDB Cloudは**Use <a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDB file naming conventions</a> for automatic mapping**オプションを表示せず、**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
 
     -   TiDB Cloud が[TiDBファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**CSV**を選択します。ソースフォルダにスキーマファイル ( `${db_name}-schema-create.sql`や`${db_name}.${table_name}-schema.sql`など) が含まれている場合、 TiDB Cloud は、ターゲットデータベースとテーブルがまだ存在しない場合に、それらを使用して作成します。
 
@@ -273,17 +273,17 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
 
     必要に応じて、 **Edit CSV Configuration**をクリックして、CSVファイルに合わせてオプションを設定してください。区切り文字や区切り記号の設定、エスケープ文字にバックスラッシュを使用するかどうかの指定、ファイルにヘッダー行が含まれているかどうかの指定が可能です。
 
-6.  **「次へ」**をクリックします。TiDB Cloudがソースファイルをスキャンします。
+6.  **次へ**をクリックします。TiDB Cloudがソースファイルをスキャンします。
 
 7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
-8.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。
+8.  インポートの進行状況が**完了**と表示されたら、インポートされたテーブルを確認してください。
 
 </div>
 
 </SimpleTab>
 
-インポートタスクを実行する際に、サポートされていない変換や無効な変換が検出された場合、 TiDB Cloud はインポートジョブを自動的に終了し、インポートエラーを報告します。詳細は**「ステータス」**フィールドで確認できます。
+インポートタスクを実行する際に、サポートされていない変換や無効な変換が検出された場合、 TiDB Cloud はインポートジョブを自動的に終了し、インポートエラーを報告します。詳細は**ステータス**フィールドで確認できます。
 
 インポートエラーが発生した場合は、以下の手順を実行してください。
 
@@ -302,4 +302,4 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
 
 ### インポートされたテーブルに行が0件あります {#zero-rows-in-the-imported-tables}
 
-インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。行数がゼロの場合は、入力したソースURIに一致するデータファイルがなかったことを意味します。この場合は、正しいソースファイルを指定するか、既存のファイルを[データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って名前変更するか、または**Destination Mapping**ステップに戻って手動マッピング規則に切り替えることで問題を解決してください。その後、再度テーブルをインポートしてください。
+インポートの進行状況が**完了**と表示されたら、インポートされたテーブルを確認してください。行数がゼロの場合は、入力したソースURIに一致するデータファイルがなかったことを意味します。この場合は、正しいソースファイルを指定するか、既存のファイルを[データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って名前変更するか、または**Destination Mapping**ステップに戻って手動マッピング規則に切り替えることで問題を解決してください。その後、再度テーブルをインポートしてください。
