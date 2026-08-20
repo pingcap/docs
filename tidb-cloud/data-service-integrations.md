@@ -17,7 +17,7 @@ summary: TiDB Cloudコンソールで、 TiDB CloudデータアプリをGPTやDi
 
 1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 
-2.  左側のペインで、対象のデータアプリを見つけ、対象のデータアプリの名前をクリックし、次に**「統合」**タブをクリックします。
+2.  左側のペインで、対象のデータアプリを見つけ、対象のデータアプリの名前をクリックし、次に**統合**タブをクリックします。
 
 3.  **Integrate with GPTs**領域で、 **Get Configuration**をクリックします。
 
