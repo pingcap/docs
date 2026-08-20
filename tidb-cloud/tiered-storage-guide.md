@@ -1,9 +1,9 @@
 ---
-title: Configure and Manage Tiered Storage
+title: Tiered Storage User Guide
 summary: Learn how to configure and manage Tiered Storage on TiDB Cloud BYOC, Premium, or Essential, including DDL, partition selectors, and best practices.
 ---
 
-# Configure and Manage Tiered Storage
+# Tiered Storage User Guide
 
 This document explains how to configure and manage Infrequent Access (IA) storage, including storage class settings, partition selectors, and recommended operational practices.
 
