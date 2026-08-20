@@ -323,9 +323,9 @@ Diagram(
 
 例外はPointGetとBatch PointGetによるロック取得時の読み取り操作（ `SELECT FOR UPDATE` ）で、これは1回のリモートプロシージャコール（RPC）で読み取りとロックを実行します。
 
-### Lock Time PointGet {#lock-time-point-get}
+### ロック取得時のPointGet {#lock-time-point-get}
 
-以下は、Lock Time PointGet操作の時間コスト図です。
+以下は、ロック取得時のPointGet操作の時間コスト図です。
 
 ```railroad+diagram
 Diagram(
@@ -342,7 +342,7 @@ Diagram(
 )
 ```
 
-Lock Time PointGetの実行中、 `execution(clustered PK)`と`execution(non-clustered PK or UK)`期間は次のように計算されます。
+ロック取得時のPointGetの実行中、 `execution(clustered PK)`期間と`execution(non-clustered PK or UK)`期間は次のように計算されます。
 
 ```text
 execution(clustered PK) =
@@ -351,11 +351,11 @@ execution(non-clustered PK or UK) =
     2 * tidb_tikvclient_txn_cmd_duration_seconds{type="lock_keys"}
 ```
 
-Lock Time PointGetはキーをロックし、その値を返します。実行後のロックフェーズと比較すると、1ラウンドトリップを節約できます。Lock Time PointGetの実行時間は[ロック期間](#lock)として扱うことができます。
+ロック取得時のPointGetはキーをロックし、その値を返します。実行後のロックフェーズと比較すると、1ラウンドトリップを節約できます。ロック取得時のPointGetの実行時間は[ロック期間](#lock)として扱うことができます。
 
-### Lock Time Batch PointGet {#lock-time-batch-point-get}
+### ロック取得時のBatch PointGet {#lock-time-batch-point-get}
 
-以下は、Lock Time Batch PointGet操作の時間コスト図です。
+以下は、ロック取得時のBatch PointGet操作の時間コスト図です。
 
 ```railroad+diagram
 Diagram(
@@ -369,7 +369,7 @@ Diagram(
 )
 ```
 
-Lock Time Batch PointGetの実行中、 `execution(clustered PK)`と`execution(non-clustered PK or UK)`期間は次のように計算されます。
+ロック取得時のBatch PointGetの実行中、 `execution(clustered PK)`期間と`execution(non-clustered PK or UK)`期間は次のように計算されます。
 
 ```text
 execution(clustered PK) =
@@ -379,7 +379,7 @@ execution(non-clustered PK or UK) =
     tidb_tikvclient_txn_cmd_duration_seconds{type="lock_keys"}
 ```
 
-Lock Time Batch PointGetの実行は、1回のRPCで複数の値を読み取る点を除けば、 [Lock Time PointGet](#lock-time-point-get)と同様です。 `tidb_tikvclient_txn_cmd_duration_seconds{type="batch_get"}`所要時間の詳細については、 [Batch PointGet](#batch-point-get)セクションを参照してください。
+ロック取得時のBatch PointGetの実行は、1回のRPCで複数の値を読み取る点を除けば、 [ロック取得時のPointGet](#lock-time-point-get)と同様です。 `tidb_tikvclient_txn_cmd_duration_seconds{type="batch_get"}`所要時間の詳細については、 [Batch PointGet](#batch-point-get)セクションを参照してください。
 
 ### ロック {#lock}
 
