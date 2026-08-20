@@ -17,8 +17,8 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-peewee/','/ja/tidb/dev/v
 
 このチュートリアルを完了するには、以下が必要です。
 
--   [Python 3.8以降](https://www.python.org/downloads/)インストールされています。
--   [Git](https://git-scm.com/downloads)がインストールされました。
+-   [Python 3.8以降](https://www.python.org/downloads/)がインストールされていること。
+-   [Git](https://git-scm.com/downloads)がインストールされていること。
 -   TiDBクラスタ。
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
