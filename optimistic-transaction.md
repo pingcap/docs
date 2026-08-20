@@ -164,7 +164,7 @@ tidb_retry_limit = 10
 
 ### 再試行の制限 {#limits-of-retry}
 
-デフォルトでは、TiDB はトランザクションを再試行しません。これは、更新の損失や[`REPEATABLE READ`分離](/transaction-isolation-levels.md)破損につながる可能性があるためです。 。
+デフォルトでは、TiDB はトランザクションを再試行しません。これは、更新の損失や[`REPEATABLE READ`分離](/transaction-isolation-levels.md)破損につながる可能性があるためです。
 
 その理由は、再試行の手順から明らかです。
 

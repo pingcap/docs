@@ -288,7 +288,7 @@ CREATE TABLE `t` (`a` VARCHAR(255) PRIMARY KEY CLUSTERED, `b` INT);
 
 TiDBのスケジューリングプロセスは、I/O、ネットワーク、CPU、メモリなどのリソースを消費します。TiDBがスケジュールされたタスクを制御しない場合、リソースの優先実行により、QPS（1秒あたりの処理数）や遅延が発生し、パフォーマンスの変動が生じる可能性があります。
 
-以下の最適化後、8時間の性能試験において、TPC-C tpmCの標準偏差は2%を超えない。
+以下の最適化後、8時間の性能試験において、TPC-C tpmCの標準偏差は2%を超えません。
 
 #### 不要なスケジューリングとパフォーマンスのジッターを軽減するために、新しいスケジューリング計算式を導入する。 {#introduce-new-scheduling-calculation-formulas-to-reduce-unnecessary-scheduling-and-performance-jitter}
 

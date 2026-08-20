@@ -62,7 +62,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
     -   原因2：他のコンポーネント（PD/TiKV）とのネットワークの問題。
 
-    -   原因3：TiDBの初期バージョン（v3.0.8より前）は、多数のゴルーチンが高並行性で動作するため、内部負荷が非常に高い。
+    -   原因3：TiDBの初期バージョン（v3.0.8より前）は、多数のゴルーチンが高並行性で動作するため、内部負荷が非常に高いです。
 
     -   原因4：初期バージョン（v2.1.15およびv3.0.0-rc1未満のバージョン）では、PDインスタンスがTiDBキーを削除できず、すべてのDDL変更が2リース分待機することになります。
 
@@ -295,7 +295,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     その他の状況については、 [バグを報告する](https://github.com/tikv/tikv/issues/new?template=bug-report.md)。
 
--   4.5.3 ログの追加処理が遅い。
+-   4.5.3 ログの追加処理が遅いです。
 
     TiKV Grafana の**Raft IO** / `append log duration`値が高い場合、通常はディスク書き込み操作が遅いことが原因です。RocksDB - raft の`WAL Sync Duration max`の値を確認することで原因を特定できます。
 
@@ -308,7 +308,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
     -   `[raftstore] store-pool-size`の設定値が小さすぎないか確認してください。値は`1`と`5`の間に設定し、大きすぎないようにすることをお勧めします。
     -   マシンのCPUリソースが不足していないか確認してください。
 
--   4.5.5 適用処理が遅い。
+-   4.5.5 適用処理が遅いです。
 
     TiKV Grafana の**Raft IO** / `apply log duration`が高い状態です。これは通常、 **Raft Propose** / `apply wait duration`が高い状態と関連しています。考えられる原因は以下のとおりです。
 
@@ -318,11 +318,11 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     -   リージョン書き込みホットスポット。単一の適用スレッドでCPU使用率が高くなっています。現在、単一のリージョンでのホットスポット問題を適切に処理することはできませんが、改善中です。各スレッドのCPU使用率を表示するには、Grafana式を変更して`by (instance, name)`を追加してください。
 
-    -   RocksDBへの書き込みが遅い。RocksDB**のkv** / `max write duration`が高い。1つのRaftログに複数のKVが含まれる可能性がある。RocksDBへの書き込み時には、1回の書き込みバッチで128個のKVがRocksDBに書き込まれる。そのため、適用ログはRocksDBへの複数の書き込みに関連付けられる可能性がある。
+    -   RocksDBへの書き込みが遅いです。RocksDB**のkv** / `max write duration`が高いです。1つのRaftログに複数のKVが含まれる可能性があります。RocksDBへの書き込み時には、1回の書き込みバッチで128個のKVがRocksDBに書き込まれます。そのため、適用ログはRocksDBへの複数の書き込みに関連付けられる可能性があります。
 
     -   その他の状況については、 [バグを報告する](https://github.com/tikv/tikv/issues/new?template=bug-report.md)。
 
--   4.5.6 Raftのコミットログが遅い。
+-   4.5.6 Raftのコミットログが遅いです。
 
     TiKV Grafana の**Raft IO** / `commit log duration`が高い (このメトリックは Grafana v4.x 以降でのみサポートされています)。各リージョンは独立したRaftグループに対応します。Raftには、TCP のスライディング ウィンドウ メカニズムと同様のフロー制御メカニズムがあります。スライディング ウィンドウのサイズは`[raftstore] raft-max-inflight-msgs = 256`パラメータを設定することで制御できます。書き込みホットスポットがあり、 `commit log duration`が高い場合は、 `1024`に増やすなど、パラメータを調整できます。
 
@@ -356,9 +356,9 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     -   原因 2: ネットワーク。PD ログに`lost the TCP streaming connection`が表示されます。PD ノード間のネットワークに問題がないか確認し、モニター**Grafana** -&gt; **PD** -&gt; **etcd**で`round trip`を表示して原因を検証する必要があります。中国語の[ケース177](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case177.md)を参照してください。
 
-    -   原因3：システム負荷が高い。ログには`server is likely overloaded`と表示されます。中国語の[ケース214](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case214.md)を参照してください。
+    -   原因3：システム負荷が高いです。ログには`server is likely overloaded`と表示されます。中国語の[ケース214](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case214.md)を参照してください。
 
--   5.2.2 PDはLeaderを選出できないか、選挙が遅い。
+-   5.2.2 PDはLeaderを選出できないか、選挙が遅いです。
 
     -   PD はLeaderを選出できません: PD ログには`lease is not expired`が表示されます。 [この問題は](https://github.com/etcd-io/etcd/issues/10355)v3.0.x および v2.1.19 で修正されました。中国語の[ケース875](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case875.md)を参照してください。
 
