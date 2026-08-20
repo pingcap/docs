@@ -62,31 +62,31 @@ tiup cluster [command] [flags]
 
 ## コマンドリスト {#command-list}
 
--   [インポート](/tiup/tiup-component-cluster-import.md) : Ansibleによってデプロイされたクラスターをインポートします
--   [テンプレート](/tiup/tiup-component-cluster-template.md) : トポロジテンプレートを出力する
--   [チェック](/tiup/tiup-component-cluster-check.md) : デプロイメントの前後にクラスターをチェックします
--   [展開する](/tiup/tiup-component-cluster-deploy.md) : 指定されたトポロジに基づいてクラスターを展開します
--   [リスト](/tiup/tiup-component-cluster-list.md) : デプロイされたクラスタのリストを照会する
--   [表示](/tiup/tiup-component-cluster-display.md) : 指定されたクラスターのステータスを表示します
--   [起動する](/tiup/tiup-component-cluster-start.md) : 指定されたクラスターを起動します
--   [停止](/tiup/tiup-component-cluster-stop.md) : 指定されたクラスターを停止します
--   [再起動](/tiup/tiup-component-cluster-restart.md) : 指定されたクラスターを再起動します
--   [スケールイン](/tiup/tiup-component-cluster-scale-in.md) : 指定されたクラスター内でスケールする
--   [スケールアウト](/tiup/tiup-component-cluster-scale-out.md) : 指定されたクラスターをスケールアウトする
--   [アップグレード](/tiup/tiup-component-cluster-upgrade.md) : 指定されたクラスターをアップグレードします
--   [プルーン](/tiup/tiup-component-cluster-prune.md) : 指定されたクラスターの Tombstone ステータスのインスタンスをクリーンアップします
--   [編集設定](/tiup/tiup-component-cluster-edit-config.md) : 指定されたクラスターの構成を変更します
--   [リロード](/tiup/tiup-component-cluster-reload.md) : 指定されたクラスタの構成を再読み込みします
--   [パッチ](/tiup/tiup-component-cluster-patch.md) : デプロイされたクラスター内のサービスを置き換えます
--   [名前を変更する](/tiup/tiup-component-cluster-rename.md) : クラスターの名前を変更する
--   [クリーン](/tiup/tiup-component-cluster-clean.md) : 指定されたクラスターからデータを削除します
--   [破棄する](/tiup/tiup-component-cluster-destroy.md) : 指定されたクラスターを破棄する
--   [監査](/tiup/tiup-component-cluster-audit.md) : 指定されたクラスタの操作監査ログを照会します
--   [リプレイ](/tiup/tiup-component-cluster-replay.md) : 指定されたコマンドを再試行します
--   [有効にする](/tiup/tiup-component-cluster-enable.md) : マシンの再起動後にクラスタ サービスの自動有効化を有効にします
--   [無効にする](/tiup/tiup-component-cluster-disable.md) : マシンの再起動後にクラスタ サービスの自動有効化を無効にします
--   [メタバックアップ](/tiup/tiup-component-cluster-meta-backup.md) : 指定されたクラスタの運用と保守に必要なTiUPメタファイルをバックアップします
--   [メタリストア](/tiup/tiup-component-cluster-meta-restore.md) : 指定されたクラスターのTiUPメタファイルを復元します
--   [ヘルプ](/tiup/tiup-component-cluster-help.md) : ヘルプ情報を出力
+-   [import](/tiup/tiup-component-cluster-import.md) : Ansibleによってデプロイされたクラスターをインポートします
+-   [template](/tiup/tiup-component-cluster-template.md) : トポロジテンプレートを出力する
+-   [check](/tiup/tiup-component-cluster-check.md) : デプロイメントの前後にクラスターをチェックします
+-   [deploy](/tiup/tiup-component-cluster-deploy.md) : 指定されたトポロジに基づいてクラスターを展開します
+-   [list](/tiup/tiup-component-cluster-list.md) : デプロイされたクラスタのリストを照会する
+-   [display](/tiup/tiup-component-cluster-display.md) : 指定されたクラスターのステータスを表示します
+-   [start](/tiup/tiup-component-cluster-start.md) : 指定されたクラスターを起動します
+-   [stop](/tiup/tiup-component-cluster-stop.md) : 指定されたクラスターを停止します
+-   [restart](/tiup/tiup-component-cluster-restart.md) : 指定されたクラスターを再起動します
+-   [scale-in](/tiup/tiup-component-cluster-scale-in.md) : 指定されたクラスター内でスケールする
+-   [scale-out](/tiup/tiup-component-cluster-scale-out.md) : 指定されたクラスターをスケールアウトする
+-   [upgrade](/tiup/tiup-component-cluster-upgrade.md) : 指定されたクラスターをアップグレードします
+-   [prune](/tiup/tiup-component-cluster-prune.md) : 指定されたクラスターの Tombstone ステータスのインスタンスをクリーンアップします
+-   [edit-config](/tiup/tiup-component-cluster-edit-config.md) : 指定されたクラスターの構成を変更します
+-   [reload](/tiup/tiup-component-cluster-reload.md) : 指定されたクラスタの構成を再読み込みします
+-   [patch](/tiup/tiup-component-cluster-patch.md) : デプロイされたクラスター内のサービスを置き換えます
+-   [rename](/tiup/tiup-component-cluster-rename.md) : クラスターの名前を変更する
+-   [clean](/tiup/tiup-component-cluster-clean.md) : 指定されたクラスターからデータを削除します
+-   [destroy](/tiup/tiup-component-cluster-destroy.md) : 指定されたクラスターを破棄する
+-   [audit](/tiup/tiup-component-cluster-audit.md) : 指定されたクラスタの操作監査ログを照会します
+-   [replay](/tiup/tiup-component-cluster-replay.md) : 指定されたコマンドを再試行します
+-   [enable](/tiup/tiup-component-cluster-enable.md) : マシンの再起動後にクラスタ サービスの自動有効化を有効にします
+-   [disable](/tiup/tiup-component-cluster-disable.md) : マシンの再起動後にクラスタ サービスの自動有効化を無効にします
+-   [meta backup](/tiup/tiup-component-cluster-meta-backup.md) : 指定されたクラスタの運用と保守に必要なTiUPメタファイルをバックアップします
+-   [meta restore](/tiup/tiup-component-cluster-meta-restore.md) : 指定されたクラスターのTiUPメタファイルを復元します
+-   [help](/tiup/tiup-component-cluster-help.md) : ヘルプ情報を出力
 
 [&lt;&lt; 前のページに戻る - TiUP参照コンポーネントリスト](/tiup/tiup-reference.md#component-list)
