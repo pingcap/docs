@@ -132,11 +132,10 @@ Manual file-pattern mapping does not support SQL data files.
 
 </CustomContent>
 
-In the mapping step of the import wizard, deselect **Use TiDB file naming conventions for automatic mapping**, and then fill in the **Source**, **Target Database**, and **Target Table** fields. The **Source** field accepts a file name pattern relative to the source URI. The supported wildcards depend on the service plan:
+In the mapping step of the import wizard, deselect **Use TiDB file naming conventions for automatic mapping**, and then fill in the source pattern, target database, and target table fields. In **Destination Mapping** and **Source Files Mapping**, the **Source** field accepts a file name pattern relative to the source URI. In **Source File URIs and Names**, enter the full source file URI. The supported wildcards depend on the mapping workflow:
 
-- For {{{ .starter }}} and {{{ .essential }}} instances that use **Destination Mapping**, use `*`, `?`, and `[]`. For example, `my-data?.csv` matches file names such as `my-data1.csv` and `my-data2.csv`, and `my-data[1-4].csv` matches `my-data1.csv` through `my-data4.csv`.
-- For {{{ .dedicated }}}, use `*`, `?`, and `[]`. For example, `my-data?.csv` matches file names such as `my-data1.csv` and `my-data2.csv`, and `my-data[1-4].csv` matches `my-data1.csv` through `my-data4.csv`.
-- For {{{ .essential }}} and {{{ .premium }}} instances that use **Source Files Mapping** under **Mapping and Job Configuration**, use `*` and `[]`. For example, `my-data[1-4].csv` matches `my-data1.csv` through `my-data4.csv`.
+- In **Destination Mapping** or **Source File URIs and Names**, use `*`, `?`, and `[]`. For example, `my-data?.csv` matches file names such as `my-data1.csv` and `my-data2.csv`, and `my-data[1-4].csv` matches `my-data1.csv` through `my-data4.csv`.
+- In **Source Files Mapping** under **Mapping and Job Configuration**, use `*` and `[]`. For example, `my-data[1-4].csv` matches `my-data1.csv` through `my-data4.csv`.
 
 <CustomContent plan="premium">
 

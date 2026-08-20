@@ -129,9 +129,9 @@ To import the CSV files to {{{ .starter }}} or {{{ .essential }}}, take the foll
 
     - To manually configure the mapping rules to associate your source CSV files with the target database and table, unselect this option, and then fill in the following fields:
 
-        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example: `TableName.01.csv`. You can also use wildcards to match multiple files. For {{{ .starter }}} and {{{ .essential }}} instances that use **Destination Mapping**, use `*`, `?`, and `[]`. For {{{ .essential }}} instances that use **Source Files Mapping** under **Mapping and Job Configuration**, use `*` and `[]`.
+        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example: `TableName.01.csv`. You can also use the `*`, `?`, and `[]` wildcards to match multiple files in **Destination Mapping**.
 
-            - For {{{ .starter }}} and {{{ .essential }}} instances that use **Destination Mapping**, `my-data?.csv` matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
+            - `my-data?.csv` matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
             - `my-data[1-4].csv` matches `my-data1.csv` through `my-data4.csv`.
             - `my-data*.csv`: matches all CSV files that start with `my-data`, such as `my-data-2023.csv` and `my-data-final.csv`.
 
@@ -181,9 +181,9 @@ To import the CSV files to {{{ .starter }}} or {{{ .essential }}}, take the foll
 
     - To manually configure the mapping rules to associate your source CSV files with the target database and table, unselect this option, and then fill in the following fields:
 
-        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example: `TableName.01.csv`. You can also use wildcards to match multiple files. For {{{ .starter }}} and {{{ .essential }}} instances that use **Destination Mapping**, use `*`, `?`, and `[]`. For {{{ .essential }}} instances that use **Source Files Mapping** under **Mapping and Job Configuration**, use `*` and `[]`.
+        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example: `TableName.01.csv`. You can also use the `*`, `?`, and `[]` wildcards to match multiple files in **Destination Mapping**.
 
-            - For {{{ .starter }}} and {{{ .essential }}} instances that use **Destination Mapping**, `my-data?.csv` matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
+            - `my-data?.csv` matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
             - `my-data[1-4].csv` matches `my-data1.csv` through `my-data4.csv`.
             - `my-data*.csv`: matches all CSV files that start with `my-data`, such as `my-data-2023.csv` and `my-data-final.csv`.
 
@@ -233,9 +233,9 @@ To import the CSV files to {{{ .starter }}} or {{{ .essential }}}, take the foll
 
     - To manually configure the mapping rules to associate your source CSV files with the target database and table, unselect this option, and then fill in the following fields:
 
-        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example: `TableName.01.csv`. You can also use wildcards to match multiple files. For {{{ .starter }}} and {{{ .essential }}} instances that use **Destination Mapping**, use `*`, `?`, and `[]`. For {{{ .essential }}} instances that use **Source Files Mapping** under **Mapping and Job Configuration**, use `*` and `[]`.
+        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example: `TableName.01.csv`. You can also use the `*`, `?`, and `[]` wildcards to match multiple files in **Destination Mapping**.
 
-            - For {{{ .starter }}} and {{{ .essential }}} instances that use **Destination Mapping**, `my-data?.csv` matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
+            - `my-data?.csv` matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
             - `my-data[1-4].csv` matches `my-data1.csv` through `my-data4.csv`.
             - `my-data*.csv`: matches all CSV files that start with `my-data`, such as `my-data-2023.csv` and `my-data-final.csv`.
 
@@ -285,9 +285,9 @@ To import the CSV files to {{{ .starter }}} or {{{ .essential }}}, take the foll
 
     - To manually configure the mapping rules to associate your source CSV files with the target database and table, unselect this option, and then fill in the following fields:
 
-        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example: `TableName.01.csv`. You can also use wildcards to match multiple files. For {{{ .starter }}} and {{{ .essential }}} instances that use **Destination Mapping**, use `*`, `?`, and `[]`. For {{{ .essential }}} instances that use **Source Files Mapping** under **Mapping and Job Configuration**, use `*` and `[]`.
+        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example: `TableName.01.csv`. You can also use the `*`, `?`, and `[]` wildcards to match multiple files in **Destination Mapping**.
 
-            - For {{{ .starter }}} and {{{ .essential }}} instances that use **Destination Mapping**, `my-data?.csv` matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
+            - `my-data?.csv` matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
             - `my-data[1-4].csv` matches `my-data1.csv` through `my-data4.csv`.
             - `my-data*.csv`: matches all CSV files that start with `my-data`, such as `my-data-2023.csv` and `my-data-final.csv`.
 
