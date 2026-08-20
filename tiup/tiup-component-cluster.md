@@ -62,13 +62,13 @@ tiup cluster [command] [flags]
 
 ## コマンドリスト {#command-list}
 
--   [輸入](/tiup/tiup-component-cluster-import.md) : Ansibleによってデプロイされたクラスターをインポートします
+-   [インポート](/tiup/tiup-component-cluster-import.md) : Ansibleによってデプロイされたクラスターをインポートします
 -   [テンプレート](/tiup/tiup-component-cluster-template.md) : トポロジテンプレートを出力する
 -   [チェック](/tiup/tiup-component-cluster-check.md) : デプロイメントの前後にクラスターをチェックします
 -   [展開する](/tiup/tiup-component-cluster-deploy.md) : 指定されたトポロジに基づいてクラスターを展開します
 -   [リスト](/tiup/tiup-component-cluster-list.md) : デプロイされたクラスタのリストを照会する
--   [画面](/tiup/tiup-component-cluster-display.md) : 指定されたクラスターのステータスを表示します
--   [始める](/tiup/tiup-component-cluster-start.md) : 指定されたクラスターを起動します
+-   [表示](/tiup/tiup-component-cluster-display.md) : 指定されたクラスターのステータスを表示します
+-   [起動する](/tiup/tiup-component-cluster-start.md) : 指定されたクラスターを起動します
 -   [停止](/tiup/tiup-component-cluster-stop.md) : 指定されたクラスターを停止します
 -   [再起動](/tiup/tiup-component-cluster-restart.md) : 指定されたクラスターを再起動します
 -   [スケールイン](/tiup/tiup-component-cluster-scale-in.md) : 指定されたクラスター内でスケールする
@@ -80,7 +80,7 @@ tiup cluster [command] [flags]
 -   [パッチ](/tiup/tiup-component-cluster-patch.md) : デプロイされたクラスター内のサービスを置き換えます
 -   [名前を変更する](/tiup/tiup-component-cluster-rename.md) : クラスターの名前を変更する
 -   [クリーン](/tiup/tiup-component-cluster-clean.md) : 指定されたクラスターからデータを削除します
--   [破壊する](/tiup/tiup-component-cluster-destroy.md) : 指定されたクラスターを破棄する
+-   [破棄する](/tiup/tiup-component-cluster-destroy.md) : 指定されたクラスターを破棄する
 -   [監査](/tiup/tiup-component-cluster-audit.md) : 指定されたクラスタの操作監査ログを照会します
 -   [リプレイ](/tiup/tiup-component-cluster-replay.md) : 指定されたコマンドを再試行します
 -   [有効にする](/tiup/tiup-component-cluster-enable.md) : マシンの再起動後にクラスタ サービスの自動有効化を有効にします

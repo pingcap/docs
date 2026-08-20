@@ -22,7 +22,7 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-langchain/','/ja/tidb/de
 このチュートリアルを完了するには、以下が必要です。
 
 -   [Python 3.8以降](https://www.python.org/downloads/)インストールされています。
--   [ジュピターノートブック](https://jupyter.org/install)がインストールされました。
+-   [Jupyter Notebook](https://jupyter.org/install)がインストールされました。
 -   [Git](https://git-scm.com/downloads)がインストールされました。
 -   TiDBクラスタ。
 

@@ -63,12 +63,12 @@ tiup dm [command] [flags]
 
 ## コマンドリスト {#command-list}
 
--   [輸入](/tiup/tiup-component-dm-import.md) : DM-Ansible によってデプロイされた DM v1.0 クラスターをインポートします。
+-   [インポート](/tiup/tiup-component-dm-import.md) : DM-Ansible によってデプロイされた DM v1.0 クラスターをインポートします。
 -   [テンプレート](/tiup/tiup-component-dm-template.md) : トポロジ テンプレートを出力します。
 -   [展開する](/tiup/tiup-component-dm-deploy.md) : 指定されたトポロジに基づいてクラスターをデプロイします。
 -   [リスト](/tiup/tiup-component-dm-list.md) : デプロイされたクラスターのリストを照会します。
--   [画面](/tiup/tiup-component-dm-display.md) : 指定されたクラスターのステータスを表示します。
--   [始める](/tiup/tiup-component-dm-start.md) : 指定されたクラスターを起動します。
+-   [表示](/tiup/tiup-component-dm-display.md) : 指定されたクラスターのステータスを表示します。
+-   [起動する](/tiup/tiup-component-dm-start.md) : 指定されたクラスターを起動します。
 -   [停止](/tiup/tiup-component-dm-stop.md) : 指定されたクラスターを停止します。
 -   [再起動](/tiup/tiup-component-dm-restart.md) : 指定されたクラスターを再起動します。
 -   [スケールイン](/tiup/tiup-component-dm-scale-in.md) : 指定されたクラスター内でスケールします。
@@ -78,7 +78,7 @@ tiup dm [command] [flags]
 -   [編集設定](/tiup/tiup-component-dm-edit-config.md) : 指定されたクラスターの構成を変更します。
 -   [リロード](/tiup/tiup-component-dm-reload.md) : 指定されたクラスターの構成を再読み込みします。
 -   [パッチ](/tiup/tiup-component-dm-patch.md) : デプロイされたクラスター内の指定されたサービスを置き換えます。
--   [破壊する](/tiup/tiup-component-dm-destroy.md) : 指定されたクラスターを破棄します。
+-   [破棄する](/tiup/tiup-component-dm-destroy.md) : 指定されたクラスターを破棄します。
 -   [監査](/tiup/tiup-component-dm-audit.md) : 指定されたクラスターの操作監査ログを照会します。
 -   [リプレイ](/tiup/tiup-component-dm-replay.md) : 指定されたコマンドを再生する
 -   [有効にする](/tiup/tiup-component-dm-enable.md) : マシンの再起動後にクラスター サービスを自動的に有効化します。
