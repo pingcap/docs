@@ -79,7 +79,7 @@ grubby --update-kernel="$KERNEL" --args='transparent_hugepage=never'
 
 ### ストレージとファイルシステム {#storage-and-file-system}
 
-コア I/O スタック リンクは、ファイル システムレイヤー、ブロック デバイスレイヤー、およびドライバーレイヤーを含めて長くなります。
+コア I/O スタック リンクは、ファイルシステムレイヤー、ブロック デバイスレイヤー、およびドライバーレイヤーを含めて長くなります。
 
 #### I/Oスケジューラ {#io-scheduler}
 

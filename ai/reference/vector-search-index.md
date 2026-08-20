@@ -25,7 +25,7 @@ aliases: ['/ja/tidb/stable/vector-search-index/','/ja/tidbcloud/vector-search-in
 -   ベクトル検索インデックスの作成および使用時には、距離関数を指定する必要があります。現在、コサイン距離`VEC_COSINE_DISTANCE()`とL2距離`VEC_L2_DISTANCE()`の関数のみがサポートされています。
 -   同じ列に対して、同じ距離関数を使用して複数のベクトル検索インデックスを作成することはサポートされていません。
 -   ベクトル検索インデックスが設定された列を直接削除することはサポートされていません。このような列を削除するには、まずその列のベクトル検索インデックスを削除し、次に列自体を削除します。
--   ベクトル インデックスを持つ列の型の変更はサポートされていません。
+-   ベクトルインデックスを持つ列の型の変更はサポートされていません。
 -   ベクトル検索インデックスを[見えない](/sql-statements/sql-statement-alter-index.md)に設定することはサポートされていません。
 -   [保存時の暗号化](/encryption-at-rest.md)有効になっているTiFlashノード上でベクトル検索インデックスを構築することはサポートされていません。
 
@@ -63,7 +63,7 @@ TiDB では、次のいずれかの方法で、 [ベクトルデータ型](/ai/r
 > -   テーブルの作成時にベクトル検索インデックスが定義されている場合、TiDB はテーブルのTiFlashレプリカを自動的に作成します。
 > -   テーブルの作成時にベクトル検索インデックスが定義されておらず、テーブルに現在TiFlashレプリカが存在しない場合は、テーブルにベクトル検索インデックスを追加する前に、手動でTiFlashレプリカを作成する必要があります。例: `ALTER TABLE 'table_name' SET TIFLASH REPLICA 1;` 。
 
-HNSW ベクトル インデックスを作成するときは、ベクトルの距離関数を指定する必要があります。
+HNSW ベクトルインデックスを作成するときは、ベクトルの距離関数を指定する必要があります。
 
 -   コサイン距離: `((VEC_COSINE_DISTANCE(embedding)))`
 -   L2距離: `((VEC_L2_DISTANCE(embedding)))`
@@ -83,7 +83,7 @@ ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3, 4, 5]')
 LIMIT 10
 ```
 
-ベクトル検索でインデックスを使用するには、 `ORDER BY ... LIMIT`句がベクトル インデックスの作成時に指定したものと同じ距離関数を使用していることを確認します。
+ベクトル検索でインデックスを使用するには、 `ORDER BY ... LIMIT`句がベクトルインデックスの作成時に指定したものと同じ距離関数を使用していることを確認します。
 
 ## フィルター付きベクトルインデックスを使用する {#use-the-vector-index-with-filters}
 
@@ -98,7 +98,7 @@ ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 5;
 ```
 
-フィルター付きのベクトル インデックスを使用するには、まずベクトル検索を使用して K 近傍を照会し、次に不要な結果をフィルター処理します。
+フィルター付きのベクトルインデックスを使用するには、まずベクトル検索を使用して K 近傍を照会し、次に不要な結果をフィルター処理します。
 
 ```sql
 -- For the following query, the `WHERE` filter is performed after KNN, so the vector index cannot be used:
@@ -190,7 +190,7 @@ LIMIT 10;
 6 rows in set, 1 warning (0.01 sec)
 ```
 
-ベクトル インデックスが使用できない場合、原因の調査に役立つ警告が表示される場合があります。
+ベクトルインデックスが使用できない場合、原因の調査に役立つ警告が表示される場合があります。
 
 ```sql
 -- Using a wrong distance function:
@@ -212,7 +212,7 @@ ANN index not used: index can be used only when ordering by vec_cosine_distance(
 
 ## ベクトル検索のパフォーマンスを分析する {#analyze-vector-search-performance}
 
-ベクトル インデックスの使用方法に関する詳細情報を確認するには、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)ステートメントを実行し、出力の`execution info`列を確認します。
+ベクトルインデックスの使用方法に関する詳細情報を確認するには、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)ステートメントを実行し、出力の`execution info`列を確認します。
 
 ```sql
 [tidb]> EXPLAIN ANALYZE SELECT * FROM vector_table_with_index

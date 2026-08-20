@@ -5,7 +5,7 @@ summary: TiDB Dashboardでは、ユーザーが現在のセッションを他の
 
 # TiDB Dashboardセッションを共有する {#share-tidb-dashboard-sessions}
 
-TiDB Dashboardの現在のセッションを他のユーザーと共有して、他のユーザーがユーザー パスワードを入力せずに TiDB Dashboardにアクセスして操作できるようにすることができます。
+TiDB Dashboardの現在のセッションを他のユーザーと共有して、他のユーザーがユーザーパスワードを入力せずに TiDB Dashboardにアクセスして操作できるようにすることができます。
 
 ## 招待者の手順 {#steps-for-the-inviter}
 

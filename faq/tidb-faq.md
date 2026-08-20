@@ -29,7 +29,7 @@ TiDBクラスタは、TiDBサーバー、PD（Placement Driver）サーバー、
 
 ### TiDB は MySQL に基づいていますか? {#is-tidb-based-on-mysql}
 
-いいえ。TiDB は MySQL の構文とプロトコルをサポートしていますが、PingCAP, Inc. によって開発および保守されている新しいオープン ソース データベースです。
+いいえ。TiDB は MySQL の構文とプロトコルをサポートしていますが、PingCAP, Inc. によって開発および保守されている新しいオープン ソースデータベースです。
 
 ### TiDB、TiKV、PD (Placement Driver) のそれぞれの責任は何ですか? {#what-is-the-respective-responsibility-of-tidb-tikv-and-pd-placement-driver}
 

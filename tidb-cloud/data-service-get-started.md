@@ -110,7 +110,7 @@ Data Serviceの利用を開始するには、独自のデータアプリを作�
 
     > **Note:**
     >
-    > データアプリにリンクされているTiDB Cloud Starterインスタンスのみがドロップダウン リストに表示されます。リンクされたTiDB Cloud Starterインスタンスを管理するには、 [リンクされたデータソースを管理する](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)を参照してください。
+    > データアプリにリンクされているTiDB Cloud Starterインスタンスのみがドロップダウンリストに表示されます。リンクされたTiDB Cloud Starterインスタンスを管理するには、 [リンクされたデータソースを管理する](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)を参照してください。
 
     SQLエディタの上部にあるドロップダウンリストから、SQLステートメントを実行するTiDB Cloud Starterインスタンスを選択します。すると、右側のペインにある**「スキーマ」**タブで、そのTiDB Cloud Starterインスタンスのすべてのデータベースを表示できます。
 

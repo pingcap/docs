@@ -130,7 +130,7 @@ SELECT CURRENT_USER();
 
 ### DATABASE() {#database}
 
-`DATABASE()`関数は、現在のセッションで使用されているデータベース スキーマを返します。
+`DATABASE()`関数は、現在のセッションで使用されているデータベーススキーマを返します。
 
 ```sql
 SELECT DATABASE();

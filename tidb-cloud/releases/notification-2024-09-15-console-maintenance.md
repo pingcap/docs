@@ -1,6 +1,6 @@
 ---
 title: 2024-09-15 TiDB Cloud Console Maintenance Notification
-summary: 2024 年 9 月 15 日のTiDB Cloud Console メンテナンスの詳細 (メンテナンス ウィンドウ、理由、影響など) について説明します。
+summary: 2024 年 9 月 15 日のTiDB Cloud Console メンテナンスの詳細 (メンテナンスウィンドウ、理由、影響など) について説明します。
 ---
 
 # [2024-09-15] TiDB Cloudコンソールメンテナンスのお知らせ {#2024-09-15-tidb-cloud-console-maintenance-notification}

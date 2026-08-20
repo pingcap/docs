@@ -256,7 +256,7 @@ TiCDCが出力する増分変更ログにおける「元の値」。TiCDCが出�
 
 ### PD Control（pd-ctl） {#pd-control-pd-ctl}
 
-PD Control (pd-ctl) は、TiDB クラスタ内の Placement Driver (PD) と対話するために使用されるコマンドライン ツールです。これを使用して、クラスタの状態情報を取得したり、クラスタ構成を変更したりできます。詳細については、 [PD Controlユーザーガイド](/pd-control.md)を参照してください。
+PD Control (pd-ctl) は、TiDB クラスタ内の Placement Driver (PD) と対話するために使用されるコマンドラインツールです。これを使用して、クラスタの状態情報を取得したり、クラスタ構成を変更したりできます。詳細については、 [PD Controlユーザーガイド](/pd-control.md)を参照してください。
 
 ### 保留中／ダウン中（Pending/Down） {#pendingdown}
 

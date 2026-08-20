@@ -22,7 +22,7 @@ tiup demo bookshop prepare --host 127.0.0.1 --port 4000 --books 1000000
 
 SQL クエリが遅くなる最も一般的な理由は、 `SELECT`ステートメントが完全なテーブル スキャンを実行するか、間違ったインデックスを使用することです。
 
-TiDB が主キーではない列またはセカンダリ インデックス内の列に基づいて大規模なテーブルから少数の行を取得する場合、通常はパフォーマンスが低下します。
+TiDB が主キーではない列またはセカンダリインデックス内の列に基づいて大規模なテーブルから少数の行を取得する場合、通常はパフォーマンスが低下します。
 
 ```sql
 SELECT * FROM books WHERE title = 'Marian Yost';
@@ -64,7 +64,7 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 
 ### 解決策: セカンダリインデックスを使用する {#solution-use-secondary-index}
 
-上記のクエリを高速化するには、 `books.title`列にセカンダリ インデックスを追加します。
+上記のクエリを高速化するには、 `books.title`列にセカンダリインデックスを追加します。
 
 ```sql
 CREATE INDEX title_idx ON books (title);
@@ -108,13 +108,13 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 
 実行計画の`IndexLookup_10`からわかるように、TiDBは`title_idx`インデックスを使ってデータをクエリします。`estRows`の値は`1.27`です。これは、オプティマイザが`1.27`行しかスキャンされないと見積もっていることを意味します。推定されるスキャン行数は、フルテーブルスキャンの`1000000.00`行のデータよりもはるかに少ないです。
 
-実行計画`IndexLookup_10`では、まず`IndexRangeScan_8`演算子を使用して`title_idx`インデックスを通じて条件を満たすインデックス データを読み取り、次に`TableLookup_9`演算子を使用して、インデックス データに格納されている行 ID に従って対応する行をクエリします。
+実行計画`IndexLookup_10`では、まず`IndexRangeScan_8`演算子を使用して`title_idx`インデックスを通じて条件を満たすインデックスデータを読み取り、次に`TableLookup_9`演算子を使用して、インデックスデータに格納されている行 ID に従って対応する行をクエリします。
 
 TiDB 実行計画の詳細については、 [TiDB クエリ実行計画の概要](/explain-overview.md)を参照してください。
 
 ### 解決策: カバリングインデックスを使用する {#solution-use-covering-index}
 
-インデックスが、SQL ステートメントによってクエリされるすべての列を含むカバーリング インデックスである場合は、インデックス データをスキャンするだけでクエリに十分です。
+インデックスが、SQL ステートメントによってクエリされるすべての列を含むカバーリング インデックスである場合は、インデックスデータをスキャンするだけでクエリに十分です。
 
 たとえば、次のクエリでは、 `title`に基づいて対応する`price`クエリするだけで済みます。
 
@@ -136,7 +136,7 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 Time: 0.007s
 ```
 
-`title_idx`インデックスには`title`列のデータのみが含まれているため、TiDB は最初にインデックス データをスキャンし、次にテーブルから`price`列をクエリする必要があります。
+`title_idx`インデックスには`title`列のデータのみが含まれているため、TiDB は最初にインデックスデータをスキャンし、次にテーブルから`price`列をクエリする必要があります。
 
 ```sql
 EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -162,7 +162,7 @@ ALTER TABLE books DROP INDEX title_idx;
 CREATE INDEX title_price_idx ON books (title, price);
 ```
 
-`price`データは`title_price_idx`インデックスに格納されているため、次のクエリではインデックス データのスキャンのみが必要です。
+`price`データは`title_price_idx`インデックスに格納されているため、次のクエリではインデックスデータのスキャンのみが必要です。
 
 ```sql
 EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';

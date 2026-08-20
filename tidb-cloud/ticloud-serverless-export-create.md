@@ -19,7 +19,7 @@ ticloud serverless export create [flags]
 ticloud serverless export create
 ```
 
-非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスターからローカル ファイルにデータをエクスポートします。
+非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスターからローカルファイルにデータをエクスポートします。
 
 ```shell
 ticloud serverless export create -c <cluster-id> --filter <database.table>

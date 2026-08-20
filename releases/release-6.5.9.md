@@ -26,7 +26,7 @@ TiDB バージョン: 6.5.9
 -   TiKV
 
     -   不要な非同期ブロックを削除してメモリ使用量を削減する[＃16540](https://github.com/tikv/tikv/issues/16540) @[overvenus](https://github.com/overvenus)
-    -   TiKV の安定性を向上させるために、raftstore スレッドでスナップショット ファイルに対する IO 操作を実行しないようにします[＃16564](https://github.com/tikv/tikv/issues/16564) @[Connor1996](https://github.com/Connor1996)
+    -   TiKV の安定性を向上させるために、raftstore スレッドでスナップショットファイルに対する IO 操作を実行しないようにします[＃16564](https://github.com/tikv/tikv/issues/16564) @[Connor1996](https://github.com/Connor1996)
     -   ピアのスローログを追加し、メッセージを保存します [＃16600](https://github.com/tikv/tikv/issues/16600) @[Connor1996](https://github.com/Connor1996)
 
 -   ツール
@@ -35,7 +35,7 @@ TiDB バージョン: 6.5.9
 
         -   ローリング再起動時のログバックアップのRPO（目標復旧時点）を最適化します。これにより、ローリング再起動時のログバックアップタスクのチェックポイントラグが短縮されます[＃15410](https://github.com/tikv/tikv/issues/15410) @[YuJuncen](https://github.com/YuJuncen) 。
         -   ログバックアップのマージ操作に対する許容度を向上します。比較的長いマージ操作が発生した場合、ログバックアップタスクがエラー状態に陥る可能性が低くなります。 [＃16554](https://github.com/tikv/tikv/issues/16554) @[YuJuncen](https://github.com/YuJuncen)
-        -   チェックポイントの遅延が大きい場合にログバックアップ タスクを自動的に中止する機能をサポートし、GC の長時間のブロッキングや潜在的なクラスターの問題を回避します[＃50803](https://github.com/pingcap/tidb/issues/50803) @[RidRisR](https://github.com/RidRisR)
+        -   チェックポイントの遅延が大きい場合にログバックアップタスクを自動的に中止する機能をサポートし、GC の長時間のブロッキングや潜在的なクラスターの問題を回避します[＃50803](https://github.com/pingcap/tidb/issues/50803) @[RidRisR](https://github.com/RidRisR)
         -   リージョンリーダーシップの移行が発生すると、PITR ログバックアップの進行のレイテンシーが長くなるという問題を軽減します[＃13638](https://github.com/tikv/tikv/issues/13638) @[YuJuncen](https://github.com/YuJuncen)
         -   より効率的なアルゴリズムを使用して、データ復元中に SST ファイルをマージする速度を改善します [＃50613](https://github.com/pingcap/tidb/issues/50613) @[Leavrth](https://github.com/Leavrth)
         -   データ復元中に SST ファイルをバッチで取り込むことをサポート[＃16267](https://github.com/tikv/tikv/issues/16267) @[3pointer](https://github.com/3pointer)

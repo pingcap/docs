@@ -106,10 +106,10 @@ TiDB バージョン: 7.5.6
     -   メモリ使用量が少ないときにTiFlash が予期せずRaftメッセージの処理を拒否する可能性がある問題を修正[＃9745](https://github.com/pingcap/tiflash/issues/9745) @[CalvinNeo](https://github.com/CalvinNeo)
     -   大量のデータをインポートした後にTiFlash のメモリ使用量が高くなる可能性がある問題を修正[＃9812](https://github.com/pingcap/tiflash/issues/9812) @[CalvinNeo](https://github.com/CalvinNeo)
     -   パーティションテーブルに対するクエリが、パーティションテーブルで`ALTER TABLE ... RENAME COLUMN`を実行した後にエラーを返す可能性がある問題を修正しました。 [＃9787](https://github.com/pingcap/tiflash/issues/9787) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    -   特定の状況でTiFlash が予期せず終了したときにエラー スタック トレースを印刷できないことがある問題を修正[＃9902](https://github.com/pingcap/tiflash/issues/9902) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   特定の状況でTiFlash が予期せず終了したときにエラースタック トレースを印刷できないことがある問題を修正[＃9902](https://github.com/pingcap/tiflash/issues/9902) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   `profiles.default.init_thread_count_scale` `0` に設定するとTiFlash の起動がブロックされる可能性がある問題を修正しました [＃9906](https://github.com/pingcap/tiflash/issues/9906) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   クエリに仮想列が含まれており、リモート読み取りをトリガーするときに`Not found column`エラーが発生する可能性がある問題を修正しました。 [＃9561](https://github.com/pingcap/tiflash/issues/9561) @[guo-shaoge](https://github.com/guo-shaoge)
-    -   分散ストレージおよびコンピューティングアーキテクチャで、 TiFlashコンピューティング ノードがリージョンピアを追加するためのターゲット ノードとして誤って選択される可能性がある問題を修正しました。 [＃9750](https://github.com/pingcap/tiflash/issues/9750) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   分散ストレージおよびコンピューティングアーキテクチャで、 TiFlashコンピューティングノードがリージョンピアを追加するためのターゲット ノードとして誤って選択される可能性がある問題を修正しました。 [＃9750](https://github.com/pingcap/tiflash/issues/9750) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 -   ツール
 

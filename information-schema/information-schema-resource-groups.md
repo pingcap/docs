@@ -81,7 +81,7 @@ SELECT * FROM information_schema.resource_groups WHERE NAME = 'rg1'; -- View the
 -   `NAME` : リソースグループの名前。
 -   `RU_PER_SEC` : リソースグループのバックフィル速度。単位は RU/秒で、RU [リクエストユニット](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)を意味します。
 -   `PRIORITY` : TiKV で処理されるタスクの絶対優先度。異なるリソースは`PRIORITY`の設定に従ってスケジュールされます。 `PRIORITY`が高いタスクが最初にスケジュールされます。 `PRIORITY`が同じリソースグループの場合、タスクは`RU_PER_SEC`の設定に従って比例的にスケジュールされます。 `PRIORITY`が指定されていない場合、デフォルトの優先度は`MEDIUM`です。
--   `BURSTABLE` : リソースグループが利用可能なシステム リソースを過剰に使用することを許可するかどうか。
+-   `BURSTABLE` : リソースグループが利用可能なシステムリソースを過剰に使用することを許可するかどうか。
 
 > **Note:**
 >

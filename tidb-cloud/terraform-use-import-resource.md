@@ -22,13 +22,13 @@ summary: tidbcloud_import` リソースを使用してインポートタスク�
 
 ## インポートタスクを作成して実行する {#create-and-run-an-import-task}
 
-`tidbcloud_import`リソースを使用して、ローカル インポートタスクまたは Amazon S3 インポートタスクのいずれかを管理できます。
+`tidbcloud_import`リソースを使用して、ローカルインポートタスクまたは Amazon S3 インポートタスクのいずれかを管理できます。
 
 ### ローカルインポートタスクを作成して実行する {#create-and-run-a-local-import-task}
 
 > **Note:**
 >
-> ローカル ファイルのインポートは、 TiDB Cloud Starter またはTiDB Cloud Essential クラスターでのみサポートされ、 TiDB Cloud Dedicated クラスターではサポートされません。
+> ローカルファイルのインポートは、 TiDB Cloud Starter またはTiDB Cloud Essential クラスターでのみサポートされ、 TiDB Cloud Dedicated クラスターではサポートされません。
 
 1.  インポート用のCSVファイルを作成します。例:
 

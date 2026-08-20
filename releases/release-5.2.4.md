@@ -113,7 +113,7 @@ TiDBバージョン：5.2.4
     -   悲観的トランザクションモードでプリライト要求を再試行すると、まれにデータ不整合のリスクが発生する可能性がある問題を修正しました [#11187](https://github.com/tikv/tikv/issues/11187)
     -   統計スレッドのデータ監視によって引き起こされるメモリリークを修正 [#11195](https://github.com/tikv/tikv/issues/11195)
     -   TiKVメトリクスにおけるインスタンスごとのgRPCリクエストの平均レイテンシーが不正確である問題を修正しました [#11299](https://github.com/tikv/tikv/issues/11299)
-    -   ピアの状態が`Applying`のときにスナップショット ファイルを削除すると発生するpanic問題を修正します [#11746](https://github.com/tikv/tikv/issues/11746)
+    -   ピアの状態が`Applying`のときにスナップショットファイルを削除すると発生するpanic問題を修正します [#11746](https://github.com/tikv/tikv/issues/11746)
     -   GCワーカーがビジー状態のときにTiKVがデータ範囲を削除できない（つまり、内部コマンド`unsafe_destroy_range`が実行される）バグを修正しました [#11903](https://github.com/tikv/tikv/issues/11903)
     -   初期化されていないレプリカを削除すると、古いレプリカが再作成される可能性がある問題を修正しました [#10533](https://github.com/tikv/tikv/issues/10533)
     -   TiKVがリバーステーブルスキャンを実行する際にメモリロックを検出できない問題を修正しました [#11440](https://github.com/tikv/tikv/issues/11440)

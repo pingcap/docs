@@ -20,7 +20,7 @@ aliases: ['/ja/tidb/stable/vector-search-data-types/','/ja/tidbcloud/vector-sear
 
 ベクトル データ型を使用すると、 [`JSON`](/data-type-json.md)型を使用する場合に比べて次の利点があります。
 
--   ベクトル インデックスのサポート: ベクトルの検索を高速化するために[ベクトル検索インデックス](/ai/reference/vector-search-index.md)を構築できます。
+-   ベクトルインデックスのサポート: ベクトルの検索を高速化するために[ベクトル検索インデックス](/ai/reference/vector-search-index.md)を構築できます。
 -   次元の強制: 異なる次元のベクトルの挿入を禁止する次元を指定できます。
 -   最適化されたストレージ形式: ベクトル データ型はベクトル データの処理に最適化されており、 `JSON`型と比較して優れたスペース効率とパフォーマンスを実現します。
 

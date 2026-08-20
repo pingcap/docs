@@ -151,7 +151,7 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 
 ### `grpc-concurrency` {#grpc-concurrency}
 
--   gRPC ワーカー スレッドの数。 gRPC スレッドプールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
+-   gRPC ワーカースレッドの数。 gRPC スレッドプールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
 
 -   デフォルト値:
 
@@ -501,7 +501,7 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 
 ### `scheduler-worker-pool-size` {#scheduler-worker-pool-size}
 
--   スケジューラのスレッドプール内のスレッドの数。スケジューラ スレッドは主に、データの書き込み前にトランザクションの整合性をチェックするために使用されます。 CPU コアの数が`16`以上の場合、デフォルト値は`8`です。それ以外の場合、デフォルト値は`4`です。スケジューラ スレッドプールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
+-   スケジューラのスレッドプール内のスレッドの数。スケジューラ スレッドは主に、データの書き込み前にトランザクションの整合性をチェックするために使用されます。 CPU コアの数が`16`以上の場合、デフォルト値は`8`です。それ以外の場合、デフォルト値は`4`です。スケジューラスレッドプールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
 -   デフォルト値: `4`
 -   値の範囲: `[1, MAX(4, CPU)]` 。 `MAX(4, CPU)`では、 `CPU`は CPU コアの数を意味します。 `MAX(4, CPU)`は`4`と`CPU`のうち大きい方の値を取得します。
 
@@ -1305,7 +1305,7 @@ RocksDBに関連するコンフィグレーション項目
 
 ### `max-background-jobs` {#max-background-jobs-1}
 
--   RocksDB のバックグラウンド スレッドの数。 RocksDB スレッドプールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
+-   RocksDB のバックグラウンドスレッドの数。 RocksDB スレッドプールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
 -   デフォルト値:
     -   CPUコア数が10の場合、デフォルト値は`9`です。
     -   CPUコア数が8の場合、デフォルト値は`7`です。
@@ -1950,7 +1950,7 @@ Titanに関連するコンフィグレーション項目。
 
 ### `max-background-jobs` {#max-background-jobs}
 
--   RocksDB のバックグラウンド スレッドの数。 RocksDB スレッドプールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
+-   RocksDB のバックグラウンドスレッドの数。 RocksDB スレッドプールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
 -   デフォルト値: `4`
 -   最小値: `2`
 
@@ -2287,7 +2287,7 @@ Raft Engineに関連するコンフィグレーション項目。
 
 ### `previous-master-key` {#previous-master-key}
 
--   新しいマスター キーをローテーションするときに古いマスター キーを指定します。構成形式は`master-key`と同じです。マスターキーの設定方法については、[保存時の暗号化- 暗号化の設定](/encryption-at-rest.md#configure-encryption)を参照してください。
+-   新しいマスターキーをローテーションするときに古いマスターキーを指定します。構成形式は`master-key`と同じです。マスターキーの設定方法については、[保存時の暗号化- 暗号化の設定](/encryption-at-rest.md#configure-encryption)を参照してください。
 
 ## インポート {#import}
 
@@ -2409,7 +2409,7 @@ BRバックアップに関連するコンフィグレーション項目。
 
 ### `num-threads` {#num-threads}
 
--   バックアップを処理するワーカー スレッドの数
+-   バックアップを処理するワーカースレッドの数
 -   デフォルト値: `MIN(CPU * 0.5, 8)`
 -   値の範囲: `[1, CPU]`
 -   最小値: `1`
@@ -2422,7 +2422,7 @@ BRバックアップに関連するコンフィグレーション項目。
 ### `sst-max-size` {#sst-max-size}
 
 -   バックアップSSTファイルのサイズのしきい値。TiKVリージョン内のバックアップファイルのサイズがこのしきい値を超えると、TiKVリージョンが複数のリージョン範囲に分割され、ファイルは複数のファイルにバックアップされます。分割されたリージョン内の各ファイルは、 `sst-max-size`と同じサイズ（またはわずかに大きいサイズ）です。
--   例えば、 `[a,e)`リージョンのバックアップ ファイルのサイズが`sst-max-size`より大きい場合、そのファイルは { `[a,b)` 、 `[b,c)`および`[c,d)` `[d,e)` } の領域を持つ複数のファイルにバックアップされ、 `[a,b)` 、 `[b,c)` 、 `[c,d)`のサイズは`sst-max-size`と同じ (またはわずかに大きい) です。
+-   例えば、 `[a,e)`リージョンのバックアップファイルのサイズが`sst-max-size`より大きい場合、そのファイルは { `[a,b)` 、 `[b,c)`および`[c,d)` `[d,e)` } の領域を持つ複数のファイルにバックアップされ、 `[a,b)` 、 `[b,c)` 、 `[c,d)`のサイズは`sst-max-size`と同じ (またはわずかに大きい) です。
 -   デフォルト値: `"384MiB"` 。v8.4.0 より前のバージョンでは、デフォルト値は`"144MiB"`です。
 
 ### `enable-auto-tune` <span class="version-mark">v5.4.0の新機能</span> {#enable-auto-tune-new-in-v540}
@@ -2437,7 +2437,7 @@ BRバックアップに関連するコンフィグレーション項目。
 > この設定項目は、S3 レート制限によって引き起こされるバックアップの失敗に対処するために導入されました。TiDB v6.1.1 以降では、この値の設定には注意してください。大きく設定しすぎると、ネットワークが不安定な場合に大きなアップロードパートが失敗したりタイムアウトしたりする可能性があります。
 
 -   バックアップ時にS3へのマルチパートアップロードを実行する際に使用されるパートサイズです。この設定値を調整することで、S3に送信されるリクエスト数を制御できます。
--   データが S3 にバックアップされ、バックアップ ファイルがこの設定項目の値より大きい場合、 [マルチパートアップロード](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)が自動的に有効になります。圧縮率に基づいて、96 MiBリージョンによって生成されるバックアップ ファイルは約 10 MiB ～ 30 MiB になります。
+-   データが S3 にバックアップされ、バックアップファイルがこの設定項目の値より大きい場合、 [マルチパートアップロード](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)が自動的に有効になります。圧縮率に基づいて、96 MiBリージョンによって生成されるバックアップファイルは約 10 MiB ～ 30 MiB になります。
 -   デフォルト値: 5MiB
 
 ### `gcp-v2-enable` <span class="version-mark">New in v8.5.7</span> {#gcp-v2-enable-new-in-v857-1}
@@ -2753,7 +2753,7 @@ TiKVストレージレイヤーのリソース制御に関連するコンフィ�
 -   値のオプション：
     -   `aggressive` : このポリシーは優先度の高いタスクのパフォーマンスを優先し、優先度の高いタスクのスループットとレイテンシーにはほとんど影響を与えないようにしますが、優先度の低いタスクの実行速度は低下します。
     -   `moderate` : このポリシーは、優先度の低いタスクに対してバランスの取れたフロー制御を課し、優先度の高いタスクへの影響を少なくします。
-    -   `conservative` : このポリシーは、システム リソースが最大限に活用されることを優先し、優先度の低いタスクが必要に応じてシステムで利用可能なリソースを最大限に活用できるようにするため、優先度の高いタスクのパフォーマンスに大きな影響を与えます。
+    -   `conservative` : このポリシーは、システムリソースが最大限に活用されることを優先し、優先度の低いタスクが必要に応じてシステムで利用可能なリソースを最大限に活用できるようにするため、優先度の高いタスクのパフォーマンスに大きな影響を与えます。
 -   デフォルト値: `moderate` 。
 
 ### `bg-cpu-throttle-threshold` <span class="version-mark">New in v8.5.7</span> {#bg-cpu-throttle-threshold-new-in-v857}

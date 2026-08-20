@@ -1471,7 +1471,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [システム変数](/system-variables.md#tidb_enable_clustered_index-new-in-v50)
 -   [TiDB バックアップと復元の概要](/br/backup-and-restore-overview.md)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
--   [TiDB データベース スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)
+-   [TiDB データベーススキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)
 -   [TiDB Lightningコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)
 -   [TiDB 6.4.0 リリースノート](/releases/release-6.4.0.md)
 -   [TiDB 5.0 リリースノート](/releases/release-5.0.0.md)

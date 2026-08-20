@@ -41,7 +41,7 @@ TiDB Ansible バージョン: 3.0.1
 -   `FAST ANALYZE`文で「無効なキー」エラーが報告される場合がある問題を修正[＃11098](https://github.com/pingcap/tidb/pull/11098)
 -   列のデフォルト値として`CURRENT_TIMESTAMP`が使用され、float精度が指定されている場合、 `SHOW CREATE TABLE`ステートメントで表示される精度が不完全になる問題を修正しました。 [＃11088](https://github.com/pingcap/tidb/pull/11088)
 -   MySQL との互換性を保つために、ウィンドウ関数がエラーを報告するときに関数名が小文字にならない問題を修正しました。 [＃11118](https://github.com/pingcap/tidb/pull/11118)
--   TiKV クライアント バッチ gRPC のバックグラウンド スレッドがパニックを起こした後、TiDB が TiKV に接続できず、サービスを提供できなくなる問題を修正しました[＃11101](https://github.com/pingcap/tidb/pull/11101)
+-   TiKV クライアント バッチ gRPC のバックグラウンドスレッドがパニックを起こした後、TiDB が TiKV に接続できず、サービスを提供できなくなる問題を修正しました[＃11101](https://github.com/pingcap/tidb/pull/11101)
 -   文字列の浅いコピーにより変数が誤って`SetVar`に設定される問題を修正しました [＃11044](https://github.com/pingcap/tidb/pull/11044)
 -   `INSERT … ON DUPLICATE`ステートメントがテーブルパーティションに適用されると実行が失敗し、エラーが報告される問題を修正しました。 [＃11231](https://github.com/pingcap/tidb/pull/11231)
 -   悲観的ロック（実験的機能）

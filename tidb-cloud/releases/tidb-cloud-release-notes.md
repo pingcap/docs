@@ -363,7 +363,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     -   [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)でごみ箱機能が利用可能になりました。ごみ箱には、有効なバックアップが存在する削除済みTiDB Cloudリソースのデータが保存されます。
 
-        バックアップが存在するTiDB Cloud Essentialインスタンスが削除されると、そのバックアップ ファイルはごみ箱に移動されます。自動バックアップによって作成されたバックアップ ファイルは、指定された期間、ごみ箱に保持されます。データ損失を防ぐため、保持期間が終了する前に、新しいTiDB Cloud Essentialインスタンスにデータを復元してください。なお、 TiDB Cloud Essentialインスタンス**にバックアップがない**場合、削除されたインスタンスはごみ箱に表示されません。
+        バックアップが存在するTiDB Cloud Essentialインスタンスが削除されると、そのバックアップファイルはごみ箱に移動されます。自動バックアップによって作成されたバックアップファイルは、指定された期間、ごみ箱に保持されます。データ損失を防ぐため、保持期間が終了する前に、新しいTiDB Cloud Essentialインスタンスにデータを復元してください。なお、 TiDB Cloud Essentialインスタンス**にバックアップがない**場合、削除されたインスタンスはごみ箱に表示されません。
 
         詳細については、 [バックアップと復元](/tidb-cloud/backup-and-restore-serverless.md#restore-from-recycle-bin)を参照してください。
 
@@ -525,7 +525,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 -   **TiDB Cloud Dedicated**
 
-    -   セキュリティ追跡を改善するために、 TiDB Cloudの [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)に**パブリック エンドポイント**ステータスを追加します。
+    -   セキュリティ追跡を改善するために、 TiDB Cloudの [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)に**パブリックエンドポイント**ステータスを追加します。
 
 **コンソールの変更**
 
@@ -539,7 +539,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     -   データフローシナリオにおけるプライベートリンク接続でのAmazon MSK Provisionedをサポートします。
 
-        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、 [Amazon MSK プロビジョニング済み](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html)クラスターへのプライベートリンク接続の作成をサポートするようになりました。この機能により、トラフィックを公共のインターネットに公開することなく、Amazon MSK プロビジョニングされたクラスターへの変更フィードのプライベート ネットワーク接続が可能になります。
+        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、 [Amazon MSK プロビジョニング済み](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html)クラスターへのプライベートリンク接続の作成をサポートするようになりました。この機能により、トラフィックを公共のインターネットに公開することなく、Amazon MSK プロビジョニングされたクラスターへの変更フィードのプライベートネットワーク接続が可能になります。
 
         詳細については、 [プライベートリンク接続を介してAmazon MSK Provisionedに接続します](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)を参照してください。
 

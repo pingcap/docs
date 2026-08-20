@@ -286,7 +286,7 @@ MySQLとDMの操作プロセスは次のとおりです。
 
 > **Note:**
 >
-> `shard-ddl-lock unlock`を実行した後、オフラインになった MySQL ソースが再ロードされ、DM ワーカーがシャードテーブルのデータを移行しようとすると、データとダウンストリーム テーブル構造の間で一致エラーが発生する可能性があります。
+> `shard-ddl-lock unlock`を実行した後、オフラインになった MySQL ソースが再ロードされ、DM ワーカーがシャードテーブルのデータを移行しようとすると、データとダウンストリームテーブル構造の間で一致エラーが発生する可能性があります。
 
 ### シナリオ2: DDLロック解除プロセス中に一部のDMワーカーが異常停止するか、ネットワーク障害が発生する {#scenario-2-some-dm-workers-stop-abnormally-or-the-network-failure-occurs-during-the-ddl-unlocking-process}
 

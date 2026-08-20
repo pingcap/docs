@@ -1,6 +1,6 @@
 ---
 title: Import Local Files to TiDB Cloud Starter
-summary: ローカル ファイルをTiDB Cloud Starter にインポートする方法を学びます。
+summary: ローカルファイルをTiDB Cloud Starter にインポートする方法を学びます。
 ---
 
 # ローカルファイルをTiDB Cloud Starterにインポートする {#import-local-files-to-tidb-cloud-starter}
@@ -11,8 +11,8 @@ summary: ローカル ファイルをTiDB Cloud Starter にインポートする
 
 ## 制限事項 {#limitations}
 
--   現在、 TiDB Cloud は、1 つのタスクにつき 250 MiB 以内の CSV 形式のローカル ファイルのインポートのみをサポートしています。
--   ローカル ファイルのインポートは、 TiDB Cloud Starter クラスターでのみサポートされ、 TiDB Cloud Essential クラスターおよび TiDB Cloud Dedicated クラスターではサポートされません。
+-   現在、 TiDB Cloud は、1 つのタスクにつき 250 MiB 以内の CSV 形式のローカルファイルのインポートのみをサポートしています。
+-   ローカルファイルのインポートは、 TiDB Cloud Starter クラスターでのみサポートされ、 TiDB Cloud Essential クラスターおよび TiDB Cloud Dedicated クラスターではサポートされません。
 -   複数のインポートタスクを同時に実行することはできません。
 
 ## ローカルファイルをインポートする {#import-local-files}
@@ -27,7 +27,7 @@ summary: ローカル ファイルをTiDB Cloud Starter にインポートする
 
     2.  ターゲット TiDB Cloud Starter インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**[データ]** &gt; **[インポート]**をクリックします。
 
-2.  **インポート**ページでは、ローカルファイルをアップロードエリアに直接ドラッグ＆ドロップするか、 **Upload a local file**をクリックして対象のローカルファイルを選択してアップロードできます。1つのタスクにつき、250MiB未満のCSVファイルを1つだけアップロードできます。ローカルファイルが250MiBを超える場合は、 [250 MiB を超えるローカル ファイルをインポートするにはどうすればよいでしょうか?](#how-to-import-a-local-file-larger-than-250-mib)を参照してください。
+2.  **インポート**ページでは、ローカルファイルをアップロードエリアに直接ドラッグ＆ドロップするか、 **Upload a local file**をクリックして対象のローカルファイルを選択してアップロードできます。1つのタスクにつき、250MiB未満のCSVファイルを1つだけアップロードできます。ローカルファイルが250MiBを超える場合は、 [250 MiB を超えるローカルファイルをインポートするにはどうすればよいでしょうか?](#how-to-import-a-local-file-larger-than-250-mib)を参照してください。
 
 3.  **「宛先」**セクションで、ターゲットデータベースとターゲットテーブルを選択するか、名前を直接入力して新しいデータベースまたはテーブルを作成します。名前には、Unicode BMP（Basic Multilingual Plane）の文字のみを使用し、ヌル文字`\u0000`と空白文字は含めず、最大64文字まで使用できます。 **Define Table**をクリックすると、 **Table Definition**セクションが表示されます。
 
@@ -106,7 +106,7 @@ LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE import_test FIELDS TERMINATED BY ',
 
 列名がTiDBで予約済みの[キーワード](/keywords.md)である場合、その列をクエリする際には、列名を囲むバッククォート`` ` ``を追加する必要があります。例えば、列名が`order`の場合、 `` `order` ``で列をクエリする必要があります。
 
-### 250 MiB を超えるローカル ファイルをインポートするにはどうすればよいでしょうか? {#how-to-import-a-local-file-larger-than-250-mib}
+### 250 MiB を超えるローカルファイルをインポートするにはどうすればよいでしょうか? {#how-to-import-a-local-file-larger-than-250-mib}
 
 ファイルが250MiBより大きい場合は、 [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)を使用してファイルをインポートできます。詳細については、 [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md)を参照してください。
 

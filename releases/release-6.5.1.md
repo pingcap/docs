@@ -162,7 +162,7 @@ TiDB バージョン: 6.5.1
         -   ログバックアップが実行中のクラスタにデータを復元すると、ログバックアップファイルが復元できなくなる問題を修正[＃40797](https://github.com/pingcap/tidb/issues/40797) @[Leavrth](https://github.com/Leavrth)
         -   完全バックアップの失敗後にチェックポイントからバックアップを再開しようとしたときに発生するpanicの問題を修正[＃40704](https://github.com/pingcap/tidb/issues/40704) @[Leavrth](https://github.com/Leavrth)
         -   PITRエラーが上書きされる問題を修正 [＃40576](https://github.com/pingcap/tidb/issues/40576) @[Leavrth](https://github.com/Leavrth)
-        -   PITR バックアップ タスクで、先行所有者と GC 所有者が異なる場合にチェックポイントが進まない問題を修正しました[＃41806](https://github.com/pingcap/tidb/issues/41806) @[joccau](https://github.com/joccau)
+        -   PITR バックアップタスクで、先行所有者と GC 所有者が異なる場合にチェックポイントが進まない問題を修正しました[＃41806](https://github.com/pingcap/tidb/issues/41806) @[joccau](https://github.com/joccau)
 
     -   TiCDC
 

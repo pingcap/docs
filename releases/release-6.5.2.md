@@ -30,7 +30,7 @@ TiDB バージョン: 6.5.2
 
 -   TiFlash
 
-    -   TiFlash読み取り時のタスク スケジューリングの CPU 消費を削減[＃6495](https://github.com/pingcap/tiflash/issues/6495) @[JinheLin](https://github.com/JinheLin)
+    -   TiFlash読み取り時のタスクスケジューリングの CPU 消費を削減[＃6495](https://github.com/pingcap/tiflash/issues/6495) @[JinheLin](https://github.com/JinheLin)
     -   デフォルト設定でBRおよびTiDB LightningからTiFlashへのデータインポートのパフォーマンスを向上 [＃7272](https://github.com/pingcap/tiflash/issues/7272) @[breezewish](https://github.com/breezewish)
 
 -   ツール

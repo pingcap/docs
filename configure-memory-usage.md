@@ -140,16 +140,16 @@ TiDBが使用するトランザクションモデルでは、トランザクシ�
 TiDBは、実行演算子のディスクへの書き込みをサポートしています。SQL実行のメモリ使用量がメモリクォータを超えた場合、tidb-serverは実行演算子の中間データをディスクに書き出すことで、メモリ負荷を軽減します。ディスクへの書き込みをサポートする演算子には、Sort、MergeJoin、HashJoin、HashAggなどがあります。
 
 -   ディスクスピル動作は、 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 、 [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) 、 [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path) 、および[`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota)パラメータによって共同で制御されます。
--   ディスク スピルがトリガーされると、TiDB はキーワード`memory exceeds quota, spill to disk now`または`memory exceeds quota, set aggregate mode to spill-mode`を含むログを出力します。
+-   ディスクスピルがトリガーされると、TiDB はキーワード`memory exceeds quota, spill to disk now`または`memory exceeds quota, set aggregate mode to spill-mode`を含むログを出力します。
 -   Sort、MergeJoin、およびHashJoin演算子のディスクスピルはv4.0.0で導入されました。HashAgg演算子の非並列アルゴリズムのディスクスピルはv5.2.0で導入されました。HashAgg演算子の並列アルゴリズムのディスクスピルはv8.0.0で実験的機能として導入され、v8.2.0で一般提供（GA）されました。TopN演算子のディスクスピルはv8.3.0で導入されました。
 -   [`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800)システム変数を使用して、ディスクスピルをサポートする並列HashAggアルゴリズムを有効にするかどうかを制御できます。この変数は将来のリリースで廃止される予定です。
--   Sort、MergeJoin、HashJoin、HashAgg、または TopN を含む SQL 実行によって OOM が発生すると、TiDB はデフォルトでディスク スピルをトリガーします。
+-   Sort、MergeJoin、HashJoin、HashAgg、または TopN を含む SQL 実行によって OOM が発生すると、TiDB はデフォルトでディスクスピルをトリガーします。
 
 > **Note:**
 >
 > HashAgg のディスクスピルは、 `DISTINCT`集計関数を含む SQL 実行をサポートしていません。`DISTINCT`集計関数を含む SQL 実行でメモリ使用量が多すぎる場合、ディスクスピルは適用されません。
 
-次の例では、メモリを消費する SQL ステートメントを使用して、HashAgg のディスク スピル機能を示します。
+次の例では、メモリを消費する SQL ステートメントを使用して、HashAgg のディスクスピル機能を示します。
 
 1.  SQL ステートメントのメモリクォータを 1 GB (デフォルトは 1 GB) に設定します。
 
@@ -165,7 +165,7 @@ TiDBは、実行演算子のディスクへの書き込みをサポートして�
     [tidb]> explain analyze select /*+ HASH_AGG() */ count(*) from t t1 join t t2 join t t3 group by t1.a, t2.a, t3.a;
     ```
 
-    この SQL ステートメントを実行するとメモリが大量に消費されるため、次の「メモリ クォータ不足」エラーメッセージが返されます。
+    この SQL ステートメントを実行するとメモリが大量に消費されるため、次の「メモリクォータ不足」エラーメッセージが返されます。
 
     ```sql
     ERROR 1105 (HY000): Out Of Memory Quota![conn_id=3]

@@ -1,6 +1,6 @@
 ---
 title: Import Snapshot Files into TiDB Cloud Dedicated
-summary: Amazon Auroraまたは RDS for MySQL スナップショット ファイルをTiDB Cloud Dedicated にインポートする方法を学びます。
+summary: Amazon Auroraまたは RDS for MySQL スナップショットファイルをTiDB Cloud Dedicated にインポートする方法を学びます。
 ---
 
 # スナップショットファイルをTiDB Cloud Dedicatedにインポートする {#import-snapshot-files-into-tidb-cloud-dedicated}

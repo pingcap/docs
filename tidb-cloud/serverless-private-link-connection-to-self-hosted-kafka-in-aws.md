@@ -10,9 +10,9 @@ summary: AWS エンドポイントサービスプライベートリンク接続�
 このメカニズムは次のように機能します。
 
 1.  プライベートリンク接続は、すべての Kafka ブローカーのアドレスとポートを返すブートストラップブローカーアドレスを使用して AWS エンドポイントサービスに接続します。
-2.  TiDB Cloud は、返されたブローカー アドレスとポートを使用して、プライベートリンク接続を介して接続を確立します。
+2.  TiDB Cloud は、返されたブローカーアドレスとポートを使用して、プライベートリンク接続を介して接続を確立します。
 3.  AWS エンドポイントサービスは、リクエストをロードバランサーに転送します。
-4.  ロード バランサーは、ポート マッピングに基づいて、対応する Kafka ブローカーにリクエストをルーティングします。
+4.  ロードバランサーは、ポート マッピングに基づいて、対応する Kafka ブローカーにリクエストをルーティングします。
 
 ## 前提条件 {#prerequisites}
 
@@ -61,7 +61,7 @@ AWS アカウント ID とアベイラビリティーゾーンを表示するに
 
 Kafka VPC には次のものが必要です。
 
--   ブローカー用のプライベート サブネットが 3 つ (AZ ごとに 1 つ)。
+-   ブローカー用のプライベートサブネットが 3 つ (AZ ごとに 1 つ)。
 -   任意の AZ に 1 つのパブリックサブネットがあり、インターネットに接続できる要塞ノードと 3 つのプライベートサブネットがあるため、Kafka クラスターを簡単にセットアップできます。本番環境では、Kafka VPC に接続できる独自の要塞ノードが必要になる場合があります。
 
 サブネットを作成する前に、AZ IDとAZ名のマッピングに基づいてAZ内にサブネットを作成します。以下のマッピングを例に挙げます。
@@ -70,7 +70,7 @@ Kafka VPC には次のものが必要です。
 -   `usw2-az2` =&gt; `us-west-2c`
 -   `usw2-az3` =&gt; `us-west-2b`
 
-次の AZ にプライベート サブネットを作成します。
+次の AZ にプライベートサブネットを作成します。
 
 -   `us-west-2a`
 -   `us-west-2c`
@@ -163,7 +163,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 **2.2. ブローカーノードを作成する**
 
-[EC2 リストページ](https://console.aws.amazon.com/ec2/home#Instances:)に進みます。ブローカー サブネットに、各 AZ に 1 つずつ、合計 3 つのブローカー ノードを作成します。
+[EC2 リストページ](https://console.aws.amazon.com/ec2/home#Instances:)に進みます。ブローカー サブネットに、各 AZ に 1 つずつ、合計 3 つのブローカーノードを作成します。
 
 -   サブネット`broker-usw2-az1`のブローカー 1
 
@@ -233,7 +233,7 @@ Kafka VPC を作成するには、次の手順を実行します。
     tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz
     ```
 
-3.  バイナリを各ブローカー ノードにコピーします。
+3.  バイナリを各ブローカーノードにコピーします。
 
     ```shell
     # Replace {broker-node1-ip} with your broker-node1 IP address
@@ -349,7 +349,7 @@ log.dirs=./data
 
 **2.4.3 Kafkaブローカーを起動する**
 
-スクリプトを作成し、それを実行して各ブローカー ノードで Kafka ブローカーを起動します。
+スクリプトを作成し、それを実行して各ブローカーノードで Kafka ブローカーを起動します。
 
 ```shell
 #!/bin/bash
@@ -674,7 +674,7 @@ b3.usw2-az3.unique_name.aws.plc.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: 
         -   **Health check protocol**： `TCP`
         -   **Register targets**: `broker-node3:39092`
 
-2.  [ロードバランサー](https://console.aws.amazon.com/ec2/home#LoadBalancers:)に進み、ネットワーク ロード バランサーを作成します。
+2.  [ロードバランサー](https://console.aws.amazon.com/ec2/home#LoadBalancers:)に進み、ネットワーク ロードバランサーを作成します。
 
     -   **Load balancer name**: `kafka-lb`
     -   **Schema**: `Internal`
@@ -711,7 +711,7 @@ b3.usw2-az3.unique_name.aws.plc.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: 
 
 ### 2. AWSエンドポイントサービスを設定する {#2-set-up-an-aws-endpoint-service}
 
-1.  [エンドポイントサービス](https://console.aws.amazon.com/vpcconsole/home#EndpointServices:)に進みます。 **Create endpoint service**をクリックして、Kafka ロード バランサーのプライベートリンク サービスを作成します。
+1.  [エンドポイントサービス](https://console.aws.amazon.com/vpcconsole/home#EndpointServices:)に進みます。 **Create endpoint service**をクリックして、Kafka ロードバランサーのプライベートリンクサービスを作成します。
 
     -   **Name**: `kafka-pl-service`
     -   **Load balancer type**: `Network`
@@ -738,7 +738,7 @@ TiDB Cloudでプライベートリンク接続を作成するには、次の手�
 
 ## ステップ4. Kafka設定内の一意の名前プレースホルダーを置き換える {#step-4-replace-the-unique-name-placeholder-in-kafka-configuration}
 
-1.  Kafka ブローカー ノードに戻り、各ブローカーの`advertised.listeners`構成内の`unique_name`プレースホルダーを、前の手順で取得した実際の一意の名前に置き換えます。
+1.  Kafka ブローカーノードに戻り、各ブローカーの`advertised.listeners`構成内の`unique_name`プレースホルダーを、前の手順で取得した実際の一意の名前に置き換えます。
 2.  すべてのブローカーを再構成したら、Kafka ブローカーを 1 つずつ再起動します。
 
 これで、このプライベートリンク接続と 9092 をブートストラップ ポートとして使用し、 TiDB Cloudから Kafka クラスターに接続できるようになります。

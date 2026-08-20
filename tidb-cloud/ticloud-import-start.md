@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/ticloud-import-start-local','/ja/tidbcloud/ticloud-impo
 
 # ticloud serverless import start {#ticloud-serverless-import-start}
 
-データ インポートタスクを開始します。
+データインポートタスクを開始します。
 
 ```shell
 ticloud serverless import start [flags]
@@ -20,7 +20,7 @@ ticloud serverless import create [flags]
 
 > **Note:**
 >
-> 現在、1 つのローカル インポートタスクにつき 1 つの CSV ファイルのみをインポートできます。
+> 現在、1 つのローカルインポートタスクにつき 1 つの CSV ファイルのみをインポートできます。
 
 ## 例 {#examples}
 
@@ -30,7 +30,7 @@ ticloud serverless import create [flags]
 ticloud serverless import start
 ```
 
-非対話型モードでローカル インポートタスクを開始します。
+非対話型モードでローカルインポートタスクを開始します。
 
 ```shell
 ticloud serverless import start --local.file-path <file-path> --cluster-id <cluster-id> --file-type <file-type> --local.target-database <target-database> --local.target-table <target-table>
@@ -42,7 +42,7 @@ ticloud serverless import start --local.file-path <file-path> --cluster-id <clus
 ticloud serverless import start --local.file-path <file-path> --cluster-id <cluster-id> --file-type <file-type> --local.target-database <target-database> --local.target-table <target-table> --local.concurrency 10
 ```
 
-カスタム CSV 形式でローカル インポートタスクを開始します。
+カスタム CSV 形式でローカルインポートタスクを開始します。
 
 ```shell
 ticloud serverless import start --local.file-path <file-path> --cluster-id <cluster-id> --file-type CSV --local.target-database <target-database> --local.target-table <target-table> --csv.separator \" --csv.delimiter \' --csv.backslash-escape=false --csv.trim-last-separator=true
@@ -83,8 +83,8 @@ ticloud serverless import start --source-type AZURE_BLOB --azblob.uri <azure-blo
 | --source-type string       | インポートソースの種類を [ `"LOCAL"` `"S3"` `"GCS"` `"AZURE_BLOB"` ] のいずれかで指定します。デフォルト値は`"LOCAL"`です。                      | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
 | -c, --cluster-id string        | クラスター ID を指定します。                                                                                              | はい  | 非対話型モードでのみ動作します。         |   |     |                          |
 | --local.concurrency int     | ファイルのアップロードの同時実行数を指定します。デフォルト値は`5`です。                                                                         | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --local.file-path string       | インポートするローカル ファイルのパスを指定します。                                                                                    | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --local.target-database string | データのインポート先のターゲット データベースを指定します。                                                                                | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
+| --local.file-path string       | インポートするローカルファイルのパスを指定します。                                                                                    | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
+| --local.target-database string | データのインポート先のターゲットデータベースを指定します。                                                                                | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
 | --local.target-table string    | データのインポート先のターゲットテーブルを指定します。                                                                                  | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
 | --file-type string         | インポート ファイルの種類を ["CSV" "SQL" "AURORA_SNAPSHOT" "PARQUET"] のいずれかで指定します。 | はい  | 非対話型モードでのみ動作します。         |   |     |                          |
 | --csv.backslash-escape         | CSVファイル内のフィールド内のバックスラッシュをエスケープ文字として解析するかどうかを指定します。デフォルト値は`true`です。                                            | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |

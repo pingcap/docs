@@ -121,7 +121,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 ## `tidbcloud_cluster_specs`データソースを使用してクラスター仕様情報を取得する {#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source}
 
-クラスターを作成する前に、使用可能なすべての構成値 (サポートされているクラウド プロバイダー、リージョン、ノード サイズなど) が含まれるクラスター仕様情報を取得する必要があります。
+クラスターを作成する前に、使用可能なすべての構成値 (サポートされているクラウドプロバイダー、リージョン、ノード サイズなど) が含まれるクラスター仕様情報を取得する必要があります。
 
 クラスター仕様情報を取得するには、次のように`tidbcloud_cluster_specs`データソースを使用できます。
 
@@ -254,7 +254,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 結果は次のとおりです。
 
--   `cloud_provider`は、TiDB クラスターをホストできるクラウド プロバイダーです。
+-   `cloud_provider`は、TiDB クラスターをホストできるクラウドプロバイダーです。
 -   `region`は`cloud_provider`の領域です。
 -   `node_quantity_range`最小ノード数とノードをスケーリングするステップを示します。
 -   `node_size`はノードのサイズです。

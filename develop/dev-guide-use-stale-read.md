@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/dev-guide-use-stale-read/','/ja/tidbcloud/dev-guide-u
 
 実際には、 [使用シナリオ](/stale-read.md#usage-scenarios-of-stale-read)に基づいて、TiDB でステイル読み取り を有効にすることが適切かどうかを慎重に検討してください。アプリケーションが非リアルタイム データの読み取りを許容できない場合は、 ステイル読み取りを有効にしないでください。
 
-TiDB は、ステートメント レベル、トランザクション レベル、セッション レベルの 3 つのレベルのステイル読み取りを提供します。
+TiDB は、ステートメントレベル、トランザクション レベル、セッションレベルの 3 つのレベルのステイル読み取りを提供します。
 
 ## 導入 {#introduction}
 
@@ -74,7 +74,7 @@ Bookshopアプリケーションでは、書籍のリアルタイム価格の表
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-特定の時間より前の書籍の価格を照会するには、上記のクエリ ステートメントに`AS OF TIMESTAMP <datetime>`句を追加します。
+特定の時間より前の書籍の価格を照会するには、上記のクエリステートメントに`AS OF TIMESTAMP <datetime>`句を追加します。
 
 ```sql
 SELECT id, title, type, price FROM books AS OF TIMESTAMP '2022-04-20 15:20:00' ORDER BY published_at DESC LIMIT 5;

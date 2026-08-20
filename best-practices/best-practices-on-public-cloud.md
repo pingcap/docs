@@ -1,6 +1,6 @@
 ---
 title: TiDB Best Practices on Public Cloud
-summary: パブリック クラウドに TiDB をデプロイするためのベストプラクティスについて説明します。
+summary: パブリッククラウドに TiDB をデプロイするためのベストプラクティスについて説明します。
 aliases: ['/ja/tidb/stable/best-practices-on-public-cloud/']
 ---
 
@@ -63,7 +63,7 @@ sdd           1033.00   4132.00   1141.33  31685.33   571.00    0.94 100.00
 
 #### ミドルレンジディスク {#middle-range-disk}
 
-さまざまなパブリック クラウドに推奨されるミドルレンジ ディスクは次のとおりです。
+さまざまなパブリッククラウドに推奨されるミドルレンジ ディスクは次のとおりです。
 
 -   AWSでは[gp3](https://aws.amazon.com/ebs/general-purpose/)推奨されます。gp3ボリュームは、ボリュームサイズに関係なく、3000 IOPSと125 MB/秒のスループットを無料で割り当てることができ、通常はRaft Engineに十分な値です。
 

@@ -18,7 +18,7 @@ TiDB Cloudプランに応じて、適切なエンドポイントモデルを選�
 
 > **Tip:**
 >
-> パブリック エンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [パブリック接続経由​​でTiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
+> パブリックエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [パブリック接続経由​​でTiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
 
 共有モデルを使用してパブリックエンドポイント経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続するには、以下の手順を実行してください。
 
@@ -45,11 +45,11 @@ TiDB Cloudプランに応じて、適切なエンドポイントモデルを選�
     > **Note:**
     >
     > -   接続タイプを`Public`のままにすると、接続が標準の TLS 接続を介して行われることを意味します。詳細については、 [TiDB Cloud StarterまたはEssentialへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を参照してください。
-    > -   **Private Endpoint**ドロップダウン リストで**Connection Type**を選択した場合、接続がプライベートエンドポイント経由であることを意味します。詳細については、 [AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
+    > -   **Private Endpoint**ドロップダウンリストで**Connection Type**を選択した場合、接続がプライベートエンドポイント経由であることを意味します。詳細については、 [AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
 
     </CustomContent>
 
-4.  TiDB Cloudでは、TiDB Cloud Starterインスタンス用に[ブランチ](https://docs.pingcap.com/tidbcloud/branch-overview/?plan=starter)を作成できます。ブランチが作成されると、**ブランチの**ドロップダウン リストからブランチに接続できます。 `main` TiDB Cloud Starterインスタンス自体を表します。
+4.  TiDB Cloudでは、TiDB Cloud Starterインスタンス用に[ブランチ](https://docs.pingcap.com/tidbcloud/branch-overview/?plan=starter)を作成できます。ブランチが作成されると、**ブランチの**ドロップダウンリストからブランチに接続できます。 `main` TiDB Cloud Starterインスタンス自体を表します。
 
 5.  まだパスワードを設定していない場合は、 **Generate Password**をクリックしてランダムなパスワードを生成してください。生成されたパスワードは二度と表示されませんので、安全な場所に保存してください。
 
@@ -57,7 +57,7 @@ TiDB Cloudプランに応じて、適切なエンドポイントモデルを選�
 
     > **Note:**
     >
-    > TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続するときは、ユーザー名にTiDB Cloud Starterまたは TiDB Cloud Essentialインスタンスのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名の接頭辞](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。クライアント IP は、TiDB Cloud StarterまたはEssentialインスタンスのパブリック エンドポイントの許可された IP ルールに含まれている必要があります。詳細については、 [パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)を参照してください。
+    > TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続するときは、ユーザー名にTiDB Cloud Starterまたは TiDB Cloud Essentialインスタンスのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名の接頭辞](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。クライアント IP は、TiDB Cloud StarterまたはEssentialインスタンスのパブリックエンドポイントの許可された IP ルールに含まれている必要があります。詳細については、 [パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)を参照してください。
 
 ## 公開エンドポイント経由で接続します（エンドポイント占有モデル） {#connect-via-a-public-endpoint-endpoint-exclusive-model}
 

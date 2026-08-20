@@ -24,7 +24,7 @@ summary: チェンジフィードの基本的な概念、状態の定義、お�
 > **Note:**
 >
 > -   GCがchangefeedによってブロックされた場合、changefeedは`gc-ttl`で指定された時間までGCの進行をブロックします。その後、changefeedはエラータイプが`ErrGCTTLExceeded`である状態`failed`に設定され、GCの進行をブロックしなくなります。
-> -   変更フィードでエラー コード`ErrGCTTLExceeded` 、または`ErrStartTsBeforeGC` `ErrSnapshotLostByGC`が発生した場合、GC 操作はブロックされません。
+> -   変更フィードでエラーコード`ErrGCTTLExceeded` 、または`ErrStartTsBeforeGC` `ErrSnapshotLostByGC`が発生した場合、GC 操作はブロックされません。
 
 上記の状態遷移図の数字は以下のように表されます。
 

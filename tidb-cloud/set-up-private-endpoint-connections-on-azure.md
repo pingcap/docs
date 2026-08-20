@@ -179,7 +179,7 @@ Azure Private Link のアーキテクチャは次のとおりです: [^1]
 
 ### TiDB Cloudでエンドポイントサービスの作成に失敗しました。どうすればよいですか？ {#tidb-cloud-fails-to-create-an-endpoint-service-what-should-i-do}
 
-**Create Azure Private Endpoint**ページを開き、TiDB クラスターを選択すると、エンドポイント サービスは自動的に作成されます。失敗と表示される場合、または**作成中の**状態が長時間続く場合は、サポートに問い合わせて[サポートチケット](/tidb-cloud/tidb-cloud-support.md)を受けてください。
+**Create Azure Private Endpoint**ページを開き、TiDB クラスターを選択すると、エンドポイントサービスは自動的に作成されます。失敗と表示される場合、または**作成中の**状態が長時間続く場合は、サポートに問い合わせて[サポートチケット](/tidb-cloud/tidb-cloud-support.md)を受けてください。
 
 ### セットアップ中にアクションをキャンセルした場合、プライベートエンドポイントを受け入れる前に何をすべきですか？ {#if-i-cancel-the-action-during-setup-what-should-i-do-before-accepting-the-private-endpoint}
 

@@ -27,7 +27,7 @@ TiDB では、[既存のテーブルにセカンダリインデックスを追�
 
 ## 既存のテーブルにセカンダリインデックスを追加する {#add-a-secondary-index-to-an-existing-table}
 
-既存のテーブルにセカンダリ インデックスを追加するには、次のようにインデックス[インデックスを作成する](/sql-statements/sql-statement-create-index.md)ステートメントを使用できます。
+既存のテーブルにセカンダリインデックスを追加するには、次のようにインデックス[インデックスを作成する](/sql-statements/sql-statement-create-index.md)ステートメントを使用できます。
 
 ```sql
 CREATE INDEX {index_name} ON {table_name} ({column_names});
@@ -35,13 +35,13 @@ CREATE INDEX {index_name} ON {table_name} ({column_names});
 
 パラメータの説明:
 
--   `{index_name}` : セカンダリ インデックスの名前。
+-   `{index_name}` : セカンダリインデックスの名前。
 -   `{table_name}` : テーブル名。
 -   `{column_names}` : インデックスを作成する列の名前をセミコロンとカンマで区切ります。
 
 ## 新しいテーブルを作成する際にセカンダリインデックスを作成する {#create-a-secondary-index-when-creating-a-new-table}
 
-テーブルの作成と同時にセカンダリ インデックスを作成するには、テーブルを作成する[テーブルを作成する](/sql-statements/sql-statement-create-table.md)の末尾に`KEY`キーワードを含む句を追加します。
+テーブルの作成と同時にセカンダリインデックスを作成するには、テーブルを作成する[テーブルを作成する](/sql-statements/sql-statement-create-table.md)の末尾に`KEY`キーワードを含む句を追加します。
 
 ```sql
 KEY `{index_name}` (`{column_names}`)
@@ -49,7 +49,7 @@ KEY `{index_name}` (`{column_names}`)
 
 パラメータの説明:
 
--   `{index_name}` : セカンダリ インデックスの名前。
+-   `{index_name}` : セカンダリインデックスの名前。
 -   `{column_names}` : インデックスを作成する列の名前をセミコロンとカンマで区切ります。
 
 ## セカンダリインデックス作成におけるルール {#rules-in-secondary-index-creation}
@@ -168,7 +168,7 @@ SHOW INDEXES FROM `bookshop`.`books`;
 
 ## 次のステップ {#next-step}
 
-データベースを作成し、テーブルとセカンダリ インデックスを追加したら、アプリケーションにデータ[書く](/develop/dev-guide-insert-data.md)機能と[読む](/develop/dev-guide-get-data-from-single-table.md)機能を追加できます。
+データベースを作成し、テーブルとセカンダリインデックスを追加したら、アプリケーションにデータ[書く](/develop/dev-guide-insert-data.md)機能と[読む](/develop/dev-guide-get-data-from-single-table.md)機能を追加できます。
 
 ## お困りですか？ {#need-help}
 

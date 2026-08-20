@@ -23,7 +23,7 @@ TiDBバージョン: 6.2.0-DMR
 -   新しい並行DDLフレームワーク：DDLステートメントのブロックが減り、実行効率が向上します。
 -   TiKV は[CPU使用率を自動的に調整する](/tikv-configuration-file.md#background-quota-limiter)をサポートしており、安定した効率的なデータベース運用を保証します。
 -   [特定時点リカバリ（PITR）](/br/backup-and-restore-overview.md)は、過去の任意の時点から TiDB クラスターのスナップショットを新しいクラスターに復元するために導入されました。
--   TiDB Lightning は、クラスター レベルではなく、物理インポートモードでテーブル[テーブルレベルでのスケジューリングを一時停止する](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import)をサポートしています。
+-   TiDB Lightning は、クラスターレベルではなく、物理インポートモードでテーブル[テーブルレベルでのスケジューリングを一時停止する](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import)をサポートしています。
 -   BR は[ユーザーおよび権限データの復元](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)サポートしており、バックアップと復元がよりスムーズになります。
 -   TiCDC[特定の種類のDDLイベントをフィルタリングする](/ticdc/ticdc-filter.md)フィルタリングすることをサポートすることで、より多くのデータ レプリケーション シナリオを可能にします。
 -   [`SAVEPOINT`機構](/sql-statements/sql-statement-savepoint.md)がサポートされており、トランザクション内のロールバックポイントを柔軟に制御できます。
@@ -289,7 +289,7 @@ TiDBバージョン: 6.2.0-DMR
 | TiKV           | [rocksdb.lockcf.format-version](/tikv-configuration-file.md#format-version-new-in-v620)                                   | 新しく追加された | SSTファイルのフォーマットバージョン。                                                                                |
 | PD             | レプリケーションモード.dr-auto-sync.wait-async-timeout                                                                               | 削除済み     | この設定は有効にならず、削除されます。                                                                                 |
 | PD             | レプリケーションモード.dr-auto-sync.wait-sync-timeout                                                                                | 削除済み     | この設定は有効にならず、削除されます。                                                                                 |
-| TiFlash        | [`storage.format_version`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                              | 変更     | `format_version`のデフォルト値が`4`に変更されます。これは v6.2.0 以降のバージョンのデフォルト形式であり、書き込み増幅とバックグラウンド タスクのリソース消費を削減します。 |
+| TiFlash        | [`storage.format_version`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                              | 変更     | `format_version`のデフォルト値が`4`に変更されます。これは v6.2.0 以降のバージョンのデフォルト形式であり、書き込み増幅とバックグラウンドタスクのリソース消費を削減します。 |
 | TiFlash        | [profiles.default.dt_enable_read_thread](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                | 新しく追加された | この設定は、ストレージエンジンからの読み取り要求を処理するためにスレッドプールを使用するかどうかを制御します。デフォルト値は`false`です。                         |
 | TiFlash        | [profiles.default.dt_page_gc_threshold](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                 | 新しく追加された | この設定では、PageStorageデータファイル内の有効データの最小比率を指定します。                                                        |
 | TiCDC          | [--overwrite-checkpoint-ts](/ticdc/ticdc-manage-changefeed.md#resume-a-replication-task)                                  | 新しく追加された | この設定は`cdc cli changefeed resume`サブコマンドに追加されます。                                                      |
@@ -304,7 +304,7 @@ TiDBバージョン: 6.2.0-DMR
 
 -   TiFlash `format_version` `4`から`3`にダウングレードすることはできません。詳細については、 [TiFlashアップグレードガイド](/tiflash-upgrade-guide.md)を参照してください。
 -   バージョン6.2.0以降では、デフォルト値の`false`を`dt_enable_logical_split`のままにして、 `true`に変更しないことを強くお勧めします。詳細は、既知の問題[#5576](https://github.com/pingcap/tiflash/issues/5576)を参照してください。
--   バックアップ クラスタにTiFlashレプリカがある場合、PITR を実行すると、リストア クラスタにはTiFlashレプリカ内のデータが含まれません。TiFlash レプリカからデータをリストアするには、 TiFlashレプリカを手動で構成する必要があります。 `exchange partition` DDL ステートメントを実行すると、PITR が失敗する可能性があります。アップストリームデータベースが TiDB Lightning の物理インポートモードを使用してデータをインポートする場合、ログバックアップでデータをバックアップできません。データ インポート後にフル バックアップを実行することをお勧めします。PITR のその他の互換性の問題については、 [PITRの制限](/br/backup-and-restore-overview.md#before-you-use)を参照してください。
+-   バックアップ クラスタにTiFlashレプリカがある場合、PITR を実行すると、リストア クラスタにはTiFlashレプリカ内のデータが含まれません。TiFlash レプリカからデータをリストアするには、 TiFlashレプリカを手動で構成する必要があります。 `exchange partition` DDL ステートメントを実行すると、PITR が失敗する可能性があります。アップストリームデータベースが TiDB Lightning の物理インポートモードを使用してデータをインポートする場合、ログバックアップでデータをバックアップできません。データインポート後にフルバックアップを実行することをお勧めします。PITR のその他の互換性の問題については、 [PITRの制限](/br/backup-and-restore-overview.md#before-you-use)を参照してください。
 -   TiDB v6.2.0以降では、データ復元時に`mysql`パラメータを指定することで`--with-sys-table=true`スキーマのテーブルを復元できます。
 -   `ALTER TABLE`ステートメントを実行して複数の列またはインデックスを追加、削除、または変更する場合、TiDB は同じ DDL ステートメントの変更内容に関わらず、ステートメント実行前後のテーブルを比較してテーブルの一貫性をチェックします。DDL の実行順序は、シナリオによっては MySQL と完全には互換性がない場合があります。
 -   TiDBコンポーネントがv6.2.0以降の場合、TiKVコンポーネントはv6.2.0より前のバージョンであってはなりません。

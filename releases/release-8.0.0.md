@@ -58,11 +58,11 @@ TiDB バージョン: 8.0.0
 
     詳細については、 [ドキュメント](/tiflash/tiflash-supported-pushdown-calculations.md)を参照してください。
 
--   TiDB の並列 HashAgg アルゴリズムはディスク スピルをサポートします (実験的) [#35637](https://github.com/pingcap/tidb/issues/35637) @[xzhangxian1008](https://github.com/xzhangxian1008)
+-   TiDB の並列 HashAgg アルゴリズムはディスクスピルをサポートします (実験的) [#35637](https://github.com/pingcap/tidb/issues/35637) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
     TiDBの以前のバージョンでは、HashAgg演算子の並行処理アルゴリズムはディスクスピルをサポートしていませんでした。SQL文の実行計画に並列HashAgg演算子が含まれている場合、そのSQL文のすべてのデータはメモリ内でしか処理できません。そのため、TiDBは大量のデータをメモリ内で処理する必要があります。データサイズがメモリ制限を超えると、TiDBは並列処理を行わないアルゴリズムしか選択できず、パフォーマンス向上のための並行処理を活用できません。
 
-    バージョン 8.0.0 では、TiDB の並列 HashAgg アルゴリズムがディスク スピルをサポートしています。並列処理のあらゆる状況において、HashAgg オペレータはメモリ使用量に基づいてデータ スピルを自動的にトリガーし、パフォーマンスとデータ スループットのバランスを取ることができます。現在、実験的機能として、TiDB はディスク スピルをサポートする並列 HashAgg アルゴリズムを有効にするかどうかを制御する`tidb_enable_parallel_hashagg_spill`変数を導入しています。この変数が`ON`の場合、有効になっていることを意味します。この機能が将来のリリースで一般提供されるようになった後、この変数は非推奨となります。
+    バージョン 8.0.0 では、TiDB の並列 HashAgg アルゴリズムがディスクスピルをサポートしています。並列処理のあらゆる状況において、HashAgg オペレータはメモリ使用量に基づいてデータ スピルを自動的にトリガーし、パフォーマンスとデータ スループットのバランスを取ることができます。現在、実験的機能として、TiDB はディスクスピルをサポートする並列 HashAgg アルゴリズムを有効にするかどうかを制御する`tidb_enable_parallel_hashagg_spill`変数を導入しています。この変数が`ON`の場合、有効になっていることを意味します。この機能が将来のリリースで一般提供されるようになった後、この変数は非推奨となります。
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800)を参照してください。
 
@@ -420,7 +420,7 @@ TiDB バージョン: 8.0.0
     -   `LEADING`ヒントが`UNION ALL`ステートメントで有効にならない問題を修正 [#50067](https://github.com/pingcap/tidb/issues/50067) @[hawkingrei](https://github.com/hawkingrei)
     -   `BIT`型の列が一部の関数の計算に関与している場合、デコードエラーによりクエリエラーが発生する可能性がある問題を修正しました。 [#49566](https://github.com/pingcap/tidb/issues/49566) [#50850](https://github.com/pingcap/tidb/issues/50850) [#50855](https://github.com/pingcap/tidb/issues/50855) @[jiyfhust](https://github.com/jiyfhust)
     -   PDとの相互作用の問題により、 `tiup cluster upgrade/start`を使用してローリングアップグレードを実行するとTiDBがpanicする可能性がある問題を修正しました [#50152](https://github.com/pingcap/tidb/issues/50152) @[zimulala](https://github.com/zimulala)
-    -   `UNIQUE`句を使用して`ORDER BY`インデックス ルックアップを実行するとエラーが発生する可能性がある問題を修正 [#49920](https://github.com/pingcap/tidb/issues/49920) @[jackysp](https://github.com/jackysp)
+    -   `UNIQUE`句を使用して`ORDER BY`インデックスルックアップを実行するとエラーが発生する可能性がある問題を修正 [#49920](https://github.com/pingcap/tidb/issues/49920) @[jackysp](https://github.com/jackysp)
     -   TiDBが`ENUM`または`SET`型を定数伝播で処理する際に誤ったクエリ結果を返す問題を修正 [#49440](https://github.com/pingcap/tidb/issues/49440) @[winoros](https://github.com/winoros)
     -   クエリに Apply 演算子が含まれている場合に TiDB がpanicを起こし、 `fatal error: concurrent map writes`エラーが発生する問題を修正しました [#50347](https://github.com/pingcap/tidb/issues/50347) @[SeaRise](https://github.com/SeaRise)
     -   文字列型の変数に対する`SET_VAR`の制御が無効になる可能性がある問題を修正しました [#50507](https://github.com/pingcap/tidb/issues/50507) @[qw4990](https://github.com/qw4990)
@@ -518,7 +518,7 @@ TiDB バージョン: 8.0.0
         -   同じノード上の TiKV IP アドレスを変更した後にログのバックアップが停止する問題を修正 [#50445](https://github.com/pingcap/tidb/issues/50445) @[3pointer](https://github.com/3pointer)
         -   S3からファイルコンテンツを読み取る際にエラーが発生した場合にBRが再試行できない問題を修正 [#49942](https://github.com/pingcap/tidb/issues/49942) @[Leavrth](https://github.com/Leavrth)
         -   データ復元失敗後にチェックポイントから再開するとエラー`the target cluster is not fresh`発生する問題を修正 [#50232](https://github.com/pingcap/tidb/issues/50232) @[Leavrth](https://github.com/Leavrth)
-        -   ログバックアップ タスクを停止すると TiDB がクラッシュする問題を修正 [#50839](https://github.com/pingcap/tidb/issues/50839) @[YuJuncen](https://github.com/YuJuncen)
+        -   ログバックアップタスクを停止すると TiDB がクラッシュする問題を修正 [#50839](https://github.com/pingcap/tidb/issues/50839) @[YuJuncen](https://github.com/YuJuncen)
         -   TiKVノードにリーダーがいないためにデータ復元が遅くなる問題を修正 [#50566](https://github.com/pingcap/tidb/issues/50566) @[Leavrth](https://github.com/Leavrth)
         -   `--filter`オプションを指定した後でも完全復元ではターゲット クラスターが空である必要がある問題を修正 [#51009](https://github.com/pingcap/tidb/issues/51009) @[3pointer](https://github.com/3pointer)
 

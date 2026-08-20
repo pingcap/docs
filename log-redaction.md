@@ -27,13 +27,13 @@ insert into t values (1),(1);
 ERROR 1062 (23000): Duplicate entry '1' for key 't.a'
 ```
 
-上記の`INSERT`ステートメントのエラー ログは次のように出力されます。
+上記の`INSERT`ステートメントのエラーログは次のように出力されます。
 
 ```
 [2024/07/02 11:35:32.686 +08:00] [INFO] [conn.go:1146] ["command dispatched failed"] [conn=1482686470] [session_alias=] [connInfo="id:1482686470, addr:127.0.0.1:52258 status:10, collation:utf8mb4_0900_ai_ci, user:root"] [command=Query] [status="inTxn:0, autocommit:1"] [sql="insert into `t` values ( ... )"] [txn_mode=PESSIMISTIC] [timestamp=450859193514065921] [err="[kv:1062]Duplicate entry '?' for key 't.a'"]
 ```
 
-上記のエラー ログから、値`tidb_redact_log`が`ON`に設定されると、データ セキュリティ リスクを回避するために、機密情報が TiDB ログで`?`マークに置き換えられることがわかります。
+上記のエラーログから、値`tidb_redact_log`が`ON`に設定されると、データ セキュリティリスクを回避するために、機密情報が TiDB ログで`?`マークに置き換えられることがわかります。
 
 さらに、TiDBには`MARKER`オプションが用意されています。`tidb_redact_log`の値を`MARKER`に設定すると、TiDBはログ内の機密情報を直接置き換えるのではなく、 `‹›`でマークするため、秘匿化ルールをカスタマイズできます。
 

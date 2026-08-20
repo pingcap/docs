@@ -63,7 +63,7 @@ DM の基本は次のとおりです。
 
 ### 完全なデータエクスポート - Dumpling {#full-data-export-dumpling}
 
-[Dumpling](/dumpling-overview.md)は、MySQL または TiDB からの論理的な完全データ エクスポートをサポートします。
+[Dumpling](/dumpling-overview.md)は、MySQL または TiDB からの論理的な完全データエクスポートをサポートします。
 
 Dumplingの基本は次のとおりです。
 

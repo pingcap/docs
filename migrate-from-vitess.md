@@ -11,7 +11,7 @@ VitessのバックエンドはMySQLベースであるため、VitessからTiDB�
 
 通常、データ移行前にDMタスクの`task-mode`を`all`に、`import-mode`を`physical`に設定することを推奨します。詳細については、 [タスク構成ファイルテンプレート（上級）](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)を参照してください。
 
-データ サイズが 10 TiB を超える場合は、2 つの手順でインポートを実行することをお勧めします。
+データサイズが 10 TiB を超える場合は、2 つの手順でインポートを実行することをお勧めします。
 
 1.  既存のデータをインポートするには、 DumplingとTiDB Lightning を使用します。
 2.  DM を使用して増分データをインポートします。

@@ -22,7 +22,7 @@ GitHub接続で**Auto Sync & Deployment**が有効になっている場合、Git
 
 > **Note:**
 >
-> GitHub リポジトリは、データアプリを接続した後、データアプリ[データアプリの設定ファイル](/tidb-cloud/data-service-app-config-files.md)を保存するために使用されます。構成ファイル内の情報 ( TiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターの ID、エンドポイント URL など) が機密である場合は、パブリック リポジトリではなくプライベート リポジトリを必ず使用してください。
+> GitHub リポジトリは、データアプリを接続した後、データアプリ[データアプリの設定ファイル](/tidb-cloud/data-service-app-config-files.md)を保存するために使用されます。構成ファイル内の情報 ( TiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターの ID、エンドポイント URL など) が機密である場合は、パブリック リポジトリではなくプライベートリポジトリを必ず使用してください。
 
 ## ステップ1：データアプリをGitHubに接続する {#step-1-connect-your-data-app-to-github}
 

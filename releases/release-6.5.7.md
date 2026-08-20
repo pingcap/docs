@@ -33,7 +33,7 @@ TiDB バージョン: 6.5.7
     -   Backup & Restore (BR)
 
         -   大規模なデータセットシナリオで`RESTORE`ステートメントのテーブル作成パフォーマンスを向上 [＃48301](https://github.com/pingcap/tidb/issues/48301) @[Leavrth](https://github.com/Leavrth)
-        -   EBS ベースのスナップショット バックアップとTiDB Lightningインポート間の互換性の問題を解決[＃46850](https://github.com/pingcap/tidb/issues/46850) @[YuJuncen](https://github.com/YuJuncen)
+        -   EBS ベースのスナップショットバックアップとTiDB Lightningインポート間の互換性の問題を解決[＃46850](https://github.com/pingcap/tidb/issues/46850) @[YuJuncen](https://github.com/YuJuncen)
         -   リージョンリーダーシップの移行が発生すると、PITR ログバックアップの進行のレイテンシーが長くなるという問題を軽減します[＃13638](https://github.com/tikv/tikv/issues/13638) @[YuJuncen](https://github.com/YuJuncen)
 
     -   TiCDC

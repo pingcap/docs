@@ -109,9 +109,9 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
     TiDB Cloud CLIには、以下の新機能が追加されました。
 
     -   [`ticloud serverless sql-user`](/tidb-cloud/ticloud-serverless-sql-user-create.md)を介して、 [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターの SQL ユーザー管理をサポートします。
-    -   [`ticloud serverless create`](/tidb-cloud/ticloud-cluster-create.md)および[`ticloud serverless update`](/tidb-cloud/ticloud-serverless-update.md)で、 [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターのパブリック エンドポイントを無効にできるようにします。
+    -   [`ticloud serverless create`](/tidb-cloud/ticloud-cluster-create.md)および[`ticloud serverless update`](/tidb-cloud/ticloud-serverless-update.md)で、 [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターのパブリックエンドポイントを無効にできるようにします。
     -   OAuth認証を使用する際に、現在のユーザーに関する情報を取得するには、 [`ticloud auth whoami`](/tidb-cloud/ticloud-auth-whoami.md)コマンドを追加してください。
-    -   [`ticloud serverless export create`](/tidb-cloud/ticloud-serverless-export-create.md)で`--sql` 、 `--where` 、および`--filter`フラグをサポートし、ソース テーブルを柔軟に選択できるようにします。
+    -   [`ticloud serverless export create`](/tidb-cloud/ticloud-serverless-export-create.md)で`--sql` 、 `--where` 、および`--filter`フラグをサポートし、ソーステーブルを柔軟に選択できるようにします。
     -   CSVファイルおよびParquetファイルへのデータエクスポートをサポートします。
     -   ロールARNを認証情報として使用してAmazon S3にデータをエクスポートする機能をサポートするとともに、Google Cloud StorageおよびAzure Blob Storageへのエクスポートもサポートします。
     -   Amazon S3、Google Cloud Storage、Azure Blob Storageからのデータインポートをサポートします。
@@ -218,13 +218,13 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **コンソールの変更**
 
--   **VPC ピアリング**ページのレイアウトを調整して、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでの[VPCピアリング接続の作成](/tidb-cloud/set-up-vpc-peering-connections.md)のユーザー エクスペリエンスを向上させます。
+-   **VPC ピアリング**ページのレイアウトを調整して、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでの[VPCピアリング接続の作成](/tidb-cloud/set-up-vpc-peering-connections.md)のユーザーエクスペリエンスを向上させます。
 
 ## 2024年7月2日 {#july-2-2024}
 
 **全般的な変更**
 
--   [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)は、データアプリに直接追加できる事前定義されたシステム エンドポイントを含むエンドポイント ライブラリを提供し、エンドポイント開発の労力を軽減します。
+-   [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)は、データアプリに直接追加できる事前定義されたシステムエンドポイントを含むエンドポイントライブラリを提供し、エンドポイント開発の労力を軽減します。
 
     現在、このライブラリには`/system/query`エンドポイントのみが含まれています。このエンドポイントを使用すると、定義済みの`sql`パラメータにSQL文を渡すだけで、任意のSQL文を実行できます。このエンドポイントにより、SQLクエリを即座に実行できるため、柔軟性と効率性が向上します。
 
@@ -441,7 +441,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     詳細については、 [公開エンドポイントを無効にする](/tidb-cloud/connect-via-standard-connection-serverless.md#disable-a-public-endpoint)ご覧ください。
 
--   [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)データアプリのエンドポイントにアクセスするためのカスタム ドメインの構成をサポートしています。
+-   [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)データアプリのエンドポイントにアクセスするためのカスタムドメインの構成をサポートしています。
 
     TiDB Cloud Data Serviceは、デフォルトでは各データアプリのエンドポイントにアクセスするためのドメイン`<region>.data.tidbcloud.com`を提供します。パーソナライズと柔軟性をさらに高めるため、デフォルトドメインの代わりにデータアプリにカスタムドメインを設定できるようになりました。この機能により、データベースサービスにブランドURLを使用でき、セキュリティも強化されます。
 

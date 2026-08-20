@@ -63,7 +63,7 @@ CREATE TABLE `sale` (
 
 ## ステップ1. データソースを読み込む {#step-1-load-data-sources}
 
-`source1.yaml`という新しいデータソースファイルを作成し、DM にアップストリーム データソースを構成して、次のコンテンツを追加します。
+`source1.yaml`という新しいデータソースファイルを作成し、DM にアップストリームデータソースを構成して、次のコンテンツを追加します。
 
 ```yaml
 # Configuration.

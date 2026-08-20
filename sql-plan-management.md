@@ -218,7 +218,7 @@ explain SELECT * FROM t1, t2 WHERE t1.id = t2.id;
 
 > **Note:**
 >
-> `PREPARE` `EXECUTE`およびバイナリ プロトコルで実行されるクエリの場合、 `PREPARE` / `EXECUTE`ステートメントではなく、実際のクエリ ステートメントの実行計画 バインディングを作成する必要があります。
+> `PREPARE` `EXECUTE`およびバイナリ プロトコルで実行されるクエリの場合、 `PREPARE` / `EXECUTE`ステートメントではなく、実際のクエリステートメントの実行計画 バインディングを作成する必要があります。
 
 #### 履歴実行計画に従ってバインディングを作成する {#create-a-binding-according-to-a-historical-execution-plan}
 

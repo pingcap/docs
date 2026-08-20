@@ -32,7 +32,7 @@ TiDB Cloudのロールの詳細については、 [ユーザーロール](/tidb-
 
 -   **AWS Endpoint Service**: ダウンストリームサービスのエンドポイントサービス名と、ダウンストリームサービスがデプロイされている可用性ゾーン（AZ）。
 
-    ダウンストリーム サービスでプライベートエンドポイント サービスを利用できない場合は、 [ステップ2. Kafkaクラスタをプライベートリンクサービスとして公開する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)プライベートリンクサービスとして公開することで、ロードバランサーとプライベートリンクサービスを設定します。
+    ダウンストリーム サービスでプライベートエンドポイントサービスを利用できない場合は、 [ステップ2. Kafkaクラスタをプライベートリンクサービスとして公開する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)プライベートリンクサービスとして公開することで、ロードバランサーとプライベートリンクサービスを設定します。
 
 -   **Amazon MSK Provisioned**: Amazon MSK ProvisionedクラスターのARN。変更フィード用のAmazon MSK Provisionedクラスターの作成方法については、[AWS PrivateLink 経由で Amazon MSK Provisioned クラスターを設定する](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)を参照してください。
 
@@ -49,7 +49,7 @@ TiDB Cloudのロールの詳細については、 [ユーザーロール](/tidb-
 
 TiDB Cloud VPCへのアクセスを許可するには、エンドポイントサービスの許可リストにTiDB CloudのAlibaba CloudアカウントIDを追加する必要があります。
 
-ダウンストリーム サービスでプライベートエンドポイント サービスを利用できない場合は、 [ステップ2. Kafkaクラスタをプライベートリンクサービスとして公開する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)プライベートリンクサービスとして公開することで、ロードバランサーとプライベートリンクサービスをセットアップします。
+ダウンストリーム サービスでプライベートエンドポイントサービスを利用できない場合は、 [ステップ2. Kafkaクラスタをプライベートリンクサービスとして公開する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)プライベートリンクサービスとして公開することで、ロードバランサーとプライベートリンクサービスをセットアップします。
 
 </div>
 </CustomContent>
@@ -96,7 +96,7 @@ AWS では、ダウンストリームサービスに応じて接続タイプを�
 
 7.  **TiDB Managed**ドメインまたは**カスタム**ドメインのいずれかを使用して、Kafka用のアドバタイズドリスナーを設定します。
 
-    -   アドバタイズされたリスナーに**TiDB Managed**ドメインを使用するには、 **Domain Pattern**フィールドに一意の文字列を入力し、 **[生成]**をクリックします。TiDB Cloud は、各アベイラビリティ ゾーンごとにサブドメインを含むブローカー アドレスを生成します。
+    -   アドバタイズされたリスナーに**TiDB Managed**ドメインを使用するには、 **Domain Pattern**フィールドに一意の文字列を入力し、 **[生成]**をクリックします。TiDB Cloud は、各アベイラビリティ ゾーンごとにサブドメインを含むブローカーアドレスを生成します。
     -   アドバタイズされたリスナーに独自の**カスタム**ドメインを使用するには、ドメインタイプを**「カスタム」**に切り替え、**Custom Domain**フィールドにルートドメインを入力し、 **「チェック」**をクリックしてから、各アベイラビリティゾーンのブローカーサブドメインを指定します。
 
 8.  **「作成」**をクリックして設定を検証し、プライベートエンドポイントを作成します。
@@ -121,7 +121,7 @@ AWS では、ダウンストリームサービスに応じて接続タイプを�
 
 2.  **「External Services のプライベートエンドポイントの作成」**ダイアログで、プライベートエンドポイントの名前を入力します。
 
-3.  リマインダーに従って、TiDB Cloud の Alibaba Cloud アカウント ID をエンドポイント サービスのホワイトリストに追加して、 TiDB Cloud VPC アクセスを許可します。詳細については、 [エンドポイントサービスの許可リストにおけるアカウントIDの管理](https://www.alibabacloud.com/help/en/privatelink/user-guide/add-and-manage-service-whitelists)を参照してください。
+3.  リマインダーに従って、TiDB Cloud の Alibaba Cloud アカウント ID をエンドポイントサービスのホワイトリストに追加して、 TiDB Cloud VPC アクセスを許可します。詳細については、 [エンドポイントサービスの許可リストにおけるアカウントIDの管理](https://www.alibabacloud.com/help/en/privatelink/user-guide/add-and-manage-service-whitelists)を参照してください。
 
 4.  [ネットワーク](#network)セクションで収集した**Endpoint Service Name**を入力します。
 
@@ -131,7 +131,7 @@ AWS では、ダウンストリームサービスに応じて接続タイプを�
 
 7.  **TiDB Managed**ドメインまたは**カスタム**ドメインのいずれかを使用して、Kafka用のアドバタイズドリスナーを設定します。
 
-    -   アドバタイズされたリスナーに**TiDB Managed**ドメインを使用するには、 **Domain Pattern**フィールドに一意の文字列を入力し、 **[生成]**をクリックします。TiDB は、各アベイラビリティ ゾーンごとにサブドメインを含むブローカー アドレスを生成します。
+    -   アドバタイズされたリスナーに**TiDB Managed**ドメインを使用するには、 **Domain Pattern**フィールドに一意の文字列を入力し、 **[生成]**をクリックします。TiDB は、各アベイラビリティ ゾーンごとにサブドメインを含むブローカーアドレスを生成します。
     -   アドバタイズされたリスナーに独自の**カスタム**ドメインを使用するには、ドメインタイプを**「カスタム」**に切り替え、**Custom Domain**フィールドにルートドメインを入力し、 **「チェック」**をクリックしてから、各アベイラビリティゾーンのブローカーサブドメインを指定します。
 
 8.  **「作成」**をクリックして設定を検証し、プライベートエンドポイントを作成します。

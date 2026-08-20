@@ -108,7 +108,7 @@ TiDB バージョン: 4.0.3
     -   Green GC がオフライン ストアのロックをスキャンしないため、データの不完全性が発生する可能性がある問題を修正しました[＃18550](https://github.com/pingcap/tidb/pull/18550)
     -   TiFlashエンジンを使用して非読み取り専用ステートメントの処理を禁止する [＃18534](https://github.com/pingcap/tidb/pull/18534)
     -   クエリ接続がパニックになったときに実際のエラーメッセージを返す[＃18500](https://github.com/pingcap/tidb/pull/18500)
-    -   `ADMIN REPAIR TABLE`目の実行で TiDB ノードのテーブル メタデータの再ロードに失敗する問題を修正しました。 [＃18323](https://github.com/pingcap/tidb/pull/18323)
+    -   `ADMIN REPAIR TABLE`目の実行で TiDB ノードのテーブルメタデータの再ロードに失敗する問題を修正しました。 [＃18323](https://github.com/pingcap/tidb/pull/18323)
     -   あるトランザクションで書き込まれ、削除された主キーのロックが別のトランザクションによって解決されたために発生したデータの不整合の問題を修正しました[＃18291](https://github.com/pingcap/tidb/pull/18291)
     -   スピルディスクをうまく機能させる[＃18288](https://github.com/pingcap/tidb/pull/18288)
     -   生成列を含むテーブルで`REPLACE INTO`文が機能するときに報告されるエラーを修正します [＃17907](https://github.com/pingcap/tidb/pull/17907)

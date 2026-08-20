@@ -272,7 +272,7 @@ Javaアプリケーションで以下のエラーが頻繁に発生する場合�
 The last packet sent successfully to the server was 3600000 milliseconds ago. The driver has not received any packets from the server. com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
 ```
 
-`n`内の`n milliseconds ago`の値が`0`または非常に小さい値である場合、通常は実行された SQL 操作によって TiDB が異常終了したことが原因です。原因を特定するには、TiDB の標準エラー ログを確認することをお勧めします。
+`n`内の`n milliseconds ago`の値が`0`または非常に小さい値である場合、通常は実行された SQL 操作によって TiDB が異常終了したことが原因です。原因を特定するには、TiDB の標準エラーログを確認することをお勧めします。
 
 `n`の値が非常に大きい場合 (上記の例の`3600000`など)、この接続が長時間アイドル状態になり、中間プロキシによって閉じられた可能性が高いです。通常の解決策は、プロキシのアイドル設定の値を増やし、接続プールが次の操作を実行できるようにすることです。
 

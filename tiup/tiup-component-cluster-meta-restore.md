@@ -5,7 +5,7 @@ summary: TiUPメタファイルを復元するには、クラスター名とバ�
 
 # tiup cluster meta restore {#tiup-cluster-meta-restore}
 
-TiUPメタ ファイルを復元するには、 `tiup cluster meta restore`コマンドを使用してバックアップ ファイルから復元できます。
+TiUPメタ ファイルを復元するには、 `tiup cluster meta restore`コマンドを使用してバックアップファイルから復元できます。
 
 ## 構文 {#syntax}
 
@@ -14,7 +14,7 @@ tiup cluster meta restore <cluster-name> <backup-file> [flags]
 ```
 
 -   `<cluster-name>`は操作対象となるクラスターの名前です。
--   `<backup-file>`はTiUPメタ バックアップ ファイルへのパスです。
+-   `<backup-file>`はTiUPメタ バックアップファイルへのパスです。
 
 > **Note:**
 >

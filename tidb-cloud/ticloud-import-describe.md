@@ -5,7 +5,7 @@ summary: ticloud serverless import describe` のリファレンス。
 
 # ticloud serverless import describe {#ticloud-serverless-import-describe}
 
-データ インポートタスクについて説明します。
+データインポートタスクについて説明します。
 
 ```shell
 ticloud serverless import describe [flags]

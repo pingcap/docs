@@ -60,7 +60,7 @@ TiDB バージョン: 5.3.1
     -   `alter column set default`テーブルスキーマを誤って更新する問題を修正 [＃31074](https://github.com/pingcap/tidb/issues/31074)
     -   `tidb_restricted_read_only`有効になっているときに`tidb_super_read_only`自動的に有効にならないバグを修正[＃31745](https://github.com/pingcap/tidb/issues/31745)
     -   照合順序`greatest`または`least`関数が間違った結果を返す問題を修正しました[＃31789](https://github.com/pingcap/tidb/issues/31789)
-    -   クエリ実行時に MPP タスク リストが空になるエラーを修正 [＃31636](https://github.com/pingcap/tidb/issues/31636)
+    -   クエリ実行時に MPP タスクリストが空になるエラーを修正 [＃31636](https://github.com/pingcap/tidb/issues/31636)
     -   innerWorker panicによって発生するインデックス結合の誤った結果を修正しました [＃31494](https://github.com/pingcap/tidb/issues/31494)
     -   列タイプを`FLOAT`から`DOUBLE`に変更した後の間違ったクエリ結果を修正[＃31372](https://github.com/pingcap/tidb/issues/31372)
     -   インデックスルックアップ結合を使用してクエリを実行するときに発生する`invalid transaction`エラーを修正します [＃30468](https://github.com/pingcap/tidb/issues/30468)

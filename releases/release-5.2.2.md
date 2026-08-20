@@ -85,7 +85,7 @@ TiDB バージョン: 5.2.2
     -   Raftクライアント実装でバッチメッセージが大きすぎる問題を修正 [＃9714](https://github.com/tikv/tikv/issues/9714)
     -   `resolved_ts` で一部のコルーチンがリークする問題を修正 [＃10965](https://github.com/tikv/tikv/issues/10965)
     -   応答サイズが4GiBを超えるとコプロセッサに発生するpanic問題を修正[＃9012](https://github.com/tikv/tikv/issues/9012)
-    -   スナップショット ファイルがガベージ コレクションできない場合に、スナップショット ガベージ コレクション (GC) で GC スナップショット ファイルが失われる問題を修正しました[＃10813](https://github.com/tikv/tikv/issues/10813)
+    -   スナップショットファイルがガベージ コレクションできない場合に、スナップショット ガベージ コレクション (GC) で GC スナップショットファイルが失われる問題を修正しました[＃10813](https://github.com/tikv/tikv/issues/10813)
     -   コプロセッサー要求の処理中にタイムアウトによって発生するpanic問題を修正[＃10852](https://github.com/tikv/tikv/issues/10852)
 
 -   PD

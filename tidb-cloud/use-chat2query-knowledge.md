@@ -1,13 +1,13 @@
 ---
 title: Use Knowledge Bases
-summary: Chat2Query ナレッジ ベース API を使用して Chat2Query の結果を改善する方法を学習します。
+summary: Chat2Query ナレッジベース API を使用して Chat2Query の結果を改善する方法を学習します。
 ---
 
 # ナレッジベースを使用する {#use-knowledge-bases}
 
-ナレッジ ベースは、Chat2Query の SQL 生成機能を強化するために使用できる構造化データのコレクションです。
+ナレッジベースは、Chat2Query の SQL 生成機能を強化するために使用できる構造化データのコレクションです。
 
-v3 以降、Chat2Query API を使用すると、Chat2Query データアプリのナレッジ ベース関連のエンドポイントを呼び出すことによって、ナレッジ ベースを追加または変更できるようになります。
+v3 以降、Chat2Query API を使用すると、Chat2Query データアプリのナレッジベース関連のエンドポイントを呼び出すことによって、ナレッジベースを追加または変更できるようになります。
 
 > **Note:**
 >
@@ -15,7 +15,7 @@ v3 以降、Chat2Query API を使用すると、Chat2Query データアプリの
 
 ## 始める前に {#before-you-begin}
 
-データベースのナレッジ ベースを作成する前に、次のものを用意してください。
+データベースのナレッジベースを作成する前に、次のものを用意してください。
 
 -   A [Chat2Queryデータアプリ](/tidb-cloud/use-chat2query-api.md#create-a-chat2query-data-app)
 -   [Chat2QueryデータアプリのAPIキー](/tidb-cloud/use-chat2query-api.md#create-an-api-key)

@@ -37,7 +37,7 @@ TiDB Cloud StarterまたはTiDB Cloud Essential[Apache Parquet](https://parquet.
 
     > **Note:**
     >
-    > 場合によっては、前述のルールに従って Parquet ファイル名を更新できないことがあります (たとえば、Parquet ファイル リンクが他のプログラムでも使用されている場合)。その場合は、ファイル名を変更せずに、[ステップ4](#step-4-import-parquet-files)の**Mapping Settings**を使用してソース データを単一のターゲットテーブルにインポートできます。
+    > 場合によっては、前述のルールに従って Parquet ファイル名を更新できないことがあります (たとえば、Parquet ファイル リンクが他のプログラムでも使用されている場合)。その場合は、ファイル名を変更せずに、[ステップ4](#step-4-import-parquet-files)の**Mapping Settings**を使用してソースデータを単一のターゲットテーブルにインポートできます。
 
 ## ステップ2．対象テーブルのスキーマを作成する {#step-2-create-the-target-table-schemas}
 

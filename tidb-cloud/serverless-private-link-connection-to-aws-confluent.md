@@ -1,6 +1,6 @@
 ---
 title: Connect to Confluent Cloud on AWS via a Private Link Connection
-summary: AWS エンドポイント サービス プライベートリンク接続を使用して AWS 上の Confluent Cloud Dedicated クラスターに接続する方法を学習します。
+summary: AWS エンドポイントサービス プライベートリンク接続を使用して AWS 上の Confluent Cloud Dedicated クラスターに接続する方法を学習します。
 ---
 
 # プライベートリンク接続を介して AWS 上の Confluent Cloud に接続する {#connect-to-confluent-cloud-on-aws-via-a-private-link-connection}

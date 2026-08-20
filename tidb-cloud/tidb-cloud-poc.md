@@ -74,7 +74,7 @@ PoC 用の[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-d
     >
     > -   クラスター作成ページの画面上の指示に従って、クレジットカードを追加します。
     > -   電信送金で支払う場合は、 TiDB Cloudサポート チームにお問い合わせください。
-    > -   クラウド マーケットプレイス (AWS、Azure、または Google Cloud) を通じてTiDB Cloudにサインアップし、クラウド プロバイダー アカウントを使用して支払います。
+    > -   クラウド マーケットプレイス (AWS、Azure、または Google Cloud) を通じてTiDB Cloudにサインアップし、クラウドプロバイダー アカウントを使用して支払います。
     >
     > PoC クレジットは、PoC 期間中に発生した対象費用を相殺するために自動的に使用されます。
 
@@ -94,7 +94,7 @@ PoC 用の[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-d
 
 ## ステップ4. スキーマとSQLを適応させる {#step-4-adapt-your-schemas-and-sql}
 
-次に、テーブルやインデックスを含むデータベース スキーマを TiDB クラスターにロードできます。
+次に、テーブルやインデックスを含むデータベーススキーマを TiDB クラスターにロードできます。
 
 PoC クレジットの数量には限りがあるため、クレジットの価値を最大化するために、 TiDB Cloudで互換性テストや予備分析用の[TiDB Cloud Starter クラスター](/tidb-cloud/select-cluster-tier.md#starter)を作成することをお勧めします。
 

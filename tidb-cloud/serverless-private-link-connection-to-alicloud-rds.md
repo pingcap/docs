@@ -43,7 +43,7 @@ ApsaraDB RDS for MySQL インスタンスは次の要件を満たしている必
 
 ## ステップ2. ApsaraDB RDS for MySQLインスタンスをエンドポイントサービスとして公開する {#step-2-expose-the-apsaradb-rds-for-mysql-instance-as-an-endpoint-service}
 
-Alibaba Cloud コンソールでロードバランサーとエンドポイント サービスを設定する必要があります。
+Alibaba Cloud コンソールでロードバランサーとエンドポイントサービスを設定する必要があります。
 
 ### ステップ2.1. ロードバランサーを設定する {#step-2-1-set-up-the-load-balancer}
 
@@ -74,7 +74,7 @@ Alibaba Cloud コンソールでロードバランサーとエンドポイント
 
 ### ステップ2.2. エンドポイントサービスを設定する {#step-2-2-set-up-an-endpoint-service}
 
-ApsaraDB RDS for MySQL と同じリージョンにエンドポイント サービスを設定するには、次の手順を実行します。
+ApsaraDB RDS for MySQL と同じリージョンにエンドポイントサービスを設定するには、次の手順を実行します。
 
 1.  エンドポイントサービスを作成するには、 [エンドポイントサービス](https://vpc.console.alibabacloud.com/endpointservice)に進んでください。以下の情報を入力してください。
 

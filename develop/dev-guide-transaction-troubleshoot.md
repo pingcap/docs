@@ -26,7 +26,7 @@ ERROR 1213: Deadlock found when trying to get lock; try restarting transaction
 INSERT INTO books (id, title, stock, published_at) VALUES (1, 'book-1', 10, now()), (2, 'book-2', 10, now());
 ```
 
-TiDB悲観的トランザクション モードでは、2 つのクライアントがそれぞれ次のステートメントを実行すると、デッドロックが発生します。
+TiDB悲観的トランザクションモードでは、2 つのクライアントがそれぞれ次のステートメントを実行すると、デッドロックが発生します。
 
 | クライアントA                                                   | クライアントB                                                       |
 | --------------------------------------------------------- | ------------------------------------------------------------- |
@@ -89,10 +89,10 @@ MySQL などの従来のデータベースとは異なり、TiDB では、楽観
     -   `Error 8002: can not retry select for update statement` : SELECT FOR UPDATE 書き込み競合エラー
     -   `Error 8022: Error: KV error safe to retry` : トランザクションのコミットに失敗したエラー。
     -   `Error 8028: Information schema is changed during the execution of the statement` : DDL 操作によってテーブルスキーマが変更され、トランザクションのコミットでエラーが発生しました。
-    -   `Error 9007: Write conflict` : 書き込み競合エラー。通常、楽観的トランザクション モードが使用されているときに、複数のトランザクションが同じデータ行を変更することによって発生します。
+    -   `Error 9007: Write conflict` : 書き込み競合エラー。通常、楽観的トランザクションモードが使用されているときに、複数のトランザクションが同じデータ行を変更することによって発生します。
 -   try ブロックの最後にあるトランザクションを`COMMIT` 。
 
-エラー コードの詳細については、 [エラーコードとトラブルシューティング](/error-codes.md)を参照してください。
+エラーコードの詳細については、 [エラーコードとトラブルシューティング](/error-codes.md)を参照してください。
 
 ```python
 while True:

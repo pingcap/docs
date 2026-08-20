@@ -177,7 +177,7 @@ pd-ctl config placement-rules rule-bundle load --out="default.json"
 pd-ctl config placement-rules rule-bundle save --in="rule.json"
 ```
 
-以前の構成にロールバックする必要がある場合は、バックアップ ファイル`default.json`を復元するか、次の JSON ファイルを手動で作成し、この JSON ファイルで現在の構成を上書きします。
+以前の構成にロールバックする必要がある場合は、バックアップファイル`default.json`を復元するか、次の JSON ファイルを手動で作成し、この JSON ファイルで現在の構成を上書きします。
 
 ```
 cat default.json

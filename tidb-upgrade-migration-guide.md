@@ -65,7 +65,7 @@ SET GLOBAL tidb_gc_life_time=60h;
 
 完全なデータを新しいクラスターに移行するときは、次の点に注意してください。
 
--   **バージョンの互換性**: バックアップと復元に使用されるBRバージョンは、古いクラスターのメジャー バージョンと一致する必要があります。
+-   **バージョンの互換性**: バックアップと復元に使用されるBRバージョンは、古いクラスターのメジャーバージョンと一致する必要があります。
 
 -   **パフォーマンスへの影響**： BRバックアップはシステムリソースを消費します。ビジネスへの影響を最小限に抑えるには、オフピーク時間帯にバックアップを実行してください。
 
@@ -76,7 +76,7 @@ SET GLOBAL tidb_gc_life_time=60h;
 
 -   **コンフィグレーションの整合性**：古いクラスタと新しいクラスタの構成が[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)であることを確認してください。同一でない場合、 BRの復元は失敗します。
 
--   **システムテーブルの復元**: BR復元中に`--with-sys-table`オプションを使用して、システムテーブル データを復元します。
+-   **システムテーブルの復元**: BR復元中に`--with-sys-table`オプションを使用して、システムテーブルデータを復元します。
 
 完全なデータを新しいクラスターに移行するには、次の手順を実行します。
 
@@ -125,7 +125,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 
 > **Note:**
 >
-> TiCDCコンポーネントのバージョンは、古いクラスターのメジャー バージョンと一致する必要があります。
+> TiCDCコンポーネントのバージョンは、古いクラスターのメジャーバージョンと一致する必要があります。
 
 -   Changefeedタスクを作成し、データ損失を防ぐために、増分レプリケーションの開始点（ `${tso}` ）を[ステップ2](#step-2-prepare-the-new-cluster)で記録したバックアップTSOと正確に設定します。
 
@@ -177,7 +177,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 
 -   [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)のスナップショット設定と TiCDC の[同期ポイント](/ticdc/ticdc-upstream-downstream-check.md)機能を組み合わせることで、Changefeed レプリケーションを停止することなくデータの整合性を検証できます。詳細については、 [上流および下流のクラスタのデータ検証とスナップショットの読み取り](/ticdc/ticdc-upstream-downstream-check.md)を参照してください。
 
--   テーブルの行数の比較など、ビジネス データの手動検証を実行します。
+-   テーブルの行数の比較など、ビジネスデータの手動検証を実行します。
 
 ### 3. 環境設定を完了する {#3-finalize-the-environment-setup}
 
@@ -188,7 +188,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 -   AUTO_INCREMENT列: 新しいクラスター内のAUTO_INCREMENT ID キャッシュをクリアします。
 -   統計: 統計を手動で収集するか、新しいクラスターで自動収集を有効にします。
 
-さらに、新しいクラスターをスケールアウトして、予想されるワークロードを処理し、アラート サブスクリプション、スケジュールされた統計収集スクリプト、データ バックアップ スクリプトなどの運用タスクを移行することもできます。
+さらに、新しいクラスターをスケールアウトして、予想されるワークロードを処理し、アラート サブスクリプション、スケジュールされた統計収集スクリプト、データバックアップ スクリプトなどの運用タスクを移行することもできます。
 
 ## ステップ4: ビジネストラフィックの切り替えとロールバック {#step-4-switch-business-traffic-and-rollback}
 
@@ -208,7 +208,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 
 1.  古いクラスタがビジネストラフィックを処理できないように、アプリケーションサービスを停止します。アクセスをさらに制限するには、次のいずれかの方法を使用します。
 
-    -   古いクラスター内のユーザー アカウントをロックします。
+    -   古いクラスター内のユーザーアカウントをロックします。
 
         ```sql
         ALTER USER ACCOUNT LOCK;
@@ -261,7 +261,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 
 7.  新しいクラスターから古いクラスターへのリバースレプリケーションを設定します。
 
-    1.  古いクラスター内のユーザー アカウントのロックを解除し、読み取り/書き込みモードを復元します。
+    1.  古いクラスター内のユーザーアカウントのロックを解除し、読み取り/書き込みモードを復元します。
 
         ```sql
         ALTER USER ACCOUNT UNLOCK;

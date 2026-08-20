@@ -218,7 +218,7 @@ Diagram(
 )
 ```
 
-テーブル スキャンおよびインデックス スキャン中、 `tidb_session_execute_duration_seconds{type="general"}`期間は次のように計算されます。
+テーブル スキャンおよびインデックススキャン中、 `tidb_session_execute_duration_seconds{type="general"}`期間は次のように計算されます。
 
 ```text
 tidb_session_execute_duration_seconds{type="general"} =
@@ -286,7 +286,7 @@ tidb_session_execute_duration_seconds{type="general"} =
 req_per_copr = rate(tidb_distsql_handle_query_duration_seconds_count) / rate(tidb_distsql_scan_keys_partial_num_count)
 ```
 
-インデックス ルックアップは、パイプラインで処理されるインデックス スキャンとテーブル スキャンを組み合わせたものです。
+インデックスルックアップは、パイプラインで処理されるインデックススキャンとテーブル スキャンを組み合わせたものです。
 
 ## クエリを書く {#write-queries}
 
@@ -317,7 +317,7 @@ Diagram(
 
 -   実行フェーズ: 変更を実行し、TiDB のメモリに書き込みます。
 -   ロックフェーズ: 実行結果に対して悲観的ロックを取得します。
--   コミット フェーズ: 2 フェーズ コミット プロトコル (2PC) を使用してトランザクションをコミットします。
+-   コミット フェーズ: 2 フェーズコミット プロトコル (2PC) を使用してトランザクションをコミットします。
 
 実行フェーズでは、TiDBはメモリ内のデータを操作します。主なレイテンシーは必要なデータの読み取りに起因します。更新クエリと削除クエリの場合、TiDBはまずTiKVからデータを読み取り、次にメモリ内の行を更新または削除します。
 
@@ -522,7 +522,7 @@ Commit_time =
 
 コミット期間は、次の 4 つの指標に分類できます。
 
--   `Get_latest_ts_time`は、非同期コミットまたはシングル フェーズ コミット (1PC) トランザクションで最新の TSO を取得するのにかかる時間を記録します。
+-   `Get_latest_ts_time`は、非同期コミットまたはシングル フェーズコミット (1PC) トランザクションで最新の TSO を取得するのにかかる時間を記録します。
 -   `Prewrite_time`は事前書き込みフェーズの期間を記録します。
 -   `Get_commit_ts_time`は、一般的な 2PC トランザクションの期間を記録します。
 -   `Commit_time`はコミットフェーズの所要時間を記録します。非同期コミットまたは1PCトランザクションにはこのフェーズはありません。

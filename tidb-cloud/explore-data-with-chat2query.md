@@ -42,7 +42,7 @@ SQLエディタの推奨される使用例は以下のとおりです。
 
 ## AIによるSQLクエリ生成を有効または無効にする {#enable-or-disable-ai-to-generate-sql-queries}
 
-PingCAP は、ユーザーのデータのプライバシーとセキュリティを最優先事項としています。 SQL エディターの Chat2Query の AI 機能は、データ自体ではなく、データベース スキーマにアクセスして SQL クエリを生成することのみが必要です。詳細については、 [Chat2Queryのプライバシーに関するFAQ](https://www.pingcap.com/privacy-policy/privacy-chat2query)を参照してください。
+PingCAP は、ユーザーのデータのプライバシーとセキュリティを最優先事項としています。 SQL エディターの Chat2Query の AI 機能は、データ自体ではなく、データベーススキーマにアクセスして SQL クエリを生成することのみが必要です。詳細については、 [Chat2Queryのプライバシーに関するFAQ](https://www.pingcap.com/privacy-policy/privacy-chat2query)を参照してください。
 
 Chat2Queryに初めてアクセスすると、PingCAPとAmazon Bedrockがお客様のコードスニペットを使用してサービスを調査および改善することを許可するかどうかを尋ねるダイアログが表示されます。
 

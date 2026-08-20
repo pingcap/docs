@@ -61,8 +61,8 @@ TiDBバージョン：8.5.3
     -   Backup & Restore (BR)
 
         -   PITR中のインデックス修復速度を向上させるため、インデックスを同時修復する [#59158](https://github.com/pingcap/tidb/issues/59158) @[Leavrth](https://github.com/Leavrth)
-        -   TiKV のダウンロード API は、バックアップ ファイルをダウンロードする際に、特定の時間範囲内のデータをフィルタリングして除外することをサポートしています。これにより、復元中に古いバージョンまたは将来のデータ バージョンがインポートされるのを回避できます [#18399](https://github.com/tikv/tikv/issues/18399) @[3pointer](https://github.com/3pointer)
-        -   タイムスタンプによるログバックアップ メタデータファイルのフィルタリングをサポートし、PITR 中のメタデータの読み取りにかかる時間を削減します [#61318](https://github.com/pingcap/tidb/issues/61318) @[3pointer](https://github.com/3pointer)
+        -   TiKV のダウンロード API は、バックアップファイルをダウンロードする際に、特定の時間範囲内のデータをフィルタリングして除外することをサポートしています。これにより、復元中に古いバージョンまたは将来のデータ バージョンがインポートされるのを回避できます [#18399](https://github.com/tikv/tikv/issues/18399) @[3pointer](https://github.com/3pointer)
+        -   タイムスタンプによるログバックアップメタデータファイルのフィルタリングをサポートし、PITR 中のメタデータの読み取りにかかる時間を削減します [#61318](https://github.com/pingcap/tidb/issues/61318) @[3pointer](https://github.com/3pointer)
 
 ## バグ修正 {#bug-fixes}
 
@@ -84,7 +84,7 @@ TiDBバージョン：8.5.3
     -   メタデータロック（MDL）を無効にした後、スキーマバージョンの更新に失敗してDDL操作が停止する問題を修正しました [#61210](https://github.com/pingcap/tidb/issues/61210) @[wjhuang2016](https://github.com/wjhuang2016)
     -   非公開インデックスが統計システムテーブルに表示される問題を修正 [#60430](https://github.com/pingcap/tidb/issues/60430) @[tangenta](https://github.com/tangenta)
     -   HashAgg演算子におけるメモリ追跡の誤りにより、大量のエラーログが発生する問題を修正しました [#58822](https://github.com/pingcap/tidb/issues/58822) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    -   HashAgg オペレーターでディスク スピル中に`nil`内の`basePartialResult4GroupConcat`バッファがpanicを引き起こす問題を修正しました [#61749](https://github.com/pingcap/tidb/issues/61749) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    -   HashAgg オペレーターでディスクスピル中に`nil`内の`basePartialResult4GroupConcat`バッファがpanicを引き起こす問題を修正しました [#61749](https://github.com/pingcap/tidb/issues/61749) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   集計式のエンコードロジックにおける誤った戻り値がクエリ実行中にpanicを引き起こす問題を修正 [#61735](https://github.com/pingcap/tidb/issues/61735) @[YangKeao](https://github.com/YangKeao)
     -   HashJoin演算子がメモリの過剰使用によりゴルーチンリークを引き起こす問題を修正 [#60926](https://github.com/pingcap/tidb/issues/60926) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   `IndexMerge`および`IndexLookUp`オペレーターで共有 KV リクエストがクエリのプッシュダウン時にデータ競合を引き起こす問題を修正しました [#60175](https://github.com/pingcap/tidb/issues/60175) @[you06](https://github.com/you06)

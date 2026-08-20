@@ -5,7 +5,7 @@ summary: mysql` スキーマの `user` テーブルについて学習します�
 
 # `mysql.user` {#mysql-user}
 
-`mysql.user`表は、ユーザー アカウントとその権限に関する情報を提供します。
+`mysql.user`表は、ユーザーアカウントとその権限に関する情報を提供します。
 
 `mysql.user`の構造を表示するには、次の SQL ステートメントを使用します。
 
@@ -82,7 +82,7 @@ DESC mysql.user;
 
 -   セキュリティ：
     -   `authentication_string`と`plugin` ： `authentication_string`にはユーザーアカウントの認証情報が保存されます。認証情報は、 `plugin`フィールドで指定された認証プラグインに基づいて解釈されます。
-    -   `Account_locked` : ユーザー アカウントがロックされているかどうかを示します。
+    -   `Account_locked` : ユーザーアカウントがロックされているかどうかを示します。
     -   `Password_reuse_history`と`Password_reuse_time` : [パスワード再利用ポリシー](/password-management.md#password-reuse-policy)に使用されます。
     -   `User_attributes` : ユーザーのコメントとユーザー属性に関する情報を提供します。
     -   `Token_issuer` : [`tidb_auth_token`](/security-compatibility-with-mysql.md#tidb_auth_token)認証プラグインに使用されます。
@@ -102,7 +102,7 @@ DESC mysql.user;
 
 -   セキュリティ：
     -   `authentication_string`と`plugin` ： `authentication_string`にはユーザーアカウントの認証情報が保存されます。認証情報は、 `plugin`フィールドで指定された認証プラグインに基づいて解釈されます。
-    -   `Account_locked` : ユーザー アカウントがロックされているかどうかを示します。
+    -   `Account_locked` : ユーザーアカウントがロックされているかどうかを示します。
     -   `Password_reuse_history`と`Password_reuse_time` : [パスワード再利用ポリシー](https://docs.pingcap.com/tidb/stable/password-management#password-reuse-policy)に使用されます。
     -   `User_attributes` : ユーザーのコメントとユーザー属性に関する情報を提供します。
     -   `Token_issuer` : [`tidb_auth_token`](https://docs.pingcap.com/tidb/stable/security-compatibility-with-mysql#tidb_auth_token)認証プラグインに使用されます。
