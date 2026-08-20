@@ -378,7 +378,7 @@ select @@tidb_slow_log_threshold;
 
 現在、システム変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)を使用してTiFlash構成`max_threads`を変更できます。この変数は、 TiFlashが要求を実行するための最大同時実行性を指​​定します。
 
-`tidb_max_tiflash_threads`のデフォルト値は`-1`で、このシステム変数は無効であり、 TiFlash設定ファイルの設定に依存することを示します。 `tidb_max_tiflash_threads`を使用すると、 `max_threads`を 10 に設定できます。
+`tidb_max_tiflash_threads`のデフォルト値は`-1`で、このシステム変数は無効であり、 TiFlash設定ファイルの設定に依存することを示します。 `tidb_max_tiflash_threads`を使用すると、 `max_threads`を10に設定できます。
 
 ```sql
 set tidb_max_tiflash_threads = 10;

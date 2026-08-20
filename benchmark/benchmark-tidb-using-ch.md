@@ -60,7 +60,7 @@ creating view revenue1
 
 ## TiFlashレプリカを作成する {#create-tiflash-replicas}
 
-TiFlashをデプロイした後、 TiFlash はTiKV データを自動的に複製しません。`tpcc`のTiFlashレプリカを作成するには、次の SQL 文を実行する必要があります。指定されたTiFlashレプリカが作成されると、TiKV は最新のデータをリアルタイムでTiFlashに自動的に複製します。次の例では、クラスターに 2つのTiFlashノードをデプロイし、レプリカ数を 2 に設定しています。
+TiFlashをデプロイした後、 TiFlash はTiKV データを自動的に複製しません。`tpcc`のTiFlashレプリカを作成するには、次の SQL 文を実行する必要があります。指定されたTiFlashレプリカが作成されると、TiKV は最新のデータをリアルタイムでTiFlashに自動的に複製します。次の例では、クラスターに 2つのTiFlashノードをデプロイし、レプリカ数を2に設定しています。
 
 ```
 ALTER DATABASE tpcc SET tiflash replica 2;

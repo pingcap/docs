@@ -461,7 +461,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     -   クエリがエラーを報告したときに CTE がブロックされる可能性があるバグを修正[＃31302](https://github.com/pingcap/tidb/issues/31302)
     -   非厳密モードでテーブルを作成するときに、varbinary または varchar 列の長さが長すぎるとエラーが発生する可能性があるバグを修正しました[＃30328](https://github.com/pingcap/tidb/issues/30328)
     -   `information_schema.placement_policies`でフォロワーが指定されていない場合のフォロワー数が間違っている問題を修正[＃31702](https://github.com/pingcap/tidb/issues/31702)
-    -   TiDB でインデックスの作成時に列プレフィックス長を 0 に指定できる問題を修正[＃31972](https://github.com/pingcap/tidb/issues/31972)
+    -   TiDB でインデックスの作成時に列プレフィックス長を0に指定できる問題を修正[＃31972](https://github.com/pingcap/tidb/issues/31972)
     -   TiDBがスペースで終わるパーティション名を許可する問題を修正[＃31535](https://github.com/pingcap/tidb/issues/31535)
     -   `RENAME TABLE`文のエラーメッセージを修正する [＃29893](https://github.com/pingcap/tidb/issues/29893)
 

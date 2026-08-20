@@ -429,7 +429,7 @@ ticloud serverless export cancel -c <cluster-id> -e <export-id>
 
 -   **TiDB Cloud Starter**:
 
-    -   使用制限を 0 に設定すると、エクスポート速度は最大 25 MiB/s になります。
+    -   使用制限を0に設定すると、エクスポート速度は最大 25 MiB/s になります。
     -   支出限度額が 0 より大きい場合、エクスポート速度は最大 100 MiB/s になります。
 
 -   **TiDB Cloud Essential** : 最大 100 MiB/秒。

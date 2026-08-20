@@ -128,7 +128,7 @@ TiDB バージョン: 5.1.4
     -   データを`DECIMAL`データ型にキャストする際のオーバーフローバグを修正
     -   `castStringAsReal` TiFlashとTiDB/TiKVの動作が一致しない問題を修正
     -   TiFlash が再起動後に`EstablishMPPConnection`エラーを返す可能性がある問題を修正しました
-    -   TiFlashレプリカの数を 0 に設定した後に古いデータを再利用できない問題を修正しました
+    -   TiFlashレプリカの数を0に設定した後に古いデータを再利用できない問題を修正しました
     -   `CastStringAsDecimal` TiFlashとTiDB/TiKVの動作が一致しない問題を修正
     -   `where <string>`句を含むクエリが間違った結果を返す問題を修正しました
     -   MPPクエリが停止したときにTiFlashがpanicになる可能性がある問題を修正しました
