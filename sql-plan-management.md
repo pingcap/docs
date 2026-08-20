@@ -48,7 +48,7 @@ CREATE GLOBAL BINDING FOR SELECT * FROM orders USING SELECT /*+ use_index(orders
 >
 > バインディングは手動で追加されたヒントよりも優先されます。そのため、対応するバインディングが存在する状態でヒントを含む文を実行すると、オプティマイザの動作を制御するヒントは有効になりません。ただし、他の種類のヒントは引き続き有効です。
 
-具体的には、これらのステートメントのうち2種類は、構文の競合のため実行計画にバインドできません。バインドの作成時に構文エラーが報告されます。次の例をご覧ください。
+具体的には、これらのステートメントのうち2種類は、構文の競合のため実行計画にバインドできません。バインディングの作成時に構文エラーが報告されます。次の例をご覧ください。
 
 ```sql
 -- Type one: Statements that get the Cartesian product by using the `JOIN` keyword and not specifying the associated columns with the `USING` keyword.
@@ -202,7 +202,7 @@ explain SELECT * FROM t1, t2 WHERE t1.id = t2.id;
 
 さらに、バインディングを作成する場合、TiDB ではセッションがデータベース コンテキスト内にあることが必要です。つまり、クライアントが接続されるか`use ${database}`が実行されるとき、データベースが指定されることになります。
 
-正規化とヒントの削除後、元のSQL文とバインドされたSQL文のテキストは一致している必要があります。一致していない場合は、バインドは失敗します。次の例をご覧ください。
+正規化とヒントの削除後、元のSQL文とバインドされたSQL文のテキストは一致している必要があります。一致していない場合は、バインディングは失敗します。次の例をご覧ください。
 
 -   このバインディングは、パラメータ化とヒントの削除の前後のテキストが同じであるため、正常に作成できます：`SELECT * FROM test . t WHERE a > ?`
 
@@ -227,7 +227,7 @@ SQL文の実行計画を過去の実行計画に固定するには、Plan Digest
 この機能を使用する場合、次の点に注意してください。
 
 -   この機能は、過去の実行計画に基づいてヒントを生成し、生成されたヒントをバインディングに使用します。過去の実行計画は[ステートメントサマリーテーブル](/statement-summary-tables.md)に保存されるため、この機能を使用する前に、 [`tidb_enable_stmt_summary`](/system-variables.md#tidb_enable_stmt_summary-new-in-v304)システム変数を有効にする必要があります。
--   TiFlashクエリ、3つ以上のテーブルを含む結合クエリ、およびサブクエリを含むクエリの場合、自動生成されるヒントが適切ではないため、プランが完全にバインドされない可能性があります。このような場合、バインドの作成時に警告が表示されます。
+-   TiFlashクエリ、3つ以上のテーブルを含む結合クエリ、およびサブクエリを含むクエリの場合、自動生成されるヒントが適切ではないため、プランが完全にバインドされない可能性があります。このような場合、バインディングの作成時に警告が表示されます。
 -   履歴実行計画がヒント付きのSQL文用である場合、ヒントはバインディングに追加されます。例えば、 `SELECT /*+ max_execution_time(1000) */ * FROM t`を実行した後、そのプランダイジェストで作成されたバインディングには`max_execution_time(1000)`が含まれます。
 
 このバインディング メソッドの SQL ステートメントは次のとおりです。
@@ -236,7 +236,7 @@ SQL文の実行計画を過去の実行計画に固定するには、Plan Digest
 CREATE [GLOBAL | SESSION] BINDING FROM HISTORY USING PLAN DIGEST StringLiteralOrUserVariableList;
 ```
 
-上記の文は、プランダイジェストを使用して実行計画をSQL文にバインドします。デフォルトのスコープはSESSIONです。作成されたバインドに適用されるSQL文、優先順位、スコープ、および有効条件は、 [SQL文に従って作成されたバインディング](#create-a-binding-according-to-a-sql-statement)と同じです。
+上記の文は、プランダイジェストを使用して実行計画をSQL文にバインドします。デフォルトのスコープはSESSIONです。作成されたバインディングに適用されるSQL文、優先順位、スコープ、および有効条件は、 [SQL文に従って作成されたバインディング](#create-a-binding-according-to-a-sql-statement)と同じです。
 
 このバインディング方法を使用するには、まず`statements_summary`で対象の履歴実行計画に対応するプランダイジェストを取得し、それを使用してバインディングを作成する必要があります。詳細な手順は以下のとおりです。
 
@@ -308,15 +308,15 @@ SELECT @@LAST_PLAN_FROM_BINDING;
 
 ### バインディングを削除する {#remove-a-binding}
 
-SQL ステートメントまたは SQL ダイジェストに従ってバインドを削除できます。
+SQL ステートメントまたは SQL ダイジェストに従ってバインディングを削除できます。
 
-#### SQL文に従ってバインドを削除する {#remove-a-binding-according-to-a-sql-statement}
+#### SQL文に従ってバインディングを削除する {#remove-a-binding-according-to-a-sql-statement}
 
 ```sql
 DROP [GLOBAL | SESSION] BINDING FOR BindableStmt;
 ```
 
-このステートメントは、GLOBAL レベルまたは SESSION レベルで指定された実行計画のバインドを削除します。デフォルトのスコープは SESSION です。
+このステートメントは、GLOBAL レベルまたは SESSION レベルで指定された実行計画のバインディングを削除します。デフォルトのスコープは SESSION です。
 
 一般的に、SESSIONスコープ内のバインディングは、主にテストや特殊な状況で使用されます。バインディングをすべてのTiDBプロセスで有効にするには、GLOBALバインディングを使用する必要があります。作成されたSESSIONバインディングは、セッションが終了する前にSESSIONバインディングが削除された場合でも、対応するGLOBALバインディングをSESSIONの終了まで保護します。この場合、バインディングは有効にならず、オプティマイザによってプランが選択されます。
 
@@ -334,7 +334,7 @@ explain SELECT * FROM t1,t2 WHERE t1.id = t2.id;
 
 #### SQLダイジェストに従ってバインディングを削除する {#remove-a-binding-according-to-sql-digest}
 
-SQL文に従ってバインドを削除するだけでなく、SQLダイジェストに従ってバインドを削除することもできます。詳細と例については、 [`DROP [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-drop-binding.md)を参照してください。
+SQL文に従ってバインディングを削除するだけでなく、SQLダイジェストに従ってバインディングを削除することもできます。詳細と例については、 [`DROP [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-drop-binding.md)を参照してください。
 
 ```sql
 DROP [GLOBAL | SESSION] BINDING FOR SQL DIGEST StringLiteralOrUserVariableList;
@@ -726,7 +726,7 @@ TiDB クラスターをアップグレードする前に、次の手順を実行
 
         -   実行計画に一貫性がある場合は、バインディングを安全に削除できます。
 
-        -   実行計画に矛盾がある場合は、統計情報を確認するなどして原因を特定する必要があります。この場合、プランの一貫性を確保するために、バインドを保持する必要があります。
+        -   実行計画に矛盾がある場合は、統計情報を確認するなどして原因を特定する必要があります。この場合、プランの一貫性を確保するために、バインディングを保持する必要があります。
 
 ## ベースライン進化 {#baseline-evolution}
 
