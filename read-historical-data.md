@@ -59,7 +59,7 @@ TiDBでは、ガベージコレクション（GC）が定期的に実行され�
     Query OK, 3 rows affected (0.00 sec)
     ```
 
-2.  表内のデータを表示する。
+2.  表内のデータを表示します。
 
     ```sql
     mysql> select * from t;
@@ -73,7 +73,7 @@ TiDBでは、ガベージコレクション（GC）が定期的に実行され�
     3 rows in set (0.00 sec)
     ```
 
-3.  テーブルのタイムスタンプを表示する。
+3.  テーブルのタイムスタンプを表示します。
 
     ```sql
     mysql> select now();
