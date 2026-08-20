@@ -162,7 +162,7 @@ TiKVコプロセッサータスクフィールド：
 
 リソース制御に関連する分野：
 
--   `Resource_group` : ステートメントがバインドされているリソース グループ。
+-   `Resource_group` : ステートメントがバインドされているリソースグループ。
 -   `Request_unit_read` : ステートメントによって消費された読み取り RU の合計。
 -   `Request_unit_write` : ステートメントによって消費された書き込み RU の合計。
 -   `Time_queued_by_rc` : ステートメントが利用可能なリソースを待機する合計時間。
@@ -389,7 +389,7 @@ TiDB 4.0 では、 `SLOW_QUERY`は、ローテーションされたスローロ�
 >
 > 指定された期間のスローログファイルが削除された場合、またはスロークエリが存在しない場合、クエリはNULLを返します。
 
-TiDB 4.0 では、すべての TiDB ノードのスロー クエリ情報を照会するための[`CLUSTER_SLOW_QUERY`](/information-schema/information-schema-slow-query.md#cluster_slow_query-table)システム テーブルが追加されました。 `CLUSTER_SLOW_QUERY`テーブルのテーブル スキーマは`CLUSTER_SLOW_QUERY`に`INSTANCE`列が追加されている点で`SLOW_QUERY`テーブルのスキーマとは異なります。 `INSTANCE`列は、スロー クエリの行情報の TiDB ノード アドレスを表します。 `CLUSTER_SLOW_QUERY` 、 [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)と同様に使用できます。
+TiDB 4.0 では、すべての TiDB ノードのスロー クエリ情報を照会するための[`CLUSTER_SLOW_QUERY`](/information-schema/information-schema-slow-query.md#cluster_slow_query-table)システムテーブルが追加されました。 `CLUSTER_SLOW_QUERY`テーブルのテーブルスキーマは`CLUSTER_SLOW_QUERY`に`INSTANCE`列が追加されている点で`SLOW_QUERY`テーブルのスキーマとは異なります。 `INSTANCE`列は、スロー クエリの行情報の TiDB ノード アドレスを表します。 `CLUSTER_SLOW_QUERY` 、 [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)と同様に使用できます。
 
 `CLUSTER_SLOW_QUERY`テーブルに対してクエリを実行すると、TiDB は他のノードからすべてのスロークエリ情報を取得して 1 つの TiDB ノードで操作を実行するのではなく、計算と判断を他のノードにプッシュします。
 

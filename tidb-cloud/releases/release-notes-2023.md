@@ -180,11 +180,11 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [AWS プライベートリンク](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc)または[Google Cloud プライベート サービス接続](https://cloud.google.com/vpc/docs/private-service-connect) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターを管理するためのTiDB Cloud API エンドポイントをいくつかリリースします。
 
-    -   クラスターのプライベート エンドポイント サービスを作成する
-    -   クラスターのプライベート エンドポイント サービス情報を取得する
+    -   クラスターのプライベートエンドポイント サービスを作成する
+    -   クラスターのプライベートエンドポイント サービス情報を取得する
     -   クラスターのプライベートエンドポイントを作成する
     -   クラスターのすべてのプライベートエンドポイントを一覧表示する
-    -   プロジェクト内のすべてのプライベート エンドポイントを一覧表示する
+    -   プロジェクト内のすべてのプライベートエンドポイントを一覧表示する
     -   クラスターのプライベートエンドポイントを削除する
 
     詳細については、 [APIドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster)を参照してください。
@@ -195,11 +195,11 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに対して Google Cloud [プライベートサービスコネクト](https://cloud.google.com/vpc/docs/private-service-connect)をサポートします。
 
-    プライベート エンドポイントを作成し、Google Cloud でホストされているTiDB Cloud Dedicated クラスタへの安全な接続を確立できるようになりました。
+    プライベートエンドポイントを作成し、Google Cloud でホストされているTiDB Cloud Dedicated クラスタへの安全な接続を確立できるようになりました。
 
     主な利点:
 
-    -   直感的な操作: わずか数ステップでプライベート エンドポイントを作成できます。
+    -   直感的な操作: わずか数ステップでプライベートエンドポイントを作成できます。
     -   強化されたセキュリティ: 安全な接続を確立してデータを保護します。
     -   パフォーマンスの向上: 低遅延かつ高帯域幅の接続を実現します。
 
@@ -257,7 +257,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   TiDB Cloud [Data Service](https://tidbcloud.com/project/data-service)でデータ アプリの OpenAPI 仕様をサポートします。
+-   TiDB Cloud [Data Service](https://tidbcloud.com/project/data-service)でデータアプリの OpenAPI 仕様をサポートします。
 
     TiDB Cloud Data Service は、各データアプリ向けに自動生成された OpenAPI ドキュメントを提供します。ドキュメントでは、エンドポイント、パラメータ、レスポンスを確認し、エンドポイントを試すことができます。
 
@@ -265,7 +265,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     詳細については、 [OpenAPI仕様を使用する](/tidb-cloud/data-service-manage-data-app.md#use-the-openapi-specification)および[Next.js で OpenAPI 仕様を使用する](/tidb-cloud/data-service-oas-with-nextjs.md)を参照してください。
 
--   [郵便配達員](https://www.postman.com/)でデータ アプリの実行をサポートします。
+-   [郵便配達員](https://www.postman.com/)でデータアプリの実行をサポートします。
 
     Postman統合により、データアプリのエンドポイントをコレクションとして、お好みのワークスペースにインポートできます。PostmanのWebアプリとデスクトップアプリの両方をサポートすることで、強化されたコラボレーションとシームレスなAPIテストのメリットを享受できます。
 
@@ -434,11 +434,11 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに Index Insight (ベータ版) を導入します。これは、スロークエリに対してインデックスの推奨事項を提供することで、クエリ パフォーマンスを最適化します。
+-   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに Index Insight (ベータ版) を導入します。これは、スロークエリに対してインデックスの推奨事項を提供することで、クエリパフォーマンスを最適化します。
 
     Index Insight を使用すると、次の方法でアプリケーション全体のパフォーマンスとデータベース操作の効率を向上させることができます。
 
-    -   強化されたクエリ パフォーマンス: Index Insight は、低速なクエリを識別し、適切なインデックスを提案します。これにより、クエリの実行速度が上がり、応答時間が短縮され、ユーザー エクスペリエンスが向上します。
+    -   強化されたクエリパフォーマンス: Index Insight は、低速なクエリを識別し、適切なインデックスを提案します。これにより、クエリの実行速度が上がり、応答時間が短縮され、ユーザー エクスペリエンスが向上します。
     -   コスト効率：Index Insight を使用してクエリパフォーマンスを最適化することで、追加のコンピューティングリソースの必要性が軽減され、既存のインフラストラクチャをより効率的に活用できるようになります。これにより、運用コストの削減につながる可能性があります。
     -   簡素化された最適化プロセス：Index Insightは、インデックスの改善点の特定と実装を簡素化し、手作業による分析や推測作業の必要性を排除します。その結果、正確なインデックス推奨によって時間と労力を節約できます。
     -   アプリケーション効率の向上: Index Insight を使用してデータベース パフォーマンスを最適化することで、 TiDB Cloudで実行されるアプリケーションはより大きなワークロードを処理し、より多くのユーザーに同時にサービスを提供できるようになり、アプリケーションのスケーリング操作がより効率的になります。
@@ -459,18 +459,18 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [データアプリ](/tidb-cloud/tidb-cloud-glossary.md#data-app) GitHub に接続することをサポートします。
 
-    [データアプリをGitHubに接続する](/tidb-cloud/data-service-manage-github-connection.md)により、データ アプリのすべての構成を Github 上の[コードファイル](/tidb-cloud/data-service-app-config-files.md)として管理できるようになり、 TiDB Cloud Data Service がシステムアーキテクチャおよび DevOps プロセスとシームレスに統合されます。
+    [データアプリをGitHubに接続する](/tidb-cloud/data-service-manage-github-connection.md)により、データアプリのすべての構成を Github 上の[コードファイル](/tidb-cloud/data-service-app-config-files.md)として管理できるようになり、 TiDB Cloud Data Service がシステムアーキテクチャおよび DevOps プロセスとシームレスに統合されます。
 
-    この機能を使用すると、次のタスクを簡単に実行できるため、データ アプリ開発の CI/CD エクスペリエンスが向上します。
+    この機能を使用すると、次のタスクを簡単に実行できるため、データアプリ開発の CI/CD エクスペリエンスが向上します。
 
-    -   GitHub を使用してデータ アプリの変更を自動的にデプロイします。
-    -   バージョン管理を使用して、GitHub でデータ アプリの変更の CI/CD パイプラインを構成します。
+    -   GitHub を使用してデータアプリの変更を自動的にデプロイします。
+    -   バージョン管理を使用して、GitHub でデータアプリの変更の CI/CD パイプラインを構成します。
     -   接続されている GitHub リポジトリから切断します。
     -   展開前にエンドポイントの変更を確認します。
     -   デプロイメント履歴を確認し、障害が発生した場合に必要なアクションを実行します。
     -   コミットを再デプロイして、以前のデプロイにロールバックします。
 
-    詳細については[GitHub でデータ アプリを自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
+    詳細については[GitHub でデータアプリを自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
 
 ## 2023年6月2日 {#june-2-2023}
 
@@ -594,7 +594,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   メンテナンス ウィンドウ機能を提供して、 [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの計画メンテナンス アクティビティを簡単にスケジュールおよび管理できるようにします。
 
-    メンテナンス ウィンドウとは、 TiDB Cloudサービスの信頼性、セキュリティ、パフォーマンスを確保するために、オペレーティング システムの更新、セキュリティ パッチ、インフラストラクチャのアップグレードなどの計画されたメンテナンス アクティビティが自動的に実行される指定された期間です。
+    メンテナンス ウィンドウとは、 TiDB Cloudサービスの信頼性、セキュリティ、パフォーマンスを確保するために、オペレーティングシステムの更新、セキュリティ パッチ、インフラストラクチャのアップグレードなどの計画されたメンテナンス アクティビティが自動的に実行される指定された期間です。
 
     メンテナンス期間中は、一時的な接続中断やQPSの変動が発生する可能性がありますが、クラスターは引き続き利用可能であり、SQL操作、既存のデータインポート、バックアップ、復元、移行、レプリケーションタスクは通常どおり実行されます。メンテナンス中は[許可された操作と許可されていない操作のリスト](/tidb-cloud/configure-maintenance-window.md#allowed-and-disallowed-operations-during-a-maintenance-window)を参照してください。
 
@@ -709,7 +709,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   [Data Service（ベータ版）](/tidb-cloud/data-service-overview.md) 、データ アプリに対するよりきめ細かいアクセス制御がサポートされます。
+-   [Data Service（ベータ版）](/tidb-cloud/data-service-overview.md) 、データアプリに対するよりきめ細かいアクセス制御がサポートされます。
 
     データアプリの詳細ページで、クラスタをデータアプリにリンクし、各APIキーのロールを指定できるようになりました。ロールは、APIキーがリンクされたクラスタへのデータの読み取りまたは書き込みを許可するかどうかを制御し、 `ReadOnly`または`ReadAndWrite`に設定できます。この機能により、データアプリに対してクラスタレベルおよび権限レベルのアクセス制御が可能になり、ビジネスニーズに応じてアクセス範囲をより柔軟に制御できるようになります。
 
@@ -755,7 +755,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     -   モバイル アプリケーションまたは Web アプリケーションから TiDB クラスターのデータベースに直接アクセスします。
     -   サーバーレス エッジ関数を使用してエンドポイントを呼び出し、データベース接続プールによって発生するスケーラビリティの問題を回避します。
-    -   Data Serviceをデータ ソースとして使用して、 TiDB Cloud をデータ視覚化プロジェクトと統合します。
+    -   Data Serviceをデータソースとして使用して、 TiDB Cloud をデータ視覚化プロジェクトと統合します。
     -   MySQL インターフェースがサポートしていない環境からデータベースに接続します。
 
     さらに、 TiDB Cloud は、AI を使用して SQL ステートメントを生成および実行できる RESTful インターフェースである[チャット2クエリAPI](/tidb-cloud/use-chat2query-api.md)提供します。
@@ -800,7 +800,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   新しい[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン6.5.0](https://docs.pingcap.com/tidb/stable/release-6.5.0)から[バージョン6.5.1](https://docs.pingcap.com/tidb/stable/release-6.5.1)にアップグレードします。
 
--   ヘッダー行を含むローカル CSV ファイルをアップロードするときに、 TiDB Cloudによって作成されるターゲット テーブルの列名の変更をサポートします。
+-   ヘッダー行を含むローカル CSV ファイルをアップロードするときに、 TiDB Cloudによって作成されるターゲットテーブルの列名の変更をサポートします。
 
     ヘッダー行を含むローカルCSVファイルを[Serverless Tier](/tidb-cloud/select-cluster-tier.md#starter)クラスターにインポートする際、 TiDB Cloudでターゲットテーブルを作成する必要があり、ヘッダー行の列名がTiDB Cloudの列命名規則に従っていない場合、対応する列名の横に警告アイコンが表示されます。この警告を解決するには、アイコンの上にカーソルを移動し、メッセージに従って既存の列名を編集するか、新しい列名を入力してください。
 
@@ -948,7 +948,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     -   CSV ファイルをアップロードするには、**インポート**ページのアップロード領域にドラッグ アンド ドロップするだけです。
     -   インポートタスクを作成する際に、対象のデータベースまたはテーブルが存在しない場合は、名前を入力することでTiDB Cloudが自動的に作成します。作成する対象テーブルには、主キーを指定するか、複数のフィールドを選択して複合主キーを形成することができます。
-    -   インポートが完了したら、 **「Chat2Query でデータを探索」**をクリックするか、タスク リストでターゲット テーブル名をクリックして、 [AI搭載のChat2Query](/tidb-cloud/explore-data-with-chat2query.md)でデータを探索できます。
+    -   インポートが完了したら、 **「Chat2Query でデータを探索」**をクリックするか、タスク リストでターゲットテーブル名をクリックして、 [AI搭載のChat2Query](/tidb-cloud/explore-data-with-chat2query.md)でデータを探索できます。
 
     詳細については[ローカルファイルをTiDB Cloudにインポートする](/tidb-cloud/tidb-cloud-import-local-files.md)を参照してください。
 
@@ -969,7 +969,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     Chat2Query では、AI に SQL クエリを自動的に生成させたり、SQL クエリを手動で記述したり、ターミナルなしでデータベースに対して SQL クエリを実行したりできます。
 
-    Chat2Query にアクセスするには、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、クラスター名をクリックして、左側のナビゲーション ペインで**Chat2Query を**クリックします。
+    Chat2Query にアクセスするには、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、クラスター名をクリックして、左側のナビゲーションペインで**Chat2Query を**クリックします。
 
 ## 2023年1月4日 {#january-4-2023}
 

@@ -277,7 +277,7 @@ SHOW GRANTS FOR `rw_user`@`192.168.%`;
 -   `CONNECTION_ADMIN`
 -   `PLACEMENT_ADMIN`は、権限所有者が配置ポリシーを作成、変更、削除できるようにします。
 -   `DASHBOARD_CLIENT`は、権限所有者が TiDB Dashboardにログインできるようにします。
--   `RESTRICTED_TABLES_ADMIN`は、SEM が有効になっている場合に、権限所有者がシステム テーブルを表示できるようにします。
+-   `RESTRICTED_TABLES_ADMIN`は、SEM が有効になっている場合に、権限所有者がシステムテーブルを表示できるようにします。
 -   `RESTRICTED_STATUS_ADMIN`を使用すると、SEM が有効になっているときに、権限所有者は[`SHOW [GLOBAL|SESSION] STATUS`](/sql-statements/sql-statement-show-status.md)ですべてのステータス変数を表示できます。
 -   `RESTRICTED_VARIABLES_ADMIN`は、SEM が有効になっている場合に、権限所有者がすべてのシステム変数を表示できるようにします。
 -   `RESTRICTED_USER_ADMIN` SEM が有効になっている場合、特権所有者が SUPER ユーザーによってアクセス権を取り消されることを禁止します。

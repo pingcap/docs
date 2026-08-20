@@ -303,7 +303,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
     -   `--pd` : アップストリームクラスタのPDアドレス。形式は`[upstream_pd_ip]:[pd_port]`です。
 
-    -   `--sink-uri` : レプリケーション タスクのダウンストリーム アドレス。 `--sink-uri`は、次の形式に従って構成します。現在、このスキームは`mysql` 、 `tidb` 、 `kafka` 、 `s3` 、および`local` 。
+    -   `--sink-uri` : レプリケーションタスクのダウンストリーム アドレス。 `--sink-uri`は、次の形式に従って構成します。現在、このスキームは`mysql` 、 `tidb` 、 `kafka` 、 `s3` 、および`local` 。
 
         ```shell
         [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]

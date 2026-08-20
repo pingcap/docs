@@ -133,7 +133,7 @@ tiup dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --filetype csv --sql 'se
 
 <CustomContent platform="tidb">
 
--   `--sql`オプションを使用すると、 Dumpling はエクスポートされたテーブルとスキーマ情報を取得できません。 `--output-filename-template`オプションを使用すると、CSV ファイルのファイル名形式を指定できます。これにより、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してデータ ファイルをインポートする際に便利です。たとえば、 `--output-filename-template='test.sbtest1.{{.Index}}'`は、エクスポートされた CSV ファイルの名前が`test.sbtest1.000000000`または`test.sbtest1.000000001`となることを指定します。
+-   `--sql`オプションを使用すると、 Dumpling はエクスポートされたテーブルとスキーマ情報を取得できません。 `--output-filename-template`オプションを使用すると、CSV ファイルのファイル名形式を指定できます。これにより、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してデータファイルをインポートする際に便利です。たとえば、 `--output-filename-template='test.sbtest1.{{.Index}}'`は、エクスポートされた CSV ファイルの名前が`test.sbtest1.000000000`または`test.sbtest1.000000001`となることを指定します。
 
 </CustomContent>
 

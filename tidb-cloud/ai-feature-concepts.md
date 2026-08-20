@@ -13,7 +13,7 @@ TiDB CloudのAI機能により、データ探索、検索、統合のための�
 
 Chat2Query は SQL エディターに統合された AI を活用した機能で、ユーザーが自然言語命令を使用して SQL クエリを生成、デバッグ、または書き換えるのを支援します。詳細については、[AI支援型SQLエディタでデータを探索しよう](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
 
-さらに、 TiDB Cloud は、 TiDB Cloud Starterインスタンス用の Chat2Query API を提供します。有効にすると、 TiDB Cloud はChat2Query と呼ばれるシステム データ アプリと Data Service に Chat2Data エンドポイントを自動的に作成します。このエンドポイントを呼び出して、AI に指示を提供して SQL ステートメントを生成および実行させることができます。詳細については、 [Chat2Query API を使い始めましょう](/tidb-cloud/use-chat2query-api.md)を参照してください。
+さらに、 TiDB Cloud は、 TiDB Cloud Starterインスタンス用の Chat2Query API を提供します。有効にすると、 TiDB Cloud はChat2Query と呼ばれるシステム データアプリと Data Service に Chat2Data エンドポイントを自動的に作成します。このエンドポイントを呼び出して、AI に指示を提供して SQL ステートメントを生成および実行させることができます。詳細については、 [Chat2Query API を使い始めましょう](/tidb-cloud/use-chat2query-api.md)を参照してください。
 
 ## ベクトル検索（プレビュー） {#vector-search-preview}
 

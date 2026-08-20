@@ -106,7 +106,7 @@ Web ページに`required component NgMonitoring is not started`が表示され�
     tiup cluster reload ${cluster-name} --role prometheus
     ```
 
-上記の手順を実行した後もエラー メッセージが表示される場合は、PingCAP またはコミュニティから[サポートを受けて](/support.md)ください。
+上記の手順を実行した後もエラーメッセージが表示される場合は、PingCAP またはコミュニティから[サポートを受けて](/support.md)ください。
 
 </details>
 

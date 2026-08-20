@@ -28,7 +28,7 @@ TiDBは[Percolator](https://www.usenix.org/legacy/event/osdi10/tech/full_papers/
 
 TiDB Grafana パネルで、 **KV エラー**の下にある次の監視メトリックを確認します。
 
--   **KV バックオフ OPS は**、TiKV によって返される 1 秒あたりのエラー メッセージの数を示します。
+-   **KV バックオフ OPS は**、TiKV によって返される 1 秒あたりのエラーメッセージの数を示します。
 
     ![kv-backoff-ops](/media/troubleshooting-write-conflict-kv-backoff-ops.png)
 

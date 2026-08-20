@@ -13,13 +13,13 @@ ticloud serverless import cancel [flags]
 
 ## 例 {#examples}
 
-対話モードでインポート タスクをキャンセルします。
+対話モードでインポートタスクをキャンセルします。
 
 ```shell
 ticloud serverless import cancel
 ```
 
-非対話型モードでインポート タスクをキャンセルします。
+非対話型モードでインポートタスクをキャンセルします。
 
 ```shell
 ticloud serverless import cancel --cluster-id <cluster-id> --import-id <import-id>
@@ -32,9 +32,9 @@ ticloud serverless import cancel --cluster-id <cluster-id> --import-id <import-i
 | フラグ                  | 説明                       | 必須  | 注記                       |
 | -------------------- | ------------------------ | --- | ------------------------ |
 | -c, --cluster-id string | クラスターの ID を指定します。        | はい  | 非対話型モードでのみ動作します。         |
-|  --force             | 確認なしでインポート タスクをキャンセルします。 | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
+|  --force             | 確認なしでインポートタスクをキャンセルします。 | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 | -h, --help           | このコマンドのヘルプ情報を表示します。      | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
-| --import-id string      | インポート タスクの ID を指定します。    | はい  | 非対話型モードでのみ動作します。         |
+| --import-id string      | インポートタスクの ID を指定します。    | はい  | 非対話型モードでのみ動作します。         |
 
 ## 継承されたフラグ {#inherited-flags}
 

@@ -55,7 +55,7 @@ tikv-ctl modify-tikv-config -n backup.enable-auto-tune -v <true|false>
 
 ## 実装 {#implementation}
 
-自動チューニングは、バックアップ タスクで使用されるスレッド プールのサイズを調整して、クラスターの全体的な CPU 使用率が特定のしきい値を超えないようにします。
+自動チューニングは、バックアップ タスクで使用されるスレッドプールのサイズを調整して、クラスターの全体的な CPU 使用率が特定のしきい値を超えないようにします。
 
 この機能には、TiKV設定ファイルに記載されていない関連する設定項目が2つあります。これらの設定項目は内部調整のみを目的としています。バックアップタスクを実行する際に、これらの設定項目を設定する必要は**ありません**。
 
@@ -78,7 +78,7 @@ tikv-ctl modify-tikv-config -n backup.enable-auto-tune -v <true|false>
 |^^^^**--| Because the cluster workload gets higher, auto-tune adjusts the size of the thread pool to `2`. After that, the cluster still has 2 idle CPU cores.
 ```
 
-**バックアップ CPU 使用率**パネルでは、自動調整によって調整されたスレッド プールのサイズを確認できます。
+**バックアップ CPU 使用率**パネルでは、自動調整によって調整されたスレッドプールのサイズを確認できます。
 
 ![Grafana dashboard example of backup auto-tune metrics](/media/br/br-auto-throttle.png)
 

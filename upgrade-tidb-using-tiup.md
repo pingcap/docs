@@ -9,7 +9,7 @@ summary: TiUPを使用してTiDBをアップグレードする方法を学びま
 
 > **Warning:**
 >
-> 1.  TiDB をアップグレードする前に、オペレーティング システムのバージョンが[OSおよびプラットフォームの要件](/hardware-and-software-requirements.md#os-and-platform-requirements)を満たしていることを確認してください。 CentOS Linux 7 で実行されているクラスターを v8.5 にアップグレードする場合は、クラスターが使用できなくなるリスクを避けるために、必ず TiDB v8.5.1 以降のバージョンを使用してください。詳細については、 [TiDB v8.5.1 リリースノート](/releases/release-8.5.1.md)を参照してください。
+> 1.  TiDB をアップグレードする前に、オペレーティングシステムのバージョンが[OSおよびプラットフォームの要件](/hardware-and-software-requirements.md#os-and-platform-requirements)を満たしていることを確認してください。 CentOS Linux 7 で実行されているクラスターを v8.5 にアップグレードする場合は、クラスターが使用できなくなるリスクを避けるために、必ず TiDB v8.5.1 以降のバージョンを使用してください。詳細については、 [TiDB v8.5.1 リリースノート](/releases/release-8.5.1.md)を参照してください。
 > 2.  TiFlash を5.3 より前のバージョンから 5.3 以降にオンラインでアップグレードすることはできません。代わりに、まず以前のバージョンのTiFlashインスタンスをすべて停止し、その後オフラインでクラスタをアップグレードする必要があります。TiDB や TiKV などの他のコンポーネントがオンラインアップグレードをサポートしていない場合は、[オンラインアップグレード](#online-upgrade)の警告の手順に従ってください。
 > 3.  アップグレード処理中はDDLステートメントを実行**しないでください**。実行すると、未定義の動作が発生する可能性があります。
 > 4.  TiDB クラスターで DDL ステートメントが実行されている間は、クラスターをアップグレード**しないでください**(通常、 `ADD INDEX`や列型の変更など、時間のかかる DDL ステートメントの場合)。アップグレードの前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスターで DDL ジョブが実行中かどうかを確認することをお勧めします。クラスターで DDL ジョブが実行されている場合は、クラスターをアップグレードする前に、DDL の実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルしてください。

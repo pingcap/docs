@@ -92,7 +92,7 @@ target-table = "t_2"           # The name of the target table
 -   `inspector_mysql_1.Tb_emp1`
 -   `Inspector_mysql_1.Tb_emp1`
 
-設定例では、アップストリーム クラスターにルール`Source.rule1`があり、ターゲット テーブルは`inspector_mysql_1.tb_emp1`です。
+設定例では、アップストリーム クラスターにルール`Source.rule1`があり、ターゲットテーブルは`inspector_mysql_1.tb_emp1`です。
 
 #### 例1 {#example-1}
 

@@ -85,7 +85,7 @@ TiDBバージョン：8.3.0
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)を参照してください。
 
--   パーティション テーブルはグローバル インデックスをサポートします (実験的) [#45133](https://github.com/pingcap/tidb/issues/45133) @[mjonss](https://github.com/mjonss)@[Defined2014](https://github.com/Defined2014) @[jiyfhust](https://github.com/jiyfhust)@[L-maple](https://github.com/L-maple)
+-   パーティションテーブルはグローバルインデックスをサポートします (実験的) [#45133](https://github.com/pingcap/tidb/issues/45133) @[mjonss](https://github.com/mjonss)@[Defined2014](https://github.com/Defined2014) @[jiyfhust](https://github.com/jiyfhust)@[L-maple](https://github.com/L-maple)
 
     以前のバージョンのパーティションテーブルでは、グローバルインデックスがサポートされていないため、いくつかの制限がありました。たとえば、一意キーはテーブルのパーティション式内のすべての列を使用する必要があります。クエリ条件でパーティションキーを使用しない場合、クエリはすべてのパーティションをスキャンするため、パフォーマンスが低下します。v7.6.0以降では、グローバルインデックス機能を有効にするためにシステム変数[`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760)が導入されました。ただし、この機能は当時開発中であったため、有効にすることは推奨されません。
 
@@ -206,7 +206,7 @@ TiDBバージョン：8.3.0
 
 ### システムテーブル {#system-tables}
 
--   [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)および[`INFORMATION_SCHEMA.CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md#cluster_processlist)システム テーブルに`SESSION_ALIAS`フィールドが追加され、DML ステートメントによって現在影響を受けている行数が表示されます。[#46889](https://github.com/pingcap/tidb/issues/46889) @[lcwangchao](https://github.com/lcwangchao)
+-   [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)および[`INFORMATION_SCHEMA.CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md#cluster_processlist)システムテーブルに`SESSION_ALIAS`フィールドが追加され、DML ステートメントによって現在影響を受けている行数が表示されます。[#46889](https://github.com/pingcap/tidb/issues/46889) @[lcwangchao](https://github.com/lcwangchao)
 
 ## 非推奨機能 {#deprecated-features}
 

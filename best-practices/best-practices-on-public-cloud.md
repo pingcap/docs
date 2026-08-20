@@ -1,6 +1,6 @@
 ---
 title: TiDB Best Practices on Public Cloud
-summary: パブリック クラウドに TiDB をデプロイするためのベスト プラクティスについて説明します。
+summary: パブリック クラウドに TiDB をデプロイするためのベストプラクティスについて説明します。
 aliases: ['/ja/tidb/stable/best-practices-on-public-cloud/']
 ---
 

@@ -287,7 +287,7 @@ TiDBダッシュボードの`KV Errors`パネルには、トランザクショ�
 
 ### 読み書き競合 {#read-write-conflicts}
 
-エラー メッセージと解決策は、楽観的ロックの競合の[読み取り書き込み競合](#read-write-conflicts)と同じです。
+エラーメッセージと解決策は、楽観的ロックの競合の[読み取り書き込み競合](#read-write-conflicts)と同じです。
 
 ### 悲観的ロック再試行制限に達しました {#pessimistic-lock-retry-limit-reached}
 
@@ -295,7 +295,7 @@ TiDBダッシュボードの`KV Errors`パネルには、トランザクショ�
 
 TiDBのロック操作は書き込み操作であり、そのプロセスはまず読み取り、次に書き込みであるため、RPCリクエストは2つあります。トランザクションの途中で書き込み競合が発生した場合、TiDBは対象キーのロックを再度試行し、各再試行はTiDBログに出力されます。再試行回数は[pessimistic-txn.max-retry-count](/tidb-configuration-file.md#max-retry-count)です。
 
-悲観的トランザクション モードでは、書き込み競合が発生し、再試行回数が上限に達すると、次のキーワードを含むエラー メッセージが TiDB ログに表示されます。
+悲観的トランザクション モードでは、書き込み競合が発生し、再試行回数が上限に達すると、次のキーワードを含むエラーメッセージが TiDB ログに表示されます。
 
 ```log
 err="pessimistic lock retry limit reached"
@@ -310,7 +310,7 @@ err="pessimistic lock retry limit reached"
 
 悲観的トランザクションモードでは、トランザクションは互いのロックを待機します。ロック待機のタイムアウトは、TiDBのパラメータ[innodb_lock_wait_timeout](/pessimistic-transaction.md#behaviors)によって定義されます。これは、SQL文レベルでの最大ロック待機時間であり、SQL文がロックを要求したがロックが取得されなかった場合に想定される時間です。この時間が経過すると、TiDBは再びロックを試行せず、対応するエラーメッセージをクライアントに返します。
 
-待機ロックのタイムアウトが発生すると、次のエラー メッセージがクライアントに返されます。
+待機ロックのタイムアウトが発生すると、次のエラーメッセージがクライアントに返されます。
 
 ```log
 ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction
@@ -324,7 +324,7 @@ ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction
 
 トランザクションの実行時間はGCのタイムリミットを超えることはできません。また、悲観的トランザクションのTTL時間には上限があり、デフォルト値は1時間です。そのため、1時間を超えて実行された悲観的トランザクションはコミットに失敗します。このタイムアウトしきい値は、TiDBパラメータ[`performance.max-txn-ttl`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example)によって制御されます。
 
-悲観的トランザクションの実行時間が TTL 時間を超えると、TiDB ログに次のエラー メッセージが表示されます。
+悲観的トランザクションの実行時間が TTL 時間を超えると、TiDB ログに次のエラーメッセージが表示されます。
 
 ```log
 TTL manager has timed out, pessimistic locks may expire, please commit or rollback this transaction

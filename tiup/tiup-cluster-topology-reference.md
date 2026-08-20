@@ -784,7 +784,7 @@ grafana_servers:
 
 -   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例："0,1"）です。
 
--   `config_file` : クラスター構成の初期化フェーズ中に、Alertmanager の構成としてターゲット マシンに転送されるローカル ファイルを指定します。
+-   `config_file` : クラスター構成の初期化フェーズ中に、Alertmanager の構成としてターゲットマシンに転送されるローカル ファイルを指定します。
 
 -   `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
 

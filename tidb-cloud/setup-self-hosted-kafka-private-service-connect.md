@@ -9,7 +9,7 @@ summary: このドキュメントでは、Google Cloud でセルフホスト型 
 
 このメカニズムは次のように機能します。
 
-1.  TiDB Cloud VPC は、プライベート エンドポイントを介して Kafka VPC に接続します。
+1.  TiDB Cloud VPC は、プライベートエンドポイントを介して Kafka VPC に接続します。
 2.  Kafka クライアントはすべての Kafka ブローカーと直接通信する必要があります。
 3.  各 Kafka ブローカーは、 TiDB Cloud VPC 内の一意のポートにマッピングされます。
 4.  マッピングを実現するには、Kafka ブートストラップ メカニズムと Google Cloud リソースを活用します。
@@ -39,7 +39,7 @@ Google Cloud でセルフホスト型 Kafka に Private Service Connect を設�
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com)で[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
     2.  概要ページで、TiDB クラスターのリージョンを確認します。Kafka クラスターが同じリージョンにデプロイされることを確認してください。
-    3.  左側のナビゲーション ペインで**[データ]** &gt; **[Changefeed] を**クリックし、右上隅の**Create Changefeed**をクリックして、次の情報を入力します。
+    3.  左側のナビゲーションペインで**[データ]** &gt; **[Changefeed] を**クリックし、右上隅の**Create Changefeed**をクリックして、次の情報を入力します。
         1.  **宛先**で、 **Kafka**を選択します。
         2.  **Connectivity Method**で、 **Private Service Connect**を選択します。
     4.  **先に進む前に、Google Cloud プロジェクトをリマインダー**に書き留めておいてください。このプロジェクトは、 TiDB Cloudからのエンドポイント作成リクエストの自動承認を承認するために使用します。

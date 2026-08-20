@@ -104,7 +104,7 @@ TiDB バージョン: 4.0.0-rc.1
 
 <!---->
 
--   列が unsigned として定義されているため、システム テーブルで負の数が正しく表示されない問題を修正しました。 [＃16004](https://github.com/pingcap/tidb/pull/16004)
+-   列が unsigned として定義されているため、システムテーブルで負の数が正しく表示されない問題を修正しました。 [＃16004](https://github.com/pingcap/tidb/pull/16004)
 -   `use_index_merge`ヒントに無効なインデックス名が含まれている場合に警告を追加します [＃15960](https://github.com/pingcap/tidb/pull/15960)
 -   同じ一時ディレクトリを共有する TiDBサーバーの複数のインスタンスを禁止する[＃16026](https://github.com/pingcap/tidb/pull/16026)
 -   プランキャッシュが有効な場合の`explain for connection`の実行中に発生するpanicを修正[＃16285](https://github.com/pingcap/tidb/pull/16285)

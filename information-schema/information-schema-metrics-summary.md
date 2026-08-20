@@ -1,6 +1,6 @@
 ---
 title: METRICS_SUMMARY
-summary: METRICS_SUMMARY システム テーブルについて学習します。
+summary: METRICS_SUMMARY システムテーブルについて学習します。
 ---
 
 # METRICS_SUMMARY {#metrics-summary}

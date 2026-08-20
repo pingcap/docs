@@ -5,7 +5,7 @@ summary: TiDB データ移行でアップストリーム MySQL インスタン�
 
 # TiDB データ移行におけるデータソース構成の管理 {#manage-data-source-configurations-in-tidb-data-migration}
 
-このドキュメントでは、MySQL パスワードの暗号化、データ ソースの操作、 [dmctl](/dm/dmctl-introduction.md)を使用したアップストリーム MySQL インスタンスと DM ワーカー間のバインディングの変更など、データ ソース構成を管理する方法について説明します。
+このドキュメントでは、MySQL パスワードの暗号化、データソースの操作、 [dmctl](/dm/dmctl-introduction.md)を使用したアップストリーム MySQL インスタンスと DM ワーカー間のバインディングの変更など、データソース構成を管理する方法について説明します。
 
 ## データベースのパスワードを暗号化する {#encrypt-the-database-password}
 
@@ -25,7 +25,7 @@ MKxn0Qo3m3XOyjCnhEMtsUCm83EhGQDZ/T4=
 
 ## データソースを操作する {#operate-data-source}
 
-`operate-source`コマンドを使用して、データ ソース構成を DM クラスターにロード、一覧表示、または削除できます。
+`operate-source`コマンドを使用して、データソース構成を DM クラスターにロード、一覧表示、または削除できます。
 
 ```bash
 help operate-source
@@ -51,7 +51,7 @@ Global Flags:
 
 -   `stop` : 1つ以上の上流データベースソースを停止します。複数のデータソースの停止に失敗した場合、一部のデータソースが停止される可能性があります。
 
--   `show` : 追加されたデータ ソースと対応する DM ワーカーを表示します。
+-   `show` : 追加されたデータソースと対応する DM ワーカーを表示します。
 
 -   `config-file` : `source.yaml`のファイル パスを指定し、複数のファイル パスを渡すことができます。
 
@@ -90,7 +90,7 @@ operate-source create ./source.yaml
 >
 > `config`コマンドは DM v6.0 以降のバージョンでのみサポートされます。それ以前のバージョンでは、 `get-config`コマンドを使用する必要があります。
 
-`source-id`がわかっている場合は、 `dmctl --master-addr <master-addr> config source <source-id>`を実行してデータ ソース構成を取得できます。
+`source-id`がわかっている場合は、 `dmctl --master-addr <master-addr> config source <source-id>`を実行してデータソース構成を取得できます。
 
 ```bash
 config source mysql-replica-01
@@ -111,7 +111,7 @@ config source mysql-replica-01
 }
 ```
 
-`source-id`がわからない場合は、まず`dmctl --master-addr <master-addr> operate-source show`を実行してすべてのデータ ソースを一覧表示できます。
+`source-id`がわからない場合は、まず`dmctl --master-addr <master-addr> operate-source show`を実行してすべてのデータソースを一覧表示できます。
 
 ```bash
 operate-source show

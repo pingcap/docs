@@ -66,7 +66,7 @@ Binlogレプリケーションユニットのパフォーマンス問題を診�
 
 Binlogレプリケーションユニットは、設定に応じて、上流のMySQL/MariaDBからbinlogイベントを読み取るか、リレーログファイルから読み取るかを決定します。関連するパフォーマンスメトリックは`read binlog event duration`で、通常は数マイクロ秒から数十マイクロ秒の範囲です。
 
--   DM のBinlogレプリケーション処理ユニットがアップストリーム MySQL/MariaDB からbinlogイベントを読み取る場合、問題を特定して解決するには、「リレー ログ ユニット」セクションの[binlogデータを読み取る](#read-binlog-data)を参照してください。
+-   DM のBinlogレプリケーション処理ユニットがアップストリーム MySQL/MariaDB からbinlogイベントを読み取る場合、問題を特定して解決するには、「リレーログ ユニット」セクションの[binlogデータを読み取る](#read-binlog-data)を参照してください。
 
 -   DMのBinlogレプリケーション処理ユニットがリレーログファイルからbinlogイベントを読み取る場合、 `binlog event size`が大きすぎない場合、 `read binlog event duration`の値はマイクロ秒単位にする必要があります。`read binlog event duration`が大きすぎる場合は、ディスクの読み取りパフォーマンスを確認してください。書き込みパフォーマンスの低下を回避するには、DMワーカーにローカルSSDを使用してください。
 

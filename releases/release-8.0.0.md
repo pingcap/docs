@@ -87,7 +87,7 @@ TiDB バージョン: 8.0.0
 
 -   オプティマイザーが多値インデックスのサポートを強化[#47759](https://github.com/pingcap/tidb/issues/47759) [#46539](https://github.com/pingcap/tidb/issues/46539) @[Arenatlx](https://github.com/Arenatlx)@[time-and-fate](https://github.com/time-and-fate)
 
-    TiDB v6.6.0 では[多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)が導入され、JSON データ型のクエリ パフォーマンスが向上しました。v8.0.0 では、オプティマイザが多値インデックスのサポートを強化し、複雑なシナリオでクエリを最適化するために、それらを正しく識別して利用できるようになりました。
+    TiDB v6.6.0 では[多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)が導入され、JSON データ型のクエリパフォーマンスが向上しました。v8.0.0 では、オプティマイザが多値インデックスのサポートを強化し、複雑なシナリオでクエリを最適化するために、それらを正しく識別して利用できるようになりました。
 
     -   オプティマイザは、多値インデックスに関する統計情報を収集し、その統計情報に基づいて実行計画を決定します。SQL文で複数の多値インデックスを選択できる場合、オプティマイザはコストが最も低いインデックスを特定できます。
     -   `OR`を使用して複数の`member of`条件を接続する場合、オプティマイザは各 DNF 項目 ( `member of`条件) に対して有効なインデックス部分パスを照合し、これらのパスを Union を使用して結合して`Index Merge`を形成できます。これにより、条件フィルタリングとデータ取得の効率が向上します。
@@ -224,7 +224,7 @@ TiDB バージョン: 8.0.0
 
 -   `IMPORT INTO ... FROM SELECT`の機能を拡張するために`IMPORT INTO`構文をサポートします (実験的) [#49883](https://github.com/pingcap/tidb/issues/49883) @[D3Hunter](https://github.com/D3Hunter)
 
-    以前の TiDB バージョンでは、クエリ結果をターゲット テーブルにインポートするには`INSERT INTO ... SELECT`ステートメントを使用するしかなく、大規模なデータセットのシナリオでは効率が悪かった。v8.0.0 以降では、TiDB で`IMPORT INTO ... FROM SELECT`を使用して`SELECT`クエリの結果を空の TiDB ターゲット テーブルにインポートできるようになり、 `INSERT INTO ... SELECT`の最大 8 倍のパフォーマンスを実現し、インポート時間を大幅に短縮できる。
+    以前の TiDB バージョンでは、クエリ結果をターゲットテーブルにインポートするには`INSERT INTO ... SELECT`ステートメントを使用するしかなく、大規模なデータセットのシナリオでは効率が悪かった。v8.0.0 以降では、TiDB で`IMPORT INTO ... FROM SELECT`を使用して`SELECT`クエリの結果を空の TiDB ターゲットテーブルにインポートできるようになり、 `INSERT INTO ... SELECT`の最大 8 倍のパフォーマンスを実現し、インポート時間を大幅に短縮できる。
 
     さらに、 `IMPORT INTO ... FROM SELECT`を使用して、 [`AS OF TIMESTAMP`](/as-of-timestamp.md)でクエリされた履歴データをインポートできます。
 
@@ -232,7 +232,7 @@ TiDB バージョン: 8.0.0
 
 -   TiDB Lightning は競合解決戦略を簡素化し、 `replace`戦略を使用した競合データの処理をサポートします (実験的) [#51036](https://github.com/pingcap/tidb/issues/51036) @[lyzx2001](https://github.com/lyzx2001)
 
-    以前のバージョンでは、 TiDB Lightning には論理インポート モード用の[データ競合解決戦略](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md#conflict-detection)と物理インポート モード用の[2つのデータ競合解決戦略](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection)ありましたが、これらは理解して設定するのが簡単ではありませんでした。
+    以前のバージョンでは、 TiDB Lightning には論理インポートモード用の[データ競合解決戦略](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md#conflict-detection)と物理インポートモード用の[2つのデータ競合解決戦略](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection)ありましたが、これらは理解して設定するのが簡単ではありませんでした。
 
     バージョン 8.0.0 以降、 TiDB Lightning は[旧バージョンの競合検出](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800)物理インポートモードの戦略を非推奨とし、 [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md)パラメータを使用して論理インポートモードと物理インポートモードの両方の競合検出戦略を制御できるようにし、このパラメータの設定を簡素化しました。さらに、物理インポートモードでは、 `replace`戦略が、インポート時に主キーまたは一意キーの競合があるデータが検出された場合、最新のデータを保持して古いデータを上書きすることをサポートするようになりました。
 
@@ -295,7 +295,7 @@ TiDB バージョン: 8.0.0
 | TiDB           | [`log.general-log-file`](/tidb-configuration-file.md#general-log-file-new-in-v800)                                                                            | 新しく追加された | 一般ログを保存するファイルを指定します。デフォルト値はnullで、これは一般ログがインスタンスファイルに書き込まれることを意味します。                                                                                                                                         |
 | TiDB           | [`tikv-client.enable-replica-selector-v2`](/tidb-configuration-file.md#enable-replica-selector-v2-new-in-v800)                                                | 新しく追加された | TiKV に RPC リクエストを送信する際に、リージョンレプリカセレクターの新しいバージョンを使用するかどうかを制御します。デフォルト値は`true`です。                                                                                                                             |
 | TiKV           | [`log-backup.initial-scan-rate-limit`](/tikv-configuration-file.md#initial-scan-rate-limit-new-in-v620)                                                       | 変更     | 最小値として`1MiB`の制限を追加します。                                                                                                                                                                                      |
-| TiKV           | [`raftstore.store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)                                                                  | 変更     | TiKV のパフォーマンスを向上させるため、デフォルト値を`0`から`1`に変更します。つまり、StoreWriter スレッド プールのサイズはデフォルトで`1`になります。                                                                                                                    |
+| TiKV           | [`raftstore.store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)                                                                  | 変更     | TiKV のパフォーマンスを向上させるため、デフォルト値を`0`から`1`に変更します。つまり、StoreWriter スレッドプールのサイズはデフォルトで`1`になります。                                                                                                                    |
 | TiKV           | [`rocksdb.defaultcf.titan.blob-cache-size`](/tikv-configuration-file.md#blob-cache-size)                                                                      | 変更     | バージョン8.0.0以降、TiKVは`shared-blob-cache`設定項目を導入し、デフォルトで有効にしているため、 `blob-cache-size`を別途設定する必要はありません。 `blob-cache-size`の設定は、 `shared-blob-cache`が`false`に設定されている場合にのみ有効になります。                                    |
 | TiKV           | [`rocksdb.titan.max-background-gc`](/tikv-configuration-file.md#max-background-gc)                                                                            | 変更     | Titan GC プロセスによるスレッド リソースの占有を減らすため、デフォルト値を`4`から`1`に変更します。                                                                                                                                                   |
 | TiKV           | [`security.encryption.master-key.vendor`](/encryption-at-rest.md#specify-a-master-key-via-kms)                                                                | 変更     | サービスプロバイダで使用可能なタイプとして`gcp`を追加します。                                                                                                                                                                           |
@@ -432,7 +432,7 @@ TiDB バージョン: 8.0.0
     -   `tidb_stats_load_sync_wait`が有効にならない問題を修正 [#50872](https://github.com/pingcap/tidb/issues/50872) @[jiyfhust](https://github.com/jiyfhust)
     -   `max_execute_time`設定が複数のレベルで互いに干渉する問題を修正 [#50914](https://github.com/pingcap/tidb/issues/50914) @[jiyfhust](https://github.com/jiyfhust)
     -   統計情報の同時更新によって発生するスレッドセーフティの問題を修正 [#50835](https://github.com/pingcap/tidb/issues/50835) @[Rustin170506](https://github.com/Rustin170506)
-    -   パーティション テーブルで`auto analyze`を実行すると TiDB がpanicを引き起こす可能性がある問題を修正 [#51187](https://github.com/pingcap/tidb/issues/51187) @[Rustin170506](https://github.com/Rustin170506)
+    -   パーティションテーブルで`auto analyze`を実行すると TiDB がpanicを引き起こす可能性がある問題を修正 [#51187](https://github.com/pingcap/tidb/issues/51187) @[Rustin170506](https://github.com/Rustin170506)
     -   SQL文中の`IN()`に異なる数の値が含まれている場合、SQLバインディングが機能しない可能性がある問題を修正しました [#51222](https://github.com/pingcap/tidb/issues/51222) @[hawkingrei](https://github.com/hawkingrei)
     -   TiDB が式内のシステム変数の型を正しく変換できない問題を修正 [#43527](https://github.com/pingcap/tidb/issues/43527) @[Rustin170506](https://github.com/Rustin170506)
     -   `force-init-stats`が設定されている場合に TiDB が対応するポートをリッスンしない問題を修正 [#51473](https://github.com/pingcap/tidb/issues/51473) @[hawkingrei](https://github.com/hawkingrei)
@@ -455,7 +455,7 @@ TiDB バージョン: 8.0.0
     -   `CAST(AS DATETIME)`が特定の状況下で時間精度を失う可能性がある問題を修正 [#49555](https://github.com/pingcap/tidb/issues/49555) @[SeaRise](https://github.com/SeaRise)
     -   テーブルにクラスター化インデックスがある場合、並列処理`Apply`が誤った結果を生成する可能性がある問題を修正 [#51372](https://github.com/pingcap/tidb/issues/51372) @[guo-shaoge](https://github.com/guo-shaoge)
     -   `ALTER TABLE ... COMPACT TIFLASH REPLICA`が主キーの型が`VARCHAR`の場合に正しく終了しない可能性がある問題を修正 [#51810](https://github.com/pingcap/tidb/issues/51810) @[breezewish](https://github.com/breezewish)
-    -   `NULL`ステートメントを使用してパーティション テーブルを交換する際に`DEFAULT NULL`属性の`EXCHANGE PARTITION`値のチェックが正しく行われない問題を修正しました。 [#47167](https://github.com/pingcap/tidb/issues/47167) @[jiyfhust](https://github.com/jiyfhust)
+    -   `NULL`ステートメントを使用してパーティションテーブルを交換する際に`DEFAULT NULL`属性の`EXCHANGE PARTITION`値のチェックが正しく行われない問題を修正しました。 [#47167](https://github.com/pingcap/tidb/issues/47167) @[jiyfhust](https://github.com/jiyfhust)
     -   パーティションテーブルの定義が、UTF8以外の文字セットを使用した場合に誤った動作を引き起こす可能性がある問題を修正しました [#49251](https://github.com/pingcap/tidb/issues/49251) @[YangKeao](https://github.com/YangKeao)
     -   一部のシステム変数について、 `INFORMATION_SCHEMA.VARIABLES_INFO`テーブルに誤ったデフォルト値が表示される問題を修正しました [#49461](https://github.com/pingcap/tidb/issues/49461) @[jiyfhust](https://github.com/jiyfhust)
     -   データベース名に空の文字列を使用した場合にエラーが報告されない場合がある問題を修正 [#45873](https://github.com/pingcap/tidb/issues/45873) @[yoshikipom](https://github.com/yoshikipom)
@@ -518,7 +518,7 @@ TiDB バージョン: 8.0.0
         -   同じノード上の TiKV IP アドレスを変更した後にログのバックアップが停止する問題を修正 [#50445](https://github.com/pingcap/tidb/issues/50445) @[3pointer](https://github.com/3pointer)
         -   S3からファイルコンテンツを読み取る際にエラーが発生した場合にBRが再試行できない問題を修正 [#49942](https://github.com/pingcap/tidb/issues/49942) @[Leavrth](https://github.com/Leavrth)
         -   データ復元失敗後にチェックポイントから再開するとエラー`the target cluster is not fresh`発生する問題を修正 [#50232](https://github.com/pingcap/tidb/issues/50232) @[Leavrth](https://github.com/Leavrth)
-        -   ログ バックアップ タスクを停止すると TiDB がクラッシュする問題を修正 [#50839](https://github.com/pingcap/tidb/issues/50839) @[YuJuncen](https://github.com/YuJuncen)
+        -   ログバックアップ タスクを停止すると TiDB がクラッシュする問題を修正 [#50839](https://github.com/pingcap/tidb/issues/50839) @[YuJuncen](https://github.com/YuJuncen)
         -   TiKVノードにリーダーがいないためにデータ復元が遅くなる問題を修正 [#50566](https://github.com/pingcap/tidb/issues/50566) @[Leavrth](https://github.com/Leavrth)
         -   `--filter`オプションを指定した後でも完全復元ではターゲット クラスターが空である必要がある問題を修正 [#51009](https://github.com/pingcap/tidb/issues/51009) @[3pointer](https://github.com/3pointer)
 

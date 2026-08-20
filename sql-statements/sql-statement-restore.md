@@ -118,13 +118,13 @@ RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/'
 
 <CustomContent platform="tidb">
 
-システム テーブルはデフォルトで復元されます。システム[権限テーブル](/privilege-management.md#privilege-table)テーブルを復元する必要がない場合は、 `WITH_SYS_TABLE`パラメーターを`FALSE`に設定できます。
+システムテーブルはデフォルトで復元されます。システム[権限テーブル](/privilege-management.md#privilege-table)テーブルを復元する必要がない場合は、 `WITH_SYS_TABLE`パラメーターを`FALSE`に設定できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-システム テーブルはデフォルトで復元されます。システム[権限テーブル](https://docs.pingcap.com/tidb/stable/privilege-management#privilege-table)テーブルを復元する必要がない場合は、 `WITH_SYS_TABLE`パラメーターを`FALSE`に設定できます。
+システムテーブルはデフォルトで復元されます。システム[権限テーブル](https://docs.pingcap.com/tidb/stable/privilege-management#privilege-table)テーブルを復元する必要がない場合は、 `WITH_SYS_TABLE`パラメーターを`FALSE`に設定できます。
 
 </CustomContent>
 

@@ -58,9 +58,9 @@ tidb-server インスタンスのメモリ使用量が総メモリの一定割�
 >
 > ハイブリッド展開シナリオでは、物理マシン全体の合計メモリしきい値ではなく、単一の tidb-server インスタンスのメモリ使用量しきい値は`tidb_server_memory_limit`になります。
 
-## INFORMATION_SCHEMA システム テーブルを使用して、現在の tidb-server インスタンスのメモリ使用量を表示する {#view-the-memory-usage-of-the-current-tidb-server-instance-using-the-information_schema-system-table}
+## INFORMATION_SCHEMA システムテーブルを使用して、現在の tidb-server インスタンスのメモリ使用量を表示する {#view-the-memory-usage-of-the-current-tidb-server-instance-using-the-information_schema-system-table}
 
-現在のインスタンスまたはクラスターのメモリ使用量を表示するには、システム テーブル[`INFORMATION_SCHEMA.(CLUSTER_)MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md)をクエリします。
+現在のインスタンスまたはクラスターのメモリ使用量を表示するには、システムテーブル[`INFORMATION_SCHEMA.(CLUSTER_)MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md)をクエリします。
 
 現在のインスタンスまたはクラスターのメモリ関連の操作と実行基準を確認するには、システムテーブル[`INFORMATION_SCHEMA.(CLUSTER_)MEMORY_USAGE_OPS_HISTORY`](/information-schema/information-schema-memory-usage-ops-history.md)をクエリします。このテーブルには、インスタンスごとに最新の50件のレコードが保持されます。
 
@@ -76,7 +76,7 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
 
 過剰なメモリ使用量のアラームがトリガーされると、TiDB は次のアクションを実行します。
 
--   TiDB は、TiDB ログ ファイル[`filename`](/tidb-configuration-file.md#filename)が配置されているディレクトリに次の情報を記録します。
+-   TiDB は、TiDB ログファイル[`filename`](/tidb-configuration-file.md#filename)が配置されているディレクトリに次の情報を記録します。
 
     -   現在実行中のすべてのSQL文の中で、メモリ使用量が最も多い上位10個のSQL文と実行時間が最も長い上位10個のSQL文に関する情報
     -   ゴルーチンスタック情報
@@ -110,7 +110,7 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
     [2022/10/11 16:39:02.281 +08:00] [WARN] [memoryusagealarm.go:212] ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"] ["is tidb_server_memory_limit set"=false] ["system memory total"=33682427904] ["system memory usage"=22120655360] ["tidb-server memory usage"=21468556992] [memory-usage-alarm-ratio=0.85] ["record path"=/tiup/deploy/tidb-4000/log/oom_record]
     ```
 
-    上記のサンプル ログ ファイルのフィールドは次のように説明されています。
+    上記のサンプル ログファイルのフィールドは次のように説明されています。
 
     -   `is tidb_server_memory_limit set`は [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)が設定されているかどうかを示します。
     -   `system memory total`は現在のシステムの合計メモリを示します。
@@ -165,7 +165,7 @@ TiDBは、実行演算子のディスクへの書き込みをサポートして�
     [tidb]> explain analyze select /*+ HASH_AGG() */ count(*) from t t1 join t t2 join t t3 group by t1.a, t2.a, t3.a;
     ```
 
-    この SQL ステートメントを実行するとメモリが大量に消費されるため、次の「メモリ クォータ不足」エラー メッセージが返されます。
+    この SQL ステートメントを実行するとメモリが大量に消費されるため、次の「メモリ クォータ不足」エラーメッセージが返されます。
 
     ```sql
     ERROR 1105 (HY000): Out Of Memory Quota![conn_id=3]

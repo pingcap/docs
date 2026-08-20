@@ -124,9 +124,9 @@ TiDBバージョン: 7.1.4
 
 -   PD
 
-    -   リソース グループ クライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値より少なくなる問題を修正しました。 [＃7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
+    -   リソースグループ クライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値より少なくなる問題を修正しました。 [＃7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
     -   一部のTSOログでエラー原因が出力されない問題を修正しました [＃7496](https://github.com/tikv/pd/issues/7496) @[CabinfeverB](https://github.com/CabinfeverB)
-    -   `BURSTABLE`有効になっているときにデフォルトのリソース グループに不要なトークンが蓄積される問題を修正[＃7206](https://github.com/tikv/pd/issues/7206) @[CabinfeverB](https://github.com/CabinfeverB)
+    -   `BURSTABLE`有効になっているときにデフォルトのリソースグループに不要なトークンが蓄積される問題を修正[＃7206](https://github.com/tikv/pd/issues/7206) @[CabinfeverB](https://github.com/CabinfeverB)
     -   `evict-leader-scheduler`インターフェースが呼び出されたときに出力がない問題を修正しました [＃7672](https://github.com/tikv/pd/issues/7672) @[CabinfeverB](https://github.com/CabinfeverB)
     -   `watch etcd`正しくオフになっていない場合に発生するメモリリークの問題を修正[＃7807](https://github.com/tikv/pd/issues/7807) @[rleungx](https://github.com/rleungx)
     -   `MergeLabels`関数が呼び出されたときにデータ競合が発生する問題を修正しました [＃7535](https://github.com/tikv/pd/issues/7535) @[lhy1024](https://github.com/lhy1024)
@@ -135,7 +135,7 @@ TiDBバージョン: 7.1.4
     -   データレプリケーション自動同期（DR自動同期）モードを採用しているクラスタで`available_stores`誤って計算される問題を修正[＃7221](https://github.com/tikv/pd/issues/7221) @[disksing](https://github.com/disksing)
     -   配置ルールの設定が複雑な場合、データレプリケーション自動同期（DR自動同期）モードを採用しているクラスタで`canSync`と`hasMajority`誤って計算される可能性がある問題を修正しました[＃7201](https://github.com/tikv/pd/issues/7201) @[disksing](https://github.com/disksing)
     -   データレプリケーション自動同期（DR自動同期）モードを採用しているクラスターで、セカンダリAZがダウンしているときにプライマリAZがTiKVノードを追加できない問題を修正しました。 [＃7218](https://github.com/tikv/pd/issues/7218) @[disksing](https://github.com/disksing)
-    -   リソース グループをバッチでクエリすると PD がpanicになる可能性がある問題を修正しました [＃7206](https://github.com/tikv/pd/issues/7206) @[nolouch](https://github.com/nolouch)
+    -   リソースグループをバッチでクエリすると PD がpanicになる可能性がある問題を修正しました [＃7206](https://github.com/tikv/pd/issues/7206) @[nolouch](https://github.com/nolouch)
     -   `pd-ctl`を使用してリーダーのないリージョンを照会すると、PD がpanicになる可能性がある問題を修正しました。 [＃7630](https://github.com/tikv/pd/issues/7630) @[rleungx](https://github.com/rleungx)
     -   リーダースイッチ後にPD監視項目`learner-peer-count`古い値を同期しない問題を修正 [＃7728](https://github.com/tikv/pd/issues/7728) @[CabinfeverB](https://github.com/CabinfeverB)
     -   PDが`systemd` で起動したときにリソース制限を読み取れない問題を修正 [＃7628](https://github.com/tikv/pd/issues/7628) @[bufferflies](https://github.com/bufferflies)
@@ -159,7 +159,7 @@ TiDBバージョン: 7.1.4
 
         -   ログバックアップタスクを停止すると TiDB がクラッシュする問題を修正[＃50839](https://github.com/pingcap/tidb/issues/50839) @[YuJuncen](https://github.com/YuJuncen)
         -   TiKVノードにリーダーがいないためにデータの復元が遅くなる問題を修正しました [＃50566](https://github.com/pingcap/tidb/issues/50566) @[Leavrth](https://github.com/Leavrth)
-        -   同じノードで TiKV IP アドレスを変更した後にログ バックアップが停止する問題を修正しました [＃50445](https://github.com/pingcap/tidb/issues/50445) @[3pointer](https://github.com/3pointer)
+        -   同じノードで TiKV IP アドレスを変更した後にログバックアップが停止する問題を修正しました [＃50445](https://github.com/pingcap/tidb/issues/50445) @[3pointer](https://github.com/3pointer)
         -   S3 からファイル コンテンツを読み取っているときにエラーが発生した場合にBR が再試行できない問題を修正しました [＃49942](https://github.com/pingcap/tidb/issues/49942) @[Leavrth](https://github.com/Leavrth)
         -   古いバージョンのバックアップからデータを復元するときに`Unsupported collation`エラーが報告される問題を修正しました [＃49466](https://github.com/pingcap/tidb/issues/49466) @[3pointer](https://github.com/3pointer)
 

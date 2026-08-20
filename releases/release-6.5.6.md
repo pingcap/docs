@@ -68,7 +68,7 @@ TiDB バージョン: 6.5.6
     -   CAST に精度損失がないのに条件`cast(col)=range`で FullScan が発生する問題を修正[＃45199](https://github.com/pingcap/tidb/issues/45199) @[AilinKid](https://github.com/AilinKid)
     -   `batch-client` in `client-go` のpanic問題を修正 [＃47691](https://github.com/pingcap/tidb/issues/47691) @[crazycs520](https://github.com/crazycs520)
     -   非整数クラスター化インデックスでのテーブル分割操作を禁止する [＃47350](https://github.com/pingcap/tidb/issues/47350) @[tangenta](https://github.com/tangenta)
-    -   時間変換中に準備済みプラン キャッシュと準備されていないプラン キャッシュの動作間の非互換性の問題を修正しました [＃42439](https://github.com/pingcap/tidb/issues/42439) @[qw4990](https://github.com/qw4990)
+    -   時間変換中に準備済みプランキャッシュと準備されていないプランキャッシュの動作間の非互換性の問題を修正しました [＃42439](https://github.com/pingcap/tidb/issues/42439) @[qw4990](https://github.com/qw4990)
     -   取り込みモードを使用して空のテーブルにインデックスを作成できないことがある問題を修正しました [＃39641](https://github.com/pingcap/tidb/issues/39641) @[tangenta](https://github.com/tangenta)
     -   パーティション交換中にパーティション定義に準拠していないデータを検出できない問題を修正 [＃46492](https://github.com/pingcap/tidb/issues/46492) @[mjonss](https://github.com/mjonss)
     -   `GROUP_CONCAT` `ORDER BY`列を解析できない問題を修正 [＃41986](https://github.com/pingcap/tidb/issues/41986) @[AilinKid](https://github.com/AilinKid)
@@ -165,7 +165,7 @@ TiDB バージョン: 6.5.6
     -   TiDB Data Migration (DM)
 
         -   DMが楽観的モードでパーティションDDLをスキップする問題を修正 [＃9788](https://github.com/pingcap/tiflow/issues/9788) @[GMHDBJD](https://github.com/GMHDBJD)
-        -   オンライン DDL をスキップするときに DM が上流のテーブル スキーマを適切に追跡できない問題を修正しました [＃9587](https://github.com/pingcap/tiflow/issues/9587) @[GMHDBJD](https://github.com/GMHDBJD)
+        -   オンライン DDL をスキップするときに DM が上流のテーブルスキーマを適切に追跡できない問題を修正しました [＃9587](https://github.com/pingcap/tiflow/issues/9587) @[GMHDBJD](https://github.com/GMHDBJD)
         -   失敗した DDL がスキップされ、後続の DDL が実行されない場合に、DM によって返されるレプリケーション ラグが増大し続ける問題を修正しました[＃9605](https://github.com/pingcap/tiflow/issues/9605) @[D3Hunter](https://github.com/D3Hunter)
         -   楽観的モードでタスクを再開するときに DM がすべての DML をスキップする問題を修正しました [＃9588](https://github.com/pingcap/tiflow/issues/9588) @[GMHDBJD](https://github.com/GMHDBJD)
 

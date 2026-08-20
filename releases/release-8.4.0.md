@@ -59,13 +59,13 @@ TiDB バージョン: 8.4.0
 
     詳細については、 [ドキュメント](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
--   パーティション テーブルはグローバル インデックスをサポート (GA) [#45133](https://github.com/pingcap/tidb/issues/45133) @[mjonss](https://github.com/mjonss)@[Defined2014](https://github.com/Defined2014) @[jiyfhust](https://github.com/jiyfhust)@[L-maple](https://github.com/L-maple)
+-   パーティションテーブルはグローバルインデックスをサポート (GA) [#45133](https://github.com/pingcap/tidb/issues/45133) @[mjonss](https://github.com/mjonss)@[Defined2014](https://github.com/Defined2014) @[jiyfhust](https://github.com/jiyfhust)@[L-maple](https://github.com/L-maple)
 
     TiDBの初期バージョンでは、パーティションテーブルはグローバルインデックスをサポートしていないため、いくつかの制限がありました。たとえば、一意キーはテーブルのパーティション式内のすべての列を使用する必要があります。クエリ条件でパーティションキーを使用しない場合、クエリはすべてのパーティションをスキャンするため、パフォーマンスが低下します。v7.6.0以降では、グローバルインデックス機能を有効にするためにシステム変数[`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760)が導入されました。しかし、この機能は当時開発中であったため、有効にすることは推奨されません。
 
     バージョン8.3.0以降、グローバルインデックス機能は実験的機能としてリリースされました。 `GLOBAL`キーワードを使用すると、パーティションテーブルのグローバルインデックスを明示的に作成できます。これにより、パーティションテーブルの一意キーにパーティション式で使用されるすべての列を含める必要があるという制約がなくなり、より柔軟なアプリケーション要件に対応できるようになります。さらに、グローバルインデックスは、パーティション化されていない列に基づくクエリのパフォーマンスも向上させます。
 
-    バージョン 8.4.0 では、この機能が一般提供 (GA) になります。グローバル インデックス機能を有効にするためにシステム変数[`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760)を設定する代わりに、キーワード`GLOBAL`を使用してグローバル インデックスを作成できます。バージョン 8.4.0 以降、このシステム変数は非推奨となり、常に`ON`になります。
+    バージョン 8.4.0 では、この機能が一般提供 (GA) になります。グローバルインデックス機能を有効にするためにシステム変数[`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760)を設定する代わりに、キーワード`GLOBAL`を使用してグローバルインデックスを作成できます。バージョン 8.4.0 以降、このシステム変数は非推奨となり、常に`ON`になります。
 
     詳細については、[ドキュメント](/global-indexes.md)を参照してください。
 
@@ -143,7 +143,7 @@ TiDB バージョン: 8.4.0
 
 ### データベース操作 {#db-operations}
 
--   BRはログ バックアップ データのクライアント側暗号化をサポートします (実験的) [#55834](https://github.com/pingcap/tidb/issues/55834) @[Tristan1900](https://github.com/Tristan1900)
+-   BRはログバックアップデータのクライアント側暗号化をサポートします (実験的) [#55834](https://github.com/pingcap/tidb/issues/55834) @[Tristan1900](https://github.com/Tristan1900)
 
     以前のTiDBバージョンでは、スナップショットバックアップデータのみがクライアント側で暗号化されていました。v8.4.0以降では、ログバックアップデータもクライアント側で暗号化できるようになりました。ログバックアップデータをバックアップストレージにアップロードする前に、以下のいずれかの方法でバックアップデータを暗号化してセキュリティを確保できます。
 
@@ -163,7 +163,7 @@ TiDB バージョン: 8.4.0
 
 -   TiDBとTiKVが消費したCPU時間をシステムテーブルに表示する [#55542](https://github.com/pingcap/tidb/issues/55542) @[yibin87](https://github.com/yibin87)
 
-    [TiDB Dashboard](/dashboard/dashboard-intro.md)の[Top SQLページ](/dashboard/top-sql.md)CPU 使用率の高い SQL ステートメントを表示します。バージョン 8.4.0 以降、TiDB はシステム テーブルに CPU 使用時間情報を追加し、セッションや SQL の他のメトリックと並べて表示することで、CPU 使用率の高い操作をさまざまな視点から簡単に把握できるようにしました。この情報は、インスタンスの CPU スパイクやクラスタ内の読み書きホットスポットなどのシナリオで、問題の原因を迅速に特定するのに役立ちます。
+    [TiDB Dashboard](/dashboard/dashboard-intro.md)の[Top SQLページ](/dashboard/top-sql.md)CPU 使用率の高い SQL ステートメントを表示します。バージョン 8.4.0 以降、TiDB はシステムテーブルに CPU 使用時間情報を追加し、セッションや SQL の他のメトリックと並べて表示することで、CPU 使用率の高い操作をさまざまな視点から簡単に把握できるようにしました。この情報は、インスタンスの CPU スパイクやクラスタ内の読み書きホットスポットなどのシナリオで、問題の原因を迅速に特定するのに役立ちます。
 
     -   [ステートメントサマリーテーブル](/statement-summary-tables.md)には`AVG_TIDB_CPU_TIME`と`AVG_TIKV_CPU_TIME`が追加され、過去の個々の SQL ステートメントによって消費された平均 CPU 時間が表示されます。
     -   [INFORMATION_SCHEMA.PROCESSLIST](/information-schema/information-schema-processlist.md)テーブルには、 `TIDB_CPU`と`TIKV_CPU`が追加され、現在セッションで実行されている SQL ステートメントの累積 CPU 消費量が表示されます。
@@ -215,7 +215,7 @@ TiDB バージョン: 8.4.0
 | ------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `log_bin`                                                                                                                       | 削除済み     | バージョン8.4.0では、 [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/)が削除されました。この変数はTiDB Binlogが使用されているかどうかを示し、バージョン8.4.0以降は削除されます。                                                                                                                                    |
 | `sql_log_bin`                                                                                                                   | 削除済み     | バージョン8.4.0では、 [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/)が削除されました。この変数は、変更内容をTiDB Binlogに書き込むかどうかを示すもので、バージョン8.4.0以降は削除されます。                                                                                                                              |
-| [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760)                                         | 非推奨      | v8.4.0 では、この変数は非推奨です。その値はデフォルト値`ON`に固定されます。つまり、[グローバルインデックス](/global-indexes.md)はデフォルトで有効になっています。 `GLOBAL`または`CREATE TABLE`を実行してグローバル インデックスを作成する際に、対応する列にキーワード`ALTER TABLE`追加するだけで済みます。                                                                                                     |
+| [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760)                                         | 非推奨      | v8.4.0 では、この変数は非推奨です。その値はデフォルト値`ON`に固定されます。つまり、[グローバルインデックス](/global-indexes.md)はデフォルトで有効になっています。 `GLOBAL`または`CREATE TABLE`を実行してグローバルインデックスを作成する際に、対応する列にキーワード`ALTER TABLE`追加するだけで済みます。                                                                                                     |
 | [`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50)                                      | 非推奨      | バージョン8.4.0では、この変数は非推奨となります。その値はデフォルト値`ON`に固定され、[リスト分割](/partitioned-table.md#list-partitioning)がデフォルトで有効になります。                                                                                                                                                                               |
 | [`tidb_enable_table_partition`](/system-variables.md#tidb_enable_table_partition)                                               | 非推奨      | v8.4.0 では、この変数は非推奨になりました。その値はデフォルト値`ON`に固定されます。つまり、[テーブルパーティショニング](/partitioned-table.md)はデフォルトで有効になります。                                                                                                                                                                                     |
 | [`tidb_analyze_partition_concurrency`](/system-variables.md#tidb_analyze_partition_concurrency)                                 | 変更     | 値の範囲を`[1, 18446744073709551615]`から`[1, 128]`に変更します。                                                                                                                                                                                                                                          |
@@ -271,7 +271,7 @@ v8.4.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
 
 ### オペレーティングシステムとプラットフォームの要件変更 {#operating-system-and-platform-requirement-changes}
 
-TiDB をアップグレードする前に、オペレーティング システムのバージョンが[OSおよびプラットフォームの要件](/hardware-and-software-requirements.md#os-and-platform-requirements)を満たしていることを確認してください。
+TiDB をアップグレードする前に、オペレーティングシステムのバージョンが[OSおよびプラットフォームの要件](/hardware-and-software-requirements.md#os-and-platform-requirements)を満たしていることを確認してください。
 
 -   [CentOS Linux サポート終了](https://www.centos.org/centos-linux-eol/)によると、CentOS Linux 7 のアップストリームサポートは 2024 年 6 月 30 日に終了しました。そのため、TiDB は v8.4.0 で CentOS 7 のサポートを終了します。Rocky Linux 9.1 以降のバージョンを使用することをお勧めします。CentOS 7 上の TiDB クラスタを v8.4.0 にアップグレードすると、クラスタが利用できなくなります。
 -   [Red Hat Enterprise Linux ライフサイクル](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates)によると、Red Hat Enterprise Linux 7 のメンテナンスサポートは 2024 年 6 月 30 日に終了しました。TiDB は、8.4 DMR バージョン以降、Red Hat Enterprise Linux 7 のサポートを終了します。Rocky Linux 9.1 以降のバージョンを使用することをお勧めします。Red Hat Enterprise Linux 7 上の TiDB クラスタを v8.4.0 以降にアップグレードすると、クラスタが使用できなくなります。

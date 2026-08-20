@@ -48,13 +48,13 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 -   デフォルト値: `200`
 -   可能な値: `[0, 2147483647]`
--   メモリを節約するために、プラン キャッシュでは、この変数で指定された数を超えるパラメータを持つクエリはキャッシュされません。 `0`制限がないことを意味します。
+-   メモリを節約するために、プランキャッシュでは、この変数で指定された数を超えるパラメータを持つクエリはキャッシュされません。 `0`制限がないことを意味します。
 
 ### <a href="https://github.com/pingcap/tidb/issues/44830">`44830`</a> <span class="version-mark">v6.5.7 および v7.3.0 の新機能</span> {#44830-new-in-v657-and-v730}
 
 -   デフォルト値: `OFF`
 -   可能`OFF`値: `ON`
--   この変数は、物理的な最適化中に生成された`PointGet`演算子を使用して実行計画をプラン キャッシュがキャッシュできるかどうかを制御します。
+-   この変数は、物理的な最適化中に生成された`PointGet`演算子を使用して実行計画をプランキャッシュがキャッシュできるかどうかを制御します。
 
 ### <a href="https://github.com/pingcap/tidb/issues/44855">`44855`</a> <span class="version-mark">v6.5.4 および v7.3.0 の新機能</span> {#44855-new-in-v654-and-v730}
 
@@ -75,7 +75,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 -   デフォルト値: `ON`
 -   可能`OFF`値: `ON`
--   この変数は、プラン キャッシュが[生成列](/generated-columns.md)にアクセスする実行計画をキャッシュできるかどうかを制御します。
+-   この変数は、プランキャッシュが[生成列](/generated-columns.md)にアクセスする実行計画をキャッシュできるかどうかを制御します。
 
 ### <a href="https://github.com/pingcap/tidb/issues/46177">`46177`</a> <span class="version-mark">v6.5.6、v7.1.3、v7.5.0 の新機能</span> {#46177-new-in-v656-v713-and-v750}
 

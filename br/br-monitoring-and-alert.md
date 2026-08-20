@@ -35,21 +35,21 @@ summary: このドキュメントでは、ログバックアップの監視、�
 | **tikv_log_backup_handle_kv_batch**                    | ヒストグラム | Raftstoreによって送信された KV ペア バッチのサイズのリージョンレベルの統計。                                                                                                 |
 | **tikv_log_backup_initial_scan_disk_read**             | カウンタ   | 初期スキャン中にディスクから読み取られたデータのサイズ。Linuxでは、この情報はprocfsから取得され、ブロックデバイスから実際に読み取られたデータのサイズです。このメトリックには、設定項目`initial-scan-rate-limit`適用されます。          |
 | **tikv_log_backup_incremental_scan_bytes**             | ヒストグラム | 初期スキャン中に実際に生成されたKVペアのサイズ。圧縮とリードアンプリフィケーションのため、この値は`tikv_log_backup_initial_scan_disk_read`と異なる場合があります。                                     |
-| **tikv_log_backup_skip_kv_count**                      | カウンタ   | バックアップに役立たないため、ログ バックアップ中にスキップされるRaftイベントの数。                                                                                               |
-| **tikv_log_backup_errors**                             | カウンタ   | ログ バックアップ中に再試行または無視できるエラー。<br/> `type :: ErrorType`                                                                                        |
+| **tikv_log_backup_skip_kv_count**                      | カウンタ   | バックアップに役立たないため、ログバックアップ中にスキップされるRaftイベントの数。                                                                                               |
+| **tikv_log_backup_errors**                             | カウンタ   | ログバックアップ中に再試行または無視できるエラー。<br/> `type :: ErrorType`                                                                                        |
 | **tikv_log_backup_fatal_errors**                       | カウンタ   | ログバックアップ中に再試行または無視できないエラー。このタイプのエラーが発生すると、ログバックアップは一時停止されます。<br/> `type :: ErrorType`                                                      |
-| **tikv_log_backup_heap_memory**                        | ゲージ    | ログ バックアップ中の初期スキャンで検出された、消費されていないイベントによって占有されているメモリ。                                                                                        |
+| **tikv_log_backup_heap_memory**                        | ゲージ    | ログバックアップ中の初期スキャンで検出された、消費されていないイベントによって占有されているメモリ。                                                                                        |
 | **tikv_log_backup_on_event_duration_seconds**          | ヒストグラム | KV イベントを一時ファイルに保存する期間。<br/> `stage :: {"write_to_tempfile", "syscall_write"}`                                                              |
 | **tikv_log_backup_store_checkpoint_ts**                | ゲージ    | ストアレベルのチェックポイントTSは非推奨です。現在のストアによって登録されたGCセーフポイントに近いです。<br/> `task :: string`                                                               |
 | **tidb_log_backup_last_checkpoint**                    | ゲージ    | グローバルチェックポイントTS。ログデータがバックアップされている時点です。<br/> `task :: string`                                                                               |
 | **tikv_log_backup_flush_duration_sec**                 | ヒストグラム | ローカルの一時ファイルを外部ストレージに移動する時間。<br/> `stage :: {"generate_metadata", "save_files", "clear_temp_files"}`                                      |
 | **tikv_log_backup_flush_file_size**                    | ヒストグラム | バックアップ中に生成されたファイルのサイズの統計。                                                                                                                  |
 | **tikv_log_backup_initial_scan_duration_sec**          | ヒストグラム | 初期スキャンの全体的な所要時間の統計。                                                                                                                        |
-| **tikv_log_backup_skip_retry_observe**                 | カウンタ   | ログ バックアップ中に無視できるエラーの統計、または再試行がスキップされる理由。<br/> `reason :: {"region-absent", "not-leader", "stale-command"}`                                 |
+| **tikv_log_backup_skip_retry_observe**                 | カウンタ   | ログバックアップ中に無視できるエラーの統計、または再試行がスキップされる理由。<br/> `reason :: {"region-absent", "not-leader", "stale-command"}`                                 |
 | **tikv_log_backup_initial_scan_operations**            | カウンタ   | 初期スキャン中の RocksDB 関連操作の統計。<br/> `cf :: {"default", "write", "lock"}, op :: RocksDBOP`                                                       |
 | **tikv_log_backup_enabled**                            | カウンタ   | ログバックアップを有効にするかどうか。値が`0`より大きい場合、ログバックアップは有効になります。                                                                                          |
 | **tikv_log_backup_observed_region**                    | ゲージ    | リッスンされているリージョンの数。                                                                                                                          |
-| **tikv_log_backup_task_status**                        | ゲージ    | ログ バックアップ タスクのステータス。`0`は実行中、 `1`は一時停止中、 `2`はエラーを意味します。<br/> `task :: string`                                                                |
+| **tikv_log_backup_task_status**                        | ゲージ    | ログバックアップ タスクのステータス。`0`は実行中、 `1`は一時停止中、 `2`はエラーを意味します。<br/> `task :: string`                                                                |
 | **tikv_log_backup_pending_initial_scan**               | ゲージ    | 保留中の初期スキャンの統計。<br/> `stage :: {"queuing", "executing"}`                                                                                    |
 
 ### ログバックアップアラート {#log-backup-alerts}

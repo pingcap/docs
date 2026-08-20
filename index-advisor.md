@@ -17,7 +17,7 @@ TiDB v8.5.0では、クエリパフォーマンスを向上させるインデッ
 
 ## `RECOMMEND INDEX`ステートメントを使用してインデックスを推奨します。 {#recommend-indexes-using-the-recommend-index-statement}
 
-TiDB では、インデックス アドバイザ タスク用の`RECOMMEND INDEX` SQL ステートメントが導入されました。 `RUN`サブコマンドは、過去のワークロードを分析し、推奨事項をシステム テーブルに保存します。 `FOR`オプションを使用すると、以前に実行されていない特定の SQL ステートメントを対象にすることができます。さらに、[オプション](#recommend-index-options)の を使用して高度な制御を行うこともできます。構文は次のとおりです。
+TiDB では、インデックス アドバイザ タスク用の`RECOMMEND INDEX` SQL ステートメントが導入されました。 `RUN`サブコマンドは、過去のワークロードを分析し、推奨事項をシステムテーブルに保存します。 `FOR`オプションを使用すると、以前に実行されていない特定の SQL ステートメントを対象にすることができます。さらに、[オプション](#recommend-index-options)の を使用して高度な制御を行うこともできます。構文は次のとおりです。
 
 ```sql
 RECOMMEND INDEX RUN [ FOR <SQL> ] [<Options>] 
@@ -92,7 +92,7 @@ RECOMMEND INDEX RUN;
 
 このテーブルには数万から数十万ものクエリが含まれる可能性があり、インデックスアドバイザーのパフォーマンスに影響を与える可能性があります。この問題を解決するため、インデックスアドバイザーは実行頻度の高いクエリを優先します。これらのクエリはワークロード全体のパフォーマンスに大きな影響を与えるためです。デフォルトでは、インデックスアドバイザーは上位1,000件のクエリを選択します。この値は、 [`max_num_query`](#recommend-index-options)パラメーターを使用して調整できます。
 
-`RECOMMEND INDEX`ステートメントの結果は`mysql.index_advisor_results`テーブルに格納されます。このテーブルをクエリして、推奨インデックスを表示できます。次の例は、前の 2 つの`RECOMMEND INDEX`ステートメントの実行後のこのシステム テーブルの内容を示しています。
+`RECOMMEND INDEX`ステートメントの結果は`mysql.index_advisor_results`テーブルに格納されます。このテーブルをクエリして、推奨インデックスを表示できます。次の例は、前の 2 つの`RECOMMEND INDEX`ステートメントの実行後のこのシステムテーブルの内容を示しています。
 
 ```sql
 SELECT * FROM mysql.index_advisor_results;
@@ -157,7 +157,7 @@ Query OK, 1 row affected (0.00 sec)
 
 ### `sys.schema_unused_indexes`を使用します {#use-sysschema_unused_indexes}
 
-[`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)ビューは、すべての TiDB インスタンスの最後の起動以降に使用されていないインデックスを識別します。このビューは、スキーマ、テーブル、および列情報を含むシステム テーブルに基づいており、スキーマ、テーブル、およびインデックス名を含む、各インデックスの完全な仕様を提供します。このビューを照会することで、どのインデックスを非表示にするか、または削除するかを決定できます。
+[`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)ビューは、すべての TiDB インスタンスの最後の起動以降に使用されていないインデックスを識別します。このビューは、スキーマ、テーブル、および列情報を含むシステムテーブルに基づいており、スキーマ、テーブル、およびインデックス名を含む、各インデックスの完全な仕様を提供します。このビューを照会することで、どのインデックスを非表示にするか、または削除するかを決定できます。
 
 > **Warning:**
 >

@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/ticloud-import-start-local','/ja/tidbcloud/ticloud-impo
 
 # ticloud serverless import start {#ticloud-serverless-import-start}
 
-データ インポート タスクを開始します。
+データ インポートタスクを開始します。
 
 ```shell
 ticloud serverless import start [flags]
@@ -20,17 +20,17 @@ ticloud serverless import create [flags]
 
 > **Note:**
 >
-> 現在、1 つのローカル インポート タスクにつき 1 つの CSV ファイルのみをインポートできます。
+> 現在、1 つのローカル インポートタスクにつき 1 つの CSV ファイルのみをインポートできます。
 
 ## 例 {#examples}
 
-対話型モードでインポート タスクを開始します。
+対話型モードでインポートタスクを開始します。
 
 ```shell
 ticloud serverless import start
 ```
 
-非対話型モードでローカル インポート タスクを開始します。
+非対話型モードでローカル インポートタスクを開始します。
 
 ```shell
 ticloud serverless import start --local.file-path <file-path> --cluster-id <cluster-id> --file-type <file-type> --local.target-database <target-database> --local.target-table <target-table>
@@ -42,25 +42,25 @@ ticloud serverless import start --local.file-path <file-path> --cluster-id <clus
 ticloud serverless import start --local.file-path <file-path> --cluster-id <cluster-id> --file-type <file-type> --local.target-database <target-database> --local.target-table <target-table> --local.concurrency 10
 ```
 
-カスタム CSV 形式でローカル インポート タスクを開始します。
+カスタム CSV 形式でローカル インポートタスクを開始します。
 
 ```shell
 ticloud serverless import start --local.file-path <file-path> --cluster-id <cluster-id> --file-type CSV --local.target-database <target-database> --local.target-table <target-table> --csv.separator \" --csv.delimiter \' --csv.backslash-escape=false --csv.trim-last-separator=true
 ```
 
-非対話型モードで S3 インポート タスクを開始します。
+非対話型モードで S3 インポートタスクを開始します。
 
 ```shell
 ticloud serverless import start --source-type S3 --s3.uri <s3-uri> --cluster-id <cluster-id> --file-type <file-type> --s3.role-arn <role-arn>
 ```
 
-非対話型モードで GCS インポート タスクを開始します。
+非対話型モードで GCS インポートタスクを開始します。
 
 ```shell
 ticloud serverless import start --source-type GCS --gcs.uri <gcs-uri> --cluster-id <cluster-id> --file-type <file-type> --gcs.service-account-key <service-account-key>
 ```
 
-非対話型モードで Azure BLOB インポート タスクを開始します。
+非対話型モードで Azure BLOB インポートタスクを開始します。
 
 ```shell
 ticloud serverless import start --source-type AZURE_BLOB --azblob.uri <azure-blob-uri> --cluster-id <cluster-id> --file-type <file-type> --azblob.sas-token <sas-token>
@@ -85,7 +85,7 @@ ticloud serverless import start --source-type AZURE_BLOB --azblob.uri <azure-blo
 | --local.concurrency int     | ファイルのアップロードの同時実行数を指定します。デフォルト値は`5`です。                                                                         | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
 | --local.file-path string       | インポートするローカル ファイルのパスを指定します。                                                                                    | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
 | --local.target-database string | データのインポート先のターゲット データベースを指定します。                                                                                | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --local.target-table string    | データのインポート先のターゲット テーブルを指定します。                                                                                  | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
+| --local.target-table string    | データのインポート先のターゲットテーブルを指定します。                                                                                  | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
 | --file-type string         | インポート ファイルの種類を ["CSV" "SQL" "AURORA_SNAPSHOT" "PARQUET"] のいずれかで指定します。 | はい  | 非対話型モードでのみ動作します。         |   |     |                          |
 | --csv.backslash-escape         | CSVファイル内のフィールド内のバックスラッシュをエスケープ文字として解析するかどうかを指定します。デフォルト値は`true`です。                                            | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
 | --csv.delimiter string          | CSVファイルを引用する際に使用する区切り文字を指定します。デフォルト値は`\`です。                                                                   | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |

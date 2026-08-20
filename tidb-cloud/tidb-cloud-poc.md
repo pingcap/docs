@@ -115,7 +115,7 @@ TiDB CloudはMySQL 8.0との互換性が非常に高くなっています。MySQ
 -   タイムスタンプ上のインデックスなど、右側のインデックスの増加によって発生する[ホットスポットの問題](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#identify-hotspot-issues)を回避します。
 -   [SHARD_ROW_ID_BITS](https://docs.pingcap.com/tidb/stable/shard-row-id-bits)と[AUTO_RANDOM](https://docs.pingcap.com/tidb/stable/auto-random)を使って[ホットスポットの問題](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#identify-hotspot-issues)を回避します。
 
-SQL ステートメントの場合、データ ソースと TiDB の互換性のレベルに応じて調整する必要がある場合があります。
+SQL ステートメントの場合、データソースと TiDB の互換性のレベルに応じて調整する必要がある場合があります。
 
 ご不明な点がございましたら[PingCAP](/tidb-cloud/tidb-cloud-support.md)までご相談ください。
 
@@ -219,7 +219,7 @@ TiDB Cloud は、自動バックアップと手動バックアップの 2 種類
 
 PoCの申請が承認されると、アカウントにクレジットが付与されます。通常、このクレジットは14日間のPoCに十分な量です。クレジットは、ノードの種類と数に応じて、時間単位で課金されます。詳細については、 [TiDB Cloud課金](/tidb-cloud/tidb-cloud-billing.md#credits)をご覧ください。
 
-PoC の合計クレジット数、利用可能なクレジット数、現在のクレジット使用量を確認するには、 TiDB Cloudコンソールの左上隅にあるコンボ ボックスを使用して対象組織に切り替え、左側のナビゲーション ペインで**[請求] を**クリックして、 **[クレジット]**タブをクリックします。
+PoC の合計クレジット数、利用可能なクレジット数、現在のクレジット使用量を確認するには、 TiDB Cloudコンソールの左上隅にあるコンボボックスを使用して対象組織に切り替え、左側のナビゲーションペインで**[請求] を**クリックして、 **[クレジット]**タブをクリックします。
 
 クレジットを節約するには、使用していないクラスターを削除してください。現在、クラスターを停止することはできません。クラスターを削除する前に、バックアップが最新であることを確認してください。そうすれば、後でPoCを再開する際にクラスターを復元できます。
 

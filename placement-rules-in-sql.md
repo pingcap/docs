@@ -137,7 +137,7 @@ SHOW PLACEMENT LABELS;
     1 row in set (0.00 sec)
     ```
 
--   クラスタ内の配置ポリシーの定義を表示するには、 [`INFORMATION_SCHEMA.PLACEMENT_POLICIES`](/information-schema/information-schema-placement-policies.md)システム テーブルをクエリします。
+-   クラスタ内の配置ポリシーの定義を表示するには、 [`INFORMATION_SCHEMA.PLACEMENT_POLICIES`](/information-schema/information-schema-placement-policies.md)システムテーブルをクエリします。
 
     ```sql
     SELECT * FROM information_schema.placement_policies\G

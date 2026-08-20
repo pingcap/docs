@@ -112,5 +112,5 @@ TiDBの使用中に問題が発生した場合は、以下のドキュメント�
 
 ## 次は？ {#what-s-next}
 
--   TiFlash のバージョン、重要なログ、システム テーブルを確認するには、 [TiFlashクラスタを管理](/tiflash/maintain-tiflash.md)を参照してください。
+-   TiFlash のバージョン、重要なログ、システムテーブルを確認するには、 [TiFlashクラスタを管理](/tiflash/maintain-tiflash.md)を参照してください。
 -   特定のTiFlashノードを削除するには、 [TiFlashクラスターをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)を参照してください。

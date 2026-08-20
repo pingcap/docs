@@ -77,7 +77,7 @@ TiDB バージョン: 7.5.5
     -   `RECOVER TABLE BY JOB JOB_ID;`を実行すると TiDB がpanicを起こす可能性がある問題を修正[＃55113](https://github.com/pingcap/tidb/issues/55113) @[crazycs520](https://github.com/crazycs520)
     -   クエリに利用可能なインデックスマージ実行計画がある場合に`read_from_storage`ヒントが有効にならない可能性がある問題を修正しました [＃56217](https://github.com/pingcap/tidb/issues/56217) @[AilinKid](https://github.com/AilinKid)
     -   異常終了時に`INDEX_HASH_JOIN`アップする可能性がある問題を修正[＃54055](https://github.com/pingcap/tidb/issues/54055) @[wshwsh12](https://github.com/wshwsh12)
-    -   分散実行フレームワーク (DXF) に関連するシステム テーブルをクエリすると、アップグレードが失敗する可能性がある問題を修正しました[＃49263](https://github.com/pingcap/tidb/issues/49263) @[D3Hunter](https://github.com/D3Hunter)
+    -   分散実行フレームワーク (DXF) に関連するシステムテーブルをクエリすると、アップグレードが失敗する可能性がある問題を修正しました[＃49263](https://github.com/pingcap/tidb/issues/49263) @[D3Hunter](https://github.com/D3Hunter)
     -   DDL内部トランザクションエラー`GC life time is shorter than transaction duration`によりインデックス追加が失敗する問題を修正[＃57043](https://github.com/pingcap/tidb/issues/57043) @[tangenta](https://github.com/tangenta)
     -   `EXCHANGE PARTITION`を実行して無効な行に遭遇すると、InfoSchema が完全にロードされ、エラー`failed to load schema diff`が報告される問題を修正しました。 [＃56685](https://github.com/pingcap/tidb/issues/56685) @[D3Hunter](https://github.com/D3Hunter)
     -   `tidb_ddl_enable_fast_reorg`と`new_collations_enabled_on_first_bootstrap`有効になっているときに照合順序が正しく処理されず、データ インデックスが不一致になる問題を修正しました。 [＃58036](https://github.com/pingcap/tidb/issues/58036) @[djshow832](https://github.com/djshow832)
@@ -115,7 +115,7 @@ TiDB バージョン: 7.5.5
     -   etcdリーダー遷移中にPDがリーダーを素早く再選出できない問題を修正 [＃8823](https://github.com/tikv/pd/issues/8823) @[rleungx](https://github.com/rleungx)
     -   ラベル統計のメモリリーク問題を修正 [＃8700](https://github.com/tikv/pd/issues/8700) @[lhy1024](https://github.com/lhy1024)
     -   同じストアID で繰り返し作成された場合に`evict-leader-scheduler`正常に動作しない問題を修正 [＃8756](https://github.com/tikv/pd/issues/8756) @[okJiang](https://github.com/okJiang)
-    -   リソース グループ クライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値より少なくなる問題を修正しました。 [＃7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
+    -   リソースグループ クライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値より少なくなる問題を修正しました。 [＃7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
     -   `evict-leader-scheduler`で間違ったパラメータを使用すると、PD がエラーを正しく報告せず、一部のスケジューラが利用できなくなる問題を修正しました[＃8619](https://github.com/tikv/pd/issues/8619) @[rleungx](https://github.com/rleungx)
     -   ホットスポット キャッシュのメモリリーク問題を修正 [＃8698](https://github.com/tikv/pd/issues/8698) @[lhy1024](https://github.com/lhy1024)
     -   乱数ジェネレータの頻繁な作成によって発生するパフォーマンスジッターの問題を修正しました [＃8674](https://github.com/tikv/pd/issues/8674) @[rleungx](https://github.com/rleungx)
@@ -125,7 +125,7 @@ TiDB バージョン: 7.5.5
     -   TiFlash が同時 DDL 実行中に競合に遭遇した場合のTiFlash panic問題を修正[＃8578](https://github.com/pingcap/tiflash/issues/8578) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   `LPAD()`と`RPAD()`関数が、場合によっては誤った結果を返す問題を修正しました[＃9465](https://github.com/pingcap/tiflash/issues/9465) @[guo-shaoge](https://github.com/guo-shaoge)
     -   2番目のパラメータが負のの場合に`SUBSTRING()`関数が誤った結果を返す問題を修正しました [＃9604](https://github.com/pingcap/tiflash/issues/9604) @[guo-shaoge](https://github.com/guo-shaoge)
-    -   テーブルに無効な文字を含むデフォルト値を持つビット型の列が含まれている場合、 TiFlash がテーブル スキーマを解析できない問題を修正しました。 [＃9461](https://github.com/pingcap/tiflash/issues/9461) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    -   テーブルに無効な文字を含むデフォルト値を持つビット型の列が含まれている場合、 TiFlash がテーブルスキーマを解析できない問題を修正しました。 [＃9461](https://github.com/pingcap/tiflash/issues/9461) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   分散ストレージおよびコンピューティングアーキテクチャで新しい列をクエリすると誤った結果が返される可能性がある問題を修正しました [＃9665](https://github.com/pingcap/tiflash/issues/9665) @[zimulala](https://github.com/zimulala)
 
 -   ツール

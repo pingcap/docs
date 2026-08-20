@@ -12,7 +12,7 @@ TiDB バージョン: 3.0.4
 TiDB Ansible バージョン: 3.0.4
 
 -   新機能
-    -   SQL レベルでパフォーマンスの問題をトラブルシューティングするために`performance_schema.events_statements_summary_by_digest`システム テーブルを追加します。
+    -   SQL レベルでパフォーマンスの問題をトラブルシューティングするために`performance_schema.events_statements_summary_by_digest`システムテーブルを追加します。
     -   TiDBの`SHOW TABLE REGIONS`構文に`WHERE`句を追加する
     -   Reparoに`worker-count`と`txn-batch`設定項目を追加して回復速度を制御します
 -   改善点

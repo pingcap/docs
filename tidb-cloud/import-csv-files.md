@@ -37,7 +37,7 @@ aliases: ['/ja/tidbcloud/migrate-from-amazon-s3-or-gcs','/ja/tidbcloud/migrate-f
     > -   データファイルのみを圧縮すればよく、データベースファイルやテーブルスキーマファイルを圧縮する必要はありません。
     > -   パフォーマンスを向上させるためには、各圧縮ファイルのサイズを100MiBに制限することをお勧めします。
     > -   Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
-    > -   圧縮されていないファイルの場合、前述のルールに従って CSV ファイル名を更新できない場合 (たとえば、CSV ファイル リンクが他のプログラムでも使用されている場合)、ファイル名を変更せずに、[ステップ4](#step-4-import-csv-files-to-tidb-cloud)の**Destination Mapping**手順で**<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDB ファイル命名規則</a>を使用して自動マッピングを行う」の**選択を解除して、ソース ファイルを単一のターゲット テーブルに手動でマッピングできます。
+    > -   圧縮されていないファイルの場合、前述のルールに従って CSV ファイル名を更新できない場合 (たとえば、CSV ファイル リンクが他のプログラムでも使用されている場合)、ファイル名を変更せずに、[ステップ4](#step-4-import-csv-files-to-tidb-cloud)の**Destination Mapping**手順で**<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDB ファイル命名規則</a>を使用して自動マッピングを行う」の**選択を解除して、ソースファイルを単一のターゲットテーブルに手動でマッピングできます。
 
 ## ステップ2．対象テーブルのスキーマを作成する {#step-2-create-the-target-table-schemas}
 
@@ -234,7 +234,7 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
             2.  ストレージアカウントに移動し、 **[概要]** &gt; **JSON View**をクリックします。
             3.  `id`プロパティの値をコピーします。リソース ID は`/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Storage/storageAccounts/<account_name>`の形式です。
 
-    -   **SAS Token**: TiDB Cloud がAzure Blob Storage コンテナー内のソース ファイルにアクセスできるようにするアカウント SAS トークンを入力します。まだお持ちでない場合は、 **「ここをクリックして Azure ARM テンプレートを使用して新しいものを作成します」を**クリックし、画面の指示に従うか、アカウント SAS トークンを手動で作成します。詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access)を参照してください。
+    -   **SAS Token**: TiDB Cloud がAzure Blob Storage コンテナー内のソースファイルにアクセスできるようにするアカウント SAS トークンを入力します。まだお持ちでない場合は、 **「ここをクリックして Azure ARM テンプレートを使用して新しいものを作成します」を**クリックし、画面の指示に従うか、アカウント SAS トークンを手動で作成します。詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access)を参照してください。
 
 4.  **「次へ」**をクリックしてください。
 

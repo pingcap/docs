@@ -59,19 +59,19 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
 
 ## 例 {#examples}
 
-1.  1 秒あたり 500 RU のクォータを持つリソース グループ`rg1`を作成し、60 秒を超えるクエリをランナウェイ クエリとして定義し、ランナウェイ クエリの優先度を下げます。
+1.  1 秒あたり 500 RU のクォータを持つリソースグループ`rg1`を作成し、60 秒を超えるクエリをランナウェイ クエリとして定義し、ランナウェイ クエリの優先度を下げます。
 
     ```sql
     CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=COOLDOWN);
     ```
 
-2.  `rg1`リソース グループを変更して、ランナウェイ クエリを終了し、次の 10 分以内に、同じパターンのクエリをランナウェイ クエリとして直ちにマークします。
+2.  `rg1`リソースグループを変更して、ランナウェイ クエリを終了し、次の 10 分以内に、同じパターンのクエリをランナウェイ クエリとして直ちにマークします。
 
     ```sql
     ALTER RESOURCE GROUP rg1 QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=SIMILAR DURATION='10m');
     ```
 
-3.  ランナウェイ クエリ チェックをキャンセルするには、 `rg1`リソース グループを変更します。
+3.  ランナウェイ クエリ チェックをキャンセルするには、 `rg1`リソースグループを変更します。
 
     ```sql
     ALTER RESOURCE GROUP rg1 QUERY_LIMIT=NULL;
@@ -92,7 +92,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
     -   `PLAN DIGEST`は`PLAN`と同じです。次のパラメータはダイジェスト文字列です。
     -   `SQL TEXT`入力SQLを生の文字列（ `EXACT` ）として一致させるか、次のパラメータに応じて`SQL DIGEST` （ `SIMILAR` ）または`PLAN DIGEST` （ `PLAN` ）に解析してコンパイルします。
 
--   デフォルトのリソース グループのランナウェイ クエリ監視リストに一致する機能を追加します (事前にデフォルトのリソース グループに`QUERY LIMIT`設定する必要があります)。
+-   デフォルトのリソースグループのランナウェイ クエリ監視リストに一致する機能を追加します (事前にデフォルトのリソースグループに`QUERY LIMIT`設定する必要があります)。
 
     ```sql
     QUERY WATCH ADD ACTION KILL SQL TEXT EXACT TO 'select * from test.t2';
@@ -104,13 +104,13 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
     QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT SIMILAR TO 'select * from test.t2';
     ```
 
--   SQL を SQL ダイジェストに解析して、 `rg1`リソース グループのランナウェイ クエリ監視リストに一致する機能を追加し、 `ACTION` `SWITCH_GROUP(rg2)`として指定します。
+-   SQL を SQL ダイジェストに解析して、 `rg1`リソースグループのランナウェイ クエリ監視リストに一致する機能を追加し、 `ACTION` `SWITCH_GROUP(rg2)`として指定します。
 
     ```sql
     QUERY WATCH ADD RESOURCE GROUP rg1 ACTION SWITCH_GROUP(rg2) SQL TEXT SIMILAR TO 'select * from test.t2';
     ```
 
--   `PLAN DIGEST`を使用して`rg1`リソース グループのランナウェイ クエリ監視リストに一致する機能を追加し、 `ACTION` `KILL`として指定します。
+-   `PLAN DIGEST`を使用して`rg1`リソースグループのランナウェイ クエリ監視リストに一致する機能を追加し、 `ACTION` `KILL`として指定します。
 
     ```sql
     QUERY WATCH ADD RESOURCE GROUP rg1 ACTION KILL PLAN DIGEST 'd08bc323a934c39dc41948b0a073725be3398479b6fa4f6dd1db2a9b115f7f57';
@@ -142,7 +142,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
 
 ## 可観測性 {#observability}
 
-ランナウェイ クエリに関する詳細情報は、次のシステム テーブルおよび`INFORMATION_SCHEMA`から取得できます。
+ランナウェイ クエリに関する詳細情報は、次のシステムテーブルおよび`INFORMATION_SCHEMA`から取得できます。
 
 -   `mysql.tidb_runaway_queries`テーブルには、過去 7 日間に特定されたすべてのランナウェイクエリの履歴レコードが含まれています。例として、1 つの行を見てみましょう。
 

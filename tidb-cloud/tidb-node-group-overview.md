@@ -1,6 +1,6 @@
 ---
 title: Overview of TiDB Node Group 
-summary: TiDB ノード グループ機能の実装と使用シナリオについて説明します。
+summary: TiDB ノードグループ機能の実装と使用シナリオについて説明します。
 ---
 
 # TiDBノードグループの概要 {#overview-of-tidb-node-group}
@@ -11,21 +11,21 @@ TiDBノードグループを使用すると、ビジネス要件に基づいて�
 
 > **Note:**
 >
-> TiDB ノード グループ機能は、TiDB Cloud Starter およびTiDB Cloud Essential クラスターでは使用でき**ません**。
+> TiDB ノードグループ機能は、TiDB Cloud Starter およびTiDB Cloud Essential クラスターでは使用でき**ません**。
 
 ## 実装 {#implementation}
 
-TiDB ノード グループは、TiDB ノードのグループ化を管理し、エンドポイントと対応する TiDB ノード間のマッピングを維持します。
+TiDB ノードグループは、TiDB ノードのグループ化を管理し、エンドポイントと対応する TiDB ノード間のマッピングを維持します。
 
 各TiDBノードグループは専用のロードバランサに関連付けられています。ユーザーがTiDBノードグループのエンドポイントにSQLリクエストを送信すると、リクエストはまずそのグループのロードバランサを通過し、その後、グループ内のTiDBノードにのみルーティングされます。
 
-次の図は、TiDB ノード グループ機能の実装を示しています。
+次の図は、TiDB ノードグループ機能の実装を示しています。
 
 ![The implementation of the TiDB Node Group feature](/media/tidb-cloud/implementation-of-tidb-node-group.png)
 
 TiDBノードグループ内のすべてのノードは、対応するエンドポイントからのリクエストに応答します。以下のタスクを実行できます。
 
--   TiDB ノード グループを作成し、それに TiDB ノードを割り当てます。
+-   TiDB ノードグループを作成し、それに TiDB ノードを割り当てます。
 -   各グループの接続エンドポイントを設定します。サポートされている接続タイプは[パブリック接続](/tidb-cloud/tidb-node-group-management.md#connect-via-public-connection) 、 [プライベートエンドポイント](/tidb-cloud/tidb-node-group-management.md#connect-via-private-endpoint) 、 [VPCピアリング](/tidb-cloud/tidb-node-group-management.md#connect-via-vpc-peering)です。
 -   個別のエンドポイントを使用してアプリケーションを特定のグループにルーティングし、リソースの分離を実現します。
 
@@ -48,14 +48,14 @@ TiDBノードグループ機能は、TiDB Cloud Dedicatedクラスタのリソ�
 現在、TiDBノードグループ機能は無料です。制限事項とクォータは次のとおりです。
 
 -   TiDB ノードグループは、AWS または Google Cloud 上のTiDB Cloud Dedicated クラスターでのみ作成できます。他のクラウドプロバイダーへのサポートは、近い将来に予定されています。
--   4 つの vCPU と 16 GiB のメモリを備えた TiDB クラスターは、TiDB ノード グループ機能をサポートしません。
+-   4 つの vCPU と 16 GiB のメモリを備えた TiDB クラスターは、TiDB ノードグループ機能をサポートしません。
 -   デフォルトでは、 TiDB Cloud Dedicated クラスターに最大 5 つの TiDB ノードグループを作成できます。さらにグループが必要な場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 -   各TiDBノードグループには、少なくとも1つのTiDBノードが含まれている必要があります。グループ内のノード数に制限はありませんが、 TiDB Cloud Dedicatedクラスタ内のTiDBノードの総数は150を超えてはなりません。
 -   TiDB Cloudは、ノードグループの境界に関係なく、TiDBオーナーノード上で自動統計収集タスクを実行します。これらのタスクは、個々のTiDBノードグループ内で分離することはできません。
--   v8.1.2 より前のバージョンの TiDB クラスターの場合、 `ADD INDEX`タスクを個々の TiDB ノード グループ内で分離することはできません。
+-   v8.1.2 より前のバージョンの TiDB クラスターの場合、 `ADD INDEX`タスクを個々の TiDB ノードグループ内で分離することはできません。
 
 ## SLAの影響 {#sla-impact}
 
 TiDB Cloud [サービスレベル契約（SLA）](https://www.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/)によると、複数のTiDBノードを展開したTiDB Cloud Dedicatedクラスタの月間稼働率は最大99.99%に達します。しかし、TiDBノードグループを導入した後、各グループに1つのTiDBノードのみを含む複数のTiDBノードグループを作成すると、グループの高可用性が失われ、クラスタの月間稼働率は単一のTiDBノード展開モデル（つまり最大99.9%）に低下します。
 
-高可用性を確保するには、TiDB ノード グループごとに少なくとも 2 つの TiDB ノードを構成することをお勧めします。
+高可用性を確保するには、TiDB ノードグループごとに少なくとも 2 つの TiDB ノードを構成することをお勧めします。

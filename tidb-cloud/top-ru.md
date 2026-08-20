@@ -27,7 +27,7 @@ TiDB Cloudプランによって、RUの主要機能は異なります。
 ## オープントップRU {#open-top-ru}
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、 TiDB Cloud EssentialまたはTiDB Cloud Premiumインスタンスに移動してください。
-2.  左側のナビゲーション ペインで、 **[監視]** &gt; **Top RU**をクリックします。
+2.  左側のナビゲーションペインで、 **[監視]** &gt; **Top RU**をクリックします。
 
 ## SQLによるRU消費量の分析 {#analyze-ru-consumption-by-sql}
 

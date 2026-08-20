@@ -87,7 +87,7 @@ tiup br backup full -u "${PD_IP}:2379" \
 --storage "azure://external/backup-20220915?account-name=${account-name}&account-key=${account-key}"
 ```
 
-**Azure Blob Storage のスナップショット バックアップ データから`test`データベースを復元します。**
+**Azure Blob Storage のスナップショット バックアップデータから`test`データベースを復元します。**
 
 ```shell
 tiup br restore db --db test -u "${PD_IP}:2379" \

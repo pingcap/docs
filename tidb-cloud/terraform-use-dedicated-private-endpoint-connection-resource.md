@@ -1,17 +1,17 @@
 ---
 title: Use `tidbcloud_dedicated_private_endpoint_connection` Resource
-summary: tidbcloud_dedicated_private_endpoint_connection` リソースを使用して、 TiDB Cloud Dedicated プライベート エンドポイント接続を作成および変更する方法を学習します。
+summary: tidbcloud_dedicated_private_endpoint_connection` リソースを使用して、 TiDB Cloud Dedicated プライベートエンドポイント接続を作成および変更する方法を学習します。
 ---
 
 # `tidbcloud_dedicated_private_endpoint_connection`リソースを使用する {#use-the-tidbcloud-dedicated-private-endpoint-connection-resource}
 
-このドキュメントでは、 `tidbcloud_dedicated_private_endpoint_connection`リソースを使用して[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)プライベート エンドポイント接続を管理する方法について説明します。
+このドキュメントでは、 `tidbcloud_dedicated_private_endpoint_connection`リソースを使用して[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)プライベートエンドポイント接続を管理する方法について説明します。
 
 `tidbcloud_dedicated_private_endpoint_connection`リソースの機能は次のとおりです。
 
--   TiDB Cloud Dedicated プライベート エンドポイント接続を作成します。
--   TiDB Cloud Dedicated プライベート エンドポイント接続をインポートします。
--   TiDB Cloud Dedicated プライベート エンドポイント接続を削除します。
+-   TiDB Cloud Dedicated プライベートエンドポイント接続を作成します。
+-   TiDB Cloud Dedicated プライベートエンドポイント接続をインポートします。
+-   TiDB Cloud Dedicated プライベートエンドポイント接続を削除します。
 
 > **Note:**
 >
@@ -24,11 +24,11 @@ summary: tidbcloud_dedicated_private_endpoint_connection` リソースを使用�
 
 ## TiDB Cloud Dedicatedプライベートエンドポイント接続を作成する {#create-a-tidb-cloud-dedicated-private-endpoint-connection}
 
-`tidbcloud_dedicated_private_endpoint_connection`リソースを使用して、 TiDB Cloud Dedicated プライベート エンドポイント接続を作成できます。
+`tidbcloud_dedicated_private_endpoint_connection`リソースを使用して、 TiDB Cloud Dedicated プライベートエンドポイント接続を作成できます。
 
-次の例は、 TiDB Cloud Dedicated プライベート エンドポイント接続を作成する方法を示しています。
+次の例は、 TiDB Cloud Dedicated プライベートエンドポイント接続を作成する方法を示しています。
 
-1.  TiDB Cloud Dedicated プライベート エンドポイント接続用のディレクトリを作成し、そこに入ります。
+1.  TiDB Cloud Dedicated プライベートエンドポイント接続用のディレクトリを作成し、そこに入ります。
 
 2.  `private_endpoint_connection.tf`ファイルを作成します。
 
@@ -58,7 +58,7 @@ summary: tidbcloud_dedicated_private_endpoint_connection` リソースを使用�
     -   `tidbcloud_dedicated_private_endpoint_connection`リソースを使用するには、リソース タイプを`tidbcloud_dedicated_private_endpoint_connection`に設定します。
     -   リソース名は必要に応じて定義できます。例： `example` 。
     -   必要な引数の値を取得する方法がわからない場合は、 [AWS のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
-    -   TiDB Cloud Dedicated プライベート エンドポイント接続仕様情報を取得するには、 [tidbcloud_private_endpoint_connection (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_private_endpoint_connection)を参照してください。
+    -   TiDB Cloud Dedicated プライベートエンドポイント接続仕様情報を取得するには、 [tidbcloud_private_endpoint_connection (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_private_endpoint_connection)を参照してください。
 
 3.  `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 
@@ -146,7 +146,7 @@ summary: tidbcloud_dedicated_private_endpoint_connection` リソースを使用�
 
 ## TiDB Cloud Dedicatedプライベートエンドポイント接続をインポートする {#import-a-tidb-cloud-dedicated-private-endpoint-connection}
 
-Terraform によって管理されていないTiDB Cloud Dedicated プライベート エンドポイント接続の場合は、インポートすることで Terraform による管理を開始できます。
+Terraform によって管理されていないTiDB Cloud Dedicated プライベートエンドポイント接続の場合は、インポートすることで Terraform による管理を開始できます。
 
 1.  新しい`tidbcloud_dedicated_private_endpoint_connection`リソースのインポート ブロックを追加します。
 
@@ -184,11 +184,11 @@ Terraform によって管理されていないTiDB Cloud Dedicated プライベ�
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
 
-    これで、インポートしたTiDB Cloud Dedicated プライベート エンドポイント接続を Terraform を使用して管理できるようになりました。
+    これで、インポートしたTiDB Cloud Dedicated プライベートエンドポイント接続を Terraform を使用して管理できるようになりました。
 
 ## TiDB Cloud Dedicated プライベートエンドポイント接続を削除する {#delete-a-tidb-cloud-dedicated-private-endpoint-connection}
 
-TiDB Cloud Dedicated プライベート エンドポイント接続を削除するには、 `tidbcloud_dedicated_private_endpoint_connection`リソースの構成を削除してから、 `terraform apply`コマンドを使用してリソースを破棄します。
+TiDB Cloud Dedicated プライベートエンドポイント接続を削除するには、 `tidbcloud_dedicated_private_endpoint_connection`リソースの構成を削除してから、 `terraform apply`コマンドを使用してリソースを破棄します。
 
 ```shell
   $ terraform apply

@@ -19,19 +19,19 @@ ticloud serverless import ls [flags]
 
 ## 例 {#examples}
 
-対話モードでインポート タスクを一覧表示します。
+対話モードでインポートタスクを一覧表示します。
 
 ```shell
 ticloud serverless import list
 ```
 
-非対話型モードでインポート タスクを一覧表示します。
+非対話型モードでインポートタスクを一覧表示します。
 
 ```shell
 ticloud serverless import list --cluster-id <cluster-id>
 ```
 
-指定されたクラスターのインポート タスクを JSON 形式で一覧表示します。
+指定されたクラスターのインポートタスクを JSON 形式で一覧表示します。
 
 ```shell
 ticloud serverless import list --cluster-id <cluster-id> --output json

@@ -1,6 +1,6 @@
 ---
 title: Connect to Alibaba Cloud Self-Hosted Kafka via Private Link Connection
-summary: Alibaba Cloud Endpoint Service のプライベート リンク接続を使用して、Alibaba Cloud セルフホスト型 Kafka に接続する方法を学習します。
+summary: Alibaba Cloud Endpoint Service のプライベートリンク接続を使用して、Alibaba Cloud セルフホスト型 Kafka に接続する方法を学習します。
 ---
 
 # プライベートリンク接続を介して Alibaba Cloud Self-Hosted Kafka に接続する {#connect-to-alibaba-cloud-self-hosted-kafka-via-a-private-link-connection}
@@ -9,8 +9,8 @@ summary: Alibaba Cloud Endpoint Service のプライベート リンク接続を
 
 このメカニズムは次のように機能します。
 
-1.  プライベート リンク接続は、 `advertised.listeners`で定義されたブローカー外部アドレスを返すブートストラップ ポートを使用して Alibaba Cloud エンドポイント サービスに接続します。
-2.  プライベート リンク接続は、ブローカーの外部アドレスを使用してエンドポイント サービスに接続します。
+1.  プライベートリンク接続は、 `advertised.listeners`で定義されたブローカー外部アドレスを返すブートストラップ ポートを使用して Alibaba Cloud エンドポイント サービスに接続します。
+2.  プライベートリンク接続は、ブローカーの外部アドレスを使用してエンドポイント サービスに接続します。
 3.  Alibaba Cloud エンドポイント サービスは、リクエストをロード バランサーに転送します。
 4.  ロード バランサーは、ポート マッピングに基づいて、対応する Kafka ブローカーにリクエストを転送します。
 
@@ -42,7 +42,7 @@ summary: Alibaba Cloud Endpoint Service のプライベート リンク接続を
 
 Alibaba Cloud アカウント ID とアベイラビリティーゾーンを表示するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[ネットワーク]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**[設定]** &gt; **[ネットワーク]**をクリックします。
 2.  **[外部サービス向け Alibaba Cloud プライベートエンドポイント]**領域で、**[外部サービス向けプライベートエンドポイントの作成]**をクリックします。
 3.  表示されたダイアログで、Alibaba Cloud アカウント ID とアベイラビリティーゾーンを見つけることができます。
 
@@ -80,7 +80,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 
     1.  **名前**を入力します (例: `Kafka VPC` )。
 
-    2.  TiDB Cloudでプライベート リンク接続を設定するリージョンを選択します。
+    2.  TiDB Cloudでプライベートリンク接続を設定するリージョンを選択します。
 
     3.  **[IPv4 CIDR ブロックを手動で入力]**を選択し、IPv4 CIDR (例: `10.0.0.0/16`を入力します。
 
@@ -648,13 +648,13 @@ b3.ap-southeast-1c.unique_name.alicloud.plc.tidbcloud.com:9095 (id: 3 rack: null
 
 ## ステップ3. TiDB Cloudでプライベートリンク接続を作成する {#step-3-create-a-private-link-connection-in-tidb-cloud}
 
-TiDB Cloudでプライベート リンク接続を作成するには、次の手順を実行します。
+TiDB Cloudでプライベートリンク接続を作成するには、次の手順を実行します。
 
-1.  [ステップ2](#2-set-up-an-alibaba-cloud-endpoint-service)で取得した Alibaba Cloud エンドポイント サービス名 (例: `com.aliyuncs.privatelink.<region>.xxxxx` ) を使用して、 TiDB Cloudにプライベート リンク接続を作成します。
+1.  [ステップ2](#2-set-up-an-alibaba-cloud-endpoint-service)で取得した Alibaba Cloud エンドポイント サービス名 (例: `com.aliyuncs.privatelink.<region>.xxxxx` ) を使用して、 TiDB Cloudにプライベートリンク接続を作成します。
 
     詳細については[Alibaba Cloud Endpoint Service のプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-alibaba-cloud-endpoint-service-private-link-connection)を参照してください。
 
-2.  TiDB Cloudのデータフロー サービスが Kafka クラスターにアクセスできるように、プライベート リンク接続にドメインをアタッチします。
+2.  TiDB Cloudのデータフロー サービスが Kafka クラスターにアクセスできるように、プライベートリンク接続にドメインをアタッチします。
 
     詳細については、 [プライベートリンク接続にドメインを添付する](/tidb-cloud/serverless-private-link-connection.md#attach-domains-to-a-private-link-connection)を参照してください。 **Attach Domains**ダイアログで、ドメインの種類として**TiDB Cloud Managed**を選択し、生成されたドメインの一意の名前を後で使用するためにコピーする必要があることに注意してください。
 
@@ -663,4 +663,4 @@ TiDB Cloudでプライベート リンク接続を作成するには、次の手
 1.  Kafka ブローカー ノードに戻り、各ブローカーの`advertised.listeners`構成内の`unique_name`プレースホルダーを、前の手順で取得した実際の一意の名前に置き換えます。
 2.  すべてのブローカーを再構成したら、Kafka ブローカーを 1 つずつ再起動します。
 
-これで、このプライベート リンク接続と 9092 をブートストラップ ポートとして使用し、 TiDB Cloudから Kafka クラスターに接続できるようになります。
+これで、このプライベートリンク接続と 9092 をブートストラップ ポートとして使用し、 TiDB Cloudから Kafka クラスターに接続できるようになります。

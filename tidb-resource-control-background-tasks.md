@@ -52,13 +52,13 @@ TiDB は次の種類のバックグラウンド タスクをサポートして�
 
 ## 例 {#examples}
 
-1.  `br`と`ddl`バックグラウンド タスクとしてマークし、バックグラウンド タスクのリソース制限を 30% に設定して、リソース グループ`default`を変更します。
+1.  `br`と`ddl`バックグラウンド タスクとしてマークし、バックグラウンド タスクのリソース制限を 30% に設定して、リソースグループ`default`を変更します。
 
     ```sql
     ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES='br,ddl', UTILIZATION_LIMIT=30);
     ```
 
-2.  `default`リソース グループを変更して、バックグラウンド タスクの種類を既定値に戻します。
+2.  `default`リソースグループを変更して、バックグラウンド タスクの種類を既定値に戻します。
 
     ```sql
     ALTER RESOURCE GROUP `default` BACKGROUND=NULL;
@@ -70,7 +70,7 @@ TiDB は次の種類のバックグラウンド タスクをサポートして�
     ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES="");
     ```
 
-4.  `default`リソース グループのバックグラウンド タスクの種類を表示する。
+4.  `default`リソースグループのバックグラウンド タスクの種類を表示する。
 
     ```sql
     SELECT * FROM information_schema.resource_groups WHERE NAME="default";

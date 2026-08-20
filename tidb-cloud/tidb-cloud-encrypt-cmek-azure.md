@@ -49,7 +49,7 @@ TiDB Cloudコンソールと Azure ポータルを使用して CMEK を構成す
 
 2.  プロジェクトビューで対象のプロジェクトを見つけ、そのプロジェクトの <MDSvgIcon name="icon-project-settings" /> をクリックします。
 
-3.  左側のナビゲーション ペインで、**Project Settings** の下にある **Encryption Access** をクリックします。
+3.  左側のナビゲーションペインで、**Project Settings** の下にある **Encryption Access** をクリックします。
 
 4.  **Encryption Access**ページで、**Create Encryption Key**をクリックします。
 
@@ -99,11 +99,11 @@ TiDB Cloudコンソールと Azure Resource Manager を使用して CMEK を構�
 
     > **Tip:**
     >
-    > 複数の組織に所属している場合は、まず左上隅のコンボ ボックスを使用して対象の組織に切り替えてください。
+    > 複数の組織に所属している場合は、まず左上隅のコンボボックスを使用して対象の組織に切り替えてください。
 
 2.  プロジェクトビューで対象のプロジェクトを見つけ、そのプロジェクトの <MDSvgIcon name="icon-project-settings" /> をクリックします。
 
-3.  左側のナビゲーション ペインで、**Project Settings** の下にある **Encryption Access** に移動します。
+3.  左側のナビゲーションペインで、**Project Settings** の下にある **Encryption Access** に移動します。
 
 4.  **Encryption Access**ページで、**Create Encryption Key**をクリックします。
 

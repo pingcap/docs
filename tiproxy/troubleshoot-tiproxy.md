@@ -19,7 +19,7 @@ summary: TiProxy の一般的な問題、原因、および解決策について
 6.  クライアントが`Require TLS enabled on TiDB when require-backend-tls=true`報告する場合は、TiDB が TLS 証明書で正しく構成されているかどうかを確認します。
 7.  クライアントが`TiProxy fails to connect to TiDB, please make sure TiDB proxy-protocol is set correctly`報告した場合は、 TiProxy で[`proxy.proxy-protocol`](/tiproxy/tiproxy-configuration.md#proxy-protocol)有効になっているかどうか、 TiDBサーバーで[`proxy-protocol`](/tidb-configuration-file.md#proxy-protocol)有効になっていないかどうかを確認します。
 8.  TiProxy が[`max-connections`](/tiproxy/tiproxy-configuration.md#max-connections)に設定されており、TiProxy 上の接続数が最大接続制限を超えているかどうかを確認します。
-9.  TiProxy ログでエラー メッセージを確認してください。
+9.  TiProxy ログでエラーメッセージを確認してください。
 
 ## TiProxyは接続を移行しません {#tiproxy-does-not-migrate-connections}
 

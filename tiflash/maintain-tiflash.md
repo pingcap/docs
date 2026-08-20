@@ -39,7 +39,7 @@ TiFlash のバージョンを確認するには、次の 2 つの方法があり
 
 ## TiFlashシステムテーブル {#tiflash-system-table}
 
-`information_schema.tiflash_replica`システム テーブルの列名とその説明は次のとおりです。
+`information_schema.tiflash_replica`システムテーブルの列名とその説明は次のとおりです。
 
 | カラム名     | 説明                                        |
 | -------- | ----------------------------------------- |

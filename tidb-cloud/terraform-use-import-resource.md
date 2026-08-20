@@ -1,6 +1,6 @@
 ---
 title: Use the `tidbcloud_import` Resource
-summary: tidbcloud_import` リソースを使用してインポート タスクを管理する方法を学習します。
+summary: tidbcloud_import` リソースを使用してインポートタスクを管理する方法を学習します。
 ---
 
 # `tidbcloud_import`リソースを使用する {#use-the-tidbcloud-import-resource}
@@ -9,9 +9,9 @@ summary: tidbcloud_import` リソースを使用してインポート タスク�
 
 `tidbcloud_import`リソースの機能は次のとおりです。
 
--   TiDB Cloudクラスターのインポート タスクを作成します。
+-   TiDB Cloudクラスターのインポートタスクを作成します。
 -   ローカルディスクまたは Amazon S3 バケットからデータをインポートします。
--   進行中のインポート タスクをキャンセルします。
+-   進行中のインポートタスクをキャンセルします。
 
 ## 前提条件 {#prerequisites}
 
@@ -22,7 +22,7 @@ summary: tidbcloud_import` リソースを使用してインポート タスク�
 
 ## インポートタスクを作成して実行する {#create-and-run-an-import-task}
 
-`tidbcloud_import`リソースを使用して、ローカル インポート タスクまたは Amazon S3 インポート タスクのいずれかを管理できます。
+`tidbcloud_import`リソースを使用して、ローカル インポートタスクまたは Amazon S3 インポートタスクのいずれかを管理できます。
 
 ### ローカルインポートタスクを作成して実行する {#create-and-run-a-local-import-task}
 
@@ -68,7 +68,7 @@ summary: tidbcloud_import` リソースを使用してインポート タスク�
 
     ファイル内のリソース値（プロジェクトID、クラスタID、CSVパスなど）をご自身のものに置き換えてください。 `csv_format`の詳細は [設定ページ](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format)に記載されています。
 
-3.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`入力して作成を確認し、インポートを開始します。
+3.  `terraform apply`コマンドを実行してインポートタスクを作成し、 `yes`入力して作成を確認し、インポートを開始します。
 
         $ terraform apply
         ...
@@ -83,7 +83,7 @@ summary: tidbcloud_import` リソースを使用してインポート タスク�
         tidbcloud_import.example_local: Creating...
         tidbcloud_import.example_local: Creation complete after 6s [id=781074]
 
-4.  `terraform state show tidbcloud_import.${resource-name}`を使用してインポート タスクのステータスを確認します。
+4.  `terraform state show tidbcloud_import.${resource-name}`を使用してインポートタスクのステータスを確認します。
 
         $ terraform state show tidbcloud_import.example_local
         # tidbcloud_import.example_local:
@@ -162,7 +162,7 @@ summary: tidbcloud_import` リソースを使用してインポート タスク�
             type                          = "LOCAL"
         }
 
-    ステータスが`COMPLETED`に変わると、インポート タスクが完了したことを示します。
+    ステータスが`COMPLETED`に変わると、インポートタスクが完了したことを示します。
 
 6.  MySQL CLI でインポートされたデータを確認します。
 
@@ -214,7 +214,7 @@ summary: tidbcloud_import` リソースを使用してインポート タスク�
           source_url   = "your_url"
         }
 
-2.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`入力して作成を確認し、インポートを開始します。
+2.  `terraform apply`コマンドを実行してインポートタスクを作成し、 `yes`入力して作成を確認し、インポートを開始します。
 
         $ terraform apply
         ...
@@ -231,15 +231,15 @@ summary: tidbcloud_import` リソースを使用してインポート タスク�
         tidbcloud_import.example_s3_parquet: Creating...
         tidbcloud_import.example_s3_parquet: Creation complete after 4s [id=781076]
 
-3.  `terraform refresh`と`terraform state show tidbcloud_import.${resource-name}`を使用して、インポート タスクのステータスを更新および確認します。
+3.  `terraform refresh`と`terraform state show tidbcloud_import.${resource-name}`を使用して、インポートタスクのステータスを更新および確認します。
 
 ## インポートタスクを更新する {#update-an-import-task}
 
-インポート タスクを更新できません。
+インポートタスクを更新できません。
 
 ## インポートタスクを削除する {#delete-an-import-task}
 
-Terraform の場合、インポート タスクを削除すると、対応する`tidbcloud_import`リソースがキャンセルされます。
+Terraform の場合、インポートタスクを削除すると、対応する`tidbcloud_import`リソースがキャンセルされます。
 
 `COMPLETED`インポートタスクをキャンセルすることはできません。キャンセルした場合は、次の例のように`Delete Error`が返されます。
 

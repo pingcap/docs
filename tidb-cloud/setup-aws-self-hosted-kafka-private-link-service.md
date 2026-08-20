@@ -10,7 +10,7 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
 
 このメカニズムは次のように機能します。
 
-1.  TiDB Cloud VPC は、プライベート エンドポイントを介して Kafka VPC に接続します。
+1.  TiDB Cloud VPC は、プライベートエンドポイントを介して Kafka VPC に接続します。
 2.  Kafka クライアントはすべての Kafka ブローカーと直接通信する必要があります。
 3.  各 Kafka ブローカーは、 TiDB Cloud VPC 内のエンドポイントの一意のポートにマッピングされます。
 4.  マッピングを実現するには、Kafka ブートストラップ メカニズムと AWS リソースを活用します。
@@ -39,14 +39,14 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
 
 3.  TiDB Cloud Dedicated クラスターから Kafka デプロイメント情報を取得します。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**Data** &gt; **Changefeed**をクリックします。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Changefeed**をクリックします。
     2.  概要ページで、TiDB クラスターのリージョンを確認します。Kafka クラスターが同じリージョンにデプロイされることを確認してください。
     3.  **Create Changefeed**をクリックします。
         1.  **Destination**で、 **Kafka**を選択します。
         2.  **Connectivity Method**で**Private Link**を選択します。
     4.  **続行する前に、** TiDB Cloud AWS アカウントの情報をリマインダーに書き留めておいてください。この情報は、TiDB Cloud がKafka Private Link サービスのエンドポイントを作成することを承認する際に使用されます。
     5.  **Number of AZs**を選択します。この例では、 **3 AZs**を選択します。KafkaクラスターをデプロイするAZのIDをメモしておいてください。AZ名とAZ IDの関係を知りたい場合は、 [AWS リソースのアベイラビリティゾーン ID](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)を参照してください。
-    6.  Kafka プライベート リンク サービスに固有の**Kafka Advertised Listener Pattern**を入力します。
+    6.  Kafka プライベートリンク サービスに固有の**Kafka Advertised Listener Pattern**を入力します。
         1.  一意のランダム文字列を入力してください。数字または小文字のみ使用できます。この文字列は、後ほど**Kafka Advertised Listener Pattern**を生成する際に使用します。
         2.  **「使用状況を確認して生成」**をクリックすると、ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズ リスナーを組み立てるために使用される**Kafka Advertised Listener Pattern**が生成されます。
 
@@ -67,7 +67,7 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
 
 3.  TiDB Cloud Premium インスタンスから Kafka デプロイメント情報を取得します。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB インスタンスのインスタンス概要ページに移動し、左側のナビゲーション ペインで**Data** &gt; **Changefeed**をクリックします。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB インスタンスのインスタンス概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Changefeed**をクリックします。
     2.  概要ページで、TiDBインスタンスのリージョンを確認します。Kafkaクラスターが同じリージョンにデプロイされることを確認してください。
     3.  チェンジフィードを作成するには、チュートリアルを参照してください。
 
@@ -659,7 +659,7 @@ b2.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:9094 (id: 2 rack: null) -> E
 b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 ```
 
-## ステップ 2. Kafka クラスターをプライベート リンク サービスとして公開する {#step-2-expose-the-kafka-cluster-as-private-link-service}
+## ステップ 2. Kafka クラスターをプライベートリンク サービスとして公開する {#step-2-expose-the-kafka-cluster-as-private-link-service}
 
 ### 1. ロードバランサーを設定する {#1-set-up-the-load-balancer}
 
@@ -757,7 +757,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 
 ### 2. プライベートリンクサービスを設定する {#2-set-up-private-link-service}
 
-1.  [エンドポイントサービス](https://console.aws.amazon.com/vpcconsole/home#EndpointServices:)に進みます。 **Create endpoint service**をクリックして、Kafka ロード バランサーのプライベート リンク サービスを作成します。
+1.  [エンドポイントサービス](https://console.aws.amazon.com/vpcconsole/home#EndpointServices:)に進みます。 **Create endpoint service**をクリックして、Kafka ロード バランサーのプライベートリンク サービスを作成します。
 
     -   **Name**: `kafka-pl-service`
     -   **Load balancer type**: `Network`

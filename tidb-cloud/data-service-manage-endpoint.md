@@ -13,10 +13,10 @@ Data Service (PREVIEW) のエンドポイントは、SQL ステートメント�
 
 -   エンドポイントを作成する前に、以下の点を確認してください。
 
-    -   TiDB Cloud Starterインスタンスとデータ アプリが作成されました。詳細については、 [データアプリを作成する](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app)を参照してください。
+    -   TiDB Cloud Starterインスタンスとデータアプリが作成されました。詳細については、 [データアプリを作成する](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app)を参照してください。
     -   エンドポイントが操作するデータベース、テーブル、および列は、既にターゲットのTiDB Cloud Starterインスタンスに存在しています。
 
--   エンドポイントを呼び出す前に、データ アプリで API キーを作成していることを確認してください。詳細については、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
+-   エンドポイントを呼び出す前に、データアプリで API キーを作成していることを確認してください。詳細については、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
 
 ## エンドポイントを作成する {#create-an-endpoint}
 
@@ -82,7 +82,7 @@ TiDB Cloud Data Serviceでは、以下のようにして1つまたは複数の�
 エンドポイントを手動で作成するには、以下の手順を実行してください。
 
 1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
-2.  左側のペインで、対象のデータ アプリを見つけ、アプリ名の右側にある**+ を**クリックし、次に**Create Endpoint**をクリックします。
+2.  左側のペインで、対象のデータアプリを見つけ、アプリ名の右側にある**+ を**クリックし、次に**Create Endpoint**をクリックします。
 3.  必要に応じてデフォルト名を更新してください。新しく作成されたエンドポイントは、エンドポイントリストの一番上に追加されます。
 4.  [エンドポイントを開発する](#develop-an-endpoint)」の指示に従って、新しいエンドポイントを構成します。
 
@@ -94,7 +94,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 
 1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 
-2.  左側のペインで、対象のデータ アプリを見つけ、アプリ名の右側にある**「+」**をクリックし、次に**Manage Endpoint Library**をクリックします。
+2.  左側のペインで、対象のデータアプリを見つけ、アプリ名の右側にある**「+」**をクリックし、次に**Manage Endpoint Library**をクリックします。
 
     エンドポイントライブラリ管理のダイアログが表示されます。現在、このダイアログには**Execute Query** （つまり、 `/system/query`エンドポイント）のみが表示されます。
 
@@ -102,7 +102,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 
     > **Tip:**
     >
-    > データ アプリから追加済みの定義済みエンドポイントを削除するには、 **Execute Query**スイッチを**[削除済み]**に切り替えます。
+    > データアプリから追加済みの定義済みエンドポイントを削除するには、 **Execute Query**スイッチを**[削除済み]**に切り替えます。
 
 4.  **「保存」**をクリックしてください。
 
@@ -174,7 +174,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
     >
     > -   パス パラメーターは SQL で直接使用できます。詳細については、[パラメータを設定する](#configure-parameters)を参照してください。
 
--   **Endpoint URL** : (読み取り専用) デフォルト URL は、対応するTiDB Cloud Starterインスタンスが配置されているリージョン、データ アプリのサービス URL、およびエンドポイントのパスに基づいて自動的に生成されます。たとえば、エンドポイントのパスが`/my_endpoint/get_id`の場合、エンドポイント URL は`https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`です。データ アプリのカスタム ドメインを構成するには、 [Data Serviceのカスタムドメイン](/tidb-cloud/data-service-custom-domain.md)を参照してください。
+-   **Endpoint URL** : (読み取り専用) デフォルト URL は、対応するTiDB Cloud Starterインスタンスが配置されているリージョン、データアプリのサービス URL、およびエンドポイントのパスに基づいて自動的に生成されます。たとえば、エンドポイントのパスが`/my_endpoint/get_id`の場合、エンドポイント URL は`https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`です。データアプリのカスタム ドメインを構成するには、 [Data Serviceのカスタムドメイン](/tidb-cloud/data-service-custom-domain.md)を参照してください。
 
 -   **Request Method**：エンドポイントのHTTPメソッド。以下のメソッドがサポートされています。
 
@@ -218,7 +218,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 
     > **Note:**
     >
-    > データ アプリにリンクされているTiDB Cloud Starterインスタンスのみがドロップダウン リストに表示されます。リンクされたTiDB Cloud Starterインスタンスを管理するには、 [リンクされたデータソースを管理する](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)を参照してください。
+    > データアプリにリンクされているTiDB Cloud Starterインスタンスのみがドロップダウン リストに表示されます。リンクされたTiDB Cloud Starterインスタンスを管理するには、 [リンクされたデータソースを管理する](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)を参照してください。
 
     SQLエディタの上部にあるドロップダウンリストから、SQLステートメントを実行するTiDB Cloud Starterインスタンスを選択します。すると、右側のペインにある**「スキーマ」**タブで、そのTiDB Cloud Starterインスタンスのすべてのデータベースを表示できます。
 
@@ -327,7 +327,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 
 > **Tip:**
 >
-> データ アプリを Postman にインポートした場合は、Postman でデータ アプリのエンドポイントをテストすることもできます。詳細については、 [Postmanでデータアプリを実行する](/tidb-cloud/data-service-postman-integration.md)を参照してください。
+> データアプリを Postman にインポートした場合は、Postman でデータアプリのエンドポイントをテストすることもできます。詳細については、 [Postmanでデータアプリを実行する](/tidb-cloud/data-service-postman-integration.md)を参照してください。
 
 1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 
@@ -354,7 +354,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 
 > **Note:**
 >
-> **Auto Sync & Deployment**を有効にしてデータ アプリを GitHub に接続している場合、GitHub で行ったデータ アプリの変更はすべてTiDB Cloud Data Service に自動的にデプロイされます。詳細については、 [GitHubで自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
+> **Auto Sync & Deployment**を有効にしてデータアプリを GitHub に接続している場合、GitHub で行ったデータアプリの変更はすべてTiDB Cloud Data Service に自動的にデプロイされます。詳細については、 [GitHubで自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
 
 エンドポイントをデプロイするには、以下の手順を実行します。
 
@@ -372,7 +372,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 
 > **Tip:**
 >
-> データ アプリを Postman にインポートした場合は、Postman でデータ アプリのエンドポイントを呼び出すこともできます。詳細については、 [Postmanでデータアプリを実行する](/tidb-cloud/data-service-postman-integration.md)を参照してください。
+> データアプリを Postman にインポートした場合は、Postman でデータアプリのエンドポイントを呼び出すこともできます。詳細については、 [Postmanでデータアプリを実行する](/tidb-cloud/data-service-postman-integration.md)を参照してください。
 
 ### 前提条件 {#prerequisites}
 
@@ -480,7 +480,7 @@ TiDB Cloud Data Serviceは、エンドポイントを呼び出すのに役立つ
 
 > **Note:**
 >
-> データ アプリ[データアプリをGitHubに接続しました](/tidb-cloud/data-service-manage-github-connection.md)**Auto Sync & Deployment**を有効にしている場合、このデータ アプリのエンドポイントのデプロイを解除すると、GitHub 上のこのエンドポイントの構成も削除されます。
+> データアプリ[データアプリをGitHubに接続しました](/tidb-cloud/data-service-manage-github-connection.md)**Auto Sync & Deployment**を有効にしている場合、このデータアプリのエンドポイントのデプロイを解除すると、GitHub 上のこのエンドポイントの構成も削除されます。
 
 エンドポイントをアンデプロイするには、以下の手順を実行します。
 

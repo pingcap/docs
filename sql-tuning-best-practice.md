@@ -123,7 +123,7 @@ TiDB Dashboardに加えて、他のツールを使用してリソースを大量
 PLAN REPLAYER DUMP EXPLAIN [ANALYZE] [WITH STATS AS OF TIMESTAMP expression] sql-statement;
 ```
 
-可能な限り`EXPLAIN ANALYZE`を使用してください。これは、実行計画と実際のパフォーマンス メトリックの両方が提供され、クエリ パフォーマンスに関するより正確な分析情報が得られるためです。
+可能な限り`EXPLAIN ANALYZE`を使用してください。これは、実行計画と実際のパフォーマンス メトリックの両方が提供され、クエリパフォーマンスに関するより正確な分析情報が得られるためです。
 
 ## SQLチューニングガイド {#sql-tuning-guide}
 

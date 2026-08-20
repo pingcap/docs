@@ -18,7 +18,7 @@ Syncpoint機能を有効にするには、レプリケーションタスクの�
 1.  レプリケーション中、TiCDC は定期的に ( `sync-point-interval`で設定) アップストリームとダウンストリームの間でスナップショットを調整し、アップストリームとダウンストリームの TSO 対応をダウンストリーム`tidb_cdc.syncpoint_v1`テーブルに保存します。
 2.  レプリケーション中、TiCDC は定期的に ( `sync-point-interval`で設定) `SET GLOBAL tidb_external_ts = @@tidb_current_ts`を実行し、バックアップ クラスターにレプリケートされた一貫性のあるスナップショット ポイントを設定します。
 
-次の TiCDC 構成例では、レプリケーション タスクの作成時に Syncpoint を有効にします。
+次の TiCDC 構成例では、レプリケーションタスクの作成時に Syncpoint を有効にします。
 
 ```toml
 # Enables SyncPoint.

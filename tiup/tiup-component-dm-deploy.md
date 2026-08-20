@@ -27,7 +27,7 @@ tiup dm deploy <cluster-name> <version> <topology.yaml> [flags]
 
 ### -i, --identity_file {#i-identity-file}
 
--   ターゲット マシンに接続するために使用するキー ファイルを指定します。
+-   ターゲットマシンに接続するために使用するキー ファイルを指定します。
 -   データ型: `STRING`
 -   デフォルト: `~/.ssh/id_rsa`
 

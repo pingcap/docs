@@ -772,11 +772,11 @@ select /*+ READ_CONSISTENT_REPLICA() */ * from t;
 
 ### IGNORE_PLAN_CACHE() {#ignore_plan_cache}
 
-`IGNORE_PLAN_CACHE()`ヒントは、現在の`prepare`ステートメントを処理するときにプラン キャッシュを使用しないようにオプティマイザーに通知します。
+`IGNORE_PLAN_CACHE()`ヒントは、現在の`prepare`ステートメントを処理するときにプランキャッシュを使用しないようにオプティマイザーに通知します。
 
-このヒントは、 [プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)有効な場合に、特定の種類のクエリのプラン キャッシュを一時的に無効にするために使用されます。
+このヒントは、 [プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)有効な場合に、特定の種類のクエリのプランキャッシュを一時的に無効にするために使用されます。
 
-次の例では、 `prepare`ステートメントを実行するときにプラン キャッシュが強制的に無効になります。
+次の例では、 `prepare`ステートメントを実行するときにプランキャッシュが強制的に無効になります。
 
 ```sql
 prepare stmt from 'select  /*+ IGNORE_PLAN_CACHE() */ * from t where t.id = ?';

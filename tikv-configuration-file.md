@@ -100,7 +100,7 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 ### `max-backups` <span class="version-mark">v5.4.0の新機能</span> {#max-backups-new-in-v540}
 
 -   TiKVが保持するログファイルの最大数。
-    -   設定項目が設定されていない場合、またはその値がデフォルト値`0`に設定されている場合、TiKV はすべてのログ ファイルを保持します。
+    -   設定項目が設定されていない場合、またはその値がデフォルト値`0`に設定されている場合、TiKV はすべてのログファイルを保持します。
     -   設定項目が`0`以外の値に設定されている場合、TiKV は`max-backups`で指定された数までの古いログファイルを保持します。たとえば、値が`7`に設定されている場合、TiKV は最大 7 つの古いログファイルを保持します。
 -   デフォルト値: `0`
 
@@ -151,7 +151,7 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 
 ### `grpc-concurrency` {#grpc-concurrency}
 
--   gRPC ワーカー スレッドの数。 gRPC スレッド プールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
+-   gRPC ワーカー スレッドの数。 gRPC スレッドプールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
 
 -   デフォルト値:
 
@@ -320,7 +320,7 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 
 ### `max-thread-count` {#max-thread-count}
 
--   統合読み取りプールまたは UnifyReadPool スレッド プールの最大作業スレッド数。このスレッド プールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
+-   統合読み取りプールまたは UnifyReadPool スレッドプールの最大作業スレッド数。このスレッドプールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
 -   値の範囲: `[min-thread-count, MAX(4, CPU quota * 10)]` 。 `MAX(4, CPU quota * 10)`は`4`と`CPU quota * 10`からより大きな値を取得します。
 -   デフォルト値: MAX(4, CPU * 0.8)
 
@@ -501,7 +501,7 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 
 ### `scheduler-worker-pool-size` {#scheduler-worker-pool-size}
 
--   スケジューラのスレッド プール内のスレッドの数。スケジューラ スレッドは主に、データの書き込み前にトランザクションの整合性をチェックするために使用されます。 CPU コアの数が`16`以上の場合、デフォルト値は`8`です。それ以外の場合、デフォルト値は`4`です。スケジューラ スレッド プールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
+-   スケジューラのスレッドプール内のスレッドの数。スケジューラ スレッドは主に、データの書き込み前にトランザクションの整合性をチェックするために使用されます。 CPU コアの数が`16`以上の場合、デフォルト値は`8`です。それ以外の場合、デフォルト値は`4`です。スケジューラ スレッドプールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
 -   デフォルト値: `4`
 -   値の範囲: `[1, MAX(4, CPU)]` 。 `MAX(4, CPU)`では、 `CPU`は CPU コアの数を意味します。 `MAX(4, CPU)`は`4`と`CPU`のうち大きい方の値を取得します。
 
@@ -983,7 +983,7 @@ Raftstoreに関連するコンフィグレーション項目。
 ### `snap-generator-pool-size` <span class="version-mark">v5.4.0の新機能</span> {#snap-generator-pool-size-new-in-v540}
 
 -   `snap-generator`スレッドプールのサイズを設定します。
--   TiKV のリカバリシナリオでリージョンがスナップショットをより高速に生成できるようにするには、対応するワーカーの`snap-generator`スレッドの数を増やす必要があります。この構成項目を使用して、 `snap-generator`スレッド プールのサイズを増やすことができます。
+-   TiKV のリカバリシナリオでリージョンがスナップショットをより高速に生成できるようにするには、対応するワーカーの`snap-generator`スレッドの数を増やす必要があります。この構成項目を使用して、 `snap-generator`スレッドプールのサイズを増やすことができます。
 -   デフォルト値: `2`
 -   最小値: `1`
 
@@ -1121,7 +1121,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### `apply-pool-size` {#apply-pool-size}
 
--   データをディスクにフラッシュするプール内のスレッドの許容数。これは、適用スレッド プールのサイズです。このスレッド プールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
+-   データをディスクにフラッシュするプール内のスレッドの許容数。これは、適用スレッドプールのサイズです。このスレッドプールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
 -   デフォルト値: `2`
 -   値の範囲: `[1, CPU * 10]` 。 `CPU`はCPU コアの数を表します。
 
@@ -1134,13 +1134,13 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### `store-pool-size` {#store-pool-size}
 
--   Raftを処理するプール内のスレッドの許容数。これはRaftstoreスレッド プールのサイズです。このスレッド プールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
+-   Raftを処理するプール内のスレッドの許容数。これはRaftstoreスレッドプールのサイズです。このスレッドプールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
 -   デフォルト値: `2`
 -   値の範囲: `[1, CPU * 10]` 。 `CPU`はCPU コアの数を表します。
 
 ### `store-io-pool-size` <span class="version-mark">v5.3.0で追加</span> {#store-io-pool-size-new-in-v530}
 
--   Raft I/O タスクを処理するスレッドの許容数。これは StoreWriter スレッド プールのサイズです。このスレッド プールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
+-   Raft I/O タスクを処理するスレッドの許容数。これは StoreWriter スレッドプールのサイズです。このスレッドプールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
 -   デフォルト値: `1` (v8.0.0 より前のバージョンでは、デフォルト値は`0`でした)
 -   最小値: `0`
 
@@ -1305,7 +1305,7 @@ RocksDBに関連するコンフィグレーション項目
 
 ### `max-background-jobs` {#max-background-jobs-1}
 
--   RocksDB のバックグラウンド スレッドの数。 RocksDB スレッド プールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
+-   RocksDB のバックグラウンド スレッドの数。 RocksDB スレッドプールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
 -   デフォルト値:
     -   CPUコア数が10の場合、デフォルト値は`9`です。
     -   CPUコア数が8の場合、デフォルト値は`7`です。
@@ -1950,7 +1950,7 @@ Titanに関連するコンフィグレーション項目。
 
 ### `max-background-jobs` {#max-background-jobs}
 
--   RocksDB のバックグラウンド スレッドの数。 RocksDB スレッド プールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
+-   RocksDB のバックグラウンド スレッドの数。 RocksDB スレッドプールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
 -   デフォルト値: `4`
 -   最小値: `2`
 
@@ -2194,7 +2194,7 @@ Raft Engineに関連するコンフィグレーション項目。
 > 2.  `format-version`を`1`に設定します。
 > 3.  `enable`を`true`に設定してRaft Engineを有効にし、TiKV を再起動して設定を有効にしてください。
 
--   Raft Engineのログ ファイルのバージョンを指定します。
+-   Raft Engineのログファイルのバージョンを指定します。
 -   値のオプション：
     -   `1` : TiKV v6.3.0 より前のバージョンのデフォルトのログファイルです。TiKV &gt;= v6.1.0 で読み取ることができます。
     -   `2` : ログのリサイクルをサポートします。TiKV &gt;= v6.3.0 で読み取ることができます。
@@ -2742,8 +2742,8 @@ TiKVストレージレイヤーのリソース制御に関連するコンフィ�
 
 ### `enabled` <span class="version-mark">（v6.6.0で新規追加）</span> {#enabled-new-in-v660}
 
--   対応するリソース グループの[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)に従って、ユーザーのフォアグラウンド読み取り/書き込みリクエストのスケジューリングを有効にするかどうかを制御します。 TiDB リソース グループとリソース制御の詳細については、[リソース制御を使用して、リソースグループの制限とフロー制御を実現します](/tidb-resource-control-ru-groups.md)を参照してください。
--   この設定項目を有効にするには、TiDB で[`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660)が有効になっている必要があります。この設定項目が有効になっている場合、TiKV は優先度キューを使用して、フォアグラウンド ユーザーからのキューに登録された読み取り/書き込みリクエストをスケジュールします。リクエストのスケジュール優先度は、そのリクエストを受け取るリソース グループが既に消費しているリソースの量に反比例し、対応するリソース グループのクォータに比例します。
+-   対応するリソースグループの[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)に従って、ユーザーのフォアグラウンド読み取り/書き込みリクエストのスケジューリングを有効にするかどうかを制御します。 TiDB リソースグループとリソース制御の詳細については、[リソース制御を使用して、リソースグループの制限とフロー制御を実現します](/tidb-resource-control-ru-groups.md)を参照してください。
+-   この設定項目を有効にするには、TiDB で[`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660)が有効になっている必要があります。この設定項目が有効になっている場合、TiKV は優先度キューを使用して、フォアグラウンド ユーザーからのキューに登録された読み取り/書き込みリクエストをスケジュールします。リクエストのスケジュール優先度は、そのリクエストを受け取るリソースグループが既に消費しているリソースの量に反比例し、対応するリソースグループのクォータに比例します。
 -   デフォルト値: `true` 。これは、リソースグループのRUに基づいたスケジューリングが有効になっていることを意味します。
 
 ### `priority-ctl-strategy` <span class="version-mark">v8.4.0で追加</span> {#priority-ctl-strategy-new-in-v840}

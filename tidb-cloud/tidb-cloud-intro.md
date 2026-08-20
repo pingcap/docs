@@ -152,7 +152,7 @@ TiDB Cloudは、以下の導入オプションを提供します。
 
 -   あなたのVPC
 
-    プライベート エンドポイント接続または VPC ピアリング接続を介してTiDB Cloudリソースに接続できます。詳細については[プライベートエンドポイント接続を設定する](/tidb-cloud/set-up-private-endpoint-connections.md)または[VPCピアリング接続の設定](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
+    プライベートエンドポイント接続または VPC ピアリング接続を介してTiDB Cloudリソースに接続できます。詳細については[プライベートエンドポイント接続を設定する](/tidb-cloud/set-up-private-endpoint-connections.md)または[VPCピアリング接続の設定](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
 
 <CustomContent plan="byoc">
 

@@ -9,9 +9,9 @@ summary: TiDB のデプロイメントに関連する FAQ について説明し�
 
 ## ソフトウェアとハ​​ードウェアの要件 {#software-and-hardware-requirements}
 
-### TiDB はどのオペレーティング システムをサポートしていますか? {#what-operating-systems-does-tidb-support}
+### TiDB はどのオペレーティングシステムをサポートしていますか? {#what-operating-systems-does-tidb-support}
 
-TiDB がサポートするオペレーティング システムについては、 [ソフトウェアとハ​​ードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
+TiDB がサポートするオペレーティングシステムについては、 [ソフトウェアとハ​​ードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
 
 ### 開発、テスト、または本番環境における TiDB クラスターの推奨ハードウェア構成は何ですか? {#what-is-the-recommended-hardware-configuration-for-a-tidb-cluster-in-the-development-test-or-production-environment}
 

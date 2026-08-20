@@ -49,7 +49,7 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
 2.  [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用してTiDB Cloud Dedicatedクラスターからデータをエクスポートし、 [インポート機能](/tidb-cloud/import-csv-files-serverless.md)を使用して宛先のTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにデータをロードします。
 
-3.  [Dumplingのエクスポートファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)のメタデータ ファイルからTiDB Cloudシンクの開始位置を取得します。
+3.  [Dumplingのエクスポートファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)のメタデータファイルからTiDB Cloudシンクの開始位置を取得します。
 
     以下はメタデータファイルの例の一部です。 `Pos`の`SHOW MASTER STATUS`は、既存データの TSO であり、 TiDB Cloudシンクの開始位置でもあります。
 

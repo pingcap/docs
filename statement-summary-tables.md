@@ -7,7 +7,7 @@ summary: TiDBのステートメントサマリーテーブルについて学び�
 
 SQL のパフォーマンス問題をより適切に処理するために、MySQL は、統計情報を使用して SQL を監視するための`performance_schema`の[ステートメントサマリーテーブル](https://dev.mysql.com/doc/refman/8.0/en/performance-schema-statement-summary-tables.html)を提供しています。これらのテーブルの中でも、 `events_statements_summary_by_digest`は、レイテンシー、実行時間、スキャンされた行数、フルテーブルスキャンなどの豊富なフィールドを備えているため、SQL の問題を特定する際に非常に役立ちます。
 
-したがって、v4.0.0-rc.1 以降、TiDB は`information_schema`と機能面で類似したシステム テーブルを`performance_schema` } `events_statements_summary_by_digest`*ではなく*) で提供します。
+したがって、v4.0.0-rc.1 以降、TiDB は`information_schema`と機能面で類似したシステムテーブルを`performance_schema` } `events_statements_summary_by_digest`*ではなく*) で提供します。
 
 -   [`statements_summary`](#statements_summary)
 -   [`statements_summary_history`](#statements_summary_history)
@@ -23,7 +23,7 @@ SQL のパフォーマンス問題をより適切に処理するために、MySQ
 
 ## `statements_summary` {#statements_summary}
 
-`statements_summary`は`information_schema`内のシステム テーブルです。 `statements_summary`は、SQL ステートメントをリソース グループ、SQL ダイジェスト、およびプラン ダイジェストごとにグループ化し、各 SQL カテゴリの統計情報を提供します。
+`statements_summary`は`information_schema`内のシステムテーブルです。 `statements_summary`は、SQL ステートメントをリソースグループ、SQL ダイジェスト、およびプラン ダイジェストごとにグループ化し、各 SQL カテゴリの統計情報を提供します。
 
 ここでいう「SQLダイジェスト」とは、スローログで使用されるものと同じ意味で、正規化されたSQLステートメントから計算される一意の識別子です。正規化プロセスでは定数や空白文字は無視され、大文字と小文字は区別されません。したがって、構文が一貫しているステートメントは同じダイジェストを持ちます。例：
 
@@ -82,7 +82,7 @@ select * from employee where id in (...) and salary between ? and ?;
 > **Note:**
 >
 > -   TiDBでは、ステートメントサマリーテーブルのフィールドの時間単位はナノ秒（ns）ですが、MySQLではピコ秒（ps）です。
-> -   v7.5.1 および v7.6.0 以降、 が有効に[リソース制御](/tidb-resource-control-ru-groups.md)ているクラスターでは、 `statements_summary`リソース グループごとに集約されます。たとえば、異なるリソース グループで実行された同じステートメントは、異なるレコードとして収集されます。
+> -   v7.5.1 および v7.6.0 以降、 が有効に[リソース制御](/tidb-resource-control-ru-groups.md)ているクラスターでは、 `statements_summary`リソースグループごとに集約されます。たとえば、異なるリソースグループで実行された同じステートメントは、異なるレコードとして収集されます。
 
 ## `statements_summary_history` {#statements_summary_history}
 
@@ -126,7 +126,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 明細書の要約を制御するために、以下のシステム変数が使用されます。
 
--   `tidb_enable_stmt_summary` : 明細サマリー機能を有効にするかどうかを決定します。 `1`は`enable`を表し、 `0`は`disable`を意味します。この機能はデフォルトで有効になっています。この機能が無効になっている場合、システム テーブルの統計情報はクリアされます。統計情報は、次回この機能が有効になったときに再計算されます。テストの結果、この機能を有効にしてもパフォーマンスへの影響はほとんどないことがわかっています。
+-   `tidb_enable_stmt_summary` : 明細サマリー機能を有効にするかどうかを決定します。 `1`は`enable`を表し、 `0`は`disable`を意味します。この機能はデフォルトで有効になっています。この機能が無効になっている場合、システムテーブルの統計情報はクリアされます。統計情報は、次回この機能が有効になったときに再計算されます。テストの結果、この機能を有効にしてもパフォーマンスへの影響はほとんどないことがわかっています。
 
 -   `tidb_stmt_summary_refresh_interval` : `statements_summary`テーブルが更新される間隔。時間の単位は秒 (s) です。デフォルト値は`1800`です。
 
@@ -331,10 +331,10 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
 -   `PLAN_DIGEST` : 実行計画の概要。
 -   `PLAN` : 元の実行計画。複数のステートメントがある場合は、1つのステートメントのプランのみが使用されます。
 -   `BINARY_PLAN` : バイナリ形式でエンコードされた元の実行計画。複数のステートメントがある場合は、1つのステートメントのプランのみが使用されます。特定の実行計画を解析するには、 [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan)ステートメントを実行してください。
--   `PLAN_CACHE_HITS` : このカテゴリの SQL ステートメントがプラン キャッシュにヒットした合計回数。
--   `PLAN_IN_CACHE` : このカテゴリの SQL ステートメントの以前の実行がプラン キャッシュにヒットしたかどうかを示します。
--   `PLAN_CACHE_UNQUALIFIED` : このカテゴリの SQL ステートメントがプラン キャッシュにヒットしなかった回数。
--   `PLAN_CACHE_UNQUALIFIED_LAST_REASON` : このカテゴリの SQL ステートメントが前回プラン キャッシュにヒットしなかった理由。
+-   `PLAN_CACHE_HITS` : このカテゴリの SQL ステートメントがプランキャッシュにヒットした合計回数。
+-   `PLAN_IN_CACHE` : このカテゴリの SQL ステートメントの以前の実行がプランキャッシュにヒットしたかどうかを示します。
+-   `PLAN_CACHE_UNQUALIFIED` : このカテゴリの SQL ステートメントがプランキャッシュにヒットしなかった回数。
+-   `PLAN_CACHE_UNQUALIFIED_LAST_REASON` : このカテゴリの SQL ステートメントが前回プランキャッシュにヒットしなかった理由。
 
 実行時間に関連するフィールド：
 
@@ -443,7 +443,7 @@ TiKVコプロセッサータスクに関連するフィールド：
 -   `MAX_REQUEST_UNIT_READ` : SQL ステートメントによって消費される読み取り RU の最大数。
 -   `AVG_QUEUED_RC_TIME` : SQL ステートメントを実行する際に、利用可能な RU を待つ平均時間。
 -   `MAX_QUEUED_RC_TIME` : SQL ステートメントを実行する際に、使用可能な RU の最大待機時間。
--   `RESOURCE_GROUP` : SQL ステートメントにバインドされたリソース グループ。
+-   `RESOURCE_GROUP` : SQL ステートメントにバインドされたリソースグループ。
 
 ストレージエンジンに関連する分野：
 

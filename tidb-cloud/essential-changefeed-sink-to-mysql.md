@@ -42,7 +42,7 @@ TiDB Cloud EssentialインスタンスがMySQLサービスに接続できるこ�
 
 プライベートリンク接続は、クラウドプロバイダーの**Private Link**技術を活用することで、VPC内のリソースがプライベートIPアドレスを介して他のVPC内のサービスに接続できるようにします。これにより、あたかもそれらのサービスがVPC内で直接ホストされているかのように動作します。
 
-プライベート リンク接続を通じて、 TiDB Cloud Essentialインスタンスを MySQL サービスに安全に接続できます。 MySQL サービスでプライベート リンク接続が利用できない場合は、プライベートリンク[プライベートリンク接続を介してAmazon RDSに接続する](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md)[プライベートリンク接続を介してAlibaba Cloud ApsaraDB RDS for MySQLに接続する](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md)。
+プライベートリンク接続を通じて、 TiDB Cloud Essentialインスタンスを MySQL サービスに安全に接続できます。 MySQL サービスでプライベートリンク接続が利用できない場合は、プライベートリンク[プライベートリンク接続を介してAmazon RDSに接続する](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md)[プライベートリンク接続を介してAlibaba Cloud ApsaraDB RDS for MySQLに接続する](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md)。
 
 </div>
 

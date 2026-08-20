@@ -35,7 +35,7 @@ TiDB バージョン: 7.5.3
     -   Backup & Restore (BR)
 
         -   `br log restore`サブコマンドを除き、他の`br log`サブコマンドはすべて、メモリ消費量を削減するために TiDB `domain`データ構造のロードをスキップすることをサポートしています[＃52088](https://github.com/pingcap/tidb/issues/52088) @[Leavrth](https://github.com/Leavrth)
-        -   チェックポイントの遅延が大きい場合にログ バックアップ タスクを自動的に中止し、GC の長時間のブロッキングや潜在的なクラスターの問題を回避することをサポートします[＃50803](https://github.com/pingcap/tidb/issues/50803) @[RidRisR](https://github.com/RidRisR)
+        -   チェックポイントの遅延が大きい場合にログバックアップ タスクを自動的に中止し、GC の長時間のブロッキングや潜在的なクラスターの問題を回避することをサポートします[＃50803](https://github.com/pingcap/tidb/issues/50803) @[RidRisR](https://github.com/RidRisR)
         -   DNSエラーによる失敗の再試行回数を増やす [＃53029](https://github.com/pingcap/tidb/issues/53029) @[YuJuncen](https://github.com/YuJuncen)
         -   ログバックアップの互換性テストとインデックスアクセラレーションの追加をカバーするPITR統合テストケースを追加します。 [＃51987](https://github.com/pingcap/tidb/issues/51987) @[Leavrth](https://github.com/Leavrth)
         -   リージョンのリーダー不在による失敗の再試行回数を増やす [＃54017](https://github.com/pingcap/tidb/issues/54017) @[Leavrth](https://github.com/Leavrth)
@@ -64,7 +64,7 @@ TiDB バージョン: 7.5.3
     -   `sql_mode=''` の場合に、フィールドの`UNSIGNED`型を`-1`に更新すると`0`ではなく`null`が返される問題を修正しました。 [＃47816](https://github.com/pingcap/tidb/issues/47816) @[lcwangchao](https://github.com/lcwangchao)
     -   最初の引数が`month`で、2番目の引数が負の場合に`TIMESTAMPADD()`関数が無限ループに入る問題を修正しました。 [＃54908](https://github.com/pingcap/tidb/issues/54908) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   ハンドシェイクが完了する前に一部の接続が終了した場合に、Grafana の接続数監視メトリックが正しくない問題を修正しました[＃54428](https://github.com/pingcap/tidb/issues/54428) @[YangKeao](https://github.com/YangKeao)
-    -   TiProxy とリソース グループを使用するときに、各リソース グループの接続数が正しくない問題を修正しました。 [＃54545](https://github.com/pingcap/tidb/issues/54545) @[YangKeao](https://github.com/YangKeao)
+    -   TiProxy とリソースグループを使用するときに、各リソースグループの接続数が正しくない問題を修正しました。 [＃54545](https://github.com/pingcap/tidb/issues/54545) @[YangKeao](https://github.com/YangKeao)
     -   `CREATE OR REPLACE VIEW`同時に実行すると`table doesn't exist`エラーが発生する可能性がある問題を修正 [＃53673](https://github.com/pingcap/tidb/issues/53673) @[tangenta](https://github.com/tangenta)
     -   データ変更操作を含むトランザクションで仮想列を持つテーブルをクエリすると、TiDB が誤ったクエリ結果を返す可能性がある問題を修正しました [＃53951](https://github.com/pingcap/tidb/issues/53951) @[qw4990](https://github.com/qw4990)
     -   `SELECT DISTINCT CAST(col AS DECIMAL), CAST(col AS SIGNED) FROM ...`クエリを実行すると誤った結果が返される可能性がある問題を修正[＃53726](https://github.com/pingcap/tidb/issues/53726) @[hawkingrei](https://github.com/hawkingrei)
@@ -93,8 +93,8 @@ TiDB バージョン: 7.5.3
 
 -   PD
 
-    -   リソース グループ クライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値より少なくなる問題を修正しました。 [＃7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
-    -   500 ミリ秒を超えるトークンをリクエストするとリソース グループがクォータ制限に達する問題を修正[＃8349](https://github.com/tikv/pd/issues/8349) @[nolouch](https://github.com/nolouch)
+    -   リソースグループ クライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値より少なくなる問題を修正しました。 [＃7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
+    -   500 ミリ秒を超えるトークンをリクエストするとリソースグループがクォータ制限に達する問題を修正[＃8349](https://github.com/tikv/pd/issues/8349) @[nolouch](https://github.com/nolouch)
     -   リソースグループのデータ競合問題を修正 [＃8267](https://github.com/tikv/pd/issues/8267) @[HuSharp](https://github.com/HuSharp)
     -   PD がオペレータ チェック中に遭遇するデータ競合問題を修正しました [＃8263](https://github.com/tikv/pd/issues/8263) @[lhy1024](https://github.com/lhy1024)
     -   削除されたノードがetcdクライアントの候補接続リストにまだ表示される問題を修正 [＃8286](https://github.com/tikv/pd/issues/8286) @[JmPotato](https://github.com/JmPotato)

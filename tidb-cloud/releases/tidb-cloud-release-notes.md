@@ -539,7 +539,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     -   データフローシナリオにおけるプライベートリンク接続でのAmazon MSK Provisionedをサポートします。
 
-        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、 [Amazon MSK プロビジョニング済み](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html)クラスターへのプライベート リンク接続の作成をサポートするようになりました。この機能により、トラフィックを公共のインターネットに公開することなく、Amazon MSK プロビジョニングされたクラスターへの変更フィードのプライベート ネットワーク接続が可能になります。
+        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、 [Amazon MSK プロビジョニング済み](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html)クラスターへのプライベートリンク接続の作成をサポートするようになりました。この機能により、トラフィックを公共のインターネットに公開することなく、Amazon MSK プロビジョニングされたクラスターへの変更フィードのプライベート ネットワーク接続が可能になります。
 
         詳細については、 [プライベートリンク接続を介してAmazon MSK Provisionedに接続します](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)を参照してください。
 

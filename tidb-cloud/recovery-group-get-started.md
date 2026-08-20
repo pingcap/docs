@@ -20,9 +20,9 @@ summary: TiDB Cloudでリカバリ グループを作成し、その詳細を表
 
 リカバリグループを作成するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、左上隅のコンボ ボックスを使用してターゲット プロジェクトに切り替えます。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、左上隅のコンボボックスを使用してターゲット プロジェクトに切り替えます。
 
-2.  左側のナビゲーション ペインで、 **Recovery Group**をクリックします。
+2.  左側のナビゲーションペインで、 **Recovery Group**をクリックします。
 
 3.  **Recovery Group**ページで、 **Create Recovery Group**をクリックします。
 
@@ -57,9 +57,9 @@ summary: TiDB Cloudでリカバリ グループを作成し、その詳細を表
 
 リカバリ グループを作成した後、**Recovery Group Detail**ページでそのステータス情報を表示できます。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、左上隅のコンボ ボックスを使用してターゲット プロジェクトに切り替えます。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、左上隅のコンボボックスを使用してターゲット プロジェクトに切り替えます。
 
-2.  左側のナビゲーション ペインで、 **Recovery Group**をクリックします。
+2.  左側のナビゲーションペインで、 **Recovery Group**をクリックします。
 
 3.  **Recovery Group**ページで、表示するリカバリグループの名前をクリックします。
 

@@ -33,7 +33,7 @@ ResourceGroupName ::=
 
 ## 例 {#examples}
 
-ユーザー`user1`を作成し、2 つのリソース グループ`rg1`と`rg2`を作成し、ユーザー`user1`をリソース グループ`rg1`にバインドします。
+ユーザー`user1`を作成し、2 つのリソースグループ`rg1`と`rg2`を作成し、ユーザー`user1`をリソースグループ`rg1`にバインドします。
 
 ```sql
 CREATE USER 'user1';
@@ -41,7 +41,7 @@ CREATE RESOURCE GROUP 'rg1' RU_PER_SEC = 1000;
 ALTER USER 'user1' RESOURCE GROUP `rg1`;
 ```
 
-`user1`を使用してログインし、現在のユーザーに紐づけられたリソース グループを表示します。
+`user1`を使用してログインし、現在のユーザーに紐づけられたリソースグループを表示します。
 
 ```sql
 SELECT CURRENT_RESOURCE_GROUP();
@@ -56,7 +56,7 @@ SELECT CURRENT_RESOURCE_GROUP();
 1 row in set (0.00 sec)
 ```
 
-`SET RESOURCE GROUP`を実行して、現在のセッションのリソース グループを`rg2`に設定します。
+`SET RESOURCE GROUP`を実行して、現在のセッションのリソースグループを`rg2`に設定します。
 
 ```sql
 SET RESOURCE GROUP `rg2`;
@@ -72,7 +72,7 @@ SELECT CURRENT_RESOURCE_GROUP();
 1 row in set (0.00 sec)
 ```
 
-`SET RESOURCE GROUP`を実行して、現在のセッションでデフォルトのリソース グループを使用するように指定します。
+`SET RESOURCE GROUP`を実行して、現在のセッションでデフォルトのリソースグループを使用するように指定します。
 
 ```sql
 SET RESOURCE GROUP `default`;

@@ -65,7 +65,7 @@ TiDB バージョン: 4.0.0-rc.2
     -   TiKV がリクエストをより適切にスケジュールして処理できるように、DistSQL リクエストに TaskID を割り当てます[＃17155](https://github.com/pingcap/tidb/pull/17155)
     -   MySQLクライアントにログインした後、TiDBサーバーのバージョン情報を表示する機能をサポート [＃17187](https://github.com/pingcap/tidb/pull/17187)
     -   `GROUP_CONCAT`関数の`ORDER BY`句をサポートする [＃16990](https://github.com/pingcap/tidb/pull/16990)
-    -   スローログに`Plan_from_cache`情報を表示して、ステートメントがプラン キャッシュにヒットしたかどうかを示すことをサポート [＃17121](https://github.com/pingcap/tidb/pull/17121)
+    -   スローログに`Plan_from_cache`情報を表示して、ステートメントがプランキャッシュにヒットしたかどうかを示すことをサポート [＃17121](https://github.com/pingcap/tidb/pull/17121)
     -   TiDB DashboardにTiFlashマルチディスク構成の容量情報を表示できる機能を追加
     -   ダッシュボードでSQL文を使用してTiFlashログを照会する機能を追加
 

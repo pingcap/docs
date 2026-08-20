@@ -252,13 +252,13 @@ pd-server関連のコンフィグレーション項目
 ### `max-days` {#max-days}
 
 -   ログが保存される最大日数
--   構成項目が設定されていない場合、またはその値がデフォルト値 0 に設定されている場合、PD はログ ファイルを消去しません。
+-   構成項目が設定されていない場合、またはその値がデフォルト値 0 に設定されている場合、PD はログファイルを消去しません。
 -   デフォルト値: `0`
 
 ### `max-backups` {#max-backups}
 
 -   保存するログファイルの最大数
--   構成項目が設定されていない場合、またはその値がデフォルト値 0 に設定されている場合、PD はすべてのログ ファイルを保持します。
+-   構成項目が設定されていない場合、またはその値がデフォルト値 0 に設定されている場合、PD はすべてのログファイルを保持します。
 -   デフォルト値: `0`
 
 ## `metric` {#metric}
@@ -512,9 +512,9 @@ pd-server関連のコンフィグレーション項目
 
 ### `disable-custom-prom-addr` {#disable-custom-prom-addr}
 
--   [TiDB Dashboard](/dashboard/dashboard-intro.md)でカスタム Prometheus データ ソース アドレスの構成を無効にするかどうか。
+-   [TiDB Dashboard](/dashboard/dashboard-intro.md)でカスタム Prometheus データソース アドレスの構成を無効にするかどうか。
 -   デフォルト値: `false`
--   `true`に設定すると、TiDB Dashboardでカスタム Prometheus データ ソース アドレスを構成すると、TiDB Dashboardはエラーを報告します。
+-   `true`に設定すると、TiDB Dashboardでカスタム Prometheus データソース アドレスを構成すると、TiDB Dashboardはエラーを報告します。
 
 ### `tidb-cacert-path` {#tidb-cacert-path}
 

@@ -871,7 +871,7 @@ TiDBには`EXCHANGE PARTITION`に影響を与える可能性のある特定の�
 
 ### 範囲、範囲列、リスト、およびリスト列パーティションの管理 {#manage-range-range-columns-list-and-list-columns-partitions}
 
-このセクションでは、以下の SQL ステートメントによって作成されたパーティション テーブルを例として、範囲パーティションとリスト パーティションの管理方法を示します。
+このセクションでは、以下の SQL ステートメントによって作成されたパーティションテーブルを例として、範囲パーティションとリスト パーティションの管理方法を示します。
 
 ```sql
 CREATE TABLE members (
@@ -1402,7 +1402,7 @@ SELECT store_id, COUNT(department_id) AS c
 
 このセクションでは、TiDBにおけるパーティションテーブルに関するいくつかの制限事項と制約事項について説明します。
 
--   [`ALTER TABLE ... CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)ステートメントを使用してパーティション テーブルの列の型を変更することはサポートされていません。
+-   [`ALTER TABLE ... CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)ステートメントを使用してパーティションテーブルの列の型を変更することはサポートされていません。
 -   [`ALTER TABLE ... CACHE`](/cached-tables.md)ステートメントを使用してパーティションテーブルをキャッシュテーブルに設定することはサポートされていません。
 -   TiDB の[一時テーブル](/temporary-tables.md)パーティション化されたテーブルと互換性**がありません**。
 -   パーティションテーブルでの[外部キー](/foreign-key.md)の作成はサポートされていません。
@@ -1607,7 +1607,7 @@ ERROR 8264 (HY000): Global Index is needed for index 'a', since the unique index
 
 ### グローバルインデックス {#global-indexes}
 
-グローバル インデックスの詳細については、[グローバルインデックス](/global-indexes.md)を参照してください。
+グローバルインデックスの詳細については、[グローバルインデックス](/global-indexes.md)を参照してください。
 
 ### 関数に関連する分割制限 {#partitioning-limitations-relating-to-functions}
 
@@ -1733,7 +1733,7 @@ set @@session.tidb_partition_prune_mode = 'dynamic'
 
 手動の ANALYZE および通常のクエリでは、セッション レベルの`tidb_partition_prune_mode`設定が使用されます。バックグラウンドでの`auto-analyze`操作では、グローバルな`tidb_partition_prune_mode`設定が使用されます。
 
-`static`モードでは、パーティション テーブルはパーティション レベルの統計情報を使用します。 `dynamic`モードでは、パーティション テーブルはテーブル レベルのグローバル統計情報を使用します。
+`static`モードでは、パーティションテーブルはパーティション レベルの統計情報を使用します。 `dynamic`モードでは、パーティションテーブルはテーブル レベルのグローバル統計情報を使用します。
 
 `static`モードから`dynamic`モードに切り替える際は、統計情報を手動で確認して収集する必要があります。これは、 `dynamic`モードに切り替えた後、パーティション化されたテーブルにはパーティションレベルの統計情報のみが存在し、テーブルレベルの統計情報は存在しないためです。グローバル統計情報は、次の`auto-analyze`操作時にのみ収集されます。
 
@@ -1910,7 +1910,7 @@ mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 
 
 例2から、 `dynamic`モードでは、クエリを実行するとIndexJoinを使用した実行計画が選択されることがわかります。
 
-現在、 `static`プルーニング モードは、プリペアドステートメントと非プリペアドステートメントの両方のプラン キャッシュをサポートしていません。
+現在、 `static`プルーニング モードは、プリペアドステートメントと非プリペアドステートメントの両方のプランキャッシュをサポートしていません。
 
 ### 動的プルーニングモードでパーティションテーブルの統計情報を更新する {#update-statistics-of-partitioned-tables-in-dynamic-pruning-mode}
 

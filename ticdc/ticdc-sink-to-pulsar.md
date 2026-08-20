@@ -9,7 +9,7 @@ summary: TiCDC を使用してデータを Pulsar に複製する方法を学び
 
 ## 増分データをPulsarに複製するレプリケーションタスクを作成する {#create-a-replication-task-to-replicate-incremental-data-to-pulsar}
 
-次のコマンドを実行してレプリケーション タスクを作成します。
+次のコマンドを実行してレプリケーションタスクを作成します。
 
 ```shell
 cdc cli changefeed create \

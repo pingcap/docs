@@ -64,7 +64,7 @@ CentOS Linux 7はサポート終了（EOL）を迎えたため、今後のTiDB�
     -   `DROP DATABASE`ステートメントの実行後に統計情報がクリアされない問題を修正しました [#57230](https://github.com/pingcap/tidb/issues/57230) @[Rustin170506](https://github.com/Rustin170506)
     -   `IndexMerge`を構築する際に一部の述語が失われる可能性がある問題を修正しました [#58476](https://github.com/pingcap/tidb/issues/58476) @[hawkingrei](https://github.com/hawkingrei)
     -   3000次元を超える列にベクトル検索インデックスを作成すると`KeyTooLong`エラーが発生する問題を修正 [#58836](https://github.com/pingcap/tidb/issues/58836) @[breezewish](https://github.com/breezewish)
-    -   `REORGANIZE PARTITION`操作が置換されたグローバル インデックスを正しくクリーンアップせず、非クラスター化テーブルの一意インデックスを処理する問題を修正しました [#56822](https://github.com/pingcap/tidb/issues/56822) @[mjonss](https://github.com/mjonss)
+    -   `REORGANIZE PARTITION`操作が置換されたグローバルインデックスを正しくクリーンアップせず、非クラスター化テーブルの一意インデックスを処理する問題を修正しました [#56822](https://github.com/pingcap/tidb/issues/56822) @[mjonss](https://github.com/mjonss)
     -   パーティションテーブルの Range INTERVAL 構文糖衣が`MINUTE`間隔として使用できない問題を修正 [#57698](https://github.com/pingcap/tidb/issues/57698) @[mjonss](https://github.com/mjonss)
     -   タイムゾーンを変更すると、スローログのクエリ時にクエリ結果が正しくなくなる問題を修正しました [#58452](https://github.com/pingcap/tidb/issues/58452) @[lcwangchao](https://github.com/lcwangchao)
     -   スキャンタスクのTTLワーカーを縮小する際に、タスクキャンセルの失敗によってタスクがリークする可能性がある問題を修正しました [#57708](https://github.com/pingcap/tidb/issues/57708) @[YangKeao](https://github.com/YangKeao)

@@ -238,7 +238,7 @@ mysql> explain select * from t t1, t t2 where t1.a>t2.a;
 
 オプティマイザの問題を分析するには、実行計画が妥当かどうかを判断する必要があります。最適化プロセスと各演算子についてある程度の理解が必要です。
 
-次の例では、テーブル スキーマが`create table t (id int, a int, b int, c int, primary key(id), key(a), key(b, c))`であると想定します。
+次の例では、テーブルスキーマが`create table t (id int, a int, b int, c int, primary key(id), key(a), key(b, c))`であると想定します。
 
 1.  `select * from t` : フィルター条件はなく、テーブル全体のスキャンが実行されます。そのため、データの読み取りには`TableFullScan`演算子が使用されます。
 2.  `select a from t where a=2` : フィルター条件があり、インデックス列のみが読み取られるため、 `IndexReader`演算子を使用してデータを読み取ります。

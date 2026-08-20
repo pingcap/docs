@@ -7,7 +7,7 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
 
 このドキュメントでは、 `tidbcloud_serverless_cluster`リソースを使用して[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)クラスターを管理する方法について説明します。
 
-また、 `tidbcloud_projects`データ ソースを使用して必要な情報を取得する方法も学習します。
+また、 `tidbcloud_projects`データソースを使用して必要な情報を取得する方法も学習します。
 
 `tidbcloud_serverless_cluster`リソースの機能は次のとおりです。
 
@@ -24,7 +24,7 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
 
 各TiDBクラスタはプロジェクトに属します。TiDB Cloud Essentialクラスタを作成する前に、クラスタを作成するプロジェクトのIDを取得する必要があります。`project_id`が指定されていない場合は、デフォルトのプロジェクトが使用されます。
 
-利用可能なすべてのプロジェクトに関する情報を取得するには、次のように`tidbcloud_projects`データ ソースを使用します。
+利用可能なすべてのプロジェクトに関する情報を取得するには、次のように`tidbcloud_projects`データソースを使用します。
 
 1.  [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)で作成した`main.tf`ファイルに、次のように`data`と`output`ブロックを追加します。
 
@@ -50,17 +50,17 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
           value = data.tidbcloud_projects.example_project.items
         }
 
-    -   `data`ブロックを使用して、データ ソース タイプやデータ ソース名など、 TiDB Cloudのデータ ソースを定義します。
+    -   `data`ブロックを使用して、データソース タイプやデータソース名など、 TiDB Cloudのデータソースを定義します。
 
-        -   プロジェクト データ ソースを使用するには、データ ソース タイプを`tidbcloud_projects`に設定します。
+        -   プロジェクト データソースを使用するには、データソース タイプを`tidbcloud_projects`に設定します。
         -   データソース名は必要に応じて定義できます。例： `"example_project"` 。
-        -   `tidbcloud_projects`データ ソースの場合、 `page`および`page_size`属性を使用して、チェックするプロジェクトの最大数を制限できます。
+        -   `tidbcloud_projects`データソースの場合、 `page`および`page_size`属性を使用して、チェックするプロジェクトの最大数を制限できます。
 
-    -   `output`ブロックを使用して、出力に表示されるデータ ソース情報を定義し、他の Terraform 構成が使用できるように情報を公開します。
+    -   `output`ブロックを使用して、出力に表示されるデータソース情報を定義し、他の Terraform 構成が使用できるように情報を公開します。
 
         `output`ブロックはプログラミング言語の戻り値と同様の動作をします。詳細は[Terraformドキュメント](https://www.terraform.io/language/values/outputs)を参照してください。
 
-    リソースとデータ ソースに使用可能なすべての構成を取得するには、 [Terraform プロバイダーの構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)を参照してください。
+    リソースとデータソースに使用可能なすべての構成を取得するには、 [Terraform プロバイダーの構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)を参照してください。
 
 2.  設定を適用するには、コマンド`terraform apply`を実行してください。続行するには、確認プロンプトで`yes`と入力してください。
 

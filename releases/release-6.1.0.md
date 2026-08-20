@@ -99,7 +99,7 @@ TiDB バージョン: 6.1.0
 
     OLAPシナリオにおけるパフォーマンス向上のため、パーティションテーブルでは動的プルーニングモードがサポートされています。TiDBをv6.0.0より前のバージョンからアップグレードする場合は、パフォーマンスを最大限に高めるために、既存のパーティションテーブルの統計情報を手動で更新することをお勧めします（新規インストールの場合、またはv6.1.0へのアップグレード後に新しく作成されたパーティションの場合は必要ありません）。
 
-    [＃3873](https://github.com/pingcap/tiflash/issues/3873) [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode) : [MPP モードでパーティション テーブルにアクセスする](/tiflash/use-tiflash-mpp-mode.md#access-partitioned-tables-in-the-mpp-mode)
+    [＃3873](https://github.com/pingcap/tiflash/issues/3873) [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode) : [MPP モードでパーティションテーブルにアクセスする](/tiflash/use-tiflash-mpp-mode.md#access-partitioned-tables-in-the-mpp-mode)
 
 ### 安定性 {#stability}
 
