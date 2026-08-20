@@ -61,7 +61,7 @@ TiDB Cloudリソースを作成するには、組織の[**My TiDB**](https://tid
 
 ### TiDB Cloudのリソースを管理する {#manage-tidb-cloud-resources}
 
-**「マイ TiDB」**ページでは、対象リソースの行にある**「...」**をクリックすることで、 TiDB Cloudリソースに対して、データの削除、名前変更、インポートなどのクイックアクションを実行できます。
+**マイ TiDB**ページでは、対象リソースの行にある**...**をクリックすることで、 TiDB Cloudリソースに対して、データの削除、名前変更、インポートなどのクイックアクションを実行できます。
 
 特定のTiDB Cloudリソースに対してより多くの操作を実行したり、設定を管理したりするには、対象のリソース名をクリックして概要ページに移動してください。
 
@@ -71,7 +71,7 @@ TiDB Cloudリソースを作成するには、組織の[**My TiDB**](https://tid
 
 ### プロジェクトを確認する {#view-projects}
 
-TiDB Cloudのリソースをプロジェクトごとにグループ化して表示するには、[**My TiDB**](https://tidbcloud.com/tidbs)ページの**「プロジェクトビュー」**タブをクリックします。
+TiDB Cloudのリソースをプロジェクトごとにグループ化して表示するには、[**My TiDB**](https://tidbcloud.com/tidbs)ページの**プロジェクトビュー**タブをクリックします。
 
 > **Tip:**
 >
@@ -123,7 +123,7 @@ TiDB Cloudのリソースをプロジェクトごとにグループ化して表�
 
         </CustomContent>
 
-    -   プロジェクトがTiDB Cloud Dedicatedクラスター用に作成されている場合は、 **Create for Dedicated Cluster**オプションを選択し、プロジェクトの [顧客管理型暗号化キー（CMEK）](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)と[メンテナンスウィンドウ](/tidb-cloud/configure-maintenance-window.md)を構成して、 **「確認」**をクリックします。
+    -   プロジェクトがTiDB Cloud Dedicatedクラスター用に作成されている場合は、 **Create for Dedicated Cluster**オプションを選択し、プロジェクトの [顧客管理型暗号化キー（CMEK）](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)と[メンテナンスウィンドウ](/tidb-cloud/configure-maintenance-window.md)を構成して、 **確認**をクリックします。
 
 ### プロジェクトを管理する {#manage-a-project}
 
@@ -165,4 +165,4 @@ TiDB Xインスタンスを移動するには、以下の手順を実行して�
     -   TiDB Xインスタンスをプロジェクトに移動するには、 **To a project**を選択し、ドロップダウンリストから対象のプロジェクトを選択します。
     -   TiDB X インスタンスをどのプロジェクトからも移動するには、 **Outside any project**を選択します。
 
-4.  **「移動」**をクリックします。
+4.  **移動**をクリックします。

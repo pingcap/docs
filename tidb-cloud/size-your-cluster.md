@@ -211,7 +211,7 @@ Standardストレージタイプは、AWS でホストされ、TiDB バージョ
 
 #### PerformanceストレージとPlusストレージ {#performance-and-plus-storage}
 
-PerformanceストレージとPlusストレージは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、これらの2つのストレージタイプは、AWSにデプロイされたクラスターに対してのみ、リクエストに応じて利用可能です。PerformanceストレージまたはPlusストレージをリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **Support Tickets**」をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、「**説明」**フィールドに「TiKVストレージタイプを申請」と入力して、 **「送信」**をクリックします。
+PerformanceストレージとPlusストレージは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、これらの2つのストレージタイプは、AWSにデプロイされたクラスターに対してのみ、リクエストに応じて利用可能です。PerformanceストレージまたはPlusストレージをリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**？**をクリックし、 **Support Tickets**」をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、「**説明」**フィールドに「TiKVストレージタイプを申請」と入力して、 **送信**をクリックします。
 
 ## サイズTiFlash {#size-tiflash}
 
@@ -269,4 +269,4 @@ Basicストレージは、パフォーマンスとコスト効率のバランス
 
 #### Plusストレージ {#plus-storage}
 
-Plusストレージは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、このストレージタイプは、AWSにデプロイされたクラスターに対してのみ、リクエストに応じて利用可能です。リクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **「説明」**フィールドに「 TiFlashストレージタイプを申請」と入力して、 **「送信」を**クリックしてください。
+Plusストレージは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、このストレージタイプは、AWSにデプロイされたクラスターに対してのみ、リクエストに応じて利用可能です。リクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**？**をクリックし、 **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **説明**フィールドに「 TiFlashストレージタイプを申請」と入力して、 **「送信」を**クリックしてください。
