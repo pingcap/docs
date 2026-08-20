@@ -205,7 +205,7 @@ TiDB Cloudで再利用される一部の TiDB ドキュメントには、 `Custo
 
 [TiDBドキュメント](https://docs.pingcap.com/tidb/stable)は、SQL構文の理解を助けるために、多くのSQL概要図を提供しています。例えば、 `ALTER INDEX`文[ここ](https://docs.pingcap.com/tidb/stable/sql-statement-alter-index#synopsis)の概要図があります。
 
-これら概要図のソースは[拡張バッカスナウア記法（EBNF）](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form)を使用して記述されています。SQL文のEBNFコードを準備する際には、コードを[https://kennytm.github.io/website-docs/dist/](https://kennytm.github.io/website-docs/dist/)にコピーして**「レンダリング」**をクリックすることで、EBNF図を簡単にプレビューできます。
+これら概要図のソースは[拡張バッカスナウア記法（EBNF）](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form)を使用して記述されています。SQL文のEBNFコードを準備する際には、コードを[https://kennytm.github.io/website-docs/dist/](https://kennytm.github.io/website-docs/dist/)にコピーして**レンダリング**をクリックすることで、EBNF図を簡単にプレビューできます。
 
 ## 接触 {#contact}
 

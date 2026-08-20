@@ -84,7 +84,7 @@ Apache PulsarサービスにパブリックIPアクセスを提供する場合�
 ## ステップ1. Apache PulsarのChangefeedページを開きます。 {#step-1-open-the-changefeed-page-for-apache-pulsar}
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
-2.  変更フィードイベントの発生源となるTiDBクラスタのクラスタ概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「変更フィード」**をクリックします。
+2.  変更フィードイベントの発生源となるTiDBクラスタのクラスタ概要ページに移動し、左側のナビゲーションペインで**データ** &gt; **変更フィード**をクリックします。
 3.  **Create Changefeed**をクリックします。
 
 ## ステップ2. changefeedの送信先を設定します {#step-2-configure-the-changefeed-destination}
@@ -94,7 +94,7 @@ Apache PulsarサービスにパブリックIPアクセスを提供する場合�
 2.  **接続**セクションに、以下の情報を入力してください。
 
     -   **Destination Protocol**： **Pulsar**または**Pulsar+SSL**を選択してください。
-    -   **Connectivity Method**：Pulsarエンドポイントへの接続方法に応じて、 **VPC Peering**または**「パブリック」**を選択してください。
+    -   **Connectivity Method**：Pulsarエンドポイントへの接続方法に応じて、 **VPC Peering**または**パブリック**を選択してください。
     -   **Pulsar Broker** : Pulsar Broker のエンドポイントを入力します。ポートとドメインまたは IP アドレスはコロンで区切ります。例`example.org:6650` 。
 
 3.  **認証**セクションで、Pulsarの認証設定に応じて**Auth Type**オプションを選択します。選択したオプションに基づいて、要求された認証情報を入力します。
@@ -107,7 +107,7 @@ Apache PulsarサービスにパブリックIPアクセスを提供する場合�
     -   **Operation Timeout**：TiCDC Pulsarクライアントを使用して操作を開始する際のタイムアウト時間を調整します。
     -   **Send Timeout**：TiCDC Pulsarプロデューサーがメッセージを送信するまでのタイムアウトを調整します。
 
-5.  **「次へ」**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のステップに進みます。
+5.  **次へ**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のステップに進みます。
 
 ## ステップ3. 変更フィードのレプリケーションを設定する {#step-3-configure-the-changefeed-replication}
 
@@ -187,7 +187,7 @@ Apache PulsarサービスにパブリックIPアクセスを提供する場合�
 
 7.  **Split Event**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクにおける、主キーまたは一意キーを分割したUPDATEイベント](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
 
-8.  **「次へ」**をクリックしてください。
+8.  **次へ**をクリックしてください。
 
 ## ステップ4．仕様の設定とレビュー {#step-4-configure-specification-and-review}
 
@@ -199,4 +199,4 @@ Apache PulsarサービスにパブリックIPアクセスを提供する場合�
 2.  変更フィードの設定をすべて確認してください。
 
     -   問題が見つかった場合は、前の手順に戻って問題を解決できます。
-    -   問題がなければ、 **「送信」**をクリックして変更フィードを作成できます。
+    -   問題がなければ、 **送信**をクリックして変更フィードを作成できます。

@@ -116,7 +116,7 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
     - **Data Format**：**SQL**または**CSV**を選択してください。
     - **圧縮**：**Gzip**、**Snappy**、**Zstd**、または**None**を選択してください。
 
-4.  **「エクスポート」**をクリックします。
+4.  **エクスポート**をクリックします。
 
 ### データをAzure Blob Storageにエクスポートする {#export-data-to-azure-blob-storage}
 
@@ -140,7 +140,7 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
     - **Data Format**：**SQL** または **CSV** を選択してください。
     - **圧縮**：**Gzip**、**Snappy**、**Zstd**、または **None** を選択してください。
 
-4.  **「エクスポート」**をクリックします。
+4.  **エクスポート**をクリックします。
 
 ### データをAlibaba Cloud OSSにエクスポート {#export-data-to-alibaba-cloud-oss}
 
@@ -164,7 +164,7 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
     - **Data Format**：**SQL** または **CSV** を選択してください。
     - **圧縮**：**Gzip**、**Snappy**、**Zstd**、または **None** を選択してください。
 
-4.  **「エクスポート」**をクリックします。
+4.  **エクスポート**をクリックします。
 
 ### エクスポートタスクをキャンセルする {#cancel-an-export-task}
 

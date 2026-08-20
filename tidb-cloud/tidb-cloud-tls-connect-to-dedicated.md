@@ -24,7 +24,7 @@ TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの
 
 1.  プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、 TiDB Cloud Dedicated クラスターの名前をクリックして概要ページに移動します。
 
-2.  右上隅の**「接続」**をクリックします。ダイアログが表示されます。
+2.  右上隅の**接続**をクリックします。ダイアログが表示されます。
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**Connection Type**を選択します。
 
