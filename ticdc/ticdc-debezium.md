@@ -27,7 +27,7 @@ Kafkaをダウンストリームシンクとして使用する場合は、 `sink
 </div>
 <div label="Classic TiCDC architecture">
 
-For the classic TiCDC architecture, the Debezium protocol only supports Row Changed events and directly ignores DDL events and WATERMARK events. A Row changed event represents a data change in a row. When a row changes, the Row Changed event is sent, including relevant information about the row both before and after the change. A WATERMARK event marks the replication progress of a table, indicating that all events earlier than the watermark have been sent to the downstream.
+従来の TiCDC アーキテクチャでは、Debezium プロトコルは行変更イベントのみをサポートし、DDL イベントと WATERMARK イベントは無視されます。行変更イベントは、行のデータ変更を表します。行が変更されると、行変更イベントが送信され、変更前後の行に関する情報が含まれます。WATERMARK イベントはテーブルのレプリケーションの進行状況を示し、ウォーターマークより前のすべてのイベントが下流に送信済みであることを示します。
 
 </div>
 </SimpleTab>
