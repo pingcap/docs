@@ -158,7 +158,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 -   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデータインポートエクスペリエンスを向上させます。
 
-    -   **インポート**ページのレイアウトをより分かりやすいものに改善する。
+    -   **インポート**ページのレイアウトをより分かりやすいものに改善します。
     -   TiDB Cloud Serverless クラスターとTiDB Cloud Dedicatedクラスターのインポート手順を統一します。
     -   AWSロールARNの作成プロセスを簡素化し、接続設定を容易にします。
 
@@ -230,7 +230,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     詳細については、 [定義済みのシステムエンドポイントを追加します](/tidb-cloud/data-service-manage-endpoint.md#add-a-predefined-system-endpoint)を参照してください。
 
--   スロークエリのデータストレージを強化する。
+-   スロークエリのデータストレージを強化します。
 
     [TiDB Cloudコンソール](https://tidbcloud.com)におけるクエリアクセスの遅延は、より安定し、データベースのパフォーマンスに影響を与えなくなりました。
 
@@ -428,7 +428,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **全般的な変更**
 
--   プロジェクトにおけるCIDR構成を強化する。
+-   プロジェクトにおけるCIDR構成を強化します。
 
     -   各プロジェクトごとに、地域レベルのCIDRを直接設定できます。
     -   より幅広いCIDR値の中から、CIDR構成を選択できます。
