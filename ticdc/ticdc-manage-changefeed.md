@@ -23,7 +23,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 ## レプリケーションタスクリストをクエリする {#query-the-replication-task-list}
 
-レプリケーションタスク リストを照会するには、次のコマンドを実行します。
+レプリケーションタスクリストを照会するには、次のコマンドを実行します。
 
 ```shell
 cdc cli changefeed list --server=http://10.0.10.25:8300

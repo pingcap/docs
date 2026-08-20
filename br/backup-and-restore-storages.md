@@ -87,7 +87,7 @@ tiup br backup full -u "${PD_IP}:2379" \
 --storage "azure://external/backup-20220915?account-name=${account-name}&account-key=${account-key}"
 ```
 
-**Azure Blob Storage のスナップショット バックアップデータから`test`データベースを復元します。**
+**Azure Blob Storage のスナップショットバックアップデータから`test`データベースを復元します。**
 
 ```shell
 tiup br restore db --db test -u "${PD_IP}:2379" \
@@ -104,10 +104,10 @@ tiup br restore db --db test -u "${PD_IP}:2379" \
 <SimpleTab groupId="storage">
 <div label="Amazon S3" value="amazon">
 
-バックアップの前に、S3 上のバックアップ ディレクトリにアクセスするための次の権限を設定します。
+バックアップの前に、S3 上のバックアップディレクトリにアクセスするための次の権限を設定します。
 
--   バックアップ中に`s3:DeleteObject`およびバックアップ &amp; リストア ( BR ) `s3:AbortMultipartUpload`バックアップ ディレクトリ`s3:GetObject`アクセスするための最小権限: `s3:ListBucket` 、および`s3:PutObject`
--   復元中に TiKV とBRがバックアップ ディレクトリにアクセスするための最小権限: `s3:ListBucket`と`s3:GetObject` 。
+-   バックアップ中に`s3:DeleteObject`およびバックアップ &amp; リストア ( BR ) `s3:AbortMultipartUpload`バックアップディレクトリ`s3:GetObject`アクセスするための最小権限: `s3:ListBucket` 、および`s3:PutObject`
+-   復元中に TiKV とBRがバックアップディレクトリにアクセスするための最小権限: `s3:ListBucket`と`s3:GetObject` 。
 
 バックアップディレクトリをまだ作成していない場合は、 [バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照して指定のリージョンに S3 バケットを作成してください。必要に応じて、 [フォルダを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してバケット内にフォルダを作成することもできます。
 

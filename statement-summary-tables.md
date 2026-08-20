@@ -23,7 +23,7 @@ SQL のパフォーマンス問題をより適切に処理するために、MySQ
 
 ## `statements_summary` {#statements_summary}
 
-`statements_summary`は`information_schema`内のシステムテーブルです。 `statements_summary`は、SQL ステートメントをリソースグループ、SQL ダイジェスト、およびプラン ダイジェストごとにグループ化し、各 SQL カテゴリの統計情報を提供します。
+`statements_summary`は`information_schema`内のシステムテーブルです。 `statements_summary`は、SQL ステートメントをリソースグループ、SQL ダイジェスト、およびプランダイジェストごとにグループ化し、各 SQL カテゴリの統計情報を提供します。
 
 ここでいう「SQLダイジェスト」とは、スローログで使用されるものと同じ意味で、正規化されたSQLステートメントから計算される一意の識別子です。正規化プロセスでは定数や空白文字は無視され、大文字と小文字は区別されません。したがって、構文が一貫しているステートメントは同じダイジェストを持ちます。例：
 

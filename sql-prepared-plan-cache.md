@@ -64,7 +64,7 @@ LRUリンクリストは、 `Prepare` / `Execute`セッションをまたいで�
 >
 > [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)システム変数は、 `Prepare` / `Execute`クエリの実行プランキャッシュのみを制御し、通常のクエリは制御しません。通常のクエリの実行プランキャッシュについては、 [SQL 非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)を参照してください。
 
-実行プランキャッシュ機能を有効にすると、セッション レベルのシステム変数[`last_plan_from_cache`](/system-variables.md#last_plan_from_cache-new-in-v40)を使用して、前の`Execute`ステートメントがキャッシュされた実行計画を使用したかどうかを確認できます。次に例を示します。
+実行プランキャッシュ機能を有効にすると、セッションレベルのシステム変数[`last_plan_from_cache`](/system-variables.md#last_plan_from_cache-new-in-v40)を使用して、前の`Execute`ステートメントがキャッシュされた実行計画を使用したかどうかを確認できます。次に例を示します。
 
 ```sql
 MySQL [test]> create table t(a int);

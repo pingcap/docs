@@ -101,7 +101,7 @@ SELECT @@tidb_last_txn_info;
 
 <CustomContent platform="tidb">
 
--   [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800)システム変数は、パイプライン DML がセッション レベルで有効かどうかを制御します。
+-   [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800)システム変数は、パイプライン DML がセッションレベルで有効かどうかを制御します。
 -   [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) `"bulk"`に設定すると、 [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600)構成項目は`false`に設定されているかのように動作します。
 -   パイプライン DML を使用して実行されるトランザクションは、TiDB 構成項目[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)で指定されたサイズ制限の対象ではありません。
 -   パイプラインDMLを使用して実行される大規模なトランザクションでは、トランザクションの実行時間が長くなる可能性があります。このような場合、トランザクションロックの最大TTLは[`max-txn-ttl`](/tidb-configuration-file.md#max-txn-ttl)または24時間のいずれか大きい方の値になります。
@@ -111,7 +111,7 @@ SELECT @@tidb_last_txn_info;
 
 <CustomContent platform="tidb-cloud">
 
--   [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800)システム変数は、パイプライン DML がセッション レベルで有効かどうかを制御します。
+-   [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800)システム変数は、パイプライン DML がセッションレベルで有効かどうかを制御します。
 -   [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) `"bulk"`に設定すると、 [`pessimistic-auto-commit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#pessimistic-auto-commit-new-in-v600)構成項目は`false`に設定されているかのように動作します。
 -   パイプライン DML を使用して実行されるトランザクションは、TiDB 構成項目[`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)で指定されたサイズ制限の対象ではありません。
 -   パイプラインDMLを使用して実行される大規模なトランザクションでは、トランザクションの実行時間が長くなる可能性があります。このような場合、トランザクションロックの最大TTLは[`max-txn-ttl`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max-txn-ttl)または24時間のいずれか大きい方の値になります。

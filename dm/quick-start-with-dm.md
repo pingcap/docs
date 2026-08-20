@@ -309,7 +309,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
 
     > **Note:**
     >
-    > この手順では、 [ステップ2](#step-2-prepare-a-source-database-optional)で説明されているように、ソース データベースにレプリケーション権限を持つ`tidb-dm`ユーザーがすでに作成されていることを前提としています。
+    > この手順では、 [ステップ2](#step-2-prepare-a-source-database-optional)で説明されているように、ソースデータベースにレプリケーション権限を持つ`tidb-dm`ユーザーがすでに作成されていることを前提としています。
 
     ```yaml
     source-id: "mysql-01"
@@ -424,7 +424,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
 
     > **Note:**
     >
-    > すべての MySQL データファイルを削除する場合は、MySQL データ ディレクトリ (通常は`/opt/homebrew/var/mysql`にあります) を削除します。
+    > すべての MySQL データファイルを削除する場合は、MySQL データディレクトリ (通常は`/opt/homebrew/var/mysql`にあります) を削除します。
 
     </div>
 
@@ -439,7 +439,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
 
     > **Note:**
     >
-    > すべての MySQL データファイルを削除する場合は、MySQL データ ディレクトリ (通常は`/var/lib/mysql`にあります) を削除します。
+    > すべての MySQL データファイルを削除する場合は、MySQL データディレクトリ (通常は`/var/lib/mysql`にあります) を削除します。
 
     </div>
 
@@ -455,7 +455,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
 
     > **Note:**
     >
-    > すべての MySQL データファイルを削除する場合は、MySQL データ ディレクトリ (通常は`/var/lib/mysql`にあります) を削除します。
+    > すべての MySQL データファイルを削除する場合は、MySQL データディレクトリ (通常は`/var/lib/mysql`にあります) を削除します。
 
     </div>
 

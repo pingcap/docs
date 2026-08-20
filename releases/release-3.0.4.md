@@ -23,7 +23,7 @@ TiDB Ansible バージョン: 3.0.4
 -   動作の変更
     -   デフォルト値の`txn-local-latches.enable`を`false`に更新して、TiDB のローカルトランザクションの競合をチェックするデフォルトの動作を無効にします。
     -   TiDBにグローバルスコープのシステム変数を`tidb_txn_mode`追加し、悲観的ロックの使用を許可します。ただし、TiDBはデフォルトで依然として楽観的ロックを採用していることに注意してください。
-    -   TiDB スロー クエリ ログの`Index_ids`フィールドを`Index_names`に置き換えて、スロー クエリ ログの使いやすさを向上させます。
+    -   TiDB スロークエリ ログの`Index_ids`フィールドを`Index_names`に置き換えて、スロークエリ ログの使いやすさを向上させます。
     -   TiDB構成ファイルに`split-region-max-num`パラメータを追加して、 `SPLIT TABLE`構文で許可されるリージョンの最大数を変更します。
     -   SQL実行がメモリ制限を超えたときにリンクを切断する代わりに`Out Of Memory Quota`エラーを返します
     -   誤操作を避けるため、TiDBの列の`AUTO_INCREMENT`の属性の削除を禁止します。この属性を削除するには、 `tidb_allow_remove_auto_inc`のシステム変数を変更します。
@@ -52,7 +52,7 @@ TiDB Ansible バージョン: 3.0.4
     -   Limit演算子を`IndexLookUpReader`実行ロジックにプッシュすることで、 `select ... limit ... offset ...`文の実行パフォーマンスを最適化します。 [＃12378](https://github.com/pingcap/tidb/pull/12378)
 -   SQL実行エンジン
     -   `PREPARED`文が正しく実行されなかった場合に、SQL文をログに出力します[＃12191](https://github.com/pingcap/tidb/pull/12191)
-    -   `UNIX_TIMESTAMP`関数を使用してパーティショニング実装する場合にパーティション プルーニングをサポートする [＃12169](https://github.com/pingcap/tidb/pull/12169)
+    -   `UNIX_TIMESTAMP`関数を使用してパーティショニング実装する場合にパーティションプルーニングをサポートする [＃12169](https://github.com/pingcap/tidb/pull/12169)
     -   `AUTO_INCREMENT` `MAX int64`と`MAX uint64`誤って割り当てた場合にエラーが報告されない問題を修正しました[＃12162](https://github.com/pingcap/tidb/pull/12162)
     -   `SHOW TABLE … REGIONS`と`SHOW TABLE .. INDEX … REGIONS`構文に`WHERE`句を追加する[＃12123](https://github.com/pingcap/tidb/pull/12123)
     -   SQL実行がメモリ制限を超えたときにリンクを切断する代わりに`Out Of Memory Quota`エラーを返す [＃12127](https://github.com/pingcap/tidb/pull/12127)

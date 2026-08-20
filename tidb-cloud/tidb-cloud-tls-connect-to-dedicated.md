@@ -26,7 +26,7 @@ TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの
 
 2.  右上隅の**「接続」**をクリックします。ダイアログが表示されます。
 
-3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**Connection Type**を選択します。
+3.  接続ダイアログで、 **[接続タイプ]**ドロップダウンリストから**Connection Type**を選択します。
 
     IPアクセスリストを設定していない場合は、初回接続前に**Configure IP Access List**をクリックして設定してください。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
 

@@ -103,7 +103,7 @@ CREATE TABLE `books` (
     SELECT title, published_at FROM books WHERE title = 'database';
     ```
 
-    次のクエリ ステートメントでは結合インデックス`(title, published_at)`を使用できますが、インデックスのない列をクエリするための追加コストが発生し、TiDB はインデックス データに格納されている参照 (通常は主キー情報) に従って行データをクエリする必要があります。
+    次のクエリステートメントでは結合インデックス`(title, published_at)`を使用できますが、インデックスのない列をクエリするための追加コストが発生し、TiDB はインデックスデータに格納されている参照 (通常は主キー情報) に従って行データをクエリする必要があります。
 
     ```sql
     SELECT * FROM books WHERE title = 'database';

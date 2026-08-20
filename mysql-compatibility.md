@@ -160,7 +160,7 @@ TiDB は[PrometheusとGrafana](/tidb-monitoring-api.md)の組み合わせを利�
 
 <CustomContent platform="tidb-cloud">
 
-TiDB Cloudのパフォーマンス メトリックを確認するには、 TiDB Cloudコンソールのクラスター概要ページを確認するか、 [サードパーティ製監視ツールとの連携](/tidb-cloud/third-party-monitoring-integrations.md)を使用します。ほとんどの [パフォーマンススキーマテーブル](/performance-schema/performance-schema.md)TiDB で空の結果を返します。
+TiDB Cloudのパフォーマンスメトリックを確認するには、 TiDB Cloudコンソールのクラスター概要ページを確認するか、 [サードパーティ製監視ツールとの連携](/tidb-cloud/third-party-monitoring-integrations.md)を使用します。ほとんどの [パフォーマンススキーマテーブル](/performance-schema/performance-schema.md)TiDB で空の結果を返します。
 
 </CustomContent>
 

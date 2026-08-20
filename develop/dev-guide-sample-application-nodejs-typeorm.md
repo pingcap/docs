@@ -109,7 +109,7 @@ npm install @types/node ts-node typescript --save-dev
 
     > **Note**
     >
-    > TiDB Cloud StarterおよびTiDB Cloud Essentialの場合、パブリック エンドポイントを使用する際には`TIDB_ENABLE_SSL`を介して TLS 接続を有効にする**必要があります**。
+    > TiDB Cloud StarterおよびTiDB Cloud Essentialの場合、パブリックエンドポイントを使用する際には`TIDB_ENABLE_SSL`を介して TLS 接続を有効にする**必要があります**。
 
 7.  `.env`ファイルを保存します。
 

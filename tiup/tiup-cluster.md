@@ -125,7 +125,7 @@ tidb_servers:
 tiup cluster deploy -p prod-cluster v8.5.4 /tmp/topology.yaml
 ```
 
-実行中に、 TiUP はトポロジーを再度確認するように要求し、ターゲットマシンのルート パスワードを要求します (フラグ`-p`はパスワードの入力を意味します)。
+実行中に、 TiUP はトポロジーを再度確認するように要求し、ターゲットマシンのルートパスワードを要求します (フラグ`-p`はパスワードの入力を意味します)。
 
 ```bash
 Please confirm your topology:
@@ -644,7 +644,7 @@ CPUスレッド数チェック、メモリサイズチェック、ディスク�
 -   認証にSSHプラグインを使用するには
 -   カスタマイズされたSSHクライアントを使用するには
 
-次に、 `--ssh=system`コマンドライン フラグを使用して、システムネイティブのコマンドライン ツールを有効にできます。
+次に、 `--ssh=system`コマンドライン フラグを使用して、システムネイティブのコマンドラインツールを有効にできます。
 
 -   クラスターをデプロイ: `tiup cluster deploy <cluster-name> <version> <topo> --ssh=system` . `<cluster-name>`にクラスターの名前、 `<version>`にデプロイする TiDB バージョン ( `v8.5.4`など)、 `<topo>`にトポロジ ファイルを入力します。
 -   クラスターを開始する: `tiup cluster start <cluster-name> --ssh=system`

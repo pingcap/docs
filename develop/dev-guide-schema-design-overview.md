@@ -48,7 +48,7 @@ TiDBには`test`という名前のデフォルトデータベースが付属し�
 
 #### 専門索引 {#specialized-indexes}
 
-さまざまなユーザー シナリオのクエリパフォーマンスを向上させるために、TiDB はいくつかの特殊なタイプのインデックスを提供します。各タイプの詳細については、[インデックスと制約](/basic-features.md#indexing-and-constraints)を参照してください。
+さまざまなユーザーシナリオのクエリパフォーマンスを向上させるために、TiDB はいくつかの特殊なタイプのインデックスを提供します。各タイプの詳細については、[インデックスと制約](/basic-features.md#indexing-and-constraints)を参照してください。
 
 ### その他のサポートされている論理オブジェクト {#other-supported-logical-objects}
 

@@ -494,7 +494,7 @@ config set service-middleware rate-limit GetRegion concurrency 0
 
 ### `hot [read | write | store|  history <start_time> <end_time> [<key> <value>]]` {#hot-read--write--store--history-start_time-end_time-key-value}
 
-このコマンドを使用して、クラスターのホット スポット情報を表示します。
+このコマンドを使用して、クラスターのホットスポット情報を表示します。
 
 使用法：
 

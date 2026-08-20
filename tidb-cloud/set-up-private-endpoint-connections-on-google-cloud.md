@@ -5,7 +5,7 @@ summary: Google Cloud Private Service Connectを使用してTiDB Cloudクラス�
 
 # Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します。 {#connect-to-a-tidb-cloud-dedicated-cluster-via-google-cloud-private-service-connect}
 
-このドキュメントでは[プライベートサービス接続](https://cloud.google.com/vpc/docs/private-service-connect)を介してTiDB Cloud Dedicatedクラスターに接続する方法について説明します。 Google Cloud Private Service Connect は、Google Cloud が提供するプライベートエンドポイント サービスです。
+このドキュメントでは[プライベートサービス接続](https://cloud.google.com/vpc/docs/private-service-connect)を介してTiDB Cloud Dedicatedクラスターに接続する方法について説明します。 Google Cloud Private Service Connect は、Google Cloud が提供するプライベートエンドポイントサービスです。
 
 <CustomContent language="en,zh">
 
@@ -158,7 +158,7 @@ Google Cloudでエンドポイントを正常に作成したら、 TiDB Cloudコ
 
 ### プライベートエンドポイントの状態参照 {#private-endpoint-status-reference}
 
-プライベートエンドポイント接続を使用すると、プライベートエンドポイントまたはプライベートエンドポイント サービスのステータスが[**Private Endpoint**ページ](#prerequisites)ページに表示されます。
+プライベートエンドポイント接続を使用すると、プライベートエンドポイントまたはプライベートエンドポイントサービスのステータスが[**Private Endpoint**ページ](#prerequisites)ページに表示されます。
 
 プライベートエンドポイントの可能なステータスは、以下のように説明されます。
 
@@ -176,7 +176,7 @@ Google Cloudでエンドポイントを正常に作成したら、 TiDB Cloudコ
 
 ### TiDB Cloudでエンドポイントサービスの作成に失敗しました。どうすればよいですか？ {#tidb-cloud-fails-to-create-an-endpoint-service-what-should-i-do}
 
-エンドポイント サービスは、 **[Google Cloud Private エンドポイント接続の作成**] ページを開いて TiDB クラスターを選択すると自動的に作成されます。作成が失敗と表示される場合、または[サポートチケット](/tidb-cloud/tidb-cloud-support.md)**作成中] の**状態が長時間続く場合は、サポートに問い合わせてください。
+エンドポイントサービスは、 **[Google Cloud Private エンドポイント接続の作成**] ページを開いて TiDB クラスターを選択すると自動的に作成されます。作成が失敗と表示される場合、または[サポートチケット](/tidb-cloud/tidb-cloud-support.md)**作成中] の**状態が長時間続く場合は、サポートに問い合わせてください。
 
 ### Google Cloudでエンドポイントを作成できませんでした。どうすればよいですか？ {#fail-to-create-an-endpoint-in-google-cloud-what-should-i-do}
 

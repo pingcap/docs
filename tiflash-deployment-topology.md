@@ -33,7 +33,7 @@ TiFlashは列指向型ストレージエンジンであり、徐々に標準的�
 ### 主なパラメータ {#key-parameters}
 
 -   PD の[配置ルール](/configure-placement-rules.md)機能を有効にするには、構成テンプレートの`replication.enable-placement-rules`の値を`true`に設定します。
--   `tiflash_servers`のインスタンス レベル`"-host"`構成では、ドメイン名ではなく IP のみがサポートされます。
+-   `tiflash_servers`のインスタンスレベル`"-host"`構成では、ドメイン名ではなく IP のみがサポートされます。
 -   TiFlashパラメータの詳細な説明については、 [TiFlashコンフィグレーション](/tiflash/tiflash-configuration.md)を参照してください。
 
 > **Note:**

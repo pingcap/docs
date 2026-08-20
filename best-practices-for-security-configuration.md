@@ -1,6 +1,6 @@
 ---
 title: Best Practices for TiDB Security Configuration
-summary: 潜在的なセキュリティ リスクを軽減するために、TiDB セキュリティ構成のベストプラクティスを学習します。
+summary: 潜在的なセキュリティリスクを軽減するために、TiDB セキュリティ構成のベストプラクティスを学習します。
 ---
 
 # TiDBセキュリティ設定のベストプラクティス {#best-practices-for-tidb-security-configuration}
@@ -15,16 +15,16 @@ TiDBのセキュリティは、データの整合性と機密性を保護する�
 
 デフォルトでは、新規作成されたTiDBクラスタのrootユーザーにはパスワードが設定されていないため、潜在的なセキュリティリスクが生じます。パスワードが設定されていない場合、誰でもrootユーザーとしてTiDBデータベースにログインを試みることができ、データにアクセスして変更される可能性があります。
 
-このリスクを回避するには、デプロイメント中にルート パスワードを設定することをお勧めします。
+このリスクを回避するには、デプロイメント中にルートパスワードを設定することをお勧めします。
 
--   TiUPを使用したデプロイメントの場合は、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md#step-7-start-a-tidb-cluster)を参照して、ルート ユーザーのランダム パスワードを生成します。
+-   TiUPを使用したデプロイメントの場合は、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md#step-7-start-a-tidb-cluster)を参照して、ルートユーザーのランダム パスワードを生成します。
 -   TiDB Operatorを使用したデプロイメントの場合は、 [初期アカウントとパスワードを設定する](https://docs.pingcap.com/tidb-in-kubernetes/stable/initialize-a-cluster#set-initial-account-and-password)を参照して root パスワードを設定してください。
 
-[`--initialize-secure`](/command-line-flags-for-tidb-configuration.md#--initialize-secure)オプションを使用して、初期ルート ユーザーのネットワーク アクセスを制限することもできます。
+[`--initialize-secure`](/command-line-flags-for-tidb-configuration.md#--initialize-secure)オプションを使用して、初期ルートユーザーのネットワーク アクセスを制限することもできます。
 
 ## パスワードの複雑さのチェックを有効にする {#enable-password-complexity-checks}
 
-デフォルトでは、TiDB はパスワードの複雑さのポリシーを強制しないため、弱いパスワードや空のパスワードが使用され、セキュリティ リスクが増大する可能性があります。
+デフォルトでは、TiDB はパスワードの複雑さのポリシーを強制しないため、弱いパスワードや空のパスワードが使用され、セキュリティリスクが増大する可能性があります。
 
 データベースユーザーが強力なパスワードを作成できるようにするには、適切な[パスワードの複雑さのポリシー](/password-management.md#password-complexity-policy)ポリシーを設定することをお勧めします。例えば、パスワードに大文字、小文字、数字、特殊文字の組み合わせを含めることを要求するポリシーを設定します。パスワードの複雑さのチェックを強制することで、データベースのセキュリティを向上させ、ブルートフォース攻撃を防ぎ、内部の脅威を軽減し、規制へのコンプライアンスを確保し、データ侵害のリスクを低減し、全体的なセキュリティを強化できます。
 

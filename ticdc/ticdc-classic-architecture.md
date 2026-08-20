@@ -122,7 +122,7 @@ TiCDCは、データ複製の状態を示すために、一連のタイムスタ
 
 このタイムスタンプはTiCDCにのみ存在します。これは、このタイムスタンプより前に発生したデータ変更が下流システムに複製されていることを意味します。
 
--   テーブル CheckpointTS: TiCDC はテーブル内のデータを複製するため、テーブル checkpointTS は、CheckpointTS がテーブル レベルで複製される前に発生したすべてのデータ変更を示します。
+-   テーブル CheckpointTS: TiCDC はテーブル内のデータを複製するため、テーブル checkpointTS は、CheckpointTS がテーブルレベルで複製される前に発生したすべてのデータ変更を示します。
 -   プロセッサ CheckpointTS: プロセッサ上の最小テーブル CheckpointTS を示します。
 -   グローバル CheckpointTS: すべてのプロセッサ間の最小 CheckpointTS を示します。
 

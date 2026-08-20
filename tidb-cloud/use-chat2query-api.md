@@ -91,7 +91,7 @@ TiDB Cloudは、Chat2Queryエンドポイントを素早く呼び出すための
 
 2.  **[Show Code Example]**をクリックします。
 
-3.  表示されたダイアログ ボックスで、エンドポイントの呼び出しに使用するクラスター、データベース、および認証方法を選択し、コード例をコピーします。
+3.  表示されたダイアログボックスで、エンドポイントの呼び出しに使用するクラスター、データベース、および認証方法を選択し、コード例をコピーします。
 
     > **Note:**
     >
@@ -105,20 +105,20 @@ TiDB Cloud Data Serviceは、次の Chat2Query v3 エンドポイントと v2 �
 
 | メソッド | エンドポイント                                                                | 説明                                                                                                                                       |
 | -- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| POST | `/v3/dataSummaries`                                               | このエンドポイントは、分析に人工知能を使用して、データベース スキーマ、テーブルスキーマ、および列スキーマのデータ サマリーを生成します。                                                                   |
+| POST | `/v3/dataSummaries`                                               | このエンドポイントは、分析に人工知能を使用して、データベーススキーマ、テーブルスキーマ、および列スキーマのデータ サマリーを生成します。                                                                   |
 | GET | `/v3/dataSummaries`                                               | このエンドポイントは、データベースのすべてのデータ概要を取得します。                                                                                                       |
 | GET | `/v3/dataSummaries/{data_summary_id}`                             | このエンドポイントは、特定のデータの概要を取得します。                                                                                                              |
 | PUT | `/v3/dataSummaries/{data_summary_id}`                             | このエンドポイントは、特定のデータ サマリーを更新します。                                                                                                            |
 | PUT | `/v3/dataSummaries/{data_summary_id}/tables/{table_name}`         | このエンドポイントは、特定のデータ サマリー内の特定のテーブルの説明を更新します。                                                                                                |
 | PUT | `/v3/dataSummaries/{data_summary_id}/tables/{table_name}/columns` | このエンドポイントは、特定のデータ サマリー内の特定のテーブルの列の説明を更新します。                                                                                              |
 | POST | `/v3/knowledgeBases`                                              | このエンドポイントは新しいナレッジベースを作成します。ナレッジベース関連のエンドポイントの使用方法の詳細については、 [ナレッジベースを活用する](/tidb-cloud/use-chat2query-knowledge.md)を参照してください。              |
-| GET | `/v3/knowledgeBases`                                              | このエンドポイントはすべてのナレッジ ベースを取得します。                                                                                                            |
-| GET | `/v3/knowledgeBases/{knowledge_base_id}`                          | このエンドポイントは、特定のナレッジ ベースを取得します。                                                                                                            |
-| PUT | `/v3/knowledgeBases/{knowledge_base_id}`                          | このエンドポイントは、特定のナレッジ ベースを更新します。                                                                                                            |
-| POST | `/v3/knowledgeBases/{knowledge_base_id}/data`                     | このエンドポイントは、特定のナレッジ ベースにデータを追加します。                                                                                                        |
-| GET | `/v3/knowledgeBases/{knowledge_base_id}/data`                     | このエンドポイントは、特定のナレッジ ベースからデータを取得します。                                                                                                       |
-| PUT | `/v3/knowledgeBases/{knowledge_base_id}/data/{knowledge_data_id}` | このエンドポイントは、ナレッジ ベース内の特定のデータを更新します。                                                                                                       |
-| DELETE | `/v3/knowledgeBases/{knowledge_base_id}/data/{knowledge_data_id}` | このエンドポイントは、ナレッジ ベースから特定のデータを削除します。                                                                                                       |
+| GET | `/v3/knowledgeBases`                                              | このエンドポイントはすべてのナレッジベースを取得します。                                                                                                            |
+| GET | `/v3/knowledgeBases/{knowledge_base_id}`                          | このエンドポイントは、特定のナレッジベースを取得します。                                                                                                            |
+| PUT | `/v3/knowledgeBases/{knowledge_base_id}`                          | このエンドポイントは、特定のナレッジベースを更新します。                                                                                                            |
+| POST | `/v3/knowledgeBases/{knowledge_base_id}/data`                     | このエンドポイントは、特定のナレッジベースにデータを追加します。                                                                                                        |
+| GET | `/v3/knowledgeBases/{knowledge_base_id}/data`                     | このエンドポイントは、特定のナレッジベースからデータを取得します。                                                                                                       |
+| PUT | `/v3/knowledgeBases/{knowledge_base_id}/data/{knowledge_data_id}` | このエンドポイントは、ナレッジベース内の特定のデータを更新します。                                                                                                       |
+| DELETE | `/v3/knowledgeBases/{knowledge_base_id}/data/{knowledge_data_id}` | このエンドポイントは、ナレッジベースから特定のデータを削除します。                                                                                                       |
 | POST | `/v3/sessions`                                                    | このエンドポイントは新しいセッションを作成します。セッション関連のエンドポイントの使用方法の詳細については、 [マルチラウンドChat2Queryを開始する](/tidb-cloud/use-chat2query-sessions.md)を参照してください。         |
 | GET | `/v3/sessions`                                                    | このエンドポイントは、すべてのセッションのリストを取得します。                                                                                                          |
 | GET | `/v3/sessions/{session_id}`                                       | このエンドポイントは、特定のセッションの詳細を取得します。                                                                                                            |
@@ -128,7 +128,7 @@ TiDB Cloud Data Serviceは、次の Chat2Query v3 エンドポイントと v2 �
 | POST | `/v3/chat2data`                                                   | このエンドポイントを使用すると、データ サマリー ID と指示を提供することで、人工知能を使用して SQL ステートメントを生成および実行できます。                                                               |
 | POST | `/v3/refineSql`                                                   | このエンドポイントは、人工知能を使用して既存の SQL クエリを改良します。                                                                                                   |
 | POST | `/v3/suggestQuestions`                                            | このエンドポイントは、提供されたデータの概要に基づいて質問を提案します。                                                                                                     |
-| POST | `/v2/dataSummaries`                                               | このエンドポイントは、人工知能を使用して、データベース スキーマ、テーブルスキーマ、および列スキーマのデータ サマリーを生成します。                                                                      |
+| POST | `/v2/dataSummaries`                                               | このエンドポイントは、人工知能を使用して、データベーススキーマ、テーブルスキーマ、および列スキーマのデータ サマリーを生成します。                                                                      |
 | GET | `/v2/dataSummaries`                                               | このエンドポイントはすべてのデータ概要を取得します。                                                                                                               |
 | POST | `/v2/chat2data`                                                   | このエンドポイントを使用すると、データ サマリー ID と指示を提供することで、人工知能を使用して SQL ステートメントを生成および実行できます。                                                               |
 | GET | `/v2/jobs/{job_id}`                                               | このエンドポイントを使用すると、特定のデータ サマリー生成ジョブのステータスを照会できます。                                                                                           |
@@ -351,7 +351,7 @@ TiDB Cloud Data Serviceは、次の Chat2Query v1 エンドポイントを提供
 
 | メソッド | エンドポイント              | 説明                                                                       |
 | -- | --------------- | ------------------------------------------------------------------------ |
-| POST | `/v1/chat2data` | このエンドポイントを使用すると、ターゲット データベース名と指示を指定して、人工知能を使用して SQL ステートメントを生成および実行できます。 |
+| POST | `/v1/chat2data` | このエンドポイントを使用すると、ターゲットデータベース名と指示を指定して、人工知能を使用して SQL ステートメントを生成および実行できます。 |
 
 `/v1/chat2data`エンドポイントを直接呼び出して、SQL文を生成・実行できます。 `/v2/chat2data`と比較すると、 `/v1/chat2data`はレスポンスが速くなりますが、パフォーマンスは低くなります。
 

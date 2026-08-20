@@ -1,6 +1,6 @@
 ---
 title: Use TiDB Lightning to Import Data in Parallel
-summary: TiDB Lightningを使用する際のデータの並列インポートの概念、ユーザー シナリオ、使用法、および制限について学習します。
+summary: TiDB Lightningを使用する際のデータの並列インポートの概念、ユーザーシナリオ、使用法、および制限について学習します。
 ---
 
 # TiDB Lightningを使用してデータを並列インポートする {#use-tidb-lightning-to-import-data-in-parallel}
@@ -192,7 +192,7 @@ parallel-import = true
 
 -   ネットワーク タイムアウトなどのエラーがデータの精度に影響を与えない場合は、次の手順を実行します。
 
-    1.  チェックポイント ソース データのエラーを消去するには、失敗したすべてのノードで設定`--checkpoint-error-ignore=all`で[`checkpoint-error-ignore`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-ignore)コマンドを実行します。
+    1.  チェックポイント ソースデータのエラーを消去するには、失敗したすべてのノードで設定`--checkpoint-error-ignore=all`で[`checkpoint-error-ignore`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-ignore)コマンドを実行します。
 
     2.  チェックポイントからのデータのインポートを続行するには、これらのノードを再起動します。
 

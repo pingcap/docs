@@ -57,7 +57,7 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
     4.  **データベース監査ログストレージコンフィグレーション**ダイアログで、 **AWS IAM Policy Settings**セクションを探し、後で使用するために**TiDB Cloud Account ID**と**TiDB Cloud External ID**を記録してください。
 
-2.  AWS マネジメント コンソールで、 **IAM** &gt; **Access Management** &gt; **Policies**に移動し、 `s3:PutObject`書き込み専用権限を持つストレージバケット ポリシーが存在するかどうかを確認します。
+2.  AWS マネジメントコンソールで、 **IAM** &gt; **Access Management** &gt; **Policies**に移動し、 `s3:PutObject`書き込み専用権限を持つストレージバケット ポリシーが存在するかどうかを確認します。
 
     -   はいの場合、後で使用するために、一致したストレージバケットポリシーを記録してください。
     -   そうでない場合は、 **IAM** &gt; **Access Management** &gt; **Policies** &gt; **Create Policy**に移動し、次のポリシー テンプレートに従ってバケット ポリシーを定義します。

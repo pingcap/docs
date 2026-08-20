@@ -101,7 +101,7 @@ TiDB バージョン: 7.1.1
 
 -   PD
 
-    -   リソース マネージャーが既定のリソースグループを繰り返し初期化する問題を修正しました。 [＃6787](https://github.com/tikv/pd/issues/6787) @[glorv](https://github.com/glorv)
+    -   リソースマネージャーが既定のリソースグループを繰り返し初期化する問題を修正しました。 [＃6787](https://github.com/tikv/pd/issues/6787) @[glorv](https://github.com/glorv)
     -   SQLの配置ルールで設定された`location-labels` 、期待どおりにスケジュールされない場合がある問題を修正しました。 [＃6662](https://github.com/tikv/pd/issues/6662) @[rleungx](https://github.com/rleungx)
     -   一部のコーナーケースで冗長レプリカが自動的に修復されない問題を修正[＃6573](https://github.com/tikv/pd/issues/6573) @[nolouch](https://github.com/nolouch)
 

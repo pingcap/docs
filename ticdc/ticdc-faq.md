@@ -253,7 +253,7 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127
 
 はい。1 つのメッセージに複数の`update`または`delete`が含まれる場合があり、 `update`と`delete`共存することもあります。
 
-## TiCDC がデータを Kafka に複製する場合、TiCDC オープン プロトコルの出力でタイムスタンプ、テーブル名、スキーマ名を表示するにはどうすればよいですか? {#when-ticdc-replicates-data-to-kafka-how-do-i-view-the-timestamp-table-name-and-schema-name-in-the-output-of-ticdc-open-protocol}
+## TiCDC がデータを Kafka に複製する場合、TiCDC オープンプロトコルの出力でタイムスタンプ、テーブル名、スキーマ名を表示するにはどうすればよいですか? {#when-ticdc-replicates-data-to-kafka-how-do-i-view-the-timestamp-table-name-and-schema-name-in-the-output-of-ticdc-open-protocol}
 
 情報はKafkaメッセージのキーに含まれます。例:
 
@@ -272,9 +272,9 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127
 
 Kafka メッセージのキーの`ts` 18 ビット右に移動すると、Unix タイムスタンプを取得できます。
 
-## TiCDC オープン プロトコルは`null`どのように表現しますか? {#how-does-ticdc-open-protocol-represent-null}
+## TiCDC オープンプロトコルは`null`どのように表現しますか? {#how-does-ticdc-open-protocol-represent-null}
 
-TiCDC オープン プロトコルでは、タイプ コード`6`は`null`表します。
+TiCDC オープンプロトコルでは、タイプ コード`6`は`null`表します。
 
 | タイプ | コード | 出力例                | 注記 |
 | :-- | :-- | :----------------- | :- |
@@ -282,7 +282,7 @@ TiCDC オープン プロトコルでは、タイプ コード`6`は`null`表し
 
 詳細については[TiCDCオープンプロトコル列タイプコード](/ticdc/ticdc-open-protocol.md#column-type-code)を参照してください。
 
-## TiCDC オープン プロトコルの行変更イベントが`INSERT`イベントなのか`UPDATE`イベントなのかをどのように判断すればよいですか? {#how-can-i-tell-if-a-row-changed-event-of-ticdc-open-protocol-is-an-insert-event-or-an-update-event}
+## TiCDC オープンプロトコルの行変更イベントが`INSERT`イベントなのか`UPDATE`イベントなのかをどのように判断すればよいですか? {#how-can-i-tell-if-a-row-changed-event-of-ticdc-open-protocol-is-an-insert-event-or-an-update-event}
 
 -   `UPDATE`イベントには`"p"`と`"u"`両方のフィールドが含まれます
 -   `INSERT`イベントには`"u"`フィールドのみが含まれます
@@ -504,15 +504,15 @@ UPDATE data_table SET value = 'v3' WHERE id = 1;
 UPDATE data_table SET value = 'v1' WHERE id = 2;
 ```
 
-2 番目の`UPDATE`ステートメントを実行するときにダウンストリーム テーブルにまだ`v1`含まれている場合、 `value`列の一意キー制約に違反し、 `CDC:ErrMySQLDuplicateEntryCDC`エラーが発生します。
+2 番目の`UPDATE`ステートメントを実行するときにダウンストリームテーブルにまだ`v1`含まれている場合、 `value`列の一意キー制約に違反し、 `CDC:ErrMySQLDuplicateEntryCDC`エラーが発生します。
 
-`CDC:ErrMySQLDuplicateEntryCDC`エラーが頻繁に発生する場合は、 [`sink-uri`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)構成で`safe-mode=true`パラメータを設定することで TiCDC セーフ モードを有効にすることができます。
+`CDC:ErrMySQLDuplicateEntryCDC`エラーが頻繁に発生する場合は、 [`sink-uri`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)構成で`safe-mode=true`パラメータを設定することで TiCDC セーフモードを有効にすることができます。
 
 ```
 mysql://user:password@host:port/?safe-mode=true
 ```
 
-セーフ モードでは、TiCDC は`UPDATE`操作を`DELETE + REPLACE INTO`に分割して実行し、一意のキーの競合エラーを回避します。
+セーフモードでは、TiCDC は`UPDATE`操作を`DELETE + REPLACE INTO`に分割して実行し、一意のキーの競合エラーを回避します。
 
 ## Kafka への TiCDC レプリケーションタスクが`broken pipe`エラーで頻繁に失敗するのはなぜですか? {#why-do-ticdc-replication-tasks-to-kafka-often-fail-with-broken-pipe-errors}
 

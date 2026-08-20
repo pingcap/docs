@@ -46,7 +46,7 @@ Fields ::=
 
 ### `LOCAL` {#local}
 
-`LOCAL`を使用して、インポートするクライアント上のデータファイルを指定できます。ファイル パラメーターは、クライアント上のファイル システム パスである必要があります。
+`LOCAL`を使用して、インポートするクライアント上のデータファイルを指定できます。ファイル パラメーターは、クライアント上のファイルシステム パスである必要があります。
 
 TiDB Cloudを使用している場合、 `LOAD DATA`ステートメントを使用してローカル データファイルをロードするには、 TiDB Cloudに接続するときに接続文字列に`--local-infile`オプションを追加する必要があります。
 
@@ -192,10 +192,10 @@ IGNORE 1 LINES;
 > -   TiDB v7.0.0 以降では、 `tidb_dml_batch_size` `LOAD DATA`には影響しなくなり、TiDB は 1 つのトランザクションですべての行をコミットします。
 > -   TiDB v4.0.0 以前のバージョンからアップグレードすると、 `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`発生する場合があります。このエラーを解決するには、 `tidb.toml`ファイルの[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)値を増やすことをお勧めします。
 > -   TiDB v7.6.0 より前のバージョンでは、トランザクションでコミットされる行数に関係なく、明示的なトランザクションの[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)ステートメントによって`LOAD DATA`ロールバックされることはありません。
-> -   TiDB v7.6.0 より前のバージョンでは、TiDB トランザクション モードの構成に関係なく、 `LOAD DATA`ステートメントは常に楽観的トランザクション モードで実行されます。
+> -   TiDB v7.6.0 より前のバージョンでは、TiDB トランザクションモードの構成に関係なく、 `LOAD DATA`ステートメントは常に楽観的トランザクションモードで実行されます。
 > -   v7.6.0 以降、TiDB は他の DML ステートメントと同じ方法で`LOAD DATA` in トランザクションを処理します。
 >     -   `LOAD DATA`ステートメントは、現在のトランザクションをコミットせず、新しいトランザクションを開始しません。
->     -   `LOAD DATA`ステートメントは、TiDB トランザクション モード設定 (楽観的または悲観的トランザクション) の影響を受けます。
+>     -   `LOAD DATA`ステートメントは、TiDB トランザクションモード設定 (楽観的または悲観的トランザクション) の影響を受けます。
 >     -   トランザクション内の`LOAD DATA`のステートメントは、トランザクション内の[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)のステートメントによってロールバックできます。
 
 </CustomContent>
@@ -209,10 +209,10 @@ IGNORE 1 LINES;
 > -   v7.0.0 以降、 `tidb_dml_batch_size` `LOAD DATA`には影響しなくなり、 TiDB は 1 つのトランザクションですべての行をコミットします。
 > -   TiDB v4.0.0以前のバージョンからアップグレードすると、 `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`発生する場合があります。このエラーを解決するには、 [TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)連絡して[`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)値を増やすことができます。
 > -   TiDB v7.6.0 より前のバージョンでは、トランザクションでコミットされる行数に関係なく、明示的なトランザクションの[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)ステートメントによって`LOAD DATA`ロールバックされることはありません。
-> -   TiDB v7.6.0 より前のバージョンでは、TiDB トランザクション モードの構成に関係なく、 `LOAD DATA`ステートメントは常に楽観的トランザクション モードで実行されます。
+> -   TiDB v7.6.0 より前のバージョンでは、TiDB トランザクションモードの構成に関係なく、 `LOAD DATA`ステートメントは常に楽観的トランザクションモードで実行されます。
 > -   v7.6.0 以降、TiDB は他の DML ステートメントと同じ方法で`LOAD DATA` in トランザクションを処理します。
 >     -   `LOAD DATA`ステートメントは、現在のトランザクションをコミットせず、新しいトランザクションを開始しません。
->     -   `LOAD DATA`ステートメントは、TiDB トランザクション モード設定 (楽観的または悲観的トランザクション) の影響を受けます。
+>     -   `LOAD DATA`ステートメントは、TiDB トランザクションモード設定 (楽観的または悲観的トランザクション) の影響を受けます。
 >     -   トランザクション内の`LOAD DATA`のステートメントは、トランザクション内の[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)のステートメントによってロールバックできます。
 
 </CustomContent>

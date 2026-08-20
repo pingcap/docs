@@ -142,7 +142,7 @@ SQL実行の基本情報には、テーブル名、インデックス名、実�
 
 #### スロークエリタブ {#slow-query-tab}
 
-実行計画の実行が遅すぎる場合は、 **[Slow Query]**タブで関連するスロー クエリ レコードを確認できます。
+実行計画の実行が遅すぎる場合は、 **[Slow Query]**タブで関連するスロークエリ レコードを確認できます。
 
 ![Slow Query](/media/dashboard/dashboard-statement-plans-slow-queries.png)
 

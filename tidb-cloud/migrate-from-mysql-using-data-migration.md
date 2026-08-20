@@ -105,7 +105,7 @@ Alibaba Cloud RDSをデータソースとして使用する場合、すべての
 
 <CustomContent plan="premium">
 
--   TiDB Cloud Premium では、論理モード (デフォルト) と物理モードの両方がサポートされています。論理モードでは、MySQL ソース データベースから SQL ステートメントとしてデータをエクスポートし、ターゲットのTiDB Cloud Premium インスタンスで実行します。このとき、ロード中にリクエストキャパシティユニット (RCU) が消費されます。物理モードでは、ターゲットのTiDB Cloud Premium インスタンスで`IMPORT INTO`を使用し、ロードのスループットとコスト効率を優先する場合の大規模データセットに推奨されます。
+-   TiDB Cloud Premium では、論理モード (デフォルト) と物理モードの両方がサポートされています。論理モードでは、MySQL ソースデータベースから SQL ステートメントとしてデータをエクスポートし、ターゲットのTiDB Cloud Premium インスタンスで実行します。このとき、ロード中にリクエストキャパシティユニット (RCU) が消費されます。物理モードでは、ターゲットのTiDB Cloud Premium インスタンスで`IMPORT INTO`を使用し、ロードのスループットとコスト効率を優先する場合の大規模データセットに推奨されます。
 -   物理モードを使用し、移行ジョブが開始されたら、 TiDB Cloud PremiumインスタンスでPITR（ポイントインタイムリカバリ）を有効にしたり、変更フィードを設定したり**しないで**ください。そうしないと、移行ジョブが停止します。PITRを有効にしたり、変更フィードを設定したりする必要がある場合は、代わりに論理モードを使用してデータを移行してください。
 -   物理モードを使用する場合、既存のデータ移行が完了する前に、 TiDB Cloud Premiumインスタンスに対して2つ目の移行ジョブまたはインポートタスクを作成することはできません。
 
@@ -121,12 +121,12 @@ Alibaba Cloud RDSをデータソースとして使用する場合、すべての
 <CustomContent plan="essential">
 
 -   増分データ移行中に、移行対象のテーブルが既にターゲットデータベースに重複キーで存在する場合、エラーが報告され、移行は中断されます。この場合、MySQLソースデータが正確であることを確認する必要があります。データが正確であれば、移行ジョブの**「再開」**ボタンをクリックすると、移行ジョブはターゲットのTiDB Cloud Essentialインスタンス内の競合レコードをMySQLソースレコードに置き換えます。
--   増分データ移行 (進行中の変更をTiDB Cloud Essentialインスタンスに移行する) 中に、移行ジョブが突然のエラーから回復した場合、60 秒間セーフ モードに入ることがあります。セーフ モード中、 TiDB Cloudは`INSERT`ステートメントを`REPLACE`に、 `UPDATE`ステートメントを`DELETE`および`REPLACE`に移行し、これらのトランザクションをターゲットのTiDB Cloud Essentialインスタンスに適用して、突然のエラー中に発生したすべてのデータが安全にターゲットに到達するようにします。ソース テーブルに主キーまたは null 以外の一意インデックスがない場合、ターゲットのTiDB Cloud Essentialインスタンスで重複した行が発生する可能性があります。
+-   増分データ移行 (進行中の変更をTiDB Cloud Essentialインスタンスに移行する) 中に、移行ジョブが突然のエラーから回復した場合、60 秒間セーフモードに入ることがあります。セーフモード中、 TiDB Cloudは`INSERT`ステートメントを`REPLACE`に、 `UPDATE`ステートメントを`DELETE`および`REPLACE`に移行し、これらのトランザクションをターゲットのTiDB Cloud Essentialインスタンスに適用して、突然のエラー中に発生したすべてのデータが安全にターゲットに到達するようにします。ソーステーブルに主キーまたは null 以外の一意インデックスがない場合、ターゲットのTiDB Cloud Essentialインスタンスで重複した行が発生する可能性があります。
 
 </CustomContent>
 <CustomContent plan="dedicated">
 
--   増分データ移行 (進行中の変更をTiDB Cloud Dedicatedクラスターに移行する) 中に、移行ジョブが突然のエラーから回復した場合、60 秒間セーフ モードに入ることがあります。セーフ モード中、 TiDB Cloudは`INSERT`ステートメントを`REPLACE`に、 `UPDATE`ステートメントを`DELETE`および`REPLACE`に移行し、これらのトランザクションをターゲットのTiDB Cloud Dedicatedクラスターに適用して、突然のエラー中に発生したすべてのデータが安全にターゲットに到達するようにします。ソース テーブルに主キーまたは null 以外の一意インデックスがない場合、ターゲットのTiDB Cloud Dedicated Dedicated クラスターで重複した行が発生する可能性があります。
+-   増分データ移行 (進行中の変更をTiDB Cloud Dedicatedクラスターに移行する) 中に、移行ジョブが突然のエラーから回復した場合、60 秒間セーフモードに入ることがあります。セーフモード中、 TiDB Cloudは`INSERT`ステートメントを`REPLACE`に、 `UPDATE`ステートメントを`DELETE`および`REPLACE`に移行し、これらのトランザクションをターゲットのTiDB Cloud Dedicatedクラスターに適用して、突然のエラー中に発生したすべてのデータが安全にターゲットに到達するようにします。ソーステーブルに主キーまたは null 以外の一意インデックスがない場合、ターゲットのTiDB Cloud Dedicated Dedicated クラスターで重複した行が発生する可能性があります。
 
 -   以下のシナリオでは、移行ジョブに24時間以上かかる場合、ソースデータベースのバイナリログを削除しないでください。これにより、データ移行ツールは増分データ移行のために連続したバイナリログを取得できます。
 
@@ -137,13 +137,13 @@ Alibaba Cloud RDSをデータソースとして使用する場合、すべての
 
 <CustomContent plan="premium">
 
--   増分データ移行 (進行中の変更をTiDB Cloud Premium インスタンスに移行する) 中に、移行ジョブが突然のエラーから回復した場合、60 秒間セーフ モードに入ることがあります。セーフ モード中、 TiDB Cloudは`INSERT`ステートメントを`REPLACE`に、 `UPDATE`ステートメントを`DELETE`および`REPLACE`に移行し、これらのトランザクションをターゲットのTiDB Cloud Premium インスタンスに適用して、突然のエラー中に発生したすべてのデータが安全にターゲットに到達するようにします。ソース テーブルに主キーまたは null 以外の一意インデックスがない場合、ターゲットのTiDB Cloud Premium インスタンスで重複した行が発生する可能性があります。
+-   増分データ移行 (進行中の変更をTiDB Cloud Premium インスタンスに移行する) 中に、移行ジョブが突然のエラーから回復した場合、60 秒間セーフモードに入ることがあります。セーフモード中、 TiDB Cloudは`INSERT`ステートメントを`REPLACE`に、 `UPDATE`ステートメントを`DELETE`および`REPLACE`に移行し、これらのトランザクションをターゲットのTiDB Cloud Premium インスタンスに適用して、突然のエラー中に発生したすべてのデータが安全にターゲットに到達するようにします。ソーステーブルに主キーまたは null 以外の一意インデックスがない場合、ターゲットのTiDB Cloud Premium インスタンスで重複した行が発生する可能性があります。
 
 </CustomContent>
 
 ## 前提条件 {#prerequisites}
 
-移行する前に、データソースがサポートされているかどうかを確認し、MySQL 互換データベースでバイナリ ロギングを有効にし、ネットワーク接続を確認して、ソース データベースとターゲット<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>インスタンス データベースの両方に必要な権限を付与します。
+移行する前に、データソースがサポートされているかどうかを確認し、MySQL 互換データベースでバイナリ ロギングを有効にし、ネットワーク接続を確認して、ソースデータベースとターゲット<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>インスタンス データベースの両方に必要な権限を付与します。
 
 ### データソースとバージョンがサポートされていることを確認してください。 {#make-sure-your-data-source-and-version-are-supported}
 
@@ -178,7 +178,7 @@ TiDB Cloud Essentialのデータ移行機能は、以下のデータソースと
 
 <CustomContent plan="premium">
 
-TiDB Cloud Premium の場合、データ移行機能は次の MySQL 互換ソース データベースをサポートしており、 **MySQL は**移行ジョブ ウィザードで使用できる唯一のデータソース タイプです。サポートされている接続方法については、[ネットワーク接続を確保する](#ensure-network-connectivity)を参照してください。
+TiDB Cloud Premium の場合、データ移行機能は次の MySQL 互換ソースデータベースをサポートしており、 **MySQL は**移行ジョブ ウィザードで使用できる唯一のデータソース タイプです。サポートされている接続方法については、[ネットワーク接続を確保する](#ensure-network-connectivity)を参照してください。
 
 | データソース                             | サポートされているバージョン |
 | :--------------------------------- | :------------- |
@@ -193,7 +193,7 @@ TiDB Cloud Premium の場合、データ移行機能は次の MySQL 互換ソー
 
 ### レプリケーションのために、ソースのMySQL互換データベースでバイナリログを有効にする {#enable-binary-logs-in-the-source-mysql-compatible-database-for-replication}
 
-DM を使用して、ソースの MySQL 互換データベースからターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>に増分変更を継続的にレプリケートするには、ソース データベースでバイナリ ログを有効にするために次の構成が必要です。
+DM を使用して、ソースの MySQL 互換データベースからターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>に増分変更を継続的にレプリケートするには、ソースデータベースでバイナリ ログを有効にするために次の構成が必要です。
 
 | コンフィグレーション                       | 必要値                              | なぜ                                        |
 | :------------------------------- | :------------------------------- | :---------------------------------------- |
@@ -242,7 +242,7 @@ SHOW VARIABLES WHERE Variable_name IN
 
 <details><summary>AWS RDSまたはAurora MySQLの設定</summary>
 
-1.  AWS マネジメント コンソールで、 [Amazon RDS コンソール](https://console.aws.amazon.com/rds/)を開き、左側のナビゲーションペインで**Parameter groups**をクリックし、カスタム パラメータ グループを作成または編集します。
+1.  AWS マネジメントコンソールで、 [Amazon RDS コンソール](https://console.aws.amazon.com/rds/)を開き、左側のナビゲーションペインで**Parameter groups**をクリックし、カスタム パラメータ グループを作成または編集します。
 2.  上記の4つのパラメータを必要な値に設定してください。
 3.  パラメータグループをインスタンスまたはクラスターにアタッチし、再起動して変更を適用してください。
 4.  再起動後、インスタンスに接続し、 `SHOW VARIABLES`ステートメントを実行して構成を確認します。
@@ -399,7 +399,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
     -   **Listener port**： `3306` 。ウィザードのデフォルト値は`80`です。リスナーを作成する前に変更してください。
     -   **Target group**：対象タイプは**IP addresses**、プロトコルは**TCP** 、ポートは**3306** 、データベースと同じVPC内。RDSエンドポイントを直接登録することはできないため、代わりにデータベースのプライベートIPアドレスを登録してください。
 
-        [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、 左側のナビゲーションペインで**Network Interfaces**をクリックし、 **「説明**= `RDSNetworkInterface`と**「VPC** = ご使用の VPC」でフィルタリングします。一致するネットワーク インターフェイスに表示されている**Primary private IPv4 address**を使用します。
+        [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、 左側のナビゲーションペインで**Network Interfaces**をクリックし、 **「説明**= `RDSNetworkInterface`と**「VPC** = ご使用の VPC」でフィルタリングします。一致するネットワークインターフェイスに表示されている**Primary private IPv4 address**を使用します。
 
         > **Note:**
         >
@@ -437,7 +437,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
 
 </details>
 
-<details><summary>Azure PrivateLink と MySQL ソース データベース用のプライベートエンドポイントを設定します。</summary>
+<details><summary>Azure PrivateLink と MySQL ソースデータベース用のプライベートエンドポイントを設定します。</summary>
 
 Azure Database for MySQL - Flexible Server は、ネイティブのプライベートエンドポイントをサポートしています。MySQL インスタンスの作成時にプライベートアクセス (VNet 統合) を有効にするか、後からプライベートエンドポイントを追加することができます。
 
@@ -485,7 +485,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
     -   **Listener port**： `3306` 。ウィザードのデフォルト値は`80`です。リスナーを作成する前に変更してください。
     -   **Target group**：対象タイプは**IP addresses**、プロトコルは**TCP** 、ポートは**3306** 、データベースと同じVPC内。RDSエンドポイントを直接登録することはできないため、代わりにデータベースのプライベートIPアドレスを登録してください。
 
-        [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、 左側のナビゲーションペインで**Network Interfaces**をクリックし、 **「説明**= `RDSNetworkInterface`と**「VPC** = ご使用の VPC」でフィルタリングします。一致するネットワーク インターフェイスに表示されている**Primary private IPv4 address**を使用します。
+        [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、 左側のナビゲーションペインで**Network Interfaces**をクリックし、 **「説明**= `RDSNetworkInterface`と**「VPC** = ご使用の VPC」でフィルタリングします。一致するネットワークインターフェイスに表示されている**Primary private IPv4 address**を使用します。
 
         > **Note:**
         >
@@ -754,7 +754,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
             -   このオプションは、MySQLサーバーで移行ユーザーに対して`REQUIRE X509`または`REQUIRE SSL`が設定されている場合に必要です。
             -   このオプションは、MySQLサーバーが認証のためにクライアント証明書を必要とする場合に使用されます。
             -   証明書は以下の情報源から入手できます。
-                -   クラウド プロバイダーからダウンロードします ( [TLS証明書リンク](#end-to-end-encryption-over-tlsssl)を参照)。
+                -   クラウドプロバイダーからダウンロードします ( [TLS証明書リンク](#end-to-end-encryption-over-tlsssl)を参照)。
                 -   組織の内部認証局証明書を使用してください。
                 -   自己署名証明書（開発／テスト専用）。
 

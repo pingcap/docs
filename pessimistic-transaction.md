@@ -65,7 +65,7 @@ TiDB の悲観的なトランザクションは、MySQL のトランザクショ
 
 -   複数のトランザクションが互いのロックを取得しようとすると、デッドロックが発生します。これは自動的に検出され、いずれかのトランザクションがランダムに終了し、MySQL互換のエラーコード`1213`が返されます。
 
--   トランザクションは、新しいロックを取得するために最大`innodb_lock_wait_timeout`秒 (デフォルト: 50) 待機します。このタイムアウトに達すると、MySQL 互換のエラー コード`1205`が返されます。複数のトランザクションが同じロックを待機している場合、優先順位はトランザクションの`start ts`に基づいておおよそ決定されます。
+-   トランザクションは、新しいロックを取得するために最大`innodb_lock_wait_timeout`秒 (デフォルト: 50) 待機します。このタイムアウトに達すると、MySQL 互換のエラーコード`1205`が返されます。複数のトランザクションが同じロックを待機している場合、優先順位はトランザクションの`start ts`に基づいておおよそ決定されます。
 
 -   TiDBは、同一クラスタ内で楽観的トランザクションモードと悲観的トランザクションモードの両方をサポートしています。トランザクションの実行には、どちらのモードでも指定できます。
 
@@ -136,7 +136,7 @@ TiDBは、悲観的トランザクションモードにおいて、以下の2つ
 
     > **Note:**
     >
-    > この分離レベルでは、最新のコミットされたデータに基づいて DML 操作が実行されます。動作は MySQL と同じですが、TiDB の楽観的トランザクション モードとは異なります。 [TiDBとMySQLのリピータブルリードの違い](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)を参照してください。
+    > この分離レベルでは、最新のコミットされたデータに基づいて DML 操作が実行されます。動作は MySQL と同じですが、TiDB の楽観的トランザクションモードとは異なります。 [TiDBとMySQLのリピータブルリードの違い](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)を参照してください。
 
 -   [コミット済みを読む](/transaction-isolation-levels.md#read-committed-isolation-level)。この分離レベルは[`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)ステートメントを使用して設定できます。
 

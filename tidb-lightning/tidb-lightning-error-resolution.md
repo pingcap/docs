@@ -59,7 +59,7 @@ TiDB Lightning がインポート中にエラーに遭遇した場合、終了�
     | - | ------ | ---- | ------------------------------------- |
     | 1 | データ型   | 1000 | `lightning_task_info` `type_error_v1` |
 
--   TiDB Lightningログファイル内のエラー レポートは次のとおりです。
+-   TiDB Lightningログファイル内のエラーレポートは次のとおりです。
 
     ```shell
     [2022/03/13 05:33:57.736 +08:00] [WARN] [errormanager.go:459] ["Detect 1000 data type errors in total, please refer to table `lightning_task_info`.`type_error_v1` for more details"]

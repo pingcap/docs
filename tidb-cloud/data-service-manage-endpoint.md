@@ -174,7 +174,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
     >
     > -   パス パラメーターは SQL で直接使用できます。詳細については、[パラメータを設定する](#configure-parameters)を参照してください。
 
--   **Endpoint URL** : (読み取り専用) デフォルト URL は、対応するTiDB Cloud Starterインスタンスが配置されているリージョン、データアプリのサービス URL、およびエンドポイントのパスに基づいて自動的に生成されます。たとえば、エンドポイントのパスが`/my_endpoint/get_id`の場合、エンドポイント URL は`https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`です。データアプリのカスタム ドメインを構成するには、 [Data Serviceのカスタムドメイン](/tidb-cloud/data-service-custom-domain.md)を参照してください。
+-   **Endpoint URL** : (読み取り専用) デフォルト URL は、対応するTiDB Cloud Starterインスタンスが配置されているリージョン、データアプリのサービス URL、およびエンドポイントのパスに基づいて自動的に生成されます。たとえば、エンドポイントのパスが`/my_endpoint/get_id`の場合、エンドポイント URL は`https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`です。データアプリのカスタムドメインを構成するには、 [Data Serviceのカスタムドメイン](/tidb-cloud/data-service-custom-domain.md)を参照してください。
 
 -   **Request Method**：エンドポイントのHTTPメソッド。以下のメソッドがサポートされています。
 
@@ -218,7 +218,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 
     > **Note:**
     >
-    > データアプリにリンクされているTiDB Cloud Starterインスタンスのみがドロップダウン リストに表示されます。リンクされたTiDB Cloud Starterインスタンスを管理するには、 [リンクされたデータソースを管理する](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)を参照してください。
+    > データアプリにリンクされているTiDB Cloud Starterインスタンスのみがドロップダウンリストに表示されます。リンクされたTiDB Cloud Starterインスタンスを管理するには、 [リンクされたデータソースを管理する](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)を参照してください。
 
     SQLエディタの上部にあるドロップダウンリストから、SQLステートメントを実行するTiDB Cloud Starterインスタンスを選択します。すると、右側のペインにある**「スキーマ」**タブで、そのTiDB Cloud Starterインスタンスのすべてのデータベースを表示できます。
 

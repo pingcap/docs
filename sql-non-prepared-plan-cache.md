@@ -142,7 +142,7 @@ SHOW warnings;
 
 ## 監視 {#monitoring}
 
-非プリペアドプランキャッシュを有効にすると、次のペインでメモリ使用量、キャッシュ内のプランの数、キャッシュ ヒット率を監視できます。
+非プリペアドプランキャッシュを有効にすると、次のペインでメモリ使用量、キャッシュ内のプランの数、キャッシュヒット率を監視できます。
 
 ![non-prepare-plan-cache](/media/tidb-non-prepared-plan-cache-metrics.png)
 

@@ -264,7 +264,7 @@ io-concurrency = 5
 
 インポート処理中、各テーブルはインデックスを格納するための「インデックスエンジン」1つと、行データを格納するための複数の「データエンジン」に分割されます。
 
-`index-concurrency`インデックス エンジンの最大同時実行数を制御します。 `index-concurrency`を調整する際は、CPU が最大限に活用されるように`index-concurrency * the number of source files of each table > region-concurrency`も必ず調整してください。比率は通常 1.5 ～ 2 です。 `index-concurrency`を高く設定しすぎたり、2 (デフォルト値) より低く設定したりしないでください。 `index-concurrency`高すぎると、パイプラインが多数構築され、インデックス エンジンのインポート ステージが滞留します。
+`index-concurrency`インデックスエンジンの最大同時実行数を制御します。 `index-concurrency`を調整する際は、CPU が最大限に活用されるように`index-concurrency * the number of source files of each table > region-concurrency`も必ず調整してください。比率は通常 1.5 ～ 2 です。 `index-concurrency`を高く設定しすぎたり、2 (デフォルト値) より低く設定したりしないでください。 `index-concurrency`高すぎると、パイプラインが多数構築され、インデックスエンジンのインポート ステージが滞留します。
 
 `table-concurrency`についても同様です。 `table-concurrency * the number of source files of each table > region-concurrency`がCPUをフル活用していることを確認してください。推奨値は`region-concurrency * 4 / the number of source files of each table`前後で、4を下回らないようにしてください。
 

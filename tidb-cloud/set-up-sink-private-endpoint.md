@@ -28,17 +28,17 @@ TiDB Cloudのロールの詳細については、 [ユーザーロール](/tidb-
 
 ### ネットワーク {#network}
 
-プライベートエンドポイントは、クラウド プロバイダーの**Private Link**または**Private Service Connect**テクノロジーを活用し、VPC 内のリソースが、あたかもそれらのサービスが VPC 内で直接ホストされているかのように、プライベート IP アドレスを介して他の VPC 内のサービスに接続できるようにします。
+プライベートエンドポイントは、クラウドプロバイダーの**Private Link**または**Private Service Connect**テクノロジーを活用し、VPC 内のリソースが、あたかもそれらのサービスが VPC 内で直接ホストされているかのように、プライベート IP アドレスを介して他の VPC 内のサービスに接続できるようにします。
 
 <SimpleTab>
 <div label="AWS">
 
 changefeed ダウンストリーム サービスが AWS でホストされている場合は、次の情報を収集します。
 
--   ダウンストリーム サービスのプライベートエンドポイント サービスの名前
+-   ダウンストリーム サービスのプライベートエンドポイントサービスの名前
 -   ダウンストリーム サービスがデプロイされているアベイラビリティ ゾーン (AZ)
 
-ダウンストリーム サービスでプライベートエンドポイント サービスが利用できない場合は、手順[ステップ 2. Kafka クラスターをプライベートリンク サービスとして公開する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)に従ってロード バランサーとプライベートリンク サービスを設定します。
+ダウンストリーム サービスでプライベートエンドポイントサービスが利用できない場合は、手順[ステップ 2. Kafka クラスターをプライベートリンクサービスとして公開する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)に従ってロードバランサーとプライベートリンクサービスを設定します。
 
 </div>
 
@@ -52,9 +52,9 @@ changefeed ダウンストリーム サービスが Google Cloud でホストさ
 
 <div label="Azure">
 
-changefeed ダウンストリーム サービスが Azure でホストされている場合は、ダウンストリーム サービスのプライベートリンク サービスのエイリアスを収集します。
+changefeed ダウンストリーム サービスが Azure でホストされている場合は、ダウンストリーム サービスのプライベートリンクサービスのエイリアスを収集します。
 
-ダウンストリーム サービスでプライベートエンドポイント サービスが利用できない場合は、手順[ステップ 2. Kafka クラスターをプライベートリンク サービスとして公開する](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)に従ってロード バランサーとプライベートリンク サービスを設定します。
+ダウンストリーム サービスでプライベートエンドポイントサービスが利用できない場合は、手順[ステップ 2. Kafka クラスターをプライベートリンクサービスとして公開する](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)に従ってロードバランサーとプライベートリンクサービスを設定します。
 
 </div>
 </SimpleTab>
@@ -73,7 +73,7 @@ changefeed ダウンストリーム サービスが Azure でホストされて�
 
 ## ステップ2. 変更フィードのプライベートエンドポイントを構成する {#step-2-configure-the-private-endpoint-for-changefeeds}
 
-構成手順は、クラスターがデプロイされているクラウド プロバイダーによって異なります。
+構成手順は、クラスターがデプロイされているクラウドプロバイダーによって異なります。
 
 <SimpleTab>
 <div label="AWS">
@@ -128,7 +128,7 @@ changefeed ダウンストリーム サービスが Azure でホストされて�
 
 3.  変更フィードを作成する前に、リマインダーに従って、 TiDB Cloudの Azure サブスクリプションを承認するか、エイリアスを持つすべてのユーザーが Private Link サービスにアクセスできるようにしてください。Private Link サービスの可視性に関する詳細については、Azure ドキュメントの[制御サービスの公開](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview#control-service-exposure)を参照してください。
 
-4.  セクション[ネットワーク](#network)で収集した**プライベートリンク サービスのエイリアス**を入力します。
+4.  セクション[ネットワーク](#network)で収集した**プライベートリンクサービスのエイリアス**を入力します。
 
 5.  このプライベートエンドポイントが Apache Kafka 用に作成される場合は、 **Kafka 用のアドバタイズドリスナーを構成する**チェックボックスを選択します。
 

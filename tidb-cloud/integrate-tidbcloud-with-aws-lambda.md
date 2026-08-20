@@ -158,7 +158,7 @@ AWS CloudFormation を使用して書店プロジェクトを設定するには�
 
 スタックが作成されたら、プロジェクトは次のように使用できます。
 
-1.  AWS マネジメント コンソールで[APIゲートウェイサービス](https://console.aws.amazon.com/apigateway)サービスにアクセスし、 `TiDBCloudApiGatewayV2` API をクリックし、左側のペインで**API: TiDBCloudApiGatewayV2**をクリックします。
+1.  AWS マネジメントコンソールで[APIゲートウェイサービス](https://console.aws.amazon.com/apigateway)サービスにアクセスし、 `TiDBCloudApiGatewayV2` API をクリックし、左側のペインで**API: TiDBCloudApiGatewayV2**をクリックします。
 
 2.  **概要**ページから`Invoke URL`をコピーしてください。この URL が API エンドポイントとして機能します。
 

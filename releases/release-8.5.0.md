@@ -35,7 +35,7 @@ TiDB 8.5.0は長期サポートリリース（LTS）です。
 
     リージョン数の多いTiDBクラスタでは、ハートビート処理やタスクスケジューリングに伴うオーバーヘッドが増加するため、PDリーダーのCPU負荷が高くなる可能性があります。クラスタにTiDBインスタンスが多数存在し、リージョン情報へのリクエストが同時に多数発生すると、PDリーダーのCPU負荷はさらに高まり、PDサービスが利用できなくなる恐れがあります。
 
-    高可用性を確保するため、TiDB v7.6.0 では、PD のリージョン情報クエリ サービスの拡張性を向上させる実験的機能として Active PD Followerが導入されました。v8.5.0 では、この機能が一般提供 (GA) になります。Active PD Follower機能を有効にするには、システム変数[`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)を`ON`に設定します。この機能が有効になると、TiDB はリージョン情報要求をすべての PD サーバーに均等に分散し、PD フォロワーもリージョン要求を処理できるようになるため、PD リーダーの CPU 負荷が軽減されます。
+    高可用性を確保するため、TiDB v7.6.0 では、PD のリージョン情報クエリサービスの拡張性を向上させる実験的機能として Active PD Followerが導入されました。v8.5.0 では、この機能が一般提供 (GA) になります。Active PD Follower機能を有効にするには、システム変数[`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)を`ON`に設定します。この機能が有効になると、TiDB はリージョン情報要求をすべての PD サーバーに均等に分散し、PD フォロワーもリージョン要求を処理できるようになるため、PD リーダーの CPU 負荷が軽減されます。
 
     詳細については、 [ドキュメント](/tune-region-performance.md#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service)を参照してください。
 
@@ -81,7 +81,7 @@ TiDB 8.5.0は長期サポートリリース（LTS）です。
 
     -   `ADMIN ALTER DDL JOBS job_id THREAD = 8;` : 指定された DDL ジョブの`tidb_ddl_reorg_worker_cnt`をオンラインで調整します。
     -   `ADMIN ALTER DDL JOBS job_id BATCH_SIZE = 256;` : 指定されたジョブの`tidb_ddl_reorg_batch_size`をオンラインで調整します。
-    -   `ADMIN ALTER DDL JOBS job_id MAX_WRITE_SPEED = '200MiB';` : オンラインの各 TiKV ノードへのインデックス データの書き込みトラフィックを調整します。
+    -   `ADMIN ALTER DDL JOBS job_id MAX_WRITE_SPEED = '200MiB';` : オンラインの各 TiKV ノードへのインデックスデータの書き込みトラフィックを調整します。
 
     詳細については、 [ドキュメント](/sql-statements/sql-statement-admin-alter-ddl.md)を参照してください。
 
@@ -179,7 +179,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
     -   `information_schema.tables`のクエリのパフォーマンスを場合によっては改善する [#57295](https://github.com/pingcap/tidb/issues/57295) @[tangenta](https://github.com/tangenta)
     -   DDLジョブパラメータの動的調整をサポートする [#57526](https://github.com/pingcap/tidb/issues/57526) @[fzzf678](https://github.com/fzzf678)
     -   パーティション式のすべての列を含むグローバルインデックスをサポート [#56230](https://github.com/pingcap/tidb/issues/56230) @[Defined2014](https://github.com/Defined2014)
-    -   範囲クエリのシナリオでリスト パーティションテーブルのパーティション プルーニングをサポート [#56673](https://github.com/pingcap/tidb/issues/56673) @[Defined2014](https://github.com/Defined2014)
+    -   範囲クエリのシナリオでリストパーティションテーブルのパーティションプルーニングをサポート [#56673](https://github.com/pingcap/tidb/issues/56673) @[Defined2014](https://github.com/Defined2014)
     -   FixControl#46177 をデフォルトで有効にして、場合によってはインデックス範囲スキャンではなくフルテーブルスキャンが誤って選択される問題を修正します [#46177](https://github.com/pingcap/tidb/issues/46177) @[terry1purcell](https://github.com/terry1purcell)
     -   複数列および多値インデックスの統計情報をより有効に活用するために内部推定ロジックを改善し、多値インデックスを含む特定のクエリの推定精度を向上させます [#56915](https://github.com/pingcap/tidb/issues/56915) @[time-and-fate](https://github.com/time-and-fate)
     -   特定のシナリオにおけるフルテーブルスキャンのコスト見積もりを改善し、フルテーブルスキャンを誤って選択する可能性を低減します [#57085](https://github.com/pingcap/tidb/issues/57085) @[terry1purcell](https://github.com/terry1purcell)

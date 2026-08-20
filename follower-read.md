@@ -67,7 +67,7 @@ set [session | global] tidb_replica_read = '<target value>';
 
 より正確な読み取りレプリカ選択ポリシーを使用する場合は、次のように使用可能な構成の完全なリストを参照してください。
 
--   値を`tidb_replica_read` ～ `leader`または空の文字列に設定すると、TiDB はデフォルトの動作を維持し、すべての読み取り操作をリーダー レプリカに送信して実行します。
+-   値を`tidb_replica_read` ～ `leader`または空の文字列に設定すると、TiDB はデフォルトの動作を維持し、すべての読み取り操作をリーダーレプリカに送信して実行します。
 
 -   `tidb_replica_read`を`follower`に設定すると、TiDB は読み取り操作を実行するためにリージョンのフォロワーレプリカを選択します。リージョンにラーナーレプリカがある場合、TiDB は同じ優先度で読み取り操作の対象としてそれらも考慮します。現在のリージョンに利用可能なフォロワーレプリカまたはラーナーレプリカが存在しない場合、TiDB はリーダーレプリカから読み取ります。
 
@@ -79,8 +79,8 @@ set [session | global] tidb_replica_read = '<target value>';
 
 -   `tidb_replica_read`の値が`closest-adaptive`に設定されている場合:
 
-    -   読み取り要求の推定結果が[`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)以上の値である場合、TiDB は読み取り操作に同じアベイラビリティ ゾーン内のレプリカを選択することを優先します。 アベイラビリティ ゾーン間で読み取りトラフィックの不均衡な分散を回避するために、TiDB はすべてのオンライン TiDB および TiKV ノードのアベイラビリティ ゾーンの分散を動的に検出します。各アベイラビリティ ゾーンでは、 `closest-adaptive`構成が有効になる TiDB ノードの数は制限されており、これは常に TiDB ノードが最も少ないアベイラビリティ ゾーン内の TiDB ノードの数と同じであり、その他の TiDB ノードは自動的にリーダー レプリカから読み取ります。たとえば、TiDB ノードが 3 つのアベイラビリティ ゾーン (A、B、C) に分散されていて、A と B にそれぞれ 3 つの TiDB ノードが含まれ、C には 2 つの TiDB ノードのみが含まれる場合、各アベイラビリティ ゾーンで`closest-adaptive`構成が有効になる TiDB ノードの数は 2 であり、A および B アベイラビリティ ゾーンのそれぞれのその他の TiDB ノードは読み取り操作にリーダー レプリカを自動的に選択します。
-    -   読み取り要求の推定結果が[`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)の値未満の場合、TiDB は読み取り操作に対してリーダー レプリカのみを選択できます。
+    -   読み取り要求の推定結果が[`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)以上の値である場合、TiDB は読み取り操作に同じアベイラビリティ ゾーン内のレプリカを選択することを優先します。 アベイラビリティ ゾーン間で読み取りトラフィックの不均衡な分散を回避するために、TiDB はすべてのオンライン TiDB および TiKV ノードのアベイラビリティ ゾーンの分散を動的に検出します。各アベイラビリティ ゾーンでは、 `closest-adaptive`構成が有効になる TiDB ノードの数は制限されており、これは常に TiDB ノードが最も少ないアベイラビリティ ゾーン内の TiDB ノードの数と同じであり、その他の TiDB ノードは自動的にリーダーレプリカから読み取ります。たとえば、TiDB ノードが 3 つのアベイラビリティ ゾーン (A、B、C) に分散されていて、A と B にそれぞれ 3 つの TiDB ノードが含まれ、C には 2 つの TiDB ノードのみが含まれる場合、各アベイラビリティ ゾーンで`closest-adaptive`構成が有効になる TiDB ノードの数は 2 であり、A および B アベイラビリティ ゾーンのそれぞれのその他の TiDB ノードは読み取り操作にリーダーレプリカを自動的に選択します。
+    -   読み取り要求の推定結果が[`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)の値未満の場合、TiDB は読み取り操作に対してリーダーレプリカのみを選択できます。
 
 -   `tidb_replica_read`を`learner`に設定すると、TiDB はラーナーレプリカからデータを読み取ります。現在のリージョンで利用可能なラーナーレプリカがない場合、TiDB は利用可能なリーダーレプリカまたはフォロワーレプリカからデータを読み取ります。
 
@@ -123,7 +123,7 @@ Follower Read機能は、TiDBのスナップショット分離トランザクシ
 
 #### `leader` {#leader}
 
--   場所に関係なく、読み取りには常にリーダー レプリカを選択します。
+-   場所に関係なく、読み取りには常にリーダーレプリカを選択します。
 
 #### `closest-replicas` {#closest-replicas}
 

@@ -1,15 +1,15 @@
 ---
 title: TiDB Data Migration Table Routing
-summary: DM におけるテーブル ルーティングの使用方法と注意事項を学びます。
+summary: DM におけるテーブルルーティングの使用方法と注意事項を学びます。
 ---
 
 # TiDB Data Migrationテーブルルーティング {#tidb-data-migration-table-routing}
 
-TiDB Data Migration (DM) を使用してデータを移行する場合、テーブル ルーティングを構成して、アップストリーム MySQL または MariaDB インスタンスの特定のテーブルをダウンストリームの指定されたテーブルに移行できます。
+TiDB Data Migration (DM) を使用してデータを移行する場合、テーブルルーティングを構成して、アップストリーム MySQL または MariaDB インスタンスの特定のテーブルをダウンストリームの指定されたテーブルに移行できます。
 
 > **Note:**
 >
-> -   1 つのテーブルに対して複数の異なるルーティング ルールを構成することはサポートされていません。
+> -   1 つのテーブルに対して複数の異なるルーティングルールを構成することはサポートされていません。
 > -   セクション[テーブルルーティングを構成する](#configure-table-routing)の`rule-2`に示すように、 `CREATE/DROP SCHEMA xx`を移行するために使用されるスキーマの一致ルールを個別に構成する必要があります。
 
 ## テーブルルーティングを構成する {#configure-table-routing}
@@ -90,7 +90,7 @@ routes:
 
 -   `extract-table` : `schema-pattern`と`table-pattern`に一致するシャードテーブルの場合、DM は`table-regexp`を使用してシャードテーブル名を抽出し、 `t_`部分を除いた名前サフィックスを結合されたテーブルの`target-column` (つまり、 `c_table`列) に書き込みます。
 -   `extract-schema` : `schema-pattern`と`table-pattern`に一致するシャード スキーマの場合、DM は`schema-regexp`を使用してシャード スキーマ名を抽出し、 `test_`部分を除いた名前サフィックスを、結合されたテーブルの`target-column` (つまり、 `c_schema`列) に書き込みます。
--   `extract-source` : `schema-pattern`と`table-pattern`に一致するシャードテーブルの場合、DM はソース インスタンス情報をマージされたテーブルの`target-column` 、つまり`c_source`列に書き込みます。
+-   `extract-source` : `schema-pattern`と`table-pattern`に一致するシャードテーブルの場合、DM はソースインスタンス情報をマージされたテーブルの`target-column` 、つまり`c_source`列に書き込みます。
 
 ```yaml
   rule-1:
@@ -215,7 +215,7 @@ CREATE TABLE `test`.`t` (
 
 シャード スキーマのシナリオを想定して、2 つのアップストリーム MySQL インスタンスの`test_{1,2,3...}`.`t_{1,2,3...}`テーブルをダウンストリーム TiDB インスタンスの`test`.`t_{1,2,3...}`テーブルに移行します。
 
-アップストリーム スキーマをダウンストリーム`test`.`t_[1,2,3]`に移行するには、ルーティング ルールを 1 つだけ作成する必要があります。
+アップストリーム スキーマをダウンストリーム`test`.`t_[1,2,3]`に移行するには、ルーティングルールを 1 つだけ作成する必要があります。
 
 ```yaml
   rule-1:
@@ -225,7 +225,7 @@ CREATE TABLE `test`.`t` (
 
 ### テーブルルーティングが正しくありません {#incorrect-table-routing}
 
-次の 2 つのルーティング ルールが設定されていて、 `test_1_bak`.`t_1_bak`が`rule-1`と`rule-2`の両方に一致する場合、テーブル ルーティング設定が数値制限に違反するためエラーが報告されます。
+次の 2 つのルーティングルールが設定されていて、 `test_1_bak`.`t_1_bak`が`rule-1`と`rule-2`の両方に一致する場合、テーブルルーティング設定が数値制限に違反するためエラーが報告されます。
 
 ```yaml
   rule-1:

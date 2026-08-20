@@ -99,7 +99,7 @@ tiup dmctl --master-addr <master-addr> operate-source create ./source-mysql-01.y
     }
     ```
 
--   `source-id`がわからない場合は、 `dmctl operate-source show`コマンドを使用してソース データベース リストを確認し、そこから対応するデータソースを見つけることができます。
+-   `source-id`がわからない場合は、 `dmctl operate-source show`コマンドを使用してソースデータベース リストを確認し、そこから対応するデータソースを見つけることができます。
 
     ```bash
     tiup dmctl --master-addr <master-addr> operate-source show

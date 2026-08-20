@@ -1,6 +1,6 @@
 ---
 title: TiCDC Row Data Checksum Verification Based on Avro
-summary: TiCDC 行データ チェックサム検証の詳細な実装を紹介します。
+summary: TiCDC 行データチェックサム検証の詳細な実装を紹介します。
 ---
 
 # Avroに基づくTiCDC行データチェックサム検証 {#ticdc-row-data-checksum-verification-based-on-avro}

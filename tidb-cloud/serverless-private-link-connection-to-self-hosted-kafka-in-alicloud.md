@@ -9,10 +9,10 @@ summary: Alibaba Cloud Endpoint Service のプライベートリンク接続を�
 
 このメカニズムは次のように機能します。
 
-1.  プライベートリンク接続は、 `advertised.listeners`で定義されたブローカー外部アドレスを返すブートストラップ ポートを使用して Alibaba Cloud エンドポイント サービスに接続します。
-2.  プライベートリンク接続は、ブローカーの外部アドレスを使用してエンドポイント サービスに接続します。
-3.  Alibaba Cloud エンドポイント サービスは、リクエストをロード バランサーに転送します。
-4.  ロード バランサーは、ポート マッピングに基づいて、対応する Kafka ブローカーにリクエストを転送します。
+1.  プライベートリンク接続は、 `advertised.listeners`で定義されたブローカー外部アドレスを返すブートストラップ ポートを使用して Alibaba Cloud エンドポイントサービスに接続します。
+2.  プライベートリンク接続は、ブローカーの外部アドレスを使用してエンドポイントサービスに接続します。
+3.  Alibaba Cloud エンドポイントサービスは、リクエストをロードバランサーに転送します。
+4.  ロードバランサーは、ポート マッピングに基づいて、対応する Kafka ブローカーにリクエストを転送します。
 
 たとえば、ポート マッピングは次のようになります。
 
@@ -30,7 +30,7 @@ summary: Alibaba Cloud Endpoint Service のプライベートリンク接続を�
     -   VPCとvSwitchを管理する
     -   ECS ノードに接続して Kafka ノードを構成する
 
--   Alibaba Cloud アカウントでロードバランサーとエンドポイント サービスを設定するには、次の権限があることを確認してください。
+-   Alibaba Cloud アカウントでロードバランサーとエンドポイントサービスを設定するには、次の権限があることを確認してください。
 
     -   ロードバランサーを管理する
     -   エンドポイントサービスの管理
@@ -110,7 +110,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 **2.2. ブローカーノードを作成する**
 
-[ECSコンソール](https://ecs.console.alibabacloud.com/home#/)に進みます。vSwitch に 3 つのブローカー ノード (AZ ごとに 1 つ) を作成します。
+[ECSコンソール](https://ecs.console.alibabacloud.com/home#/)に進みます。vSwitch に 3 つのブローカーノード (AZ ごとに 1 つ) を作成します。
 
 -   vSwitch `broker-ap-southeast-1a`のブローカー 1
 
@@ -156,7 +156,7 @@ Kafka VPC を作成するには、次の手順を実行します。
     tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz
     ```
 
-3.  要塞ノードから各ブローカー ノードにバイナリをコピーします。
+3.  要塞ノードから各ブローカーノードにバイナリをコピーします。
 
     ```shell
     # Replace {broker-node1-ip} with your broker-node1 IP address
@@ -269,7 +269,7 @@ log.dirs=./data
 
 **2.4.3 Kafkaブローカーを起動する**
 
-スクリプトを作成し、それを実行して各ブローカー ノードで Kafka ブローカーを起動します。
+スクリプトを作成し、それを実行して各ブローカーノードで Kafka ブローカーを起動します。
 
 ```shell
 #!/bin/bash
@@ -581,7 +581,7 @@ b3.ap-southeast-1c.unique_name.alicloud.plc.tidbcloud.com:9095 (id: 3 rack: null
         -   **Backend Server Protocol**: `TCP`を選択
         -   **Backend servers**: 作成したサーバーグループをクリックし、バックエンドサーバー`broker-node3:39092`を追加します。
 
-2.  [NLB](https://slb.console.alibabacloud.com/nlb)に進み、ネットワーク ロード バランサーを作成します。
+2.  [NLB](https://slb.console.alibabacloud.com/nlb)に進み、ネットワーク ロードバランサーを作成します。
 
     -   **Network Type**: `Internal-facing`を選択
     -   **VPC** : `Kafka VPC`
@@ -593,7 +593,7 @@ b3.ap-southeast-1c.unique_name.alicloud.plc.tidbcloud.com:9095 (id: 3 rack: null
     -   **Instance Name**: `kafka-nlb`
     -   **Create Now**をクリックしてロードバランサーを作成します。
 
-3.  作成したロード バランサーを見つけて、 **Create Listener**をクリックして 4 つの TCP リスナーを作成します。
+3.  作成したロードバランサーを見つけて、 **Create Listener**をクリックして 4 つの TCP リスナーを作成します。
 
     -   ブートストラップサーバーグループ
 
@@ -634,9 +634,9 @@ b3.ap-southeast-1c.unique_name.alicloud.plc.tidbcloud.com:9095 (id: 3 rack: null
 
 ### 2. Alibaba Cloudエンドポイントサービスを設定する {#2-set-up-an-alibaba-cloud-endpoint-service}
 
-同じリージョンにエンドポイント サービスを設定します。
+同じリージョンにエンドポイントサービスを設定します。
 
-1.  エンドポイント サービスを作成するには、 [エンドポイントサービス](https://vpc.console.alibabacloud.com/endpointservice)に進みます。
+1.  エンドポイントサービスを作成するには、 [エンドポイントサービス](https://vpc.console.alibabacloud.com/endpointservice)に進みます。
 
     -   **Service Resource Type**: `NLB`を選択
     -   **Select Service Resource**: NLB が含まれるすべてのゾーンを選択し、前の手順で作成した NLB を選択します。
@@ -650,7 +650,7 @@ b3.ap-southeast-1c.unique_name.alicloud.plc.tidbcloud.com:9095 (id: 3 rack: null
 
 TiDB Cloudでプライベートリンク接続を作成するには、次の手順を実行します。
 
-1.  [ステップ2](#2-set-up-an-alibaba-cloud-endpoint-service)で取得した Alibaba Cloud エンドポイント サービス名 (例: `com.aliyuncs.privatelink.<region>.xxxxx` ) を使用して、 TiDB Cloudにプライベートリンク接続を作成します。
+1.  [ステップ2](#2-set-up-an-alibaba-cloud-endpoint-service)で取得した Alibaba Cloud エンドポイントサービス名 (例: `com.aliyuncs.privatelink.<region>.xxxxx` ) を使用して、 TiDB Cloudにプライベートリンク接続を作成します。
 
     詳細については[Alibaba Cloud Endpoint Service のプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-alibaba-cloud-endpoint-service-private-link-connection)を参照してください。
 
@@ -660,7 +660,7 @@ TiDB Cloudでプライベートリンク接続を作成するには、次の手�
 
 ## ステップ4. Kafka設定内の一意の名前プレースホルダーを置き換える {#step-4-replace-the-unique-name-placeholder-in-kafka-configuration}
 
-1.  Kafka ブローカー ノードに戻り、各ブローカーの`advertised.listeners`構成内の`unique_name`プレースホルダーを、前の手順で取得した実際の一意の名前に置き換えます。
+1.  Kafka ブローカーノードに戻り、各ブローカーの`advertised.listeners`構成内の`unique_name`プレースホルダーを、前の手順で取得した実際の一意の名前に置き換えます。
 2.  すべてのブローカーを再構成したら、Kafka ブローカーを 1 つずつ再起動します。
 
 これで、このプライベートリンク接続と 9092 をブートストラップ ポートとして使用し、 TiDB Cloudから Kafka クラスターに接続できるようになります。

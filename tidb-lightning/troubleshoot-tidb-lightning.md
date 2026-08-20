@@ -74,11 +74,11 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 
 **原因**: ローカルデータソースとリモートインポートデータベースのテーブルのチェックサムが異なります。このエラーには、より深刻な理由がいくつか考えられます。`checksum mismatched`を含むログを確認することで、原因をさらに特定できます。
 
-`checksum mismatched`を含む行は情報`total_kvs: x vs y`を提供します。ここで、 `x`はインポートの完了後にターゲット クラスターによって計算されたキーと値のペア (KV ペア) の数を示し、 `y`はローカル データソースによって生成されたキーと値のペアの数を示します。
+`checksum mismatched`を含む行は情報`total_kvs: x vs y`を提供します。ここで、 `x`はインポートの完了後にターゲット クラスターによって計算されたキーと値のペア (KV ペア) の数を示し、 `y`はローカルデータソースによって生成されたキーと値のペアの数を示します。
 
 -   `x`が大きい場合は、ターゲット クラスター内にさらに多くの KV ペアが存在することを意味します。
     -   インポート前にこのテーブルが空でなかったために、データのチェックサムに影響が出ている可能性があります。また、 TiDB Lightning が以前に障害を起こしてシャットダウンしたものの、正常に再起動しなかった可能性もあります。
--   `y`が大きい場合は、ローカル データソースにさらに多くの KV ペアが存在することを意味します。
+-   `y`が大きい場合は、ローカルデータソースにさらに多くの KV ペアが存在することを意味します。
     -   ターゲットデータベースのチェックサムがすべて0の場合、インポートが実行されていないことを意味します。クラスターがビジー状態のため、データを受信できない可能性があります。
     -   エクスポートされたデータに、重複した値を持つ UNIQUE KEY や PRIMARY KEY などの重複データが含まれている可能性があります。また、下流のテーブル構造では大文字と小文字が区別されないのに対し、データは大文字と小文字が区別される可能性があります。
 -   その他の考えられる理由
@@ -92,11 +92,11 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
     tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=all
     ```
 
-2.  ターゲット データベースの負荷を軽減するために、チェックポイント (変更`[checkpoint] dsn` ) を保存するために外部データベースの使用を検討してください。
+2.  ターゲットデータベースの負荷を軽減するために、チェックポイント (変更`[checkpoint] dsn` ) を保存するために外部データベースの使用を検討してください。
 
 3.  TiDB Lightningが不適切に再起動された場合は、 FAQの「 [TiDB Lightningを適切に再起動する方法](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning) 」セクションも参照してください。
 
-### `Checkpoint for … has invalid status:` (エラー コード) {#checkpoint-for--has-invalid-status-error-code}
+### `Checkpoint for … has invalid status:` (エラーコード) {#checkpoint-for--has-invalid-status-error-code}
 
 **原因**: [チェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)が有効になっており、 TiDB Lightningまたは TiKV Importer が以前に異常終了しています。偶発的なデータ破損を防ぐため、エラーが解決されるまでTiDB Lightning は起動しません。
 
@@ -120,7 +120,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 1.  ファイル全体が UTF-8 または GB-18030 になるようにスキーマを修正します。
 
-2.  ターゲット データベース内の影響を受けるテーブルを手動で`CREATE` 。
+2.  ターゲットデータベース内の影響を受けるテーブルを手動で`CREATE` 。
 
 3.  `[mydumper] character-set = "binary"`を設定するとチェックをスキップします。ただし、これにより対象データベースに文字化けが発生する可能性があります。
 
@@ -130,7 +130,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 **ソリューション**：
 
-1.  TiDB Lightningとソース データベースが同じタイム ゾーンを使用していることを確認します。
+1.  TiDB Lightningとソースデータベースが同じタイム ゾーンを使用していることを確認します。
 
     TiDB Lightning を直接実行する場合、 `$TZ`環境変数を使用してタイムゾーンを強制できます。
 

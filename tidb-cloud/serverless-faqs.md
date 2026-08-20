@@ -49,7 +49,7 @@ TiDB Cloud StarterをGoogle CloudやAzureを含む他のクラウドプラット
 
 ### TiDB Cloud Starterが利用可能になる前にDeveloper Tierクラスターを作成しました。このクラスターは引き続き使用できますか？ {#i-created-a-developer-tier-cluster-before-tidb-cloud-starter-was-available-can-i-still-use-my-cluster}
 
-はい、 Developer TierクラスターはTiDB Cloud Starter クラスターに自動的に移行されており、以前の使用状況に支障をきたすことなく、ユーザー エクスペリエンスが向上します。
+はい、 Developer TierクラスターはTiDB Cloud Starter クラスターに自動的に移行されており、以前の使用状況に支障をきたすことなく、ユーザーエクスペリエンスが向上します。
 
 ### TiDB Cloud Starter の列指向ストレージとは何ですか? {#what-is-columnar-storage-in-tidb-cloud-starter}
 
@@ -73,8 +73,8 @@ TiDB Cloud Starterの列指向ストレージは、行ベースストレージ�
 
 TiDB Cloud Starter での列指向ストレージの使用は、 TiFlashでの使用と同様です。列指向ストレージは、テーブルレベルとデータベースレベルの両方で有効にできます。
 
--   テーブル レベル: TiFlashレプリカをテーブルに割り当てて、特定のテーブルの列指向ストレージを有効にします。
--   データベース レベル: データベース全体で列型ストレージを使用するように、データベース内のすべてのテーブルに対してTiFlashレプリカを構成します。
+-   テーブルレベル: TiFlashレプリカをテーブルに割り当てて、特定のテーブルの列指向ストレージを有効にします。
+-   データベースレベル: データベース全体で列型ストレージを使用するように、データベース内のすべてのテーブルに対してTiFlashレプリカを構成します。
 
 テーブルにTiFlashレプリカが設定されると、TiDBは行ベースストレージからそのテーブルの列指向ストレージにデータを自動的に複製します。これにより、データの一貫性が確保され、分析クエリのパフォーマンスが最適化されます。
 
@@ -142,7 +142,7 @@ TiDB の必須バックグラウンドジョブが原因で、RU 使用量が急
 
 ### データのインポート中に RU 使用量が急増するのはなぜですか? {#why-do-i-observe-spikes-in-ru-usage-while-importing-data}
 
-TiDB Cloud Starter クラスターのデータ インポート プロセス中、データが正常にインポートされた場合にのみ RU 消費が発生するため、RU 使用量が急増します。
+TiDB Cloud Starter クラスターのデータインポートプロセス中、データが正常にインポートされた場合にのみ RU 消費が発生するため、RU 使用量が急増します。
 
 ### TiDB Cloud Starter で列指向ストレージを使用する場合、どのようなコストがかかりますか? {#what-costs-are-involved-when-using-columnar-storage-in-tidb-cloud-starter}
 
@@ -167,7 +167,7 @@ TPC-H ベンチマーク テストによると、列ベースのストレージ�
 ### TiDB Cloud Starter はどのようにしてセキュリティを確保しますか? {#how-does-tidb-cloud-starter-ensure-security}
 
 -   接続はTransport Layer Security（TLS）によって暗号化されます。TLSを使用してTiDB Cloud Starterに接続する方法の詳細については、 [TiDB Cloud StarterへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)をご覧ください。
--   TiDB Cloud Starter に保存されるすべてのデータは、クラスターが実行されているクラウド プロバイダーのツールを使用して保存時に暗号化されます。
+-   TiDB Cloud Starter に保存されるすべてのデータは、クラスターが実行されているクラウドプロバイダーのツールを使用して保存時に暗号化されます。
 
 ## メンテナンスに関するFAQ {#maintenance-faq}
 

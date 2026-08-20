@@ -47,7 +47,7 @@ After sending an API request, if an error occurs, the returned error message is 
 }
 ```
 
-上記の JSON 出力では、 `error_msg`エラーメッセージを示し、 `error_code`対応するエラー コードを示します。
+上記の JSON 出力では、 `error_msg`エラーメッセージを示し、 `error_code`対応するエラーコードを示します。
 
 ## TiCDCノードのステータス情報を取得する {#get-the-status-information-of-a-ticdc-node}
 
@@ -208,7 +208,7 @@ changefeed 設定を変更するには、 `pause the replication task -> modify 
 
 現在、API 経由で変更できるのは次の構成のみです。
 
-| パラメータ名 | 説明 | | :--------------------- | :-------------------------- --------------------------- | | `target_ts` | `UINT64` type。changefeed のターゲット TSO を指定します。(オプション) | | `sink_uri` | `STRING` type。レプリケーションタスクのダウンストリーム アドレス。(オプション) | | `filter_rules` | `STRING` type 配列。テーブルスキーマ フィルタリングのルール。(オプション) | | `ignore_txn_start_ts` | `UINT64` type 配列。指定された start_ts のトランザクションを無視します。(オプション) | | `mounter_worker_num` | `INT` type。マウント元スレッド番号。(オプション) | | `sink_config` | シンクの構成パラメータ。(オプション) |
+| パラメータ名 | 説明 | | :--------------------- | :-------------------------- --------------------------- | | `target_ts` | `UINT64` type。changefeed のターゲット TSO を指定します。(オプション) | | `sink_uri` | `STRING` type。レプリケーションタスクのダウンストリーム アドレス。(オプション) | | `filter_rules` | `STRING` type 配列。テーブルスキーマフィルタリングのルール。(オプション) | | `ignore_txn_start_ts` | `UINT64` type 配列。指定された start_ts のトランザクションを無視します。(オプション) | | `mounter_worker_num` | `INT` type。マウント元スレッド番号。(オプション) | | `sink_config` | シンクの構成パラメータ。(オプション) |
 
 上記のパラメータの意味はセクション[レプリケーションタスクを作成する](#create-a-replication-task)と同じです。詳細については、セクション1を参照してください。
 

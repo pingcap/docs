@@ -38,6 +38,6 @@ MySQL と同様に、TiDB はユーザー ログイン認証とパスワード�
 
 ## ユーザーのパスワードと権限を変更するにはどうすればよいですか? {#how-to-modify-the-user-password-and-privilege}
 
-TiDB でユーザー パスワードを変更する場合は、他のノードのパスワードがタイムリーに更新されない可能性がある`UPDATE mysql.user`ではなく、 `ALTER USER` (たとえば、 `ALTER USER 'test'@'localhost' IDENTIFIED BY 'mypass';` ) を使用することをお勧めします。
+TiDB でユーザーパスワードを変更する場合は、他のノードのパスワードがタイムリーに更新されない可能性がある`UPDATE mysql.user`ではなく、 `ALTER USER` (たとえば、 `ALTER USER 'test'@'localhost' IDENTIFIED BY 'mypass';` ) を使用することをお勧めします。
 
 ユーザーのパスワードと権限を変更する際は、公式の標準ステートメントを使用することをお勧めします。詳細については、 [TiDB ユーザーアカウント管理](/user-account-management.md)を参照してください。

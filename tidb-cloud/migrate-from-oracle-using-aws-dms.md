@@ -89,13 +89,13 @@ SQLスクリプトの実行が完了したら、Oracleのデータを確認し�
 
 1.  AWS DMS コンソールの[レプリケーションインスタンス](https://console.aws.amazon.com/dms/v2/home#replicationInstances)ページに移動し、対応するリージョンに切り替えます。
 
-2.  VPC 内に`dms.t3.large`を使用して AWS DMS レプリケーション インスタンスを作成します。
+2.  VPC 内に`dms.t3.large`を使用して AWS DMS レプリケーションインスタンスを作成します。
 
     ![Create AWS DMS Instance](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-8.png)
 
 > **Note:**
 >
-> TiDB Cloud Starterで動作する AWS DMS レプリケーション インスタンスを作成する詳細な手順については、 [AWS DMSをTiDB Cloudに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)を参照してください。
+> TiDB Cloud Starterで動作する AWS DMS レプリケーションインスタンスを作成する詳細な手順については、 [AWS DMSをTiDB Cloudに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)を参照してください。
 
 ## ステップ6．DMSエンドポイントを作成する {#step-6-create-dms-endpoints}
 

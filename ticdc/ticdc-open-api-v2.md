@@ -45,7 +45,7 @@ API リクエストの送信後にエラーが発生した場合、返される�
 }
 ```
 
-上記の JSON 出力では、 `error_msg`エラーメッセージを示し、 `error_code`対応するエラー コードを示します。
+上記の JSON 出力では、 `error_msg`エラーメッセージを示し、 `error_code`対応するエラーコードを示します。
 
 ## APIリストインターフェースの戻り形式 {#return-format-of-the-api-list-interface}
 

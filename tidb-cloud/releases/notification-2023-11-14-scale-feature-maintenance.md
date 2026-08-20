@@ -1,6 +1,6 @@
 ---
 title: 2023-11-14 TiDB Cloud Dedicated Scale Feature Maintenance Notification
-summary: 2023 年 11 月 14 日のTiDB Cloud Dedicated Scale 機能メンテナンスの詳細 (メンテナンス ウィンドウや影響など) について説明します。
+summary: 2023 年 11 月 14 日のTiDB Cloud Dedicated Scale 機能メンテナンスの詳細 (メンテナンスウィンドウや影響など) について説明します。
 ---
 
 # [2023-11-14] TiDB Cloud Dedicatedスケール機能メンテナンスのお知らせ {#2023-11-14-tidb-cloud-dedicated-scale-feature-maintenance-notification}
@@ -15,7 +15,7 @@ summary: 2023 年 11 月 14 日のTiDB Cloud Dedicated Scale 機能メンテナ�
 
 > **Note:**
 >
-> 2023-11-16 に更新: メンテナンス ウィンドウの終了時刻が 2023-11-16 から 2023-11-21 に延長されました。
+> 2023-11-16 に更新: メンテナンスウィンドウの終了時刻が 2023-11-16 から 2023-11-21 に延長されました。
 
 ## インパクト {#impact}
 

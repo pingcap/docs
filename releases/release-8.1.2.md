@@ -120,7 +120,7 @@ TiDB バージョン: 8.1.2
     -   削除されたリソースグループが監視パネルに引き続き表示される問題を修正しました [＃8716](https://github.com/tikv/pd/issues/8716) @[AndreMouche](https://github.com/AndreMouche)
     -   マイクロサービスモードでPDリーダーが切り替えられたときにスケジューリングサーバーでデータ競合が発生する可能性がある問題を修正しました [＃8538](https://github.com/tikv/pd/issues/8538) @[lhy1024](https://github.com/lhy1024)
     -   `evict-leader-scheduler`で間違ったパラメータを使用すると、PD がエラーを正しく報告せず、一部のスケジューラが利用できなくなる問題を修正しました[＃8619](https://github.com/tikv/pd/issues/8619) @[rleungx](https://github.com/rleungx)
-    -   リソースグループ セレクターがどのパネルでも有効にならない問題を修正しました [＃56572](https://github.com/pingcap/tidb/issues/56572) @[glorv](https://github.com/glorv)
+    -   リソースグループセレクターがどのパネルでも有効にならない問題を修正しました [＃56572](https://github.com/pingcap/tidb/issues/56572) @[glorv](https://github.com/glorv)
 
 -   TiFlash
 

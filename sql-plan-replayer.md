@@ -37,7 +37,7 @@ TiDB は、 `sql-statement`に基づいて、次のオンサイト情報を整�
 
 > **Note:**
 >
-> `PLAN REPLAYER`テーブル データをエクスポートし**ません**。
+> `PLAN REPLAYER`テーブルデータをエクスポートし**ません**。
 
 ### クラスター情報のエクスポートの例 {#examples-of-exporting-cluster-information}
 

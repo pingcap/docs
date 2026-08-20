@@ -4,7 +4,7 @@ summary: このドキュメントでは、AWS でセルフホスト型 Kafka 用
 aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
 ---
 
-# AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする {#set-up-self-hosted-kafka-private-link-service-in-aws}
+# AWS でセルフホスト型 Kafka プライベートリンクサービスをセットアップする {#set-up-self-hosted-kafka-private-link-service-in-aws}
 
 このドキュメントでは、AWS でセルフホスト型 Kafka 用の Private Link サービスを設定し、それをTiDB Cloudで動作させる方法について説明します。
 
@@ -46,7 +46,7 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
         2.  **Connectivity Method**で**Private Link**を選択します。
     4.  **続行する前に、** TiDB Cloud AWS アカウントの情報をリマインダーに書き留めておいてください。この情報は、TiDB Cloud がKafka Private Link サービスのエンドポイントを作成することを承認する際に使用されます。
     5.  **Number of AZs**を選択します。この例では、 **3 AZs**を選択します。KafkaクラスターをデプロイするAZのIDをメモしておいてください。AZ名とAZ IDの関係を知りたい場合は、 [AWS リソースのアベイラビリティゾーン ID](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)を参照してください。
-    6.  Kafka プライベートリンク サービスに固有の**Kafka Advertised Listener Pattern**を入力します。
+    6.  Kafka プライベートリンクサービスに固有の**Kafka Advertised Listener Pattern**を入力します。
         1.  一意のランダム文字列を入力してください。数字または小文字のみ使用できます。この文字列は、後ほど**Kafka Advertised Listener Pattern**を生成する際に使用します。
         2.  **「使用状況を確認して生成」**をクリックすると、ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズ リスナーを組み立てるために使用される**Kafka Advertised Listener Pattern**が生成されます。
 
@@ -98,7 +98,7 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
 
 Kafka VPC には次のものが必要です。
 
--   ブローカー用のプライベート サブネットが 3 つ (AZ ごとに 1 つ)。
+-   ブローカー用のプライベートサブネットが 3 つ (AZ ごとに 1 つ)。
 -   任意の AZ に 1 つのパブリックサブネットがあり、インターネットに接続できる要塞ノードと 3 つのプライベートサブネットがあるため、Kafka クラスターを簡単にセットアップできます。本番環境では、Kafka VPC に接続できる独自の要塞ノードが必要になる場合があります。
 
 サブネットを作成する前に、AZ IDとAZ名のマッピングに基づいてAZ内にサブネットを作成します。以下のマッピングを例に挙げます。
@@ -107,7 +107,7 @@ Kafka VPC には次のものが必要です。
 -   `usw2-az2` =&gt; `us-west-2c`
 -   `usw2-az3` =&gt; `us-west-2b`
 
-次の AZ にプライベート サブネットを作成します。
+次の AZ にプライベートサブネットを作成します。
 
 -   `us-west-2a`
 -   `us-west-2c`
@@ -200,7 +200,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 **2.2. ブローカーノードを作成する**
 
-[EC2 リストページ](https://console.aws.amazon.com/ec2/home#Instances:)に進みます。ブローカー サブネットに、各 AZ に 1 つずつ、合計 3 つのブローカー ノードを作成します。
+[EC2 リストページ](https://console.aws.amazon.com/ec2/home#Instances:)に進みます。ブローカー サブネットに、各 AZ に 1 つずつ、合計 3 つのブローカーノードを作成します。
 
 -   サブネット`broker-usw2-az1`のブローカー 1
 
@@ -270,7 +270,7 @@ Kafka VPC を作成するには、次の手順を実行します。
     tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz
     ```
 
-3.  バイナリを各ブローカー ノードにコピーします。
+3.  バイナリを各ブローカーノードにコピーします。
 
     ```shell
     # Replace {broker-node1-ip} with your broker-node1 IP address
@@ -386,7 +386,7 @@ log.dirs=./data
 
 **2.4.3 Kafkaブローカーを起動する**
 
-スクリプトを作成し、それを実行して各ブローカー ノードで Kafka ブローカーを起動します。
+スクリプトを作成し、それを実行して各ブローカーノードで Kafka ブローカーを起動します。
 
 ```shell
 #!/bin/bash
@@ -659,7 +659,7 @@ b2.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:9094 (id: 2 rack: null) -> E
 b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 ```
 
-## ステップ 2. Kafka クラスターをプライベートリンク サービスとして公開する {#step-2-expose-the-kafka-cluster-as-private-link-service}
+## ステップ 2. Kafka クラスターをプライベートリンクサービスとして公開する {#step-2-expose-the-kafka-cluster-as-private-link-service}
 
 ### 1. ロードバランサーを設定する {#1-set-up-the-load-balancer}
 
@@ -720,7 +720,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
         -   **Health check protocol**： `TCP`
         -   **Register targets**: `broker-node3:39092`
 
-2.  [ロードバランサー](https://console.aws.amazon.com/ec2/home#LoadBalancers:)に進み、ネットワーク ロード バランサーを作成します。
+2.  [ロードバランサー](https://console.aws.amazon.com/ec2/home#LoadBalancers:)に進み、ネットワーク ロードバランサーを作成します。
 
     -   **Load balancer name**: `kafka-lb`
     -   **Schema**: `Internal`
@@ -757,7 +757,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 
 ### 2. プライベートリンクサービスを設定する {#2-set-up-private-link-service}
 
-1.  [エンドポイントサービス](https://console.aws.amazon.com/vpcconsole/home#EndpointServices:)に進みます。 **Create endpoint service**をクリックして、Kafka ロード バランサーのプライベートリンク サービスを作成します。
+1.  [エンドポイントサービス](https://console.aws.amazon.com/vpcconsole/home#EndpointServices:)に進みます。 **Create endpoint service**をクリックして、Kafka ロードバランサーのプライベートリンクサービスを作成します。
 
     -   **Name**: `kafka-pl-service`
     -   **Load balancer type**: `Network`
@@ -795,7 +795,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 
 2.  [ステップ1. Kafkaクラスターをセットアップする](#step-1-set-up-a-kafka-cluster)に進んだら、 [実行中の Kafka クラスターを再構成する](#reconfigure-a-running-kafka-cluster)に従って、EXTERNAL リスナーとアドバタイズリスナーの別のグループを作成します。このグループの名前は**EXTERNAL2**とします。EXTERNAL2 のポート範囲は**EXTERNAL**と重複できないことに注意してください。
 
-3.  ブローカーを再構成した後、ブートストラップおよびブローカー ターゲット グループを含む別のターゲット グループをロード バランサーに追加します。
+3.  ブローカーを再構成した後、ブートストラップおよびブローカー ターゲット グループを含む別のターゲット グループをロードバランサーに追加します。
 
 4.  次の情報を使用してTiDB Cloud接続を構成します。
 

@@ -34,7 +34,7 @@ AWS PrivateLink を利用することで、エンドポイント接続は安全�
 ほとんどのシナリオでは、VPC ピアリングではなくプライベートエンドポイント接続を使用することをお勧めします。ただし、以下のシナリオでは、プライベートエンドポイント接続ではなく VPC ピアリングを使用する必要があります。
 
 -   高可用性を実現するために、ソースTiDBクラスターからターゲットTiDBクラスターへリージョンをまたいでデータをレプリケートするために、 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)クラスターを使用しています。現在、プライベートエンドポイントはリージョン間接続をサポートしていません。
--   TiCDC クラスターを使用してダウンストリーム クラスター (Amazon Aurora、MySQL、Kafka など) にデータをレプリケートしていますが、エンドポイント サービスを独自に維持することはできません。
+-   TiCDC クラスターを使用してダウンストリーム クラスター (Amazon Aurora、MySQL、Kafka など) にデータをレプリケートしていますが、エンドポイントサービスを独自に維持することはできません。
 -   PD または TiKV ノードに直接接続しています。
 
 ## 前提条件 {#prerequisites}
@@ -57,7 +57,7 @@ AWS VPC設定でDNSホスト名とDNS解決の両方が有効になっている�
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、概要ページに移動します。
 2.  右上隅の**Connect**をクリックします。接続ダイアログが表示されます。
-3.  **Connection Type**ドロップダウン リストで**Private Endpoint**を選択し、 **Create Private Endpoint Connection**をクリックします。
+3.  **Connection Type**ドロップダウンリストで**Private Endpoint**を選択し、 **Create Private Endpoint Connection**をクリックします。
 
 > **Note:**
 >
@@ -67,7 +67,7 @@ AWS VPC設定でDNSホスト名とDNS解決の両方が有効になっている�
 
 > **Note:**
 >
-> 2023 年 3 月 28 日以降に作成されたTiDB Cloud Dedicated クラスターごとに、クラスターの作成後 3 ～ 4 分後に対応するエンドポイント サービスが自動的に作成されます。
+> 2023 年 3 月 28 日以降に作成されたTiDB Cloud Dedicated クラスターごとに、クラスターの作成後 3 ～ 4 分後に対応するエンドポイントサービスが自動的に作成されます。
 
 `TiDB Private Link Service is ready`メッセージが表示された場合、対応するエンドポイントサービスは準備完了です。エンドポイントを作成するには、以下の情報を提供してください。
 
@@ -142,7 +142,7 @@ AWS マネジメントコンソールを使用して VPC インターフェイ�
 >
 > プライベートエンドポイント接続は、次の 2 つのページで表示および管理できます。
 >
-> -   クラスター レベルの**Networking**ページ: 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
+> -   クラスターレベルの**Networking**ページ: 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
 > -   プロジェクト レベルの**Network Access**ページ: 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、**Project view** タブをクリックして対象のプロジェクトを見つけ、そのプロジェクトの <MDSvgIcon name="icon-project-settings" /> をクリックし、**Project Settings** の下にある **Network Access** をクリックします。
 
 ### ステップ4. プライベートDNSを有効にする {#step-4-enable-private-dns}
@@ -189,24 +189,24 @@ AWS マネジメントコンソールでプライベート DNS を有効にす�
 
 ### プライベートエンドポイントのステータスリファレンス {#private-endpoint-status-reference}
 
-プライベートエンドポイント接続を使用すると、プライベートエンドポイントとプライベートエンドポイント サービスの状態が次のページに表示されます。
+プライベートエンドポイント接続を使用すると、プライベートエンドポイントとプライベートエンドポイントサービスの状態が次のページに表示されます。
 
--   クラスター レベルの**Networking**ページ: 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
+-   クラスターレベルの**Networking**ページ: 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
 -   プロジェクト レベルの**Network Access**ページ: 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、**Project view** タブをクリックして対象のプロジェクトを見つけ、そのプロジェクトの <MDSvgIcon name="icon-project-settings" /> をクリックし、**Project Settings** の下にある **Network Access** をクリックします。
 
 プライベートエンドポイントの可能なステータスについては、次のように説明されます。
 
--   **Not Configured**: エンドポイント サービスは作成されていますが、プライベートエンドポイントはまだ作成されていません。
+-   **Not Configured**: エンドポイントサービスは作成されていますが、プライベートエンドポイントはまだ作成されていません。
 -   **Pending**: 処理を待機中です。
 -   **Active**：プライベートエンドポイントは使用可能です。このステータスのプライベートエンドポイントは編集できません。
 -   **Deleting**: プライベートエンドポイントを削除しています。
 -   **Failed**: プライベートエンドポイントの作成に失敗しました。その行の**Edit**をクリックすると、作成を再試行できます。
 
-プライベートエンドポイント サービスの可能なステータスについては、次のように説明されます。
+プライベートエンドポイントサービスの可能なステータスについては、次のように説明されます。
 
--   **Creating**: エンドポイント サービスを作成中です。これには 3 ～ 5 分かかります。
--   **Active**: プライベートエンドポイントが作成されたかどうかに関係なく、エンドポイント サービスが作成されます。
--   **Deleting**: エンドポイント サービスまたはクラスターを削除中です。これには 3 ～ 5 分かかります。
+-   **Creating**: エンドポイントサービスを作成中です。これには 3 ～ 5 分かかります。
+-   **Active**: プライベートエンドポイントが作成されたかどうかに関係なく、エンドポイントサービスが作成されます。
+-   **Deleting**: エンドポイントサービスまたはクラスターを削除中です。これには 3 ～ 5 分かかります。
 
 ## トラブルシューティング {#troubleshooting}
 

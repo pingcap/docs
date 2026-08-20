@@ -9,19 +9,19 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
 ## ページにアクセスする {#access-the-page}
 
-リソース マネージャー ページにアクセスするには、次の 2 つの方法のいずれかを使用できます。
+リソースマネージャー ページにアクセスするには、次の 2 つの方法のいずれかを使用できます。
 
--   TiDB Dashboardにログインしたら、左側のナビゲーション メニューで**[リソース マネージャー] を**クリックします。
+-   TiDB Dashboardにログインしたら、左側のナビゲーション メニューで**[リソースマネージャー] を**クリックします。
 
 -   ブラウザで[http://127.0.0.1:2379/dashboard/#/resource_manager](http://127.0.0.1:2379/dashboard/#/resource_manager)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
 
 ## リソースマネージャーページ {#resource-manager-page}
 
-次の図は、リソース マネージャーの詳細ページを示しています。
+次の図は、リソースマネージャーの詳細ページを示しています。
 
 ![TiDB Dashboard: Resource Manager](/media/dashboard/dashboard-resource-manager-info.png)
 
-リソース マネージャー ページには、次の 3 つのセクションがあります。
+リソースマネージャー ページには、次の 3 つのセクションがあります。
 
 -   コンフィグレーション: このセクションには、TiDBの`RESOURCE_GROUPS`テーブルから取得したデータが表示されます。すべてのリソースグループに関する情報が含まれています。詳細については、 [`RESOURCE_GROUPS`](/information-schema/information-schema-resource-groups.md)を参照してください。
 

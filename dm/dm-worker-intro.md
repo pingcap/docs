@@ -26,7 +26,7 @@ DM-worker は、TiDB Data Migration (DM) のコンポーネントであり、DM-
 
 ### ダンプ処理装置 {#dump-processing-unit}
 
-ダンプ処理ユニットは、アップストリームの MySQL/MariaDB から完全なデータをローカル ディスクにダンプします。
+ダンプ処理ユニットは、アップストリームの MySQL/MariaDB から完全なデータをローカルディスクにダンプします。
 
 ### ロード処理装置 {#load-processing-unit}
 

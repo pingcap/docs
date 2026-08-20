@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-use-subqueries/','/ja/tidbcloud/dev-guide-u
 
 # サブクエリ {#subquery}
 
-このドキュメントでは、TiDB のサブクエリ ステートメントとカテゴリについて説明します。
+このドキュメントでは、TiDB のサブクエリステートメントとカテゴリについて説明します。
 
 ## 概要 {#overview}
 

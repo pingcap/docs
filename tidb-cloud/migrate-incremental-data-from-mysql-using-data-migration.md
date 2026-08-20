@@ -5,7 +5,7 @@ summary: データ移行を使用して、Amazon Aurora MySQL、Amazon Relationa
 
 # データ移行を使用して、MySQL互換データベースからTiDB Cloudへ増分データのみを移行する {#migrate-only-incremental-data-from-mysql-compatible-databases-to-tidb-cloud-using-data-migration}
 
-このドキュメントでは、TiDB Cloud コンソールのデータ移行機能を使用して、クラウド プロバイダー (Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、Google Cloud SQL for MySQL、Azure Database for MySQL、または Alibaba Cloud RDS) 上の MySQL 互換データベース、または自己ホスト型のソース データベースから、 TiDB Cloudコンソールのデータ移行機能を使用して、増分データを<CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent> <CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>に移行する方法について説明します。
+このドキュメントでは、TiDB Cloud コンソールのデータ移行機能を使用して、クラウドプロバイダー (Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、Google Cloud SQL for MySQL、Azure Database for MySQL、または Alibaba Cloud RDS) 上の MySQL 互換データベース、または自己ホスト型のソースデータベースから、 TiDB Cloudコンソールのデータ移行機能を使用して、増分データを<CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent> <CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>に移行する方法について説明します。
 
 <CustomContent plan="essential">
 

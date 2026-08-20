@@ -89,7 +89,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 -   Fast Online DDL による一意インデックス作成のサポート [#40730](https://github.com/pingcap/tidb/issues/40730) @[tangenta](https://github.com/tangenta)
 
-    TiDB v6.5.0 では、Fast Online DDL による通常のセカンダリ インデックスの作成がサポートされています。TiDB v7.0.0 では、Fast Online DDL によるユニーク インデックスの作成がサポートされています。v6.1.0 と比較して、大規模テーブルへのユニーク インデックスの追加は、パフォーマンスの向上により数倍高速化されることが期待されます。
+    TiDB v6.5.0 では、Fast Online DDL による通常のセカンダリインデックスの作成がサポートされています。TiDB v7.0.0 では、Fast Online DDL によるユニーク インデックスの作成がサポートされています。v6.1.0 と比較して、大規模テーブルへのユニーク インデックスの追加は、パフォーマンスの向上により数倍高速化されることが期待されます。
 
     詳細については、[ドキュメント](/best-practices/ddl-introduction.md)を参照してください。
 
@@ -156,7 +156,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 -   `prefer-leader`オプションをサポートします。このオプションは、読み取り操作の可用性を高め、不安定なネットワーク状況での応答レイテンシーを低減します。 [#40905](https://github.com/pingcap/tidb/issues/40905) @[LykxSassinator](https://github.com/LykxSassinator)
 
-    TiDB のデータ読み取り動作は、システム変数[`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)で制御できます。v7.0.0 では、この変数に`prefer-leader`オプションが追加されました。この変数を`prefer-leader`に設定すると、TiDB はリーダー レプリカを選択して読み取り操作を実行することを優先します。ディスクやネットワークのパフォーマンス変動などによりリーダー レプリカの処理速度が著しく低下した場合、TiDB は利用可能な他のフォロワー レプリカを選択して読み取り操作を実行し、可用性を高め、応答レイテンシーを削減します。
+    TiDB のデータ読み取り動作は、システム変数[`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)で制御できます。v7.0.0 では、この変数に`prefer-leader`オプションが追加されました。この変数を`prefer-leader`に設定すると、TiDB はリーダーレプリカを選択して読み取り操作を実行することを優先します。ディスクやネットワークのパフォーマンス変動などによりリーダーレプリカの処理速度が著しく低下した場合、TiDB は利用可能な他のフォロワー レプリカを選択して読み取り操作を実行し、可用性を高め、応答レイテンシーを削減します。
 
     詳細については、[ドキュメント](/develop/dev-guide-use-follower-read.md)を参照してください。
 
@@ -375,7 +375,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     -   TiDB Lightning
 
-        -   TiDB Lightning物理インポートモードは、データ インポートとインデックス インポートの分離をサポートし、インポート速度と安定性を向上させます [#42132](https://github.com/pingcap/tidb/issues/42132) @[sleepymole](https://github.com/sleepymole)
+        -   TiDB Lightning物理インポートモードは、データインポートとインデックス インポートの分離をサポートし、インポート速度と安定性を向上させます [#42132](https://github.com/pingcap/tidb/issues/42132) @[sleepymole](https://github.com/sleepymole)
 
             `add-index-by-sql`パラメータを追加します。デフォルト値は`false`で、これはTiDB Lightning が行データとインデックスデータの両方を KV ペアにエンコードし、それらをまとめて TiKV にインポートすることを意味します。これを`true`に設定すると、 TiDB Lightningデータのインポート後に`ADD INDEX` SQL ステートメントを使用してインデックスを追加し、インポートの速度と安定性を向上させます。
 

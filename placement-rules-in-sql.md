@@ -111,7 +111,7 @@ SHOW PLACEMENT LABELS;
     ALTER TABLE t2 PLACEMENT POLICY=myplacementpolicy;
     ```
 
-    `PLACEMENT POLICY`どのデータベース スキーマにも関連付けられておらず、グローバル スコープに添付できます。したがって、 `CREATE TABLE`を使用して配置ポリシーを指定する場合、追加の権限は必要ありません。
+    `PLACEMENT POLICY`どのデータベーススキーマにも関連付けられておらず、グローバル スコープに添付できます。したがって、 `CREATE TABLE`を使用して配置ポリシーを指定する場合、追加の権限は必要ありません。
 
 ### 配置ポリシーを表示する {#view-placement-policies}
 

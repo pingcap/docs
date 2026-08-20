@@ -27,7 +27,7 @@ TiDB Cloudの Dataflow サービス（Changefeed や Data Migration (DM) など�
 
 このタイプのプライベートリンク接続により、 **Alibaba Cloud**上のTiDB Cloudクラスターが Alibaba Cloud PrivateLink を搭載した[Alibaba Cloudエンドポイントサービス](https://www.alibabacloud.com/help/en/privatelink/share-your-service/#51976edba8no7)に接続できるようになります。
 
-プライベートリンク接続は、エンドポイント サービスに関連付けることで、RDS インスタンスや Kafka サービスなどのさまざまな Alibaba Cloud サービスにアクセスできます。
+プライベートリンク接続は、エンドポイントサービスに関連付けることで、RDS インスタンスや Kafka サービスなどのさまざまな Alibaba Cloud サービスにアクセスできます。
 
 ## AWS エンドポイントサービスプライベートリンク接続を作成する {#create-an-aws-endpoint-service-private-link-connection}
 
@@ -67,11 +67,11 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
     -   **Private Link Connection Name**: プライベートリンク接続の名前を入力します。
     -   **Connection Type**： **AWS Endpoint Service**を選択します。このオプションが表示されない場合は、クラスターがAWS上に作成されていることを確認してください。
-    -   **Endpoint Service Name**: AWS エンドポイント サービス名を入力します (例: `com.amazonaws.vpce.<region>.vpce-svc-xxxxxxxxxxxxxxxxx` )。
+    -   **Endpoint Service Name**: AWS エンドポイントサービス名を入力します (例: `com.amazonaws.vpce.<region>.vpce-svc-xxxxxxxxxxxxxxxxx` )。
 
 5.  **[作成]**をクリックします。
 
-6.  [AWSコンソール](https://console.aws.amazon.com)のエンドポイント サービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を承認します。
+6.  [AWSコンソール](https://console.aws.amazon.com)のエンドポイントサービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を承認します。
 
 </div>
 
@@ -85,7 +85,7 @@ TiDB Cloud CLI を使用してプライベートリンク接続を作成する�
     ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type AWS_ENDPOINT_SERVICE --aws.endpoint-service-name <endpoint-service-name>
     ```
 
-2.  [AWSコンソール](https://console.aws.amazon.com)のエンドポイント サービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を承認します。
+2.  [AWSコンソール](https://console.aws.amazon.com)のエンドポイントサービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を承認します。
 
 </div>
 </SimpleTab>
@@ -123,7 +123,7 @@ Amazon MSK プロビジョニングプライベートリンク接続を作成す
 
 TiDB CloudコンソールまたはTiDB Cloud CLI を使用して、Alibaba Cloud Endpoint Service プライベートリンク接続を作成できます。
 
-Alibaba Cloud エンドポイント サービスが次の条件を満たしていることを確認します。
+Alibaba Cloud エンドポイントサービスが次の条件を満たしていることを確認します。
 
 -   TiDB Cloudクラスターと同じリージョンに存在します。
 -   TiDB Cloudアカウント ID を**Service Whitelist**に追加します。
@@ -157,11 +157,11 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
     -   **Private Link Connection Name**: プライベートリンク接続の名前を入力します。
     -   **Connection Type**： **Alibaba Cloud Endpoint Service**を選択します。このオプションが表示されない場合は、クラスターがAlibaba Cloud上に作成されていることを確認してください。
-    -   **Endpoint Service Name**: Alibaba Cloud エンドポイント サービス名を入力します (例: `com.aliyuncs.privatelink.<region>.epsrv-xxxxxxxxxxxxxxxxx` )。
+    -   **Endpoint Service Name**: Alibaba Cloud エンドポイントサービス名を入力します (例: `com.aliyuncs.privatelink.<region>.epsrv-xxxxxxxxxxxxxxxxx` )。
 
 5.  **[作成]**をクリックします。
 
-6.  [Alibaba Cloudコンソール](https://console.alibabacloud.com)のエンドポイント サービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を許可します。
+6.  [Alibaba Cloudコンソール](https://console.alibabacloud.com)のエンドポイントサービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を許可します。
 
 </div>
 
@@ -175,7 +175,7 @@ TiDB Cloud CLI を使用してプライベートリンク接続を作成する�
     ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type ALICLOUD_ENDPOINT_SERVICE --alicloud.endpoint-service-name <endpoint-service-name>
     ```
 
-2.  [Alibaba Cloudコンソール](https://console.alibabacloud.com)のエンドポイント サービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を許可します。
+2.  [Alibaba Cloudコンソール](https://console.alibabacloud.com)のエンドポイントサービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を許可します。
 
 </div>
 </SimpleTab>

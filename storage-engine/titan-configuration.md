@@ -69,7 +69,7 @@ TitanはRocksDBと互換性があるため、RocksDBを使用する既存のTiKV
 >
 > Titanが無効になっている場合、RocksDBはTitanに移動されたデータを読み取ることができません。Titanが既に有効になっているTiKVインスタンスでTitanを誤って無効にした場合（誤って`rocksdb.titan.enabled`を`false`に設定した場合）、TiKVは起動に失敗し、TiKVログに`You have disabled titan when its data directory is not empty`エラーが表示されます。Titanを正しく無効にするには、 [Titanを無効にする](#disable-titan)を参照してください。
 
-Titan を有効にした後、RocksDB に保存されている既存のデータは、すぐに Titan エンジンに移動されるわけではありません。新しいデータが TiKV に書き込まれ、RocksDB が圧縮を実行すると、**値は徐々にキーから分離され、 Titan に書き込まれます**。同様に、 BRスナップショット/ログを通じて復元されたデータ、スケーリング中に変換されたデータ、またはTiDB Lightning物理インポートモードによってインポートされたデータは、Titan に直接書き込まれません。圧縮が進むにつれて、処理された SST ファイル内のデフォルト値 ( `32KB` ) の[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)を超える大きな値が Titan に分離されます。TiKV**の詳細 &gt; Titan kv &gt; blob ファイル サイズ**パネルを観察してデータ サイズを見積もることで、Titan に保存されているファイルのサイズを監視できます。
+Titan を有効にした後、RocksDB に保存されている既存のデータは、すぐに Titan エンジンに移動されるわけではありません。新しいデータが TiKV に書き込まれ、RocksDB が圧縮を実行すると、**値は徐々にキーから分離され、 Titan に書き込まれます**。同様に、 BRスナップショット/ログを通じて復元されたデータ、スケーリング中に変換されたデータ、またはTiDB Lightning物理インポートモードによってインポートされたデータは、Titan に直接書き込まれません。圧縮が進むにつれて、処理された SST ファイル内のデフォルト値 ( `32KB` ) の[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)を超える大きな値が Titan に分離されます。TiKV**の詳細 &gt; Titan kv &gt; blob ファイルサイズ**パネルを観察してデータサイズを見積もることで、Titan に保存されているファイルのサイズを監視できます。
 
 書き込みプロセスを高速化したい場合は、tikv-ctl を使用して TiKV クラスター全体のデータを手動で圧縮できます。詳細は[手作業による圧縮](/tikv-control.md#compact-data-of-the-whole-tikv-cluster-manually)を参照してください。RocksDB から Titan への変換中はデータアクセスが継続的に行われるため、RocksDB のブロックキャッシュによってデータ変換プロセスが大幅に高速化されます。テストでは、tikv-ctl を使用することで、670 GiB の TiKV データを 1 時間で Titan に変換できました。
 
@@ -99,7 +99,7 @@ Titanの値のキャッシュサイズを制御するには、 [`blob-cache-size
 
 BLOBファイル内の古いデータ（対応するキーが更新または削除されたデータ）の割合が、 [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio)で設定されたしきい値を超えると、Titan GCがトリガーされます。このしきい値を下げると、スペースの増幅を軽減できますが、Titan GCの頻度が高くなる可能性があります。この値を上げると、Titan GC、I/O帯域幅、CPU消費量を削減できますが、ディスク容量の使用量は増加します。
 
-**TiKV の詳細**-**スレッド CPU** - **RocksDB CPU**から、Titan GC スレッドが長時間にわたってフル ロード状態になっていることが確認された場合は、 [`max-background-gc`](/tikv-configuration-file.md#max-background-gc)調整して Titan GC スレッドプールのサイズを増やすことを検討してください。
+**TiKV の詳細**-**スレッド CPU** - **RocksDB CPU**から、Titan GC スレッドが長時間にわたってフルロード状態になっていることが確認された場合は、 [`max-background-gc`](/tikv-configuration-file.md#max-background-gc)調整して Titan GC スレッドプールのサイズを増やすことを検討してください。
 
 ### `rate-bytes-per-sec` {#rate-bytes-per-sec}
 

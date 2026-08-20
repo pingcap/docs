@@ -67,7 +67,7 @@ AWSコンソールでロードバランサーとAWSエンドポイントサー�
 
     詳細については、 [ネットワークロードバランサーのターゲットグループを作成する](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-target-group.html)を参照してください。
 
-2.  [ロードバランサー](https://console.aws.amazon.com/ec2/home#LoadBalancers)に移動して、ネットワーク ロード バランサーを作成します。次の情報を入力してください。
+2.  [ロードバランサー](https://console.aws.amazon.com/ec2/home#LoadBalancers)に移動して、ネットワーク ロードバランサーを作成します。次の情報を入力してください。
 
     -   **スキーマ**: `Internal`を選択
 

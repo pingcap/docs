@@ -31,7 +31,7 @@ client.execute(
 
 ## 生のSQLでデータをクエリする {#query-data-with-raw-sql}
 
-`client.query()`メソッドを使用して、 `SELECT` 、 `SHOW` 、およびその他のクエリ ステートメントを実行します。
+`client.query()`メソッドを使用して、 `SELECT` 、 `SHOW` 、およびその他のクエリステートメントを実行します。
 
 ### クエリ結果を出力する {#output-query-result}
 

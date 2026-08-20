@@ -49,7 +49,7 @@ TiDBバージョン: 6.3.0-DMR
 
 -   DDL変更時のDML成功率を向上させるための軽量メタデータロックを提供する（実験的） [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016)
 
-    TiDB は、変更されるメタデータ オブジェクトをサポートするために、オンライン非同期スキーマ変更アルゴリズムを使用します。トランザクションが実行されると、トランザクションの開始時に対応するメタデータ スナップショットを取得します。トランザクション中にメタデータが変更された場合、データの一貫性を確保するために、TiDB は`Information schema is changed`エラーを返し、トランザクションはコミットに失敗します。この問題を解決するために、TiDB v6.3.0 では、オンライン DDL アルゴリズムに[メタデータロック](/metadata-lock.md)が導入されました。可能な限り DML エラーを回避するために、TiDB はテーブル メタデータの変更中に DML と DDL の優先順位を調整し、実行中の DDL が古いメタデータを持つ DML のコミットを待つようにします。
+    TiDB は、変更されるメタデータ オブジェクトをサポートするために、オンライン非同期スキーマ変更アルゴリズムを使用します。トランザクションが実行されると、トランザクションの開始時に対応するメタデータ スナップショットを取得します。トランザクション中にメタデータが変更された場合、データの一貫性を確保するために、TiDB は`Information schema is changed`エラーを返し、トランザクションはコミットに失敗します。この問題を解決するために、TiDB v6.3.0 では、オンライン DDL アルゴリズムに[メタデータロック](/metadata-lock.md)が導入されました。可能な限り DML エラーを回避するために、TiDB はテーブルメタデータの変更中に DML と DDL の優先順位を調整し、実行中の DDL が古いメタデータを持つ DML のコミットを待つようにします。
 
 -   インデックス追加のパフォーマンスを向上させ、DML トランザクションへの影響を軽減します (実験的) [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037)
 
@@ -67,7 +67,7 @@ TiDBバージョン: 6.3.0-DMR
 
 -   TiDB JDBC は SM3 アルゴリズムによる認証をサポート [#25](https://github.com/pingcap/mysql-connector-j/issues/25) @[lastincisor](https://github.com/lastincisor)
 
-    ユーザー パスワードの認証には、クライアント側のサポートが必要です。 [JDBCはSM3アルゴリズムをサポートしています](/develop/dev-guide-choose-driver-or-orm.md#java-drivers)ので、TiDB-JDBC経由でSM3認証を使用してTiDBに接続できるようになります。
+    ユーザーパスワードの認証には、クライアント側のサポートが必要です。 [JDBCはSM3アルゴリズムをサポートしています](/develop/dev-guide-choose-driver-or-orm.md#java-drivers)ので、TiDB-JDBC経由でSM3認証を使用してTiDBに接続できるようになります。
 
 ### 可観測性 {#observability}
 
@@ -139,7 +139,7 @@ TiDBバージョン: 6.3.0-DMR
 
 -   統計情報が古くなった場合に統計情報を読み込むデフォルトポリシーを変更する [#27601](https://github.com/pingcap/tidb/issues/27601) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
 
-    v5.3.0 では、統計情報が古くなったときのオプティマイザの動作を制御するために、システム変数[`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530)が導入されました。デフォルト値は`ON`で、これは旧バージョンの動作を維持することを意味します。つまり、SQL ステートメントに関係するオブジェクトの統計情報が古くなった場合、オプティマイザは (テーブルの総行数以外の) 統計情報はもはや信頼できないと判断し、代わりに擬似統計情報を使用します。実際のユーザー シナリオのテストと分析の結果、v6.3.0 以降、デフォルト値`tidb_enable_pseudo_for_outdated_stats`は`OFF`に変更されました。統計情報が古くなっても、オプティマイザはテーブル上の統計情報を使用するため、実行計画がより安定します。
+    v5.3.0 では、統計情報が古くなったときのオプティマイザの動作を制御するために、システム変数[`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530)が導入されました。デフォルト値は`ON`で、これは旧バージョンの動作を維持することを意味します。つまり、SQL ステートメントに関係するオブジェクトの統計情報が古くなった場合、オプティマイザは (テーブルの総行数以外の) 統計情報はもはや信頼できないと判断し、代わりに擬似統計情報を使用します。実際のユーザーシナリオのテストと分析の結果、v6.3.0 以降、デフォルト値`tidb_enable_pseudo_for_outdated_stats`は`OFF`に変更されました。統計情報が古くなっても、オプティマイザはテーブル上の統計情報を使用するため、実行計画がより安定します。
 
 -   Titan の無効化が GA に@[tabokie](https://github.com/tabokie)
 
@@ -147,7 +147,7 @@ TiDBバージョン: 6.3.0-DMR
 
 -   グローバル統計が準備できていない場合は、 `static`パーティションプルーニングを使用します [#37535](https://github.com/pingcap/tidb/issues/37535) @[Yisaer](https://github.com/Yisaer)
 
-    [`dynamic pruning`](/partitioned-table.md#dynamic-pruning-mode)が有効になっている場合、オプティマイザは[世界の統計](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)に基づいて実行計画を選択します。グローバル統計が完全に収集される前に擬似統計を使用すると、パフォーマンスが低下する可能性があります。v6.3.0 では、グローバル統計の収集が完了する前に`dynamic`プルーニング モードを有効にすると、グローバル統計が完全に収集されるまで TiDB は`static`モードのままになります。これにより、パーティション プルーニングの設定を変更したときのパフォーマンスの安定性が確保されます。
+    [`dynamic pruning`](/partitioned-table.md#dynamic-pruning-mode)が有効になっている場合、オプティマイザは[世界の統計](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)に基づいて実行計画を選択します。グローバル統計が完全に収集される前に擬似統計を使用すると、パフォーマンスが低下する可能性があります。v6.3.0 では、グローバル統計の収集が完了する前に`dynamic`プルーニングモードを有効にすると、グローバル統計が完全に収集されるまで TiDB は`static`モードのままになります。これにより、パーティションプルーニングの設定を変更したときのパフォーマンスの安定性が確保されます。
 
 ### 使いやすさ {#ease-of-use}
 
@@ -244,7 +244,7 @@ TiDBバージョン: 6.3.0-DMR
 | TiDB           | [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)                                        | 新しく追加された | TiDB が一時データを格納するために使用するファイルシステム上の場所を指定します。機能が TiDB ノードでローカルストレージを必要とする場合、TiDB は対応する一時データをこの場所に格納します。デフォルト値は`/tmp/tidb`です。                                                                                      |
 | TiKV           | [`auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)              | 新しく追加された | スレッドプールのサイズを自動的に調整するかどうかを制御します。有効にすると、現在のCPU使用率に基づいてUnifyReadPoolスレッドプールのサイズを自動的に調整することで、TiKVの読み取りパフォーマンスが最適化されます。                                                                                               |
 | TiKV           | [`data-encryption-method`](/tikv-configuration-file.md#data-encryption-method)                        | 変更     | 新しい値オプション`sm4-ctr`が導入されました。この設定項目が`sm4-ctr`に設定されている場合、データは保存される前に SM4 を使用して暗号化されます。                                                                                                                              |
-| TiKV           | [`enable-log-recycle`](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)                    | 新しく追加された | Raft Engineで古いログファイルを再利用するかどうかを決定します。有効にすると、論理的に削除されたログファイルは再利用のために予約されます。これにより、書き込みワークロードのロング テールレイテンシーが削減されます。この設定項目は[フォーマットバージョン](/tikv-configuration-file.md#format-version-new-in-v630)が 2 以上の場合のみ使用できます。 |
+| TiKV           | [`enable-log-recycle`](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)                    | 新しく追加された | Raft Engineで古いログファイルを再利用するかどうかを決定します。有効にすると、論理的に削除されたログファイルは再利用のために予約されます。これにより、書き込みワークロードのロングテールレイテンシーが削減されます。この設定項目は[フォーマットバージョン](/tikv-configuration-file.md#format-version-new-in-v630)が 2 以上の場合のみ使用できます。 |
 | TiKV           | [`format-version`](/tikv-configuration-file.md#format-version-new-in-v630)                            | 新しく追加された | Raft Engineのログファイルのバージョンを指定します。デフォルトのログファイル バージョンは、TiKV v6.3.0 より前のバージョンでは`1`です。ログファイルは、TiKV &gt;= v6.1.0 で読み取ることができます。デフォルトのログファイル バージョンは、TiKV v6.3.0 以降では`2`です。TiKV v6.3.0 以降では、ログファイルを読み取ることができます。       |
 | TiKV           | [`log-backup.enable`](/tikv-configuration-file.md#enable-new-in-v620)                                 | 変更     | バージョン6.3.0以降、デフォルト値が`false`から`true`に変更されました。                                                                                                                                                                     |
 | TiKV           | [`log-backup.max-flush-interval`](/tikv-configuration-file.md#max-flush-interval-new-in-v620)         | 変更     | バージョン6.3.0以降、デフォルト値が`5min`から`3min`に変更されました。                                                                                                                                                                      |

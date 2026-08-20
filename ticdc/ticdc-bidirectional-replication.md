@@ -13,7 +13,7 @@ TiCDCは、2つのTiDBクラスタ間の双方向レプリケーション（BDR�
 
 TiCDCは、指定されたタイムスタンプ以降に発生した増分データ変更のみを下流クラスターに複製します。双方向レプリケーションを開始する前に、次の手順を実行する必要があります。
 
-1.  (オプション) 必要に応じて、データ エクスポート ツール[Dumpling](/dumpling-overview.md)とデータ インポート ツール[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して、2 つの TiDB クラスターのデータを相互にインポートします。
+1.  (オプション) 必要に応じて、データエクスポート ツール[Dumpling](/dumpling-overview.md)とデータインポート ツール[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して、2 つの TiDB クラスターのデータを相互にインポートします。
 
 2.  2つのTiDBクラスターの間に2つのTiCDCクラスターをデプロイ。クラスタートポロジは以下のとおりです。図中の矢印はデータフローの方向を示しています。
 

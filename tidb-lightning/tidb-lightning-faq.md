@@ -15,7 +15,7 @@ TiDB Lightningのバージョンはクラスターと同じである必要があ
 
 はい。
 
-## ターゲット データベースの権限要件は何ですか? {#what-are-the-privilege-requirements-for-the-target-database}
+## ターゲットデータベースの権限要件は何ですか? {#what-are-the-privilege-requirements-for-the-target-database}
 
 権限の詳細については[TiDB Lightningを使用するための前提条件](/tidb-lightning/tidb-lightning-requirements.md)を参照してください。
 

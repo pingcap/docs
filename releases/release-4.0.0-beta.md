@@ -30,7 +30,7 @@ TiDB Ansible バージョン: 4.0.0-beta
 -   サポートテーブルロック[＃11038](https://github.com/pingcap/tidb/pull/11038)
 -   条件付きフィルタリングで`ADMIN SHOW DDL JOBS`の`LIKE`または`WHERE`句の使用をサポート [＃12484](https://github.com/pingcap/tidb/pull/12484)
 -   `information_schema.tables`表の`TIDB_ROW_ID_SHARDING_INFO`列を追加して`RowID`散乱情報を出力します（たとえば、表`A`の`SHARD_ROW_ID_BITS`列の値は`"SHARD_BITS={bit_number}"`です） [＃13418](https://github.com/pingcap/tidb/pull/13418)
--   SQL エラーメッセージのエラー コードを最適化して、 `ERROR 1105 (HY000)`コードが複数のエラーメッセージ ( `Unknown Error`種類) に使用される状況を回避します。
+-   SQL エラーメッセージのエラーコードを最適化して、 `ERROR 1105 (HY000)`コードが複数のエラーメッセージ ( `Unknown Error`種類) に使用される状況を回避します。
     -   [＃14002](https://github.com/pingcap/tidb/pull/14002) [＃13874](https://github.com/pingcap/tidb/pull/13874) [＃13733](https://github.com/pingcap/tidb/pull/13733) [＃13654](https://github.com/pingcap/tidb/pull/13654) [＃13646](https://github.com/pingcap/tidb/pull/13646)
     -   [＃13540](https://github.com/pingcap/tidb/pull/13540) [＃13366](https://github.com/pingcap/tidb/pull/13366) [＃13329](https://github.com/pingcap/tidb/pull/13329) [＃13300](https://github.com/pingcap/tidb/pull/13300) [＃13233](https://github.com/pingcap/tidb/pull/13233)
     -   [＃13033](https://github.com/pingcap/tidb/pull/13033) [＃12866](https://github.com/pingcap/tidb/pull/12866) [＃14054](https://github.com/pingcap/tidb/pull/14054)

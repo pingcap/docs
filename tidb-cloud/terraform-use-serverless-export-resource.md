@@ -1,17 +1,17 @@
 ---
 title: Use `tidbcloud_serverless_export` Resource
-summary: tidbcloud_serverless_export` リソースを使用して、 TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータ エクスポート タスクを作成および変更する方法を学習します。
+summary: tidbcloud_serverless_export` リソースを使用して、 TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータエクスポート タスクを作成および変更する方法を学習します。
 ---
 
 # `tidbcloud_serverless_export`リソースを使用する {#use-tidbcloud-serverless-export-resource}
 
-このドキュメントでは、 `tidbcloud_serverless_export`リソースを使用して、TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータ エクスポート タスクを管理する方法について説明します。
+このドキュメントでは、 `tidbcloud_serverless_export`リソースを使用して、TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータエクスポート タスクを管理する方法について説明します。
 
 `tidbcloud_serverless_export`リソースの機能は次のとおりです。
 
--   TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータ エクスポート タスクを作成します。
--   TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータ エクスポート タスクをインポートします。
--   TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータ エクスポート タスクを削除します。
+-   TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータエクスポート タスクを作成します。
+-   TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータエクスポート タスクをインポートします。
+-   TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータエクスポート タスクを削除します。
 
 > **Note:**
 >
@@ -22,13 +22,13 @@ summary: tidbcloud_serverless_export` リソースを使用して、 TiDB Cloud 
 -   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
 -   [TiDB Cloud Starter またはTiDB Cloud Essential クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md) 。
 
-## TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータ エクスポート タスクを作成する {#create-a-data-export-task-for-a-tidb-cloud-starter-or-tidb-cloud-essential-cluster}
+## TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータエクスポート タスクを作成する {#create-a-data-export-task-for-a-tidb-cloud-starter-or-tidb-cloud-essential-cluster}
 
-`tidbcloud_serverless_export`リソースを使用して、 TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータ エクスポート タスクを作成できます。
+`tidbcloud_serverless_export`リソースを使用して、 TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータエクスポート タスクを作成できます。
 
 1.  エクスポート用のディレクトリを作成してそこに入ります。
 
-2.  データ エクスポート タスク用に`export.tf`ファイルを作成します。
+2.  データエクスポート タスク用に`export.tf`ファイルを作成します。
 
     以下は`export.tf`ファイルの例です。
 
@@ -142,9 +142,9 @@ summary: tidbcloud_serverless_export` リソースを使用して、 TiDB Cloud 
     }
     ```
 
-## TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータ エクスポート タスクをインポートします {#import-a-data-export-task-for-a-tidb-cloud-starter-or-tidb-cloud-essential-cluster}
+## TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータエクスポート タスクをインポートします {#import-a-data-export-task-for-a-tidb-cloud-starter-or-tidb-cloud-essential-cluster}
 
-TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータ エクスポート タスクが Terraform によって管理されていない場合は、インポートすることで Terraform 管理下に置くことができます。
+TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータエクスポート タスクが Terraform によって管理されていない場合は、インポートすることで Terraform 管理下に置くことができます。
 
 1.  新しい`tidbcloud_serverless_export`リソースのインポート ブロックを追加します。
 
@@ -182,9 +182,9 @@ TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータ エ
 
 これで、インポートしたエクスポートを Terraform で管理できるようになりました。
 
-## TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータ エクスポート タスクを削除します {#delete-a-data-export-task-for-a-tidb-cloud-starter-or-tidb-cloud-essential-cluster}
+## TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータエクスポート タスクを削除します {#delete-a-data-export-task-for-a-tidb-cloud-starter-or-tidb-cloud-essential-cluster}
 
-TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータ エクスポート タスクを削除するには、 `tidbcloud_serverless_export`リソースの構成を削除してから、 `terraform apply`コマンドを使用してリソースを破棄します。
+TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータエクスポート タスクを削除するには、 `tidbcloud_serverless_export`リソースの構成を削除してから、 `terraform apply`コマンドを使用してリソースを破棄します。
 
 ```shell
 $ terraform apply

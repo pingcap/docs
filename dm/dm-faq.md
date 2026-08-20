@@ -211,20 +211,20 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
     2.  エクスポートされたデータのディレクトリ内のすべてのファイルを削除します。
     3.  dmctl を使用してタスクを削除し、コマンド`start-task --remove-meta`を実行して新しいタスクを作成します。
 
-    新しいタスクが開始したら、冗長な DM ワーカー ノードが存在しないことを確認し、完全インポート中に DM クラスターの再起動やアップグレードを行わないようにすることをお勧めします。
+    新しいタスクが開始したら、冗長な DM ワーカーノードが存在しないことを確認し、完全インポート中に DM クラスターの再起動やアップグレードを行わないようにすることをお勧めします。
 
 -   データ量が大きい場合 (1 TB を超える場合) は、次の手順を実行します。
 
     1.  ダウンストリーム データベースにインポートされたデータをクリーンアップします。
     2.  データを処理する DM ワーカーノードに TiDB-Lightningをデプロイします。
-    3.  DM ダンプ ユニットがエクスポートするデータをインポートするには、TiDB-Lightning のローカル バックエンド モードを使用します。
+    3.  DM ダンプユニットがエクスポートするデータをインポートするには、TiDB-Lightning のローカル バックエンド モードを使用します。
     4.  完全インポートが完了したら、次の方法でタスク構成ファイルを編集し、タスクを再起動します。
         -   `task-mode`を`incremental`に変更します。
         -   ダンプユニットが出力するメタデータファイルに記録されている位置に値`mysql-instance.meta.pos`を設定します。
 
 ## 増分タスク中に再起動すると、DM がエラー`ERROR 1236 (HY000): The slave is connecting using CHANGE MASTER TO MASTER_AUTO_POSITION = 1, but the master has purged binary logs containing GTIDs that the slave requires.`はなぜですか? {#why-does-dm-report-the-error-error-1236-hy000-the-slave-is-connecting-using-change-master-to-master_auto_position--1-but-the-master-has-purged-binary-logs-containing-gtids-that-the-slave-requires-if-it-restarts-during-an-incremental-task}
 
-このエラーは、ダンプ ユニットによって出力されたメタデータファイルに記録されたアップストリームbinlogの位置が、完全な移行中に消去されたことを示します。
+このエラーは、ダンプユニットによって出力されたメタデータファイルに記録されたアップストリームbinlogの位置が、完全な移行中に消去されたことを示します。
 
 この問題が発生した場合は、タスクを一時停止し、ダウンストリーム データベースに移行されたすべてのデータを削除して、 `--remove-meta`オプションで新しいタスクを開始する必要があります。
 
@@ -337,7 +337,7 @@ query-status test
     4.  増分タスクの`task.yaml`に`syncers.safe-mode`を`true`に設定し、タスクを再開します。
     5.  増分タスクがすべての欠落データをダウンストリームに複製した後、タスクを停止し、 `task.yaml`の`safe-mode`を`false`に変更します。
     6.  タスクを再度開始します。
--   アップストリーム バイナリ ログが消去されたが、ローカル リレーログが残っている場合は、次の手順を実行できます。
+-   アップストリーム バイナリ ログが消去されたが、ローカルリレーログが残っている場合は、次の手順を実行できます。
     1.  現在のタスクを停止します。
     2.  連続しない GTID を持つデータソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポート タスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成します。
     3.  増分タスクの`task.yaml`で、 `binlog-gtid`の前の値を`previous_gtids`の前の値に変更します。上記の例では、 `1-y`を`6-y`に変更します。

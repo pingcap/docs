@@ -19,11 +19,11 @@ TiDB バージョン: 7.6.0
 
 ### 拡張性 {#scalability}
 
--   Active PD Follower機能を使用して PD のリージョン情報クエリ サービスのスケーラビリティを強化する (実験的) [#7431](https://github.com/tikv/pd/issues/7431) @[CabinfeverB](https://github.com/CabinfeverB)
+-   Active PD Follower機能を使用して PD のリージョン情報クエリサービスのスケーラビリティを強化する (実験的) [#7431](https://github.com/tikv/pd/issues/7431) @[CabinfeverB](https://github.com/CabinfeverB)
 
     リージョン数の多いTiDBクラスタでは、ハートビート処理やタスクスケジューリングに伴うオーバーヘッドが増加するため、PDリーダーのCPU負荷が高くなる可能性があります。クラスタにTiDBインスタンスが多数存在し、リージョン情報へのリクエストが同時に多数発生すると、PDリーダーのCPU負荷はさらに高まり、PDサービスが利用できなくなる恐れがあります。
 
-    高可用性を確保するため、TiDB v7.6.0 では、PD のリージョン情報クエリ サービスの拡張性を向上させる Active PD Follower機能をサポートしています。Active PD Follower機能は、システム変数[`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760) `ON`に設定することで有効にできます。この機能を有効にすると、TiDB はリージョン情報要求をすべての PD サーバーに均等に分散し、PD フォロワーもリージョン要求を処理できるようになるため、PD リーダーの CPU 負荷が軽減されます。
+    高可用性を確保するため、TiDB v7.6.0 では、PD のリージョン情報クエリサービスの拡張性を向上させる Active PD Follower機能をサポートしています。Active PD Follower機能は、システム変数[`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760) `ON`に設定することで有効にできます。この機能を有効にすると、TiDB はリージョン情報要求をすべての PD サーバーに均等に分散し、PD フォロワーもリージョン要求を処理できるようになるため、PD リーダーの CPU 負荷が軽減されます。
 
     詳細については、 [ドキュメント](/tune-region-performance.md#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service)を参照してください。
 
@@ -168,7 +168,7 @@ TiDB バージョン: 7.6.0
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760)を参照してください。
 
--   BR はデフォルトでユーザー データなどのシステムテーブルを復元します[#48567](https://github.com/pingcap/tidb/issues/48567) @[BornChanger](https://github.com/BornChanger) [#49627](https://github.com/pingcap/tidb/issues/49627) @[Leavrth](https://github.com/Leavrth)
+-   BR はデフォルトでユーザーデータなどのシステムテーブルを復元します[#48567](https://github.com/pingcap/tidb/issues/48567) @[BornChanger](https://github.com/BornChanger) [#49627](https://github.com/pingcap/tidb/issues/49627) @[Leavrth](https://github.com/Leavrth)
 
     バージョン5.1.0以降、スナップショットをバックアップすると、 BRは`mysql`スキーマ内のシステムテーブルを自動的にバックアップしますが、デフォルトではこれらのシステムテーブルを復元しません。バージョン6.2.0では、 BRは`--with-sys-table`パラメータを追加し、一部のシステムテーブルのデータを復元できるようにすることで、操作の柔軟性を向上させています。
 
@@ -224,7 +224,7 @@ TiDB バージョン: 7.6.0
 
 ### MySQLとの互換性 {#mysql-compatibility}
 
--   TiDB v7.6.0 より前は、 `LOAD DATA`操作は、単一のトランザクションですべての行をコミットするか、トランザクションをバッチでコミットしていました。これは MySQL の動作とは若干異なります。v7.6.0 以降、TiDB は`LOAD DATA` MySQL と同様にトランザクションで処理します。トランザクション内の`LOAD DATA`ステートメントは、現在のトランザクションを自動的にコミットしたり、新しいトランザクションを開始したりしなくなりました。さらに、トランザクション内の`LOAD DATA`ステートメントを明示的にコミットまたはロールバックできます。また、 `LOAD DATA`ステートメントは、TiDB のトランザクション モード設定 (楽観的トランザクションまたは悲観的トランザクション) の影響を受けます。 [#49079](https://github.com/pingcap/tidb/pull/49079) @[ekexium](https://github.com/ekexium)
+-   TiDB v7.6.0 より前は、 `LOAD DATA`操作は、単一のトランザクションですべての行をコミットするか、トランザクションをバッチでコミットしていました。これは MySQL の動作とは若干異なります。v7.6.0 以降、TiDB は`LOAD DATA` MySQL と同様にトランザクションで処理します。トランザクション内の`LOAD DATA`ステートメントは、現在のトランザクションを自動的にコミットしたり、新しいトランザクションを開始したりしなくなりました。さらに、トランザクション内の`LOAD DATA`ステートメントを明示的にコミットまたはロールバックできます。また、 `LOAD DATA`ステートメントは、TiDB のトランザクションモード設定 (楽観的トランザクションまたは悲観的トランザクション) の影響を受けます。 [#49079](https://github.com/pingcap/tidb/pull/49079) @[ekexium](https://github.com/ekexium)
 
 ### システム変数 {#system-variables}
 
@@ -372,7 +372,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   `ALTER TABLE t PARTITION BY`を実行する際に配置ルールを指定すると`ERROR 8239`というエラーが報告される問題を修正しました。 [#48630](https://github.com/pingcap/tidb/issues/48630) @[mjonss](https://github.com/mjonss)
     -   `START_TIME`の`INFORMATION_SCHEMA.CLUSTER_INFO`列タイプが無効であるという問題を修正します [#45221](https://github.com/pingcap/tidb/issues/45221) @[dveeden](https://github.com/dveeden)
     -   `EXTRA`の列タイプが無効であるために`INFORMATION_SCHEMA.COLUMNS`エラー`Data Too Long, field len 30, data len 45`が発生する問題を修正しました。 [#42030](https://github.com/pingcap/tidb/issues/42030) @[tangenta](https://github.com/tangenta)
-    -   `IN (...)`で`INFORMATION_SCHEMA.STATEMENTS_SUMMARY`で異なるプラン ダイジェストが発生する問題を修正 [#33559](https://github.com/pingcap/tidb/issues/33559) @[King-Dylan](https://github.com/King-Dylan)
+    -   `IN (...)`で`INFORMATION_SCHEMA.STATEMENTS_SUMMARY`で異なるプランダイジェストが発生する問題を修正 [#33559](https://github.com/pingcap/tidb/issues/33559) @[King-Dylan](https://github.com/King-Dylan)
     -   `TIME`型を`YEAR`型に変換する際に、返される結果に`TIME`と年が混在する問題を修正しました。 [#48557](https://github.com/pingcap/tidb/issues/48557) @[YangKeao](https://github.com/YangKeao)
     -   `tidb_enable_collect_execution_info`を無効にするとコプロセッサキャッシュがpanicを起こす問題を修正 [#48212](https://github.com/pingcap/tidb/issues/48212) @[you06](https://github.com/you06)
     -   `shuffleExec`が予期せず終了した際にTiDBがクラッシュする問題を修正 [#48230](https://github.com/pingcap/tidb/issues/48230) @[wshwsh12](https://github.com/wshwsh12)
@@ -414,7 +414,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   多階層にネストされた`LIMIT`クエリ内の`UNION`無効になる可能性がある問題を修正 [#49874](https://github.com/pingcap/tidb/issues/49874) @[Defined2014](https://github.com/Defined2014)
     -   `BETWEEN ... AND ...`条件を使用してパーティションテーブルをクエリすると誤った結果が返される問題を修正 [#49842](https://github.com/pingcap/tidb/issues/49842) @[Defined2014](https://github.com/Defined2014)
     -   `REPLACE INTO`ステートメントでヒントが使用できない問題を修正 [#34325](https://github.com/pingcap/tidb/issues/34325) @[YangKeao](https://github.com/YangKeao)
-    -   ハッシュ パーティションテーブルのクエリ時に TiDB が間違ったパーティションを選択する可能性がある問題を修正 [#50044](https://github.com/pingcap/tidb/issues/50044) @[Defined2014](https://github.com/Defined2014)
+    -   ハッシュパーティションテーブルのクエリ時に TiDB が間違ったパーティションを選択する可能性がある問題を修正 [#50044](https://github.com/pingcap/tidb/issues/50044) @[Defined2014](https://github.com/Defined2014)
     -   圧縮を有効にして MariaDB Connector/J を使用するときに発生する接続エラーを修正 [#49845](https://github.com/pingcap/tidb/issues/49845) @[onlyacat](https://github.com/onlyacat)
 
 -   TiKV

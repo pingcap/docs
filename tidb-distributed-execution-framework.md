@@ -24,7 +24,7 @@ TiDBは、優れたスケーラビリティと弾力性を備えたコンピュ�
 DXF を有効にすると上記の問題が解決され、次の 3 つの利点があります。
 
 -   このフレームワークは、高いスケーラビリティ、高い可用性、および高いパフォーマンスを実現する統合された機能を提供します。
--   DXF はタスクの分散実行をサポートしており、TiDB クラスター全体の利用可能なコンピューティング リソースを柔軟にスケジュールできるため、TiDB クラスター内のコンピューティング リソースをより有効に活用できます。
+-   DXF はタスクの分散実行をサポートしており、TiDB クラスター全体の利用可能なコンピューティングリソースを柔軟にスケジュールできるため、TiDB クラスター内のコンピューティングリソースをより有効に活用できます。
 -   DXF は、全体的タスクと個々のタスクの両方に対して、統合されたリソースの使用および管理機能を提供します。
 
 現在、DXF は[`ADD INDEX`](/sql-statements/sql-statement-add-index.md)と[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)ステートメントの分散実行をサポートしています。
@@ -51,11 +51,11 @@ DXF を使用して[`ADD INDEX`](/sql-statements/sql-statement-add-index.md)タ�
 1.  高速オンライン DDL に関連する次のシステム変数を調整します。
 
     -   [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) : 高速オンラインDDLモードを有効にするために使用されます。TiDB v6.5.0以降ではデフォルトで有効になっています。
-    -   [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630) : 高速オンライン DDL モードで使用できるローカル ディスクの最大クォータを制御するために使用されます。
+    -   [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630) : 高速オンライン DDL モードで使用できるローカルディスクの最大クォータを制御するために使用されます。
 
 2.  高速オンライン DDL に関連する次の構成項目を調整します。
 
-    -   [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) : 高速オンライン DDL モードで使用できるローカル ディスク パスを指定します。
+    -   [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) : 高速オンライン DDL モードで使用できるローカルディスク パスを指定します。
 
 > **Note:**
 >
@@ -68,7 +68,7 @@ DXF を使用して[`ADD INDEX`](/sql-statements/sql-statement-add-index.md)タ�
 高速オンライン DDL に関連する次のシステム変数を調整します。
 
 -   [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) : 高速オンラインDDLモードを有効にするために使用されます。TiDB v6.5.0以降ではデフォルトで有効になっています。
--   [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630) : 高速オンライン DDL モードで使用できるローカル ディスクの最大クォータを制御するために使用されます。
+-   [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630) : 高速オンライン DDL モードで使用できるローカルディスクの最大クォータを制御するために使用されます。
 
 </CustomContent>
 
@@ -115,7 +115,7 @@ DXF のアーキテクチャは次のとおりです。
 -   ディスパッチャ: 各タスクの分散実行計画を生成し、実行プロセスを管理し、タスクの状態を変換し、実行時のタスク情報を収集してフィードバックします。
 -   スケジューラ: TiDB ノード間で分散タスクの実行を複製し、タスク実行の効率を向上させます。
 -   サブタスクエグゼキュータ：分散サブタスクの実際の実行者。また、サブタスクエグゼキュータはサブタスクの実行状況をスケジューラに返し、スケジューラはサブタスクの実行状況を一元的に更新します。
--   リソース プール: 上記のモジュールのコンピューティング リソースをプールすることにより、リソースの使用状況と管理を定量化する基礎を提供します。
+-   リソース プール: 上記のモジュールのコンピューティングリソースをプールすることにより、リソースの使用状況と管理を定量化する基礎を提供します。
 
 ## 参照 {#see-also}
 

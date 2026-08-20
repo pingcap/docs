@@ -103,4 +103,4 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 
 -   読み取りインデックス OPS: 各TiFlashインスタンスが`read_index`回のリクエストをトリガーする回数。これはトリガーされたリージョンの数に等しくなります。
 -   インデックス読み取り時間: すべてのTiFlashインスタンスの`read_index`が使用する時間。ほとんどの時間は、リージョンリーダーとのやり取りと再試行に使用されます。
--   インデックス待機期間: すべてのTiFlashインスタンスに対して`wait_index`が使用する時間。つまり、 `read_index`要求を受信した後、ローカル インデックス &gt;= read_index になるまで待機する時間です。
+-   インデックス待機期間: すべてのTiFlashインスタンスに対して`wait_index`が使用する時間。つまり、 `read_index`要求を受信した後、ローカルインデックス &gt;= read_index になるまで待機する時間です。

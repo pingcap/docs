@@ -1,6 +1,6 @@
 ---
 title: Configure Maintenance Window
-summary: TiDB Cloud Dedicatedクラスターのメンテナンス ウィンドウを設定する方法を学びましょう。
+summary: TiDB Cloud Dedicatedクラスターのメンテナンスウィンドウを設定する方法を学びましょう。
 ---
 
 # メンテナンスウィンドウの設定 {#configure-maintenance-window}

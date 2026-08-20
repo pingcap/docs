@@ -167,7 +167,7 @@ TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー�
 | メンテナンスタスクの延期           | メンテナンスタスクを延期する                                                       |
 | ブランチの作成                | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチを作成する           |
 | ブランチの削除                | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチを削除します          |
-| ブランチルートパスワードの設定        | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチのルート パスワードを設定する |
+| ブランチルートパスワードの設定        | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチのルートパスワードを設定する |
 | 接続ブランチGitHub           | クラスターをGitHubリポジトリに接続してブランチ統合を有効にする                                   |
 | ブランチを切断GitHub          | ブランチ統合を無効にするには、クラスターを GitHub リポジトリから切断します。                           |
 | 認証方法の更新                | Cloud Organization SSO の認証方法を更新する                                    |

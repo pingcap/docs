@@ -31,7 +31,7 @@ VPCピアリングリクエストをリージョンに追加するには、そ�
 
 2.  左側のナビゲーションペインで、 **Project Settings** &gt; **Network Access**をクリックします。
 
-3.  **Network Access**ページで、 **Project CIDR**タブをクリックし、クラウド プロバイダーに応じて**AWS**または**Google Cloud**を選択します。
+3.  **Network Access**ページで、 **Project CIDR**タブをクリックし、クラウドプロバイダーに応じて**AWS**または**Google Cloud**を選択します。
 
 4.  右上隅の**Create CIDR**をクリックします。 **Create AWS CIDR**または**Create Google Cloud CIDR**ダイアログでリージョンと CIDR 値を指定し、 **Confirm**をクリックします。
 
@@ -50,7 +50,7 @@ VPCピアリングリクエストをリージョンに追加するには、そ�
     >     -   172.30.0.0 - 172.31.255.255
     > -   TiDB Cloud は、リージョンの CIDR ブロック サイズに基づいて、プロジェクトのリージョン内のTiDB Cloudノードの数を制限します。
 
-5.  クラウド プロバイダーと特定のリージョンの CIDR を確認する。
+5.  クラウドプロバイダーと特定のリージョンの CIDR を確認する。
 
     CIDRはデフォルトで無効になっています。CIDRを有効にするには、対象リージョンにクラスターを作成する必要があります。リージョンのCIDRが有効な場合は、そのリージョンにVPCピアリングを作成できます。
 
@@ -319,7 +319,7 @@ gcloud beta compute networks peerings create <your-peer-name> --project <your-pr
 
 1.  プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページで、ターゲット クラスターの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックし、 **Connection Type**ドロップダウン リストから**VPC Peering**を選択します。
+2.  右上隅の**Connect**をクリックし、 **Connection Type**ドロップダウンリストから**VPC Peering**を選択します。
 
     VPC ピアリング接続ステータスが**システムチェック**から**アクティブ**に変わるまで待ちます (約 5 分)。
 

@@ -424,7 +424,7 @@ EXPLAIN SELECT /*+ ORDER_INDEX(t, a) */ a FROM t ORDER BY a LIMIT 10;
 
 `NO_ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])`ヒントは、指定されたテーブルに対して指定されたインデックスのみを使用し、指定されたインデックスを順番に読み取らないようにオプティマイザに指示します。このヒントは通常、以下のシナリオに適用されます。
 
-次の例は、クエリ ステートメントの効果が`SELECT * FROM t t1 use index(idx1, idx2);`と同等であることを示しています。
+次の例は、クエリステートメントの効果が`SELECT * FROM t t1 use index(idx1, idx2);`と同等であることを示しています。
 
 ```sql
 CREATE TABLE t(a INT, b INT, key(a), key(b));

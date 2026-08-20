@@ -22,11 +22,11 @@ summary: DBスナップショットを使用して、Amazon AuroraからTiDBへ�
 
 ### ステップ1. スキーマファイルのエクスポートとインポート {#step-1-export-and-import-the-schema-file}
 
-このセクションでは、Amazon Auroraからスキーマ ファイルをエクスポートし、TiDB にインポートする方法について説明します。対象データベースにテーブルを手動で作成している場合は、この手順をスキップできます。
+このセクションでは、Amazon Auroraからスキーマファイルをエクスポートし、TiDB にインポートする方法について説明します。対象データベースにテーブルを手動で作成している場合は、この手順をスキップできます。
 
 #### 1.1 Amazon Auroraからスキーマファイルをエクスポートする {#1-1-export-the-schema-file-from-amazon-aurora}
 
-Amazon Auroraのスナップショット ファイルには DDL ステートメントが含まれていないため、 Dumplingを使用してスキーマをエクスポートし、 TiDB Lightningを使用してターゲット データベースにスキーマを作成する必要があります。
+Amazon Auroraのスナップショットファイルには DDL ステートメントが含まれていないため、 Dumplingを使用してスキーマをエクスポートし、 TiDB Lightningを使用してターゲットデータベースにスキーマを作成する必要があります。
 
 次のコマンドを実行して、 Dumplingを使用してスキーマをエクスポートします。このコマンドには`--filter`パラメータが含まれており、目的のテーブルスキーマのみをエクスポートできます。パラメータの詳細については、 [Dumplingのオプション一覧](/dumpling-overview.md#option-list-of-dumpling)を参照してください。
 

@@ -141,8 +141,8 @@ TiDB Cloudは、組織、プロジェクト、インスタンスの各レベル�
 | バックアップからインスタンスまたはクラスターを新しいリソースとして復元します。                                                           | ✅               | ❌                                | ❌                               | ❌                |
 | データを読み取るためのエンドポイントの使用または作成など、データ読み取り専用操作の[Data Service](/tidb-cloud/data-service-overview.md)を管理します。      | ✅               | ✅                                | ✅                               | ❌                |
 | データの読み取りおよび書き込み操作のための[Data Service](/tidb-cloud/data-service-overview.md)を管理します。                          | ✅               | ✅                                | ❌                               | ❌                |
-| リソース タイプでサポートされている場合は、[SQLエディタ](/tidb-cloud/explore-data-with-chat2query.md)を使用してリソース データを確認する。       | ✅               | ✅                                | ✅                               | ❌                |
-| リソースの種類でサポートされている場合は、[SQLエディタ](/tidb-cloud/explore-data-with-chat2query.md)を使用してリソース データを変更および削除します。 | ✅               | ✅                                | ❌                               | ❌                |
+| リソース タイプでサポートされている場合は、[SQLエディタ](/tidb-cloud/explore-data-with-chat2query.md)を使用してリソースデータを確認する。       | ✅               | ✅                                | ✅                               | ❌                |
+| リソースの種類でサポートされている場合は、[SQLエディタ](/tidb-cloud/explore-data-with-chat2query.md)を使用してリソースデータを変更および削除します。 | ✅               | ✅                                | ❌                               | ❌                |
 | [変更フィード](/tidb-cloud/changefeed-overview.md)を管理します。                                                  | ✅               | ✅                                | ✅                               | ❌                |
 | リソースの種類が対応している場合は、リソースのパスワードを確認し、リセットしてください。                                                         | ✅               | ❌                                | ❌                               | ❌                |
 | プロジェクト内のリソースの概要、バックアップ レコード、メトリック、イベント、および[変更フィード](/tidb-cloud/changefeed-overview.md)を確認する。          | ✅               | ✅                                | ✅                               | ✅                |

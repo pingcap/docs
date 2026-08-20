@@ -1,6 +1,6 @@
 ---
 title: Use Resource Control to Manage Background Tasks
-summary: リソース制御を通じてバックグラウンド タスクを制御する方法を紹介します。
+summary: リソース制御を通じてバックグラウンドタスクを制御する方法を紹介します。
 ---
 
 # リソース制御を使用してバックグラウンドタスクを管理する {#use-resource-control-to-manage-background-tasks}
@@ -22,7 +22,7 @@ v7.4.0以降、 [TiDB リソース制御](/tidb-resource-control-ru-groups.md)�
 -   `TASK_TYPES` : バックグラウンドタスクとして管理する必要があるタスクの種類を指定します。複数のタスクの種類を指定する場合は、カンマ ( `,` ) で区切ります。
 -   `UTILIZATION_LIMIT` : 各 TiKV ノード上でバックグラウンドタスクが消費できるリソースの最大割合（0～100）を制限します。デフォルトでは、TiKV はノードの総リソースとフォアグラウンドタスクが現在占有しているリソースに基づいて、バックグラウンドタスクに利用可能なリソースを計算します。`UTILIZATION_LIMIT`を設定すると、バックグラウンドタスクに割り当てられるリソースはこの制限を超えません。
 
-TiDB は次の種類のバックグラウンド タスクをサポートしています。
+TiDB は次の種類のバックグラウンドタスクをサポートしています。
 
 <CustomContent platform="tidb">
 
@@ -52,13 +52,13 @@ TiDB は次の種類のバックグラウンド タスクをサポートして�
 
 ## 例 {#examples}
 
-1.  `br`と`ddl`バックグラウンド タスクとしてマークし、バックグラウンド タスクのリソース制限を 30% に設定して、リソースグループ`default`を変更します。
+1.  `br`と`ddl`バックグラウンドタスクとしてマークし、バックグラウンドタスクのリソース制限を 30% に設定して、リソースグループ`default`を変更します。
 
     ```sql
     ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES='br,ddl', UTILIZATION_LIMIT=30);
     ```
 
-2.  `default`リソースグループを変更して、バックグラウンド タスクの種類を既定値に戻します。
+2.  `default`リソースグループを変更して、バックグラウンドタスクの種類を既定値に戻します。
 
     ```sql
     ALTER RESOURCE GROUP `default` BACKGROUND=NULL;
@@ -70,7 +70,7 @@ TiDB は次の種類のバックグラウンド タスクをサポートして�
     ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES="");
     ```
 
-4.  `default`リソースグループのバックグラウンド タスクの種類を表示する。
+4.  `default`リソースグループのバックグラウンドタスクの種類を表示する。
 
     ```sql
     SELECT * FROM information_schema.resource_groups WHERE NAME="default";

@@ -1,6 +1,6 @@
 ---
 title: TiDB User Account Management
-summary: TiDB ユーザー アカウントを管理する方法を学習します。
+summary: TiDB ユーザーアカウントを管理する方法を学習します。
 ---
 
 # TiDB ユーザーアカウント管理 {#tidb-user-account-management}
@@ -131,7 +131,7 @@ SHOW CREATE USER 'admin'@'localhost';
 
 ## ユーザーアカウントを削除する {#remove-user-accounts}
 
-ユーザー アカウントを削除するには、次[`DROP USER`](/sql-statements/sql-statement-drop-user.md)ステートメントを使用します。
+ユーザーアカウントを削除するには、次[`DROP USER`](/sql-statements/sql-statement-drop-user.md)ステートメントを使用します。
 
 ```sql
 DROP USER 'test'@'localhost';
