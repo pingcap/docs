@@ -73,7 +73,7 @@ SELECT * FROM test.repository;
 
 2.  依存関係をインストールします。
 
-    このドキュメントでは[OpenAPIジェネレーター](https://github.com/OpenAPITools/openapi-generator)を使用して、OpenAPI 仕様から API クライアント ライブラリを自動的に生成します。
+    このドキュメントでは[OpenAPIジェネレーター](https://github.com/OpenAPITools/openapi-generator)を使用して、OpenAPI 仕様から API クライアントライブラリを自動的に生成します。
 
     OpenAPI Generatorを開発依存関係としてインストールするには、次のコマンドを実行します。
 

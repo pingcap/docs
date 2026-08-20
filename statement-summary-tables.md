@@ -40,7 +40,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 ここでいう「プランダイジェスト」とは、正規化された実行計画によって計算される一意の識別子を指します。正規化処理では定数は無視されます。同じSQL文でも実行計画が異なる場合があるため、異なるカテゴリに分類されることがあります。同じカテゴリのSQL文は、同じ実行計画を持ちます。
 
-`statements_summary`は、SQL モニタリング メトリックの集計結果が格納されます。一般的に、各モニタリング メトリックには、最大値と平均値が含まれます。たとえば、実行レイテンシーメトリックは、 `AVG_LATENCY` (平均レイテンシー) と`MAX_LATENCY` (最大レイテンシー) の 2 つのフィールドに対応します。
+`statements_summary`は、SQL モニタリングメトリックの集計結果が格納されます。一般的に、各モニタリングメトリックには、最大値と平均値が含まれます。たとえば、実行レイテンシーメトリックは、 `AVG_LATENCY` (平均レイテンシー) と`MAX_LATENCY` (最大レイテンシー) の 2 つのフィールドに対応します。
 
 監視メトリクスが最新の状態であることを確認するため、 `statements_summary`テーブルのデータは定期的にクリアされ、最新の集計結果のみが保持されて表示されます。定期的なデータクリアは、 `tidb_stmt_summary_refresh_interval`システム変数によって制御されます。クリア直後にクエリを実行すると、表示されるデータが非常に少なくなる場合があります。
 
@@ -154,7 +154,7 @@ set global tidb_stmt_summary_refresh_interval = 1800;
 set global tidb_stmt_summary_history_size = 24;
 ```
 
-前述の設定が有効になると、 `statements_summary`テーブルは 30 分ごとにクリアされ、 `statements_summary_history`テーブルには最大 3000 種類の SQL ステートメントが格納されます。各タイプについて、 `statements_summary_history`テーブルには直近 24 期間のデータが格納されます。 `statements_summary_evicted`テーブルには、ステートメント サマリーから SQL ステートメントが削除された直近 24 期間が記録されます。 `statements_summary_evicted`テーブルは 30 分ごとに更新されます。
+前述の設定が有効になると、 `statements_summary`テーブルは 30 分ごとにクリアされ、 `statements_summary_history`テーブルには最大 3000 種類の SQL ステートメントが格納されます。各タイプについて、 `statements_summary_history`テーブルには直近 24 期間のデータが格納されます。 `statements_summary_evicted`テーブルには、ステートメントサマリーから SQL ステートメントが削除された直近 24 期間が記録されます。 `statements_summary_evicted`テーブルは 30 分ごとに更新されます。
 
 > **Note:**
 >

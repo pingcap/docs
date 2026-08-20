@@ -98,7 +98,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、 [ドキュメント](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan)を参照してください。
 
--   いくつかのオプティマイザー ヒントを追加 [#39964](https://github.com/pingcap/tidb/issues/39964) @[Reminiscent](https://github.com/Reminiscent)
+-   いくつかのオプティマイザーヒントを追加 [#39964](https://github.com/pingcap/tidb/issues/39964) @[Reminiscent](https://github.com/Reminiscent)
 
     TiDB は v6.6.0 で`LIMIT`操作の実行計画の選択を制御するためのオプティマイザヒントをいくつか追加しました。
 
@@ -109,7 +109,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 -   DDL操作のリソース使用量を動的に管理するサポート（実験的） [#38025](https://github.com/pingcap/tidb/issues/38025) @[hawkingrei](https://github.com/hawkingrei)
 
-    TiDB v6.6.0 では、DDL 操作のリソース管理が導入されており、これらの操作の CPU 使用率を自動的に制御することで、オンライン アプリケーションに対する DDL 変更の影響を軽減します。この機能は[DDL分散並列実行フレームワーク](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_ddl_distribute_reorg-new-in-v660)が有効になった後にのみ有効です。
+    TiDB v6.6.0 では、DDL 操作のリソース管理が導入されており、これらの操作の CPU 使用率を自動的に制御することで、オンラインアプリケーションに対する DDL 変更の影響を軽減します。この機能は[DDL分散並列実行フレームワーク](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_ddl_distribute_reorg-new-in-v660)が有効になった後にのみ有効です。
 
 ### 可用性 {#availability}
 
@@ -124,7 +124,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 -   `FLASHBACK CLUSTER TO TIMESTAMP`ステートメントによる DDL 操作のロールバックのサポート [#14045](https://github.com/tikv/tikv/issues/14045) @[Defined2014](https://github.com/Defined2014) @[JmPotato](https://github.com/JmPotato)
 
-    [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)ステートメントは、ガベージ コレクション (GC) の有効期間内の指定された時点にクラスタ全体を復元することをサポートします。TiDB v6.6.0 では、この機能に DDL 操作のロールバック機能が追加されました。これにより、クラスタ上で発生した DML または DDL 操作の誤りを迅速に取り消したり、クラスタを数分以内にロールバックしたり、タイムライン上でクラスタを複数回ロールバックして特定のデータ変更が発生したタイミングを特定したりすることができます。
+    [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)ステートメントは、ガベージコレクション (GC) の有効期間内の指定された時点にクラスタ全体を復元することをサポートします。TiDB v6.6.0 では、この機能に DDL 操作のロールバック機能が追加されました。これにより、クラスタ上で発生した DML または DDL 操作の誤りを迅速に取り消したり、クラスタを数分以内にロールバックしたり、タイムライン上でクラスタを複数回ロールバックして特定のデータ変更が発生したタイミングを特定したりすることができます。
 
     詳細については、 [ドキュメント](/sql-statements/sql-statement-flashback-cluster.md)を参照してください。
 
@@ -148,7 +148,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 -   リソースを大量に消費するタスク向けに読み取り専用ストレージノードを構成する機能をサポート @[v01dstar](https://github.com/v01dstar)
 
-    本番環境では、バックアップや大規模なデータ読み取りと分析など、読み取り専用操作が定期的に大量のリソースを消費し、クラスタ全体のパフォーマンスに影響を与える場合があります。TiDB v6.6.0 では、リソースを消費する読み取り専用タスク用に読み取り専用ストレージノードを構成して、オンライン アプリケーションへの影響を軽減できます。現在、TiDB、TiSpark、およびBR は、読み取り専用ストレージノードからのデータ読み取りをサポートしています。 [手順](/best-practices/readonly-nodes.md#procedures)のパフォーマンスの安定性を確保するため、システム変数`tidb_replica_read` 、TiSpark 構成項目`spark.tispark.replica_read` 、または br コマンドライン引数`--replica-read-label` 、読み取り先を指定して、読み取り専用ストレージ ノードを次のように構成できます。
+    本番環境では、バックアップや大規模なデータ読み取りと分析など、読み取り専用操作が定期的に大量のリソースを消費し、クラスタ全体のパフォーマンスに影響を与える場合があります。TiDB v6.6.0 では、リソースを消費する読み取り専用タスク用に読み取り専用ストレージノードを構成して、オンラインアプリケーションへの影響を軽減できます。現在、TiDB、TiSpark、およびBR は、読み取り専用ストレージノードからのデータ読み取りをサポートしています。 [手順](/best-practices/readonly-nodes.md#procedures)のパフォーマンスの安定性を確保するため、システム変数`tidb_replica_read` 、TiSpark 構成項目`spark.tispark.replica_read` 、または br コマンドライン引数`--replica-read-label` 、読み取り先を指定して、読み取り専用ストレージ ノードを次のように構成できます。
 
     詳細については、[ドキュメント](/best-practices/readonly-nodes.md)を参照してください。
 
@@ -160,7 +160,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 -   TiDBクラスタ初期化時に実行されるSQLスクリプトの指定をサポートする [#35624](https://github.com/pingcap/tidb/issues/35624) @[morgo](https://github.com/morgo)
 
-    TiDB クラスタを初めて起動する際に、コマンドライン パラメータ`--initialize-sql-file`を設定することで、実行する SQL スクリプトを指定できます。この機能は、システム変数の値の変更、ユーザーの作成、権限の付与などの操作を実行する必要がある場合に使用できます。
+    TiDB クラスタを初めて起動する際に、コマンドラインパラメータ`--initialize-sql-file`を設定することで、実行する SQL スクリプトを指定できます。この機能は、システム変数の値の変更、ユーザーの作成、権限の付与などの操作を実行する必要がある場合に使用できます。
 
     詳細については、 [ドキュメント](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)を参照してください。
 
@@ -315,7 +315,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 | `tidb_general_plan_cache_size`                                                                                                                               | 変更     | この変数は、General Plan Cache によってキャッシュできる実行計画の最大数を制御します。v6.6.0 以降、この変数は[`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)に名前が変更されました。                                                                                |
 | [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)                                                                                     | 変更     | この変数に新しい値オプション`learner`が追加され、TiDB が読み取り専用ノードからデータを読み取る際に使用するラーナーレプリカを指定できます。                                                                                                                                                                                  |
 | [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)                                                                                     | 変更     | TiDBクラスタの読み取り可用性を向上させるため、この変数に新しい値オプション`prefer-leader`が追加されました。このオプションを設定すると、TiDBはリーダーレプリカからの読み取りを優先します。リーダーレプリカのパフォーマンスが著しく低下した場合、TiDBは自動的にフォロワーレプリカからの読み取りに切り替わります。                                                                                        |
-| [`tidb_store_batch_size`](/system-variables.md#tidb_store_batch_size)                                                                                        | 変更     | この変数は`IndexLookUp`オペレータのコプロセッサータスクのバッチ サイズを制御します。 `0`バッチを無効にすることを意味します。v6.6.0 以降、デフォルト値は`0`から`4`に変更され、リクエストのバッチごとに 4 つのコプロセッサータスクが 1 つのタスクにまとめられます。                                                                                                          |
+| [`tidb_store_batch_size`](/system-variables.md#tidb_store_batch_size)                                                                                        | 変更     | この変数は`IndexLookUp`オペレータのコプロセッサータスクのバッチサイズを制御します。 `0`バッチを無効にすることを意味します。v6.6.0 以降、デフォルト値は`0`から`4`に変更され、リクエストのバッチごとに 4 つのコプロセッサータスクが 1 つのタスクにまとめられます。                                                                                                          |
 | [`mpp_exchange_compression_mode`](/system-variables.md#mpp_exchange_compression_mode-new-in-v660)                                                            | 新しく追加された | この変数は、MPP Exchange オペレータのデータ圧縮モードを指定します。この変数は、TiDB がバージョン番号`1`の MPP 実行計画を選択した場合に有効になります。デフォルト値`UNSPECIFIED`は、TiDB が自動的に`FAST`圧縮モードを選択することを意味します。                                                                                                            |
 | [`mpp_version`](/system-variables.md#mpp_version-new-in-v660)                                                                                                | 新しく追加された | この変数は、MPP実行計画のバージョンを指定します。バージョンを指定すると、TiDBは指定されたバージョンのMPP実行計画を選択します。デフォルト値`UNSPECIFIED` 、TiDBが最新バージョン`1`自動的に選択することを意味します。                                                                                                                                  |
 | [`tidb_ddl_distribute_reorg`](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_ddl_distribute_reorg-new-in-v660)                             | 新しく追加された | この変数は、DDL 再編成フェーズの分散実行を有効にしてこのフェーズを高速化するかどうかを制御します。デフォルト値`OFF`は、デフォルトでは DDL 再編成フェーズの分散実行を有効にしないことを意味します。現在、この変数は`ADD INDEX`に対してのみ有効です。                                                                                                                       |
@@ -429,7 +429,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     -   TiDB Data Migration (DM)
 
-        -   DM アラート ルールとコンテンツを最適化 [#7376](https://github.com/pingcap/tiflow/issues/7376) @[D3Hunter](https://github.com/D3Hunter)
+        -   DM アラートルールとコンテンツを最適化 [#7376](https://github.com/pingcap/tiflow/issues/7376) @[D3Hunter](https://github.com/D3Hunter)
 
             従来は、関連するエラーが発生するたびに「DM_XXX_process_exits_with_error」のようなアラートが発生していました。しかし、一部のアラートはアイドル状態のデータベース接続が原因で発生し、再接続後に回復できる場合があります。このようなアラートを減らすため、DMはエラーを自動的に回復可能なエラーと回復不可能なエラーの2種類に分類します。
 
@@ -504,7 +504,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 -   TiKV
 
     -   `const Enum`型を他の型にキャストする際に発生するエラーを修正します [#14156](https://github.com/tikv/tikv/issues/14156) @[wshwsh12](https://github.com/wshwsh12)
-    -   解決された TS によりネットワーク トラフィックが増加する問題を修正 [#14092](https://github.com/tikv/tikv/issues/14092) @[overvenus](https://github.com/overvenus)
+    -   解決された TS によりネットワークトラフィックが増加する問題を修正 [#14092](https://github.com/tikv/tikv/issues/14092) @[overvenus](https://github.com/overvenus)
     -   TiDBとTiKV間のネットワーク障害によって発生するデータ不整合の問題を修正。DML実行中に悲観的DMLが失敗した後に発生するデータ不整合の問題を修正 [#14038](https://github.com/tikv/tikv/issues/14038) @[MyonKeminta](https://github.com/MyonKeminta)
 
 -   PD

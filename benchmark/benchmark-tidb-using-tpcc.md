@@ -86,7 +86,7 @@ tiup bench tpcc -H 172.16.5.140,172.16.5.141 -P 4000 -D tpcc --warehouses 1000 -
 
 ## テストデータをクリーンアップする {#clean-up-test-data}
 
-テスト データをクリーンアップするには、次のコマンドを実行します。
+テストデータをクリーンアップするには、次のコマンドを実行します。
 
 ```shell
 tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 4 cleanup

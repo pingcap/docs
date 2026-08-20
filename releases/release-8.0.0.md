@@ -62,7 +62,7 @@ TiDB バージョン: 8.0.0
 
     TiDBの以前のバージョンでは、HashAgg演算子の並行処理アルゴリズムはディスクスピルをサポートしていませんでした。SQL文の実行計画に並列HashAgg演算子が含まれている場合、そのSQL文のすべてのデータはメモリ内でしか処理できません。そのため、TiDBは大量のデータをメモリ内で処理する必要があります。データサイズがメモリ制限を超えると、TiDBは並列処理を行わないアルゴリズムしか選択できず、パフォーマンス向上のための並行処理を活用できません。
 
-    バージョン 8.0.0 では、TiDB の並列 HashAgg アルゴリズムがディスクスピルをサポートしています。並列処理のあらゆる状況において、HashAgg オペレータはメモリ使用量に基づいてデータ スピルを自動的にトリガーし、パフォーマンスとデータ スループットのバランスを取ることができます。現在、実験的機能として、TiDB はディスクスピルをサポートする並列 HashAgg アルゴリズムを有効にするかどうかを制御する`tidb_enable_parallel_hashagg_spill`変数を導入しています。この変数が`ON`の場合、有効になっていることを意味します。この機能が将来のリリースで一般提供されるようになった後、この変数は非推奨となります。
+    バージョン 8.0.0 では、TiDB の並列 HashAgg アルゴリズムがディスクスピルをサポートしています。並列処理のあらゆる状況において、HashAgg オペレータはメモリ使用量に基づいてデータスピルを自動的にトリガーし、パフォーマンスとデータ スループットのバランスを取ることができます。現在、実験的機能として、TiDB はディスクスピルをサポートする並列 HashAgg アルゴリズムを有効にするかどうかを制御する`tidb_enable_parallel_hashagg_spill`変数を導入しています。この変数が`ON`の場合、有効になっていることを意味します。この機能が将来のリリースで一般提供されるようになった後、この変数は非推奨となります。
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800)を参照してください。
 
@@ -242,7 +242,7 @@ TiDB バージョン: 8.0.0
 
     バージョン7.4.0より前では、[分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)を使用して`IMPORT INTO`タスクを実行すると、ローカルストレージ容量が限られているため、TiDBはデータの一部をローカルでソートしてからTiKVにインポートしていました。このため、TiKVにインポートされたデータにかなりの重複が生じ、インポート中にTiKVが追加の圧縮操作を実行する必要が生じ、TiKVのパフォーマンスと安定性に影響が出ていました。
 
-    v7.4.0 で導入された実験的機能であるグローバル ソートを使用すると、TiDB はインポートするデータを TiKV にインポートする前に、グローバル ソートのために一時的に外部ストレージ(Amazon S3 など) に保存できます。これにより、インポート中の TiKV 圧縮操作が不要になります。v8.0.0 では、グローバル ソートが GA になります。この機能により、TiKV のリソース消費が削減され、 `IMPORT INTO`のパフォーマンスと安定性が大幅に向上します。グローバル ソートを有効にすると、各`IMPORT INTO`タスクは 40 TiB 以内のデータのインポートをサポートします。
+    v7.4.0 で導入された実験的機能であるグローバルソートを使用すると、TiDB はインポートするデータを TiKV にインポートする前に、グローバルソートのために一時的に外部ストレージ(Amazon S3 など) に保存できます。これにより、インポート中の TiKV 圧縮操作が不要になります。v8.0.0 では、グローバルソートが GA になります。この機能により、TiKV のリソース消費が削減され、 `IMPORT INTO`のパフォーマンスと安定性が大幅に向上します。グローバルソートを有効にすると、各`IMPORT INTO`タスクは 40 TiB 以内のデータのインポートをサポートします。
 
     詳細については、[ドキュメント](/tidb-global-sort.md)を参照してください。
 
@@ -260,7 +260,7 @@ TiDB バージョン: 8.0.0
 
 -   セキュリティ強化モード（SEM）で[`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610) `ON`に設定することを禁止し、ユーザーの接続に関する潜在的な問題を防止します。 [#47665](https://github.com/pingcap/tidb/issues/47665) @[tiancaiamao](https://github.com/tiancaiamao)
 -   DM では、暗号化および復号化用の固定秘密キーが削除され、暗号化および復号化用の秘密キーをカスタマイズできるようになります。アップグレード前に[データソース構成](/dm/dm-source-configuration-file.md)と[移行タスクの設定](/dm/task-configuration-file-full.md)で暗号化されたパスワードが使用されている場合、追加の操作については[DMの暗号化と復号化のための秘密鍵をカスタマイズする](/dm/dm-customized-secret-key.md)のアップグレード手順を参照する必要があります。 [#9492](https://github.com/pingcap/tiflow/issues/9492) @[D3Hunter](https://github.com/D3Hunter)
--   v8.0.0 より前では、 `ADD INDEX`および`CREATE INDEX` ( `tidb_ddl_enable_fast_reorg = ON` ) の高速化を有効にした後、エンコードされたインデックス キーは、下流の TiKV 容量に応じて動的に調整できない固定の同時実行数`16`で TiKV にデータを取り込みます。v8.0.0 以降では、 [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)システム変数を使用して同時実行数を調整できます。デフォルト値は`4`です。以前のデフォルト値`16`と比較すると、新しいデフォルト値では、インデックス付きキーと値のペアを取り込むときのパフォーマンスが低下します。このシステム変数は、クラスターのワークロードに基づいて調整できます。
+-   v8.0.0 より前では、 `ADD INDEX`および`CREATE INDEX` ( `tidb_ddl_enable_fast_reorg = ON` ) の高速化を有効にした後、エンコードされたインデックスキーは、下流の TiKV 容量に応じて動的に調整できない固定の同時実行数`16`で TiKV にデータを取り込みます。v8.0.0 以降では、 [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)システム変数を使用して同時実行数を調整できます。デフォルト値は`4`です。以前のデフォルト値`16`と比較すると、新しいデフォルト値では、インデックス付きキーと値のペアを取り込むときのパフォーマンスが低下します。このシステム変数は、クラスターのワークロードに基づいて調整できます。
 
 ### MySQLとの互換性 {#mysql-compatibility}
 
@@ -273,7 +273,7 @@ TiDB バージョン: 8.0.0
 | [`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry)                                         | 非推奨      | バージョン8.0.0以降、このシステム変数は非推奨となり、TiDBは楽観的トランザクションの自動再試行をサポートしなくなりました。[悲観的トランザクションモード](/pessimistic-transaction.md)の使用をお勧めします。楽観的トランザクションの競合が発生した場合は、エラーを捕捉してアプリケーションでトランザクションを再試行できます。                                               |
 | `tidb_ddl_version`                                                                                                        | 名称変更     | TiDB DDL V2 を有効にするかどうかを制御します。バージョン 8.0.0 以降、この変数は目的をより明確にするために[`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)に名称変更されました。                                                 |
 | [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info)                           | 変更     | [インデックスの使用統計](/information-schema/information-schema-tidb-index-usage.md)を記録するかどうかのコントロールを追加します。デフォルト値は`ON`です。                                                                                                             |
-| [`tidb_redact_log`](/system-variables.md#tidb_redact_log)                                                                 | 変更     | TiDB ログおよびスロー ログを記録する際に、SAL テキスト内のユーザー情報をどのように処理するかを制御します。値のオプションは`OFF` (ログ内のユーザー情報を処理しないことを示す) と`ON` (ログ内のユーザー情報を非表示にすることを示す) です。ログ内のユーザー情報をより詳細に処理できるように、v8.0.0 ではログ情報をマークするための`MARKER`オプションが追加されました。                    |
+| [`tidb_redact_log`](/system-variables.md#tidb_redact_log)                                                                 | 変更     | TiDB ログおよびスローログを記録する際に、SAL テキスト内のユーザー情報をどのように処理するかを制御します。値のオプションは`OFF` (ログ内のユーザー情報を処理しないことを示す) と`ON` (ログ内のユーザー情報を非表示にすることを示す) です。ログ内のユーザー情報をより詳細に処理できるように、v8.0.0 ではログ情報をマークするための`MARKER`オプションが追加されました。                    |
 | [`div_precision_increment`](/system-variables.md#div_precision_increment-new-in-v800)                                     | 新しく追加された | `/` 演算子を使用した除算の結果桁数を増やすかどうかを制御します。この変数はMySQLと同じです。                                                                                                                                                                  |
 | [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800)                                                         | 新しく追加された | DML ステートメントの実行モードを制御します。値のオプションは`"standard"`と`"bulk"`です。                                                                                                                                                                   |
 | [`tidb_enable_auto_analyze_priority_queue`](/system-variables.md#tidb_enable_auto_analyze_priority_queue-new-in-v800)     | 新しく追加された | 統計情報の自動収集タスクをスケジュールするための優先度キューを有効にするかどうかを制御します。この変数を有効にすると、TiDB は統計情報を最も必要とするテーブルの統計情報の収集を優先します。                                                                                                                           |
@@ -520,7 +520,7 @@ TiDB バージョン: 8.0.0
         -   データ復元失敗後にチェックポイントから再開するとエラー`the target cluster is not fresh`発生する問題を修正 [#50232](https://github.com/pingcap/tidb/issues/50232) @[Leavrth](https://github.com/Leavrth)
         -   ログバックアップタスクを停止すると TiDB がクラッシュする問題を修正 [#50839](https://github.com/pingcap/tidb/issues/50839) @[YuJuncen](https://github.com/YuJuncen)
         -   TiKVノードにリーダーがいないためにデータ復元が遅くなる問題を修正 [#50566](https://github.com/pingcap/tidb/issues/50566) @[Leavrth](https://github.com/Leavrth)
-        -   `--filter`オプションを指定した後でも完全復元ではターゲット クラスターが空である必要がある問題を修正 [#51009](https://github.com/pingcap/tidb/issues/51009) @[3pointer](https://github.com/3pointer)
+        -   `--filter`オプションを指定した後でも完全復元ではターゲットクラスターが空である必要がある問題を修正 [#51009](https://github.com/pingcap/tidb/issues/51009) @[3pointer](https://github.com/3pointer)
 
     -   TiCDC
 

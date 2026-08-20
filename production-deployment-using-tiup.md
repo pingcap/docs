@@ -216,7 +216,7 @@ tiup cluster template > topology.yaml
     tiup cluster template --full > topology.yaml
     ```
 
--   地理的に分散した展開の場合: TiDB クラスターは地理的に分散したデータ センターに展開されます。詳細については、[地理的に分散した展開トポロジー](/geo-distributed-deployment-topology.md)を参照してください。
+-   地理的に分散した展開の場合: TiDB クラスターは地理的に分散したデータセンターに展開されます。詳細については、[地理的に分散した展開トポロジー](/geo-distributed-deployment-topology.md)を参照してください。
 
     ```shell
     tiup cluster template --multi-dc > topology.yaml
@@ -338,7 +338,7 @@ TiUPは複数のTiDBクラスタの管理をサポートしています。上記
 tiup cluster display tidb-test
 ```
 
-期待される出力には、インスタンス ID、ロール、ホスト、リスニング ポート、ステータス (クラスターがまだ起動していないため、ステータスは`Down` / `inactive`です)、およびディレクトリ情報が含まれます。
+期待される出力には、インスタンス ID、ロール、ホスト、リスニングポート、ステータス (クラスターがまだ起動していないため、ステータスは`Down` / `inactive`です)、およびディレクトリ情報が含まれます。
 
 ## ステップ7. TiDBクラスタを起動する {#step-7-start-a-tidb-cluster}
 
@@ -399,7 +399,7 @@ TiDBクラスタとともに[TiCDC](/ticdc/ticdc-overview.md)をデプロイし�
 -   [TiCDCのトラブルシューティング](/ticdc/troubleshoot-ticdc.md)
 -   [TiCDCに関するよくある質問](/ticdc/ticdc-faq.md)
 
-オンライン サービスを中断せずに TiDB クラスターをスケールアウトまたはスケールインしたい場合は、 [TiUPを使用してTiDBクラスタをスケーリングする](/scale-tidb-using-tiup.md)を参照してください。
+オンラインサービスを中断せずに TiDB クラスターをスケールアウトまたはスケールインしたい場合は、 [TiUPを使用してTiDBクラスタをスケーリングする](/scale-tidb-using-tiup.md)を参照してください。
 
 ## 関連リソース {#related-resources}
 

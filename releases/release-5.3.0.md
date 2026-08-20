@@ -344,7 +344,7 @@ TiCDC v5.3.0以降、TiDBクラスター間の循環レプリケーション機�
     -   プランナーが場合によっては無効なプランをキャッシュする可能性がある問題を修正`join` [＃28087](https://github.com/pingcap/tidb/issues/28087)
     -   ハッシュ列の型が`enum` の場合の誤った`IndexLookUpJoin`修正 [＃27893](https://github.com/pingcap/tidb/issues/27893)
     -   アイドル接続をリサイクルすると、まれにリクエストの送信がブロックされる可能性があるバッチクライアントのバグを修正しました[＃27688](https://github.com/pingcap/tidb/pull/27688)
-    -   ターゲット クラスタでチェックサムの実行に失敗した場合のTiDB Lightning panic問題を修正しました。 [＃27686](https://github.com/pingcap/tidb/pull/27686)
+    -   ターゲットクラスタでチェックサムの実行に失敗した場合のTiDB Lightning panic問題を修正しました。 [＃27686](https://github.com/pingcap/tidb/pull/27686)
     -   いくつかのケースで`date_add`と`date_sub`関数の誤った結果を修正[＃27232](https://github.com/pingcap/tidb/issues/27232)
     -   ベクトル化された式の関数`hour`の誤った結果を修正します [＃28643](https://github.com/pingcap/tidb/issues/28643)
     -   MySQL 5.1 またはそれ以前のクライアントバージョンに接続する際の認証の問題を修正しました [＃27855](https://github.com/pingcap/tidb/issues/27855)
@@ -384,11 +384,11 @@ TiCDC v5.3.0以降、TiDBクラスター間の循環レプリケーション機�
     -   Raftクライアント実装でバッチメッセージが大きすぎる問題を修正 [＃9714](https://github.com/tikv/tikv/issues/9714)
     -   `resolved_ts` で一部のコルーチンがリークする問題を修正 [＃10965](https://github.com/tikv/tikv/issues/10965)
     -   応答サイズが4 GiBを超えるとコプロセッサに発生するpanic問題を修正[＃9012](https://github.com/tikv/tikv/issues/9012)
-    -   スナップショットファイルがガベージ コレクションできない場合に、スナップショット ガベージ コレクション (GC) で GC スナップショットファイルが失われる問題を修正しました[＃10813](https://github.com/tikv/tikv/issues/10813)
+    -   スナップショットファイルがガベージコレクションできない場合に、スナップショット ガベージコレクション (GC) で GC スナップショットファイルが失われる問題を修正しました[＃10813](https://github.com/tikv/tikv/issues/10813)
     -   コプロセッサー要求の処理中にタイムアウトによって発生するpanic問題を修正[＃10852](https://github.com/tikv/tikv/issues/10852)
     -   統計スレッドの監視データによって発生するメモリリークを修正しました [＃11195](https://github.com/tikv/tikv/issues/11195)
     -   一部のプラットフォームから cgroup 情報を取得する際に発生するpanic問題を修正[＃10980](https://github.com/tikv/tikv/pull/10980)
-    -   MVCC 削除バージョンが圧縮フィルタ GC によって削除されないため、スキャン パフォーマンスが低下する問題を修正しました。 [＃11248](https://github.com/tikv/tikv/pull/11248)
+    -   MVCC 削除バージョンが圧縮フィルタ GC によって削除されないため、スキャンパフォーマンスが低下する問題を修正しました。 [＃11248](https://github.com/tikv/tikv/pull/11248)
 
 -   PD
 

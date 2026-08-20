@@ -160,7 +160,7 @@ DMは定期的に現在のタスクステータスとエラーメッセージを
 
 ### Binlogイベントフィルター {#binlog-event-filter}
 
-DM v2.0.2 以降では、ソース構成ファイルでbinlogイベント フィルターを構成できます。
+DM v2.0.2 以降では、ソース構成ファイルでbinlogイベントフィルターを構成できます。
 
 #### `case-sensitive` {#case-sensitive}
 

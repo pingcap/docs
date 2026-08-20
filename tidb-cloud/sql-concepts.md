@@ -17,7 +17,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 SQLは、その関数に応じて以下の4種類に分類されます。
 
--   DDL (データ定義言語): データベース、テーブル、ビュー、インデックスなどのデータベース オブジェクトを定義するために使用されます。 TiDB の DDL ステートメントについては、 [スキーマ管理／データ定義文（DDL）](/sql-statements/sql-statement-overview.md#schema-management--data-definition-statements-ddl)を参照してください。
+-   DDL (データ定義言語): データベース、テーブル、ビュー、インデックスなどのデータベースオブジェクトを定義するために使用されます。 TiDB の DDL ステートメントについては、 [スキーマ管理／データ定義文（DDL）](/sql-statements/sql-statement-overview.md#schema-management--data-definition-statements-ddl)を参照してください。
 
 -   DML（データ操作言語）：アプリケーション関連のレコードを操作するために使用されます。TiDB の DML ステートメントについては、 [データ操作文（DML）](/sql-statements/sql-statement-overview.md#data-manipulation-statements-dml)を参照してください。
 

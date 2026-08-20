@@ -45,7 +45,7 @@ summary: TiUPを使用してTiDBをアップグレードする方法を学びま
 >
 >         元のクラスターが v7.1.0 以前の場合、v7.2.0 以降にアップグレードすると、 [`performance.lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)の導入により、統計情報の読み込み時間が大幅に短縮されます。この場合、アップグレード前の`init stats info time`は、アップグレード後の読み込み時間よりも長くなります。
 >
->     -   TiDB のローリング アップグレード期間を短縮したい場合、およびアップグレード中の初期統計情報の欠落による潜在的なパフォーマンスへの影響がクラスターで許容できる場合は、TiUP を使用して対象インスタンスの設定を変更することで、アップグレード前に`performance.force-init-stats` `OFF`に[TiUPを使用して対象インスタンスの設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)。アップグレードの完了後、必要に応じてこの設定を再評価して元に戻すことができます。
+>     -   TiDB のローリングアップグレード期間を短縮したい場合、およびアップグレード中の初期統計情報の欠落による潜在的なパフォーマンスへの影響がクラスターで許容できる場合は、TiUP を使用して対象インスタンスの設定を変更することで、アップグレード前に`performance.force-init-stats` `OFF`に[TiUPを使用して対象インスタンスの設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)。アップグレードの完了後、必要に応じてこの設定を再評価して元に戻すことができます。
 
 ## アップグレードに関する注意事項 {#upgrade-caveat}
 
@@ -156,7 +156,7 @@ tiup update cluster
 
 -   クラスタDDL:
 
-    -   [スムーズなアップグレード](/smooth-upgrade-tidb.md)を使用して TiDB を v8.1.0 以降にアップグレードし、[分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)が有効になっている場合は、アップグレードする前に DXF を無効にすることをお勧めします。そうしないと、アップグレード プロセス中に追加されたインデックスがデータと矛盾し、アップグレードが失敗する可能性があります。
+    -   [スムーズなアップグレード](/smooth-upgrade-tidb.md)を使用して TiDB を v8.1.0 以降にアップグレードし、[分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)が有効になっている場合は、アップグレードする前に DXF を無効にすることをお勧めします。そうしないと、アップグレードプロセス中に追加されたインデックスがデータと矛盾し、アップグレードが失敗する可能性があります。
     -   な を使用しない場合は、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)[スムーズなアップグレード](/smooth-upgrade-tidb.md)を使用して、実行中の DDL ジョブが存在するかどうかを確認することをお勧めします。実行中の DDL ジョブが存在する場合は、アップグレードを実行する前に、ジョブの実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)ステートメントを使用してキャンセルしてください。
 
 -   クラスタのバックアップ：クラスタ内でバックアップまたはリストアタスクが実行中かどうかを確認するには[`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md)コマンドを実行することをお勧めします。実行中の場合は、アップグレードを実行する前にタスクが完了するまでお待ちください。

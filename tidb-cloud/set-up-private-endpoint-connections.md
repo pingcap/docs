@@ -34,7 +34,7 @@ AWS PrivateLink を利用することで、エンドポイント接続は安全�
 ほとんどのシナリオでは、VPC ピアリングではなくプライベートエンドポイント接続を使用することをお勧めします。ただし、以下のシナリオでは、プライベートエンドポイント接続ではなく VPC ピアリングを使用する必要があります。
 
 -   高可用性を実現するために、ソースTiDBクラスターからターゲットTiDBクラスターへリージョンをまたいでデータをレプリケートするために、 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)クラスターを使用しています。現在、プライベートエンドポイントはリージョン間接続をサポートしていません。
--   TiCDC クラスターを使用してダウンストリーム クラスター (Amazon Aurora、MySQL、Kafka など) にデータをレプリケートしていますが、エンドポイントサービスを独自に維持することはできません。
+-   TiCDC クラスターを使用してダウンストリームクラスター (Amazon Aurora、MySQL、Kafka など) にデータをレプリケートしていますが、エンドポイントサービスを独自に維持することはできません。
 -   PD または TiKV ノードに直接接続しています。
 
 ## 前提条件 {#prerequisites}
@@ -121,11 +121,11 @@ AWS マネジメントコンソールを使用して VPC インターフェイ�
     >
     > サービスが3つを超えるアベイラビリティゾーン（AZ）にまたがっている場合、 **Subnets**エリアでAZを選択できない場合があります。この問題は、選択したリージョンに、TiDBクラスターが配置されているAZに加えて、追加のAZが存在する場合に発生します。その場合は、 [PingCAP テクニカルサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)お問い合わせください。
 
-8.  **Security groups**領域で、セキュリティ グループを適切に選択します。
+8.  **Security groups**領域で、セキュリティグループを適切に選択します。
 
     > **Note:**
     >
-    > 選択したセキュリティ グループが、ポート`4000`または顧客定義のポート上の EC2 インスタンスからのインバウンド アクセスを許可していることを確認します。
+    > 選択したセキュリティグループが、ポート`4000`または顧客定義のポート上の EC2 インスタンスからのインバウンド アクセスを許可していることを確認します。
 
 9.  **Create endpoint**をクリックします。
 
@@ -143,7 +143,7 @@ AWS マネジメントコンソールを使用して VPC インターフェイ�
 > プライベートエンドポイント接続は、次の 2 つのページで表示および管理できます。
 >
 > -   クラスターレベルの**Networking**ページ: 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
-> -   プロジェクト レベルの**Network Access**ページ: 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、**Project view** タブをクリックして対象のプロジェクトを見つけ、そのプロジェクトの <MDSvgIcon name="icon-project-settings" /> をクリックし、**Project Settings** の下にある **Network Access** をクリックします。
+> -   プロジェクトレベルの**Network Access**ページ: 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、**Project view** タブをクリックして対象のプロジェクトを見つけ、そのプロジェクトの <MDSvgIcon name="icon-project-settings" /> をクリックし、**Project Settings** の下にある **Network Access** をクリックします。
 
 ### ステップ4. プライベートDNSを有効にする {#step-4-enable-private-dns}
 
@@ -192,7 +192,7 @@ AWS マネジメントコンソールでプライベート DNS を有効にす�
 プライベートエンドポイント接続を使用すると、プライベートエンドポイントとプライベートエンドポイントサービスの状態が次のページに表示されます。
 
 -   クラスターレベルの**Networking**ページ: 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
--   プロジェクト レベルの**Network Access**ページ: 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、**Project view** タブをクリックして対象のプロジェクトを見つけ、そのプロジェクトの <MDSvgIcon name="icon-project-settings" /> をクリックし、**Project Settings** の下にある **Network Access** をクリックします。
+-   プロジェクトレベルの**Network Access**ページ: 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、**Project view** タブをクリックして対象のプロジェクトを見つけ、そのプロジェクトの <MDSvgIcon name="icon-project-settings" /> をクリックし、**Project Settings** の下にある **Network Access** をクリックします。
 
 プライベートエンドポイントの可能なステータスについては、次のように説明されます。
 

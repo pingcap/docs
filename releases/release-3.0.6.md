@@ -85,7 +85,7 @@ TiDB Ansible バージョン: 3.0.6
 
 -   各フィルターに`ActOn`ディメンションを追加して、各スケジューラとチェッカーがフィルターの影響を受けることを示します。また、使用されていない2つのフィルター（ `disconnectFilter`と`rejectLeaderFilter` を削除します。 [＃1911](https://github.com/pingcap/pd/pull/1911)
 -   PD でタイムスタンプを生成するのに 5 ミリ秒以上かかる場合は警告ログを出力します。 [＃1867](https://github.com/pingcap/pd/pull/1867)
--   利用できないエンドポイントをクライアントに渡すときにクライアントのログ レベルを下げる [＃1856](https://github.com/pingcap/pd/pull/1856)
+-   利用できないエンドポイントをクライアントに渡すときにクライアントのログレベルを下げる [＃1856](https://github.com/pingcap/pd/pull/1856)
 -   gRPCメッセージパッケージが`region_syncer`レプリケーションプロセスで最大サイズを超える可能性がある問題を修正 [＃1952](https://github.com/pingcap/pd/pull/1952)
 
 ## ツール {#tools}

@@ -26,7 +26,7 @@ TiDB バージョン: 5.3.1
 -   TiKV
 
     -   解決ロックのステップ必要とするリージョンの数を減らすことで、TiCDC の回復時間を短縮します。 [＃11993](https://github.com/tikv/tikv/issues/11993)
-    -   Raftログへのガベージ コレクション (GC) を実行するときに書き込みバッチ サイズを増やすことで、GC プロセスを高速化します。 [＃11404](https://github.com/tikv/tikv/issues/11404)
+    -   Raftログへのガベージコレクション (GC) を実行するときに書き込みバッチサイズを増やすことで、GC プロセスを高速化します。 [＃11404](https://github.com/tikv/tikv/issues/11404)
     -   procファイルシステム（procfs）をv0.12.0 に更新する [＃11702](https://github.com/tikv/tikv/issues/11702)
 
 -   PD
@@ -92,7 +92,7 @@ TiDB バージョン: 5.3.1
 
     -   特定のケースでスケジュール処理に不要な JointConsensus ステップが含まれるバグを修正[＃4362](https://github.com/tikv/pd/issues/4362)
     -   投票者を直接降格させるとスケジュールが実行できないバグを修正[＃4444](https://github.com/tikv/pd/issues/4444)
-    -   レプリカのレプリケーション モードの構成を更新するときに発生するデータ競合の問題を修正しました [＃4325](https://github.com/tikv/pd/issues/4325)
+    -   レプリカのレプリケーションモードの構成を更新するときに発生するデータ競合の問題を修正しました [＃4325](https://github.com/tikv/pd/issues/4325)
     -   特定のケースで読み取りロックが解除されないバグを修正[＃4354](https://github.com/tikv/pd/issues/4354)
     -   ホットスポット統計からコールドホットスポットデータを削除できない問題を修正[＃4390](https://github.com/tikv/pd/issues/4390)
 

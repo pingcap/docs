@@ -134,7 +134,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 -   TiDB Cloudパートナー向けのリソースおよび請求管理を強化するため、 TiDB CloudパートナーWebコンソールとオープンAPIをリリースしました。
 
-    AWS Marketplace Channel Partner Private Offer (CPPO) を通じてマネージド サービス プロバイダー (MSP) と再販業者は[TiDB CloudパートナーWebコンソール](https://partner-console.tidbcloud.com/)とオープン API を活用して日常業務を合理化できるようになりました。
+    AWS Marketplace Channel Partner Private Offer (CPPO) を通じてマネージドサービス プロバイダー (MSP) と再販業者は[TiDB CloudパートナーWebコンソール](https://partner-console.tidbcloud.com/)とオープン API を活用して日常業務を合理化できるようになりました。
 
     詳細については、 [TiDB CloudパートナーWebコンソール](/tidb-cloud/tidb-cloud-partners.md)を参照してください。
 
@@ -188,7 +188,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)のクラスタサイズ構成エクスペリエンスを向上させます。
 
-    TiDB Cloud Dedicatedクラスターの [**クラスタを作成する**](/tidb-cloud/create-tidb-cluster.md)ページと「クラスター [**クラスタの変更**](/tidb-cloud/scale-tidb-cluster.md)ページの**「クラスタサイズ」**セクションのレイアウトを調整します。さらに、 **「クラスタサイズ」**セクションには、適切なクラスター サイズの選択に役立つノード サイズの推奨ドキュメントへのリンクが含まれるようになりました。
+    TiDB Cloud Dedicatedクラスターの [**クラスタを作成する**](/tidb-cloud/create-tidb-cluster.md)ページと「クラスター [**クラスタの変更**](/tidb-cloud/scale-tidb-cluster.md)ページの**「クラスタサイズ」**セクションのレイアウトを調整します。さらに、 **「クラスタサイズ」**セクションには、適切なクラスターサイズの選択に役立つノードサイズの推奨ドキュメントへのリンクが含まれるようになりました。
 
 ## 2024年7月23日 {#july-23-2024}
 
@@ -332,11 +332,11 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **全般的な変更**
 
--   さまざまな地域の顧客によりよく対応できるように、タイム[**タイムゾーン**](/tidb-cloud/manage-user-access.md#set-the-time-zone-for-your-organization)セクションのタイム ゾーンの選択を拡大します。
+-   さまざまな地域の顧客によりよく対応できるように、タイム[**タイムゾーン**](/tidb-cloud/manage-user-access.md#set-the-time-zone-for-your-organization)セクションのタイムゾーンの選択を拡大します。
 
 -   VPC がTiDB Cloudの VPC とは異なるリージョンにある場合、 [VPCピアリングの作成](/tidb-cloud/set-up-vpc-peering-connections.md)サポートします。
 
--   [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)クエリ パラメーターとともにパス パラメーターをサポートしています。
+-   [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)クエリパラメーターとともにパス パラメーターをサポートしています。
 
     この機能は、構造化URLによるリソース識別を強化し、ユーザーエクスペリエンス、検索エンジン最適化（SEO）、クライアント統合を改善することで、開発者により柔軟性を提供し、業界標準との整合性を高めます。
 

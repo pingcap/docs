@@ -19,7 +19,7 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 
 -   ソースデータベースが Amazon RDS または Amazon Auroraの場合、 `binlog_format`パラメータを`ROW`に設定する必要があります。データベースがデフォルトのパラメータ グループを使用する場合、 `binlog_format`パラメータはデフォルトで`MIXED`となり、変更できません。この場合、 [新しいパラメータグループを作成する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.Prerequisites.html#CHAP_GettingStarted.Prerequisites.params)必要があります (例: `newset` 。その`binlog_format`を`ROW`に設定します。次に、 [デフォルトパラメータグループを変更する](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithDBInstanceParamGroups.html#USER_WorkingWithParamGroups.Modifying)`newset`に変更します。パラメータ グループを変更するとデータベースが再起動されることに注意してください。
 -   ソースデータベースが TiDB と互換性のある照合順序を使用していることを確認してください。TiDB の utf8mb4 文字セットのデフォルトの照合照合順序は`utf8mb4_bin`です。しかし、MySQL 8.0 では、デフォルトの照合照合順序は`utf8mb4_0900_ai_ci`です。アップストリームの MySQL がデフォルトの照合順序を使用している場合、TiDB は`utf8mb4_0900_ai_ci`と互換性がないため、AWS DMS は TiDB にターゲットテーブルを作成できず、データを移行できません。この問題を解決するには、移行前にソースデータベースの照合順序`utf8mb4_bin`に変更する必要があります。TiDB でサポートされている文字セットと照合順序の完全なリストについては、 [文字セットと照合](https://docs.pingcap.com/tidb/stable/character-set-and-collation)を参照してください。
--   TiDB には、デフォルトで`INFORMATION_SCHEMA` 、 `PERFORMANCE_SCHEMA` 、 `mysql` 、 `sys` } 、および`test`システム データベースが含まれています。AWS DMS 移行タスクを作成する際は、デフォルトの`%`を使用して移行オブジェクトを選択するのではなく、これらのシステム データベースを除外する必要があります。そうしないと、AWS DMS はこれらのシステム データベースをソースデータベースからターゲット TiDB に移行しようとし、タスクが失敗します。この問題を回避するには、特定のデータベース名とテーブル名を入力することをお勧めします。
+-   TiDB には、デフォルトで`INFORMATION_SCHEMA` 、 `PERFORMANCE_SCHEMA` 、 `mysql` 、 `sys` } 、および`test`システムデータベースが含まれています。AWS DMS 移行タスクを作成する際は、デフォルトの`%`を使用して移行オブジェクトを選択するのではなく、これらのシステムデータベースを除外する必要があります。そうしないと、AWS DMS はこれらのシステムデータベースをソースデータベースからターゲット TiDB に移行しようとし、タスクが失敗します。この問題を回避するには、特定のデータベース名とテーブル名を入力することをお勧めします。
 -   AWS DMSのパブリックネットワークIPアドレスとプライベートネットワークIPアドレスを、ソースデータベースとターゲットデータベースの両方のIPアクセスリストに追加してください。そうしないと、状況によってはネットワーク接続が失敗する可能性があります。
 -   [VPCピアリング](/tidb-cloud/set-up-vpc-peering-connections.md#set-up-vpc-peering-on-aws)または[プライベートエンドポイント接続](/tidb-cloud/set-up-private-endpoint-connections.md)を使用して、AWS DMS と TiDB クラスターを接続します。
 -   データ書き込みパフォーマンスを向上させるため、AWS DMSとTiDBクラスターには同じリージョンを使用することをお勧めします。
@@ -170,7 +170,7 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 
 4.  **Table mappings**のセクションで、移行するデータベースを指定します。
 
-    スキーマ名は、Amazon RDS インスタンス内のデータベース名です。**Source name**のデフォルト値は「%」で、これは Amazon RDS 内のすべてのデータベースが TiDB に移行されることを意味します。これにより、Amazon RDS 内の`mysql`や`sys`などのシステム データベースが TiDB クラスターに移行され、タスクが失敗します。そのため、特定のデータベース名を入力するか、すべてのシステム データベースを除外することをお勧めします。たとえば、次のスクリーンショットの設定に従って、 `franktest`という名前のデータベースと、そのデータベース内のすべてのテーブルのみが移行されます。
+    スキーマ名は、Amazon RDS インスタンス内のデータベース名です。**Source name**のデフォルト値は「%」で、これは Amazon RDS 内のすべてのデータベースが TiDB に移行されることを意味します。これにより、Amazon RDS 内の`mysql`や`sys`などのシステムデータベースが TiDB クラスターに移行され、タスクが失敗します。そのため、特定のデータベース名を入力するか、すべてのシステムデータベースを除外することをお勧めします。たとえば、次のスクリーンショットの設定に従って、 `franktest`という名前のデータベースと、そのデータベース内のすべてのテーブルのみが移行されます。
 
     ![Table mappings](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-table-mappings.png)
 

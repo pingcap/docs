@@ -19,7 +19,7 @@ ticloud config ls [flags]
 
 ## 例 {#examples}
 
-利用可能なすべてのユーザー プロファイルを一覧表示します。
+利用可能なすべてのユーザープロファイルを一覧表示します。
 
 ```shell
 ticloud config list

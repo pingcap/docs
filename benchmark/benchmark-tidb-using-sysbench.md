@@ -27,7 +27,7 @@ server_configs:
 
 ### TiKV構成 {#tikv-configuration}
 
-ログ レベルが高いほど、TiKV のパフォーマンスも向上します。
+ログレベルが高いほど、TiKV のパフォーマンスも向上します。
 
 TiKVクラスターには複数のカラムファミリーがあり、主に異なる種類のデータを格納するために使用されます。デフォルトカラムファミリー、書き込みカラムファミリー、ロックカラムファミリーなどです。Sysbenchテストでは、デフォルトカラムファミリーと書き込みカラムファミリーのみに注目してください。データのインポートに使用されるカラムファミリーは、TiDBクラスター間で一定の割合で存在します。
 
@@ -51,7 +51,7 @@ server_configs:
     storage.block-cache.capacity: "30GB"
 ```
 
-TiKV パフォーマンス チューニングの詳細については、 [TiKVパフォーマンスの調整](/tune-tikv-memory-performance.md)を参照してください。
+TiKV パフォーマンスチューニングの詳細については、 [TiKVパフォーマンスの調整](/tune-tikv-memory-performance.md)を参照してください。
 
 ## テストプロセス {#test-process}
 

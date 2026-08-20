@@ -61,7 +61,7 @@ Flags:
 
 ## クラスターリストを確認する {#view-the-cluster-list}
 
-クラスターが正常にデプロイされたら、次のコマンドを実行してクラスター リストを表示します。
+クラスターが正常にデプロイされたら、次のコマンドを実行してクラスターリストを表示します。
 
 ```bash
 tiup dm list
@@ -81,7 +81,7 @@ prod-cluster  tidb  ${version}  /root/.tiup/storage/dm/clusters/test  /root/.tiu
 tiup dm start prod-cluster
 ```
 
-クラスターの名前を忘れた場合は、 `tiup dm list`を実行してクラスター リストを表示します。
+クラスターの名前を忘れた場合は、 `tiup dm list`を実行してクラスターリストを表示します。
 
 ## クラスターのステータスを確認する {#check-the-cluster-status}
 
@@ -137,9 +137,9 @@ tiup dm scale-in prod-cluster -N 172.16.5.140:8262
 
 ## クラスターをスケールアウトする {#scale-out-a-cluster}
 
-スケールアウト操作には、デプロイメントと同様の内部ロジックがあります。TiUP TiUP DMコンポーネントは、まずノードの SSH 接続を確認し、ターゲット ノードに必要なディレクトリを作成し、次にデプロイメント操作を実行して、ノード サービスを開始します。
+スケールアウト操作には、デプロイメントと同様の内部ロジックがあります。TiUP TiUP DMコンポーネントは、まずノードの SSH 接続を確認し、ターゲットノードに必要なディレクトリを作成し、次にデプロイメント操作を実行して、ノード サービスを開始します。
 
-たとえば、クラスター`prod-cluster`内の DM ワーカーノードをスケール アウトするには、次の手順を実行します (DM マスターのスケール アウトにも同様の手順があります)。
+たとえば、クラスター`prod-cluster`内の DM ワーカーノードをスケールアウトするには、次の手順を実行します (DM マスターのスケールアウトにも同様の手順があります)。
 
 1.  `scale.yaml`ファイルを作成し、新しいワーカーノードの情報を追加します。
 
@@ -270,10 +270,10 @@ tiup dm import --dir=/path/to/dm-ansible --cluster-version ${version}
 
 `import`コマンドを使用するプロセスは次のとおりです。
 
-1.  TiUP は、DM-Ansible を使用して以前にデプロイされた DM クラスターに基づいてトポロジ ファイル[`topology.yml`](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を生成します。
-2.  トポロジ ファイルが生成されたことを確認したら、それを使用して v2.0 以降のバージョンの DM クラスターをデプロイできます。
+1.  TiUP は、DM-Ansible を使用して以前にデプロイされた DM クラスターに基づいてトポロジファイル[`topology.yml`](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を生成します。
+2.  トポロジファイルが生成されたことを確認したら、それを使用して v2.0 以降のバージョンの DM クラスターをデプロイできます。
 
-デプロイメントが完了したら、 `tiup dm start`コマンドを実行してクラスターを起動し、DM カーネルのアップグレード プロセスを開始できます。
+デプロイメントが完了したら、 `tiup dm start`コマンドを実行してクラスターを起動し、DM カーネルのアップグレードプロセスを開始できます。
 
 ## 操作ログを確認する {#view-the-operation-log}
 
@@ -358,9 +358,9 @@ tiup dmctl --master-addr master1:8261 operate-source create /tmp/source1.yml
 -   認証にSSHプラグインを使用するには
 -   カスタマイズされたSSHクライアントを使用するには
 
-次に、 `--native-ssh`コマンドライン フラグを使用して、システムネイティブのコマンドラインツールを有効にできます。
+次に、 `--native-ssh`コマンドラインフラグを使用して、システムネイティブのコマンドラインツールを有効にできます。
 
--   クラスターをデプロイ: `tiup dm deploy <cluster-name> <version> <topo> --native-ssh` `<cluster-name>`にクラスターの名前、 `<version>`にデプロイする DM バージョン ( `v8.5.3`など)、 `<topo>`にトポロジ ファイル名を入力します。
+-   クラスターをデプロイ: `tiup dm deploy <cluster-name> <version> <topo> --native-ssh` `<cluster-name>`にクラスターの名前、 `<version>`にデプロイする DM バージョン ( `v8.5.3`など)、 `<topo>`にトポロジファイル名を入力します。
 -   クラスターを起動します: `tiup dm start <cluster-name> --native-ssh` .
 -   クラスターのアップグレード: `tiup dm upgrade ... --native-ssh`
 
@@ -380,4 +380,4 @@ export TIUP_NATIVE_SSH=enable
 
 > **Note:**
 >
-> クラスターの展開プロセス中に、接続にパスワードを使用する必要がある場合、またはキー ファイルに`passphrase`が設定されている場合は、コントロール マシンに`sshpass`がインストールされていることを確認する必要があります。そうでない場合、タイムアウト エラーが報告されます。
+> クラスターの展開プロセス中に、接続にパスワードを使用する必要がある場合、またはキー ファイルに`passphrase`が設定されている場合は、コントロールマシンに`sshpass`がインストールされていることを確認する必要があります。そうでない場合、タイムアウトエラーが報告されます。

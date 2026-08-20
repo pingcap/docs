@@ -246,7 +246,7 @@ host = "<host>"
 
 `location-labels`が設定されている場合は、PD 設定ファイルで`isolation-level`設定することで、TiKV クラスターのトポロジ分離要件をさらに強化できます。
 
-上記の手順に従って`location-labels`をゾーン -&gt; ラック -&gt; ホストと設定して 3 層クラスタ トポロジを作成したと仮定すると、次のように`isolation-level`を`zone`に設定できます。
+上記の手順に従って`location-labels`をゾーン -&gt; ラック -&gt; ホストと設定して 3 層クラスタトポロジを作成したと仮定すると、次のように`isolation-level`を`zone`に設定できます。
 
 ```toml
 [replication]

@@ -1,6 +1,6 @@
 ---
 title: Recovery Group Overview (Beta)
-summary: TiDB Cloudリカバリ グループを使用してデータベースを災害から保護する方法を学びます。
+summary: TiDB Cloudリカバリグループを使用してデータベースを災害から保護する方法を学びます。
 ---
 
 # リカバリグループの概要（ベータ版） {#recovery-group-overview-beta}
@@ -23,9 +23,9 @@ TiDB Cloudリカバリグループを使用すると、 TiDB Cloud Dedicated ク
 
 ## 主な機能と制限 {#key-features-and-limitations}
 
--   現在、AWS でホストされているTiDB Cloud Dedicated クラスターのみがリカバリ グループをサポートしています。
--   リカバリ グループは 2 つのクラスター間に確立されます。
--   リカバリ グループでは、データベースの双方向レプリケーションはサポートされません。
+-   現在、AWS でホストされているTiDB Cloud Dedicated クラスターのみがリカバリグループをサポートしています。
+-   リカバリグループは 2 つのクラスター間に確立されます。
+-   リカバリグループでは、データベースの双方向レプリケーションはサポートされません。
 
 > **Warning**
 >
@@ -33,5 +33,5 @@ TiDB Cloudリカバリグループを使用すると、 TiDB Cloud Dedicated ク
 
 ## 次は何？ {#what-s-next}
 
--   リカバリ グループの使用を開始するには、 [データベース復旧グループの作成](/tidb-cloud/recovery-group-get-started.md)を参照してください。
+-   リカバリグループの使用を開始するには、 [データベース復旧グループの作成](/tidb-cloud/recovery-group-get-started.md)を参照してください。
 -   リカバリグループの使用方法については、 [データベースのフェイルオーバーと再保護](/tidb-cloud/recovery-group-failover.md)を参照してください。

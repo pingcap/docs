@@ -55,7 +55,7 @@ TiDB バージョン: 8.4.0
 
 -   TiDB Lightningの論理インポートモードは、プリペアドステートメントとクライアントステートメントキャッシュをサポートします [#54850](https://github.com/pingcap/tidb/issues/54850) @[dbsid](https://github.com/dbsid)
 
-    `logical-import-prep-stmt`設定項目を有効にすると、TiDB Lightning の論理インポートモードで実行される SQL ステートメントは、プリペアド ステートメントとクライアント ステートメントキャッシュを使用します。これにより、 TiDB SQLの解析とコンパイルのコストが削減され、SQL の実行効率が向上し、実行計画 キャッシュへのアクセス確率が高まるため、論理インポートが高速化されます。
+    `logical-import-prep-stmt`設定項目を有効にすると、TiDB Lightning の論理インポートモードで実行される SQL ステートメントは、プリペアドステートメントとクライアント ステートメントキャッシュを使用します。これにより、 TiDB SQLの解析とコンパイルのコストが削減され、SQL の実行効率が向上し、実行計画 キャッシュへのアクセス確率が高まるため、論理インポートが高速化されます。
 
     詳細については、 [ドキュメント](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
@@ -133,7 +133,7 @@ TiDB バージョン: 8.4.0
 
     ベクトル検索は、データの意味論に基づいた検索手法であり、より関連性の高い検索結果を提供します。AIや大規模言語モデル（LLM）の中核関数の一つとして、ベクトル検索は、検索拡張生成（RAG）、意味検索、推薦システムなど、さまざまなシナリオで活用できます。
 
-    v8.4.0 以降、TiDB は [ベクトルデータ型](/ai/reference/vector-search-data-types.md)と[ベクトル検索インデックス](/ai/reference/vector-search-index.md)をサポートし、強力なベクトル検索機能を提供します。 TiDB ベクトル データ タイプは、最大 16,383 次元をサポートし、L2 距離 (ユークリッド距離)、コサイン距離、負の内積、L1 距離 (マンハッタン距離) を含むさまざまな[距離関数](/ai/reference/vector-search-functions-and-operators.md#vector-functions)をサポートします。
+    v8.4.0 以降、TiDB は [ベクトルデータ型](/ai/reference/vector-search-data-types.md)と[ベクトル検索インデックス](/ai/reference/vector-search-index.md)をサポートし、強力なベクトル検索機能を提供します。 TiDB ベクトルデータタイプは、最大 16,383 次元をサポートし、L2 距離 (ユークリッド距離)、コサイン距離、負の内積、L1 距離 (マンハッタン距離) を含むさまざまな[距離関数](/ai/reference/vector-search-functions-and-operators.md#vector-functions)をサポートします。
 
     ベクトル検索を開始するには、ベクトルデータ型のテーブルを作成し、ベクトルデータを挿入し、ベクトルデータに対するクエリを実行するだけで済みます。ベクトルデータと従来の関係データを組み合わせたクエリを実行することも可能です。
 
@@ -366,7 +366,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
     -   非バイナリ照合順序を持つ文字列列の統計情報が、統計情報の初期化時にロードに失敗する可能性がある問題を修正 [#55684](https://github.com/pingcap/tidb/issues/55684) @[winoros](https://github.com/winoros)
     -   クエリ条件`column IS NULL`を使用して一意インデックスにアクセスする際に、オプティマイザが行数を誤って 1 と推定する問題を修正しました。 [#56116](https://github.com/pingcap/tidb/issues/56116) @[hawkingrei](https://github.com/hawkingrei)
     -   クエリに`(... AND ...) OR (... AND ...) ...`のようなフィルタ条件が含まれている場合、オプティマイザが行数推定に最適な複数列統計情報を使用しない問題を修正します [#54323](https://github.com/pingcap/tidb/issues/54323) @[time-and-fate](https://github.com/time-and-fate)
-    -   クエリに利用可能なインデックス マージ実行計画がある場合、 `read_from_storage`ヒントが有効にならない可能性がある問題を修正 [#56217](https://github.com/pingcap/tidb/issues/56217) @[AilinKid](https://github.com/AilinKid)
+    -   クエリに利用可能なインデックスマージ実行計画がある場合、 `read_from_storage`ヒントが有効にならない可能性がある問題を修正 [#56217](https://github.com/pingcap/tidb/issues/56217) @[AilinKid](https://github.com/AilinKid)
     -   `IndexNestedLoopHashJoin` のデータ競合問題を修正 [#49692](https://github.com/pingcap/tidb/issues/49692) @[solotzg](https://github.com/solotzg)
     -   `SUB_PART`テーブル内の`INFORMATION_SCHEMA.STATISTICS`の値が`NULL`になっている問題を修正します [#55812](https://github.com/pingcap/tidb/issues/55812) @[Defined2014](https://github.com/Defined2014)
     -   DMLステートメントにネストされた生成列が含まれている場合にエラーが発生する問題を修正しました [#53967](https://github.com/pingcap/tidb/issues/53967) @[wjhuang2016](https://github.com/wjhuang2016)
@@ -408,7 +408,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
     -   TiDB Data Migration (DM)
 
         -   複数のDMマスターノードが同時にリーダーになる可能性があり、データ不整合を引き起こす問題を修正しました [#11602](https://github.com/pingcap/tiflow/issues/11602) @[GMHDBJD](https://github.com/GMHDBJD)
-        -   `ALTER DATABASE`ステートメントを処理する際に DM がデフォルト データベースを設定しないことでレプリケーション エラーが発生する問題を修正します [#11503](https://github.com/pingcap/tiflow/issues/11503) @[lance6716](https://github.com/lance6716)
+        -   `ALTER DATABASE`ステートメントを処理する際に DM がデフォルトデータベースを設定しないことでレプリケーション エラーが発生する問題を修正します [#11503](https://github.com/pingcap/tiflow/issues/11503) @[lance6716](https://github.com/lance6716)
 
     -   TiDB Lightning
 

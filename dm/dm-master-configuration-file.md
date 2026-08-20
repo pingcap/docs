@@ -50,7 +50,7 @@ secret-key-path = "/path/to/secret/key"
 
 #### `log-level` {#log-level}
 
--   ログ レベルを指定します。
+-   ログレベルを指定します。
 -   デフォルト値: `info`
 -   `fatal` `warn` `info` `error` `debug`
 

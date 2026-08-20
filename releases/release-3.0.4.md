@@ -23,7 +23,7 @@ TiDB Ansible バージョン: 3.0.4
 -   動作の変更
     -   デフォルト値の`txn-local-latches.enable`を`false`に更新して、TiDB のローカルトランザクションの競合をチェックするデフォルトの動作を無効にします。
     -   TiDBにグローバルスコープのシステム変数を`tidb_txn_mode`追加し、悲観的ロックの使用を許可します。ただし、TiDBはデフォルトで依然として楽観的ロックを採用していることに注意してください。
-    -   TiDB スロークエリ ログの`Index_ids`フィールドを`Index_names`に置き換えて、スロークエリ ログの使いやすさを向上させます。
+    -   TiDB スロークエリログの`Index_ids`フィールドを`Index_names`に置き換えて、スロークエリログの使いやすさを向上させます。
     -   TiDB構成ファイルに`split-region-max-num`パラメータを追加して、 `SPLIT TABLE`構文で許可されるリージョンの最大数を変更します。
     -   SQL実行がメモリ制限を超えたときにリンクを切断する代わりに`Out Of Memory Quota`エラーを返します
     -   誤操作を避けるため、TiDBの列の`AUTO_INCREMENT`の属性の削除を禁止します。この属性を削除するには、 `tidb_allow_remove_auto_inc`のシステム変数を変更します。

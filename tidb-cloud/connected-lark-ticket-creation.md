@@ -41,4 +41,4 @@ TiDB Cloud **Enterprise** [サポートプラン](/tidb-cloud/connected-care-det
 
 ## サポートにお問い合わせください {#contact-support}
 
-ヘルプや質問がある場合は、サポート チーム<a href="mailto:support@pingcap.com">[support@pi​​ngcap.com](mailto:support@pingcap.com)</a>にお問い合わせください。
+ヘルプや質問がある場合は、サポートチーム<a href="mailto:support@pingcap.com">[support@pi​​ngcap.com](mailto:support@pingcap.com)</a>にお問い合わせください。

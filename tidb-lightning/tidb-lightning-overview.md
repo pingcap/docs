@@ -41,7 +41,7 @@ TiDB Lightning は、 `backend`で設定された 2 つのインポートモー�
 | ネットワーク帯域幅の消費                   | 高い                                                                           | 低い              |
 | インポート時のACID準拠                  | いいえ                                                                          | はい              |
 | ターゲットテーブル                      | 空でなければなりません                                                                  | データを含むことができる    |
-| TiDB クラスタ バージョン                | = 4.0.0                                                                      | 全て              |
+| TiDB クラスタバージョン                | = 4.0.0                                                                      | 全て              |
 | TiDBクラスタがインポート中にサービスを提供できるかどうか | [限定サービス](/tidb-lightning/tidb-lightning-physical-import-mode.md#limitations) | はい              |
 
 <Note>

@@ -265,7 +265,7 @@ TiDBバージョン：8.3.0
 
     -   `async-io`が有効になっている場合、 Raftログの書き込みバッチ処理ポリシーを最適化して、ディスク I/O 帯域幅リソースの消費を削減します [#16907](https://github.com/tikv/tikv/issues/16907) @[LykxSassinator](https://github.com/LykxSassinator)
     -   リージョン部分購読をより適切にサポートするために、TiCDCデリゲートとダウンストリームモジュールを再設計します [#16362](https://github.com/tikv/tikv/issues/16362) @[hicqu](https://github.com/hicqu)
-    -   単一のスロークエリ ログのサイズを削減 [#17294](https://github.com/tikv/tikv/issues/17294) @[Connor1996](https://github.com/Connor1996)
+    -   単一のスロークエリログのサイズを削減 [#17294](https://github.com/tikv/tikv/issues/17294) @[Connor1996](https://github.com/Connor1996)
     -   新しいモニタリング指標を追加`min safe ts` [#17307](https://github.com/tikv/tikv/issues/17307) @[mittalrishabh](https://github.com/mittalrishabh)
     -   ピアメッセージチャネルのメモリ使用量を削減します [#16229](https://github.com/tikv/tikv/issues/16229) @[Connor1996](https://github.com/Connor1996)
 
@@ -355,7 +355,7 @@ TiDBバージョン：8.3.0
     -   仮想生成列を含むクエリが遅延マテリアライゼーション有効後に誤った結果を返す可能性がある問題を修正 [#9188](https://github.com/pingcap/tiflash/issues/9188) @[JinheLin](https://github.com/JinheLin)
     -   TiFlashでSSL証明書の設定を空文字列に設定するとTLSが誤って有効になり、 TiFlashが起動に失敗する問題を修正しました [#9235](https://github.com/pingcap/tiflash/issues/9235) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   データベース作成直後にデータベースが削除されるとTiFlash がpanicすることがある問題を修正 [#9266](https://github.com/pingcap/tiflash/issues/9266) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    -   TiFlashと任意の PD 間のネットワーク パーティション (ネットワークの切断) により、読み取りリクエストのタイムアウト エラーが発生する可能性がある問題を修正 [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    -   TiFlashと任意の PD 間のネットワークパーティション (ネットワークの切断) により、読み取りリクエストのタイムアウトエラーが発生する可能性がある問題を修正 [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   分散ストレージおよびコンピューティングアーキテクチャでTiFlash書き込みノードの再起動に失敗することがある問題を修正 [#9282](https://github.com/pingcap/tiflash/issues/9282) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   分散ストレージおよびコンピューティングアーキテクチャにおいて、 TiFlash書き込みノードの読み取りスナップショットがタイムリーに解放されない問題を修正します [#9298](https://github.com/pingcap/tiflash/issues/9298) @[JinheLin](https://github.com/JinheLin)
 

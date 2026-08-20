@@ -174,7 +174,7 @@ TiDBはパスワードを[`mysql.user`](/mysql-schema/mysql-schema-user.md)シ�
 1.  設定ファイルを変更します。
 
     1.  tidb-server インスタンスの 1 つが配置されているマシンにログインします。
-    2.  TiDB ノードのデプロイメント ディレクトリの下の`conf`ディレクトリに入り、 `tidb.toml`構成ファイルを見つけます。
+    2.  TiDB ノードのデプロイメントディレクトリの下の`conf`ディレクトリに入り、 `tidb.toml`構成ファイルを見つけます。
     3.  設定ファイルの[`security`](/tidb-configuration-file.md#security)セクションに設定項目[`skip-grant-table`](/tidb-configuration-file.md)を追加します。`security`がない場合は、 `tidb.toml`設定ファイルの末尾に次の2行を追加します。
 
         ```
@@ -202,7 +202,7 @@ TiDBはパスワードを[`mysql.user`](/mysql-schema/mysql-schema-user.md)シ�
     >
     > TiDBプロセスを開始する前に`skip-grant-table`を設定すると、オペレーティングシステムのユーザーチェックが開始されます。オペレーティングシステムの`root`ユーザーのみがTiDBプロセスを開始できます。
 
-    1.  TiDB ノードのデプロイメント ディレクトリの下の`scripts`ディレクトリを入力します。
+    1.  TiDB ノードのデプロイメントディレクトリの下の`scripts`ディレクトリを入力します。
     2.  Switch to the `root` account of the operating system.
     3.  ディレクトリ内の`run_tidb.sh`スクリプトをフォアグラウンドで実行します。
     4.  新しいターミナル ウィンドウで`root`としてログインし、パスワードを変更します。

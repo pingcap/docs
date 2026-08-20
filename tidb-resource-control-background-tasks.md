@@ -28,7 +28,7 @@ TiDB は次の種類のバックグラウンドタスクをサポートしてい
 
 -   `import` : [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)または[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用してインポートタスクを実行します。TiDB Lightning の物理インポートモードと論理インポートモードの両方がサポートされています。
 -   `br` : [BR](/br/backup-and-restore-overview.md)を使用してバックアップおよび復元タスクを実行します。PITR はサポートされていません。
--   `ddl` : Reorg DDL のバッチ データ書き戻しフェーズ中のリソース使用量を制御します。
+-   `ddl` : Reorg DDL のバッチデータ書き戻しフェーズ中のリソース使用量を制御します。
 -   `stats` : 手動で実行されるか、TiDB によって自動的にトリガーされる[統計を収集する](/statistics.md#collect-statistics)タスク。
 -   `background` : 予約済みのタスクタイプ。システム変数[`tidb_request_source_type`](/system-variables.md#tidb_request_source_type-new-in-v740)を使用して、現在のセッションのタスクタイプを`background`として指定できます。
 
@@ -38,7 +38,7 @@ TiDB は次の種類のバックグラウンドタスクをサポートしてい
 
 -   `import` : [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)を使用してインポートタスクを実行します。TiDB Lightningの物理インポートモードと論理インポートモードの両方がサポートされています。
 -   `br` : [BR](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)を使用してバックアップおよび復元タスクを実行します。PITR はサポートされていません。
--   `ddl` : Reorg DDL のバッチ データ書き戻しフェーズ中のリソース使用量を制御します。
+-   `ddl` : Reorg DDL のバッチデータ書き戻しフェーズ中のリソース使用量を制御します。
 -   `stats` : 手動で実行されるか、TiDB によって自動的にトリガーされる[統計を収集する](/statistics.md#collect-statistics)タスク。
 -   `background` : 予約済みのタスクタイプ。システム変数[`tidb_request_source_type`](/system-variables.md#tidb_request_source_type-new-in-v740)を使用して、現在のセッションのタスクタイプを`background`として指定できます。
 

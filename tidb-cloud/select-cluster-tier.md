@@ -98,7 +98,7 @@ TiDB Cloudは、 TiDB Cloud StarterまたはTiDB Cloud Essentialの各インス�
 
     > **Note:**
     >
-    > TiDB Cloud StarterおよびTiDB Cloud Essential には TLS 接続が必要です。システム上の CA ルート パスを見つけるには、 [ルート証明書のデフォルトパス](/tidb-cloud/secure-connections-to-serverless-clusters.md#root-certificate-default-path)を参照してください。
+    > TiDB Cloud StarterおよびTiDB Cloud Essential には TLS 接続が必要です。システム上の CA ルートパスを見つけるには、 [ルート証明書のデフォルトパス](/tidb-cloud/secure-connections-to-serverless-clusters.md#root-certificate-default-path)を参照してください。
 
 -   データベースユーザーを作成するには：
 

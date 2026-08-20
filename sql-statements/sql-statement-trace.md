@@ -58,7 +58,7 @@ TRACE FORMAT='row' SELECT * FROM mysql.user;
 TRACE FORMAT='json' SELECT * FROM mysql.user;
 ```
 
-JSON 形式のトレースは、TiDB ステータス ポート経由でアクセスできるトレース ビューアーに貼り付けることができます。
+JSON 形式のトレースは、TiDB ステータスポート経由でアクセスできるトレース ビューアーに貼り付けることができます。
 
 ![TiDB Trace Viewer-1](/media/trace-paste.png)
 

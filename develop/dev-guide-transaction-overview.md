@@ -19,7 +19,7 @@ TiDBは完全な分散トランザクションをサポートし、 [楽観的�
 
 トランザクションにより、上記の操作の両方が正常に実行されるか、または両方とも失敗するかを確認できます。
 
-[書店](/develop/dev-guide-bookshop-schema-design.md)データベースの`users`テーブルを使用して、テーブルにいくつかのサンプル データを挿入します。
+[書店](/develop/dev-guide-bookshop-schema-design.md)データベースの`users`テーブルを使用して、テーブルにいくつかのサンプルデータを挿入します。
 
 ```sql
 INSERT INTO users (id, nickname, balance)

@@ -21,13 +21,13 @@ TiDB バージョン: 7.3.0
 
 -   TiFlashはレプリカ選択戦略をサポートしています [#44106](https://github.com/pingcap/tidb/issues/44106) @[XuHuaiyu](https://github.com/XuHuaiyu)
 
-    バージョン 7.3.0 より前のTiFlashでは、パフォーマンスを最大化するために、すべてのノードのレプリカを使用してデータ スキャンと MPP 計算を行っていました。バージョン 7.3.0 以降では、 TiFlash はレプリカ選択戦略を導入し、システム変数[`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730)を使用して設定できるようになりました。この戦略では、ノードの[ゾーン属性](/schedule-replicas-by-topology-labels.md#optional-configure-labels-for-tidb)に基づいて特定のレプリカを選択し、データ スキャンと MPP 計算のために特定のノードをスケジュールすることができます。
+    バージョン 7.3.0 より前のTiFlashでは、パフォーマンスを最大化するために、すべてのノードのレプリカを使用してデータスキャンと MPP 計算を行っていました。バージョン 7.3.0 以降では、 TiFlash はレプリカ選択戦略を導入し、システム変数[`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730)を使用して設定できるようになりました。この戦略では、ノードの[ゾーン属性](/schedule-replicas-by-topology-labels.md#optional-configure-labels-for-tidb)に基づいて特定のレプリカを選択し、データスキャンと MPP 計算のために特定のノードをスケジュールすることができます。
 
     複数のデータセンターに展開され、各データセンターに完全なTiFlashデータレプリカが存在するクラスターの場合、この戦略を設定して、現在のデータセンターのTiFlashレプリカのみを選択することができます。これにより、データスキャンとMPP計算は現在のデータセンター内のTiFlashノードでのみ実行されるため、データセンター間での過剰なネットワークデータ転送を回避できます。
 
     詳細については、 [ドキュメント](/system-variables.md#tiflash_replica_read-new-in-v730)を参照してください。
 
--   TiFlash はノード内のランタイム フィルターをサポート [#40220](https://github.com/pingcap/tidb/issues/40220) @[elsa0520](https://github.com/elsa0520)
+-   TiFlash はノード内のランタイムフィルターをサポート [#40220](https://github.com/pingcap/tidb/issues/40220) @[elsa0520](https://github.com/elsa0520)
 
     ランタイムフィルタは、クエリプランニングフェーズ中に生成される**動的な述語**です。テーブル結合処理において、これらの動的な述語は結合条件を満たさない行を効果的にフィルタリングし、スキャン時間とネットワークオーバーヘッドを削減し、テーブル結合の効率を向上させます。TiFlashはv7.3.0以降、ノード内でランタイムフィルタをサポートし、分析クエリの全体的なパフォーマンスを向上させています。一部のTPC-DSワークロードでは、パフォーマンスが10%から50%向上する可能性があります。
 

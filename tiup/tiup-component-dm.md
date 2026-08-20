@@ -64,7 +64,7 @@ tiup dm [command] [flags]
 ## コマンドリスト {#command-list}
 
 -   [輸入](/tiup/tiup-component-dm-import.md) : DM-Ansible によってデプロイされた DM v1.0 クラスターをインポートします。
--   [テンプレート](/tiup/tiup-component-dm-template.md) : トポロジ テンプレートを出力します。
+-   [テンプレート](/tiup/tiup-component-dm-template.md) : トポロジテンプレートを出力します。
 -   [展開する](/tiup/tiup-component-dm-deploy.md) : 指定されたトポロジに基づいてクラスターをデプロイします。
 -   [リスト](/tiup/tiup-component-dm-list.md) : デプロイされたクラスターのリストを照会します。
 -   [画面](/tiup/tiup-component-dm-display.md) : 指定されたクラスターのステータスを表示します。

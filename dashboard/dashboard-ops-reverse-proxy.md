@@ -5,7 +5,7 @@ summary: TiDB Dashboardは、リバースプロキシを使用して安全に公
 
 # リバースプロキシの背後でTiDB Dashboardを使用する {#use-tidb-dashboard-behind-a-reverse-proxy}
 
-リバース プロキシを使用すると、TiDB Dashboard サービスを内部ネットワークから外部に安全に公開できます。
+リバースプロキシを使用すると、TiDB Dashboard サービスを内部ネットワークから外部に安全に公開できます。
 
 ## 手順 {#procedures}
 
@@ -27,7 +27,7 @@ http://192.168.0.123:2379/dashboard/
 
 > **Note:**
 >
-> この機能は、 `tiup cluster`デプロイメント ツールの新しいバージョン (v1.0.3 以降) でのみ使用できます。
+> この機能は、 `tiup cluster`デプロイメントツールの新しいバージョン (v1.0.3 以降) でのみ使用できます。
 >
 > <details><summary>TiUPクラスタのアップグレード</summary>
 >
@@ -64,13 +64,13 @@ http://192.168.0.123:2379/dashboard/
 
 2.  設定を有効にするには、HAProxy を再起動します。
 
-3.  リバース プロキシが有効かどうかをテストします。HAProxy が配置されているマシンの`8033`ポートの`/dashboard/`アドレス ( `http://example.com:8033/dashboard/`など) にアクセスして、TiDB Dashboardにアクセスします。
+3.  リバースプロキシが有効かどうかをテストします。HAProxy が配置されているマシンの`8033`ポートの`/dashboard/`アドレス ( `http://example.com:8033/dashboard/`など) にアクセスして、TiDB Dashboardにアクセスします。
 
 </details>
 
 <details><summary><strong>NGINXを使用する</strong></summary>
 
-[NGINX](https://nginx.org/)リバース プロキシとして使用する場合は、次の手順を実行します。
+[NGINX](https://nginx.org/)リバースプロキシとして使用する場合は、次の手順を実行します。
 
 1.  TiDB Dashboardのリバースプロキシを`8033`ポート（例）で使用します。NGINX設定ファイルに以下の設定を追加します。
 
@@ -95,7 +95,7 @@ http://192.168.0.123:2379/dashboard/
     sudo nginx -s reload
     ```
 
-3.  リバース プロキシが有効かどうかをテストします。NGINX が配置されているマシンの`8033`ポートの`/dashboard/`アドレス ( `http://example.com:8033/dashboard/`など) にアクセスして、TiDB Dashboardにアクセスします。
+3.  リバースプロキシが有効かどうかをテストします。NGINX が配置されているマシンの`8033`ポートの`/dashboard/`アドレス ( `http://example.com:8033/dashboard/`など) にアクセスして、TiDB Dashboardにアクセスします。
 
 </details>
 
@@ -179,7 +179,7 @@ server_configs:
 
 </details>
 
-TiDB Dashboard サービスをルート パス ( `http://example.com:8033/`など) で実行する場合は、次の構成を使用します。
+TiDB Dashboard サービスをルートパス ( `http://example.com:8033/`など) で実行する場合は、次の構成を使用します。
 
 ```yaml
 server_configs:
@@ -214,7 +214,7 @@ backend tidb_dashboard_back
 >
 > **このパス内のサービスのみが**リバースプロキシの背後にあることを保証するには、 `use_backend`ディレクティブの`if`部分を保持する必要があります。そうしないと、セキュリティリスクが発生する可能性があります。[TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
 
-TiDB Dashboard サービスをルート パス ( `http://example.com:8033/`など) で実行する場合は、次の構成を使用します。
+TiDB Dashboard サービスをルートパス ( `http://example.com:8033/`など) で実行する場合は、次の構成を使用します。
 
 ```haproxy
 frontend tidb_dashboard_front
@@ -249,7 +249,7 @@ server {
 >
 > `proxy_pass`ディレクティブの`/dashboard/`パスは必ず保持し**、このパス内のサービスのみが**リバースプロキシの背後にあるようにする必要があります。そうしないと、セキュリティリスクが発生する可能性があります。[TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
 
-TiDB Dashboard サービスをルート パス ( `http://example.com:8033/`など) で実行する場合は、次の構成を使用します。
+TiDB Dashboard サービスをルートパス ( `http://example.com:8033/`など) で実行する場合は、次の構成を使用します。
 
 ```nginx
 server {

@@ -5,7 +5,7 @@ summary: アプリケーションでフィルタリングを使用する方法�
 
 # フィルタリング {#filtering}
 
-リレーショナル データベースである TiDB は、正確なクエリを実行するための[SQL演算子](https://docs.pingcap.com/tidbcloud/operators/)なフィルタリング条件と柔軟な組み合わせをサポートします。
+リレーショナルデータベースである TiDB は、正確なクエリを実行するための[SQL演算子](https://docs.pingcap.com/tidbcloud/operators/)なフィルタリング条件と柔軟な組み合わせをサポートします。
 
 ## 概要 {#overview}
 

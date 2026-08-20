@@ -19,7 +19,7 @@ TiDB Cloudでは、常時稼働していないTiDB Cloud Dedicatedクラスタ�
 
 -   クラスターを一時停止できるのは、クラスターの状態が「**利用可能**」の場合のみです。クラスターの状態が**「変更中」**などの場合、一時停止する前に現在の操作が完了するまで待つ必要があります。
 -   データインポートタスクの実行中は、クラスターを一時停止することはできません。インポートタスクが完了するまで待つか、インポートタスクをキャンセルするかのいずれかを選択してください。
--   バックアップ ジョブの実行中はクラスターを一時停止できません。現在のバックアップ ジョブが完了するまで待つか、 [実行中のバックアップジョブを削除します](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job)。
+-   バックアップジョブの実行中はクラスターを一時停止できません。現在のバックアップジョブが完了するまで待つか、 [実行中のバックアップジョブを削除します](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job)。
 -   クラスターに[変更フィード](/tidb-cloud/changefeed-overview.md)がある場合、クラスターを一時停止することはできません。クラスターを一時停止する前に[既存の変更フィードを削除する](/tidb-cloud/changefeed-overview.md#delete-a-changefeed)必要があります。
 -   [Point-in-Time Restore (PITR)](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore) が有効になっている場合、クラスターを一時停止することはできません。クラスターを一時停止する前に、**Backup Setting** の **Point-in-time Restore** スイッチをオフにする必要があります。
 -   [Data Migration](/tidb-cloud/tidb-cloud-migration-overview.md) ジョブの実行中は、クラスターを一時停止することはできません。クラスターを一時停止する前に、移行ジョブが実行されていないことを確認してください。

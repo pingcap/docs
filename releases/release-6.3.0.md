@@ -49,7 +49,7 @@ TiDBバージョン: 6.3.0-DMR
 
 -   DDL変更時のDML成功率を向上させるための軽量メタデータロックを提供する（実験的） [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016)
 
-    TiDB は、変更されるメタデータ オブジェクトをサポートするために、オンライン非同期スキーマ変更アルゴリズムを使用します。トランザクションが実行されると、トランザクションの開始時に対応するメタデータ スナップショットを取得します。トランザクション中にメタデータが変更された場合、データの一貫性を確保するために、TiDB は`Information schema is changed`エラーを返し、トランザクションはコミットに失敗します。この問題を解決するために、TiDB v6.3.0 では、オンライン DDL アルゴリズムに[メタデータロック](/metadata-lock.md)が導入されました。可能な限り DML エラーを回避するために、TiDB はテーブルメタデータの変更中に DML と DDL の優先順位を調整し、実行中の DDL が古いメタデータを持つ DML のコミットを待つようにします。
+    TiDB は、変更されるメタデータオブジェクトをサポートするために、オンライン非同期スキーマ変更アルゴリズムを使用します。トランザクションが実行されると、トランザクションの開始時に対応するメタデータスナップショットを取得します。トランザクション中にメタデータが変更された場合、データの一貫性を確保するために、TiDB は`Information schema is changed`エラーを返し、トランザクションはコミットに失敗します。この問題を解決するために、TiDB v6.3.0 では、オンライン DDL アルゴリズムに[メタデータロック](/metadata-lock.md)が導入されました。可能な限り DML エラーを回避するために、TiDB はテーブルメタデータの変更中に DML と DDL の優先順位を調整し、実行中の DDL が古いメタデータを持つ DML のコミットを待つようにします。
 
 -   インデックス追加のパフォーマンスを向上させ、DML トランザクションへの影響を軽減します (実験的) [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037)
 
@@ -77,7 +77,7 @@ TiDBバージョン: 6.3.0-DMR
 
 -   スローログと`TRACE`ステートメントの出力強化 [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk)
 
-    TiDB v6.3.0 では、スロー ログと`TRACE`の出力が強化されています。TiDB の解析から KV RocksDB によるディスクへの書き込みまでの SQL クエリの[フルリンク期間](/latency-breakdown.md)を観察できるため、診断機能がさらに強化されます。
+    TiDB v6.3.0 では、スローログと`TRACE`の出力が強化されています。TiDB の解析から KV RocksDB によるディスクへの書き込みまでの SQL クエリの[フルリンク期間](/latency-breakdown.md)を観察できるため、診断機能がさらに強化されます。
 
 -   TiDB Dashboardはデッドロック履歴情報を提供します [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk)
 
@@ -97,7 +97,7 @@ TiDBバージョン: 6.3.0-DMR
 
     この機能はバージョン6.2.0では実験的に提供されており、バージョン6.3.0で正式リリースとなります。
 
--   TiFlashデータ レプリケーションのパフォーマンスが向上 [#5237](https://github.com/pingcap/tiflash/issues/5237) @[breezewish](https://github.com/breezewish)
+-   TiFlashデータレプリケーションのパフォーマンスが向上 [#5237](https://github.com/pingcap/tiflash/issues/5237) @[breezewish](https://github.com/breezewish)
 
     TiFlashは、TiKVからのデータレプリケーションにRaftプロトコルを使用します。v6.3.0より前は、大量のレプリカデータのレプリケーションに時間がかかることがよくありました。TiDB v6.3.0では、 TiFlashのデータレプリケーションメカニズムが最適化され、レプリケーション速度が大幅に向上しました。BRを使用してデータをリカバリする場合、 TiDB Lightningを使用してデータをインポートする場合、または新しいTiFlashレプリカを追加する場合、 TiFlashレプリカのレプリケーションがより迅速に行われます。TiFlashを使用したクエリもより迅速に実行できます。さらに、 TiFlashレプリカのスケールアップ、スケールダウン、またはレプリカ数の変更時にも、 TiFlashレプリカはより迅速に安全でバランスの取れた状態に到達します。
 
@@ -113,7 +113,7 @@ TiDBバージョン: 6.3.0-DMR
 
     TiDB v6.3.0 では、新しい結合[ヌル値認識型アンチジョイン（NAAJ）](/explain-subqueries.md#null-aware-anti-semi-join-not-in-and--all-subqueries)が導入されています。 NAAJ は、コレクション操作を処理するときに、コレクションが空であるか、 `NULL`であるかを認識できます。これにより`IN`や`= ANY`などの操作の実行効率が最適化され、SQL パフォーマンスが向上します。
 
--   ハッシュ結合のビルド終了を制御するオプティマイザー ヒントを追加 [#35439](https://github.com/pingcap/tidb/issues/35439) @[Reminiscent](https://github.com/Reminiscent)
+-   ハッシュ結合のビルド終了を制御するオプティマイザーヒントを追加 [#35439](https://github.com/pingcap/tidb/issues/35439) @[Reminiscent](https://github.com/Reminiscent)
 
     バージョン6.3.0では、TiDBオプティマイザに、ハッシュ結合、そのプローブ終了、および構築終了を指定するための2つのヒント、 `HASH_JOIN_BUILD()`と`HASH_JOIN_PROBE()`が導入されました。オプティマイザが最適な実行計画を選択できない場合、これらのヒントを使用してプランに介入できます。
 
@@ -195,11 +195,11 @@ TiDBバージョン: 6.3.0-DMR
 
 -   TiCDCは、地理的に分散した複数のデータソースからデータを複製できるデプロイメントトポロジーをサポートしています [#5301](https://github.com/pingcap/tiflow/issues/5301) @[sdojjy](https://github.com/sdojjy)
 
-    v6.3.0 以降、単一の TiDB クラスターから複数の地理的に分散されたデータ システムへのデータの複製をサポートするために、 [TiCDCは複数のIDCに展開できます](/ticdc/deploy-ticdc.md) 。この機能は、地理的に分散されたデータ レプリケーションおよび展開トポロジの機能を提供するのに役立ちます。
+    v6.3.0 以降、単一の TiDB クラスターから複数の地理的に分散されたデータ システムへのデータの複製をサポートするために、 [TiCDCは複数のIDCに展開できます](/ticdc/deploy-ticdc.md) 。この機能は、地理的に分散されたデータレプリケーションおよび展開トポロジの機能を提供するのに役立ちます。
 
 -   TiCDCは、アップストリームとダウンストリーム間でスナップショットの一貫性を維持することをサポートしています（同期ポイント） [#6977](https://github.com/pingcap/tiflow/issues/6977) @[asddongmen](https://github.com/asddongmen)
 
-    ディザスタリカバリのためのデータ レプリケーションのシナリオでは、TiCDC は、ダウンストリーム スナップショットがアップストリーム スナップショットと一貫性を保つように [定期的に下流データのスナップショットを維持する](/ticdc/ticdc-upstream-downstream-check.md)をサポートします。この機能により、TiCDC は読み取りと書き込みが分離されるシナリオをより適切にサポートし、コストの削減に役立ちます。
+    ディザスタリカバリのためのデータレプリケーションのシナリオでは、TiCDC は、ダウンストリーム スナップショットがアップストリーム スナップショットと一貫性を保つように [定期的に下流データのスナップショットを維持する](/ticdc/ticdc-upstream-downstream-check.md)をサポートします。この機能により、TiCDC は読み取りと書き込みが分離されるシナリオをより適切にサポートし、コストの削減に役立ちます。
 
 -   TiCDC はグレースフル アップグレードをサポート [#4757](https://github.com/pingcap/tiflow/issues/4757) @[overvenus](https://github.com/overvenus)@[3AceShowHand](https://github.com/3AceShowHand)
 
@@ -357,7 +357,7 @@ TiDBバージョン: 6.3.0-DMR
     -   JSON集計関数で単精度浮動小数点数が使用できない問題を修正 [#37287](https://github.com/pingcap/tidb/issues/37287) @[YangKeao](https://github.com/YangKeao)
     -   `UNION`演算子が予期しない空の結果を返す可能性がある問題を修正 [#36903](https://github.com/pingcap/tidb/issues/36903) @[tiancaiamao](https://github.com/tiancaiamao)
     -   `castRealAsTime`式の結果が MySQL と一致しない問題を修正します [#37462](https://github.com/pingcap/tidb/issues/37462) @[mengxin9014](https://github.com/mengxin9014)
-    -   悲観的DML 操作が非一意インデックス キーをロックする問題を修正 [#36235](https://github.com/pingcap/tidb/issues/36235) @[ekexium](https://github.com/ekexium)
+    -   悲観的DML 操作が非一意インデックスキーをロックする問題を修正 [#36235](https://github.com/pingcap/tidb/issues/36235) @[ekexium](https://github.com/ekexium)
     -   `auto-commit`の変更がトランザクションコミットの動作に影響を与える問題を修正 [#36581](https://github.com/pingcap/tidb/issues/36581) @[cfzjywxk](https://github.com/cfzjywxk)
     -   DML実行エンジンを使用した`EXPLAIN ANALYZE`ステートメントがトランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました [#37373](https://github.com/pingcap/tidb/issues/37373) @[cfzjywxk](https://github.com/cfzjywxk)
     -   UPDATE 文が場合によっては誤って投影を削除し、 `Can't find column` エラーが発生する問題を修正しました。 [#37568](https://github.com/pingcap/tidb/issues/37568) @[AilinKid](https://github.com/AilinKid)

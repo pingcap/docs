@@ -9,7 +9,7 @@ summary: TIFLASH_SEGMENTS` information_schema テーブルについて学習し�
 >
 > このテーブルは不安定であり、TiDB の新しいリリースで予告なく変更される可能性があるため、本番環境では使用しないでください。
 
-`TIFLASH_SEGMENTS`テーブルは、 TiFlashのデータ テーブル内のセグメントに関する統計情報を提供します。
+`TIFLASH_SEGMENTS`テーブルは、 TiFlashのデータテーブル内のセグメントに関する統計情報を提供します。
 
 ```sql
 USE information_schema;

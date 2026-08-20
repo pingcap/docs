@@ -33,13 +33,13 @@ aliases: ['/ja/tidb/stable/vector-search-limitations/','/ja/tidb/dev/vector-sear
 
 -   TiDB Cloudの機能：
 
-    -   [TiDB Cloudコンソールのデータ移行機能](/tidb-cloud/migrate-from-mysql-using-data-migration.md)MySQL ベクトル データ型のTiDB Cloudへの移行または複製をサポートしていません。
+    -   [TiDB Cloudコンソールのデータ移行機能](/tidb-cloud/migrate-from-mysql-using-data-migration.md)MySQL ベクトルデータ型のTiDB Cloudへの移行または複製をサポートしていません。
 
 -   TiDB Self-Managedツール：
 
     -   データのバックアップと復元には、 [BR](/br/backup-and-restore-overview.md)のバージョン8.4.0以降を使用していることを確認してください。ベクトルデータ型のテーブルをTiDBバージョン8.4.0より前のバージョンに復元することはサポートされていません。
     -   [TiDB Data Migration (DM)](/dm/dm-overview.md) MySQLベクトルデータ型をTiDBに移行または複製することをサポートしていません。
-    -   [TiCDC](/ticdc/ticdc-overview.md)ベクトル データ タイプをサポートしていないダウンストリームにベクトル データをレプリケートすると、ベクトル データ タイプが別のタイプに変更されます。詳細については、 [ベクトルデータ型との互換性](/ticdc/ticdc-compatibility.md#compatibility-with-vector-data-types)を参照してください。
+    -   [TiCDC](/ticdc/ticdc-overview.md)ベクトルデータタイプをサポートしていないダウンストリームにベクトルデータをレプリケートすると、ベクトルデータタイプが別のタイプに変更されます。詳細については、 [ベクトルデータ型との互換性](/ticdc/ticdc-compatibility.md#compatibility-with-vector-data-types)を参照してください。
 
 ## フィードバック {#feedback}
 

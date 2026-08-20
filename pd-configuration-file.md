@@ -13,7 +13,7 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 > **Tip:**
 >
-> PD 初期化後に設定項目の値を調整する必要がある場合は、 [設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)と[PD Controlユーザー ガイド](/pd-control.md)を参照してください。
+> PD 初期化後に設定項目の値を調整する必要がある場合は、 [設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)と[PD Controlユーザーガイド](/pd-control.md)を参照してください。
 
 ### `name` {#name}
 
@@ -533,7 +533,7 @@ pd-server関連のコンフィグレーション項目
 
 ### `public-path-prefix` {#public-path-prefix}
 
--   TiDB Dashboardがリバース プロキシの背後でアクセスされる場合、この項目はすべての Web リソースのパブリック URL パス プレフィックスを設定します。
+-   TiDB Dashboardがリバースプロキシの背後でアクセスされる場合、この項目はすべての Web リソースのパブリック URL パス プレフィックスを設定します。
 -   デフォルト値: `/dashboard`
 -   リバースプロキシを経由せずにTiDB Dashboardにアクセスする場合は、この設定項目を変更**しないで**ください。変更すると、アクセスの問題が発生する可能性があります。詳細は[リバースプロキシの背後で TiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
 

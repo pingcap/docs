@@ -5,7 +5,7 @@ summary: TiDBスナップショットのバックアップと復元コマンド�
 
 # TiDB スナップショットのバックアップと復元コマンドマニュアル {#tidb-snapshot-backup-and-restore-command-manual}
 
-このドキュメントでは、次のようなアプリケーション シナリオに応じて、TiDB スナップショットのバックアップと復元のコマンドについて説明します。
+このドキュメントでは、次のようなアプリケーションシナリオに応じて、TiDB スナップショットのバックアップと復元のコマンドについて説明します。
 
 -   [クラスターのスナップショットをバックアップする](#back-up-cluster-snapshots)
 -   [データベースまたはテーブルをバックアップする](#back-up-a-database-or-a-table)
@@ -112,7 +112,7 @@ TiDB v7.5.0以降、 `br`コマンドラインツールに`--ignore-stats`パラ
 
 このパラメータを`false`に設定しない場合、 `br`コマンドラインツールはデフォルト設定の`--ignore-stats=true`を使用します。つまり、データのバックアップ中に統計はバックアップされません。
 
-以下は、クラスター スナップショット データをバックアップし、テーブル統計を`--ignore-stats=false`でバックアップする例です。
+以下は、クラスター スナップショットデータをバックアップし、テーブル統計を`--ignore-stats=false`でバックアップする例です。
 
 ```shell
 tiup br backup full \
@@ -218,7 +218,7 @@ tiup br restore full \
 
 データベースをクラスターに復元するには、 `tiup br restore db`コマンドを実行します。
 
-次の例では、バックアップデータから`test`データベースをターゲット クラスターに復元します。
+次の例では、バックアップデータから`test`データベースをターゲットクラスターに復元します。
 
 ```shell
 tiup br restore db \
@@ -239,7 +239,7 @@ tiup br restore db \
 
 単一のテーブルをクラスターに復元するには、 `tiup br restore table`コマンドを実行します。
 
-次の例では、 `test.usertable`テーブルを Amazon S3 からターゲット クラスターに復元します。
+次の例では、 `test.usertable`テーブルを Amazon S3 からターゲットクラスターに復元します。
 
 ```shell
 tiup br restore table \
@@ -255,7 +255,7 @@ tiup br restore table \
 
 ### テーブルフィルターを使用して複数のテーブルを復元する {#restore-multiple-tables-with-table-filter}
 
-より複雑なフィルター ルールを使用して複数のテーブルを復元するには、 `tiup br restore full`コマンドを実行し、 [テーブルフィルター](/table-filter.md)を`--filter`または`-f`に指定します。
+より複雑なフィルタールールを使用して複数のテーブルを復元するには、 `tiup br restore full`コマンドを実行し、 [テーブルフィルター](/table-filter.md)を`--filter`または`-f`に指定します。
 
 次の例では、 `db*.tbl*`フィルタルールに一致するテーブルを Amazon S3 からターゲットクラスターに復元します。
 

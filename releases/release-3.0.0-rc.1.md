@@ -31,7 +31,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
 
 -   実行エンジン
     -   3つの演算子`TableReader` `IndexLookupReader` メモリ使用量の追跡と制御をサポートします`IndexReader` [＃10003](https://github.com/pingcap/tidb/pull/10003)
-    -   コプロセッサのタスク数、実行時間/待機時間の平均/最長/90%、実行時間または待機時間が最も長い TiKV のアドレスなど、スロー ログ内のコプロセッサタスクに関する詳細情報の表示をサポートします[＃10165](https://github.com/pingcap/tidb/pull/10165)
+    -   コプロセッサのタスク数、実行時間/待機時間の平均/最長/90%、実行時間または待機時間が最も長い TiKV のアドレスなど、スローログ内のコプロセッサタスクに関する詳細情報の表示をサポートします[＃10165](https://github.com/pingcap/tidb/pull/10165)
     -   プレースホルダなしの準備済みDDL文をサポートする[＃10144](https://github.com/pingcap/tidb/pull/10144)
 
 -   サーバ

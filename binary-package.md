@@ -1,9 +1,9 @@
 ---
 title: TiDB Installation Packages
-summary: TiDB インストール パッケージと、含まれる特定のコンポーネントについて説明します。
+summary: TiDB インストールパッケージと、含まれる特定のコンポーネントについて説明します。
 ---
 
-# TiDB インストール パッケージ {#tidb-installation-packages}
+# TiDB インストールパッケージ {#tidb-installation-packages}
 
 [TiUPをオフラインで展開する](/production-deployment-using-tiup.md#deploy-tiup-offline)前に、 [TiUPオフラインコンポーネントパッケージを準備する](/production-deployment-using-tiup.md#prepare-the-tiup-offline-component-package)で説明されているように TiDB のバイナリパッケージをダウンロードする必要があります。
 

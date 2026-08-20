@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Support
-summary: TiDB Cloudのサポート チームに連絡する方法について説明します。
+summary: TiDB Cloudのサポートチームに連絡する方法について説明します。
 ---
 
 # TiDB Cloudサポート {#tidb-cloud-support}
@@ -13,7 +13,7 @@ TiDB Cloudは複数のサポートチャネルを提供しています。利用�
 
 -   サポートチケット ( [ヘルプセンター](#access-pingcap-help-center) )
 
-    TiDB Cloudサポート チームからの直接支援が必要な問題については、このチケット ベースのチャネルを使用してください。
+    TiDB Cloudサポートチームからの直接支援が必要な問題については、このチケット ベースのチャネルを使用してください。
 
     -   [請求とアカウントチケット](/tidb-cloud/tidb-cloud-support.md#create-an-account-or-billing-support-ticket)はすべてのTiDB Cloudユーザーが利用できます。
     -   有料サポートプランでは、応答時間保証付きの[テクニカルサポートチケット](/tidb-cloud/tidb-cloud-support.md#create-a-technical-support-ticket)をご利用いただけます。有料サポートプランにご加入されていない場合は、技術的なご質問についてはコミュニティチャンネルをご利用ください。
@@ -35,12 +35,12 @@ TiDB Cloudは複数のサポートチャネルを提供しています。利用�
 
 ## PingCAPヘルプセンターにアクセスする {#access-pingcap-help-center}
 
-[PingCAP ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)は、 TiDB Cloudユーザーがサポート サービスにアクセスし、サポート チケットを管理するための中心的なハブです。
+[PingCAP ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)は、 TiDB Cloudユーザーがサポートサービスにアクセスし、サポートチケットを管理するための中心的なハブです。
 
 PingCAP ヘルプ センターには、 [https://tidb.support.pingcap.com/servicedesk/customer/portals](https://tidb.support.pingcap.com/servicedesk/customer/portals)から直接アクセスすることも、次の[TiDB Cloudコンソール](https://tidbcloud.com/)の方法でアクセスすることもできます。
 
 -   [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**[?]**をクリックし、 **Support Tickets**をクリックします。
--   [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある**[サポート] を**クリックし、サポート プランに応じて次のいずれかを実行します。
+-   [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある**[サポート] を**クリックし、サポートプランに応じて次のいずれかを実行します。
     -   **基本**: **[Account & Billing]**領域で、 **Account/Billing issues**をクリックします。
     -   **Developer** 、 **Enterprise** 、または**Premium** : **Talk to an expert**エリアで、 **PingCAP Help Center**をクリックします。
 -   プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページで、クラスターの行にある**[...]**をクリックし、 **Get Support**を選択します。
@@ -66,7 +66,7 @@ TiDB Cloudのすべてのユーザーは、請求およびアカウント関連�
 
 ## テクニカルサポートチケットを作成する {#create-a-technical-support-ticket}
 
-技術的な問題に関するサポート チケットを作成するには、次の手順を実行します。
+技術的な問題に関するサポートチケットを作成するには、次の手順を実行します。
 
 1.  [PingCAP ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)にログインし、 [TiDB Cloudテクニカルサポート](https://tidb.support.pingcap.com/servicedesk/customer/portal/6)をクリックします。
 
@@ -105,7 +105,7 @@ TiDB Cloudのすべてのユーザーは、請求およびアカウント関連�
 
 ## サポートチケットを確認する {#view-support-tickets}
 
-過去のサポート チケットをすべて表示するには、 [PingCAP ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)にログインし、右上隅のアバターをクリックして、 **[リクエスト]**をクリックします。
+過去のサポートチケットをすべて表示するには、 [PingCAP ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)にログインし、右上隅のアバターをクリックして、 **[リクエスト]**をクリックします。
 
 ## サポートプランを確認またはアップグレードする {#check-or-upgrade-your-support-plan}
 
@@ -153,10 +153,10 @@ TiDB Cloudは、デフォルトで無料の基本サポートプランを提供�
 
 ## サポートプランをダウングレードする {#downgrade-your-support-plan}
 
-サポート プランをダウングレードするには、次の手順を実行します。
+サポートプランをダウングレードするには、次の手順を実行します。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、左下隅にある**[サポート]**をクリックします。
-2.  切り替えるサポート プランを選択し、 **[ダウングレード]**をクリックします。
+2.  切り替えるサポートプランを選択し、 **[ダウングレード]**をクリックします。
 
     <CustomContent plan="byoc">
 

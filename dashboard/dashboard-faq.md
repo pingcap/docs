@@ -14,7 +14,7 @@ summary: このドキュメントは、TiDB Dashboardに関するよくある質
 クラスター内に複数のPlacement Driver（PD）インスタンスがデプロイされている場合、TiDB Dashboardサービスを実際に実行するPDインスタンスは1つだけです。このPDインスタンスではなく他のPDインスタンスにアクセスすると、ブラウザは別のアドレスにリダイレクトします。TiDB Dashboardへのアクセス用にファイアウォールまたはリバースプロキシが適切に設定されていない場合、ダッシュボードにアクセスした際に、ファイアウォールまたはリバースプロキシによって保護されている内部アドレスにリダイレクトされる可能性があります。
 
 -   複数の PD インスタンスを使用した TiDB Dashboardの動作原理については、 [TiDB Dashboardのマルチ PD インスタンスの展開](/dashboard/dashboard-ops-deploy.md)を参照してください。
--   リバース プロキシを正しく構成する方法については、 [リバースプロキシ経由でTiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
+-   リバースプロキシを正しく構成する方法については、 [リバースプロキシ経由でTiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
 -   ファイアウォールを正しく構成する方法については、 [TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
 
 ### TiDB Dashboardがデュアルネットワークインターフェースカード（NIC）で展開されている場合、別のNICを使用してTiDB Dashboardにアクセスすることはできません。 {#when-tidb-dashboard-is-deployed-with-dual-network-interface-cards-nics-tidb-dashboard-cannot-be-accessed-using-another-nic}

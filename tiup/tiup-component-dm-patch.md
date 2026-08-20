@@ -31,7 +31,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
 -   `mkdir -p /tmp/package && cd /tmp/package`を実行して、ファイルをパックするための一時ディレクトリを作成します。
 -   `tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz`を実行して元のバイナリパッケージを解凍します。
 -   `find .`を実行して、一時パッケージ ディレクトリ内のファイル構造を表示します。
--   バイナリ ファイルまたは構成ファイルを一時ディレクトリ内の対応する場所にコピーします。
+-   バイナリファイルまたは構成ファイルを一時ディレクトリ内の対応する場所にコピーします。
 -   `tar czf /tmp/${component}-hotfix-${os}-${arch}.tar.gz *`を実行して、一時ディレクトリにファイルをパックします。
 -   最後に、 `tiup dm patch`コマンドの`<package-path>`の値として`/tmp/${component}-hotfix-${os}-${arch}.tar.gz`を使用できます。
 
@@ -108,7 +108,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
     tar -zxvf /root/.tiup/storage/dm/packages/dm-worker-v5.3.0-linux-amd64.tar.gz -C /tmp/package/
     ```
 
-2.  バイナリ ファイルを修正プログラム パッケージに置き換えます。
+2.  バイナリファイルを修正プログラム パッケージに置き換えます。
 
     ```shell
     # Decompress the hotfix package and use it to replace the binary file.

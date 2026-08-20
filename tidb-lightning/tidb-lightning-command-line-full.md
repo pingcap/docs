@@ -26,7 +26,7 @@ TiDB Lightning は、設定ファイルまたはコマンドラインから設�
 | `--pd-urls <host1:port1,host2:port2,...,hostn:portn>` | PDエンドポイントアドレス。v7.6.0以降、TiDBは複数のPDアドレスの設定をサポートします。                                                                                                                                 | `tidb.pd-addr`                 |
 | `--tidb-host <host>`                                  | TiDBサーバーホスト                                                                                                                                                                       | `tidb.host`                    |
 | `--tidb-port <port>`                                  | TiDBサーバーポート (デフォルト = 4000)                                                                                                                                                        | `tidb.port`                    |
-| `--tidb-status <port>`                                | TiDB ステータス ポート (デフォルト = 10080)                                                                                                                                                    | `tidb.status-port`             |
+| `--tidb-status <port>`                                | TiDB ステータスポート (デフォルト = 10080)                                                                                                                                                    | `tidb.status-port`             |
 | `--tidb-user <user>`                                  | TiDBに接続するためのユーザー名                                                                                                                                                                 | `tidb.user`                    |
 | `--tidb-password <password>`                          | TiDBに接続するためのパスワード。パスワードはプレーンテキストまたはBase64エンコードのいずれかで指定できます。                                                                                                                       | `tidb.password`                |
 | `--enable-checkpoint <bool>`                          | チェックポイントを有効にするかどうか（デフォルト = true）                                                                                                                                                  | `checkpoint.enable`            |
@@ -49,8 +49,8 @@ TiDB Lightning は、設定ファイルまたはコマンドラインから設�
 | `--compact`                               | 完全な圧縮を実行します。                                     |
 | `--switch-mode <mode>`                    | すべての TiKV ストアを指定されたモード (通常またはインポート) に切り替えます。     |
 | `--fetch-mode`                            | 各 TiKV ストアの現在のモードを出力します。                         |
-| `--import-engine <uuid>`                  | 閉じたエンジン ファイルを TiKV インポーターから TiKV クラスターにインポートします。 |
-| `--cleanup-engine <uuid>`                 | TiKV インポーターからエンジン ファイルを削除します。                    |
+| `--import-engine <uuid>`                  | 閉じたエンジンファイルを TiKV インポーターから TiKV クラスターにインポートします。 |
+| `--cleanup-engine <uuid>`                 | TiKV インポーターからエンジンファイルを削除します。                    |
 | `--checkpoint-dump <folder>`              | 現在のチェックポイントを CSV としてフォルダーにダンプします。                |
 | `--checkpoint-error-destroy <table_name>` | チェックポイントを削除します。エラーが発生した場合は、テーブルを削除します。           |
 | `--checkpoint-error-ignore <table_name>`  | 指定されたテーブルに関連するチェックポイントに記録されたエラーを無視します。           |

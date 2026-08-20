@@ -5,7 +5,7 @@ summary: ticloud serverless audit-log filter-rule describe` のリファレン�
 
 # ticloud serverless audit-log filter-rule describe {#ticloud-serverless-audit-log-filter-rule-describe}
 
-TiDB Cloud Essential クラスターの監査ログ フィルター ルールについて説明します。
+TiDB Cloud Essential クラスターの監査ログフィルタールールについて説明します。
 
 ```shell
 ticloud serverless audit-log filter-rule describe [flags]
@@ -13,13 +13,13 @@ ticloud serverless audit-log filter-rule describe [flags]
 
 ## 例 {#examples}
 
-インタラクティブ モードで監査ログ フィルタ ルールを記述します。
+インタラクティブ モードで監査ログフィルタルールを記述します。
 
 ```shell
 ticloud serverless audit-log filter-rule describe
 ```
 
-非対話型モードで監査ログ フィルタ ルールを記述します。
+非対話型モードで監査ログフィルタルールを記述します。
 
 ```shell
 ticloud serverless audit-log filter-rule describe --cluster-id <cluster-id> --filter-rule-id <rule-id>
@@ -30,7 +30,7 @@ ticloud serverless audit-log filter-rule describe --cluster-id <cluster-id> --fi
 | フラグ                  | 説明                  | 必須  | 注記                                   |
 | -------------------- | ------------------- | --- | ------------------------------------ |
 | -c, --cluster-id string | クラスターの ID。          | はい  | 非対話型モードでのみ動作します。                     |
-| --filter-rule-id string | フィルター ルールの ID。      | はい  | 非対話型モードでのみ動作します。                     |
+| --filter-rule-id string | フィルタールールの ID。      | はい  | 非対話型モードでのみ動作します。                     |
 | -h, --help           | このコマンドのヘルプ情報を表示します。 | いいえ | インタラクティブ モードと非インタラクティブ モードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}

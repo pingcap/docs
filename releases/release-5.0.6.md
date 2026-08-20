@@ -50,7 +50,7 @@ TiDB バージョン: 5.0.6
 
     -   Backup & Restore (BR)
 
-        -   PD 要求エラーまたは TiKV I/O タイムアウト エラーが発生した場合は、 BRタスクを再試行します[＃27787](https://github.com/pingcap/tidb/issues/27787)
+        -   PD 要求エラーまたは TiKV I/O タイムアウトエラーが発生した場合は、 BRタスクを再試行します[＃27787](https://github.com/pingcap/tidb/issues/27787)
         -   復元の堅牢性を向上させる[＃27421](https://github.com/pingcap/tidb/issues/27421)
 
     -   TiDB Lightning

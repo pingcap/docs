@@ -16,7 +16,7 @@ summary: アプリケーションで複数のテーブル結合を使用する�
 
 `TiDBClient`を使用して、すでに[TiDBに接続](/ai/guides/connect.md)していると仮定します。
 
-`documents`テーブルを作成し、いくつかのサンプル データを挿入します。
+`documents`テーブルを作成し、いくつかのサンプルデータを挿入します。
 
 ```python
 from pytidb import Session
@@ -37,7 +37,7 @@ client.table("documents").bulk_insert([
 ])
 ```
 
-`chunks`テーブルを作成し、いくつかのサンプル データを挿入します。
+`chunks`テーブルを作成し、いくつかのサンプルデータを挿入します。
 
 ```python
 class Chunk(TableModel):
@@ -58,7 +58,7 @@ client.table("chunks").bulk_insert([
 </div>
 <div label="SQL" value="sql">
 
-`documents`テーブルを作成し、いくつかのサンプル データを挿入します。
+`documents`テーブルを作成し、いくつかのサンプルデータを挿入します。
 
 ```sql
 CREATE TABLE documents (
@@ -72,7 +72,7 @@ INSERT INTO documents (id, title) VALUES
     (3, 'The Art of Happiness');
 ```
 
-`chunks`テーブルを作成し、いくつかのサンプル データを挿入します。
+`chunks`テーブルを作成し、いくつかのサンプルデータを挿入します。
 
 ```sql
 CREATE TABLE chunks (

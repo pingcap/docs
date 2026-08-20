@@ -27,9 +27,9 @@ PDアフィニティスケジューリングを有効にし、テーブルの`AF
 
 PDアフィニティスケジューリングはデフォルトで無効になっています。テーブルまたはパーティションのアフィニティを設定する前に、この機能を有効にして設定する必要があります。
 
-1.  アフィニティ スケジューリングを有効にするには、PD 構成項目[`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855) `0`より大きい値に設定します。
+1.  アフィニティスケジューリングを有効にするには、PD 構成項目[`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855) `0`より大きい値に設定します。
 
-    たとえば、次のコマンドは値を`4`に設定し、PD が最大 4 つのアフィニティ スケジューリング タスクを同時に実行できるようにします。
+    たとえば、次のコマンドは値を`4`に設定し、PD が最大 4 つのアフィニティスケジューリング タスクを同時に実行できるようにします。
 
     ```bash
     pd-ctl config set schedule.affinity-schedule-limit 4
@@ -86,7 +86,7 @@ ALTER TABLE t1 AFFINITY = '';
 
 -   [`SHOW AFFINITY`](/sql-statements/sql-statement-show-affinity.md)番目のステートメントを実行します。`Status`の列には、アフィニティが有効になっているテーブルまたはパーティションと、それらのスケジュールステータスが表示されます。`Status`の列の値の意味は次のとおりです。
 
-    -   `Pending` : リーダーまたは投票者がまだ決定されていない場合など、PD はテーブルまたはパーティションのアフィニティ スケジューリングを開始していません。
+    -   `Pending` : リーダーまたは投票者がまだ決定されていない場合など、PD はテーブルまたはパーティションのアフィニティスケジューリングを開始していません。
     -   `Preparing` : PD はアフィニティ要件を満たすようにリージョンをスケジュールしています。
     -   `Stable` : すべてのリージョンが目標配布に到達しました。
 

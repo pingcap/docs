@@ -823,7 +823,7 @@ Empty set (0.00 sec)
 
 > **Note:**
 >
-> TiDB のハッシュ パーティションによる`NULL`値は[MySQLパーティショニングがNULLをどのように処理するか](https://dev.mysql.com/doc/refman/8.0/en/partitioning-handling-nulls.html)で説明されているのと同じ方法で処理されますが、これは MySQL の実際の動作と一致しません。言い換えれば、この場合の MySQL の実装はそのドキュメントと一致していません。
+> TiDB のハッシュパーティションによる`NULL`値は[MySQLパーティショニングがNULLをどのように処理するか](https://dev.mysql.com/doc/refman/8.0/en/partitioning-handling-nulls.html)で説明されているのと同じ方法で処理されますが、これは MySQL の実際の動作と一致しません。言い換えれば、この場合の MySQL の実装はそのドキュメントと一致していません。
 >
 > この場合、TiDBの実際の動作はこの文書の説明と一致しています。
 
@@ -1024,7 +1024,7 @@ ALTER TABLE member_level REORGANIZE PARTITION l1_2,l3,l4,l5,l6 INTO
 
 ### ハッシュとキーのパーティションを管理する {#manage-hash-and-key-partitions}
 
-このセクションでは、次の SQL ステートメントで作成されたパーティションテーブルを例として、ハッシュ パーティションの管理方法を示します。キー パーティションについても、同じ管理ステートメントを使用できます。
+このセクションでは、次の SQL ステートメントで作成されたパーティションテーブルを例として、ハッシュパーティションの管理方法を示します。キー パーティションについても、同じ管理ステートメントを使用できます。
 
 ```sql
 CREATE TABLE example (

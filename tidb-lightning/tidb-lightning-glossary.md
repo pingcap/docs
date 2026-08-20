@@ -93,7 +93,7 @@ TiKV インポーターでは、エンジンは KV ペアをソートするた�
 
 TiDB Lightningは、エンジンを介してTiKV Importerにデータを転送します。まずエンジンを開き、KVペアを（順序は問わず）エンジンに送信し、最後にエンジンを閉じます。エンジンは閉じた後、受信したKVペアをソートします。閉じられたエンジンは、TiKVストアにアップロードして取り込みを行うことができます。
 
-エンジンは TiKV インポーターの`import-dir`を一時ストレージとして使用します。これは「エンジン ファイル」と呼ばれることもあります。
+エンジンは TiKV インポーターの`import-dir`を一時ストレージとして使用します。これは「エンジンファイル」と呼ばれることもあります。
 
 [データエンジン](/tidb-lightning/tidb-lightning-glossary.md#data-engine)と[インデックスエンジン](/tidb-lightning/tidb-lightning-glossary.md#index-engine)も参照してください。
 

@@ -25,7 +25,7 @@ TiDBバージョン: 6.2.0-DMR
 -   [特定時点リカバリ（PITR）](/br/backup-and-restore-overview.md)は、過去の任意の時点から TiDB クラスターのスナップショットを新しいクラスターに復元するために導入されました。
 -   TiDB Lightning は、クラスターレベルではなく、物理インポートモードでテーブル[テーブルレベルでのスケジューリングを一時停止する](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import)をサポートしています。
 -   BR は[ユーザーおよび権限データの復元](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)サポートしており、バックアップと復元がよりスムーズになります。
--   TiCDC[特定の種類のDDLイベントをフィルタリングする](/ticdc/ticdc-filter.md)フィルタリングすることをサポートすることで、より多くのデータ レプリケーション シナリオを可能にします。
+-   TiCDC[特定の種類のDDLイベントをフィルタリングする](/ticdc/ticdc-filter.md)フィルタリングすることをサポートすることで、より多くのデータレプリケーションシナリオを可能にします。
 -   [`SAVEPOINT`機構](/sql-statements/sql-statement-savepoint.md)がサポートされており、トランザクション内のロールバックポイントを柔軟に制御できます。
 -   TiDB は[1つの`ALTER TABLE`ステートメントだけで、複数の列またはインデックスの追加、削除、変更を行う](/sql-statements/sql-statement-alter-table.md)サポートしています。
 -   [クラスター間RawKV複製](/tikv-configuration-file.md#api-version-new-in-v610)サポートされるようになりました。
@@ -52,7 +52,7 @@ TiDBバージョン: 6.2.0-DMR
 
 -   TiDB Dashboardにモニタリングページが追加されました
 
-    新しいモニタリング ページには、パフォーマンス チューニングに必要な主要な指標が表示され、これに基づいて[データベース時間によるパフォーマンスチューニング](/performance-tuning-methods.md)を参照してパフォーマンスを分析および調整できます。
+    新しいモニタリング ページには、パフォーマンスチューニングに必要な主要な指標が表示され、これに基づいて[データベース時間によるパフォーマンスチューニング](/performance-tuning-methods.md)を参照してパフォーマンスを分析および調整できます。
 
     具体的には、ユーザー応答時間とデータベース時間を全体的かつトップダウンの視点から分析することで、ユーザー応答時間のボトルネックがデータベースの問題によるものかどうかを確認できます。ボトルネックがデータベースにある場合は、データベース時間の概要とSQLレイテンシーの内訳を使用してボトルネックを特定し、パフォーマンスを調整できます。
 

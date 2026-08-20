@@ -84,7 +84,7 @@ TiDB CloudがAmazon S3バケット、GCSバケット、またはAzure Blob Stora
 
 -   CSV ファイルが Amazon S3 にある場合は、 [Amazon S3へのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)。
 
-    バケットにアクセスするには、AWS アクセスキーまたはロール ARN のいずれかを使用できます。完了したら、[ステップ4](#step-4-import-csv-files-to-tidb-cloud)で必要となるため、アクセスキー (アクセスキー ID とシークレット アクセスキーを含む) またはロール ARN の値をメモしておいてください。
+    バケットにアクセスするには、AWS アクセスキーまたはロール ARN のいずれかを使用できます。完了したら、[ステップ4](#step-4-import-csv-files-to-tidb-cloud)で必要となるため、アクセスキー (アクセスキー ID とシークレットアクセスキーを含む) またはロール ARN の値をメモしておいてください。
 
 -   CSV ファイルが GCS にある場合は、 [GCSへのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access)。
 
@@ -115,7 +115,7 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
     -   **Source URI** ：
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`s3://[bucket_name]/[data_source_folder]/[file_name].csv`の形式で入力してください。例: `s3://mybucket/myfolder/TableName.01.csv` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`s3://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `s3://mybucket/myfolder/` 。
-    -   **認証情報**: AWS ロール ARN または AWS アクセス キーを使用してバケットにアクセスできます。詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)を参照してください。
+    -   **認証情報**: AWS ロール ARN または AWS アクセスキーを使用してバケットにアクセスできます。詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)を参照してください。
         -   **AWS Role ARN** (推奨): AWS ロール ARN の値を入力します。まだロール ARN がない場合は、 **[ここをクリックして AWS CloudFormation を使用して新しいロール ARN を作成する]**をクリックし、画面の指示に従うか、 **[問題が発生しましたか?] ダイアログでロール ARN を手動で作成して、**クラスターの**TiDB Cloud Account ID**と**TiDB Cloud External ID**を取得し、 IAMロールを手動で作成します。
         -   **AWS Access Key**：AWSアクセスキーIDとAWSシークレットアクセスキーを入力してください。
 
@@ -170,7 +170,7 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
     -   **Source URI** ：
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`gs://[bucket_name]/[data_source_folder]/[file_name].csv`の形式で入力します。例: `gs://mybucket/myfolder/TableName.01.csv` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`gs://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `gs://mybucket/myfolder/` 。
-    -   **Google Cloud サービス アカウント ID** : TiDB Cloud は、このページで一意の Google Cloud サービス アカウント ID ( `example-service-account@your-project.iam.gserviceaccount.com`など) を提供します。このサービス アカウント ID に、Google Cloud プロジェクト内の GCS バケットに対して必要なIAM権限（ `Storage Object Viewer`など）を付与します。詳細については、 [GCSへのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access)を参照してください。
+    -   **Google Cloud サービスアカウント ID** : TiDB Cloud は、このページで一意の Google Cloud サービスアカウント ID ( `example-service-account@your-project.iam.gserviceaccount.com`など) を提供します。このサービスアカウント ID に、Google Cloud プロジェクト内の GCS バケットに対して必要なIAM権限（ `Storage Object Viewer`など）を付与します。詳細については、 [GCSへのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access)を参照してください。
 
 4.  **「次へ」**をクリックしてください。
 

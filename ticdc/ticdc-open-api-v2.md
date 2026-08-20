@@ -970,8 +970,8 @@ curl -X GET http://127.0.0.1:8300/api/v2/processors
 
 | パラメータ名          | 説明                             |
 | :-------------- | :----------------------------- |
-| `changefeed_id` | クエリするレプリケーション サブタスクの変更フィード ID。 |
-| `capture_id`    | クエリするレプリケーション サブタスクのキャプチャ ID。  |
+| `changefeed_id` | クエリするレプリケーションサブタスクの変更フィード ID。 |
+| `capture_id`    | クエリするレプリケーションサブタスクのキャプチャ ID。  |
 
 ### 例 {#example}
 
@@ -1058,7 +1058,7 @@ curl -X POST http://127.0.0.1:8300/api/v2/owner/resign
 
 | パラメータ名      | 説明          |
 | :---------- | :---------- |
-| `log_level` | 設定するログ レベル。 |
+| `log_level` | 設定するログレベル。 |
 
 `log_level` 、「debug」、「info」、「warn」、「error」、「dpanic」、「panic」、「fatal」の[zapが提供するログレベル](https://godoc.org/go.uber.org/zap#UnmarshalText)サポートします。
 

@@ -74,7 +74,7 @@ TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー�
 
 ## コンソール監査イベントの種類 {#console-audit-event-types}
 
-コンソール監査ログには、イベント タイプを通じてTiDB Cloudコンソール上のさまざまなユーザー アクティビティが記録されます。
+コンソール監査ログには、イベントタイプを通じてTiDB Cloudコンソール上のさまざまなユーザー アクティビティが記録されます。
 
 > **Note:**
 >

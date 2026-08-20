@@ -137,7 +137,7 @@ TiDB バージョン: 7.1.2
 
 -   PD
 
-    -   v2 スケジューラ アルゴリズムでホット リージョンがスケジュールされない可能性がある問題を修正しました [＃6645](https://github.com/tikv/pd/issues/6645) @[lhy1024](https://github.com/lhy1024)
+    -   v2 スケジューラ アルゴリズムでホットリージョンがスケジュールされない可能性がある問題を修正しました [＃6645](https://github.com/tikv/pd/issues/6645) @[lhy1024](https://github.com/lhy1024)
     -   TLSハンドシェイクにより空のクラスタでCPU使用率が上昇する可能性がある問題を修正 [＃6913](https://github.com/tikv/pd/issues/6913) @[nolouch](https://github.com/nolouch)
     -   PDノード間の注入エラーによりPD panicが発生する可能性がある問題を修正しました [＃6858](https://github.com/tikv/pd/issues/6858) @[HuSharp](https://github.com/HuSharp)
     -   ストア情報の同期によりPDリーダーが終了し、 で停止する可能性がある問題を修正しました。 [＃6918](https://github.com/tikv/pd/issues/6918) @[rleungx](https://github.com/rleungx)

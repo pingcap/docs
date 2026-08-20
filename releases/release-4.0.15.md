@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.15 Release Notes
-summary: "TiDB 4.0.15 リリース ノート: 互換性の変更には、アップグレードの非互換性を引き起こす可能性のあるバグ修正が含まれています。TiKV の機能強化により、構成の動的な変更がサポートされます。TiDB、TiKV、PD、およびツールが改善されました。TiDB、TiKV、PD、 TiFlash、バックアップと復元、および TiCDC のバグ修正も行われました。"
+summary: "TiDB 4.0.15 リリースノート: 互換性の変更には、アップグレードの非互換性を引き起こす可能性のあるバグ修正が含まれています。TiKV の機能強化により、構成の動的な変更がサポートされます。TiDB、TiKV、PD、およびツールが改善されました。TiDB、TiKV、PD、 TiFlash、バックアップと復元、および TiCDC のバグ修正も行われました。"
 ---
 
 # TiDB 4.0.15 リリースノート {#tidb-4-0-15-release-notes}
@@ -55,7 +55,7 @@ TiDB バージョン: 4.0.15
     -   Backup & Restore (BR)
 
         -   領域を同時に分割して分散させることで、復元速度が向上します[＃1363](https://github.com/pingcap/br/pull/1363)
-        -   PD 要求エラーまたは TiKV I/O タイムアウト エラーが発生した場合は、 BRタスクを再試行します[＃27787](https://github.com/pingcap/tidb/issues/27787)
+        -   PD 要求エラーまたは TiKV I/O タイムアウトエラーが発生した場合は、 BRタスクを再試行します[＃27787](https://github.com/pingcap/tidb/issues/27787)
         -   多数の小さなテーブルをリストアするときに空のリージョンを減らして、リストア後のクラスタ操作に影響を与えないようにします[＃1374](https://github.com/pingcap/br/issues/1374)
         -   テーブルの作成中に`rebase auto id`操作を実行すると、別の`rebase auto id` DDL操作が節約され、 復元が高速化されます。 [＃1424](https://github.com/pingcap/br/pull/1424)
 

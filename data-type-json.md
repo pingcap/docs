@@ -50,7 +50,7 @@ JSONドキュメント内の値には型があります。これは[`JSON_TYPE` 
 
 -   現在、TiDBはTiFlashへのプッシュダウンを限定的に`JSON`関数のみサポートしています。詳細については[プッシュダウン式](/tiflash/tiflash-supported-pushdown-calculations.md#push-down-expressions)をご覧ください。
 -   TiDBバックアップ＆リストア（BR）は、v6.3.0でJSON列データのエンコード方法を変更します。そのため、JSON列を含むデータをBRを使用してv6.3.0より前のTiDBクラスターにリストアすることは推奨されません。
--   `DATE` 、 `DATETIME` 、 `TIME`などの非標準`JSON`データ型を含むデータをレプリケートする場合は、レプリケーション ツールを使用しないでください。
+-   `DATE` 、 `DATETIME` 、 `TIME`などの非標準`JSON`データ型を含むデータをレプリケートする場合は、レプリケーションツールを使用しないでください。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 

@@ -9,7 +9,7 @@ summary: コマンドラインオプションに関係しない、TiDB設定フ�
 
 # TiDBコンフィグレーションファイル {#tidb-configuration-file}
 
-TiDB 構成ファイルは、コマンドライン パラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example)をダウンロードし、その名前を`config.toml`に変更できます。本書では[コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係のないオプションのみを説明します。
+TiDB 構成ファイルは、コマンドラインパラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example)をダウンロードし、その名前を`config.toml`に変更できます。本書では[コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係のないオプションのみを説明します。
 
 > **Tip:**
 >
@@ -197,7 +197,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   TCP4のみでのリスニングを有効または無効にします。
 -   デフォルト値: `false`
--   [TCPヘッダーからの実際のクライアントIP](https://github.com/alibaba/LVS/tree/master/kernel/net/toa)が「tcp4」プロトコルで正しく解析できるため、ロード バランシングのために TiDB を LVS とともに使用する場合、このオプションを有効にすると便利です。
+-   [TCPヘッダーからの実際のクライアントIP](https://github.com/alibaba/LVS/tree/master/kernel/net/toa)が「tcp4」プロトコルで正しく解析できるため、ロードバランシングのために TiDB を LVS とともに使用する場合、このオプションを有効にすると便利です。
 
 ### `enable-enum-length-limit` <span class="version-mark">v5.0で追加</span> {#enable-enum-length-limit-new-in-v50}
 
@@ -320,13 +320,13 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   デフォルト値: `300`
 -   単位：ミリ秒
 -   クエリの実行時間がこの値よりも長い場合、そのクエリはスロークエリとみなされ、そのログがスロークエリログに出力されます。なお、 [`log.level`](#level)の出力レベルが`"debug"`の場合、このパラメータの設定に関わらず、すべてのクエリがスロークエリログに記録されます。
--   バージョン 6.1.0 以降、スロー ログの消費時間のしきい値は、TiDB 設定項目の[`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold)またはシステム変数[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)で指定されます。 `slow-threshold`は引き続き有効です。ただし、 `slow-threshold`と`instance.tidb_slow_log_threshold`が同時に設定されている場合、後者が有効になります。
+-   バージョン 6.1.0 以降、スローログの消費時間のしきい値は、TiDB 設定項目の[`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold)またはシステム変数[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)で指定されます。 `slow-threshold`は引き続き有効です。ただし、 `slow-threshold`と`instance.tidb_slow_log_threshold`が同時に設定されている場合、後者が有効になります。
 
 ### `record-plan-in-slow-log` {#record-plan-in-slow-log}
 
 -   実行計画をスローログに記録するかどうかを決定します。
 -   デフォルト値: `1`
--   バージョン 6.1.0 以降、実行計画をスロー ログに記録するかどうかは、TiDB 設定項目の[`instance.tidb_record_plan_in_slow_log`](/tidb-configuration-file.md#tidb_record_plan_in_slow_log)またはシステム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)によって決定されます。 `record-plan-in-slow-log`は引き続き有効です。ただし、 `record-plan-in-slow-log`と`instance.tidb_record_plan_in_slow_log`が同時に設定されている場合は、後者が有効になります。
+-   バージョン 6.1.0 以降、実行計画をスローログに記録するかどうかは、TiDB 設定項目の[`instance.tidb_record_plan_in_slow_log`](/tidb-configuration-file.md#tidb_record_plan_in_slow_log)またはシステム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)によって決定されます。 `record-plan-in-slow-log`は引き続き有効です。ただし、 `record-plan-in-slow-log`と`instance.tidb_record_plan_in_slow_log`が同時に設定されている場合は、後者が有効になります。
 
 ### `expensive-threshold` {#expensive-threshold}
 
@@ -868,14 +868,14 @@ TiDBサービスの状態に関するコンフィグレーション。
 
 ### deadlock-history-capacity {#deadlock-history-capacity}
 
--   単一の TiDBサーバーの[`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルに記録できるデッドロック イベントの最大数。このテーブルが満杯の状態でさらにデッドロック イベントが発生した場合、最新のエラーを記録するために、テーブル内の最も古いレコードが削除されます。
+-   単一の TiDBサーバーの[`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルに記録できるデッドロックイベントの最大数。このテーブルが満杯の状態でさらにデッドロックイベントが発生した場合、最新のエラーを記録するために、テーブル内の最も古いレコードが削除されます。
 -   デフォルト値: `10`
 -   最小値: `0`
 -   最大値: `10000`
 
 ### deadlock-history-collect-retryable {#deadlock-history-collect-retryable}
 
--   [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルが再試行可能なデッドロック エラーの情報を収集するかどうかを制御します。再試行可能なデッドロック エラーの説明については、 [再試行可能なデッドロックエラー](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors)を参照してください。
+-   [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルが再試行可能なデッドロックエラーの情報を収集するかどうかを制御します。再試行可能なデッドロックエラーの説明については、 [再試行可能なデッドロックエラー](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors)を参照してください。
 -   デフォルト値: `false`
 
 ### pessimistic-auto-commit <span class="version-mark">v6.0.0で追加</span> {#pessimistic-auto-commit-new-in-v600}

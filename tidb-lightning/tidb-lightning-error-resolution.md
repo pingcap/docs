@@ -197,7 +197,7 @@ CREATE VIEW conflict_view AS
     EOF
     ```
 
-3.  TiDB Lightningを構成して厳密な SQL モードを有効にし、ローカル バックエンドを使用してデータをインポートし、重複を置き換え、最大 10 個のエラーをスキップします。
+3.  TiDB Lightningを構成して厳密な SQL モードを有効にし、ローカルバックエンドを使用してデータをインポートし、重複を置き換え、最大 10 個のエラーをスキップします。
 
     ```shell
     cat <<EOF > config.toml

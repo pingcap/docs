@@ -251,7 +251,7 @@ production:
 
 > **Note**
 >
-> [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、パブリックエンドポイントを使用する際には**、** `ssl_mode`の`verify_identity`クエリ パラメータを`DATABASE_URL`に設定して TLS 接続を有効にする必要がありますが、mysql2 gem が特定の順序で既存の CA 証明書を検索してファイルが見つかるまで検索するため、 `DATABASE_URL`を介して SSL CA 証明書を指定する必要**はあり**ません。
+> [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、パブリックエンドポイントを使用する際には**、** `ssl_mode`の`verify_identity`クエリパラメータを`DATABASE_URL`に設定して TLS 接続を有効にする必要がありますが、mysql2 gem が特定の順序で既存の CA 証明書を検索してファイルが見つかるまで検索するため、 `DATABASE_URL`を介して SSL CA 証明書を指定する必要**はあり**ません。
 
 ### データを挿入する {#insert-data}
 

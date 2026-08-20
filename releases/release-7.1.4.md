@@ -95,7 +95,7 @@ TiDBバージョン: 7.1.4
     -   無効なオプティマイザヒントによって有効なヒントが無効になる可能性がある問題を修正[＃49308](https://github.com/pingcap/tidb/issues/49308) @[hawkingrei](https://github.com/hawkingrei)
     -   一部のタイムゾーンで夏時間が正しく表示されない問題を修正 [＃49586](https://github.com/pingcap/tidb/issues/49586) @[overvenus](https://github.com/overvenus)
     -   `PREPARE`メソッドを使用して`SELECT INTO OUTFILE`を実行すると、エラーではなく、誤って成功メッセージが返される問題を修正しました。 [＃49166](https://github.com/pingcap/tidb/issues/49166) @[qw4990](https://github.com/qw4990)
-    -   PD との相互作用の問題により、 `tiup cluster upgrade/start`を使用してローリング アップグレードを実行すると TiDB がpanicになる可能性がある問題を修正しました。 [＃50152](https://github.com/pingcap/tidb/issues/50152) @[zimulala](https://github.com/zimulala)
+    -   PD との相互作用の問題により、 `tiup cluster upgrade/start`を使用してローリングアップグレードを実行すると TiDB がpanicになる可能性がある問題を修正しました。 [＃50152](https://github.com/pingcap/tidb/issues/50152) @[zimulala](https://github.com/zimulala)
     -   空のテーブルにインデックスを追加したときに期待される最適化が有効にならない問題を修正しました [＃49682](https://github.com/pingcap/tidb/issues/49682) @[zimulala](https://github.com/zimulala)
     -   多数のテーブルまたはパーティションが作成された場合に TiDB が OOM になる可能性がある問題を修正[＃50077](https://github.com/pingcap/tidb/issues/50077) @[zimulala](https://github.com/zimulala)
     -   ネットワークが不安定な場合にインデックスを追加するとインデックスデータの不整合が発生する可能性がある問題を修正[＃49773](https://github.com/pingcap/tidb/issues/49773) @[tangenta](https://github.com/tangenta)

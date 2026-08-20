@@ -7,9 +7,9 @@ summary: TiKVの設定ファイルについて学びましょう。
 
 <!-- markdownlint-disable MD001 -->
 
-TiKV の設定ファイルは、コマンドライン パラメータよりも多くのオプションをサポートしています。デフォルトの設定ファイルは[etc/config-template.toml](https://github.com/tikv/tikv/blob/release-8.5/etc/config-template.toml)にあり、 `config.toml`に名前を変更できます。
+TiKV の設定ファイルは、コマンドラインパラメータよりも多くのオプションをサポートしています。デフォルトの設定ファイルは[etc/config-template.toml](https://github.com/tikv/tikv/blob/release-8.5/etc/config-template.toml)にあり、 `config.toml`に名前を変更できます。
 
-このドキュメントでは、コマンドライン パラメーターに含まれないパラメーターのみについて説明します。詳しくは[コマンドラインパラメータ](/command-line-flags-for-tikv-configuration.md)をご覧ください。
+このドキュメントでは、コマンドラインパラメーターに含まれないパラメーターのみについて説明します。詳しくは[コマンドラインパラメータ](/command-line-flags-for-tikv-configuration.md)をご覧ください。
 
 > **Tip:**
 >
@@ -2708,8 +2708,8 @@ TiKV API V2 が有効になっている場合にタイムスタンプを取得�
 ### `renew-batch-min-size` {#renew-batch-min-size}
 
 -   タイムスタンプ要求におけるTSOの最小数。
--   TiKV は、前の期間のタイムスタンプ消費量に応じて、キャッシュされたタイムスタンプの数を調整します。必要な TSO が少ない場合は、TiKV は要求される TSO の数を`renew-batch-min-size`に達するまで減らします。アプリケーションで大量のバースト書き込みトラフィックが頻繁に発生する場合は、このパラメータを適切な値に設定できます。このパラメータは、単一の tikv-server のキャッシュ サイズであることに注意してください。このパラメータを大きすぎる値に設定し、クラスタに多数の tikv-server が含まれている場合、TSO の消費が速すぎることになります。
--   Grafana の**TiKV-RAW** &gt; **Causal timestamp**パネルでは、 **TSO バッチ サイズ**は、アプリケーションのワークロードに応じて動的に調整されるローカル キャッシュされたタイムスタンプの数です。このメトリックを参照して`renew-batch-min-size`を調整できます。
+-   TiKV は、前の期間のタイムスタンプ消費量に応じて、キャッシュされたタイムスタンプの数を調整します。必要な TSO が少ない場合は、TiKV は要求される TSO の数を`renew-batch-min-size`に達するまで減らします。アプリケーションで大量のバースト書き込みトラフィックが頻繁に発生する場合は、このパラメータを適切な値に設定できます。このパラメータは、単一の tikv-server のキャッシュサイズであることに注意してください。このパラメータを大きすぎる値に設定し、クラスタに多数の tikv-server が含まれている場合、TSO の消費が速すぎることになります。
+-   Grafana の**TiKV-RAW** &gt; **Causal timestamp**パネルでは、 **TSO バッチサイズ**は、アプリケーションのワークロードに応じて動的に調整されるローカルキャッシュされたタイムスタンプの数です。このメトリックを参照して`renew-batch-min-size`を調整できます。
 -   デフォルト値: `100`
 
 ### `renew-batch-max-size` <span class="version-mark">v6.4.0で追加</span> {#renew-batch-max-size-new-in-v640}
@@ -2873,7 +2873,7 @@ TiKV MVCC インメモリエンジン (IME) のストレージレイヤーに関
 >
 > この設定項目は設定ファイルで設定できますが、SQL文で照会することはできません。
 
--   インメモリ エンジンを有効にしてマルチバージョン クエリを高速化するかどうか。インメモリ エンジンの詳細については、 [TiKV MVCC インメモリエンジン](/tikv-in-memory-engine.md)を参照してください。
+-   インメモリエンジンを有効にしてマルチバージョン クエリを高速化するかどうか。インメモリエンジンの詳細については、 [TiKV MVCC インメモリエンジン](/tikv-in-memory-engine.md)を参照してください。
 -   デフォルト値: `false` (インメモリエンジンは無効になっています)
 -   TiKVノードには最低でも8GiBのメモリを搭載することを推奨します。最適なパフォーマンスを得るには、32GiB以上を搭載することをお勧めします。
 -   TiKVノードで使用可能なメモリが不足している場合、この設定項目が`true`に設定されていても、インメモリエンジンは有効になりません。このような場合は、TiKVログファイルで`"in-memory engine is disabled because"`を含むメッセージを確認し、インメモリエンジンが有効にならない理由を調べてください。

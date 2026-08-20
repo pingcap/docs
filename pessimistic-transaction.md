@@ -114,7 +114,7 @@ TiDB の悲観的なトランザクションは、MySQL のトランザクショ
 
 3.  DDLは、悲観的トランザクションコミットの失敗につながる可能性があります。
 
-    MySQL で DDL を実行すると、実行中のトランザクションによってブロックされる可能性があります。しかし、このシナリオでは、TiDB で DDL 操作がブロックされないため、悲観的トランザクション コミット`ERROR 1105 (HY000): Information schema is changed. [try again later]`が失敗します。TiDB はトランザクションの実行中に`TRUNCATE TABLE`ステートメントを実行するため、 `table doesn't exist`エラーが発生する可能性があります。
+    MySQL で DDL を実行すると、実行中のトランザクションによってブロックされる可能性があります。しかし、このシナリオでは、TiDB で DDL 操作がブロックされないため、悲観的トランザクションコミット`ERROR 1105 (HY000): Information schema is changed. [try again later]`が失敗します。TiDB はトランザクションの実行中に`TRUNCATE TABLE`ステートメントを実行するため、 `table doesn't exist`エラーが発生する可能性があります。
 
 4.  `START TRANSACTION WITH CONSISTENT SNAPSHOT`を実行した後でも、MySQL は他のトランザクションで後から作成されたテーブルを読み取ることができますが、TiDB はできません。
 
@@ -282,7 +282,7 @@ set config tikv pessimistic-txn.pipelined='false';
 
 <CustomContent platform="tidb-cloud">
 
-アプリケーション ロジックがロックまたはロック待機メカニズムに依存している場合、または TiKV クラスター異常の場合でもトランザクション コミットの成功率をできる限り保証したい場合は、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)。
+アプリケーションロジックがロックまたはロック待機メカニズムに依存している場合、または TiKV クラスター異常の場合でもトランザクションコミットの成功率をできる限り保証したい場合は、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)。
 
 </CustomContent>
 

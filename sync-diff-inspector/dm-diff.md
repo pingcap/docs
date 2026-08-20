@@ -3,7 +3,7 @@ title: Data Check in the DM Replication Scenario
 summary: データチェックを実行するために DM-master` から特定の `task-name` 構成を設定する方法について説明します。
 ---
 
-# DM レプリケーション シナリオにおけるデータチェック {#data-check-in-the-dm-replication-scenario}
+# DM レプリケーションシナリオにおけるデータチェック {#data-check-in-the-dm-replication-scenario}
 
 [TiDB Data Migration](/dm/dm-overview.md)のようなレプリケーションツールを使用する場合、レプリケーション処理の前後でデータの整合性を確認する必要があります。`DM-master`から特定の`task-name`設定を設定することで、データチェックを実行できます。
 

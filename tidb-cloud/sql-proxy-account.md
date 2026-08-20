@@ -1,6 +1,6 @@
 ---
 title: SQL Proxy Account
-summary: TiDB Cloudの SQL プロキシ アカウントについて説明します。
+summary: TiDB Cloudの SQL プロキシアカウントについて説明します。
 ---
 
 # SQL プロキシアカウント {#sql-proxy-account}
@@ -9,7 +9,7 @@ SQLプロキシアカウントは、 TiDB Cloudによって自動的に作成さ
 
 SQLプロキシアカウントは、 TiDB Cloud内のデータベースにアクセスするための安全なトークンベースの認証メカニズムを提供します。従来のユーザー名とパスワードによる認証が不要になるため、SQLプロキシアカウントはセキュリティを強化し、アクセス管理を簡素化します。
 
-SQL プロキシ アカウントの主な利点は次のとおりです。
+SQL プロキシアカウントの主な利点は次のとおりです。
 
 -   強化されたセキュリティ: JWT トークンを使用することで、静的資格情報に関連するリスクを軽減します。
 -   合理化されたアクセス: SQL エディターとData Serviceへのアクセスを具体的に制限し、正確な制御を保証します。
@@ -17,7 +17,7 @@ SQL プロキシ アカウントの主な利点は次のとおりです。
 
 ## SQLプロキシアカウントを特定する {#identify-the-sql-proxy-account}
 
-特定の SQL アカウントが SQL プロキシ アカウントであるかどうかを識別する場合は、次の手順を実行します。
+特定の SQL アカウントが SQL プロキシアカウントであるかどうかを識別する場合は、次の手順を実行します。
 
 1.  `mysql.user`テーブルを調べます。
 
@@ -34,13 +34,13 @@ SQL プロキシ アカウントの主な利点は次のとおりです。
 
 ## SQLプロキシアカウントの作成方法 {#how-the-sql-proxy-account-is-created}
 
-SQL プロキシ アカウントは、クラスター内で権限を持つロールが付与されたTiDB Cloud クラスターの初期化中に自動的に作成されます。
+SQL プロキシアカウントは、クラスター内で権限を持つロールが付与されたTiDB Cloud クラスターの初期化中に自動的に作成されます。
 
 ## SQLプロキシアカウントを削除する方法 {#how-the-sql-proxy-account-is-deleted}
 
-ユーザーが[組織](/tidb-cloud/manage-user-access.md#remove-an-organization-member)または[プロジェクト](/tidb-cloud/manage-user-access.md#remove-a-project-member)から削除されるか、そのロールがクラスターにアクセスできないロールに変更されると、SQL プロキシ アカウントは自動的に削除されます。
+ユーザーが[組織](/tidb-cloud/manage-user-access.md#remove-an-organization-member)または[プロジェクト](/tidb-cloud/manage-user-access.md#remove-a-project-member)から削除されるか、そのロールがクラスターにアクセスできないロールに変更されると、SQL プロキシアカウントは自動的に削除されます。
 
-SQL プロキシ アカウントを手動で削除した場合、ユーザーが次回TiDB Cloudコンソールにログインしたときに自動的に再作成されることに注意してください。
+SQL プロキシアカウントを手動で削除した場合、ユーザーが次回TiDB Cloudコンソールにログインしたときに自動的に再作成されることに注意してください。
 
 ## SQLプロキシアカウントのユーザー名 {#sql-proxy-account-username}
 
@@ -70,9 +70,9 @@ SQLプロキシアカウントのユーザー名は、 TiDB Cloudのユーザー
 
 SQL プロキシアカウントは JWT トークンベースであるため、これらのアカウントのパスワードを管理する必要はありません。セキュリティトークンはシステムによって自動的に管理されます。
 
-## SQL プロキシ アカウント ロール {#sql-proxy-account-roles}
+## SQL プロキシアカウント ロール {#sql-proxy-account-roles}
 
-SQL プロキシ アカウントのロールは、 TiDB CloudユーザーのIAMロールによって異なります。
+SQL プロキシアカウントのロールは、 TiDB CloudユーザーのIAMロールによって異なります。
 
 -   組織レベル:
     -   組織の所有者: role_admin
@@ -85,6 +85,6 @@ SQL プロキシ アカウントのロールは、 TiDB CloudユーザーのIAM�
     -   プロジェクトデータアクセスの読み取り/書き込み: role_readwrite
     -   プロジェクトデータアクセス読み取り専用: role_readonly
 
-## SQL プロキシ アカウント アクセス制御 {#sql-proxy-account-access-control}
+## SQL プロキシアカウント アクセス制御 {#sql-proxy-account-access-control}
 
 SQLプロキシアカウントはJWTトークンベースであり、Data ServiceとSQLエディタからのみアクセスできます。ユーザー名とパスワードを使用してSQLプロキシアカウントを使用してTiDB Cloudクラスターにアクセスすることはできません。

@@ -12,7 +12,7 @@ TiDB は、インデックスを利用してクエリの実行を高速化する
 -   [`Point_Get`と`Batch_Point_Get`](#point_get-and-batch_point_get)
 -   [`IndexFullScan`](#indexfullscan)
 
-このドキュメントの例は、次のサンプル データに基づいています。
+このドキュメントの例は、次のサンプルデータに基づいています。
 
 ```sql
 CREATE TABLE t1 (

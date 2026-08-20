@@ -124,7 +124,7 @@ TiDB バージョン: 7.2.0
 
     `IMPORT INTO`ステートメントは、 TiDB Lightningの[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)機能を統合します。このステートメントを使用すると、CSV、SQL、PARQUET などの形式のデータを TiDB の空のテーブルにすばやくインポートできます。このインポート方法により、 TiDB Lightningの個別のデプロイと管理が不要になり、データインポートの複雑さが軽減され、インポート効率が大幅に向上します。
 
-    Amazon S3 または GCS に保存されているデータファイルの場合、 [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)が有効になっていると、 `IMPORT INTO`は、データインポート ジョブを複数のサブジョブに分割し、それらを複数の TiDB ノードにスケジュールして並列インポートを行うこともサポートしており、インポートパフォーマンスをさらに向上させます。
+    Amazon S3 または GCS に保存されているデータファイルの場合、 [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)が有効になっていると、 `IMPORT INTO`は、データインポートジョブを複数のサブジョブに分割し、それらを複数の TiDB ノードにスケジュールして並列インポートを行うこともサポートしており、インポートパフォーマンスをさらに向上させます。
 
     詳細については、 [ドキュメント](/sql-statements/sql-statement-import-into.md)を参照してください。
 

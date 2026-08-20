@@ -128,7 +128,7 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
         -   `"Resource": "<Your S3 bucket ARN>/<Your data directory>/*"` 、ここで`<Your data directory>`はエクスポートされたデータのターゲットディレクトリ、またはインポートされたデータのソースディレクトリです。例:
 
-            -   インポートまたはエクスポートするデータが`tidb-cloud-source-data`バケットのルート ディレクトリにある場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`を使用してください。
+            -   インポートまたはエクスポートするデータが`tidb-cloud-source-data`バケットのルートディレクトリにある場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`を使用してください。
             -   インポートまたはエクスポートするデータがバケットの`mydata`ディレクトリにある場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`を使用します。
 
             TiDB Cloud がこのディレクトリ内のすべてのファイルにアクセスできるように、ディレクトリの末尾に`/*`が追加されていることを確認してください。
@@ -190,7 +190,7 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
 > **Note:**
 >
-> TiDB Cloudはアクセス キーを保存しません。インポートまたはエクスポートが完了したら[アクセスキーを削除する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)ことをお勧めします。
+> TiDB Cloudはアクセスキーを保存しません。インポートまたはエクスポートが完了したら[アクセスキーを削除する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)ことをお勧めします。
 
 <CustomContent plan="starter,essential">
 
@@ -200,7 +200,7 @@ TiDB Cloud StarterまたはEssentialインスタンスがGCSバケットにア�
 
 サービスアカウントキーを設定するには、以下の手順に従ってください。
 
-1.  Google Cloud サービス[サービスアカウントページ](https://console.cloud.google.com/iam-admin/serviceaccounts)ページで、 **CREATE SERVICE ACCOUNT**をクリックしてサービス アカウントを作成します。詳細については、 [サービスアカウントの作成](https://cloud.google.com/iam/docs/creating-managing-service-accounts)を参照してください。
+1.  Google Cloud サービス[サービスアカウントページ](https://console.cloud.google.com/iam-admin/serviceaccounts)ページで、 **CREATE SERVICE ACCOUNT**をクリックしてサービスアカウントを作成します。詳細については、 [サービスアカウントの作成](https://cloud.google.com/iam/docs/creating-managing-service-accounts)を参照してください。
 
     1.  サービスアカウント名を入力してください。
 
@@ -225,7 +225,7 @@ TiDB Cloud StarterまたはEssentialインスタンスがGCSバケットにア�
 
     ![service-account-key](/media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
 
-3.  デフォルトのキータイプ`JSON`を選択し、 **[作成]**をクリックして Google Cloud 認証情報ファイルをダウンロードします。このファイルには、TiDB Cloud StarterまたはEssentialインスタンスの GCS アクセスを設定する際に使用する必要のあるサービス アカウント キーが含まれています。
+3.  デフォルトのキータイプ`JSON`を選択し、 **[作成]**をクリックして Google Cloud 認証情報ファイルをダウンロードします。このファイルには、TiDB Cloud StarterまたはEssentialインスタンスの GCS アクセスを設定する際に使用する必要のあるサービスアカウント キーが含まれています。
 
 </CustomContent>
 

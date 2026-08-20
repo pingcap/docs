@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/dev-guide-use-stale-read/','/ja/tidbcloud/dev-guide-u
 
 実際には、 [使用シナリオ](/stale-read.md#usage-scenarios-of-stale-read)に基づいて、TiDB でステイル読み取り を有効にすることが適切かどうかを慎重に検討してください。アプリケーションが非リアルタイム データの読み取りを許容できない場合は、 ステイル読み取りを有効にしないでください。
 
-TiDB は、ステートメントレベル、トランザクション レベル、セッションレベルの 3 つのレベルのステイル読み取りを提供します。
+TiDB は、ステートメントレベル、トランザクションレベル、セッションレベルの 3 つのレベルのステイル読み取りを提供します。
 
 ## 導入 {#introduction}
 
@@ -275,7 +275,7 @@ SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;
 </div>
 <div label="Java" value="java">
 
-トランザクションのヘルパー クラスを定義して、トランザクション レベルでステイル読み取りを有効にするコマンドをヘルパー メソッドとしてカプセル化することができます。
+トランザクションのヘルパー クラスを定義して、トランザクションレベルでステイル読み取りを有効にするコマンドをヘルパー メソッドとしてカプセル化することができます。
 
 ```java
 public static class StaleReadHelper {
@@ -382,7 +382,7 @@ SET TRANSACTION READ ONLY AS OF TIMESTAMP NOW() - INTERVAL 5 SECOND;
 </div>
 <div label="Java" value="java">
 
-トランザクションのヘルパー クラスを定義して、トランザクション レベルでステイル読み取りを有効にするコマンドをヘルパー メソッドとしてカプセル化することができます。
+トランザクションのヘルパー クラスを定義して、トランザクションレベルでステイル読み取りを有効にするコマンドをヘルパー メソッドとしてカプセル化することができます。
 
 ```java
 public static class TxnHelper {

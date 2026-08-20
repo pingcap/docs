@@ -225,7 +225,7 @@ DMは、移行タスクの中断を引き起こすDDL文のスキップまたは
 
 データ移行後にデータの整合性を検証することをお勧めします。TiDB は、データ検証を完了するために役立つ[sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)提供します。
 
-sync-diff-inspector は、DM タスクを通じてデータ整合性チェック対象のテーブルリストを自動管理できるようになりました。以前の手動設定と比較して、より効率的です。詳細は[DM レプリケーション シナリオにおけるデータチェック](/sync-diff-inspector/dm-diff.md)ご覧ください。
+sync-diff-inspector は、DM タスクを通じてデータ整合性チェック対象のテーブルリストを自動管理できるようになりました。以前の手動設定と比較して、より効率的です。詳細は[DM レプリケーションシナリオにおけるデータチェック](/sync-diff-inspector/dm-diff.md)ご覧ください。
 
 DM v6.2.0以降、DMは増分レプリケーションにおける継続的なデータ検証をサポートしています。詳細については、 [DMにおける継続的なデータ検証](/dm/dm-continuous-data-validation.md)を参照してください。
 

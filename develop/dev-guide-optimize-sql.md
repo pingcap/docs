@@ -1,6 +1,6 @@
 ---
 title: SQL Performance Tuning
-summary: TiDB の SQL パフォーマンス チューニング スキームと分析アプローチを紹介します。
+summary: TiDB の SQL パフォーマンスチューニング スキームと分析アプローチを紹介します。
 aliases: ['/ja/tidb/stable/dev-guide-optimize-sql/','/ja/tidbcloud/dev-guide-optimize-sql/']
 ---
 
@@ -16,11 +16,11 @@ aliases: ['/ja/tidb/stable/dev-guide-optimize-sql/','/ja/tidbcloud/dev-guide-opt
 tiup demo bookshop prepare --host 127.0.0.1 --port 4000 --books 1000000
 ```
 
-または、事前に準備されたサンプル データをインポートする場合は[TiDB Cloudのインポート機能を使用する](/develop/dev-guide-bookshop-schema-design.md#tidb-cloud-via-the-import-feature) 。
+または、事前に準備されたサンプルデータをインポートする場合は[TiDB Cloudのインポート機能を使用する](/develop/dev-guide-bookshop-schema-design.md#tidb-cloud-via-the-import-feature) 。
 
 ## 問題: テーブル全体のスキャン {#issue-full-table-scan}
 
-SQL クエリが遅くなる最も一般的な理由は、 `SELECT`ステートメントが完全なテーブル スキャンを実行するか、間違ったインデックスを使用することです。
+SQL クエリが遅くなる最も一般的な理由は、 `SELECT`ステートメントが完全なテーブルスキャンを実行するか、間違ったインデックスを使用することです。
 
 TiDB が主キーではない列またはセカンダリインデックス内の列に基づいて大規模なテーブルから少数の行を取得する場合、通常はパフォーマンスが低下します。
 

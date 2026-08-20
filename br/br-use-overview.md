@@ -33,7 +33,7 @@ BRは基本的なバックアップと復元機能のみを提供し、バック
 
 バックアップデータはAmazon S3、Google Cloud Storage（GCS）、またはAzure Blob Storageに保存することをお勧めします。これらのシステムを使用すれば、バックアップ容量や帯域幅の割り当てを気にする必要がありません。
 
-TiDB クラスターを独自に構築したデータ センターに導入する場合は、次のプラクティスが推奨されます。
+TiDB クラスターを独自に構築したデータセンターに導入する場合は、次のプラクティスが推奨されます。
 
 -   バックアップストレージシステムとして[MinIO](https://docs.min.io/docs/minio-quickstart-guide.html)構築し、S3 プロトコルを使用してデータを MinIO にバックアップします。
 -   ネットワークファイルシステム (NFS、NAS など) ディスクを br コマンドラインツールとすべての TiKV インスタンスにマウントし、POSIX ファイルシステム インターフェイスを使用して、バックアップデータを対応する NFS ディレクトリに書き込みます。
@@ -86,7 +86,7 @@ TiDB は、br コマンドラインツールを使用したバックアップと
 
 TiDB は、SQL ステートメントを使用した完全バックアップと復元をサポートします。
 
--   [`BACKUP`](/sql-statements/sql-statement-backup.md) : 完全なスナップショット データをバックアップします。
+-   [`BACKUP`](/sql-statements/sql-statement-backup.md) : 完全なスナップショットデータをバックアップします。
 -   [`RESTORE`](/sql-statements/sql-statement-restore.md) : スナップショットバックアップデータを復元します。
 -   [`SHOW BACKUPS|RESTORES`](/sql-statements/sql-statement-show-backups.md) : バックアップと復元の進行状況を表示します。
 

@@ -1,11 +1,11 @@
 ---
 title: TiFlash Alert Rules
-summary: TiFlashクラスターのアラート ルールについて学習します。
+summary: TiFlashクラスターのアラートルールについて学習します。
 ---
 
 # TiFlashアラートルール {#tiflash-alert-rules}
 
-このドキュメントでは、 TiFlashクラスターのアラート ルールについて説明します。
+このドキュメントでは、 TiFlashクラスターのアラートルールについて説明します。
 
 ## `TiFlash_schema_error` {#tiflash-schema-error}
 

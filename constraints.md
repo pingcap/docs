@@ -143,7 +143,7 @@ ALTER TABLE t ALTER CONSTRAINT c1 NOT ENFORCED;
 
 ### 楽観的トランザクション {#optimistic-transactions}
 
-デフォルトでは、楽観的トランザクションの場合、TiDB は実行フェーズで一意制約[怠惰に](/transaction-overview.md#lazy-check-of-constraints)チェックし、コミット フェーズで厳密にチェックします。これにより、ネットワーク オーバーヘッドが削減され、パフォーマンスが向上します。
+デフォルトでは、楽観的トランザクションの場合、TiDB は実行フェーズで一意制約[怠惰に](/transaction-overview.md#lazy-check-of-constraints)チェックし、コミットフェーズで厳密にチェックします。これにより、ネットワーク オーバーヘッドが削減され、パフォーマンスが向上します。
 
 例えば：
 

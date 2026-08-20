@@ -29,7 +29,7 @@ TiDBのトランザクション実装では、MVCC（Multiple Version Concurrenc
 
 > **Tip:**
 >
-> 具体的には、 Dumplingが TiDB (1 TB 未満) からデータをエクスポートする際に、TiDB のバージョンが v4.0.0 以降であり、 Dumpling がTiDB クラスターの PD アドレスと[`INFORMATION_SCHEMA.CLUSTER_INFO`](/information-schema/information-schema-cluster-info.md)テーブルにアクセスできる場合、 Dumpling はGC セーフ ポイントを自動的に調整して、元のクラスターに影響を与えずに GC をブロックします。
+> 具体的には、 Dumplingが TiDB (1 TB 未満) からデータをエクスポートする際に、TiDB のバージョンが v4.0.0 以降であり、 Dumpling がTiDB クラスターの PD アドレスと[`INFORMATION_SCHEMA.CLUSTER_INFO`](/information-schema/information-schema-cluster-info.md)テーブルにアクセスできる場合、 Dumpling はGC セーフポイントを自動的に調整して、元のクラスターに影響を与えずに GC をブロックします。
 >
 > ただし、次のいずれかのシナリオでは、 Dumpling はGC 時間を自動的に調整できません。
 >

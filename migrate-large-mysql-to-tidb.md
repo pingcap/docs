@@ -275,8 +275,8 @@ TiUPを使用してDMをデプロイした際に、Prometheus、Alertmanager、�
 
 DMが実行されている間、DM-worker、DM-master、およびdmctlは関連情報をログに出力します。これらのコンポーネントのログディレクトリは以下のとおりです。
 
--   DM-master: DM-master プロセス パラメータ`--log-file`で指定されます。TiUPを使用して DM をデプロイする場合、ログ ディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`になります。
--   DM-worker: DM-worker プロセス パラメータ`--log-file`で指定されます。TiUPを使用して DM をデプロイする場合、ログ ディレクトリはデフォルトで`/dm-deploy/dm-worker-8262/log/`になります。
+-   DM-master: DM-master プロセスパラメータ`--log-file`で指定されます。TiUPを使用して DM をデプロイする場合、ログディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`になります。
+-   DM-worker: DM-worker プロセスパラメータ`--log-file`で指定されます。TiUPを使用して DM をデプロイする場合、ログディレクトリはデフォルトで`/dm-deploy/dm-worker-8262/log/`になります。
 
 ## 次は？ {#what-s-next}
 

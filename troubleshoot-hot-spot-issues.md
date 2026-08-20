@@ -188,6 +188,6 @@ v8.5.7 以降、PD は読み取りホットスポット向けの CPU-aware hot R
 
 スケジューリング次元を表示または調整するには、[`pd-ctl scheduler config balance-hot-region-scheduler`](/pd-control.md#scheduler-config-balance-hot-region-scheduler) を使用します。
 
-## TiKV MVCC インメモリ エンジンを使用して、高い MVCC 読み取り増幅によって発生する読み取りホットスポットを軽減します。 {#use-tikv-mvcc-in-memory-engine-to-mitigate-read-hotspots-caused-by-high-mvcc-read-amplification}
+## TiKV MVCC インメモリエンジンを使用して、高い MVCC 読み取り増幅によって発生する読み取りホットスポットを軽減します。 {#use-tikv-mvcc-in-memory-engine-to-mitigate-read-hotspots-caused-by-high-mvcc-read-amplification}
 
 GCの履歴MVCCデータの保持期間が長すぎる場合、またはレコードが頻繁に更新または削除される場合、多数のMVCCバージョンをスキャンすることで読み取りホットスポットが発生する可能性があります。このようなホットスポットを軽減するには、 [TiKV MVCC インメモリエンジン](/tikv-in-memory-engine.md)機能を有効にします。

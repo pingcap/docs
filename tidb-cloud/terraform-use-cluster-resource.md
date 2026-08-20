@@ -121,7 +121,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 ## `tidbcloud_cluster_specs`データソースを使用してクラスター仕様情報を取得する {#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source}
 
-クラスターを作成する前に、使用可能なすべての構成値 (サポートされているクラウドプロバイダー、リージョン、ノード サイズなど) が含まれるクラスター仕様情報を取得する必要があります。
+クラスターを作成する前に、使用可能なすべての構成値 (サポートされているクラウドプロバイダー、リージョン、ノードサイズなど) が含まれるクラスター仕様情報を取得する必要があります。
 
 クラスター仕様情報を取得するには、次のように`tidbcloud_cluster_specs`データソースを使用できます。
 

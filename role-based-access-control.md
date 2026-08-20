@@ -186,7 +186,7 @@ SET DEFAULT ROLE app_read, app_write TO 'rw_user1'@'localhost';
 SET DEFAULT ROLE ALL TO 'dev1'@'localhost';
 ```
 
-次のステートメントを使用して、 `dev1@localhost`のすべてのデフォルト ロールを無効にすることができます。
+次のステートメントを使用して、 `dev1@localhost`のすべてのデフォルトロールを無効にすることができます。
 
 ```sql
 SET DEFAULT ROLE NONE TO 'dev1'@'localhost';
@@ -194,7 +194,7 @@ SET DEFAULT ROLE NONE TO 'dev1'@'localhost';
 
 > **Note:**
 >
-> このロールにデフォルト ロールを設定する前に、ユーザーにロールを付与する必要があります。
+> このロールにデフォルトロールを設定する前に、ユーザーにロールを付与する必要があります。
 
 ### 現在のセッションでロールを有効にする {#enable-a-role-in-the-current-session}
 
@@ -216,7 +216,7 @@ SET ROLE {
 SET ROLE 'app_read', 'app_write';
 ```
 
-現在のユーザーのデフォルト ロールを有効にするには、次のステートメントを使用できます。
+現在のユーザーのデフォルトロールを有効にするには、次のステートメントを使用できます。
 
 ```sql
 SET ROLE DEFAULT
@@ -364,7 +364,7 @@ SELECT * FROM mysql.default_roles;
 ```
 
 -   `HOST`と`USER`それぞれユーザーのホスト名とユーザー名を示します。
--   `DEFAULT_ROLE_HOST`と`DEFAULT_ROLE_USER` 、それぞれデフォルト ロールのホスト名とユーザー名を示します。
+-   `DEFAULT_ROLE_HOST`と`DEFAULT_ROLE_USER` 、それぞれデフォルトロールのホスト名とユーザー名を示します。
 
 ### リファレンス {#references}
 

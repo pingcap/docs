@@ -41,4 +41,4 @@ Slackのサポートチャンネルで、 **PingCAP Support Bot**をメンショ
 
 ## サポートにお問い合わせください {#contact-support}
 
-ヘルプや質問がある場合は、 <a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>のサポート チームにお問い合わせください。
+ヘルプや質問がある場合は、 <a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>のサポートチームにお問い合わせください。

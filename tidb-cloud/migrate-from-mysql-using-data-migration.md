@@ -391,7 +391,7 @@ TiDB Cloud Premiumで利用可能な接続方法は以下のとおりです。
 
 AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサポートしていません。そのため、ネットワークロードバランサー (NLB) を作成し、それをソース MySQL インスタンスに関連付けられたエンドポイントサービスとして公開し、TiDB Cloud の AWS プリンシパルがそのサービスを利用できるように承認する必要があります。
 
-1.  [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)データベースのプライベート IP アドレスを含むターゲット グループに転送する TCP リスナーをポート`3306`で持つ内部 NLB を作成します。以下のキー設定を構成します。
+1.  [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)データベースのプライベート IP アドレスを含むターゲットグループに転送する TCP リスナーをポート`3306`で持つ内部 NLB を作成します。以下のキー設定を構成します。
 
     -   **スキーム**:**内部**。ロードバランサーはVPC内に留まります。次のステップのエンドポイントサービスのみが、ロードバランサーをTiDB Cloudに公開します。
     -   **VPC** ：RDSまたはAuroraインスタンスと同じVPCを指定します。フォームはデフォルトでアカウントのデフォルトVPCを選択しますが、データベースが配置されている場所は通常このVPCではないため、続行する前に**VPC**のドロップダウンリストを変更してください。
@@ -477,7 +477,7 @@ AWS 上でホストされているTiDB Cloud Premium インスタンスの場合
 
 AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサポートしていません。そのため、ネットワークロードバランサー (NLB) を作成し、それをソース MySQL インスタンスに関連付けられたエンドポイントサービスとして公開し、TiDB Cloud の AWS プリンシパルがそのサービスを利用できるように承認する必要があります。
 
-1.  [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)データベースのプライベート IP アドレスを含むターゲット グループに転送する TCP リスナーをポート`3306`で持つ内部 NLB を作成します。以下のキー設定を構成します。
+1.  [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)データベースのプライベート IP アドレスを含むターゲットグループに転送する TCP リスナーをポート`3306`で持つ内部 NLB を作成します。以下のキー設定を構成します。
 
     -   **スキーム**:**内部**。ロードバランサーはVPC内に留まります。次のステップのエンドポイントサービスのみが、ロードバランサーをTiDB Cloudに公開します。
     -   **VPC** ：RDSまたはAuroraインスタンスと同じVPCを指定します。フォームはデフォルトでアカウントのデフォルトVPCを選択しますが、データベースが配置されている場所は通常このVPCではないため、続行する前に**VPC**のドロップダウンリストを変更してください。
@@ -590,13 +590,13 @@ MySQLサービスがGoogle Cloud VPC内にある場合は、以下の手順を�
 
     <CustomContent plan="dedicated">
 
-    [TiDB Cloud Dedicatedクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)イングレス ファイアウォール ルールに追加する必要があります。これにより、トラフィックがTiDB Cloud Dedicatedクラスターから MySQL エンドポイントに流れることが可能になります。
+    [TiDB Cloud Dedicatedクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)イングレス ファイアウォールルールに追加する必要があります。これにより、トラフィックがTiDB Cloud Dedicatedクラスターから MySQL エンドポイントに流れることが可能になります。
 
     </CustomContent>
 
     <CustomContent plan="essential">
 
-    [TiDB Cloud Essentialインスタンスが配置されているリージョンのCIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)イングレス ファイアウォール ルールに追加する必要があります。これにより、トラフィックがTiDB Cloud Essentialインスタンスから MySQL エンドポイントに流れることが可能になります。
+    [TiDB Cloud Essentialインスタンスが配置されているリージョンのCIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)イングレス ファイアウォールルールに追加する必要があります。これにより、トラフィックがTiDB Cloud Essentialインスタンスから MySQL エンドポイントに流れることが可能になります。
 
     </CustomContent>
 

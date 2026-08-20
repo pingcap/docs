@@ -28,7 +28,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
 さらに、 **Windows**上の DBeaver からTiDB Cloud StarterまたはTiDB Cloud Essential のパブリックエンドポイントに接続するには、以下の手順で追加の SSL 証明書 (ISRG Root X1) を設定する必要があります。設定しない場合、接続は失敗します。その他のオペレーティングシステムの場合は、これらの手順はスキップできます。
 
-1.  [ISRGルートX1証明書](https://letsencrypt.org/certs/isrgrootx1.pem)をダウンロードし、 `C:\certs\isrgrootx1.pem`などのローカル パスに保存します。
+1.  [ISRGルートX1証明書](https://letsencrypt.org/certs/isrgrootx1.pem)をダウンロードし、 `C:\certs\isrgrootx1.pem`などのローカルパスに保存します。
 
 2.  DBeaverで接続設定を編集し、 **SSL**タブに移動します。
 

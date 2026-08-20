@@ -13,7 +13,7 @@ MySQL -&gt; DM -&gt; TiDB という単純な移行データフローを使用し
 
 ## テスト環境をデプロイ {#deploy-test-environment}
 
--   すべてのデフォルト構成で、 TiUPを使用して TiDB テスト クラスターをデプロイ。
+-   すべてのデフォルト構成で、 TiUPを使用して TiDB テストクラスターをデプロイ。
 -   MySQL サービスをデプロイ。binlogの`ROW`モードを有効にし、その他の設定項目はデフォルト設定を使用します。
 -   DM ワーカーと DM マスターを使用して DM クラスターをデプロイ。
 
@@ -95,7 +95,7 @@ DM-worker のログを確認してください。`all data files have been finis
  [INFO] [loader.go:604] ["all data files have been finished"] [task=test] [unit=load] ["cost time"=52.439796ms]
 ```
 
-テスト データのサイズとデータのインポートにかかる時間に応じて、完全なデータの移行速度を計算できます。
+テストデータのサイズとデータのインポートにかかる時間に応じて、完全なデータの移行速度を計算できます。
 
 ### 増分レプリケーションのベンチマークケース {#incremental-replication-benchmark-case}
 

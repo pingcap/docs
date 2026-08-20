@@ -5,7 +5,7 @@ summary: ticloud config create` のリファレンス。
 
 # ticloud config create {#ticloud-config-create}
 
-ユーザー プロファイル設定を保存する[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を作成します。
+ユーザープロファイル設定を保存する[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を作成します。
 
 ```shell
 ticloud config create [flags]
@@ -13,17 +13,17 @@ ticloud config create [flags]
 
 > **Note:**
 >
-> ユーザー プロファイルを作成する前に、 [TiDB Cloud APIキーを作成する](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)必要があります。
+> ユーザープロファイルを作成する前に、 [TiDB Cloud APIキーを作成する](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)必要があります。
 
 ## 例 {#examples}
 
-対話型モードでユーザー プロファイルを作成します。
+対話型モードでユーザープロファイルを作成します。
 
 ```shell
 ticloud config create
 ```
 
-非対話型モードでユーザー プロファイルを作成します。
+非対話型モードでユーザープロファイルを作成します。
 
 ```shell
 ticloud config create --profile-name <profile-name> --public-key <public-key> --private-key <private-key>

@@ -41,7 +41,7 @@ summary: TiFlash の設定方法を学びます。
 
 #### `delta_index_cache_size` {#delta_index_cache_size}
 
--   DeltaIndex のキャッシュ サイズの制限。
+-   DeltaIndex のキャッシュサイズの制限。
 -   デフォルト値: `0` 、制限がないことを意味します。
 
 #### `path` {#path}
@@ -201,7 +201,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `dir` {#dir}
 
--   分散ストレージおよびコンピューティングアーキテクチャ内のコンピューティングノードのローカル データ キャッシュ ディレクトリ。
+-   分散ストレージおよびコンピューティングアーキテクチャ内のコンピューティングノードのローカルデータ キャッシュ ディレクトリ。
 
 <!-- Example: `"/data1/tiflash/cache"` -->
 
@@ -219,7 +219,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `compact_log_min_gap` <span class="version-mark">v7.4.0 の新機能</span> {#compact_log_min_gap-new-in-v740}
 
--   現在のRaftステート マシンによって進められた`applied_index`と最後のディスクスピル時の`applied_index`との差が`compact_log_min_gap`超えると、 TiFlash はTiKV から`CompactLog`コマンドを実行し、データをディスクにスピルします。
+-   現在のRaftステートマシンによって進められた`applied_index`と最後のディスクスピル時の`applied_index`との差が`compact_log_min_gap`超えると、 TiFlash はTiKV から`CompactLog`コマンドを実行し、データをディスクにスピルします。
 -   このギャップを大きくすると、 TiFlashのディスク書き込み頻度が低下し、ランダム書き込みシナリオにおける読み取りレイテンシーが短縮される可能性がありますが、メモリオーバーヘッドも増加する可能性があります。このギャップを小さくすると、 TiFlashのディスク書き込み頻度が増加し、 TiFlashのメモリ負荷が軽減される可能性があります。ただし、現段階では、このギャップを`0`に設定しても、 TiFlashのディスク書き込み頻度は TiKV よりも高くなることはありません。
 -   デフォルト値を維持することをお勧めします。
 -   デフォルト値: `200`
@@ -284,7 +284,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `config` {#config}
 
--   プロキシの構成ファイル パス。
+-   プロキシの構成ファイルパス。
 
 <!-- Example: `"/tidb-deploy/tiflash-9000/conf/tiflash-learner.toml"` -->
 
@@ -300,7 +300,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `level` {#level}
 
--   ログ レベル。
+-   ログレベル。
 -   デフォルト値: `"info"`
 -   `"info"` `"debug"` `"error"` `"warn"` `"trace"`
 
@@ -500,7 +500,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `level` <span class="version-mark">v5.4.0 の新機能</span> {#level-new-in-v540}
 
--   TiFlash Proxy のログ レベル。
+-   TiFlash Proxy のログレベル。
 -   デフォルト値: `"info"`
 -   `"info"` `"debug"` `"error"` `"warn"` `"trace"`
 

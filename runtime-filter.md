@@ -1,6 +1,6 @@
 ---
 title: Runtime Filter
-summary: ランタイム フィルターの動作原理とその使用方法を学びます。
+summary: ランタイムフィルターの動作原理とその使用方法を学びます。
 ---
 
 # ランタイムフィルター {#runtime-filter}
@@ -50,7 +50,7 @@ WHERE ss_date_sk = d_date_sk
 
 *（上図では交換ノードとその他のノードを省略しています。）*
 
-ランタイム フィルターの実行プロセスは次のとおりです。
+ランタイムフィルターの実行プロセスは次のとおりです。
 
 1.  `date_dim`テーブルのデータをスキャンします。
 2.  `PhysicalHashJoin` `date_dim in (2001/01/01~2001/12/31)`などのビルド側のデータに基づいてフィルター条件を計算します。
@@ -76,13 +76,13 @@ WHERE ss_date_sk = d_date_sk
 
 *(RFはランタイムフィルターの略です)*
 
-上記 2 つの図から、スキャンされるデータ量が`store_sales`で 100 万から 5000 に削減されていることがわかります。スキャンされるデータ量を`TableFullScan`削減することで、Runtime Filter はハッシュ テーブルとの照合回数を削減し、不要な I/O とネットワーク転送を回避できるため、結合操作の効率が大幅に向上します。
+上記 2 つの図から、スキャンされるデータ量が`store_sales`で 100 万から 5000 に削減されていることがわかります。スキャンされるデータ量を`TableFullScan`削減することで、Runtime Filter はハッシュテーブルとの照合回数を削減し、不要な I/O とネットワーク転送を回避できるため、結合操作の効率が大幅に向上します。
 
 ## ランタイムフィルターを使用する {#use-runtime-filter}
 
-ランタイム フィルターを使用するには、 TiFlashレプリカを含むテーブルを作成し、 [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)を`LOCAL`に設定する必要があります。
+ランタイムフィルターを使用するには、 TiFlashレプリカを含むテーブルを作成し、 [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)を`LOCAL`に設定する必要があります。
 
-このセクションでは、TPC-DS データセットを例に、結合操作にテーブル`catalog_sales`とテーブル`date_dim`を使用して、ランタイム フィルターによってクエリ効率がどのように向上するかを説明します。
+このセクションでは、TPC-DS データセットを例に、結合操作にテーブル`catalog_sales`とテーブル`date_dim`を使用して、ランタイムフィルターによってクエリ効率がどのように向上するかを説明します。
 
 ### ステップ1. 結合するテーブルのTiFlashレプリカを作成する {#step-1-create-tiflash-replicas-for-tables-to-be-joined}
 
@@ -113,7 +113,7 @@ SELECT * FROM INFORMATION_SCHEMA.TIFLASH_REPLICA WHERE TABLE_NAME='date_dim';
 
 ### ステップ2. ランタイムフィルターを有効にする {#step-2-enable-runtime-filter}
 
-ランタイム フィルターを有効にするには、システム変数[`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)の値を`LOCAL`に設定します。
+ランタイムフィルターを有効にするには、システム変数[`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)の値を`LOCAL`に設定します。
 
 ```sql
 SET tidb_runtime_filter_mode="LOCAL";
@@ -130,11 +130,11 @@ SHOW VARIABLES LIKE "tidb_runtime_filter_mode";
 +--------------------------+-------+
 ```
 
-システム変数の値が`LOCAL`の場合、ランタイム フィルターは有効になります。
+システム変数の値が`LOCAL`の場合、ランタイムフィルターは有効になります。
 
 ### ステップ3. クエリを実行する {#step-3-execute-the-query}
 
-クエリを実行する前に、 [`EXPLAIN`文](/sql-statements/sql-statement-explain.md)を使用して実行計画を表示し、ランタイム フィルターが有効になっているかどうかを確認します。
+クエリを実行する前に、 [`EXPLAIN`文](/sql-statements/sql-statement-explain.md)を使用して実行計画を表示し、ランタイムフィルターが有効になっているかどうかを確認します。
 
 ```sql
 EXPLAIN SELECT cs_ship_date_sk FROM catalog_sales, date_dim
@@ -142,7 +142,7 @@ WHERE d_date = '2002-2-01' AND
      cs_ship_date_sk = d_date_sk;
 ```
 
-ランタイム フィルターが有効になると、対応するランタイム フィルターがノード`HashJoin`とノード`TableScan`にマウントされ、ランタイム フィルターが正常に適用されたことが示されます。
+ランタイムフィルターが有効になると、対応するランタイムフィルターがノード`HashJoin`とノード`TableScan`にマウントされ、ランタイムフィルターが正常に適用されたことが示されます。
 
 ```
 TableFullScan: runtime filter:0[IN] -> tpcds50.catalog_sales.cs_ship_date_sk
@@ -168,7 +168,7 @@ HashJoin: runtime filter:0[IN] <- tpcds50.date_dim.d_date_sk |
 9 rows in set (0.01 sec)
 ```
 
-ここで、SQL クエリを実行すると、ランタイム フィルターが適用されます。
+ここで、SQL クエリを実行すると、ランタイムフィルターが適用されます。
 
 ```sql
 SELECT cs_ship_date_sk FROM catalog_sales, date_dim
@@ -180,7 +180,7 @@ WHERE d_date = '2002-2-01' AND
 
 この例では、50 GBのTPC-DSデータを使用しています。ランタイムフィルターを有効にすると、クエリ時間は0.38秒から0.17秒に短縮され、効率は 50 %向上します。`ANALYZE`ステートメントを使用すると、ランタイムフィルター有効後の各演算子の実行時間を確認できます。
 
-ランタイム フィルターが有効になっていない場合のクエリの実行情報は次のとおりです。
+ランタイムフィルターが有効になっていない場合のクエリの実行情報は次のとおりです。
 
 ```sql
 EXPLAIN ANALYZE SELECT cs_ship_date_sk FROM catalog_sales, date_dim WHERE d_date = '2002-2-01' AND cs_ship_date_sk = d_date_sk;
@@ -200,7 +200,7 @@ EXPLAIN ANALYZE SELECT cs_ship_date_sk FROM catalog_sales, date_dim WHERE d_date
 9 rows in set (0.38 sec)
 ```
 
-ランタイム フィルターが有効な場合のクエリの実行情報は次のとおりです。
+ランタイムフィルターが有効な場合のクエリの実行情報は次のとおりです。
 
 ```sql
 EXPLAIN ANALYZE SELECT cs_ship_date_sk FROM catalog_sales, date_dim
@@ -224,7 +224,7 @@ EXPLAIN ANALYZE SELECT cs_ship_date_sk FROM catalog_sales, date_dim
 
 2 つのクエリの実行情報を比較すると、次の改善点がわかります。
 
--   IO 削減: TableFullScan 演算子の`total_scanned_rows`比較すると、ランタイム フィルターを有効にすると`TableFullScan`のスキャン量が 2/3 削減されることがわかります。
+-   IO 削減: TableFullScan 演算子の`total_scanned_rows`比較すると、ランタイムフィルターを有効にすると`TableFullScan`のスキャン量が 2/3 削減されることがわかります。
 -   ハッシュ結合のパフォーマンス向上: `HashJoin`演算子の実行時間が 376.1 ミリ秒から 157.6 ミリ秒に短縮されました。
 
 ### ベストプラクティス {#best-practices}
@@ -235,7 +235,7 @@ TPC-DS におけるテーブル`Sales`とテーブル`date_dim`の結合操作�
 
 ## ランタイムフィルターを構成する {#configure-runtime-filter}
 
-ランタイム フィルターを使用する場合、ランタイム フィルターのモードと述語タイプを構成できます。
+ランタイムフィルターを使用する場合、ランタイムフィルターのモードと述語タイプを構成できます。
 
 ### ランタイムフィルターモード {#runtime-filter-mode}
 
@@ -253,8 +253,8 @@ TPC-DS におけるテーブル`Sales`とテーブル`date_dim`の結合操作�
 
 ## 制限事項 {#limitations}
 
--   ランタイム フィルターは MPPアーキテクチャの最適化であり、 TiFlashにプッシュダウンされたクエリにのみ適用できます。
+-   ランタイムフィルターは MPPアーキテクチャの最適化であり、 TiFlashにプッシュダウンされたクエリにのみ適用できます。
 -   結合タイプ：左外部結合、完全外部結合、およびアンチ結合（左テーブルがプローブ側の場合）は、ランタイムフィルターをサポートしていません。ランタイムフィルターは結合に関係するデータを事前にフィルタリングするため、上記の結合タイプでは不一致データが破棄されず、ランタイムフィルターは使用できません。
 -   等価結合式：等価結合式内のプローブ列が複雑な式である場合、またはプローブ列の型がJSON、Blob、配列などの複雑なデータ型である場合、ランタイムフィルターは生成されません。主な理由は、これらの型の列が結合列として使用されることはほとんどないためです。フィルターが生成されたとしても、フィルタリング率は通常低くなります。
 
-上記の制限事項について、ランタイム フィルターが正しく生成されたかどうかを確認する必要がある場合は、 [`EXPLAIN`文](/sql-statements/sql-statement-explain.md)を使用して実行計画を検証できます。
+上記の制限事項について、ランタイムフィルターが正しく生成されたかどうかを確認する必要がある場合は、 [`EXPLAIN`文](/sql-statements/sql-statement-explain.md)を使用して実行計画を検証できます。

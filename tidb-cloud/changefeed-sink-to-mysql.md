@@ -57,7 +57,7 @@ MySQL サービスがパブリックインターネット アクセスのない 
 2.  MySQL サービスの VPC とTiDB Cloud Dedicatedクラスターの間で[VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
 3.  MySQLが配置されているVPCの受信ファイアウォールルールを変更します。
 
-    [TiDB Cloud Dedicatedクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)イングレス ファイアウォール ルールに追加する必要があります。これにより、トラフィックがTiDB Cloud Dedicatedクラスターから MySQL エンドポイントに流れるようになります。
+    [TiDB Cloud Dedicatedクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)イングレス ファイアウォールルールに追加する必要があります。これにより、トラフィックがTiDB Cloud Dedicatedクラスターから MySQL エンドポイントに流れるようになります。
 
 </div>
 
@@ -98,7 +98,7 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
 
 既存のデータを読み込むには：
 
-1.  [`tidb_gc_life_time`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)以下の 2 つの操作の合計時間よりも長く設定することで、その期間中の履歴データが TiDB によってガベージ コレクションされないようにします。
+1.  [`tidb_gc_life_time`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)以下の 2 つの操作の合計時間よりも長く設定することで、その期間中の履歴データが TiDB によってガベージコレクションされないようにします。
 
     -   既存データのエクスポートとインポートにかかる時間
     -   **Sink to MySQL**を作成する時間

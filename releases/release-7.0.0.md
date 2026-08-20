@@ -131,14 +131,14 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     バージョン7.0.0では、TiDBは統計情報の収集ロジックをさらに最適化し、収集時間を約25%短縮しました。この最適化により、大規模データベースクラスタの運用効率と安定性が向上し、統計情報の収集がクラスタのパフォーマンスに与える影響が軽減されます。
 
--   MPP 最適化のための新しいオプティマイザー ヒントを追加 [#39710](https://github.com/pingcap/tidb/issues/39710) @[Reminiscent](https://github.com/Reminiscent)
+-   MPP 最適化のための新しいオプティマイザーヒントを追加 [#39710](https://github.com/pingcap/tidb/issues/39710) @[Reminiscent](https://github.com/Reminiscent)
 
     バージョン7.0.0では、TiDBはMPP実行計画の生成に影響を与える一連のオプティマイザヒントを追加しました。
 
     -   [`SHUFFLE_JOIN()`](/optimizer-hints.md#shuffle_joint1_name--tl_name-) : MPP で有効になります。指定されたテーブルに対してシャッフル結合アルゴリズムを使用するようにオプティマイザに指示します。
     -   [`BROADCAST_JOIN()`](/optimizer-hints.md#broadcast_joint1_name--tl_name-) : MPP で有効になります。指定されたテーブルに対してブロードキャスト結合アルゴリズムを使用するようにオプティマイザに指示します。
     -   [`MPP_1PHASE_AGG()`](/optimizer-hints.md#mpp_1phase_agg) ：MPP（最大パフォーマンス）に有効です。指定されたクエリブロック内のすべての集計関数に対して、オプティマイザに1フェーズ集計アルゴリズムを使用するように指示します。
-    -   [`MPP_2PHASE_AGG()`](/optimizer-hints.md#mpp_2phase_agg) : MPP で有効になります。指定されたクエリ ブロック内のすべての集計関数に対して、2 段階集計アルゴリズムを使用するようにオプティマイザに指示します。
+    -   [`MPP_2PHASE_AGG()`](/optimizer-hints.md#mpp_2phase_agg) : MPP で有効になります。指定されたクエリブロック内のすべての集計関数に対して、2 段階集計アルゴリズムを使用するようにオプティマイザに指示します。
 
     MPPオプティマイザのヒントを使用すると、HTAPクエリに介入して、HTAPワークロードのパフォーマンスと安定性を向上させることができます。
 
@@ -365,7 +365,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
         -   MQ シンクに Large Row モニタリング メトリクスを追加します [#8286](https://github.com/pingcap/tiflow/issues/8286) @[Rustin170506](https://github.com/Rustin170506)
 
-        -   リージョンに複数のテーブルのデータが含まれるシナリオで、TiKV ノードと TiCDC ノード間のネットワーク トラフィックを削減します [#6346](https://github.com/pingcap/tiflow/issues/6346) @[overvenus](https://github.com/overvenus)
+        -   リージョンに複数のテーブルのデータが含まれるシナリオで、TiKV ノードと TiCDC ノード間のネットワークトラフィックを削減します [#6346](https://github.com/pingcap/tiflow/issues/6346) @[overvenus](https://github.com/overvenus)
 
         -   Checkpoint TSとResolved TSのP99メトリクスパネルをラグ分析パネルに移動します [#8524](https://github.com/pingcap/tiflow/issues/8524) @[Rustin170506](https://github.com/Rustin170506)
 
@@ -438,7 +438,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
         -   `stopped`ステータスの変更フィードが自動的に再起動する可能性がある問題を修正 [#8330](https://github.com/pingcap/tiflow/issues/8330) @[sdojjy](https://github.com/sdojjy)
         -   すべてのダウンストリーム Kafka サーバーが利用できないときに TiCDCサーバーがパニックになる問題を修正 [#8523](https://github.com/pingcap/tiflow/issues/8523) @[3AceShowHand](https://github.com/3AceShowHand)
         -   ダウンストリームがMySQLで、実行されたステートメントがTiDBと互換性がない場合にデータが失われる可能性がある問題を修正します [#8453](https://github.com/pingcap/tiflow/issues/8453) @[asddongmen](https://github.com/asddongmen)
-        -   ローリング アップグレードが TiCDC OOM を引き起こす可能性がある問題、またはチェックポイントがスタックする問題を修正 [#8329](https://github.com/pingcap/tiflow/issues/8329) @[overvenus](https://github.com/overvenus)
+        -   ローリングアップグレードが TiCDC OOM を引き起こす可能性がある問題、またはチェックポイントがスタックする問題を修正 [#8329](https://github.com/pingcap/tiflow/issues/8329) @[overvenus](https://github.com/overvenus)
         -   Kubernetes で TiCDC クラスターの正常なアップグレードが失敗する問題を修正 [#8484](https://github.com/pingcap/tiflow/issues/8484) @[overvenus](https://github.com/overvenus)
 
     -   TiDB Data Migration (DM)

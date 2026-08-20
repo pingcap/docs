@@ -227,7 +227,7 @@ npm install prisma typescript ts-node @types/node --save-dev
 
 ### ステップ4．データベーススキーマを初期化する {#step-4-initialize-the-database-schema}
 
-次のコマンドを実行して[Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate)を呼び出し、 `prisma/prisma.schema`で定義されたデータ モデルでデータベースを初期化します。
+次のコマンドを実行して[Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate)を呼び出し、 `prisma/prisma.schema`で定義されたデータモデルでデータベースを初期化します。
 
 ```shell
 npx prisma migrate dev
@@ -260,7 +260,7 @@ model Profile {
 }
 ```
 
-Prisma でデータ モデルを定義する方法については、データモデル[データモデル](https://www.prisma.io/docs/concepts/components/prisma-schema/data-model)ドキュメントを確認してください。
+Prisma でデータモデルを定義する方法については、データモデル[データモデル](https://www.prisma.io/docs/concepts/components/prisma-schema/data-model)ドキュメントを確認してください。
 
 **期待される実行出力:**
 

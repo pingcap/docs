@@ -124,7 +124,7 @@ TiDB Cloudのリソースごとに異なるプロジェクトタイプが導入�
 
 ## 移行後にはどのような対応が必要ですか？ {#what-actions-are-required-after-migration}
 
-TiDB Cloud StarterまたはEssentialインスタンスを新しい TiDB X プロジェクトに移行した場合は、以下の項目など、元のプロジェクト ID または元のプロジェクト レベルの設定に依存するものを確認してください。
+TiDB Cloud StarterまたはEssentialインスタンスを新しい TiDB X プロジェクトに移行した場合は、以下の項目など、元のプロジェクト ID または元のプロジェクトレベルの設定に依存するものを確認してください。
 
 -   自動化またはスクリプト
 -   統合

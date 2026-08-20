@@ -25,7 +25,7 @@ TiDB バージョン: 6.5.1
 
 -   TiKV [`advance-ts-interval`](/tikv-configuration-file.md#advance-ts-interval)設定項目のデフォルト値が`1s`から`20s`に変更されました。この設定項目を変更することで、レイテンシーを短縮し、 ステイル読み取りデータの適時性を向上させることができます。詳細は[ステイル読み取りのレイテンシーを削減](/stale-read.md#reduce-stale-read-latency)ご覧ください。
 
--   ネットワーク トラフィックを削減するために、TiKV [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)構成項目の既定値が`"200ms"`から`"1s"`に変更されました。
+-   ネットワークトラフィックを削減するために、TiKV [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)構成項目の既定値が`"200ms"`から`"1s"`に変更されました。
 
 ## 改善点 {#improvements}
 

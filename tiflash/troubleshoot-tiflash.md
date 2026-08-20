@@ -214,7 +214,7 @@ TiDB クラスターを展開した後、 TiFlashレプリカの作成が継続�
     pd-ctl operator add remove-peer <region-id> <tiflash-store-id>
     ```
 
-上記のすべてのチェックに合格しても問題が解決しない場合は、 [データはTiFlashに複製されません](#data-is-not-replicated-to-tiflash)の手順に従って、どのコンポーネントまたはデータ レプリケーション プロセスで問題が発生しているかを特定します。
+上記のすべてのチェックに合格しても問題が解決しない場合は、 [データはTiFlashに複製されません](#data-is-not-replicated-to-tiflash)の手順に従って、どのコンポーネントまたはデータレプリケーションプロセスで問題が発生しているかを特定します。
 
 ## データはTiFlashに複製されません {#data-is-not-replicated-to-tiflash}
 

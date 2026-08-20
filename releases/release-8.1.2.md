@@ -73,7 +73,7 @@ TiDB バージョン: 8.1.2
     -   `IndexNestedLoopHashJoin` のデータ競合問題を修正 [＃49692](https://github.com/pingcap/tidb/issues/49692) @[solotzg](https://github.com/solotzg)
     -   `StreamAggExec`分の`groupOffset`空の場合に TiDB がpanicを起こす可能性がある問題を修正しました [＃53867](https://github.com/pingcap/tidb/issues/53867) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   相関サブクエリと CTE を含むクエリを実行すると、TiDB がハングしたり、誤った結果が返されたりする問題を修正しました。 [＃55551](https://github.com/pingcap/tidb/issues/55551) @[guo-shaoge](https://github.com/guo-shaoge)
-    -   インデックス追加中の再試行によって発生するデータ インデックスの不整合の問題を修正しました [＃55808](https://github.com/pingcap/tidb/issues/55808) @[lance6716](https://github.com/lance6716)
+    -   インデックス追加中の再試行によって発生するデータインデックスの不整合の問題を修正しました [＃55808](https://github.com/pingcap/tidb/issues/55808) @[lance6716](https://github.com/lance6716)
     -   整数型の列に小さい表示幅を指定すると`out of range`エラーが発生する可能性がある問題を修正しました。 [＃55837](https://github.com/pingcap/tidb/issues/55837) @[windtalker](https://github.com/windtalker)
     -   `LOAD DATA ... REPLACE INTO`操作でデータの不整合が発生する問題を修正[＃56408](https://github.com/pingcap/tidb/issues/56408) @[fzzf678](https://github.com/fzzf678)
     -   `columnEvaluator`入力チャンク内の列参照を識別できず、SQL 文を実行すると`runtime error: index out of range`が発生する問題を修正しました。 [＃53713](https://github.com/pingcap/tidb/issues/53713) @[AilinKid](https://github.com/AilinKid)
@@ -151,7 +151,7 @@ TiDB バージョン: 8.1.2
         -   PullerモジュールのResolved TSレイテンシーモニタリングで誤った値が表示される問題を修正しました [＃11561](https://github.com/pingcap/tiflow/issues/11561) @[wlwilliamx](https://github.com/wlwilliamx)
         -   `enable-table-across-nodes`有効にすると、リージョン分割中にテーブルの一部のスパン レプリケーションタスクが失われる可能性がある問題を修正しました。 [＃11675](https://github.com/pingcap/tiflow/issues/11675) @[wk989898](https://github.com/wk989898)
         -   やり直しモジュールがエラーを正しく報告できない問題を修正しました [＃11744](https://github.com/pingcap/tiflow/issues/11744) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        -   TiDB DDL 所有者の変更中に DDL タスクのスキーマ バージョンが非増分になったときに、TiCDC が誤って DDL タスクを破棄する問題を修正[＃11714](https://github.com/pingcap/tiflow/issues/11714) @[wlwilliamx](https://github.com/wlwilliamx)
+        -   TiDB DDL 所有者の変更中に DDL タスクのスキーマバージョンが非増分になったときに、TiCDC が誤って DDL タスクを破棄する問題を修正[＃11714](https://github.com/pingcap/tiflow/issues/11714) @[wlwilliamx](https://github.com/wlwilliamx)
         -   チェンジフィードチェックポイントの**barrier-ts**監視メトリックが不正確になる可能性がある問題を修正しました[＃11553](https://github.com/pingcap/tiflow/issues/11553) @[3AceShowHand](https://github.com/3AceShowHand)
 
     -   TiDB Data Migration (DM)

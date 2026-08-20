@@ -18,7 +18,7 @@ PD RecoverはPDのディザスタリカバリツールであり、正常に起�
 
 ## TiDB Toolkitをダウンロード {#download-tidb-toolkit}
 
-PD Recover インストール パッケージは、 TiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
+PD Recover インストールパッケージは、 TiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
 
 以下のセクションでは、PDクラスタを復旧するための2つの方法、すなわち、稼働中のPDノードからの復旧と、PDクラスタ全体の再構築について説明します。
 
