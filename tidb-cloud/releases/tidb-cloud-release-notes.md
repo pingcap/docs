@@ -30,10 +30,10 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         サポートされているその他のリージョンについては、[Platforms & Regions](https://docs.pingcap.com/tidbcloudlake/platforms-regions/) を参照してください。
 
-    - 新しい外部 Python UDF SDK と dbt adapter により、TiDB Cloud Lake の Python 拡張性と analytics engineering ワークフローを拡張しました。
+    - 新しい外部 Python UDF SDK と dbtアダプターにより、TiDB Cloud Lake の Python 拡張性と analytics engineering ワークフローを拡張しました。
 
         - 新しい外部 Python UDF SDK を使用すると、Python でカスタムのスカラー関数およびテーブル関数を実装し、それらを UDF サーバーにデプロイし、TiDB Cloud Lake にエンドポイントを登録して、SQL から直接これらの関数を呼び出すことができます。この SDK は、一般的なデータ型と複雑なデータ型、NULL 処理、I/O 並列処理、および関数ごとの同時実行制御をサポートします。
-        - 新しい dbt adapter を使用すると、dbt を TiDB Cloud Lake に接続して、データ変換ワークフローの構築、テスト、ドキュメント化を行うことができます。この adapter は、table、view、incremental materialization に加え、seeds、sources、カスタムデータテスト、ドキュメント生成、snapshots、接続の再試行をサポートします。
+        - 新しい dbtアダプターを使用すると、dbt を TiDB Cloud Lake に接続して、データ変換ワークフローの構築、テスト、ドキュメント化を行うことができます。このアダプターは、table、view、incremental materialization に加え、seeds、sources、カスタムデータテスト、ドキュメント生成、snapshots、接続の再試行をサポートします。
 
       詳細については、以下のドキュメントを参照してください。
 
