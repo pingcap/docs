@@ -15,7 +15,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + TiDB
 
-    - Improve memory efficiency for joins and `UPDATE`/`DELETE` statements by reducing excessive initial chunk allocation, especially in high-concurrency workloads and when processing wide rows [#68545](https://github.com/pingcap/tidb/issues/68545) @[solotzg](https://github.com/solotzg) <!-- component: execution --> <!-- pr: https://github.com/pingcap/tidb/pull/69965 -->
     - Improve optimizer row count estimation for composite indexes that include virtual columns by falling back to index statistics when column statistics are unavailable, helping TiDB choose indexes more accurately [#69134](https://github.com/pingcap/tidb/issues/69134) @[qw4990](https://github.com/qw4990) <!-- component: planner --> <!-- pr: https://github.com/pingcap/tidb/pull/70327 -->
 
 + Tools
@@ -46,6 +45,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Fix the issue that recording OOM diagnostic goroutine profiles might prolong stop-the-world pauses and increase query latency when memory usage frequently exceeds the alarm ratio [#62080](https://github.com/pingcap/tidb/issues/62080) @[YangKeao](https://github.com/YangKeao) <!-- component: sql-infra --> <!-- pr: https://github.com/pingcap/tidb/pull/70228 -->
     - Fix the issue that `LOAD DATA LOCAL INFILE` in a pessimistic transaction might retry internally after a retryable lock conflict, desynchronize the client connection, and return an invalid sequence error instead of the original deadlock error [#69793](https://github.com/pingcap/tidb/issues/69793) @[lance6716](https://github.com/lance6716) <!-- component: transaction, sql-infra, execution --> <!-- pr: https://github.com/pingcap/tidb/pull/70194 -->
     - Fix the issue that `ALTER TABLE ... REORGANIZE PARTITION` might rebuild global indexes without entries for rows in non-reorganized partitions that come after the reorganized partitions in partition order, causing queries using those indexes to miss rows and unique constraints not to be enforced for the affected values [#70023](https://github.com/pingcap/tidb/issues/70023) @[mjonss](https://github.com/mjonss) <!-- component: ddl --> <!-- pr: https://github.com/pingcap/tidb/pull/70479 -->
+    - Fix the issue that Join operations, `UPDATE` statements, and `DELETE` statements might allocate excessive memory for initial Chunks, especially under high concurrency or when processing wide rows [#68545](https://github.com/pingcap/tidb/issues/68545) @[solotzg](https://github.com/solotzg) <!-- component: execution --> <!-- pr: https://github.com/pingcap/tidb/pull/69965 -->
 
 + TiKV
 
