@@ -1,6 +1,6 @@
 ---
 title: Vector Search Index
-summary: ベクトル検索インデックスを構築して使用し、TiDB で K 近傍法 (KNN) クエリを高速化する方法を学びます。
+summary: ベクトル検索インデックスを構築して使用し、TiDB で K近傍法 (KNN) クエリを高速化する方法を学びます。
 aliases: ['/ja/tidb/stable/vector-search-index/','/ja/tidbcloud/vector-search-index/']
 ---
 
@@ -74,7 +74,7 @@ HNSW ベクトルインデックスを作成するときは、ベクトルの距
 
 ## ベクトルインデックスを使用する {#use-the-vector-index}
 
-ベクトル検索インデックスは、次のように`ORDER BY ... LIMIT`句を使用して K 近傍検索クエリで使用できます。
+ベクトル検索インデックスは、次のように`ORDER BY ... LIMIT`句を使用して K近傍検索クエリで使用できます。
 
 ```sql
 SELECT *
@@ -98,7 +98,7 @@ ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 5;
 ```
 
-フィルター付きのベクトルインデックスを使用するには、まずベクトル検索を使用して K 近傍を照会し、次に不要な結果をフィルター処理します。
+フィルター付きのベクトルインデックスを使用するには、まずベクトル検索を使用して K近傍を照会し、次に不要な結果をフィルター処理します。
 
 ```sql
 -- For the following query, the `WHERE` filter is performed after KNN, so the vector index cannot be used:
