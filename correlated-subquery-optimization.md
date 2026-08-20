@@ -19,7 +19,7 @@ TiDBがこの書き換えを行う必要がある理由は、相関サブクエ�
 
 したがって、外部値が少ない場合は、非相関化を行わないでください。非相関化により、実行パフォーマンスが向上する可能性があります。この場合、 [`NO_DECORRELATE`](/optimizer-hints.md#no_decorrelate)オプティマイザヒントを使用するか、 [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)の「サブクエリの非相関化」最適化ルールを無効にすることで、この最適化を無効にできます。ほとんどの場合、非相関化を無効にするには、 [SQLプラン管理](/sql-plan-management.md)オプティマイザヒントと併用することをお勧めします。
 
-v8.5.7 以降では、このようなシナリオを最適化するために、システム変数 [`tidb_opt_enable_alternative_logical_plans`](/system-variables.md#tidb_opt_enable_alternative_logical_plans-new-in-v857) も使用できます。この変数を有効にすると、非相関化された Candidate プランが、元の相関サブクエリと同じアクセス方向を持つ同等の `IndexJoin` Candidate プランの生成に失敗した場合、オプティマイザは追加で非相関化されていない Candidate プランを保持し、非相関化された Candidate プランと非相関化されていない Candidate プランの両方を評価して、コストの低い[実行計画](/explain-subqueries.md)を選択します。
+v8.5.7 以降では、このようなシナリオを最適化するために、システム変数 [`tidb_opt_enable_alternative_logical_plans`](/system-variables.md#tidb_opt_enable_alternative_logical_plans-new-in-v857) も使用できます。この変数を有効にすると、非相関化された候補プランが、元の相関サブクエリと同じアクセス方向を持つ同等の `IndexJoin` 候補プランの生成に失敗した場合、オプティマイザは追加で非相関化されていない候補プランを保持し、非相関化された候補プランと非相関化されていない候補プランの両方を評価して、コストの低い[実行計画](/explain-subqueries.md)を選択します。
 
 ## 例 {#example}
 
