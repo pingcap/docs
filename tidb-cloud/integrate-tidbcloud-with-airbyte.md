@@ -64,7 +64,7 @@ airbyte-server      | --------------------------------------
     > -   JDBC を介してTiDB Cloudへの TLS 接続を無効にする場合は、JDBC URL パラメータで useSSL を`false`に設定し、SSL 接続を閉じる必要があります。たとえば、 `useSSL=false`のように設定します。
     > -   TiDB Cloud StarterとTiDB Cloud EssentialはTLS接続のみをサポートしています。
 
-4.  コネクタの作成を完了するには、**「ソースの設定」**または**「宛先の設定」**をクリックします。次のスクリーンショットは、ソースとしてTiDBを設定した例です。
+4.  コネクタの作成を完了するには、**ソースの設定**または**宛先の設定**をクリックします。次のスクリーンショットは、ソースとしてTiDBを設定した例です。
 
 ![TiDB source configuration](/media/tidb-cloud/integration-airbyte-parameters.jpg)
 
@@ -78,7 +78,7 @@ TiDB コネクタの詳細については、 [TiDBソース](https://docs.airbyt
 
 以下の手順では、TiDBをソースと宛先の両方として使用します。他のコネクタでは、パラメータが異なる場合があります。
 
-1.  サイドバーの**「接続」**をクリックし、次に**New Connection**をクリックします。
+1.  サイドバーの**接続**をクリックし、次に**New Connection**をクリックします。
 
 2.  事前に設定した送信元と送信先を選択してください。
 
@@ -103,7 +103,7 @@ TiDB コネクタの詳細については、 [TiDBソース](https://docs.airbyt
 
 8.  **Set up connection**をクリックしてください。
 
-9.  接続が確立されたら、 **「有効」**をクリックして同期タスクをアクティブ化します。また、 **Sync now**をクリックすると、すぐに同期を開始できます。
+9.  接続が確立されたら、 **有効**をクリックして同期タスクをアクティブ化します。また、 **Sync now**をクリックすると、すぐに同期を開始できます。
 
 ![Sync data](/media/tidb-cloud/integration-airbyte-sync.jpg)
 

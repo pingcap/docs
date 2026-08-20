@@ -25,7 +25,7 @@ Prometheusとの連携を移行するには、以下の手順を実行してく�
 
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  左側のナビゲーションパネルで、 **「プロジェクト設定」**の下にある**Project Settings**をクリックします。
+3.  左側のナビゲーションパネルで、 **プロジェクト設定**の下にある**Project Settings**をクリックします。
 
 4.  **Integrations** &gt; **Integration to Prometheus (BETA)**モジュールで、 **[Scrape_config Files]**を選択し、 **Delete**をクリックします。
 

@@ -19,7 +19,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 [Zapテンプレート](https://docs.zapier.com/integrations/publish/zap-templates)、公開されているZapier連携機能向けに、アプリとコアフィールドが事前に選択された、すぐに使える連携機能またはZapです。
 
-このセクションでは、 **「新しい GitHub グローバル イベントを TiDB 行に追加する」**テンプレートを例として、ワークフローを作成します。このワークフローでは、GitHub アカウントから新しいグローバル イベント (任意のリポジトリで、あなたからまたはあなたに対して発生する[GitHubイベント](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types)) が作成されるたびに、Zapier がTiDB Cloudクラスターに新しい行を追加します。
+このセクションでは、 **新しい GitHub グローバル イベントを TiDB 行に追加する**テンプレートを例として、ワークフローを作成します。このワークフローでは、GitHub アカウントから新しいグローバル イベント (任意のリポジトリで、あなたからまたはあなたに対して発生する[GitHubイベント](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types)) が作成されるたびに、Zapier がTiDB Cloudクラスターに新しい行を追加します。
 
 ### 前提条件 {#prerequisites}
 
@@ -111,7 +111,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
         ![Table columns](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-columns.png)
 
-    3.  **「列」**ボックスで、トリガーから対応するデータを選択します。すべての列を入力し、 **Continue**をクリックします。
+    3.  **列**ボックスで、トリガーから対応するデータを選択します。すべての列を入力し、 **Continue**をクリックします。
 
         ![Fill in Columns](/media/tidb-cloud/zapier/zapier-fill-in-tidbcloud-triggers-data.png)
 
@@ -131,7 +131,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 ### ステップ5：Zapを公開する {#step-5-publish-your-zap}
 
-**「公開」**をクリックして、作成したZapを公開します。[ホームページ](https://zapier.com/app/zaps)でZapが実行されていることを確認できます。
+**公開**をクリックして、作成したZapを公開します。[ホームページ](https://zapier.com/app/zaps)でZapが実行されていることを確認できます。
 
 ![Publish the zap](/media/tidb-cloud/zapier/zapier-tidbcloud-publish.png)
 

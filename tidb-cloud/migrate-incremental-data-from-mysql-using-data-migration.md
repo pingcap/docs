@@ -305,7 +305,7 @@ SHOW MASTER STATUS;
 
 ## ステップ6：仕様を選択して移行を開始する {#step-6-choose-a-spec-and-start-migration}
 
-**「仕様を選択して移行を開始」**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [データ移行の仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)を参照してください。
+**仕様を選択して移行を開始**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [データ移行の仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)を参照してください。
 
 仕様を選択したら、 **Create Job and Start**をクリックして移行を開始します。
 

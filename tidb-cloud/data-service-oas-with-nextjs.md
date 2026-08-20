@@ -84,7 +84,7 @@ SELECT * FROM test.repository;
 3.  OpenAPI仕様をダウンロードして、 `oas/doc.json`として保存してください。
 
     1.  TiDB Cloud[**Data Service**](https://tidbcloud.com/project/data-service)ページで、左側のペインにあるデータアプリ名をクリックすると、アプリの設定が表示されます。
-    2.  **API Specification**エリアで**「ダウンロード」**をクリックし、JSON形式を選択して、プロンプトが表示されたら**「承認」**をクリックします。
+    2.  **API Specification**エリアで**ダウンロード**をクリックし、JSON形式を選択して、プロンプトが表示されたら**承認**をクリックします。
     3.  ダウンロードしたファイルを`oas/doc.json`プロジェクトディレクトリに`hello-repos` }という名前で保存してください。
 
     詳細については、 [OpenAPI仕様書をダウンロードする](/tidb-cloud/data-service-manage-data-app.md#download-the-openapi-specification)を参照してください。

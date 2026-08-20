@@ -23,7 +23,7 @@ TiDB Cloudは、DatadogおよびNew Relicとの連携をクラスタレベルで
 
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  左側のナビゲーションパネルで、 **「プロジェクト設定」**の下にある**Project Settings**をクリックします。
+3.  左側のナビゲーションパネルで、 **プロジェクト設定**の下にある**Project Settings**をクリックします。
 
 4.  **統合**ページで、 **Integration to Datadog**または**Integration to New Relic**の横にある**Delete**をクリックします。
 

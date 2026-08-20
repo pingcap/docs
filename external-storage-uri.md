@@ -83,10 +83,10 @@ tiup cdc:v7.5.0 cli changefeed create \
         > **Note:**
         >
         > -   IAMロールを自動的に作成するには、 [TiDB Cloudコンソール](https://tidbcloud.com/)でクラスターの**[Amazon S3 からのデータのインポート]**ページに移動し、 **[フォルダー URI]**フィールドに入力し、 **[ロール ARN]**フィールドの [**ここをクリックして AWS CloudFormation で新しく作成] を**クリックして、 **[新しいロール ARN の追加]**ダイアログの画面上の指示に従います。
-        > -   AWS CloudFormation を使用してIAMロールを作成する際に問題が発生した場合は、 **「新しいロール ARN を追加」**ダイアログで**「問題が発生した場合は、ロール ARN を手動で作成する」を**クリックしてTiDB Cloudアカウント ID とTiDB Cloud外部 ID を取得し、 [ロール ARN を使用して Amazon S3 アクセスを構成する](https://docs.pingcap.com/tidbcloud/dedicated-external-storage#configure-amazon-s3-access-using-a-role-arn)の手順に従って手動でロールを作成してください。IAMを設定する際は、 **「アカウント ID」**フィールドにTiDB Cloudアカウント ID を入力し、 [混乱した副官の攻撃](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)から保護するために**外部 ID を要求する」**を選択してください。
+        > -   AWS CloudFormation を使用してIAMロールを作成する際に問題が発生した場合は、 **新しいロール ARN を追加**ダイアログで**「問題が発生した場合は、ロール ARN を手動で作成する」を**クリックしてTiDB Cloudアカウント ID とTiDB Cloud外部 ID を取得し、 [ロール ARN を使用して Amazon S3 アクセスを構成する](https://docs.pingcap.com/tidbcloud/dedicated-external-storage#configure-amazon-s3-access-using-a-role-arn)の手順に従って手動でロールを作成してください。IAMを設定する際は、 **アカウント ID**フィールドにTiDB Cloudアカウント ID を入力し、 [混乱した副官の攻撃](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)から保護するために**外部 ID を要求する」**を選択してください。
         > -   セキュリティを強化するために、**最大セッション継続時間を**短く設定することで、 IAMロールの有効期間を短縮できます。詳細については、AWSドキュメントの[ロールの最大セッション期間を更新する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_update-role-settings.html#id_roles_update-session-duration)を参照してください。
 
-    -   `external-id` : TiDB Cloud がAmazon S3 データにアクセスするために必要なTiDB Cloud外部 ID を指定します。この ID は、 [TiDB Cloudコンソール](https://tidbcloud.com/)の**「新しいロール ARN を追加」**ダイアログから取得できます。詳細については、 [ロール ARN を使用して Amazon S3 アクセスを構成する](https://docs.pingcap.com/tidbcloud/dedicated-external-storage#configure-amazon-s3-access-using-a-role-arn)を参照してください。
+    -   `external-id` : TiDB Cloud がAmazon S3 データにアクセスするために必要なTiDB Cloud外部 ID を指定します。この ID は、 [TiDB Cloudコンソール](https://tidbcloud.com/)の**新しいロール ARN を追加**ダイアログから取得できます。詳細については、 [ロール ARN を使用して Amazon S3 アクセスを構成する](https://docs.pingcap.com/tidbcloud/dedicated-external-storage#configure-amazon-s3-access-using-a-role-arn)を参照してください。
 
 以下は、 [`BACKUP`](/sql-statements/sql-statement-backup.md)と[`RESTORE`](/sql-statements/sql-statement-restore.md)のAmazon S3 URIの例です。この例では、ファイルパス`testfolder`を使用しています。
 

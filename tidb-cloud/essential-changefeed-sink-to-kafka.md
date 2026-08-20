@@ -84,7 +84,7 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 <SimpleTab>
 <div label="Public">
 
-1.  **Connectivity Method**で**「パブリック」**を選択し、Kafkaブローカーのエンドポイントを入力します。複数のエンドポイントはカンマ`,`を使用して区切ることができます。
+1.  **Connectivity Method**で**パブリック**を選択し、Kafkaブローカーのエンドポイントを入力します。複数のエンドポイントはカンマ`,`を使用して区切ることができます。
 
 2.  Kafkaの認証設定に応じて、**Authentication**オプションを選択してください。
 
@@ -216,5 +216,5 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 ## ステップ4．変更フィードを確認して作成する {#step-4-review-and-create-your-changefeed}
 
 1.  **Changefeed Name**欄に、変更フィードの名前を指定します。
-2.  設定した変更フィードの設定をすべて確認してください。必要に応じて**「戻る」**をクリックして変更してください。
+2.  設定した変更フィードの設定をすべて確認してください。必要に応じて**戻る**をクリックして変更してください。
 3.  すべての設定が正しければ、 **Submit**をクリックして変更フィードを作成します。

@@ -112,9 +112,9 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
-2.  **「クラウドストレージからデータをインポート」**をクリックします。
+2.  **クラウドストレージからデータをインポート**をクリックします。
 
-3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
+3.  **クラウドストレージからデータをインポート**ページで、以下の情報を入力してください。
 
     -   **Storage Provider**： **Amazon S3**を選択してください。
     -   **Source URI** ：
@@ -132,7 +132,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     > **Note:**
     >
-    > **Source URI**で単一のファイルを指定すると、 TiDB Cloudは**「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する」**オプションを表示せず、**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
+    > **Source URI**で単一のファイルを指定すると、 TiDB Cloudは**自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する**オプションを表示せず、**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
 
     -   TiDB Cloud が[TiDBファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**Parquet**を選択します。ソースフォルダにスキーマファイル ( `${db_name}-schema-create.sql`や`${db_name}.${table_name}-schema.sql`など) が含まれている場合、 TiDB Cloud は、ターゲットデータベースとテーブルがまだ存在しない場合に、それらを使用して作成します。
 
@@ -165,9 +165,9 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
-2.  **「クラウドストレージからデータをインポート」**をクリックします。
+2.  **クラウドストレージからデータをインポート**をクリックします。
 
-3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
+3.  **クラウドストレージからデータをインポート**ページで、以下の情報を入力してください。
 
     -   **Storage Provider**： **Google Cloud Storage**を選択してください。
     -   **Source URI** ：
@@ -183,7 +183,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     > **Note:**
     >
-    > **Source URI**で単一のファイルを指定すると、 TiDB Cloudは**「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する」**オプションを表示せず、**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
+    > **Source URI**で単一のファイルを指定すると、 TiDB Cloudは**自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する**オプションを表示せず、**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
 
     -   TiDB Cloud が[TiDBファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**Parquet**を選択します。ソースフォルダにスキーマファイル ( `${db_name}-schema-create.sql`や`${db_name}.${table_name}-schema.sql`など) が含まれている場合、 TiDB Cloud は、ターゲットデータベースとテーブルがまだ存在しない場合に、それらを使用して作成します。
 
@@ -216,9 +216,9 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
-2.  **「クラウドストレージからデータをインポート」**をクリックします。
+2.  **クラウドストレージからデータをインポート**をクリックします。
 
-3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
+3.  **クラウドストレージからデータをインポート**ページで、以下の情報を入力してください。
 
     -   **Storage Provider**： **Azure Blob Storage**を選択します。
 
@@ -229,7 +229,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
     -   **Connectivity Method**： TiDB CloudがAzure Blob Storageに接続する方法を選択してください。
 
         -   **パブリック**（デフォルト）：パブリックインターネット経由で接続します。ストレージアカウントがパブリックネットワークへのアクセスを許可している場合にこのオプションを使用してください。
-        -   **Private Link**：Azure プライベートエンドポイント経由で接続し、ネットワークから隔離されたアクセスを実現します。ストレージアカウントがパブリックアクセスをブロックしている場合、またはセキュリティポリシーでプライベート接続が必要な場合にこのオプションを使用します。**Private Link**を選択した場合は、追加フィールド**「Azure Blob Storage リソース ID」**も入力する必要があります。リソース ID を確認するには：
+        -   **Private Link**：Azure プライベートエンドポイント経由で接続し、ネットワークから隔離されたアクセスを実現します。ストレージアカウントがパブリックアクセスをブロックしている場合、またはセキュリティポリシーでプライベート接続が必要な場合にこのオプションを使用します。**Private Link**を選択した場合は、追加フィールド**Azure Blob Storage リソース ID**も入力する必要があります。リソース ID を確認するには：
 
             1.  [Azureポータル](https://portal.azure.com/)にアクセスします。
             2.  ストレージアカウントに移動し、 **Overview** &gt; **JSON View**をクリックします。
@@ -245,7 +245,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     2.  **Networking** &gt; **Private endpoint connections**をクリックします。
 
-    3.  TiDB Cloudからの保留中の接続要求を見つけて、 **「承認」**をクリックします。
+    3.  TiDB Cloudからの保留中の接続要求を見つけて、 **承認**をクリックします。
 
     4.  [TiDB Cloudコンソール](https://tidbcloud.com/)に戻ります。エンドポイントが承認されると、インポート ウィザードが自動的に続行されます。
 
@@ -259,7 +259,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     > **Note:**
     >
-    > **Source URI**で単一のファイルを指定すると、 TiDB Cloudは**「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する」**オプションを表示せず、**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
+    > **Source URI**で単一のファイルを指定すると、 TiDB Cloudは**自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する**オプションを表示せず、**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
 
     -   TiDB Cloud が[TiDBファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**Parquet**を選択します。ソースフォルダにスキーマファイル ( `${db_name}-schema-create.sql`や`${db_name}.${table_name}-schema.sql`など) が含まれている場合、 TiDB Cloud は、ターゲットデータベースとテーブルがまだ存在しない場合に、それらを使用して作成します。
 

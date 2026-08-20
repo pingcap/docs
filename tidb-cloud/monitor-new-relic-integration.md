@@ -26,7 +26,7 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 
 -   New Relicとの連携機能は、現在[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでのみ利用可能です。
 
--   クラスターの状態が**CREATING** 、 **「復元中」** 、 **PAUSED** 、 **RESUMING**の場合は、New Relic の統合は利用できません。
+-   クラスターの状態が**CREATING** 、 **復元中** 、 **PAUSED** 、 **RESUMING**の場合は、New Relic の統合は利用できません。
 
 -   New Relicとの連携が確立されたクラスターが削除されると、それに関連付けられた連携サービスも削除されます。
 
@@ -61,7 +61,7 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  左側のナビゲーションペインで、 **「プロジェクト設定」**の下にある**Project Settings**をクリックします。
+3.  左側のナビゲーションペインで、 **プロジェクト設定**の下にある**Project Settings**をクリックします。
 
 4.  **統合**ページで、 **[New Relic との統合 (ベータ版)]**をクリックします。
 
@@ -115,9 +115,9 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
         >
         > 統合エラーを回避するために、JSON ファイル内のすべての`"accountIds"`フィールドにアカウント ID が追加されていることを確認してください。
 
-2.  [New Relic](https://one.newrelic.com/)にログインし、左側のナビゲーションバーの**Dashboards**をクリックし、右上隅の**「ダッシュボードのインポート」**をクリックします。
+2.  [New Relic](https://one.newrelic.com/)にログインし、左側のナビゲーションバーの**Dashboards**をクリックし、右上隅の**ダッシュボードのインポート**をクリックします。
 
-3.  表示されたダイアログで、準備した JSON ファイルの内容をすべてテキスト エリアに貼り付け、次に**「ダッシュボードのインポート」**をクリックします。
+3.  表示されたダイアログで、準備した JSON ファイルの内容をすべてテキスト エリアに貼り付け、次に**ダッシュボードのインポート**をクリックします。
 
 </div>
 <div label="Legacy project-level New Relic integration (Beta)">

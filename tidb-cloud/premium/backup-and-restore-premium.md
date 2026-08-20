@@ -236,7 +236,7 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
     </div>
      </SimpleTab>
 
-4.  **Next**をクリックして、 **「新しいインスタンスへの復元」**ページに進んでください。
+4.  **Next**をクリックして、 **新しいインスタンスへの復元**ページに進んでください。
 
 5. 新しい {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスを復元用に構成します。手順は <CustomContent plan="premium">[{{{ .premium }}} インスタンスの作成](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent> を参照してください。
 

@@ -159,7 +159,7 @@ TiDB Cloud Vercel 統合経由で接続するには、 [Vercelの統合マーケ
 [TiDB Cloud Vercelとの統合](https://vercel.com/integrations/tidb-cloud)をインストールしている場合は、統合内の接続を追加または削除できます。
 
 1.  Vercelダッシュボードで、 **Integrations**をクリックします。
-2.  TiDB Cloudのエントリで**「管理」**をクリックします。
+2.  TiDB Cloudのエントリで**管理**をクリックします。
 3.  **Configure**をクリックします。
 4.  接続を追加または削除するには、 **Add Link**または**Remove**をクリックします。
 

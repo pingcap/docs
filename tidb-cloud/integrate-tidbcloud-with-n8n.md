@@ -60,7 +60,7 @@ TiDB Cloudノードは、npmリポジトリでは`n8n-nodes-tidb-cloud`という
 2.  **Settings**&gt;**Community nodes**に移動してください。
 3.  **Install a community node**をクリックしてください。
 4.  **npm Package Name**フィールドに`n8n-nodes-tidb-cloud`と入力します。
-5.  **「インストール」**をクリックしてください。
+5.  **インストール**をクリックしてください。
 
 その後、**TiDB Cloud**の検索バーで**TiDB Cloud**ノードを検索し、ワークスペースにドラッグすることでTiDB Cloudノードを使用できます。
 
@@ -104,7 +104,7 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、このノ�
 #### ワークフローの開始点として手動トリガーを使用する {#use-a-manual-trigger-as-the-workflow-s-starter}
 
 1.  ワークフローがまだ作成されていない場合は、**Workflows**パネルに移動して、 **Start from scratch**をクリックしてください。既にワークフローを作成している場合は、この手順をスキップしてください。
-2.  右上隅の**「+」**をクリックして、 `schedule trigger`を検索します。
+2.  右上隅の**+**をクリックして、 `schedule trigger`を検索します。
 3.  手動トリガーノードをワークスペースにドラッグし、ノードをダブルクリックします。**パラメーター**ダイアログが表示されます。
 4.  ルールを以下のように設定してください。
 
@@ -117,7 +117,7 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、このノ�
 
 #### データ挿入に使用するテーブルを作成します。 {#create-a-table-used-to-insert-data}
 
-1.  手動トリガーノードの右側にある**「+」**をクリックします。
+1.  手動トリガーノードの右側にある**+**をクリックします。
 
 2.  `TiDB Cloud`を検索してワークスペースに追加します。
 
@@ -145,24 +145,24 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、このノ�
 
 #### Hacker NewsのRSSフィードを入手する {#get-the-hacker-news-rss}
 
-1.  TiDB Cloudノードの右側にある**「+」**をクリックします。
+1.  TiDB Cloudノードの右側にある**+**をクリックします。
 2.  `RSS Read`を検索してワークスペースに追加します。
 3.  **URL**ボックスに`https://hnrss.org/frontpage`と入力します。
 
 #### TiDBにデータを挿入する {#insert-data-to-tidb}
 
-1.  RSS Readノードの右側にある**「+」**をクリックしてください。
+1.  RSS Readノードの右側にある**+**をクリックしてください。
 2.  `TiDB Cloud`を検索してワークスペースに追加します。
 3.  以前のTiDB Cloudノードで入力した認証情報を選択してください。
 4.  **Project**一覧から、プロジェクトを選択してください。
 5.  **操作**リストで、 `Insert`を選択します。
 6.  **Cluster** 、 **User** 、 **Database** 、 **Password**の各ボックスに、それぞれ対応する値を入力してください。
 7.  **Table**ボックスに、 `hacker_news_briefing`表を入力します。
-8.  **「列」**ボックスに`creator, title, link, pubdate, comments, content, guid, isodate`と入力します。
+8.  **列**ボックスに`creator, title, link, pubdate, comments, content, guid, isodate`と入力します。
 
 #### メッセージを作成する {#build-message}
 
-1.  RSSフィードの「読む」ノードの右側にある**「+」**をクリックします。
+1.  RSSフィードの「読む」ノードの右側にある**+**をクリックします。
 2.  `code`を検索してワークスペースに追加します。
 3.  `Run Once for All Items`モードを選択してください。
 4.  **JavaScript**ボックスに、以下のコードをコピー＆ペーストしてください。
@@ -198,7 +198,7 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、このノ�
 
 #### Gmailでメッセージを送信 {#send-message-by-gmail}
 
-1.  コードノードの右側にある**「+」**をクリックします。
+1.  コードノードの右側にある**+**をクリックします。
 2.  `gmail`を検索してワークスペースに追加します。
 3.  Gmail ノードの認証情報を入力します。詳細な手順については、 [n8nドキュメント](https://docs.n8n.io/integrations/builtin/credentials/google/oauth-single-service/)ドキュメントを参照してください。
 4.  **Resource**リストで、 `Message`を選択します。

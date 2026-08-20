@@ -115,12 +115,12 @@ Alibaba Cloud RDSをデータソースとして使用する場合、すべての
 
 <CustomContent plan="dedicated">
 
--   増分データ移行中に、移行対象のテーブルが既にターゲットデータベースに重複キーで存在する場合、エラーが報告され、移行は中断されます。この場合、MySQLソースデータが正確であることを確認する必要があります。データが正確であれば、移行ジョブの**「再開」**ボタンをクリックすると、移行ジョブはターゲットのTiDB Cloud Dedicatedクラスタ内の競合レコードをMySQLソースレコードに置き換えます。
+-   増分データ移行中に、移行対象のテーブルが既にターゲットデータベースに重複キーで存在する場合、エラーが報告され、移行は中断されます。この場合、MySQLソースデータが正確であることを確認する必要があります。データが正確であれば、移行ジョブの**再開**ボタンをクリックすると、移行ジョブはターゲットのTiDB Cloud Dedicatedクラスタ内の競合レコードをMySQLソースレコードに置き換えます。
 
 </CustomContent>
 <CustomContent plan="essential">
 
--   増分データ移行中に、移行対象のテーブルが既にターゲットデータベースに重複キーで存在する場合、エラーが報告され、移行は中断されます。この場合、MySQLソースデータが正確であることを確認する必要があります。データが正確であれば、移行ジョブの**「再開」**ボタンをクリックすると、移行ジョブはターゲットのTiDB Cloud Essentialインスタンス内の競合レコードをMySQLソースレコードに置き換えます。
+-   増分データ移行中に、移行対象のテーブルが既にターゲットデータベースに重複キーで存在する場合、エラーが報告され、移行は中断されます。この場合、MySQLソースデータが正確であることを確認する必要があります。データが正確であれば、移行ジョブの**再開**ボタンをクリックすると、移行ジョブはターゲットのTiDB Cloud Essentialインスタンス内の競合レコードをMySQLソースレコードに置き換えます。
 -   増分データ移行 (進行中の変更をTiDB Cloud Essentialインスタンスに移行する) 中に、移行ジョブが突然のエラーから回復した場合、60 秒間セーフ モードに入ることがあります。セーフ モード中、 TiDB Cloudは`INSERT`ステートメントを`REPLACE`に、 `UPDATE`ステートメントを`DELETE`および`REPLACE`に移行し、これらのトランザクションをターゲットのTiDB Cloud Essentialインスタンスに適用して、突然のエラー中に発生したすべてのデータが安全にターゲットに到達するようにします。ソース テーブルに主キーまたは null 以外の一意インデックスがない場合、ターゲットのTiDB Cloud Essentialインスタンスで重複した行が発生する可能性があります。
 
 </CustomContent>
@@ -280,7 +280,7 @@ SHOW VARIABLES WHERE Variable_name IN
 
 1.  [ApsaraDB RDSコンソール](https://rds.console.aliyun.com/)で、インスタンスのリージョンを選択し、RDS for MySQL インスタンスの ID をクリックします。
 
-2.  左側のナビゲーションペインで**「パラメーター」**をクリックし、各パラメーターを検索して、次の値を設定します。
+2.  左側のナビゲーションペインで**パラメーター**をクリックし、各パラメーターを検索して、次の値を設定します。
 
     -   `binlog_row_image` : `FULL`
 
@@ -423,7 +423,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
     arn:aws:iam::886436925895:root
     ```
 
-    この手順を行わないと、 TiDB Cloud はサービスに接続する VPC エンドポイントを作成できず、 TiDB Cloudの**「外部サービス用のプライベートエンドポイントの作成」**ダイアログがエラーメッセージも表示されずに永久に停止してしまいます。
+    この手順を行わないと、 TiDB Cloud はサービスに接続する VPC エンドポイントを作成できず、 TiDB Cloudの**外部サービス用のプライベートエンドポイントの作成**ダイアログがエラーメッセージも表示されずに永久に停止してしまいます。
 
     詳細な手順については、AWS ドキュメントの[権限を管理する](https://docs.aws.amazon.com/vpc/latest/privatelink/configure-endpoint-service.html#add-remove-permissions)を参照してください。
 
@@ -443,7 +443,7 @@ Azure Database for MySQL - Flexible Server は、ネイティブのプライベ�
 
 新しいプライベートエンドポイントを追加するには、以下の手順を実行してください。
 
-1.  [Azureポータル](https://portal.azure.com/)で、 **「Azure Database for MySQL サーバー」**を検索して選択し、インスタンス名をクリックしてから、左側のナビゲーション ペインで**Setting** &gt; **Networking**をクリックします。
+1.  [Azureポータル](https://portal.azure.com/)で、 **Azure Database for MySQL サーバー**を検索して選択し、インスタンス名をクリックしてから、左側のナビゲーション ペインで**Setting** &gt; **Networking**をクリックします。
 
 2.  **Networking**ページで、**Private endpoints**セクションまでスクロールダウンし、 **+ Create private endpoint**をクリックして、画面の指示に従ってプライベートエンドポイントを設定します。
 
@@ -509,7 +509,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
     arn:aws:iam::886436925895:root
     ```
 
-    この手順を行わないと、 TiDB Cloud はサービスに接続する VPC エンドポイントを作成できず、 TiDB Cloudの**「外部サービス用のプライベートエンドポイントの作成」**ダイアログがエラーメッセージも表示されずに永久に停止してしまいます。
+    この手順を行わないと、 TiDB Cloud はサービスに接続する VPC エンドポイントを作成できず、 TiDB Cloudの**外部サービス用のプライベートエンドポイントの作成**ダイアログがエラーメッセージも表示されずに永久に停止してしまいます。
 
     詳細な手順については、AWS ドキュメントの[権限を管理する](https://docs.aws.amazon.com/vpc/latest/privatelink/configure-endpoint-service.html#add-remove-permissions)を参照してください。
 
@@ -533,7 +533,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
 
 3.  **AWS 外部サービス用プライベートエンドポイントの**セクションで、 **[外部サービス用プライベートエンドポイントの作成]**をクリックします。
 
-4.  **「外部サービス用のプライベートエンドポイントの作成」**ダイアログで、プライベートエンドポイントの名前と、MySQLソースデータベース用にAWS PrivateLinkをセットアップした際にコピーした**Endpoint Service Name**を入力します。
+4.  **外部サービス用のプライベートエンドポイントの作成**ダイアログで、プライベートエンドポイントの名前と、MySQLソースデータベース用にAWS PrivateLinkをセットアップした際にコピーした**Endpoint Service Name**を入力します。
 
     > **Note:**
     >
@@ -714,7 +714,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
     -   選択した**Connectivity method**に基づいて、以下の手順を実行してください。
 
-        -   **「公開」**を選択した場合は、 **Hostname or IP address**フィールドにデータソースのホスト名またはIPアドレスを入力してください。
+        -   **公開**を選択した場合は、 **Hostname or IP address**フィールドにデータソースのホスト名またはIPアドレスを入力してください。
         -   **Private Link**が選択されている場合は、[プライベートリンク[プライベートリンクまたはプライベートエンドポイント](#private-link-or-private-endpoint)セクションで作成したプライベート リンク接続を選択します。
 
     </CustomContent>
@@ -722,7 +722,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
     -   選択した**Connectivity method**に基づいて、以下の手順を実行してください。
 
-        -   **「公開」**を選択した場合は、 **Hostname or IP address**フィールドにデータソースのホスト名またはIPアドレスを入力してください。
+        -   **公開**を選択した場合は、 **Hostname or IP address**フィールドにデータソースのホスト名またはIPアドレスを入力してください。
         -   **Private Link**が選択されている場合は、 **Private Endpoint**フィールドで既存のプライベート エンドポイントを選択するか、 **[ここでプライベート エンドポイントを作成] をクリックしてプライベート エンドポイント**を作成します。プライベート エンドポイントは、 TiDB Cloud Premium インスタンスの**Networking** &gt; **[AWS 外部サービス用プライベートエンドポイント]**で管理されます。プライベート エンドポイントは、複数のデータ移行ジョブおよび変更フィード間で再利用できます。設定の詳細については、[プライベートリンクまたはプライベートエンドポイント](#private-link-or-private-endpoint)をご覧ください。
 
     </CustomContent>
@@ -933,7 +933,7 @@ TiDB Cloud Premiumへのデータ移行を一度で完了させるには、 **Fu
 
 ## ステップ6：仕様を選択して移行を開始する {#step-6-choose-a-spec-and-start-migration}
 
-**「仕様を選択して移行を開始」**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [データ移行の仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)を参照してください。
+**仕様を選択して移行を開始**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [データ移行の仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)を参照してください。
 
 仕様を選択したら、 **Create Job and Start**をクリックして移行を開始します。
 

@@ -42,7 +42,7 @@ TiDB Cloud Starter、 Essential、またはPremiumインスタンスがAmazon S3
 
     -   データをAmazon S3にエクスポートする場合は、次のように**Add New ARN**ダイアログを開きます。
 
-        1.  **Export data to...** &gt; **Amazon S3**をクリックします。TiDB Cloud StarterまたはEssentialインスタンスでこれまでデータのインポートまたはエクスポートが行われていない場合は、ページ下部の**「ここをクリックしてデータをエクスポート...」** &gt; **Amazon S3**をクリックしてください。
+        1.  **Export data to...** &gt; **Amazon S3**をクリックします。TiDB Cloud StarterまたはEssentialインスタンスでこれまでデータのインポートまたはエクスポートが行われていない場合は、ページ下部の**ここをクリックしてデータをエクスポート...** &gt; **Amazon S3**をクリックしてください。
         2.  **Folder URI**欄に入力してください。
         3.  **AWS Role ARN**を選択し、[**ここをクリックして AWS CloudFormation を使用して新しいロールを作成します] をクリックします**。
 
@@ -61,7 +61,7 @@ TiDB Cloud Starter、 Essential、またはPremiumインスタンスがAmazon S3
 
 3.  AWS CloudFormationテンプレートを使用してロールARNを作成します。
 
-    1.  **Add New ARN**ダイアログで、 **「CloudFormation テンプレートを使用した AWS コンソール」**をクリックします。
+    1.  **Add New ARN**ダイアログで、 **CloudFormation テンプレートを使用した AWS コンソール**をクリックします。
 
     2.  [AWS マネジメントコンソール](https://console.aws.amazon.com)コンソールにログインすると、AWS CloudFormation の**Quick create stack**ページにリダイレクトされます。
 
@@ -77,7 +77,7 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
 <details><summary>詳細はこちらをクリックしてください</summary>
 
-1.  前の手順で説明した**Add New ARN**ダイアログで、 **「問題が発生しましたか？ロール ARN を手動で作成します」**をクリックします。**TiDB Cloud Account ID**と**TiDB Cloud External ID**が取得されます。
+1.  前の手順で説明した**Add New ARN**ダイアログで、 **問題が発生しましたか？ロール ARN を手動で作成します**をクリックします。**TiDB Cloud Account ID**と**TiDB Cloud External ID**が取得されます。
 
 2.  AWS マネジメントコンソールで、Amazon S3 バケット用のマネージドポリシーを作成します。
 
@@ -163,7 +163,7 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
     2.  役割を作成するには、以下の情報を入力してください。
 
         -   **Trusted entity type**で**AWS account**を選択します。
-        -   **「AWSアカウント」**で**Another AWS account**を選択し、 TiDB CloudアカウントIDを**Account ID**フィールドに貼り付けます。
+        -   **AWSアカウント**で**Another AWS account**を選択し、 TiDB CloudアカウントIDを**Account ID**フィールドに貼り付けます。
         -   **[オプション]**で、 **[外部 ID が必要 (サードパーティがこの役割を引き受ける場合のベスト プラクティス)]**をクリックし、 TiDB Cloud外部 ID を**External ID**フィールドに貼り付けます。<CustomContent plan="starter,essential">ロールが外部IDを必須とせずに作成された場合、プロジェクト内のいずれかのTiDB Cloud StarterまたはEssentialインスタンスの設定が完了すると、そのプロジェクト内のすべてのTiDB Cloud StarterおよびEssentialインスタンスは同じロールARNを使用してAmazon S3バケットにアクセスできます。ロールがアカウントIDと外部IDの両方を使用して作成された場合、対応するTiDB Cloud StarterまたはEssentialインスタンスのみがバケットにアクセスできます。</CustomContent>
 
     3.  **Next**をクリックしてポリシー一覧を開き、先ほど作成したポリシーを選択してから**Next**をクリックします。
@@ -245,7 +245,7 @@ Azure ARMテンプレートを使用してSASトークンを作成するには�
 
     2.  対象のTiDB Cloudリソースの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**または**Data** &gt; **Export**をクリックします。
 
-2.  **「ARMテンプレート展開による新しいSASトークンの生成」**ダイアログを開きます。
+2.  **ARMテンプレート展開による新しいSASトークンの生成**ダイアログを開きます。
 
     -   Azure Blob Storage からデータをインポートする場合：
 
@@ -257,7 +257,7 @@ Azure ARMテンプレートを使用してSASトークンを作成するには�
 
     -   データをAzure Blob Storageにエクスポートする場合：
 
-        1.  **Export data to...** &gt; **Azure Blob Storage**をクリックします。TiDB Cloud StarterまたはEssentialインスタンスでこれまでデータのインポートまたはエクスポートが行われていない場合は、ページ下部の**「データのエクスポート先...」** &gt; **Azure Blob Storage**をクリックしてください。
+        1.  **Export data to...** &gt; **Azure Blob Storage**をクリックします。TiDB Cloud StarterまたはEssentialインスタンスでこれまでデータのインポートまたはエクスポートが行われていない場合は、ページ下部の**データのエクスポート先...** &gt; **Azure Blob Storage**をクリックしてください。
         2.  **Azure Blob Storage Settings**エリアまでスクロールダウンし、SAS トークンフィールドの下にある**[ここをクリックして、Azure ARM テンプレートを使用して新しいものを作成する] をクリックします**。
 
     </CustomContent>
@@ -274,7 +274,7 @@ Azure ARMテンプレートを使用してSASトークンを作成するには�
 
 3.  Azure ARMテンプレートを使用してSASトークンを作成します。
 
-    1.  **「ARM テンプレート展開による新しい SAS トークンの生成」**ダイアログで、[クリック**] をクリックして、事前構成済みの ARM テンプレートを含む Azure ポータルを開きます**。
+    1.  **ARM テンプレート展開による新しい SAS トークンの生成**ダイアログで、[クリック**] をクリックして、事前構成済みの ARM テンプレートを含む Azure ポータルを開きます**。
 
     2.  Azureにログインすると、Azure**Custom deployment**ページにリダイレクトされます。
 
@@ -331,7 +331,7 @@ TiDB CloudがAlibaba Cloud OSSバケットにアクセスできるようにす�
 
 2.  必要な権限を持つカスタム ポリシーを作成します。詳細については、 [カスタムポリシーを作成する](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy)を参照してください。
 
-    -   **Effect**セクションで**「許可」**を選択します。
+    -   **Effect**セクションで**許可**を選択します。
 
     -   **Service**セクションで、 **Object Storage Service**を選択します。
 

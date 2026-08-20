@@ -86,7 +86,7 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 
     ![Fill in the endpoint configurations](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-endpoint-config.png)
 
-6.  **Endpoint settings**、 **KMS key**、**Tags**にはデフォルト値を使用してください。**Test endpoint connection (optional)**セクションでは、ネットワーク構成を簡素化するために、ソースデータベースと同じVPCを選択することをお勧めします。対応するレプリケーションインスタンスを選択し、 **Run test**をクリックします。ステータスが**「成功」**である必要があります。
+6.  **Endpoint settings**、 **KMS key**、**Tags**にはデフォルト値を使用してください。**Test endpoint connection (optional)**セクションでは、ネットワーク構成を簡素化するために、ソースデータベースと同じVPCを選択することをお勧めします。対応するレプリケーションインスタンスを選択し、 **Run test**をクリックします。ステータスが**成功**である必要があります。
 
 7.  **Create endpoint**をクリックします。
 
@@ -100,11 +100,11 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 
 2.  TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のリソース名をクリックしてから、右上隅の**Connect**をクリックすると、 TiDB Cloudデータベースの接続情報が表示されます。
 
-3.  ダイアログの**「ステップ 1: トラフィック フィルタの作成」**で、 **Edit**をクリックし、AWS DMS コンソールからコピーしたパブリック IP アドレスとプライベート IP アドレスを入力して、 **Update Filter**をクリックします。AWS DMS レプリケーション インスタンスのパブリック IP アドレスとプライベート IP アドレスを TiDB クラスタのトラフィック フィルタに同時に追加することをお勧めします。そうしないと、状況によっては AWS DMS が TiDB クラスタに接続できない場合があります。
+3.  ダイアログの**ステップ 1: トラフィック フィルタの作成**で、 **Edit**をクリックし、AWS DMS コンソールからコピーしたパブリック IP アドレスとプライベート IP アドレスを入力して、 **Update Filter**をクリックします。AWS DMS レプリケーション インスタンスのパブリック IP アドレスとプライベート IP アドレスを TiDB クラスタのトラフィック フィルタに同時に追加することをお勧めします。そうしないと、状況によっては AWS DMS が TiDB クラスタに接続できない場合があります。
 
 4.  **Download CA cert**をクリックします。ダイアログの**[ステップ3：SQLクライアントで接続する**]で、接続文字列内の`-u` 、 `-h` 、および`-P`情報を後で使用するためにメモしておきます。
 
-5.  ダイアログの**VPC Peering**タブをクリックし、 **「ステップ1：VPCの設定**」の下にある**「追加」**をクリックして、TiDBクラスターとAWS DMSのVPCピアリング接続を作成します。
+5.  ダイアログの**VPC Peering**タブをクリックし、 **「ステップ1：VPCの設定**」の下にある**追加**をクリックして、TiDBクラスターとAWS DMSのVPCピアリング接続を作成します。
 
 6.  対応する情報を設定します。 [VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
 
@@ -132,7 +132,7 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 
     ![Upload CA](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-upload-ca.png)
 
-10. **Endpoint settings**、 **KMS key**、**Tags**にはデフォルト値を使用します。**Test endpoint connection (optional)**セクションで、ソースデータベースと同じVPCを選択します。対応するレプリケーションインスタンスを選択し、 **Run test**をクリックします。ステータスが**「成功」**である必要があります。
+10. **Endpoint settings**、 **KMS key**、**Tags**にはデフォルト値を使用します。**Test endpoint connection (optional)**セクションで、ソースデータベースと同じVPCを選択します。対応するレプリケーションインスタンスを選択し、 **Run test**をクリックします。ステータスが**成功**である必要があります。
 
 11. **Create endpoint**をクリックします。
 
@@ -151,7 +151,7 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
     -   **Replication instance**：先ほど作成したAWS DMSインスタンスを選択します。
     -   **Source database endpoint**：先ほど作成したソースデータベースエンドポイントを選択してください。
     -   **Target database endpoint**：先ほど作成したターゲットデータベースエンドポイントを選択してください。
-    -   **Migration type**：必要に応じて移行タイプを選択してください。この例では、 **「既存データの移行と進行中の変更の複製」**を選択します。
+    -   **Migration type**：必要に応じて移行タイプを選択してください。この例では、 **既存データの移行と進行中の変更の複製**を選択します。
 
     ![Task configurations](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-config.png)
 

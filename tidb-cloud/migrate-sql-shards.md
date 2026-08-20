@@ -185,7 +185,7 @@ Amazon S3へのアクセスを設定した後、 TiDB Cloudコンソールで次
 
     2.  ターゲットの<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>の名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Data** &gt; **Import**をクリックします。
 
-2.  **「クラウドストレージからデータをインポート」**を選択し、次に**Amazon S3**をクリックします。
+2.  **クラウドストレージからデータをインポート**を選択し、次に**Amazon S3**をクリックします。
 
 3.  **Amazon S3からデータをインポートする**ページで、以下の情報を入力してください。
 
@@ -205,7 +205,7 @@ Amazon S3へのアクセスを設定した後、 TiDB Cloudコンソールで次
 
     複数のファイルをインポートする場合、 **Advanced Settings** ＞ **Mapping Settings**を使用して、各ターゲットテーブルとその対応するCSVファイルごとにカスタムマッピングルールを定義できます。その後、データソースファイルは、指定されたカスタムマッピングルールを使用して再スキャンされます。
 
-    ソースファイルURIと名前を**「ソースファイルURIと名前」**に入力する際は、 `s3://[bucket_name]/[data_source_folder]/[file_name].csv`の形式になっていることを確認してください。例: `s3://sampledata/ingest/TableName.01.csv` 。
+    ソースファイルURIと名前を**ソースファイルURIと名前**に入力する際は、 `s3://[bucket_name]/[data_source_folder]/[file_name].csv`の形式になっていることを確認してください。例: `s3://sampledata/ingest/TableName.01.csv` 。
 
     ワイルドカードを使用してソースファイルを照合することもできます。例：
 

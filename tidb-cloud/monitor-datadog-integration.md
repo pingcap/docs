@@ -34,7 +34,7 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 
 -   Datadog統合は、[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは利用できません。
 
--   クラスターの状態が**CREATING** 、 **「復元中」** 、 **PAUSED** 、 **RESUMING**の場合は、Datadog の統合は利用できません。
+-   クラスターの状態が**CREATING** 、 **復元中** 、 **PAUSED** 、 **RESUMING**の場合は、Datadog の統合は利用できません。
 
 -   Datadogとの統合が設定されているクラスターが削除されると、それに関連付けられている統合サービスも削除されます。
 
@@ -69,7 +69,7 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  左側のナビゲーションペインで、 **「プロジェクト設定」**の下にある**Project Settings**をクリックします。
+3.  左側のナビゲーションペインで、 **プロジェクト設定**の下にある**Project Settings**をクリックします。
 
 4.  **統合**ページで、 **Integration to Datadog (BETA)**をクリックします。
 
@@ -101,7 +101,7 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 ## 事前に構築されたダッシュボードを確認する {#view-the-pre-built-dashboard}
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、 **Integrations**ページに移動します。
-2.  **Datadog**セクションの**「ダッシュボード」**リンクをクリックしてください。
+2.  **Datadog**セクションの**ダッシュボード**リンクをクリックしてください。
 
     -   クラスタレベルのDatadog統合の場合、**Dashboard**リンクをクリックすると、拡張バージョンで導入された最新のメトリクスを含む新しいダッシュボードが開きます。
     -   従来のプロジェクトレベルのDatadog統合（ベータ版）の場合、**Dashboard**リンクをクリックすると従来のダッシュボードが開きますが、そこにはクラスタレベルのDatadog統合で導入された最新のメトリクスは含まれていません。

@@ -73,7 +73,7 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の AWS �
 
     3.  **DB Audit Logging**ページで、右上隅の**Enable**をクリックします。
 
-    4.  **「データベース監査ログストレージ設定」**ダイアログで、 **AWS IAM Policy Settings**セクションを見つけて、後で使用するために**TiDB Cloud Account ID**と**TiDB Cloud External ID**を記録します。
+    4.  **データベース監査ログストレージ設定**ダイアログで、 **AWS IAM Policy Settings**セクションを見つけて、後で使用するために**TiDB Cloud Account ID**と**TiDB Cloud External ID**を記録します。
 
 2.  [AWS Management Console](https://console.aws.amazon.com/)で、 **IAM** &gt; **Access Management** &gt; **Policies**に移動し、書き込み専用権限`s3:PutObject`を持つIAMポリシーがあるかどうかを確認します。
 
