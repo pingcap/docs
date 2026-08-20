@@ -121,7 +121,7 @@ TiDB Dumplingを使用してデフォルト設定でSQLファイルをエクス�
 
 ソースデータファイル（CSVまたはParquet）が命名規則に準拠していない場合は、ファイル名パターンを使用してソースデータファイルをターゲットテーブルに手動でマッピングできます。この機能は、 Aurora SnapshotおよびSQLデータファイルには対応していません。
 
-インポートウィザードの**Destination Mapping**ステップで、 **「TiDB ファイル命名規則を使用して自動マッピングを行う」**の選択を解除し、 **「ソース」** 、 **Target Database** 、 **Target Table**の各フィールドに入力します。**「ソース」**フィールドには`*`および`?`ワイルドカードをサポートするファイル名パターンを指定できます。
+インポートウィザードの**Destination Mapping**ステップで、 **TiDB ファイル命名規則を使用して自動マッピングを行う**の選択を解除し、 **ソース** 、 **Target Database** 、 **Target Table**の各フィールドに入力します。**ソース**フィールドには`*`および`?`ワイルドカードをサポートするファイル名パターンを指定できます。
 
 -   CSV ファイルについては[ステップ4. CSVファイルをTiDB Cloudにインポートする](/tidb-cloud/import-csv-files.md#step-4-import-csv-files-to-tidb-cloud)。
 -   Parquet ファイルについては、 [ステップ4. ParquetファイルをTiDB Cloudにインポートする](/tidb-cloud/import-parquet-files.md#step-4-import-parquet-files-to-tidb-cloud)。

@@ -57,13 +57,13 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
 
 2.  スキーマ レジストリ エンドポイントを記録します。
 
-    Confluent Cloud Console で、 **「スキーマレジストリ」** &gt; **「API エンドポイント」**を選択します。スキーマレジストリエンドポイントを記録します。以下は例です。
+    Confluent Cloud Console で、 **スキーマレジストリ** &gt; **API エンドポイント**を選択します。スキーマレジストリエンドポイントを記録します。以下は例です。
 
         https://yyy-yyyyy.us-east-2.aws.confluent.cloud
 
 3.  スキーマ レジストリ API キーを作成します。
 
-    Confluent Cloud Console で、 **「スキーマレジストリ」** &gt; **「API 認証情報」**を選択します。 **「編集」**をクリックし、 **「キーの作成」**をクリックします。
+    Confluent Cloud Console で、 **スキーマレジストリ** &gt; **API 認証情報**を選択します。 **編集**をクリックし、 **キーの作成**をクリックします。
 
     作成後、次に示すようにキー ペア ファイルが生成されます。
 
@@ -148,7 +148,7 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
 
     ![Confluent topics](/media/integrate/confluent-topics.png)
 
-    Confluent Cloud コンソールで、 **「トピック」**をクリックします。対象のトピックが作成され、データを受信して​​いることがわかります。この時点で、TiDB データベースの増分データが Confluent Cloud に正常に複製されています。
+    Confluent Cloud コンソールで、 **トピック**をクリックします。対象のトピックが作成され、データを受信して​​いることがわかります。この時点で、TiDB データベースの増分データが Confluent Cloud に正常に複製されています。
 
 ## Snowflakeとデータを統合する {#integrate-data-with-snowflake}
 
@@ -163,9 +163,9 @@ Snowflakeはクラウドネイティブなデータウェアハウスです。Co
 
 1.  Snowflake でデータベースとスキーマを作成します。
 
-    Snowflakeコントロールコンソールで、 **「データ」** &gt; **「データベース」**を選択します。`TPCC`名前のデータベースと`TiCDC`という名前のスキーマを作成します。
+    Snowflakeコントロールコンソールで、 **データ** &gt; **データベース**を選択します。`TPCC`名前のデータベースと`TiCDC`という名前のスキーマを作成します。
 
-2.  Confluent Cloud Consoleで、 **「データ統合」** &gt; **「コネクタ」** &gt; **Snowflake Sink**を選択します。以下のページが表示されます。
+2.  Confluent Cloud Consoleで、 **データ統合** &gt; **コネクタ** &gt; **Snowflake Sink**を選択します。以下のページが表示されます。
 
     ![Add snowflake sink connector](/media/integrate/add-snowflake-sink-connector.png)
 
@@ -177,11 +177,11 @@ Snowflakeはクラウドネイティブなデータウェアハウスです。Co
 
     ![Configuration](/media/integrate/configuration.png)
 
-5.  **コンフィグレーション**ページで、**入力Kafkaレコード値の形式**と**入力Kafkaレコードキーの形式**の両方に`AVRO`選択します。次に、 **「続行」**をクリックします。コネクタが作成され、ステータスが**「実行中」**になるまでお待ちください。これには数分かかる場合があります。
+5.  **コンフィグレーション**ページで、**入力Kafkaレコード値の形式**と**入力Kafkaレコードキーの形式**の両方に`AVRO`選択します。次に、 **続行**をクリックします。コネクタが作成され、ステータスが**実行中**になるまでお待ちください。これには数分かかる場合があります。
 
     ![Data preview](/media/integrate/data-preview.png)
 
-6.  Snowflakeコンソールで、 **「データ」** &gt; **「データベース」** &gt; **TPCC** &gt; **TiCDC**を選択します。TiDBの増分データがSnowflakeに複製されていることがわかります。Snowflakeとのデータ統合は完了しています（上図を参照）。ただし、Snowflakeのテーブル構造はTiDBとは異なり、データは増分的にSnowflakeに挿入されます。ほとんどのシナリオでは、SnowflakeのデータはTiDBの変更ログを保存するのではなく、TiDBのデータのレプリカであることが想定されます。この問題については、次のセクションで説明します。
+6.  Snowflakeコンソールで、 **データ** &gt; **データベース** &gt; **TPCC** &gt; **TiCDC**を選択します。TiDBの増分データがSnowflakeに複製されていることがわかります。Snowflakeとのデータ統合は完了しています（上図を参照）。ただし、Snowflakeのテーブル構造はTiDBとは異なり、データは増分的にSnowflakeに挿入されます。ほとんどのシナリオでは、SnowflakeのデータはTiDBの変更ログを保存するのではなく、TiDBのデータのレプリカであることが想定されます。この問題については、次のセクションで説明します。
 
 ### SnowflakeでTiDBテーブルのデータレプリカを作成する {#create-data-replicas-of-tidb-tables-in-snowflake}
 
@@ -298,7 +298,7 @@ ksqlDBは、ストリーム処理アプリケーション向けに特別に構�
 
 1.  Confluent Cloud Console で**ksqlDB**を選択し、指示に従って ksqlDB クラスターを作成します。
 
-    ksqlDB クラスターのステータスが**「実行中」**になるまでお待ちください。このプロセスには数分かかります。
+    ksqlDB クラスターのステータスが**実行中**になるまでお待ちください。このプロセスには数分かかります。
 
 2.  ksqlDB エディターで次のコマンドを実行して、 `tidb_tpcc_orders`トピックにアクセスするためのストリームを作成します。
 
@@ -340,7 +340,7 @@ Microsoft SQL Server は、Microsoft が開発したリレーショナルデー�
     (6 rows affected)
     ```
 
-2.  Confluent Cloud Console で、 **「データ統合」** &gt; **「コネクタ」** &gt; **Microsoft SQL Server Sink**を選択します。以下のページが表示されます。
+2.  Confluent Cloud Console で、 **データ統合** &gt; **コネクタ** &gt; **Microsoft SQL Server Sink**を選択します。以下のページが表示されます。
 
     ![Topic selection](/media/integrate/topic-selection.png)
 
@@ -350,7 +350,7 @@ Microsoft SQL Server は、Microsoft が開発したリレーショナルデー�
 
 4.  接続情報と認証情報を入力してください。次のページに進んでください。
 
-5.  **「コンフィグレーション」**ページで次のフィールドを構成し、 **「続行」**をクリックします。
+5.  **コンフィグレーション**ページで次のフィールドを構成し、 **続行**をクリックします。
 
     | フィールド              | 値     |
     | :-------------- | :----- |
@@ -362,7 +362,7 @@ Microsoft SQL Server は、Microsoft が開発したリレーショナルデー�
     | 入力Kafkaレコードキー形式 | Avro    |
     | null の場合に削除     | true     |
 
-6.  設定後、 **「続行」**をクリックします。コネクタのステータスが**「実行中」**になるまで待ちます。これには数分かかる場合があります。
+6.  設定後、 **続行**をクリックします。コネクタのステータスが**実行中**になるまで待ちます。これには数分かかる場合があります。
 
     ![Results](/media/integrate/results.png)
 
