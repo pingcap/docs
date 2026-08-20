@@ -13,7 +13,7 @@ TiDB には、システム内の障害や隠れた問題を検出するための
 >
 > このテーブルは TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
-`information_schema.inspection_result`診断結果表`information_schema.inspection_result`の構造は以下のとおりである。
+`information_schema.inspection_result`診断結果表`information_schema.inspection_result`の構造は以下のとおりです。
 
 ```sql
 USE information_schema;
