@@ -226,7 +226,7 @@ scrape_configs:
 
 -   **`lightning_chunk_parser_read_block_seconds`** (ヒストグラム)
 
-    データ ファイル パーサーがブロックを読み取るために必要な時間のバケット化されたヒストグラム。
+    データファイル パーサーがブロックを読み取るために必要な時間のバケット化されたヒストグラム。
 
 -   **`lightning_checksum_seconds`** （ヒストグラム）
 

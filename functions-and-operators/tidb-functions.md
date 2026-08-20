@@ -65,7 +65,7 @@ summary: TiDB 固有の関数の使用法について学習します。
 
 例:
 
-ユーザー`user1`を作成し、リソース グループ`rg1`と`rg2` 2 つのリソース グループを作成し、ユーザー`user1`リソース グループ`rg1`にバインドします。
+ユーザー`user1`を作成し、リソースグループ`rg1`と`rg2` 2 つのリソースグループを作成し、ユーザー`user1`リソースグループ`rg1`にバインドします。
 
 ```sql
 CREATE USER 'user1';
@@ -74,7 +74,7 @@ CREATE RESOURCE GROUP rg2 RU_PER_SEC = 2000;
 ALTER USER 'user1' RESOURCE GROUP `rg1`;
 ```
 
-`user1`を使用してログインし、現在のユーザーにバインドされているリソース グループを表示します。
+`user1`を使用してログインし、現在のユーザーにバインドされているリソースグループを表示します。
 
 ```sql
 SELECT CURRENT_RESOURCE_GROUP();
@@ -89,7 +89,7 @@ SELECT CURRENT_RESOURCE_GROUP();
 1 row in set (0.00 sec)
 ```
 
-`SET RESOURCE GROUP`を実行して、現在のセッションのリソース グループを`rg2`に設定し、現在のユーザーにバインドされているリソース グループを表示します。
+`SET RESOURCE GROUP`を実行して、現在のセッションのリソースグループを`rg2`に設定し、現在のユーザーにバインドされているリソースグループを表示します。
 
 ```sql
 SET RESOURCE GROUP `rg2`;
@@ -662,7 +662,7 @@ TIDB_ENCODE_RECORD_KEY(<db_name>, <table_name>, <handle_columns>...)
 
 パラメータの説明:
 
--   `<db_name>` : ターゲット テーブルを含むデータベースの名前。
+-   `<db_name>` : ターゲットテーブルを含むデータベースの名前。
 -   `<table_name>` : 対象テーブルの名前。パーティションテーブルの場合は、 `<table_name>`にパーティション名を指定できます（例： `'t(p0)'` ）。
 -   `<handle_columns>...` : 対応する行のハンドル（行キー）値。ハンドルの正確な構成は、テーブルの主キーの種類（例えば、主キーが`CLUSTERED` （共通ハンドル）であるか、非表示列`_tidb_rowid`を使用しているかなど）によって異なります。詳細については、 [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key)の`<handle_columns>...`の説明を参照してください。
 

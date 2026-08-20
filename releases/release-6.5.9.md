@@ -35,7 +35,7 @@ TiDB バージョン: 6.5.9
 
         -   ローリング再起動時のログバックアップのRPO（目標復旧時点）を最適化します。これにより、ローリング再起動時のログバックアップタスクのチェックポイントラグが短縮されます[＃15410](https://github.com/tikv/tikv/issues/15410) @[YuJuncen](https://github.com/YuJuncen) 。
         -   ログバックアップのマージ操作に対する許容度を向上します。比較的長いマージ操作が発生した場合、ログバックアップタスクがエラー状態に陥る可能性が低くなります。 [＃16554](https://github.com/tikv/tikv/issues/16554) @[YuJuncen](https://github.com/YuJuncen)
-        -   チェックポイントの遅延が大きい場合にログ バックアップ タスクを自動的に中止する機能をサポートし、GC の長時間のブロッキングや潜在的なクラスターの問題を回避します[＃50803](https://github.com/pingcap/tidb/issues/50803) @[RidRisR](https://github.com/RidRisR)
+        -   チェックポイントの遅延が大きい場合にログバックアップ タスクを自動的に中止する機能をサポートし、GC の長時間のブロッキングや潜在的なクラスターの問題を回避します[＃50803](https://github.com/pingcap/tidb/issues/50803) @[RidRisR](https://github.com/RidRisR)
         -   リージョンリーダーシップの移行が発生すると、PITR ログバックアップの進行のレイテンシーが長くなるという問題を軽減します[＃13638](https://github.com/tikv/tikv/issues/13638) @[YuJuncen](https://github.com/YuJuncen)
         -   より効率的なアルゴリズムを使用して、データ復元中に SST ファイルをマージする速度を改善します [＃50613](https://github.com/pingcap/tidb/issues/50613) @[Leavrth](https://github.com/Leavrth)
         -   データ復元中に SST ファイルをバッチで取り込むことをサポート[＃16267](https://github.com/tikv/tikv/issues/16267) @[3pointer](https://github.com/3pointer)
@@ -50,7 +50,7 @@ TiDB バージョン: 6.5.9
     -   ドロップされたテーブルがGrafana `Stats Healthy Distribution`パネルでまだカウントされる問題を修正 [＃39349](https://github.com/pingcap/tidb/issues/39349) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     -   SQL文のクエリに`MemTableScan`の演算子が含まれている場合、TiDBがSQL文の`WHERE <column_name>`のフィルタリング条件を処理しない問題を修正しました。 [＃40937](https://github.com/pingcap/tidb/issues/40937) @[zhongzc](https://github.com/zhongzc)
     -   サブクエリの`HAVING`句に相関列が含まれている場合にクエリ結果が正しくない可能性がある問題を修正しました。 [＃51107](https://github.com/pingcap/tidb/issues/51107) @[hawkingrei](https://github.com/hawkingrei)
-    -   共通テーブル式 (CTE) を使用して、統計情報が欠落しているパーティション テーブルにアクセスすると、クエリ結果が正しくなくなる可能性がある問題を修正しました[＃51873](https://github.com/pingcap/tidb/issues/51873) @[qw4990](https://github.com/qw4990)
+    -   共通テーブル式 (CTE) を使用して、統計情報が欠落しているパーティションテーブルにアクセスすると、クエリ結果が正しくなくなる可能性がある問題を修正しました[＃51873](https://github.com/pingcap/tidb/issues/51873) @[qw4990](https://github.com/qw4990)
     -   SQL 文に`JOIN`が含まれ、文内の`SELECT`リストに定数のみが含まれる場合に、MPP を使用してクエリを実行すると、誤ったクエリ結果が返される可能性がある問題を修正しました。 [＃50358](https://github.com/pingcap/tidb/issues/50358) @[yibin87](https://github.com/yibin87)
     -   AUTO_INCREMENT ID を割り当てるときに、 `AUTO_INCREMENT`属性によって不要なトランザクション競合が発生し、ID が連続しなくなる問題を修正しました。 [＃50819](https://github.com/pingcap/tidb/issues/50819) @[tiancaiamao](https://github.com/tiancaiamao)
     -   Grafana の監視メトリック`tidb_statistics_auto_analyze_total`整数として表示されない問題を修正しました [＃51051](https://github.com/pingcap/tidb/issues/51051) @[hawkingrei](https://github.com/hawkingrei)

@@ -320,7 +320,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
       port: 3306
     ```
 
-2.  DM データ ソースを作成します。
+2.  DM データソースを作成します。
 
     ```shell
     tiup dmctl --master-addr 127.0.0.1:8261 operate-source create mysql-01.yaml
@@ -424,7 +424,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
 
     > **Note:**
     >
-    > すべての MySQL データ ファイルを削除する場合は、MySQL データ ディレクトリ (通常は`/opt/homebrew/var/mysql`にあります) を削除します。
+    > すべての MySQL データファイルを削除する場合は、MySQL データ ディレクトリ (通常は`/opt/homebrew/var/mysql`にあります) を削除します。
 
     </div>
 
@@ -439,7 +439,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
 
     > **Note:**
     >
-    > すべての MySQL データ ファイルを削除する場合は、MySQL データ ディレクトリ (通常は`/var/lib/mysql`にあります) を削除します。
+    > すべての MySQL データファイルを削除する場合は、MySQL データ ディレクトリ (通常は`/var/lib/mysql`にあります) を削除します。
 
     </div>
 
@@ -455,7 +455,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
 
     > **Note:**
     >
-    > すべての MySQL データ ファイルを削除する場合は、MySQL データ ディレクトリ (通常は`/var/lib/mysql`にあります) を削除します。
+    > すべての MySQL データファイルを削除する場合は、MySQL データ ディレクトリ (通常は`/var/lib/mysql`にあります) を削除します。
 
     </div>
 

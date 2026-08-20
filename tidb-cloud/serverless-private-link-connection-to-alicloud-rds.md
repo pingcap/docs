@@ -23,7 +23,7 @@ summary: Alibaba Cloud Endpoint Service プライベートリンク接続を使�
 
 Alibaba Cloud アカウント ID とアベイラビリティーゾーンを表示するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[ネットワーク]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**[設定]** &gt; **[ネットワーク]**をクリックします。
 2.  **[外部サービス向け Alibaba Cloud プライベートエンドポイント]**領域で、**[外部サービス向けプライベートエンドポイントの作成]**をクリックします。
 3.  表示されたダイアログで、Alibaba Cloud アカウント ID とアベイラビリティーゾーンを見つけることができます。
 
@@ -88,6 +88,6 @@ ApsaraDB RDS for MySQL と同じリージョンにエンドポイント サー�
 
 ## ステップ3. TiDB Cloudでプライベートリンク接続を作成する {#step-3-create-a-private-link-connection-in-tidb-cloud}
 
-TiDB CloudコンソールまたはTiDB Cloud CLI を使用してプライベート リンク接続を作成できます。
+TiDB CloudコンソールまたはTiDB Cloud CLI を使用してプライベートリンク接続を作成できます。
 
 詳細については[Alibaba Cloud Endpoint Service のプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-alibaba-cloud-endpoint-service-private-link-connection)を参照してください。

@@ -32,7 +32,7 @@ tiup mirror clone <target-dir> [global version] [flags]
 
 ### -o, --os {#o-os}
 
--   指定されたオペレーティング システムで実行できるコンポーネントのみを複製します。
+-   指定されたオペレーティングシステムで実行できるコンポーネントのみを複製します。
 -   データ型: `STRING`
 -   デフォルト: "linux,darwin"
 

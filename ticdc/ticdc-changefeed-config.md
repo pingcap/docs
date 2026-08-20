@@ -21,7 +21,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 -   `--changefeed-id` : レプリケーションタスクのID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`正規表現に一致する必要があります。このIDが指定されていない場合、TiCDCは自動的にUUID（バージョン4形式）をIDとして生成します。
 
--   `--sink-uri` : レプリケーション タスクのダウンストリーム アドレス。 `--sink-uri`は、次の形式に従って設定します。現在、このスキームは`mysql` 、 `tidb` 、および`kafka`をサポートしています。
+-   `--sink-uri` : レプリケーションタスクのダウンストリーム アドレス。 `--sink-uri`は、次の形式に従って設定します。現在、このスキームは`mysql` 、 `tidb` 、および`kafka`をサポートしています。
 
     ```
     [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]

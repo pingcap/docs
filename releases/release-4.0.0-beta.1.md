@@ -15,7 +15,7 @@ TiDB Ansible バージョン: 4.0.0-beta.1
 
 -   TiDB
     -   `log.enable-slow-log`構成項目の型を整数からブール型に変更します[＃14864](https://github.com/pingcap/tidb/pull/14864)
-    -   MySQL 5.7と一致するように、 `mysql.user`システム テーブルの`password`フィールド名を`authentication_string`に変更します (**この互換性の変更により、以前のバージョンにロールバックできなくなります**) [＃14598](https://github.com/pingcap/tidb/pull/14598)
+    -   MySQL 5.7と一致するように、 `mysql.user`システムテーブルの`password`フィールド名を`authentication_string`に変更します (**この互換性の変更により、以前のバージョンにロールバックできなくなります**) [＃14598](https://github.com/pingcap/tidb/pull/14598)
     -   `txn-total-size-limit`構成項目のデフォルト値を`1GB`から`100MB`に調整します[＃14522](https://github.com/pingcap/tidb/pull/14522)
     -   PD [＃14750](https://github.com/pingcap/tidb/pull/14750) から読み取った構成項目の動的な変更または更新をサポート [＃14830](https://github.com/pingcap/tidb/pull/14830) [＃14303](https://github.com/pingcap/tidb/pull/14303)
 
@@ -67,7 +67,7 @@ TiDB Ansible バージョン: 4.0.0-beta.1
 -   TiDB Binlog
     -   コンポーネント間のTLSをサポート[＃904](https://github.com/pingcap/tidb-binlog/pull/904) [＃894](https://github.com/pingcap/tidb-binlog/pull/894)
     -   Drainerに`kafka-client-id`設定項目を追加して、KafkaのクライアントID を設定します。 [＃902](https://github.com/pingcap/tidb-binlog/pull/902)
-    -   Drainer の増分バックアップ データの削除をサポート [＃885](https://github.com/pingcap/tidb-binlog/pull/885)
+    -   Drainer の増分バックアップデータの削除をサポート [＃885](https://github.com/pingcap/tidb-binlog/pull/885)
 
 -   TiDB Ansible
     -   1 つのクラスターに複数の Grafana/Prometheus/Alertmanager をデプロイすることをサポート[＃1142](https://github.com/pingcap/tidb-ansible/pull/1142)

@@ -108,8 +108,8 @@ MVCC (Multi-Version Concurrency Control) メカニズムを使用しているた
 外部ストレージでは、チェックポイント データのディレクトリ構造は次のようになります。
 
 -   ルート パス`restore-{downstream-cluster-ID}`は、ダウンストリーム クラスター ID `{downstream-cluster-ID}`を使用して、異なる復元クラスターを区別します。
--   パス`restore-{downstream-cluster-ID}/log`は、ログ復元フェーズ中にログ ファイルのチェックポイント データが保存されます。
--   パス`restore-{downstream-cluster-ID}/sst`は、ログ復元フェーズ中にログ バックアップによってバックアップされない SST ファイルのチェックポイント データが保存されます。
+-   パス`restore-{downstream-cluster-ID}/log`は、ログ復元フェーズ中にログファイルのチェックポイント データが保存されます。
+-   パス`restore-{downstream-cluster-ID}/sst`は、ログ復元フェーズ中にログバックアップによってバックアップされない SST ファイルのチェックポイント データが保存されます。
 -   パス`restore-{downstream-cluster-ID}/snapshot`は、スナップショット復元フェーズ中にチェックポイント データが保存されます。
 
 <!---->

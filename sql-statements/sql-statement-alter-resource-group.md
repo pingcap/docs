@@ -5,7 +5,7 @@ summary: TiDBにおけるALTER RESOURCE GROUPの使い方を学びましょう�
 
 # ALTER RESOURCE GROUP {#alter-resource-group}
 
-`ALTER RESOURCE GROUP`ステートメントは、データベース内のリソース グループを変更するために使用されます。
+`ALTER RESOURCE GROUP`ステートメントは、データベース内のリソースグループを変更するために使用されます。
 
 > **Note:**
 >
@@ -92,7 +92,7 @@ TiDB は、次の`DirectResourceGroupOption`をサポートします。ここで
 >
 > -   `ALTER RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)が`ON`に設定されている場合にのみ実行できます。
 > -   `ALTER RESOURCE GROUP`ステートメントは、指定されていないパラメーターを変更せずに、増分的な変更をサポートします。ただし、 `QUERY_LIMIT`と`BACKGROUND`は全体として使用されるため、部分的に変更することはできません。
-> -   現在、 `default`リソース グループのみが`BACKGROUND`構成の変更をサポートしています。
+> -   現在、 `default`リソースグループのみが`BACKGROUND`構成の変更をサポートしています。
 
 ## 例 {#examples}
 
@@ -153,7 +153,7 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
 1 rows in set (1.30 sec)
 ```
 
-`BACKGROUND`リソース グループの`default` } オプションを変更します。
+`BACKGROUND`リソースグループの`default` } オプションを変更します。
 
 ```sql
 ALTER RESOURCE GROUP default BACKGROUND = (TASK_TYPES = "br,ddl", UTILIZATION_LIMIT=30);

@@ -41,7 +41,7 @@ Hive の各テーブルは`STORED AS PARQUET LOCATION '/path/in/hdfs'`を指定�
     DROP TABLE temp;
     ```
 
-3.  Hive からエクスポートされた Parquet ファイルには`.parquet`サフィックスが付いていない場合があるため、TiDB Lightning はそれらを正しく識別できません。ファイルをインポートする前に、ファイル名を変更して `.parquet`サフィックスを追加し、ファイル名全体をTiDB Lightning が認識する形式（例: `${db_name}.${table_name}.parquet`）に変更する必要があります。ファイルの種類とパターンに関する詳細については、 [TiDB Lightningデータソース](/tidb-lightning/tidb-lightning-data-source.md)を参照してください。また、正しい[カスタマイズされた表現](/tidb-lightning/tidb-lightning-data-source.md#match-customized-files)を設定することでデータ ファイルを一致させることもできます。
+3.  Hive からエクスポートされた Parquet ファイルには`.parquet`サフィックスが付いていない場合があるため、TiDB Lightning はそれらを正しく識別できません。ファイルをインポートする前に、ファイル名を変更して `.parquet`サフィックスを追加し、ファイル名全体をTiDB Lightning が認識する形式（例: `${db_name}.${table_name}.parquet`）に変更する必要があります。ファイルの種類とパターンに関する詳細については、 [TiDB Lightningデータソース](/tidb-lightning/tidb-lightning-data-source.md)を参照してください。また、正しい[カスタマイズされた表現](/tidb-lightning/tidb-lightning-data-source.md#match-customized-files)を設定することでデータファイルを一致させることもできます。
 
 4.  すべての Parquet ファイルを、例えば`/data/my_datasource/`や`s3://my-bucket/sql-backup`のような単一のディレクトリに配置してください。TiDB Lightning は、このディレクトリとそのサブディレクトリ内のすべての`.parquet`ファイルを再帰的に検索します。
 
@@ -49,7 +49,7 @@ Hive の各テーブルは`STORED AS PARQUET LOCATION '/path/in/hdfs'`を指定�
 
 ParquetファイルからTiDBにデータをインポートする前に、ターゲットテーブルスキーマを作成する必要があります。ターゲットテーブルスキーマは、以下の2つの方法のいずれかで作成できます。
 
--   **方法 1** : TiDB Lightningを使用してターゲット テーブル スキーマを作成します。
+-   **方法 1** : TiDB Lightningを使用してターゲットテーブルスキーマを作成します。
 
     必要なDDLステートメントを含むSQLファイルを作成します。
 

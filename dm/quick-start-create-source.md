@@ -1,15 +1,15 @@
 ---
 title: Create a Data Source for TiDB Data Migration
-summary: データ移行 (DM) のデータ ソースを作成する方法を学習します。
+summary: データ移行 (DM) のデータソースを作成する方法を学習します。
 ---
 
 # TiDB Data Migration用のデータソースを作成する {#create-a-data-source-for-tidb-data-migration}
 
 > **Note:**
 >
-> データ ソースを作成する前に、 [TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)を実行する必要があります。
+> データソースを作成する前に、 [TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)を実行する必要があります。
 
-このドキュメントでは、TiDB Data Migration (DM) のデータ移行タスク用のデータ ソースを作成する方法について説明します。
+このドキュメントでは、TiDB Data Migration (DM) のデータ移行タスク用のデータソースを作成する方法について説明します。
 
 データソースには、上流の移行タスクにアクセスするための情報が含まれています。データ移行タスクは、アクセスの設定情報を取得するために、対応するデータソースを参照する必要があるため、データ移行タスクを作成する前に、タスクのデータソースを作成する必要があります。具体的なデータソース管理コマンドについては、 [データソース構成の管理](/dm/dm-manage-source.md)を参照してください。
 
@@ -49,7 +49,7 @@ summary: データ移行 (DM) のデータ ソースを作成する方法を学�
 
 ## ステップ2: データソースを作成する {#step-2-create-a-data-source}
 
-次のコマンドを使用してデータ ソースを作成できます。
+次のコマンドを使用してデータソースを作成できます。
 
 ```bash
 tiup dmctl --master-addr <master-addr> operate-source create ./source-mysql-01.yaml
@@ -76,9 +76,9 @@ tiup dmctl --master-addr <master-addr> operate-source create ./source-mysql-01.y
 
 ## ステップ3: 作成したデータソースをクエリする {#step-3-query-the-data-source-you-created}
 
-データ ソースを作成したら、次のコマンドを使用してデータ ソースをクエリできます。
+データソースを作成したら、次のコマンドを使用してデータソースをクエリできます。
 
--   データ ソースの`source-id`がわかっている場合は、 `dmctl config source <source-id>`コマンドを使用してデータ ソースの構成を直接確認できます。
+-   データソースの`source-id`がわかっている場合は、 `dmctl config source <source-id>`コマンドを使用してデータソースの構成を直接確認できます。
 
     ```bash
     tiup dmctl --master-addr <master-addr> config source mysql-01
@@ -99,7 +99,7 @@ tiup dmctl --master-addr <master-addr> operate-source create ./source-mysql-01.y
     }
     ```
 
--   `source-id`がわからない場合は、 `dmctl operate-source show`コマンドを使用してソース データベース リストを確認し、そこから対応するデータ ソースを見つけることができます。
+-   `source-id`がわからない場合は、 `dmctl operate-source show`コマンドを使用してソース データベース リストを確認し、そこから対応するデータソースを見つけることができます。
 
     ```bash
     tiup dmctl --master-addr <master-addr> operate-source show

@@ -160,7 +160,7 @@ WHERE `A` = 1 OR `A` = 2;
 -   RawKVのみを使用するTiKVクラスター。
 -   TiDB の[`CREATE SEQUENCE` DDL操作](/sql-statements/sql-statement-create-sequence.md)と[`SEQUENCE`関数](/sql-statements/sql-statement-create-sequence.md#sequence-function)上流の TiDB が`SEQUENCE`を使用している場合、TiCDC は上流で実行された`SEQUENCE` DDL 操作/関数を無視します。ただし、 `SEQUENCE`関数を使用した DML 操作は正しく複製できます。
 -   現在、TiCDC によってレプリケートされているテーブルおよびデータベースへの[TiDB Lightning物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)を使用したデータのインポートはサポートされていません。詳細については、 [TiDB Lightningの物理インポートモードとTiCDCの互換性に関する制限事項は何ですか？](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-tidb-lightning-physical-import-mode-and-ticdc)を参照してください。
--   v8.2.0 より前では、 BR はTiCDC レプリケーション タスクを使用するクラスター[データの復元](/br/backup-and-restore-overview.md)サポートしていません。詳細については、 [BR （バックアップ＆リストア）とTiCDCの互換性に関する制限事項は何ですか？](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-br-and-ticdc)を参照してください。
+-   v8.2.0 より前では、 BR はTiCDC レプリケーションタスクを使用するクラスター[データの復元](/br/backup-and-restore-overview.md)サポートしていません。詳細については、 [BR （バックアップ＆リストア）とTiCDCの互換性に関する制限事項は何ですか？](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-br-and-ticdc)を参照してください。
 -   バージョン8.2.0以降、 BRはTiCDCのデータ復元に関する制限を緩和しました。復元対象データの`BackupTS` （バックアップ時刻）がchangefeed [`CheckpointTS`](/ticdc/ticdc-classic-architecture.md#checkpointts) （現在のレプリケーションの進行状況を示すタイムスタンプ）よりも前であれば、 BRは正常にデータ復元を進めることができます。 `BackupTS`は通常かなり前であることを考慮すると、ほとんどのシナリオにおいて、 BRはTiCDCレプリケーションタスクを持つクラスタのデータ復元をサポートしていると考えられます。
 
 TiCDCは、アップストリームにおける大規模トランザクションを含むシナリオを部分的にのみサポートしています。詳細については、 [TiCDCに関するFAQ](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk)を参照してください。FAQでは、TiCDCが大規模トランザクションのレプリケーションをサポートしているかどうか、および関連するリスクについて詳しく説明されています。

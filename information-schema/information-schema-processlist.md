@@ -15,7 +15,7 @@ summary: PROCESSLIST` information_schema テーブルについて学習します
 -   処理中のリクエストによって使用されているメモリをバイト単位で表示する`MEM`列。
 -   ディスク使用量をバイト単位で表示する`DISK`列。
 -   トランザクションの開始時刻を表示する`TxnStart`列。
--   リソース グループ名を表示する`RESOURCE_GROUP`列。
+-   リソースグループ名を表示する`RESOURCE_GROUP`列。
 -   現在のセッションのエイリアスを表示する`SESSION_ALIAS`列。
 -   ステートメントによって現在影響を受けている行数を示す`ROWS_AFFECTED`列。
 -   `TIDB_CPU`列は、ステートメントがTiDBサーバーのCPUを消費した時間をナノ秒単位で示します。この列は、 [Top SQL](/dashboard/top-sql.md)機能が有効な場合にのみ意味のある値を表示します。それ以外の場合は、値は`0`になります。
@@ -29,7 +29,7 @@ summary: PROCESSLIST` information_schema テーブルについて学習します
 -   処理中のリクエストによって使用されているメモリをバイト単位で表示する`MEM`列。
 -   ディスク使用量をバイト単位で表示する`DISK`列。
 -   トランザクションの開始時刻を表示する`TxnStart`列。
--   リソース グループ名を表示する`RESOURCE_GROUP`列。
+-   リソースグループ名を表示する`RESOURCE_GROUP`列。
 -   現在のセッションのエイリアスを表示する`SESSION_ALIAS`列。
 -   ステートメントによって現在影響を受けている行数を示す`ROWS_AFFECTED`列。
 -   `TIDB_CPU`列は、ステートメントがTiDBサーバーのCPUを消費した時間をナノ秒単位で示します。この列は、 [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql)機能が有効な場合にのみ意味のある値を表示します。それ以外の場合は、値は`0`になります。
@@ -107,7 +107,7 @@ RESOURCE_GROUP: default
 -   `MEM` : 処理中のリクエストによって使用されるメモリ(バイト単位)。
 -   `DISK` : ディスク使用量（バイト単位）。
 -   `TxnStart` : トランザクションの開始時刻。
--   `RESOURCE_GROUP` : リソース グループ名。
+-   `RESOURCE_GROUP` : リソースグループ名。
 -   `SESSION_ALIAS` : 現在のセッションのエイリアス。
 -   `ROWS_AFFECTED` : 現在ステートメントによって影響を受けている行数。
 -   `TIDB_CPU` : ステートメントがTiDBサーバーのCPUを消費する時間（ナノ秒単位）。この列は、 [Top SQL](/dashboard/top-sql.md)機能が有効な場合にのみ意味のある値を表示します。それ以外の場合は、値は`0`になります。
@@ -129,7 +129,7 @@ RESOURCE_GROUP: default
 -   `MEM` : 処理中のリクエストによって使用されるメモリ(バイト単位)。
 -   `DISK` : ディスク使用量（バイト単位）。
 -   `TxnStart` : トランザクションの開始時刻。
--   `RESOURCE_GROUP` : リソース グループ名。
+-   `RESOURCE_GROUP` : リソースグループ名。
 -   `SESSION_ALIAS` : 現在のセッションのエイリアス。
 -   `ROWS_AFFECTED` : 現在ステートメントによって影響を受けている行数。
 -   `TIDB_CPU` : ステートメントがTiDBサーバーのCPUを消費する時間（ナノ秒単位）。この列は、 [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql)機能が有効な場合にのみ意味のある値を表示します。それ以外の場合は、値は`0`になります。

@@ -41,7 +41,7 @@ summary: Amazon S3、GCS、またはAzure Blob StorageからTiDB Cloud Dedicated
 
     > **Note:**
     >
-    > -   前述のルールに従って Parquet ファイル名を更新できない場合 (たとえば、Parquet ファイル リンクが他のプログラムでも使用されている場合)、ファイル名を変更せずに、 [ステップ4](#step-4-import-parquet-files-to-tidb-cloud)の**Destination Mapping**サブステップで**<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDB ファイル命名規則</a>を使用して自動マッピングを行う」**の選択を解除して、ソース ファイルを単一のターゲット テーブルに手動でマッピングできます。
+    > -   前述のルールに従って Parquet ファイル名を更新できない場合 (たとえば、Parquet ファイル リンクが他のプログラムでも使用されている場合)、ファイル名を変更せずに、 [ステップ4](#step-4-import-parquet-files-to-tidb-cloud)の**Destination Mapping**サブステップで**<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDB ファイル命名規則</a>を使用して自動マッピングを行う」**の選択を解除して、ソースファイルを単一のターゲットテーブルに手動でマッピングできます。
     > -   Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
 
 ## ステップ2．対象テーブルのスキーマを作成する {#step-2-create-the-target-table-schemas}
@@ -235,7 +235,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
             2.  ストレージアカウントに移動し、 **[概要]** &gt; **JSON View**をクリックします。
             3.  `id`プロパティの値をコピーします。リソース ID は`/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Storage/storageAccounts/<account_name>`の形式です。
 
-    -   **資格情報**: TiDB Cloud がAzure Blob Storage コンテナー内のソース ファイルにアクセスできるようにするためのアカウント SAS トークンを入力します。まだお持ちでない場合は、 **「ここをクリックして Azure ARM テンプレートを使用して新しいものを作成します」を**クリックし、画面の指示に従うか、アカウント SAS トークンを手動で作成します。詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access)を参照してください。
+    -   **資格情報**: TiDB Cloud がAzure Blob Storage コンテナー内のソースファイルにアクセスできるようにするためのアカウント SAS トークンを入力します。まだお持ちでない場合は、 **「ここをクリックして Azure ARM テンプレートを使用して新しいものを作成します」を**クリックし、画面の指示に従うか、アカウント SAS トークンを手動で作成します。詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access)を参照してください。
 
 4.  **「次へ」**をクリックしてください。
 

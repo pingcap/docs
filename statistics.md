@@ -159,13 +159,13 @@ TiDB が SQL ステートメントを実行する際、オプティマイザは�
 
     <CustomContent platform="tidb">
 
-    TiDB は常に`PREDICATE COLUMNS`情報を 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease)ごとに[`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables)システム テーブルに書き込みます。
+    TiDB は常に`PREDICATE COLUMNS`情報を 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease)ごとに[`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables)システムテーブルに書き込みます。
 
     </CustomContent>
 
     <CustomContent platform="tidb-cloud">
 
-    TiDB は常に`PREDICATE COLUMNS`情報を[`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables)システム テーブルに 300 秒ごとに書き込みます。
+    TiDB は常に`PREDICATE COLUMNS`情報を[`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables)システムテーブルに 300 秒ごとに書き込みます。
 
     </CustomContent>
 
@@ -173,7 +173,7 @@ TiDB が SQL ステートメントを実行する際、オプティマイザは�
 
     > **Note:**
     >
-    > -   [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables)システム テーブルにそのテーブルに対して`PREDICATE COLUMNS`が記録されていない場合、上記の構文は、そのテーブルのインデックス付き列とすべてのインデックスに関する統計情報を収集します。
+    > -   [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables)システムテーブルにそのテーブルに対して`PREDICATE COLUMNS`が記録されていない場合、上記の構文は、そのテーブルのインデックス付き列とすべてのインデックスに関する統計情報を収集します。
     > -   手動で列をリストアップするか、 `PREDICATE COLUMNS`を使用して収集対象から除外した列の統計情報は上書きされません。新しいタイプの SQL クエリを実行すると、オプティマイザは、そのような列に古い統計情報が存在する場合はそれを使用し、統計情報が収集されたことがない列の場合は擬似列統計情報を使用します。 `PREDICATE COLUMNS`を使用した次の ANALYZE で、これらの列の統計情報が収集されます。
 
 -   すべての列とインデックスに関する統計情報を収集するには、次の構文を使用します。

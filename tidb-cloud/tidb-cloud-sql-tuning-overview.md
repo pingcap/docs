@@ -77,7 +77,7 @@ SQLクエリが遅くなる最も一般的な原因は、 `SELECT`ステート�
 
 ### インデックスのベストプラクティス {#index-best-practices}
 
-[インデックス作成のベストプラクティス](/develop/dev-guide-index-best-practice.md)には、インデックスの作成とインデックスの使用に関するベスト プラクティスが含まれています。
+[インデックス作成のベストプラクティス](/develop/dev-guide-index-best-practice.md)には、インデックスの作成とインデックスの使用に関するベストプラクティスが含まれています。
 
 インデックスの作成速度はデフォルトでは控えめですが、シナリオによっては[変数の変更](/develop/dev-guide-optimize-sql-best-practices.md#add-index-best-practices)によってインデックス作成プロセスを高速化できます。
 

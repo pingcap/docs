@@ -46,9 +46,9 @@ Fields ::=
 
 ### `LOCAL` {#local}
 
-`LOCAL`を使用して、インポートするクライアント上のデータ ファイルを指定できます。ファイル パラメーターは、クライアント上のファイル システム パスである必要があります。
+`LOCAL`を使用して、インポートするクライアント上のデータファイルを指定できます。ファイル パラメーターは、クライアント上のファイル システム パスである必要があります。
 
-TiDB Cloudを使用している場合、 `LOAD DATA`ステートメントを使用してローカル データ ファイルをロードするには、 TiDB Cloudに接続するときに接続文字列に`--local-infile`オプションを追加する必要があります。
+TiDB Cloudを使用している場合、 `LOAD DATA`ステートメントを使用してローカル データファイルをロードするには、 TiDB Cloudに接続するときに接続文字列に`--local-infile`オプションを追加する必要があります。
 
 -   以下は、 TiDB Cloud Starter の接続文字列の例です。
 
@@ -101,7 +101,7 @@ TiDB Cloudを使用している場合、 `LOAD DATA`ステートメントを使�
 -   `FIELDS ENCLOSED BY` : データの囲み文字を指定します。
 -   `LINES TERMINATED BY` : 特定の文字で行を終了する場合に、行末文字を指定します。
 
-`DEFINED NULL BY`を使用すると、データ ファイル内で NULL 値をどのように表現するかを指定できます。
+`DEFINED NULL BY`を使用すると、データファイル内で NULL 値をどのように表現するかを指定できます。
 
 -   MySQL の動作と一致して、 `ESCAPED BY`が NULL でない場合、たとえばデフォルト値`\`が使用されると、 `\N`は NULL 値と見なされます。
 -   `DEFINED NULL BY 'my-null'`のように`DEFINED NULL BY`を使用すると、 `my-null`は NULL 値と見なされます。

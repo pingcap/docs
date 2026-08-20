@@ -224,7 +224,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **全般的な変更**
 
--   [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)は、データ アプリに直接追加できる事前定義されたシステム エンドポイントを含むエンドポイント ライブラリを提供し、エンドポイント開発の労力を軽減します。
+-   [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)は、データアプリに直接追加できる事前定義されたシステム エンドポイントを含むエンドポイント ライブラリを提供し、エンドポイント開発の労力を軽減します。
 
     現在、このライブラリには`/system/query`エンドポイントのみが含まれています。このエンドポイントを使用すると、定義済みの`sql`パラメータにSQL文を渡すだけで、任意のSQL文を実行できます。このエンドポイントにより、SQLクエリを即座に実行できるため、柔軟性と効率性が向上します。
 
@@ -441,7 +441,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     詳細については、 [公開エンドポイントを無効にする](/tidb-cloud/connect-via-standard-connection-serverless.md#disable-a-public-endpoint)ご覧ください。
 
--   [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)データ アプリのエンドポイントにアクセスするためのカスタム ドメインの構成をサポートしています。
+-   [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)データアプリのエンドポイントにアクセスするためのカスタム ドメインの構成をサポートしています。
 
     TiDB Cloud Data Serviceは、デフォルトでは各データアプリのエンドポイントにアクセスするためのドメイン`<region>.data.tidbcloud.com`を提供します。パーソナライズと柔軟性をさらに高めるため、デフォルトドメインの代わりにデータアプリにカスタムドメインを設定できるようになりました。この機能により、データベースサービスにブランドURLを使用でき、セキュリティも強化されます。
 

@@ -65,7 +65,7 @@ MySQL サービスがパブリック インターネット アクセスのない
 
 プライベートエンドポイントは、クラウドプロバイダーの**Private Link**または**Private Service Connect**技術を活用し、VPC内のリソースがプライベートIPアドレスを介して他のVPC内のサービスに接続できるようにします。これにより、あたかもそれらのサービスがVPC内で直接ホストされているかのように動作します。
 
-プライベート エンドポイントを介して、 TiDB Cloud Dedicatedクラスターを MySQL サービスに安全に接続できます。 MySQL サービスでプライベート エンドポイントが利用できない場合は、[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)に従って作成します。
+プライベートエンドポイントを介して、 TiDB Cloud Dedicatedクラスターを MySQL サービスに安全に接続できます。 MySQL サービスでプライベートエンドポイントが利用できない場合は、[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)に従って作成します。
 
 </div>
 
@@ -79,7 +79,7 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
 
 プライベートエンドポイントは、クラウドプロバイダーの**Private Link**または**Private Service Connect**技術を活用し、VPC内のリソースがプライベートIPアドレスを介して他のVPC内のサービスに接続できるようにします。これにより、あたかもそれらのサービスがVPC内で直接ホストされているかのように動作します。
 
-プライベート エンドポイントを通じて、 TiDB Cloud Premium インスタンスを MySQL サービスに安全に接続できます。 MySQL サービスでプライベート エンドポイントが利用できない場合は、 [Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)に従って作成します。
+プライベートエンドポイントを通じて、 TiDB Cloud Premium インスタンスを MySQL サービスに安全に接続できます。 MySQL サービスでプライベートエンドポイントが利用できない場合は、 [Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)に従って作成します。
 
 </CustomContent>
 
@@ -111,7 +111,7 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
 
 2.  [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用して<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>インスタンスからデータをエクスポートし、 [mydumper/myloader](https://centminmod.com/mydumper.html)などのコミュニティ ツールを使用してデータを MySQL サービスにロードします。
 
-3.  [Dumplingのエクスポートファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)のメタデータ ファイルから MySQL シンクの開始位置を取得します。
+3.  [Dumplingのエクスポートファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)のメタデータファイルから MySQL シンクの開始位置を取得します。
 
     以下はメタデータファイルの例の一部です。 `Pos`の`SHOW MASTER STATUS`は、既存データの TSO であり、MySQL シンクの開始位置でもあります。
 
@@ -131,7 +131,7 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
 
 前提条件を満たしたら、データをMySQLに取り込むことができます。
 
-1.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[変更フィード]**をクリックします。
+1.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の概要ページに移動し、左側のナビゲーションペインで**[データ]** &gt; **[変更フィード]**をクリックします。
 
 2.  **Create Changefeed**をクリックし、**宛先**として**MySQL**を選択します。
 
@@ -167,7 +167,7 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
 
 8.  **Start Replication Position**で、MySQLシンクの開始位置を設定します。
 
-    -   Dumplingを使用して[既存のデータをロードした](#load-existing-data-optional)場合は、 **[特定の TSO からレプリケーションを開始する]**を選択し、 Dumpling のエクスポートされたメタデータ ファイルから取得した TSO を入力します。
+    -   Dumplingを使用して[既存のデータをロードした](#load-existing-data-optional)場合は、 **[特定の TSO からレプリケーションを開始する]**を選択し、 Dumpling のエクスポートされたメタデータファイルから取得した TSO を入力します。
     -   アップストリームの TiDB にデータがない場合は、 **「今すぐレプリケーションを開始する」**を選択してください。
     -   それ以外の場合は、 **「特定の時間からレプリケーションを開始する」**を選択して、開始時刻をカスタマイズできます。
 

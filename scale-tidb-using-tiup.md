@@ -380,7 +380,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
     tiup cluster display <cluster-name>
     ```
 
-4.  削除されたTiFlashノードのステータスが`Tombstone`になったら、削除されたノードの情報をTiUPトポロジから削除します (TiUP は`Tombstone`ノードの関連データ ファイルを自動的にクリーンアップします)。
+4.  削除されたTiFlashノードのステータスが`Tombstone`になったら、削除されたノードの情報をTiUPトポロジから削除します (TiUP は`Tombstone`ノードの関連データファイルを自動的にクリーンアップします)。
 
     ```shell
     tiup cluster prune <cluster-name>
@@ -420,7 +420,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
 3.  TiFlashプロセスを停止する前に、 TiFlashノードのストアが消えるか、 `state_name` `Tombstone`になるまで待ちます。
 
-4.  削除されたノードの情報をTiUPトポロジから削除します (TiUP は`Tombstone`ノードの関連データ ファイルを自動的にクリーンアップします)。
+4.  削除されたノードの情報をTiUPトポロジから削除します (TiUP は`Tombstone`ノードの関連データファイルを自動的にクリーンアップします)。
 
     ```shell
     tiup cluster prune <cluster-name>

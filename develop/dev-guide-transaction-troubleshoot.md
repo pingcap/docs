@@ -88,7 +88,7 @@ MySQL などの従来のデータベースとは異なり、TiDB では、楽観
 -   SQL実行例外をキャッチするには`try ... catch ...`を使用します。以下のエラーが発生した場合は再試行してください。その他のエラーが発生した場合はロールバックしてください。
     -   `Error 8002: can not retry select for update statement` : SELECT FOR UPDATE 書き込み競合エラー
     -   `Error 8022: Error: KV error safe to retry` : トランザクションのコミットに失敗したエラー。
-    -   `Error 8028: Information schema is changed during the execution of the statement` : DDL 操作によってテーブル スキーマが変更され、トランザクションのコミットでエラーが発生しました。
+    -   `Error 8028: Information schema is changed during the execution of the statement` : DDL 操作によってテーブルスキーマが変更され、トランザクションのコミットでエラーが発生しました。
     -   `Error 9007: Write conflict` : 書き込み競合エラー。通常、楽観的トランザクション モードが使用されているときに、複数のトランザクションが同じデータ行を変更することによって発生します。
 -   try ブロックの最後にあるトランザクションを`COMMIT` 。
 

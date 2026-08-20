@@ -170,7 +170,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)               | リソースグループを削除します。                                                                                    |
 | [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)                               | 暴走クエリの監視リストを管理します。                                                                                 |
 | [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)                 | リソースグループを設定します。                                                                                    |
-| [`SHOW CREATE RESOURCE GROUP`](/sql-statements/sql-statement-show-create-resource-group.md) | リソース グループの`CREATE`ステートメントを表示します。                                                                   |
+| [`SHOW CREATE RESOURCE GROUP`](/sql-statements/sql-statement-show-create-resource-group.md) | リソースグループの`CREATE`ステートメントを表示します。                                                                   |
 
 </CustomContent>
 
@@ -183,7 +183,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)               | リソースグループを削除します。                  |
 | [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)                               | 暴走クエリの監視リストを管理します。               |
 | [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)                 | リソースグループを設定します。                  |
-| [`SHOW CREATE RESOURCE GROUP`](/sql-statements/sql-statement-show-create-resource-group.md) | リソース グループの`CREATE`ステートメントを表示します。 |
+| [`SHOW CREATE RESOURCE GROUP`](/sql-statements/sql-statement-show-create-resource-group.md) | リソースグループの`CREATE`ステートメントを表示します。 |
 
 </CustomContent>
 

@@ -160,7 +160,7 @@ Chat2Queryでは、以下の手順でChat2Queryデータアプリにアクセス
 1.  右上隅の**「…」**をクリックし、次に**Access Chat2Query via API**をクリックします。
 2.  表示されたダイアログで、次のいずれかの操作を行います。
 
-    -   新しい Chat2Query データ アプリを作成するには、 **New Chat2Query Data App**をクリックします。
+    -   新しい Chat2Query データアプリを作成するには、 **New Chat2Query Data App**をクリックします。
     -   既存のChat2Queryデータアプリにアクセスするには、対象のデータアプリの名前をクリックしてください。
 
 詳細については、 [Chat2Query API を使い始めましょう](/tidb-cloud/use-chat2query-api.md)を参照してください。

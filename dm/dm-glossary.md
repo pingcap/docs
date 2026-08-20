@@ -39,7 +39,7 @@ Binlogログレプリケーション処理ユニットは、DM-workerにおい�
 
 ### チェックポイント {#checkpoint}
 
-チェックポイントは、完全なデータ インポートまたは増分レプリケーション タスクが一時停止されて再開される位置、または停止されて再起動される位置を示します。
+チェックポイントは、完全なデータ インポートまたは増分レプリケーションタスクが一時停止されて再開される位置、または停止されて再起動される位置を示します。
 
 -   フルインポートタスクでは、チェックポイントは、インポート対象のファイル内の正常にインポートされたデータのオフセットなどの情報に対応します。チェックポイントは、データインポートタスクと同期して更新されます。
 -   増分レプリケーションでは、チェックポイントは、正常に解析され下流に移行された[binlogイベント](#binlog-event)の[binlogの位置](#binlog-position)とその他の情報に対応します。チェックポイントは、DDL操作が正常に移行された後、または最後の更新から30秒後に更新されます。
@@ -78,7 +78,7 @@ TiDB データ移行ツールを使用して、アップストリーム デー�
 
 リレーログとは、DM-workerが上流のMySQLまたはMariaDBから取得し、ローカルディスクに保存するbinlogファイルを指します。リレーログの形式は標準的なbinlogファイルであり、互換性のあるバージョンの[mysqlbinlog](https://dev.mysql.com/doc/refman/8.0/en/mysqlbinlog.html)などのツールで解析できます。その役割は[MySQLリレーログ](https://dev.mysql.com/doc/refman/8.0/en/replica-logs-relaylog.html)および[MariaDB リレーログ](https://mariadb.com/docs/server/server-management/server-monitoring-logs/binary-log/relay-log)と同様です。
 
-リレー ログのディレクトリ構造、初期移行ルール、TiDB DM のデータ パージなどの詳細については、 [TiDB DMリレーログ](/dm/relay-log.md)を参照してください。
+リレーログのディレクトリ構造、初期移行ルール、TiDB DM のデータ パージなどの詳細については、 [TiDB DMリレーログ](/dm/relay-log.md)を参照してください。
 
 ### リレー処理ユニット {#relay-processing-unit}
 

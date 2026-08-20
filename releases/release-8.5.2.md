@@ -53,7 +53,7 @@ TiDBバージョン：8.5.2
     -   ログの秘匿化を有効にしても特定のシナリオで効果がない問題を修正 [#59279](https://github.com/pingcap/tidb/issues/59279) @[tangenta](https://github.com/tangenta)
     -   `rowContainer`が特定のシナリオで TiDB をpanicする可能性がある問題を修正 [#59976](https://github.com/pingcap/tidb/issues/59976) @[YangKeao](https://github.com/YangKeao)
     -   パーティション化されたテーブルの`Point_Get`シナリオでパーティションプルーニングが正しくない可能性がある問題を修正 [#59827](https://github.com/pingcap/tidb/issues/59827) @[mjonss](https://github.com/mjonss)
-    -   DDL 実行中にパーティション テーブル内のレコードを更新するとデータ破損が発生する可能性がある問題を修正 [#57588](https://github.com/pingcap/tidb/issues/57588) @[Defined2014](https://github.com/Defined2014)
+    -   DDL 実行中にパーティションテーブル内のレコードを更新するとデータ破損が発生する可能性がある問題を修正 [#57588](https://github.com/pingcap/tidb/issues/57588) @[Defined2014](https://github.com/Defined2014)
     -   `information_schema`のパフォーマンスと安定性が特定のシナリオで影響を受ける問題を修正しました[#58142](https://github.com/pingcap/tidb/issues/58142) [#58363](https://github.com/pingcap/tidb/issues/58363) [#58712](https://github.com/pingcap/tidb/issues/58712) @[tiancaiamao](https://github.com/tiancaiamao)
     -   分散実行フレームワーク（DXF）が有効になっている場合、内部TiDBセッションで`tidb_txn_entry_size_limit`を動的に調整できない問題を修正します [#59506](https://github.com/pingcap/tidb/issues/59506) @[D3Hunter](https://github.com/D3Hunter)
     -   `IMPORT INTO`機能がグローバルソートが有効になっている場合に一意キーの競合を適切に処理できない問題を修正します [#59650](https://github.com/pingcap/tidb/issues/59650) @[lance6716](https://github.com/lance6716)

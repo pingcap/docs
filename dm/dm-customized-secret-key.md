@@ -1,6 +1,6 @@
 ---
 title: Customize a Secret Key for DM Encryption and Decryption
-summary: DM（データ移行）データ ソースおよび移行タスク構成で使用されるパスワードを暗号化および復号化するための秘密キーをカスタマイズする方法を学習します。
+summary: DM（データ移行）データソースおよび移行タスク構成で使用されるパスワードを暗号化および復号化するための秘密キーをカスタマイズする方法を学習します。
 ---
 
 # DM 暗号化と復号化用の秘密鍵をカスタマイズする {#customize-a-secret-key-for-dm-encryption-and-decryption}

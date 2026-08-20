@@ -5,7 +5,7 @@ summary: TiDBにおけるDROP RESOURCE GROUPの使い方を学びましょう。
 
 # DROP RESOURCE GROUP {#drop-resource-group}
 
-`DROP RESOURCE GROUP`ステートメントを使用してリソース グループを削除できます。
+`DROP RESOURCE GROUP`ステートメントを使用してリソースグループを削除できます。
 
 > **Note:**
 >
@@ -28,11 +28,11 @@ ResourceGroupName ::=
 > **Note:**
 >
 > -   `DROP RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)が`ON`に設定されている場合にのみ実行できます。
-> -   `default`リソース グループは予約済みであり、削除できません。
+> -   `default`リソースグループは予約済みであり、削除できません。
 
 ## 例 {#examples}
 
-`rg1`という名前のリソース グループを削除します。
+`rg1`という名前のリソースグループを削除します。
 
 ```sql
 DROP RESOURCE GROUP IF EXISTS rg1;

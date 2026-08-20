@@ -101,7 +101,7 @@ TiDBバージョン: 4.0.16
         -   複数の TiKV がクラッシュした場合や強制再起動中に TiCDC レプリケーションが中断される問題を修正[＃3288](https://github.com/pingcap/tiflow/issues/3288)
         -   DDL 処理後のメモリリークの問題を修正 [＃3174](https://github.com/pingcap/tiflow/issues/3174)
         -   ErrGCTTLExceeded エラーが発生したときに changefeed が十分に速く失敗しない問題を修正しました[＃3111](https://github.com/pingcap/tiflow/issues/3111)
-        -   上流の TiDB インスタンスが予期せず終了すると、TiCDC レプリケーション タスクが終了する可能性がある問題を修正しました[＃3061](https://github.com/pingcap/tiflow/issues/3061)
+        -   上流の TiDB インスタンスが予期せず終了すると、TiCDC レプリケーションタスクが終了する可能性がある問題を修正しました[＃3061](https://github.com/pingcap/tiflow/issues/3061)
         -   TiKV が同じリージョンに重複したリクエストを送信したときに TiCDC プロセスがpanicになる可能性がある問題を修正しました。 [＃2386](https://github.com/pingcap/tiflow/issues/2386)
         -   TiCDCによって生成されるKafkaメッセージの量が`max-message-size` に制限されない問題を修正 [＃2962](https://github.com/pingcap/tiflow/issues/2962)
         -   `tikv_cdc_min_resolved_ts_no_change_for_1m`チェンジフィードがないときに警告が続く問題を修正[＃11017](https://github.com/tikv/tikv/issues/11017)

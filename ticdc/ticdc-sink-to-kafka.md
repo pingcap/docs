@@ -9,7 +9,7 @@ summary: TiCDC を使用して Apache Kafka にデータを複製する方法を
 
 ## レプリケーションタスクを作成する {#create-a-replication-task}
 
-次のコマンドを実行してレプリケーション タスクを作成します。
+次のコマンドを実行してレプリケーションタスクを作成します。
 
 ```shell
 cdc cli changefeed create \
@@ -75,8 +75,8 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 | `topic-name`                         | 変数。Kafka トピックの名前。                                                                                                                                                                                                                                                                                                                                                                           |
 | `protocol`                           | Kafka にメッセージを出力するプロトコル。値のオプションは[`canal-json`](/ticdc/ticdc-canal-json.md) 、 [`open-protocol`](/ticdc/ticdc-open-protocol.md) 、 [`avro`](/ticdc/ticdc-avro-protocol.md) 、 [`debezium`](/ticdc/ticdc-debezium.md) 、 [`simple`](/ticdc/ticdc-simple-protocol.md)です。                                                                                                                            |
 | `kafka-version`                      | ダウンストリーム Kafka のバージョン。この値は、ダウンストリーム Kafka の実際のバージョンと一致している必要があります。                                                                                                                                                                                                                                                                                                                          |
-| `kafka-client-id`                    | レプリケーション タスクの Kafka クライアント ID を指定します (オプション。デフォルトは`TiCDC_sarama_producer_replication ID` )。                                                                                                                                                                                                                                                                                                 |
-| `partition-num`                      | ダウンストリーム Kafka パーティションの数 (オプション。値は実際のパーティション数**以下に**する必要があります。そうでない場合、レプリケーション タスクを正常に作成できません。デフォルトは`3` )。                                                                                                                                                                                                                                                                                  |
+| `kafka-client-id`                    | レプリケーションタスクの Kafka クライアント ID を指定します (オプション。デフォルトは`TiCDC_sarama_producer_replication ID` )。                                                                                                                                                                                                                                                                                                 |
+| `partition-num`                      | ダウンストリーム Kafka パーティションの数 (オプション。値は実際のパーティション数**以下に**する必要があります。そうでない場合、レプリケーションタスクを正常に作成できません。デフォルトは`3` )。                                                                                                                                                                                                                                                                                  |
 | `max-message-bytes`                  | Kafkaブローカーに毎回送信されるデータの最大サイズ（オプション、デフォルトは`10MB` 、最大値は`100MB` ）。v5.0.6およびv4.0.6以降、デフォルト値は`64MB`および`256MB`から`10MB`に変更されました。                                                                                                                                                                                                                                                                    |
 | `replication-factor`                 | 保存できるKafkaメッセージレプリカの数（オプション、デフォルトは`1` ）。この値はKafkaの[`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas)の値である必要があります。                                                                                                                                                                                                                    |
 | `required-acks`                      | `Produce`リクエストで使用されるパラメータ。ブローカーが応答するまでに受信する必要があるレプリカ確認応答の数を通知します。値のオプションは`0` ( `NoResponse` : 応答なし、 `TCP ACK`のみ提供)、 `1` ( `WaitForLocal` : ローカルコミットが正常に送信された後にのみ応答)、および`-1` ( `WaitForAll` : すべての複製レプリカが正常にコミットされた後に応答) です。複製レプリカの最小数は、ブローカーの[`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas)設定項目を使用して設定できます。(オプション、デフォルト値は`-1` )。 |
@@ -111,7 +111,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 -   独自のKafkaトピックを作成することをお勧めします。少なくとも、トピックがKafkaブローカーに送信できる各メッセージの最大データ量と、下流のKafkaパーティションの数を設定する必要があります。チェンジフィードを作成する場合、これらの2つの設定はそれぞれ`max-message-bytes`と`partition-num`に対応します。
 -   まだ存在しないトピックでチェンジフィードを作成した場合、TiCDCは`partition-num`と`replication-factor`パラメータを使用してトピックを作成しようとします。これらのパラメータは明示的に指定することをお勧めします。
 -   ほとんどの場合、 `canal-json`プロトコルを使用することをお勧めします。
--   TiCDCにおけるアップストリームデータの変更頻度が低い場合（例えば、10分以上データの変更がないなど）、Kafkaブローカー設定ファイルでKafka接続アイドルタイムアウトを増やすことをお勧めします。詳細については、 [TiCDC の Kafka へのレプリケーション タスクが`broken pipe`エラーで頻繁に失敗する理由](/ticdc/ticdc-faq.md#why-do-ticdc-replication-tasks-to-kafka-often-fail-with-broken-pipe-errors)を参照してください。
+-   TiCDCにおけるアップストリームデータの変更頻度が低い場合（例えば、10分以上データの変更がないなど）、Kafkaブローカー設定ファイルでKafka接続アイドルタイムアウトを増やすことをお勧めします。詳細については、 [TiCDC の Kafka へのレプリケーションタスクが`broken pipe`エラーで頻繁に失敗する理由](/ticdc/ticdc-faq.md#why-do-ticdc-replication-tasks-to-kafka-often-fail-with-broken-pipe-errors)を参照してください。
 
 > **Note:**
 >

@@ -59,7 +59,7 @@ cd jaffle_shop
 
 -   `dbt_project.yml`は dbt プロジェクト構成ファイルであり、プロジェクト名とデータベース構成ファイルの情報が含まれています。
 
--   `models`ディレクトリには、プロジェクトの SQL モデルとテーブル スキーマが含まれています。このセクションはデータ アナリストが作成します。モデルの詳細については、 [SQLモデル](https://docs.getdbt.com/docs/build/sql-models)を参照してください。
+-   `models`ディレクトリには、プロジェクトの SQL モデルとテーブルスキーマが含まれています。このセクションはデータ アナリストが作成します。モデルの詳細については、 [SQLモデル](https://docs.getdbt.com/docs/build/sql-models)を参照してください。
 
 -   `seeds`ディレクトリには、データベース エクスポート ツールによってダンプされた CSV ファイルが保存されます。たとえば、 Dumplingを通じて[TiDB Cloudデータをエクスポートする](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud)できます。 `jaffle_shop`プロジェクトでは、これらの CSV ファイルが処理される生データとして使用されます。
 

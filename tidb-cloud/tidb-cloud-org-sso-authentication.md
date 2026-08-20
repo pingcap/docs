@@ -77,9 +77,9 @@ Cloud Organization SSO を有効にする前に、次の点についてメンバ
 
 Cloud Organization SSO を有効にするには、次の手順を実行します。
 
-1.  `Organization Owner`ロールを持つユーザーとして[TiDB Cloudコンソール](https://tidbcloud.com)にログインし、左上隅のコンボ ボックスを使用して対象の組織に切り替えます。
+1.  `Organization Owner`ロールを持つユーザーとして[TiDB Cloudコンソール](https://tidbcloud.com)にログインし、左上隅のコンボボックスを使用して対象の組織に切り替えます。
 
-2.  左側のナビゲーション ペインで、 **Organization Settings** &gt; **[認証]**をクリックします。
+2.  左側のナビゲーションペインで、 **Organization Settings** &gt; **[認証]**をクリックします。
 
 3.  **[認証]**ページで、 **[有効にする]**をクリックします。
 
@@ -265,8 +265,8 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
 
 3.  TiDB Cloudで、アイデンティティ プロバイダーからプッシュされたグループを表示します。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用して対象の組織に切り替えます。
-    2.  左側のナビゲーション ペインで、 **Organization Settings** &gt; **[認証]**をクリックします。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボボックスを使用して対象の組織に切り替えます。
+    2.  左側のナビゲーションペインで、 **Organization Settings** &gt; **[認証]**をクリックします。
     3.  **「グループ」**タブをクリックします。IDプロバイダーから同期されたグループが表示されます。
     4.  グループ内のユーザーを表示するには、 **[ビュー]**をクリックします。
 

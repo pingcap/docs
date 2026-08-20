@@ -88,7 +88,7 @@ You can take the following steps to upgrade TiDB manually or by using a script:
 
 -   アップグレード中は、次の操作は許可されません。
 
-    -   システム テーブル ( `mysql.*` 、 `information_schema.*` 、 `performance_schema.*` 、および`metrics_schema.*` ) に対して DDL 操作を実行します。
+    -   システムテーブル ( `mysql.*` 、 `information_schema.*` 、 `performance_schema.*` 、および`metrics_schema.*` ) に対して DDL 操作を実行します。
     -   DDL ジョブを手動でキャンセルします: `ADMIN CANCEL DDL JOBS job_id [, job_id] ...;` .
     -   データをインポートします。
 

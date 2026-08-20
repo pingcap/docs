@@ -75,7 +75,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 -   TiDB Lightningは競合解決戦略を簡素化し、 `replace`戦略（GA） を使用して競合するデータの処理をサポートします。 [＃51036](https://github.com/pingcap/tidb/issues/51036) @[lyzx2001](https://github.com/lyzx2001)
 
-    v8.0.0 より前のTiDB Lightningには、論理インポート モードが[1つのデータ競合解決戦略](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md#conflict-detection) 、物理インポート モードが[2つのデータ競合解決戦略](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection)があり、理解して構成するのは簡単ではありません。
+    v8.0.0 より前のTiDB Lightningには、論理インポートモードが[1つのデータ競合解決戦略](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md#conflict-detection) 、物理インポートモードが[2つのデータ競合解決戦略](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection)があり、理解して構成するのは簡単ではありません。
 
     TiDB Lightning v8.0.0では、物理インポートモードにおける[競合検出の古いバージョン](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800)戦略が廃止され、 [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md)パラメータ（実験的）を介して論理インポートモードと物理インポートモードの両方で競合検出戦略を制御できるようになり、このパラメータの設定が簡素化されました。さらに、物理インポートモードでは、 `replace`戦略により、インポート時に主キーまたは一意キーの競合が検出された場合に、最新のデータを保持し、古いデータを上書きすることがサポートされます。v8.1.0では、 `replace`戦略で競合データを処理する機能が一般提供（GA）されます。
 
@@ -188,14 +188,14 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
     -   複数値インデックスを持つテーブルを含むSQL文を実行すると、 `Can't find a proper physical plan for this query`エラーが返される可能性がある問題を修正しました。 [＃49438](https://github.com/pingcap/tidb/issues/49438) @[qw4990](https://github.com/qw4990)
     -   OOMエラー発生後に自動統計収集が停止する問題を修正[＃51993](https://github.com/pingcap/tidb/issues/51993) @[Rustin170506](https://github.com/Rustin170506)
     -   BRを使用して統計情報のないテーブルを復元した後、そのテーブルの統計の健全性が 100% のままになる問題を修正しました。 [＃29769](https://github.com/pingcap/tidb/issues/29769) @[winoros](https://github.com/winoros)
-    -   アップグレード中に TiDB がシステム テーブルの統計を作成する問題を修正しました [＃52040](https://github.com/pingcap/tidb/issues/52040) @[Rustin170506](https://github.com/Rustin170506)
+    -   アップグレード中に TiDB がシステムテーブルの統計を作成する問題を修正しました [＃52040](https://github.com/pingcap/tidb/issues/52040) @[Rustin170506](https://github.com/Rustin170506)
     -   統計の初期化が完了する前に自動統計収集がトリガーされる問題を修正[＃52346](https://github.com/pingcap/tidb/issues/52346) @[Rustin170506](https://github.com/Rustin170506)
     -   `tidb_mem_quota_analyze`が有効になっていて、統計の更新に使用されるメモリが制限を超えると TiDB がクラッシュする可能性がある問題を修正しました。 [＃52601](https://github.com/pingcap/tidb/issues/52601) @[hawkingrei](https://github.com/hawkingrei)
     -   TiDBの同期的な統計読み込みメカニズムが空の統計の読み込みを無期限に再試行し、 `fail to get stats version for this histogram` log を出力問題を修正しました。 [＃52657](https://github.com/pingcap/tidb/issues/52657) @[hawkingrei](https://github.com/hawkingrei)
     -   照合順序の新しいフレームワークが無効になっているときに、異なる照合順序を含む式によってクエリがpanicになる可能性がある問題を修正しました[＃52772](https://github.com/pingcap/tidb/issues/52772) @[wjhuang2016](https://github.com/wjhuang2016)
     -   `CPS by type`メトリックに誤った値が表示される問題を修正しました [＃52605](https://github.com/pingcap/tidb/issues/52605) @[nolouch](https://github.com/nolouch)
     -   `INFORMATION_SCHEMA.TIKV_REGION_STATUS` をクエリすると nil ポインタエラーが発生する問題を修正しました [＃52013](https://github.com/pingcap/tidb/issues/52013) @[JmPotato](https://github.com/JmPotato)
-    -   列に無効なデフォルト値が指定されたときに表示される誤ったエラー メッセージを修正しました。 [＃51592](https://github.com/pingcap/tidb/issues/51592) @[danqixu](https://github.com/danqixu)
+    -   列に無効なデフォルト値が指定されたときに表示される誤ったエラーメッセージを修正しました。 [＃51592](https://github.com/pingcap/tidb/issues/51592) @[danqixu](https://github.com/danqixu)
     -   取り込みモードでインデックスを追加すると、一部のコーナーケースでデータインデックスの不整合が発生する可能性がある問題を修正[＃51954](https://github.com/pingcap/tidb/issues/51954) @[lance6716](https://github.com/lance6716)
     -   外部キーを持つテーブルを復元するときに DDL 操作が停止する問題を修正しました [＃51838](https://github.com/pingcap/tidb/issues/51838) @[YangKeao](https://github.com/YangKeao)
     -   TiDBネットワークが分離されているときにインデックスの追加が失敗する問題を修正 [＃51846](https://github.com/pingcap/tidb/issues/51846) @[ywqzzy](https://github.com/ywqzzy)
@@ -255,9 +255,9 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
         -   BRが`AUTO_RANDOM`列を含むユニオンクラスター化インデックスの`AUTO_RANDOM` ID割り当ての進行状況をバックアップできない問題を修正しました。 [＃52255](https://github.com/pingcap/tidb/issues/52255) @[Leavrth](https://github.com/Leavrth)
         -   ログバックアップタスクを一時停止後に削除しても、GCセーフポイントがすぐに復元されない問題を修正しました。 [＃52082](https://github.com/pingcap/tidb/issues/52082) @[3pointer](https://github.com/3pointer)
         -   特別なイベントタイミングにより、ログバックアップでデータ損失が発生する可能性があるという稀な問題を修正しました。 [＃16739](https://github.com/tikv/tikv/issues/16739) @[YuJuncen](https://github.com/YuJuncen)
-        -   TiKV の再起動により、ログ バックアップのグローバル チェックポイントが実際のバックアップ ファイルの書き込みポイントよりも先に進められ、少量のバックアップ データが失われる可能性がある問題を修正しました[＃16809](https://github.com/tikv/tikv/issues/16809) @[YuJuncen](https://github.com/YuJuncen)
+        -   TiKV の再起動により、ログバックアップのグローバル チェックポイントが実際のバックアップ ファイルの書き込みポイントよりも先に進められ、少量のバックアップデータが失われる可能性がある問題を修正しました[＃16809](https://github.com/tikv/tikv/issues/16809) @[YuJuncen](https://github.com/YuJuncen)
         -   フルバックアップ中に`--concurrency`に関連する紛らわしい情報がログに表示される問題を修正 [＃50837](https://github.com/pingcap/tidb/issues/50837) @[BornChanger](https://github.com/BornChanger)
-        -   BRを使用してデータを復元する場合、または物理インポート モードでTiDB Lightningを使用してデータをインポートする場合に、PD から取得されたリージョンにLeaderがない問題を修正しました[＃51124](https://github.com/pingcap/tidb/issues/51124) [＃50501](https://github.com/pingcap/tidb/issues/50501) @[Leavrth](https://github.com/Leavrth)
+        -   BRを使用してデータを復元する場合、または物理インポートモードでTiDB Lightningを使用してデータをインポートする場合に、PD から取得されたリージョンにLeaderがない問題を修正しました[＃51124](https://github.com/pingcap/tidb/issues/51124) [＃50501](https://github.com/pingcap/tidb/issues/50501) @[Leavrth](https://github.com/Leavrth)
         -   ログバックアップタスクを一時停止、停止、再構築した後、タスクの状態は正常であるが、チェックポイントが進まない問題を修正しました。 [＃53047](https://github.com/pingcap/tidb/issues/53047) @[RidRisR](https://github.com/RidRisR)
         -   不安定なテストケース`TestClearCache` を修正 [＃51671](https://github.com/pingcap/tidb/issues/51671) @[zxc111](https://github.com/zxc111)
         -   不安定なテストケース`TestGetMergeRegionSizeAndCount` を修正 [＃52095](https://github.com/pingcap/tidb/issues/52095) @[3pointer](https://github.com/3pointer)

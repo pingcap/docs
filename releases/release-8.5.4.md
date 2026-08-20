@@ -192,7 +192,7 @@ TiDBバージョン：8.5.4
 
     -   Backup & Restore (BR)
 
-        -   ログ バックアップの zstd 圧縮が有効にならず、出力が圧縮されないままになる問題を修正 [#18836](https://github.com/tikv/tikv/issues/18836) @[3pointer](https://github.com/3pointer)
+        -   ログバックアップの zstd 圧縮が有効にならず、出力が圧縮されないままになる問題を修正 [#18836](https://github.com/tikv/tikv/issues/18836) @[3pointer](https://github.com/3pointer)
         -   Azure Blob Storageへのデータバックアップ時にフラッシュ操作が時々遅くなる問題を修正 [#18410](https://github.com/tikv/tikv/issues/18410) @[YuJuncen](https://github.com/YuJuncen)
         -   ファイル削除が失敗した場合に`log truncate`が発生する可能性がある問題を修正 [#63358](https://github.com/pingcap/tidb/issues/63358) @[YuJuncen](https://github.com/YuJuncen)
         -   バックアップ中に`--checksum`を`false`に設定すると、リストア後に`count`テーブルの`mysql.stats_meta`列が`0`になる可能性がある問題を修正 [#60978](https://github.com/pingcap/tidb/issues/60978) @[Leavrth](https://github.com/Leavrth)

@@ -127,7 +127,7 @@ SHOW TABLES
     -   `"NOT_SHARDED(PK_IS_HANDLE)"` : 行 ID として整数の主キーを定義するテーブルはシャード化されません。
     -   `"PK_AUTO_RANDOM_BITS={bit_number}"` : 整数の主キーを行 ID として定義するテーブルは、主キーに`AUTO_RANDOM`属性が割り当てられているため、シャードされます。
     -   `"SHARD_BITS={bit_number}"` : テーブルは`SHARD_ROW_ID_BITS={bit_number}`を使用して分割されます。
-    -   `NULL` : テーブルはシステム テーブルまたはビューであるため、シャード化できません。
+    -   `NULL` : テーブルはシステムテーブルまたはビューであるため、シャード化できません。
 -   `TIDB_PK_TYPE` : テーブルの主キーの種類。可能な値は`CLUSTERED` (クラスター化主キー) と`NONCLUSTERED` (非クラスター化主キー) です。
 -   `TIDB_PLACEMENT_POLICY_NAME` : テーブルに適用された配置ポリシーの名前。
 -   `TIDB_TABLE_MODE` : テーブルのモード。たとえば、 `Normal` 、 `Import` 、 `Restore` 。

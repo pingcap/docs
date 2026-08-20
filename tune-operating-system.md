@@ -1,6 +1,6 @@
 ---
 title: Tune Operating System Performance
-summary: オペレーティング システムのパラメータを調整する方法を学びます。
+summary: オペレーティングシステムのパラメータを調整する方法を学びます。
 ---
 
 # オペレーティングシステムのパフォーマンスを調整する {#tune-operating-system-performance}

@@ -10,7 +10,7 @@ summary: AWS エンドポイントサービスプライベートリンク接続�
 このメカニズムは次のように機能します。
 
 1.  プライベートリンク接続は、すべての Kafka ブローカーのアドレスとポートを返すブートストラップブローカーアドレスを使用して AWS エンドポイントサービスに接続します。
-2.  TiDB Cloud は、返されたブローカー アドレスとポートを使用して、プライベート リンク接続を介して接続を確立します。
+2.  TiDB Cloud は、返されたブローカー アドレスとポートを使用して、プライベートリンク接続を介して接続を確立します。
 3.  AWS エンドポイントサービスは、リクエストをロードバランサーに転送します。
 4.  ロード バランサーは、ポート マッピングに基づいて、対応する Kafka ブローカーにリクエストをルーティングします。
 
@@ -36,7 +36,7 @@ summary: AWS エンドポイントサービスプライベートリンク接続�
 
 AWS アカウント ID とアベイラビリティーゾーンを表示するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**Settings** &gt; **Networking**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
 2.  **AWS Private Endpoints for External Services**領域で、 **Create Private Endpoint for External Services**をクリックします。
 3.  表示されたダイアログで、AWS アカウント ID とアベイラビリティーゾーンを見つけることができます。
 
@@ -711,7 +711,7 @@ b3.usw2-az3.unique_name.aws.plc.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: 
 
 ### 2. AWSエンドポイントサービスを設定する {#2-set-up-an-aws-endpoint-service}
 
-1.  [エンドポイントサービス](https://console.aws.amazon.com/vpcconsole/home#EndpointServices:)に進みます。 **Create endpoint service**をクリックして、Kafka ロード バランサーのプライベート リンク サービスを作成します。
+1.  [エンドポイントサービス](https://console.aws.amazon.com/vpcconsole/home#EndpointServices:)に進みます。 **Create endpoint service**をクリックして、Kafka ロード バランサーのプライベートリンク サービスを作成します。
 
     -   **Name**: `kafka-pl-service`
     -   **Load balancer type**: `Network`
@@ -726,13 +726,13 @@ b3.usw2-az3.unique_name.aws.plc.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: 
 
 ## ステップ3. TiDB Cloudでプライベートリンク接続を作成する {#step-3-create-a-private-link-connection-in-tidb-cloud}
 
-TiDB Cloudでプライベート リンク接続を作成するには、次の手順を実行します。
+TiDB Cloudでプライベートリンク接続を作成するには、次の手順を実行します。
 
 1.  [ステップ2](#2-set-up-an-aws-endpoint-service)で取得した AWS エンドポイントサービス名 (例: `com.amazonaws.vpce.<region>.vpce-svc-xxxx` ) を使用して、 TiDB Cloudにプライベートリンク接続を作成します。
 
     詳細については[AWS エンドポイントサービスプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-aws-endpoint-service-private-link-connection)を参照してください。
 
-2.  TiDB Cloudのデータフロー サービスが Kafka クラスターにアクセスできるように、プライベート リンク接続にドメインをアタッチします。
+2.  TiDB Cloudのデータフロー サービスが Kafka クラスターにアクセスできるように、プライベートリンク接続にドメインをアタッチします。
 
     詳細については、 [プライベートリンク接続にドメインを添付する](/tidb-cloud/serverless-private-link-connection.md#attach-domains-to-a-private-link-connection)を参照してください。 **Attach Domains**ダイアログで、ドメインの種類として**TiDB Cloud Managed**を選択し、生成されたドメインの一意の名前を後で使用するためにコピーする必要があることに注意してください。
 
@@ -741,4 +741,4 @@ TiDB Cloudでプライベート リンク接続を作成するには、次の手
 1.  Kafka ブローカー ノードに戻り、各ブローカーの`advertised.listeners`構成内の`unique_name`プレースホルダーを、前の手順で取得した実際の一意の名前に置き換えます。
 2.  すべてのブローカーを再構成したら、Kafka ブローカーを 1 つずつ再起動します。
 
-これで、このプライベート リンク接続と 9092 をブートストラップ ポートとして使用し、 TiDB Cloudから Kafka クラスターに接続できるようになります。
+これで、このプライベートリンク接続と 9092 をブートストラップ ポートとして使用し、 TiDB Cloudから Kafka クラスターに接続できるようになります。

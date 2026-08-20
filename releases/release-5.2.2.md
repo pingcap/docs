@@ -104,7 +104,7 @@ TiDB バージョン: 5.2.2
 -   ツール
 
     -   TiCDC
-        -   上流の TiDB インスタンスが予期せず終了すると、TiCDC レプリケーション タスクが終了する可能性がある問題を修正しました[＃3061](https://github.com/pingcap/tiflow/issues/3061)
+        -   上流の TiDB インスタンスが予期せず終了すると、TiCDC レプリケーションタスクが終了する可能性がある問題を修正しました[＃3061](https://github.com/pingcap/tiflow/issues/3061)
         -   TiKVが同じリージョンに重複したリクエストを送信した場合にTiCDCプロセスがpanicする可能性がある問題を修正しました [＃2386](https://github.com/pingcap/tiflow/issues/2386)
         -   下流の TiDB/MySQL の可用性を検証する際の不要な CPU 消費を修正[＃3073](https://github.com/pingcap/tiflow/issues/3073)
         -   TiCDCによって生成されるKafkaメッセージの量が`max-message-size` に制限されない問題を修正 [＃2962](https://github.com/pingcap/tiflow/issues/2962)

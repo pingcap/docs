@@ -247,9 +247,9 @@ TiDB Cloud コンソールでは、 `<User>` 、 `<Password>` 、 `<Endpoint>` �
 </div>
 <div label="Data App">
 
-1.  データ アプリとそのエンドポイントをまだ作成していない場合は、「データ アプリ[データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)と[エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)の手順に従ってデータ アプリとそのエンドポイントを作成します。
+1.  データアプリとそのエンドポイントをまだ作成していない場合は、「データアプリ[データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)と[エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)の手順に従ってデータアプリとそのエンドポイントを作成します。
 
-2.  Vercel ダッシュボード &gt; Vercel プロジェクト &gt;**設定**&gt;**Environment Variables**に移動し、データ アプリの接続情報に従って[各環境変数の値を宣言する](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable)。
+2.  Vercel ダッシュボード &gt; Vercel プロジェクト &gt;**設定**&gt;**Environment Variables**に移動し、データアプリの接続情報に従って[各環境変数の値を宣言する](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable)。
 
     ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
 

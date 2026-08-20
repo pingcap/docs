@@ -5,14 +5,14 @@ summary: Google Cloud Private Service Connectを使用してTiDB Cloudクラス�
 
 # Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します。 {#connect-to-a-tidb-cloud-dedicated-cluster-via-google-cloud-private-service-connect}
 
-このドキュメントでは[プライベートサービス接続](https://cloud.google.com/vpc/docs/private-service-connect)を介してTiDB Cloud Dedicatedクラスターに接続する方法について説明します。 Google Cloud Private Service Connect は、Google Cloud が提供するプライベート エンドポイント サービスです。
+このドキュメントでは[プライベートサービス接続](https://cloud.google.com/vpc/docs/private-service-connect)を介してTiDB Cloud Dedicatedクラスターに接続する方法について説明します。 Google Cloud Private Service Connect は、Google Cloud が提供するプライベートエンドポイント サービスです。
 
 <CustomContent language="en,zh">
 
 > **Tip:**
 >
-> -   AWS のプライベート エンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [AWS PrivateLink を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
-> -   Azure のプライベート エンドポイントを介してTiDB Cloud Dedicatedクラスターに接続する方法については、 [Azureプライベートリンクを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)D dedicated クラスターに接続する」を参照してください。
+> -   AWS のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [AWS PrivateLink を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
+> -   Azure のプライベートエンドポイントを介してTiDB Cloud Dedicatedクラスターに接続する方法については、 [Azureプライベートリンクを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)D dedicated クラスターに接続する」を参照してください。
 > -   プライベートエンドポイントを介してTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、以下のドキュメントを参照してください。
 >     -   [AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
 >     -   [Alibaba Cloudプライベートエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
@@ -23,8 +23,8 @@ summary: Google Cloud Private Service Connectを使用してTiDB Cloudクラス�
 
 > **Tip:**
 >
-> -   AWS のプライベート エンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [AWS PrivateLink を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
-> -   Azure のプライベート エンドポイントを介してTiDB Cloud Dedicatedクラスターに接続する方法については、 [Azureプライベートリンクを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)D dedicated クラスターに接続する」を参照してください。
+> -   AWS のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [AWS PrivateLink を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
+> -   Azure のプライベートエンドポイントを介してTiDB Cloud Dedicatedクラスターに接続する方法については、 [Azureプライベートリンクを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)D dedicated クラスターに接続する」を参照してください。
 > -   プライベートエンドポイント経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、 [AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
 
 </CustomContent>
@@ -158,7 +158,7 @@ Google Cloudでエンドポイントを正常に作成したら、 TiDB Cloudコ
 
 ### プライベートエンドポイントの状態参照 {#private-endpoint-status-reference}
 
-プライベート エンドポイント接続を使用すると、プライベート エンドポイントまたはプライベート エンドポイント サービスのステータスが[**Private Endpoint**ページ](#prerequisites)ページに表示されます。
+プライベートエンドポイント接続を使用すると、プライベートエンドポイントまたはプライベートエンドポイント サービスのステータスが[**Private Endpoint**ページ](#prerequisites)ページに表示されます。
 
 プライベートエンドポイントの可能なステータスは、以下のように説明されます。
 
@@ -186,7 +186,7 @@ Google Cloudでエンドポイントを正常に作成したら、 TiDB Cloudコ
 
 キャンセルされたアクションの未保存の下書きは保持も表示もされません。次回TiDB Cloudコンソールで新しいプライベートエンドポイントを作成する際は、各手順を繰り返す必要があります。
 
-Google Cloud Shell でプライベート エンドポイントを作成するコマンドをすでに実行している場合は、Google Cloud コンソールで手動で[対応するエンドポイントを削除します](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#delete-endpoint)必要があります。
+Google Cloud Shell でプライベートエンドポイントを作成するコマンドをすでに実行している場合は、Google Cloud コンソールで手動で[対応するエンドポイントを削除します](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#delete-endpoint)必要があります。
 
 ### TiDB Cloudコンソールで、サービス添付ファイルを直接コピーして生成されたエンドポイントが表示されないのはなぜですか？ {#why-can-t-i-see-the-endpoints-generated-by-directly-copying-the-service-attachment-in-the-tidb-cloud-console}
 

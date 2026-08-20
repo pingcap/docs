@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Handling Millions of Tables in SaaS Multi-Tenant Scenarios
-summary: SaaS (Software as a Service) マルチテナント シナリオ、特に単一クラスター内のテーブル数が 100 万を超える環境における TiDB のベスト プラクティスを学習します。
+summary: SaaS (Software as a Service) マルチテナント シナリオ、特に単一クラスター内のテーブル数が 100 万を超える環境における TiDB のベストプラクティスを学習します。
 aliases: ['/ja/tidb/stable/saas-best-practices/']
 ---
 
@@ -12,7 +12,7 @@ aliases: ['/ja/tidb/stable/saas-best-practices/']
 >
 > TiDB v8.5.0 以降のバージョンを使用することをお勧めします。
 
-これらのベスト プラクティスの実際のケース スタディについては、ブログ投稿[300万テーブルへの拡張: TiDB が Atlassian Forge の SaaS プラットフォームを支える仕組み](https://www.pingcap.com/blog/scaling-3-million-tables-how-tidb-powers-atlassian-forge-saas-platform/)を参照してください。
+これらのベストプラクティスの実際のケース スタディについては、ブログ投稿[300万テーブルへの拡張: TiDB が Atlassian Forge の SaaS プラットフォームを支える仕組み](https://www.pingcap.com/blog/scaling-3-million-tables-how-tidb-powers-atlassian-forge-saas-platform/)を参照してください。
 
 ## TiDB ハードウェア推奨事項 {#tidb-hardware-recommendations}
 

@@ -83,7 +83,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   自動統計収集中にシステム変数`tidb_enable_async_merge_global_stats`と`tidb_analyze_partition_concurrency`有効にならない問題を修正[＃53972](https://github.com/pingcap/tidb/issues/53972) @[hi-rustin](https://github.com/hi-rustin)
     -   最初の引数が`month`で、2番目の引数が負の場合に`TIMESTAMPADD()`関数が無限ループに入る問題を修正しました。 [＃54908](https://github.com/pingcap/tidb/issues/54908) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   ハンドシェイクが完了する前に一部の接続が終了した場合に、Grafana の接続数監視メトリックが正しくない問題を修正しました[＃54428](https://github.com/pingcap/tidb/issues/54428) @[YangKeao](https://github.com/YangKeao)
-    -   TiProxy とリソース グループを使用するときに、各リソース グループの接続数が正しくない問題を修正しました。 [＃54545](https://github.com/pingcap/tidb/issues/54545) @[YangKeao](https://github.com/YangKeao)
+    -   TiProxy とリソースグループを使用するときに、各リソースグループの接続数が正しくない問題を修正しました。 [＃54545](https://github.com/pingcap/tidb/issues/54545) @[YangKeao](https://github.com/YangKeao)
     -   再帰CTE でビューの使用が機能しない問題を修正 [＃49721](https://github.com/pingcap/tidb/issues/49721) @[hawkingrei](https://github.com/hawkingrei)
     -   大規模並列処理 (MPP) で`final` AggMode と`non-final` AggMode が共存できない問題を修正しました [＃51362](https://github.com/pingcap/tidb/issues/51362) @[AilinKid](https://github.com/AilinKid)
     -   オプティマイザーヒント使用時に誤った警告情報が表示される問題を修正しました [＃53767](https://github.com/pingcap/tidb/issues/53767) @[hawkingrei](https://github.com/hawkingrei)
@@ -141,12 +141,12 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   `Filter`監視メトリックでデータが欠落している問題を修正しました [＃8098](https://github.com/tikv/pd/issues/8098) @[nolouch](https://github.com/nolouch)
     -   TLS が有効になっているときに HTTP クライアントがpanicする可能性がある問題を修正[＃8237](https://github.com/tikv/pd/issues/8237) @[okJiang](https://github.com/okJiang)
     -   暗号化マネージャーが使用前に初期化されない問題を修正[＃8384](https://github.com/tikv/pd/issues/8384) @[rleungx](https://github.com/rleungx)
-    -   同時実行性が高い場合にリソース グループがリソース使用量を効果的に制限できない問題を修正[＃8435](https://github.com/tikv/pd/issues/8435) @[nolouch](https://github.com/nolouch)
+    -   同時実行性が高い場合にリソースグループがリソース使用量を効果的に制限できない問題を修正[＃8435](https://github.com/tikv/pd/issues/8435) @[nolouch](https://github.com/nolouch)
     -   `store limit` に関連するデータ競合問題を修正 [＃8253](https://github.com/tikv/pd/issues/8253) @[lhy1024](https://github.com/lhy1024)
     -   `scheduling`マイクロサービスが有効化された後にスケーリングの進行状況が正しく表示されない問題を修正しました [＃8331](https://github.com/tikv/pd/issues/8331) @[rleungx](https://github.com/rleungx)
     -   `tso`マイクロサービスが有効になった後、TSO ノードが動的に更新されない問題を修正[＃8154](https://github.com/tikv/pd/issues/8154) @[rleungx](https://github.com/rleungx)
     -   リソースグループのデータ競合問題を修正 [＃8267](https://github.com/tikv/pd/issues/8267) @[HuSharp](https://github.com/HuSharp)
-    -   500 ミリ秒を超えるトークンをリクエストするとリソース グループがクォータ制限に達する問題を修正[＃8349](https://github.com/tikv/pd/issues/8349) @[nolouch](https://github.com/nolouch)
+    -   500 ミリ秒を超えるトークンをリクエストするとリソースグループがクォータ制限に達する問題を修正[＃8349](https://github.com/tikv/pd/issues/8349) @[nolouch](https://github.com/nolouch)
     -   PDリーダーを手動で転送すると失敗する可能性がある問題を修正しました [＃8225](https://github.com/tikv/pd/issues/8225) @[HuSharp](https://github.com/HuSharp)
     -   削除されたノードがetcdクライアントの候補接続リストにまだ表示される問題を修正 [＃8286](https://github.com/tikv/pd/issues/8286) @[JmPotato](https://github.com/JmPotato)
     -   `ALTER PLACEMENT POLICY`配置ポリシー を変更できない問題を修正 [＃51712](https://github.com/pingcap/tidb/issues/51712) @[jiyfhust](https://github.com/jiyfhust) [＃52257](https://github.com/pingcap/tidb/issues/52257)
@@ -166,7 +166,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   TiFlashで SSL 証明書の構成を空の文字列に設定すると、誤って TLS が有効になり、 TiFlash が起動しなくなる問題を修正しました[＃9235](https://github.com/pingcap/tiflash/issues/9235) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   分散ストレージおよびコンピューティングアーキテクチャで、DDL操作で非NULL列を追加した後にクエリでNULL値が誤って返される可能性がある問題を修正しました。 [＃9084](https://github.com/pingcap/tiflash/issues/9084) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   データベースにまたがる空のパーティションを持つパーティションテーブルで`RENAME TABLE ... TO ...`を実行した後にTiFlash がpanicする可能性がある問題を修正しました。 [＃9132](https://github.com/pingcap/tiflash/issues/9132) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    -   空のパーティションを含むパーティション テーブルでクエリを実行するときに発生するクエリ タイムアウトの問題を修正しました。 [＃9024](https://github.com/pingcap/tiflash/issues/9024) @[JinheLin](https://github.com/JinheLin)
+    -   空のパーティションを含むパーティションテーブルでクエリを実行するときに発生するクエリ タイムアウトの問題を修正しました。 [＃9024](https://github.com/pingcap/tiflash/issues/9024) @[JinheLin](https://github.com/JinheLin)
     -   遅延マテリアライゼーションが有効になった後に、一部のクエリで列タイプの不一致エラーが報告される可能性がある問題を修正[＃9175](https://github.com/pingcap/tiflash/issues/9175) @[JinheLin](https://github.com/JinheLin)
     -   遅延マテリアライゼーションが有効になった後、仮想生成列を含むクエリが誤った結果を返す可能性がある問題を修正[＃9188](https://github.com/pingcap/tiflash/issues/9188) @[JinheLin](https://github.com/JinheLin)
 
@@ -195,7 +195,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
         -   MariaDBデータの移行中に`SET`ステートメントがDM panicを引き起こす問題を修正[＃10206](https://github.com/pingcap/tiflow/issues/10206) @[dveeden](https://github.com/dveeden)
         -   `go-mysql` にアップグレードして接続ブロックの問題を修正しました [＃11041](https://github.com/pingcap/tiflow/issues/11041) @[D3Hunter](https://github.com/D3Hunter)
         -   インデックスの長さがデフォルト値の`max-index-length` を超えるとデータレプリケーションが中断される問題を修正しました [＃11459](https://github.com/pingcap/tiflow/issues/11459) @[michaelmdeng](https://github.com/michaelmdeng)
-        -   スキーマ トラッカーが LIST パーティション テーブルを誤って処理し、DM エラーが発生する問題を修正しました。 [＃11408](https://github.com/pingcap/tiflow/issues/11408) @[lance6716](https://github.com/lance6716)
+        -   スキーマ トラッカーが LIST パーティションテーブルを誤って処理し、DM エラーが発生する問題を修正しました。 [＃11408](https://github.com/pingcap/tiflow/issues/11408) @[lance6716](https://github.com/lance6716)
 
     -   TiDB Lightning
 

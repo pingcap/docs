@@ -1,6 +1,6 @@
 ---
 title: Best Practices for DDL Execution in TiDB
-summary: TiDB での DDL ステートメントの実装方法、オンライン変更プロセス、およびベスト プラクティスについて学習します。
+summary: TiDB での DDL ステートメントの実装方法、オンライン変更プロセス、およびベストプラクティスについて学習します。
 aliases: ['/ja/tidb/stable/ddl-introduction/','/ja/tidbcloud/ddl-introduction/']
 ---
 

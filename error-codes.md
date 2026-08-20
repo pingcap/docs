@@ -287,7 +287,7 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
 -   エラー番号: 8113
 
-    `Prepare`ステートメントの実行後、 `EXECUTE`ステートメントに関連付けられたテーブル スキーマが変更されました。
+    `Prepare`ステートメントの実行後、 `EXECUTE`ステートメントに関連付けられたテーブルスキーマが変更されました。
 
 -   エラー番号: 8115
 
@@ -485,7 +485,7 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
 -   エラー番号: 8250
 
-    完全なエラー メッセージは次のとおりです。
+    完全なエラーメッセージは次のとおりです。
 
     `ERROR 8250 (HY000) : Resource control feature is disabled. Run "SET GLOBAL tidb_enable_resource_control='on'" to enable the feature`
 
@@ -497,7 +497,7 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
 -   エラー番号: 8252
 
-    完全なエラー メッセージは次のとおりです。
+    完全なエラーメッセージは次のとおりです。
 
     `ERROR 8252 (HY000) : Exceeded resource group quota limitation`
 

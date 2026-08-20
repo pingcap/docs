@@ -168,7 +168,7 @@ TiDB バージョン: 7.6.0
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760)を参照してください。
 
--   BR はデフォルトでユーザー データなどのシステム テーブルを復元します[#48567](https://github.com/pingcap/tidb/issues/48567) @[BornChanger](https://github.com/BornChanger) [#49627](https://github.com/pingcap/tidb/issues/49627) @[Leavrth](https://github.com/Leavrth)
+-   BR はデフォルトでユーザー データなどのシステムテーブルを復元します[#48567](https://github.com/pingcap/tidb/issues/48567) @[BornChanger](https://github.com/BornChanger) [#49627](https://github.com/pingcap/tidb/issues/49627) @[Leavrth](https://github.com/Leavrth)
 
     バージョン5.1.0以降、スナップショットをバックアップすると、 BRは`mysql`スキーマ内のシステムテーブルを自動的にバックアップしますが、デフォルトではこれらのシステムテーブルを復元しません。バージョン6.2.0では、 BRは`--with-sys-table`パラメータを追加し、一部のシステムテーブルのデータを復元できるようにすることで、操作の柔軟性を向上させています。
 
@@ -180,10 +180,10 @@ TiDB バージョン: 7.6.0
 
 -   リソース制御に関する可観測性の強化 [#49318](https://github.com/pingcap/tidb/issues/49318) @[glorv](https://github.com/glorv)@[bufferflies](https://github.com/bufferflies)@[nolouch](https://github.com/nolouch)
 
-    アプリケーションのワークロードを分離するためにリソース グループを使用するユーザーが増えるにつれ、リソース コントロールはリソース グループに基づいた強化されたデータを提供します。これにより、リソース グループのワークロードと設定を監視し、次のような問題を迅速かつ正確に特定して診断できるようになります。
+    アプリケーションのワークロードを分離するためにリソースグループを使用するユーザーが増えるにつれ、リソース コントロールはリソースグループに基づいた強化されたデータを提供します。これにより、リソースグループのワークロードと設定を監視し、次のような問題を迅速かつ正確に特定して診断できるようになります。
 
-    -   [スロークエリ](/identify-slow-queries.md): リソース グループ名、リソース ユニット (RU) の消費量、およびリソースの待機時間を追加します。
-    -   [ステートメントサマリーテーブル](/statement-summary-tables.md): リソース グループ名、RU 消費量、リソースの待機時間を追加します。
+    -   [スロークエリ](/identify-slow-queries.md): リソースグループ名、リソース ユニット (RU) の消費量、およびリソースの待機時間を追加します。
+    -   [ステートメントサマリーテーブル](/statement-summary-tables.md): リソースグループ名、RU 消費量、リソースの待機時間を追加します。
     -   システム変数[`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014)に、SQL ステートメントによって消費された[RU](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)を示す新しいエントリ`ru_consumption`を追加します。この変数を使用して、セッション内の最後のステートメントのリソース消費量を取得できます。
     -   リソースグループに基づいてデータベースのメトリックを追加します。具体的には、QPS/TPS、実行時間（P999/P99/P95）、障害発生回数、接続数などです。
     -   すべてのリソースグループの1日あたりのRU消費量の履歴レコードを記録するために、システムテーブル[`request_unit_by_group`](/mysql-schema/mysql-schema.md#system-tables-related-to-resource-control)を追加します。
@@ -267,7 +267,7 @@ TiDB バージョン: 7.6.0
 
 -   TiDBでサポートされているすべてのキーワードの情報を表示するために、新しいシステムテーブル[`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md)を追加します。
 -   システムテーブル[`INFORMATION_SCHEMA.SLOW_QUERY`](/information-schema/information-schema-slow-query.md)に、リソース制御に関連する以下のフィールドを追加します。
-    -   `Resource_group` : ステートメントがバインドされているリソース グループ。
+    -   `Resource_group` : ステートメントがバインドされているリソースグループ。
     -   `Request_unit_read` : ステートメントによって消費された読み取り RU の合計。
     -   `Request_unit_write` : ステートメントによって消費された書き込み RU の合計。
     -   `Time_queued_by_rc` : ステートメントが利用可能なリソースを待機する合計時間。
@@ -302,7 +302,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
 -   TiKV
 
     -   非同期タスクを照会するためのAPIエンドポイント`/async_tasks`を追加 [#15759](https://github.com/tikv/tikv/issues/15759) @[YuJuncen](https://github.com/YuJuncen)
-    -   gRPC モニタリングに優先度ラベルを追加して、異なる優先度のリソース グループ データを表示します [#49318](https://github.com/pingcap/tidb/issues/49318) @[bufferflies](https://github.com/bufferflies)
+    -   gRPC モニタリングに優先度ラベルを追加して、異なる優先度のリソースグループ データを表示します [#49318](https://github.com/pingcap/tidb/issues/49318) @[bufferflies](https://github.com/bufferflies)
     -   `readpool.unified.max-tasks-per-worker`の値を動的に調整することで、優先度に基づいて実行中のタスク数を個別に計算できます [#16026](https://github.com/tikv/tikv/issues/16026) @[glorv](https://github.com/glorv)
     -   GCスレッド数を動的に調整する機能をサポート。デフォルト値は`1` [#16101](https://github.com/tikv/tikv/issues/16101) @[tonyxuqqi](https://github.com/tonyxuqqi)
 
@@ -412,9 +412,9 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   `UPDATE` 、 `DELETE` 、および`INSERT`ステートメントが、 `SQL_MODE`が厳密でない場合に警告ではなくオーバーフローエラーを返す問題を修正します [#49137](https://github.com/pingcap/tidb/issues/49137) @[YangKeao](https://github.com/YangKeao)
     -   テーブルに多値インデックスと非バイナリ型文字列で構成される複合インデックスがある場合にデータを挿入できない問題を修正 [#49680](https://github.com/pingcap/tidb/issues/49680) @[YangKeao](https://github.com/YangKeao)
     -   多階層にネストされた`LIMIT`クエリ内の`UNION`無効になる可能性がある問題を修正 [#49874](https://github.com/pingcap/tidb/issues/49874) @[Defined2014](https://github.com/Defined2014)
-    -   `BETWEEN ... AND ...`条件を使用してパーティション テーブルをクエリすると誤った結果が返される問題を修正 [#49842](https://github.com/pingcap/tidb/issues/49842) @[Defined2014](https://github.com/Defined2014)
+    -   `BETWEEN ... AND ...`条件を使用してパーティションテーブルをクエリすると誤った結果が返される問題を修正 [#49842](https://github.com/pingcap/tidb/issues/49842) @[Defined2014](https://github.com/Defined2014)
     -   `REPLACE INTO`ステートメントでヒントが使用できない問題を修正 [#34325](https://github.com/pingcap/tidb/issues/34325) @[YangKeao](https://github.com/YangKeao)
-    -   ハッシュ パーティション テーブルのクエリ時に TiDB が間違ったパーティションを選択する可能性がある問題を修正 [#50044](https://github.com/pingcap/tidb/issues/50044) @[Defined2014](https://github.com/Defined2014)
+    -   ハッシュ パーティションテーブルのクエリ時に TiDB が間違ったパーティションを選択する可能性がある問題を修正 [#50044](https://github.com/pingcap/tidb/issues/50044) @[Defined2014](https://github.com/Defined2014)
     -   圧縮を有効にして MariaDB Connector/J を使用するときに発生する接続エラーを修正 [#49845](https://github.com/pingcap/tidb/issues/49845) @[onlyacat](https://github.com/onlyacat)
 
 -   TiKV

@@ -28,7 +28,7 @@ TiDB バージョン: 5.0.6
 
 -   TiKV
 
-    -   検証プロセスを`Apply`スレッド プールから`Import`スレッド プールに移動することで、SST ファイルの挿入速度が向上します[＃11239](https://github.com/tikv/tikv/issues/11239)
+    -   検証プロセスを`Apply`スレッドプールから`Import`スレッドプールに移動することで、SST ファイルの挿入速度が向上します[＃11239](https://github.com/tikv/tikv/issues/11239)
     -   モジュールのパフォーマンスの問題を特定するために、 Raftログのガベージコレクションモジュールのメトリックを追加します。 [＃11374](https://github.com/tikv/tikv/issues/11374)
     -   Grafanaダッシュボードで、ストレージ関連の珍しいメトリックをいくつか折りたたむ [＃11681](https://github.com/tikv/tikv/issues/11681)
 
@@ -143,7 +143,7 @@ TiDB バージョン: 5.0.6
         -   Kafka メッセージの書き込み中にエラーが発生すると、TiCDC 同期タスクが一時停止する可能性がある問題を修正しました[＃2978](https://github.com/pingcap/tiflow/issues/2978)
         -   一部のタイプの列を Open Protocol 形式にエンコードするときに発生する可能性のあるpanic問題を修正しました。 [＃2758](https://github.com/pingcap/tiflow/issues/2758)
         -   デフォルト値の`max-message-bytes`を`10M` に設定することで、Kafkaが過度に大きなメッセージを送信する可能性がある問題を修正しました。 [＃3081](https://github.com/pingcap/tiflow/issues/3081)
-        -   上流の TiDB インスタンスが予期せず終了すると、TiCDC レプリケーション タスクが終了する可能性がある問題を修正しました[＃3061](https://github.com/pingcap/tiflow/issues/3061)
+        -   上流の TiDB インスタンスが予期せず終了すると、TiCDC レプリケーションタスクが終了する可能性がある問題を修正しました[＃3061](https://github.com/pingcap/tiflow/issues/3061)
         -   TiKV が同じリージョンに重複したリクエストを送信したときに TiCDC プロセスがpanicになる可能性がある問題を修正しました。 [＃2386](https://github.com/pingcap/tiflow/issues/2386)
         -   複数の TiKV がクラッシュした場合や強制再起動中に TiCDC レプリケーションが中断される問題を修正[＃3288](https://github.com/pingcap/ticdc/issues/3288)
         -   チェンジフィードチェックポイントラグの負の値エラーを修正 [＃3010](https://github.com/pingcap/ticdc/issues/3010)

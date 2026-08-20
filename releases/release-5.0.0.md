@@ -64,7 +64,7 @@ TiDB バージョン: 5.0.0
 
 ### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
 
--   TiDB の[`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50)設定項目を追加します。デフォルト値は`64`で、範囲は`[64,512]`です。MySQL テーブルは最大 64 個のインデックスをサポートします。この値がデフォルト設定を超え、テーブルに 64 個を超えるインデックスが作成された場合、テーブル スキーマが MySQL に再インポートされるとエラーが報告されます。
+-   TiDB の[`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50)設定項目を追加します。デフォルト値は`64`で、範囲は`[64,512]`です。MySQL テーブルは最大 64 個のインデックスをサポートします。この値がデフォルト設定を超え、テーブルに 64 個を超えるインデックスが作成された場合、テーブルスキーマが MySQL に再インポートされるとエラーが報告されます。
 -   TiDB が MySQL の ENUM/SET の長さ (ENUM の長さ &lt; 255) と互換性があり、一貫性を保つように、 [`enable-enum-length-limit`](/tidb-configuration-file.md#enable-enum-length-limit-new-in-v50)設定項目を追加します。デフォルト値は`true`です。
 -   `pessimistic-txn.enable`設定項目を[`tidb_txn_mode`](/system-variables.md#tidb_txn_mode)環境変数に置き換えてください。
 -   `performance.max-memory`設定項目を[`performance.server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)に置き換えます。

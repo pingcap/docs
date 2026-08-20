@@ -49,7 +49,7 @@ DESC CLIENT_ERRORS_SUMMARY_BY_USER;
 
 -   `USER` : 認証されたユーザー。
 -   `ERROR_NUMBER` : 返された MySQL 互換エラー番号。
--   `ERROR_MESSAGE` : エラー番号に一致するエラー メッセージ (プリペアドステートメント形式)。
+-   `ERROR_MESSAGE` : エラー番号に一致するエラーメッセージ (プリペアドステートメント形式)。
 -   `ERROR_COUNT` : このエラーがユーザーに返された回数。
 -   `WARNING_COUNT` : この警告がユーザーに返された回数。
 -   `FIRST_SEEN` : このエラー (または警告) がユーザーに初めて送信されたとき。

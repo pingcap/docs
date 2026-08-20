@@ -5,7 +5,7 @@ summary: ticloud serverless import describe` のリファレンス。
 
 # ticloud serverless import describe {#ticloud-serverless-import-describe}
 
-データ インポート タスクについて説明します。
+データ インポートタスクについて説明します。
 
 ```shell
 ticloud serverless import describe [flags]
@@ -19,13 +19,13 @@ ticloud serverless import get [flags]
 
 ## 例 {#examples}
 
-対話型モードでインポート タスクを説明します。
+対話型モードでインポートタスクを説明します。
 
 ```shell
 ticloud serverless import describe
 ```
 
-非対話型モードでのインポート タスクについて説明します。
+非対話型モードでのインポートタスクについて説明します。
 
 ```shell
 ticloud serverless import describe --cluster-id <cluster-id> --import-id <import-id>
@@ -39,7 +39,7 @@ ticloud serverless import describe --cluster-id <cluster-id> --import-id <import
 | -------------------- | --------------------- | --- | ------------------------ |
 | -c, --cluster-id string | クラスターの ID を指定します。     | はい  | 非対話型モードでのみ動作します。         |
 | -h, --help           | このコマンドのヘルプ情報を表示します。   | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
-| --import-id string      | インポート タスクの ID を指定します。 | はい  | 非対話型モードでのみ動作します。         |
+| --import-id string      | インポートタスクの ID を指定します。 | はい  | 非対話型モードでのみ動作します。         |
 
 ## 継承されたフラグ {#inherited-flags}
 

@@ -53,7 +53,7 @@ TiDBバージョン：8.5.5
 
 -   テーブルレベルのデータアフィニティをサポートしてクエリのパフォーマンスを向上させる（実験的） [#9764](https://github.com/tikv/pd/issues/9764) @[lhy1024](https://github.com/lhy1024)
 
-    バージョン 8.5.5 以降では、テーブルの作成または変更時に`AFFINITY`テーブル オプションを`table`または`partition`として構成できます。このオプションを有効にすると、PD は同じテーブルまたは同じパーティションに属するリージョンを単一のアフィニティ グループにグループ化します。スケジューリング中、PD はこれらのリージョンのリーダー レプリカと投票者レプリカを少数の TiKV ノードの同じサブセットに配置することを優先します。このシナリオでは、クエリで[`INDEX_LOOKUP_PUSHDOWN`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855)ヒントを使用することで、オプティマイザにインデックス ルックアップを TiKV にプッシュダウンするように明示的に指示でき、ノード間分散クエリによって発生するレイテンシーを削減し、クエリ パフォーマンスを向上させることができます。
+    バージョン 8.5.5 以降では、テーブルの作成または変更時に`AFFINITY`テーブル オプションを`table`または`partition`として構成できます。このオプションを有効にすると、PD は同じテーブルまたは同じパーティションに属するリージョンを単一のアフィニティ グループにグループ化します。スケジューリング中、PD はこれらのリージョンのリーダー レプリカと投票者レプリカを少数の TiKV ノードの同じサブセットに配置することを優先します。このシナリオでは、クエリで[`INDEX_LOOKUP_PUSHDOWN`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855)ヒントを使用することで、オプティマイザにインデックス ルックアップを TiKV にプッシュダウンするように明示的に指示でき、ノード間分散クエリによって発生するレイテンシーを削減し、クエリパフォーマンスを向上させることができます。
 
     この機能は現在実験的であり、デフォルトでは無効になっています。有効にするには、PD 設定項目[`schedule.affinity-schedule-limit`](https://docs.pingcap.com/tidb/v8.5/pd-configuration-file#affinity-schedule-limit-new-in-v855)を`0`より大きい値に設定してください。この設定項目は、PD が同時に実行できるアフィニティ スケジューリング タスクの最大数を制御します。
 
@@ -109,13 +109,13 @@ TiDBバージョン：8.5.5
 
     詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#graceful-shutdown-timeout-new-in-v855)を参照してください。
 
--   進行中のログ バックアップとスナップショットの復元の間の互換性を向上 [#58685](https://github.com/pingcap/tidb/issues/58685) @[BornChanger](https://github.com/BornChanger)
+-   進行中のログバックアップとスナップショットの復元の間の互換性を向上 [#58685](https://github.com/pingcap/tidb/issues/58685) @[BornChanger](https://github.com/BornChanger)
 
     バージョン8.5.5以降では、ログバックアップタスクの実行中でも、前提条件を満たしていればスナップショット復元を実行できます。これにより、復元処理中に進行中のログバックアップを停止することなく続行でき、復元されたデータは進行中のログバックアップに正しく記録されます。
 
     詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/br-pitr-manual#compatibility-between-ongoing-log-backup-and-snapshot-restore)を参照してください。
 
--   ログ バックアップからのテーブル レベルの復元をサポート [#57613](https://github.com/pingcap/tidb/issues/57613) @[Tristan1900](https://github.com/Tristan1900)
+-   ログバックアップからのテーブル レベルの復元をサポート [#57613](https://github.com/pingcap/tidb/issues/57613) @[Tristan1900](https://github.com/Tristan1900)
 
     バージョン8.5.5以降では、フィルタを使用してログバックアップから個々のテーブルのポイントインタイムリカバリ（PITR）を実行できます。クラスタ全体ではなく特定のテーブルを特定の時点に復元することで、より柔軟で影響の少ないリカバリオプションが提供されます。
 
@@ -272,7 +272,7 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
     -   グローバルソートを有効にして`IMPORT INTO`を実行すると、ファイルの読み込み中に無限ループが発生する問題を修正しました [#61177](https://github.com/pingcap/tidb/issues/61177) @[CbcWestwolf](https://github.com/CbcWestwolf)
     -   `IMPORT INTO`の処理中に生成列を処理する際にpanicが発生する問題を修正しました [#64657](https://github.com/pingcap/tidb/issues/64657) @[D3Hunter](https://github.com/D3Hunter)
     -   単一の SQL ステートメントに複数の`AS OF TIMESTAMP`が含まれている場合にエラーが誤って報告される可能性がある問題を修正しました [#65090](https://github.com/pingcap/tidb/issues/65090) @[you06](https://github.com/you06)
-    -   `information_schema.tables`をクエリする際に発生する可能性のある OOM 問題を修正するため、システム テーブルをクエリする際のメモリ使用量の監視を改善しました [#58985](https://github.com/pingcap/tidb/issues/58985) @[tangenta](https://github.com/tangenta)
+    -   `information_schema.tables`をクエリする際に発生する可能性のある OOM 問題を修正するため、システムテーブルをクエリする際のメモリ使用量の監視を改善しました [#58985](https://github.com/pingcap/tidb/issues/58985) @[tangenta](https://github.com/tangenta)
     -   `client-go`の潜在的なメモリリークを修正 [#65522](https://github.com/pingcap/tidb/issues/65522) @[bufferflies](https://github.com/bufferflies)
 
 -   TiKV

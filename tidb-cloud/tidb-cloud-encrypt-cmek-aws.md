@@ -66,7 +66,7 @@ TiDB Cloudコンソールまたは API を使用して、プロジェクトの C
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、**Project view** タブをクリックします。
 2.  プロジェクトビューで対象のプロジェクトを見つけ、そのプロジェクトの <MDSvgIcon name="icon-project-settings" /> をクリックします。
-3.  左側のナビゲーション ペインで、**Project Settings** の下にある **Encryption Access** をクリックします。
+3.  左側のナビゲーションペインで、**Project Settings** の下にある **Encryption Access** をクリックします。
 4.  **Encryption Access**ページで、**Create Encryption Key**をクリックして、キー作成ページに入ります。
 5.  キープロバイダーはAWS KMSのみをサポートしています。暗号化キーを使用できるリージョンを選択できます。
 6.  JSONファイルをコピーして`ROLE-TRUST-POLICY.JSON`として保存します。このファイルは信頼関係を記述します。

@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Indexing
-summary: TiDB でインデックスを作成して使用するためのベスト プラクティスをいくつか学習します。
+summary: TiDB でインデックスを作成して使用するためのベストプラクティスをいくつか学習します。
 aliases: ['/ja/tidb/stable/dev-guide-index-best-practice/','/ja/tidbcloud/dev-guide-index-best-practice/']
 ---
 
@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-index-best-practice/','/ja/tidbcloud/dev-gu
 
 # インデックス作成のベストプラクティス {#best-practices-for-indexing}
 
-このドキュメントでは、TiDB でインデックスを作成および使用するためのベスト プラクティスをいくつか紹介します。
+このドキュメントでは、TiDB でインデックスを作成および使用するためのベストプラクティスをいくつか紹介します。
 
 ## 始める前に {#before-you-begin}
 

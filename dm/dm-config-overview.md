@@ -19,7 +19,7 @@ summary: このドキュメントでは、データ移行構成ファイルの�
 
 データ移行タスクを作成するには、次の手順に従います。
 
-1.  [dmctl を使用してデータ ソース構成を DM クラスターにロードします](/dm/dm-manage-source.md#operate-data-source) 。
+1.  [dmctl を使用してデータソース構成を DM クラスターにロードします](/dm/dm-manage-source.md#operate-data-source) 。
 2.  [タスクコンフィグレーションガイド](/dm/dm-task-configuration-guide.md)の説明を参考に設定ファイル`your_task.yaml`を作成します。
 3.  [dmctlを使用してデータ移行タスクを作成する](/dm/dm-create-task.md) 。
 

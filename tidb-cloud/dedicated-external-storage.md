@@ -45,7 +45,7 @@ TiDB Cloudのバケットアクセスを設定し、以下の手順でロールA
 
         ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
 
-    3.  [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)でIAMコンソールを開き、左側のナビゲーション ペインで**[ポリシー]**をクリックし、 **Create Policy**をクリックします。
+    3.  [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)でIAMコンソールを開き、左側のナビゲーションペインで**[ポリシー]**をクリックし、 **Create Policy**をクリックします。
 
         ![Create a policy](/media/tidb-cloud/aws-create-policy.png)
 
@@ -111,7 +111,7 @@ TiDB Cloudのバケットアクセスを設定し、以下の手順でロールA
 
 3.  AWS マネジメントコンソールで、 TiDB Cloudのアクセスロールを作成し、ロール ARN を取得します。
 
-    1.  [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)のIAMコンソールで、左側のナビゲーション ペインの**[ロール]**をクリックし、 **Create role**をクリックします。
+    1.  [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)のIAMコンソールで、左側のナビゲーションペインの**[ロール]**をクリックし、 **Create role**をクリックします。
 
         ![Create a role](/media/tidb-cloud/aws-create-role.png)
 
@@ -230,7 +230,7 @@ TiDB Cloud DedicatedがAzure Blobコンテナにアクセスできるように�
 
 1.  [Azureストレージアカウント](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts)ページで、コンテナーが属するストレージアカウントをクリックします。
 
-2.  ストレージアカウントのナビゲーション ペインで、 **Security + networking** &gt; **Shared access signature**をクリックします。
+2.  ストレージアカウントのナビゲーションペインで、 **Security + networking** &gt; **Shared access signature**をクリックします。
 
     ![sas-position](/media/tidb-cloud/dedicated-external-storage/azure-sas-position.png)
 

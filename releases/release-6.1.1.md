@@ -80,7 +80,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
     -   CTE スキーマハッシュコードが誤って複製され、CTE が複数回参照されると`Can't find column ... in schema ...`エラーが発生する問題を修正しました[＃35404](https://github.com/pingcap/tidb/issues/35404) @[AilinKid](https://github.com/AilinKid)
     -   一部の右外部結合シナリオで結合順序が間違っていると、間違ったクエリ結果が発生する問題を修正しました。 [＃36912](https://github.com/pingcap/tidb/issues/36912) @[winoros](https://github.com/winoros)
     -   EqualAll の場合でTiFlash `firstrow`集計関数の誤って推論された null フラグの問題を修正しました [＃34584](https://github.com/pingcap/tidb/issues/34584) @[fixdb](https://github.com/fixdb)
-    -   `IGNORE_PLAN_CACHE`ヒントでバインディングを作成するとプラン キャッシュが機能しない問題を修正しました [＃34596](https://github.com/pingcap/tidb/issues/34596) @[fzzf678](https://github.com/fzzf678)
+    -   `IGNORE_PLAN_CACHE`ヒントでバインディングを作成するとプランキャッシュが機能しない問題を修正しました [＃34596](https://github.com/pingcap/tidb/issues/34596) @[fzzf678](https://github.com/fzzf678)
     -   ハッシュパーティションウィンドウと単一パーティションウィンドウの間に`EXCHANGE`演算子が欠落している問題を修正しました。 [＃35990](https://github.com/pingcap/tidb/issues/35990) @[LittleFall](https://github.com/LittleFall)
     -   パーティションテーブルがインデックスを完全に使用してデータをスキャンできない場合がある問題を修正[#33966](https://github.com/pingcap/tidb/issues/33966) @[mjonss](https://github.com/mjonss)
     -   集計がプッシュダウンされた後に部分集計に間違ったデフォルト値が設定された場合の間違ったクエリ結果の問題を修正しました [＃35295](https://github.com/pingcap/tidb/issues/35295) @[tiancaiamao](https://github.com/tiancaiamao)

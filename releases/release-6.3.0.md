@@ -181,7 +181,7 @@ TiDBバージョン: 6.3.0-DMR
 
 -   BRは AWS S3 オブジェクト ロックをサポートします [#13442](https://github.com/tikv/tikv/issues/13442) @[3pointer](https://github.com/3pointer)
 
-    [S3オブジェクトロック](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html)を有効にすることで、AWS 上のバックアップ データが改ざんまたは削除されないように保護できます。
+    [S3オブジェクトロック](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html)を有効にすることで、AWS 上のバックアップデータが改ざんまたは削除されないように保護できます。
 
 ### データ移行 {#data-migration}
 
@@ -244,8 +244,8 @@ TiDBバージョン: 6.3.0-DMR
 | TiDB           | [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)                                        | 新しく追加された | TiDB が一時データを格納するために使用するファイルシステム上の場所を指定します。機能が TiDB ノードでローカルストレージを必要とする場合、TiDB は対応する一時データをこの場所に格納します。デフォルト値は`/tmp/tidb`です。                                                                                      |
 | TiKV           | [`auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)              | 新しく追加された | スレッドプールのサイズを自動的に調整するかどうかを制御します。有効にすると、現在のCPU使用率に基づいてUnifyReadPoolスレッドプールのサイズを自動的に調整することで、TiKVの読み取りパフォーマンスが最適化されます。                                                                                               |
 | TiKV           | [`data-encryption-method`](/tikv-configuration-file.md#data-encryption-method)                        | 変更     | 新しい値オプション`sm4-ctr`が導入されました。この設定項目が`sm4-ctr`に設定されている場合、データは保存される前に SM4 を使用して暗号化されます。                                                                                                                              |
-| TiKV           | [`enable-log-recycle`](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)                    | 新しく追加された | Raft Engineで古いログ ファイルを再利用するかどうかを決定します。有効にすると、論理的に削除されたログ ファイルは再利用のために予約されます。これにより、書き込みワークロードのロング テールレイテンシーが削減されます。この設定項目は[フォーマットバージョン](/tikv-configuration-file.md#format-version-new-in-v630)が 2 以上の場合のみ使用できます。 |
-| TiKV           | [`format-version`](/tikv-configuration-file.md#format-version-new-in-v630)                            | 新しく追加された | Raft Engineのログ ファイルのバージョンを指定します。デフォルトのログ ファイル バージョンは、TiKV v6.3.0 より前のバージョンでは`1`です。ログ ファイルは、TiKV &gt;= v6.1.0 で読み取ることができます。デフォルトのログ ファイル バージョンは、TiKV v6.3.0 以降では`2`です。TiKV v6.3.0 以降では、ログ ファイルを読み取ることができます。       |
+| TiKV           | [`enable-log-recycle`](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)                    | 新しく追加された | Raft Engineで古いログファイルを再利用するかどうかを決定します。有効にすると、論理的に削除されたログファイルは再利用のために予約されます。これにより、書き込みワークロードのロング テールレイテンシーが削減されます。この設定項目は[フォーマットバージョン](/tikv-configuration-file.md#format-version-new-in-v630)が 2 以上の場合のみ使用できます。 |
+| TiKV           | [`format-version`](/tikv-configuration-file.md#format-version-new-in-v630)                            | 新しく追加された | Raft Engineのログファイルのバージョンを指定します。デフォルトのログファイル バージョンは、TiKV v6.3.0 より前のバージョンでは`1`です。ログファイルは、TiKV &gt;= v6.1.0 で読み取ることができます。デフォルトのログファイル バージョンは、TiKV v6.3.0 以降では`2`です。TiKV v6.3.0 以降では、ログファイルを読み取ることができます。       |
 | TiKV           | [`log-backup.enable`](/tikv-configuration-file.md#enable-new-in-v620)                                 | 変更     | バージョン6.3.0以降、デフォルト値が`false`から`true`に変更されました。                                                                                                                                                                     |
 | TiKV           | [`log-backup.max-flush-interval`](/tikv-configuration-file.md#max-flush-interval-new-in-v620)         | 変更     | バージョン6.3.0以降、デフォルト値が`5min`から`3min`に変更されました。                                                                                                                                                                      |
 | PD             | [診断を有効にする](/pd-configuration-file.md#enable-diagnostic-new-in-v630)                                   | 新しく追加された | 診断機能を有効にするかどうかを制御します。デフォルト値は`false`です。                                                                                                                                                                           |

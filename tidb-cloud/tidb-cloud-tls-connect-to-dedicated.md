@@ -77,7 +77,7 @@ mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clust
 
 ここでは、 [MySQL Connector/J](https://dev.mysql.com/doc/connector-j/en/)の TLS 接続構成が例として使用されています。
 
-TiDB クラスター CA をダウンロードした後、それをオペレーティング システムにインポートする場合は、 `keytool -importcert -alias TiDBCACert -file ca.pem -keystore <your_custom_truststore_path> -storepass <your_truststore_password>`コマンドを使用できます。
+TiDB クラスター CA をダウンロードした後、それをオペレーティングシステムにインポートする場合は、 `keytool -importcert -alias TiDBCACert -file ca.pem -keystore <your_custom_truststore_path> -storepass <your_truststore_password>`コマンドを使用できます。
 
 ```shell
 /* Be sure to replace the parameters in the following connection string. */

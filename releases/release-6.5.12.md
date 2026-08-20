@@ -78,7 +78,7 @@ TiDBバージョン: 6.5.12
     -   Prepareプロトコルで、クライアントがUTF8以外の文字セットを使用するとエラーが発生する問題を修正しました。 [＃58870](https://github.com/pingcap/tidb/issues/58870) @[xhebox](https://github.com/xhebox)
     -   一時テーブルをクエリすると、場合によっては予期しない TiKV リクエストがトリガーされる可能性がある問題を修正しました[＃58875](https://github.com/pingcap/tidb/issues/58875) @[tiancaiamao](https://github.com/tiancaiamao)
     -   ビューのステートメントに`ONLY_FULL_GROUP_BY`設定が反映されない問題を修正しました [＃53175](https://github.com/pingcap/tidb/issues/53175) @[mjonss](https://github.com/mjonss)
-    -   不一致な値型と型変換エラーを含む`IN`条件を使用してパーティション テーブルをクエリすると、誤ったクエリ結果が発生する問題を修正しました [＃54746](https://github.com/pingcap/tidb/issues/54746) @[mjonss](https://github.com/mjonss)
+    -   不一致な値型と型変換エラーを含む`IN`条件を使用してパーティションテーブルをクエリすると、誤ったクエリ結果が発生する問題を修正しました [＃54746](https://github.com/pingcap/tidb/issues/54746) @[mjonss](https://github.com/mjonss)
     -   特定のフィールドに空の値が含まれている場合にスローログのクエリが失敗する可能性がある問題を修正[＃58147](https://github.com/pingcap/tidb/issues/58147) @[yibin87](https://github.com/yibin87)
     -   `RADIANS()`関数が誤った順序で値を計算する問題を修正[＃57671](https://github.com/pingcap/tidb/issues/57671) @[gengliqi](https://github.com/gengliqi)
     -   `BIT`列のデフォルト値が正しくない問題を修正[＃57301](https://github.com/pingcap/tidb/issues/57301) @[YangKeao](https://github.com/YangKeao)

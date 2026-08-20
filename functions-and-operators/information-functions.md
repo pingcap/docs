@@ -313,7 +313,7 @@ Store: tikv
 
 | 名前                                                                                              | 説明                                  |
 | :---------------------------------------------------------------------------------------------- | :---------------------------------- |
-| [`CURRENT_RESOURCE_GROUP()`](/functions-and-operators/tidb-functions.md#current_resource_group) | 現在のセッションがバインドされているリソース グループの名前を返します |
+| [`CURRENT_RESOURCE_GROUP()`](/functions-and-operators/tidb-functions.md#current_resource_group) | 現在のセッションがバインドされているリソースグループの名前を返します |
 
 ## サポートされていない関数 {#unsupported-functions}
 

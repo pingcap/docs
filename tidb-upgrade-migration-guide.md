@@ -33,7 +33,7 @@ summary: 完全バックアップと復元のためのBRと、増分データレ
 
     -   **テーブルスキーマの要件**：レプリケートするテーブルに有効なインデックスが含まれていることを確認してください。詳細については、 [TiCDC有効インデックス](/ticdc/ticdc-overview.md#valid-index)を参照してください。
     -   **機能制限**：TiCDCはシーケンスDDLレプリケーションまたはTiFlash DDLレプリケーションをサポートしていません。詳細については、 [TiCDC がサポートしていないシナリオ](/ticdc/ticdc-overview.md#unsupported-scenarios)を参照してください。
-    -   **ベスト プラクティス**: スイッチオーバー中に TiCDC のアップストリーム クラスターで DDL 操作を実行しないでください。
+    -   **ベストプラクティス**: スイッチオーバー中に TiCDC のアップストリーム クラスターで DDL 操作を実行しないでください。
 
 -   BRの互換性を確認します。
 
@@ -76,7 +76,7 @@ SET GLOBAL tidb_gc_life_time=60h;
 
 -   **コンフィグレーションの整合性**：古いクラスタと新しいクラスタの構成が[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)であることを確認してください。同一でない場合、 BRの復元は失敗します。
 
--   **システム テーブルの復元**: BR復元中に`--with-sys-table`オプションを使用して、システム テーブル データを復元します。
+-   **システムテーブルの復元**: BR復元中に`--with-sys-table`オプションを使用して、システムテーブル データを復元します。
 
 完全なデータを新しいクラスターに移行するには、次の手順を実行します。
 
@@ -133,7 +133,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
     tiup ctl:${cluster_version} cdc changefeed create --server http://${cdc_host}:${cdc_port} --sink-uri="mysql://${username}:${password}@${tidb_endpoint}:${port}" --config config.toml --start-ts ${tso}
     ```
 
--   レプリケーション タスクのステータスを確認し、 `tso`または`checkpoint`継続的に進んでいることを確認します。
+-   レプリケーションタスクのステータスを確認し、 `tso`または`checkpoint`継続的に進んでいることを確認します。
 
     ```shell
     tiup ctl:${cluster_version} cdc changefeed list --server http://${cdc_host}:${cdc_port}
@@ -235,7 +235,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
     -   TiCDC が追いついたら、新しいクラスターから`down-tso`を取得します。
     -   [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)ツールを使用して、 `up-tso`と`down-tso`の新しいクラスターと古いクラスター間のデータの一貫性を比較します。
 
-4.  フォワード Changefeed レプリケーション タスクを一時停止します。
+4.  フォワード Changefeed レプリケーションタスクを一時停止します。
 
     ```shell
     tiup ctl:${cluster_version} cdc changefeed pause --server http://${cdc_host}:${cdc_port} -c <changefeedid>

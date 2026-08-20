@@ -404,21 +404,21 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
     -   DM 操作中、アップストリームおよびダウンストリーム データベースのユーザーは、対応する読み取りおよび書き込み権限を持っている必要があります。データ移行も、データ複製タスクの開始時に自動的に[対応する権限を事前チェックします](/dm/dm-precheck.md)。
     -   DM クラスターに異なるバージョンの DM-worker/DM-master/dmctl をデプロイするには、 [AskTUGに関するケーススタディ](https://pingkai.cn/tidbcommunity/forum/t/topic/1049/5)を参照してください。
 
--   6.1.3 レプリケーション タスクが`driver: bad connection`エラーで中断されました。
+-   6.1.3 レプリケーションタスクが`driver: bad connection`エラーで中断されました。
 
     -   `driver: bad connection`エラーは、DM と下流の TiDB データベース間の接続で異常が発生したこと (ネットワーク障害や TiDB の再起動など) と、現在のリクエストのデータがまだ TiDB に送信されていないことを示しています。
 
         -   DM 1.0.0 GA より前のバージョンでは、 `stop-task`を実行してタスクを停止し、 `start-task`を実行してタスクを再起動します。
         -   DM 1.0.0 GA以降のバージョンでは、この種のエラーに対する自動再試行メカニズムが追加されています。詳細は[#265](https://github.com/pingcap/dm/pull/265)を参照してください。
 
--   6.1.4 レプリケーション タスクが`invalid connection`エラーで中断されました。
+-   6.1.4 レプリケーションタスクが`invalid connection`エラーで中断されました。
 
-    -   `invalid connection`エラーは、DM と下流の TiDB データベース間の接続で異常 (ネットワーク障害、TiDB の再起動、TiKV のビジーなど) が発生し、現在のリクエストのデータの一部が TiDB に送信されたことを示しています。DM はレプリケーション タスクで下流にデータを同時にレプリケートする機能があるため、タスクが中断されるといくつかのエラーが発生する可能性があります。これらのエラーは`query-status`または`query-error`を実行して確認できます。
+    -   `invalid connection`エラーは、DM と下流の TiDB データベース間の接続で異常 (ネットワーク障害、TiDB の再起動、TiKV のビジーなど) が発生し、現在のリクエストのデータの一部が TiDB に送信されたことを示しています。DM はレプリケーションタスクで下流にデータを同時にレプリケートする機能があるため、タスクが中断されるといくつかのエラーが発生する可能性があります。これらのエラーは`query-status`または`query-error`を実行して確認できます。
 
         -   増分レプリケーション処理中に`invalid connection`エラーのみが発生した場合、DM はタスクを自動的に再試行します。
         -   DM がリトライしない、またはバージョン問題のために自動的にリトライできない場合 (自動リトライは v1.0.0-rc.1 で導入されました)、 `stop-task`を使用してタスクを停止し、 `start-task`を使用してタスクを再起動します。
 
--   6.1.5 リレーユニットがエラー`event from * in * diff from passed-in event *`を報告するか、レプリケーション タスクがbinlogの取得または解析に失敗するエラー（例: `get binlog error ERROR 1236 (HY000) and binlog checksum mismatch, data may be corrupted returned`で中断される。
+-   6.1.5 リレーユニットがエラー`event from * in * diff from passed-in event *`を報告するか、レプリケーションタスクがbinlogの取得または解析に失敗するエラー（例: `get binlog error ERROR 1236 (HY000) and binlog checksum mismatch, data may be corrupted returned`で中断される。
 
     -   DMがリレーログを取得するプロセス、または増分レプリケーションのプロセス中に、アップストリームのbinlogファイルのサイズが4GBを超えると、次の2つのエラーが発生する可能性があります。
 
@@ -505,7 +505,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     TiKVコプロセッサが長いキューに入っている理由を調査する必要があります。
 
--   7.1.3 `region_cache.go`は`switch region peer to next due to send request fail`を多数報告し、エラー メッセージは`context deadline exceeded`です。
+-   7.1.3 `region_cache.go`は`switch region peer to next due to send request fail`を多数報告し、エラーメッセージは`context deadline exceeded`です。
 
     TiKV へのリクエストがタイムアウトし、リージョン キャッシュがリクエストを他のノードに切り替えるようにトリガーされました。ログの`grep "<addr> cancelled`フィールドで`addr`コマンドを引き続き実行し、 `grep`の結果に応じて以下の手順を実行してください。
 

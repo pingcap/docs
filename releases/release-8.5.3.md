@@ -62,7 +62,7 @@ TiDBバージョン：8.5.3
 
         -   PITR中のインデックス修復速度を向上させるため、インデックスを同時修復する [#59158](https://github.com/pingcap/tidb/issues/59158) @[Leavrth](https://github.com/Leavrth)
         -   TiKV のダウンロード API は、バックアップ ファイルをダウンロードする際に、特定の時間範囲内のデータをフィルタリングして除外することをサポートしています。これにより、復元中に古いバージョンまたは将来のデータ バージョンがインポートされるのを回避できます [#18399](https://github.com/tikv/tikv/issues/18399) @[3pointer](https://github.com/3pointer)
-        -   タイムスタンプによるログ バックアップ メタデータ ファイルのフィルタリングをサポートし、PITR 中のメタデータの読み取りにかかる時間を削減します [#61318](https://github.com/pingcap/tidb/issues/61318) @[3pointer](https://github.com/3pointer)
+        -   タイムスタンプによるログバックアップ メタデータファイルのフィルタリングをサポートし、PITR 中のメタデータの読み取りにかかる時間を削減します [#61318](https://github.com/pingcap/tidb/issues/61318) @[3pointer](https://github.com/3pointer)
 
 ## バグ修正 {#bug-fixes}
 

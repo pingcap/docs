@@ -17,7 +17,7 @@ Data Service（PREVIEW）を使用すると、カスタムAPIエンドポイン�
 
 ## 始める前に {#before-you-begin}
 
-データ アプリを作成する前に、AWS でホストされる[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md)インスタンスを作成していることを確認してください。お持ちでない場合は、 [TiDB Cloud StarterまたはEssentialインスタンスを作成します](/tidb-cloud/create-tidb-cluster-serverless.md)の手順に従って作成してください。
+データアプリを作成する前に、AWS でホストされる[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md)インスタンスを作成していることを確認してください。お持ちでない場合は、 [TiDB Cloud StarterまたはEssentialインスタンスを作成します](/tidb-cloud/create-tidb-cluster-serverless.md)の手順に従って作成してください。
 
 > **Note:**
 >
@@ -63,7 +63,7 @@ Data Serviceの利用を開始するには、独自のデータアプリを作�
 
     > **Note:**
     >
-    > デフォルトでは、データ アプリのタイプは**Standard Data App**です。 **Chat2Query Data App**を作成したい場合は、本書の代わりに[Chat2Query API を使い始めよう](/tidb-cloud/use-chat2query-api.md)を参照してください。
+    > デフォルトでは、データアプリのタイプは**Standard Data App**です。 **Chat2Query Data App**を作成したい場合は、本書の代わりに[Chat2Query API を使い始めよう](/tidb-cloud/use-chat2query-api.md)を参照してください。
 
 4.  （オプション）データアプリのエンドポイントを、お好みのGitHubリポジトリとブランチに自動的にデプロイするには、 **Connect to GitHub**を有効にしてから、以下の手順を実行してください。
 
@@ -80,9 +80,9 @@ Data Serviceの利用を開始するには、独自のデータアプリを作�
 
 5.  **Create Data App**をクリックします。 [**Data Service**](https://tidbcloud.com/project/data-service)の詳細ページが表示されます。
 
-6.  データ アプリを GitHub に接続するように構成している場合は、指定した GitHub ディレクトリを確認してください。データ[データアプリの設定ファイル](/tidb-cloud/data-service-app-config-files.md)`tidb-cloud-data-service`によってディレクトリにコミットされていることがわかります。これは、データアプリが GitHub に正常に接続されていることを意味します。
+6.  データアプリを GitHub に接続するように構成している場合は、指定した GitHub ディレクトリを確認してください。データ[データアプリの設定ファイル](/tidb-cloud/data-service-app-config-files.md)`tidb-cloud-data-service`によってディレクトリにコミットされていることがわかります。これは、データアプリが GitHub に正常に接続されていることを意味します。
 
-    新しいデータ アプリでは、**Auto Sync & Deployment**および**Review Draft**がデフォルトで有効になっているため、 TiDB Cloudコンソールと GitHub の間でデータ アプリの変更を簡単に同期し、デプロイメント前に変更をレビューできます。 GitHub 統合の詳細については、 [GitHub を使用してデータ アプリの変更を自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
+    新しいデータアプリでは、**Auto Sync & Deployment**および**Review Draft**がデフォルトで有効になっているため、 TiDB Cloudコンソールと GitHub の間でデータアプリの変更を簡単に同期し、デプロイメント前に変更をレビューできます。 GitHub 統合の詳細については、 [GitHub を使用してデータアプリの変更を自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
 
 ### ステップ2. エンドポイントを開発する {#step-2-develop-an-endpoint}
 
@@ -96,7 +96,7 @@ Data Serviceの利用を開始するには、独自のデータアプリを作�
 
 -   **パス**：ユーザーがエンドポイントにアクセスするために使用するパス。リクエストメソッドとパスの組み合わせは、データアプリ内で一意である必要があります。
 
--   **Endpoint URL** : (読み取り専用) URL は、対応するTiDB Cloud Starterインスタンスが配置されているリージョン、データ アプリのサービス URL、およびエンドポイントのパスに基づいて自動的に生成されます。たとえば、エンドポイントのパスが`/my_endpoint/get_id`の場合、エンドポイント URL は`https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`になります。
+-   **Endpoint URL** : (読み取り専用) URL は、対応するTiDB Cloud Starterインスタンスが配置されているリージョン、データアプリのサービス URL、およびエンドポイントのパスに基づいて自動的に生成されます。たとえば、エンドポイントのパスが`/my_endpoint/get_id`の場合、エンドポイント URL は`https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`になります。
 
 -   **Request Method**：エンドポイントの HTTP メソッド。 `GET`を使用してデータを取得し、 `POST`を使用してデータを作成または挿入し、 `PUT`を使用してデータを更新または変更し、 `DELETE`を使用してデータを削除できます。
 
@@ -110,7 +110,7 @@ Data Serviceの利用を開始するには、独自のデータアプリを作�
 
     > **Note:**
     >
-    > データ アプリにリンクされているTiDB Cloud Starterインスタンスのみがドロップダウン リストに表示されます。リンクされたTiDB Cloud Starterインスタンスを管理するには、 [リンクされたデータソースを管理する](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)を参照してください。
+    > データアプリにリンクされているTiDB Cloud Starterインスタンスのみがドロップダウン リストに表示されます。リンクされたTiDB Cloud Starterインスタンスを管理するには、 [リンクされたデータソースを管理する](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)を参照してください。
 
     SQLエディタの上部にあるドロップダウンリストから、SQLステートメントを実行するTiDB Cloud Starterインスタンスを選択します。すると、右側のペインにある**「スキーマ」**タブで、そのTiDB Cloud Starterインスタンスのすべてのデータベースを表示できます。
 
@@ -191,7 +191,7 @@ HTTPSリクエストを送信することでエンドポイントを呼び出す
 
 #### 1. APIキーを作成する {#1-create-an-api-key}
 
-1.  [**Data Service**](https://tidbcloud.com/project/data-service)ページの左側のペインで、データ アプリの名前をクリックして詳細を表示します。
+1.  [**Data Service**](https://tidbcloud.com/project/data-service)ページの左側のペインで、データアプリの名前をクリックして詳細を表示します。
 
 2.  **認証**エリアで、 **Create API Key**をクリックします。
 

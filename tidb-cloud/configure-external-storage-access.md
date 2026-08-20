@@ -28,7 +28,7 @@ TiDB Cloud Starter、 Essential、またはPremiumインスタンスがAmazon S3
 1.  対象のTiDB Cloud Starter、 Essential、またはPremiumインスタンスの**インポート**ページを開きます。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
-    2.  対象のTiDB Cloud Starter、 Essential、または Premium インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
+    2.  対象のTiDB Cloud Starter、 Essential、または Premium インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**[データ]** &gt; **[インポート]**をクリックします。
 
 2.  **Add New ARN**ダイアログを開きます。
 
@@ -156,7 +156,7 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
 3.  AWS マネジメントコンソールで、 TiDB Cloudのアクセスロールを作成し、ロール ARN を取得します。
 
-    1.  [IAMコンソール](https://console.aws.amazon.com/iam/)で、左側のナビゲーション ペインの**[ロール]**をクリックし、 **Create role**をクリックします。
+    1.  [IAMコンソール](https://console.aws.amazon.com/iam/)で、左側のナビゲーションペインの**[ロール]**をクリックし、 **Create role**をクリックします。
 
         ![Create a role](/media/tidb-cloud/aws-create-role.png)
 
@@ -164,7 +164,7 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
         -   **Trusted entity type**で**AWS account**を選択します。
         -   **「AWSアカウント」**で**Another AWS account**を選択し、 TiDB CloudアカウントIDを**Account ID**フィールドに貼り付けます。
-        -   **[オプション]**で、 **[外部 ID が必要 (サードパーティがこの役割を引き受ける場合のベスト プラクティス)]**をクリックし、 TiDB Cloud外部 ID を**External ID**フィールドに貼り付けます。<CustomContent plan="starter,essential">ロールが外部IDを必須とせずに作成された場合、プロジェクト内のいずれかのTiDB Cloud StarterまたはEssentialインスタンスの設定が完了すると、そのプロジェクト内のすべてのTiDB Cloud StarterおよびEssentialインスタンスは同じロールARNを使用してAmazon S3バケットにアクセスできます。ロールがアカウントIDと外部IDの両方を使用して作成された場合、対応するTiDB Cloud StarterまたはEssentialインスタンスのみがバケットにアクセスできます。</CustomContent>
+        -   **[オプション]**で、 **[外部 ID が必要 (サードパーティがこの役割を引き受ける場合のベストプラクティス)]**をクリックし、 TiDB Cloud外部 ID を**External ID**フィールドに貼り付けます。<CustomContent plan="starter,essential">ロールが外部IDを必須とせずに作成された場合、プロジェクト内のいずれかのTiDB Cloud StarterまたはEssentialインスタンスの設定が完了すると、そのプロジェクト内のすべてのTiDB Cloud StarterおよびEssentialインスタンスは同じロールARNを使用してAmazon S3バケットにアクセスできます。ロールがアカウントIDと外部IDの両方を使用して作成された場合、対応するTiDB Cloud StarterまたはEssentialインスタンスのみがバケットにアクセスできます。</CustomContent>
 
     3.  **「次へ」**をクリックしてポリシー一覧を開き、先ほど作成したポリシーを選択してから**「次へ」**をクリックします。
 

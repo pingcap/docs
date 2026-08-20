@@ -48,7 +48,7 @@ TiDB バージョン: 5.4.0
 | TiKV           | `allow-remove-leader`                                                                                           | 削除済み     | メインスイッチの削除を許可するかどうかを決定します。                                                                                                                                                                                                                                                                                            |
 | TiKV           | `raft-msg-flush-interval`                                                                                       | 削除済み     | Raftメッセージがバッチで送信される間隔を決定します。Raftメッセージは、この設定項目で指定された間隔ごとにバッチで送信されます。                                                                                                                                                                                                                                                   |
 | PD             | [`log.level`](/pd-configuration-file.md#level)                                                                  | 変更     | デフォルト値が「INFO」から「info」に変更され、大文字と小文字を区別しないことが保証されます。                                                                                                                                                                                                                                                                    |
-| TiFlash        | [`profile.default.enable_elastic_threadpool`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | 新しく追加された | エラスティック スレッド プール機能を有効にするか無効にするかを決定します。この設定項目を有効にすると、高並行処理シナリオでのTiFlash CPU 使用率が大幅に向上します。デフォルト値は`false`です。                                                                                                                                                                                                             |
+| TiFlash        | [`profile.default.enable_elastic_threadpool`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | 新しく追加された | エラスティック スレッドプール機能を有効にするか無効にするかを決定します。この設定項目を有効にすると、高並行処理シナリオでのTiFlash CPU 使用率が大幅に向上します。デフォルト値は`false`です。                                                                                                                                                                                                             |
 | TiFlash        | [`storage.format_version`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                    | 新しく追加された | DTFile のバージョンを指定します。デフォルト値は`2`で、このバージョンではハッシュがデータファイルに埋め込まれます。値を`3`に設定することもできます。 `3`の場合、データファイルにはメタデータとトークンデータのチェックサムが含まれ、複数のハッシュアルゴリズムがサポートされます。                                                                                                                                                                     |
 | TiFlash        | [`logger.count`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                              | 変更     | デフォルト値は`10`に変更されます。                                                                                                                                                                                                                                                                                                   |
 | TiFlash        | [`status.metrics_port`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                       | 変更     | デフォルト値は`8234`に変更されます。                                                                                                                                                                                                                                                                                                 |
@@ -171,7 +171,7 @@ TiDB バージョン: 5.4.0
 
     バージョン5.4.0以降では、 [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)システム変数の値を`ON`に設定することで、TiDBが`PREDICATE COLUMNS`を収集できるようになります。
 
-    設定後、TiDB は`PREDICATE COLUMNS`情報を 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease)ごとに`mysql.column_stats_usage`システム テーブルに書き込みます。ビジネスのクエリ パターンが安定している場合は、 `ANALYZE TABLE TableName PREDICATE COLUMNS`構文を使用して`PREDICATE COLUMNS`列のみの統計情報を収集することで、統計情報の収集オーバーヘッドを大幅に削減できます。
+    設定後、TiDB は`PREDICATE COLUMNS`情報を 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease)ごとに`mysql.column_stats_usage`システムテーブルに書き込みます。ビジネスのクエリ パターンが安定している場合は、 `ANALYZE TABLE TableName PREDICATE COLUMNS`構文を使用して`PREDICATE COLUMNS`列のみの統計情報を収集することで、統計情報の収集オーバーヘッドを大幅に削減できます。
 
     [ユーザー向けドキュメント](/statistics.md#collect-statistics-on-some-columns)
 
@@ -248,7 +248,7 @@ TiDB バージョン: 5.4.0
 
     [ユーザー向けドキュメント](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)
 
--   **DM の`transfer source`を最適化して、レプリケーション タスクをスムーズに実行できるようにします。**
+-   **DM の`transfer source`を最適化して、レプリケーションタスクをスムーズに実行できるようにします。**
 
     DMワーカーノードの負荷が不均衡な場合、 `transfer source`コマンドを使用して、 `source`の構成を別の負荷に手動で転送できます。最適化後、 `transfer source`コマンドを使用すると、手動操作が簡素化されます。DMは他の操作を内部的に完了するため、関連するすべてのタスクを一時停止することなく、ソースをスムーズに転送できます。
 

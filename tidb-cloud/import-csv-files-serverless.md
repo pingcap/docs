@@ -127,7 +127,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
     >
     > **Source Files URI**で単一のファイルが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションは表示されず、 TiDB Cloudは**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
-    -   TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソース ファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**CSV**を選択します。
+    -   TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**CSV**を選択します。
 
     -   ソースCSVファイルをターゲットデータベースおよびテーブルに関連付けるためのマッピングルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
 
@@ -178,7 +178,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
     >
     > **Source Files URI**で単一のファイルが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションは表示されず、 TiDB Cloudは**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
-    -   TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソース ファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**CSV**を選択します。
+    -   TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**CSV**を選択します。
 
     -   ソースCSVファイルをターゲットデータベースおよびテーブルに関連付けるためのマッピングルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
 
@@ -229,7 +229,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
     >
     > **Source Files URI**で単一のファイルが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションは表示されず、 TiDB Cloudは**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
-    -   TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソース ファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**CSV**を選択します。
+    -   TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**CSV**を選択します。
 
     -   ソースCSVファイルをターゲットデータベースおよびテーブルに関連付けるためのマッピングルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
 
@@ -280,7 +280,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
     >
     > **Source Files URI**で単一のファイルが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションは表示されず、 TiDB Cloudは**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
-    -   TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソース ファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**CSV**を選択します。
+    -   TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**CSV**を選択します。
 
     -   ソースCSVファイルをターゲットデータベースおよびテーブルに関連付けるためのマッピングルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
 
@@ -314,7 +314,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
 ### データインポート中の警告を解決する {#resolve-warnings-during-data-import}
 
-**Start Import**をクリックした後、 `can't find the corresponding source files`などの警告メッセージが表示された場合は、正しいソース ファイルを提供するか、 [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って既存のファイルの名前を変更するか、**Advanced Settings**を使用して変更することで問題を解決します。
+**Start Import**をクリックした後、 `can't find the corresponding source files`などの警告メッセージが表示された場合は、正しいソースファイルを提供するか、 [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って既存のファイルの名前を変更するか、**Advanced Settings**を使用して変更することで問題を解決します。
 
 これらの問題を解決した後、データを再度インポートする必要があります。
 

@@ -61,7 +61,7 @@ TiDB Dashboardの [ログの検索] ページでは、クラスター内で実�
 
 ## リソース制御のためのクラスター容量の見積もり {#estimate-cluster-capacity-for-resource-control}
 
-[リソース管理](/tidb-resource-control-ru-groups.md)機能を使用してリソース分離を実装するには、クラスター管理者がリソース グループを作成し、各グループにクォータを設定できます。
+[リソース管理](/tidb-resource-control-ru-groups.md)機能を使用してリソース分離を実装するには、クラスター管理者がリソースグループを作成し、各グループにクォータを設定できます。
 
 リソース計画を立てる前に、クラスター全体の容量を把握しておく必要があります。詳細については、 [リソースマネージャーページ](/dashboard/dashboard-resource-manager.md)を参照してください。
 

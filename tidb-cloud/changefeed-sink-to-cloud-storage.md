@@ -21,7 +21,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
 ## ステップ1. 宛先を設定する {#step-1-configure-destination}
 
-対象のTiDB Cloud Dedicatedクラスターの概要ページに移動します。左側のナビゲーション ペインで**[データ]** &gt; **[変更フィード]**をクリックし、 **Create Changefeed**をクリックして**[宛先]**ページに移動します。次に、 TiDB Cloud Dedicatedクラスターがホストされているクラウド プロバイダーに応じて、宛先として**Amazon S3** 、 **GCS** 、または**Azure Blob Storage**を選択します。構成プロセスは、選択した宛先によって異なります。
+対象のTiDB Cloud Dedicatedクラスターの概要ページに移動します。左側のナビゲーションペインで**[データ]** &gt; **[変更フィード]**をクリックし、 **Create Changefeed**をクリックして**[宛先]**ページに移動します。次に、 TiDB Cloud Dedicatedクラスターがホストされているクラウド プロバイダーに応じて、宛先として**Amazon S3** 、 **GCS** 、または**Azure Blob Storage**を選択します。構成プロセスは、選択した宛先によって異なります。
 
 <SimpleTab>
 <div label="Amazon S3">

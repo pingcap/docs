@@ -209,7 +209,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 -   `LOAD DATA`ステートメントの機能を強化し、クラウドストレージからのデータインポートをサポートする (実験的) [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716)
 
-    TiDB v7.0.0 より前は、 `LOAD DATA`ステートメントではクライアント側からのデータ ファイルのインポートしかできませんでした。クラウドストレージからデータをインポートするには、 TiDB Lightningを使用する必要がありました。しかし、 TiDB Lightning を別途デプロイすると、追加のデプロイおよび管理コストが発生します。v7.0.0 では、 `LOAD DATA`ステートメントを使用してクラウドストレージから直接データをインポートできます。この機能の例を以下に示します。
+    TiDB v7.0.0 より前は、 `LOAD DATA`ステートメントではクライアント側からのデータファイルのインポートしかできませんでした。クラウドストレージからデータをインポートするには、 TiDB Lightningを使用する必要がありました。しかし、 TiDB Lightning を別途デプロイすると、追加のデプロイおよび管理コストが発生します。v7.0.0 では、 `LOAD DATA`ステートメントを使用してクラウドストレージから直接データをインポートできます。この機能の例を以下に示します。
 
     -   Amazon S3およびGoogle Cloud StorageからTiDBへのデータインポートをサポートします。ワイルドカードを使用して、複数のソースファイルを一度にTiDBにインポートすることをサポートします。
     -   `DEFINED NULL BY`を使用して null を定義することをサポートします。
@@ -375,7 +375,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     -   TiDB Lightning
 
-        -   TiDB Lightning物理インポート モードは、データ インポートとインデックス インポートの分離をサポートし、インポート速度と安定性を向上させます [#42132](https://github.com/pingcap/tidb/issues/42132) @[sleepymole](https://github.com/sleepymole)
+        -   TiDB Lightning物理インポートモードは、データ インポートとインデックス インポートの分離をサポートし、インポート速度と安定性を向上させます [#42132](https://github.com/pingcap/tidb/issues/42132) @[sleepymole](https://github.com/sleepymole)
 
             `add-index-by-sql`パラメータを追加します。デフォルト値は`false`で、これはTiDB Lightning が行データとインデックスデータの両方を KV ペアにエンコードし、それらをまとめて TiKV にインポートすることを意味します。これを`true`に設定すると、 TiDB Lightningデータのインポート後に`ADD INDEX` SQL ステートメントを使用してインデックスを追加し、インポートの速度と安定性を向上させます。
 
@@ -396,7 +396,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
     -   プリペアドプランキャッシュが有効になっている場合に、フルインデックススキャンでエラーが発生する可能性がある問題を修正しました [#42150](https://github.com/pingcap/tidb/issues/42150) @[fzzf678](https://github.com/fzzf678)
     -   `IFNULL(NOT NULL COLUMN, ...)`が間違った結果を返す可能性がある問題を修正 [#41734](https://github.com/pingcap/tidb/issues/41734) @[LittleFall](https://github.com/LittleFall)
     -   パーティションテーブル内のすべてのデータが単一のリージョンにある場合に、TiDBが誤った結果を生成する可能性がある問題を修正します [#41801](https://github.com/pingcap/tidb/issues/41801) @[Defined2014](https://github.com/Defined2014)
-    -   TiDB で、異なるパーティション テーブルが単一の SQL ステートメントに現れる場合に誤った結果が生成される可能性がある問題を修正しました [#42135](https://github.com/pingcap/tidb/issues/42135) @[mjonss](https://github.com/mjonss)
+    -   TiDB で、異なるパーティションテーブルが単一の SQL ステートメントに現れる場合に誤った結果が生成される可能性がある問題を修正しました [#42135](https://github.com/pingcap/tidb/issues/42135) @[mjonss](https://github.com/mjonss)
     -   パーティションテーブルに新しいインデックスを追加した後、パーティションパーティションテーブルで統計情報の自動収集が正しくトリガーされない可能性がある問題を修正しました [#41638](https://github.com/pingcap/tidb/issues/41638) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     -   TiDBが統計情報を2回連続で収集した後に誤った列統計情報を読み取る可能性がある問題を修正 [#42073](https://github.com/pingcap/tidb/issues/42073) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     -   プリペアドプランキャッシュが有効になっている場合に IndexMerge が誤った結果を生成する可能性がある問題を修正しました [#41828](https://github.com/pingcap/tidb/issues/41828) @[qw4990](https://github.com/qw4990)
@@ -404,7 +404,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
     -   非 BIGINT 符号なし整数が文字列/10 進数と比較したときに誤った結果を生成する可能性がある問題を修正 [#41736](https://github.com/pingcap/tidb/issues/41736) @[LittleFall](https://github.com/LittleFall)
     -   メモリ制限超過により以前の`ANALYZE`ステートメントが強制終了されると、同じセッション内の現在の`ANALYZE`ステートメントも強制終了される可能性がある問題を修正しました [#41825](https://github.com/pingcap/tidb/issues/41825) @[XuHuaiyu](https://github.com/XuHuaiyu)
     -   バッチコプロセッサの情報収集プロセス中にデータ競合が発生する可能性がある問題を修正しました [#41412](https://github.com/pingcap/tidb/issues/41412) @[you06](https://github.com/you06)
-    -   アサーション エラーによりパーティション テーブルの MVCC 情報が印刷できない問題を修正 [#40629](https://github.com/pingcap/tidb/issues/40629) @[ekexium](https://github.com/ekexium)
+    -   アサーション エラーによりパーティションテーブルの MVCC 情報が印刷できない問題を修正 [#40629](https://github.com/pingcap/tidb/issues/40629) @[ekexium](https://github.com/ekexium)
     -   フェアロックモードで存在しないキーにロックが追加される問題を修正 [#41527](https://github.com/pingcap/tidb/issues/41527) @[ekexium](https://github.com/ekexium)
     -   `INSERT IGNORE`および`REPLACE`ステートメントが値を変更しないキーをロックしない問題を修正 [#42121](https://github.com/pingcap/tidb/issues/42121) @[zyguan](https://github.com/zyguan)
 

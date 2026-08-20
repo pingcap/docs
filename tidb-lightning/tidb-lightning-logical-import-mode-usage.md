@@ -62,9 +62,9 @@ log-level = "error"
 
 ## パフォーマンスチューニング {#performance-tuning}
 
--   論理インポート モードでは、 TiDB Lightningのパフォーマンスはターゲット TiDB クラスターの書き込みパフォーマンスに大きく依存します。クラスターがパフォーマンスのボトルネックに達した場合は、 [高並行書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)を参照してください。
+-   論理インポートモードでは、 TiDB Lightningのパフォーマンスはターゲット TiDB クラスターの書き込みパフォーマンスに大きく依存します。クラスターがパフォーマンスのボトルネックに達した場合は、 [高並行書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)を参照してください。
 
--   対象の TiDB クラスタで書き込みボトルネックが発生しない場合は、 TiDB Lightning構成の`region-concurrency`の値を増やすことを検討してください。 `region-concurrency`のデフォルト値は CPU コア数です。 `region-concurrency`の意味は、物理インポート モードと論理インポート モードで異なります。論理インポート モードでは、 `region-concurrency`は書き込み同時実行数です。
+-   対象の TiDB クラスタで書き込みボトルネックが発生しない場合は、 TiDB Lightning構成の`region-concurrency`の値を増やすことを検討してください。 `region-concurrency`のデフォルト値は CPU コア数です。 `region-concurrency`の意味は、物理インポートモードと論理インポートモードで異なります。論理インポートモードでは、 `region-concurrency`は書き込み同時実行数です。
 
     設定例：
 

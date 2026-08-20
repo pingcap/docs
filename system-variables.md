@@ -734,7 +734,7 @@ mysql> SELECT * FROM t1;
     -   `UNSPECIFIED` : 未指定を意味します。TiDB は最新バージョン`2`を自動的に選択します。
     -   `0` : すべての TiDB クラスタ バージョンと互換性があります。 `0`より大きい MPP バージョンを持つ機能は、このモードでは有効になりません。
     -   `1` : v6.6.0 の新機能。 TiFlashで圧縮を伴うデータ交換を有効にするために使用されます。詳細については、 [MPPバージョンとデータ圧縮の交換](/explain-mpp.md#mpp-version-and-exchange-data-compression)を参照してください。
-    -   `2` : v7.3.0 で新しく追加され、 TiFlashで MPP タスクがエラーに遭遇したときに、より正確なエラー メッセージを提供するために使用されます。
+    -   `2` : v7.3.0 で新しく追加され、 TiFlashで MPP タスクがエラーに遭遇したときに、より正確なエラーメッセージを提供するために使用されます。
 
 ### OutPacketBytes <span class="version-mark">New in v8.5.6</span>
 
@@ -2165,7 +2165,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 </CustomContent>
 
 -   SEMは、 [セキュリティ強化Linux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux)などのシステムの設計に触発されています。MySQLの`SUPER`権限を持つユーザーの能力を制限し、代わりに`RESTRICTED`のようなきめ細かい権限を付与することを要求します。これらのきめ細かい権限には以下が含まれます。
-    -   `RESTRICTED_TABLES_ADMIN` : `mysql`スキーマのシステム テーブルにデータを書き込む機能、および`information_schema`テーブルの機密列を表示する機能。
+    -   `RESTRICTED_TABLES_ADMIN` : `mysql`スキーマのシステムテーブルにデータを書き込む機能、および`information_schema`テーブルの機密列を表示する機能。
     -   `RESTRICTED_STATUS_ADMIN` : コマンド`SHOW STATUS`で機密変数を表示する機能。
     -   `RESTRICTED_VARIABLES_ADMIN` : `SHOW [GLOBAL] VARIABLES`および`SET`内の機密変数を表示および設定する機能。
     -   `RESTRICTED_USER_ADMIN` : 他のユーザーが変更を加えたり、ユーザーアカウントを削除したりすることを防止できる機能。
@@ -2268,7 +2268,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: Boolean
 -   デフォルト値: `ON`
--   この変数は、パーティション テーブルに対して[グローバルインデックス](/global-indexes.md)の作成をサポートするかどうかを制御します。この変数を有効にすると、TiDB では、インデックス定義で`GLOBAL`を指定することで**、パーティション式で使用されているすべての列を含まない**一意インデックスを作成できます。
+-   この変数は、パーティションテーブルに対して[グローバルインデックス](/global-indexes.md)の作成をサポートするかどうかを制御します。この変数を有効にすると、TiDB では、インデックス定義で`GLOBAL`を指定することで**、パーティション式で使用されているすべての列を含まない**一意インデックスを作成できます。
 -   この変数は v8.4.0 以降非推奨になりました。その値はデフォルト値`ON`に固定されています。つまり、[グローバルインデックス](/global-indexes.md)はデフォルトで有効になっています。
 
 ### tidb_enable_lazy_cursor_fetch <span class="version-mark">New in v8.3.0</span>
@@ -2565,7 +2565,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: Boolean
 -   デフォルト値: `OFF`
--   この変数は、インスタンス プラン キャッシュ機能を有効にするかどうかを制御します。この機能はインスタンス レベルの実行計画 キャッシュを実装しており、同じ TiDB インスタンス内のすべてのセッションが実行計画 キャッシュを共有できるため、メモリ使用率が向上します。インスタンス プラン キャッシュを有効にする前に、セッション レベル[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)と[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)を無効にすることをお勧めします。
+-   この変数は、インスタンス プランキャッシュ機能を有効にするかどうかを制御します。この機能はインスタンス レベルの実行計画 キャッシュを実装しており、同じ TiDB インスタンス内のすべてのセッションが実行計画 キャッシュを共有できるため、メモリ使用率が向上します。インスタンス プランキャッシュを有効にする前に、セッション レベル[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)と[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)を無効にすることをお勧めします。
 
 ### tidb_enable_ordered_result_mode
 
@@ -2771,7 +2771,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   デフォルト値: `ON`
 -   型: Boolean
--   この変数は[リソース制御機能](/tidb-resource-control-ru-groups.md)のスイッチです。この変数が`ON`に設定されている場合、TiDB クラスターはリソース グループに基づいてアプリケーション リソースを分離できます。
+-   この変数は[リソース制御機能](/tidb-resource-control-ru-groups.md)のスイッチです。この変数が`ON`に設定されている場合、TiDB クラスターはリソースグループに基づいてアプリケーション リソースを分離できます。
 
 ### tidb_enable_reuse_chunk <span class="version-mark">New in v6.4.0</span>
 
@@ -3680,7 +3680,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   型: Float
 -   デフォルト値: `0.1`
 -   範囲: `[0, 1]`
--   この変数は、メモリ削除後に[インスタンスプランキャッシュ](#tidb_enable_instance_plan_cache-new-in-v840)用に予約されるアイドルメモリの割合を制御します。インスタンス プラン キャッシュで使用されるメモリが[`tidb_instance_plan_cache_max_size`](#tidb_instance_plan_cache_max_size-new-in-v840)で設定された制限に達すると、TiDB はアイドル メモリの割合が[`tidb_instance_plan_cache_reserved_percentage`](#tidb_instance_plan_cache_reserved_percentage-new-in-v840)で設定された値を超えるまで、Least Recently Used (LRU) アルゴリズムを使用してメモリからメモリプランを削除し始めます。
+-   この変数は、メモリ削除後に[インスタンスプランキャッシュ](#tidb_enable_instance_plan_cache-new-in-v840)用に予約されるアイドルメモリの割合を制御します。インスタンス プランキャッシュで使用されるメモリが[`tidb_instance_plan_cache_max_size`](#tidb_instance_plan_cache_max_size-new-in-v840)で設定された制限に達すると、TiDB はアイドル メモリの割合が[`tidb_instance_plan_cache_reserved_percentage`](#tidb_instance_plan_cache_reserved_percentage-new-in-v840)で設定された値を超えるまで、Least Recently Used (LRU) アルゴリズムを使用してメモリからメモリプランを削除し始めます。
 
 ### tidb_instance_plan_cache_max_size <span class="version-mark">New in v8.4.0</span>
 
@@ -4035,7 +4035,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   デフォルト値: `-1`
 -   範囲: `[-1, 9223372036854775807]`
 -   単位：バイト
--   この変数は、TiDB の統計情報更新における最大メモリ使用量を制御します。このようなメモリ使用量は、手動で[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)を実行したとき、および TiDB がバックグラウンドでタスクを自動的に分析するときに発生します。合計メモリ使用量がこのしきい値を超えると、ユーザーが実行した`ANALYZE`は終了し、より低いサンプリング レートを試すか、後で再試行するように促すエラー メッセージが表示されます。メモリしきい値を超えたために TiDB のバックグラウンドで自動タスクが終了し、使用されているサンプリング レートがデフォルト値よりも高い場合、TiDB はデフォルトのサンプリング レートを使用して更新を再試行します。この変数の値が負またはゼロの場合、TiDB は手動および自動更新タスクの両方のメモリ使用量を制限しません。
+-   この変数は、TiDB の統計情報更新における最大メモリ使用量を制御します。このようなメモリ使用量は、手動で[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)を実行したとき、および TiDB がバックグラウンドでタスクを自動的に分析するときに発生します。合計メモリ使用量がこのしきい値を超えると、ユーザーが実行した`ANALYZE`は終了し、より低いサンプリング レートを試すか、後で再試行するように促すエラーメッセージが表示されます。メモリしきい値を超えたために TiDB のバックグラウンドで自動タスクが終了し、使用されているサンプリング レートがデフォルト値よりも高い場合、TiDB はデフォルトのサンプリング レートを使用して更新を再試行します。この変数の値が負またはゼロの場合、TiDB は手動および自動更新タスクの両方のメモリ使用量を制限しません。
 
 > **Note:**
 >
@@ -5426,7 +5426,7 @@ SHOW WARNINGS;
 -   型: Enumeration
 -   デフォルト値: `dynamic`
 -   指定可能な値: `static` 、 `dynamic` 、 `static-only` 、 `dynamic-only`
--   パーティション テーブルに`dynamic`モードと`static`モードのどちらを使用するかを指定します。動的パーティショニングは、完全なテーブルレベル統計、またはグローバル統計が収集された後にのみ有効であることに注意してください。グローバル統計の収集が完了する前に`dynamic`プルーニング モードを有効にすると、TiDB はグローバル統計が完全に収集されるまで`static`モードのままになります。グローバル統計の詳細については、 [動的プルーニングモードでパーティションテーブルの統計情報を収集する](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)を参照してください。動的プルーニング モードの詳細については、 [パーティションテーブルの動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)を参照してください。
+-   パーティションテーブルに`dynamic`モードと`static`モードのどちらを使用するかを指定します。動的パーティショニングは、完全なテーブルレベル統計、またはグローバル統計が収集された後にのみ有効であることに注意してください。グローバル統計の収集が完了する前に`dynamic`プルーニング モードを有効にすると、TiDB はグローバル統計が完全に収集されるまで`static`モードのままになります。グローバル統計の詳細については、 [動的プルーニングモードでパーティションテーブルの統計情報を収集する](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)を参照してください。動的プルーニング モードの詳細については、 [パーティションテーブルの動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)を参照してください。
 
 ### tidb_persist_analyze_options <span class="version-mark">New in v5.4.0</span>
 
@@ -5488,7 +5488,7 @@ SHOW WARNINGS;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 -   デフォルト値： `2097152` （2 MiB）
 -   範囲: `[0, 9223372036854775807]` 、バイト単位。単位が「KiB|MiB|GiB|TiB」のメモリ形式もサポートされています。 `0`は制限なしを意味します。
--   この変数は、プリペアドプラン キャッシュまたは非プリペアドプラン キャッシュにキャッシュできるプランの最大サイズを制御します。プランのサイズがこの値を超える場合、プランはキャッシュされません。詳細については、 [プリペアドプランキャッシュのメモリ管理](/sql-prepared-plan-cache.md#memory-management-of-prepared-plan-cache)と[非プリペアドプランキャッシュ](/sql-plan-management.md#usage)を参照してください。
+-   この変数は、プリペアドプランキャッシュまたは非プリペアドプランキャッシュにキャッシュできるプランの最大サイズを制御します。プランのサイズがこの値を超える場合、プランはキャッシュされません。詳細については、 [プリペアドプランキャッシュのメモリ管理](/sql-prepared-plan-cache.md#memory-management-of-prepared-plan-cache)と[非プリペアドプランキャッシュ](/sql-plan-management.md#usage)を参照してください。
 
 ### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
 
@@ -5725,7 +5725,7 @@ SHOW WARNINGS;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: Boolean
 -   デフォルト値: `ON`
--   この変数は[`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)ステートメントと[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)オプティマイザヒントに特権制御を適用するかどうかを制御します。このシステム変数が`ON`に設定されている場合、これらの 2 つの方法で現在のセッションまたは現在のステートメントのバインドされたリソース グループを変更するには`SUPER` 、 `RESOURCE_GROUP_ADMIN` 、または`RESOURCE_GROUP_USER`の特権が必要です。 `OFF`に設定されている場合、これらの権限は不要となり、この変数がない以前の TiDB バージョンと同じ動作になります。
+-   この変数は[`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)ステートメントと[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)オプティマイザヒントに特権制御を適用するかどうかを制御します。このシステム変数が`ON`に設定されている場合、これらの 2 つの方法で現在のセッションまたは現在のステートメントのバインドされたリソースグループを変更するには`SUPER` 、 `RESOURCE_GROUP_ADMIN` 、または`RESOURCE_GROUP_USER`の特権が必要です。 `OFF`に設定されている場合、これらの権限は不要となり、この変数がない以前の TiDB バージョンと同じ動作になります。
 -   TiDB クラスターを以前のバージョンから v8.2.0 以降にアップグレードすると、この変数のデフォルト値は`OFF`に設定され、この機能はデフォルトで無効になります。
 
 ### tidb_retry_limit
@@ -5802,7 +5802,7 @@ SHOW WARNINGS;
 -   TiDB v8.4.0 より前では、この変数のデフォルト値は`0`です。
 -   TiDB v8.4.0以降では、デフォルト値は`536870912`です。以前のバージョンからv8.4.0以降にアップグレードすると、以前のバージョンで設定されていた値が使用されます。
 -   この変数は、TiDB のスキーマ キャッシュのサイズを制御します。単位はバイトです。この変数を`0`に設定すると、キャッシュ制限機能が無効になります。この機能を有効にするには、 `[67108864, 9223372036854775807]`の範囲内の値を設定する必要があります。TiDB はこの値を最大使用可能メモリ制限として使用し、Least Recently Used (LRU) アルゴリズムを適用して必要なテーブルをキャッシュすることで、スキーマ情報によって使用されるメモリを効果的に削減します。
--   クラスターに多数のパーティション テーブルが含まれている場合、またはパーティション テーブル ( `TRUNCATE`や`DROP PARTITION`など) に対して DDL 操作を頻繁に実行する場合は、この変数を`0`に設定することをお勧めします。
+-   クラスターに多数のパーティションテーブルが含まれている場合、またはパーティションテーブル ( `TRUNCATE`や`DROP PARTITION`など) に対して DDL 操作を頻繁に実行する場合は、この変数を`0`に設定することをお勧めします。
 
 ### tidb_schema_version_cache_limit <span class="version-mark">New in v7.4.0</span>
 
@@ -6183,7 +6183,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: 整数
 -   デフォルト値: `0`
--   この変数は読み取り専用です。 [ステートメントの要約持続性](/statement-summary-tables.md#persist-statements-summary)が有効な場合に保存できるデータ ファイルの最大数を指定します。
+-   この変数は読み取り専用です。 [ステートメントの要約持続性](/statement-summary-tables.md#persist-statements-summary)が有効な場合に保存できるデータファイルの最大数を指定します。
 
 <CustomContent platform="tidb">
 
@@ -6210,7 +6210,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   型: 整数
 -   デフォルト値: `3`
 -   単位：日
--   この変数は読み取り専用です。 [ステートメントの要約持続性](/statement-summary-tables.md#persist-statements-summary)が有効な場合に、永続的なデータ ファイルを保持する最大日数を指定します。
+-   この変数は読み取り専用です。 [ステートメントの要約持続性](/statement-summary-tables.md#persist-statements-summary)が有効な場合に、永続的なデータファイルを保持する最大日数を指定します。
 
 <CustomContent platform="tidb">
 
@@ -6237,7 +6237,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   型: 整数
 -   デフォルト値: `64`
 -   単位: MiB
--   この変数は読み取り専用です。 [ステートメントの要約持続性](/statement-summary-tables.md#persist-statements-summary)が有効な場合の永続データ ファイルの最大サイズを指定します。
+-   この変数は読み取り専用です。 [ステートメントの要約持続性](/statement-summary-tables.md#persist-statements-summary)が有効な場合の永続データファイルの最大サイズを指定します。
 
 <CustomContent platform="tidb">
 
@@ -6831,7 +6831,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 -   デフォルト値: `OFF`
 -   型: Boolean
--   [ファストスキャン](/tiflash/use-fastscan.md)が有効になっている場合 ( `ON`に設定されている場合)、 TiFlash はより効率的なクエリ パフォーマンスを提供しますが、クエリ結果の精度やデータの一貫性は保証されません。
+-   [ファストスキャン](/tiflash/use-fastscan.md)が有効になっている場合 ( `ON`に設定されている場合)、 TiFlash はより効率的なクエリパフォーマンスを提供しますが、クエリ結果の精度やデータの一貫性は保証されません。
 
 ### tiflash_fine_grained_shuffle_batch_size <span class="version-mark">New in v6.2.0</span>
 

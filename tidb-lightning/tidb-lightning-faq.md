@@ -32,7 +32,7 @@ TiDB Lightningのバージョンはクラスターと同じである必要があ
 
 TiDB Lightningはデフォルトで、ローカルデータソースとインポートされたテーブルのチェックサムを実行します。チェックサムが一致しない場合、プロセスは中止されます。このチェックサム情報はログから読み取ることができます。
 
-ターゲット テーブルで[`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md) SQL コマンドを実行して、インポートされたデータのチェックサムを再計算することもできます。
+ターゲットテーブルで[`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md) SQL コマンドを実行して、インポートされたデータのチェックサムを再計算することもできます。
 
 ```sql
 ADMIN CHECKSUM TABLE `schema`.`table`;
@@ -47,7 +47,7 @@ ADMIN CHECKSUM TABLE `schema`.`table`;
 1 row in set (0.01 sec)
 ```
 
-## TiDB Lightningではどのようなデータ ソース形式がサポートされていますか? {#what-kinds-of-data-source-formats-are-supported-by-tidb-lightning}
+## TiDB Lightningではどのようなデータソース形式がサポートされていますか? {#what-kinds-of-data-source-formats-are-supported-by-tidb-lightning}
 
 TiDB Lightning は以下をサポートします:
 
@@ -165,8 +165,8 @@ TiDB LightningでSQLの配置ルールを使用するには、データをター
 
 1.  データ分散トポロジを計画します。
 2.  TiKV および PD に必要なラベルを構成します。
-3.  配置ルール ポリシーを作成し、作成したポリシーをターゲット テーブルに適用します。
-4.  TiDB Lightningを使用して、データをターゲット テーブルにインポートします。
+3.  配置ルール ポリシーを作成し、作成したポリシーをターゲットテーブルに適用します。
+4.  TiDB Lightningを使用して、データをターゲットテーブルにインポートします。
 
 ## TiDB LightningとDumplingを使用してスキーマをコピーするにはどうすればよいですか? {#how-can-i-use-tidb-lightning-and-dumpling-to-copy-a-schema}
 

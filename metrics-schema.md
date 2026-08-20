@@ -89,7 +89,7 @@ SHOW TABLES;
 626 rows in set (0.00 sec)
 ```
 
-`METRICS_SCHEMA` 、（ [`metrics_summary`](/information-schema/information-schema-metrics-summary.md) 、 [`metrics_summary_by_label`](/information-schema/information-schema-metrics-summary.md) 、 [`inspection_summary`](/information-schema/information-schema-inspection-summary.md)などの監視関連の要約テーブルのデータ ソースとして使用されます。
+`METRICS_SCHEMA` 、（ [`metrics_summary`](/information-schema/information-schema-metrics-summary.md) 、 [`metrics_summary_by_label`](/information-schema/information-schema-metrics-summary.md) 、 [`inspection_summary`](/information-schema/information-schema-inspection-summary.md)などの監視関連の要約テーブルのデータソースとして使用されます。
 
 ## 追加の例 {#additional-examples}
 
