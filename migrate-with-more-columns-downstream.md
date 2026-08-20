@@ -1,6 +1,6 @@
 ---
 title: Migrate Data to a Downstream TiDB Table with More Columns
-summary: 対応するアップストリーム テーブルよりも多くの列を持つダウンストリーム TiDB テーブルにデータを移行する方法を学習します。
+summary: 対応するアップストリームテーブルよりも多くの列を持つダウンストリーム TiDB テーブルにデータを移行する方法を学習します。
 ---
 
 # より多くの列を持つ下流の TiDB テーブルにデータを移行する {#migrate-data-to-a-downstream-tidb-table-with-more-columns}
@@ -82,7 +82,7 @@ DM がダウンストリームテーブルスキーマを使用してアップ�
     | `-s`                | ソースを指定します。`${source-id}`は MySQL データのソース ID を示します。                                                               |
     | `${task-name}`      | データ移行タスクの`task.yaml`構成ファイルで定義されている移行タスクの名前を指定します。                                                                |
     | `${database-name}`  | データベースを指定します。`${database-name}`はアップストリーム データベースの名前を示します。                                                        |
-    | `${table-name}`     | アップストリーム テーブルの名前を指定します。                                                                                          |
+    | `${table-name}`     | アップストリームテーブルの名前を指定します。                                                                                          |
     | `${schema-file}`    | 設定するテーブルスキーマファイルを指定します。                                                                                        |
 
     例えば：

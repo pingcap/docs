@@ -12,7 +12,7 @@ summary: TiProxy の一般的な問題、原因、および解決策について
 次の手順に従って、問題をトラブルシューティングできます。
 
 1.  [コネクタバージョン](/tiproxy/tiproxy-overview.md#supported-connectors)がサポートされているかどうかを確認してください。コネクタがリストにない場合は、コネクタが[認証プラグイン](https://dev.mysql.com/doc/refman/8.0/en/pluggable-authentication.html)サポートしているかどうかを確認してください。
-2.  クライアントが`No available TiDB instances, please make sure TiDB is available`報告する場合は、TiDBサーバーが存在するかどうか、および TiDBサーバーの SQL ポートと HTTP ステータス ポートに正常に接続できるかどうかを確認します。
+2.  クライアントが`No available TiDB instances, please make sure TiDB is available`報告する場合は、TiDBサーバーが存在するかどうか、および TiDBサーバーの SQL ポートと HTTP ステータスポートに正常に接続できるかどうかを確認します。
 3.  クライアントが`Require TLS enabled on TiProxy when require-backend-tls=true`報告する場合は、TiProxy が TLS 証明書で正しく構成されているかどうかを確認します。
 4.  クライアントが`Verify TiDB capability failed, please upgrade TiDB`報告する場合は、TiDBサーバーのバージョンが v6.5.0 以降であるかどうかを確認します。
 5.  クライアントが`TiProxy fails to connect to TiDB, please make sure TiDB is available`報告した場合は、 TiProxy ノードが TiDBサーバーに接続できるかどうかを確認します。

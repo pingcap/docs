@@ -18,7 +18,7 @@ summary: このドキュメントでは、brコマンドラインツールを使
 
 > **Note:**
 >
-> -   以下の例では、Amazon S3 アクセス キーとシークレット キーを使用して権限を認証することを前提としていますIAMロールを使用して権限を認証する場合は、 `--send-credentials-to-tikv` `false`に設定する必要があります。
+> -   以下の例では、Amazon S3 アクセスキーとシークレット キーを使用して権限を認証することを前提としていますIAMロールを使用して権限を認証する場合は、 `--send-credentials-to-tikv` `false`に設定する必要があります。
 > -   他のストレージシステムまたは認証方法を使用して権限を認証する場合は、[バックアップストレージ](/br/backup-and-restore-storages.md)に従ってパラメータ設定を調整します。
 
 `tiup br backup full`コマンドを実行すると、TiDB クラスタのスナップショットをバックアップできます。ヘルプ情報を表示するには、 `tiup br backup full --help`を実行してください。
@@ -76,7 +76,7 @@ tiup br validate decode --field="end-version" \
 
 `tiup br restore full`コマンドを実行すると、スナップショットバックアップを復元できます。ヘルプ情報を表示するには、 `tiup br restore full --help`を実行してください。
 
-次の例では[前のバックアップスナップショット](#back-up-cluster-snapshots)をターゲット クラスターに復元します。
+次の例では[前のバックアップスナップショット](#back-up-cluster-snapshots)をターゲットクラスターに復元します。
 
 ```shell
 tiup br restore full --pd "${PD_IP}:2379" \

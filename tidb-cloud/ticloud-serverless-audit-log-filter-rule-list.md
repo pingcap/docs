@@ -5,7 +5,7 @@ summary: ticloud serverless audit-log filter-rule list` のリファレンス。
 
 # ticloud serverless audit-log filter-rule list {#ticloud-serverless-audit-log-filter-rule-list}
 
-TiDB Cloud Essential クラスターの監査ログ フィルター ルールを一覧表示します。
+TiDB Cloud Essential クラスターの監査ログフィルタールールを一覧表示します。
 
 ```shell
 ticloud serverless audit-log filter-rule list [flags]
@@ -13,19 +13,19 @@ ticloud serverless audit-log filter-rule list [flags]
 
 ## 例 {#examples}
 
-対話モードですべての監査ログ フィルタ ルールを一覧表示します。
+対話モードですべての監査ログフィルタルールを一覧表示します。
 
 ```shell
 ticloud serverless audit-log filter-rule list
 ```
 
-非対話型モードですべての監査ログ フィルタ ルールを一覧表示します。
+非対話型モードですべての監査ログフィルタルールを一覧表示します。
 
 ```shell
 ticloud serverless audit-log filter-rule list -c <cluster-id>
 ```
 
-非対話型モードで JSON 形式のすべての監査ログ フィルター ルールを一覧表示します。
+非対話型モードで JSON 形式のすべての監査ログフィルタールールを一覧表示します。
 
 ```shell
 ticloud serverless audit-log filter-rule list -c <cluster-id> -o json

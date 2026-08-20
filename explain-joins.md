@@ -173,7 +173,7 @@ EXPLAIN ANALYZE SELECT * FROM t1 INNER JOIN t2 ON t1.id = t2.t1_id WHERE t1.int_
 
 インデックス結合のパフォーマンスは、次のシステム変数の影響を受けます。
 
--   [`tidb_index_join_batch_size`](/system-variables.md#tidb_index_join_batch_size) (デフォルト値: `25000` ) - `index lookup join`操作のバッチ サイズ。
+-   [`tidb_index_join_batch_size`](/system-variables.md#tidb_index_join_batch_size) (デフォルト値: `25000` ) - `index lookup join`操作のバッチサイズ。
 -   [`tidb_index_lookup_join_concurrency`](/system-variables.md#tidb_index_lookup_join_concurrency) (デフォルト値: `4` ) - 同時インデックス検索タスクの数。
 
 ## ハッシュ結合 {#hash-join}
@@ -202,9 +202,9 @@ EXPLAIN SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 `HashJoin_27`の実行プロセスでは、TiDB は次の操作を順番に実行します。
 
 1.  `Build`面分のデータをメモリにキャッシュします。
-2.  キャッシュされたデータに基づいて`Build`側にハッシュ テーブルを構築します。
+2.  キャッシュされたデータに基づいて`Build`側にハッシュテーブルを構築します。
 3.  `Probe`面のデータを読み取ります。
-4.  `Probe`側のデータを使用してハッシュ テーブルをプローブします。
+4.  `Probe`側のデータを使用してハッシュテーブルをプローブします。
 5.  適格なデータをユーザーに返します。
 
 結果テーブル`EXPLAIN`の`operator info`列には、クエリが内部結合か外部結合か、結合条件など、 `HashJoin_27`に関するその他の情報も記録されます。上記の例では、クエリは内部結合であり、結合条件`equal:[eq(test.t1.id, test.t2.id)]`はクエリ条件`WHERE t1.id = t2.id`と部分的に一致しています。以降の例における他の結合演算子の演算子情報も、これと同様です。

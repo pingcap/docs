@@ -335,7 +335,7 @@ SELECT * FROM t;
 
 新しく割り当てられた値は`101` 。これは、AUTO_INCREMENT IDを割り当てるためのキャッシュのサイズが`100`であることを示しています。
 
-さらに、バッチ`INSERT`ステートメント内の連続 ID の長さが`AUTO_ID_CACHE`を超えると、TiDB はそれに応じてキャッシュ サイズを増やし、ステートメントがデータを適切に挿入できるようにします。
+さらに、バッチ`INSERT`ステートメント内の連続 ID の長さが`AUTO_ID_CACHE`を超えると、TiDB はそれに応じてキャッシュサイズを増やし、ステートメントがデータを適切に挿入できるようにします。
 
 ### AUTO_INCREMENT IDキャッシュをクリアする {#clear-the-auto-increment-id-cache}
 
@@ -463,7 +463,7 @@ IDは常に増加し、 `AUTO_ID_CACHE 0`のような大きなギャップは発
 
 現在、 `AUTO_INCREMENT` TiDB で使用する場合、次の制限があります。
 
--   TiDB v6.6.0 以前のバージョンの場合、定義された列は主キーまたはインデックス プレフィックスのいずれかである必要があります。
+-   TiDB v6.6.0 以前のバージョンの場合、定義された列は主キーまたはインデックスプレフィックスのいずれかである必要があります。
 -   `INTEGER` 、 `FLOAT` 、または`DOUBLE`タイプの列に定義する必要があります。
 -   `DEFAULT`列の値と同じ列には指定できません。
 -   `ALTER TABLE` 、属性`AUTO_INCREMENT`を持つ列を追加または変更するために使用できません。これには、属性`AUTO_INCREMENT`既存の列に追加するために`ALTER TABLE ... MODIFY/CHANGE COLUMN`を使用することや、属性`AUTO_INCREMENT`を持つ列を追加するために`ALTER TABLE ... ADD COLUMN`を使用することも含まれます。

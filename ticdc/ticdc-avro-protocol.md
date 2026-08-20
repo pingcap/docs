@@ -281,7 +281,7 @@ TiCDC Avro プロトコルは[`io.confluent.kafka.serializers.KafkaAvroDeseriali
 
 ### イベントの種類を区別する {#distinguish-event-types}
 
-コンシューマー プログラムは、次のルールによって DML イベント タイプを区別できます。
+コンシューマー プログラムは、次のルールによって DML イベントタイプを区別できます。
 
 -   Key部分のみの場合はDeleteイベントになります。
 -   キーと値の両方がある場合、挿入イベントまたは更新イベントのいずれかです。[TiDB拡張フィールド](#tidb-extension-fields)が有効になっている場合は、 `_tidb_op`フィールドを使用して挿入イベントか更新イベントかを識別できます。TiDB拡張フィールドが有効になっていない場合は、それらを区別できません。

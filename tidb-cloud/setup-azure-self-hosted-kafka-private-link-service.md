@@ -34,7 +34,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 
 3.  [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターから Kafka デプロイメント情報を取得します。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲットクラスターの名前をクリックして概要ページに移動します。
     2.  左側のナビゲーションペインで、 **[データ]** &gt; **[Changefeed] を**クリックします。
     3.  **Changefeed**ページで、右上隅の**Create Changefeed**をクリックし、次の情報を入力します。
         1.  **宛先**で、 **Kafka**を選択します。
@@ -42,7 +42,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     4.  続行する前に、 TiDB Cloud Azureアカウントのリージョン情報とサブスクリプションを**リマインダー**に書き留めておいてください。この情報は、TiDB CloudがKafka Private Linkサービスにアクセスできるように承認する際に使用します。
     5.  一意のランダム文字列を指定して、Kafka プライベートリンクサービス用の**Kafka Advertised Listener Pattern**を生成します。
         1.  一意のランダム文字列を入力してください。数字または小文字のみ使用できます。この文字列は、後ほど**Kafka Advertised Listener Pattern**を生成する際に使用します。
-        2.  **「使用状況を確認して生成」をクリックすると、**ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズ リスナーを組み立てるために使用される**Kafka Advertised Listener Pattern**が生成されます。
+        2.  **「使用状況を確認して生成」をクリックすると、**ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズリスナーを組み立てるために使用される**Kafka Advertised Listener Pattern**が生成されます。
 
 すべてのデプロイメント情報をメモしてください。後でKafka Private Linkサービスを設定する際に必要になります。
 
@@ -150,7 +150,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
         2.  2 つのブローカー リスナーを構成します。内部 Kafka クライアント アクセス用の**INTERNAL**と、 TiDB Cloudからのアクセス用の**EXTERNAL です**。
 
     2.  `advertised.listeners`については、次の操作を行います。
-        1.  ブローカーノードの内部 IP アドレスを使用して、各ブローカーの内部アドバタイズ リスナーを構成します。これにより、内部 Kafka クライアントはアドバタイズ アドレスを介してブローカーに接続できるようになります。
+        1.  ブローカーノードの内部 IP アドレスを使用して、各ブローカーの内部アドバタイズリスナーを構成します。これにより、内部 Kafka クライアントはアドバタイズ アドレスを介してブローカーに接続できるようになります。
         2.  TiDB Cloudから取得した**Kafka Advertised Listener Pattern**に基づいて、各ブローカーノードにEXTERNALアドバタイズリスナーを設定することで、TiDB Cloudが異なるブローカーを区別できるようになります。異なるEXTERNALアドバタイズリスナーを設定することで、 TiDB Cloud側のKafkaクライアントはリクエストを適切なブローカーにルーティングできるようになります。
             -   Kafka Private Link サービスへのアクセスにおいて、ブローカーを区別するために異なる`<port>`値を使用してください。すべてのブローカーの EXTERNAL アドバタイズリスナーのポート範囲を計画してください。これらのポートは、ブローカーが実際にリッスンするポートである必要はありません。これらのポートは、Private Link サービス内のロードバランサーがリッスンするポートであり、ロードバランサーはリクエストを異なるブローカーに転送します。
             -   トラブルシューティングを容易にするために、ブローカーごとに異なるブローカー ID を構成することをお勧めします。

@@ -99,7 +99,7 @@ TiDBバージョン: 6.4.0-DMR
 
     詳細については、 [ユーザー向けドキュメント](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640)を参照してください。
 
--   相関サブクエリの非相関化を実行するかどうかを制御する新しいオプティマイザー ヒント`NO_DECORRELATE`を導入します [#37789](https://github.com/pingcap/tidb/issues/37789) @[time-and-fate](https://github.com/time-and-fate)
+-   相関サブクエリの非相関化を実行するかどうかを制御する新しいオプティマイザーヒント`NO_DECORRELATE`を導入します [#37789](https://github.com/pingcap/tidb/issues/37789) @[time-and-fate](https://github.com/time-and-fate)
 
     TiDB はデフォルトでは、相関のあるサブクエリを書き換えて相関解除を実行しようとします。これにより、通常は実行効率が向上します。しかし、シナリオによっては相関解除によって実行効率が低下する場合があります。v6.4.0 では、オプティマイザヒント`NO_DECORRELATE`が導入され、特定のクエリブロックに対して相関解除を実行しないようにオプティマイザに指示することで、シナリオによってはクエリのパフォーマンスが向上します。
 
@@ -199,7 +199,7 @@ TiDBバージョン: 6.4.0-DMR
 
 -   データベースユーザー向けの追加説明の追加をサポート [#38172](https://github.com/pingcap/tidb/issues/38172) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
-    TiDB v6.4 では、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)または[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)を使用して、データベース ユーザーの追加の説明を追加できます。TiDB は 2 つの説明形式を提供します。 `COMMENT`を使用してテキスト コメントを追加したり、 `ATTRIBUTE`を使用して JSON 形式の構造化属性セットを追加したりできます。
+    TiDB v6.4 では、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)または[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)を使用して、データベースユーザーの追加の説明を追加できます。TiDB は 2 つの説明形式を提供します。 `COMMENT`を使用してテキスト コメントを追加したり、 `ATTRIBUTE`を使用して JSON 形式の構造化属性セットを追加したりできます。
 
     さらに、TiDB v6.4.0では[`USER_ATTRIBUTES`](/information-schema/information-schema-user-attributes.md)テーブルが追加され、ユーザーコメントやユーザー属性の情報を表示できるようになりました。
 

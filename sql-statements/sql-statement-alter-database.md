@@ -19,7 +19,7 @@ DatabaseOption ::=
 
 ## 例 {#examples}
 
-utf8mb4 文字セットを使用するようにテスト データベーススキーマを変更します。
+utf8mb4 文字セットを使用するようにテストデータベーススキーマを変更します。
 
 ```sql
 ALTER DATABASE test DEFAULT CHARACTER SET = utf8mb4;

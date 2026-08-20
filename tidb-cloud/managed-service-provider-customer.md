@@ -1,11 +1,11 @@
 ---
 title: Managed Service Provider Customer
-summary: マネージド サービス プロバイダー (MSP) の顧客になる方法を学びます。
+summary: マネージドサービス プロバイダー (MSP) の顧客になる方法を学びます。
 ---
 
 # マネージドサービスプロバイダーの顧客 {#managed-service-provider-customer}
 
-マネージド サービス プロバイダー (MSP) 顧客とは、マネージド サービス プロバイダーが提供するTiDB Cloudサービスを使用する顧客です。
+マネージドサービス プロバイダー (MSP) 顧客とは、マネージドサービス プロバイダーが提供するTiDB Cloudサービスを使用する顧客です。
 
 TiDB Cloud の直接顧客と比較すると、サインアップと請求書の支払いに関していくつかの違いがあります。
 

@@ -10,10 +10,10 @@ aliases: ['/ja/tidb/stable/dev-guide-choose-driver-or-orm/','/ja/tidbcloud/dev-g
 >
 > TiDB は、ドライバーと ORM に対して次の 2 つのサポート レベルを提供します。
 >
-> -   **完全**: TiDB がツールのほとんどの機能と互換性があり、最新バージョンとの互換性を維持していることを示します。PingCAP は、最新バージョン[TiDB でサポートされているサードパーティ ツール](/develop/dev-guide-third-party-support.md)との互換性テストを定期的に実施します。
+> -   **完全**: TiDB がツールのほとんどの機能と互換性があり、最新バージョンとの互換性を維持していることを示します。PingCAP は、最新バージョン[TiDB でサポートされているサードパーティツール](/develop/dev-guide-third-party-support.md)との互換性テストを定期的に実施します。
 > -   **互換**：対応するサードパーティ製ツールがMySQLに適合しており、TiDBはMySQLプロトコルと高い互換性があるため、TiDBはツールのほとんどの機能を使用できることを示します。ただし、PingCAPはツールのすべての機能について完全なテストを完了していないため、予期しない動作が発生する可能性があります。
 >
-> 詳細については[TiDB でサポートされているサードパーティ ツール](/develop/dev-guide-third-party-support.md)を参照してください。
+> 詳細については[TiDB でサポートされているサードパーティツール](/develop/dev-guide-third-party-support.md)を参照してください。
 
 TiDBはMySQLプロトコルと高い互換性がありますが、一部の機能はMySQLと互換性がありません。互換性の違いに関する完全なリストについては、 [MySQLとの互換性](/mysql-compatibility.md)を参照してください。
 

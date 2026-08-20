@@ -401,7 +401,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 -   6.1.2 `Access denied for user 'root'@'172.31.43.27' (using password: YES)` `query status`を実行したとき、またはログを確認したときに表示されます。
 
     -   すべてのDM設定ファイル内のデータベース関連のパスワードは`dmctl`で暗号化する必要があります。データベースパスワードが空の場合は、パスワードを暗号化する必要はありません。バージョン1.0.6以降では、平文パスワードを使用できます。
-    -   DM 操作中、アップストリームおよびダウンストリーム データベースのユーザーは、対応する読み取りおよび書き込み権限を持っている必要があります。データ移行も、データ複製タスクの開始時に自動的に[対応する権限を事前チェックします](/dm/dm-precheck.md)。
+    -   DM 操作中、アップストリームおよびダウンストリームデータベースのユーザーは、対応する読み取りおよび書き込み権限を持っている必要があります。データ移行も、データ複製タスクの開始時に自動的に[対応する権限を事前チェックします](/dm/dm-precheck.md)。
     -   DM クラスターに異なるバージョンの DM-worker/DM-master/dmctl をデプロイするには、 [AskTUGに関するケーススタディ](https://pingkai.cn/tidbcommunity/forum/t/topic/1049/5)を参照してください。
 
 -   6.1.3 レプリケーションタスクが`driver: bad connection`エラーで中断されました。
@@ -438,7 +438,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
         -   `relay.meta`に記録されたbinlogイベントにより、不完全なリカバリプロセスがトリガーされ、誤ったGTID情報が記録されます。この問題はv1.0.2で修正されていますが、それ以前のバージョンでは発生する可能性があります。 <!--See [case-764](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case764.md).-->
 
--   6.1.7 DM レプリケーション プロセスでエラー`Error 1366: incorrect utf8 value eda0bdedb29d(\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd)`が返されます。
+-   6.1.7 DM レプリケーションプロセスでエラー`Error 1366: incorrect utf8 value eda0bdedb29d(\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd)`が返されます。
 
     -   この値は MySQL 8.0 または TiDB には正常に書き込めませんが、 MySQL 5.7には書き込めます。 `tidb_skip_utf8_check`パラメータを有効にすることで、データ形式のチェックをスキップできます。
 

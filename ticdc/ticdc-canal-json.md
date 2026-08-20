@@ -27,8 +27,8 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-
 
 Canal-JSONプロトコルは元々MySQL用に設計されており、CommitTSトランザクションのTiDB固有の一意の識別子などの重要なフィールドが含まれていません。この問題を解決するために、TiCDCはCanal-JSONプロトコル形式にTiDB拡張フィールドを追加します`sink-uri`で`enable-tidb-extension`を`true` （デフォルトは`false` ）に設定すると、TiCDCはCanal-JSONメッセージを生成する際に次のように動作します。
 
--   TiCDC は、 `_tidb`名前のフィールドを含む DML イベント メッセージと DDL イベント メッセージを送信します。
--   TiCDC は WATERMARK イベント メッセージを送信します。
+-   TiCDC は、 `_tidb`名前のフィールドを含む DML イベントメッセージと DDL イベントメッセージを送信します。
+-   TiCDC は WATERMARK イベントメッセージを送信します。
 
 次に例を示します。
 
@@ -375,7 +375,7 @@ update tp_int set c_int = 0, c_tinyint = 0 where c_smallint = 32767;
 }
 ```
 
-公式 Canal の場合、出力イベント メッセージの`old`フィールドには、以下に示すように、変更された列データのみが含まれます。
+公式 Canal の場合、出力イベントメッセージの`old`フィールドには、以下に示すように、変更された列データのみが含まれます。
 
 ```json
 {

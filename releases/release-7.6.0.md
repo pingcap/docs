@@ -146,7 +146,7 @@ TiDB バージョン: 7.6.0
 
 -   長時間実行されているアイドル状態のトランザクションを自動的に終了させる機能のサポート [#48714](https://github.com/pingcap/tidb/pull/48714) @[crazycs520](https://github.com/crazycs520)
 
-    ネットワーク切断やアプリケーション障害が発生するシナリオでは、 `COMMIT` / `ROLLBACK`ステートメントがデータベースに送信されない可能性があります。これにより、データベース ロックの解放が遅延し、トランザクション ロック待機が発生し、データベース接続が急増する可能性があります。このような問題はテスト環境ではよく発生しますが、本番環境でも時折発生する可能性があり、迅速な診断が難しい場合があります。これらの問題を回避するために、TiDB v7.6.0 では、長時間実行されているアイドル状態のトランザクションを自動的に終了する[`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760)システム変数が導入されました。トランザクション状態のユーザー セッションがこの変数の値を超える期間アイドル状態になると、TiDB はトランザクションのデータベース接続を終了し、トランザクションをロールバックします。
+    ネットワーク切断やアプリケーション障害が発生するシナリオでは、 `COMMIT` / `ROLLBACK`ステートメントがデータベースに送信されない可能性があります。これにより、データベース ロックの解放が遅延し、トランザクション ロック待機が発生し、データベース接続が急増する可能性があります。このような問題はテスト環境ではよく発生しますが、本番環境でも時折発生する可能性があり、迅速な診断が難しい場合があります。これらの問題を回避するために、TiDB v7.6.0 では、長時間実行されているアイドル状態のトランザクションを自動的に終了する[`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760)システム変数が導入されました。トランザクション状態のユーザーセッションがこの変数の値を超える期間アイドル状態になると、TiDB はトランザクションのデータベース接続を終了し、トランザクションをロールバックします。
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760)を参照してください。
 
@@ -274,7 +274,7 @@ TiDB バージョン: 7.6.0
 
 ## オフラインパッケージの変更 {#offline-package-changes}
 
-v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-package.md)には、プロキシ コンポーネント[TiProxy](/tiproxy/tiproxy-overview.md)のインストール パッケージである`tiproxy-{version}-linux-{arch}.tar.gz`含まれるようになりました。
+v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-package.md)には、プロキシ コンポーネント[TiProxy](/tiproxy/tiproxy-overview.md)のインストールパッケージである`tiproxy-{version}-linux-{arch}.tar.gz`含まれるようになりました。
 
 ## 非推奨機能 {#deprecated-features}
 
@@ -480,7 +480,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
 
     -   TiDB Data Migration (DM)
 
-        -   DM で「イベント タイプ truncate が無効です」というエラーが発生し、アップグレードが失敗する問題を修正します [#10282](https://github.com/pingcap/tiflow/issues/10282) @[GMHDBJD](https://github.com/GMHDBJD)
+        -   DM で「イベントタイプ truncate が無効です」というエラーが発生し、アップグレードが失敗する問題を修正します [#10282](https://github.com/pingcap/tiflow/issues/10282) @[GMHDBJD](https://github.com/GMHDBJD)
         -   GTID モードでデータをレプリケートする際のパフォーマンス低下の問題を修正 [#9676](https://github.com/pingcap/tiflow/issues/9676) @[feran-morgan-pingcap](https://github.com/feran-morgan-pingcap)
         -   下流テーブル構造に`shard_row_id_bits`が含まれている場合にマイグレーションタスクエラーが発生する問題を修正 [#10308](https://github.com/pingcap/tiflow/issues/10308) @[GMHDBJD](https://github.com/GMHDBJD)
 

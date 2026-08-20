@@ -5,11 +5,11 @@ summary: TiDB での CANCEL IMPORT の使用法の概要。
 
 # CANCEL IMPORT {#cancel-import}
 
-`CANCEL IMPORT`ステートメントは、TiDB で作成されたデータインポート ジョブをキャンセルするために使用されます。
+`CANCEL IMPORT`ステートメントは、TiDB で作成されたデータインポートジョブをキャンセルするために使用されます。
 
 ## 必要な権限 {#required-privileges}
 
-データインポート ジョブをキャンセルするには、インポート ジョブの作成者であるか、 `SUPER`権限を持っている必要があります。
+データインポートジョブをキャンセルするには、インポートジョブの作成者であるか、 `SUPER`権限を持っている必要があります。
 
 ## 概要 {#synopsis}
 
@@ -20,7 +20,7 @@ CancelImportJobsStmt ::=
 
 ## 例 {#example}
 
-ID が`1`のインポート ジョブをキャンセルするには、次のステートメントを実行します。
+ID が`1`のインポートジョブをキャンセルするには、次のステートメントを実行します。
 
 ```sql
 CANCEL IMPORT JOB 1;

@@ -26,7 +26,7 @@ TiDB バージョン: 7.5.2
     -   `SHOW CREATE TABLE` の出力に表示される式のデフォルト値のMySQL互換性を改善しました [＃52939](https://github.com/pingcap/tidb/issues/52939) @[CbcWestwolf](https://github.com/CbcWestwolf)
     -   常に`false`である DNF 項目の処理を強化し、そのようなフィルタ条件を直接無視することで、不要なテーブル全体のスキャンを回避します[＃40997](https://github.com/pingcap/tidb/issues/40997) @[Rustin170506](https://github.com/Rustin170506)
     -   `EXPLAIN ANALYZE` のTiFlash `TableScan`オペレータの実行プロセスの統計を最適化します [＃51727](https://github.com/pingcap/tidb/issues/51727) @[JinheLin](https://github.com/JinheLin)
-    -   MPP ロード バランシング中にリージョンのないストアを削除する [＃52313](https://github.com/pingcap/tidb/issues/52313) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    -   MPP ロードバランシング中にリージョンのないストアを削除する [＃52313](https://github.com/pingcap/tidb/issues/52313) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   PD からリージョンを一括ロードすることをサポートし、大規模なテーブルをクエリするときに KV 範囲からリージョンへの変換プロセスを高速化します。 [＃51326](https://github.com/pingcap/tidb/issues/51326) @[SeaRise](https://github.com/SeaRise)
     -   `Resource Control`監視ページで、各リソースグループの最大 RU 消費率を表示する新しいパネル`RU(Max)`を追加します。 [＃49318](https://github.com/pingcap/tidb/issues/49318) @[nolouch](https://github.com/nolouch)
     -   同期ロードパフォーマンスを改善し、統計情報のロードのレイテンシーを削減します[＃52994](https://github.com/pingcap/tidb/issues/52294) @[hawkingrei](https://github.com/hawkingrei)
@@ -77,9 +77,9 @@ TiDB バージョン: 7.5.2
 
 -   TiDB
 
-    -   一意インデックスを追加するときに同時 DML 操作によって発生するデータ インデックスの不整合の問題を修正しました。 [＃52914](https://github.com/pingcap/tidb/issues/52914) @[wjhuang2016](https://github.com/wjhuang2016)
+    -   一意インデックスを追加するときに同時 DML 操作によって発生するデータインデックスの不整合の問題を修正しました。 [＃52914](https://github.com/pingcap/tidb/issues/52914) @[wjhuang2016](https://github.com/wjhuang2016)
     -   パーティションテーブルに複数のスキーマ変更を含むインデックスを追加することで発生するデータインデックスの不整合の問題を修正しました。 [＃52080](https://github.com/pingcap/tidb/issues/52080) @[tangenta](https://github.com/tangenta)
-    -   複数値インデックスを追加することによって発生するデータ インデックスの不整合の問題を修正しました [＃51162](https://github.com/pingcap/tidb/issues/51162) @[ywqzzy](https://github.com/ywqzzy)
+    -   複数値インデックスを追加することによって発生するデータインデックスの不整合の問題を修正しました [＃51162](https://github.com/pingcap/tidb/issues/51162) @[ywqzzy](https://github.com/ywqzzy)
     -   ネットワークの問題によりDDL操作が停止する問題を修正[＃47060](https://github.com/pingcap/tidb/issues/47060) @[wjhuang2016](https://github.com/wjhuang2016)
     -   起動時に統計情報をロードするときにTiDBがGCによるエラーを報告する可能性がある問題を修正[＃53592](https://github.com/pingcap/tidb/issues/53592) @[you06](https://github.com/you06)
     -   TiDBが準備完了していないTiKVノードにリクエストを送信する可能性がある問題を修正 [＃50758](https://github.com/pingcap/tidb/issues/50758) @[zyguan](https://github.com/zyguan)
@@ -93,7 +93,7 @@ TiDB バージョン: 7.5.2
     -   クラスター化インデックスを述語として使用すると`SELECT INTO OUTFILE`が機能しない問題を修正[＃42093](https://github.com/pingcap/tidb/issues/42093) @[qw4990](https://github.com/qw4990)
     -   TopN演算子が誤ってプッシュダウンされる可能性がある問題を修正しました [＃37986](https://github.com/pingcap/tidb/issues/37986) @[qw4990](https://github.com/qw4990)
     -   空の投影により TiDB がpanicを引き起こす問題を修正しました [＃49109](https://github.com/pingcap/tidb/issues/49109) @[winoros](https://github.com/winoros)
-    -   インデックス プランが順序に保たれている場合に、インデックス マージによって部分的な制限が誤ってプッシュダウンされる問題を修正しました。 [＃52947](https://github.com/pingcap/tidb/issues/52947) @[AilinKid](https://github.com/AilinKid)
+    -   インデックス プランが順序に保たれている場合に、インデックスマージによって部分的な制限が誤ってプッシュダウンされる問題を修正しました。 [＃52947](https://github.com/pingcap/tidb/issues/52947) @[AilinKid](https://github.com/AilinKid)
     -   再帰CTE でビューの使用が機能しない問題を修正 [＃49721](https://github.com/pingcap/tidb/issues/49721) @[hawkingrei](https://github.com/hawkingrei)
     -   列の不安定な一意のIDにより、 `UPDATE`文がエラーを返す可能性がある問題を修正しました。 [＃53236](https://github.com/pingcap/tidb/issues/53236) @[winoros](https://github.com/winoros)
     -   常に`true` となる述語を持つ`SHOW ERRORS`文を実行すると TiDB がパニックを起こす問題を修正しました。 [＃46962](https://github.com/pingcap/tidb/issues/46962) @[elsa0520](https://github.com/elsa0520)
@@ -139,7 +139,7 @@ TiDB バージョン: 7.5.2
     -   分散実行フレームワーク (DXF) を有効にした後に、大きなテーブルにインデックスを追加できない問題を修正しました。 [＃52640](https://github.com/pingcap/tidb/issues/52640) @[tangenta](https://github.com/tangenta)
     -   TTL 機能により、データ範囲の分割が不正確になり、場合によってはでデータ ホットスポットが発生する問題を修正しました。 [＃51527](https://github.com/pingcap/tidb/issues/51527) @[lcwangchao](https://github.com/lcwangchao)
     -   主キーの型が`VARCHAR` の場合に`ALTER TABLE ... COMPACT TIFLASH REPLICA`誤って終了する可能性がある問題を修正しました [＃51810](https://github.com/pingcap/tidb/issues/51810) @[breezewish](https://github.com/breezewish)
-    -   インデックス追加中にクラスターのアップグレードによって発生するデータ インデックスの不整合の問題を修正しました。 [＃52411](https://github.com/pingcap/tidb/issues/52411) @[tangenta](https://github.com/tangenta)
+    -   インデックス追加中にクラスターのアップグレードによって発生するデータインデックスの不整合の問題を修正しました。 [＃52411](https://github.com/pingcap/tidb/issues/52411) @[tangenta](https://github.com/tangenta)
     -   TableDual で述語プッシュダウンを無効にすることで発生するパフォーマンス低下の問題を修正しました [＃50614](https://github.com/pingcap/tidb/issues/50614) @[time-and-fate](https://github.com/time-and-fate)
     -   TiDBサーバーがHTTPインターフェース経由でラベルを追加し成功を返すが、それが有効にならない問題を修正[＃51427](https://github.com/pingcap/tidb/issues/51427) @[you06](https://github.com/you06)
     -   取り込みモードでインデックスを追加すると、一部のコーナーケースでデータインデックスの不整合が発生する可能性がある問題を修正[＃51954](https://github.com/pingcap/tidb/issues/51954) @[lance6716](https://github.com/lance6716)

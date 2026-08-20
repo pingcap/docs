@@ -38,7 +38,7 @@ TiDB バージョン: 7.5.6
     -   Backup & Restore (BR)
 
         -   バックアップパフォーマンスを向上させるために、フルバックアップ中のテーブルレベルのチェックサム計算をデフォルトで無効にする（ `--checksum=false` ） [＃56373](https://github.com/pingcap/tidb/issues/56373) @[Tristan1900](https://github.com/Tristan1900)
-        -   非完全リストアの場合、ターゲット クラスタに同じ名前のテーブルが含まれているかどうかを確認するチェックを追加します。 [＃55087](https://github.com/pingcap/tidb/issues/55087) @[RidRisR](https://github.com/RidRisR)
+        -   非完全リストアの場合、ターゲットクラスタに同じ名前のテーブルが含まれているかどうかを確認するチェックを追加します。 [＃55087](https://github.com/pingcap/tidb/issues/55087) @[RidRisR](https://github.com/RidRisR)
 
     -   TiDB Lightning
 
@@ -109,7 +109,7 @@ TiDB バージョン: 7.5.6
     -   特定の状況でTiFlash が予期せず終了したときにエラースタック トレースを印刷できないことがある問題を修正[＃9902](https://github.com/pingcap/tiflash/issues/9902) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   `profiles.default.init_thread_count_scale` `0` に設定するとTiFlash の起動がブロックされる可能性がある問題を修正しました [＃9906](https://github.com/pingcap/tiflash/issues/9906) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   クエリに仮想列が含まれており、リモート読み取りをトリガーするときに`Not found column`エラーが発生する可能性がある問題を修正しました。 [＃9561](https://github.com/pingcap/tiflash/issues/9561) @[guo-shaoge](https://github.com/guo-shaoge)
-    -   分散ストレージおよびコンピューティングアーキテクチャで、 TiFlashコンピューティングノードがリージョンピアを追加するためのターゲット ノードとして誤って選択される可能性がある問題を修正しました。 [＃9750](https://github.com/pingcap/tiflash/issues/9750) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   分散ストレージおよびコンピューティングアーキテクチャで、 TiFlashコンピューティングノードがリージョンピアを追加するためのターゲットノードとして誤って選択される可能性がある問題を修正しました。 [＃9750](https://github.com/pingcap/tiflash/issues/9750) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 -   ツール
 

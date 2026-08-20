@@ -80,7 +80,7 @@ JavaやGoなど、クライアントがシステムのルートCAストアをデ
 WindowsはCAルートへの特定のパスを提供していません。代わりに、 [レジストリ](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores)を使用して証明書を保存します。そのため、WindowsでCAルートパスを指定するには、次の手順に従います。
 
 1.  [ISRGルートX1証明書](https://letsencrypt.org/certs/isrgrootx1.pem)をダウンロードし、 `<path_to_ca>`などの任意のパスに保存します。
-2.  TiDB Cloudクラスターに接続するときは、パス ( `<path_to_ca>` ) を CA ルート パスとして使用します。
+2.  TiDB Cloudクラスターに接続するときは、パス ( `<path_to_ca>` ) を CA ルートパスとして使用します。
 
 ## よくある質問 {#faqs}
 

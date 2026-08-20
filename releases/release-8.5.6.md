@@ -53,7 +53,7 @@ TiDBバージョン：8.5.6
 
     詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/column-privilege-management)を参照してください。
 
--   `FOR UPDATE OF`句でのテーブル エイリアスの使用をサポート [#63035](https://github.com/pingcap/tidb/issues/63035) @[cryo-zd](https://github.com/cryo-zd)
+-   `FOR UPDATE OF`句でのテーブルエイリアスの使用をサポート [#63035](https://github.com/pingcap/tidb/issues/63035) @[cryo-zd](https://github.com/cryo-zd)
 
     v8.5.6 より前のバージョンでは、 `SELECT ... FOR UPDATE OF <table>`ステートメントがロック句でテーブルエイリアスを参照する場合、エイリアスが有効であっても、TiDB がエイリアスを正しく解決できず、 `table not exists`エラーを返すことがありました。
 
@@ -82,7 +82,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 ### MySQLとの互換性 {#mysql-compatibility}
 
 -   バージョン8.5.6以降、TiDBはMySQL互換の列レベルの権限管理メカニズムをサポートしています。テーブルレベルで特定の列に対して、 `SELECT` 、 `INSERT` 、 `UPDATE` 、および`REFERENCES`の権限または取り消すことができます。詳細については、 [列レベルの権限管理](https://docs.pingcap.com/tidb/v8.5/column-privilege-management)を参照してください。
--   バージョン 8.5.6 以降、TiDB は`FOR UPDATE OF`句でテーブル エイリアスの使用をサポートしています。下位互換性を維持するために、エイリアスが定義されている場合でもベース テーブル名を参照できますが、明示的なエイリアスの使用を推奨する警告が表示されます。詳細については、 [`SELECT`](https://docs.pingcap.com/tidb/v8.5/sql-statement-select)を参照してください。
+-   バージョン 8.5.6 以降、TiDB は`FOR UPDATE OF`句でテーブルエイリアスの使用をサポートしています。下位互換性を維持するために、エイリアスが定義されている場合でもベース テーブル名を参照できますが、明示的なエイリアスの使用を推奨する警告が表示されます。詳細については、 [`SELECT`](https://docs.pingcap.com/tidb/v8.5/sql-statement-select)を参照してください。
 -   バージョン8.5.6以降、 Dumplingは更新されたMySQLバイナリログの命名に対応することで、MySQL 8.4からのデータエクスポートをサポートしています。 [#53082](https://github.com/pingcap/tidb/issues/53082) @[dveeden](https://github.com/dveeden)
 -   バージョン8.5.6以降、TiDB Data Migration (DM) は、このバージョンで導入された新しい用語とバージョン検出ロジックに対応することで、アップストリームデータソースとしてMySQL 8.4をサポートします。 [#11020](https://github.com/pingcap/tiflow/issues/11020) @[dveeden](https://github.com/dveeden)
 

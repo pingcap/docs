@@ -39,7 +39,7 @@ pause-task [-s "mysql-replica-01"] task-name
 ## フラグの説明 {#flags-description}
 
 -   `-s` : (オプション) 移行タスクのサブタスクを一時停止するMySQLソースを指定します。設定されている場合、このコマンドは指定されたMySQLソースのサブタスクのみを一時停止します。
--   `task-name| task-file` : (必須) タスク名またはタスク ファイル パスを指定します。
+-   `task-name| task-file` : (必須) タスク名またはタスク ファイルパスを指定します。
 
 ## 返された結果 {#returned-results}
 

@@ -19,7 +19,7 @@ TiDBはバージョン5.1以降、ロックビュー機能をサポートして�
 
 -   [`TIDB_TRX`および`CLUSTER_TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) : 現在の TiDB ノードまたはクラスター全体で実行中のすべてのトランザクションの情報 (トランザクションがロック待機状態にあるかどうか、ロック待機時間、トランザクションで実行されたステートメントのダイジェストなど) を提供します。
 -   [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md) : ブロックしているトランザクションとブロックされたトランザクションの`start_ts` 、ブロックされた SQL ステートメントのダイジェスト、待機が発生したキーなど、悲観的ロック待機情報を TiKV で提供します。
--   [`DEADLOCKS`と`CLUSTER_DEADLOCKS`](/information-schema/information-schema-deadlocks.md) : デッドロック ループ内のトランザクション間の待機関係、トランザクションで現在実行されているステートメントのダイジェスト、待機が発生しているキーなど、現在の TiDB ノードまたはクラスター全体で最近発生したいくつかのデッドロック イベントの情報を提供します。
+-   [`DEADLOCKS`と`CLUSTER_DEADLOCKS`](/information-schema/information-schema-deadlocks.md) : デッドロック ループ内のトランザクション間の待機関係、トランザクションで現在実行されているステートメントのダイジェスト、待機が発生しているキーなど、現在の TiDB ノードまたはクラスター全体で最近発生したいくつかのデッドロックイベントの情報を提供します。
 
 > **Note:**
 >
@@ -29,7 +29,7 @@ TiDBはバージョン5.1以降、ロックビュー機能をサポートして�
 
 ### デッドロックエラー {#deadlock-errors}
 
-最近のデッドロック エラーの情報を取得するには、テーブル`DEADLOCKS`または`CLUSTER_DEADLOCKS`をクエリできます。
+最近のデッドロックエラーの情報を取得するには、テーブル`DEADLOCKS`または`CLUSTER_DEADLOCKS`をクエリできます。
 
 たとえば、テーブル`DEADLOCKS`をクエリするには、次の SQL ステートメントを実行できます。
 
@@ -153,7 +153,7 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
 
 ### メタデータロック {#metadata-locks}
 
-セッションがスキーマの変更を待機している場合、メタデータ ロックが原因である可能性があります。
+セッションがスキーマの変更を待機している場合、メタデータロックが原因である可能性があります。
 
 詳細については[メタデータロック](/metadata-lock.md)を参照してください。
 

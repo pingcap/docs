@@ -1,6 +1,6 @@
 ---
 title: TiCDC Alert Rules
-summary: TiCDC アラート ルールとアラートの処理方法について学習します。
+summary: TiCDC アラートルールとアラートの処理方法について学習します。
 ---
 
 # TiCDCアラートルール {#ticdc-alert-rules}

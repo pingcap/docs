@@ -215,7 +215,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     -   より詳細な監査イベント定義とよりきめ細かな監査設定のために、「フィルター」と「ルール」の概念を導入します。
     -   JSON 形式でのルールの定義をサポートし、よりユーザーフレンドリーな構成方法を提供します。
     -   自動ログローテーションとスペース管理関数を追加し、保持時間とログサイズの 2 つの次元でのログローテーションの構成をサポートします。
-    -   監査ログをTEXTと JSON 形式の両方で出力できるようにすることで、サードパーティ ツールとの統合が容易になります。
+    -   監査ログをTEXTと JSON 形式の両方で出力できるようにすることで、サードパーティツールとの統合が容易になります。
     -   監査ログの秘匿化をサポートします。セキュリティ強化のため、すべてのリテラルを置き換えることができます。
 
     データベース監査は、TiDB Enterprise Editionの重要な機能です。この機能は、企業のデータセキュリティとコンプライアンスを確保するための強力な監視・監査ツールを提供します。企業の管理者は、データベース操作の発生源と影響を追跡し、不正なデータ盗難や改ざんを防止することができます。さらに、データベース監査は、企業が様々な規制やコンプライアンス要件を満たし、法的および倫理的コンプライアンスを確保するのにも役立ちます。この機能は、企業の情報セキュリティにとって重要なアプリケーション価値を持っています。
@@ -234,7 +234,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     TiFlash をv7.1.0 にアップグレードした場合、TiDB を v7.1.0 にアップグレードする際に、TiDB はTiFlashシステムテーブル ( [`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)と[`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md) ) を読み取ることができません。
 
--   TiDB バージョン v6.2.0 から v7.0.0 のTiDB Lightning は、TiDB クラスターのバージョンに基づいてグローバルスケジューリングを一時停止するかどうかを決定します。TiDB クラスター バージョン &gt;= v6.1.0 の場合、スケジュールはターゲットテーブルデータを格納するリージョンに対してのみ一時停止され、ターゲットテーブルのインポートが完了すると再開されます。その他のバージョンの場合、 TiDB Lightning はグローバルスケジューリングを一時停止します。TiDB v7.1.0 以降では、 [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)設定することで、グローバルスケジューリングを一時停止するかどうかを制御できます。デフォルトでは、 TiDB Lightning はターゲットテーブルデータを格納するリージョンのスケジュールを一時停止します。ターゲット クラスターのバージョンが v6.1.0 より前の場合、エラーが発生します。この場合、パラメータの値を`"global"`に変更して再試行できます。
+-   TiDB バージョン v6.2.0 から v7.0.0 のTiDB Lightning は、TiDB クラスターのバージョンに基づいてグローバルスケジューリングを一時停止するかどうかを決定します。TiDB クラスター バージョン &gt;= v6.1.0 の場合、スケジュールはターゲットテーブルデータを格納するリージョンに対してのみ一時停止され、ターゲットテーブルのインポートが完了すると再開されます。その他のバージョンの場合、 TiDB Lightning はグローバルスケジューリングを一時停止します。TiDB v7.1.0 以降では、 [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)設定することで、グローバルスケジューリングを一時停止するかどうかを制御できます。デフォルトでは、 TiDB Lightning はターゲットテーブルデータを格納するリージョンのスケジュールを一時停止します。ターゲットクラスターのバージョンが v6.1.0 より前の場合、エラーが発生します。この場合、パラメータの値を`"global"`に変更して再試行できます。
 
 -   TiDB v7.1.0で[`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)を使用すると、FLASHBACK操作が完了した後も、一部のリージョンがFLASHBACKプロセスに残る可能性があります。v7.1.0ではこの機能の使用を避けることをお勧めします。詳細については、問題を参照してください。この問題が発生した場合は、機能[TiDBスナップショットのバックアップと復元](/br/br-snapshot-guide.md)を使用してデータを復元できます。 [＃44292](https://github.com/pingcap/tidb/issues/44292)
 
@@ -362,7 +362,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     -   `DROP TABLE`操作が実行されているときに`ADMIN SHOW DDL JOBS`結果にテーブル名が表示されない問題を修正[＃42268](https://github.com/pingcap/tidb/issues/42268) @[tiancaiamao](https://github.com/tiancaiamao)
     -   Grafana モニタリング パネルで`Ignore Event Per Minute`と`Stats Cache LRU Cost`チャートが正常に表示されないことがある問題を修正しました [＃42562](https://github.com/pingcap/tidb/issues/42562) @[pingandb](https://github.com/pingandb)
     -   `INFORMATION_SCHEMA.COLUMNS`テーブルをクエリするときに`ORDINAL_POSITION`列が誤った結果を返す問題を修正しました [＃43379](https://github.com/pingcap/tidb/issues/43379) @[bb7133](https://github.com/bb7133)
-    -   キャッシュ テーブルに新しい列が追加された後、列のデフォルト値ではなく値が`NULL`になる問題を修正しました。 [＃42928](https://github.com/pingcap/tidb/issues/42928) @[lqs](https://github.com/lqs)
+    -   キャッシュテーブルに新しい列が追加された後、列のデフォルト値ではなく値が`NULL`になる問題を修正しました。 [＃42928](https://github.com/pingcap/tidb/issues/42928) @[lqs](https://github.com/lqs)
     -   述語をプッシュダウンするときに CTE 結果が正しくない問題を修正しました [＃43645](https://github.com/pingcap/tidb/issues/43645) @[winoros](https://github.com/winoros)
     -   多数のパーティションとTiFlashレプリカを持つパーティションテーブルに対して`TRUNCATE TABLE`を実行するときに書き込み競合によって発生する DDL 再試行の問題を修正しました。 [＃42940](https://github.com/pingcap/tidb/issues/42940) @[mjonss](https://github.com/mjonss)
     -   パーティションテーブル の作成時に`SUBPARTITION`を使用すると警告が表示されない問題を修正 [＃41200](https://github.com/pingcap/tidb/issues/41200) @[mjonss](https://github.com/mjonss) [＃41198](https://github.com/pingcap/tidb/issues/41198)

@@ -5,7 +5,7 @@ summary: ticloud serverless audit-log filter-rule template` のリファレン�
 
 # ticloud serverless audit-log filter-rule template {#ticloud-serverless-audit-log-filter-rule-template}
 
-TiDB Cloud Essential クラスターの監査ログ フィルター ルール テンプレートを表示します。
+TiDB Cloud Essential クラスターの監査ログフィルタールール テンプレートを表示します。
 
 ```shell
 ticloud serverless audit-log filter-rule template [flags]

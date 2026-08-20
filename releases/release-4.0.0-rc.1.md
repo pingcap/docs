@@ -91,7 +91,7 @@ TiDB バージョン: 4.0.0-rc.1
     -   Kafka シンクモジュールでのメッセージのバッチ送信をサポート [＃426](https://github.com/pingcap/tiflow/pull/426)
     -   プロセッサでのファイルソートをサポート [＃477](https://github.com/pingcap/tiflow/pull/477)
     -   自動`resolve lock` サポート [＃459](https://github.com/pingcap/tiflow/pull/459)
-    -   TiCDC サービスの GC セーフ ポイントを PD に自動的に更新する機能を追加します。 [＃487](https://github.com/pingcap/tiflow/pull/487)
+    -   TiCDC サービスの GC セーフポイントを PD に自動的に更新する機能を追加します。 [＃487](https://github.com/pingcap/tiflow/pull/487)
     -   データ複製タイムゾーン設定を追加する [＃498](https://github.com/pingcap/tiflow/pull/498)
 
 -   Backup & Restore (BR)

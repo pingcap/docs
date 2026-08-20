@@ -31,7 +31,7 @@ https://download.pingcap.com/tidb-community-toolkit-{version}-linux-{arch}.tar.g
 
 > **Note:**
 >
-> [PD Control](/pd-control.md)ツール`pd-ctl`をダウンロードする必要がある場合は、TiDB インストール パッケージを`https://download.pingcap.com/tidb-community-server-{version}-linux-{arch}.tar.gz`から別途ダウンロードしてください。
+> [PD Control](/pd-control.md)ツール`pd-ctl`をダウンロードする必要がある場合は、TiDB インストールパッケージを`https://download.pingcap.com/tidb-community-server-{version}-linux-{arch}.tar.gz`から別途ダウンロードしてください。
 
 ## TiDB Toolkitの説明 {#tidb-toolkit-description}
 

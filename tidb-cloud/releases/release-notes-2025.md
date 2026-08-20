@@ -1,11 +1,11 @@
 ---
 title: TiDB Cloud Release Notes in 2025
-summary: 2025 年のTiDB Cloudのリリース ノートについて説明します。
+summary: 2025 年のTiDB Cloudのリリースノートについて説明します。
 ---
 
 # 2025年のTiDB Cloudリリースノート {#tidb-cloud-release-notes-in-2025}
 
-このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
+このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが記載されています。
 
 ## 2025年12月30日 {#december-30-2025}
 
@@ -19,7 +19,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
         ハイライト:
 
-        -   スケーリング操作およびローリング アップグレード中に永続的なクライアント接続を維持します。
+        -   スケーリング操作およびローリングアップグレード中に永続的なクライアント接続を維持します。
         -   リソース利用率を向上させるために、TiDB ノード全体にトラフィックを均等に分散します。
 
         詳細については[TiProxyの概要](/tidb-cloud/tiproxy-overview-for-cloud.md)を参照してください。
@@ -267,9 +267,9 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
         分割動作の詳細については、 [MySQL以外のシンクの主キーまたは一意キーの`UPDATE`イベントを分割する](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
 
-    -   Google Cloud でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに新しいノード サイズ`32 vCPU, 64 GiB`を指定します。
+    -   Google Cloud でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに新しいノードサイズ`32 vCPU, 64 GiB`を指定します。
 
-        この新しいノード サイズは、TiDB ノードで使用できます。
+        この新しいノードサイズは、TiDB ノードで使用できます。
 
 ## 2025年9月16日 {#september-16-2025}
 
@@ -459,7 +459,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   TiDB Cloud IAM API (v1beta1) は、組織レベルとプロジェクトレベルの両方で API キー管理のロールベースのアクセス制御 (RBAC) をサポートします。
 
-    セキュリティとアクセス制御を強化するために、組織レベルまたはプロジェクト レベルで API キーのロールを設定できます。
+    セキュリティとアクセス制御を強化するために、組織レベルまたはプロジェクトレベルで API キーのロールを設定できます。
 
     詳細については[TiDB CloudIAM API](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam/)を参照してください。
 
@@ -487,7 +487,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   Google Cloud でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに新しいノード サイズ`32 vCPU, 128 GiB`を指定します。
+-   Google Cloud でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに新しいノードサイズ`32 vCPU, 128 GiB`を指定します。
 
     この新しいサイズは、TiDB、TiKV、およびTiFlashノードで使用できます。
 
@@ -507,7 +507,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
     詳細については、次のドキュメントを参照してください。
 
     -   [サンプルデータをTiDB Cloud Serverlessにインポートする](/tidb-cloud/import-sample-data-serverless.md)
-    -   [クラウド ストレージからTiDB Cloud Serverless に CSV ファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)
+    -   [クラウドストレージからTiDB Cloud Serverless に CSV ファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)
     -   [Cloud Storage からTiDB Cloud Serverless に Apache Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files-serverless.md)
 
 ## 2025年7月15日 {#july-15-2025}
@@ -570,7 +570,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   Microsoft Azure の[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)がパブリック プレビューで利用できるようになりました。
+-   Microsoft Azure の[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)がパブリックプレビューで利用できるようになりました。
 
     このリリースにより、 TiDB Cloud はAWS、Google Cloud、Azure の 3 つの主要なパブリッククラウド プラットフォームすべてをサポートするようになり、ビジネス ニーズとクラウド戦略に最適な場所にTiDB Cloud Dedicated クラスターを展開できるようになりました。
 
@@ -713,11 +713,11 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **コンソールの変更**
 
--   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスター内のパブリックエンドポイントのファイアウォール ルールをサポートします。
+-   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスター内のパブリックエンドポイントのファイアウォールルールをサポートします。
 
     TiDB Cloud Serverless クラスターのファイアウォールルールを設定して、パブリックエンドポイント経由のアクセスを制御できるようになりました。[TiDB Cloudコンソール](https://tidbcloud.com/)で許可する IP アドレスまたは範囲を直接指定することで、セキュリティを強化できます。
 
-    詳細については[パブリックエンドポイント用のTiDB Cloud Serverless ファイアウォール ルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)を参照してください。
+    詳細については[パブリックエンドポイント用のTiDB Cloud Serverless ファイアウォールルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)を参照してください。
 
 ## 2025年3月18日 {#march-18-2025}
 
@@ -741,7 +741,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **コンソールの変更**
 
--   TiDB Cloudの新しいサポート サービスである Connected Care を紹介します。
+-   TiDB Cloudの新しいサポートサービスである Connected Care を紹介します。
 
     Connected Care サービスは、最新のコミュニケーション ツール、プロアクティブなサポート、高度な AI 機能を通じてTiDB Cloudとの接続を強化し、シームレスで顧客中心のエクスペリエンスを実現するように設計されています。
 
@@ -750,13 +750,13 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
     -   **Clinic Service**: パフォーマンスを最適化するための高度な監視と診断。
     -   **IM での AI チャット**: インスタント メッセージ (IM) ツールを通じて AI による即時サポートを受けることができます。
     -   **アラートとチケット更新の IM サブスクリプション**: IM 経由でアラートとチケットの進行状況に関する最新情報を入手します。
-    -   **サポート チケットの IM 対話**: IM ツールを使用してサポート チケットを作成し、対話します。
+    -   **サポートチケットの IM 対話**: IM ツールを使用してサポートチケットを作成し、対話します。
 
     詳細については[Connected Careの概要](/tidb-cloud/connected-care-overview.md)を参照してください。
 
 -   GCS および Azure Blob Storage から[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターへのデータのインポートをサポートします。
 
-    TiDB Cloud Serverless は、Google Cloud Storage (GCS) および Azure Blob Storage からのデータのインポートをサポートするようになりました。認証には、Google Cloud サービス アカウント キーまたは Azure Shared Access Signature (SAS) トークンを使用できます。この機能により、TiDB Cloud Serverless へのデータ移行が簡素化されます。
+    TiDB Cloud Serverless は、Google Cloud Storage (GCS) および Azure Blob Storage からのデータのインポートをサポートするようになりました。認証には、Google Cloud サービスアカウント キーまたは Azure Shared Access Signature (SAS) トークンを使用できます。この機能により、TiDB Cloud Serverless へのデータ移行が簡素化されます。
 
     詳細については、 [Amazon S3、GCS、または Azure Blob Storage からTiDB Cloud Serverless に CSV ファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)および[Amazon S3、GCS、または Azure Blob Storage から Apache Parquet ファイルをTiDB Cloud Serverless にインポートする](/tidb-cloud/import-parquet-files-serverless.md)を参照してください。
 
@@ -792,7 +792,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     -   AWS の Apache Kafka の場合は、 [AWS でセルフホスト型 Kafka プライベートリンクサービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)手順に従ってネットワーク接続を構成します。
 
-    -   Google Cloud の Apache Kafka の場合は、 [Google Cloud でセルフホスト型 Kafka プライベート サービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)手順に従ってネットワーク接続を構成します。
+    -   Google Cloud の Apache Kafka の場合は、 [Google Cloud でセルフホスト型 Kafka プライベートサービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)手順に従ってネットワーク接続を構成します。
 
     この機能を使用すると、追加の[プライベートデータリンクのコスト](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost)が発生することに注意してください。
 

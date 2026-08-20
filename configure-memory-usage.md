@@ -66,7 +66,7 @@ tidb-server インスタンスのメモリ使用量が総メモリの一定割�
 
 ## 過剰なメモリ使用量のアラームをトリガーする {#trigger-the-alarm-of-excessive-memory-usage}
 
-tidb-server インスタンスのメモリ使用量がメモリしきい値 (デフォルトでは合計メモリの 70%) を超え、次のいずれかの条件が満たされると、TiDB は関連するステータス ファイルを記録し、アラーム ログを出力。
+tidb-server インスタンスのメモリ使用量がメモリしきい値 (デフォルトでは合計メモリの 70%) を超え、次のいずれかの条件が満たされると、TiDB は関連するステータスファイルを記録し、アラーム ログを出力。
 
 -   メモリ使用量がメモリしきい値を超えるのは初めてです。
 -   メモリ使用量がメモリしきい値を超えており、前回のアラームから 60 秒以上経過しています。
@@ -104,7 +104,7 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
 
 3.  `select * from t t1 join t t2 join t t3 order by t1.a`を実行します。この SQL 文は 10 億件のレコードを出力し、大量のメモリを消費するため、アラームがトリガーされます。
 
-4.  システムメモリの合計、現在のシステムメモリ使用量、tidb-server インスタンスのメモリ使用量、およびステータス ファイルのディレクトリを記録する`tidb.log`ファイルを確認します。
+4.  システムメモリの合計、現在のシステムメモリ使用量、tidb-server インスタンスのメモリ使用量、およびステータスファイルのディレクトリを記録する`tidb.log`ファイルを確認します。
 
     ```
     [2022/10/11 16:39:02.281 +08:00] [WARN] [memoryusagealarm.go:212] ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"] ["is tidb_server_memory_limit set"=false] ["system memory total"=33682427904] ["system memory usage"=22120655360] ["tidb-server memory usage"=21468556992] [memory-usage-alarm-ratio=0.85] ["record path"=/tiup/deploy/tidb-4000/log/oom_record]
@@ -117,7 +117,7 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
     -   `system memory usage`は現在のシステムメモリ使用量を示します。
     -   `tidb-server memory usage`は、tidb-server インスタンスのメモリ使用量を示します。
     -   `memory-usage-alarm-ratio`はシステム変数[`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)の値を示します。
-    -   `record path`はステータス ファイルのディレクトリを示します。
+    -   `record path`はステータスファイルのディレクトリを示します。
 
 5.  ステータスファイルのディレクトリ（上記の例ではディレクトリ`/tiup/deploy/tidb-4000/log/oom_record` ）を確認すると、対応するタイムスタンプ（例： `record2022-10-09T17:18:38+08:00` ）を持つレコードディレクトリが表示されます。レコードディレクトリには、 `goroutinue` 、 `heap` 、 `running_sql`の3つのファイルが含まれています。これらの3つのファイルには、ステータスファイルが記録された時刻が末尾に付加されます。これらのファイルには、それぞれ、ゴルーチンのスタック情報、ヒープメモリの使用状況、アラーム発生時の実行SQL情報が記録されています。 `running_sql`の内容については、 [`expensive-queries`](/identify-expensive-queries.md)を参照してください。
 

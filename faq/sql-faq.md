@@ -28,7 +28,7 @@ summary: TiDB SQLに関連する FAQ について説明します。
 
 TiDBにはコストベースのオプティマイザが搭載されています。ほとんどの場合、オプティマイザが最適なクエリプランを選択します。オプティマイザがうまく機能しない場合でも、 [オプティマイザヒント](/optimizer-hints.md)を使用してオプティマイザに介入することができます。
 
-さらに、 [SQLバインディング](/sql-plan-management.md#sql-binding)を使用して、特定の SQL ステートメントのクエリ プランを修正することもできます。
+さらに、 [SQLバインディング](/sql-plan-management.md#sql-binding)を使用して、特定の SQL ステートメントのクエリプランを修正することもできます。
 
 ## 特定の SQL ステートメントの実行を防ぐにはどうすればよいでしょうか? {#how-to-prevent-the-execution-of-a-particular-sql-statement}
 
@@ -223,7 +223,7 @@ TiDBは、 [グローバル](/system-variables.md#tidb_force_priority)単位ま�
     REPLACE HIGH_PRIORITY | LOW_PRIORITY | DELAYED INTO table_name;
     ```
 
-2.  フル テーブル スキャン ステートメントは、自動的に低い優先度に調整されます。 [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) 、デフォルトで低い優先度を持ちます。
+2.  フルテーブルスキャン ステートメントは、自動的に低い優先度に調整されます。 [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) 、デフォルトで低い優先度を持ちます。
 
 ## TiDB での`auto analyze`のトリガー戦略は何ですか? {#whats-the-trigger-strategy-for-auto-analyze-in-tidb}
 

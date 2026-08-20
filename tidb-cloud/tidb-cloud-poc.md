@@ -73,7 +73,7 @@ PoC 用の[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-d
     > TiDB Cloud Dedicated クラスターを作成する前に、次のいずれかの支払い方法を追加する必要があります。
     >
     > -   クラスター作成ページの画面上の指示に従って、クレジットカードを追加します。
-    > -   電信送金で支払う場合は、 TiDB Cloudサポート チームにお問い合わせください。
+    > -   電信送金で支払う場合は、 TiDB Cloudサポートチームにお問い合わせください。
     > -   クラウド マーケットプレイス (AWS、Azure、または Google Cloud) を通じてTiDB Cloudにサインアップし、クラウドプロバイダー アカウントを使用して支払います。
     >
     > PoC クレジットは、PoC 期間中に発生した対象費用を相殺するために自動的に使用されます。
@@ -81,7 +81,7 @@ PoC 用の[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-d
 クラスターを作成する前に、キャパシティプランニングを実施してクラスターのサイズを決定することをお勧めします。TiDB、TiKV、またはTiFlashノードの概算数から開始し、パフォーマンス要件に合わせて後からクラスターをスケールアウトすることも可能です。詳細については、以下のドキュメントをご覧いただくか、サポートチームにお問い合わせください。
 
 -   サイズ見積もりの実践の詳細については、 [TiDBのサイズ](/tidb-cloud/size-your-cluster.md)を参照してください。
--   TiDB Cloud Dedicated クラスターの構成については、 [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。TiDB、TiKV、 TiFlash (オプション) のクラスター サイズをそれぞれ構成します。
+-   TiDB Cloud Dedicated クラスターの構成については、 [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。TiDB、TiKV、 TiFlash (オプション) のクラスターサイズをそれぞれ構成します。
 -   PoC クレジットの消費を効果的に計画し、最適化する方法については、このドキュメントの[FAQ](#faq)を参照してください。
 -   スケーリングの詳細については、 [TiDBクラスタのスケール](/tidb-cloud/scale-tidb-cluster.md)を参照してください。
 
@@ -160,7 +160,7 @@ TiDB Cloudにはさまざまな形式のデータをインポートできます�
 
 -   ストレージサイズとCPU使用率を評価し、それに応じてTiDBクラスターのスケールアウトまたはスケールインを実施してください。スケーリングの詳細については、セクション[FAQ](#faq)を参照してください。
 
-パフォーマンス チューニングのヒントを次に示します。
+パフォーマンスチューニングのヒントを次に示します。
 
 -   書き込みパフォーマンスの向上
 

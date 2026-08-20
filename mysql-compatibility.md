@@ -180,7 +180,7 @@ TiDBはMySQLの組み込み関数のほとんどをサポートしています�
 
 TiDBでは、サポートされているすべてのDDL変更をオンラインで実行できます。ただし、TiDBのDDL操作には、MySQLと比較していくつかの大きな制限があります。
 
--   単一の`ALTER TABLE`ステートメントを使用してテーブルの複数のスキーマ オブジェクト (列やインデックスなど) を変更する場合、同じオブジェクトを複数の変更で指定することはサポートされていません。たとえば、 `ALTER TABLE t1 MODIFY COLUMN c1 INT, DROP COLUMN c1`コマンドを実行すると、 `Unsupported operate same column/index`エラーが出力されます。
+-   単一の`ALTER TABLE`ステートメントを使用してテーブルの複数のスキーマオブジェクト (列やインデックスなど) を変更する場合、同じオブジェクトを複数の変更で指定することはサポートされていません。たとえば、 `ALTER TABLE t1 MODIFY COLUMN c1 INT, DROP COLUMN c1`コマンドを実行すると、 `Unsupported operate same column/index`エラーが出力されます。
 -   同じ`ALTER TABLE`ステートメント内で、`SHARD_ROW_ID_BITS`と`AUTO_ID_CACHE`を同時に変更することはサポートされていません。
 -   TiDB は`ALTER TABLE`を使用した一部のデータ型の変更をサポートしていません。たとえば、TiDB は`DECIMAL`型から`DATE`型への変更をサポートしていません。データ型の変更がサポートされていない場合、TiDB は`Unsupported modify column: type %d not match origin %d`エラーを報告します。詳細については、 [`ALTER TABLE`](/sql-statements/sql-statement-modify-column.md)を参照してください。
 -   `ALGORITHM={INSTANT,INPLACE,COPY}`構文はTiDBではアサーションとしてのみ機能し、 `ALTER`アルゴリズムを変更しません。詳細については、 [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)を参照してください。

@@ -351,7 +351,7 @@ conn.query('DELETE FROM players WHERE id = ?;', [1], (err, ok) => {
 
     > **Note**
     >
-    > `mysqljs/mysql`パッケージはまだプリペアド ステートメントをサポートしておらず、クライアント側で値をエスケープするだけです (関連する問題:[mysqljs/mysql#274](https://github.com/mysqljs/mysql/issues/274) )。
+    > `mysqljs/mysql`パッケージはまだプリペアドステートメントをサポートしておらず、クライアント側で値をエスケープするだけです (関連する問題:[mysqljs/mysql#274](https://github.com/mysqljs/mysql/issues/274) )。
     >
     > SQLインジェクション攻撃を回避したり、バッチ挿入/更新の効率を向上させたりするためにこの機能を使用したい場合は、代わりに[mysql2](https://github.com/sidorares/node-mysql2)パッケージを使用することをお勧めします。
 

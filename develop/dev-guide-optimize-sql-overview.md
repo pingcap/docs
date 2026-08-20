@@ -1,6 +1,6 @@
 ---
 title: Overview of Optimizing SQL Performance
-summary: TiDB アプリケーション開発者向けに、SQL パフォーマンス チューニングの概要を説明します。
+summary: TiDB アプリケーション開発者向けに、SQL パフォーマンスチューニングの概要を説明します。
 aliases: ['/ja/tidb/stable/dev-guide-optimize-sql-overview/','/ja/tidbcloud/dev-guide-optimize-sql-overview/']
 ---
 
@@ -22,7 +22,7 @@ aliases: ['/ja/tidb/stable/dev-guide-optimize-sql-overview/','/ja/tidbcloud/dev-
 
 ## スキーマ設計 {#schema-design}
 
-[SQLパフォーマンスのチューニング](#sql-performance-tuning)後もアプリケーションのパフォーマンスがまだ良好でない場合は、次の問題を回避するためにスキーマ設計とデータ アクセス パターンを確認する必要がある可能性があります。
+[SQLパフォーマンスのチューニング](#sql-performance-tuning)後もアプリケーションのパフォーマンスがまだ良好でない場合は、次の問題を回避するためにスキーマ設計とデータアクセス パターンを確認する必要がある可能性があります。
 
 -   トランザクションの競合。トランザクションの競合を診断して解決する方法については、 [ロック競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)を参照してください。
 -   ホットスポット。ホットスポットの診断と解決方法については、 [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。

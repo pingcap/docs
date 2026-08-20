@@ -137,7 +137,7 @@ tiup dmctl check-task ./task.yaml
     -   `binlog_format=ROW`が設定されているかどうかを確認してください（DMはROW形式のbinlogの移行のみをサポートしています）。
     -   `binlog_row_image=FULL`が設定されているかどうかを確認してください (DM は`binlog_row_image=FULL`のみをサポートしています)。
     -   `binlog_transaction_compression=OFF`が設定されているかどうかを確認してください (DM はトランザクション圧縮をサポートしていません)。
-    -   `binlog_do_db`または`binlog_ignore_db`が設定されている場合は、移行対象のデータベース テーブルが`binlog_do_db`および`binlog_ignore_db`の条件を満たしているかどうかを確認します。
+    -   `binlog_do_db`または`binlog_ignore_db`が設定されている場合は、移行対象のデータベーステーブルが`binlog_do_db`および`binlog_ignore_db`の条件を満たしているかどうかを確認します。
 
 -   （必須）MariaDBbinlogの設定
 
@@ -145,7 +145,7 @@ tiup dmctl check-task ./task.yaml
     -   `binlog_legacy_event_pos`が`ON`に設定されているかどうかを確認してください。
     -   `binlog_format=ROW`が設定されているかどうかを確認してください（DMはROW形式のbinlogの移行のみをサポートしています）。
     -   `binlog_row_image=FULL`が設定されているかどうかを確認してください (DM は`binlog_row_image=FULL`のみをサポートしています)。
-    -   `binlog_do_db`または`binlog_ignore_db`が設定されている場合は、移行対象のデータベース テーブルが`binlog_do_db`および`binlog_ignore_db`の条件を満たしているかどうかを確認します。
+    -   `binlog_do_db`または`binlog_ignore_db`が設定されている場合は、移行対象のデータベーステーブルが`binlog_do_db`および`binlog_ignore_db`の条件を満たしているかどうかを確認します。
     -   `binlog_annotate_row_events`が`OFF`に設定されているかどうかを確認してください。
     -   `log_bin_compress`が`OFF`に設定されているかどうかを確認してください。
 

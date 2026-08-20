@@ -17,7 +17,7 @@ TiDB Ansible バージョン: 3.0.8
     -   タイミングの悪いキャッシュ更新によって発生した間違ったSQLバインディングプランを修正[＃13891](https://github.com/pingcap/tidb/pull/13891)
     -   SQL文にシンボルリストが含まれている場合にSQLバインディングが無効になる可能性がある問題を修正しました [＃14004](https://github.com/pingcap/tidb/pull/14004)
     -   SQL文が`;` で終わるためSQLバインディングを作成または削除できない問題を修正しました [＃14113](https://github.com/pingcap/tidb/pull/14113)
-    -   `PhysicalUnionScan`演算子が間違った統計を設定するため、間違った SQL クエリ プランが選択される可能性がある問題を修正しました[＃14133](https://github.com/pingcap/tidb/pull/14133)
+    -   `PhysicalUnionScan`演算子が間違った統計を設定するため、間違った SQL クエリプランが選択される可能性がある問題を修正しました[＃14133](https://github.com/pingcap/tidb/pull/14133)
     -   `minAutoAnalyzeRatio`制限を解除して`autoAnalyze`をよりタイムリーにする[＃14015](https://github.com/pingcap/tidb/pull/14015)
 -   SQL実行エンジン
     -   `INSERT/REPLACE/UPDATE ... SET ... = DEFAULT`構文でエラーが報告される可能性があり、 `DEFAULT`の使用と仮想生成列を組み合わせるとエラーが報告される可能性がある問題を修正しました[＃13682](https://github.com/pingcap/tidb/pull/13682)

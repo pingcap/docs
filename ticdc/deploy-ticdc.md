@@ -39,7 +39,7 @@ cdc_servers:
 
 > **Note:**
 >
-> TiCDC をインストールする前に、 TiUPコントロール マシンと TiCDC ホストの間に[SSH相互信頼とパスワードなしのsudoを手動で設定](/check-before-deployment.md#manually-configure-the-ssh-mutual-trust-and-sudo-without-password)いることを確認してください。
+> TiCDC をインストールする前に、 TiUPコントロールマシンと TiCDC ホストの間に[SSH相互信頼とパスワードなしのsudoを手動で設定](/check-before-deployment.md#manually-configure-the-ssh-mutual-trust-and-sudo-without-password)いることを確認してください。
 
 ## TiUPを使用して、既存のTiDBクラスタにTiCDCを追加またはスケールアウトします。 {#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup}
 
@@ -98,7 +98,7 @@ TiCDCクラスタをアップグレードする際には、以下の点に注意
 
 -   TiCDC v4.0.2 は`changefeed`を再構成しました。詳細については、 [コンフィグレーションファイルの互換性に関する注意事項](/ticdc/ticdc-compatibility.md#cli-and-configuration-file-compatibility)を参照してください。
 -   アップグレード中に問題が発生した場合は、解決策について[アップグレードに関するよくある質問](/upgrade-tidb-using-tiup.md#faq)を参照してください。
--   v6.3.0 以降、TiCDC はローリング アップグレードをサポートしています。マイナー バージョン間のローリング アップグレードを直接実行できます (たとえば、v8.5.0 -&gt; v8.5.3 はマイナー バージョン アップグレードであり、v8.1.x -&gt; v8.5.x はメジャーバージョン アップグレードです)。 TiCDC クラシックアーキテクチャの場合、メジャーバージョン間のアップグレード中に変更フィードを実行しないでください。クラシックアーキテクチャをアップグレードする前に、変更フィードを一時停止してください。新しい TiCDCアーキテクチャは、ローリング アップグレード プロセス中の変更フィードの実行をサポートします。詳細については、 [以前のTiCDCバージョンからのローリングアップグレードに関する互換性に関する注意事項](/ticdc/ticdc-compatibility.md#compatibility-notes-for-upgrading-from-earlier-versions)を参照してください。次の条件が満たされる場合、ローリング アップグレードは自動的に有効になります。
+-   v6.3.0 以降、TiCDC はローリングアップグレードをサポートしています。マイナー バージョン間のローリングアップグレードを直接実行できます (たとえば、v8.5.0 -&gt; v8.5.3 はマイナー バージョン アップグレードであり、v8.1.x -&gt; v8.5.x はメジャーバージョン アップグレードです)。 TiCDC クラシックアーキテクチャの場合、メジャーバージョン間のアップグレード中に変更フィードを実行しないでください。クラシックアーキテクチャをアップグレードする前に、変更フィードを一時停止してください。新しい TiCDCアーキテクチャは、ローリングアップグレードプロセス中の変更フィードの実行をサポートします。詳細については、 [以前のTiCDCバージョンからのローリングアップグレードに関する互換性に関する注意事項](/ticdc/ticdc-compatibility.md#compatibility-notes-for-upgrading-from-earlier-versions)を参照してください。次の条件が満たされる場合、ローリングアップグレードは自動的に有効になります。
 
     -   TiCDCはバージョン6.3.0以降です。
     -   TiUPはバージョン1.11.3以降です。

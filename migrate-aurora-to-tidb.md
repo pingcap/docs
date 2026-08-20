@@ -38,7 +38,7 @@ tiup dumpling --host ${host} --port 3306 --user root --password ${password} --fi
 
 上記コマンドでエクスポートされたスキーマのURI（例：「s3://my-bucket/schema-backup」）を記録しておいてください。これは後でスキーマファイルをインポートする際に使用します。
 
-Amazon S3 にアクセスするには、この Amazon S3ストレージパスへのアクセス権を持つアカウントのシークレット アクセス キーとアクセス キーを環境変数としてDumplingまたはTiDB Lightningノードに渡します。Dumpling とTiDB Lightning は`~/.aws/credentials`からの認証情報ファイルの読み取りもサポートしています。この方法により、そのDumplingまたはTiDB Lightningノード上のすべてのタスクでシークレット アクセス キーとアクセス キーを再度指定する必要がなくなります。
+Amazon S3 にアクセスするには、この Amazon S3ストレージパスへのアクセス権を持つアカウントのシークレットアクセスキーとアクセスキーを環境変数としてDumplingまたはTiDB Lightningノードに渡します。Dumpling とTiDB Lightning は`~/.aws/credentials`からの認証情報ファイルの読み取りもサポートしています。この方法により、そのDumplingまたはTiDB Lightningノード上のすべてのタスクでシークレットアクセスキーとアクセスキーを再度指定する必要がなくなります。
 
 #### 1.2 スキーマファイル用のTiDB Lightning設定ファイルを作成する {#1-2-create-the-tidb-lightning-configuration-file-for-the-schema-file}
 
@@ -298,8 +298,8 @@ TiUPを使用してDMをデプロイした際に、Prometheus、Alertmanager、�
 
 DMが実行されている間、DM-worker、DM-master、およびdmctlは関連情報をログに出力します。これらのコンポーネントのログディレクトリは以下のとおりです。
 
--   DM-master: DM-master プロセス パラメータ`--log-file`で指定されます。TiUPを使用して DM をデプロイする場合、ログ ディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`になります。
--   DM-worker: DM-worker プロセス パラメータ`--log-file`で指定されます。TiUPを使用して DM をデプロイする場合、ログ ディレクトリはデフォルトで`/dm-deploy/dm-worker-8262/log/`になります。
+-   DM-master: DM-master プロセスパラメータ`--log-file`で指定されます。TiUPを使用して DM をデプロイする場合、ログディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`になります。
+-   DM-worker: DM-worker プロセスパラメータ`--log-file`で指定されます。TiUPを使用して DM をデプロイする場合、ログディレクトリはデフォルトで`/dm-deploy/dm-worker-8262/log/`になります。
 
 ## 次は？ {#what-s-next}
 

@@ -61,7 +61,7 @@ You can directly write SQL statements to submit import tasks, which are easy to 
 
 10 個のTiDB Lightningインスタンスを起動してデータを並列インポートする場合、10 個のTiDB Lightning設定ファイルを作成する必要があります。各ファイルでは、対応するTiDB Lightningインスタンスが読み取るソースファイルの範囲を設定する必要があります。例えば、 TiDB Lightningインスタンス 1 は最初の 100 ファイルを読み取り、インスタンス 2 は次の 100 ファイルを読み取り、というように続きます。
 
-さらに、これら 10 個のTiDB Lightningインスタンスの共有メタデータ テーブルやその他の構成情報を構成する必要があり、これは複雑です。
+さらに、これら 10 個のTiDB Lightningインスタンスの共有メタデータテーブルやその他の構成情報を構成する必要があり、これは複雑です。
 
 ### グローバルソートとローカルソート {#global-sort-vs-local-sort}
 

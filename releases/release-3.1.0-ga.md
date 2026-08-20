@@ -15,7 +15,7 @@ TiDB Ansible バージョン: 3.1.0 GA
 
 -   TiDB
 
-    -   `report-status`構成項目が有効になっているときに HTTP リスニング ポートが利用できない場合に TiDB の起動を直接停止する機能をサポート[＃16291](https://github.com/pingcap/tidb/pull/16291)
+    -   `report-status`構成項目が有効になっているときに HTTP リスニングポートが利用できない場合に TiDB の起動を直接停止する機能をサポート[＃16291](https://github.com/pingcap/tidb/pull/16291)
 
 -   ツール
 

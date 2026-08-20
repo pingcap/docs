@@ -156,7 +156,7 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 
 TiDB の`ALTER TABLE`には次の主な制限が適用されます。
 
--   `ALTER TABLE`つのステートメントで複数のスキーマ オブジェクトを変更する場合:
+-   `ALTER TABLE`つのステートメントで複数のスキーマオブジェクトを変更する場合:
 
     -   同じオブジェクトを複数回変更することはサポートされていません。
     -   TiDBは**実行前に**テーブルスキーマに従ってステートメントを検証します。例えば、 `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT AFTER c1;`を実行すると、列`c1`テーブルに存在しないためエラーが返されます。

@@ -99,7 +99,7 @@ BRに基づく DR ソリューションは、5 分未満の RPO と、復元す�
 
 ### その他の災害復旧ソリューション {#other-dr-solutions}
 
-前述の DR ソリューションに加えて、同じ都市のデュアルセンター シナリオでゼロ RPO が必須の場合は、DR-AUTO 同期ソリューションを使用することもできます。詳細については、[1 つの地域に展開された 2 つのデータ センター](/two-data-centers-in-one-city-deployment.md)をご覧ください。
+前述の DR ソリューションに加えて、同じ都市のデュアルセンター シナリオでゼロ RPO が必須の場合は、DR-AUTO 同期ソリューションを使用することもできます。詳細については、[1 つの地域に展開された 2 つのデータセンター](/two-data-centers-in-one-city-deployment.md)をご覧ください。
 
 ## 解決策の比較 {#solution-comparison}
 

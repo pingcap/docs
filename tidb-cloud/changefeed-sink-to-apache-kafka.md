@@ -87,7 +87,7 @@ Apache Kafka サービスがインターネットにアクセスできない Goo
 1.  Apache Kafka サービスの VPC とTiDB Cloud Dedicatedクラスターの間で[VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
 2.  Apache Kafkaが配置されているVPCのイングレスファイアウォールルールを変更します。
 
-    TiDB Cloud Dedicatedクラスターが配置されているリージョンの CIDR を、イングレス ファイアウォール ルールに追加する必要があります。CIDR は**VPC Peering**ページで確認できます。これにより、TiDB Cloud Dedicatedクラスターから Kafka ブローカーへのトラフィックが流れるようになります。
+    TiDB Cloud Dedicatedクラスターが配置されているリージョンの CIDR を、イングレス ファイアウォールルールに追加する必要があります。CIDR は**VPC Peering**ページで確認できます。これにより、TiDB Cloud Dedicatedクラスターから Kafka ブローカーへのトラフィックが流れるようになります。
 
 </div>
 <div label="Public IP">
@@ -135,7 +135,7 @@ Apache KafkaサービスにパブリックIPアクセスを提供する場合は
 TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミングし、Kafkaトピックを自動的に作成できるようにするには、Kafkaに以下の権限が追加されていることを確認してください。
 
 -   Kafka のトピック リソース タイプに`Create`および`Write`権限が追加されます。
--   Kafka のクラスタ リソース タイプに`DescribeConfigs`権限が追加されます。
+-   Kafka のクラスタリソース タイプに`DescribeConfigs`権限が追加されます。
 
 たとえば、Kafka クラスターが Confluent Cloud にある場合、詳細については Confluent ドキュメントの[リソース](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)と[ACLの追加](https://docs.confluent.io/platform/current/kafka/authorization.html#adding-acls)を参照してください。
 

@@ -277,7 +277,7 @@ firewall-cmd --permanent --zone=public --add-service=grafana
 
 ## NTPサービスを確認してインストールする {#check-and-install-the-ntp-service}
 
-TiDB は、 ACIDモデルにおけるトランザクションの線形一貫性を保証するためにノード間のクロック同期を必要とする分散データベース システムです。
+TiDB は、 ACIDモデルにおけるトランザクションの線形一貫性を保証するためにノード間のクロック同期を必要とする分散データベースシステムです。
 
 現在、クロック同期の一般的なソリューションは、ネットワークタイムプロトコル（NTP）サービスを使用することです。インターネット上の`pool.ntp.org`タイミングサービスを使用することも、オフライン環境で独自のNTPサービスを構築することもできます。
 
@@ -555,7 +555,7 @@ sudo systemctl enable ntpd.service
 
     -   方法2：スクリプトを使用して設定する。既に方法1を使用している場合は、この方法をスキップしてください。
 
-        1.  デフォルトのカーネル バージョンを確認するには、 `grubby`コマンドを実行します。
+        1.  デフォルトのカーネルバージョンを確認するには、 `grubby`コマンドを実行します。
 
             > **Note:**
             >
@@ -587,7 +587,7 @@ sudo systemctl enable ntpd.service
 
             > **Note:**
             >
-            > `--info`の後には実際のデフォルトのカーネル バージョンが続きます。
+            > `--info`の後には実際のデフォルトのカーネルバージョンが続きます。
 
             ```
             index=0
@@ -700,7 +700,7 @@ sudo systemctl enable ntpd.service
 
     > **Note:**
     >
-    > -   `vm.min_free_kbytes`は、システムによって予約される空きメモリの最小量 (KiB 単位) を制御する Linux カーネル パラメータです。
+    > -   `vm.min_free_kbytes`は、システムによって予約される空きメモリの最小量 (KiB 単位) を制御する Linux カーネルパラメータです。
     > -   `vm.min_free_kbytes`に設定すると、メモリ回収メカニズムに影響します。設定値が大きすぎると利用可能なメモリが減少し、小さすぎるとメモリ要求速度がバックグラウンド回収速度を超え、メモリ回収が発生し、結果としてメモリ割り当てが遅延する可能性があります。
     > -   `vm.min_free_kbytes`を少なくとも`1048576` KiB（1 GiB）に設定することをお勧めします。[NUMAがインストールされている](/check-before-deployment.md#install-the-numactl-tool)場合は、 `number of NUMA nodes * 1048576` KiBに設定することをお勧めします。
     > -   Linux カーネル 4.11 以前を実行しているシステムの場合は、 `net.ipv4.tcp_tw_recycle = 0`を設定することをお勧めします。

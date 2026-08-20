@@ -1,6 +1,6 @@
 ---
 title: TSO Configuration Flags
-summary: TSO 構成フラグは、コマンド ライン フラグまたは環境変数を介して構成できます。
+summary: TSO 構成フラグは、コマンドラインフラグまたは環境変数を介して構成できます。
 ---
 
 # TSOコンフィグレーションフラグ {#tso-configuration-flags}
@@ -21,7 +21,7 @@ TSOノードは、PD用の`tso`マイクロサービスを提供するために�
 
 ## `--cacert` {#cacert}
 
--   TLS を有効にするために使用される CA のファイル パス。
+-   TLS を有効にするために使用される CA のファイルパス。
 -   デフォルト: `""`
 
 ## `--cert` {#cert}
@@ -65,7 +65,7 @@ TSOノードは、PD用の`tso`マイクロサービスを提供するために�
 
 ## `-L` {#l}
 
--   ログ レベル。
+-   ログレベル。
 -   デフォルト: `"info"`
 -   `"warn"` `"fatal"` `"error"` `"debug"` `"info"`
 

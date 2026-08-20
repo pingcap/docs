@@ -60,7 +60,7 @@ target-database:       # Configuration of target TiDB database.
 
 データ移行タスクのデータソーステーブルのブロックリストと許可リストを構成するには、次の手順を実行します。
 
-1.  タスク構成ファイルで、ブロックおよび許可リストのグローバル フィルター ルール セットを構成します。
+1.  タスク構成ファイルで、ブロックおよび許可リストのグローバル フィルタールール セットを構成します。
 
     ```yaml
     block-allow-list:
@@ -98,7 +98,7 @@ target-database:       # Configuration of target TiDB database.
 
 データ移行タスクのbinlogイベントのフィルターを構成するには、次の手順を実行します。
 
-1.  タスク構成ファイルで、 binlogイベントのグローバル フィルター ルール セットを構成します。
+1.  タスク構成ファイルで、 binlogイベントのグローバル フィルタールール セットを構成します。
 
     ```yaml
     filters:                                        # The filter rule set of data source binlog events. You can set multiple rules at the same time.
@@ -115,7 +115,7 @@ target-database:       # Configuration of target TiDB database.
 
     詳細な設定ルールについては[Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)を参照してください。
 
-2.  データソース構成内のbinlogイベント フィルタリング ルールを参照して、データソース内の指定されたテーブルまたはスキーマの指定されたbinlogイベントをフィルタリングします。
+2.  データソース構成内のbinlogイベントフィルタリング ルールを参照して、データソース内の指定されたテーブルまたはスキーマの指定されたbinlogイベントをフィルタリングします。
 
     ```yaml
     mysql-instances:
@@ -135,9 +135,9 @@ target-database:       # Configuration of target TiDB database.
 >
 > -   シャードマージタスクの場合は、タスク構成ファイルでマッピングルールを設定する**必要があります**。
 
-データソーステーブルを指定されたダウンストリーム TiDB テーブルに移行するためのルーティング マッピング ルールを構成するには、次の手順を実行します。
+データソーステーブルを指定されたダウンストリーム TiDB テーブルに移行するためのルーティング マッピングルールを構成するには、次の手順を実行します。
 
-1.  タスク構成ファイルでグローバル ルーティング マッピング ルール セットを構成します。
+1.  タスク構成ファイルでグローバル ルーティング マッピングルール セットを構成します。
 
     ```yaml
     routes:                           # The routing mapping rule set between the data source tables and downstream TiDB tables. You can set multiple rules at the same time.
@@ -153,7 +153,7 @@ target-database:       # Configuration of target TiDB database.
 
     詳細な設定ルールについては[テーブルルーティング](/dm/dm-table-routing.md)を参照してください。
 
-2.  データソース構成内のルーティング マッピング ルールを参照して、移行するテーブルをフィルター処理します。
+2.  データソース構成内のルーティング マッピングルールを参照して、移行するテーブルをフィルター処理します。
 
     ```yaml
     mysql-instances:

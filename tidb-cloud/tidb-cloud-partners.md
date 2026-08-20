@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Partner Web Console
-summary: 再販業者およびマネージド サービス プロバイダー (MSP) としてTiDB Cloud Partner Web コンソールを使用する方法を学習します。
+summary: 再販業者およびマネージドサービス プロバイダー (MSP) としてTiDB Cloud Partner Web コンソールを使用する方法を学習します。
 aliases: ['/ja/tidbcloud/managed-service-provider']
 ---
 
@@ -11,7 +11,7 @@ TiDB Cloudパートナー Web コンソールは、SaaS ソリューションに
 TiDB Cloudパートナーには 2 つの種類があります。
 
 -   再販業者: AWS Marketplace チャネルパートナープライベートオファー (CPPO) を通じてTiDB Cloud を再販します
--   マネージド サービス プロバイダー (MSP): TiDB Cloudを再販し、付加価値サービスを提供します
+-   マネージドサービス プロバイダー (MSP): TiDB Cloudを再販し、付加価値サービスを提供します
 
 ## AWS チャネルパートナープライベートオファー (CPPO) を通じた再販業者 {#reseller-through-aws-channel-partner-private-offer-cppo}
 
@@ -32,7 +32,7 @@ TiDB Cloudパートナーには 2 つの種類があります。
 
 MSP は、 TiDB Cloudを再販し、 TiDB Cloud組織管理、課金サービス、技術サポートなどを含む付加価値サービスを提供するパートナーです。
 
-マネージド サービス プロバイダーになるメリットは次のとおりです。
+マネージドサービス プロバイダーになるメリットは次のとおりです。
 
 -   割引とインセンティブプログラム
 -   エンパワーメントトレーニング

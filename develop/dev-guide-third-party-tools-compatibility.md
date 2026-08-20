@@ -1,6 +1,6 @@
 ---
 title: Known Incompatibility Issues with Third-Party Tools
-summary: テスト中に発見されたサードパーティ ツールとの TiDB 互換性の問題について説明します。
+summary: テスト中に発見されたサードパーティツールとの TiDB 互換性の問題について説明します。
 aliases: ['/ja/tidb/stable/dev-guide-third-party-tools-compatibility/','/ja/tidbcloud/dev-guide-third-party-tools-compatibility/']
 ---
 

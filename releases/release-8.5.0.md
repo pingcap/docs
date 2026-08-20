@@ -49,9 +49,9 @@ TiDB 8.5.0は長期サポートリリース（LTS）です。
 
     詳細については、[ドキュメント](/accelerated-table-creation.md)を参照してください。
 
--   TiKV は MVCC インメモリ エンジン (IME) をサポートしており、広範な MVCC 履歴バージョンのスキャンを伴うクエリを高速化します [#16141](https://github.com/tikv/tikv/issues/16141) @[SpadeA-Tang](https://github.com/SpadeA-Tang)@[glorv](https://github.com/glorv)@[overvenus](https://github.com/overvenus)
+-   TiKV は MVCC インメモリエンジン (IME) をサポートしており、広範な MVCC 履歴バージョンのスキャンを伴うクエリを高速化します [#16141](https://github.com/tikv/tikv/issues/16141) @[SpadeA-Tang](https://github.com/SpadeA-Tang)@[glorv](https://github.com/glorv)@[overvenus](https://github.com/overvenus)
 
-    レコードが頻繁に更新される場合、または TiDB が履歴バージョンを長期間 (例えば 24 時間) 保持する必要がある場合、MVCC バージョンの蓄積によりスキャン パフォーマンスが低下する可能性があります。TiKV の MVCC インメモリ エンジンは、最新の MVCC バージョンをメモリにキャッシュし、高速な GC メカニズムを使用して履歴バージョンをメモリから削除することで、スキャン パフォーマンスを向上させます。
+    レコードが頻繁に更新される場合、または TiDB が履歴バージョンを長期間 (例えば 24 時間) 保持する必要がある場合、MVCC バージョンの蓄積によりスキャンパフォーマンスが低下する可能性があります。TiKV の MVCC インメモリエンジンは、最新の MVCC バージョンをメモリにキャッシュし、高速な GC メカニズムを使用して履歴バージョンをメモリから削除することで、スキャンパフォーマンスを向上させます。
 
     バージョン8.5.0以降、TiKVはMVCCインメモリエンジンを導入しました。TiKVクラスタ内でMVCCバージョンが蓄積され、スキャンパフォーマンスが低下する場合は、TiKV構成パラメータ[`in-memory-engine.enable`](/tikv-in-memory-engine.md#usage)を設定することで、TiKV MVCCインメモリエンジンを有効にしてスキャンパフォーマンスを向上させることができます。
 
@@ -133,9 +133,9 @@ TiDB 8.5.0は長期サポートリリース（LTS）です。
 | ------------------------ | ----------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB                     | [`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length)                      | 変更     | バージョン8.5.0以降、整数表示幅機能は非推奨となりました。この設定項目のデフォルト値は`false`から`true`に変更されました。                                                                              |
 | TiKV                     | [`raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size)                                          | 変更     | デフォルト値を`8192`から`16384`に変更します。                                                                                                                      |
-| TiKV                     | [`in-memory-engine.capacity`](/tikv-configuration-file.md#capacity-new-in-v850)                                         | 新しく追加された | TiKV MVCC インメモリ エンジンが使用できる最大メモリサイズを制御します。デフォルト値は`min(the system memory * 10%, 5 GiB)`です。                                                           |
+| TiKV                     | [`in-memory-engine.capacity`](/tikv-configuration-file.md#capacity-new-in-v850)                                         | 新しく追加された | TiKV MVCC インメモリエンジンが使用できる最大メモリサイズを制御します。デフォルト値は`min(the system memory * 10%, 5 GiB)`です。                                                           |
 | TiKV                     | [`in-memory-engine.enable`](/tikv-configuration-file.md#enable-new-in-v850)                                             | 新しく追加された | TiKV MVCCのインメモリエンジンを有効にして、マルチバージョンクエリを高速化するかどうかを制御します。デフォルト値は`false`で、これはインメモリエンジンが無効になっていることを意味します。                                               |
-| TiKV                     | [`in-memory-engine.gc-run-interval`](/tikv-configuration-file.md#gc-run-interval-new-in-v850)                           | 新しく追加された | インメモリ エンジンがキャッシュされた MVCC バージョンに対してガベージコレクション(GC) を実行する時間間隔を制御します。デフォルト値は`"3m"`です。                                                                  |
+| TiKV                     | [`in-memory-engine.gc-run-interval`](/tikv-configuration-file.md#gc-run-interval-new-in-v850)                           | 新しく追加された | インメモリエンジンがキャッシュされた MVCC バージョンに対してガベージコレクション(GC) を実行する時間間隔を制御します。デフォルト値は`"3m"`です。                                                                  |
 | TiKV                     | [`in-memory-engine.mvcc-amplification-threshold`](/tikv-configuration-file.md#mvcc-amplification-threshold-new-in-v850) | 新しく追加された | インメモリエンジンがリージョンを選択してロードする際の、MVCC読み取り増幅のしきい値を制御します。デフォルト値は`10`で、リージョン内の1行を読み取るのに10を超えるMVCCバージョンを処理する必要がある場合は、そのリージョンがインメモリエンジンにロードされる可能性があることを示します。 |
 | PD                       | [`patrol-region-worker-count`](/pd-configuration-file.md#patrol-region-worker-count-new-in-v850)                        | 新しく追加された | リージョンの健全性状態を検査する際にチェッカーによって作成される同時[オペレーター](/glossary.md#operator)の数を制御します。                                                                         |
 | BR                       | [`--checksum`](/br/br-snapshot-manual.md)                                                                               | 変更     | デフォルト値を`true`から`false`に変更します。これは、デフォルトではBR がフルバックアップ中にテーブルレベルのチェックサムを計算しないことを意味し、バックアップのパフォーマンスを向上させます。                                            |
@@ -320,7 +320,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
 
         -   Debeziumプロトコル使用時にKafkaメッセージにキーフィールドが欠落する問題を修正 [#1799](https://github.com/pingcap/tiflow/issues/1799) @[wk989898](https://github.com/wk989898)
         -   再実行モジュールがエラーを正しく報告できない問題を修正 [#11744](https://github.com/pingcap/tiflow/issues/11744) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        -   TiDB DDL の所有者変更中に DDL タスクのスキーマ バージョンが非増分になった場合に TiCDC が誤って DDL タスクを破棄してしまう問題を修正しました [#11714](https://github.com/pingcap/tiflow/issues/11714) @[wlwilliamx](https://github.com/wlwilliamx)
+        -   TiDB DDL の所有者変更中に DDL タスクのスキーマバージョンが非増分になった場合に TiCDC が誤って DDL タスクを破棄してしまう問題を修正しました [#11714](https://github.com/pingcap/tiflow/issues/11714) @[wlwilliamx](https://github.com/wlwilliamx)
 
     -   TiDB Lightning
 

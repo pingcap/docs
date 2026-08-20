@@ -57,7 +57,7 @@ TiDBバージョン: 6.5.11
     -   厳密に自己増分ではないRANGEパーティションテーブルが作成できる問題を修正 [＃54829](https://github.com/pingcap/tidb/issues/54829) @[Defined2014](https://github.com/Defined2014)
     -   最初の引数が`month`で、2番目の引数が負の場合に`TIMESTAMPADD()`関数が無限ループに入る問題を修正しました。 [＃54908](https://github.com/pingcap/tidb/issues/54908) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   `auth_socket`認証プラグインを使用しているときに、TiDB が認証されていないユーザーの接続を拒否できないことがある問題を修正しました。 [＃54031](https://github.com/pingcap/tidb/issues/54031) @[lcwangchao](https://github.com/lcwangchao)
-    -   分散実行フレームワーク (DXF) を使用してインデックスを追加する際のネットワーク パーティションによって、データ インデックスの不整合が発生する可能性がある問題を修正しました。 [＃54897](https://github.com/pingcap/tidb/issues/54897) @[tangenta](https://github.com/tangenta)
+    -   分散実行フレームワーク (DXF) を使用してインデックスを追加する際のネットワークパーティションによって、データインデックスの不整合が発生する可能性がある問題を修正しました。 [＃54897](https://github.com/pingcap/tidb/issues/54897) @[tangenta](https://github.com/tangenta)
     -   メモリ使用量が`tidb_mem_quota_query` で設定された制限を超えたためにクエリが終了したときに停止する可能性がある問題を修正しました [＃55042](https://github.com/pingcap/tidb/issues/55042) @[yibin87](https://github.com/yibin87)
     -   特定の状況下でプランキャッシュを使用する際に、メタデータロックの不適切な使用によって異常なデータが書き込まれる可能性がある問題を修正しました[＃53634](https://github.com/pingcap/tidb/issues/53634) @[zimulala](https://github.com/zimulala)
     -   再帰CTEクエリが無効なポインタを生成する可能性がある問題を修正しました [＃54449](https://github.com/pingcap/tidb/issues/54449) @[hawkingrei](https://github.com/hawkingrei)
@@ -80,7 +80,7 @@ TiDBバージョン: 6.5.11
     -   大きなテーブルやパーティションを削除した後に発生する可能性のあるトラフィック制御の問題を修正しました [＃17304](https://github.com/tikv/tikv/issues/17304) @[Connor1996](https://github.com/Connor1996)
     -   削除された`sst_importer` SST ファイルを取り込むことにより TiKV がpanicになる可能性がある問題を修正しました [＃15053](https://github.com/tikv/tikv/issues/15053) @[lance6716](https://github.com/lance6716)
     -   古いレプリカがRaftスナップショットを処理するときに、遅い分割操作と新しいレプリカの即時削除によってトリガーされ、TiKV がpanicになる可能性がある問題を修正しました。 [＃17469](https://github.com/tikv/tikv/issues/17469) @[hbisheng](https://github.com/hbisheng)
-    -   破損したRaftデータ スナップショットを適用すると TiKV が繰り返しpanicする可能性がある問題を修正しました。 [＃15292](https://github.com/tikv/tikv/issues/15292) @[LykxSassinator](https://github.com/LykxSassinator)
+    -   破損したRaftデータスナップショットを適用すると TiKV が繰り返しpanicする可能性がある問題を修正しました。 [＃15292](https://github.com/tikv/tikv/issues/15292) @[LykxSassinator](https://github.com/LykxSassinator)
     -   gRPC メッセージ圧縮方式を`grpc-compression-type`で設定しても、TiKV から TiDB に送信されるメッセージには反映されない問題を修正しました。 [＃17176](https://github.com/tikv/tikv/issues/17176) @[ekexium](https://github.com/ekexium)
     -   CDC とログバックアップが`advance-ts-interval`構成を使用して`check_leader`のタイムアウトを制限しないため、TiKV が正常に再起動したときに`resolved_ts`遅延が大きくなる場合がある問題を修正しました[＃17107](https://github.com/tikv/tikv/issues/17107) @[MyonKeminta](https://github.com/MyonKeminta)
 

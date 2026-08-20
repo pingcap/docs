@@ -12,7 +12,7 @@ summary: AWS エンドポイントサービスプライベートリンク接続�
 1.  プライベートリンク接続は、すべての Kafka ブローカーのアドレスとポートを返すブートストラップブローカーアドレスを使用して AWS エンドポイントサービスに接続します。
 2.  TiDB Cloud は、返されたブローカーアドレスとポートを使用して、プライベートリンク接続を介して接続を確立します。
 3.  AWS エンドポイントサービスは、リクエストをロードバランサーに転送します。
-4.  ロードバランサーは、ポート マッピングに基づいて、対応する Kafka ブローカーにリクエストをルーティングします。
+4.  ロードバランサーは、ポートマッピングに基づいて、対応する Kafka ブローカーにリクエストをルーティングします。
 
 ## 前提条件 {#prerequisites}
 
@@ -25,7 +25,7 @@ summary: AWS エンドポイントサービスプライベートリンク接続�
 
 -   AWS アカウントでロードバランサーとエンドポイントサービスを設定するには、次の権限があることを確認してください。
 
-    -   セキュリティ グループを管理する
+    -   セキュリティグループを管理する
     -   ロードバランサーを管理する
     -   エンドポイントサービスの管理
 
@@ -123,12 +123,12 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 2.  前にメモしておいた**VPC ID** (この例では`vpc-01f50b790fa01dffa` ) を選択します。
 
-3.  次の情報を使用して、任意の AZ にパブリック サブネットを追加します。
+3.  次の情報を使用して、任意の AZ にパブリックサブネットを追加します。
 
     -   **Subnet name**: `bastion`
     -   **IPv4 subnet CIDR block**： `10.0.192.0/18`
 
-4.  要塞サブネットをパブリック サブネットに構成します。
+4.  要塞サブネットをパブリックサブネットに構成します。
 
     1.  [VPCダッシュボード &gt; インターネットゲートウェイ](https://console.aws.amazon.com/vpcconsole/home#igws:)に進みます。`kafka-vpc-igw`名前のインターネットゲートウェイを作成します。
 
@@ -628,7 +628,7 @@ b3.usw2-az3.unique_name.aws.plc.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: 
 
 ロードバランサーを設定するには、次の手順を実行します。
 
-1.  [対象グループ](https://console.aws.amazon.com/ec2/home#CreateTargetGroup:)に進み、4 つのターゲット グループを作成します。
+1.  [対象グループ](https://console.aws.amazon.com/ec2/home#CreateTargetGroup:)に進み、4 つのターゲットグループを作成します。
 
     -   ブートストラップターゲットグループ
 
@@ -674,7 +674,7 @@ b3.usw2-az3.unique_name.aws.plc.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: 
         -   **Health check protocol**： `TCP`
         -   **Register targets**: `broker-node3:39092`
 
-2.  [ロードバランサー](https://console.aws.amazon.com/ec2/home#LoadBalancers:)に進み、ネットワーク ロードバランサーを作成します。
+2.  [ロードバランサー](https://console.aws.amazon.com/ec2/home#LoadBalancers:)に進み、ネットワークロードバランサーを作成します。
 
     -   **Load balancer name**: `kafka-lb`
     -   **Schema**: `Internal`
@@ -684,7 +684,7 @@ b3.usw2-az3.unique_name.aws.plc.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: 
         -   `usw2-az1`と`broker-usw2-az1 subnet`
         -   `usw2-az2`と`broker-usw2-az2 subnet`
         -   `usw2-az3`と`broker-usw2-az3 subnet`
-    -   **Security groups**: 次のルールで新しいセキュリティ グループを作成します。
+    -   **Security groups**: 次のルールで新しいセキュリティグループを作成します。
         -   受信ルールは、Kafka VPCからのすべてのTCPを許可します：タイプ - `{ports of target groups}` （例： `9092-9095` ）、ソース - `{CIDR of TiDB Cloud}` 。リージョン内のTiDB CloudのCIDRを取得するには、 [TiDB Cloudコンソール](https://tidbcloud.com)で組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、**Project view** タブをクリックして対象のプロジェクトを見つけ、そのプロジェクトの <MDSvgIcon name="icon-project-settings" /> をクリックし、**Project Settings** の下にある **Network Access** をクリックしてから、**Project CIDR** > **AWS** をクリックします。
         -   アウトバウンドルールは、Kafka VPC へのすべての TCP を許可します: タイプ - `All TCP` 、宛先 - `Anywhere-IPv4`
     -   リスナーとルーティング:

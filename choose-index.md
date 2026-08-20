@@ -145,7 +145,7 @@ mysql> SHOW WARNINGS;
 
 ## 多値インデックスを使用する {#use-multi-valued-indexes}
 
-[多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)は通常のインデックスとは異なります。 TiDB は現在、多値インデックスにアクセスするために[インデックスマージ](/explain-index-merge.md)のみを使用します。したがって、データ アクセスに多値インデックスを使用するには、システム変数[`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40)の値が`ON`に設定されていることを確認してください。
+[多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)は通常のインデックスとは異なります。 TiDB は現在、多値インデックスにアクセスするために[インデックスマージ](/explain-index-merge.md)のみを使用します。したがって、データアクセスに多値インデックスを使用するには、システム変数[`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40)の値が`ON`に設定されていることを確認してください。
 
 多値インデックスの制限事項については、 [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md#limitations)を参照してください。
 

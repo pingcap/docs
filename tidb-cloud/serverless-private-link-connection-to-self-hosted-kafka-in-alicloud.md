@@ -12,9 +12,9 @@ summary: Alibaba Cloud Endpoint Service のプライベートリンク接続を�
 1.  プライベートリンク接続は、 `advertised.listeners`で定義されたブローカー外部アドレスを返すブートストラップ ポートを使用して Alibaba Cloud エンドポイントサービスに接続します。
 2.  プライベートリンク接続は、ブローカーの外部アドレスを使用してエンドポイントサービスに接続します。
 3.  Alibaba Cloud エンドポイントサービスは、リクエストをロードバランサーに転送します。
-4.  ロードバランサーは、ポート マッピングに基づいて、対応する Kafka ブローカーにリクエストを転送します。
+4.  ロードバランサーは、ポートマッピングに基づいて、対応する Kafka ブローカーにリクエストを転送します。
 
-たとえば、ポート マッピングは次のようになります。
+たとえば、ポートマッピングは次のようになります。
 
 | ブローカー外部アドレスポート | ロードバランサーのリスナーポート | ロードバランサバックエンドサーバー |
 | -------------- | ---------------- | ----------------- |
@@ -581,7 +581,7 @@ b3.ap-southeast-1c.unique_name.alicloud.plc.tidbcloud.com:9095 (id: 3 rack: null
         -   **Backend Server Protocol**: `TCP`を選択
         -   **Backend servers**: 作成したサーバーグループをクリックし、バックエンドサーバー`broker-node3:39092`を追加します。
 
-2.  [NLB](https://slb.console.alibabacloud.com/nlb)に進み、ネットワーク ロードバランサーを作成します。
+2.  [NLB](https://slb.console.alibabacloud.com/nlb)に進み、ネットワークロードバランサーを作成します。
 
     -   **Network Type**: `Internal-facing`を選択
     -   **VPC** : `Kafka VPC`

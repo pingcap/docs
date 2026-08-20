@@ -394,7 +394,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 -   サーバーの文字セットと照合順序は、システム変数`character_set_server`と`collation_server`の値です。
 
--   デフォルト データベースの文字セットと照合順序は、システム変数`character_set_database`と`collation_database`の値です。
+-   デフォルトデータベースの文字セットと照合順序は、システム変数`character_set_database`と`collation_database`の値です。
 
 `character_set_connection`と`collation_connection`を使用して、各接続の文字セットと照合順序を指定するために使用できます。`character_set_client`は、クライアントの文字セットを設定するための変数です。
 

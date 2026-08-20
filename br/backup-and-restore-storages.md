@@ -80,7 +80,7 @@ tiup br restore full --pd "${PD_IP}:2379" \
 </div>
 <div label="Azure Blob Storage" value="azure">
 
-**スナップショット データを Azure Blob Storage にバックアップする**
+**スナップショットデータを Azure Blob Storage にバックアップする**
 
 ```shell
 tiup br backup full -u "${PD_IP}:2379" \
@@ -185,7 +185,7 @@ TiKV で GCS WIF または ADC を使用する場合は、 `gcp_v2`外部スト�
 
         > **Note:**
         >
-        > この方法を使用する場合は、手順 3 で TiKV を再起動する必要があります。クラスターを再起動できない場合は、 **「方法 1: バックアップと復元のアクセス キーを指定する」**を使用します。
+        > この方法を使用する場合は、手順 3 で TiKV を再起動する必要があります。クラスターを再起動できない場合は、 **「方法 1: バックアップと復元のアクセスキーを指定する」**を使用します。
 
         1.  このノードの TiKV ポートが`24000` 、つまり systemd サービスの名前が`tikv-24000`であるとします。
 

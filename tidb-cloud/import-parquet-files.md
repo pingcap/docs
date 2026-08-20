@@ -89,7 +89,7 @@ TiDB CloudがAmazon S3バケット、GCSバケット、またはAzure Blob Stora
 
 -   Parquet ファイルが Amazon S3 にある場合は、 [Amazon S3へのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)。
 
-    バケットにアクセスするには、AWS アクセスキーまたはロール ARN のいずれかを使用できます。完了したら、 [ステップ4](#step-4-import-parquet-files-to-tidb-cloud)で必要となるため、アクセスキー (アクセスキー ID とシークレット アクセスキーを含む) またはロール ARN の値をメモしておいてください。
+    バケットにアクセスするには、AWS アクセスキーまたはロール ARN のいずれかを使用できます。完了したら、 [ステップ4](#step-4-import-parquet-files-to-tidb-cloud)で必要となるため、アクセスキー (アクセスキー ID とシークレットアクセスキーを含む) またはロール ARN の値をメモしておいてください。
 
 -   Parquet ファイルが GCS にある場合は、 [GCSへのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access)。
 
@@ -120,7 +120,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
     -   **Source URI** ：
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`s3://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `s3://mybucket/myfolder/TableName.01.parquet` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`s3://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `s3://mybucket/myfolder/` 。
-    -   **認証情報**: AWS ロール ARN または AWS アクセス キーを使用してバケットにアクセスできます。詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)を参照してください。
+    -   **認証情報**: AWS ロール ARN または AWS アクセスキーを使用してバケットにアクセスできます。詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)を参照してください。
         -   **AWS Role ARN** (推奨): AWS ロール ARN の値を入力します。まだロール ARN がない場合は、 **[ここをクリックして AWS CloudFormation を使用して新しいロール ARN を作成する]**をクリックし、画面の指示に従うか、 **[問題が発生しましたか?] ダイアログでロール ARN を手動で作成して、**クラスターの**TiDB Cloud Account ID**と**TiDB Cloud External ID**を取得し、 IAMロールを手動で作成します。
         -   **AWS Access Key**：AWSアクセスキーIDとAWSシークレットアクセスキーを入力してください。
 
@@ -136,7 +136,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     -   TiDB Cloud が[TiDBファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**Parquet を**選択します。ソースフォルダにスキーマファイル ( `${db_name}-schema-create.sql`や`${db_name}.${table_name}-schema.sql`など) が含まれている場合、 TiDB Cloud は、ターゲットデータベースとテーブルがまだ存在しない場合に、それらを使用して作成します。
 
-    -   ソース Parquet ファイルをターゲットのデータベースおよびテーブルに関連付けるためのマッピング ルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
+    -   ソース Parquet ファイルをターゲットのデータベースおよびテーブルに関連付けるためのマッピングルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
 
         -   **ソース**: ファイル名のパターンを`[file_name].parquet`の形式で入力してください。例: `TableName.01.parquet` 。ワイルドカードを使用して複数のファイルを照合することもできます。TiDB Cloud は`*`と`?`のワイルドカードのみをサポートしています。
 
@@ -173,7 +173,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
     -   **Source URI** ：
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`gs://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `gs://mybucket/myfolder/TableName.01.parquet` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`gs://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `gs://mybucket/myfolder/` 。
-    -   **認証情報**: TiDB Cloud は、このページで一意の Google Cloud サービス アカウント ID ( `example-service-account@your-project.iam.gserviceaccount.com`など) を提供します。このサービス アカウント ID に、Google Cloud プロジェクト内の GCS バケットに対して必要なIAM権限（ `Storage Object Viewer`など）を付与します。詳細については、 [GCSへのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access)を参照してください。
+    -   **認証情報**: TiDB Cloud は、このページで一意の Google Cloud サービスアカウント ID ( `example-service-account@your-project.iam.gserviceaccount.com`など) を提供します。このサービスアカウント ID に、Google Cloud プロジェクト内の GCS バケットに対して必要なIAM権限（ `Storage Object Viewer`など）を付与します。詳細については、 [GCSへのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access)を参照してください。
 
 4.  **「次へ」**をクリックしてください。
 
@@ -187,7 +187,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     -   TiDB Cloud が[TiDBファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**Parquet を**選択します。ソースフォルダにスキーマファイル ( `${db_name}-schema-create.sql`や`${db_name}.${table_name}-schema.sql`など) が含まれている場合、 TiDB Cloud は、ターゲットデータベースとテーブルがまだ存在しない場合に、それらを使用して作成します。
 
-    -   ソース Parquet ファイルをターゲットのデータベースおよびテーブルに関連付けるためのマッピング ルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
+    -   ソース Parquet ファイルをターゲットのデータベースおよびテーブルに関連付けるためのマッピングルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
 
         -   **ソース**: ファイル名のパターンを`[file_name].parquet`の形式で入力してください。例: `TableName.01.parquet` 。ワイルドカードを使用して複数のファイルを照合することもできます。TiDB Cloud は`*`と`?`のワイルドカードのみをサポートしています。
 
@@ -263,7 +263,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     -   TiDB Cloud が[TiDBファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**Parquet を**選択します。ソースフォルダにスキーマファイル ( `${db_name}-schema-create.sql`や`${db_name}.${table_name}-schema.sql`など) が含まれている場合、 TiDB Cloud は、ターゲットデータベースとテーブルがまだ存在しない場合に、それらを使用して作成します。
 
-    -   ソース Parquet ファイルをターゲットのデータベースおよびテーブルに関連付けるためのマッピング ルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
+    -   ソース Parquet ファイルをターゲットのデータベースおよびテーブルに関連付けるためのマッピングルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
 
         -   **ソース**: ファイル名のパターンを`[file_name].parquet`の形式で入力してください。例: `TableName.01.parquet` 。ワイルドカードを使用して複数のファイルを照合することもできます。TiDB Cloud は`*`と`?`のワイルドカードのみをサポートしています。
 

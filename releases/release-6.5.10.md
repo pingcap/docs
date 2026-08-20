@@ -21,7 +21,7 @@ TiDB バージョン: 6.5.10
 -   TiDB
 
     -   `SHOW CREATE TABLE` の出力に表示される式のデフォルト値のMySQL互換性を改善しました [＃52939](https://github.com/pingcap/tidb/issues/52939) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    -   MPP ロード バランシング中にリージョンのないストアを削除する [＃52313](https://github.com/pingcap/tidb/issues/52313) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    -   MPP ロードバランシング中にリージョンのないストアを削除する [＃52313](https://github.com/pingcap/tidb/issues/52313) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
 -   TiKV
 
@@ -69,7 +69,7 @@ TiDB バージョン: 6.5.10
     -   `tidb_mem_quota_analyze`が有効になっていて、統計の更新に使用されるメモリが制限を超えると TiDB がクラッシュする可能性がある問題を修正しました。 [＃52601](https://github.com/pingcap/tidb/issues/52601) @[hawkingrei](https://github.com/hawkingrei)
     -   `UPDATE`リスト内のサブクエリによって TiDB がpanicする可能性がある問題を修正[＃52687](https://github.com/pingcap/tidb/issues/52687) @[winoros](https://github.com/winoros)
     -   述語の`Longlong`型のオーバーフローの問題を修正 [＃45783](https://github.com/pingcap/tidb/issues/45783) @[hawkingrei](https://github.com/hawkingrei)
-    -   一意インデックスを追加するときに同時 DML 操作によって発生するデータ インデックスの不整合の問題を修正しました。 [＃52914](https://github.com/pingcap/tidb/issues/52914) @[wjhuang2016](https://github.com/wjhuang2016)
+    -   一意インデックスを追加するときに同時 DML 操作によって発生するデータインデックスの不整合の問題を修正しました。 [＃52914](https://github.com/pingcap/tidb/issues/52914) @[wjhuang2016](https://github.com/wjhuang2016)
     -   インデックスデータを解析するときに TiDB がpanicする可能性がある問題を修正しました [＃47115](https://github.com/pingcap/tidb/issues/47115) @[zyguan](https://github.com/zyguan)
     -   スライスの浅いコピーを使用せずに列プルーニングを行うと、TiDB がpanicする可能性がある問題を修正しました[＃52768](https://github.com/pingcap/tidb/issues/52768) @[winoros](https://github.com/winoros)
     -   再帰CTE でビューの使用が機能しない問題を修正 [＃49721](https://github.com/pingcap/tidb/issues/49721) @[hawkingrei](https://github.com/hawkingrei)

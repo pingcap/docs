@@ -79,9 +79,9 @@ sql-mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"
 
 -   手動デプロイの場合： `tidb-lightning`フォアグラウンドで実行されている場合は、 <kbd>Ctrl</kbd> + <kbd>C</kbd>を押して終了します。それ以外の場合は、 `ps aux | grep tidb-lightning`コマンドを使用してプロセス ID を取得し、 `kill -2 ${PID}`コマンドを使用してプロセスを終了します。
 
-## TiDB Lightning は1 ギガビット ネットワーク カードで使用できますか? {#can-tidb-lightning-be-used-with-1-gigabit-network-card}
+## TiDB Lightning は1 ギガビット ネットワークカードで使用できますか? {#can-tidb-lightning-be-used-with-1-gigabit-network-card}
 
-TiDB Lightning は、10 ギガビット ネットワーク カードで使用するのが最適です。
+TiDB Lightning は、10 ギガビット ネットワークカードで使用するのが最適です。
 
 1ギガビットネットワークカードは合計120MB/秒の帯域幅しか提供できず、これをすべてのターゲットTiKVストアで共有する必要があります。TiDB Lightningは、物理インポートモードで1ギガビットネットワークの全帯域幅を簡単に飽和させ、PDに接続できなくなるため、クラスタを停止させる可能性があります。
 

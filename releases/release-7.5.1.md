@@ -177,7 +177,7 @@ TiDB バージョン: 7.5.1
     -   リソースグループをバッチでクエリすると PD がpanicになる可能性がある問題を修正しました [＃7206](https://github.com/tikv/pd/issues/7206) @[nolouch](https://github.com/nolouch)
     -   PDが`systemd` で起動したときにリソース制限を読み取れない問題を修正 [＃7628](https://github.com/tikv/pd/issues/7628) @[bufferflies](https://github.com/bufferflies)
     -   PD ディスクレイテンシーの継続的なジッタにより、PD が新しいリーダーを選択できない可能性がある問題を修正しました。 [＃7251](https://github.com/tikv/pd/issues/7251) @[HuSharp](https://github.com/HuSharp)
-    -   PD のネットワーク パーティションにより、スケジュールがすぐに開始されない可能性がある問題を修正[＃7016](https://github.com/tikv/pd/issues/7016) @[HuSharp](https://github.com/HuSharp)
+    -   PD のネットワークパーティションにより、スケジュールがすぐに開始されない可能性がある問題を修正[＃7016](https://github.com/tikv/pd/issues/7016) @[HuSharp](https://github.com/HuSharp)
     -   リーダースイッチ後にPD監視項目`learner-peer-count`古い値を同期しない問題を修正 [＃7728](https://github.com/tikv/pd/issues/7728) @[CabinfeverB](https://github.com/CabinfeverB)
     -   PDリーダーが転送され、新しいリーダーとPDクライアントの間にネットワークパーティションがある場合、PDクライアントがリーダーの情報を更新できない問題を修正しました。 [＃7416](https://github.com/tikv/pd/issues/7416) @[CabinfeverB](https://github.com/CabinfeverB)
     -   Gin Web Framework のバージョンを v1.8.1 から v1.9.1 にアップグレードして、いくつかのセキュリティ問題を修正しました[＃7438](https://github.com/tikv/pd/issues/7438) @[niubell](https://github.com/niubell)
@@ -211,7 +211,7 @@ TiDB バージョン: 7.5.1
     -   Backup & Restore (BR)
 
         -   TiKVノードにリーダーがいないためにデータの復元が遅くなる問題を修正しました [＃50566](https://github.com/pingcap/tidb/issues/50566) @[Leavrth](https://github.com/Leavrth)
-        -   `--filter`オプションを指定した後でも、完全な復元を行うにはターゲット クラスターが空である必要があるという問題を修正しました[＃51009](https://github.com/pingcap/tidb/issues/51009) @[3pointer](https://github.com/3pointer)
+        -   `--filter`オプションを指定した後でも、完全な復元を行うにはターゲットクラスターが空である必要があるという問題を修正しました[＃51009](https://github.com/pingcap/tidb/issues/51009) @[3pointer](https://github.com/3pointer)
         -   データの復元に失敗した後、チェックポイントから再開するとエラー`the target cluster is not fresh`が発生する問題を修正しました[＃50232](https://github.com/pingcap/tidb/issues/50232) @[Leavrth](https://github.com/Leavrth)
         -   ログバックアップタスクを停止すると TiDB がクラッシュする問題を修正[＃50839](https://github.com/pingcap/tidb/issues/50839) @[YuJuncen](https://github.com/YuJuncen)
         -   古いバージョンのバックアップからデータを復元するときに`Unsupported collation`エラーが報告される問題を修正しました [＃49466](https://github.com/pingcap/tidb/issues/49466) @[3pointer](https://github.com/3pointer)
@@ -237,4 +237,4 @@ TiDB バージョン: 7.5.1
     -   TiDB Data Migration (DM)
 
         -   下流のテーブル構造に`shard_row_id_bits` が含まれている場合に移行タスクエラーが発生する問題を修正しました [＃10308](https://github.com/pingcap/tiflow/issues/10308) @[GMHDBJD](https://github.com/GMHDBJD)
-        -   DM が「イベント タイプ切り捨てが無効です」というエラーに遭遇し、アップグレードが失敗する問題を修正しました[＃10282](https://github.com/pingcap/tiflow/issues/10282) @[GMHDBJD](https://github.com/GMHDBJD)
+        -   DM が「イベントタイプ切り捨てが無効です」というエラーに遭遇し、アップグレードが失敗する問題を修正しました[＃10282](https://github.com/pingcap/tiflow/issues/10282) @[GMHDBJD](https://github.com/GMHDBJD)

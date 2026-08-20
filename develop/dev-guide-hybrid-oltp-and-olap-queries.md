@@ -20,7 +20,7 @@ TiDBは、オンライントランザクション処理（OLTP）には行ベー
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --host 127.0.0.1 --port 4000 --drop-tables
 ```
 
-または、 [TiDB Cloudのインポート機能を使用する](/develop/dev-guide-bookshop-schema-design.md#tidb-cloud-via-the-import-feature)を実行して事前に準備されたサンプル データをインポートすることもできます。
+または、 [TiDB Cloudのインポート機能を使用する](/develop/dev-guide-bookshop-schema-design.md#tidb-cloud-via-the-import-feature)を実行して事前に準備されたサンプルデータをインポートすることもできます。
 
 ## ウィンドウ関数 {#window-functions}
 

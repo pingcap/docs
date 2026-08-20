@@ -13,7 +13,7 @@ TiDB Cloud CLIはコマンドラインインターフェースであり、ター
 
 ## 始める前に {#before-you-begin}
 
-必ず最初に[TiDB Cloud CLI環境をセットアップする](/tidb-cloud/get-started-with-cli.md)。 `ticloud` CLI をインストールすると、それを使用してコマンド ラインからTiDB Cloud StarterインスタンスとEssentialインスタンスを管理できるようになります。
+必ず最初に[TiDB Cloud CLI環境をセットアップする](/tidb-cloud/get-started-with-cli.md)。 `ticloud` CLI をインストールすると、それを使用してコマンドラインからTiDB Cloud StarterインスタンスとEssentialインスタンスを管理できるようになります。
 
 ## 使用可能なコマンド {#commands-available}
 

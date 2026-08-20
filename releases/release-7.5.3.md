@@ -89,7 +89,7 @@ TiDB バージョン: 7.5.3
     -   gRPC メッセージ圧縮方式を`grpc-compression-type`で設定しても、TiKV から TiDB に送信されるメッセージには反映されない問題を修正しました。 [＃17176](https://github.com/tikv/tikv/issues/17176) @[ekexium](https://github.com/ekexium)
     -   同時実行性の高いコプロセッサー要求により TiKV OOM が発生する可能性がある問題を修正しました [＃16653](https://github.com/tikv/tikv/issues/16653) @[overvenus](https://github.com/overvenus)
     -   CDC とログバックアップが`advance-ts-interval`構成を使用して`check_leader`のタイムアウトを制限しないため、TiKV が正常に再起動したときに`resolved_ts`遅延が大きくなる場合がある問題を修正しました[＃17107](https://github.com/tikv/tikv/issues/17107) @[MyonKeminta](https://github.com/MyonKeminta)
-    -   破損したRaftデータ スナップショットを適用すると TiKV が繰り返しpanicする可能性がある問題を修正しました。 [＃15292](https://github.com/tikv/tikv/issues/15292) @[LykxSassinator](https://github.com/LykxSassinator)
+    -   破損したRaftデータスナップショットを適用すると TiKV が繰り返しpanicする可能性がある問題を修正しました。 [＃15292](https://github.com/tikv/tikv/issues/15292) @[LykxSassinator](https://github.com/LykxSassinator)
 
 -   PD
 

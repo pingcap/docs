@@ -1,6 +1,6 @@
 ---
 title: Recovery Group Billing
-summary: TiDB Cloudのリカバリ グループの課金について説明します。
+summary: TiDB Cloudのリカバリグループの課金について説明します。
 ---
 
 # リカバリグループ請求 {#recovery-group-billing}
@@ -11,4 +11,4 @@ TiDB Cloudは、データ処理もGiB単位で課金されます。データ処�
 
 ## 価格 {#pricing}
 
-TiDB Cloudリカバリ グループがサポートされているリージョンと価格については、 [リカバリグループコスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#recovery-group-cost)を参照してください。
+TiDB Cloudリカバリグループがサポートされているリージョンと価格については、 [リカバリグループコスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#recovery-group-cost)を参照してください。

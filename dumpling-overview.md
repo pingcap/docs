@@ -11,7 +11,7 @@ summary: TiDBからデータをエクスポートするには、Dumplingツー�
 
 [TiUP](/tiup/tiup-overview.md)を使用してDumplingを取得するには、 `tiup install dumpling`を実行します。その後、 `tiup dumpling ...`を使用してDumplingを実行できます。
 
-Dumplingインストール パッケージは、 TiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
+Dumplingインストールパッケージは、 TiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
 
 </CustomContent>
 
@@ -73,7 +73,7 @@ Dumplingには次のような利点があります。
 
 -   プロセス：クラスタ情報を照会してPDアドレスを取得し、PDを介してGCを制御する必要があります。
 -   SELECT: テーブルをエクスポートする際に必須です。
--   RELOAD: `consistency`のレベルが`flush`の場合に必要です。アップストリームが RDS データベースまたはマネージド サービスの場合は、この権限を無視できます。
+-   RELOAD: `consistency`のレベルが`flush`の場合に必要です。アップストリームが RDS データベースまたはマネージドサービスの場合は、この権限を無視できます。
 -   テーブルのロック: `consistency`のレベルが`lock`の場合に必要です。この権限は、エクスポートするすべてのデータベースとテーブルに対して付与する必要があります。
 -   レプリケーションクライアント：データスナップショットを記録するためにメタデータをエクスポートする場合に必要です。この権限はオプションであり、メタデータをエクスポートする必要がない場合は無視できます。
 -   ビューの表示：エクスポート用のビューメタデータを収集するために必要です。
@@ -92,7 +92,7 @@ tiup dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o /tmp/test -r 2
 
 -   `-h` 、 `-P` 、および`-u`オプションは、それぞれアドレス、ポート、およびユーザーを意味します。認証にパスワードが必要な場合は、 `-p $YOUR_SECRET_PASSWORD`を使用してパスワードをDumplingに渡すことができます。
 
--   `-o` (または`--output` ) オプションは、ストレージのエクスポート ディレクトリを指定します。これは、絶対ローカルファイル パスまたは[外部ストレージURI](/external-storage-uri.md)をサポートします。
+-   `-o` (または`--output` ) オプションは、ストレージのエクスポート ディレクトリを指定します。これは、絶対ローカルファイルパスまたは[外部ストレージURI](/external-storage-uri.md)をサポートします。
 
 -   `-t`オプションは、エクスポートに使用するスレッド数を指定します。スレッド数を増やすと、Dumplingの並列処理能力とエクスポート速度が向上しますが、データベースのメモリ使用量も増加します。そのため、スレッド数をあまり大きく設定することは推奨されません。通常は 64 未満に設定します。
 
@@ -236,7 +236,7 @@ tiup dumpling -u root -P 4000 -h 127.0.0.1 -r 200000 -o "s3://${Bucket}/${Folder
 
 #### `--where`オプションを使用してデータをフィルタリングします {#use-the-where-option-to-filter-data}
 
-デフォルトでは、 Dumpling はシステム データベース ( `mysql` 、 `sys` 、 `INFORMATION_SCHEMA` 、 `PERFORMANCE_SCHEMA` 、 `METRICS_SCHEMA` 、および`INSPECTION_SCHEMA` ) を除くすべてのデータベースをエクスポートします。 `--where <SQL where expression>`を使用して、エクスポートするレコードを選択できます。
+デフォルトでは、 Dumpling はシステムデータベース ( `mysql` 、 `sys` 、 `INFORMATION_SCHEMA` 、 `PERFORMANCE_SCHEMA` 、 `METRICS_SCHEMA` 、および`INSPECTION_SCHEMA` ) を除くすべてのデータベースをエクスポートします。 `--where <SQL where expression>`を使用して、エクスポートするレコードを選択できます。
 
 ```shell
 tiup dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --where "id < 100"
@@ -313,7 +313,7 @@ ls -lh /tmp/test | awk '{print $5 "\t" $9}'
 
 Dumpling は`--snapshot`オプションを指定して、特定の[`tidb_snapshot`](/read-historical-data.md#how-tidb-reads-data-from-history-versions)のデータをエクスポートできます。
 
-`--snapshot`オプションは、TSO ( `Position`コマンドによって出力される`SHOW MASTER STATUS`フィールド) または`datetime`データ タイプの有効時間 ( `YYYY-MM-DD hh:mm:ss`の形式) に設定できます。例:
+`--snapshot`オプションは、TSO ( `Position`コマンドによって出力される`SHOW MASTER STATUS`フィールド) または`datetime`データタイプの有効時間 ( `YYYY-MM-DD hh:mm:ss`の形式) に設定できます。例:
 
 ```shell
 tiup dumpling --snapshot 417773951312461825
@@ -326,7 +326,7 @@ TSOが`417773951312461825`で時刻が`2020-07-02 17:12:45`のときのTiDB履�
 
 DumplingがTiDBから大きな単一テーブルをエクスポートする際、エクスポートされるデータサイズが大きすぎるためにメモリ不足（OOM）が発生し、接続が中断されてエクスポートが失敗する場合があります。TiDBのメモリ使用量を削減するには、以下のパラメータを使用してください。
 
--   `-r`を設定すると、エクスポートするデータがチャンクに分割されます。これにより、TiDB のデータ スキャンのメモリオーバーヘッドが削減され、同時テーブルデータ ダンプが可能になり、エクスポート効率が向上します。アップストリーム データベースが TiDB v3.0 以降のバージョンの場合、 `-r`の値が 0 より大きい場合は、TiDB リージョン情報が分割に使用され、特定の`-r`の値は分割アルゴリズムに影響しません。
+-   `-r`を設定すると、エクスポートするデータがチャンクに分割されます。これにより、TiDB のデータスキャンのメモリオーバーヘッドが削減され、同時テーブルデータ ダンプが可能になり、エクスポート効率が向上します。アップストリーム データベースが TiDB v3.0 以降のバージョンの場合、 `-r`の値が 0 より大きい場合は、TiDB リージョン情報が分割に使用され、特定の`-r`の値は分割アルゴリズムに影響しません。
 -   `--tidb-mem-quota-query`の値を`8589934592` (8 GB) 以下まで減らしてください。 `--tidb-mem-quota-query` TiDB の単一クエリステートメントのメモリ使用量を制御します。
 -   `--params "tidb_distsql_scan_concurrency=5"`パラメータを調整します。[`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)は、TiDB でのスキャン操作の同時実行性を制御するセッション変数です。
 

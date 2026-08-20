@@ -732,7 +732,7 @@ mysql> SELECT * FROM t1;
 -   値のオプション: `UNSPECIFIED` 、 `0` 、 `1` 、 `2`
 -   この変数は、MPP実行計画の異なるバージョンを指定するために使用されます。バージョンが指定されると、TiDBは指定されたバージョンのMPP実行計画を選択します。変数の値の意味は次のとおりです。
     -   `UNSPECIFIED` : 未指定を意味します。TiDB は最新バージョン`2`を自動的に選択します。
-    -   `0` : すべての TiDB クラスタ バージョンと互換性があります。 `0`より大きい MPP バージョンを持つ機能は、このモードでは有効になりません。
+    -   `0` : すべての TiDB クラスタバージョンと互換性があります。 `0`より大きい MPP バージョンを持つ機能は、このモードでは有効になりません。
     -   `1` : v6.6.0 の新機能。 TiFlashで圧縮を伴うデータ交換を有効にするために使用されます。詳細については、 [MPPバージョンとデータ圧縮の交換](/explain-mpp.md#mpp-version-and-exchange-data-compression)を参照してください。
     -   `2` : v7.3.0 で新しく追加され、 TiFlashで MPP タスクがエラーに遭遇したときに、より正確なエラーメッセージを提供するために使用されます。
 
@@ -1091,7 +1091,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 -   クラスターに保持される: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 -   デフォルト値: ""
--   この変数は、TiKV にフォールバックする可能性のあるストレージエンジンのリストを指定するために使用されます。リストで指定されたストレージエンジンの障害により SQL ステートメントの実行が失敗した場合、TiDB は TiKV を使用してこの SQL ステートメントの実行を再試行します。この変数は "" または "tiflash" に設定できます。この変数が "tiflash" に設定されている場合、 TiFlash がタイムアウト エラー (エラーコード: ErrTiFlashServerTimeout) を返すと、TiDB は TiKV を使用してこの SQL ステートメントの実行を再試行します。
+-   この変数は、TiKV にフォールバックする可能性のあるストレージエンジンのリストを指定するために使用されます。リストで指定されたストレージエンジンの障害により SQL ステートメントの実行が失敗した場合、TiDB は TiKV を使用してこの SQL ステートメントの実行を再試行します。この変数は "" または "tiflash" に設定できます。この変数が "tiflash" に設定されている場合、 TiFlash がタイムアウトエラー (エラーコード: ErrTiFlashServerTimeout) を返すと、TiDB は TiKV を使用してこの SQL ステートメントの実行を再試行します。
 
 ### tidb_allow_function_for_expression_index <span class="version-mark">New in v5.2.0</span>
 
@@ -1633,7 +1633,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 -   値のオプション：
     -   `1` : TiDB v6.4.0 以前のバージョンでデフォルトで使用されているコストモデルバージョン 1 を有効にします。
     -   `2` :[コストモデル バージョン2](/cost-model.md#cost-model-version-2)を有効にします。これは TiDB v6.5.0 で一般提供されており、内部テストではバージョン 1 よりも正確です。
--   コスト モデルのバージョンは、オプティマイザーの計画決定に影響します。詳細については、[コストモデル](/cost-model.md)を参照してください。
+-   コストモデルのバージョンは、オプティマイザーの計画決定に影響します。詳細については、[コストモデル](/cost-model.md)を参照してください。
 
 ### tidb_current_ts
 
@@ -1715,7 +1715,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 -   この変数は[TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)を有効にするかどうかを制御するために使用されます。フレームワークが有効になると、DDLやインポートなどのDXFタスクは、クラスタ内の複数のTiDBノードによって分散的に実行および完了されます。
 -   TiDB v7.1.0以降、DXFはパーティションテーブルに対する[`ADD INDEX`](/sql-statements/sql-statement-add-index.md)ステートメントの分散実行をサポートしています。
 -   TiDB v7.2.0以降、DXFはインポートジョブにおける[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)ステートメントの分散実行をサポートしています。
--   TiDB v8.1.0 以降では、この変数はデフォルトで有効になっています。DXF が有効になっているクラスタを v8.1.0 以降にアップグレードする場合は、アップグレード前に DXF を無効にしてください ( `tidb_enable_dist_task`を`OFF`に設定)。これにより、アップグレード中に`ADD INDEX`操作が発生してデータ インデックスの不整合が発生するのを回避できます。アップグレード後、DXF を手動で有効にすることができます。
+-   TiDB v8.1.0 以降では、この変数はデフォルトで有効になっています。DXF が有効になっているクラスタを v8.1.0 以降にアップグレードする場合は、アップグレード前に DXF を無効にしてください ( `tidb_enable_dist_task`を`OFF`に設定)。これにより、アップグレード中に`ADD INDEX`操作が発生してデータインデックスの不整合が発生するのを回避できます。アップグレード後、DXF を手動で有効にすることができます。
 -   この変数は`tidb_ddl_distribute_reorg`から名前が変更されました。
 
 ### tidb_cloud_storage_uri <span class="version-mark">New in v7.4.0</span>
@@ -1728,7 +1728,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 -   クラスターに保持される: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   デフォルト値: `""`
--   この変数は、[グローバルソート](/tidb-global-sort.md)を有効にするための Amazon S3 クラウドストレージURI を指定するために使用されます。 [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)を有効にすると、URI を構成し、ストレージへのアクセスに必要な権限を持つ適切なクラウドストレージパスを指すようにすることで、グローバル ソート機能を使用できるようになります。詳細については、 [Amazon S3 URI形式](/external-storage-uri.md#amazon-s3-uri-format)を参照してください。
+-   この変数は、[グローバルソート](/tidb-global-sort.md)を有効にするための Amazon S3 クラウドストレージURI を指定するために使用されます。 [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)を有効にすると、URI を構成し、ストレージへのアクセスに必要な権限を持つ適切なクラウドストレージパスを指すようにすることで、グローバルソート機能を使用できるようになります。詳細については、 [Amazon S3 URI形式](/external-storage-uri.md#amazon-s3-uri-format)を参照してください。
 -   以下のステートメントでは、グローバルソート機能を使用できます。
     -   [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)文。
     -   インポートジョブ用の[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)ステートメント。
@@ -1774,9 +1774,9 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 -   デフォルト値: `256`
 -   範囲: `[32, 10240]`
 -   単位：行
--   この変数は、DDL 操作の`re-organize`フェーズ中にバッチ サイズを設定するために使用されます。たとえば、TiDB が`ADD INDEX`操作を実行すると、インデックスデータは`tidb_ddl_reorg_worker_cnt` (数) 個の同時実行ワーカーによってバックフィルされる必要があります。各ワーカーは、インデックスデータをバッチ単位でバックフィルします。
+-   この変数は、DDL 操作の`re-organize`フェーズ中にバッチサイズを設定するために使用されます。たとえば、TiDB が`ADD INDEX`操作を実行すると、インデックスデータは`tidb_ddl_reorg_worker_cnt` (数) 個の同時実行ワーカーによってバックフィルされる必要があります。各ワーカーは、インデックスデータをバッチ単位でバックフィルします。
     -   `tidb_ddl_enable_fast_reorg`が`OFF`に設定されている場合、 `ADD INDEX`はトランザクションとして実行されます。 `ADD INDEX`の実行中に、対象列で`UPDATE`や`REPLACE`などの更新操作が多数発生する場合、バッチサイズが大きいほどトランザクション競合が発生する可能性が高くなります。この場合、バッチサイズを小さい値に設定することをお勧めします。最小値は 32 です。
-    -   トランザクションの競合が存在しない場合、または`tidb_ddl_enable_fast_reorg`が`ON`に設定されている場合は、バッチ サイズを大きな値に設定できます。これにより、データのバックフィルが高速になりますが、TiKV への書き込み圧力も増加します。適切なバッチ サイズについては、 `tidb_ddl_reorg_worker_cnt`の値も参照する必要があります。参考として[オンラインワークロードと`ADD INDEX`操作に関する相互作用テスト](https://docs.pingcap.com/tidb/dev/online-workloads-and-add-index-operations)を参照してください。
+    -   トランザクションの競合が存在しない場合、または`tidb_ddl_enable_fast_reorg`が`ON`に設定されている場合は、バッチサイズを大きな値に設定できます。これにより、データのバックフィルが高速になりますが、TiKV への書き込み圧力も増加します。適切なバッチサイズについては、 `tidb_ddl_reorg_worker_cnt`の値も参照する必要があります。参考として[オンラインワークロードと`ADD INDEX`操作に関する相互作用テスト](https://docs.pingcap.com/tidb/dev/online-workloads-and-add-index-operations)を参照してください。
     -   バージョン8.3.0以降、このパラメータはセッションレベルでサポートされています。グローバルレベルでパラメータを変更しても、現在実行中のDDLステートメントには影響しません。変更は、新規セッションで送信されるDDLにのみ適用されます。
     -   バージョン 8.5.0 以降では、 `ADMIN ALTER DDL JOBS <job_id> BATCH_SIZE = <new_batch_size>;`を実行することで、実行中の DDL ジョブのこのパラメータを変更できます。TiDB バージョン 8.5.5 より前のバージョンでは、 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が有効になっている場合、 `ADD INDEX` DDL に対してこの操作はサポートされていないことに注意してください。詳細については、 [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)を参照してください。
 
@@ -2129,7 +2129,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: Boolean
 -   デフォルト値: `ON`
--   この変数は、スロークエリ ログに各オペレーターの実行情報を記録するかどうか、および[インデックスの使用統計](/information-schema/information-schema-tidb-index-usage.md)を記録するかどうかを制御します。
+-   この変数は、スロークエリログに各オペレーターの実行情報を記録するかどうか、および[インデックスの使用統計](/information-schema/information-schema-tidb-index-usage.md)を記録するかどうかを制御します。
 
 ### tidb_enable_column_tracking <span class="version-mark">New in v5.4.0</span>
 
@@ -2611,7 +2611,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: Boolean
 -   デフォルト値: `ON`
--   この変数は、TiDB が並列 HashAgg アルゴリズムでディスクスピルをサポートするかどうかを制御します。この変数が`ON`の場合、HashAgg オペレータは、あらゆる並列条件下でメモリ使用量に基づいてデータ スピルを自動的にトリガーできるため、パフォーマンスとデータ スループットのバランスが取れます。この変数を`OFF`に設定することは推奨されません。v8.2.0 以降では、 `OFF`に設定するとエラーが報告されます。この変数は、将来のリリースで非推奨になります。
+-   この変数は、TiDB が並列 HashAgg アルゴリズムでディスクスピルをサポートするかどうかを制御します。この変数が`ON`の場合、HashAgg オペレータは、あらゆる並列条件下でメモリ使用量に基づいてデータスピルを自動的にトリガーできるため、パフォーマンスとデータ スループットのバランスが取れます。この変数を`OFF`に設定することは推奨されません。v8.2.0 以降では、 `OFF`に設定するとエラーが報告されます。この変数は、将来のリリースで非推奨になります。
 
 ### tidb_enable_pipelined_window_function
 
@@ -3536,7 +3536,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   型: Boolean
 -   デフォルト値: `OFF`
 -   この変数は、プリペアドステートメントキャッシュを閉じるコマンドを無視するかどうかを設定するために使用されます。
--   この変数が`ON`に設定されている場合、バイナリ プロトコルの`COM_STMT_CLOSE`コマンドとテキスト プロトコルの[`DEALLOCATE PREPARE`](/sql-statements/sql-statement-deallocate.md)ステートメントは無視されます。詳細については、 [`COM_STMT_CLOSE`コマンドと`DEALLOCATE PREPARE`ステートメントは無視してください](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement)を参照してください。
+-   この変数が`ON`に設定されている場合、バイナリプロトコルの`COM_STMT_CLOSE`コマンドとテキスト プロトコルの[`DEALLOCATE PREPARE`](/sql-statements/sql-statement-deallocate.md)ステートメントは無視されます。詳細については、 [`COM_STMT_CLOSE`コマンドと`DEALLOCATE PREPARE`ステートメントは無視してください](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement)を参照してください。
 
 ### tidb_ignore_inlist_plan_digest <span class="version-mark">New in v7.6.0</span>
 
@@ -3758,7 +3758,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   デフォルト値: `"1s"`
 -   範囲: `[0s, 1h]`
 -   型: String
--   この変数は、負荷ベースのレプリカ読み取りをトリガーするためのしきい値を設定するために使用されます。リーダー ノードの推定キュー時間がしきい値を超えると、TiDB はフォロワー ノードからのデータの読み取りを優先します。形式は、 `"100ms"`や`"1s"`などの期間です。詳細については、 [ホットスポットの問題をトラブルシューティングする](/troubleshoot-hot-spot-issues.md#scatter-read-hotspots)を参照してください。
+-   この変数は、負荷ベースのレプリカ読み取りをトリガーするためのしきい値を設定するために使用されます。リーダーノードの推定キュー時間がしきい値を超えると、TiDB はフォロワーノードからのデータの読み取りを優先します。形式は、 `"100ms"`や`"1s"`などの期間です。詳細については、 [ホットスポットの問題をトラブルシューティングする](/troubleshoot-hot-spot-issues.md#scatter-read-hotspots)を参照してください。
 
 </CustomContent>
 
@@ -3770,7 +3770,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   デフォルト値: `"1s"`
 -   範囲: `[0s, 1h]`
 -   型: String
--   この変数は、負荷ベースのレプリカ読み取りをトリガーするためのしきい値を設定するために使用されます。リーダー ノードの推定キュー時間がしきい値を超えると、TiDB はフォロワー ノードからのデータの読み取りを優先します。形式は、 `"100ms"`や`"1s"`などの期間です。詳細については、 [ホットスポットの問題をトラブルシューティングする](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#scatter-read-hotspots)を参照してください。
+-   この変数は、負荷ベースのレプリカ読み取りをトリガーするためのしきい値を設定するために使用されます。リーダーノードの推定キュー時間がしきい値を超えると、TiDB はフォロワーノードからのデータの読み取りを優先します。形式は、 `"100ms"`や`"1s"`などの期間です。詳細については、 [ホットスポットの問題をトラブルシューティングする](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#scatter-read-hotspots)を参照してください。
 
 </CustomContent>
 
@@ -4050,7 +4050,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   デフォルト値: `33554432` (32 MiB)
 -   範囲: `[0, 9223372036854775807]`
 -   単位：バイト
--   この変数は`Apply`演算子のローカル キャッシュのメモリ使用量しきい値を設定するために使用されます。
+-   この変数は`Apply`演算子のローカルキャッシュのメモリ使用量しきい値を設定するために使用されます。
 -   `Apply`演算子のローカルキャッシュは`Apply`演算子の計算を高速化するために使用されます。 変数を`0`に設定すると、 `Apply`キャッシュ機能を無効にできます。
 
 ### tidb_mem_quota_binding_cache <span class="version-mark">New in v6.0.0</span>
@@ -4928,7 +4928,7 @@ explain select * from t where age=5;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 -   デフォルト値: `ON`
 -   この変数は、TiDBオプティマイザが不要なテーブル検索を回避し、クエリパフォーマンスを向上させるために、一部のフィルタ条件をプレフィックスインデックスにプッシュダウンするかどうかを制御します。
--   この変数の値が`ON`に設定されている場合、一部のフィルタ条件がプレフィックスインデックスにプッシュダウンされます。たとえば、 `col`列がテーブルのインデックス プレフィックス 列であるとします。クエリ内の`col is null`または`col is not null`条件は、テーブル参照のフィルタ条件ではなく、インデックスのフィルタ条件として処理されるため、不要なテーブル参照が回避されます。
+-   この変数の値が`ON`に設定されている場合、一部のフィルタ条件がプレフィックスインデックスにプッシュダウンされます。たとえば、 `col`列がテーブルのインデックスプレフィックス 列であるとします。クエリ内の`col is null`または`col is not null`条件は、テーブル参照のフィルタ条件ではなく、インデックスのフィルタ条件として処理されるため、不要なテーブル参照が回避されます。
 
 <details><summary><code>tidb_opt_prefix_index_single_scan</code>の使用例</summary>
 
@@ -5699,7 +5699,7 @@ SHOW WARNINGS;
     -   `tidb_restricted_read_only`を`ON`に設定すると、 [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) `ON`に更新されます。
     -   `tidb_restricted_read_only`を`OFF`に設定しても、 [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)は変更されません。
     -   `tidb_restricted_read_only`が`ON`の場合、 [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) `OFF`に設定することはできません。
--   TiDB の DBaaS プロバイダーの場合、TiDB クラスタが別のデータベースのダウンストリーム データベースである場合、TiDB クラスタを読み取り専用にするには、 [セキュリティ強化モード](#tidb_enable_enhanced_security)を有効にした上で`tidb_restricted_read_only`を使用する必要がある場合があります。これにより、顧客が[`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)を使用してクラスタを書き込み可能にすることができなくなります。これを実現するには、 [セキュリティ強化モード](#tidb_enable_enhanced_security)を有効にし、 `SYSTEM_VARIABLES_ADMIN`および`RESTRICTED_VARIABLES_ADMIN`権限を持つ管理者ユーザーを使用して`tidb_restricted_read_only`を制御し、データベース ユーザーには、 `SUPER`権限を持つルートユーザーを使用して[`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)のみを制御させる必要があります。
+-   TiDB の DBaaS プロバイダーの場合、TiDB クラスタが別のデータベースのダウンストリームデータベースである場合、TiDB クラスタを読み取り専用にするには、 [セキュリティ強化モード](#tidb_enable_enhanced_security)を有効にした上で`tidb_restricted_read_only`を使用する必要がある場合があります。これにより、顧客が[`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)を使用してクラスタを書き込み可能にすることができなくなります。これを実現するには、 [セキュリティ強化モード](#tidb_enable_enhanced_security)を有効にし、 `SYSTEM_VARIABLES_ADMIN`および`RESTRICTED_VARIABLES_ADMIN`権限を持つ管理者ユーザーを使用して`tidb_restricted_read_only`を制御し、データベースユーザーには、 `SUPER`権限を持つルートユーザーを使用して[`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)のみを制御させる必要があります。
 -   この変数は、クラスタ全体の読み取り専用状態を制御します。変数が`ON`の場合、クラスタ全体のすべての TiDB サーバーが読み取り専用モードになります。この場合、TiDB は`SELECT` 、 `USE` 、 `SHOW` など、データを変更しないステートメントのみを実行します。 `INSERT`や`UPDATE`などの他のステートメントについては、TiDB は読み取り専用モードでの実行を拒否します。
 -   この変数を使用して読み取り専用モードを有効にしても、最終的にクラスタ全体が読み取り専用状態になることが保証されるだけです。TiDBクラスタでこの変数の値を変更しても、その変更が他のTiDBサーバーにまだ反映されていない場合、更新されていないTiDBサーバーは読み取り専用モードになり**ません**。
 -   TiDB は、SQL ステートメントの実行前に読み取り専用フラグを確認します。v6.2.0 以降では、SQL ステートメントのコミット前にもフラグがチェックされます。これにより、サーバーが読み取り専用モードになった後に、長時間実行される[自動コミット](/transaction-overview.md#autocommit)ステートメントがデータを変更するケースを防ぐことができます。
@@ -5801,7 +5801,7 @@ SHOW WARNINGS;
 -   範囲: `0`または`[67108864, 9223372036854775807]`
 -   TiDB v8.4.0 より前では、この変数のデフォルト値は`0`です。
 -   TiDB v8.4.0以降では、デフォルト値は`536870912`です。以前のバージョンからv8.4.0以降にアップグレードすると、以前のバージョンで設定されていた値が使用されます。
--   この変数は、TiDB のスキーマ キャッシュのサイズを制御します。単位はバイトです。この変数を`0`に設定すると、キャッシュ制限機能が無効になります。この機能を有効にするには、 `[67108864, 9223372036854775807]`の範囲内の値を設定する必要があります。TiDB はこの値を最大使用可能メモリ制限として使用し、Least Recently Used (LRU) アルゴリズムを適用して必要なテーブルをキャッシュすることで、スキーマ情報によって使用されるメモリを効果的に削減します。
+-   この変数は、TiDB のスキーマキャッシュのサイズを制御します。単位はバイトです。この変数を`0`に設定すると、キャッシュ制限機能が無効になります。この機能を有効にするには、 `[67108864, 9223372036854775807]`の範囲内の値を設定する必要があります。TiDB はこの値を最大使用可能メモリ制限として使用し、Least Recently Used (LRU) アルゴリズムを適用して必要なテーブルをキャッシュすることで、スキーマ情報によって使用されるメモリを効果的に削減します。
 -   クラスターに多数のパーティションテーブルが含まれている場合、またはパーティションテーブル ( `TRUNCATE`や`DROP PARTITION`など) に対して DDL 操作を頻繁に実行する場合は、この変数を`0`に設定することをお勧めします。
 
 ### tidb_schema_version_cache_limit <span class="version-mark">New in v7.4.0</span>
@@ -5812,7 +5812,7 @@ SHOW WARNINGS;
 -   デフォルト値: `16`
 -   範囲: `[2, 255]`
 -   この変数は、TiDBインスタンスにキャッシュできる履歴スキーマバージョンの数を制限します。デフォルト値は`16`で、これはTiDBがデフォルトで16個の履歴スキーマバージョンをキャッシュすることを意味します。
--   通常、この変数を変更する必要はありません。[ステイル読み取り](/stale-read.md)機能を使用し、DDL 操作が非常に頻繁に実行されると、スキーマ バージョンが頻繁に変更されます。その結果、ステイル読み取りがスナップショットからスキーマ情報を取得しようとすると、スキーマ キャッシュ ミスにより情報の再構築に時間がかかる場合があります。この場合、 `tidb_schema_version_cache_limit`の値を増やすことで (例えば、 `32` )、スキーマ キャッシュ ミスの問題を回避できます。
+-   通常、この変数を変更する必要はありません。[ステイル読み取り](/stale-read.md)機能を使用し、DDL 操作が非常に頻繁に実行されると、スキーマバージョンが頻繁に変更されます。その結果、ステイル読み取りがスナップショットからスキーマ情報を取得しようとすると、スキーマキャッシュ ミスにより情報の再構築に時間がかかる場合があります。この場合、 `tidb_schema_version_cache_limit`の値を増やすことで (例えば、 `32` )、スキーマキャッシュ ミスの問題を回避できます。
 -   この変数を変更すると、TiDBのメモリ使用量がわずかに増加します。メモリ不足の問題を回避するため、TiDBのメモリ使用量を監視してください。
 
 ### tidb_server_memory_limit <span class="version-mark">New in v6.4.0</span>
@@ -6725,7 +6725,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 <CustomContent platform="tidb-cloud">
 
--   この変数は、TiDB が TiKV に送信するトランザクション コミット リクエストのバッチ サイズを制御するために使用されます。アプリケーション ワークロード内のトランザクションの大部分で書き込み操作が多数発生する場合、この変数の値を大きくすることでバッチ処理のパフォーマンスを向上させることができます。ただし、この変数を大きすぎる値に設定して TiKV の単一ログの最大サイズ (デフォルトでは 8 MiB) の制限を超えると、コミットが失敗する可能性があります。
+-   この変数は、TiDB が TiKV に送信するトランザクションコミット リクエストのバッチサイズを制御するために使用されます。アプリケーション ワークロード内のトランザクションの大部分で書き込み操作が多数発生する場合、この変数の値を大きくすることでバッチ処理のパフォーマンスを向上させることができます。ただし、この変数を大きすぎる値に設定して TiKV の単一ログの最大サイズ (デフォルトでは 8 MiB) の制限を超えると、コミットが失敗する可能性があります。
 
 </CustomContent>
 
@@ -6880,7 +6880,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 > **Note:**
 >
 > -   この変数は、 [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740)が`0`より大きい場合にのみ有効になります。つまり、 [tiflash_mem_quota_query_per_node](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740)が`0`または`-1`の場合、 `tiflash_query_spill_ratio`が`0`より大きい場合でも、クエリレベルのスピルは有効になりません。
-> -   TiFlashクエリ レベルのスピルが有効になっている場合、個々のTiFlashオペレーターのスピルしきい値は自動的に無効になります。つまり、 [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740)と`tiflash_query_spill_ratio`両方が 0 より大きい場合、3 つの変数[tidb_max_bytes_before_tiflash_external_sort](/system-variables.md#tidb_max_bytes_before_tiflash_external_sort-new-in-v700) 、 [tidb_max_bytes_before_tiflash_external_group_by](/system-variables.md#tidb_max_bytes_before_tiflash_external_group_by-new-in-v700) 、および[tidb_max_bytes_before_tiflash_external_join](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700)は自動的に無効になり、 `0`に設定するのと同等になります。
+> -   TiFlashクエリレベルのスピルが有効になっている場合、個々のTiFlashオペレーターのスピルしきい値は自動的に無効になります。つまり、 [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740)と`tiflash_query_spill_ratio`両方が 0 より大きい場合、3 つの変数[tidb_max_bytes_before_tiflash_external_sort](/system-variables.md#tidb_max_bytes_before_tiflash_external_sort-new-in-v700) 、 [tidb_max_bytes_before_tiflash_external_group_by](/system-variables.md#tidb_max_bytes_before_tiflash_external_group_by-new-in-v700) 、および[tidb_max_bytes_before_tiflash_external_join](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700)は自動的に無効になり、 `0`に設定するのと同等になります。
 
 ### tiflash_replica_read <span class="version-mark">New in v7.3.0</span>
 

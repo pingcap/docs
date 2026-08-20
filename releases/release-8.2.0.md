@@ -115,7 +115,7 @@ TiDB バージョン: 8.2.0
 
 -   複数の変更フィード間で TiCDC 同期ポイントを調整する [#11212](https://github.com/pingcap/tiflow/issues/11212) @[hongyunyan](https://github.com/hongyunyan)
 
-    バージョン 8.2.0 より前は、複数のチェンジフィード間で TiCDC 同期ポイントを整合させるのは困難でした。チェンジフィードの作成時に、他のチェンジフィードの同期ポイントと整合するように、チェンジフィードの`startTs` `sync-point-interval`構成の倍数として作成されます。この変更により、同じ`sync-point-interval`構成を持つ複数のチェンジフィード間で同期ポイントを整合させることが可能になり、複数のダウンストリーム クラスタの整合が簡素化され、機能が向上します。
+    バージョン 8.2.0 より前は、複数のチェンジフィード間で TiCDC 同期ポイントを整合させるのは困難でした。チェンジフィードの作成時に、他のチェンジフィードの同期ポイントと整合するように、チェンジフィードの`startTs` `sync-point-interval`構成の倍数として作成されます。この変更により、同じ`sync-point-interval`構成を持つ複数のチェンジフィード間で同期ポイントを整合させることが可能になり、複数のダウンストリームクラスタの整合が簡素化され、機能が向上します。
 
     詳細については、 [ドキュメント](/ticdc/ticdc-upstream-downstream-check.md#notes)を参照してください。
 
@@ -221,7 +221,7 @@ TiDB バージョン: 8.2.0
 -   PD
 
     -   リージョンハートビート処理のパフォーマンスを改善 [#7897](https://github.com/tikv/pd/issues/7897) @[nolouch](https://github.com/nolouch)@[rleungx](https://github.com/rleungx) @[JmPotato](https://github.com/JmPotato)
-    -   pd-ctl は、バイトまたはクエリ次元によるホット リージョンのクエリをサポートします [#7369](https://github.com/tikv/pd/issues/7369) @[lhy1024](https://github.com/lhy1024)
+    -   pd-ctl は、バイトまたはクエリ次元によるホットリージョンのクエリをサポートします [#7369](https://github.com/tikv/pd/issues/7369) @[lhy1024](https://github.com/lhy1024)
 
 -   TiFlash
 

@@ -13,7 +13,7 @@ ticloud config use <profile-name> [flags]
 
 ## 例 {#examples}
 
-`test`プロファイルをアクティブ ユーザー プロファイルとして設定します。
+`test`プロファイルをアクティブ ユーザープロファイルとして設定します。
 
 ```shell
 ticloud config use test

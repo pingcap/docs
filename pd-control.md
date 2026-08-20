@@ -3,7 +3,7 @@ title: PD Control User Guide
 summary: PD Controlを使用して、クラスターの状態情報を取得し、クラスターを調整します。
 ---
 
-# PD Controlユーザー ガイド {#pd-control-user-guide}
+# PD Controlユーザーガイド {#pd-control-user-guide}
 
 PD のコマンドラインツールであるPD Control は、クラスターの状態情報を取得し、クラスターをチューニングします。
 
@@ -19,7 +19,7 @@ PD Controlを使用するには、 `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd
 
 ### インストールパッケージをダウンロードする {#download-the-installation-package}
 
-最新バージョンの`pd-ctl`を入手するには、TiDBサーバーインストール パッケージをダウンロードします。`pd-ctl`は`ctl-{version}-linux-{arch}.tar.gz`パッケージに含まれています。
+最新バージョンの`pd-ctl`を入手するには、TiDBサーバーインストールパッケージをダウンロードします。`pd-ctl`は`ctl-{version}-linux-{arch}.tar.gz`パッケージに含まれています。
 
 | インストールパッケージ                                                                                | OS    | アーキテクチャ | SHA256チェックサム                                                                             |
 | :----------------------------------------------------------------------------------------- | :---- | :------ | :--------------------------------------------------------------------------------------- |
@@ -33,7 +33,7 @@ PD Controlを使用するには、 `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd
 ### ソースコードからコンパイルする {#compile-from-source-code}
 
 1.  [Go](https://golang.org/) Go モジュールが使用されるため、1.25 以降が必要です。
-2.  [PDプロジェクト](https://github.com/pingcap/pd)のルート ディレクトリで、 `make`または`make pd-ctl`コマンドを使用して`bin/pd-ctl`をコンパイルして生成します。
+2.  [PDプロジェクト](https://github.com/pingcap/pd)のルートディレクトリで、 `make`または`make pd-ctl`コマンドを使用して`bin/pd-ctl`をコンパイルして生成します。
 
 ## 使用法 {#usage}
 
@@ -1307,7 +1307,7 @@ store weight 1 5 10
 
 ### `log [fatal | error | warn | info | debug]` {#log-fatal--error--warn--info--debug}
 
-このコマンドを使用して、PD リーダーのログ レベルを設定します。
+このコマンドを使用して、PD リーダーのログレベルを設定します。
 
 使用法：
 
@@ -1331,7 +1331,7 @@ logic:  120102
 
 > **Warning:**
 >
-> -   この機能は非可逆回復であるため、TiKV はこの機能を使用した後のデータの整合性とデータ インデックスの整合性を保証できません。
+> -   この機能は非可逆回復であるため、TiKV はこの機能を使用した後のデータの整合性とデータインデックスの整合性を保証できません。
 > -   機能関連の操作は、TiDB チームのサポートを受けながら実行することをお勧めします。誤った操作を行うと、クラスターの復旧が困難になる可能性があります。
 
 このコマンドは、レプリカが永久的に破損し、データが利用できなくなった場合に、損失を伴うリカバリ操作を実行するために使用します。次の例を参照してください。詳細は[オンラインの安全でない回復](/online-unsafe-recovery.md)に記載されています。

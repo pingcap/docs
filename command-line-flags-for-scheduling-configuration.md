@@ -1,6 +1,6 @@
 ---
 title: Scheduling Configuration Flags
-summary: スケジュール構成フラグは、コマンド ライン フラグまたは環境変数を介して構成できます。
+summary: スケジュール構成フラグは、コマンドラインフラグまたは環境変数を介して構成できます。
 ---
 
 # スケジュールコンフィグレーションフラグ {#scheduling-configuration-flags}
@@ -21,7 +21,7 @@ summary: スケジュール構成フラグは、コマンド ライン フラグ
 
 ## `--cacert` {#cacert}
 
--   TLS を有効にするために使用される CA のファイル パス。
+-   TLS を有効にするために使用される CA のファイルパス。
 -   デフォルト: `""`
 
 ## `--cert` {#cert}
@@ -65,7 +65,7 @@ summary: スケジュール構成フラグは、コマンド ライン フラグ
 
 ## `-L` {#l}
 
--   ログ レベル。
+-   ログレベル。
 -   デフォルト: `"info"`
 -   `"warn"` `"fatal"` `"error"` `"debug"` `"info"`
 

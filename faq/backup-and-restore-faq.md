@@ -117,9 +117,9 @@ failed to refresh meta for database with schemaID=124, dbName=pitr_test: [ddl:82
 
 ## 機能の互換性の問題 {#feature-compatibility-issues}
 
-### br コマンドラインツールを使用して復元されたデータが TiCDC のアップストリーム クラスターに複製できないのはなぜですか? {#why-does-data-restored-using-br-command-line-tool-cannot-be-replicated-to-the-upstream-cluster-of-ticdc}
+### br コマンドラインツールを使用して復元されたデータが TiCDC のアップストリームクラスターに複製できないのはなぜですか? {#why-does-data-restored-using-br-command-line-tool-cannot-be-replicated-to-the-upstream-cluster-of-ticdc}
 
--   **BRを使用して復元されたデータは、ダウンストリームに複製できません**。これは、 BR がSST ファイルを直接インポートしますが、ダウンストリーム クラスタがアップストリームからこれらのファイルを取得できないためです。
+-   **BRを使用して復元されたデータは、ダウンストリームに複製できません**。これは、 BR がSST ファイルを直接インポートしますが、ダウンストリームクラスタがアップストリームからこれらのファイルを取得できないためです。
 
 -   v4.0.3より前のバージョンでは、復元中に生成されたDDLジョブによって、TiCDCで予期しないDDL実行が発生する可能性があります。そのため、TiCDCの上流クラスターで復元を実行する必要がある場合は、brコマンドラインツールを使用して復元したすべてのテーブルをTiCDCのブロックリストに追加してください。
 
@@ -152,7 +152,7 @@ v6.0.0より前では、 BRは[配置ルール](/placement-rules-in-sql.md)サ�
 
 このエラーは、復元するクラスターの容量が不足している場合に発生する可能性があります。このクラスターの監視メトリックまたはTiKVログを確認することで、原因をさらに確認できます。
 
-この問題に対処するには、クラスター リソースをスケール アウトし、復元の値`tikv-max-restore-concurrency`を減らして、オプション`ratelimit`を有効にしてみてください。
+この問題に対処するには、クラスター リソースをスケールアウトし、復元の値`tikv-max-restore-concurrency`を減らして、オプション`ratelimit`を有効にしてみてください。
 
 ### `the entry too large, the max entry size is 6291456, the size of data is 7690800` 」というエラーメッセージが表示されて復元が失敗した場合は、どうすればよいでしょうか。 {#what-should-i-do-if-the-restore-fails-with-the-error-message-the-entry-too-large-the-max-entry-size-is-6291456-the-size-of-data-is-7690800}
 

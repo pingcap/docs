@@ -366,7 +366,7 @@ tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
     DMが実行されている場合、DM-master、DM-worker、およびdmctlは、移行タスクに関する情報を含むログを出力します。各コンポーネントのログディレクトリは以下のとおりです。
 
     -   DM-master ログディレクトリ: これは、DM-master コマンドラインパラメータ`--log-file`で指定されます。DM がTiUPを使用してデプロイされている場合、ログディレクトリは`/dm-deploy/dm-master-8261/log/`です。
-    -   DM-worker のログ ディレクトリ: これは、DM-worker コマンドライン パラメータ`--log-file`で指定されます。DM がTiUPを使用してデプロイされている場合、ログ ディレクトリは`/dm-deploy/dm-worker-8262/log/`です。
+    -   DM-worker のログディレクトリ: これは、DM-worker コマンドラインパラメータ`--log-file`で指定されます。DM がTiUPを使用してデプロイされている場合、ログディレクトリは`/dm-deploy/dm-worker-8262/log/`です。
 
 ## 関連項目 {#see-also}
 

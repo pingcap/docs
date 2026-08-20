@@ -30,6 +30,6 @@ tiup dm upgrade <cluster-name> <version> [flags]
 
 ## 出力 {#output}
 
-サービスのアップグレード プロセスのログ。
+サービスのアップグレードプロセスのログ。
 
 [&lt;&lt; 前のページに戻る - TiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

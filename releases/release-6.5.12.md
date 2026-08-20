@@ -36,7 +36,7 @@ TiDBバージョン: 6.5.12
     -   Backup & Restore (BR)
 
         -   完全復元のためにターゲットクラスタが空のクラスタであるかどうかを確認するチェックを追加します[＃35744](https://github.com/pingcap/tidb/issues/35744) @[3pointer](https://github.com/3pointer)
-        -   非完全復元の場合、ターゲット クラスターに同じ名前のテーブルが含まれているかどうかを確認するチェックを追加します。 [＃55087](https://github.com/pingcap/tidb/issues/55087) @[RidRisR](https://github.com/RidRisR)
+        -   非完全復元の場合、ターゲットクラスターに同じ名前のテーブルが含まれているかどうかを確認するチェックを追加します。 [＃55087](https://github.com/pingcap/tidb/issues/55087) @[RidRisR](https://github.com/RidRisR)
         -   `br log restore`サブコマンドを除き、他の`br log`サブコマンドはすべて、メモリ消費量を削減するために TiDB `domain`データ構造のロードをスキップすることをサポートしています[＃52088](https://github.com/pingcap/tidb/issues/52088) @[Leavrth](https://github.com/Leavrth)
         -   バックアップパフォーマンスを向上させるために、フルバックアップ中のテーブルレベルのチェックサム計算をデフォルトで無効にする（ `--checksum=false` ） [＃56373](https://github.com/pingcap/tidb/issues/56373) @[Tristan1900](https://github.com/Tristan1900)
 
@@ -142,7 +142,7 @@ TiDBバージョン: 6.5.12
         -   TiKV にリクエストを送信するときに`rpcClient is idle`エラーが発生し、 BR が復元に失敗する問題を修正しました。 [＃58845](https://github.com/pingcap/tidb/issues/58845) @[Tristan1900](https://github.com/Tristan1900)
         -   `br log status --json` を使用してログバックアップタスクをクエリすると、結果に`status`フィールドが表示されない問題を修正しました。 [＃57959](https://github.com/pingcap/tidb/issues/57959) @[Leavrth](https://github.com/Leavrth)
         -   ログバックアップ中のPDLeaderI/Oレイテンシーによりチェックポイントレイテンシーが増加する可能性がある問題を修正しました。 [＃58574](https://github.com/pingcap/tidb/issues/58574) @[YuJuncen](https://github.com/YuJuncen)
-        -   `tiup br restore`コマンドがデータベースまたはテーブルの復元中にターゲット クラスタ テーブルが既に存在するかどうかのチェックを省略し、既存のテーブルを上書きする可能性がある問題を修正しました。 [＃58168](https://github.com/pingcap/tidb/issues/58168) @[RidRisR](https://github.com/RidRisR)
+        -   `tiup br restore`コマンドがデータベースまたはテーブルの復元中にターゲットクラスタ テーブルが既に存在するかどうかのチェックを省略し、既存のテーブルを上書きする可能性がある問題を修正しました。 [＃58168](https://github.com/pingcap/tidb/issues/58168) @[RidRisR](https://github.com/RidRisR)
         -   アドバンサー所有者が切り替わったときに、ログバックアップが予期せず一時停止状態になる可能性がある問題を修正しました。 [＃58031](https://github.com/pingcap/tidb/issues/58031) @[3pointer](https://github.com/3pointer)
         -   ログバックアップが残留ロックをすぐに解決できず、チェックポイントが進まない問題を修正しました。 [＃57134](https://github.com/pingcap/tidb/issues/57134) @[3pointer](https://github.com/3pointer)
         -   BR統合テストケースが不安定になる問題を修正し、スナップショットまたはログバックアップファイルの破損をシミュレートする新しいテストケースを追加します[＃53835](https://github.com/pingcap/tidb/issues/53835) @[Leavrth](https://github.com/Leavrth)
@@ -159,7 +159,7 @@ TiDBバージョン: 6.5.12
         -   `changefeed pause`コマンドで`--overwrite-checkpoint-ts`パラメータを使用すると、変更フィードが停止する可能性がある問題を修正しました。 [＃12055](https://github.com/pingcap/tiflow/issues/12055) @[hongyunyan](https://github.com/hongyunyan)
         -   `CREATE TABLE IF NOT EXISTS`または`CREATE DATABASE IF NOT EXISTS`ステートメントを複製するときに TiCDC がpanicする可能性がある問題を修正しました [＃11839](https://github.com/pingcap/tiflow/issues/11839) @[CharlesCheung96](https://github.com/CharlesCheung96)
         -   有効なインデックスのないテーブルで`TRUNCATE TABLE` DDL を複製するときに TiCDC がエラーを報告する可能性がある問題を修正しました。 [＃11765](https://github.com/pingcap/tiflow/issues/11765) @[asddongmen](https://github.com/asddongmen)
-        -   TiDB DDL 所有者の変更中に DDL タスクのスキーマ バージョンが非増分になったときに、TiCDC が誤って DDL タスクを破棄する問題を修正[＃11714](https://github.com/pingcap/tiflow/issues/11714) @[wlwilliamx](https://github.com/wlwilliamx)
+        -   TiDB DDL 所有者の変更中に DDL タスクのスキーマバージョンが非増分になったときに、TiCDC が誤って DDL タスクを破棄する問題を修正[＃11714](https://github.com/pingcap/tiflow/issues/11714) @[wlwilliamx](https://github.com/wlwilliamx)
         -   新しい TiKV ノードがクラスターに追加された後に、変更フィードがスタックする可能性がある問題を修正しました。 [＃11766](https://github.com/pingcap/tiflow/issues/11766) @[lidezhu](https://github.com/lidezhu)
         -   Sarama クライアントによって再送信された順序外メッセージによって Kafka メッセージの順序が正しくなくなる問題を修正[＃11935](https://github.com/pingcap/tiflow/issues/11935) @[3AceShowHand](https://github.com/3AceShowHand)
         -   PullerモジュールのResolved TSレイテンシーモニタリングで誤った値が表示される問題を修正しました [＃11561](https://github.com/pingcap/tiflow/issues/11561) @[wlwilliamx](https://github.com/wlwilliamx)

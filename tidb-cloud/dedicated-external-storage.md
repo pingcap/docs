@@ -51,7 +51,7 @@ TiDB Cloudのバケットアクセスを設定し、以下の手順でロールA
 
     4.  **Create policy**ページで、 **JSON**タブをクリックします。
 
-    5.  以下のアクセス ポリシー テンプレートをコピーして、ポリシー テキスト フィールドに貼り付けてください。
+    5.  以下のアクセスポリシー テンプレートをコピーして、ポリシー テキスト フィールドに貼り付けてください。
 
         ````json
         {
@@ -152,7 +152,7 @@ TiDB Cloudのバケットアクセスを設定し、以下の手順でロールA
 
 > **Note:**
 >
-> TiDB Cloudはアクセス キーを保存しません。インポートが完了したら、 [アクセスキーを削除する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)ことをお勧めします。
+> TiDB Cloudはアクセスキーを保存しません。インポートが完了したら、 [アクセスキーを削除する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)ことをお勧めします。
 
 ## GCSへのアクセスを設定する {#configure-gcs-access}
 

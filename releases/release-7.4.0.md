@@ -129,7 +129,7 @@ TiDB バージョン: 7.4.0
 
     -   `lightning` : [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)または[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用してインポートタスクを実行します。
     -   `br` : [BR](/br/backup-and-restore-overview.md)を使用してバックアップおよび復元タスクを実行します。PITR はサポートされていません。
-    -   `ddl` : Reorg DDL のバッチ データ書き戻しフェーズ中のリソース使用量を制御します。
+    -   `ddl` : Reorg DDL のバッチデータ書き戻しフェーズ中のリソース使用量を制御します。
     -   `stats` : 手動で実行されるか、TiDB によって自動的にトリガーされる[統計を収集する](/statistics.md#collect-statistics)タスク。
 
     デフォルトでは、バックグラウンドタスクとしてマークされたタスクタイプは空で、バックグラウンドタスクの管理は無効になっています。このデフォルトの動作は、TiDB v7.4.0より前のバージョンと同じです。バックグラウンドタスクを管理するには、 `default`リソースグループのバックグラウンドタスクタイプを手動で変更する必要があります。
@@ -274,7 +274,7 @@ TiDB バージョン: 7.4.0
 | TiDB           | [`enable-stats-cache-mem-quota`](/tidb-configuration-file.md#enable-stats-cache-mem-quota-new-in-v610)                                  | 変更     | デフォルト値は`false`から`true`に変更され、TiDB 統計のキャッシュのメモリ制限がデフォルトで有効になることを意味します。                                                                                                    |
 | TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](/tikv-configuration-file.md#periodic-compaction-seconds-new-in-v720) | 変更     | RocksDBの定期的なコンパクションをデフォルトで無効化するため、デフォルト値を`"30d"`から`"0s"`に変更しました。この変更により、TiDBのアップグレード後に大量のコンパクションがトリガーされ、フロントエンドの読み取りおよび書き込みパフォーマンスに影響が出るのを回避できます。                       |
 | TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].ttl`](/tikv-configuration-file.md#ttl-new-in-v720)                                                 | 変更     | デフォルト値が`"30d"`から`"0s"`に変更され、SST ファイルは TTL によりデフォルトで圧縮をトリガーしなくなり、フロントエンドの読み取りおよび書き込みパフォーマンスに影響を与えなくなります。                                                                 |
-| TiFlash        | [`flash.compact_log_min_gap`](/tiflash/tiflash-configuration.md)                                                                        | 新しく追加された | 現在のRaftステート マシンによって進められた`applied_index`と最後のディスクスピル時の`applied_index`の差が`compact_log_min_gap`超えると、 TiFlash はTiKV から`CompactLog`コマンドを実行し、データをディスクにスピルします。                 |
+| TiFlash        | [`flash.compact_log_min_gap`](/tiflash/tiflash-configuration.md)                                                                        | 新しく追加された | 現在のRaftステートマシンによって進められた`applied_index`と最後のディスクスピル時の`applied_index`の差が`compact_log_min_gap`超えると、 TiFlash はTiKV から`CompactLog`コマンドを実行し、データをディスクにスピルします。                 |
 | TiFlash        | [`profiles.default.enable_resource_control`](/tiflash/tiflash-configuration.md)                                                         | 新しく追加された | TiFlashリソース制御機能を有効にするかどうかを制御します。                                                                                                                                        |
 | TiFlash        | [`storage.format_version`](/tiflash/tiflash-configuration.md)                                                                           | 変更     | デフォルト値を`4`から`5`に変更します。新しい形式では、小さなファイルを結合することで物理ファイルの数を削減できます。                                                                                                           |
 | TiFlash        | [`task_scheduler_active_set_soft_limit`](/tiflash/tiflash-configuration.md#task_scheduler_active_set_soft_limit-new-in-v640)            | 変更     | デフォルト値を`vcpu * 0.25`から`vcpu * 2`に変更します。                                                                                                                                 |
@@ -320,7 +320,7 @@ TiDB バージョン: 7.4.0
 -   TiFlash
 
     -   TiFlash書き込みプロセスのスピルポリシーを最適化することで、ランダム書き込みワークロード中の書き込みパフォーマンスを向上します[＃7564](https://github.com/pingcap/tiflash/issues/7564) @[CalvinNeo](https://github.com/CalvinNeo)
-    -   TiFlash のRaftレプリケーション プロセスに関するメトリクスを追加します。 [＃8068](https://github.com/pingcap/tiflash/issues/8068) @[CalvinNeo](https://github.com/CalvinNeo)
+    -   TiFlash のRaftレプリケーションプロセスに関するメトリクスを追加します。 [＃8068](https://github.com/pingcap/tiflash/issues/8068) @[CalvinNeo](https://github.com/CalvinNeo)
     -   ファイルシステムの inode が枯渇する可能性を回避するために、小さなファイルの数を減らします。 [＃7595](https://github.com/pingcap/tiflash/issues/7595) @[hongyunyan](https://github.com/hongyunyan)
 
 -   ツール

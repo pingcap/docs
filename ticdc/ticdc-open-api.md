@@ -146,7 +146,7 @@ The configuration parameters of sink are as follows:
 -   `index-value`: uses the name and value of the selected HandleKey column to create the hash value and dispatch events.
 -   `table` : テーブルのスキーマ名とテーブル名を使用してハッシュ値を作成し、イベントをディスパッチします。
 
-`matcher` : マッチャーの一致構文はフィルター ルール構文と同じです。
+`matcher` : マッチャーの一致構文はフィルタールール構文と同じです。
 
 `protocol` : MQタイプのシンクの場合、メッセージのプロトコル形式を指定できます。現在、 `canal-json` `debezium`プロトコル`open-protocol`サポート`simple`れています`avro`
 
@@ -234,7 +234,7 @@ changefeed 設定を変更するには、 `pause the replication task -> modify 
 
 #### クエリパラメータ {#query-parameters}
 
-| パラメータ名 | 説明 | | :------ | :----------------------------------------- ----- | | `state` | このパラメータを指定すると、この状態のレプリケーション ステータス情報のみが返されます。(オプション) |
+| パラメータ名 | 説明 | | :------ | :----------------------------------------- ----- | | `state` | このパラメータを指定すると、この状態のレプリケーションステータス情報のみが返されます。(オプション) |
 
 `state`の値のオプションは`all` 、 `normal` 、 `stopped` 、 `error` 、 `failed` 、 `finished`です。
 
@@ -415,8 +415,8 @@ curl -X GET http://127.0.0.1:8300/api/v1/processors
 
 | パラメータ名          | 説明                             |
 | :-------------- | :----------------------------- |
-| `changefeed_id` | クエリするレプリケーション サブタスクの変更フィード ID。 |
-| `capture_id`    | クエリするレプリケーション サブタスクのキャプチャ ID。  |
+| `changefeed_id` | クエリするレプリケーションサブタスクの変更フィード ID。 |
+| `capture_id`    | クエリするレプリケーションサブタスクのキャプチャ ID。  |
 
 ### 例 {#example}
 
@@ -554,7 +554,7 @@ curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v1
 
 | パラメータ名      | 説明          |
 | :---------- | :---------- |
-| `log_level` | 設定するログ レベル。 |
+| `log_level` | 設定するログレベル。 |
 
 `log_level` 、「debug」、「info」、「warn」、「error」、「dpanic」、「panic」、「fatal」の[zapが提供するログレベル](https://godoc.org/go.uber.org/zap#UnmarshalText)サポートします。
 

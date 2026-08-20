@@ -53,7 +53,7 @@ summary: TiUPを使用して DM クラスターをオフラインで展開する
 
 ## ステップ2: オフラインTiUPコンポーネントをデプロイ {#step-2-deploy-the-offline-tiup-component}
 
-パッケージをターゲット クラスターの制御マシンに送信した後、次のコマンドを実行してTiUPコンポーネントをインストールします。
+パッケージをターゲットクラスターの制御マシンに送信した後、次のコマンドを実行してTiUPコンポーネントをインストールします。
 
 ```bash
 # You can modify ${version} to the needed version.
@@ -171,7 +171,7 @@ dm-test  tidb  ${version}  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/
 tiup dm display dm-test
 ```
 
-予想される出力には、インスタンス ID、ロール、ホスト、リスニング ポート、ステータス (クラスターはまだ起動されていないため、ステータス`inactive` `Down`です)、および`dm-test`クラスターのディレクトリ情報が含まれます。
+予想される出力には、インスタンス ID、ロール、ホスト、リスニングポート、ステータス (クラスターはまだ起動されていないため、ステータス`inactive` `Down`です)、および`dm-test`クラスターのディレクトリ情報が含まれます。
 
 ## ステップ7: クラスターを起動する {#step-7-start-the-cluster}
 

@@ -70,7 +70,7 @@ TiDB バージョン: 7.5.4
     -   整数型の列に小さい表示幅が指定された場合、 `out of range`エラーが発生する可能性がある問題を修正しました。 [＃55837](https://github.com/pingcap/tidb/issues/55837) @[windtalker](https://github.com/windtalker)
     -   一意インデックスを追加するときに`duplicate entry`発生する可能性がある問題を修正 [＃56161](https://github.com/pingcap/tidb/issues/56161) @[tangenta](https://github.com/tangenta)
     -   `IMPORT INTO`文を使用して一時テーブルをインポートするときに TiDB がパニックになる問題を修正しました [＃55970](https://github.com/pingcap/tidb/issues/55970) @[D3Hunter](https://github.com/D3Hunter)
-    -   インデックス追加中の再試行によって発生するデータ インデックスの不整合の問題を修正しました [＃55808](https://github.com/pingcap/tidb/issues/55808) @[lance6716](https://github.com/lance6716)
+    -   インデックス追加中の再試行によって発生するデータインデックスの不整合の問題を修正しました [＃55808](https://github.com/pingcap/tidb/issues/55808) @[lance6716](https://github.com/lance6716)
 
 -   TiKV
 

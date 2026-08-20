@@ -34,7 +34,7 @@ tiup status [flags]
 -   `Status` : 動作中のコンポーネントのステータス。
 -   `Created Time` : コンポーネントの開始時刻。
 -   `Directory` : コンポーネントのデータディレクトリ。
--   `Binary` : コンポーネントのバイナリ ファイル パス。
+-   `Binary` : コンポーネントのバイナリファイルパス。
 -   `Args` : 操作コンポーネントの開始引数。
 
 ### コンポーネントのステータス {#component-status}

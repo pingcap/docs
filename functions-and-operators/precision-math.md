@@ -50,7 +50,7 @@ DECIMAL列には、先頭の`+`文字、 `-`文字、または先頭の`0`桁は
 
 DECIMAL列では、列定義で指定された範囲を超える値は許可されません。例えば、 `DECIMAL(3,0)`列は`-999`から`999`までの範囲をサポートします。`DECIMAL(M,D)`列では、小数点の左側に最大`M - D`桁までしか許可されません。
 
-DECIMAL 値の内部形式の詳細については、TiDB ソース コードの[`mydecimal.go`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/types/mydecimal.go)を参照してください。
+DECIMAL 値の内部形式の詳細については、TiDB ソースコードの[`mydecimal.go`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/types/mydecimal.go)を参照してください。
 
 ## 式の処理 {#expression-handling}
 

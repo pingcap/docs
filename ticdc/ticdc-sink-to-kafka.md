@@ -173,7 +173,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 
 ### TiCDC を Kafka Connect (Confluent Platform) と統合する {#integrate-ticdc-with-kafka-connect-confluent-platform}
 
-Confluent が提供する[データコネクタ](https://docs.confluent.io/current/connect/managing/connectors.html)を使用してリレーショナル データベースまたは非リレーショナル データベースにデータをストリーミングするには、 [`avro`プロトコル](/ticdc/ticdc-avro-protocol.md)を使用し、 `schema-registry`で[Confluent スキーマレジストリ](https://www.confluent.io/product/confluent-platform/data-compatibility/)の URL を指定する必要があります。
+Confluent が提供する[データコネクタ](https://docs.confluent.io/current/connect/managing/connectors.html)を使用してリレーショナルデータベースまたは非リレーショナルデータベースにデータをストリーミングするには、 [`avro`プロトコル](/ticdc/ticdc-avro-protocol.md)を使用し、 `schema-registry`で[Confluent スキーマレジストリ](https://www.confluent.io/product/confluent-platform/data-compatibility/)の URL を指定する必要があります。
 
 サンプル構成:
 
@@ -420,8 +420,8 @@ large-message-handle-compression = "none"
 
 v7.3.0以降、TiCDC Kafkaシンクは、メッセージサイズが制限を超えた場合にハンドルキーのみを送信することをサポートします。これにより、メッセージサイズが大幅に削減され、Kafkaトピックの制限を超えたメッセージサイズに起因するチェンジフィードエラーやタスクの失敗を回避できます。ハンドルキーとは、以下のものを指します。
 
--   複製するテーブルに主キーがある場合、主キーがハンドル キーになります。
--   テーブルに主キーがなく、NOT NULL 一意キーがある場合、NOT NULL 一意キーがハンドル キーになります。
+-   複製するテーブルに主キーがある場合、主キーがハンドルキーになります。
+-   テーブルに主キーがなく、NOT NULL 一意キーがある場合、NOT NULL 一意キーがハンドルキーになります。
 
 サンプル構成は次のとおりです。
 
@@ -435,7 +435,7 @@ large-message-handle-option = "claim-check"
 
 ### ハンドルキーのみでメッセージを消費する {#consume-messages-with-handle-keys-only}
 
-ハンドル キーのみを含むメッセージ形式は次のとおりです。
+ハンドルキーのみを含むメッセージ形式は次のとおりです。
 
 ```json
 {

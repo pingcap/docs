@@ -102,7 +102,7 @@ TiDBバージョン：8.5.2
 
     -   ソート中にデータが流出してTiFlashがクラッシュする可能性がある問題を修正 [#9999](https://github.com/pingcap/tiflash/issues/9999) @[windtalker](https://github.com/windtalker)
     -   TiFlashが`Exception: Block schema mismatch`を含むSQL文を実行する際に`GROUP BY ... WITH ROLLUP`エラーを返す可能性がある問題を修正しました。 [#10110](https://github.com/pingcap/tiflash/issues/10110) @[gengliqi](https://github.com/gengliqi)
-    -   分散ストレージとコンピューティングアーキテクチャで、 TiFlashコンピューティングノードがリージョンピアを追加するターゲット ノードとして誤って選択される可能性がある問題を修正 [#9750](https://github.com/pingcap/tiflash/issues/9750) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   分散ストレージとコンピューティングアーキテクチャで、 TiFlashコンピューティングノードがリージョンピアを追加するターゲットノードとして誤って選択される可能性がある問題を修正 [#9750](https://github.com/pingcap/tiflash/issues/9750) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   特定の状況でTiFlash が予期せず終了した場合に、エラースタック トレースの出力に失敗することがある問題を修正 [#9902](https://github.com/pingcap/tiflash/issues/9902) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   大量のデータをインポートした後にTiFlash が高いメモリ使用量を維持する可能性がある問題を修正 [#9812](https://github.com/pingcap/tiflash/issues/9812) @[CalvinNeo](https://github.com/CalvinNeo)
     -   `profiles.default.init_thread_count_scale`が`0`に設定されている場合、 TiFlash の起動がブロックされる場合がある問題を修正 [#9906](https://github.com/pingcap/tiflash/issues/9906) @[JaySon-Huang](https://github.com/JaySon-Huang)

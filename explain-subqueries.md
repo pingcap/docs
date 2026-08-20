@@ -7,7 +7,7 @@ summary: TiDB のEXPLAINステートメントによって返される実行計�
 
 TiDBはサブクエリのパフォーマンスを向上させるために[いくつかの最適化](/subquery-optimization.md)を実行します。このドキュメントでは、一般的なサブクエリに対するこれらの最適化のいくつかと、 `EXPLAIN`の出力の解釈方法について説明します。
 
-このドキュメントの例は、次のサンプル データに基づいています。
+このドキュメントの例は、次のサンプルデータに基づいています。
 
 ```sql
 CREATE TABLE t1 (id BIGINT NOT NULL PRIMARY KEY auto_increment, pad1 BLOB, pad2 BLOB, pad3 BLOB, int_col INT NOT NULL DEFAULT 0);

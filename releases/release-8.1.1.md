@@ -30,7 +30,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
 -   TiDB
 
     -   TiFlash配置ルールを一括削除することで、パーティションテーブルで`TRUNCATE`または`DROP`操作を実行した後のデータGCの処理速度が向上します。 [＃54068](https://github.com/pingcap/tidb/issues/54068) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    -   MPP ロード バランシング中にリージョンのないストアを削除する [＃52313](https://github.com/pingcap/tidb/issues/52313) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    -   MPP ロードバランシング中にリージョンのないストアを削除する [＃52313](https://github.com/pingcap/tidb/issues/52313) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   TiKV の高負荷時に広範囲にわたるタイムアウトを回避するために、統計を同期的にロードするタスクの優先度を一時的に高く調整します。タイムアウトにより、統計がロードされない可能性があります[＃50332](https://github.com/pingcap/tidb/issues/50332) @[winoros](https://github.com/winoros)
     -   `EXPLAIN`ステートメントは`tidb_redact_log`設定の適用をサポートし、ログ処理ロジックをさらに最適化します。
     -   `EXPLAIN`ステートメントの出力に`tidb_redact_log`設定を適用し、ログの処理ロジックをさらに最適化することをサポート [＃54565](https://github.com/pingcap/tidb/issues/54565) @[hawkingrei](https://github.com/hawkingrei)
@@ -113,7 +113,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   グローバルソートを使用してインデックスを追加するときにパフォーマンスが不安定になる問題を修正しました [＃54147](https://github.com/pingcap/tidb/issues/54147) @[tangenta](https://github.com/tangenta)
     -   v7.1 からアップグレードした後に`SHOW IMPORT JOBS`エラー`Unknown column 'summary'`を報告する問題を修正しました [＃54241](https://github.com/pingcap/tidb/issues/54241) @[tangenta](https://github.com/tangenta)
     -   `root`ユーザーが`tidb_mdl_view` を照会できない問題を修正 [＃53292](https://github.com/pingcap/tidb/issues/53292) @[tangenta](https://github.com/tangenta)
-    -   分散実行フレームワーク (DXF) を使用してインデックスを追加する際のネットワーク パーティションによって、データ インデックスの不整合が発生する可能性がある問題を修正しました。 [＃54897](https://github.com/pingcap/tidb/issues/54897) @[tangenta](https://github.com/tangenta)
+    -   分散実行フレームワーク (DXF) を使用してインデックスを追加する際のネットワークパーティションによって、データインデックスの不整合が発生する可能性がある問題を修正しました。 [＃54897](https://github.com/pingcap/tidb/issues/54897) @[tangenta](https://github.com/tangenta)
     -   TiDB Lightning物理インポートモードの初期化中にエラーが発生し、リソースリークが発生する可能性がある問題を修正[＃53659](https://github.com/pingcap/tidb/issues/53659) @[D3Hunter](https://github.com/D3Hunter)
     -   ビュー定義でサブクエリが列定義として使用されている場合、 `information_schema.columns`を使用して列情報を取得すると警告1356が返される問題を修正しました。 [＃54343](https://github.com/pingcap/tidb/issues/54343) @[lance6716](https://github.com/lance6716)
     -   インデックスアクセラレーションを使用して一意インデックスを追加すると、所有者が切り替えられたときに`Duplicate entry`エラーが発生する可能性がある問題を修正しました。 [＃49233](https://github.com/pingcap/tidb/issues/49233) @[lance6716](https://github.com/lance6716)
@@ -127,10 +127,10 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   CDC とログバックアップが`advance-ts-interval`構成を使用して`check_leader`のタイムアウトを制限しないため、TiKV が正常に再起動したときに`resolved_ts`遅延が大きくなる場合がある問題を修正しました[＃17107](https://github.com/tikv/tikv/issues/17107) @[MyonKeminta](https://github.com/MyonKeminta)
     -   gRPC メッセージ圧縮方式を`grpc-compression-type`で設定しても、TiKV から TiDB に送信されるメッセージには反映されない問題を修正しました。 [＃17176](https://github.com/tikv/tikv/issues/17176) @[ekexium](https://github.com/ekexium)
     -   `make docker`と`make docker_test`の失敗を修正[＃17075](https://github.com/tikv/tikv/issues/17075) @[shunki-fujita](https://github.com/shunki-fujita)
-    -   **gRPC リクエスト ソースの継続時間**メトリックが監視ダッシュボードに誤って表示される問題を修正しました [＃17133](https://github.com/tikv/tikv/issues/17133) @[King-Dylan](https://github.com/King-Dylan)
+    -   **gRPC リクエストソースの継続時間**メトリックが監視ダッシュボードに誤って表示される問題を修正しました [＃17133](https://github.com/tikv/tikv/issues/17133) @[King-Dylan](https://github.com/King-Dylan)
     -   tikv-ctlの`raft region`コマンドの出力にリージョンステータス情報が含まれていない問題を修正しました [＃17037](https://github.com/tikv/tikv/issues/17037) @[glorv](https://github.com/glorv)
     -   `raftstore.periodic-full-compact-start-times`構成項目をオンラインで変更すると、TiKVがpanicを起こす可能性がある問題を修正しました[＃17066](https://github.com/tikv/tikv/issues/17066) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
-    -   破損したRaftデータ スナップショットを適用すると TiKV が繰り返しpanicする可能性がある問題を修正しました。 [＃15292](https://github.com/tikv/tikv/issues/15292) @[LykxSassinator](https://github.com/LykxSassinator)
+    -   破損したRaftデータスナップショットを適用すると TiKV が繰り返しpanicする可能性がある問題を修正しました。 [＃15292](https://github.com/tikv/tikv/issues/15292) @[LykxSassinator](https://github.com/LykxSassinator)
     -   キャッシュエントリが永続化される前に解放すると TiKV がpanicを起こす問題を修正しました [＃17040](https://github.com/tikv/tikv/issues/17040) @[glorv](https://github.com/glorv)
 
 -   PD
@@ -185,7 +185,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   TiCDC
 
         -   リージョンの変更によりダウンストリームpanicが発生する問題を修正[＃17233](https://github.com/tikv/tikv/issues/17233) @[hicqu](https://github.com/hicqu)
-        -   アップストリームで新しい照合順序が無効になっている場合、TiCDC がクラスター化インデックス テーブルの主キーを正しくデコードできない問題を修正しました。 [＃11371](https://github.com/pingcap/tiflow/issues/11371) @[lidezhu](https://github.com/lidezhu)
+        -   アップストリームで新しい照合順序が無効になっている場合、TiCDC がクラスター化インデックステーブルの主キーを正しくデコードできない問題を修正しました。 [＃11371](https://github.com/pingcap/tiflow/issues/11371) @[lidezhu](https://github.com/lidezhu)
         -   `UPDATE`イベントを分割した後、チェックサムが正しく`0`に設定されない問題を修正しました。 [＃11402](https://github.com/pingcap/tiflow/issues/11402) @[3AceShowHand](https://github.com/3AceShowHand)
         -   マルチノード環境で大量の`UPDATE`操作を実行する際にChangefeedを繰り返し再起動するとデータの不整合が発生する可能性がある問題を修正[＃11219](https://github.com/pingcap/tiflow/issues/11219) @[lidezhu](https://github.com/lidezhu)
         -   下流の Kafka にアクセスできない場合にプロセッサモジュールがスタックする可能性がある問題を修正[＃11340](https://github.com/pingcap/tiflow/issues/11340) @[asddongmen](https://github.com/asddongmen)

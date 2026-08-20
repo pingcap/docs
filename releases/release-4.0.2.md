@@ -130,7 +130,7 @@ TiDB バージョン: 4.0.2
     -   `max_execution_time`ヒントが時々機能しない問題を修正[＃17536](https://github.com/pingcap/tidb/pull/17536)
     -   `EXPLAIN ANALYZE` の結果に同時実行情報が重複して出力される問題を修正しました [＃17350](https://github.com/pingcap/tidb/pull/17350)
     -   `STR_TO_DATE`関数の`%h`の非互換な動作を修正 [＃17498](https://github.com/pingcap/tidb/pull/17498)
-    -   `tidb_replica_read` `follower`に設定され、リーダーとフォロワー/ラーナー間にネットワーク パーティションがある場合にフォロワー/ラーナーが再試行を続ける問題を修正しました。 [＃17443](https://github.com/pingcap/tidb/pull/17443)
+    -   `tidb_replica_read` `follower`に設定され、リーダーとフォロワー/ラーナー間にネットワークパーティションがある場合にフォロワー/ラーナーが再試行を続ける問題を修正しました。 [＃17443](https://github.com/pingcap/tidb/pull/17443)
     -   TiDBがPDフォロワーにpingを送信しすぎる場合がある問題を修正[＃17947](https://github.com/pingcap/tidb/pull/17947)
     -   TiDB v4.0 で古いバージョンの範囲パーティションテーブルをロードできない問題を修正しました [＃17983](https://github.com/pingcap/tidb/pull/17983)
     -   各リージョンに異なる`Backoffer`割り当てることで、複数のリージョン要求が同時に失敗した場合の SQL ステートメントのタイムアウト問題を修正しました[＃17585](https://github.com/pingcap/tidb/pull/17585)

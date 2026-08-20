@@ -55,7 +55,7 @@ TiDB Ansible バージョン: 4.0.0-beta.1
     -   `Apply`オペレータと`Sort`オペレータのコストモデルを最適化して安定性を向上させる[＃13550](https://github.com/pingcap/tidb/pull/13550) [＃14708](https://github.com/pingcap/tidb/pull/14708)
 
 -   TiKV
-    -   HTTP API 経由でステータス ポートから構成項目を取得する機能をサポート [＃6480](https://github.com/tikv/tikv/pull/6480)
+    -   HTTP API 経由でステータスポートから構成項目を取得する機能をサポート [＃6480](https://github.com/tikv/tikv/pull/6480)
     -   コプロセッサーの`Chunk Encoder`のパフォーマンスを最適化 [＃6341](https://github.com/tikv/tikv/pull/6341)
 
 -   PD

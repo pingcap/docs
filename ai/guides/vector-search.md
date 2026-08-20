@@ -289,7 +289,7 @@ LIMIT 10;
 
 ## メタデータフィルタリング {#metadata-filtering}
 
-リレーショナル データベースである TiDB は、豊富なセット[SQL演算子](https://docs.pingcap.com/tidbcloud/operators/)をサポートし、フィルタリング条件の柔軟な組み合わせを可能にします。
+リレーショナルデータベースである TiDB は、豊富なセット[SQL演算子](https://docs.pingcap.com/tidbcloud/operators/)をサポートし、フィルタリング条件の柔軟な組み合わせを可能にします。
 
 TiDB でのベクトル検索では、スカラー フィールド (整数や文字列など) または JSON フィールドにメタデータ フィルタリングを適用できます。
 

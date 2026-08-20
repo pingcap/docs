@@ -1,11 +1,11 @@
 ---
 title: TiDB Data Migration Command-line Flags
-summary: DM のコマンドライン フラグについて学習します。
+summary: DM のコマンドラインフラグについて学習します。
 ---
 
 # TiDB データ移行コマンドラインフラグ {#tidb-data-migration-command-line-flags}
 
-このドキュメントでは、DM のコマンドライン フラグについて説明します。
+このドキュメントでは、DM のコマンドラインフラグについて説明します。
 
 ## DMマスター {#dm-master}
 

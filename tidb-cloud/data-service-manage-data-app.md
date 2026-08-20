@@ -134,7 +134,7 @@ Data Service（プレビュー版）は、各データアプリ向けのOpenAPI�
 
     OpenAPI 仕様を初めてダウンロードする場合は、プロンプトが表示されたらリクエストを承認する必要があります。
 
-4.  次に、OpenAPI 仕様がローカル マシンにダウンロードされます。
+4.  次に、OpenAPI 仕様がローカルマシンにダウンロードされます。
 
 ### OpenAPIドキュメントを確認する {#view-the-openapi-documentation}
 

@@ -48,7 +48,7 @@ TiDB Cloudにアカウントとクラスターが既に作成されている必�
 
     > **Note:**
     >
-    > TiDB Cloud Dedicatedクラスターの場合、Vercel デプロイメントは IP アドレスを使用するため、クラスターのトラフィック フィルターがすべての IP アドレス ( `0.0.0.0/0` } に設定) からの接続を許可して[動的IPアドレス](https://vercel.com/guides/how-to-allowlist-deployment-ip-address)ことを確認してください。
+    > TiDB Cloud Dedicatedクラスターの場合、Vercel デプロイメントは IP アドレスを使用するため、クラスターのトラフィックフィルターがすべての IP アドレス ( `0.0.0.0/0` } に設定) からの接続を許可して[動的IPアドレス](https://vercel.com/guides/how-to-allowlist-deployment-ip-address)ことを確認してください。
 
 [TiDB Cloud Vercel統合を介してVercelと統合する](#connect-via-the-tidb-cloud-vercel-integration)には、組織の`Organization Owner`ロール、またはTiDB Cloudのターゲット プロジェクトの`Project Owner`ロールに所属することが求められます。詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)を参照してください。
 

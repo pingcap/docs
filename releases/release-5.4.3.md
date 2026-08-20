@@ -34,7 +34,7 @@ TiDB バージョン: 5.4.3
     -   クラスターのPDノードが交換された後、一部のDDL文が一定期間スタックする可能性がある問題を修正しました[＃33908](https://github.com/pingcap/tidb/issues/33908)
     -   `KILL TIDB`アイドル接続時にすぐに効果を発揮できない問題を修正[＃24031](https://github.com/pingcap/tidb/issues/24031)
     -   `INFORMSTION_SCHEMA.COLUMNS`システムテーブルをクエリするときに`DATA_TYPE`と`COLUMN_TYPE`列に誤った結果が返される問題を修正しました[＃36496](https://github.com/pingcap/tidb/issues/36496)
-    -   TiDB Binlogが有効な場合、 `ALTER SEQUENCE`文を実行するとメタデータ バージョンが間違って発生し、 Drainerが終了する可能性がある問題を修正しました[＃36276](https://github.com/pingcap/tidb/issues/36276)
+    -   TiDB Binlogが有効な場合、 `ALTER SEQUENCE`文を実行するとメタデータバージョンが間違って発生し、 Drainerが終了する可能性がある問題を修正しました[＃36276](https://github.com/pingcap/tidb/issues/36276)
     -   `UNION`演算子が予期しない空の結果を返す可能性がある問題を修正しました[＃36903](https://github.com/pingcap/tidb/issues/36903)
     -   TiFlashのパーティションテーブルでダイナミックモードを有効にしたときに発生する誤った結果を修正しました[＃37254](https://github.com/pingcap/tidb/issues/37254)
     -   `LIMIT`と併用すると`INL_HASH_JOIN`がハングアップする可能性がある問題を修正[＃35638](https://github.com/pingcap/tidb/issues/35638)

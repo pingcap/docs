@@ -27,7 +27,7 @@ Data Service（PREVIEW）を使用すると、カスタムAPIエンドポイン�
 
 Data Serviceを使い始めるには、サンプルデータアプリを作成するのが最適です。プロジェクトにまだデータアプリがない場合は、**Data Service**ページの画面上の指示に従ってサンプルデータアプリを作成し、このアプリを使ってData Serviceの機能を試してみてください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページの**[プロジェクト ビュー]**タブをクリックし、プロジェクトの [ **...]**をクリックして、 **[Data Service]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページの**[プロジェクトビュー]**タブをクリックし、プロジェクトの [ **...]**をクリックして、 **[Data Service]**をクリックします。
 
 2.  **Data Service**ページで、 **Create Sample Data App**をクリックします。ダイアログが表示されます。
 
@@ -51,7 +51,7 @@ Data Serviceの利用を開始するには、独自のデータアプリを作�
 
 データアプリを作成するには、以下の手順を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページの**[プロジェクト ビュー]**タブをクリックし、プロジェクトの [ **...]**をクリックして、 **[Data Service]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページの**[プロジェクトビュー]**タブをクリックし、プロジェクトの [ **...]**をクリックして、 **[Data Service]**をクリックします。
 
 2.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページで、左側のペインで<MDSvgIcon name="icon-create-data-app" /> **Create DataApp**をクリックします。
 

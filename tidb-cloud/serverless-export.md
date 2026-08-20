@@ -9,9 +9,9 @@ TiDB Cloudを使用すると、 TiDB Cloud StarterまたはEssentialクラスタ
 
 [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html)や TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview)などのツールを使用してデータをエクスポートすることもできますが、 TiDB Cloudが提供するエクスポート機能は、クラスターからデータをエクスポートするためのより便利で効率的な方法を提供します。これには、次のような利点があります。
 
--   利便性: エクスポート サービスは、クラスターからデータをエクスポートするためのシンプルで使いやすい方法を提供するため、追加のツールやリソースは必要ありません。
--   分離: エクスポート サービスは個別のコンピューティングリソースを使用するため、オンライン サービスで使用されるリソースからの分離が保証されます。
--   一貫性: エクスポート サービスは、ロックを発生させることなくエクスポートされたデータの一貫性を確保するため、オンライン サービスには影響しません。
+-   利便性: エクスポートサービスは、クラスターからデータをエクスポートするためのシンプルで使いやすい方法を提供するため、追加のツールやリソースは必要ありません。
+-   分離: エクスポートサービスは個別のコンピューティングリソースを使用するため、オンラインサービスで使用されるリソースからの分離が保証されます。
+-   一貫性: エクスポートサービスは、ロックを発生させることなくエクスポートされたデータの一貫性を確保するため、オンラインサービスには影響しません。
 
 > **Note:**
 >
@@ -55,7 +55,7 @@ Amazon S3 にデータをエクスポートするには、次の情報を提供�
 
 -   URI: `s3://<bucket-name>/<folder-path>/`
 -   次のいずれかのアクセス資格情報:
-    -   [アクセスキー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) : アクセス キーに`s3:PutObject`と`s3:ListBucket`権限があることを確認します。
+    -   [アクセスキー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) : アクセスキーに`s3:PutObject`と`s3:ListBucket`権限があることを確認します。
     -   [ロールARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) : ロールARN（Amazonリソースネーム）に`s3:PutObject`と`s3:ListBucket`権限があることを確認してください。このロールARNはAWSでホストされているクラスターでのみサポートされることに注意してください。
 
 詳細については[Amazon S3 アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
@@ -241,7 +241,7 @@ Alibaba Cloud OSS にデータをエクスポートするには、次の情報�
     >
     > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**[データ]** &gt; **[インポート] を**クリックします。
+2.  ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**[データ]** &gt; **[インポート] を**クリックします。
 
 3.  **インポート**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**Amazon S3**を選択します。以下のパラメータを入力します。
 
@@ -267,8 +267,8 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 ```
 
 -   `s3.uri` : `s3://<bucket-name>/<folder-path>/`形式の Amazon S3 URI。
--   `s3.access-key-id` : バケットにアクセスする権限を持つユーザーのアクセス キー ID。
--   `s3.secret-access-key` : バケットにアクセスする権限を持つユーザーのアクセス キー シークレット。
+-   `s3.access-key-id` : バケットにアクセスする権限を持つユーザーのアクセスキー ID。
+-   `s3.secret-access-key` : バケットにアクセスする権限を持つユーザーのアクセスキー シークレット。
 -   `s3.role-arn` : バケットにアクセスする権限を持つロール ARN。
 
 </div>
@@ -307,7 +307,7 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
 ```
 
 -   `gcs.uri` : `gs://<bucket-name>/<folder-path>/`形式の Google Cloud Storage バケットの URI。
--   `gcs.service-account-key` : base64 でエンコードされたサービス アカウント キー。
+-   `gcs.service-account-key` : base64 でエンコードされたサービスアカウント キー。
 
 </div>
 </SimpleTab>
@@ -323,7 +323,7 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
     >
     > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**[データ]** &gt; **[インポート] を**クリックします。
+2.  ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**[データ]** &gt; **[インポート] を**クリックします。
 
 3.  **インポート**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**Azure Blob Storage**を選択します。以下のパラメータを入力します。
 
@@ -361,7 +361,7 @@ ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azbl
     >
     > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**[データ]** &gt; **[インポート] を**クリックします。
+2.  ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**[データ]** &gt; **[インポート] を**クリックします。
 
 3.  **「インポート」**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**Alibaba Cloud OSS**を選択します。
 
@@ -404,7 +404,7 @@ ticloud serverless export create -c <cluster-id> --target-type OSS --oss.uri <ur
     >
     > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**[データ]** &gt; **[インポート] を**クリックします。
+2.  ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**[データ]** &gt; **[インポート] を**クリックします。
 
 3.  **[インポート]**ページで**[エクスポート]**をクリックして、エクスポート タスクリストを表示します。
 

@@ -53,7 +53,7 @@ TiDB の一時テーブルは、ローカル一時テーブルとグローバル
 
 ### ローカル一時テーブルを作成する {#create-a-local-temporary-table}
 
-ローカル一時テーブルを作成する前に、現在のデータベース ユーザーに`CREATE TEMPORARY TABLES`権限を追加する必要があります。
+ローカル一時テーブルを作成する前に、現在のデータベースユーザーに`CREATE TEMPORARY TABLES`権限を追加する必要があります。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -218,7 +218,7 @@ public List<Author> getTop50EldestAuthorInfo() throws SQLException {
 
 ## 一時テーブルをクエリする {#query-a-temporary-table}
 
-一時テーブルの準備ができたら、通常のデータ テーブルとしてクエリを実行できます。
+一時テーブルの準備ができたら、通常のデータテーブルとしてクエリを実行できます。
 
 ```sql
 SELECT * FROM top_50_eldest_authors;

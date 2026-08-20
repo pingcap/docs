@@ -110,13 +110,13 @@ summary: TiUP no-sudo モードを使用してオンライン TiDB クラスタ�
 
 ## トポロジファイルを準備する {#prepare-the-topology-file}
 
-1.  次のコマンドを実行してトポロジ ファイルを生成します。
+1.  次のコマンドを実行してトポロジファイルを生成します。
 
     ```shell
     tiup cluster template > topology.yaml
     ```
 
-2.  トポロジ ファイルを編集します。
+2.  トポロジファイルを編集します。
 
     通常モードと比較して、 TiUPをno-sudoモードで使用する場合は、 `topology.yaml`ファイルの`global`モジュールに`systemd_mode: "user"`の行を追加する必要があります。`systemd_mode`パラメータは、`systemd user`モードを使用するかどうかを設定するために使用されます。このパラメータが設定されていない場合、デフォルト値は`system`で、sudo権限が必要であることを意味します。
 
