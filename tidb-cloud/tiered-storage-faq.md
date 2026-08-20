@@ -11,9 +11,9 @@ This document answers common questions about Infrequent Access (IA) storage, inc
 >
 > Tiered storage is in **Private Preview** for {{{ .essential }}}, {{{ .premium }}}, and {{{ .byoc }}}. The behavior described on this page reflects the current preview implementation and might change before general availability (GA).
 
-## Can IA tables execute UPDATE / DELETE?
+## Can IA tables execute `UPDATE`/`DELETE`?
 
-Yes. An UPDATE operation first loads the corresponding data from object storage into the IA cache, performs the modification, and writes a new SST file, the same flow as a regular UPDATE. Performance is affected by cold reads.
+Yes. An `UPDATE` operation first loads the corresponding data from object storage into the IA cache, performs the modification, and writes a new SST file, the same flow as a regular `UPDATE`. Performance is affected by cold reads.
 
 ## Can TiFlash replicas of IA tables be set to IA?
 
@@ -29,7 +29,7 @@ TiDB does not provide built-in cold/hot detection tools. You need to assess data
 
 ## When data is stored in cold storage (IA tier), are all three replicas stored, or just one copy?
 
-Only one copy is stored on S3, all three replicas share the same object.
+Only one copy is stored on Amazon S3, and all three replicas share the same object.
 
 In the cloud storage engine architecture, SST/blob data files have only one copy on object storage (S3/DFS) to begin with: files are uploaded once by flush/compaction, the S3 key contains no node/replica information, and the three Raft replicas reference the same file id through the Raft-replicated ChangeSet. The three-replica mechanism applies only to Raft logs, metadata, and each node's local cache, never to the data on object storage.
 
