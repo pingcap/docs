@@ -237,13 +237,13 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set patrol-region-interval 10ms // Set the execution frequency of the checker to 10ms
     ```
 
--   `patrol-region-worker-count`はリージョンのヘルス状態を検査する際にチェッカーによって作成される同時実行数[オペレーター](/glossary.md#operator)を制御します。通常、この設定を調整する必要はありません。この設定項目を 1 より大きい値に設定すると、同時実行チェックが有効になります。現在、この機能は実験的であり、本番環境での使用は推奨されません。
+-   `patrol-region-worker-count`は、リージョンのヘルス状態を検査する際にチェッカーが同時に実行する[オペレーター](/glossary.md#operator)の数を制御します。通常、この設定を調整する必要はありません。この設定項目を 1 より大きい値に設定すると、同時実行チェックが有効になります。現在、この機能は実験的であり、本番環境での使用は推奨されません。
 
     ```bash
     config set patrol-region-worker-count 2 // Set the checker concurrency to 2
     ```
 
--   `max-store-down-time`はPD が切断されたストアを復元できないと判断するまでの時間を制御します。指定された時間内に PD がストアからハートビートを受信しない場合、PD は他のノードにレプリカを追加します。
+-   `max-store-down-time`は、PD が切断されたストアをダウンとみなすまでの時間を制御します。指定された時間内に PD がストアからハートビートを受信しない場合、PD は他のノードにレプリカを追加します。
 
     ```bash
     config set max-store-down-time 30m  // Set the time within which PD receives no heartbeats and after which PD starts to add replicas to 30 minutes
