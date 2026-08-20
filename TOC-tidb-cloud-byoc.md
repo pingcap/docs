@@ -61,7 +61,7 @@
     - [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md)
   - Use Tiered Storage ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [Overview](/tidb-cloud/tiered-storage-overview.md)
-    - [Operations](/tidb-cloud/tiered-storage-operations.md)
+    - [Operations](/tidb-cloud/tiered-storage-guide.md)
     - [Limitations](/tidb-cloud/tiered-storage-limitations.md)
     - [FAQ](/tidb-cloud/tiered-storage-faq.md)
   - Monitor and Alert

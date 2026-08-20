@@ -1,11 +1,11 @@
 ---
-title: Tiered Storage Operations Guide
-summary: Learn how to configure and manage Tiered Storage on TiDB Cloud BYOC/Premium/Essential, including DDL, partition selectors, and best practices.
+title: Configure and Manage Tiered Storage
+summary: Learn how to configure and manage Tiered Storage on TiDB Cloud BYOC, Premium, or Essential, including DDL, partition selectors, and best practices.
 ---
 
-# Tiered Storage Operations Guide
+# Configure and Manage Tiered Storage
 
-This document explains how to configure and operate Infrequent Access (IA) storage, including storage class settings, partition selectors, and recommended operational practices.
+This document explains how to configure and manage Infrequent Access (IA) storage, including storage class settings, partition selectors, and recommended operational practices.
 
 > **Note:**
 >
@@ -13,7 +13,11 @@ This document explains how to configure and operate Infrequent Access (IA) stora
 
 ## How to use
 
+This section describes how to configure and manage IA storage, including storage class settings, partition selectors, and recommended operational practices.
+
 ### Storage class support matrix
+
+This section describes the supported storage class values, table types, and inheritance rules for indexes and related objects.
 
 #### Storage class values
 
@@ -47,11 +51,13 @@ Values are case-insensitive.
 
 ### Regular table DDL
 
-#### Specifying at create time
+This section describes how to configure IA storage for regular (non-partitioned) tables.
+
+#### Specify at create time
 
 Syntactic sugar (recommended):
 
-```SQL
+```sql
 CREATE TABLE t_ia (
     id BIGINT PRIMARY KEY,
     created_at DATETIME NOT NULL,
@@ -61,17 +67,17 @@ CREATE TABLE t_ia (
 
 `ENGINE_ATTRIBUTE` method:
 
-```SQL
+```sql
 CREATE TABLE t_ia (
     id BIGINT PRIMARY KEY
 ) ENGINE_ATTRIBUTE='{"storage_class":"IA"}';
 ```
 
-> **Conflict constraint**: `STORAGE_CLASS` syntactic sugar and `ENGINE_ATTRIBUTE`'s `storage_class` **cannot be specified together** — the system will reject with an error.
+**Conflict constraint**: `STORAGE_CLASS` syntactic sugar and `ENGINE_ATTRIBUTE`'s `storage_class` **cannot be specified together** — the system will reject with an error.
 
-#### Modifying an existing table
+#### Modify an existing table
 
-```SQL
+```sql
 -- Standard → IA
 ALTER TABLE t1 STORAGE_CLASS='IA';
 ALTER TABLE t1 ENGINE_ATTRIBUTE='{"storage_class":"IA"}';
@@ -81,7 +87,7 @@ ALTER TABLE t1 STORAGE_CLASS='STANDARD';
 ALTER TABLE t1 ENGINE_ATTRIBUTE='{"storage_class":"STANDARD"}';
 ```
 
-ALTER operations preserve all data access, and SQL reads/writes are supported during the conversion.
+`ALTER` operations preserve all data access, and SQL reads/writes are supported during the conversion.
 
 ### Partitioned table DDL
 
@@ -98,7 +104,7 @@ Partition attributes support three selector types (cannot be mixed) plus a table
 
 #### Example A: table-level IA with specific partitions overridden to Standard
 
-```SQL
+```sql
 CREATE TABLE orders (
     order_id BIGINT NOT NULL,
     created_at DATETIME NOT NULL,
@@ -121,7 +127,7 @@ Result: p2023 / p2024 → IA, p2025 / p_future → Standard.
 
 #### Example B: range selector
 
-```SQL
+```sql
 CREATE TABLE users (
     user_id BIGINT NOT NULL,
     PRIMARY KEY (user_id)
@@ -142,7 +148,7 @@ Result: p0 / p1 → IA, p2 / p3 → Standard.
 
 #### Example C: list value selector
 
-```SQL
+```sql
 CREATE TABLE order_status_log (
     log_id BIGINT NOT NULL,
     status INT NOT NULL,
@@ -168,9 +174,9 @@ Result: p_pending / p_paid → IA, p_shipped / p_completed → Standard.
 - **Mutual exclusion**: Multiple matching methods (e.g., `"names_in"` and `"less_than"`) cannot be used together in the same selector — this will raise an error
 - **Forward compatibility**: New partitions added later (`ADD PARTITION` / `REORGANIZE PARTITION`) are automatically evaluated against the persistent storage class rules; matching partitions inherit the configuration
 
-### Viewing and monitoring
+### View and monitor
 
-```SQL
+```sql
 -- View DDL definition
 SHOW CREATE TABLE t1\G
 
@@ -187,21 +193,23 @@ WHERE TABLE_SCHEMA = 'your_database'
   AND TABLE_NAME = 'your_table';
 ```
 
-#### Monitoring IA storage space
+#### Monitor IA storage space
 
-View in Cloud Console:
+View in TiDB Cloud console:
 
-- **Path**: Cloud Console → Monitoring → Metrics → Instance Overview (or Overview → Core Metrics)
-- **New metrics**:
+- Path: **Overview** > **Monitoring** > **Metrics** > **Instance Overview** (or **Overview** > **Core Metrics**)
+- New metrics:
     - `Row-based IA Storage` — Total IA table space
     - `Row-based Standard Storage` — Total Standard table space
-- **Relationship**: `Row-based Storage` = `Row-based IA Storage` + `Row-based Standard Storage`
+- Relationship: `Row-based Storage` = `Row-based IA Storage` + `Row-based Standard Storage`
 
 The single-table space query method remains unchanged:
 
-> Note: This method depends on table statistics and may have significant estimation errors.
+> **Note:**
+>
+> This method depends on table statistics and may have significant estimation errors.
 
-```SQL
+```sql
 SELECT TABLE_NAME,
     ROUND(DATA_LENGTH / 1024 / 1024, 2) AS Data_MB,
     ROUND(INDEX_LENGTH / 1024 / 1024, 2) AS Index_MB,
@@ -212,9 +220,9 @@ WHERE TABLE_SCHEMA = 'your_database'
 ORDER BY (DATA_LENGTH + INDEX_LENGTH) DESC;
 ```
 
----
-
 ## Observability
+
+This section describes how to observe IA storage behavior, including `EXPLAIN ANALYZE`, statement summary, and slow query metrics.
 
 ### EXPLAIN ANALYZE
 
@@ -228,22 +236,24 @@ EXPLAIN ANALYZE SELECT * FROM t_ia WHERE id BETWEEN 1 AND 50000;
 -- ia_remote_read_segment_wait_time: 0.008   -- Remote wait time (seconds)
 ```
 
-> Note: The IA signal is per-request read path evidence, not a table-level stable flag — the same query may show IA information on the first run but not after a cache hit.
+> **Note:**
 >
-> Additionally, ia_remote_read_segment_wait_time is the aggregate time of all remote requests. Due to TiKV's underlying parallel reading mechanism, this value may exceed the SQL's actual execution time.
+> The IA signal is per-request read path evidence, not a table-level stable flag — the same query may show IA information on the first run but not after a cache hit.
+>
+> Additionally, `ia_remote_read_segment_wait_time` is the aggregate time of all remote requests. Due to TiKV's underlying parallel reading mechanism, this value may exceed the SQL's actual execution time.
 
 ### Statement summary
 
 `STATEMENTS_SUMMARY_HISTORY` and `CLUSTER_STATEMENTS_SUMMARY_HISTORY` have 6 new columns:
 
-| Column Name | Description |
-|-|-|
-| `AVG_IA_REMOTE_READ_SEGMENT_COUNT` | Average number of remote segments read |
-| `MAX_IA_REMOTE_READ_SEGMENT_COUNT` | Maximum number of remote segments read |
-| `AVG_IA_REMOTE_READ_SEGMENT_SIZE` | Average remote read data volume |
-| `MAX_IA_REMOTE_READ_SEGMENT_SIZE` | Maximum remote read data volume |
-| `AVG_IA_REMOTE_READ_SEGMENT_WAIT_TIME` | Average remote wait time |
-| `MAX_IA_REMOTE_READ_SEGMENT_WAIT_TIME` | Maximum remote wait time |
+| Column Name                            | Description                            |
+|----------------------------------------|----------------------------------------|
+| `AVG_IA_REMOTE_READ_SEGMENT_COUNT`     | Average number of remote segments read |
+| `MAX_IA_REMOTE_READ_SEGMENT_COUNT`     | Maximum number of remote segments read |
+| `AVG_IA_REMOTE_READ_SEGMENT_SIZE`      | Average remote read data volume        |
+| `MAX_IA_REMOTE_READ_SEGMENT_SIZE`      | Maximum remote read data volume        |
+| `AVG_IA_REMOTE_READ_SEGMENT_WAIT_TIME` | Average remote wait time               |
+| `MAX_IA_REMOTE_READ_SEGMENT_WAIT_TIME` | Maximum remote wait time               |
 
 ### Slow queries
 
@@ -253,11 +263,11 @@ EXPLAIN ANALYZE SELECT * FROM t_ia WHERE id BETWEEN 1 AND 50000;
 - `IA_remote_read_segment_size`
 - `IA_remote_read_segment_wait_time`
 
-Corresponding panels are also visible in the Cloud Console slow query details.
-
----
+Corresponding panels are also visible in the TiDB Cloud console slow query details.
 
 ## Best practices
+
+This section describes recommended operational practices for IA storage, including tiering strategy, rollout strategy, write optimization, query optimization, switch-back considerations, and configuration stability.
 
 ### Tiering strategy: prefer partition-level IA
 
@@ -269,7 +279,7 @@ For partitioned tables, **always prefer partition-level IA** over table-level IA
 
 ### Rollout strategy: start with the smallest oldest partition
 
-```Plaintext
+```
 Step 1: Select the oldest and smallest partition → ALTER PARTITION → IA
 Step 2: Observe for one full business day (at least 24h)
 Step 3: Verify QPS / TPS / P99 Latency / CPU metrics show no degradation
@@ -284,7 +294,7 @@ Step 5: Repeat Steps 2-4 until all target partitions are covered
 - Benchmark concurrent writes with the same thread count, workload, and partition distribution before applying this tuning. In one test environment, random writes to IA partitions averaged 50k rows/sec, while fixed single-thread writes to one IA partition averaged 70k rows/sec; these results are not directly comparable.
 - Newly imported data only transitions to IA mode after flush/compaction. Large-range queries immediately after import may encounter cold cache.
 
-> These figures are from test environments and do not represent real-world production scenarios. You should obtain accurate data based on your own business testing.
+These figures are from test environments and do not represent real-world production scenarios. You should obtain accurate data based on your own business testing.
 
 ### Query optimization
 
