@@ -40,7 +40,7 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
+2.  右上隅の**接続**をクリックしてください。接続ダイアログが表示されます。
 
 3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
@@ -60,7 +60,7 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
     > **Tip:**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードをリセット」**をクリックして新しいパスワードを生成できます。
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **パスワードをリセット**をクリックして新しいパスワードを生成できます。
 
 5.  VS Codeを起動し、ナビゲーションペインで**SQLTools**拡張機能を選択します。 **[接続]**セクションで**[新しい接続を追加]**をクリックし、データベースドライバとして**TiDB**を選択します。
 
@@ -87,14 +87,14 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
     ![VS Code SQLTools: configure connection settings for TiDB Cloud Starter](/media/develop/vsc-sqltools-connection-config-serverless.jpg)
 
-7.  **「接続テスト」**をクリックして、対象のTiDB Cloud StarterまたはEssentialインスタンスへの接続を検証してください。
+7.  **接続テスト**をクリックして、対象のTiDB Cloud StarterまたはEssentialインスタンスへの接続を検証してください。
 
-    1.  ポップアップウィンドウで**「許可」**をクリックします。
+    1.  ポップアップウィンドウで**許可**をクリックします。
     2.  **SQLToolsDriver認証情報**ダイアログで、手順4で作成したパスワードを入力します。
 
         ![VS Code SQLTools: enter password to connect to TiDB Cloud Starter](/media/develop/vsc-sqltools-password.jpg)
 
-8.  接続テストが成功すると、「**接続に成功しました！」という**メッセージが表示されます。 **「接続を保存」**をクリックして、接続設定を保存してください。
+8.  接続テストが成功すると、「**接続に成功しました！」という**メッセージが表示されます。 **接続を保存**をクリックして、接続設定を保存してください。
 
 </div>
 <div label="TiDB Cloud Premium">
@@ -107,15 +107,15 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
     クライアントのIPアドレスがアクセスリストに追加されていることを確認してください。
 
-4.  左側のナビゲーションペインで**「概要」**をクリックすると、インスタンスの概要ページに戻ります。
+4.  左側のナビゲーションペインで**概要**をクリックすると、インスタンスの概要ページに戻ります。
 
-5.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
+5.  右上隅の**接続**をクリックしてください。接続ダイアログが表示されます。
 
-6.  接続ダイアログで、 **「接続タイプ」**ドロップダウンリストから**「パブリック」**を選択します。
+6.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**パブリック**を選択します。
 
     -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
-    -   まだパスワードを設定していない場合は、ダイアログの**「ルートパスワードを設定」**をクリックしてください。
-    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **「CA証明書」**をクリックしてダウンロードしてください。
+    -   まだパスワードを設定していない場合は、ダイアログの**ルートパスワードを設定**をクリックしてください。
+    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA証明書**をクリックしてダウンロードしてください。
     -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
 7.  VS Codeを起動し、ナビゲーションペインで**SQLTools**拡張機能を選択します。 **[接続]**セクションで**[新しい接続を追加]**をクリックし、データベースドライバとして**TiDB**を選択します。
@@ -133,20 +133,20 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
         -   **認証プロトコル**：**デフォルト**を選択してください。
         -   **SSL** ：**無効を**選択してください。
 
-9.  **「接続テスト」**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
+9.  **接続テスト**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
 
 10. **SQLToolsDriver認証情報**ダイアログで、パスワードを入力します。
 
-11. 接続テストが成功したら、 **「接続を保存」**をクリックして接続設定を保存します。
+11. 接続テストが成功したら、 **接続を保存**をクリックして接続設定を保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
 
-2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
+2.  右上隅の**接続**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、「**接続タイプ」**ドロップダウンリストから**「パブリック」**を選択し、 **「CA証明書」**をクリックしてCA証明書をダウンロードします。
+3.  接続ダイアログで、「**接続タイプ」**ドロップダウンリストから**パブリック**を選択し、 **CA証明書**をクリックしてCA証明書をダウンロードします。
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **[IP アクセス リストの設定] をクリックするか、「IP アクセス リストを設定する」**の手順に従って[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
 
@@ -173,14 +173,14 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
     ![VS Code SQLTools: configure connection settings for TiDB Cloud Dedicated](/media/develop/vsc-sqltools-connection-config-dedicated.jpg)
 
-6.  **「接続テスト」**をクリックして、 TiDB Cloud Dedicatedクラスターへの接続を検証してください。
+6.  **接続テスト**をクリックして、 TiDB Cloud Dedicatedクラスターへの接続を検証してください。
 
-    1.  ポップアップウィンドウで**「許可」**をクリックします。
+    1.  ポップアップウィンドウで**許可**をクリックします。
     2.  **SQLToolsDriver認証情報**ダイアログで、 TiDB Cloud Dedicatedクラスタのパスワードを入力します。
 
     ![VS Code SQLTools: enter password to connect to TiDB Cloud Dedicated](/media/develop/vsc-sqltools-password.jpg)
 
-7.  接続テストが成功すると、「**接続に成功しました！」という**メッセージが表示されます。 **「接続を保存」**をクリックして、接続設定を保存してください。
+7.  接続テストが成功すると、「**接続に成功しました！」という**メッセージが表示されます。 **接続を保存**をクリックして、接続設定を保存してください。
 
 </div>
 <div label="TiDB Self-Managed" value="tidb">
@@ -207,8 +207,8 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
     -   **パスワードモード**：
 
-        -   パスワードが空欄の場合は、 **「空欄のパスワードを使用する」**を選択してください。
-        -   それ以外の場合は、 **「SQLToolsDriver資格情報」**を選択してください。
+        -   パスワードが空欄の場合は、 **空欄のパスワードを使用する**を選択してください。
+        -   それ以外の場合は、 **SQLToolsDriver資格情報**を選択してください。
 
     -   **MySQLドライバ固有のオプション**領域で、以下のパラメータを設定します。
 
@@ -217,13 +217,13 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
     ![VS Code SQLTools: configure connection settings for TiDB Self-Managed](/media/develop/vsc-sqltools-connection-config-self-hosted.jpg)
 
-3.  **「接続テスト」**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
+3.  **接続テスト**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
 
-    パスワードが空欄でない場合は、ポップアップウィンドウで**「許可」**をクリックし、TiDB Self-Managedクラスタのパスワードを入力してください。
+    パスワードが空欄でない場合は、ポップアップウィンドウで**許可**をクリックし、TiDB Self-Managedクラスタのパスワードを入力してください。
 
     ![VS Code SQLTools: enter password to connect to TiDB Self-Managed](/media/develop/vsc-sqltools-password.jpg)
 
-4.  接続テストが成功すると、「**接続に成功しました！」という**メッセージが表示されます。 **「接続を保存」**をクリックして、接続設定を保存してください。
+4.  接続テストが成功すると、「**接続に成功しました！」という**メッセージが表示されます。 **接続を保存**をクリックして、接続設定を保存してください。
 
 </div>
 </SimpleTab>
