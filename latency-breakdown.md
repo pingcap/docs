@@ -321,7 +321,7 @@ Diagram(
 
 実行フェーズでは、TiDBはメモリ内のデータを操作します。主なレイテンシーは必要なデータの読み取りに起因します。更新クエリと削除クエリの場合、TiDBはまずTiKVからデータを読み取り、次にメモリ内の行を更新または削除します。
 
-例外はPointGetとBatch PointGetによるロックタイム読み取り操作（ `SELECT FOR UPDATE` ）で、これは1回のリモートプロシージャコール（RPC）で読み取りとロックを実行します。
+例外はPointGetとBatch PointGetによるロック取得時の読み取り操作（ `SELECT FOR UPDATE` ）で、これは1回のリモートプロシージャコール（RPC）で読み取りとロックを実行します。
 
 ### Lock Time PointGet {#lock-time-point-get}
 
