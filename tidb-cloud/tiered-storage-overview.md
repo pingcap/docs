@@ -80,8 +80,8 @@ Tiered storage implementation spans the TiDB → TiKV → Object Store three-lay
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
-│ TiDB Schema Layer                                                 │
-│ · STORAGE_CLASS / ENGINE_ATTRIBUTE written to TiDB schema         │
+│ TiDB Schema Layer                                                │
+│ · STORAGE_CLASS / ENGINE_ATTRIBUTE written to TiDB schema        │
 └──────────────────────────────────────────────────────────────────┘
                               ↓
 ┌──────────────────────────────────────────────────────────────────┐
@@ -96,7 +96,7 @@ Tiered storage implementation spans the TiDB → TiKV → Object Store three-lay
 └──────────────────────────────────────────────────────────────────┘
                               ↓
 ┌──────────────────────────────────────────────────────────────────┐
-│ Remote Object Storage (S3/OSS)                                    │
+│ Remote Object Storage (S3/OSS)                                   │
 │ · Full SST data organized and stored by segment                  │
 └──────────────────────────────────────────────────────────────────┘
 ```
