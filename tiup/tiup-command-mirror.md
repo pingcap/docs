@@ -26,15 +26,15 @@ tiup mirror <command> [flags]
 
 ## コマンドリスト {#command-list}
 
--   [ゲンキー](/tiup/tiup-command-mirror-genkey.md) : 秘密鍵ファイルを生成する
--   [サイン](/tiup/tiup-command-mirror-sign.md) : 秘密鍵ファイルを使用して特定のファイルに署名します
--   [初期化](/tiup/tiup-command-mirror-init.md) : 空のミラーを開始する
--   [セット](/tiup/tiup-command-mirror-set.md) : 現在のミラーを設定する
--   [付与](/tiup/tiup-command-mirror-grant.md) : 現在のミラーに新しいコンポーネント所有者を付与します
--   [公開](/tiup/tiup-command-mirror-publish.md) : 新しいコンポーネントを現在のミラーに公開します
--   [修正する](/tiup/tiup-command-mirror-modify.md) : 現在のミラー内のコンポーネントの属性を変更します
--   [回転する](/tiup/tiup-command-mirror-rotate.md) : 現在のミラーのルート証明書を更新します
--   [クローン](/tiup/tiup-command-mirror-clone.md) : 既存のミラーから新しいミラーを複製します
--   [マージ](/tiup/tiup-command-mirror-merge.md) : ミラーをマージする
+-   [genkey](/tiup/tiup-command-mirror-genkey.md) : 秘密鍵ファイルを生成する
+-   [sign](/tiup/tiup-command-mirror-sign.md) : 秘密鍵ファイルを使用して特定のファイルに署名します
+-   [init](/tiup/tiup-command-mirror-init.md) : 空のミラーを開始する
+-   [set](/tiup/tiup-command-mirror-set.md) : 現在のミラーを設定する
+-   [grant](/tiup/tiup-command-mirror-grant.md) : 現在のミラーに新しいコンポーネント所有者を付与します
+-   [publish](/tiup/tiup-command-mirror-publish.md) : 新しいコンポーネントを現在のミラーに公開します
+-   [modify](/tiup/tiup-command-mirror-modify.md) : 現在のミラー内のコンポーネントの属性を変更します
+-   [rotate](/tiup/tiup-command-mirror-rotate.md) : 現在のミラーのルート証明書を更新します
+-   [clone](/tiup/tiup-command-mirror-clone.md) : 既存のミラーから新しいミラーを複製します
+-   [merge](/tiup/tiup-command-mirror-merge.md) : ミラーをマージする
 
 [&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)

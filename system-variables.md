@@ -4496,9 +4496,9 @@ mysql> desc select count(distinct a) from test.t;
 - ヒント [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) への適用: Yes
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、[相関サブクエリのデコリレーション](/correlated-subquery-optimization.md) のシナリオにおいて、オプティマイザがデコリレーションを行わない論理候補プランも追加で構築するかどうかを制御します。
-    - デフォルトでは、TiDB は相関サブクエリに対してデコリレーション書き換えを優先的に試みます。
-    - この変数を有効にすると、デコリレーション後の Candidate プランが、元の相関サブクエリと同じアクセス方向を持つ等価な `IndexJoin` Candidate プランの生成に失敗した場合、オプティマイザはデコリレーションしない Candidate プランも追加で保持し、デコリレーションあり・なしの両方の Candidate プランを評価したうえで、より低コストな[実行計画](/explain-subqueries.md)を選択します。
+- この変数は、[相関サブクエリの非相関化](/correlated-subquery-optimization.md) のシナリオにおいて、オプティマイザが非相関化を行わない論理候補プランも追加で構築するかどうかを制御します。
+    - デフォルトでは、TiDB は相関サブクエリに対して非相関化の書き換えを優先的に試みます。
+    - この変数を有効にすると、非相関化後の候補プランが、元の相関サブクエリと同じアクセス方向を持つ等価な `IndexJoin` 候補プランの生成に失敗した場合、オプティマイザは非相関化しない候補プランも追加で保持し、非相関化あり・なしの両方の候補プランを評価したうえで、より低コストな[実行計画](/explain-subqueries.md)を選択します。
 
 ### tidb_opt_enable_semi_join_rewrite <span class="version-mark">New in v8.5.4</span>
 

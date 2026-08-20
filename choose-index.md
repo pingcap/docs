@@ -110,7 +110,7 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-### コスト見積もりに基づく選定 {#cost-estimation-based-selection}
+### コスト見積もりに基づく選択 {#cost-estimation-based-selection}
 
 スカイライン剪定ルールを使用して不適切なインデックスを除外した後、インデックスの選択は完全にコスト見積もりに基づいて行われます。テーブルへのアクセスにかかるコスト見積もりには、以下の点を考慮する必要があります。
 
