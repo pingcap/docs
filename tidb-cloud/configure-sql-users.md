@@ -9,7 +9,7 @@ summary: TiDB Cloudコンソールでデータベースユーザーとロール�
 
 > **Note:**
 >
-> -   **SQL Users**ページはパブリックプレビューであり、リクエストがあった場合のみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)**？」**をクリックし、**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **「説明」**フィールドに「SQLユーザーページの申請」と入力して、 **「送信」を**クリックします。
+> -   **SQL Users**ページはパブリックプレビューであり、リクエストがあった場合のみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)**？」**をクリックし、**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **説明**フィールドに「SQLユーザーページの申請」と入力して、 **「送信」を**クリックします。
 > -   データベースのユーザーと役割[組織およびプロジェクトのユーザーと役割](/tidb-cloud/manage-user-access.md)から独立しています。データベース ユーザーは TiDB クラスター内のデータベースにアクセスするために使用され、組織およびプロジェクト ユーザーは[TiDB Cloudコンソール](https://tidbcloud.com/)内の組織およびプロジェクトにアクセスするために使用されます。
 > -   **SQL Users**ページに加えて、SQL クライアントを使用してクラスターに接続し、SQL ステートメントを作成することによって、データベース ユーザーとロールを管理することもできます。詳細については、 [TiDBユーザーアカウント管理](https://docs.pingcap.com/tidb/dev/user-account-management)を参照してください。
 
@@ -70,7 +70,7 @@ SQLユーザーに組み込みロールと複数のカスタムロールの両�
 
     各SQLユーザーに対して、組み込みロールと複数のカスタムロール（存在する場合）を付与できます。
 
-4.  **「作成」**をクリックします。
+4.  **作成**をクリックします。
 
 ## SQLユーザーを編集する {#edit-a-sql-user}
 
