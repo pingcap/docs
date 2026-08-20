@@ -112,7 +112,7 @@ TiDB Cloud Lake の料金は、ウェアハウス、ストレージ、クラウ�
 
 - **Row-based storage**: TiDB テーブルはデフォルトで行ベースのストレージを使用し、データは **TiKV** に保存されます。 <!--**Use case:** Core online transactional processing (OLTP) workloads that require low-latency reads and writes.-->
 
-- **Row-based storage with IA**: Infrequent Access (IA) を使用する行ベースのストレージでは、データは **remote object storage** に保存され、アクセス頻度は低いもののオンラインクエリで利用可能である必要があるデータ向けに設計されています。 <!--**Use case:** Historical or archival data that is accessed infrequently but still needs to remain queryable while reducing storage costs.-->
+- **Row-based storage with IA**: Infrequent Access (IA) を使用する行ベースのストレージでは、データは **外部オブジェクトストレージ** に保存され、アクセス頻度は低いもののオンラインクエリで利用可能である必要があるデータ向けに設計されています。 <!--**Use case:** Historical or archival data that is accessed infrequently but still needs to remain queryable while reducing storage costs.-->
 
     > **Note:**
     >
