@@ -25,7 +25,7 @@ summary: TiDB Cloudリソースを削除する方法を学びましょう。
 
 4.  削除確認ウィンドウで、削除を確定してください。
 
-    -   手動または自動バックアップが少なくとも 1 つある場合は、バックアップの数とバックアップの課金ポリシーを確認できます。 **[続行]**をクリックして`<organization name>/<project name>/<resource name>`と入力します。
+    -   手動または自動バックアップが少なくとも 1つある場合は、バックアップの数とバックアップの課金ポリシーを確認できます。 **[続行]**をクリックして`<organization name>/<project name>/<resource name>`と入力します。
     -   バックアップがない場合は、 `<organization name>/<project name>/<resource name>`と入力してください。
 
     今後、削除したTiDB Cloud EssentialインスタンスまたはTiDB Cloud Dedicatedクラスターを復元したい場合は、必ずバックアップを作成してください。バックアップがない場合、復元することはできません。

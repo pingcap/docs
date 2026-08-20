@@ -174,7 +174,7 @@ cd jaffle_shop
 
 2.  TiDB Cloudで結果を確認してください。
 
-    `show databases`コマンドは、dbt が作成した新しい`analytics`データベースを一覧表示します。 `show tables`コマンドは、 `analytics`データベースに、作成したテーブルに対応する 3 つのテーブルが存在することを示します。
+    `show databases`コマンドは、dbt が作成した新しい`analytics`データベースを一覧表示します。 `show tables`コマンドは、 `analytics`データベースに、作成したテーブルに対応する 3つのテーブルが存在することを示します。
 
     ```sql
     mysql> SHOW DATABASES;
@@ -256,7 +256,7 @@ cd jaffle_shop
     Done. PASS=5 WARN=0 ERROR=0 SKIP=0 TOTAL=5
     ```
 
-    結果によると、2 つのテーブル ( `analytics.customers`と`analytics.orders` ) と 3 つのビュー ( `analytics.stg_customers` 、 `analytics.stg_orders` 、および`analytics.stg_payments` ) が正常に作成されました。
+    結果によると、2つのテーブル ( `analytics.customers`と`analytics.orders` ) と 3つのビュー ( `analytics.stg_customers` 、 `analytics.stg_orders` 、および`analytics.stg_payments` ) が正常に作成されました。
 
 2.  TiDB Cloudにアクセスして、変換が成功したことを確認してください。
 

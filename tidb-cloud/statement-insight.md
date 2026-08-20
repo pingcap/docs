@@ -11,7 +11,7 @@ Statement Insight は、履歴データに基づいてベースラインを把�
 
 > **Note:**
 >
-> Statement Insight はパブリックプレビュー中であり、8 月 19 日以降に作成された一部の <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .premium }}} and {{{ .byoc }}}</CustomContent> インスタンスでのみ利用できます。今後のリリースで、より広範囲に展開される予定です。早期アクセスを希望する場合は、[TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) にお問い合わせください。
+> Statement Insight はパブリックプレビュー中であり、8月 19日以降に作成された一部の <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .premium }}} and {{{ .byoc }}}</CustomContent> インスタンスでのみ利用できます。今後のリリースで、より広範囲に展開される予定です。早期アクセスを希望する場合は、[TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) にお問い合わせください。
 > Statement Insight がまだ利用できないインスタンスでは、当面の間、ステートメント分析に [SQL Statement](/tidb-cloud/tune-performance.md#statement-analysis) タブを引き続き使用できます。
 
 ## 始める前に {#before-you-begin}
@@ -19,7 +19,7 @@ Statement Insight は、履歴データに基づいてベースラインを把�
 Statement Insight は、インスタンスで有効化された後にのみデータ収集を開始するため、初めてページを開く際は次の点に注意してください。
 
 - 過去データは補完されません。表示されるのは、この機能がインスタンスで有効化された時点以降のデータのみです。
-- 利用可能な時間範囲は日ごとに増えていきます。たとえば、機能の稼働開始から 1 日後には、約 1 日分のデータが表示されます。
+- 利用可能な時間範囲は日ごとに増えていきます。たとえば、機能の稼働開始から 1日後には、約 1日分のデータが表示されます。
 
 ## Statement Insight を開く {#open-statement-insight}
 

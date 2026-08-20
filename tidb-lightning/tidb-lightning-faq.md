@@ -19,9 +19,9 @@ TiDB Lightningのバージョンはクラスターと同じである必要があ
 
 権限の詳細については[TiDB Lightningを使用するための前提条件](/tidb-lightning/tidb-lightning-requirements.md)を参照してください。
 
-## TiDB Lightning で1 つのテーブルのインポート中にエラーが発生しました。他のテーブルにも影響しますか？プロセスは終了しますか？ {#tidb-lightning-encountered-an-error-when-importing-one-table-will-it-affect-other-tables-will-the-process-be-terminated}
+## TiDB Lightning で1つのテーブルのインポート中にエラーが発生しました。他のテーブルにも影響しますか？プロセスは終了しますか？ {#tidb-lightning-encountered-an-error-when-importing-one-table-will-it-affect-other-tables-will-the-process-be-terminated}
 
-1 つのテーブルのみにエラーが発生した場合でも、残りのテーブルは正常に処理されます。
+1つのテーブルのみにエラーが発生した場合でも、残りのテーブルは正常に処理されます。
 
 ## TiDB Lightningを適切に再起動するにはどうすればよいですか? {#how-to-properly-restart-tidb-lightning}
 

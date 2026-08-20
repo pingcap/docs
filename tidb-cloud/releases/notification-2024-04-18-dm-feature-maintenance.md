@@ -1,11 +1,11 @@
 ---
 title: 2024-04-18 TiDB Cloud Data Migration (DM) Feature Maintenance Notification
-summary: 2024 年 4 月 18 日のTiDB Cloud Data Migration (DM) 機能メンテナンスの詳細 (メンテナンス ウィンドウや影響など) について説明します。
+summary: 2024年 4月 18日のTiDB Cloud Data Migration (DM) 機能メンテナンスの詳細 (メンテナンス ウィンドウや影響など) について説明します。
 ---
 
 # [2024-04-18] TiDB Cloudデータ移行（DM）機能メンテナンスのお知らせ {#2024-04-18-tidb-cloud-data-migration-dm-feature-maintenance-notification}
 
-この通知では、2024 年 4 月 18 日のTiDB Cloud Dedicated [データ移行（DM）機能](/tidb-cloud/migrate-from-mysql-using-data-migration.md)のメンテナンスについて知っておく必要のある詳細について説明します。
+この通知では、2024年 4月 18日のTiDB Cloud Dedicated [データ移行（DM）機能](/tidb-cloud/migrate-from-mysql-using-data-migration.md)のメンテナンスについて知っておく必要のある詳細について説明します。
 
 ## メンテナンスウィンドウ {#maintenance-window}
 

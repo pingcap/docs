@@ -49,7 +49,7 @@ Google Cloud Private Service Connect のアーキテクチャは以下のとお�
 -   各TiDBクラスタは、最大10個のエンドポイントからの接続を処理できます。
 -   各Google Cloudプロジェクトは、最大10個のエンドポイントをTiDBクラスタに接続できます。
 -   2025年8月12日以降、Google Cloud上のTiDB Cloud Dedicatedクラスターでリージョンごとに作成できるGoogle Private Service Connect（PSC）接続の最大数は、NATサブネットCIDRブロックサイズによって異なります。
-    -   `/20` : 地域ごとに最大 7 つの PSC 接続
+    -   `/20` : 地域ごとに最大 7つの PSC 接続
     -   `/19` : 地域ごとに最大 23 の PSC 接続
     -   `/18` : 地域ごとに最大55のPSC接続
     -   `/17` : 地域ごとに最大 119 の PSC 接続

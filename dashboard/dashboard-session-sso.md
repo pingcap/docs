@@ -23,7 +23,7 @@ TiDB Dashboardは、SQLベースの[OIDC](https://openid.net/connect/)サイン�
 
 4.  フォームの**OIDC クライアント ID**と**OIDC 検出 URL**フィールドに入力します。
 
-    通常、SSO サービス プロバイダーから次の 2 つのフィールドを取得できます。
+    通常、SSO サービス プロバイダーから次の 2つのフィールドを取得できます。
 
     -   OIDC クライアント ID は、OIDC トークン発行者とも呼ばれます。
     -   OIDC Discovery URL は、OIDC Token Audience とも呼ばれます。

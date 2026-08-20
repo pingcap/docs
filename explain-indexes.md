@@ -87,7 +87,7 @@ EXPLAIN SELECT * FROM t1 WHERE intkey >= 99 AND intkey <= 103;
 3 rows in set (0.00 sec)
 ```
 
-`IndexLookup`演算子には 2 つの子ノードがあります。
+`IndexLookup`演算子には 2つの子ノードがあります。
 
 -   `├─IndexRangeScan_8(Build)`演算子は`intkey`インデックスの範囲スキャンを実行し、内部の`RowID` (このテーブルの場合は主キー) の値を取得します。
 -   次に、 `└─TableRowIDScan_9(Probe)`演算子はテーブル データから完全な行を取得します。

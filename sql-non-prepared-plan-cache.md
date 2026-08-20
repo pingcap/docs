@@ -44,7 +44,7 @@ TiDBは、 [ステートメント`Prepare` / `Execute`](/sql-prepared-plan-cache
     SET tidb_enable_non_prepared_plan_cache = ON;
     ```
 
-3.  次の 2 つのクエリを実行します。
+3.  次の 2つのクエリを実行します。
 
     ```sql
     SELECT * FROM t WHERE b < 10 AND a = 1;
@@ -82,7 +82,7 @@ TiDBは、パラメータ化されたクエリに対して1つのプランのみ
 
 -   [プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)でサポートされていないクエリまたはプランは、非プリペアドプラン キャッシュでもサポートされません。
 -   `Window`や`Having`などの複雑な演算子を含むクエリはサポートされていません。
--   3 つ以上の`Join`テーブルまたはサブクエリを含むクエリはサポートされていません。
+-   3つ以上の`Join`テーブルまたはサブクエリを含むクエリはサポートされていません。
 -   `ORDER BY 1`や`GROUP BY a+1`など、 `ORDER BY`または`GROUP BY`直後に数字や式が含まれるクエリはサポートされていません`ORDER BY column_name`と`GROUP BY column_name`のみがサポートされています。
 -   `SELECT * FROM t WHERE json_col = '{}'`など、 `JSON` 、 `ENUM` 、 `SET` 、または`BIT`タイプの列でフィルタリングするクエリはサポートされていません。
 -   `SELECT * FROM t WHERE a is NULL`など、 `NULL`値でフィルタリングするクエリはサポートされていません。
@@ -160,7 +160,7 @@ SHOW warnings;
     SET @@tidb_enable_non_prepared_plan_cache=ON;
     ```
 
-3.  次の 3 つのクエリを実行します。
+3.  次の 3つのクエリを実行します。
 
     ```sql
     SELECT * FROM t WHERE a<1;

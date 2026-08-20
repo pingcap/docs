@@ -20,7 +20,7 @@ ticloud serverless import create [flags]
 
 > **Note:**
 >
-> 現在、1 つのローカル インポート タスクにつき 1 つの CSV ファイルのみをインポートできます。
+> 現在、1つのローカル インポート タスクにつき 1つの CSV ファイルのみをインポートできます。
 
 ## 例 {#examples}
 

@@ -37,7 +37,7 @@ TiDB Ansible バージョン: 3.0.8
 -   サーバ
     -   ステートメントサマリーの改善:
         -   SQL文をより詳細に分析できるように多数のSQLメトリックフィールドを追加します[＃14151](https://github.com/pingcap/tidb/pull/14151) [＃14168](https://github.com/pingcap/tidb/pull/14168)
-        -   `stmt-summary.refresh-interval`パラメータを追加して、古いデータを`events_statements_summary_by_digest`テーブルから`events_statements_summary_by_digest_history`テーブルに移動するかどうかを制御します (デフォルトの間隔: 30 分) [＃14161](https://github.com/pingcap/tidb/pull/14161)
+        -   `stmt-summary.refresh-interval`パラメータを追加して、古いデータを`events_statements_summary_by_digest`テーブルから`events_statements_summary_by_digest_history`テーブルに移動するかどうかを制御します (デフォルトの間隔: 30分) [＃14161](https://github.com/pingcap/tidb/pull/14161)
         -   `events_statements_summary_by_digest` の古いデータを保存するには、 `events_statements_summary_by_digest_history`テーブルを追加します。 [＃14166](https://github.com/pingcap/tidb/pull/14166)
     -   RBAC関連の内部SQL文実行時にbinlogが誤って出力される問題を修正[＃13890](https://github.com/pingcap/tidb/pull/13890)
     -   TiDBサーバーバージョン変更する機能を制御するための`server-version`構成項目を追加します [＃13906](https://github.com/pingcap/tidb/pull/13906)

@@ -8,7 +8,7 @@ TiDB ドキュメントへようこそ!
 
 TiDB ドキュメント内の特定のコンテンツを自由に並べ替えたり削除したりするなど、特定のシナリオのニーズに合わせて TiDB ドキュメントをローカルでカスタマイズして PDF 形式で出力する場合は、 [TiDBドキュメントPDF生成チュートリアル](/resources/tidb-pdf-generation-tutorial.md)を参照してください。
 
-現在、公式ドキュメントは次の 2 つの言語をサポートしています。
+現在、公式ドキュメントは次の 2つの言語をサポートしています。
 
 -   `en` : [英語のドキュメント](https://docs.pingcap.com/tidb/stable)
 -   `zh` : [中国語のドキュメント](https://docs.pingcap.com/zh/tidb/stable)
@@ -63,7 +63,7 @@ Google翻訳を使えば、ドキュメントを様々な言語で閲覧でき�
 
 貢献者になるには[TiDB ドキュメント貢献ガイド](/CONTRIBUTING.md)ご覧ください！🤓
 
-<a href="https://next.ossinsight.io/widgets/official/compose-recent-active-contributors?repo_id=63995402&limit=30" target="_blank" style="display: block;" align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://next.ossinsight.io/widgets/official/compose-recent-active-contributors/thumbnail.png?repo_id=63995402&limit=30&image_size=auto&color_scheme=dark" width="655" height="auto" /><img alt="pingcap/docs のアクティブな貢献者 - 過去 28 日間" src="https://next.ossinsight.io/widgets/official/compose-recent-active-contributors/thumbnail.png?repo_id=63995402&limit=30&image_size=auto&color_scheme=light" width="655" height="auto" /></picture></a>
+<a href="https://next.ossinsight.io/widgets/official/compose-recent-active-contributors?repo_id=63995402&limit=30" target="_blank" style="display: block;" align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://next.ossinsight.io/widgets/official/compose-recent-active-contributors/thumbnail.png?repo_id=63995402&limit=30&image_size=auto&color_scheme=dark" width="655" height="auto" /><img alt="pingcap/docs のアクティブな貢献者 - 過去 28日間" src="https://next.ossinsight.io/widgets/official/compose-recent-active-contributors/thumbnail.png?repo_id=63995402&limit=30&image_size=auto&color_scheme=light" width="655" height="auto" /></picture></a>
 
 ## ライセンス {#license}
 

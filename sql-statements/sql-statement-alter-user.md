@@ -141,7 +141,7 @@ ALTER USER 'newuser' PASSWORD EXPIRE NEVER;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-`ALTER USER ... PASSWORD REUSE INTERVAL ... DAY`を使用して、 `newuser`パスワード再利用ポリシーを変更し、過去 90 日以内に使用されたパスワードの再利用を禁止します。
+`ALTER USER ... PASSWORD REUSE INTERVAL ... DAY`を使用して、 `newuser`パスワード再利用ポリシーを変更し、過去 90日以内に使用されたパスワードの再利用を禁止します。
 
 ```sql
 ALTER USER 'newuser' PASSWORD REUSE INTERVAL 90 DAY;

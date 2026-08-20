@@ -49,7 +49,7 @@ TiDB がビューをクエリする場合、ビューに関連付けられた`SE
 
 ## ビューの更新 {#update-views}
 
-現在、TiDB のビューは`ALTER VIEW view_name AS query;`をサポートしていませんが、次の 2 つの方法でビューを「更新」できます。
+現在、TiDB のビューは`ALTER VIEW view_name AS query;`をサポートしていませんが、次の 2つの方法でビューを「更新」できます。
 
 -   `DROP VIEW view_name;`ステートメントで古いビューを削除し、 `CREATE VIEW view_name AS query;`ステートメントで新しいビューを作成してビューを更新します。
 -   同じ名前の既存のビューを上書きするには、 `CREATE OR REPLACE VIEW view_name AS query;`ステートメントを使用します。

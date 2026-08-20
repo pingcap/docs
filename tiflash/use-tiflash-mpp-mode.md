@@ -27,7 +27,7 @@ TiFlashは、クエリ実行にMPPモードをサポートしています。こ�
 
 変数`tidb_allow_mpp` 、TiDBがクエリ実行時にMPPモードを選択できるかどうかを制御します。変数`tidb_enforce_mpp` 、オプティマイザのコスト見積もりを無視し、クエリ実行時にTiFlashのMPPモードを強制的に使用するかどうかを制御します。
 
-これら 2 つの変数のすべての値に対応する結果は次のとおりです。
+これら 2つの変数のすべての値に対応する結果は次のとおりです。
 
 |                             | tidb_allow_mpp=オフ | tidb_allow_mpp=on (デフォルト)                 |
 | --------------------------- | ----------------- | ----------------------------------------- |
@@ -107,7 +107,7 @@ explain select count(*) from customer c join nation n on c.c_nationkey=n.n_natio
 
 この実行計画の例には、演算子`ExchangeReceiver`と演算子`ExchangeSender`含まれています。この実行計画は、演算子`ExchangeSender`テーブル`nation`読み取った後、各ノードにテーブルをブロードキャストし、演算子`HashJoin`と演算子`HashAgg`テーブル`nation`とテーブル`customer`に対して実行され、結果がTiDBに返されることを示しています。
 
-TiFlash は、ブロードキャスト ハッシュ結合を使用するかどうかを制御する次の 3 つのグローバル/セッション変数を提供します。
+TiFlash は、ブロードキャスト ハッシュ結合を使用するかどうかを制御する次の 3つのグローバル/セッション変数を提供します。
 
 -   [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50) : 値の単位はバイトです。テーブルサイズ（バイト単位）が変数の値より小さい場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
 -   [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) : 値の単位は行です。結合操作のオブジェクトがサブクエリに属する場合、オプティマイザはサブクエリの結果セットのサイズを推定できないため、結果セットの行数によってサイズが決定されます。サブクエリの推定行数がこの変数の値より少ない場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。

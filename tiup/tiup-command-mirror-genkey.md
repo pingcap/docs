@@ -5,7 +5,7 @@ summary: TiUP mirror genkey は、 TiUP用の秘密鍵を生成するための�
 
 # tiup mirror genkey {#tiup-mirror-genkey}
 
-TiUP [ミラー](/tiup/tiup-mirror-reference.md)の定義によれば、ユーザーには 3 つの役割があります。
+TiUP [ミラー](/tiup/tiup-mirror-reference.md)の定義によれば、ユーザーには 3つの役割があります。
 
 -   ミラー管理者: `root.json` 、 `index.json` 、 `snapshot.json` 、 `timestamp.json`を変更する権限があります。
 -   コンポーネント所有者: 対応するコンポーネントを変更する権限を持ちます。

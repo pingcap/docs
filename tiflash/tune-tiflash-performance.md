@@ -175,7 +175,7 @@ TiFlashは、 `Sum`列など、 `Distinct`列を受け入れる一部の集計�
 set @@tidb_opt_distinct_agg_push_down = ON;
 ```
 
-以下の例は、変数`tidb_opt_distinct_agg_push_down`を有効にする前と有効にした後のクエリ結果を示しています。この変数を有効にする前は、TiDB はTiFlashからすべてのデータを読み取り、TiDB 内で`distinct`を実行する必要があります。この変数を有効にすると、 `distinct a`がTiFlashにプッシュダウンされ、新しい`group by`列である`test.t.a`が`HashAgg_6`に追加されます。クエリ結果の 2 つの警告は、集計関数をTiFlashに完全にプッシュダウンできないことを示しています。
+以下の例は、変数`tidb_opt_distinct_agg_push_down`を有効にする前と有効にした後のクエリ結果を示しています。この変数を有効にする前は、TiDB はTiFlashからすべてのデータを読み取り、TiDB 内で`distinct`を実行する必要があります。この変数を有効にすると、 `distinct a`がTiFlashにプッシュダウンされ、新しい`group by`列である`test.t.a`が`HashAgg_6`に追加されます。クエリ結果の 2つの警告は、集計関数をTiFlashに完全にプッシュダウンできないことを示しています。
 
 `tidb_opt_distinct_agg_push_down`が有効になる前:
 
@@ -304,7 +304,7 @@ mysql> explain analyze select max(l_shipdate), max(l_commitdate), max(l_receiptd
 set @@tidb_max_tiflash_threads = 20;
 ```
 
-以下の例は、 `tidb_max_tiflash_threads`を再設定する前後のクエリ結果を示しています。`tidb_max_tiflash_threads`を設定する前は、単一のTiFlashインスタンスに対するリクエスト実行の同時実行数は 8 スレッドです。クラスターには合計 3 つのTiFlashインスタンスがあるため、すべてのTiFlashインスタンスにおけるリクエスト実行のスレッド数の合計は 24 (8 × 3) です。`tidb_max_tiflash_threads`を`20`に設定すると、すべてのTiFlashインスタンスにおけるリクエスト実行のスレッド数の合計は 60 (20 × 3) になります。
+以下の例は、 `tidb_max_tiflash_threads`を再設定する前後のクエリ結果を示しています。`tidb_max_tiflash_threads`を設定する前は、単一のTiFlashインスタンスに対するリクエスト実行の同時実行数は 8 スレッドです。クラスターには合計 3つのTiFlashインスタンスがあるため、すべてのTiFlashインスタンスにおけるリクエスト実行のスレッド数の合計は 24 (8 × 3) です。`tidb_max_tiflash_threads`を`20`に設定すると、すべてのTiFlashインスタンスにおけるリクエスト実行のスレッド数の合計は 60 (20 × 3) になります。
 
 `tidb_max_tiflash_threads`が再構成される前:
 

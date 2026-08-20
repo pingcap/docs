@@ -207,7 +207,7 @@ TiDB バージョン: 4.0.9
         -   スキーマストレージがTiDB テーブルをキャッシュするときに、早期 GC または更新のレイテンシー`TableInfo`によって発生するレプリケーション中断の問題を修正しました。 [＃1114](https://github.com/pingcap/tiflow/pull/1114)
         -   DDL操作が頻繁に行われる場合にスキーマストレージのメモリ消費量が多すぎる問題を修正しました[＃1127](https://github.com/pingcap/tiflow/pull/1127)
         -   チェンジフィードが一時停止または停止したときのゴルーチンリークを修正[＃1075](https://github.com/pingcap/tiflow/pull/1075)
-        -   下流の Kafka サービスまたはネットワークジッターによるレプリケーションの中断を防ぐために、Kafka プロデューサーの最大再試行タイムアウトを 600 秒に増やします。 [＃1118](https://github.com/pingcap/tiflow/pull/1118)
+        -   下流の Kafka サービスまたはネットワークジッターによるレプリケーションの中断を防ぐために、Kafka プロデューサーの最大再試行タイムアウトを 600秒に増やします。 [＃1118](https://github.com/pingcap/tiflow/pull/1118)
         -   Kafka のバッチサイズが有効にならないバグを修正[＃1112](https://github.com/pingcap/tiflow/pull/1112)
         -   TiCDC と PD 間のネットワークにジッターがあり、一時停止中の変更フィードが同時に再開されると、一部のテーブルの行の変更が失われる可能性があるバグを修正しました[＃1213](https://github.com/pingcap/tiflow/pull/1213)
         -   TiCDCとPD間のネットワークが安定していない場合にTiCDCプロセスが終了する可能性があるバグを修正[＃1218](https://github.com/pingcap/tiflow/pull/1218)

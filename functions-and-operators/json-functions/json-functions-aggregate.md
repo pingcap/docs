@@ -15,7 +15,7 @@ TiDB は MySQL 8.0 で利用可能な[2つの集計JSON関数](https://dev.mysql
 
 例：
 
-ここでは、テーブルの 1 つの列にある 2 つの行が JSON 配列に集約されます。
+ここでは、テーブルの 1つの列にある 2つの行が JSON 配列に集約されます。
 
 ```sql
 SELECT JSON_ARRAYAGG(v) FROM (SELECT 1 'v' UNION SELECT 2);
@@ -36,7 +36,7 @@ SELECT JSON_ARRAYAGG(v) FROM (SELECT 1 'v' UNION SELECT 2);
 
 例：
 
-まず、2 つのテーブルを作成し、そこにいくつかの行を追加します。
+まず、2つのテーブルを作成し、そこにいくつかの行を追加します。
 
 ```sql
 CREATE TABLE plants (

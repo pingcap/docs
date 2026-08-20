@@ -9,7 +9,7 @@ summary: TiFlashクラスターを保守する際の一般的な操作を学習�
 
 ## TiFlashのバージョンを確認する {#check-the-tiflash-version}
 
-TiFlash のバージョンを確認するには、次の 2 つの方法があります。
+TiFlash のバージョンを確認するには、次の 2つの方法があります。
 
 -   TiFlashのバイナリファイル名が`tiflash`の場合、 `./tiflash version`コマンドを実行することでバージョンを確認できます。
 

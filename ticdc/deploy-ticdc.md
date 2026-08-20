@@ -106,7 +106,7 @@ TiCDCクラスタをアップグレードする際には、以下の点に注意
 
 ## TiUPを使用してTiCDCクラスタ構成を変更します。 {#modify-ticdc-cluster-configurations-using-tiup}
 
-このセクションでは[`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md)コマンドを使用して TiCDC の設定を変更する方法について説明します。次の例では、 `gc-ttl`のデフォルト値を`86400`から`172800` (48 時間) に変更する必要があると想定しています。
+このセクションでは[`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md)コマンドを使用して TiCDC の設定を変更する方法について説明します。次の例では、 `gc-ttl`のデフォルト値を`86400`から`172800` (48時間) に変更する必要があると想定しています。
 
 1.  `tiup cluster edit-config`コマンドを実行します。 `<cluster-name>`実際のクラスター名に置き換えてください。
 
@@ -127,7 +127,7 @@ TiCDCクラスタをアップグレードする際には、以下の点に注意
         gc-ttl: 172800
     ```
 
-    上記のコマンドでは、 `gc-ttl`が 48 時間に設定されています。
+    上記のコマンドでは、 `gc-ttl`が 48時間に設定されています。
 
 3.  `tiup cluster reload <cluster-name> -R cdc`コマンドを実行して設定を再読み込みします。
 

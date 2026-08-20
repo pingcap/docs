@@ -33,7 +33,7 @@ ResourceGroupName ::=
 
 ## 例 {#examples}
 
-ユーザー`user1`を作成し、2 つのリソース グループ`rg1`と`rg2`を作成し、ユーザー`user1`をリソース グループ`rg1`にバインドします。
+ユーザー`user1`を作成し、2つのリソース グループ`rg1`と`rg2`を作成し、ユーザー`user1`をリソース グループ`rg1`にバインドします。
 
 ```sql
 CREATE USER 'user1';

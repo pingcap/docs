@@ -94,7 +94,7 @@ CREATE SEQUENCE s1;
 Query OK, 0 rows affected (0.15 sec)
 ```
 
-次の SQL ステートメントを 2 回実行して、シーケンスから次の 2 つの値を取得します。
+次の SQL ステートメントを 2回実行して、シーケンスから次の 2つの値を取得します。
 
 ```sql
 SELECT NEXTVAL(s1);
@@ -132,7 +132,7 @@ ALTER SEQUENCE s1 INCREMENT=2;
 Query OK, 0 rows affected (0.18 sec)
 ```
 
-ここで、シーケンスから次の 2 つの値を再度取得します。
+ここで、シーケンスから次の 2つの値を再度取得します。
 
 ```sql
 SELECT NEXTVAL(s1);

@@ -210,7 +210,7 @@ FROM (
 
 例:
 
-次の例では、JSON ドキュメント内の 2 つの最上位キーを返します。
+次の例では、JSON ドキュメント内の 2つの最上位キーを返します。
 
 ```sql
 SELECT JSON_KEYS('{"name": {"first": "John", "last": "Doe"}, "type": "Person"}');
@@ -242,7 +242,7 @@ SELECT JSON_KEYS('{"name": {"first": "John", "last": "Doe"}, "type": "Person"}',
 
 ## `JSON_SEARCH()` {#json_search}
 
-`JSON_SEARCH(json_doc, one_or_all, str)`関数は、JSON ドキュメントで文字列の 1 つまたはすべての一致を検索します。
+`JSON_SEARCH(json_doc, one_or_all, str)`関数は、JSON ドキュメントで文字列の 1つまたはすべての一致を検索します。
 
 例:
 

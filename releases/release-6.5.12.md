@@ -52,7 +52,7 @@ TiDBバージョン: 6.5.12
     -   `CAST`関数が文字セットの明示的な設定をサポートしていない問題を修正しました [＃55677](https://github.com/pingcap/tidb/issues/55677) @[Defined2014](https://github.com/Defined2014)
     -   `LOAD DATA ... REPLACE INTO`操作でデータの不整合が発生する問題を修正[＃56408](https://github.com/pingcap/tidb/issues/56408) @[fzzf678](https://github.com/fzzf678)
     -   `ADD INDEX` を実行するときに TiDB がインデックスの長さ制限をチェックしない問題を修正しました [＃56930](https://github.com/pingcap/tidb/issues/56930) @[fzzf678](https://github.com/fzzf678)
-    -   共通テーブル式 (CTE) に複数のデータ コンシューマーがあり、1 つのコンシューマーがデータを読み取らずに終了した場合に発生する可能性のある無効なメモリアクセスの問題を修正しました[＃55881](https://github.com/pingcap/tidb/issues/55881) @[windtalker](https://github.com/windtalker)
+    -   共通テーブル式 (CTE) に複数のデータ コンシューマーがあり、1つのコンシューマーがデータを読み取らずに終了した場合に発生する可能性のある無効なメモリアクセスの問題を修正しました[＃55881](https://github.com/pingcap/tidb/issues/55881) @[windtalker](https://github.com/windtalker)
     -   `IndexMerge` を構築するときに一部の述語が失われる可能性がある問題を修正しました [＃58476](https://github.com/pingcap/tidb/issues/58476) @[hawkingrei](https://github.com/hawkingrei)
     -   `BIT`型から`CHAR`型にデータを変換すると TiKV パニックが発生する可能性がある問題を修正しました [＃56494](https://github.com/pingcap/tidb/issues/56494) @[lcwangchao](https://github.com/lcwangchao)
     -   `CREATE VIEW`ステートメントで変数またはパラメータを使用してもエラーが報告されない問題を修正[＃53176](https://github.com/pingcap/tidb/issues/53176) @[mjonss](https://github.com/mjonss)

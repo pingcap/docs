@@ -422,7 +422,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
     }
     ```
 
-    クラスターのステータスは`CREATING`です。この場合、ステータスが`AVAILABLE`に変わるまで待つ必要があります。これには通常、少なくとも 10 分かかります。
+    クラスターのステータスは`CREATING`です。この場合、ステータスが`AVAILABLE`に変わるまで待つ必要があります。これには通常、少なくとも 10分かかります。
 
 6.  最新の状態を確認したい場合は、 `terraform refresh`コマンドを実行して状態を更新した後、 `terraform state show tidbcloud_cluster.${resource-name}`コマンドを実行して状態を表示します。
 
@@ -535,7 +535,7 @@ TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次の�
 
     ```
 
-    上記の実行計画のように、 TiFlashが追加され、リソースが 1 つ変更されます。
+    上記の実行計画のように、 TiFlashが追加され、リソースが 1つ変更されます。
 
 3.  計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
 
@@ -592,7 +592,7 @@ TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次の�
 
 1.  [クラスターを作成する](#create-a-cluster-using-the-cluster-resource)際に使用される`cluster.tf`ファイルで、 `components`構成を編集します。
 
-    たとえば、TiDB 用にさらに 1 つのノード、TiKV 用にさらに 3 つのノード (TiKV ノードの数は、ステップが 3 であるため 3 の倍数である必要があります。[クラスタ仕様からこの情報を取得](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)することができます)、およびTiFlash用にさらに 1 つのノードを追加するには、次のように構成を編集します。
+    たとえば、TiDB 用にさらに 1つのノード、TiKV 用にさらに 3つのノード (TiKV ノードの数は、ステップが 3 であるため 3 の倍数である必要があります。[クラスタ仕様からこの情報を取得](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)することができます)、およびTiFlash用にさらに 1つのノードを追加するには、次のように構成を編集します。
 
             components = {
               tidb = {

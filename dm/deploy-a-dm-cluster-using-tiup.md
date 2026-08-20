@@ -47,7 +47,7 @@ TiUPはDM v2.0以降のバージョンの導入をサポートしています。
 
 コマンド`tiup dm template > topology.yaml`を使用すると、構成ファイル テンプレートをすばやく生成できます。
 
-3 つの DM マスター、3 つの DM ワーカー、および 1 つの監視コンポーネントインスタンスを展開する構成は次のとおりです。
+3つの DM マスター、3つの DM ワーカー、および 1つの監視コンポーネントインスタンスを展開する構成は次のとおりです。
 
 ```yaml
 # The global variables apply to all other components in the configuration. If one specific value is missing in the component instance, the corresponding global variable serves as the default value.

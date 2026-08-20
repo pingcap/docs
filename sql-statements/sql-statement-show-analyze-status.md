@@ -9,7 +9,7 @@ summary: TiDB データベースの SHOW ANALYZE STATUS の使用法の概要。
 
 TiDB v6.1.0以降、 `SHOW ANALYZE STATUS`ステートメントはクラスターレベルのタスクの表示をサポートします。TiDBの再起動後でも、このステートメントを使用して再起動前のタスクレコードを表示できます。TiDB v6.1.0より前のバージョンでは、 `SHOW ANALYZE STATUS`ステートメントはインスタンスレベルのタスクのみを表示でき、タスクレコードはTiDBの再起動後に消去されます。
 
-TiDB v6.1.0 以降では、システム テーブル`mysql.analyze_jobs`を通じて過去 7 日間の履歴タスクを表示できます。
+TiDB v6.1.0 以降では、システム テーブル`mysql.analyze_jobs`を通じて過去 7日間の履歴タスクを表示できます。
 
 TiDB v7.3.0 以降では、システム テーブル`mysql.analyze_jobs`または`SHOW ANALYZE STATUS`を通じて現在の`ANALYZE`タスクの進行状況を表示できます。
 

@@ -145,9 +145,9 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 
 1.  3つのノードでKRaft Kafkaクラスターをセットアップします。各ノードはブローカーとコントローラーの両方の役割を果たします。各ブローカーノードに対して、以下の手順を実行します。
 
-    1.  `listeners`を構成します。3 つのブローカーはすべて同じであり、ブローカーとコントローラーのロールとして機能します。
+    1.  `listeners`を構成します。3つのブローカーはすべて同じであり、ブローカーとコントローラーのロールとして機能します。
         1.  すべての**コントローラー**ロールノードに同じ CONTROLLER リスナーを設定します。ブローカーロールノードのみを追加する場合は、 `server.properties`の CONTROLLER リスナーを省略できます。
-        2.  2 つのブローカー リスナーを構成します。内部 Kafka クライアント アクセス用の**INTERNAL**と、 TiDB Cloudからのアクセス用の**EXTERNAL です**。
+        2.  2つのブローカー リスナーを構成します。内部 Kafka クライアント アクセス用の**INTERNAL**と、 TiDB Cloudからのアクセス用の**EXTERNAL です**。
 
     2.  `advertised.listeners`については、次の操作を行います。
         1.  ブローカー ノードの内部 IP アドレスを使用して、各ブローカーの内部アドバタイズ リスナーを構成します。これにより、内部 Kafka クライアントはアドバタイズ アドレスを介してブローカーに接続できるようになります。
@@ -392,7 +392,7 @@ Kafka クラスターが TiDB クラスターと同じリージョンにデプ�
     listener.security.protocol.map=...,EXTERNAL:PLAINTEXT
     ```
 
-3.  すべてのブローカーを再構成したら、Kafka ブローカーを 1 つずつ再起動します。
+3.  すべてのブローカーを再構成したら、Kafka ブローカーを 1つずつ再起動します。
 
 **2. 内部ネットワークで外部リスナーの設定をテストする**
 
@@ -444,13 +444,13 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
     -   **課題**： `Dynamic`
     -   **Availability zone**: `Zone-redundant`
 
-4.  **Backend pools**タブで、次の 3 つのバックエンド プールを追加し、 **Next : Inbound rules**をクリックします。
+4.  **Backend pools**タブで、次の 3つのバックエンド プールを追加し、 **Next : Inbound rules**をクリックします。
 
     -   名前: `pool1` ; バックエンド プールコンフィグレーション: `NIC` ; IP 構成: `broker-node-1`
     -   名前: `pool2` ; バックエンド プールコンフィグレーション: `NIC` ; IP 構成: `broker-node-2`
     -   名前: `pool3` ; バックエンド プールコンフィグレーション: `NIC` ; IP 構成: `broker-node-3`
 
-5.  **Inbound rules**タブで、次の 3 つの負荷分散規則を追加します。
+5.  **Inbound rules**タブで、次の 3つの負荷分散規則を追加します。
 
     1.  ルール1
 
@@ -535,7 +535,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 ## FAQ {#faq}
 
-### 2 つの異なるTiDB Cloudプロジェクトから同じ Kafka Private Link サービスに接続するにはどうすればよいですか? {#how-to-connect-to-the-same-kafka-private-link-service-from-two-different-tidb-cloud-projects}
+### 2つの異なるTiDB Cloudプロジェクトから同じ Kafka Private Link サービスに接続するにはどうすればよいですか? {#how-to-connect-to-the-same-kafka-private-link-service-from-two-different-tidb-cloud-projects}
 
 このドキュメントの手順に従って最初のプロジェクトからの接続をすでに正常に設定している場合は、次のようにして 2 番目のプロジェクトから同じ Kafka Private Link サービスに接続できます。
 

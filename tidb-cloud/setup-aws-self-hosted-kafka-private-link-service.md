@@ -19,7 +19,7 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
 
 ![Connect to AWS Self-Hosted Kafka Private Link Service](/media/tidb-cloud/changefeed/connect-to-aws-self-hosted-kafka-privatelink-service.jpeg)
 
-このドキュメントでは、AWS の 3 つのアベイラビリティゾーン (AZ) にデプロイされた Kafka Private Link サービスへの接続例を示します。同様のポートマッピング原則に基づいて他の構成も可能ですが、このドキュメントでは Kafka Private Link サービスの基本的な設定手順について説明します。本番環境では、運用の保守性と可観測性を強化した、より耐障害性の高い Kafka Private Link サービスの使用をお勧めします。
+このドキュメントでは、AWS の 3つのアベイラビリティゾーン (AZ) にデプロイされた Kafka Private Link サービスへの接続例を示します。同様のポートマッピング原則に基づいて他の構成も可能ですが、このドキュメントでは Kafka Private Link サービスの基本的な設定手順について説明します。本番環境では、運用の保守性と可観測性を強化した、より耐障害性の高い Kafka Private Link サービスの使用をお勧めします。
 
 ## 前提条件 {#prerequisites}
 
@@ -98,8 +98,8 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
 
 Kafka VPC には次のものが必要です。
 
--   ブローカー用のプライベート サブネットが 3 つ (AZ ごとに 1 つ)。
--   任意の AZ に 1 つのパブリックサブネットがあり、インターネットに接続できる要塞ノードと 3 つのプライベートサブネットがあるため、Kafka クラスターを簡単にセットアップできます。本番環境では、Kafka VPC に接続できる独自の要塞ノードが必要になる場合があります。
+-   ブローカー用のプライベート サブネットが 3つ (AZ ごとに 1つ)。
+-   任意の AZ に 1つのパブリックサブネットがあり、インターネットに接続できる要塞ノードと 3つのプライベートサブネットがあるため、Kafka クラスターを簡単にセットアップできます。本番環境では、Kafka VPC に接続できる独自の要塞ノードが必要になる場合があります。
 
 サブネットを作成する前に、AZ IDとAZ名のマッピングに基づいてAZ内にサブネットを作成します。以下のマッピングを例に挙げます。
 
@@ -200,7 +200,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 **2.2. ブローカーノードを作成する**
 
-[EC2 リストページ](https://console.aws.amazon.com/ec2/home#Instances:)に進みます。ブローカー サブネットに、各 AZ に 1 つずつ、合計 3 つのブローカー ノードを作成します。
+[EC2 リストページ](https://console.aws.amazon.com/ec2/home#Instances:)に進みます。ブローカー サブネットに、各 AZ に 1つずつ、合計 3つのブローカー ノードを作成します。
 
 -   サブネット`broker-usw2-az1`のブローカー 1
 
@@ -298,10 +298,10 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 各ノードはブローカーとコントローラーの役割を担います。各ブローカーに対して以下の操作を実行してください。
 
-1.  `listeners`項目の場合、3 つのブローカーはすべて同じであり、ブローカーとコントローラーのロールとして機能します。
+1.  `listeners`項目の場合、3つのブローカーはすべて同じであり、ブローカーとコントローラーのロールとして機能します。
 
     1.  すべての**コントローラー**ロールノードに同じ CONTROLLER リスナーを設定します。**ブローカー**ロールノードのみを追加する場合は、 `server.properties`の CONTROLLER リスナーは必要ありません。
-    2.  **ブローカー**リスナーを 2 つ構成します。`INTERNAL`は内部アクセス用、 `EXTERNAL`はTiDB Cloudからの外部アクセス用です。
+    2.  **ブローカー**リスナーを 2つ構成します。`INTERNAL`は内部アクセス用、 `EXTERNAL`はTiDB Cloudからの外部アクセス用です。
 
 2.  `advertised.listeners`項目については、次の操作を行います。
 
@@ -629,7 +629,7 @@ Kafka クラスターが TiDB インスタンスと同じリージョンおよ�
     listener.security.protocol.map=...,EXTERNAL:PLAINTEXT
     ```
 
-3.  すべてのブローカーを再構成したら、Kafka ブローカーを 1 つずつ再起動します。
+3.  すべてのブローカーを再構成したら、Kafka ブローカーを 1つずつ再起動します。
 
 #### 2. 内部ネットワークで外部リスナーの設定をテストする {#2-test-external-listener-settings-in-your-internal-network}
 
@@ -674,7 +674,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 
 ロードバランサーを設定するには、次の手順を実行します。
 
-1.  [対象グループ](https://console.aws.amazon.com/ec2/home#CreateTargetGroup:)に進み、4 つのターゲット グループを作成します。
+1.  [対象グループ](https://console.aws.amazon.com/ec2/home#CreateTargetGroup:)に進み、4つのターゲット グループを作成します。
 
     -   ブートストラップターゲットグループ
 
@@ -776,10 +776,10 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 
 2.  **Configure the changefeed target > Connectivity Method > Private Link**に進むときは、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
 
-    -   **Kafka Type**: `3 AZs`。クラスターが同じ 3 つの AZ にデプロイされていることを確認します。
+    -   **Kafka Type**: `3 AZs`。クラスターが同じ 3つの AZ にデプロイされていることを確認します。
     -   **Kafka Advertised Listener Pattern**: `abc` 。これは、 [前提条件](#prerequisites)で**Kafka Advertised Listener Pattern**を生成するために使用する一意のランダム文字列と同じです。
     -   **Endpoint Service Name**: Kafka サービス名。
-    -   **Bootstrap Ports**: `9092`。背後に専用のブートストラップ ターゲット グループを構成するため、1 つのポートで十分です。
+    -   **Bootstrap Ports**: `9092`。背後に専用のブートストラップ ターゲット グループを構成するため、1つのポートで十分です。
 
 3.  [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)の手順に進みます。
 
@@ -787,7 +787,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 
 ## FAQ {#faq}
 
-### 2 つの異なるTiDB Cloudプロジェクトから同じ Kafka Private Link サービスに接続するにはどうすればよいですか? {#how-to-connect-to-the-same-kafka-private-link-service-from-two-different-tidb-cloud-projects}
+### 2つの異なるTiDB Cloudプロジェクトから同じ Kafka Private Link サービスに接続するにはどうすればよいですか? {#how-to-connect-to-the-same-kafka-private-link-service-from-two-different-tidb-cloud-projects}
 
 このドキュメントに従って最初のプロジェクトからの接続をすでに正常に設定している場合は、次のようにして 2 番目のプロジェクトから同じ Kafka Private Link サービスに接続できます。
 

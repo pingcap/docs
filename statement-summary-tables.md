@@ -40,7 +40,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 ここでいう「プランダイジェスト」とは、正規化された実行計画によって計算される一意の識別子を指します。正規化処理では定数は無視されます。同じSQL文でも実行計画が異なる場合があるため、異なるカテゴリに分類されることがあります。同じカテゴリのSQL文は、同じ実行計画を持ちます。
 
-`statements_summary`は、SQL モニタリング メトリックの集計結果が格納されます。一般的に、各モニタリング メトリックには、最大値と平均値が含まれます。たとえば、実行レイテンシーメトリックは、 `AVG_LATENCY` (平均レイテンシー) と`MAX_LATENCY` (最大レイテンシー) の 2 つのフィールドに対応します。
+`statements_summary`は、SQL モニタリング メトリックの集計結果が格納されます。一般的に、各モニタリング メトリックには、最大値と平均値が含まれます。たとえば、実行レイテンシーメトリックは、 `AVG_LATENCY` (平均レイテンシー) と`MAX_LATENCY` (最大レイテンシー) の 2つのフィールドに対応します。
 
 監視メトリクスが最新の状態であることを確認するため、 `statements_summary`テーブルのデータは定期的にクリアされ、最新の集計結果のみが保持されて表示されます。定期的なデータクリアは、 `tidb_stmt_summary_refresh_interval`システム変数によって制御されます。クリア直後にクエリを実行すると、表示されるデータが非常に少なくなる場合があります。
 
@@ -154,11 +154,11 @@ set global tidb_stmt_summary_refresh_interval = 1800;
 set global tidb_stmt_summary_history_size = 24;
 ```
 
-前述の設定が有効になると、 `statements_summary`テーブルは 30 分ごとにクリアされ、 `statements_summary_history`テーブルには最大 3000 種類の SQL ステートメントが格納されます。各タイプについて、 `statements_summary_history`テーブルには直近 24 期間のデータが格納されます。 `statements_summary_evicted`テーブルには、ステートメント サマリーから SQL ステートメントが削除された直近 24 期間が記録されます。 `statements_summary_evicted`テーブルは 30 分ごとに更新されます。
+前述の設定が有効になると、 `statements_summary`テーブルは 30分ごとにクリアされ、 `statements_summary_history`テーブルには最大 3000種類の SQL ステートメントが格納されます。各タイプについて、 `statements_summary_history`テーブルには直近 24 期間のデータが格納されます。 `statements_summary_evicted`テーブルには、ステートメント サマリーから SQL ステートメントが削除された直近 24 期間が記録されます。 `statements_summary_evicted`テーブルは 30分ごとに更新されます。
 
 > **Note:**
 >
-> -   SQL タイプが毎分出現する場合、 `statements_summary_history`には直近 12 時間分のデータが格納されます。SQL タイプが毎日 00:00 から 00:30 の間にのみ出現する場合、 `statements_summary_history`には直近 24 期間分のデータが格納されます。各期間は 1 日です。したがって、 `statements_summary_history`にはこの SQL タイプに関する直近 24 日分のデータが格納されます。
+> -   SQL タイプが毎分出現する場合、 `statements_summary_history`には直近 12時間分のデータが格納されます。SQL タイプが毎日 00:00 から 00:30 の間にのみ出現する場合、 `statements_summary_history`には直近 24 期間分のデータが格納されます。各期間は 1日です。したがって、 `statements_summary_history`にはこの SQL タイプに関する直近 24日分のデータが格納されます。
 > -   `tidb_stmt_summary_history_size` 、 `tidb_stmt_summary_max_stmt_count` 、および`tidb_stmt_summary_max_sql_length`構成項目はメモリ使用量に影響します。これらの構成は、ニーズ、SQLサイズ、SQL数、およびマシン構成に基づいて調整することをお勧めします。大きすぎる値を設定することはお勧めしません。メモリ使用量は`tidb_stmt_summary_history_size` * `tidb_stmt_summary_max_stmt_count` * `tidb_stmt_summary_max_sql_length` * `3` 。
 
 ### 明細書の要約に適切なサイズを設定してください。 {#set-a-proper-size-for-statement-summary}
@@ -257,7 +257,7 @@ tidb_stmt_summary_enable_persistent = true
 
 > **Note:**
 >
-> -   ステートメントサマリーの永続化が有効になっている場合、メモリが履歴データを保持しないため、[パラメータ設定](#parameter-configuration)セクションで説明されている`tidb_stmt_summary_history_size`構成は無効になります。代わりに、永続化のための履歴データの保持期間とサイズを制御するために、次の 3 つの構成が使用されます[`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660) 、 [`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660) 、および[`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660) 。
+> -   ステートメントサマリーの永続化が有効になっている場合、メモリが履歴データを保持しないため、[パラメータ設定](#parameter-configuration)セクションで説明されている`tidb_stmt_summary_history_size`構成は無効になります。代わりに、永続化のための履歴データの保持期間とサイズを制御するために、次の 3つの構成が使用されます[`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660) 、 [`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660) 、および[`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660) 。
 > -   `tidb_stmt_summary_refresh_interval`の値が小さいほど、ディスクに書き込まれるデータ量は多くなります。しかし、これは同時に、ディスクに書き込まれる冗長なデータ量も多くなることを意味します。
 
 </CustomContent>
@@ -327,7 +327,7 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
 -   `QUERY_SAMPLE_TEXT` : SQLカテゴリの元のSQLステートメント。元のステートメントは1つだけ取得されます。
 -   `TABLE_NAMES` : SQL ステートメントに関係するすべてのテーブル。テーブルが複数ある場合は、それぞれをカンマで区切ります。
 -   `INDEX_NAMES` : SQL文で使用されるすべてのSQLインデックス。インデックスが複数ある場合は、それぞれをカンマで区切ります。
--   `SAMPLE_USER` : このカテゴリの SQL ステートメントを実行するユーザー。1 人のユーザーのみが対象となります。
+-   `SAMPLE_USER` : このカテゴリの SQL ステートメントを実行するユーザー。1人のユーザーのみが対象となります。
 -   `PLAN_DIGEST` : 実行計画の概要。
 -   `PLAN` : 元の実行計画。複数のステートメントがある場合は、1つのステートメントのプランのみが使用されます。
 -   `BINARY_PLAN` : バイナリ形式でエンコードされた元の実行計画。複数のステートメントがある場合は、1つのステートメントのプランのみが使用されます。特定の実行計画を解析するには、 [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan)ステートメントを実行してください。

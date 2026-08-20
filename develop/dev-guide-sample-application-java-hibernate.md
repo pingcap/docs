@@ -260,7 +260,7 @@ public SessionFactory getSessionFactory() {
 }
 ```
 
-この関数を使用する際は、 `${your_entity_class}`独自のデータエンティティクラスに置き換える必要があります。複数のエンティティクラスを使用する場合は、それぞれに`.addAnnotatedClass(${your_entity_class})`ステートメントを追加する必要があります。上記の関数は、Hibernate を設定する方法の 1 つにすぎません。設定で問題が発生した場合、または Hibernate についてさらに詳しく知りたい場合は、 [Hibernateの公式ドキュメント](https://hibernate.org/orm/documentation)を参照してください。
+この関数を使用する際は、 `${your_entity_class}`独自のデータエンティティクラスに置き換える必要があります。複数のエンティティクラスを使用する場合は、それぞれに`.addAnnotatedClass(${your_entity_class})`ステートメントを追加する必要があります。上記の関数は、Hibernate を設定する方法の 1つにすぎません。設定で問題が発生した場合、または Hibernate についてさらに詳しく知りたい場合は、 [Hibernateの公式ドキュメント](https://hibernate.org/orm/documentation)を参照してください。
 
 ### データを挿入または更新する {#insert-or-update-data}
 

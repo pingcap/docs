@@ -107,7 +107,7 @@ nohup tiup tidb-lightning -config tidb-lightning-schema.toml > nohup.out 2>&1 &
     1 row in set (0.012 sec)
     ```
 
-2.  Amazon Auroraスナップショットをエクスポートします。詳細な手順については、 [DBスナップショットデータをAmazon S3にエクスポートする](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html)を参照してください。binlogの位置を取得したら、5 分以内にスナップショットをエクスポートします。そうしないと、記録されたbinlogの位置が古くなり、増分レプリケーション中にデータの競合が発生する可能性があります。
+2.  Amazon Auroraスナップショットをエクスポートします。詳細な手順については、 [DBスナップショットデータをAmazon S3にエクスポートする](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html)を参照してください。binlogの位置を取得したら、5分以内にスナップショットをエクスポートします。そうしないと、記録されたbinlogの位置が古くなり、増分レプリケーション中にデータの競合が発生する可能性があります。
 
 #### 2.2 データファイル用のTiDB Lightning構成ファイルを作成する {#2-2-create-the-tidb-lightning-configuration-file-for-the-data-file}
 
@@ -162,7 +162,7 @@ TiDBクラスターでTLSを有効にする必要がある場合は、 [TiDB Lig
 
 2.  インポートが開始された後、以下のいずれかの方法でインポートの進行状況を確認できます。
 
-    -   ログ内のキーワード`progress`を`grep`することで、インポートの進行状況を確認できます。進行状況は、デフォルトでは 5 分ごとに更新されます。
+    -   ログ内のキーワード`progress`を`grep`することで、インポートの進行状況を確認できます。進行状況は、デフォルトでは 5分ごとに更新されます。
     -   [モニタリングダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進捗状況を確認します。
 
 3.  TiDB Lightning はインポートが完了すると自動的に終了します。`tidb-lightning.log`の最後の行に`the whole procedure completed`が含まれているかどうかを確認してください。含まれている場合はインポートが成功しています。含まれていない場合は、インポート中にエラーが発生しました。エラーメッセージの指示に従ってエラーに対処してください。

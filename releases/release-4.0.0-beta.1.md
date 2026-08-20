@@ -70,7 +70,7 @@ TiDB Ansible バージョン: 4.0.0-beta.1
     -   Drainer の増分バックアップ データの削除をサポート [＃885](https://github.com/pingcap/tidb-binlog/pull/885)
 
 -   TiDB Ansible
-    -   1 つのクラスターに複数の Grafana/Prometheus/Alertmanager をデプロイすることをサポート[＃1142](https://github.com/pingcap/tidb-ansible/pull/1142)
+    -   1つのクラスターに複数の Grafana/Prometheus/Alertmanager をデプロイすることをサポート[＃1142](https://github.com/pingcap/tidb-ansible/pull/1142)
     -   TiFlashの設定ファイルに`metric_port`設定項目（デフォルトでは`8234` ）を追加します。 [＃1145](https://github.com/pingcap/tidb-ansible/pull/1145)
     -   TiFlashの設定ファイルに`flash_proxy_status_port`設定項目（デフォルトでは`20292` ）を追加します。 [＃1141](https://github.com/pingcap/tidb-ansible/pull/1141)
     -   TiFlash監視ダッシュボードを追加する[＃1147](https://github.com/pingcap/tidb-ansible/pull/1147) [＃1151](https://github.com/pingcap/tidb-ansible/pull/1151)

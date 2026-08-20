@@ -89,7 +89,7 @@ TiDBは、テーブルへの変更回数に基づいて、自動的に[`ANALYZE`
 
 ヒストグラムは、データの分布を近似的に表現したものです。値の全範囲を複数のバケットに分割し、各バケットに含まれる値の数など、単純なデータを用いて各バケットを記述します。TiDBでは、各テーブルの特定の列に対して等深ヒストグラムが作成されます。この等深ヒストグラムは、区間クエリの推定に利用できます。
 
-ここで「等深」とは、各バケットに入る値の数が可能な限り均等になることを意味します。たとえば、与えられたセット {1.6, 1.9, 1.9, 2.0, 2.4, 2.6, 2.7, 2.7, 2.8, 2.9, 3.4, 3.5} に対して、4 つのバケットを生成したいとします。等深ヒストグラムは次のようになります。これには [1.6, 1.9]、[2.0, 2.6]、[2.7, 2.8]、[2.9, 3.5] の 4 つのバケットが含まれます。バケットの深さは 3 です。
+ここで「等深」とは、各バケットに入る値の数が可能な限り均等になることを意味します。たとえば、与えられたセット {1.6, 1.9, 1.9, 2.0, 2.4, 2.6, 2.7, 2.7, 2.8, 2.9, 3.4, 3.5} に対して、4つのバケットを生成したいとします。等深ヒストグラムは次のようになります。これには [1.6, 1.9]、[2.0, 2.6]、[2.7, 2.8]、[2.9, 3.5] の 4つのバケットが含まれます。バケットの深さは 3 です。
 
 ![Equal-depth Histogram Example](/media/statistics-1.png)
 
@@ -106,7 +106,7 @@ Count-Min Sketch はハッシュ構造です。 `a = 1`や`IN`クエリ (例え�
 Count-Min Sketch はハッシュ構造であるため、ハッシュ衝突が発生する可能性があります。[`EXPLAIN`](/sql-statements/sql-statement-explain.md)ステートメントにおいて、同等のクエリの推定値が実際の値から大きく乖離する場合、より大きな値とより小さな値がハッシュ化されているとみなすことができます。この場合、ハッシュ衝突を回避するために、以下のいずれかの方法を取ることができます。
 
 -   `WITH NUM TOPN`パラメータを変更します。TiDB は、高頻度 (上位 x) のデータを別々に格納し、その他のデータは Count-Min Sketch に格納します。そのため、より大きな値とより小さな値が一緒にハッシュ化されるのを防ぐには、 `WITH NUM TOPN`の値を増やすことができます。TiDB では、デフォルト値は 20 です。最大値は 1024 です。このパラメータの詳細については、 [手動収集](#manual-collection)を参照してください。
--   `WITH NUM CMSKETCH DEPTH`と`WITH NUM CMSKETCH WIDTH`の 2 つのパラメータを変更します。どちらもハッシュ バケットの数と衝突確率に影響します。実際のシナリオに応じて 2 つのパラメータの値を適切に増やすことでハッシュ衝突の確率を減らすことができますが、統計情報のメモリ使用量が増加します。TiDB では、 `WITH NUM CMSKETCH DEPTH`のデフォルト値は 5、 `WITH NUM CMSKETCH WIDTH`のデフォルト値は 2048 です。2 つのパラメータの詳細については、 [手動収集](#manual-collection)を参照してください。
+-   `WITH NUM CMSKETCH DEPTH`と`WITH NUM CMSKETCH WIDTH`の 2つのパラメータを変更します。どちらもハッシュ バケットの数と衝突確率に影響します。実際のシナリオに応じて 2つのパラメータの値を適切に増やすことでハッシュ衝突の確率を減らすことができますが、統計情報のメモリ使用量が増加します。TiDB では、 `WITH NUM CMSKETCH DEPTH`のデフォルト値は 5、 `WITH NUM CMSKETCH WIDTH`のデフォルト値は 2048 です。2つのパラメータの詳細については、 [手動収集](#manual-collection)を参照してください。
 
 ### トップN {#top-n}
 
@@ -165,7 +165,7 @@ TiDB が SQL ステートメントを実行する際、オプティマイザは�
 
     <CustomContent platform="tidb-cloud">
 
-    TiDB は常に`PREDICATE COLUMNS`情報を[`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables)システム テーブルに 300 秒ごとに書き込みます。
+    TiDB は常に`PREDICATE COLUMNS`情報を[`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables)システム テーブルに 300秒ごとに書き込みます。
 
     </CustomContent>
 
@@ -233,7 +233,7 @@ TiDBは、統計情報の収集パフォーマンスを向上させるための2
 
 ### 統計サンプリング {#statistics-sampling}
 
-サンプリングは`ANALYZE`ステートメントの 2 つのオプションで利用可能であり、それぞれ異なる収集アルゴリズムに対応しています。
+サンプリングは`ANALYZE`ステートメントの 2つのオプションで利用可能であり、それぞれ異なる収集アルゴリズムに対応しています。
 
 -   `WITH NUM SAMPLES`は、TiDB のリザーバーサンプリング方式で実装されているサンプリングセットのサイズを指定します。テーブルが大きい場合、この方式を使用して統計情報を収集することは推奨されません。リザーバーサンプリングの中間結果セットには冗長な結果が含まれるため、メモリなどのリソースに余分な負荷がかかります。
 -   `WITH FLOAT_NUM SAMPLERATE`は、v5.3.0 で導入されたサンプリング方法です。値の範囲`(0, 1]`を指定することで、サンプリングレートを設定できます。TiDB ではベルヌーイサンプリング方式で実装されており、大規模なテーブルのサンプリングに適しており、収集効率とリソース使用量の面で優れたパフォーマンスを発揮します。
@@ -364,7 +364,7 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 >
 > v8.5.6 以降、統計バージョン 1 ( `tidb_analyze_version = 1` ) は非推奨となり、将来のリリースでは削除される予定です。統計バージョン 2 ( `tidb_analyze_version = 2` ) および[統計バージョン1を使用している既存のオブジェクトをバージョン2に移行する](#switch-between-statistics-versions)ことをお勧めします。
 
-[`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)変数は、TiDB によって収集される統計情報を制御します。現在、TiDB は`tidb_analyze_version = 1`と`tidb_analyze_version = 2` 2 つの統計バージョンをサポートしています。
+[`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)変数は、TiDB によって収集される統計情報を制御します。現在、TiDB は`tidb_analyze_version = 1`と`tidb_analyze_version = 2` 2つの統計バージョンをサポートしています。
 
 -   TiDB Self-Managedの場合、v5.3.0以降、この変数のデフォルト値が`1`から`2`に変更されます。
 -   TiDB Cloudの場合、v6.5.0 以降、この変数のデフォルト値が`1`から`2`に変更されます。
@@ -419,7 +419,7 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 
 TiDB v6.1.0 以降では、 `SHOW ANALYZE STATUS`ステートメントでクラスタレベルのタスクを表示できるようになりました。TiDB を再起動した後でも、このステートメントを使用すれば再起動前のタスクレコードを表示できます。TiDB v6.1.0 より前では、 `SHOW ANALYZE STATUS`ステートメントではインスタンスレベルのタスクしか表示できず、TiDB の再起動後にタスクレコードはクリアされていました。
 
-`SHOW ANALYZE STATUS`には、最新のタスク記録のみが表示されます。TiDB v6.1.0 以降では、システムテーブル`mysql.analyze_jobs`を通じて、過去 7 日間の履歴タスクを表示できます。
+`SHOW ANALYZE STATUS`には、最新のタスク記録のみが表示されます。TiDB v6.1.0 以降では、システムテーブル`mysql.analyze_jobs`を通じて、過去 7日間の履歴タスクを表示できます。
 
 [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)が設定されていて、TiDB のバックグラウンドで実行されている自動`ANALYZE`タスクがこのしきい値を超えるメモリを使用している場合、タスクは再試行されます。失敗したタスクと再試行されたタスクは`SHOW ANALYZE STATUS`ステートメントの出力で確認できます。
 

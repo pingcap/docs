@@ -122,7 +122,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-過去 5 回のパスワードの再利用を許可しないユーザーを作成します。
+過去 5回のパスワードの再利用を許可しないユーザーを作成します。
 
 ```sql
 CREATE USER 'newuser8'@'%' PASSWORD HISTORY 5;

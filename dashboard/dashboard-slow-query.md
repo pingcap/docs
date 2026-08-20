@@ -68,7 +68,7 @@ TiDB Dashboardの「スロークエリ」ページでは、クラスタ内のす
 
 ### 実行計画 {#execution-plans}
 
-TiDB Dashboardでは、表、テキスト、グラフの 3 つの方法で実行計画を表示できます。実行計画の読み方については、[クエリ実行計画を理解する](/explain-overview.md)を参照してください。
+TiDB Dashboardでは、表、テキスト、グラフの 3つの方法で実行計画を表示できます。実行計画の読み方については、[クエリ実行計画を理解する](/explain-overview.md)を参照してください。
 
 #### 実行計画を表形式で表示 {#execution-plan-in-table-format}
 

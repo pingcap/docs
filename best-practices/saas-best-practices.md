@@ -37,7 +37,7 @@ TiKV および PD に推奨されるハードウェア構成は次のとおり�
 -   TiDB v8.4.0 以降、TiDB は SQL 実行中に、SQL ステートメントに関連するテーブル情報をオンデマンドで Infoschema キャッシュにロードします。
 
     -   TiDB ダッシュボードの**「スキーマ ロード」**パネルの下にある**「Infoschema v2 キャッシュ サイズ」**サブパネルと**「Infoschema v2 キャッシュ操作」**サブパネルを観察することで、Infoschema キャッシュのサイズとヒット率を監視できます。
-    -   システム変数[`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)を使用すると、ビジネスニーズに合わせて Infoschema キャッシュのメモリ制限を調整できます。Infoschema キャッシュのサイズは、SQL 実行に関係するテーブルの数に比例します。実際のテストでは、100 万テーブル（各テーブルに 4 つの列、1 つの主キー、1 つのインデックス）のメタデータを完全にキャッシュするには、約 2.4 GiB のメモリが必要です。
+    -   システム変数[`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)を使用すると、ビジネスニーズに合わせて Infoschema キャッシュのメモリ制限を調整できます。Infoschema キャッシュのサイズは、SQL 実行に関係するテーブルの数に比例します。実際のテストでは、100 万テーブル（各テーブルに 4つの列、1つの主キー、1つのインデックス）のメタデータを完全にキャッシュするには、約 2.4 GiB のメモリが必要です。
 
 -   TiDB は、SQL 実行中に、SQL ステートメントに関係するテーブル統計をオンデマンドで統計キャッシュに読み込みます。
 
@@ -64,7 +64,7 @@ TiKV および PD に推奨されるハードウェア構成は次のとおり�
     SELECT COUNT(*) FROM information_schema.tables;
     ```
 
--   次の SQL ステートメントの実行には約 20 分かかります。
+-   次の SQL ステートメントの実行には約 20分かかります。
 
     ```sql
     SELECT COUNT(*) FROM information_schema.views;

@@ -487,7 +487,7 @@ TiCDC は`BOOTSTRAP`イベントを次の JSON 形式でエンコードします
 
 ### WATERMARK {#watermark}
 
--   生成時間: TiCDC は、変更フィードのレプリケーションの進行状況を示すために、定期的に`WATERMARK`イベントを送信します。現在の間隔は 1 秒です。
+-   生成時間: TiCDC は、変更フィードのレプリケーションの進行状況を示すために、定期的に`WATERMARK`イベントを送信します。現在の間隔は 1秒です。
 -   宛先: TiCDC は、対応するトピックのすべてのパーティションに`WATERMARK`イベントを送信します。
 
 ### BOOTSTRAP {#bootstrap}
@@ -508,7 +508,7 @@ TiCDC SimpleプロトコルはDMLメッセージの送信時にテーブルの�
 -   各 DDL メッセージには、DDL イベントの前後のテーブルのスキーマ情報をマークするための`tableSchema`フィールドと`preTableSchema`フィールドが含まれています。
 -   各 BOOTSTRAP メッセージには、BOOTSTRAP メッセージに対応するテーブルのスキーマ情報をマークするための`tableSchema`フィールドが含まれています。
 
-消費方法を次の 2 つのシナリオで紹介します。
+消費方法を次の 2つのシナリオで紹介します。
 
 ### シナリオ1: コンシューマーが最初から消費を始める {#scenario-1-the-consumer-starts-consuming-from-the-beginning}
 

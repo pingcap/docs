@@ -26,7 +26,7 @@ AlterTableCompactStmt ::=
 
 ### テーブル内のコンパクトなTiFlashレプリカ {#compact-tiflash-replicas-in-a-table}
 
-以下は、2 つのTiFlashレプリカを持つ 4 つのパーティションを持つ`employees`テーブルを例として示します。
+以下は、2つのTiFlashレプリカを持つ 4つのパーティションを持つ`employees`テーブルを例として示します。
 
 ```sql
 CREATE TABLE employees (
@@ -43,7 +43,7 @@ PARTITION BY LIST (store_id) (
 ALTER TABLE employees SET TIFLASH REPLICA 2;
 ```
 
-次のステートメントを実行すると、 `employees`テーブル内のすべてのパーティションの 2 つのTiFlashレプリカの圧縮を直ちに開始できます。
+次のステートメントを実行すると、 `employees`テーブル内のすべてのパーティションの 2つのTiFlashレプリカの圧縮を直ちに開始できます。
 
 ```sql
 ALTER TABLE employees COMPACT TIFLASH REPLICA;
@@ -51,7 +51,7 @@ ALTER TABLE employees COMPACT TIFLASH REPLICA;
 
 ### テーブル内の指定されたパーティションのコンパクトTiFlashレプリカ {#compact-tiflash-replicas-of-specified-partitions-in-a-table}
 
-以下は、2 つのTiFlashレプリカを持つ 4 つのパーティションを持つ`employees`テーブルを例として示します。
+以下は、2つのTiFlashレプリカを持つ 4つのパーティションを持つ`employees`テーブルを例として示します。
 
 ```sql
 CREATE TABLE employees (
@@ -69,7 +69,7 @@ PARTITION BY LIST (store_id) (
 ALTER TABLE employees SET TIFLASH REPLICA 2;
 ```
 
-次のステートメントを実行すると、テーブル`employees`のパーティション`pNorth`と`pEast`の 2 つのTiFlashレプリカの圧縮を直ちに開始できます。
+次のステートメントを実行すると、テーブル`employees`のパーティション`pNorth`と`pEast`の 2つのTiFlashレプリカの圧縮を直ちに開始できます。
 
 ```sql
 ALTER TABLE employees COMPACT PARTITION pNorth, pEast TIFLASH REPLICA;

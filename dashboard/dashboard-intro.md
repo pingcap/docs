@@ -19,7 +19,7 @@ TiDB Dashboardは[GitHub](https://github.com/pingcap-incubator/tidb-dashboard)�
 
 ## TiDBクラスタの全体的な実行ステータスを表示します {#show-the-overall-running-status-of-the-tidb-cluster}
 
-TiDB Dashboardを使用すると、TiDB クラスターの 1 秒あたりのクエリ数 (QPS)、実行時間、最も多くのリソースを消費する SQL ステートメントの種類などの概要情報を確認できます。
+TiDB Dashboardを使用すると、TiDB クラスターの 1秒あたりのクエリ数 (QPS)、実行時間、最も多くのリソースを消費する SQL ステートメントの種類などの概要情報を確認できます。
 
 詳細は[TiDB Dashboardの概要](/dashboard/dashboard-overview.md)参照。
 

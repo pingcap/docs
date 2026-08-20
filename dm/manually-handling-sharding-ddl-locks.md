@@ -147,7 +147,7 @@ shard-ddl-lock unlock test-`shard_db`.`shard_table`
 
 ## サポートされているシナリオ {#supported-scenarios}
 
-現在、 `shard-ddl-lock unlock`コマンドは、次の 2 つの異常なシナリオでのシャーディング DDL ロックの処理のみをサポートしています。
+現在、 `shard-ddl-lock unlock`コマンドは、次の 2つの異常なシナリオでのシャーディング DDL ロックの処理のみをサポートしています。
 
 ### シナリオ1: MySQLソースの一部が削除される {#scenario-1-some-mysql-sources-are-removed}
 
@@ -185,7 +185,7 @@ ALTER TABLE shard_db_*.shard_table_* ADD COLUMN c2 INT;
 
 MySQLとDMの操作プロセスは次のとおりです。
 
-1.  対応する DDL 操作が`mysql-replica-01`の 2 つのシャード テーブルに対して実行され、テーブル構造が変更されます。
+1.  対応する DDL 操作が`mysql-replica-01`の 2つのシャード テーブルに対して実行され、テーブル構造が変更されます。
 
     ```sql
     ALTER TABLE shard_db_1.shard_table_1 ADD COLUMN c2 INT;
@@ -195,7 +195,7 @@ MySQLとDMの操作プロセスは次のとおりです。
     ALTER TABLE shard_db_1.shard_table_2 ADD COLUMN c2 INT;
     ```
 
-2.  DM-worker は、受信した`mysql-replica-01`の 2 つのシャード テーブルの DDL 情報を DM-master に送信し、DM-master は対応する DDL ロックを作成します。
+2.  DM-worker は、受信した`mysql-replica-01`の 2つのシャード テーブルの DDL 情報を DM-master に送信し、DM-master は対応する DDL ロックを作成します。
 
 3.  現在の DDL ロックの情報を確認するには、 `shard-ddl-lock`を使用します。
 

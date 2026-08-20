@@ -13,7 +13,7 @@ summary: TiUPミラーローテートは、 TiUPミラー内のroot.jsonファ�
     -   index.json
     -   snapshot.json
     -   timestamp.json
--   `root.json`の有効期限。公式ミラーの場合、有効期限は作成日`root.json`の 1 年後となります。
+-   `root.json`の有効期限。公式ミラーの場合、有効期限は作成日`root.json`の 1年後となります。
 
 TiUPミラーの詳細については、 [TiUPミラーリファレンス](/tiup/tiup-mirror-reference.md)を参照してください。
 

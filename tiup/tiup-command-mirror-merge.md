@@ -5,7 +5,7 @@ summary: 「tiup mirror merge」コマンドは、1つまたは複数のミラ�
 
 # tiup mirror merge {#tiup-mirror-merge}
 
-`tiup mirror merge`コマンドは、1 つ以上のミラーを現在のミラーにマージするために使用されます。
+`tiup mirror merge`コマンドは、1つ以上のミラーを現在のミラーにマージするために使用されます。
 
 このコマンドを実行するには、次の条件を満たしている必要があります。
 

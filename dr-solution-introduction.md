@@ -93,13 +93,13 @@ TiDBのバックアップおよび復元ツールとして、 BRは特定の時�
 
 このアーキテクチャでは、TiDBクラスタ1がリージョン1にデプロイされます。BRはクラスタ1のデータを定期的にリージョン2にバックアップし、さらにこのクラスタのデータ変更ログも継続的にリージョン2にバックアップします。リージョン1で災害が発生し、クラスタ1が復旧できない場合、バックアップデータとデータ変更ログを使用して、リージョン2に新しいクラスタ（クラスタ2）を復元し、サービスを提供できます。
 
-BRに基づく DR ソリューションは、5 分未満の RPO と、復元するデータのサイズに応じて変化する RTO を提供します。 BR v6.5.0 の場合、復元速度については[スナップショット復元のパフォーマンスと影響](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore)と[PITRのパフォーマンスと影響](/br/br-pitr-guide.md#performance-capabilities-of-pitr)を参照してください。通常、リージョン間のバックアップ機能はデータ セキュリティの最後の手段とみなされ、ほとんどのシステムにとって必須のソリューションでもあります。このソリューションの詳細については、 [BRに基づくDRソリューション](/dr-backup-restore.md)を参照してください。
+BRに基づく DR ソリューションは、5分未満の RPO と、復元するデータのサイズに応じて変化する RTO を提供します。 BR v6.5.0 の場合、復元速度については[スナップショット復元のパフォーマンスと影響](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore)と[PITRのパフォーマンスと影響](/br/br-pitr-guide.md#performance-capabilities-of-pitr)を参照してください。通常、リージョン間のバックアップ機能はデータ セキュリティの最後の手段とみなされ、ほとんどのシステムにとって必須のソリューションでもあります。このソリューションの詳細については、 [BRに基づくDRソリューション](/dr-backup-restore.md)を参照してください。
 
 一方、 BR はv6.5.0 以降、 [EBSボリュームのスナップショットからTiDBクラスタを復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-ebs-snapshot-across-multiple-kubernetes)をサポートします。クラスターが Kubernetes 上で実行されており、クラスターに影響を与えずにできるだけ早くクラスターを復元したい場合は、この機能を使用してシステムの RTO を短縮できます。
 
 ### その他の災害復旧ソリューション {#other-dr-solutions}
 
-前述の DR ソリューションに加えて、同じ都市のデュアルセンター シナリオでゼロ RPO が必須の場合は、DR-AUTO 同期ソリューションを使用することもできます。詳細については、[1 つの地域に展開された 2 つのデータ センター](/two-data-centers-in-one-city-deployment.md)をご覧ください。
+前述の DR ソリューションに加えて、同じ都市のデュアルセンター シナリオでゼロ RPO が必須の場合は、DR-AUTO 同期ソリューションを使用することもできます。詳細については、[1つの地域に展開された 2つのデータ センター](/two-data-centers-in-one-city-deployment.md)をご覧ください。
 
 ## 解決策の比較 {#solution-comparison}
 

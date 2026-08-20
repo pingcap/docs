@@ -70,7 +70,7 @@ MySQLでは、クエリが単一スレッドで実行されるため、結果の
 
 > `<order by clause>`が指定されていない場合、 `<cursor specification>`によって指定されたテーブルは T であり、T 内の行の順序は実装に依存します。
 
-次の 2 つのクエリでは、両方の結果が正当であると見なされます。
+次の 2つのクエリでは、両方の結果が正当であると見なされます。
 
 ```sql
 > select * from t;
@@ -340,7 +340,7 @@ TiDB v6.2.0以降、TiDB DDLモジュールは並列フレームワークを採�
 
 ### JDBC URL で`connectionCollation`が構成されていない場合、JDBC 接続ではどの照合順序が使用されますか? {#what-collation-is-used-in-a-jdbc-connection-when-connectioncollation-is-not-configured-in-the-jdbc-url}
 
-JDBC URL に`connectionCollation`が設定されていない場合、次の 2 つのシナリオが考えられます。
+JDBC URL に`connectionCollation`が設定されていない場合、次の 2つのシナリオが考えられます。
 
 **シナリオ 1** : JDBC URL に`connectionCollation`も`characterEncoding`も設定されていない
 
@@ -444,8 +444,8 @@ RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganiz
 ### DDL ジョブを表示するにはどうすればいいですか? {#how-to-view-the-ddl-job}
 
 -   `ADMIN SHOW DDL` : 実行中のDDLジョブを表示する
--   `ADMIN SHOW DDL JOBS` : 現在の DDL ジョブ キュー内のすべての結果 (実行中および実行待ちのタスクを含む) と、完了した DDL ジョブ キューの最後の 10 件の結果を表示します。
--   `ADMIN SHOW DDL JOBS QUERIES 'job_id' [, 'job_id'] ...` : `job_id`に対応する DDL タスクの元の SQL ステートメントを表示します。`job_id`は実行中の DDL ジョブと DDL 履歴ジョブ キュー内の最後の 10 件の結果のみを検索します。
+-   `ADMIN SHOW DDL JOBS` : 現在の DDL ジョブ キュー内のすべての結果 (実行中および実行待ちのタスクを含む) と、完了した DDL ジョブ キューの最後の 10件の結果を表示します。
+-   `ADMIN SHOW DDL JOBS QUERIES 'job_id' [, 'job_id'] ...` : `job_id`に対応する DDL タスクの元の SQL ステートメントを表示します。`job_id`は実行中の DDL ジョブと DDL 履歴ジョブ キュー内の最後の 10件の結果のみを検索します。
 
 ### TiDB は CBO (コストベース最適化) をサポートしていますか? サポートしている場合、どの程度サポートしていますか? {#does-tidb-support-cbo-cost-based-optimization-if-yes-to-what-extent}
 
@@ -461,7 +461,7 @@ RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganiz
 
 ### TiDBクエリプランでは、 `cop`タスクは同じルートにあります。それらは同時に実行されますか？ {#in-the-tidb-query-plan-cop-tasks-are-in-the-same-root-are-they-executed-concurrently}
 
-現在、 TiDB のコンピューティング タスクは、タスク`cop task`と`root task`の 2 つの異なるタイプに属しています。
+現在、 TiDB のコンピューティング タスクは、タスク`cop task`と`root task`の 2つの異なるタイプに属しています。
 
 `cop task`は、分散実行のために KV エンドにプッシュダウンされるコンピューティング タスクです。`root task` 、TiDB エンドでの単一ポイント実行のためのコンピューティング タスクです。
 

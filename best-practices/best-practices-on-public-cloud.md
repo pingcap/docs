@@ -196,7 +196,7 @@ set global tidb_tso_client_batch_max_wait_time = 2; # default: 0
 
 チューニング後、次の効果が見られます。
 
--   1 秒あたりの TSO リクエストは 64,800 に減少します。
+-   1秒あたりの TSO リクエストは 64,800 に減少します。
 -   CPU 使用率は約 4,600% から 1,400% に大幅に減少しました。
 -   P999 値`PD server TSO handle time`が 2ms から 0.5ms に減少します。
 

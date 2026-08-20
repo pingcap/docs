@@ -56,7 +56,7 @@ AWS VPC 設定で DNS ホスト名と DNS 解決の両方が有効になって�
 > **Note:**
 >
 > - すでにプライベートエンドポイント接続を作成している場合、アクティブなエンドポイントが接続ダイアログに表示されます。追加のプライベートエンドポイント接続を作成するには、左側のナビゲーションペインで **Settings** > **Networking** をクリックして **Networking** ページに移動します。
-> - 各 {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスについて、対応するエンドポイントサービスはインスタンス作成後 3 ～ 4 分で自動的に作成されます。
+> - 各 {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスについて、対応するエンドポイントサービスはインスタンス作成後 3 ～ 4分で自動的に作成されます。
 
 ### Step 2. AWS で VPC endpoint を作成する {#step-2-create-a-vpc-endpoint-in-aws}
 
@@ -88,7 +88,7 @@ AWS CLI を使用して VPC endpoint を作成するには、次の手順を実�
 >
 > - コマンドを実行する前に、AWS CLI をインストールして設定しておく必要があります。詳細は [AWS CLI configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) を参照してください。
 >
-> - サービスが 3 つを超える availability zone (AZ) にまたがっている場合、VPC endpoint service が subnet の AZ をサポートしていないことを示すエラーメッセージが表示されます。この問題は、選択したリージョンに、{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスが配置されている AZ に加えて、余分な AZ が存在する場合に発生します。この場合は、[PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) にお問い合わせください。
+> - サービスが 3つを超える availability zone (AZ) にまたがっている場合、VPC endpoint service が subnet の AZ をサポートしていないことを示すエラーメッセージが表示されます。この問題は、選択したリージョンに、{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスが配置されている AZ に加えて、余分な AZ が存在する場合に発生します。この場合は、[PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) にお問い合わせください。
 
 </div>
 <div label="Use AWS Console">
@@ -110,7 +110,7 @@ AWS Management Console を使用して VPC endpoint を作成するには、次�
 
     > **Tip:**
     >
-    > サービスが 3 つを超える availability zone (AZ) にまたがっている場合、**Subnets** エリアで AZ を選択できないことがあります。この問題は、選択したリージョンに、{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスが配置されている AZ に加えて、余分な AZ が存在する場合に発生します。この場合は、[PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) にお問い合わせください。
+    > サービスが 3つを超える availability zone (AZ) にまたがっている場合、**Subnets** エリアで AZ を選択できないことがあります。この問題は、選択したリージョンに、{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスが配置されている AZ に加えて、余分な AZ が存在する場合に発生します。この場合は、[PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) にお問い合わせください。
 
 8. **Security groups** エリアで、適切な security group を選択します。
 
@@ -176,7 +176,7 @@ AWS マネジメントコンソールでプライベート DNS を有効にす�
 
 プライベートエンドポイント接続が作成されると、接続ダイアログにリダイレクトされます。
 
-1. プライベートエンドポイント接続のステータスが **System Checking** から **Active** に変わるまで待機してください（約 5 分）。
+1. プライベートエンドポイント接続のステータスが **System Checking** から **Active** に変わるまで待機してください（約 5分）。
 2. **Connection Type** ドロップダウンリストで、**Private Endpoint** を選択します。
 3. **Endpoint ID** ドロップダウンリストで、使用するアクティブな VPC エンドポイントを選択します。
 

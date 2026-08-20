@@ -23,7 +23,7 @@ SQL の配置ルール機能を使用すると、[配置ポリシーを作成し
 
 | レベル     | 説明                                                                                                                                                                        |
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| クラスタ    | デフォルトでは、TiDB はクラスターに対して 3 つのレプリカのポリシーを構成します。クラスターのグローバル配置ポリシーを構成できます。詳細については、 [クラスターのレプリカ数をグローバルに指定します](#specify-the-number-of-replicas-globally-for-a-cluster)を参照してください。 |
+| クラスタ    | デフォルトでは、TiDB はクラスターに対して 3つのレプリカのポリシーを構成します。クラスターのグローバル配置ポリシーを構成できます。詳細については、 [クラスターのレプリカ数をグローバルに指定します](#specify-the-number-of-replicas-globally-for-a-cluster)を参照してください。 |
 | データベース  | 特定のデータベースの配置ポリシーを構成できます。詳細については、 [データベースのデフォルトの配置ポリシーを指定します](#specify-a-default-placement-policy-for-a-database)を参照してください。                                                |
 | テーブル    | 特定のテーブルの配置ポリシーを構成できます。詳細については、[テーブルの配置ポリシーを指定します](#specify-a-placement-policy-for-a-table)を参照してください。                                                                      |
 | パーティション | テーブル内のさまざまな行にパーティションを作成し、パーティションの配置ポリシーを個別に構成できます。詳細については、 [パーティションテーブルの配置ポリシーを指定します](#specify-a-placement-policy-for-a-partitioned-table)を参照してください。                      |
@@ -183,7 +183,7 @@ SHOW PLACEMENT LABELS;
 ALTER PLACEMENT POLICY myplacementpolicy FOLLOWERS=4;
 ```
 
-このステートメントでは、 `FOLLOWERS=4`オプションは、データに対して 4 つの Followers と 1 Leaderを含む 5 つのレプリカを構成することを意味します。構成可能な配置オプションとその意味の詳細については、[配置オプションの参考](#placement-option-reference)を参照してください。
+このステートメントでは、 `FOLLOWERS=4`オプションは、データに対して 4つの Followers と 1 Leaderを含む 5つのレプリカを構成することを意味します。構成可能な配置オプションとその意味の詳細については、[配置オプションの参考](#placement-option-reference)を参照してください。
 
 ### ドロップ配置ポリシー {#drop-placement-policies}
 
@@ -210,7 +210,7 @@ DROP PLACEMENT POLICY myplacementpolicy;
 | `PRIMARY_REGION` | このオプションの値と一致する`region`ラベルを持つノードにRaftリーダーを配置することを指定します。                           |
 | `REGIONS`        | このオプションの値と一致する`region`ラベルを持つノードにRaft Followers を配置することを指定します。                    |
 | `SCHEDULE`       | フォロワーの配置スケジュール戦略を指定します。値のオプションは`EVEN` (デフォルト) または`MAJORITY_IN_PRIMARY`です。        |
-| `FOLLOWERS`      | フォロワーの数を指定します。たとえば、 `FOLLOWERS=2`データのレプリカが 3 つ（フォロワー 2 つとLeader1 つ）存在することを意味します。 |
+| `FOLLOWERS`      | フォロワーの数を指定します。たとえば、 `FOLLOWERS=2`データのレプリカが 3つ（フォロワー 2つとLeader1つ）存在することを意味します。 |
 
 ### 高度な配置オプション {#advanced-placement-options}
 
@@ -232,7 +232,7 @@ DROP PLACEMENT POLICY myplacementpolicy;
 | 制約形式  | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | リスト形式 | 指定する制約がすべてのレプリカに適用される場合は、キーと値のリスト形式を使用できます。各キーは`+`または`-`で始まります。例:<br/><ul><li> `[+region=us-east-1]`は、 `region`ラベルを持つノードに`us-east-1`としてデータを配置することを意味します。</li><li> `[+region=us-east-1,-type=fault]`は、 `region`という`us-east-1`ラベルを持つノードにデータを配置することを意味しますが、 `type`という`fault`ラベルは持っていません。</li></ul><br/>                                                                                                                                                                                                                                                                                                                                                                                     |
-| 辞書形式  | 異なる制約に対して異なるレプリカ数を指定する必要がある場合は、辞書形式を使用できます。例：<br/><ul><li> `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";`は、 `us-east-1`にFollowerを 1 つ、 `us-east-2`にFollowerを1 つ、 `us-west-1`にフォロワーを 1 つFollower。</li><li> `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+type=scale-node": 1,"+region=us-west-1": 1}';`は、 `us-east-1` `type` } `scale-node`あるノードに 1 つのフォロワーを配置し、 `us-west-1`に 1 つのFollowerを意味します。</li></ul>辞書形式は`+`または`-`で始まる各キーをサポートし、特別な`#evict-leader`属性を設定できます。たとえば、 `FOLLOWER_CONSTRAINTS='{"+region=us-east-1":1, "+region=us-east-2": 2, "+region=us-west-1,#evict-leader": 1}'`は、 `us-west-1`で選出されたリーダーが、ディザスタリカバリ中に可能な限り排除されることを意味します。 |
+| 辞書形式  | 異なる制約に対して異なるレプリカ数を指定する必要がある場合は、辞書形式を使用できます。例：<br/><ul><li> `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";`は、 `us-east-1`にFollowerを 1つ、 `us-east-2`にFollowerを1つ、 `us-west-1`にフォロワーを 1つFollower。</li><li> `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+type=scale-node": 1,"+region=us-west-1": 1}';`は、 `us-east-1` `type` } `scale-node`あるノードに 1つのフォロワーを配置し、 `us-west-1`に 1つのFollowerを意味します。</li></ul>辞書形式は`+`または`-`で始まる各キーをサポートし、特別な`#evict-leader`属性を設定できます。たとえば、 `FOLLOWER_CONSTRAINTS='{"+region=us-east-1":1, "+region=us-east-2": 2, "+region=us-west-1,#evict-leader": 1}'`は、 `us-west-1`で選出されたリーダーが、ディザスタリカバリ中に可能な限り排除されることを意味します。 |
 
 > **Note:**
 >
@@ -352,7 +352,7 @@ SELECT store_id,address,label from INFORMATION_SCHEMA.TIKV_STORE_STATUS;
 
 データの正確な分散方法には特にこだわらず、ディザスタリカバリ要件を満たすことを優先する場合は、 `SURVIVAL_PREFERENCES`オプションを使用して、データの生存に関する設定を指定できます。
 
-前述の例と同様に、TiDB クラスタは 3 つのリージョンに分散され、各リージョンには 3 つのゾーンが含まれています。このクラスタの配置ポリシーを作成する場合、 `SURVIVAL_PREFERENCES`を次のように構成することを想定します。
+前述の例と同様に、TiDB クラスタは 3つのリージョンに分散され、各リージョンには 3つのゾーンが含まれています。このクラスタの配置ポリシーを作成する場合、 `SURVIVAL_PREFERENCES`を次のように構成することを想定します。
 
 ```sql
 CREATE PLACEMENT POLICY multiaz SURVIVAL_PREFERENCES="[region, zone, host]";
@@ -429,7 +429,7 @@ CREATE PLACEMENT POLICY eastandwest PRIMARY_REGION="us-east-1" REGIONS="us-east-
 CREATE TABLE t1 (a INT) PLACEMENT POLICY=eastandwest;
 ```
 
--   `PRIMARY_REGION`リーダーの配布地域を指定します。このオプションでは、1 つの地域のみを指定できます。
+-   `PRIMARY_REGION`リーダーの配布地域を指定します。このオプションでは、1つの地域のみを指定できます。
 -   `SCHEDULE`オプションは、TiDB がフォロワーの分布をどのようにバランスさせるかを指定します。
     -   デフォルトの`EVEN`スケジューリングルールは、すべてのリージョンにわたってフォロワーが均等に分散されることを保証します。
     -   `PRIMARY_REGION` (つまり`us-east-1` ) に十分な数のFollowerレプリカを配置したい場合は、 `MAJORITY_IN_PRIMARY`スケジューリングルールを使用できます。このスケジューリングルールは、可用性を多少犠牲にする代わりに、トランザクションのレイテンシーを低減します。プライマリリージョンが障害を起こした場合、 `MAJORITY_IN_PRIMARY`自動フェイルオーバーを提供しません。

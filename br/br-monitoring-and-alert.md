@@ -93,7 +93,7 @@ groups:
 -   警戒レベル: 重大
 -   説明: ログデータが30分以上ストレージに保存されていません。このアラートは多くの場合、異常を示しています。原因を特定するには、TiKVログを確認してください。
 
-#### ログバックアップ一時停止中 (2 時間以上) {#logbackuppausingmorethan2h}
+#### ログバックアップ一時停止中 (2時間以上) {#logbackuppausingmorethan2h}
 
 -   警告項目: `max(time() - tidb_log_backup_last_checkpoint / 262144000) by (task) / 3600 > 2 and max(tidb_log_backup_last_checkpoint) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 1`
 -   警戒レベル：警告

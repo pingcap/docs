@@ -34,7 +34,7 @@ TiDB バージョン: 6.0.0-DMR
 
 ## リリース戦略の変更 {#release-strategy-changes}
 
-TiDB v6.0.0 以降、TiDB は次の 2 種類のリリースを提供します。
+TiDB v6.0.0 以降、TiDB は次の 2種類のリリースを提供します。
 
 -   長期サポートリリース
 
@@ -106,7 +106,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 -   実行計画を共有するためにプリペアドステートメントを強化する
 
-    SQL 実行計画を再利用すると、SQL 文の解析時間を効果的に短縮し、CPU リソースの消費を抑え、SQL 実行効率を向上させることができます。SQL チューニングの重要な方法の 1 つは、SQL 実行計画を効果的に再利用することです。TiDB は、プリペアドステートメントと実行計画の共有をサポートしています。ただし、プリペアドステートメントが閉じられると、TiDB は対応するプラン キャッシュを自動的にクリアします。その後、TiDB は繰り返される SQL 文を不必要に解析し、実行効率に影響を与える可能性があります。v6.0.0 以降、TiDB は`tidb_ignore_prepared_cache_close_stmt`パラメータ (デフォルトでは無効) によって`COM_STMT_CLOSE`のコマンドを無視するかどうかを制御できるようになりました。パラメータを有効にすると、TiDB はプリペアドステートメントを閉じるコマンドを無視し、実行計画をキャッシュに保持するため、実行計画の再利用率が向上します。
+    SQL 実行計画を再利用すると、SQL 文の解析時間を効果的に短縮し、CPU リソースの消費を抑え、SQL 実行効率を向上させることができます。SQL チューニングの重要な方法の 1つは、SQL 実行計画を効果的に再利用することです。TiDB は、プリペアドステートメントと実行計画の共有をサポートしています。ただし、プリペアドステートメントが閉じられると、TiDB は対応するプラン キャッシュを自動的にクリアします。その後、TiDB は繰り返される SQL 文を不必要に解析し、実行効率に影響を与える可能性があります。v6.0.0 以降、TiDB は`tidb_ignore_prepared_cache_close_stmt`パラメータ (デフォルトでは無効) によって`COM_STMT_CLOSE`のコマンドを無視するかどうかを制御できるようになりました。パラメータを有効にすると、TiDB はプリペアドステートメントを閉じるコマンドを無視し、実行計画をキャッシュに保持するため、実行計画の再利用率が向上します。
 
     [ユーザードキュメント](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement) [＃31056](https://github.com/pingcap/tidb/issues/31056)
 
@@ -160,7 +160,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 -   TiFlashのzstd圧縮アルゴリズムをサポート
 
-    TiFlash、 `profiles.default.dt_compression_method`と`profiles.default.dt_compression_level` 2 つのパラメータが導入されており、ユーザーはパフォーマンスと容量のバランスに基づいて最適な圧縮アルゴリズムを選択できます。
+    TiFlash、 `profiles.default.dt_compression_method`と`profiles.default.dt_compression_level` 2つのパラメータが導入されており、ユーザーはパフォーマンスと容量のバランスに基づいて最適な圧縮アルゴリズムを選択できます。
 
     [ユーザードキュメント](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)
 
@@ -473,7 +473,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     -   GCワーカーがビジー状態のときにTiKVがデータ範囲を削除できない（つまり内部コマンド`unsafe_destroy_range`が実行される）バグを修正[＃11903](https://github.com/tikv/tikv/issues/11903)
     -   `StoreMeta`のデータが一部のコーナーケースで誤って削除されたときに TiKV がパニックを起こすバグを修正[＃11852](https://github.com/tikv/tikv/issues/11852)
     -   ARM プラットフォームでプロファイリングを実行するときに TiKV がパニックを起こすバグを修正[＃10658](https://github.com/tikv/tikv/issues/10658)
-    -   TiKV が 2 年以上実行されている場合にpanicする可能性があるバグを修正[＃11940](https://github.com/tikv/tikv/issues/11940)
+    -   TiKV が 2年以上実行されている場合にpanicする可能性があるバグを修正[＃11940](https://github.com/tikv/tikv/issues/11940)
     -   SSE命令セット不足により発生するARM64アーキテクチャでのコンパイル問題を修正 [＃12034](https://github.com/tikv/tikv/issues/12034)
     -   初期化されていないレプリカを削除すると古いレプリカが再作成される可能性がある問題を修正[＃10533](https://github.com/tikv/tikv/issues/10533)
     -   古いメッセージによって TiKV がpanicを起こすバグを修正[＃12023](https://github.com/tikv/tikv/issues/12023)

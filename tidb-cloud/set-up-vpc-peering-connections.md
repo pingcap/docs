@@ -82,7 +82,7 @@ VPC ピアリング リクエストは、TiDB Cloudコンソールのプロジ�
     -   VPC ID
     -   VPC CIDR
 
-    このような情報は、 [AWS マネジメントコンソール](https://console.aws.amazon.com/)の VPC 詳細ページから取得できます。TiDB Cloud は、同じリージョン内または 2 つの異なるリージョンの VPC 間の VPC ピアリングの作成をサポートしています。
+    このような情報は、 [AWS マネジメントコンソール](https://console.aws.amazon.com/)の VPC 詳細ページから取得できます。TiDB Cloud は、同じリージョン内または 2つの異なるリージョンの VPC 間の VPC ピアリングの作成をサポートしています。
 
     ![VPC peering](/media/tidb-cloud/vpc-peering/vpc-peering-creating-infos.png)
 
@@ -112,7 +112,7 @@ VPC ピアリング リクエストは、TiDB Cloudコンソールのプロジ�
     -   VPC ID
     -   VPC CIDR
 
-    このような情報は、 [AWS マネジメントコンソール](https://console.aws.amazon.com/)の VPC 詳細ページから取得できます。TiDB Cloud は、同じリージョン内または 2 つの異なるリージョンの VPC 間の VPC ピアリングの作成をサポートしています。
+    このような情報は、 [AWS マネジメントコンソール](https://console.aws.amazon.com/)の VPC 詳細ページから取得できます。TiDB Cloud は、同じリージョン内または 2つの異なるリージョンの VPC 間の VPC ピアリングの作成をサポートしています。
 
     ![VPC peering](/media/tidb-cloud/vpc-peering/vpc-peering-creating-infos.png)
 
@@ -321,7 +321,7 @@ gcloud beta compute networks peerings create <your-peer-name> --project <your-pr
 
 2.  右上隅の**Connect**をクリックし、 **Connection Type**ドロップダウン リストから**VPC Peering**を選択します。
 
-    VPC ピアリング接続ステータスが**システムチェック**から**アクティブ**に変わるまで待ちます (約 5 分)。
+    VPC ピアリング接続ステータスが**システムチェック**から**アクティブ**に変わるまで待ちます (約 5分)。
 
 3.  **Connect With**ドロップダウンリストで、希望する接続方法を選択します。対応する接続文字列がダイアログの下部に表示されます。
 

@@ -67,7 +67,7 @@ SQLAlchemyは、複数のデータベースを扱うORMライブラリです。�
 
 > **Note:**
 >
-> 現在、 TiDB Cloud Starterインスタンスには制限があります。5 分間アクティブな接続がない場合、インスタンスはシャットダウンし、すべての接続が閉じられます。そのため、 TiDB Cloud Starterインスタンスで SQLAlchemy を使用する場合、プールされた接続で`OperationalError`のような`Lost connection to MySQL server during query`や`MySQL Connection not available`発生する可能性があります。このエラーを回避するには、 `pool_recycle`パラメータを`300`に設定してください。詳細については、SQLAlchemy ドキュメントの[接続切れへの対処](https://docs.sqlalchemy.org/en/20/core/pooling.html#dealing-with-disconnects)を参照してください。
+> 現在、 TiDB Cloud Starterインスタンスには制限があります。5分間アクティブな接続がない場合、インスタンスはシャットダウンし、すべての接続が閉じられます。そのため、 TiDB Cloud Starterインスタンスで SQLAlchemy を使用する場合、プールされた接続で`OperationalError`のような`Lost connection to MySQL server during query`や`MySQL Connection not available`発生する可能性があります。このエラーを回避するには、 `pool_recycle`パラメータを`300`に設定してください。詳細については、SQLAlchemy ドキュメントの[接続切れへの対処](https://docs.sqlalchemy.org/en/20/core/pooling.html#dealing-with-disconnects)を参照してください。
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 

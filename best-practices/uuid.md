@@ -26,7 +26,7 @@ UUID を主キーとして使用すると、 [`AUTO_INCREMENT`](/auto-increment.
 
 ### UUID形式のバイナリ順序とクラスター化された主キー {#uuid-format-binary-order-and-clustered-primary-keys}
 
-`UUID_TO_BIN()`関数は、 1 つの引数 (UUID)、または 2 つの引数 (2 番目の引数は`swap_flag`とともに使用できます。
+`UUID_TO_BIN()`関数は、 1つの引数 (UUID)、または 2つの引数 (2 番目の引数は`swap_flag`とともに使用できます。
 
 [ホットスポット](/best-practices/high-concurrency-best-practices.md)回避するために、 TiDB で`swap_flag`設定しないことをお勧めします。
 
@@ -34,7 +34,7 @@ UUID を主キーとして使用すると、 [`AUTO_INCREMENT`](/auto-increment.
 
 `swap_flag`の効果を示すために、同じ構造を持つ2つのテーブルを示します。違いは、 `uuid_demo_1`に挿入されたデータは`UUID_TO_BIN(?, 0)`を使用し、 `uuid_demo_2` `UUID_TO_BIN(?, 1)`を使用していることです。
 
-以下の Key Visualizer のスクリーンショットでは、バイナリ形式でフィールドの順序が入れ替わった`uuid_demo_2`テーブルの 1 つのリージョンに書き込みが集中していることがわかります。
+以下の Key Visualizer のスクリーンショットでは、バイナリ形式でフィールドの順序が入れ替わった`uuid_demo_2`テーブルの 1つのリージョンに書き込みが集中していることがわかります。
 
 ![Key Visualizer](/media/best-practices/uuid_keyviz.png)
 

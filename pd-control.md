@@ -204,7 +204,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set split-merge-interval 24h  // Set the interval between `split` and `merge` to one day
     ```
 
--   `enable-one-way-merge`は 、PD がリージョン を次のリージョンとの結合のみを許可するかどうかを制御します。`false`に設定すると、PD はリージョン を隣接する 2 つの Region との結合を許可します。
+-   `enable-one-way-merge`は 、PD がリージョン を次のリージョンとの結合のみを許可するかどうかを制御します。`false`に設定すると、PD はリージョン を隣接する 2つの Region との結合を許可します。
 
     ```bash
     config set enable-one-way-merge true  // Enables one-way merging.
@@ -251,7 +251,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 -   `max-store-preparing-time`はストアがオンラインになるまでの最大待機時間を制御します。ストアがオンライン状態の間、PD はストアのオンライン進行状況を照会できます。指定された時間を超えると、PD はストアがオンライン状態になったとみなし、再度ストアのオンライン進行状況を照会できなくなります。ただし、これによってリージョンが新しいオンラインストアに移行するのが妨げられることはありません。ほとんどのシナリオでは、このパラメータを調整する必要はありません。
 
-    次のコマンドは、ストアがオンラインになるまでの最大待機時間が 4 時間であることを指定します。
+    次のコマンドは、ストアがオンラインになるまでの最大待機時間が 4時間であることを指定します。
 
     ```bash
     config set max-store-preparing-time 4h
@@ -1463,7 +1463,7 @@ store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"en
 {"id":24,"peer_stores":[1,32,33]}
 ```
 
-`[store30, store31]`がダウンしている場合は、 `remove-peer`オペレータを作成して安全に処理できるすべてのリージョン、つまり DownPeer が 1 つだけあるリージョンを見つけます。
+`[store30, store31]`がダウンしている場合は、 `remove-peer`オペレータを作成して安全に処理できるすべてのリージョン、つまり DownPeer が 1つだけあるリージョンを見つけます。
 
 ```bash
 >> region --jq=".regions[] | {id: .id, remove_peer: [.peers[].store_id] | select(length>1) | map(if .==(30,31) then . else empty end) | select(length==1)}"

@@ -18,7 +18,7 @@ summary: TiDBデータベースにおけるBACKUPの使用方法の概要。
 
 `BACKUP`ステートメントは、バックアップ タスク全体が完了、失敗、またはキャンセルされるまでブロックされます。 `BACKUP`を実行するには、長時間接続を準備する必要があります。タスクは、[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
 
-`BACKUP`および[`RESTORE`](/sql-statements/sql-statement-restore.md)タスクは、一度に 1 つしか実行できません。 `BACKUP`または`RESTORE`ステートメントが同じ TiDBサーバーで既に実行されている場合、新しい`BACKUP`の実行は、以前のすべてのタスクが完了するまで待機します。
+`BACKUP`および[`RESTORE`](/sql-statements/sql-statement-restore.md)タスクは、一度に 1つしか実行できません。 `BACKUP`または`RESTORE`ステートメントが同じ TiDBサーバーで既に実行されている場合、新しい`BACKUP`の実行は、以前のすべてのタスクが完了するまで待機します。
 
 `BACKUP` 「tikv」ストレージエンジンでのみ使用できます。「unistore」エンジンで`BACKUP`を使用すると失敗します。
 

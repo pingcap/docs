@@ -1,11 +1,11 @@
 ---
 title: TiDB Cloud Release Notes in 2023
-summary: 2023 年のTiDB Cloudのリリース ノートについて説明します。
+summary: 2023年のTiDB Cloudのリリース ノートについて説明します。
 ---
 
 # 2023年のTiDB Cloudリリースノート {#tidb-cloud-release-notes-in-2023}
 
-このページには、2023 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
+このページには、2023年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
 ## 2023年12月5日 {#december-5-2023}
 
@@ -71,9 +71,9 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   以下のリソース使用状況アラートを追加します。新しいアラートはデフォルトで無効になっています。必要に応じて有効にすることができます。
 
-    -   TiDB ノード全体の最大メモリ使用率が 10 分間 70% を超えました
+    -   TiDB ノード全体の最大メモリ使用率が 10分間 70% を超えました
     -   TiKVノード全体の最大メモリ使用率が10分間70%を超えました
-    -   TiDB ノード全体の最大 CPU 使用率が 10 分間 80% を超えました
+    -   TiDB ノード全体の最大 CPU 使用率が 10分間 80% を超えました
     -   TiKVノード全体の最大CPU使用率が10分間80%を超えました
 
     詳細については[TiDB Cloud組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md#resource-usage-alerts)を参照してください。
@@ -138,7 +138,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターから 2 つの vCPU TiDB ノードと TiKV ノードを削除します。
+-   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターから 2つの vCPU TiDB ノードと TiKV ノードを削除します。
 
     2 vCPU オプションは、 **[クラスタの作成]**ページまたは**[クラスタの変更]**ページで使用できなくなりました。
 
@@ -172,7 +172,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   クラスターの主な変更の記録を提供する、 [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターの**イベント**ページを紹介します。
 
-    このページでは、過去 7 日間のイベント履歴を表示し、トリガー時間やアクションを開始したユーザーなどの重要な詳細を追跡できます。
+    このページでは、過去 7日間のイベント履歴を表示し、トリガー時間やアクションを開始したユーザーなどの重要な詳細を追跡できます。
 
     詳細については[TiDB Cloudクラスター イベント](/tidb-cloud/tidb-cloud-events.md)を参照してください。
 
@@ -236,7 +236,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     詳細については[高度なプロパティ](/tidb-cloud/data-service-manage-endpoint.md#advanced-properties)を参照してください。
 
--   AWS でホストされ、2023 年 8 月 15 日以降に作成された[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの負荷分散の改善を無効にします。これには以下が含まれます。
+-   AWS でホストされ、2023年 8月 15日以降に作成された[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの負荷分散の改善を無効にします。これには以下が含まれます。
 
     -   AWS でホストされている TiDB ノードをスケールアウトするときに、既存の接続を新しい TiDB ノードに自動的に移行することを無効にします。
     -   AWS でホストされている TiDB ノードをスケールインするときに、利用可能な TiDB ノードへの既存の接続の自動移行を無効にします。
@@ -338,7 +338,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 -   TiDB Cloudのインポート機能を最適化し、データのインポートエクスペリエンスを向上させました。以下の改善が行われました。
 
     -   TiDB Cloud Serverless の統合インポート エントリ: データのインポートのエントリを統合し、ローカル ファイルのインポートと Amazon S3 からのファイルのインポートをシームレスに切り替えることができます。
-    -   合理化された構成: Amazon S3 からのデータのインポートは 1 つのステップだけで済むため、時間と労力を節約できます。
+    -   合理化された構成: Amazon S3 からのデータのインポートは 1つのステップだけで済むため、時間と労力を節約できます。
     -   強化された CSV 構成: CSV 構成設定がファイル タイプ オプションの下に配置されるようになり、必要なパラメータを簡単にすばやく構成できるようになりました。
     -   ターゲットテーブルの選択機能強化：チェックボックスをクリックすることで、データインポートの対象となるターゲットテーブルを選択できるようになりました。この改善により、複雑な式を入力する必要がなくなり、ターゲットテーブルの選択が簡素化されます。
     -   表示情報の改良：インポート処理中に表示される不正確な情報に関する問題を解決しました。また、不完全なデータ表示や誤解を招く情報を避けるため、プレビュー機能を削除しました。
@@ -350,7 +350,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)が一般公開されました。
 
--   多言語サポート、24 時間 365 日のリアルタイム応答、統合ドキュメント アクセスを提供する OpenAI 搭載チャットボット、TiDB Bot (ベータ版) をご紹介します。
+-   多言語サポート、24時間 365日のリアルタイム応答、統合ドキュメント アクセスを提供する OpenAI 搭載チャットボット、TiDB Bot (ベータ版) をご紹介します。
 
     TiDB Bot には次のような利点があります。
 
@@ -364,7 +364,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     TiDB Cloud、 TiDB Cloud Serverless クラスターのブランチを作成できます。クラスターのブランチとは、元のクラスターから分岐したデータのコピーを含む独立したインスタンスです。これにより分離された環境が提供され、元のクラスターへの影響を心配することなく、自由に接続して実験を行うことができます。
 
-    [TiDB Cloudコンソール](/tidb-cloud/branch-manage.md)または[TiDB Cloud CLI](/tidb-cloud/ticloud-branch-create.md)のいずれかを使用して、2023 年 7 月 5 日以降に作成されたTiDB Cloud Serverless クラスターのブランチを作成できます。
+    [TiDB Cloudコンソール](/tidb-cloud/branch-manage.md)または[TiDB Cloud CLI](/tidb-cloud/ticloud-branch-create.md)のいずれかを使用して、2023年 7月 5日以降に作成されたTiDB Cloud Serverless クラスターのブランチを作成できます。
 
     アプリケーション開発にGitHubをご利用の場合、 TiDB Cloud Serverlessブランチ機能をGitHub CI/CDパイプラインに統合することで、本番のデータベースに影響を与えることなく、ブランチを使用してプルリクエストを自動的にテストできます。詳細については、 [TiDB Cloud Serverless Branching（ベータ版）をGitHubと統合する](/tidb-cloud/branch-github-integration.md)ご覧ください。
 
@@ -420,7 +420,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     詳細については[クラスターのサイズ](/tidb-cloud/size-your-cluster.md)を参照してください。
 
--   [監視メトリクスの保持期間](/tidb-cloud/built-in-monitoring.md#metrics-retention-policy) for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターを 3 日から 7 日に延長します。
+-   [監視メトリクスの保持期間](/tidb-cloud/built-in-monitoring.md#metrics-retention-policy) for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターを 3日から 7日に延長します。
 
     メトリクスの保持期間を延長することで、より多くの履歴データにアクセスできるようになります。これにより、クラスターの傾向やパターンを特定し、より適切な意思決定と迅速なトラブルシューティングが可能になります。
 
@@ -516,7 +516,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     新しいナビゲーションにより、機能エントリをより簡単に、より直感的に見つけられるようになりました。新しいナビゲーションを表示するには、クラスターの概要ページにアクセスしてください。
 
--   Dedicated Tierクラスターの**診断**ページの次の 2 つのタブに新しいネイティブ Web インフラストラクチャをリリースします。
+-   Dedicated Tierクラスターの**診断**ページの次の 2つのタブに新しいネイティブ Web インフラストラクチャをリリースします。
 
     -   [スロークエリ](/tidb-cloud/tune-performance.md#slow-query)
     -   [SQL文](/tidb-cloud/tune-performance.md#statement-analysis)
@@ -527,7 +527,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   2023 年 4 月 26 日以降に作成された GCP ホスト クラスタのノード サイズの変更をサポートします。
+-   2023年 4月 26日以降に作成された GCP ホスト クラスタのノード サイズの変更をサポートします。
 
     この機能により、需要の増加に合わせて高パフォーマンスノードにアップグレードしたり、コスト削減のために低パフォーマンスノードにダウングレードしたりできます。この柔軟性の向上により、ワークロードに合わせてクラスターの容量を調整し、コストを最適化できます。
 
@@ -600,12 +600,12 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     メンテナンスの頻度を最小限に抑えるよう努めます。メンテナンス期間が予定されている場合、デフォルトの開始時刻は対象週の水曜日の午前3時（ TiDB Cloud組織のタイムゾーンに基づきます）です。サービス中断の可能性を回避するために、メンテナンススケジュールをご確認いただき、それに応じて運用を計画していただくことが重要です。
 
-    -   最新情報をお届けするために、 TiDB Cloud はメンテナンス ウィンドウごとに 3 つの電子メール通知を送信します。1 つはメンテナンス タスクの前、1 つは開始時、もう 1 つはメンテナンス タスクの後のものです。
+    -   最新情報をお届けするために、 TiDB Cloud はメンテナンス ウィンドウごとに 3つの電子メール通知を送信します。1つはメンテナンス タスクの前、1つは開始時、もう 1つはメンテナンス タスクの後のものです。
     -   メンテナンスの影響を最小限に抑えるには、 **「メンテナンス」**ページでメンテナンスの開始時刻を希望の時間に変更したり、メンテナンス アクティビティを延期したりすることができます。
 
     詳細については[メンテナンスウィンドウを構成する](/tidb-cloud/configure-maintenance-window.md)を参照してください。
 
--   2023 年 4 月 25 日以降に作成され、AWS でホストされている[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの TiDB ノードをスケーリングするときに、TiDB の負荷分散を改善し、接続の切断を減らします。
+-   2023年 4月 25日以降に作成され、AWS でホストされている[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの TiDB ノードをスケーリングするときに、TiDB の負荷分散を改善し、接続の切断を減らします。
 
     -   TiDB ノードをスケールアウトするときに、既存の接続を新しい TiDB ノードに自動的に移行することをサポートします。
     -   TiDB ノードをスケールインするときに、既存の接続を利用可能な TiDB ノードに自動的に移行することをサポートします。
@@ -678,10 +678,10 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   誤検知を防ぐため、 [TiDB Cloud組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md#tidb-cloud-built-in-alert-conditions)から以下の 2 つのアラートを削除します。これは、ノードの 1 つで一時的なオフラインまたはメモリ不足 (OOM) が発生しても、クラスター全体の健全性に大きな影響を与えないためです。
+-   誤検知を防ぐため、 [TiDB Cloud組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md#tidb-cloud-built-in-alert-conditions)から以下の 2つのアラートを削除します。これは、ノードの 1つで一時的なオフラインまたはメモリ不足 (OOM) が発生しても、クラスター全体の健全性に大きな影響を与えないためです。
 
-    -   クラスター内の少なくとも 1 つの TiDB ノードでメモリが発生しました。
-    -   1 つ以上のクラスター ノードがオフラインです。
+    -   クラスター内の少なくとも 1つの TiDB ノードでメモリが発生しました。
+    -   1つ以上のクラスター ノードがオフラインです。
 
 **コンソールの変更**
 
@@ -723,7 +723,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     これらの新しい仕様を使用することで、以前は 16 個の RCU が必要だったシナリオと比較して、データ複製コストを最大 87.5% 削減できます。
 
--   2023 年 3 月 28 日以降に作成された[チェンジフィード](/tidb-cloud/changefeed-overview.md)スケールアップまたはスケールダウン仕様をサポートします。
+-   2023年 3月 28日以降に作成された[チェンジフィード](/tidb-cloud/changefeed-overview.md)スケールアップまたはスケールダウン仕様をサポートします。
 
     より高い仕様を選択するとレプリケーションのパフォーマンスが向上し、より低い仕様を選択するとレプリケーションのコストが削減されます。
 
@@ -733,7 +733,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     詳細については[TiDB Cloudにシンク](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)を参照してください。
 
--   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの[データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)機能に対して 2 つの新しい GCP リージョン ( `Singapore (asia-southeast1)`と`Oregon (us-west1)`をサポートします。
+-   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの[データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)機能に対して 2つの新しい GCP リージョン ( `Singapore (asia-southeast1)`と`Oregon (us-west1)`をサポートします。
 
     これらの新しいリージョンにより、 TiDB Cloudへのデータ移行の選択肢が広がります。アップストリームデータがこれらのリージョン内またはその付近に保存されている場合、GCP からTiDB Cloudへのより高速で信頼性の高いデータ移行を活用できるようになります。
 
@@ -766,7 +766,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
     -   [Data Serviceを始める](/tidb-cloud/data-service-get-started.md)
     -   [Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)
 
--   AWS でホストされ、2022 年 12 月 31 日以降に作成される[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでスケールするために、TiDB、TiKV、およびTiFlashノードのサイズを縮小することをサポートします。
+-   AWS でホストされ、2022年 12月 31日以降に作成される[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでスケールするために、TiDB、TiKV、およびTiFlashノードのサイズを縮小することをサポートします。
 
     ノード サイズを[TiDB Cloudコンソール経由](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)または[TiDB Cloud API（ベータ版）経由](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)減らすことができます。
 
@@ -871,10 +871,10 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     この方法はロールARNを使用するよりも簡単です。詳細については[Amazon S3 アクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)を参照してください。
 
--   [監視メトリクスの保持期間](/tidb-cloud/built-in-monitoring.md#metrics-retention-policy) 2 日からより長い期間に延長します。
+-   [監視メトリクスの保持期間](/tidb-cloud/built-in-monitoring.md#metrics-retention-policy) 2日からより長い期間に延長します。
 
-    -   Dedicated Tierクラスターの場合、過去 7 日間のメトリック データを表示できます。
-    -   Serverless Tierクラスターの場合、過去 3 日間のメトリック データを表示できます。
+    -   Dedicated Tierクラスターの場合、過去 7日間のメトリック データを表示できます。
+    -   Serverless Tierクラスターの場合、過去 3日間のメトリック データを表示できます。
 
     メトリクスの保持期間を延長することで、より多くの履歴データにアクセスできるようになります。これにより、クラスターの傾向やパターンを特定し、より適切な意思決定と迅速なトラブルシューティングが可能になります。
 
@@ -904,7 +904,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [Serverless Tier](/tidb-cloud/select-cluster-tier.md#starter)クラスターの**監視**ページを紹介します。
 
-    **モニタリング**ページには、1 秒あたりに実行される SQL ステートメントの数、クエリの平均実行時間、失敗したクエリの数など、さまざまなメトリックとデータが提供され、 Serverless Tierクラスター内の SQL ステートメントの全体的なパフォーマンスをよりよく理解するのに役立ちます。
+    **モニタリング**ページには、1秒あたりに実行される SQL ステートメントの数、クエリの平均実行時間、失敗したクエリの数など、さまざまなメトリックとデータが提供され、 Serverless Tierクラスター内の SQL ステートメントの全体的なパフォーマンスをよりよく理解するのに役立ちます。
 
     詳細については[TiDB Cloud組み込み監視](/tidb-cloud/built-in-monitoring.md)を参照してください。
 
@@ -975,13 +975,13 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   AWS でホストされ、2022 年 12 月 31 日以降に作成されたTiDB Cloud Dedicated クラスターの**ノード サイズ (vCPU + RAM) を**増やすことで、TiDB、TiKV、およびTiFlashノードのスケールアップをサポートします。
+-   AWS でホストされ、2022年 12月 31日以降に作成されたTiDB Cloud Dedicated クラスターの**ノード サイズ (vCPU + RAM) を**増やすことで、TiDB、TiKV、およびTiFlashノードのスケールアップをサポートします。
 
     ノード サイズを[TiDB Cloudコンソールを使用する](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)または[TiDB Cloud API（ベータ版）を使用する](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)増やすことができます。
 
--   [**監視**](/tidb-cloud/built-in-monitoring.md)ページのメトリックの保持期間を 2 日間に延長します。
+-   [**監視**](/tidb-cloud/built-in-monitoring.md)ページのメトリックの保持期間を 2日間に延長します。
 
-    これで、過去 2 日間のメトリック データにアクセスできるようになり、クラスターのパフォーマンスと傾向をより柔軟かつ明確に把握できるようになります。
+    これで、過去 2日間のメトリック データにアクセスできるようになり、クラスターのパフォーマンスと傾向をより柔軟かつ明確に把握できるようになります。
 
     この改善は追加費用なしで、クラスターの[**監視**](/tidb-cloud/built-in-monitoring.md)ページの**「診断」**タブからアクセスできます。これにより、パフォーマンスの問題を特定してトラブルシューティングし、クラスター全体の健全性をより効果的に監視できるようになります。
 

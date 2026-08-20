@@ -12,7 +12,7 @@ aliases: ['/ja/tidb/stable/three-dc-local-read/']
 
 ## 3つのデータセンターのTiDBクラスタをデプロイ {#deploy-a-tidb-cluster-of-three-data-centers}
 
-3 つのデータセンターの展開方法については、 [1 つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md)を参照してください。
+3つのデータセンターの展開方法については、 [1つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md)を参照してください。
 
 TiKVノードとTiDBノードの両方に構成項目`labels`設定されている場合、同じデータセンター内のTiKVノードとTiDBノードのラベル`zone`の値は同一である必要があります。例えば、TiKVノードとTiDBノードの両方がデータセンター`dc-1`にある場合、2つのノードに以下のラベルを設定する必要があります。
 

@@ -238,7 +238,7 @@ JDBCは通常、JDBC URLパラメータの形式で実装関連の設定を提�
 
 #### バッチ関連パラメータ {#batch-related-parameters}
 
-バッチ書き込みを処理する際は、 `rewriteBatchedStatements=true`設定することをお勧めします。`addBatch()`または`executeBatch()`を使用した後でも、JDBC はデフォルトでは SQL を 1 つずつ送信します。例:
+バッチ書き込みを処理する際は、 `rewriteBatchedStatements=true`設定することをお勧めします。`addBatch()`または`executeBatch()`を使用した後でも、JDBC はデフォルトでは SQL を 1つずつ送信します。例:
 
 ```java
 pstmt = prepare("INSERT INTO `t` (a) values(?)");
@@ -304,7 +304,7 @@ UPDATE `t` SET `a` = 10 WHERE `id` = 1; UPDATE `t` SET `a` = 11 WHERE `id` = 2; 
 
 #### タイムアウト関連のパラメータ {#timeout-related-parameters}
 
-TiDB はタイムアウトを制御するために 2 つの MySQL 互換パラメータ ( [`wait_timeout`](/system-variables.md#wait_timeout)と[`max_execution_time`](/system-variables.md#max_execution_time) ) を提供します。これらの 2 つのパラメータはそれぞれ、 Javaアプリケーションとの接続アイドルタイムアウトと接続内の SQL 実行のタイムアウトを制御します。つまり、これらのパラメータは、TiDB とJavaアプリケーション間の接続の最長アイドル時間と最長ビジー時間を制御します。TiDB v5.4 以降、 `wait_timeout`のデフォルト値は`28800`秒で、8 時間です。v5.4 より前の TiDB バージョンでは、デフォルト値は`0`で、タイムアウトは無制限です。`max_execution_time`のデフォルト値は`0`で、SQL ステートメントの最大実行時間は無制限であり、 `SELECT`ステートメントすべて ( `SELECT ... FOR UPDATE`を含む) に適用されます。
+TiDB はタイムアウトを制御するために 2つの MySQL 互換パラメータ ( [`wait_timeout`](/system-variables.md#wait_timeout)と[`max_execution_time`](/system-variables.md#max_execution_time) ) を提供します。これらの 2つのパラメータはそれぞれ、 Javaアプリケーションとの接続アイドルタイムアウトと接続内の SQL 実行のタイムアウトを制御します。つまり、これらのパラメータは、TiDB とJavaアプリケーション間の接続の最長アイドル時間と最長ビジー時間を制御します。TiDB v5.4 以降、 `wait_timeout`のデフォルト値は`28800`秒で、8時間です。v5.4 より前の TiDB バージョンでは、デフォルト値は`0`で、タイムアウトは無制限です。`max_execution_time`のデフォルト値は`0`で、SQL ステートメントの最大実行時間は無制限であり、 `SELECT`ステートメントすべて ( `SELECT ... FOR UPDATE`を含む) に適用されます。
 
 デフォルト値の[`wait_timeout`](/system-variables.md#wait_timeout)は比較的大きな値です。トランザクションが開始されてもコミットもロールバックもされないような状況では、ロックの保持時間が長引くのを防ぐために、よりきめ細かな制御と短いタイムアウトが必要になる場合があります。このような場合は、 [`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) （TiDB v7.6.0で導入）を使用して、ユーザーセッション内のトランザクションのアイドルタイムアウトを制御できます。
 

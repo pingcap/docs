@@ -7,7 +7,7 @@ summary: カスタマイズされた組織認証を使用してTiDB Cloudコン�
 
 シングル サインオン (SSO) は、 TiDB Cloud [組織](/tidb-cloud/tidb-cloud-glossary.md#organization)のメンバーが電子メール アドレスとパスワードの代わりに ID プロバイダー (IdP) の ID を使用してTiDB Cloudにログインできるようにする認証スキームです。
 
-TiDB Cloud は、次の 2 種類の SSO 認証をサポートしています。
+TiDB Cloud は、次の 2種類の SSO 認証をサポートしています。
 
 -   [標準SSO](/tidb-cloud/tidb-cloud-sso-authentication.md) : メンバーはGitHub、Google、またはMicrosoftの認証方法を使用して[TiDB Cloudコンソール](https://tidbcloud.com/)にログインできます。TiDB Cloudのすべての組織では、標準SSOがデフォルトで有効になっています。
 
@@ -49,7 +49,7 @@ TiDB Cloud は、Cloud Organization SSO に次の認証方法を提供します�
 -   OIDC
 -   SAML
 
-Cloud Organization SSO を有効にすると、最初の 4 つの認証方法がデフォルトで有効になります。組織で SSO の使用を強制したい場合は、ユーザー名とパスワードによる認証方法を無効にすることができます。
+Cloud Organization SSO を有効にすると、最初の 4つの認証方法がデフォルトで有効になります。組織で SSO の使用を強制したい場合は、ユーザー名とパスワードによる認証方法を無効にすることができます。
 
 有効になっているすべての認証方法はカスタムTiDB Cloudログイン ページに表示されるため、事前に有効または無効にする認証方法を決定する必要があります。
 

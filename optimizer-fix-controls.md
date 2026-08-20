@@ -18,7 +18,7 @@ v6.5.3 および v7.1.0 以降、TiDB は、オプティマイザーの動作を
 
 各修正は、特定の目的のためにTiDBオプティマイザーの動作を調整するために用いられる制御項目です。修正には、動作変更の技術的な詳細が記載されたGitHub Issueに対応する番号が付けられています。例えば、修正`44262`の場合、修正[問題44262](https://github.com/pingcap/tidb/issues/44262)でその制御内容を確認できます。
 
-システム変数[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710) 、複数の修正をカンマ区切りで 1 つの値として受け入れます ( `,` )。形式は`"<#issue1>:<value1>,<#issue2>:<value2>,...,<#issueN>:<valueN>"`で、 `<#issueN>`修正番号です。例:
+システム変数[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710) 、複数の修正をカンマ区切りで 1つの値として受け入れます ( `,` )。形式は`"<#issue1>:<value1>,<#issue2>:<value2>,...,<#issueN>:<valueN>"`で、 `<#issueN>`修正番号です。例:
 
 ```sql
 SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
@@ -123,4 +123,4 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 -   デフォルト値: `ON`
 -   可能`OFF`値: `ON`
--   この変数は`ORDER BY`ステートメントで使用される重い式を 2 回計算することを回避するかどうかを制御します。
+-   この変数は`ORDER BY`ステートメントで使用される重い式を 2回計算することを回避するかどうかを制御します。

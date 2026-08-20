@@ -9,11 +9,11 @@ summary: 特定のシナリオのニーズに合わせて、TiDB ドキュメン
 
 ## 環境の準備 {#environment-preparation}
 
-次の準備手順は、PDF ファイルを初めて生成するときに 1 回だけ実行する必要があり、今後の PDF 生成では直接スキップできます。
+次の準備手順は、PDF ファイルを初めて生成するときに 1回だけ実行する必要があり、今後の PDF 生成では直接スキップできます。
 
 ### 準備1: Docker環境のインストールと設定 {#preparation-1-install-and-configure-the-docker-environment}
 
-> 推定所要時間: 30 分。
+> 推定所要時間: 30分。
 
 次の手順では、Docker Desktop のインストールとして macOS または Windows を例に説明します。
 
@@ -37,7 +37,7 @@ summary: 特定のシナリオのニーズに合わせて、TiDB ドキュメン
 
 ### 準備2: TiDBドキュメントリポジトリをローカルディスクにクローンする {#preparation-2-clone-the-tidb-documentation-repository-to-your-local-disk}
 
-> 推定所要時間: 10 分。
+> 推定所要時間: 10分。
 
 TiDB 英語ドキュメントリポジトリ: [https://github.com/pingcap/docs](https://github.com/pingcap/docs) ; TiDB 中国語ドキュメントリポジトリ: [https://github.com/pingcap/docs-cn](https://github.com/pingcap/docs-cn)
 
@@ -68,7 +68,7 @@ TiDB 英語ドキュメントリポジトリ: [https://github.com/pingcap/docs](
 
 ## 手順 {#steps}
 
-> 推定時間: 以下の操作には 2 分しかかかりませんが、PDF の生成には 0.5 ～ 1 時間かかります。
+> 推定時間: 以下の操作には 2分しかかかりませんが、PDF の生成には 0.5 ～ 1時間かかります。
 
 1.  ローカルの TiDB ドキュメント リポジトリ内のファイルが、アップストリーム GitHub リポジトリの最新バージョンであることを確認します。
 
@@ -77,7 +77,7 @@ TiDB 英語ドキュメントリポジトリ: [https://github.com/pingcap/docs](
     1.  ローカル リポジトリのルート ディレクトリにある`TOC.md`ファイルを開きます。
     2.  `TOC.md`ファイルを編集します。例えば、不要なドキュメントの章のタイトルとリンクをすべて削除できます。
 
-3.  `TOC.md`ファイルに従って、すべてのドキュメントの章を 1 つの Markdown ファイルに統合します。
+3.  `TOC.md`ファイルに従って、すべてのドキュメントの章を 1つの Markdown ファイルに統合します。
 
     1.  Docker アプリケーションを起動します。
 

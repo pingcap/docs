@@ -92,7 +92,7 @@ TiDB バージョン: 5.2.0
 -   **オプティマイザのカーディナリティ推定の精度を向上させる**
 
     -   TiDBのTopN/Limit推定精度を向上させます。例えば、 `order by col limit x`条件を含む大規模テーブルに対するページネーションクエリの場合、TiDBは適切なインデックスをより容易に選択し、クエリ応答時間を短縮できます。
-    -   範囲外推定の精度を向上させます。たとえば、1 日の統計情報が更新されていなくても、TiDB は`where date=Now()`を含むクエリに対して対応するインデックスを正確に選択できます。
+    -   範囲外推定の精度を向上させます。たとえば、1日の統計情報が更新されていなくても、TiDB は`where date=Now()`を含むクエリに対して対応するインデックスを正確に選択できます。
     -   オプティマイザが Limit/TopN をプッシュダウンする動作を制御するために`tidb_opt_limit_push_down_threshold`変数を導入します。これにより、誤った推定のために一部の状況で Limit/TopN をプッシュダウンすることができないという問題が解決されます。
 
     [ユーザー向けドキュメント](/system-variables.md#tidb_opt_limit_push_down_threshold)、 [#26085](https://github.com/pingcap/tidb/issues/26085)

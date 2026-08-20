@@ -213,7 +213,7 @@ Gitリポジトリに変更をプッシュすると、Vercelがプレビュー�
 
 > **Note:**
 >
-> TiDB Cloudの各組織では、デフォルトではTiDB Cloud Starterインスタンス用に最大 5 つのブランチを作成できます。制限を超えないようにするには、不要になったTiDB Cloud Starterインスタンスのブランチを削除してください。詳細については、 [TiDB Cloudブランチを管理する](/tidb-cloud/branch-manage.md)を参照してください。 .
+> TiDB Cloudの各組織では、デフォルトではTiDB Cloud Starterインスタンス用に最大 5つのブランチを作成できます。制限を超えないようにするには、不要になったTiDB Cloud Starterインスタンスのブランチを削除してください。詳細については、 [TiDB Cloudブランチを管理する](/tidb-cloud/branch-manage.md)を参照してください。 .
 
 ## 環境変数を手動で設定して接続します {#connect-via-manually-setting-environment-variables}
 

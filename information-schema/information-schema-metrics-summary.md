@@ -5,14 +5,14 @@ summary: METRICS_SUMMARY システム テーブルについて学習します。
 
 # METRICS_SUMMARY {#metrics-summary}
 
-TiDB クラスタには多くの監視メトリックがあります。異常な監視メトリックを容易に検出できるように、TiDB 4.0 では次の 2 つの監視サマリーテーブルが導入されています。
+TiDB クラスタには多くの監視メトリックがあります。異常な監視メトリックを容易に検出できるように、TiDB 4.0 では次の 2つの監視サマリーテーブルが導入されています。
 
 -   `information_schema.metrics_summary`
 -   `information_schema.metrics_summary_by_label`
 
 > **Note:**
 >
-> 上記の 2 つの監視概要テーブルは、TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
+> 上記の 2つの監視概要テーブルは、TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
 2つの表は、すべての監視データを要約したもので、各監視メトリックを効率的に確認できます。 `information_schema.metrics_summary`と比較して、表`information_schema.metrics_summary_by_label`には`label`列が追加され、異なるラベルに応じて区別された統計情報が表示されます。
 
@@ -138,7 +138,7 @@ COMMENT      | The quantile of TiDB query durations(second)
 -   期間t1: `("2020-03-03 17:08:00", "2020-03-03 17:11:00")`
 -   期間t2: `("2020-03-03 17:18:00", "2020-03-03 17:21:00")`
 
-2 つの期間の監視項目は`METRICS_NAME`に従って結合され、差異値に従ってソートされます。`TIME_RANGE`はクエリ時間を指定するヒントです。
+2つの期間の監視項目は`METRICS_NAME`に従って結合され、差異値に従ってソートされます。`TIME_RANGE`はクエリ時間を指定するヒントです。
 
 ```sql
 SELECT GREATEST(t1.avg_value,t2.avg_value)/LEAST(t1.avg_value,

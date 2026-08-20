@@ -127,11 +127,11 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 -   TiB レベルのデータをインポートする際のTiDB Lightningの安定性を向上[＃43510](https://github.com/pingcap/tidb/issues/43510) [＃43657](https://github.com/pingcap/tidb/issues/43657) @[D3Hunter](https://github.com/D3Hunter) @[lance6716](https://github.com/lance6716)
 
-    v7.1.0 以降、 TiDB Lightning には、TiB レベルのデータをインポートする際の安定性を向上させるために 4 つの構成項目が追加されました。
+    v7.1.0 以降、 TiDB Lightning には、TiB レベルのデータをインポートする際の安定性を向上させるために 4つの構成項目が追加されました。
 
     -   `tikv-importer.region-split-batch-size`バッチでリージョンを分割する際のリージョンの数を制御します。デフォルト値は`4096`です。
     -   `tikv-importer.region-split-concurrency`リージョン分割時の同時実行を制御します。デフォルト値は CPU コアの数です。
-    -   `tikv-importer.region-check-backoff-limit` 、分割および分散処理後にリージョンがオンラインになるまでの再試行回数を制御します。デフォルト値は`1800`で、最大再試行間隔は 2 秒です。再試行の間にいずれかのリージョンがオンラインになった場合、再試行回数は増加しません。
+    -   `tikv-importer.region-check-backoff-limit` 、分割および分散処理後にリージョンがオンラインになるまでの再試行回数を制御します。デフォルト値は`1800`で、最大再試行間隔は 2秒です。再試行の間にいずれかのリージョンがオンラインになった場合、再試行回数は増加しません。
     -   `tikv-importer.pause-pd-scheduler-scope` TiDB Lightning がPD スケジューリングを一時停止する範囲を制御します。値のオプションは`"table"`と`"global"`です。デフォルト値は`"table"`です。v6.1.0 より前のバージョンの TiDB では、データインポート中にグローバルスケジューリングを一時停止する`"global"`オプションのみを設定できます。v6.1.0 以降では、ターゲットテーブルデータが格納されているリージョンのスケジューリングのみを一時停止する`"table"`オプションがサポートされています。データ量が多いシナリオでは、安定性を向上させるために、この設定項目を`"global"`に設定することをお勧めします。
 
     詳細については[ドキュメント](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
@@ -204,7 +204,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 -   LDAP認証をサポート [＃43580](https://github.com/pingcap/tidb/issues/43580) @[YangKeao](https://github.com/YangKeao)
 
-    v7.1.0 以降、TiDB は LDAP 認証をサポートし、 `authentication_ldap_sasl`と`authentication_ldap_simple` 2 つの認証プラグインを提供します。
+    v7.1.0 以降、TiDB は LDAP 認証をサポートし、 `authentication_ldap_sasl`と`authentication_ldap_simple` 2つの認証プラグインを提供します。
 
     詳細については[ドキュメント](/security-compatibility-with-mysql.md)を参照してください。
 
@@ -214,7 +214,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     -   より詳細な監査イベント定義とよりきめ細かな監査設定のために、「フィルター」と「ルール」の概念を導入します。
     -   JSON 形式でのルールの定義をサポートし、よりユーザーフレンドリーな構成方法を提供します。
-    -   自動ログローテーションとスペース管理関数を追加し、保持時間とログサイズの 2 つの次元でのログローテーションの構成をサポートします。
+    -   自動ログローテーションとスペース管理関数を追加し、保持時間とログサイズの 2つの次元でのログローテーションの構成をサポートします。
     -   監査ログをTEXTと JSON 形式の両方で出力できるようにすることで、サードパーティ ツールとの統合が容易になります。
     -   監査ログの秘匿化をサポートします。セキュリティ強化のため、すべてのリテラルを置き換えることができます。
 
@@ -246,7 +246,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 | [`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)                                           | 非推奨      | バージョン7.1.0以降、このシステム変数は非推奨となりました。[`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)を指定することで、キャッシュ可能なプランの最大数を制御できます。                                                                                                                                                                                                                                |
 | [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)                                       | 非推奨      | バージョン7.1.0以降、このシステム変数は非推奨となりました。[`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)を指定することで、キャッシュ可能なプランの最大数を制御できます。                                                                                                                                                                                                                                |
 | `tidb_ddl_distribute_reorg`                                                                                                             | 削除済み     | この変数の名前は[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)に変更されます。                                                                                                                                                                                                                                                                                               |
-| [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin)                                                   | 変更     | 2 つの新しい値オプション`authentication_ldap_sasl`と`authentication_ldap_simple`が導入されました。                                                                                                                                                                                                                                                                                                                   |
+| [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin)                                                   | 変更     | 2つの新しい値オプション`authentication_ldap_sasl`と`authentication_ldap_simple`が導入されました。                                                                                                                                                                                                                                                                                                                   |
 | [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700)                     | 変更     | バージョン7.1.0以降で有効となり、負荷ベースのレプリカ読み取りをトリガーするためのしきい値を制御します。追加のテストを経て、デフォルト値を`"0s"`から`"1s"`に変更します。                                                                                                                                                                                                                                                                                                    |
 | [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)                         | 変更     | デフォルト値を`OFF`から`ON`に変更します。これは、 TiFlash の遅延マテリアライゼーション機能がデフォルトで有効になっていることを意味します。                                                                                                                                                                                                                                                                                                                  |
 | [`authentication_ldap_sasl_auth_method_name`](/system-variables.md#authentication_ldap_sasl_auth_method_name-new-in-v710)               | 新しく追加された | LDAP SASL 認証における認証方法名を指定します。                                                                                                                                                                                                                                                                                                                                                                    |
@@ -295,7 +295,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 | PD             | [`schedule.enable-diagnostic`](/pd-configuration-file.md#enable-diagnostic-new-in-v630)                                        | 変更     | デフォルト値を`false`から`true`に変更します。これは、スケジューラの診断機能がデフォルトで有効であることを意味します。                                                                                                                  |
 | TiFlash        | `http_port`                                                                                                                    | 削除済み     | HTTP サービス ポート (デフォルト`8123` ) を廃止します。                                                                                                                                               |
 | TiDB Lightning | [`tikv-importer.pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)                                    | 新しく追加された | TiDB LightningがPDスケジュールを一時停止する範囲を制御します。デフォルト値は`"table"`で、値のオプションは`"global"`と`"table"`です。                                                                                           |
-| TiDB Lightning | [`tikv-importer.region-check-backoff-limit`](/tidb-lightning/tidb-lightning-configuration.md)                                  | 新しく追加された | 分割および分散処理後にリージョンがオンラインになるまでの再試行回数を制御します。デフォルト値は`1800`です。最大再試行間隔は 2 秒です。再試行の間にいずれかのリージョンがオンラインになった場合、再試行回数は増加しません。                                                                  |
+| TiDB Lightning | [`tikv-importer.region-check-backoff-limit`](/tidb-lightning/tidb-lightning-configuration.md)                                  | 新しく追加された | 分割および分散処理後にリージョンがオンラインになるまでの再試行回数を制御します。デフォルト値は`1800`です。最大再試行間隔は 2秒です。再試行の間にいずれかのリージョンがオンラインになった場合、再試行回数は増加しません。                                                                  |
 | TiDB Lightning | [`tikv-importer.region-split-batch-size`](/tidb-lightning/tidb-lightning-configuration.md)                                     | 新しく追加された | バッチでリージョンを分割する際のリージョン数を制御します。デフォルト値は`4096`です。                                                                                                                                      |
 | TiDB Lightning | [`tikv-importer.region-split-concurrency`](/tidb-lightning/tidb-lightning-configuration.md)                                    | 新しく追加された | リージョンを分割する際の同時実行を制御します。デフォルト値はCPUコアの数です。                                                                                                                                           |
 | TiCDC          | [`insecure-skip-verify`](/ticdc/ticdc-sink-to-kafka.md)                                                                        | 新しく追加された | Kafka にデータを複製するシナリオで TLS が有効になっている場合に認証アルゴリズムを設定するかどうかを制御します。                                                                                                                      |
@@ -439,7 +439,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
         -   TiCDC タイムゾーン設定の問題を修正 [＃8798](https://github.com/pingcap/tiflow/issues/8798) @[Rustin170506](https://github.com/Rustin170506)
         -   PDアドレスまたはリーダーに障害が発生したときにTiCDCが自動的に回復できない問題を修正[＃8812](https://github.com/pingcap/tiflow/issues/8812) [＃8877](https://github.com/pingcap/tiflow/issues/8877) @[asddongmen](https://github.com/asddongmen)
-        -   上流の TiKV ノードの 1 つがクラッシュするとチェックポイントの遅延が増加する問題を修正しました [＃8858](https://github.com/pingcap/tiflow/issues/8858) @[hicqu](https://github.com/hicqu)
+        -   上流の TiKV ノードの 1つがクラッシュするとチェックポイントの遅延が増加する問題を修正しました [＃8858](https://github.com/pingcap/tiflow/issues/8858) @[hicqu](https://github.com/hicqu)
         -   オブジェクトストレージにデータを複製する際に、上流の`EXCHANGE PARTITION`操作が下流のに正しく複製されない問題を修正しました。 [＃8914](https://github.com/pingcap/tiflow/issues/8914) @[CharlesCheung96](https://github.com/CharlesCheung96)
         -   いくつかの特殊なシナリオでソートコンポーネントの過剰なメモリ使用によって引き起こされる OOM 問題を修正しました[＃8974](https://github.com/pingcap/tiflow/issues/8974) @[hicqu](https://github.com/hicqu)
         -   下流の Kafka シンクがローリング再起動されたときに発生する TiCDC ノードpanicを修正しました[＃9023](https://github.com/pingcap/tiflow/issues/9023) @[asddongmen](https://github.com/asddongmen)

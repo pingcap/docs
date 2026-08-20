@@ -78,7 +78,7 @@ TiCDCのアーキテクチャを次の図に示す。
 
 ## 有効なインデックス {#valid-index}
 
-一般的に、TiCDC は有効なインデックスを少なくとも 1 つ持つテーブルのみをダウンストリームにレプリケートします。テーブル内のインデックスが以下のいずれかの要件を満たしている場合、そのインデックスは有効です。
+一般的に、TiCDC は有効なインデックスを少なくとも 1つ持つテーブルのみをダウンストリームにレプリケートします。テーブル内のインデックスが以下のいずれかの要件を満たしている場合、そのインデックスは有効です。
 
 -   主キー（ `PRIMARY KEY` ）は有効なインデックスです。
 -   一意インデックス ( `UNIQUE INDEX` ) は、インデックスのすべての列が明示的に非 null 許容 ( `NOT NULL` ) として定義され、インデックスに仮想生成列 ( `VIRTUAL GENERATED COLUMNS` ) がない場合に有効です。
@@ -94,7 +94,7 @@ TiCDCのアーキテクチャを次の図に示す。
     -   TiCDCのバージョンがv6.5.2より前の場合は、下流のTiDBクラスタが配置されているリージョン（IDC）にTiCDCをデプロイすることをお勧めします。
     -   TiCDC v6.5.2以降に導入された一連の改善により、TiCDCは上流のTiDBクラスタが配置されているリージョン（IDC）にデプロイすることが推奨されます。
 
--   TiCDC によって複製される各テーブルには、少なくとも 1 つの[有効なインデックス](#valid-index)があります。
+-   TiCDC によって複製される各テーブルには、少なくとも 1つの[有効なインデックス](#valid-index)があります。
 
 -   TiCDC をディザスタリカバリに使用する際に最終的な整合性を確保するには、 [リドゥログ](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)を設定し、上流で災害が発生した場合でも、リドゥログが書き込まれるストレージシステムが正常に読み取れるようにする必要があります。
 
@@ -120,7 +120,7 @@ MySQLのbinlogは、アップストリームで実行されたすべてのDML SQ
 
 TiCDCは、データ変更情報に基づいて、さまざまなダウンストリームタイプに適した形式でデータを生成し、ダウンストリームに送信します。例えば、Canal-JSONやAvroなどの形式でデータを生成してKafkaに書き込んだり、データをSQL文に変換してダウンストリームのMySQLやTiDBに送信したりします。
 
-現在、TiCDC が対応するプロトコルのデータ変更情報を適応させる場合、特定の`UPDATE`イベントについて、それらのイベントを 1 つの`DELETE`イベントと 1 つの`INSERT`イベントに分割する場合があります。詳細については、 [MySQLシンクの`UPDATE`イベントを分割する](/ticdc/ticdc-split-update-behavior.md#split-update-events-for-mysql-sinks)および[MySQL以外のシンクにおける、主キーまたは一意キーを分割した`UPDATE`イベント](/ticdc/ticdc-split-update-behavior.md#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
+現在、TiCDC が対応するプロトコルのデータ変更情報を適応させる場合、特定の`UPDATE`イベントについて、それらのイベントを 1つの`DELETE`イベントと 1つの`INSERT`イベントに分割する場合があります。詳細については、 [MySQLシンクの`UPDATE`イベントを分割する](/ticdc/ticdc-split-update-behavior.md#split-update-events-for-mysql-sinks)および[MySQL以外のシンクにおける、主キーまたは一意キーを分割した`UPDATE`イベント](/ticdc/ticdc-split-update-behavior.md#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
 
 ダウンストリームがMySQLまたはTiDBの場合、TiCDCはダウンストリームに書き込まれるSQL文がアップストリームで実行されるSQL文と完全に一致することを保証できません。これは、TiCDCがアップストリームで実行される元のDML文を直接取得するのではなく、データ変更情報に基づいてSQL文を生成するためです。ただし、TiCDCは最終結果の一貫性を保証します。
 

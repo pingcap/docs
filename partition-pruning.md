@@ -39,7 +39,7 @@ EXPLAIN SELECT * FROM t1 WHERE id BETWEEN 80 AND 120;
 
 ## パーティションプルーニングの使用シナリオ {#usage-scenarios-of-partition-pruning}
 
-パーティション プルーニングの使用シナリオは、範囲パーティション テーブルとハッシュ パーティション テーブルという 2 種類のパーティション テーブルで異なります。
+パーティション プルーニングの使用シナリオは、範囲パーティション テーブルとハッシュ パーティション テーブルという 2種類のパーティション テーブルで異なります。
 
 ### ハッシュパーティションテーブルでパーティションプルーニングを使用する {#use-partition-pruning-in-hash-partitioned-tables}
 
@@ -68,7 +68,7 @@ explain select * from t where x = 1;
 
 #### ハッシュパーティションテーブルに適用されないシナリオ {#inapplicable-scenarios-in-hash-partitioned-tables}
 
-このセクションでは、ハッシュ パーティション テーブルでのパーティション プルーニングの適用されない 2 つの使用シナリオについて説明します。
+このセクションでは、ハッシュ パーティション テーブルでのパーティション プルーニングの適用されない 2つの使用シナリオについて説明します。
 
 ##### シナリオ1 {#scenario-one}
 
@@ -139,7 +139,7 @@ explain select * from t2 where x = (select * from t1 where t2.x = t1.x and t2.x 
 
 #### 範囲パーティションテーブルに適用可能なシナリオ {#applicable-scenarios-in-range-partitioned-tables}
 
-このセクションでは、範囲パーティション化されたテーブルでのパーティション プルーニングの適用可能な 3 つの使用シナリオについて説明します。
+このセクションでは、範囲パーティション化されたテーブルでのパーティション プルーニングの適用可能な 3つの使用シナリオについて説明します。
 
 ##### シナリオ1 {#scenario-one}
 

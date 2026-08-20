@@ -20,7 +20,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         これにより、DB User、SQL type、DB、table、SQL digest などの複数の次元で、SQL ステートメントの RU 消費量、レイテンシー、実行回数を分析できるようになりました。さらに、主な要因をひと目で確認できるため、高いリソース消費や処理遅延の原因を特定しやすくなります。
 
-        現在、この機能はパブリックプレビュー段階であり、8 月 19 日以降に作成された一部の TiDB Cloud Premium インスタンスでのみ利用できます。
+        現在、この機能はパブリックプレビュー段階であり、8月 19日以降に作成された一部の TiDB Cloud Premium インスタンスでのみ利用できます。
 
         詳細については、[Statement Insight (PREVIEW)](https://docs.pingcap.com/tidbcloud/statement-insight/?plan=premium) を参照してください。
 
@@ -88,9 +88,9 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - TiDB Cloud Premium インスタンスの自動バックアップに **Custom Retention Mode** を導入しました。
 
-        TiDB Cloud Premium では、2 つの自動バックアップモードを利用できるようになりました。
+        TiDB Cloud Premium では、2つの自動バックアップモードを利用できるようになりました。
 
-        - **Custom Retention Mode:** 保持期間を 3 日から 33 日まで指定し、日次スナップショットを作成するタイミングを選択できます。
+        - **Custom Retention Mode:** 保持期間を 3日から 33日まで指定し、日次スナップショットを作成するタイミングを選択できます。
         - **Standard Bundle Mode:** PITR、時間単位のスナップショット、および日次スナップショットに対する従来のデフォルト自動バックアップ設定を維持します。
 
       詳細については、[Automatic backup modes](/tidb-cloud/premium/backup-and-restore-premium.md#automatic-backup-modes) を参照してください。
@@ -231,7 +231,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         - Alibaba Cloud: `Singapore (ap-southeast-1)` および `Tokyo (ap-northeast-1)`
 
-      この機能は、1 分単位で RU 消費量が上位の SQL ステートメントを表示し、最もリソースを消費するクエリをすばやく特定してコスト削減に役立てることができます。
+      この機能は、1分単位で RU 消費量が上位の SQL ステートメントを表示し、最もリソースを消費するクエリをすばやく特定してコスト削減に役立てることができます。
 
       この機能は段階的に展開されています。早期アクセスについては [support@pingcap.com](mailto:support@pingcap.com) までお問い合わせください。
 
@@ -248,7 +248,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - TiDB Cloud Lake がパブリックプレビューになりました。
 
-        TiDB Cloud Lake は、モダンな分析および AI 指向のデータワークフロー向けの、TiDB Cloud におけるクラウドネイティブな分析ウェアハウスです。弾力的なウェアハウス、ANSI SQL 分析、オブジェクトストレージ、全文検索、ベクトル検索、地理空間分析を 1 つのマネージドサービスで提供し、個別の分析インフラを管理することなく、構造化データおよび半構造化データを分析できるよう支援します。
+        TiDB Cloud Lake は、モダンな分析および AI 指向のデータワークフロー向けの、TiDB Cloud におけるクラウドネイティブな分析ウェアハウスです。弾力的なウェアハウス、ANSI SQL 分析、オブジェクトストレージ、全文検索、ベクトル検索、地理空間分析を 1つのマネージドサービスで提供し、個別の分析インフラを管理することなく、構造化データおよび半構造化データを分析できるよう支援します。
 
         このパブリックプレビューでは、弾力的なウェアハウスで SQL 分析を実行し、組み込みの検索機能を BI、ログ分析、セマンティック検索、その他のモダンな分析および AI のユースケースに活用できます。
 
@@ -363,7 +363,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 -   **TiDB Cloud Starter**
 
-    -   [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)で[全文検索](https://docs.pingcap.com/ai/vector-search-full-text-search-python/)(パブリックプレビュー) 用の新しい AWS リージョンが 2 つ追加されました: `Tokyo (ap-northeast-1)`と`Oregon (us-west-2)` 。この機能は、以下の AWS リージョンで利用可能になりました。
+    -   [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)で[全文検索](https://docs.pingcap.com/ai/vector-search-full-text-search-python/)(パブリックプレビュー) 用の新しい AWS リージョンが 2つ追加されました: `Tokyo (ap-northeast-1)`と`Oregon (us-west-2)` 。この機能は、以下の AWS リージョンで利用可能になりました。
 
         -   `Tokyo (ap-northeast-1)`
         -   `Oregon (us-west-2)`

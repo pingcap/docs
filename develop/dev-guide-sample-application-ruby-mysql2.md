@@ -266,7 +266,7 @@ client = Mysql2::Client.new(options)
 
 ### データを挿入する {#insert-data}
 
-次のクエリは、2 つのフィールドを持つ単一のプレーヤーを作成し、 `last_insert_id`を返します。
+次のクエリは、2つのフィールドを持つ単一のプレーヤーを作成し、 `last_insert_id`を返します。
 
 ```ruby
 def create_player(client, coins, goods)
