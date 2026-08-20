@@ -40,7 +40,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 Navigate to the overview page of the target TiDB Cloud Dedicated cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** to go to the **Destination** page, and then select **Amazon S3**, **GCS**, or **Azure Blob Storage** as the destination, depending on the cloud provider on which your TiDB Cloud Dedicated cluster is hosted. The configuration process varies depending on the destination you choose.
 </CustomContent>
 <CustomContent plan="premium">
-Navigate to the overview page of the target TiDB Cloud Premium cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** to go to the **Destination** page, and then select **Amazon S3** or **Alibaba Cloud OSS** as the destination, depending on the cloud provider on which your TiDB Cloud Premium cluster is hosted. The configuration process varies depending on the destination you choose.
+Navigate to the overview page of the target TiDB Cloud Premium instance. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** to go to the **Destination** page, and then select **Amazon S3** or **Alibaba Cloud OSS** as the destination, depending on the cloud provider on which your TiDB Cloud Premium instance is hosted. The configuration process varies depending on the destination you choose.
 </CustomContent>
 
 <SimpleTab>
