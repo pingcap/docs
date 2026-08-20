@@ -123,7 +123,7 @@ TiDB Cloud Lake の料金は、ウェアハウス、ストレージ、クラウ�
 - **Dual-layer encryption**: 行ベースのストレージとカラム型ストレージはどちらもデュアルレイヤー暗号化をサポートしています。このメカニズムは、2 つの独立した暗号化レイヤーでデータを保護し、1 つのレイヤーが侵害された場合でもデータが保護された状態を維持できるようにします。
 
     - Storage-layer encryption: 基盤となるクラウドプロバイダーは、ネイティブのストレージ暗号化メカニズムを使用して、保存中のすべてのデータを暗号化します。
-    - Database-layer encryption: クラウドプロバイダーの暗号化に加えて、TiDB Cloud は customer-managed encryption key (CMEK) または escrow key のいずれかを使用して、自動的に第 2 の暗号化レイヤーを適用します。
+    - Database-layer encryption: クラウドプロバイダーの暗号化に加えて、TiDB Cloud は顧客管理暗号化キー (CMEK) またはエスクロー鍵のいずれかを使用して、自動的に第 2 の暗号化レイヤーを適用します。
 
 <!--**Use case:** Workloads with strict security and compliance requirements, such as those in the financial services, government, and healthcare industries.-->
 

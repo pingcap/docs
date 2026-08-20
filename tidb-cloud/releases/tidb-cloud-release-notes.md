@@ -10,7 +10,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 ## 2026年8月18日 {#august-18-2026}
 
-**General changes**
+**全般的な変更**
 
 - **TiDB Cloud Premium**
 

@@ -23,7 +23,7 @@ Statement Insight は、インスタンスで有効化された後にのみデ�
 
 ## Statement Insight を開く {#open-statement-insight}
 
-1. [TiDB Cloud console](https://tidbcloud.com/) にログインし、<CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .premium }}} or {{{ .byoc }}}</CustomContent> インスタンスに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/) にログインし、<CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .premium }}} or {{{ .byoc }}}</CustomContent> インスタンスに移動します。
 2. 左側のナビゲーションペインで、**Monitoring** > **Diagnosis** をクリックします。
 3. **Diagnosis** ページで、**Statement Insight** タブをクリックします。
 
@@ -64,7 +64,7 @@ Statement Insight は、インスタンスで有効化された後にのみデ�
 ## 制限事項 {#limitations}
 
 - Statement Insight は、履歴分析および RU またはパフォーマンスのベースライン作成を目的としています。データ収集方法と集計方法の違いにより、表示される RU は TiDB Cloud 請求書に記載される RU 使用量とは異なります（Statement Insight では累積 RU 消費量を表示します）。請求額の照合に Statement Insight のデータを使用しないでください。
-- データの更新間隔は最大 **10 minutes** で、基盤となる収集サイクルに一致します。
+- データの更新間隔は最大 **10分**で、基盤となる収集サイクルに一致します。
 
 ## FAQ {#faq}
 
