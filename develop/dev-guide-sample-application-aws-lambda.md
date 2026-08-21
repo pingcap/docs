@@ -116,7 +116,7 @@ npm install
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+2.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
 
 3.  **Networking**ページで、**Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
 
@@ -285,7 +285,7 @@ AWS Lambda関数は、 [SAM CLI](#sam-cli-deployment-recommended)または[AWS L
 
 5.  Lambda 関数で[対応する接続​​文字列をコピーして設定します](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)
 
-    1.  Lambda コンソールの[機能](https://console.aws.amazon.com/lambda/home#/functions)ページで、 **[コンフィグレーション]**タブを選択し、 **[環境変数]**を選択します。
+    1.  Lambda コンソールの[Functions](https://console.aws.amazon.com/lambda/home#/functions)ページで、 **Configuration**タブを選択し、 **Environment variables**を選択します。
     2.  **Edit**を選択してください。
     3.  データベースへのアクセス資格情報を追加するには、以下の手順を実行してください。
         -   **Add environment variable**を選択し、 **Key**に`TIDB_HOST`と入力し、 **Value**にホスト名を入力します。

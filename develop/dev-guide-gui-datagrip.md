@@ -80,7 +80,7 @@ DataGripは2つの方法で使用できます。
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+2.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
 
 3.  **Networking**ページで、**Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
 
@@ -103,12 +103,12 @@ DataGripは2つの方法で使用できます。
 
 9.  適切な接続文字列をコピーして、DataGrip の **Data Source and Drivers**ウィンドウに貼り付けてください。DataGrip のフィールドとTiDB Cloud Premium の接続文字列のマッピングは以下のとおりです。
 
-    | データグリップフィールド | TiDB Cloud Premium接続文字列 |
+    | DataGrip field | TiDB Cloud Premium接続文字列 |
     | ------------ | ----------------------- |
-    | ホスト          | `{host}`                |
-    | ポート          | `{port}`                |
-    | ユーザー         | `{user}`                |
-    | パスワード        | `{password}`            |
+    | Host          | `{host}`                |
+    | Port          | `{port}`                |
+    | User         | `{user}`                |
+    | Password        | `{password}`            |
 
     -   **SSH/SSL**タブで、 **Use SSL**チェックボックスをオフにします。
     -   **Download missing driver files**という警告が表示された場合は、 **Download**をクリックしてドライバファイルを入手してください。
@@ -138,14 +138,14 @@ DataGripは2つの方法で使用できます。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
-6.  適切な接続文字列をコピーして、DataGrip の [**データ ソースとドライバ]**ウィンドウに貼り付けてください。DataGrip フィールドとTiDB Cloud Dedicated接続文字列のマッピングは以下のとおりです。
+6.  適切な接続文字列をコピーして、DataGrip の **Data Source and Drivers**ウィンドウに貼り付けてください。DataGrip フィールドとTiDB Cloud Dedicated接続文字列のマッピングは以下のとおりです。
 
-    | データグリップフィールド | TiDB Cloud Dedicated接続文字列 |
+    | DataGrip field | TiDB Cloud Dedicated接続文字列 |
     | ------------ | ------------------------- |
-    | ホスト          | `{host}`                  |
-    | ポート          | `{port}`                  |
-    | ユーザー         | `{user}`                  |
-    | パスワード        | `{password}`              |
+    | Host          | `{host}`                  |
+    | Port          | `{port}`                  |
+    | User         | `{user}`                  |
+    | Password        | `{password}`              |
 
     例えば、以下のような例があります。
 
@@ -157,7 +157,7 @@ DataGripは2つの方法で使用できます。
 
     **Download missing driver files**という警告が表示された場合は、 **Download**をクリックしてドライバファイルを入手してください。
 
-8.  **[詳細設定]**タブをクリックし、スクロールして**enabledTLSProtocols**パラメーターを見つけ、その値を`TLSv1.2,TLSv1.3`に設定します。
+8.  **Advanced**タブをクリックし、スクロールして**enabledTLSProtocols**パラメーターを見つけ、その値を`TLSv1.2,TLSv1.3`に設定します。
 
     ![Configure the TLS for TiDB Cloud Dedicated](/media/develop/datagrip-dedicated-advanced.jpg)
 
@@ -180,10 +180,10 @@ DataGripは2つの方法で使用できます。
 
 3.  以下の接続パラメータを設定してください。
 
-    -   **ホスト**：TiDB Self-ManagedクラスタのIPアドレスまたはドメイン名。
-    -   **ポート**：TiDB Self-Managedクラスタのポート番号。
-    -   **ユーザー**：TiDB Self-Managedクラスタに接続するために使用するユーザー名。
-    -   **パスワード**：ユーザー名のパスワード。
+    -   **Host**：TiDB Self-ManagedクラスタのIPアドレスまたはドメイン名。
+    -   **Port**：TiDB Self-Managedクラスタのポート番号。
+    -   **User**：TiDB Self-Managedクラスタに接続するために使用するユーザー名。
+    -   **Password**：ユーザー名のパスワード。
 
     例えば、以下のような例があります。
 

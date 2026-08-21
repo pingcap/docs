@@ -61,11 +61,11 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
 6.  **Setup New Connection**ダイアログで、以下の接続パラメータを設定します。
 
-    -   **接続名**：この接続に分かりやすい名前を付けてください。
-    -   **ホスト名**： TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
-    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
-    -   **ユーザー名**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
-    -   **パスワード**： **[キーチェーンに保存...]**または**[Vaultに保存]**をクリックし、手順4で作成したパスワードを入力して、 **[OK]**をクリックしてパスワードを保存します。
+    -   **Connection Name**：この接続に分かりやすい名前を付けてください。
+    -   **Hostname**： TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    -   **Port**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    -   **Username**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
+    -   **Password**： **Store in Keychain ...**または**Store in Vault**をクリックし、手順4で作成したパスワードを入力して、 **OK**をクリックしてパスワードを保存します。
 
         ![MySQL Workbench: store the password of TiDB Cloud Starter in keychain](/media/develop/mysql-workbench-store-password-in-keychain.png)
 
@@ -82,7 +82,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+2.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
 
 3.  **Networking**ページで、**Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
 
@@ -103,11 +103,11 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
 8.  **Setup New Connection**ダイアログで、以下の接続パラメータを設定します。
 
-    -   **接続名**：この接続に分かりやすい名前を付けてください。
-    -   **ホスト名**： TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
-    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
-    -   **ユーザー名**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
-    -   **パスワード**： **[キーチェーンに保存...]**または**[Vaultに保存]**をクリックし、 TiDB Cloud Premiumインスタンスのパスワードを入力して、 **[OK]**をクリックするとパスワードが保存されます。
+    -   **Connection Name**：この接続に分かりやすい名前を付けてください。
+    -   **Hostname**： TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    -   **Port**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    -   **Username**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
+    -   **Password**： **Store in Keychain ...**または**Store in Vault**をクリックし、 TiDB Cloud Premiumインスタンスのパスワードを入力して、 **OK**をクリックするとパスワードが保存されます。
 
 9.  **Test Connection**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
 
@@ -132,11 +132,11 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
 5.  **Setup New Connection**ダイアログで、以下の接続パラメータを設定します。
 
-    -   **接続名**：この接続に分かりやすい名前を付けてください。
-    -   **ホスト名**： TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
-    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
-    -   **ユーザー名**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
-    -   **パスワード**： **[キーチェーンに保存...]**をクリックし、 TiDB Cloud Dedicatedクラスタのパスワードを入力して、 **[OK]**をクリックするとパスワードが保存されます。
+    -   **Connection Name**：この接続に分かりやすい名前を付けてください。
+    -   **Hostname**： TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    -   **Port**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    -   **Username**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
+    -   **Password**： **Store in Keychain ...**をクリックし、 TiDB Cloud Dedicatedクラスタのパスワードを入力して、 **OK**をクリックするとパスワードが保存されます。
 
         ![MySQL Workbench: store the password of TiDB Cloud Dedicated in keychain](/media/develop/mysql-workbench-store-dedicated-password-in-keychain.png)
 
@@ -157,11 +157,11 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
 2.  **Setup New Connection**ダイアログで、以下の接続パラメータを設定します。
 
-    -   **接続名**：この接続に分かりやすい名前を付けてください。
-    -   **ホスト名**：TiDB Self-ManagedクラスタのIPアドレスまたはドメイン名を入力してください。
-    -   **ポート**：TiDB Self-Managedクラスタのポート番号を入力してください。
-    -   **ユーザー名**：TiDBに接続するために使用するユーザー名を入力してください。
-    -   **パスワード**： **[キーチェーンに保存...]**をクリックし、TiDB Self-Managedクラスタへの接続に使用するパスワードを入力して、 **[OK]**をクリックしてパスワードを保存します。
+    -   **Connection Name**：この接続に分かりやすい名前を付けてください。
+    -   **Hostname**：TiDB Self-ManagedクラスタのIPアドレスまたはドメイン名を入力してください。
+    -   **Port**：TiDB Self-Managedクラスタのポート番号を入力してください。
+    -   **Username**：TiDBに接続するために使用するユーザー名を入力してください。
+    -   **Password**： **Store in Keychain ...**をクリックし、TiDB Self-Managedクラスタへの接続に使用するパスワードを入力して、 **OK**をクリックしてパスワードを保存します。
 
         ![MySQL Workbench: store the password of TiDB Self-Managed in keychain](/media/develop/mysql-workbench-store-self-hosted-password-in-keychain.png)
 
@@ -182,7 +182,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
 このエラーは、クエリの実行時間がタイムアウト制限を超えたことを示しています。この問題を解決するには、以下の手順でタイムアウト設定を調整してください。
 
-1.  MySQL Workbenchを起動し、 **Workbenchの設定**ページに移動します。
+1.  MySQL Workbenchを起動し、 **Workbench Preferences**ページに移動します。
 2.  **SQL Editor** > **MySQL Session**セクションで、 **DBMS connection read timeout interval (in seconds)**オプションを設定します。これは、MySQL Workbenchがサーバーから切断されるまでにクエリが実行できる最大時間（秒単位）を設定します。
 
     ![MySQL Workbench: adjust timeout option in SQL Editor settings](/media/develop/mysql-workbench-adjust-sqleditor-read-timeout.jpg)

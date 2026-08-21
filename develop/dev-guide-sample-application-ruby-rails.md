@@ -74,7 +74,7 @@ bundle add mysql2 dotenv
 
 2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、[**接続先]**ドロップダウンリストから`Rails`を選択し、 **[接続タイプ]**のデフォルト設定を`Public`のままにします。
+3.  接続ダイアログで、**Connect With**ドロップダウンリストから`Rails`を選択し、 **Connection Type**のデフォルト設定を`Public`のままにします。
 
 4.  まだパスワードを設定していない場合は、 **Generate Password**をクリックしてランダムなパスワードを生成してください。
 
@@ -101,7 +101,7 @@ bundle add mysql2 dotenv
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+2.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
 
 3.  **Networking**ページで、**Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
 

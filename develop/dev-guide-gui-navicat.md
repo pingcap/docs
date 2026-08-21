@@ -57,11 +57,11 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
 6.  **New Connection (TiDB)**ダイアログで、以下の接続パラメータを設定します。
 
-    -   **接続名**：この接続に分かりやすい名前を付けてください。
-    -   **ホスト**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
-    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
-    -   **ユーザー名**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
-    -   **パスワード**：手順4で作成したパスワードを入力してください。
+    -   **Connection Name**：この接続に分かりやすい名前を付けてください。
+    -   **Host**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    -   **Port**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    -   **User Name**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
+    -   **Password**：手順4で作成したパスワードを入力してください。
 
     ![Navicat: configure connection general panel for TiDB Cloud Starter](/media/develop/navicat-premium-connection-config-serverless-general.png)
 
@@ -78,9 +78,9 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+2.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
 
-3.  **ネットワークの**ページで、 **[パブリックエンドポイント**を**有効にする]**をクリックし、次に**[IP アドレスを追加]**をクリックします。
+3.  **Networking**ページで、 **Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
 
     クライアントのIPアドレスがアクセスリストに追加されていることを確認してください。
 
@@ -99,11 +99,11 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
 8.  **New Connection (TiDB)**ダイアログで、以下の接続パラメータを設定します。
 
-    -   **接続名**：この接続に分かりやすい名前を付けてください。
-    -   **ホスト**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
-    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
-    -   **ユーザー名**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
-    -   **パスワード**： TiDB Cloud Premiumインスタンスのパスワードを入力してください。
+    -   **Connection Name**：この接続に分かりやすい名前を付けてください。
+    -   **Host**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    -   **Port**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    -   **User Name**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
+    -   **Password**： TiDB Cloud Premiumインスタンスのパスワードを入力してください。
 
 9.  **SSL**タブをクリックし、 **Use SSL**チェックボックスをオフにします。
 
@@ -132,11 +132,11 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
 6.  **New Connection (TiDB)**ダイアログで、以下の接続パラメータを設定します。
 
-    -   **接続名**：この接続に分かりやすい名前を付けてください。
-    -   **ホスト**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
-    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
-    -   **ユーザー名**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
-    -   **パスワード**： TiDB Cloud Dedicatedクラスタのパスワードを入力してください。
+    -   **Connection Name**：この接続に分かりやすい名前を付けてください。
+    -   **Host**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    -   **Port**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    -   **User Name**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
+    -   **Password**： TiDB Cloud Dedicatedクラスタのパスワードを入力してください。
 
     ![Navicat: configure connection general panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-general.png)
 
@@ -157,11 +157,11 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
 2.  **New Connection (TiDB)**ダイアログで、以下の接続パラメータを設定します。
 
-    -   **接続名**：この接続に分かりやすい名前を付けてください。
-    -   **ホスト**：TiDB Self-ManagedクラスタのIPアドレスまたはドメイン名を入力してください。
-    -   **ポート**：TiDB Self-Managedクラスタのポート番号を入力してください。
-    -   **ユーザー名**：TiDBに接続するために使用するユーザー名を入力してください。
-    -   **パスワード**：TiDBに接続するために使用するパスワードを入力してください。
+    -   **Connection Name**：この接続に分かりやすい名前を付けてください。
+    -   **Host**：TiDB Self-ManagedクラスタのIPアドレスまたはドメイン名を入力してください。
+    -   **Port**：TiDB Self-Managedクラスタのポート番号を入力してください。
+    -   **User Name**：TiDBに接続するために使用するユーザー名を入力してください。
+    -   **Password**：TiDBに接続するために使用するパスワードを入力してください。
 
     ![Navicat: configure connection general panel for self-hosted TiDB](/media/develop/navicat-premium-connection-config-self-hosted-general.png)
 
