@@ -35,7 +35,7 @@ TiDB Cloudコンソールを使用して、 TiDB Cloud Starterインスタンス
     -   パスワードが既に存在する場合は、 **Enter the password for easy setup**欄に入力してください。
     -   パスワードを忘れた場合は、 **Prerequisites**セクションの**Reset password**をクリックして新しいパスワードを生成してください。
 
-5.  **Cursor**タブを選択し、 **Add to Cursor**をクリックしてから、Cursorに**Install**をクリックします。
+5.  **Cursor**タブを選択し、 **Add to Cursor**をクリックしてから、Cursorで**Install**をクリックします。
 
 ## 手動設定（任意のTiDBクラスタ） {#manual-configuration-any-tidb-cluster}
 

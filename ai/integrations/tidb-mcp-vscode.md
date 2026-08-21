@@ -31,7 +31,7 @@ TiDB Cloudコンソールを使用して、VS Code構成を生成します。
     -   パスワードが既に存在する場合は、 **Enter the password for easy setup**欄に入力してください。
     -   パスワードを忘れた場合は、 **Prerequisites**セクションの**Reset password**をクリックして新しいパスワードを生成してください。
 
-5.  **VS Code**タブを選択し、 **Add to VS Code**をクリックしてから、VS Codeに**Install**をクリックします。
+5.  **VS Code**タブを選択し、 **Add to VS Code**をクリックしてから、VS Codeで**Install**をクリックします。
 
 ## 手動設定（任意のTiDBクラスタ） {#manual-configuration-any-tidb-cluster}
 
