@@ -212,6 +212,29 @@ For **Alibaba Cloud OSS**, follow these steps to configure the changefeed:
         - `oss:PutObject`
         - `oss:DeleteObject`
 
+    The following JSON example shows a policy with the required permissions. Replace `<Your bucket name>` with the name of your OSS bucket.
+
+    ```json
+    {
+      "Version": "1",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "oss:ListObjects",
+            "oss:GetObject",
+            "oss:PutObject",
+            "oss:DeleteObject"
+          ],
+          "Resource": [
+            "acs:oss:*:*:<Your bucket name>",
+            "acs:oss:*:*:<Your bucket name>/*"
+          ]
+        }
+      ]
+    }
+    ```
+
 2. On the **Destination** page for Alibaba Cloud OSS, fill in the following fields:
 
     - **Bucket URI**: enter the OSS URI in the format `oss://<BucketName>/<prefix>/`.
