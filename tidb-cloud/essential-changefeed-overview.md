@@ -14,7 +14,7 @@ TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサー
 >     1.  [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある?をクリックします**。** 。
 >     2.  **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。
 >     3.  チケットを作成します。「説明」欄に「changefeedへの申請」と入力します。
->     4.  **「送信」**をクリックしてください。
+>     4.  **送信**をクリックしてください。
 > -   TiDB Cloud Essentialインスタンスごとに最大10個の変更フィードが許可されています。
 > -   [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは、変更フィード機能は利用できません。
 
@@ -44,7 +44,7 @@ TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサー
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「変更フィード」**をクリックします。変更フィードページが表示されます。
+2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**データ** &gt; **変更フィード**をクリックします。変更フィードページが表示されます。
 
 **変更フィード**ページでは、変更フィードの作成、既存の変更フィードの一覧表示、および既存の変更フィードの操作（変更フィードの一時停止、再開、編集、削除など）を行うことができます。
 
@@ -156,7 +156,7 @@ ticloud serverless changefeed edit --cluster-id <cluster-id> --changefeed-id <ch
 1.  ターゲットのTiDB Cloud Essentialインスタンスの[**変更フィード**](#view-the-changefeed-page)ページに移動します。
 2.  複製したい変更フィードを探します。**アクション**列で、 **...** &gt;**複製を**クリックします。
 3.  TiDB Cloudは、新しい変更フィード設定に元の設定を自動的に反映します。必要に応じて設定を確認および変更できます。
-4.  設定を確認後、 **「送信」**をクリックして新しい変更フィードを作成して開始します。
+4.  設定を確認後、 **送信**をクリックして新しい変更フィードを作成して開始します。
 
 ## 変更フィードを削除する {#delete-a-changefeed}
 

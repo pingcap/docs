@@ -126,7 +126,7 @@ sequenceDiagram
 > -   TiDB v3.0.0以降、トランザクションの自動再試行はデフォルトで無効になっています。これは、**トランザクション分離レベルを損なう**可能性があるためです。
 > -   TiDB v8.0.0以降、楽観的トランザクションの自動再試行はサポートされなくなりました。
 
-トランザクションのコミット中に書き込み競合が発生した場合、TiDB は書き込み操作を含む SQL ステートメントを自動的に再試行します。自動再試行を有効にするには、 `tidb_disable_txn_auto_retry` ～ `OFF`を設定し、再試行回数の上限を`tidb_retry_limit`に設定してください。
+トランザクションのコミット中に書き込み競合が発生した場合、TiDB は書き込み操作を含む SQL ステートメントを自動的に再試行します。自動再試行を有効にするには、 `tidb_disable_txn_auto_retry`を`OFF`に設定し、再試行回数の上限を`tidb_retry_limit`に設定してください。
 
 ```toml
 # Whether to disable automatic retry. ("on" by default)

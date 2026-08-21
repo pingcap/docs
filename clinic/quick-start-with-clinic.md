@@ -42,7 +42,7 @@ PingCAP Clinicを使用する前に、Diag をインストールし、データ�
 
     <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-    [中国本土のユーザー向けClinic Server](https://clinic.pingcap.com.cn)に進み、 **「AskTUGを続ける」**を選択してAskTUGコミュニティのログインページに進みます。AskTUGアカウントをお持ちでない場合は、このページでアカウントを作成してください。
+    [中国本土のユーザー向けClinic Server](https://clinic.pingcap.com.cn)に進み、 **AskTUGを続ける**を選択してAskTUGコミュニティのログインページに進みます。AskTUGアカウントをお持ちでない場合は、このページでアカウントを作成してください。
 
     </div>
     </SimpleTab>

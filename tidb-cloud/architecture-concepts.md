@@ -84,7 +84,7 @@ TiDB Cloud Essentialは、さまざまな運用要件に対応するため、2�
 
 -   **無制限の成長と自動スケーリング**：変化するワークロードに対応するためのシームレスなスケーリングを提供し、ビジネスに不可欠な業務の継続的な信頼性を確保します。
 -   **パフォーマンス最適化**：高スループットかつ低遅延のワークロード向けに調整されており、より大きなリソース上限と、よりきめ細かなスケーリング制御を提供します。
--   **従量課金制**：実際の[要求容量単位（RCU）](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu)消費量とストレージ使用量に基づいて課金されます。この柔軟なモデルにより、バックエンドでの手動による過剰プロビジョニングが不要になります。
+-   **従量課金制**：実際の[リクエストキャパシティユニット（RCU）](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu)消費量とストレージ使用量に基づいて課金されます。この柔軟なモデルにより、バックエンドでの手動による過剰プロビジョニングが不要になります。
 -   **高度なセキュリティ**：大規模企業や規制対象業界が必要とする、より高度なセキュリティ設定とコンプライアンス機能を提供します。
 
 ミッション クリティカルなワークロードの稼働時間と回復力を最大化するために、 TiDB Cloud Premium は[地域的な高可用性](/tidb-cloud/serverless-high-availability.md#regional-high-availability-architecture)を提供し、複数のアベイラビリティ ゾーンにノードを分散して、ゾーン展開よりも高い冗長性を実現します。
@@ -214,9 +214,9 @@ TiDBノードを複数デプロイすることで、水平方向に拡張し、�
 
 ## TiDB Cloud Premium でユニットと容量をリクエストする {#request-units-and-capacity-in-premium}
 
-### 要求容量単位（RCU） {#request-capacity-unit-rcu}
+### リクエストキャパシティユニット（RCU） {#request-capacity-unit-rcu}
 
-[要求容量単位（RCU）](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu)は、TiDB Cloud Premiumインスタンスにプロビジョニングされたコンピューティング容量を表す単位です。1 RCUは、1秒あたり一定数の RU を処理できる固定量のコンピューティングリソースを提供します。プロビジョニングする RCUの数によって、TiDB Cloud Premiumインスタンスのベースラインパフォーマンスとスループット容量が決まります。
+[リクエストキャパシティユニット（RCU）](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu)は、TiDB Cloud Premiumインスタンスにプロビジョニングされたコンピューティング容量を表す単位です。1 RCUは、1秒あたり一定数の RU を処理できる固定量のコンピューティングリソースを提供します。プロビジョニングする RCUの数によって、TiDB Cloud Premiumインスタンスのベースラインパフォーマンスとスループット容量が決まります。
 
 1 RCUは、毎秒RUの持続的な処理能力を表します。例えば、ベースラインとして*X* RCUを設定すると、1分間（またはインスタンスに設定された最小計算時間）で測定した平均で、毎秒*X* RUの処理能力が保証されます。
 

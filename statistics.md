@@ -377,8 +377,8 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 | 情報         | バージョン1                     | バージョン2                   |
 | ---------- | -------------------------- | ------------------------ |
 | テーブル内の行の総数 | ⎷                          | ⎷                        |
-| 等しい/IN述語推定 | ⎷（カラム／インデックス上位N件と最小件数スケッチ） | ⎷（カラム／インデックス上位N件とヒストグラム） |
-| 範囲述語推定     | ⎷（カラム／インデックス上位N件とヒストグラム）   | ⎷（カラム／インデックス上位N件とヒストグラム） |
+| 等しい/IN述語推定 | ⎷（カラム／インデックストップNと最小件数スケッチ） | ⎷（カラム／インデックストップNとヒストグラム） |
+| 範囲述語推定     | ⎷（カラム／インデックストップNとヒストグラム）   | ⎷（カラム／インデックストップNとヒストグラム） |
 | `NULL`述語推定 | ⎷                          | ⎷                        |
 | 列の平均長さ     | ⎷                          | ⎷                        |
 | インデックスの平均長 | ⎷                          | ⎷                        |
@@ -781,19 +781,19 @@ TiDB v6.0以降、TiDBは`KILL`ステートメントを使用して、バック�
 
 <CustomContent platform="tidb">
 
--   [ロード統計](/sql-statements/sql-statement-load-stats.md)
--   [ドロップ統計](/sql-statements/sql-statement-drop-stats.md)
--   [ロック統計](/sql-statements/sql-statement-lock-stats.md)
--   [統計情報をアンロックする](/sql-statements/sql-statement-unlock-stats.md)
--   [統計情報ロックを表示](/sql-statements/sql-statement-show-stats-locked.md)
+-   [LOAD STATS](/sql-statements/sql-statement-load-stats.md)
+-   [DROP STATS](/sql-statements/sql-statement-drop-stats.md)
+-   [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
+-   [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
+-   [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   [ロード統計](/sql-statements/sql-statement-load-stats.md)
--   [ロック統計](/sql-statements/sql-statement-lock-stats.md)
--   [統計情報をアンロックする](/sql-statements/sql-statement-unlock-stats.md)
--   [統計情報ロックを表示](/sql-statements/sql-statement-show-stats-locked.md)
+-   [LOAD STATS](/sql-statements/sql-statement-load-stats.md)
+-   [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
+-   [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
+-   [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
 
 </CustomContent>

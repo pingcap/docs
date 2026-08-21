@@ -62,7 +62,7 @@ summary: TiDB Cloudリソースの監視方法を学びましょう。
 
 ## インスタンスの状態 {#instance-status}
 
-[**My TiDB**](https://tidbcloud.com/tidbs)ページでは、 **「ステータス」**列に、実行中の各TiDB Cloudインスタンスの現在のステータスが表示されます。
+[**My TiDB**](https://tidbcloud.com/tidbs)ページでは、 **ステータス**列に、実行中の各TiDB Cloudインスタンスの現在のステータスが表示されます。
 
 | 状態        | 説明                                 |
 | :-------- | :--------------------------------- |

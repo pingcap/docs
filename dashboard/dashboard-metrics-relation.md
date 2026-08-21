@@ -13,7 +13,7 @@ TiDB Dashboardにログイン後、左側のナビゲーション メニュー�
 
 ![Metrics relation graph homepage](/media/dashboard/dashboard-metrics-relation-home-v650.png)
 
-**範囲開始時刻**と**範囲期間**を設定した後、 **「メトリック関係の生成」**をクリックすると、メトリック関係グラフのページが表示されます。
+**範囲開始時刻**と**範囲期間**を設定した後、 **メトリック関係の生成**をクリックすると、メトリック関係グラフのページが表示されます。
 
 ## グラフを理解する {#understand-graph}
 

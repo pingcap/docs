@@ -334,5 +334,5 @@ EXPLAIN FORMAT = "tidb_json" SELECT id FROM t WHERE a = 1;
 
 -   [クエリ実行計画を理解する](/explain-overview.md)
 -   [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md)
--   [ANALYZE](/sql-statements/sql-statement-analyze-table.md)
+-   [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
 -   [TRACE](/sql-statements/sql-statement-trace.md)

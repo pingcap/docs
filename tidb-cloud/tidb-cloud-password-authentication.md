@@ -76,7 +76,7 @@ TiDB Cloudは、登録ユーザーに対してデフォルトのパスワード�
 
 2.  **Account Settings**をクリックします。
 
-3.  **「パスワード」**セクションで、 **Change Password**をクリックし、 TiDB Cloudからの電子メールを確認してパスワードをリセットします。
+3.  **パスワード**セクションで、 **Change Password**をクリックし、 TiDB Cloudからの電子メールを確認してパスワードをリセットします。
 
 ## 多要素認証を管理する（オプション） {#manage-multi-factor-authentication-optional}
 
@@ -93,7 +93,7 @@ TiDB Cloudは、登録ユーザーに対してデフォルトのパスワード�
 
 2.  **Account Settings**をクリックします。
 
-3.  **Multi-Factor Authentication**セクションで、 **「有効にする」**をクリックします。
+3.  **Multi-Factor Authentication**セクションで、 **有効にする**をクリックします。
 
 4.  本人確認のため、アカウントのパスワードを入力してください。
 

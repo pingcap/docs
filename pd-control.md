@@ -216,7 +216,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set enable-cross-table-merge true  // Enable cross table merge.
     ```
 
--   `key-type` 、クラスターで使用されるキーエンコーディングの種類を指定します。サポートされているオプションは ["table", "raw", "txn"] で、デフォルト値は "table" です。
+-   `key-type`はクラスターで使用されるキーエンコーディングの種類を指定します。サポートされているオプションは ["table", "raw", "txn"] で、デフォルト値は "table" です。
 
     -   クラスター内に TiDB インスタンスが存在しない場合は、 `key-type` 「raw」または「txn」になり、PD は`enable-cross-table-merge`設定に関係なくテーブル間でリージョンをマージできます。
     -   クラスター内にTiDBインスタンスが存在する場合、 `key-type`は 「table」である必要があります。PDがテーブル間でリージョンをマージできるかどうかは、 `enable-cross-table-merge`によって決まります。`key-type`が 「raw」の場合、配置ルールは機能しません。
@@ -231,19 +231,19 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set region-score-formula-version v2
     ```
 
--   `patrol-region-interval` 、チェッカーがリージョンのヘルスステータスを検査する実行頻度を制御します。間隔が短いほど、実行頻度が高くなります。通常、調整する必要はありません。
+-   `patrol-region-interval`はチェッカーがリージョンのヘルスステータスを検査する実行頻度を制御します。間隔が短いほど、実行頻度が高くなります。通常、調整する必要はありません。
 
     ```bash
     config set patrol-region-interval 10ms // Set the execution frequency of the checker to 10ms
     ```
 
--   `patrol-region-worker-count` 、リージョンのヘルス状態を検査する際にチェッカーによって作成される同時実行数[オペレーター](/glossary.md#operator)を制御します。通常、この設定を調整する必要はありません。この設定項目を 1 より大きい値に設定すると、同時実行チェックが有効になります。現在、この機能は実験的であり、本番環境での使用は推奨されません。
+-   `patrol-region-worker-count`は、リージョンのヘルス状態を検査する際にチェッカーが同時に実行する[オペレーター](/glossary.md#operator)の数を制御します。通常、この設定を調整する必要はありません。この設定項目を 1 より大きい値に設定すると、同時実行チェックが有効になります。現在、この機能は実験的であり、本番環境での使用は推奨されません。
 
     ```bash
     config set patrol-region-worker-count 2 // Set the checker concurrency to 2
     ```
 
--   `max-store-down-time` 、PD が切断されたストアを復元できないと判断するまでの時間を制御します。指定された時間内に PD がストアからハートビートを受信しない場合、PD は他のノードにレプリカを追加します。
+-   `max-store-down-time`は、PD が切断されたストアをダウンとみなすまでの時間を制御します。指定された時間内に PD がストアからハートビートを受信しない場合、PD は他のノードにレプリカを追加します。
 
     ```bash
     config set max-store-down-time 30m  // Set the time within which PD receives no heartbeats and after which PD starts to add replicas to 30 minutes
@@ -1107,12 +1107,12 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
     scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.1
     ```
 
--   `read-priorities` 、 `write-leader-priorities` 、 `write-peer-priorities` 、ホットリージョンスケジューリングにおいてスケジューラがどのディメンションを優先するかを制御します。設定では2つのディメンションがサポートされています。
+-   `read-priorities` 、 `write-leader-priorities` 、 `write-peer-priorities`はホットリージョンスケジューリングにおいてスケジューラがどのディメンションを優先するかを制御します。設定では2つのディメンションがサポートされています。
 
-    -   `read-priorities` 、読み取りタイプのホットリージョンをスケジューリングする際に、スケジューラがどのディメンションを優先するかを制御します。ディメンションのオプションは`cpu` 、 `query` 、 `byte` 、 `key`です。
-    -   `write-leader-priorities` 、書き込みリーダータイプのホットリージョンをスケジューリングする際に、スケジューラがどのディメンションを優先するかを制御します。ディメンションのオプションは`query` 、 `byte` 、 `key`です。
+    -   `read-priorities`は読み取りタイプのホットリージョンをスケジューリングする際に、スケジューラがどのディメンションを優先するかを制御します。ディメンションのオプションは`cpu` 、 `query` 、 `byte` 、 `key`です。
+    -   `write-leader-priorities`は書き込みリーダータイプのホットリージョンをスケジューリングする際に、スケジューラがどのディメンションを優先するかを制御します。ディメンションのオプションは`query` 、 `byte` 、 `key`です。
 
-    -   `write-peer-priorities` 、書き込みピアタイプのホットリージョンのスケジュールにおいて、スケジューラがどのディメンションを優先するかを制御します。ディメンションのオプションは`byte`と`key`です。
+    -   `write-peer-priorities`は書き込みピアタイプのホットリージョンのスケジュールにおいて、スケジューラがどのディメンションを優先するかを制御します。ディメンションのオプションは`byte`と`key`です。
 
     > **Note:**
     >
@@ -1133,14 +1133,14 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
 -   `rank-formula-version`は、ホットリージョンスケジューリングで使用するスケジューラアルゴリズムのバージョンを制御します。値の選択肢は`v1`と`v2`です。デフォルト値は`v2`です。
 
     -   `v1`アルゴリズムは、TiDB v6.3.0以前のバージョンで使用されていたスケジューラ戦略です。このアルゴリズムは、主にストア間の負荷差を軽減することに重点を置いており、他のディメンションへの副作用の発生を回避します。
-    -   `v2`アルゴリズムは、TiDB v6.3.0 で導入された実験的スケジューラ戦略であり、TiDB v6.4.0 で一般提供（GA）されました。このアルゴリズムは、副作用を少なくしながら、ストアとファクタ間の公平性を向上させることに主眼を置いています。`strict-picking-store`が`true`である`v1`アルゴリズムと比較すると、 `v2`アルゴリズムは第 1 次元の優先度均等化により重点を置いています。`strict-picking-store`が`false`である`v1`アルゴリズムと比較すると、 `v2`アルゴリズムは第 2 次元のバランスを考慮しています。
-    -   `strict-picking-store`を`true`とする`v1`アルゴリズムは保守的であり、両次元に高負荷のストアがある場合にのみスケジューリングが生成されます。特定のシナリオでは、次元の競合によりバランス調整を継続できなくなる可能性があります。第 1 次元でより適切なバランス調整を実現するには、 `strict-picking-store`を`false`に設定する必要があります。`v2`アルゴリズムは両次元でより適切なバランス調整を実現し、無効なスケジューリングを削減します。
+    -   `v2`アルゴリズムは、TiDB v6.3.0 で導入された実験的スケジューラ戦略であり、TiDB v6.4.0 で一般提供（GA）されました。このアルゴリズムは、ストア間の公平性の向上を主な目的としつつ、副作用も考慮しています。`strict-picking-store`が`true`である`v1`アルゴリズムと比較すると、 `v2`アルゴリズムは第1次元の均等化をより重視しています。`strict-picking-store`が`false`である`v1`アルゴリズムと比較すると、 `v2`アルゴリズムは第2次元のバランスを考慮しています。
+    -   `strict-picking-store`を`true`とする`v1`アルゴリズムは保守的であり、両次元に高負荷のストアがある場合にのみスケジューリングが生成されます。特定のシナリオでは、次元の競合によりバランス調整を継続できなくなる可能性があります。第1次元でより適切なバランス調整を実現するには、 `strict-picking-store`を`false`に設定する必要があります。`v2`アルゴリズムは両次元でより適切なバランス調整を実現し、無効なスケジューリングを削減します。
 
   ```bash
   scheduler config balance-hot-region-scheduler set rank-formula-version v2
   ```
 
--   `enable-for-tiflash` 、 TiFlashインスタンス間のホットリージョンスケジューリングを有効にするかどうかを制御します。通常は有効です。無効にすると、 TiFlashインスタンス間のホットリージョンスケジューリングは実行されません。
+-   `enable-for-tiflash`はTiFlashインスタンス間のホットリージョンスケジューリングを有効にするかどうかを制御します。通常は有効です。無効にすると、 TiFlashインスタンス間のホットリージョンスケジューリングは実行されません。
 
     ```bash
     scheduler config balance-hot-region-scheduler set enable-for-tiflash true

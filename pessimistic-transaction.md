@@ -31,7 +31,7 @@ BEGIN /*T! PESSIMISTIC */;
 
 `BEGIN PESSIMISTIC;`および`BEGIN OPTIMISTIC;`ステートメントは`tidb_txn_mode`システム変数よりも優先されます。これらの 2つのステートメントで開始されたトランザクションは、システム変数を無視し、悲観的トランザクションモードと楽観的トランザクションモードの両方をサポートします。
 
-## 行動 {#behaviors}
+## 動作 {#behaviors}
 
 TiDB の悲観的なトランザクションは、MySQL のトランザクションと同様に動作します。 [MySQL InnoDBとの違い](#differences-from-mysql-innodb)の小さな違いを参照してください。
 
@@ -128,7 +128,7 @@ TiDB の悲観的なトランザクションは、MySQL のトランザクショ
 
 7.  TiDB では、オープンなトランザクションはガベージコレクション(GC) をブロックしません。デフォルトでは、これにより悲観的トランザクションの最大実行時間が 1時間に制限されます。この制限は、TiDB 設定ファイルの`max-txn-ttl`の下にある`[performance]`編集することで変更できます。
 
-## 隔離レベル {#isolation-level}
+## 分離レベル {#isolation-level}
 
 TiDBは、悲観的トランザクションモードにおいて、以下の2つの分離レベルをサポートしています。
 

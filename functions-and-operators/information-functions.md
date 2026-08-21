@@ -3,7 +3,7 @@ title: Information Functions
 summary: 情報関数について学習します。
 ---
 
-# 情報機能 {#information-functions}
+# 情報関数 {#information-functions}
 
 TiDB は、MySQL 8.0 で利用可能な[情報関数](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html)ほとんどをサポートしています。
 
