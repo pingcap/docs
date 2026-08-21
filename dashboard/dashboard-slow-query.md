@@ -37,13 +37,13 @@ TiDB Dashboardの「スロークエリ」ページでは、クラスタ内のす
 
 ### スロークエリをローカルに出力する {#export-slow-queries-locally}
 
-ページ右上隅の☰（**その他**）をクリックすると、**Export**オプションが表示されます。**エクスポートを**クリックすると、TiDB Dashboardは現在のリストにあるスロークエリをCSVファイルとしてエクスポートします。
+ページ右上隅の☰（**More**）をクリックすると、**Export**オプションが表示されます。**Export**をクリックすると、TiDB Dashboardは現在のリストにあるスロークエリをCSVファイルとしてエクスポートします。
 
 ![Export slow queries locally](/media/dashboard/dashboard-slow-queries-export-v651.png)
 
 ### 列で並べ替え {#sort-by-column}
 
-デフォルトでは、リストは**終了時刻**の降順でソートされています。列見出しをクリックすると、その列でソートしたり、ソート順を切り替えたりできます。
+デフォルトでは、リストは**Finish Time**の降順でソートされています。列見出しをクリックすると、その列でソートしたり、ソート順を切り替えたりできます。
 
 ![Modify sorting basis](/media/dashboard/dashboard-slow-queries-list3-v620.png)
 
@@ -108,7 +108,7 @@ TiDB Dashboardでは、表、テキスト、グラフの 3 つの方法で実行
 
 #### 基本タブ {#basic-tab}
 
-SQL実行の基本情報には、テーブル名、インデックス名、実行回数、および合計レイテンシーが含まれます。**説明**列には、各フィールドの詳細な説明が表示されます。
+SQL実行の基本情報には、テーブル名、インデックス名、実行回数、および合計レイテンシーが含まれます。**Description**列には、各フィールドの詳細な説明が表示されます。
 
 ![Basic information](/media/dashboard/dashboard-slow-queries-detail-plans-basic.png)
 
