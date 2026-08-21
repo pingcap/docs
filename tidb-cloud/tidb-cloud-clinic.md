@@ -93,7 +93,15 @@ For more information, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.
 
 ## Monitor Top SQL
 
-TiDB Cloud Clinic provides Top SQL information to help you visually analyze the most resource-intensive queries on a specific TiDB or TiKV node over a period of time. By default, Top SQL continuously collects CPU load data. For TiKV nodes, if TiKV network IO collection is enabled, you can also inspect `Network Bytes` and `Logical IO Bytes`, and analyze hotspots by `Query`, `Table`, `DB`, or `Region`. This helps you identify and troubleshoot performance issues across multiple resource dimensions, not just CPU.
+TiDB Cloud Clinic provides Top SQL information to help you visually analyze the most resource-intensive queries on a specific TiDB or TiKV node over a period of time. By default, Top SQL continuously collects CPU load data. For TiKV nodes, if TiKV network IO collection is enabled, you can also inspect network and logical I/O metrics, and analyze hotspots by `Query`, `Table`, `DB`, or `Region`. This helps you identify and troubleshoot performance issues across multiple resource dimensions, not just CPU.
+
+For TiDB Cloud Dedicated clusters hosted on AWS and running TiDB v9.0.0 or later, Top SQL replaces the combined `Logical IO` sort dimension with the following detailed I/O dimensions:
+
+- `Logical Read`: the number of logical bytes read or processed by TiKV requests at the storage layer.
+- `Logical Write`: the number of logical bytes written by TiKV write requests.
+- `Read IOPS`: the number of RocksDB block reads recorded in foreground TiKV request contexts.
+
+`CPU` and `Network` remain available. `Read IOPS` is an attribution signal for Top SQL and is not the actual IOPS of the underlying storage device.
 
 To view Top SQL, take the following steps:
 
@@ -103,7 +111,7 @@ To view Top SQL, take the following steps:
 
 3. Select a specific TiDB or TiKV node to observe its workload. You can use the time picker or select a time range in the chart to refine your analysis.
 
-4. Analyze the charts and tables displayed by Top SQL. Depending on the selected node and enabled metrics, you can use `Order By` and the available aggregation dimensions to inspect CPU, network, or logical I/O hotspots.
+4. Analyze the charts and tables displayed by Top SQL. Depending on the selected node, cluster version, and available metrics, you can use `Order By` and the available aggregation dimensions to inspect CPU, network, logical I/O, logical read, logical write, or Read IOPS hotspots.
 
 For more information, see [Top SQL in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/top-sql).
 
