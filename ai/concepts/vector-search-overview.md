@@ -4,7 +4,7 @@ summary: TiDBのベクトル検索について学びましょう。この機能�
 aliases: ['/ja/tidb/stable/vector-search-overview/','/ja/tidb/dev/vector-search-overview/','/ja/tidbcloud/vector-search-overview/']
 ---
 
-# ベクトルサーチの概要 {#vector-search-overview}
+# ベクトル検索の概要 {#vector-search-overview}
 
 ベクトル検索は、文書、画像、音声、動画など、多様なデータタイプにわたる意味的類似性検索のための強力なソリューションを提供します。開発者は、MySQLの専門知識を活用して、生成型AI機能を備えた拡張性の高いアプリケーションを構築でき、高度な検索機能の統合を簡素化できます。
 

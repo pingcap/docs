@@ -95,7 +95,7 @@ Diagram(
 )
 ```
 
-ポイント獲得中、 `tidb_session_execute_duration_seconds{type="general"}`期間は次のように計算されます。
+PointGetの実行中、 `tidb_session_execute_duration_seconds{type="general"}`期間は次のように計算されます。
 
 ```text
 tidb_session_execute_duration_seconds{type="general"} =
@@ -321,11 +321,11 @@ Diagram(
 
 実行フェーズでは、TiDBはメモリ内のデータを操作します。主なレイテンシーは必要なデータの読み取りに起因します。更新クエリと削除クエリの場合、TiDBはまずTiKVからデータを読み取り、次にメモリ内の行を更新または削除します。
 
-例外はPointGetとバッチPointGetによるロックタイム読み取り操作（ `SELECT FOR UPDATE` ）で、これは1回のリモートプロシージャコール（RPC）で読み取りとロックを実行します。
+例外はPointGetとBatch PointGetによるロック取得時の読み取り操作（ `SELECT FOR UPDATE` ）で、これは1回のリモートプロシージャコール（RPC）で読み取りとロックを実行します。
 
-### Lock Time PointGet {#lock-time-point-get}
+### ロック取得時のPointGet {#lock-time-point-get}
 
-以下は、Lock Time PointGet操作の時間コスト図です。
+以下は、ロック取得時のPointGet操作の時間コスト図です。
 
 ```railroad+diagram
 Diagram(
@@ -342,7 +342,7 @@ Diagram(
 )
 ```
 
-ロックタイムポイントの取得中、 `execution(clustered PK)`と`execution(non-clustered PK or UK)`期間は次のように計算されます。
+ロック取得時のPointGetの実行中、 `execution(clustered PK)`期間と`execution(non-clustered PK or UK)`期間は次のように計算されます。
 
 ```text
 execution(clustered PK) =
@@ -351,11 +351,11 @@ execution(non-clustered PK or UK) =
     2 * tidb_tikvclient_txn_cmd_duration_seconds{type="lock_keys"}
 ```
 
-Lock Time PointGetはキーをロックし、その値を返します。実行後のロックフェーズと比較すると、1ラウンドトリップを節約できます。Lock Time PointGetの実行時間は[ロック期間](#lock)として扱うことができます。
+ロック取得時のPointGetはキーをロックし、その値を返します。実行後のロックフェーズと比較すると、1ラウンドトリップを節約できます。ロック取得時のPointGetの実行時間は[ロック期間](#lock)として扱うことができます。
 
-### Lock Time Batch PointGet {#lock-time-batch-point-get}
+### ロック取得時のBatch PointGet {#lock-time-batch-point-get}
 
-以下は、Lock Time Batch PointGet操作の時間コスト図です。
+以下は、ロック取得時のBatch PointGet操作の時間コスト図です。
 
 ```railroad+diagram
 Diagram(
@@ -369,7 +369,7 @@ Diagram(
 )
 ```
 
-Lock Time Batch PointGetの実行中、 `execution(clustered PK)`と`execution(non-clustered PK or UK)`期間は次のように計算されます。
+ロック取得時のBatch PointGetの実行中、 `execution(clustered PK)`期間と`execution(non-clustered PK or UK)`期間は次のように計算されます。
 
 ```text
 execution(clustered PK) =
@@ -379,7 +379,7 @@ execution(non-clustered PK or UK) =
     tidb_tikvclient_txn_cmd_duration_seconds{type="lock_keys"}
 ```
 
-Lock Time Batch PointGetの実行は、1回のRPCで複数の値を読み取る点を除けば、 [Lock Time PointGet](#lock-time-point-get)と同様です。 `tidb_tikvclient_txn_cmd_duration_seconds{type="batch_get"}`所要時間の詳細については、 [Batch PointGet](#batch-point-get)セクションを参照してください。
+ロック取得時のBatch PointGetの実行は、1回のRPCで複数の値を読み取る点を除けば、 [ロック取得時のPointGet](#lock-time-point-get)と同様です。 `tidb_tikvclient_txn_cmd_duration_seconds{type="batch_get"}`所要時間の詳細については、 [Batch PointGet](#batch-point-get)セクションを参照してください。
 
 ### ロック {#lock}
 
@@ -724,7 +724,7 @@ async write duration(async io enabled) =
 
 非同期書き込みは次の 3 つのフェーズに分けられます。
 
--   提案する
+-   提案
 -   コミット
 -   適用：上記の式に`tikv_raftstore_apply_wait_time_duration_secs + tikv_raftstore_apply_log_duration_seconds`を代入する
 

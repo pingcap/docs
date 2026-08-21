@@ -91,7 +91,7 @@ Titanパラメータを適切に設定することで、データベースのパ
 
 Titanの値のキャッシュサイズを制御するには、 [`blob-cache-size`](/tikv-configuration-file.md#blob-cache-size)を使用します。キャッシュサイズが大きいほど、Titanの読み取りパフォーマンスが向上します。ただし、キャッシュサイズが大きすぎると、メモリ不足（OOM）の問題が発生します。
 
-ストアサイズからBLOBファイルサイズを引いた値を`storage.block-cache.capacity`に設定し、データベースが安定して動作している場合は、監視指標に応じて`blob-cache-size` ～ `memory size * 50% - block cache size`設定することをお勧めします。これにより、ブロックキャッシュがRocksDBエンジン全体に十分な大きさである場合に、BLOBキャッシュサイズが最大化されます。
+ストアサイズからBLOBファイルサイズを引いた値を`storage.block-cache.capacity`に設定し、データベースが安定して動作している場合は、監視指標に応じて`blob-cache-size`を`memory size * 50% - block cache size`に設定することをお勧めします。これにより、ブロックキャッシュがRocksDBエンジン全体に十分な大きさである場合に、BLOBキャッシュサイズが最大化されます。
 
 ### `discardable-ratio`と`max-background-gc` {#discardable-ratio-and-max-background-gc}
 

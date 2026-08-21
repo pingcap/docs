@@ -207,5 +207,5 @@ drop view v;
 
 ## 参照 {#see-also}
 
--   [ビューを作成](/sql-statements/sql-statement-create-view.md)
--   [ドロップビュー](/sql-statements/sql-statement-drop-view.md)
+-   [CREATE VIEW](/sql-statements/sql-statement-create-view.md)
+-   [DROP VIEW](/sql-statements/sql-statement-drop-view.md)

@@ -782,7 +782,7 @@ select /*+ READ_CONSISTENT_REPLICA() */ * from t;
 prepare stmt from 'select  /*+ IGNORE_PLAN_CACHE() */ * from t where t.id = ?';
 ```
 
-### SET_VAR(変数名=変数値) {#set_varvar_namevar_value}
+### SET_VAR(VAR_NAME=VAR_VALUE) {#set_varvar_namevar_value}
 
 `SET_VAR(VAR_NAME=VAR_VALUE)`ヒントを使用すると、文の実行中にシステム変数の値を一時的に変更できます。文の実行後、現在のセッションにおけるシステム変数の値は自動的に元の値に戻ります。このヒントは、オプティマイザとエグゼキュータに関連する一部のシステム変数を変更するために使用できます。このヒントを使用して変更できるシステム変数のリストについては、 [システム変数](/system-variables.md)を参照してください。
 
@@ -815,7 +815,7 @@ SELECT @@MAX_EXECUTION_TIME;
 1 row in set (0.00 sec)
 ```
 
-### ストレート結合() {#straight_join}
+### STRAIGHT_JOIN() {#straight_join}
 
 `STRAIGHT_JOIN()`ヒントは、結合プランを生成するときに、 `FROM`句のテーブル名の順序でテーブルを結合するようにオプティマイザーに通知します。
 
@@ -846,7 +846,7 @@ SELECT /*+ NTH_PLAN(3) */ count(*) from t where a > 5;
 >
 > `NTH_PLAN(N)`は主にテスト用に使用されており、それ以降のバージョンとの互換性は保証されていません。このヒントは**慎重に**使用してください。
 
-### RESOURCE_GROUP(リソースグループ名) {#resource_groupresource_group_name}
+### RESOURCE_GROUP(resource_group_name) {#resource_groupresource_group_name}
 
 `RESOURCE_GROUP(resource_group_name)`は、[リソース管理](/tidb-resource-control-ru-groups.md)でリソースを分離するために使用されます。このヒントは、指定されたリソースグループを使用して現在のステートメントを一時的に実行します。指定されたリソースグループが存在しない場合、このヒントは無視されます。
 
@@ -1087,7 +1087,7 @@ EXPLAIN SELECT /*+ leading(t1, t3), inl_join(t3) */ * FROM t1, t2, t3 WHERE t1.i
 `Can't find a proper physical plan for this query`エラーは次のシナリオで発生する可能性があります。
 
 -   クエリ自体はインデックスを順番に読み取る必要はありません。つまり、このクエリでは、ヒントを使用しない限り、オプティマイザはインデックスを順番に読み取るプランを生成しません。この場合、ヒント`ORDER_INDEX`が指定されていると、このエラーが発生します。この問題を解決するには、対応するヒント`ORDER_INDEX`を削除してください。
--   クエリは、 `NO_JOIN`関連するヒントを使用して、可能なすべての結合方法を除外します。
+-   クエリは、 `NO_JOIN`に関連するヒントを使用して、可能なすべての結合方法を除外します。
 
 ```sql
 CREATE TABLE t1 (a INT);

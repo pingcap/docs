@@ -124,7 +124,7 @@ Apache KafkaサービスにパブリックIPアクセスを提供する場合は
 
 <div label="VPC Peering">
 
-現在、 TiDB Cloud PremiumインスタンスのVPCピアリング機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**「？」**をクリックし、 次に**Support Tickets**をクリックし[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **「説明」**フィールドに「TiDB Cloud PremiumインスタンスのVPCピアリングの申請」と入力して、 **「送信」を**クリックします。
+現在、 TiDB Cloud PremiumインスタンスのVPCピアリング機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**？**をクリックし、 次に**Support Tickets**をクリックし[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **説明**フィールドに「TiDB Cloud PremiumインスタンスのVPCピアリングの申請」と入力して、 **「送信」を**クリックします。
 
 </div>
 </SimpleTab>
@@ -165,7 +165,7 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
 5.  Kafkaで**TLS Encryption**オプションを有効にしてください。
 
-6.  **「次へ」**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
+6.  **次へ**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
 
 </div>
 <div label="Private Link (AWS)">
@@ -180,7 +180,7 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 5.  **Kafka Version**を選択してください。どのバージョンを使用すればよいかわからない場合は、 **Kafka v2**を使用してください。
 6.  この変更フィード内のデータの**圧縮**タイプを選択してください。
 7.  Kafkaで**TLS Encryption**オプションを有効にしてください。
-8.  **「次へ」**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
+8.  **次へ**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
 
 </div>
 
@@ -197,7 +197,7 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 5.  **Kafka Version**を選択してください。どのバージョンを使用すればよいかわからない場合は、 **Kafka v2**を使用してください。
 6.  この変更フィード内のデータの**圧縮**タイプを選択してください。
 7.  Kafkaで**TLS Encryption**オプションを有効にしてください。
-8.  **「次へ」**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
+8.  **次へ**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
 
 </div>
 </CustomContent>
@@ -215,7 +215,7 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 5.  **Kafka Version**を選択してください。どのバージョンを使用すればよいかわからない場合は、 **Kafka v2**を使用してください。
 6.  この変更フィード内のデータの**圧縮**タイプを選択してください。
 7.  Kafkaで**TLS Encryption**オプションを有効にしてください。
-8.  **「次へ」**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
+8.  **次へ**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
 9.  TiDB Cloudは**Private Service Connect**用のエンドポイントを作成しますが、これには数分かかる場合があります。
 10. エンドポイントが作成されたら、クラウドプロバイダーのコンソールにログインし、接続要求を承認してください。
 11. [TiDB Cloudコンソール](https://tidbcloud.com)に戻る 接続要求を承認したことを確認してください。TiDB Cloudは接続テストを実行し、テストが成功した場合は次のページに進みます。
@@ -236,7 +236,7 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 5.  **Kafka Version**を選択してください。どのバージョンを使用すればよいかわからない場合は、 **Kafka v2**を使用してください。
 6.  この変更フィード内のデータの**圧縮**タイプを選択してください。
 7.  Kafkaで**TLS Encryption**オプションを有効にしてください。
-8.  **「次へ」**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
+8.  **次へ**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
 9.  TiDB Cloudは**Private Link**のエンドポイントを作成しますが、これには数分かかる場合があります。
 10. エンドポイントが作成されたら、 [Azureポータル](https://portal.azure.com/)にログインして接続要求を承認してください。
 11. [TiDB Cloudコンソール](https://tidbcloud.com)に戻る 接続要求を承認したことを確認してください。TiDB Cloudは接続テストを実行し、テストが成功した場合は次のページに進みます。
@@ -335,13 +335,13 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
 10. **Split Event**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクにおける、主キーまたは一意キーを分割したUPDATEイベント](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
 
-11. **「次へ」**をクリックしてください。
+11. **次へ**をクリックしてください。
 
 ## ステップ4. 変更フィード仕様を設定します {#step-4-configure-your-changefeed-specification}
 
 1.  **Changefeed Specification**領域で、チェンジフィードで使用する<CustomContent plan="dedicated">複製容量単位（RCU）</CustomContent>チェンジフィード<CustomContent plan="premium">チェンジフィード容量ユニット（CCU）</CustomContent>の数を指定します。
 2.  **Changefeed Name**欄に、変更フィードの名前を指定します。
-3.  **「次へ」**をクリックして、設定した内容を確認し、次のページへ進んでください。
+3.  **次へ**をクリックして、設定した内容を確認し、次のページへ進んでください。
 
 ## ステップ5．設定内容を確認する {#step-5-review-the-configurations}
 

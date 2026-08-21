@@ -63,8 +63,8 @@ target-table = "t_2"           # The name of the target table
 
 -   ルール内に`schema.table`という名前のテーブル`target-schema/target-table`が存在する場合、sync-diff-inspector の動作は次のようになります。
 
-    -   `schema.table` ～ `schema.table`に一致するルールがある場合、sync-diff-inspector は何も行いません。
-    -   `schema.table`から`schema.table`に一致するルールがない場合、sync-diff-inspector はテーブルルーターに新しいルール`schema.table -> _no__exists__db_._no__exists__table_`を追加します。その後、sync-diff-inspector はテーブル`schema.table`テーブル`_no__exists__db_._no__exists__table_`として扱います。
+    -   `schema.table`から`schema.table`に一致するルールがある場合、sync-diff-inspector は何も行いません。
+    -   `schema.table`から`schema.table`に一致するルールがない場合、sync-diff-inspector はテーブルルーターに新しいルール`schema.table -> _no__exists__db_._no__exists__table_`を追加します。その後、sync-diff-inspector はテーブル`schema.table`をテーブル`_no__exists__db_._no__exists__table_`として扱います。
 
 -   `target-schema`ルール内にのみ存在する場合、次のようになります。
 

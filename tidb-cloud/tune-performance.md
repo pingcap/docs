@@ -14,7 +14,7 @@ TiDB Cloud では、パフォーマンスを分析するために [スローク�
 
 <CustomContent plan="premium">
 
-TiDB Cloud では、パフォーマンスを分析するために [スロークエリ](#slow-query) と [SQL Statement](#sql-statement) を提供しています。
+TiDB Cloud では、パフォーマンスを分析するために [スロークエリ](#slow-query) と [Statement Analysis](#statement-analysis) を提供しています。
 
 </CustomContent>
 
@@ -48,8 +48,6 @@ TiDB Cloud では、パフォーマンスを分析するために [スローク�
 
 <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> でスロークエリを表示するには、次の手順を実行します。
 
-<CustomContent plan="starter,essential,dedicated">
-
 1. [**Diagnosis** ページに移動します](#view-the-diagnosis-page)。
 
 2. **Slow Query** タブをクリックします。
@@ -57,18 +55,6 @@ TiDB Cloud では、パフォーマンスを分析するために [スローク�
 3. リスト内の任意のスロークエリをクリックして、その詳細な実行情報を表示します。
 
 4. （任意）対象の時間範囲、関連するデータベース、および SQL キーワードに基づいてスロークエリをフィルタリングできます。表示するスロークエリの数を制限することもできます。
-
-</CustomContent>
-
-<CustomContent plan="premium">
-
-1. {{{ .premium }}} instance の概要ページに移動し、左側のナビゲーションペインで **Monitoring** > **Slow Query** をクリックします。
-
-2. リストからスロークエリを選択して、その詳細な実行情報を表示します。
-
-3. （任意）対象の時間範囲と SQL キーワードに基づいてスロークエリをフィルタリングできます。表示するスロークエリの数を制限することもできます。
-
-</CustomContent>
 
 結果は表形式で表示され、異なる列で並べ替えることができます。
 
@@ -85,7 +71,7 @@ TiDB Cloud では、パフォーマンスを分析するために [スローク�
 
 </CustomContent>
 
-<CustomContent plan="starter,essential,dedicated">
+<CustomContent plan="starter,essential,dedicated,premium">
 
 ## Statement Analysis {#statement-analysis}
 
@@ -96,22 +82,6 @@ Statement Analysis を使用するには、次の手順を実行します。
 2. **SQL Statement** タブをクリックします。
 
 3. 時間間隔ボックスで分析対象の期間を選択します。すると、その期間におけるすべてのデータベースの SQL 文の実行統計を取得できます。
-
-4. （任意）特定のデータベースのみに関心がある場合は、次のボックスで対応する schema(s) を選択して結果をフィルタリングできます。
-
-</CustomContent>
-
-<CustomContent plan="premium">
-
-## SQL Statement {#sql-statement}
-
-**SQL Statement** ページを使用するには、次の手順を実行します。
-
-1. {{{ .premium }}} instance の概要ページに移動し、左側のナビゲーションペインで **Monitoring** > **SQL Statement** をクリックします。
-
-2. リスト内の SQL 文をクリックして、その詳細な実行情報を表示します。
-
-3. 時間間隔ボックスで分析対象の期間を選択します。すると、その期間におけるすべてのデータベースにまたがる SQL 文の実行統計を取得できます。
 
 4. （任意）特定のデータベースのみに関心がある場合は、次のボックスで対応する schema(s) を選択して結果をフィルタリングできます。
 

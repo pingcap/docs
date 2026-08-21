@@ -17,7 +17,7 @@ Slackのサポートチャンネルで、 **PingCAP Support Bot**をメンショ
 
 ![slack-ticket-creation-1](/media/tidb-cloud/connected-slack-ticket-creation-1.png)
 
-**Raise request**をクリックしてフォームを開き、問題に応じて入力し、 **「作成」**をクリックしてチケットを送信します。
+**Raise request**をクリックしてフォームを開き、問題に応じて入力し、 **作成**をクリックしてチケットを送信します。
 
 ![slack-ticket-creation-2](/media/tidb-cloud/connected-slack-ticket-creation-2.png)
 

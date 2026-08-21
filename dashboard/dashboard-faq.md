@@ -129,7 +129,7 @@ tiup update playground
 
 ### **スロークエリ**ページに`unknown field`エラーが表示されます {#an-unknown-field-error-is-shown-on-the-slow-queries-page}
 
-クラスターのアップグレード後に**「スロークエリ」**ページにエラー`unknown field`が表示される場合、そのエラーはTiDB Dashboardのサーバーフィールド（更新される可能性があります）とユーザー設定フィールド（ブラウザキャッシュ内）の差異に起因する互換性の問題に関連しています。この問題は修正されています。クラスターのバージョンがv5.0.3またはv4.0.14より前の場合は、以下の手順に従ってブラウザキャッシュをクリアしてください。
+クラスターのアップグレード後に**スロークエリ**ページにエラー`unknown field`が表示される場合、そのエラーはTiDB Dashboardのサーバーフィールド（更新される可能性があります）とユーザー設定フィールド（ブラウザキャッシュ内）の差異に起因する互換性の問題に関連しています。この問題は修正されています。クラスターのバージョンがv5.0.3またはv4.0.14より前の場合は、以下の手順に従ってブラウザキャッシュをクリアしてください。
 
 1.  TiDB Dashboard ページを開きます。
 
@@ -143,6 +143,6 @@ tiup update playground
 
     ![Opening DevTools from Chrome's main menu](/media/dashboard/dashboard-faq-devtools.png)
 
-3.  **アプリケーション**パネルを選択し、**ローカルストレージ**メニューを展開して、 **TiDB Dashboardページのドメイン**を選択します。「**すべてクリア」**ボタンをクリックします。
+3.  **アプリケーション**パネルを選択し、**ローカルストレージ**メニューを展開して、 **TiDB Dashboardページのドメイン**を選択します。**すべてクリア**ボタンをクリックします。
 
     ![Clear the Local Storage](/media/dashboard/dashboard-faq-devtools-application.png)

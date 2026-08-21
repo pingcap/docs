@@ -194,11 +194,11 @@ MySQLのマスター/スタンバイメカニズムでは、非同期レプリ�
 
 リレーログの使用にはいくつかの制限があります。DMは高可用性をサポートしています。DMワーカーに障害が発生すると、アイドル状態のDMワーカーインスタンスを稼働中のインスタンスに昇格させようとします。アップストリームのバイナリログに必要な移行ログが含まれていない場合、中断が発生する可能性があります。リレーログを新しいDMワーカーノードにできるだけ早く手動でコピーし、対応するリレーメタファイルを変更する必要があります。詳細については、 [トラブルシューティング](/dm/dm-error-handling.md#the-relay-unit-throws-error-event-from--in--diff-from-passed-in-event--or-a-migration-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-get-binlog-error-error-1236-hy000-and-binlog-checksum-mismatch-data-may-be-corrupted-returned)を参照してください。
 
-#### アップストリームでPT-osc/GH-ostを使用する {#use-pt-osc-gh-ost-in-upstream}
+#### アップストリームでpt-osc/gh-ostを使用する {#use-pt-osc-gh-ost-in-upstream}
 
-MySQLの日常的な運用・保守では、業務への影響を最小限に抑えるため、通常、PT-osc/GH-ostなどのツールを使用してオンラインでスキーマを変更します。しかし、このプロセス全体はMySQL Binlogに記録されます。このようなデータを下流のTiDBに移行すると、不要な書き込み操作が大量に発生し、効率的でも経済的でもありません。
+MySQLの日常的な運用・保守では、業務への影響を最小限に抑えるため、通常、pt-osc/gh-ostなどのツールを使用してオンラインでスキーマを変更します。しかし、このプロセス全体はMySQL Binlogに記録されます。このようなデータを下流のTiDBに移行すると、不要な書き込み操作が多数発生し、効率的でも経済的でもありません。
 
-この問題を解決するため、DMは移行タスクの設定時にPT-oscやGH-ostなどのサードパーティ製データツールをサポートしています。これらのツールを使用すると、DMは冗長データを移行せず、データの整合性を確保します。詳細については、 [GH-ost/PT-osc を使用するデータベースからの移行](/dm/feature-online-ddl.md)を参照してください。
+この問題を解決するため、DMは移行タスクの設定時にpt-oscやgh-ostなどのサードパーティ製データツールをサポートしています。これらのツールを使用すると、DMは冗長データを移行せず、データの整合性を確保します。詳細については、 [gh-ost/pt-osc を使用するデータベースからの移行](/dm/feature-online-ddl.md)を参照してください。
 
 ## 移行中のベストプラクティス {#best-practices-during-migration}
 
