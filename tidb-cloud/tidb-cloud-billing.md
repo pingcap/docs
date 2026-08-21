@@ -103,9 +103,9 @@ The **Bills** tab shows the billing summary by projects & instances and the bill
 
 > **Note:**
 >
-> Your Bills data and the data in Cost Explorer or usage detail CSV exports are processed and presented at different granularities. Bills data is calculated for monthly settlement, while Cost Explorer and usage detail CSV exports provide more granular breakdowns, such as by day, service, project, cluster, or resource. As a result, their totals might vary slightly due to rounding at different aggregation levels.
+> Your Bills data and the data in Cost Explorer or usage details CSV exports are processed and presented at different granularities. Bills data is calculated for monthly settlement, while Cost Explorer and usage details CSV exports provide more granular breakdowns, such as by day, service, project, cluster, or resource. As a result, their totals might vary slightly due to rounding at different aggregation levels.
 >
-> Cost Explorer and usage detail CSV exports are intended for usage and cost analysis. When these data sources differ, the amount on your invoice is the final amount that you owe.
+> Cost Explorer and usage details CSV exports are intended for usage and cost analysis. When these data sources differ, the amount on your invoice is the final amount that you owe.
 
 The following are billing explanations related to storage:
 
