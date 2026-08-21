@@ -6330,7 +6330,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 </CustomContent>
 
-### tidb_stmt_summary_group_by_user <span class="version-mark">New in v8.5.7</span>
+### tidb_stmt_summary_group_by_user <span class="version-mark">TiDB-X-CLOUD.202603.1</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -6416,7 +6416,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 </CustomContent>
 
-### tidb_stmt_summary_persist_evicted <span class="version-mark">New in v8.5.7</span>
+### tidb_stmt_summary_persist_evicted <span class="version-mark">New in TiDB-X-CLOUD.202603.1</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
