@@ -3178,6 +3178,10 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_foreign_key_check_in_shared_lock <span class="version-mark">New in v8.5.6</span>
 
+> **Warning:**
+>
+> On TiDB X, using shared locks for foreign key checks is an experimental feature. It is not recommended that you use this feature in production environments. This feature might be changed or removed without prior notice. Before setting this variable to `ON`, you must set [`experimental.allow-enable-foreign-key-check-in-shared-lock`](/tidb-configuration-file.md#allow-enable-foreign-key-check-in-shared-lock) to `true`. When this configuration item is `false`, TiDB rejects attempts to set this variable to `ON`, but an `ON` value that has already been persisted or restored continues to take effect.
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
