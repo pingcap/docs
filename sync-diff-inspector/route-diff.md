@@ -82,7 +82,7 @@ target-table = "t_2"           # The name of the target table
 
 ### 例 {#examples}
 
-アップストリーム クラスターに 7 つのテーブルがあるとします。
+アップストリーム クラスターに 7つのテーブルがあるとします。
 
 -   `inspector_mysql_0.tb_emp1`
 -   `Inspector_mysql_0.tb_emp1`

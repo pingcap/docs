@@ -125,7 +125,7 @@ dispatchers = [
         ]
     }
 
-`enable-tidb-extension`無効になっている値のデータ形式と比較すると、 `_tidb_op` 、 `_tidb_commit_ts` 、 `_tidb_commit_physical_time` 3 つの新しいフィールドが追加されます。
+`enable-tidb-extension`無効になっている値のデータ形式と比較すると、 `_tidb_op` 、 `_tidb_commit_ts` 、 `_tidb_commit_physical_time` 3つの新しいフィールドが追加されます。
 
 ### カラムデータ形式 {#column-data-format}
 
@@ -141,7 +141,7 @@ dispatchers = [
         }
     }
 
-1 つの列が NULL になる可能性がある場合、カラムのデータ形式は次のようになります。
+1つの列が NULL になる可能性がある場合、カラムのデータ形式は次のようになります。
 
     {
         "default":null,
@@ -195,7 +195,7 @@ dispatchers = [
 | DECIMAL            | DECIMAL           | bytes     | `avro-decimal-handling-mode`文字列の場合、AVRO_TYPE は文字列です。                                              |
 | TiDBVECTORFloat32  | TiDBVECTORFloat32 | string    |  -                                                                                                                         |
 
-Avro プロトコルでは、他の 2 つの`sink-uri`パラメータ`avro-decimal-handling-mode`と`avro-bigint-unsigned-handling-mode`もカラムデータ形式に影響する可能性があります。
+Avro プロトコルでは、他の 2つの`sink-uri`パラメータ`avro-decimal-handling-mode`と`avro-bigint-unsigned-handling-mode`もカラムデータ形式に影響する可能性があります。
 
 -   `avro-decimal-handling-mode` 、Avro が小数フィールドを処理する方法を制御します。これには以下が含まれます。
 

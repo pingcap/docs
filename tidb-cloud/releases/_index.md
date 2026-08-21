@@ -7,7 +7,7 @@ summary: TiDB Cloud のリリース ノート、カーネルのバージョン�
 
 [TiDB Cloud](https://www.pingcap.com/tidb/cloud/)は、オープンソースのハイブリッドトランザクションおよび分析処理（HTAP）データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)をクラウドに提供する、フルマネージドの Database-as-a-Service（DBaaS）です。
 
-TiDB Cloud には、[クラウドプラットフォーム リリース](#cloud-platform-release-notes) と [データベース カーネル リリース](#database-kernel-release-notes) の 2 種類のリリースがあります。これらは独立したリリース サイクルに従い、別々に文書化されています。
+TiDB Cloud には、[クラウドプラットフォーム リリース](#cloud-platform-release-notes) と [データベース カーネル リリース](#database-kernel-release-notes) の 2種類のリリースがあります。これらは独立したリリース サイクルに従い、別々に文書化されています。
 
 ## クラウドプラットフォーム リリースノート
 

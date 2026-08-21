@@ -90,7 +90,7 @@ filters:
 
 ### シャーディングされたスキーマとテーブルのDML操作のみを移行する {#migrate-only-dml-operations-of-sharded-schemas-and-tables}
 
-DML ステートメントのみをレプリケートするには、次に示すように`Binlog event filter rule`を 2 つ設定します。
+DML ステートメントのみをレプリケートするには、次に示すように`Binlog event filter rule`を 2つ設定します。
 
 ```
 filters:

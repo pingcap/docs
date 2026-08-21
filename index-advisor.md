@@ -92,7 +92,7 @@ RECOMMEND INDEX RUN;
 
 このテーブルには数万から数十万ものクエリが含まれる可能性があり、インデックスアドバイザーのパフォーマンスに影響を与える可能性があります。この問題を解決するため、インデックスアドバイザーは実行頻度の高いクエリを優先します。これらのクエリはワークロード全体のパフォーマンスに大きな影響を与えるためです。デフォルトでは、インデックスアドバイザーは上位1,000件のクエリを選択します。この値は、 [`max_num_query`](#recommend-index-options)パラメーターを使用して調整できます。
 
-`RECOMMEND INDEX`ステートメントの結果は`mysql.index_advisor_results`テーブルに格納されます。このテーブルをクエリして、推奨インデックスを表示できます。次の例は、前の 2 つの`RECOMMEND INDEX`ステートメントの実行後のこのシステム テーブルの内容を示しています。
+`RECOMMEND INDEX`ステートメントの結果は`mysql.index_advisor_results`テーブルに格納されます。このテーブルをクエリして、推奨インデックスを表示できます。次の例は、前の 2つの`RECOMMEND INDEX`ステートメントの実行後のこのシステム テーブルの内容を示しています。
 
 ```sql
 SELECT * FROM mysql.index_advisor_results;
@@ -188,7 +188,7 @@ WHERE last_access_time IS NOT NULL AND percentage_access_0 + percentage_access_0
 
 > **Note:**
 >
-> `INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`のデータは最大 5 分遅延する可能性があり、TiDB ノードが再起動されるたびに使用状況データはリセットされます。また、インデックスの使用状況は、テーブルに有効な統計情報がある場合にのみ記録されます。
+> `INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`のデータは最大 5分遅延する可能性があり、TiDB ノードが再起動されるたびに使用状況データはリセットされます。また、インデックスの使用状況は、テーブルに有効な統計情報がある場合にのみ記録されます。
 
 ## 仮説インデックス {#hypothetical-indexes}
 

@@ -27,7 +27,7 @@ summary: TiDB 2.1 RC2は2018年9月14日にリリースされ、安定性、SQL�
     -   自動分析作業で統計を繰り返し分析する問題を修正 [＃7550](https://github.com/pingcap/tidb/pull/7550)
     -   統計情報に変更がない場合に発生する統計情報更新エラーを修正[＃7530](https://github.com/pingcap/tidb/pull/7530)
     -   `Analyze`リクエストを構築するときはRC分離レベルと低い優先度を使用する [＃7496](https://github.com/pingcap/tidb/pull/7496)
-    -   1 日の特定の期間の統計を自動分析できるようにするサポート[＃7570](https://github.com/pingcap/tidb/pull/7570)
+    -   1日の特定の期間の統計を自動分析できるようにするサポート[＃7570](https://github.com/pingcap/tidb/pull/7570)
     -   統計情報のログ記録時に発生するpanic問題を修正[＃7588](https://github.com/pingcap/tidb/pull/7588)
     -   `ANALYZE TABLE WITH BUCKETS`文を使用してヒストグラム内のバケット数の設定をサポートします [＃7619](https://github.com/pingcap/tidb/pull/7619)
     -   空のヒストグラムを更新するときにpanic問題を修正[＃7640](https://github.com/pingcap/tidb/pull/7640)

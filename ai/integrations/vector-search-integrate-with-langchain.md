@@ -415,7 +415,7 @@ TiDBベクトルストア内の各ドキュメントには、JSONオブジェク
 
 ### 例 {#example}
 
-次の例では、2 つのドキュメントを`TiDBVectorStore`に追加し、各ドキュメントにメタデータとして`title`フィールドを追加します。
+次の例では、2つのドキュメントを`TiDBVectorStore`に追加し、各ドキュメントにメタデータとして`title`フィールドを追加します。
 
 ```python
 vector_store.add_texts(

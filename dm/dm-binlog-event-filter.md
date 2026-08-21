@@ -101,7 +101,7 @@ DM v2.0.2以降では、ソース設定ファイルでbinlogイベントフィ�
 
 ### すべてのシャーディング削除操作をフィルタリングする {#filter-all-sharding-deletion-operations}
 
-すべての削除操作をフィルタリングするには、次の 2 つのフィルタリング ルールを構成します。
+すべての削除操作をフィルタリングするには、次の2つのフィルタリング ルールを構成します。
 
 -   `filter-table-rule`は、 `test_*`.`t_*`パターンに一致するすべてのテーブルの`TRUNCATE TABLE` 、 `DROP TABLE` 、および`DELETE STATEMENT`操作を除外します。
 -   `filter-schema-rule`は`test_*`パターンに一致するすべてのスキーマの`DROP DATABASE`操作を除外します。
@@ -121,7 +121,7 @@ filters:
 
 ### シャーディングDMLステートメントのみを移行する {#only-migrate-sharding-dml-statements}
 
-シャーディング DML ステートメントのみを移行するには、次の 2 つのフィルタリング ルールを構成します。
+シャーディング DML ステートメントのみを移行するには、次の2つのフィルタリング ルールを構成します。
 
 -   `do-table-rule`は、 `test_*`.`t_*`パターンに一致するすべてのテーブルの`CREATE TABLE` 、 `INSERT` 、 `UPDATE` 、および`DELETE`ステートメントのみを移行します。
 -   `do-schema-rule`は、 `test_*`パターンに一致するすべてのスキーマの`CREATE DATABASE`のステートメントのみを移行します。

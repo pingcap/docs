@@ -23,7 +23,7 @@ TiDB Ansible バージョン: 2.1.16
     -   `INTERVAL`が負の場合に`DATE_ADD`関数が間違った結果を返す問題を修正しました [＃11616](https://github.com/pingcap/tidb/pull/11616)
     -   `DATE_ADD`関数が`FLOAT` 、 `DOUBLE` 、または`DECIMAL`型の引数を受け入れるときに型変換を誤って実行するため、誤った結果が返される可能性がある問題を修正しました[＃11628](https://github.com/pingcap/tidb/pull/11628)
     -   CAST(JSON AS SIGNED)がオーバーフローしたときにエラーメッセージが不正確になる問題を修正しました [＃11562](https://github.com/pingcap/tidb/pull/11562)
-    -   1 つの子ノードが閉じられず、Executor を閉じる処理中にエラーが返された場合に、他の子ノードが閉じられない問題を修正しました。 [＃11598](https://github.com/pingcap/tidb/pull/11598)
+    -   1つの子ノードが閉じられず、Executor を閉じる処理中にエラーが返された場合に、他の子ノードが閉じられない問題を修正しました。 [＃11598](https://github.com/pingcap/tidb/pull/11598)
     -   タイムアウトまでにリージョン分散のスケジュールが完了していない場合に、エラーではなく、正常に分割されたリージョンの数と完了したパーセンテージを返す`SPLIT TABLE`ステートメントをサポートします。 [＃11487](https://github.com/pingcap/tidb/pull/11487)
     -   MySQL との互換性を保つために、 `REGEXP BINARY`関数で大文字と小文字を区別する [＃11505](https://github.com/pingcap/tidb/pull/11505)
     -   `DATE_ADD` / `DATE_SUB`の結果の`YEAR`の値が 0 より小さいかより大きい場合にオーバーフローするため、 `NULL`が正しく返されない問題を修正しました。 [＃11477](https://github.com/pingcap/tidb/pull/11477)

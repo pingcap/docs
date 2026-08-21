@@ -65,7 +65,7 @@ Grafana の**TiKV ダッシュボード**では、次の監視メトリックを
 
 ## パフォーマンスチューニング方法 {#performance-tuning-methods}
 
-パフォーマンスの問題の原因を突き止めたら、次の 2 つの側面から解決を試みてください。
+パフォーマンスの問題の原因を突き止めたら、次の2つの側面から解決を試みてください。
 
 -   単一の TiKV インスタンス上のリージョン数を減らす
 -   単一リージョンのメッセージ数を減らす
@@ -98,7 +98,7 @@ config set max-merge-region-keys 540000
 config set merge-schedule-limit 8
 ```
 
-詳細については、 [リージョン結合](https://tikv.org/docs/4.0/tasks/configure/region-merge/)および[PD設定ファイル](/pd-configuration-file.md#schedule)の次の 3 つの構成パラメータを参照してください。
+詳細については、 [リージョン結合](https://tikv.org/docs/4.0/tasks/configure/region-merge/)および[PD設定ファイル](/pd-configuration-file.md#schedule)の次の3つの構成パラメータを参照してください。
 
 -   [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size)
 -   [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys)

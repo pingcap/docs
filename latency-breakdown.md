@@ -73,7 +73,7 @@ e2e duration =
 
 ## クエリを読む {#read-queries}
 
-読み取りクエリにはプロセス フォームが 1 つだけあります。
+読み取りクエリにはプロセス フォームが 1つだけあります。
 
 ### PointGet {#point-get}
 
@@ -313,7 +313,7 @@ Diagram(
 | 自動コミット  | 実行 + ロック + コミット | 実行 + コミット |
 | 非自動コミット | 実行 + ロック        | 実行する      |
 
-書き込みクエリは次の 3 つのフェーズに分かれています。
+書き込みクエリは次の3つのフェーズに分かれています。
 
 -   実行フェーズ: 変更を実行し、TiDB のメモリに書き込みます。
 -   ロックフェーズ: 実行結果に対して悲観的ロックを取得します。
@@ -520,7 +520,7 @@ Commit_time =
     commit_round * tidb_tikvclient_request_seconds{type="Commit"}
 ```
 
-コミット期間は、次の 4 つの指標に分類できます。
+コミット期間は、次の4つの指標に分類できます。
 
 -   `Get_latest_ts_time`は、非同期コミットまたはシングル フェーズ コミット (1PC) トランザクションで最新の TSO を取得するのにかかる時間を記録します。
 -   `Prewrite_time`は事前書き込みフェーズの期間を記録します。
@@ -612,7 +612,7 @@ Diagram(
 -   RPC クライアントは各ストアへの接続プール (ConnArray という名前) を維持し、各プールにはバッチ要求 (送信) チャネルを持つ BatchConn があります。
 -   ストアが TiKV であり、バッチ サイズが正の場合、バッチが有効になります。これはほとんどの場合に当てはまります。
 -   バッチ要求チャネルのサイズは[`tikv-client.max-batch-size`](/tidb-configuration-file.md#max-batch-size) (デフォルトは`128` ) で、エンキューの期間は`tidb_tikvclient_batch_wait_duration`として観測されます。
--   ストリーム要求には`CmdBatchCop` 、 `CmdCopStream` 、 `CmdMPPConn` 3 種類があり、ストリームから最初の応答を取得するために追加の`recv()`呼び出しが必要になります。
+-   ストリーム要求には`CmdBatchCop` 、 `CmdCopStream` 、 `CmdMPPConn` 3種類があり、ストリームから最初の応答を取得するために追加の`recv()`呼び出しが必要になります。
 
 まだいくらかのレイテンシーが観測されていますが、 `tidb_tikvclient_request_seconds`は次のように概算できます。
 
@@ -722,7 +722,7 @@ async write duration(async io enabled) =
     tikv_raftstore_apply_log_duration_seconds
 ```
 
-非同期書き込みは次の 3 つのフェーズに分けられます。
+非同期書き込みは次の3つのフェーズに分けられます。
 
 -   提案
 -   コミット

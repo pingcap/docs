@@ -198,7 +198,7 @@ SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array", "minItems"
 1 row in set (0.00 sec)
 ```
 
-上記の出力は、 `fruits`少なくとも 3 つの項目を持つ配列であることを示しています。
+上記の出力は、 `fruits`少なくとも 3つの項目を持つ配列であることを示しています。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array", "minItems": 4}}}',@j);
@@ -213,7 +213,7 @@ SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array", "minItems"
 1 row in set (0.00 sec)
 ```
 
-上記の出力から、 `fruits`は少なくとも 4 つの項目を持つ配列では**ないこと**がわかります。これは、最小項目数を満たしていないためです。
+上記の出力から、 `fruits`は少なくとも 4つの項目を持つ配列では**ないこと**がわかります。これは、最小項目数を満たしていないためです。
 
 整数値の場合、特定の範囲内にあるかどうかを確認できます。
 

@@ -75,7 +75,7 @@ Flags:
 
 TPC-Cテストを実行するための簡略化された手順を以下に示します。詳細な手順については、 [TiDBでTPC-Cテストを実行する方法](/benchmark/benchmark-tidb-using-tpcc.md)を参照してください。
 
-1.  ハッシュを使用して 4 つのパーティションを使用して 4 つの倉庫を作成します。
+1.  ハッシュを使用して 4つのパーティションを使用して 4つの倉庫を作成します。
 
     ```shell
     tiup bench tpcc --warehouses 4 --parts 4 prepare

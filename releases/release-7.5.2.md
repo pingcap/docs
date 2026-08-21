@@ -163,7 +163,7 @@ TiDB バージョン: 7.5.2
     -   不安定なテストケースの問題を修正し、各テストが独立した一時ディレクトリを使用するようにして、オンライン構成の変更が他のテストケースに影響しないようにします。 [＃16871](https://github.com/tikv/tikv/issues/16871) @[glorv](https://github.com/glorv)
     -   バイナリからJSON への変換中にTiKVがpanicする可能性がある問題を修正しました [＃16616](https://github.com/tikv/tikv/issues/16616) @[YangKeao](https://github.com/YangKeao)
     -   tikv-ctlの`raft region`コマンドの出力にリージョンステータス情報が含まれていない問題を修正しました [＃17037](https://github.com/tikv/tikv/issues/17037) @[glorv](https://github.com/glorv)
-    -   1 つの TiKV ノードで遅い`check-leader`操作により、他の TiKV ノードの`resolved-ts`正常に進まなくなる問題を修正しました。 [＃15999](https://github.com/tikv/tikv/issues/15999) @[crazycs520](https://github.com/crazycs520)
+    -   1つの TiKV ノードで遅い`check-leader`操作により、他の TiKV ノードの`resolved-ts`正常に進まなくなる問題を修正しました。 [＃15999](https://github.com/tikv/tikv/issues/15999) @[crazycs520](https://github.com/crazycs520)
     -   スナップショットの適用によってピアの破棄処理が中断された後、スナップショットの適用が完了しても再開されない問題を修正[＃16561](https://github.com/tikv/tikv/issues/16561) @[tonyxuqqi](https://github.com/tonyxuqqi)
     -   `DECIMAL`型の小数点部分が場合に正しくない問題を修正しました [＃16913](https://github.com/tikv/tikv/issues/16913) @[gengliqi](https://github.com/gengliqi)
     -   クエリ内の`CONV()`関数が数値システム変換中にオーバーフローし、TiKV panicが発生する問題を修正しました。 [＃16969](https://github.com/tikv/tikv/issues/16969) @[gengliqi](https://github.com/gengliqi)

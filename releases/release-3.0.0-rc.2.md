@@ -120,5 +120,5 @@ TiDB Ansible バージョン: 3.0.0-rc.2
 
     -   シャードデータベースとテーブルのマージをサポート[＃95](https://github.com/pingcap/tidb-lightning/pull/95)
     -   KV書き込み失敗再試行メカニズムを追加 [＃176](https://github.com/pingcap/tidb-lightning/pull/176)
-    -   デフォルト値`table-concurrency`を6 に更新 [＃175](https://github.com/pingcap/tidb-lightning/pull/175)
+    -   デフォルト値`table-concurrency`を6に更新 [＃175](https://github.com/pingcap/tidb-lightning/pull/175)
     -   `tidb.pd-addr`と`tidb.port`提供されていない場合は自動的に検出して必要な構成項目を削減します[＃173](https://github.com/pingcap/tidb-lightning/pull/173)

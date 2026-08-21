@@ -89,7 +89,7 @@ SELECT JSON_ARRAY_INSERT('["Car", "Boat", "Train"]', '$[1]', "Airplane") AS "Tra
 
 ## `JSON_INSERT()` {#json_insert}
 
-`JSON_INSERT(json_doc, path, value [,path, value] ...)`関数は、JSON ドキュメントに 1 つ以上の値を挿入し、結果を返します。
+`JSON_INSERT(json_doc, path, value [,path, value] ...)`関数は、JSON ドキュメントに 1つ以上の値を挿入し、結果を返します。
 
 この関数は引数をペアで受け取ります。各ペアは`path`と`value`です。
 
@@ -152,7 +152,7 @@ SELECT JSON_MERGE_PATCH(
 
 ## `JSON_MERGE_PRESERVE()` {#json_merge_preserve}
 
-`JSON_MERGE_PRESERVE(json_doc, json_doc [,json_doc] ...)`関数は、各キーに関連付けられたすべての値を保持しながら 2 つ以上の JSON ドキュメントをマージし、マージされた結果を返します。
+`JSON_MERGE_PRESERVE(json_doc, json_doc [,json_doc] ...)`関数は、各キーに関連付けられたすべての値を保持しながら 2つ以上の JSON ドキュメントをマージし、マージされた結果を返します。
 
 例:
 

@@ -31,8 +31,8 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 -   パスワード コンプライアンス監査要件を満たす[パスワード管理](/password-management.md)ポリシーをサポートします。
 -   TiDB LightningとDumplingは、圧縮されたSQLおよびCSVファイルの[インポート](/tidb-lightning/tidb-lightning-data-source.md)および[エクスポート](/dumpling-overview.md#improve-export-efficiency-through-concurrency)をサポートします。
 -   TiDB Data Migration (DM) [継続的なデータ検証](/dm/dm-continuous-data-validation.md) GA になります。
--   TiDB バックアップ &amp; リストアは、スナップショット チェックポイント バックアップをサポートし、 [PITR](/br/br-pitr-guide.md#run-pitr)のリカバリ パフォーマンスを 50% 向上させ、一般的なシナリオでの RPO を最短 5 分に短縮します。
--   [Kafkaへのデータの複製](/replicate-data-to-kafka.md)の TiCDC スループットを 4000 行/秒から 35000 行/秒に向上し、レプリケーションのレイテンシーを2 秒に短縮します。
+-   TiDB バックアップ &amp; リストアは、スナップショット チェックポイント バックアップをサポートし、 [PITR](/br/br-pitr-guide.md#run-pitr)のリカバリ パフォーマンスを 50% 向上させ、一般的なシナリオでの RPO を最短 5分に短縮します。
+-   [Kafkaへのデータの複製](/replicate-data-to-kafka.md)の TiCDC スループットを 4000 行/秒から 35000 行/秒に向上し、レプリケーションのレイテンシーを2秒に短縮します。
 -   データのライフサイクルを管理するために行レベル[存続時間（TTL）](/time-to-live.md)を提供します (実験的)。
 -   TiCDC は、Amazon S3、Azure Blob Storage、NFS (実験的) など[変更ログをオブジェクトストレージに複製する](/ticdc/ticdc-sink-to-cloud-storage.md)サポートしています。
 
@@ -281,7 +281,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     TiDBクラスタのテストシナリオでは、TiCDCのパフォーマンスが大幅に向上しました。具体的には、シナリオ[Kafkaへのデータの複製](/replicate-data-to-kafka.md)では、単一のTiCDCが処理できる行変更の最大量は3万行/秒に達し、レプリケーションのレイテンシーは10秒に短縮されました。TiKVとTiCDCのローリングアップグレード中でも、レプリケーションのレイテンシーは30秒未満です。
 
-    災害復旧 (DR) シナリオでは、TiCDC の再実行ログと同期ポイントを有効にすると、TiCDC のスループットを 4000 行/秒から 35000 行/秒に向上でき、レプリケーションのレイテンシーを2 秒に制限できます。
+    災害復旧 (DR) シナリオでは、TiCDC の再実行ログと同期ポイントを有効にすると、TiCDC のスループットを 4000 行/秒から 35000 行/秒に向上でき、レプリケーションのレイテンシーを2秒に制限できます。
 
 ### バックアップと復元 {#backup-and-restore}
 
@@ -366,7 +366,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 ### その他 {#others}
 
--   v6.5.0 以降、 `mysql.user`テーブルに`Password_reuse_history`と`Password_reuse_time` 2 つの新しい列が追加されます。
+-   v6.5.0 以降、 `mysql.user`テーブルに`Password_reuse_history`と`Password_reuse_time` 2つの新しい列が追加されます。
 -   バージョン6.5.0以降、 [インデックス加速](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)機能がデフォルトで有効になっています。この機能は[1つの`ALTER TABLE`文で複数の列またはインデックスを変更する](/sql-statements/sql-statement-alter-table.md)と完全には互換性がありません。インデックスアクセラレーションを使用して一意インデックスを追加する場合、同じステートメント内で他の列やインデックスを変更しないようにする必要があります。この機能は[PITR（ポイントインタイムリカバリ）](/br/br-pitr-guide.md)とも互換性がありません。インデックスアクセラレーション機能を使用する場合は、バックグラウンドでPITRバックアップタスクが実行されていないことを確認する必要があります。そうしないと、予期しない結果が発生する可能性があります。詳細については、 [ドキュメント](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)を参照してください。
 
 ## 非推奨の機能 {#deprecated-feature}
@@ -415,7 +415,7 @@ v6.5.0 以降では、v4.0.7 で導入された`AMEND TRANSACTION`メカニズ�
 
     -   TiDB Dashboard
 
-        -   スロークエリページに 3 つの新しいフィールドを追加します:「Is Prepared?」、「Is Plan from Cache?」、「Is Plan from Binding?」 [＃1451](https://github.com/pingcap/tidb-dashboard/issues/1451) @[shhdgit](https://github.com/shhdgit)
+        -   スロークエリページに 3つの新しいフィールドを追加します:「Is Prepared?」、「Is Plan from Cache?」、「Is Plan from Binding?」 [＃1451](https://github.com/pingcap/tidb-dashboard/issues/1451) @[shhdgit](https://github.com/shhdgit)
 
     -   Backup & Restore (BR)
 

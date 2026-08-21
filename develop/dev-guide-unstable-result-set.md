@@ -12,7 +12,7 @@ aliases: ['/ja/tidb/stable/dev-guide-unstable-result-set/','/ja/tidbcloud/dev-gu
 
 便宜上、MySQLは`GROUP BY`構文を「拡張」し、 `SELECT`句で`GROUP BY`句で宣言されていない非集約フィールドを参照できるようにしています。つまり、 `NON-FULL GROUP BY`構文です。他のデータベースでは、これは不安定な結果セットを引き起こすため、構文***エラー***とみなされます。
 
-たとえば、次の 2 つのテーブルがあるとします。
+たとえば、次の2つのテーブルがあるとします。
 
 -   `stu_info`学生情報を保存します
 -   `stu_score`生徒のテストのスコアが格納されます。
@@ -67,7 +67,7 @@ ORDER BY
     `a`.`stuname`;
 ```
 
-すると、この SQL に一致する 2 つの値が返されます。
+すると、この SQL に一致する 2つの値が返されます。
 
 最初に返される値:
 
@@ -120,7 +120,7 @@ SQLセマンティクスでは、 `ORDER BY`構文が使用されている場合
 
 分散データベースであるTiDBは、複数のサーバーにデータを保存しています。また、TiDBレイヤーはデータページをキャッシュしないため、 `ORDER BY`を含まないSQL文の結果セットの順序は不安定であると認識されやすくなります。連続した結果セットを出力するには、SQLセマンティクスに準拠した`ORDER BY`句に明示的に順序フィールドを追加する必要があります。
 
-次の例では、 `ORDER BY`句に 1 つのフィールドのみが追加され、TiDB はその 1 つのフィールドのみで結果を並べ替えます。
+次の例では、 `ORDER BY`句に 1つのフィールドのみが追加され、TiDB はその1つのフィールドのみで結果を並べ替えます。
 
 ```sql
 mysql> select a.class, a.stuname, b.course, b.courscore from stu_info a join stu_score b on a.stuno=b.stuno order by a.class;

@@ -76,7 +76,7 @@ TiDB Ansible バージョン: 3.0.2
     -   長さがゼロの非文字列列をインデックスするときにエラーが発生する問題を修正[＃11214](https://github.com/pingcap/tidb/pull/11214)
     -   外部キー制約とフルテキストインデックスを持つ列の変更を禁止します（注：TiDBは、構文で外部キー制約とフルテキストインデックスを引き続きサポートしています） [＃11274](https://github.com/pingcap/tidb/pull/11274)
     -   `ALTER TABLE`文で変更された位置と列のデフォルト値が同時に使用されるため、列のインデックスオフセットが間違っている可能性がある問題を修正しました[＃11346](https://github.com/pingcap/tidb/pull/11346)
-    -   JSON ファイルの解析時に発生する 2 つの問題を修正しました。
+    -   JSON ファイルの解析時に発生する 2つの問題を修正しました。
         -   `int64`は`ConvertJSONToFloat`の`uint64`の中間解析結果として使用され、精度オーバーフローエラーが発生します。 [＃11433](https://github.com/pingcap/tidb/pull/11433)
         -   `int64`は`ConvertJSONToInt`の`uint64`の中間解析結果として使用され、精度オーバーフローエラーが発生します。 [＃11551](https://github.com/pingcap/tidb/pull/11551)
     -   AUTO_INCREMENT列のインデックスの削除を禁止して、AUTO_INCREMENT列が誤った結果を取得する可能性を回避する[＃11399](https://github.com/pingcap/tidb/pull/11399)

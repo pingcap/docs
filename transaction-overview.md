@@ -290,7 +290,7 @@ START TRANSACTION WITH CAUSAL CONSISTENCY ONLY;
 
 TiDBはデフォルトで線形一貫性を保証します。線形一貫性の場合、トランザクション1がコミットされた後にトランザクション2がコミットされた場合、論理的にはトランザクション2はトランザクション1の後に発生するはずです。因果一貫性は線形一貫性よりも弱い保証です。因果一貫性の場合、2つのトランザクションのコミット順序と発生順序の一貫性が保証されるのは、トランザクション1とトランザクション2によってロックまたは書き込まれたデータが交差している場合のみです。つまり、2つのトランザクションはデータベースに既知の因果関係があることを意味します。現在、TiDBは外部因果関係の伝播をサポートしていません。
 
-因果一貫性が有効になっている 2 つのトランザクションには、次の特性があります。
+因果一貫性が有効になっている 2つのトランザクションには、次の特性があります。
 
 -   [潜在的な因果関係を持つトランザクションは、一貫した論理順序と物理的なコミット順序を持つ](#transactions-with-potential-causal-relationship-have-the-consistent-logical-order-and-physical-commit-order)
 -   [因果関係のないトランザクションは、一貫した論理順序と物理的なコミット順序を保証しません](#transactions-with-no-causal-relationship-do-not-guarantee-consistent-logical-order-and-physical-commit-order)

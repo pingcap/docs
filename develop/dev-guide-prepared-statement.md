@@ -61,7 +61,7 @@ DEALLOCATE PREPARE {prepared_statement_name};
 
 ## 例 {#examples}
 
-このセクションでは、プリペアドステートメントの例として、データの`SELECT`とデータの`INSERT`の 2 つを説明します。
+このセクションでは、プリペアドステートメントの例として、データの`SELECT`とデータの`INSERT`の 2つを説明します。
 
 ### `SELECT`例 {#select-example}
 

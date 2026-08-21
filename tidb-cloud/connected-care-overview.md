@@ -16,7 +16,7 @@ aliases: ['/ja/tidbcloud/connected-care-announcement']
 
 Connected Care サービスは、最新のコミュニケーション ツール、プロアクティブなサポート、高度な AI 機能を通じてTiDB Cloudとの接続を強化し、シームレスで顧客中心のエクスペリエンスを実現するように設計されています。
 
-Connected Care サービスには、 **Basic** 、 **Developer** (従来の**Standard**プランに相当)、 **Enterprise** 、 **Premium の**4 つのサポート プランがあります。
+Connected Care サービスには、 **Basic** 、 **Developer** (従来の**Standard**プランに相当)、 **Enterprise** 、 **Premium の**4つのサポート プランがあります。
 
 > **Note**
 >
@@ -39,7 +39,7 @@ Connected Care サービスには、 **Basic** 、 **Developer** (従来の**Sta
 
 > **Note**
 >
-> 4 つのサポート プランすべてのお客様は、サービス リクエストに[PingCAPサポートポータル](https://tidb.support.pingcap.com/)を利用できます。
+> 4つのサポート プランすべてのお客様は、サービス リクエストに[PingCAPサポートポータル](https://tidb.support.pingcap.com/)を利用できます。
 
 ## 従来のサポートサービスとConnected Careサポートサービスの違い {#differences-between-legacy-support-services-and-connected-care-support-services}
 

@@ -241,7 +241,7 @@ mysql-instances:
 
 ## コンフィグレーション順序 {#configuration-order}
 
-サンプル設定ファイルから、設定ファイルが`Global configuration`と`Instance configuration`の 2 つの部分から構成されていることがわかります。ここで、 `Global configuration`には`Basic configuration`と`Feature configuration set`が含まれています。設定順序は次のとおりです。
+サンプル設定ファイルから、設定ファイルが`Global configuration`と`Instance configuration`の 2つの部分から構成されていることがわかります。ここで、 `Global configuration`には`Basic configuration`と`Feature configuration set`が含まれています。設定順序は次のとおりです。
 
 1.  [グローバル設定](#global-configuration)を編集します。
 2.  グローバル構成に基づいて[インスタンス構成](#instance-configuration)を編集します。

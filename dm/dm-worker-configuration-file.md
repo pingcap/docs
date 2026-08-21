@@ -62,7 +62,7 @@ cert-allowed-cn = ["dm"]
 
 #### `join` {#join}
 
--   DM マスター構成ファイル内の 1 つ以上の[`master-addr`](/dm/dm-master-configuration-file.md#global-configuration)に対応します。
+-   DM マスター構成ファイル内の 1つ以上の[`master-addr`](/dm/dm-master-configuration-file.md#global-configuration)に対応します。
 
 #### `keepalive-ttl` {#keepalive-ttl}
 

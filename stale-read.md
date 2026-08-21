@@ -69,13 +69,13 @@ create table t1(id int);
 alter table t1 set tiflash replica 1;
 ```
 
-1 分後に次の DDL 操作を実行します。
+1分後に次の DDL 操作を実行します。
 
 ```sql
 alter table t1 add column c1 int not null;
 ```
 
-次に、 ステイル読み取りを使用して 1 分前のデータをクエリします。
+次に、 ステイル読み取りを使用して 1分前のデータをクエリします。
 
 ```sql
 set @@session.tidb_enforce_mpp=1;

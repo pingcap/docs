@@ -48,7 +48,7 @@ TiDBバージョン5.0以降では、配置ルール機能はデフォルトで�
 -   `exists` : 指定されたラベル キーが含まれます。
 -   `notExists` : 指定されたラベル キーは含まれません。
 
-`LocationLabels`の意味と機能は、v4.0 以前のバージョンと同じです。例えば、 `[zone,rack,host]`をデプロイし、3 層トポロジを定義しているとします。クラスターには複数のゾーン（アベイラビリティゾーン）があり、各ゾーンには複数のラックがあり、各ラックには複数のホストがあります。スケジュールを実行する際、PD はまずリージョンのピアを異なるゾーンに配置しようとします。この試行が失敗した場合（レプリカは 3 つあるがゾーンは合計 2 つしかない場合など）、PD はこれらのレプリカを異なるラックに配置することを保証します。ラック数が分離を保証するのに十分でない場合、PD はホストレベルの分離を試みます。
+`LocationLabels`の意味と機能は、v4.0 以前のバージョンと同じです。例えば、 `[zone,rack,host]`をデプロイし、3 層トポロジを定義しているとします。クラスターには複数のゾーン（アベイラビリティゾーン）があり、各ゾーンには複数のラックがあり、各ラックには複数のホストがあります。スケジュールを実行する際、PD はまずリージョンのピアを異なるゾーンに配置しようとします。この試行が失敗した場合（レプリカは 3つあるがゾーンは合計2つしかない場合など）、PD はこれらのレプリカを異なるラックに配置することを保証します。ラック数が分離を保証するのに十分でない場合、PD はホストレベルの分離を試みます。
 
 `IsolationLevel`の意味と機能については[クラスタトポロジ構成](/schedule-replicas-by-topology-labels.md)で詳しく説明します。例えば、 `LocationLabels`を含む3層トポロジを定義する`[zone,rack,host]`をデプロイし、 `IsolationLevel`を`zone`に設定した場合、PDはスケジューリング中に各リージョンのすべてのピアが異なるゾーンに配置されるように保証します。 `IsolationLevel`の最小分離レベル制限を満たすことができない場合（例えば、レプリカが3つ設定されているが、データゾーンが合計で2つしかない場合）、PDはこの制限を満たすために調整を試みません。デフォルト値`IsolationLevel`は空の文字列であり、無効であることを意味します。
 
@@ -101,7 +101,7 @@ PD は、 `max-replicas` 、 `location-labels` 、および`isolation-level`構�
 > **Note:**
 >
 > -   配置ルールが有効で複数のルールが存在する場合、以前に設定されたルール`max-replicas` 、 `location-labels` 、および`isolation-level`は適用されなくなります。レプリカポリシーを調整するには、配置ルールに関連するインターフェースを使用してください。
-> -   配置ルールが有効になっていて、デフォルト ルールが 1 つだけ存在する場合、 `max-replicas` 、 `location-labels` 、または`isolation-level`が変更されると、TiDB はこのデフォルト ルールを自動的に更新します。
+> -   配置ルールが有効になっていて、デフォルト ルールが 1つだけ存在する場合、 `max-replicas` 、 `location-labels` 、または`isolation-level`が変更されると、TiDB はこのデフォルト ルールを自動的に更新します。
 
 ### 配置ルールを無効にする {#disable-placement-rules}
 
@@ -306,7 +306,7 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 
 このセクションでは、配置ルールの一般的な使用シナリオを紹介します。
 
-### シナリオ 1: 通常のテーブルに 3 つのレプリカを使用し、メタデータに 5 つのレプリカを使用してクラスタの耐障害性を向上させる {#scenario-1-use-three-replicas-for-normal-tables-and-five-replicas-for-the-metadata-to-improve-cluster-disaster-tolerance}
+### シナリオ 1: 通常のテーブルに 3つのレプリカを使用し、メタデータに 5つのレプリカを使用してクラスタの耐障害性を向上させる {#scenario-1-use-three-replicas-for-normal-tables-and-five-replicas-for-the-metadata-to-improve-cluster-disaster-tolerance}
 
 キーの範囲をメタデータの範囲に制限するルールを追加し、`count`の値を`5`に設定するだけです。このルールの例を以下に示します。
 

@@ -19,7 +19,7 @@ Postmanにデータアプリをインポートする前に、以下のものを�
 
 -   [Postmanデスクトップアプリ](https://www.postman.com/downloads)(オプション)。あるいは、アプリをダウンロードせずに Postman Web バージョンを使用することもできます。
 
--   明確に定義された[終点](/tidb-cloud/data-service-manage-endpoint.md)が少なくとも 1 つある[データアプリ](/tidb-cloud/data-service-manage-data-app.md)。次の要件を満たすエンドポイントのみを Postman にインポートできます。
+-   明確に定義された[終点](/tidb-cloud/data-service-manage-endpoint.md)が少なくとも 1つある[データアプリ](/tidb-cloud/data-service-manage-data-app.md)。次の要件を満たすエンドポイントのみを Postman にインポートできます。
 
     -   対象のTiDB Cloud Starterインスタンスが選択されました。
     -   エンドポイントパスとリクエストメソッドが設定されました。

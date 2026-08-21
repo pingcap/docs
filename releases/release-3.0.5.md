@@ -31,7 +31,7 @@ TiDB Ansible バージョン: 3.0.5
     -   型変換に関して、 `AND`と`OR`論理式が誤った結果を返す問題を修正しました。 [＃12811](https://github.com/pingcap/tidb/pull/12811)
 -   サーバ
     -   後で大規模なトランザクションをサポートするためにトランザクションTTLを変更するインターフェース関数を実装します[＃12397](https://github.com/pingcap/tidb/pull/12397)
-    -   悲観的トランザクションをサポートするために、必要に応じてトランザクション TTL を延長する（最大 10 分）ことをサポートします[＃12579](https://github.com/pingcap/tidb/pull/12579)
+    -   悲観的トランザクションをサポートするために、必要に応じてトランザクション TTL を延長する（最大 10分）ことをサポートします[＃12579](https://github.com/pingcap/tidb/pull/12579)
     -   TiDBがスキーマの変更とそれに対応する変更されたテーブル情報をキャッシュする回数を100から1024に調整し、 `tidb_max_delta_schema_count`システム変数を使用して変更をサポートします。 [＃12502](https://github.com/pingcap/tidb/pull/12502)
     -   `kvrpc.Cleanup`プロトコルの動作を更新して、時間外ではないトランザクションのロックをクリーンアップしないようにしました[＃12417](https://github.com/pingcap/tidb/pull/12417)
     -   パーティションテーブル情報を`information_schema.tables`テーブルに記録するサポート [＃12631](https://github.com/pingcap/tidb/pull/12631)

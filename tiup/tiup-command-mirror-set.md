@@ -5,7 +5,7 @@ summary: tiup mirror set コマンドは、現在のミラーをローカルフ�
 
 # tiup mirror set {#tiup-mirror-set}
 
-`tiup mirror set`コマンドは現在のミラーを切り替えるために使用され、ローカル ファイル システムとリモート ネットワーク アドレスの 2 つの形式のミラーをサポートします。
+`tiup mirror set`コマンドは現在のミラーを切り替えるために使用され、ローカル ファイル システムとリモート ネットワーク アドレスの 2つの形式のミラーをサポートします。
 
 公式ミラーのアドレスは`https://tiup-mirrors.pingcap.com`です。
 
@@ -15,7 +15,7 @@ summary: tiup mirror set コマンドは、現在のミラーをローカルフ�
 tiup mirror set <mirror-addr> [flags]
 ```
 
-`<mirror-addr>`はミラー アドレスであり、次の 2 つの形式があります。
+`<mirror-addr>`はミラー アドレスであり、次の2つの形式があります。
 
 -   ネットワークアドレス: `http`または`https`で始まります。例: `http://172.16.5.5:8080` 、 `https://tiup-mirrors.pingcap.com` 。
 -   ローカルファイルパス: ミラーディレクトリの絶対パス。例: `/path/to/local-tiup-mirror` 。

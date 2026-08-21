@@ -90,7 +90,7 @@ SET GLOBAL validate_password.policy = LOW;
 SET GLOBAL validate_password.length = 10;
 ```
 
-パスワードには少なくとも 2 つの数字、1 つの大文字、1 つの小文字、および 1 つの特殊文字を含める必要があります。
+パスワードには少なくとも 2つの数字、1つの大文字、1つの小文字、および 1つの特殊文字を含める必要があります。
 
 ```sql
 SET GLOBAL validate_password.number_count = 2;
@@ -224,7 +224,7 @@ TiDB は、グローバル レベルとアカウント レベルでの自動パ�
 
     グローバル自動パスワード有効期限ポリシーは、アカウント レベルのオーバーライドを持たないすべてのアカウントに適用されます。
 
-    次の例では、パスワードの有効期間が 180 日間のグローバル自動パスワード有効期限ポリシーを確立します。
+    次の例では、パスワードの有効期間が 180日間のグローバル自動パスワード有効期限ポリシーを確立します。
 
     ```sql
     SET GLOBAL default_password_lifetime = 180;
@@ -234,7 +234,7 @@ TiDB は、グローバル レベルとアカウント レベルでの自動パ�
 
     個々のアカウントに対して自動パスワード有効期限ポリシーを確立するには、 `CREATE USER`または`ALTER USER`ステートメントの`PASSWORD EXPIRE`オプションを使用します。
 
-    次の例では、ユーザー パスワードを 90 日ごとに変更する必要があります。
+    次の例では、ユーザー パスワードを 90日ごとに変更する必要があります。
 
     ```sql
     CREATE USER 'test'@'localhost' PASSWORD EXPIRE INTERVAL 90 DAY;
@@ -301,7 +301,7 @@ TiDB はアカウントのパスワード履歴を記録し、履歴からの新
 
 グローバル パスワード再利用ポリシーを確立するには、システム変数[`password_history`](/system-variables.md#password_history-new-in-v650)と[`password_reuse_interval`](/system-variables.md#password_reuse_interval-new-in-v650)を使用します。
 
-たとえば、過去 6 個のパスワードと過去 365 日以内に使用されたパスワードの再利用を禁止するグローバル パスワード再利用ポリシーを確立するには、次のようにします。
+たとえば、過去 6 個のパスワードと過去 365日以内に使用されたパスワードの再利用を禁止するグローバル パスワード再利用ポリシーを確立するには、次のようにします。
 
 ```sql
 SET GLOBAL password_history = 6;
@@ -316,21 +316,21 @@ SET GLOBAL password_reuse_interval = 365;
 
 例えば：
 
-過去 5 つのパスワードの再利用を禁止するには:
+過去 5つのパスワードの再利用を禁止するには:
 
 ```sql
 CREATE USER 'test'@'localhost' PASSWORD HISTORY 5;
 ALTER USER 'test'@'localhost' PASSWORD HISTORY 5;
 ```
 
-過去 365 日以内に使用したパスワードの再利用を禁止するには:
+過去 365日以内に使用したパスワードの再利用を禁止するには:
 
 ```sql
 CREATE USER 'test'@'localhost' PASSWORD REUSE INTERVAL 365 DAY;
 ALTER USER 'test'@'localhost' PASSWORD REUSE INTERVAL 365 DAY;
 ```
 
-2 種類の再利用ポリシーを組み合わせるには、 `PASSWORD HISTORY`と`PASSWORD REUSE INTERVAL`両方を使用します。
+2種類の再利用ポリシーを組み合わせるには、 `PASSWORD HISTORY`と`PASSWORD REUSE INTERVAL`両方を使用します。
 
 ```sql
 CREATE USER 'test'@'localhost'

@@ -255,7 +255,7 @@ production:
 
 ### データを挿入する {#insert-data}
 
-次のクエリは、2 つのフィールドを持つ単一の Player オブジェクトを作成し、作成された`Player`オブジェクトを返します。
+次のクエリは、2つのフィールドを持つ単一の Player オブジェクトを作成し、作成された`Player`オブジェクトを返します。
 
 ```ruby
 new_player = Player.create!(coins: 100, goods: 100)

@@ -20,7 +20,7 @@ summary: TiDB Cloudで SQL パフォーマンスを分析および調整する�
 
 指定された時間範囲（ `ΔT` ）内のユーザー応答時間の合計を取得するには、次の数式を使用します。
 
-`ΔT`での合計ユーザー応答時間 = 平均 TPS (1 秒あたりのトランザクション数) x 平均ユーザー応答時間 x `ΔT` 。
+`ΔT`での合計ユーザー応答時間 = 平均 TPS (1秒あたりのトランザクション数) x 平均ユーザー応答時間 x `ΔT` 。
 
 ![user\_response\_time](/media/performance/user_response_time_en.png)
 
@@ -49,7 +49,7 @@ TiDB Cloudコンソールには、ユーザー応答時間のトラブルシュ�
     -   **SQL Statement**を使用すると、ページ上のSQL実行を直接観察し、システムテーブルをクエリすることなくパフォーマンスの問題を簡単に特定できます。SQL文をクリックすると、クエリの実行計画をさらに詳しく表示して、トラブルシューティングや分析を行うことができます。SQLパフォーマンスチューニングの詳細については、 [SQLチューニングの概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)を参照してください。
     -   **Key Visualizer**を使用すると、TiDB のデータ アクセス パターンとデータ ホットスポットを観察できます。
 
--   [**メトリクス**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) : このページでは、リクエスト単位、使用済みストレージサイズ、1 秒あたりのクエリ数、平均クエリ実行時間などのメトリックを表示できます。
+-   [**メトリクス**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) : このページでは、リクエスト単位、使用済みストレージサイズ、1秒あたりのクエリ数、平均クエリ実行時間などのメトリックを表示できます。
 
 追加のメトリックをリクエストするには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 

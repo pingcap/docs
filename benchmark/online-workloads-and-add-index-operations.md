@@ -19,7 +19,7 @@ TiDB バージョン: v3.0.1
 
 ## テスト環境 {#test-environment}
 
-このテストは、3 つの TiDB インスタンス、3 つの TiKV インスタンス、3 つの PD インスタンスがデプロイされた Kubernetes クラスターで実行されます。
+このテストは、3つの TiDB インスタンス、3つの TiKV インスタンス、3つの PD インスタンスがデプロイされた Kubernetes クラスターで実行されます。
 
 ### バージョン情報 {#version-information}
 
@@ -85,7 +85,7 @@ sysbench $testname \
 2.  手順 1 と同時に実行します。`alter table sbtest1 add index c_idx(c)`を使用してインデックスを追加します。
 3.  手順 2 の最後に実行します。インデックスが正常に追加されたら、テスト`oltp_read_write`を停止します。
 4.  `alter table ... add index`の期間と、この期間の Sysbench の平均 TPS と QPS を取得します。
-5.  2 つのパラメータ`tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値を徐々に増やし、手順 1 ～ 4 を繰り返します。
+5.  2つのパラメータ`tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値を徐々に増やし、手順 1 ～ 4 を繰り返します。
 
 ### テスト結果 {#test-results}
 
@@ -220,7 +220,7 @@ sysbench $testname \
 2.  手順 1 と同時に実行します。`alter table sbtest1 add index c_idx(c)`を使用してインデックスを追加します。
 3.  手順 2 の最後に実行します。インデックスが正常に追加されたら、テスト`oltp_read_only`を停止します。
 4.  `alter table ... add index`の期間と、この期間の Sysbench の平均 TPS と QPS を取得します。
-5.  2 つのパラメータ`tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値を徐々に増やし、手順 1 ～ 4 を繰り返します。
+5.  2つのパラメータ`tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値を徐々に増やし、手順 1 ～ 4 を繰り返します。
 
 ### テスト結果 {#test-results}
 
@@ -282,7 +282,7 @@ sysbench $testname \
 2.  手順 1 と同時に実行します。`alter table test add index pad_idx(pad)`を使用してインデックスを追加します。
 3.  手順 2 の最後に実行します。インデックスが正常に追加されたら、テスト`oltp_read_only`を停止します。
 4.  `alter table ... add index`の期間と、この期間の Sysbench の平均 TPS と QPS を取得します。
-5.  2 つのパラメータ`tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値を徐々に増やし、手順 1 ～ 4 を繰り返します。
+5.  2つのパラメータ`tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値を徐々に増やし、手順 1 ～ 4 を繰り返します。
 
 ### テスト結果 {#test-results}
 

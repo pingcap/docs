@@ -13,7 +13,7 @@ TiDB は、MySQL 8.0 で利用可能な[JSON値属性を返すJSON関数](https:
 
 例:
 
-次の例では、レベルが 3 つあるため、 `JSON_DEPTH()` `3`を返します。
+次の例では、レベルが 3つあるため、 `JSON_DEPTH()` `3`を返します。
 
 -   ルート（ `$` ）
 -   天気 ( `$.weather` )
@@ -53,7 +53,7 @@ SELECT JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$'
 1 row in set (0.00 sec)
 ```
 
-次の例では、 `$.weather`に`current`と`tomorrow` 2 つの項目があるため、返される値は`2`なります。
+次の例では、 `$.weather`に`current`と`tomorrow` 2つの項目があるため、返される値は`2`なります。
 
 ```sql
 SELECT JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$.weather');

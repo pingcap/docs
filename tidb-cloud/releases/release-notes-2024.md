@@ -178,7 +178,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) AWS上でのロードバランシングに関する課金体系の変更。
 
-    2024 年 8 月 1 日以降、 TiDB Cloud Dedicated の請求書には、[AWSの料金改定は2024年2月1日から適用されます](https://aws.amazon.com/blogs/aws/new-aws-public-ipv4-address-charge-public-ip-insights/)に伴い、パブリック IPv4 アドレスに対する新しい AWS 料金が含まれます。各パブリック IPv4 アドレスの料金は 1 時間あたり 0.005 ドルで、これは AWS でホストされるTiDB Cloud Dedicatedクラスターごとに月額約 10 ドルになります。
+    2024年 8月 1日以降、 TiDB Cloud Dedicated の請求書には、[AWSの料金改定は2024年2月1日から適用されます](https://aws.amazon.com/blogs/aws/new-aws-public-ipv4-address-charge-public-ip-insights/)に伴い、パブリック IPv4 アドレスに対する新しい AWS 料金が含まれます。各パブリック IPv4 アドレスの料金は 1時間あたり 0.005 ドルで、これは AWS でホストされるTiDB Cloud Dedicatedクラスターごとに月額約 10 ドルになります。
 
     この料金は、お客様の既存の**TiDB Cloud Dedicated - Data Transfer - Load Balancing**サービスの下に表示されます。 [請求明細](/tidb-cloud/tidb-cloud-billing.md#billing-details)。
 
@@ -364,7 +364,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **全般的な変更**
 
--   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスター向けに、**無料プラン**と**スケーラブルプラン**の 2 つのサービス プランを導入します。
+-   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスター向けに、**無料プラン**と**スケーラブルプラン**の 2つのサービス プランを導入します。
 
     TiDB Cloud Serverlessは、多様なユーザーニーズに対応するため、無料プランと拡張可能なサービスプランを提供しています。これからサービスを開始する場合でも、アプリケーションの需要増加に合わせて規模を拡大する場合でも、これらのプランは必要な柔軟性と機能を提供します。
 

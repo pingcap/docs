@@ -46,13 +46,13 @@ DESC deadlocks;
 
 <CustomContent platform="tidb">
 
-`DEADLOCKS`テーブルに記録できるデッドロックイベントの最大数を調整するには、TiDB 設定ファイルの[`pessimistic-txn.deadlock-history-capacity`](/tidb-configuration-file.md#deadlock-history-capacity)設定を調整します。デフォルトでは、直近 10 件のデッドロックイベントの情報がテーブルに記録されます。
+`DEADLOCKS`テーブルに記録できるデッドロックイベントの最大数を調整するには、TiDB 設定ファイルの[`pessimistic-txn.deadlock-history-capacity`](/tidb-configuration-file.md#deadlock-history-capacity)設定を調整します。デフォルトでは、直近 10件のデッドロックイベントの情報がテーブルに記録されます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-最近の 10 件のデッドロック イベントの情報が`DEADLOCKS`テーブルに記録されます。
+最近の 10件のデッドロック イベントの情報が`DEADLOCKS`テーブルに記録されます。
 
 </CustomContent>
 
@@ -117,14 +117,14 @@ DESC deadlocks;
 UPDATE t SET v = v + 1 WHERE id = 1 OR id = 2;
 ```
 
-トランザクションB は次の 2 つのステートメントを連続して実行します。
+トランザクションB は次の2つのステートメントを連続して実行します。
 
 ```sql
 UPDATE t SET v = 4 WHERE id = 2;
 UPDATE t SET v = 2 WHERE id = 1;
 ```
 
-次に、トランザクション A が`id = 1`と`id = 2`で 2 つの行をロックし、 2 つのトランザクションが次の順序で実行されるとします。
+次に、トランザクション A が`id = 1`と`id = 2`で 2つの行をロックし、 2つのトランザクションが次の順序で実行されるとします。
 
 1.  トランザクションA は行を`id = 1`でロックします。
 2.  トランザクションB は最初のステートメントを実行し、行を`id = 2`でロックします。
@@ -144,7 +144,7 @@ CREATE TABLE t (id int primary key, v int);
 INSERT INTO t VALUES (1, 10), (2, 20);
 ```
 
-2 つのトランザクションは次の順序で実行されます。
+2つのトランザクションは次の順序で実行されます。
 
 | トランザクション1                           | トランザクション2                           | 説明                           |
 | ----------------------------------- | ----------------------------------- | ---------------------------- |

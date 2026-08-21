@@ -9,7 +9,7 @@ TiDB 4.0以降、パッケージマネージャーであるTiUPにより、 TiUP
 
 ## TiUPをインストールする {#install-tiup}
 
-Darwin と Linux の両方のオペレーティング システムで、1 つのコマンドを使用してTiUPをインストールできます。
+Darwin と Linux の両方のオペレーティング システムで、1つのコマンドを使用してTiUPをインストールできます。
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
@@ -97,7 +97,7 @@ Flags:
 Use "tiup [command] --help" for more information about a command.
 ```
 
-出力は長くなりますが、次の 2 つの部分だけに注目してください。
+出力は長くなりますが、次の2つの部分だけに注目してください。
 
 -   利用可能なコマンド
     -   install:コンポーネントの特定のバージョンをインストールするために使用されます

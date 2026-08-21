@@ -15,7 +15,7 @@ TiDBは[Percolator](https://www.usenix.org/legacy/event/osdi10/tech/full_papers/
 
 クライアントが TiDB に`COMMIT`リクエストを送信すると、TiDB は 2PC プロセスを開始します。
 
-1.  TiDB は、トランザクション内のすべてのキーから 1 つのキーをトランザクションの主キーとして選択します。
+1.  TiDB は、トランザクション内のすべてのキーから 1つのキーをトランザクションの主キーとして選択します。
 2.  TiDBは、このコミットに関係するすべてのTiKVリージョンに`prewrite`リクエストを送信します。TiKVは、すべてのキーが正常にプレビューできるかどうかを判断します。
 3.  TiDB は、 `prewrite`リクエストがすべて成功したという結果を受け取ります。
 4.  TiDB は PD から`commit_ts`を取得します。
@@ -28,13 +28,13 @@ TiDBは[Percolator](https://www.usenix.org/legacy/event/osdi10/tech/full_papers/
 
 TiDB Grafana パネルで、 **KV エラー**の下にある次の監視メトリックを確認します。
 
--   **KV バックオフ OPS は**、TiKV によって返される 1 秒あたりのエラー メッセージの数を示します。
+-   **KV バックオフ OPS は**、TiKV によって返される 1秒あたりのエラー メッセージの数を示します。
 
     ![kv-backoff-ops](/media/troubleshooting-write-conflict-kv-backoff-ops.png)
 
     メトリック`txnlock`は書き込み競合を示します。メトリック`txnLockFast`は読み取り競合を示します。
 
--   **ロック解決 OPS は、** 1 秒あたりのトランザクション競合に関連する項目の数を示します。
+-   **ロック解決 OPS は、** 1秒あたりのトランザクション競合に関連する項目の数を示します。
 
     ![lock-resolve-ops](/media/troubleshooting-write-conflict-lock-resolve-ops.png)
 

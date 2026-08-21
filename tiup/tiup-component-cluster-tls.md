@@ -17,7 +17,7 @@ tiup cluster tls <cluster-name> <enable/disable> [flags]
 
 > **Note:**
 >
-> 現在、 `tiup cluster tls`コマンドは、単一の PD ノードを持つクラスタでのみ TLS の有効化または無効化をサポートしています。複数の PD ノードを持つクラスタの場合、TLS ステータスの切り替えによって PD ノード間で通信例外が発生する可能性があるため、 `tiup cluster tls`コマンドを直接実行するとエラーが返されます。複数の PD ノードを持つクラスタで TLS を有効化または無効化するには、まず PD ノードを 1 つのノードに[`scale-in`](/tiup/tiup-component-cluster-scale-in.md)から、 `tiup cluster tls`コマンドを実行してください。
+> 現在、 `tiup cluster tls`コマンドは、単一の PD ノードを持つクラスタでのみ TLS の有効化または無効化をサポートしています。複数の PD ノードを持つクラスタの場合、TLS ステータスの切り替えによって PD ノード間で通信例外が発生する可能性があるため、 `tiup cluster tls`コマンドを直接実行するとエラーが返されます。複数の PD ノードを持つクラスタで TLS を有効化または無効化するには、まず PD ノードを 1つのノードに[`scale-in`](/tiup/tiup-component-cluster-scale-in.md)から、 `tiup cluster tls`コマンドを実行してください。
 
 ## オプション {#options}
 

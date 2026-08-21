@@ -156,7 +156,7 @@ TiKV で GCS WIF または ADC を使用する場合は、 `gcp_v2`外部スト�
 -   完全バックアップと復元: [TiKV Configuration File Descriptions](/tikv-configuration-file.md)で`[backup].gcp-v2-enable`を`true`に設定します
 -   ログバックアップ: [TiKV Configuration File Descriptions](/tikv-configuration-file.md)で`[log-backup].gcp-v2-enable`を`true`に設定します
 
-前述の 2 つの設定項目のデフォルト値はどちらも`true`です。 `gcp_v2`を無効にすると、TiKV は引き続き従来の GCS 実装を使用します。この実装は Service Account JSON のみをサポートし、WIF の直接使用はサポートしません。
+前述の2つの設定項目のデフォルト値はどちらも`true`です。 `gcp_v2`を無効にすると、TiKV は引き続き従来の GCS 実装を使用します。この実装は Service Account JSON のみをサポートし、WIF の直接使用はサポートしません。
 
 > **Note:**
 >
@@ -181,7 +181,7 @@ TiKV で GCS WIF または ADC を使用する場合は、 `gcp_v2`外部スト�
 
     BRが実行されているノードで環境変数`$AZURE_CLIENT_ID` `$AZURE_TENANT_ID`および`$AZURE_CLIENT_SECRET`を設定します。
 
-    -   TiUPを使用してクラスターを起動すると、TiKV は systemd サービスを使用します。次の例は、TiKV の上記の 3 つの環境変数を設定する方法を示しています。
+    -   TiUPを使用してクラスターを起動すると、TiKV は systemd サービスを使用します。次の例は、TiKV の上記の3つの環境変数を設定する方法を示しています。
 
         > **Note:**
         >
@@ -193,7 +193,7 @@ TiKV で GCS WIF または ADC を使用する場合は、 `gcp_v2`外部スト�
             systemctl edit tikv-24000
             ```
 
-        2.  TiKV 構成ファイルを編集して、次の 3 つの環境変数を構成します。
+        2.  TiKV 構成ファイルを編集して、次の3つの環境変数を構成します。
 
             ```
             [Service]

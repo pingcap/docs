@@ -27,7 +27,7 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 > **Note:**
 >
-> [AWS Global Acceleratorの制限](https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works.html#about-idle-timeout)のため、AWS のパブリックエンドポイント接続のアイドルタイムアウトは 340 秒です。同じ理由から、TCP キープアライブパケットを使用して接続を維持することはできません。
+> [AWS Global Acceleratorの制限](https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works.html#about-idle-timeout)のため、AWS のパブリックエンドポイント接続のアイドルタイムアウトは 340秒です。同じ理由から、TCP キープアライブパケットを使用して接続を維持することはできません。
 
 ### 暗号化 {#encryption}
 
@@ -66,7 +66,7 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 TiDB Cloudでは、組織ごとに最大5つのクラスター（デフォルトでは[無料のTiDB Cloud Starterクラスター](/tidb-cloud/select-cluster-tier.md#starter)を作成できます。TiDB Cloud Starterクラスターをさらに作成するには、クレジットカード情報と使用量に応じた[毎月の支出限度額を設定する](/tidb-cloud/manage-serverless-spend-limit.md)追加する必要があります。
 
-組織内の最初の 5 つのTiDB Cloud Starter クラスターについては、 TiDB Cloud は次のようにクラスターごとに無料使用量割り当てを提供します。
+組織内の最初の 5つのTiDB Cloud Starter クラスターについては、 TiDB Cloud は次のようにクラスターごとに無料使用量割り当てを提供します。
 
 -   行ベースのストレージ: 5 GiB
 -   列指向ストレージ: 5 GiB

@@ -214,7 +214,7 @@ scrape_configs:
 
 -   **`lightning_row_kv_deliver_seconds`** (ヒストグラム)
 
-    1 つの SQL 行に対応する KV ペアのセットを配信するために必要な時間のバケット化されたヒストグラム。
+    1つの SQL 行に対応する KV ペアのセットを配信するために必要な時間のバケット化されたヒストグラム。
 
 -   **`lightning_block_deliver_seconds`** （ヒストグラム）
 

@@ -115,7 +115,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
     -   **Storage Provider**： **Amazon S3**を選択してください。
     -   **Source Files URI** ：
-        -   1 つのファイルをインポートする場合は、ソースファイルの URI を`s3://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `s3://sampledata/ingest/TableName.01.parquet` 。
+        -   1つのファイルをインポートする場合は、ソースファイルの URI を`s3://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `s3://sampledata/ingest/TableName.01.parquet` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`s3://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `s3://sampledata/ingest/` 。
     -   **認証情報**: AWS ロール ARN または AWS アクセス キーを使用してバケットにアクセスできます。詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
         -   **AWS Role ARN** ：AWSロールARNの値を入力してください。
@@ -168,7 +168,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
     -   **Storage Provider**： **Google Cloud Storage**を選択してください。
     -   **Source Files URI** ：
-        -   1 つのファイルをインポートする場合は、ソースファイルの URI を`[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `[gcs|gs]://sampledata/ingest/TableName.01.parquet` 。
+        -   1つのファイルをインポートする場合は、ソースファイルの URI を`[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `[gcs|gs]://sampledata/ingest/TableName.01.parquet` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`[gcs|gs]://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `[gcs|gs]://sampledata/ingest/` 。
     -   **認証情報**: GCS IAM役割サービス アカウント キーを使用してバケットにアクセスできます。詳細については、 [GCSへのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)を参照してください。
 
@@ -219,7 +219,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
     -   **Storage Provider**： **Azure Blob Storage**を選択します。
     -   **Source Files URI** ：
-        -   1 つのファイルをインポートする場合は、ソースファイルの URI を`[azure|https]://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `[azure|https]://sampledata/ingest/TableName.01.parquet` 。
+        -   1つのファイルをインポートする場合は、ソースファイルの URI を`[azure|https]://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `[azure|https]://sampledata/ingest/TableName.01.parquet` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`[azure|https]://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `[azure|https]://sampledata/ingest/` 。
     -   **資格情報**: Shared Access Signature (SAS) トークンを使用してバケットにアクセスできます。詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)を参照してください。
 
@@ -270,7 +270,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
     -   **Storage Provider**： **Alibaba Cloud OSS**を選択してください。
     -   **Source Files URI** ：
-        -   1 つのファイルをインポートする場合は、ソースファイルの URI を`oss://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `oss://sampledata/ingest/TableName.01.parquet` 。
+        -   1つのファイルをインポートする場合は、ソースファイルの URI を`oss://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `oss://sampledata/ingest/TableName.01.parquet` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`oss://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `oss://sampledata/ingest/` 。
     -   **Credential** : AccessKey ペアを使用してバケットにアクセスできます。詳細については、 [Alibaba Cloudオブジェクトストレージサービス（OSS）へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)を参照してください。
 

@@ -15,11 +15,11 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 
 -   TiDB
 
-    -   1 つのテーブルで配置ルールとTiFlashレプリカを同時に設定できるようにする [＃37171](https://github.com/pingcap/tidb/issues/37171) @[lcwangchao](https://github.com/lcwangchao)
+    -   1つのテーブルで配置ルールとTiFlashレプリカを同時に設定できるようにする [＃37171](https://github.com/pingcap/tidb/issues/37171) @[lcwangchao](https://github.com/lcwangchao)
 
 -   TiKV
 
-    -   1 つのピアが到達不能になった後にRaftstore が過剰なメッセージをブロードキャストすることを回避するための`unreachable_backoff`項目の設定をサポートします[＃13054](https://github.com/tikv/tikv/issues/13054) @[5kbpers](https://github.com/5kbpers)
+    -   1つのピアが到達不能になった後にRaftstore が過剰なメッセージをブロードキャストすることを回避するための`unreachable_backoff`項目の設定をサポートします[＃13054](https://github.com/tikv/tikv/issues/13054) @[5kbpers](https://github.com/5kbpers)
     -   RocksDB 書き込みストール設定をフロー制御しきい値より小さい値に設定できるようになりました。 [#13467](https://github.com/tikv/tikv/issues/13467) @[tabokie](https://github.com/tabokie)
 
 -   ツール

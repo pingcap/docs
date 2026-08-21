@@ -15,7 +15,7 @@ summary: 顧客管理暗号化キー (CMEK) を使用して、Azure でホスト
 -   CMEK を使用するには、プロジェクトの作成時に CMEK を有効にし、クラスタを作成する前に CMEK 関連の設定を完了する必要があります。既存のプロジェクトでは CMEK を有効にできません。
 -   現在、CMEK 対応プロジェクトでは、AWS と Azure でホストされる[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのみ作成できます。
 -   現在、CMEK 対応プロジェクトでは、 [デュアルリージョンバックアップ](/tidb-cloud/backup-and-restore-concepts.md#dual-region-backup)はサポートされていません。
--   現在、CMEK 対応プロジェクトでは、AWS と Azure で CMEK を有効化できます。クラウドプロバイダーごとに、リージョンごとに 1 つの固有の暗号化キーを設定できます。選択したクラウドプロバイダーの暗号化キーを設定したリージョンでのみ、クラスタを作成できます。
+-   現在、CMEK 対応プロジェクトでは、AWS と Azure で CMEK を有効化できます。クラウドプロバイダーごとに、リージョンごとに 1つの固有の暗号化キーを設定できます。選択したクラウドプロバイダーの暗号化キーを設定したリージョンでのみ、クラスタを作成できます。
 
 ## CMEKを有効にする {#enable-cmek}
 

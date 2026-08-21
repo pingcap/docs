@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/dev-guide-use-stale-read/','/ja/tidbcloud/dev-guide-u
 
 実際には、 [使用シナリオ](/stale-read.md#usage-scenarios-of-stale-read)に基づいて、TiDB でステイル読み取り を有効にすることが適切かどうかを慎重に検討してください。アプリケーションが非リアルタイム データの読み取りを許容できない場合は、 ステイル読み取りを有効にしないでください。
 
-TiDB は、ステートメント レベル、トランザクション レベル、セッション レベルの 3 つのレベルのステイル読み取りを提供します。
+TiDB は、ステートメント レベル、トランザクション レベル、セッション レベルの 3つのレベルのステイル読み取りを提供します。
 
 ## 導入 {#introduction}
 
@@ -97,13 +97,13 @@ SELECT id, title, type, price FROM books AS OF TIMESTAMP '2022-04-20 15:20:00' O
 
 正確な時間を指定することに加えて、次のことも指定できます。
 
--   `AS OF TIMESTAMP NOW() - INTERVAL 10 SECOND` 10 秒前の最新データを照会します。
+-   `AS OF TIMESTAMP NOW() - INTERVAL 10 SECOND` 10秒前の最新データを照会します。
 -   `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')` `2016-10-08 16:45:26`から`2016-10-08 16:45:29`の間の最新データを照会します。
--   `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() -INTERVAL 20 SECOND, NOW())` 20 秒以内に最新のデータを照会します。
+-   `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() -INTERVAL 20 SECOND, NOW())` 20秒以内に最新のデータを照会します。
 
 指定するタイムスタンプまたは間隔は、現在の時刻より早すぎたり遅すぎたりしないようにしてください。また、 `NOW()`はデフォルトで秒精度となります。より高い精度を実現するには、パラメータを追加することができます。例えば、 `NOW(3)`ではミリ秒精度となります。詳細については、 [MySQLドキュメント](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_now)を参照してください。
 
-期限切れのデータはTiDBで[ガベージコレクション](/garbage-collection-overview.md)リサイクルされ、クリアされるまでの短い期間保持されます。この期間は[GC の有効期間 (デフォルト 10 分)](/system-variables.md#tidb_gc_life_time-new-in-v50)呼ばれます。GCが開始されると、現在の時刻からこの期間を差し引いた値が**GCセーフポイント**として使用されます。GCセーフポイントより前にデータを読み取ろうとすると、TiDBは次のエラーを報告します。
+期限切れのデータはTiDBで[ガベージコレクション](/garbage-collection-overview.md)リサイクルされ、クリアされるまでの短い期間保持されます。この期間は[GC の有効期間 (デフォルト 10分)](/system-variables.md#tidb_gc_life_time-new-in-v50)呼ばれます。GCが開始されると、現在の時刻からこの期間を差し引いた値が**GCセーフポイント**として使用されます。GCセーフポイントより前にデータを読み取ろうとすると、TiDBは次のエラーを報告します。
 
 ```
 ERROR 9006 (HY000): GC life time is shorter than transaction duration...
@@ -373,7 +373,7 @@ The latest book price (after the transaction commit): 150
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-たとえば、次の`AS OF TIMESTAMP`ステートメントを使用して、進行中のトランザクションを読み取り専用モードに切り替え、5 秒前の履歴データを読み取ることができます。
+たとえば、次の`AS OF TIMESTAMP`ステートメントを使用して、進行中のトランザクションを読み取り専用モードに切り替え、5秒前の履歴データを読み取ることができます。
 
 ```sql
 SET TRANSACTION READ ONLY AS OF TIMESTAMP NOW() - INTERVAL 5 SECOND;
@@ -458,7 +458,7 @@ public class BookDAO {
 SET @@tidb_read_staleness="-5";
 ```
 
-たとえば、値が`-5`に設定され、TiKV またはTiFlash に対応する履歴データがある場合、TiDB は 5 秒の時間範囲内で可能な限り新しいタイムスタンプを選択します。
+たとえば、値が`-5`に設定され、TiKV またはTiFlash に対応する履歴データがある場合、TiDB は 5秒の時間範囲内で可能な限り新しいタイムスタンプを選択します。
 
 セッションでステイル読み取りを無効にします。
 

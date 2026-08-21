@@ -8,7 +8,7 @@ aliases: ['/ja/tidbcloud/managed-service-provider']
 
 TiDB Cloudパートナー Web コンソールは、SaaS ソリューションに重点を置くパートナー向けに設計されており、PingCAP とパートナー間の強力なパートナーシップを構築および育成し、顧客により良いサービスを提供することを目的としています。
 
-TiDB Cloudパートナーには 2 つの種類があります。
+TiDB Cloudパートナーには 2つの種類があります。
 
 -   再販業者: AWS Marketplace チャネルパートナープライベートオファー (CPPO) を通じてTiDB Cloud を再販します
 -   マネージド サービス プロバイダー (MSP): TiDB Cloudを再販し、付加価値サービスを提供します
@@ -23,7 +23,7 @@ TiDB Cloudパートナーには 2 つの種類があります。
 
 ### 再販業者の日常業務を管理する {#manage-daily-tasks-for-a-reseller}
 
-再販業者には、日常の管理タスクを管理する 2 つの方法があります。
+再販業者には、日常の管理タスクを管理する 2つの方法があります。
 
 -   [TiDB Cloudパートナーコンソール](https://partner-console.tidbcloud.com)
 -   パートナー管理 API。オープン API ドキュメントは、 TiDB Cloudパートナー コンソールの**サポート**ページでご覧いただけます。
@@ -46,7 +46,7 @@ MSPプログラムにご興味があり、パートナーとしてご参加を�
 -   会社名
 -   会社の連絡先メールアドレス
 -   会社公式サイトURL
--   会社のロゴ（ライトモード用に 1 つの SVG ファイル、ダークモード用に 1 つの SVG ファイル。256 x 48 ピクセルの横長のロゴが推奨されます）
+-   会社のロゴ（ライトモード用に 1つの SVG ファイル、ダークモード用に 1つの SVG ファイル。256 x 48 ピクセルの横長のロゴが推奨されます）
 
 上記の情報は、顧客専用のサインアップ URL と会社ロゴ入りのページを生成するために使用されます。
 
@@ -54,7 +54,7 @@ MSPプログラムにご興味があり、パートナーとしてご参加を�
 
 ### MSPの日常業務を管理する {#manage-daily-tasks-for-an-msp}
 
-TiDB Cloud MSP パートナーとして、日常の管理タスクを管理するには 2 つの方法があります。
+TiDB Cloud MSP パートナーとして、日常の管理タスクを管理するには 2つの方法があります。
 
 -   [TiDB Cloudパートナーコンソール](https://partner-console.tidbcloud.com)
 -   [MSP 管理 API (非推奨)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)

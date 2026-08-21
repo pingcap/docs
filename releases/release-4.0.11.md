@@ -121,7 +121,7 @@ TiDB バージョン: 4.0.11
     -   一致しないメモリ診断を修正[＃9589](https://github.com/tikv/tikv/pull/9589)
     -   部分的なRawKV復元範囲の終了キーが含む問題を修正 [＃9583](https://github.com/tikv/tikv/pull/9583)
     -   TiCDC の増分スキャン中にロールバックされたトランザクションのキーの古い値をロードするときに発生する TiKV panicの問題を修正しました[＃9569](https://github.com/tikv/tikv/pull/9569)
-    -   異なる設定の変更フィードが 1 つのリージョンに接続したときに古い値の構成の不具合を修正しました。 [＃9565](https://github.com/tikv/tikv/pull/9565)
+    -   異なる設定の変更フィードが 1つのリージョンに接続したときに古い値の構成の不具合を修正しました。 [＃9565](https://github.com/tikv/tikv/pull/9565)
     -   MAC アドレスのないネットワーク インターフェースを持つマシンで TiKV クラスターを実行すると発生するクラッシュの問題を修正しました (v4.0.9 で導入) [＃9516](https://github.com/tikv/tikv/pull/9516)
     -   巨大なリージョンをバックアップする際のTiKV OOMの問題を修正 [＃9448](https://github.com/tikv/tikv/pull/9448)
     -   `region-split-check-diff`カスタマイズできない問題を修正[＃9530](https://github.com/tikv/tikv/pull/9530)

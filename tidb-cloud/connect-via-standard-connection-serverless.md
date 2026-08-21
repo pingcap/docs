@@ -11,8 +11,8 @@ summary: パブリックエンドポイントを介して、 TiDB Cloud Starter�
 
 TiDB Cloudプランに応じて、適切なエンドポイントモデルを選択します。
 
-- {{{ .starter }}} インスタンス、または 2026 年 7 月 1 日より前に作成された {{{ .essential }}} インスタンスの場合は、 [**エンドポイント共有モデル**](#connect-via-a-public-endpoint-endpoint-shared-model)を使用します。このモデルでは、単一のパブリックエンドポイントを同じリージョン内の複数の {{{ .starter }}} インスタンスおよび Essential インスタンスで共有できます。
-- 2026 年 7 月 1 日以降に作成された {{{ .essential }}} インスタンスの場合は、 [**エンドポイント占有モデル**](#connect-via-a-public-endpoint-endpoint-exclusive-model)を使用します。このモデルでは、各 {{{ .essential }}} インスタンスが独自のスタンドアロンパブリックエンドポイントを使用します。このモデルでは接続時に[アカウントプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を含める必要がなくなりますが、各 {{{ .essential }}} インスタンスに対してセットアップ手順を繰り返す必要があります。
+- {{{ .starter }}} インスタンス、または 2026年 7月 1日より前に作成された {{{ .essential }}} インスタンスの場合は、 [**エンドポイント共有モデル**](#connect-via-a-public-endpoint-endpoint-shared-model)を使用します。このモデルでは、単一のパブリックエンドポイントを同じリージョン内の複数の {{{ .starter }}} インスタンスおよび Essential インスタンスで共有できます。
+- 2026年 7月 1日以降に作成された {{{ .essential }}} インスタンスの場合は、 [**エンドポイント占有モデル**](#connect-via-a-public-endpoint-endpoint-exclusive-model)を使用します。このモデルでは、各 {{{ .essential }}} インスタンスが独自のスタンドアロンパブリックエンドポイントを使用します。このモデルでは接続時に[アカウントプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を含める必要がなくなりますが、各 {{{ .essential }}} インスタンスに対してセットアップ手順を繰り返す必要があります。
 
 ## 公開エンドポイント経由で接続します（エンドポイント共有モデル） {#connect-via-a-public-endpoint-endpoint-shared-model}
 
@@ -63,7 +63,7 @@ TiDB Cloudプランに応じて、適切なエンドポイントモデルを選�
 
 > **Note:**
 >
-> 現在、エンドポイント占有モデルは、特定のリージョンで 2026 年 7 月 1 日以降に作成された {{{ .essential }}} インスタンスでのみ使用できます。お使いのインスタンスで利用できない場合は、代わりに[エンドポイント共有モデル](#connect-via-a-public-endpoint-endpoint-shared-model)を使用できます。
+> 現在、エンドポイント占有モデルは、特定のリージョンで 2026年 7月 1日以降に作成された {{{ .essential }}} インスタンスでのみ使用できます。お使いのインスタンスで利用できない場合は、代わりに[エンドポイント共有モデル](#connect-via-a-public-endpoint-endpoint-shared-model)を使用できます。
 
 エンドポイント占有モデルでは、各 {{{ .essential }}} インスタンスが独自のスタンドアロンパブリックエンドポイントを使用します。このモデルでは接続時に[アカウントプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を含める必要がなくなりますが、各 {{{ .essential }}} インスタンスに対してセットアップ手順を繰り返す必要があります。
 

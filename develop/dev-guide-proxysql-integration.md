@@ -224,7 +224,7 @@ systemctl start docker
 
     プロンプトが表示されたら、 `Serverless Tier Host`のTiDB Cloud Starterインスタンスのエンドポイントを入力し、次にTiDB Cloud Starterインスタンスのユーザー名とパスワードを入力します。
 
-    以下は出力例です。現在の`tidb-cloud-connect`フォルダーの下に 3 つの設定ファイルが生成されていることがわかります。
+    以下は出力例です。現在の`tidb-cloud-connect`フォルダーの下に 3つの設定ファイルが生成されていることがわかります。
 
     ```
     [Begin] generating configuration files..
@@ -687,7 +687,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
     上記の手順を実行すると、ProxySQLの管理画面が表示されます。
 
-2.  使用するTiDB Cloud Dedicatedクラスターを構成します。ProxySQL に 1 つまたは複数のTiDB Cloud Dedicatedクラスターを追加できます。たとえば、次のステートメントは 1 つのTiDB Cloud Dedicatedクラスターを追加します。 `<tidb cloud dedicated cluster host>`と`<tidb cloud dedicated cluster port>`を、ご使用のTiDB Cloud Dedicatedエンドポイントとポートに置き換える必要があります (デフォルトのポートは`4000`です)。
+2.  使用するTiDB Cloud Dedicatedクラスターを構成します。ProxySQL に 1つまたは複数のTiDB Cloud Dedicatedクラスターを追加できます。たとえば、次のステートメントは 1つのTiDB Cloud Dedicatedクラスターを追加します。 `<tidb cloud dedicated cluster host>`と`<tidb cloud dedicated cluster port>`を、ご使用のTiDB Cloud Dedicatedエンドポイントとポートに置き換える必要があります (デフォルトのポートは`4000`です)。
 
     ```sql
     INSERT INTO mysql_servers(hostgroup_id, hostname, port) 
@@ -896,10 +896,10 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
     全てが順調に進めば、以下のコンテナが起動されます。
 
-    -   ポート`4001`および`4002`を介して公開される TiDB クラスタの 2 つの Docker コンテナ
-    -   ポート`6034`を介して公開される ProxySQL Docker コンテナが 1 つあります。
+    -   ポート`4001`および`4002`を介して公開される TiDB クラスタの 2つの Docker コンテナ
+    -   ポート`6034`を介して公開される ProxySQL Docker コンテナが 1つあります。
 
-4.  2 つの TiDB コンテナでは、 `mysql`を使用して同様のスキーマ定義を持つテーブルを作成し、次に異なるデータ ( `'tidb-server01-port-4001'` 、 `'tidb-server02-port-4002'` ) を挿入してこれらのコンテナを識別します。
+4.  2つの TiDB コンテナでは、 `mysql`を使用して同様のスキーマ定義を持つテーブルを作成し、次に異なるデータ ( `'tidb-server01-port-4001'` 、 `'tidb-server02-port-4002'` ) を挿入してこれらのコンテナを識別します。
 
      <SimpleTab groupId="os">
 
@@ -1002,7 +1002,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
     ProxySQLパターンがクエリルールとどのように一致するかについての追加情報は以下のとおりです。
 
-    -   ProxySQL は`rule_id`の昇順でルールを 1 つずつ照合しようとします。
+    -   ProxySQL は`rule_id`の昇順でルールを 1つずつ照合しようとします。
     -   `^`記号は SQL ステートメントの開始と一致し、 `$`終了と一致します。
 
     ProxySQLの正規表現とパターンマッチングの詳細については、ProxySQLドキュメントの[mysql-query_processor_regex](https://proxysql.com/documentation/global-variables/mysql-variables/#mysql-query_processor_regex)を参照してください。

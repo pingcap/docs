@@ -53,7 +53,7 @@ summary: TiDBのシステムテーブルについて学びましょう。
 -   `stats_history` : 履歴統計のその他の情報
 -   `analyze_options` : 各テーブルのデフォルトの`analyze`オプション
 -   `column_stats_usage` : 列統計の使用方法
--   `analyze_jobs` : 進行中の統計収集タスクと過去 7 日間の履歴タスク記録
+-   `analyze_jobs` : 進行中の統計収集タスクと過去 7日間の履歴タスク記録
 
 ## 実行計画関連のシステムテーブル {#execution-plan-related-system-tables}
 
@@ -82,11 +82,11 @@ summary: TiDBのシステムテーブルについて学びましょう。
 
 -   `tidb_ttl_table_status` : すべてのTTLテーブルに対して、以前に実行されたTTLジョブと進行中のTTLジョブ
 -   `tidb_ttl_task` : 現在進行中のTTLサブタスク
--   `tidb_ttl_job_history` : 過去 90 日間の TTL タスクの実行履歴
+-   `tidb_ttl_job_history` : 過去 90日間の TTL タスクの実行履歴
 
 ## 暴走クエリに関連するシステムテーブル {#system-tables-related-to-runaway-queries}
 
--   `tidb_runaway_queries` : 過去 7 日間に検出されたすべての暴走クエリの履歴記録
+-   `tidb_runaway_queries` : 過去 7日間に検出されたすべての暴走クエリの履歴記録
 -   `tidb_runaway_watch` : 暴走クエリの監視リスト
 -   `tidb_runaway_watch_done` : 削除または期限切れの暴走クエリの監視リスト
 

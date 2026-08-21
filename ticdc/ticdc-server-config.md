@@ -16,7 +16,7 @@ summary: TiCDC で使用される CLI と構成パラメータについて学習
 -   `pd` : PD エンドポイントのコンマ区切りリスト。
 -   `config` : TiCDCが使用する設定ファイルのアドレス（オプション）。このオプションはTiCDC v5.0.0以降でサポートされています。このオプションはTiUP v1.4.0以降のTiCDCデプロイメントで使用できます。詳細な設定については、 [TiCDC Changefeed構成](/ticdc/ticdc-changefeed-config.md)を参照してください。
 -   `data-dir` : TiCDC がファイルを保存するためにディスクを使用する必要があるときに使用するディレクトリを指定します。TiCDC が使用するソートエンジンと REDO ログは、このディレクトリに一時ファイルを保存します。このディレクトリの空きディスク容量は 500 GiB 以上確保することをお勧めします。TiUPを使用している場合は、セクション[`cdc_servers`](/tiup/tiup-cluster-topology-reference.md#cdc_servers)で`data_dir`設定するか、 `global`でデフォルトのパス`data_dir`を直接使用できます。
--   `gc-ttl` : TiCDC によって設定される PD のサービスレベル`GC safepoint`の TTL (Time To Live) と、レプリケーションタスクが一時停止できる期間（秒単位）。デフォルト値は`86400`で、これは 24 時間を意味します。注: TiCDC レプリケーションタスクの一時停止は、TiCDC GC セーフポイントの進行に影響します。つまり、 [TiCDC GCセーフポイントの完全な動作](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)で詳述されているように、上流の TiDB GC の進行にも影響します。
+-   `gc-ttl` : TiCDC によって設定される PD のサービスレベル`GC safepoint`の TTL (Time To Live) と、レプリケーションタスクが一時停止できる期間（秒単位）。デフォルト値は`86400`で、これは 24時間を意味します。注: TiCDC レプリケーションタスクの一時停止は、TiCDC GC セーフポイントの進行に影響します。つまり、 [TiCDC GCセーフポイントの完全な動作](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)で詳述されているように、上流の TiDB GC の進行にも影響します。
 -   `log-file` : TiCDCプロセス実行時にログが出力されるパス。このパラメータが指定されていない場合、ログは標準出力（stdout）に書き込まれます。
 -   `log-level` : TiCDCプロセス実行時のログレベル。デフォルト値は`"info"`です。
 -   `ca` : TLS 接続用の PEM 形式の CA 証明書ファイルのパスを指定します (オプション)。
@@ -116,7 +116,7 @@ summary: TiCDC で使用される CLI と構成パラメータについて学習
 ### `owner-flush-interval` {#owner-flush-interval}
 
 -   TiCDCクラスタ内のオーナーモジュールがレプリケーションの進行状況をプッシュしようとする間隔を指定します。このパラメータはオプションで、デフォルト値は`50000000`ナノ秒（つまり50ミリ秒）です。
--   このパラメータは、数値のみを指定する（たとえば、 `40000000`に設定すると 40000000 ナノ秒、つまり 40 ミリ秒を表します）、または数値と単位の両方を指定する（たとえば、直接`40ms`に設定する）という 2 つの方法で設定できます。
+-   このパラメータは、数値のみを指定する（たとえば、 `40000000`に設定すると 40000000 ナノ秒、つまり 40 ミリ秒を表します）、または数値と単位の両方を指定する（たとえば、直接`40ms`に設定する）という 2つの方法で設定できます。
 -   デフォルト値: `50000000` 、つまり50ミリ秒
 
 ### `processor-flush-interval` {#processor-flush-interval}
@@ -154,7 +154,7 @@ summary: TiCDC で使用される CLI と構成パラメータについて学習
 
 #### `cache-size-in-mb` {#cache-size-in-mb}
 
--   デフォルトで起動される 8 つの Pebble DB の Sorter モジュール内の共有 Pebbleブロックキャッシュのサイズを指定します。
+-   デフォルトで起動される 8つの Pebble DB の Sorter モジュール内の共有 Pebbleブロックキャッシュのサイズを指定します。
 -   デフォルト値: `128`
 -   単位: MiB
 
@@ -178,7 +178,7 @@ summary: TiCDC で使用される CLI と構成パラメータについて学習
 #### `region-retry-duration` {#region-retry-duration}
 
 -   リージョン接続の再試行期間を指定します。このパラメータはオプションです。
--   このパラメータは次の 2 つの方法で設定できます。
+-   このパラメータは次の2つの方法で設定できます。
     -   数字のみを指定します。たとえば、 `50000000` 50000000ナノ秒（50ミリ秒）を表します。
     -   数値と単位の両方を指定します（例： `50ms`
 -   デフォルト値: `60000000000` (1分)

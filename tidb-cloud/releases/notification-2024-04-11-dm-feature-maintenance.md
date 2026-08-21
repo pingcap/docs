@@ -1,11 +1,11 @@
 ---
 title: 2024-04-11 TiDB Cloud Data Migration (DM) Feature Maintenance Notification
-summary: 2024 年 4 月 11 日のTiDB Cloud Data Migration (DM) 機能メンテナンスの詳細（メンテナンス ウィンドウや影響など）について説明します。
+summary: 2024年 4月 11日のTiDB Cloud Data Migration (DM) 機能メンテナンスの詳細（メンテナンス ウィンドウや影響など）について説明します。
 ---
 
 # [2024-04-11] TiDB Cloudデータ移行（DM）機能メンテナンスのお知らせ {#2024-04-11-tidb-cloud-data-migration-dm-feature-maintenance-notification}
 
-この通知では、2024 年 4 月 11 日のTiDB Cloud Dedicated の[データ移行（DM）機能](/tidb-cloud/migrate-from-mysql-using-data-migration.md)のメンテナンスについて知っておく必要のある詳細について説明します。
+この通知では、2024年 4月 11日のTiDB Cloud Dedicated の[データ移行（DM）機能](/tidb-cloud/migrate-from-mysql-using-data-migration.md)のメンテナンスについて知っておく必要のある詳細について説明します。
 
 ## メンテナンスウィンドウ {#maintenance-window}
 
@@ -36,7 +36,7 @@ AWS にデプロイされたクラスターの場合:
 
 Google Cloud にデプロイされたクラスタの場合:
 
--   DM コンソールは最大 30 分間利用できなくなります。この間は、DM タスクの作成や管理はできません。
+-   DM コンソールは最大 30分間利用できなくなります。この間は、DM タスクの作成や管理はできません。
 -   DMタスクが増分移行段階にある場合、最大30分間中断されます。この間、MySQLデータベースのバイナリログをパージしないでください。アップグレードが完了すると、DMタスクは自動的に再開されます。
 -   DMタスクがフルデータのエクスポートとインポートの段階にある場合、アップグレード中に失敗し、アップグレード後に再開することはできません。アップグレード開始時にフルデータのエクスポートとインポートの段階にあるDMタスクが存在しないように、アップグレードを実行する当日はDMタスクを作成しないことをお勧めします。
 

@@ -141,28 +141,28 @@ I/O トラフィック制限設定を構成します。
 <!-- The following  default configurations indicate that each type of traffic gets a weight of 25% (25 / (25 + 25 + 25 + 25) = 25%) -->
 
 -   TiFlashは内部的にI/O要求を4つのタイプに分類します。フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取りです。`foreground_write_weight`はフォアグラウンド書き込みI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
--   I/O トラフィック制限が初期化されると、 TiFlash は`foreground_write_weight` 、 [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight) 、 [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight) 、 [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight)の比率に従って、これら 4 種類の要求に帯域幅を割り当てます。
+-   I/O トラフィック制限が初期化されると、 TiFlash は`foreground_write_weight` 、 [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight) 、 [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight) 、 [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight)の比率に従って、これら4種類の要求に帯域幅を割り当てます。
 -   重みが`0`に設定されている場合、対応する I/O トラフィックは制限されません。
 -   デフォルト値: `25` 、帯域幅の 25% の割り当てを表します。
 
 ##### `background_write_weight` {#background_write_weight}
 
 -   TiFlashは内部的にI/O要求を4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。`background_write_weight`は、バックグラウンド書き込みI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
--   I/O トラフィック制限が初期化されると、 TiFlash は[`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight) 、 `background_write_weight` 、 [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight) 、 [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight)の比率に従って、これら 4 種類の要求に帯域幅を割り当てます。
+-   I/O トラフィック制限が初期化されると、 TiFlash は[`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight) 、 `background_write_weight` 、 [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight) 、 [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight)の比率に従って、これら4種類の要求に帯域幅を割り当てます。
 -   重みが`0`に設定されている場合、対応する I/O トラフィックは制限されません。
 -   デフォルト値: `25` 、帯域幅の 25% の割り当てを表します。
 
 ##### `foreground_read_weight` {#foreground_read_weight}
 
 -   TiFlashは内部的にI/O要求を4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。`foreground_read_weight`は、フォアグラウンド読み取りI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
--   I/O トラフィック制限が初期化されると、 TiFlash は[`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight) 、 [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight) 、 `foreground_read_weight` 、 [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight)の比率に従って、これら 4 種類の要求に帯域幅を割り当てます。
+-   I/O トラフィック制限が初期化されると、 TiFlash は[`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight) 、 [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight) 、 `foreground_read_weight` 、 [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight)の比率に従って、これら4種類の要求に帯域幅を割り当てます。
 -   重みが`0`に設定されている場合、対応する I/O トラフィックは制限されません。
 -   デフォルト値: `25` 、帯域幅の 25% の割り当てを表します。
 
 ##### `background_read_weight` {#background_read_weight}
 
 -   TiFlashは内部的にI/O要求を4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。`background_read_weight`は、バックグラウンド読み取りI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
--   I/O トラフィック制限が初期化されると、 TiFlash は[`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight) 、 [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight) 、 [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight) 、 `background_read_weight`の比率に従って、これら 4 種類の要求に帯域幅を割り当てます。
+-   I/O トラフィック制限が初期化されると、 TiFlash は[`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight) 、 [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight) 、 [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight) 、 `background_read_weight`の比率に従って、これら4種類の要求に帯域幅を割り当てます。
 -   重みが`0`に設定されている場合、対応する I/O トラフィックは制限されません。
 -   デフォルト値: `25` 、帯域幅の 25% の割り当てを表します。
 
@@ -318,7 +318,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `size` {#size}
 
--   1 つのログ ファイルのサイズ。
+-   1つのログ ファイルのサイズ。
 -   デフォルト値: `"100M"`
 
 ##### `count` {#count}

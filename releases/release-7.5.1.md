@@ -108,7 +108,7 @@ TiDB バージョン: 7.5.1
     -   集計関数をグループ計算に使用すると発生する可能性のある`Can't find column ...`エラーを修正[＃50926](https://github.com/pingcap/tidb/issues/50926) @[qw4990](https://github.com/qw4990)
     -   文字列型の変数に対する`SET_VAR`の制御が無効になる可能性がある問題を修正[＃50507](https://github.com/pingcap/tidb/issues/50507) @[qw4990](https://github.com/qw4990)
     -   `tidb_server_memory_limit` による長期メモリ圧迫により TiDB の CPU 使用率が上昇する問題を修正 [＃48741](https://github.com/pingcap/tidb/issues/48741) @[XuHuaiyu](https://github.com/XuHuaiyu)
-    -   依存関係のある 2 つの DDL タスクの完了時間がと誤って順序付けられる問題を修正しました。 [＃49498](https://github.com/pingcap/tidb/issues/49498) @[tangenta](https://github.com/tangenta)
+    -   依存関係のある 2つの DDL タスクの完了時間がと誤って順序付けられる問題を修正しました。 [＃49498](https://github.com/pingcap/tidb/issues/49498) @[tangenta](https://github.com/tangenta)
     -   無効なオプティマイザヒントによって有効なヒントが無効になる可能性がある問題を修正[＃49308](https://github.com/pingcap/tidb/issues/49308) @[hawkingrei](https://github.com/hawkingrei)
     -   `CHECK`制約の DDL 文がスタックする問題を修正しました [＃47632](https://github.com/pingcap/tidb/issues/47632) @[jiyfhust](https://github.com/jiyfhust)
     -   `CHECK`制約の`ENFORCED`オプションの動作がMySQL 8.0 と一致しない問題を修正 [＃47631](https://github.com/pingcap/tidb/issues/47631) @[jiyfhust](https://github.com/jiyfhust) [＃47567](https://github.com/pingcap/tidb/issues/47567)

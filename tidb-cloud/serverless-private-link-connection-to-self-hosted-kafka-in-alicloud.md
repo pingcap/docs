@@ -67,8 +67,8 @@ Alibaba Cloud アカウント ID とアベイラビリティーゾーンを表�
 
 Kafka VPC には次のものが必要です。
 
--   ブローカー用のプライベート vSwitch が 3 つ (AZ ごとに 1 つ)。
--   任意の AZ にパブリック vSwitch を 1 つ、インターネットに接続できる Bastion ノードを 1 つ、プライベート vSwitch を 3 つ配置することで、Kafka クラスターを簡単にセットアップできます。本番環境では、Kafka VPC に接続できる独自の Bastion ノードを配置することもできます。
+-   ブローカー用のプライベート vSwitch が 3つ (AZ ごとに 1つ)。
+-   任意の AZ にパブリック vSwitch を 1つ、インターネットに接続できる Bastion ノードを 1つ、プライベート vSwitch を 3つ配置することで、Kafka クラスターを簡単にセットアップできます。本番環境では、Kafka VPC に接続できる独自の Bastion ノードを配置することもできます。
 
 Kafka VPC を作成するには、次の手順を実行します。
 
@@ -110,7 +110,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 **2.2. ブローカーノードを作成する**
 
-[ECSコンソール](https://ecs.console.alibabacloud.com/home#/)に進みます。vSwitch に 3 つのブローカー ノード (AZ ごとに 1 つ) を作成します。
+[ECSコンソール](https://ecs.console.alibabacloud.com/home#/)に進みます。vSwitch に 3つのブローカー ノード (AZ ごとに 1つ) を作成します。
 
 -   vSwitch `broker-ap-southeast-1a`のブローカー 1
 
@@ -184,10 +184,10 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 各ノードはブローカーとコントローラーの役割を担います。各ブローカーに対して以下の操作を実行してください。
 
-1.  `listeners`項目の場合、3 つのブローカーはすべて同じであり、ブローカーとコントローラーのロールとして機能します。
+1.  `listeners`項目の場合、3つのブローカーはすべて同じであり、ブローカーとコントローラーのロールとして機能します。
 
     1.  すべての**コントローラー**ロールノードに同じ CONTROLLER リスナーを設定します。**ブローカー**ロールノードのみを追加する場合は、 `server.properties`の CONTROLLER リスナーは必要ありません。
-    2.  **ブローカー**リスナーを 2 つ構成します。`INTERNAL`は内部アクセス用、 `EXTERNAL`はTiDB Cloudからの外部アクセス用です。
+    2.  **ブローカー**リスナーを 2つ構成します。`INTERNAL`は内部アクセス用、 `EXTERNAL`はTiDB Cloudからの外部アクセス用です。
 
 2.  `advertised.listeners`項目については、次の操作を行います。
 
@@ -502,7 +502,7 @@ Kafka クラスターが TiDB クラスターと同じリージョンおよび A
     listener.security.protocol.map=...,EXTERNAL:PLAINTEXT
     ```
 
-3.  すべてのブローカーを再構成したら、Kafka ブローカーを 1 つずつ再起動します。
+3.  すべてのブローカーを再構成したら、Kafka ブローカーを 1つずつ再起動します。
 
 #### 2. 内部ネットワークで外部リスナーの設定をテストする {#2-test-external-listener-settings-in-your-internal-network}
 
@@ -547,7 +547,7 @@ b3.ap-southeast-1c.unique_name.alicloud.plc.tidbcloud.com:9095 (id: 3 rack: null
 
 ロードバランサーを設定するには、次の手順を実行します。
 
-1.  [サーバーグループ](https://slb.console.alibabacloud.com/nlb/ap-southeast-1/server-groups)に進み、4 つのサーバーグループを作成します。
+1.  [サーバーグループ](https://slb.console.alibabacloud.com/nlb/ap-southeast-1/server-groups)に進み、4つのサーバーグループを作成します。
 
     -   ブートストラップサーバーグループ
 
@@ -593,7 +593,7 @@ b3.ap-southeast-1c.unique_name.alicloud.plc.tidbcloud.com:9095 (id: 3 rack: null
     -   **Instance Name**: `kafka-nlb`
     -   **Create Now**をクリックしてロードバランサーを作成します。
 
-3.  作成したロード バランサーを見つけて、 **Create Listener**をクリックして 4 つの TCP リスナーを作成します。
+3.  作成したロード バランサーを見つけて、 **Create Listener**をクリックして 4つの TCP リスナーを作成します。
 
     -   ブートストラップサーバーグループ
 
@@ -661,6 +661,6 @@ TiDB Cloudでプライベート リンク接続を作成するには、次の手
 ## ステップ4. Kafka設定内の一意の名前プレースホルダーを置き換える {#step-4-replace-the-unique-name-placeholder-in-kafka-configuration}
 
 1.  Kafka ブローカー ノードに戻り、各ブローカーの`advertised.listeners`構成内の`unique_name`プレースホルダーを、前の手順で取得した実際の一意の名前に置き換えます。
-2.  すべてのブローカーを再構成したら、Kafka ブローカーを 1 つずつ再起動します。
+2.  すべてのブローカーを再構成したら、Kafka ブローカーを 1つずつ再起動します。
 
 これで、このプライベート リンク接続と 9092 をブートストラップ ポートとして使用し、 TiDB Cloudから Kafka クラスターに接続できるようになります。

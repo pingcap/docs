@@ -13,7 +13,7 @@ TiDB バージョン: 7.5.4
 
 ## 互換性の変更 {#compatibility-changes}
 
--   [TiDB HTTP API](https://github.com/pingcap/tidb/blob/release-7.5/docs/tidb_http_api.md)から取得される DDL 履歴タスクのデフォルトの制限を 2048 に設定して、過剰な履歴タスクによる OOM の問題を防止します。 [＃55711](https://github.com/pingcap/tidb/issues/55711) @[joccau](https://github.com/joccau)
+-   [TiDB HTTP API](https://github.com/pingcap/tidb/blob/release-7.5/docs/tidb_http_api.md)から取得される DDL 履歴タスクのデフォルトの制限を2048に設定して、過剰な履歴タスクによる OOM の問題を防止します。 [＃55711](https://github.com/pingcap/tidb/issues/55711) @[joccau](https://github.com/joccau)
 
 ## 改善点 {#improvements}
 

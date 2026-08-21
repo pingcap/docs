@@ -22,7 +22,7 @@ summary: TiDBデータベースにおけるRESTOREの使用方法の概要。
 
 `RESTORE`ステートメントはブロッキング処理であり、リストアタスク全体が完了、失敗、またはキャンセルされるまで終了しません。 `RESTORE`を実行するには、長時間接続を準備する必要があります。タスクは[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
 
-`BACKUP`と`RESTORE`のタスクは、一度に 1 つしか実行できません。 `BACKUP`または`RESTORE`タスクが同じ TiDBサーバーで既に実行されている場合、新しい`RESTORE`実行は、以前のすべてのタスクが完了するまで待機します。
+`BACKUP`と`RESTORE`のタスクは、一度に 1つしか実行できません。 `BACKUP`または`RESTORE`タスクが同じ TiDBサーバーで既に実行されている場合、新しい`RESTORE`実行は、以前のすべてのタスクが完了するまで待機します。
 
 `RESTORE` 「tikv」ストレージエンジンでのみ使用できます。「unistore」エンジンで`RESTORE`を使用すると失敗します。
 

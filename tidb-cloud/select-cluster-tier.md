@@ -51,7 +51,7 @@ TiDB Cloud Starterは、フルマネージド型のマルチテナント対応Ti
 
 TiDB Cloudでは、組織ごとにデフォルトで最大5つのTiDB Cloud Starterインスタンスを無料で作成できます。それ以上のTiDB Cloud Starterインスタンスを作成するには、クレジットカードを追加して利用限度額を指定する必要があります。
 
-組織内の最初の 5 つのTiDB Cloud Starterインスタンス（無料版かスケーラブル版かを問わず）については、 TiDB Cloud はそれぞれに以下の無料使用クォ​​ータを提供します。
+組織内の最初の 5つのTiDB Cloud Starterインスタンス（無料版かスケーラブル版かを問わず）については、 TiDB Cloud はそれぞれに以下の無料使用クォ​​ータを提供します。
 
 -   行ベースストレージ：5 GiB
 -   カラム型ストレージ：5 GiB
@@ -69,7 +69,7 @@ TiDB Cloudの各組織につき、最大 5[支店](/tidb-cloud/branch-overview.m
 
 TiDB Cloudの有料組織ごとに、合計で最大100個のTiDB Cloud Starterインスタンスとブランチを作成できます。各ブランチは個別のインスタンスとしてカウントされます。
 
-エージェントプラットフォームや、多数のインスタンスとブランチを必要とするその他のサービスを構築する有料組織向けに、 TiDB Cloud は**Instance Capacity Plan**を提供しています。このプランでは、有料のTiDB Cloud組織は 5 つ以上のブランチを作成でき、 TiDB Cloud Starter のインスタンスとブランチの 100 個という制限を受けません。インスタンス容量プランの詳細と申し込みについては、 [申込書](https://www.pingcap.com/programs/agentic-ai-instance-capacity)にご記入ください。
+エージェントプラットフォームや、多数のインスタンスとブランチを必要とするその他のサービスを構築する有料組織向けに、 TiDB Cloud は**Instance Capacity Plan**を提供しています。このプランでは、有料のTiDB Cloud組織は 5つ以上のブランチを作成でき、 TiDB Cloud Starter のインスタンスとブランチの 100 個という制限を受けません。インスタンス容量プランの詳細と申し込みについては、 [申込書](https://www.pingcap.com/programs/agentic-ai-instance-capacity)にご記入ください。
 
 TiDB Cloudインスタンス容量プランの申請が承認されると、メールで通知が届きます。
 

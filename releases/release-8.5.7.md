@@ -27,9 +27,9 @@ TiDB version: 8.5.7
 
 ### 信頼性 {#reliability}
 
-* 単一ユーザーが 1 つの TiDB インスタンス上で確立できる接続数の制限をサポート [#59203](https://github.com/pingcap/tidb/issues/59203) @[joccau](https://github.com/joccau)
+* 単一ユーザーが 1つの TiDB インスタンス上で確立できる接続数の制限をサポート [#59203](https://github.com/pingcap/tidb/issues/59203) @[joccau](https://github.com/joccau)
 
-    v8.5.7 以降、`max_user_connections` システム変数を使用して、単一ユーザーが単一の TiDB サーバーインスタンスに対して確立できる最大接続数を制限できます。これにより、1 人のユーザーによる過剰な [token](https://docs.pingcap.com/tidb/v8.5/tidb-configuration-file#token-limit) 消費によって、他のユーザーからのリクエストへの応答が遅延する状況を防ぐのに役立ちます。
+    v8.5.7 以降、`max_user_connections` システム変数を使用して、単一ユーザーが単一の TiDB サーバーインスタンスに対して確立できる最大接続数を制限できます。これにより、1人のユーザーによる過剰な [token](https://docs.pingcap.com/tidb/v8.5/tidb-configuration-file#token-limit) 消費によって、他のユーザーからのリクエストへの応答が遅延する状況を防ぐのに役立ちます。
 
     さらに、`CREATE USER` および `ALTER USER` 文で `WITH MAX_USER_CONNECTIONS N` を使用して、対応するユーザーが確立できる最大接続数を制限できます。
 
@@ -198,7 +198,7 @@ v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以�
 
 + PD
 
-    - PD のメンテナンス用エンドポイントと `pd-ctl` コマンドを追加し、TiKV のメンテナンスタスクを直列化できるようにしました。これにより、一度に 1 つのメンテナンスタスクのみを有効にして Raft クォーラム喪失を防ぎます。[#9477](https://github.com/tikv/pd/issues/9477) @[SerjKol80](https://github.com/SerjKol80) @[HaoW30](https://github.com/HaoW30)
+    - PD のメンテナンス用エンドポイントと `pd-ctl` コマンドを追加し、TiKV のメンテナンスタスクを直列化できるようにしました。これにより、一度に 1つのメンテナンスタスクのみを有効にして Raft クォーラム喪失を防ぎます。[#9477](https://github.com/tikv/pd/issues/9477) @[SerjKol80](https://github.com/SerjKol80) @[HaoW30](https://github.com/HaoW30)
     -リージョン分割後の予期しないスケジューリングを避けるため、PD で split scatter をデフォルトで無効にしました。引き続き `schedule.split-scatter-schedule-limit` を正の値に設定することで有効化できます。[#10592](https://github.com/tikv/pd/issues/10592) @[lhy1024](https://github.com/lhy1024)
     - unsafe recovery の empty-region プラン生成を最適化し、多数のリージョンとギャップを持つ大規模クラスターでパフォーマンスを向上し、タイムアウトリスクを低減しました。[#10638](https://github.com/tikv/pd/issues/10638) @[Connor1996](https://github.com/Connor1996)
     - PD のトランザクション継続時間メトリクスを改善し、本番環境のレイテンシー分布をより適切に反映できるようにして、ダッシュボードとアラートでの可観測性を向上しました。[#10705](https://github.com/tikv/pd/issues/10705) @[bufferflies](https://github.com/bufferflies)
@@ -302,7 +302,7 @@ v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以�
 
     - 高並行時に token bucket が過剰なトークンを蓄積し、PD の resource control rate limiting が弱くなる可能性がある問題を修正しました。[#10744](https://github.com/tikv/pd/issues/10744) @[YuhaoZhang00](https://github.com/YuhaoZhang00)
     - token bucket 通知タイマーのリセット時に発生する resource group client controller の goroutine リークを修正しました。[#9745](https://github.com/tikv/pd/issues/9745) @[lhy1024](https://github.com/lhy1024)
-    - 設定された RU fill rate が実際の RU 消費量より大幅に高い場合に、resource group への SQL リクエストで約 1 秒のレイテンシースパイクが発生する問題を修正しました。[#10251](https://github.com/tikv/pd/issues/10251) @[JmPotato](https://github.com/JmPotato)
+    - 設定された RU fill rate が実際の RU 消費量より大幅に高い場合に、resource group への SQL リクエストで約1秒のレイテンシースパイクが発生する問題を修正しました。[#10251](https://github.com/tikv/pd/issues/10251) @[JmPotato](https://github.com/JmPotato)
     - 配置ルールで要求される最高分離レベルが満たされていない場合でも、PD の affinity scheduling がリージョンを適切にレプリケート済みと見なしてしまい、誤ったレプリカ配置判断につながる可能性がある問題を修正しました。[#10149](https://github.com/tikv/pd/issues/10149) @[HunDunDM](https://github.com/HunDunDM)
     - Region heartbeat breakdown メトリクスがホストの monotonic clock の一時的な逆行に遭遇した際に、`counter cannot decrease in value` エラーを引き起こす可能性がある PD の panic を修正しました。[#10901](https://github.com/tikv/pd/issues/10901) @[JmPotato](https://github.com/JmPotato)
     - affinity group が設定されていない場合に、PD が affinity checker operator limit メトリクスを誤って報告する問題を修正しました。[#10687](https://github.com/tikv/pd/issues/10687) @[lhy1024](https://github.com/lhy1024)
@@ -368,7 +368,7 @@ v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以�
         - 頻繁な DDL を伴う syncpoint 有効ワークロードで、重複する block status リクエストの処理に TiCDC が過剰な時間を費やし、maintainer slow log や barrier 処理遅延を引き起こす問題を修正しました。[#4957](https://github.com/pingcap/ticdc/issues/4957) @[hongyunyan](https://github.com/hongyunyan)
         - etcd クラスターのメンバーシップ変更後に、TiCDC `cli changefeed list` が異なるクラスターの changefeed を表示する可能性がある問題を修正しました。[#5137](https://github.com/pingcap/ticdc/issues/5137) @[wk989898](https://github.com/wk989898)
         - シャットダウン中にタスクが送信または再スケジュールされた際に、TiCDC のスレッドプールのシャットダウンがハングする可能性がある問題を修正しました。[#4640](https://github.com/pingcap/ticdc/issues/4640) @[wk989898](https://github.com/wk989898)
-        - dispatcher の `WAITING` ステータスが maintainer によって一時的に無視された場合に、`CREATE TABLE ... LIKE ...` などの一部の DDL で TiCDC が barrier を進める前に約 5 秒待機する問題を修正しました。[#4810](https://github.com/pingcap/ticdc/issues/4810) @[zier-one](https://github.com/zier-one)
+        - dispatcher の `WAITING` ステータスが maintainer によって一時的に無視された場合に、`CREATE TABLE ... LIKE ...` などの一部の DDL で TiCDC が barrier を進める前に約5秒待機する問題を修正しました。[#4810](https://github.com/pingcap/ticdc/issues/4810) @[zier-one](https://github.com/zier-one)
         - 多数の changefeed を一時停止して再開した後に、TiCDC の changefeed のラグが増加し CPU 使用率が高くなる問題を修正しました。[#4653](https://github.com/pingcap/ticdc/issues/4653) @[lidezhu](https://github.com/lidezhu)
         - ソーステーブルのスキーマが明示的に指定されていない場合に、TiCDC がデータベース間の `CREATE TABLE ... LIKE` ステートメントをレプリケートできない問題を修正しました。[#5025](https://github.com/pingcap/ticdc/issues/5025) @[lidezhu](https://github.com/lidezhu)
         - ビュー定義で修飾されていないソーステーブル名が使用されている場合に、TiCDC がスキーマ間の `CREATE VIEW` ステートメントを誤ってレプリケートし、下流のレプリケーションが失敗したりビューが誤ったテーブルを参照したりする可能性がある問題を修正しました。[#5026](https://github.com/pingcap/ticdc/issues/5026) @[lidezhu](https://github.com/lidezhu)

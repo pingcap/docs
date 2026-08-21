@@ -16,12 +16,12 @@ tiup cluster template [flags]
 このオプションを指定しない場合、出力のデフォルト テンプレートには次のインスタンスが含まれます。
 
 -   3つのPDインスタンス
--   3 つの TiKV インスタンス
--   3 つの TiDB インスタンス
--   2 つのTiFlashインスタンス
+-   3つの TiKV インスタンス
+-   3つの TiDB インスタンス
+-   2つのTiFlashインスタンス
 -   1つのPrometheusインスタンス
--   1 つの Grafana インスタンス
--   1 つの Alertmanager インスタンス
+-   1つの Grafana インスタンス
+-   1つの Alertmanager インスタンス
 
 ## オプション {#options}
 

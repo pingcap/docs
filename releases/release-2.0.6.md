@@ -17,7 +17,7 @@ summary: TiDB 2.0.6は、システムの互換性と安定性の向上を伴い�
     -   実行効率を向上させるために、 `Index Join`の外部テーブルとして推定行数が少ないテーブルを選択します[＃7277](https://github.com/pingcap/tidb/pull/7277)
     -   `ANALYZE TABLE`の実行中に発生したパニックに対する回復メカニズムを追加し、統計収集するプロセスでの異常な動作によって tidb サーバーが利用できなくなることを回避します。 [＃7228](https://github.com/pingcap/tidb/pull/7228)
     -   `RPAD`と`LPAD`の結果が`max_allowed_packet`システム変数の値を超えた場合、 `NULL`と対応する警告を返し、MySQL と互換性があります [＃7244](https://github.com/pingcap/tidb/pull/7244)
-    -   `PREPARE`文のプレースホルダ数の上限を 65535 に設定し、MySQL と互換性を持たせます。 [＃7250](https://github.com/pingcap/tidb/pull/7250)
+    -   `PREPARE`文のプレースホルダ数の上限を65535に設定し、MySQL と互換性を持たせます。 [＃7250](https://github.com/pingcap/tidb/pull/7250)
 -   バグ修正
     -   `DROP USER`文が場合によっては MySQL の動作と互換性がない問題を修正[＃7014](https://github.com/pingcap/tidb/pull/7014)
     -   `INSERT` / `LOAD DATA`のような文が`tidb_batch_insert` を有効にした後にOOMに遭遇する問題を修正しました [＃7092](https://github.com/pingcap/tidb/pull/7092)

@@ -87,7 +87,7 @@ TiDBバージョン: 7.1.4
     -   クエリに Apply 演算子が含まれており、 `fatal error: concurrent map writes`エラーが発生すると TiDB がpanicになる可能性がある問題を修正しました。 [＃50347](https://github.com/pingcap/tidb/issues/50347) @[SeaRise](https://github.com/SeaRise)
     -   集計関数をグループ計算に使用すると発生する可能性のある`Can't find column ...`エラーを修正[＃50926](https://github.com/pingcap/tidb/issues/50926) @[qw4990](https://github.com/qw4990)
     -   定数伝播で`ENUM`または`SET`型を処理するときに TiDB が間違ったクエリ結果を返す問題を修正しました [＃49440](https://github.com/pingcap/tidb/issues/49440) @[winoros](https://github.com/winoros)
-    -   依存関係のある 2 つの DDL タスクの完了時間がと誤って順序付けられる問題を修正しました。 [＃49498](https://github.com/pingcap/tidb/issues/49498) @[tangenta](https://github.com/tangenta)
+    -   依存関係のある 2つの DDL タスクの完了時間がと誤って順序付けられる問題を修正しました。 [＃49498](https://github.com/pingcap/tidb/issues/49498) @[tangenta](https://github.com/tangenta)
     -   `tidb_enable_prepared_plan_cache`システム変数が有効になってから無効になった後に`EXECUTE`ステートメントを使用して`PREPARE STMT`を実行すると、TiDB がpanicになる可能性がある問題を修正しました[＃49344](https://github.com/pingcap/tidb/issues/49344) @[qw4990](https://github.com/qw4990)
     -   ネストされた`UNION`のクエリで`LIMIT`と`OPRDERBY`無効になる可能性がある問題を修正しました [＃49377](https://github.com/pingcap/tidb/issues/49377) @[AilinKid](https://github.com/AilinKid)
     -   `LEADING`ヒントが`UNION ALL`ステートメントで有効にならない問題を修正しました [＃50067](https://github.com/pingcap/tidb/issues/50067) @[hawkingrei](https://github.com/hawkingrei)
@@ -113,7 +113,7 @@ TiDBバージョン: 7.1.4
 -   TiKV
 
     -   例外的な状況で休止状態の領域がすぐに起動しない問題を修正[＃16368](https://github.com/tikv/tikv/issues/16368) @[LykxSassinator](https://github.com/LykxSassinator)
-    -   ノードをオフラインにする前に、リージョン内のすべてのレプリカの最後のハートビート時間をチェックすることで、1 つのレプリカがオフラインになるとリージョン全体が使用できなくなる問題を修正しました[＃16465](https://github.com/tikv/tikv/issues/16465) @[tonyxuqqi](https://github.com/tonyxuqqi)
+    -   ノードをオフラインにする前に、リージョン内のすべてのレプリカの最後のハートビート時間をチェックすることで、1つのレプリカがオフラインになるとリージョン全体が使用できなくなる問題を修正しました[＃16465](https://github.com/tikv/tikv/issues/16465) @[tonyxuqqi](https://github.com/tonyxuqqi)
     -   Titan が有効になっているときに RocksDB に保存されるテーブルプロパティが不正確になる可能性がある問題を修正[＃16319](https://github.com/tikv/tikv/issues/16319) @[hicqu](https://github.com/hicqu)
     -   クラスターにTiFlashノードがある場合に`tikv-ctl compact-cluster`実行が失敗する問題を修正しました [＃16189](https://github.com/tikv/tikv/issues/16189) @[frew](https://github.com/frew)
     -   gRPC スレッドが`is_shutdown` をチェックしているときに TiKV がpanicする可能性がある問題を修正しました [＃16236](https://github.com/tikv/tikv/issues/16236) @[pingyu](https://github.com/pingyu)

@@ -1,11 +1,11 @@
 ---
 title: TiDB Cloud Release Notes in 2021
-summary: 2021 年のTiDB Cloudのリリース ノートについて説明します。
+summary: 2021年のTiDB Cloudのリリース ノートについて説明します。
 ---
 
 # 2021年のTiDB Cloudリリースノート {#tidb-cloud-release-notes-in-2021}
 
-このページには、2021 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
+このページには、2021年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
 ## 2021年12月28日 {#december-28-2021}
 
@@ -40,13 +40,13 @@ summary: 2021 年のTiDB Cloudのリリース ノートについて説明しま�
 
 ## 2021年11月8日 {#november-8-2021}
 
--   Launch [Developer Tier](/tidb-cloud/select-cluster-tier.md#starter)では、 TiDB Cloudの 1 年間の無料トライアルが提供されます。
+-   Launch [Developer Tier](/tidb-cloud/select-cluster-tier.md#starter)では、 TiDB Cloudの 1年間の無料トライアルが提供されます。
 
     各Developer Tierクラスターはフル機能の TiDB クラスターであり、次のものが含まれます。
 
     -   1つのTiDB共有ノード
-    -   1 つの TiKV 共有ノード (500 MiB の OLTPストレージ付き)
-    -   1 つのTiFlash共有ノード (500 MiB の OLAPストレージ付き)
+    -   1つの TiKV 共有ノード (500 MiB の OLTPストレージ付き)
+    -   1つのTiFlash共有ノード (500 MiB の OLAPストレージ付き)
 
     始めましょ[ここ](/tidb-cloud/tidb-cloud-quickstart.md) .
 

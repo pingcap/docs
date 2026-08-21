@@ -15,7 +15,7 @@ KillStmt ::= 'KILL' 'TIDB'? ( 'CONNECTION' | 'QUERY' )? CONNECTION_ID
 
 ## 例 {#examples}
 
-次の例は、現在のクラスター内のすべてのアクティブなクエリを取得し、そのうちの 1 つを終了する方法を示しています。
+次の例は、現在のクラスター内のすべてのアクティブなクエリを取得し、そのうちの 1つを終了する方法を示しています。
 
 ```sql
 SELECT ID, USER, INSTANCE, INFO FROM INFORMATION_SCHEMA.CLUSTER_PROCESSLIST;

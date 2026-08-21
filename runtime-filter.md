@@ -76,7 +76,7 @@ WHERE ss_date_sk = d_date_sk
 
 *(RFはランタイムフィルターの略です)*
 
-上記 2 つの図から、スキャンされるデータ量が`store_sales`で 100 万から 5000 に削減されていることがわかります。スキャンされるデータ量を`TableFullScan`削減することで、Runtime Filter はハッシュ テーブルとの照合回数を削減し、不要な I/O とネットワーク転送を回避できるため、結合操作の効率が大幅に向上します。
+上記 2つの図から、スキャンされるデータ量が`store_sales`で 100 万から 5000 に削減されていることがわかります。スキャンされるデータ量を`TableFullScan`削減することで、Runtime Filter はハッシュ テーブルとの照合回数を削減し、不要な I/O とネットワーク転送を回避できるため、結合操作の効率が大幅に向上します。
 
 ## ランタイムフィルターを使用する {#use-runtime-filter}
 
@@ -93,7 +93,7 @@ ALTER TABLE catalog_sales SET tiflash REPLICA 1;
 ALTER TABLE date_dim SET tiflash REPLICA 1;
 ```
 
-2 つのテーブルのTiFlashレプリカが準備されるまで、つまりレプリカの`AVAILABLE`フィールドと`PROGRESS`フィールドが両方とも`1`なるまで待機します。
+2つのテーブルのTiFlashレプリカが準備されるまで、つまりレプリカの`AVAILABLE`フィールドと`PROGRESS`フィールドが両方とも`1`なるまで待機します。
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.TIFLASH_REPLICA WHERE TABLE_NAME='catalog_sales';
@@ -222,7 +222,7 @@ EXPLAIN ANALYZE SELECT cs_ship_date_sk FROM catalog_sales, date_dim
 9 rows in set (0.17 sec)
 ```
 
-2 つのクエリの実行情報を比較すると、次の改善点がわかります。
+2つのクエリの実行情報を比較すると、次の改善点がわかります。
 
 -   IO 削減: TableFullScan 演算子の`total_scanned_rows`比較すると、ランタイム フィルターを有効にすると`TableFullScan`のスキャン量が 2/3 削減されることがわかります。
 -   ハッシュ結合のパフォーマンス向上: `HashJoin`演算子の実行時間が 376.1 ミリ秒から 157.6 ミリ秒に短縮されました。

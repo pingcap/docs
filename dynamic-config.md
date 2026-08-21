@@ -150,7 +150,7 @@ show warnings;
 | `raftstore.store-io-pool-size`                            | Raft I/Oタスクを処理するスレッドの数。これは StoreWriter スレッド プールのサイズでもあります (この値を 0 以外の値から 0 に、または 0 から 0 以外の値に変更**しないでください**)                               |
 | `raftstore.periodic-full-compact-start-max-cpu`           | 完全圧縮が有効な場合に TiKV が定期的に完全圧縮を実行する CPU 使用率のしきい値                                                                                               |
 | `readpool.unified.max-thread-count`                       | 読み取り要求を均一に処理するスレッド プール内のスレッドの最大数。これは UnifyReadPool スレッド プールのサイズです。                                                                         |
-| `readpool.unified.max-tasks-per-worker`                   | 統合読み取りプール内の 1 つのスレッドに許可されるタスクの最大数。値を超えると`Server Is Busy`エラーが返されます。                                                                         |
+| `readpool.unified.max-tasks-per-worker`                   | 統合読み取りプール内の 1つのスレッドに許可されるタスクの最大数。値を超えると`Server Is Busy`エラーが返されます。                                                                         |
 | `readpool.unified.auto-adjust-pool-size`                  | UnifyReadPool スレッド プールのサイズを自動的に調整するかどうかを決定します                                                                                              |
 | `resource-control.priority-ctl-strategy`                  | 低優先度タスクのフロー制御戦略を構成します。                                                                                                                     |
 | `coprocessor.split-region-on-table`                       | テーブルごとにリージョンを分割できます                                                                                                                        |
@@ -271,7 +271,7 @@ Query OK, 0 rows affected (0.01 sec)
 | `schedule.max-merge-region-keys`                     | `Region Merge`キーの最大数を指定します                                 |
 | `schedule.patrol-region-interval`                    | チェッカーがリージョンのヘルス状態を検査する頻度を決定します                             |
 | `schedule.split-merge-interval`                      | 同じリージョンで分割および結合操作を実行する時間間隔を決定します                           |
-| `schedule.max-snapshot-count`                        | 1 つのストアが同時に送信または受信できるスナップショットの最大数を決定します。                   |
+| `schedule.max-snapshot-count`                        | 1つのストアが同時に送信または受信できるスナップショットの最大数を決定します。                   |
 | `schedule.max-pending-peer-count`                    | 単一ストア内の保留中のピアの最大数を決定します                                    |
 | `schedule.max-store-down-time`                       | PDが切断されたストアを回復できないと判断するまでのダウンタイム                           |
 | `schedule.max-store-preparing-time`                  | ストアがオンラインになるまでの最大待ち時間を制御します                                |
@@ -378,7 +378,7 @@ select @@tidb_slow_log_threshold;
 
 現在、システム変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)を使用してTiFlash構成`max_threads`を変更できます。この変数は、 TiFlashが要求を実行するための最大同時実行性を指​​定します。
 
-`tidb_max_tiflash_threads`のデフォルト値は`-1`で、このシステム変数は無効であり、 TiFlash設定ファイルの設定に依存することを示します。 `tidb_max_tiflash_threads`を使用すると、 `max_threads`を 10 に設定できます。
+`tidb_max_tiflash_threads`のデフォルト値は`-1`で、このシステム変数は無効であり、 TiFlash設定ファイルの設定に依存することを示します。 `tidb_max_tiflash_threads`を使用すると、 `max_threads`を10に設定できます。
 
 ```sql
 set tidb_max_tiflash_threads = 10;

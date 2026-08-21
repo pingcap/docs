@@ -33,7 +33,7 @@ TiDB バージョン: 4.0.0-rc.2
 
 -   TiDB
 
-    -   `WHERE`句に同等の条件が 1 つしかない場合に間違ったパーティションが選択される問題を修正[＃17054](https://github.com/pingcap/tidb/pull/17054)
+    -   `WHERE`句に同等の条件が 1つしかない場合に間違ったパーティションが選択される問題を修正[＃17054](https://github.com/pingcap/tidb/pull/17054)
     -   `WHERE`句に文字列列のみが含まれている場合に誤ったインデックス範囲を構築することで誤った結果が発生する問題を修正しました。 [＃16660](https://github.com/pingcap/tidb/pull/16660)
     -   `DELETE`操作後にトランザクション内の`PointGet`クエリを実行するときに発生するpanic問題を修正しました [＃16991](https://github.com/pingcap/tidb/pull/16991)
     -   エラーが発生したときにGCワーカーがデッドロックに遭遇する可能性がある問題を修正しました[＃16915](https://github.com/pingcap/tidb/pull/16915)

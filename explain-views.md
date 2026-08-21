@@ -9,13 +9,13 @@ summary: TiDB の EXPLAIN` ステートメントによって返される実行�
 
 <CustomContent platform="tidb">
 
-[自転車シェアリングのサンプルデータベース](/import-example-data.md)から、次の 2 つのクエリが同様の方法で実行されていることがわかります。
+[自転車シェアリングのサンプルデータベース](/import-example-data.md)から、次の2つのクエリが同様の方法で実行されていることがわかります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[自転車シェアリングのサンプルデータベース](/tidb-cloud/import-sample-data.md)から、次の 2 つのクエリが同様の方法で実行されていることがわかります。
+[自転車シェアリングのサンプルデータベース](/tidb-cloud/import-sample-data.md)から、次の2つのクエリが同様の方法で実行されていることがわかります。
 
 </CustomContent>
 

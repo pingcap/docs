@@ -370,7 +370,7 @@ SELECT /*+ USE_INDEX(t1, idx1, idx2) */ * FROM t1;
 
 `FORCE_INDEX(t1_name, idx1_name [, idx2_name ...])`の使い方と効果は`USE_INDEX(t1_name, idx1_name [, idx2_name ...])`の使い方と効果と同じです。
 
-次の 4 つのクエリは同じ効果があります。
+次の4つのクエリは同じ効果があります。
 
 ```sql
 SELECT /*+ USE_INDEX(t, idx1) */ * FROM t;
@@ -629,7 +629,7 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
     SELECT /*+ QB_NAME(v_1, v) USE_INDEX(t@v_1, idx) */ * FROM v;
     ```
 
--   ネストされたビューとサブクエリを含む複雑なステートメントの場合、次の例では、ビュー`v1`と`v2`の 2 つのクエリ ブロックのそれぞれの名前を指定します。
+-   ネストされたビューとサブクエリを含む複雑なステートメントの場合、次の例では、ビュー`v1`と`v2`の 2つのクエリ ブロックのそれぞれの名前を指定します。
 
     ```sql
     SELECT /* Comment: The name of the current query block is the default @SEL_1 */ * FROM v2 JOIN (
@@ -740,7 +740,7 @@ select /*+ USE_TOJA(TRUE) */ t1.a, t1.b from t1 where t1.a in (select t2.a from 
 
 ### MAX_EXECUTION_TIME(N) {#max_execution_timen}
 
-`MAX_EXECUTION_TIME(N)`ヒントは、サーバーが文の実行を終了させるまでの制限時間`N` （ミリ秒単位のタイムアウト値）を設定します。次のヒントでは、 `MAX_EXECUTION_TIME(1000)`タイムアウトが 1000 ミリ秒（つまり 1 秒）であることを意味します。
+`MAX_EXECUTION_TIME(N)`ヒントは、サーバーが文の実行を終了させるまでの制限時間`N` （ミリ秒単位のタイムアウト値）を設定します。次のヒントでは、 `MAX_EXECUTION_TIME(1000)`タイムアウトが 1000 ミリ秒（つまり 1秒）であることを意味します。
 
 ```sql
 select /*+ MAX_EXECUTION_TIME(1000) */ * from t1 inner join t2 where t1.id = t2.id;

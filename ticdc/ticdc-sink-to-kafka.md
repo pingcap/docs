@@ -83,7 +83,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 | `compression`                        | メッセージを送信する際に使用する圧縮アルゴリズム（値の選択肢は`none` 、 `lz4` 、 `gzip` 、 `snappy` 、 `zstd` 。デフォルトは`none` ）。Snappy圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。その他のSnappy圧縮形式はサポートされていません。                                                                                                                                                                                            |
 | `auto-create-topic`                  | 渡された`topic-name` Kafka クラスターに存在しない場合に、TiCDC がトピックを自動的に作成するかどうかを決定します (オプション、デフォルトは`true` )。                                                                                                                                                                                                                                                                                                 |
 | `enable-tidb-extension`              | オプション。デフォルトは`false` 。出力プロトコルが`canal-json`の場合、値が`true`であれば、TiCDC は[ウォーターマークイベント](/ticdc/ticdc-canal-json.md#watermark-event)を送信し、Kafka メッセージに[TiDB拡張フィールド](/ticdc/ticdc-canal-json.md#tidb-extension-field)を追加します。v6.1.0 以降では、このパラメータは`avro`プロトコルにも適用されます。値が`true`であれば、TiCDC は Kafka メッセージに[3つのTiDB拡張フィールド](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields)を追加します。                         |
-| `max-batch-size`                     | v4.0.9 の新機能。メッセージプロトコルが 1 つの Kafka メッセージに複数のデータ変更を出力することをサポートしている場合、このパラメータは 1 つの Kafka メッセージに含まれるデータ変更の最大数を指定します。現在、このパラメータは Kafka の`protocol`が`open-protocol` （オプション、デフォルトは`16` ）の場合にのみ有効です。                                                                                                                                                                                              |
+| `max-batch-size`                     | v4.0.9 の新機能。メッセージプロトコルが 1つの Kafka メッセージに複数のデータ変更を出力することをサポートしている場合、このパラメータは 1つの Kafka メッセージに含まれるデータ変更の最大数を指定します。現在、このパラメータは Kafka の`protocol`が`open-protocol` （オプション、デフォルトは`16` ）の場合にのみ有効です。                                                                                                                                                                                              |
 | `enable-tls`                         | ダウンストリーム Kafka インスタンスに接続するために TLS を使用するかどうか (オプション、デフォルトは`false` )。                                                                                                                                                                                                                                                                                                                         |
 | `ca`                                 | ダウンストリーム Kafka インスタンスに接続するために必要な CA 証明書ファイルのパス (オプション)。                                                                                                                                                                                                                                                                                                                                     |
 | `cert`                               | ダウンストリーム Kafka インスタンスに接続するために必要な証明書ファイルのパス (オプション)。                                                                                                                                                                                                                                                                                                                                         |
@@ -115,7 +115,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 
 > **Note:**
 >
-> `protocol`が`open-protocol`の場合、TiCDC は複数のイベントを 1 つの Kafka メッセージにエンコードし、 `max-message-bytes`で指定された長さを超えるメッセージの生成を回避します。1 行の変更イベントのエンコード結果が`max-message-bytes`を超える場合、changefeed はエラーを報告し、ログを出力。
+> `protocol`が`open-protocol`の場合、TiCDC は複数のイベントを 1つの Kafka メッセージにエンコードし、 `max-message-bytes`で指定された長さを超えるメッセージの生成を回避します。1 行の変更イベントのエンコード結果が`max-message-bytes`を超える場合、changefeed はエラーを報告し、ログを出力。
 
 ### TiCDCはKafkaの認証と認可を使用します {#ticdc-uses-the-authentication-and-authorization-of-kafka}
 
@@ -414,7 +414,7 @@ large-message-handle-compression = "none"
 
 `large-message-handle-compression`を設定した場合、TiCDC はメッセージを受信すると、まずメッセージサイズ制限パラメータの値と比較し、サイズ制限を超えるメッセージを圧縮します。[`sink-uri`](#configure-sink-uri-for-kafka)に`compression`も設定した場合、TiCDC は`sink-uri`設定に基づいて、送信データ要求全体をシンクレベルで再度圧縮します。
 
-前述の 2 つの圧縮方法の圧縮率は次のように計算されます`compression ratio = size before compression / size after compression * 100` 。
+前述の2つの圧縮方法の圧縮率は次のように計算されます`compression ratio = size before compression / size after compression * 100` 。
 
 ### ハンドルキーのみ送信 {#send-handle-keys-only}
 
@@ -544,7 +544,7 @@ Kafkaコンシューマーは、外部ストレージ内の大きなメッセー
 }
 ```
 
-`key`と`value`フィールドは、Kafka メッセージ内の同名のフィールドに対応しています。コンシューマーは、これらの 2 つのフィールドのデータを解析することで、元の大きなメッセージを取得できます。オープンプロトコルでエンコードされた Kafka メッセージのみが、 `key`フィールドに有効なコンテンツを含みます。TiCDC は、 `key`と`value`両方を単一の JSON オブジェクトにエンコードして、完全なメッセージを一度に配信します。他のプロトコルでは、 `key`フィールドは常に空です。
+`key`と`value`フィールドは、Kafka メッセージ内の同名のフィールドに対応しています。コンシューマーは、これらの 2つのフィールドのデータを解析することで、元の大きなメッセージを取得できます。オープンプロトコルでエンコードされた Kafka メッセージのみが、 `key`フィールドに有効なコンテンツを含みます。TiCDC は、 `key`と`value`両方を単一の JSON オブジェクトにエンコードして、完全なメッセージを一度に配信します。他のプロトコルでは、 `key`フィールドは常に空です。
 
 #### `value`フィールドを外部ストレージにのみ送信する {#send-the-value-field-to-external-storage-only}
 

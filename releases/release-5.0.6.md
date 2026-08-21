@@ -18,7 +18,7 @@ TiDB バージョン: 5.0.6
 
         -   `cdc server`コマンドエラーの出力を stdout から stderr に変更します [＃3133](https://github.com/pingcap/tiflow/issues/3133)
         -   Kafkaシンク`max-message-bytes`のデフォルト値を`10M` に設定する [＃3081](https://github.com/pingcap/tiflow/issues/3081)
-        -   TiCDC がメッセージを Kafka パーティション間でより均等に分散するように、Kafka シンク`partition-num`のデフォルト値を 3 に変更します[＃3337](https://github.com/pingcap/ticdc/issues/3337)
+        -   TiCDC がメッセージを Kafka パーティション間でより均等に分散するように、Kafka シンク`partition-num`のデフォルト値を3に変更します[＃3337](https://github.com/pingcap/ticdc/issues/3337)
 
 ## 改善点 {#improvements}
 

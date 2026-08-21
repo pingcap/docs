@@ -73,7 +73,7 @@ insert into t select * from t;
 -   `Succ` : ステートメントが正常に実行されたかどうか。
 -   `Backoff_time` : ステートメントが再試行を必要とするエラーに遭遇した場合の、再試行までの待機時間。このような一般的なエラーには、 `lock occurs` 、 `Region split` 、および`tikv server is busy`などがあります。
 -   `Plan` : ステートメントの実行計画。 `SELECT tidb_decode_plan('xxx...')`ステートメントを実行して、具体的な実行計画を解析します。
--   `Binary_plan` : バイナリエンコードされたステートメントの実行計画。特定の実行計画を解析するには、 [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan)ステートメントを実行します。 `Plan`および`Binary_plan`フィールドには同じ情報が含まれています。ただし、これら 2 つのフィールドから解析される実行計画の形式は異なります。
+-   `Binary_plan` : バイナリエンコードされたステートメントの実行計画。特定の実行計画を解析するには、 [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan)ステートメントを実行します。 `Plan`および`Binary_plan`フィールドには同じ情報が含まれています。ただし、これら2つのフィールドから解析される実行計画の形式は異なります。
 -   `Prepared` : このステートメントが`Prepare`または`Execute`の要求であるかどうか。
 -   `Plan_from_cache` : このステートメントが実行プランキャッシュにヒットするかどうか。
 -   `Plan_from_binding` : このステートメントがバインドされた実行計画を使用するかどうか。
@@ -82,7 +82,7 @@ insert into t select * from t;
 -   `Preproc_subqueries` : ステートメント内で事前に実行されるサブクエリの数。たとえば、 `where id in (select if from t)`サブクエリが事前に実行される場合があります。
 -   `Preproc_subqueries_time` : このステートメントのサブクエリを事前に実行するために要した時間。
 -   `Exec_retry_count` : このステートメントの再試行回数。このフィールドは通常、ロックが失敗した場合にステートメントが再試行される悲観的トランザクションに使用されます。
--   `Exec_retry_time` : このステートメントの実行再試行時間。たとえば、ステートメントが合計 3 回実行された場合 (最初の 2 回は失敗)、 `Exec_retry_time`は最初の 2 回の実行の合計時間を意味します。最後の実行の時間は、 `Query_time`から`Exec_retry_time`を引いた時間です。
+-   `Exec_retry_time` : このステートメントの実行再試行時間。たとえば、ステートメントが合計3回実行された場合 (最初の 2回は失敗)、 `Exec_retry_time`は最初の 2回の実行の合計時間を意味します。最後の実行の時間は、 `Query_time`から`Exec_retry_time`を引いた時間です。
 -   `KV_total` : このステートメントによって、TiKV またはTiFlash上のすべての RPC リクエストに費やされた時間。
 -   `PD_total` : このステートメントによる PD 上のすべての RPC リクエストに費やされた時間。
 -   `Backoff_total` : このステートメントの実行中にすべてのバックオフに費やされた時間。
@@ -185,7 +185,7 @@ TiKVコプロセッサータスクフィールド：
 
 ### 統一されたルール構文と型制約 {#unified-rule-syntax-and-type-constraints}
 
--   ルール容量と分離: `SESSION`と`GLOBAL`はそれぞれ最大 10 個のルールをサポートします。1 つのセッションで最大 20 個のアクティブなルールを持つことができます。ルールは`;`で分離されます。
+-   ルール容量と分離: `SESSION`と`GLOBAL`はそれぞれ最大 10 個のルールをサポートします。1つのセッションで最大 20 個のアクティブなルールを持つことができます。ルールは`;`で分離されます。
 -   条件の形式: 各条件は`field_name:value`の形式を使用します。単一のルール内の複数の条件は`,`で区切られます。
 -   フィールドとスコープ: フィールド名は大文字と小文字を区別しません (アンダースコアやその他の文字は保持されます)。 `SESSION`ルールは`Conn_ID`をサポートしていません。 `GLOBAL`ルールのみが`Conn_ID`をサポートしています。
 -   意味の一致：
@@ -283,7 +283,7 @@ TiKVコプロセッサータスクフィールド：
     SET GLOBAL tidb_slow_log_rules = 'Query_time: 0.5, Is_internal: false';
     ```
 
--   特定の接続に対するグローバルルール（ `Conn_ID:11`と`Conn_ID:12` 2 つの接続にそれぞれ適用されます）：
+-   特定の接続に対するグローバルルール（ `Conn_ID:11`と`Conn_ID:12` 2つの接続にそれぞれ適用されます）：
 
     ```sql
     SET GLOBAL tidb_slow_log_rules = 'Conn_ID: 11, Query_time: 0.5, Is_internal: false; Conn_ID: 12, Query_time: 0.6, Process_time: 0.3, DB: db1';
@@ -305,8 +305,8 @@ TiKVコプロセッサータスクフィールド：
     >
     > `tidb_slow_log_rules`の時間関連フィールド（ `Query_time`や`Process_time`など）は単位として秒を使用し、小数点を含むことができますが、 [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)はミリ秒を使用します。
 
--   [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v856) : 1 秒あたりに書き込めるスロークエリログエントリの最大数を設定します。デフォルト値は`0`です。この変数は v8.5.6 で導入されました。
-    -   `0`という値は、1 秒あたりに書き込まれるスロークエリログエントリの数に制限がないことを意味します。
+-   [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v856) : 1秒あたりに書き込めるスロークエリログエントリの最大数を設定します。デフォルト値は`0`です。この変数は v8.5.6 で導入されました。
+    -   `0`という値は、1秒あたりに書き込まれるスロークエリログエントリの数に制限がないことを意味します。
     -   `0`より大きい値を指定すると、TiDBは1秒あたりに指定された数のスロークエリログエントリを書き込みます。超過分のログエントリは破棄され、スロークエリログファイルには書き込まれません。
     -   ルールベースのスロークエリログが頻繁にトリガーされるのを防ぐため、 `tidb_slow_log_rules`を有効にした後にこの変数を設定することをお勧めします。
 
@@ -391,13 +391,13 @@ TiDB 4.0 では、 `SLOW_QUERY`は、ローテーションされたスローロ�
 
 TiDB 4.0 では、すべての TiDB ノードのスロー クエリ情報を照会するための[`CLUSTER_SLOW_QUERY`](/information-schema/information-schema-slow-query.md#cluster_slow_query-table)システム テーブルが追加されました。 `CLUSTER_SLOW_QUERY`テーブルのテーブル スキーマは`CLUSTER_SLOW_QUERY`に`INSTANCE`列が追加されている点で`SLOW_QUERY`テーブルのスキーマとは異なります。 `INSTANCE`列は、スロー クエリの行情報の TiDB ノード アドレスを表します。 `CLUSTER_SLOW_QUERY` 、 [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)と同様に使用できます。
 
-`CLUSTER_SLOW_QUERY`テーブルに対してクエリを実行すると、TiDB は他のノードからすべてのスロークエリ情報を取得して 1 つの TiDB ノードで操作を実行するのではなく、計算と判断を他のノードにプッシュします。
+`CLUSTER_SLOW_QUERY`テーブルに対してクエリを実行すると、TiDB は他のノードからすべてのスロークエリ情報を取得して 1つの TiDB ノードで操作を実行するのではなく、計算と判断を他のノードにプッシュします。
 
 ## `SLOW_QUERY` / `CLUSTER_SLOW_QUERY`使用例 {#slow_query--cluster_slow_query-usage-examples}
 
 ### 上位N件のスロークエリ {#top-n-slow-queries}
 
-ユーザーのスロークエリ上位 2 件をクエリします。 `Is_internal=false` TiDB 内のスロークエリを除外し、ユーザーのスロークエリのみをクエリすることを意味します。
+ユーザーのスロークエリ上位 2件をクエリします。 `Is_internal=false` TiDB 内のスロークエリを除外し、ユーザーのスロークエリのみをクエリすることを意味します。
 
 ```sql
 select query_time, query
@@ -420,7 +420,7 @@ limit 2;
 
 ### `test`ユーザーの上位N件のスロークエリを照会する {#query-the-top-n-slow-queries-of-the-test-user}
 
-次の例では、 `test`ユーザーによって実行されたスロークエリが照会され、最初の 2 つの結果が実行時間の逆順に表示されます。
+次の例では、 `test`ユーザーによって実行されたスロークエリが照会され、最初の 2つの結果が実行時間の逆順に表示されます。
 
 ```sql
 select query_time, query, user
