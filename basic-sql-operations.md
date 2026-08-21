@@ -13,7 +13,7 @@ SQLを試したり、TiDBとMySQLクエリの互換性をテストしたりす�
 
 </CustomContent>
 
-このページでは、DDL、DML、CRUD操作などのTiDB SQL文について解説します。TiDB文の完全なリストについては、 [SQLステートメントの概要](/sql-statements/sql-statement-overview.md)を参照してください。
+このページでは、DDL、DML、CRUD操作などのTiDB SQL文について解説します。TiDB文の完全なリストについては、 [SQL Statement Overview](/sql-statements/sql-statement-overview.md)を参照してください。
 
 ## カテゴリ {#category}
 

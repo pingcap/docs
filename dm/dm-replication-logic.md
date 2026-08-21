@@ -47,7 +47,7 @@ UPDATE + DELETE => DELETE
 DELETE + INSERT => UPDATE
 ```
 
-Compactor機能はデフォルトで無効になっています。有効にするには、レプリケーションタスクの`sync`の設定モジュールで`syncer.compact` ～ `true`に設定します（以下を参照）。
+Compactor機能はデフォルトで無効になっています。有効にするには、レプリケーションタスクの`sync`の設定モジュールで`syncer.compact`を`true`に設定します（以下を参照）。
 
 ```yaml
 syncers:                            # The configuration parameters of the sync processing unit
@@ -80,7 +80,7 @@ MySQLのbinlogプロトコルでは、各binlogは1行のデータの変更操�
 = DELETE tb WHERE (a) IN (1),(2);
 ```
 
-マージャー機能はデフォルトで無効になっています。有効にするには、レプリケーションタスクの`sync`の設定モジュールで`syncer.multiple-rows` ～ `true`に設定します（以下を参照）。
+マージャー機能はデフォルトで無効になっています。有効にするには、レプリケーションタスクの`sync`の設定モジュールで`syncer.multiple-rows`を`true`に設定します（以下を参照）。
 
 ```yaml
 syncers:                            # The configuration parameters of the sync processing unit

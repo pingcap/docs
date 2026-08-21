@@ -98,7 +98,7 @@ TiDB Cloud Premiumでは、チェンジフィードのTiCDC 変更フィード�
 1.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**変更フィード**](#view-the-changefeed-page)ページに移動します。
 2.  拡大縮小したい対応する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[拡大/縮小]**をクリックします。
 3.  新しい仕様を選択してください。
-4.  **「送信」**をクリックしてください。
+4.  **送信**をクリックしてください。
 
 スケーリング処理の完了には約10分かかります（この間、changefeedは通常通り動作します）。新しい仕様への切り替えには数秒かかります（この間、changefeedは一時停止され、自動的に再開されます）。
 
@@ -143,7 +143,7 @@ TiDB Cloud Premiumでは、チェンジフィードのTiCDC 変更フィード�
 1.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**変更フィード**](#view-the-changefeed-page)ページに移動します。
 2.  複製したい変更フィードを探します。**アクション**列で、 **...** &gt;**複製を**クリックします。
 3.  TiDB Cloudは、新しい変更フィード設定に元の設定を自動的に反映します。必要に応じて設定を確認および変更できます。
-4.  設定を確認後、 **「送信」**をクリックして新しい変更フィードを作成して開始します。
+4.  設定を確認後、 **送信**をクリックして新しい変更フィードを作成して開始します。
 
 ## 変更フィードを削除する {#delete-a-changefeed}
 

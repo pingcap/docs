@@ -21,9 +21,9 @@ Claude DesktopでTiDB MCPサーバーを設定するには、以下の手順に�
 
 1.  **設定**ダイアログを開きます。
 
-2.  ダイアログの「**開発者」**タブをクリックします。
+2.  ダイアログの**開発者**タブをクリックします。
 
-3.  **「設定の編集」**ボタンをクリックして、MCP設定ファイル`claude_desktop_config.json`を開きます。
+3.  **設定の編集**ボタンをクリックして、MCP設定ファイル`claude_desktop_config.json`を開きます。
 
 4.  以下の設定を`claude_desktop_config.json`ファイルにコピーしてください。
 
@@ -46,7 +46,7 @@ Claude DesktopでTiDB MCPサーバーを設定するには、以下の手順に�
 
 5.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックすると、その概要ページに移動します。
 
-6.  右上隅の**「接続」**をクリックして接続パラメータを取得し、 `TIDB_HOST` 、 `TIDB_PORT` 、 `TIDB_USERNAME` 、 `TIDB_PASSWORD` 、および`TIDB_DATABASE`の値を自分の値に置き換えてください。
+6.  右上隅の**接続**をクリックして接続パラメータを取得し、 `TIDB_HOST` 、 `TIDB_PORT` 、 `TIDB_USERNAME` 、 `TIDB_PASSWORD` 、および`TIDB_DATABASE`の値を自分の値に置き換えてください。
 
 7.  Claude Desktopを再起動してください。
 

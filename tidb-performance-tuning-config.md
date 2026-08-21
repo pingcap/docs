@@ -272,7 +272,7 @@ sysbench oltp_read_only run --mysql-host={host} --mysql-port={port} --mysql-user
 
 #### パフォーマンス分析 {#performance-analysis}
 
-バージョン7.6.0以降、Titanはデフォルトで有効になっています。TiDB v8.4.0では、Titanの`min-blob-size`のデフォルト値は`32KiB`です。ベースライン構成では、レコードサイズを`31KiB`に設定することで、データがRocksDBに保存されるようにしています。一方、キー設定構成では、 `min-blob-size` ～ `1KiB`に設定すると、データがTitanに保存されます。
+バージョン7.6.0以降、Titanはデフォルトで有効になっています。TiDB v8.4.0では、Titanの`min-blob-size`のデフォルト値は`32KiB`です。ベースライン構成では、レコードサイズを`31KiB`に設定することで、データがRocksDBに保存されるようにしています。一方、キー設定構成では、 `min-blob-size`を`1KiB`に設定すると、データがTitanに保存されます。
 
 主要設定で確認されたパフォーマンスの向上は、主にTitanがRocksDBの圧縮を削減する能力によるものです。以下の図に示すように、
 
@@ -454,7 +454,7 @@ TiDBは、さまざまなワークロードパターンに合わせてパフォ�
 
 バージョン8.0.0で導入されたシステム変数[`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800)を使用して、DMLステートメントの実行モードを制御できます。
 
-バルクDML実行モードを使用するには、 `tidb_dml_type` ～ `"bulk"`に設定します。このモードでは、競合のないバルクデータロードが最適化され、大規模な書き込み操作中のメモリ使用量が削減されます。このモードを使用する前に、以下の点を確認してください。
+バルクDML実行モードを使用するには、 `tidb_dml_type`を`"bulk"`に設定します。このモードでは、競合のないバルクデータロードが最適化され、大規模な書き込み操作中のメモリ使用量が削減されます。このモードを使用する前に、以下の点を確認してください。
 
 -   [`autocommit`](/system-variables.md#autocommit)が有効です。
 -   [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600)設定項目は`false`に設定されています。
