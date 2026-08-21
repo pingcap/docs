@@ -269,4 +269,4 @@ Basicストレージは、パフォーマンスとコスト効率のバランス
 
 #### Plusストレージ {#plus-storage}
 
-Plusストレージは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、このストレージタイプは、AWSにデプロイされたクラスターに対してのみ、リクエストに応じて利用可能です。リクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**?**をクリックし、 **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **Description**フィールドに「 TiFlashストレージタイプを申請」と入力して、 **Submit**をクリックしてください。
+Plusストレージは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、このストレージタイプは、AWSにデプロイされたクラスターに対してのみ、リクエストに応じて利用可能です。リクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**？**をクリックし、 **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **Description**フィールドに「 TiFlashストレージタイプを申請」と入力して、 **Submit**をクリックしてください。

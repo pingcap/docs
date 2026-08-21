@@ -42,7 +42,7 @@ summary: Alibaba Cloud Endpoint Service のプライベート リンク接続を
 
 Alibaba Cloud アカウント ID とアベイラビリティーゾーンを表示するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[ネットワーク]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**Settings** &gt; **Networking**をクリックします。
 2.  **[外部サービス向け Alibaba Cloud プライベートエンドポイント]**領域で、**[外部サービス向けプライベートエンドポイントの作成]**をクリックします。
 3.  表示されたダイアログで、Alibaba Cloud アカウント ID とアベイラビリティーゾーンを見つけることができます。
 
@@ -78,7 +78,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 2.  **Create VPC**をクリックします。**VPC settings**ページで以下の情報を入力します。
 
-    1.  **名前**を入力します (例: `Kafka VPC` )。
+    1.  **Name**を入力します (例: `Kafka VPC` )。
 
     2.  TiDB Cloudでプライベート リンク接続を設定するリージョンを選択します。
 
@@ -118,7 +118,7 @@ Kafka VPC を作成するには、次の手順を実行します。
     -   **インスタンスとイメージ**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
     -   **Key pair**:再利用`kafka-vpc-key-pair` 。
     -   **Instance Name**: `broker-node1`
-    -   **Security Group**: Kafka VPCからのすべてのTCPを許可する新しいセキュリティグループを作成します。本番環境では、安全性を考慮してルールを絞り込むことができます。インバウンドルール: -**プロトコル**: `TCP` -**Port range**: `All` -**ソース**: `10.0.0.0/16`
+    -   **Security Group**: Kafka VPCからのすべてのTCPを許可する新しいセキュリティグループを作成します。本番環境では、安全性を考慮してルールを絞り込むことができます。インバウンドルール: -**Protocol**: `TCP` -**Port range**: `All` -**Source**: `10.0.0.0/16`
 
 -   vSwitch `broker-ap-southeast-1b`のブローカー 2
 
@@ -126,7 +126,7 @@ Kafka VPC を作成するには、次の手順を実行します。
     -   **インスタンスとイメージ**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
     -   **Key pair**:再利用`kafka-vpc-key-pair` 。
     -   **Instance Name**: `broker-node2`
-    -   **Security Group**: Kafka VPCからのすべてのTCPを許可する新しいセキュリティグループを作成します。本番環境では、安全性を考慮してルールを絞り込むことができます。インバウンドルール: -**プロトコル**: `TCP` -**Port range**: `All` -**ソース**: `10.0.0.0/16`
+    -   **Security Group**: Kafka VPCからのすべてのTCPを許可する新しいセキュリティグループを作成します。本番環境では、安全性を考慮してルールを絞り込むことができます。インバウンドルール: -**Protocol**: `TCP` -**Port range**: `All` -**Source**: `10.0.0.0/16`
 
 -   vSwitch `broker-ap-southeast-1c`のブローカー 3
 
@@ -134,7 +134,7 @@ Kafka VPC を作成するには、次の手順を実行します。
     -   **インスタンスとイメージ**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
     -   **Key pair**:再利用`kafka-vpc-key-pair` 。
     -   **Instance Name**: `broker-node3`
-    -   **Security Group**: Kafka VPCからのすべてのTCPを許可する新しいセキュリティグループを作成します。本番環境では、安全性を考慮してルールを絞り込むことができます。インバウンドルール: -**プロトコル**: `TCP` -**Port range**: `All` -**ソース**: `10.0.0.0/16`
+    -   **Security Group**: Kafka VPCからのすべてのTCPを許可する新しいセキュリティグループを作成します。本番環境では、安全性を考慮してルールを絞り込むことができます。インバウンドルール: -**Protocol**: `TCP` -**Port range**: `All` -**Source**: `10.0.0.0/16`
 
 **2.3. Kafkaランタイムバイナリの準備**
 

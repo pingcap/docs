@@ -40,7 +40,7 @@ TiDB Cloudの確認メールが届きます。登録プロセス全体を完了�
 
 ### サインアウト {#sign-out}
 
-TiDB Cloudコンソールの左下隅で、<mdsvgicon name="icon-top-account-settings">**ログアウト**を選択します。</mdsvgicon>
+TiDB Cloudコンソールの左下隅で、<mdsvgicon name="icon-top-account-settings">**Logout**を選択します。</mdsvgicon>
 
 ## パスワードポリシー {#password-policy}
 
@@ -76,7 +76,7 @@ TiDB Cloudは、登録ユーザーに対してデフォルトのパスワード�
 
 2.  **Account Settings**をクリックします。
 
-3.  **パスワード**セクションで、 **Change Password**をクリックし、 TiDB Cloudからの電子メールを確認してパスワードをリセットします。
+3.  **Password**セクションで、 **Change Password**をクリックし、 TiDB Cloudからの電子メールを確認してパスワードをリセットします。
 
 ## 多要素認証を管理する（オプション） {#manage-multi-factor-authentication-optional}
 
@@ -93,7 +93,7 @@ TiDB Cloudは、登録ユーザーに対してデフォルトのパスワード�
 
 2.  **Account Settings**をクリックします。
 
-3.  **Multi-Factor Authentication**セクションで、 **有効にする**をクリックします。
+3.  **Multi-Factor Authentication**セクションで、 **Enable**をクリックします。
 
 4.  本人確認のため、アカウントのパスワードを入力してください。
 
@@ -114,7 +114,7 @@ TiDB Cloudは、登録ユーザーに対してデフォルトのパスワード�
 
 2.  **Account Settings**をクリックします。
 
-3.  **Multi-Factor Authentication**セクションで、 **「無効にする」を**クリックします。
+3.  **Multi-Factor Authentication**セクションで、 **Disable**をクリックします。
 
 4.  操作を確認するには、アカウントのパスワードと MFA 認証コードを入力します。
 

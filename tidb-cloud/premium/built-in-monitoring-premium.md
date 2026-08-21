@@ -9,7 +9,7 @@ TiDB Cloudは、 TiDB Cloud Premiumインスタンスの標準メトリック一
 
 ## メトリクスページを確認する {#view-the-metrics-page}
 
-**メトリクス**ページでメトリクスを表示するには、以下の手順に従ってください。
+**Metrics**ページでメトリクスを表示するには、以下の手順に従ってください。
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Premiumインスタンスの名前をクリックすると、その概要ページに移動します。
 
@@ -17,7 +17,7 @@ TiDB Cloudは、 TiDB Cloud Premiumインスタンスの標準メトリック一
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  左側のナビゲーションペインで、 **[監視]** &gt; **[メトリクス]**をクリックします。
+2.  左側のナビゲーションペインで、 **Monitoring** &gt; **Metrics**をクリックします。
 
 ## メトリクス保持ポリシー {#metrics-retention-policy}
 
@@ -25,7 +25,7 @@ TiDB Cloud Premiumインスタンスの場合、メトリクスデータは7日�
 
 ## TiDB Cloud Premiumインスタンスのメトリクス {#metrics-for-tidb-cloud-premium-instances}
 
-以下のセクションでは、TiDB Cloud Premiumインスタンスの**メトリクス**ページに表示されるメトリクスについて説明します。
+以下のセクションでは、TiDB Cloud Premiumインスタンスの**Metrics**ページに表示されるメトリクスについて説明します。
 
 ### 概要 {#overview}
 

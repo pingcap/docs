@@ -36,138 +36,138 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**接続**をクリックしてください。接続ダイアログが表示されます。
+2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
 3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **接続タイプ**は`Public`に設定されています。
-    -   **ブランチ**は`main`に設定されています。
-    -   **「接続」は**`Navicat`に設定されています。
-    -   お使いの環境に合った**オペレーティングシステム**を選択してください。
+    -   **Connection Type**は`Public`に設定されています。
+    -   **Branch**は`main`に設定されています。
+    -   **Connect With**は`Navicat`に設定されています。
+    -   お使いの環境に合った**Operating System**を選択してください。
 
-4.  **「パスワード生成」をクリックすると、ランダムなパスワード**が生成されます。
+4.  **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
 
     > **Tip:**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **パスワードをリセット**をクリックして新しいパスワードを生成できます。
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **Reset Password**をクリックして新しいパスワードを生成できます。
 
-5.  Navicat Premiumを起動し、左上隅の**接続**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDBを**ダブルクリックします。
+5.  Navicat Premiumを起動し、左上隅の**Connection**をクリックし、**Vendor Filter**リストから**PingCAP**を選択し、右側のパネルで**TiDB**をダブルクリックします。
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
-6.  **新規接続（TiDB）**ダイアログで、以下の接続パラメータを設定します。
+6.  **New Connection (TiDB)**ダイアログで、以下の接続パラメータを設定します。
 
-    -   **接続名**：この接続に分かりやすい名前を付けてください。
-    -   **ホスト**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
-    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
-    -   **ユーザー名**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
-    -   **パスワード**：手順4で作成したパスワードを入力してください。
+    -   **Connection Name**：この接続に分かりやすい名前を付けてください。
+    -   **Host**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    -   **Port**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    -   **User Name**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
+    -   **Password**：手順4で作成したパスワードを入力してください。
 
     ![Navicat: configure connection general panel for TiDB Cloud Starter](/media/develop/navicat-premium-connection-config-serverless-general.png)
 
-7.  **SSL**タブをクリックし、 **SSLを使用** 、 **認証を使用** 、 **CAに対してサーバー証明書を検証する**のチェックボックスを選択します。次に、 TiDB Cloud接続ダイアログから`CA`ファイルを選択し、 **CA証明書**フィールドに貼り付けます。
+7.  **SSL**タブをクリックし、 **Use SSL** 、 **Use authentication** 、 **Verify server certificate against CA**のチェックボックスを選択します。次に、 TiDB Cloud接続ダイアログから`CA`ファイルを選択し、 **CA Certificate**フィールドに貼り付けます。
 
     ![Navicat: configure connection SSL panel for TiDB Cloud Starter](/media/develop/navicat-premium-connection-config-serverless-ssl.png)
 
-8.  **接続テスト**をクリックして、対象のTiDB Cloud StarterまたはEssentialインスタンスへの接続を検証してください。
+8.  **Test Connection**をクリックして、対象のTiDB Cloud StarterまたはEssentialインスタンスへの接続を検証してください。
 
-9.  接続テストが成功すると、 **「接続成功」という**メッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
+9.  接続テストが成功すると、 **Connection Successful**というメッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
 
 </div>
 <div label="TiDB Cloud Premium">
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+2.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
 
-3.  **ネットワークの**ページで、 **[パブリックエンドポイント**を**有効にする]**をクリックし、次に**[IP アドレスを追加]**をクリックします。
+3.  **Networking**ページで、 **Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
 
     クライアントのIPアドレスがアクセスリストに追加されていることを確認してください。
 
-4.  左側のナビゲーションペインで**概要**をクリックすると、インスタンスの概要ページに戻ります。
+4.  左側のナビゲーションペインで**Overview**をクリックすると、インスタンスの概要ページに戻ります。
 
-5.  右上隅の**接続**をクリックしてください。接続ダイアログが表示されます。
+5.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-6.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**パブリック**を選択します。
+6.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
 
     -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
-    -   まだパスワードを設定していない場合は、ダイアログの**ルートパスワードを設定**をクリックしてください。
-    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA証明書**をクリックしてダウンロードしてください。
-    -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+    -   まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
+    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
+    -   **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
-7.  Navicat Premiumを起動し、左上隅の**接続**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDBを**ダブルクリックします。
+7.  Navicat Premiumを起動し、左上隅の**Connect**をクリックし、**Vendor Filter**リストから**PingCAP**を選択し、右側のパネルで**TiDB**をダブルクリックします。
 
-8.  **新規接続（TiDB）**ダイアログで、以下の接続パラメータを設定します。
+8.  **New Connection (TiDB)**ダイアログで、以下の接続パラメータを設定します。
 
-    -   **接続名**：この接続に分かりやすい名前を付けてください。
-    -   **ホスト**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
-    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
-    -   **ユーザー名**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
-    -   **パスワード**： TiDB Cloud Premiumインスタンスのパスワードを入力してください。
+    -   **Connection Name**：この接続に分かりやすい名前を付けてください。
+    -   **Host**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    -   **Port**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    -   **User Name**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
+    -   **Password**： TiDB Cloud Premiumインスタンスのパスワードを入力してください。
 
-9.  **SSL**タブをクリックし、 **SSLを使用する**チェックボックスをオフにします。
+9.  **SSL**タブをクリックし、 **Use SSL**チェックボックスをオフにします。
 
-10. **接続テスト**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
+10. **Test Connection**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
 
-11. 接続テストが成功すると、 **「接続成功」という**メッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
+11. 接続テストが成功すると、 **Connection Successful**というメッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
 
-2.  右上隅の**接続**をクリックしてください。接続ダイアログが表示されます。
+2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**パブリック**を選択します。
+3.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
 
-    IP アクセス リストを設定していない場合は、最初の接続の前に、 **[IP アクセス リストの設定] をクリックするか、「IP アクセス リストを設定する」**の手順に従って[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
+    IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
+    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
-4.  **CA証明書をダウンロードするには、「CA証明書**」をクリックしてください。
+4.  CA証明書をダウンロードするには、 **CA cert**をクリックしてください。
 
-5.  Navicat Premiumを起動し、左上隅の**接続**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDBを**ダブルクリックします。
+5.  Navicat Premiumを起動し、左上隅の**Connect**をクリックし、**Vendor Filter**リストから**PingCAP**を選択し、右側のパネルで**TiDB**をダブルクリックします。
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
-6.  **新規接続（TiDB）**ダイアログで、以下の接続パラメータを設定します。
+6.  **New Connection (TiDB)**ダイアログで、以下の接続パラメータを設定します。
 
-    -   **接続名**：この接続に分かりやすい名前を付けてください。
-    -   **ホスト**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
-    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
-    -   **ユーザー名**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
-    -   **パスワード**： TiDB Cloud Dedicatedクラスタのパスワードを入力してください。
+    -   **Connection Name**：この接続に分かりやすい名前を付けてください。
+    -   **Host**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    -   **Port**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    -   **User Name**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
+    -   **Password**： TiDB Cloud Dedicatedクラスタのパスワードを入力してください。
 
     ![Navicat: configure connection general panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-general.png)
 
-7.  **SSL**タブをクリックし、 **SSLを使用する** 、 **認証を使用する**、 **CAに対してサーバー証明書を検証する**のチェックボックスをオンにします。次に、手順4でダウンロードしたCAファイルを**CA証明書**フィールドで選択します。
+7.  **SSL**タブをクリックし、 **Use SSL** 、 **Use authentication**、 **Verify server certificate against CA**チェックボックスをオンにします。次に、手順4でダウンロードしたCAファイルを**CA Certificate**フィールドに選択します。
 
     ![Navicat: configure connection SSL panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-ssl.png)
 
 8.  TiDB Cloud Dedicatedクラスターへの接続を検証するために、**接続テストを実行します**。
 
-9.  接続テストが成功すると、 **「接続成功」という**メッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
+9.  接続テストが成功すると、 **Connection Successful**というメッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
 
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
-1.  Navicat Premiumを起動し、左上隅の**接続**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDBを**ダブルクリックします。
+1.  Navicat Premiumを起動し、左上隅の**Connection**をクリックし、**Vendor Filter**リストから**PingCAP**を選択し、右側のパネルで**TiDB**をダブルクリックします。
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
-2.  **新規接続（TiDB）**ダイアログで、以下の接続パラメータを設定します。
+2.  **New Connection (TiDB)**ダイアログで、以下の接続パラメータを設定します。
 
-    -   **接続名**：この接続に分かりやすい名前を付けてください。
-    -   **ホスト**：TiDB Self-ManagedクラスタのIPアドレスまたはドメイン名を入力してください。
-    -   **ポート**：TiDB Self-Managedクラスタのポート番号を入力してください。
-    -   **ユーザー名**：TiDBに接続するために使用するユーザー名を入力してください。
-    -   **パスワード**：TiDBに接続するために使用するパスワードを入力してください。
+    -   **Connection Name**：この接続に分かりやすい名前を付けてください。
+    -   **Host**：TiDB Self-ManagedクラスタのIPアドレスまたはドメイン名を入力してください。
+    -   **Port**：TiDB Self-Managedクラスタのポート番号を入力してください。
+    -   **User Name**：TiDBに接続するために使用するユーザー名を入力してください。
+    -   **Password**：TiDBに接続するために使用するパスワードを入力してください。
 
     ![Navicat: configure connection general panel for self-hosted TiDB](/media/develop/navicat-premium-connection-config-self-hosted-general.png)
 
-3.  **接続テスト**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
+3.  **Test Connection**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
 
-4.  接続テストが成功すると、 **「接続成功」という**メッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
+4.  接続テストが成功すると、 **Connection Successful**というメッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
 
 </div>
 </SimpleTab>

@@ -72,7 +72,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     -   [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)クラスターのクラスター レベルで**統合された統合**ページを追加します。
 
-        -   クラスターの**統合**ページで、すべてのサードパーティ統合を統合します。以下のリストは、ユースケース別にまとめたこれらの統合の概要です。
+        -   クラスターの**Integrations**ページで、すべてのサードパーティ統合を統合します。以下のリストは、ユースケース別にまとめたこれらの統合の概要です。
             -   **デプロイ**: AWS Lambda、Cloudflare Workers、Gitpod、Netlify、Terraform、WordPress
             -   **データ**: Airbyte、Amazon AppFlow、dbt Labs、Looker Studio、n8n、Zapier
             -   **GUI** : DBeaver、JetBrains DataGrip、MySQL Workbench、Navicat、ProxySQL、Visual Studio Code
@@ -82,7 +82,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
             -   **Node.js** : mysql.js、Next.js、node-mysql2、Prisma、Sequelize、TypeORM
             -   **Ruby** : mysql2、Rails
         -   検出可能性を向上させるために、統合エントリ[Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)と[AWS Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md)クラスター レベルに移動します。
-        -   新しい統合をリクエストするための**統合の提案**を追加します。
+        -   新しい統合をリクエストするための**Suggest Integration**を追加します。
 
 **APIの変更**
 
@@ -444,7 +444,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
     -   **クラスタ**: TiDB Cloud Dedicated クラスターをより柔軟に管理します。
     -   **リージョン**: TiDB Cloud Dedicated クラスターをデプロイできるすべてのクラウド リージョンを表示します。
     -   **プライベート エンドポイント接続**: クラスターの安全でプライベートな接続を設定します。
-    -   **インポート**: クラスターのデータ インポート タスクを管理します。
+    -   **Import**: クラスターのデータ インポート タスクを管理します。
 
     詳細については[TiDB Cloud Dedicated API](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated/)を参照してください。
 
@@ -452,8 +452,8 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     -   **クラスタ**: TiDB Cloud Starter または Essential クラスターをより柔軟に管理します。
     -   **ブランチ**: クラスターのブランチを管理します。
-    -   **エクスポート**: クラスターのデータ エクスポート タスクを管理します。
-    -   **インポート**: クラスターのデータ インポート タスクを管理します。
+    -   **Export**: クラスターのデータ エクスポート タスクを管理します。
+    -   **Import**: クラスターのデータ インポート タスクを管理します。
 
     詳細については[TiDB Cloud Starterと基本 API](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless/)を参照してください。
 
@@ -536,7 +536,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)データベース監査ログ（ベータ版）がリクエストに応じて利用可能になりました。この機能を使用すると、ユーザーアクセスの詳細（実行されたSQL文など）の履歴をログに記録できます。
 
-    この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**？**をクリックし、 **サポートをリクエスト**をクリックします。次に、「説明」フィールドに「 TiDB Cloud Serverless データベース監査ログの申請」と入力し、 **「送信」を**クリックします。
+    この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**？**をクリックし、 **Request Support**をクリックします。次に、「説明」フィールドに「 TiDB Cloud Serverless データベース監査ログの申請」と入力し、 **Submit**をクリックします。
 
 -   顧客管理の暗号化キー (CMEK) を使用した保存時の暗号化が、AWS でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで一般提供 (GA) されました。
 

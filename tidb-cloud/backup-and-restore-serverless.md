@@ -20,7 +20,7 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  左側のナビゲーションペインで、 **[データ]** &gt; **[バックアップ]**をクリックします。
+2.  左側のナビゲーションペインで、 **Data** &gt; **Backup**をクリックします。
 
 ## 自動バックアップ {#automatic-backups}
 
@@ -52,13 +52,13 @@ TiDB Cloudはデータを自動的にバックアップするため、災害発�
 
 TiDB Cloud Essentialインスタンスのバックアップ時間を設定するには、以下の手順を実行します。
 
-1.  TiDB Cloud StarterまたはEssentialインスタンスの[**バックアップ**](#view-the-backup-page)ページに移動します。
+1.  TiDB Cloud StarterまたはEssentialインスタンスの[**Backup**](#view-the-backup-page)ページに移動します。
 
 2.  **Backup Setting**をクリックしてください。すると**Backup Setting**ウィンドウが開きます。ここで、必要に応じて自動バックアップの設定を構成できます。
 
 3.  **Backup Time**で、毎日のバックアップの開始時刻を設定します。
 
-4.  **確認**をクリックしてください。
+4.  **Confirm**をクリックしてください。
 
 ## 復元する {#restore}
 
@@ -93,9 +93,9 @@ TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンス�
 
 新しいTiDB Cloud StarterまたはEssentialインスタンスにデータを復元するには、以下の手順に従ってください。
 
-1.  TiDB Cloud StarterまたはEssentialインスタンスの[**バックアップ**](#view-the-backup-page)ページに移動します。
+1.  TiDB Cloud StarterまたはEssentialインスタンスの[**Backup**](#view-the-backup-page)ページに移動します。
 
-2.  **復元**をクリックしてください。
+2.  **Restore**をクリックしてください。
 
 3.  **Restore Mode**では、特定のバックアップから復元するか、任意の時点から復元するかを選択できます。
 
@@ -125,9 +125,9 @@ TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンス�
     -   TiDB Cloud Starterインスタンスの場合、 [無料割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)よりも多くのリソースが必要な場合は、毎月の支出制限を設定してください。
     -   TiDB Cloud Essentialインスタンスの場合、最小RCUと最大RCUを設定し、必要に応じて詳細設定を構成してください。
 
-6.  **復元**をクリックして復元プロセスを開始してください。
+6.  **Restore**をクリックして復元プロセスを開始してください。
 
-復元処理が開始されると、 TiDB Cloud StarterまたはEssentialインスタンスのステータスが**復元中**に変わります。復元が完了し、ステータスが**利用可能**に変わるまで、 TiDB Cloud StarterまたはEssentialインスタンスは利用できません。
+復元処理が開始されると、 TiDB Cloud StarterまたはEssentialインスタンスのステータスが**Restoring**に変わります。復元が完了し、ステータスが**Available**に変わるまで、 TiDB Cloud StarterまたはEssentialインスタンスは利用できません。
 
 ### ごみ箱から復元 {#restore-from-recycle-bin}
 
@@ -151,9 +151,9 @@ TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンス�
     >
     > TiDB Cloud Essentialインスタンス**にバックアップがない**場合、削除されたインスタンスはごみ箱に表示されません。
 
-4.  復元したいバックアップの行で、 **...**をクリックし、次に**復元**を選択します。
+4.  復元したいバックアップの行で、 **...**をクリックし、次に**Restore**を選択します。
 
-5.  **[復元]**ページで、[新しいインスタンスに復元する](#restore-to-a-new-instance)と同じ手順に従って、バックアップを新しいインスタンスに復元します。
+5.  **Restore**ページで、[新しいインスタンスに復元する](#restore-to-a-new-instance)と同じ手順に従って、バックアップを新しいインスタンスに復元します。
 
 ## 制限事項 {#limitations}
 

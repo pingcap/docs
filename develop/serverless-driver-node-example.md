@@ -42,7 +42,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-node-example/']
 
 TiDB Cloud Serverless Driverは、CommonJSモジュールとESモジュールの両方をサポートしています。以下の手順では、ESモジュールの使用例を示します。
 
-1.  TiDB Cloud Starterインスタンスの概要ページで、右上隅の**接続**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
+1.  TiDB Cloud Starterインスタンスの概要ページで、右上隅の**Connect**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
 
     ```
    mysql://[username]:[password]@[host]/[database]

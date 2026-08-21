@@ -17,7 +17,7 @@ TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用して対象の組織に切り替えます。
 2.  左側のナビゲーション ペインで、 **[Console Audit Logging]**をクリックします。
-3.  右上隅の**[設定]**をクリックし、コンソール監査ログを有効にして、 **[更新]**をクリックします。
+3.  右上隅の**Settings**をクリックし、コンソール監査ログを有効にして、 **Update**をクリックします。
 
 ## コンソール監査ログを無効にする {#disable-console-audit-logging}
 
@@ -25,7 +25,7 @@ TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用して対象の組織に切り替えます。
 2.  左側のナビゲーション ペインで、 **[Console Audit Logging]**をクリックします。
-3.  右上隅の**[設定]**をクリックし、コンソール監査ログを無効にして、 **[更新]**をクリックします。
+3.  右上隅の**Settings**をクリックし、コンソール監査ログを無効にして、 **Update**をクリックします。
 
 ## コンソール監査ログを確認する {#view-console-audit-logs}
 
@@ -39,7 +39,7 @@ TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー�
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用して対象の組織に切り替えます。
 2.  左側のナビゲーション ペインで、 **[Console Audit Logging]**をクリックします。
 3.  監査ログの特定の部分を取得するには、イベントの種類、操作ステータス、および時間範囲をフィルタリングできます。
-4.  (オプション) さらにフィールドをフィルターするには、 **Advanced filter**をクリックし、さらにフィルターを追加して、 **[適用]**をクリックします。
+4.  (オプション) さらにフィールドをフィルターするには、 **Advanced filter**をクリックし、さらにフィルターを追加して、 **Apply**をクリックします。
 5.  ログの行をクリックすると、右側のペインに詳細情報が表示されます。
 
 ## コンソール監査ログをエクスポートする {#export-console-audit-logs}

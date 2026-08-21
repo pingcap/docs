@@ -44,8 +44,8 @@ Prometheus サービスでTiDB Cloudのメトリクスを読み取るように�
 <div label="Cluster-level Prometheus integration">
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[統合]**をクリックします。
-3.  **統合**ページで、 **Integration to Prometheus**をクリックします。
+2.  左側のナビゲーションペインで、 **Settings** &gt; **Integrations**をクリックします。
+3.  **Integrations**ページで、 **Integration to Prometheus**をクリックします。
 4.  **Add File**をクリックすると、現在のクラスター用の`scrape_config`ファイルが生成されて表示されます。
 5.  `scrape_config`ファイルの内容のコピーを作成して、後で使用してください。
 
@@ -55,7 +55,7 @@ Prometheus サービスでTiDB Cloudのメトリクスを読み取るように�
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 3.  左側のナビゲーションペインで、 **Project Settings**の下にある**Integrations**をクリックします。
-4.  **統合**ページで、 **Integration to Prometheus (BETA)**をクリックします。
+4.  **Integrations**ページで、 **Integration to Prometheus (BETA)**をクリックします。
 5.  **Add File**をクリックすると、現在のプロジェクトのscrape_configファイルが生成されて表示されます。
 6.  `scrape_config`ファイルの内容のコピーを作成して、後で使用できるようにします。
 
@@ -74,7 +74,7 @@ Prometheus サービスでTiDB Cloudのメトリクスを読み取るように�
 
 2.  Prometheus の設定ファイルで、 `scrape_configs`セクションを探し、 TiDB Cloudから取得した`scrape_config`ファイルの内容をそのセクションにコピーします。
 
-3.  Prometheusサービスで、 **[ステータス]** &gt; **[ターゲット]**を確認し、新しい`scrape_config`ファイルが読み込まれていることを確認してください。読み込まれていない場合は、Prometheusサービスを再起動する必要があるかもしれません。
+3.  Prometheusサービスで、 **Status** &gt; **[ターゲット]**を確認し、新しい`scrape_config`ファイルが読み込まれていることを確認してください。読み込まれていない場合は、Prometheusサービスを再起動する必要があるかもしれません。
 
 ### ステップ3. Grafana GUIダッシュボードを使用してメトリクスを視覚化する {#step-3-use-grafana-gui-dashboards-to-visualize-the-metrics}
 
@@ -102,7 +102,7 @@ Grafana の使用方法の詳細については、 [Grafanaのドキュメント
 1.  [ステップ1](#step-1-get-a-scrape_config-file-for-prometheus)に従って、Prometheus 用の新しい`scrape_config`ファイルを作成します。
 2.  新しいファイルの内容をPrometheusの設定ファイルに追加してください。
 3.  Prometheus サービスがTiDB Cloudから引き続き読み取れることを確認したら、Prometheus 設定ファイルから古い`scrape_config`ファイルの内容を削除します。
-4.  プロジェクトまたはクラスターの**統合**ページで、対応する古い`scrape_config`ファイルを削除して、他のユーザーがTiDB Cloud Prometheus エンドポイントから読み取るために使用できないようにします。
+4.  プロジェクトまたはクラスターの**Integrations**ページで、対応する古い`scrape_config`ファイルを削除して、他のユーザーがTiDB Cloud Prometheus エンドポイントから読み取るために使用できないようにします。
 
 ## Prometheusで利用可能なメトリクス {#metrics-available-to-prometheus}
 

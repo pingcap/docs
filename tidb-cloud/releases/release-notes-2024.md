@@ -150,7 +150,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの接続エクスペリエンスを向上させます。
 
-    -   TiDB Cloud Dedicatedユーザーがよりスムーズで効率的な接続体験を得られるよう、**接続**ダイアログのインターフェースを改訂します。
+    -   TiDB Cloud Dedicatedユーザーがよりスムーズで効率的な接続体験を得られるよう、**Connect**ダイアログのインターフェースを改訂します。
     -   クラスターのネットワーク設定を簡素化するために、新しいクラスターレベルの**ネットワーク設定**ページを導入しました。
     -   **セキュリティ設定**ページを新しい**パスワード設定**ページに置き換え、IPアクセスリストの設定を新しい**ネットワーク**ページに移動します。
 
@@ -158,7 +158,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 -   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデータインポートエクスペリエンスを向上させます。
 
-    -   **インポート**ページのレイアウトをより分かりやすいものに改善する。
+    -   **Import**ページのレイアウトをより分かりやすいものに改善する。
     -   TiDB Cloud Serverless クラスターとTiDB Cloud Dedicatedクラスターのインポート手順を統一します。
     -   AWSロールARNの作成プロセスを簡素化し、接続設定を容易にします。
 
@@ -168,7 +168,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **コンソールの変更**
 
--   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで新しいプライベートエンドポイント接続を作成する際のユーザーエクスペリエンスを向上させるため、 **プライベートエンドポイント接続の作成**ページのレイアウトを改良します。
+-   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで新しいプライベートエンドポイント接続を作成する際のユーザーエクスペリエンスを向上させるため、 **Create Private Endpoint Connection**ページのレイアウトを改良します。
 
     詳細については、 [AWSのプライベートエンドポイントを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)および[Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
 
@@ -188,7 +188,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)のクラスタサイズ構成エクスペリエンスを向上させます。
 
-    TiDB Cloud Dedicatedクラスターの [**クラスタを作成する**](/tidb-cloud/create-tidb-cluster.md)ページと「クラスター [**クラスタの変更**](/tidb-cloud/scale-tidb-cluster.md)ページの**クラスタサイズ**セクションのレイアウトを調整します。さらに、 **クラスタサイズ**セクションには、適切なクラスター サイズの選択に役立つノード サイズの推奨ドキュメントへのリンクが含まれるようになりました。
+    TiDB Cloud Dedicatedクラスターの [**Create Cluster**](/tidb-cloud/create-tidb-cluster.md)ページと「クラスター [**Modify Cluster**](/tidb-cloud/scale-tidb-cluster.md)ページの**Cluster Size**セクションのレイアウトを調整します。さらに、 **Cluster Size**セクションには、適切なクラスター サイズの選択に役立つノード サイズの推奨ドキュメントへのリンクが含まれるようになりました。
 
 ## 2024年7月23日 {#july-23-2024}
 
@@ -214,7 +214,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 -   システム[システムステータス](https://status.tidbcloud.com/)ページを強化して、 TiDB Cloudシステムの健全性とパフォーマンスについてのより良い洞察を提供します。
 
-    アクセスするには、 [https://status.tidbcloud.com/](https://status.tidbcloud.com/)直接アクセスするか、 [TiDB Cloudコンソール](https://tidbcloud.com)を介してナビゲートしてください。右下隅の**？**をクリックして**システムステータス**を選択します。
+    アクセスするには、 [https://status.tidbcloud.com/](https://status.tidbcloud.com/)直接アクセスするか、 [TiDB Cloudコンソール](https://tidbcloud.com)を介してナビゲートしてください。右下隅の**？**をクリックして**System Status**を選択します。
 
 **コンソールの変更**
 
@@ -382,9 +382,9 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **コンソールの変更**
 
--   [**請求**](https://tidbcloud.com/org-settings/billing/payments)ページに**コストエクスプローラー**タブを導入します。このタブは、組織のコストレポートを時系列で分析およびカスタマイズするための直感的なインターフェースを提供します。
+-   [**Billing**](https://tidbcloud.com/org-settings/billing/payments)ページに**Cost Explorer**タブを導入します。このタブは、組織のコストレポートを時系列で分析およびカスタマイズするための直感的なインターフェースを提供します。
 
-    この機能を使用するには、組織の**請求**ページに移動し、 **コストエクスプローラー**タブをクリックしてください。
+    この機能を使用するには、組織の**Billing**ページに移動し、 **Cost Explorer**タブをクリックしてください。
 
     詳細については、 [コストエクスプローラー](/tidb-cloud/tidb-cloud-billing.md#cost-explorer)を参照してください。
 

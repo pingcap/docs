@@ -119,7 +119,7 @@ AWS CloudFormation を使用して書店プロジェクトを設定するには�
 
     1.  **前提条件**の領域で、 **Choose an existing template**を選択します。
 
-    2.  **Specify template**領域で、 **Upload a template file**を選択し、 **Choose file**をクリックしてテンプレート ファイル (YAML または JSON) をアップロードし、 **[次へ]**をクリックします。
+    2.  **Specify template**領域で、 **Upload a template file**を選択し、 **Choose file**をクリックしてテンプレート ファイル (YAML または JSON) をアップロードし、 **Next**をクリックします。
 
         まだファイルをお持ちでない場合は、 [GitHub](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest)からダウンロードしてください。このファイルには、プロジェクトに必要なリソースを作成するAWS CloudFormationテンプレートが含まれています。
 
@@ -160,7 +160,7 @@ AWS CloudFormation を使用して書店プロジェクトを設定するには�
 
 1.  AWS マネジメント コンソールで[APIゲートウェイサービス](https://console.aws.amazon.com/apigateway)サービスにアクセスし、 `TiDBCloudApiGatewayV2` API をクリックし、左側のペインで**API: TiDBCloudApiGatewayV2**をクリックします。
 
-2.  **概要**ページから`Invoke URL`をコピーしてください。この URL が API エンドポイントとして機能します。
+2.  **Overview**ページから`Invoke URL`をコピーしてください。この URL が API エンドポイントとして機能します。
 
     ![API Gateway Invoke URL](/media/develop/aws-lambda-get-apigateway-invoke-url.png)
 

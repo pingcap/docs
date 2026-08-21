@@ -9,7 +9,7 @@ summary: データ移行時に発生する事前チェックエラー、移行�
 
 ## 事前チェックのエラーと解決策 {#precheck-errors-and-solutions}
 
-このセクションでは、データ移行時の事前チェック エラーと対応する解決策について説明します。これらのエラーは[データ移行を使用してデータを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)ときに**[事前チェック]**ページに表示されます。
+このセクションでは、データ移行時の事前チェック エラーと対応する解決策について説明します。これらのエラーは[データ移行を使用してデータを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)ときに**Precheck**ページに表示されます。
 
 解決策は、使用している上位データベースによって異なります。
 
@@ -70,7 +70,7 @@ TiDB Cloudクラスターでエラーが発生した場合は、ドキュメン�
 
 ### エラーメッセージ：「指定されたパラメータを使用してソースデータベースに接続できませんでした。ソースデータベースが稼働しており、指定されたパラメータを使用して接続できることを確認してください。」 {#error-message-failed-to-connect-to-the-source-database-using-given-parameters-please-make-sure-the-source-database-is-up-and-can-be-connected-using-the-given-parameters}
 
-このエラーは、ソースデータベースへの接続に失敗したことを意味します。ソースデータベースが起動しており、指定されたパラメータを使用して接続できるかどうかを確認してください。ソースデータベースが利用可能であることを確認したら、 **再起動**をクリックしてタスクの復旧を試みてください。
+このエラーは、ソースデータベースへの接続に失敗したことを意味します。ソースデータベースが起動しており、指定されたパラメータを使用して接続できるかどうかを確認してください。ソースデータベースが利用可能であることを確認したら、 **Restart**をクリックしてタスクの復旧を試みてください。
 
 ### 移行タスクが中断され、「ドライバー: 接続不良」または「無効な接続」というエラーが含まれています。 {#the-migration-task-is-interrupted-and-contains-the-error-driver-bad-connection-or-invalid-connection}
 
@@ -82,11 +82,11 @@ TiDB クラスターへの接続に失敗しました。TiDB クラスターが�
 
 ### エラーメッセージ：「TiDBクラスタのストレージが不足しています。TiKVのノードストレージを増やしてください。」 {#error-message-tidb-cluster-storage-is-not-enough-please-increase-the-node-storage-of-tikv}
 
-TiDB クラスターのストレージが不足しています。 [TiKVノードのストレージを増やす](/tidb-cloud/scale-tidb-cluster.md#change-storage)から、 **再起動**をクリックしてタスクを再開することをお勧めします。
+TiDB クラスターのストレージが不足しています。 [TiKVノードのストレージを増やす](/tidb-cloud/scale-tidb-cluster.md#change-storage)から、 **Restart**をクリックしてタスクを再開することをお勧めします。
 
 ### エラーメッセージ：「ソースデータベースへの接続に失敗しました。データベースが利用可能か、または最大接続数に達していないかを確認してください。」 {#error-message-failed-to-connect-to-the-source-database-please-check-whether-the-database-is-available-or-the-maximum-connections-have-been-reached}
 
-ソースデータベースへの接続に失敗しました。ソースデータベースが起動しているか、データベース接続数が上限に達していないか、ジョブで指定されたパラメータを使用して接続できるかを確認してください。ソースデータベースが利用可能であることを確認したら、 **再起動**をクリックしてジョブを再開してください。
+ソースデータベースへの接続に失敗しました。ソースデータベースが起動しているか、データベース接続数が上限に達していないか、ジョブで指定されたパラメータを使用して接続できるかを確認してください。ソースデータベースが利用可能であることを確認したら、 **Restart**をクリックしてジョブを再開してください。
 
 ### エラーメッセージ：「エラー 1273: 新しい照合順序が有効になっている場合、サポートされていない照合順序です: 'utf8mb4_0900_ai_ci'」 {#error-message-error-1273-unsupported-collation-when-new-collation-is-enabled-utf8mb4-0900-ai-ci}
 
@@ -108,7 +108,7 @@ TiDB クラスターのストレージが不足しています。 [TiKVノード
 GRANT LOCK TABLES ON *.* TO 'dm_source_user'@'%';
 ```
 
-その後、 **再起動**をクリックしてタスクを再開してください。
+その後、 **Restart**をクリックしてタスクを再開してください。
 
 ## アラート {#alerts}
 

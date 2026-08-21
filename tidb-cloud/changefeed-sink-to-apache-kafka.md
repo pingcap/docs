@@ -124,7 +124,7 @@ Apache KafkaサービスにパブリックIPアクセスを提供する場合は
 
 <div label="VPC Peering">
 
-現在、 TiDB Cloud PremiumインスタンスのVPCピアリング機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**？**をクリックし、 次に**Support Tickets**をクリックし[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **説明**フィールドに「TiDB Cloud PremiumインスタンスのVPCピアリングの申請」と入力して、 **「送信」を**クリックします。
+現在、 TiDB Cloud PremiumインスタンスのVPCピアリング機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**？**をクリックし、 次に**Support Tickets**をクリックし[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **Description**フィールドに「TiDB Cloud PremiumインスタンスのVPCピアリングの申請」と入力して、 **Submit**をクリックします。
 
 </div>
 </SimpleTab>
@@ -142,7 +142,7 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 ## ステップ1. Apache KafkaのChangefeedページを開きます。 {#step-1-open-the-changefeed-page-for-apache-kafka}
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
-2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[変更フィード]**をクリックします。
+2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の概要ページに移動し、左側のナビゲーション ペインで**Data** &gt; **Changefeed**をクリックします。
 3.  **Create Changefeed**をクリックし、**宛先**として**Kafka**を選択します。
 
 ## ステップ2. changefeedターゲットを設定する {#step-2-configure-the-changefeed-target}
@@ -154,18 +154,18 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
 1.  **Connectivity Method**で**VPC Peering**または**Public IP**を選択し、Kafkaブローカーのエンドポイントを入力します。複数のエンドポイントはカンマ`,`で区切ることができます。
 
-2.  Kafkaの認証設定に応じて、**認証**オプションを選択してください。
+2.  Kafkaの認証設定に応じて、**Authentication**オプションを選択してください。
 
-    -   Kafkaで認証が必要ない場合は、デフォルトオプションの**「無効」の**ままにしてください。
-    -   Kafkaで認証が必要な場合は、該当する認証タイプを選択し、認証に使用するKafkaアカウントの**user name**と**パスワード**を入力してください。
+    -   Kafkaで認証が必要ない場合は、デフォルトオプションの**Disable**のままにしてください。
+    -   Kafkaで認証が必要な場合は、該当する認証タイプを選択し、認証に使用するKafkaアカウントの**user name**と**password**を入力してください。
 
 3.  **Kafka Version**を選択してください。どのバージョンを使用すればよいかわからない場合は、 **Kafka v2**を使用してください。
 
-4.  この変更フィード内のデータの**圧縮**タイプを選択してください。
+4.  この変更フィード内のデータの**Compression**タイプを選択してください。
 
 5.  Kafkaで**TLS Encryption**オプションを有効にしてください。
 
-6.  **次へ**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
+6.  **Next**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
 
 </div>
 <div label="Private Link (AWS)">
@@ -173,14 +173,14 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 1.  **Connectivity Method**で**Private Link**を選択します。
 2.  **Private Endpoint**で、[ネットワーク](#network)セクションで作成したプライベートエンドポイントを選択します。プライベートエンドポイントのAZがKafkaデプロイメントのAZと一致していることを確認してください。
 3.  [ネットワーク](#network)セクションで取得した**Bootstrap Ports**を入力してください。1つのAZにつき少なくとも1つのポートを設定することをお勧めします。複数のポートを指定する場合は、カンマ`,`で区切ってください。
-4.  Kafkaの認証設定に応じて、**認証**オプションを選択してください。
+4.  Kafkaの認証設定に応じて、**Authentication**オプションを選択してください。
 
-    -   Kafkaで認証が必要ない場合は、デフォルトオプションの**「無効」の**ままにしてください。
-    -   Kafkaで認証が必要な場合は、該当する認証タイプを選択し、認証に使用するKafkaアカウントの**user name**と**パスワード**を入力してください。
+    -   Kafkaで認証が必要ない場合は、デフォルトオプションの**Disable**のままにしてください。
+    -   Kafkaで認証が必要な場合は、該当する認証タイプを選択し、認証に使用するKafkaアカウントの**user name**と**password**を入力してください。
 5.  **Kafka Version**を選択してください。どのバージョンを使用すればよいかわからない場合は、 **Kafka v2**を使用してください。
-6.  この変更フィード内のデータの**圧縮**タイプを選択してください。
+6.  この変更フィード内のデータの**Compression**タイプを選択してください。
 7.  Kafkaで**TLS Encryption**オプションを有効にしてください。
-8.  **次へ**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
+8.  **Next**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
 
 </div>
 
@@ -190,14 +190,14 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 1.  **Connectivity Method**で**Private Link**を選択します。
 2.  **Private Endpoint**で、[ネットワーク](#network)セクションで作成したプライベートエンドポイントを選択します。プライベートエンドポイントのAZがKafkaデプロイメントのAZと一致していることを確認してください。
 3.  [ネットワーク](#network)セクションで取得した**Bootstrap Ports**を入力してください。1つのAZにつき少なくとも1つのポートを設定することをお勧めします。複数のポートを指定する場合は、カンマ`,`で区切ってください。
-4.  Kafkaの認証設定に応じて、**認証**オプションを選択してください。
+4.  Kafkaの認証設定に応じて、**Authentication**オプションを選択してください。
 
-    -   Kafkaで認証が必要ない場合は、デフォルトオプションの**「無効」の**ままにしてください。
-    -   Kafkaで認証が必要な場合は、該当する認証タイプを選択し、認証に使用するKafkaアカウントの**user name**と**パスワード**を入力してください。
+    -   Kafkaで認証が必要ない場合は、デフォルトオプションの**Disable**のままにしてください。
+    -   Kafkaで認証が必要な場合は、該当する認証タイプを選択し、認証に使用するKafkaアカウントの**user name**と**password**を入力してください。
 5.  **Kafka Version**を選択してください。どのバージョンを使用すればよいかわからない場合は、 **Kafka v2**を使用してください。
-6.  この変更フィード内のデータの**圧縮**タイプを選択してください。
+6.  この変更フィード内のデータの**Compression**タイプを選択してください。
 7.  Kafkaで**TLS Encryption**オプションを有効にしてください。
-8.  **次へ**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
+8.  **Next**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
 
 </div>
 </CustomContent>
@@ -208,14 +208,14 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 1.  **Connectivity Method**で**Private Service Connect**を選択します。
 2.  **Private Endpoint**で、[ネットワーク](#network)セクションで作成したプライベート エンドポイントを選択します。
 3.  [ネットワーク](#network)セクションで取得した**Bootstrap Ports**を入力してください。複数のポートを指定することをお勧めします。複数のポートを区切るには、カンマ`,`を使用できます。
-4.  Kafkaの認証設定に応じて、**認証**オプションを選択してください。
+4.  Kafkaの認証設定に応じて、**Authentication**オプションを選択してください。
 
-    -   Kafkaで認証が必要ない場合は、デフォルトオプションの**「無効」の**ままにしてください。
-    -   Kafkaで認証が必要な場合は、該当する認証タイプを選択し、認証に使用するKafkaアカウントの**user name**と**パスワード**を入力してください。
+    -   Kafkaで認証が必要ない場合は、デフォルトオプションの**Disable**のままにしてください。
+    -   Kafkaで認証が必要な場合は、該当する認証タイプを選択し、認証に使用するKafkaアカウントの**user name**と**password**を入力してください。
 5.  **Kafka Version**を選択してください。どのバージョンを使用すればよいかわからない場合は、 **Kafka v2**を使用してください。
-6.  この変更フィード内のデータの**圧縮**タイプを選択してください。
+6.  この変更フィード内のデータの**Compression**タイプを選択してください。
 7.  Kafkaで**TLS Encryption**オプションを有効にしてください。
-8.  **次へ**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
+8.  **Next**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
 9.  TiDB Cloudは**Private Service Connect**用のエンドポイントを作成しますが、これには数分かかる場合があります。
 10. エンドポイントが作成されたら、クラウドプロバイダーのコンソールにログインし、接続要求を承認してください。
 11. [TiDB Cloudコンソール](https://tidbcloud.com)に戻る 接続要求を承認したことを確認してください。TiDB Cloudは接続テストを実行し、テストが成功した場合は次のページに進みます。
@@ -229,14 +229,14 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 1.  **Connectivity Method**で**Private Link**を選択します。
 2.  **Private Endpoint**で、[ネットワーク](#network)セクションで作成したプライベート エンドポイントを選択します。
 3.  [ネットワーク](#network)セクションで取得した**Bootstrap Ports**を入力してください。1つのAZにつき少なくとも1つのポートを設定することをお勧めします。複数のポートを指定する場合は、カンマ`,`で区切ってください。
-4.  Kafkaの認証設定に応じて、**認証**オプションを選択してください。
+4.  Kafkaの認証設定に応じて、**Authentication**オプションを選択してください。
 
-    -   Kafkaで認証が必要ない場合は、デフォルトオプションの**「無効」の**ままにしてください。
-    -   Kafkaで認証が必要な場合は、該当する認証タイプを選択し、認証に使用するKafkaアカウントの**user name**と**パスワード**を入力してください。
+    -   Kafkaで認証が必要ない場合は、デフォルトオプションの**Disable**のままにしてください。
+    -   Kafkaで認証が必要な場合は、該当する認証タイプを選択し、認証に使用するKafkaアカウントの**user name**と**password**を入力してください。
 5.  **Kafka Version**を選択してください。どのバージョンを使用すればよいかわからない場合は、 **Kafka v2**を使用してください。
-6.  この変更フィード内のデータの**圧縮**タイプを選択してください。
+6.  この変更フィード内のデータの**Compression**タイプを選択してください。
 7.  Kafkaで**TLS Encryption**オプションを有効にしてください。
-8.  **次へ**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
+8.  **Next**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
 9.  TiDB Cloudは**Private Link**のエンドポイントを作成しますが、これには数分かかる場合があります。
 10. エンドポイントが作成されたら、 [Azureポータル](https://portal.azure.com/)にログインして接続要求を承認してください。
 11. [TiDB Cloudコンソール](https://tidbcloud.com)に戻る 接続要求を承認したことを確認してください。TiDB Cloudは接続テストを実行し、テストが成功した場合は次のページに進みます。
@@ -283,14 +283,14 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
     TiDB 拡張フィールドの詳細については、 [Avroデータ形式のTiDB拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields)フィールド」および[Canal-JSONデータ形式のTiDB拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field)を参照してください。
 
-6.  データ形式として**Avroを**選択すると、ページにAvro固有の設定項目が表示されます。これらの設定項目は、以下のように入力できます。
+6.  データ形式として**Avro**を選択すると、ページにAvro固有の設定項目が表示されます。これらの設定項目は、以下のように入力できます。
 
     -   **Decimal**および**Unsigned BigInt**の設定では、 TiDB CloudがKafkaメッセージ内のdecimal型およびunsigned bigint型データ型をどのように処理するかを指定します。
     -   **Schema Registry**領域で、スキーマレジストリエンドポイントを入力します。**HTTP Authentication**を有効にすると、ユーザー名とパスワードのフィールドが表示され、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>のエンドポイントとパスワードが自動的に入力されます。TiDB <CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>。
 
 7.  **Topic Distribution**エリアで配信モードを選択し、選択したモードに応じてトピック名の設定を入力します。
 
-    データ形式として**Avroを**選択した場合、 **Distribution Mode**ドロップダウンリストでは**[テーブルごとの変更ログをKafkaトピックに配信する]**モードのみを選択できます。
+    データ形式として**Avro**を選択した場合、 **Distribution Mode**ドロップダウンリストでは**[テーブルごとの変更ログをKafkaトピックに配信する]**モードのみを選択できます。
 
     配信モードは、変更フィードがKafkaトピックを作成する方法を制御します。テーブルごと、データベースごと、またはすべての変更ログに対して1つのトピックを作成するかを選択できます。
 
@@ -335,16 +335,16 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
 10. **Split Event**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクにおける、主キーまたは一意キーを分割したUPDATEイベント](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
 
-11. **次へ**をクリックしてください。
+11. **Next**をクリックしてください。
 
 ## ステップ4. 変更フィード仕様を設定します {#step-4-configure-your-changefeed-specification}
 
 1.  **Changefeed Specification**領域で、チェンジフィードで使用する<CustomContent plan="dedicated">複製容量単位（RCU）</CustomContent>チェンジフィード<CustomContent plan="premium">チェンジフィード容量ユニット（CCU）</CustomContent>の数を指定します。
 2.  **Changefeed Name**欄に、変更フィードの名前を指定します。
-3.  **次へ**をクリックして、設定した内容を確認し、次のページへ進んでください。
+3.  **Next**をクリックして、設定した内容を確認し、次のページへ進んでください。
 
 ## ステップ5．設定内容を確認する {#step-5-review-the-configurations}
 
 このページでは、設定したすべての変更フィード設定を確認できます。
 
-エラーが見つかった場合は、戻って修正できます。エラーがない場合は、下部のチェックボックスをクリックし、 **「作成」を**クリックして変更フィードを作成します。
+エラーが見つかった場合は、戻って修正できます。エラーがない場合は、下部のチェックボックスをクリックし、 **Create**をクリックして変更フィードを作成します。

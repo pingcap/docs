@@ -19,7 +19,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 [Zapテンプレート](https://docs.zapier.com/integrations/publish/zap-templates)、公開されているZapier連携機能向けに、アプリとコアフィールドが事前に選択された、すぐに使える連携機能またはZapです。
 
-このセクションでは、 **新しい GitHub グローバル イベントを TiDB 行に追加する**テンプレートを例として、ワークフローを作成します。このワークフローでは、GitHub アカウントから新しいグローバル イベント (任意のリポジトリで、あなたからまたはあなたに対して発生する[GitHubイベント](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types)) が作成されるたびに、Zapier がTiDB Cloudクラスターに新しい行を追加します。
+このセクションでは、 **Add new Github global events to TiDB rows**テンプレートを例として、ワークフローを作成します。このワークフローでは、GitHub アカウントから新しいグローバル イベント (任意のリポジトリで、あなたからまたはあなたに対して発生する[GitHubイベント](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types)) が作成されるたびに、Zapier がTiDB Cloudクラスターに新しい行を追加します。
 
 ### 前提条件 {#prerequisites}
 
@@ -39,31 +39,31 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 1.  アプリとイベントを選択
 
-    テンプレートにはアプリとイベントがデフォルトで設定されているため、ここでは何もする必要はありません。 **続行**をクリックしてください。
+    テンプレートにはアプリとイベントがデフォルトで設定されているため、ここでは何もする必要はありません。 **Continue**をクリックしてください。
 
 2.  アカウントを選択
 
-    TiDB Cloudに接続するGitHubアカウントを選択してください。新規アカウントを接続することも、既存のアカウントを選択することもできます。設定が完了したら、 **続行**をクリックしてください。
+    TiDB Cloudに接続するGitHubアカウントを選択してください。新規アカウントを接続することも、既存のアカウントを選択することもできます。設定が完了したら、 **Continue**をクリックしてください。
 
 3.  トリガーの設定
 
-    テンプレートでは、デフォルトでトリガーが設定されています。 **続行**をクリックしてください。
+    テンプレートでは、デフォルトでトリガーが設定されています。 **Continue**をクリックしてください。
 
 4.  テストトリガー
 
-    **Test trigger**をクリックします。トリガーが正常に設定されると、GitHubアカウントから新しいグローバルイベントのデータが表示されます。 **続行**をクリックします。
+    **Test trigger**をクリックします。トリガーが正常に設定されると、GitHubアカウントから新しいグローバルイベントのデータが表示されます。 **Continue**をクリックします。
 
 ### ステップ3： `Find Table in TiDB Cloud`アクションを設定する {#step-3-set-up-the-find-table-in-tidb-cloud-action}
 
 1.  アプリとイベントを選択
 
-    テンプレートで設定されているデフォルト値`Find Table`そのまま使用します。 **[続行]**をクリックします。
+    テンプレートで設定されているデフォルト値`Find Table`そのまま使用します。 **Continue**をクリックします。
 
 2.  アカウントを選択
 
     1.  **Sign in**ボタンをクリックすると、新しいログインページにリダイレクトされます。
     2.  ログイン ページで、公開キーと秘密キーを入力します。 TiDB Cloud API キーを取得するには、 [TiDB Cloud APIドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)ドキュメントの手順に従ってください。
-    3.  **続行**をクリックしてください。
+    3.  **Continue**をクリックしてください。
 
     ![Account](/media/tidb-cloud/zapier/zapier-tidbcloud-account.png)
 
@@ -83,7 +83,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
         Zapierは、入力されたパスワードを使用してTiDB Cloudからデータベースを検索します。TiDB Cloud Starterインスタンスにデータベースが見つからない場合は、パスワードを再入力してページを更新してください。
 
-    4.  **「検索するテーブル」ボックス**に`github_global_event`と入力します。テーブルが存在しない場合、テンプレートは次の DDL を使用してテーブルを作成します。 **続行**をクリックします。
+    4.  **The table you want to search**ボックスに`github_global_event`と入力します。テーブルが存在しない場合、テンプレートは次の DDL を使用してテーブルを作成します。 **Continue**をクリックします。
 
         ![The create table DDL](/media/tidb-cloud/zapier/zapier-tidbcloud-create-table-ddl.png)
 
@@ -95,11 +95,11 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 1.  アプリとイベントを選択
 
-    テンプレートで設定されているデフォルト値をそのまま使用します。 **続行**をクリックしてください。
+    テンプレートで設定されているデフォルト値をそのまま使用します。 **Continue**をクリックしてください。
 
 2.  アカウントを選択
 
-    `Find Table in TiDB Cloud`アクションを設定する際に選択したアカウントを選択します。 **[続行]**をクリックします。
+    `Find Table in TiDB Cloud`アクションを設定する際に選択したアカウントを選択します。 **Continue**をクリックします。
 
     ![Choose account](/media/tidb-cloud/zapier/zapier-tidbcloud-choose-account.png)
 
@@ -111,7 +111,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
         ![Table columns](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-columns.png)
 
-    3.  **列**ボックスで、トリガーから対応するデータを選択します。すべての列を入力し、 **続行**をクリックします。
+    3.  **Columns**ボックスで、トリガーから対応するデータを選択します。すべての列を入力し、 **Continue**をクリックします。
 
         ![Fill in Columns](/media/tidb-cloud/zapier/zapier-fill-in-tidbcloud-triggers-data.png)
 
@@ -131,7 +131,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 ### ステップ5：Zapを公開する {#step-5-publish-your-zap}
 
-**公開**をクリックして、作成したZapを公開します。[ホームページ](https://zapier.com/app/zaps)でZapが実行されていることを確認できます。
+**Publish**をクリックして、作成したZapを公開します。[ホームページ](https://zapier.com/app/zaps)でZapが実行されていることを確認できます。
 
 ![Publish the zap](/media/tidb-cloud/zapier/zapier-tidbcloud-publish.png)
 

@@ -84,7 +84,7 @@ systemctl start docker
 -   Gitをダウンロードしてインストールしてください。
 
     1.  [Git Windows ダウンロード](https://git-scm.com/download/win)ページから**64 ビット Git for Windows セットアップ**パッケージをダウンロードします。
-    2.  セットアップウィザードの手順に従ってGitパッケージをインストールしてください。デフォルトのインストール設定を使用する場合は、 **「次へ」を**数回クリックしてください。
+    2.  セットアップウィザードの手順に従ってGitパッケージをインストールしてください。デフォルトのインストール設定を使用する場合は、 **Next**を数回クリックしてください。
 
         ![proxysql-windows-git-install](/media/develop/proxysql-windows-git-install.png)
 

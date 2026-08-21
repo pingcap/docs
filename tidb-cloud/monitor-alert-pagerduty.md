@@ -60,10 +60,10 @@ TiDB Cloud は、PagerDuty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メ�
 
 7.  **Test Connection**をクリックしてください。
 
-    -   テストが成功すると、**保存**ボタンが表示されます。
+    -   テストが成功すると、**Save**ボタンが表示されます。
     -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージの指示に従って問題を解決し、接続を再試行してください。
 
-8.  購読を完了するには、 **保存**をクリックしてください。
+8.  購読を完了するには、 **Save**をクリックしてください。
 
 または、 TiDB Cloud Dedicatedクラスタの**アラート**ページの右上にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
@@ -79,7 +79,7 @@ TiDB Cloud は、PagerDuty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メ�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **Alert Subscription**をクリックします。
+2.  左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
 
 3.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
@@ -89,10 +89,10 @@ TiDB Cloud は、PagerDuty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メ�
 
 6.  **Test Connection**をクリックしてください。
 
-    -   テストが成功すると、**保存**ボタンが表示されます。
+    -   テストが成功すると、**Save**ボタンが表示されます。
     -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージの指示に従って問題を解決し、接続を再試行してください。
 
-7.  購読を完了するには、 **保存**をクリックしてください。
+7.  購読を完了するには、 **Save**をクリックしてください。
 
 または、 TiDB Cloud Essentialインスタンスの**アラート**ページの右上隅にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
@@ -106,20 +106,20 @@ TiDB Cloud は、PagerDuty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メ�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **Alert Subscription**をクリックします。
+2.  左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
 
 3.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
 4.  **Subscriber Type**ドロップダウンリストから**PagerDuty**を選択してください。
 
-5.  「**名前」**欄に名前を入力し、 **Integration Key**欄にPagerDutyの統合キーを入力してください。
+5.  **Name**欄に名前を入力し、 **Integration Key**欄にPagerDutyの統合キーを入力してください。
 
 6.  **Test Connection**をクリックしてください。
 
-    -   テストが成功すると、**保存**ボタンが表示されます。
+    -   テストが成功すると、**Save**ボタンが表示されます。
     -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージの指示に従って問題を解決し、接続を再試行してください。
 
-7.  購読を完了するには、 **保存**をクリックしてください。
+7.  購読を完了するには、 **Save**をクリックしてください。
 
 または、 TiDB Cloud Premiumインスタンスの**アラート**ページの右上隅にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
@@ -136,7 +136,7 @@ TiDB Cloud は、PagerDuty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メ�
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 3.  左側のナビゲーションペインで、 **Project Settings**の下にある**Alert Subscription**をクリックします。
-4.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **[Unsubscribe]**をクリックします。
+4.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **Unsubscribe**をクリックします。
 5.  購読解除を確定するには、 **Unsubscribe**をクリックしてください。
 
 </CustomContent>
@@ -144,8 +144,8 @@ TiDB Cloud は、PagerDuty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メ�
 <CustomContent plan="essential">
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[Alert Subscription]**をクリックします。
-3.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **[Unsubscribe]**をクリックします。
+2.  左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
+3.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **Unsubscribe**をクリックします。
 4.  購読解除を確定するには、 **Unsubscribe**をクリックしてください。
 
 </CustomContent>
@@ -153,8 +153,8 @@ TiDB Cloud は、PagerDuty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メ�
 <CustomContent plan="premium">
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[Alert Subscription]**をクリックします。
-3.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **[Unsubscribe]**をクリックします。
+2.  左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
+3.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **Unsubscribe**をクリックします。
 4.  購読解除を確定するには、 **Unsubscribe**をクリックしてください。
 
 </CustomContent>
