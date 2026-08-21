@@ -131,7 +131,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 ### ステップ5：Zapを公開する {#step-5-publish-your-zap}
 
-**公開**をクリックして、作成したZapを公開します。[ホームページ](https://zapier.com/app/zaps)でZapが実行されていることを確認できます。
+**Publish**をクリックして、作成したZapを公開します。[ホームページ](https://zapier.com/app/zaps)でZapが実行されていることを確認できます。
 
 ![Publish the zap](/media/tidb-cloud/zapier/zapier-tidbcloud-publish.png)
 

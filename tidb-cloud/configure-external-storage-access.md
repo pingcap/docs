@@ -331,7 +331,7 @@ TiDB CloudがAlibaba Cloud OSSバケットにアクセスできるようにす�
 
 2.  必要な権限を持つカスタム ポリシーを作成します。詳細については、 [カスタムポリシーを作成する](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy)を参照してください。
 
-    -   **Effect**セクションで**許可**を選択します。
+    -   **Effect**セクションで**Allow**を選択します。
 
     -   **Service**セクションで、 **Object Storage Service**を選択します。
 

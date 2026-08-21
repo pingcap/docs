@@ -84,7 +84,7 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 <SimpleTab>
 <div label="Public">
 
-1.  **Connectivity Method**で**パブリック**を選択し、Kafkaブローカーのエンドポイントを入力します。複数のエンドポイントはカンマ`,`を使用して区切ることができます。
+1.  **Connectivity Method**で**Public**を選択し、Kafkaブローカーのエンドポイントを入力します。複数のエンドポイントはカンマ`,`を使用して区切ることができます。
 
 2.  Kafkaの認証設定に応じて、**Authentication**オプションを選択してください。
 

@@ -115,12 +115,12 @@ Alibaba Cloud RDSをデータソースとして使用する場合、すべての
 
 <CustomContent plan="dedicated">
 
--   増分データ移行中に、移行対象のテーブルが既にターゲットデータベースに重複キーで存在する場合、エラーが報告され、移行は中断されます。この場合、MySQLソースデータが正確であることを確認する必要があります。データが正確であれば、移行ジョブの**再開**ボタンをクリックすると、移行ジョブはターゲットのTiDB Cloud Dedicatedクラスタ内の競合レコードをMySQLソースレコードに置き換えます。
+-   増分データ移行中に、移行対象のテーブルが既にターゲットデータベースに重複キーで存在する場合、エラーが報告され、移行は中断されます。この場合、MySQLソースデータが正確であることを確認する必要があります。データが正確であれば、移行ジョブの**Restart**ボタンをクリックすると、移行ジョブはターゲットのTiDB Cloud Dedicatedクラスタ内の競合レコードをMySQLソースレコードに置き換えます。
 
 </CustomContent>
 <CustomContent plan="essential">
 
--   増分データ移行中に、移行対象のテーブルが既にターゲットデータベースに重複キーで存在する場合、エラーが報告され、移行は中断されます。この場合、MySQLソースデータが正確であることを確認する必要があります。データが正確であれば、移行ジョブの**再開**ボタンをクリックすると、移行ジョブはターゲットのTiDB Cloud Essentialインスタンス内の競合レコードをMySQLソースレコードに置き換えます。
+-   増分データ移行中に、移行対象のテーブルが既にターゲットデータベースに重複キーで存在する場合、エラーが報告され、移行は中断されます。この場合、MySQLソースデータが正確であることを確認する必要があります。データが正確であれば、移行ジョブの**Restart**ボタンをクリックすると、移行ジョブはターゲットのTiDB Cloud Essentialインスタンス内の競合レコードをMySQLソースレコードに置き換えます。
 -   増分データ移行 (進行中の変更をTiDB Cloud Essentialインスタンスに移行する) 中に、移行ジョブが突然のエラーから回復した場合、60 秒間セーフ モードに入ることがあります。セーフ モード中、 TiDB Cloudは`INSERT`ステートメントを`REPLACE`に、 `UPDATE`ステートメントを`DELETE`および`REPLACE`に移行し、これらのトランザクションをターゲットのTiDB Cloud Essentialインスタンスに適用して、突然のエラー中に発生したすべてのデータが安全にターゲットに到達するようにします。ソース テーブルに主キーまたは null 以外の一意インデックスがない場合、ターゲットのTiDB Cloud Essentialインスタンスで重複した行が発生する可能性があります。
 
 </CustomContent>
@@ -687,7 +687,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
     -   **Connectivity method**：セキュリティ要件とクラウドプロバイダーに基づいて、データソースの接続方法を選択してください。
 
-        -   **公開**：すべてのクラウドプロバイダーで利用可能（テストおよび概念実証のための移行に推奨）。
+        -   **Public**：すべてのクラウドプロバイダーで利用可能（テストおよび概念実証のための移行に推奨）。
         -   **Private Link**：AWSおよびAlibaba Cloudでのみ利用可能です（プライベート接続を必要とする本番のワークロードに推奨）。
 
     </CustomContent>
@@ -695,7 +695,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
     -   **Connectivity method**：セキュリティ要件とクラウドプロバイダーに基づいて、データソースの接続方法を選択してください。
 
-        -   **公開**： TiDB Cloud Premiumがサポートするすべてのクラウドプロバイダーで利用可能（テストおよび概念実証移行に推奨）。
+        -   **Public**： TiDB Cloud Premiumがサポートするすべてのクラウドプロバイダーで利用可能（テストおよび概念実証移行に推奨）。
         -   **Private Link**：AWSのみで利用可能（プライベート接続を必要とする本番のワークロードに推奨）。
 
     </CustomContent>
@@ -714,7 +714,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
     -   選択した**Connectivity method**に基づいて、以下の手順を実行してください。
 
-        -   **公開**を選択した場合は、 **Hostname or IP address**フィールドにデータソースのホスト名またはIPアドレスを入力してください。
+        -   **Public**を選択した場合は、 **Hostname or IP address**フィールドにデータソースのホスト名またはIPアドレスを入力してください。
         -   **Private Link**が選択されている場合は、[プライベートリンク[プライベートリンクまたはプライベートエンドポイント](#private-link-or-private-endpoint)セクションで作成したプライベート リンク接続を選択します。
 
     </CustomContent>
@@ -722,7 +722,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
     -   選択した**Connectivity method**に基づいて、以下の手順を実行してください。
 
-        -   **公開**を選択した場合は、 **Hostname or IP address**フィールドにデータソースのホスト名またはIPアドレスを入力してください。
+        -   **Public**を選択した場合は、 **Hostname or IP address**フィールドにデータソースのホスト名またはIPアドレスを入力してください。
         -   **Private Link**が選択されている場合は、 **Private Endpoint**フィールドで既存のプライベート エンドポイントを選択するか、 **[ここでプライベート エンドポイントを作成] をクリックしてプライベート エンドポイント**を作成します。プライベート エンドポイントは、 TiDB Cloud Premium インスタンスの**Networking** &gt; **[AWS 外部サービス用プライベートエンドポイント]**で管理されます。プライベート エンドポイントは、複数のデータ移行ジョブおよび変更フィード間で再利用できます。設定の詳細については、[プライベートリンクまたはプライベートエンドポイント](#private-link-or-private-endpoint)をご覧ください。
 
     </CustomContent>

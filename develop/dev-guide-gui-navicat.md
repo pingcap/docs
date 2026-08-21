@@ -49,7 +49,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
     > **Tip:**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **パスワードをリセット**をクリックして新しいパスワードを生成できます。
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **Reset Password**をクリックして新しいパスワードを生成できます。
 
 5.  Navicat Premiumを起動し、左上隅の**Connection**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDBを**ダブルクリックします。
 
@@ -69,7 +69,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
     ![Navicat: configure connection SSL panel for TiDB Cloud Starter](/media/develop/navicat-premium-connection-config-serverless-ssl.png)
 
-8.  **接続テスト**をクリックして、対象のTiDB Cloud StarterまたはEssentialインスタンスへの接続を検証してください。
+8.  **Test Connection**をクリックして、対象のTiDB Cloud StarterまたはEssentialインスタンスへの接続を検証してください。
 
 9.  接続テストが成功すると、 **「接続成功」という**メッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
 
@@ -88,12 +88,12 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
 5.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-6.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**パブリック**を選択します。
+6.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**Public**を選択します。
 
     -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
     -   まだパスワードを設定していない場合は、ダイアログの**ルートパスワードを設定**をクリックしてください。
     -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA証明書**をクリックしてダウンロードしてください。
-    -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+    -   **Public**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
 7.  Navicat Premiumを起動し、左上隅の**Connect**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDBを**ダブルクリックします。
 
@@ -107,7 +107,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
 9.  **SSL**タブをクリックし、 **SSLを使用する**チェックボックスをオフにします。
 
-10. **接続テスト**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
+10. **Test Connection**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
 
 11. 接続テストが成功すると、 **「接続成功」という**メッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
 
@@ -118,11 +118,11 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
 2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**パブリック**を選択します。
+3.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**Public**を選択します。
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **[IP アクセス リストの設定] をクリックするか、「IP アクセス リストを設定する」**の手順に従って[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
+    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
 4.  **CA証明書をダウンロードするには、「CA証明書**」をクリックしてください。
 
@@ -165,7 +165,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
     ![Navicat: configure connection general panel for self-hosted TiDB](/media/develop/navicat-premium-connection-config-self-hosted-general.png)
 
-3.  **接続テスト**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
+3.  **Test Connection**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
 
 4.  接続テストが成功すると、 **「接続成功」という**メッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
 

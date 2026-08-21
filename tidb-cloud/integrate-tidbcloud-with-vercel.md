@@ -92,7 +92,7 @@ TiDB Cloud Vercel 統合経由で接続するには、 [Vercelの統合マーケ
     4.  対象のTiDB Cloudリソースを選択してください。**Cluster**のドロップダウン リストが空の場合、または新しいTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを選択する場合は、リストの**+ Create Cluster**をクリックして作成してください。
     5.  接続するデータベースを選択してください。**Database**のドロップダウンリストが空の場合、または新しいデータベースを選択する場合は、リスト内の**+ Create Database**をクリックして作成してください。
     6.  Vercelプロジェクトで使用しているフレームワークを選択してください。対象のフレームワークが一覧にない場合は、 **General**を選択してください。フレームワークによって環境変数が異なります。
-    7.  プレビュー環境用に新しいブランチを作成するために、**ブランチ機能**を有効にするかどうかを選択してください。
+    7.  プレビュー環境用に新しいブランチを作成するために、**Branching**を有効にするかどうかを選択してください。
     8.  **「統合を追加」をクリックしてVercelに戻ります**。
 
 ![Vercel Integration Page](/media/tidb-cloud/vercel/integration-link-cluster-page.png)
@@ -178,7 +178,7 @@ Vercel の[プレビュー展開](https://vercel.com/docs/deployments/preview-de
 TiDB Cloud Branching を有効にするには、 [TiDB Cloud Vercel統合ワークフロー](#integration-workflow)で次のことを確認する必要があります。
 
 1.  接続タイプとして**Cluster**を選択してください。
-2.  プレビュー環境用の新しいブランチを作成するには、**ブランチ機能**を有効にしてください。
+2.  プレビュー環境用の新しいブランチを作成するには、**Branching**を有効にしてください。
 
 Gitリポジトリに変更をプッシュすると、Vercelがプレビューデプロイメントをトリガーします。TiDB Cloudとの連携により、Gitブランチ用のTiDB Cloudクラスタのブランチが自動的に作成され、環境変数が設定されます。詳細な手順は以下のとおりです。
 

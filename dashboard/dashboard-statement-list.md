@@ -31,7 +31,7 @@ SQL文の概要ページの上部で、表示するSQL実行の時間範囲を�
 
 ### より多くの列を表示する {#display-more-columns}
 
-ページ上の**列**をクリックすると、さらに列を表示できます。列名の右側にある**(i)**アイコンにマウスを移動すると、その列の説明が表示されます。
+ページ上の**Columns**をクリックすると、さらに列を表示できます。列名の右側にある**(i)**アイコンにマウスを移動すると、その列の説明が表示されます。
 
 ![Choose columns](/media/dashboard/dashboard-statement-columns-selector.png)
 

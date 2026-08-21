@@ -163,7 +163,7 @@ Snowflakeはクラウドネイティブなデータウェアハウスです。Co
 
 1.  Snowflake でデータベースとスキーマを作成します。
 
-    Snowflakeコントロールコンソールで、 **データ** &gt; **データベース**を選択します。`TPCC`名前のデータベースと`TiCDC`という名前のスキーマを作成します。
+    Snowflakeコントロールコンソールで、 **Data** &gt; **Database**を選択します。`TPCC`名前のデータベースと`TiCDC`という名前のスキーマを作成します。
 
 2.  Confluent Cloud Consoleで、 **データ統合** &gt; **コネクタ** &gt; **Snowflake Sink**を選択します。以下のページが表示されます。
 
@@ -181,7 +181,7 @@ Snowflakeはクラウドネイティブなデータウェアハウスです。Co
 
     ![Data preview](/media/integrate/data-preview.png)
 
-6.  Snowflakeコンソールで、 **データ** &gt; **データベース** &gt; **TPCC** &gt; **TiCDC**を選択します。TiDBの増分データがSnowflakeに複製されていることがわかります。Snowflakeとのデータ統合は完了しています（上図を参照）。ただし、Snowflakeのテーブル構造はTiDBとは異なり、データは増分的にSnowflakeに挿入されます。ほとんどのシナリオでは、SnowflakeのデータはTiDBの変更ログを保存するのではなく、TiDBのデータのレプリカであることが想定されます。この問題については、次のセクションで説明します。
+6.  Snowflakeコンソールで、 **Data** &gt; **Database** &gt; **TPCC** &gt; **TiCDC**を選択します。TiDBの増分データがSnowflakeに複製されていることがわかります。Snowflakeとのデータ統合は完了しています（上図を参照）。ただし、Snowflakeのテーブル構造はTiDBとは異なり、データは増分的にSnowflakeに挿入されます。ほとんどのシナリオでは、SnowflakeのデータはTiDBの変更ログを保存するのではなく、TiDBのデータのレプリカであることが想定されます。この問題については、次のセクションで説明します。
 
 ### SnowflakeでTiDBテーブルのデータレプリカを作成する {#create-data-replicas-of-tidb-tables-in-snowflake}
 

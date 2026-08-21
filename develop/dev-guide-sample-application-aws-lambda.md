@@ -126,12 +126,12 @@ npm install
 
 5.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-6.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**パブリック**を選択します。
+6.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**Public**を選択します。
 
     -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
     -   まだパスワードを設定していない場合は、ダイアログの**ルートパスワードを設定**をクリックしてください。
     -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA証明書**をクリックしてダウンロードしてください。
-    -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+    -   **Public**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
 7.  対応する接続​​文字列をコピーして`env.json`に貼り付けてください。以下に例を示します。
 
@@ -288,10 +288,10 @@ AWS Lambda関数は、 [SAM CLI](#sam-cli-deployment-recommended)または[AWS L
     1.  Lambda コンソールの[機能](https://console.aws.amazon.com/lambda/home#/functions)ページで、 **[コンフィグレーション]**タブを選択し、 **[環境変数]**を選択します。
     2.  **Edit**を選択してください。
     3.  データベースへのアクセス資格情報を追加するには、以下の手順を実行してください。
-        -   **環境変数の追加**を選択し、 **キー**に`TIDB_HOST`と入力し、 **値**にホスト名を入力します。
-        -   **環境変数の追加**を選択し、 **キー**に`TIDB_PORT`と入力し、 **値**にポート番号を入力します（デフォルトは4000です）。
-        -   **環境変数の追加**を選択し、 **キー**に`TIDB_USER`と入力し、 **値**にユーザー名を入力します。
-        -   **環境変数の追加**を選択し、 **キー**に`TIDB_PASSWORD`と入力し、 **値**にデータベース作成時に選択したパスワードを入力します。
+        -   **Add environment variable**を選択し、 **キー**に`TIDB_HOST`と入力し、 **値**にホスト名を入力します。
+        -   **Add environment variable**を選択し、 **キー**に`TIDB_PORT`と入力し、 **値**にポート番号を入力します（デフォルトは4000です）。
+        -   **Add environment variable**を選択し、 **キー**に`TIDB_USER`と入力し、 **値**にユーザー名を入力します。
+        -   **Add environment variable**を選択し、 **キー**に`TIDB_PASSWORD`と入力し、 **値**にデータベース作成時に選択したパスワードを入力します。
         -   **Save**を選択してください。
 
 ## サンプルコードスニペット {#sample-code-snippets}

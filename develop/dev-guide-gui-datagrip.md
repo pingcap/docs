@@ -53,7 +53,7 @@ DataGripは2つの方法で使用できます。
 
     > **Tip:**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **パスワードをリセット**をクリックして新しいパスワードを生成できます。
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **Reset Password**をクリックして新しいパスワードを生成できます。
 
 5.  DataGripを起動し、接続を管理するためのプロジェクトを作成します。
 
@@ -69,7 +69,7 @@ DataGripは2つの方法で使用できます。
 
     **不足しているドライバファイルをダウンロードしてください**という警告が表示された場合は、 **Download**をクリックしてドライバファイルを入手してください。
 
-8.  **接続テスト**をクリックして、対象のTiDB Cloud StarterまたはEssentialインスタンスへの接続を検証してください。
+8.  **Test Connection**をクリックして、対象のTiDB Cloud StarterまたはEssentialインスタンスへの接続を検証してください。
 
     ![Test the connection to a TiDB Cloud Starter instance](/media/develop/datagrip-test-connection.jpg)
 
@@ -90,12 +90,12 @@ DataGripは2つの方法で使用できます。
 
 5.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-6.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**パブリック**を選択します。
+6.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**Public**を選択します。
 
     -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
     -   まだパスワードを設定していない場合は、ダイアログの**ルートパスワードを設定**をクリックしてください。
     -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA証明書**をクリックしてダウンロードしてください。
-    -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+    -   **Public**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
 7.  DataGripを起動し、接続を管理するためのプロジェクトを作成します。
 
@@ -113,7 +113,7 @@ DataGripは2つの方法で使用できます。
     -   **SSH/SSL**タブで、 **SSLを使用する**チェックボックスをオフにします。
     -   **不足しているドライバファイルをダウンロードしてください**という警告が表示された場合は、 **Download**をクリックしてドライバファイルを入手してください。
 
-10. **接続テスト**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
+10. **Test Connection**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
 
 11. 接続設定を保存するには、 **OK**をクリックしてください。
 
@@ -124,11 +124,11 @@ DataGripは2つの方法で使用できます。
 
 2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、「**接続タイプ」**ドロップダウンリストから**パブリック**を選択し、 **CA証明書**をクリックしてCA証明書をダウンロードします。
+3.  接続ダイアログで、「**接続タイプ」**ドロップダウンリストから**Public**を選択し、 **CA証明書**をクリックしてCA証明書をダウンロードします。
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **[IP アクセス リストの設定] をクリックするか、「IP アクセス リストを設定する」**の手順に従って[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
+    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
 4.  DataGripを起動し、接続を管理するためのプロジェクトを作成します。
 
@@ -161,7 +161,7 @@ DataGripは2つの方法で使用できます。
 
     ![Configure the TLS for TiDB Cloud Dedicated](/media/develop/datagrip-dedicated-advanced.jpg)
 
-9.  **接続テスト**をクリックして、 TiDB Cloud Dedicatedクラスターへの接続を検証してください。
+9.  **Test Connection**をクリックして、 TiDB Cloud Dedicatedクラスターへの接続を検証してください。
 
     ![Test the connection to a TiDB Cloud Dedicated cluster](/media/develop/datagrip-dedicated-test-connection.jpg)
 
@@ -191,7 +191,7 @@ DataGripは2つの方法で使用できます。
 
     **不足しているドライバファイルをダウンロードしてください**という警告が表示された場合は、 **Download**をクリックしてドライバファイルを入手してください。
 
-4.  **接続テスト**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
+4.  **Test Connection**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
 
     ![Test the connection to a TiDB Self-Managed cluster](/media/develop/datagrip-self-hosted-test-connection.jpg)
 

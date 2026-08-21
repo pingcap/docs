@@ -38,7 +38,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
 3.  SSL 構成の競合を避けるため、**Driverのプロパティ**タブで、既存の`sslMode` 、 `useSSL` 、または`requireSSL`エントリをすべて削除してください。
 
-4.  **接続テスト**をクリックして、接続が成功したことを確認してください。
+4.  **Test Connection**をクリックして、接続が成功したことを確認してください。
 
 ## TiDBに接続する {#connect-to-tidb}
 
@@ -62,7 +62,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
     > **Tip:**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **パスワードをリセット**をクリックして新しいパスワードを生成できます。
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **Reset Password**をクリックして新しいパスワードを生成できます。
 
 5.  DBeaverを起動し、左上隅の**新しいデータベース接続**をクリックします。 **「データベースへの接続**」ダイアログで、リストから**TiDBを**選択し、 **Next**をクリックします。
 
@@ -74,17 +74,17 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
     ![Configure connection settings for TiDB Cloud Starter](/media/develop/dbeaver-connection-settings-serverless.jpg)
 
-8.  **接続テスト**をクリックして、対象のTiDB Cloud StarterまたはEssentialインスタンスへの接続を検証してください。
+8.  **Test Connection**をクリックして、対象のTiDB Cloud StarterまたはEssentialインスタンスへの接続を検証してください。
 
     **ドライバファイルのダウンロード**ダイアログが表示されたら、 **Download**をクリックしてドライバファイルを入手してください。
 
     ![Download driver files](/media/develop/dbeaver-download-driver.jpg)
 
-    接続テストが成功すると、以下のように**接続テスト**ダイアログが表示されます。 **OK**をクリックして閉じます。
+    接続テストが成功すると、以下のように**Connection test**ダイアログが表示されます。 **OK**をクリックして閉じます。
 
     ![Connection test result](/media/develop/dbeaver-connection-test.jpg)
 
-9.  接続設定を保存するには、 **完了**をクリックしてください。
+9.  接続設定を保存するには、 **Finish**をクリックしてください。
 
 </div>
 <div label="TiDB Cloud Premium">
@@ -101,12 +101,12 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
 5.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-6.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**パブリック**を選択します。
+6.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**Public**を選択します。
 
     -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
     -   まだパスワードを設定していない場合は、ダイアログの**ルートパスワードを設定**をクリックしてください。
     -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA証明書**をクリックしてダウンロードしてください。
-    -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+    -   **Public**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
 7.  DBeaverを起動し、左上隅の**新しいデータベース接続**をクリックします。 **「データベースへの接続**」ダイアログで、リストから**TiDBを**選択し、 **Next**をクリックします。
 
@@ -121,9 +121,9 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
     SSL設定は無効のままにしてください。
 
-9.  **接続テスト**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
+9.  **Test Connection**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
 
-10. 接続設定を保存するには、 **完了**をクリックしてください。
+10. 接続設定を保存するには、 **Finish**をクリックしてください。
 
 </div>
 <div label="TiDB Cloud Dedicated">
@@ -132,11 +132,11 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
 2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、「**接続タイプ」**ドロップダウンリストから**パブリック**を選択し、 **CA証明書**をクリックしてCA証明書をダウンロードします。
+3.  接続ダイアログで、「**接続タイプ」**ドロップダウンリストから**Public**を選択し、 **CA証明書**をクリックしてCA証明書をダウンロードします。
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **[IP アクセス リストの設定] をクリックするか、「IP アクセス リストを設定する」**の手順に従って[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
+    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
 4.  DBeaverを起動し、左上隅の**新しいデータベース接続**をクリックします。 **「データベースへの接続**」ダイアログで、リストから**TiDBを**選択し、 **Next**をクリックします。
 
@@ -155,17 +155,17 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
     ![Configure connection settings for TiDB Cloud Dedicated](/media/develop/dbeaver-connection-settings-dedicated.jpg)
 
-6.  **接続テスト**をクリックして、 TiDB Cloud Dedicatedクラスターへの接続を検証してください。
+6.  **Test Connection**をクリックして、 TiDB Cloud Dedicatedクラスターへの接続を検証してください。
 
     **ドライバファイルのダウンロード**ダイアログが表示されたら、 **Download**をクリックしてドライバファイルを入手してください。
 
     ![Download driver files](/media/develop/dbeaver-download-driver.jpg)
 
-    接続テストが成功すると、以下のように**接続テスト**ダイアログが表示されます。 **OK**をクリックして閉じます。
+    接続テストが成功すると、以下のように**Connection test**ダイアログが表示されます。 **OK**をクリックして閉じます。
 
     ![Connection test result](/media/develop/dbeaver-connection-test.jpg)
 
-7.  接続設定を保存するには、 **完了**をクリックしてください。
+7.  接続設定を保存するには、 **Finish**をクリックしてください。
 
 </div>
 <div label="TiDB Self-Managed" value="tidb">
@@ -185,17 +185,17 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
     ![Configure connection settings for TiDB Self-Managed](/media/develop/dbeaver-connection-settings-self-hosted.jpg)
 
-3.  **接続テスト**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
+3.  **Test Connection**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
 
     **ドライバファイルのダウンロード**ダイアログが表示されたら、 **Download**をクリックしてドライバファイルを入手してください。
 
     ![Download driver files](/media/develop/dbeaver-download-driver.jpg)
 
-    接続テストが成功すると、以下のように**接続テスト**ダイアログが表示されます。 **OK**をクリックして閉じます。
+    接続テストが成功すると、以下のように**Connection test**ダイアログが表示されます。 **OK**をクリックして閉じます。
 
     ![Connection test result](/media/develop/dbeaver-connection-test.jpg)
 
-4.  接続設定を保存するには、 **完了**をクリックしてください。
+4.  接続設定を保存するには、 **Finish**をクリックしてください。
 
 </div>
 </SimpleTab>
