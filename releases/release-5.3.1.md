@@ -26,7 +26,7 @@ TiDB バージョン: 5.3.1
 -   TiKV
 
     -   解決ロックのステップ必要とするリージョンの数を減らすことで、TiCDC の回復時間を短縮します。 [＃11993](https://github.com/tikv/tikv/issues/11993)
-    -   Raftログへのガベージ コレクション (GC) を実行するときに書き込みバッチ サイズを増やすことで、GC プロセスを高速化します。 [＃11404](https://github.com/tikv/tikv/issues/11404)
+    -   Raftログへのガベージコレクション (GC) を実行するときに書き込みバッチサイズを増やすことで、GC プロセスを高速化します。 [＃11404](https://github.com/tikv/tikv/issues/11404)
     -   procファイルシステム（procfs）をv0.12.0 に更新する [＃11702](https://github.com/tikv/tikv/issues/11702)
 
 -   PD
@@ -60,7 +60,7 @@ TiDB バージョン: 5.3.1
     -   `alter column set default`テーブルスキーマを誤って更新する問題を修正 [＃31074](https://github.com/pingcap/tidb/issues/31074)
     -   `tidb_restricted_read_only`有効になっているときに`tidb_super_read_only`自動的に有効にならないバグを修正[＃31745](https://github.com/pingcap/tidb/issues/31745)
     -   照合順序`greatest`または`least`関数が間違った結果を返す問題を修正しました[＃31789](https://github.com/pingcap/tidb/issues/31789)
-    -   クエリ実行時に MPP タスク リストが空になるエラーを修正 [＃31636](https://github.com/pingcap/tidb/issues/31636)
+    -   クエリ実行時に MPP タスクリストが空になるエラーを修正 [＃31636](https://github.com/pingcap/tidb/issues/31636)
     -   innerWorker panicによって発生するインデックス結合の誤った結果を修正しました [＃31494](https://github.com/pingcap/tidb/issues/31494)
     -   列タイプを`FLOAT`から`DOUBLE`に変更した後の間違ったクエリ結果を修正[＃31372](https://github.com/pingcap/tidb/issues/31372)
     -   インデックスルックアップ結合を使用してクエリを実行するときに発生する`invalid transaction`エラーを修正します [＃30468](https://github.com/pingcap/tidb/issues/30468)
@@ -92,7 +92,7 @@ TiDB バージョン: 5.3.1
 
     -   特定のケースでスケジュール処理に不要な JointConsensus ステップが含まれるバグを修正[＃4362](https://github.com/tikv/pd/issues/4362)
     -   投票者を直接降格させるとスケジュールが実行できないバグを修正[＃4444](https://github.com/tikv/pd/issues/4444)
-    -   レプリカのレプリケーション モードの構成を更新するときに発生するデータ競合の問題を修正しました [＃4325](https://github.com/tikv/pd/issues/4325)
+    -   レプリカのレプリケーションモードの構成を更新するときに発生するデータ競合の問題を修正しました [＃4325](https://github.com/tikv/pd/issues/4325)
     -   特定のケースで読み取りロックが解除されないバグを修正[＃4354](https://github.com/tikv/pd/issues/4354)
     -   ホットスポット統計からコールドホットスポットデータを削除できない問題を修正[＃4390](https://github.com/tikv/pd/issues/4390)
 

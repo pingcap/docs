@@ -26,7 +26,7 @@ TiDB バージョン: 7.1.5
 -   TiKV
 
     -   ピアのスローログを追加し、メッセージを保存します [＃16600](https://github.com/tikv/tikv/issues/16600) @[Connor1996](https://github.com/Connor1996)
-    -   TiKV の安定性を向上させるために、raftstore スレッドでスナップショット ファイルに対する IO 操作を実行しないようにします[＃16564](https://github.com/tikv/tikv/issues/16564) @[Connor1996](https://github.com/Connor1996)
+    -   TiKV の安定性を向上させるために、raftstore スレッドでスナップショットファイルに対する IO 操作を実行しないようにします[＃16564](https://github.com/tikv/tikv/issues/16564) @[Connor1996](https://github.com/Connor1996)
 
 -   PD
 
@@ -36,7 +36,7 @@ TiDB バージョン: 7.1.5
 
     -   Backup & Restore (BR)
 
-        -   チェックポイントの遅延が大きい場合にログ バックアップ タスクを自動的に中止する機能をサポートし、GC の長時間のブロッキングや潜在的なクラスターの問題を回避します[＃50803](https://github.com/pingcap/tidb/issues/50803) @[RidRisR](https://github.com/RidRisR)
+        -   チェックポイントの遅延が大きい場合にログバックアップタスクを自動的に中止する機能をサポートし、GC の長時間のブロッキングや潜在的なクラスターの問題を回避します[＃50803](https://github.com/pingcap/tidb/issues/50803) @[RidRisR](https://github.com/RidRisR)
         -   ログバックアップの互換性テストとインデックスアクセラレーションをカバーするPITR統合テストケースを追加します。 [＃51987](https://github.com/pingcap/tidb/issues/51987) @[Leavrth](https://github.com/Leavrth)
         -   ログバックアップの開始時にアクティブなDDLジョブの無効な検証を削除します[＃52733](https://github.com/pingcap/tidb/issues/52733) @[Leavrth](https://github.com/Leavrth)
 
@@ -101,7 +101,7 @@ TiDB バージョン: 7.1.5
         -   フルバックアップでピアが見つからない場合に TiKV がパニックを起こす問題を修正[＃16394](https://github.com/tikv/tikv/issues/16394) @[Leavrth](https://github.com/Leavrth)
         -   PD接続障害により、ログバックアップアドバンサ所有者が配置されているTiDBインスタンスがpanicになる可能性がある問題を修正しました。 [＃52597](https://github.com/pingcap/tidb/issues/52597) @[YuJuncen](https://github.com/YuJuncen)
         -   不安定なテストケースを修正する [＃52547](https://github.com/pingcap/tidb/issues/52547) @[Leavrth](https://github.com/Leavrth)
-        -   TiKV の再起動により、ログ バックアップのグローバル チェックポイントが実際のバックアップ ファイルの書き込みポイントよりも先に進められ、少量のバックアップ データが失われる可能性がある問題を修正しました[＃16809](https://github.com/tikv/tikv/issues/16809) @[YuJuncen](https://github.com/YuJuncen)
+        -   TiKV の再起動により、ログバックアップのグローバルチェックポイントが実際のバックアップファイルの書き込みポイントよりも先に進められ、少量のバックアップデータが失われる可能性がある問題を修正しました[＃16809](https://github.com/tikv/tikv/issues/16809) @[YuJuncen](https://github.com/YuJuncen)
         -   特別なイベントタイミングにより、ログバックアップでデータ損失が発生する可能性があるという稀な問題を修正しました。 [＃16739](https://github.com/tikv/tikv/issues/16739) @[YuJuncen](https://github.com/YuJuncen)
 
     -   TiCDC

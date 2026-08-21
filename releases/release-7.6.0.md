@@ -19,11 +19,11 @@ TiDB バージョン: 7.6.0
 
 ### 拡張性 {#scalability}
 
--   Active PD Follower機能を使用して PD のリージョン情報クエリ サービスのスケーラビリティを強化する (実験的) [#7431](https://github.com/tikv/pd/issues/7431) @[CabinfeverB](https://github.com/CabinfeverB)
+-   Active PD Follower機能を使用して PD のリージョン情報クエリサービスのスケーラビリティを強化する (実験的) [#7431](https://github.com/tikv/pd/issues/7431) @[CabinfeverB](https://github.com/CabinfeverB)
 
     リージョン数の多いTiDBクラスタでは、ハートビート処理やタスクスケジューリングに伴うオーバーヘッドが増加するため、PDリーダーのCPU負荷が高くなる可能性があります。クラスタにTiDBインスタンスが多数存在し、リージョン情報へのリクエストが同時に多数発生すると、PDリーダーのCPU負荷はさらに高まり、PDサービスが利用できなくなる恐れがあります。
 
-    高可用性を確保するため、TiDB v7.6.0 では、PD のリージョン情報クエリ サービスの拡張性を向上させる Active PD Follower機能をサポートしています。Active PD Follower機能は、システム変数[`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760) `ON`に設定することで有効にできます。この機能を有効にすると、TiDB はリージョン情報要求をすべての PD サーバーに均等に分散し、PD フォロワーもリージョン要求を処理できるようになるため、PD リーダーの CPU 負荷が軽減されます。
+    高可用性を確保するため、TiDB v7.6.0 では、PD のリージョン情報クエリサービスの拡張性を向上させる Active PD Follower機能をサポートしています。Active PD Follower機能は、システム変数[`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760) `ON`に設定することで有効にできます。この機能を有効にすると、TiDB はリージョン情報要求をすべての PD サーバーに均等に分散し、PD フォロワーもリージョン要求を処理できるようになるため、PD リーダーの CPU 負荷が軽減されます。
 
     詳細については、 [ドキュメント](/tune-region-performance.md#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service)を参照してください。
 
@@ -146,7 +146,7 @@ TiDB バージョン: 7.6.0
 
 -   長時間実行されているアイドル状態のトランザクションを自動的に終了させる機能のサポート [#48714](https://github.com/pingcap/tidb/pull/48714) @[crazycs520](https://github.com/crazycs520)
 
-    ネットワーク切断やアプリケーション障害が発生するシナリオでは、 `COMMIT` / `ROLLBACK`ステートメントがデータベースに送信されない可能性があります。これにより、データベース ロックの解放が遅延し、トランザクション ロック待機が発生し、データベース接続が急増する可能性があります。このような問題はテスト環境ではよく発生しますが、本番環境でも時折発生する可能性があり、迅速な診断が難しい場合があります。これらの問題を回避するために、TiDB v7.6.0 では、長時間実行されているアイドル状態のトランザクションを自動的に終了する[`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760)システム変数が導入されました。トランザクション状態のユーザー セッションがこの変数の値を超える期間アイドル状態になると、TiDB はトランザクションのデータベース接続を終了し、トランザクションをロールバックします。
+    ネットワーク切断やアプリケーション障害が発生するシナリオでは、 `COMMIT` / `ROLLBACK`ステートメントがデータベースに送信されない可能性があります。これにより、データベース ロックの解放が遅延し、トランザクション ロック待機が発生し、データベース接続が急増する可能性があります。このような問題はテスト環境ではよく発生しますが、本番環境でも時折発生する可能性があり、迅速な診断が難しい場合があります。これらの問題を回避するために、TiDB v7.6.0 では、長時間実行されているアイドル状態のトランザクションを自動的に終了する[`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760)システム変数が導入されました。トランザクション状態のユーザーセッションがこの変数の値を超える期間アイドル状態になると、TiDB はトランザクションのデータベース接続を終了し、トランザクションをロールバックします。
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760)を参照してください。
 
@@ -168,7 +168,7 @@ TiDB バージョン: 7.6.0
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760)を参照してください。
 
--   BR はデフォルトでユーザー データなどのシステム テーブルを復元します[#48567](https://github.com/pingcap/tidb/issues/48567) @[BornChanger](https://github.com/BornChanger) [#49627](https://github.com/pingcap/tidb/issues/49627) @[Leavrth](https://github.com/Leavrth)
+-   BR はデフォルトでユーザーデータなどのシステムテーブルを復元します[#48567](https://github.com/pingcap/tidb/issues/48567) @[BornChanger](https://github.com/BornChanger) [#49627](https://github.com/pingcap/tidb/issues/49627) @[Leavrth](https://github.com/Leavrth)
 
     バージョン5.1.0以降、スナップショットをバックアップすると、 BRは`mysql`スキーマ内のシステムテーブルを自動的にバックアップしますが、デフォルトではこれらのシステムテーブルを復元しません。バージョン6.2.0では、 BRは`--with-sys-table`パラメータを追加し、一部のシステムテーブルのデータを復元できるようにすることで、操作の柔軟性を向上させています。
 
@@ -180,10 +180,10 @@ TiDB バージョン: 7.6.0
 
 -   リソース制御に関する可観測性の強化 [#49318](https://github.com/pingcap/tidb/issues/49318) @[glorv](https://github.com/glorv)@[bufferflies](https://github.com/bufferflies)@[nolouch](https://github.com/nolouch)
 
-    アプリケーションのワークロードを分離するためにリソース グループを使用するユーザーが増えるにつれ、リソース コントロールはリソース グループに基づいた強化されたデータを提供します。これにより、リソース グループのワークロードと設定を監視し、次のような問題を迅速かつ正確に特定して診断できるようになります。
+    アプリケーションのワークロードを分離するためにリソースグループを使用するユーザーが増えるにつれ、リソース コントロールはリソースグループに基づいた強化されたデータを提供します。これにより、リソースグループのワークロードと設定を監視し、次のような問題を迅速かつ正確に特定して診断できるようになります。
 
-    -   [スロークエリ](/identify-slow-queries.md): リソース グループ名、リソース ユニット (RU) の消費量、およびリソースの待機時間を追加します。
-    -   [ステートメントサマリーテーブル](/statement-summary-tables.md): リソース グループ名、RU 消費量、リソースの待機時間を追加します。
+    -   [スロークエリ](/identify-slow-queries.md): リソースグループ名、リソース ユニット (RU) の消費量、およびリソースの待機時間を追加します。
+    -   [ステートメントサマリーテーブル](/statement-summary-tables.md): リソースグループ名、RU 消費量、リソースの待機時間を追加します。
     -   システム変数[`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014)に、SQL ステートメントによって消費された[RU](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)を示す新しいエントリ`ru_consumption`を追加します。この変数を使用して、セッション内の最後のステートメントのリソース消費量を取得できます。
     -   リソースグループに基づいてデータベースのメトリックを追加します。具体的には、QPS/TPS、実行時間（P999/P99/P95）、障害発生回数、接続数などです。
     -   すべてのリソースグループの1日あたりのRU消費量の履歴レコードを記録するために、システムテーブル[`request_unit_by_group`](/mysql-schema/mysql-schema.md#system-tables-related-to-resource-control)を追加します。
@@ -224,7 +224,7 @@ TiDB バージョン: 7.6.0
 
 ### MySQLとの互換性 {#mysql-compatibility}
 
--   TiDB v7.6.0 より前は、 `LOAD DATA`操作は、単一のトランザクションですべての行をコミットするか、トランザクションをバッチでコミットしていました。これは MySQL の動作とは若干異なります。v7.6.0 以降、TiDB は`LOAD DATA` MySQL と同様にトランザクションで処理します。トランザクション内の`LOAD DATA`ステートメントは、現在のトランザクションを自動的にコミットしたり、新しいトランザクションを開始したりしなくなりました。さらに、トランザクション内の`LOAD DATA`ステートメントを明示的にコミットまたはロールバックできます。また、 `LOAD DATA`ステートメントは、TiDB のトランザクション モード設定 (楽観的トランザクションまたは悲観的トランザクション) の影響を受けます。 [#49079](https://github.com/pingcap/tidb/pull/49079) @[ekexium](https://github.com/ekexium)
+-   TiDB v7.6.0 より前は、 `LOAD DATA`操作は、単一のトランザクションですべての行をコミットするか、トランザクションをバッチでコミットしていました。これは MySQL の動作とは若干異なります。v7.6.0 以降、TiDB は`LOAD DATA` MySQL と同様にトランザクションで処理します。トランザクション内の`LOAD DATA`ステートメントは、現在のトランザクションを自動的にコミットしたり、新しいトランザクションを開始したりしなくなりました。さらに、トランザクション内の`LOAD DATA`ステートメントを明示的にコミットまたはロールバックできます。また、 `LOAD DATA`ステートメントは、TiDB のトランザクションモード設定 (楽観的トランザクションまたは悲観的トランザクション) の影響を受けます。 [#49079](https://github.com/pingcap/tidb/pull/49079) @[ekexium](https://github.com/ekexium)
 
 ### システム変数 {#system-variables}
 
@@ -267,14 +267,14 @@ TiDB バージョン: 7.6.0
 
 -   TiDBでサポートされているすべてのキーワードの情報を表示するために、新しいシステムテーブル[`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md)を追加します。
 -   システムテーブル[`INFORMATION_SCHEMA.SLOW_QUERY`](/information-schema/information-schema-slow-query.md)に、リソース制御に関連する以下のフィールドを追加します。
-    -   `Resource_group` : ステートメントがバインドされているリソース グループ。
+    -   `Resource_group` : ステートメントがバインドされているリソースグループ。
     -   `Request_unit_read` : ステートメントによって消費された読み取り RU の合計。
     -   `Request_unit_write` : ステートメントによって消費された書き込み RU の合計。
     -   `Time_queued_by_rc` : ステートメントが利用可能なリソースを待機する合計時間。
 
 ## オフラインパッケージの変更 {#offline-package-changes}
 
-v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-package.md)には、プロキシ コンポーネント[TiProxy](/tiproxy/tiproxy-overview.md)のインストール パッケージである`tiproxy-{version}-linux-{arch}.tar.gz`含まれるようになりました。
+v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-package.md)には、プロキシ コンポーネント[TiProxy](/tiproxy/tiproxy-overview.md)のインストールパッケージである`tiproxy-{version}-linux-{arch}.tar.gz`含まれるようになりました。
 
 ## 非推奨機能 {#deprecated-features}
 
@@ -302,7 +302,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
 -   TiKV
 
     -   非同期タスクを照会するためのAPIエンドポイント`/async_tasks`を追加 [#15759](https://github.com/tikv/tikv/issues/15759) @[YuJuncen](https://github.com/YuJuncen)
-    -   gRPC モニタリングに優先度ラベルを追加して、異なる優先度のリソース グループ データを表示します [#49318](https://github.com/pingcap/tidb/issues/49318) @[bufferflies](https://github.com/bufferflies)
+    -   gRPC モニタリングに優先度ラベルを追加して、異なる優先度のリソースグループ データを表示します [#49318](https://github.com/pingcap/tidb/issues/49318) @[bufferflies](https://github.com/bufferflies)
     -   `readpool.unified.max-tasks-per-worker`の値を動的に調整することで、優先度に基づいて実行中のタスク数を個別に計算できます [#16026](https://github.com/tikv/tikv/issues/16026) @[glorv](https://github.com/glorv)
     -   GCスレッド数を動的に調整する機能をサポート。デフォルト値は`1` [#16101](https://github.com/tikv/tikv/issues/16101) @[tonyxuqqi](https://github.com/tonyxuqqi)
 
@@ -372,7 +372,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   `ALTER TABLE t PARTITION BY`を実行する際に配置ルールを指定すると`ERROR 8239`というエラーが報告される問題を修正しました。 [#48630](https://github.com/pingcap/tidb/issues/48630) @[mjonss](https://github.com/mjonss)
     -   `START_TIME`の`INFORMATION_SCHEMA.CLUSTER_INFO`列タイプが無効であるという問題を修正します [#45221](https://github.com/pingcap/tidb/issues/45221) @[dveeden](https://github.com/dveeden)
     -   `EXTRA`の列タイプが無効であるために`INFORMATION_SCHEMA.COLUMNS`エラー`Data Too Long, field len 30, data len 45`が発生する問題を修正しました。 [#42030](https://github.com/pingcap/tidb/issues/42030) @[tangenta](https://github.com/tangenta)
-    -   `IN (...)`で`INFORMATION_SCHEMA.STATEMENTS_SUMMARY`で異なるプラン ダイジェストが発生する問題を修正 [#33559](https://github.com/pingcap/tidb/issues/33559) @[King-Dylan](https://github.com/King-Dylan)
+    -   `IN (...)`で`INFORMATION_SCHEMA.STATEMENTS_SUMMARY`で異なるプランダイジェストが発生する問題を修正 [#33559](https://github.com/pingcap/tidb/issues/33559) @[King-Dylan](https://github.com/King-Dylan)
     -   `TIME`型を`YEAR`型に変換する際に、返される結果に`TIME`と年が混在する問題を修正しました。 [#48557](https://github.com/pingcap/tidb/issues/48557) @[YangKeao](https://github.com/YangKeao)
     -   `tidb_enable_collect_execution_info`を無効にするとコプロセッサキャッシュがpanicを起こす問題を修正 [#48212](https://github.com/pingcap/tidb/issues/48212) @[you06](https://github.com/you06)
     -   `shuffleExec`が予期せず終了した際にTiDBがクラッシュする問題を修正 [#48230](https://github.com/pingcap/tidb/issues/48230) @[wshwsh12](https://github.com/wshwsh12)
@@ -412,9 +412,9 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   `UPDATE` 、 `DELETE` 、および`INSERT`ステートメントが、 `SQL_MODE`が厳密でない場合に警告ではなくオーバーフローエラーを返す問題を修正します [#49137](https://github.com/pingcap/tidb/issues/49137) @[YangKeao](https://github.com/YangKeao)
     -   テーブルに多値インデックスと非バイナリ型文字列で構成される複合インデックスがある場合にデータを挿入できない問題を修正 [#49680](https://github.com/pingcap/tidb/issues/49680) @[YangKeao](https://github.com/YangKeao)
     -   多階層にネストされた`LIMIT`クエリ内の`UNION`無効になる可能性がある問題を修正 [#49874](https://github.com/pingcap/tidb/issues/49874) @[Defined2014](https://github.com/Defined2014)
-    -   `BETWEEN ... AND ...`条件を使用してパーティション テーブルをクエリすると誤った結果が返される問題を修正 [#49842](https://github.com/pingcap/tidb/issues/49842) @[Defined2014](https://github.com/Defined2014)
+    -   `BETWEEN ... AND ...`条件を使用してパーティションテーブルをクエリすると誤った結果が返される問題を修正 [#49842](https://github.com/pingcap/tidb/issues/49842) @[Defined2014](https://github.com/Defined2014)
     -   `REPLACE INTO`ステートメントでヒントが使用できない問題を修正 [#34325](https://github.com/pingcap/tidb/issues/34325) @[YangKeao](https://github.com/YangKeao)
-    -   ハッシュ パーティション テーブルのクエリ時に TiDB が間違ったパーティションを選択する可能性がある問題を修正 [#50044](https://github.com/pingcap/tidb/issues/50044) @[Defined2014](https://github.com/Defined2014)
+    -   ハッシュパーティションテーブルのクエリ時に TiDB が間違ったパーティションを選択する可能性がある問題を修正 [#50044](https://github.com/pingcap/tidb/issues/50044) @[Defined2014](https://github.com/Defined2014)
     -   圧縮を有効にして MariaDB Connector/J を使用するときに発生する接続エラーを修正 [#49845](https://github.com/pingcap/tidb/issues/49845) @[onlyacat](https://github.com/onlyacat)
 
 -   TiKV
@@ -480,7 +480,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
 
     -   TiDB Data Migration (DM)
 
-        -   DM で「イベント タイプ truncate が無効です」というエラーが発生し、アップグレードが失敗する問題を修正します [#10282](https://github.com/pingcap/tiflow/issues/10282) @[GMHDBJD](https://github.com/GMHDBJD)
+        -   DM で「イベントタイプ truncate が無効です」というエラーが発生し、アップグレードが失敗する問題を修正します [#10282](https://github.com/pingcap/tiflow/issues/10282) @[GMHDBJD](https://github.com/GMHDBJD)
         -   GTID モードでデータをレプリケートする際のパフォーマンス低下の問題を修正 [#9676](https://github.com/pingcap/tiflow/issues/9676) @[feran-morgan-pingcap](https://github.com/feran-morgan-pingcap)
         -   下流テーブル構造に`shard_row_id_bits`が含まれている場合にマイグレーションタスクエラーが発生する問題を修正 [#10308](https://github.com/pingcap/tiflow/issues/10308) @[GMHDBJD](https://github.com/GMHDBJD)
 

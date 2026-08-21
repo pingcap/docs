@@ -41,7 +41,7 @@ TiDB バージョン: 4.0.13
 
     -   Backup & Restore (BR)
 
-        -   `mysql`スキーマで作成されたユーザー テーブルのバックアップをサポート [＃1077](https://github.com/pingcap/br/pull/1077)
+        -   `mysql`スキーマで作成されたユーザーテーブルのバックアップをサポート [＃1077](https://github.com/pingcap/br/pull/1077)
         -   更新`checkVersion`クラスタデータとバックアップデータチェックする [＃1090](https://github.com/pingcap/br/pull/1090)
         -   バックアップ中に少数のTiKVノード障害を許容する [＃1062](https://github.com/pingcap/br/pull/1062)
 
@@ -94,7 +94,7 @@ TiDB バージョン: 4.0.13
     -   照合順序が正しく処理されていないため、 `concat` / `make_set` / `insert`式の結果が間違っている問題を修正しました[＃23878](https://github.com/pingcap/tidb/pull/23878)
     -   `RANGE`パーティションを持つテーブルでクエリを実行するときに発生するpanicを修正しました [＃23689](https://github.com/pingcap/tidb/pull/23689)
     -   問題を修正: 以前のバージョンのクラスターで、変数`tidb_enable_table_partition` `false`に設定されている場合、パーティションを含むテーブルは非パーティションテーブルとして扱われます。クラスターを新しいバージョンにアップグレードした後、このテーブルに対して`batch point get`クエリを実行すると、接続panicが発生します[＃23682](https://github.com/pingcap/tidb/pull/23682)
-    -   TiDB が TCP および UNIX ソケットを listen するように構成されている場合、TCP 接続経由のリモート ホストが接続に対して正しく検証されない問題を修正しました。 [＃23513](https://github.com/pingcap/tidb/pull/23513)
+    -   TiDB が TCP および UNIX ソケットを listen するように構成されている場合、TCP 接続経由のリモートホストが接続に対して正しく検証されない問題を修正しました。 [＃23513](https://github.com/pingcap/tidb/pull/23513)
     -   デフォルト以外の照合順序で間違ったクエリ結果が発生するバグを修正[＃22923](https://github.com/pingcap/tidb/pull/22923)
     -   Grafanaの**コプロセッサー Cache**パネルが動作しないバグを修正[＃22617](https://github.com/pingcap/tidb/pull/22617)
     -   オプティマイザが統計キャッシュアクセスする際に発生するエラーを修正 [＃22565](https://github.com/pingcap/tidb/pull/22565)
@@ -135,7 +135,7 @@ TiDB バージョン: 4.0.13
     -   TiCDC
 
         -   ソーターの入力チャネルがブロックされたときにフロー制御によって発生するデッドロックの問題を修正しました[＃1779](https://github.com/pingcap/tiflow/pull/1779)
-        -   TiCDC チェンジフィード チェックポイントの停滞により TiKV GC セーフ ポイントがブロックされる問題を修正しました [＃1756](https://github.com/pingcap/tiflow/pull/1756)
+        -   TiCDC チェンジフィード チェックポイントの停滞により TiKV GC セーフポイントがブロックされる問題を修正しました [＃1756](https://github.com/pingcap/tiflow/pull/1756)
         -   MySQL にデータを複製するときに`SUPER`権限を必要とする`explicit_defaults_for_timestamp`の更新を元に戻す [＃1749](https://github.com/pingcap/tiflow/pull/1749)
 
     -   TiDB Lightning

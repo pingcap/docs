@@ -11,14 +11,14 @@ DMを使用してMySQLからTiDBにデータを移行する場合、online-ddl�
 
 ## オンライン DDL ツールを使用した DM の動作詳細 {#working-details-for-dm-with-online-ddl-tools}
 
-このセクションでは、オンライン スキーマ変更を実装する場合の、オンライン DDL ツール[gh-ost](https://github.com/github/gh-ost)および[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)を使用した DM の動作の詳細について説明します。
+このセクションでは、オンラインスキーマ変更を実装する場合の、オンライン DDL ツール[gh-ost](https://github.com/github/gh-ost)および[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)を使用した DM の動作の詳細について説明します。
 
 ## オンラインスキーマ変更: gh-ost {#online-schema-change-gh-ost}
 
-gh-ost がオンライン スキーマ変更を実装すると、次の 3 種類のテーブルが作成されます。
+gh-ost がオンラインスキーマ変更を実装すると、次の 3 種類のテーブルが作成されます。
 
 -   gho: DDLの適用に使用されます。データが完全に複製され、ghoテーブルが元のテーブルと整合性が取れている場合、元のテーブルは名前変更によって置き換えられます。
--   ghc: オンライン スキーマ変更に関連する情報を保存するために使用されます。
+-   ghc: オンラインスキーマ変更に関連する情報を保存するために使用されます。
 -   del: 元のテーブルの名前を変更して作成されました。
 
 移行プロセスでは、DM は上記のテーブルを 3 つのカテゴリに分割します。
@@ -113,7 +113,7 @@ gh-ost で主に使用される SQL ステートメントとそれに対応す�
 
 ## オンラインスキーマ変更: pt {#online-schema-change-pt}
 
-pt-osc がオンライン スキーマ変更を実装すると、次の 2 種類のテーブルが作成されます。
+pt-osc がオンラインスキーマ変更を実装すると、次の 2 種類のテーブルが作成されます。
 
 -   `new` : DDLの適用に使用されます。データが完全に複製され、 `new`テーブルが元のテーブルと整合性が取れている場合、元のテーブルは名前変更によって置き換えられます。
 -   `old` : 元のテーブルの名前を変更して作成されました。

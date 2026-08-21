@@ -13,14 +13,14 @@ summary: TiCDC の使用時に発生する可能性のある問題のトラブ�
 
 ## TiCDC レプリケーションの中断 {#ticdc-replication-interruptions}
 
-### TiCDC レプリケーション タスクが中断されたかどうかはどうすればわかりますか? {#how-do-i-know-whether-a-ticdc-replication-task-is-interrupted}
+### TiCDC レプリケーションタスクが中断されたかどうかはどうすればわかりますか? {#how-do-i-know-whether-a-ticdc-replication-task-is-interrupted}
 
 -   Grafanaダッシュボードで、レプリケーションタスクの監視メトリック`changefeed checkpoint` （適切な`changefeed id`選択）を確認してください。メトリック値が変化しない場合、またはメトリック`checkpoint lag`が増加し続ける場合、レプリケーションタスクが中断されている可能性があります。
 -   監視メトリック`exit error count`を確認してください。メトリック値が`0`より大きい場合、レプリケーションタスクでエラーが発生しました。
 -   `cdc cli changefeed list`と`cdc cli changefeed query`を実行して、レプリケーションタスクのステータスを確認します。`stopped`はタスクが停止したことを意味し、 `error`は詳細なエラーメッセージを示します。エラー発生後、TiCDCサーバーログで`error on running processor`を検索してエラースタックを確認し、トラブルシューティングを行うことができます。
 -   極端なケースでは、TiCDC サービスが再起動されることがあります。トラブルシューティングのために、TiCDCサーバーログの`FATAL`レベル目のログを検索できます。
 
-### レプリケーション タスクが手動で停止されたかどうかを確認するにはどうすればよいですか? {#how-do-i-know-whether-the-replication-task-is-stopped-manually}
+### レプリケーションタスクが手動で停止されたかどうかを確認するにはどうすればよいですか? {#how-do-i-know-whether-the-replication-task-is-stopped-manually}
 
 レプリケーションタスクが手動で停止されているかどうかを確認するには、 `cdc cli`を実行します。例:
 
@@ -32,29 +32,29 @@ cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id 28c43ffc
 
 ### レプリケーションの中断をどのように処理しますか? {#how-do-i-handle-replication-interruptions}
 
-次の既知のシナリオでは、レプリケーション タスクが中断される可能性があります。
+次の既知のシナリオでは、レプリケーションタスクが中断される可能性があります。
 
 -   ダウンストリームは引き続き異常であり、何度も再試行しても TiCDC は失敗します。
 
     -   このシナリオでは、TiCDCはタスク情報を保存します。TiCDCはPDにサービスGCセーフポイントを設定しているため、タスクチェックポイント以降のデータは有効期間`gc-ttl`内にTiKV GCによってクリーンアップされません。
 
-    -   対処方法：ダウンストリームが正常に戻った後、 `cdc cli changefeed resume`を実行することでレプリケーション タスクを再開できます。
+    -   対処方法：ダウンストリームが正常に戻った後、 `cdc cli changefeed resume`を実行することでレプリケーションタスクを再開できます。
 
 -   ダウンストリームに互換性のない SQL ステートメントがあるため、レプリケーションを続行できません。
 
     -   このシナリオでは、TiCDCはタスク情報を保存します。TiCDCはPDにサービスGCセーフポイントを設定しているため、タスクチェックポイント以降のデータは有効期間`gc-ttl`内にTiKV GCによってクリーンアップされません。
     -   取り扱い手順:
-        1.  `cdc cli changefeed query`コマンドを使用してレプリケーション タスクのステータス情報を照会し、 `checkpoint-ts`の値を記録します。
+        1.  `cdc cli changefeed query`コマンドを使用してレプリケーションタスクのステータス情報を照会し、 `checkpoint-ts`の値を記録します。
         2.  新しいタスク構成ファイルを使用して`ignore-txn-start-ts`パラメータを追加し、指定された`start-ts`に対応するトランザクションをスキップします。
-        3.  `cdc cli changefeed pause -c <changefeed-id>`を実行してレプリケーション タスクを一時停止します。
+        3.  `cdc cli changefeed pause -c <changefeed-id>`を実行してレプリケーションタスクを一時停止します。
         4.  `cdc cli changefeed update -c <changefeed-id> --config <config-file-path>`を実行して新しいタスク構成ファイルを指定します。
-        5.  `cdc cli changefeed resume -c <changefeed-id>`を実行してレプリケーション タスクを再開します。
+        5.  `cdc cli changefeed resume -c <changefeed-id>`を実行してレプリケーションタスクを再開します。
 
 ### タスク中断後に TiCDC を再起動した後で発生する OOM を処理するにはどうすればよいですか? {#what-should-i-do-to-handle-the-oom-that-occurs-after-ticdc-is-restarted-after-a-task-interruption}
 
 -   TiDBクラスタとTiCDCクラスタを最新バージョンに更新してください。OOM問題は**、v4.0.14以降のv4.0バージョン、v5.0.2以降のv5.0バージョン、および最新バージョン**で既に解決されています。
 
-## レプリケーション タスクを作成するとき、または MySQL にデータをレプリケートするときに、「 `Error 1298: Unknown or incorrect time zone: 'UTC'`エラーを処理するにはどうすればよいですか? {#how-do-i-handle-the-error-1298-unknown-or-incorrect-time-zone-utc-error-when-creating-the-replication-task-or-replicating-data-to-mysql}
+## レプリケーションタスクを作成するとき、または MySQL にデータをレプリケートするときに、「 `Error 1298: Unknown or incorrect time zone: 'UTC'`エラーを処理するにはどうすればよいですか? {#how-do-i-handle-the-error-1298-unknown-or-incorrect-time-zone-utc-error-when-creating-the-replication-task-or-replicating-data-to-mysql}
 
 このエラーは、下流のMySQLがタイムゾーンをロードしていない場合に返されます。[`mysql_tzinfo_to_sql`](https://dev.mysql.com/doc/refman/8.0/en/mysql-tzinfo-to-sql.html)を実行することでタイムゾーンをロードできます。タイムゾーンをロードした後は、タスクを作成し、通常どおりデータをレプリケートできます。
 
@@ -82,7 +82,7 @@ Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skippin
 
 ## TiCDCタスクの`start-ts`タイムスタンプが現在時刻と大きく異なります。このタスクの実行中にレプリケーションが中断され、エラー`[CDC:ErrBufferReachLimit]`が発生しました。どうすればよいでしょうか？ {#the-start-ts-timestamp-of-the-ticdc-task-is-quite-different-from-the-current-time-during-the-execution-of-this-task-replication-is-interrupted-and-an-error-cdc-errbufferreachlimit-occurs-what-should-i-do}
 
-v4.0.9 以降では、レプリケーション タスクで統合ソーター機能を有効にするか、 BRツールを使用して増分バックアップと復元を実行し、新しい時間から TiCDC レプリケーション タスクを開始することができます。
+v4.0.9 以降では、レプリケーションタスクで統合ソーター機能を有効にするか、 BRツールを使用して増分バックアップと復元を実行し、新しい時間から TiCDC レプリケーションタスクを開始することができます。
 
 ## 変更フィードの下流にMySQLなどのデータベースがあり、TiCDCが時間のかかるDDL文を実行すると、他のすべての変更フィードがブロックされます。どうすればよいでしょうか？ {#when-the-downstream-of-a-changefeed-is-a-database-similar-to-mysql-and-ticdc-executes-a-time-consuming-ddl-statement-all-other-changefeeds-are-blocked-what-should-i-do}
 

@@ -138,7 +138,7 @@ ALTER TABLE orders TTL_JOB_INTERVAL = '24h';
 
 TTLジョブを実行する際、TiDBはテーブルを最大64個のタスクに分割します。リージョンを最小単位とします。これらのタスクは分散して実行されます。システム変数[`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700)を設定することで、クラスター全体で同時実行可能なTTLタスクの数を制限できます。ただし、すべての種類のテーブルのすべてのTTLジョブをタスクに分割できるわけではありません。どの種類のテーブルのTTLジョブをタスクに分割できないかの詳細については、セクション[制限事項](#limitations)を参照してください。
 
-TTL ジョブの実行を無効にするには、 `TTL_ENABLE='OFF'`テーブル オプションを設定することに加えて、 [`tidb_ttl_job_enable`](/system-variables.md#tidb_ttl_job_enable-new-in-v650)グローバル変数を設定してクラスター全体で TTL ジョブの実行を無効にすることもできます。
+TTL ジョブの実行を無効にするには、 `TTL_ENABLE='OFF'`テーブルオプションを設定することに加えて、 [`tidb_ttl_job_enable`](/system-variables.md#tidb_ttl_job_enable-new-in-v650)グローバル変数を設定してクラスター全体で TTL ジョブの実行を無効にすることもできます。
 
 ```sql
 SET @@global.tidb_ttl_job_enable = OFF;
@@ -273,7 +273,7 @@ TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツー
 
 <CustomContent platform="tidb">
 
--   削除がデータ サイズを比較的安定させるのに十分な速さであるかどうかをどのように判断すればよいでしょうか?
+-   削除がデータサイズを比較的安定させるのに十分な速さであるかどうかをどのように判断すればよいでしょうか?
 
     [Grafana `TiDB`ダッシュボード](/grafana-tidb-dashboard.md)パネル`TTL Insert Rows Per Hour`は、過去 1 時間に挿入された行の総数を記録します。対応する`TTL Delete Rows Per Hour`は 、過去 1 時間に TTL タスクによって削除された行の総数を記録します。`TTL Insert Rows Per Hour`が長期間にわたって`TTL Delete Rows Per Hour`よりも高い場合、挿入率が削除率を上回り、データの総量が増加することを意味します。例:
 

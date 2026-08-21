@@ -37,7 +37,7 @@ aliases: ['/ja/tidbcloud/migrate-from-amazon-s3-or-gcs','/ja/tidbcloud/migrate-f
     > -   データファイルのみを圧縮すればよく、データベースファイルやテーブルスキーマファイルを圧縮する必要はありません。
     > -   パフォーマンスを向上させるためには、各圧縮ファイルのサイズを100MiBに制限することをお勧めします。
     > -   Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
-    > -   圧縮されていないファイルの場合、前述のルールに従って CSV ファイル名を更新できない場合 (たとえば、CSV ファイル リンクが他のプログラムでも使用されている場合)、ファイル名を変更せずに、[ステップ4](#step-4-import-csv-files-to-tidb-cloud)の**Destination Mapping**手順で**<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDB ファイル命名規則</a>を使用して自動マッピングを行う」の**選択を解除して、ソース ファイルを単一のターゲット テーブルに手動でマッピングできます。
+    > -   圧縮されていないファイルの場合、前述のルールに従って CSV ファイル名を更新できない場合 (たとえば、CSV ファイル リンクが他のプログラムでも使用されている場合)、ファイル名を変更せずに、[ステップ4](#step-4-import-csv-files-to-tidb-cloud)の**Destination Mapping**手順で**<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDB ファイル命名規則</a>を使用して自動マッピングを行う」の**選択を解除して、ソースファイルを単一のターゲットテーブルに手動でマッピングできます。
 
 ## ステップ2．対象テーブルのスキーマを作成する {#step-2-create-the-target-table-schemas}
 
@@ -84,7 +84,7 @@ TiDB CloudがAmazon S3バケット、GCSバケット、またはAzure Blob Stora
 
 -   CSV ファイルが Amazon S3 にある場合は、 [Amazon S3へのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)。
 
-    バケットにアクセスするには、AWS アクセスキーまたはロール ARN のいずれかを使用できます。完了したら、[ステップ4](#step-4-import-csv-files-to-tidb-cloud)で必要となるため、アクセスキー (アクセスキー ID とシークレット アクセスキーを含む) またはロール ARN の値をメモしておいてください。
+    バケットにアクセスするには、AWS アクセスキーまたはロール ARN のいずれかを使用できます。完了したら、[ステップ4](#step-4-import-csv-files-to-tidb-cloud)で必要となるため、アクセスキー (アクセスキー ID とシークレットアクセスキーを含む) またはロール ARN の値をメモしておいてください。
 
 -   CSV ファイルが GCS にある場合は、 [GCSへのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access)。
 
@@ -115,7 +115,7 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
     -   **Source URI** ：
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`s3://[bucket_name]/[data_source_folder]/[file_name].csv`の形式で入力してください。例: `s3://mybucket/myfolder/TableName.01.csv` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`s3://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `s3://mybucket/myfolder/` 。
-    -   **認証情報**: AWS ロール ARN または AWS アクセス キーを使用してバケットにアクセスできます。詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)を参照してください。
+    -   **認証情報**: AWS ロール ARN または AWS アクセスキーを使用してバケットにアクセスできます。詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)を参照してください。
         -   **AWS Role ARN** (推奨): AWS ロール ARN の値を入力します。まだロール ARN がない場合は、 **[ここをクリックして AWS CloudFormation を使用して新しいロール ARN を作成する]**をクリックし、画面の指示に従うか、 **[問題が発生しましたか?] ダイアログでロール ARN を手動で作成して、**クラスターの**TiDB Cloud Account ID**と**TiDB Cloud External ID**を取得し、 IAMロールを手動で作成します。
         -   **AWS Access Key**：AWSアクセスキーIDとAWSシークレットアクセスキーを入力してください。
 
@@ -170,7 +170,7 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
     -   **Source URI** ：
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`gs://[bucket_name]/[data_source_folder]/[file_name].csv`の形式で入力します。例: `gs://mybucket/myfolder/TableName.01.csv` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`gs://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `gs://mybucket/myfolder/` 。
-    -   **Google Cloud サービス アカウント ID** : TiDB Cloud は、このページで一意の Google Cloud サービス アカウント ID ( `example-service-account@your-project.iam.gserviceaccount.com`など) を提供します。このサービス アカウント ID に、Google Cloud プロジェクト内の GCS バケットに対して必要なIAM権限（ `Storage Object Viewer`など）を付与します。詳細については、 [GCSへのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access)を参照してください。
+    -   **Google Cloud サービスアカウント ID** : TiDB Cloud は、このページで一意の Google Cloud サービスアカウント ID ( `example-service-account@your-project.iam.gserviceaccount.com`など) を提供します。このサービスアカウント ID に、Google Cloud プロジェクト内の GCS バケットに対して必要なIAM権限（ `Storage Object Viewer`など）を付与します。詳細については、 [GCSへのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access)を参照してください。
 
 4.  **次へ**をクリックしてください。
 
@@ -234,7 +234,7 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
             2.  ストレージアカウントに移動し、 **[概要]** &gt; **JSON View**をクリックします。
             3.  `id`プロパティの値をコピーします。リソース ID は`/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Storage/storageAccounts/<account_name>`の形式です。
 
-    -   **SAS Token**: TiDB Cloud がAzure Blob Storage コンテナー内のソース ファイルにアクセスできるようにするアカウント SAS トークンを入力します。まだお持ちでない場合は、 **「ここをクリックして Azure ARM テンプレートを使用して新しいものを作成します」を**クリックし、画面の指示に従うか、アカウント SAS トークンを手動で作成します。詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access)を参照してください。
+    -   **SAS Token**: TiDB Cloud がAzure Blob Storage コンテナー内のソースファイルにアクセスできるようにするアカウント SAS トークンを入力します。まだお持ちでない場合は、 **「ここをクリックして Azure ARM テンプレートを使用して新しいものを作成します」を**クリックし、画面の指示に従うか、アカウント SAS トークンを手動で作成します。詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access)を参照してください。
 
 4.  **次へ**をクリックしてください。
 

@@ -37,7 +37,7 @@ TiDB DashboardはPDクライアントポート（デフォルトは[http://IP:23
     >
     > TiDB、TiKV、その他のコンポーネントは、PDクライアントポートを介してPDコンポーネントと通信する必要があるため、コンポーネント間の内部ネットワークへのアクセスをブロックしないでください。ブロックすると、クラスターが使用できなくなります。
 
--   リバース プロキシを構成して、別のポートで TiDB Dashboard サービスを外部ネットワークに安全に提供する方法の詳細については、 [リバースプロキシの背後で TiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
+-   リバースプロキシを構成して、別のポートで TiDB Dashboard サービスを外部ネットワークに安全に提供する方法の詳細については、 [リバースプロキシの背後で TiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
 
 ### 複数のPDインスタンスを展開するときにTiDB Dashboardポートへのアクセスを開く方法 {#how-to-open-access-to-tidb-dashboard-port-when-deploying-multiple-pd-instances}
 
@@ -49,7 +49,7 @@ TiDB DashboardはPDクライアントポート（デフォルトは[http://IP:23
 
 複数のPDインスタンスがデプロイされている場合、TiDB Dashboardは実際に1つのPDインスタンスのみで実行され、他のPDインスタンスにアクセスするとブラウザのリダイレクトが発生します。そのため、ファイアウォールに正しいIPアドレスが設定されていることを確認する必要があります。このメカニズムの詳細については、 [複数のPDインスタンスを使用したデプロイメント](/dashboard/dashboard-ops-deploy.md#deployment-with-multiple-pd-instances)を参照してください。
 
-TiUPデプロイメント ツールを使用する場合、次のコマンドを実行すると、実際に TiDB Dashboardを実行している PD インスタンスのアドレスを表示できます ( `CLUSTER_NAME`をクラスター名に置き換えます)。
+TiUPデプロイメントツールを使用する場合、次のコマンドを実行すると、実際に TiDB Dashboardを実行している PD インスタンスのアドレスを表示できます ( `CLUSTER_NAME`をクラスター名に置き換えます)。
 
 ```bash
 tiup cluster display CLUSTER_NAME --dashboard
@@ -59,7 +59,7 @@ tiup cluster display CLUSTER_NAME --dashboard
 
 > **Note:**
 >
-> この機能は、 `tiup cluster`デプロイメント ツールの新しいバージョン (v1.0.3 以降) でのみ使用できます。
+> この機能は、 `tiup cluster`デプロイメントツールの新しいバージョン (v1.0.3 以降) でのみ使用できます。
 >
 > <details><summary>TiUPクラスタのアップグレード</summary>
 >
@@ -78,15 +78,15 @@ http://192.168.0.123:2379/dashboard/
 
 この例では、ファイアウォールは、開いている IP `192.168.0.123`のポート`2379`への受信アクセスを設定する必要があり、TiDB Dashboardには[http://192.168.0.123:2379/dashboard/](http://192.168.0.123:2379/dashboard/)経由でアクセスします。
 
-## TiDB Dashboard専用のリバース プロキシ {#reverse-proxy-only-for-tidb-dashboard}
+## TiDB Dashboard専用のリバースプロキシ {#reverse-proxy-only-for-tidb-dashboard}
 
 [ファイアウォールを使用して信頼できないアクセスをブロックする](#ファイアウォールを使用して信頼できないアクセスをブロックする)で述べたように、PDクライアントポートで提供されるサービスには、TiDB Dashboard（ [http://IP:2379/dashboard/](http://IP:2379/dashboard/)に配置）だけでなく、PD内の他の特権インターフェース（ [http://IP:2379/pd/api/v1/members](http://IP:2379/pd/api/v1/members)など）も含まれます。したがって、リバースプロキシを使用してTiDB Dashboardを外部ネットワークに提供する場合は、外部ネットワークが**リバース**プロキシを介してPD内の特権インターフェースにアクセスできないように、ポート内のすべてのサービスで**はなく**、プレフィックスが`/dashboard`サービスのみを提供するようにしてください。
 
-安全で推奨されるリバース プロキシ構成を確認するには、 [リバースプロキシの背後で TiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照することをお勧めします。
+安全で推奨されるリバースプロキシ構成を確認するには、 [リバースプロキシの背後で TiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照することをお勧めします。
 
 ## リバースプロキシのTLSを有効にする {#enable-tls-for-reverse-proxy}
 
-トランスポートレイヤーのセキュリティをさらに強化するには、リバース プロキシに対して TLS を有効にし、さらに mTLS を導入してユーザー証明書を認証することもできます。
+トランスポートレイヤーのセキュリティをさらに強化するには、リバースプロキシに対して TLS を有効にし、さらに mTLS を導入してユーザー証明書を認証することもできます。
 
 詳細は[HTTPSサーバーの設定](http://nginx.org/en/docs/http/configuring_https_servers.html)と[HAProxy SSL 終了](https://www.haproxy.com/blog/haproxy-ssl-termination/)ご覧ください。
 

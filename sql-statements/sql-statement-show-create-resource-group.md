@@ -5,7 +5,7 @@ summary: TiDBにおけるSHOW CREATE RESOURCE GROUPの使い方を学びまし�
 
 # SHOW CREATE RESOURCE GROUP {#show-create-resource-group}
 
-`SHOW CREATE RESOURCE GROUP`ステートメントを使用すると、リソース グループの現在の定義を表示できます。
+`SHOW CREATE RESOURCE GROUP`ステートメントを使用すると、リソースグループの現在の定義を表示できます。
 
 > **Note:**
 >

@@ -1,6 +1,6 @@
 ---
 title: TiCDC Client Authentication
-summary: コマンドライン ツールまたは OpenAPI を使用して TiCDC クライアント認証を実行する方法を紹介します。
+summary: コマンドラインツールまたは OpenAPI を使用して TiCDC クライアント認証を実行する方法を紹介します。
 ---
 
 # TiCDC クライアント認証 {#ticdc-client-authentication}

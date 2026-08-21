@@ -8,7 +8,7 @@ summary: ある TiDB クラスターから別の TiDB クラスターにデー�
 このドキュメントでは、あるTiDBクラスタから別のTiDBクラスタにデータを移行する方法について説明します。この機能は、以下のシナリオに適用されます。
 
 -   データベースの分割: TiDB クラスターが大きすぎる場合、またはクラスターのサービス間への影響を避けたい場合は、データベースを分割できます。
--   データベースの再配置: データ センターの変更など、データベースを物理的に再配置します。
+-   データベースの再配置: データセンターの変更など、データベースを物理的に再配置します。
 -   新しいバージョンの TiDB クラスターにデータを移行する: データのセキュリティと精度の要件を満たすために、新しいバージョンの TiDB クラスターにデータを移行します。
 
 このドキュメントでは、移行プロセス全体を例示し、次の手順について説明します。
@@ -142,7 +142,7 @@ summary: ある TiDB クラスターから別の TiDB クラスターにデー�
 
 2.  データをバックアップします。
 
-    データをバックアップするには、アップストリーム クラスターで`BACKUP`ステートメントを実行します。
+    データをバックアップするには、アップストリームクラスターで`BACKUP`ステートメントを実行します。
 
     ```sql
     MySQL [(none)]> BACKUP DATABASE * TO 's3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://${HOST_IP}:6060&force-path-style=true' RATE_LIMIT = 120 MB/SECOND;
@@ -161,7 +161,7 @@ summary: ある TiDB クラスターから別の TiDB クラスターにデー�
 
 3.  データを復元します。
 
-    ダウンストリーム クラスターで`RESTORE`コマンドを実行してデータを復元します。
+    ダウンストリームクラスターで`RESTORE`コマンドを実行してデータを復元します。
 
     ```sql
     mysql> RESTORE DATABASE * FROM 's3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://${HOST_IP}:6060&force-path-style=true';
@@ -218,7 +218,7 @@ summary: ある TiDB クラスターから別の TiDB クラスターにデー�
 
 2.  変更フィードを作成します。
 
-    アップストリーム クラスターで次のコマンドを実行して、アップストリーム クラスターからダウンストリーム クラスターへの変更フィードを作成します。
+    アップストリームクラスターで次のコマンドを実行して、アップストリームクラスターからダウンストリームクラスターへの変更フィードを作成します。
 
     ```shell
     tiup cdc cli changefeed create --server=http://172.16.6.122:8300 --sink-uri="mysql://root:@172.16.6.125:4000" --changefeed-id="upstream-to-downstream" --start-ts="431434047157698561"

@@ -1,13 +1,13 @@
 ---
 title: Schema Object Names
-summary: TiDB SQLステートメントのスキーマ オブジェクト名について学習します。
+summary: TiDB SQLステートメントのスキーマオブジェクト名について学習します。
 ---
 
 # Schema Object Names {#schema-object-names}
 
 <!-- markdownlint-disable MD038 -->
 
-このドキュメントでは、TiDB SQLステートメントのスキーマ オブジェクト名について説明します。
+このドキュメントでは、TiDB SQLステートメントのスキーマオブジェクト名について説明します。
 
 スキーマオブジェクト名は、データベース、テーブル、インデックス、列、エイリアスなど、TiDB内のすべてのスキーマオブジェクトの名前として使用されます。SQL文では、識別子を使用してこれらのオブジェクトを引用符で囲むことができます。
 

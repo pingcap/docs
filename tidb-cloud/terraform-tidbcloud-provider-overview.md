@@ -12,7 +12,7 @@ summary: Terraform を使用してTiDB Cloudリソースを作成、管理、更
 リソースのプロビジョニングとインフラストラクチャ ワークフローを自動化する簡単な方法を探している場合は、次の機能を提供するTiDB Cloud Terraform Provider を試してみてください。
 
 -   プロジェクト情報を取得します。
--   サポートされているクラウド プロバイダー、リージョン、ノード サイズなどのクラスター仕様情報を取得します。
+-   サポートされているクラウドプロバイダー、リージョン、ノードサイズなどのクラスター仕様情報を取得します。
 -   クラスターの作成、スケーリング、一時停止、再開など、TiDB クラスターを管理します。
 -   クラスターのバックアップを作成および削除します。
 -   クラスターの復元タスクを作成します。
@@ -27,7 +27,7 @@ summary: Terraform を使用してTiDB Cloudリソースを作成、管理、更
 
 [リソース](https://www.terraform.io/language/resources)と[データソース](https://www.terraform.io/language/data-sources) 、Terraform 言語で最も重要な 2 つの要素です。
 
-TiDB Cloud は次のリソースとデータ ソースをサポートしています。
+TiDB Cloud は次のリソースとデータソースをサポートしています。
 
 -   リソース
 
@@ -44,7 +44,7 @@ TiDB Cloud は次のリソースとデータ ソースをサポートしてい�
     -   `tidbcloud_restores`
     -   `tidbcloud_backups`
 
-リソースとデータ ソースの使用可能なすべての構成を取得するには、[構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)を参照してください。
+リソースとデータソースの使用可能なすべての構成を取得するには、[構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)を参照してください。
 
 ## 次のステップ {#next-step}
 

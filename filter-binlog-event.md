@@ -14,7 +14,7 @@ summary: データを移行するときにbinlogイベントをフィルター�
 
 ## コンフィグレーション {#configuration}
 
-binlogイベント フィルターを使用するには、以下に示すように、DM のタスク構成ファイルに`filter`を追加します。
+binlogイベントフィルターを使用するには、以下に示すように、DM のタスク構成ファイルに`filter`を追加します。
 
 ```yaml
 filters:
@@ -69,7 +69,7 @@ filters:
 
 ## アプリケーションシナリオ {#application-scenarios}
 
-このセクションでは、 binlogイベント フィルターの適用シナリオについて説明します。
+このセクションでは、 binlogイベントフィルターの適用シナリオについて説明します。
 
 ### すべてのシャーディング削除操作を除外する {#filter-out-all-sharding-deletion-operations}
 

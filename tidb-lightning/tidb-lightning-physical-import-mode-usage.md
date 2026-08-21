@@ -7,7 +7,7 @@ summary: TiDB Lightningの物理インポートモードの使い方を学びま
 
 このドキュメントでは、 TiDB Lightningの[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)の使用方法について説明します。具体的には、設定ファイルの作成、パフォーマンスのチューニング、ディスククォータの設定などが含まれます。
 
-物理インポート モードには制限があります。物理インポートモードを使用する前に、 [制限事項](/tidb-lightning/tidb-lightning-physical-import-mode.md#limitations)必ずお読みください。
+物理インポートモードには制限があります。物理インポートモードを使用する前に、 [制限事項](/tidb-lightning/tidb-lightning-physical-import-mode.md#limitations)必ずお読みください。
 
 ## 物理インポートモードを設定して使用する {#configure-and-use-the-physical-import-mode}
 
@@ -142,7 +142,7 @@ analyze = "optional"
 
 旧バージョンの競合検出では、 TiDB Lightningは2つの戦略を提供していました。
 
--   `remove` (推奨): ターゲット TiDB の一貫した状態を確保するために、ターゲット テーブルから競合するすべてのレコードを記録して削除します。
+-   `remove` (推奨): ターゲット TiDB の一貫した状態を確保するために、ターゲットテーブルから競合するすべてのレコードを記録して削除します。
 -   `none` : 重複レコードを検出しません。 `none` 2 つの戦略の中で最も優れたパフォーマンスを発揮しますが、ターゲット TiDB のデータに不整合が生じる可能性があります。
 
 バージョン5.3より前のTiDB Lightningは、競合検出をサポートしていません。競合データが存在する場合、インポート処理はチェックサムの段階で失敗します。競合検出が有効になっている場合、競合データが存在すると、 TiDB Lightningはチェックサムの段階をスキップします（常に失敗するため）。
@@ -264,7 +264,7 @@ io-concurrency = 5
 
 インポート処理中、各テーブルはインデックスを格納するための「インデックスエンジン」1つと、行データを格納するための複数の「データエンジン」に分割されます。
 
-`index-concurrency`インデックス エンジンの最大同時実行数を制御します。 `index-concurrency`を調整する際は、CPU が最大限に活用されるように`index-concurrency * the number of source files of each table > region-concurrency`も必ず調整してください。比率は通常 1.5 ～ 2 です。 `index-concurrency`を高く設定しすぎたり、2 (デフォルト値) より低く設定したりしないでください。 `index-concurrency`高すぎると、パイプラインが多数構築され、インデックス エンジンのインポート ステージが滞留します。
+`index-concurrency`インデックスエンジンの最大同時実行数を制御します。 `index-concurrency`を調整する際は、CPU が最大限に活用されるように`index-concurrency * the number of source files of each table > region-concurrency`も必ず調整してください。比率は通常 1.5 ～ 2 です。 `index-concurrency`を高く設定しすぎたり、2 (デフォルト値) より低く設定したりしないでください。 `index-concurrency`高すぎると、パイプラインが多数構築され、インデックスエンジンのインポート ステージが滞留します。
 
 `table-concurrency`についても同様です。 `table-concurrency * the number of source files of each table > region-concurrency`がCPUをフル活用していることを確認してください。推奨値は`region-concurrency * 4 / the number of source files of each table`前後で、4を下回らないようにしてください。
 

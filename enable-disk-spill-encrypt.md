@@ -1,6 +1,6 @@
 ---
 title: Enable Encryption for Disk Spill
-summary: TiDB でディスク スピルの暗号化を有効にする方法を学習します。
+summary: TiDB でディスクスピルの暗号化を有効にする方法を学習します。
 ---
 
 # ディスク流出時の暗号化機能を有効にする {#enable-encryption-for-disk-spill}
@@ -11,7 +11,7 @@ summary: TiDB でディスク スピルの暗号化を有効にする方法を�
 
 ## 設定 {#configure}
 
-ディスク スピル ファイルの暗号化を有効にするには、TiDB 構成ファイルのセクション`[security]`の項目[`spilled-file-encryption-method`](/tidb-configuration-file.md#spilled-file-encryption-method)構成します。
+ディスクスピル ファイルの暗号化を有効にするには、TiDB 構成ファイルのセクション`[security]`の項目[`spilled-file-encryption-method`](/tidb-configuration-file.md#spilled-file-encryption-method)構成します。
 
 ```toml
 [security]

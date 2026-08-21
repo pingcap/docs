@@ -51,7 +51,7 @@ http://192.168.0.123:2379/dashboard/
 
 > **Note:**
 >
-> この機能は、 `tiup cluster`デプロイメント ツールの新しいバージョン (v1.0.3 以降) でのみ使用できます。
+> この機能は、 `tiup cluster`デプロイメントツールの新しいバージョン (v1.0.3 以降) でのみ使用できます。
 >
 > <details><summary>TiUPクラスタのアップグレード</summary>
 >
@@ -83,7 +83,7 @@ tiup cluster display CLUSTER_NAME --dashboard
 
 > **Warning:**
 >
-> TiDB Dashboard を実行するインスタンスを変更すると、Key Visualize 履歴や検索履歴など、以前の TiDB Dashboard インスタンスに保存されたローカル データが失われます。
+> TiDB Dashboard を実行するインスタンスを変更すると、Key Visualize 履歴や検索履歴など、以前の TiDB Dashboard インスタンスに保存されたローカルデータが失われます。
 
 ## TiDB Dashboardを無効にする {#disable-tidb-dashboard}
 
@@ -123,7 +123,7 @@ TiDB Dashboardを提供するPDインスタンスを手動で指定すること�
 
 > **Warning:**
 >
-> 新しく有効になった TiDB Dashboard インスタンスが、TiDB Dashboardを提供していた以前のインスタンスと異なる場合、Key Visualize 履歴や検索履歴など、以前の TiDB Dashboard インスタンスに保存されたローカル データは失われます。
+> 新しく有効になった TiDB Dashboard インスタンスが、TiDB Dashboardを提供していた以前のインスタンスと異なる場合、Key Visualize 履歴や検索履歴など、以前の TiDB Dashboard インスタンスに保存されたローカルデータは失われます。
 
 ## 次は何か {#what-s-next}
 

@@ -17,7 +17,7 @@ TiDB Ansible バージョン: 3.0.8
     -   タイミングの悪いキャッシュ更新によって発生した間違ったSQLバインディングプランを修正[＃13891](https://github.com/pingcap/tidb/pull/13891)
     -   SQL文にシンボルリストが含まれている場合にSQLバインディングが無効になる可能性がある問題を修正しました [＃14004](https://github.com/pingcap/tidb/pull/14004)
     -   SQL文が`;` で終わるためSQLバインディングを作成または削除できない問題を修正しました [＃14113](https://github.com/pingcap/tidb/pull/14113)
-    -   `PhysicalUnionScan`演算子が間違った統計を設定するため、間違った SQL クエリ プランが選択される可能性がある問題を修正しました[＃14133](https://github.com/pingcap/tidb/pull/14133)
+    -   `PhysicalUnionScan`演算子が間違った統計を設定するため、間違った SQL クエリプランが選択される可能性がある問題を修正しました[＃14133](https://github.com/pingcap/tidb/pull/14133)
     -   `minAutoAnalyzeRatio`制限を解除して`autoAnalyze`をよりタイムリーにする[＃14015](https://github.com/pingcap/tidb/pull/14015)
 -   SQL実行エンジン
     -   `INSERT/REPLACE/UPDATE ... SET ... = DEFAULT`構文でエラーが報告される可能性があり、 `DEFAULT`の使用と仮想生成列を組み合わせるとエラーが報告される可能性がある問題を修正しました[＃13682](https://github.com/pingcap/tidb/pull/13682)
@@ -46,7 +46,7 @@ TiDB Ansible バージョン: 3.0.8
     -   MySQLの動作の互換性を保つために、TiDBの動作を、現在のデータベースを使用する動作から、 `GRANT`文でデータベース名が指定されていない場合に`No database selected`エラーを報告する動作に変更しました。 [＃13784](https://github.com/pingcap/tidb/pull/13784)
     -   MySQLの動作との一貫性を保つために、 `REVOKE`文の実行権限を`SuperPriv`から`REVOKE`変更し、対応するスキーマに対する権限を持つユーザーのみ実行できるようにします。 [＃13306](https://github.com/pingcap/tidb/pull/13306)
     -   `GRANT ALL`構文に`WITH GRANT OPTION` が含まれていない場合に、対象ユーザーに`GrantPriv`が誤って付与される問題を修正しました。 [＃13943](https://github.com/pingcap/tidb/pull/13943)
-    -   `LoadDataInfo` `addRecord` 呼び出しに失敗した場合、エラー メッセージに`LOAD DATA`ステートメントの誤った動作の原因が含まれていない問題を修正しました。 [＃13980](https://github.com/pingcap/tidb/pull/13980)
+    -   `LoadDataInfo` `addRecord` 呼び出しに失敗した場合、エラーメッセージに`LOAD DATA`ステートメントの誤った動作の原因が含まれていない問題を修正しました。 [＃13980](https://github.com/pingcap/tidb/pull/13980)
     -   クエリ内の複数のSQL文が同じ`StartTime` を共有しているため、間違ったスロークエリ情報が出力される問題を修正しました。 [＃13898](https://github.com/pingcap/tidb/pull/13898)
     -   `batchClient`大規模なトランザクションを処理するときにメモリが発生する可能性がある問題を修正[＃14032](https://github.com/pingcap/tidb/pull/14032)
     -   `system_time_zone`が常に`CST`として表示され、TiDB の`system_time_zone` `mysql.tidb`テーブルの`systemTZ`から取得される問題を修正しました。 [＃14086](https://github.com/pingcap/tidb/pull/14086)

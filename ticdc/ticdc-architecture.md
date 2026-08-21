@@ -167,7 +167,7 @@ TiUPを使用して新しいアーキテクチャにTiCDCノードをデプロ�
 
 2.  TiDBクラスタのバージョンがv8.5.4より前の場合は、新しいアーキテクチャのTiCDCバイナリパッケージを手動でダウンロードし、ダウンロードしたファイルをTiDBクラスタにパッチ適用する必要があります。それ以外の場合は、この手順をスキップしてください。
 
-    ダウンロード リンクは次の形式に従います: `https://tiup-mirrors.pingcap.com/cdc-${version}-${os}-${arch}.tar.gz` 。ここで、 `${version}`は TiCDC バージョン (利用可能なバージョン[TiCDCが新アーキテクチャ向けにリリース](https://github.com/pingcap/ticdc/releases)方向へのリリースを参照)、 `${os}`はオペレーティング システムです。 `${arch}`は、コンポーネントが実行されるプラットフォーム ( `amd64`または`arm64` ) です。
+    ダウンロードリンクは次の形式に従います: `https://tiup-mirrors.pingcap.com/cdc-${version}-${os}-${arch}.tar.gz` 。ここで、 `${version}`は TiCDC バージョン (利用可能なバージョン[TiCDCが新アーキテクチャ向けにリリース](https://github.com/pingcap/ticdc/releases)方向へのリリースを参照)、 `${os}`はオペレーティングシステムです。 `${arch}`は、コンポーネントが実行されるプラットフォーム ( `amd64`または`arm64` ) です。
 
     例えば、Linux (x86-64) 用の TiCDC v8.5.4-release.1 のバイナリパッケージをダウンロードするには、次のコマンドを実行します。
 
@@ -200,7 +200,7 @@ TiUPを使用して新しいアーキテクチャにTiCDCノードをデプロ�
         newarch: true
     ```
 
-6.  すべてのレプリケーション タスクを再開するには、 [レプリケーションタスクを再開する](/ticdc/ticdc-manage-changefeed.md#resume-a-replication-task)を参照してください。
+6.  すべてのレプリケーションタスクを再開するには、 [レプリケーションタスクを再開する](/ticdc/ticdc-manage-changefeed.md#resume-a-replication-task)を参照してください。
 
     ```shell
     # The default server port of TiCDC is 8300.

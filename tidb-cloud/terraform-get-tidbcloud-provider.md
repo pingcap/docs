@@ -29,7 +29,7 @@ macOS の場合、次の手順に従ってHomebrewを使用して Terraform を�
     brew install hashicorp/tap/terraform
     ```
 
-その他のオペレーティング システムの手順については、[Terraform ドキュメント](https://learn.hashicorp.com/tutorials/terraform/install-cli)を参照してください。
+その他のオペレーティングシステムの手順については、[Terraform ドキュメント](https://learn.hashicorp.com/tutorials/terraform/install-cli)を参照してください。
 
 ## ステップ2. APIキーを作成する {#step-2-create-an-api-key}
 

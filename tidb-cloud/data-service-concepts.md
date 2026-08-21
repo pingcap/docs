@@ -33,16 +33,16 @@ TiDB Cloudの Chat2Query API は、AI が指示を与えることで SQL 文を�
 
 サードパーティ製ツールをデータアプリに統合することで、サードパーティ製ツールが提供する高度な自然言語処理機能と人工知能（AI）機能をアプリケーションに導入し、強化することができます。この統合により、アプリケーションはより複雑なタスクを実行し、インテリジェントなソリューションを提供できるようになります。
 
-現在、GPT や Dify などのサードパーティ ツールをTiDB Cloudコンソールに統合できます。
+現在、GPT や Dify などのサードパーティツールをTiDB Cloudコンソールに統合できます。
 
 詳細については[データアプリをサードパーティツールと統合する](/tidb-cloud/data-service-integrations.md)を参照してください。
 
 ## コードとしてのコンフィグレーション {#configuration-as-code}
 
-TiDB Cloud は、 JSON 構文を使用してデータ アプリの構成全体をコードとして表現する、 コンフィグレーション as Code (CaC) アプローチを提供します。
+TiDB Cloud は、 JSON 構文を使用してデータアプリの構成全体をコードとして表現する、 コンフィグレーション as Code (CaC) アプローチを提供します。
 
-データ アプリを GitHub に接続することで、 TiDB Cloud はCaC アプローチを使用して、データ アプリの構成を[設定ファイル](/tidb-cloud/data-service-app-config-files.md)として優先 GitHub リポジトリおよびブランチにプッシュできます。
+データアプリを GitHub に接続することで、 TiDB Cloud はCaC アプローチを使用して、データアプリの構成を[設定ファイル](/tidb-cloud/data-service-app-config-files.md)として優先 GitHub リポジトリおよびブランチにプッシュできます。
 
 GitHub接続で自動同期とデプロイが有効になっている場合は、GitHub上の設定ファイルを更新することでデータアプリを変更することもできます。設定ファイルの変更をGitHubにプッシュすると、新しい設定がTiDB Cloudに自動的にデプロイされます。
 
-詳細については[GitHub でデータ アプリを自動デプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
+詳細については[GitHub でデータアプリを自動デプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。

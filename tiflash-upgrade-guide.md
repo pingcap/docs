@@ -7,7 +7,7 @@ summary: TiFlash をアップグレードする際の注意事項を説明しま
 
 このドキュメントでは、 TiFlash をアップグレードするときに知っておく必要のある機能の変更と推奨されるアクションについて説明します。
 
-標準的なアップグレード プロセスについては、次のドキュメントを参照してください。
+標準的なアップグレードプロセスについては、次のドキュメントを参照してください。
 
 -   [TiUPを使用して TiDB をアップグレードする](/upgrade-tidb-using-tiup.md)
 -   [Kubernetes 上の TiDB をアップグレードする](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)

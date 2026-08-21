@@ -29,7 +29,7 @@ TiDBのトランザクション実装では、MVCC（Multiple Version Concurrenc
 
 > **Tip:**
 >
-> 具体的には、 Dumplingが TiDB (1 TB 未満) からデータをエクスポートする際に、TiDB のバージョンが v4.0.0 以降であり、 Dumpling がTiDB クラスターの PD アドレスと[`INFORMATION_SCHEMA.CLUSTER_INFO`](/information-schema/information-schema-cluster-info.md)テーブルにアクセスできる場合、 Dumpling はGC セーフ ポイントを自動的に調整して、元のクラスターに影響を与えずに GC をブロックします。
+> 具体的には、 Dumplingが TiDB (1 TB 未満) からデータをエクスポートする際に、TiDB のバージョンが v4.0.0 以降であり、 Dumpling がTiDB クラスターの PD アドレスと[`INFORMATION_SCHEMA.CLUSTER_INFO`](/information-schema/information-schema-cluster-info.md)テーブルにアクセスできる場合、 Dumpling はGC セーフポイントを自動的に調整して、元のクラスターに影響を与えずに GC をブロックします。
 >
 > ただし、次のいずれかのシナリオでは、 Dumpling はGC 時間を自動的に調整できません。
 >
@@ -56,7 +56,7 @@ TiDB には、単一の SQL 文の実行時間を制限するシステム変数�
 
 ## JDBCクエリタイムアウト {#jdbc-query-timeout}
 
-v6.1.0 以降では、 [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)構成項目がデフォルト値`true`に設定されている場合、MySQL JDBC によって提供される`setQueryTimeout()`メソッドを使用してクエリ タイムアウトを制御できます。
+v6.1.0 以降では、 [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)構成項目がデフォルト値`true`に設定されている場合、MySQL JDBC によって提供される`setQueryTimeout()`メソッドを使用してクエリタイムアウトを制御できます。
 
 > **Note:**
 >

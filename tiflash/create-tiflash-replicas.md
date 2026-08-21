@@ -68,7 +68,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>
 
 上記のステートメントの結果は次のようになります。
 
--   `AVAILABLE`は、このテーブルのTiFlashレプリカが使用可能かどうかを示します。`1`は使用可能、 `0`は使用不可を意味します。レプリカが使用可能になると、このステータスは変更されません。DDL ステートメントを使用してレプリカの数を変更すると、レプリケーション ステータスは再計算されます。
+-   `AVAILABLE`は、このテーブルのTiFlashレプリカが使用可能かどうかを示します。`1`は使用可能、 `0`は使用不可を意味します。レプリカが使用可能になると、このステータスは変更されません。DDL ステートメントを使用してレプリカの数を変更すると、レプリケーションステータスは再計算されます。
 -   `PROGRESS`はレプリケーションの進行状況を表します。値は`0.0`から`1.0`までです。`1`は少なくとも 1 つのレプリカがレプリケートされていることを意味します。
 
 ## データベースのTiFlashレプリカを作成する {#create-tiflash-replicas-for-databases}
@@ -106,7 +106,7 @@ ALTER DATABASE db_name SET TIFLASH REPLICA count;
 >
 > -   ステートメントの実行が完了した**後に**このデータベースにテーブルを作成した場合、これらの新しいテーブルに対してTiFlashレプリカは自動的に作成されません。
 >
-> -   このステートメントは、システム テーブル、ビュー、一時テーブル、およびTiFlashでサポートされていない文字セットを持つテーブルをスキップします。
+> -   このステートメントは、システムテーブル、ビュー、一時テーブル、およびTiFlashでサポートされていない文字セットを持つテーブルをスキップします。
 
 > -   システム変数[`tidb_batch_pending_tiflash_count`](/system-variables.md#tidb_batch_pending_tiflash_count-new-in-v60)を設定することで、実行中に利用不可のままにできるテーブルの数を制御できます。この値を下げると、レプリケーション中のクラスターへの負荷を軽減できます。ただし、この制限はリアルタイムではないため、設定適用後も利用不可のテーブルの数が制限を超える可能性があります。
 
@@ -134,7 +134,7 @@ SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>
 
 </CustomContent>
 
-TiDB クラスターは、次のいずれかの操作を実行すると、 TiFlashレプリカのレプリケーション プロセスをトリガーします。
+TiDB クラスターは、次のいずれかの操作を実行すると、 TiFlashレプリカのレプリケーションプロセスをトリガーします。
 
 -   テーブルにTiFlashレプリカを追加します。
 -   新しいTiFlashインスタンスを追加すると、PD は元のインスタンスのTiFlashレプリカを新しいTiFlashインスタンスにスケジュールします。
@@ -173,14 +173,14 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
 
     数分以内に、 TiFlashノードのCPUとディスクIOリソース使用量が大幅に増加し、 TiFlashによるレプリカ作成速度が速くなります。同時に、TiKVノードのCPUとディスクIOリソース使用量も増加します。
 
-    この時点で TiKV ノードとTiFlashノードにまだ余分なリソースがあり、オンライン サービスのレイテンシーが大幅に増加しない場合は、制限をさらに緩和して、たとえば元の速度を 3 倍にすることができます。
+    この時点で TiKV ノードとTiFlashノードにまだ余分なリソースがあり、オンラインサービスのレイテンシーが大幅に増加しない場合は、制限をさらに緩和して、たとえば元の速度を 3 倍にすることができます。
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 90 add-peer
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 90 remove-peer
     ```
 
-3.  TiFlashレプリケーションが完了したら、オンライン サービスへの影響を軽減するために、デフォルト構成に戻します。
+3.  TiFlashレプリケーションが完了したら、オンラインサービスへの影響を軽減するために、デフォルト構成に戻します。
 
     デフォルトのレプリカ スケジューリング速度制限を復元するには、次のPD Controlコマンドを実行します。
 
@@ -281,7 +281,7 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
 
 <CustomContent platform="tidb">
 
-ラベルを使用してレプリカをスケジュールする方法の詳細については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md) 、 [1 つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md) 、および[2 つの地域に配置された 3 つのデータ センター](/three-data-centers-in-two-cities-deployment.md)を参照してください。
+ラベルを使用してレプリカをスケジュールする方法の詳細については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md) 、 [1 つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md) 、および[2 つの地域に配置された 3 つのデータセンター](/three-data-centers-in-two-cities-deployment.md)を参照してください。
 
 TiFlashは、異なるゾーンに対するレプリカ選択戦略の設定をサポートしています。詳細については、 [`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730)を参照してください。
 

@@ -318,7 +318,7 @@ grafana_servers:
 
 #### 切り替え前に生成された履歴メトリックを表示する（オプション） {#view-historical-metrics-generated-before-the-switch-optional}
 
-切り替え前に生成された履歴メトリックを表示する必要がある場合は、次のように Grafana のデータ ソースを切り替えます。
+切り替え前に生成された履歴メトリックを表示する必要がある場合は、次のように Grafana のデータソースを切り替えます。
 
 1.  クラスター構成を編集します。
 

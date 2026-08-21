@@ -96,7 +96,7 @@ TiDB クラスターのストレージが不足しています。 [TiKVノード
 
 ### エラーメッセージ：「LOCK TABLES ... アクセスが拒否されました」 {#error-message-lock-tables-access-denied}
 
-ソース データベース ユーザーに`LOCK TABLES`権限がないため、データの完全なエクスポートが失敗します。このエラーは通常、マネージド MySQL サービス (Amazon RDS、 Aurora、ApsaraDB RDS for MySQL、Azure Database for MySQL、Google Cloud SQL など) から移行する場合に発生します。これらのサービスでは、クラウド プロバイダーによって`FLUSH TABLES WITH READ LOCK` (FTWRL) が許可されていません。このシナリオでは、DM はデフォルトの`consistency=auto`モードを使用し、完全なエクスポート中にデータの一貫性を確保するために`LOCK TABLES`にフォールバックします。この操作には`LOCK TABLES`権限が必要です。
+ソースデータベースユーザーに`LOCK TABLES`権限がないため、データの完全なエクスポートが失敗します。このエラーは通常、マネージド MySQL サービス (Amazon RDS、 Aurora、ApsaraDB RDS for MySQL、Azure Database for MySQL、Google Cloud SQL など) から移行する場合に発生します。これらのサービスでは、クラウドプロバイダーによって`FLUSH TABLES WITH READ LOCK` (FTWRL) が許可されていません。このシナリオでは、DM はデフォルトの`consistency=auto`モードを使用し、完全なエクスポート中にデータの一貫性を確保するために`LOCK TABLES`にフォールバックします。この操作には`LOCK TABLES`権限が必要です。
 
 > **Note:**
 >
@@ -118,15 +118,15 @@ TiDB Cloudのアラートメールを購読すると、アラートが発生し�
 
 -   データ移行ジョブで、データエクスポート中にエラーが発生しました。
 
-    推奨されるアクション: データ移行ページでエラー メッセージを確認し、[移行エラーとその解決策](#migration-errors-and-solutions)でヘルプを参照してください。
+    推奨されるアクション: データ移行ページでエラーメッセージを確認し、[移行エラーとその解決策](#migration-errors-and-solutions)でヘルプを参照してください。
 
 -   データ移行ジョブのデータインポート中にエラーが発生しました
 
-    推奨されるアクション: データ移行ページでエラー メッセージを確認し、[移行エラーとその解決策](#migration-errors-and-solutions)でヘルプを参照してください。
+    推奨されるアクション: データ移行ページでエラーメッセージを確認し、[移行エラーとその解決策](#migration-errors-and-solutions)でヘルプを参照してください。
 
 -   「増分データ移行中にデータ移行ジョブでエラーが発生しました」
 
-    推奨されるアクション: データ移行ページでエラー メッセージを確認し、[移行エラーとその解決策](#migration-errors-and-solutions)でヘルプを参照してください。
+    推奨されるアクション: データ移行ページでエラーメッセージを確認し、[移行エラーとその解決策](#migration-errors-and-solutions)でヘルプを参照してください。
 
 -   「増分移行中にデータ移行ジョブが6時間以上一時停止されました」
 

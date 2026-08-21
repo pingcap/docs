@@ -91,7 +91,7 @@ TiDB バージョン: 4.0.0-rc.1
     -   Kafka シンクモジュールでのメッセージのバッチ送信をサポート [＃426](https://github.com/pingcap/tiflow/pull/426)
     -   プロセッサでのファイルソートをサポート [＃477](https://github.com/pingcap/tiflow/pull/477)
     -   自動`resolve lock` サポート [＃459](https://github.com/pingcap/tiflow/pull/459)
-    -   TiCDC サービスの GC セーフ ポイントを PD に自動的に更新する機能を追加します。 [＃487](https://github.com/pingcap/tiflow/pull/487)
+    -   TiCDC サービスの GC セーフポイントを PD に自動的に更新する機能を追加します。 [＃487](https://github.com/pingcap/tiflow/pull/487)
     -   データ複製タイムゾーン設定を追加する [＃498](https://github.com/pingcap/tiflow/pull/498)
 
 -   Backup & Restore (BR)
@@ -104,7 +104,7 @@ TiDB バージョン: 4.0.0-rc.1
 
 <!---->
 
--   列が unsigned として定義されているため、システム テーブルで負の数が正しく表示されない問題を修正しました。 [＃16004](https://github.com/pingcap/tidb/pull/16004)
+-   列が unsigned として定義されているため、システムテーブルで負の数が正しく表示されない問題を修正しました。 [＃16004](https://github.com/pingcap/tidb/pull/16004)
 -   `use_index_merge`ヒントに無効なインデックス名が含まれている場合に警告を追加します [＃15960](https://github.com/pingcap/tidb/pull/15960)
 -   同じ一時ディレクトリを共有する TiDBサーバーの複数のインスタンスを禁止する[＃16026](https://github.com/pingcap/tidb/pull/16026)
 -   プランキャッシュが有効な場合の`explain for connection`の実行中に発生するpanicを修正[＃16285](https://github.com/pingcap/tidb/pull/16285)

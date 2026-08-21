@@ -38,7 +38,7 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 ## コプロセッサー {#coprocessor}
 
 -   要求 QPS: すべてのTiFlashインスタンスによって受信されたコプロセッサ要求の数。`batch`はバッチ要求の数です。`batch_cop`はバッチ要求内のコプロセッサ要求の数です。`cop`はコプロセッサ インターフェイスを介して直接送信されたコプロセッサ要求の数です。`cop_dag`はすべてのコプロセッサ要求内の DAG 要求の数です。`super_batch`はスーパー バッチ機能を有効にするための要求の数です。
--   Executor QPS: すべてのTiFlashインスタンスが受信したリクエスト内の各タイプの DAG Executor の数。`table_scan`はテーブル スキャン Executor です。`selection`は選択 Executor です。`aggregation`は集約 Executor です。`top_n`は`TopN` Executor です。`limit`は制限 Executor です。
+-   Executor QPS: すべてのTiFlashインスタンスが受信したリクエスト内の各タイプの DAG Executor の数。`table_scan`はテーブルスキャン Executor です。`selection`は選択 Executor です。`aggregation`は集約 Executor です。`top_n`は`TopN` Executor です。`limit`は制限 Executor です。
 -   リクエスト期間: コプロセッサリクエストを処理するすべてのTiFlashインスタンスの合計期間。合計期間は、コプロセッサリクエストを受信してからリクエストへの応答が完了するまでの期間です。
 -   エラー QPS: コプロセッサ要求を処理するすべてのTiFlashインスタンスのエラー数。`meet_lock`は読み取りデータがロックされていることを意味します。`region_not_found`はリージョンが存在しないことを意味します。`epoch_not_match`は読み取りリージョンエポックがローカル エポックと一致していないことを意味します。`kv_client_error`はTiKV との通信でエラーが返されたことを意味します。`internal_error`はTiFlashの内部システム エラーです。`other`はその他のタイプのエラーです。
 -   リクエスト処理期間：すべてのTiFlashインスタンスがコプロセッサリクエストを処理する期間。処理時間は、コプロセッサリクエストの実行開始から完了までです。
@@ -61,7 +61,7 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 
 ## DDL {#ddl}
 
--   スキーマ バージョン: 各TiFlashインスタンスに現在キャッシュされているスキーマのバージョン。
+-   スキーマバージョン: 各TiFlashインスタンスに現在キャッシュされているスキーマのバージョン。
 -   スキーマ適用OPM：すべてのTiFlashインスタンスによって1分間に`apply`操作で同期されたTiDB `schema diff`の数。この項目には、 `diff apply` 、 `full apply` 、 `failed apply`の3種類の`apply`のカウントが含まれます。`diff apply`は単一の適用の通常のプロセスです。`diff apply`が失敗した場合、 `failed apply`が`1`増加し、 TiFlashは`full apply`にロールバックし、最新のスキーマ情報を取得してTiFlashのスキーマバージョンを更新します。
 -   スキーマ内部 DDL OPM: すべてのTiFlashインスタンスで 1 分あたりに実行された特定の DDL 操作の数。
 -   スキーマ適用期間: すべてのTiFlashインスタンスでの単一の`apply schema`操作に使用される時間。
@@ -103,4 +103,4 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 
 -   読み取りインデックス OPS: 各TiFlashインスタンスが`read_index`回のリクエストをトリガーする回数。これはトリガーされたリージョンの数に等しくなります。
 -   インデックス読み取り時間: すべてのTiFlashインスタンスの`read_index`が使用する時間。ほとんどの時間は、リージョンリーダーとのやり取りと再試行に使用されます。
--   インデックス待機期間: すべてのTiFlashインスタンスに対して`wait_index`が使用する時間。つまり、 `read_index`要求を受信した後、ローカル インデックス &gt;= read_index になるまで待機する時間です。
+-   インデックス待機期間: すべてのTiFlashインスタンスに対して`wait_index`が使用する時間。つまり、 `read_index`要求を受信した後、ローカルインデックス &gt;= read_index になるまで待機する時間です。

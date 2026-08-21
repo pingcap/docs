@@ -51,13 +51,13 @@ MySQLサービスがパブリックインターネットアクセスを持たな
     1.  [VPCピアリング接続のDNS解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
     2.  **Accepter DNS resolution**オプションを有効にする。
 
-MySQL サービスがパブリック インターネット アクセスのない Google Cloud VPC 内にある場合は、以下の手順を実行してください。
+MySQL サービスがパブリックインターネット アクセスのない Google Cloud VPC 内にある場合は、以下の手順を実行してください。
 
 1.  MySQL サービスが Google Cloud SQL の場合、Google Cloud SQL インスタンスに関連付けられた VPC に MySQL エンドポイントを公開する必要があります。Cloud [**Cloud SQL Auth proxy**](https://cloud.google.com/sql/docs/mysql/sql-proxy)を使用する必要がある場合があります。これは Google によって開発されています。
 2.  MySQL サービスの VPC とTiDB Cloud Dedicatedクラスターの間で[VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
 3.  MySQLが配置されているVPCの受信ファイアウォールルールを変更します。
 
-    [TiDB Cloud Dedicatedクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)イングレス ファイアウォール ルールに追加する必要があります。これにより、トラフィックがTiDB Cloud Dedicatedクラスターから MySQL エンドポイントに流れるようになります。
+    [TiDB Cloud Dedicatedクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)イングレス ファイアウォールルールに追加する必要があります。これにより、トラフィックがTiDB Cloud Dedicatedクラスターから MySQL エンドポイントに流れるようになります。
 
 </div>
 
@@ -65,7 +65,7 @@ MySQL サービスがパブリック インターネット アクセスのない
 
 プライベートエンドポイントは、クラウドプロバイダーの**Private Link**または**Private Service Connect**技術を活用し、VPC内のリソースがプライベートIPアドレスを介して他のVPC内のサービスに接続できるようにします。これにより、あたかもそれらのサービスがVPC内で直接ホストされているかのように動作します。
 
-プライベート エンドポイントを介して、 TiDB Cloud Dedicatedクラスターを MySQL サービスに安全に接続できます。 MySQL サービスでプライベート エンドポイントが利用できない場合は、[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)に従って作成します。
+プライベートエンドポイントを介して、 TiDB Cloud Dedicatedクラスターを MySQL サービスに安全に接続できます。 MySQL サービスでプライベートエンドポイントが利用できない場合は、[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)に従って作成します。
 
 </div>
 
@@ -79,7 +79,7 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
 
 プライベートエンドポイントは、クラウドプロバイダーの**Private Link**または**Private Service Connect**技術を活用し、VPC内のリソースがプライベートIPアドレスを介して他のVPC内のサービスに接続できるようにします。これにより、あたかもそれらのサービスがVPC内で直接ホストされているかのように動作します。
 
-プライベート エンドポイントを通じて、 TiDB Cloud Premium インスタンスを MySQL サービスに安全に接続できます。 MySQL サービスでプライベート エンドポイントが利用できない場合は、 [Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)に従って作成します。
+プライベートエンドポイントを通じて、 TiDB Cloud Premium インスタンスを MySQL サービスに安全に接続できます。 MySQL サービスでプライベートエンドポイントが利用できない場合は、 [Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)に従って作成します。
 
 </CustomContent>
 
@@ -98,7 +98,7 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
 
 既存のデータを読み込むには：
 
-1.  [`tidb_gc_life_time`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)以下の 2 つの操作の合計時間よりも長く設定することで、その期間中の履歴データが TiDB によってガベージ コレクションされないようにします。
+1.  [`tidb_gc_life_time`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)以下の 2 つの操作の合計時間よりも長く設定することで、その期間中の履歴データが TiDB によってガベージコレクションされないようにします。
 
     -   既存データのエクスポートとインポートにかかる時間
     -   **Sink to MySQL**を作成する時間
@@ -111,7 +111,7 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
 
 2.  [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用して<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>インスタンスからデータをエクスポートし、 [mydumper/myloader](https://centminmod.com/mydumper.html)などのコミュニティ ツールを使用してデータを MySQL サービスにロードします。
 
-3.  [Dumplingのエクスポートファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)のメタデータ ファイルから MySQL シンクの開始位置を取得します。
+3.  [Dumplingのエクスポートファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)のメタデータファイルから MySQL シンクの開始位置を取得します。
 
     以下はメタデータファイルの例の一部です。 `Pos`の`SHOW MASTER STATUS`は、既存データの TSO であり、MySQL シンクの開始位置でもあります。
 
@@ -131,7 +131,7 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
 
 前提条件を満たしたら、データをMySQLに取り込むことができます。
 
-1.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[変更フィード]**をクリックします。
+1.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の概要ページに移動し、左側のナビゲーションペインで**[データ]** &gt; **[変更フィード]**をクリックします。
 
 2.  **Create Changefeed**をクリックし、**宛先**として**MySQL**を選択します。
 
@@ -167,10 +167,9 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
 
 8.  **Start Replication Position**で、MySQLシンクの開始位置を設定します。
 
-    -   Dumplingを使用して[既存のデータをロードした](#load-existing-data-optional)場合は、 **[特定の TSO からレプリケーションを開始する]**を選択し、 Dumpling のエクスポートされたメタデータ ファイルから取得した TSO を入力します。
+    -   Dumplingを使用して[既存のデータをロードした](#load-existing-data-optional)場合は、 **[特定の TSO からレプリケーションを開始する]**を選択し、 Dumpling のエクスポートされたメタデータファイルから取得した TSO を入力します。
     -   アップストリームの TiDB にデータがない場合は、 **今すぐレプリケーションを開始する**を選択してください。
     -   それ以外の場合は、 **特定の時間からレプリケーションを開始する**を選択して、開始時刻をカスタマイズできます。
-
 9.  **次へ**をクリックして、変更フィードの仕様を設定してください。
 
     -   **Changefeed Specification**領域で、チェンジフィードで使用する<CustomContent plan="dedicated">複製容量単位（RCU）</CustomContent>チェンジフィード<CustomContent plan="premium">チェンジフィード容量ユニット（CCU）</CustomContent>の数を指定します。

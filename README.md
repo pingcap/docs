@@ -2,7 +2,7 @@
 
 TiDB ドキュメントへようこそ!
 
-このリポジトリには[PingCAP ウェブサイトの TiDB ドキュメント](https://docs.pingcap.com/tidb/stable)のすべてのソース ファイルが格納され、 [pingcap/docs-cn](https://github.com/pingcap/docs-cn)リポジトリには[TiDB の中国語ドキュメント](https://docs.pingcap.com/zh/tidb/stable)のすべてのソース ファイルが格納されます。
+このリポジトリには[PingCAP ウェブサイトの TiDB ドキュメント](https://docs.pingcap.com/tidb/stable)のすべてのソースファイルが格納され、 [pingcap/docs-cn](https://github.com/pingcap/docs-cn)リポジトリには[TiDB の中国語ドキュメント](https://docs.pingcap.com/zh/tidb/stable)のすべてのソースファイルが格納されます。
 
 ドキュメントに問題が見つかった場合は、お気軽に[問題を作成する](https://github.com/pingcap/docs/issues/new/choose)までご連絡いただくか、直接[プルリクエストを作成する](/CONTRIBUTING.md#how-to-contribute)ご連絡いただき、修正または更新をお手伝いください。
 

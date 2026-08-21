@@ -38,7 +38,7 @@ TiDB バージョン: 7.5.6
     -   Backup & Restore (BR)
 
         -   バックアップパフォーマンスを向上させるために、フルバックアップ中のテーブルレベルのチェックサム計算をデフォルトで無効にする（ `--checksum=false` ） [＃56373](https://github.com/pingcap/tidb/issues/56373) @[Tristan1900](https://github.com/Tristan1900)
-        -   非完全リストアの場合、ターゲット クラスタに同じ名前のテーブルが含まれているかどうかを確認するチェックを追加します。 [＃55087](https://github.com/pingcap/tidb/issues/55087) @[RidRisR](https://github.com/RidRisR)
+        -   非完全リストアの場合、ターゲットクラスタに同じ名前のテーブルが含まれているかどうかを確認するチェックを追加します。 [＃55087](https://github.com/pingcap/tidb/issues/55087) @[RidRisR](https://github.com/RidRisR)
 
     -   TiDB Lightning
 
@@ -53,7 +53,7 @@ TiDB バージョン: 7.5.6
     -   同じ名前のビューを2つ作成してもエラーが報告されない問題を修正[＃58769](https://github.com/pingcap/tidb/issues/58769) @[tiancaiamao](https://github.com/tiancaiamao)
     -   `BIT`型から`CHAR`型にデータを変換すると TiKV パニックが発生する可能性がある問題を修正しました [＃56494](https://github.com/pingcap/tidb/issues/56494) @[lcwangchao](https://github.com/lcwangchao)
     -   ハートビートを失った TTL ジョブが他のジョブのハートビートの取得をブロックする問題を修正しました [＃57915](https://github.com/pingcap/tidb/issues/57915) @[YangKeao](https://github.com/YangKeao)
-    -   不一致な値タイプとタイプ変換エラーを含む`IN`条件を使用してパーティション テーブルをクエリすると、誤ったクエリ結果が発生する問題を修正しました。 [＃54746](https://github.com/pingcap/tidb/issues/54746) @[mjonss](https://github.com/mjonss)
+    -   不一致な値タイプとタイプ変換エラーを含む`IN`条件を使用してパーティションテーブルをクエリすると、誤ったクエリ結果が発生する問題を修正しました。 [＃54746](https://github.com/pingcap/tidb/issues/54746) @[mjonss](https://github.com/mjonss)
     -   `BIT`列のデフォルト値が正しくない問題を修正[＃57301](https://github.com/pingcap/tidb/issues/57301) @[YangKeao](https://github.com/YangKeao)
     -   Prepareプロトコルで、クライアントがUTF8以外の文字セットを使用するとエラーが発生する問題を修正しました。 [＃58870](https://github.com/pingcap/tidb/issues/58870) @[xhebox](https://github.com/xhebox)
     -   `CREATE VIEW`ステートメントで変数またはパラメータを使用してもエラーが報告されない問題を修正[＃53176](https://github.com/pingcap/tidb/issues/53176) @[mjonss](https://github.com/mjonss)
@@ -70,7 +70,7 @@ TiDB バージョン: 7.5.6
     -   分散ストレージおよびコンピューティングアーキテクチャのTiFlashノードを含むクラスターで`ALTER TABLE ... PLACEMENT POLICY ...`を実行した後、リージョンピアが誤ってTiFlashコンピューティングノードに追加される可能性がある問題を修正しました。 [＃58633](https://github.com/pingcap/tidb/issues/58633) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   DDL所有者が変更されるとジョブステータスが上書きされる問題を修正 [＃52747](https://github.com/pingcap/tidb/issues/52747) @[D3Hunter](https://github.com/D3Hunter)
     -   ハッシュパーティションテーブルで条件`is null`クエリを実行するとpanicが発生する問題を修正 [＃58374](https://github.com/pingcap/tidb/issues/58374) @[Defined2014](https://github.com/Defined2014)
-    -   生成列を含むパーティション テーブルをクエリするときにエラーが発生する問題を修正しました。 [＃58475](https://github.com/pingcap/tidb/issues/58475) @[joechenrh](https://github.com/joechenrh)
+    -   生成列を含むパーティションテーブルをクエリするときにエラーが発生する問題を修正しました。 [＃58475](https://github.com/pingcap/tidb/issues/58475) @[joechenrh](https://github.com/joechenrh)
     -   TTLジョブが無視されたり、複数回処理されたりする問題を修正[＃59347](https://github.com/pingcap/tidb/issues/59347) @[YangKeao](https://github.com/YangKeao)
     -   パーティション交換での誤った判断により実行エラーが発生する問題を修正[＃59534](https://github.com/pingcap/tidb/issues/59534) @[mjonss](https://github.com/mjonss)
     -   `tidb_audit_log`変数を複数レベルの相対パスで設定すると、ログディレクトリでエラーが発生する問題を修正しました。 [＃58971](https://github.com/pingcap/tidb/issues/58971) @[lcwangchao](https://github.com/lcwangchao)
@@ -106,10 +106,10 @@ TiDB バージョン: 7.5.6
     -   メモリ使用量が少ないときにTiFlash が予期せずRaftメッセージの処理を拒否する可能性がある問題を修正[＃9745](https://github.com/pingcap/tiflash/issues/9745) @[CalvinNeo](https://github.com/CalvinNeo)
     -   大量のデータをインポートした後にTiFlash のメモリ使用量が高くなる可能性がある問題を修正[＃9812](https://github.com/pingcap/tiflash/issues/9812) @[CalvinNeo](https://github.com/CalvinNeo)
     -   パーティションテーブルに対するクエリが、パーティションテーブルで`ALTER TABLE ... RENAME COLUMN`を実行した後にエラーを返す可能性がある問題を修正しました。 [＃9787](https://github.com/pingcap/tiflash/issues/9787) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    -   特定の状況でTiFlash が予期せず終了したときにエラー スタック トレースを印刷できないことがある問題を修正[＃9902](https://github.com/pingcap/tiflash/issues/9902) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   特定の状況でTiFlash が予期せず終了したときにエラースタック トレースを印刷できないことがある問題を修正[＃9902](https://github.com/pingcap/tiflash/issues/9902) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   `profiles.default.init_thread_count_scale` `0` に設定するとTiFlash の起動がブロックされる可能性がある問題を修正しました [＃9906](https://github.com/pingcap/tiflash/issues/9906) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   クエリに仮想列が含まれており、リモート読み取りをトリガーするときに`Not found column`エラーが発生する可能性がある問題を修正しました。 [＃9561](https://github.com/pingcap/tiflash/issues/9561) @[guo-shaoge](https://github.com/guo-shaoge)
-    -   分散ストレージおよびコンピューティングアーキテクチャで、 TiFlashコンピューティング ノードがリージョンピアを追加するためのターゲット ノードとして誤って選択される可能性がある問題を修正しました。 [＃9750](https://github.com/pingcap/tiflash/issues/9750) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   分散ストレージおよびコンピューティングアーキテクチャで、 TiFlashコンピューティングノードがリージョンピアを追加するためのターゲットノードとして誤って選択される可能性がある問題を修正しました。 [＃9750](https://github.com/pingcap/tiflash/issues/9750) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 -   ツール
 

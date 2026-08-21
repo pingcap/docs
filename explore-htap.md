@@ -96,7 +96,7 @@ TiDBを使用する場合、TiDBクラスタの状態とパフォーマンス指
 -   [TiDB Dashboard](/dashboard/dashboard-intro.md): TiDBクラスターの全体的な実行ステータスを確認し、読み取りおよび書き込みトラフィックの分布と傾向を分析し、スロークエリの詳細な実行情報を知ることができます。
 -   [監視システム（PrometheusおよびGrafana）](/grafana-overview-dashboard.md) : PD、TiDB、TiKV、 TiFlash、TiCDC、Node_exporterなどのTiDBクラスター関連コンポーネントの監視パラメータを確認できます。
 
-TiDB クラスターおよびTiFlashクラスターのアラート ルールを確認するには、 [TiDBクラスタアラートルール](/alert-rules.md)および[TiFlashアラートルール](/tiflash/tiflash-alert-rules.md)を参照してください。
+TiDB クラスターおよびTiFlashクラスターのアラートルールを確認するには、 [TiDBクラスタアラートルール](/alert-rules.md)および[TiFlashアラートルール](/tiflash/tiflash-alert-rules.md)を参照してください。
 
 ## トラブルシューティング {#troubleshooting}
 
@@ -112,5 +112,5 @@ TiDBの使用中に問題が発生した場合は、以下のドキュメント�
 
 ## 次は？ {#what-s-next}
 
--   TiFlash のバージョン、重要なログ、システム テーブルを確認するには、 [TiFlashクラスタを管理](/tiflash/maintain-tiflash.md)を参照してください。
+-   TiFlash のバージョン、重要なログ、システムテーブルを確認するには、 [TiFlashクラスタを管理](/tiflash/maintain-tiflash.md)を参照してください。
 -   特定のTiFlashノードを削除するには、 [TiFlashクラスターをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)を参照してください。

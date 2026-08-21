@@ -23,7 +23,7 @@ TiDB Cloud Terraform Provider v0.4.0 以降では、 `tidbcloud_cluster`リソ�
     terraform state list | grep "tidbcloud_cluster"
     ```
 
-2.  移行するターゲット クラスター リソースを選択し、後で使用するためにクラスター`id`を取得します。
+2.  移行するターゲットクラスター リソースを選択し、後で使用するためにクラスター`id`を取得します。
 
     ```shell
     terraform state show ${your_target_cluster_resource} | grep ' id '
@@ -31,7 +31,7 @@ TiDB Cloud Terraform Provider v0.4.0 以降では、 `tidbcloud_cluster`リソ�
 
 ## ステップ2. Terraform状態から既存のリソースを削除する {#step-2-remove-the-existing-resource-from-the-terraform-state}
 
-ターゲット クラスター リソースを Terraform 状態から削除します。
+ターゲットクラスター リソースを Terraform 状態から削除します。
 
 ```shell
 terraform state rm ${your_target_cluster_resource}
@@ -39,11 +39,11 @@ terraform state rm ${your_target_cluster_resource}
 
 ## ステップ3. ターゲットクラスタリソースの構成を削除する {#step-3-delete-the-configuration-of-your-target-cluster-resource}
 
-`.tf`ファイルで、ターゲット クラスター リソースの構成を見つけて、対応するコードを削除します。
+`.tf`ファイルで、ターゲットクラスター リソースの構成を見つけて、対応するコードを削除します。
 
 ## ステップ4. 新しいクラスターリソースのインポートブロックを追加する {#step-4-add-an-import-block-for-the-new-cluster-resource}
 
--   ターゲット クラスターがTiDB Cloud Starter の場合は、次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` [ステップ1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate)から取得したクラスター ID に置き換えます。
+-   ターゲットクラスターがTiDB Cloud Starter の場合は、次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` [ステップ1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate)から取得したクラスター ID に置き換えます。
 
     ```
     # TiDB Cloud Starter
@@ -53,7 +53,7 @@ terraform state rm ${your_target_cluster_resource}
     }
     ```
 
--   ターゲット クラスターがTiDB Cloud Dedicated の場合は、次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` [ステップ1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate)から取得したクラスター ID に置き換えます。
+-   ターゲットクラスターがTiDB Cloud Dedicated の場合は、次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` [ステップ1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate)から取得したクラスター ID に置き換えます。
 
     ```
     # TiDB Cloud Dedicated

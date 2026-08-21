@@ -54,7 +54,7 @@ summary: 2018年4月27日にリリースされたTiDB 2.0 GAでは、MySQLとの
     -   DDLジョブのより詳細なステータス情報を`Admin Show DDL Jobs`で出力します
     -   `Admin Show DDL Job Queries JobID`を使用して現在実行中のDDLジョブの元のステートメントを照会する機能をサポート
     -   災害復旧のために`Admin Recover Index`を使用してインデックスデータの復旧をサポート
-    -   `Alter`ステートメントを使用してテーブル オプションを変更することをサポートします
+    -   `Alter`ステートメントを使用してテーブルオプションを変更することをサポートします
 
 ## PD {#pd}
 

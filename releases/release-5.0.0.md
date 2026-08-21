@@ -64,7 +64,7 @@ TiDB バージョン: 5.0.0
 
 ### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
 
--   TiDB の[`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50)設定項目を追加します。デフォルト値は`64`で、範囲は`[64,512]`です。MySQL テーブルは最大 64 個のインデックスをサポートします。この値がデフォルト設定を超え、テーブルに 64 個を超えるインデックスが作成された場合、テーブル スキーマが MySQL に再インポートされるとエラーが報告されます。
+-   TiDB の[`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50)設定項目を追加します。デフォルト値は`64`で、範囲は`[64,512]`です。MySQL テーブルは最大 64 個のインデックスをサポートします。この値がデフォルト設定を超え、テーブルに 64 個を超えるインデックスが作成された場合、テーブルスキーマが MySQL に再インポートされるとエラーが報告されます。
 -   TiDB が MySQL の ENUM/SET の長さ (ENUM の長さ &lt; 255) と互換性があり、一貫性を保つように、 [`enable-enum-length-limit`](/tidb-configuration-file.md#enable-enum-length-limit-new-in-v50)設定項目を追加します。デフォルト値は`true`です。
 -   `pessimistic-txn.enable`設定項目を[`tidb_txn_mode`](/system-variables.md#tidb_txn_mode)環境変数に置き換えてください。
 -   `performance.max-memory`設定項目を[`performance.server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)に置き換えます。
@@ -122,7 +122,7 @@ List COLUMNS パーティショニングを有効にするには、セッショ�
 
 [#18005](https://github.com/pingcap/tidb/issues/18005)
 
-悲観的トランザクション モードでは、トランザクションに関係するテーブルに同時 DDL 操作または`SCHEMA VERSION`変更が含まれている場合、トランザクションのコミットが成功するように、またトランザクションが DDL 操作または`SCHEMA VERSION`変更によって中断されたときにクライアントが`Information schema is changed`エラーを受け取るのを避けるために、システムはトランザクションの`SCHEMA VERSION`最新の状態に自動的に更新します。
+悲観的トランザクションモードでは、トランザクションに関係するテーブルに同時 DDL 操作または`SCHEMA VERSION`変更が含まれている場合、トランザクションのコミットが成功するように、またトランザクションが DDL 操作または`SCHEMA VERSION`変更によって中断されたときにクライアントが`Information schema is changed`エラーを受け取るのを避けるために、システムはトランザクションの`SCHEMA VERSION`最新の状態に自動的に更新します。
 
 この機能はデフォルトでは無効になっています。機能を有効にするには、システム変数`tidb_enable_amend_pessimistic_txn`の値を変更してください。この機能はバージョン 4.0.7 で導入され、バージョン 5.0 で以下の問題が修正されています。
 
@@ -429,10 +429,10 @@ TiDB v5.0では、パフォーマンスの問題をより効率的にトラブ�
 
 -   TiUP クラスタは、より包括的なワンクリック環境チェックを実行し、修復に関する推奨事項を提供する`check topo.yaml`コマンドをサポートしています。
 -   TiUP クラスタは、環境チェック中に検出された環境問題を自動的に修復する`check topo.yaml --apply`コマンドをサポートしています。
--   TiUP クラスタ は、DBA が編集するためのクラスタ トポロジ テンプレート ファイルを取得し、グローバル ノード パラメータの変更をサポートする`template`コマンドをサポートしています。
+-   TiUP クラスタ は、DBA が編集するためのクラスタトポロジテンプレート ファイルを取得し、グローバル ノード パラメータの変更をサポートする`template`コマンドをサポートしています。
 -   TiUPは`remote_config`コマンドを使用して`edit-config`パラメータを編集し、リモートPrometheusを設定することをサポートしています。
 -   TiUPは`external_alertmanagers`コマンドを使用して異なるAlertManagerを設定するために、 `edit-config`パラメーターの編集をサポートしています。
--   tiup-clusterの`edit-config`サブコマンドを使用してトポロジ ファイルを編集する場合、構成項目の値のデータ型を変更できます。
+-   tiup-clusterの`edit-config`サブコマンドを使用してトポロジファイルを編集する場合、構成項目の値のデータ型を変更できます。
 
 ### アップグレードの安定性を向上させる {#improve-upgrade-stability}
 

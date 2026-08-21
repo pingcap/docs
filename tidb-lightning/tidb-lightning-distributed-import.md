@@ -1,6 +1,6 @@
 ---
 title: Use TiDB Lightning to Import Data in Parallel
-summary: TiDB Lightningを使用する際のデータの並列インポートの概念、ユーザー シナリオ、使用法、および制限について学習します。
+summary: TiDB Lightningを使用する際のデータの並列インポートの概念、ユーザーシナリオ、使用法、および制限について学習します。
 ---
 
 # TiDB Lightningを使用してデータを並列インポートする {#use-tidb-lightning-to-import-data-in-parallel}
@@ -73,7 +73,7 @@ TiDB Lightning は実行時に一部のリソースを排他的に使用しま�
 
 ### ステップ1: Dumplingを使用してデータをエクスポートする {#step-1-use-dumpling-to-export-data}
 
-TiDB Lightningがデプロイされている 5 つのノード上の 2 つのシャード テーブルをエクスポートします。
+TiDB Lightningがデプロイされている 5 つのノード上の 2 つのシャードテーブルをエクスポートします。
 
 -   2つのシャードテーブルが同じMySQLインスタンス内にある場合、 Dumplingのパラメータ`--filter`を使用して直接エクスポートできます。TiDB Lightningを使用してインポートする場合は、 Dumplingがデータをエクスポートするディレクトリとして`data-source-dir`を指定できます。
 -   2つのシャードテーブルのデータが異なるMySQLノードに分散されている場合は、 Dumplingを使用して個別にエクスポートする必要があります。エクスポートしたデータは、同じ親ディレクトリ内<b>、かつ異なるサブディレクトリに</b>配置する必要があります。TiDB Lightningを使用して並列インポートを実行する場合は、親ディレクトリとして`data-source-dir`を指定する必要があります。
@@ -178,7 +178,7 @@ type = "sql"
 parallel-import = true
 ```
 
-他のインスタンスの構成を変更して、 `05001 ~ 10000`データ ファイルのみをインポートすることができます。
+他のインスタンスの構成を変更して、 `05001 ~ 10000`データファイルのみをインポートすることができます。
 
 その他の手順については、例 1 の関連する手順を参照してください。
 
@@ -188,15 +188,15 @@ parallel-import = true
 
 並列インポート中に 1 つ以上のTiDB Lightningノードが異常終了した場合は、ログに記録されたエラーに基づいて原因を特定し、エラーの種類に応じてエラーを処理します。
 
--   エラーが通常の終了 (たとえば、kill コマンドに応答して終了) または OOM によるオペレーティング システムによる終了を示している場合は、構成を調整してから、 TiDB Lightningノードを再起動します。
+-   エラーが通常の終了 (たとえば、kill コマンドに応答して終了) または OOM によるオペレーティングシステムによる終了を示している場合は、構成を調整してから、 TiDB Lightningノードを再起動します。
 
 -   ネットワーク タイムアウトなどのエラーがデータの精度に影響を与えない場合は、次の手順を実行します。
 
-    1.  チェックポイント ソース データのエラーを消去するには、失敗したすべてのノードで設定`--checkpoint-error-ignore=all`で[`checkpoint-error-ignore`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-ignore)コマンドを実行します。
+    1.  チェックポイント ソースデータのエラーを消去するには、失敗したすべてのノードで設定`--checkpoint-error-ignore=all`で[`checkpoint-error-ignore`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-ignore)コマンドを実行します。
 
     2.  チェックポイントからのデータのインポートを続行するには、これらのノードを再起動します。
 
--   ソース ファイル内の無効なデータを示すチェックサムの不一致など、データの不正確さにつながるエラーがログに記録されている場合は、次の手順を実行してこの問題を解決できます。
+-   ソースファイル内の無効なデータを示すチェックサムの不一致など、データの不正確さにつながるエラーがログに記録されている場合は、次の手順を実行してこの問題を解決できます。
 
     1.  成功したノードを含むすべてのLightningノードで[`checkpoint-error-destroy`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-destroy)コマンドを実行します。このコマンドは、失敗したテーブルからインポートされたデータを削除し、これらのテーブルのチェックポイントステータスを「未開始」にリセットします。
 

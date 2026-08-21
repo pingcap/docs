@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Indexing
-summary: TiDB でインデックスを作成して使用するためのベスト プラクティスをいくつか学習します。
+summary: TiDB でインデックスを作成して使用するためのベストプラクティスをいくつか学習します。
 aliases: ['/ja/tidb/stable/dev-guide-index-best-practice/','/ja/tidbcloud/dev-guide-index-best-practice/']
 ---
 
@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-index-best-practice/','/ja/tidbcloud/dev-gu
 
 # インデックス作成のベストプラクティス {#best-practices-for-indexing}
 
-このドキュメントでは、TiDB でインデックスを作成および使用するためのベスト プラクティスをいくつか紹介します。
+このドキュメントでは、TiDB でインデックスを作成および使用するためのベストプラクティスをいくつか紹介します。
 
 ## 始める前に {#before-you-begin}
 
@@ -103,7 +103,7 @@ CREATE TABLE `books` (
     SELECT title, published_at FROM books WHERE title = 'database';
     ```
 
-    次のクエリ ステートメントでは結合インデックス`(title, published_at)`を使用できますが、インデックスのない列をクエリするための追加コストが発生し、TiDB はインデックス データに格納されている参照 (通常は主キー情報) に従って行データをクエリする必要があります。
+    次のクエリステートメントでは結合インデックス`(title, published_at)`を使用できますが、インデックスのない列をクエリするための追加コストが発生し、TiDB はインデックスデータに格納されている参照 (通常は主キー情報) に従って行データをクエリする必要があります。
 
     ```sql
     SELECT * FROM books WHERE title = 'database';

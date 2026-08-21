@@ -83,7 +83,7 @@ Db2 または Oracle から TiDB にすべてのデータを移行するか、�
 
 -   OGG、Gateway、CDC (Change Data Capture) などの Oracle の公式移行ツールを使用します。
 -   データをインポートおよびエクスポートするためのプログラムを開発します。
--   スプールをテキスト ファイルとしてエクスポートし、Load infile を使用してデータをインポートします。
+-   スプールをテキストファイルとしてエクスポートし、Load infile を使用してデータをインポートします。
 -   サードパーティのデータ移行ツールを使用します。
 
 現在はOGGの使用が推奨されています。
@@ -154,9 +154,9 @@ Google Cloud Spanner には[同様の制限](https://cloud.google.com/spanner/do
 
 `DELETE` 、 `TRUNCATE` 、 `DROP`操作はいずれもデータを即時に解放しません。`TRUNCATE`と`DROP`操作では、TiDB GC（ガベージコレクション）時間（デフォルトでは10分）後にデータが削除され、領域が解放されます。`DELETE`操作では、データは削除されますが、TiDB GCに従って領域は解放されません。後続のデータがRocksDBに書き込まれ、 `COMPACT`が実行されると、領域は再利用されます。
 
-### データをロードするときに、ターゲット テーブルで DDL 操作を実行できますか? {#can-i-execute-ddl-operations-on-the-target-table-when-loading-data}
+### データをロードするときに、ターゲットテーブルで DDL 操作を実行できますか? {#can-i-execute-ddl-operations-on-the-target-table-when-loading-data}
 
-いいえ。データをロードするときに、ターゲット テーブルで DDL 操作を実行することはできません。そうしないと、データのロードに失敗します。
+いいえ。データをロードするときに、ターゲットテーブルで DDL 操作を実行することはできません。そうしないと、データのロードに失敗します。
 
 ### TiDB は`replace into`構文をサポートしていますか? {#does-tidb-support-the-replace-into-syntax}
 

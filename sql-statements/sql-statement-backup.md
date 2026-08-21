@@ -16,7 +16,7 @@ summary: TiDBデータベースにおけるBACKUPの使用方法の概要。
 
 `BACKUP`を実行するには`BACKUP_ADMIN`または`SUPER`権限が必要です。さらに、バックアップを実行する TiDB ノードとクラスタ内のすべての TiKV ノードの両方が、宛先への読み取りまたは書き込み権限を持っている必要があります。 [セキュリティ強化モード](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合、ローカルストレージ( `local://`で始まるストレージパス) は許可されません。
 
-`BACKUP`ステートメントは、バックアップ タスク全体が完了、失敗、またはキャンセルされるまでブロックされます。 `BACKUP`を実行するには、長時間接続を準備する必要があります。タスクは、[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
+`BACKUP`ステートメントは、バックアップタスク全体が完了、失敗、またはキャンセルされるまでブロックされます。 `BACKUP`を実行するには、長時間接続を準備する必要があります。タスクは、[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
 
 `BACKUP`および[`RESTORE`](/sql-statements/sql-statement-restore.md)タスクは、一度に 1 つしか実行できません。 `BACKUP`または`RESTORE`ステートメントが同じ TiDBサーバーで既に実行されている場合、新しい`BACKUP`の実行は、以前のすべてのタスクが完了するまで待機します。
 

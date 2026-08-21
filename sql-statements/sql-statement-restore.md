@@ -112,19 +112,19 @@ RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/'
 
 `RATE_LIMIT`を使用して、TiKVノードあたりの平均ダウンロード速度を制限し、ネットワーク帯域幅を削減します。
 
-リストアが完了する前に、 `RESTORE`はデフォルトでバックアップ ファイル内のデータに対してチェックサムを実行し、データの正当性を検証します。単一テーブルに対するチェックサム タスクのデフォルトの同時実行数は 4 ですが、 `CHECKSUM_CONCURRENCY`パラメータを使用して調整できます。データの検証が不要であると確信している場合は、 `CHECKSUM`パラメータを`FALSE`に設定することでチェックを無効にできます。
+リストアが完了する前に、 `RESTORE`はデフォルトでバックアップファイル内のデータに対してチェックサムを実行し、データの正当性を検証します。単一テーブルに対するチェックサム タスクのデフォルトの同時実行数は 4 ですが、 `CHECKSUM_CONCURRENCY`パラメータを使用して調整できます。データの検証が不要であると確信している場合は、 `CHECKSUM`パラメータを`FALSE`に設定することでチェックを無効にできます。
 
 統計情報がバックアップされている場合、復元時にデフォルトで復元されます。統計情報を復元する必要がない場合は、 `LOAD_STATS`パラメーターを`FALSE`に設定できます。
 
 <CustomContent platform="tidb">
 
-システム テーブルはデフォルトで復元されます。システム[権限テーブル](/privilege-management.md#privilege-table)テーブルを復元する必要がない場合は、 `WITH_SYS_TABLE`パラメーターを`FALSE`に設定できます。
+システムテーブルはデフォルトで復元されます。システム[権限テーブル](/privilege-management.md#privilege-table)テーブルを復元する必要がない場合は、 `WITH_SYS_TABLE`パラメーターを`FALSE`に設定できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-システム テーブルはデフォルトで復元されます。システム[権限テーブル](https://docs.pingcap.com/tidb/stable/privilege-management#privilege-table)テーブルを復元する必要がない場合は、 `WITH_SYS_TABLE`パラメーターを`FALSE`に設定できます。
+システムテーブルはデフォルトで復元されます。システム[権限テーブル](https://docs.pingcap.com/tidb/stable/privilege-management#privilege-table)テーブルを復元する必要がない場合は、 `WITH_SYS_TABLE`パラメーターを`FALSE`に設定できます。
 
 </CustomContent>
 

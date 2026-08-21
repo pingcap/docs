@@ -13,7 +13,7 @@ TiDB バージョン: 7.3.0
 
 7.3.0では、以下の主要機能が導入されています。さらに、7.3.0には、TiDBサーバーおよびTiFlashにおけるクエリの安定性を向上させるための一連の機能強化（[機能の詳細](#feature-details)セクションで説明）も含まれています。これらの機能強化は、より細かなものであり、ユーザーに直接影響を与えるものではないため、以下の表には含まれていません。
 
-<table><thead><tr><th>カテゴリ</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td>拡張性とパフォーマンス</td><td>TiDB Lightningは<a href="https://docs-archive.pingcap.com/tidb/v7.3/partitioned-raft-kv">パーティション化されたRaft KV</a>をサポートしています（実験的）。</td><td> TiDB Lightningは、アーキテクチャの近々の一般提供開始の一環として、新しいパーティション化されたRaft KVアーキテクチャをサポートするようになりました。</td></tr><tr><td rowspan="2">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.3/tidb-lightning-physical-import-mode-usage#conflict-detection">データインポート時に自動的な競合検出と解決機能を追加する</a></td><td>TiDB Lightningの物理インポートモードでは、競合検出の新しいバージョンがサポートされています。このバージョンでは、競合が発生した場合に、競合データを置換（ <code>replace</code> ）または無視（ <code>ignore</code> ）するセマンティクスが実装されています。競合データを自動的に処理し、競合解決のパフォーマンスを向上させます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v7.3/tidb-resource-control#query-watch-parameters">暴走クエリの手動管理</a>（実験的）</td><td>クエリの実行に予想以上に時間がかかる場合があります。新しいリソース グループの監視リストを使用すると、クエリをより効果的に管理し、優先順位を下げたり、強制終了したりできます。この機能により、オペレーターは対象のクエリを正確な SQL テキスト、SQL ダイジェスト、またはプラン ダイジェストでマークし、リソース グループ レベルでクエリを処理できるため、予期しない大規模なクエリがクラスターに及ぼす潜在的な影響をより詳細に制御できます。</td></tr><tr><td> SQL</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.3/optimizer-hints">クエリプランナーにオプティマイザヒントを追加することで、クエリの安定性に対するオペレーターの制御を強化します。</a></td><td>追加されたヒント: <code>NO_INDEX_JOIN()</code> 、 <code>NO_MERGE_JOIN()</code> 、 <code>NO_INDEX_MERGE_JOIN()</code> 、 <code>NO_HASH_JOIN()</code> 、 <code>NO_INDEX_HASH_JOIN()</code></td></tr><tr><td>データベースの運用と可観測性</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.3/sql-statement-show-analyze-status">統計収集タスクの進捗状況を表示します。</a></td><td> <code>SHOW ANALYZE STATUS</code>ステートメントまたは<code>mysql.analyze_jobs</code>システム テーブルを使用して、 <code>ANALYZE</code>タスクの進行状況を表示することをサポートします。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td>拡張性とパフォーマンス</td><td>TiDB Lightningは<a href="https://docs-archive.pingcap.com/tidb/v7.3/partitioned-raft-kv">パーティション化されたRaft KV</a>をサポートしています（実験的）。</td><td> TiDB Lightningは、アーキテクチャの近々の一般提供開始の一環として、新しいパーティション化されたRaft KVアーキテクチャをサポートするようになりました。</td></tr><tr><td rowspan="2">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.3/tidb-lightning-physical-import-mode-usage#conflict-detection">データインポート時に自動的な競合検出と解決機能を追加する</a></td><td>TiDB Lightningの物理インポートモードでは、競合検出の新しいバージョンがサポートされています。このバージョンでは、競合が発生した場合に、競合データを置換（ <code>replace</code> ）または無視（ <code>ignore</code> ）するセマンティクスが実装されています。競合データを自動的に処理し、競合解決のパフォーマンスを向上させます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v7.3/tidb-resource-control#query-watch-parameters">暴走クエリの手動管理</a>（実験的）</td><td>クエリの実行に予想以上に時間がかかる場合があります。新しいリソースグループの監視リストを使用すると、クエリをより効果的に管理し、優先順位を下げたり、強制終了したりできます。この機能により、オペレーターは対象のクエリを正確な SQL テキスト、SQL ダイジェスト、またはプランダイジェストでマークし、リソースグループ レベルでクエリを処理できるため、予期しない大規模なクエリがクラスターに及ぼす潜在的な影響をより詳細に制御できます。</td></tr><tr><td> SQL</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.3/optimizer-hints">クエリプランナーにオプティマイザヒントを追加することで、クエリの安定性に対するオペレーターの制御を強化します。</a></td><td>追加されたヒント: <code>NO_INDEX_JOIN()</code> 、 <code>NO_MERGE_JOIN()</code> 、 <code>NO_INDEX_MERGE_JOIN()</code> 、 <code>NO_HASH_JOIN()</code> 、 <code>NO_INDEX_HASH_JOIN()</code></td></tr><tr><td>データベースの運用と可観測性</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.3/sql-statement-show-analyze-status">統計収集タスクの進捗状況を表示します。</a></td><td> <code>SHOW ANALYZE STATUS</code>ステートメントまたは<code>mysql.analyze_jobs</code>システムテーブルを使用して、 <code>ANALYZE</code>タスクの進行状況を表示することをサポートします。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -21,13 +21,13 @@ TiDB バージョン: 7.3.0
 
 -   TiFlashはレプリカ選択戦略をサポートしています [#44106](https://github.com/pingcap/tidb/issues/44106) @[XuHuaiyu](https://github.com/XuHuaiyu)
 
-    バージョン 7.3.0 より前のTiFlashでは、パフォーマンスを最大化するために、すべてのノードのレプリカを使用してデータ スキャンと MPP 計算を行っていました。バージョン 7.3.0 以降では、 TiFlash はレプリカ選択戦略を導入し、システム変数[`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730)を使用して設定できるようになりました。この戦略では、ノードの[ゾーン属性](/schedule-replicas-by-topology-labels.md#optional-configure-labels-for-tidb)に基づいて特定のレプリカを選択し、データ スキャンと MPP 計算のために特定のノードをスケジュールすることができます。
+    バージョン 7.3.0 より前のTiFlashでは、パフォーマンスを最大化するために、すべてのノードのレプリカを使用してデータスキャンと MPP 計算を行っていました。バージョン 7.3.0 以降では、 TiFlash はレプリカ選択戦略を導入し、システム変数[`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730)を使用して設定できるようになりました。この戦略では、ノードの[ゾーン属性](/schedule-replicas-by-topology-labels.md#optional-configure-labels-for-tidb)に基づいて特定のレプリカを選択し、データスキャンと MPP 計算のために特定のノードをスケジュールすることができます。
 
     複数のデータセンターに展開され、各データセンターに完全なTiFlashデータレプリカが存在するクラスターの場合、この戦略を設定して、現在のデータセンターのTiFlashレプリカのみを選択することができます。これにより、データスキャンとMPP計算は現在のデータセンター内のTiFlashノードでのみ実行されるため、データセンター間での過剰なネットワークデータ転送を回避できます。
 
     詳細については、 [ドキュメント](/system-variables.md#tiflash_replica_read-new-in-v730)を参照してください。
 
--   TiFlash はノード内のランタイム フィルターをサポート [#40220](https://github.com/pingcap/tidb/issues/40220) @[elsa0520](https://github.com/elsa0520)
+-   TiFlash はノード内のランタイムフィルターをサポート [#40220](https://github.com/pingcap/tidb/issues/40220) @[elsa0520](https://github.com/elsa0520)
 
     ランタイムフィルタは、クエリプランニングフェーズ中に生成される**動的な述語**です。テーブル結合処理において、これらの動的な述語は結合条件を満たさない行を効果的にフィルタリングし、スキャン時間とネットワークオーバーヘッドを削減し、テーブル結合の効率を向上させます。TiFlashはv7.3.0以降、ノード内でランタイムフィルタをサポートし、分析クエリの全体的なパフォーマンスを向上させています。一部のTPC-DSワークロードでは、パフォーマンスが10%から50%向上する可能性があります。
 
@@ -95,7 +95,7 @@ TiDB バージョン: 7.3.0
 
 -   TiDB Lightning で競合データ検出および処理戦略の新バージョンが導入されました [#41629](https://github.com/pingcap/tidb/issues/41629) @[lance6716](https://github.com/lance6716)
 
-    以前のバージョンでは、 TiDB Lightning は論理インポート モードと物理インポート モードに対して異なる競合検出および処理方法を使用しており、設定が複雑でユーザーが理解しにくいものでした。さらに、物理インポート モードでは`replace`または`ignore`戦略を使用して競合を処理することができませんでした。v7.3.0 以降、 TiDB Lightning は論理インポート モードと物理インポート モードの両方に対して統一された競合検出および処理戦略を導入しました。競合が発生した場合、競合するデータをエラーとして報告 ( `error` )、置換 ( `replace` )、または無視 ( `ignore` ) するかを選択できます。競合レコードの数を制限することもでき、たとえば、指定した数の競合レコードを処理した後、タスクが中断されて終了します。さらに、このシステムはトラブルシューティングのために矛盾するデータを記録することもできます。
+    以前のバージョンでは、 TiDB Lightning は論理インポートモードと物理インポートモードに対して異なる競合検出および処理方法を使用しており、設定が複雑でユーザーが理解しにくいものでした。さらに、物理インポートモードでは`replace`または`ignore`戦略を使用して競合を処理することができませんでした。v7.3.0 以降、 TiDB Lightning は論理インポートモードと物理インポートモードの両方に対して統一された競合検出および処理戦略を導入しました。競合が発生した場合、競合するデータをエラーとして報告 ( `error` )、置換 ( `replace` )、または無視 ( `ignore` ) するかを選択できます。競合レコードの数を制限することもでき、たとえば、指定した数の競合レコードを処理した後、タスクが中断されて終了します。さらに、このシステムはトラブルシューティングのために矛盾するデータを記録することもできます。
 
     競合が多数含まれるインポートデータの場合、パフォーマンス向上のため、競合検出および処理戦略の新しいバージョンを使用することをお勧めします。ラボ環境では、新しいバージョンの戦略は、競合検出および処理のパフォーマンスを旧バージョンよりも最大3倍高速化できます。このパフォーマンス値は参考値です。実際のパフォーマンスは、構成、テーブル構造、および競合データの割合によって異なる場合があります。なお、競合戦略の新バージョンと旧バージョンは同時に使用できません。旧バージョンの競合検出および処理戦略は、将来的に廃止される予定です。
 
@@ -260,7 +260,7 @@ TiDB バージョン: 7.3.0
 
 -   PD
 
-    -   PD の再起動によって`default`リソース グループが再初期化される可能性がある問題を修正 [#6787](https://github.com/tikv/pd/issues/6787) @[glorv](https://github.com/glorv)
+    -   PD の再起動によって`default`リソースグループが再初期化される可能性がある問題を修正 [#6787](https://github.com/tikv/pd/issues/6787) @[glorv](https://github.com/glorv)
     -   etcdが既に起動しているがクライアントがまだ接続していない場合に、クライアントを呼び出すとPDがpanicを起こす可能性がある問題を修正しました [#6860](https://github.com/tikv/pd/issues/6860) @[HuSharp](https://github.com/HuSharp)
     -   リージョンの出力 `health-check` が、リージョン ID を照会して返されるリージョン情報と一致しない問題を修正します。 [#6560](https://github.com/tikv/pd/issues/6560) @[JmPotato](https://github.com/JmPotato)
     -   `unsafe recovery`で失敗したラーナーピアが`auto-detect`モードでは無視される問題を修正 [#6690](https://github.com/tikv/pd/issues/6690) @[v01dstar](https://github.com/v01dstar)
@@ -270,7 +270,7 @@ TiDB バージョン: 7.3.0
 -   TiFlash
 
     -   TiFlashがデッドロックのためにパーティション化されたテーブルを正常に複製できない問題を修正 [#7758](https://github.com/pingcap/tiflash/issues/7758) @[hongyunyan](https://github.com/hongyunyan)
-    -   `INFORMATION_SCHEMA.TIFLASH_REPLICA`システム テーブルにユーザーがアクセスする権限を持たないテーブルが含まれる問題を修正 [#7795](https://github.com/pingcap/tiflash/issues/7795) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    -   `INFORMATION_SCHEMA.TIFLASH_REPLICA`システムテーブルにユーザーがアクセスする権限を持たないテーブルが含まれる問題を修正 [#7795](https://github.com/pingcap/tiflash/issues/7795) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   同じ MPP タスク内に複数の HashAgg 演算子が存在する場合、MPP タスクのコンパイルに非常に長い時間がかかり、クエリのパフォーマンスに深刻な影響を与える問題を修正しました [#7810](https://github.com/pingcap/tiflash/issues/7810) @[SeaRise](https://github.com/SeaRise)
 
 -   ツール

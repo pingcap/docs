@@ -5,7 +5,7 @@ summary: サードパーティのメトリクス統合の使用方法を学習�
 
 # サードパーティのメトリクス統合 {#third-party-metrics-integrations}
 
-TiDB Cloud を次のサードパーティ メトリック サービスと統合して、 TiDB Cloudアラートを受信し、これらのサービスで TiDB クラスターのパフォーマンス メトリックを表示できます。
+TiDB Cloud を次のサードパーティ メトリック サービスと統合して、 TiDB Cloudアラートを受信し、これらのサービスで TiDB クラスターのパフォーマンスメトリックを表示できます。
 
 -   [Datadog統合](#datadog-integration)
 -   [PrometheusとGrafanaの統合](#prometheus-and-grafana-integration)

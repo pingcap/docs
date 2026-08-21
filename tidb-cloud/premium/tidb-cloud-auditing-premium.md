@@ -57,7 +57,7 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
     4.  **データベース監査ログストレージコンフィグレーション**ダイアログで、 **AWS IAM Policy Settings**セクションを探し、後で使用するために**TiDB Cloud Account ID**と**TiDB Cloud External ID**を記録してください。
 
-2.  AWS マネジメント コンソールで、 **IAM** &gt; **Access Management** &gt; **Policies**に移動し、 `s3:PutObject`書き込み専用権限を持つストレージバケット ポリシーが存在するかどうかを確認します。
+2.  AWS マネジメントコンソールで、 **IAM** &gt; **Access Management** &gt; **Policies**に移動し、 `s3:PutObject`書き込み専用権限を持つストレージバケット ポリシーが存在するかどうかを確認します。
 
     -   はいの場合、後で使用するために、一致したストレージバケットポリシーを記録してください。
     -   そうでない場合は、 **IAM** &gt; **Access Management** &gt; **Policies** &gt; **Create Policy**に移動し、次のポリシー テンプレートに従ってバケット ポリシーを定義します。
@@ -364,7 +364,7 @@ TiDB Cloudは、監査ログ内の各データベースイベントレコード�
 | `CURRENT_DB`     | 現在使用しているデータベースの名前。                                                         |
 | `SQL_TEXT`       | 実行されたSQL文。監査ログのマスキングが有効になっている場合は、マスキングされた文が記録されます。                         |
 | `EXECUTE_PARAMS` | `EXECUTE`ステートメントに渡されるパラメータ。イベントクラスに`EXECUTE`が含まれ、かつ編集が無効になっている場合にのみ記録されます。 |
-| `AFFECTED_ROWS`  | SQL ステートメントによって影響を受けた行数。イベント クラスに`QUERY_DML`が含まれている場合にのみ記録されます。            |
+| `AFFECTED_ROWS`  | SQL ステートメントによって影響を受けた行数。イベントクラスに`QUERY_DML`が含まれている場合にのみ記録されます。            |
 
 ### 接続情報 {#connection-information}
 

@@ -9,7 +9,7 @@ summary: TiUPを使用してTiDBをアップグレードする方法を学びま
 
 > **Warning:**
 >
-> 1.  TiDB をアップグレードする前に、オペレーティング システムのバージョンが[OSおよびプラットフォームの要件](/hardware-and-software-requirements.md#os-and-platform-requirements)を満たしていることを確認してください。 CentOS Linux 7 で実行されているクラスターを v8.5 にアップグレードする場合は、クラスターが使用できなくなるリスクを避けるために、必ず TiDB v8.5.1 以降のバージョンを使用してください。詳細については、 [TiDB v8.5.1 リリースノート](/releases/release-8.5.1.md)を参照してください。
+> 1.  TiDB をアップグレードする前に、オペレーティングシステムのバージョンが[OSおよびプラットフォームの要件](/hardware-and-software-requirements.md#os-and-platform-requirements)を満たしていることを確認してください。 CentOS Linux 7 で実行されているクラスターを v8.5 にアップグレードする場合は、クラスターが使用できなくなるリスクを避けるために、必ず TiDB v8.5.1 以降のバージョンを使用してください。詳細については、 [TiDB v8.5.1 リリースノート](/releases/release-8.5.1.md)を参照してください。
 > 2.  TiFlash を5.3 より前のバージョンから 5.3 以降にオンラインでアップグレードすることはできません。代わりに、まず以前のバージョンのTiFlashインスタンスをすべて停止し、その後オフラインでクラスタをアップグレードする必要があります。TiDB や TiKV などの他のコンポーネントがオンラインアップグレードをサポートしていない場合は、[オンラインアップグレード](#online-upgrade)の警告の手順に従ってください。
 > 3.  アップグレード処理中はDDLステートメントを実行**しないでください**。実行すると、未定義の動作が発生する可能性があります。
 > 4.  TiDB クラスターで DDL ステートメントが実行されている間は、クラスターをアップグレード**しないでください**(通常、 `ADD INDEX`や列型の変更など、時間のかかる DDL ステートメントの場合)。アップグレードの前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスターで DDL ジョブが実行中かどうかを確認することをお勧めします。クラスターで DDL ジョブが実行されている場合は、クラスターをアップグレードする前に、DDL の実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルしてください。
@@ -45,13 +45,13 @@ summary: TiUPを使用してTiDBをアップグレードする方法を学びま
 >
 >         元のクラスターが v7.1.0 以前の場合、v7.2.0 以降にアップグレードすると、 [`performance.lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)の導入により、統計情報の読み込み時間が大幅に短縮されます。この場合、アップグレード前の`init stats info time`は、アップグレード後の読み込み時間よりも長くなります。
 >
->     -   TiDB のローリング アップグレード期間を短縮したい場合、およびアップグレード中の初期統計情報の欠落による潜在的なパフォーマンスへの影響がクラスターで許容できる場合は、TiUP を使用して対象インスタンスの設定を変更することで、アップグレード前に`performance.force-init-stats` `OFF`に[TiUPを使用して対象インスタンスの設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)。アップグレードの完了後、必要に応じてこの設定を再評価して元に戻すことができます。
+>     -   TiDB のローリングアップグレード期間を短縮したい場合、およびアップグレード中の初期統計情報の欠落による潜在的なパフォーマンスへの影響がクラスターで許容できる場合は、TiUP を使用して対象インスタンスの設定を変更することで、アップグレード前に`performance.force-init-stats` `OFF`に[TiUPを使用して対象インスタンスの設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)。アップグレードの完了後、必要に応じてこの設定を再評価して元に戻すことができます。
 
 ## アップグレードに関する注意事項 {#upgrade-caveat}
 
 -   TiDBは現在、アップグレード後にバージョンをダウングレードしたり、以前のバージョンに戻したりすることをサポートしていません。
 -   TiCDC、 TiFlash、およびその他のコンポーネントのバージョンアップグレードをサポートします。
--   クラスターが TiCDC クラシックアーキテクチャ(v8.1.2 など) を使用している場合は、メジャー バージョン間のアップグレード中に変更フィードを実行し続けないでください。この場合、次の手順を順番に実行します。すべての変更フィードを一時停止し、TiCDC をアップグレードし、TiDB クラスターをアップグレードし、すべての変更フィードを再開します。詳細については、 [以前のバージョンからのアップグレードに関する互換性に関する注意事項](/ticdc/ticdc-compatibility.md#compatibility-notes-for-upgrading-from-earlier-versions)を参照してください。
+-   クラスターが TiCDC クラシックアーキテクチャ(v8.1.2 など) を使用している場合は、メジャーバージョン間のアップグレード中に変更フィードを実行し続けないでください。この場合、次の手順を順番に実行します。すべての変更フィードを一時停止し、TiCDC をアップグレードし、TiDB クラスターをアップグレードし、すべての変更フィードを再開します。詳細については、 [以前のバージョンからのアップグレードに関する互換性に関する注意事項](/ticdc/ticdc-compatibility.md#compatibility-notes-for-upgrading-from-earlier-versions)を参照してください。
 -   TiFlashをv6.3.0より前のバージョンからv6.3.0以降のバージョンにアップグレードする場合、Linux AMD64アーキテクチャではCPUがAVX2命令セットを、Linux ARM64アーキテクチャではARMv8命令セットアーキテクチャをサポートしている必要があることに注意してください。詳細は[v6.3.0 リリースノート](/releases/release-6.3.0.md#others)の説明を参照してください。
 -   各バージョンの互換性に関する詳細な変更点については、各バージョンの[リリースノート](/releases/_index.md)を参照してください。該当するリリースノートの「互換性の変更点」セクションに従って、クラスタ構成を変更してください。
 -   クラスターをv5.3より前のバージョンからv5.3以降のバージョンに更新する場合、デフォルトでデプロイされているPrometheusによって生成されるアラートの時刻フォーマットが変更されることに注意してください。このフォーマット変更はPrometheus v2.27.1から導入されています。詳細については、 [Prometheus](https://github.com/prometheus/prometheus/commit/7646cbca328278585be15fa615e22f2a50b47d06)を参照してください。
@@ -156,7 +156,7 @@ tiup update cluster
 
 -   クラスタDDL:
 
-    -   [スムーズなアップグレード](/smooth-upgrade-tidb.md)を使用して TiDB を v8.1.0 以降にアップグレードし、[分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)が有効になっている場合は、アップグレードする前に DXF を無効にすることをお勧めします。そうしないと、アップグレード プロセス中に追加されたインデックスがデータと矛盾し、アップグレードが失敗する可能性があります。
+    -   [スムーズなアップグレード](/smooth-upgrade-tidb.md)を使用して TiDB を v8.1.0 以降にアップグレードし、[分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)が有効になっている場合は、アップグレードする前に DXF を無効にすることをお勧めします。そうしないと、アップグレードプロセス中に追加されたインデックスがデータと矛盾し、アップグレードが失敗する可能性があります。
     -   な を使用しない場合は、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)[スムーズなアップグレード](/smooth-upgrade-tidb.md)を使用して、実行中の DDL ジョブが存在するかどうかを確認することをお勧めします。実行中の DDL ジョブが存在する場合は、アップグレードを実行する前に、ジョブの実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)ステートメントを使用してキャンセルしてください。
 
 -   クラスタのバックアップ：クラスタ内でバックアップまたはリストアタスクが実行中かどうかを確認するには[`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md)コマンドを実行することをお勧めします。実行中の場合は、アップグレードを実行する前にタスクが完了するまでお待ちください。

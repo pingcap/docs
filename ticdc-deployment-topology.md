@@ -9,7 +9,7 @@ summary: 最小限の TiDB トポロジに基づく TiCDC のデプロイメン�
 >
 > TiCDCはv4.0.6以降、一般提供（GA）された機能です。本番環境でご利用いただけます。
 
-このドキュメントでは、最小限のクラスタ トポロジに基づく[TiCDC](/ticdc/ticdc-overview.md)のデプロイメント トポロジについて説明します。
+このドキュメントでは、最小限のクラスタトポロジに基づく[TiCDC](/ticdc/ticdc-overview.md)のデプロイメント トポロジについて説明します。
 
 TiCDCは、TiDB 4.0で導入されたTiDBの増分データを複製するためのツールです。TiDB、MySQL、Kafka、MQ、ストレージサービスなど、複数のダウンストリームプラットフォームをサポートします。TiCDCは低レイテンシーとネイティブな高可用性を備えています。
 
@@ -32,9 +32,9 @@ TiCDCは、TiDB 4.0で導入されたTiDBの増分データを複製するため
 -   [TiCDCトポロジのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-cdc.yaml)
 -   [TiCDCトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-cdc.yaml)
 
-上記の TiDB クラスター トポロジ ファイルの構成項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジファイルの構成項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 > **Note:**
 >
 > -   設定ファイルに`tidb`ユーザーを手動で作成する必要はありません。TiUPクラスタコンポーネントは、ターゲットマシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、制御マシンと同じユーザーを維持することもできます。
-> -   デプロイメント ディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。
+> -   デプロイメントディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。

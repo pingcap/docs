@@ -9,7 +9,7 @@ summary: TIFLASH_TABLES` information_schema テーブルについて学習しま
 >
 > このテーブルは不安定であり、TiDB の新しいリリースで予告なく変更される可能性があるため、本番環境では使用しないでください。
 
-`TIFLASH_TABLES`表は、 TiFlashのデータ テーブルに関する統計情報を提供します。
+`TIFLASH_TABLES`表は、 TiFlashのデータテーブルに関する統計情報を提供します。
 
 ```sql
 USE information_schema;

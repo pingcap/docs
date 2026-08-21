@@ -77,7 +77,7 @@ mv tidb-latest-linux-amd64/bin/tidb-server ./
 
 ## MySQLデータソースを構成する {#configure-the-mysql-data-source}
 
-データ移行タスクを開始する前に、MySQL データ ソースを構成する必要があります。
+データ移行タスクを開始する前に、MySQL データソースを構成する必要があります。
 
 ### パスワードを暗号化する {#encrypt-the-password}
 
@@ -100,7 +100,7 @@ mv tidb-latest-linux-amd64/bin/tidb-server ./
 fCxfQ9XKCezSzuCD0Wf5dUD+LsKegSg=
 ```
 
-この暗号化された値を保存し、次の手順で MySQL データ ソースを作成するときに使用します。
+この暗号化された値を保存し、次の手順で MySQL データソースを作成するときに使用します。
 
 ### ソース構成ファイルを編集する {#edit-the-source-configuration-file}
 
@@ -125,7 +125,7 @@ MySQL2データソースで、上記の設定を`conf/source2.yaml`にコピー�
 
 ### ソースを作成する {#create-a-source}
 
-dmctl を使用して MySQL1 のデータ ソース構成を DM クラスターにロードするには、ターミナルで次のコマンドを実行します。
+dmctl を使用して MySQL1 のデータソース構成を DM クラスターにロードするには、ターミナルで次のコマンドを実行します。
 
 ```bash
 ./dmctl --master-addr=127.0.0.1:8261 operate-source create conf/source1.yaml
@@ -209,7 +209,7 @@ MySQL2 の場合、上記のコマンドの設定ファイルを MySQL2 の設�
     }
     ```
 
-これで、MySQL1 および MySQL2 インスタンスから TiDB にシャード テーブルを移行するタスクが正常に作成されました。
+これで、MySQL1 および MySQL2 インスタンスから TiDB にシャードテーブルを移行するタスクが正常に作成されました。
 
 ## データを検証する {#verify-data}
 

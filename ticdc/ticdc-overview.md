@@ -5,7 +5,7 @@ summary: TiCDCとは何か、TiCDCが提供する機能、そしてTiCDCのイ�
 
 # TiCDCの概要 {#ticdc-overview}
 
-[TiCDC](https://github.com/pingcap/tiflow/tree/release-8.5/cdc)は、TiDB から増分データをレプリケートするために使用されるツールです。具体的には、TiCDC は TiKV 変更ログを取得し、キャプチャしたデータを並べ替えて、行ベースの増分データをダウンストリーム データベースにエクスポートします。データ レプリケーション機能の詳細については、 [TiCDCのデータレプリケーション機能](/ticdc/ticdc-data-replication-capabilities.md)を参照してください。
+[TiCDC](https://github.com/pingcap/tiflow/tree/release-8.5/cdc)は、TiDB から増分データをレプリケートするために使用されるツールです。具体的には、TiCDC は TiKV 変更ログを取得し、キャプチャしたデータを並べ替えて、行ベースの増分データをダウンストリームデータベースにエクスポートします。データレプリケーション機能の詳細については、 [TiCDCのデータレプリケーション機能](/ticdc/ticdc-data-replication-capabilities.md)を参照してください。
 
 ## 使用シナリオ {#usage-scenarios}
 
@@ -72,7 +72,7 @@ TiCDCのアーキテクチャを次の図に示す。
 -   TiCDC: TiCDCプロセスが実行されるTiCDCノード。各ノードではTiCDCプロセスが実行されます。各プロセスは、TiKVノード内の1つ以上のテーブルからデータ変更を取得し、シンクコンポーネントを介して下流システムにその変更を複製します。
 -   PD：TiDBクラスタのスケジューリングモジュール。このモジュールはクラスタデータのスケジューリングを担当し、通常は3つのPDノードで構成されます。PDはetcdクラスタを介して高可用性を提供します。etcdクラスタでは、TiCDCはノードの状態情報や変更フィードの設定などのメタデータを保存します。
 
-実装では、TiCDC の[新しいアーキテクチャ](/ticdc/ticdc-architecture.md)と[古典アーキテクチャ](/ticdc/ticdc-classic-architecture.md)両方が、同じ増分データ レプリケーション モデルに基づいて構築されます。クラシックアーキテクチャと比較して、新しいアーキテクチャはタスク スケジューリングとレプリケーション メカニズムをリファクタリングして最適化し、リソース コストを削減しながら、リアルタイム データ レプリケーションのパフォーマンス、スケーラビリティ、安定性を大幅に向上させます。
+実装では、TiCDC の[新しいアーキテクチャ](/ticdc/ticdc-architecture.md)と[古典アーキテクチャ](/ticdc/ticdc-classic-architecture.md)両方が、同じ増分データレプリケーション モデルに基づいて構築されます。クラシックアーキテクチャと比較して、新しいアーキテクチャはタスクスケジューリングとレプリケーション メカニズムをリファクタリングして最適化し、リソース コストを削減しながら、リアルタイム データレプリケーションのパフォーマンス、スケーラビリティ、安定性を大幅に向上させます。
 
 アーキテクチャ図に示すように、TiCDCはTiDB、MySQL、Kafka、およびストレージサービスへのデータ複製をサポートしています。
 
@@ -160,7 +160,7 @@ WHERE `A` = 1 OR `A` = 2;
 -   RawKVのみを使用するTiKVクラスター。
 -   TiDB の[`CREATE SEQUENCE` DDL操作](/sql-statements/sql-statement-create-sequence.md)と[`SEQUENCE`関数](/sql-statements/sql-statement-create-sequence.md#sequence-function)上流の TiDB が`SEQUENCE`を使用している場合、TiCDC は上流で実行された`SEQUENCE` DDL 操作/関数を無視します。ただし、 `SEQUENCE`関数を使用した DML 操作は正しく複製できます。
 -   現在、TiCDC によってレプリケートされているテーブルおよびデータベースへの[TiDB Lightning物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)を使用したデータのインポートはサポートされていません。詳細については、 [TiDB Lightningの物理インポートモードとTiCDCの互換性に関する制限事項は何ですか？](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-tidb-lightning-physical-import-mode-and-ticdc)を参照してください。
--   v8.2.0 より前では、 BR はTiCDC レプリケーション タスクを使用するクラスター[データの復元](/br/backup-and-restore-overview.md)サポートしていません。詳細については、 [BR （バックアップ＆リストア）とTiCDCの互換性に関する制限事項は何ですか？](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-br-and-ticdc)を参照してください。
+-   v8.2.0 より前では、 BR はTiCDC レプリケーションタスクを使用するクラスター[データの復元](/br/backup-and-restore-overview.md)サポートしていません。詳細については、 [BR （バックアップ＆リストア）とTiCDCの互換性に関する制限事項は何ですか？](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-br-and-ticdc)を参照してください。
 -   バージョン8.2.0以降、 BRはTiCDCのデータ復元に関する制限を緩和しました。復元対象データの`BackupTS` （バックアップ時刻）がchangefeed [`CheckpointTS`](/ticdc/ticdc-classic-architecture.md#checkpointts) （現在のレプリケーションの進行状況を示すタイムスタンプ）よりも前であれば、 BRは正常にデータ復元を進めることができます。 `BackupTS`は通常かなり前であることを考慮すると、ほとんどのシナリオにおいて、 BRはTiCDCレプリケーションタスクを持つクラスタのデータ復元をサポートしていると考えられます。
 
 TiCDCは、アップストリームにおける大規模トランザクションを含むシナリオを部分的にのみサポートしています。詳細については、 [TiCDCに関するFAQ](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk)を参照してください。FAQでは、TiCDCが大規模トランザクションのレプリケーションをサポートしているかどうか、および関連するリスクについて詳しく説明されています。

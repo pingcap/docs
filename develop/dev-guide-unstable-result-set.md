@@ -17,7 +17,7 @@ aliases: ['/ja/tidb/stable/dev-guide-unstable-result-set/','/ja/tidbcloud/dev-gu
 -   `stu_info`学生情報を保存します
 -   `stu_score`生徒のテストのスコアが格納されます。
 
-次に、次のような SQL クエリ ステートメントを記述します。
+次に、次のような SQL クエリステートメントを記述します。
 
 ```sql
 SELECT

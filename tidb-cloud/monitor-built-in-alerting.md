@@ -65,7 +65,7 @@ TiDB Cloudでは、アラートを無効化または有効化したり、アラ�
 
     > **Tip:**
     >
-    > 現在、 TiDB Cloudでは、アラート ルール編集の機能が限定的に提供されています。一部のアラート ルールは編集をサポートしていません。異なるトリガー条件や頻度を構成したい場合、または[PagerDuty](https://www.pagerduty.com/docs/guides/datadog-integration-guide/)などのダウンストリーム サービスでアラートが自動的にアクションをトリガーする[サードパーティの監視およびアラートとの統合](/tidb-cloud/third-party-monitoring-integrations.md)使用を検討してください。
+    > 現在、 TiDB Cloudでは、アラートルール編集の機能が限定的に提供されています。一部のアラートルールは編集をサポートしていません。異なるトリガー条件や頻度を構成したい場合、または[PagerDuty](https://www.pagerduty.com/docs/guides/datadog-integration-guide/)などのダウンストリーム サービスでアラートが自動的にアクションをトリガーする[サードパーティの監視およびアラートとの統合](/tidb-cloud/third-party-monitoring-integrations.md)使用を検討してください。
 
 ## アラート通知を購読する {#subscribe-to-alert-notifications}
 
@@ -89,7 +89,7 @@ TiDB Cloudでは、以下のいずれかの方法でアラート通知を購読�
 > -   TiDB Cloudコンソールでアラートのしきい値を編集できます。
 > -   一部のアラートルールはデフォルトで無効になっています。必要に応じて有効にすることができます。
 
-TiDB Cloudは、そのプランで利用可能[特徴](/tidb-cloud/features.md)に基づいて、 [TiDB Cloudプラン](/tidb-cloud/select-cluster-tier.md)ごとに異なるアラート ルールを提供します。
+TiDB Cloudは、そのプランで利用可能[特徴](/tidb-cloud/features.md)に基づいて、 [TiDB Cloudプラン](/tidb-cloud/select-cluster-tier.md)ごとに異なるアラートルールを提供します。
 
 <CustomContent plan="dedicated">
 

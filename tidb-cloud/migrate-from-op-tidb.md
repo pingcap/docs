@@ -143,8 +143,7 @@ AWS コンソールでアクセスキーを作成します。詳細について�
 
 2.  右上にあるナビゲーションバーでユーザー名を選択し、 **My Security Credentials**をクリックします。
 
-3.  アクセスキーを作成するには、 **Create access key**をクリックします。次に、 **Download .csv file**を選択して、アクセスキー ID とシークレット アクセスキーをコンピュータの CSV ファイルに保存します。このファイルは安全な場所に保存してください。このダイアログボックスを閉じると、シークレット アクセスキーには再度アクセスできなくなります。CSV ファイルをダウンロードしたら、 **閉じる**を選択します。アクセスキーを作成すると、キー ペアはデフォルトで有効になり、すぐに使用できます。
-
+3.  アクセスキーを作成するには、 **Create access key**をクリックします。次に、 **Download .csv file**を選択して、アクセスキー ID とシークレットアクセスキーをコンピュータの CSV ファイルに保存します。このファイルは安全な場所に保存してください。このダイアログボックスを閉じると、シークレットアクセスキーには再度アクセスできなくなります。CSV ファイルをダウンロードしたら、 **閉じる**を選択します。アクセスキーを作成すると、キーペアはデフォルトで有効になり、すぐに使用できます。
     ![Create access key](/media/tidb-cloud/op-to-cloud-create-access-key01.png)
 
     ![Download CSV file](/media/tidb-cloud/op-to-cloud-create-access-key02.png)
@@ -217,7 +216,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
     -   kms:復号化
 
-3.  アクセスポリシーを設定します。 [AWSコンソール &gt; IAM &gt; アクセス管理 &gt; ポリシー](https://console.aws.amazon.com/iamv2/home#/policies)してリージョンに切り替えて、 TiDB Cloudのアクセス ポリシーが既に存在するかどうかを確認します。存在しない場合は、このドキュメントに従ってポリシーを作成します。 [JSONタブでポリシーを作成する](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html)。
+3.  アクセスポリシーを設定します。 [AWSコンソール &gt; IAM &gt; アクセス管理 &gt; ポリシー](https://console.aws.amazon.com/iamv2/home#/policies)してリージョンに切り替えて、 TiDB Cloudのアクセスポリシーが既に存在するかどうかを確認します。存在しない場合は、このドキュメントに従ってポリシーを作成します。 [JSONタブでポリシーを作成する](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html)。
 
     以下は、JSONポリシーのテンプレート例です。
 
@@ -287,7 +286,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
     2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
     3.  TiDB Cloudのプランに応じて、TiCDCがTiDB Cloudに接続できるようにするために、以下のいずれかの操作を行ってください。
 
-        -   TiDB Cloud StarterまたはEssentialの場合は、 **Authorized Networks**セクションで**Add rule**をクリックします。表示されたダイアログで、TiCDCコンポーネントのパブリック IP アドレスを使用するファイアウォール ルールを追加し、 **[保存]**をクリックします。詳細については、 [パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md#create-and-manage-a-firewall-rule)を参照してください。
+        -   TiDB Cloud StarterまたはEssentialの場合は、 **Authorized Networks**セクションで**Add rule**をクリックします。表示されたダイアログで、TiCDCコンポーネントのパブリック IP アドレスを使用するファイアウォールルールを追加し、 **[保存]**をクリックします。詳細については、 [パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md#create-and-manage-a-firewall-rule)を参照してください。
         -   TiDB Cloud Dedicatedの場合は、 **Add IP Address**をクリックします。表示されたダイアログで、 **[IP アドレスを使用する]**を選択し、 [ **+]**をクリックし、TiCDCコンポーネントのパブリック IP アドレスを**IP Address**フィールドに入力して、 **[確認]**をクリックします。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
 
 3.  下流のTiDB Cloudリソースの接続情報を取得します。
@@ -309,7 +308,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
     -   `--pd` : アップストリームクラスタのPDアドレス。形式は`[upstream_pd_ip]:[pd_port]`です。
 
-    -   `--sink-uri` : レプリケーション タスクのダウンストリーム アドレス。 `--sink-uri`は、次の形式に従って構成します。現在、このスキームは`mysql` 、 `tidb` 、 `kafka` 、 `s3` 、および`local` 。
+    -   `--sink-uri` : レプリケーションタスクのダウンストリーム アドレス。 `--sink-uri`は、次の形式に従って構成します。現在、このスキームは`mysql` 、 `tidb` 、 `kafka` 、 `s3` 、および`local` 。
 
         ```shell
         [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]

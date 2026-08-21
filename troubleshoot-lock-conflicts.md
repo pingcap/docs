@@ -19,7 +19,7 @@ TiDBはバージョン5.1以降、ロックビュー機能をサポートして�
 
 -   [`TIDB_TRX`および`CLUSTER_TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) : 現在の TiDB ノードまたはクラスター全体で実行中のすべてのトランザクションの情報 (トランザクションがロック待機状態にあるかどうか、ロック待機時間、トランザクションで実行されたステートメントのダイジェストなど) を提供します。
 -   [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md) : ブロックしているトランザクションとブロックされたトランザクションの`start_ts` 、ブロックされた SQL ステートメントのダイジェスト、待機が発生したキーなど、悲観的ロック待機情報を TiKV で提供します。
--   [`DEADLOCKS`と`CLUSTER_DEADLOCKS`](/information-schema/information-schema-deadlocks.md) : デッドロック ループ内のトランザクション間の待機関係、トランザクションで現在実行されているステートメントのダイジェスト、待機が発生しているキーなど、現在の TiDB ノードまたはクラスター全体で最近発生したいくつかのデッドロック イベントの情報を提供します。
+-   [`DEADLOCKS`と`CLUSTER_DEADLOCKS`](/information-schema/information-schema-deadlocks.md) : デッドロック ループ内のトランザクション間の待機関係、トランザクションで現在実行されているステートメントのダイジェスト、待機が発生しているキーなど、現在の TiDB ノードまたはクラスター全体で最近発生したいくつかのデッドロックイベントの情報を提供します。
 
 > **Note:**
 >
@@ -29,7 +29,7 @@ TiDBはバージョン5.1以降、ロックビュー機能をサポートして�
 
 ### デッドロックエラー {#deadlock-errors}
 
-最近のデッドロック エラーの情報を取得するには、テーブル`DEADLOCKS`または`CLUSTER_DEADLOCKS`をクエリできます。
+最近のデッドロックエラーの情報を取得するには、テーブル`DEADLOCKS`または`CLUSTER_DEADLOCKS`をクエリできます。
 
 たとえば、テーブル`DEADLOCKS`をクエリするには、次の SQL ステートメントを実行できます。
 
@@ -153,13 +153,13 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
 
 ### メタデータロック {#metadata-locks}
 
-セッションがスキーマの変更を待機している場合、メタデータ ロックが原因である可能性があります。
+セッションがスキーマの変更を待機している場合、メタデータロックが原因である可能性があります。
 
 詳細については[メタデータロック](/metadata-lock.md)を参照してください。
 
 ## 楽観的ロックの競合のトラブルシューティング {#troubleshoot-optimistic-lock-conflicts}
 
-このセクションでは、楽観的トランザクション モードでの一般的なロック競合の問題の解決策を示します。
+このセクションでは、楽観的トランザクションモードでの一般的なロック競合の問題の解決策を示します。
 
 ### 読み書き競合 {#read-write-conflicts}
 
@@ -235,7 +235,7 @@ TiDBダッシュボードの`KV Errors`パネルには、トランザクショ�
 
 -   監視中にtxnLockが少量発生しても、あまり気にする必要はありません。バックオフとリトライはバックグラウンドで自動的に実行されます。リトライの初回は100ミリ秒、最大1回のリトライ時間は3000ミリ秒です。
 -   `KV Backoff OPS`に「txnLock」操作が多すぎる場合は、アプリケーション側から書き込み競合の原因を分析することをお勧めします。
--   アプリケーションで書き込み-書き込み競合が発生するシナリオの場合は、悲観的トランザクション モードを使用することを強くお勧めします。
+-   アプリケーションで書き込み-書き込み競合が発生するシナリオの場合は、悲観的トランザクションモードを使用することを強くお勧めします。
 
 ### LockNotFoundエラー {#locknotfound-error}
 
@@ -279,7 +279,7 @@ TiDBダッシュボードの`KV Errors`パネルには、トランザクショ�
 
 ## 悲観的ロックの競合のトラブルシューティング {#troubleshoot-pessimistic-lock-conflicts}
 
-このセクションでは、悲観的トランザクション モードでの一般的なロック競合の問題の解決策を示します。
+このセクションでは、悲観的トランザクションモードでの一般的なロック競合の問題の解決策を示します。
 
 > **Note:**
 >
@@ -287,7 +287,7 @@ TiDBダッシュボードの`KV Errors`パネルには、トランザクショ�
 
 ### 読み書き競合 {#read-write-conflicts}
 
-エラー メッセージと解決策は、楽観的ロックの競合の[読み取り書き込み競合](#read-write-conflicts)と同じです。
+エラーメッセージと解決策は、楽観的ロックの競合の[読み取り書き込み競合](#read-write-conflicts)と同じです。
 
 ### 悲観的ロック再試行制限に達しました {#pessimistic-lock-retry-limit-reached}
 
@@ -295,7 +295,7 @@ TiDBダッシュボードの`KV Errors`パネルには、トランザクショ�
 
 TiDBのロック操作は書き込み操作であり、そのプロセスはまず読み取り、次に書き込みであるため、RPCリクエストは2つあります。トランザクションの途中で書き込み競合が発生した場合、TiDBは対象キーのロックを再度試行し、各再試行はTiDBログに出力されます。再試行回数は[pessimistic-txn.max-retry-count](/tidb-configuration-file.md#max-retry-count)です。
 
-悲観的トランザクション モードでは、書き込み競合が発生し、再試行回数が上限に達すると、次のキーワードを含むエラー メッセージが TiDB ログに表示されます。
+悲観的トランザクションモードでは、書き込み競合が発生し、再試行回数が上限に達すると、次のキーワードを含むエラーメッセージが TiDB ログに表示されます。
 
 ```log
 err="pessimistic lock retry limit reached"
@@ -310,7 +310,7 @@ err="pessimistic lock retry limit reached"
 
 悲観的トランザクションモードでは、トランザクションは互いのロックを待機します。ロック待機のタイムアウトは、TiDBのパラメータ[innodb_lock_wait_timeout](/pessimistic-transaction.md#behaviors)によって定義されます。これは、SQL文レベルでの最大ロック待機時間であり、SQL文がロックを要求したがロックが取得されなかった場合に想定される時間です。この時間が経過すると、TiDBは再びロックを試行せず、対応するエラーメッセージをクライアントに返します。
 
-待機ロックのタイムアウトが発生すると、次のエラー メッセージがクライアントに返されます。
+待機ロックのタイムアウトが発生すると、次のエラーメッセージがクライアントに返されます。
 
 ```log
 ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction
@@ -324,7 +324,7 @@ ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction
 
 トランザクションの実行時間はGCのタイムリミットを超えることはできません。また、悲観的トランザクションのTTL時間には上限があり、デフォルト値は1時間です。そのため、1時間を超えて実行された悲観的トランザクションはコミットに失敗します。このタイムアウトしきい値は、TiDBパラメータ[`performance.max-txn-ttl`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example)によって制御されます。
 
-悲観的トランザクションの実行時間が TTL 時間を超えると、TiDB ログに次のエラー メッセージが表示されます。
+悲観的トランザクションの実行時間が TTL 時間を超えると、TiDB ログに次のエラーメッセージが表示されます。
 
 ```log
 TTL manager has timed out, pessimistic locks may expire, please commit or rollback this transaction

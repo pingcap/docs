@@ -81,7 +81,7 @@ TiDB Cloud PremiumがAmazon S3またはAlibaba Cloud Object Storage Service（OS
 
 -   CSV ファイルが Amazon S3 にある場合は、 TiDB Cloud Premium インスタンスに対して[Amazon S3へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)。
 
-    バケットにアクセスするには、AWS アクセスキーまたはロール ARN のいずれかを使用できます。完了したら、[ステップ4](#step-4-import-csv-files)で必要となるため、アクセスキー (アクセスキー ID とシークレット アクセスキーを含む) またはロール ARN の値をメモしておいてください。
+    バケットにアクセスするには、AWS アクセスキーまたはロール ARN のいずれかを使用できます。完了したら、[ステップ4](#step-4-import-csv-files)で必要となるため、アクセスキー (アクセスキー ID とシークレットアクセスキーを含む) またはロール ARN の値をメモしておいてください。
 
 -   CSV ファイルが Alibaba Cloud Object Storage Service (OSS) にある場合は、 TiDB Cloud Premium インスタンスの[Alibaba Cloud Object Storage Service (OSS) へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)。
 
@@ -110,7 +110,7 @@ CSVファイルをTiDB Cloud Premiumにインポートするには、以下の�
     -   **Source Files URI** ：
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`s3://[bucket_name]/[data_source_folder]/[file_name].csv`の形式で入力します。例: `s3://sampledata/ingest/TableName.01.csv` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`s3://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `s3://sampledata/ingest/` 。
-    -   **認証情報**: AWS ロール ARN または AWS アクセス キーを使用してバケットにアクセスできます。詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
+    -   **認証情報**: AWS ロール ARN または AWS アクセスキーを使用してバケットにアクセスできます。詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
         -   **AWS Role ARN** : AWS ロール ARN の値を入力してください。新しいロールを作成する必要がある場合は、 **[ここをクリックして AWS CloudFormation を使用して新しいロールを作成] をクリックし**、ガイド付き手順に従って、提供されているテンプレートを起動し、 IAM警告を確認し、スタックを作成し、生成された ARN をTiDB Cloud Premium にコピーしてください。
         -   **AWS Access Key**：AWSアクセスキーIDとAWSシークレットアクセスキーを入力してください。
     -   **Test Bucket Access**：認証情報が正しく入力された後、このボタンをクリックして、 TiDB Cloud Premiumがバケットにアクセスできることを確認してください。
@@ -126,7 +126,7 @@ CSVファイルをTiDB Cloud Premiumにインポートするには、以下の�
     >
     > **Source Files URI**で単一のファイルが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションは表示されず、 TiDB Cloud Premiumは**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
-    -   [ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)ソース ファイルとターゲット テーブルに適用するには、自動マッピングを有効のままにしておきます。データ形式として**CSV**を選択したままにしておきます。
+    -   [ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)ソースファイルとターゲットテーブルに適用するには、自動マッピングを有効のままにしておきます。データ形式として**CSV**を選択したままにしておきます。
 
     -   **Advanced options**：パネルを展開して`Ignore compatibility checks (advanced)`の切り替えボタンを表示します。スキーマ互換性検証を意図的にバイパスしたい場合を除き、無効のままにしておいてください。
 
@@ -179,7 +179,7 @@ CSVファイルをTiDB Cloud Premiumにインポートするには、以下の�
     >
     > **Source Files URI**で単一のファイルが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションは表示されず、 TiDB Cloud Premiumは**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
-    -   [ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)ソース ファイルとターゲット テーブルに適用するには、自動マッピングを有効のままにしておきます。データ形式として**CSV**を選択したままにしておきます。
+    -   [ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)ソースファイルとターゲットテーブルに適用するには、自動マッピングを有効のままにしておきます。データ形式として**CSV**を選択したままにしておきます。
 
     -   **Advanced options**：パネルを展開して`Ignore compatibility checks (advanced)`の切り替えボタンを表示します。スキーマ互換性検証を意図的にバイパスしたい場合を除き、無効のままにしておいてください。
 
@@ -213,7 +213,7 @@ CSVファイルをTiDB Cloud Premiumにインポートするには、以下の�
 
 ### データインポート中の警告を解決する {#resolve-warnings-during-data-import}
 
-**Start Import**をクリックした後、 `can't find the corresponding source files`などの警告メッセージが表示された場合は、正しいソース ファイルを提供するか、 [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って既存のファイルの名前を変更するか、**Advanced Settings**を使用して変更することで問題を解決します。
+**Start Import**をクリックした後、 `can't find the corresponding source files`などの警告メッセージが表示された場合は、正しいソースファイルを提供するか、 [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って既存のファイルの名前を変更するか、**Advanced Settings**を使用して変更することで問題を解決します。
 
 これらの問題を解決した後、データを再度インポートする必要があります。
 

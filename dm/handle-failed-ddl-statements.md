@@ -17,7 +17,7 @@ summary: TiDB データ移行ツールを使用してデータを移行すると
 -   失敗した DDL ステートメントを他の DDL ステートメントに置き換えることはできません。
 -   その他の DDL ステートメントをダウンストリーム TiDB に挿入してはなりません。
 
-たとえば、 `DROP PRIMARY KEY` 。このシナリオでは、新しいテーブル スキーマを使用してダウンストリームに新しいテーブルを作成し (DDL ステートメントを実行した後)、すべてのデータをこの新しいテーブルに再インポートすることしかできません。
+たとえば、 `DROP PRIMARY KEY` 。このシナリオでは、新しいテーブルスキーマを使用してダウンストリームに新しいテーブルを作成し (DDL ステートメントを実行した後)、すべてのデータをこの新しいテーブルに再インポートすることしかできません。
 
 ## サポートされているシナリオ {#supported-scenarios}
 
@@ -132,7 +132,7 @@ SHOW CREATE TABLE db1.tbl1;
 +-------+--------------------------------------------------+
 ```
 
-ここで、アップストリームで次の DDL ステートメントが実行され、テーブル スキーマが変更されます (つまり、c2 の DECIMAL(11, 3) が DECIMAL(10, 3) に変更されます)。
+ここで、アップストリームで次の DDL ステートメントが実行され、テーブルスキーマが変更されます (つまり、c2 の DECIMAL(11, 3) が DECIMAL(10, 3) に変更されます)。
 
 ```sql
 ALTER TABLE db1.tbl1 CHANGE c2 c2 DECIMAL (10, 3);
@@ -229,7 +229,7 @@ ERROR 8200 (HY000): Unsupported modify column: can't change decimal column preci
 -   MySQL インスタンス 1 には、 `shard_table_1`と`shard_table_2`テーブルを含む`shard_db_1`スキーマが含まれています。
 -   MySQL インスタンス 2 には、 `shard_table_1`と`shard_table_2`テーブルを含む`shard_db_2`スキーマが含まれています。
 
-初期のテーブル スキーマは次のとおりです。
+初期のテーブルスキーマは次のとおりです。
 
 ```sql
 SHOW CREATE TABLE shard_db.shard_table;
@@ -246,7 +246,7 @@ SHOW CREATE TABLE shard_db.shard_table;
 +-------+-----------------------------------------------------------------------------------------------------------+
 ```
 
-次に、すべてのアップストリーム シャード テーブルに対して次の DDL ステートメントを実行して、文字セットを変更します。
+次に、すべてのアップストリーム シャードテーブルに対して次の DDL ステートメントを実行して、文字セットを変更します。
 
 ```sql
 ALTER TABLE `shard_db_*`.`shard_table_*` CHARACTER SET LATIN1 COLLATE LATIN1_DANISH_CI;
@@ -574,7 +574,7 @@ ALTER TABLE `db1`.`tbl1` ADD COLUMN new_col INT UNIQUE;
 -   MySQL インスタンス 1 にはスキーマ`shard_db_1`があり、そこには`shard_table_1`と`shard_table_2` 2 つのテーブルがあります。
 -   MySQL インスタンス 2 にはスキーマ`shard_db_2`があり、そこには`shard_table_1`と`shard_table_2` 2 つのテーブルがあります。
 
-初期のテーブル スキーマは次のとおりです。
+初期のテーブルスキーマは次のとおりです。
 
 ```sql
 SHOW CREATE TABLE shard_db.shard_table;
@@ -591,7 +591,7 @@ SHOW CREATE TABLE shard_db.shard_table;
 +-------+-----------------------------------------------------------------------------------------------------------+
 ```
 
-次に、すべてのアップストリーム シャード テーブルに対して次の DDL 操作を実行し、UNIQUE 制約を持つ新しい列を追加します。
+次に、すべてのアップストリーム シャードテーブルに対して次の DDL 操作を実行し、UNIQUE 制約を持つ新しい列を追加します。
 
 ```sql
 ALTER TABLE `shard_db_*`.`shard_table_*` ADD COLUMN new_col INT UNIQUE;

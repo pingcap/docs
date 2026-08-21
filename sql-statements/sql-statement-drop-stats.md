@@ -39,7 +39,7 @@ DROP STATS TableName PARTITION PartitionNameList;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-次のステートメントは、指定されたテーブルの動的プルーニング モードで生成されたグローバル統計のみを削除します。
+次のステートメントは、指定されたテーブルの動的プルーニングモードで生成されたグローバル統計のみを削除します。
 
 ```sql
 DROP STATS TableName GLOBAL;

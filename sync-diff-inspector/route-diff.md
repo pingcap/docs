@@ -5,7 +5,7 @@ summary: さまざまなデータベース名またはテーブル名のデー�
 
 # 異なるスキーマまたはテーブル名を持つテーブルのデータチェック {#data-check-for-tables-with-different-schema-or-table-names}
 
-[TiDB Data Migration](/dm/dm-overview.md)などのレプリケーション ツールを使用する場合、 `route-rules`を設定すると、ダウンストリーム内の指定されたテーブルにデータをレプリケートできます。 sync-diff-inspector では、 `rules`を設定することで、異なるスキーマ名またはテーブル名を持つテーブルを検証できます。
+[TiDB Data Migration](/dm/dm-overview.md)などのレプリケーションツールを使用する場合、 `route-rules`を設定すると、ダウンストリーム内の指定されたテーブルにデータをレプリケートできます。 sync-diff-inspector では、 `rules`を設定することで、異なるスキーマ名またはテーブル名を持つテーブルを検証できます。
 
 以下は簡単な設定例です。詳細な設定については、 [sync-diff-inspector ユーザーガイド](/sync-diff-inspector/sync-diff-inspector-overview.md)を参照してください。
 
@@ -82,7 +82,7 @@ target-table = "t_2"           # The name of the target table
 
 ### 例 {#examples}
 
-アップストリーム クラスターに 7 つのテーブルがあるとします。
+アップストリームクラスターに 7 つのテーブルがあるとします。
 
 -   `inspector_mysql_0.tb_emp1`
 -   `Inspector_mysql_0.tb_emp1`
@@ -92,7 +92,7 @@ target-table = "t_2"           # The name of the target table
 -   `inspector_mysql_1.Tb_emp1`
 -   `Inspector_mysql_1.Tb_emp1`
 
-設定例では、アップストリーム クラスターにルール`Source.rule1`があり、ターゲット テーブルは`inspector_mysql_1.tb_emp1`です。
+設定例では、アップストリームクラスターにルール`Source.rule1`があり、ターゲットテーブルは`inspector_mysql_1.tb_emp1`です。
 
 #### 例1 {#example-1}
 

@@ -157,7 +157,7 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
 
 2.  変更フィードを作成します。
 
-    アップストリーム クラスターで次のコマンドを実行して、アップストリーム クラスターからダウンストリーム クラスターへの変更フィードを作成します。
+    アップストリームクラスターで次のコマンドを実行して、アップストリームクラスターからダウンストリームクラスターへの変更フィードを作成します。
 
     ```shell
     tiup cdc:v<CLUSTER_VERSION> cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:@127.0.0.1:3306" --changefeed-id="upstream-to-downstream" --start-ts="434217889191428107"

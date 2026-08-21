@@ -26,7 +26,7 @@ summary: 単一クラスターのマルチレプリカ災害復旧ソリュー�
 
 この例では、TiDBには5つのレプリカと3つのリージョンが含まれています。リージョン1はプライマリリージョン、リージョン2はセカンダリリージョン、リージョン3は投票に使用されます。同様に、PDクラスターにも5つのレプリカが含まれており、TiDBクラスターと基本的に同じように機能します。
 
-1.  次のようなトポロジ ファイルを作成します。
+1.  次のようなトポロジファイルを作成します。
 
     ```toml
     global:
@@ -89,7 +89,7 @@ summary: 単一クラスターのマルチレプリカ災害復旧ソリュー�
 
     上記の構成では、次のオプションを使用して、リージョン間 DR を最適化します。
 
-    -   `server.grpc-compression-type: gzip`設定すると、TiKV での gRPC メッセージ圧縮が有効になり、ネットワーク トラフィックが削減されます。
+    -   `server.grpc-compression-type: gzip`設定すると、TiKV での gRPC メッセージ圧縮が有効になり、ネットワークトラフィックが削減されます。
     -   `raftstore.raft-min-election-timeout-ticks`と`raftstore.raft-max-election-timeout-ticks`設定して、リージョン 3 が選挙に参加するまでの時間を延長し、このリージョン内のレプリカがリーダーとして投票されるのを防ぎます。
 
 2.  上記の構成ファイルを使用してクラスターを作成します。
@@ -166,7 +166,7 @@ GrafanaまたはTiDB Dashboardにアクセスすることで、TiKV、TiDB、PD�
 
 計画的スイッチオーバーとは、メンテナンスの必要性に基づいてプライマリリージョンとセカンダリリージョン間でスケジュールされたスイッチオーバーです。DRシステムが正常に動作しているかどうかを確認するために使用できます。このセクションでは、計画的スイッチオーバーの実行方法について説明します。
 
-1.  次のコマンドを実行して、すべてのユーザー テーブルと PD リーダーをリージョン 2 に切り替えます。
+1.  次のコマンドを実行して、すべてのユーザーテーブルと PD リーダーをリージョン 2 に切り替えます。
 
     ```sql
     -- Apply the rule secondary_rule_for_region2 to the corresponding user tables.
@@ -197,7 +197,7 @@ GrafanaまたはTiDB Dashboardにアクセスすることで、TiKV、TiDB、PD�
     tiup cluster stop drtest -N tidb-dr-test1:20160,tidb-dr-test2:20160,tidb-dr-test1:2379,tidb-dr-test2:2379
     ```
 
-2.  次のコマンドを実行して、すべてのユーザー テーブルのリーダーをリージョン 2 に切り替えます。
+2.  次のコマンドを実行して、すべてのユーザーテーブルのリーダーをリージョン 2 に切り替えます。
 
     ```sql
     -- Apply the rule secondary_rule_for_region2 to the corresponding user tables.
@@ -208,4 +208,4 @@ GrafanaまたはTiDB Dashboardにアクセスすることで、TiKV、TiDB、PD�
     SELECT STORE_ID, address, leader_count, label FROM TIKV_STORE_STATUS ORDER BY store_id;
     ```
 
-    リージョン 1 が回復したら、前述のコマンドと同様のコマンドを使用して、ユーザー テーブルのリーダーをリージョン 1 に戻すことができます。
+    リージョン 1 が回復したら、前述のコマンドと同様のコマンドを使用して、ユーザーテーブルのリーダーをリージョン 1 に戻すことができます。

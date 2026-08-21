@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Handling Millions of Tables in SaaS Multi-Tenant Scenarios
-summary: SaaS (Software as a Service) マルチテナント シナリオ、特に単一クラスター内のテーブル数が 100 万を超える環境における TiDB のベスト プラクティスを学習します。
+summary: SaaS (Software as a Service) マルチテナントシナリオ、特に単一クラスター内のテーブル数が 100 万を超える環境における TiDB のベストプラクティスを学習します。
 aliases: ['/ja/tidb/stable/saas-best-practices/']
 ---
 
@@ -12,7 +12,7 @@ aliases: ['/ja/tidb/stable/saas-best-practices/']
 >
 > TiDB v8.5.0 以降のバージョンを使用することをお勧めします。
 
-これらのベスト プラクティスの実際のケース スタディについては、ブログ投稿[300万テーブルへの拡張: TiDB が Atlassian Forge の SaaS プラットフォームを支える仕組み](https://www.pingcap.com/blog/scaling-3-million-tables-how-tidb-powers-atlassian-forge-saas-platform/)を参照してください。
+これらのベストプラクティスの実際のケーススタディについては、ブログ投稿[300万テーブルへの拡張: TiDB が Atlassian Forge の SaaS プラットフォームを支える仕組み](https://www.pingcap.com/blog/scaling-3-million-tables-how-tidb-powers-atlassian-forge-saas-platform/)を参照してください。
 
 ## TiDB ハードウェア推奨事項 {#tidb-hardware-recommendations}
 
@@ -36,8 +36,7 @@ TiKV および PD に推奨されるハードウェア構成は次のとおり�
 
 -   TiDB v8.4.0 以降、TiDB は SQL 実行中に、SQL ステートメントに関連するテーブル情報をオンデマンドで Infoschema キャッシュにロードします。
 
-    -   TiDB ダッシュボードの**スキーマ ロード**パネルの下にある**Infoschema v2 キャッシュ サイズ**サブパネルと**Infoschema v2 キャッシュ操作**サブパネルを観察することで、Infoschema キャッシュのサイズとヒット率を監視できます。
-    -   システム変数[`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)を使用すると、ビジネスニーズに合わせて Infoschema キャッシュのメモリ制限を調整できます。Infoschema キャッシュのサイズは、SQL 実行に関係するテーブルの数に比例します。実際のテストでは、100 万テーブル（各テーブルに 4 つの列、1 つの主キー、1 つのインデックス）のメタデータを完全にキャッシュするには、約 2.4 GiB のメモリが必要です。
+    -   TiDB ダッシュボードの**スキーマ ロード**パネルの下にある**Infoschema v2 キャッシュサイズ**サブパネルと**Infoschema v2 キャッシュ操作**サブパネルを観察することで、Infoschema キャッシュのサイズとヒット率を監視できます。    -   システム変数[`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)を使用すると、ビジネスニーズに合わせて Infoschema キャッシュのメモリ制限を調整できます。Infoschema キャッシュのサイズは、SQL 実行に関係するテーブルの数に比例します。実際のテストでは、100 万テーブル（各テーブルに 4 つの列、1 つの主キー、1 つのインデックス）のメタデータを完全にキャッシュするには、約 2.4 GiB のメモリが必要です。
 
 -   TiDB は、SQL 実行中に、SQL ステートメントに関係するテーブル統計をオンデマンドで統計キャッシュに読み込みます。
 

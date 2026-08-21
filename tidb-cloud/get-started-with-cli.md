@@ -95,7 +95,7 @@ MySQL コマンドライン クライアントがインストールされてい�
 
 ### TiDB Cloudでユーザープロファイルを作成するか、ログインしてください。 {#create-a-user-profile-or-log-into-tidb-cloud}
 
-TiDB Cloud CLI を使用して TiDB Cloud Starterインスタンスを作成する前に、ユーザー プロファイルを作成するか、 TiDB Cloudにログインする必要があります。
+TiDB Cloud CLI を使用して TiDB Cloud Starterインスタンスを作成する前に、ユーザープロファイルを作成するか、 TiDB Cloudにログインする必要があります。
 
 -   [TiDB Cloud APIキー](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)を使用してユーザープロファイルを作成します。
 

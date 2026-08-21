@@ -11,7 +11,7 @@ v5.4.0以降、 TiDB Lightningを設定して、無効な型変換や一意キ�
 
 -   `lightning.max-error` : 型エラーの許容閾値
 -   `conflict.strategy` : 競合`conflict.max-record-rows` `conflict.threshold`に関連する構成
--   `tikv-importer.duplicate-resolution` (v8.0.0 で非推奨となり、将来のリリースで削除される予定): 物理インポート モードでのみ使用できる競合処理構成
+-   `tikv-importer.duplicate-resolution` (v8.0.0 で非推奨となり、将来のリリースで削除される予定): 物理インポートモードでのみ使用できる競合処理構成
 -   `lightning.task-info-schema-name` : TiDB Lightningが競合を検出したときに競合するデータが格納されるデータベース
 
 詳細については[TiDB Lightning （タスク）](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)を参照してください。
@@ -51,7 +51,7 @@ max-error = 0
 
 ## エラーレポート {#error-report}
 
-TiDB Lightning がインポート中にエラーに遭遇した場合、終了時にターミナルとログ ファイルの両方にこれらのエラーに関する統計の概要が出力されます。
+TiDB Lightning がインポート中にエラーに遭遇した場合、終了時にターミナルとログファイルの両方にこれらのエラーに関する統計の概要が出力されます。
 
 -   ターミナルのエラーレポートは次の表のようになります。
 
@@ -59,7 +59,7 @@ TiDB Lightning がインポート中にエラーに遭遇した場合、終了�
     | - | ------ | ---- | ------------------------------------- |
     | 1 | データ型   | 1000 | `lightning_task_info` `type_error_v1` |
 
--   TiDB Lightningログ ファイル内のエラー レポートは次のとおりです。
+-   TiDB Lightningログファイル内のエラーレポートは次のとおりです。
 
     ```shell
     [2022/03/13 05:33:57.736 +08:00] [WARN] [errormanager.go:459] ["Detect 1000 data type errors in total, please refer to table `lightning_task_info`.`type_error_v1` for more details"]
@@ -167,9 +167,9 @@ CREATE VIEW conflict_view AS
 
 ## 例 {#example}
 
-この例では、いくつかの既知のエラーを含むデータ ソースが準備されます。
+この例では、いくつかの既知のエラーを含むデータソースが準備されます。
 
-1.  データベースとテーブル スキーマを準備します。
+1.  データベースとテーブルスキーマを準備します。
 
     ```shell
     mkdir example && cd example
@@ -197,7 +197,7 @@ CREATE VIEW conflict_view AS
     EOF
     ```
 
-3.  TiDB Lightningを構成して厳密な SQL モードを有効にし、ローカル バックエンドを使用してデータをインポートし、重複を置き換え、最大 10 個のエラーをスキップします。
+3.  TiDB Lightningを構成して厳密な SQL モードを有効にし、ローカルバックエンドを使用してデータをインポートし、重複を置き換え、最大 10 個のエラーをスキップします。
 
     ```shell
     cat <<EOF > config.toml

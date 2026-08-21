@@ -59,7 +59,7 @@ HAProxy をデプロイする前に、ハードウェアとソフトウェアの
 
 > **Note:**
 >
-> -   サポートされているその他のオペレーティング システムの詳細については、 [HAProxyドキュメント](https://github.com/haproxy/haproxy/blob/master/INSTALL)を参照してください。
+> -   サポートされているその他のオペレーティングシステムの詳細については、 [HAProxyドキュメント](https://github.com/haproxy/haproxy/blob/master/INSTALL)を参照してください。
 
 #### 依存関係 {#dependencies}
 

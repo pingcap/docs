@@ -105,7 +105,7 @@ Software as a Service (SaaS) プロバイダーとして、当社はデータの
 
 ### 他のRDBMSからTiDB Cloudへの簡単な移行方法はありますか？ {#is-there-an-easy-migration-path-from-another-rdbms-to-tidb-cloud}
 
-TiDB は MySQL と高い互換性があります。データがセルフホスト型 MySQL インスタンスからのものであっても、パブリック クラウドによって提供される RDS サービスからのものであっても、MySQL 互換データベースから TiDB にスムーズにデータを移行できます。詳細については、 [データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を参照してください。
+TiDB は MySQL と高い互換性があります。データがセルフホスト型 MySQL インスタンスからのものであっても、パブリッククラウドによって提供される RDS サービスからのものであっても、MySQL 互換データベースから TiDB にスムーズにデータを移行できます。詳細については、 [データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を参照してください。
 
 ## バックアップと復元に関するFAQ {#backup-and-restore-faq}
 

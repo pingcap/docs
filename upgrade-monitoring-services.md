@@ -20,11 +20,11 @@ TiDB クラスターをデプロイすると、 TiUP はクラスターの監視
 
 TiDBとの互換性を高めるため、TiDBインストールパッケージに含まれるPrometheusインストールパッケージの使用をお勧めします。TiDBインストールパッケージに含まれるPrometheusのバージョンは固定です。より新しいバージョンのPrometheusをご利用になる場合は、各バージョンの新機能については[Prometheus リリースノート](https://github.com/prometheus/prometheus/releases)を参照し、本番環境に適したバージョンをお選びください。推奨バージョンについては、PingCAPの技術スタッフにご相談ください。
 
-次のアップグレード手順では、Prometheus Web サイトから必要なバージョンの Prometheus インストール パッケージをダウンロードし、それを使用してTiUPが使用できる Prometheus パッケージを作成する必要があります。
+次のアップグレード手順では、Prometheus Web サイトから必要なバージョンの Prometheus インストールパッケージをダウンロードし、それを使用してTiUPが使用できる Prometheus パッケージを作成する必要があります。
 
 ### ステップ1. Prometheusのウェブサイトから新しいPrometheusインストールパッケージをダウンロードする {#step-1-download-a-new-prometheus-installation-package-from-the-prometheus-website}
 
-[Prometheusのダウンロードページ](https://prometheus.io/download/)から新しいインストール パッケージをダウンロードして解凍します。
+[Prometheusのダウンロードページ](https://prometheus.io/download/)から新しいインストールパッケージをダウンロードして解凍します。
 
 ### ステップ2. TiDBが提供するPrometheusインストールパッケージをダウンロードする {#step-2-download-the-prometheus-installation-package-provided-by-tidb}
 
@@ -68,7 +68,7 @@ tiup cluster patch <cluster-name> prometheus-v{new-version}.tar.gz -R prometheus
 
 TiDBとの互換性を高めるため、TiDBインストールパッケージに同梱されているGrafanaインストールパッケージのご利用をお勧めします。TiDBインストールパッケージに含まれるGrafanaのバージョンは固定です。より新しいGrafanaバージョンをご利用になる場合は、各バージョンの新機能については[Grafana リリースノート](https://grafana.com/docs/grafana/latest/whatsnew/)を参照し、本番環境に適したバージョンをお選びください。推奨バージョンについては、PingCAPの技術スタッフまでお問い合わせください。
 
-次のアップグレード手順では、Grafana Web サイトから必要なバージョンの Grafana インストール パッケージをダウンロードし、それを使用してTiUPが使用できる Grafana パッケージを作成する必要があります。
+次のアップグレード手順では、Grafana Web サイトから必要なバージョンの Grafana インストールパッケージをダウンロードし、それを使用してTiUPが使用できる Grafana パッケージを作成する必要があります。
 
 ### ステップ1. Grafanaのウェブサイトから新しいGrafanaインストールパッケージをダウンロードします。 {#step-1-download-a-new-grafana-installation-package-from-the-grafana-website}
 
@@ -120,7 +120,7 @@ TiDBインストールパッケージに含まれるAlertmanagerパッケージ�
 
 ### ステップ1. PrometheusのWebサイトから新しいAlertmanagerインストールパッケージをダウンロードします。 {#step-1-download-a-new-alertmanager-installation-package-from-the-prometheus-website}
 
-[Prometheusのダウンロードページ](https://prometheus.io/download/#alertmanager)から`alertmanager`インストール パッケージをダウンロードします。
+[Prometheusのダウンロードページ](https://prometheus.io/download/#alertmanager)から`alertmanager`インストールパッケージをダウンロードします。
 
 ### ステップ2. ダウンロードしたインストールパッケージを使用してAlertmanagerをアップグレードする {#step-2-upgrade-alertmanager-using-the-downloaded-installation-package}
 

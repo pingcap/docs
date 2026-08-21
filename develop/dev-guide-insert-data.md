@@ -243,7 +243,7 @@ TiDBに大量のデータを迅速にインポートする必要がある場合�
 <div label="TiDB Self-Managed" value="tidb">
 
 -   データエクスポート： [Dumpling](/dumpling-overview.md) 。MySQLまたはTiDBのデータをローカルまたはAmazon S3にエクスポートできます。
--   データインポート: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 。 **Dumpling**でエクスポートされたデータ、 **CSV**ファイル、 [Amazon AuroraからTiDBへのデータ移行](/migrate-aurora-to-tidb.md)をインポートできます。ローカル ディスクまたは Amazon S3 クラウド ディスクからのデータの読み取りもサポートします。
+-   データインポート: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 。 **Dumpling**でエクスポートされたデータ、 **CSV**ファイル、 [Amazon AuroraからTiDBへのデータ移行](/migrate-aurora-to-tidb.md)をインポートできます。ローカルディスクまたは Amazon S3 クラウドディスクからのデータの読み取りもサポートします。
 -   データレプリケーション： [TiDB Data Migration](/dm/dm-overview.md)MySQL、MariaDB、Amazon AuroraデータベースをTiDBにレプリケートできます。また、ソースデータベースからのシャーディングされたインスタンスとテーブルのマージおよび移行もサポートしています。
 -   データのバックアップと復元:[Backup & Restore (BR)](/br/backup-and-restore-overview.md) 。 **Dumpling**と比較して、 **BR**は***ビッグデータの***シナリオにより適しています。
 

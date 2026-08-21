@@ -87,7 +87,7 @@ TiDB Cloud Essentialは、さまざまな運用要件に対応するため、2�
 -   **従量課金制**：実際の[リクエストキャパシティユニット（RCU）](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu)消費量とストレージ使用量に基づいて課金されます。この柔軟なモデルにより、バックエンドでの手動による過剰プロビジョニングが不要になります。
 -   **高度なセキュリティ**：大規模企業や規制対象業界が必要とする、より高度なセキュリティ設定とコンプライアンス機能を提供します。
 
-ミッション クリティカルなワークロードの稼働時間と回復力を最大化するために、 TiDB Cloud Premium は[地域的な高可用性](/tidb-cloud/serverless-high-availability.md#regional-high-availability-architecture)を提供し、複数のアベイラビリティ ゾーンにノードを分散して、ゾーン展開よりも高い冗長性を実現します。
+ミッション クリティカルなワークロードの稼働時間と回復力を最大化するために、 TiDB Cloud Premium は[地域的な高可用性](/tidb-cloud/serverless-high-availability.md#regional-high-availability-architecture)を提供し、複数のアベイラビリティゾーンにノードを分散して、ゾーン展開よりも高い冗長性を実現します。
 
 <CustomContent plan="byoc">
 

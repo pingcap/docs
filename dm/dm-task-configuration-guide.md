@@ -12,10 +12,10 @@ summary: Data Migration (DM) でデータ移行タスクを構成する方法を
 タスクの移行対象となるデータソースを設定する前に、DMが対応するデータソースの設定ファイルをロードしていることを確認する必要があります。以下に操作手順を示します。
 
 -   データソースを表示するには、 [データソースの構成を確認する](/dm/dm-manage-source.md#check-data-source-configurations)を参照してください。
--   データ ソースを作成するには、 [データソースを作成する](/dm/migrate-data-using-dm.md#step-3-create-data-source)を参照してください。
--   データ ソース構成ファイルを生成するには、 [ソース構成ファイルの紹介](/dm/dm-source-configuration-file.md)を参照してください。
+-   データソースを作成するには、 [データソースを作成する](/dm/migrate-data-using-dm.md#step-3-create-data-source)を参照してください。
+-   データソース構成ファイルを生成するには、 [ソース構成ファイルの紹介](/dm/dm-source-configuration-file.md)を参照してください。
 
-次の例`mysql-instances`は、データ移行タスクで移行する必要があるデータ ソースを構成する方法を示しています。
+次の例`mysql-instances`は、データ移行タスクで移行する必要があるデータソースを構成する方法を示しています。
 
 ```yaml
 ---
@@ -58,9 +58,9 @@ target-database:       # Configuration of target TiDB database.
 >
 > 特定のテーブルをフィルタリングしたり、特定のテーブルを移行したりする必要がない場合は、この構成をスキップします。
 
-データ移行タスクのデータ ソース テーブルのブロック リストと許可リストを構成するには、次の手順を実行します。
+データ移行タスクのデータソーステーブルのブロックリストと許可リストを構成するには、次の手順を実行します。
 
-1.  タスク構成ファイルで、ブロックおよび許可リストのグローバル フィルター ルール セットを構成します。
+1.  タスク構成ファイルで、ブロックおよび許可リストのグローバル フィルタールール セットを構成します。
 
     ```yaml
     block-allow-list:
@@ -80,7 +80,7 @@ target-database:       # Configuration of target TiDB database.
 
     詳細な設定ルールについては[ブロックと許可のテーブルリスト](/dm/dm-block-allow-table-lists.md)を参照してください。
 
-2.  データ ソース構成のブロック リスト ルールと許可リスト ルールを参照して、移行するテーブルをフィルター処理します。
+2.  データソース構成のブロックリスト ルールと許可リスト ルールを参照して、移行するテーブルをフィルター処理します。
 
     ```yaml
     mysql-instances:
@@ -98,7 +98,7 @@ target-database:       # Configuration of target TiDB database.
 
 データ移行タスクのbinlogイベントのフィルターを構成するには、次の手順を実行します。
 
-1.  タスク構成ファイルで、 binlogイベントのグローバル フィルター ルール セットを構成します。
+1.  タスク構成ファイルで、 binlogイベントのグローバル フィルタールール セットを構成します。
 
     ```yaml
     filters:                                        # The filter rule set of data source binlog events. You can set multiple rules at the same time.
@@ -115,7 +115,7 @@ target-database:       # Configuration of target TiDB database.
 
     詳細な設定ルールについては[Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)を参照してください。
 
-2.  データ ソース構成内のbinlogイベント フィルタリング ルールを参照して、データ ソース内の指定されたテーブルまたはスキーマの指定されたbinlogイベントをフィルタリングします。
+2.  データソース構成内のbinlogイベントフィルタリング ルールを参照して、データソース内の指定されたテーブルまたはスキーマの指定されたbinlogイベントをフィルタリングします。
 
     ```yaml
     mysql-instances:
@@ -131,13 +131,13 @@ target-database:       # Configuration of target TiDB database.
 
 > **Note:**
 >
-> -   データ ソースの特定のテーブルをダウンストリーム TiDB インスタンス内の別の名前のテーブルに移行する必要がない場合は、この構成をスキップします。
+> -   データソースの特定のテーブルをダウンストリーム TiDB インスタンス内の別の名前のテーブルに移行する必要がない場合は、この構成をスキップします。
 >
 > -   シャードマージタスクの場合は、タスク構成ファイルでマッピングルールを設定する**必要があります**。
 
-データ ソース テーブルを指定されたダウンストリーム TiDB テーブルに移行するためのルーティング マッピング ルールを構成するには、次の手順を実行します。
+データソーステーブルを指定されたダウンストリーム TiDB テーブルに移行するためのルーティング マッピングルールを構成するには、次の手順を実行します。
 
-1.  タスク構成ファイルでグローバル ルーティング マッピング ルール セットを構成します。
+1.  タスク構成ファイルでグローバル ルーティング マッピングルール セットを構成します。
 
     ```yaml
     routes:                           # The routing mapping rule set between the data source tables and downstream TiDB tables. You can set multiple rules at the same time.
@@ -153,7 +153,7 @@ target-database:       # Configuration of target TiDB database.
 
     詳細な設定ルールについては[テーブルルーティング](/dm/dm-table-routing.md)を参照してください。
 
-2.  データ ソース構成内のルーティング マッピング ルールを参照して、移行するテーブルをフィルター処理します。
+2.  データソース構成内のルーティング マッピングルールを参照して、移行するテーブルをフィルター処理します。
 
     ```yaml
     mysql-instances:

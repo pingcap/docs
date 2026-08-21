@@ -1,13 +1,13 @@
 ---
 title: TiDB Cluster Alert Rules
-summary: TiDB クラスターのアラート ルールについて学習します。
+summary: TiDB クラスターのアラートルールについて学習します。
 ---
 
 <!-- markdownlint-disable MD024 -->
 
 # TiDBクラスタアラートルール {#tidb-cluster-alert-rules}
 
-このドキュメントでは、TiDB、TiKV、PD、 TiFlash、TiCDC、Node_exporter、Blackbox_exporter のアラート項目のルールの説明と解決策を含む、TiDB クラスター内のさまざまなコンポーネントのアラート ルールについて説明します。
+このドキュメントでは、TiDB、TiKV、PD、 TiFlash、TiCDC、Node_exporter、Blackbox_exporter のアラート項目のルールの説明と解決策を含む、TiDB クラスター内のさまざまなコンポーネントのアラートルールについて説明します。
 
 アラートルールは、重大度レベルに応じて、緊急レベル、重大レベル、警告レベルの3つのカテゴリ（高から低の順）に分類されます。この重大度レベルの区分は、以下の各コンポーネントのすべてのアラート項目に適用されます。
 
@@ -19,7 +19,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 ## TiDBアラートルール {#tidb-alert-rules}
 
-このセクションでは、TiDBコンポーネントのアラート ルールについて説明します。
+このセクションでは、TiDBコンポーネントのアラートルールについて説明します。
 
 ### 緊急レベルの警報 {#emergency-level-alerts-1}
 
@@ -172,7 +172,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 ## PDアラートルール {#pd-alert-rules}
 
-このセクションでは、PDコンポーネントのアラート ルールについて説明します。
+このセクションでは、PDコンポーネントのアラートルールについて説明します。
 
 ### 緊急レベルの警報 {#emergency-level-alerts-2}
 
@@ -417,7 +417,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 ## TiKVアラートルール {#tikv-alert-rules}
 
-このセクションでは、TiKVコンポーネントのアラート ルールについて説明します。
+このセクションでは、TiKVコンポーネントのアラートルールについて説明します。
 
 ### 緊急レベルの警報 {#emergency-level-alerts-3}
 
@@ -553,7 +553,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   解決：
 
-    1.  TiDB ログからスロー クエリ ログを確認し、クエリでインデックスまたは完全なテーブル スキャンが使用されているかどうか、または分析に必要かどうかを確認します。
+    1.  TiDB ログからスロークエリログを確認し、クエリでインデックスまたは完全なテーブルスキャンが使用されているかどうか、または分析に必要かどうかを確認します。
     2.  ホットスポットがあるかどうかを確認します。
     3.  コプロセッサーモニターで、 `coprocessor table/index scan`の`total`と`process`が一致しているかどうかを確認してください。大きく異なる場合は、無効なクエリが多すぎることを示しています。`over seek bound`があるかどうかも確認できます。もしそうであれば、GC が時間内に処理できないバージョンが多すぎます。その場合は、並列 GC スレッドの数を増やす必要があります。
 
@@ -772,15 +772,15 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 ## TiFlashアラートルール {#tiflash-alert-rules}
 
-TiFlashアラート ルールの詳細な説明については、 [TiFlashアラートルール](/tiflash/tiflash-alert-rules.md)を参照してください。
+TiFlashアラートルールの詳細な説明については、 [TiFlashアラートルール](/tiflash/tiflash-alert-rules.md)を参照してください。
 
 ## TiCDCアラートルール {#ticdc-alert-rules}
 
-TiCDC アラート ルールの詳細な説明については、 [TiCDCアラートルール](/ticdc/ticdc-alert-rules.md)を参照してください。
+TiCDC アラートルールの詳細な説明については、 [TiCDCアラートルール](/ticdc/ticdc-alert-rules.md)を参照してください。
 
 ## Node_exporterホストアラートルール {#node_exporter-host-alert-rules}
 
-このセクションでは、Node_exporter ホストのアラート ルールについて説明します。
+このセクションでは、Node_exporter ホストのアラートルールについて説明します。
 
 ### 緊急レベルの警報 {#emergency-level-alerts-4}
 
@@ -927,7 +927,7 @@ TiCDC アラート ルールの詳細な説明については、 [TiCDCアラー
 
 ## Blackbox_exporter TCP、ICMP、HTTP アラートルール {#blackbox_exporter-tcp-icmp-and-http-alert-rules}
 
-このセクションでは、Blackbox_exporter の TCP、ICMP、および HTTP のアラート ルールについて説明します。
+このセクションでは、Blackbox_exporter の TCP、ICMP、および HTTP のアラートルールについて説明します。
 
 ### 緊急レベルの警報 {#emergency-level-alerts}
 

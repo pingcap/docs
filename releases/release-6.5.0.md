@@ -19,7 +19,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 >
 > 以前の LTS 6.1.0 と比較して、 TiDB 6.5.0 には、 [6.2.0-DMR](/releases/release-6.2.0.md) 、 [6.3.0-DMR](/releases/release-6.3.0.md) 、 [6.4.0-DMR](/releases/release-6.4.0.md)でリリースされた新機能、改善、バグ修正も含まれています。
 >
-> -   6.1.0 LTS バージョンと 6.5.0 LTS バージョン間の変更点の完全なリストを取得するには、このリリース ノートに加えて、 [6.2.0-DMR リリースノート](/releases/release-6.2.0.md) 、 [6.3.0-DMR リリースノート](/releases/release-6.3.0.md) 、および[6.4.0-DMR リリースノート](/releases/release-6.4.0.md)も参照してください。
+> -   6.1.0 LTS バージョンと 6.5.0 LTS バージョン間の変更点の完全なリストを取得するには、このリリースノートに加えて、 [6.2.0-DMR リリースノート](/releases/release-6.2.0.md) 、 [6.3.0-DMR リリースノート](/releases/release-6.3.0.md) 、および[6.4.0-DMR リリースノート](/releases/release-6.4.0.md)も参照してください。
 > -   6.1.0 LTS バージョンと 6.5.0 LTS バージョンの主な機能を簡単に比較するには、 [TiDBの機能](/basic-features.md)の`v6.1`と`v6.5`列を確認してください。
 
 -   [インデックス加速](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)機能が一般提供 (GA) され、v6.1.0 と比較してインデックス追加のパフォーマンスが約 10 倍向上しました。
@@ -44,7 +44,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     TiDB v6.3.0では、インデックス作成時のバックフィル速度を向上させる実験的機能として[インデックス加速を追加](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)導入されました。v6.5.0ではこの機能がGAとなり、デフォルトで有効化されます。大規模テーブルにおけるパフォーマンスはv6.1.0と比較して約10倍向上すると予想されます。この高速化機能は、単一のSQL文がインデックスを逐次追加するシナリオに適しています。複数のSQL文が並列でインデックスを追加する場合は、そのうちの1つのSQL文のみが高速化されます。
 
--   DDL 変更時の DML 成功率を向上させる軽量メタデータ ロックを提供する (GA) [＃37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016)
+-   DDL 変更時の DML 成功率を向上させる軽量メタデータロックを提供する (GA) [＃37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016)
 
     TiDB v6.3.0 では、 [メタデータロック](/metadata-lock.md)実験的機能として導入されています。DML 文によって発生する`Information schema is changed`エラーを回避するため、TiDB はテーブルメタデータの変更時に DML と DDL の優先順位を調整し、実行中の DDL を古いメタデータを持つ DML のコミットまで待機させます。v6.5.0 ではこの機能が GA となり、デフォルトで有効化されます。これは、さまざまな種類の DDL 変更シナリオに適しています。既存のクラスターを v6.5.0 より前のバージョンから v6.5.0 以降にアップグレードすると、TiDB は自動的にメタデータロックを有効にします。この機能を無効にするには、システム変数[`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630)を`OFF`に設定します。
 
@@ -140,8 +140,8 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     TiFlashおよび CDC パネルは、 TiFlashおよび TiCDC の監視情報を再編成します。これにより、 TiFlashおよび TiCDC のパフォーマンスの問題の分析とトラブルシューティングの効率が大幅に向上します。
 
-    -   [TiFlashパネル](/grafana-performance-overview-dashboard.md#tiflash)では、 TiFlashクラスターのリクエスト タイプ、レイテンシー分析、リソース使用状況の概要を簡単に表示できます。
-    -   [CDCパネル](/grafana-performance-overview-dashboard.md#cdc)では、TiCDC クラスターの健全性、レプリケーションのレイテンシー、データ フロー、ダウンストリームの書き込みレイテンシーを簡単に確認できます。
+    -   [TiFlashパネル](/grafana-performance-overview-dashboard.md#tiflash)では、 TiFlashクラスターのリクエストタイプ、レイテンシー分析、リソース使用状況の概要を簡単に表示できます。
+    -   [CDCパネル](/grafana-performance-overview-dashboard.md#cdc)では、TiCDC クラスターの健全性、レプリケーションのレイテンシー、データフロー、ダウンストリームの書き込みレイテンシーを簡単に確認できます。
 
     詳細については[ドキュメント](/performance-tuning-methods.md)を参照してください。
 
@@ -181,7 +181,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     TiDB v6.2.0 では、 [コストモデル バージョン 2](/cost-model.md#cost-model-version-2)が実験的機能として導入されました。このモデルは、より正確なコスト推定手法を用いて、オプティマイザーが最適な実行計画を選択できるように支援します。特にTiFlashを導入している場合、コストモデル バージョン 2 は適切なストレージエンジンを自動的に選択し、手動による介入を大幅に削減します。一定期間の実環境テストを経て、このモデルは v6.5.0 で一般提供となります。v6.5.0 以降、新規に作成されたクラスターはデフォルトでコストモデル バージョン 2 を使用します。v6.5.0 にアップグレードするクラスターでは、コストモデル バージョン 2 によってクエリプランが変更される可能性があるため、十分なパフォーマンステストを行った後、 [`tidb_cost_model_version = 2`](/system-variables.md#tidb_cost_model_version-new-in-v620)変数を設定して新しいコストモデルを使用するように設定できます。
 
-    コスト モデル バージョン 2 は、TiDB オプティマイザーの全体的な機能を大幅に向上させ、TiDB をより強力な HTAP データベースへと進化させる、一般利用可能な機能になります。
+    コストモデル バージョン 2 は、TiDB オプティマイザーの全体的な機能を大幅に向上させ、TiDB をより強力な HTAP データベースへと進化させる、一般利用可能な機能になります。
 
     詳細については[ドキュメント](/cost-model.md#cost-model-version-2)を参照してください。
 
@@ -309,9 +309,9 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 | ------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `tidb_enable_amend_pessimistic_txn`                                                                                       | 非推奨      | v6.5.0 以降、この変数は非推奨となり、TiDB は`Information schema is changed`エラーを回避するためにデフォルトで[メタデータロック](/metadata-lock.md)機能を使用します。                                                                                                                                                                                                                                     |
 | [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610)                       | 変更     | さらにテストを行った後、デフォルト値を`OFF`から`ON`に変更します。つまり、 [結合したテーブルの再配置](/join-reorder.md)アルゴリズムの Outer Join のサポートがデフォルトで有効になります。                                                                                                                                                                                                                                      |
-| [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-new-in-v620)                                     | 変更     | さらにテストを行った後、デフォルト値を`1`から`2`に変更します。つまり、インデックス選択と演算子選択には、デフォルトでコスト モデル バージョン 2 が使用されることになります。                                                                                                                                                                                                                                                            |
+| [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-new-in-v620)                                     | 変更     | さらにテストを行った後、デフォルト値を`1`から`2`に変更します。つまり、インデックス選択と演算子選択には、デフォルトでコストモデル バージョン 2 が使用されることになります。                                                                                                                                                                                                                                                            |
 | [`tidb_enable_gc_aware_memory_track`](/system-variables.md#tidb_enable_gc_aware_memory_track)                             | 変更     | デフォルト値を`ON`から`OFF`に変更します。GC対応メモリトラックはテストで不正確であることが判明し、追跡されるメモリサイズが大きくなりすぎるため、メモリトラックは無効化されています。また、 Golang 1.19では、GC対応メモリトラックによって追跡されるメモリは、全体のメモリに大きな影響を与えません。                                                                                                                                                                                          |
-| [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630)                                 | 変更     | さらにテストを行った後、デフォルト値を`OFF`から`ON`に変更します。これは、メタデータ ロック機能がデフォルトで有効になっていることを意味します。                                                                                                                                                                                                                                                                           |
+| [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630)                                 | 変更     | さらにテストを行った後、デフォルト値を`OFF`から`ON`に変更します。これは、メタデータロック機能がデフォルトで有効になっていることを意味します。                                                                                                                                                                                                                                                                           |
 | [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630)     | 変更     | 6.5.0以降で有効になります。`INSERT` 、 `DELETE` 、 `UPDATE`を含むSQL文の読み取り操作をTiFlashにプッシュダウンできるかどうかを制御します。デフォルト値は`OFF`です。                                                                                                                                                                                                                                              |
 | [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)                               | 変更     | さらにテストを行った後、デフォルト値を`OFF`から`ON`に変更します。つまり、 `ADD INDEX`と`CREATE INDEX`の加速はデフォルトで有効になります。                                                                                                                                                                                                                                                                 |
 | [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)                                                       | 変更     | TiDB v6.5.0より前のバージョンでは、この変数はクエリのメモリクォータのしきい値を設定するために使用されます。TiDB v6.5.0以降のバージョンでは、DMLステートメントのメモリをより正確に制御するために、この変数はセッションのメモリクォータのしきい値を設定するために使用されます。                                                                                                                                                                                                    |

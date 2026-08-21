@@ -32,7 +32,7 @@ summary: TiDB Lightningをデプロイ、大量の新しいデータを迅速に
 
 [TiDBツールをダウンロード](/download-ecosystem-tools.md)を参照してTiDB Lightning のバイナリをダウンロードしてください。TiDB Lightning はTiDB の以前のバージョンと完全に互換性があります。最新バージョンのTiDB Lightning を使用することをお勧めします。
 
-TiDB Lightningバイナリ パッケージを解凍して、 `tidb-lightning`実行可能ファイルを取得します。
+TiDB Lightningバイナリパッケージを解凍して、 `tidb-lightning`実行可能ファイルを取得します。
 
 ```bash
 tar -zxvf tidb-lightning-${version}-linux-amd64.tar.gz

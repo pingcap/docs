@@ -281,7 +281,7 @@ TiKV モジュールの監視情報に関連するテーブルは次のとおり
 -   `Coprocessor Info` : TiKV 内のコプロセッサーモジュールに関連する監視情報。
 -   `Raft Info` : TiKV 内のRaftモジュールの監視情報。
 -   `Snapshot Info` : TiKV 内のスナップショット関連の監視情報。
--   `GC Info` : TiKV 内のガベージ コレクション (GC) 関連の監視情報。
+-   `GC Info` : TiKV 内のガベージコレクション (GC) 関連の監視情報。
 -   `Cache Hit` : TiKV 内の RocksDB の各キャッシュのヒット率情報。
 
 ### コンフィグレーション情報 {#configuration-information}

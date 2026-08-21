@@ -23,7 +23,7 @@ tiup [flags] <component> [args...]      # Runs a component
 
 ### --binary {#binary}
 
--   このオプションを有効にすると、指定されたバイナリ ファイルのパスが出力されます。
+-   このオプションを有効にすると、指定されたバイナリファイルのパスが出力されます。
 
     -   `tiup --binary <component>`を実行すると、最新の安定版がインストールされた`<component>`コンポーネントのパスが表示されます。`<component>`がインストールされていない場合はエラーが返されます。
     -   `tiup --binary <component>:<version>`を実行すると、インストールされた`<component>`コンポーネントの`<version>`パスが出力されます。この`<version>`が出力されない場合は、エラーが返されます。

@@ -75,7 +75,7 @@ TiDB バージョン: 6.5.8
 
         -   古いバージョンのバックアップからデータを復元するときに`Unsupported collation`エラーが報告される問題を修正しました [＃49466](https://github.com/pingcap/tidb/issues/49466) @[3pointer](https://github.com/3pointer)
         -   S3 からファイル コンテンツを読み取っているときにエラーが発生した場合にBR が再試行できない問題を修正しました [＃49942](https://github.com/pingcap/tidb/issues/49942) @[Leavrth](https://github.com/Leavrth)
-        -   同じノードで TiKV IP アドレスを変更した後にログ バックアップが停止する問題を修正しました [＃50445](https://github.com/pingcap/tidb/issues/50445) @[3pointer](https://github.com/3pointer)
+        -   同じノードで TiKV IP アドレスを変更した後にログバックアップが停止する問題を修正しました [＃50445](https://github.com/pingcap/tidb/issues/50445) @[3pointer](https://github.com/3pointer)
 
     -   TiCDC
 

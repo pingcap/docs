@@ -16,7 +16,7 @@ JavaアプリケーションでTiDBデータベースと連携する一般的な
 -   JDBC APIとJDBCドライバ： Javaアプリケーションは通常、標準の[JDBC（Javaデータベース接続）](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) APIを使用してデータベースにアクセスします。TiDBに接続するには、JDBC APIを介してMySQLプロトコルを実装するJDBCドライバを使用できます。MySQL用の一般的なJDBCドライバには[MySQL Connector/J](https://github.com/mysql/mysql-connector-j)や[MariaDB Connector/J](https://mariadb.com/docs/connectors/mariadb-connector-j/about-mariadb-connector-j#about-mariadb-connectorj)などがあります。
 -   データベース接続プール：アプリケーションは通常、接続要求のたびに接続を作成するオーバーヘッドを削減するために、接続プールを使用して接続をキャッシュし、再利用します。JDBCData [データソース](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html)接続プールAPIを定義しています。必要に応じて、さまざまなオープンソースの接続プール実装から選択できます。
 -   データアクセスフレームワーク: アプリケーションは通常、 [MyBatis](https://mybatis.org/mybatis-3/index.html)や[Hibernate](https://hibernate.org/)などのデータアクセスフレームワークを使用して、データベースアクセス操作をさらに簡素化および管理します。
--   アプリケーションの実装: アプリケーション ロジックは、いつどのコマンドをデータベースに送信するかを制御します。一部のアプリケーションは[春のトランザクション](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html)アスペクトを使用して、トランザクションの開始およびコミットのロジックを管理します。
+-   アプリケーションの実装: アプリケーションロジックは、いつどのコマンドをデータベースに送信するかを制御します。一部のアプリケーションは[春のトランザクション](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html)アスペクトを使用して、トランザクションの開始およびコミットのロジックを管理します。
 
 ![Java application components](/media/best-practices/java-practice-1.png)
 
@@ -119,7 +119,7 @@ JDBC は通常、実装関連の設定を JDBC URL パラメーターの形式�
 
 ##### `prepStmtCacheSize` {#prepstmtcachesize}
 
-`prepStmtCacheSize`キャッシュされるプリペアド ステートメントの数を制御します (デフォルト値は`25`です)。アプリケーションで多くの種類の SQL ステートメントを「準備」する必要があり、プリペアド ステートメントを再利用したい場合は、この値を増やすことができます。
+`prepStmtCacheSize`キャッシュされるプリペアドステートメントの数を制御します (デフォルト値は`25`です)。アプリケーションで多くの種類の SQL ステートメントを「準備」する必要があり、プリペアドステートメントを再利用したい場合は、この値を増やすことができます。
 
 この設定が既に有効になっていることを確認するには、次の操作を実行してください。
 
@@ -272,7 +272,7 @@ Javaアプリケーションで以下のエラーが頻繁に発生する場合�
 The last packet sent successfully to the server was 3600000 milliseconds ago. The driver has not received any packets from the server. com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
 ```
 
-`n`内の`n milliseconds ago`の値が`0`または非常に小さい値である場合、通常は実行された SQL 操作によって TiDB が異常終了したことが原因です。原因を特定するには、TiDB の標準エラー ログを確認することをお勧めします。
+`n`内の`n milliseconds ago`の値が`0`または非常に小さい値である場合、通常は実行された SQL 操作によって TiDB が異常終了したことが原因です。原因を特定するには、TiDB の標準エラーログを確認することをお勧めします。
 
 `n`の値が非常に大きい場合 (上記の例の`3600000`など)、この接続が長時間アイドル状態になり、中間プロキシによって閉じられた可能性が高いです。通常の解決策は、プロキシのアイドル設定の値を増やし、接続プールが次の操作を実行できるようにすることです。
 

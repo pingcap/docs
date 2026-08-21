@@ -21,7 +21,7 @@ TiDB バージョン: 6.5.10
 -   TiDB
 
     -   `SHOW CREATE TABLE` の出力に表示される式のデフォルト値のMySQL互換性を改善しました [＃52939](https://github.com/pingcap/tidb/issues/52939) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    -   MPP ロード バランシング中にリージョンのないストアを削除する [＃52313](https://github.com/pingcap/tidb/issues/52313) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    -   MPP ロードバランシング中にリージョンのないストアを削除する [＃52313](https://github.com/pingcap/tidb/issues/52313) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
 -   TiKV
 
@@ -69,7 +69,7 @@ TiDB バージョン: 6.5.10
     -   `tidb_mem_quota_analyze`が有効になっていて、統計の更新に使用されるメモリが制限を超えると TiDB がクラッシュする可能性がある問題を修正しました。 [＃52601](https://github.com/pingcap/tidb/issues/52601) @[hawkingrei](https://github.com/hawkingrei)
     -   `UPDATE`リスト内のサブクエリによって TiDB がpanicする可能性がある問題を修正[＃52687](https://github.com/pingcap/tidb/issues/52687) @[winoros](https://github.com/winoros)
     -   述語の`Longlong`型のオーバーフローの問題を修正 [＃45783](https://github.com/pingcap/tidb/issues/45783) @[hawkingrei](https://github.com/hawkingrei)
-    -   一意インデックスを追加するときに同時 DML 操作によって発生するデータ インデックスの不整合の問題を修正しました。 [＃52914](https://github.com/pingcap/tidb/issues/52914) @[wjhuang2016](https://github.com/wjhuang2016)
+    -   一意インデックスを追加するときに同時 DML 操作によって発生するデータインデックスの不整合の問題を修正しました。 [＃52914](https://github.com/pingcap/tidb/issues/52914) @[wjhuang2016](https://github.com/wjhuang2016)
     -   インデックスデータを解析するときに TiDB がpanicする可能性がある問題を修正しました [＃47115](https://github.com/pingcap/tidb/issues/47115) @[zyguan](https://github.com/zyguan)
     -   スライスの浅いコピーを使用せずに列プルーニングを行うと、TiDB がpanicする可能性がある問題を修正しました[＃52768](https://github.com/pingcap/tidb/issues/52768) @[winoros](https://github.com/winoros)
     -   再帰CTE でビューの使用が機能しない問題を修正 [＃49721](https://github.com/pingcap/tidb/issues/49721) @[hawkingrei](https://github.com/hawkingrei)
@@ -116,11 +116,11 @@ TiDB バージョン: 6.5.10
     -   Backup & Restore (BR)
 
         -   テストケース`TestGetTSWithRetry`実行に時間がかかりすぎる問題を修正[＃52547](https://github.com/pingcap/tidb/issues/52547) @[Leavrth](https://github.com/Leavrth)
-        -   BRを使用してデータを復元する場合、または物理インポート モードでTiDB Lightningを使用してデータをインポートする場合に、PD から取得されたリージョンにLeaderがない問題を修正しました[＃51124](https://github.com/pingcap/tidb/issues/51124) [＃50501](https://github.com/pingcap/tidb/issues/50501) @[Leavrth](https://github.com/Leavrth)
+        -   BRを使用してデータを復元する場合、または物理インポートモードでTiDB Lightningを使用してデータをインポートする場合に、PD から取得されたリージョンにLeaderがない問題を修正しました[＃51124](https://github.com/pingcap/tidb/issues/51124) [＃50501](https://github.com/pingcap/tidb/issues/50501) @[Leavrth](https://github.com/Leavrth)
         -   PD接続障害により、ログバックアップアドバンサ所有者が配置されているTiDBインスタンスがpanicになる可能性がある問題を修正しました。 [＃52597](https://github.com/pingcap/tidb/issues/52597) @[YuJuncen](https://github.com/YuJuncen)
         -   ログバックアップタスクを一時停止、停止、再構築した後、タスクの状態は正常であるが、チェックポイントが進まない問題を修正しました。 [＃53047](https://github.com/pingcap/tidb/issues/53047) @[RidRisR](https://github.com/RidRisR)
         -   TiKVノードにリーダーがいないためにデータ復元が遅くなる問題を修正 [＃50566](https://github.com/pingcap/tidb/issues/50566) @[Leavrth](https://github.com/Leavrth)
-        -   TiKV の再起動により、ログ バックアップのグローバル チェックポイントが実際のバックアップ ファイルの書き込みポイントよりも先に進められ、少量のバックアップ データが失われる可能性がある問題を修正しました[＃16809](https://github.com/tikv/tikv/issues/16809) @[YuJuncen](https://github.com/YuJuncen)
+        -   TiKV の再起動により、ログバックアップのグローバルチェックポイントが実際のバックアップファイルの書き込みポイントよりも先に進められ、少量のバックアップデータが失われる可能性がある問題を修正しました[＃16809](https://github.com/tikv/tikv/issues/16809) @[YuJuncen](https://github.com/YuJuncen)
         -   PDリーダーの転送により、データ復元時にBRがpanicになる可能性がある問題を修正しました。 [＃53724](https://github.com/pingcap/tidb/issues/53724) @[Leavrth](https://github.com/Leavrth)
         -   PD へのネットワーク接続が不安定な状態で一時停止中のログバックアップタスクを再開すると TiKV がpanicする可能性がある問題を修正しました [＃17020](https://github.com/tikv/tikv/issues/17020) @[YuJuncen](https://github.com/YuJuncen)
         -   アドバンサー所有者の移行後にログバックアップが一時停止される可能性がある問題を修正しました [＃53561](https://github.com/pingcap/tidb/issues/53561) @[RidRisR](https://github.com/RidRisR)

@@ -71,7 +71,7 @@ TiDB Ansible バージョン: 3.0.2
     -   `http://{TiDB_ADDRESS:TIDB_IP}/mvcc/key/{db}/{table}/{handle}` API によって返される結果にリージョンID を追加します。 [＃11557](https://github.com/pingcap/tidb/pull/11557)
     -   Scatter Table API が Range キーをエスケープしないために Scatter Table が動作しない問題を修正しました [＃11298](https://github.com/pingcap/tidb/pull/11298)
     -   リージョンキャッシュを最適化します。対応するストアにアクセスできない場合は、リージョンが存在するストアを無効としてラベル付けし、このストアにアクセスすることによって発生するクエリパフォーマンスの低下を回避します[＃11498](https://github.com/pingcap/tidb/pull/11498)
-    -   同じ名前のデータベースを複数回削除した後でも、HTTP API 経由でテーブル スキーマを取得できるというエラーを修正しました[＃11585](https://github.com/pingcap/tidb/pull/11585)
+    -   同じ名前のデータベースを複数回削除した後でも、HTTP API 経由でテーブルスキーマを取得できるというエラーを修正しました[＃11585](https://github.com/pingcap/tidb/pull/11585)
 -   DDL
     -   長さがゼロの非文字列列をインデックスするときにエラーが発生する問題を修正[＃11214](https://github.com/pingcap/tidb/pull/11214)
     -   外部キー制約とフルテキストインデックスを持つ列の変更を禁止します（注：TiDBは、構文で外部キー制約とフルテキストインデックスを引き続きサポートしています） [＃11274](https://github.com/pingcap/tidb/pull/11274)

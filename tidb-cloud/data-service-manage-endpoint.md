@@ -13,10 +13,10 @@ Data Service (PREVIEW) のエンドポイントは、SQL ステートメント�
 
 -   エンドポイントを作成する前に、以下の点を確認してください。
 
-    -   TiDB Cloud Starterインスタンスとデータ アプリが作成されました。詳細については、 [データアプリを作成する](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app)を参照してください。
+    -   TiDB Cloud Starterインスタンスとデータアプリが作成されました。詳細については、 [データアプリを作成する](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app)を参照してください。
     -   エンドポイントが操作するデータベース、テーブル、および列は、既にターゲットのTiDB Cloud Starterインスタンスに存在しています。
 
--   エンドポイントを呼び出す前に、データ アプリで API キーを作成していることを確認してください。詳細については、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
+-   エンドポイントを呼び出す前に、データアプリで API キーを作成していることを確認してください。詳細については、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
 
 ## エンドポイントを作成する {#create-an-endpoint}
 
@@ -67,7 +67,7 @@ TiDB Cloud Data Serviceでは、以下のようにして1つまたは複数の�
 
         -   バッチ操作を選択した場合、 TiDB Cloud Data Service は生成されるエンドポイント名に`/bulk`を追加します。たとえば、選択されたテーブル名が`/sample_table`で、選択された操作が`POST (Batch Create)`の場合、生成されるエンドポイントは`POST /sample_table/bulk`と表示されます。
         -   `POST (Vector Similarity Search)`が選択された場合、 TiDB Cloud Data Service は生成されるエンドポイント名に`/vector_search`を追加します。たとえば、選択されたテーブル名が`/sample_table`で、選択された操作が`POST (Vector Similarity Search)`の場合、生成されたエンドポイントは`POST /sample_table/vector_search`と表示されます。
-        -   既に同じリクエスト メソッドとエンドポイント名を持つエンドポイントが存在する場合、 TiDB Cloud Data Service は生成されたエンドポイント名に`_dump_<random letters>`を追加します。たとえば、 `/sample_table_dump_EUKRfl`となります。
+        -   既に同じリクエストメソッドとエンドポイント名を持つエンドポイントが存在する場合、 TiDB Cloud Data Service は生成されたエンドポイント名に`_dump_<random letters>`を追加します。たとえば、 `/sample_table_dump_EUKRfl`となります。
 
     -   SQLステートメント： TiDB Cloud Data Serviceは、テーブルの列仕様と選択されたエンドポイント操作に基づいて、生成されたエンドポイント用のSQLステートメントを自動的に作成します。エンドポイント名をクリックすると、ページの中央部分に表示されるSQLステートメントを確認できます。
 
@@ -82,7 +82,7 @@ TiDB Cloud Data Serviceでは、以下のようにして1つまたは複数の�
 エンドポイントを手動で作成するには、以下の手順を実行してください。
 
 1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
-2.  左側のペインで、対象のデータ アプリを見つけ、アプリ名の右側にある**+ を**クリックし、次に**Create Endpoint**をクリックします。
+2.  左側のペインで、対象のデータアプリを見つけ、アプリ名の右側にある**+ を**クリックし、次に**Create Endpoint**をクリックします。
 3.  必要に応じてデフォルト名を更新してください。新しく作成されたエンドポイントは、エンドポイントリストの一番上に追加されます。
 4.  [エンドポイントを開発する](#develop-an-endpoint)」の指示に従って、新しいエンドポイントを構成します。
 
@@ -94,15 +94,14 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 
 1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 
-2.  左側のペインで、対象のデータ アプリを見つけ、アプリ名の右側にある**+**をクリックし、次に**Manage Endpoint Library**をクリックします。
-
+2.  左側のペインで、対象のデータアプリを見つけ、アプリ名の右側にある**+**をクリックし、次に**Manage Endpoint Library**をクリックします。
     エンドポイントライブラリ管理のダイアログが表示されます。現在、このダイアログには**Execute Query** （つまり、 `/system/query`エンドポイント）のみが表示されます。
 
 3.  `/system/query`エンドポイントをデータアプリに追加するには、**Execute Query**スイッチを**[追加済み]**に切り替えます。
 
     > **Tip:**
     >
-    > データ アプリから追加済みの定義済みエンドポイントを削除するには、 **Execute Query**スイッチを**[削除済み]**に切り替えます。
+    > データアプリから追加済みの定義済みエンドポイントを削除するには、 **Execute Query**スイッチを**[削除済み]**に切り替えます。
 
 4.  **保存**をクリックしてください。
 
@@ -174,7 +173,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
     >
     > -   パス パラメーターは SQL で直接使用できます。詳細については、[パラメータを設定する](#configure-parameters)を参照してください。
 
--   **Endpoint URL** : (読み取り専用) デフォルト URL は、対応するTiDB Cloud Starterインスタンスが配置されているリージョン、データ アプリのサービス URL、およびエンドポイントのパスに基づいて自動的に生成されます。たとえば、エンドポイントのパスが`/my_endpoint/get_id`の場合、エンドポイント URL は`https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`です。データ アプリのカスタム ドメインを構成するには、 [Data Serviceのカスタムドメイン](/tidb-cloud/data-service-custom-domain.md)を参照してください。
+-   **Endpoint URL** : (読み取り専用) デフォルト URL は、対応するTiDB Cloud Starterインスタンスが配置されているリージョン、データアプリのサービス URL、およびエンドポイントのパスに基づいて自動的に生成されます。たとえば、エンドポイントのパスが`/my_endpoint/get_id`の場合、エンドポイント URL は`https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`です。データアプリのカスタムドメインを構成するには、 [Data Serviceのカスタムドメイン](/tidb-cloud/data-service-custom-domain.md)を参照してください。
 
 -   **Request Method**：エンドポイントのHTTPメソッド。以下のメソッドがサポートされています。
 
@@ -193,7 +192,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 
 -   **タグ**：エンドポイントのグループを識別するために使用されるタグ。
 
--   **ページネーション**：このプロパティは、リクエストメソッドが`GET`で、エンドポイントの最後の SQL ステートメントが`SELECT`操作の場合にのみ使用できます。**ページネーションが**有効になっている場合、エンドポイントを呼び出す際にクエリ パラメータとして`page`と`page_size`を指定することで、結果をページネーションできます（例`https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id?page=<Page Number>&page_size=<Page Size>` 。詳細については、[エンドポイントを呼び出す](#call-an-endpoint)を参照してください。
+-   **ページネーション**：このプロパティは、リクエストメソッドが`GET`で、エンドポイントの最後の SQL ステートメントが`SELECT`操作の場合にのみ使用できます。**ページネーションが**有効になっている場合、エンドポイントを呼び出す際にクエリパラメータとして`page`と`page_size`を指定することで、結果をページネーションできます（例`https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id?page=<Page Number>&page_size=<Page Size>` 。詳細については、[エンドポイントを呼び出す](#call-an-endpoint)を参照してください。
 
     > **Note:**
     >
@@ -204,7 +203,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 
 -   **有効期限（Time-to-live）** ：このプロパティは**Cache Response**が有効になっている場合にのみ使用できます。これを使用して、キャッシュされたレスポンスの有効期限（TTL）を秒単位で指定できます。TTL期間中に同じ`GET`リクエストを再度行うと、Data Serviceはターゲットデータベースからデータを再度取得する代わりに、キャッシュされたレスポンスを直接返します。これにより、クエリのパフォーマンスが向上します。
 
--   **Batch Operation**: このプロパティは、リクエストメソッドが`POST`または`PUT`の場合にのみ表示されます。**Batch Operation**が有効になっている場合、単一のリクエストで複数の行を操作できます。たとえば、curl コマンドの`POST`オプションのオブジェクトの`items`フィールドにデータ オブジェクトの配列を配置することで、単一`--data-raw`リクエストで複数の行のデータ[エンドポイントを呼び出す](#call-an-endpoint)。.
+-   **Batch Operation**: このプロパティは、リクエストメソッドが`POST`または`PUT`の場合にのみ表示されます。**Batch Operation**が有効になっている場合、単一のリクエストで複数の行を操作できます。たとえば、curl コマンドの`POST`オプションのオブジェクトの`items`フィールドにデータオブジェクトの配列を配置することで、単一`--data-raw`リクエストで複数の行のデータ[エンドポイントを呼び出す](#call-an-endpoint)。.
 
     > **Note:**
     >
@@ -218,7 +217,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 
     > **Note:**
     >
-    > データ アプリにリンクされているTiDB Cloud Starterインスタンスのみがドロップダウン リストに表示されます。リンクされたTiDB Cloud Starterインスタンスを管理するには、 [リンクされたデータソースを管理する](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)を参照してください。
+    > データアプリにリンクされているTiDB Cloud Starterインスタンスのみがドロップダウンリストに表示されます。リンクされたTiDB Cloud Starterインスタンスを管理するには、 [リンクされたデータソースを管理する](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)を参照してください。
 
     SQLエディタの上部にあるドロップダウンリストから、SQLステートメントを実行するTiDB Cloud Starterインスタンスを選択します。すると、右側のペインにある**スキーマ**タブで、そのTiDB Cloud Starterインスタンスのすべてのデータベースを表示できます。
 
@@ -305,7 +304,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 
 -   **場所**：パラメータの位置を示します。このプロパティは変更できません。
     -   パスパラメータの場合、このプロパティは`Path`です。
-    -   その他のパラメーターの場合、リクエスト メソッドが`GET`または`DELETE`の場合、このプロパティは`Query`です。リクエスト メソッドが`POST`または`PUT`の場合、このプロパティは`Body`です。
+    -   その他のパラメーターの場合、リクエストメソッドが`GET`または`DELETE`の場合、このプロパティは`Query`です。リクエストメソッドが`POST`または`PUT`の場合、このプロパティは`Body`です。
 
 **Test Values**セクションでは、テストパラメータの表示と設定ができます。これらの値は、エンドポイントをテストする際のパラメータ値として使用されます。値がパラメータの型に変換できることを確認してください。変換できない場合、エンドポイントはエラーを返します。
 
@@ -327,7 +326,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 
 > **Tip:**
 >
-> データ アプリを Postman にインポートした場合は、Postman でデータ アプリのエンドポイントをテストすることもできます。詳細については、 [Postmanでデータアプリを実行する](/tidb-cloud/data-service-postman-integration.md)を参照してください。
+> データアプリを Postman にインポートした場合は、Postman でデータアプリのエンドポイントをテストすることもできます。詳細については、 [Postmanでデータアプリを実行する](/tidb-cloud/data-service-postman-integration.md)を参照してください。
 
 1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 
@@ -354,7 +353,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 
 > **Note:**
 >
-> **Auto Sync & Deployment**を有効にしてデータ アプリを GitHub に接続している場合、GitHub で行ったデータ アプリの変更はすべてTiDB Cloud Data Service に自動的にデプロイされます。詳細については、 [GitHubで自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
+> **Auto Sync & Deployment**を有効にしてデータアプリを GitHub に接続している場合、GitHub で行ったデータアプリの変更はすべてTiDB Cloud Data Service に自動的にデプロイされます。詳細については、 [GitHubで自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
 
 エンドポイントをデプロイするには、以下の手順を実行します。
 
@@ -372,7 +371,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 
 > **Tip:**
 >
-> データ アプリを Postman にインポートした場合は、Postman でデータ アプリのエンドポイントを呼び出すこともできます。詳細については、 [Postmanでデータアプリを実行する](/tidb-cloud/data-service-postman-integration.md)を参照してください。
+> データアプリを Postman にインポートした場合は、Postman でデータアプリのエンドポイントを呼び出すこともできます。詳細については、 [Postmanでデータアプリを実行する](/tidb-cloud/data-service-postman-integration.md)を参照してください。
 
 ### 前提条件 {#prerequisites}
 
@@ -467,8 +466,8 @@ TiDB Cloud Data Serviceは、エンドポイントを呼び出すのに役立つ
 
     -   エンドポイントのリクエストメソッドが`POST`または`PUT`の場合は、操作対象のデータ行に応じて`--data-raw`オプションを入力してください。
 
-        -   **Batch Operation**が有効になっているエンドポイントの場合、 `--data-raw`オプションは、データ オブジェクトの配列を含む`items`フィールドを持つオブジェクトを受け入れるため、1 つのエンドポイントを使用して複数のデータ行を操作できます。
-        -   **Batch Operation**が有効になっていないエンドポイントの場合、 `--data-raw`オプションは 1 つのデータ オブジェクトのみを受け入れます。
+        -   **Batch Operation**が有効になっているエンドポイントの場合、 `--data-raw`オプションは、データオブジェクトの配列を含む`items`フィールドを持つオブジェクトを受け入れるため、1 つのエンドポイントを使用して複数のデータ行を操作できます。
+        -   **Batch Operation**が有効になっていないエンドポイントの場合、 `--data-raw`オプションは 1 つのデータオブジェクトのみを受け入れます。
 
     -   エンドポイントにパラメータが含まれている場合は、エンドポイントを呼び出す際にパラメータ値を指定してください。
 
@@ -480,7 +479,7 @@ TiDB Cloud Data Serviceは、エンドポイントを呼び出すのに役立つ
 
 > **Note:**
 >
-> データ アプリ[データアプリをGitHubに接続しました](/tidb-cloud/data-service-manage-github-connection.md)**Auto Sync & Deployment**を有効にしている場合、このデータ アプリのエンドポイントのデプロイを解除すると、GitHub 上のこのエンドポイントの構成も削除されます。
+> データアプリ[データアプリをGitHubに接続しました](/tidb-cloud/data-service-manage-github-connection.md)**Auto Sync & Deployment**を有効にしている場合、このデータアプリのエンドポイントのデプロイを解除すると、GitHub 上のこのエンドポイントの構成も削除されます。
 
 エンドポイントをアンデプロイするには、以下の手順を実行します。
 

@@ -74,7 +74,7 @@ Dumplingを使用してデータをAmazon S3にエクスポートする場合、
 
 -   アップストリームクラスターのbinlogを有効にします。
 -   適切なAmazon S3ディレクトリとリージョンを選択してください。
--   上流クラスタへの影響を最小限に抑えるには、 `-t`オプションを設定して適切な同時実行数を選択するか、バックアップ データベースから直接エクスポートしてください。このパラメータの使用方法の詳細については、 [Dumplingのオプション一覧](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling)を参照してください。
+-   上流クラスタへの影響を最小限に抑えるには、 `-t`オプションを設定して適切な同時実行数を選択するか、バックアップデータベースから直接エクスポートしてください。このパラメータの使用方法の詳細については、 [Dumplingのオプション一覧](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling)を参照してください。
 -   `--filetype csv`と`--no-schemas`に適切な値を設定します。これらのパラメーターの使用方法の詳細については、 [Dumplingのオプション一覧](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling)を参照してください。
 
 CSVファイルの名前は以下のようにしてください。
@@ -183,7 +183,7 @@ Amazon S3へのアクセスを設定した後、 TiDB Cloudコンソールで次
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  ターゲットの<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>の名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート] を**クリックします。
+    2.  ターゲットの<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>の名前をクリックして概要ページに移動し、左側のナビゲーションペインで**[データ]** &gt; **[インポート] を**クリックします。
 
 2.  **クラウドストレージからデータをインポート**を選択し、次に**Amazon S3**をクリックします。
 
@@ -192,12 +192,12 @@ Amazon S3へのアクセスを設定した後、 TiDB Cloudコンソールで次
     -   **Import File Count**： TiDB Cloud StarterまたはTiDB Cloud Essentialの場合は、 **Multiple files**を選択してください。このフィールドはTiDB Cloud Dedicatedでは利用できません。
     -   **Included Schema Files**:**いいえ**を選択します。
     -   **Data Format**： **CSV**を選択してください。
-    -   **Folder URI** : ソース データのバケット URI を入力してください。この例では、テーブルに対応する第 2 階層のディレクトリ`s3://dumpling-s3/store/sales/`を使用することで、 TiDB Cloud はすべての MySQL インスタンスのデータを`store.sales`に一度にインポートしてマージできます。
+    -   **Folder URI** : ソースデータのバケット URI を入力してください。この例では、テーブルに対応する第 2 階層のディレクトリ`s3://dumpling-s3/store/sales/`を使用することで、 TiDB Cloud はすべての MySQL インスタンスのデータを`store.sales`に一度にインポートしてマージできます。
     -   **Bucket Access**&gt; **AWS Role ARN** ：取得したロールARNを入力してください。
 
     バケットの場所が<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>クラスターと異なる場合は、クロスリージョンのコンプライアンスを確認してください。
 
-    TiDB Cloudは、指定されたバケット URI 内のデータにアクセスできるかどうかの検証を開始します。検証後、 TiDB Cloudはデフォルトのファイル命名パターンを使用してデータ ソース内のすべてのファイルのスキャンを試行し、次のページの左側にスキャンの概要結果を返します。 `AccessDenied`エラーが発生した場合は、 [S3からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
+    TiDB Cloudは、指定されたバケット URI 内のデータにアクセスできるかどうかの検証を開始します。検証後、 TiDB Cloudはデフォルトのファイル命名パターンを使用してデータソース内のすべてのファイルのスキャンを試行し、次のページの左側にスキャンの概要結果を返します。 `AccessDenied`エラーが発生した場合は、 [S3からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
 
 4.  **接続**をクリックしてください。
 
@@ -209,9 +209,9 @@ Amazon S3へのアクセスを設定した後、 TiDB Cloudコンソールで次
 
     ワイルドカードを使用してソースファイルを照合することもできます。例：
 
-    -   `s3://[bucket_name]/[data_source_folder]/my-data?.csv` : そのフォルダ内の`my-data`で始まり、その後に 1 文字が続くすべての CSV ファイル (例えば`my-data1.csv`や`my-data2.csv` ) は、同じターゲット テーブルにインポートされます。
+    -   `s3://[bucket_name]/[data_source_folder]/my-data?.csv` : そのフォルダ内の`my-data`で始まり、その後に 1 文字が続くすべての CSV ファイル (例えば`my-data1.csv`や`my-data2.csv` ) は、同じターゲットテーブルにインポートされます。
 
-    -   `s3://[bucket_name]/[data_source_folder]/my-data*.csv` : `my-data`で始まるフォルダ内のすべての CSV ファイルは、同じターゲット テーブルにインポートされます。
+    -   `s3://[bucket_name]/[data_source_folder]/my-data*.csv` : `my-data`で始まるフォルダ内のすべての CSV ファイルは、同じターゲットテーブルにインポートされます。
 
     `?`と`*`のみがサポートされていることに注意してください。
 
@@ -508,7 +508,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/d
 
 ### ステップ4．レプリケーションタスクのステータスを確認する {#step-4-check-the-replication-task-status}
 
-DM クラスターでレプリケーション タスクが進行中かどうかを確認し、タスクの状態を表示するには、 `query-status`を使用して`tiup dmctl`コマンドを実行します。
+DM クラスターでレプリケーションタスクが進行中かどうかを確認し、タスクの状態を表示するには、 `query-status`を使用して`tiup dmctl`コマンドを実行します。
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr 192.168.11.110:9261 query-status test-task1

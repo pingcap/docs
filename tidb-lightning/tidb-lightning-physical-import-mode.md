@@ -1,13 +1,13 @@
 ---
 title: Physical Import Mode
-summary: TiDB Lightningの物理インポート モードについて学習します。
+summary: TiDB Lightningの物理インポートモードについて学習します。
 ---
 
 # 物理インポートモード {#physical-import-mode}
 
 物理インポートモードは、SQLインターフェースを経由せずに、TiKVノードにキーと値のペアとして直接データを挿入する、効率的で高速なインポートモードです。物理インポートモードを使用する場合、Lightningインスタンス1つで最大10TiBのデータをインポートできます。Lightningインスタンスの数が増えるにつれて、サポートされるインポートデータ量は理論上増加します。ユーザーによる検証では、Lightningインスタンスの[並列インポート](/tidb-lightning/tidb-lightning-distributed-import.md)で最大50TiBのデータを効率的に処理できることが示されています。
 
-物理インポート モードを使用する前に、必ず[要件と制限](#requirements-and-restrictions)をお読みください。
+物理インポートモードを使用する前に、必ず[要件と制限](#requirements-and-restrictions)をお読みください。
 
 物理インポートモードのバックエンドは`local`です。 `tidb-lightning.toml`で変更できます。
 
@@ -23,9 +23,9 @@ backend = "local"
 
     -   v7.1.0 以降では、 TiDB Lightningパラメータ[`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)を使用して、一時停止スケジュールの範囲を制御できます。
     -   TiDB Lightningバージョン v6.2.0 から v7.0.0 の場合、グローバルスケジューリングの一時停止の動作は TiDB クラスタのバージョンによって異なります。TiDB クラスタが v6.1.0 以上の場合、 TiDB Lightning はターゲットテーブルデータが格納されているリージョンのスケジューリングを一時停止します。インポートが完了すると、 TiDB Lightning はスケジューリングを回復します。その他のバージョンの場合、 TiDB Lightning はグローバルスケジューリングを一時停止します。
-    -   TiDB Lightning &lt; v6.2.0 の場合、 TiDB Lightning はグローバル スケジューリングを一時停止します。
+    -   TiDB Lightning &lt; v6.2.0 の場合、 TiDB Lightning はグローバルスケジューリングを一時停止します。
 
-2.  TiDB Lightning は、ターゲット データベースにテーブル スキーマを作成し、メタデータを取得します。
+2.  TiDB Lightning は、ターゲットデータベースにテーブルスキーマを作成し、メタデータを取得します。
 
     `add-index-by-sql`を`true`に設定した場合、 `tidb-lightning`はSQLインターフェース経由でインデックスを追加し、データをインポートする前にターゲットテーブルからすべてのセカンダリインデックスを削除します。デフォルト値は`false`で、以前のバージョンと一致しています。
 
@@ -33,11 +33,11 @@ backend = "local"
 
 4.  TiDB Lightningは、キーと値のペアを処理するために、各ブロックごとに「エンジンファイル」を用意します。TiDB LightningはSQLダンプを並列に読み取り、データソースをTiDBと同じエンコーディングでキーと値のペアに変換し、キーと値のペアをソートしてローカルの一時ストレージファイルに書き込みます。
 
-5.  エンジン ファイルが書き込まれると、 TiDB Lightning はターゲット TiKV クラスター上のデータの分割とスケジュールを開始し、その後、データを TiKV クラスターにインポートします。
+5.  エンジンファイルが書き込まれると、 TiDB Lightning はターゲット TiKV クラスター上のデータの分割とスケジュールを開始し、その後、データを TiKV クラスターにインポートします。
 
     エンジンファイルには、**データエンジン**と**インデックスエンジン**という2種類のエンジンが含まれています。各エンジンは、キーと値のペアの種類（行データとセカンダリインデックス）に対応しています。通常、行データはデータソース内で完全に順序付けされており、セカンダリインデックスは順序付けされていません。そのため、データエンジンファイルは対応するブロックが書き込まれた直後にインポートされ、すべてのインデックスエンジンファイルはテーブル全体がエンコードされた後にのみインポートされます。
 
-    `tidb-lightning` SQL インターフェイス経由でインデックスを追加する場合 (つまり、 `add-index-by-sql`を`true`に設定する場合)、ターゲット テーブルのセカンダリ インデックスは手順 2 で既に削除されているため、インデックス エンジンはデータを書き込まないことに注意してください。
+    `tidb-lightning` SQL インターフェイス経由でインデックスを追加する場合 (つまり、 `add-index-by-sql`を`true`に設定する場合)、ターゲットテーブルのセカンダリインデックスは手順 2 で既に削除されているため、インデックスエンジンはデータを書き込まないことに注意してください。
 
 6.  すべてのエンジンファイルがインポートされた後、 TiDB Lightningはローカルデータソースと下流クラスターのチェックサムを比較し、インポートされたデータが破損していないことを確認します。その後、 TiDB Lightningはステップ2で削除したセカンダリインデックスを追加するか、TiDBに新しいデータを分析させて（ `ANALYZE` ）、将来の操作を最適化します。一方、 `tidb-lightning`は将来の競合を防ぐために`AUTO_INCREMENT`値を調整します。
 
@@ -89,10 +89,10 @@ CentOS 7の新規インスタンスの使用をお勧めします。仮想マシ
 
     -   v5.4.0 より前のTiDB Lightningでは、 `charset=GBK`のテーブルをインポートできません。
 
--   TiDB Lightning をTiCDC と併用する場合の考慮事項については、 [TiDB Lightning物理インポート モードと TiCDC 間の互換性の制限は何ですか?](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-tidb-lightning-physical-import-mode-and-ticdc)を参照してください。
+-   TiDB Lightning をTiCDC と併用する場合の考慮事項については、 [TiDB Lightning物理インポートモードと TiCDC 間の互換性の制限は何ですか?](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-tidb-lightning-physical-import-mode-and-ticdc)を参照してください。
 
 -   BRでTiDB Lightning を使用する場合は、次の点に注意してください。
 
-    -   BR がTiDB Lightningによってインポートされているテーブルのスナップショットをバックアップすると、それらのテーブルのバックアップ データが不整合になる可能性があります。
+    -   BR がTiDB Lightningによってインポートされているテーブルのスナップショットをバックアップすると、それらのテーブルのバックアップデータが不整合になる可能性があります。
     -   BR がAWS EBS ボリュームスナップショットを使用してデータをバックアップすると、 TiDB Lightning はデータのインポートに失敗する可能性があります。
-    -   TiDB Lightning物理インポート モードでインポートされたデータは[ログバックアップ](/br/br-pitr-guide.md#start-log-backup)をサポートしていないため、Point-in-Time Recovery (PITR) では復元できません。
+    -   TiDB Lightning物理インポートモードでインポートされたデータは[ログバックアップ](/br/br-pitr-guide.md#start-log-backup)をサポートしていないため、Point-in-Time Recovery (PITR) では復元できません。

@@ -19,7 +19,7 @@ ticloud serverless export create [flags]
 ticloud serverless export create
 ```
 
-非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスターからローカル ファイルにデータをエクスポートします。
+非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスターからローカルファイルにデータをエクスポートします。
 
 ```shell
 ticloud serverless export create -c <cluster-id> --filter <database.table>
@@ -75,7 +75,7 @@ ticloud serverless export create -c <cluster-id> --sql 'select * from database.t
 | --s3.secret-access-key string  | Amazon S3のシークレットアクセスキーを指定します。s3.role-arnと[s3.access-key-id, s3.secret-access-key]のいずれか1つだけを設定する必要があります。                   | いいえ | 非対話型モードでのみ動作します。         |
 | --s3.role-arn string           | Amazon S3のロールARNを指定します。s3.role-arnと[s3.access-key-id、s3.secret-access-key]のいずれか1つだけを設定する必要があります。                          | いいえ | 非対話型モードでのみ動作します。         |
 | --gcs.uri string               | GCS URIを`gcs://<bucket>/<file-path>`形式で指定します。ターゲットタイプがGCSの場合は必須です。                                                        | いいえ | 非対話型モードでのみ動作します。         |
-| --gcs.service-account-key string        | GCS の base64 でエンコードされたサービス アカウント キーを指定します。                                                                                | いいえ | 非対話型モードでのみ動作します。         |
+| --gcs.service-account-key string        | GCS の base64 でエンコードされたサービスアカウント キーを指定します。                                                                                | いいえ | 非対話型モードでのみ動作します。         |
 | --azblob.uri string            | Azure BLOB URI を`azure://<account>.blob.core.windows.net/<container>/<file-path>`形式で指定します。ターゲット タイプが AZURE_BLOB の場合に必須です。 | いいえ | 非対話型モードでのみ動作します。         |
 | --azblob.sas-token string      | Azure Blob の SAS トークンを指定します。                                                                                              | いいえ | 非対話型モードでのみ動作します。         |
 | --oss.uri string               | Alibaba Cloud OSS URIを`oss://<bucket>/<file-path>`形式で指定します。エクスポート`target-type`が`"OSS"`の場合に必須です。                            | いいえ | 非対話型モードでのみ動作します。         |

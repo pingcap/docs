@@ -13,7 +13,7 @@ TiDB バージョン: 7.4.0
 
 7.4.0 では、次の主な機能と改善が導入されています。
 
-<table><thead><tr><th>カテゴリ</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.4/tidb-global-sort" target="_blank">グローバルソート</a>による<code>IMPORT INTO</code>および<code>ADD INDEX</code>操作のパフォーマンスと安定性を向上 (実験的)</td><td> v7.4.0より前のバージョンでは、 <a href="https://docs-archive.pingcap.com/tidb/v7.4/tidb-distributed-execution-framework" target="_blank">TiDB Distributed eXecution Framework (DXF)</a>を使用した<code>ADD INDEX</code>や<code>IMPORT INTO</code>などのタスクは、局所的かつ部分的なソートを意味しており、最終的にはTiKVが部分的なソートを補うために多くの追加作業を実行することになりました。また、これらのジョブを実行するには、TiDBノードがソート用のローカルディスク領域をTiKVにロードする前に割り当てる必要がありました。<br/> v7.4.0で導入されたグローバルソート機能により、データはTiKVにロードされる前に、グローバルソートのために外部共有ストレージ（このバージョンではS3）に一時的に保存されます。これにより、TiKVが余分なリソースを消費する必要がなくなり、 <code>ADD INDEX</code>や<code>IMPORT INTO</code>などの操作のパフォーマンスと安定性が大幅に向上します。</td></tr><tr><td>バックグラウンドタスクの<a href="https://docs-archive.pingcap.com/tidb/v7.4/tidb-resource-control#manage-background-tasks" target="_blank">リソース制御</a>（実験的）</td><td> v7.1.0では、ワークロード間のリソースおよびストレージアクセスの干渉を軽減するための<a href="https://docs-archive.pingcap.com/tidb/v7.4/tidb-resource-control#use-resource-control-to-achieve-resource-isolation" target="_blank">リソース制御</a>機能が導入されました。TiDB v7.4.0では、この制御がバックグラウンドタスクにも適用されます。v7.4.0では、自動分析、バックアップとリストア、 TiDB Lightningによるバルクロード、オンラインDDLなどのバックグラウンドタスクによって生成されるリソースをリソース制御が識別し、管理するようになりました。これは最終的にすべてのバックグラウンドタスクに適用されます。</td></tr><tr><td> TiFlashは <a href="https://docs-archive.pingcap.com/tidb/v7.4/tiflash-disaggregated-and-s3" target="_blank">ストレージとコンピューティングの分離とS3</a> （GA）をサポートします</td><td>TiFlash分散ストレージおよびコンピューティングアーキテクチャと S3 共有ストレージが一般提供開始:<ul><li> TiFlash のコンピューティングとストレージを分離します。これは、弾力性のある HTAP リソース利用のマイルストーンとなります。</li><li>低コストで共有ストレージを提供できる S3 ベースのストレージエンジンの使用をサポートします。</li></ul></td></tr><tr><td rowspan="2"> SQL</td><td> TiDBは<a href="https://docs-archive.pingcap.com/tidb/v7.4/partitioned-table#convert-a-partitioned-table-to-a-non-partitioned-table" target="_blank">パーティションタイプの管理</a>をサポート</td><td>v7.4.0 より前では、範囲/リスト パーティション テーブルは、 <code>TRUNCATE</code> 、 <code>EXCHANGE</code> 、 <code>ADD</code> 、 <code>DROP</code> 、 <code>REORGANIZE</code>などのパーティション管理操作をサポートし、ハッシュ/キー パーティション テーブルは、 <code>ADD</code>や<code>COALESCE</code>などのパーティション管理操作をサポートします。<p>現在、TiDB は次のパーティション タイプ管理操作もサポートしています。</p><ul><li>パーティションテーブルを非パーティションテーブルに変換する</li><li>既存のパーティション化されていないテーブルをパーティション化する</li><li>既存のテーブルのパーティションタイプを変更する</li></ul></td></tr><tr><td>MySQL 8.0 互換性: <a href="https://docs-archive.pingcap.com/tidb/v7.4/character-set-and-collation#character-sets-and-collations-supported-by-tidb" target="_blank">照合順序<code>utf8mb4_0900_ai_ci</code></a>サポート</td><td>MySQL 8.0 の注目すべき変更点の 1 つは、デフォルトの文字セットが utf8mb4 になり、utf8mb4 のデフォルトの照合順序が<code>utf8mb4_0900_ai_ci</code>なったことです。TiDB v7.4.0 でこのサポートが追加されたことで、MySQL 8.0 との互換性が向上し、デフォルトの照合順序を持つ MySQL 8.0 データベースからの移行とレプリケーションがよりスムーズになりました。</td></tr><tr><td> DB操作と可観測性</td><td><code>IMPORT INTO</code>および<code>ADD INDEX</code> SQL ステートメントを実行するため<a href="https://docs-archive.pingcap.com/tidb/v7.4/system-variables#tidb_service_scope-new-in-v740" target="_blank">のそれぞれの TiDB ノード</a>を指定します (実験的)</td><td> <code>IMPORT INTO</code>または<code>ADD INDEX</code> SQL 文を、既存の TiDB ノードの一部、または新規に追加された TiDB ノードに対して実行するかどうかを柔軟に指定できます。このアプローチにより、他の TiDB ノードからのリソース分離が可能になり、業務への影響を防ぎながら、先行する SQL 文の実行に最適なパフォーマンスを確保できます。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.4/tidb-global-sort" target="_blank">グローバルソート</a>による<code>IMPORT INTO</code>および<code>ADD INDEX</code>操作のパフォーマンスと安定性を向上 (実験的)</td><td> v7.4.0より前のバージョンでは、 <a href="https://docs-archive.pingcap.com/tidb/v7.4/tidb-distributed-execution-framework" target="_blank">TiDB Distributed eXecution Framework (DXF)</a>を使用した<code>ADD INDEX</code>や<code>IMPORT INTO</code>などのタスクは、局所的かつ部分的なソートを意味しており、最終的にはTiKVが部分的なソートを補うために多くの追加作業を実行することになりました。また、これらのジョブを実行するには、TiDBノードがソート用のローカルディスク領域をTiKVにロードする前に割り当てる必要がありました。<br/> v7.4.0で導入されたグローバルソート機能により、データはTiKVにロードされる前に、グローバルソートのために外部共有ストレージ（このバージョンではS3）に一時的に保存されます。これにより、TiKVが余分なリソースを消費する必要がなくなり、 <code>ADD INDEX</code>や<code>IMPORT INTO</code>などの操作のパフォーマンスと安定性が大幅に向上します。</td></tr><tr><td>バックグラウンドタスクの<a href="https://docs-archive.pingcap.com/tidb/v7.4/tidb-resource-control#manage-background-tasks" target="_blank">リソース制御</a>（実験的）</td><td> v7.1.0では、ワークロード間のリソースおよびストレージアクセスの干渉を軽減するための<a href="https://docs-archive.pingcap.com/tidb/v7.4/tidb-resource-control#use-resource-control-to-achieve-resource-isolation" target="_blank">リソース制御</a>機能が導入されました。TiDB v7.4.0では、この制御がバックグラウンドタスクにも適用されます。v7.4.0では、自動分析、バックアップとリストア、 TiDB Lightningによるバルクロード、オンラインDDLなどのバックグラウンドタスクによって生成されるリソースをリソース制御が識別し、管理するようになりました。これは最終的にすべてのバックグラウンドタスクに適用されます。</td></tr><tr><td> TiFlashは <a href="https://docs-archive.pingcap.com/tidb/v7.4/tiflash-disaggregated-and-s3" target="_blank">ストレージとコンピューティングの分離とS3</a> （GA）をサポートします</td><td>TiFlash分散ストレージおよびコンピューティングアーキテクチャと S3 共有ストレージが一般提供開始:<ul><li> TiFlash のコンピューティングとストレージを分離します。これは、弾力性のある HTAP リソース利用のマイルストーンとなります。</li><li>低コストで共有ストレージを提供できる S3 ベースのストレージエンジンの使用をサポートします。</li></ul></td></tr><tr><td rowspan="2"> SQL</td><td> TiDBは<a href="https://docs-archive.pingcap.com/tidb/v7.4/partitioned-table#convert-a-partitioned-table-to-a-non-partitioned-table" target="_blank">パーティションタイプの管理</a>をサポート</td><td>v7.4.0 より前では、範囲/リストパーティションテーブルは、 <code>TRUNCATE</code> 、 <code>EXCHANGE</code> 、 <code>ADD</code> 、 <code>DROP</code> 、 <code>REORGANIZE</code>などのパーティション管理操作をサポートし、ハッシュ/キーパーティションテーブルは、 <code>ADD</code>や<code>COALESCE</code>などのパーティション管理操作をサポートします。<p>現在、TiDB は次のパーティションタイプ管理操作もサポートしています。</p><ul><li>パーティションテーブルを非パーティションテーブルに変換する</li><li>既存のパーティション化されていないテーブルをパーティション化する</li><li>既存のテーブルのパーティションタイプを変更する</li></ul></td></tr><tr><td>MySQL 8.0 互換性: <a href="https://docs-archive.pingcap.com/tidb/v7.4/character-set-and-collation#character-sets-and-collations-supported-by-tidb" target="_blank">照合順序<code>utf8mb4_0900_ai_ci</code></a>サポート</td><td>MySQL 8.0 の注目すべき変更点の 1 つは、デフォルトの文字セットが utf8mb4 になり、utf8mb4 のデフォルトの照合順序が<code>utf8mb4_0900_ai_ci</code>なったことです。TiDB v7.4.0 でこのサポートが追加されたことで、MySQL 8.0 との互換性が向上し、デフォルトの照合順序を持つ MySQL 8.0 データベースからの移行とレプリケーションがよりスムーズになりました。</td></tr><tr><td> DB操作と可観測性</td><td><code>IMPORT INTO</code>および<code>ADD INDEX</code> SQL ステートメントを実行するため<a href="https://docs-archive.pingcap.com/tidb/v7.4/system-variables#tidb_service_scope-new-in-v740" target="_blank">のそれぞれの TiDB ノード</a>を指定します (実験的)</td><td> <code>IMPORT INTO</code>または<code>ADD INDEX</code> SQL 文を、既存の TiDB ノードの一部、または新規に追加された TiDB ノードに対して実行するかどうかを柔軟に指定できます。このアプローチにより、他の TiDB ノードからのリソース分離が可能になり、業務への影響を防ぎながら、先行する SQL 文の実行に最適なパフォーマンスを確保できます。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -125,11 +125,11 @@ TiDB バージョン: 7.4.0
 
     データバックアップや自動統計収集などのバックグラウンドタスクは、優先度が低いにもかかわらず、多くのリソースを消費します。これらのタスクは通常、定期的または不定期にトリガーされます。実行中に大量のリソースを消費するため、オンラインの高優先度タスクのパフォーマンスに影響を与えます。v7.4.0以降、TiDBリソース制御機能はバックグラウンドタスクの管理をサポートします。この機能により、低優先度タスクがオンラインアプリケーションに及ぼすパフォーマンスへの影響を軽減し、合理的なリソース割り当てを実現し、クラスターの安定性を大幅に向上させます。
 
-    TiDB は次の種類のバックグラウンド タスクをサポートしています。
+    TiDB は次の種類のバックグラウンドタスクをサポートしています。
 
-    -   `lightning` : [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)または[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用してインポート タスクを実行します。
+    -   `lightning` : [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)または[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用してインポートタスクを実行します。
     -   `br` : [BR](/br/backup-and-restore-overview.md)を使用してバックアップおよび復元タスクを実行します。PITR はサポートされていません。
-    -   `ddl` : Reorg DDL のバッチ データ書き戻しフェーズ中のリソース使用量を制御します。
+    -   `ddl` : Reorg DDL のバッチデータ書き戻しフェーズ中のリソース使用量を制御します。
     -   `stats` : 手動で実行されるか、TiDB によって自動的にトリガーされる[統計を収集する](/statistics.md#collect-statistics)タスク。
 
     デフォルトでは、バックグラウンドタスクとしてマークされたタスクタイプは空で、バックグラウンドタスクの管理は無効になっています。このデフォルトの動作は、TiDB v7.4.0より前のバージョンと同じです。バックグラウンドタスクを管理するには、 `default`リソースグループのバックグラウンドタスクタイプを手動で変更する必要があります。
@@ -192,7 +192,7 @@ TiDB バージョン: 7.4.0
 
 -   TiDB Dashboardは、実行計画をテーブルビューで表示することをサポートしています[＃1589](https://github.com/pingcap/tidb-dashboard/issues/1589) @[baurine](https://github.com/baurine)
 
-    v7.4.0 では、TiDB Dashboardは、診断エクスペリエンスを向上させるために、**スロー クエリ ページ**と**SQL ステートメント**ページで実行計画をテーブル ビューで表示することをサポートしています。
+    v7.4.0 では、TiDB Dashboardは、診断エクスペリエンスを向上させるために、**スロークエリ ページ**と**SQL ステートメント**ページで実行計画をテーブル ビューで表示することをサポートしています。
 
     詳細については[ドキュメント](/dashboard/dashboard-statement-details.md)を参照してください。
 
@@ -204,7 +204,7 @@ TiDB バージョン: 7.4.0
 
     さらに、v7.4.0 では、 `IMPORT INTO`機能に次の機能が導入されています。
 
-    -   `Split_File`オプションの構成をサポートします。これにより、大きな CSV ファイルを複数の 256 MiB の小さな CSV ファイルに分割して並列処理し、インポート パフォーマンスを向上させることができます。
+    -   `Split_File`オプションの構成をサポートします。これにより、大きな CSV ファイルを複数の 256 MiB の小さな CSV ファイルに分割して並列処理し、インポートパフォーマンスを向上させることができます。
     -   圧縮されたCSVファイルとSQLファイル`.snappy`インポート`.zst`サポートします。サポートされている`.zstd`形式は、 `.gzip` `.gz` 。
 
     詳細については[ドキュメント](/sql-statements/sql-statement-import-into.md)を参照してください。
@@ -274,7 +274,7 @@ TiDB バージョン: 7.4.0
 | TiDB           | [`enable-stats-cache-mem-quota`](/tidb-configuration-file.md#enable-stats-cache-mem-quota-new-in-v610)                                  | 変更     | デフォルト値は`false`から`true`に変更され、TiDB 統計のキャッシュのメモリ制限がデフォルトで有効になることを意味します。                                                                                                    |
 | TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](/tikv-configuration-file.md#periodic-compaction-seconds-new-in-v720) | 変更     | RocksDBの定期的なコンパクションをデフォルトで無効化するため、デフォルト値を`"30d"`から`"0s"`に変更しました。この変更により、TiDBのアップグレード後に大量のコンパクションがトリガーされ、フロントエンドの読み取りおよび書き込みパフォーマンスに影響が出るのを回避できます。                       |
 | TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].ttl`](/tikv-configuration-file.md#ttl-new-in-v720)                                                 | 変更     | デフォルト値が`"30d"`から`"0s"`に変更され、SST ファイルは TTL によりデフォルトで圧縮をトリガーしなくなり、フロントエンドの読み取りおよび書き込みパフォーマンスに影響を与えなくなります。                                                                 |
-| TiFlash        | [`flash.compact_log_min_gap`](/tiflash/tiflash-configuration.md)                                                                        | 新しく追加された | 現在のRaftステート マシンによって進められた`applied_index`と最後のディスク スピル時の`applied_index`の差が`compact_log_min_gap`超えると、 TiFlash はTiKV から`CompactLog`コマンドを実行し、データをディスクにスピルします。                 |
+| TiFlash        | [`flash.compact_log_min_gap`](/tiflash/tiflash-configuration.md)                                                                        | 新しく追加された | 現在のRaftステートマシンによって進められた`applied_index`と最後のディスクスピル時の`applied_index`の差が`compact_log_min_gap`超えると、 TiFlash はTiKV から`CompactLog`コマンドを実行し、データをディスクにスピルします。                 |
 | TiFlash        | [`profiles.default.enable_resource_control`](/tiflash/tiflash-configuration.md)                                                         | 新しく追加された | TiFlashリソース制御機能を有効にするかどうかを制御します。                                                                                                                                        |
 | TiFlash        | [`storage.format_version`](/tiflash/tiflash-configuration.md)                                                                           | 変更     | デフォルト値を`4`から`5`に変更します。新しい形式では、小さなファイルを結合することで物理ファイルの数を削減できます。                                                                                                           |
 | TiFlash        | [`task_scheduler_active_set_soft_limit`](/tiflash/tiflash-configuration.md#task_scheduler_active_set_soft_limit-new-in-v640)            | 変更     | デフォルト値を`vcpu * 0.25`から`vcpu * 2`に変更します。                                                                                                                                 |
@@ -320,7 +320,7 @@ TiDB バージョン: 7.4.0
 -   TiFlash
 
     -   TiFlash書き込みプロセスのスピルポリシーを最適化することで、ランダム書き込みワークロード中の書き込みパフォーマンスを向上します[＃7564](https://github.com/pingcap/tiflash/issues/7564) @[CalvinNeo](https://github.com/CalvinNeo)
-    -   TiFlash のRaftレプリケーション プロセスに関するメトリクスを追加します。 [＃8068](https://github.com/pingcap/tiflash/issues/8068) @[CalvinNeo](https://github.com/CalvinNeo)
+    -   TiFlash のRaftレプリケーションプロセスに関するメトリクスを追加します。 [＃8068](https://github.com/pingcap/tiflash/issues/8068) @[CalvinNeo](https://github.com/CalvinNeo)
     -   ファイルシステムの inode が枯渇する可能性を回避するために、小さなファイルの数を減らします。 [＃7595](https://github.com/pingcap/tiflash/issues/7595) @[hongyunyan](https://github.com/hongyunyan)
 
 -   ツール
@@ -430,7 +430,7 @@ TiDB バージョン: 7.4.0
         -   DM が大文字と小文字を区別しない照合順序で競合を正しく処理できない問題を修正しました [＃9489](https://github.com/pingcap/tiflow/issues/9489) @[hihihuhu](https://github.com/hihihuhu)
         -   DM バリデーターのデッドロック問題を修正し、再試行を強化しました。 [＃9257](https://github.com/pingcap/tiflow/issues/9257) @[D3Hunter](https://github.com/D3Hunter)
         -   失敗した DDL がスキップされ、後続の DDL が実行されない場合に、DM によって返されるレプリケーション ラグが増大し続ける問題を修正しました[＃9605](https://github.com/pingcap/tiflow/issues/9605) @[D3Hunter](https://github.com/D3Hunter)
-        -   オンライン DDL をスキップするときに DM が上流のテーブル スキーマを適切に追跡できない問題を修正しました [＃9587](https://github.com/pingcap/tiflow/issues/9587) @[GMHDBJD](https://github.com/GMHDBJD)
+        -   オンライン DDL をスキップするときに DM が上流のテーブルスキーマを適切に追跡できない問題を修正しました [＃9587](https://github.com/pingcap/tiflow/issues/9587) @[GMHDBJD](https://github.com/GMHDBJD)
         -   楽観的モードでタスクを再開するときに DM がすべての DML をスキップする問題を修正しました [＃9588](https://github.com/pingcap/tiflow/issues/9588) @[GMHDBJD](https://github.com/GMHDBJD)
         -   DMが楽観的モードでパーティションDDLをスキップする問題を修正 [＃9788](https://github.com/pingcap/tiflow/issues/9788) @[GMHDBJD](https://github.com/GMHDBJD)
 

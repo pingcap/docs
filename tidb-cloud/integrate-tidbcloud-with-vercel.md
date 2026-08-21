@@ -48,7 +48,7 @@ TiDB Cloudにアカウントとクラスターが既に作成されている必�
 
     > **Note:**
     >
-    > TiDB Cloud Dedicatedクラスターの場合、Vercel デプロイメントは IP アドレスを使用するため、クラスターのトラフィック フィルターがすべての IP アドレス ( `0.0.0.0/0` } に設定) からの接続を許可して[動的IPアドレス](https://vercel.com/guides/how-to-allowlist-deployment-ip-address)ことを確認してください。
+    > TiDB Cloud Dedicatedクラスターの場合、Vercel デプロイメントは IP アドレスを使用するため、クラスターのトラフィックフィルターがすべての IP アドレス ( `0.0.0.0/0` } に設定) からの接続を許可して[動的IPアドレス](https://vercel.com/guides/how-to-allowlist-deployment-ip-address)ことを確認してください。
 
 [TiDB Cloud Vercel統合を介してVercelと統合する](#connect-via-the-tidb-cloud-vercel-integration)には、組織の`Organization Owner`ロール、またはTiDB Cloudのターゲット プロジェクトの`Project Owner`ロールに所属することが求められます。詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)を参照してください。
 
@@ -89,8 +89,7 @@ TiDB Cloud Vercel 統合経由で接続するには、 [Vercelの統合マーケ
     1.  対象となるVercelプロジェクトを選択し、 **次へ**をクリックしてください。
     2.  対象となるTiDB Cloud組織とプロジェクトを選択してください。
     3.  接続タイプとして**クラスタ**を選択してください。
-    4.  対象のTiDB Cloudリソースを選択してください。**クラスタ**のドロップダウン リストが空の場合、または新しいTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを選択する場合は、リストの**+ Create Cluster**をクリックして作成してください。
-    5.  接続するデータベースを選択してください。**データベース**のドロップダウンリストが空の場合、または新しいデータベースを選択する場合は、リスト内の**+ Create Database**をクリックして作成してください。
+    4.  対象のTiDB Cloudリソースを選択してください。**クラスタ**のドロップダウンリストが空の場合、または新しいTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを選択する場合は、リストの**+ Create Cluster**をクリックして作成してください。    5.  接続するデータベースを選択してください。**データベース**のドロップダウンリストが空の場合、または新しいデータベースを選択する場合は、リスト内の**+ Create Database**をクリックして作成してください。
     6.  Vercelプロジェクトで使用しているフレームワークを選択してください。対象のフレームワークが一覧にない場合は、 **一般**を選択してください。フレームワークによって環境変数が異なります。
     7.  プレビュー環境用に新しいブランチを作成するために、**ブランチ機能**を有効にするかどうかを選択してください。
     8.  **「統合を追加」をクリックしてVercelに戻ります**。
@@ -247,9 +246,9 @@ TiDB Cloud コンソールでは、 `<User>` 、 `<Password>` 、 `<Endpoint>` �
 </div>
 <div label="Data App">
 
-1.  データ アプリとそのエンドポイントをまだ作成していない場合は、「データ アプリ[データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)と[エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)の手順に従ってデータ アプリとそのエンドポイントを作成します。
+1.  データアプリとそのエンドポイントをまだ作成していない場合は、「データアプリ[データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)と[エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)の手順に従ってデータアプリとそのエンドポイントを作成します。
 
-2.  Vercel ダッシュボード &gt; Vercel プロジェクト &gt;**設定**&gt;**Environment Variables**に移動し、データ アプリの接続情報に従って[各環境変数の値を宣言する](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable)。
+2.  Vercel ダッシュボード &gt; Vercel プロジェクト &gt;**設定**&gt;**Environment Variables**に移動し、データアプリの接続情報に従って[各環境変数の値を宣言する](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable)。
 
     ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
 

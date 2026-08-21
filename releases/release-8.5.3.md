@@ -24,7 +24,7 @@ TiDBバージョン：8.5.3
     -   統計情報が完全に TopN で構成され、対応するテーブル統計情報の変更された行数がゼロでない場合、TopN に到達しない等価条件の推定結果を 0 から 1 に調整します。 [#47400](https://github.com/pingcap/tidb/issues/47400) @[terry1purcell](https://github.com/terry1purcell)
     -   グローバルソートを使用した一意インデックスの追加パフォーマンスを改善し、重複する一意インデックスを追加する際のエラーメッセージを改善します [#61689](https://github.com/pingcap/tidb/issues/61689) @[CbcWestwolf](https://github.com/CbcWestwolf)
     -   `IMPORT INTO`がグローバルソートを有効にしている場合、TiKV のインポートモードへの切り替えを無効にする [#60361](https://github.com/pingcap/tidb/issues/60361) @[D3Hunter](https://github.com/D3Hunter)
-    -   インデックス追加中の TiKV への書き込み速度を監視するためのモニタリング メトリックを追加 [#60925](https://github.com/pingcap/tidb/issues/60925) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    -   インデックス追加中の TiKV への書き込み速度を監視するためのモニタリングメトリックを追加 [#60925](https://github.com/pingcap/tidb/issues/60925) @[CbcWestwolf](https://github.com/CbcWestwolf)
     -   `merge sort`サブタスクのスケジューリングロジックを最適化してソートパフォーマンスを向上させる [#60375](https://github.com/pingcap/tidb/issues/60375) @[tangenta](https://github.com/tangenta)
     -   外部キーを持つ多数のテーブルを作成する際のテーブル作成を高速化し、メモリ使用効率を最適化する [#61126](https://github.com/pingcap/tidb/issues/61126) @[GMHDBJD](https://github.com/GMHDBJD)
     -   `information_schema.tables` テーブルの読み取りパフォーマンスを改善します [#62020](https://github.com/pingcap/tidb/issues/62020) @[tangenta](https://github.com/tangenta)
@@ -61,8 +61,8 @@ TiDBバージョン：8.5.3
     -   Backup & Restore (BR)
 
         -   PITR中のインデックス修復速度を向上させるため、インデックスを同時修復する [#59158](https://github.com/pingcap/tidb/issues/59158) @[Leavrth](https://github.com/Leavrth)
-        -   TiKV のダウンロード API は、バックアップ ファイルをダウンロードする際に、特定の時間範囲内のデータをフィルタリングして除外することをサポートしています。これにより、復元中に古いバージョンまたは将来のデータ バージョンがインポートされるのを回避できます [#18399](https://github.com/tikv/tikv/issues/18399) @[3pointer](https://github.com/3pointer)
-        -   タイムスタンプによるログ バックアップ メタデータ ファイルのフィルタリングをサポートし、PITR 中のメタデータの読み取りにかかる時間を削減します [#61318](https://github.com/pingcap/tidb/issues/61318) @[3pointer](https://github.com/3pointer)
+        -   TiKV のダウンロード API は、バックアップファイルをダウンロードする際に、特定の時間範囲内のデータをフィルタリングして除外することをサポートしています。これにより、復元中に古いバージョンまたは将来のデータバージョンがインポートされるのを回避できます [#18399](https://github.com/tikv/tikv/issues/18399) @[3pointer](https://github.com/3pointer)
+        -   タイムスタンプによるログバックアップメタデータファイルのフィルタリングをサポートし、PITR 中のメタデータの読み取りにかかる時間を削減します [#61318](https://github.com/pingcap/tidb/issues/61318) @[3pointer](https://github.com/3pointer)
 
 ## バグ修正 {#bug-fixes}
 
@@ -84,7 +84,7 @@ TiDBバージョン：8.5.3
     -   メタデータロック（MDL）を無効にした後、スキーマバージョンの更新に失敗してDDL操作が停止する問題を修正しました [#61210](https://github.com/pingcap/tidb/issues/61210) @[wjhuang2016](https://github.com/wjhuang2016)
     -   非公開インデックスが統計システムテーブルに表示される問題を修正 [#60430](https://github.com/pingcap/tidb/issues/60430) @[tangenta](https://github.com/tangenta)
     -   HashAgg演算子におけるメモリ追跡の誤りにより、大量のエラーログが発生する問題を修正しました [#58822](https://github.com/pingcap/tidb/issues/58822) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    -   HashAgg オペレーターでディスク スピル中に`nil`内の`basePartialResult4GroupConcat`バッファがpanicを引き起こす問題を修正しました [#61749](https://github.com/pingcap/tidb/issues/61749) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    -   HashAgg オペレーターでディスクスピル中に`nil`内の`basePartialResult4GroupConcat`バッファがpanicを引き起こす問題を修正しました [#61749](https://github.com/pingcap/tidb/issues/61749) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   集計式のエンコードロジックにおける誤った戻り値がクエリ実行中にpanicを引き起こす問題を修正 [#61735](https://github.com/pingcap/tidb/issues/61735) @[YangKeao](https://github.com/YangKeao)
     -   HashJoin演算子がメモリの過剰使用によりゴルーチンリークを引き起こす問題を修正 [#60926](https://github.com/pingcap/tidb/issues/60926) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   `IndexMerge`および`IndexLookUp`オペレーターで共有 KV リクエストがクエリのプッシュダウン時にデータ競合を引き起こす問題を修正しました [#60175](https://github.com/pingcap/tidb/issues/60175) @[you06](https://github.com/you06)

@@ -138,7 +138,7 @@ RESOURCE_GROUP_NAME: default
 `RUNAWAY_WATCHES`テーブルの各列フィールドの意味は次のとおりです。
 
 -   `ID` : ウォッチアイテムのID。
--   `RESOURCE_GROUP_NAME` : リソース グループの名前。
+-   `RESOURCE_GROUP_NAME` : リソースグループの名前。
 -   `START_TIME` : 開始時刻。
 -   `END_TIME` ：終了時刻。 `UNLIMITED`は、ウォッチアイテムの有効期間が無制限であることを意味します。
 -   `WATCH` : クイック識別のマッチタイプ。値は次のとおりです。

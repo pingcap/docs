@@ -31,7 +31,7 @@ TiKVは自動チューニング機能の動的な設定をサポートしてい�
 tikv-ctl modify-tikv-config -n backup.enable-auto-tune -v <true|false>
 ```
 
-オフライン クラスターでバックアップ タスクを実行する場合、バックアップを高速化するために、 `tikv-ctl`を使用して`backup.num-threads`の値をより大きな数値に変更できます。
+オフライン クラスターでバックアップタスクを実行する場合、バックアップを高速化するために、 `tikv-ctl`を使用して`backup.num-threads`の値をより大きな数値に変更できます。
 
 ## 制限事項 {#limitations}
 
@@ -45,7 +45,7 @@ tikv-ctl modify-tikv-config -n backup.enable-auto-tune -v <true|false>
 
         バックアッププロセスには、SSTのデコード、エンコード、圧縮、解凍といった多くの処理が含まれており、CPUリソースを消費します。さらに、過去のテストケースでは、バックアッププロセス中に、バックアップに使用されるスレッドプールのCPU使用率が100%に近づくことが確認されています。これは、バックアップタスクが多くのCPUリソースを消費していることを意味します。TiKVは、バックアップタスクで使用されるスレッド数を調整することで、バックアップタスクで使用されるCPUコア数を制限し、バックアップタスクがクラスターのパフォーマンスに与える影響を軽減します。
 
--   問題 2:**ホットスポットのあるクラスター**の場合、ホットスポットがある TiKV ノード上のバックアップ タスクが過度に制限され、全体的なバックアップ プロセスが遅くなることがあります。
+-   問題 2:**ホットスポットのあるクラスター**の場合、ホットスポットがある TiKV ノード上のバックアップタスクが過度に制限され、全体的なバックアッププロセスが遅くなることがあります。
 
     -   解決策: ホットスポット ノードを削除するか、ホットスポット ノードの自動調整を無効にします (これにより、クラスターのパフォーマンスが低下する可能性があります)。
 
@@ -55,21 +55,21 @@ tikv-ctl modify-tikv-config -n backup.enable-auto-tune -v <true|false>
 
 ## 実装 {#implementation}
 
-自動チューニングは、バックアップ タスクで使用されるスレッド プールのサイズを調整して、クラスターの全体的な CPU 使用率が特定のしきい値を超えないようにします。
+自動チューニングは、バックアップタスクで使用されるスレッドプールのサイズを調整して、クラスターの全体的な CPU 使用率が特定のしきい値を超えないようにします。
 
 この機能には、TiKV設定ファイルに記載されていない関連する設定項目が2つあります。これらの設定項目は内部調整のみを目的としています。バックアップタスクを実行する際に、これらの設定項目を設定する必要は**ありません**。
 
 -   `backup.auto-tune-remain-threads` :
 
-    -   自動調整は、バックアップ タスクで使用されるリソースを制御し、同じノード上の他のタスクで少なくとも`backup.auto-tune-remain-threads`コアが使用可能であることを保証します。
+    -   自動調整は、バックアップタスクで使用されるリソースを制御し、同じノード上の他のタスクで少なくとも`backup.auto-tune-remain-threads`コアが使用可能であることを保証します。
     -   デフォルト値: `round(0.2 * vCPU)`
 
 -   `backup.auto-tune-refresh-interval` :
 
-    -   自動調整により、 `backup.auto-tune-refresh-interval`分ごとに統計が更新され、バックアップ タスクで使用できる CPU コアの最大数が再計算されます。
+    -   自動調整により、 `backup.auto-tune-refresh-interval`分ごとに統計が更新され、バックアップタスクで使用できる CPU コアの最大数が再計算されます。
     -   デフォルト値: `1m`
 
-以下は、自動チューニングの動作例です。`*`はバックアップ タスクで使用される CPU コアを示します。`^`は他のタスクで使用される CPU コアを示します。`-`は、アイドル状態の CPU コアを示します。
+以下は、自動チューニングの動作例です。`*`はバックアップタスクで使用される CPU コアを示します。`^`は他のタスクで使用される CPU コアを示します。`-`は、アイドル状態の CPU コアを示します。
 
 ```
 |--------| The server has 8 logical CPU cores.
@@ -78,7 +78,7 @@ tikv-ctl modify-tikv-config -n backup.enable-auto-tune -v <true|false>
 |^^^^**--| Because the cluster workload gets higher, auto-tune adjusts the size of the thread pool to `2`. After that, the cluster still has 2 idle CPU cores.
 ```
 
-**バックアップ CPU 使用率**パネルでは、自動調整によって調整されたスレッド プールのサイズを確認できます。
+**バックアップ CPU 使用率**パネルでは、自動調整によって調整されたスレッドプールのサイズを確認できます。
 
 ![Grafana dashboard example of backup auto-tune metrics](/media/br/br-auto-throttle.png)
 

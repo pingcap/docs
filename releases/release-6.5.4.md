@@ -181,7 +181,7 @@ TiDB バージョン: 6.5.4
 
     -   TiDB Lightning
 
-        -   エンジンがデータをインポートしているときにディスク クォータ チェックがブロックされる可能性がある問題を修正しました [＃44867](https://github.com/pingcap/tidb/issues/44867) @[D3Hunter](https://github.com/D3Hunter)
+        -   エンジンがデータをインポートしているときにディスククォータ チェックがブロックされる可能性がある問題を修正しました [＃44867](https://github.com/pingcap/tidb/issues/44867) @[D3Hunter](https://github.com/D3Hunter)
         -   ターゲットクラスタで SSL が有効になっているときにチェックサムがエラー`Region is unavailable`を報告する問題を修正しました [＃45462](https://github.com/pingcap/tidb/issues/45462) @[D3Hunter](https://github.com/D3Hunter)
         -   エンコードエラーが正しく記録されない問題を修正[＃44321](https://github.com/pingcap/tidb/issues/44321) @[lyzx2001](https://github.com/lyzx2001)
         -   CSVデータをインポートする際にルートがpanicになる可能性がある問題を修正 [＃43284](https://github.com/pingcap/tidb/issues/43284) @[lyzx2001](https://github.com/lyzx2001)

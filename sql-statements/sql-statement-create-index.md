@@ -246,7 +246,7 @@ SELECT MAX(LOWER(col1)) FROM t;
 SELECT MIN(col1) FROM t GROUP BY LOWER(col1);
 ```
 
-式インデックスに対応する式を確認するには、 [`SHOW INDEX`](/sql-statements/sql-statement-show-indexes.md)を実行するか、システム テーブル[`information_schema.tidb_indexes`](/information-schema/information-schema-tidb-indexes.md)およびテーブル[`information_schema.STATISTICS`](/information-schema/information-schema-statistics.md)を確認してください。出力の`Expression`列は、対応する式を示します。式インデックス以外の場合は、 `NULL`が表示されます。
+式インデックスに対応する式を確認するには、 [`SHOW INDEX`](/sql-statements/sql-statement-show-indexes.md)を実行するか、システムテーブル[`information_schema.tidb_indexes`](/information-schema/information-schema-tidb-indexes.md)およびテーブル[`information_schema.STATISTICS`](/information-schema/information-schema-statistics.md)を確認してください。出力の`Expression`列は、対応する式を示します。式インデックス以外の場合は、 `NULL`が表示されます。
 
 式インデックスの維持コストは、他のインデックスの維持コストよりも高くなります。これは、行が挿入または更新されるたびに式の値を計算する必要があるためです。式の値は既にインデックスに格納されているため、オプティマイザが式インデックスを選択する際に、この値を再計算する必要はありません。
 

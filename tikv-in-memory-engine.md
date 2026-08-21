@@ -5,7 +5,7 @@ summary: インメモリエンジンの適用シナリオと動作原理、お�
 
 # TiKV MVCC インメモリエンジン {#tikv-mvcc-in-memory-engine}
 
-TiKV MVCC インメモリ エンジン (IME) は、主に多数の MVCC 履歴バージョンをスキャンする必要があるクエリを高速化するために使用されます。つまり、 [スキャンされたバージョンの総数（ `total_keys` ）は、処理されたバージョン数（ `processed_keys` ）よりもはるかに多い](/analyze-slow-queries.md#obsolete-mvcc-versions-and-excessive-keys) 。
+TiKV MVCC インメモリエンジン (IME) は、主に多数の MVCC 履歴バージョンをスキャンする必要があるクエリを高速化するために使用されます。つまり、 [スキャンされたバージョンの総数（ `total_keys` ）は、処理されたバージョン数（ `processed_keys` ）よりもはるかに多い](/analyze-slow-queries.md#obsolete-mvcc-versions-and-excessive-keys) 。
 
 TiKV MVCCインメモリエンジンは、以下のシナリオに適しています。
 

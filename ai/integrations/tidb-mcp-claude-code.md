@@ -51,7 +51,7 @@ claude mcp add --transport stdio TiDB \
 
 ### 方法2：プロジェクト設定ファイル {#method-2-project-config-file}
 
-次の設定をプロジェクト レベルの`.mcp.json`ファイルに追加します。詳細については、 [Claude Code MCP ドキュメント](https://code.claude.com/docs/en/mcp#project-scope)を参照してください。
+次の設定をプロジェクトレベルの`.mcp.json`ファイルに追加します。詳細については、 [Claude Code MCP ドキュメント](https://code.claude.com/docs/en/mcp#project-scope)を参照してください。
 
 ```json
 {

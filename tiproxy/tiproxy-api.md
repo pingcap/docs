@@ -1,11 +1,11 @@
 ---
 title: TiProxy API
-summary: TiProxy API を使用して構成、ヘルス ステータス、監視データにアクセスする方法を学習します。
+summary: TiProxy API を使用して構成、ヘルスステータス、監視データにアクセスする方法を学習します。
 ---
 
 # TiProxy API {#tiproxy-api}
 
-[TiProxy](/tiproxy/tiproxy-overview.md) 、構成、ヘルス ステータス、および監視データにアクセスするための API エンドポイントを提供します。
+[TiProxy](/tiproxy/tiproxy-overview.md) 、構成、ヘルスステータス、および監視データにアクセスするための API エンドポイントを提供します。
 
 > **Note:**
 >
@@ -131,4 +131,4 @@ curl http://127.0.0.1:3080/metrics/
 
 [`server-http-tls`](/tiproxy/tiproxy-configuration.md#server-http-tls)でTLSを有効にし、 [安全](/tiproxy/tiproxy-configuration.md#security)セクションの`server-http-tls`サブセクションにある`cert-allowed-cn`オプションを設定することで、TiProxy APIへのアクセスを制限できます。TiProxyはクライアント証明書の共通名（CN）を[コンポーネント呼び出し元のIDを確認する](/enable-tls-between-components.md#verify-component-callers-identity)に使用します。
 
-TLS が有効になっていない場合は、代わりにファイアウォール ルールを使用してアクセスを制御できます。
+TLS が有効になっていない場合は、代わりにファイアウォールルールを使用してアクセスを制御できます。

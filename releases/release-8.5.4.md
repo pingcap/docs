@@ -111,7 +111,7 @@ TiDBバージョン：8.5.4
     -   不要なアラートを減らすため、特定の TiKV エラーのログレベルを`ERROR`から`WARN`に変更します [#18745](https://github.com/tikv/tikv/issues/18745) @[exit-code-1](https://github.com/exit-code-1)
     -   RaftモジュールのGCチェックプロセスを2つのフェーズに分割し、リージョン内の冗長なMVCCバージョンのガベージコレクションの効率を向上させる [#18695](https://github.com/tikv/tikv/issues/18695) @[v01dstar](https://github.com/v01dstar)
     -   GCセーフポイントとRocksDB統計に基づいてMVCC冗長性を計算し、圧縮の効率と精度を向上させる [#18697](https://github.com/tikv/tikv/issues/18697) @[v01dstar](https://github.com/v01dstar)
-    -   リージョン MVCC の GC 処理ロジックを GC ワーカー スレッドで実行するように変更し、GC 処理ロジック全体を統一します [#18727](https://github.com/tikv/tikv/issues/18727) @[v01dstar](https://github.com/v01dstar)
+    -   リージョン MVCC の GC 処理ロジックを GC ワーカースレッドで実行するように変更し、GC 処理ロジック全体を統一します [#18727](https://github.com/tikv/tikv/issues/18727) @[v01dstar](https://github.com/v01dstar)
     -   デフォルトのgRPCスレッドプールサイズの計算方法を最適化し、固定値ではなくCPUクォータの合計に基づいて動的に計算するようにすることで、gRPCスレッド不足によるパフォーマンスボトルネックを回避します [#18613](https://github.com/tikv/tikv/issues/18613) @[LykxSassinator](https://github.com/LykxSassinator)
     -   多数のSSTファイルが存在する環境における非同期スナップショットおよび書き込み操作のテールレイテンシーを最適化する [#18743](https://github.com/tikv/tikv/issues/18743) @[Connor1996](https://github.com/Connor1996)
 
@@ -125,7 +125,7 @@ TiDBバージョン：8.5.4
 
     -   `TableScan`パフォーマンスを向上させるために不要なデータ読み取りをスキップします [#9875](https://github.com/pingcap/tiflash/issues/9875) @[gengliqi](https://github.com/gengliqi)
     -   TiFlashで、多くの列とスパースデータ (つまり、大量の`NULL`または空の値) を含む広いテーブルでの`TableScan`パフォーマンスを最適化します [#10361](https://github.com/pingcap/tiflash/issues/10361) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    -   多数のテーブルを持つクラスターにベクトル インデックスを追加することによって生じるTiFlash CPU オーバーヘッドを削減 [#10357](https://github.com/pingcap/tiflash/issues/10357) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    -   多数のテーブルを持つクラスターにベクトルインデックスを追加することによって生じるTiFlash CPU オーバーヘッドを削減 [#10357](https://github.com/pingcap/tiflash/issues/10357) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   無駄なRaftコマンド処理時の不要なログ出力を最小限にしてログ容量を削減 [#10467](https://github.com/pingcap/tiflash/issues/10467) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   TiFlashの小さなパーティション分割テーブルでの`TableScan`パフォーマンスを向上 [#10487](https://github.com/pingcap/tiflash/issues/10487) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
@@ -192,7 +192,7 @@ TiDBバージョン：8.5.4
 
     -   Backup & Restore (BR)
 
-        -   ログ バックアップの zstd 圧縮が有効にならず、出力が圧縮されないままになる問題を修正 [#18836](https://github.com/tikv/tikv/issues/18836) @[3pointer](https://github.com/3pointer)
+        -   ログバックアップの zstd 圧縮が有効にならず、出力が圧縮されないままになる問題を修正 [#18836](https://github.com/tikv/tikv/issues/18836) @[3pointer](https://github.com/3pointer)
         -   Azure Blob Storageへのデータバックアップ時にフラッシュ操作が時々遅くなる問題を修正 [#18410](https://github.com/tikv/tikv/issues/18410) @[YuJuncen](https://github.com/YuJuncen)
         -   ファイル削除が失敗した場合に`log truncate`が発生する可能性がある問題を修正 [#63358](https://github.com/pingcap/tidb/issues/63358) @[YuJuncen](https://github.com/YuJuncen)
         -   バックアップ中に`--checksum`を`false`に設定すると、リストア後に`count`テーブルの`mysql.stats_meta`列が`0`になる可能性がある問題を修正 [#60978](https://github.com/pingcap/tidb/issues/60978) @[Leavrth](https://github.com/Leavrth)

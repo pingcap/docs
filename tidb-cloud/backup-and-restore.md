@@ -16,7 +16,7 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 
 -   TiDB Cloud Dedicatedは、v6.2.0以降のバージョンのクラスタでは、デフォルトでバックアップからのユーザーアカウントとSQLバインディングの復元をサポートしています。
 -   TiDB Cloud Dedicated は、 `mysql`スキーマに保存されているシステム変数の復元をサポートしていません。
--   最初にデータをインポートし、次に**手動**スナップショット バックアップを実行し、最後にポイントインタイム リストアを有効にすることをお勧めします。 TiDB Cloudコンソールを通じてインポートされたデータは変更ログを生成**しない**ため、自動的に検出してバックアップすることはできません。詳細については、[クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)を参照してください。
+-   最初にデータをインポートし、次に**手動**スナップショットバックアップを実行し、最後にポイントインタイム リストアを有効にすることをお勧めします。 TiDB Cloudコンソールを通じてインポートされたデータは変更ログを生成**しない**ため、自動的に検出してバックアップすることはできません。詳細については、[クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)を参照してください。
 -   ポイントインタイム復元を複数回オン/オフした場合、復元可能な期間内で選択できるのは、直近のポイントインタイム復元が有効になった時点以降の時点のみです。それ以前の復元可能な期間にはアクセスできません。
 -   **Point-in-time Restore**と**Dual Region Backup**のスイッチを同時に変更しないでください。
 
@@ -34,7 +34,7 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 
 ### 自動バックアップを有効にする {#turn-on-auto-backup}
 
-TiDB Cloud Dedicated は、 [スナップショットバックアップ](https://docs.pingcap.com/tidb/stable/br-snapshot-guide)と[ログバックアップ](https://docs.pingcap.com/tidb/stable/br-pitr-guide)両方をサポートしています。スナップショット バックアップを使用すると、データをバックアップ ポイントに復元できます。デフォルトでは、スナップショット バックアップは自動的に作成され、バックアップ保持ポリシーに従って保存されます。自動バックアップはいつでも無効にできます。
+TiDB Cloud Dedicated は、 [スナップショットバックアップ](https://docs.pingcap.com/tidb/stable/br-snapshot-guide)と[ログバックアップ](https://docs.pingcap.com/tidb/stable/br-pitr-guide)両方をサポートしています。スナップショットバックアップを使用すると、データをバックアップ ポイントに復元できます。デフォルトでは、スナップショットバックアップは自動的に作成され、バックアップ保持ポリシーに従って保存されます。自動バックアップはいつでも無効にできます。
 
 #### ポイントインタイム復元を有効にする {#turn-on-point-in-time-restore}
 
@@ -62,7 +62,7 @@ TiDB Cloud Dedicatedクラスターでこの機能を有効にするには、以
 
     > **Warning**
     >
-    > ポイントインタイム リストアは、次のバックアップ タスクが完了した後にのみ有効になります。より早く有効にするには、有効にした後に[手動でバックアップを実行する](#perform-a-manual-backup)ことができます。
+    > ポイントインタイム リストアは、次のバックアップタスクが完了した後にのみ有効になります。より早く有効にするには、有効にした後に[手動でバックアップを実行する](#perform-a-manual-backup)ことができます。
 
 5.  変更を保存するには、 **保存**をクリックしてください。
 
@@ -248,7 +248,7 @@ TiDB Cloud Dedicatedクラスターに手動バックアップを適用するに
 
 #### バックアップファイルを削除する {#delete-backup-files}
 
-TiDB Cloud Dedicatedクラスターの既存のバックアップ ファイルを削除するには、次の手順を実行します。
+TiDB Cloud Dedicatedクラスターの既存のバックアップファイルを削除するには、次の手順を実行します。
 
 1.  TiDB Cloud Dedicatedクラスターの[**バックアップ**](#view-the-backup-page)ページに移動します。
 
@@ -256,11 +256,11 @@ TiDB Cloud Dedicatedクラスターの既存のバックアップ ファイル�
 
 #### 実行中のバックアップジョブを削除します {#delete-a-running-backup-job}
 
-TiDB Cloud Dedicatedクラスターの実行中のバックアップ ジョブを削除するには、[**バックアップファイルを削除する**](#delete-backup-files)と同様のプロセスに従います。
+TiDB Cloud Dedicatedクラスターの実行中のバックアップジョブを削除するには、[**バックアップファイルを削除する**](#delete-backup-files)と同様のプロセスに従います。
 
 1.  TiDB Cloud Dedicatedクラスターの[**バックアップ**](#view-the-backup-page)ページに移動します。
 
-2.  **保留中**または**実行**中のバックアップ ジョブを見つけて、 **[アクション]**列の**[...]** &gt; **[削除]**をクリックします。
+2.  **保留中**または**実行**中のバックアップジョブを見つけて、 **[アクション]**列の**[...]** &gt; **[削除]**をクリックします。
 
 ## 復元する {#restore}
 

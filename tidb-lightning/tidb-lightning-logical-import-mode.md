@@ -1,6 +1,6 @@
 ---
 title: Logical Import Mode Introduction
-summary: TiDB Lightningの論理インポート モードについて学習します。
+summary: TiDB Lightningの論理インポートモードについて学習します。
 ---
 
 # 論理インポートモードの概要 {#logical-import-mode-introduction}
@@ -9,7 +9,7 @@ summary: TiDB Lightningの論理インポート モードについて学習し�
 
 TiDBクラスターに既にデータが含まれており、外部アプリケーションにサービスを提供している場合は、論理インポートモードでデータをインポートすることをお勧めします。論理インポートモードの動作は通常のSQL文の実行と同じであるため、 ACID準拠が保証されます。
 
-論理インポート モードのバックエンドは`tidb`です。
+論理インポートモードのバックエンドは`tidb`です。
 
 ## 環境要件 {#environment-requirements}
 

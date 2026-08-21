@@ -15,7 +15,7 @@ TiDB Lightningのバージョンはクラスターと同じである必要があ
 
 はい。
 
-## ターゲット データベースの権限要件は何ですか? {#what-are-the-privilege-requirements-for-the-target-database}
+## ターゲットデータベースの権限要件は何ですか? {#what-are-the-privilege-requirements-for-the-target-database}
 
 権限の詳細については[TiDB Lightningを使用するための前提条件](/tidb-lightning/tidb-lightning-requirements.md)を参照してください。
 
@@ -32,7 +32,7 @@ TiDB Lightningのバージョンはクラスターと同じである必要があ
 
 TiDB Lightningはデフォルトで、ローカルデータソースとインポートされたテーブルのチェックサムを実行します。チェックサムが一致しない場合、プロセスは中止されます。このチェックサム情報はログから読み取ることができます。
 
-ターゲット テーブルで[`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md) SQL コマンドを実行して、インポートされたデータのチェックサムを再計算することもできます。
+ターゲットテーブルで[`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md) SQL コマンドを実行して、インポートされたデータのチェックサムを再計算することもできます。
 
 ```sql
 ADMIN CHECKSUM TABLE `schema`.`table`;
@@ -47,7 +47,7 @@ ADMIN CHECKSUM TABLE `schema`.`table`;
 1 row in set (0.01 sec)
 ```
 
-## TiDB Lightningではどのようなデータ ソース形式がサポートされていますか? {#what-kinds-of-data-source-formats-are-supported-by-tidb-lightning}
+## TiDB Lightningではどのようなデータソース形式がサポートされていますか? {#what-kinds-of-data-source-formats-are-supported-by-tidb-lightning}
 
 TiDB Lightning は以下をサポートします:
 
@@ -79,9 +79,9 @@ sql-mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"
 
 -   手動デプロイの場合： `tidb-lightning`フォアグラウンドで実行されている場合は、 <kbd>Ctrl</kbd> + <kbd>C</kbd>を押して終了します。それ以外の場合は、 `ps aux | grep tidb-lightning`コマンドを使用してプロセス ID を取得し、 `kill -2 ${PID}`コマンドを使用してプロセスを終了します。
 
-## TiDB Lightning は1 ギガビット ネットワーク カードで使用できますか? {#can-tidb-lightning-be-used-with-1-gigabit-network-card}
+## TiDB Lightning は1 ギガビット ネットワークカードで使用できますか? {#can-tidb-lightning-be-used-with-1-gigabit-network-card}
 
-TiDB Lightning は、10 ギガビット ネットワーク カードで使用するのが最適です。
+TiDB Lightning は、10 ギガビット ネットワークカードで使用するのが最適です。
 
 1ギガビットネットワークカードは合計120MB/秒の帯域幅しか提供できず、これをすべてのターゲットTiKVストアで共有する必要があります。TiDB Lightningは、物理インポートモードで1ギガビットネットワークの全帯域幅を簡単に飽和させ、PDに接続できなくなるため、クラスタを停止させる可能性があります。
 
@@ -165,8 +165,8 @@ TiDB LightningでSQLの配置ルールを使用するには、データをター
 
 1.  データ分散トポロジを計画します。
 2.  TiKV および PD に必要なラベルを構成します。
-3.  配置ルール ポリシーを作成し、作成したポリシーをターゲット テーブルに適用します。
-4.  TiDB Lightningを使用して、データをターゲット テーブルにインポートします。
+3.  配置ルール ポリシーを作成し、作成したポリシーをターゲットテーブルに適用します。
+4.  TiDB Lightningを使用して、データをターゲットテーブルにインポートします。
 
 ## TiDB LightningとDumplingを使用してスキーマをコピーするにはどうすればよいですか? {#how-can-i-use-tidb-lightning-and-dumpling-to-copy-a-schema}
 

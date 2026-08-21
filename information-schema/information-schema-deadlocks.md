@@ -5,7 +5,7 @@ summary: DEADLOCKS` INFORMATION_SCHEMA テーブルについて学習します�
 
 # DEADLOCKS {#deadlocks}
 
-`DEADLOCKS`テーブルには、現在の TiDB ノードで最近発生したいくつかのデッドロック エラーの情報が表示されます。
+`DEADLOCKS`テーブルには、現在の TiDB ノードで最近発生したいくつかのデッドロックエラーの情報が表示されます。
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -35,7 +35,7 @@ DESC deadlocks;
 `DEADLOCKS`テーブル内の各列フィールドの意味は次のとおりです。
 
 -   `DEADLOCK_ID` : デッドロックイベントのID。テーブル内に複数のデッドロックエラーが存在する場合、この列を使用して、異なるデッドロックエラーに属する行を区別できます。
--   `OCCUR_TIME` : デッドロック エラーが発生した時刻。
+-   `OCCUR_TIME` : デッドロックエラーが発生した時刻。
 -   `RETRYABLE` : デッドロックエラーを再試行できるかどうか。再試行可能なデッドロックエラーの説明については、セクション[再試行可能なデッドロックエラー](#retryable-deadlock-errors)を参照してください。
 -   `TRY_LOCK_TRX_ID` : ロックを取得しようとするトランザクションのID。このIDはトランザクションの`start_ts`でもあります。
 -   `CURRENT_SQL_DIGEST` : ロックを取得するトランザクションで現在実行されている SQL ステートメントのダイジェスト。
@@ -52,7 +52,7 @@ DESC deadlocks;
 
 <CustomContent platform="tidb-cloud">
 
-最近の 10 件のデッドロック イベントの情報が`DEADLOCKS`テーブルに記録されます。
+最近の 10 件のデッドロックイベントの情報が`DEADLOCKS`テーブルに記録されます。
 
 </CustomContent>
 
@@ -77,8 +77,8 @@ DESC deadlocks;
     -   `"unknown"` : ハンドル タイプは現在サポートされていません。
 -   `"handle_value"` : ハンドル値。
 -   `"index_id"` : インデックスキー（インデックスを格納するキー）が属するインデックス ID。
--   `"index_name"` : インデックス キーが属するインデックスの名前。
--   `"index_values"` : インデックス キー内のインデックス値。
+-   `"index_name"` : インデックスキーが属するインデックスの名前。
+-   `"index_values"` : インデックスキー内のインデックス値。
 
 上記のフィールドのうち、該当しない、または現在利用できない場合、そのフィールドはクエリ結果から省略されます。例えば、行キー情報には`index_id` 、 `index_name` 、 `index_values`は含まれません。インデックスキーには`handle_type`と`handle_value`は含まれません。非パーティションテーブルでは`partition_id`と`partition_name`は表示されません。削除されたテーブルのキー情報では`table_name` 、 `db_id` 、 `db_name` 、 `index_name`などのスキーマ情報を取得できず、テーブルがパーティションテーブルであるかどうかを区別できません。
 
@@ -109,7 +109,7 @@ DESC deadlocks;
 -   ケース 1:トランザクションB は、トランザクション A の開始後、トランザクション A がブロックされる前に実行されたステートメントによって生成されたロックによって (直接的または間接的に) ブロックされる可能性があります。
 -   ケース 2:トランザクションB も、トランザクション A で現在実行中のステートメントによってブロックされる可能性があります。
 
-ケース 1 では、TiDB はトランザクション A のクライアントにデッドロック エラーを報告し、トランザクションを終了します。
+ケース 1 では、TiDB はトランザクション A のクライアントにデッドロックエラーを報告し、トランザクションを終了します。
 
 ケース2では、トランザクションAで現在実行中の文がTiDBで自動的に再試行されます。例えば、トランザクションAが以下の文を実行するとします。
 
@@ -153,7 +153,7 @@ INSERT INTO t VALUES (1, 10), (2, 20);
 | `UPDATE t SET v = 11 WHERE id = 1;` |                                     |                              |
 |                                     | `UPDATE t SET v = 21 WHERE id = 2;` |                              |
 | `UPDATE t SET v = 12 WHERE id = 2;` |                                     | トランザクション1 はブロックされます。         |
-|                                     | `UPDATE t SET v = 22 WHERE id = 1;` | トランザクション2 はデッドロック エラーを報告します。 |
+|                                     | `UPDATE t SET v = 22 WHERE id = 1;` | トランザクション2 はデッドロックエラーを報告します。 |
 
 次に、トランザクション2がデッドロックエラーを報告します。この時点で、テーブル`DEADLOCKS`クエリを実行します。
 
@@ -194,9 +194,9 @@ SELECT * FROM INFORMATION_SCHEMA.DEADLOCKS;
 
 ## クラスターデッドロック {#cluster_deadlocks}
 
-`CLUSTER_DEADLOCKS`テーブルは、クラスター全体の各 TiDB ノードの最近のデッドロック エラーに関する情報を返します。これは、各ノードの`DEADLOCKS`テーブルの情報を組み合わせたものです。`CLUSTER_DEADLOCKS`は、異なる TiDB ノードを区別するために、ノードの IP アドレスとポートを表示する追加の`INSTANCE`列も含まれています。
+`CLUSTER_DEADLOCKS`テーブルは、クラスター全体の各 TiDB ノードの最近のデッドロックエラーに関する情報を返します。これは、各ノードの`DEADLOCKS`テーブルの情報を組み合わせたものです。`CLUSTER_DEADLOCKS`は、異なる TiDB ノードを区別するために、ノードの IP アドレスとポートを表示する追加の`INSTANCE`列も含まれています。
 
-`DEADLOCK_ID`グローバルな一意性が保証されないため、 `CLUSTER_DEADLOCKS`テーブルのクエリ結果では、結果セット内の異なるデッドロック エラーの情報を区別するために、 `INSTANCE`と`DEADLOCK_ID`一緒に使用する必要があることに注意してください。
+`DEADLOCK_ID`グローバルな一意性が保証されないため、 `CLUSTER_DEADLOCKS`テーブルのクエリ結果では、結果セット内の異なるデッドロックエラーの情報を区別するために、 `INSTANCE`と`DEADLOCK_ID`一緒に使用する必要があることに注意してください。
 
 ```sql
 USE INFORMATION_SCHEMA;

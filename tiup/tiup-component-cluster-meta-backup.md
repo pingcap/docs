@@ -19,7 +19,7 @@ tiup cluster meta backup <cluster-name> [flags]
 
 ### --file (文字列、デフォルトは現在のディレクトリ) {#file-string-defaults-to-the-current-directory}
 
-TiUPメタ バックアップ ファイルを保存するターゲット ディレクトリを指定します。
+TiUPメタ バックアップファイルを保存するターゲット ディレクトリを指定します。
 
 ### -h, --help {#h-help}
 

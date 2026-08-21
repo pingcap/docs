@@ -11,7 +11,7 @@ summary: よくある質問 (FAQ) とバックアップおよび復元のソリ�
 
 TiDB v6.4.0では、フラッシュバック機能が導入されました。この機能を使用すると、GC時間内に特定の時点までデータを迅速に復旧できます。そのため、誤操作が発生した場合でも、この機能を使用してデータを復旧できます。詳細は[`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)と[`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)を参照してください。
 
-## TiDB v5.4.0 以降のバージョンでは、ワークロードが高いクラスターでバックアップ タスクを実行すると、バックアップ タスクの速度が遅くなるのはなぜですか? {#in-tidb-v540-and-later-versions-when-backup-tasks-are-performed-on-the-cluster-under-a-heavy-workload-why-does-the-speed-of-backup-tasks-become-slow}
+## TiDB v5.4.0 以降のバージョンでは、ワークロードが高いクラスターでバックアップタスクを実行すると、バックアップタスクの速度が遅くなるのはなぜですか? {#in-tidb-v540-and-later-versions-when-backup-tasks-are-performed-on-the-cluster-under-a-heavy-workload-why-does-the-speed-of-backup-tasks-become-slow}
 
 TiDB v5.4.0以降、 BRはバックアップタスクの自動チューニング機能を導入しました。v5.4.0以降のバージョンのクラスターでは、この機能はデフォルトで有効になっています。クラスターのワークロードが高い場合、この機能はバックアップタスクで使用されるリソースを制限し、オンラインクラスターへの影響を軽減します。詳細については、 [バックアップオートチューン](/br/br-auto-tune.md)を参照してください。
 
@@ -22,9 +22,9 @@ TiKVは[動的構成](/tikv-control.md#modify-the-tikv-configuration-dynamically
 
 `tikv-ctl`を使用して自動調整を有効または無効にするには、 [オートチューンを使用する](/br/br-auto-tune.md#use-auto-tune)を参照してください。
 
-さらに、自動チューニングにより、バックアップ タスクで使用されるデフォルトのスレッド数が削減されます。詳細については、 `backup.num-threads` ](/tikv-configuration-file.md#num-threads-1) を参照してください。そのため、Grafana ダッシュボードでは、バックアップ タスクで使用される速度、CPU 使用率、および I/O リソース使用率が、v5.4.0 より前のバージョンよりも低くなります。v5.4.0 より前では、デフォルト値`backup.num-threads`は`CPU * 0.75`でした。つまり、バックアップ タスクで使用されるスレッド数は、論理 CPU コアの 75% を占めていました。その最大値は`32`でした。v5.4.0 以降、この構成項目のデフォルト値は`CPU * 0.5` 、最大値は`8`です。
+さらに、自動チューニングにより、バックアップタスクで使用されるデフォルトのスレッド数が削減されます。詳細については、 `backup.num-threads` ](/tikv-configuration-file.md#num-threads-1) を参照してください。そのため、Grafana ダッシュボードでは、バックアップタスクで使用される速度、CPU 使用率、および I/O リソース使用率が、v5.4.0 より前のバージョンよりも低くなります。v5.4.0 より前では、デフォルト値`backup.num-threads`は`CPU * 0.75`でした。つまり、バックアップタスクで使用されるスレッド数は、論理 CPU コアの 75% を占めていました。その最大値は`32`でした。v5.4.0 以降、この構成項目のデフォルト値は`CPU * 0.5` 、最大値は`8`です。
 
-オフライン クラスターでバックアップ タスクを実行する場合、バックアップを高速化するために、 `tikv-ctl`を使用して`backup.num-threads`の値をより大きな数値に変更できます。
+オフライン クラスターでバックアップタスクを実行する場合、バックアップを高速化するために、 `tikv-ctl`を使用して`backup.num-threads`の値をより大きな数値に変更できます。
 
 ## PITRの問題 {#pitr-issues}
 
@@ -46,13 +46,13 @@ TiKVは[動的構成](/tikv-control.md#modify-the-tikv-configuration-dynamically
 
 クラスター内でネットワークパーティション障害が発生すると、バックアップタスクはログのバックアップを続行できなくなります。一定の再試行時間後、タスクは状態`ERROR`に設定されます。この時点で、バックアップタスクは停止しています。
 
-この問題を解決するには、 `br log resume`コマンドを手動で実行して、ログ バックアップ タスクを再開する必要があります。
+この問題を解決するには、 `br log resume`コマンドを手動で実行して、ログバックアップタスクを再開する必要があります。
 
 ## `br restore point`コマンドを使用してダウンストリームクラスターを復元した後、 TiFlashからデータにアクセスできなくなりました。どうすればよいでしょうか？ {#after-restoring-a-downstream-cluster-using-the-br-restore-point-command-data-cannot-be-accessed-from-tiflash-what-should-i-do}
 
 現在、PITRはリストアフェーズ中にTiFlashへの直接データ書き込みをサポートしていません。代わりに、brコマンドラインツールが`ALTER TABLE table_name SET TIFLASH REPLICA ***` DDLを実行してデータを複製します。そのため、PITRによるデータリストアが完了した直後にTiFlashレプリカは利用できません。TiKVノードからデータが複製されるまで、一定時間待つ必要があります。レプリケーションの進行状況を確認するには、 `INFORMATION_SCHEMA.tiflash_replica`表の`progress`情報を確認してください。
 
-### ログ バックアップ タスクの`status`が`ERROR`になった場合はどうすればよいでしょうか? {#what-should-i-do-if-the-status-of-a-log-backup-task-becomes-error}
+### ログバックアップタスクの`status`が`ERROR`になった場合はどうすればよいでしょうか? {#what-should-i-do-if-the-status-of-a-log-backup-task-becomes-error}
 
 ログバックアップタスクの実行中に、タスクが失敗し、再試行しても回復できない場合、タスクステータスは`ERROR`になります。以下に例を示します。
 
@@ -97,7 +97,7 @@ checkpoint[global]: 2022-07-25 14:46:50.118 +0000; gap=6m28s
 >
 > この機能は、複数のバージョンのデータをバックアップします。長時間のバックアップタスクが失敗し、ステータスが`ERROR`になると、このタスクのチェックポイントデータは`safe point`に設定され、 `safe point`のデータは24時間以内にガベージコレクションされません。そのため、エラーからの再開後、バックアップタスクは最後のチェックポイントから続行されます。タスクが24時間以上失敗し、最後のチェックポイントデータがガベージコレクションされている場合、タスクを再開するとエラーが報告されます。この場合、まず`br log stop`コマンドを実行してタスクを停止し、新しいバックアップタスクを開始する必要があります。
 
-### `br log resume`コマンドを使用して中断されたタスクを再開するときに、エラー メッセージ`ErrBackupGCSafepointExceeded`返された場合、どうすればよいですか? {#what-should-i-do-if-the-error-message-errbackupgcsafepointexceeded-is-returned-when-using-the-br-log-resume-command-to-resume-a-suspended-task}
+### `br log resume`コマンドを使用して中断されたタスクを再開するときに、エラーメッセージ`ErrBackupGCSafepointExceeded`返された場合、どうすればよいですか? {#what-should-i-do-if-the-error-message-errbackupgcsafepointexceeded-is-returned-when-using-the-br-log-resume-command-to-resume-a-suspended-task}
 
 ```shell
 Error: failed to check gc safePoint, checkpoint ts 433177834291200000: GC safepoint 433193092308795392 exceed TS 433177834291200000: [BR:Backup:ErrBackupGCSafepointExceeded]backup GC safepoint exceeded
@@ -107,7 +107,7 @@ Error: failed to check gc safePoint, checkpoint ts 433177834291200000: GC safepo
 
 この問題を解決するには、 `br log stop`を使用して現在のタスクを削除し、 `br log start`を使用してログバックアップタスクを作成します。同時に、後続の PITR のためにフルバックアップを実行できます。
 
-### PITR テーブル フィルターの使用時にエラー メッセージ`[ddl:8204]invalid ddl job type: none`が返された場合はどうすればよいですか? {#what-should-i-do-if-the-error-message-ddl8204invalid-ddl-job-type-none-is-returned-when-using-the-pitr-table-filter}
+### PITR テーブルフィルターの使用時にエラーメッセージ`[ddl:8204]invalid ddl job type: none`が返された場合はどうすればよいですか? {#what-should-i-do-if-the-error-message-ddl8204invalid-ddl-job-type-none-is-returned-when-using-the-pitr-table-filter}
 
 ```shell
 failed to refresh meta for database with schemaID=124, dbName=pitr_test: [ddl:8204]invalid ddl job type: none
@@ -117,13 +117,13 @@ failed to refresh meta for database with schemaID=124, dbName=pitr_test: [ddl:82
 
 ## 機能の互換性の問題 {#feature-compatibility-issues}
 
-### br コマンドライン ツールを使用して復元されたデータが TiCDC のアップストリーム クラスターに複製できないのはなぜですか? {#why-does-data-restored-using-br-command-line-tool-cannot-be-replicated-to-the-upstream-cluster-of-ticdc}
+### br コマンドラインツールを使用して復元されたデータが TiCDC のアップストリームクラスターに複製できないのはなぜですか? {#why-does-data-restored-using-br-command-line-tool-cannot-be-replicated-to-the-upstream-cluster-of-ticdc}
 
--   **BRを使用して復元されたデータは、ダウンストリームに複製できません**。これは、 BR がSST ファイルを直接インポートしますが、ダウンストリーム クラスタがアップストリームからこれらのファイルを取得できないためです。
+-   **BRを使用して復元されたデータは、ダウンストリームに複製できません**。これは、 BR がSST ファイルを直接インポートしますが、ダウンストリームクラスタがアップストリームからこれらのファイルを取得できないためです。
 
 -   v4.0.3より前のバージョンでは、復元中に生成されたDDLジョブによって、TiCDCで予期しないDDL実行が発生する可能性があります。そのため、TiCDCの上流クラスターで復元を実行する必要がある場合は、brコマンドラインツールを使用して復元したすべてのテーブルをTiCDCのブロックリストに追加してください。
 
-[`filter.rules`](https://github.com/pingcap/tiflow/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16)を使用して、TiCDC のブロック リストを構成できます。
+[`filter.rules`](https://github.com/pingcap/tiflow/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16)を使用して、TiCDC のブロックリストを構成できます。
 
 ### 復元中に`new_collation_enabled`不一致が報告されるのはなぜですか? {#why-is-new_collation_enabled-mismatch-reported-during-restore}
 
@@ -152,13 +152,13 @@ v6.0.0より前では、 BRは[配置ルール](/placement-rules-in-sql.md)サ�
 
 このエラーは、復元するクラスターの容量が不足している場合に発生する可能性があります。このクラスターの監視メトリックまたはTiKVログを確認することで、原因をさらに確認できます。
 
-この問題に対処するには、クラスター リソースをスケール アウトし、復元の値`tikv-max-restore-concurrency`を減らして、オプション`ratelimit`を有効にしてみてください。
+この問題に対処するには、クラスター リソースをスケールアウトし、復元の値`tikv-max-restore-concurrency`を減らして、オプション`ratelimit`を有効にしてみてください。
 
-### `the entry too large, the max entry size is 6291456, the size of data is 7690800` 」というエラー メッセージが表示されて復元が失敗した場合は、どうすればよいでしょうか。 {#what-should-i-do-if-the-restore-fails-with-the-error-message-the-entry-too-large-the-max-entry-size-is-6291456-the-size-of-data-is-7690800}
+### `the entry too large, the max entry size is 6291456, the size of data is 7690800` 」というエラーメッセージが表示されて復元が失敗した場合は、どうすればよいでしょうか。 {#what-should-i-do-if-the-restore-fails-with-the-error-message-the-entry-too-large-the-max-entry-size-is-6291456-the-size-of-data-is-7690800}
 
 `--ddl-batch-size` ～ `128`またはそれより小さい値を設定することで、バッチで作成されるテーブルの数を減らすことができます。
 
-BRを使用して[`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-create-table)の値が`1`より大きいバックアップ データを復元する場合、TiDB はテーブル作成の DDL ジョブを TiKV が管理する DDL ジョブ キューに書き込みます。このとき、ジョブ メッセージの最大値がデフォルトで`6 MB`であるため (この値を変更することは**推奨されません**。詳細については、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)と[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)を参照してください)、TiDB が一度に送信するすべてのテーブル スキーマの合計サイズは 6 MB を超えてはなりません。したがって、 `--ddl-batch-size`過度に大きな値に設定すると、TiDB が一度にバッチで送信するテーブルのスキーマ サイズが指定値を超え、 BR が`entry too large, the max entry size is 6291456, the size of data is 7690800`エラーを報告します。
+BRを使用して[`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-create-table)の値が`1`より大きいバックアップデータを復元する場合、TiDB はテーブル作成の DDL ジョブを TiKV が管理する DDL ジョブキューに書き込みます。このとき、ジョブ メッセージの最大値がデフォルトで`6 MB`であるため (この値を変更することは**推奨されません**。詳細については、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)と[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)を参照してください)、TiDB が一度に送信するすべてのテーブルスキーマの合計サイズは 6 MB を超えてはなりません。したがって、 `--ddl-batch-size`過度に大きな値に設定すると、TiDB が一度にバッチで送信するテーブルのスキーマ サイズが指定値を超え、 BR が`entry too large, the max entry size is 6291456, the size of data is 7690800`エラーを報告します。
 
 ### `local`ストレージを使用する場合、バックアップされたファイルはどこに保存されますか? {#where-are-the-backed-up-files-stored-when-i-use-local-storage}
 
@@ -168,7 +168,7 @@ BRを使用して[`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-cre
 
 ローカルストレージを使用する場合、 BRが稼働しているノードに`backupmeta`が生成され、各リージョンのLeaderノードにバックアップファイルが生成されます。
 
-### データの復元中に`could not read local://...:download sst failed`というエラー メッセージが返された場合、どうすればよいですか? {#what-should-i-do-if-the-error-message-could-not-read-localdownload-sst-failed-is-returned-during-data-restore}
+### データの復元中に`could not read local://...:download sst failed`というエラーメッセージが返された場合、どうすればよいですか? {#what-should-i-do-if-the-error-message-could-not-read-localdownload-sst-failed-is-returned-during-data-restore}
 
 データを復元する場合、各ノードは**すべての**バックアップファイル（SSTファイル）にアクセスできる必要があります。デフォルトでは、ストレージを`local`を使用している場合、バックアップファイルが複数のノードに分散しているため、データを復元できません。そのため、各TiKVノードのバックアップファイルを他のTiKVノードにコピーする必要があります。**バックアップデータは、Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage、またはNFSに保存することをお勧めします**。
 
@@ -178,7 +178,7 @@ TiKVがバックアップディレクトリにアクセスできるかどうか�
 
 バックアップ操作中、ストレージメディアがローカルディスクまたはネットワークファイルシステム（NFS）の場合、 `br`を起動するユーザーとTiKVを起動するユーザーが一致していることを確認してください（ `br`とTiKVが異なるマシン上にある場合は、ユーザーのUIDが一致している必要があります）。一致していない場合、 `Permission denied`問題が発生する可能性があります。
 
-バックアップ ファイル (SST ファイル) は TiKV によって保存されるため、ディスク権限が原因で`br`を`root`ユーザーとして実行すると失敗する可能性があります。
+バックアップファイル (SST ファイル) は TiKV によって保存されるため、ディスク権限が原因で`br`を`root`ユーザーとして実行すると失敗する可能性があります。
 
 > **Note:**
 >
@@ -267,7 +267,7 @@ br restore full -f '*.*' -f '!mysql.*' -f 'mysql.usertable' -s $external_storage
 br restore full -f 'mysql.usertable' -s $external_storage_url --with-sys-table
 ```
 
-[テーブルフィルター](/table-filter.md#syntax)設定しても、 **BR は次のシステム テーブルを復元しないこと**に注意してください。
+[テーブルフィルター](/table-filter.md#syntax)設定しても、 **BR は次のシステムテーブルを復元しないこと**に注意してください。
 
 -   統計表（ `mysql.stat_*` ）。ただし、統計は復元可能です。[統計のバックアップ](/br/br-snapshot-manual.md#back-up-statistics)を参照してください。
 -   システム変数テーブル（ `mysql.tidb` `mysql.global_variables`
@@ -283,13 +283,13 @@ br restore full -f 'mysql.usertable' -s $external_storage_url --with-sys-table
 
 データバックアップ中、各リージョンのLeaderノードにバックアップファイルが生成されます。バックアップのサイズはデータサイズと等しく、冗長レプリカは作成されません。したがって、合計データサイズは、TiKVデータの総数をレプリカ数で割った値とほぼ等しくなります。
 
-ただし、ローカルストレージからデータを復元する場合、各 TiKV がすべてのバックアップ ファイルにアクセスできる必要があるため、レプリカの数は TiKV ノードの数と同じになります。
+ただし、ローカルストレージからデータを復元する場合、各 TiKV がすべてのバックアップファイルにアクセスできる必要があるため、レプリカの数は TiKV ノードの数と同じになります。
 
 ### BRを使用してバックアップまたは復元した後、監視ノードに表示されるディスク使用量が一致しないのはなぜですか? {#why-is-the-disk-usage-shown-on-the-monitoring-node-inconsistent-after-backup-or-restore-using-br}
 
 この不整合は、バックアップで使用されるデータ圧縮率が、復元で使用されるデフォルトの圧縮率と異なるために発生します。チェックサムが成功した場合は、この問題は無視できます。
 
-### BR がバックアップ データを復元した後、テーブルとインデックスの TiDB の統計を更新するために、テーブルに対して`ANALYZE`ステートメントを実行する必要がありますか? {#after-br-restores-the-backup-data-do-i-need-to-execute-the-analyze-statement-on-the-table-to-update-the-statistics-of-tidb-on-the-tables-and-indexes}
+### BR がバックアップデータを復元した後、テーブルとインデックスの TiDB の統計を更新するために、テーブルに対して`ANALYZE`ステートメントを実行する必要がありますか? {#after-br-restores-the-backup-data-do-i-need-to-execute-the-analyze-statement-on-the-table-to-update-the-statistics-of-tidb-on-the-tables-and-indexes}
 
 BRは統計情報をバックアップしません（v4.0.9を除く）。そのため、バックアップデータを復元した後は、 `ANALYZE TABLE`手動で実行するか、TiDBが`ANALYZE`自動的に実行するのを待つ必要があります。
 

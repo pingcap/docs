@@ -21,7 +21,7 @@ Kubernetes上でTiDBをデプロイ・運用する必要がある場合は、Kub
 
 ## MySQL/ Auroraから完全なデータをインポート {#import-full-data-from-mysql-aurora}
 
-MySQL/ Auroraから完全なデータをインポートする必要がある場合は、まず[Dumpling](/dumpling-overview.md)を使用してデータを SQL ダンプ ファイルとしてエクスポートし、次に[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してデータを TiDB クラスターにインポートします。
+MySQL/ Auroraから完全なデータをインポートする必要がある場合は、まず[Dumpling](/dumpling-overview.md)を使用してデータを SQL ダンプファイルとしてエクスポートし、次に[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してデータを TiDB クラスターにインポートします。
 
 ## MySQL/ Auroraからデータを移行する {#migrate-data-from-mysql-aurora}
 
@@ -37,7 +37,7 @@ TiDB クラスターをバックアップする必要がある場合、または
 
 ## TiDBへのデータの移行 {#migrate-data-to-tidb}
 
-TiDB クラスターから別の TiDB クラスターにデータを移行する必要がある場合は、 [Dumpling](/dumpling-overview.md)を使用して TiDB から完全なデータを SQL ダンプ ファイルとしてエクスポートし、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してデータを別の TiDB クラスターにインポートします。
+TiDB クラスターから別の TiDB クラスターにデータを移行する必要がある場合は、 [Dumpling](/dumpling-overview.md)を使用して TiDB から完全なデータを SQL ダンプファイルとしてエクスポートし、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してデータを別の TiDB クラスターにインポートします。
 
 増分データも移行する必要がある場合は、 [TiCDC](/ticdc/ticdc-overview.md)を使用できます。
 

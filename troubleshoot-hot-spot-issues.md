@@ -28,14 +28,14 @@ Value: [col1, col2, col3, col4]
 
 キーの`tablePrefix`と`recordPrefixSep`は特定の文字列定数であり、KV 空間内の他のデータと区別するために使用されます。
 
-インデックス データの場合、キーと値のペアは次の規則に従ってエンコードされます。
+インデックスデータの場合、キーと値のペアは次の規則に従ってエンコードされます。
 
 ```
 Key: tablePrefix{TableID}_indexPrefixSep{IndexID}_indexedColumnsValue
 Value: rowID
 ```
 
-インデックス データには、一意インデックスと非一意インデックスの 2 種類があります。
+インデックスデータには、一意インデックスと非一意インデックスの 2 種類があります。
 
 -   一意インデックスの場合は、上記のコーディング規則に従うことができます。
 -   非一意インデックスの場合、このエンコーディングでは一意キーを構築できません。これは、同じインデックスの`tablePrefix{TableID}_indexPrefixSep{IndexID}`は同じですが、複数の行の`ColumnsValue`は同じになる可能性があるためです。非一意インデックスのエンコーディング規則は次のとおりです。
@@ -188,6 +188,6 @@ v8.5.7 以降、PD は読み取りホットスポット向けの CPU-aware hot R
 
 スケジューリング次元を表示または調整するには、[`pd-ctl scheduler config balance-hot-region-scheduler`](/pd-control.md#scheduler-config-balance-hot-region-scheduler) を使用します。
 
-## TiKV MVCC インメモリ エンジンを使用して、高い MVCC 読み取り増幅によって発生する読み取りホットスポットを軽減します。 {#use-tikv-mvcc-in-memory-engine-to-mitigate-read-hotspots-caused-by-high-mvcc-read-amplification}
+## TiKV MVCC インメモリエンジンを使用して、高い MVCC 読み取り増幅によって発生する読み取りホットスポットを軽減します。 {#use-tikv-mvcc-in-memory-engine-to-mitigate-read-hotspots-caused-by-high-mvcc-read-amplification}
 
 GCの履歴MVCCデータの保持期間が長すぎる場合、またはレコードが頻繁に更新または削除される場合、多数のMVCCバージョンをスキャンすることで読み取りホットスポットが発生する可能性があります。このようなホットスポットを軽減するには、 [TiKV MVCC インメモリエンジン](/tikv-in-memory-engine.md)機能を有効にします。

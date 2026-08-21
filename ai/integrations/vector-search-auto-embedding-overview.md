@@ -71,7 +71,7 @@ LIMIT 3;
 
 ## 自動埋め込み + ベクトルインデックス {#auto-embedding--vector-index}
 
-自動埋め込みはクエリのパフォーマンスを向上させるための[ベクトルインデックス](/ai/reference/vector-search-index.md)と互換性があります。生成されたベクトル列にベクトル インデックスを定義でき、それは自動的に使用されます。
+自動埋め込みはクエリのパフォーマンスを向上させるための[ベクトルインデックス](/ai/reference/vector-search-index.md)と互換性があります。生成されたベクトル列にベクトルインデックスを定義でき、それは自動的に使用されます。
 
 ```sql
 -- Create a table with auto-embedding and a vector index

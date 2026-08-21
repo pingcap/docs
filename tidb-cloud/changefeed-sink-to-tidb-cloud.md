@@ -36,7 +36,7 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
 変更フィードを作成する前に、ソースのTiDB Cloud Dedicatedクラスターから既存のデータをエクスポートし、そのデータを宛先のTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにロードする必要があります。
 
-1.  [`tidb_gc_life_time`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)以下の 2 つの操作の合計時間よりも長く設定することで、その期間中の履歴データが TiDB によってガベージ コレクションされないようにします。
+1.  [`tidb_gc_life_time`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)以下の 2 つの操作の合計時間よりも長く設定することで、その期間中の履歴データが TiDB によってガベージコレクションされないようにします。
 
     -   既存データのエクスポートとインポートにかかる時間
     -   **Sink to TiDB Cloud**を作成する時間
@@ -49,7 +49,7 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
 2.  [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用してTiDB Cloud Dedicatedクラスターからデータをエクスポートし、 [インポート機能](/tidb-cloud/import-csv-files-serverless.md)を使用して宛先のTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにデータをロードします。
 
-3.  [Dumplingのエクスポートファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)のメタデータ ファイルからTiDB Cloudシンクの開始位置を取得します。
+3.  [Dumplingのエクスポートファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)のメタデータファイルからTiDB Cloudシンクの開始位置を取得します。
 
     以下はメタデータファイルの例の一部です。 `Pos`の`SHOW MASTER STATUS`は、既存データの TSO であり、 TiDB Cloudシンクの開始位置でもあります。
 

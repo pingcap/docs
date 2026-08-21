@@ -1,6 +1,6 @@
 ---
 title: Import Snapshot Files into TiDB Cloud Starter or Essential
-summary: Amazon Auroraまたは RDS for MySQL スナップショット ファイルをTiDB Cloud Starter または Essential にインポートする方法を学びます。
+summary: Amazon Auroraまたは RDS for MySQL スナップショットファイルをTiDB Cloud Starter または Essential にインポートする方法を学びます。
 ---
 
 # スナップショットファイルをTiDB Cloud StarterまたはEssentialにインポートする {#import-snapshot-files-into-tidb-cloud-starter-or-essential}

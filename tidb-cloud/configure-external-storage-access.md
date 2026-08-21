@@ -28,7 +28,7 @@ TiDB Cloud Starter、 Essential、またはPremiumインスタンスがAmazon S3
 1.  対象のTiDB Cloud Starter、 Essential、またはPremiumインスタンスの**インポート**ページを開きます。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
-    2.  対象のTiDB Cloud Starter、 Essential、または Premium インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
+    2.  対象のTiDB Cloud Starter、 Essential、または Premium インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**[データ]** &gt; **[インポート]**をクリックします。
 
 2.  **Add New ARN**ダイアログを開きます。
 
@@ -128,7 +128,7 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
         -   `"Resource": "<Your S3 bucket ARN>/<Your data directory>/*"` 、ここで`<Your data directory>`はエクスポートされたデータのターゲットディレクトリ、またはインポートされたデータのソースディレクトリです。例:
 
-            -   インポートまたはエクスポートするデータが`tidb-cloud-source-data`バケットのルート ディレクトリにある場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`を使用してください。
+            -   インポートまたはエクスポートするデータが`tidb-cloud-source-data`バケットのルートディレクトリにある場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`を使用してください。
             -   インポートまたはエクスポートするデータがバケットの`mydata`ディレクトリにある場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`を使用します。
 
             TiDB Cloud がこのディレクトリ内のすべてのファイルにアクセスできるように、ディレクトリの末尾に`/*`が追加されていることを確認してください。
@@ -156,7 +156,7 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
 3.  AWS マネジメントコンソールで、 TiDB Cloudのアクセスロールを作成し、ロール ARN を取得します。
 
-    1.  [IAMコンソール](https://console.aws.amazon.com/iam/)で、左側のナビゲーション ペインの**[ロール]**をクリックし、 **Create role**をクリックします。
+    1.  [IAMコンソール](https://console.aws.amazon.com/iam/)で、左側のナビゲーションペインの**[ロール]**をクリックし、 **Create role**をクリックします。
 
         ![Create a role](/media/tidb-cloud/aws-create-role.png)
 
@@ -164,8 +164,7 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
         -   **Trusted entity type**で**AWS account**を選択します。
         -   **AWSアカウント**で**Another AWS account**を選択し、 TiDB CloudアカウントIDを**Account ID**フィールドに貼り付けます。
-        -   **[オプション]**で、 **[外部 ID が必要 (サードパーティがこの役割を引き受ける場合のベスト プラクティス)]**をクリックし、 TiDB Cloud外部 ID を**External ID**フィールドに貼り付けます。<CustomContent plan="starter,essential">ロールが外部IDを必須とせずに作成された場合、プロジェクト内のいずれかのTiDB Cloud StarterまたはEssentialインスタンスの設定が完了すると、そのプロジェクト内のすべてのTiDB Cloud StarterおよびEssentialインスタンスは同じロールARNを使用してAmazon S3バケットにアクセスできます。ロールがアカウントIDと外部IDの両方を使用して作成された場合、対応するTiDB Cloud StarterまたはEssentialインスタンスのみがバケットにアクセスできます。</CustomContent>
-
+        -   **[オプション]**で、 **[外部 ID が必要 (サードパーティがこの役割を引き受ける場合のベストプラクティス)]**をクリックし、 TiDB Cloud外部 ID を**External ID**フィールドに貼り付けます。<CustomContent plan="starter,essential">ロールが外部IDを必須とせずに作成された場合、プロジェクト内のいずれかのTiDB Cloud StarterまたはEssentialインスタンスの設定が完了すると、そのプロジェクト内のすべてのTiDB Cloud StarterおよびEssentialインスタンスは同じロールARNを使用してAmazon S3バケットにアクセスできます。ロールがアカウントIDと外部IDの両方を使用して作成された場合、対応するTiDB Cloud StarterまたはEssentialインスタンスのみがバケットにアクセスできます。</CustomContent>
     3.  **次へ**をクリックしてポリシー一覧を開き、先ほど作成したポリシーを選択してから**次へ**をクリックします。
 
     4.  **Role details**で役割の名前を設定し、右下隅の**Create role**をクリックします。役割が作成されると、役割の一覧が表示されます。
@@ -190,7 +189,7 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
 > **Note:**
 >
-> TiDB Cloudはアクセス キーを保存しません。インポートまたはエクスポートが完了したら[アクセスキーを削除する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)ことをお勧めします。
+> TiDB Cloudはアクセスキーを保存しません。インポートまたはエクスポートが完了したら[アクセスキーを削除する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)ことをお勧めします。
 
 <CustomContent plan="starter,essential">
 
@@ -200,7 +199,7 @@ TiDB Cloud StarterまたはEssentialインスタンスがGCSバケットにア�
 
 サービスアカウントキーを設定するには、以下の手順に従ってください。
 
-1.  Google Cloud サービス[サービスアカウントページ](https://console.cloud.google.com/iam-admin/serviceaccounts)ページで、 **CREATE SERVICE ACCOUNT**をクリックしてサービス アカウントを作成します。詳細については、 [サービスアカウントの作成](https://cloud.google.com/iam/docs/creating-managing-service-accounts)を参照してください。
+1.  Google Cloud サービス[サービスアカウントページ](https://console.cloud.google.com/iam-admin/serviceaccounts)ページで、 **CREATE SERVICE ACCOUNT**をクリックしてサービスアカウントを作成します。詳細については、 [サービスアカウントの作成](https://cloud.google.com/iam/docs/creating-managing-service-accounts)を参照してください。
 
     1.  サービスアカウント名を入力してください。
 
@@ -225,7 +224,7 @@ TiDB Cloud StarterまたはEssentialインスタンスがGCSバケットにア�
 
     ![service-account-key](/media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
 
-3.  デフォルトのキータイプ`JSON`を選択し、 **[作成]**をクリックして Google Cloud 認証情報ファイルをダウンロードします。このファイルには、TiDB Cloud StarterまたはEssentialインスタンスの GCS アクセスを設定する際に使用する必要のあるサービス アカウント キーが含まれています。
+3.  デフォルトのキータイプ`JSON`を選択し、 **[作成]**をクリックして Google Cloud 認証情報ファイルをダウンロードします。このファイルには、TiDB Cloud StarterまたはEssentialインスタンスの GCS アクセスを設定する際に使用する必要のあるサービスアカウント キーが含まれています。
 
 </CustomContent>
 

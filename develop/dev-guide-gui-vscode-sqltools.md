@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-gui-vscode-sqltools/','/ja/tidb/dev/dev-gui
 
 # Visual Studio Codeを使用してTiDBに接続する {#connect-to-tidb-with-visual-studio-code}
 
-TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code)](https://code.visualstudio.com/)は軽量かつ強力なソース コード エディターです。このチュートリアルでは、TiDB を[公式ドライバー](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql)としてサポートする[SQLツール](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)拡張機能を使用します。
+TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code)](https://code.visualstudio.com/)は軽量かつ強力なソースコード エディターです。このチュートリアルでは、TiDB を[公式ドライバー](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql)としてサポートする[SQLツール](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)拡張機能を使用します。
 
 このチュートリアルでは、Visual Studio Code を使用して TiDB に接続する方法を学ぶことができます。
 
@@ -116,8 +116,7 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
     -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
     -   まだパスワードを設定していない場合は、ダイアログの**ルートパスワードを設定**をクリックしてください。
     -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA証明書**をクリックしてダウンロードしてください。
-    -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
-
+    -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベートエンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 7.  VS Codeを起動し、ナビゲーションペインで**SQLTools**拡張機能を選択します。 **[接続]**セクションで**[新しい接続を追加]**をクリックし、データベースドライバとして**TiDB**を選択します。
 
 8.  設定画面で、以下の接続パラメータを設定します。
@@ -150,7 +149,7 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **[IP アクセス リストの設定] をクリックするか、「IP アクセス リストを設定する」**の手順に従って[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
+    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
 4.  VS Codeを起動し、ナビゲーションペインで**SQLTools**拡張機能を選択します。 **[接続]**セクションで**[新しい接続を追加]**をクリックし、データベースドライバとして**TiDB**を選択します。
 

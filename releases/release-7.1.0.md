@@ -33,7 +33,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 -   TiFlashは遅延マテリアライゼーション（GA） をサポートします [＃5829](https://github.com/pingcap/tiflash/issues/5829) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
 
-    v7.0.0 では、クエリ パフォーマンスを最適化するための実験的機能として、 TiFlashに遅延マテリアライゼーションが導入されました。この機能はデフォルトでは無効になっています ( [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)システム変数はデフォルトで`OFF`に設定されます)。フィルタ条件 ( `WHERE`句) を含む`SELECT`ステートメントを処理する場合、 TiFlash はクエリに必要な列からすべてのデータを読み取り、クエリ条件に基づいてデータをフィルタリングおよび集計します。遅延マテリアライゼーションを有効にすると、TiDB はフィルタ条件の一部を TableScan 演算子にプッシュ ダウンすることをサポートします。つまり、 TiFlash は最初に TableScan 演算子にプッシュ ダウンされるフィルタ条件に関連する列データをスキャンし、条件を満たす行をフィルタリングしてから、これらの行の他の列データをスキャンしてさらに計算を行うため、IO スキャンとデータ処理の計算が削減されます。
+    v7.0.0 では、クエリパフォーマンスを最適化するための実験的機能として、 TiFlashに遅延マテリアライゼーションが導入されました。この機能はデフォルトでは無効になっています ( [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)システム変数はデフォルトで`OFF`に設定されます)。フィルタ条件 ( `WHERE`句) を含む`SELECT`ステートメントを処理する場合、 TiFlash はクエリに必要な列からすべてのデータを読み取り、クエリ条件に基づいてデータをフィルタリングおよび集計します。遅延マテリアライゼーションを有効にすると、TiDB はフィルタ条件の一部を TableScan 演算子にプッシュダウンすることをサポートします。つまり、 TiFlash は最初に TableScan 演算子にプッシュダウンされるフィルタ条件に関連する列データをスキャンし、条件を満たす行をフィルタリングしてから、これらの行の他の列データをスキャンしてさらに計算を行うため、IO スキャンとデータ処理の計算が削減されます。
 
     バージョン7.1.0以降、 TiFlashの遅延マテリアライゼーション機能が一般提供され、デフォルトで有効化されています（システム変数[`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)はデフォルトで`ON`に設定されています）。TiDBオプティマイザーは、クエリの統計情報とフィルター条件に基づいて、TableScan演算子にプッシュダウンするフィルターを決定します。
 
@@ -200,7 +200,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 -   TiFlashシステムテーブル情報のクエリに使用されるインターフェイスを置き換えます[＃6941](https://github.com/pingcap/tiflash/issues/6941) @[flowbehappy](https://github.com/flowbehappy)
 
-    v7.1.0 以降、TiDB の[`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)および[`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md)システム テーブルのクエリ サービスを提供する際に、 TiFlash はHTTP ポートではなく gRPC ポートを使用するようになりました。これにより、HTTP サービスのセキュリティ リスクが回避されます。
+    v7.1.0 以降、TiDB の[`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)および[`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md)システムテーブルのクエリサービスを提供する際に、 TiFlash はHTTP ポートではなく gRPC ポートを使用するようになりました。これにより、HTTP サービスのセキュリティリスクが回避されます。
 
 -   LDAP認証をサポート [＃43580](https://github.com/pingcap/tidb/issues/43580) @[YangKeao](https://github.com/YangKeao)
 
@@ -210,12 +210,12 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 -   データベース監査機能の強化（Enterprise Edition）
 
-    v7.1.0 では、TiDB Enterprise Edition でデータベース監査機能が強化され、その機能が大幅に拡張され、ユーザー エクスペリエンスが向上して、企業のデータベース セキュリティ コンプライアンスのニーズに対応できるようになりました。
+    v7.1.0 では、TiDB Enterprise Edition でデータベース監査機能が強化され、その機能が大幅に拡張され、ユーザーエクスペリエンスが向上して、企業のデータベース セキュリティ コンプライアンスのニーズに対応できるようになりました。
 
     -   より詳細な監査イベント定義とよりきめ細かな監査設定のために、「フィルター」と「ルール」の概念を導入します。
     -   JSON 形式でのルールの定義をサポートし、よりユーザーフレンドリーな構成方法を提供します。
     -   自動ログローテーションとスペース管理関数を追加し、保持時間とログサイズの 2 つの次元でのログローテーションの構成をサポートします。
-    -   監査ログをTEXTと JSON 形式の両方で出力できるようにすることで、サードパーティ ツールとの統合が容易になります。
+    -   監査ログをTEXTと JSON 形式の両方で出力できるようにすることで、サードパーティツールとの統合が容易になります。
     -   監査ログの秘匿化をサポートします。セキュリティ強化のため、すべてのリテラルを置き換えることができます。
 
     データベース監査は、TiDB Enterprise Editionの重要な機能です。この機能は、企業のデータセキュリティとコンプライアンスを確保するための強力な監視・監査ツールを提供します。企業の管理者は、データベース操作の発生源と影響を追跡し、不正なデータ盗難や改ざんを防止することができます。さらに、データベース監査は、企業が様々な規制やコンプライアンス要件を満たし、法的および倫理的コンプライアンスを確保するのにも役立ちます。この機能は、企業の情報セキュリティにとって重要なアプリケーション価値を持っています。
@@ -232,9 +232,9 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 -   セキュリティを向上させるために、 TiFlashはHTTPサービスポート（デフォルト`8123` ）を廃止し、代わりにgRPCポートを使用します。
 
-    TiFlash をv7.1.0 にアップグレードした場合、TiDB を v7.1.0 にアップグレードする際に、TiDB はTiFlashシステム テーブル ( [`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)と[`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md) ) を読み取ることができません。
+    TiFlash をv7.1.0 にアップグレードした場合、TiDB を v7.1.0 にアップグレードする際に、TiDB はTiFlashシステムテーブル ( [`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)と[`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md) ) を読み取ることができません。
 
--   TiDB バージョン v6.2.0 から v7.0.0 のTiDB Lightning は、TiDB クラスターのバージョンに基づいてグローバル スケジューリングを一時停止するかどうかを決定します。TiDB クラスター バージョン &gt;= v6.1.0 の場合、スケジュールはターゲット テーブル データを格納するリージョンに対してのみ一時停止され、ターゲット テーブルのインポートが完了すると再開されます。その他のバージョンの場合、 TiDB Lightning はグローバル スケジューリングを一時停止します。TiDB v7.1.0 以降では、 [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)設定することで、グローバル スケジューリングを一時停止するかどうかを制御できます。デフォルトでは、 TiDB Lightning はターゲット テーブル データを格納するリージョンのスケジュールを一時停止します。ターゲット クラスターのバージョンが v6.1.0 より前の場合、エラーが発生します。この場合、パラメータの値を`"global"`に変更して再試行できます。
+-   TiDB バージョン v6.2.0 から v7.0.0 のTiDB Lightning は、TiDB クラスターのバージョンに基づいてグローバルスケジューリングを一時停止するかどうかを決定します。TiDB クラスター バージョン &gt;= v6.1.0 の場合、スケジュールはターゲットテーブルデータを格納するリージョンに対してのみ一時停止され、ターゲットテーブルのインポートが完了すると再開されます。その他のバージョンの場合、 TiDB Lightning はグローバルスケジューリングを一時停止します。TiDB v7.1.0 以降では、 [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)設定することで、グローバルスケジューリングを一時停止するかどうかを制御できます。デフォルトでは、 TiDB Lightning はターゲットテーブルデータを格納するリージョンのスケジュールを一時停止します。ターゲットクラスターのバージョンが v6.1.0 より前の場合、エラーが発生します。この場合、パラメータの値を`"global"`に変更して再試行できます。
 
 -   TiDB v7.1.0で[`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)を使用すると、FLASHBACK操作が完了した後も、一部のリージョンがFLASHBACKプロセスに残る可能性があります。v7.1.0ではこの機能の使用を避けることをお勧めします。詳細については、問題を参照してください。この問題が発生した場合は、機能[TiDBスナップショットのバックアップと復元](/br/br-snapshot-guide.md)を使用してデータを復元できます。 [＃44292](https://github.com/pingcap/tidb/issues/44292)
 
@@ -273,7 +273,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 | [`tidb_enable_non_prepared_plan_cache_for_dml`](/system-variables.md#tidb_enable_non_prepared_plan_cache_for_dml-new-in-v710)           | 新しく追加された | DML ステートメントに対して[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)機能を有効にするかどうかを制御します。                                                                                                                                                                                                                                                                                                           |
 | [`tidb_enable_row_level_checksum`](/system-variables.md#tidb_enable_row_level_checksum-new-in-v710)                                     | 新しく追加された | 単一行データ機能に対して TiCDC データ整合性検証を有効にするかどうかを制御します。                                                                                                                                                                                                                                                                                                                                                    |
 | [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)                                                | 新しく追加された | この変数は、オプティマイザをより細かく制御し、オプティマイザの動作の変更によって引き起こされるアップグレード後のパフォーマンスの低下を防ぐのに役立ちます。                                                                                                                                                                                                                                                                                                                   |
-| [`tidb_plan_cache_invalidation_on_fresh_stats`](/system-variables.md#tidb_plan_cache_invalidation_on_fresh_stats-new-in-v710)           | 新しく追加された | 関連テーブルの統計が更新されたときにプラン キャッシュを自動的に無効にするかどうかを制御します。                                                                                                                                                                                                                                                                                                                                                |
+| [`tidb_plan_cache_invalidation_on_fresh_stats`](/system-variables.md#tidb_plan_cache_invalidation_on_fresh_stats-new-in-v710)           | 新しく追加された | 関連テーブルの統計が更新されたときにプランキャッシュを自動的に無効にするかどうかを制御します。                                                                                                                                                                                                                                                                                                                                                |
 | [`tidb_plan_cache_max_plan_size`](/system-variables.md#tidb_plan_cache_max_plan_size-new-in-v710)                                       | 新しく追加された | プリペアドプランキャッシュまたは非プリペアドプランキャッシュにキャッシュできるプランの最大サイズを制御します。                                                                                                                                                                                                                                                                                                                                      |
 | [`tidb_prefer_broadcast_join_by_exchange_data_size`](/system-variables.md#tidb_prefer_broadcast_join_by_exchange_data_size-new-in-v710) | 新しく追加された | ネットワーク転送のオーバーヘッドが最小となるアルゴリズムを使用するかどうかを制御します。この変数を有効にすると、TiDBはネットワークで交換されるデータのサイズをそれぞれ`Broadcast Hash Join`と`Shuffled Hash Join`で推定し、サイズが小さい方を選択します。この変数を有効にすると、 [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50)と[`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)無効になります。 |
 | [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)                                         | 新しく追加された | キャッシュできるプランの最大数を制御します。プリペアドプランキャッシュと非プリペアドプランキャッシュは同じキャッシュを共有します。                                                                                                                                                                                                                                                                                                                            |
@@ -362,15 +362,15 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     -   `DROP TABLE`操作が実行されているときに`ADMIN SHOW DDL JOBS`結果にテーブル名が表示されない問題を修正[＃42268](https://github.com/pingcap/tidb/issues/42268) @[tiancaiamao](https://github.com/tiancaiamao)
     -   Grafana モニタリング パネルで`Ignore Event Per Minute`と`Stats Cache LRU Cost`チャートが正常に表示されないことがある問題を修正しました [＃42562](https://github.com/pingcap/tidb/issues/42562) @[pingandb](https://github.com/pingandb)
     -   `INFORMATION_SCHEMA.COLUMNS`テーブルをクエリするときに`ORDINAL_POSITION`列が誤った結果を返す問題を修正しました [＃43379](https://github.com/pingcap/tidb/issues/43379) @[bb7133](https://github.com/bb7133)
-    -   キャッシュ テーブルに新しい列が追加された後、列のデフォルト値ではなく値が`NULL`になる問題を修正しました。 [＃42928](https://github.com/pingcap/tidb/issues/42928) @[lqs](https://github.com/lqs)
+    -   キャッシュテーブルに新しい列が追加された後、列のデフォルト値ではなく値が`NULL`になる問題を修正しました。 [＃42928](https://github.com/pingcap/tidb/issues/42928) @[lqs](https://github.com/lqs)
     -   述語をプッシュダウンするときに CTE 結果が正しくない問題を修正しました [＃43645](https://github.com/pingcap/tidb/issues/43645) @[winoros](https://github.com/winoros)
-    -   多数のパーティションとTiFlashレプリカを持つパーティション テーブルに対して`TRUNCATE TABLE`を実行するときに書き込み競合によって発生する DDL 再試行の問題を修正しました。 [＃42940](https://github.com/pingcap/tidb/issues/42940) @[mjonss](https://github.com/mjonss)
+    -   多数のパーティションとTiFlashレプリカを持つパーティションテーブルに対して`TRUNCATE TABLE`を実行するときに書き込み競合によって発生する DDL 再試行の問題を修正しました。 [＃42940](https://github.com/pingcap/tidb/issues/42940) @[mjonss](https://github.com/mjonss)
     -   パーティションテーブル の作成時に`SUBPARTITION`を使用すると警告が表示されない問題を修正 [＃41200](https://github.com/pingcap/tidb/issues/41200) @[mjonss](https://github.com/mjonss) [＃41198](https://github.com/pingcap/tidb/issues/41198)
     -   生成列の値オーバーフローの問題を処理する際の MySQL との非互換性の問題を修正しました [＃40066](https://github.com/pingcap/tidb/issues/40066) @[jiyfhust](https://github.com/jiyfhust)
     -   `REORGANIZE PARTITION`他の DDL 操作と同時に実行できない問題を修正 [＃42442](https://github.com/pingcap/tidb/issues/42442) @[bb7133](https://github.com/bb7133)
     -   DDL でパーティション再編成タスクをキャンセルすると、後続の DDL 操作が失敗する可能性がある問題を修正しました[＃42448](https://github.com/pingcap/tidb/issues/42448) @[lcwangchao](https://github.com/lcwangchao)
     -   特定の条件下で削除操作のアサーションが正しくない問題を修正[＃42426](https://github.com/pingcap/tidb/issues/42426) @[tiancaiamao](https://github.com/tiancaiamao)
-    -   cgroup 情報の読み取りエラーにより、TiDBサーバーが起動できない問題を修正しました。エラー メッセージは「cgroup v1 からファイルメモリ.stat を読み取れません: open /sys/ メモリ.stat no such file or directory」です[＃42659](https://github.com/pingcap/tidb/issues/42659) @[hawkingrei](https://github.com/hawkingrei)
+    -   cgroup 情報の読み取りエラーにより、TiDBサーバーが起動できない問題を修正しました。エラーメッセージは「cgroup v1 からファイルメモリ.stat を読み取れません: open /sys/ メモリ.stat no such file or directory」です[＃42659](https://github.com/pingcap/tidb/issues/42659) @[hawkingrei](https://github.com/hawkingrei)
     -   グローバルインデックスを持つパーティションテーブルの行のパーティションキーを更新するときに発生する`Duplicate Key`問題を修正しました [＃42312](https://github.com/pingcap/tidb/issues/42312) @[L-maple](https://github.com/L-maple)
     -   TTLモニタリングパネルの`Scan Worker Time By Phase`チャートにデータが表示されない問題を修正しました [＃42515](https://github.com/pingcap/tidb/issues/42515) @[lcwangchao](https://github.com/lcwangchao)
     -   グローバルインデックスを持つパーティションテーブルに対する一部のクエリが誤った結果を返す問題を修正[＃41991](https://github.com/pingcap/tidb/issues/41991) [＃42065](https://github.com/pingcap/tidb/issues/42065) @[L-maple](https://github.com/L-maple)
@@ -397,8 +397,8 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     -   `ADMIN SHOW DDL JOBS LIMIT`誤った結果を返す問題を修正[＃42298](https://github.com/pingcap/tidb/issues/42298) @[CbcWestwolf](https://github.com/CbcWestwolf)
     -   `UNION` でユニオンビューと一時テーブルをクエリするときに発生する TiDBのpanic問題を修正しました。 [＃42563](https://github.com/pingcap/tidb/issues/42563) @[lcwangchao](https://github.com/lcwangchao)
     -   トランザクションで複数のステートメントをコミットするときにテーブル名の変更が有効にならない問題を修正しました [＃39664](https://github.com/pingcap/tidb/issues/39664) @[tiancaiamao](https://github.com/tiancaiamao)
-    -   時間変換中に準備済みプラン キャッシュと非プリペアドプラン キャッシュの動作間の非互換性の問題を修正しました [＃42439](https://github.com/pingcap/tidb/issues/42439) @[qw4990](https://github.com/qw4990)
-    -   Decimal 型のプラン キャッシュによって発生する誤った結果を修正しました [＃43311](https://github.com/pingcap/tidb/issues/43311) @[qw4990](https://github.com/qw4990)
+    -   時間変換中に準備済みプランキャッシュと非プリペアドプランキャッシュの動作間の非互換性の問題を修正しました [＃42439](https://github.com/pingcap/tidb/issues/42439) @[qw4990](https://github.com/qw4990)
+    -   Decimal 型のプランキャッシュによって発生する誤った結果を修正しました [＃43311](https://github.com/pingcap/tidb/issues/43311) @[qw4990](https://github.com/qw4990)
     -   間違ったフィールドタイプチェックによる、null 認識アンチ結合 (NAAJ) での TiDBのpanic問題を修正しました。 [＃42459](https://github.com/pingcap/tidb/issues/42459) @[AilinKid](https://github.com/AilinKid)
     -   RC分離レベルでの悲観的トランザクションにおけるDML実行の失敗により、データとインデックスの間に不整合が発生する可能性がある問題を修正しました。 [＃43294](https://github.com/pingcap/tidb/issues/43294) @[ekexium](https://github.com/ekexium)
     -   極端なケースで、悲観的トランザクションの最初のステートメントが再試行されるときに、このトランザクションのロックを解決するとトランザクションの正確性に影響する可能性がある問題を修正しました[＃42937](https://github.com/pingcap/tidb/issues/42937) @[MyonKeminta](https://github.com/MyonKeminta)

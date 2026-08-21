@@ -19,7 +19,7 @@ ticloud config rm <profile-name> [flags]
 
 ## 例 {#examples}
 
-ユーザー プロファイルを削除します。
+ユーザープロファイルを削除します。
 
 ```shell
 ticloud config delete <profile-name>

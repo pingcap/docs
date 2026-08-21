@@ -77,9 +77,9 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
     -   TiDB Data Migration (DM)
 
         -   DMタスクが同期ユニットに入り、中断されると上流のテーブル構造情報が失われる問題を修正[#7159](https://github.com/pingcap/tiflow/issues/7159) @[lance6716](https://github.com/lance6716)
-        -   チェックポイントを保存するときに SQL ステートメントを分割して、大規模なトランザクション エラーを修正します。 [＃5010](https://github.com/pingcap/tiflow/issues/5010) @[lance6716](https://github.com/lance6716)
+        -   チェックポイントを保存するときに SQL ステートメントを分割して、大規模なトランザクションエラーを修正します。 [＃5010](https://github.com/pingcap/tiflow/issues/5010) @[lance6716](https://github.com/lance6716)
         -   DM事前チェックに`INFORMATION_SCHEMA` の`SELECT`権限が必要になる問題を修正 [＃7317](https://github.com/pingcap/tiflow/issues/7317) @[lance6716](https://github.com/lance6716)
-        -   高速/完全バリデータで DM タスクを実行した後に DM ワーカーがデッドロック エラーをトリガーする問題を修正しました [＃7241](https://github.com/pingcap/tiflow/issues/7241) @[buchuitoudegou](https://github.com/buchuitoudegou)
+        -   高速/完全バリデータで DM タスクを実行した後に DM ワーカーがデッドロックエラーをトリガーする問題を修正しました [＃7241](https://github.com/pingcap/tiflow/issues/7241) @[buchuitoudegou](https://github.com/buchuitoudegou)
         -   DMが`Specified key was too long`エラーを報告する問題を修正 [＃5315](https://github.com/pingcap/tiflow/issues/5315) @[lance6716](https://github.com/lance6716)
         -   レプリケーション中に latin1 データが破損する可能性がある問題を修正しました [＃7028](https://github.com/pingcap/tiflow/issues/7028) @[lance6716](https://github.com/lance6716)
 

@@ -36,7 +36,7 @@ TiDB バージョン: 5.3.4
     -   多数のリージョンをマージした後にリージョンキャッシュが適切にクリアされない問題を修正[＃37174](https://github.com/pingcap/tidb/issues/37174)
     -   特定のシナリオで`EXECUTE`文が予期しないエラーをスローする可能性がある問題を修正しました[＃37187](https://github.com/pingcap/tidb/issues/37187)
     -   `ORDER BY`句に相関サブクエリが含まれている場合に`GROUP CONCAT`と`ORDER BY`が失敗する可能性がある問題を修正しました [＃18216](https://github.com/pingcap/tidb/issues/18216)
-    -   プラン キャッシュ使用時に、Decimal と Real の長さと幅が正しく設定されていない場合に返される誤った結果を修正しました。 [＃29565](https://github.com/pingcap/tidb/issues/29565)
+    -   プランキャッシュ使用時に、Decimal と Real の長さと幅が正しく設定されていない場合に返される誤った結果を修正しました。 [＃29565](https://github.com/pingcap/tidb/issues/29565)
 
 -   PD
 

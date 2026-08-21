@@ -5,7 +5,7 @@ summary: サポートチケットのLarkインタラクションに関する詳�
 
 # Lark経由でサポートチケットとやり取りする {#interact-with-support-tickets-via-lark}
 
-**Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)に加入している顧客向けに、 TiDB Cloud は、サポート チケットのより包括的なやり取りと管理をサポートするために、 [Lark](https://www.larksuite.com/)で**PingCAP Support Bot**と呼ばれるチケット ボットを提供します。
+**Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)に加入している顧客向けに、 TiDB Cloud は、サポートチケットのより包括的なやり取りと管理をサポートするために、 [Lark](https://www.larksuite.com/)で**PingCAP Support Bot**と呼ばれるチケット ボットを提供します。
 
 > **Note:**
 >
@@ -21,7 +21,7 @@ Lark の**PingCAP Support Group**に[サポートチケットを作成する](/t
 
 サポートエンジニアがチケットに返信すると、その返信はLarkのメッセージスレッドに同期されます。サポートポータルにアクセスすることなく、スレッド内で直接返信内容を確認したり、返信を送信したりできます。返信はチケットシステムにも同期されます。
 
-この機能を使用すると、**Premium**サポート プランに加入すると、Lark を離れることなく、チケットをすばやく作成、応答、管理できます。
+この機能を使用すると、**Premium**サポートプランに加入すると、Lark を離れることなく、チケットをすばやく作成、応答、管理できます。
 
 ![lark-ticket-interaction-2](/media/tidb-cloud/connected-lark-ticket-interaction-2.png)
 
@@ -33,4 +33,4 @@ Lark の**PingCAP Support Group**に[サポートチケットを作成する](/t
 
 ## サポートにお問い合わせください {#contact-support}
 
-ヘルプや質問がある場合は、サポート チーム<a href="mailto:support@pingcap.com">[support@pi​​ngcap.com](mailto:support@pingcap.com)</a>にお問い合わせください。
+ヘルプや質問がある場合は、サポートチーム<a href="mailto:support@pingcap.com">[support@pi​​ngcap.com](mailto:support@pingcap.com)</a>にお問い合わせください。

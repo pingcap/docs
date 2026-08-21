@@ -1,6 +1,6 @@
 ---
 title: Connected Care Overview
-summary: 新しい世代のTiDB Cloudサポート サービスである Connected Care を紹介します。
+summary: 新しい世代のTiDB Cloudサポートサービスである Connected Care を紹介します。
 aliases: ['/ja/tidbcloud/connected-care-announcement']
 ---
 
@@ -16,11 +16,11 @@ aliases: ['/ja/tidbcloud/connected-care-announcement']
 
 Connected Care サービスは、最新のコミュニケーション ツール、プロアクティブなサポート、高度な AI 機能を通じてTiDB Cloudとの接続を強化し、シームレスで顧客中心のエクスペリエンスを実現するように設計されています。
 
-Connected Care サービスには、 **Basic** 、 **Developer** (従来の**Standard**プランに相当)、 **Enterprise** 、 **Premium の**4 つのサポート プランがあります。
+Connected Care サービスには、 **Basic** 、 **Developer** (従来の**Standard**プランに相当)、 **Enterprise** 、 **Premium の**4 つのサポートプランがあります。
 
 > **Note**
 >
-> **Basic** 、 **Enterprise** 、および**Premium の**サポート プランでは、従来のプランと同じプラン名が使用されていますが、サービス コミットメントが異なる異なるプランを指します。
+> **Basic** 、 **Enterprise** 、および**Premium の**サポートプランでは、従来のプランと同じプラン名が使用されていますが、サービス コミットメントが異なる異なるプランを指します。
 
 以下の表は、Connected Careサービスの各サポートプランの概要を示しています。詳細については、 [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)ご覧ください。
 
@@ -39,11 +39,11 @@ Connected Care サービスには、 **Basic** 、 **Developer** (従来の**Sta
 
 > **Note**
 >
-> 4 つのサポート プランすべてのお客様は、サービス リクエストに[PingCAPサポートポータル](https://tidb.support.pingcap.com/)を利用できます。
+> 4 つのサポートプランすべてのお客様は、サービス リクエストに[PingCAPサポートポータル](https://tidb.support.pingcap.com/)を利用できます。
 
 ## 従来のサポートサービスとConnected Careサポートサービスの違い {#differences-between-legacy-support-services-and-connected-care-support-services}
 
-Connected Care サービスのサポート プランでは、次のようなまったく新しい機能セットが導入されています。
+Connected Care サービスのサポートプランでは、次のようなまったく新しい機能セットが導入されています。
 
 -   Connected: Clinic Service
 
@@ -67,15 +67,15 @@ Connected Care サービスのサポート プランでは、次のようなま�
 
 これらの新機能により、Connected Care サービスは、より優れた接続性、よりパーソナライズされたサポート、さまざまな顧客ニーズに対応するコスト効率の高いソリューションを提供します。
 
--   新しい**Enterprise**および**Premium**プラン: Clinic の高度な監視サービス、 TiDB Cloudアラートの IM サブスクリプション、チケット更新の IM サブスクリプション、IM での AI チャット、サポート チケットの IM 対話を通じて、最新のコミュニケーション ツールと高度な AI 機能を提供します。
+-   新しい**Enterprise**および**Premium**プラン: Clinic の高度な監視サービス、 TiDB Cloudアラートの IM サブスクリプション、チケット更新の IM サブスクリプション、IM での AI チャット、サポートチケットの IM 対話を通じて、最新のコミュニケーション ツールと高度な AI 機能を提供します。
 
--   新しい**Developer**プラン:**Basic**プランと同じコミュニティ チャネル ( [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)と[Discord](https://discord.com/invite/KVRZBR2DrG) ) と[TiDB.AI](https://tidb.ai/)サポートへのアクセスに加え、直接接続とテクニカル サポートへの無制限のアクセスが提供されます。
+-   新しい**Developer**プラン:**Basic**プランと同じコミュニティ チャネル ( [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)と[Discord](https://discord.com/invite/KVRZBR2DrG) ) と[TiDB.AI](https://tidb.ai/)サポートへのアクセスに加え、直接接続とテクニカルサポートへの無制限のアクセスが提供されます。
 
 -   新しい**Basic**プラン: コミュニティ チャネル ( [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)と[Discord](https://discord.com/invite/KVRZBR2DrG) ) に参加して他のコミュニティ メンバーと交流したり、 [TiDB.AI](https://tidb.ai/)を使用して技術サポートを受けることができます。
 
 ## Connected Careへの移行 {#transition-to-connected-care}
 
-次の表に、従来のサポート プランのシャットダウン スケジュールを示します。
+次の表に、従来のサポートプランのシャットダウン スケジュールを示します。
 
 | サポートプラン                        | シャットダウン日   |
 | :----------------------------- | :--------- |
@@ -87,7 +87,7 @@ Connected Care サービスのサポート プランでは、次のようなま�
 
 ## よくある質問 {#faqs}
 
-### 現在のサポート プランを確認または変更するにはどうすればよいですか? {#how-do-i-check-or-make-changes-to-my-current-support-plan}
+### 現在のサポートプランを確認または変更するにはどうすればよいですか? {#how-do-i-check-or-make-changes-to-my-current-support-plan}
 
 [TiDB Cloudコンソール](https://tidbcloud.com/)で、左下隅の**Support**をクリックします。**Support** ページが表示され、現在のサポートプランが**CURRENT**タグで強調表示されます。
 
@@ -97,6 +97,6 @@ Connected Care サービスのサポート プランでは、次のようなま�
 
 新しいConnected Careサービスは、より包括的で豊富な機能を備えたサポートエクスペリエンスを提供しますが、価格は従来のサービスとほぼ同等です。TiDB Cloudは、お客様のビジネスをより良くサポートするために、付加価値の提供に引き続き尽力してまいります。
 
-### 従来の**Basic**プランが終了した後、テクニカル サポートを受けるにはどうすればよいですか? {#how-can-i-get-technical-support-after-the-legacy-basic-plan-shuts-down}
+### 従来の**Basic**プランが終了した後、テクニカルサポートを受けるにはどうすればよいですか? {#how-can-i-get-technical-support-after-the-legacy-basic-plan-shuts-down}
 
 [請求とアカウントサポート](/tidb-cloud/tidb-cloud-support.md#create-an-account-or-billing-support-ticket)には引き続きアクセスできます。テクニカルサポートをご希望の場合は、Connected Care サービスのサポートプランのご購入をご検討ください。1ヶ月の無料トライアルが含まれる**Developer**プランから始めることをお勧めします。

@@ -143,8 +143,7 @@ AWS コンソールでアクセスキーを作成します。詳細について�
 
 2.  右上にあるナビゲーションバーでユーザー名を選択し、 **My Security Credentials**をクリックします。
 
-3.  アクセスキーを作成するには、 **Create access key**をクリックします。次に、 **Download .csv file**を選択して、アクセスキー ID とシークレット アクセスキーをコンピュータの CSV ファイルに保存します。このファイルは安全な場所に保存してください。このダイアログボックスを閉じると、シークレット アクセスキーには再度アクセスできなくなります。CSV ファイルをダウンロードしたら、 **閉じる**を選択します。アクセスキーを作成すると、キー ペアはデフォルトで有効になり、すぐに使用できます。
-
+3.  アクセスキーを作成するには、 **Create access key**をクリックします。次に、 **Download .csv file**を選択して、アクセスキー ID とシークレットアクセスキーをコンピュータの CSV ファイルに保存します。このファイルは安全な場所に保存してください。このダイアログボックスを閉じると、シークレットアクセスキーには再度アクセスできなくなります。CSV ファイルをダウンロードしたら、 **閉じる**を選択します。アクセスキーを作成すると、キーペアはデフォルトで有効になり、すぐに使用できます。
     ![Create access key](/media/tidb-cloud/op-to-cloud-create-access-key01.png)
 
     ![Download CSV file](/media/tidb-cloud/op-to-cloud-create-access-key02.png)
@@ -220,7 +219,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
 #### IAMロールを手動で作成する（オプション） {#manually-create-the-iam-role-optional}
 
-組織がCloudFormationスタックをデプロイできない場合は、アクセス ポリシーとIAMロールを手動で作成してください。
+組織がCloudFormationスタックをデプロイできない場合は、アクセスポリシーとIAMロールを手動で作成してください。
 
 1.  AWS IAMで、バケット（および該当する場合はKMSキー）に対して以下の操作を許可するポリシーを作成します。
 
@@ -303,7 +302,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
     -   `--pd` : アップストリームクラスタのPDアドレス。形式は`[upstream_pd_ip]:[pd_port]`です。
 
-    -   `--sink-uri` : レプリケーション タスクのダウンストリーム アドレス。 `--sink-uri`は、次の形式に従って構成します。現在、このスキームは`mysql` 、 `tidb` 、 `kafka` 、 `s3` 、および`local` 。
+    -   `--sink-uri` : レプリケーションタスクのダウンストリーム アドレス。 `--sink-uri`は、次の形式に従って構成します。現在、このスキームは`mysql` 、 `tidb` 、 `kafka` 、 `s3` 、および`local` 。
 
         ```shell
         [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]

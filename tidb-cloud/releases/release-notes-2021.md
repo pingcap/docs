@@ -1,11 +1,11 @@
 ---
 title: TiDB Cloud Release Notes in 2021
-summary: 2021 年のTiDB Cloudのリリース ノートについて説明します。
+summary: 2021 年のTiDB Cloudのリリースノートについて説明します。
 ---
 
 # 2021年のTiDB Cloudリリースノート {#tidb-cloud-release-notes-in-2021}
 
-このページには、2021 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
+このページには、2021 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが記載されています。
 
 ## 2021年12月28日 {#december-28-2021}
 

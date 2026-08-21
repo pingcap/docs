@@ -5,7 +5,7 @@ summary: ticloud serverless export cancel` の参照。
 
 # ticloud serverless export cancel {#ticloud-serverless-export-cancel}
 
-データ エクスポート タスクをキャンセルします。
+データエクスポート タスクをキャンセルします。
 
 ```shell
 ticloud serverless export cancel [flags]

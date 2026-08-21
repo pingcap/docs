@@ -128,7 +128,7 @@ TiDBは、ユーザーがTiDBにログインするための証明書ベースの
 
 サーバーの鍵と証明書を生成したら、クライアント用の鍵と証明書を生成する必要があります。多くの場合、ユーザーごとに異なる鍵と証明書を生成する必要があります。
 
-1.  次のコマンドを実行してクライアント キーを生成します。
+1.  次のコマンドを実行してクライアントキーを生成します。
 
     ```bash
     sudo openssl req -newkey rsa:2048 -days 365000 -nodes -keyout client-key.pem -out client-req.pem
@@ -219,9 +219,9 @@ TiDBを起動し、ログを確認します。ログに以下の情報が表示�
 
 ### クライアント証明書を使用するようにクライアントを構成する {#configure-the-client-to-use-client-certificate}
 
-クライアントがログインにクライアント キーと証明書を使用するようにクライアントを構成します。
+クライアントがログインにクライアントキーと証明書を使用するようにクライアントを構成します。
 
-MySQL クライアントを例にとると、 `ssl-cert` 、 `ssl-key` 、 `ssl-ca`を指定して、新しく作成されたクライアント証明書、クライアント キー、および CA を使用できます。
+MySQL クライアントを例にとると、 `ssl-cert` 、 `ssl-key` 、 `ssl-ca`を指定して、新しく作成されたクライアント証明書、クライアントキー、および CA を使用できます。
 
 ```bash
 mysql -u test -h 0.0.0.0 -P 4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key /path/to/client-key.new.pem --ssl-ca /path/to/ca-cert.pem
@@ -414,7 +414,7 @@ CA証明書は、クライアントとサーバー間の相互検証の基盤と
     sudo openssl x509 -req -in client-req.new.pem -days 365000 -CA ca-cert.pem -CAkey ca-key.pem -set_serial 01 -out client-cert.new.pem
     ```
 
-3.  新しいクライアント キーと証明書を使用して、クライアント (MySQL など) を TiDB に接続します。
+3.  新しいクライアントキーと証明書を使用して、クライアント (MySQL など) を TiDB に接続します。
 
     ```bash
     mysql -u test -h 0.0.0.0 -P 4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key /path/to/client-key.new.pem --ssl-ca /path/to/ca-cert.pem

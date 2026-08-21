@@ -27,7 +27,7 @@ TiDB Lightning は次のソースからデータを読み取ることができ�
 
 ![Architecture of TiDB Lightning tool set](/media/tidb-lightning-architecture.png)
 
-TiDB Lightning は、 `backend`で設定された 2 つのインポート モードをサポートしています。インポート モードによって、TiDB へのデータのインポート方法が決まります。
+TiDB Lightning は、 `backend`で設定された 2 つのインポートモードをサポートしています。インポートモードによって、TiDB へのデータのインポート方法が決まります。
 
 -   [物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md) : TiDB Lightningは、まずデータをキーと値のペアにエンコードし、ローカルの一時ディレクトリに保存します。次に、これらのキーと値のペアを各TiKVノードにアップロードし、最後にTiKV 取り込みインターフェースを呼び出してTiKVのRocksDBにデータを挿入します。初期インポートを実行する必要がある場合は、インポート速度が速い物理インポートモードを検討してください。物理インポートモードのバックエンドは`local`です。
 
@@ -41,7 +41,7 @@ TiDB Lightning は、 `backend`で設定された 2 つのインポート モー
 | ネットワーク帯域幅の消費                   | 高い                                                                           | 低い              |
 | インポート時のACID準拠                  | いいえ                                                                          | はい              |
 | ターゲットテーブル                      | 空でなければなりません                                                                  | データを含むことができる    |
-| TiDB クラスタ バージョン                | = 4.0.0                                                                      | 全て              |
+| TiDB クラスタバージョン                | = 4.0.0                                                                      | 全て              |
 | TiDBクラスタがインポート中にサービスを提供できるかどうか | [限定サービス](/tidb-lightning/tidb-lightning-physical-import-mode.md#limitations) | はい              |
 
 <Note>

@@ -27,7 +27,7 @@ TiDBはv8.5 LTSにおいて、様々なオペレーティングシステムとCP
     >
     > -   [CentOS Linux サポート終了](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/)よると、CentOS Linux 7 のアップストリーム サポートは 2024 年 6 月 30 日に終了しました。
     >     -   TiDBをアップグレードする前に、オペレーティングシステムのバージョンを確認してください。TiDB v8.4.0 DMRおよびv8.5.0では、glibc 2.17のサポートが終了し、CentOS Linux 7のサポートとテストも終了しました。Rocky Linux 9.1以降のバージョンを使用することをお勧めします。CentOS 7上のTiDBクラスタをv8.4.0またはv8.5.0にアップグレードすると、クラスタが利用できなくなるリスクがあります。
-    >     -   CentOS Linux 7 をまだ使用しているユーザーを支援するために、v8.5.1 以降、TiDB は glibc 2.17 のサポートを再開し、CentOS Linux 7 のテストを再開し、CentOS Linux 7 と互換性を持つようになりました。ただし、CentOS Linux の EOL ステータスのため、CentOS Linux 7 の[公式発表およびセキュリティに関するガイダンス](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol)を確認し、Rocky Linux 9.1 や TiDB が本番用にサポートするオペレーティング システムに移行することを強くお勧めします。 後で。
+    >     -   CentOS Linux 7 をまだ使用しているユーザーを支援するために、v8.5.1 以降、TiDB は glibc 2.17 のサポートを再開し、CentOS Linux 7 のテストを再開し、CentOS Linux 7 と互換性を持つようになりました。ただし、CentOS Linux の EOL ステータスのため、CentOS Linux 7 の[公式発表およびセキュリティに関するガイダンス](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol)を確認し、Rocky Linux 9.1 や TiDB が本番用にサポートするオペレーティングシステムに移行することを強くお勧めします。 後で。
     > -   [Red Hat Enterprise Linux ライフサイクル](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates)によると、Red Hat Enterprise Linux 7 のメンテナンスサポートは 2024 年 6 月 30 日に終了しました。TiDB は、8.4 DMR バージョン以降、Red Hat Enterprise Linux 7 のサポートを終了します。Rocky Linux 9.1 以降のバージョンを使用することをお勧めします。Red Hat Enterprise Linux 7 上の TiDB クラスタを v8.4.0 以降にアップグレードすると、クラスタが使用できなくなります。TiDB をアップグレードする前に、オペレーティングシステムのバージョンを確認してください。
 
     > **Note:**

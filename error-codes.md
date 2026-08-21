@@ -1,6 +1,6 @@
 ---
 title: Error Codes and Troubleshooting
-summary: TiDB のエラー コードと解決策について学習します。
+summary: TiDB のエラーコードと解決策について学習します。
 ---
 
 # エラーコードとトラブルシューティング {#error-codes-and-troubleshooting}
@@ -15,7 +15,7 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 >
 > 一部のエラーコードは内部エラーを表します。通常、TiDBはエラーをユーザーに返すのではなく、処理するため、一部のエラーコードはここには記載されていません。
 >
-> ここに記載されていないエラー コードが発生した場合は、PingCAP またはコミュニティから[サポートを受けて](/support.md)ください。
+> ここに記載されていないエラーコードが発生した場合は、PingCAP またはコミュニティから[サポートを受けて](/support.md)ください。
 
 -   エラー番号: 8001
 
@@ -287,7 +287,7 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
 -   エラー番号: 8113
 
-    `Prepare`ステートメントの実行後、 `EXECUTE`ステートメントに関連付けられたテーブル スキーマが変更されました。
+    `Prepare`ステートメントの実行後、 `EXECUTE`ステートメントに関連付けられたテーブルスキーマが変更されました。
 
 -   エラー番号: 8115
 
@@ -485,7 +485,7 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
 -   エラー番号: 8250
 
-    完全なエラー メッセージは次のとおりです。
+    完全なエラーメッセージは次のとおりです。
 
     `ERROR 8250 (HY000) : Resource control feature is disabled. Run "SET GLOBAL tidb_enable_resource_control='on'" to enable the feature`
 
@@ -497,7 +497,7 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
 -   エラー番号: 8252
 
-    完全なエラー メッセージは次のとおりです。
+    完全なエラーメッセージは次のとおりです。
 
     `ERROR 8252 (HY000) : Exceeded resource group quota limitation`
 

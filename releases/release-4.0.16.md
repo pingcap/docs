@@ -30,7 +30,7 @@ TiDBバージョン: 4.0.16
 
 -   TiKV
 
-    -   バックアップと復元を使用してデータを復元する場合、またはTiDB Lightning のローカル バックエンドを使用してデータをインポートする場合に、zstd アルゴリズムを採用して SST ファイルを圧縮することで、ディスク領域の消費量を削減します。 [＃11469](https://github.com/tikv/tikv/issues/11469)
+    -   バックアップと復元を使用してデータを復元する場合、またはTiDB Lightning のローカルバックエンドを使用してデータをインポートする場合に、zstd アルゴリズムを採用して SST ファイルを圧縮することで、ディスク領域の消費量を削減します。 [＃11469](https://github.com/tikv/tikv/issues/11469)
 
 -   ツール
 
@@ -65,7 +65,7 @@ TiDBバージョン: 4.0.16
     -   同じパーティションを同時に切り捨てるとDDL文がスタックする問題を修正しました[＃26229](https://github.com/pingcap/tidb/issues/26229)
     -   `Decimal`を`String`に変換するときに長さ情報が間違っている問題を修正しました[＃29417](https://github.com/pingcap/tidb/issues/29417)
     -   `NATURAL JOIN`複数のテーブルを結合するために使用したときにクエリ結果に余分な列が残る問題を修正[＃29481](https://github.com/pingcap/tidb/issues/29481)
-    -   `IndexScan`プレフィックス インデックスを使用している場合に、 `TopN`が誤って`indexPlan`にプッシュダウンされる問題を修正しました。 [＃29711](https://github.com/pingcap/tidb/issues/29711)
+    -   `IndexScan`プレフィックスインデックスを使用している場合に、 `TopN`が誤って`indexPlan`にプッシュダウンされる問題を修正しました。 [＃29711](https://github.com/pingcap/tidb/issues/29711)
     -   `DOUBLE`型のAUTO_INCREMENT列でトランザクションを再試行するとデータ破損が発生する問題を修正[＃29892](https://github.com/pingcap/tidb/issues/29892)
 
 -   TiKV
@@ -101,7 +101,7 @@ TiDBバージョン: 4.0.16
         -   複数の TiKV がクラッシュした場合や強制再起動中に TiCDC レプリケーションが中断される問題を修正[＃3288](https://github.com/pingcap/tiflow/issues/3288)
         -   DDL 処理後のメモリリークの問題を修正 [＃3174](https://github.com/pingcap/tiflow/issues/3174)
         -   ErrGCTTLExceeded エラーが発生したときに changefeed が十分に速く失敗しない問題を修正しました[＃3111](https://github.com/pingcap/tiflow/issues/3111)
-        -   上流の TiDB インスタンスが予期せず終了すると、TiCDC レプリケーション タスクが終了する可能性がある問題を修正しました[＃3061](https://github.com/pingcap/tiflow/issues/3061)
+        -   上流の TiDB インスタンスが予期せず終了すると、TiCDC レプリケーションタスクが終了する可能性がある問題を修正しました[＃3061](https://github.com/pingcap/tiflow/issues/3061)
         -   TiKV が同じリージョンに重複したリクエストを送信したときに TiCDC プロセスがpanicになる可能性がある問題を修正しました。 [＃2386](https://github.com/pingcap/tiflow/issues/2386)
         -   TiCDCによって生成されるKafkaメッセージの量が`max-message-size` に制限されない問題を修正 [＃2962](https://github.com/pingcap/tiflow/issues/2962)
         -   `tikv_cdc_min_resolved_ts_no_change_for_1m`チェンジフィードがないときに警告が続く問題を修正[＃11017](https://github.com/tikv/tikv/issues/11017)

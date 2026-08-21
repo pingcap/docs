@@ -1,13 +1,13 @@
 ---
 title: Interaction Test on Online Workloads and `ADD INDEX` Operations
-summary: このドキュメントでは、オンライン ワークロードと ADD INDEX` 操作間の相互作用効果をテストします。
+summary: このドキュメントでは、オンラインワークロードと ADD INDEX` 操作間の相互作用効果をテストします。
 ---
 
 # オンラインワークロードと`ADD INDEX`操作のインタラクションテスト {#interaction-test-on-online-workloads-and-add-index-operations}
 
 ## テスト目的 {#test-purpose}
 
-このドキュメントでは、OLTP シナリオにおけるオンライン ワークロードと`ADD INDEX`操作間の相互作用効果をテストします。
+このドキュメントでは、OLTP シナリオにおけるオンラインワークロードと`ADD INDEX`操作間の相互作用効果をテストします。
 
 ## テストバージョン、時間、場所 {#test-version-time-and-place}
 
@@ -274,7 +274,7 @@ sysbench $testname \
 
 ### テストの結論 {#test-conclusion}
 
-`ADD INDEX`のステートメントのターゲット列に対してのみクエリ操作を実行する場合、 `ADD INDEX`操作がオンライン ワークロードに与える影響は明らかではありません。
+`ADD INDEX`のステートメントのターゲット列に対してのみクエリ操作を実行する場合、 `ADD INDEX`操作がオンラインワークロードに与える影響は明らかではありません。
 
 ## テストプラン3: `ADD INDEX`文のターゲット列はオンラインワークロードとは無関係です {#test-plan-3-the-target-column-of-the-add-index-statement-is-irrelevant-to-online-workloads}
 
@@ -336,9 +336,9 @@ sysbench $testname \
 
 ### テストの結論 {#test-conclusion}
 
-`ADD INDEX`のステートメントのターゲット列がオンライン ワークロードに関係ない場合、 `ADD INDEX`の操作がワークロードに与える影響は明らかではありません。
+`ADD INDEX`のステートメントのターゲット列がオンラインワークロードに関係ない場合、 `ADD INDEX`の操作がワークロードに与える影響は明らかではありません。
 
 ## まとめ {#summary}
 
 -   `ADD INDEX`ステートメントの対象列に対して、書き込み操作（ `INSERT` `DELETE`操作を含む）を頻繁に実行すると、デフォルトの`ADD INDEX` `UPDATE`では比較的頻繁に書き込み競合が発生し、オンラインワークロードに大きな影響を与えます。同時に、 `ADD INDEX`操作は継続的な再試行により完了までに長い時間がかかります。このテストでは、 `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`の積をデフォルト値の1/32に変更できます。例えば、 `tidb_ddl_reorg_worker_cnt`を`4`に、 `tidb_ddl_reorg_batch_size`を`256`に設定すると、パフォーマンスが向上します。
--   `ADD INDEX`ステートメントのターゲット列に対してのみクエリ操作を実行する場合、またはターゲット列がオンライン ワークロードに直接関連していない場合は、デフォルトの`ADD INDEX`構成を使用できます。
+-   `ADD INDEX`ステートメントのターゲット列に対してのみクエリ操作を実行する場合、またはターゲット列がオンラインワークロードに直接関連していない場合は、デフォルトの`ADD INDEX`構成を使用できます。

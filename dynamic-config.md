@@ -113,7 +113,7 @@ show warnings;
 
 | コンフィグレーション項目                                              | 説明                                                                                                                                         |
 | :-------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
-| ログレベル                                                     | ログ レベル。                                                                                                                                    |
+| ログレベル                                                     | ログレベル。                                                                                                                                    |
 | `raftstore.raft-max-inflight-msgs`                        | 確認するRaftログの数。この数を超えると、 Raftステートマシンはログの送信速度を低下させます。                                                                                         |
 | `raftstore.raft-log-gc-tick-interval`                     | Raftログを削除するポーリングタスクがスケジュールされる時間間隔                                                                                                          |
 | `raftstore.raft-log-gc-threshold`                         | 残存Raftログの最大許容数に関するソフト制限                                                                                                                    |
@@ -143,15 +143,15 @@ show warnings;
 | `raftstore.local-read-batch-size`                         | 1バッチで処理される読み取り要求の最大数                                                                                                                       |
 | `raftstore.apply-yield-write-size`                        | 適用スレッドが各ラウンドで1つのFSM（有限状態機械）に書き込むことができる最大バイト数                                                                                               |
 | `raftstore.hibernate-timeout`                             | 起動時に休止状態に入るまでの最短待機時間。この時間内は、TiKV は休止状態になりません（解放されません）。                                                                                     |
-| `raftstore.apply-pool-size`                               | ディスクにデータをフラッシュするプール内のスレッドの数。これは適用スレッド プールのサイズです。                                                                                           |
+| `raftstore.apply-pool-size`                               | ディスクにデータをフラッシュするプール内のスレッドの数。これは適用スレッドプールのサイズです。                                                                                           |
 | `raftstore.store-pool-size`                               | Raftを処理するプール内のスレッドの数。これはRaftstoreスレッドプールのサイズです。                                                                                            |
 | `raftstore.apply-max-batch-size`                          | Raftステートマシンは、BatchSystemによってデータ書き込みリクエストをバッチ処理します。この設定項目は、1バッチでリクエストを実行できるRaftステートマシンの最大数を指定します。                                           |
 | `raftstore.store-max-batch-size`                          | Raftステートマシンは、BatchSystemによってログをディスクにフラッシュするリクエストをバッチ処理します。この設定項目は、1回のバッチでリクエストを処理できるRaftステートマシンの最大数を指定します。                                 |
-| `raftstore.store-io-pool-size`                            | Raft I/Oタスクを処理するスレッドの数。これは StoreWriter スレッド プールのサイズでもあります (この値を 0 以外の値から 0 に、または 0 から 0 以外の値に変更**しないでください**)                               |
+| `raftstore.store-io-pool-size`                            | Raft I/Oタスクを処理するスレッドの数。これは StoreWriter スレッドプールのサイズでもあります (この値を 0 以外の値から 0 に、または 0 から 0 以外の値に変更**しないでください**)                               |
 | `raftstore.periodic-full-compact-start-max-cpu`           | 完全圧縮が有効な場合に TiKV が定期的に完全圧縮を実行する CPU 使用率のしきい値                                                                                               |
-| `readpool.unified.max-thread-count`                       | 読み取り要求を均一に処理するスレッド プール内のスレッドの最大数。これは UnifyReadPool スレッド プールのサイズです。                                                                         |
+| `readpool.unified.max-thread-count`                       | 読み取り要求を均一に処理するスレッドプール内のスレッドの最大数。これは UnifyReadPool スレッドプールのサイズです。                                                                         |
 | `readpool.unified.max-tasks-per-worker`                   | 統合読み取りプール内の 1 つのスレッドに許可されるタスクの最大数。値を超えると`Server Is Busy`エラーが返されます。                                                                         |
-| `readpool.unified.auto-adjust-pool-size`                  | UnifyReadPool スレッド プールのサイズを自動的に調整するかどうかを決定します                                                                                              |
+| `readpool.unified.auto-adjust-pool-size`                  | UnifyReadPool スレッドプールのサイズを自動的に調整するかどうかを決定します                                                                                              |
 | `resource-control.priority-ctl-strategy`                  | 低優先度タスクのフロー制御戦略を構成します。                                                                                                                     |
 | `coprocessor.split-region-on-table`                       | テーブルごとにリージョンを分割できます                                                                                                                        |
 | `coprocessor.batch-split-limit`                           | バッチでのリージョン分割のしきい値                                                                                                                          |

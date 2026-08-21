@@ -25,7 +25,7 @@ TiDB バージョン: 6.5.1
 
 -   TiKV [`advance-ts-interval`](/tikv-configuration-file.md#advance-ts-interval)設定項目のデフォルト値が`1s`から`20s`に変更されました。この設定項目を変更することで、レイテンシーを短縮し、 ステイル読み取りデータの適時性を向上させることができます。詳細は[ステイル読み取りのレイテンシーを削減](/stale-read.md#reduce-stale-read-latency)ご覧ください。
 
--   ネットワーク トラフィックを削減するために、TiKV [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)構成項目の既定値が`"200ms"`から`"1s"`に変更されました。
+-   ネットワークトラフィックを削減するために、TiKV [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)構成項目の既定値が`"200ms"`から`"1s"`に変更されました。
 
 ## 改善点 {#improvements}
 
@@ -104,7 +104,7 @@ TiDB バージョン: 6.5.1
     -   `cop`の上限同時実行数が制限されない問題を修正 [＃41134](https://github.com/pingcap/tidb/issues/41134) @[you06](https://github.com/you06)
     -   `cursor read`分の`statement context`が誤ってキャッシュされる問題を修正 [＃39998](https://github.com/pingcap/tidb/issues/39998) @[zyguan](https://github.com/zyguan)
     -   メモリリークとパフォーマンスの低下を防ぐため、古くなったリージョンキャッシュを定期的にクリーンアップします[＃40355](https://github.com/pingcap/tidb/issues/40355) @[sticnarf](https://github.com/sticnarf)
-    -   `year <cmp> const`含むクエリでプラン キャッシュを使用すると間違った結果が返される可能性がある問題を修正しました [＃41626](https://github.com/pingcap/tidb/issues/41626) @[qw4990](https://github.com/qw4990)
+    -   `year <cmp> const`含むクエリでプランキャッシュを使用すると間違った結果が返される可能性がある問題を修正しました [＃41626](https://github.com/pingcap/tidb/issues/41626) @[qw4990](https://github.com/qw4990)
     -   大きな範囲と大量のデータ変更を伴うクエリを実行するときに大きな推定エラーが発生する問題を修正[＃39593](https://github.com/pingcap/tidb/issues/39593) @[time-and-fate](https://github.com/time-and-fate)
     -   Plan Cache の使用時に、一部の条件が Join 演算子を通じてプッシュダウンできない問題を修正しました。 [＃38205](https://github.com/pingcap/tidb/issues/38205) @[qw4990](https://github.com/qw4990) [＃40093](https://github.com/pingcap/tidb/issues/40093)
     -   IndexMerge プランが SET 型の列 に誤った範囲を生成する可能性がある問題を修正しました [＃41293](https://github.com/pingcap/tidb/issues/41293) @[time-and-fate](https://github.com/time-and-fate) [＃41273](https://github.com/pingcap/tidb/issues/41273)
@@ -162,7 +162,7 @@ TiDB バージョン: 6.5.1
         -   ログバックアップが実行中のクラスタにデータを復元すると、ログバックアップファイルが復元できなくなる問題を修正[＃40797](https://github.com/pingcap/tidb/issues/40797) @[Leavrth](https://github.com/Leavrth)
         -   完全バックアップの失敗後にチェックポイントからバックアップを再開しようとしたときに発生するpanicの問題を修正[＃40704](https://github.com/pingcap/tidb/issues/40704) @[Leavrth](https://github.com/Leavrth)
         -   PITRエラーが上書きされる問題を修正 [＃40576](https://github.com/pingcap/tidb/issues/40576) @[Leavrth](https://github.com/Leavrth)
-        -   PITR バックアップ タスクで、先行所有者と GC 所有者が異なる場合にチェックポイントが進まない問題を修正しました[＃41806](https://github.com/pingcap/tidb/issues/41806) @[joccau](https://github.com/joccau)
+        -   PITR バックアップタスクで、先行所有者と GC 所有者が異なる場合にチェックポイントが進まない問題を修正しました[＃41806](https://github.com/pingcap/tidb/issues/41806) @[joccau](https://github.com/joccau)
 
     -   TiCDC
 

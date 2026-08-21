@@ -49,7 +49,7 @@ TiDB バージョン: 5.2.2
     -   プランナーが`join`の無効なプランをキャッシュする可能性がある問題を修正しました[＃28087](https://github.com/pingcap/tidb/issues/28087)
     -   ハッシュ列の型が列挙型場合の間違ったインデックス ハッシュ結合を修正しました [＃27893](https://github.com/pingcap/tidb/issues/27893)
     -   アイドル接続をリサイクルすると、まれにリクエストの送信がブロックされる可能性があるバッチクライアントのバグを修正しました[＃27688](https://github.com/pingcap/tidb/pull/27688)
-    -   ターゲット クラスタでチェックサムの実行に失敗した場合のTiDB Lightning panic問題を修正しました。 [＃27686](https://github.com/pingcap/tidb/pull/27686)
+    -   ターゲットクラスタでチェックサムの実行に失敗した場合のTiDB Lightning panic問題を修正しました。 [＃27686](https://github.com/pingcap/tidb/pull/27686)
     -   いくつかのケースで`date_add`と`date_sub`関数の誤った結果を修正[＃27232](https://github.com/pingcap/tidb/issues/27232)
     -   ベクトル化された式の関数`hour`の誤った結果を修正します [＃28643](https://github.com/pingcap/tidb/issues/28643)
     -   MySQL 5.1またはそれ以前のクライアントバージョンに接続する際の認証問題を修正 [＃27855](https://github.com/pingcap/tidb/issues/27855)
@@ -85,7 +85,7 @@ TiDB バージョン: 5.2.2
     -   Raftクライアント実装でバッチメッセージが大きすぎる問題を修正 [＃9714](https://github.com/tikv/tikv/issues/9714)
     -   `resolved_ts` で一部のコルーチンがリークする問題を修正 [＃10965](https://github.com/tikv/tikv/issues/10965)
     -   応答サイズが4GiBを超えるとコプロセッサに発生するpanic問題を修正[＃9012](https://github.com/tikv/tikv/issues/9012)
-    -   スナップショット ファイルがガベージ コレクションできない場合に、スナップショット ガベージ コレクション (GC) で GC スナップショット ファイルが失われる問題を修正しました[＃10813](https://github.com/tikv/tikv/issues/10813)
+    -   スナップショットファイルがガベージコレクションできない場合に、スナップショット ガベージコレクション (GC) で GC スナップショットファイルが失われる問題を修正しました[＃10813](https://github.com/tikv/tikv/issues/10813)
     -   コプロセッサー要求の処理中にタイムアウトによって発生するpanic問題を修正[＃10852](https://github.com/tikv/tikv/issues/10852)
 
 -   PD
@@ -104,7 +104,7 @@ TiDB バージョン: 5.2.2
 -   ツール
 
     -   TiCDC
-        -   上流の TiDB インスタンスが予期せず終了すると、TiCDC レプリケーション タスクが終了する可能性がある問題を修正しました[＃3061](https://github.com/pingcap/tiflow/issues/3061)
+        -   上流の TiDB インスタンスが予期せず終了すると、TiCDC レプリケーションタスクが終了する可能性がある問題を修正しました[＃3061](https://github.com/pingcap/tiflow/issues/3061)
         -   TiKVが同じリージョンに重複したリクエストを送信した場合にTiCDCプロセスがpanicする可能性がある問題を修正しました [＃2386](https://github.com/pingcap/tiflow/issues/2386)
         -   下流の TiDB/MySQL の可用性を検証する際の不要な CPU 消費を修正[＃3073](https://github.com/pingcap/tiflow/issues/3073)
         -   TiCDCによって生成されるKafkaメッセージの量が`max-message-size` に制限されない問題を修正 [＃2962](https://github.com/pingcap/tiflow/issues/2962)

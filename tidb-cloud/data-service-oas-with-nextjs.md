@@ -45,7 +45,7 @@ VALUES ('tidb', 'https://github.com/pingcap/tidb'),
 
 ## ステップ2. データアプリを作成する {#step-2-create-a-data-app}
 
-データ挿入後、 [TiDB Cloudコンソール](https://tidbcloud.com)の[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。 TiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターにリンクするデータ アプリを作成し、データ アプリの API キーを作成してから、データ アプリに`GET /repositories`エンドポイントを作成します。このエンドポイントに対応する SQL ステートメントは次のとおりです。これは`test.repository`テーブルからすべての行を取得します。
+データ挿入後、 [TiDB Cloudコンソール](https://tidbcloud.com)の[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。 TiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターにリンクするデータアプリを作成し、データアプリの API キーを作成してから、データアプリに`GET /repositories`エンドポイントを作成します。このエンドポイントに対応する SQL ステートメントは次のとおりです。これは`test.repository`テーブルからすべての行を取得します。
 
 ```sql
 SELECT * FROM test.repository;
@@ -73,7 +73,7 @@ SELECT * FROM test.repository;
 
 2.  依存関係をインストールします。
 
-    このドキュメントでは[OpenAPIジェネレーター](https://github.com/OpenAPITools/openapi-generator)を使用して、OpenAPI 仕様から API クライアント ライブラリを自動的に生成します。
+    このドキュメントでは[OpenAPIジェネレーター](https://github.com/OpenAPITools/openapi-generator)を使用して、OpenAPI 仕様から API クライアントライブラリを自動的に生成します。
 
     OpenAPI Generatorを開発依存関係としてインストールするには、次のコマンドを実行します。
 
@@ -152,7 +152,7 @@ SELECT * FROM test.repository;
     TIDBCLOUD_DATA_SERVICE_PRIVATE_KEY=YOUR_PRIVATE_KEY
     ```
 
-    データ アプリの API キーを作成するには、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
+    データアプリの API キーを作成するには、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
 
 2.  `hello-repos`プロジェクトディレクトリで、 `app/page.tsx`の内容を、 `GET /repositories`エンドポイントからデータを取得して表示する以下のコードに置き換えてください。
 

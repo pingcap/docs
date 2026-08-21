@@ -5,14 +5,13 @@ summary: TiDB Cloudコンソールでデータベースユーザーとロール�
 
 # データベースのユーザーと役割を管理する {#manage-database-users-and-roles}
 
-このドキュメントでは[TiDB Cloudコンソール](https://tidbcloud.com/)の**SQL Users**ページを使用してデータベース ユーザーとロールを管理する方法について説明します。
+このドキュメントでは[TiDB Cloudコンソール](https://tidbcloud.com/)の**SQL Users**ページを使用してデータベースユーザーとロールを管理する方法について説明します。
 
 > **Note:**
 >
 > -   **SQL Users**ページはパブリックプレビューであり、リクエストがあった場合のみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)**？**をクリックし、**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **Description**フィールドに「SQLユーザーページの申請」と入力して、 **Submit**をクリックします。
-> -   データベースのユーザーと役割[組織およびプロジェクトのユーザーと役割](/tidb-cloud/manage-user-access.md)から独立しています。データベース ユーザーは TiDB クラスター内のデータベースにアクセスするために使用され、組織およびプロジェクト ユーザーは[TiDB Cloudコンソール](https://tidbcloud.com/)内の組織およびプロジェクトにアクセスするために使用されます。
-> -   **SQL Users**ページに加えて、SQL クライアントを使用してクラスターに接続し、SQL ステートメントを作成することによって、データベース ユーザーとロールを管理することもできます。詳細については、 [TiDBユーザーアカウント管理](https://docs.pingcap.com/tidb/dev/user-account-management)を参照してください。
-
+> -   データベースのユーザーと役割[組織およびプロジェクトのユーザーと役割](/tidb-cloud/manage-user-access.md)から独立しています。データベースユーザーは TiDB クラスター内のデータベースにアクセスするために使用され、組織およびプロジェクト ユーザーは[TiDB Cloudコンソール](https://tidbcloud.com/)内の組織およびプロジェクトにアクセスするために使用されます。
+> -   **SQL Users**ページに加えて、SQL クライアントを使用してクラスターに接続し、SQL ステートメントを作成することによって、データベースユーザーとロールを管理することもできます。詳細については、 [TiDBユーザーアカウント管理](https://docs.pingcap.com/tidb/dev/user-account-management)を参照してください。
 ## データベースユーザーの役割 {#roles-of-database-users}
 
 TiDB Cloudでは、ロールベースのアクセス制御のために、組み込みロールと複数のカスタムロール（利用可能な場合）の両方をSQLユーザーに付与できます。
@@ -33,7 +32,7 @@ SQLユーザーに組み込みロールと複数のカスタムロールの両�
 
 ## 前提条件 {#prerequisites}
 
--   **SQL Users**ページを使用してデータベース ユーザーとロールを管理するには、組織の`Organization Owner`ロール、またはプロジェクトの`Project Owner`ロールに属している必要があります。
+-   **SQL Users**ページを使用してデータベースユーザーとロールを管理するには、組織の`Organization Owner`ロール、またはプロジェクトの`Project Owner`ロールに属している必要があります。
 -   プロジェクトの`Project Data Access Read-Write`または`Project Data Access Read-Only`ロールに属している場合、データベースユーザーはそのプロジェクトの**SQL Users**ページでのみ表示できます。
 
 ## SQLユーザーを確認する {#view-sql-users}

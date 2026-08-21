@@ -21,7 +21,7 @@ TiDBクラスターをデプロイすると、ユーザーデータの大部分�
 
 TiKVは保存時の暗号化をサポートしています。この機能により、TiKVは[AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)または[SM4](https://en.wikipedia.org/wiki/SM4_(cipher)) in [CTR](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation)モードを使用してデータファイルを透過的に暗号化できます。保存時の暗号化を有効にするには、ユーザーが暗号化キーを提供する必要があります。このキーはマスターキーと呼ばれます。TiKVは、実際のデータファイルの暗号化に使用したデータキーを自動的にローテーションします。マスターキーは手動で随時ローテーションできます。保存時の暗号化は、保存中のデータ（つまりディスク上）のみを暗号化し、ネットワーク経由で転送中のデータは暗号化しないことに注意してください。保存時の暗号化とTLSを併用することをお勧めします。
 
-クラウド展開とセルフホスト展開の両方でキー管理サービス (KMS) を使用することも、プレーンテキストのマスター キーをファイルで提供することもできます。
+クラウド展開とセルフホスト展開の両方でキー管理サービス (KMS) を使用することも、プレーンテキストのマスターキーをファイルで提供することもできます。
 
 TiKVは現在、コアダンプから暗号鍵とユーザーデータを除外していません。保存時の暗号化を使用する場合は、TiKVプロセスのコアダンプを無効にすることをお勧めします。これは現在、TiKV自体では処理されていません。
 
@@ -84,7 +84,7 @@ data-key-rotation-period = "168h" # 7 days
 
 -   `data-key-rotation-period`は、TiKV がキーをローテーションする頻度を指定します。
 
-暗号化が有効になっている場合（つまり、 `data-encryption-method`の値が`"plaintext"`ではない場合）、次のいずれかの方法でマスター キーを指定する必要があります。
+暗号化が有効になっている場合（つまり、 `data-encryption-method`の値が`"plaintext"`ではない場合）、次のいずれかの方法でマスターキーを指定する必要があります。
 
 -   [KMS経由でマスターキーを指定する](#specify-a-master-key-via-kms)
 -   [ファイル経由でマスターキーを指定する](#specify-a-master-key-via-a-file)
@@ -158,7 +158,7 @@ gcloud kms keys create "key-name" --keyring "key-ring-name" --location "global" 
 
 **ステップ2. マスターキーを設定する**
 
-Google Cloud KMS を使用してマスター キーを指定するには、 `[security.encryption]`セクションの後に`[security.encryption.master-key]`構成を追加します。
+Google Cloud KMS を使用してマスターキーを指定するには、 `[security.encryption]`セクションの後に`[security.encryption.master-key]`構成を追加します。
 
 ```
 [security.encryption.master-key]
@@ -198,7 +198,7 @@ Azure でキーを作成するには、 [Azure ポータルを使用して Azure
 
 **ステップ2. マスターキーを設定する**
 
-Azure KMS を使用してマスター キーを指定するには、TiKV 構成ファイルの`[security.encryption]`セクションの後に`[security.encryption.master-key]`構成を追加します。
+Azure KMS を使用してマスターキーを指定するには、TiKV 構成ファイルの`[security.encryption]`セクションの後に`[security.encryption.master-key]`構成を追加します。
 
 ```
 [security.encryption.master-key]
@@ -228,7 +228,7 @@ client_secret = ""
 
 #### ファイル経由でマスターキーを指定する {#specify-a-master-key-via-a-file}
 
-ファイルに保存されているマスター キーを指定する場合、マスター キーの構成は次のようになります。
+ファイルに保存されているマスターキーを指定する場合、マスターキーの構成は次のようになります。
 
 ```
 [security.encryption.master-key]
@@ -269,7 +269,7 @@ TiKVをGrafanaでデプロイしている場合は、保存時の暗号化を監
 -   暗号化の初期化: TiKV起動時に暗号化が初期化された場合は1、それ以外の場合は0。マスターキーのローテーションの場合、暗号化が初期化された後は、TiKVは以前のマスターキーにアクセスする必要はありません。
 -   暗号化データキー：既存のデータキーの数。データキーのローテーションが発生するたびに、この数は1ずつ増加します。この指標を使用して、データキーのローテーションが期待どおりに機能しているかどうかを監視します。
 -   暗号化ファイル: 現在存在する暗号化データファイルの数。この数とデータディレクトリ内の既存のデータファイル数を比較することで、暗号化されていないクラスタの暗号化を有効にする際に、暗号化されるデータの量を推定できます。
--   暗号化メタファイル サイズ: 暗号化メタデータ ファイルのサイズ。
+-   暗号化メタファイルサイズ: 暗号化メタデータファイルのサイズ。
 -   読み取り/書き込み暗号化メタ期間: 暗号化のメタデータを操作するための追加のオーバーヘッド。
 
 デバッグのために、 `tikv-ctl`コマンドを使用すると、ファイルの暗号化に使用された暗号化方式やデータキーID、データキーのリストなどの暗号化メタデータをダンプできます。この操作により機密データが漏洩する可能性があるため、本番での使用は推奨されません。[TiKV Control](/tikv-control.md#dump-encryption-metadata)ドキュメントを参照してください。
@@ -348,7 +348,7 @@ server_configs:
 
 上記の設定項目の意味は TiKV と同じです。
 
-ファイルに保存されているマスター キーを指定するには、 `tiflash-learner.toml`構成ファイルに次の構成を追加します。
+ファイルに保存されているマスターキーを指定するには、 `tiflash-learner.toml`構成ファイルに次の構成を追加します。
 
 ```
 [security.encryption.master-key]
@@ -434,7 +434,7 @@ BRを使用して Azure Blob Storage にデータをバックアップする場�
 
 ### 方法1: 暗号化スコープを使用する {#method-1-use-an-encryption-scope}
 
-バックアップ データの暗号化範囲を指定するには、次の 2 つの方法のいずれかを使用できます。
+バックアップデータの暗号化範囲を指定するには、次の 2 つの方法のいずれかを使用できます。
 
 -   `backup`コマンドに`--azblob.encryption-scope`オプションを含め、スコープ名に設定します。
 
@@ -458,7 +458,7 @@ tiup br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>"
 
 ### 方法2: 暗号化キーを使用する {#method-2-use-an-encryption-key}
 
-バックアップ データの暗号化キーを指定するには、次の 3 つの方法のいずれかを使用できます。
+バックアップデータの暗号化キーを指定するには、次の 3 つの方法のいずれかを使用できます。
 
 -   `backup`コマンドに`--azblob.encryption-key`オプションを含め、AES256 暗号化キーを設定します。
 

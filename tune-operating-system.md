@@ -1,6 +1,6 @@
 ---
 title: Tune Operating System Performance
-summary: オペレーティング システムのパラメータを調整する方法を学びます。
+summary: オペレーティングシステムのパラメータを調整する方法を学びます。
 ---
 
 # オペレーティングシステムのパフォーマンスを調整する {#tune-operating-system-performance}
@@ -43,7 +43,7 @@ CentOS 7.6以降、LinuxカーネルはBerkeley Packet Filter（BPF）をサポ�
 
 ## パフォーマンスチューニング {#performance-tuning}
 
-このセクションでは、分類されたカーネル サブシステムに基づいたパフォーマンス チューニングについて説明します。
+このセクションでは、分類されたカーネル サブシステムに基づいたパフォーマンスチューニングについて説明します。
 
 ### CPU—周波数スケーリング {#cpufrequency-scaling}
 
@@ -79,7 +79,7 @@ grubby --update-kernel="$KERNEL" --args='transparent_hugepage=never'
 
 ### ストレージとファイルシステム {#storage-and-file-system}
 
-コア I/O スタック リンクは、ファイル システムレイヤー、ブロック デバイスレイヤー、およびドライバーレイヤーを含めて長くなります。
+コア I/O スタック リンクは、ファイルシステムレイヤー、ブロック デバイスレイヤー、およびドライバーレイヤーを含めて長くなります。
 
 #### I/Oスケジューラ {#io-scheduler}
 

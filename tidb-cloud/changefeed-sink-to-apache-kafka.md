@@ -62,9 +62,9 @@ Apache Kafkaにデータをストリーミングするためのチェンジフ�
 
 TiDB Cloud は現在、セルフホスト型 Kafka のプライベート接続のみをサポートしています。 MSK、Confluent Kafka、またはその他の Kafka SaaS サービスとの直接統合はサポートされていません。 Private Connect 経由でこれらの Kafka SaaS サービスに接続するには、 [kafka-proxy](https://github.com/grepplabs/kafka-proxy)を仲介としてデプロイし、Kafka サービスを自己ホスト型 Kafka として効果的に公開できます。詳細な例については、 [Google Cloud で Kafka-proxy を使用して自己ホスト型 Kafka プライベートサービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy)を参照してください。この設定は、すべての Kafka SaaS サービスで同様です。
 
--   Apache Kafka サービスが AWS でホストされている場合は、 [AWSでセルフホスト型のKafkaプライベートリンクサービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)セットアップする」に従ってネットワーク接続を構成し、**Bootstrap Ports**情報を取得します。次に[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)ポイントを設定する」に従ってプライベート エンドポイントを作成します。
--   Apache Kafka サービスが Google Cloud でホストされている場合は、 [Google Cloud でセルフホスト型の Kafka プライベートサービスコネクトを設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)ネットワーク接続を構成し、**Bootstrap Ports**情報を取得します。次に[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)ポイントを設定するに従ってプライベート エンドポイントを作成します。
--   Apache Kafka サービスが Azure でホストされている場合は、 [Azureでセルフホスト型Kafkaプライベートリンクサービスをセットアップする](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)セットアップする」に従ってネットワーク接続を構成し、**Bootstrap Ports**情報を取得してから、[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)エンドプライベートポイントを設定するに従ってプライベート エンドポイントを作成します。
+-   Apache Kafka サービスが AWS でホストされている場合は、 [AWSでセルフホスト型のKafkaプライベートリンクサービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)セットアップする」に従ってネットワーク接続を構成し、**Bootstrap Ports**情報を取得します。次に[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)ポイントを設定する」に従ってプライベートエンドポイントを作成します。
+-   Apache Kafka サービスが Google Cloud でホストされている場合は、 [Google Cloud でセルフホスト型の Kafka プライベートサービスコネクトを設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)ネットワーク接続を構成し、**Bootstrap Ports**情報を取得します。次に[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)ポイントを設定するに従ってプライベートエンドポイントを作成します。
+-   Apache Kafka サービスが Azure でホストされている場合は、 [Azureでセルフホスト型Kafkaプライベートリンクサービスをセットアップする](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)セットアップする」に従ってネットワーク接続を構成し、**Bootstrap Ports**情報を取得してから、[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)エンドプライベートポイントを設定するに従ってプライベートエンドポイントを作成します。
 
 </div>
 <div label="VPC Peering">
@@ -87,7 +87,7 @@ Apache Kafka サービスがインターネットにアクセスできない Goo
 1.  Apache Kafka サービスの VPC とTiDB Cloud Dedicatedクラスターの間で[VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
 2.  Apache Kafkaが配置されているVPCのイングレスファイアウォールルールを変更します。
 
-    TiDB Cloud Dedicatedクラスターが配置されているリージョンの CIDR を、イングレス ファイアウォール ルールに追加する必要があります。CIDR は**VPC Peering**ページで確認できます。これにより、TiDB Cloud Dedicatedクラスターから Kafka ブローカーへのトラフィックが流れるようになります。
+    TiDB Cloud Dedicatedクラスターが配置されているリージョンの CIDR を、イングレス ファイアウォールルールに追加する必要があります。CIDR は**VPC Peering**ページで確認できます。これにより、TiDB Cloud Dedicatedクラスターから Kafka ブローカーへのトラフィックが流れるようになります。
 
 </div>
 <div label="Public IP">
@@ -107,11 +107,11 @@ Apache KafkaサービスにパブリックIPアクセスを提供する場合は
 
 プライベートコネクトは、クラウドプロバイダーの**Private Link**または**Private Service Connect**技術を活用し、VPC内のリソースがプライベートIPアドレスを使用して他のVPC内のサービスに接続できるようにします。これにより、あたかもそれらのサービスがVPC内で直接ホストされているかのように動作します。
 
-TiDB Cloud Premium インスタンスでチェンジフィードのプライベート エンドポイントを作成するには、[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)するに従ってください。
+TiDB Cloud Premium インスタンスでチェンジフィードのプライベートエンドポイントを作成するには、[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)するに従ってください。
 
 TiDB Cloudは現在、セルフホスト型KafkaのみPrivate Connectをサポートしています。MSK、Confluent Kafka、その他のKafka SaaSサービスとの直接統合はサポートしていません。これらのKafka SaaSサービスにPrivate Connect経由で接続するには、 [kafka-proxy](https://github.com/grepplabs/kafka-proxy)中間サーバーとしてデプロイし、Kafkaサービスをセルフホスト型Kafkaとして公開する必要があります。
 
-Apache Kafka サービスが AWS でホストされている場合は、 [AWSでセルフホスト型のKafkaプライベートリンクサービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)セットアップする」に従ってネットワーク接続を構成し、**Bootstrap Ports**情報を取得します。次に[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)ポイントを設定する」に従ってプライベート エンドポイントを作成します。
+Apache Kafka サービスが AWS でホストされている場合は、 [AWSでセルフホスト型のKafkaプライベートリンクサービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)セットアップする」に従ってネットワーク接続を構成し、**Bootstrap Ports**情報を取得します。次に[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)ポイントを設定する」に従ってプライベートエンドポイントを作成します。
 
 </div>
 <div label="Public IP">
@@ -135,14 +135,14 @@ Apache KafkaサービスにパブリックIPアクセスを提供する場合は
 TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミングし、Kafkaトピックを自動的に作成できるようにするには、Kafkaに以下の権限が追加されていることを確認してください。
 
 -   Kafka のトピック リソース タイプに`Create`および`Write`権限が追加されます。
--   Kafka のクラスタ リソース タイプに`DescribeConfigs`権限が追加されます。
+-   Kafka のクラスタリソース タイプに`DescribeConfigs`権限が追加されます。
 
 たとえば、Kafka クラスターが Confluent Cloud にある場合、詳細については Confluent ドキュメントの[リソース](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)と[ACLの追加](https://docs.confluent.io/platform/current/kafka/authorization.html#adding-acls)を参照してください。
 
 ## ステップ1. Apache KafkaのChangefeedページを開きます。 {#step-1-open-the-changefeed-page-for-apache-kafka}
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
-2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[変更フィード]**をクリックします。
+2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の概要ページに移動し、左側のナビゲーションペインで**[データ]** &gt; **[変更フィード]**をクリックします。
 3.  **Create Changefeed**をクリックし、**宛先**として**Kafka**を選択します。
 
 ## ステップ2. changefeedターゲットを設定する {#step-2-configure-the-changefeed-target}
@@ -206,7 +206,7 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 <div label="Private Service Connect (Google Cloud)">
 
 1.  **Connectivity Method**で**Private Service Connect**を選択します。
-2.  **Private Endpoint**で、[ネットワーク](#network)セクションで作成したプライベート エンドポイントを選択します。
+2.  **Private Endpoint**で、[ネットワーク](#network)セクションで作成したプライベートエンドポイントを選択します。
 3.  [ネットワーク](#network)セクションで取得した**Bootstrap Ports**を入力してください。複数のポートを指定することをお勧めします。複数のポートを区切るには、カンマ`,`を使用できます。
 4.  Kafkaの認証設定に応じて、**認証**オプションを選択してください。
 
@@ -227,7 +227,7 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 <div label="Private Link (Azure)">
 
 1.  **Connectivity Method**で**Private Link**を選択します。
-2.  **Private Endpoint**で、[ネットワーク](#network)セクションで作成したプライベート エンドポイントを選択します。
+2.  **Private Endpoint**で、[ネットワーク](#network)セクションで作成したプライベートエンドポイントを選択します。
 3.  [ネットワーク](#network)セクションで取得した**Bootstrap Ports**を入力してください。1つのAZにつき少なくとも1つのポートを設定することをお勧めします。複数のポートを指定する場合は、カンマ`,`で区切ってください。
 4.  Kafkaの認証設定に応じて、**認証**オプションを選択してください。
 
@@ -276,7 +276,7 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
     -   Avroは、コンパクトで高速なバイナリデータフォーマットであり、豊富なデータ構造を備え、様々なフローシステムで広く利用されています。詳細については、 [Avroデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol)を参照してください。
     -   Canal-JSONは、解析が容易なプレーンなJSONテキスト形式です。詳細については、 [Canal-JSONデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-canal-json)を参照してください。
-    -   オープン プロトコルは、監視、キャッシュ、全文インデックス作成、分析エンジン、および異なるデータベース間のプライマリとセカンダリのレプリケーションのためのデータ ソースを提供する行レベルのデータ変更通知プロトコルです。詳細については、 [オープンプロトコルデータフォーマット](https://docs.pingcap.com/tidb/stable/ticdc-open-protocol)を参照してください。
+    -   オープンプロトコルは、監視、キャッシュ、全文インデックス作成、分析エンジン、および異なるデータベース間のプライマリとセカンダリのレプリケーションのためのデータソースを提供する行レベルのデータ変更通知プロトコルです。詳細については、 [オープンプロトコルデータフォーマット](https://docs.pingcap.com/tidb/stable/ticdc-open-protocol)を参照してください。
     -   Debeziumは、データベースの変更をキャプチャするためのツールです。キャプチャされた各データベース変更を「イベント」と呼ばれるメッセージに変換し、これらのイベントをKafkaに送信します。詳細については、 [Debeziumデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-debezium)を参照してください。
 
 5.  TiDB拡張フィールドをKafkaメッセージ本文に追加する場合は、 **TiDB Extension**オプションを有効にしてください。

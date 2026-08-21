@@ -125,8 +125,7 @@ npm install mysql2 dotenv --save
     -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
     -   まだパスワードを設定していない場合は、ダイアログの**ルートパスワードを設定**をクリックしてください。
     -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA証明書**をクリックしてダウンロードしてください。
-    -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
-
+    -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベートエンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 7.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
@@ -157,7 +156,7 @@ npm install mysql2 dotenv --save
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **[IP アクセス リストの設定] をクリックするか、「IP アクセス リストを設定する」**の手順に従って[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
+    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
 4.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
@@ -277,7 +276,7 @@ void main();
 
 > **Note**
 >
-> TiDB Cloud StarterおよびTiDB Cloud Essentialでは、パブリック エンドポイントを使用する場合、 `TIDB_ENABLE_SSL`を介して TLS 接続を有効にする**必要があります**。ただし、Node.js はデフォルトで組み込みの Mozilla CA を使用するため、 `TIDB_CA_PATH`を介して SSL CA 証明書を指定する必要はありません。この組み込みの[Mozilla CA証明書](https://wiki.mozilla.org/CA/Included_Certificates)はTiDB Cloud Starterによって信頼されています。
+> TiDB Cloud StarterおよびTiDB Cloud Essentialでは、パブリックエンドポイントを使用する場合、 `TIDB_ENABLE_SSL`を介して TLS 接続を有効にする**必要があります**。ただし、Node.js はデフォルトで組み込みの Mozilla CA を使用するため、 `TIDB_CA_PATH`を介して SSL CA 証明書を指定する必要はありません。この組み込みの[Mozilla CA証明書](https://wiki.mozilla.org/CA/Included_Certificates)はTiDB Cloud Starterによって信頼されています。
 
 ### データを挿入する {#insert-data}
 
@@ -337,7 +336,7 @@ console.log(rsh.affectedRows);
 ## 次のステップ {#next-steps}
 
 -   node-mysql2 ドライバーの使用方法の詳細については[node-mysql2 のドキュメント](https://github.com/sidorares/node-mysql2#readme)を参照してください。
--   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md)、SQL [トランザクション](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)などの章を読んで、TiDB アプリケーション開発のベスト プラクティスを学びましょう。
+-   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md)、SQL [トランザクション](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)などの章を読んで、TiDB アプリケーション開発のベストプラクティスを学びましょう。
 -   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}

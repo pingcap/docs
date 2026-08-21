@@ -52,9 +52,9 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled=false
 | --cloud-storage string              | クラウドストレージ`"GCS"` 。 `"AZURE_BLOB"` `"OSS"`オプション: `"TIDB_CLOUD"` `"S3"`                                      | いいえ | 非対話型モードでのみ動作します。                     |
 | -c, --cluster-id string        | 更新するクラスターの ID。                                                                                               | はい  | 非対話型モードでのみ動作します。                     |
 | --enabled                        | データベース監査ログを有効または無効にします。                                                                                      | いいえ | 非対話型モードでのみ動作します。                     |
-| --gcs.service-account-key string        | Google Cloud Storage の Base64 でエンコードされたサービス アカウント キー。                                                        | いいえ | 非対話型モードでのみ動作します。                     |
+| --gcs.service-account-key string        | Google Cloud Storage の Base64 でエンコードされたサービスアカウント キー。                                                        | いいえ | 非対話型モードでのみ動作します。                     |
 | --gcs.uri string               | `gs://<bucket>/<path>`形式の Google Cloud Storage URI。                                                          | いいえ | 非対話型モードでのみ動作します。                     |
-| --oss.access-key-id string     | Alibaba Cloud Object Storage Service (OSS) のアクセス キー ID。                                                      | いいえ | 非対話型モードでのみ動作します。                     |
+| --oss.access-key-id string     | Alibaba Cloud Object Storage Service (OSS) のアクセスキー ID。                                                      | いいえ | 非対話型モードでのみ動作します。                     |
 | --oss.access-key-secret string | Alibaba Cloud OSS のアクセスキーシークレット。                                                                             | いいえ | 非対話型モードでのみ動作します。                     |
 | --oss.uri string               | `oss://<bucket>/<path>`形式の Alibaba Cloud OSS URI。                                                            | いいえ | 非対話型モードでのみ動作します。                     |
 | --rotation-interval-minutes int32             | ローテーション間隔（分）。有効な範囲： `[10, 1440]` 。                                                                           | いいえ | 非対話型モードでのみ動作します。                     |
@@ -64,15 +64,15 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled=false
 | --s3.secret-access-key string  | Amazon S3のシークレットアクセスキー。`--s3.role-arn`のいずれか、または`--s3.access-key-id`と`--s3.secret-access-key`の両方を設定する必要があります。 | いいえ | 非対話型モードでのみ動作します。                     |
 | --s3.uri string                | `s3://<bucket>/<path>`形式の Amazon S3 URI。                                                                     | いいえ | 非対話型モードでのみ動作します。                     |
 | --unredacted                      | データベース監査ログを秘匿化解除または秘匿化します。                                                                                     | いいえ | 非対話型モードでのみ動作します。                     |
-| -h, --help                  | このコマンドのヘルプ情報を表示します。                                                                                          | いいえ | インタラクティブ モードと非インタラクティブ モードの両方で動作します。 |
+| -h, --help                  | このコマンドのヘルプ情報を表示します。                                                                                          | いいえ | インタラクティブモードと非インタラクティブモードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}
 
 | フラグ               | 説明                        | 必須  | 注記                                   |
 | ----------------- | ------------------------- | --- | ------------------------------------ |
-| -D, --debug        | デバッグ モードを有効にします。          | いいえ | インタラクティブ モードと非インタラクティブ モードの両方で動作します。 |
+| -D, --debug        | デバッグ モードを有効にします。          | いいえ | インタラクティブモードと非インタラクティブモードの両方で動作します。 |
 | --no-color             | カラー出力を無効にします。             | いいえ | 非対話型モードでのみ動作します。                     |
-| -P, --profile string | 構成ファイルから使用するプロファイルを指定します。 | いいえ | インタラクティブ モードと非インタラクティブ モードの両方で動作します。 |
+| -P, --profile string | 構成ファイルから使用するプロファイルを指定します。 | いいえ | インタラクティブモードと非インタラクティブモードの両方で動作します。 |
 
 ## フィードバック {#feedback}
 

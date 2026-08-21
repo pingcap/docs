@@ -9,15 +9,15 @@ summary: TiDB のデプロイメントに関連する FAQ について説明し�
 
 ## ソフトウェアとハ​​ードウェアの要件 {#software-and-hardware-requirements}
 
-### TiDB はどのオペレーティング システムをサポートしていますか? {#what-operating-systems-does-tidb-support}
+### TiDB はどのオペレーティングシステムをサポートしていますか? {#what-operating-systems-does-tidb-support}
 
-TiDB がサポートするオペレーティング システムについては、 [ソフトウェアとハ​​ードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
+TiDB がサポートするオペレーティングシステムについては、 [ソフトウェアとハ​​ードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
 
 ### 開発、テスト、または本番環境における TiDB クラスターの推奨ハードウェア構成は何ですか? {#what-is-the-recommended-hardware-configuration-for-a-tidb-cluster-in-the-development-test-or-production-environment}
 
 TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェア・サーバー・プラットフォーム、またはARMアーキテクチャのハードウェア・サーバー・プラットフォームに導入および実行できます。開発環境、テスト環境、および本番環境におけるサーバー・ハードウェア構成の要件と推奨事項については、 [ソフトウェアとハ​​ードウェアの推奨事項 - サーバー要件](/hardware-and-software-requirements.md#server-requirements)を参照してください。
 
-### 10 ギガビットのネットワーク カード 2 枚の目的は何ですか? {#whats-the-purposes-of-2-network-cards-of-10-gigabit}
+### 10 ギガビットのネットワークカード 2 枚の目的は何ですか? {#whats-the-purposes-of-2-network-cards-of-10-gigabit}
 
 分散型クラスタであるTiDBは、特にPDに対して高い時間要件を要求します。これは、PDが一意のタイムスタンプを配布する必要があるためです。PDサーバーの時刻が一致していないと、PDサーバーを切り替える際に待機時間が長くなります。2枚のネットワークカードの結合によりデータ転送の安定性が保証され、10ギガビットの速度により転送速度が保証されます。ギガビットネットワークカードはボトルネックになりやすいため、10ギガビットネットワークカードの使用を強くお勧めします。
 
@@ -39,7 +39,7 @@ TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェ�
 
 ### TiKV/PD 用に変更された`toml`構成が有効にならないのはなぜですか? {#why-the-modified-toml-configuration-for-tikvpd-does-not-take-effect}
 
-`toml`設定を有効にするには、TiKV/PD で`--config`パラメータを設定する必要があります。TiKV/PD はデフォルトでは設定を読み取りません。現在、この問題はバイナリを使用してデプロイする場合にのみ発生します。TiKV の場合は、設定を編集してサービスを再起動してください。PD の場合は、設定ファイルは PD の初回起動時にのみ読み込まれ、その後は pd-ctl を使用して設定を変更できます。詳細は[PD Controlユーザー ガイド](/pd-control.md)を参照してください。
+`toml`設定を有効にするには、TiKV/PD で`--config`パラメータを設定する必要があります。TiKV/PD はデフォルトでは設定を読み取りません。現在、この問題はバイナリを使用してデプロイする場合にのみ発生します。TiKV の場合は、設定を編集してサービスを再起動してください。PD の場合は、設定ファイルは PD の初回起動時にのみ読み込まれ、その後は pd-ctl を使用して設定を変更できます。詳細は[PD Controlユーザーガイド](/pd-control.md)を参照してください。
 
 ### TiDB モニタリングフレームワーク (Prometheus + Grafana) はスタンドアロンマシンにデプロイするべきでしょうか、それとも複数のマシンにデプロイするべきでしょうか? 推奨される CPU とメモリはどれくらいでしょうか? {#should-i-deploy-the-tidb-monitoring-framework-prometheus--grafana-on-a-standalone-machine-or-on-multiple-machines-what-is-the-recommended-cpu-and-memory}
 
@@ -61,11 +61,11 @@ TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェ�
 
 TiDB `label`の設定は、クラスタのデプロイメントアーキテクチャに関連しています。これは重要であり、PDがグローバル管理とスケジューリングを実行するための基盤となります。以前のクラスタのデプロイメント時に`label`設定していない場合は、PD管理ツール`pd-ctl`を使用して`location-labels`情報を手動で追加し、デプロイメント構造を調整する必要があります（例： `config set location-labels "zone,rack,host"` ）。（実際の`label`レベル名に基づいて設定する必要があります）。
 
-`pd-ctl`の使い方については[PD Controlユーザー ガイド](/pd-control.md)を参照してください。
+`pd-ctl`の使い方については[PD Controlユーザーガイド](/pd-control.md)を参照してください。
 
 ### ディスク テストの`dd`コマンドが`oflag=direct`オプションを使用するのはなぜですか? {#why-does-the-dd-command-for-the-disk-test-use-the-oflagdirect-option}
 
-ダイレクト モードでは、書き込み要求を I/O コマンドにラップし、このコマンドをディスクに送信してファイル システム キャッシュをバイパスし、ディスクの実際の I/O 読み取り/書き込みパフォーマンスを直接テストします。
+ダイレクト モードでは、書き込み要求を I/O コマンドにラップし、このコマンドをディスクに送信してファイルシステム キャッシュをバイパスし、ディスクの実際の I/O 読み取り/書き込みパフォーマンスを直接テストします。
 
 ### `fio`コマンドを使用して TiKV インスタンスのディスク パフォーマンスをテストするにはどうすればよいですか? {#how-to-use-the-fio-command-to-test-the-disk-performance-of-the-tikv-instance}
 
@@ -83,7 +83,7 @@ TiDB `label`の設定は、クラスタのデプロイメントアーキテク�
     ./fio -ioengine=psync -bs=32k -direct=1 -thread -rw=randrw -percentage_random=100,0 -time_based -size=10G -filename=fio_randread_write_test.txt -name='fio mixed randread and sequential write test' -iodepth=1 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_write_test.json
     ```
 
-## 現在 TiDB でサポートされているパブリック クラウド ベンダーは何ですか? {#what-public-cloud-vendors-are-currently-supported-by-tidb}
+## 現在 TiDB でサポートされているパブリッククラウド ベンダーは何ですか? {#what-public-cloud-vendors-are-currently-supported-by-tidb}
 
 TiDB は[Google Cloud GKE](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke) 、 [AWS EKS](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks) 、 [アリババクラウドACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud)でのデプロイメントをサポートします。
 

@@ -22,7 +22,7 @@ TiDB バージョン: 6.5.5
 
     -   接続再試行のプロセスでPDクライアントのバックオフメカニズムを追加し、エラー再試行中に再試行間隔を徐々に増やしてPD圧力を軽減します。 [＃15428](https://github.com/tikv/tikv/issues/15428) @[nolouch](https://github.com/nolouch)
     -   スナップショットの監視メトリックを追加します [＃15401](https://github.com/tikv/tikv/issues/15401) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
-    -   リーダー転送中の PITR チェックポイント ラグの安定性を向上[＃13638](https://github.com/tikv/tikv/issues/13638) @[YuJuncen](https://github.com/YuJuncen)
+    -   リーダー転送中の PITR チェックポイントラグの安定性を向上[＃13638](https://github.com/tikv/tikv/issues/13638) @[YuJuncen](https://github.com/YuJuncen)
     -   `safe-ts` に関連するログと監視メトリックを追加します [＃15082](https://github.com/tikv/tikv/issues/15082) @[ekexium](https://github.com/ekexium)
     -   `resolved-ts` のログと監視メトリックをさらに提供 [＃15082](https://github.com/tikv/tikv/issues/15082) @[ekexium](https://github.com/ekexium)
 
@@ -73,4 +73,4 @@ TiDB バージョン: 6.5.5
         -   ターゲットサーバーにTiCDCがデプロイされているときにTiDB Lightningが起動に失敗する問題を修正 [＃41040](https://github.com/pingcap/tidb/issues/41040) @[lance6716](https://github.com/lance6716)
         -   PDトポロジが変更されるとTiDB Lightningが起動に失敗する問題を修正[＃46688](https://github.com/pingcap/tidb/issues/46688) @[lance6716](https://github.com/lance6716)
         -   PD のリーダーを切り替えた後にTiDB Lightning がデータのインポートを続行できない問題を修正しました [＃46540](https://github.com/pingcap/tidb/issues/46540) @[lance6716](https://github.com/lance6716)
-        -   事前チェックがターゲット クラスターで実行中の TiCDC の存在を正確に検出できない問題を修正しました。 [＃41040](https://github.com/pingcap/tidb/issues/41040) @[lance6716](https://github.com/lance6716)
+        -   事前チェックがターゲットクラスターで実行中の TiCDC の存在を正確に検出できない問題を修正しました。 [＃41040](https://github.com/pingcap/tidb/issues/41040) @[lance6716](https://github.com/lance6716)

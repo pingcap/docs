@@ -21,7 +21,7 @@ TiDB バージョン: 6.5.3
 
 -   TiDB
 
-    -   配置ルールでパーティション テーブル上の`TRUNCATE`のパフォーマンスを向上します。 [＃43070](https://github.com/pingcap/tidb/issues/43070) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    -   配置ルールでパーティションテーブル上の`TRUNCATE`のパフォーマンスを向上します。 [＃43070](https://github.com/pingcap/tidb/issues/43070) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   ロックを解決した後の無効なステイル読み取り再試行を回避する [＃43659](https://github.com/pingcap/tidb/issues/43659) @[you06](https://github.com/you06)
     -   ステイル読み取りで`DataIsNotReady`エラーが発生した場合にリーダー読み取りを使用してレイテンシーを削減します。 [＃765](https://github.com/tikv/client-go/pull/765) @[Tema](https://github.com/Tema)
     -   ステイル読み取り を使用するときにヒット率とトラフィックを追跡するために`Stale Read OPS`と`Stale Read MBps`メトリックを追加します [＃43325](https://github.com/pingcap/tidb/issues/43325) @[you06](https://github.com/you06)

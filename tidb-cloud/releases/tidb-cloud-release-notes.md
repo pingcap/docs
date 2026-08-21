@@ -396,7 +396,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     -   [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)でごみ箱機能が利用可能になりました。ごみ箱には、有効なバックアップが存在する削除済みTiDB Cloudリソースのデータが保存されます。
 
-        バックアップが存在するTiDB Cloud Essentialインスタンスが削除されると、そのバックアップ ファイルはごみ箱に移動されます。自動バックアップによって作成されたバックアップ ファイルは、指定された期間、ごみ箱に保持されます。データ損失を防ぐため、保持期間が終了する前に、新しいTiDB Cloud Essentialインスタンスにデータを復元してください。なお、 TiDB Cloud Essentialインスタンス**にバックアップがない**場合、削除されたインスタンスはごみ箱に表示されません。
+        バックアップが存在するTiDB Cloud Essentialインスタンスが削除されると、そのバックアップファイルはごみ箱に移動されます。自動バックアップによって作成されたバックアップファイルは、指定された期間、ごみ箱に保持されます。データ損失を防ぐため、保持期間が終了する前に、新しいTiDB Cloud Essentialインスタンスにデータを復元してください。なお、 TiDB Cloud Essentialインスタンス**にバックアップがない**場合、削除されたインスタンスはごみ箱に表示されません。
 
         詳細については、 [バックアップと復元](/tidb-cloud/backup-and-restore-serverless.md#restore-from-recycle-bin)を参照してください。
 
@@ -482,7 +482,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     -   新しい[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[v8.5.5](https://docs.pingcap.com/tidb/stable/release-8.5.5/)から[v8.5.6](https://docs.pingcap.com/tidb/stable/release-8.5.6/)にアップグレードします。
 
-    -   [TiDB Cloud Clinic](/tidb-cloud/tidb-cloud-clinic.md)のTop SQLページは、AWS 上でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの TiKV ネットワーク トラフィックと論理 I/O メトリックの収集と表示をサポートするようになりました。
+    -   [TiDB Cloud Clinic](/tidb-cloud/tidb-cloud-clinic.md)のTop SQLページは、AWS 上でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの TiKV ネットワークトラフィックと論理 I/O メトリックの収集と表示をサポートするようになりました。
 
 **コンソールの変更**
 
@@ -558,7 +558,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 -   **TiDB Cloud Dedicated**
 
-    -   セキュリティ追跡を改善するために、 TiDB Cloudの [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)に**パブリック エンドポイント**ステータスを追加します。
+    -   セキュリティ追跡を改善するために、 TiDB Cloudの [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)に**パブリックエンドポイント**ステータスを追加します。
 
 **コンソールの変更**
 
@@ -572,7 +572,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     -   データフローシナリオにおけるプライベートリンク接続でのAmazon MSK Provisionedをサポートします。
 
-        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、 [Amazon MSK プロビジョニング済み](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html)クラスターへのプライベート リンク接続の作成をサポートするようになりました。この機能により、トラフィックを公共のインターネットに公開することなく、Amazon MSK プロビジョニングされたクラスターへの変更フィードのプライベート ネットワーク接続が可能になります。
+        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、 [Amazon MSK プロビジョニング済み](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html)クラスターへのプライベートリンク接続の作成をサポートするようになりました。この機能により、トラフィックを公共のインターネットに公開することなく、Amazon MSK プロビジョニングされたクラスターへの変更フィードのプライベートネットワーク接続が可能になります。
 
         詳細については、 [プライベートリンク接続を介してAmazon MSK Provisionedに接続します](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)を参照してください。
 
@@ -686,8 +686,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     -   **プランに応じたサポートのリダイレクト**：クラスタ概要ページで、 **[アクション]**列の**[サポートを受ける]**を選択すると、サブスクリプションプランに基づいて最も適切なリソースにリダイレクトされます。Basicプランのユーザーは**サポートプラン**パネルに、有料プランのユーザーは**サポートポータル**に誘導されます。
     -   **ヘルプセンターメニューの改善**：ヘルプメニュー項目名を**サポートオプション**と**サポートチケット**に変更し、利用可能なサービスをより適切に反映させます。また、有料プランでのみテクニカルサポートチケットが利用できることを明確にするツールチップを追加します。
-    -   **明確なコミュニティ サポート アクセス**:**サポート プラン**オプション内では、Slack と Discord がBasic プラン ユーザーの主要なテクニカル サポート チャネルとして明確に識別されます。次のドキュメントは、サポート チャネル ポリシーとコミュニティ アクセスを明確にするために合理化されています: [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)、[Connected Careの概要](/tidb-cloud/connected-care-overview.md)、および[Connected Careの詳細](/tidb-cloud/connected-care-detail.md)。
-    -   **アクション指向のサポートプランUI** ：**サポートプラン**ウィンドウを再設計し、一般的なプラン比較ではなく、現在ご利用のプランで利用可能なサポートオプションを優先的に表示するようにしました。この変更により、現在ご利用のプランに基づいてサポートを受ける方法をすばやく特定できます。
+    -   **明確なコミュニティ サポート アクセス**:**サポートプラン**オプション内では、Slack と Discord がBasic プラン ユーザーの主要なテクニカルサポート チャネルとして明確に識別されます。次のドキュメントは、サポート チャネル ポリシーとコミュニティ アクセスを明確にするために合理化されています: [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)、[Connected Careの概要](/tidb-cloud/connected-care-overview.md)、および[Connected Careの詳細](/tidb-cloud/connected-care-detail.md)。    -   **アクション指向のサポートプランUI** ：**サポートプラン**ウィンドウを再設計し、一般的なプラン比較ではなく、現在ご利用のプランで利用可能なサポートオプションを優先的に表示するようにしました。この変更により、現在ご利用のプランに基づいてサポートを受ける方法をすばやく特定できます。
 
     詳細については、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)を参照してください。
 

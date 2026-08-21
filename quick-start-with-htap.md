@@ -5,7 +5,7 @@ summary: TiDB HTAPをすぐに使い始める方法を学びます。
 
 # TiDB HTAPのクイックスタート {#quick-start-with-tidb-htap}
 
-このガイドでは、TiDB のハイブリッド トランザクションおよび分析処理 (HTAP) のワンストップ ソリューションを最も簡単に使い始める方法について説明します。
+このガイドでは、TiDB のハイブリッドトランザクションおよび分析処理 (HTAP) のワンストップ ソリューションを最も簡単に使い始める方法について説明します。
 
 > **Note:**
 >
@@ -13,7 +13,7 @@ summary: TiDB HTAPをすぐに使い始める方法を学びます。
 
 ## 基本概念 {#basic-concepts}
 
-TiDB HTAP を使用する前に、 [TiKV](/tikv-overview.md) 、TiDB オンライン トランザクション処理 (OLTP) 用の行ベースのストレージ エンジン、および[TiFlash](/tiflash/tiflash-overview.md) 、TiDB オンライン分析処理 (OLAP) 用の列ベースのストレージに関する基本的な知識が必要です。
+TiDB HTAP を使用する前に、 [TiKV](/tikv-overview.md) 、TiDB オンライン トランザクション処理 (OLTP) 用の行ベースのストレージエンジン、および[TiFlash](/tiflash/tiflash-overview.md) 、TiDB オンライン分析処理 (OLAP) 用の列ベースのストレージに関する基本的な知識が必要です。
 
 -   HTAPのストレージエンジン：HTAPでは、行ベースストレージエンジンと列指向ストレージエンジンが共存します。どちらのストレージエンジンもデータを自動的に複製し、強力な一貫性を維持できます。行ベースストレージエンジンはOLTPパフォーマンスを最適化し、列指向ストレージエンジンはOLAPパフォーマンスを最適化します。
 -   HTAP のデータ一貫性: 分散型トランザクション キー値データベースである TiKV は、 ACID準拠のトランザクション インターフェイスを提供し、 [Raftコンセンサスアルゴリズム](https://raft.github.io/raft.pdf)の実装により複数のレプリカ間のデータ一貫性と高可用性を保証します。TiKV の列指向ストレージ拡張機能であるTiFlash は、 Raft Learnerコンセンサス アルゴリズムに従って TiKV からデータをリアルタイムで複製し、TiKV とTiFlash間でデータの強力な一貫性を保証します。
@@ -34,7 +34,7 @@ tiup playground
 
 > **Note:**
 >
-> `tiup playground`コマンドはクイック スタート専用であり、本番用ではありません。
+> `tiup playground`コマンドはクイックスタート専用であり、本番用ではありません。
 
 ### ステップ2. テストデータの準備 {#step-2-prepare-test-data}
 
@@ -42,15 +42,15 @@ tiup playground
 
 > **Note:**
 >
-> 既存のデータを分析クエリに使用する場合は、 [データをTiDBに移行する](/migration-overview.md)を実行できます。独自のテスト データを設計および作成する場合は、SQL ステートメントを実行するか、関連ツールを使用して作成できます。
+> 既存のデータを分析クエリに使用する場合は、 [データをTiDBに移行する](/migration-overview.md)を実行できます。独自のテストデータを設計および作成する場合は、SQL ステートメントを実行するか、関連ツールを使用して作成できます。
 
-1.  次のコマンドを実行して、テスト データ生成ツールをインストールします。
+1.  次のコマンドを実行して、テストデータ生成ツールをインストールします。
 
     ```shell
     tiup install bench
     ```
 
-2.  次のコマンドを実行してテスト データを生成します。
+2.  次のコマンドを実行してテストデータを生成します。
 
     ```shell
     tiup bench tpch --sf=1 prepare
@@ -138,7 +138,7 @@ ALTER TABLE test.orders SET TIFLASH REPLICA 1;
 ALTER TABLE test.lineitem SET TIFLASH REPLICA 1;
 ```
 
-特定のテーブルのレプリケーション ステータスを確認するには、次のステートメントを実行します。
+特定のテーブルのレプリケーションステータスを確認するには、次のステートメントを実行します。
 
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'test' and TABLE_NAME = 'customer';
@@ -190,7 +190,7 @@ limit 10;
 
 さらに、クエリ全体の各部分をTiFlashエンジンのみを使用して計算するように指定することもできます。詳細については、 [TiDBを使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
 
-これら 2 つの方法のクエリ結果とクエリ パフォーマンスを比較できます。
+これら 2 つの方法のクエリ結果とクエリパフォーマンスを比較できます。
 
 ## 次は何？ {#what-s-next}
 

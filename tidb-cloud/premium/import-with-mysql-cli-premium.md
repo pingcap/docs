@@ -5,7 +5,7 @@ summary: MySQLコマンドラインクライアント（mysql`）を使用して
 
 # MySQLコマンドラインクライアントを使用してTiDB Cloud Premiumにデータをインポートする {#import-data-into-tidb-cloud-premium-using-the-mysql-command-line-client}
 
-このドキュメントでは[MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)を使用してTiDB Cloud Premium にデータをインポートする方法について説明します。( `mysql` )。以下のセクションでは、SQL ファイルまたは CSV ファイルからデータをインポートするための手順を段階的に説明します。このプロセスでは論理インポートが実行され、MySQL コマンドライン クライアントがローカル マシンからTiDB Cloudに対して SQL ステートメントを再生します。
+このドキュメントでは[MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)を使用してTiDB Cloud Premium にデータをインポートする方法について説明します。( `mysql` )。以下のセクションでは、SQL ファイルまたは CSV ファイルからデータをインポートするための手順を段階的に説明します。このプロセスでは論理インポートが実行され、MySQL コマンドライン クライアントがローカルマシンからTiDB Cloudに対して SQL ステートメントを再生します。
 
 > **Tip:**
 >
@@ -96,7 +96,7 @@ SQLファイルからデータをインポートするには、以下の手順�
 
 <Important>
 
-認証に使用する SQL ユーザーには、テーブルを定義し、ターゲット データベースにデータをロードするために必要な権限(例えば、 `CREATE`および`INSERT` ) が付与されている必要があります。
+認証に使用する SQL ユーザーには、テーブルを定義し、ターゲットデータベースにデータをロードするために必要な権限(例えば、 `CREATE`および`INSERT` ) が付与されている必要があります。
 
 </Important>
 

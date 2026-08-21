@@ -13,7 +13,7 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 > **Tip:**
 >
-> PD 初期化後に設定項目の値を調整する必要がある場合は、 [設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)と[PD Controlユーザー ガイド](/pd-control.md)を参照してください。
+> PD 初期化後に設定項目の値を調整する必要がある場合は、 [設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)と[PD Controlユーザーガイド](/pd-control.md)を参照してください。
 
 ### `name` {#name}
 
@@ -252,13 +252,13 @@ pd-server関連のコンフィグレーション項目
 ### `max-days` {#max-days}
 
 -   ログが保存される最大日数
--   構成項目が設定されていない場合、またはその値がデフォルト値 0 に設定されている場合、PD はログ ファイルを消去しません。
+-   構成項目が設定されていない場合、またはその値がデフォルト値 0 に設定されている場合、PD はログファイルを消去しません。
 -   デフォルト値: `0`
 
 ### `max-backups` {#max-backups}
 
 -   保存するログファイルの最大数
--   構成項目が設定されていない場合、またはその値がデフォルト値 0 に設定されている場合、PD はすべてのログ ファイルを保持します。
+-   構成項目が設定されていない場合、またはその値がデフォルト値 0 に設定されている場合、PD はすべてのログファイルを保持します。
 -   デフォルト値: `0`
 
 ## `metric` {#metric}
@@ -295,7 +295,7 @@ pd-server関連のコンフィグレーション項目
 ### `max-affinity-merge-region-size` <span class="version-mark">v8.5.5 の新機能</span> {#max-affinity-merge-region-size-new-in-v855}
 
 -   [親和性](/table-affinity.md)グループに属する隣接する小さなリージョンを自動的にマージするためのしきい値を制御します。リージョンがアフィニティグループに属し、そのサイズがこのしきい値より小さい場合、PD はこのリージョンを同じアフィニティグループ内の他の隣接する小さなリージョンとマージして、リージョン数を減らし、アフィニティ効果を維持しようとします。
--   これを`0`に設定すると、アフィニティ グループ内の隣接する小さいリージョンの自動マージが無効になります。
+-   これを`0`に設定すると、アフィニティグループ内の隣接する小さいリージョンの自動マージが無効になります。
 -   デフォルト値: `256`
 -   単位: MiB
 
@@ -512,9 +512,9 @@ pd-server関連のコンフィグレーション項目
 
 ### `disable-custom-prom-addr` {#disable-custom-prom-addr}
 
--   [TiDB Dashboard](/dashboard/dashboard-intro.md)でカスタム Prometheus データ ソース アドレスの構成を無効にするかどうか。
+-   [TiDB Dashboard](/dashboard/dashboard-intro.md)でカスタム Prometheus データソース アドレスの構成を無効にするかどうか。
 -   デフォルト値: `false`
--   `true`に設定すると、TiDB Dashboardでカスタム Prometheus データ ソース アドレスを構成すると、TiDB Dashboardはエラーを報告します。
+-   `true`に設定すると、TiDB Dashboardでカスタム Prometheus データソース アドレスを構成すると、TiDB Dashboardはエラーを報告します。
 
 ### `tidb-cacert-path` {#tidb-cacert-path}
 
@@ -533,7 +533,7 @@ pd-server関連のコンフィグレーション項目
 
 ### `public-path-prefix` {#public-path-prefix}
 
--   TiDB Dashboardがリバース プロキシの背後でアクセスされる場合、この項目はすべての Web リソースのパブリック URL パス プレフィックスを設定します。
+-   TiDB Dashboardがリバースプロキシの背後でアクセスされる場合、この項目はすべての Web リソースのパブリック URL パス プレフィックスを設定します。
 -   デフォルト値: `/dashboard`
 -   リバースプロキシを経由せずにTiDB Dashboardにアクセスする場合は、この設定項目を変更**しないで**ください。変更すると、アクセスの問題が発生する可能性があります。詳細は[リバースプロキシの背後で TiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
 

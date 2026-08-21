@@ -35,7 +35,7 @@ AWSアカウントIDとアベイラビリティゾーンを表示するには、
 Amazon RDSインスタンスは、以下の要件を満たす必要があります。
 
 -   リージョンの一致：インスタンスは、 TiDB Cloud Essentialインスタンスと同じAWSリージョンに存在する必要があります。
--   Amazon RDS インスタンスの[サブネットグループ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Subnets)には、TiDB Cloud Essentialインスタンスのアベイラビリティ ゾーンと重複するアベイラビリティ ゾーンが必要です。
+-   Amazon RDS インスタンスの[サブネットグループ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Subnets)には、TiDB Cloud Essentialインスタンスのアベイラビリティゾーンと重複するアベイラビリティゾーンが必要です。
 -   Amazon RDSインスタンスに適切なセキュリティグループを設定し、VPC内からアクセス可能であることを確認してください。例えば、以下のルールを持つセキュリティグループを作成できます。
 
     -   MySQL/ Auroraを許可する受信ルール：
@@ -67,7 +67,7 @@ AWSコンソールでロードバランサーとAWSエンドポイントサー�
 
     詳細については、 [ネットワークロードバランサーのターゲットグループを作成する](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-target-group.html)を参照してください。
 
-2.  [ロードバランサー](https://console.aws.amazon.com/ec2/home#LoadBalancers)に移動して、ネットワーク ロード バランサーを作成します。次の情報を入力してください。
+2.  [ロードバランサー](https://console.aws.amazon.com/ec2/home#LoadBalancers)に移動して、ネットワークロードバランサーを作成します。次の情報を入力してください。
 
     -   **スキーマ**: `Internal`を選択
 

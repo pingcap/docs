@@ -90,7 +90,7 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
     -   非制限`sql-mode` で`text` / `blob` / `json`のデフォルト値をNULLにすることを許可する [＃7230](https://github.com/pingcap/tidb/pull/7230)
     -   場合によっては`ADD INDEX`問題を修正[＃7142](https://github.com/pingcap/tidb/pull/7142)
     -   `UNIQUE-KEY`インデックス追加操作の速度を大幅に向上 [＃7132](https://github.com/pingcap/tidb/pull/7132)
-    -   UTF-8 文字セットのプレフィックス インデックスの切り捨て問題を修正しました [＃7109](https://github.com/pingcap/tidb/pull/7109)
+    -   UTF-8 文字セットのプレフィックスインデックスの切り捨て問題を修正しました [＃7109](https://github.com/pingcap/tidb/pull/7109)
     -   環境変数`tidb_ddl_reorg_priority`を追加して、 `add-index`操作の優先順位を制御します。 [＃7116](https://github.com/pingcap/tidb/pull/7116)
     -   `information_schema.tables` 文の`AUTO-INCREMENT`の表示問題を修正 [＃7037](https://github.com/pingcap/tidb/pull/7037)
     -   `admin show ddl jobs <number>`コマンドをサポートし、指定された数のDDLジョブ出力をサポートします。 [＃7028](https://github.com/pingcap/tidb/pull/7028)

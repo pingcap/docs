@@ -1,6 +1,6 @@
 ---
 title: Compatibility of TiDB Lightning and IMPORT INTO with TiCDC and Log Backup
-summary: IMPORT INTO およびTiDB Lightning とログ バックアップおよび TiCDC との互換性について説明します。
+summary: IMPORT INTO およびTiDB Lightning とログバックアップおよび TiCDC との互換性について説明します。
 ---
 
 # TiDB Lightningと IMPORT INTO と TiCDC およびログバックアップとの互換性 {#compatibility-of-tidb-lightning-and-import-into-with-ticdc-and-log-backup}
@@ -13,7 +13,7 @@ summary: IMPORT INTO およびTiDB Lightning とログ バックアップおよ�
 
 ## ログバックアップおよびTiCDCとの互換性 {#compatibility-with-log-backup-and-ticdc}
 
--   TiDB Lightning [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)は、ログ バックアップおよび TiCDC と互換性があります。
+-   TiDB Lightning [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)は、ログバックアップおよび TiCDC と互換性があります。
 
 -   TiDB Lightning [物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)は、ログバックアップおよびTiCDCと互換性がありません。これは、物理インポートモードがソースデータのエンコードされたKVペアをTiKVに直接取り込むため、TiKVがこの処理中に該当する変更ログを生成できないためです。変更ログが生成されないと、ログバックアップによる関連データのバックアップやTiCDCによるレプリケーションが実行できません。
 
@@ -23,13 +23,13 @@ summary: IMPORT INTO およびTiDB Lightning とログ バックアップおよ�
 
 ## TiDB Lightning論理インポートモードのシナリオ {#scenarios-for-tidb-lightning-logical-import-mode}
 
-TiDB Lightning論理インポート モードがアプリケーションのパフォーマンス要件を満たすことができ、アプリケーションでインポートされたテーブルを TiCDC を使用してダウンストリームにバックアップまたは複製する必要がある場合は、 TiDB Lightning論理インポート モードを使用することをお勧めします。
+TiDB Lightning論理インポートモードがアプリケーションのパフォーマンス要件を満たすことができ、アプリケーションでインポートされたテーブルを TiCDC を使用してダウンストリームにバックアップまたは複製する必要がある場合は、 TiDB Lightning論理インポートモードを使用することをお勧めします。
 
 ## TiDB Lightning物理インポートモードのシナリオ {#scenarios-for-tidb-lightning-physical-import-mode}
 
 このセクションでは、TiDB Lightning を[ログバックアップ](/br/br-pitr-guide.md)および[TiCDC](/ticdc/ticdc-overview.md)と一緒に使用する方法について説明します。
 
-TiDB Lightning論理インポート モードがアプリケーションのパフォーマンス要件を満たしていない場合、 TiDB Lightning物理インポート モードを使用する必要があり、インポートされたテーブルを TiCDC を使用してダウンストリームにバックアップまたは複製する必要がある場合は、次のシナリオが推奨されます。
+TiDB Lightning論理インポートモードがアプリケーションのパフォーマンス要件を満たしていない場合、 TiDB Lightning物理インポートモードを使用する必要があり、インポートされたテーブルを TiCDC を使用してダウンストリームにバックアップまたは複製する必要がある場合は、次のシナリオが推奨されます。
 
 ### ログバックアップで使用される {#used-with-log-backup}
 
@@ -39,7 +39,7 @@ TiDB Lightning物理インポートモードでインポートされたデータ
 
 ### TiCDC で使用される {#used-with-ticdc}
 
-TiCDC を物理インポート モードで使用することは、短期的には互換性がありません。これは、TiCDC がTiDB Lightning物理インポート モードの書き込み速度に追いつけず、クラスター レプリケーションのレイテンシーが長くなる可能性があるためです。
+TiCDC を物理インポートモードで使用することは、短期的には互換性がありません。これは、TiCDC がTiDB Lightning物理インポートモードの書き込み速度に追いつけず、クラスター レプリケーションのレイテンシーが長くなる可能性があるためです。
 
 次のようにさまざまなシナリオで実行できます。
 

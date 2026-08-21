@@ -9,7 +9,7 @@ summary: コマンドラインオプションに関係しない、TiDB設定フ�
 
 # TiDBコンフィグレーションファイル {#tidb-configuration-file}
 
-TiDB 構成ファイルは、コマンドライン パラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example)をダウンロードし、その名前を`config.toml`に変更できます。本書では[コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係のないオプションのみを説明します。
+TiDB 構成ファイルは、コマンドラインパラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example)をダウンロードし、その名前を`config.toml`に変更できます。本書では[コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係のないオプションのみを説明します。
 
 > **Tip:**
 >
@@ -197,7 +197,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   TCP4のみでのリスニングを有効または無効にします。
 -   デフォルト値: `false`
--   [TCPヘッダーからの実際のクライアントIP](https://github.com/alibaba/LVS/tree/master/kernel/net/toa)が「tcp4」プロトコルで正しく解析できるため、ロード バランシングのために TiDB を LVS とともに使用する場合、このオプションを有効にすると便利です。
+-   [TCPヘッダーからの実際のクライアントIP](https://github.com/alibaba/LVS/tree/master/kernel/net/toa)が「tcp4」プロトコルで正しく解析できるため、ロードバランシングのために TiDB を LVS とともに使用する場合、このオプションを有効にすると便利です。
 
 ### `enable-enum-length-limit` <span class="version-mark">v5.0で追加</span> {#enable-enum-length-limit-new-in-v50}
 
@@ -320,13 +320,13 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   デフォルト値: `300`
 -   単位：ミリ秒
 -   クエリの実行時間がこの値よりも長い場合、そのクエリはスロークエリとみなされ、そのログがスロークエリログに出力されます。なお、 [`log.level`](#level)の出力レベルが`"debug"`の場合、このパラメータの設定に関わらず、すべてのクエリがスロークエリログに記録されます。
--   バージョン 6.1.0 以降、スロー ログの消費時間のしきい値は、TiDB 設定項目の[`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold)またはシステム変数[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)で指定されます。 `slow-threshold`は引き続き有効です。ただし、 `slow-threshold`と`instance.tidb_slow_log_threshold`が同時に設定されている場合、後者が有効になります。
+-   バージョン 6.1.0 以降、スローログの消費時間のしきい値は、TiDB 設定項目の[`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold)またはシステム変数[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)で指定されます。 `slow-threshold`は引き続き有効です。ただし、 `slow-threshold`と`instance.tidb_slow_log_threshold`が同時に設定されている場合、後者が有効になります。
 
 ### `record-plan-in-slow-log` {#record-plan-in-slow-log}
 
 -   実行計画をスローログに記録するかどうかを決定します。
 -   デフォルト値: `1`
--   バージョン 6.1.0 以降、実行計画をスロー ログに記録するかどうかは、TiDB 設定項目の[`instance.tidb_record_plan_in_slow_log`](/tidb-configuration-file.md#tidb_record_plan_in_slow_log)またはシステム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)によって決定されます。 `record-plan-in-slow-log`は引き続き有効です。ただし、 `record-plan-in-slow-log`と`instance.tidb_record_plan_in_slow_log`が同時に設定されている場合は、後者が有効になります。
+-   バージョン 6.1.0 以降、実行計画をスローログに記録するかどうかは、TiDB 設定項目の[`instance.tidb_record_plan_in_slow_log`](/tidb-configuration-file.md#tidb_record_plan_in_slow_log)またはシステム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)によって決定されます。 `record-plan-in-slow-log`は引き続き有効です。ただし、 `record-plan-in-slow-log`と`instance.tidb_record_plan_in_slow_log`が同時に設定されている場合は、後者が有効になります。
 
 ### `expensive-threshold` {#expensive-threshold}
 
@@ -564,13 +564,13 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   統計情報の再読み込み、テーブル行数の更新、自動分析の実行が必要かどうかの確認、フィードバックを使用した統計情報の更新、および列の統計情報の読み込みを行う時間間隔。
 -   デフォルト値: `3s`
     -   `stats-lease`間隔で、TiDB は統計情報の更新をチェックし、更新が存在する場合はそれをメモリに更新します。
-    -   `20 * stats-lease`間隔で、TiDB は DML によって生成された行の総数と変更された行の数をシステム テーブルに更新します。
+    -   `20 * stats-lease`間隔で、TiDB は DML によって生成された行の総数と変更された行の数をシステムテーブルに更新します。
     -   `stats-lease`の間隔で、TiDB は自動分析が必要なテーブルとインデックスをチェックします。
     -   `stats-lease`の間隔で、TiDB はメモリにロードする必要のある列統計をチェックします。
-    -   `200 * stats-lease`の間隔で、TiDB はメモリにキャッシュされたフィードバックをシステム テーブルに書き込みます。
-    -   `5 * stats-lease`の間隔で、TiDB はシステム テーブル内のフィードバックを読み取り、メモリにキャッシュされた統計情報を更新します。
--   `stats-lease`を 0s に設定すると、TiDB はシステム テーブル内のフィードバックを定期的に読み取り、メモリにキャッシュされた統計情報を 3 秒ごとに更新します。ただし、TiDB は、以下の統計情報関連のシステム テーブルを自動的に変更しなくなります。
-    -   `mysql.stats_meta` : TiDB は、トランザクションによって変更されたテーブル行の数を自動的に記録し、このシステム テーブルに更新しなくなりました。
+    -   `200 * stats-lease`の間隔で、TiDB はメモリにキャッシュされたフィードバックをシステムテーブルに書き込みます。
+    -   `5 * stats-lease`の間隔で、TiDB はシステムテーブル内のフィードバックを読み取り、メモリにキャッシュされた統計情報を更新します。
+-   `stats-lease`を 0s に設定すると、TiDB はシステムテーブル内のフィードバックを定期的に読み取り、メモリにキャッシュされた統計情報を 3 秒ごとに更新します。ただし、TiDB は、以下の統計情報関連のシステムテーブルを自動的に変更しなくなります。
+    -   `mysql.stats_meta` : TiDB は、トランザクションによって変更されたテーブル行の数を自動的に記録し、このシステムテーブルに更新しなくなりました。
     -   `mysql.stats_histograms` / `mysql.stats_buckets`および`mysql.stats_top_n` : TiDB は統計情報を自動的に分析して積極的に更新しなくなりました。
     -   `mysql.stats_feedback` : TiDB は、クエリされたデータによって返される統計情報の一部に基づいて、テーブルとインデックスの統計情報を更新しなくなりました。
 
@@ -868,19 +868,19 @@ TiDBサービスの状態に関するコンフィグレーション。
 
 ### deadlock-history-capacity {#deadlock-history-capacity}
 
--   単一の TiDBサーバーの[`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルに記録できるデッドロック イベントの最大数。このテーブルが満杯の状態でさらにデッドロック イベントが発生した場合、最新のエラーを記録するために、テーブル内の最も古いレコードが削除されます。
+-   単一の TiDBサーバーの[`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルに記録できるデッドロックイベントの最大数。このテーブルが満杯の状態でさらにデッドロックイベントが発生した場合、最新のエラーを記録するために、テーブル内の最も古いレコードが削除されます。
 -   デフォルト値: `10`
 -   最小値: `0`
 -   最大値: `10000`
 
 ### deadlock-history-collect-retryable {#deadlock-history-collect-retryable}
 
--   [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルが再試行可能なデッドロック エラーの情報を収集するかどうかを制御します。再試行可能なデッドロック エラーの説明については、 [再試行可能なデッドロックエラー](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors)を参照してください。
+-   [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルが再試行可能なデッドロックエラーの情報を収集するかどうかを制御します。再試行可能なデッドロックエラーの説明については、 [再試行可能なデッドロックエラー](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors)を参照してください。
 -   デフォルト値: `false`
 
 ### pessimistic-auto-commit <span class="version-mark">v6.0.0で追加</span> {#pessimistic-auto-commit-new-in-v600}
 
--   悲観的トランザクション モードがグローバルに有効になっている場合 ( `tidb_txn_mode='pessimistic'` ) に、自動コミット トランザクションが使用するトランザクション モードを決定します。デフォルトでは、悲観的トランザクション モードがグローバルに有効になっていても、自動コミット トランザクションは楽観的トランザクション モードを使用します。 `pessimistic-auto-commit`を有効にすると ( `true` に設定)、自動コミット トランザクションも悲観的モードを使用するようになり、明示的にコミットされた他の悲観的トランザクションと一貫性が保たれます。
+-   悲観的トランザクションモードがグローバルに有効になっている場合 ( `tidb_txn_mode='pessimistic'` ) に、自動コミット トランザクションが使用するトランザクションモードを決定します。デフォルトでは、悲観的トランザクションモードがグローバルに有効になっていても、自動コミット トランザクションは楽観的トランザクションモードを使用します。 `pessimistic-auto-commit`を有効にすると ( `true` に設定)、自動コミット トランザクションも悲観的モードを使用するようになり、明示的にコミットされた他の悲観的トランザクションと一貫性が保たれます。
 -   競合が発生するシナリオでは、この設定を有効にすると、TiDB は自動コミットトランザクションをグローバルロック待機管理に組み込み、デッドロックを回避し、デッドロックを引き起こす競合によって発生するレイテンシーの急増を軽減します。
 -   競合のないシナリオで、自動コミット トランザクションが多数ある場合 (具体的な数は実際のシナリオによって決まります。たとえば、自動コミット トランザクションの数がアプリケーションの総数の半分以上を占める場合)、単一のトランザクションが大量のデータを操作すると、この構成を有効にするとパフォーマンスが低下します。たとえば、自動コミット`INSERT INTO SELECT`ステートメントです。
 -   セッションレベルのシステム変数[`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800)が`"bulk"`に設定されている場合、セッションにおけるこの設定の効果は、それを`false`に設定することと同じです。

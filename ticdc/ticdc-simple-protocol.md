@@ -70,7 +70,7 @@ DML:
 他の：
 
 -   `WATERMARK` : 上流 TiDB クラスターの TSO（64 ビットタイムスタンプ）を含み、テーブルレプリケーションの進行状況を示します。ウォーターマークより前のすべてのイベントは下流に送信されています。
--   `BOOTSTRAP` : ダウンストリームのテーブル スキーマを構築するために使用されるテーブルのスキーマ情報が含まれます。
+-   `BOOTSTRAP` : ダウンストリームのテーブルスキーマを構築するために使用されるテーブルのスキーマ情報が含まれます。
 
 ## メッセージ形式 {#message-format}
 
@@ -232,7 +232,7 @@ TiCDC は、DDL イベントを次の JSON 形式でエンコードします。
 | フィールド名               | 型 | 説明                                                                                                    |
 | ---------------- | --- | ----------------------------------------------------------------------------------------------------- |
 | `version`        | number  | プロトコルのバージョン番号。現在は`1`です。                                                                               |
-| `type`           | string   | DDL イベント タイプ ( `CREATE` 、 `RENAME` 、 `CINDEX` 、 `DINDEX` 、 `ERASE` 、 `TRUNCATE` 、 `ALTER` 、 `QUERY` 。 |
+| `type`           | string   | DDL イベントタイプ ( `CREATE` 、 `RENAME` 、 `CINDEX` 、 `DINDEX` 、 `ERASE` 、 `TRUNCATE` 、 `ALTER` 、 `QUERY` 。 |
 | `sql`            | string   | DDL ステートメント。                                                                                          |
 | `commitTs`       | number  | DDL ステートメントの実行がアップストリームで完了したときのコミット タイムスタンプ。                                                          |
 | `buildTs`        | number  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。                                                            |
@@ -272,10 +272,10 @@ TiCDC は`INSERT`イベントを次の JSON 形式でエンコードします。
 | `database`      | string   | データベースの名前。                                      |
 | `table`         | string   | テーブルの名前。                                        |
 | `tableID`       | number  | テーブルの ID。                                       |
-| `type`          | string   | DML イベント タイプ`INSERT` 、 `UPDATE` 、 `DELETE`を含む)。 |
+| `type`          | string   | DML イベントタイプ`INSERT` 、 `UPDATE` 、 `DELETE`を含む)。 |
 | `commitTs`      | number  | DML ステートメントの実行がアップストリームで完了したときのコミット タイムスタンプ。    |
 | `buildTs`       | number  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。      |
-| `schemaVersion` | number  | DML メッセージがエンコードされるときのテーブルのスキーマ バージョン番号。         |
+| `schemaVersion` | number  | DML メッセージがエンコードされるときのテーブルのスキーマバージョン番号。         |
 | `data`          | object  | 挿入されたデータ。フィールド名は列名、フィールド値は列値です。                 |
 
 `INSERT`イベントには`data`フィールドが含まれ、 `old`フィールドは含まれません。
@@ -317,10 +317,10 @@ TiCDC は`UPDATE`イベントを次の JSON 形式でエンコードします。
 | `database`      | string    | データベースの名前。                                      |
 | `table`         | string    | テーブルの名前。                                        |
 | `tableID`       | number   | テーブルの ID。                                       |
-| `type`          | string    | DML イベント タイプ`INSERT` 、 `UPDATE` 、 `DELETE`を含む)。 |
+| `type`          | string    | DML イベントタイプ`INSERT` 、 `UPDATE` 、 `DELETE`を含む)。 |
 | `commitTs`      | number   | DML ステートメントの実行がアップストリームで完了したときのコミット タイムスタンプ。    |
 | `buildTs`       | number   | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。      |
-| `schemaVersion` | number   | DML メッセージがエンコードされるときのテーブルのスキーマ バージョン番号。         |
+| `schemaVersion` | number   | DML メッセージがエンコードされるときのテーブルのスキーマバージョン番号。         |
 | `data`          | object   | 更新後のデータ。フィールド名は列名、フィールド値は列値です。                  |
 | `old`           | object   | 更新前のデータ。フィールド名は列名、フィールド値は列値です。                  |
 
@@ -357,10 +357,10 @@ TiCDC は`DELETE`イベントを次の JSON 形式でエンコードします。
 | `database`      | string   | データベースの名前。                                      |
 | `table`         | string   | テーブルの名前。                                        |
 | `tableID`       | number  | テーブルの ID。                                       |
-| `type`          | string   | DML イベント タイプ`INSERT` 、 `UPDATE` 、 `DELETE`を含む)。 |
+| `type`          | string   | DML イベントタイプ`INSERT` 、 `UPDATE` 、 `DELETE`を含む)。 |
 | `commitTs`      | number  | DML ステートメントの実行がアップストリームで完了したときのコミット タイムスタンプ。    |
 | `buildTs`       | number  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。      |
-| `schemaVersion` | number  | DML メッセージがエンコードされるときのテーブルのスキーマ バージョン番号。         |
+| `schemaVersion` | number  | DML メッセージがエンコードされるときのテーブルのスキーマバージョン番号。         |
 | `old`           | object  | 削除されたデータ。フィールド名は列名、フィールド値は列値です。                 |
 
 `DELETE`イベントには`old`フィールドが含まれ、 `data`フィールドは含まれません。
@@ -493,7 +493,7 @@ TiCDC は`BOOTSTRAP`イベントを次の JSON 形式でエンコードします
 ### BOOTSTRAP {#bootstrap}
 
 -   生成時間:
-    -   新しい変更フィードを作成した後、テーブルの最初の DML イベントが送信される前に、TiCDC はテーブル スキーマを構築するために`BOOTSTRAP`イベントをダウンストリームに送信します。
+    -   新しい変更フィードを作成した後、テーブルの最初の DML イベントが送信される前に、TiCDC はテーブルスキーマを構築するために`BOOTSTRAP`イベントをダウンストリームに送信します。
     -   さらに、TiCDCは、新しく参加したコンシューマーがテーブルスキーマを構築できるように、定期的にイベントを`BOOTSTRAP`送信します。デフォルトの送信間隔は120秒または10000メッセージごとです。送信間隔は、 `sink`設定でパラメータ`send-bootstrap-interval-in-sec`と`send-bootstrap-in-msg-count`設定することで調整できます。
     -   テーブルが30分以内に新しいDMLメッセージを受信しない場合、そのテーブルは非アクティブとみなされます。TiCDCは、新しいDMLイベントを受信するまで、そのテーブルへの`BOOTSTRAP`の送信を停止します。
 -   送信先: デフォルトでは、TiCDC は対応するトピックのすべてのパーティションに`BOOTSTRAP`イベントを送信します。シンク設定の`send-bootstrap-to-all-partition`パラメータを設定することで、送信戦略を調整できます。
@@ -504,7 +504,7 @@ TiCDC SimpleプロトコルはDMLメッセージの送信時にテーブルの�
 
 以下では、ダウンストリームがDDLまたはBOOTSTRAPメッセージに基づいてDMLメッセージをどのように処理するかについて説明します。これまでの説明から、以下の情報が判明しています。
 
--   各 DML メッセージには、DML メッセージに対応するテーブルのスキーマ バージョン番号をマークするための`schemaVersion`フィールドが含まれています。
+-   各 DML メッセージには、DML メッセージに対応するテーブルのスキーマバージョン番号をマークするための`schemaVersion`フィールドが含まれています。
 -   各 DDL メッセージには、DDL イベントの前後のテーブルのスキーマ情報をマークするための`tableSchema`フィールドと`preTableSchema`フィールドが含まれています。
 -   各 BOOTSTRAP メッセージには、BOOTSTRAP メッセージに対応するテーブルのスキーマ情報をマークするための`tableSchema`フィールドが含まれています。
 
@@ -601,15 +601,15 @@ TableSchemaは、テーブル名、テーブルID、テーブルバージョン�
 | `schema`  | string   | データベースの名前。                                        |
 | `table`   | string   | テーブルの名前。                                          |
 | `tableID` | number  | テーブルの ID。                                         |
-| `version` | number  | テーブルのスキーマ バージョン番号。                                |
+| `version` | number  | テーブルのスキーマバージョン番号。                                |
 | `columns` | Array  | 列名、データ型、null が可能かどうか、デフォルト値などの列情報。                |
 | `indexes` | Array  | インデックス名、インデックスが一意かどうか、主キーかどうか、インデックス列などのインデックス情報。 |
 
-テーブル名とスキーマ バージョン番号によって、テーブルのスキーマ情報を一意に識別できます。
+テーブル名とスキーマバージョン番号によって、テーブルのスキーマ情報を一意に識別できます。
 
 > **Note:**
 >
-> TiDB の実装上の制限により、 `RENAME TABLE` DDL 操作を実行しても、テーブルのスキーマ バージョン番号は変更されません。
+> TiDB の実装上の制限により、 `RENAME TABLE` DDL 操作を実行しても、テーブルのスキーマバージョン番号は変更されません。
 
 #### カラムの定義 {#column-definition}
 

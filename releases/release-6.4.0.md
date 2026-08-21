@@ -47,7 +47,7 @@ TiDBバージョン: 6.4.0-DMR
 
     `FLASHBACK CLUSTER TO TIMESTAMP`構文を使用すると、ガベージコレクション（GC）の有効期間内に、クラスタを特定の時点に迅速に復元できます。この機能は、DML操作の誤りを簡単かつ迅速に取り消すのに役立ちます。たとえば、 `WHERE`句なしで誤って`DELETE`を実行した後、この構文を使用して数分で元のクラスタを復元できます。この機能はデータベースのバックアップに依存せず、異なる時点のデータをロールバックして、データが変更された正確な時刻を特定できます。 `FLASHBACK CLUSTER TO TIMESTAMP`はデータベースのバックアップの代わりにはならないことに注意してください。
 
-    `FLASHBACK CLUSTER TO TIMESTAMP`を実行する前に、TiCDC などのツールで実行されている PITR およびレプリケーション タスクを一時停止し、 `FLASHBACK`が完了した後に再開する必要があります。そうしないと、レプリケーション タスクが失敗する可能性があります。
+    `FLASHBACK CLUSTER TO TIMESTAMP`を実行する前に、TiCDC などのツールで実行されている PITR およびレプリケーションタスクを一時停止し、 `FLASHBACK`が完了した後に再開する必要があります。そうしないと、レプリケーションタスクが失敗する可能性があります。
 
     詳細については、 [ユーザー向けドキュメント](/sql-statements/sql-statement-flashback-cluster.md)を参照してください。
 
@@ -77,7 +77,7 @@ TiDBバージョン: 6.4.0-DMR
 
 -   コプロセッサタスクの同時実行適応メカニズムを導入します [#37724](https://github.com/pingcap/tidb/issues/37724) @[you06](https://github.com/you06)
 
-    TiKV の処理速度に基づいて、コプロセッサ タスクの数が増えると、TiDB は自動的に並列度を上げて ( [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)の値を調整して)、コプロセッサ タスク キューを減らし、レイテンシーを削減します。
+    TiKV の処理速度に基づいて、コプロセッサタスクの数が増えると、TiDB は自動的に並列度を上げて ( [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)の値を調整して)、コプロセッサタスク キューを減らし、レイテンシーを削減します。
 
 -   テーブル結合順序を決定するための動的計画アルゴリズムを追加 [#37825](https://github.com/pingcap/tidb/issues/37825) @[winoros](https://github.com/winoros)
 
@@ -99,7 +99,7 @@ TiDBバージョン: 6.4.0-DMR
 
     詳細については、 [ユーザー向けドキュメント](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640)を参照してください。
 
--   相関サブクエリの非相関化を実行するかどうかを制御する新しいオプティマイザー ヒント`NO_DECORRELATE`を導入します [#37789](https://github.com/pingcap/tidb/issues/37789) @[time-and-fate](https://github.com/time-and-fate)
+-   相関サブクエリの非相関化を実行するかどうかを制御する新しいオプティマイザーヒント`NO_DECORRELATE`を導入します [#37789](https://github.com/pingcap/tidb/issues/37789) @[time-and-fate](https://github.com/time-and-fate)
 
     TiDB はデフォルトでは、相関のあるサブクエリを書き換えて相関解除を実行しようとします。これにより、通常は実行効率が向上します。しかし、シナリオによっては相関解除によって実行効率が低下する場合があります。v6.4.0 では、オプティマイザヒント`NO_DECORRELATE`が導入され、特定のクエリブロックに対して相関解除を実行しないようにオプティマイザに指示することで、シナリオによってはクエリのパフォーマンスが向上します。
 
@@ -139,7 +139,7 @@ TiDBバージョン: 6.4.0-DMR
 
 -   バッチ書き込みリクエストが軽量トランザクション書き込みの応答時間に与える影響を軽減する [#13313](https://github.com/tikv/tikv/issues/13313) @[glorv](https://github.com/glorv)
 
-    一部のシステムのビジネスロジックでは、定期的なバッチ DML タスクが必要ですが、これらのバッチ書き込みタスクを処理すると、オンライン トランザクションのレイテンシーが増加します。v6.3.0 では、TiKV はハイブリッド ワークロード シナリオでの読み取り要求のスケジューリングを最適化するため、 [`readpool.unified.auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)構成項目を有効にすると、TiKV がすべての読み取り要求に対して UnifyReadPool スレッド プールのサイズを自動的に調整します。v6.4.0 では、TiKV は書き込み要求も動的に識別して優先順位を付け、1 回のポーリングで Apply スレッドが 1 つの FSM (有限状態機械) に対して書き込むことができる最大バイト数を制御できるため、バッチ書き込み要求がトランザクション書き込みの応答時間に与える影響を軽減できます。
+    一部のシステムのビジネスロジックでは、定期的なバッチ DML タスクが必要ですが、これらのバッチ書き込みタスクを処理すると、オンライン トランザクションのレイテンシーが増加します。v6.3.0 では、TiKV はハイブリッドワークロード シナリオでの読み取り要求のスケジューリングを最適化するため、 [`readpool.unified.auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)構成項目を有効にすると、TiKV がすべての読み取り要求に対して UnifyReadPool スレッドプールのサイズを自動的に調整します。v6.4.0 では、TiKV は書き込み要求も動的に識別して優先順位を付け、1 回のポーリングで Apply スレッドが 1 つの FSM (有限状態機械) に対して書き込むことができる最大バイト数を制御できるため、バッチ書き込み要求がトランザクション書き込みの応答時間に与える影響を軽減できます。
 
 ### 使いやすさ {#ease-of-use}
 
@@ -199,7 +199,7 @@ TiDBバージョン: 6.4.0-DMR
 
 -   データベースユーザー向けの追加説明の追加をサポート [#38172](https://github.com/pingcap/tidb/issues/38172) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
-    TiDB v6.4 では、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)または[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)を使用して、データベース ユーザーの追加の説明を追加できます。TiDB は 2 つの説明形式を提供します。 `COMMENT`を使用してテキスト コメントを追加したり、 `ATTRIBUTE`を使用して JSON 形式の構造化属性セットを追加したりできます。
+    TiDB v6.4 では、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)または[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)を使用して、データベースユーザーの追加の説明を追加できます。TiDB は 2 つの説明形式を提供します。 `COMMENT`を使用してテキスト コメントを追加したり、 `ATTRIBUTE`を使用して JSON 形式の構造化属性セットを追加したりできます。
 
     さらに、TiDB v6.4.0では[`USER_ATTRIBUTES`](/information-schema/information-schema-user-attributes.md)テーブルが追加され、ユーザーコメントやユーザー属性の情報を表示できるようになりました。
 
@@ -236,7 +236,7 @@ TiDBバージョン: 6.4.0-DMR
 
 -   DMは、下流のマージ済みテーブルの拡張列に上流のデータソース情報を書き込むことをサポートしています [#37797](https://github.com/pingcap/tidb/issues/37797) @[lichunzhu](https://github.com/lichunzhu)
 
-    上流から TiDB へシャーディングされたスキーマとテーブルをマージする際、ターゲット テーブルに複数のフィールド (拡張列) を手動で追加し、DM タスクの設定時にその値を指定できます。たとえば、拡張列に上流のシャーディングされたスキーマとテーブルの名前を指定すると、DM によって下流に書き込まれるデータにはスキーマ名とテーブル名が含まれます。下流のデータが通常と異なる場合、この機能を使用して、スキーマ名やテーブル名など、ターゲット テーブル内のデータ ソース情報をすばやく特定できます。
+    上流から TiDB へシャーディングされたスキーマとテーブルをマージする際、ターゲットテーブルに複数のフィールド (拡張列) を手動で追加し、DM タスクの設定時にその値を指定できます。たとえば、拡張列に上流のシャーディングされたスキーマとテーブルの名前を指定すると、DM によって下流に書き込まれるデータにはスキーマ名とテーブル名が含まれます。下流のデータが通常と異なる場合、この機能を使用して、スキーマ名やテーブル名など、ターゲットテーブル内のデータソース情報をすばやく特定できます。
 
     詳細については、 [テーブル、スキーマ、ソース情報を抽出し、マージされたテーブルに書き込みます](/dm/dm-table-routing.md#extract-table-schema-and-source-information-and-write-into-the-merged-table)
 
@@ -298,7 +298,7 @@ TiDBバージョン: 6.4.0-DMR
 | [`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640)                                                             | 新しく追加された | デフォルト値は`0`です。tidb_enable_external_ts_read [`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640) `ON`に設定されている場合、TiDB はこの変数で指定されたタイムスタンプを持つデータを読み取ります。                                      |
 | [`tidb_gogc_tuner_threshold`](/system-variables.md#tidb_gogc_tuner_threshold-new-in-v640)                                           | 新しく追加された | GOGC のチューニングにおける最大メモリしきい値を指定します。メモリがこのしきい値を超えると、GOGC Tuner は動作を停止します。デフォルト値は`0.6`です。                                                                                                                                                |
 | [`tidb_memory_usage_alarm_keep_record_num`](/system-variables.md#tidb_memory_usage_alarm_keep_record_num-new-in-v640)               | 新しく追加された | tidb-serverのメモリ使用量がメモリアラームのしきい値を超えてアラームが発生した場合、TiDBはデフォルトでは直近5件のアラーム発生時に生成されたステータスファイルのみを保持します。この件数は、この変数で調整できます。                                                                                                                   |
-| [`tidb_opt_prefix_index_single_scan`](/system-variables.md#tidb_opt_prefix_index_single_scan-new-in-v640)                           | 新しく追加された | TiDB オプティマイザが不要なテーブル検索を回避し、クエリのパフォーマンスを向上させるために、一部のフィルタ条件をプレフィックス インデックスにプッシュダウンするかどうかを制御します。デフォルト値は`ON`です。                                                                                                                         |
+| [`tidb_opt_prefix_index_single_scan`](/system-variables.md#tidb_opt_prefix_index_single_scan-new-in-v640)                           | 新しく追加された | TiDB オプティマイザが不要なテーブル検索を回避し、クエリのパフォーマンスを向上させるために、一部のフィルタ条件をプレフィックスインデックスにプッシュダウンするかどうかを制御します。デフォルト値は`ON`です。                                                                                                                         |
 | [`tidb_opt_range_max_size`](/system-variables.md#tidb_opt_range_max_size-new-in-v640)                                               | 新しく追加された | オプティマイザがスキャン範囲を構築するためのメモリ使用量の上限を指定します。デフォルト値は`67108864` (64 MiB) です。                                                                                                                                                                |
 | [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)                                             | 新しく追加された | オプティマイザがスキャン範囲を構築するためのメモリ使用量の上限を制御します（実験的）。デフォルト値は`0`で、メモリ制限がないことを意味します。                                                                                                                                                            |
 | [`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)                       | 新しく追加された | TiDB が GC をトリガーしようとするしきい値を制御します (実験的)。デフォルト値は`70%`です。                                                                                                                                                                               |
@@ -326,7 +326,7 @@ TiDBバージョン: 6.4.0-DMR
 
 ### その他 {#others}
 
--   v6.4.0 以降、 `mysql.user`テーブルには、 `User_attributes`と`Token_issuer`という 2 つの新しい列が追加されています。以前の TiDB バージョンのバックアップ データから TiDB v6.4.0 に[`mysql`スキーマ内のシステムテーブルを復元します](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)と、 BR は`column count mismatch`テーブルの`mysql.user`エラーを報告します。 `mysql`スキーマ内のシステム テーブルを復元しない場合、このエラーは報告されません。
+-   v6.4.0 以降、 `mysql.user`テーブルには、 `User_attributes`と`Token_issuer`という 2 つの新しい列が追加されています。以前の TiDB バージョンのバックアップデータから TiDB v6.4.0 に[`mysql`スキーマ内のシステムテーブルを復元します](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)と、 BR は`column count mismatch`テーブルの`mysql.user`エラーを報告します。 `mysql`スキーマ内のシステムテーブルを復元しない場合、このエラーは報告されません。
 -   名前が「 [Dumplingのエクスポートファイルの形式](/dumpling-overview.md#format-of-exported-files)一致するものの、末尾が非圧縮形式（例`test-schema-create.sql.origin`および`test.table-schema.sql.origin` ）で終わるファイルについては、 TiDB Lightning の処理方法が変更されました。v6.4.0 より前は、インポート対象ファイルにこのようなファイルが含まれている場合、TiDB Lightning はこれらのファイルのインポートをスキップしていました。v6.4.0 以降では、 TiDB Lightning TiDB Lightning はこれらのファイルがサポートされていない圧縮形式を使用しているとみなすため、インポート処理は失敗します。
 -   バージョン6.4.0以降、 `SYSTEM_VARIABLES_ADMIN`または`SUPER`の権限を持つチェンジフィードのみがTiCDC Syncpoint機能を使用できます。
 
@@ -381,7 +381,7 @@ TiDBバージョン: 6.4.0-DMR
     -   TiDB Data Migration (DM)
 
         -   役に立たない`operate-source update`コマンドを dmctl から削除します [#7246](https://github.com/pingcap/tiflow/issues/7246) @[buchuitoudegou](https://github.com/buchuitoudegou)
-        -   上流データベースが TiDB と互換性のない DDL ステートメントを使用している場合に DM の完全インポートが失敗する問題を修正しました。TiDB でサポートされている DDL ステートメントを使用して、事前に TiDB でターゲット テーブルのスキーマを手動で作成することで、インポートの成功を確実にすることができます [#37984](https://github.com/pingcap/tidb/issues/37984) @[lance6716](https://github.com/lance6716)
+        -   上流データベースが TiDB と互換性のない DDL ステートメントを使用している場合に DM の完全インポートが失敗する問題を修正しました。TiDB でサポートされている DDL ステートメントを使用して、事前に TiDB でターゲットテーブルのスキーマを手動で作成することで、インポートの成功を確実にすることができます [#37984](https://github.com/pingcap/tidb/issues/37984) @[lance6716](https://github.com/lance6716)
 
     -   TiDB Lightning
 
