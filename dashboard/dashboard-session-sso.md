@@ -112,7 +112,7 @@ TiDB Dashboardに SSO が設定されると、次の手順に従って SSO 経�
 
 5.  **アプリケーションの種類**で**シングルページ アプリケーション**を選択します。
 
-6.  **次へ**ボタンをクリックします。
+6.  **Next**ボタンをクリックします。
 
     ![Sample Step](/media/dashboard/dashboard-session-sso-okta-2.png)
 
@@ -168,7 +168,7 @@ Oktaと同様に、 [オーソ0](https://auth0.com/)もOIDC SSOアイデンテ�
 
     ![Create Application](/media/dashboard/dashboard-session-sso-auth0-create-app.png)
 
-    ポップアップダイアログで、**名前**を入力します（例：「TiDB Dashboard」）。**アプリケーションの種類を選択**で**「シングルページWebアプリケーション」を**選択します。 **作成**をクリックします。
+    ポップアップダイアログで、**名前**を入力します（例：「TiDB Dashboard」）。**アプリケーションの種類を選択**で**「シングルページWebアプリケーション」を**選択します。 **Create**をクリックします。
 
 4.  **[設定]**をクリックします。
 

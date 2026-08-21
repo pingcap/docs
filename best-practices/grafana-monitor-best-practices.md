@@ -47,11 +47,11 @@ tidb_executor_statement_total{type="Show"} 500531
 tidb_executor_statement_total{type="Use"} 466016
 ```
 
-上記のデータはPrometheusに保存され、Grafanaに表示されます。パネルを右クリックし、次の図に示すように**編集**ボタンをクリックするか、直接<kbd>E</kbd>キーを押します。
+上記のデータはPrometheusに保存され、Grafanaに表示されます。パネルを右クリックし、次の図に示すように**Edit**ボタンをクリックするか、直接<kbd>E</kbd>キーを押します。
 
 ![The Edit entry for the Metrics tab](/media/best-practices/metric-board-edit-entry.png)
 
-**編集**ボタンをクリックすると、「メトリクス」タブに`tidb_executor_statement_total`メトリクス名を含むクエリ式が表示されます。パネル上のいくつかの項目の意味は次のとおりです。
+**Edit**ボタンをクリックすると、「メトリクス」タブに`tidb_executor_statement_total`メトリクス名を含むクエリ式が表示されます。パネル上のいくつかの項目の意味は次のとおりです。
 
 -   `rate[1m]` : 1分間の成長率。カウンター型のデータにのみ使用できます。
 -   `sum` : 値の合計。
@@ -111,7 +111,7 @@ Y 軸を線形スケールに切り替えます。
 
 ### ヒント4: 共有クロスヘアまたはツールチップを使用する {#tip-4-use-shared-crosshair-or-tooltip}
 
-**設定**パネルには、デフォルトで**Default**に設定されている**グラフツールチップ**パネルオプションがあります。
+**Settings**パネルには、デフォルトで**Default**に設定されている**グラフツールチップ**パネルオプションがあります。
 
 ![Graphic presentation tools](/media/best-practices/graph-tooltip.jpeg)
 

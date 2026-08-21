@@ -37,7 +37,7 @@ TiDB Dashboardの「スロークエリ」ページでは、クラスタ内のす
 
 ### スロークエリをローカルに出力する {#export-slow-queries-locally}
 
-ページ右上隅の☰（**その他**）をクリックすると、**エクスポート**オプションが表示されます。**エクスポートを**クリックすると、TiDB Dashboardは現在のリストにあるスロークエリをCSVファイルとしてエクスポートします。
+ページ右上隅の☰（**その他**）をクリックすると、**Export**オプションが表示されます。**エクスポートを**クリックすると、TiDB Dashboardは現在のリストにあるスロークエリをCSVファイルとしてエクスポートします。
 
 ![Export slow queries locally](/media/dashboard/dashboard-slow-queries-export-v651.png)
 

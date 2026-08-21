@@ -92,7 +92,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
     -   画面の使用効率を最大化するために、左側のナビゲーション バーを導入します。
     -   よりフラットなナビゲーション階層を採用します。
 
--   Serverless Tierユーザーの[**接続する**](/tidb-cloud/connect-to-tidb-cluster-serverless.md)エクスペリエンスを向上します。
+-   Serverless Tierユーザーの[**Connect**](/tidb-cloud/connect-to-tidb-cluster-serverless.md)エクスペリエンスを向上します。
 
     開発者は、コンテキストを切り替えることなく、数回クリックするだけで SQL エディターまたは好みのツールに接続できるようになりました。
 
@@ -614,7 +614,7 @@ TiDB Cloudが一般提供を開始しました。以下の[サインアップ](h
 
 改善：
 
--   [**接続する**](/tidb-cloud/connect-via-standard-connection.md)ページの MySQL クライアントに推奨オプション`--connect-timeout 15`を追加します。
+-   [**Connect**](/tidb-cloud/connect-via-standard-connection.md)ページの MySQL クライアントに推奨オプション`--connect-timeout 15`を追加します。
 
 バグ修正:
 

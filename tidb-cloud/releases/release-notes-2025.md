@@ -444,7 +444,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
     -   **クラスタ**: TiDB Cloud Dedicated クラスターをより柔軟に管理します。
     -   **リージョン**: TiDB Cloud Dedicated クラスターをデプロイできるすべてのクラウド リージョンを表示します。
     -   **プライベート エンドポイント接続**: クラスターの安全でプライベートな接続を設定します。
-    -   **インポート**: クラスターのデータ インポート タスクを管理します。
+    -   **Import**: クラスターのデータ インポート タスクを管理します。
 
     詳細については[TiDB Cloud Dedicated API](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated/)を参照してください。
 
@@ -452,8 +452,8 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     -   **クラスタ**: TiDB Cloud Starter または Essential クラスターをより柔軟に管理します。
     -   **ブランチ**: クラスターのブランチを管理します。
-    -   **エクスポート**: クラスターのデータ エクスポート タスクを管理します。
-    -   **インポート**: クラスターのデータ インポート タスクを管理します。
+    -   **Export**: クラスターのデータ エクスポート タスクを管理します。
+    -   **Import**: クラスターのデータ インポート タスクを管理します。
 
     詳細については[TiDB Cloud Starterと基本 API](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless/)を参照してください。
 

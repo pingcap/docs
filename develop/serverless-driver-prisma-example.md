@@ -123,7 +123,7 @@ const prisma = new PrismaClient({ adapter });
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1.  TiDB Cloud Starterインスタンスの概要ページで、右上隅の**接続**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
+1.  TiDB Cloud Starterインスタンスの概要ページで、右上隅の**Connect**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
 
     ```
     mysql://[username]:[password]@[host]:4000/[database]?sslaccept=strict

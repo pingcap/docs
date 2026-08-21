@@ -73,7 +73,7 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
 
 ### TiDB Cloud：インポート機能経由 {#tidb-cloud-via-the-import-feature}
 
-1.  対象のTiDB Cloudリソースの**インポート**ページを開きます。
+1.  対象のTiDB Cloudリソースの**Import**ページを開きます。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
@@ -81,7 +81,7 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象リソースの名前をクリックして概要ページに移動し、左側のナビゲーションペインにある**インポート**をクリックします。
+    2.  対象リソースの名前をクリックして概要ページに移動し、左側のナビゲーションペインにある**Import**をクリックします。
 
 2.  **クラウドストレージからデータをインポート**を選択し、次に**Amazon S3**をクリックします。
 
@@ -102,7 +102,7 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
     -   1,000,000行の評価記録
     -   1,000,000行の注文記録
 
-4.  **接続** ＞ **インポート開始**をクリックしてインポート処理を開始し、 TiDB Cloudインポート完了をお待ちください。
+4.  **Connect** ＞ **インポート開始**をクリックしてインポート処理を開始し、 TiDB Cloudインポート完了をお待ちください。
 
 データをTiDB Cloudにインポートまたは移行する方法の詳細については、 [TiDB Cloud移行の概要](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview)を参照してください。
 

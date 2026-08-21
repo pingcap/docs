@@ -83,7 +83,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
     3.  役割の名前、説明、ID、および役割の起動ステージを入力してください。役割名は、作成後に変更することはできません。
 
-    4.  **Add permissions**をクリックします。役割に以下の権限を追加し、 **追加**をクリックします。
+    4.  **Add permissions**をクリックします。役割に以下の権限を追加し、 **Add**をクリックします。
 
         -   storage.buckets.get
         -   storage.オブジェクト.作成
@@ -100,7 +100,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
     ![Grant Access to the bucket ](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-grant-access-1.png)
 
-5.  バケットへのアクセスを許可するには、以下の情報を入力し、 **保存**をクリックしてください。
+5.  バケットへのアクセスを許可するには、以下の情報を入力し、 **Save**をクリックしてください。
 
     -   **New Principals**フィールドに、以前に記録した対象のTiDBクラスタの**Service Account ID**を貼り付けます。
 
@@ -147,7 +147,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
     3.  **Allowed resource types**セクションで、 **コンテナ**と**オブジェクト**を選択します。
 
-    4.  **Allowed permissions**セクションで、 **読み取り** 、 **書き込み** 、 **削除** 、 **一覧表示** 、 **作成**を選択します。
+    4.  **Allowed permissions**セクションで、 **読み取り** 、 **書き込み** 、 **Delete** 、 **一覧表示** 、 **Create**を選択します。
 
     5.  SASトークンの有効期間を、ニーズを満たすのに十分な長さに指定してください。
 
@@ -169,10 +169,10 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 </div>
 </SimpleTab>
 
-**次へ**をクリックして、 TiDB Cloud DedicatedクラスターからAmazon S3、GCS、またはAzure Blob Storageへの接続を確立します。TiDB Cloudは接続が成功したかどうかを自動的にテストおよび検証します。
+**Next**をクリックして、 TiDB Cloud DedicatedクラスターからAmazon S3、GCS、またはAzure Blob Storageへの接続を確立します。TiDB Cloudは接続が成功したかどうかを自動的にテストおよび検証します。
 
 -   はいの場合、次の設定手順に進みます。
--   そうでない場合は、接続エラーが表示されますので、エラーを処理してください。エラーが解決したら、 **次へ**をクリックして接続を再試行してください。
+-   そうでない場合は、接続エラーが表示されますので、エラーを処理してください。エラーが解決したら、 **Next**をクリックして接続を再試行してください。
 
 ## ステップ2. レプリケーションの設定 {#step-2-configure-replication}
 
@@ -242,16 +242,16 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
 ## ステップ3．仕様の設定 {#step-3-configure-specification}
 
-**次へ**をクリックして、変更フィードの仕様を設定してください。
+**Next**をクリックして、変更フィードの仕様を設定してください。
 
 1.  **Changefeed Specification**領域で、変更フィードで使用するレプリケーション容量ユニット（RCU）の数を指定します。
 2.  **Changefeed Name**欄に、変更フィードの名前を指定します。
 
 ## ステップ4．構成を確認し、レプリケーションを開始する {#step-4-review-the-configuration-and-start-replication}
 
-**次へ**をクリックして、変更フィードの設定を確認してください。
+**Next**をクリックして、変更フィードの設定を確認してください。
 
--   すべての設定が正しいことを確認したら、 **作成**をクリックして変更フィードの作成に進んでください。
+-   すべての設定が正しいことを確認したら、 **Create**をクリックして変更フィードの作成に進んでください。
 -   設定を変更する必要がある場合は、 **前へ**をクリックして戻り、必要な変更を行ってください。
 
 シンクはまもなく起動し、シンクの状態が**作成中**から**実行中**に変わるのが確認できます。

@@ -105,7 +105,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 ### フロー名を設定します {#set-the-flow-name}
 
-フロー名を入力し、 **次へ**をクリックします。
+フロー名を入力し、 **Next**をクリックします。
 
 ![name flow](/media/develop/aws-appflow-step-name-flow.png)
 
@@ -121,9 +121,9 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
     ![salesforce data](/media/develop/aws-appflow-step-salesforce-data.png)
 
-2.  **接続**をクリックしてください。
+2.  **Connect**をクリックしてください。
 
-    1.  **Salesforceに接続**ダイアログで、この接続の名前を指定し、 **続行**をクリックします。
+    1.  **Salesforceに接続**ダイアログで、この接続の名前を指定し、 **Continue**をクリックします。
 
         ![connect to salesforce](/media/develop/aws-appflow-step-connect-to-salesforce.png)
 
@@ -139,7 +139,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
     ![tidb dest](/media/develop/aws-appflow-step-tidb-dest.png)
 
-4.  **接続**をクリックする前に、Salesforce **Account**オブジェクト用に TiDB に`sf_account`テーブルを作成する必要があります。このテーブルスキーマは[Amazon AppFlow のチュートリアル](https://docs.aws.amazon.com/appflow/latest/userguide/flow-tutorial-set-up-source.html)にあるサンプルデータとは異なることに注意してください。
+4.  **Connect**をクリックする前に、Salesforce **Account**オブジェクト用に TiDB に`sf_account`テーブルを作成する必要があります。このテーブルスキーマは[Amazon AppFlow のチュートリアル](https://docs.aws.amazon.com/appflow/latest/userguide/flow-tutorial-set-up-source.html)にあるサンプルデータとは異なることに注意してください。
 
     ```sql
     CREATE TABLE `sf_account` (
@@ -167,7 +167,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
     ![complete flow](/media/develop/aws-appflow-step-complete-flow.png)
 
-8.  **エラー処理**領域で、 **現在のフロー実行を停止する**を選択します。**フローのトリガー**領域で、 **「オンデマンドで実行**」トリガータイプを選択します。これは、フローを手動で実行する必要があることを意味します。次に、 **次へ**をクリックします。
+8.  **エラー処理**領域で、 **現在のフロー実行を停止する**を選択します。**フローのトリガー**領域で、 **「オンデマンドで実行**」トリガータイプを選択します。これは、フローを手動で実行する必要があることを意味します。次に、 **Next**をクリックします。
 
     ![complete step1](/media/develop/aws-appflow-step-complete-step1.png)
 
@@ -204,7 +204,7 @@ Salesforce の**Account**オブジェクトのフィールドを TiDB の`sf_acc
 
 ### （オプション）フィルターを設定する {#optional-set-filters}
 
-データフィールドにフィルターを追加したい場合は、ここで設定できます。そうでない場合は、この手順をスキップして**次へ**をクリックしてください。
+データフィールドにフィルターを追加したい場合は、ここで設定できます。そうでない場合は、この手順をスキップして**Next**をクリックしてください。
 
 ![filters](/media/develop/aws-appflow-step-filters.png)
 

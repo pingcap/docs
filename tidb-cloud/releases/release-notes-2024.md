@@ -150,7 +150,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの接続エクスペリエンスを向上させます。
 
-    -   TiDB Cloud Dedicatedユーザーがよりスムーズで効率的な接続体験を得られるよう、**接続**ダイアログのインターフェースを改訂します。
+    -   TiDB Cloud Dedicatedユーザーがよりスムーズで効率的な接続体験を得られるよう、**Connect**ダイアログのインターフェースを改訂します。
     -   クラスターのネットワーク設定を簡素化するために、新しいクラスターレベルの**ネットワーク設定**ページを導入しました。
     -   **セキュリティ設定**ページを新しい**パスワード設定**ページに置き換え、IPアクセスリストの設定を新しい**ネットワーク**ページに移動します。
 
@@ -158,7 +158,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 -   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデータインポートエクスペリエンスを向上させます。
 
-    -   **インポート**ページのレイアウトをより分かりやすいものに改善する。
+    -   **Import**ページのレイアウトをより分かりやすいものに改善する。
     -   TiDB Cloud Serverless クラスターとTiDB Cloud Dedicatedクラスターのインポート手順を統一します。
     -   AWSロールARNの作成プロセスを簡素化し、接続設定を容易にします。
 

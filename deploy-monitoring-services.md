@@ -241,7 +241,7 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
 
 5.  Prometheus データ ソースを選択します。
 
-6.  **インポート**をクリックします。Prometheusダッシュボードがインポートされます。
+6.  **Import**をクリックします。Prometheusダッシュボードがインポートされます。
 
 ## コンポーネントメトリックを表示する {#view-component-metrics}
 

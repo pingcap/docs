@@ -36,7 +36,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**接続**をクリックしてください。接続ダイアログが表示されます。
+2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
 3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
@@ -51,7 +51,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **パスワードをリセット**をクリックして新しいパスワードを生成できます。
 
-5.  Navicat Premiumを起動し、左上隅の**接続**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDBを**ダブルクリックします。
+5.  Navicat Premiumを起動し、左上隅の**Connection**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDBを**ダブルクリックします。
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
@@ -84,9 +84,9 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
     クライアントのIPアドレスがアクセスリストに追加されていることを確認してください。
 
-4.  左側のナビゲーションペインで**概要**をクリックすると、インスタンスの概要ページに戻ります。
+4.  左側のナビゲーションペインで**Overview**をクリックすると、インスタンスの概要ページに戻ります。
 
-5.  右上隅の**接続**をクリックしてください。接続ダイアログが表示されます。
+5.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
 6.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**パブリック**を選択します。
 
@@ -95,7 +95,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
     -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA証明書**をクリックしてダウンロードしてください。
     -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
-7.  Navicat Premiumを起動し、左上隅の**接続**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDBを**ダブルクリックします。
+7.  Navicat Premiumを起動し、左上隅の**Connect**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDBを**ダブルクリックします。
 
 8.  「**新規接続（TiDB）」**ダイアログで、以下の接続パラメータを設定します。
 
@@ -116,7 +116,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
 
-2.  右上隅の**接続**をクリックしてください。接続ダイアログが表示されます。
+2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
 3.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**パブリック**を選択します。
 
@@ -126,7 +126,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
 4.  **CA証明書をダウンロードするには、「CA証明書**」をクリックしてください。
 
-5.  Navicat Premiumを起動し、左上隅の**接続**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDBを**ダブルクリックします。
+5.  Navicat Premiumを起動し、左上隅の**Connect**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDBを**ダブルクリックします。
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
@@ -151,7 +151,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
-1.  Navicat Premiumを起動し、左上隅の**接続**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDBを**ダブルクリックします。
+1.  Navicat Premiumを起動し、左上隅の**Connection**をクリックし、**ベンダーフィルタ**リストから**PingCAP**を選択し、右側のパネルで**TiDBを**ダブルクリックします。
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 

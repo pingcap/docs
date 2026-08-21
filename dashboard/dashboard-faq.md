@@ -27,7 +27,7 @@ summary: このドキュメントは、TiDB Dashboardに関するよくある質
 
 ### 概要ページの**QPS**と**レイテンシの**セクションに`prometheus_not_found`エラーが表示される {#a-prometheus_not_found-error-is-shown-in-qps-and-latency-sections-on-the-overview-page}
 
-**概要**ページの**QPS**と**レイテンシの**セクションには、Prometheusがデプロイされたクラスターが必要です。そうでない場合、エラーが表示されます。この問題を解決するには、クラスターにPrometheusインスタンスをデプロイしてください。
+**Overview**ページの**QPS**と**レイテンシの**セクションには、Prometheusがデプロイされたクラスターが必要です。そうでない場合、エラーが表示されます。この問題を解決するには、クラスターにPrometheusインスタンスをデプロイしてください。
 
 Prometheusインスタンスをデプロイしてもこの問題が引き続き発生する場合は、デプロイメントツール（TiUPまたはTiDB Operator）が古く、ツールがメトリクスアドレスを自動的に報告しないため、TiDB Dashboardでメトリクスをクエリできないことが原因である可能性があります。デプロイメントツールを最新バージョンにアップグレードして、もう一度お試しください。
 

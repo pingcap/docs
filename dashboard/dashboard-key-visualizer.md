@@ -64,11 +64,11 @@ TiDB クラスターには最大数十万のリージョンが含まれる場合
 
 ### 設定 {#settings}
 
-Key Visualizerページを初めてご利用になる場合は、 **設定**ページでこの機能を手動で有効にする必要があります。ページのガイドに従い、 **設定を開く**をクリックして設定ページを開きます。
+Key Visualizerページを初めてご利用になる場合は、 **Settings**ページでこの機能を手動で有効にする必要があります。ページのガイドに従い、 **設定を開く**をクリックして設定ページを開きます。
 
 ![Feature disabled](/media/dashboard/dashboard-keyviz-not-enabled.png)
 
-この機能を有効にすると、右上隅にある**設定**アイコンをクリックして設定ページを開くことができます。
+この機能を有効にすると、右上隅にある**Settings**アイコンをクリックして設定ページを開くことができます。
 
 ![Settings icon](/media/dashboard/dashboard-keyviz-settings-button.png)
 
@@ -76,7 +76,7 @@ Key Visualizerページを初めてご利用になる場合は、 **設定**ペ�
 
 ![Settings page](/media/dashboard/dashboard-keyviz-settings.png)
 
-スイッチを介してデータ収集を開始するかどうかを設定し、 **保存**をクリックして設定を有効にします。機能を有効にすると、ツールバーが利用可能になります。
+スイッチを介してデータ収集を開始するかどうかを設定し、 **Save**をクリックして設定を有効にします。機能を有効にすると、ツールバーが利用可能になります。
 
 ![Toolbar](/media/dashboard/dashboard-keyviz-toolbar.png)
 
