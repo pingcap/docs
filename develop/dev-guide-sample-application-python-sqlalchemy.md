@@ -77,11 +77,11 @@ SQLAlchemyは、複数のデータベースを扱うORMライブラリです。�
 
     -   **Connection Type**は`Public`に設定されています。
 
-    -   **ブランチ**は`main`に設定されています。
+    -   **Branch**は`main`に設定されています。
 
-    -   **Connect With は**`General`に設定されています。
+    -   **Connect With**は`General`に設定されています。
 
-    -   お使いの環境に合った**オペレーティングシステム**を選択してください。
+    -   お使いの環境に合った**Operating System**を選択してください。
 
     > **Tip:**
     >

@@ -62,13 +62,13 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 
 3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **接続タイプ**は`Public`に設定されています。
+    -   **Connection Type**は`Public`に設定されています。
 
-    -   **ブランチ**は`main`に設定されています。
+    -   **Branch**は`main`に設定されています。
 
-    -   **Connect With は**`General`に設定されています。
+    -   **Connect With**は`General`に設定されています。
 
-    -   お使いの環境に合った**オペレーティングシステム**を選択してください。
+    -   お使いの環境に合った**Operating System**を選択してください。
 
     > **Tip:**
     >

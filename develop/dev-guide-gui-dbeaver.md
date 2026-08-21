@@ -54,9 +54,9 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
     -   **Connection Type**は`Public`に設定されています。
-    -   **ブランチ**は`main`に設定されています。
-    -   **Connect With は**`DBeaver`に設定されています。
-    -   お使いの環境に合った**オペレーティングシステム**を選択してください。
+    -   **Branch**は`main`に設定されています。
+    -   **Connect With**は`DBeaver`に設定されています。
+    -   お使いの環境に合った**Operating System**を選択してください。
 
 4.  **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
 

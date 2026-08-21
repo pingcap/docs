@@ -57,10 +57,10 @@ TiDB Cloud StarterへのWordPressデータベース接続を設定します。
 
 3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **接続タイプ**は`Public`に設定されています。
+    -   **Connection Type**は`Public`に設定されています。
     -   **Connect With**は`WordPress`に設定されています。
-    -   **オペレーティングシステム**は`Debian/Ubuntu/Arch`に設定されています。
-    -   **データベースは**、使用したいデータベースに設定されます。たとえば、 `test` 。
+    -   **Operating System**は`Debian/Ubuntu/Arch`に設定されています。
+    -   **Database**は、使用したいデータベースに設定されます。たとえば、 `test` 。
 
 4.  **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
 
