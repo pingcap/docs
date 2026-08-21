@@ -103,10 +103,9 @@ The **Bills** tab shows the billing summary by projects & instances and the bill
 
 > **Note:**
 >
-> The total amount in the monthly bill might differ from that in the daily usage details due to differences in precision:
+> Your Bills data and the data in Cost Explorer or usage detail CSV exports are processed and presented at different granularities. Bills data is calculated for monthly settlement, while Cost Explorer and usage detail CSV exports provide more granular breakdowns, such as by day, service, project, cluster, or resource. As a result, their totals might vary slightly due to rounding at different aggregation levels.
 >
-> - The total amount in the monthly bill is rounded off to the 2nd decimal place.
-> - The total amount in the daily usage details is accurate to the 6th decimal place.
+> Cost Explorer and usage detail CSV exports are intended for usage and cost analysis. When these data sources differ, the amount on your invoice is the final amount that you owe.
 
 The following are billing explanations related to storage:
 
