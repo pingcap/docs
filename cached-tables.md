@@ -240,5 +240,5 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## 参照 {#see-also}
 
--   [テーブルの変更](/sql-statements/sql-statement-alter-table.md)
+-   [ALTER TABLE](/sql-statements/sql-statement-alter-table.md)
 -   [システム変数](/system-variables.md)

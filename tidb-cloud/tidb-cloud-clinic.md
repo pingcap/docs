@@ -38,7 +38,7 @@ TiDB Cloud ClinicはGrafanaを使用して、TiDBクラスターの包括的な�
 
 メトリクス ダッシュボードを表示するには、次の手順を実行します。
 
-1.  [TiDB Cloud Clinic コンソール](https://clinic.pingcap.com/)で、クラスターの**「クラスタ」**ページに移動します。
+1.  [TiDB Cloud Clinic コンソール](https://clinic.pingcap.com/)で、クラスターの**クラスタ**ページに移動します。
 
 2.  **[メトリック]**をクリックします。
 
@@ -77,7 +77,7 @@ TiDB Cloudコンソールのデフォルトの[**Slow Queries**](/tidb-cloud/tun
 
 クラスター内のスロークエリを表示するには、次の手順を実行します。
 
-1.  [TiDB Cloud Clinic コンソール](https://clinic.pingcap.com/)で、クラスターの**「クラスタ」**ページに移動します。
+1.  [TiDB Cloud Clinic コンソール](https://clinic.pingcap.com/)で、クラスターの**クラスタ**ページに移動します。
 
 2.  **Slow Query**をクリックします。
 
@@ -97,7 +97,7 @@ TiDB Cloud ClinicはTopSQL情報を提供し、データベース内の各SQL文
 
 TopSQL を表示するには、次の手順を実行します。
 
-1.  [TiDB Cloud Clinic コンソール](https://clinic.pingcap.com/)で、クラスターの**「クラスタ」**ページに移動します。
+1.  [TiDB Cloud Clinic コンソール](https://clinic.pingcap.com/)で、クラスターの**クラスタ**ページに移動します。
 
 2.  **TopSQL**をクリックします。
 
@@ -113,7 +113,7 @@ TopSQL を表示するには、次の手順を実行します。
 
 ベンチマークレポートを生成するには、次の手順を実行します。
 
-1.  [TiDB Cloud Clinic コンソール](https://clinic.pingcap.com/)で、クラスターの**「クラスタ」**ページに移動します。
+1.  [TiDB Cloud Clinic コンソール](https://clinic.pingcap.com/)で、クラスターの**クラスタ**ページに移動します。
 
 2.  **Benchmark Report**をクリックします。
 
@@ -121,4 +121,4 @@ TopSQL を表示するには、次の手順を実行します。
 
 4.  ベンチマークレポートを生成するには、**Create Report**をクリックします。
 
-5.  レポートの生成が完了するまでお待ちください。レポートが完成したら、 **「ビュー」**をクリックして開きます。
+5.  レポートの生成が完了するまでお待ちください。レポートが完成したら、 **ビュー**をクリックして開きます。

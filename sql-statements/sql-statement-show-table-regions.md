@@ -204,5 +204,5 @@ test> SHOW TABLE t REGIONS;
 
 ## 参照 {#see-also}
 
--   [Split Region](/sql-statements/sql-statement-split-region.md)
+-   [SPLIT REGION](/sql-statements/sql-statement-split-region.md)
 -   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)

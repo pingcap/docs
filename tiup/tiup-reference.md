@@ -62,19 +62,19 @@ TiUPバージョンを出力します。
 
 TiUPには複数のコマンドがあり、これらのコマンドには複数のサブコマンドがあります。具体的なコマンドとその詳細な説明については、以下のリストにある対応するリンクをクリックしてください。
 
--   [インストール](/tiup/tiup-command-install.md) :コンポーネントをインストールします。
--   [リスト](/tiup/tiup-command-list.md) :コンポーネントリストを表示します。
--   [アンインストール](/tiup/tiup-command-uninstall.md) :コンポーネントをアンインストールします。
--   [アップデート](/tiup/tiup-command-update.md) : インストールされているコンポーネントを更新します。
--   [状態](/tiup/tiup-command-status.md) :コンポーネントの実行ステータスを表示します。
--   [クリーン](/tiup/tiup-command-clean.md) :コンポーネントのデータディレクトリをクリーンアップします。
+-   [install](/tiup/tiup-command-install.md) :コンポーネントをインストールします。
+-   [list](/tiup/tiup-command-list.md) :コンポーネントリストを表示します。
+-   [uninstall](/tiup/tiup-command-uninstall.md) :コンポーネントをアンインストールします。
+-   [update](/tiup/tiup-command-update.md) : インストールされているコンポーネントを更新します。
+-   [status](/tiup/tiup-command-status.md) :コンポーネントの実行ステータスを表示します。
+-   [clean](/tiup/tiup-command-clean.md) :コンポーネントのデータディレクトリをクリーンアップします。
 -   [mirror](/tiup/tiup-command-mirror.md) : ミラーを管理します。
--   [テレメトリー](/tiup/tiup-command-telemetry.md) : テレメトリを有効または無効にします。
--   [完了](/tiup/tiup-command-completion.md) : TiUPコマンドを完了します。
--   [環境](/tiup/tiup-command-env.md) : TiUP関連の環境変数を表示します。
--   [ヘルプ](/tiup/tiup-command-help.md) : コマンドまたはコンポーネントのヘルプ情報を表示します。
+-   [telemetry](/tiup/tiup-command-telemetry.md) : テレメトリを有効または無効にします。
+-   [completion](/tiup/tiup-command-completion.md) : TiUPコマンドを完了します。
+-   [env](/tiup/tiup-command-env.md) : TiUP関連の環境変数を表示します。
+-   [help](/tiup/tiup-command-help.md) : コマンドまたはコンポーネントのヘルプ情報を表示します。
 
 ## コンポーネントリスト {#component-list}
 
--   [クラスタ](/tiup/tiup-component-cluster.md) :本番環境で TiDB クラスターを管理します。
+-   [cluster](/tiup/tiup-component-cluster.md) :本番環境で TiDB クラスターを管理します。
 -   [dm](/tiup/tiup-component-dm.md) :本番環境で TiDB Data Migration (DM) クラスターを管理します。

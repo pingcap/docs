@@ -65,7 +65,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
     >
     > [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com) 、または[Google Cloud Marketplace](https://console.cloud.google.com/marketplace)経由でTiDB Cloudに登録した場合、AWSアカウント、Azureアカウント、またはGoogle Cloudアカウントから直接支払いを行うことができますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりすることはできません。
 
-6.  **「作成」**をクリックします。
+6.  **作成**をクリックします。
 
     TiDB Cloudクラスタの作成には約20～30分かかります。作成が完了すると、 TiDB Cloudコンソールから通知が届きます。
 
@@ -77,7 +77,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 TiDB Cloud Dedicatedクラスターの作成が完了したら、以下の手順に従ってルートパスワードを設定してください。
 
-1.  クラスター概要ページの右上隅にある**「...」**をクリックし、 **Password Settings**を選択します。
+1.  クラスター概要ページの右上隅にある**...**をクリックし、 **Password Settings**を選択します。
 
 2.  クラスターに接続するためのルートパスワードを設定し、 **[保存]**をクリックします。
 

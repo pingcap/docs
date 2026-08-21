@@ -8,6 +8,39 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年8月18日 {#august-18-2026}
+
+**全般的な変更**
+
+- **TiDB Cloud Premium**
+
+    - TiDB Cloud Premium インスタンス向けに **Statement Insight** (PREVIEW) を導入しました。
+
+        この機能は、TiDB Cloud Premium インスタンスにおける SQL のリソース消費を実用的に把握できるビューを提供します。
+
+        これにより、DB User、SQL type、DB、table、SQL digest などの複数の次元で、SQL ステートメントの RU 消費量、レイテンシー、実行回数を分析できるようになりました。さらに、主な要因をひと目で確認できるため、高いリソース消費や処理遅延の原因を特定しやすくなります。
+
+        現在、この機能はパブリックプレビュー段階であり、8 月 19 日以降に作成された一部の TiDB Cloud Premium インスタンスでのみ利用できます。
+
+        詳細については、[Statement Insight (PREVIEW)](https://docs.pingcap.com/tidbcloud/statement-insight/?plan=premium) を参照してください。
+
+- **TiDB Cloud Lake**
+
+    - [TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/) が、日本 (Tokyo) の Alibaba Cloud (`ap-northeast-1`) で利用可能になりました。
+
+        サポートされているその他のリージョンについては、[Platforms & Regions](https://docs.pingcap.com/tidbcloudlake/platforms-regions/) を参照してください。
+
+    - 新しい外部 Python UDF SDK と dbtアダプターにより、TiDB Cloud Lake の Python 拡張性と analytics engineering ワークフローを拡張しました。
+
+        - 新しい外部 Python UDF SDK を使用すると、Python でカスタムのスカラー関数およびテーブル関数を実装し、それらを UDF サーバーにデプロイし、TiDB Cloud Lake にエンドポイントを登録して、SQL から直接これらの関数を呼び出すことができます。この SDK は、一般的なデータ型と複雑なデータ型、NULL 処理、I/O 並列処理、および関数ごとの同時実行制御をサポートします。
+        - 新しい dbtアダプターを使用すると、dbt を TiDB Cloud Lake に接続して、データ変換ワークフローの構築、テスト、ドキュメント化を行うことができます。このアダプターは、table、view、incremental materialization に加え、seeds、sources、カスタムデータテスト、ドキュメント生成、snapshots、接続の再試行をサポートします。
+
+      詳細については、以下のドキュメントを参照してください。
+
+        - [External Function](https://docs.pingcap.com/tidbcloudlake/external-function/)
+        - [Choose a User-Defined Function Type](https://docs.pingcap.com/tidbcloudlake/choose-a-udf-type/)
+        - [Load Data with dbt](https://docs.pingcap.com/tidbcloudlake/load-with-dbt/)
+
 ## 2026年8月11日 {#august-11-2026}
 
 **全般的な変更**
@@ -652,9 +685,8 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
     [TiDB Cloudコンソール](https://tidbcloud.com/)すべてのサブスクリプションプランにおいてサポート体験を向上させるため、プランに応じたサポートオプションを提供開始しました。これらのアップデートには以下が含まれます。
 
     -   **プランに応じたサポートのリダイレクト**：クラスタ概要ページで、 **[アクション]**列の**[サポートを受ける]**を選択すると、サブスクリプションプランに基づいて最も適切なリソースにリダイレクトされます。Basicプランのユーザーは**サポートプラン**パネルに、有料プランのユーザーは**サポートポータル**に誘導されます。
-    -   **ヘルプセンターメニューの改善**：ヘルプメニュー項目名を**「サポートオプション」**と**「サポートチケット」**に変更し、利用可能なサービスをより適切に反映させます。また、有料プランでのみテクニカルサポートチケットが利用できることを明確にするツールチップを追加します。
-    -   **明確なコミュニティ サポート アクセス**:**サポートプラン**オプション内では、Slack と Discord がBasic プラン ユーザーの主要なテクニカルサポート チャネルとして明確に識別されます。次のドキュメントは、サポート チャネル ポリシーとコミュニティ アクセスを明確にするために合理化されています: [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)、[Connected Careの概要](/tidb-cloud/connected-care-overview.md)、および[Connected Careの詳細](/tidb-cloud/connected-care-detail.md)。
-    -   **アクション指向のサポートプランUI** ：**サポートプラン**ウィンドウを再設計し、一般的なプラン比較ではなく、現在ご利用のプランで利用可能なサポートオプションを優先的に表示するようにしました。この変更により、現在ご利用のプランに基づいてサポートを受ける方法をすばやく特定できます。
+    -   **ヘルプセンターメニューの改善**：ヘルプメニュー項目名を**サポートオプション**と**サポートチケット**に変更し、利用可能なサービスをより適切に反映させます。また、有料プランでのみテクニカルサポートチケットが利用できることを明確にするツールチップを追加します。
+    -   **明確なコミュニティ サポート アクセス**:**サポートプラン**オプション内では、Slack と Discord がBasic プラン ユーザーの主要なテクニカルサポート チャネルとして明確に識別されます。次のドキュメントは、サポート チャネル ポリシーとコミュニティ アクセスを明確にするために合理化されています: [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)、[Connected Careの概要](/tidb-cloud/connected-care-overview.md)、および[Connected Careの詳細](/tidb-cloud/connected-care-detail.md)。    -   **アクション指向のサポートプランUI** ：**サポートプラン**ウィンドウを再設計し、一般的なプラン比較ではなく、現在ご利用のプランで利用可能なサポートオプションを優先的に表示するようにしました。この変更により、現在ご利用のプランに基づいてサポートを受ける方法をすばやく特定できます。
 
     詳細については、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)を参照してください。
 

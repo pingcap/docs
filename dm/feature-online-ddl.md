@@ -1,9 +1,9 @@
 ---
-title: Migrate from Databases that Use GH-ost/PT-osc
+title: Migrate from Databases that Use gh-ost/pt-osc
 summary: このドキュメントでは、DM の online-ddl/online-ddl-scheme` 機能について説明します。
 ---
 
-# GH-ost/PT-osc を使用するデータベースからの移行 {#migrate-from-databases-that-use-gh-ost-pt-osc}
+# gh-ost/pt-osc を使用するデータベースからの移行 {#migrate-from-databases-that-use-gh-ost-pt-osc}
 
 本番環境では、DDL実行中のテーブルロックによって、データベースからの読み取りまたは書き込みがある程度ブロックされる可能性があります。そのため、読み取りと書き込みへの影響を最小限に抑えるため、オンラインDDLツールを使用してDDLを実行することがよくあります。一般的なDDLツールは[gh-ost](https://github.com/github/gh-ost)と[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)です。
 

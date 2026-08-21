@@ -24,9 +24,9 @@ TiDB Cloud Dedicatedクラスターに接続してください。
 
 3.  **ネットワーク設定**ページで、 **IP Access List**領域の**Add IP Address**をクリックします。
 
-4.  ダイアログで**Allow access from anywhere**を選択し、 **「確認」**をクリックします。
+4.  ダイアログで**Allow access from anywhere**を選択し、 **確認**をクリックします。
 
-5.  右上隅にある**「接続」**をクリックすると、接続情報ダイアログが開きます。
+5.  右上隅にある**接続**をクリックすると、接続情報ダイアログが開きます。
 
     接続文字列を取得する方法の詳細については、 [パブリック接続経由​​でTiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
 

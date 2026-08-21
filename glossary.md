@@ -129,7 +129,7 @@ Dumplingは、TiDB、MySQL、またはMariaDBに保存されているデータ�
 
 式インデックスは、式に基づいて作成される特殊なタイプのインデックスです。式インデックスが作成されると、TiDBはこのインデックスを式ベースのクエリに使用できるようになり、クエリのパフォーマンスが大幅に向上します。
 
-詳細については、 [インデックスの作成 -式インデックス or 関数インデックス](/sql-statements/sql-statement-create-index.md#expression-index)を参照してください。
+詳細については、 [CREATE INDEX - Expression index](/sql-statements/sql-statement-create-index.md#expression-index)を参照してください。
 
 ## <a id="G" class="letter" href="#G">G</a> {#g}
 
