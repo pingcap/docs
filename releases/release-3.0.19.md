@@ -25,7 +25,7 @@ TiDBバージョン: 3.0.19
 
 -   TiKV
 
-    -   `sync-log` ～ `true`を調整不可の値として設定する [＃8636](https://github.com/tikv/tikv/pull/8636)
+    -   `sync-log`を調整不可の値である`true`に設定する [＃8636](https://github.com/tikv/tikv/pull/8636)
 
 -   PD
 

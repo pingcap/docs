@@ -25,7 +25,7 @@ SQLは、その関数に応じて以下の4種類に分類されます。
 
 -   DCL（データ制御言語）：アクセス権限とセキュリティレベルを定義するために使用されます。
 
-TiDB の SQL ステートメントの概要については、 [SQLステートメントの概要](/sql-statements/sql-statement-overview.md)を参照してください。
+TiDB の SQL ステートメントの概要については、 [SQL Statement Overview](/sql-statements/sql-statement-overview.md)を参照してください。
 
 ## SQLモード {#sql-mode}
 

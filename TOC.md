@@ -224,7 +224,7 @@
   - 診断方法
     - [SQL診断](/information-schema/information-schema-sql-diagnostics.md)
     - [ステートメントサマリーテーブル](/statement-summary-tables.md)
-    - [Top SQLを使用してコストの高いクエリを特定する](/dashboard/top-sql.md)
+    - [Top SQL を使用して高コストなクエリを特定する](/dashboard/top-sql.md)
     - [ログを使用して高負荷なクエリを特定する](/identify-expensive-queries.md)
     - [クラスタのオンサイト情報を保存および復元する](/sql-plan-replayer.md)
     - [TiKVにおけるステイル読み取りとsafe-tsの理解](/troubleshoot-stale-read.md)
@@ -454,7 +454,7 @@
         - [悲観的モード](/dm/feature-shard-merge-pessimistic.md)
         - [楽観的モード](/dm/feature-shard-merge-optimistic.md)
         - [シャーディングDDLロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)
-      - [GH-ost/PT-oscを使用するMySQLデータベースからの移行](/dm/feature-online-ddl.md)
+      - [gh-ost/pt-osc を使用する MySQL データベースから移行する](/dm/feature-online-ddl.md)
       - [より多くのカラムを持つダウンストリーム TiDB テーブルにデータを移行する](/migrate-with-more-columns-downstream.md)
       - [継続的なデータ検証](/dm/dm-continuous-data-validation.md)
     - 管理
@@ -828,7 +828,7 @@
       - [キャスト関数と演算子](/functions-and-operators/cast-functions-and-operators.md)
       - [暗号化および圧縮機能](/functions-and-operators/encryption-and-compression-functions.md)
       - [ロック機能](/functions-and-operators/locking-functions.md)
-      - [情報機能](/functions-and-operators/information-functions.md)
+      - [情報関数](/functions-and-operators/information-functions.md)
       - [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
       - JSON関数
         - [概要](/functions-and-operators/json-functions.md)

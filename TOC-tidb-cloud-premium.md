@@ -53,6 +53,7 @@
     - [概要](/tidb-cloud/monitor-tidb-cluster.md)
     - [組み込みの指標](/tidb-cloud/premium/built-in-monitoring-premium.md)
     - [Top RU](/tidb-cloud/top-ru.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+    - [Statement Insight](/tidb-cloud/statement-insight.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [内蔵アラート機能](/tidb-cloud/monitor-built-in-alerting.md)
     - [TiDB CloudをPrometheusおよびGrafanaと統合する](/tidb-cloud/prometheus-grafana-integration.md)
     - アラート通知を購読する
@@ -351,7 +352,7 @@
     - [キャスト関数と演算子](/functions-and-operators/cast-functions-and-operators.md)
     - [暗号化および圧縮機能](/functions-and-operators/encryption-and-compression-functions.md)
     - [ロック機能](/functions-and-operators/locking-functions.md)
-    - [情報機能](/functions-and-operators/information-functions.md)
+    - [情報関数](/functions-and-operators/information-functions.md)
     - JSON関数
       - [概要](/functions-and-operators/json-functions.md)
       - [JSONを作成する関数](/functions-and-operators/json-functions/json-functions-create.md)

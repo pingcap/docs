@@ -15,7 +15,7 @@ TiDB で同時書き込みの多いワークロードを処理する方法の詳
 
 </CustomContent>
 
-[テーブルの作成](/sql-statements/sql-statement-create-table.md)文の`AUTO_RANDOM_BASE`パラメータは、初期増分値`auto_random`を設定するために使用されます。このオプションは内部インターフェースの一部とみなすことができます。このパラメータは無視できます。
+[CREATE TABLE](/sql-statements/sql-statement-create-table.md)文の`AUTO_RANDOM_BASE`パラメータは、初期増分値`auto_random`を設定するために使用されます。このオプションは内部インターフェースの一部とみなすことができます。このパラメータは無視できます。
 
 ## 基本概念 {#basic-concepts}
 

@@ -50,7 +50,7 @@ TiDB Cloud は、PagerDuty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メ�
 
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  左側のナビゲーションペインで、 **Alert Subscription**の下にある**Project Settings**をクリックします。
+3.  左側のナビゲーションペインで、 **Project Settings**の下にある**Alert Subscription**をクリックします。
 
 4.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 

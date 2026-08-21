@@ -11,7 +11,7 @@ summary: TiDB Cloudのインポートデータサービスで CSV 構成を使�
 
 <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/import-data-csv-config.png" width="500" />
 
-## セパレーター {#separator}
+## Separator {#separator}
 
 -   定義: フィールドセパレーターを定義します。1文字または複数文字を指定できますが、空にすることはできません。
 
@@ -22,7 +22,7 @@ summary: TiDB Cloudのインポートデータサービスで CSV 構成を使�
 
 -   デフォルト: `,`
 
-## デリミタ {#delimiter}
+## Delimiter {#delimiter}
 
 -   定義: 引用符で囲む際に使用する区切り文字を定義します。**Delimiter**が空の場合、すべてのフィールドは引用符で囲まれません。
 
@@ -33,17 +33,17 @@ summary: TiDB Cloudのインポートデータサービスで CSV 構成を使�
 
 -   デフォルト: `"`
 
-## NULL値 {#null-value}
+## Null Value {#null-value}
 
 -   定義: CSV ファイル内の`NULL`値を表す文字列を定義します。
 
 -   デフォルト: `\N`
 
-## バックスラッシュエスケープ {#backslash-escape}
+## Backslash Escape {#backslash-escape}
 
 -   定義: フィールド内のバックスラッシュをエスケープ文字として解析するかどうかを制御します。**Backslash Escape**が有効になっている場合、以下のシーケンスが認識され、変換されます。
 
-    | シーケンス | 変換された                    |
+    | シーケンス | 変換後                    |
     | ----- | ------------------------ |
     | `\0`  | ヌル文字（ `U+0000` ）         |
     | `\b`  | バックスペース ( `U+0008` )     |
@@ -73,7 +73,7 @@ summary: TiDB Cloudのインポートデータサービスで CSV 構成を使�
 
 -   デフォルト: 有効
 
-## ヘッダーをスキップ {#skip-header}
+## Skip Header {#skip-header}
 
 -   定義: CSVファイルのヘッダー行をスキップするかどうかを制御します。 **Skip Header**が有効になっている場合、インポート時にCSVファイルの最初の行がスキップされます。
 

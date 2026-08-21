@@ -24,7 +24,7 @@ TiDB は、MySQL 構文を拡張して[ベクトル検索](/ai/concepts/vector-s
 
 この文書の手順を完了するには、以下が必要です。
 
--   [MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.4/en/mysql.html)(MySQL CLI)がマシンにインストールされています。
+-   [MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.4/en/mysql.html)(MySQL CLI)がマシンにインストールされていること。
 -   TiDBクラスタ。
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**

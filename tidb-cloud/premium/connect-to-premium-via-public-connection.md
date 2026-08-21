@@ -7,6 +7,14 @@ summary: パブリック接続を介してTiDB Cloud Premiumに接続する方�
 
 このドキュメントでは、パブリック接続を使用して {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスに接続する方法について説明します。パブリック接続では、トラフィックフィルタを備えたパブリックエンドポイントが公開されるため、ラップトップから SQL クライアントを介して {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスに接続できます。
 
+<CustomContent plan="byoc">
+
+> **Note:**
+>
+> パブリック接続を利用できるのは、BYOC のデプロイ時に public hosted zone を指定した場合のみです。private hosted zone を指定した場合は、プライベート接続を使用してインスタンスに接続してください。
+
+</CustomContent>
+
 > **Tip:**
 >
 > -   パブリック接続経由​​でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、 [パブリックエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/connect-via-standard-connection-serverless.md)を参照してください。

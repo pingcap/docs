@@ -221,7 +221,7 @@ Amazon S3へのアクセスを設定した後、 TiDB Cloudコンソールで次
 
 6.  必要に応じてCSV設定を編集してください。
 
-    また、 **Edit CSV configuration**をクリックすると、バックスラッシュエスケープ、セパレータ、区切り文字を設定して、より詳細な制御を行うことができます。
+    また、 **Edit CSV configuration**をクリックすると、Backslash Escape、Separator、Delimiterを設定して、より詳細な制御を行うことができます。
 
     > **Note:**
     >
