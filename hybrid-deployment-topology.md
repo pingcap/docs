@@ -17,7 +17,7 @@ summary: TiDB クラスターのハイブリッド展開トポロジについて
 | :------------- | :--- | :-------------------------- | :----------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | 6    | 32 VCore 64GB               | 10.0.1.1<br/> 10.0.1.2<br/> 10.0.1.3 | CPUコアをバインドするためにNUMAを構成する                                                                                                                                               |
 | PD             | 3    | 16 VCore 32 GB              | 10.0.1.4<br/> 10.0.1.5<br/> 10.0.1.6 | `location_labels`パラメータを設定する                                                                                                                                            |
-| TiKV           | 6    | 32 VCore 64GB               | 10.0.1.7<br/> 10.0.1.8<br/> 10.0.1.9 | <li>インスタンス レベルのポートと status_port を分離します。<br/> 2. グローバルパラメータ`readpool` `storage`設定します`raftstore`<br/> 3. インスタンス レベルのホストのラベルを構成します。<br/> 4. CPUコアをバインドするためのNUMAを構成する</li> |
+| TiKV           | 6    | 32 VCore 64GB               | 10.0.1.7<br/> 10.0.1.8<br/> 10.0.1.9 | <li>1. インスタンス レベルのポートと status_port を分離します。<br/> 2. グローバルパラメータ `readpool`、`storage`、`raftstore`を設定します。<br/> 3. インスタンス レベルのホストのラベルを構成します。<br/> 4. CPUコアをバインドするためのNUMAを構成する</li> |
 | モニタリングとGrafana | 1    | 4 VCore 8GB * 1 500GB (SSD) | 10.0.1.10                            | デフォルト設定                                                                                                                                                                |
 
 > **Note:**
@@ -39,7 +39,7 @@ summary: TiDB クラスターのハイブリッド展開トポロジについて
 
     -   `readpool`スレッドプールに自己適応するように設定します。`readpool.unified.max-thread-count`パラメータを設定することで、 `readpool.storage`と`readpool.coprocessor`が統合スレッドプールを共有し、それぞれ自己適応スイッチを設定できます。
 
-        -   `readpool.storage`と`readpool.coprocessor`有効にする:
+        -   `readpool.storage`と`readpool.coprocessor`を有効にする:
 
             ```yaml
             readpool.storage.use-unified-pool: true

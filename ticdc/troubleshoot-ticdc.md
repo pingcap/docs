@@ -127,7 +127,7 @@ cdc cli changefeed resume -c test-cf --server=http://127.0.0.1:8300
 この問題のあるDDL文をスキップするには、 `ignore-txn-start-ts`パラメータを設定して、指定された`start-ts`に対応するトランザクションをスキップします。例:
 
 1.  TiCDC ログで`apply job`フィールドを検索し、時間がかかっている`start-ts`の DDL を特定します。
-2.  changefeed の設定を変更します。設定項目`ignore-txn-start-ts`に上記の`start-ts`追加します。
+2.  changefeed の設定を変更します。設定項目`ignore-txn-start-ts`に上記の`start-ts`を追加します。
 3.  中断された変更フィードを再開します。
 
 > **Note:**

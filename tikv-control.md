@@ -408,7 +408,7 @@ tikv-ctl --host ip:port modify-tikv-config -n storage.block-cache.capacity -v 10
 
     success
 
-`shared block cache`が無効の場合は、 `write` CF に`block cache size`設定します。
+`shared block cache`が無効の場合は、 `write` CF に`block cache size`を設定します。
 
 ```shell
 tikv-ctl --host ip:port modify-tikv-config -n rocksdb.writecf.block-cache-size -v 256MB

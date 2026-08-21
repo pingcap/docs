@@ -123,7 +123,7 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 <div label="Legacy project-level New Relic integration (Beta)">
 
 1.  [New Relic](https://one.newrelic.com/)にログインします。
-2.  **Add Data**をクリックし、 `TiDB Cloud`を検索して、 **TiDB Cloud Monitoring**ページに移動します。または、 [リンク](https://one.newrelic.com/marketplace?state=79bf274b-0c01-7960-c85c-3046ca96568e)クリックして直接ページにアクセスすることもできます。
+2.  **Add Data**をクリックし、 `TiDB Cloud`を検索して、 **TiDB Cloud Monitoring**ページに移動します。または、 [リンク](https://one.newrelic.com/marketplace?state=79bf274b-0c01-7960-c85c-3046ca96568e)をクリックして直接ページにアクセスすることもできます。
 3.  アカウントIDを選択し、New Relicでダッシュボードを作成してください。
 
 </div>

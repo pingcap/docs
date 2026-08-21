@@ -502,7 +502,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 1.  [Azureポータル](https://portal.azure.com/)にログインし、 [プライベートリンクサービス](https://portal.azure.com/#view/Microsoft_Azure_Network/PrivateLinkCenterBlade/~/privatelinkservices)ページに移動して、 **+ Create**をクリックし、Kafka ロードバランサーのプライベートリンク サービスを作成します。
 
-2.  **[基本]**タブで、 **[サブスクリプ**ション]、 **Resource group** 、 **[リージョン]**を選択し、[**名前]**フィールドに`kafka-pls`入力して、 **[次へ: 送信設定 &gt;]**をクリックします。
+2.  **[基本]**タブで、 **[サブスクリプション]**、 **Resource group** 、 **[リージョン]**を選択し、 **[名前]**フィールドに`kafka-pls`を入力して、 **[次へ: 送信設定 &gt;]**をクリックします。
 
 3.  **Outbound settings**タブで、次のようにパラメータを入力し、 **Next : Access security &gt;**をクリックします。
 

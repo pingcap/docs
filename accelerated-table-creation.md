@@ -19,7 +19,7 @@ TiDB v7.6.0 では、テーブル作成の高速化をサポートするシス�
 
 テーブル作成時のパフォーマンス最適化は、 [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)文でのみ使用可能になりました。ただし、この文には外部キー制約を含めてはなりません。
 
-## テーブル作成を高速化するには、 `tidb_enable_fast_create_table`使用してください。 {#use-tidb-enable-fast-create-table-to-accelerate-table-creation}
+## テーブル作成を高速化するには、 `tidb_enable_fast_create_table`を使用してください。 {#use-tidb-enable-fast-create-table-to-accelerate-table-creation}
 
 システム変数[`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)の値を指定することで、テーブル作成時のパフォーマンス最適化を有効または無効にすることができます。
 

@@ -55,7 +55,7 @@ TiDB Ansible バージョン: 3.0.3
 -   リージョンマージ中に発生する可能性のある TiKV パニックを修正[＃5291](https://github.com/tikv/tikv/pull/5291)
 -   デッドロック検出器リーダー変更チェックを高速化 [＃5317](https://github.com/tikv/tikv/pull/5317)
 -   `grpc env`を使用してデッドロッククライアントを作成するサポート [＃5346](https://github.com/tikv/tikv/pull/5346)
--   構成が正しいかどうかを確認するには`config-check`追加します[＃5349](https://github.com/tikv/tikv/pull/5349)
+-   構成が正しいかどうかを確認するには`config-check`を追加します[＃5349](https://github.com/tikv/tikv/pull/5349)
 -   リーダーがない場合にReadIndexが何も返さない問題を修正 [＃5351](https://github.com/tikv/tikv/pull/5351)
 
 ## PD {#pd}

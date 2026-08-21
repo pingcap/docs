@@ -267,7 +267,7 @@ br restore full -f '*.*' -f '!mysql.*' -f 'mysql.usertable' -s $external_storage
 br restore full -f 'mysql.usertable' -s $external_storage_url --with-sys-table
 ```
 
-[テーブルフィルター](/table-filter.md#syntax)設定しても、 **BR は次のシステム テーブルを復元しないこと**に注意してください。
+[テーブルフィルター](/table-filter.md#syntax)を設定しても、 **BR は次のシステム テーブルを復元しないこと**に注意してください。
 
 -   統計表（ `mysql.stat_*` ）。ただし、統計は復元可能です。[統計のバックアップ](/br/br-snapshot-manual.md#back-up-statistics)を参照してください。
 -   システム変数テーブル（ `mysql.tidb` `mysql.global_variables`

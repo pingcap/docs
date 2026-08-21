@@ -68,7 +68,7 @@ summary: tidbcloud_import` リソースを使用してインポート タスク�
 
     ファイル内のリソース値（プロジェクトID、クラスタID、CSVパスなど）をご自身のものに置き換えてください。 `csv_format`の詳細は [設定ページ](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format)に記載されています。
 
-3.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`入力して作成を確認し、インポートを開始します。
+3.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`を入力して作成を確認し、インポートを開始します。
 
         $ terraform apply
         ...
@@ -214,7 +214,7 @@ summary: tidbcloud_import` リソースを使用してインポート タスク�
           source_url   = "your_url"
         }
 
-2.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`入力して作成を確認し、インポートを開始します。
+2.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`を入力して作成を確認し、インポートを開始します。
 
         $ terraform apply
         ...
