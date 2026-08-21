@@ -143,6 +143,6 @@ tiup update playground
 
     ![Opening DevTools from Chrome's main menu](/media/dashboard/dashboard-faq-devtools.png)
 
-3.  **アプリケーション**パネルを選択し、**ローカルストレージ**メニューを展開して、 **TiDB Dashboardページのドメイン**を選択します。 **Clear All**ボタンをクリックします。
+3.  **Application**パネルを選択し、**Local Storage**メニューを展開して、 **TiDB Dashboardページのドメイン**を選択します。 **Clear All**ボタンをクリックします。
 
     ![Clear the Local Storage](/media/dashboard/dashboard-faq-devtools-application.png)
