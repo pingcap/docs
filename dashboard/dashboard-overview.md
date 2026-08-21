@@ -16,7 +16,7 @@ summary: TiDB概要ページには、クラスターのQPS、レイテンシー�
 
 ## ページにアクセスする {#access-the-page}
 
-TiDB Dashboardにログインすると、デフォルトで概要ページが表示されます。または、左側のナビゲーション メニューで**[概要]**をクリックしてこのページにアクセスすることもできます。
+TiDB Dashboardにログインすると、デフォルトで概要ページが表示されます。または、左側のナビゲーション メニューで**Overview**をクリックしてこのページにアクセスすることもできます。
 
 ![Enter overview page](/media/dashboard/dashboard-overview-access-v650.png)
 
@@ -77,7 +77,7 @@ TiDB Dashboardにログインすると、デフォルトで概要ページが表
 -   稼働中: インスタンスは正常に実行されています (オフラインストレージインスタンスを含む)。
 -   ダウン: ネットワーク切断やプロセスクラッシュなど、インスタンスが異常な状態で動作しています。
 
-**インスタンスの**タイトルをクリックすると、各インスタンスの詳細な実行ステータスを示す[クラスタ情報ページ](/dashboard/dashboard-cluster-info.md)が表示されます。
+**Instance**のタイトルをクリックすると、各インスタンスの詳細な実行ステータスを示す[クラスタ情報ページ](/dashboard/dashboard-cluster-info.md)が表示されます。
 
 ## 監視と警告 {#monitor-and-alert}
 
@@ -85,9 +85,9 @@ TiDB Dashboardにログインすると、デフォルトで概要ページが表
 
 ![Monitor and alert](/media/dashboard/dashboard-overview-monitor.png)
 
--   **メトリクスの表示**：このリンクをクリックすると、Grafanaダッシュボードに移動し、クラスターの詳細な監視情報を確認できます。Grafanaダッシュボードの各監視メトリクスの詳細については、 [監視メトリック](/grafana-overview-dashboard.md)を参照してください。
+-   **View Metrics**：このリンクをクリックすると、Grafanaダッシュボードに移動し、クラスターの詳細な監視情報を確認できます。Grafanaダッシュボードの各監視メトリクスの詳細については、 [監視メトリック](/grafana-overview-dashboard.md)を参照してください。
 -   **View Alerts**：このリンクをクリックすると、AlertManagerページに移動し、クラスターの詳細なアラート情報を確認できます。クラスターにアラートが存在する場合、アラートの数がリンクテキストに直接表示されます。
--   **診断の実行**: このリンクをクリックすると、より詳細な[クラスター診断ページ](/dashboard/dashboard-diagnostics-access.md)にジャンプします。
+-   **Run Diagnostics**: このリンクをクリックすると、より詳細な[クラスター診断ページ](/dashboard/dashboard-diagnostics-access.md)にジャンプします。
 
 > **Note:**
 >
