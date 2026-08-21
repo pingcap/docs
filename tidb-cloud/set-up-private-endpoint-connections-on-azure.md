@@ -63,7 +63,7 @@ Azure Private Link のアーキテクチャは次のとおりです: [^1]
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Dedicatedクラスタの名前をクリックすると、その概要ページに移動します。
 2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
-3.  **Connection Type**ドロップダウンリストで**Private Endpoint**を選択し、 **Create Private Endpoint Connection**をクリックして、 **Azureプライベートエンドポイント接続の作成**ダイアログを開きます。
+3.  **Connection Type**ドロップダウンリストで**Private Endpoint**を選択し、 **Create Private Endpoint Connection**をクリックして、 **Create Azure Private Endpoint Connection**ダイアログを開きます。
 
 > **Note:**
 >
@@ -71,7 +71,7 @@ Azure Private Link のアーキテクチャは次のとおりです: [^1]
 
 ### ステップ2. Azureプライベートエンドポイントを作成する {#step-2-create-an-azure-private-endpoint}
 
-1.  **Azureプライベートエンドポイント接続の作成**ダイアログで、プライベートリンクサービスのTiDB CloudリソースIDをコピーし、後で使用するためにダイアログを開いたままにしておきます。
+1.  **Create Azure Private Endpoint Connection**ダイアログで、プライベートリンクサービスのTiDB CloudリソースIDをコピーし、後で使用するためにダイアログを開いたままにしておきます。
 
     > **Note:**
     >
@@ -86,7 +86,7 @@ Azure Private Link のアーキテクチャは次のとおりです: [^1]
 2.  **Private endpoints**を検索し、検索結果から**Private endpoints**を選択してください。
 3.  **Private endpoint**ページで、 **+ Create**をクリックします。
 4.  **Basics**タブで、プロジェクトとインスタンスの情報を入力し、 **Next: Resource**をクリックします。
-5.  **Resource**タブで、**接続方法**として**リソース ID またはエイリアスを使用して Azure リソースに接続する**を選択し、コピーしたTiDB Cloudリソース ID を**Resource ID or alias**フィールドに貼り付けます。
+5.  **Resource**タブで、**connection method**として**Connect to an Azure resource by resource ID or alias**を選択し、コピーしたTiDB Cloudリソース ID を**Resource ID or alias**フィールドに貼り付けます。
 6.  引き続き**Next**をクリックして残りの構成タブに進み、必要な設定を完了します。次に、 **Create**をクリックしてプライベート エンドポイントを作成してデプロイします。 Azure のデプロイが完了するまでに数秒かかる場合があります。詳細については、Azure ドキュメントの[プライベートエンドポイントを作成する](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip#create-a-private-endpoint)を参照してください。
 7.  プライベートエンドポイントの作成とデプロイが完了したら、 **Go to resource**をクリックし、以下の手順を実行してください。
 
@@ -108,7 +108,7 @@ Azure Private Link のアーキテクチャは次のとおりです: [^1]
     az account set --subscription ${your_subscription_id}
     ```
 
-2.  **Azureプライベートエンドポイント接続の作成**ダイアログからコピーしたTiDB CloudリソースIDを使用して、プライベートエンドポイントを作成します。
+2.  **Create Azure Private Endpoint Connection**ダイアログからコピーしたTiDB CloudリソースIDを使用して、プライベートエンドポイントを作成します。
 
     ```bash
     az network private-endpoint create \
@@ -146,7 +146,7 @@ Azure Private Link のアーキテクチャは次のとおりです: [^1]
 
 ### ステップ3. エンドポイントを受け入れる {#step-3-accept-the-endpoint}
 
-1.  TiDB Cloudコンソールの**Azureプライベートエンドポイント接続の作成**ダイアログに戻り、コピーした**Resource ID**と**IP address**それぞれのフィールドに貼り付けます。
+1.  TiDB Cloudコンソールの**Create Azure Private Endpoint Connection**ダイアログに戻り、コピーした**Resource ID**と**IP address**それぞれのフィールドに貼り付けます。
 2.  **Verify Endpoint**をクリックして、プライベートエンドポイントへのアクセスを検証してください。エラーが発生した場合は、エラーメッセージの手順に従ってトラブルシューティングを行い、再度お試しください。
 3.  検証が成功したら、 **Accept Endpoint**をクリックして、プライベートエンドポイントからの接続を承認してください。
 

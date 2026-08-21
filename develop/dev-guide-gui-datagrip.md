@@ -44,12 +44,12 @@ DataGripは2つの方法で使用できます。
 
 3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **接続タイプ**は`Public`に設定されています。
+    -   **Connection Type**は`Public`に設定されています。
     -   **ブランチ**は`main`に設定されています。
     -   **Connect With は**`DataGrip`に設定されています。
     -   お使いの環境に合った**オペレーティングシステム**を選択してください。
 
-4.  **「パスワードを生成」を**クリックすると、ランダムなパスワードが生成されます。
+4.  **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
 
     > **Tip:**
     >
@@ -59,7 +59,7 @@ DataGripは2つの方法で使用できます。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-6.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**+**をクリックし、 **データソース** &gt; **その他** &gt; **TiDB**を選択します。
+6.  新しく作成したプロジェクトで、**Database Explorer**パネルの左上隅にある**+**をクリックし、 **Data Source** &gt; **Other** &gt; **TiDB**を選択します。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
@@ -67,7 +67,7 @@ DataGripは2つの方法で使用できます。
 
     ![Configure the URL field for TiDB Cloud Starter](/media/develop/datagrip-url-paste.jpg)
 
-    **不足しているドライバファイルをダウンロードしてください**という警告が表示された場合は、 **Download**をクリックしてドライバファイルを入手してください。
+    **Download missing driver files**という警告が表示された場合は、 **Download**をクリックしてドライバファイルを入手してください。
 
 8.  **Test Connection**をクリックして、対象のTiDB Cloud StarterまたはEssentialインスタンスへの接続を検証してください。
 
@@ -90,16 +90,16 @@ DataGripは2つの方法で使用できます。
 
 5.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-6.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**Public**を選択します。
+6.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
 
     -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
-    -   まだパスワードを設定していない場合は、ダイアログの**ルートパスワードを設定**をクリックしてください。
-    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA証明書**をクリックしてダウンロードしてください。
+    -   まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
+    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
     -   **Public**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
 7.  DataGripを起動し、接続を管理するためのプロジェクトを作成します。
 
-8.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**+**をクリックし、 **データソース** &gt; **その他** &gt; **TiDB**を選択します。
+8.  新しく作成したプロジェクトで、**Database Explorer**パネルの左上隅にある**+**をクリックし、 **Data Source** &gt; **Other** &gt; **TiDB**を選択します。
 
 9.  適切な接続文字列をコピーして、DataGrip の [**データ ソースとドライバー]**ウィンドウに貼り付けてください。DataGrip のフィールドとTiDB Cloud Premium の接続文字列のマッピングは以下のとおりです。
 
@@ -110,8 +110,8 @@ DataGripは2つの方法で使用できます。
     | ユーザー         | `{user}`                |
     | パスワード        | `{password}`            |
 
-    -   **SSH/SSL**タブで、 **SSLを使用する**チェックボックスをオフにします。
-    -   **不足しているドライバファイルをダウンロードしてください**という警告が表示された場合は、 **Download**をクリックしてドライバファイルを入手してください。
+    -   **SSH/SSL**タブで、 **Use SSL**チェックボックスをオフにします。
+    -   **Download missing driver files**という警告が表示された場合は、 **Download**をクリックしてドライバファイルを入手してください。
 
 10. **Test Connection**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
 
@@ -124,9 +124,9 @@ DataGripは2つの方法で使用できます。
 
 2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、「**接続タイプ」**ドロップダウンリストから**Public**を選択し、 **CA証明書**をクリックしてCA証明書をダウンロードします。
+3.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **CA cert**をクリックしてCA証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、最初の接続の前に、 **[IP アクセス リストの設定] をクリックするか、「IP アクセス リストを設定する」**の手順に従って[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
+    IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
 
     TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
@@ -134,7 +134,7 @@ DataGripは2つの方法で使用できます。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-5.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**+**をクリックし、 **データソース** &gt; **その他** &gt; **TiDB**を選択します。
+5.  新しく作成したプロジェクトで、**Database Explorer**パネルの左上隅にある**+**をクリックし、 **Data Source** &gt; **Other** &gt; **TiDB**を選択します。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
@@ -151,11 +151,11 @@ DataGripは2つの方法で使用できます。
 
     ![Configure the connection parameters for TiDB Cloud Dedicated](/media/develop/datagrip-dedicated-connect.jpg)
 
-7.  **SSH/SSL**タブをクリックし、 **SSLを使用する**チェックボックスを選択して、CA証明書のパスを**CAファイル**フィールドに入力します。
+7.  **SSH/SSL**タブをクリックし、 **Use SSL**チェックボックスを選択して、CA証明書のパスを**CA file**フィールドに入力します。
 
     ![Configure the CA for TiDB Cloud Dedicated](/media/develop/datagrip-dedicated-ssl.jpg)
 
-    **不足しているドライバファイルをダウンロードしてください**という警告が表示された場合は、 **Download**をクリックしてドライバファイルを入手してください。
+    **Download missing driver files**という警告が表示された場合は、 **Download**をクリックしてドライバファイルを入手してください。
 
 8.  **[詳細設定]**タブをクリックし、スクロールして**enabledTLSProtocols**パラメーターを見つけ、その値を`TLSv1.2,TLSv1.3`に設定します。
 
@@ -174,7 +174,7 @@ DataGripは2つの方法で使用できます。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-2.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**+**をクリックし、 **データソース** &gt; **その他** &gt; **TiDB**を選択します。
+2.  新しく作成したプロジェクトで、**Database Explorer**パネルの左上隅にある**+**をクリックし、 **Data Source** &gt; **Other** &gt; **TiDB**を選択します。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
@@ -189,7 +189,7 @@ DataGripは2つの方法で使用できます。
 
     ![Configure the connection parameters for TiDB Self-Managed](/media/develop/datagrip-self-hosted-connect.jpg)
 
-    **不足しているドライバファイルをダウンロードしてください**という警告が表示された場合は、 **Download**をクリックしてドライバファイルを入手してください。
+    **Download missing driver files**という警告が表示された場合は、 **Download**をクリックしてドライバファイルを入手してください。
 
 4.  **Test Connection**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
 

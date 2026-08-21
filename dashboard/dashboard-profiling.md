@@ -61,7 +61,7 @@ summary: 手動プロファイリングを使用すると、TiDB、TiKV、PD、 
 
 ## パフォーマンスデータをダウンロード {#download-performance-data}
 
-すべてのインスタンスのプロファイリングが完了したら、右上隅の**プロファイリング結果のダウンロード**をクリックして、すべてのパフォーマンス データをダウンロードできます。
+すべてのインスタンスのプロファイリングが完了したら、右上隅の**Download Profiling Result**をクリックして、すべてのパフォーマンス データをダウンロードできます。
 
 ![Download profiling result](/media/dashboard/dashboard-profiling-download.png)
 

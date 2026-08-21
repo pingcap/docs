@@ -61,7 +61,7 @@ TiDB Cloudリソースを作成するには、組織の[**My TiDB**](https://tid
 
 ### TiDB Cloudのリソースを管理する {#manage-tidb-cloud-resources}
 
-**マイ TiDB**ページでは、対象リソースの行にある**...**をクリックすることで、 TiDB Cloudリソースに対して、データの削除、名前変更、インポートなどのクイックアクションを実行できます。
+**My TiDB**ページでは、対象リソースの行にある**...**をクリックすることで、 TiDB Cloudリソースに対して、データの削除、名前変更、インポートなどのクイックアクションを実行できます。
 
 特定のTiDB Cloudリソースに対してより多くの操作を実行したり、設定を管理したりするには、対象のリソース名をクリックして概要ページに移動してください。
 
@@ -71,7 +71,7 @@ TiDB Cloudリソースを作成するには、組織の[**My TiDB**](https://tid
 
 ### プロジェクトを確認する {#view-projects}
 
-TiDB Cloudのリソースをプロジェクトごとにグループ化して表示するには、[**My TiDB**](https://tidbcloud.com/tidbs)ページの**プロジェクトビュー**タブをクリックします。
+TiDB Cloudのリソースをプロジェクトごとにグループ化して表示するには、[**My TiDB**](https://tidbcloud.com/tidbs)ページの**Project view**タブをクリックします。
 
 > **Tip:**
 >

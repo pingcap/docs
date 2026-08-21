@@ -80,7 +80,7 @@ changefeed ダウンストリーム サービスが Azure でホストされて�
 
 1.  **Networking**ページで、 **[外部サービス用 AWS プライベートエンドポイント]**セクションの**[外部サービス用プライベートエンドポイントの作成]**をクリックします。
 
-2.  **外部サービス用プライベート エンドポイントの作成**ダイアログで、プライベート エンドポイントの名前を入力します。
+2.  **Create Private Endpoint for External Services**ダイアログで、プライベート エンドポイントの名前を入力します。
 
 3.  リマインダーに従って、 TiDB Cloudの[AWS プリンシパル](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts)にエンドポイントの作成を承認します。
 
@@ -103,7 +103,7 @@ changefeed ダウンストリーム サービスが Azure でホストされて�
 
 1.  **Networking**ページで、 **[外部サービス用 Google Cloud プライベートエンドポイント]**セクションの**[外部サービス用プライベートエンドポイントの作成]**をクリックします。
 
-2.  **外部サービス用プライベート エンドポイントの作成**ダイアログで、プライベート エンドポイントの名前を入力します。
+2.  **Create Private Endpoint for External Services**ダイアログで、プライベート エンドポイントの名前を入力します。
 
 3.  リマインダーに従って、 TiDB Cloudの[Google Cloud プロジェクト](https://cloud.google.com/resource-manager/docs/creating-managing-projects)にエンドポイントの作成を事前承認するよう許可するか、エンドポイント接続要求を受け取ったら手動で承認します。
 
@@ -124,7 +124,7 @@ changefeed ダウンストリーム サービスが Azure でホストされて�
 
 1.  **Networking**ページで、 **[外部サービス用 Azure プライベートエンドポイント]**セクションの**[外部サービス用プライベートエンドポイントの作成]**をクリックします。
 
-2.  **外部サービス用プライベート エンドポイントの作成**ダイアログで、プライベート エンドポイントの名前を入力します。
+2.  **Create Private Endpoint for External Services**ダイアログで、プライベート エンドポイントの名前を入力します。
 
 3.  変更フィードを作成する前に、リマインダーに従って、 TiDB Cloudの Azure サブスクリプションを承認するか、エイリアスを持つすべてのユーザーが Private Link サービスにアクセスできるようにしてください。Private Link サービスの可視性に関する詳細については、Azure ドキュメントの[制御サービスの公開](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview#control-service-exposure)を参照してください。
 

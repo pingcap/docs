@@ -73,7 +73,7 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の AWS �
 
     3.  **DB Audit Logging**ページで、右上隅の**Enable**をクリックします。
 
-    4.  **データベース監査ログストレージ設定**ダイアログで、 **AWS IAM Policy Settings**セクションを見つけて、後で使用するために**TiDB Cloud Account ID**と**TiDB Cloud External ID**を記録します。
+    4.  **Database Audit Log Storage Configuration**ダイアログで、 **AWS IAM Policy Settings**セクションを見つけて、後で使用するために**TiDB Cloud Account ID**と**TiDB Cloud External ID**を記録します。
 
 2.  [AWS Management Console](https://console.aws.amazon.com/)で、 **IAM** &gt; **Access Management** &gt; **Policies**に移動し、書き込み専用権限`s3:PutObject`を持つIAMポリシーがあるかどうかを確認します。
 
@@ -245,7 +245,7 @@ TiDB Cloudがデータベース監査ログを書き込む宛先として、組�
 
 3.  **DB Audit Logging**ページで、右上隅の**Enable**をクリックします。
 
-4.  **データベース監査ログストレージ設定**ダイアログで、 [ステップ2. Azure BLOBアクセスを構成する](#step-2-configure-azure-blob-storage-access)から取得した BLOB URL と SAS トークンを指定します。
+4.  **Database Audit Log Storage Configuration**ダイアログで、 [ステップ2. Azure BLOBアクセスを構成する](#step-2-configure-azure-blob-storage-access)から取得した BLOB URL と SAS トークンを指定します。
 
     -   **Blob URL**フィールドに、監査ログが保存されるコンテナの URL を入力します。
     -   **SAS Token**フィールドに、コンテナーにアクセスするための SAS トークンを入力します。

@@ -115,7 +115,7 @@ MySQLサービスがパブリックネットワーク経由でアクセスでき
 8.  **Start Replication Position**で、MySQLシンクの開始位置を設定します。
 
     -   エクスポートを使用して[既存のデータをロードしました](#load-existing-data-optional)がある場合は、 **From Time**を選択し、エクスポートによって返されたスナップショット時刻を入力します。タイムゾーンが正しいことを確認してください。
-    -   上流のTiDB Cloud Essentialインスタンスにデータがない場合は、 **今すぐレプリケーションを開始する**を選択してください。
+    -   上流のTiDB Cloud Essentialインスタンスにデータがない場合は、 **Start replication from now on**を選択してください。
 
 9.  **Next**をクリックして変更フィードを設定してください。
 

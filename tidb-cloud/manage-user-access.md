@@ -351,7 +351,7 @@ TiDB Xインスタンスへのアクセス権を付与するには、以下の�
     >
     > ユーザーがまだ組織に属していない場合は、右上隅にある**Invite User**をクリックし、[ユーザーを組織に招待する](#invite-a-user-to-your-organization)の手順に従って、ユーザーにインスタンス ロールを付与します。
 
-4.  **Edit Role**ページで、 **インスタンスアクセス**セクションの**Instance access**をクリックし、ユーザーにロールを付与して、対象のTiDB Xインスタンスを選択します。
+4.  **Edit Role**ページで、 **Instance access**セクションの**Add Role and Select Instance**をクリックし、ユーザーにロールを付与して、対象のTiDB Xインスタンスを選択します。
 
 5.  **Save**をクリックしてください。
 

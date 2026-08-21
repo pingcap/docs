@@ -55,7 +55,7 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
     3.  **DB Audit Logging**ページで、右上隅にある**Enable**をクリックします。
 
-    4.  **データベース監査ログストレージコンフィグレーション**ダイアログで、 **AWS IAM Policy Settings**セクションを探し、後で使用するために**TiDB Cloud Account ID**と**TiDB Cloud External ID**を記録してください。
+    4.  **Database Audit Log Storage Configuration**ダイアログで、 **AWS IAM Policy Settings**セクションを探し、後で使用するために**TiDB Cloud Account ID**と**TiDB Cloud External ID**を記録してください。
 
 2.  AWS マネジメント コンソールで、 **IAM** &gt; **Access Management** &gt; **Policies**に移動し、 `s3:PutObject`書き込み専用権限を持つストレージバケット ポリシーが存在するかどうかを確認します。
 
@@ -89,7 +89,7 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
 #### ステップ3．監査ログを有効にする {#step-3-enable-audit-logging}
 
-TiDB Cloudコンソールで、 TiDB CloudアカウントIDと外部IDの値を取得した**データベース監査ログストレージコンフィグレーション**ダイアログに戻り、以下の手順を実行します。
+TiDB Cloudコンソールで、 TiDB CloudアカウントIDと外部IDの値を取得した**Database Audit Log Storage Configuration**ダイアログに戻り、以下の手順を実行します。
 
 1.  **Bucket URI**フィールドに、監査ログファイルが書き込まれるS3バケットのURIを入力してください。
 
@@ -135,7 +135,7 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
     1.  TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
     2.  対象インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
     3.  **DB Audit Logging**ページで、右上隅にある**Enable**をクリックします。
-    4.  **データベース監査ログストレージコンフィグレーション**ダイアログで、 **Alibaba Cloud RAM Policy Settings**セクションを探し、後で使用するために**TiDB Cloud Account ID**と**TiDB Cloud External ID**を記録してください。
+    4.  **Database Audit Log Storage Configuration**ダイアログで、 **Alibaba Cloud RAM Policy Settings**セクションを探し、後で使用するために**TiDB Cloud Account ID**と**TiDB Cloud External ID**を記録してください。
 
 2.  Alibaba Cloud コンソールで、 **[RAM]** &gt; **Permissions** &gt; **Policies**に移動し、監査ログ OSS バケットに対して`oss:PutObject`書き込み専用権限を持つポリシーが既に存在するかどうかを確認します。
 
@@ -180,8 +180,8 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
     ダイアログで、以下の設定を構成してください。
 
-    -   **Resource Scope**については、 **アカウント**を選択してください。
-    -   **ポリシー**フィールドで、以前に作成したOSS書き込みポリシーを選択します。
+    -   **Resource Scope**については、 **Account**を選択してください。
+    -   **Policy**フィールドで、以前に作成したOSS書き込みポリシーを選択します。
     -   **Grant Permissions**をクリックしてください。
 
 5.  後で使用するために、**Role ARN** (例: `acs:ram::<Your-Account-ID>:role/tidb-cloud-audit-role` ) をコピーしてください。
@@ -233,7 +233,7 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
 #### ステップ3．監査ログを有効にする {#step-3-enable-audit-logging}
 
-TiDB Cloudコンソールで、 TiDB CloudアカウントIDを取得した**データベース監査ログストレージコンフィグレーション**ダイアログに戻り、以下の手順を実行します。
+TiDB Cloudコンソールで、 TiDB CloudアカウントIDを取得した**Database Audit Log Storage Configuration**ダイアログに戻り、以下の手順を実行します。
 
 1.  **Bucket URI**フィールドに、OSSバケットのURIを入力します。例： `oss://tidb-cloud-audit-log` 。
 
@@ -263,7 +263,7 @@ TiDB Cloudコンソールで、 TiDB CloudアカウントIDを取得した**デ�
 
 インスタンスの監査フィルタルールを指定するには、次の手順を実行します。
 
-1.  **DB Audit Logging**ページで、 **ログフィルタルール**セクションの**Add Filter Rule**をクリックして、監査フィルタルールを追加します。
+1.  **DB Audit Logging**ページで、 **Log Filter Rules**セクションの**Add Filter Rule**をクリックして、監査フィルタルールを追加します。
 
     監査ルールは一度に1つずつ追加できます。各ルールでは、ユーザー式、データベース式、テーブル式、およびアクセスタイプを指定します。監査要件に合わせて、複数の監査ルールを追加できます。
 

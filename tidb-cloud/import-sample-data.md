@@ -20,9 +20,9 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
 
     2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
-2.  **クラウドストレージからデータをインポート**をクリックします。
+2.  **Import data from Cloud Storage**をクリックします。
 
-3.  **クラウドストレージからデータをインポート**ページで、以下の情報を入力してください。
+3.  **Import Data from Cloud Storage**ページで、以下の情報を入力してください。
 
     -   **Storage Provider**： **Amazon S3**を選択してください。
     -   **Source URI** ：サンプルデータURI `s3://tidbcloud-sample-data/data-ingestion/`を入力してください。
@@ -52,9 +52,9 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
 
     2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
-2.  **クラウドストレージからデータをインポート**をクリックします。
+2.  **Import data from Cloud Storage**をクリックします。
 
-3.  **クラウドストレージからデータをインポート**ページで、以下の情報を入力してください。
+3.  **Import Data from Cloud Storage**ページで、以下の情報を入力してください。
 
     -   **Storage Provider**： **Google Cloud Storage**を選択してください。
     -   **Source URI** ：サンプルデータURI `gs://tidbcloud-samples-us-west1/`を入力してください。
@@ -84,9 +84,9 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
 
     2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
-2.  **クラウドストレージからデータをインポート**をクリックします。
+2.  **Import data from Cloud Storage**をクリックします。
 
-3.  **クラウドストレージからデータをインポート**ページで、以下の情報を入力してください。
+3.  **Import Data from Cloud Storage**ページで、以下の情報を入力してください。
 
     -   **Storage Provider**： **Azure Blob Storage**を選択します。
 
@@ -95,7 +95,7 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
     -   **Connectivity Method**： TiDB CloudがAzure Blob Storageに接続する方法を選択します。サンプルデータをインポートするには、デフォルトの接続方法を使用できます。
 
         -   **Public**（デフォルト）：パブリックインターネット経由で接続します。ストレージアカウントがパブリックネットワークへのアクセスを許可している場合にこのオプションを使用してください。
-        -   **Private Link**：Azure プライベートエンドポイント経由で接続し、ネットワークから隔離されたアクセスを実現します。ストレージアカウントがパブリックアクセスをブロックしている場合、またはセキュリティポリシーでプライベート接続が必要な場合にこのオプションを使用します。**Private Link**を選択した場合は、追加フィールド**Azure Blob Storage リソース ID**も入力する必要があります。リソース ID を確認するには：
+        -   **Private Link**：Azure プライベートエンドポイント経由で接続し、ネットワークから隔離されたアクセスを実現します。ストレージアカウントがパブリックアクセスをブロックしている場合、またはセキュリティポリシーでプライベート接続が必要な場合にこのオプションを使用します。**Private Link**を選択した場合は、追加フィールド**Azure Blob Storage Resource ID**も入力する必要があります。リソース ID を確認するには：
 
             1.  [Azureポータル](https://portal.azure.com/)にアクセスします。
             2.  ストレージアカウントに移動し、 **Overview** &gt; **JSON View**をクリックします。
@@ -114,7 +114,7 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
 
     2.  **Networking** &gt; **Private endpoint connections**をクリックします。
 
-    3.  TiDB Cloudからの保留中の接続要求を見つけて、 **承認**をクリックします。
+    3.  TiDB Cloudからの保留中の接続要求を見つけて、 **Approve**をクリックします。
 
     4.  [TiDB Cloudコンソール](https://tidbcloud.com/)に戻ります。エンドポイントが承認されると、インポート ウィザードが自動的に続行されます。
 

@@ -197,7 +197,7 @@ TiDB Cloudは、偶発的なデータ損失や破損が発生した場合にデ�
 
 TiDB Cloudは、インスタンスのスナップショット復元と特定時点への復元をサポートしています。
 
--   **Snapshot Restore**：特定のバックアップスナップショットからインスタンスを復元します。この方法は、自動バックアップと手動バックアップの両方の復元に使用できます。**バックアップ一覧**では、手動バックアップには**Manual**タイプと**Permanent**有効期限ステータスが表示されます。
+-   **Snapshot Restore**：特定のバックアップスナップショットからインスタンスを復元します。この方法は、自動バックアップと手動バックアップの両方の復元に使用できます。**Backup List**では、手動バックアップには**Manual**タイプと**Permanent**有効期限ステータスが表示されます。
 
 -   **Point-in-Time Restore**：インスタンスを特定の時点の状態に復元します。
 
@@ -236,7 +236,7 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
     </div>
      </SimpleTab>
 
-4.  **Next**をクリックして、 **新しいインスタンスへの復元**ページに進んでください。
+4.  **Next**をクリックして、 **Restore to a New Instance**ページに進んでください。
 
 5. 新しい {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスを復元用に構成します。手順は <CustomContent plan="premium">[{{{ .premium }}} インスタンスの作成](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent> を参照してください。
 

@@ -55,7 +55,7 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 この機能を有効にするには:
 
 1.  [継続的なプロファイリングページ](#access-the-page)ご覧ください。
-2.  **Open Settings**をクリックします。右側の**Settings**領域で、 **Enable Feature**をオンにし、必要に応じて**保存期間**のデフォルト値を変更します。
+2.  **Open Settings**をクリックします。右側の**Settings**領域で、 **Enable Feature**をオンにし、必要に応じて**Retention Duration**のデフォルト値を変更します。
 3.  **[保存]を**クリックします。
 
 ![Enable feature](/media/dashboard/dashboard-conprof-start.png)

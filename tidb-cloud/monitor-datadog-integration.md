@@ -34,7 +34,7 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 
 -   Datadog統合は、[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは利用できません。
 
--   クラスターの状態が**CREATING** 、 **復元中** 、 **PAUSED** 、 **RESUMING**の場合は、Datadog の統合は利用できません。
+-   クラスターの状態が**CREATING** 、 **RESTORING** 、 **PAUSED** 、 **RESUMING**の場合は、Datadog の統合は利用できません。
 
 -   Datadogとの統合が設定されているクラスターが削除されると、それに関連付けられている統合サービスも削除されます。
 
@@ -51,7 +51,7 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 
 2.  左側のナビゲーションペインで、 **Settings** &gt; **Integrations**をクリックします。
 
-3.  **統合**ページで、 **Integration to Datadog**をクリックします。
+3.  **Integrations**ページで、 **Integration to Datadog**をクリックします。
 
 4.  Datadog APIキーを入力し、Datadogサイトを選択してください。
 
@@ -69,9 +69,9 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  左側のナビゲーションペインで、 **プロジェクト設定**の下にある**Project Settings**をクリックします。
+3.  左側のナビゲーションペインで、 **Project Settings**の下にある**Project Settings**をクリックします。
 
-4.  **統合**ページで、 **Integration to Datadog (BETA)**をクリックします。
+4.  **Integrations**ページで、 **Integration to Datadog (BETA)**をクリックします。
 
 5.  Datadog APIキーを入力し、Datadogサイトを選択してください。
 

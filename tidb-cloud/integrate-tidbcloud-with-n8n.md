@@ -60,7 +60,7 @@ TiDB Cloudノードは、npmリポジトリでは`n8n-nodes-tidb-cloud`という
 2.  **Settings**&gt;**Community nodes**に移動してください。
 3.  **Install a community node**をクリックしてください。
 4.  **npm Package Name**フィールドに`n8n-nodes-tidb-cloud`と入力します。
-5.  **インストール**をクリックしてください。
+5.  **Install**をクリックしてください。
 
 その後、**TiDB Cloud**の検索バーで**TiDB Cloud**ノードを検索し、ワークスペースにドラッグすることでTiDB Cloudノードを使用できます。
 
@@ -158,7 +158,7 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、このノ�
 5.  **操作**リストで、 `Insert`を選択します。
 6.  **Cluster** 、 **User** 、 **Database** 、 **Password**の各ボックスに、それぞれ対応する値を入力してください。
 7.  **Table**ボックスに、 `hacker_news_briefing`表を入力します。
-8.  **列**ボックスに`creator, title, link, pubdate, comments, content, guid, isodate`と入力します。
+8.  **Columns**ボックスに`creator, title, link, pubdate, comments, content, guid, isodate`と入力します。
 
 #### メッセージを作成する {#build-message}
 
@@ -282,7 +282,7 @@ TiDB Cloudノードは[通常のノード](https://docs.n8n.io/workflows/nodes/#
 -   **User**： TiDB Cloud Starterインスタンスのユーザー名。
 -   **Database**：データベース名。
 -   **Table**：テーブル名。 `From list`モードを使用してテーブル名を選択するか、 `Name`モードを使用してテーブル名を手動で入力できます。
--   **列**：入力項目のプロパティをカンマで区切ったリストで、新しい行の列として使用されます。項目とは、あるノードから別のノードに送信されるデータのことです。ノードは、受信データの各項目に対してアクションを実行します。n8n の項目に関する詳細は、 [n8nドキュメント](https://docs.n8n.io/workflows/items/)を参照してください。
+-   **Columns**：入力項目のプロパティをカンマで区切ったリストで、新しい行の列として使用されます。項目とは、あるノードから別のノードに送信されるデータのことです。ノードは、受信データの各項目に対してアクションを実行します。n8n の項目に関する詳細は、 [n8nドキュメント](https://docs.n8n.io/workflows/items/)を参照してください。
 
 </div>
 <div label="Update">
@@ -296,7 +296,7 @@ TiDB Cloudノードは[通常のノード](https://docs.n8n.io/workflows/nodes/#
 -   **Database**：データベース名。
 -   **Table**：テーブル名。 `From list`モードを使用してテーブル名を選択するか、 `Name`モードを使用してテーブル名を手動で入力できます。
 -   **Update Key**: データベース内のどの行を更新するかを決定するアイテムのプロパティ名。アイテムとは、あるノードから別のノードに送信されるデータのことです。ノードは、受信データの各アイテムに対してアクションを実行します。n8n のアイテムの詳細については、 [n8nドキュメント](https://docs.n8n.io/workflows/items/)を参照してください。
--   **列**：入力項目のプロパティをカンマで区切ったリスト。更新対象の行の列として使用されます。
+-   **Columns**：入力項目のプロパティをカンマで区切ったリスト。更新対象の行の列として使用されます。
 
 </div>
 </SimpleTab>

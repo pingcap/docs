@@ -352,9 +352,9 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 -   5.2.1 PD スイッチLeader。
 
-    -   原因1：ディスク。PDノードが配置されているディスクのI/O負荷が最大になっています。PDがI/O負荷の高い他のコンポーネントと一緒にデプロイされているかどうか、およびディスクの状態を調査してください。Grafana**の**「**ディスクパフォ​​ーマンス**」→ **レイテンシー**/**負荷**でモニターメトリックを確認することで原因を特定できます。必要に応じて、FIOツールを使用してディスクのチェックを実行することもできます。中国語の[ケース292](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case292.md)を参照してください。
+    -   原因1：ディスク。PDノードが配置されているディスクのI/O負荷が最大になっています。PDがI/O負荷の高い他のコンポーネントと一緒にデプロイされているかどうか、およびディスクの状態を調査してください。**Grafana** -> **disk performance** -> **latency**/**load**でモニターメトリックを確認することで原因を特定できます。必要に応じて、FIOツールを使用してディスクのチェックを実行することもできます。中国語の[ケース292](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case292.md)を参照してください。
 
-    -   原因 2: ネットワーク。PD ログに`lost the TCP streaming connection`が表示されます。PD ノード間のネットワークに問題がないか確認し、モニター**Grafana** -&gt; **PD** -&gt; **etcd**で`round trip`を表示して原因を検証する必要があります。中国語の[ケース177](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case177.md)を参照してください。
+    -   原因 2: ネットワーク。PD ログに`lost the TCP streaming connection`が表示されます。PD ノード間のネットワークに問題がないか確認し、モニター**Grafana** -> **PD** -> **etcd**で`round trip`を表示して原因を検証する必要があります。中国語の[ケース177](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case177.md)を参照してください。
 
     -   原因3：システム負荷が高い。ログには`server is likely overloaded`と表示されます。中国語の[ケース214](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case214.md)を参照してください。
 

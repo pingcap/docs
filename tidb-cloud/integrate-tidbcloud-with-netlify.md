@@ -136,7 +136,7 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
     netlify init
     ```
 
-    プロンプトが表示されたら、 **新しいサイトを作成して設定する**を選択し、GitHub にアクセス権を付与してください。その他のオプションはすべてデフォルト値を使用してください。
+    プロンプトが表示されたら、 **Create & configure a new site**を選択し、GitHub にアクセス権を付与してください。その他のオプションはすべてデフォルト値を使用してください。
 
     ```shell
     Adding local .netlify folder to .gitignore file...

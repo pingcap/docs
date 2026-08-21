@@ -19,7 +19,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 [Zapテンプレート](https://docs.zapier.com/integrations/publish/zap-templates)、公開されているZapier連携機能向けに、アプリとコアフィールドが事前に選択された、すぐに使える連携機能またはZapです。
 
-このセクションでは、 **新しい GitHub グローバル イベントを TiDB 行に追加する**テンプレートを例として、ワークフローを作成します。このワークフローでは、GitHub アカウントから新しいグローバル イベント (任意のリポジトリで、あなたからまたはあなたに対して発生する[GitHubイベント](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types)) が作成されるたびに、Zapier がTiDB Cloudクラスターに新しい行を追加します。
+このセクションでは、 **Add new Github global events to TiDB rows**テンプレートを例として、ワークフローを作成します。このワークフローでは、GitHub アカウントから新しいグローバル イベント (任意のリポジトリで、あなたからまたはあなたに対して発生する[GitHubイベント](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types)) が作成されるたびに、Zapier がTiDB Cloudクラスターに新しい行を追加します。
 
 ### 前提条件 {#prerequisites}
 
@@ -83,7 +83,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
         Zapierは、入力されたパスワードを使用してTiDB Cloudからデータベースを検索します。TiDB Cloud Starterインスタンスにデータベースが見つからない場合は、パスワードを再入力してページを更新してください。
 
-    4.  **「検索するテーブル」ボックス**に`github_global_event`と入力します。テーブルが存在しない場合、テンプレートは次の DDL を使用してテーブルを作成します。 **Continue**をクリックします。
+    4.  **The table you want to search**ボックスに`github_global_event`と入力します。テーブルが存在しない場合、テンプレートは次の DDL を使用してテーブルを作成します。 **Continue**をクリックします。
 
         ![The create table DDL](/media/tidb-cloud/zapier/zapier-tidbcloud-create-table-ddl.png)
 
@@ -111,7 +111,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
         ![Table columns](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-columns.png)
 
-    3.  **列**ボックスで、トリガーから対応するデータを選択します。すべての列を入力し、 **Continue**をクリックします。
+    3.  **Columns**ボックスで、トリガーから対応するデータを選択します。すべての列を入力し、 **Continue**をクリックします。
 
         ![Fill in Columns](/media/tidb-cloud/zapier/zapier-fill-in-tidbcloud-triggers-data.png)
 

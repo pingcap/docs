@@ -168,8 +168,8 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
 8.  **Start Replication Position**で、MySQLシンクの開始位置を設定します。
 
     -   Dumplingを使用して[既存のデータをロードした](#load-existing-data-optional)場合は、 **[特定の TSO からレプリケーションを開始する]**を選択し、 Dumpling のエクスポートされたメタデータ ファイルから取得した TSO を入力します。
-    -   アップストリームの TiDB にデータがない場合は、 **今すぐレプリケーションを開始する**を選択してください。
-    -   それ以外の場合は、 **特定の時間からレプリケーションを開始する**を選択して、開始時刻をカスタマイズできます。
+    -   アップストリームの TiDB にデータがない場合は、 **Start replication from now on**を選択してください。
+    -   それ以外の場合は、 **Start replication from a specific time**を選択して、開始時刻をカスタマイズできます。
 
 9.  **Next**をクリックして、変更フィードの仕様を設定してください。
 

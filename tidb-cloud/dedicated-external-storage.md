@@ -29,11 +29,11 @@ TiDB Cloudのバケットアクセスを設定し、以下の手順でロールA
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**データ** &gt; **Import**をクリックします。
+    2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
-    3.  **クラウドストレージからデータをインポート**をクリックします。
+    3.  **Import data from Cloud Storage**をクリックします。
 
-    4.  **クラウドストレージからデータをインポート**ページで、**Storage Provider**を**Amazon S3**に設定し、 **Credentials**で**AWS Role ARN**が選択されていることを確認してから、 **Role ARN**フィールドの下にある**ここをクリックして AWS CloudFormation で新しいロール ARN を作成**をクリックします。 **Add New Role ARN**ダイアログが表示されます。
+    4.  **Import Data from Cloud Storage**ページで、**Storage Provider**を**Amazon S3**に設定し、 **Credentials**で**AWS Role ARN**が選択されていることを確認してから、 **Role ARN**フィールドの下にある**Click here to create new one with AWS CloudFormation**をクリックします。 **Add New Role ARN**ダイアログが表示されます。
 
     5.  **問題が発生しましたか？ロールARNを手動で作成して**、このクラスターの**TiDB Cloud Account ID**と**TiDB Cloud External ID**を取得してください。これらのIDは後で使用するため、メモしておいてください。
 
@@ -166,11 +166,11 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**データ** &gt; **Import**をクリックします。
+    2.  対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
-    3.  **クラウドストレージからデータをインポート**をクリックします。
+    3.  **Import data from Cloud Storage**をクリックします。
 
-    4.  **クラウドストレージからデータをインポート**ページで、 **Storage Provider**を**Google Cloud Storage**に設定し、後で使用するためにGoogle CloudサービスアカウントIDをコピーしてください。
+    4.  **Import Data from Cloud Storage**ページで、 **Storage Provider**を**Google Cloud Storage**に設定し、後で使用するためにGoogle CloudサービスアカウントIDをコピーしてください。
 
 2.  Google Cloud コンソールで、GCS バケット用のIAMロールを作成します。
 
@@ -190,7 +190,7 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
         -   storage.get
         -   storage.オブジェクトリスト
 
-        権限名をフィルタークエリとして**プロパティ名または値を入力**フィールドにコピーし、フィルター結果からその名前を選択できます。3つの権限を追加するには、権限名の間に**OR演算子**を使用します。
+        権限名をフィルタークエリとして**プロパティ名または値を入力**フィールドにコピーし、フィルター結果からその名前を選択できます。3つの権限を追加するには、権限名の間に**OR**を使用します。
 
         ![Add permissions](/media/tidb-cloud/gcp-add-permissions.png)
 
@@ -200,7 +200,7 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
 
     ![Grant Access to the bucket ](/media/tidb-cloud/gcp-bucket-permissions.png)
 
-5.  バケットへのアクセス権を付与するには、以下の情報を入力し、 **保存**をクリックしてください。
+5.  バケットへのアクセス権を付与するには、以下の情報を入力し、 **SAVE**をクリックしてください。
 
     -   **New Principals**フィールドに、対象のTiDBクラスターのGoogle Cloud ServiceアカウントIDを貼り付けます。
 
@@ -210,7 +210,7 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
     >
     > TiDB Cloudへのアクセス権を削除するには、付与したアクセス権を削除するだけで済みます。
 
-6.  **Bucket details**ページで、「**オブジェクト」**タブをクリックします。
+6.  **Bucket details**ページで、**OBJECTS**タブをクリックします。
 
     ファイルの gsutil URI をコピーするには、ファイルを選択し、 **[オブジェクトを開く] オーバーフロー メニュー**をクリックして、 **Copy gsutil URI**をクリックします。
 
@@ -238,7 +238,7 @@ TiDB Cloud DedicatedがAzure Blobコンテナにアクセスできるように�
 
     1.  **Allowed services**で**Blob**を選択します。
     2.  **Allowed resource types**で、 **Container**と**Object**を選択します。
-    3.  **Allowed permissions**で、必要な権限を選択します。たとえば、 TiDB Cloud Dedicatedにデータをインポートするには、 **読み取り**と**「一覧表示」の**権限が必要です。
+    3.  **Allowed permissions**で、必要な権限を選択します。たとえば、 TiDB Cloud Dedicatedにデータをインポートするには、 **Read**と**List**の権限が必要です。
     4.  必要に応じて**開始日時と有効期限日時**を調整してください。セキュリティ上の理由から、有効期限はデータインポートのスケジュールに合わせて設定することをお勧めします。
     5.  その他の設定については、デフォルト値を維持してください。
 

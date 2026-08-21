@@ -31,7 +31,7 @@ summary: パブリック接続を使用してTiDB Cloudクラスターに接続�
 
 2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**Connection Type**を選択します。
+3.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、 [IP アクセス リストを設定する](/tidb-cloud/configure-ip-access-list.md)の手順に従って設定してください。
 

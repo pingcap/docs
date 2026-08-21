@@ -105,9 +105,9 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
     2.  対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
-2.  **クラウドストレージからデータをインポート**をクリックします。
+2.  **Import data from Cloud Storage**をクリックします。
 
-3.  **クラウドストレージからデータをインポート**ページで、以下の情報を入力してください。
+3.  **Import Data from Cloud Storage**ページで、以下の情報を入力してください。
 
     -   **Storage Provider**： **Amazon S3**を選択してください。
     -   **Source Files URI** ：
@@ -158,9 +158,9 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
     2.  対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
-2.  **クラウドストレージからデータをインポート**をクリックします。
+2.  **Import data from Cloud Storage**をクリックします。
 
-3.  **クラウドストレージからデータをインポート**ページで、以下の情報を入力してください。
+3.  **Import Data from Cloud Storage**ページで、以下の情報を入力してください。
 
     -   **Storage Provider**： **Google Cloud Storage**を選択してください。
     -   **Source Files URI** ：
@@ -209,9 +209,9 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
     2.  対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
-2.  **クラウドストレージからデータをインポート**をクリックします。
+2.  **Import data from Cloud Storage**をクリックします。
 
-3.  **クラウドストレージからデータをインポート**ページで、以下の情報を入力してください。
+3.  **Import Data from Cloud Storage**ページで、以下の情報を入力してください。
 
     -   **Storage Provider**： **Azure Blob Storage**を選択します。
     -   **Source Files URI** ：
@@ -260,9 +260,9 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
     2.  対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
-2.  **クラウドストレージからデータをインポート**をクリックします。
+2.  **Import data from Cloud Storage**をクリックします。
 
-3.  **クラウドストレージからデータをインポート**ページで、以下の情報を入力してください。
+3.  **Import Data from Cloud Storage**ページで、以下の情報を入力してください。
 
     -   **Storage Provider**： **Alibaba Cloud OSS**を選択してください。
     -   **Source Files URI** ：

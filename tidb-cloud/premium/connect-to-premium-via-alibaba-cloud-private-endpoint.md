@@ -39,7 +39,7 @@ Alibaba Cloud管理コンソールを使用してVPCインターフェースエ�
     -   **Endpoint Name**：エンドポイントの名前を入力してください。
     -   **Endpoint Type**：**Interface Endpoint**を選択してください。
     -   **Endpoint Service**： **[その他のエンドポイントサービス]**を選択します。
-5.  **エンドポイントサービス名**フィールドに、 TiDB Cloudからコピーしたサービス名を貼り付けます。
+5.  **Endpoint Service Name**フィールドに、 TiDB Cloudからコピーしたサービス名を貼り付けます。
 6.  **Verify**をクリックしてください。緑色のチェックマークが表示されれば、サービスが有効であることを示します。
 7.  エンドポイントに関連付ける**VPC** 、**Security Group**、および**ゾーン**を選択してください。
 8.  エンドポイントを作成するには、 **OK**をクリックしてください。
@@ -49,13 +49,13 @@ Alibaba Cloud管理コンソールを使用してVPCインターフェースエ�
 
 -   **Basic Information**セクションで、**Endpoint ID**をコピーしてください。この値は後で*エンドポイントリソースID*として使用します。
 
--   **エンドポイントサービスのドメイン名**セクションで、 **デフォルトのドメイン名**をコピーしてください。この値は後で*ドメイン名*として使用します。
+-   **Domain name of Endpoint Service**セクションで、 **Default Domain Name**をコピーしてください。この値は後で*ドメイン名*として使用します。
 
     ![AliCloud private endpoint Information](/media/tidb-cloud/private-endpoint/alicloud-private-endpoint-info.png)
 
 ### ステップ3. エンドポイントを受け入れ、エンドポイント接続を作成します。 {#step-3-accept-the-endpoint-and-create-the-endpoint-connection}
 
-1.  TiDB Cloudコンソールの**Alibaba Cloudプライベートエンドポイント接続の作成**ダイアログに戻ります。
+1.  TiDB Cloudコンソールの**Create Alibaba Cloud Private Endpoint Connection**ダイアログに戻ります。
 
 2.  先ほどコピーした*エンドポイントリソースID*と*ドメイン名*を、それぞれのフィールドに貼り付けてください。
 

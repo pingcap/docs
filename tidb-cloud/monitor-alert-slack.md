@@ -34,8 +34,8 @@ TiDB Cloud、Slack、[メール](/tidb-cloud/monitor-alert-email.md)、[Zoom](/t
 1.  まだお持ちでない場合は、 [Slackアプリを作成する](https://api.slack.com/apps/new)。 **Create New App**をクリックし、 **From scratch**を選択します。名前を入力し、アプリを関連付けるワークスペースを選択して、 **Create App**をクリックします。
 2.  アプリの設定ページに移動します。[アプリの管理ダッシュボード](https://api.slack.com/apps)から設定をロードできます。
 3.  **Incoming Webhooks**タブをクリックし、 **Activate Incoming Webhooks**を**ON**に切り替えます。
-4.  **ワークスペースに新しいWebhookを追加**をクリックします。
-5.  アラート通知を受信するチャネルを選択し、 **承認**を選択してください。受信Webhookをプライベートチャネルに追加する必要がある場合は、まずそのチャネルに参加している必要があります。
+4.  **Add New Webhook to Workspace**をクリックします。
+5.  アラート通知を受信するチャネルを選択し、 **Authorize**を選択してください。受信Webhookをプライベートチャネルに追加する必要がある場合は、まずそのチャネルに参加している必要があります。
 
 **ワークスペースの Webhook URL**セクションに、次の形式で新しいエントリが表示されます: `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX` 。
 

@@ -95,7 +95,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
     ![register connector dialog](/media/develop/aws-appflow-step-register-connector-dialog.png)
 
-3.  **登録**をクリックします。すると、TiDBコネクタが正常に登録されます。
+3.  **Register**をクリックします。すると、TiDBコネクタが正常に登録されます。
 
 ## ステップ2. フローを作成する {#step-2-create-a-flow}
 
@@ -123,7 +123,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 2.  **Connect**をクリックしてください。
 
-    1.  **Salesforceに接続**ダイアログで、この接続の名前を指定し、 **Continue**をクリックします。
+    1.  **Connect to Salesforce**ダイアログで、この接続の名前を指定し、 **Continue**をクリックします。
 
         ![connect to salesforce](/media/develop/aws-appflow-step-connect-to-salesforce.png)
 
@@ -135,7 +135,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     >
     > 会社がすでに Salesforce の Professional Edition を使用している場合、REST API はデフォルトでは有効になっていません。 REST API を使用するには、新しい Developer Edition の登録が必要になる場合があります。詳細については、 [Salesforceフォーラムトピック](https://developer.salesforce.com/forums/?id=906F0000000D9Y2IAK)を参照してください。
 
-3.  **接続先の詳細**エリアで、接続先として**TiDB-Connector**を選択します。「**接続」**ボタンが表示されます。
+3.  **Destination details**エリアで、接続先として**TiDB-Connector**を選択します。 **Connect**ボタンが表示されます。
 
     ![tidb dest](/media/develop/aws-appflow-step-tidb-dest.png)
 
@@ -167,7 +167,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
     ![complete flow](/media/develop/aws-appflow-step-complete-flow.png)
 
-8.  **エラー処理**領域で、 **現在のフロー実行を停止する**を選択します。**フローのトリガー**領域で、 **「オンデマンドで実行**」トリガータイプを選択します。これは、フローを手動で実行する必要があることを意味します。次に、 **Next**をクリックします。
+8.  **Error handling**領域で、 **Stop the current flow run**を選択します。**Flow trigger**領域で、 **Run on demand**トリガータイプを選択します。これは、フローを手動で実行する必要があることを意味します。次に、 **Next**をクリックします。
 
     ![complete step1](/media/develop/aws-appflow-step-complete-step1.png)
 
@@ -185,7 +185,7 @@ Salesforce の**Account**オブジェクトのフィールドを TiDB の`sf_acc
     +----+------+------+---------------+--------+----------+
     ```
 
--   マッピングルールを設定するには、左側でソースフィールド名を選択し、右側で宛先フィールド名を選択します。次に、 **フィールドのマッピング**をクリックすると、ルールが設定されます。
+-   マッピングルールを設定するには、左側でソースフィールド名を選択し、右側で宛先フィールド名を選択します。次に、 **Map fields**をクリックすると、ルールが設定されます。
 
     ![add mapping rule](/media/develop/aws-appflow-step-add-mapping-rule.png)
 
@@ -216,7 +216,7 @@ Salesforce の**Account**オブジェクトのフィールドを TiDB の`sf_acc
 
 ## ステップ3. フローを実行する {#step-3-run-the-flow}
 
-新しく作成したフローのページで、右上隅にある**フローを実行**をクリックします。
+新しく作成したフローのページで、右上隅にある**Run flow**をクリックします。
 
 ![run flow](/media/develop/aws-appflow-step-run-flow.png)
 

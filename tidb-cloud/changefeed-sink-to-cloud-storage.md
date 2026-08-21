@@ -104,7 +104,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
     -   **New Principals**フィールドに、以前に記録した対象のTiDBクラスタの**Service Account ID**を貼り付けます。
 
-    -   **役割を選択**ドロップダウンリストに、先ほど作成したIAMロールの名前を入力し、フィルター結果からその名前を選択します。
+    -   **Select a role**ドロップダウンリストに、先ほど作成したIAMロールの名前を入力し、フィルター結果からその名前を選択します。
 
     > **Note:**
     >
@@ -145,9 +145,9 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
     2.  **Allowed services**セクションで、 **Blob**を選択します。
 
-    3.  **Allowed resource types**セクションで、 **コンテナ**と**オブジェクト**を選択します。
+    3.  **Allowed resource types**セクションで、 **Container**と**Object**を選択します。
 
-    4.  **Allowed permissions**セクションで、 **読み取り** 、 **書き込み** 、 **Delete** 、 **一覧表示** 、 **Create**を選択します。
+    4.  **Allowed permissions**セクションで、 **Read** 、 **Write** 、 **Delete** 、 **List** 、 **Create**を選択します。
 
     5.  SASトークンの有効期間を、ニーズを満たすのに十分な長さに指定してください。
 
@@ -157,7 +157,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
         > -   生成されたSASトークンは取り消すことができないため、有効期間を慎重に設定してください。
         > -   継続的な可用性を確保するため、SASトークンの有効期限が切れる前に再生成および更新してください。
 
-    6.  **SASと接続文字列を生成**をクリックし、 **SAS token**を保存します。
+    6.  **Generate SAS and connection string**をクリックし、 **SAS token**を保存します。
 
         ![Generate a SAS token](/media/tidb-cloud/changefeed/sink-to-cloud-storage-azure-signature.png)
 
@@ -254,6 +254,6 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 -   すべての設定が正しいことを確認したら、 **Create**をクリックして変更フィードの作成に進んでください。
 -   設定を変更する必要がある場合は、 **Previous**をクリックして戻り、必要な変更を行ってください。
 
-シンクはまもなく起動し、シンクの状態が**作成中**から**実行中**に変わるのが確認できます。
+シンクはまもなく起動し、シンクの状態が**Creating**から**Running**に変わるのが確認できます。
 
 変更フィードの名前をクリックすると、その詳細ページに移動します。このページでは、チェックポイントの状態、レプリケーションのレイテンシー、その他の関連メトリックなど、変更フィードに関する詳細情報を確認できます。

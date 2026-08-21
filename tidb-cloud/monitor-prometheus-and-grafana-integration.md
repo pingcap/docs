@@ -102,7 +102,7 @@ Grafana の使用方法の詳細については、 [Grafanaのドキュメント
 1.  [ステップ1](#step-1-get-a-scrape_config-file-for-prometheus)に従って、Prometheus 用の新しい`scrape_config`ファイルを作成します。
 2.  新しいファイルの内容をPrometheusの設定ファイルに追加してください。
 3.  Prometheus サービスがTiDB Cloudから引き続き読み取れることを確認したら、Prometheus 設定ファイルから古い`scrape_config`ファイルの内容を削除します。
-4.  プロジェクトまたはクラスターの**統合**ページで、対応する古い`scrape_config`ファイルを削除して、他のユーザーがTiDB Cloud Prometheus エンドポイントから読み取るために使用できないようにします。
+4.  プロジェクトまたはクラスターの**Integrations**ページで、対応する古い`scrape_config`ファイルを削除して、他のユーザーがTiDB Cloud Prometheus エンドポイントから読み取るために使用できないようにします。
 
 ## Prometheusで利用可能なメトリクス {#metrics-available-to-prometheus}
 

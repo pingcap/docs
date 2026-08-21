@@ -81,7 +81,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 
         デフォルトでは`AzureBastionSubnet`が作成されます。
 
-5.  情報を確認するには、 **確認 + 作成**をクリックします。
+5.  情報を確認するには、 **Review + create**をクリックします。
 
 6.  **Create**をクリックします。
 
@@ -112,7 +112,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     -   **Public inbound ports**: `Allow selected ports`
     -   受信ポートを選択: `SSH (22)`
     -   **Load balancing options**: `None`
-4.  情報を確認するには、 **確認 + 作成**をクリックします。
+4.  情報を確認するには、 **Review + create**をクリックします。
 5.  **Create**をクリックします。**Generate new key pair**メッセージが表示されます。
 6.  **「秘密鍵をダウンロードしてリソースを作成」をクリックして、**秘密鍵をローカルマシンにダウンロードします。仮想マシンの作成の進行状況を確認できます。
 
@@ -127,7 +127,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     -   **Authentication Type**: `SSH Private Key from Local File`
     -   **Username**: `azureuser`
     -   **Local File**: 以前にダウンロードした秘密鍵ファイルを選択します
-    -   **新しいブラウザタブで開く**オプションを選択します
+    -   **Open in new browser tab**オプションを選択します
 
 3.  ブローカーノードの各ページで**Connect**をクリックすると、Linuxターミナルで新しいブラウザタブが開きます。3つのブローカーノードごとに、Linuxターミナルで3つのブラウザタブを開く必要があります。
 
@@ -515,7 +515,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
     -   **表示**については、 **Restricted by subscription**または**Anyone with your alias**を選択します。
     -   **Subscription-level access and auto-approval**については、**Add subscriptions**をクリックして、 [前提条件](#prerequisites)で取得したTiDB Cloud Azure アカウントのサブスクリプションを追加します。
 
-5.  **Next : Tags >**をクリックし、 **次へ: 確認と作成 &gt;**をクリックして情報を確認します。
+5.  **Next : Tags >**をクリックし、 **Next : Review + create &gt;**をクリックして情報を確認します。
 
 6.  **Create**をクリックします。操作が完了したら、後で使用するためにプライベートリンクサービスのエイリアスを書き留めておきます。
 

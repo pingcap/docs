@@ -44,11 +44,11 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
 3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **接続タイプ**は`Public`に設定されています。
+    -   **Connection Type**は`Public`に設定されています。
 
     -   **ブランチ**は`main`に設定されています。
 
-    -   **「接続」は**`VS Code`に設定されています。
+    -   **Connect With**は`VS Code`に設定されています。
 
     -   お使いの環境に合った**オペレーティングシステム**を選択してください。
 
@@ -56,7 +56,7 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
     >
     > VS Code をリモート開発環境で実行している場合は、リストからリモートのオペレーティングシステムを選択してください。たとえば、Windows Subsystem for Linux (WSL) を使用している場合は、対応する Linux ディストリビューションに切り替えてください。GitHub Codespaces を使用している場合は、この操作は不要です。
 
-4.  **「パスワードを生成」を**クリックすると、ランダムなパスワードが生成されます。
+4.  **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
 
     > **Tip:**
     >
@@ -111,11 +111,11 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
 5.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-6.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**Public**を選択します。
+6.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
 
     -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
-    -   まだパスワードを設定していない場合は、ダイアログの**ルートパスワードを設定**をクリックしてください。
-    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA証明書**をクリックしてダウンロードしてください。
+    -   まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
+    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
     -   **Public**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
 7.  VS Codeを起動し、ナビゲーションペインで**SQLTools**拡張機能を選択します。 **[接続]**セクションで**[新しい接続を追加]**をクリックし、データベースドライバとして**TiDB**を選択します。
@@ -146,9 +146,9 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
 2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、「**接続タイプ」**ドロップダウンリストから**Public**を選択し、 **CA証明書**をクリックしてCA証明書をダウンロードします。
+3.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **CA cert**をクリックしてCA証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、最初の接続の前に、 **[IP アクセス リストの設定] をクリックするか、「IP アクセス リストを設定する」**の手順に従って[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
+    IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
 
     TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
@@ -207,8 +207,8 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
     -   **パスワードモード**：
 
-        -   パスワードが空欄の場合は、 **空欄のパスワードを使用する**を選択してください。
-        -   それ以外の場合は、 **SQLToolsDriver資格情報**を選択してください。
+        -   パスワードが空欄の場合は、 **Use empty password**を選択してください。
+        -   それ以外の場合は、 **SQLTools Driver Credentials**を選択してください。
 
     -   **MySQLドライバ固有のオプション**領域で、以下のパラメータを設定します。
 

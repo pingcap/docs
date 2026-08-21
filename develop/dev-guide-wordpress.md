@@ -101,7 +101,7 @@ TiDB Cloud StarterへのWordPressデータベース接続を設定します。
 ### ステップ5：データベース接続を確認する {#step-5-confirm-the-database-connection}
 
 1.  TiDB CloudコンソールでTiDB Cloud Starterインスタンスの接続ダイアログを閉じ、 **SQLエディタ**ページを開きます。
-2.  左側の**スキーマ**タブで、WordPressに接続したデータベースをクリックします。
+2.  左側の**Schemas**タブで、WordPressに接続したデータベースをクリックします。
 3.  そのデータベースのテーブル一覧に、WordPressのテーブル（ `wp_posts`や`wp_comments`など）が表示されていることを確認してください。
 
 ## お困りですか？ {#need-help}

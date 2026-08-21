@@ -83,11 +83,11 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
 
     2.  対象リソースの名前をクリックして概要ページに移動し、左側のナビゲーションペインにある**Import**をクリックします。
 
-2.  **クラウドストレージからデータをインポート**を選択し、次に**Amazon S3**をクリックします。
+2.  **Import data from Cloud Storage**を選択し、次に**Amazon S3**をクリックします。
 
 3.  **Amazon S3 からデータをインポートする**ページで、以下のソースデータ情報を設定してください。
 
-    -   **インポートするファイル数**： TiDB Cloud Starterの場合は、 **複数のファイル**を選択してください。このフィールドはTiDB Cloud Dedicatedでは利用できません。
+    -   **Import File Count**： TiDB Cloud Starterの場合は、 **Multiple files**を選択してください。このフィールドはTiDB Cloud Dedicatedでは利用できません。
     -   **Included Schema Files**：**Yes**を選択してください。
     -   **データ形式**: SELECT **SQL** 。
     -   **フォルダURI** : `s3://developer.pingcap.com/bookshop/`を入力してください。
@@ -102,7 +102,7 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
     -   1,000,000行の評価記録
     -   1,000,000行の注文記録
 
-4.  **Connect** ＞ **インポート開始**をクリックしてインポート処理を開始し、 TiDB Cloudインポート完了をお待ちください。
+4.  **Connect** ＞ **Start Import**をクリックしてインポート処理を開始し、 TiDB Cloudインポート完了をお待ちください。
 
 データをTiDB Cloudにインポートまたは移行する方法の詳細については、 [TiDB Cloud移行の概要](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview)を参照してください。
 

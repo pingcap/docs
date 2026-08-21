@@ -58,7 +58,7 @@ cd tidb-java-mybatis-quickstart
 
 3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **接続タイプ**は`Public`に設定されています。
+    -   **Connection Type**は`Public`に設定されています。
 
     -   **ブランチ**は`main`に設定されています。
 
@@ -114,11 +114,11 @@ cd tidb-java-mybatis-quickstart
 
 5.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-6.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**Public**を選択します。
+6.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
 
     -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
-    -   まだパスワードを設定していない場合は、ダイアログの**ルートパスワードを設定**をクリックしてください。
-    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA証明書**をクリックしてダウンロードしてください。
+    -   まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
+    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
     -   **Public**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
 7.  `env.sh.example`をコピーして`env.sh`に名前を変更するには、次のコマンドを実行します。
@@ -149,9 +149,9 @@ cd tidb-java-mybatis-quickstart
 
 2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、「**接続タイプ」**ドロップダウンリストから**Public**を選択し、 **CA証明書**をクリックしてCA証明書をダウンロードします。
+3.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **CA cert**をクリックしてCA証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、最初の接続の前に、 **[IP アクセス リストの設定] をクリックするか、「IP アクセス リストを設定する」**の手順に従って[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
+    IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
 
     TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 

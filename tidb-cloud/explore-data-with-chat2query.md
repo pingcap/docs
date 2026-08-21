@@ -51,7 +51,7 @@ Chat2Queryに初めてアクセスすると、PingCAPとAmazon Bedrockがお客�
 
 初回アクセス後も、AI設定は以下のように変更できます。
 
--   AIを有効にするには、Chat2Queryの右上隅にある**データ探索のためのAI機能を有効にする**をクリックしてください。
+-   AIを有効にするには、Chat2Queryの右上隅にある**Enable AI power for data exploration**をクリックしてください。
 -   AIを無効にするには、 [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある<MDSvgIcon name="icon-top-account-settings" />をクリックします。**Account Settings**をクリックし、 **AI & Privacy**タブをクリックして、 **AI-powered Data Exploration**オプションを無効にします。
 
 ## SQLクエリを作成して実行する {#write-and-run-sql-queries}
@@ -147,7 +147,7 @@ SQLエディタでは、Chat2Queryを使用して既存のSQLクエリを書き�
 
 SQLエディタでは、SQLクエリを複数のSQLファイルに保存し、以下のようにSQLファイルを管理できます。
 
--   SQLファイルを追加するには、 **SQLファイル**タブの**+**をクリックします。
+-   SQLファイルを追加するには、 **SQL Files**タブの**+**をクリックします。
 -   SQL ファイルの名前を変更するには、ファイル名にカーソルを合わせ、ファイル名の横にある**...**をクリックして、 **Rename**を選択します。
 -   SQL ファイルを削除するには、ファイル名にカーソルを合わせ、ファイル名の横にある**...**をクリックしてから、 **Delete**を選択します。なお、 **SQL Files**タブに SQL ファイルが 1 つしかない場合は、削除できません。
 
@@ -171,7 +171,7 @@ TiDB Cloud には、カスタム API エンドポイントを使用して HTTPS 
 
 1.  ファイル名にカーソルを合わせ、ファイル名の横にある**...**をクリックして、 **Generate endpoint**を選択します。
 2.  **Generate endpoint**ダイアログボックスで、エンドポイントを生成するデータアプリを選択し、エンドポイント名を入力します。
-3.  **生成**をクリックします。エンドポイントが生成され、その詳細ページが表示されます。
+3.  **Generate**をクリックします。エンドポイントが生成され、その詳細ページが表示されます。
 
 詳細については、[エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)を参照してください.
 
