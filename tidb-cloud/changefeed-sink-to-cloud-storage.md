@@ -25,22 +25,21 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 ## Restrictions
 
-<CustomContent plan="dedicated">
-- For each TiDB Cloud Dedicated cluster, you can create up to 100 changefeeds.
-</CustomContent>
-<CustomContent plan="premium">
-- For each TiDB Cloud Premium instance, you can create up to 100 changefeeds.
-</CustomContent>
+- For each <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent>, you can create up to 100 changefeeds.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
 
 ## Step 1. Configure destination
 
 <CustomContent plan="dedicated">
+
 Navigate to the overview page of the target TiDB Cloud Dedicated cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** to go to the **Destination** page, and then select **Amazon S3**, **GCS**, or **Azure Blob Storage** as the destination, depending on the cloud provider on which your TiDB Cloud Dedicated cluster is hosted. The configuration process varies depending on the destination you choose.
 </CustomContent>
+
 <CustomContent plan="premium">
+
 Navigate to the overview page of the target TiDB Cloud Premium instance. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** to go to the **Destination** page, and then select **Amazon S3** or **Alibaba Cloud OSS** as the destination, depending on the cloud provider on which your TiDB Cloud Premium instance is hosted. The configuration process varies depending on the destination you choose.
+
 </CustomContent>
 
 <SimpleTab>
@@ -83,7 +82,9 @@ To use an access key for authentication, follow these steps:
     - **Secret Access Key**
 
 </div>
+
 <CustomContent plan="dedicated">
+
 <div label="GCS">
 
 For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bucket access. Take the following steps:
@@ -179,8 +180,11 @@ For **Azure Blob Storage**, you must configure the container and get a SAS token
     - **SAS Token**: enter the generated SAS token obtained in step 3.
 
 </div>
+
 </CustomContent>
+
 <CustomContent plan="dedicated">
+
 <div label="Alibaba Cloud OSS">
 For **Alibaba Cloud OSS**, follow these steps to configure the changefeed:
 
@@ -200,6 +204,7 @@ For **Alibaba Cloud OSS**, follow these steps to configure the changefeed:
     - **Bucket URI**: enter the OSS URI in the format `oss://<BucketName>/<prefix>/`.
     - **Access Key ID**: enter the AccessKey ID from the RAM user.
     - **Access Key Secret**: enter the AccessKey Secret from the RAM user.
+
 </div>
 </CustomContent>
 </SimpleTab>
