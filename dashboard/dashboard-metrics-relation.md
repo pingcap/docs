@@ -9,7 +9,7 @@ TiDB Dashboardのメトリクス関係グラフは、v4.0.7で導入された機
 
 ## アクセスグラフ {#access-graph}
 
-TiDB Dashboardにログイン後、左側のナビゲーション メニューで**[クラスタ診断]**をクリックすると、メトリック関係グラフを生成するページが表示されます。
+TiDB Dashboardにログイン後、左側のナビゲーション メニューで**Cluster Diagnostics**をクリックすると、メトリック関係グラフを生成するページが表示されます。
 
 ![Metrics relation graph homepage](/media/dashboard/dashboard-metrics-relation-home-v650.png)
 
