@@ -244,7 +244,7 @@ TiDB Cloud DedicatedがAzure Blobコンテナにアクセスできるように�
 
     ![sas-create](/media/tidb-cloud/dedicated-external-storage/azure-sas-create.png)
 
-4.  SASトークンを生成するには、 **「SASと接続文字列の生成」を**クリックしてください。
+4.  SASトークンを生成するには、 **Generate SAS and connection string**をクリックしてください。
 
 5.  生成された**SAS Token**をコピーしてください。このトークン文字列は、TiDB Cloudでデータインポートを設定する際に必要になります。
 

@@ -58,7 +58,7 @@ TiDB Dashboardにログインした後、 **Search Logs**をクリックして�
 
 ## 検索履歴リスト {#search-history-list}
 
-ログ検索ホームページの**「検索履歴の表示**」リンクをクリックすると、検索履歴リストのページに入ります。
+ログ検索ホームページの**View search history**リンクをクリックすると、検索履歴リストのページに入ります。
 
 ![Search history entry](/media/dashboard/dashboard-log-search-history-entry.png)
 

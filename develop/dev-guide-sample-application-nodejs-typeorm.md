@@ -85,7 +85,7 @@ npm install @types/node ts-node typescript --save-dev
 
     -   **Connection Type**は`Public`に設定されています。
     -   **ブランチ**は`main`に設定されています。
-    -   **「接続」は**`General`に設定されています。
+    -   **Connect With**は`General`に設定されています。
     -   **オペレーティングシステムは、**アプリケーションを実行するオペレーティングシステムと一致します。
 
 4.  まだパスワードを設定していない場合は、 **Generate Password**をクリックしてランダムなパスワードを生成してください。

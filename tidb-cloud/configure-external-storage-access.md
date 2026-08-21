@@ -249,16 +249,16 @@ Azure ARMテンプレートを使用してSASトークンを作成するには�
 
     -   Azure Blob Storage からデータをインポートする場合：
 
-        1.  **「Azure Blob Storage からインポート」を**クリックします。
+        1.  **Import from Azure Blob Storage**をクリックします。
         2.  **Folder URI**欄に入力してください。
-        3.  **SAS Token**フィールドで、 **[Azure ARMテンプレートを使用して新しいトークンを作成するには、ここをクリックしてください]をクリックします**。
+        3.  **SAS Token**フィールドで、 **Click here to create a new one with Azure ARM template**をクリックします。
 
     <CustomContent plan="starter,essential">
 
     -   データをAzure Blob Storageにエクスポートする場合：
 
         1.  **Export data to...** &gt; **Azure Blob Storage**をクリックします。TiDB Cloud StarterまたはEssentialインスタンスでこれまでデータのインポートまたはエクスポートが行われていない場合は、ページ下部の**Click here to export data to...** &gt; **Azure Blob Storage**をクリックしてください。
-        2.  **Azure Blob Storage Settings**エリアまでスクロールダウンし、SAS トークンフィールドの下にある**[ここをクリックして、Azure ARM テンプレートを使用して新しいものを作成する] をクリックします**。
+        2.  **Azure Blob Storage Settings**エリアまでスクロールダウンし、SASトークンフィールドの下にある**Click here to create a new one with Azure ARM template**をクリックします。
 
     </CustomContent>
 
@@ -268,7 +268,7 @@ Azure ARMテンプレートを使用してSASトークンを作成するには�
 
         1.  **Export Data**をクリックします。
         2.  **Target Connection**で**Azure Blob Storage**を選択してください。
-        3.  SASトークンフィールドの下にある**「ここをクリックして、Azure ARMテンプレートを使用して新しいものを作成してください」をクリックしてください**。
+        3.  SASトークンフィールドの下にある**Click here to create a new one with Azure ARM template**をクリックしてください。
 
     </CustomContent>
 
@@ -313,7 +313,7 @@ Azure ARMテンプレートを使用してSASトークンを作成する際に�
 
     ![sas-create](/media/tidb-cloud/serverless-external-storage/azure-sas-create.png)
 
-4.  SASトークンを生成するには、 **「SASと接続文字列の生成」を**クリックしてください。
+4.  SASトークンを生成するには、 **Generate SAS and connection string**をクリックしてください。
 
 </details>
 
@@ -327,7 +327,7 @@ TiDB CloudがAlibaba Cloud OSSバケットにアクセスできるようにす�
 
 1.  RAM ユーザーを作成し、AccessKey ペアを取得します。詳細については、 [RAMユーザーを作成する](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-ram-user)を参照してください。
 
-    **Access Mode**セクションで、 **「永続的なアクセスキーを使用してアクセスする」を**選択します。
+    **Access Mode**セクションで、 **Using permanent AccessKey to access**を選択します。
 
 2.  必要な権限を持つカスタム ポリシーを作成します。詳細については、 [カスタムポリシーを作成する](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy)を参照してください。
 

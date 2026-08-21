@@ -25,4 +25,4 @@ TiDB Cloud Dedicatedクラスタの場合、ルートパスワードと接続を
 
 > **Tip:**
 >
-> TiDB Cloud Dedicatedクラスターの概要ページを表示している場合は、ページ右上隅の「 **...」**をクリックし、 **Password Settings**を選択して、これらの設定を構成することもできます。
+> TiDB Cloud Dedicatedクラスターの概要ページを表示している場合は、ページ右上隅の**...**をクリックし、 **Password Settings**を選択して、これらの設定を構成することもできます。

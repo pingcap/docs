@@ -74,7 +74,7 @@ npm install
 
     -   **ブランチ**は`main`に設定されています。
 
-    -   **Connect With は**`General`に設定されています。
+    -   **Connect With**は`General`に設定されています。
 
     -   お使いの環境に合った**オペレーティングシステム**を選択してください。
 

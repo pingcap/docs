@@ -56,7 +56,7 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 1.  [継続的なプロファイリングページ](#access-the-page)ご覧ください。
 2.  **Open Settings**をクリックします。右側の**Settings**領域で、 **Enable Feature**をオンにし、必要に応じて**Retention Duration**のデフォルト値を変更します。
-3.  **[保存]を**クリックします。
+3.  **Save**をクリックします。
 
 ![Enable feature](/media/dashboard/dashboard-conprof-start.png)
 
@@ -84,7 +84,7 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 1.  [継続的なプロファイリングページ](#access-the-page)ご覧ください。
 2.  右上隅の歯車アイコンをクリックして設定ページを開きます。 **Enable Feature**をオフにします。
-3.  **[保存]を**クリックします。
+3.  **Save**をクリックします。
 4.  ポップアップされたダイアログボックスで、 **[無効にする]**をクリックします。
 
 ![Disable feature](/media/dashboard/dashboard-conprof-stop.png)

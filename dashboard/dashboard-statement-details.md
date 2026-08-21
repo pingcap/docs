@@ -43,7 +43,7 @@ TiDB v6.6.0以降、高速プランバインディング機能が導入されま
 
     ![Fast plan binding - popup - bound](/media/dashboard/dashboard-quick-binding-popup-bound.png)
 
-3.  バインドが削除されると、 **「バインドされていません」という**ラベルが表示されます。
+3.  バインドが削除されると、 **Not bound**ラベルが表示されます。
 
     ![Fast plan binding - popup](/media/dashboard/dashboard-quick-binding-popup-notbound.png)
 

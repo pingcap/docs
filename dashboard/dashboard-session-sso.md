@@ -104,7 +104,7 @@ TiDB Dashboardに SSO が設定されると、次の手順に従って SSO 経�
 
 2.  左側のサイドバーから**Applications** &gt; **Applications**に移動します。
 
-3.  **「アプリ統合の作成」を**クリックします。
+3.  **Create App Integration**をクリックします。
 
     ![Sample Step](/media/dashboard/dashboard-session-sso-okta-1.png)
 
@@ -164,7 +164,7 @@ Oktaと同様に、 [オーソ0](https://auth0.com/)もOIDC SSOアイデンテ�
 
 2.  左側のサイドバーで**Applications** &gt; **Applications**に移動します。
 
-3.  **「アプリ統合の作成」を**クリックします。
+3.  **Create App Integration**をクリックします。
 
     ![Create Application](/media/dashboard/dashboard-session-sso-auth0-create-app.png)
 

@@ -93,7 +93,7 @@ TiDB Cloud Vercel 統合経由で接続するには、 [Vercelの統合マーケ
     5.  接続するデータベースを選択してください。**Database**のドロップダウンリストが空の場合、または新しいデータベースを選択する場合は、リスト内の**+ Create Database**をクリックして作成してください。
     6.  Vercelプロジェクトで使用しているフレームワークを選択してください。対象のフレームワークが一覧にない場合は、 **General**を選択してください。フレームワークによって環境変数が異なります。
     7.  プレビュー環境用に新しいブランチを作成するために、**Branching**を有効にするかどうかを選択してください。
-    8.  **「統合を追加」をクリックしてVercelに戻ります**。
+    8.  **Add Integration and Return to Vercel**をクリックします。
 
 ![Vercel Integration Page](/media/tidb-cloud/vercel/integration-link-cluster-page.png)
 
@@ -137,7 +137,7 @@ TiDB Cloud Vercel 統合経由で接続するには、 [Vercelの統合マーケ
     2.  対象となるTiDB Cloud組織とプロジェクトを選択してください。
     3.  接続タイプとして**Data App**を選択してください。
     4.  対象のTiDBデータアプリを選択してください。
-    5.  **「統合を追加」をクリックしてVercelに戻ります**。
+    5.  **Add Integration and Return to Vercel**をクリックします。
 
 ![Vercel Integration Page](/media/tidb-cloud/vercel/integration-link-data-app-page.png)
 

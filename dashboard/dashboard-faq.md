@@ -25,9 +25,9 @@ summary: このドキュメントは、TiDB Dashboardに関するよくある質
 
 ## UIに関するよくあるFAQ {#ui-related-faq}
 
-### 概要ページの**QPS**と**レイテンシの**セクションに`prometheus_not_found`エラーが表示される {#a-prometheus_not_found-error-is-shown-in-qps-and-latency-sections-on-the-overview-page}
+### **Overview**ページの**QPS**と**Latency**セクションに`prometheus_not_found`エラーが表示される {#a-prometheus_not_found-error-is-shown-in-qps-and-latency-sections-on-the-overview-page}
 
-**Overview**ページの**QPS**と**レイテンシの**セクションには、Prometheusがデプロイされたクラスターが必要です。そうでない場合、エラーが表示されます。この問題を解決するには、クラスターにPrometheusインスタンスをデプロイしてください。
+**Overview**ページの**QPS**と**Latency**のセクションには、Prometheusがデプロイされたクラスターが必要です。そうでない場合、エラーが表示されます。この問題を解決するには、クラスターにPrometheusインスタンスをデプロイしてください。
 
 Prometheusインスタンスをデプロイしてもこの問題が引き続き発生する場合は、デプロイメントツール（TiUPまたはTiDB Operator）が古く、ツールがメトリクスアドレスを自動的に報告しないため、TiDB Dashboardでメトリクスをクエリできないことが原因である可能性があります。デプロイメントツールを最新バージョンにアップグレードして、もう一度お試しください。
 
@@ -143,6 +143,6 @@ tiup update playground
 
     ![Opening DevTools from Chrome's main menu](/media/dashboard/dashboard-faq-devtools.png)
 
-3.  **アプリケーション**パネルを選択し、**ローカルストレージ**メニューを展開して、 **TiDB Dashboardページのドメイン**を選択します。「**すべてクリア」**ボタンをクリックします。
+3.  **アプリケーション**パネルを選択し、**ローカルストレージ**メニューを展開して、 **TiDB Dashboardページのドメイン**を選択します。 **Clear All**ボタンをクリックします。
 
     ![Clear the Local Storage](/media/dashboard/dashboard-faq-devtools-application.png)
