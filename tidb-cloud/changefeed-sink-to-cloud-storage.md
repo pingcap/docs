@@ -1,27 +1,53 @@
 ---
 title: Sink to Cloud Storage
-summary: This document explains how to create a changefeed to stream data from TiDB Cloud to Amazon S3, Google Cloud Storage (GCS), or Azure Blob Storage. It includes restrictions, configuration steps for the destination, replication, and specification, as well as starting the replication process.
+summary: This document explains how to create a changefeed to stream data from TiDB Cloud to cloud storage. It includes restrictions, configuration steps for the destination, replication, and specification, as well as starting the replication process.
 ---
 
 # Sink to Cloud Storage
 
-This document describes how to create a changefeed to stream data from TiDB Cloud to cloud storage. Currently, Amazon S3, Google Cloud Storage (GCS), and Azure Blob Storage are supported.
+
+This document describes how to create a changefeed to stream data from <CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent><CustomContent plan="premium">TiDB Cloud Premium</CustomContent> to cloud storage.
+
+<CustomContent plan="dedicated">
 
 > **Note:**
 >
-> - To stream data to cloud storage, make sure that your TiDB cluster version is v7.1.1 or later. To upgrade your TiDB Cloud Dedicated cluster to v7.1.1 or later, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> - To stream data from {{{ .dedicated }}} to cloud storage, make sure that your TiDB cluster version is v7.1.1 or later. To upgrade your TiDB Cloud Dedicated cluster to v7.1.1 or later, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 > - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances, the changefeed feature is unavailable.
 > - For [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) instances, the changefeed feature is only available upon request. For more information, see [Changefeed](/tidb-cloud/essential-changefeed-overview.md).
+> - For [{{{ .premium }}}](/tidb-cloud/select-cluster-tier.md#premium) instances, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium).
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+> **Note:**
+>
+> - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances, the changefeed feature is unavailable.
+> - For [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) instances, the changefeed feature is only available upon request. For more information, see [Changefeed](/tidb-cloud/essential-changefeed-overview.md).
+> - For [{{{ .dedicated }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/).
+
+</CustomContent>
 
 ## Restrictions
 
-- For each TiDB Cloud Dedicated cluster, you can create up to 100 changefeeds.
+- For each <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent>, you can create up to 100 changefeeds.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
 
 ## Step 1. Configure destination
 
+<CustomContent plan="dedicated">
+
 Navigate to the overview page of the target TiDB Cloud Dedicated cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** to go to the **Destination** page, and then select **Amazon S3**, **GCS**, or **Azure Blob Storage** as the destination, depending on the cloud provider on which your TiDB Cloud Dedicated cluster is hosted. The configuration process varies depending on the destination you choose.
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+Navigate to the overview page of the target TiDB Cloud Premium instance. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** to go to the **Destination** page, and then select **Amazon S3** or **Alibaba Cloud OSS** as the destination, depending on the cloud provider on which your TiDB Cloud Premium instance is hosted. The configuration process varies depending on the destination you choose.
+
+</CustomContent>
 
 <SimpleTab>
 <div label="Amazon S3">
@@ -63,6 +89,9 @@ To use an access key for authentication, follow these steps:
     - **Secret Access Key**
 
 </div>
+
+<CustomContent plan="dedicated">
+
 <div label="GCS">
 
 For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bucket access. Take the following steps:
@@ -118,6 +147,11 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 7. In the TiDB Cloud console, go to the Changefeed's **Destination** page, and fill in the **bucket gsutil URI** field.
 
 </div>
+
+</CustomContent>
+
+<CustomContent plan="dedicated">
+
 <div label="Azure Blob Storage">
 
 For **Azure Blob Storage**, you must configure the container and get a SAS token in the Azure portal first. Take the following steps:
@@ -158,6 +192,59 @@ For **Azure Blob Storage**, you must configure the container and get a SAS token
     - **SAS Token**: enter the generated SAS token obtained in step 3.
 
 </div>
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+<div label="Alibaba Cloud OSS">
+
+For **Alibaba Cloud OSS**, follow these steps to configure the changefeed:
+
+1. In the [Alibaba Cloud console](https://www.alibabacloud.com/), perform the following prerequisite steps:
+
+    1. Create an OSS bucket in the same region as your TiDB cluster. For detailed instructions, see [Create a bucket](https://www.alibabacloud.com/help/en/oss/user-guide/create-a-bucket-4).
+    2. Create a RAM user for the changefeed and generate an AccessKey pair. For detailed instructions, see [Create an AccessKey pair](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair).
+    3. Grant the RAM user OSS permissions. For the required permissions, see [OSS permissions and access control](https://www.alibabacloud.com/help/en/oss/user-guide/permissions-and-access-control-overview). The RAM user needs at least the following permissions:
+
+        - `oss:ListObjects`
+        - `oss:GetObject`
+        - `oss:PutObject`
+        - `oss:DeleteObject`
+
+    The following JSON example shows a policy with the required permissions. Replace `<Your bucket name>` with the name of your OSS bucket.
+
+    ```json
+    {
+      "Version": "1",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "oss:ListObjects",
+            "oss:GetObject",
+            "oss:PutObject",
+            "oss:DeleteObject"
+          ],
+          "Resource": [
+            "acs:oss:*:*:<Your bucket name>",
+            "acs:oss:*:*:<Your bucket name>/*"
+          ]
+        }
+      ]
+    }
+    ```
+
+2. On the **Destination** page for Alibaba Cloud OSS, fill in the following fields:
+
+    - **Bucket URI**: enter the OSS URI in the format `oss://<BucketName>/<prefix>/`.
+    - **Access Key ID**: enter the AccessKey ID from the RAM user.
+    - **Access Key Secret**: enter the AccessKey Secret from the RAM user.
+
+</div>
+
+</CustomContent>
+
 </SimpleTab>
 
 Click **Next** to establish the connection from the TiDB Cloud Dedicated cluster to Amazon S3, GCS, or Azure Blob Storage. TiDB Cloud will automatically test and verify if the connection is successful.
