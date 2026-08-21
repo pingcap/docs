@@ -198,7 +198,7 @@ Oktaと同様に、 [オーソ0](https://auth0.com/)もOIDC SSOアイデンテ�
 
 1.  Auth0 の**Settings**タブの**Basic Information**にある**Client ID**を、TiDB Dashboardの**OIDC Client ID**に入力します。
 
-2.  **OIDC Discovery URL**に、**Domain**フィールドの値の先頭に`https://` 、末尾に`/`入力します（例： `https://example.us.auth0.com/` ）。認証を完了し、設定を保存します。
+2.  **OIDC Discovery URL**に、**Domain**フィールドの値の先頭に`https://`、末尾に`/`を追加して入力します（例： `https://example.us.auth0.com/` ）。認証を完了し、設定を保存します。
 
     ![Settings](/media/dashboard/dashboard-session-sso-auth0-settings-3.png)
 
@@ -236,7 +236,7 @@ Oktaと同様に、 [オーソ0](https://auth0.com/)もOIDC SSOアイデンテ�
 
 1.  前の手順で保存した**Client ID**を TiDB Dashboardの**OIDC Client ID**に入力します。
 
-2.  **OIDC Discovery URL**に、**Domain**フィールドの値の先頭に`https://` 、末尾に`/`入力します（例： `https://casdoor.example.com/` ）。認証を完了し、設定を保存します。
+2.  **OIDC Discovery URL**に、**Domain**フィールドの値の先頭に`https://`、末尾に`/`を追加して入力します（例： `https://casdoor.example.com/` ）。認証を完了し、設定を保存します。
 
     ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-3.png)
 
