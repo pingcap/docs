@@ -95,13 +95,13 @@ DataGripは2つの方法で使用できます。
     -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
     -   まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
     -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
-    -   **Public**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+    -   **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
 7.  DataGripを起動し、接続を管理するためのプロジェクトを作成します。
 
 8.  新しく作成したプロジェクトで、**Database Explorer**パネルの左上隅にある**+**をクリックし、 **Data Source** &gt; **Other** &gt; **TiDB**を選択します。
 
-9.  適切な接続文字列をコピーして、DataGrip の [**データ ソースとドライバー]**ウィンドウに貼り付けてください。DataGrip のフィールドとTiDB Cloud Premium の接続文字列のマッピングは以下のとおりです。
+9.  適切な接続文字列をコピーして、DataGrip の **Data Source and Drivers**ウィンドウに貼り付けてください。DataGrip のフィールドとTiDB Cloud Premium の接続文字列のマッピングは以下のとおりです。
 
     | データグリップフィールド | TiDB Cloud Premium接続文字列 |
     | ------------ | ----------------------- |
@@ -128,7 +128,7 @@ DataGripは2つの方法で使用できます。
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
 
-    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
+    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
 4.  DataGripを起動し、接続を管理するためのプロジェクトを作成します。
 

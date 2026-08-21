@@ -33,10 +33,10 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 2.  DBeaverで接続設定を編集し、 **SSL**タブに移動します。
 
     1.  **SSLを使用する**を選択してください。
-    2.  **CA証明書の**フィールドで、ダウンロードした`isrgrootx1.pem`ファイルを選択します。
+    2.  **CA certificate**フィールドで、ダウンロードした`isrgrootx1.pem`ファイルを選択します。
     3.  その他の証明書欄は空欄のままにしてください。
 
-3.  SSL 構成の競合を避けるため、**Driverのプロパティ**タブで、既存の`sslMode` 、 `useSSL` 、または`requireSSL`エントリをすべて削除してください。
+3.  SSL 構成の競合を避けるため、**Driver properties**タブで、既存の`sslMode` 、 `useSSL` 、または`requireSSL`エントリをすべて削除してください。
 
 4.  **Test Connection**をクリックして、接続が成功したことを確認してください。
 
@@ -106,7 +106,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
     -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
     -   まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
     -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
-    -   **Public**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+    -   **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
 7.  DBeaverを起動し、左上隅の**New Database Connection**をクリックします。 **Connect to a database**ダイアログで、リストから**TiDB**を選択し、 **Next**をクリックします。
 
@@ -136,7 +136,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
 
-    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
+    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
 4.  DBeaverを起動し、左上隅の**New Database Connection**をクリックします。 **Connect to a database**ダイアログで、リストから**TiDB**を選択し、 **Next**をクリックします。
 
@@ -176,8 +176,8 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
 2.  以下の接続パラメータを設定してください。
 
-    -   **サーバーホスト**：TiDB Self-ManagedクラスタのIPアドレスまたはドメイン名。
-    -   **ポート**：TiDB Self-Managedクラスタのポート番号。
+    -   **Server Host**：TiDB Self-ManagedクラスタのIPアドレスまたはドメイン名。
+    -   **Port**：TiDB Self-Managedクラスタのポート番号。
     -   **Username**：TiDB Self-Managedクラスタに接続するために使用するユーザー名。
     -   **Password**：ユーザー名のパスワード。
 

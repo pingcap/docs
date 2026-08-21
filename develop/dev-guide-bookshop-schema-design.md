@@ -85,14 +85,14 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
 
 2.  **Import data from Cloud Storage**を選択し、次に**Amazon S3**をクリックします。
 
-3.  **Amazon S3 からデータをインポートする**ページで、以下のソースデータ情報を設定してください。
+3.  **Import Data from Amazon S3**ページで、以下のソースデータ情報を設定してください。
 
     -   **Import File Count**： TiDB Cloud Starterの場合は、 **Multiple files**を選択してください。このフィールドはTiDB Cloud Dedicatedでは利用できません。
     -   **Included Schema Files**：**Yes**を選択してください。
-    -   **データ形式**: SELECT **SQL** 。
-    -   **フォルダURI** : `s3://developer.pingcap.com/bookshop/`を入力してください。
-    -   **バケットアクセス**: **AWSロールARN**を選択します。
-    -   **ロール ARN** : `arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access`を入力してください。
+    -   **Data Format**: SELECT **SQL** 。
+    -   **Folder URI** : `s3://developer.pingcap.com/bookshop/`を入力してください。
+    -   **Bucket Access**: **AWS Role ARN**を選択します。
+    -   **Role ARN** : `arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access`を入力してください。
 
     この例では、以下のデータが事前に生成されます。
 
