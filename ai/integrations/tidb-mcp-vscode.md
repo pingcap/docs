@@ -19,7 +19,7 @@ summary: このガイドでは、Visual Studio CodeでTiDB MCPサーバーを設
 
 TiDB Cloudコンソールを使用して、VS Code構成を生成します。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動し、右上隅の**[AI ツールで使用する]**をクリックします。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動し、右上隅の**Use with AI Tools**をクリックします。
 
 2.  表示されたダイアログで、VS Codeがアクセスする**Branch**と**Database**を選択します。
 
@@ -27,7 +27,7 @@ TiDB Cloudコンソールを使用して、VS Code構成を生成します。
 
 4.  ルートパスワードを設定します。
 
-    -   まだパスワードを設定していない場合は、「パスワード**を生成」をクリックして、生成されたパスワード**を安全な場所に保存してください（パスワードは一度しか表示されません）。
+    -   まだパスワードを設定していない場合は、**Generate Password**をクリックして、生成されたパスワードを安全な場所に保存してください（パスワードは一度しか表示されません）。
     -   パスワードが既に存在する場合は、 **Enter the password for easy setup**欄に入力してください。
     -   パスワードを忘れた場合は、 **Prerequisites**セクションの**Reset password**をクリックして新しいパスワードを生成してください。
 
