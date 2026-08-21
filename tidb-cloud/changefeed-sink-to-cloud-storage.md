@@ -6,22 +6,28 @@ summary: This document explains how to create a changefeed to stream data from T
 # Sink to Cloud Storage
 
 
-This document describes how to create a changefeed to stream data from TiDB Cloud to cloud storage.
+This document describes how to create a changefeed to stream data from <CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent><CustomContent plan="premium">TiDB Cloud Premium</CustomContent> to cloud storage.
+
+<CustomContent plan="dedicated">
 
 > **Note:**
 >
-<CustomContent plan="dedicated">
-> - To stream data to cloud storage, make sure that your TiDB cluster version is v7.1.1 or later. To upgrade your TiDB Cloud Dedicated cluster to v7.1.1 or later, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
-> - For [{{{ .premium }}}](/tidb-cloud/select-cluster-tier.md#premium) instances, see [Sink to Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md?plan=premium).
-</CustomContent>
-<CustomContent plan="premium">
-> - For [{{{ .dedicated }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) instances, see [Sink to Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md).
-</CustomContent>
-> - To stream data to cloud storage, make sure that your TiDB cluster version is v7.1.1 or later. To upgrade your TiDB Cloud Dedicated cluster to v7.1.1 or later, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
-</CustomContent>
+> - To stream data from {{{ .dedicated }}} to cloud storage, make sure that your TiDB cluster version is v7.1.1 or later. To upgrade your TiDB Cloud Dedicated cluster to v7.1.1 or later, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 > - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances, the changefeed feature is unavailable.
 > - For [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) instances, the changefeed feature is only available upon request. For more information, see [Changefeed](/tidb-cloud/essential-changefeed-overview.md).
+> - For [{{{ .premium }}}](/tidb-cloud/select-cluster-tier.md#premium) instances, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium).
 
+</CustomContent>
+
+<CustomContent plan="premium">
+
+> **Note:**
+>
+> - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances, the changefeed feature is unavailable.
+> - For [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) instances, the changefeed feature is only available upon request. For more information, see [Changefeed](/tidb-cloud/essential-changefeed-overview.md).
+> - For [{{{ .dedicated }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/).
+
+</CustomContent>
 
 ## Restrictions
 
@@ -34,6 +40,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 <CustomContent plan="dedicated">
 
 Navigate to the overview page of the target TiDB Cloud Dedicated cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** to go to the **Destination** page, and then select **Amazon S3**, **GCS**, or **Azure Blob Storage** as the destination, depending on the cloud provider on which your TiDB Cloud Dedicated cluster is hosted. The configuration process varies depending on the destination you choose.
+
 </CustomContent>
 
 <CustomContent plan="premium">
@@ -140,6 +147,11 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 7. In the TiDB Cloud console, go to the Changefeed's **Destination** page, and fill in the **bucket gsutil URI** field.
 
 </div>
+
+</CustomContent>
+
+<CustomContent plan="dedicated">
+
 <div label="Azure Blob Storage">
 
 For **Azure Blob Storage**, you must configure the container and get a SAS token in the Azure portal first. Take the following steps:
@@ -183,9 +195,10 @@ For **Azure Blob Storage**, you must configure the container and get a SAS token
 
 </CustomContent>
 
-<CustomContent plan="dedicated">
+<CustomContent plan="premium">
 
 <div label="Alibaba Cloud OSS">
+
 For **Alibaba Cloud OSS**, follow these steps to configure the changefeed:
 
 1. In the [Alibaba Cloud console](https://www.alibabacloud.com/), perform the following prerequisite steps:
@@ -206,7 +219,9 @@ For **Alibaba Cloud OSS**, follow these steps to configure the changefeed:
     - **Access Key Secret**: enter the AccessKey Secret from the RAM user.
 
 </div>
+
 </CustomContent>
+
 </SimpleTab>
 
 Click **Next** to establish the connection from the TiDB Cloud Dedicated cluster to Amazon S3, GCS, or Azure Blob Storage. TiDB Cloud will automatically test and verify if the connection is successful.
