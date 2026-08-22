@@ -295,7 +295,6 @@ SET GLOBAL tidb_tmp_table_max_size=268435456;
 Local temporary tables and global temporary tables in TiDB are **NOT** compatible with the following TiDB features:
 
 - `AUTO_RANDOM` columns
-- `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` table options
 - Partitioned tables
 - `SPLIT REGION` statements
 - `ADMIN CHECK TABLE` and `ADMIN CHECKSUM TABLE` statements
