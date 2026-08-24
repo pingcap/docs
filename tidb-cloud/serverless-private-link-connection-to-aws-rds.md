@@ -24,8 +24,8 @@ summary: AWS Endpoint Serviceのプライベートリンク接続を使用して
 
 AWSアカウントIDとアベイラビリティゾーンを表示するには、以下の手順を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)TiDB Cloud Essentialインスタンスの概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
-2.  **外部サービス向けAWSプライベートエンドポイント**領域で、 **[外部サービス向けプライベートエンドポイントの作成]を**クリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)TiDB Cloud Essentialインスタンスの概要ページに移動し、左側のナビゲーションペインで **Settings** > **Networking** をクリックします。
+2.  **AWS Private Endpoints for External Services** 領域で、**Create Private Endpoint for External Services** をクリックします。
 3.  表示されたダイアログには、AWSアカウントIDとアベイラビリティゾーンが表示されます。
 
 ## ステップ1. Amazon RDSインスタンスをセットアップする {#step-1-set-up-the-amazon-rds-instance}
@@ -71,7 +71,7 @@ AWSコンソールでロードバランサーとAWSエンドポイントサー�
 
     -   **Schema**: `Internal`を選択
 
-    -   **ロードバランサーのIPアドレスタイプ**： `IPv4`を選択
+    -   **Load balancer IP address type**： `IPv4`を選択
 
     -   **VPC** ：RDSが配置されているVPCを選択してください。
 

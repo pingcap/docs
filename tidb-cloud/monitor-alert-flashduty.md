@@ -58,7 +58,7 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 
 4.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-5.  **加入者タイプの**ドロップダウンリストから**Flashduty**を選択してください。
+5.  **Subscriber Type**のドロップダウンリストから**Flashduty**を選択してください。
 
 6.  **Name**欄に名前を入力し、 **Webhook URL**欄にFlashdutyのWebhook URLを入力してください。
 
@@ -69,9 +69,9 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 
 8.  購読を完了するには、 **Save**をクリックしてください。
 
-または、 TiDB Cloud Dedicatedクラスタの**アラート**ページの右上にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
+または、 TiDB Cloud Dedicatedクラスタの**Alert**ページの右上にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
-または、クラスターの**アラート**ページの右上隅にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
+または、クラスターの**Alert**ページの右上隅にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
 </CustomContent>
 
@@ -87,7 +87,7 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 
 3.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-4.  **加入者タイプの**ドロップダウンリストから**Flashduty**を選択してください。
+4.  **Subscriber Type**のドロップダウンリストから**Flashduty**を選択してください。
 
 5.  **Name**欄に名前を入力し、 **Webhook URL**欄にFlashdutyのWebhook URLを入力してください。
 
@@ -98,7 +98,7 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 
 7.  購読を完了するには、 **Save**をクリックしてください。
 
-または、 TiDB Cloud Essentialインスタンスの**アラート**ページの右上隅にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
+または、 TiDB Cloud Essentialインスタンスの**Alert**ページの右上隅にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
 </CustomContent>
 
@@ -114,7 +114,7 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 
 3.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-4.  **加入者タイプの**ドロップダウンリストから**Flashduty**を選択してください。
+4.  **Subscriber Type**のドロップダウンリストから**Flashduty**を選択してください。
 
 5.  **Name**欄に名前を入力し、 **Webhook URL**欄にFlashdutyのWebhook URLを入力してください。
 
@@ -125,7 +125,7 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 
 7.  購読を完了するには、 **Save**をクリックしてください。
 
-または、 TiDB Cloud Premiumインスタンスの**アラート**ページの右上隅にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
+または、 TiDB Cloud Premiumインスタンスの**Alert**ページの右上隅にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
 </CustomContent>
 
@@ -140,7 +140,7 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 3.  左側のナビゲーションペインで、 **Project Settings**の下にある**Alert Subscription**をクリックします。
-4.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **Unsubscribe**をクリックします。
+4.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **...** &gt; **Unsubscribe**をクリックします。
 5.  購読解除を確定するには、 **Unsubscribe**をクリックしてください。
 
 </CustomContent>
@@ -149,7 +149,7 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
 2.  左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
-3.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **Unsubscribe**をクリックします。
+3.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **...** &gt; **Unsubscribe**をクリックします。
 4.  購読解除を確定するには、 **Unsubscribe**をクリックしてください。
 
 </CustomContent>
@@ -158,7 +158,7 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
 2.  左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
-3.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **Unsubscribe**をクリックします。
+3.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **...** &gt; **Unsubscribe**をクリックします。
 4.  購読解除を確定するには、 **Unsubscribe**をクリックしてください。
 
 </CustomContent>

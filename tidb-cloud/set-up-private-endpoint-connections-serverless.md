@@ -77,7 +77,7 @@ AWS マネジメントコンソールを使用して VPC インターフェイ�
 
     ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
 
-3.  **NLBとGWLBを使用するエンドポイントサービス**を選択します。
+3.  **Endpoint services that use NLBs and GWLBs**を選択します。
 
 4.  [ステップ1](#step-1-choose-a-tidb-instance)で見つけたサービス名を入力します。
 
@@ -311,6 +311,6 @@ AWS Management Console でプライベートDNSを有効にするには、次の
 
 ### プライベートDNSを有効にした後、プライベートエンドポイント経由でTiDB Cloud StarterまたはEssentialインスタンスに接続できません。なぜでしょうか？ {#i-cannot-connect-to-a-tidb-cloud-starter-or-essential-instance-via-a-private-endpoint-after-enabling-private-dns-why}
 
-AWS マネジメント コンソールで**、** VPC エンドポイントのセキュリティ グループを適切に設定する必要がある場合があります。VPC &gt;**Endpoints**に移動します。VPC エンドポイントを右クリックし、適切な**Manage security groups**を選択します。VPC 内に、EC2 インスタンスからのポート 4000 またはお客様定義のポートへの受信アクセスを許可する適切なセキュリティ グループを設定します。
+AWS マネジメント コンソールで、VPC エンドポイントのセキュリティ グループを適切に設定する必要がある場合があります。**VPC** &gt; **Endpoints**に移動します。VPC エンドポイントを右クリックし、適切な**Manage security groups**を選択します。VPC 内に、EC2 インスタンスからのポート 4000 またはお客様定義のポートへの受信アクセスを許可する適切なセキュリティ グループを設定します。
 
 ![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)

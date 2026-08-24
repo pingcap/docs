@@ -95,7 +95,7 @@ VPC ピアリング リクエストは、TiDB Cloudコンソールのプロジ�
 
 1.  ターゲット クラスターの概要ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
         > **Tip:**
         >
@@ -274,7 +274,7 @@ VPC ピアリング リクエストは、TiDB Cloudコンソールのプロジ�
 
 1.  ターゲット クラスターの概要ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
         > **Tip:**
         >
@@ -317,11 +317,11 @@ gcloud beta compute networks peerings create <your-peer-name> --project <your-pr
 
 ## TiDBクラスタに接続する {#connect-to-the-tidb-cluster}
 
-1.  プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページで、ターゲット クラスターの名前をクリックして、概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、ターゲット クラスターの名前をクリックして、概要ページに移動します。
 
 2.  右上隅の**Connect**をクリックし、 **Connection Type**ドロップダウン リストから**VPC Peering**を選択します。
 
-    VPC ピアリング接続ステータスが**システムチェック**から**アクティブ**に変わるまで待ちます (約 5 分)。
+    VPC ピアリング接続ステータスが**system checking**から**active**に変わるまで待ちます (約 5 分)。
 
 3.  **Connect With**ドロップダウンリストで、希望する接続方法を選択します。対応する接続文字列がダイアログの下部に表示されます。
 

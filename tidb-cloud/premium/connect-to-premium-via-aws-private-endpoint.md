@@ -215,6 +215,6 @@ AWS マネジメントコンソールでプライベート DNS を有効にす�
 
 ### プライベートDNSを有効にした後、プライベートエンドポイント経由でTiDB Cloud Premiumインスタンスに接続できません。なぜでしょうか？ {#i-cannot-connect-to-a-tidb-cloud-premium-instance-via-a-private-endpoint-after-enabling-private-dns-why}
 
-AWS マネジメント コンソールで、VPC エンドポイントのセキュリティ グループを適切に設定する必要がある場合があります。そのためには、 **[VPC]** &gt; **Endpoints**に移動し、VPC エンドポイントを右クリックして、 **Manage security groups**を選択します。選択したセキュリティ グループが、ポート`4000`またはお客様定義のポートで EC2 インスタンスからの受信アクセスを許可していることを確認してください。
+AWS マネジメント コンソールで、VPC エンドポイントのセキュリティ グループを適切に設定する必要がある場合があります。そのためには、**VPC** > **Endpoints** に移動し、VPC エンドポイントを右クリックして、**Manage security groups** を選択します。選択したセキュリティ グループが、ポート`4000`またはお客様定義のポートで EC2 インスタンスからの受信アクセスを許可していることを確認してください。
 
 ![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)

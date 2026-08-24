@@ -137,7 +137,7 @@ TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンス�
 
 ごみ箱から削除されたTiDB Cloud Essentialインスタンスを復元するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、右上隅の**[...]**をクリックして、 **Recycle Bin**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、右上隅の**...**をクリックして、 **Recycle Bin**をクリックします。
 
     > **Tip:**
     >
@@ -145,7 +145,7 @@ TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンス�
 
 2.  **Recycle Bin**ページで、 **Essential**タブをクリックすると、 TiDB Cloud Essentialインスタンスのごみ箱に移動します。
 
-3.  復元したいTiDB Cloud Essentialインスタンスを見つけて、 **[&gt;]**ボタンをクリックして、そのインスタンスで使用可能なバックアップを展開します。
+3.  復元したいTiDB Cloud Essentialインスタンスを見つけて、 **&gt;**ボタンをクリックして、そのインスタンスで使用可能なバックアップを展開します。
 
     > **Note:**
     >

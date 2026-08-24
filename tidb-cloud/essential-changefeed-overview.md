@@ -63,7 +63,7 @@ TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサー
 <div label="Console">
 
 1.  ターゲットのTiDB Cloud Essentialインスタンスの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
-2.  表示したい該当する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[ビュー]**をクリックします。
+2.  表示したい該当する変更フィードを見つけて、 **Action**列の**...** &gt; **View**をクリックします。
 3.  変更フィードの詳細（設定、ステータス、メトリクスなど）を確認できます。
 
 </div>
@@ -87,7 +87,7 @@ TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、変更フィ�
 <div label="Console">
 
 1.  ターゲットのTiDB Cloud Essentialインスタンスの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
-2.  一時停止または再開したい該当する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[一時停止/再開]**をクリックします。
+2.  一時停止または再開したい該当する変更フィードを見つけて、 **Action**列の**...** &gt; **Pause/Resume**をクリックします。
 
 </div>
 
@@ -121,16 +121,16 @@ ticloud serverless changefeed resume -c <cluster-id> --changefeed-id <changefeed
 
 1.  ターゲットのTiDB Cloud Essentialインスタンスの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
 
-2.  一時停止したい変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[一時停止]**をクリックします。
+2.  一時停止したい変更フィードを見つけて、 **Action**列の**...** &gt; **Pause**をクリックします。
 
-3.  変更フィードのステータスが`Paused`に変更されたら、 **[...]** &gt; **Edit**をクリックして、対応する変更フィードを編集します。
+3.  変更フィードのステータスが`Paused`に変更されたら、 **...** &gt; **Edit**をクリックして、対応する変更フィードを編集します。
 
     TiDB Cloudはデフォルトで変更フィードの設定を自動的に行います。以下の設定を変更できます。
 
     -   Apache Kafkaシンク：**Destination**、**Connection**、**Start Position**を除くすべての設定
     -   MySQLシンク：**Destination**、**Connection**、**Start Position**を除くすべての設定
 
-4.  設定を編集した後、 **[...]** &gt; **[再開]**をクリックして、対応する変更フィードを再開します。
+4.  設定を編集した後、 **...** &gt; **Resume**をクリックして、対応する変更フィードを再開します。
 
 </div>
 
@@ -166,7 +166,7 @@ TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、変更フィ�
 <div label="Console">
 
 1.  ターゲットのTiDB Cloud Essentialインスタンスの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
-2.  削除したい変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[削除]**をクリックします。
+2.  削除したい変更フィードを見つけて、 **Action**列の**...** &gt; **Delete**をクリックします。
 
 </div>
 

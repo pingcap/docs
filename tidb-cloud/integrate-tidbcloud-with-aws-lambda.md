@@ -98,7 +98,7 @@ AWS リソースを作成する際に`us-east-1`以外の別の AWS リージョ
 
         2.  `aws-lambda-cloudformation/dist/index.zip`ファイルを確認してください。
 
-        3.  `index.zip`ファイルを右クリックして、 **[ダウンロード]**を選択します。
+        3.  `index.zip`ファイルを右クリックして、 **Download**を選択します。
 
 4.  再構築したコードバンドルを、ご自身のS3バケットにアップロードしてください。
 
@@ -117,7 +117,7 @@ AWS CloudFormation を使用して書店プロジェクトを設定するには�
 2.  **Create Stack** &gt; **With new resources (standard)**をクリックします。
 3.  **Create Stack**ページで、スタックの作成プロセスを完了します。
 
-    1.  **前提条件**の領域で、 **Choose an existing template**を選択します。
+    1.  **Prerequisite**の領域で、 **Choose an existing template**を選択します。
 
     2.  **Specify template**領域で、 **Upload a template file**を選択し、 **Choose file**をクリックしてテンプレート ファイル (YAML または JSON) をアップロードし、 **Next**をクリックします。
 

@@ -32,7 +32,7 @@ MySQLコマンドラインクライアントを使用してTiDB Cloud Premiumイ
 
     -   **Connection Type**は`Public`に設定されています。
 
-    -   **Connect With**`MySQL CLI`に設定されています。
+    -   **Connect With**は`MySQL CLI`に設定されています。
 
     -   お使いの環境に合った**Operating System**を選択してください。
 

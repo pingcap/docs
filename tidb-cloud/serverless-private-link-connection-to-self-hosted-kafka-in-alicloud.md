@@ -43,7 +43,7 @@ summary: Alibaba Cloud Endpoint Service のプライベート リンク接続を
 Alibaba Cloud アカウント ID とアベイラビリティーゾーンを表示するには、次の手順を実行します。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**Settings** &gt; **Networking**をクリックします。
-2.  **[外部サービス向け Alibaba Cloud プライベートエンドポイント]**領域で、**[外部サービス向けプライベートエンドポイントの作成]**をクリックします。
+2.  **Alibaba Cloud Private Endpoints for External Services**領域で、**Create Private Endpoint for External Services**をクリックします。
 3.  表示されたダイアログで、Alibaba Cloud アカウント ID とアベイラビリティーゾーンを見つけることができます。
 
 次の表は、展開情報の例を示しています。
@@ -82,7 +82,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 
     2.  TiDB Cloudでプライベート リンク接続を設定するリージョンを選択します。
 
-    3.  **[IPv4 CIDR ブロックを手動で入力]**を選択し、IPv4 CIDR (例: `10.0.0.0/16`を入力します。
+    3.  **Manually enter an IPv4 CIDR block**を選択し、IPv4 CIDR (例: `10.0.0.0/16`を入力します。
 
     4.  Kafkaブローカーをデプロイする各AZごとにvSwitchを作成し、IPv4 CIDRを設定します。例：
 
@@ -91,7 +91,7 @@ Kafka VPC を作成するには、次の手順を実行します。
         -   broker-ap-southeast-1c vSwitch `ap-southeast-1c` : 10.0.128.0/18
         -   `ap-southeast-1a`の bastion vSwitch: 10.0.192.0/18
 
-    5.  その他のオプションはデフォルト値を使用します。 **OK**をクリックします。
+    5.  その他のオプションはデフォルト値を使用します。 **Ok**をクリックします。
 
 3.  VPC の詳細ページで、VPC ID (例: `vpc-t4nfx2vcqazc862e9fg06` ) をメモします。
 
@@ -101,9 +101,9 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 [ECSコンソール](https://ecs.console.alibabacloud.com/home#/)に進みます。要塞 vSwitch に要塞ノードを作成します。
 
--   **ネットワークとゾーン**: `Kafka VPC`および`bastion` vSwitch。
--   **インスタンスとイメージ**: インスタンス タイプが`ecs.t5-lc1m2.small` 、イメージが`Alibaba Cloud Linux` 。
--   **ネットワークとセキュリティグループ**: `Assign Public IPv4 Address`を選択します。
+-   **Network and Zone**: `Kafka VPC`および`bastion` vSwitch。
+-   **Instance and Image**: インスタンス タイプが`ecs.t5-lc1m2.small` 、イメージが`Alibaba Cloud Linux` 。
+-   **Network and Security Groups**: `Assign Public IPv4 Address`を選択します。
 -   **Key pair**: `kafka-vpc-key-pair` 。 `kafka-vpc-key-pair`という名前の新しいキーペアを作成します。 `kafka-vpc-key-pair.pem`ローカルマシンにダウンロードして、後で設定します。
 -   **Security Group**：どこからでもSSHログインを許可する新しいセキュリティグループを作成します。本番環境の安全性を確保するために、ルールを絞り込むことができます。
 -   **Instance Name**: `bastion-node` 。
@@ -114,24 +114,24 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 -   vSwitch `broker-ap-southeast-1a`のブローカー 1
 
-    -   **ネットワークとゾーン**: `Kafka VPC`および`broker-ap-southeast-1a` vSwitch
-    -   **インスタンスとイメージ**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
+    -   **Network and Zone**: `Kafka VPC`および`broker-ap-southeast-1a` vSwitch
+    -   **Instance and Image**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
     -   **Key pair**:再利用`kafka-vpc-key-pair` 。
     -   **Instance Name**: `broker-node1`
     -   **Security Group**: Kafka VPCからのすべてのTCPを許可する新しいセキュリティグループを作成します。本番環境では、安全性を考慮してルールを絞り込むことができます。インバウンドルール: -**Protocol**: `TCP` -**Port range**: `All` -**Source**: `10.0.0.0/16`
 
 -   vSwitch `broker-ap-southeast-1b`のブローカー 2
 
-    -   **ネットワークとゾーン**: `Kafka VPC`および`broker-ap-southeast-1b` vSwitch
-    -   **インスタンスとイメージ**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
+    -   **Network and Zone**: `Kafka VPC`および`broker-ap-southeast-1b` vSwitch
+    -   **Instance and Image**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
     -   **Key pair**:再利用`kafka-vpc-key-pair` 。
     -   **Instance Name**: `broker-node2`
     -   **Security Group**: Kafka VPCからのすべてのTCPを許可する新しいセキュリティグループを作成します。本番環境では、安全性を考慮してルールを絞り込むことができます。インバウンドルール: -**Protocol**: `TCP` -**Port range**: `All` -**Source**: `10.0.0.0/16`
 
 -   vSwitch `broker-ap-southeast-1c`のブローカー 3
 
-    -   **ネットワークとゾーン**: `Kafka VPC`および`broker-ap-southeast-1c` vSwitch
-    -   **インスタンスとイメージ**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
+    -   **Network and Zone**: `Kafka VPC`および`broker-ap-southeast-1c` vSwitch
+    -   **Instance and Image**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
     -   **Key pair**:再利用`kafka-vpc-key-pair` 。
     -   **Instance Name**: `broker-node3`
     -   **Security Group**: Kafka VPCからのすべてのTCPを許可する新しいセキュリティグループを作成します。本番環境では、安全性を考慮してルールを絞り込むことができます。インバウンドルール: -**Protocol**: `TCP` -**Port range**: `All` -**Source**: `10.0.0.0/16`
@@ -203,8 +203,8 @@ Kafka VPC を作成するには、次の手順を実行します。
 
     -   **CONTROLLER port**: `29092`
     -   **INTERNAL port**： `9092`
-    -   **外部**: `39092`
-    -   **外部アドバタイズリスナーポート範囲**: `9093~9095`
+    -   **EXTERNAL**: `39092`
+    -   **EXTERNAL advertised listener ports range**: `9093~9095`
 
 **2.4.2. 設定ファイルを作成する**
 
@@ -585,7 +585,7 @@ b3.ap-southeast-1c.unique_name.alicloud.plc.tidbcloud.com:9095 (id: 3 rack: null
 
     -   **Network Type**: `Internal-facing`を選択
     -   **VPC** : `Kafka VPC`
-    -   **ゾーン**:
+    -   **Zone**:
         -   `ap-southeast-1a`と`broker-ap-southeast-1a vswitch`
         -   `ap-southeast-1b`と`broker-ap-southeast-1b vswitch`
         -   `ap-southeast-1c`と`broker-ap-southeast-1c vswitch`
@@ -597,26 +597,26 @@ b3.ap-southeast-1c.unique_name.alicloud.plc.tidbcloud.com:9095 (id: 3 rack: null
 
     -   ブートストラップサーバーグループ
 
-        -   **リスナープロトコル**: `TCP`を選択
+        -   **Listener Protocol**: `TCP`を選択
         -   **Listener Port**: `9092`
         -   **Server Group**: 以前に作成したサーバーグループ`bootstrap-server-group`を選択します。
 
     -   ブローカーサーバーグループ1
 
-        -   **リスナープロトコル**: `TCP`を選択
-        -   **リスナーポート**: `9093`
+        -   **Listener Protocol**: `TCP`を選択
+        -   **Listener Port**: `9093`
         -   **Server Group**: 以前に作成したサーバーグループ`broker-server-group-1`を選択します。
 
     -   ブローカーサーバーグループ2
 
-        -   **リスナープロトコル**: `TCP`を選択
-        -   **リスナーポート**: `9094`
+        -   **Listener Protocol**: `TCP`を選択
+        -   **Listener Port**: `9094`
         -   **Server Group**: 以前に作成したサーバーグループ`broker-server-group-2`を選択します。
 
     -   ブローカーサーバーグループ3
 
-        -   **リスナープロトコル**: `TCP`を選択
-        -   **リスナーポート**: `9095`
+        -   **Listener Protocol**: `TCP`を選択
+        -   **Listener Port**: `9095`
         -   **Server Group**: 以前に作成したサーバーグループ`broker-server-group-3`を選択します。
 
 4.  要塞ノードでロードバランサーをテストします。この例では、Kafka ブートストラップのみをテストします。ロードバランサーは Kafka EXTERNAL リスナーをリッスンしているため、EXTERNAL アドバタイズされたリスナーのアドレスは要塞ノードでは解決できません。ロードバランサーの詳細ページから`kafka-lb` DNS 名（例： `nlb-o21d6wyjknamw8hjxb.ap-southeast-1.nlb.aliyuncsslbintl.com` ）をメモしておいてください。要塞ノードでスクリプトを実行してください。

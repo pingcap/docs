@@ -288,7 +288,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
     3.  TiDB Cloudのプランに応じて、TiCDCがTiDB Cloudに接続できるようにするために、以下のいずれかの操作を行ってください。
 
         -   TiDB Cloud StarterまたはEssentialの場合は、 **Authorized Networks**セクションで**Add rule**をクリックします。表示されたダイアログで、TiCDCコンポーネントのパブリック IP アドレスを使用するファイアウォール ルールを追加し、 **Save**をクリックします。詳細については、 [パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md#create-and-manage-a-firewall-rule)を参照してください。
-        -   TiDB Cloud Dedicatedの場合は、 **Add IP Address**をクリックします。表示されたダイアログで、 **[IP アドレスを使用する]**を選択し、 [ **+]**をクリックし、TiCDCコンポーネントのパブリック IP アドレスを**IP Address**フィールドに入力して、 **Confirm**をクリックします。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
+        -   TiDB Cloud Dedicatedの場合は、 **Add IP Address**をクリックします。表示されたダイアログで、 **Use IP addresses**を選択し、 **+**をクリックし、TiCDCコンポーネントのパブリック IP アドレスを**IP Address**フィールドに入力して、 **Confirm**をクリックします。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
 
 3.  下流のTiDB Cloudリソースの接続情報を取得します。
 

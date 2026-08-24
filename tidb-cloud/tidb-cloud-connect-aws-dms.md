@@ -92,20 +92,20 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 4.  **Instance configuration**セクションで、インスタンスを構成します。
     -   **Instance class**: 適切なインスタンスクラスを選択します。詳細については、 [レプリケーションインスタンスタイプの選択](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Types.html)を参照してください。
     -   **Engine version**: デフォルト構成を維持します。
-    -   **High Availability**: ビジネス ニーズに応じて、**マルチ AZ**または**Single-AZ**を選択します。
+    -   **High Availability**: ビジネス ニーズに応じて、**Multi-AZ**または**Single-AZ**を選択します。
 
 5.  **Allocated storage (GiB)**フィールドでストレージを構成します。
 
 6.  接続とセキュリティを設定します。ネットワーク設定については[前のセクション](#configure-network)を参照してください。
 
     -   **Network type - new**: **IPv4**を選択します。
-    -   **IPv4 用の仮想プライベート クラウド (VPC)** : 必要な VPC を選択します。
+    -   **Virtual private cloud (VPC) for IPv4**: 必要な VPC を選択します。
     -   **Replication subnet group**: レプリケーション インスタンスのサブネット グループを選択します。
     -   **Public accessible**: ネットワーク構成に基づいて設定します。
 
     ![Connectivity and security](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-connectivity-security.png)
 
-7.  必要に応じて、 **Advanced settings** 、 **Maintenance** 、 **Tags**セクションを構成し、 **[Create replication instance]**をクリックしてインスタンスの作成を完了します。
+7.  必要に応じて、 **Advanced settings** 、 **Maintenance** 、 **Tags**セクションを構成し、 **Create replication instance**をクリックしてインスタンスの作成を完了します。
 
 > **Note:**
 >
@@ -125,7 +125,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
 4.  **Endpoint configuration**セクションで、**Endpoint identifier**とARNフィールドに入力します。次に、**Source engine**または**Target engine**として**MySQL**を選択します。
 
-5.  **[Access to endpoint database]**フィールドで、 **[Provide access information manually]**チェックボックスをオンにし、次のようにクラスター情報を入力します。
+5.  **Access to endpoint database**フィールドで、 **Provide access information manually**チェックボックスをオンにし、次のようにクラスター情報を入力します。
 
     <SimpleTab>
 
@@ -135,7 +135,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
     -   **Port**: クラスターの`PORT` 。
     -   **User name**: 移行先クラスターのユーザー。DMSの要件を満たしていることを確認してください。
     -   **Password**: クラスター ユーザーのパスワード。
-    -   **セキュリティ Socket Layer (SSL) モード**：パブリックエンドポイント経由で接続する場合は、トランスポートセキュリティを確保するために、モードを**verify-full**に設定することを強くお勧めします。プライベートエンドポイント経由で接続する場合は、モードを**none**に設定できます。
+    -   **Secure Socket Layer (SSL) mode**：パブリックエンドポイント経由で接続する場合は、トランスポートセキュリティを確保するために、モードを**verify-full**に設定することを強くお勧めします。プライベートエンドポイント経由で接続する場合は、モードを**none**に設定できます。
     -   （オプション） **CA certificate**： [ISRGルートX1証明書](https://letsencrypt.org/certs/isrgrootx1.pem)を使用します。詳細については、 [TiDB Cloud Starter または Essential への TLS 接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を参照してください。
 
     </div>
@@ -146,7 +146,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
     -   **Port**: TiDB Cloud Dedicated クラスターの`PORT` 。
     -   **User name**：移行用のTiDB Cloud Dedicatedクラスタのユーザー。DMS要件を満たしていることを確認してください。
     -   **Password**: TiDB Cloud Dedicated クラスター ユーザーのパスワード。
-    -   **セキュリティ Socket Layer (SSL) モード**：パブリックエンドポイント経由で接続する場合は、トランスポートセキュリティを確保するために、モードを**verify-full**に設定することを強くお勧めします。プライベートエンドポイント経由で接続する場合は、 **none**に設定できます。
+    -   **Secure Socket Layer (SSL) mode**：パブリックエンドポイント経由で接続する場合は、トランスポートセキュリティを確保するために、モードを**verify-full**に設定することを強くお勧めします。プライベートエンドポイント経由で接続する場合は、 **none**に設定できます。
     -   (オプション) **CA certificate**: [TiDB Cloud DedicatedへのTLS接続](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)に従って CA 証明書を取得します。
 
     </div>
