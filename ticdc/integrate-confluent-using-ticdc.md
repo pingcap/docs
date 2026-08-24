@@ -44,22 +44,26 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
 
     作成後、以下に示すようにキー ペア ファイルが生成されます。
 
-        === Confluent Cloud API key: xxx-xxxxx ===
+    ```
+    === Confluent Cloud API key: xxx-xxxxx ===
 
-        API key:
-        L5WWA4GK4NAT2EQV
+    API key:
+    L5WWA4GK4NAT2EQV
 
-        API secret:
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    API secret:
+    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-        Bootstrap server:
-        xxx-xxxxx.ap-east-1.aws.confluent.cloud:9092
+    Bootstrap server:
+    xxx-xxxxx.ap-east-1.aws.confluent.cloud:9092
+    ```
 
 2. スキーマ レジストリ エンドポイントを記録します。
 
     Confluent Cloud Console で、 **Schema Registry** &gt; **API endpoint**を選択します。スキーマレジストリエンドポイントを記録します。以下は例です。
 
-        https://yyy-yyyyy.us-east-2.aws.confluent.cloud
+    ```
+    https://yyy-yyyyy.us-east-2.aws.confluent.cloud
+    ```
 
 3. スキーマ レジストリ API キーを作成します。
 
@@ -67,11 +71,13 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
 
     作成後、次に示すようにキー ペア ファイルが生成されます。
 
-        === Confluent Cloud API key: yyy-yyyyy ===
-        API key:
-        7NBH2CAFM2LMGTH7
-        API secret:
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    ```
+    === Confluent Cloud API key: yyy-yyyyy ===
+    API key:
+    7NBH2CAFM2LMGTH7
+    API secret:
+    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    ```
 
     この手順はConfluent CLIを使用して実行することもできます。詳細については[Confluent CLI を Confluent Cloudクラスタに接続する](https://docs.confluent.io/confluent-cli/current/connect.html)を参照してください。
 
@@ -81,10 +87,12 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
 
     AvroおよびConfluent Connectorの要件に従い、各テーブルの増分データは独立したトピックに送信され、イベントごとに主キーの値に基づいてパーティションがディスパッチされる必要があります。そのため、以下の内容を含むchangefeed設定ファイル`changefeed.conf`を作成する必要があります。
 
-        [sink]
-        dispatchers = [
-        {matcher = ['*.*'], topic = "tidb_{schema}_{table}", partition="index-value"},
-        ]
+    ```
+    [sink]
+    dispatchers = [
+    {matcher = ['*.*'], topic = "tidb_{schema}_{table}", partition="index-value"},
+    ]
+    ```
 
     設定ファイルの`dispatchers`の詳細な説明については[Kafka シンクのトピックおよびパーティションディスパッチャーのルールをカスタマイズする](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink)を参照してください。
 
@@ -189,62 +197,72 @@ Snowflakeはクラウドネイティブなデータウェアハウスです。Co
 
 `ITEM`テーブルの構造は次のとおりです。
 
-    CREATE TABLE `item` (
-      `i_id` int NOT NULL,
-      `i_im_id` int DEFAULT NULL,
-      `i_name` varchar(24) DEFAULT NULL,
-      `i_price` decimal(5,2) DEFAULT NULL,
-      `i_data` varchar(50) DEFAULT NULL,
-      PRIMARY KEY (`i_id`)
-    );
+```
+CREATE TABLE `item` (
+  `i_id` int NOT NULL,
+  `i_im_id` int DEFAULT NULL,
+  `i_name` varchar(24) DEFAULT NULL,
+  `i_price` decimal(5,2) DEFAULT NULL,
+  `i_data` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`i_id`)
+);
+```
 
 Snowflakeには、Confluent Snowflake Sink Connectorによって自動的に作成された`TIDB_TEST_ITEM`というテーブルがあります。テーブル構造は次のとおりです。
 
-    create or replace TABLE TIDB_TEST_ITEM (
-            RECORD_METADATA VARIANT,
-            RECORD_CONTENT VARIANT
-    );
+```
+create or replace TABLE TIDB_TEST_ITEM (
+        RECORD_METADATA VARIANT,
+        RECORD_CONTENT VARIANT
+);
+```
 
 1. Snowflake で、TiDB と同じ構造のテーブルを作成します。
 
-        create or replace table TEST_ITEM (
-            i_id INTEGER primary key,
-            i_im_id INTEGER,
-            i_name VARCHAR,
-            i_price DECIMAL(36,2),
-            i_data VARCHAR
-        );
+    ```
+    create or replace table TEST_ITEM (
+        i_id INTEGER primary key,
+        i_im_id INTEGER,
+        i_name VARCHAR,
+        i_price DECIMAL(36,2),
+        i_data VARCHAR
+    );
+    ```
 
 2. `TIDB_TEST_ITEM`ストリームを作成し、 `append_only`から`true`を次のように設定します。
 
-        create or replace stream TEST_ITEM_STREAM on table TIDB_TEST_ITEM append_only=true;
+    ```
+    create or replace stream TEST_ITEM_STREAM on table TIDB_TEST_ITEM append_only=true;
+    ```
 
     このようにして作成されたストリームは、リアルタイムで`INSERT`イベントのみをキャプチャします。具体的には、TiDBで`ITEM`新しい変更ログが生成されると、その変更ログが`TIDB_TEST_ITEM`に挿入され、ストリームによってキャプチャされます。
 
 3. ストリーム内のデータを処理します。イベントの種類に応じて、 `TEST_ITEM`テーブル内のストリームデータを挿入、更新、または削除します。
 
-        --Merge data into the TEST_ITEM table
-        merge into TEST_ITEM n
-          using
-              -- Query TEST_ITEM_STREAM
-              (SELECT RECORD_METADATA:key as k, RECORD_CONTENT:val as v from TEST_ITEM_STREAM) stm
-              -- Match the stream with table on the condition that i_id is equal
-              on k:i_id = n.i_id
-          -- If the TEST_ITEM table contains a record that matches i_id and v is empty, delete this record
-          when matched and IS_NULL_VALUE(v) = true then
-              delete
+    ```
+    --Merge data into the TEST_ITEM table
+    merge into TEST_ITEM n
+      using
+          -- Query TEST_ITEM_STREAM
+          (SELECT RECORD_METADATA:key as k, RECORD_CONTENT:val as v from TEST_ITEM_STREAM) stm
+          -- Match the stream with table on the condition that i_id is equal
+          on k:i_id = n.i_id
+      -- If the TEST_ITEM table contains a record that matches i_id and v is empty, delete this record
+      when matched and IS_NULL_VALUE(v) = true then
+          delete
 
-          -- If the TEST_ITEM table contains a record that matches i_id and v is not empty, update this record
-          when matched and IS_NULL_VALUE(v) = false then
-              update set n.i_data = v:i_data, n.i_im_id = v:i_im_id, n.i_name = v:i_name, n.i_price = v:i_price
+      -- If the TEST_ITEM table contains a record that matches i_id and v is not empty, update this record
+      when matched and IS_NULL_VALUE(v) = false then
+          update set n.i_data = v:i_data, n.i_im_id = v:i_im_id, n.i_name = v:i_name, n.i_price = v:i_price
 
-          -- If the TEST_ITEM table does not contain a record that matches i_id, insert this record
-          when not matched then
-              insert
-                  (i_data, i_id, i_im_id, i_name, i_price)
-              values
-                  (v:i_data, v:i_id, v:i_im_id, v:i_name, v:i_price)
-        ;
+      -- If the TEST_ITEM table does not contain a record that matches i_id, insert this record
+      when not matched then
+          insert
+              (i_data, i_id, i_im_id, i_name, i_price)
+          values
+              (v:i_data, v:i_id, v:i_im_id, v:i_name, v:i_price)
+    ;
+    ```
 
     上の例では、Snowflakeの`MERGE INTO`のステートメントを使用して、ストリームとテーブルを特定の条件で一致させ、レコードの削除、更新、挿入などの対応する操作を実行しています。この例では、以下の3つのシナリオで3つの`WHERE`句が使用されています。
 
@@ -254,43 +272,47 @@ Snowflakeには、Confluent Snowflake Sink Connectorによって自動的に作�
 
 4. データが常に最新であることを確認するために、手順3のステートメントを定期的に実行してください。Snowflakeの`SCHEDULED TASK`機能を使用することもできます。
 
-        -- Create a TASK to periodically execute the MERGE INTO statement
-        create or replace task STREAM_TO_ITEM
-            warehouse = test
-            -- Execute the TASK every minute
-            schedule = '1 minute'
-        when
-            -- Skip the TASK when there is no data in TEST_ITEM_STREAM
-            system$stream_has_data('TEST_ITEM_STREAM')
-        as
-        -- Merge data into the TEST_ITEM table. The statement is the same as that in the preceding example
-        merge into TEST_ITEM n
-          using
-              (select RECORD_METADATA:key as k, RECORD_CONTENT:val as v from TEST_ITEM_STREAM) stm
-              on k:i_id = n.i_id
-          when matched and IS_NULL_VALUE(v) = true then
-              delete
-          when matched and IS_NULL_VALUE(v) = false then
-              update set n.i_data = v:i_data, n.i_im_id = v:i_im_id, n.i_name = v:i_name, n.i_price = v:i_price
-          when not matched then
-              insert
-                  (i_data, i_id, i_im_id, i_name, i_price)
-              values
-                  (v:i_data, v:i_id, v:i_im_id, v:i_name, v:i_price)
-        ;
+    ```
+    -- Create a TASK to periodically execute the MERGE INTO statement
+    create or replace task STREAM_TO_ITEM
+        warehouse = test
+        -- Execute the TASK every minute
+        schedule = '1 minute'
+    when
+        -- Skip the TASK when there is no data in TEST_ITEM_STREAM
+        system$stream_has_data('TEST_ITEM_STREAM')
+    as
+    -- Merge data into the TEST_ITEM table. The statement is the same as that in the preceding example
+    merge into TEST_ITEM n
+      using
+          (select RECORD_METADATA:key as k, RECORD_CONTENT:val as v from TEST_ITEM_STREAM) stm
+          on k:i_id = n.i_id
+      when matched and IS_NULL_VALUE(v) = true then
+          delete
+      when matched and IS_NULL_VALUE(v) = false then
+          update set n.i_data = v:i_data, n.i_im_id = v:i_im_id, n.i_name = v:i_name, n.i_price = v:i_price
+      when not matched then
+          insert
+              (i_data, i_id, i_im_id, i_name, i_price)
+          values
+              (v:i_data, v:i_id, v:i_im_id, v:i_name, v:i_price)
+    ;
+    ```
 
 これで、特定のETL機能を備えたデータチャネルが確立されました。このデータチャネルを通じて、TiDBの増分データ変更ログをSnowflakeに複製し、TiDBのデータレプリカを維持し、Snowflakeでデータを使用することができます。
 
 最後のステップは、 `TIDB_TEST_ITEM`テーブル内の不要なデータを定期的にクリーンアップすることです。
 
-    -- Clean up the TIDB_TEST_ITEM table every two hours
-    create or replace task TRUNCATE_TIDB_TEST_ITEM
-        warehouse = test
-        schedule = '120 minute'
-    when
-        system$stream_has_data('TIDB_TEST_ITEM')
-    as
-        TRUNCATE table TIDB_TEST_ITEM;
+```
+-- Clean up the TIDB_TEST_ITEM table every two hours
+create or replace task TRUNCATE_TIDB_TEST_ITEM
+    warehouse = test
+    schedule = '120 minute'
+when
+    system$stream_has_data('TIDB_TEST_ITEM')
+as
+    TRUNCATE table TIDB_TEST_ITEM;
+```
 
 ## ksqlDBとデータを統合する {#integrate-data-with-ksqldb}
 

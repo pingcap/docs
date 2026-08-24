@@ -40,15 +40,17 @@ TiCDC は DML イベントを Kafka イベントに変換し、イベントの�
 
 ### キーデータ形式 {#key-data-format}
 
-    {
-        "name":"{{TableName}}",
-        "namespace":"{{Namespace}}",
-        "type":"record",
-        "fields":[
-            {{ColumnValueBlock}},
-            {{ColumnValueBlock}},
-        ]
-    }
+```
+{
+    "name":"{{TableName}}",
+    "namespace":"{{Namespace}}",
+    "type":"record",
+    "fields":[
+        {{ColumnValueBlock}},
+        {{ColumnValueBlock}},
+    ]
+}
+```
 
 - `{{TableName}}`イベントが発生したテーブルの名前を示します。
 - `{{Namespace}}`は Avro の名前空間です。
@@ -58,15 +60,17 @@ TiCDC は DML イベントを Kafka イベントに変換し、イベントの�
 
 ### 値のデータ形式 {#value-data-format}
 
-    {
-        "name":"{{TableName}}",
-        "namespace":"{{Namespace}}",
-        "type":"record",
-        "fields":[
-            {{ColumnValueBlock}},
-            {{ColumnValueBlock}},
-        ]
-    }
+```
+{
+    "name":"{{TableName}}",
+    "namespace":"{{Namespace}}",
+    "type":"record",
+    "fields":[
+        {{ColumnValueBlock}},
+        {{ColumnValueBlock}},
+    ]
+}
+```
 
 デフォルトでは、値のデータ形式はキーと同じです。ただし、値の`fields`にはすべての列が含まれます。
 
@@ -103,27 +107,29 @@ dispatchers = [
 
 [`enable-tidb-extension`](#tidb-extension-fields)有効にすると、値のデータ形式は次のようになります。
 
-    {
-        "name":"{{TableName}}",
-        "namespace":"{{Namespace}}",
-        "type":"record",
-        "fields":[
-            {{ColumnValueBlock}},
-            {{ColumnValueBlock}},
-            {
-                "name":"_tidb_op",
-                "type":"string"
-            },
-            {
-                "name":"_tidb_commit_ts",
-                "type":"long"
-            },
-            {
-                "name":"_tidb_commit_physical_time",
-                "type":"long"
-            }
-        ]
-    }
+```
+{
+    "name":"{{TableName}}",
+    "namespace":"{{Namespace}}",
+    "type":"record",
+    "fields":[
+        {{ColumnValueBlock}},
+        {{ColumnValueBlock}},
+        {
+            "name":"_tidb_op",
+            "type":"string"
+        },
+        {
+            "name":"_tidb_commit_ts",
+            "type":"long"
+        },
+        {
+            "name":"_tidb_commit_physical_time",
+            "type":"long"
+        }
+    ]
+}
+```
 
 `enable-tidb-extension`無効になっている値のデータ形式と比較すると、 `_tidb_op` 、 `_tidb_commit_ts` 、 `_tidb_commit_physical_time` 3 つの新しいフィールドが追加されます。
 
@@ -131,31 +137,35 @@ dispatchers = [
 
 カラムデータは、キー/値データ形式の`{{ColumnValueBlock}}`要素です。TiCDCはSQLタイプに基づいてカラムデータ形式を生成します。基本的なカラムデータ形式は次のとおりです。
 
-    {
-        "name":"{{ColumnName}}",
-        "type":{
+```
+{
+    "name":"{{ColumnName}}",
+    "type":{
+        "connect.parameters":{
+            "tidb_type":"{{TIDB_TYPE}}"
+        },
+        "type":"{{AVRO_TYPE}}"
+    }
+}
+```
+
+1 つの列が NULL になる可能性がある場合、カラムのデータ形式は次のようになります。
+
+```
+{
+    "default":null,
+    "name":"{{ColumnName}}",
+    "type":[
+        "null",
+        {
             "connect.parameters":{
                 "tidb_type":"{{TIDB_TYPE}}"
             },
             "type":"{{AVRO_TYPE}}"
         }
-    }
-
-1 つの列が NULL になる可能性がある場合、カラムのデータ形式は次のようになります。
-
-    {
-        "default":null,
-        "name":"{{ColumnName}}",
-        "type":[
-            "null",
-            {
-                "connect.parameters":{
-                    "tidb_type":"{{TIDB_TYPE}}"
-                },
-                "type":"{{AVRO_TYPE}}"
-            }
-        ]
-    }
+    ]
+}
+```
 
 - `{{ColumnName}}`列名を示します。
 - `{{TIDB_TYPE}}`は TiDB 内の型を示します。これは SQL 型との 1 対 1 のマッピングではありません。
@@ -224,44 +234,50 @@ dispatchers = [
 
 ビット(64)
 
-    {
-        "name":"{{ColumnName}}",
-        "type":{
-            "connect.parameters":{
-                "tidb_type":"BIT",
-                "length":"64"
-            },
-            "type":"bytes"
-        }
+```
+{
+    "name":"{{ColumnName}}",
+    "type":{
+        "connect.parameters":{
+            "tidb_type":"BIT",
+            "length":"64"
+        },
+        "type":"bytes"
     }
+}
+```
 
 列挙型/セット(a,b,c)
 
-    {
-        "name":"{{ColumnName}}",
-        "type":{
-            "connect.parameters":{
-                "tidb_type":"ENUM/SET",
-                "allowed":"a,b,c"
-            },
-            "type":"string"
-        }
+```
+{
+    "name":"{{ColumnName}}",
+    "type":{
+        "connect.parameters":{
+            "tidb_type":"ENUM/SET",
+            "allowed":"a,b,c"
+        },
+        "type":"string"
     }
+}
+```
 
 10進数(10, 4)
 
-    {
-        "name":"{{ColumnName}}",
-        "type":{
-            "connect.parameters":{
-                "tidb_type":"DECIMAL",
-            },
-            "logicalType":"decimal",
-            "precision":10,
-            "scale":4,
-            "type":"bytes"
-        }
+```
+{
+    "name":"{{ColumnName}}",
+    "type":{
+        "connect.parameters":{
+            "tidb_type":"DECIMAL",
+        },
+        "logicalType":"decimal",
+        "precision":10,
+        "scale":4,
+        "type":"bytes"
     }
+}
+```
 
 ## DDLイベントとスキーマの変更 {#ddl-events-and-schema-changes}
 

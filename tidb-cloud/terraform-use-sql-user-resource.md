@@ -31,25 +31,27 @@ summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザ
 
 2. `sql_user.tf`ファイルを作成します。
 
-        terraform {
-          required_providers {
-            tidbcloud = {
-              source = "tidbcloud/tidbcloud"
-            }
-          }
+    ```
+    terraform {
+      required_providers {
+        tidbcloud = {
+          source = "tidbcloud/tidbcloud"
         }
+      }
+    }
 
-        provider "tidbcloud" {
-          public_key = "your_public_key"
-          private_key = "your_private_key"
-        }
+    provider "tidbcloud" {
+      public_key = "your_public_key"
+      private_key = "your_private_key"
+    }
 
-        resource "tidbcloud_sql_user" "example" {
-          cluster_id   = "your_cluster_id"
-          user_name    = "example_user"
-          password     = "example_password"
-          builtin_role = "role_admin"
-        }
+    resource "tidbcloud_sql_user" "example" {
+      cluster_id   = "your_cluster_id"
+      user_name    = "example_user"
+      password     = "example_password"
+      builtin_role = "role_admin"
+    }
+    ```
 
     `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
@@ -128,12 +130,14 @@ summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザ
 
     例えば：
 
-        resource "tidbcloud_sql_user" "example" {
-          cluster_id = 10423692645600000000
-          user_name = "example_user"
-          password = "updated_example_password"
-          builtin_role = "role_readonly"
-        }
+    ```
+    resource "tidbcloud_sql_user" "example" {
+      cluster_id = 10423692645600000000
+      user_name = "example_user"
+      password = "updated_example_password"
+      builtin_role = "role_readonly"
+    }
+    ```
 
 2. `terraform apply`コマンドを実行します。
 
@@ -180,14 +184,16 @@ summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザ
 
 4. `terraform state show tidbcloud_sql_user.${resource-name}`を使用して状態を確認します。
 
-        $ terraform state show tidbcloud_sql_user.example
-        # tidbcloud_sql_user.example:
-        resource "tidbcloud_sql_user" "example" {
-            builtin_role = "role_readonly"
-            cluster_id   = "10423692645600000000"
-            password     = (sensitive value)
-            user_name    = "example_user"
-        }
+    ```
+    $ terraform state show tidbcloud_sql_user.example
+    # tidbcloud_sql_user.example:
+    resource "tidbcloud_sql_user" "example" {
+        builtin_role = "role_readonly"
+        cluster_id   = "10423692645600000000"
+        password     = (sensitive value)
+        user_name    = "example_user"
+    }
+    ```
 
 `builtin_role`は`role_readonly`に変更されます。`password`はセンシティブな値であるため表示されません。
 
@@ -201,10 +207,12 @@ Terraform で管理されていないTiDB Cloud SQL ユーザーの場合は、T
 
     次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` `cluster_id,user_name`の形式に置き換えます。
 
-        import {
-          to = tidbcloud_sql_user.example
-          id = "${id}"
-        }
+    ```
+    import {
+      to = tidbcloud_sql_user.example
+      id = "${id}"
+    }
+    ```
 
 2. 新しい構成ファイルを生成します。
 
@@ -271,4 +279,6 @@ SQL ユーザーを削除するには、 `tidbcloud_sql_user`リソースの構�
 
 ここで、コマンド`terraform show`を実行すると、リソースがクリアされているため何も表示されません。
 
-    $ terraform show
+```
+$ terraform show
+```

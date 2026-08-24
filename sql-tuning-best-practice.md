@@ -204,14 +204,16 @@ TiDBはコストベースオプティマイザ（CBO）を使用して、SQL文�
     SHOW STATS_META WHERE table_name='T2'\G;
     ```
 
-        *************************** 1. row ***************************
-                  Db_name: test
-               Table_name: T2
-           Partition_name:
-              Update_time: 2023-05-11 02:16:50
-             Modify_count: 10000
-                Row_count: 20000
-        1 row in set (0.03 sec)
+    ```
+    *************************** 1. row ***************************
+              Db_name: test
+           Table_name: T2
+       Partition_name:
+          Update_time: 2023-05-11 02:16:50
+         Modify_count: 10000
+            Row_count: 20000
+    1 row in set (0.03 sec)
+    ```
 
 - [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) : テーブル統計のヘルス ステータスを表示します。
 
@@ -219,12 +221,14 @@ TiDBはコストベースオプティマイザ（CBO）を使用して、SQL文�
     SHOW STATS_HEALTHY WHERE table_name='T2'\G;
     ```
 
-        *************************** 1. row ***************************
-               Db_name: test
-            Table_name: T2
-        Partition_name:
-               Healthy: 50
-        1 row in set (0.00 sec)
+    ```
+    *************************** 1. row ***************************
+           Db_name: test
+        Table_name: T2
+    Partition_name:
+           Healthy: 50
+    1 row in set (0.00 sec)
+    ```
 
 TiDBは、統計情報を収集する方法として、自動収集と手動収集の2種類を提供しています。ほとんどの場合、自動収集で十分です。TiDBは、特定の条件が満たされると自動収集をトリガーします。一般的なトリガー条件には、次のようなものがあります。
 
@@ -235,13 +239,15 @@ TiDBは、統計情報を収集する方法として、自動収集と手動収�
 SHOW VARIABLES LIKE 'tidb\_auto\_analyze%';
 ```
 
-    +-----------------------------------------+-------------+
-    | Variable_name                           | Value       |
-    +-----------------------------------------+-------------+
-    | tidb_auto_analyze_ratio                 | 0.5         |
-    | tidb_auto_analyze_start_time            | 00:00 +0000 |
-    | tidb_auto_analyze_end_time              | 23:59 +0000 |
-    +-----------------------------------------+-------------+
+```
++-----------------------------------------+-------------+
+| Variable_name                           | Value       |
++-----------------------------------------+-------------+
+| tidb_auto_analyze_ratio                 | 0.5         |
+| tidb_auto_analyze_start_time            | 00:00 +0000 |
+| tidb_auto_analyze_end_time              | 23:59 +0000 |
++-----------------------------------------+-------------+
+```
 
 自動収集ではニーズを満たせない場合があります。デフォルトでは`00:00` ～ `23:59`の間に収集されるため、分析ジョブはいつでも実行できます。オンラインビジネスへのパフォーマンスへの影響を最小限に抑えるため、統計収集の開始時間と終了時間を指定することもできます。
 
@@ -281,11 +287,13 @@ TiDBは前処理中に、SQL文が[`Point_Get`](/explain-indexes.md#point_get-an
 EXPLAIN SELECT id, name FROM emp WHERE id = 901;
 ```
 
-    +-------------+---------+------+---------------+---------------+
-    | id          | estRows | task | access object | operator info |
-    +-------------+---------+------+---------------+---------------+
-    | Point_Get_1 | 1.00    | root | table:emp     | handle:901    |
-    +-------------+---------+------+---------------+---------------+
+```
++-------------+---------+------+---------------+---------------+
+| id          | estRows | task | access object | operator info |
++-------------+---------+------+---------------+---------------+
+| Point_Get_1 | 1.00    | root | table:emp     | handle:901    |
++-------------+---------+------+---------------+---------------+
+```
 
 ##### 2. 論理変換 {#2-logical-transformation}
 
@@ -327,16 +335,18 @@ TiDB Dashboardから実行計画情報にアクセスするだけでなく、 `E
 EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
 ```
 
-    +--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
-    | id                       | estRows     | task         | access object     | operator info                                                                                      |
-    +--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
-    | StreamAgg_20             | 1.00        | root         |                   | funcs:count(Column#13)->Column#11                                                                  |
-    | └─TableReader_21         | 1.00        | root         |                   | data:StreamAgg_9                                                                                   |
-    |   └─StreamAgg_9          | 1.00        | cop[tikv]    |                   | funcs:count(1)->Column#13                                                                          |
-    |     └─Selection_19       | 250.00      | cop[tikv]    |                   | ge(trips.start_date, 2017-07-01 00:00:00.000000), le(trips.start_date, 2017-07-01 23:59:59.000000) |
-    |       └─TableFullScan_18 | 10000.00    | cop[tikv]    | table:trips       | keep order:false, stats:pseudo                                                                     |
-    +--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
-    5 rows in set (0.00 sec)
+```
++--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
+| id                       | estRows     | task         | access object     | operator info                                                                                      |
++--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
+| StreamAgg_20             | 1.00        | root         |                   | funcs:count(Column#13)->Column#11                                                                  |
+| └─TableReader_21         | 1.00        | root         |                   | data:StreamAgg_9                                                                                   |
+|   └─StreamAgg_9          | 1.00        | cop[tikv]    |                   | funcs:count(1)->Column#13                                                                          |
+|     └─Selection_19       | 250.00      | cop[tikv]    |                   | ge(trips.start_date, 2017-07-01 00:00:00.000000), le(trips.start_date, 2017-07-01 23:59:59.000000) |
+|       └─TableFullScan_18 | 10000.00    | cop[tikv]    | table:trips       | keep order:false, stats:pseudo                                                                     |
++--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
+5 rows in set (0.00 sec)
+```
 
 `EXPLAIN`とは異なり、 `EXPLAIN ANALYZE`は対応するSQL文を実行し、その実行時情報を記録し、実行計画とともに返します。この実行時情報は、クエリ実行のデバッグに不可欠です。詳細については、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
 
@@ -366,22 +376,24 @@ FROM (
 ) pm;
 ```
 
-    +-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
-    | id                                      |.| actRows | task      | access object             | execution info                                                 |.| memory    | disk    |
-    +-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
-    | Projection_14                           |.| 1       | root      |                           | time:1.39ms, loops:2, RU:1.561975, Concurrency:OFF             |.| 9.64 KB   | N/A     |
-    | └─StreamAgg_16                          |.| 1       | root      |                           | time:1.39ms, loops:2                                           |.| 1.46 KB   | N/A     |
-    |   └─Projection_40                       |.| 4       | root      |                           | time:1.38ms, loops:4, Concurrency:OFF                          |.| 8.24 KB   | N/A     |
-    |     └─HashAgg_17                        |.| 4       | root      |                           | time:1.36ms, loops:4, partial_worker:{...}, final_worker:{...} |.| 82.1 KB   | N/A     |
-    |       └─HashJoin_19                     |.| 25      | root      |                           | time:1.29ms, loops:2, build_hash_table:{...}, probe:{...}      |.| 2.25 KB   | 0 Bytes |
-    |         ├─HashJoin_35(Build)            |.| 4       | root      |                           | time:1.08ms, loops:2, build_hash_table:{...}, probe:{...}      |.| 25.7 KB   | 0 Bytes |
-    |         │ ├─IndexReader_39(Build)       |.| 1       | root      |                           | time:888.5µs, loops:2, cop_task: {...}                         |.| 286 Bytes | N/A     |
-    |         │ │ └─IndexRangeScan_38         |.| 1       | cop[tikv] | table:c, index:name(name) | tikv_task:{time:0s, loops:1}, scan_detail: {...}               |.| N/A       | N/A     |
-    |         │ └─TableReader_37(Probe)       |.| 10      | root      |                           | time:543.7µs, loops:2, cop_task: {...}                         |.| 577 Bytes | N/A     |
-    |         │   └─TableFullScan_36          |.| 10      | cop[tikv] | table:p                   | tikv_task:{time:0s, loops:1}, scan_detail: {...}               |.| N/A       | N/A     |
-    |         └─TableReader_22(Probe)         |.| 28      | root      |                           | time:671.7µs, loops:2, cop_task: {...}                         |.| 876 Bytes | N/A     |
-    |           └─TableFullScan_21            |.| 28      | cop[tikv] | table:m                   | tikv_task:{time:0s, loops:1}, scan_detail: {...}               |.| N/A       | N/A     |
-    +-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
+```
++-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
+| id                                      |.| actRows | task      | access object             | execution info                                                 |.| memory    | disk    |
++-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
+| Projection_14                           |.| 1       | root      |                           | time:1.39ms, loops:2, RU:1.561975, Concurrency:OFF             |.| 9.64 KB   | N/A     |
+| └─StreamAgg_16                          |.| 1       | root      |                           | time:1.39ms, loops:2                                           |.| 1.46 KB   | N/A     |
+|   └─Projection_40                       |.| 4       | root      |                           | time:1.38ms, loops:4, Concurrency:OFF                          |.| 8.24 KB   | N/A     |
+|     └─HashAgg_17                        |.| 4       | root      |                           | time:1.36ms, loops:4, partial_worker:{...}, final_worker:{...} |.| 82.1 KB   | N/A     |
+|       └─HashJoin_19                     |.| 25      | root      |                           | time:1.29ms, loops:2, build_hash_table:{...}, probe:{...}      |.| 2.25 KB   | 0 Bytes |
+|         ├─HashJoin_35(Build)            |.| 4       | root      |                           | time:1.08ms, loops:2, build_hash_table:{...}, probe:{...}      |.| 25.7 KB   | 0 Bytes |
+|         │ ├─IndexReader_39(Build)       |.| 1       | root      |                           | time:888.5µs, loops:2, cop_task: {...}                         |.| 286 Bytes | N/A     |
+|         │ │ └─IndexRangeScan_38         |.| 1       | cop[tikv] | table:c, index:name(name) | tikv_task:{time:0s, loops:1}, scan_detail: {...}               |.| N/A       | N/A     |
+|         │ └─TableReader_37(Probe)       |.| 10      | root      |                           | time:543.7µs, loops:2, cop_task: {...}                         |.| 577 Bytes | N/A     |
+|         │   └─TableFullScan_36          |.| 10      | cop[tikv] | table:p                   | tikv_task:{time:0s, loops:1}, scan_detail: {...}               |.| N/A       | N/A     |
+|         └─TableReader_22(Probe)         |.| 28      | root      |                           | time:671.7µs, loops:2, cop_task: {...}                         |.| 876 Bytes | N/A     |
+|           └─TableFullScan_21            |.| 28      | cop[tikv] | table:m                   | tikv_task:{time:0s, loops:1}, scan_detail: {...}               |.| N/A       | N/A     |
++-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
+```
 
 #### 実行計画の読み取り: 最初の子を先頭とする {#read-execution-plans-first-child-first}
 
@@ -405,16 +417,18 @@ FROM (
 EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
 ```
 
-    +--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
-    | id                       | estRows     | task         | access object     | operator info                                                                                      |
-    +--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
-    | StreamAgg_20             | 1.00        | root         |                   | funcs:count(Column#13)->Column#11                                                                  |
-    | └─TableReader_21         | 1.00        | root         |                   | data:StreamAgg_9                                                                                   |
-    |   └─StreamAgg_9          | 1.00        | cop[tikv]    |                   | funcs:count(1)->Column#13                                                                          |
-    |     └─Selection_19       | 250.00      | cop[tikv]    |                   | ge(trips.start_date, 2017-07-01 00:00:00.000000), le(trips.start_date, 2017-07-01 23:59:59.000000) |
-    |       └─TableFullScan_18 | 10000.00    | cop[tikv]    | table:trips       | keep order:false, stats:pseudo                                                                     |
-    +--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
-    5 rows in set (0.00 sec)
+```
++--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
+| id                       | estRows     | task         | access object     | operator info                                                                                      |
++--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
+| StreamAgg_20             | 1.00        | root         |                   | funcs:count(Column#13)->Column#11                                                                  |
+| └─TableReader_21         | 1.00        | root         |                   | data:StreamAgg_9                                                                                   |
+|   └─StreamAgg_9          | 1.00        | cop[tikv]    |                   | funcs:count(1)->Column#13                                                                          |
+|     └─Selection_19       | 250.00      | cop[tikv]    |                   | ge(trips.start_date, 2017-07-01 00:00:00.000000), le(trips.start_date, 2017-07-01 23:59:59.000000) |
+|       └─TableFullScan_18 | 10000.00    | cop[tikv]    | table:trips       | keep order:false, stats:pseudo                                                                     |
++--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
+5 rows in set (0.00 sec)
+```
 
 次の例では、プランツリーの最初のリーフノードである`IndexRangeScan_47`を調べることから始めます。オプティマイザは、 `stars`テーブルから`name`と`id`列のみを選択します。これらの列は`name(name)`インデックスから取得できます。その結果、 `stars`のルートリーダーは`IndexReader_48`であり、`TableReader`ではありません。
 
@@ -436,18 +450,20 @@ ORDER BY t5.gravity DESC
 LIMIT 3;
 ```
 
-    +-----------------------------------+----------+-----------+---------------------------+
-    | id                                | estRows  | task      | access object             |
-    +-----------------------------------+----------+-----------+---------------------------+
-    | Projection_16                     | 3.00     | root      |                           |
-    | └─TopN_19                         | 3.00     | root      |                           |
-    |   └─TopN_26                       | 5.00     | root      |                           |
-    |     └─HashJoin_44                 | 5.00     | root      |                           |
-    |       ├─IndexReader_48(Build)     | 1.00     | root      |                           |
-    |       │ └─IndexRangeScan_47       | 1.00     | cop[tikv] | table:s, index:name(name) |
-    |       └─TableReader_46(Probe)     | 10.00    | root      |                           |
-    |         └─TableFullScan_45        | 10.00    | cop[tikv] | table:p                   |
-    +-----------------------------------+----------+-----------+---------------------------+
+```
++-----------------------------------+----------+-----------+---------------------------+
+| id                                | estRows  | task      | access object             |
++-----------------------------------+----------+-----------+---------------------------+
+| Projection_16                     | 3.00     | root      |                           |
+| └─TopN_19                         | 3.00     | root      |                           |
+|   └─TopN_26                       | 5.00     | root      |                           |
+|     └─HashJoin_44                 | 5.00     | root      |                           |
+|       ├─IndexReader_48(Build)     | 1.00     | root      |                           |
+|       │ └─IndexRangeScan_47       | 1.00     | cop[tikv] | table:s, index:name(name) |
+|       └─TableReader_46(Probe)     | 10.00    | root      |                           |
+|         └─TableFullScan_45        | 10.00    | cop[tikv] | table:p                   |
++-----------------------------------+----------+-----------+---------------------------+
+```
 
 次の図は、2 番目の実行計画のプラン ツリーを示しています。
 
@@ -492,23 +508,25 @@ LIMIT 3;
 
 これらの問題に対処するには、特に`orders`テーブルと`index_orders_on_adjustment_id`インデックスのテーブル統計が最新であることを確認します。
 
-    +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------...----------------------+
-    | id                                 | estRows   | estCost      | actRows   | task      | access object                                                                          | execution info ...| memory   | disk     |
-    +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------...----------------------+
-    | TopN_19                            | 1.01      | 461374372.63 | 0         | root      |                                                                                        | time:5m51.1s, l...| 0 Bytes  | 0 Bytes  |
-    | └─IndexJoin_32                     | 1.01      | 460915067.45 | 0         | root      |                                                                                        | time:5m51.1s, l...| 0 Bytes  | N/A      |
-    |   ├─HashJoin_69(Build)             | 1.01      | 460913065.41 | 0         | root      |                                                                                        | time:5m51.1s, l...| 21.6 GB  | 7.65 GB  |
-    |   │ ├─IndexReader_76(Build)        | 1.00      | 18.80        | 256805045 | root      |                                                                                        | time:1m4.1s, lo...| 12.4 MB  | N/A      |
-    |   │ │ └─IndexRangeScan_75          | 1.00      | 186.74       | 256811189 | cop[tikv] | table:orders, index:index_orders_on_adjustment_id(adjustment_id)                       | tikv_task:{proc...| N/A      | N/A      |
-    |   │ └─Projection_74(Probe)         | 30652.93  | 460299612.60 | 1024      | root      |                                                                                        | time:1.08s, loo...| 413.4 KB | N/A      |
-    |   │   └─IndexLookUp_73             | 30652.93  | 460287375.95 | 6144      | root      | partition:all                                                                          | time:1.08s, loo...| 107.8 MB | N/A      |
-    |   │     ├─IndexRangeScan_70(Build) | 234759.64 | 53362737.50  | 390699    | cop[tikv] | table:rates, index:index_rates_on_label_id(label_id)                                   | time:29.6ms, lo...| N/A      | N/A      |
-    |   │     └─Selection_72(Probe)      | 30652.93  | 110373973.91 | 187070    | cop[tikv] |                                                                                        | time:36.8s, loo...| N/A      | N/A      |
-    |   │       └─TableRowIDScan_71      | 234759.64 | 86944962.10  | 390699    | cop[tikv] | table:rates                                                                            | tikv_task:{proc...| N/A      | N/A      |
-    |   └─TableReader_28(Probe)          | 0.00      | 43.64        | 0         | root      |                                                                                        |                ...| N/A      | N/A      |
-    |     └─Selection_27                 | 0.00      | 653.96       | 0         | cop[tikv] |                                                                                        |                ...| N/A      | N/A      |
-    |       └─TableRangeScan_26          | 1.01      | 454.36       | 0         | cop[tikv] | table:labels                                                                           |                ...| N/A      | N/A      |
-    +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------...----------------------+
+```
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------...----------------------+
+| id                                 | estRows   | estCost      | actRows   | task      | access object                                                                          | execution info ...| memory   | disk     |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------...----------------------+
+| TopN_19                            | 1.01      | 461374372.63 | 0         | root      |                                                                                        | time:5m51.1s, l...| 0 Bytes  | 0 Bytes  |
+| └─IndexJoin_32                     | 1.01      | 460915067.45 | 0         | root      |                                                                                        | time:5m51.1s, l...| 0 Bytes  | N/A      |
+|   ├─HashJoin_69(Build)             | 1.01      | 460913065.41 | 0         | root      |                                                                                        | time:5m51.1s, l...| 21.6 GB  | 7.65 GB  |
+|   │ ├─IndexReader_76(Build)        | 1.00      | 18.80        | 256805045 | root      |                                                                                        | time:1m4.1s, lo...| 12.4 MB  | N/A      |
+|   │ │ └─IndexRangeScan_75          | 1.00      | 186.74       | 256811189 | cop[tikv] | table:orders, index:index_orders_on_adjustment_id(adjustment_id)                       | tikv_task:{proc...| N/A      | N/A      |
+|   │ └─Projection_74(Probe)         | 30652.93  | 460299612.60 | 1024      | root      |                                                                                        | time:1.08s, loo...| 413.4 KB | N/A      |
+|   │   └─IndexLookUp_73             | 30652.93  | 460287375.95 | 6144      | root      | partition:all                                                                          | time:1.08s, loo...| 107.8 MB | N/A      |
+|   │     ├─IndexRangeScan_70(Build) | 234759.64 | 53362737.50  | 390699    | cop[tikv] | table:rates, index:index_rates_on_label_id(label_id)                                   | time:29.6ms, lo...| N/A      | N/A      |
+|   │     └─Selection_72(Probe)      | 30652.93  | 110373973.91 | 187070    | cop[tikv] |                                                                                        | time:36.8s, loo...| N/A      | N/A      |
+|   │       └─TableRowIDScan_71      | 234759.64 | 86944962.10  | 390699    | cop[tikv] | table:rates                                                                            | tikv_task:{proc...| N/A      | N/A      |
+|   └─TableReader_28(Probe)          | 0.00      | 43.64        | 0         | root      |                                                                                        |                ...| N/A      | N/A      |
+|     └─Selection_27                 | 0.00      | 653.96       | 0         | cop[tikv] |                                                                                        |                ...| N/A      | N/A      |
+|       └─TableRangeScan_26          | 1.01      | 454.36       | 0         | cop[tikv] | table:labels                                                                           |                ...| N/A      | N/A      |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------...----------------------+
+```
 
 以下の実行計画は、テーブル`orders`の誤った推定値を修正した後の期待される結果を示しています。クエリの実行時間は1.96秒となり、以前の5分51秒から大幅に改善されました。
 
@@ -518,25 +536,27 @@ LIMIT 3;
 
 この最適化されたプランは、クエリパフォーマンスにおける正確な統計と適切な結合順序の重要性を示しています。実行時間の短縮（351秒から1.96秒）は、推定エラーへの対処による効果を示しています。
 
-    +---------------------------------------+----------+---------+-----------+----------------------------------------------------------------------------------------+---------------...+----------+------+
-    | id                                    | estRows  | actRows | task      | access object                                                                          | execution info...| memory   | disk |
-    +---------------------------------------+----------+---------+-----------+----------------------------------------------------------------------------------------+---------------...+----------+------+
-    | Limit_24                              | 1000.00  | 1000    | root      |                                                                                        | time:1.96s, lo...| N/A      | N/A  |
-    | └─IndexJoin_88                        | 1000.00  | 1000    | root      |                                                                                        | time:1.96s, lo...| 1.32 MB  | N/A  |
-    |   ├─IndexJoin_99(Build)               | 1000.00  | 2458    | root      |                                                                                        | time:1.96s, lo...| 77.7 MB  | N/A  |
-    |   │ ├─TableReader_109(Build)          | 6505.62  | 158728  | root      |                                                                                        | time:1.26s, lo...| 297.0 MB | N/A  |
-    |   │ │ └─Selection_108                 | 6505.62  | 171583  | cop[tikv] |                                                                                        | tikv_task:{pro...| N/A      | N/A  |
-    |   │ │   └─TableRangeScan_107          | 80396.43 | 179616  | cop[tikv] | table:labels                                                                           | tikv_task:{pro...| N/A      | N/A  |
-    |   │ └─Projection_98(Probe)            | 1000.00  | 2458    | root      |                                                                                        | time:2.13s, lo...| 59.2 KB  | N/A  |
-    |   │   └─IndexLookUp_97                | 1000.00  | 2458    | root      | partition:all                                                                          | time:2.13s, lo...| 1.20 MB  | N/A  |
-    |   │     ├─Selection_95(Build)         | 6517.14  | 6481    | cop[tikv] |                                                                                        | time:798.6ms, ...| N/A      | N/A  |
-    |   │     │ └─IndexRangeScan_93         | 6517.14  | 6481    | cop[tikv] | table:rates, index:index_rates_on_label_id(label_id)                                   | tikv_task:{pro...| N/A      | N/A  |
-    |   │     └─Selection_96(Probe)         | 1000.00  | 2458    | cop[tikv] |                                                                                        | time:444.4ms, ...| N/A      | N/A  |
-    |   │       └─TableRowIDScan_94         | 6517.14  | 6481    | cop[tikv] | table:rates                                                                            | tikv_task:{pro...| N/A      | N/A  |
-    |   └─TableReader_84(Probe)             | 984.56   | 1998    | root      |                                                                                        | time:207.6ms, ...| N/A      | N/A  |
-    |     └─Selection_83                    | 984.56   | 1998    | cop[tikv] |                                                                                        | tikv_task:{pro...| N/A      | N/A  |
-    |       └─TableRangeScan_82             | 1000.00  | 2048    | cop[tikv] | table:orders                                                                           | tikv_task:{pro...| N/A      | N/A  |
-    +---------------------------------------+----------+---------+-----------+----------------------------------------------------------------------------------------+---------------...+----------+------+
+```
++---------------------------------------+----------+---------+-----------+----------------------------------------------------------------------------------------+---------------...+----------+------+
+| id                                    | estRows  | actRows | task      | access object                                                                          | execution info...| memory   | disk |
++---------------------------------------+----------+---------+-----------+----------------------------------------------------------------------------------------+---------------...+----------+------+
+| Limit_24                              | 1000.00  | 1000    | root      |                                                                                        | time:1.96s, lo...| N/A      | N/A  |
+| └─IndexJoin_88                        | 1000.00  | 1000    | root      |                                                                                        | time:1.96s, lo...| 1.32 MB  | N/A  |
+|   ├─IndexJoin_99(Build)               | 1000.00  | 2458    | root      |                                                                                        | time:1.96s, lo...| 77.7 MB  | N/A  |
+|   │ ├─TableReader_109(Build)          | 6505.62  | 158728  | root      |                                                                                        | time:1.26s, lo...| 297.0 MB | N/A  |
+|   │ │ └─Selection_108                 | 6505.62  | 171583  | cop[tikv] |                                                                                        | tikv_task:{pro...| N/A      | N/A  |
+|   │ │   └─TableRangeScan_107          | 80396.43 | 179616  | cop[tikv] | table:labels                                                                           | tikv_task:{pro...| N/A      | N/A  |
+|   │ └─Projection_98(Probe)            | 1000.00  | 2458    | root      |                                                                                        | time:2.13s, lo...| 59.2 KB  | N/A  |
+|   │   └─IndexLookUp_97                | 1000.00  | 2458    | root      | partition:all                                                                          | time:2.13s, lo...| 1.20 MB  | N/A  |
+|   │     ├─Selection_95(Build)         | 6517.14  | 6481    | cop[tikv] |                                                                                        | time:798.6ms, ...| N/A      | N/A  |
+|   │     │ └─IndexRangeScan_93         | 6517.14  | 6481    | cop[tikv] | table:rates, index:index_rates_on_label_id(label_id)                                   | tikv_task:{pro...| N/A      | N/A  |
+|   │     └─Selection_96(Probe)         | 1000.00  | 2458    | cop[tikv] |                                                                                        | time:444.4ms, ...| N/A      | N/A  |
+|   │       └─TableRowIDScan_94         | 6517.14  | 6481    | cop[tikv] | table:rates                                                                            | tikv_task:{pro...| N/A      | N/A  |
+|   └─TableReader_84(Probe)             | 984.56   | 1998    | root      |                                                                                        | time:207.6ms, ...| N/A      | N/A  |
+|     └─Selection_83                    | 984.56   | 1998    | cop[tikv] |                                                                                        | tikv_task:{pro...| N/A      | N/A  |
+|       └─TableRangeScan_82             | 1000.00  | 2048    | cop[tikv] | table:orders                                                                           | tikv_task:{pro...| N/A      | N/A  |
++---------------------------------------+----------+---------+-----------+----------------------------------------------------------------------------------------+---------------...+----------+------+
+```
 
 詳細については、 [TiDB クエリ実行計画の概要](/explain-overview.md)および[`EXPLAIN`ウォークスルー](/explain-walkthrough.md)を参照してください。
 
@@ -634,16 +654,18 @@ WHERE
 
 元の実行計画は次のとおりです。
 
-    +-------------------------------+------------+---------+-----------+--------------------------------------------------------------------------+------------------------------------------------------------+
-    | id                            | estRows    | actRows | task      | access object                                                            | execution info                                             | 
-    +-------------------------------+------------+---------+-----------+--------------------------------------------------------------------------+------------------------------------------------------------+
-    | HashAgg_18                   | 1.00       | 2571625.22 | 1       | root      |                                                              | time:46.4s, loops:2, partial_worker:{wall_time:46.37,   ...|
-    | └─IndexLookUp_19             | 1.00       | 2570096.68 | 301     | root      |                                                              | time:46.4s, loops:2, index_task: {total_time: 45.8s,    ...|
-    |   ├─IndexRangeScan_11(Build) | 1309.50    | 317033.98  | 2597411 | cop[tikv] | table:logs, index:logs_idx(snapshot_id, user_id, status)     | time:228ms, loops:2547, cop_task: {num: 67, max: 2.17s, ...|
-    |   └─HashAgg_7(Probe)         | 1.00       | 588434.48  | 301     | cop[tikv] |                                                              | time:3m46.7s, loops:260, cop_task: {num: 301,           ...|
-    |     └─Selection_13           | 1271.37    | 561549.27  | 2566562 | cop[tikv] |                                                              | tikv_task:{proc max:10s, min:0s, avg: 915.3ms,          ...|
-    |       └─TableRowIDScan_12    | 1309.50    | 430861.31  | 2597411 | cop[tikv] | table:logs                                                   | tikv_task:{proc max:10s, min:0s, avg: 908.7ms,          ...|
-    +-------------------------------+------------+---------+-----------+--------------------------------------------------------------------------+------------------------------------------------------------+
+```
++-------------------------------+------------+---------+-----------+--------------------------------------------------------------------------+------------------------------------------------------------+
+| id                            | estRows    | actRows | task      | access object                                                            | execution info                                             | 
++-------------------------------+------------+---------+-----------+--------------------------------------------------------------------------+------------------------------------------------------------+
+| HashAgg_18                   | 1.00       | 2571625.22 | 1       | root      |                                                              | time:46.4s, loops:2, partial_worker:{wall_time:46.37,   ...|
+| └─IndexLookUp_19             | 1.00       | 2570096.68 | 301     | root      |                                                              | time:46.4s, loops:2, index_task: {total_time: 45.8s,    ...|
+|   ├─IndexRangeScan_11(Build) | 1309.50    | 317033.98  | 2597411 | cop[tikv] | table:logs, index:logs_idx(snapshot_id, user_id, status)     | time:228ms, loops:2547, cop_task: {num: 67, max: 2.17s, ...|
+|   └─HashAgg_7(Probe)         | 1.00       | 588434.48  | 301     | cop[tikv] |                                                              | time:3m46.7s, loops:260, cop_task: {num: 301,           ...|
+|     └─Selection_13           | 1271.37    | 561549.27  | 2566562 | cop[tikv] |                                                              | tikv_task:{proc max:10s, min:0s, avg: 915.3ms,          ...|
+|       └─TableRowIDScan_12    | 1309.50    | 430861.31  | 2597411 | cop[tikv] | table:logs                                                   | tikv_task:{proc max:10s, min:0s, avg: 908.7ms,          ...|
++-------------------------------+------------+---------+-----------+--------------------------------------------------------------------------+------------------------------------------------------------+
+```
 
 クエリのパフォーマンスを向上させるには、 `source_type` 、 `target_type` 、 `amount`列を含むカバーリングインデックスを作成します。この最適化により、追加のテーブル参照が不要になり、実行時間が90ミリ秒に短縮されます。TiDBはデータスキャンのためにTiKVに1つのcopタスクを送信するだけで済みます。
 
@@ -656,15 +678,17 @@ ANALYZE TABLE logs INDEX logs_covered;
 
 新しい実行計画は次のとおりです。
 
-    +-------------------------------+------------+---------+-----------+---------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+
-    | id                            | estRows    | actRows | task      | access object                                                                                                                   | execution info                              |
-    +-------------------------------+------------+---------+-----------+---------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+
-    | HashAgg_13                    | 1.00       | 1       | root      |                                                                                                                                 | time:90ms, loops:2, RU:158.885311,       ...|
-    | └─IndexReader_14              | 1.00       | 1       | root      |                                                                                                                                 | time:89.8ms, loops:2, cop_task: {num: 1, ...|
-    |   └─HashAgg_6                 | 1.00       | 1       | cop[tikv] |                                                                                                                                 | tikv_task:{time:88ms, loops:52},         ...|
-    |     └─Selection_12            | 5245632.33 | 52863   | cop[tikv] |                                                                                                                                 | tikv_task:{time:80ms, loops:52}          ...|
-    |       └─IndexRangeScan_11     | 5245632.33 | 52863   | cop[tikv] | table:logs, index:logs_covered(snapshot_id, user_id, status, source_type, target_type, amount)                                  | tikv_task:{time:60ms, loops:52}          ...|
-    +-------------------------------+------------+---------+-----------+---------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+
+```
++-------------------------------+------------+---------+-----------+---------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+
+| id                            | estRows    | actRows | task      | access object                                                                                                                   | execution info                              |
++-------------------------------+------------+---------+-----------+---------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+
+| HashAgg_13                    | 1.00       | 1       | root      |                                                                                                                                 | time:90ms, loops:2, RU:158.885311,       ...|
+| └─IndexReader_14              | 1.00       | 1       | root      |                                                                                                                                 | time:89.8ms, loops:2, cop_task: {num: 1, ...|
+|   └─HashAgg_6                 | 1.00       | 1       | cop[tikv] |                                                                                                                                 | tikv_task:{time:88ms, loops:52},         ...|
+|     └─Selection_12            | 5245632.33 | 52863   | cop[tikv] |                                                                                                                                 | tikv_task:{time:80ms, loops:52}          ...|
+|       └─IndexRangeScan_11     | 5245632.33 | 52863   | cop[tikv] | table:logs, index:logs_covered(snapshot_id, user_id, status, source_type, target_type, amount)                                  | tikv_task:{time:60ms, loops:52}          ...|
++-------------------------------+------------+---------+-----------+---------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+
+```
 
 #### ソートを含む複合インデックスを使用したSQLチューニング {#sql-tuning-with-a-composite-index-involving-sorting}
 
@@ -692,16 +716,18 @@ LIMIT
 
 当初の計画は次のとおりです。
 
-    +------------------------------+---------+---------+-----------+----------------------------------------------------------+-----------------------------------------------+--------------------------------------------+
-    | id                           | estRows | actRows | task      | access object                                            | execution info                                | operator info                              | 
-    +------------------------------+---------+---------+-----------+----------------------------------------------------------+-----------------------------------------------+--------------------------------------------+
-    | id                           | estRows | actRows | task      | access object                                            | execution info                             ...| test.id, offset:0, count:1000              | 
-    | TopN_10                      | 19.98   | 1000    | root      |                                                          | time:170.6ms, loops:2                      ...|                                            |
-    | └─IndexLookUp_23             | 19.98   | 5715    | root      |                                                          | time:166.6ms, loops:7                      ...|                                            | 
-    |   ├─Selection_22(Build)      | 19.98   | 5715    | cop[tikv] |                                                          | time:18.6ms, loops:9, cop_task: {num: 3,   ...| gt(test.id, 998464)                        | 
-    |   │ └─IndexRangeScan_20      | 433.47  | 7715    | cop[tikv] | table:test, index:test_idx(snapshot_id, user_id, status) | tikv_task:{proc max:4ms, min:4ms, avg: 4ms ...| range:[459840,459840], keep order:false    |
-    |   └─TableRowIDScan_21(Probe) | 19.98   | 5715    | cop[tikv] | table:test                                               | time:301.6ms, loops:10, cop_task: {num: 3, ...| keep order:false                           | 
-    +------------------------------+---------+---------+-----------+----------------------------------------------------------+-----------------------------------------------+--------------------------------------------+
+```
++------------------------------+---------+---------+-----------+----------------------------------------------------------+-----------------------------------------------+--------------------------------------------+
+| id                           | estRows | actRows | task      | access object                                            | execution info                                | operator info                              | 
++------------------------------+---------+---------+-----------+----------------------------------------------------------+-----------------------------------------------+--------------------------------------------+
+| id                           | estRows | actRows | task      | access object                                            | execution info                             ...| test.id, offset:0, count:1000              | 
+| TopN_10                      | 19.98   | 1000    | root      |                                                          | time:170.6ms, loops:2                      ...|                                            |
+| └─IndexLookUp_23             | 19.98   | 5715    | root      |                                                          | time:166.6ms, loops:7                      ...|                                            | 
+|   ├─Selection_22(Build)      | 19.98   | 5715    | cop[tikv] |                                                          | time:18.6ms, loops:9, cop_task: {num: 3,   ...| gt(test.id, 998464)                        | 
+|   │ └─IndexRangeScan_20      | 433.47  | 7715    | cop[tikv] | table:test, index:test_idx(snapshot_id, user_id, status) | tikv_task:{proc max:4ms, min:4ms, avg: 4ms ...| range:[459840,459840], keep order:false    |
+|   └─TableRowIDScan_21(Probe) | 19.98   | 5715    | cop[tikv] | table:test                                               | time:301.6ms, loops:10, cop_task: {num: 3, ...| keep order:false                           | 
++------------------------------+---------+---------+-----------+----------------------------------------------------------+-----------------------------------------------+--------------------------------------------+
+```
 
 クエリを最適化するには、 `(snapshot_id)`に新しいインデックスを作成します。これにより、 `id`が各`snapshot_id`グループ内でソートされるようになります。このインデックスにより、実行時間は96ミリ秒に短縮されます。 `IndexRangeScan_33`の`keep order`プロパティは`true`になり、 `TopN`は`Limit`に置き換えられます。その結果、 `IndexLookUp_35`はTiDBに1,000行のみを返すため、追加のソート操作は不要になります。
 
@@ -714,14 +740,16 @@ ANALYZE TABLE test INDEX test_new;
 
 新しい計画は次のとおりです。
 
-    +----------------------------------+---------+---------+-----------+----------------------------------------------+----------------------------------------------+----------------------------------------------------+
-    | id                               | estRows | actRows | task      | access object                                | execution info                               | operator info                                      |
-    +----------------------------------+---------+---------+-----------+----------------------------------------------+----------------------------------------------+----------------------------------------------------+
-    | Limit_14                         | 17.59   | 1000    | root      |                                              | time:96.1ms, loops:2, RU:92.300155           | offset:0, count:1000                               |
-    | └─IndexLookUp_35                 | 17.59   | 1000    | root      |                                              | time:96.1ms, loops:1, index_task:         ...|                                                    |
-    |   ├─IndexRangeScan_33(Build)     | 17.59   | 5715    | cop[tikv] | table:test, index:test_new(snapshot_id)      | time:7.25ms, loops:8, cop_task: {num: 3,  ...| range:(459840 998464,459840 +inf], keep order:true |
-    |   └─TableRowIDScan_34(Probe)     | 17.59   | 5715    | cop[tikv] | table:test                                   | time:232.9ms, loops:9, cop_task: {num: 3, ...| keep order:false                                   |
-    +----------------------------------+---------+---------+-----------+----------------------------------------------+----------------------------------------------+----------------------------------------------------+
+```
++----------------------------------+---------+---------+-----------+----------------------------------------------+----------------------------------------------+----------------------------------------------------+
+| id                               | estRows | actRows | task      | access object                                | execution info                               | operator info                                      |
++----------------------------------+---------+---------+-----------+----------------------------------------------+----------------------------------------------+----------------------------------------------------+
+| Limit_14                         | 17.59   | 1000    | root      |                                              | time:96.1ms, loops:2, RU:92.300155           | offset:0, count:1000                               |
+| └─IndexLookUp_35                 | 17.59   | 1000    | root      |                                              | time:96.1ms, loops:1, index_task:         ...|                                                    |
+|   ├─IndexRangeScan_33(Build)     | 17.59   | 5715    | cop[tikv] | table:test, index:test_new(snapshot_id)      | time:7.25ms, loops:8, cop_task: {num: 3,  ...| range:(459840 998464,459840 +inf], keep order:true |
+|   └─TableRowIDScan_34(Probe)     | 17.59   | 5715    | cop[tikv] | table:test                                   | time:232.9ms, loops:9, cop_task: {num: 3, ...| keep order:false                                   |
++----------------------------------+---------+---------+-----------+----------------------------------------------+----------------------------------------------+----------------------------------------------------+
+```
 
 #### 効率的なフィルタリングとソートのための複合インデックスを使用したSQLチューニング {#sql-tuning-with-composite-indexes-for-efficient-filtering-and-sorting}
 
@@ -761,16 +789,18 @@ KEY `index_orders_on_created_at` (`created_at`)
 
 元の実行計画は次のとおりです。
 
-    +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------+----------+------+
-    | id                             | estRows   | actRows | task      | access object                                                                  | execution info                                      | operator info                                                                          | memory   | disk |
-    +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------+----------+------+
-    | TopN_10                        | 101.00    | 101     | root      |                                                                                | time:11m9.8s, loops:2                               | orders.id:desc, offset:0, count:101                                                    | 271 KB   | N/A  |
-    | └─IndexLookUp_39               | 173.83    | 16604   | root      |                                                                                | time:11m9.8s, loops:19, index_task: {total_time:...}|                                                                                        | 20.4 MB  | N/A  |
-    |   ├─Selection_37(Build)        | 8296.70   | 12082311| cop[tikv] |                                                                                | time:26.4ms, loops:11834, cop_task: {num: 294, m...}| ge(orders.id, 1000000000), lt(orders.id, 1500000000)                                   | N/A      | N/A  |
-    |   │ └─IndexRangeScan_35        | 6934161.90| 25147450| cop[tikv] | table:orders, index:index_orders_on_created_at(created_at)                     | tikv_task:{proc max:2.15s, min:0s, avg: 58.9ms, ...}| range:[2024-04-07 18:07:52,2024-05-11 18:07:52), keep order:false                      | N/A      | N/A  |
-    |   └─Selection_38(Probe)        | 173.83    | 16604   | cop[tikv] |                                                                                | time:54m46.2s, loops:651, cop_task: {num: 1076, ...}| eq(orders.mode, "production"), eq(orders.user_id, 11111), not(isnull(orders.label_id)) | N/A      | N/A  |
-    |     └─TableRowIDScan_36        | 8296.70   | 12082311| cop[tikv] | table:orders                                                                   | tikv_task:{proc max:44.8s, min:0s, avg: 3.33s, p...}| keep order:false                                                                       | N/A      | N/A  |
-    +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------+----------+------+
+```
++--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------+----------+------+
+| id                             | estRows   | actRows | task      | access object                                                                  | execution info                                      | operator info                                                                          | memory   | disk |
++--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------+----------+------+
+| TopN_10                        | 101.00    | 101     | root      |                                                                                | time:11m9.8s, loops:2                               | orders.id:desc, offset:0, count:101                                                    | 271 KB   | N/A  |
+| └─IndexLookUp_39               | 173.83    | 16604   | root      |                                                                                | time:11m9.8s, loops:19, index_task: {total_time:...}|                                                                                        | 20.4 MB  | N/A  |
+|   ├─Selection_37(Build)        | 8296.70   | 12082311| cop[tikv] |                                                                                | time:26.4ms, loops:11834, cop_task: {num: 294, m...}| ge(orders.id, 1000000000), lt(orders.id, 1500000000)                                   | N/A      | N/A  |
+|   │ └─IndexRangeScan_35        | 6934161.90| 25147450| cop[tikv] | table:orders, index:index_orders_on_created_at(created_at)                     | tikv_task:{proc max:2.15s, min:0s, avg: 58.9ms, ...}| range:[2024-04-07 18:07:52,2024-05-11 18:07:52), keep order:false                      | N/A      | N/A  |
+|   └─Selection_38(Probe)        | 173.83    | 16604   | cop[tikv] |                                                                                | time:54m46.2s, loops:651, cop_task: {num: 1076, ...}| eq(orders.mode, "production"), eq(orders.user_id, 11111), not(isnull(orders.label_id)) | N/A      | N/A  |
+|     └─TableRowIDScan_36        | 8296.70   | 12082311| cop[tikv] | table:orders                                                                   | tikv_task:{proc max:44.8s, min:0s, avg: 3.33s, p...}| keep order:false                                                                       | N/A      | N/A  |
++--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------+----------+------+
+```
 
 `orders(user_id, mode, id, created_at, label_id)`に複合インデックス`idx_composite`を作成すると、クエリのパフォーマンスが大幅に向上します。実行時間は11分9秒からわずか5.3ミリ秒に短縮され、クエリは126,000倍以上高速化します。この大幅な改善は、以下の要因によるものです。
 
@@ -788,15 +818,17 @@ ANALYZE TABLE orders index idx_composite;
 
 新しい実行計画は次のとおりです。
 
-    +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
-    | id                             | estRows   | actRows | task      | access object                                                                  | execution info                                      | operator info                                                                                                        | memory   | disk |
-    +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
-    | IndexLookUp_32                 | 101.00    | 101     | root      |                                                                                | time:5.3ms, loops:2, RU:3.435006, index_task: {t...}| limit embedded(offset:0, count:101)                                                                                  | 128.5 KB | N/A  |
-    | ├─Limit_31(Build)              | 101.00    | 101     | cop[tikv] |                                                                                | time:1.35ms, loops:1, cop_task: {num: 1, max: 1....}| offset:0, count:101                                                                                                  | N/A      | N/A  |
-    | │ └─Selection_30               | 535.77    | 224     | cop[tikv] |                                                                                | tikv_task:{time:0s, loops:3}                        | ge(orders.created_at, 2024-04-07 18:07:52), le(orders.created_at, 2024-05-11 18:07:52), not(isnull(orders.label_id)) | N/A      | N/A  |
-    | │   └─IndexRangeScan_28        | 503893.42 | 224     | cop[tikv] | table:orders, index:idx_composite(user_id, mode, id, created_at, label_id)     | tikv_task:{time:0s, loops:3}                        | range:[11111 "production" 1000000000,11111 "production" 1500000000), keep order:true, desc                           | N/A      | N/A  |
-    | └─TableRowIDScan_29(Probe)     | 101.00    | 101     | cop[tikv] | table:orders                                                                   | time:2.9ms, loops:2, cop_task: {num: 3, max: 2.7...}| keep order:false                                                                                                     | N/A      | N/A  |
-    +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
+```
++--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
+| id                             | estRows   | actRows | task      | access object                                                                  | execution info                                      | operator info                                                                                                        | memory   | disk |
++--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
+| IndexLookUp_32                 | 101.00    | 101     | root      |                                                                                | time:5.3ms, loops:2, RU:3.435006, index_task: {t...}| limit embedded(offset:0, count:101)                                                                                  | 128.5 KB | N/A  |
+| ├─Limit_31(Build)              | 101.00    | 101     | cop[tikv] |                                                                                | time:1.35ms, loops:1, cop_task: {num: 1, max: 1....}| offset:0, count:101                                                                                                  | N/A      | N/A  |
+| │ └─Selection_30               | 535.77    | 224     | cop[tikv] |                                                                                | tikv_task:{time:0s, loops:3}                        | ge(orders.created_at, 2024-04-07 18:07:52), le(orders.created_at, 2024-05-11 18:07:52), not(isnull(orders.label_id)) | N/A      | N/A  |
+| │   └─IndexRangeScan_28        | 503893.42 | 224     | cop[tikv] | table:orders, index:idx_composite(user_id, mode, id, created_at, label_id)     | tikv_task:{time:0s, loops:3}                        | range:[11111 "production" 1000000000,11111 "production" 1500000000), keep order:true, desc                           | N/A      | N/A  |
+| └─TableRowIDScan_29(Probe)     | 101.00    | 101     | cop[tikv] | table:orders                                                                   | time:2.9ms, loops:2, cop_task: {num: 3, max: 2.7...}| keep order:false                                                                                                     | N/A      | N/A  |
++--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
+```
 
 ### TiFlashを使用する場合 {#when-to-use-tiflash}
 
@@ -830,40 +862,44 @@ where ol_i_id = i_id and ol_delivery_d >= '2007-01-02 00:00:00.000000' and ol_de
 
 TiKV での実行計画は次のとおりです。
 
-    +-------------------------------+--------------+-----------+-----------+----------------+----------------------------------------------+
-    | ID                            | ESTROWS      | ACTROWS   | TASK      | ACCESS OBJECT  | EXECUTION INFO                               |
-    +-------------------------------+--------------+-----------+-----------+----------------+----------------------------------------------+
-    | Projection_8                  | 1.00         | 1         | root      |                | time:21.1s, loops:2, RU:1023225.707561, ...  |
-    | └─HashAgg_9                   | 1.00         | 1         | root      |                | time:21.1s, loops:2, partial_worker:{ ...    |
-    |   └─Projection_38             | 3839984.46   | 3864397   | root      |                | time:21.1s, loops:3776, Concurrency:5        |
-    |     └─HashJoin_21             | 3839984.46   | 3864397   | root      |                | time:21.1s, loops:3776, build_hash_table:... |
-    |       ├─TableReader_24(Build) | 3826762.62   | 3864397   | root      |                | time:18.4s, loops:3764, cop_task: ...        |
-    |       │ └─Selection_23        | 3826762.62   | 3864397   | cop[tikv] |                | tikv_task:{proc max:717ms, min:265ms, ...    |
-    |       │   └─TableFullScan_22  | 300005811.00 | 300005811 | cop[tikv] | table:lineitem | tikv_task:{proc max:685ms, min:252ms, ...    |
-    |       └─TableReader_26(Probe) | 10000000.00  | 10000000  | root      |                | time:1.29s, loops:9780, cop_task: ...        |
-    |         └─TableFullScan_25    | 10000000.00  | 10000000  | cop[tikv] | table:part     | tikv_task:{proc max:922ms, min:468ms, ...    |
-    +-------------------------------+--------------+-----------+-----------+----------------+----------------------------------------------+
+```
++-------------------------------+--------------+-----------+-----------+----------------+----------------------------------------------+
+| ID                            | ESTROWS      | ACTROWS   | TASK      | ACCESS OBJECT  | EXECUTION INFO                               |
++-------------------------------+--------------+-----------+-----------+----------------+----------------------------------------------+
+| Projection_8                  | 1.00         | 1         | root      |                | time:21.1s, loops:2, RU:1023225.707561, ...  |
+| └─HashAgg_9                   | 1.00         | 1         | root      |                | time:21.1s, loops:2, partial_worker:{ ...    |
+|   └─Projection_38             | 3839984.46   | 3864397   | root      |                | time:21.1s, loops:3776, Concurrency:5        |
+|     └─HashJoin_21             | 3839984.46   | 3864397   | root      |                | time:21.1s, loops:3776, build_hash_table:... |
+|       ├─TableReader_24(Build) | 3826762.62   | 3864397   | root      |                | time:18.4s, loops:3764, cop_task: ...        |
+|       │ └─Selection_23        | 3826762.62   | 3864397   | cop[tikv] |                | tikv_task:{proc max:717ms, min:265ms, ...    |
+|       │   └─TableFullScan_22  | 300005811.00 | 300005811 | cop[tikv] | table:lineitem | tikv_task:{proc max:685ms, min:252ms, ...    |
+|       └─TableReader_26(Probe) | 10000000.00  | 10000000  | root      |                | time:1.29s, loops:9780, cop_task: ...        |
+|         └─TableFullScan_25    | 10000000.00  | 10000000  | cop[tikv] | table:part     | tikv_task:{proc max:922ms, min:468ms, ...    |
++-------------------------------+--------------+-----------+-----------+----------------+----------------------------------------------+
+```
 
 TiFlash上の実行計画は次のとおりです。
 
-    +--------------------------------------------+-------------+----------+--------------+----------------+--------------------------------------+
-    | ID                                         | ESTROWS     | ACTROWS  | TASK         | ACCESS OBJECT  | EXECUTION INFO                       |
-    +--------------------------------------------+-------------+----------+--------------+----------------+--------------------------------------+
-    | Projection_8                               | 1.00        | 1        | root         |                | time:1.41s, loops:2, RU:45879.127909 |
-    | └─HashAgg_52                               | 1.00        | 1        | root         |                | time:1.41s, loops:2, ...             |
-    |   └─TableReader_54                         | 1.00        | 1        | root         |                | time:1.41s, loops:2, ...             |
-    |     └─ExchangeSender_53                    | 1.00        | 1        | mpp[tiflash] |                | tiflash_task:{time:1.41s, ...        |
-    |       └─HashAgg_13                         | 1.00        | 1        | mpp[tiflash] |                | tiflash_task:{time:1.41s, ...        |
-    |         └─Projection_74                    | 3813443.11  | 3864397  | mpp[tiflash] |                | tiflash_task:{time:1.4s, ...         |
-    |           └─Projection_51                  | 3813443.11  | 3864397  | mpp[tiflash] |                | tiflash_task:{time:1.39s, ...        |
-    |             └─HashJoin_50                  | 3813443.11  | 3864397  | mpp[tiflash] |                | tiflash_task:{time:1.39s, ...        |
-    |               ├─ExchangeReceiver_31(Build) | 3800312.67  | 3864397  | mpp[tiflash] |                | tiflash_task:{time:1.05s, ...        |
-    |               │ └─ExchangeSender_30        | 3800312.67  | 3864397  | mpp[tiflash] |                | tiflash_task:{time:1.2s, ...         |
-    |               │   └─TableFullScan_28       | 3800312.67  | 3864397  | mpp[tiflash] | table:lineitem | tiflash_task:{time:1.15s, ...        |
-    |               └─ExchangeReceiver_34(Probe) | 10000000.00 | 10000000 | mpp[tiflash] |                | tiflash_task:{time:1.24s, ...        |
-    |                 └─ExchangeSender_33        | 10000000.00 | 10000000 | mpp[tiflash] |                | tiflash_task:{time:1.4s, ...         |
-    |                   └─TableFullScan_32       | 10000000.00 | 10000000 | mpp[tiflash] | table:part     | tiflash_task:{time:59.2ms, ...       |
-    +--------------------------------------------+-------------+----------+--------------+----------------+--------------------------------------+
+```
++--------------------------------------------+-------------+----------+--------------+----------------+--------------------------------------+
+| ID                                         | ESTROWS     | ACTROWS  | TASK         | ACCESS OBJECT  | EXECUTION INFO                       |
++--------------------------------------------+-------------+----------+--------------+----------------+--------------------------------------+
+| Projection_8                               | 1.00        | 1        | root         |                | time:1.41s, loops:2, RU:45879.127909 |
+| └─HashAgg_52                               | 1.00        | 1        | root         |                | time:1.41s, loops:2, ...             |
+|   └─TableReader_54                         | 1.00        | 1        | root         |                | time:1.41s, loops:2, ...             |
+|     └─ExchangeSender_53                    | 1.00        | 1        | mpp[tiflash] |                | tiflash_task:{time:1.41s, ...        |
+|       └─HashAgg_13                         | 1.00        | 1        | mpp[tiflash] |                | tiflash_task:{time:1.41s, ...        |
+|         └─Projection_74                    | 3813443.11  | 3864397  | mpp[tiflash] |                | tiflash_task:{time:1.4s, ...         |
+|           └─Projection_51                  | 3813443.11  | 3864397  | mpp[tiflash] |                | tiflash_task:{time:1.39s, ...        |
+|             └─HashJoin_50                  | 3813443.11  | 3864397  | mpp[tiflash] |                | tiflash_task:{time:1.39s, ...        |
+|               ├─ExchangeReceiver_31(Build) | 3800312.67  | 3864397  | mpp[tiflash] |                | tiflash_task:{time:1.05s, ...        |
+|               │ └─ExchangeSender_30        | 3800312.67  | 3864397  | mpp[tiflash] |                | tiflash_task:{time:1.2s, ...         |
+|               │   └─TableFullScan_28       | 3800312.67  | 3864397  | mpp[tiflash] | table:lineitem | tiflash_task:{time:1.15s, ...        |
+|               └─ExchangeReceiver_34(Probe) | 10000000.00 | 10000000 | mpp[tiflash] |                | tiflash_task:{time:1.24s, ...        |
+|                 └─ExchangeSender_33        | 10000000.00 | 10000000 | mpp[tiflash] |                | tiflash_task:{time:1.4s, ...         |
+|                   └─TableFullScan_32       | 10000000.00 | 10000000 | mpp[tiflash] | table:part     | tiflash_task:{time:59.2ms, ...       |
++--------------------------------------------+-------------+----------+--------------+----------------+--------------------------------------+
+```
 
 #### SaaS 任意フィルタリングワークロード {#saas-arbitrary-filtering-workloads}
 
@@ -908,39 +944,43 @@ FROM
 
 TiKV での実行計画は次のとおりです。
 
-    +--------------------------------+-----------+---------+-----------+-----------------------+-----------------------------------------------------+
-    | id                             | estRows   | actRows | task      | access object         | execution info                                      |
-    +--------------------------------+-----------+---------+-----------+-----------------------+-----------------------------------------------------+
-    | Union_18                       | 101.00    | 101     | root      |                       | time:2m38.6s, loops:3, RU:8662189.451027            |
-    | ├─Limit_20                     | 100.00    | 100     | root      |                       | time:23ms, loops:2                                  |
-    | │ └─TableReader_25             | 100.00    | 100     | root      |                       | time:23ms, loops:1, cop_task: {num: 1, max: 22.8...}|
-    | │   └─Limit_24                 | 100.00    | 100     | cop[tikv] |                       | tikv_task:{time:21ms, loops:3}, scan_detail: {...}  |
-    | │     └─TableRangeScan_22      | 100.00    | 100     | cop[tikv] | table:usertable       | tikv_task:{time:21ms, loops:3}                      |
-    | └─Projection_26                | 1.00      | 1       | root      |                       | time:2m38.6s, loops:2, Concurrency:OFF              |
-    |   └─HashAgg_34                 | 1.00      | 1       | root      |                       | time:2m38.6s, loops:2, partial_worker:{...}, fin.. .|
-    |     └─TableReader_35           | 1.00      | 5121    | root      |                       | time:2m38.6s, loops:7, cop_task: {num: 5121, max:...|
-    |       └─HashAgg_27             | 1.00      | 5121    | cop[tikv] |                       | tikv_task:{proc max:0s, min:0s, avg: 462.8ms, p...} |
-    |         └─TableRangeScan_32    | 10000000  | 10000000| cop[tikv] | table:usertable       | tikv_task:{proc max:0s, min:0s, avg: 460.5ms, p...} |
-    +--------------------------------+-----------+---------+-----------+-----------------------+-----------------------------------------------------+
+```
++--------------------------------+-----------+---------+-----------+-----------------------+-----------------------------------------------------+
+| id                             | estRows   | actRows | task      | access object         | execution info                                      |
++--------------------------------+-----------+---------+-----------+-----------------------+-----------------------------------------------------+
+| Union_18                       | 101.00    | 101     | root      |                       | time:2m38.6s, loops:3, RU:8662189.451027            |
+| ├─Limit_20                     | 100.00    | 100     | root      |                       | time:23ms, loops:2                                  |
+| │ └─TableReader_25             | 100.00    | 100     | root      |                       | time:23ms, loops:1, cop_task: {num: 1, max: 22.8...}|
+| │   └─Limit_24                 | 100.00    | 100     | cop[tikv] |                       | tikv_task:{time:21ms, loops:3}, scan_detail: {...}  |
+| │     └─TableRangeScan_22      | 100.00    | 100     | cop[tikv] | table:usertable       | tikv_task:{time:21ms, loops:3}                      |
+| └─Projection_26                | 1.00      | 1       | root      |                       | time:2m38.6s, loops:2, Concurrency:OFF              |
+|   └─HashAgg_34                 | 1.00      | 1       | root      |                       | time:2m38.6s, loops:2, partial_worker:{...}, fin.. .|
+|     └─TableReader_35           | 1.00      | 5121    | root      |                       | time:2m38.6s, loops:7, cop_task: {num: 5121, max:...|
+|       └─HashAgg_27             | 1.00      | 5121    | cop[tikv] |                       | tikv_task:{proc max:0s, min:0s, avg: 462.8ms, p...} |
+|         └─TableRangeScan_32    | 10000000  | 10000000| cop[tikv] | table:usertable       | tikv_task:{proc max:0s, min:0s, avg: 460.5ms, p...} |
++--------------------------------+-----------+---------+-----------+-----------------------+-----------------------------------------------------+
+```
 
 TiFlash上の実行計画は次のとおりです。
 
-    +--------------------------------+-----------+---------+--------------+--------------------+-----------------------------------------------------+
-    | id                             | estRows   | actRows | task         | access object      | execution info                                      |
-    +--------------------------------+-----------+---------+--------------+--------------------+-----------------------------------------------------+
-    | Union_18                       | 101.00    | 101     | root         |                    | time:3.44s, loops:3, RU:0.000000                    |
-    | ├─Limit_22                     | 100.00    | 100     | root         |                    | time:146.7ms, loops:2                               |
-    | │ └─TableReader_30             | 100.00    | 100     | root         |                    | time:146.7ms, loops:1, cop_task: {num: 1, max: 0...}|
-    | │   └─ExchangeSender_29        | 100.00    | 0       | mpp[tiflash] |                    |                                                     |
-    | │     └─Limit_28               | 100.00    | 0       | mpp[tiflash] |                    |                                                     |
-    | │       └─TableRangeScan_27    | 100.00    | 0       | mpp[tiflash] | table:usertable    |                                                     |
-    | └─Projection_31                | 1.00      | 1       | root         |                    | time:3.42s, loops:2, Concurrency:OFF                |
-    |   └─HashAgg_49                 | 1.00      | 1       | root         |                    | time:3.42s, loops:2, partial_worker:{...}, fin...   |
-    |     └─TableReader_51           | 1.00      | 2       | root         |                    | time:3.42s, loops:2, cop_task: {num: 4, max: 0...}  |
-    |       └─ExchangeSender_50      | 1.00      | 2       | mpp[tiflash] |                    | tiflash_task:{proc max:3.4s, min:3.15s, avg: 3...}  |
-    |         └─HashAgg_36           | 1.00      | 2       | mpp[tiflash] |                    | tiflash_task:{proc max:3.4s, min:3.15s, avg: 3...}  |
-    |           └─TableRangeScan_48 | 10000000   | 10000000| mpp[tiflash] | table:usertable    | tiflash_task:{proc max:3.4s, min:3.15s, avg: 3...}  |
-    +--------------------------------+-----------+---------+--------------+--------------------+-----------------------------------------------------+
+```
++--------------------------------+-----------+---------+--------------+--------------------+-----------------------------------------------------+
+| id                             | estRows   | actRows | task         | access object      | execution info                                      |
++--------------------------------+-----------+---------+--------------+--------------------+-----------------------------------------------------+
+| Union_18                       | 101.00    | 101     | root         |                    | time:3.44s, loops:3, RU:0.000000                    |
+| ├─Limit_22                     | 100.00    | 100     | root         |                    | time:146.7ms, loops:2                               |
+| │ └─TableReader_30             | 100.00    | 100     | root         |                    | time:146.7ms, loops:1, cop_task: {num: 1, max: 0...}|
+| │   └─ExchangeSender_29        | 100.00    | 0       | mpp[tiflash] |                    |                                                     |
+| │     └─Limit_28               | 100.00    | 0       | mpp[tiflash] |                    |                                                     |
+| │       └─TableRangeScan_27    | 100.00    | 0       | mpp[tiflash] | table:usertable    |                                                     |
+| └─Projection_31                | 1.00      | 1       | root         |                    | time:3.42s, loops:2, Concurrency:OFF                |
+|   └─HashAgg_49                 | 1.00      | 1       | root         |                    | time:3.42s, loops:2, partial_worker:{...}, fin...   |
+|     └─TableReader_51           | 1.00      | 2       | root         |                    | time:3.42s, loops:2, cop_task: {num: 4, max: 0...}  |
+|       └─ExchangeSender_50      | 1.00      | 2       | mpp[tiflash] |                    | tiflash_task:{proc max:3.4s, min:3.15s, avg: 3...}  |
+|         └─HashAgg_36           | 1.00      | 2       | mpp[tiflash] |                    | tiflash_task:{proc max:3.4s, min:3.15s, avg: 3...}  |
+|           └─TableRangeScan_48 | 10000000   | 10000000| mpp[tiflash] | table:usertable    | tiflash_task:{proc max:3.4s, min:3.15s, avg: 3...}  |
++--------------------------------+-----------+---------+--------------+--------------------+-----------------------------------------------------+
+```
 
 ##### TiKVとTiFlash間のクエリルーティング {#query-routing-between-tikv-and-tiflash}
 

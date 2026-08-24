@@ -87,28 +87,30 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 
 詳細なコード例を表示するには、 **show example usage**をクリックします。
 
-    import com.mysql.jdbc.Driver;
-    import java.sql.*;
+```
+import com.mysql.jdbc.Driver;
+import java.sql.*;
 
-    class Main {
-      public static void main(String args[]) throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        try {
-          Connection conn = DriverManager.getConnection("jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=root&password=<your_password>&sslMode=VERIFY_IDENTITY&tlsVersions=TLSv1.2&trustCertificateKeyStoreUrl=file:<your_custom_truststore_path>&trustCertificateKeyStorePassword=<your_truststore_password>");
-          Statement stmt = conn.createStatement();
-          try {
-            ResultSet rs = stmt.executeQuery("SELECT DATABASE();");
-            if (rs.next()) {
-              System.out.println("using db:" + rs.getString(1));
-            }
-          } catch (Exception e) {
-            System.out.println("exec error:" + e);
-          }
-        } catch (Exception e) {
-          System.out.println("connect error:" + e);
+class Main {
+  public static void main(String args[]) throws SQLException, ClassNotFoundException {
+    Class.forName("com.mysql.cj.jdbc.Driver");
+    try {
+      Connection conn = DriverManager.getConnection("jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=root&password=<your_password>&sslMode=VERIFY_IDENTITY&tlsVersions=TLSv1.2&trustCertificateKeyStoreUrl=file:<your_custom_truststore_path>&trustCertificateKeyStorePassword=<your_truststore_password>");
+      Statement stmt = conn.createStatement();
+      try {
+        ResultSet rs = stmt.executeQuery("SELECT DATABASE();");
+        if (rs.next()) {
+          System.out.println("using db:" + rs.getString(1));
         }
+      } catch (Exception e) {
+        System.out.println("exec error:" + e);
       }
+    } catch (Exception e) {
+      System.out.println("connect error:" + e);
     }
+  }
+}
+```
 
 パラメータの説明：
 
@@ -123,19 +125,23 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 
 ここでは、 [mysqlクライアント](https://pypi.org/project/mysqlclient/)の TLS 接続構成が例として使用されています。
 
-    host="tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com", user="root", password="<your_password>", port=4000, database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "ca.pem"}
+```
+host="tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com", user="root", password="<your_password>", port=4000, database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "ca.pem"}
+```
 
 詳細なコード例を表示するには、 **show example usage**をクリックします。
 
-    import MySQLdb
+```
+import MySQLdb
 
-    connection = MySQLdb.connect(host="tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com", port=4000, user="root", password="<your_password>", database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "ca.pem"})
+connection = MySQLdb.connect(host="tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com", port=4000, user="root", password="<your_password>", database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "ca.pem"})
 
-    with connection:
-        with connection.cursor() as cursor:
-            cursor.execute("SELECT DATABASE();")
-            m = cursor.fetchone()
-            print(m[0])
+with connection:
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT DATABASE();")
+        m = cursor.fetchone()
+        print(m[0])
+```
 
 パラメータの説明：
 
@@ -148,62 +154,66 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 
 ここでは、 [Go-MySQL-ドライバー](https://github.com/go-sql-driver/mysql)の TLS 接続構成が例として使用されています。
 
-    rootCertPool := x509.NewCertPool()
-    pem, err := ioutil.ReadFile("ca.pem")
-    if err != nil {
-        log.Fatal(err)
-    }
-    if ok := rootCertPool.AppendCertsFromPEM(pem); !ok {
-        log.Fatal("Failed to append PEM.")
-    }
-    mysql.RegisterTLSConfig("tidb", &tls.Config{
-        RootCAs:    rootCertPool,
-        MinVersion: tls.VersionTLS12,
-        ServerName: "tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com",
-    })
+```
+rootCertPool := x509.NewCertPool()
+pem, err := ioutil.ReadFile("ca.pem")
+if err != nil {
+    log.Fatal(err)
+}
+if ok := rootCertPool.AppendCertsFromPEM(pem); !ok {
+    log.Fatal("Failed to append PEM.")
+}
+mysql.RegisterTLSConfig("tidb", &tls.Config{
+    RootCAs:    rootCertPool,
+    MinVersion: tls.VersionTLS12,
+    ServerName: "tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com",
+})
 
-    db, err := sql.Open("mysql", "root:<your_password>@tcp(tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000)/test?tls=tidb")
+db, err := sql.Open("mysql", "root:<your_password>@tcp(tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000)/test?tls=tidb")
+```
 
 詳細なコード例を表示するには、 **show example usage**をクリックします。
 
-    package main
-    import (
-      "crypto/tls"
-      "crypto/x509"
-      "database/sql"
-      "fmt"
-      "io/ioutil"
-      "log"
+```
+package main
+import (
+  "crypto/tls"
+  "crypto/x509"
+  "database/sql"
+  "fmt"
+  "io/ioutil"
+  "log"
 
-      "github.com/go-sql-driver/mysql"
-    )
-    func main() {
-      rootCertPool := x509.NewCertPool()
-      pem, err := ioutil.ReadFile("ca.pem")
-      if err != nil {
-        log.Fatal(err)
-      }
-      if ok := rootCertPool.AppendCertsFromPEM(pem); !ok {
-        log.Fatal("Failed to append PEM.")
-      }
-      mysql.RegisterTLSConfig("tidb", &tls.Config{
-        RootCAs:    rootCertPool,
-        MinVersion: tls.VersionTLS12,
-        ServerName: "tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com",
-      })
-      db, err := sql.Open("mysql", "root:<your_password>@tcp(tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000)/test?tls=tidb")
-      if err != nil {
-        log.Fatal("failed to connect database", err)
-      }
-      defer db.Close()
+  "github.com/go-sql-driver/mysql"
+)
+func main() {
+  rootCertPool := x509.NewCertPool()
+  pem, err := ioutil.ReadFile("ca.pem")
+  if err != nil {
+    log.Fatal(err)
+  }
+  if ok := rootCertPool.AppendCertsFromPEM(pem); !ok {
+    log.Fatal("Failed to append PEM.")
+  }
+  mysql.RegisterTLSConfig("tidb", &tls.Config{
+    RootCAs:    rootCertPool,
+    MinVersion: tls.VersionTLS12,
+    ServerName: "tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com",
+  })
+  db, err := sql.Open("mysql", "root:<your_password>@tcp(tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000)/test?tls=tidb")
+  if err != nil {
+    log.Fatal("failed to connect database", err)
+  }
+  defer db.Close()
 
-      var dbName string
-      err = db.QueryRow("SELECT DATABASE();").Scan(&dbName)
-      if err != nil {
-        log.Fatal("failed to execute query", err)
-      }
-      fmt.Println(dbName)
-    }
+  var dbName string
+  err = db.QueryRow("SELECT DATABASE();").Scan(&dbName)
+  if err != nil {
+    log.Fatal("failed to execute query", err)
+  }
+  fmt.Println(dbName)
+}
+```
 
 パラメータの説明：
 
@@ -218,47 +228,51 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 
 ここでは、 [MySQL2](https://www.npmjs.com/package/mysql2)の TLS 接続構成が例として使用されています。
 
-    var connection = mysql.createConnection({
-      host: 'tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com',
-      port: 4000,
-      user: 'root',
-      password: '<your_password>',
-      database: 'test',
-      ssl: {
-        ca: fs.readFileSync('ca.pem'),
-        minVersion: 'TLSv1.2',
-        rejectUnauthorized: true
-      }
-    });
+```
+var connection = mysql.createConnection({
+  host: 'tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com',
+  port: 4000,
+  user: 'root',
+  password: '<your_password>',
+  database: 'test',
+  ssl: {
+    ca: fs.readFileSync('ca.pem'),
+    minVersion: 'TLSv1.2',
+    rejectUnauthorized: true
+  }
+});
+```
 
 詳細なコード例を表示するには、 **show example usage**をクリックします。
 
-    var mysql = require('mysql2');
-    var fs = require('fs');
-    var connection = mysql.createConnection({
-      host: 'tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com',
-      port: 4000,
-      user: 'root',
-      password: '<your_password>',
-      database: 'test',
-      ssl: {
-        ca: fs.readFileSync('ca.pem'),
-        minVersion: 'TLSv1.2',
-        rejectUnauthorized: true
-      }
-    });
-    connection.connect(function(err) {
-      if (err) {
-        throw err
-      }
-      connection.query('SELECT DATABASE();', function(err, rows) {
-        if (err) {
-          throw err
-        }
-        console.log(rows[0]['DATABASE()']);
-        connection.end()
-      });
-    });
+```
+var mysql = require('mysql2');
+var fs = require('fs');
+var connection = mysql.createConnection({
+  host: 'tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com',
+  port: 4000,
+  user: 'root',
+  password: '<your_password>',
+  database: 'test',
+  ssl: {
+    ca: fs.readFileSync('ca.pem'),
+    minVersion: 'TLSv1.2',
+    rejectUnauthorized: true
+  }
+});
+connection.connect(function(err) {
+  if (err) {
+    throw err
+  }
+  connection.query('SELECT DATABASE();', function(err, rows) {
+    if (err) {
+      throw err
+    }
+    console.log(rows[0]['DATABASE()']);
+    connection.end()
+  });
+});
+```
 
 パラメータの説明：
 
