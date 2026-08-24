@@ -27,13 +27,15 @@ VPCピアリングリクエストをリージョンに追加するには、そ�
 
 最初のTiDB Cloud Dedicatedクラスタを作成する際にCIDRを設定できます。クラスタ作成前にCIDRを設定する場合は、以下の操作を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用してターゲット プロジェクトに切り替えます。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
-2.  左側のナビゲーション ペインで、 **Project Settings** &gt; **Network Access**をクリックします。
+2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  **Network Access**ページで、 **Project CIDR**タブをクリックし、クラウド プロバイダーに応じて**AWS**または**Google Cloud**を選択します。
+3.  左側のナビゲーション ペインで、 **Project Settings**の下にある**Network Access**をクリックします。
 
-4.  右上隅の**Create CIDR**をクリックします。 **Create AWS CIDR**または**Create Google Cloud CIDR**ダイアログでリージョンと CIDR 値を指定し、 **Confirm**をクリックします。
+4.  **Network Access**ページで、 **Project CIDR**タブをクリックし、クラウド プロバイダーに応じて**AWS**または**Google Cloud**を選択します。
+
+5.  右上隅の**Create CIDR**をクリックします。 **Create AWS CIDR**または**Create Google Cloud CIDR**ダイアログでリージョンと CIDR 値を指定し、 **Confirm**をクリックします。
 
     ![Project-CIDR4](/media/tidb-cloud/Project-CIDR4.png)
 
@@ -50,7 +52,7 @@ VPCピアリングリクエストをリージョンに追加するには、そ�
     >     -   172.30.0.0 - 172.31.255.255
     > -   TiDB Cloud は、リージョンの CIDR ブロック サイズに基づいて、プロジェクトのリージョン内のTiDB Cloudノードの数を制限します。
 
-5.  クラウド プロバイダーと特定のリージョンの CIDR を確認する。
+6.  クラウド プロバイダーと特定のリージョンの CIDR を確認する。
 
     CIDRはデフォルトで無効になっています。CIDRを有効にするには、対象リージョンにクラスターを作成する必要があります。リージョンのCIDRが有効な場合は、そのリージョンにVPCピアリングを作成できます。
 
@@ -67,15 +69,17 @@ VPC ピアリング リクエストは、TiDB Cloudコンソールのプロジ�
 <SimpleTab>
 <div label="VPC peering setting on the project-level Network Access page">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用してターゲット プロジェクトに切り替えます。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
-2.  左側のナビゲーション ペインで、 **Project Settings** &gt; **Network Access**をクリックします。
+2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  **Network Access**ページで、 **VPC Peering**タブをクリックし、 **AWS**サブタブをクリックします。
+3.  左側のナビゲーション ペインで、 **Project Settings**の下にある**Network Access**をクリックします。
+
+4.  **Network Access**ページで、 **VPC Peering**タブをクリックし、 **AWS**サブタブをクリックします。
 
     **VPC Peering**構成はデフォルトで表示されます。
 
-4.  右上隅で**Create VPC Peering**をクリックし、 **TiDB Cloud VPC Region**を選択して、既存の AWS VPC の必要な情報を入力します。
+5.  右上隅で**Create VPC Peering**をクリックし、 **TiDB Cloud VPC Region**を選択して、既存の AWS VPC の必要な情報を入力します。
 
     -   Your VPC Region
     -   AWS Account ID
@@ -86,9 +90,9 @@ VPC ピアリング リクエストは、TiDB Cloudコンソールのプロジ�
 
     ![VPC peering](/media/tidb-cloud/vpc-peering/vpc-peering-creating-infos.png)
 
-5.  **Create**をクリックしてVPCピアリングリクエストを送信し、 **VPC Peering** &gt; **AWS**タブでVPCピアリング情報を確認します。新しく作成されたVPCピアリングのステータスは**System Checking**です。
+6.  **Create**をクリックしてVPCピアリングリクエストを送信し、 **VPC Peering** &gt; **AWS**タブでVPCピアリング情報を確認します。新しく作成されたVPCピアリングのステータスは**System Checking**です。
 
-6.  新しく作成したVPCピアリングの詳細情報を表示するには、 **Action**列の**...** &gt; **View**をクリックします。 **VPC Peering Details**ページが表示されます。
+7.  新しく作成したVPCピアリングの詳細情報を表示するには、 **Action**列の**...** &gt; **View**をクリックします。 **VPC Peering Details**ページが表示されます。
 
 </div>
 <div label="VPC peering setting on the cluster-level Networking page">
@@ -99,7 +103,7 @@ VPC ピアリング リクエストは、TiDB Cloudコンソールのプロジ�
 
         > **Tip:**
         >
-        > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+        > 複数の組織に所属している場合は、まず左上隅のコンボ ボックスを使用して対象の組織に切り替えてください。
 
     2.  ターゲット クラスターの名前をクリックすると、概要ページに移動します。
 
@@ -247,15 +251,17 @@ VPC ピアリング リクエストは、TiDB Cloudコンソールのプロジ�
 <SimpleTab>
 <div label="VPC peering setting on the project-level Network Access page">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用してターゲット プロジェクトに切り替えます。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
-2.  左側のナビゲーション ペインで、 **Project Settings** &gt; **Network Access**をクリックします。
+2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  **Network Access**ページで、 **VPC Peering**タブをクリックし、 **Google Cloud**サブタブをクリックします。
+3.  左側のナビゲーション ペインで、 **Project Settings**の下にある**Network Access**をクリックします。
+
+4.  **Network Access**ページで、 **VPC Peering**タブをクリックし、 **Google Cloud**サブタブをクリックします。
 
     **VPC Peering**構成はデフォルトで表示されます。
 
-4.  右上隅で**Create VPC Peering**をクリックし、 **TiDB Cloud VPC Region**を選択して、既存の Google Cloud VPC の必要な情報を入力します。
+5.  右上隅で**Create VPC Peering**をクリックし、 **TiDB Cloud VPC Region**を選択して、既存の Google Cloud VPC の必要な情報を入力します。
 
     > **Tip:**
     >
@@ -265,9 +271,9 @@ VPC ピアリング リクエストは、TiDB Cloudコンソールのプロジ�
     -   VPC Network Name
     -   VPC CIDR
 
-5.  **Create**をクリックしてVPCピアリングリクエストを送信し、 **VPC Peering** &gt; **Google Cloud**タブでVPCピアリング情報を確認します。新しく作成されたVPCピアリングのステータスは**System Checking**です。
+6.  **Create**をクリックしてVPCピアリングリクエストを送信し、 **VPC Peering** &gt; **Google Cloud**タブでVPCピアリング情報を確認します。新しく作成されたVPCピアリングのステータスは**System Checking**です。
 
-6.  新しく作成したVPCピアリングの詳細情報を表示するには、 **Action**列の**...** &gt; **View**をクリックします。 **VPC Peering Details**ページが表示されます。
+7.  新しく作成したVPCピアリングの詳細情報を表示するには、 **Action**列の**...** &gt; **View**をクリックします。 **VPC Peering Details**ページが表示されます。
 
 </div>
 <div label="VPC peering setting on the cluster-level Networking page">
@@ -278,7 +284,7 @@ VPC ピアリング リクエストは、TiDB Cloudコンソールのプロジ�
 
         > **Tip:**
         >
-        > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+        > 複数の組織に所属している場合は、まず左上隅のコンボ ボックスを使用して対象の組織に切り替えてください。
 
     2.  ターゲット クラスターの名前をクリックすると、概要ページに移動します。
 
