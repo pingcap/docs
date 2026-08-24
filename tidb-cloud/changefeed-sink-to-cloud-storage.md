@@ -58,7 +58,7 @@ For **Amazon S3**, you can use either **AWS Role ARN** or **AWS access key** for
 
 To use an IAM Role for authentication, follow these steps:
 
-1. On the **Destination** page for Amazon S3, enter the **S3 URI**. Make sure that the S3 bucket is in the same AWS region as your TiDB cluster.
+1. On the **Destination** page for Amazon S3, enter the **S3 URI**. Make sure that the S3 bucket is in the same AWS region as your <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent>.
 2. Under **Bucket Access**, select **AWS Role ARN**.
 3. To create a new Role ARN, click **Click here to create new one with AWS CloudFormation**. This template automatically configures the required permissions.
 
@@ -81,7 +81,7 @@ To use an IAM Role for authentication, follow these steps:
 
 To use an access key for authentication, follow these steps:
 
-1. On the **Destination** page for Amazon S3, enter the **S3 URI**. Make sure that the S3 bucket is in the same AWS region as your TiDB cluster.
+1. On the **Destination** page for Amazon S3, enter the **S3 URI**. Make sure that the S3 bucket is in the same AWS region as your <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent>.
 2. Under **Bucket Access**, select **AWS Access Key**.
 3. Fill in the following fields:
 
