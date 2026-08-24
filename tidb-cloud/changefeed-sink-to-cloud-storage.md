@@ -237,7 +237,7 @@ For **Alibaba Cloud OSS**, follow these steps to configure the changefeed:
 
 2. On the **Destination** page for Alibaba Cloud OSS, fill in the following fields:
 
-    - **Bucket URI**: enter the OSS URI in the format `oss://<BucketName>/<prefix>/`.
+    - **Bucket URI**: enter the OSS URI in the format `oss://<Your bucket name>/<prefix>/`.
     - **Access Key ID**: enter the AccessKey ID from the RAM user.
     - **Access Key Secret**: enter the AccessKey Secret from the RAM user.
 
@@ -247,7 +247,7 @@ For **Alibaba Cloud OSS**, follow these steps to configure the changefeed:
 
 </SimpleTab>
 
-Click **Next** to establish the connection from the TiDB Cloud Dedicated cluster to Amazon S3, GCS, or Azure Blob Storage. TiDB Cloud will automatically test and verify if the connection is successful.
+Click **Next** to establish the connection from the <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent> to your cloud storage. TiDB Cloud will automatically test and verify if the connection is successful.
 
 - If yes, you are directed to the next step of configuration.
 - If not, a connectivity error is displayed, and you need to handle the error. After the error is resolved, click **Next** to retry the connection.
