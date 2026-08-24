@@ -24,12 +24,17 @@ scope_filter = importlib.import_module("release-notes-ai-generator.scope_filter"
 
 
 class AzureOpenAIClientTest(unittest.TestCase):
-    def create_client(self, response):
+    def create_client(
+        self,
+        response,
+        key_name="AZURE_OPENAI_KEY",
+        base_url_name="AZURE_OPENAI_BASE_URL",
+    ):
         responses = SimpleNamespace(create=mock.Mock(return_value=response))
         sdk_client = SimpleNamespace(responses=responses)
         environment = {
-            "AZURE_OPENAI_KEY": "test-key",
-            "AZURE_OPENAI_BASE_URL": "https://example.openai.azure.com",
+            key_name: "test-key",
+            base_url_name: "https://example.openai.azure.com",
             "AZURE_OPENAI_DEPLOYMENT": "release-notes-deployment",
         }
         with (
@@ -59,6 +64,43 @@ class AzureOpenAIClientTest(unittest.TestCase):
         request = responses.create.call_args.kwargs
         self.assertEqual(schema, request["text"]["format"]["schema"])
         self.assertTrue(request["text"]["format"]["strict"])
+
+    def test_accepts_each_supported_azure_api_key_variable(self):
+        response = SimpleNamespace(
+            status="completed",
+            incomplete_details=None,
+            error=None,
+            output_text="{}",
+        )
+        for key_name in (
+            "AZURE_OPENAI_KEY",
+            "AZURE_FOUNDRY_API_KEY",
+            "AZURE_OPENAI_API_KEY",
+        ):
+            with self.subTest(key_name=key_name):
+                _client, _responses, openai_mock = self.create_client(
+                    response,
+                    key_name,
+                )
+                self.assertEqual("test-key", openai_mock.call_args.kwargs["api_key"])
+
+    def test_accepts_each_supported_base_url_variable(self):
+        response = SimpleNamespace(
+            status="completed",
+            incomplete_details=None,
+            error=None,
+            output_text="{}",
+        )
+        for base_url_name in ("AZURE_OPENAI_BASE_URL", "OPENAI_BASE_URL"):
+            with self.subTest(base_url_name=base_url_name):
+                _client, _responses, openai_mock = self.create_client(
+                    response,
+                    base_url_name=base_url_name,
+                )
+                self.assertEqual(
+                    "https://example.openai.azure.com/openai/v1/",
+                    openai_mock.call_args.kwargs["base_url"],
+                )
 
     def test_rejects_incomplete_response_with_reason(self):
         response = SimpleNamespace(

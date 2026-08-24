@@ -97,9 +97,9 @@ def add_generate_args(parser: argparse.ArgumentParser) -> None:
         help=(
             "AI provider to use. 'codex' runs the Codex CLI as a subprocess "
             "(requires codex to be installed). 'azure' calls Azure OpenAI via the "
-            "OpenAI Python SDK (requires AZURE_OPENAI_KEY and AZURE_OPENAI_BASE_URL "
-            "or OPENAI_BASE_URL, plus a deployment name from --ai-model or "
-            "AZURE_OPENAI_DEPLOYMENT). Default: codex."
+            "OpenAI Python SDK (requires a supported Azure API key environment "
+            "variable, AZURE_OPENAI_BASE_URL or OPENAI_BASE_URL, and a deployment "
+            "name from --ai-model or AZURE_OPENAI_DEPLOYMENT). Default: codex."
         ),
     )
     parser.add_argument(

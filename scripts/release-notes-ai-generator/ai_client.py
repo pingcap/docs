@@ -170,15 +170,20 @@ class AzureOpenAIClient(AIClient):
     def __init__(self, model: str | None, timeout: int):
         from openai import OpenAI
 
-        key = os.environ.get("AZURE_OPENAI_KEY", "")
+        key = (
+            os.environ.get("AZURE_OPENAI_KEY")
+            or os.environ.get("AZURE_FOUNDRY_API_KEY")
+            or os.environ.get("AZURE_OPENAI_API_KEY")
+        )
         base_url = (
             os.environ.get("AZURE_OPENAI_BASE_URL")
             or os.environ.get("OPENAI_BASE_URL", "")
         )
         if not key:
             raise ValueError(
-                "AZURE_OPENAI_KEY environment variable is required "
-                "when using --ai-provider azure"
+                "AZURE_OPENAI_KEY, AZURE_FOUNDRY_API_KEY, or "
+                "AZURE_OPENAI_API_KEY environment variable is required when "
+                "using --ai-provider azure"
             )
         if not base_url:
             raise ValueError(

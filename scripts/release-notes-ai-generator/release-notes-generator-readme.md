@@ -60,10 +60,10 @@ The generator does not create a complete formal release note. It does not genera
 
 - Prepare the AI settings in your environment.
 
-- If you use `--ai-provider azure` instead, set the following environment variables:
+- If you use `--ai-provider azure` instead, set one of `AZURE_OPENAI_KEY`, `AZURE_FOUNDRY_API_KEY`, or `AZURE_OPENAI_API_KEY` for the API key. Also set the base URL and deployment name:
 
     ```bash
-    export AZURE_OPENAI_KEY="your-key"
+    export AZURE_OPENAI_API_KEY="your-key"
     export AZURE_OPENAI_BASE_URL="https://your-resource.openai.azure.com"
     export AZURE_OPENAI_DEPLOYMENT="your-deployment-name"
     ```
