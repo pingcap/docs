@@ -49,6 +49,12 @@ If you have the required permissions, you can create a {{{ .byoc }}} instance as
 
     Only resource pools that match the selected cloud provider and region and are in the **Active** status are displayed. If no suitable resource pool is available and you are an `Organization Owner`, click **Create Resource Pool** to create one. After the resource pool becomes active, it is automatically selected for the new instance.
 
+    If the selected resource pool has a Pool vCPU Limit and its current provisioned vCPU is greater than or equal to the limit, TiDB Cloud displays a warning and you cannot create the instance in that resource pool. To continue, go to the Resource Pool details page to increase or turn off the Pool vCPU Limit, or select another resource pool.
+
+    > **Important:**
+    >
+    > Even if the current provisioned vCPU is below the Pool vCPU Limit, creating a new instance might cause the total provisioned vCPU to exceed the limit. This might constrain resource scaling and degrade the performance of all instances in the resource pool. Before creating the instance, make sure that the resource pool has sufficient vCPU capacity. If necessary, increase or turn off the Pool vCPU Limit, or select another resource pool.
+
 7. In the **Capacity** area, set the maximum number of Request Capacity Units (RCUs) for your instance. RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your instance within this range based on demand.
 
 8. For {{{ .byoc }}} instances, the high availability mode is inherited from the selected resource pool. If the resource pool uses Regional high availability, the instance uses Regional high availability. If the resource pool uses Zonal high availability, the instance uses Zonal high availability. You cannot configure the high availability mode when you create a BYOC instance. For more information, see [TiDB Cloud BYOC architecture](/tidb-cloud/architecture-concepts.md#tidb-cloud-byoc).

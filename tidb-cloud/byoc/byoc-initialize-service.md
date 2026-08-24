@@ -34,7 +34,7 @@ After preparing your backup file in Amazon S3, you can restore the data to a new
 
     Once the access keys are configured, you can initiate the restore job from the TiDB Cloud console.
 
-    During restore, select an active resource pool in the target cloud provider and region. The restored instance inherits the high availability mode of the selected resource pool.
+    During restore, select an active resource pool in the target cloud provider and region. The restored instance inherits the high availability mode of the selected resource pool. Make sure that the resource pool has sufficient vCPU capacity, because restoring an instance might cause the total provisioned vCPU to exceed the Pool vCPU Limit and degrade the performance of all instances in the resource pool. If the resource pool has reached its Pool vCPU Limit, increase or turn off the limit, or select another resource pool before continuing.
 
     For step-by-step restoration procedures, see [Restore backups from cloud storage](/tidb-cloud/premium/backup-and-restore-premium.md#restore-backups-from-cloud-storage).
 

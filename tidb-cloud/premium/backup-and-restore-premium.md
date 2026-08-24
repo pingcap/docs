@@ -244,6 +244,12 @@ To restore your data to a new {{{ .premium }}}<CustomContent plan="byoc"> or {{{
 
     For {{{ .byoc }}}, select an active resource pool in the same cloud provider and region as the backup. The restored instance inherits the high availability mode of the selected resource pool. You can restore the same backup to a Zonal or Regional resource pool if the resource pool meets the restore requirements. If no suitable resource pool is available, an `Organization Owner` can create one before restoring the instance. Other roles cannot create resource pools. For more information, see [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md).
 
+    If the selected resource pool has a Pool vCPU Limit and its current provisioned vCPU is greater than or equal to the limit, TiDB Cloud displays a warning and you cannot restore the instance to that resource pool. To continue, go to the Resource Pool details page to increase or turn off the Pool vCPU Limit, or select another resource pool.
+
+    > **Important:**
+    >
+    > Even if the current provisioned vCPU is below the Pool vCPU Limit, restoring an instance might cause the total provisioned vCPU to exceed the limit. This might constrain resource scaling and degrade the performance of all instances in the resource pool. Before restoring the instance, make sure that the resource pool has sufficient vCPU capacity. If necessary, increase or turn off the Pool vCPU Limit, or select another resource pool.
+
     </CustomContent>
 
     > **Note:**
@@ -367,6 +373,12 @@ To restore backups from cloud storage, do the following:
     <CustomContent plan="byoc">
 
     For {{{ .byoc }}}, select an active resource pool that matches the target cloud provider and region. The restored instance inherits the high availability mode of the selected resource pool. You can restore the same backup to a Zonal or Regional resource pool if the resource pool meets the restore requirements. If no suitable resource pool is available, an `Organization Owner` can create one before restoring the instance. Other roles cannot create resource pools. For more information, see [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md).
+
+    If the selected resource pool has a Pool vCPU Limit and its current provisioned vCPU is greater than or equal to the limit, TiDB Cloud displays a warning and you cannot restore the instance to that resource pool. To continue, go to the Resource Pool details page to increase or turn off the Pool vCPU Limit, or select another resource pool.
+
+    > **Important:**
+    >
+    > Even if the current provisioned vCPU is below the Pool vCPU Limit, restoring an instance might cause the total provisioned vCPU to exceed the limit. This might constrain resource scaling and degrade the performance of all instances in the resource pool. Before restoring the instance, make sure that the resource pool has sufficient vCPU capacity. If necessary, increase or turn off the Pool vCPU Limit, or select another resource pool.
 
     </CustomContent>
 
