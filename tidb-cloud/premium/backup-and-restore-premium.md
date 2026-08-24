@@ -242,7 +242,7 @@ To restore your data to a new {{{ .premium }}}<CustomContent plan="byoc"> or {{{
 
     <CustomContent plan="byoc">
 
-    For {{{ .byoc }}}, select an active resource pool in the same cloud provider and region as the backup. If no suitable resource pool is available, an `Organization Owner` can create one before restoring the instance. Other roles cannot create resource pools. For more information, see [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md).
+    For {{{ .byoc }}}, select an active resource pool in the same cloud provider and region as the backup. The restored instance inherits the high availability mode of the selected resource pool. You can restore the same backup to a Zonal or Regional resource pool if the resource pool meets the restore requirements. If no suitable resource pool is available, an `Organization Owner` can create one before restoring the instance. Other roles cannot create resource pools. For more information, see [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md).
 
     </CustomContent>
 
@@ -366,7 +366,7 @@ To restore backups from cloud storage, do the following:
 
     <CustomContent plan="byoc">
 
-    For {{{ .byoc }}}, select an active resource pool that matches the target cloud provider and region. If no suitable resource pool is available, an `Organization Owner` can create one before restoring the instance. Other roles cannot create resource pools. For more information, see [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md).
+    For {{{ .byoc }}}, select an active resource pool that matches the target cloud provider and region. The restored instance inherits the high availability mode of the selected resource pool. You can restore the same backup to a Zonal or Regional resource pool if the resource pool meets the restore requirements. If no suitable resource pool is available, an `Organization Owner` can create one before restoring the instance. Other roles cannot create resource pools. For more information, see [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md).
 
     </CustomContent>
 

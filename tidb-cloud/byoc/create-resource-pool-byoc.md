@@ -48,7 +48,18 @@ To create a resource pool, take the following steps:
 
     If you set a Pool vCPU Limit, make sure that the total vCPUs of the initial TiKV and TiFlash resources do not exceed 50% of the Pool vCPU Limit. This helps reserve capacity for future instance creation and automatic scale-out.
 
-6. In the **Pool CIDR** area, review or enter the CIDR range for the resource pool.
+6. In the **High Availability** area, select a high availability mode for the resource pool.
+
+    - **Zonal**: deploys the resource pool in a single availability zone for lower network latency.
+    - **Regional**: deploys the resource pool across multiple availability zones for higher availability and resilience against an availability-zone-level outage.
+
+    You must select a high availability mode before creating the resource pool. You cannot select the specific availability zones. TiDB Cloud determines the availability zones based on the BYOC region configuration and available cloud resources.
+
+    To create a Regional resource pool, at least three eligible availability zones must be available in the region. If this requirement is not met, you cannot create the Regional resource pool.
+
+    After the resource pool is created, you cannot change its high availability mode or availability zone placement.
+
+7. In the **Pool CIDR** area, review or enter the CIDR range for the resource pool.
 
     The resource pool CIDR is used as the network address range for resources in the resource pool and cannot be modified after the resource pool is created.
 
@@ -60,10 +71,6 @@ To create a resource pool, take the following steps:
     - It must not overlap with your application VPC CIDR or any other customer-managed network that needs to connect to this resource pool.
 
     TiDB Cloud validates CIDR overlap with known TiDB Cloud managed network ranges in the target region. TiDB Cloud cannot detect overlap with your application VPCs, on-premises networks, or VPN networks. You must verify these customer-managed network ranges before creating the resource pool.
-
-7. In the **High Availability** area, review the high availability mode.
-
-    The high availability mode is inherited from the BYOC deployment configuration of the selected region. You cannot change it when creating a Resource Pool.
 
 8. (Optional) In the **AWS Resource Tags** area, add tags.
 
