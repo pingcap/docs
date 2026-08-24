@@ -205,7 +205,7 @@ For **Alibaba Cloud OSS**, follow these steps to configure the changefeed:
 
     1. Create an OSS bucket in the same region as your TiDB cluster. For detailed instructions, see [Create a bucket](https://www.alibabacloud.com/help/en/oss/user-guide/create-a-bucket-4).
     2. Create a RAM user for the changefeed and generate an AccessKey pair. For detailed instructions, see [Create an AccessKey pair](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair).
-    3. Grant the RAM user OSS permissions. For the required permissions, see [OSS permissions and access control](https://www.alibabacloud.com/help/en/oss/user-guide/permissions-and-access-control-overview). The RAM user needs at least the following permissions:
+    3. Grant the RAM user custom RAM policy permissions to strictly limit access to the changefeed bucket prefix (least privilege). For policy structure, see [OSS permissions and access control](https://www.alibabacloud.com/help/en/oss/user-guide/permissions-and-access-control-overview).
 
         - `oss:ListObjects`
         - `oss:GetObject`
