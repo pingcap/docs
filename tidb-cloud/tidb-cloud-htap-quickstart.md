@@ -62,8 +62,8 @@ SELECT TABLE_SCHEMA, TABLE_NAME, TABLE_ID, REPLICA_COUNT, LOCATION_LABELS, AVAIL
 
 上記のステートメントの結果は次のようになります。
 
--   `AVAILABLE`は、特定のテーブルのTiFlashレプリカが利用可能かどうかを示します。`1`は利用可能、 `0`は利用不可を意味します。レプリカが利用可能になると、このステータスは変更されません。
--   `PROGRESS`はレプリケーションの進行状況を表します。値は`0`から`1`までです。`1`は少なくとも1つのレプリカがレプリケートされていることを意味します。
+- `AVAILABLE`は、特定のテーブルのTiFlashレプリカが利用可能かどうかを示します。`1`は利用可能、 `0`は利用不可を意味します。レプリカが利用可能になると、このステータスは変更されません。
+- `PROGRESS`はレプリケーションの進行状況を表します。値は`0`から`1`までです。`1`は少なくとも1つのレプリカがレプリケートされていることを意味します。
 
 ### ステップ2. HTAPを使用してデータをクエリする {#step-2-query-data-using-htap}
 
@@ -91,7 +91,7 @@ ORDER BY
 
 このステップでは、TiKV (行ベースのストレージ) とTiFlash (列ベースのストレージ) 間の実行統計を比較できます。
 
--   TiKV を使用してこのクエリの実行統計を取得するには、次のステートメントを実行します。
+- TiKV を使用してこのクエリの実行統計を取得するには、次のステートメントを実行します。
 
     ```sql
     EXPLAIN ANALYZE SELECT /*+ READ_FROM_STORAGE(TIKV[games]) */
@@ -143,7 +143,7 @@ ORDER BY
     (8 rows)
     ```
 
--   TiFlashを使用してこのクエリの実行統計を取得するには、`/*+ READ_FROM_STORAGE(TIKV[games]) */` ヒントを付けずに同じステートメントを実行します。
+- TiFlashを使用してこのクエリの実行統計を取得するには、`/*+ READ_FROM_STORAGE(TIKV[games]) */` ヒントを付けずに同じステートメントを実行します。
 
     ```sql
     EXPLAIN ANALYZE SELECT
@@ -200,8 +200,8 @@ ORDER BY
 
 ## もっと詳しく知る {#learn-more}
 
--   [TiFlashの概要](/tiflash/tiflash-overview.md)
--   [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)
--   [TiFlashからデータを読み取る](/tiflash/use-tidb-to-read-tiflash.md)
--   [MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)
--   [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
+- [TiFlashの概要](/tiflash/tiflash-overview.md)
+- [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)
+- [TiFlashからデータを読み取る](/tiflash/use-tidb-to-read-tiflash.md)
+- [MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)
+- [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)

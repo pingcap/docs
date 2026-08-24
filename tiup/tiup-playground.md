@@ -19,11 +19,11 @@ tiup playground ${version} [flags]
 
 このコマンドは実際には以下の操作を実行します。
 
--   このコマンドではPlaygroundコンポーネントのバージョンが指定されていないため、 TiUP はまずインストールされているPlaygroundコンポーネントの最新バージョンを確認します。最新バージョンが v1.12.3 であると仮定すると、このコマンドは`tiup playground:v1.12.3`と同じように動作します。
--   TiUP playgroundを使用してTiDB、TiKV、およびPDコンポーネントをインストールしていない場合、playgroundコンポーネントはこれらのコンポーネントの最新の安定版をインストールし、その後これらのインスタンスを起動します。
--   このコマンドでは TiDB、PD、TiKVコンポーネントのバージョンが指定されていないため、 TiUP playground はデフォルトで各コンポーネントの最新バージョンを使用します。最新バージョンが v8.5.4 であると仮定すると、このコマンドは`tiup playground:v1.12.3 v8.5.4`と同じように動作します。
--   このコマンドでは各コンポーネントの数を指定しないため、 TiUP playground はデフォルトで、TiDB インスタンス、TiKV インスタンス、PD インスタンス、 TiFlashインスタンスがそれぞれ 1 つずつで構成される最小のクラスタを起動します。
--   TiDB の各コンポーネントを起動した後、 TiUP Playgroundはクラスターが正常に起動したことを通知し、MySQL クライアントを介して TiDB クラスターに接続する方法や、 [TiDB Dashboard](/dashboard/dashboard-intro.md)にアクセスする方法など、いくつかの有用な情報を提供します。
+- このコマンドではPlaygroundコンポーネントのバージョンが指定されていないため、 TiUP はまずインストールされているPlaygroundコンポーネントの最新バージョンを確認します。最新バージョンが v1.12.3 であると仮定すると、このコマンドは`tiup playground:v1.12.3`と同じように動作します。
+- TiUP playgroundを使用してTiDB、TiKV、およびPDコンポーネントをインストールしていない場合、playgroundコンポーネントはこれらのコンポーネントの最新の安定版をインストールし、その後これらのインスタンスを起動します。
+- このコマンドでは TiDB、PD、TiKVコンポーネントのバージョンが指定されていないため、 TiUP playground はデフォルトで各コンポーネントの最新バージョンを使用します。最新バージョンが v8.5.4 であると仮定すると、このコマンドは`tiup playground:v1.12.3 v8.5.4`と同じように動作します。
+- このコマンドでは各コンポーネントの数を指定しないため、 TiUP playground はデフォルトで、TiDB インスタンス、TiKV インスタンス、PD インスタンス、 TiFlashインスタンスがそれぞれ 1 つずつで構成される最小のクラスタを起動します。
+- TiDB の各コンポーネントを起動した後、 TiUP Playgroundはクラスターが正常に起動したことを通知し、MySQL クライアントを介して TiDB クラスターに接続する方法や、 [TiDB Dashboard](/dashboard/dashboard-intro.md)にアクセスする方法など、いくつかの有用な情報を提供します。
 
 Playgroundコンポーネントのコマンドラインフラグを表示するには、次のコマンドを使用できます。
 
@@ -93,15 +93,15 @@ tiup playground --tag ${tag_name}
 
 TiUP playgroundを使用してTiDBクラスタを起動すると、ブラウザで次のアドレスにアクセスすることで、 [TiDB Dashboard](/dashboard/dashboard-intro.md)とGrafanaにアクセスできます。
 
--   TiDB Dashboard： `http://127.0.0.1:2379/dashboard`
+- TiDB Dashboard： `http://127.0.0.1:2379/dashboard`
 
-    -   デフォルトのユーザー名: `root`
-    -   デフォルトパスワード: `` (空欄の場合は、直接`Enter`を押してください)
+    - デフォルトのユーザー名: `root`
+    - デフォルトパスワード: `` (空欄の場合は、直接`Enter`を押してください)
 
--   Grafana： `http://127.0.0.1:3000`
+- Grafana： `http://127.0.0.1:3000`
 
-    -   デフォルトのユーザー名: `admin`
-    -   デフォルトパスワード: `admin`
+    - デフォルトのユーザー名: `admin`
+    - デフォルトパスワード: `admin`
 
 > **Note:**
 >
@@ -156,7 +156,7 @@ tiup playground scale-in --pid 86526
 
 TiUP v1.15.0以降では、 TiUP Playgroundを使用してクラスターにTiProxyをデプロイできます。
 
-1.  ファイル`tidb.toml`を作成し、以下の設定を追加してください。
+1. ファイル`tidb.toml`を作成し、以下の設定を追加してください。
 
     ```
     graceful-wait-before-shutdown=15
@@ -164,7 +164,7 @@ TiUP v1.15.0以降では、 TiUP Playgroundを使用してクラスターにTiPr
 
     この設定項目は、TiDBがサーバーをシャットダウンするまでの待機時間（秒単位）を制御し、クラスタのスケールイン操作中にクライアントが切断されるのを防ぎます。
 
-2.  TiDBクラスタを起動します。
+2. TiDBクラスタを起動します。
 
     ```shell
     tiup playground v8.5.4 --tiproxy 1 --db.config tidb.toml
@@ -195,7 +195,7 @@ TiProxyクライアントプログラム`tiproxyctl`を使用するには、 [Ti
 tiup playground v8.5.4 --pd.mode ms --pd 3 --tso 2 --scheduling 2
 ```
 
--   `--pd.mode` ：これを`ms`に設定すると、PDのマイクロサービスモードが有効になります。
--   `--pd <num>` : PDマイクロサービスのAPIの数を指定します。少なくとも`1`ある必要があります。
--   `--tso <num>` ： `tso`マイクロサービスにデプロイするインスタンスの数を指定します。
--   `--scheduling <num>` ： `scheduling`マイクロサービスにデプロイするインスタンスの数を指定します。
+- `--pd.mode` ：これを`ms`に設定すると、PDのマイクロサービスモードが有効になります。
+- `--pd <num>` : PDマイクロサービスのAPIの数を指定します。少なくとも`1`ある必要があります。
+- `--tso <num>` ： `tso`マイクロサービスにデプロイするインスタンスの数を指定します。
+- `--scheduling <num>` ： `scheduling`マイクロサービスにデプロイするインスタンスの数を指定します。

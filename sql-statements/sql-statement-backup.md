@@ -9,8 +9,8 @@ summary: TiDBデータベースにおけるBACKUPの使用方法の概要。
 
 > **Warning:**
 >
-> -   この機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
-> -   この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
+> - この機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> - この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
 `BACKUP`ステートメントは、 [BRツール](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)と同じエンジンを使用しますが、バックアップ処理は別のBRツールではなくBR自体によって実行されます。BR のすべての利点と警告は、このステートメントにも適用されます。
 
@@ -156,12 +156,12 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/hist03'
 
 相対時間でサポートされている単位は以下のとおりです。
 
--   マイクロ秒
--   2番
--   分
--   時間
--   日
--   週
+- マイクロ秒
+- 2番
+- 分
+- 時間
+- 日
+- 週
 
 SQL標準に従い、単位は常に単数形であることに注意してください。
 
@@ -185,5 +185,5 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/hist03'
 
 ## 参照 {#see-also}
 
--   [RESTORE](/sql-statements/sql-statement-restore.md)
--   [SHOW [BACKUPS|RESTORES]](/sql-statements/sql-statement-show-backups.md)
+- [RESTORE](/sql-statements/sql-statement-restore.md)
+- [SHOW [BACKUPS|RESTORES]](/sql-statements/sql-statement-show-backups.md)

@@ -15,8 +15,8 @@ TiUPは、TiDB、 TiFlash、TiCDC、および監視システムのデプロイ�
 
 以下の文書を必ずお読みください。
 
--   [TiDBのソフトウェアおよびハードウェア要件](/hardware-and-software-requirements.md)
--   [TiDB環境およびシステムコンフィグレーションチェック](/check-before-deployment.md)
+- [TiDBのソフトウェアおよびハードウェア要件](/hardware-and-software-requirements.md)
+- [TiDB環境およびシステムコンフィグレーションチェック](/check-before-deployment.md)
 
 さらに、 [TiDBセキュリティ設定のベストプラクティス](/best-practices-for-security-configuration.md)について学習することをお勧めします。
 
@@ -32,33 +32,33 @@ TiUPを制御マシンに展開するには、オンライン展開とオフラ�
 
 通常のユーザーアカウントを使用して制御マシンにログインします（例として`tidb`ユーザーを使用します）。その後のTiUPのインストールとクラスタ管理は`tidb`ユーザーが実行できます。
 
-1.  以下のコマンドを実行してTiUPをインストールしてください。
+1. 以下のコマンドを実行してTiUPをインストールしてください。
 
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-2.  TiUP環境変数を設定する：
+2. TiUP環境変数を設定する：
 
-    1.  グローバル環境変数を再宣言します。
+    1. グローバル環境変数を再宣言します。
 
         ```shell
         source .bash_profile
         ```
 
-    2.  TiUPがインストールされているかどうかを確認してください。
+    2. TiUPがインストールされているかどうかを確認してください。
 
         ```shell
         which tiup
         ```
 
-3.  TiUPクラスタコンポーネントをインストールします。
+3. TiUPクラスタコンポーネントをインストールします。
 
     ```shell
     tiup cluster
     ```
 
-4.  TiUPが既にインストールされている場合は、 TiUPクラスタコンポーネントを最新バージョンにアップデートしてください。
+4. TiUPが既にインストールされている場合は、 TiUPクラスタコンポーネントを最新バージョンにアップデートしてください。
 
     ```shell
     tiup update --self && tiup update cluster
@@ -66,7 +66,7 @@ TiUPを制御マシンに展開するには、オンライン展開とオフラ�
 
     `Updated successfully!`が表示された場合、 TiUPクラスタは正常に更新されています。
 
-5.  TiUPクラスターの現在のバージョンを確認してください。
+5. TiUPクラスターの現在のバージョンを確認してください。
 
     ```shell
     tiup --binary cluster
@@ -96,29 +96,29 @@ https://download.pingcap.com/tidb-community-toolkit-{version}-linux-{arch}.tar.g
 
 **方法2** ： `tiup mirror clone`を使用してオフラインコンポーネントパッケージを手動でパックします。詳細な手順は次のとおりです。
 
-1.  TiUPパッケージマネージャーをオンラインでインストールしてください。
+1. TiUPパッケージマネージャーをオンラインでインストールしてください。
 
-    1.  TiUPツールをインストールしてください。
+    1. TiUPツールをインストールしてください。
 
         ```shell
         curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
         ```
 
-    2.  グローバル環境変数を再宣言します。
+    2. グローバル環境変数を再宣言します。
 
         ```shell
         source .bash_profile
         ```
 
-    3.  TiUPがインストールされているかどうかを確認してください。
+    3. TiUPがインストールされているかどうかを確認してください。
 
         ```shell
         which tiup
         ```
 
-2.  TiUPを使ってミラーを引き出します。
+2. TiUPを使ってミラーを引き出します。
 
-    1.  インターネットに接続できるマシンで、必要なコンポーネントを取り出してください。
+    1. インターネットに接続できるマシンで、必要なコンポーネントを取り出してください。
 
         ```shell
         tiup mirror clone tidb-community-server-${version}-linux-amd64 ${version} --os=linux --arch=amd64
@@ -126,7 +126,7 @@ https://download.pingcap.com/tidb-community-toolkit-{version}-linux-{arch}.tar.g
 
         上記のコマンドは、現在のディレクトリに`tidb-community-server-${version}-linux-amd64`という名前のディレクトリを作成します。このディレクトリには、クラスターの起動に必要なコンポーネントパッケージが含まれています。
 
-    2.  `tar`コマンドを使用してコンポーネントパッケージを梱包し、隔離された環境にある制御マシンにパッケージを送信します。
+    2. `tar`コマンドを使用してコンポーネントパッケージを梱包し、隔離された環境にある制御マシンにパッケージを送信します。
 
         ```bash
         tar czvf tidb-community-server-${version}-linux-amd64.tar.gz tidb-community-server-${version}-linux-amd64
@@ -134,11 +134,11 @@ https://download.pingcap.com/tidb-community-toolkit-{version}-linux-{arch}.tar.g
 
         `tidb-community-server-${version}-linux-amd64.tar.gz`は独立したオフライン環境パッケージです。
 
-3.  オフラインミラーをカスタマイズするか、既存のオフラインミラーの内容を調整します。
+3. オフラインミラーをカスタマイズするか、既存のオフラインミラーの内容を調整します。
 
     既存のオフラインミラーを調整する場合（コンポーネントの新しいバージョンを追加する場合など）、以下の手順に従ってください。
 
-    1.  オフラインミラーを取得する際、コンポーネントやバージョン情報などの特定の情報をパラメータで指定することで、不完全なオフラインミラーを取得できます。たとえば、次のコマンドを実行すると、 TiUP v1.12.3 とTiUP クラスタ v1.12.3 のオフラインミラーのみを含むオフラインミラーを取得できます。
+    1. オフラインミラーを取得する際、コンポーネントやバージョン情報などの特定の情報をパラメータで指定することで、不完全なオフラインミラーを取得できます。たとえば、次のコマンドを実行すると、 TiUP v1.12.3 とTiUP クラスタ v1.12.3 のオフラインミラーのみを含むオフラインミラーを取得できます。
 
         ```bash
         tiup mirror clone tiup-custom-mirror-v1.12.3 --tiup v1.12.3 --cluster v1.12.3
@@ -146,9 +146,9 @@ https://download.pingcap.com/tidb-community-toolkit-{version}-linux-{arch}.tar.g
 
         特定のプラットフォーム用のコンポーネントのみが必要な場合は、 `--os`または`--arch`パラメーターを使用して指定できます。
 
-    2.  「 TiUPを使用してミラーを引き出す」の手順2を参照し、この不完全なオフラインミラーを隔離された環境にある制御機に送信します。
+    2. 「 TiUPを使用してミラーを引き出す」の手順2を参照し、この不完全なオフラインミラーを隔離された環境にある制御機に送信します。
 
-    3.  隔離された環境にある制御マシン上で、現在のオフラインミラーのパスを確認してください。TiUPツールが最新バージョンであれば、以下のコマンドを実行することで現在のミラーアドレスを取得できます。
+    3. 隔離された環境にある制御マシン上で、現在のオフラインミラーのパスを確認してください。TiUPツールが最新バージョンであれば、以下のコマンドを実行することで現在のミラーアドレスを取得できます。
 
         ```bash
         tiup mirror show
@@ -156,7 +156,7 @@ https://download.pingcap.com/tidb-community-toolkit-{version}-linux-{arch}.tar.g
 
         上記のコマンドの出力で`show`コマンドが存在しないと表示される場合は、 TiUPの古いバージョンを使用している可能性があります。この場合、 `$HOME/.tiup/tiup.toml`から現在のミラー アドレスを取得できます。このミラー アドレスを記録してください。以降の手順では、 `${base_mirror}`このアドレスを参照するために使用されます。
 
-    4.  不完全なオフラインミラーを既存のオフラインミラーに統合する：
+    4. 不完全なオフラインミラーを既存のオフラインミラーに統合する：
 
         まず、現在のオフラインミラーにある`keys`ディレクトリを`$HOME/.tiup`ディレクトリにコピーします。
 
@@ -170,7 +170,7 @@ https://download.pingcap.com/tidb-community-toolkit-{version}-linux-{arch}.tar.g
         tiup mirror merge tiup-custom-mirror-v1.12.3
         ```
 
-    5.  上記の手順が完了したら、 `tiup list`コマンドを実行して結果を確認します。このドキュメントの例では、 `tiup list tiup`と`tiup list cluster`の両方の出力から`v1.12.3`の対応するコンポーネントが利用可能であることが示されています。
+    5. 上記の手順が完了したら、 `tiup list`コマンドを実行して結果を確認します。このドキュメントの例では、 `tiup list tiup`と`tiup list cluster`の両方の出力から`v1.12.3`の対応するコンポーネントが利用可能であることが示されています。
 
 #### オフラインのTiUPコンポーネントをデプロイ {#deploy-the-offline-tiup-component}
 
@@ -210,13 +210,13 @@ tiup cluster template > topology.yaml
 
 以下の2つの一般的なシナリオでは、コマンドを実行することで推奨トポロジーテンプレートを生成できます。
 
--   ハイブリッド デプロイメントの場合: 複数のインスタンスが 1 台のマシンにデプロイされます。詳細は[ハイブリッド展開トポロジー](/hybrid-deployment-topology.md)を参照。
+- ハイブリッド デプロイメントの場合: 複数のインスタンスが 1 台のマシンにデプロイされます。詳細は[ハイブリッド展開トポロジー](/hybrid-deployment-topology.md)を参照。
 
     ```shell
     tiup cluster template --full > topology.yaml
     ```
 
--   地理的に分散した展開の場合: TiDB クラスターは地理的に分散したデータ センターに展開されます。詳細については、[地理的に分散した展開トポロジー](/geo-distributed-deployment-topology.md)を参照してください。
+- 地理的に分散した展開の場合: TiDB クラスターは地理的に分散したデータ センターに展開されます。詳細については、[地理的に分散した展開トポロジー](/geo-distributed-deployment-topology.md)を参照してください。
 
     ```shell
     tiup cluster template --multi-dc > topology.yaml
@@ -263,17 +263,17 @@ alertmanager_servers:
 
 > **Note:**
 >
-> -   グローバルに適用されるべきパラメータについては、設定ファイルの`server_configs`セクションで、対応するコンポーネントのこれらのパラメータを設定します。
-> -   特定のノードで有効にするパラメータについては、このノードの`config`でこれらのパラメータを設定します。
-> -   `.`を使用して、構成のサブカテゴリを指定します (例: `log.slow-threshold` 。その他の形式については、 [TiUP構成テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)を参照してください。
-> -   対象マシン上に作成するユーザーグループ名を指定する必要がある場合は、 [この例](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml#L7)を参照してください。
+> - グローバルに適用されるべきパラメータについては、設定ファイルの`server_configs`セクションで、対応するコンポーネントのこれらのパラメータを設定します。
+> - 特定のノードで有効にするパラメータについては、このノードの`config`でこれらのパラメータを設定します。
+> - `.`を使用して、構成のサブカテゴリを指定します (例: `log.slow-threshold` 。その他の形式については、 [TiUP構成テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)を参照してください。
+> - 対象マシン上に作成するユーザーグループ名を指定する必要がある場合は、 [この例](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml#L7)を参照してください。
 
 設定の詳細については、以下の設定例を参照してください。
 
--   [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example)
--   [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/release-8.5/etc/config-template.toml)
--   [PD `config.toml.example`](https://github.com/tikv/pd/blob/release-8.5/conf/config.toml)
--   [TiFlash `config.toml.example`](https://github.com/pingcap/tiflash/blob/release-8.5/etc/config-template.toml)
+- [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example)
+- [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/release-8.5/etc/config-template.toml)
+- [PD `config.toml.example`](https://github.com/tikv/pd/blob/release-8.5/conf/config.toml)
+- [TiFlash `config.toml.example`](https://github.com/pingcap/tiflash/blob/release-8.5/etc/config-template.toml)
 
 ## ステップ4. デプロイコマンドを実行します {#step-4-run-the-deployment-command}
 
@@ -281,32 +281,32 @@ alertmanager_servers:
 >
 > TiUP ( `--user`で指定) を介してクラスタをデプロイする際に初期化に使用するユーザーを、キーまたはクロスパスワードのいずれかを使用して安全に認証できます。
 >
-> -   秘密鍵を使用する場合は、 `-i`または`--identity_file`を使用して鍵のパスを指定します。
-> -   パスワードを使用する場合は、 `-p`フラグを追加して、パスワード入力ウィンドウを開きます。
-> -   対象マシンへのパスワード不要ログインが設定されている場合、認証は不要です。
+> - 秘密鍵を使用する場合は、 `-i`または`--identity_file`を使用して鍵のパスを指定します。
+> - パスワードを使用する場合は、 `-p`フラグを追加して、パスワード入力ウィンドウを開きます。
+> - 対象マシンへのパスワード不要ログインが設定されている場合、認証は不要です。
 >
 > 一般的に、 TiUPが実際にプロセスを実行するために使用するユーザーとグループ ( `topology.yaml`で指定され、デフォルト値は`tidb`です) は、次の例外を除き、ターゲット マシン上に自動的に作成されます。
 >
-> -   `topology.yaml`で設定されたユーザー名は、既にターゲットマシン上に存在します。
-> -   コマンドラインで`--skip-create-user`オプションを使用して、ユーザーを作成する手順を明示的にスキップしました。
+> - `topology.yaml`で設定されたユーザー名は、既にターゲットマシン上に存在します。
+> - コマンドラインで`--skip-create-user`オプションを使用して、ユーザーを作成する手順を明示的にスキップしました。
 >
 > `topology.yaml`で合意されたユーザーとグループが自動的に作成されるかどうかに関わらず、 TiUPは自動的にSSHキーのペアを生成し、各マシン上でそのユーザーに対してシークレットフリーのログインを設定します。このユーザーとSSHキーは、以降のすべての操作でマシンを管理するために使用され、初期化に使用されたユーザーとパスワードは、デプロイ完了後は使用されなくなります。
 
 `deploy`コマンドを実行する前に、 `check`コマンドと`check --apply`コマンドを使用して、クラスター内の潜在的なリスクを検出し、自動的に修復してください。
 
-1.  潜在的なリスクを確認してください。
+1. 潜在的なリスクを確認してください。
 
     ```shell
     tiup cluster check ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
-2.  自動修復を有効にする：
+2. 自動修復を有効にする：
 
     ```shell
     tiup cluster check ./topology.yaml --apply --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
-3.  TiDBクラスタをデプロイ：
+3. TiDBクラスタをデプロイ：
 
     ```shell
     tiup cluster deploy tidb-test v8.5.4 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
@@ -314,11 +314,11 @@ alertmanager_servers:
 
 上記の`tiup cluster deploy`コマンドでは、次のようになります。
 
--   `tidb-test`は、デプロイされる TiDB クラスタの名前です。
--   `v8.5.4`は、デプロイする TiDB クラスタのバージョンです。 `tiup list tidb`を実行すると、サポートされている最新バージョンを確認できます。
--   `topology.yaml`は初期化設定ファイルです。
--   `--user root` `root`ユーザーとしてターゲット マシンにログインし、クラスタのデプロイを完了することを示します。 `root`ユーザーは、ターゲット マシンに対して`ssh`および`sudo`の権限を持っている必要があります。あるいは、 `ssh`および`sudo`の権限を持つ他のユーザーを使用してデプロイを完了することもできます。
--   `[-i]`と`[-p]`はオプションです。ターゲット マシンへのログインをパスワードなしで設定している場合は、これらのパラメーターは不要です。そうでない場合は、2 つのパラメーターのいずれかを選択してください。 `[-i]`は、ターゲット マシンへのアクセス権を持つルート ユーザー (または`--user`で指定された他のユーザー) の秘密鍵です。 `[-p]`は、ユーザー パスワードを対話的に入力するために使用されます。
+- `tidb-test`は、デプロイされる TiDB クラスタの名前です。
+- `v8.5.4`は、デプロイする TiDB クラスタのバージョンです。 `tiup list tidb`を実行すると、サポートされている最新バージョンを確認できます。
+- `topology.yaml`は初期化設定ファイルです。
+- `--user root` `root`ユーザーとしてターゲット マシンにログインし、クラスタのデプロイを完了することを示します。 `root`ユーザーは、ターゲット マシンに対して`ssh`および`sudo`の権限を持っている必要があります。あるいは、 `ssh`および`sudo`の権限を持つ他のユーザーを使用してデプロイを完了することもできます。
+- `[-i]`と`[-p]`はオプションです。ターゲット マシンへのログインをパスワードなしで設定している場合は、これらのパラメーターは不要です。そうでない場合は、2 つのパラメーターのいずれかを選択してください。 `[-i]`は、ターゲット マシンへのアクセス権を持つルート ユーザー (または`--user`で指定された他のユーザー) の秘密鍵です。 `[-p]`は、ユーザー パスワードを対話的に入力するために使用されます。
 
 出力ログの最後に``Deployed cluster `tidb-test` successfully``と表示されます。これは、デプロイが成功したことを示しています。
 
@@ -348,8 +348,8 @@ TiUP cluster v1.9.0以降、新しい起動方法としてセーフスタート�
 
 > **Note:**
 >
-> -   TiDBクラスタの安全な起動後、パスワードなしでrootユーザーとしてTiDBにログインすることはできません。そのため、今後のログインのために、コマンド出力に表示されるパスワードを記録しておく必要があります。
-> -   パスワードは 1 回だけ生成されます。記録していない場合、または忘れた場合は、 [`root`パスワードを忘れる](/user-account-management.md#forget-the-root-password)を参照してパスワードを変更してください。
+> - TiDBクラスタの安全な起動後、パスワードなしでrootユーザーとしてTiDBにログインすることはできません。そのため、今後のログインのために、コマンド出力に表示されるパスワードを記録しておく必要があります。
+> - パスワードは 1 回だけ生成されます。記録していない場合、または忘れた場合は、 [`root`パスワードを忘れる](/user-account-management.md#forget-the-root-password)を参照してパスワードを変更してください。
 
 方法1：セーフスタート
 
@@ -387,17 +387,17 @@ tiup cluster display tidb-test
 
 TiDBクラスタとともに[TiFlash](/tiflash/tiflash-overview.md)をデプロイしている場合は、以下のドキュメントを参照してください。
 
--   [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)
--   [TiFlashクラスタの管理](/tiflash/maintain-tiflash.md)
--   [TiFlashアラートのルールと解決策](/tiflash/tiflash-alert-rules.md)
--   [TiFlashのトラブルシューティング](/tiflash/troubleshoot-tiflash.md)
+- [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)
+- [TiFlashクラスタの管理](/tiflash/maintain-tiflash.md)
+- [TiFlashアラートのルールと解決策](/tiflash/tiflash-alert-rules.md)
+- [TiFlashのトラブルシューティング](/tiflash/troubleshoot-tiflash.md)
 
 TiDBクラスタとともに[TiCDC](/ticdc/ticdc-overview.md)をデプロイしている場合は、データのストリーミング方法について以下のドキュメントを参照してください。
 
--   [変更フィードの概要](/ticdc/ticdc-changefeed-overview.md)
--   [変更フィードを管理する](/ticdc/ticdc-manage-changefeed.md)
--   [TiCDCのトラブルシューティング](/ticdc/troubleshoot-ticdc.md)
--   [TiCDCに関するよくある質問](/ticdc/ticdc-faq.md)
+- [変更フィードの概要](/ticdc/ticdc-changefeed-overview.md)
+- [変更フィードを管理する](/ticdc/ticdc-manage-changefeed.md)
+- [TiCDCのトラブルシューティング](/ticdc/troubleshoot-ticdc.md)
+- [TiCDCに関するよくある質問](/ticdc/ticdc-faq.md)
 
 オンライン サービスを中断せずに TiDB クラスターをスケールアウトまたはスケールインしたい場合は、 [TiUPを使用してTiDBクラスタをスケーリングする](/scale-tidb-using-tiup.md)を参照してください。
 

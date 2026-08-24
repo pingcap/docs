@@ -13,37 +13,37 @@ TiDB Ansible バージョン: 3.1.1
 
 ## 新機能 {#new-features}
 
--   TiDB
+- TiDB
 
-    -   `auto_rand_base` のテーブルオプションを追加 [＃16812](https://github.com/pingcap/tidb/pull/16812)
-    -   `Feature ID`コメントを追加: SQL文の特別なコメントでは、登録された文のフラグメントのみがパーサーによって解析されます。それ以外の場合、文は無視されます[＃16155](https://github.com/pingcap/tidb/pull/16155)
+    - `auto_rand_base` のテーブルオプションを追加 [＃16812](https://github.com/pingcap/tidb/pull/16812)
+    - `Feature ID`コメントを追加: SQL文の特別なコメントでは、登録された文のフラグメントのみがパーサーによって解析されます。それ以外の場合、文は無視されます[＃16155](https://github.com/pingcap/tidb/pull/16155)
 
--   TiFlash
+- TiFlash
 
-    -   `handle`目と`version`列をキャッシュして、単一の読み取り要求のディスクI/Oを削減します。
-    -   DeltaTreeエンジンの読み取りおよび書き込みワークロードに関連するグラフィックスをGrafanaに追加します
-    -   `Chunk`コーデックの 10 進データエンコードを最適化します
-    -   TiFlashの負荷が低いときに開いているファイル記述子の数を減らす
+    - `handle`目と`version`列をキャッシュして、単一の読み取り要求のディスクI/Oを削減します。
+    - DeltaTreeエンジンの読み取りおよび書き込みワークロードに関連するグラフィックスをGrafanaに追加します
+    - `Chunk`コーデックの 10 進データエンコードを最適化します
+    - TiFlashの負荷が低いときに開いているファイル記述子の数を減らす
 
 ## バグ修正 {#bug-fixes}
 
--   TiDB
+- TiDB
 
-    -   インスタンスレベルでの分離読み取り設定が有効にならない問題と、TiDB をアップグレードした後に分離読み取り設定が誤って保持される問題を修正しました[＃16482](https://github.com/pingcap/tidb/pull/16482) [＃16802](https://github.com/pingcap/tidb/pull/16802)
-    -   ハッシュパーティションテーブルのパーティション選択構文を修正し、 `partition (P0)` などの構文でエラーが報告されないようにしました。 [＃16076](https://github.com/pingcap/tidb/pull/16076)
-    -   `UPDATE` SQL 文がビューからのクエリのみ実行し、ビューを更新しない場合でも、更新文でエラーが報告される問題を修正しました[＃16789](https://github.com/pingcap/tidb/pull/16789)
-    -   ネストされたクエリから`not not`を削除することによって誤った結果が発生する問題を修正しました [＃16423](https://github.com/pingcap/tidb/pull/16423)
+    - インスタンスレベルでの分離読み取り設定が有効にならない問題と、TiDB をアップグレードした後に分離読み取り設定が誤って保持される問題を修正しました[＃16482](https://github.com/pingcap/tidb/pull/16482) [＃16802](https://github.com/pingcap/tidb/pull/16802)
+    - ハッシュパーティションテーブルのパーティション選択構文を修正し、 `partition (P0)` などの構文でエラーが報告されないようにしました。 [＃16076](https://github.com/pingcap/tidb/pull/16076)
+    - `UPDATE` SQL 文がビューからのクエリのみ実行し、ビューを更新しない場合でも、更新文でエラーが報告される問題を修正しました[＃16789](https://github.com/pingcap/tidb/pull/16789)
+    - ネストされたクエリから`not not`を削除することによって誤った結果が発生する問題を修正しました [＃16423](https://github.com/pingcap/tidb/pull/16423)
 
--   TiFlash
+- TiFlash
 
-    -   異常状態にあるリージョンからデータを読み取る際にエラーが発生する問題を修正しました
-    -   TiFlashのテーブル名のマッピングを修正して、 `recover table` / `flashback table`正しくサポートする
-    -   テーブル名を変更するときに発生する可能性のあるデータ損失の問題を修正するためにストレージパスを変更します
-    -   オンライン更新シナリオの読み取りモードを変更して読み取りパフォーマンスを向上させる
-    -   データベース/テーブル名に特殊文字が含まれている場合、アップグレード後にTiFlash が正常に起動しない問題を修正しました。
+    - 異常状態にあるリージョンからデータを読み取る際にエラーが発生する問題を修正しました
+    - TiFlashのテーブル名のマッピングを修正して、 `recover table` / `flashback table`正しくサポートする
+    - テーブル名を変更するときに発生する可能性のあるデータ損失の問題を修正するためにストレージパスを変更します
+    - オンライン更新シナリオの読み取りモードを変更して読み取りパフォーマンスを向上させる
+    - データベース/テーブル名に特殊文字が含まれている場合、アップグレード後にTiFlash が正常に起動しない問題を修正しました。
 
--   ツール
+- ツール
 
-    -   Backup & Restore (BR)
+    - Backup & Restore (BR)
 
-        -   BRが`auto_random`属性を持つテーブルを復元した後、データを挿入すると重複エントリエラーが発生する可能性がある問題を修正しました。 [＃241](https://github.com/pingcap/br/issues/241)
+        - BRが`auto_random`属性を持つテーブルを復元した後、データを挿入すると重複エントリエラーが発生する可能性がある問題を修正しました。 [＃241](https://github.com/pingcap/br/issues/241)

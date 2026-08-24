@@ -38,11 +38,11 @@ EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 
 子演算子`└─TableFullScan_18`から戻ると、その実行プロセスは次のようになります。これは現時点では最適ではありません。
 
-1.  コプロセッサ（TiKV）は、 `trips`テーブル全体を`TableFullScan`演算として読み取ります。その後、読み取った行をTiKV内の`Selection_19`の演算子に渡します。
-2.  述語`WHERE start_date BETWEEN ..`は演算子`Selection_19`でフィルタリングされます。この選択に該当する行は約`250`行と推定されます。この数は統計情報と演算子のロジックに基づいて推定されることに注意してください。演算子`└─TableFullScan_18`には`stats:pseudo`と表示されますが、これはテーブルに実際の統計情報が存在しないことを意味します。`ANALYZE TABLE trips`を実行して統計情報を収集すると、統計の精度が向上することが期待されます。
-3.  選択基準を満たす行には、関数`count`が適用されます。これも演算子`StreamAgg_9`内で完了しますが、この演算子も TiKV 内にあります ( `cop[tikv]` )。TiKV コプロセッサは、MySQL の組み込み関数を多数実行できます。そのうちの 1 つが`count`です。
-4.  `StreamAgg_9`の結果は、TiDBサーバー内にある`TableReader_21`演算子（ `root`のタスク）に送信されます。この演算子の`estRows`列の値は`1`です。これは、演算子がアクセス対象のTiKVリージョンごとに1行ずつ受け取ることを意味します。これらのリクエストの詳細については、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
-5.  次に、演算子`StreamAgg_20`は演算子`└─TableReader_21`の各行に関数`count`適用します。これは演算子[`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)からもわかるように、約 56 行になります。これはルート演算子であるため、結果をクライアントに返します。
+1. コプロセッサ（TiKV）は、 `trips`テーブル全体を`TableFullScan`演算として読み取ります。その後、読み取った行をTiKV内の`Selection_19`の演算子に渡します。
+2. 述語`WHERE start_date BETWEEN ..`は演算子`Selection_19`でフィルタリングされます。この選択に該当する行は約`250`行と推定されます。この数は統計情報と演算子のロジックに基づいて推定されることに注意してください。演算子`└─TableFullScan_18`には`stats:pseudo`と表示されますが、これはテーブルに実際の統計情報が存在しないことを意味します。`ANALYZE TABLE trips`を実行して統計情報を収集すると、統計の精度が向上することが期待されます。
+3. 選択基準を満たす行には、関数`count`が適用されます。これも演算子`StreamAgg_9`内で完了しますが、この演算子も TiKV 内にあります ( `cop[tikv]` )。TiKV コプロセッサは、MySQL の組み込み関数を多数実行できます。そのうちの 1 つが`count`です。
+4. `StreamAgg_9`の結果は、TiDBサーバー内にある`TableReader_21`演算子（ `root`のタスク）に送信されます。この演算子の`estRows`列の値は`1`です。これは、演算子がアクセス対象のTiKVリージョンごとに1行ずつ受け取ることを意味します。これらのリクエストの詳細については、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
+5. 次に、演算子`StreamAgg_20`は演算子`└─TableReader_21`の各行に関数`count`適用します。これは演算子[`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)からもわかるように、約 56 行になります。これはルート演算子であるため、結果をクライアントに返します。
 
 > **Note:**
 >
@@ -114,9 +114,9 @@ SHOW STATS_HEALTHY;
 
 現在の実行計画は、次の点で効率的です。
 
--   作業の大部分はTiKVコプロセッサ内で処理されます。ネットワークを介してTiDBに送り返され、処理されるのは56行のみです。これらの行はそれぞれ短く、選択範囲に一致するカウントのみが格納されます。
+- 作業の大部分はTiKVコプロセッサ内で処理されます。ネットワークを介してTiDBに送り返され、処理されるのは56行のみです。これらの行はそれぞれ短く、選択範囲に一致するカウントのみが格納されます。
 
--   TiDB ( `StreamAgg_20` )とTiKV ( `└─StreamAgg_9` )の両方で行数を集計するには、メモリ使用量の面で非常に効率的なストリーム集計を使用します。
+- TiDB ( `StreamAgg_20` )とTiKV ( `└─StreamAgg_9` )の両方で行数を集計するには、メモリ使用量の面で非常に効率的なストリーム集計を使用します。
 
 現在の実行計画の最大の問題は、述語`start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59'`すぐに適用されないことです。まず演算子`TableFullScan`ですべての行が読み込まれ、その後選択が適用されます。`SHOW CREATE TABLE trips`出力から原因がわかります。
 

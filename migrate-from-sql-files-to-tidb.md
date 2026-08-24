@@ -9,8 +9,8 @@ summary: SQLファイルからTiDBへのデータ移行方法を学びましょ�
 
 ## 前提条件 {#prerequisites}
 
--   [TiUPを使用してTiDB Lightningをインストールする](/migration-tools.md)
--   [TiDB Lightningの対象データベースに必要な権限を付与します](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database)
+- [TiUPを使用してTiDB Lightningをインストールする](/migration-tools.md)
+- [TiDB Lightningの対象データベースに必要な権限を付与します](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database)
 
 ## ステップ1. SQLファイルを準備する {#step-1-prepare-sql-files}
 
@@ -22,14 +22,14 @@ TiDBにデータをインポートするには、対象データベースのテ�
 
 Dumplingを使用してデータをエクスポートする場合、テーブルスキーマファイルは自動的にエクスポートされます。その他の方法でエクスポートされたデータについては、以下のいずれかの方法でテーブルスキーマを作成できます。
 
--   **方法 1** : TiDB Lightningを使用してターゲット テーブル スキーマを作成します。
+- **方法 1** : TiDB Lightningを使用してターゲット テーブル スキーマを作成します。
 
     必要なDDLステートメントを含むSQLファイルを作成します。
 
-    -   `CREATE DATABASE`ファイルに`${db_name}-schema-create.sql` } ステートメントを追加します。
-    -   `CREATE TABLE`ファイルに`${db_name}.${table_name}-schema.sql` } ステートメントを追加します。
+    - `CREATE DATABASE`ファイルに`${db_name}-schema-create.sql` } ステートメントを追加します。
+    - `CREATE TABLE`ファイルに`${db_name}.${table_name}-schema.sql` } ステートメントを追加します。
 
--   **方法2** ：対象テーブルのスキーマを手動で作成する。
+- **方法2** ：対象テーブルのスキーマを手動で作成する。
 
 ## ステップ3．設定ファイルを作成する {#step-3-create-the-configuration-file}
 
@@ -81,8 +81,8 @@ TiDB Lightning は`~/.aws/credentials`からの認証情報ファイルの読み
 
 インポートが開始された後、以下のいずれかの方法で進行状況を確認できます。
 
--   ログ内のキーワード`progress`を`grep`することで、インポートの進行状況を確認できます。このログはデフォルトで 5 分ごとに更新されます。
--   Grafana ダッシュボードを使用します。詳細については、 [TiDB Lightningモニタリング](/tidb-lightning/monitor-tidb-lightning.md)を参照してください。
+- ログ内のキーワード`progress`を`grep`することで、インポートの進行状況を確認できます。このログはデフォルトで 5 分ごとに更新されます。
+- Grafana ダッシュボードを使用します。詳細については、 [TiDB Lightningモニタリング](/tidb-lightning/monitor-tidb-lightning.md)を参照してください。
 
 インポートが完了すると、 TiDB Lightning は自動的に終了します。`tidb-lightning.log`の最後の行に`the whole procedure completed`が含まれているかどうかを確認してください。含まれている場合は、インポートは成功です。含まれていない場合は、インポート中にエラーが発生しました。エラーメッセージの指示に従ってエラーに対処してください。
 

@@ -60,10 +60,10 @@ TiDBの`SET PASSWORD`文はMySQLと完全に互換性があります。互換性
 
 ## 参照 {#see-also}
 
--   [CREATE USER](/sql-statements/sql-statement-create-user.md)
+- [CREATE USER](/sql-statements/sql-statement-create-user.md)
 
 <CustomContent platform="tidb">
 
--   [権限管理](/privilege-management.md)
+- [権限管理](/privilege-management.md)
 
 </CustomContent>

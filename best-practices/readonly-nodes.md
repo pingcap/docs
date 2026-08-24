@@ -26,7 +26,7 @@ tikv_servers:
 
 ### 2. 配置ルールを使用して、ラーナーとして読み取り専用ノードにデータを保存する {#2-use-placement-rules-to-store-data-on-read-only-nodes-as-learners}
 
-1.  `pd-ctl config placement-rules`コマンドを実行して、デフォルトの配置ルールをエクスポートします。
+1. `pd-ctl config placement-rules`コマンドを実行して、デフォルトの配置ルールをエクスポートします。
 
     ```shell
     pd-ctl config placement-rules rule-bundle load --out="rules.json"
@@ -54,7 +54,7 @@ tikv_servers:
     ]
     ```
 
-2.  すべてのデータをラーナーとして読み取り専用ノードに保存します。以下の例はデフォルトの設定に基づいています。
+2. すべてのデータをラーナーとして読み取り専用ノードに保存します。以下の例はデフォルトの設定に基づいています。
 
     ```json
     [
@@ -94,7 +94,7 @@ tikv_servers:
     ]
     ```
 
-3.  上記の構成を PD に書き込むには、 `pd-ctl config placement-rules`コマンドを使用します。
+3. 上記の構成を PD に書き込むには、 `pd-ctl config placement-rules`コマンドを使用します。
 
     ```shell
     pd-ctl config placement-rules rule-bundle save --in="rules.json"
@@ -102,8 +102,8 @@ tikv_servers:
 
 > **Note:**
 >
-> -   大規模なデータセットを持つクラスターで上記の操作を実行すると、クラスター全体のデータが読み取り専用ノードに完全に複製されるまでに時間がかかる場合があります。この間、読み取り専用ノードはサービスを提供できない可能性があります。
-> -   バックアップの特別な実装のため、各ラベルのラーナー数は 1 を超えることはできません。そうでない場合、バックアップ中に重複データが生成されます。
+> - 大規模なデータセットを持つクラスターで上記の操作を実行すると、クラスター全体のデータが読み取り専用ノードに完全に複製されるまでに時間がかかる場合があります。この間、読み取り専用ノードはサービスを提供できない可能性があります。
+> - バックアップの特別な実装のため、各ラベルのラーナー数は 1 を超えることはできません。そうでない場合、バックアップ中に重複データが生成されます。
 
 ### 3. Follower Readを使用して読み取り専用ノードからデータを読み取る {#3-use-follower-read-to-read-data-from-read-only-nodes}
 

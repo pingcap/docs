@@ -7,10 +7,10 @@ summary: 単一クラスターのマルチレプリカ災害復旧ソリュー�
 
 このドキュメントでは、単一クラスタ内の複数のレプリカに基づく災害復旧（DR）ソリューションについて説明します。このドキュメントは、以下の構成になっています。
 
--   ソリューション紹介
--   クラスターをセットアップしてレプリカを構成する方法
--   クラスターを監視する方法
--   DRスイッチオーバーを実行する方法
+- ソリューション紹介
+- クラスターをセットアップしてレプリカを構成する方法
+- クラスターを監視する方法
+- DRスイッチオーバーを実行する方法
 
 ## 導入 {#introduction}
 
@@ -26,7 +26,7 @@ summary: 単一クラスターのマルチレプリカ災害復旧ソリュー�
 
 この例では、TiDBには5つのレプリカと3つのリージョンが含まれています。リージョン1はプライマリリージョン、リージョン2はセカンダリリージョン、リージョン3は投票に使用されます。同様に、PDクラスターにも5つのレプリカが含まれており、TiDBクラスターと基本的に同じように機能します。
 
-1.  次のようなトポロジ ファイルを作成します。
+1. 次のようなトポロジ ファイルを作成します。
 
     ```toml
     global:
@@ -89,10 +89,10 @@ summary: 単一クラスターのマルチレプリカ災害復旧ソリュー�
 
     上記の構成では、次のオプションを使用して、リージョン間 DR を最適化します。
 
-    -   `server.grpc-compression-type: gzip`設定すると、TiKV での gRPC メッセージ圧縮が有効になり、ネットワーク トラフィックが削減されます。
-    -   `raftstore.raft-min-election-timeout-ticks`と`raftstore.raft-max-election-timeout-ticks`設定して、リージョン 3 が選挙に参加するまでの時間を延長し、このリージョン内のレプリカがリーダーとして投票されるのを防ぎます。
+    - `server.grpc-compression-type: gzip`設定すると、TiKV での gRPC メッセージ圧縮が有効になり、ネットワーク トラフィックが削減されます。
+    - `raftstore.raft-min-election-timeout-ticks`と`raftstore.raft-max-election-timeout-ticks`設定して、リージョン 3 が選挙に参加するまでの時間を延長し、このリージョン内のレプリカがリーダーとして投票されるのを防ぎます。
 
-2.  上記の構成ファイルを使用してクラスターを作成します。
+2. 上記の構成ファイルを使用してクラスターを作成します。
 
     ```shell
     tiup cluster deploy drtest v6.4.0 ./topo.yaml
@@ -124,7 +124,7 @@ summary: 単一クラスターのマルチレプリカ災害復旧ソリュー�
     >
     > 利用可能なすべての PD ノードの中で、優先順位番号が最も高いノードがリーダーになります。
 
-3.  配置ルールを作成し、テスト テーブルのプライマリ レプリカをリージョン 1 に固定します。
+3. 配置ルールを作成し、テスト テーブルのプライマリ レプリカをリージョン 1 に固定します。
 
     ```sql
     -- Create two placement rules: the first rule specifies that region 1 works as the primary region, and region 2 as the secondary region.
@@ -153,10 +153,10 @@ summary: 単一クラスターのマルチレプリカ災害復旧ソリュー�
 
 GrafanaまたはTiDB Dashboardにアクセスすることで、TiKV、TiDB、PD、およびクラスター内のその他のコンポーネントのパフォーマンスメトリックを監視できます。コンポーネントのステータスに基づいて、DRスイッチオーバーを実行するかどうかを判断できます。詳細については、以下のドキュメントをご覧ください。
 
--   [TiDBの主要な監視指標](/grafana-tidb-dashboard.md)
--   [TiKVの主要な監視指標](/grafana-tikv-dashboard.md)
--   [PDの主要なモニタリング指標](/grafana-pd-dashboard.md)
--   [TiDB Dashboard監視ページ](/dashboard/dashboard-monitoring.md)
+- [TiDBの主要な監視指標](/grafana-tidb-dashboard.md)
+- [TiKVの主要な監視指標](/grafana-tikv-dashboard.md)
+- [PDの主要なモニタリング指標](/grafana-pd-dashboard.md)
+- [TiDB Dashboard監視ページ](/dashboard/dashboard-monitoring.md)
 
 ## DRスイッチオーバーを実行する {#perform-a-dr-switchover}
 
@@ -166,7 +166,7 @@ GrafanaまたはTiDB Dashboardにアクセスすることで、TiKV、TiDB、PD�
 
 計画的スイッチオーバーとは、メンテナンスの必要性に基づいてプライマリリージョンとセカンダリリージョン間でスケジュールされたスイッチオーバーです。DRシステムが正常に動作しているかどうかを確認するために使用できます。このセクションでは、計画的スイッチオーバーの実行方法について説明します。
 
-1.  次のコマンドを実行して、すべてのユーザー テーブルと PD リーダーをリージョン 2 に切り替えます。
+1. 次のコマンドを実行して、すべてのユーザー テーブルと PD リーダーをリージョン 2 に切り替えます。
 
     ```sql
     -- Apply the rule secondary_rule_for_region2 to the corresponding user tables.
@@ -185,19 +185,19 @@ GrafanaまたはTiDB Dashboardにアクセスすることで、TiKV、TiDB、PD�
     tiup ctl:v6.4.0 pd member leader_priority pd-4 3
     ```
 
-2.  GrafanaでPDノードとTiKVノードを監視し、PDテーブルとユーザーテーブルのリーダーがターゲットリージョンに転送されていることを確認します。元のリージョンに戻す手順は前述の手順と同じであるため、このドキュメントでは説明しません。
+2. GrafanaでPDノードとTiKVノードを監視し、PDテーブルとユーザーテーブルのリーダーがターゲットリージョンに転送されていることを確認します。元のリージョンに戻す手順は前述の手順と同じであるため、このドキュメントでは説明しません。
 
 ### 計画外の切り替え {#unplanned-switchover}
 
 計画外のスイッチオーバーとは、災害発生時にプライマリリージョンとセカンダリリージョン間で行われるスイッチオーバーを指します。また、DRシステムの有効性を検証するために災害シナリオをシミュレートするために開始されるプライマリリージョンとセカンダリリージョン間のスイッチオーバーも含まれます。
 
-1.  次のコマンドを実行して、リージョン 1 内のすべての TiKV、TiDB、および PD ノードを停止します。
+1. 次のコマンドを実行して、リージョン 1 内のすべての TiKV、TiDB、および PD ノードを停止します。
 
     ```shell
     tiup cluster stop drtest -N tidb-dr-test1:20160,tidb-dr-test2:20160,tidb-dr-test1:2379,tidb-dr-test2:2379
     ```
 
-2.  次のコマンドを実行して、すべてのユーザー テーブルのリーダーをリージョン 2 に切り替えます。
+2. 次のコマンドを実行して、すべてのユーザー テーブルのリーダーをリージョン 2 に切り替えます。
 
     ```sql
     -- Apply the rule secondary_rule_for_region2 to the corresponding user tables.

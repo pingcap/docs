@@ -32,9 +32,9 @@ mysql> SHOW PROCESSLIST;
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
--   TiDBの`State`列はあまり意味を持ちません。クエリは並列に実行され、各ゴルーチンは常に異なる状態を持つため、状態を単一の値として表現することはTiDBではより複雑です。
+- TiDBの`State`列はあまり意味を持ちません。クエリは並列に実行され、各ゴルーチンは常に異なる状態を持つため、状態を単一の値として表現することはTiDBではより複雑です。
 
 ## 参照 {#see-also}
 
--   [KILL](/sql-statements/sql-statement-kill.md)
--   [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)
+- [KILL](/sql-statements/sql-statement-kill.md)
+- [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)

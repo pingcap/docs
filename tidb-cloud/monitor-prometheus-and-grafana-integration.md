@@ -13,9 +13,9 @@ TiDB Cloudは[Prometheus](https://prometheus.io/)APIエンドポイントを提�
 
 TiDB Cloudは、2022年3月15日よりプロジェクトレベルのPrometheus統合（ベータ版）をサポートしてきました。2025年10月21日より、TiDB CloudレベルのPrometheus統合（PREVIEW）を導入します。2025年12月2日より、クラスターレベルのPrometheus統合が一般提供（GA）となります。
 
--   **クラスタレベルのPrometheus統合**：2025年10月21日までに組織内に削除されていない従来のプロジェクトレベルのPrometheus統合が残っていない場合、 TiDB Cloudは組織が最新の機能強化を体験できるように、クラスタレベルのPrometheus統合を提供します。
+- **クラスタレベルのPrometheus統合**：2025年10月21日までに組織内に削除されていない従来のプロジェクトレベルのPrometheus統合が残っていない場合、 TiDB Cloudは組織が最新の機能強化を体験できるように、クラスタレベルのPrometheus統合を提供します。
 
--   **従来のプロジェクトレベルの Prometheus 統合 (ベータ版)** : 2025 年 10 月 21 日時点で組織内に少なくとも 1 つの従来のプロジェクトレベルの Prometheus 統合が削除されずに残っている場合、 TiDB Cloud は、現在のダッシュボードへの影響を回避するために、組織向けにプロジェクトレベルで既存および新規の統合の両方を保持します。
+- **従来のプロジェクトレベルの Prometheus 統合 (ベータ版)** : 2025 年 10 月 21 日時点で組織内に少なくとも 1 つの従来のプロジェクトレベルの Prometheus 統合が削除されずに残っている場合、 TiDB Cloud は、現在のダッシュボードへの影響を回避するために、組織向けにプロジェクトレベルで既存および新規の統合の両方を保持します。
 
     > **Note**
     >
@@ -23,14 +23,14 @@ TiDB Cloudは、2022年3月15日よりプロジェクトレベルのPrometheus�
 
 ## 前提条件 {#prerequisites}
 
--   TiDB CloudをPrometheusと統合するには、自己ホスト型またはマネージド型のPrometheusサービスが必要です。
+- TiDB CloudをPrometheusと統合するには、自己ホスト型またはマネージド型のPrometheusサービスが必要です。
 
--   TiDB Cloudのサードパーティ メトリクス統合を設定するには、 TiDB Cloudで`Organization Owner`または`Project Owner`アクセス権が必要です。統合ページを表示するには、 TiDB Cloudのプロジェクト内の対象のTiDB Cloud Dedicatedクラスターにアクセスするための`Project Viewer`ロール以上が必要です。
+- TiDB Cloudのサードパーティ メトリクス統合を設定するには、 TiDB Cloudで`Organization Owner`または`Project Owner`アクセス権が必要です。統合ページを表示するには、 TiDB Cloudのプロジェクト内の対象のTiDB Cloud Dedicatedクラスターにアクセスするための`Project Viewer`ロール以上が必要です。
 
 ## 制限 {#limitation}
 
--   PrometheusとGrafanaの統合機能は、現在[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでのみ利用可能です。
--   クラスターの状態が**CREATING** 、 **RESTORING** 、 **PAUSED** 、または**RESUMING**の場合、Prometheus および Grafana の統合は利用できません。
+- PrometheusとGrafanaの統合機能は、現在[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでのみ利用可能です。
+- クラスターの状態が**CREATING** 、 **RESTORING** 、 **PAUSED** 、または**RESUMING**の場合、Prometheus および Grafana の統合は利用できません。
 
 ## 手順 {#steps}
 
@@ -43,21 +43,21 @@ Prometheus サービスでTiDB Cloudのメトリクスを読み取るように�
 <SimpleTab>
 <div label="Cluster-level Prometheus integration">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで、 **Settings** &gt; **Integrations**をクリックします。
-3.  **Integrations**ページで、 **Integration to Prometheus**をクリックします。
-4.  **Add File**をクリックすると、現在のクラスター用の`scrape_config`ファイルが生成されて表示されます。
-5.  `scrape_config`ファイルの内容のコピーを作成して、後で使用してください。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
+2. 左側のナビゲーションペインで、 **Settings** &gt; **Integrations**をクリックします。
+3. **Integrations**ページで、 **Integration to Prometheus**をクリックします。
+4. **Add File**をクリックすると、現在のクラスター用の`scrape_config`ファイルが生成されて表示されます。
+5. `scrape_config`ファイルの内容のコピーを作成して、後で使用してください。
 
 </div>
 <div label="Legacy project-level Prometheus integration (Beta)">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
-2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
-3.  左側のナビゲーションペインで、 **Project Settings**の下にある**Integrations**をクリックします。
-4.  **Integrations**ページで、 **Integration to Prometheus (BETA)**をクリックします。
-5.  **Add File**をクリックすると、現在のプロジェクトのscrape_configファイルが生成されて表示されます。
-6.  `scrape_config`ファイルの内容のコピーを作成して、後で使用できるようにします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
+2. プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
+3. 左側のナビゲーションペインで、 **Project Settings**の下にある**Integrations**をクリックします。
+4. **Integrations**ページで、 **Integration to Prometheus (BETA)**をクリックします。
+5. **Add File**をクリックすると、現在のプロジェクトのscrape_configファイルが生成されて表示されます。
+6. `scrape_config`ファイルの内容のコピーを作成して、後で使用できるようにします。
 
 </div>
 </SimpleTab>
@@ -68,30 +68,30 @@ Prometheus サービスでTiDB Cloudのメトリクスを読み取るように�
 
 ### ステップ2．Prometheusとの統合 {#step-2-integrate-with-prometheus}
 
-1.  Prometheusサービスで指定された監視ディレクトリ内で、Prometheusの設定ファイルを探してください。
+1. Prometheusサービスで指定された監視ディレクトリ内で、Prometheusの設定ファイルを探してください。
 
     例えば、 `/etc/prometheus/prometheus.yml` 。
 
-2.  Prometheus の設定ファイルで、 `scrape_configs`セクションを探し、 TiDB Cloudから取得した`scrape_config`ファイルの内容をそのセクションにコピーします。
+2. Prometheus の設定ファイルで、 `scrape_configs`セクションを探し、 TiDB Cloudから取得した`scrape_config`ファイルの内容をそのセクションにコピーします。
 
-3.  Prometheusサービスで、 **Status** &gt; **[ターゲット]**を確認し、新しい`scrape_config`ファイルが読み込まれていることを確認してください。読み込まれていない場合は、Prometheusサービスを再起動する必要があるかもしれません。
+3. Prometheusサービスで、 **Status** &gt; **[ターゲット]**を確認し、新しい`scrape_config`ファイルが読み込まれていることを確認してください。読み込まれていない場合は、Prometheusサービスを再起動する必要があるかもしれません。
 
 ### ステップ3. Grafana GUIダッシュボードを使用してメトリクスを視覚化する {#step-3-use-grafana-gui-dashboards-to-visualize-the-metrics}
 
 PrometheusサービスがTiDB Cloudからメトリクスを読み取るようになったら、Grafana GUIダッシュボードを使用して、次のようにメトリクスを視覚化できます。
 
-1.  [Prometheus統合バージョン](#prometheus-integration-versions)バージョンに応じて、 TiDB Cloud for Prometheus の Grafana ダッシュボード JSON をダウンロードするリンクは異なります。
+1. [Prometheus統合バージョン](#prometheus-integration-versions)バージョンに応じて、 TiDB Cloud for Prometheus の Grafana ダッシュボード JSON をダウンロードするリンクは異なります。
 
-    -   クラスターレベルでのPrometheus統合については、 [ここ](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker.json)GrafanaダッシュボードJSONファイルをダウンロードしてください。
-    -   従来のプロジェクトレベルでのPrometheus統合（ベータ版）については、 [ここ](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-grafana-dashboard-UI.json)GrafanaダッシュボードJSONファイルをダウンロードしてください。
+    - クラスターレベルでのPrometheus統合については、 [ここ](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker.json)GrafanaダッシュボードJSONファイルをダウンロードしてください。
+    - 従来のプロジェクトレベルでのPrometheus統合（ベータ版）については、 [ここ](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-grafana-dashboard-UI.json)GrafanaダッシュボードJSONファイルをダウンロードしてください。
 
-2.  メトリクスを視覚化するには、 [このJSONをGrafana GUIにインポートしてください](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard)
+2. メトリクスを視覚化するには、 [このJSONをGrafana GUIにインポートしてください](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard)
 
     > **Note:**
     >
     > 既にPrometheusとGrafanaを使用してTiDB Cloudを監視しており、新たに利用可能になったメトリクスを組み込みたい場合は、既存のダッシュボードのJSONを直接更新するのではなく、新しいダッシュボードを作成することをお勧めします。
 
-3.  （オプション）パネルの追加や削除、データソースの変更、表示オプションの修正などにより、必要に応じてダッシュボードをカスタマイズできます。
+3. （オプション）パネルの追加や削除、データソースの変更、表示オプションの修正などにより、必要に応じてダッシュボードをカスタマイズできます。
 
 Grafana の使用方法の詳細については、 [Grafanaのドキュメント](https://grafana.com/docs/grafana/latest/getting-started/getting-started-prometheus/)を参照してください。
 
@@ -99,10 +99,10 @@ Grafana の使用方法の詳細については、 [Grafanaのドキュメント
 
 データセキュリティを向上させるために、 `scrape_config`ファイルベアラートークンを定期的にローテーションすることが一般的なベストプラクティスです。
 
-1.  [ステップ1](#step-1-get-a-scrape_config-file-for-prometheus)に従って、Prometheus 用の新しい`scrape_config`ファイルを作成します。
-2.  新しいファイルの内容をPrometheusの設定ファイルに追加してください。
-3.  Prometheus サービスがTiDB Cloudから引き続き読み取れることを確認したら、Prometheus 設定ファイルから古い`scrape_config`ファイルの内容を削除します。
-4.  プロジェクトまたはクラスターの**Integrations**ページで、対応する古い`scrape_config`ファイルを削除して、他のユーザーがTiDB Cloud Prometheus エンドポイントから読み取るために使用できないようにします。
+1. [ステップ1](#step-1-get-a-scrape_config-file-for-prometheus)に従って、Prometheus 用の新しい`scrape_config`ファイルを作成します。
+2. 新しいファイルの内容をPrometheusの設定ファイルに追加してください。
+3. Prometheus サービスがTiDB Cloudから引き続き読み取れることを確認したら、Prometheus 設定ファイルから古い`scrape_config`ファイルの内容を削除します。
+4. プロジェクトまたはクラスターの**Integrations**ページで、対応する古い`scrape_config`ファイルを削除して、他のユーザーがTiDB Cloud Prometheus エンドポイントから読み取るために使用できないようにします。
 
 ## Prometheusで利用可能なメトリクス {#metrics-available-to-prometheus}
 
@@ -144,6 +144,6 @@ Prometheusは、TiDBクラスタに関して以下のメトリックデータを
 
 ## FAQ {#faq}
 
--   なぜ同じメトリックが、GrafanaとTiDB Cloudコンソールで同時に異なる値を示すのでしょうか？
+- なぜ同じメトリックが、GrafanaとTiDB Cloudコンソールで同時に異なる値を示すのでしょうか？
 
     GrafanaとTiDB Cloudでは集計計算ロジックが異なるため、表示される集計値が異なる場合があります。より詳細なメトリック値を取得するには、Grafanaの`mini step`設定を調整してください。

@@ -7,9 +7,9 @@ summary: TiDB でサポートされている数値データ型について学習
 
 TiDB は、以下を含むすべての MySQL 数値型をサポートしています。
 
--   [整数型](#integer-types) (正確な値)
--   [浮動小数点型](#floating-point-types) (近似値)
--   [固定小数点型](#fixed-point-types) (正確な値)
+- [整数型](#integer-types) (正確な値)
+- [浮動小数点型](#floating-point-types) (近似値)
+- [固定小数点型](#fixed-point-types) (正確な値)
 
 ## 整数型 {#integer-types}
 

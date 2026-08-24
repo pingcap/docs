@@ -189,9 +189,9 @@ SELECT PARTITION_NAME, TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS
 
 > **Note:**
 >
-> -   圧縮中にデータが更新された場合、圧縮完了後も`TOTAL_DELTA_ROWS` 0以外の値のままになることがあります。これは正常な動作であり、これらの更新が圧縮されていないことを示しています。これらの更新を圧縮するには、 `ALTER TABLE ... COMPACT`ステートメントを再度実行してください。
+> - 圧縮中にデータが更新された場合、圧縮完了後も`TOTAL_DELTA_ROWS` 0以外の値のままになることがあります。これは正常な動作であり、これらの更新が圧縮されていないことを示しています。これらの更新を圧縮するには、 `ALTER TABLE ... COMPACT`ステートメントを再度実行してください。
 >
-> -   `TOTAL_DELTA_ROWS`は行数ではなくデータバージョンを示します。例えば、行を挿入してから削除した場合、 `TOTAL_DELTA_ROWS` 2ずつ増加します。
+> - `TOTAL_DELTA_ROWS`は行数ではなくデータバージョンを示します。例えば、行を挿入してから削除した場合、 `TOTAL_DELTA_ROWS` 2ずつ増加します。
 
 ## 互換性 {#compatibility}
 
@@ -205,5 +205,5 @@ SELECT PARTITION_NAME, TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS
 
 ## 参照 {#see-also}
 
--   [ALTER TABLE](/sql-statements/sql-statement-alter-table.md)
--   [KILL](/sql-statements/sql-statement-kill.md)
+- [ALTER TABLE](/sql-statements/sql-statement-alter-table.md)
+- [KILL](/sql-statements/sql-statement-kill.md)

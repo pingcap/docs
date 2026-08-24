@@ -9,10 +9,10 @@ summary: Alibaba Cloud Endpoint Service のプライベート リンク接続を
 
 このメカニズムは次のように機能します。
 
-1.  プライベート リンク接続は、 `advertised.listeners`で定義されたブローカー外部アドレスを返すブートストラップ ポートを使用して Alibaba Cloud エンドポイント サービスに接続します。
-2.  プライベート リンク接続は、ブローカーの外部アドレスを使用してエンドポイント サービスに接続します。
-3.  Alibaba Cloud エンドポイント サービスは、リクエストをロード バランサーに転送します。
-4.  ロード バランサーは、ポート マッピングに基づいて、対応する Kafka ブローカーにリクエストを転送します。
+1. プライベート リンク接続は、 `advertised.listeners`で定義されたブローカー外部アドレスを返すブートストラップ ポートを使用して Alibaba Cloud エンドポイント サービスに接続します。
+2. プライベート リンク接続は、ブローカーの外部アドレスを使用してエンドポイント サービスに接続します。
+3. Alibaba Cloud エンドポイント サービスは、リクエストをロード バランサーに転送します。
+4. ロード バランサーは、ポート マッピングに基づいて、対応する Kafka ブローカーにリクエストを転送します。
 
 たとえば、ポート マッピングは次のようになります。
 
@@ -24,27 +24,27 @@ summary: Alibaba Cloud Endpoint Service のプライベート リンク接続を
 
 ## 前提条件 {#prerequisites}
 
--   Kafka クラスターがあること、またはクラスターを設定するための次の権限があることを確認します。
+- Kafka クラスターがあること、またはクラスターを設定するための次の権限があることを確認します。
 
-    -   ECSノードを管理する
-    -   VPCとvSwitchを管理する
-    -   ECS ノードに接続して Kafka ノードを構成する
+    - ECSノードを管理する
+    - VPCとvSwitchを管理する
+    - ECS ノードに接続して Kafka ノードを構成する
 
--   Alibaba Cloud アカウントでロードバランサーとエンドポイント サービスを設定するには、次の権限があることを確認してください。
+- Alibaba Cloud アカウントでロードバランサーとエンドポイント サービスを設定するには、次の権限があることを確認してください。
 
-    -   ロードバランサーを管理する
-    -   エンドポイントサービスの管理
+    - ロードバランサーを管理する
+    - エンドポイントサービスの管理
 
--   TiDB Cloud EssentialはAlibaba Cloudでホストされており、アクティブです。後で使用するために、以下の詳細情報を取得して保存してください。
+- TiDB Cloud EssentialはAlibaba Cloudでホストされており、アクティブです。後で使用するために、以下の詳細情報を取得して保存してください。
 
-    -   Alibaba CloudアカウントID
-    -   可用性ゾーン（AZ）
+    - Alibaba CloudアカウントID
+    - 可用性ゾーン（AZ）
 
 Alibaba Cloud アカウント ID とアベイラビリティーゾーンを表示するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**Settings** &gt; **Networking**をクリックします。
-2.  **Alibaba Cloud Private Endpoints for External Services**領域で、**Create Private Endpoint for External Services**をクリックします。
-3.  表示されたダイアログで、Alibaba Cloud アカウント ID とアベイラビリティーゾーンを見つけることができます。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**Settings** &gt; **Networking**をクリックします。
+2. **Alibaba Cloud Private Endpoints for External Services**領域で、**Create Private Endpoint for External Services**をクリックします。
+3. 表示されたダイアログで、Alibaba Cloud アカウント ID とアベイラビリティーゾーンを見つけることができます。
 
 次の表は、展開情報の例を示しています。
 
@@ -67,33 +67,33 @@ Alibaba Cloud アカウント ID とアベイラビリティーゾーンを表�
 
 Kafka VPC には次のものが必要です。
 
--   ブローカー用のプライベート vSwitch が 3 つ (AZ ごとに 1 つ)。
--   任意の AZ にパブリック vSwitch を 1 つ、インターネットに接続できる Bastion ノードを 1 つ、プライベート vSwitch を 3 つ配置することで、Kafka クラスターを簡単にセットアップできます。本番環境では、Kafka VPC に接続できる独自の Bastion ノードを配置することもできます。
+- ブローカー用のプライベート vSwitch が 3 つ (AZ ごとに 1 つ)。
+- 任意の AZ にパブリック vSwitch を 1 つ、インターネットに接続できる Bastion ノードを 1 つ、プライベート vSwitch を 3 つ配置することで、Kafka クラスターを簡単にセットアップできます。本番環境では、Kafka VPC に接続できる独自の Bastion ノードを配置することもできます。
 
 Kafka VPC を作成するには、次の手順を実行します。
 
 **1.1. Kafka VPCを作成する**
 
-1.  [Alibaba Cloud コンソール &gt; VPC ダッシュボード](https://vpc.console.alibabacloud.com/vpc)に進み、Kafka をデプロイするリージョンに切り替えます。
+1. [Alibaba Cloud コンソール &gt; VPC ダッシュボード](https://vpc.console.alibabacloud.com/vpc)に進み、Kafka をデプロイするリージョンに切り替えます。
 
-2.  **Create VPC**をクリックします。**VPC settings**ページで以下の情報を入力します。
+2. **Create VPC**をクリックします。**VPC settings**ページで以下の情報を入力します。
 
-    1.  **Name**を入力します (例: `Kafka VPC` )。
+    1. **Name**を入力します (例: `Kafka VPC` )。
 
-    2.  TiDB Cloudでプライベート リンク接続を設定するリージョンを選択します。
+    2. TiDB Cloudでプライベート リンク接続を設定するリージョンを選択します。
 
-    3.  **Manually enter an IPv4 CIDR block**を選択し、IPv4 CIDR (例: `10.0.0.0/16`を入力します。
+    3. **Manually enter an IPv4 CIDR block**を選択し、IPv4 CIDR (例: `10.0.0.0/16`を入力します。
 
-    4.  Kafkaブローカーをデプロイする各AZごとにvSwitchを作成し、IPv4 CIDRを設定します。例：
+    4. Kafkaブローカーをデプロイする各AZごとにvSwitchを作成し、IPv4 CIDRを設定します。例：
 
-        -   broker-ap-southeast-1a vSwitch `ap-southeast-1a` : 10.0.0.0/18
-        -   broker-ap-southeast-1b vSwitch `ap-southeast-1b` : 10.0.64.0/18
-        -   broker-ap-southeast-1c vSwitch `ap-southeast-1c` : 10.0.128.0/18
-        -   `ap-southeast-1a`の bastion vSwitch: 10.0.192.0/18
+        - broker-ap-southeast-1a vSwitch `ap-southeast-1a` : 10.0.0.0/18
+        - broker-ap-southeast-1b vSwitch `ap-southeast-1b` : 10.0.64.0/18
+        - broker-ap-southeast-1c vSwitch `ap-southeast-1c` : 10.0.128.0/18
+        - `ap-southeast-1a`の bastion vSwitch: 10.0.192.0/18
 
-    5.  その他のオプションはデフォルト値を使用します。 **Ok**をクリックします。
+    5. その他のオプションはデフォルト値を使用します。 **Ok**をクリックします。
 
-3.  VPC の詳細ページで、VPC ID (例: `vpc-t4nfx2vcqazc862e9fg06` ) をメモします。
+3. VPC の詳細ページで、VPC ID (例: `vpc-t4nfx2vcqazc862e9fg06` ) をメモします。
 
 #### 2. Kafkaブローカーを設定する {#2-set-up-kafka-brokers}
 
@@ -101,44 +101,44 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 [ECSコンソール](https://ecs.console.alibabacloud.com/home#/)に進みます。要塞 vSwitch に要塞ノードを作成します。
 
--   **Network and Zone**: `Kafka VPC`および`bastion` vSwitch。
--   **Instance and Image**: インスタンス タイプが`ecs.t5-lc1m2.small` 、イメージが`Alibaba Cloud Linux` 。
--   **Network and Security Groups**: `Assign Public IPv4 Address`を選択します。
--   **Key pair**: `kafka-vpc-key-pair` 。 `kafka-vpc-key-pair`という名前の新しいキーペアを作成します。 `kafka-vpc-key-pair.pem`ローカルマシンにダウンロードして、後で設定します。
--   **Security Group**：どこからでもSSHログインを許可する新しいセキュリティグループを作成します。本番環境の安全性を確保するために、ルールを絞り込むことができます。
--   **Instance Name**: `bastion-node` 。
+- **Network and Zone**: `Kafka VPC`および`bastion` vSwitch。
+- **Instance and Image**: インスタンス タイプが`ecs.t5-lc1m2.small` 、イメージが`Alibaba Cloud Linux` 。
+- **Network and Security Groups**: `Assign Public IPv4 Address`を選択します。
+- **Key pair**: `kafka-vpc-key-pair` 。 `kafka-vpc-key-pair`という名前の新しいキーペアを作成します。 `kafka-vpc-key-pair.pem`ローカルマシンにダウンロードして、後で設定します。
+- **Security Group**：どこからでもSSHログインを許可する新しいセキュリティグループを作成します。本番環境の安全性を確保するために、ルールを絞り込むことができます。
+- **Instance Name**: `bastion-node` 。
 
 **2.2. ブローカーノードを作成する**
 
 [ECSコンソール](https://ecs.console.alibabacloud.com/home#/)に進みます。vSwitch に 3 つのブローカー ノード (AZ ごとに 1 つ) を作成します。
 
--   vSwitch `broker-ap-southeast-1a`のブローカー 1
+- vSwitch `broker-ap-southeast-1a`のブローカー 1
 
-    -   **Network and Zone**: `Kafka VPC`および`broker-ap-southeast-1a` vSwitch
-    -   **Instance and Image**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
-    -   **Key pair**:再利用`kafka-vpc-key-pair` 。
-    -   **Instance Name**: `broker-node1`
-    -   **Security Group**: Kafka VPCからのすべてのTCPを許可する新しいセキュリティグループを作成します。本番環境では、安全性を考慮してルールを絞り込むことができます。インバウンドルール: -**Protocol**: `TCP` -**Port range**: `All` -**Source**: `10.0.0.0/16`
+    - **Network and Zone**: `Kafka VPC`および`broker-ap-southeast-1a` vSwitch
+    - **Instance and Image**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
+    - **Key pair**:再利用`kafka-vpc-key-pair` 。
+    - **Instance Name**: `broker-node1`
+    - **Security Group**: Kafka VPCからのすべてのTCPを許可する新しいセキュリティグループを作成します。本番環境では、安全性を考慮してルールを絞り込むことができます。インバウンドルール: -**Protocol**: `TCP` -**Port range**: `All` -**Source**: `10.0.0.0/16`
 
--   vSwitch `broker-ap-southeast-1b`のブローカー 2
+- vSwitch `broker-ap-southeast-1b`のブローカー 2
 
-    -   **Network and Zone**: `Kafka VPC`および`broker-ap-southeast-1b` vSwitch
-    -   **Instance and Image**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
-    -   **Key pair**:再利用`kafka-vpc-key-pair` 。
-    -   **Instance Name**: `broker-node2`
-    -   **Security Group**: Kafka VPCからのすべてのTCPを許可する新しいセキュリティグループを作成します。本番環境では、安全性を考慮してルールを絞り込むことができます。インバウンドルール: -**Protocol**: `TCP` -**Port range**: `All` -**Source**: `10.0.0.0/16`
+    - **Network and Zone**: `Kafka VPC`および`broker-ap-southeast-1b` vSwitch
+    - **Instance and Image**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
+    - **Key pair**:再利用`kafka-vpc-key-pair` 。
+    - **Instance Name**: `broker-node2`
+    - **Security Group**: Kafka VPCからのすべてのTCPを許可する新しいセキュリティグループを作成します。本番環境では、安全性を考慮してルールを絞り込むことができます。インバウンドルール: -**Protocol**: `TCP` -**Port range**: `All` -**Source**: `10.0.0.0/16`
 
--   vSwitch `broker-ap-southeast-1c`のブローカー 3
+- vSwitch `broker-ap-southeast-1c`のブローカー 3
 
-    -   **Network and Zone**: `Kafka VPC`および`broker-ap-southeast-1c` vSwitch
-    -   **Instance and Image**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
-    -   **Key pair**:再利用`kafka-vpc-key-pair` 。
-    -   **Instance Name**: `broker-node3`
-    -   **Security Group**: Kafka VPCからのすべてのTCPを許可する新しいセキュリティグループを作成します。本番環境では、安全性を考慮してルールを絞り込むことができます。インバウンドルール: -**Protocol**: `TCP` -**Port range**: `All` -**Source**: `10.0.0.0/16`
+    - **Network and Zone**: `Kafka VPC`および`broker-ap-southeast-1c` vSwitch
+    - **Instance and Image**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ
+    - **Key pair**:再利用`kafka-vpc-key-pair` 。
+    - **Instance Name**: `broker-node3`
+    - **Security Group**: Kafka VPCからのすべてのTCPを許可する新しいセキュリティグループを作成します。本番環境では、安全性を考慮してルールを絞り込むことができます。インバウンドルール: -**Protocol**: `TCP` -**Port range**: `All` -**Source**: `10.0.0.0/16`
 
 **2.3. Kafkaランタイムバイナリの準備**
 
-1.  要塞ノードの詳細ページに移動します。**Public IPv4 address**を取得します。SSHを使用して、先ほどダウンロードした`kafka-vpc-key-pair.pem`を使用してノードにログインします。
+1. 要塞ノードの詳細ページに移動します。**Public IPv4 address**を取得します。SSHを使用して、先ほどダウンロードした`kafka-vpc-key-pair.pem`を使用してノードにログインします。
 
     ```shell
     chmod 400 kafka-vpc-key-pair.pem
@@ -146,7 +146,7 @@ Kafka VPC を作成するには、次の手順を実行します。
     ssh -i "kafka-vpc-key-pair.pem" root@{bastion_public_ip}
     ```
 
-2.  バイナリを要塞ノードにダウンロードします。
+2. バイナリを要塞ノードにダウンロードします。
 
     ```shell
     # Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
@@ -156,7 +156,7 @@ Kafka VPC を作成するには、次の手順を実行します。
     tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz
     ```
 
-3.  要塞ノードから各ブローカー ノードにバイナリをコピーします。
+3. 要塞ノードから各ブローカー ノードにバイナリをコピーします。
 
     ```shell
     # Replace {broker-node1-ip} with your broker-node1 IP address
@@ -184,27 +184,27 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 各ノードはブローカーとコントローラーの役割を担います。各ブローカーに対して以下の操作を実行してください。
 
-1.  `listeners`項目の場合、3 つのブローカーはすべて同じであり、ブローカーとコントローラーのロールとして機能します。
+1. `listeners`項目の場合、3 つのブローカーはすべて同じであり、ブローカーとコントローラーのロールとして機能します。
 
-    1.  すべての**コントローラー**ロールノードに同じ CONTROLLER リスナーを設定します。**ブローカー**ロールノードのみを追加する場合は、 `server.properties`の CONTROLLER リスナーは必要ありません。
-    2.  **ブローカー**リスナーを 2 つ構成します。`INTERNAL`は内部アクセス用、 `EXTERNAL`はTiDB Cloudからの外部アクセス用です。
+    1. すべての**コントローラー**ロールノードに同じ CONTROLLER リスナーを設定します。**ブローカー**ロールノードのみを追加する場合は、 `server.properties`の CONTROLLER リスナーは必要ありません。
+    2. **ブローカー**リスナーを 2 つ構成します。`INTERNAL`は内部アクセス用、 `EXTERNAL`はTiDB Cloudからの外部アクセス用です。
 
-2.  `advertised.listeners`項目については、次の操作を行います。
+2. `advertised.listeners`項目については、次の操作を行います。
 
-    1.  各ブローカーに対して、ブローカーノードの内部IPアドレスを使用して、INTERNALアドバタイズリスナーを設定します。アドバタイズされた内部Kafkaクライアントは、このアドレスを使用してブローカーにアクセスします。
-    2.  TiDB Cloudから取得した**Kafka Advertised Listener Pattern**に基づいて、各ブローカーノードに外部ア​​ドバタイズリスナーを設定することで、 TiDB Cloudが複数のブローカーを区別できるようになります。異なる外部アドバタイズリスナーを設定することで、 TiDB CloudのKafkaクライアントはリクエストを適切なブローカーにルーティングできるようになります。
+    1. 各ブローカーに対して、ブローカーノードの内部IPアドレスを使用して、INTERNALアドバタイズリスナーを設定します。アドバタイズされた内部Kafkaクライアントは、このアドレスを使用してブローカーにアクセスします。
+    2. TiDB Cloudから取得した**Kafka Advertised Listener Pattern**に基づいて、各ブローカーノードに外部ア​​ドバタイズリスナーを設定することで、 TiDB Cloudが複数のブローカーを区別できるようになります。異なる外部アドバタイズリスナーを設定することで、 TiDB CloudのKafkaクライアントはリクエストを適切なブローカーにルーティングできるようになります。
 
-        -   `<port>`ブローカーと Kafka プライベートリンクサービスのアクセスポイントを区別します。すべてのブローカーの EXTERNAL アドバタイズリスナーのポート範囲を計画してください。これらのポートは、ブローカーが実際にリッスンするポートである必要はありません。これらは、リクエストを別のブローカーに転送するプライベートリンクサービスのロードバランサーがリッスンするポートです。
-        -   **Kafka Advertised Listener Pattern**の`AZ ID`は、ブローカーがデプロイされている場所を示します。TiDB Cloud は、 AZ ID に基づいてリクエストを異なるエンドポイント DNS 名にルーティングします。
+        - `<port>`ブローカーと Kafka プライベートリンクサービスのアクセスポイントを区別します。すべてのブローカーの EXTERNAL アドバタイズリスナーのポート範囲を計画してください。これらのポートは、ブローカーが実際にリッスンするポートである必要はありません。これらは、リクエストを別のブローカーに転送するプライベートリンクサービスのロードバランサーがリッスンするポートです。
+        - **Kafka Advertised Listener Pattern**の`AZ ID`は、ブローカーがデプロイされている場所を示します。TiDB Cloud は、 AZ ID に基づいてリクエストを異なるエンドポイント DNS 名にルーティングします。
 
     トラブルシューティングを容易にするために、ブローカーごとに異なるブローカー ID を構成することをお勧めします。
 
-3.  計画値は次のとおりです。
+3. 計画値は次のとおりです。
 
-    -   **CONTROLLER port**: `29092`
-    -   **INTERNAL port**： `9092`
-    -   **EXTERNAL**: `39092`
-    -   **EXTERNAL advertised listener ports range**: `9093~9095`
+    - **CONTROLLER port**: `29092`
+    - **INTERNAL port**： `9092`
+    - **EXTERNAL**: `39092`
+    - **EXTERNAL advertised listener ports range**: `9093~9095`
 
 **2.4.2. 設定ファイルを作成する**
 
@@ -313,7 +313,7 @@ LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properti
 
 **2.5. 要塞ノードでクラスター設定をテストする**
 
-1.  Kafka ブートストラップをテストします。
+1. Kafka ブートストラップをテストします。
 
     ```shell
     export JAVA_HOME=~/jdk-22.0.2
@@ -335,7 +335,7 @@ LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properti
     b3.unique_name.alicloud.plc.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     ```
 
-2.  要塞ノードにプロデューサー スクリプト`produce.sh`を作成します。
+2. 要塞ノードにプロデューサー スクリプト`produce.sh`を作成します。
 
     ```shell
     #!/bin/bash
@@ -368,7 +368,7 @@ LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properti
     produce_messages 
     ```
 
-3.  要塞ノードにコンシューマー スクリプト`consume.sh`を作成します。
+3. 要塞ノードにコンシューマー スクリプト`consume.sh`を作成します。
 
     ```shell
     #!/bin/bash
@@ -391,7 +391,7 @@ LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properti
     consume_messages
     ```
 
-4.  `produce.sh`と`consume.sh`を実行して、Kafkaクラスターが実行中であることを確認してください。これらのスクリプトは、後ほどネットワーク接続テストにも再利用されます。スクリプトは`--partitions 3 --replication-factor 3`のトピックを作成します。これら3つのブローカーすべてにデータが含まれていることを確認してください。ネットワーク接続がテストされることを保証するために、スクリプトが3つのブローカーすべてに接続することを確認してください。
+4. `produce.sh`と`consume.sh`を実行して、Kafkaクラスターが実行中であることを確認してください。これらのスクリプトは、後ほどネットワーク接続テストにも再利用されます。スクリプトは`--partitions 3 --replication-factor 3`のトピックを作成します。これら3つのブローカーすべてにデータが含まれていることを確認してください。ネットワーク接続がテストされることを保証するために、スクリプトが3つのブローカーすべてに接続することを確認してください。
 
     ```shell
     # Test write message. 
@@ -446,16 +446,16 @@ Kafka クラスターが TiDB クラスターと同じリージョンおよび A
 
 以下の設定はKafka KRaftクラスターに適用されます。ZKモードの設定も同様です。
 
-1.  構成の変更を計画します。
+1. 構成の変更を計画します。
 
-    1.  TiDB Cloudからの外部アクセス用に、各ブローカーに EXTERNAL**リスナー**を設定します。EXTERNAL ポートとして、一意のポート（例： `39092` ）を選択します。
-    2.  TiDB Cloudから取得した**Kafka Advertised Listener Pattern**に基づいて、各ブローカーノードにEXTERNAL**advertised listener**を設定することで、 TiDB Cloudが複数のブローカーを区別できるようになります。異なるEXTERNALアドバタイズリスナーを設定することで、TiDB CloudのKafkaクライアントはリクエストを適切なブローカーにルーティングできるようになります。
+    1. TiDB Cloudからの外部アクセス用に、各ブローカーに EXTERNAL**リスナー**を設定します。EXTERNAL ポートとして、一意のポート（例： `39092` ）を選択します。
+    2. TiDB Cloudから取得した**Kafka Advertised Listener Pattern**に基づいて、各ブローカーノードにEXTERNAL**advertised listener**を設定することで、 TiDB Cloudが複数のブローカーを区別できるようになります。異なるEXTERNALアドバタイズリスナーを設定することで、TiDB CloudのKafkaクライアントはリクエストを適切なブローカーにルーティングできるようになります。
 
-        -   `<port>`ブローカーと Kafka プライベートリンクサービスのアクセスポイントを区別します。すべてのブローカーの EXTERNAL アドバタイズリスナーのポート範囲を計画してください（例： `range from 9093` ）。これらのポートは、ブローカーが実際にリッスンするポートである必要はありません。これらは、リクエストを別のブローカーに転送するプライベートリンクサービスのロードバランサーがリッスンするポートです。
+        - `<port>`ブローカーと Kafka プライベートリンクサービスのアクセスポイントを区別します。すべてのブローカーの EXTERNAL アドバタイズリスナーのポート範囲を計画してください（例： `range from 9093` ）。これらのポートは、ブローカーが実際にリッスンするポートである必要はありません。これらは、リクエストを別のブローカーに転送するプライベートリンクサービスのロードバランサーがリッスンするポートです。
 
     トラブルシューティングを容易にするために、ブローカーごとに異なるブローカー ID を構成することをお勧めします。
 
-2.  SSHを使用して各ブローカーノードにログインします。各ブローカーの設定ファイルを以下の内容に変更します。
+2. SSHを使用して各ブローカーノードにログインします。各ブローカーの設定ファイルを以下の内容に変更します。
 
     ```properties
     # brokers in ap-southeast-1a
@@ -502,7 +502,7 @@ Kafka クラスターが TiDB クラスターと同じリージョンおよび A
     listener.security.protocol.map=...,EXTERNAL:PLAINTEXT
     ```
 
-3.  すべてのブローカーを再構成したら、Kafka ブローカーを 1 つずつ再起動します。
+3. すべてのブローカーを再構成したら、Kafka ブローカーを 1 つずつ再起動します。
 
 #### 2. 内部ネットワークで外部リスナーの設定をテストする {#2-test-external-listener-settings-in-your-internal-network}
 
@@ -538,88 +538,88 @@ b3.ap-southeast-1c.unique_name.alicloud.plc.tidbcloud.com:9095 (id: 3 rack: null
 
 異なるポートを持つ4つのサーバーグループを持つネットワークロードバランサーを作成します。1つのサーバーグループはブートストラップ用で、他のサーバーグループは異なるブローカーにマッピングされます。
 
-1.  ブートストラップサーバーグループ =&gt; 9092 =&gt; broker-node1:39092、broker-node2:39092、broker-node3:39092
-2.  ブローカーサーバーグループ 1 =&gt; 9093 =&gt; broker-node1:39092
-3.  ブローカーサーバーグループ 2 =&gt; 9094 =&gt; broker-node2:39092
-4.  ブローカーサーバーグループ 3 =&gt; 9095 =&gt; broker-node3:39092
+1. ブートストラップサーバーグループ =&gt; 9092 =&gt; broker-node1:39092、broker-node2:39092、broker-node3:39092
+2. ブローカーサーバーグループ 1 =&gt; 9093 =&gt; broker-node1:39092
+3. ブローカーサーバーグループ 2 =&gt; 9094 =&gt; broker-node2:39092
+4. ブローカーサーバーグループ 3 =&gt; 9095 =&gt; broker-node3:39092
 
 ブローカーロールノードが複数ある場合は、マッピングを追加する必要があります。ブートストラップターゲットグループに少なくとも1つのノードがあることを確認してください。耐障害性を確保するため、各AZに1つずつ、合計3つのノードを追加することをお勧めします。
 
 ロードバランサーを設定するには、次の手順を実行します。
 
-1.  [サーバーグループ](https://slb.console.alibabacloud.com/nlb/ap-southeast-1/server-groups)に進み、4 つのサーバーグループを作成します。
+1. [サーバーグループ](https://slb.console.alibabacloud.com/nlb/ap-southeast-1/server-groups)に進み、4 つのサーバーグループを作成します。
 
-    -   ブートストラップサーバーグループ
+    - ブートストラップサーバーグループ
 
-        -   **Server Group Type**: `Server`を選択
-        -   **Server Group Name**: `bootstrap-server-group`
-        -   **VPC** : `Kafka VPC`
-        -   **Backend Server Protocol**: `TCP`を選択
-        -   **Backend servers**: 作成したサーバーグループをクリックし、 `broker-node1:39092` `broker-node3:39092`含むバックエンドサーバーを追加します`broker-node2:39092`
+        - **Server Group Type**: `Server`を選択
+        - **Server Group Name**: `bootstrap-server-group`
+        - **VPC** : `Kafka VPC`
+        - **Backend Server Protocol**: `TCP`を選択
+        - **Backend servers**: 作成したサーバーグループをクリックし、 `broker-node1:39092` `broker-node3:39092`含むバックエンドサーバーを追加します`broker-node2:39092`
 
-    -   ブローカーサーバーグループ1
+    - ブローカーサーバーグループ1
 
-        -   **Server Group Type**: `Server`を選択
-        -   **Server Group Name**: `broker-server-group-1`
-        -   **VPC** : `Kafka VPC`
-        -   **Backend Server Protocol**: `TCP`を選択
-        -   **Backend servers**: 作成したサーバーグループをクリックし、バックエンドサーバー`broker-node1:39092`を追加します。
+        - **Server Group Type**: `Server`を選択
+        - **Server Group Name**: `broker-server-group-1`
+        - **VPC** : `Kafka VPC`
+        - **Backend Server Protocol**: `TCP`を選択
+        - **Backend servers**: 作成したサーバーグループをクリックし、バックエンドサーバー`broker-node1:39092`を追加します。
 
-    -   ブローカーサーバーグループ2
+    - ブローカーサーバーグループ2
 
-        -   **Server Group Type**: `Server`を選択
-        -   **Server Group Name**: `broker-server-group-2`
-        -   **VPC** : `Kafka VPC`
-        -   **Backend Server Protocol**: `TCP`を選択
-        -   **Backend servers**: 作成したサーバーグループをクリックし、バックエンドサーバー`broker-node2:39092`を追加します。
+        - **Server Group Type**: `Server`を選択
+        - **Server Group Name**: `broker-server-group-2`
+        - **VPC** : `Kafka VPC`
+        - **Backend Server Protocol**: `TCP`を選択
+        - **Backend servers**: 作成したサーバーグループをクリックし、バックエンドサーバー`broker-node2:39092`を追加します。
 
-    -   ブローカーサーバーグループ3
+    - ブローカーサーバーグループ3
 
-        -   **Server Group Type**: `Server`を選択
-        -   **Server Group Name**: `broker-server-group-3`
-        -   **VPC** : `Kafka VPC`
-        -   **Backend Server Protocol**: `TCP`を選択
-        -   **Backend servers**: 作成したサーバーグループをクリックし、バックエンドサーバー`broker-node3:39092`を追加します。
+        - **Server Group Type**: `Server`を選択
+        - **Server Group Name**: `broker-server-group-3`
+        - **VPC** : `Kafka VPC`
+        - **Backend Server Protocol**: `TCP`を選択
+        - **Backend servers**: 作成したサーバーグループをクリックし、バックエンドサーバー`broker-node3:39092`を追加します。
 
-2.  [NLB](https://slb.console.alibabacloud.com/nlb)に進み、ネットワーク ロード バランサーを作成します。
+2. [NLB](https://slb.console.alibabacloud.com/nlb)に進み、ネットワーク ロード バランサーを作成します。
 
-    -   **Network Type**: `Internal-facing`を選択
-    -   **VPC** : `Kafka VPC`
-    -   **Zone**:
-        -   `ap-southeast-1a`と`broker-ap-southeast-1a vswitch`
-        -   `ap-southeast-1b`と`broker-ap-southeast-1b vswitch`
-        -   `ap-southeast-1c`と`broker-ap-southeast-1c vswitch`
-    -   **IP Version**: `IPv4`を選択
-    -   **Instance Name**: `kafka-nlb`
-    -   **Create Now**をクリックしてロードバランサーを作成します。
+    - **Network Type**: `Internal-facing`を選択
+    - **VPC** : `Kafka VPC`
+    - **Zone**:
+        - `ap-southeast-1a`と`broker-ap-southeast-1a vswitch`
+        - `ap-southeast-1b`と`broker-ap-southeast-1b vswitch`
+        - `ap-southeast-1c`と`broker-ap-southeast-1c vswitch`
+    - **IP Version**: `IPv4`を選択
+    - **Instance Name**: `kafka-nlb`
+    - **Create Now**をクリックしてロードバランサーを作成します。
 
-3.  作成したロード バランサーを見つけて、 **Create Listener**をクリックして 4 つの TCP リスナーを作成します。
+3. 作成したロード バランサーを見つけて、 **Create Listener**をクリックして 4 つの TCP リスナーを作成します。
 
-    -   ブートストラップサーバーグループ
+    - ブートストラップサーバーグループ
 
-        -   **Listener Protocol**: `TCP`を選択
-        -   **Listener Port**: `9092`
-        -   **Server Group**: 以前に作成したサーバーグループ`bootstrap-server-group`を選択します。
+        - **Listener Protocol**: `TCP`を選択
+        - **Listener Port**: `9092`
+        - **Server Group**: 以前に作成したサーバーグループ`bootstrap-server-group`を選択します。
 
-    -   ブローカーサーバーグループ1
+    - ブローカーサーバーグループ1
 
-        -   **Listener Protocol**: `TCP`を選択
-        -   **Listener Port**: `9093`
-        -   **Server Group**: 以前に作成したサーバーグループ`broker-server-group-1`を選択します。
+        - **Listener Protocol**: `TCP`を選択
+        - **Listener Port**: `9093`
+        - **Server Group**: 以前に作成したサーバーグループ`broker-server-group-1`を選択します。
 
-    -   ブローカーサーバーグループ2
+    - ブローカーサーバーグループ2
 
-        -   **Listener Protocol**: `TCP`を選択
-        -   **Listener Port**: `9094`
-        -   **Server Group**: 以前に作成したサーバーグループ`broker-server-group-2`を選択します。
+        - **Listener Protocol**: `TCP`を選択
+        - **Listener Port**: `9094`
+        - **Server Group**: 以前に作成したサーバーグループ`broker-server-group-2`を選択します。
 
-    -   ブローカーサーバーグループ3
+    - ブローカーサーバーグループ3
 
-        -   **Listener Protocol**: `TCP`を選択
-        -   **Listener Port**: `9095`
-        -   **Server Group**: 以前に作成したサーバーグループ`broker-server-group-3`を選択します。
+        - **Listener Protocol**: `TCP`を選択
+        - **Listener Port**: `9095`
+        - **Server Group**: 以前に作成したサーバーグループ`broker-server-group-3`を選択します。
 
-4.  要塞ノードでロードバランサーをテストします。この例では、Kafka ブートストラップのみをテストします。ロードバランサーは Kafka EXTERNAL リスナーをリッスンしているため、EXTERNAL アドバタイズされたリスナーのアドレスは要塞ノードでは解決できません。ロードバランサーの詳細ページから`kafka-lb` DNS 名（例： `nlb-o21d6wyjknamw8hjxb.ap-southeast-1.nlb.aliyuncsslbintl.com` ）をメモしておいてください。要塞ノードでスクリプトを実行してください。
+4. 要塞ノードでロードバランサーをテストします。この例では、Kafka ブートストラップのみをテストします。ロードバランサーは Kafka EXTERNAL リスナーをリッスンしているため、EXTERNAL アドバタイズされたリスナーのアドレスは要塞ノードでは解決できません。ロードバランサーの詳細ページから`kafka-lb` DNS 名（例： `nlb-o21d6wyjknamw8hjxb.ap-southeast-1.nlb.aliyuncsslbintl.com` ）をメモしておいてください。要塞ノードでスクリプトを実行してください。
 
     ```shell
     # Replace {lb_dns_name} to your actual value
@@ -636,31 +636,31 @@ b3.ap-southeast-1c.unique_name.alicloud.plc.tidbcloud.com:9095 (id: 3 rack: null
 
 同じリージョンにエンドポイント サービスを設定します。
 
-1.  エンドポイント サービスを作成するには、 [エンドポイントサービス](https://vpc.console.alibabacloud.com/endpointservice)に進みます。
+1. エンドポイント サービスを作成するには、 [エンドポイントサービス](https://vpc.console.alibabacloud.com/endpointservice)に進みます。
 
-    -   **Service Resource Type**: `NLB`を選択
-    -   **Select Service Resource**: NLB が含まれるすべてのゾーンを選択し、前の手順で作成した NLB を選択します。
-    -   **Automatically Accept Endpoint Connections**: `No`を選択することをお勧めします
+    - **Service Resource Type**: `NLB`を選択
+    - **Select Service Resource**: NLB が含まれるすべてのゾーンを選択し、前の手順で作成した NLB を選択します。
+    - **Automatically Accept Endpoint Connections**: `No`を選択することをお勧めします
 
-2.  エンドポイントサービスの詳細ページに移動し、**Endpoint Service Name**（例： `com.aliyuncs.privatelink.<region>.xxxxx` ）をコピーします。これは後でTiDB Cloudで使用する必要があります。
+2. エンドポイントサービスの詳細ページに移動し、**Endpoint Service Name**（例： `com.aliyuncs.privatelink.<region>.xxxxx` ）をコピーします。これは後でTiDB Cloudで使用する必要があります。
 
-3.  エンドポイントサービスの詳細ページで、**Service Whitelist**タブをクリックし、 **Add to Whitelist**をクリックして、 [前提条件](#prerequisites)で取得した Alibaba Cloud アカウント ID を入力します。
+3. エンドポイントサービスの詳細ページで、**Service Whitelist**タブをクリックし、 **Add to Whitelist**をクリックして、 [前提条件](#prerequisites)で取得した Alibaba Cloud アカウント ID を入力します。
 
 ## ステップ3. TiDB Cloudでプライベートリンク接続を作成する {#step-3-create-a-private-link-connection-in-tidb-cloud}
 
 TiDB Cloudでプライベート リンク接続を作成するには、次の手順を実行します。
 
-1.  [ステップ2](#2-set-up-an-alibaba-cloud-endpoint-service)で取得した Alibaba Cloud エンドポイント サービス名 (例: `com.aliyuncs.privatelink.<region>.xxxxx` ) を使用して、 TiDB Cloudにプライベート リンク接続を作成します。
+1. [ステップ2](#2-set-up-an-alibaba-cloud-endpoint-service)で取得した Alibaba Cloud エンドポイント サービス名 (例: `com.aliyuncs.privatelink.<region>.xxxxx` ) を使用して、 TiDB Cloudにプライベート リンク接続を作成します。
 
     詳細については[Alibaba Cloud Endpoint Service のプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-alibaba-cloud-endpoint-service-private-link-connection)を参照してください。
 
-2.  TiDB Cloudのデータフロー サービスが Kafka クラスターにアクセスできるように、プライベート リンク接続にドメインをアタッチします。
+2. TiDB Cloudのデータフロー サービスが Kafka クラスターにアクセスできるように、プライベート リンク接続にドメインをアタッチします。
 
     詳細については、 [プライベートリンク接続にドメインを添付する](/tidb-cloud/serverless-private-link-connection.md#attach-domains-to-a-private-link-connection)を参照してください。 **Attach Domains**ダイアログで、ドメインの種類として**TiDB Cloud Managed**を選択し、生成されたドメインの一意の名前を後で使用するためにコピーする必要があることに注意してください。
 
 ## ステップ4. Kafka設定内の一意の名前プレースホルダーを置き換える {#step-4-replace-the-unique-name-placeholder-in-kafka-configuration}
 
-1.  Kafka ブローカー ノードに戻り、各ブローカーの`advertised.listeners`構成内の`unique_name`プレースホルダーを、前の手順で取得した実際の一意の名前に置き換えます。
-2.  すべてのブローカーを再構成したら、Kafka ブローカーを 1 つずつ再起動します。
+1. Kafka ブローカー ノードに戻り、各ブローカーの`advertised.listeners`構成内の`unique_name`プレースホルダーを、前の手順で取得した実際の一意の名前に置き換えます。
+2. すべてのブローカーを再構成したら、Kafka ブローカーを 1 つずつ再起動します。
 
 これで、このプライベート リンク接続と 9092 をブートストラップ ポートとして使用し、 TiDB Cloudから Kafka クラスターに接続できるようになります。

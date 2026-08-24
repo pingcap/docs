@@ -43,7 +43,7 @@ Slackのサポートチャンネルで、 **PingCAP Support Bot**をメンショ
 
 ## よくある質問 {#faqs}
 
--   チケットのステータスを確認するにはどうすればいいですか?
+- チケットのステータスを確認するにはどうすればいいですか?
 
     チケット作成時に使用したメールアドレスで[PingCAPヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/user/requests)にログインしてください。現在のアカウントのすべての過去のチケットとそのステータスを確認できます。
 

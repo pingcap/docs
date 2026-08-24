@@ -8,8 +8,8 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 [Kysely](https://kysely.dev/docs/intro)、タイプセーフでオートコンプリートに適した TypeScript SQL クエリ ビルダーです。 TiDB Cloudは[@tidbcloud/kysely](https://github.com/tidbcloud/kysely)を提供しており、 [TiDB Cloud Serverless Driver](/develop/serverless-driver.md)を使用して HTTPS 経由で Kysely を使用できるようにします。従来の TCP 方式と比較して、 [@tidbcloud/kysely](https://github.com/tidbcloud/kysely)は次の利点があります。
 
--   サーバーレス環境におけるパフォーマンスの向上。
--   Kyselyをエッジ環境で使用できる機能。
+- サーバーレス環境におけるパフォーマンスの向上。
+- Kyselyをエッジ環境で使用できる機能。
 
 このチュートリアルでは、Node.js環境およびエッジ環境で、 TiDB Cloud Serverless DriverをKyselyと組み合わせて使用​​する方法について説明します。
 
@@ -21,26 +21,26 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 このチュートリアルを完了するには、以下のものが必要です。
 
--   [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
--   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 、またはお好みのパッケージマネージャーを使用してください。
--   TiDB Cloud Starterインスタンス。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 、またはお好みのパッケージマネージャーを使用してください。
+- TiDB Cloud Starterインスタンス。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
-1.  `kysely-node-example`という名前のプロジェクトを作成します。
+1. `kysely-node-example`という名前のプロジェクトを作成します。
 
     ```
     mkdir kysely-node-example
     cd kysely-node-example
     ```
 
-2.  `kysely` 、 `@tidbcloud/kysely` 、および`@tidbcloud/serverless`パッケージをインストールしてください。
+2. `kysely` 、 `@tidbcloud/kysely` 、および`@tidbcloud/serverless`パッケージをインストールしてください。
 
    ```
    npm install kysely @tidbcloud/kysely @tidbcloud/serverless
    ```
 
-3.  プロジェクトのルートディレクトリで、 `package.json`ファイルを探し、そのファイルに`"type": "module"`を追加して ES モジュールを指定します。
+3. プロジェクトのルートディレクトリで、 `package.json`ファイルを探し、そのファイルに`"type": "module"`を追加して ES モジュールを指定します。
 
    ```json
    {
@@ -53,7 +53,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
    }
    ```
 
-4.  プロジェクトのルートディレクトリに、TypeScriptコンパイラオプションを定義する`tsconfig.json`ファイルを追加します。以下にファイルの例を示します。
+4. プロジェクトのルートディレクトリに、TypeScriptコンパイラオプションを定義する`tsconfig.json`ファイルを追加します。以下にファイルの例を示します。
 
    ```json
    {
@@ -74,13 +74,13 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1.  TiDB Cloud Starterインスタンスの概要ページで、右上隅の**Connect**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
+1. TiDB Cloud Starterインスタンスの概要ページで、右上隅の**Connect**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
 
     ```
     mysql://[username]:[password]@[host]/[database]
     ```
 
-2.  ローカル環境で環境変数`DATABASE_URL`を設定してください。例えば、Linux または macOS では、次のコマンドを実行できます。
+2. ローカル環境で環境変数`DATABASE_URL`を設定してください。例えば、Linux または macOS では、次のコマンドを実行できます。
 
     ```bash
     export DATABASE_URL='mysql://[username]:[password]@[host]/[database]'
@@ -88,7 +88,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 ### ステップ3. Kyselyを使用してデータをクエリする {#step-3-use-kysely-to-query-data}
 
-1.  TiDB Cloud Starterインスタンスにテーブルを作成し、データを挿入してください。
+1. TiDB Cloud Starterインスタンスにテーブルを作成し、データを挿入してください。
 
     [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query)を使用してSQLステートメントを実行できます。以下に例を示します。
 
@@ -103,7 +103,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
    insert into test.person values (1,'pingcap','male')
    ```
 
-2.  プロジェクトのルートディレクトリに、 `hello-world.ts`という名前のファイルを作成し、以下のコードを追加してください。
+2. プロジェクトのルートディレクトリに、 `hello-world.ts`という名前のファイルを作成し、以下のコードを追加してください。
 
    ```ts
    import { Kysely,GeneratedAlways,Selectable } from 'kysely'
@@ -144,14 +144,14 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 ### ステップ4．TypeScriptコードを実行する {#step-4-run-the-typescript-code}
 
-1.  TypeScript を JavaScript に変換するには`ts-node`をインストールし、次に Node.js 用の TypeScript 型定義を提供するには`@types/node`をインストールします。
+1. TypeScript を JavaScript に変換するには`ts-node`をインストールし、次に Node.js 用の TypeScript 型定義を提供するには`@types/node`をインストールします。
 
    ```
    npm install -g ts-node
    npm i --save-dev @types/node
    ```
 
-2.  以下のコマンドでTypeScriptコードを実行してください。
+2. 以下のコマンドでTypeScriptコードを実行してください。
 
    ```
    ts-node --esm hello-world.ts
@@ -165,26 +165,26 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 このチュートリアルを完了するには、以下のものが必要です。
 
--   エッジ環境を提供する[Vercel](https://vercel.com/docs)アカウント。
--   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 、またはお好みのパッケージマネージャーを使用してください。
--   TiDB Cloud Starterインスタンス。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- エッジ環境を提供する[Vercel](https://vercel.com/docs)アカウント。
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 、またはお好みのパッケージマネージャーを使用してください。
+- TiDB Cloud Starterインスタンス。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
-1.  Vercel CLIをインストールしてください。
+1. Vercel CLIをインストールしてください。
 
     ```
     npm i -g vercel@latest
     ```
 
-2.  以下のターミナルコマンドを使用して`kysely-example`という名前の[Next.js](https://nextjs.org/)プロジェクトを作成します。
+2. 以下のターミナルコマンドを使用して`kysely-example`という名前の[Next.js](https://nextjs.org/)プロジェクトを作成します。
 
    ```
    npx create-next-app@latest kysely-example --ts --no-eslint --tailwind --no-src-dir --app --import-alias "@/*"
    cd kysely-example
    ```
 
-3.  `kysely` 、 `@tidbcloud/kysely` 、および`@tidbcloud/serverless`パッケージをインストールしてください。
+3. `kysely` 、 `@tidbcloud/kysely` 、および`@tidbcloud/serverless`パッケージをインストールしてください。
 
    ```
    npm install kysely @tidbcloud/kysely @tidbcloud/serverless
@@ -200,7 +200,7 @@ mysql://[username]:[password]@[host]/[database]
 
 ### ステップ3. エッジ関数を作成する {#step-3-create-an-edge-function}
 
-1.  TiDB Cloud Starterインスタンスにテーブルを作成し、データを挿入してください。
+1. TiDB Cloud Starterインスタンスにテーブルを作成し、データを挿入してください。
 
     [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query)を使用してSQL文を実行できます。以下に例を示します。
 
@@ -215,7 +215,7 @@ mysql://[username]:[password]@[host]/[database]
    insert into test.person values (1,'pingcap','male')
    ```
 
-2.  プロジェクトの`app`ディレクトリに、 `/api/edge-function-example/route.ts`ファイルを作成し、以下のコードを追加します。
+2. プロジェクトの`app`ディレクトリに、 `/api/edge-function-example/route.ts`ファイルを作成し、以下のコードを追加します。
 
    ```ts
    import { NextResponse } from 'next/server';
@@ -273,18 +273,18 @@ mysql://[username]:[password]@[host]/[database]
 
     上記のコードは、クエリパラメータ`query`を受け取り、クエリの結果を返します。クエリパラメータが指定されていない場合は、 `person`テーブル内のすべてのレコードを返します。
 
-3.  コードをローカル環境でテストしてください。
+3. コードをローカル環境でテストしてください。
 
    ```
    export DATABASE_URL='mysql://[username]:[password]@[host]/[database]'
    next dev
    ```
 
-4.  `http://localhost:3000/api/edge-function-example`に移動して、ルートからの応答を取得してください。
+4. `http://localhost:3000/api/edge-function-example`に移動して、ルートからの応答を取得してください。
 
 ### ステップ4．Vercelにコードをデプロイ {#step-4-deploy-your-code-to-vercel}
 
-1.  `DATABASE_URL`環境変数を使用して、Vercelにコードをデプロイ。
+1. `DATABASE_URL`環境変数を使用して、Vercelにコードをデプロイ。
 
    ```
    vercel -e DATABASE_URL='mysql://[username]:[password]@[host]/[database]' --prod
@@ -292,9 +292,9 @@ mysql://[username]:[password]@[host]/[database]
 
     デプロイが完了すると、プロジェクトのURLが発行されます。
 
-2.  `${Your-URL}/api/edge-function-example`ページに移動して、ルートからの応答を取得してください。
+2. `${Your-URL}/api/edge-function-example`ページに移動して、ルートからの応答を取得してください。
 
 ## 次は？ {#what-s-next}
 
--   [Kysely](https://kysely.dev/docs/intro)と[@tidbcloud/kysely](https://github.com/tidbcloud/kysely)についてもっと詳しく知りたい方はこちらをご覧ください。
--   [TiDB CloudとVercelを統合する](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)方法を学ぶ
+- [Kysely](https://kysely.dev/docs/intro)と[@tidbcloud/kysely](https://github.com/tidbcloud/kysely)についてもっと詳しく知りたい方はこちらをご覧ください。
+- [TiDB CloudとVercelを統合する](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)方法を学ぶ

@@ -18,16 +18,16 @@ SQL クエリのパフォーマンスを向上させる場合は、 [SQL性能�
 
 <div label="TiDB Cloud" value="tidb-cloud">
 
--   [スロークエリ](/tidb-cloud/tune-performance.md#slow-query)
--   [ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)
--   [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
+- [スロークエリ](/tidb-cloud/tune-performance.md#slow-query)
+- [ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)
+- [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
 
 </div>
 
 <div label="TiDB Self-Managed" value="tidb">
 
--   [スロークエリを分析する](/analyze-slow-queries.md)
--   [Top SQLを使用してコストの高いクエリを特定する](/dashboard/top-sql.md)
+- [スロークエリを分析する](/analyze-slow-queries.md)
+- [Top SQLを使用してコストの高いクエリを特定する](/dashboard/top-sql.md)
 
 </div>
 </SimpleTab>
@@ -40,12 +40,12 @@ SQL 操作について質問がある場合は、 [SQLに関するよくある�
 
 ## 参照 {#see-also}
 
--   [サポートされていない機能](/mysql-compatibility.md#unsupported-features)
--   [TiDB Cloudに関するよくある質問](/tidb-cloud/tidb-cloud-faq.md)
--   [TiDB Self-Managedに関するFAQ](/faq/faq-overview.md)
+- [サポートされていない機能](/mysql-compatibility.md#unsupported-features)
+- [TiDB Cloudに関するよくある質問](/tidb-cloud/tidb-cloud-faq.md)
+- [TiDB Self-Managedに関するFAQ](/faq/faq-overview.md)
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

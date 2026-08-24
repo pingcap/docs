@@ -36,61 +36,61 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 
 シンプルなシナリオでは、スキーマとテーブルのマッチングにワイルドカードを使用することをお勧めします。ただし、以下のバージョンの違いにご注意ください。
 
--   `*` 、 `?` 、 `[]`を含むワイルドカードがサポートされています。ワイルドカードマッチでは`*`記号は1つだけ使用でき、末尾になければなりません。例えば、 `tbl-name: "t*"`の場合、 `"t*"`は`t`で始まるすべてのテーブルを表します。詳細は[ワイルドカードマッチング](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)を参照してください。
+- `*` 、 `?` 、 `[]`を含むワイルドカードがサポートされています。ワイルドカードマッチでは`*`記号は1つだけ使用でき、末尾になければなりません。例えば、 `tbl-name: "t*"`の場合、 `"t*"`は`t`で始まるすべてのテーブルを表します。詳細は[ワイルドカードマッチング](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)を参照してください。
 
--   正規表現は`~`文字で始まる必要があります。
+- 正規表現は`~`文字で始まる必要があります。
 
 ## パラメータの説明 {#parameter-descriptions}
 
--   `do-dbs` : MySQL の[`replicate-do-db`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-do-db)と同様に、移行するスキーマのリストを許可します。
--   `ignore-dbs` : 移行するスキーマのブロック リスト (MySQL の[`replicate-ignore-db`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-ignore-db)に類似)。
--   `do-tables` : 移行するテーブルのリストを許可します（MySQLの[`replicate-do-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-do-table)に相当）。`db-name`と`tbl-name`の両方を指定する必要があります。
--   `ignore-tables` : 移行対象テーブルのブロックリスト（MySQLの[`replicate-ignore-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-ignore-table)に相当）。`db-name`と`tbl-name`の両方を指定する必要があります。
+- `do-dbs` : MySQL の[`replicate-do-db`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-do-db)と同様に、移行するスキーマのリストを許可します。
+- `ignore-dbs` : 移行するスキーマのブロック リスト (MySQL の[`replicate-ignore-db`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-ignore-db)に類似)。
+- `do-tables` : 移行するテーブルのリストを許可します（MySQLの[`replicate-do-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-do-table)に相当）。`db-name`と`tbl-name`の両方を指定する必要があります。
+- `ignore-tables` : 移行対象テーブルのブロックリスト（MySQLの[`replicate-ignore-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-ignore-table)に相当）。`db-name`と`tbl-name`の両方を指定する必要があります。
 
 上記のパラメータの値が`~`文字で始まる場合、その値の以降の文字は[正規表現](https://golang.org/pkg/regexp/syntax/#hdr-syntax)として扱われます。このパラメータは、スキーマ名またはテーブル名を一致させるために使用できます。
 
 ## フィルタリングプロセス {#filtering-process}
 
--   `do-dbs`と`ignore-dbs`に対応するフィルタリング ルールは、MySQL の[データベースレベルのレプリケーションとバイナリログオプションの評価](https://dev.mysql.com/doc/refman/8.0/en/replication-rules-db-options.html)と同様です。
--   `do-tables`と`ignore-tables`に対応するフィルタリング ルールは、MySQL の[テーブルレベルのレプリケーションオプションの評価](https://dev.mysql.com/doc/refman/8.0/en/replication-rules-table-options.html)と同様です。
+- `do-dbs`と`ignore-dbs`に対応するフィルタリング ルールは、MySQL の[データベースレベルのレプリケーションとバイナリログオプションの評価](https://dev.mysql.com/doc/refman/8.0/en/replication-rules-db-options.html)と同様です。
+- `do-tables`と`ignore-tables`に対応するフィルタリング ルールは、MySQL の[テーブルレベルのレプリケーションオプションの評価](https://dev.mysql.com/doc/refman/8.0/en/replication-rules-table-options.html)と同様です。
 
 > **Note:**
 >
 > DM と MySQL では、ブロック リストと許可リストのフィルタリング ルールが次の点で異なります。
 >
-> -   MySQLでは、 [`replicate-wild-do-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-wild-do-table)と[`replicate-wild-ignore-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-wild-ignore-table)ワイルドカード文字をサポートしています。DMでは、一部のパラメータ値は`~`で始まる正規表現を直接サポートしています。
-> -   DMは現在、 `ROW`形式のバイナリログのみをサポートしており、 `STATEMENT`形式と`MIXED`形式のバイナリログはサポートしていません。そのため、DMのフィルタリングルールはMySQLの`ROW`形式のフィルタリングルールに対応しています。
-> -   MySQLは、DDL文の`USE`のセクションに明示的に指定されたデータベース名のみに基づいてDDL文を判別します。DMは、まずDDL文のデータベース名セクションに基づいて文を判別します。DDL文にそのようなセクションが含まれていない場合、DMは`USE`セクションに基づいて文を判別します。判別対象のSQL文が`USE test_db_2; CREATE TABLE test_db_1.test_table (c1 INT PRIMARY KEY)`で、MySQLに`replicate-do-db=test_db_1`が設定され、DMに`do-dbs: ["test_db_1"]`が設定されているとします。この場合、このルールはDMにのみ適用され、MySQLには適用されません。
+> - MySQLでは、 [`replicate-wild-do-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-wild-do-table)と[`replicate-wild-ignore-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-wild-ignore-table)ワイルドカード文字をサポートしています。DMでは、一部のパラメータ値は`~`で始まる正規表現を直接サポートしています。
+> - DMは現在、 `ROW`形式のバイナリログのみをサポートしており、 `STATEMENT`形式と`MIXED`形式のバイナリログはサポートしていません。そのため、DMのフィルタリングルールはMySQLの`ROW`形式のフィルタリングルールに対応しています。
+> - MySQLは、DDL文の`USE`のセクションに明示的に指定されたデータベース名のみに基づいてDDL文を判別します。DMは、まずDDL文のデータベース名セクションに基づいて文を判別します。DDL文にそのようなセクションが含まれていない場合、DMは`USE`セクションに基づいて文を判別します。判別対象のSQL文が`USE test_db_2; CREATE TABLE test_db_1.test_table (c1 INT PRIMARY KEY)`で、MySQLに`replicate-do-db=test_db_1`が設定され、DMに`do-dbs: ["test_db_1"]`が設定されているとします。この場合、このルールはDMにのみ適用され、MySQLには適用されません。
 
 `test`テーブルのフィルタリング プロセス`t`は次のとおりです。
 
-1.  **スキーマ**レベルでフィルターします。
+1. **スキーマ**レベルでフィルターします。
 
-    -   `do-dbs`が空でない場合は、 `do-dbs`に一致するスキーマが存在するかどうかを確認します。
+    - `do-dbs`が空でない場合は、 `do-dbs`に一致するスキーマが存在するかどうかを確認します。
 
-        -   はいの場合は、**テーブル**レベルでフィルタリングを続行します。
-        -   そうでない場合は、 `test` 。 `t` 。
+        - はいの場合は、**テーブル**レベルでフィルタリングを続行します。
+        - そうでない場合は、 `test` 。 `t` 。
 
-    -   `do-dbs`が空で`ignore-dbs`が空でない場合は、 `ignore-dbs`に一致するスキーマが存在するかどうかを確認します。
+    - `do-dbs`が空で`ignore-dbs`が空でない場合は、 `ignore-dbs`に一致するスキーマが存在するかどうかを確認します。
 
-        -   はいの場合は、フィルター`test` 。 `t` 。
-        -   そうでない場合は、**テーブル**レベルでフィルタリングを続行します。
+        - はいの場合は、フィルター`test` 。 `t` 。
+        - そうでない場合は、**テーブル**レベルでフィルタリングを続行します。
 
-    -   `do-dbs`と`ignore-dbs`両方が空の場合は、**テーブル**レベルでフィルタリングを続行します。
+    - `do-dbs`と`ignore-dbs`両方が空の場合は、**テーブル**レベルでフィルタリングを続行します。
 
-2.  **テーブル**レベルでフィルターします。
+2. **テーブル**レベルでフィルターします。
 
-    1.  `do-tables`が空でない場合は、 `do-tables`に一致するテーブルが存在するかどうかを確認します。
+    1. `do-tables`が空でない場合は、 `do-tables`に一致するテーブルが存在するかどうかを確認します。
 
-        -   はいの場合は、 `test` . `t`移行します。
-        -   そうでない場合は、 `test` 。 `t` 。
+        - はいの場合は、 `test` . `t`移行します。
+        - そうでない場合は、 `test` 。 `t` 。
 
-    2.  `ignore-tables`が空でない場合は、 `ignore-tables`に一致するテーブルが存在するかどうかを確認します。
+    2. `ignore-tables`が空でない場合は、 `ignore-tables`に一致するテーブルが存在するかどうかを確認します。
 
-        -   はいの場合は、フィルター`test` 。 `t` 。
-        -   そうでない場合は、 `test` 。 `t` 。 を移行します。
+        - はいの場合は、フィルター`test` 。 `t` 。
+        - そうでない場合は、 `test` 。 `t` 。 を移行します。
 
-    3.  `do-tables`と`ignore-tables`両方が空の場合は、 `test` 。 `t` 。
+    3. `do-tables`と`ignore-tables`両方が空の場合は、 `test` 。 `t` 。
 
 > **Note:**
 >

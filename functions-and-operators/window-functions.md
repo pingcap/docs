@@ -9,9 +9,9 @@ TiDBにおけるウィンドウ関数の使用方法は、MySQL 8.0と同様で�
 
 TiDB では、次のシステム変数を使用してウィンドウ関数を制御できます。
 
--   [`tidb_enable_window_function`](/system-variables.md#tidb_enable_window_function) : ウィンドウ関数はパーサー内で追加の[キーワード](/keywords.md)予約するため、TiDB はこの変数を使用してウィンドウ関数を無効化します。TiDB のアップグレード後に SQL 文の解析エラーが発生する場合は、この変数を`OFF`に設定してみてください。
--   [`tidb_enable_pipelined_window_function`](/system-variables.md#tidb_enable_pipelined_window_function) : この変数を使用して、ウィンドウ関数のパイプライン実行アルゴリズムを無効にすることができます。
--   [`windowing_use_high_precision`](/system-variables.md#windowing_use_high_precision) : この変数を使用して、ウィンドウ関数の高精度モードを無効にすることができます。
+- [`tidb_enable_window_function`](/system-variables.md#tidb_enable_window_function) : ウィンドウ関数はパーサー内で追加の[キーワード](/keywords.md)予約するため、TiDB はこの変数を使用してウィンドウ関数を無効化します。TiDB のアップグレード後に SQL 文の解析エラーが発生する場合は、この変数を`OFF`に設定してみてください。
+- [`tidb_enable_pipelined_window_function`](/system-variables.md#tidb_enable_pipelined_window_function) : この変数を使用して、ウィンドウ関数のパイプライン実行アルゴリズムを無効にすることができます。
+- [`windowing_use_high_precision`](/system-variables.md#windowing_use_high_precision) : この変数を使用して、ウィンドウ関数の高精度モードを無効にすることができます。
 
 ウィンドウ関数[ここに記載](/tiflash/tiflash-supported-pushdown-calculations.md) TiFlashにプッシュダウンできます。
 
@@ -107,8 +107,8 @@ FROM (
 
 次の例では、 2 つの異なるウィンドウ定義を使用しています。
 
--   `PARTITION BY n MOD 2 ORDER BY n`は、テーブル`a`のデータを`1, 3`と`2, 4`の2つのグループに分割します。したがって、これらのグループの最初の値である`1`または`2`が返されます。
--   `PARTITION BY n <= 2 ORDER BY n`は、テーブル`a`のデータを`1, 2`と`3, 4`の2つのグループに分割します。したがって、 `n`がどのグループに属しているかに応じて`1`または`3`を返します。
+- `PARTITION BY n MOD 2 ORDER BY n`は、テーブル`a`のデータを`1, 3`と`2, 4`の2つのグループに分割します。したがって、これらのグループの最初の値である`1`または`2`が返されます。
+- `PARTITION BY n <= 2 ORDER BY n`は、テーブル`a`のデータを`1, 2`と`3, 4`の2つのグループに分割します。したがって、 `n`がどのグループに属しているかに応じて`1`または`3`を返します。
 
 ```sql
 SELECT

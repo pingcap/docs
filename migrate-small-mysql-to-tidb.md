@@ -13,8 +13,8 @@ summary: 小さなデータセットを MySQL から TiDB に移行する方法�
 
 ## 前提条件 {#prerequisites}
 
--   [TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)
--   [DMのソースデータベースとターゲットデータベースに必要な権限を付与します](/dm/dm-worker-intro.md)
+- [TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)
+- [DMのソースデータベースとターゲットデータベースに必要な権限を付与します](/dm/dm-worker-intro.md)
 
 ## ステップ1. データソースを作成する {#step-1-create-the-data-source}
 
@@ -124,13 +124,13 @@ tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 
 TiUPを使用して DM をデプロイする際に Prometheus、Alertmanager、Grafana をデプロイしている場合は、デプロイ時に指定した IP アドレスとポートを使用して Grafana にアクセスできます。その後、DM ダッシュボードを選択して、DM 関連の監視メトリクスを表示できます。
 
--   DMマスターのログディレクトリ：DMマスタープロセスパラメータ`--log-file`で指定されます。TiUPを使用してDMを展開した場合、ログディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`なります。
--   DM-workerのログディレクトリ：DM-workerプロセスパラメータ`--log-file`で指定されます。TiUPを使用してDMをデプロイした場合、デフォルトのログディレクトリは`/dm-deploy/dm-worker-8262/log/`です。
+- DMマスターのログディレクトリ：DMマスタープロセスパラメータ`--log-file`で指定されます。TiUPを使用してDMを展開した場合、ログディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`なります。
+- DM-workerのログディレクトリ：DM-workerプロセスパラメータ`--log-file`で指定されます。TiUPを使用してDMをデプロイした場合、デフォルトのログディレクトリは`/dm-deploy/dm-worker-8262/log/`です。
 
 ## 次は何？ {#what-s-next}
 
--   [移行タスクを一時停止する](/dm/dm-pause-task.md)
--   [移行タスクを再開する](/dm/dm-resume-task.md)
--   [移行タスクを停止する](/dm/dm-stop-task.md)
--   [クラスターデータソースとタスク構成をエクスポートおよびインポートする](/dm/dm-export-import-config.md)
--   [失敗したDDL文を処理する](/dm/handle-failed-ddl-statements.md)
+- [移行タスクを一時停止する](/dm/dm-pause-task.md)
+- [移行タスクを再開する](/dm/dm-resume-task.md)
+- [移行タスクを停止する](/dm/dm-stop-task.md)
+- [クラスターデータソースとタスク構成をエクスポートおよびインポートする](/dm/dm-export-import-config.md)
+- [失敗したDDL文を処理する](/dm/handle-failed-ddl-statements.md)

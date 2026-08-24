@@ -11,24 +11,24 @@ summary: MySQL CLIを使用して、 TiDB Cloud StarterまたはTiDB Cloud Essen
 
 MySQL CLI を介してTiDB Cloud StarterまたはTiDB Cloud Essentialにデータをインポートするには、以下の前提条件を満たす必要があります。
 
--   TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにアクセスできます。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)」の手順に従って作成します。
--   ローカルコンピュータにMySQL CLIをインストールしてください。
+- TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにアクセスできます。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)」の手順に従って作成します。
+- ローカルコンピュータにMySQL CLIをインストールしてください。
 
 ## ステップ1. TiDB Cloud StarterまたはEssentialインスタンスに接続します。 {#step-1-connect-to-your-tidb-cloud-starter-or-essential-instance}
 
 TiDB Cloud StarterまたはEssentialインスタンスに接続してください。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
+3. 接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **Connection Type**は`Public`に設定されています。
-    -   **Connect With**`MySQL CLI`に設定されています。
-    -   お使いの環境に合った**Operating System**を選択してください。
+    - **Connection Type**は`Public`に設定されています。
+    - **Connect With**`MySQL CLI`に設定されています。
+    - お使いの環境に合った**Operating System**を選択してください。
 
-4.  **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
+4. **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
 
     > **Tip:**
     >
@@ -62,9 +62,9 @@ SQLファイルまたはCSVファイルからデータをインポートでき�
 
 SQLファイルからデータをインポートするには、以下の手順を実行してください。
 
-1.  インポートしたいデータを含む実際のSQLファイル（例： `product_data.sql` ）を提供してください。このSQLファイルには、実際のデータを含む`INSERT`個のステートメントが含まれている必要があります。
+1. インポートしたいデータを含む実際のSQLファイル（例： `product_data.sql` ）を提供してください。このSQLファイルには、実際のデータを含む`INSERT`個のステートメントが含まれている必要があります。
 
-2.  SQLファイルからデータをインポートするには、以下のコマンドを使用してください。
+2. SQLファイルからデータをインポートするには、以下のコマンドを使用してください。
 
     ```bash
     mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p<your_password> < product_data.sql
@@ -79,9 +79,9 @@ SQLファイルからデータをインポートするには、以下の手順�
 
 CSVファイルからデータをインポートするには、以下の手順を実行してください。
 
-1.  TiDBで、データインポートのニーズに合わせてデータベースとスキーマを作成します。
+1. TiDBで、データインポートのニーズに合わせてデータベースとスキーマを作成します。
 
-2.  インポートしたいデータを含むサンプルCSVファイル（例： `product_data.csv` ）を提供してください。以下はCSVファイルの例です。
+2. インポートしたいデータを含むサンプルCSVファイル（例： `product_data.csv` ）を提供してください。以下はCSVファイルの例です。
 
     **product_data.csv:**
 
@@ -92,7 +92,7 @@ CSVファイルからデータをインポートするには、以下の手順�
     6,Tablet,299.99
     ```
 
-3.  以下のコマンドを使用して、CSVファイルからデータをインポートします。
+3. 以下のコマンドを使用して、CSVファイルからデータをインポートします。
 
     ```bash
     mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p<your_password> -e "LOAD DATA LOCAL INFILE '<your_csv_path>' INTO TABLE products

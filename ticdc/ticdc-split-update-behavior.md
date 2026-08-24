@@ -9,8 +9,8 @@ summary: TiCDC が UPDATE` イベントを分割するかどうかに関する�
 
 v6.5.10、v7.1.6、v7.5.2、v8.1.1、v8.2.0以降では、MySQLシンクを使用する場合、テーブルのレプリケーション要求を受信したTiCDCノードは、下流へのレプリケーションを開始する前に、PDから現在のタイムスタンプ`thresholdTS`を取得します。このタイムスタンプの値に基づいて、TiCDCは`UPDATE`イベントを分割するかどうかを決定します。
 
--   1 つまたは複数の`UPDATE`変更を含むトランザクションの場合、トランザクション`commitTS` `thresholdTS`未満であれば、TiCDC は`UPDATE`イベントを`DELETE`イベントと`INSERT`イベントに分割してから、それらを Sorter モジュールに書き込みます。
--   トランザクション`commitTS`が`thresholdTS`以上である`UPDATE`イベントの場合、TiCDC はそれらを分割しません。詳細については、GitHub の問題[＃10918](https://github.com/pingcap/tiflow/issues/10918)を参照してください。
+- 1 つまたは複数の`UPDATE`変更を含むトランザクションの場合、トランザクション`commitTS` `thresholdTS`未満であれば、TiCDC は`UPDATE`イベントを`DELETE`イベントと`INSERT`イベントに分割してから、それらを Sorter モジュールに書き込みます。
+- トランザクション`commitTS`が`thresholdTS`以上である`UPDATE`イベントの場合、TiCDC はそれらを分割しません。詳細については、GitHub の問題[＃10918](https://github.com/pingcap/tiflow/issues/10918)を参照してください。
 
 > **Note:**
 >
@@ -40,7 +40,7 @@ UPDATE t SET a = 2 WHERE a = 1;
 UPDATE t SET a = 3 WHERE a = 2;
 ```
 
--   この動作変更前、TiCDCはこれらの`UPDATE`イベントをSorterモジュールに書き込み、その後`DELETE`つと`INSERT`イベントに分割していました。分割後、下流におけるこれらのイベントの実際の実行順序は以下のようになります。
+- この動作変更前、TiCDCはこれらの`UPDATE`イベントをSorterモジュールに書き込み、その後`DELETE`つと`INSERT`イベントに分割していました。分割後、下流におけるこれらのイベントの実際の実行順序は以下のようになります。
 
     ```sql
     BEGIN;
@@ -53,7 +53,7 @@ UPDATE t SET a = 3 WHERE a = 2;
 
     ダウンストリームがトランザクションを実行した後、データベース内のレコードは`(3, 2)`なりますが、これはアップストリーム データベースのレコード ( `(2, 1)`と`(3, 2)` ) と異なり、データの不整合の問題があることを示しています。
 
--   この動作変更後、TiCDCが対応するテーブルを下流にレプリケーションし始める際に、トランザクション`commitTS` PDからフェッチされた`thresholdTS`より小さい場合、TiCDCはこれらの`UPDATE`イベントを`DELETE`つと`INSERT`イベントに分割してからSorterモジュールに書き込みます。Sorterモジュールによるソート後、下流におけるこれらのイベントの実際の実行順序は以下のようになります。
+- この動作変更後、TiCDCが対応するテーブルを下流にレプリケーションし始める際に、トランザクション`commitTS` PDからフェッチされた`thresholdTS`より小さい場合、TiCDCはこれらの`UPDATE`イベントを`DELETE`つと`INSERT`イベントに分割してからSorterモジュールに書き込みます。Sorterモジュールによるソート後、下流におけるこれらのイベントの実際の実行順序は以下のようになります。
 
     ```sql
     BEGIN;
@@ -116,8 +116,8 @@ COMMIT;
 
 v6.5.10、v7.1.6、v7.5.3、v8.1.1以降、MySQL以外のシンクを使用する場合、TiCDCはGitHub Issue [＃11211](https://github.com/pingcap/tiflow/issues/11211)に記載されているように、 `output-raw-change-event`パラメータを介して主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御できるようになりました。このパラメータの具体的な動作は次のとおりです。
 
--   `output-raw-change-event = false`設定すると、主キーまたは null 以外の一意インデックス値が`UPDATE`イベントで変更された場合、TiCDC はイベントを`DELETE`と`INSERT`イベントに分割し、すべてのイベントが`INSERT`イベントの前の`DELETE`イベントのシーケンスに従うようにします。
--   `output-raw-change-event = true`設定すると、TiCDCは`UPDATE`イベントを分割せず、 [MySQL以外のシンクの主キーまたは一意キーの`UPDATE`イベントを分割する](/ticdc/ticdc-split-update-behavior.md#split-primary-or-unique-key-update-events-for-non-mysql-sinks)で説明した問題への対処はコンシューマー側で行います。そうしないと、データの不整合が発生するリスクがあります。テーブルの主キーがクラスター化インデックスである場合、主キーへの更新はTiDB内で依然として`DELETE`つと`INSERT`イベントに分割されますが、この動作は`output-raw-change-event`パラメータの影響を受けません。
+- `output-raw-change-event = false`設定すると、主キーまたは null 以外の一意インデックス値が`UPDATE`イベントで変更された場合、TiCDC はイベントを`DELETE`と`INSERT`イベントに分割し、すべてのイベントが`INSERT`イベントの前の`DELETE`イベントのシーケンスに従うようにします。
+- `output-raw-change-event = true`設定すると、TiCDCは`UPDATE`イベントを分割せず、 [MySQL以外のシンクの主キーまたは一意キーの`UPDATE`イベントを分割する](/ticdc/ticdc-split-update-behavior.md#split-primary-or-unique-key-update-events-for-non-mysql-sinks)で説明した問題への対処はコンシューマー側で行います。そうしないと、データの不整合が発生するリスクがあります。テーブルの主キーがクラスター化インデックスである場合、主キーへの更新はTiDB内で依然として`DELETE`つと`INSERT`イベントに分割されますが、この動作は`output-raw-change-event`パラメータの影響を受けません。
 
 > **Note**
 >

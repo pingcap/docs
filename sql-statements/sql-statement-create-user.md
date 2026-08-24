@@ -178,24 +178,24 @@ SELECT USER, HOST, USER_ATTRIBUTES FROM MYSQL.USER WHERE USER='newuser11';
 
 次の`CREATE USER`オプションは TiDB ではまだサポートされていないため、解析されますが無視されます。
 
--   `PASSWORD REQUIRE CURRENT DEFAULT`
--   `WITH MAX_QUERIES_PER_HOUR`
--   `WITH MAX_UPDATES_PER_HOUR`
+- `PASSWORD REQUIRE CURRENT DEFAULT`
+- `WITH MAX_QUERIES_PER_HOUR`
+- `WITH MAX_UPDATES_PER_HOUR`
 
 次の`CREATE USER`オプションも TiDB ではサポートされておらず、パーサーでは受け入れ*られません*。
 
--   `DEFAULT ROLE`
--   `PASSWORD REQUIRE CURRENT OPTIONAL`
+- `DEFAULT ROLE`
+- `PASSWORD REQUIRE CURRENT OPTIONAL`
 
 ## 参照 {#see-also}
 
 <CustomContent platform="tidb">
 
--   [MySQLとのセキュリティ互換性](/security-compatibility-with-mysql.md)
--   [権限管理](/privilege-management.md)
+- [MySQLとのセキュリティ互換性](/security-compatibility-with-mysql.md)
+- [権限管理](/privilege-management.md)
 
 </CustomContent>
 
--   [DROP USER](/sql-statements/sql-statement-drop-user.md)
--   [SHOW CREATE USER](/sql-statements/sql-statement-show-create-user.md)
--   [ALTER USER](/sql-statements/sql-statement-alter-user.md)
+- [DROP USER](/sql-statements/sql-statement-drop-user.md)
+- [SHOW CREATE USER](/sql-statements/sql-statement-show-create-user.md)
+- [ALTER USER](/sql-statements/sql-statement-alter-user.md)

@@ -41,8 +41,8 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
--   MySQL の`KILL`文は現在接続されている MySQL インスタンス内の接続のみを終了できますが、TiDB の`KILL`文はクラスター全体の任意の TiDB インスタンス内の接続を終了できます。
--   v7.2.0 以前のバージョンでは、MySQL コマンドラインの<kbd>Control+C</kbd>を使用して TiDB 内のクエリまたは接続を終了することはサポートされていません。
+- MySQL の`KILL`文は現在接続されている MySQL インスタンス内の接続のみを終了できますが、TiDB の`KILL`文はクラスター全体の任意の TiDB インスタンス内の接続を終了できます。
+- v7.2.0 以前のバージョンでは、MySQL コマンドラインの<kbd>Control+C</kbd>を使用して TiDB 内のクエリまたは接続を終了することはサポートされていません。
 
 ## 行動変化の説明 {#behavior-change-descriptions}
 
@@ -70,17 +70,17 @@ Global Kill機能を有効にすると、 `KILL`と`KILL TIDB`両方のステー
 
 Global Kill 機能が有効になっていない場合、または v6.1.0 より前のバージョンの TiDB を使用している場合は、次の点に注意してください。
 
--   デフォルトでは、 `KILL` MySQL と互換性がありません。これは、ロードバランサーの背後に複数の TiDB サーバーを配置することが一般的であるため、誤った TiDBサーバーによって接続が切断される事態を防ぐのに役立ちます。現在接続中の TiDB インスタンス上の他の接続を切断するには、 `KILL TIDB`ステートメントを実行して明示的に`TIDB`サフィックスを追加する必要があります。
+- デフォルトでは、 `KILL` MySQL と互換性がありません。これは、ロードバランサーの背後に複数の TiDB サーバーを配置することが一般的であるため、誤った TiDBサーバーによって接続が切断される事態を防ぐのに役立ちます。現在接続中の TiDB インスタンス上の他の接続を切断するには、 `KILL TIDB`ステートメントを実行して明示的に`TIDB`サフィックスを追加する必要があります。
 
 <CustomContent platform="tidb">
 
--   クライアントが常に同じTiDBインスタンスに接続されることが確実でない限り、設定ファイルで[`compatible-kill-query = true`](/tidb-configuration-file.md#compatible-kill-query)を設定することは**強く推奨されません**。これは、デフォルトのMySQLクライアントで<kbd>Control+C</kbd>を押すと、新しい接続が開かれ、その中で`KILL`が実行されるためです。クライアントとTiDBクラスタの間にプロキシが存在する場合、新しい接続が別のTiDBインスタンスにルーティングされ、誤って別のセッションが強制終了される可能性があります。
+- クライアントが常に同じTiDBインスタンスに接続されることが確実でない限り、設定ファイルで[`compatible-kill-query = true`](/tidb-configuration-file.md#compatible-kill-query)を設定することは**強く推奨されません**。これは、デフォルトのMySQLクライアントで<kbd>Control+C</kbd>を押すと、新しい接続が開かれ、その中で`KILL`が実行されるためです。クライアントとTiDBクラスタの間にプロキシが存在する場合、新しい接続が別のTiDBインスタンスにルーティングされ、誤って別のセッションが強制終了される可能性があります。
 
 </CustomContent>
 
--   `KILL TIDB`文はTiDBの拡張機能です。この文の機能は、MySQL `KILL [CONNECTION|QUERY]`コマンドおよびMySQLコマンドラインの<kbd>Control+C</kbd>に似ています。同じTiDBインスタンスで`KILL TIDB`安全に使用できます。
+- `KILL TIDB`文はTiDBの拡張機能です。この文の機能は、MySQL `KILL [CONNECTION|QUERY]`コマンドおよびMySQLコマンドラインの<kbd>Control+C</kbd>に似ています。同じTiDBインスタンスで`KILL TIDB`安全に使用できます。
 
 ## 参照 {#see-also}
 
--   [SHOW [FULL] PROCESSLIST](/sql-statements/sql-statement-show-processlist.md)
--   [CLUSTER_PROCESSLIST](/information-schema/information-schema-processlist.md#cluster_processlist)
+- [SHOW [FULL] PROCESSLIST](/sql-statements/sql-statement-show-processlist.md)
+- [CLUSTER_PROCESSLIST](/information-schema/information-schema-processlist.md#cluster_processlist)

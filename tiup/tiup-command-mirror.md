@@ -7,8 +7,8 @@ summary: TiUPミラーはTiUPの重要な概念であり、ローカルおよび
 
 TiUPでは、 [ミラー](/tiup/tiup-mirror-reference.md)は重要な概念です。TiUPは現在、2つの形式のミラーリングをサポートしています。
 
--   ローカル ミラー: TiUPクライアントとミラーは同じマシン上にあり、クライアントはファイル システムを介してミラーにアクセスします。
--   リモート ミラー: TiUPクライアントとミラーは同じマシン上に存在せず、クライアントはネットワーク経由でミラーにアクセスします。
+- ローカル ミラー: TiUPクライアントとミラーは同じマシン上にあり、クライアントはファイル システムを介してミラーにアクセスします。
+- リモート ミラー: TiUPクライアントとミラーは同じマシン上に存在せず、クライアントはネットワーク経由でミラーにアクセスします。
 
 `tiup mirror`コマンドはミラーの管理に使用され、ミラーの作成、コンポーネントの配布、キーの管理を行う方法を提供します。
 
@@ -26,15 +26,15 @@ tiup mirror <command> [flags]
 
 ## コマンドリスト {#command-list}
 
--   [genkey](/tiup/tiup-command-mirror-genkey.md) : 秘密鍵ファイルを生成する
--   [sign](/tiup/tiup-command-mirror-sign.md) : 秘密鍵ファイルを使用して特定のファイルに署名します
--   [init](/tiup/tiup-command-mirror-init.md) : 空のミラーを開始する
--   [set](/tiup/tiup-command-mirror-set.md) : 現在のミラーを設定する
--   [grant](/tiup/tiup-command-mirror-grant.md) : 現在のミラーに新しいコンポーネント所有者を付与します
--   [publish](/tiup/tiup-command-mirror-publish.md) : 新しいコンポーネントを現在のミラーに公開します
--   [modify](/tiup/tiup-command-mirror-modify.md) : 現在のミラー内のコンポーネントの属性を変更します
--   [rotate](/tiup/tiup-command-mirror-rotate.md) : 現在のミラーのルート証明書を更新します
--   [clone](/tiup/tiup-command-mirror-clone.md) : 既存のミラーから新しいミラーを複製します
--   [merge](/tiup/tiup-command-mirror-merge.md) : ミラーをマージする
+- [genkey](/tiup/tiup-command-mirror-genkey.md) : 秘密鍵ファイルを生成する
+- [sign](/tiup/tiup-command-mirror-sign.md) : 秘密鍵ファイルを使用して特定のファイルに署名します
+- [init](/tiup/tiup-command-mirror-init.md) : 空のミラーを開始する
+- [set](/tiup/tiup-command-mirror-set.md) : 現在のミラーを設定する
+- [grant](/tiup/tiup-command-mirror-grant.md) : 現在のミラーに新しいコンポーネント所有者を付与します
+- [publish](/tiup/tiup-command-mirror-publish.md) : 新しいコンポーネントを現在のミラーに公開します
+- [modify](/tiup/tiup-command-mirror-modify.md) : 現在のミラー内のコンポーネントの属性を変更します
+- [rotate](/tiup/tiup-command-mirror-rotate.md) : 現在のミラーのルート証明書を更新します
+- [clone](/tiup/tiup-command-mirror-clone.md) : 既存のミラーから新しいミラーを複製します
+- [merge](/tiup/tiup-command-mirror-merge.md) : ミラーをマージする
 
 [&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)

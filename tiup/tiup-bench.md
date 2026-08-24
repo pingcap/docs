@@ -42,12 +42,12 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
   -U, --user string           Database user (default to "root")
 ```
 
--   `--host`と`--port`にカンマ区切りの値を指定すると、クライアント側の負荷分散が有効になります。例えば`--host 172.16.4.1,172.16.4.2 --port 4000,4001`を指定すると、プログラムはラウンドロビン方式で選択された 172.16.4.1:4000、172.16.4.1:4001、172.16.4.2:4000、172.16.4.2:4001 に接続します。
--   ローカルデプロイメントの場合、デフォルトのデータベースホストアドレスは`127.0.0.1`です。リモートデータベースに接続する場合は、ホストとその他の関連パラメータを指定する必要があります。例: `tiup bench tpcc -H 192.168.169.31 -P 4000 -D tpcc -U root -p tidb --warehouses 4 --parts 4 prepare`
--   `--conn-params` [クエリ文字列](https://en.wikipedia.org/wiki/Query_string)の形式に従う必要があります。データベースによってパラメータが異なる場合があります。例:
-    -   `--conn-params tidb_isolation_read_engines='tiflash'` TiDB にTiFlashからの読み取りを強制します。
-    -   `--conn-params sslmode=disable` 、PostgreSQL に接続するときに SSL を無効にします。
--   CH-benCHmark を実行する場合、 `--ap-host` 、 `--ap-port` 、 `--ap-conn-params`を使用して、OLAP クエリ用のスタンドアロン TiDBサーバーを指定できます。
+- `--host`と`--port`にカンマ区切りの値を指定すると、クライアント側の負荷分散が有効になります。例えば`--host 172.16.4.1,172.16.4.2 --port 4000,4001`を指定すると、プログラムはラウンドロビン方式で選択された 172.16.4.1:4000、172.16.4.1:4001、172.16.4.2:4000、172.16.4.2:4001 に接続します。
+- ローカルデプロイメントの場合、デフォルトのデータベースホストアドレスは`127.0.0.1`です。リモートデータベースに接続する場合は、ホストとその他の関連パラメータを指定する必要があります。例: `tiup bench tpcc -H 192.168.169.31 -P 4000 -D tpcc -U root -p tidb --warehouses 4 --parts 4 prepare`
+- `--conn-params` [クエリ文字列](https://en.wikipedia.org/wiki/Query_string)の形式に従う必要があります。データベースによってパラメータが異なる場合があります。例:
+    - `--conn-params tidb_isolation_read_engines='tiflash'` TiDB にTiFlashからの読み取りを強制します。
+    - `--conn-params sslmode=disable` 、PostgreSQL に接続するときに SSL を無効にします。
+- CH-benCHmark を実行する場合、 `--ap-host` 、 `--ap-port` 、 `--ap-conn-params`を使用して、OLAP クエリ用のスタンドアロン TiDBサーバーを指定できます。
 
 次のセクションでは、 TiUPを使用して TPC-C、TPC-H、YCSB テストを実行する方法について説明します。
 
@@ -75,25 +75,25 @@ Flags:
 
 TPC-Cテストを実行するための簡略化された手順を以下に示します。詳細な手順については、 [TiDBでTPC-Cテストを実行する方法](/benchmark/benchmark-tidb-using-tpcc.md)を参照してください。
 
-1.  ハッシュを使用して 4 つのパーティションを使用して 4 つの倉庫を作成します。
+1. ハッシュを使用して 4 つのパーティションを使用して 4 つの倉庫を作成します。
 
     ```shell
     tiup bench tpcc --warehouses 4 --parts 4 prepare
     ```
 
-2.  TPC-C テストを実行します。
+2. TPC-C テストを実行します。
 
     ```shell
     tiup bench tpcc --warehouses 4 --time 10m run
     ```
 
-3.  一貫性を確認します。
+3. 一貫性を確認します。
 
     ```shell
     tiup bench tpcc --warehouses 4 check
     ```
 
-4.  データをクリーンアップします:
+4. データをクリーンアップします:
 
     ```shell
     tiup bench tpcc --warehouses 4 cleanup
@@ -101,13 +101,13 @@ TPC-Cテストを実行するための簡略化された手順を以下に示し
 
 大規模なデータセットでベンチマークを実行する場合、SQLによるデータ準備は遅くなる可能性があります。その場合は、以下のコマンドでCSV形式のデータを生成し、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)経由でTiDBにインポートできます。
 
--   CSV ファイルを生成します。
+- CSV ファイルを生成します。
 
     ```shell
     tiup bench tpcc --warehouses 4 prepare --output-dir data --output-type=csv
     ```
 
--   指定されたテーブルの CSV ファイルを生成します。
+- 指定されたテーブルの CSV ファイルを生成します。
 
     ```shell
     tiup bench tpcc --warehouses 4 prepare --output-dir data --output-type=csv --tables history,orders
@@ -132,13 +132,13 @@ Flags:
 
 ### テスト手順 {#test-procedures}
 
-1.  データを準備します:
+1. データを準備します:
 
     ```shell
     tiup bench tpch --sf=1 prepare
     ```
 
-2.  統計を収集します。
+2. 統計を収集します。
 
     OLAPシナリオでは、TiDBオプティマイザーが最適な実行計画を生成できるように、以下のSQL文を実行して事前に統計情報を収集してください。**<a href="/system-variables.md#tidb_analyze_column_options-new-in-v830">`tidb_analyze_column_options`</a> `ALL`に設定してください。そうしないと、統計情報を収集するとクエリのパフォーマンスが大幅に低下する可能性があります。**
 
@@ -146,21 +146,21 @@ Flags:
     set global tidb_analyze_column_options='ALL';
     ```
 
-3.  次のいずれかのコマンドを実行して、TPC-H テストを実行します。
+3. 次のいずれかのコマンドを実行して、TPC-H テストを実行します。
 
-    -   結果を確認する場合は、次のコマンドを実行します。
+    - 結果を確認する場合は、次のコマンドを実行します。
 
         ```shell
         tiup bench tpch --count=22 --sf=1 --check=true run
         ```
 
-    -   結果を確認しない場合は、次のコマンドを実行します。
+    - 結果を確認しない場合は、次のコマンドを実行します。
 
         ```shell
         tiup bench tpch --count=22 --sf=1 run
         ```
 
-4.  データをクリーンアップします:
+4. データをクリーンアップします:
 
     ```shell
     tiup bench tpch cleanup
@@ -172,13 +172,13 @@ YCSB を介して TiDB と TiKV の両方をストレス テストできます�
 
 ### ストレステスト TiDB {#stress-test-tidb}
 
-1.  データを準備します:
+1. データを準備します:
 
     ```shell
     tiup bench ycsb load tidb -p tidb.instances="127.0.0.1:4000" -p recordcount=10000
     ```
 
-2.  YCSB ワークロードを実行します。
+2. YCSB ワークロードを実行します。
 
     ```shell
     # The read-write percent is 95% by default
@@ -187,13 +187,13 @@ YCSB を介して TiDB と TiKV の両方をストレス テストできます�
 
 ### ストレステスト TiKV {#stress-test-tikv}
 
-1.  データを準備します:
+1. データを準備します:
 
     ```shell
     tiup bench ycsb load tikv -p tikv.pd="127.0.0.1:2379" -p recordcount=10000
     ```
 
-2.  YCSB ワークロードを実行します。
+2. YCSB ワークロードを実行します。
 
     ```shell
     # The read-write percent is 95% by default
@@ -204,7 +204,7 @@ YCSB を介して TiDB と TiKV の両方をストレス テストできます�
 
 任意のクエリを SQL ファイルに記述し、次のように`tiup bench rawsql`を実行してテストに使用することができます。
 
-1.  データとクエリを準備します。
+1. データとクエリを準備します。
 
     ```sql
     -- Prepare data
@@ -215,7 +215,7 @@ YCSB を介して TiDB と TiKV の両方をストレス テストできます�
     SELECT a, sleep(rand()) FROM t WHERE a < 4*rand();
     ```
 
-2.  RawSQL テストを実行します。
+2. RawSQL テストを実行します。
 
     ```shell
     tiup bench rawsql run --count 60 --query-files demo.sql

@@ -7,10 +7,10 @@ summary: 演算子の優先順位、比較関数と演算子、論理演算子�
 
 このドキュメントでは、演算子の優先順位、比較関数と演算子、論理演算子、および代入演算子について説明します。
 
--   [演算子の優先順位](#operator-precedence)
--   [比較関数と演算子](#comparison-functions-and-operators)
--   [論理演算子](#logical-operators)
--   [代入演算子](#assignment-operators)
+- [演算子の優先順位](#operator-precedence)
+- [比較関数と演算子](#comparison-functions-and-operators)
+- [論理演算子](#logical-operators)
+- [代入演算子](#assignment-operators)
 
 | 名前                                                                                                         | 説明                                                                                                                                                                   |
 | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -59,7 +59,7 @@ summary: 演算子の優先順位、比較関数と演算子、論理演算子�
 
 ## サポートされていない演算子 {#unsupported-operators}
 
--   [`SOUNDS LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#operator_sounds-like)
+- [`SOUNDS LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#operator_sounds-like)
 
 ## 演算子の優先順位 {#operator-precedence}
 
@@ -140,4 +140,4 @@ OR, ||
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
--   MySQL は`ILIKE`演算子をサポートしていません。
+- MySQL は`ILIKE`演算子をサポートしていません。

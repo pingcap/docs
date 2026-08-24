@@ -15,19 +15,19 @@ summary: TiDB Lightningは、MySQLデータをTiDBクラスタにインポート
 
 まず、[Dumpling](/dumpling-overview.md)を使用してMySQLからデータをエクスポートします。
 
-1.  TiUPが既にインストールされているかどうかを確認するには、 `tiup --version`を実行してください。TiUPがインストールされている場合は、この手順をスキップしてください。TiUPがインストールされていない場合は、次のコマンドを実行してください。
+1. TiUPが既にインストールされているかどうかを確認するには、 `tiup --version`を実行してください。TiUPがインストールされている場合は、この手順をスキップしてください。TiUPがインストールされていない場合は、次のコマンドを実行してください。
 
     ```
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-2.  TiUPを使用してDumplingをインストールする方法：
+2. TiUPを使用してDumplingをインストールする方法：
 
     ```shell
     tiup install dumpling
     ```
 
-3.  MySQL からデータをエクスポートするには、 [Dumplingを使用してデータをエクスポートする](/dumpling-overview.md#export-to-sql-files)に記載されている詳細な手順を参照してください。
+3. MySQL からデータをエクスポートするには、 [Dumplingを使用してデータをエクスポートする](/dumpling-overview.md#export-to-sql-files)に記載されている詳細な手順を参照してください。
 
     ```sh
     tiup dumpling -h 127.0.0.1 -P 3306 -u root -t 16 -F 256MB -B test -f 'test.t[12]' -o /data/my_database/
@@ -35,10 +35,10 @@ summary: TiDB Lightningは、MySQLデータをTiDBクラスタにインポート
 
     上記のコマンドでは：
 
-    -   `-t 16` : 16 スレッドを使用してデータをエクスポートします。
-    -   `-F 256MB` : 各テーブルを複数のファイルに分割し、各ファイルのサイズは約 256 MB にします。
-    -   `-B test` : `test`データベースからエクスポートします。
-    -   `-f 'test.t[12]'` : 2 つのテーブル`test.t1`と`test.t2`のみをエクスポートします。
+    - `-t 16` : 16 スレッドを使用してデータをエクスポートします。
+    - `-F 256MB` : 各テーブルを複数のファイルに分割し、各ファイルのサイズは約 256 MB にします。
+    - `-B test` : `test`データベースからエクスポートします。
+    - `-f 'test.t[12]'` : 2 つのテーブル`test.t1`と`test.t2`のみをエクスポートします。
 
     エクスポートされた完全なバックアップデータは、 `/data/my_database`ディレクトリに保存されます。
 
@@ -62,7 +62,7 @@ tiup install tidb-lightning
 >
 > このセクションのインポート方法は、テストと機能体験にのみ適しています。本番環境については、 [MySQLからTiDBへの大規模データセットの移行](/migrate-large-mysql-to-tidb.md)を参照してください。
 
-1.  構成ファイル`tidb-lightning.toml`を作成し、クラスタ情報に基づいて以下の設定を入力してください。
+1. 構成ファイル`tidb-lightning.toml`を作成し、クラスタ情報に基づいて以下の設定を入力してください。
 
     ```toml
     [lightning]
@@ -95,7 +95,7 @@ tiup install tidb-lightning
     pd-addr = "172.16.31.3:2379,56.78.90.12:3456"
     ```
 
-2.  `tidb-lightning`を実行します。 `SIGHUP`を使用してコマンドラインから直接プログラムを起動したときに、 `nohup`シグナルによってプログラムが終了するのを避けるため、 `nohup`コマンドをスクリプトに記述することをお勧めします。例:
+2. `tidb-lightning`を実行します。 `SIGHUP`を使用してコマンドラインから直接プログラムを起動したときに、 `nohup`シグナルによってプログラムが終了するのを避けるため、 `nohup`コマンドをスクリプトに記述することをお勧めします。例:
 
     ```shell
     #!/bin/bash

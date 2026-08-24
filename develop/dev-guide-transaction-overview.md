@@ -130,10 +130,10 @@ SELECT * FROM `users`;
 
 SQL-92 標準では、次の 4 つの分離レベルが定義されています。
 
--   コミットされていない読み取り ( `READ UNCOMMITTED` )
--   コミットされた読み取り ( `READ COMMITTED` )
--   繰り返し読み取り ( `REPEATABLE READ` )
--   シリアル化可能（ `SERIALIZABLE` ）。
+- コミットされていない読み取り ( `READ UNCOMMITTED` )
+- コミットされた読み取り ( `READ COMMITTED` )
+- 繰り返し読み取り ( `REPEATABLE READ` )
+- シリアル化可能（ `SERIALIZABLE` ）。
 
 詳細については、以下の表を参照してください。
 
@@ -163,6 +163,6 @@ TiDBは、MySQLとの整合性を確保するために、スナップショッ�
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

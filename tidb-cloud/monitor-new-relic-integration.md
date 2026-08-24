@@ -11,24 +11,24 @@ TiDB CloudはNew Relicとの連携をサポートしています。TiDB Cloudを
 
 TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統合（ベータ版）をサポートしてきました。2025年7月31日より、TiDB CloudレベルのNew Relic統合（PREVIEW）を導入します。2025年9月30日より、クラスターレベルのNew Relic統合が一般提供（GA）となります。
 
--   **クラスタレベルのNew Relic統合**：2025年7月31日までに組織内で削除されていない従来のプロジェクトレベルのDatadogまたはNew Relic統合が残っていない場合、 TiDB Cloudは組織が最新の機能強化を体験できるように、クラスタレベルのNew Relic統合を提供します。
--   **従来のプロジェクトレベルの New Relic 統合 (ベータ版)** : 2025 年 7 月 31 日時点で組織内に少なくとも 1 つの従来のプロジェクトレベルの Datadog または New Relic 統合が削除されずに残っている場合、 TiDB Cloud は、現在のダッシュボードへの影響を回避するために、組織向けにプロジェクトレベルで既存および新規の統合の両方を保持します。従来のプロジェクトレベルの New Relic 統合は、2025 年 10 月 31 日に廃止されました。組織がこれらの従来の統合をまだ使用している場合は、[DatadogとNew Relicの統合を移行する](/tidb-cloud/migrate-metrics-integrations.md)手順に従って、新しいクラスタレベルの統合に移行し、メトリクス関連サービスへの影響を最小限に抑えてください。
+- **クラスタレベルのNew Relic統合**：2025年7月31日までに組織内で削除されていない従来のプロジェクトレベルのDatadogまたはNew Relic統合が残っていない場合、 TiDB Cloudは組織が最新の機能強化を体験できるように、クラスタレベルのNew Relic統合を提供します。
+- **従来のプロジェクトレベルの New Relic 統合 (ベータ版)** : 2025 年 7 月 31 日時点で組織内に少なくとも 1 つの従来のプロジェクトレベルの Datadog または New Relic 統合が削除されずに残っている場合、 TiDB Cloud は、現在のダッシュボードへの影響を回避するために、組織向けにプロジェクトレベルで既存および新規の統合の両方を保持します。従来のプロジェクトレベルの New Relic 統合は、2025 年 10 月 31 日に廃止されました。組織がこれらの従来の統合をまだ使用している場合は、[DatadogとNew Relicの統合を移行する](/tidb-cloud/migrate-metrics-integrations.md)手順に従って、新しいクラスタレベルの統合に移行し、メトリクス関連サービスへの影響を最小限に抑えてください。
 
 ## 前提条件 {#prerequisites}
 
--   TiDB Cloud をNew Relic と統合するには、[New Relic](https://newrelic.com/)アカウントと、 `Ingest - License`タイプの[New Relic APIキーを作成する](https://one.newrelic.com/admin-portal/api-keys/home?)必要があります。
+- TiDB Cloud をNew Relic と統合するには、[New Relic](https://newrelic.com/)アカウントと、 `Ingest - License`タイプの[New Relic APIキーを作成する](https://one.newrelic.com/admin-portal/api-keys/home?)必要があります。
 
     New Relicのアカウントをお持ちでない場合は、[ここ](https://newrelic.com/signup)ご登録ください。
 
--   TiDB Cloudのサードパーティ メトリクス統合を設定するには、 TiDB Cloudで`Organization Owner`または`Project Owner`アクセス権が必要です。統合ページを表示したり、提供されたリンクから設定済みのダッシュボードにアクセスしたりするには、TiDB Cloudのプロジェクト内の対象のTiDB Cloud Dedicatedクラスターにアクセスするための`Project Viewer`ロール以上が必要です。
+- TiDB Cloudのサードパーティ メトリクス統合を設定するには、 TiDB Cloudで`Organization Owner`または`Project Owner`アクセス権が必要です。統合ページを表示したり、提供されたリンクから設定済みのダッシュボードにアクセスしたりするには、TiDB Cloudのプロジェクト内の対象のTiDB Cloud Dedicatedクラスターにアクセスするための`Project Viewer`ロール以上が必要です。
 
 ## 制限 {#limitation}
 
--   New Relicとの連携機能は、現在[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでのみ利用可能です。
+- New Relicとの連携機能は、現在[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでのみ利用可能です。
 
--   クラスターの状態が**CREATING** 、 **RESTORING** 、 **PAUSED** 、 **RESUMING**の場合は、New Relic の統合は利用できません。
+- クラスターの状態が**CREATING** 、 **RESTORING** 、 **PAUSED** 、 **RESUMING**の場合は、New Relic の統合は利用できません。
 
--   New Relicとの連携が確立されたクラスターが削除されると、それに関連付けられた連携サービスも削除されます。
+- New Relicとの連携が確立されたクラスターが削除されると、それに関連付けられた連携サービスも削除されます。
 
 ## 手順 {#steps}
 
@@ -39,40 +39,40 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 <SimpleTab>
 <div label="Cluster-level New Relic integration">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **Settings** &gt; **Integrations**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** &gt; **Integrations**をクリックします。
 
-3.  **Integrations**ページで、 **Integration to New Relic**をクリックします。
+3. **Integrations**ページで、 **Integration to New Relic**をクリックします。
 
-4.  New RelicのAPIキーを入力し、New Relicのサイトを選択してください。
+4. New RelicのAPIキーを入力し、New Relicのサイトを選択してください。
 
-5.  **Test Integration**をクリックします。
+5. **Test Integration**をクリックします。
 
-    -   テストが成功すると、 **Confirm**ボタンが表示されます。
-    -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、統合を再試行してください。
+    - テストが成功すると、 **Confirm**ボタンが表示されます。
+    - テストが失敗した場合は、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、統合を再試行してください。
 
-6.  統合を完了するには、 **Confirm**をクリックしてください。
+6. 統合を完了するには、 **Confirm**をクリックしてください。
 
 </div>
 <div label="Legacy project-level New Relic integration (Beta)">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
-2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
+2. プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  左側のナビゲーションペインで、 **Project Settings**の下にある**Project Settings**をクリックします。
+3. 左側のナビゲーションペインで、 **Project Settings**の下にある**Project Settings**をクリックします。
 
-4.  **Integrations**ページで、 **[New Relic との統合 (ベータ版)]**をクリックします。
+4. **Integrations**ページで、 **[New Relic との統合 (ベータ版)]**をクリックします。
 
-5.  New RelicのAPIキーを入力し、New Relicのサイトを選択してください。
+5. New RelicのAPIキーを入力し、New Relicのサイトを選択してください。
 
-6.  **Test Integration**をクリックします。
+6. **Test Integration**をクリックします。
 
-    -   テストが成功すると、 **Confirm**ボタンが表示されます。
-    -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、統合を再試行してください。
+    - テストが成功すると、 **Confirm**ボタンが表示されます。
+    - テストが失敗した場合は、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、統合を再試行してください。
 
-7.  統合を完了するには、 **Confirm**をクリックしてください。
+7. 統合を完了するには、 **Confirm**をクリックしてください。
 
 </div>
 </SimpleTab>
@@ -86,11 +86,11 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 
 新しいTiDB Cloudダッシュボードは、保留中の[広報](https://github.com/newrelic/newrelic-quickstarts/pull/2681)New Relicによってマージされた後にNew Relicで利用可能になります。それまでは、以下の手順でダッシュボードをNew Relicに手動でインポートできます。
 
-1.  新しいダッシュボード用のJSONファイルを準備します。
+1. 新しいダッシュボード用のJSONファイルを準備します。
 
-    1.  テンプレートの JSON ファイルを[ここ](https://github.com/pingcap/diag/blob/integration/integration/dashboards/newrelic-dashboard.json)ダウンロードします。
+    1. テンプレートの JSON ファイルを[ここ](https://github.com/pingcap/diag/blob/integration/integration/dashboards/newrelic-dashboard.json)ダウンロードします。
 
-    2.  JSONファイルで、4行目に`"permissions": "PUBLIC_READ_WRITE"`以下のように追加します。
+    2. JSONファイルで、4行目に`"permissions": "PUBLIC_READ_WRITE"`以下のように追加します。
 
         ```json
         {
@@ -101,7 +101,7 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
         }
         ```
 
-    3.  JSON ファイル内のすべての`"accountIds": []`フィールドに New Relic アカウント ID を追加してください。
+    3. JSON ファイル内のすべての`"accountIds": []`フィールドに New Relic アカウント ID を追加してください。
 
         例えば：
 
@@ -115,30 +115,30 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
         >
         > 統合エラーを回避するために、JSON ファイル内のすべての`"accountIds"`フィールドにアカウント ID が追加されていることを確認してください。
 
-2.  [New Relic](https://one.newrelic.com/)にログインし、左側のナビゲーションバーの**Dashboards**をクリックし、右上隅の**Import dashboard**をクリックします。
+2. [New Relic](https://one.newrelic.com/)にログインし、左側のナビゲーションバーの**Dashboards**をクリックし、右上隅の**Import dashboard**をクリックします。
 
-3.  表示されたダイアログで、準備した JSON ファイルの内容をすべてテキスト エリアに貼り付け、次に**Import dashboard**をクリックします。
+3. 表示されたダイアログで、準備した JSON ファイルの内容をすべてテキスト エリアに貼り付け、次に**Import dashboard**をクリックします。
 
 </div>
 <div label="Legacy project-level New Relic integration (Beta)">
 
-1.  [New Relic](https://one.newrelic.com/)にログインします。
-2.  **Add Data**をクリックし、 `TiDB Cloud`を検索して、 **TiDB Cloud Monitoring**ページに移動します。または、 [リンク](https://one.newrelic.com/marketplace?state=79bf274b-0c01-7960-c85c-3046ca96568e)クリックして直接ページにアクセスすることもできます。
-3.  アカウントIDを選択し、New Relicでダッシュボードを作成してください。
+1. [New Relic](https://one.newrelic.com/)にログインします。
+2. **Add Data**をクリックし、 `TiDB Cloud`を検索して、 **TiDB Cloud Monitoring**ページに移動します。または、 [リンク](https://one.newrelic.com/marketplace?state=79bf274b-0c01-7960-c85c-3046ca96568e)クリックして直接ページにアクセスすることもできます。
+3. アカウントIDを選択し、New Relicでダッシュボードを作成してください。
 
 </div>
 </SimpleTab>
 
 ## 事前に構築されたダッシュボードを確認する {#view-the-pre-built-dashboard}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、 **Integrations**ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、 **Integrations**ページに移動します。
 
-2.  **New Relic**セクションの**New Relic**リンクをクリックすると、TiDBクラスターの事前構築済みダッシュボードが表示されます。
+2. **New Relic**セクションの**New Relic**リンクをクリックすると、TiDBクラスターの事前構築済みダッシュボードが表示されます。
 
-3.  [新しいRelic統合バージョン](#new-relic-integration-version)に応じて、次のいずれかを実行します。
+3. [新しいRelic統合バージョン](#new-relic-integration-version)に応じて、次のいずれかを実行します。
 
-    -   クラスタレベルでのNew Relic統合を行うには、 **TiDB Cloud Dynamic Tracker**をクリックして新しいダッシュボードを表示してください。
-    -   従来のプロジェクトレベルのNew Relic統合（ベータ版）については、 **TiDB Cloud Monitoring**をクリックして従来のダッシュボードを表示してください。
+    - クラスタレベルでのNew Relic統合を行うには、 **TiDB Cloud Dynamic Tracker**をクリックして新しいダッシュボードを表示してください。
+    - 従来のプロジェクトレベルのNew Relic統合（ベータ版）については、 **TiDB Cloud Monitoring**をクリックして従来のダッシュボードを表示してください。
 
 ## New Relicで利用可能なメトリクス {#metrics-available-to-new-relic}
 

@@ -53,11 +53,11 @@ EMPTY_REGION_COUNT: 1
 
 `TABLE_STORAGE_STATS`テーブル内のフィールドは次のように説明されます。
 
--   `TABLE_SCHEMA` : テーブルが属するスキーマの名前。
--   `TABLE_NAME` : テーブルの名前。
--   `TABLE_ID` : テーブルの ID。
--   `PEER_COUNT` : テーブルのレプリカの数。
--   `REGION_COUNT` : リージョンの数。
--   `EMPTY_REGION_COUNT` : このテーブルにデータが含まれていないリージョンの数。
--   `TABLE_SIZE` : テーブルの合計サイズ (MiB 単位)。
--   `TABLE_KEYS` : テーブル内のレコードの合計数。
+- `TABLE_SCHEMA` : テーブルが属するスキーマの名前。
+- `TABLE_NAME` : テーブルの名前。
+- `TABLE_ID` : テーブルの ID。
+- `PEER_COUNT` : テーブルのレプリカの数。
+- `REGION_COUNT` : リージョンの数。
+- `EMPTY_REGION_COUNT` : このテーブルにデータが含まれていないリージョンの数。
+- `TABLE_SIZE` : テーブルの合計サイズ (MiB 単位)。
+- `TABLE_KEYS` : テーブル内のレコードの合計数。

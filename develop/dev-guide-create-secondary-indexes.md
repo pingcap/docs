@@ -12,10 +12,10 @@ aliases: ['/ja/tidb/stable/dev-guide-create-secondary-indexes/','/ja/tidb/dev/de
 
 セカンダリインデックスを作成する前に、以下の手順を実行してください。
 
--   [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)お読みください。
--   [データベースを作成する](/develop/dev-guide-create-database.md)。
--   [テーブルを作成する](/develop/dev-guide-create-table.md)。
+- [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)お読みください。
+- [データベースを作成する](/develop/dev-guide-create-database.md)。
+- [テーブルを作成する](/develop/dev-guide-create-table.md)。
 
 ## セカンダリインデックスとは何ですか？ {#what-is-secondary-index}
 
@@ -35,9 +35,9 @@ CREATE INDEX {index_name} ON {table_name} ({column_names});
 
 パラメータの説明:
 
--   `{index_name}` : セカンダリ インデックスの名前。
--   `{table_name}` : テーブル名。
--   `{column_names}` : インデックスを作成する列の名前をセミコロンとカンマで区切ります。
+- `{index_name}` : セカンダリ インデックスの名前。
+- `{table_name}` : テーブル名。
+- `{column_names}` : インデックスを作成する列の名前をセミコロンとカンマで区切ります。
 
 ## 新しいテーブルを作成する際にセカンダリインデックスを作成する {#create-a-secondary-index-when-creating-a-new-table}
 
@@ -49,8 +49,8 @@ KEY `{index_name}` (`{column_names}`)
 
 パラメータの説明:
 
--   `{index_name}` : セカンダリ インデックスの名前。
--   `{column_names}` : インデックスを作成する列の名前をセミコロンとカンマで区切ります。
+- `{index_name}` : セカンダリ インデックスの名前。
+- `{column_names}` : インデックスを作成する列の名前をセミコロンとカンマで区切ります。
 
 ## セカンダリインデックス作成におけるルール {#rules-in-secondary-index-creation}
 
@@ -141,8 +141,8 @@ CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`
 
 SQLパフォーマンスチューニングの詳細については、以下のドキュメントを参照してください。
 
--   [TiDB CloudのSQLチューニング概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
--   [TiDB Self-ManagedのSQLチューニング概要](/sql-tuning-overview.md)
+- [TiDB CloudのSQLチューニング概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
+- [TiDB Self-ManagedのSQLチューニング概要](/sql-tuning-overview.md)
 
 > **Note:**
 >
@@ -172,6 +172,6 @@ SHOW INDEXES FROM `bookshop`.`books`;
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

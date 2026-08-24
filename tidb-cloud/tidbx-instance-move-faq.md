@@ -13,14 +13,14 @@ TiDB Xインスタンスは、 [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-
 
 2026年4月15日以前は、 TiDB Cloudは単一の**TiDB dedicated project**タイプを使用してすべてのTiDB Cloudリソースを管理していました。このようなプロジェクトには、TiDB Cloud DedicatedクラスタとTiDB Xインスタンスが混在することができました。しかし、1つのプロジェクトに異なるリソースタイプを混在させると、次のような理由で管理が複雑化しました。
 
--   TiDB専用プロジェクトは、元々 TiDB Cloud Dedicatedクラスター向けに設計されたものです。
--   TiDB XインスタンスとTiDB Cloud Dedicatedクラスタは、動作と管理モデルが異なります。
+- TiDB専用プロジェクトは、元々 TiDB Cloud Dedicatedクラスター向けに設計されたものです。
+- TiDB XインスタンスとTiDB Cloud Dedicatedクラスタは、動作と管理モデルが異なります。
 
 2026年4月15日より、 TiDB Cloudは異なるリソースタイプを明確に区別するために、個別のプロジェクトタイプを導入します。各プロジェクトタイプは、それぞれ独自のリソースタイプをホストするようになります。
 
--   **TiDB dedicated project**： TiDB Cloud Dedicatedクラスター向け
--   **TiDB X project**：TiDB Xインスタンス向け
--   **TiDB X virtual project**：どのTiDB Xプロジェクトにもグループ化されていないTiDB Xインスタンス用
+- **TiDB dedicated project**： TiDB Cloud Dedicatedクラスター向け
+- **TiDB X project**：TiDB Xインスタンス向け
+- **TiDB X virtual project**：どのTiDB Xプロジェクトにもグループ化されていないTiDB Xインスタンス用
 
 TiDB Xプロジェクトは軽量で、TiDB Xインスタンスではオプションですが、 TiDB Cloud Dedicatedクラスタでは専用プロジェクトが必須です。これらのリソースを分離することで、より一貫性のあるユーザーエクスペリエンスが実現し、どのプロジェクト機能が適用されるかについての混乱が解消されます。
 
@@ -30,24 +30,24 @@ TiDB Xプロジェクトは軽量で、TiDB Xインスタンスではオプシ�
 
 TiDB Cloudは、異なるリソースタイプとユースケースに対応するため、3種類のプロジェクトタイプを提供しています。
 
--   **TiDB dedicated project**：このプロジェクトタイプは、 TiDB Cloud Dedicatedクラスターでのみ使用されます。
+- **TiDB dedicated project**：このプロジェクトタイプは、 TiDB Cloud Dedicatedクラスターでのみ使用されます。
 
-    -   この機能を使うと、RBAC、ネットワーク、メンテナンス、アラート購読、暗号化アクセスなど、 TiDB Cloud Dedicatedクラスタの設定をプロジェクトごとに個別に管理できます。
-    -   各TiDB Cloud Dedicatedクラスターは、専用プロジェクトに属していなければなりません。
-    -   TiDB Cloud Dedicatedクラスターは、インフラストラクチャの結合により、プロジェクト間で移動することはできません。
+    - この機能を使うと、RBAC、ネットワーク、メンテナンス、アラート購読、暗号化アクセスなど、 TiDB Cloud Dedicatedクラスタの設定をプロジェクトごとに個別に管理できます。
+    - 各TiDB Cloud Dedicatedクラスターは、専用プロジェクトに属していなければなりません。
+    - TiDB Cloud Dedicatedクラスターは、インフラストラクチャの結合により、プロジェクト間で移動することはできません。
 
--   **TiDB X project**：このプロジェクトタイプは、TiDB Xインスタンスでのみ使用されます。
+- **TiDB X project**：このプロジェクトタイプは、TiDB Xインスタンスでのみ使用されます。
 
-    -   これは、プロジェクトごとにTiDB XインスタンスのRBAC（ロールベースアクセス制御）を管理するのに役立ちます。
-    -   TiDB Xプロジェクトは軽量でオプションなので、プロジェクトに割り当てずにTiDB Xインスタンスを作成することもできます。
-    -   プロジェクトは、TiDB Xインスタンスを整理したりグループ化したりする場合に役立ちますが、必須ではありません。
-    -   TiDB Xインスタンスは、TiDB Xプロジェクト間、または組織レベルに戻して移動できます。
+    - これは、プロジェクトごとにTiDB XインスタンスのRBAC（ロールベースアクセス制御）を管理するのに役立ちます。
+    - TiDB Xプロジェクトは軽量でオプションなので、プロジェクトに割り当てずにTiDB Xインスタンスを作成することもできます。
+    - プロジェクトは、TiDB Xインスタンスを整理したりグループ化したりする場合に役立ちますが、必須ではありません。
+    - TiDB Xインスタンスは、TiDB Xプロジェクト間、または組織レベルに戻して移動できます。
 
--   **TiDB X virtual project**：このプロジェクトは仮想プロジェクトであり、管理機能は提供していません。
+- **TiDB X virtual project**：このプロジェクトは仮想プロジェクトであり、管理機能は提供していません。
 
-    -   これは、どのプロジェクトにも属さないTiDB Xインスタンスの論理コンテナとして機能するため、プロジェクトIDを使用することで、 TiDB Cloud APIを介してこれらのインスタンスにアクセスできます。
-    -   各組織には固有の仮想プロジェクトIDが付与されています。
-    -   この ID は、TiDB Cloud API の[アクセス可能なプロジェクトをすべて一覧表示します](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects)
+    - これは、どのプロジェクトにも属さないTiDB Xインスタンスの論理コンテナとして機能するため、プロジェクトIDを使用することで、 TiDB Cloud APIを介してこれらのインスタンスにアクセスできます。
+    - 各組織には固有の仮想プロジェクトIDが付与されています。
+    - この ID は、TiDB Cloud API の[アクセス可能なプロジェクトをすべて一覧表示します](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects)
 
 以下の表は、これらのプロジェクトタイプ間の違いを示しています。
 
@@ -67,8 +67,8 @@ TiDB Cloudは、異なるリソースタイプとユースケースに対応す�
 
 それは、現在のプロジェクトの構造によって異なります。
 
--   プロジェクトにTiDB Cloud StarterおよびEssentialインスタンスのみが含まれている場合、 TiDB Cloudは2026年4月15日に自動的にプロジェクトをTiDB Xプロジェクトに変換します。追加の操作は必要ありません。
--   プロジェクトにTiDB Cloud DedicatedクラスターとTiDB Cloud StarterまたはEssentialインスタンスの両方が含まれている場合、 TiDB Cloudコンソールは、上部のバナーにある**Move & Unlock**をクリックして、 TiDB Cloud StarterおよびEssentialインスタンスを新しい TiDB X プロジェクトに移動するように促します。
+- プロジェクトにTiDB Cloud StarterおよびEssentialインスタンスのみが含まれている場合、 TiDB Cloudは2026年4月15日に自動的にプロジェクトをTiDB Xプロジェクトに変換します。追加の操作は必要ありません。
+- プロジェクトにTiDB Cloud DedicatedクラスターとTiDB Cloud StarterまたはEssentialインスタンスの両方が含まれている場合、 TiDB Cloudコンソールは、上部のバナーにある**Move & Unlock**をクリックして、 TiDB Cloud StarterおよびEssentialインスタンスを新しい TiDB X プロジェクトに移動するように促します。
 
 ## 誰が移行作業を実行できますか？ {#who-can-perform-the-migration}
 
@@ -80,14 +80,14 @@ TiDB Cloud StarterおよびEssentialインスタンスのみを含むプロジ�
 
 移行後に何が変わるのか：
 
--   このプロジェクトはTiDB Xプロジェクトになります。
--   新しいTiDB Xプロジェクトには、ネットワーク設定、CMEK設定、メンテナンス構成などの専用のプロジェクト設定は含まれていません。
+- このプロジェクトはTiDB Xプロジェクトになります。
+- 新しいTiDB Xプロジェクトには、ネットワーク設定、CMEK設定、メンテナンス構成などの専用のプロジェクト設定は含まれていません。
 
 移行後も変わらないもの：
 
--   既存のインスタンスとそのデータ、可用性、およびパフォーマンス。
--   お客様の請求額と利用状況。
--   プロジェクト名とプロジェクトID。
+- 既存のインスタンスとそのデータ、可用性、およびパフォーマンス。
+- お客様の請求額と利用状況。
+- プロジェクト名とプロジェクトID。
 
 ## プロジェクトにTiDB Cloud DedicatedクラスターとTiDB Cloud StarterまたはEssentialインスタンスの両方が含まれている場合、どうなりますか？ {#what-happens-if-my-project-contains-both-tidb-cloud-dedicated-clusters-and-tidb-cloud-starter-or-essential-instances}
 
@@ -105,18 +105,18 @@ TiDB Cloudのリソースごとに異なるプロジェクトタイプが導入�
 
 移行後に何が変わるのか：
 
--   TiDB Cloud StarterおよびEssentialインスタンスは、新しく作成されたTiDB Xプロジェクトに移行されます。
--   移行後のインスタンスは、新しいプロジェクトIDに属します。
--   プロジェクトレベルのRBAC権限は、新しいプロジェクトにコピーされます。
+- TiDB Cloud StarterおよびEssentialインスタンスは、新しく作成されたTiDB Xプロジェクトに移行されます。
+- 移行後のインスタンスは、新しいプロジェクトIDに属します。
+- プロジェクトレベルのRBAC権限は、新しいプロジェクトにコピーされます。
 
 移行後も変わらないもの：
 
--   インスタンスデータ。
--   インスタンスの可用性。
--   インスタンスのパフォーマンス。
--   お客様の請求額と利用状況。
--   インスタンスの基盤となるインフラストラクチャ。
--   TiDB Cloud Dedicatedクラスターは、現在のプロジェクトに留まり、移動されることはありません。
+- インスタンスデータ。
+- インスタンスの可用性。
+- インスタンスのパフォーマンス。
+- お客様の請求額と利用状況。
+- インスタンスの基盤となるインフラストラクチャ。
+- TiDB Cloud Dedicatedクラスターは、現在のプロジェクトに留まり、移動されることはありません。
 
 この移行には追加費用はかかりません。
 
@@ -126,13 +126,13 @@ TiDB Cloudのリソースごとに異なるプロジェクトタイプが導入�
 
 TiDB Cloud StarterまたはEssentialインスタンスを新しい TiDB X プロジェクトに移行した場合は、以下の項目など、元のプロジェクト ID または元のプロジェクト レベルの設定に依存するものを確認してください。
 
--   自動化またはスクリプト
--   統合
--   プロジェクトベースの運用ワークフロー
--   ユーザーアクセスとRBACの割り当て
--   Data Serviceの設定
--   データアプリ
--   Data Service APIキー
+- 自動化またはスクリプト
+- 統合
+- プロジェクトベースの運用ワークフロー
+- ユーザーアクセスとRBACの割り当て
+- Data Serviceの設定
+- データアプリ
+- Data Service APIキー
 
 プロジェクトレベルのRBAC権限は新しいプロジェクトにコピーされますが、移行後もアクセス権限を確認し、ユーザーとワークフローが期待どおりに機能することを確認する必要があります。
 

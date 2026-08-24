@@ -216,8 +216,8 @@ mysql> SELECT * FROM t1; -- MySQL returns 1 2; TiDB returns 1.
 
 > **Note:**
 >
-> -   この最適化は楽観的トランザクションにのみ適用されます。
-> -   この最適化は`INSERT IGNORE`と`INSERT ON DUPLICATE KEY UPDATE`には適用されず、通常の`INSERT`ステートメントにのみ適用されます。
+> - この最適化は楽観的トランザクションにのみ適用されます。
+> - この最適化は`INSERT IGNORE`と`INSERT ON DUPLICATE KEY UPDATE`には適用されず、通常の`INSERT`ステートメントにのみ適用されます。
 
 ## ステートメントのロールバック {#statement-rollback}
 
@@ -292,9 +292,9 @@ TiDBはデフォルトで線形一貫性を保証します。線形一貫性の�
 
 因果一貫性が有効になっている 2 つのトランザクションには、次の特性があります。
 
--   [潜在的な因果関係を持つトランザクションは、一貫した論理順序と物理的なコミット順序を持つ](#transactions-with-potential-causal-relationship-have-the-consistent-logical-order-and-physical-commit-order)
--   [因果関係のないトランザクションは、一貫した論理順序と物理的なコミット順序を保証しません](#transactions-with-no-causal-relationship-do-not-guarantee-consistent-logical-order-and-physical-commit-order)
--   [ロックなしの読み取りでは因果関係は生まれない](#reads-without-lock-do-not-create-causal-relationship)
+- [潜在的な因果関係を持つトランザクションは、一貫した論理順序と物理的なコミット順序を持つ](#transactions-with-potential-causal-relationship-have-the-consistent-logical-order-and-physical-commit-order)
+- [因果関係のないトランザクションは、一貫した論理順序と物理的なコミット順序を保証しません](#transactions-with-no-causal-relationship-do-not-guarantee-consistent-logical-order-and-physical-commit-order)
+- [ロックなしの読み取りでは因果関係は生まれない](#reads-without-lock-do-not-create-causal-relationship)
 
 ### 潜在的な因果関係を持つトランザクションは、一貫した論理順序と物理的なコミット順序を持つ {#transactions-with-potential-causal-relationship-have-the-consistent-logical-order-and-physical-commit-order}
 

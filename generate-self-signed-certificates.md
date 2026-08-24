@@ -24,13 +24,13 @@ summary: openssl` を使用して自己署名証明書を生成します。
 
 ## OpenSSLをインストールする {#install-openssl}
 
--   Debian または Ubuntu OS の場合:
+- Debian または Ubuntu OS の場合:
 
     ```bash
     apt install openssl
     ```
 
--   RedHat または CentOS OS の場合:
+- RedHat または CentOS OS の場合:
 
     ```bash
     yum install openssl
@@ -42,19 +42,19 @@ summary: openssl` を使用して自己署名証明書を生成します。
 
 証明機関（CA）は、デジタル証明書を発行する信頼できる機関です。実際には、管理者に証明書の発行を依頼するか、信頼できるCAを利用してください。CAは複数の証明書ペアを管理しています。ここでは、以下の手順に従って、オリジナルの証明書ペアを生成するだけで済みます。
 
-1.  ルートキーを生成します:
+1. ルートキーを生成します:
 
     ```bash
     openssl genrsa -out root.key 4096
     ```
 
-2.  ルート証明書を生成します:
+2. ルート証明書を生成します:
 
     ```bash
     openssl req -new -x509 -days 1000 -key root.key -out root.crt
     ```
 
-3.  ルート証明書を検証します。
+3. ルート証明書を検証します。
 
     ```bash
     openssl x509 -text -in root.crt -noout
@@ -66,22 +66,22 @@ summary: openssl` を使用して自己署名証明書を生成します。
 
 ### クラスタで使用される可能性のある証明書 {#certificates-that-might-be-used-in-the-cluster}
 
--   tidb-server 証明書: TiDB が他のコンポーネントやクライアントに対して TiDB を認証するために使用されます。
--   tikv-server 証明書: TiKV が他のコンポーネントやクライアントに対して TiKV を認証するために使用されます
--   pd-server 証明書: PD が他のコンポーネントやクライアントに対して PD を認証するために使用されます。
--   クライアント証明書: PD、TiKV、TiDBからのクライアントの認証に使用されます（例: `pd-ctl`、`tikv-ctl`）
+- tidb-server 証明書: TiDB が他のコンポーネントやクライアントに対して TiDB を認証するために使用されます。
+- tikv-server 証明書: TiKV が他のコンポーネントやクライアントに対して TiKV を認証するために使用されます
+- pd-server 証明書: PD が他のコンポーネントやクライアントに対して PD を認証するために使用されます。
+- クライアント証明書: PD、TiKV、TiDBからのクライアントの認証に使用されます（例: `pd-ctl`、`tikv-ctl`）
 
 ### TiKVインスタンスに証明書を発行する {#issue-certificates-to-tikv-instances}
 
 TiKV インスタンスに証明書を発行するには、次の手順を実行します。
 
-1.  証明書に対応する秘密鍵を生成します。
+1. 証明書に対応する秘密鍵を生成します。
 
     ```bash
     openssl genrsa -out tikv.key 2048
     ```
 
-2.  OpenSSL 構成テンプレート ファイルのコピーを作成します (テンプレート ファイルは複数の場所に存在する可能性があるため、実際の場所を参照してください)。
+2. OpenSSL 構成テンプレート ファイルのコピーを作成します (テンプレート ファイルは複数の場所に存在する可能性があるため、実際の場所を参照してください)。
 
     ```bash
     cp /usr/lib/ssl/openssl.cnf .
@@ -93,7 +93,7 @@ TiKV インスタンスに証明書を発行するには、次の手順を実行
     find / -name openssl.cnf
     ```
 
-3.  `openssl.cnf`を編集し、 `[ req ]`フィールドに`req_extensions = v3_req`を追加し、 `[ v3_req ]`フィールドに`subjectAltName = @alt_names`を追加します。最後に、新しいフィールドを作成し、SAN の情報を編集します。
+3. `openssl.cnf`を編集し、 `[ req ]`フィールドに`req_extensions = v3_req`を追加し、 `[ v3_req ]`フィールドに`subjectAltName = @alt_names`を追加します。最後に、新しいフィールドを作成し、SAN の情報を編集します。
 
     ```
     [ alt_names ]
@@ -103,25 +103,25 @@ TiKV インスタンスに証明書を発行するには、次の手順を実行
     IP.4 = 172.16.10.16
     ```
 
-4.  `openssl.cnf`ファイルを保存し、証明書要求ファイルを生成します (この手順では、証明書に共通名を割り当てることもできます。共通名は、サーバーがクライアントの ID を検証するために使用されます。各コンポーネントはデフォルトで検証を有効にしませんが、構成ファイルで有効にすることができます)。
+4. `openssl.cnf`ファイルを保存し、証明書要求ファイルを生成します (この手順では、証明書に共通名を割り当てることもできます。共通名は、サーバーがクライアントの ID を検証するために使用されます。各コンポーネントはデフォルトで検証を有効にしませんが、構成ファイルで有効にすることができます)。
 
     ```bash
     openssl req -new -key tikv.key -out tikv.csr -config openssl.cnf
     ```
 
-5.  証明書を発行して生成します。
+5. 証明書を発行して生成します。
 
     ```bash
     openssl x509 -req -days 365 -CA root.crt -CAkey root.key -CAcreateserial -in tikv.csr -out tikv.crt -extensions v3_req -extfile openssl.cnf
     ```
 
-6.  証明書に SAN フィールドが含まれていることを確認します (オプション)。
+6. 証明書に SAN フィールドが含まれていることを確認します (オプション)。
 
     ```bash
     openssl x509 -text -in tikv.crt -noout
     ```
 
-7.  現在のディレクトリに次のファイルが存在することを確認します。
+7. 現在のディレクトリに次のファイルが存在することを確認します。
 
     ```
     root.crt
@@ -135,19 +135,19 @@ TiKV インスタンスに証明書を発行するには、次の手順を実行
 
 クライアントに証明書を発行するには、次の手順を実行します。
 
-1.  証明書に対応する秘密鍵を生成します。
+1. 証明書に対応する秘密鍵を生成します。
 
     ```bash
     openssl genrsa -out client.key 2048
     ```
 
-2.  証明書要求ファイルを生成します (この手順では、証明書に共通名を割り当てることもできます。共通名は、サーバーがクライアントの ID を検証するために使用されます。各コンポーネントはデフォルトで検証を有効にしませんが、構成ファイルで有効にすることができます)。
+2. 証明書要求ファイルを生成します (この手順では、証明書に共通名を割り当てることもできます。共通名は、サーバーがクライアントの ID を検証するために使用されます。各コンポーネントはデフォルトで検証を有効にしませんが、構成ファイルで有効にすることができます)。
 
     ```bash
     openssl req -new -key client.key -out client.csr
     ```
 
-3.  証明書を発行して生成します。
+3. 証明書を発行して生成します。
 
     ```bash
     openssl x509 -req -days 365 -CA root.crt -CAkey root.key -CAcreateserial -in client.csr -out client.crt

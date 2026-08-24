@@ -17,13 +17,13 @@ summary: このドキュメントでは、ログバックアップの監視、�
 
 ### 監視構成 {#monitoring-configuration}
 
--   TiUPを使用してデプロイされたクラスターの場合、Prometheus は監視メトリックを自動的に収集します。
--   手動でデプロイされたクラスターの場合は、 [TiDBクラスタ監視の展開](/deploy-monitoring-services.md)の手順に従って、Prometheus 構成ファイルの`scrape_configs`セクションに TiKV 関連のジョブを追加します。
+- TiUPを使用してデプロイされたクラスターの場合、Prometheus は監視メトリックを自動的に収集します。
+- 手動でデプロイされたクラスターの場合は、 [TiDBクラスタ監視の展開](/deploy-monitoring-services.md)の手順に従って、Prometheus 構成ファイルの`scrape_configs`セクションに TiKV 関連のジョブを追加します。
 
 ### Grafanaの設定 {#grafana-configuration}
 
--   TiUPを使用してデプロイされたクラスターの場合、ダッシュボード[Grafana](https://grafana.com/)にポイントインタイムリカバリ (PITR) パネルが表示されます。TiKV-Details ダッシュボードの**バックアップログ**パネルが PITR パネルです。
--   手動でデプロイされたクラスターの場合は、 [Grafanaダッシュボードをインポートする](/deploy-monitoring-services.md#step-2-import-a-grafana-dashboard)を参照し、 [tikv_詳細](https://github.com/tikv/tikv/blob/release-8.5/metrics/grafana/tikv_details.json) JSON ファイルを Grafana にアップロードしてください。その後、TiKV-Details ダッシュボードの**バックアップログ**パネルを見つけてください。
+- TiUPを使用してデプロイされたクラスターの場合、ダッシュボード[Grafana](https://grafana.com/)にポイントインタイムリカバリ (PITR) パネルが表示されます。TiKV-Details ダッシュボードの**バックアップログ**パネルが PITR パネルです。
+- 手動でデプロイされたクラスターの場合は、 [Grafanaダッシュボードをインポートする](/deploy-monitoring-services.md#step-2-import-a-grafana-dashboard)を参照し、 [tikv_詳細](https://github.com/tikv/tikv/blob/release-8.5/metrics/grafana/tikv_details.json) JSON ファイルを Grafana にアップロードしてください。その後、TiKV-Details ダッシュボードの**バックアップログ**パネルを見つけてください。
 
 ### 監視メトリクス {#monitoring-metrics}
 
@@ -60,17 +60,17 @@ summary: このドキュメントでは、ログバックアップの監視、�
 
 PITR でアラート項目を構成するには、次の手順に従います。
 
-1.  Prometheusが配置されているノードのアラートルール用の設定ファイル（例： `pitr.rules.yml` ）を作成します。このファイルには、 [Prometheusのドキュメント](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/) 、以下の推奨アラート項目、および設定サンプルに従ってアラートルールを記述します。
-2.  Prometheus 構成ファイルの`rule_files`フィールドに、アラート ルール ファイルのパスを追加します。
-3.  Prometheusプロセスにシグナル`SIGHUP`送信するか（ `kill -HUP pid` ）、HTTPリクエスト`POST`を`http://prometheus-addr/-/reload`に送信します（HTTPリクエストを送信する前に、Prometheusの起動時にパラメータ`--web.enable-lifecycle`を追加します）。
+1. Prometheusが配置されているノードのアラートルール用の設定ファイル（例： `pitr.rules.yml` ）を作成します。このファイルには、 [Prometheusのドキュメント](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/) 、以下の推奨アラート項目、および設定サンプルに従ってアラートルールを記述します。
+2. Prometheus 構成ファイルの`rule_files`フィールドに、アラート ルール ファイルのパスを追加します。
+3. Prometheusプロセスにシグナル`SIGHUP`送信するか（ `kill -HUP pid` ）、HTTPリクエスト`POST`を`http://prometheus-addr/-/reload`に送信します（HTTPリクエストを送信する前に、Prometheusの起動時にパラメータ`--web.enable-lifecycle`を追加します）。
 
 推奨されるアラート項目は次のとおりです。
 
 #### ログバックアップ実行RPO10分以上 {#logbackuprunningrpomorethan10m}
 
--   警告項目: `max(time() - tidb_log_backup_last_checkpoint / 262144000) by (task) / 60 > 10 and max(tidb_log_backup_last_checkpoint) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 0`
--   警戒レベル：警告
--   説明: ログデータが10分以上ストレージに保存されていません。このアラートはリマインダーです。ほとんどの場合、ログバックアップには影響しません。
+- 警告項目: `max(time() - tidb_log_backup_last_checkpoint / 262144000) by (task) / 60 > 10 and max(tidb_log_backup_last_checkpoint) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 0`
+- 警戒レベル：警告
+- 説明: ログデータが10分以上ストレージに保存されていません。このアラートはリマインダーです。ほとんどの場合、ログバックアップには影響しません。
 
 このアラート項目の構成サンプルは次のとおりです。
 
@@ -89,30 +89,30 @@ groups:
 
 #### ログバックアップ実行RPO30分以上 {#logbackuprunningrpomorethan30m}
 
--   警告項目: `max(time() - tidb_log_backup_last_checkpoint / 262144000) by (task) / 60 > 30 and max(tidb_log_backup_last_checkpoint) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 0`
--   警戒レベル: 重大
--   説明: ログデータが30分以上ストレージに保存されていません。このアラートは多くの場合、異常を示しています。原因を特定するには、TiKVログを確認してください。
+- 警告項目: `max(time() - tidb_log_backup_last_checkpoint / 262144000) by (task) / 60 > 30 and max(tidb_log_backup_last_checkpoint) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 0`
+- 警戒レベル: 重大
+- 説明: ログデータが30分以上ストレージに保存されていません。このアラートは多くの場合、異常を示しています。原因を特定するには、TiKVログを確認してください。
 
 #### ログバックアップ一時停止中 (2 時間以上) {#logbackuppausingmorethan2h}
 
--   警告項目: `max(time() - tidb_log_backup_last_checkpoint / 262144000) by (task) / 3600 > 2 and max(tidb_log_backup_last_checkpoint) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 1`
--   警戒レベル：警告
--   説明: ログバックアップタスクが2時間以上一時停止されています。このアラートはリマインダーであり、できるだけ早く`br log resume`を実行してください。
+- 警告項目: `max(time() - tidb_log_backup_last_checkpoint / 262144000) by (task) / 3600 > 2 and max(tidb_log_backup_last_checkpoint) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 1`
+- 警戒レベル：警告
+- 説明: ログバックアップタスクが2時間以上一時停止されています。このアラートはリマインダーであり、できるだけ早く`br log resume`を実行してください。
 
 #### ログバックアップ一時停止中（12時間以上） {#logbackuppausingmorethan12h}
 
--   警告項目: `max(time() - tidb_log_backup_last_checkpoint / 262144000) by (task) / 3600 > 12 and max(tidb_log_backup_last_checkpoint) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 1`
--   警戒レベル: 重大
--   説明: ログバックアップタスクが12時間以上一時停止されています。タスクを再開するには、できるだけ早く`br log resume`を実行してください。ログタスクの一時停止時間が長すぎると、データが失われるリスクがあります。
+- 警告項目: `max(time() - tidb_log_backup_last_checkpoint / 262144000) by (task) / 3600 > 12 and max(tidb_log_backup_last_checkpoint) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 1`
+- 警戒レベル: 重大
+- 説明: ログバックアップタスクが12時間以上一時停止されています。タスクを再開するには、できるだけ早く`br log resume`を実行してください。ログタスクの一時停止時間が長すぎると、データが失われるリスクがあります。
 
 #### ログバックアップ失敗 {#logbackupfailed}
 
--   警告項目: `max(tikv_log_backup_task_status) by (task) == 2 and max(tidb_log_backup_last_checkpoint) by (task) > 0`
--   警戒レベル: 重大
--   説明: ログバックアップタスクが失敗しました。失敗の原因を確認するには、 `br log status`を実行する必要があります。必要に応じて、TiKV ログをさらに確認する必要があります。
+- 警告項目: `max(tikv_log_backup_task_status) by (task) == 2 and max(tidb_log_backup_last_checkpoint) by (task) > 0`
+- 警戒レベル: 重大
+- 説明: ログバックアップタスクが失敗しました。失敗の原因を確認するには、 `br log status`を実行する必要があります。必要に応じて、TiKV ログをさらに確認する必要があります。
 
 #### ログバックアップGCセーフポイントがチェックポイントを超える {#logbackupgcsafepointexceedscheckpoint}
 
--   警告項目: `min(tidb_log_backup_last_checkpoint) by (instance) - max(tikv_gcworker_autogc_safe_point) by (instance) < 0`
--   警戒レベル: 重大
--   説明: バックアップ前に一部のデータがガベージコレクションされました。これは、一部のデータが失われており、サービスに影響を与える可能性が非常に高いことを意味します。
+- 警告項目: `min(tidb_log_backup_last_checkpoint) by (instance) - max(tikv_gcworker_autogc_safe_point) by (instance) < 0`
+- 警戒レベル: 重大
+- 説明: バックアップ前に一部のデータがガベージコレクションされました。これは、一部のデータが失われており、サービスに影響を与える可能性が非常に高いことを意味します。

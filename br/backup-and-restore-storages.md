@@ -106,8 +106,8 @@ tiup br restore db --db test -u "${PD_IP}:2379" \
 
 バックアップの前に、S3 上のバックアップ ディレクトリにアクセスするための次の権限を設定します。
 
--   バックアップ中に`s3:DeleteObject`およびバックアップ &amp; リストア ( BR ) `s3:AbortMultipartUpload`バックアップ ディレクトリ`s3:GetObject`アクセスするための最小権限: `s3:ListBucket` 、および`s3:PutObject`
--   復元中に TiKV とBRがバックアップ ディレクトリにアクセスするための最小権限: `s3:ListBucket`と`s3:GetObject` 。
+- バックアップ中に`s3:DeleteObject`およびバックアップ &amp; リストア ( BR ) `s3:AbortMultipartUpload`バックアップ ディレクトリ`s3:GetObject`アクセスするための最小権限: `s3:ListBucket` 、および`s3:PutObject`
+- 復元中に TiKV とBRがバックアップ ディレクトリにアクセスするための最小権限: `s3:ListBucket`と`s3:GetObject` 。
 
 バックアップディレクトリをまだ作成していない場合は、 [バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照して指定のリージョンに S3 バケットを作成してください。必要に応じて、 [フォルダを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してバケット内にフォルダを作成することもできます。
 
@@ -117,16 +117,16 @@ tiup br restore db --db test -u "${PD_IP}:2379" \
 
 次のいずれかの方法で S3 へのアクセスを構成することをお勧めします。
 
--   方法1: アクセスキーを指定する
+- 方法1: アクセスキーを指定する
 
     URIにアクセスキーとシークレットアクセスキーを指定すると、指定されたアクセスキーとシークレットアクセスキーを使用して認証が行われます。URIでキーを指定する以外にも、以下の方法がサポートされています。
 
-    -   BRは環境変数`$AWS_ACCESS_KEY_ID`と`$AWS_SECRET_ACCESS_KEY`を読み取ります。
-    -   BR は環境変数`$AWS_ACCESS_KEY`と`$AWS_SECRET_KEY`を読み取ります。
-    -   BR は、環境変数`$AWS_SHARED_CREDENTIALS_FILE`で指定されたパスにある共有資格情報ファイルを読み取ります。
-    -   BR は`~/.aws/credentials`パスの共有資格情報ファイルを読み取ります。
+    - BRは環境変数`$AWS_ACCESS_KEY_ID`と`$AWS_SECRET_ACCESS_KEY`を読み取ります。
+    - BR は環境変数`$AWS_ACCESS_KEY`と`$AWS_SECRET_KEY`を読み取ります。
+    - BR は、環境変数`$AWS_SHARED_CREDENTIALS_FILE`で指定されたパスにある共有資格情報ファイルを読み取ります。
+    - BR は`~/.aws/credentials`パスの共有資格情報ファイルを読み取ります。
 
--   方法2: IAMロールに基づくアクセス
+- 方法2: IAMロールに基づくアクセス
 
     S3にアクセスできるIAMロールを、TiKVノードとBRノードが稼働するEC2インスタンスに関連付けます。関連付け後、 BRは追加設定なしでS3内のバックアップディレクトリに直接アクセスできるようになります。
 
@@ -140,21 +140,21 @@ tiup br restore db --db test -u "${PD_IP}:2379" \
 
 GCS へのアクセスに使用する認証情報は、次の方法で設定できます。
 
--   方法1: `credentials-file`を明示的に指定する
+- 方法1: `credentials-file`を明示的に指定する
 
-    -   `credentials-file`が Service Account JSON ファイルを指している場合、BR と TiKV はこの認証情報を使用して GCS にアクセスします。
-    -   TiKV が`gcp_v2`外部ストレージバックエンドを使用している場合、 `credentials-file`は Google Cloud WIF で使用される`external_account` JSON を指すこともできます。
+    - `credentials-file`が Service Account JSON ファイルを指している場合、BR と TiKV はこの認証情報を使用して GCS にアクセスします。
+    - TiKV が`gcp_v2`外部ストレージバックエンドを使用している場合、 `credentials-file`は Google Cloud WIF で使用される`external_account` JSON を指すこともできます。
 
--   方法2: Application Default Credentials (ADC) を使用する
+- 方法2: Application Default Credentials (ADC) を使用する
 
-    -   BRは環境変数`$GOOGLE_APPLICATION_CREDENTIALS`で指定されたパスのファイルを読み取ります。
-    -   BRはファイル`~/.config/gcloud/application_default_credentials.json`を読み取ります。
-    -   BR が GCE または GAE で実行される場合、メタデータサーバーから取得した認証情報を使用します。
+    - BRは環境変数`$GOOGLE_APPLICATION_CREDENTIALS`で指定されたパスのファイルを読み取ります。
+    - BRはファイル`~/.config/gcloud/application_default_credentials.json`を読み取ります。
+    - BR が GCE または GAE で実行される場合、メタデータサーバーから取得した認証情報を使用します。
 
 TiKV で GCS WIF または ADC を使用する場合は、 `gcp_v2`外部ストレージバックエンドを有効にする必要があります。**v8.5.7 以降、TiKV はデフォルトで`gcp_v2`外部ストレージバックエンドを有効にします。** `gcp_v2`は次の方法で設定できます。
 
--   完全バックアップと復元: [TiKV Configuration File Descriptions](/tikv-configuration-file.md)で`[backup].gcp-v2-enable`を`true`に設定します
--   ログバックアップ: [TiKV Configuration File Descriptions](/tikv-configuration-file.md)で`[log-backup].gcp-v2-enable`を`true`に設定します
+- 完全バックアップと復元: [TiKV Configuration File Descriptions](/tikv-configuration-file.md)で`[backup].gcp-v2-enable`を`true`に設定します
+- ログバックアップ: [TiKV Configuration File Descriptions](/tikv-configuration-file.md)で`[log-backup].gcp-v2-enable`を`true`に設定します
 
 前述の 2 つの設定項目のデフォルト値はどちらも`true`です。 `gcp_v2`を無効にすると、TiKV は引き続き従来の GCS 実装を使用します。この実装は Service Account JSON のみをサポートし、WIF の直接使用はサポートしません。
 
@@ -169,31 +169,31 @@ TiKV で GCS WIF または ADC を使用する場合は、 `gcp_v2`外部スト�
 </div>
 <div label="Azure Blob Storage" value="azure">
 
--   方法1: 共有アクセス署名を指定する
+- 方法1: 共有アクセス署名を指定する
 
     URIに`account-name`と`sas-token`を指定した場合、指定されたアカウント名と共有アクセス署名（SAS）トークンを使用して認証が行われます。SASトークンには`&`という文字が含まれていることに注意してください。これをURIに追加する前に、 `%26`としてエンコードする必要があります。パーセントエンコードを使用して、 `sas-token`全体を直接エンコードすることもできます。
 
--   方法2: アクセスキーを指定する
+- 方法2: アクセスキーを指定する
 
     URIに`account-name`と`account-key`を指定すると、指定されたアカウント名とアカウントキーを用いて認証が行われます。URIでキーを指定する方法に加え、 BRは環境変数`$AZURE_STORAGE_KEY`からキーを読み取ることもできます。
 
--   方法3: バックアップと復元にAzure ADを使用する
+- 方法3: バックアップと復元にAzure ADを使用する
 
     BRが実行されているノードで環境変数`$AZURE_CLIENT_ID` `$AZURE_TENANT_ID`および`$AZURE_CLIENT_SECRET`を設定します。
 
-    -   TiUPを使用してクラスターを起動すると、TiKV は systemd サービスを使用します。次の例は、TiKV の上記の 3 つの環境変数を設定する方法を示しています。
+    - TiUPを使用してクラスターを起動すると、TiKV は systemd サービスを使用します。次の例は、TiKV の上記の 3 つの環境変数を設定する方法を示しています。
 
         > **Note:**
         >
         > この方法を使用する場合は、手順 3 で TiKV を再起動する必要があります。クラスターを再起動できない場合は、 **方法 1: バックアップと復元のアクセス キーを指定する**を使用します。
 
-        1.  このノードの TiKV ポートが`24000` 、つまり systemd サービスの名前が`tikv-24000`であるとします。
+        1. このノードの TiKV ポートが`24000` 、つまり systemd サービスの名前が`tikv-24000`であるとします。
 
             ```shell
             systemctl edit tikv-24000
             ```
 
-        2.  TiKV 構成ファイルを編集して、次の 3 つの環境変数を構成します。
+        2. TiKV 構成ファイルを編集して、次の 3 つの環境変数を構成します。
 
             ```
             [Service]
@@ -202,14 +202,14 @@ TiKV で GCS WIF または ADC を使用する場合は、 `gcp_v2`外部スト�
             Environment="AZURE_CLIENT_SECRET=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             ```
 
-        3.  設定を再読み込みし、TiKV を再起動します。
+        3. 設定を再読み込みし、TiKV を再起動します。
 
             ```shell
             systemctl daemon-reload
             systemctl restart tikv-24000
             ```
 
-    -   コマンドラインで起動した TiKV およびBRの Azure AD 情報を構成するには、次のコマンドを実行して、オペレーティング環境で環境変数`$AZURE_CLIENT_ID` `$AZURE_TENANT_ID`および`$AZURE_CLIENT_SECRET`が構成されているかどうかを確認するだけです。
+    - コマンドラインで起動した TiKV およびBRの Azure AD 情報を構成するには、次のコマンドを実行して、オペレーティング環境で環境変数`$AZURE_CLIENT_ID` `$AZURE_TENANT_ID`および`$AZURE_CLIENT_SECRET`が構成されているかどうかを確認するだけです。
 
         ```shell
         echo $AZURE_CLIENT_ID
@@ -217,20 +217,20 @@ TiKV で GCS WIF または ADC を使用する場合は、 `gcp_v2`外部スト�
         echo $AZURE_CLIENT_SECRET
         ```
 
-    -   BRを使用してデータを Azure Blob Storage にバックアップします。
+    - BRを使用してデータを Azure Blob Storage にバックアップします。
 
         ```shell
         tiup br backup full -u "${PD_IP}:2379" \
         --storage "azure://external/backup-20220915?account-name=${account-name}"
         ```
 
--   方法4: AzureマネージドIDを使用する
+- 方法4: AzureマネージドIDを使用する
 
     v8.5.5 以降では、TiDB クラスターとBRが Azure 仮想マシン (VM) または Azure Kubernetes Service (AKS) 環境で実行されており、Azure マネージド ID がノードに割り当てられている場合は、認証に Azure マネージド ID を使用できます。
 
     この方法を使用する前に、 [Azureポータル](https://azure.microsoft.com/)内のターゲットストレージアカウントにアクセスするためのアクセス許可 ( `Storage Blob Data Contributor`など) が対応するマネージド ID に付与されていることを確認してください。
 
-    -   **システム割り当てマネージド ID** :
+    - **システム割り当てマネージド ID** :
 
         システム割り当てマネージド ID を使用する場合、Azure 関連の環境変数を構成する必要はありません。BRコマンドを直接実行できます。
 
@@ -243,41 +243,41 @@ TiKV で GCS WIF または ADC を使用する場合は、 `gcp_v2`外部スト�
         >
         > ランタイム環境で環境変数`AZURE_CLIENT_ID` 、 `AZURE_TENANT_ID` 、 `AZURE_CLIENT_SECRET`設定されて**いない**ことを確認してください。設定されていない場合、Azure SDK が他の認証方法を優先し、マネージド ID が有効にならない可能性があります。
 
-    -   **ユーザー割り当てマネージド ID** :
+    - **ユーザー割り当てマネージド ID** :
 
         ユーザー割り当てマネージドIDを使用する場合は、TiKVとBRのランタイム環境で環境変数`AZURE_CLIENT_ID`を設定し、その値をマネージドIDのクライアントIDに設定してから、 BRバックアップコマンドを実行する必要があります。詳細な手順は次のとおりです。
 
-        1.  TiUPで起動するときに TiKV のクライアント ID を設定します。
+        1. TiUPで起動するときに TiKV のクライアント ID を設定します。
 
             次の手順では、TiKV ポート`24000`と systemd サービス名`tikv-24000`例として使用します。
 
-            1.  次のコマンドを実行して、systemd サービス エディターを開きます。
+            1. 次のコマンドを実行して、systemd サービス エディターを開きます。
 
                 ```shell
                 systemctl edit tikv-24000
                 ```
 
-            2.  `AZURE_CLIENT_ID`環境変数をマネージド ID クライアント ID に設定します。
+            2. `AZURE_CLIENT_ID`環境変数をマネージド ID クライアント ID に設定します。
 
                 ```ini
                 [Service]
                 Environment="AZURE_CLIENT_ID=<your-client-id>"
                 ```
 
-            3.  systemd 構成を再ロードし、TiKV を再起動します。
+            3. systemd 構成を再ロードし、TiKV を再起動します。
 
                 ```shell
                 systemctl daemon-reload
                 systemctl restart tikv-24000
                 ```
 
-        2.  BRの`AZURE_CLIENT_ID`環境変数を設定します。
+        2. BRの`AZURE_CLIENT_ID`環境変数を設定します。
 
             ```shell
             export AZURE_CLIENT_ID="<your-client-id>"
             ```
 
-        3.  次のBRコマンドを使用して、データを Azure Blob Storage にバックアップします。
+        3. 次のBRコマンドを使用して、データを Azure Blob Storage にバックアップします。
 
             ```shell
             tiup br backup full -u "${PD_IP}:2379" \

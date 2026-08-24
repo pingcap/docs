@@ -10,9 +10,9 @@ TiDBはMySQL互換のデータベースであり、 [TypeORM](https://github.com
 
 このチュートリアルでは、TiDBとTypeORMを使用して以下のタスクを実行する方法を学ぶことができます。
 
--   環境をセットアップしてください。
--   TypeORMを使用してTiDBに接続します。
--   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
+- 環境をセットアップしてください。
+- TypeORMを使用してTiDBに接続します。
+- アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
 
 > **Note**
 >
@@ -22,14 +22,14 @@ TiDBはMySQL互換のデータベースであり、 [TypeORM](https://github.com
 
 このチュートリアルを完了するには、以下が必要です。
 
--   お使いのコンピューターに[Node.js](https://nodejs.org/en) &gt;= 16.xがインストールされていること。
--   お使いのマシンに[Git](https://git-scm.com/downloads)がインストールされています。
--   TiDBクラスタが稼働中です。
+- お使いのコンピューターに[Node.js](https://nodejs.org/en) &gt;= 16.xがインストールされていること。
+- お使いのマシンに[Git](https://git-scm.com/downloads)がインストールされています。
+- TiDBクラスタが稼働中です。
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
--   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
 ## TiDBに接続するには、サンプルアプリを実行してください。 {#run-the-sample-app-to-connect-to-tidb}
 
@@ -56,12 +56,12 @@ npm install
 
 既存のプロジェクトの場合、以下のコマンドを実行してパッケージをインストールしてください。
 
--   `typeorm` : Node.js 用の ORM フレームワーク。
--   `mysql2` : Node.js 用の MySQL ドライバーです`mysql`ドライバーも使用できます。
--   `dotenv` : `.env`ファイルから環境変数を読み込みます。
--   `typescript` : TypeScript コードを JavaScript にコンパイルします。
--   `ts-node` : TypeScript コードをコンパイルせずに直接実行します。
--   `@types/node` : Node.js 用の TypeScript 型定義を提供します。
+- `typeorm` : Node.js 用の ORM フレームワーク。
+- `mysql2` : Node.js 用の MySQL ドライバーです`mysql`ドライバーも使用できます。
+- `dotenv` : `.env`ファイルから環境変数を読み込みます。
+- `typescript` : TypeScript コードを JavaScript にコンパイルします。
+- `ts-node` : TypeScript コードをコンパイルせずに直接実行します。
+- `@types/node` : Node.js 用の TypeScript 型定義を提供します。
 
 ```shell
 npm install typeorm mysql2 dotenv --save
@@ -77,26 +77,26 @@ npm install @types/node ts-node typescript --save-dev
 <SimpleTab>
 <div label="TiDB Cloud Starter or Essential">
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
+3. 接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **Connection Type**は`Public`に設定されています。
-    -   **Branch**は`main`に設定されています。
-    -   **Connect With**は`General`に設定されています。
-    -   **Operating System**は、アプリケーションを実行するオペレーティングシステムと一致します。
+    - **Connection Type**は`Public`に設定されています。
+    - **Branch**は`main`に設定されています。
+    - **Connect With**は`General`に設定されています。
+    - **Operating System**は、アプリケーションを実行するオペレーティングシステムと一致します。
 
-4.  まだパスワードを設定していない場合は、 **Generate Password**をクリックしてランダムなパスワードを生成してください。
+4. まだパスワードを設定していない場合は、 **Generate Password**をクリックしてランダムなパスワードを生成してください。
 
-5.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
+5. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
     cp .env.example .env
     ```
 
-6.  `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`接続パラメータに置き換えます。
+6. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`接続パラメータに置き換えます。
 
     ```dotenv
     TIDB_HOST={host}
@@ -111,37 +111,37 @@ npm install @types/node ts-node typescript --save-dev
     >
     > TiDB Cloud StarterおよびTiDB Cloud Essentialの場合、パブリック エンドポイントを使用する際には`TIDB_ENABLE_SSL`を介して TLS 接続を有効にする**必要があります**。
 
-7.  `.env`ファイルを保存します。
+7. `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Premium">
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
 
-3.  **Networking**ページで、**Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
+3. **Networking**ページで、**Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
 
     クライアントのIPアドレスがアクセスリストに追加されていることを確認してください。
 
-4.  左側のナビゲーションペインで**Overview**をクリックすると、インスタンスの概要ページに戻ります。
+4. 左側のナビゲーションペインで**Overview**をクリックすると、インスタンスの概要ページに戻ります。
 
-5.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+5. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-6.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
+6. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
 
-    -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
-    -   まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
-    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
-    -   **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+    - 公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
+    - まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
+    - サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
+    - **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
-7.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
+7. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
     cp .env.example .env
     ```
 
-8.  `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログで対応するプレースホルダー`{}`を接続パラメータに置き換えます。
+8. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログで対応するプレースホルダー`{}`を接続パラメータに置き換えます。
 
     ```dotenv
     TIDB_HOST={host}
@@ -152,28 +152,28 @@ npm install @types/node ts-node typescript --save-dev
     TIDB_ENABLE_SSL=false
     ```
 
-9.  `.env`ファイルを保存します。
+9. `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **CA cert**をクリックしてCA証明書をダウンロードします。
+3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **CA cert**をクリックしてCA証明書をダウンロードします。
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
 
     TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
-4.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
+4. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
     cp .env.example .env
     ```
 
-5.  `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`接続パラメータに置き換えます。
+5. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`接続パラメータに置き換えます。
 
     ```dotenv
     TIDB_HOST={host}
@@ -189,18 +189,18 @@ npm install @types/node ts-node typescript --save-dev
     >
     > TiDB Cloud Dedicatedの場合、パブリックエンドポイントを使用する際には`TIDB_ENABLE_SSL`を介して TLS 接続を有効にすることを**お勧めします**。 `TIDB_ENABLE_SSL=true`を設定する際には、 `TIDB_CA_PATH=/path/to/ca.pem`を介して接続ダイアログからダウンロードした CA 証明書のパスを指定する**必要があります**。
 
-6.  `.env`ファイルを保存します。
+6. `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
-1.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
+1. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
     cp .env.example .env
     ```
 
-2.  `.env`ファイルを編集し、環境変数を以下のように設定し、対応するプレースホルダー`{}` TiDB の接続パラメータに置き換えてください。
+2. `.env`ファイルを編集し、環境変数を以下のように設定し、対応するプレースホルダー`{}` TiDB の接続パラメータに置き換えてください。
 
     ```dotenv
     TIDB_HOST={host}
@@ -212,7 +212,7 @@ npm install @types/node ts-node typescript --save-dev
 
     TiDBをローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空です。
 
-3.  `.env`ファイルを保存します。
+3. `.env`ファイルを保存します。
 
 </div>
 </SimpleTab>
@@ -395,12 +395,12 @@ export class ActionLog {
 
 ## 次のステップ {#next-steps}
 
--   TypeORM の使用法の詳細については[TypeORMのドキュメント](https://typeorm.io/)を参照してください。
--   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md)、SQL [トランザクション](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)などの章を読んで、TiDB アプリケーション開発のベスト プラクティスを学びましょう。
--   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- TypeORM の使用法の詳細については[TypeORMのドキュメント](https://typeorm.io/)を参照してください。
+- [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md)、SQL [トランザクション](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)などの章を読んで、TiDB アプリケーション開発のベスト プラクティスを学びましょう。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

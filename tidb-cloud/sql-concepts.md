@@ -17,13 +17,13 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 SQLは、その関数に応じて以下の4種類に分類されます。
 
--   DDL (データ定義言語): データベース、テーブル、ビュー、インデックスなどのデータベース オブジェクトを定義するために使用されます。 TiDB の DDL ステートメントについては、 [スキーマ管理／データ定義文（DDL）](/sql-statements/sql-statement-overview.md#schema-management--data-definition-statements-ddl)を参照してください。
+- DDL (データ定義言語): データベース、テーブル、ビュー、インデックスなどのデータベース オブジェクトを定義するために使用されます。 TiDB の DDL ステートメントについては、 [スキーマ管理／データ定義文（DDL）](/sql-statements/sql-statement-overview.md#schema-management--data-definition-statements-ddl)を参照してください。
 
--   DML（データ操作言語）：アプリケーション関連のレコードを操作するために使用されます。TiDB の DML ステートメントについては、 [データ操作文（DML）](/sql-statements/sql-statement-overview.md#data-manipulation-statements-dml)を参照してください。
+- DML（データ操作言語）：アプリケーション関連のレコードを操作するために使用されます。TiDB の DML ステートメントについては、 [データ操作文（DML）](/sql-statements/sql-statement-overview.md#data-manipulation-statements-dml)を参照してください。
 
--   DQL（データクエリ言語）：条件付きフィルタリング後のレコードをクエリするために使用されます。
+- DQL（データクエリ言語）：条件付きフィルタリング後のレコードをクエリするために使用されます。
 
--   DCL（データ制御言語）：アクセス権限とセキュリティレベルを定義するために使用されます。
+- DCL（データ制御言語）：アクセス権限とセキュリティレベルを定義するために使用されます。
 
 TiDB の SQL ステートメントの概要については、 [SQL Statement Overview](/sql-statements/sql-statement-overview.md)を参照してください。
 
@@ -37,11 +37,11 @@ TiDBサーバーは複数のSQLモードで動作し、クライアントごと�
 
 TiDBは、行IDの生成とデータ配信を最適化するための3つのSQL属性を提供します。
 
--   AUTO_INCREMENT
+- AUTO_INCREMENT
 
--   AUTO_RANDOM
+- AUTO_RANDOM
 
--   SHARD_ROW_ID_BITS
+- SHARD_ROW_ID_BITS
 
 ### AUTO_INCREMENT {#auto-increment}
 
@@ -71,9 +71,9 @@ TiDBは、行IDの生成とデータ配信を最適化するための3つのSQL�
 
 キーワードとは、 `SELECT` 、 `UPDATE` 、 `DELETE`のように、SQL ステートメントで特別な意味を持つ単語です。
 
--   それらのいくつかは、識別子として直接使用することができ、それらは非予約キーワードと呼ばれます。
+- それらのいくつかは、識別子として直接使用することができ、それらは非予約キーワードと呼ばれます。
 
--   それらのいくつかは、識別子として使用する前に特別な処理が必要であり、予約キーワードと呼ばれます。
+- それらのいくつかは、識別子として使用する前に特別な処理が必要であり、予約キーワードと呼ばれます。
 
 ただし、予約語ではないキーワードでも、特別な対応が必要になる場合があります。そのようなキーワードは、予約語として扱うことをお勧めします。
 

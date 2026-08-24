@@ -20,11 +20,11 @@ TiDBはオンラインDDLをサポートしています。つまり、データ�
 
 対象となるDDLオブジェクトに含まれるデータを操作するかどうかによって、DDL文は次の種類に分類されます。
 
--   **論理 DDL ステートメント**: 論理 DDL ステートメントは通常、テーブル名の変更や列名の変更など、オブジェクトに格納されているデータを処理せずに、データベース オブジェクトのメタデータのみを変更します。
+- **論理 DDL ステートメント**: 論理 DDL ステートメントは通常、テーブル名の変更や列名の変更など、オブジェクトに格納されているデータを処理せずに、データベース オブジェクトのメタデータのみを変更します。
 
     TiDBでは、論理DDL文は「汎用DDL」とも呼ばれます。これらの文は通常、実行時間が短く、完了までに数十ミリ秒または数秒しかかからないことがよくあります。そのため、システムリソースをあまり消費せず、アプリケーションのワークロードにも影響を与えません。
 
--   **物理DDL文**：物理DDL文は、変更対象となるオブジェクトのメタデータを変更するだけでなく、オブジェクトに格納されているユーザーデータも変更します。例えば、TiDBがテーブルのインデックスを作成する場合、テーブルの定義を変更するだけでなく、新しく追加されたインデックスを構築するためにテーブル全体のスキャンを実行します。
+- **物理DDL文**：物理DDL文は、変更対象となるオブジェクトのメタデータを変更するだけでなく、オブジェクトに格納されているユーザーデータも変更します。例えば、TiDBがテーブルのインデックスを作成する場合、テーブルの定義を変更するだけでなく、新しく追加されたインデックスを構築するためにテーブル全体のスキャンを実行します。
 
     TiDBでは、物理DDL文は「reorg DDL」（再編成）とも呼ばれます。現在、物理DDL文には、 `ADD INDEX`と非可逆的な列型変更（例えば、 `INT`型から`CHAR`型への変更）のみが含まれます。これらの文の実行には時間がかかり、実行時間はテーブル内のデータ量、マシン構成、アプリケーションのワークロードによって影響を受けます。
 
@@ -84,17 +84,17 @@ DDLタスク間に依存関係がない場合、並列実行はデータの正�
 
 DDL実行のユーザーエクスペリエンスを向上させるため、TiDB v6.2.0以降では、オーナーがDDLタスクの関連性を判断できるようになりました。そのロジックは次のとおりです。
 
--   同じテーブルに対して実行される DDL ステートメントは相互にブロックされます。
--   `DROP DATABASE`と、データベース内のすべてのオブジェクトに影響する DDL ステートメントは相互にブロックされます。
--   異なるテーブルでのインデックスの追加と列タイプの変更を同時に実行できます。
--   v8.2.0 以降では、異なるテーブルに対して[論理DDLステートメント](/best-practices/ddl-introduction.md#types-of-ddl-statements)並列実行できます。
--   それ以外の場合、同時 DDL 実行の可用性レベルに基づいて DDL を実行できます。
+- 同じテーブルに対して実行される DDL ステートメントは相互にブロックされます。
+- `DROP DATABASE`と、データベース内のすべてのオブジェクトに影響する DDL ステートメントは相互にブロックされます。
+- 異なるテーブルでのインデックスの追加と列タイプの変更を同時に実行できます。
+- v8.2.0 以降では、異なるテーブルに対して[論理DDLステートメント](/best-practices/ddl-introduction.md#types-of-ddl-statements)並列実行できます。
+- それ以外の場合、同時 DDL 実行の可用性レベルに基づいて DDL を実行できます。
 
 具体的には、TiDB 6.2.0 では、次の点で DDL 実行フレームワークが強化されました。
 
--   DDL 所有者は、前述のロジックに基づいて DDL タスクを並列に実行できます。
--   DDLジョブキューにおける先入先出法の問題が解決されました。DDLオーナーはキュー内の最初のジョブを選択するのではなく、現時点で実行可能なジョブを選択するようになりました。
--   物理 DDL 文を処理するワーカーの数が増加し、複数の物理 DDL 文を並列に実行できるようになりました。
+- DDL 所有者は、前述のロジックに基づいて DDL タスクを並列に実行できます。
+- DDLジョブキューにおける先入先出法の問題が解決されました。DDLオーナーはキュー内の最初のジョブを選択するのではなく、現時点で実行可能なジョブを選択するようになりました。
+- 物理 DDL 文を処理するワーカーの数が増加し、複数の物理 DDL 文を並列に実行できるようになりました。
 
     TiDBのすべてのDDLタスクはオンライン変更アプローチを使用して実装されているため、TiDBはオーナーを通じて新しいDDLジョブの関連性を判断し、その情報に基づいてDDLタスクをスケジュールすることができます。このアプローチにより、分散データベースは従来のデータベースと同等のDDL同時実行性を実現できます。
 
@@ -105,25 +105,25 @@ DDL実行のユーザーエクスペリエンスを向上させるため、TiDB 
 
 v6.2.0 より前では、 TiDB SQLレイヤーで非同期スキーマ変更を処理するプロセスは次のとおりです。
 
-1.  MySQL クライアントは TiDBサーバーに DDL 要求を送信します。
+1. MySQL クライアントは TiDBサーバーに DDL 要求を送信します。
 
-2.  リクエストを受信すると、TiDBサーバーはMySQL プロトコルレイヤーでリクエストを解析および最適化し、実行のためにTiDB SQLレイヤーに送信します。
+2. リクエストを受信すると、TiDBサーバーはMySQL プロトコルレイヤーでリクエストを解析および最適化し、実行のためにTiDB SQLレイヤーに送信します。
 
     TiDBのSQLレイヤーはDDLリクエストを受信すると、 `start job`モジュールを起動してリクエストを特定のDDLジョブ（つまりDDLタスク）にカプセル化し、ステートメントの種類に基づいてKVレイヤーの対応するDDLジョブキューに格納します。処理が必要なジョブは、対応するワーカーに通知されます。
 
-3.  ジョブ処理の通知を受け取ると、ワーカーはDDLオーナーのロールを持っているかどうかを判断します。DDLオーナーのロールを持っている場合は、ジョブを直接処理します。そうでない場合は、何も処理せずに終了します。
+3. ジョブ処理の通知を受け取ると、ワーカーはDDLオーナーのロールを持っているかどうかを判断します。DDLオーナーのロールを持っている場合は、ジョブを直接処理します。そうでない場合は、何も処理せずに終了します。
 
     TiDBサーバーがオーナーロールでない場合は、別のノードがオーナーになる必要があります。オーナーロールのノードのワーカーは、実行可能なジョブがあるかどうかを定期的に確認します。実行可能なジョブが見つかった場合、ワーカーはそのジョブを処理します。
 
-4.  ワーカーはジョブを処理した後、KVレイヤーのジョブキューからジョブを削除し、 `job history queue`に配置します。ジョブをカプセル化された`start job`モジュールは、 `job history queue`内のジョブIDを定期的にチェックし、処理済みかどうかを確認します。処理済みであれば、ジョブに対応するDDL操作全体が終了します。
+4. ワーカーはジョブを処理した後、KVレイヤーのジョブキューからジョブを削除し、 `job history queue`に配置します。ジョブをカプセル化された`start job`モジュールは、 `job history queue`内のジョブIDを定期的にチェックし、処理済みかどうかを確認します。処理済みであれば、ジョブに対応するDDL操作全体が終了します。
 
-5.  TiDBサーバーは、DDL 処理結果を MySQL クライアントに返します。
+5. TiDBサーバーは、DDL 処理結果を MySQL クライアントに返します。
 
 TiDB v6.2.0 より前では、DDL 実行フレームワークには次の制限がありました。
 
--   TiKV クラスターには、それぞれ論理 DDL と物理 DDL を処理するキュー`general job queue`と`add index job queue` 2 つのキューのみがあります。
--   DDL 所有者は常に先入先出方式で DDL ジョブを処理します。
--   DDL 所有者は、一度に同じタイプ (論理または物理) の DDL タスクを 1 つだけ実行できます。これは比較的厳格であり、ユーザー エクスペリエンスに影響します。
+- TiKV クラスターには、それぞれ論理 DDL と物理 DDL を処理するキュー`general job queue`と`add index job queue` 2 つのキューのみがあります。
+- DDL 所有者は常に先入先出方式で DDL ジョブを処理します。
+- DDL 所有者は、一度に同じタイプ (論理または物理) の DDL タスクを 1 つだけ実行できます。これは比較的厳格であり、ユーザー エクスペリエンスに影響します。
 
 これらの制限により、意図しないDDLブロッキング動作が発生する可能性があります。詳細については、 [SQL FAQ - DDL実行](https://docs.pingcap.com/tidb/stable/sql-faq#ddl-execution)を参照してください。
 
@@ -136,20 +136,20 @@ TiDB v6.2.0 より前では、DDL 実行フレームワークには次の制限�
 
 物理 DDL ステートメント (インデックスの追加や列タイプの変更を含む) を実行する場合、次のシステム変数の値を調整して、DDL 実行の速度とアプリケーションの負荷への影響のバランスを取ることができます。
 
--   [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt) : この変数は、バックフィルの同時実行を制御する DDL 操作の再編成ワーカーの数を設定します。
+- [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt) : この変数は、バックフィルの同時実行を制御する DDL 操作の再編成ワーカーの数を設定します。
 
--   [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size) : この変数は、`re-organize`フェーズの DDL 操作のバッチ サイズを設定し、バックフィルされるデータの量を制御します。
+- [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size) : この変数は、`re-organize`フェーズの DDL 操作のバッチ サイズを設定し、バックフィルされるデータの量を制御します。
 
     推奨値:
 
-    -   他に負荷がない場合は、 `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`の値を増やすことで`ADD INDEX`処理を高速化できます。例えば、2つの変数の値をそれぞれ`20`と`2048`に設定することができます。
-    -   他の負荷がある場合は、 `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`の値を減らして他のアプリケーションへの影響を最小限に抑えることができます。例えば、これらの変数の値をそれぞれ`4`と`256`に設定することができます。
+    - 他に負荷がない場合は、 `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`の値を増やすことで`ADD INDEX`処理を高速化できます。例えば、2つの変数の値をそれぞれ`20`と`2048`に設定することができます。
+    - 他の負荷がある場合は、 `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`の値を減らして他のアプリケーションへの影響を最小限に抑えることができます。例えば、これらの変数の値をそれぞれ`4`と`256`に設定することができます。
 
 > **Tip:**
 >
-> -   前述の 2 つの変数は、DDL タスクの実行中に動的に調整され、次のトランザクション バッチで有効になります。
-> -   DDL操作の種類とアプリケーションの負荷状況に応じて、適切なタイミングでDDL操作を実行してください。例えば、アプリケーションの負荷が低い場合は、 `ADD INDEX`操作を実行することをお勧めします。
-> -   インデックスの追加には比較的長い時間がかかるため、TiDBはコマンド送信後、バックグラウンドでタスクを実行します。TiDBサーバーがダウンしていても、実行には影響ありません。
+> - 前述の 2 つの変数は、DDL タスクの実行中に動的に調整され、次のトランザクション バッチで有効になります。
+> - DDL操作の種類とアプリケーションの負荷状況に応じて、適切なタイミングでDDL操作を実行してください。例えば、アプリケーションの負荷が低い場合は、 `ADD INDEX`操作を実行することをお勧めします。
+> - インデックスの追加には比較的長い時間がかかるため、TiDBはコマンド送信後、バックグラウンドでタスクを実行します。TiDBサーバーがダウンしていても、実行には影響ありません。
 
 ### DDLリクエストを同時に送信して多数のテーブルを素早く作成する {#quickly-create-many-tables-by-concurrently-sending-ddl-requests}
 
@@ -167,28 +167,28 @@ TiDBがインデックスを追加する際、データのバックフィルフ�
 
 ## DDL関連コマンド {#ddl-related-commands}
 
--   `ADMIN SHOW DDL` : TiDB DDL操作のステータス（現在のスキーマバージョン番号、DDL所有者のDDL IDとアドレス、実行中のDDLタスクとSQL、現在のTiDBインスタンスのDDL IDなど）を表示するために使用されます。詳細については、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl)を参照してください。
+- `ADMIN SHOW DDL` : TiDB DDL操作のステータス（現在のスキーマバージョン番号、DDL所有者のDDL IDとアドレス、実行中のDDLタスクとSQL、現在のTiDBインスタンスのDDL IDなど）を表示するために使用されます。詳細については、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl)を参照してください。
 
--   `ADMIN SHOW DDL JOBS` : クラスター環境で実行されているDDLタスクの詳細なステータスを表示するために使用されます。詳細については、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs)を参照してください。
+- `ADMIN SHOW DDL JOBS` : クラスター環境で実行されているDDLタスクの詳細なステータスを表示するために使用されます。詳細については、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs)を参照してください。
 
--   `ADMIN SHOW DDL JOB QUERIES job_id [, job_id]` : `job_id`に対応するDDLタスクの元のSQL文を表示するために使用されます。詳細については[`ADMIN SHOW DDL JOB QUERIES`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-job-queries)を参照してください。
+- `ADMIN SHOW DDL JOB QUERIES job_id [, job_id]` : `job_id`に対応するDDLタスクの元のSQL文を表示するために使用されます。詳細については[`ADMIN SHOW DDL JOB QUERIES`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-job-queries)を参照してください。
 
--   `ADMIN CANCEL DDL JOBS job_id, [, job_id]` : 送信されたが完了していないDDLタスクをキャンセルするために使用されます。キャンセルが完了すると、DDLタスクを実行するSQL文は`ERROR 8214 (HY000): Cancelled DDL job`エラーを返します。
+- `ADMIN CANCEL DDL JOBS job_id, [, job_id]` : 送信されたが完了していないDDLタスクをキャンセルするために使用されます。キャンセルが完了すると、DDLタスクを実行するSQL文は`ERROR 8214 (HY000): Cancelled DDL job`エラーを返します。
 
     完了した DDL タスクがキャンセルされた場合、 `RESULT`列に`DDL Job:90 not found`エラーが表示されます。これは、タスクが DDL 待機キューから削除されたことを意味します。
 
--   `ADMIN PAUSE DDL JOBS job_id [, job_id]` : 実行中のDDLジョブを一時停止します。コマンド実行後、バックグラウンドジョブが一時停止されている間、DDLジョブを実行するSQL文は実行中として表示されます。詳細は[`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)を参照してください。
+- `ADMIN PAUSE DDL JOBS job_id [, job_id]` : 実行中のDDLジョブを一時停止します。コマンド実行後、バックグラウンドジョブが一時停止されている間、DDLジョブを実行するSQL文は実行中として表示されます。詳細は[`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)を参照してください。
 
     一時停止できるのは、進行中またはキュー内にあるDDLタスクのみです。それ以外の場合は、 `RESULT`列にエラー`Job 3 can't be paused now`が表示されます。
 
--   `ADMIN RESUME DDL JOBS job_id [, job_id]` : 一時停止中のDDLタスクを再開します。コマンド実行後、DDLタスクを実行するSQL文が実行中として表示され、バックグラウンドタスクが再開されます。詳細は[`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)を参照してください。
+- `ADMIN RESUME DDL JOBS job_id [, job_id]` : 一時停止中のDDLタスクを再開します。コマンド実行後、DDLタスクを実行するSQL文が実行中として表示され、バックグラウンドタスクが再開されます。詳細は[`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)を参照してください。
 
     一時停止中のDDLタスクのみを再開できます。それ以外の場合は、 `RESULT`列にエラー`Job 3 can't be resumed`が表示されます。
 
 ## DDL関連テーブル {#ddl-related-tables}
 
--   [`information_schema.DDL_JOBS`](/information-schema/information-schema-ddl-jobs.md) : 現在実行中および完了した DDL ジョブに関する情報。
--   [`mysql.tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md) : [メタデータロック](/metadata-lock.md)のビューに関する情報。DDLの進行を妨げているクエリを特定するのに役立ちます。
+- [`information_schema.DDL_JOBS`](/information-schema/information-schema-ddl-jobs.md) : 現在実行中および完了した DDL ジョブに関する情報。
+- [`mysql.tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md) : [メタデータロック](/metadata-lock.md)のビューに関する情報。DDLの進行を妨げているクエリを特定するのに役立ちます。
 
 ## よくある質問 {#common-questions}
 

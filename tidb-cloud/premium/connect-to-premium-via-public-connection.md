@@ -17,8 +17,8 @@ summary: パブリック接続を介してTiDB Cloud Premiumに接続する方�
 
 > **Tip:**
 >
-> -   パブリック接続経由​​でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、 [パブリックエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/connect-via-standard-connection-serverless.md)を参照してください。
-> -   パブリック エンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [パブリック接続経由​​でTiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
+> - パブリック接続経由​​でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、 [パブリックエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/connect-via-standard-connection-serverless.md)を参照してください。
+> - パブリック エンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [パブリック接続経由​​でTiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
 
 ## 前提条件：IPアクセスリストの設定 {#prerequisite-configure-ip-access-list}
 
@@ -30,25 +30,25 @@ summary: パブリック接続を介してTiDB Cloud Premiumに接続する方�
 
 <CustomContent plan="premium">
 
-1.  対象インスタンスの概要ページを開きます。
+1. 対象インスタンスの概要ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+    1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
         > **Tip:**
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象インスタンスの名前をクリックすると、その概要ページに移動します。
+    2. 対象インスタンスの名前をクリックすると、その概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Connection Type**を選択します。
+3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Connection Type**を選択します。
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、**Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md)の手順に従って設定してください。
 
-4.  **CA cert**をクリックすると、 TiDB Cloud PremiumインスタンスへのTLS接続に必要なCA証明書をダウンロードできます。このCA証明書はデフォルトでTLS 1.2をサポートしています。
+4. **CA cert**をクリックすると、 TiDB Cloud PremiumインスタンスへのTLS接続に必要なCA証明書をダウンロードできます。このCA証明書はデフォルトでTLS 1.2をサポートしています。
 
-5.  ご希望の接続方法を選択し、タブに表示されている接続文字列とサンプルコードを参照してインスタンスに接続してください。
+5. ご希望の接続方法を選択し、タブに表示されている接続文字列とサンプルコードを参照してインスタンスに接続してください。
 
 </CustomContent>
 

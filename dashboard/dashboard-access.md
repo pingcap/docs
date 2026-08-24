@@ -23,9 +23,9 @@ TiDB Dashboardにアクセスするには、ブラウザから[http://127.0.0.1:
 
 TiDB Dashboardは、比較的新しいバージョンの次の一般的なデスクトップ ブラウザーで使用できます。
 
--   Chrome &gt;= 77
--   Firefox &gt;= 68
--   Edge &gt;= 17
+- Chrome &gt;= 77
+- Firefox &gt;= 68
+- Edge &gt;= 17
 
 > **Note:**
 >
@@ -35,16 +35,16 @@ TiDB Dashboardは、比較的新しいバージョンの次の一般的なデス
 
 TiDB Dashboardにアクセスすると、ユーザー ログイン インターフェイスに移動します。
 
--   TiDB `root`アカウントを使用して TiDB Dashboardにサインインできます。
--   TiDB Dashboardには、シングルサインオン（SSO）経由でサインインすることもできます。詳細については、 [TiDB DashboardのSSOを構成する](/dashboard/dashboard-session-sso.md)ご覧ください。
--   [ユーザー定義のSQLユーザー](/dashboard/dashboard-user.md)を作成した場合は、このアカウントと対応するパスワードを使用してサインインできます。
+- TiDB `root`アカウントを使用して TiDB Dashboardにサインインできます。
+- TiDB Dashboardには、シングルサインオン（SSO）経由でサインインすることもできます。詳細については、 [TiDB DashboardのSSOを構成する](/dashboard/dashboard-session-sso.md)ご覧ください。
+- [ユーザー定義のSQLユーザー](/dashboard/dashboard-user.md)を作成した場合は、このアカウントと対応するパスワードを使用してサインインできます。
 
 次のいずれかの状況が存在する場合、ログインが失敗する可能性があります。
 
--   TiDB `root`ユーザーが存在しません。
--   PD が起動していないか、アクセスできません。
--   TiDB が起動されていないか、アクセスできません。
--   パスワードが`root`間違っています。
+- TiDB `root`ユーザーが存在しません。
+- PD が起動していないか、アクセスできません。
+- TiDB が起動されていないか、アクセスできません。
+- パスワードが`root`間違っています。
 
 サインイン後、セッションは24時間有効です。サインアウトの方法については、 [ログアウト](#logout)セクションをご覧ください。
 
@@ -52,8 +52,8 @@ TiDB Dashboardにアクセスすると、ユーザー ログイン インター�
 
 TiDB Dashboardでは次の言語がサポートされています。
 
--   英語
--   中国語（簡体字）
+- 英語
+- 中国語（簡体字）
 
 **SQL ユーザー サインイン**ページで、**言語の切り替え**ドロップダウン リストをクリックしてインターフェイス言語を切り替えることができます。
 

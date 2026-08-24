@@ -18,11 +18,11 @@ aliases: ['/ja/tidb/stable/dev-guide-use-subqueries/','/ja/tidbcloud/dev-guide-u
 
 ほとんどの場合、サブクエリには次の 5 つの種類があります。
 
--   スカラーサブクエリ (例: `SELECT (SELECT s1 FROM t2) FROM t1` )。
--   派生テーブル (例: `SELECT t1.s1 FROM (SELECT s1 FROM t2) t1` )。
--   存在判定、例: `WHERE NOT EXISTS(SELECT ... FROM t2)` 、 `WHERE t1.a IN (SELECT ... FROM t2)` 。
--   量化比較、例: `WHERE t1.a = ANY(SELECT ... FROM t2)` 、 `WHERE t1.a = ANY(SELECT ... FROM t2)` 。
--   比較演算子のオペランドとしてのサブクエリ (例: `WHERE t1.a > (SELECT ... FROM t2)` 。
+- スカラーサブクエリ (例: `SELECT (SELECT s1 FROM t2) FROM t1` )。
+- 派生テーブル (例: `SELECT t1.s1 FROM (SELECT s1 FROM t2) t1` )。
+- 存在判定、例: `WHERE NOT EXISTS(SELECT ... FROM t2)` 、 `WHERE t1.a IN (SELECT ... FROM t2)` 。
+- 量化比較、例: `WHERE t1.a = ANY(SELECT ... FROM t2)` 、 `WHERE t1.a = ANY(SELECT ... FROM t2)` 。
+- 比較演算子のオペランドとしてのサブクエリ (例: `WHERE t1.a > (SELECT ... FROM t2)` 。
 
 ## サブクエリのカテゴリ {#category-of-subquery}
 
@@ -126,12 +126,12 @@ WHERE
 
 ## 続きを読む {#read-more}
 
--   [サブクエリ関連の最適化](/subquery-optimization.md)
--   [相関サブクエリの非相関](/correlated-subquery-optimization.md)
--   [TiDBにおけるサブクエリの最適化](https://www.pingcap.com/blog/subquery-optimization-in-tidb/)
+- [サブクエリ関連の最適化](/subquery-optimization.md)
+- [相関サブクエリの非相関](/correlated-subquery-optimization.md)
+- [TiDBにおけるサブクエリの最適化](https://www.pingcap.com/blog/subquery-optimization-in-tidb/)
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

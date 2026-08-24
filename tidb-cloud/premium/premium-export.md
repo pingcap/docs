@@ -22,18 +22,18 @@ TiDB Cloudを使用すると、{{{ .premium }}}<CustomContent plan="byoc"> ま�
 
 データを以下の外部ストレージの場所にエクスポートできます。
 
--   [Amazon S3](https://aws.amazon.com/s3/)
--   [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
--   [Alibaba Cloudオブジェクトストレージサービス（OSS）](https://www.alibabacloud.com/product/oss)
+- [Amazon S3](https://aws.amazon.com/s3/)
+- [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
+- [Alibaba Cloudオブジェクトストレージサービス（OSS）](https://www.alibabacloud.com/product/oss)
 
 ### Amazon S3 {#amazon-s3}
 
 データをAmazon S3にエクスポートするには、以下の情報を提供する必要があります。
 
--   URI: `s3://<bucket-name>/<folder-path>/`
--   以下のいずれかのアクセス認証情報：
-    -   [アクセスキー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): アクセスキーに `s3:PutObject` 権限があることを確認してください。
-    -   [ロールARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): ロールARN（Amazon Resource Name）に `s3:PutObject` 権限があることを確認してください。なお、ロールARNをサポートしているのは、AWS 上でホストされている {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスのみです。
+- URI: `s3://<bucket-name>/<folder-path>/`
+- 以下のいずれかのアクセス認証情報：
+    - [アクセスキー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): アクセスキーに `s3:PutObject` 権限があることを確認してください。
+    - [ロールARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): ロールARN（Amazon Resource Name）に `s3:PutObject` 権限があることを確認してください。なお、ロールARNをサポートしているのは、AWS 上でホストされている {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスのみです。
 
 詳細については、 [外部ストレージへのアクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
 
@@ -41,8 +41,8 @@ TiDB Cloudを使用すると、{{{ .premium }}}<CustomContent plan="byoc"> ま�
 
 Azure Blob Storage にデータをエクスポートするには、以下の情報を提供する必要があります。
 
--   URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`または`https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
--   アクセス資格情報: Azure Blob Storage コンテナーの[共有アクセス署名（SAS）トークン](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)。 SAS トークンに、 `Read`および`Write`リソースに対する`Container`および`Object`権限があることを確認してください。
+- URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`または`https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
+- アクセス資格情報: Azure Blob Storage コンテナーの[共有アクセス署名（SAS）トークン](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)。 SAS トークンに、 `Read`および`Write`リソースに対する`Container`および`Object`権限があることを確認してください。
 
 詳細については、 [外部ストレージへのアクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)を参照してください。
 
@@ -50,8 +50,8 @@ Azure Blob Storage にデータをエクスポートするには、以下の情�
 
 Alibaba Cloud OSSにデータをエクスポートするには、以下の情報を提供する必要があります。
 
--   URI: `oss://<bucket-name>/<folder-path>/`
--   アクセス資格情報: Alibaba Cloud アカウントの[アクセスキーペア](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)。 AccessKey ペアに`oss:PutObject`および`oss:GetBucketInfo`権限があることを確認してください。
+- URI: `oss://<bucket-name>/<folder-path>/`
+- アクセス資格情報: Alibaba Cloud アカウントの[アクセスキーペア](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)。 AccessKey ペアに`oss:PutObject`および`oss:GetBucketInfo`権限があることを確認してください。
 
 詳細については、 [外部ストレージへのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)を参照してください。
 
@@ -65,12 +65,12 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
 
 データを以下の形式でエクスポートできます。
 
--   `SQL` : データを SQL 形式でエクスポートします。
--   `CSV` : データをCSV形式でエクスポートします。以下のオプションを指定できます。
-    -   `delimiter` : エクスポートされたデータで使用される区切り文字を指定します。デフォルトの区切り文字は`"`です。
-    -   `separator` : エクスポートされたデータ内のフィールドを区切るために使用される文字を指定します。デフォルトの区切り文字は`,`です。
-    -   `header` : エクスポートされたデータにヘッダー行を含めるかどうかを指定します。デフォルト値は`true`です。
-    -   `null-value` : エクスポートされたデータ内の NULL 値を表す文字列を指定します。デフォルト値は`\N`です。
+- `SQL` : データを SQL 形式でエクスポートします。
+- `CSV` : データをCSV形式でエクスポートします。以下のオプションを指定できます。
+    - `delimiter` : エクスポートされたデータで使用される区切り文字を指定します。デフォルトの区切り文字は`"`です。
+    - `separator` : エクスポートされたデータ内のフィールドを区切るために使用される文字を指定します。デフォルトの区切り文字は`,`です。
+    - `header` : エクスポートされたデータにヘッダー行を含めるかどうかを指定します。デフォルト値は`true`です。
+    - `null-value` : エクスポートされたデータ内の NULL 値を表す文字列を指定します。デフォルト値は`\N`です。
 
 スキーマとデータは、以下の命名規則に従ってエクスポートされます。
 
@@ -85,24 +85,24 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
 
 エクスポートされたCSVデータとSQLデータは、以下のアルゴリズムを使用して圧縮できます。
 
--   `gzip` (デフォルト): `gzip`を使用してエクスポートされたデータを圧縮します。
--   `snappy` : `snappy`を使用してエクスポートされたデータを圧縮します。
--   `zstd` : `zstd`を使用してエクスポートされたデータを圧縮します。
--   `none` : エクスポートされたデータを圧縮しない。
+- `gzip` (デフォルト): `gzip`を使用してエクスポートされたデータを圧縮します。
+- `snappy` : `snappy`を使用してエクスポートされたデータを圧縮します。
+- `zstd` : `zstd`を使用してエクスポートされたデータを圧縮します。
+- `none` : エクスポートされたデータを圧縮しない。
 
 ## 例 {#examples}
 
 ### データをAmazon S3にエクスポートする {#export-data-to-amazon-s3}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、 [**TiDB Instances**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、 [**TiDB Instances**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象の{{{ .premium }}}<CustomContent plan="byoc">または{{{ .byoc }}}</CustomContent>インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Export**をクリックします。
+2. 対象の{{{ .premium }}}<CustomContent plan="byoc">または{{{ .byoc }}}</CustomContent>インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Export**をクリックします。
 
-3.  **Export**ページで、右上隅にある**Export Data**をクリックします。次に、以下の設定を行います。
+3. **Export**ページで、右上隅にある**Export Data**をクリックします。次に、以下の設定を行います。
 
     - **Task Name**：エクスポートタスクの名前を入力してください。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
     - **Source Connection**：{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスの**Username**と**Password**を入力し、**Test Connection**をクリックして認証情報を確認します。
@@ -116,19 +116,19 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
     - **Data Format**：**SQL**または**CSV**を選択してください。
     - **Compression**：**Gzip**、**Snappy**、**Zstd**、または**None**を選択してください。
 
-4.  **Export**をクリックします。
+4. **Export**をクリックします。
 
 ### データをAzure Blob Storageにエクスポートする {#export-data-to-azure-blob-storage}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、 [**TiDB Instances**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、 [**TiDB Instances**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象の {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで **Data** > **Export** をクリックします。
+2. 対象の {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで **Data** > **Export** をクリックします。
 
-3.  **Export**ページで、右上隅にある**Export Data**をクリックします。次に、以下の設定を行います。
+3. **Export**ページで、右上隅にある**Export Data**をクリックします。次に、以下の設定を行います。
 
     - **Task Name**：エクスポートタスクの名前を入力してください。デフォルト値は `SNAPSHOT_{snapshot_time}` です。
     - **Source Connection**：{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスの **Username** と **Password** を入力し、**Test Connection** をクリックして認証情報を確認します。
@@ -140,19 +140,19 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
     - **Data Format**：**SQL** または **CSV** を選択してください。
     - **Compression**：**Gzip**、**Snappy**、**Zstd**、または **None** を選択してください。
 
-4.  **Export**をクリックします。
+4. **Export**をクリックします。
 
 ### データをAlibaba Cloud OSSにエクスポート {#export-data-to-alibaba-cloud-oss}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、 [**TiDB Instances**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、 [**TiDB Instances**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象の{{{ .premium }}}<CustomContent plan="byoc">または{{{ .byoc }}}</CustomContent>インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Export**をクリックします。
+2. 対象の{{{ .premium }}}<CustomContent plan="byoc">または{{{ .byoc }}}</CustomContent>インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Export**をクリックします。
 
-3.  **Export**ページで、右上隅にある**Export Data**をクリックします。
+3. **Export**ページで、右上隅にある**Export Data**をクリックします。
 
     - **Task Name**：エクスポートタスクの名前を入力してください。デフォルト値は `SNAPSHOT_{snapshot_time}` です。
     - **Source Connection**：{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスの **Username** と **Password** を入力し、**Test Connection** をクリックして認証情報を確認します。
@@ -164,13 +164,13 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
     - **Data Format**：**SQL** または **CSV** を選択してください。
     - **Compression**：**Gzip**、**Snappy**、**Zstd**、または **None** を選択してください。
 
-4.  **Export**をクリックします。
+4. **Export**をクリックします。
 
 ### エクスポートタスクをキャンセルする {#cancel-an-export-task}
 
 進行中のエクスポートタスクをキャンセルするには、以下の手順に従ってください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、 [**TiDB Instances**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、 [**TiDB Instances**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
@@ -178,8 +178,8 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
 
 2. 対象の {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで **Data** > **Export** をクリックします。
 
-3.  **Export**ページで、エクスポートタスク一覧を表示します。
+3. **Export**ページで、エクスポートタスク一覧を表示します。
 
-4.  キャンセルしたいエクスポートタスクを選択し、 **Action**をクリックします。
+4. キャンセルしたいエクスポートタスクを選択し、 **Action**をクリックします。
 
-5.  ドロップダウンリストから**Cancel**を選択してください。なお、キャンセルできるのは**Running**ステータスのエクスポートタスクのみです。
+5. ドロップダウンリストから**Cancel**を選択してください。なお、キャンセルできるのは**Running**ステータスのエクスポートタスクのみです。

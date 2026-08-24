@@ -28,9 +28,9 @@ TableNameList ::=
 
 通常のテーブルと一時テーブルを削除するには、次の構文を使用できます。
 
--   ローカル一時テーブルを削除するには`DROP TEMPORARY TABLE`を使用します。
--   グローバル一時テーブルを削除するには`DROP GLOBAL TEMPORARY TABLE`を使用します。
--   通常のテーブルまたは一時テーブルを削除するには、 `DROP TABLE`を使用します。
+- ローカル一時テーブルを削除するには`DROP TEMPORARY TABLE`を使用します。
+- グローバル一時テーブルを削除するには`DROP GLOBAL TEMPORARY TABLE`を使用します。
+- 通常のテーブルまたは一時テーブルを削除するには、 `DROP TABLE`を使用します。
 
 ## 例 {#examples}
 
@@ -68,6 +68,6 @@ Query OK, 0 rows affected (0.23 sec)
 
 ## 参照 {#see-also}
 
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
--   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
--   [SHOW [FULL] TABLES](/sql-statements/sql-statement-show-tables.md)
+- [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+- [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+- [SHOW [FULL] TABLES](/sql-statements/sql-statement-show-tables.md)

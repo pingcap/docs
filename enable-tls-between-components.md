@@ -7,15 +7,15 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
 
 このドキュメントでは、TiDBクラスタ内のコンポーネント間で暗号化されたデータ転送を有効にする方法について説明します。有効にすると、以下のコンポーネント間で暗号化された転送が使用されます。
 
--   TiDB、TiKV、PD、 TiFlash間の通信
--   TiDB コントロールと TiDB、 TiKV Controlと TiKV、 PD Controlと PD
--   各 TiDB、TiKV、PD、およびTiFlashクラスタ内の内部通信
+- TiDB、TiKV、PD、 TiFlash間の通信
+- TiDB コントロールと TiDB、 TiKV Controlと TiKV、 PD Controlと PD
+- 各 TiDB、TiKV、PD、およびTiFlashクラスタ内の内部通信
 
 現在、特定のコンポーネントの暗号化された送信のみを有効にすることはサポートされていません。
 
 ## 暗号化されたデータ転送を設定して有効にする {#configure-and-enable-encrypted-data-transmission}
 
-1.  証明書を準備します。
+1. 証明書を準備します。
 
     TiDB、TiKV、PD それぞれにサーバー証明書を用意することをお勧めします。これらのコンポーネントが相互に認証できることを確認してください。TiDB、TiKV、PD の制御ツールは、1 つのクライアント証明書を共有することもできます。
 
@@ -33,11 +33,11 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
 
     </CustomContent>
 
-2.  証明書を構成します。
+2. 証明書を構成します。
 
     TiDB コンポーネント間の相互認証を有効にするには、TiDB、TiKV、PD の証明書を次のように構成します。
 
-    -   TiDB
+    - TiDB
 
         設定ファイルまたはコマンドライン引数で設定します。
 
@@ -51,7 +51,7 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
         cluster-ssl-key = "/path/to/tidb-server-key.pem"
         ```
 
-    -   TiKV
+    - TiKV
 
         設定ファイルまたはコマンドライン引数で設定し、対応する URL を`https`に設定します。
 
@@ -66,7 +66,7 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
         key-path = "/path/to/tikv-server-key.pem"
         ```
 
-    -   PD
+    - PD
 
         設定ファイルまたはコマンドライン引数で設定し、対応する URL を`https`に設定します。
 
@@ -81,7 +81,7 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
         key-path = "/path/to/pd-server-key.pem"
         ```
 
-    -   TiFlash (v4.0.5 の新機能)
+    - TiFlash (v4.0.5 の新機能)
 
         `tiflash.toml`ファイルで設定します。
 
@@ -108,7 +108,7 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
         key-path = "/path/to/tiflash-server-key.pem"
         ```
 
-    -   TiCDC
+    - TiCDC
 
         設定ファイルで設定します。
 
@@ -151,10 +151,10 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
 
 > **Note:**
 >
-> -   v8.4.0以降、PD構成項目`cert-allowed-cn`複数の値をサポートします。必要に応じて、TiDB用構成項目`cluster-verify-cn`とその他のコンポーネント用構成項目`cert-allowed-cn`に、複数の`Common Name`設定できます。TiUPはコンポーネントのステータスを照会する際に別の識別子を使用することに注意してください。例えば、クラスター名が`test`の場合、 TiUPは`Common Name`として`test-client`を使用します。
-> -   v8.3.0以前のバージョンでは、PD設定項目`cert-allowed-cn`には単一の値しか設定できません。そのため、すべての認証オブジェクトの`Common Name`同じ値に設定する必要があります。関連する設定例については、 [v8.3.0 ドキュメント](https://docs-archive.pingcap.com/tidb/v8.3/enable-tls-between-components/)を参照してください。
+> - v8.4.0以降、PD構成項目`cert-allowed-cn`複数の値をサポートします。必要に応じて、TiDB用構成項目`cluster-verify-cn`とその他のコンポーネント用構成項目`cert-allowed-cn`に、複数の`Common Name`設定できます。TiUPはコンポーネントのステータスを照会する際に別の識別子を使用することに注意してください。例えば、クラスター名が`test`の場合、 TiUPは`Common Name`として`test-client`を使用します。
+> - v8.3.0以前のバージョンでは、PD設定項目`cert-allowed-cn`には単一の値しか設定できません。そのため、すべての認証オブジェクトの`Common Name`同じ値に設定する必要があります。関連する設定例については、 [v8.3.0 ドキュメント](https://docs-archive.pingcap.com/tidb/v8.3/enable-tls-between-components/)を参照してください。
 
--   TiDB
+- TiDB
 
     設定ファイルまたはコマンドライン引数で設定します。
 
@@ -163,7 +163,7 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
     cluster-verify-cn = ["tidb", "test-client", "prometheus"]
     ```
 
--   TiKV
+- TiKV
 
     設定ファイルまたはコマンドライン引数で設定します。
 
@@ -172,7 +172,7 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
     cert-allowed-cn = ["tidb", "pd", "tikv", "tiflash", "prometheus"]
     ```
 
--   PD
+- PD
 
     設定ファイルまたはコマンドライン引数で設定します。
 
@@ -181,7 +181,7 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
     cert-allowed-cn = ["tidb", "pd", "tikv", "tiflash", "test-client", "prometheus"]
     ```
 
--   TiFlash (v4.0.5 の新機能)
+- TiFlash (v4.0.5 の新機能)
 
     `tiflash.toml`ファイルまたはコマンドライン引数で設定します。
 
@@ -201,31 +201,31 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
 
 TiDBコンポーネント間の通信にTLSを設定したら、以下のコマンドを使用してTLSが正常に有効化されたことを確認できます。これらのコマンドは、各コンポーネントの証明書とTLSハンドシェイクの詳細を出力します。
 
--   TiDB
+- TiDB
 
     ```sh
     openssl s_client -connect <tidb_host>:10080 -cert /path/to/client.pem -key /path/to/client-key.pem -CAfile ./ca.crt < /dev/null
     ```
 
--   PD
+- PD
 
     ```sh
     openssl s_client -connect <pd_host>:2379 -cert /path/to/client.pem -key /path/to/client-key.pem -CAfile ./ca.crt < /dev/null
     ```
 
--   TiKV
+- TiKV
 
     ```sh
     openssl s_client -connect <tikv_host>:20160 -cert /path/to/client.pem -key /path/to/client-key.pem -CAfile ./ca.crt < /dev/null
     ```
 
--   TiFlash (v4.0.5 の新機能)
+- TiFlash (v4.0.5 の新機能)
 
     ```sh
     openssl s_client -connect <tiflash_host>:<tiflash_port> -cert /path/to/client.pem -key /path/to/client-key.pem -CAfile ./ca.crt < /dev/null
     ```
 
--   TiProxy
+- TiProxy
 
     ```sh
     openssl s_client -connect <tiproxy_host>:3080 -cert /path/to/client.pem -key /path/to/client-key.pem -CAfile ./ca.crt < /dev/null
@@ -233,11 +233,11 @@ TiDBコンポーネント間の通信にTLSを設定したら、以下のコマ�
 
 ## 証明書を再読み込みする {#reload-certificates}
 
--   TiDB クラスターがローカル データ センターに展開されている場合、証明書とキーを再ロードするために、TiDB、PD、TiKV、 TiFlash、TiCDC、およびすべての種類のクライアントは、新しい接続が作成されるたびに、TiDB クラスターを再起動せずに現在の証明書とキー ファイルを再読み取ります。
+- TiDB クラスターがローカル データ センターに展開されている場合、証明書とキーを再ロードするために、TiDB、PD、TiKV、 TiFlash、TiCDC、およびすべての種類のクライアントは、新しい接続が作成されるたびに、TiDB クラスターを再起動せずに現在の証明書とキー ファイルを再読み取ります。
 
--   TiProxy は 1 時間に 1 回、ディスクから証明書を再読み込みします。
+- TiProxy は 1 時間に 1 回、ディスクから証明書を再読み込みします。
 
--   TiDB クラスタを自社マネージドクラウドにデプロイしている場合は、TLS 証明書の発行がクラウドプロバイダーの証明書管理サービスと統合されていることを確認してください。TiDB、PD、TiKV、 TiFlash、および TiCDC コンポーネントの TLS 証明書は、TiDB クラスタを再起動することなく自動的にローテーションできます。
+- TiDB クラスタを自社マネージドクラウドにデプロイしている場合は、TLS 証明書の発行がクラウドプロバイダーの証明書管理サービスと統合されていることを確認してください。TiDB、PD、TiKV、 TiFlash、および TiCDC コンポーネントの TLS 証明書は、TiDB クラスタを再起動することなく自動的にローテーションできます。
 
 ## 証明書の有効期限 {#certificate-validity}
 
@@ -245,4 +245,4 @@ TiDBクラスタ内の各コンポーネントのTLS証明書の有効期間を�
 
 ## 参照 {#see-also}
 
--   [TiDBクライアントとサーバー間のTLSを有効にする](/enable-tls-between-clients-and-servers.md)
+- [TiDBクライアントとサーバー間のTLSを有効にする](/enable-tls-between-clients-and-servers.md)

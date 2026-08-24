@@ -10,13 +10,13 @@ aliases: ['/ja/tidb/stable/vector-search-full-text-search-sql/','/ja/tidbcloud/v
 
 TiDBの全文検索機能は、以下の機能を提供します。
 
--   **テキストデータを直接クエリする**：埋め込み処理を行わずに、任意の文字列列を直接検索できます。
+- **テキストデータを直接クエリする**：埋め込み処理を行わずに、任意の文字列列を直接検索できます。
 
--   **多言語対応**：高品質な検索のために言語を指定する必要はありません。TiDBのテキストアナラ​​イザーは、同一テーブル内に複数の言語で記述された文書が混在する場合でも対応し、各文書に最適なアナライザーを自動的に選択します。
+- **多言語対応**：高品質な検索のために言語を指定する必要はありません。TiDBのテキストアナラ​​イザーは、同一テーブル内に複数の言語で記述された文書が混在する場合でも対応し、各文書に最適なアナライザーを自動的に選択します。
 
--   **関連性順に並べる**: 広く採用されている[BM25ランキング](https://en.wikipedia.org/wiki/Okapi_BM25)アルゴリズムを使用して、検索結果を関連性順に並べ替えることができます。
+- **関連性順に並べる**: 広く採用されている[BM25ランキング](https://en.wikipedia.org/wiki/Okapi_BM25)アルゴリズムを使用して、検索結果を関連性順に並べ替えることができます。
 
--   **SQLとの完全な互換性**：事前フィルタリング、事後フィルタリング、グループ化、結合など、すべてのSQL機能を全文検索で使用できます。
+- **SQLとの完全な互換性**：事前フィルタリング、事後フィルタリング、グループ化、結合など、すべてのSQL機能を全文検索で使用できます。
 
 > **Tip:**
 >
@@ -28,17 +28,17 @@ TiDBの全文検索機能は、以下の機能を提供します。
 
 全文検索機能はまだ開発初期段階にあり、より多くのお客様に順次展開していく予定です。現在、全文検索機能は、以下のリージョンにおけるTiDB Cloud Starterでのみご利用いただけます。
 
--   AWS: `Oregon (us-west-2)` 、 `N. Virginia (us-east-1)` 、 `Tokyo (ap-northeast-1)` 、 `Frankfurt (eu-central-1)` 、および`Singapore (ap-southeast-1)`
+- AWS: `Oregon (us-west-2)` 、 `N. Virginia (us-east-1)` 、 `Tokyo (ap-northeast-1)` 、 `Frankfurt (eu-central-1)` 、および`Singapore (ap-southeast-1)`
 
 全文検索を使用する前に、 TiDB Cloud Starterインスタンスがサポートされているリージョンで作成されていることを確認してください。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
 全文検索を実行するには、以下の手順に従ってください。
 
-1.  [**全文索引を作成する**](#create-a-full-text-index): フルテキスト インデックスを持つテーブルを作成するか、既存のテーブルにフルテキスト インデックスを追加します。
+1. [**全文索引を作成する**](#create-a-full-text-index): フルテキスト インデックスを持つテーブルを作成するか、既存のテーブルにフルテキスト インデックスを追加します。
 
-2.  テキストデータ[**テキストデータを挿入する**](#insert-text-data): テーブルにテキストデータを挿入します。
+2. テキストデータ[**テキストデータを挿入する**](#insert-text-data): テーブルにテキストデータを挿入します。
 
-3.  [**全文検索を実行する**](#perform-a-full-text-search): テキストクエリと全文検索関数を使用して全文検索を実行します。
+3. [**全文検索を実行する**](#perform-a-full-text-search): テキストクエリと全文検索関数を使用して全文検索を実行します。
 
 ### 全文索引を作成する {#create-a-full-text-index}
 
@@ -70,9 +70,9 @@ ALTER TABLE stock_items ADD FULLTEXT INDEX (title) WITH PARSER MULTILINGUAL ADD_
 
 `WITH PARSER <PARSER_NAME>`句では、以下のパーサーが受け入れられます。
 
--   `STANDARD` : 高速で、英語コンテンツに対応し、スペースと句読点によって単語を分割します。インデックス作成と検索では、すべてのテキストが小文字化されます（大文字と小文字を区別しないマッチング）。
+- `STANDARD` : 高速で、英語コンテンツに対応し、スペースと句読点によって単語を分割します。インデックス作成と検索では、すべてのテキストが小文字化されます（大文字と小文字を区別しないマッチング）。
 
--   `MULTILINGUAL` : 英語、中国語、日本語、韓国語など、複数の言語をサポートしています。
+- `MULTILINGUAL` : 英語、中国語、日本語、韓国語など、複数の言語をサポートしています。
 
 ### 全文インデックスを管理する {#manage-full-text-indexes}
 
@@ -315,11 +315,11 @@ WHERE t.author_id IN
 
 ## 関連項目 {#see-also}
 
--   [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)
+- [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)
 
 ## フィードバックとヘルプ {#feedback-x26-help}
 
 全文検索はまだ開発初期段階であり、利用できる地域が限られています。まだ利用できない地域で全文検索を試してみたい場合、またはご意見やご質問がある場合は、お気軽にお問い合わせください。
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)

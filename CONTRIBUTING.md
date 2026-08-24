@@ -6,12 +6,12 @@
 
 [PingCAP ウェブサイトの TiDB ドキュメント](https://docs.pingcap.com/tidb/stable)を改善するには、次のいずれかの項目から始めることができます。
 
--   タイプミスやフォーマット（句読点、スペース、インデント、コードブロックなど）を修正します
--   不適切または古い説明を修正または更新する
--   不足しているコンテンツ（文、段落、または新しいドキュメント）を追加します
--   ドキュメントの変更を英語から中国語に翻訳する
--   提出、返信、解決[ドキュメントの問題](https://github.com/pingcap/docs/issues)
--   (上級) 他の人が作成したプルリクエストを確認する
+- タイプミスやフォーマット（句読点、スペース、インデント、コードブロックなど）を修正します
+- 不適切または古い説明を修正または更新する
+- 不足しているコンテンツ（文、段落、または新しいドキュメント）を追加します
+- ドキュメントの変更を英語から中国語に翻訳する
+- 提出、返信、解決[ドキュメントの問題](https://github.com/pingcap/docs/issues)
+- (上級) 他の人が作成したプルリクエストを確認する
 
 ## 貢献する前に {#before-you-contribute}
 
@@ -19,11 +19,11 @@
 
 ### スタイルに慣れる {#get-familiar-with-style}
 
--   [コミットメッセージのスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message)
--   [プルリクエストのタイトルスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style)
--   [マークダウンルール](/resources/markdownlint-rules.md)
--   [コードコメントスタイル](https://github.com/pingcap/community/blob/master/contributors/code-comment-style.md)
--   図表スタイル: [Figma クイックスタートガイド](https://github.com/pingcap/community/blob/master/contributors/figma-quick-start-guide.md)
+- [コミットメッセージのスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message)
+- [プルリクエストのタイトルスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style)
+- [マークダウンルール](/resources/markdownlint-rules.md)
+- [コードコメントスタイル](https://github.com/pingcap/community/blob/master/contributors/code-comment-style.md)
+- 図表スタイル: [Figma クイックスタートガイド](https://github.com/pingcap/community/blob/master/contributors/figma-quick-start-guide.md)
 
     図のスタイルを統一するために、図の描画やデザインには[Figma](https://www.figma.com/)を使用することをお勧めします。図を描く必要がある場合は、ガイドを参照し、テンプレートで提供されている図形や色を使用してください。
 
@@ -33,29 +33,29 @@ TiDB 用の新しいドキュメントを作成する場合は、当社のスタ
 
 プル リクエストを送信する前に、次のテンプレートを確認してください。
 
--   [概念](/resources/doc-templates/template-concept.md)
--   [タスク](/resources/doc-templates/template-task.md)
--   [参照](/resources/doc-templates/template-reference.md)
--   [新機能](/resources/doc-templates/template-new-feature.md)
--   [トラブルシューティング](/resources/doc-templates/template-troubleshooting.md)
+- [概念](/resources/doc-templates/template-concept.md)
+- [タスク](/resources/doc-templates/template-task.md)
+- [参照](/resources/doc-templates/template-reference.md)
+- [新機能](/resources/doc-templates/template-new-feature.md)
+- [トラブルシューティング](/resources/doc-templates/template-troubleshooting.md)
 
 ### ドキュメントのバージョンについて学ぶ {#learn-about-docs-versions}
 
 異なるバージョンの TiDB ドキュメントを管理するために、個別のブランチを使用します。
 
--   [開発中のドキュメント](https://docs.pingcap.com/tidb/dev)は`master`ブランチで維持されます。
--   [公開された文書](https://docs.pingcap.com/tidb/stable/)は対応する`release-<version>`ブランチでメンテナンスされています。例えば、TiDB v8.1 のドキュメントは`release-8.1`ブランチでメンテナンスされています。
--   [アーカイブされた文書](https://docs-archive.pingcap.com/)はメンテナンスされなくなり、今後更新されることはありません。
+- [開発中のドキュメント](https://docs.pingcap.com/tidb/dev)は`master`ブランチで維持されます。
+- [公開された文書](https://docs.pingcap.com/tidb/stable/)は対応する`release-<version>`ブランチでメンテナンスされています。例えば、TiDB v8.1 のドキュメントは`release-8.1`ブランチでメンテナンスされています。
+- [アーカイブされた文書](https://docs-archive.pingcap.com/)はメンテナンスされなくなり、今後更新されることはありません。
 
 ### チェリーピックラベルを使用する {#use-cherry-pick-labels}
 
 あるドキュメント バージョンへの変更は他のドキュメント バージョンにも適用されることが多いため、チェリー ピック ラベルに基づいて PR チェリー ピック プロセスを自動化する[ti-chi-bot](https://github.com/ti-chi-bot)を導入します。
 
--   変更が特定のドキュメントバージョンにのみ適用される場合は、そのドキュメントバージョンのブランチに基づいてPRを作成してください。チェリーピックラベルを追加する必要はありません。
+- 変更が特定のドキュメントバージョンにのみ適用される場合は、そのドキュメントバージョンのブランチに基づいてPRを作成してください。チェリーピックラベルを追加する必要はありません。
 
--   変更が複数のドキュメントバージョンに適用される場合は、複数のPRを作成する代わりに、最新の適用可能なブランチ（例： `master` ）に基づいて1つのPRを作成し、適用可能なドキュメントバージョンに応じて1つまたは複数の`needs-cherry-pick-release-<version>`ラベルをPRに追加します。PRがマージされると、ti-chi-botは指定されたバージョンのブランチに基づいて、対応するチェリーピックPRを自動的に作成します。
+- 変更が複数のドキュメントバージョンに適用される場合は、複数のPRを作成する代わりに、最新の適用可能なブランチ（例： `master` ）に基づいて1つのPRを作成し、適用可能なドキュメントバージョンに応じて1つまたは複数の`needs-cherry-pick-release-<version>`ラベルをPRに追加します。PRがマージされると、ti-chi-botは指定されたバージョンのブランチに基づいて、対応するチェリーピックPRを自動的に作成します。
 
--   変更の大部分が複数のドキュメントバージョンに適用されるものの、バージョン間で差異が存在する場合は、対象バージョンすべてにチェリーピックラベルを付与するだけでなく、PRレビュアーへのリマインダーとして「 `requires-version-specific-change`ラベルも付与する必要があります。PRがマージされ、ti-chi-botが対応するチェリーピックPRを作成した後でも、これらのチェリーピックPRに変更を加えることができます。
+- 変更の大部分が複数のドキュメントバージョンに適用されるものの、バージョン間で差異が存在する場合は、対象バージョンすべてにチェリーピックラベルを付与するだけでなく、PRレビュアーへのリマインダーとして「 `requires-version-specific-change`ラベルも付与する必要があります。PRがマージされ、ti-chi-botが対応するチェリーピックPRを作成した後でも、これらのチェリーピックPRに変更を加えることができます。
 
 ## 貢献方法 {#how-to-contribute}
 
@@ -71,8 +71,8 @@ TiDB 用の新しいドキュメントを作成する場合は、当社のスタ
 
 ### ステップ1: リポジトリをフォークする {#step-1-fork-the-repository}
 
-1.  プロジェクトを訪問: [https://github.com/pingcap/docs](https://github.com/pingcap/docs)
-2.  右上の**フォーク**ボタンをクリックし、完了するまで待ちます。
+1. プロジェクトを訪問: [https://github.com/pingcap/docs](https://github.com/pingcap/docs)
+2. 右上の**フォーク**ボタンをクリックし、完了するまで待ちます。
 
 ### ステップ2: フォークしたリポジトリをローカルストレージにクローンする {#step-2-clone-the-forked-repository-to-local-storage}
 
@@ -87,7 +87,7 @@ git remote -v # Confirms that your remote makes sense
 
 ### ステップ3: 新しいブランチを作成する {#step-3-create-a-new-branch}
 
-1.  ローカル マスターを、upstream/master で最新の状態にします。
+1. ローカル マスターを、upstream/master で最新の状態にします。
 
     ```
     cd $working_dir/docs
@@ -96,7 +96,7 @@ git remote -v # Confirms that your remote makes sense
     git rebase upstream/master
     ```
 
-2.  マスター ブランチに基づいて新しいブランチを作成します。
+2. マスター ブランチに基づいて新しいブランチを作成します。
 
     ```
     git checkout -b new-branch-name
@@ -132,8 +132,8 @@ git push -u origin new-branch-name # "-u" is used to track the remote branch fro
 
 ### ステップ8: プルリクエストを作成する {#step-8-create-a-pull-request}
 
-1.  [https://github.com/$user/docs](https://github.com/$user/docs)でフォークにアクセスします ( `$user` GitHub ID に置き換えます)
-2.  `new-branch-name`ブランチの横にある`Compare & pull request`ボタンをクリックして PR を作成します。詳細は[プルリクエストのタイトルスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style)を参照してください。
+1. [https://github.com/$user/docs](https://github.com/$user/docs)でフォークにアクセスします ( `$user` GitHub ID に置き換えます)
+2. `new-branch-name`ブランチの横にある`Compare & pull request`ボタンをクリックして PR を作成します。詳細は[プルリクエストのタイトルスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style)を参照してください。
 
 これで、PR が正常に送信されました。この PR がマージされると、自動的に TiDB ドキュメントの貢献者になります。
 
@@ -143,16 +143,16 @@ git push -u origin new-branch-name # "-u" is used to track the remote branch fro
 
 変更が以下のいずれかの状況に該当する場合は、 **「マスターブランチのみを選択」すること**をお勧めします。PRがマージされると、変更はすぐに[PingCAP ドキュメント ウェブサイトの開発ページ](https://docs.pingcap.com/tidb/dev/)に表示されます。TiDBの次のメジャーバージョンまたはマイナーバージョンがリリースされると、変更は新しいバージョンのウェブサイトページにも表示されます。
 
--   欠落または不完全なドキュメントの内容を補足するなど、ドキュメントの拡張に関連します。
--   値、説明、例、タイプミスなど、不正確または間違ったドキュメントの内容を修正します。
--   特定のトピック モジュールでのドキュメントのリファクタリングが含まれます。
+- 欠落または不完全なドキュメントの内容を補足するなど、ドキュメントの拡張に関連します。
+- 値、説明、例、タイプミスなど、不正確または間違ったドキュメントの内容を修正します。
+- 特定のトピック モジュールでのドキュメントのリファクタリングが含まれます。
 
 変更が以下のいずれかの状況に当てはまる場合は、**影響を受けるリリース ブランチとマスターを選択してください**。
 
--   特定のバージョンに関連する機能の動作の変更が含まれます。
--   構成項目またはシステム変数のデフォルト値の変更など、互換性の変更が含まれます。
--   表示エラーを解決するためにフォーマットを修正します
--   壊れたリンクを修正
+- 特定のバージョンに関連する機能の動作の変更が含まれます。
+- 構成項目またはシステム変数のデフォルト値の変更など、互換性の変更が含まれます。
+- 表示エラーを解決するためにフォーマットを修正します
+- 壊れたリンクを修正
 
 ## TiDB Cloudドキュメントへの貢献に関するガイドライン {#guideline-for-contributing-to-tidb-cloud-documentation}
 
@@ -162,8 +162,8 @@ git push -u origin new-branch-name # "-u" is used to track the remote branch fro
 >
 > TiDB Cloudによって再利用される TiDB ドキュメントを確認するには、 [TiDB Cloudドキュメントの TOC ファイル](https://github.com/pingcap/docs/blob/release-8.1/TOC-tidb-cloud.md?plain=1)を確認してください。
 >
-> -   このファイル内のドキュメントのパスが`/tidb-cloud/`で始まる場合、このドキュメントはTiDB Cloud Dedicatedであることを意味します。
-> -   このファイル内のドキュメントのパスが`/tidb-cloud/`で始まっていない場合は、この TiDB ドキュメントがTiDB Cloudによって再利用されることを意味します。
+> - このファイル内のドキュメントのパスが`/tidb-cloud/`で始まる場合、このドキュメントはTiDB Cloud Dedicatedであることを意味します。
+> - このファイル内のドキュメントのパスが`/tidb-cloud/`で始まっていない場合は、この TiDB ドキュメントがTiDB Cloudによって再利用されることを意味します。
 
 TiDB Cloudで再利用される一部の TiDB ドキュメントには、 `CustomContent`タグが含まれている場合があります。これらの`CustomContent`タグは、TiDB またはTiDB Cloudの専用コンテンツを示すために使用されます。
 
@@ -197,9 +197,9 @@ TiDB Cloudで再利用される一部の TiDB ドキュメントには、 `Custo
 
 この例では、
 
--   `<CustomContent platform="tidb">`タグ内のコンテンツは TiDB にのみ適用され、 [TiDB Cloudドキュメント](https://docs.pingcap.com/tidbcloud/) Web サイトには表示されません。
--   `<CustomContent platform="tidb-cloud">`タグ内のコンテンツはTiDB Cloudにのみ適用され、 [TiDBドキュメント](https://docs.pingcap.com/tidb/stable) Web サイトには表示されません。
--   `<CustomContent>`タグで囲まれていないコンテンツは、TiDB とTiDB Cloud の両方に適用され、両方のドキュメント Web サイトに表示されます。
+- `<CustomContent platform="tidb">`タグ内のコンテンツは TiDB にのみ適用され、 [TiDB Cloudドキュメント](https://docs.pingcap.com/tidbcloud/) Web サイトには表示されません。
+- `<CustomContent platform="tidb-cloud">`タグ内のコンテンツはTiDB Cloudにのみ適用され、 [TiDBドキュメント](https://docs.pingcap.com/tidb/stable) Web サイトには表示されません。
+- `<CustomContent>`タグで囲まれていないコンテンツは、TiDB とTiDB Cloud の両方に適用され、両方のドキュメント Web サイトに表示されます。
 
 ## EBNF図のプレビューのガイドライン {#guideline-for-previewing-ebnf-diagrams}
 

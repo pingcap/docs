@@ -11,9 +11,9 @@ Chat2Query API v3以降では、セッション関連のエンドポイントを
 
 マルチラウンド Chat2Query を開始する前に、次のものを用意してください。
 
--   A [Chat2Queryデータアプリ](/tidb-cloud/use-chat2query-api.md#create-a-chat2query-data-app) 。
--   [Chat2QueryデータアプリのAPIキー](/tidb-cloud/use-chat2query-api.md#create-an-api-key)です。
--   A [ターゲットデータベースのデータサマリー](/tidb-cloud/use-chat2query-api.md#1-generate-a-data-summary-by-calling-v3datasummaries) 。
+- A [Chat2Queryデータアプリ](/tidb-cloud/use-chat2query-api.md#create-a-chat2query-data-app) 。
+- [Chat2QueryデータアプリのAPIキー](/tidb-cloud/use-chat2query-api.md#create-an-api-key)です。
+- A [ターゲットデータベースのデータサマリー](/tidb-cloud/use-chat2query-api.md#1-generate-a-data-summary-by-calling-v3datasummaries) 。
 
 ## ステップ1. セッションを開始する {#step-1-start-a-session}
 
@@ -37,9 +37,9 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 
 上記のコードでは、リクエスト本体は次のプロパティを持つ JSON オブジェクトです。
 
--   `cluster_id` :*文字列*。TiDBクラスタの一意の識別子。
--   `database` :*文字列*。データベースの名前。
--   `name` ：*文字列*。セッションの名前。
+- `cluster_id` :*文字列*。TiDBクラスタの一意の識別子。
+- `database` :*文字列*。データベースの名前。
+- `name` ：*文字列*。セッションの名前。
 
 応答の例は次のとおりです。
 
@@ -80,10 +80,10 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://eu-cen
 
 上記のコードでは、リクエスト本体は次のプロパティを持つ JSON オブジェクトです。
 
--   `question` :*文字列*。必要なクエリを説明する自然言語での質問。
--   `feedback_answer_id` ：*文字列*。フィードバック回答ID。このフィールドはオプションであり、フィードバックにのみ使用されます。
--   `feedback_task_id` ：*文字列*。フィードバックタスクID。このフィールドはオプションであり、フィードバックにのみ使用されます。
--   `sql_generate_mode` :*文字列*。SQL文を生成するモード。値は`direct`または`auto_breakdown`です。 `direct`に設定すると、APIは指定された`question`に基づいて直接SQL文を生成します。 `auto_breakdown`に設定すると、APIは`question`を複数のタスクに分割し、各タスクごとにSQL文を生成します。
+- `question` :*文字列*。必要なクエリを説明する自然言語での質問。
+- `feedback_answer_id` ：*文字列*。フィードバック回答ID。このフィールドはオプションであり、フィードバックにのみ使用されます。
+- `feedback_task_id` ：*文字列*。フィードバックタスクID。このフィールドはオプションであり、フィードバックにのみ使用されます。
+- `sql_generate_mode` :*文字列*。SQL文を生成するモード。値は`direct`または`auto_breakdown`です。 `direct`に設定すると、APIは指定された`question`に基づいて直接SQL文を生成します。 `auto_breakdown`に設定すると、APIは`question`を複数のタスクに分割し、各タスクごとにSQL文を生成します。
 
 応答の例は次のとおりです。
 

@@ -10,27 +10,27 @@ TiDB は、MySQL 構文を拡張して[ベクトル検索](/ai/concepts/vector-s
 
 このドキュメントでは、SQL ステートメントだけを使用して TiDB Vector Search を開始する方法を説明します。 [MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.4/en/mysql.html)を使用して、次の操作を実行する方法を学習します。
 
--   TiDBに接続します。
--   ベクトルテーブルを作成します。
--   ベクトル埋め込みを保存する。
--   ベクトル検索クエリを実行します。
+- TiDBに接続します。
+- ベクトルテーブルを作成します。
+- ベクトル埋め込みを保存する。
+- ベクトル検索クエリを実行します。
 
 > **Note:**
 >
-> -   ベクトル検索機能はパブリックプレビューであり、予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
-> -   ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)および [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> - ベクトル検索機能はパブリックプレビューであり、予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> - ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)および [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## 前提条件 {#prerequisites}
 
 この文書の手順を完了するには、以下が必要です。
 
--   [MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.4/en/mysql.html)(MySQL CLI)がマシンにインストールされていること。
--   TiDBクラスタ。
+- [MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.4/en/mysql.html)(MySQL CLI)がマシンにインストールされていること。
+- TiDBクラスタ。
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
--   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
 ## さあ始めましょう {#get-started}
 
@@ -41,15 +41,15 @@ TiDB は、MySQL 構文を拡張して[ベクトル検索](/ai/concepts/vector-s
 <SimpleTab>
 <div label="TiDB Cloud Starter">
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、 **Connect With**ドロップダウンリストから**MySQL CLI**を選択し、 **Connection Type**のデフォルト設定を**Public**のままにします。
+3. 接続ダイアログで、 **Connect With**ドロップダウンリストから**MySQL CLI**を選択し、 **Connection Type**のデフォルト設定を**Public**のままにします。
 
-4.  まだパスワードを設定していない場合は、 **Generate Password**をクリックしてランダムなパスワードを生成してください。
+4. まだパスワードを設定していない場合は、 **Generate Password**をクリックしてランダムなパスワードを生成してください。
 
-5.  接続コマンドをコピーしてターミナルに貼り付けてください。以下はmacOSの例です。
+5. 接続コマンドをコピーしてターミナルに貼り付けてください。以下はmacOSの例です。
 
     ```bash
     mysql -u '<prefix>.root' -h '<host>' -P 4000 -D 'test' --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p'<password>'
@@ -173,5 +173,5 @@ LIMIT 3;
 
 ## 参照 {#see-also}
 
--   [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
--   [ベクトル検索インデックス](/ai/reference/vector-search-index.md)
+- [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
+- [ベクトル検索インデックス](/ai/reference/vector-search-index.md)

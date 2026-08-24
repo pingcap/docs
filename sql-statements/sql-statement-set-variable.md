@@ -105,19 +105,19 @@ SELECT @myvar, @myvar + 1;
 
 次の動作の違いが適用されます。
 
--   MySQLでは、 `SET GLOBAL`で行われた変更はレプリカには適用されません。しかし、TiDBでは、 `SET GLOBAL`の適用範囲は特定のシステム変数によって異なります。
+- MySQLでは、 `SET GLOBAL`で行われた変更はレプリカには適用されません。しかし、TiDBでは、 `SET GLOBAL`の適用範囲は特定のシステム変数によって異なります。
 
-    -   グローバル変数: ほとんどのシステム変数 (たとえば、クラスターの動作やオプティマイザーの動作に影響するもの) の場合、 `SET GLOBAL`で行われた変更はクラスター内のすべての TiDB インスタンスに適用されます。
-    -   インスタンス レベルの変数: 一部のシステム変数 (たとえば、 `max_connections` ) の場合、 `SET GLOBAL`で行われた変更は、現在の接続で使用されている TiDB インスタンスにのみ適用されます。
+    - グローバル変数: ほとんどのシステム変数 (たとえば、クラスターの動作やオプティマイザーの動作に影響するもの) の場合、 `SET GLOBAL`で行われた変更はクラスター内のすべての TiDB インスタンスに適用されます。
+    - インスタンス レベルの変数: 一部のシステム変数 (たとえば、 `max_connections` ) の場合、 `SET GLOBAL`で行われた変更は、現在の接続で使用されている TiDB インスタンスにのみ適用されます。
 
     したがって、 `SET GLOBAL`を使用して変数を変更する場合は、常にその変数の[ドキュメント](/system-variables.md) 、特に「クラスターに保持」属性をチェックして、変更の範囲を確認してください。
 
--   TiDBは、いくつかの変数を読み取りと設定の両方が可能としています。これは、アプリケーションとコネクタの両方がMySQL変数を読み取るのが一般的であるため、MySQLとの互換性を保つために必要です。例えば、JDBCコネクタは、その動作に依存していないにもかかわらず、クエリキャッシュ設定の読み取りと設定の両方を行います。
+- TiDBは、いくつかの変数を読み取りと設定の両方が可能としています。これは、アプリケーションとコネクタの両方がMySQL変数を読み取るのが一般的であるため、MySQLとの互換性を保つために必要です。例えば、JDBCコネクタは、その動作に依存していないにもかかわらず、クエリキャッシュ設定の読み取りと設定の両方を行います。
 
--   `SET GLOBAL`で行われた変更は、TiDBサーバーの再起動後も保持されます。つまり、TiDB の`SET GLOBAL` 、MySQL 8.0 以降で利用可能な`SET PERSIST`に近い動作をすることになります。
+- `SET GLOBAL`で行われた変更は、TiDBサーバーの再起動後も保持されます。つまり、TiDB の`SET GLOBAL` 、MySQL 8.0 以降で利用可能な`SET PERSIST`に近い動作をすることになります。
 
--   TiDB はグローバル変数を永続化するため、 `SET PERSIST`と`SET PERSIST_ONLY`サポートしません。
+- TiDB はグローバル変数を永続化するため、 `SET PERSIST`と`SET PERSIST_ONLY`サポートしません。
 
 ## 参照 {#see-also}
 
--   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)

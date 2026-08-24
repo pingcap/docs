@@ -31,13 +31,13 @@ TiDB DashboardはPDクライアントポート（デフォルトは[http://IP:23
 
 以下の対策を講じることをお勧めします。
 
--   ファイアウォールを使用して、コンポーネントが外部ネットワークまたは信頼できないネットワーク経由で PDコンポーネントの**クライアント**ポートにアクセスすることを禁止します。
+- ファイアウォールを使用して、コンポーネントが外部ネットワークまたは信頼できないネットワーク経由で PDコンポーネントの**クライアント**ポートにアクセスすることを禁止します。
 
     > **Note:**
     >
     > TiDB、TiKV、その他のコンポーネントは、PDクライアントポートを介してPDコンポーネントと通信する必要があるため、コンポーネント間の内部ネットワークへのアクセスをブロックしないでください。ブロックすると、クラスターが使用できなくなります。
 
--   リバース プロキシを構成して、別のポートで TiDB Dashboard サービスを外部ネットワークに安全に提供する方法の詳細については、 [リバースプロキシの背後で TiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
+- リバース プロキシを構成して、別のポートで TiDB Dashboard サービスを外部ネットワークに安全に提供する方法の詳細については、 [リバースプロキシの背後で TiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
 
 ### 複数のPDインスタンスを展開するときにTiDB Dashboardポートへのアクセスを開く方法 {#how-to-open-access-to-tidb-dashboard-port-when-deploying-multiple-pd-instances}
 
@@ -92,5 +92,5 @@ http://192.168.0.123:2379/dashboard/
 
 ## その他の推奨される安全対策 {#other-recommended-safety-measures}
 
--   [TLS認証を有効にして保存データを暗号化する](/enable-tls-between-components.md)
--   [TiDBクライアントとサーバー間のTLSを有効にする](/enable-tls-between-clients-and-servers.md)
+- [TLS認証を有効にして保存データを暗号化する](/enable-tls-between-components.md)
+- [TiDBクライアントとサーバー間のTLSを有効にする](/enable-tls-between-clients-and-servers.md)

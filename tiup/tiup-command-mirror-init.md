@@ -34,14 +34,14 @@ tiup mirror init <path> [flags]
 
 ### -k, --key-dir {#k-key-dir}
 
--   TiUPが秘密鍵ファイルを生成するディレクトリを指定します。指定されたディレクトリが存在しない場合は、 TiUPが自動的に作成します。
--   データ型: `STRING`
--   コマンドでこのオプションを指定しない場合、 TiUP はデフォルトで`{path}/keys`に秘密鍵ファイルを生成します。
+- TiUPが秘密鍵ファイルを生成するディレクトリを指定します。指定されたディレクトリが存在しない場合は、 TiUPが自動的に作成します。
+- データ型: `STRING`
+- コマンドでこのオプションを指定しない場合、 TiUP はデフォルトで`{path}/keys`に秘密鍵ファイルを生成します。
 
 ### 出力 {#outputs}
 
--   コマンドが正常に実行された場合、出力はありません。
--   指定された`<path>`空でない場合、 TiUP はエラー`Error: the target path '%s' is not an empty directory`報告します。
--   指定された`<path>`ディレクトリでない場合、 TiUP はエラー`Error: fdopendir: not a directory`報告します。
+- コマンドが正常に実行された場合、出力はありません。
+- 指定された`<path>`空でない場合、 TiUP はエラー`Error: the target path '%s' is not an empty directory`報告します。
+- 指定された`<path>`ディレクトリでない場合、 TiUP はエラー`Error: fdopendir: not a directory`報告します。
 
 [&lt;&lt; 前のページに戻る - TiUPミラーコマンドリスト](/tiup/tiup-command-mirror.md#command-list)

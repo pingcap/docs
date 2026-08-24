@@ -10,8 +10,8 @@ aliases: ['/ja/tidb/stable/vector-search-overview/','/ja/tidb/dev/vector-search-
 
 > **Note:**
 >
-> -   ベクトル検索機能はパブリックプレビューです。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
-> -   ベクトル検索機能は、 [TiDB Self-Managed](/overview.md) および [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> - ベクトル検索機能はパブリックプレビューです。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> - ベクトル検索機能は、 [TiDB Self-Managed](/overview.md) および [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## 概念 {#concepts}
 
@@ -49,8 +49,8 @@ TiDBベクトル検索は、 [距離関数](/ai/reference/vector-search-function
 
 TiDBは、ベクトル検索機能を統合したリレーショナルデータベースとして、データとその対応するベクトル表現（ベクトル埋め込み）を1つのデータベースにまとめて保存できます。データの保存方法は以下のいずれかの方法を選択できます。
 
--   データとその対応するベクトル表現を、同じテーブルの異なる列に格納します。
--   データとその対応するベクトル表現を別々のテーブルに格納します。このため、データを取得する際には`JOIN`クエリを使用してテーブルを結合する必要があります。
+- データとその対応するベクトル表現を、同じテーブルの異なる列に格納します。
+- データとその対応するベクトル表現を別々のテーブルに格納します。このため、データを取得する際には`JOIN`クエリを使用してテーブルを結合する必要があります。
 
 ## ユースケース {#use-cases}
 
@@ -70,8 +70,8 @@ TiDBは、ベクトル検索機能を統合したリレーショナルデータ�
 
 TiDB Vector Searchの利用を開始するには、以下のドキュメントを参照してください。
 
--   [Pythonを使ったベクトル検索を始めましょう](/ai/quickstart-via-python.md)
--   [SQL を使用したベクトル検索を始めましょう](/ai/quickstart-via-sql.md)
+- [Pythonを使ったベクトル検索を始めましょう](/ai/quickstart-via-python.md)
+- [SQL を使用したベクトル検索を始めましょう](/ai/quickstart-via-sql.md)
 
 ## 関連リソース {#related-resources}
 

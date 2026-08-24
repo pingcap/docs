@@ -56,7 +56,7 @@ TiDBの`SHOW DATABASES`文はMySQLと完全に互換性があります。互換�
 
 ## 参照 {#see-also}
 
--   [SHOW SCHEMAS](/sql-statements/sql-statement-show-schemas.md)
--   [DROP DATABASE](/sql-statements/sql-statement-drop-database.md)
--   [CREATE DATABASE](/sql-statements/sql-statement-create-database.md)
--   [`INFORMATION_SCHEMA.SCHEMATA`](/information-schema/information-schema-schemata.md)
+- [SHOW SCHEMAS](/sql-statements/sql-statement-show-schemas.md)
+- [DROP DATABASE](/sql-statements/sql-statement-drop-database.md)
+- [CREATE DATABASE](/sql-statements/sql-statement-create-database.md)
+- [`INFORMATION_SCHEMA.SCHEMATA`](/information-schema/information-schema-schemata.md)

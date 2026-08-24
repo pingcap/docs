@@ -116,10 +116,10 @@ RECOMMEND INDEX SHOW OPTION;
 
 以下のオプションが利用可能です。
 
--   `timeout` : `RECOMMEND INDEX`コマンドの実行に許容される最大時間を指定します。
--   `max_num_index` : `RECOMMEND INDEX`の結果に含めるインデックスの最大数を指定します。
--   `max_index_columns` : 結果の複数列インデックスで許可される最大列数を指定します。
--   `max_num_query` : ステートメントサマリーワークロードから選択するクエリの最大数を指定します。
+- `timeout` : `RECOMMEND INDEX`コマンドの実行に許容される最大時間を指定します。
+- `max_num_index` : `RECOMMEND INDEX`の結果に含めるインデックスの最大数を指定します。
+- `max_index_columns` : 結果の複数列インデックスで許可される最大列数を指定します。
+- `max_num_query` : ステートメントサマリーワークロードから選択するクエリの最大数を指定します。
 
 現在のオプション設定を確認するには、 `RECOMMEND INDEX SHOW OPTION`ステートメントを実行してください。
 
@@ -147,9 +147,9 @@ Query OK, 1 row affected (0.00 sec)
 
 インデックス推奨機能には、以下の制限事項があります。
 
--   現在、[プリペアドステートメント](/develop/dev-guide-prepared-statement.md)ステートメントはサポートされていません。 `RECOMMEND INDEX RUN`ステートメントは`Prepare`および`Execute`プロトコルを介して実行されるクエリに対してインデックスを推奨することはできません。
--   現時点では、インデックスの削除に関する推奨事項は提供されていません。
--   現在、インデックスアドバイザーのユーザーインターフェース（UI）はまだ提供されていません。
+- 現在、[プリペアドステートメント](/develop/dev-guide-prepared-statement.md)ステートメントはサポートされていません。 `RECOMMEND INDEX RUN`ステートメントは`Prepare`および`Execute`プロトコルを介して実行されるクエリに対してインデックスを推奨することはできません。
+- 現時点では、インデックスの削除に関する推奨事項は提供されていません。
+- 現在、インデックスアドバイザーのユーザーインターフェース（UI）はまだ提供されていません。
 
 ## 使用されていないインデックスを削除する {#remove-unused-indexes}
 

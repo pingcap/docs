@@ -9,9 +9,9 @@ TiDB Cloudを使用すると、 TiDB Cloud StarterまたはEssentialクラスタ
 
 [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html)や TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview)などのツールを使用してデータをエクスポートすることもできますが、 TiDB Cloudが提供するエクスポート機能は、クラスターからデータをエクスポートするためのより便利で効率的な方法を提供します。これには、次のような利点があります。
 
--   利便性: エクスポート サービスは、クラスターからデータをエクスポートするためのシンプルで使いやすい方法を提供するため、追加のツールやリソースは必要ありません。
--   分離: エクスポート サービスは個別のコンピューティング リソースを使用するため、オンライン サービスで使用されるリソースからの分離が保証されます。
--   一貫性: エクスポート サービスは、ロックを発生させることなくエクスポートされたデータの一貫性を確保するため、オンライン サービスには影響しません。
+- 利便性: エクスポート サービスは、クラスターからデータをエクスポートするためのシンプルで使いやすい方法を提供するため、追加のツールやリソースは必要ありません。
+- 分離: エクスポート サービスは個別のコンピューティング リソースを使用するため、オンライン サービスで使用されるリソースからの分離が保証されます。
+- 一貫性: エクスポート サービスは、ロックを発生させることなくエクスポートされたデータの一貫性を確保するため、オンライン サービスには影響しません。
 
 > **Note:**
 >
@@ -21,19 +21,19 @@ TiDB Cloudを使用すると、 TiDB Cloud StarterまたはEssentialクラスタ
 
 次の場所にデータをエクスポートできます。
 
--   {{{ .starter }}} の場合:
+- {{{ .starter }}} の場合:
 
-    -   ローカルファイル
-    -   Amazon S3
-    -   Google Cloud Storage
-    -   Azure Blob Storage
-    -   Alibaba Cloud Object Storage Service (OSS)
+    - ローカルファイル
+    - Amazon S3
+    - Google Cloud Storage
+    - Azure Blob Storage
+    - Alibaba Cloud Object Storage Service (OSS)
 
--   {{{ .essential }}} の場合:
+- {{{ .essential }}} の場合:
 
-    -   Amazon S3
-    -   Azure Blob Storage
-    -   Alibaba Cloud Object Storage Service (OSS)
+    - Amazon S3
+    - Azure Blob Storage
+    - Alibaba Cloud Object Storage Service (OSS)
 
 > **Note:**
 >
@@ -45,18 +45,18 @@ TiDB Cloudを使用すると、 TiDB Cloud StarterまたはEssentialクラスタ
 
 データをローカル ファイルにエクスポートする場合、次の制限があります。
 
--   TiDB Cloudコンソールを使用してエクスポートされたデータをダウンロードすることはサポートされていません。
--   エクスポートされたデータはTiDB Cloudのステージングエリアに保存され、2日後に有効期限が切れます。エクスポートしたデータは期限内にダウンロードする必要があります。
--   ステージング領域のストレージスペースがいっぱいの場合、データをローカル ファイルにエクスポートすることはできません。
+- TiDB Cloudコンソールを使用してエクスポートされたデータをダウンロードすることはサポートされていません。
+- エクスポートされたデータはTiDB Cloudのステージングエリアに保存され、2日後に有効期限が切れます。エクスポートしたデータは期限内にダウンロードする必要があります。
+- ステージング領域のストレージスペースがいっぱいの場合、データをローカル ファイルにエクスポートすることはできません。
 
 ### Amazon S3 {#amazon-s3}
 
 Amazon S3 にデータをエクスポートするには、次の情報を提供する必要があります。
 
--   URI: `s3://<bucket-name>/<folder-path>/`
--   次のいずれかのアクセス資格情報:
-    -   [アクセスキー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) : アクセス キーに`s3:PutObject`と`s3:ListBucket`権限があることを確認します。
-    -   [ロールARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) : ロールARN（Amazonリソースネーム）に`s3:PutObject`と`s3:ListBucket`権限があることを確認してください。このロールARNはAWSでホストされているクラスターでのみサポートされることに注意してください。
+- URI: `s3://<bucket-name>/<folder-path>/`
+- 次のいずれかのアクセス資格情報:
+    - [アクセスキー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) : アクセス キーに`s3:PutObject`と`s3:ListBucket`権限があることを確認します。
+    - [ロールARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) : ロールARN（Amazonリソースネーム）に`s3:PutObject`と`s3:ListBucket`権限があることを確認してください。このロールARNはAWSでホストされているクラスターでのみサポートされることに注意してください。
 
 詳細については[Amazon S3 アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
 
@@ -64,8 +64,8 @@ Amazon S3 にデータをエクスポートするには、次の情報を提供�
 
 Google Cloud Storage にデータをエクスポートするには、次の情報を提供する必要があります。
 
--   URI: `gs://<bucket-name>/<folder-path>/`
--   アクセス認証情報: バケットの**Base64エンコードされた**[サービスアカウントキー](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) 。サービスアカウントキーに`storage.objects.create`権限があることを確認してください。
+- URI: `gs://<bucket-name>/<folder-path>/`
+- アクセス認証情報: バケットの**Base64エンコードされた**[サービスアカウントキー](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) 。サービスアカウントキーに`storage.objects.create`権限があることを確認してください。
 
 詳細については[GCS アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)を参照してください。
 
@@ -73,8 +73,8 @@ Google Cloud Storage にデータをエクスポートするには、次の情�
 
 Azure Blob Storage にデータをエクスポートするには、次の情報を提供する必要があります。
 
--   URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`または`https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
--   アクセス資格情報: Azure Blob Storage コンテナーの[共有アクセス署名（SAS）トークン](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) 。SAS トークンに、 `Container`と`Object`リソースに対する`Read`と`Write`権限があることを確認してください。
+- URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`または`https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
+- アクセス資格情報: Azure Blob Storage コンテナーの[共有アクセス署名（SAS）トークン](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) 。SAS トークンに、 `Container`と`Object`リソースに対する`Read`と`Write`権限があることを確認してください。
 
 詳細については[Azure Blob Storage アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)を参照してください。
 
@@ -82,8 +82,8 @@ Azure Blob Storage にデータをエクスポートするには、次の情報�
 
 Alibaba Cloud OSS にデータをエクスポートするには、次の情報を提供する必要があります。
 
--   URI: `oss://<bucket-name>/<folder-path>/`
--   アクセス資格情報：Alibaba Cloudアカウントの[アクセスキーペア](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)ペアに`oss:PutObject`と`oss:GetBucketInfo`権限があることを確認してください。
+- URI: `oss://<bucket-name>/<folder-path>/`
+- アクセス資格情報：Alibaba Cloudアカウントの[アクセスキーペア](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)ペアに`oss:PutObject`と`oss:GetBucketInfo`権限があることを確認してください。
 
 詳細については[Alibaba Cloud Object Storage Service (OSS) アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)を参照してください。
 
@@ -91,20 +91,20 @@ Alibaba Cloud OSS にデータをエクスポートするには、次の情報�
 
 ### データフィルタリング {#data-filtering}
 
--   TiDB Cloudコンソールは、選択したデータベースとテーブルを含むデータのエクスポートをサポートしています。
--   TiDB Cloud CLI は、SQL ステートメントと[テーブルフィルター](/table-filter.md)を使用したデータのエクスポートをサポートしています。
+- TiDB Cloudコンソールは、選択したデータベースとテーブルを含むデータのエクスポートをサポートしています。
+- TiDB Cloud CLI は、SQL ステートメントと[テーブルフィルター](/table-filter.md)を使用したデータのエクスポートをサポートしています。
 
 ### データ形式 {#data-formats}
 
 次の形式でデータをエクスポートできます。
 
--   `SQL` : SQL 形式でデータをエクスポートします。
--   `CSV` : CSV形式でデータをエクスポートします。以下のオプションを指定できます。
-    -   `delimiter` : エクスポートデータで使用する区切り文字を指定します。デフォルトの区切り文字は`"`です。
-    -   `separator` : エクスポートデータのフィールド区切りに使用する文字を指定します。デフォルトの区切り文字は`,`です。
-    -   `header` : エクスポートデータにヘッダー行を含めるかどうかを指定します。デフォルト値は`true`です。
-    -   `null-value` : エクスポートデータ内の NULL 値を表す文字列を指定します。デフォルト値は`\N`です。
--   `Parquet` : Parquet 形式でデータをエクスポートします。これは {{{ .starter }}} データのエクスポートにのみ適用されます。
+- `SQL` : SQL 形式でデータをエクスポートします。
+- `CSV` : CSV形式でデータをエクスポートします。以下のオプションを指定できます。
+    - `delimiter` : エクスポートデータで使用する区切り文字を指定します。デフォルトの区切り文字は`"`です。
+    - `separator` : エクスポートデータのフィールド区切りに使用する文字を指定します。デフォルトの区切り文字は`,`です。
+    - `header` : エクスポートデータにヘッダー行を含めるかどうかを指定します。デフォルト値は`true`です。
+    - `null-value` : エクスポートデータ内の NULL 値を表す文字列を指定します。デフォルト値は`\N`です。
+- `Parquet` : Parquet 形式でデータをエクスポートします。これは {{{ .starter }}} データのエクスポートにのみ適用されます。
 
 スキーマとデータは、次の命名規則に従ってエクスポートされます。
 
@@ -118,17 +118,17 @@ Alibaba Cloud OSS にデータをエクスポートするには、次の情報�
 
 次のアルゴリズムを使用して、エクスポートされた CSV および SQL データを圧縮できます。
 
--   `gzip` (デフォルト): エクスポートされたデータを`gzip`で圧縮します。
--   `snappy` : エクスポートされたデータを`snappy`で圧縮します。
--   `zstd` : エクスポートされたデータを`zstd`で圧縮します。
--   `none` : エクスポートした`data`を圧縮しません。
+- `gzip` (デフォルト): エクスポートされたデータを`gzip`で圧縮します。
+- `snappy` : エクスポートされたデータを`snappy`で圧縮します。
+- `zstd` : エクスポートされたデータを`zstd`で圧縮します。
+- `none` : エクスポートした`data`を圧縮しません。
 
 次のアルゴリズムを使用して、エクスポートされた Parquet データを圧縮できます。
 
--   `zstd` (デフォルト): Parquet ファイルを`zstd`で圧縮します。
--   `gzip` : Parquet ファイルを`gzip`で圧縮します。
--   `snappy` : Parquet ファイルを`snappy`で圧縮します。
--   `none` : Parquet ファイルを圧縮しません。
+- `zstd` (デフォルト): Parquet ファイルを`zstd`で圧縮します。
+- `gzip` : Parquet ファイルを`gzip`で圧縮します。
+- `snappy` : Parquet ファイルを`snappy`で圧縮します。
+- `none` : Parquet ファイルを圧縮しません。
 
 ### データ変換 {#data-conversion}
 
@@ -181,37 +181,37 @@ Alibaba Cloud OSS にデータをエクスポートするには、次の情報�
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲット {{{ .starter }}} インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Data** > **Import**をクリックします。
+2. ターゲット {{{ .starter }}} インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Data** > **Import**をクリックします。
 
-3.  **Import**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**Local File**を選択します。以下のパラメータを入力します。
+3. **Import**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**Local File**を選択します。以下のパラメータを入力します。
 
-    -   **Task Name**: エクスポートタスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
+    - **Task Name**: エクスポートタスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
 
-    -   **Exported Data**: エクスポートするデータベースとテーブルを選択します。
+    - **Exported Data**: エクスポートするデータベースとテーブルを選択します。
 
-    -   **Data Format**: **SQL** 、 **CSV** 、または**Parquet**を選択します。
+    - **Data Format**: **SQL** 、 **CSV** 、または**Parquet**を選択します。
 
-    -   **Compression**: **Gzip** 、 **Snappy** 、 **Zstd** 、または**None**を選択します。
+    - **Compression**: **Gzip** 、 **Snappy** 、 **Zstd** 、または**None**を選択します。
 
     > **Tip:**
     >
     > {{{ .starter }}} インスタンスでこれまでにデータのインポートもエクスポートもしたことがない場合は、ページの下部にある **Click here to export data to...** をクリックしてデータをエクスポートする必要があります。
 
-4.  **Export**をクリックします。
+4. **Export**をクリックします。
 
-5.  エクスポート タスクが成功したら、エクスポート タスクの詳細に表示されるダウンロード コマンドをコピーし、 [TiDB Cloud CLI](/tidb-cloud/cli-reference.md)でコマンドを実行してエクスポートされたデータをダウンロードできます。
+5. エクスポート タスクが成功したら、エクスポート タスクの詳細に表示されるダウンロード コマンドをコピーし、 [TiDB Cloud CLI](/tidb-cloud/cli-reference.md)でコマンドを実行してエクスポートされたデータをダウンロードできます。
 
 </div>
 
 <div label="CLI">
 
-1.  エクスポート タスクを作成します。
+1. エクスポート タスクを作成します。
 
     ```shell
     ticloud serverless export create -c <cluster-id>
@@ -219,7 +219,7 @@ Alibaba Cloud OSS にデータをエクスポートするには、次の情報�
 
     出力からエクスポート ID が取得されます。
 
-2.  エクスポート タスクが成功したら、エクスポートされたデータをローカル ファイルにダウンロードします。
+2. エクスポート タスクが成功したら、エクスポートされたデータをローカル ファイルにダウンロードします。
 
     ```shell
     ticloud serverless export download -c <cluster-id> -e <export-id>
@@ -235,26 +235,26 @@ Alibaba Cloud OSS にデータをエクスポートするには、次の情報�
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Data** > **Import**をクリックします。
+2. ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Data** > **Import**をクリックします。
 
-3.  **Import**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**Amazon S3**を選択します。以下のパラメータを入力します。
+3. **Import**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**Amazon S3**を選択します。以下のパラメータを入力します。
 
-    -   **Task Name**: エクスポートタスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
-    -   **Exported Data**: エクスポートするデータベースとテーブルを選択します。
-    -   **Data Format**: **SQL** 、 **CSV** 、または**Parquet**を選択します。
-    -   **Compression**: **Gzip** 、 **Snappy** 、 **Zstd** 、または**None**を選択します。
-    -   **Folder URI** : `s3://<bucket-name>/<folder-path>/`形式で Amazon S3 の URI を入力します。
-    -   **Bucket Access**: 次のアクセス資格情報のいずれかを選択し、資格情報を入力します。
-        -   **AWS Role ARN** : バケットへのアクセス権を持つロール ARN を入力します。AWS CloudFormation を使用してロール ARN を作成することをお勧めします。詳細については、 [Amazon S3 アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
-        -   **AWS Access Key**: バケットにアクセスする権限を持つアクセスキー ID とアクセスキーシークレットを入力します。
+    - **Task Name**: エクスポートタスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
+    - **Exported Data**: エクスポートするデータベースとテーブルを選択します。
+    - **Data Format**: **SQL** 、 **CSV** 、または**Parquet**を選択します。
+    - **Compression**: **Gzip** 、 **Snappy** 、 **Zstd** 、または**None**を選択します。
+    - **Folder URI** : `s3://<bucket-name>/<folder-path>/`形式で Amazon S3 の URI を入力します。
+    - **Bucket Access**: 次のアクセス資格情報のいずれかを選択し、資格情報を入力します。
+        - **AWS Role ARN** : バケットへのアクセス権を持つロール ARN を入力します。AWS CloudFormation を使用してロール ARN を作成することをお勧めします。詳細については、 [Amazon S3 アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
+        - **AWS Access Key**: バケットにアクセスする権限を持つアクセスキー ID とアクセスキーシークレットを入力します。
 
-4.  **Export**をクリックします。
+4. **Export**をクリックします。
 
 </div>
 
@@ -266,10 +266,10 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri> --s3.role-arn <role-arn> --filter "database.table"
 ```
 
--   `s3.uri` : `s3://<bucket-name>/<folder-path>/`形式の Amazon S3 URI。
--   `s3.access-key-id` : バケットにアクセスする権限を持つユーザーのアクセス キー ID。
--   `s3.secret-access-key` : バケットにアクセスする権限を持つユーザーのアクセス キー シークレット。
--   `s3.role-arn` : バケットにアクセスする権限を持つロール ARN。
+- `s3.uri` : `s3://<bucket-name>/<folder-path>/`形式の Amazon S3 URI。
+- `s3.access-key-id` : バケットにアクセスする権限を持つユーザーのアクセス キー ID。
+- `s3.secret-access-key` : バケットにアクセスする権限を持つユーザーのアクセス キー シークレット。
+- `s3.role-arn` : バケットにアクセスする権限を持つロール ARN。
 
 </div>
 </SimpleTab>
@@ -279,24 +279,24 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲット {{{ .starter }}} インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Data** > **Import**をクリックします。
+2. ターゲット {{{ .starter }}} インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Data** > **Import**をクリックします。
 
-3.  **Import**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**Google Cloud Storage**を選択します。以下のパラメータを入力します。
+3. **Import**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**Google Cloud Storage**を選択します。以下のパラメータを入力します。
 
-    -   **Task Name**: エクスポートタスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
-    -   **Exported Data**: エクスポートするデータベースとテーブルを選択します。
-    -   **Data Format**: **SQL** 、 **CSV** 、または**Parquet**を選択します。
-    -   **Compression**: **Gzip** 、 **Snappy** 、 **Zstd** 、または**None**を選択します。
-    -   **Folder URI** : Google Cloud Storage の URI を`gs://<bucket-name>/<folder-path>/`形式で入力します。
-    -   **Bucket Access**: バケットにアクセスする権限を持つ Google Cloud 認証情報ファイルをアップロードします。
+    - **Task Name**: エクスポートタスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
+    - **Exported Data**: エクスポートするデータベースとテーブルを選択します。
+    - **Data Format**: **SQL** 、 **CSV** 、または**Parquet**を選択します。
+    - **Compression**: **Gzip** 、 **Snappy** 、 **Zstd** 、または**None**を選択します。
+    - **Folder URI** : Google Cloud Storage の URI を`gs://<bucket-name>/<folder-path>/`形式で入力します。
+    - **Bucket Access**: バケットにアクセスする権限を持つ Google Cloud 認証情報ファイルをアップロードします。
 
-4.  **Export**をクリックします。
+4. **Export**をクリックします。
 
 </div>
 
@@ -306,8 +306,8 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <uri> --gcs.service-account-key <service-account-key> --filter "database.table"
 ```
 
--   `gcs.uri` : `gs://<bucket-name>/<folder-path>/`形式の Google Cloud Storage バケットの URI。
--   `gcs.service-account-key` : base64 でエンコードされたサービス アカウント キー。
+- `gcs.uri` : `gs://<bucket-name>/<folder-path>/`形式の Google Cloud Storage バケットの URI。
+- `gcs.service-account-key` : base64 でエンコードされたサービス アカウント キー。
 
 </div>
 </SimpleTab>
@@ -317,24 +317,24 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Data** > **Import**をクリックします。
+2. ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Data** > **Import**をクリックします。
 
-3.  **Import**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**Azure Blob Storage**を選択します。以下のパラメータを入力します。
+3. **Import**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**Azure Blob Storage**を選択します。以下のパラメータを入力します。
 
-    -   **Task Name**: エクスポートタスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
-    -   **Exported Data**: エクスポートするデータベースとテーブルを選択します。
-    -   **Data Format**: **SQL** 、 **CSV** 、または**Parquet**を選択します。
-    -   **Compression**: **Gzip** 、 **Snappy** 、 **Zstd** 、または**None**を選択します。
-    -   **Folder URI** : `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`形式で Azure Blob Storage の URI を入力します。
-    -   **SAS Token**: コンテナへのアクセス権を持つSASトークンを入力します。[Azure ARM テンプレート](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)を使用してSASトークンを作成することをお勧めします。詳細については、 [Azure Blob Storage アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)を参照してください。
+    - **Task Name**: エクスポートタスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
+    - **Exported Data**: エクスポートするデータベースとテーブルを選択します。
+    - **Data Format**: **SQL** 、 **CSV** 、または**Parquet**を選択します。
+    - **Compression**: **Gzip** 、 **Snappy** 、 **Zstd** 、または**None**を選択します。
+    - **Folder URI** : `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`形式で Azure Blob Storage の URI を入力します。
+    - **SAS Token**: コンテナへのアクセス権を持つSASトークンを入力します。[Azure ARM テンプレート](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)を使用してSASトークンを作成することをお勧めします。詳細については、 [Azure Blob Storage アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)を参照してください。
 
-4.  **Export**をクリックします。
+4. **Export**をクリックします。
 
 </div>
 
@@ -344,8 +344,8 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
 ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azblob.uri <uri> --azblob.sas-token <sas-token> --filter "database.table"
 ```
 
--   `azblob.uri` : `(azure|https)://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`形式の Azure Blob Storage の URI。
--   `azblob.sas-token` : Azure Blob Storage のアカウント SAS トークン。
+- `azblob.uri` : `(azure|https)://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`形式の Azure Blob Storage の URI。
+- `azblob.sas-token` : Azure Blob Storage のアカウント SAS トークン。
 
 </div>
 </SimpleTab>
@@ -355,26 +355,26 @@ ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azbl
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Data** > **Import**をクリックします。
+2. ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Data** > **Import**をクリックします。
 
-3.  **Import**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**Alibaba Cloud OSS**を選択します。
+3. **Import**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**Alibaba Cloud OSS**を選択します。
 
-4.  次のパラメータを入力してください。
+4. 次のパラメータを入力してください。
 
-    -   **Task Name**: エクスポートタスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
-    -   **Exported Data**: エクスポートするデータベースとテーブルを選択します。
-    -   **Data Format**: **SQL** 、 **CSV** 、または**Parquet**を選択します。
-    -   **Compression**: **Gzip** 、 **Snappy** 、 **Zstd** 、または**None**を選択します。
-    -   **Folder URI** : データをエクスポートする Alibaba Cloud OSS URI を`oss://<bucket-name>/<folder-path>/`形式で入力します。
-    -   **AccessKey ID**と**AccessKey Secret** : バケットにアクセスする権限を持つ AccessKey ID と AccessKey Secret を入力します。
+    - **Task Name**: エクスポートタスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
+    - **Exported Data**: エクスポートするデータベースとテーブルを選択します。
+    - **Data Format**: **SQL** 、 **CSV** 、または**Parquet**を選択します。
+    - **Compression**: **Gzip** 、 **Snappy** 、 **Zstd** 、または**None**を選択します。
+    - **Folder URI** : データをエクスポートする Alibaba Cloud OSS URI を`oss://<bucket-name>/<folder-path>/`形式で入力します。
+    - **AccessKey ID**と**AccessKey Secret** : バケットにアクセスする権限を持つ AccessKey ID と AccessKey Secret を入力します。
 
-5.  **Export**をクリックします。
+5. **Export**をクリックします。
 
 </div>
 
@@ -384,9 +384,9 @@ ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azbl
 ticloud serverless export create -c <cluster-id> --target-type OSS --oss.uri <uri> --oss.access-key-id <access-key-id> --oss.access-key-secret <access-key-secret> --filter "database.table"
 ```
 
--   `oss.uri` : データをエクスポートする Alibaba Cloud OSS URI ( `oss://<bucket-name>/<folder-path>/`形式)。
--   `oss.access-key-id` : バケットにアクセスする権限を持つユーザーの AccessKey ID。
--   `oss.access-key-secret` : バケットにアクセスする権限を持つユーザーの AccessKey シークレット。
+- `oss.uri` : データをエクスポートする Alibaba Cloud OSS URI ( `oss://<bucket-name>/<folder-path>/`形式)。
+- `oss.access-key-id` : バケットにアクセスする権限を持つユーザーの AccessKey ID。
+- `oss.access-key-secret` : バケットにアクセスする権限を持つユーザーの AccessKey シークレット。
 
 </div>
 </SimpleTab>
@@ -398,19 +398,19 @@ ticloud serverless export create -c <cluster-id> --target-type OSS --oss.uri <ur
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Data** > **Import**をクリックします。
+2. ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Data** > **Import**をクリックします。
 
-3.  **Import**ページで**Export**をクリックして、エクスポート タスク リストを表示します。
+3. **Import**ページで**Export**をクリックして、エクスポート タスク リストを表示します。
 
-4.  キャンセルするエクスポート タスクを選択し、 **Action**をクリックします。
+4. キャンセルするエクスポート タスクを選択し、 **Action**をクリックします。
 
-5.  ドロップダウンリストから**Cancel**を選択します。キャンセルできるのは、**Running**中のエクスポートタスクのみです。
+5. ドロップダウンリストから**Cancel**を選択します。キャンセルできるのは、**Running**中のエクスポートタスクのみです。
 
 </div>
 
@@ -427,9 +427,9 @@ ticloud serverless export cancel -c <cluster-id> -e <export-id>
 
 エクスポート速度は[クラスタープラン](/tidb-cloud/select-cluster-tier.md)によって異なります:
 
--   **TiDB Cloud Starter**:
+- **TiDB Cloud Starter**:
 
-    -   使用制限を 0 に設定すると、エクスポート速度は最大 25 MiB/s になります。
-    -   支出限度額が 0 より大きい場合、エクスポート速度は最大 100 MiB/s になります。
+    - 使用制限を 0 に設定すると、エクスポート速度は最大 25 MiB/s になります。
+    - 支出限度額が 0 より大きい場合、エクスポート速度は最大 100 MiB/s になります。
 
--   **TiDB Cloud Essential** : 最大 100 MiB/秒。
+- **TiDB Cloud Essential** : 最大 100 MiB/秒。

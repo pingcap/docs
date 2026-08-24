@@ -33,17 +33,17 @@ DESC cluster_log;
 
 フィールドの説明:
 
--   `TIME` : ログを印刷する時間。
--   `TYPE` : インスタンスタイプ。オプションの値は`tidb` 、 `pd` 、 `tikv`です。
--   `INSTANCE` : インスタンスのサービス アドレス。
--   `LEVEL` : ログレベル。
--   `MESSAGE` : ログの内容。
+- `TIME` : ログを印刷する時間。
+- `TYPE` : インスタンスタイプ。オプションの値は`tidb` 、 `pd` 、 `tikv`です。
+- `INSTANCE` : インスタンスのサービス アドレス。
+- `LEVEL` : ログレベル。
+- `MESSAGE` : ログの内容。
 
 > **Note:**
 >
-> -   クラスターログテーブルのすべてのフィールドは、対応するインスタンスにプッシュダウンされて実行されます。クラスターログテーブルの使用に伴うオーバーヘッドを削減するには、検索に使用するキーワード、時間範囲、そして可能な限り多くの条件を指定する必要があります。例えば、 `select * from cluster_log where message like '%ddl%' and time > '2020-05-18 20:40:00' and time<'2020-05-18 21:40:00' and type='tidb'`に指定します。
+> - クラスターログテーブルのすべてのフィールドは、対応するインスタンスにプッシュダウンされて実行されます。クラスターログテーブルの使用に伴うオーバーヘッドを削減するには、検索に使用するキーワード、時間範囲、そして可能な限り多くの条件を指定する必要があります。例えば、 `select * from cluster_log where message like '%ddl%' and time > '2020-05-18 20:40:00' and time<'2020-05-18 21:40:00' and type='tidb'`に指定します。
 >
-> -   `message`フィールドは`like`と`regexp`正規表現をサポートしており、対応するパターンは`regexp`としてエンコードされます。複数の`message`条件を指定すると、 `grep`コマンドの`pipeline`形式と同じになります。例えば、 `select * from cluster_log where message like 'coprocessor%' and message regexp '.*slow.*' and time > '2020-05-18 20:40:00' and time<'2020-05-18 21:40:00'`ステートメントを実行すると、すべてのクラスターインスタンスで`grep 'coprocessor' xxx.log | grep -E '.*slow.*'`を実行するのと同じになります。
+> - `message`フィールドは`like`と`regexp`正規表現をサポートしており、対応するパターンは`regexp`としてエンコードされます。複数の`message`条件を指定すると、 `grep`コマンドの`pipeline`形式と同じになります。例えば、 `select * from cluster_log where message like 'coprocessor%' and message regexp '.*slow.*' and time > '2020-05-18 20:40:00' and time<'2020-05-18 21:40:00'`ステートメントを実行すると、すべてのクラスターインスタンスで`grep 'coprocessor' xxx.log | grep -E '.*slow.*'`を実行するのと同じになります。
 
 次の例は、 `CLUSTER_LOG`テーブルを使用して DDL ステートメントの実行プロセスをクエリする方法を示しています。
 
@@ -66,6 +66,6 @@ SELECT time,instance,left(message,150) FROM cluster_log WHERE message LIKE '%ddl
 
 上記のクエリ結果は、DDL ステートメントを実行するプロセスを示しています。
 
-1.  DDL JOB ID が`80`のリクエストが`127.0.0.1:4002` TiDB インスタンスに送信されます。
-2.  `127.0.0.1:4000` TiDB インスタンスがこの DDL 要求を処理します。これは、 `127.0.0.1:4000`のインスタンスがその時点で DDL 所有者であることを示します。
-3.  DDL JOB ID が`80`のリクエストが処理されました。
+1. DDL JOB ID が`80`のリクエストが`127.0.0.1:4002` TiDB インスタンスに送信されます。
+2. `127.0.0.1:4000` TiDB インスタンスがこの DDL 要求を処理します。これは、 `127.0.0.1:4000`のインスタンスがその時点で DDL 所有者であることを示します。
+3. DDL JOB ID が`80`のリクエストが処理されました。

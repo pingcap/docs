@@ -11,27 +11,27 @@ summary: このガイドでは、Visual Studio CodeでTiDB MCPサーバーを設
 
 始める前に、以下のものを用意してください。
 
--   **Visual Studio Code** : [code.visualstudio.com](https://code.visualstudio.com)からVS Codeをダウンロードしてインストールしてください。
--   **Python (&gt;=3.10) と uv** : Python (3.10 以降) と`uv`がインストールされていることを確認します。 [インストールガイド](https://docs.astral.sh/uv/getting-started/installation/)に従って`uv`をインストールします。
--   **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
+- **Visual Studio Code** : [code.visualstudio.com](https://code.visualstudio.com)からVS Codeをダウンロードしてインストールしてください。
+- **Python (&gt;=3.10) と uv** : Python (3.10 以降) と`uv`がインストールされていることを確認します。 [インストールガイド](https://docs.astral.sh/uv/getting-started/installation/)に従って`uv`をインストールします。
+- **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
 
 ## TiDB Cloud Starterに接続する（推奨） {#connect-to-tidb-cloud-starter-recommended}
 
 TiDB Cloudコンソールを使用して、VS Code構成を生成します。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動し、右上隅の**Use with AI Tools**をクリックします。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動し、右上隅の**Use with AI Tools**をクリックします。
 
-2.  表示されたダイアログで、VS Codeがアクセスする**Branch**と**Database**を選択します。
+2. 表示されたダイアログで、VS Codeがアクセスする**Branch**と**Database**を選択します。
 
-3.  ダイアログに表示される**Prerequisites**リストを確認し、不足している依存関係があればインストールしてください。
+3. ダイアログに表示される**Prerequisites**リストを確認し、不足している依存関係があればインストールしてください。
 
-4.  ルートパスワードを設定します。
+4. ルートパスワードを設定します。
 
-    -   まだパスワードを設定していない場合は、**Generate Password**をクリックして、生成されたパスワードを安全な場所に保存してください（パスワードは一度しか表示されません）。
-    -   パスワードが既に存在する場合は、 **Enter the password for easy setup**欄に入力してください。
-    -   パスワードを忘れた場合は、 **Prerequisites**セクションの**Reset password**をクリックして新しいパスワードを生成してください。
+    - まだパスワードを設定していない場合は、**Generate Password**をクリックして、生成されたパスワードを安全な場所に保存してください（パスワードは一度しか表示されません）。
+    - パスワードが既に存在する場合は、 **Enter the password for easy setup**欄に入力してください。
+    - パスワードを忘れた場合は、 **Prerequisites**セクションの**Reset password**をクリックして新しいパスワードを生成してください。
 
-5.  **VS Code**タブを選択し、 **Add to VS Code**をクリックしてから、VS Codeで**Install**をクリックします。
+5. **VS Code**タブを選択し、 **Add to VS Code**をクリックしてから、VS Codeで**Install**をクリックします。
 
 ## 手動設定（任意のTiDBクラスタ） {#manual-configuration-any-tidb-cluster}
 
@@ -58,4 +58,4 @@ TiDB Cloudコンソールを使用して、VS Code構成を生成します。
 
 ## 関連項目 {#see-also}
 
--   [TiDB MCPサーバー](/ai/integrations/tidb-mcp-server.md)
+- [TiDB MCPサーバー](/ai/integrations/tidb-mcp-server.md)

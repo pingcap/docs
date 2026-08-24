@@ -13,9 +13,9 @@ summary: このドキュメントは、TiDB Dashboardに関するよくある質
 
 クラスター内に複数のPlacement Driver（PD）インスタンスがデプロイされている場合、TiDB Dashboardサービスを実際に実行するPDインスタンスは1つだけです。このPDインスタンスではなく他のPDインスタンスにアクセスすると、ブラウザは別のアドレスにリダイレクトします。TiDB Dashboardへのアクセス用にファイアウォールまたはリバースプロキシが適切に設定されていない場合、ダッシュボードにアクセスした際に、ファイアウォールまたはリバースプロキシによって保護されている内部アドレスにリダイレクトされる可能性があります。
 
--   複数の PD インスタンスを使用した TiDB Dashboardの動作原理については、 [TiDB Dashboardのマルチ PD インスタンスの展開](/dashboard/dashboard-ops-deploy.md)を参照してください。
--   リバース プロキシを正しく構成する方法については、 [リバースプロキシ経由でTiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
--   ファイアウォールを正しく構成する方法については、 [TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
+- 複数の PD インスタンスを使用した TiDB Dashboardの動作原理については、 [TiDB Dashboardのマルチ PD インスタンスの展開](/dashboard/dashboard-ops-deploy.md)を参照してください。
+- リバース プロキシを正しく構成する方法については、 [リバースプロキシ経由でTiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
+- ファイアウォールを正しく構成する方法については、 [TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
 
 ### TiDB Dashboardがデュアルネットワークインターフェースカード（NIC）で展開されている場合、別のNICを使用してTiDB Dashboardにアクセスすることはできません。 {#when-tidb-dashboard-is-deployed-with-dual-network-interface-cards-nics-tidb-dashboard-cannot-be-accessed-using-another-nic}
 
@@ -33,16 +33,16 @@ Prometheusインスタンスをデプロイしてもこの問題が引き続き�
 
 デプロイメントツールがTiUPの場合は、以下の手順に従って問題を解決してください。その他のデプロイメントツールについては、それぞれのツールのドキュメントを参照してください。
 
-1.  TiUPおよびTiUPクラスタのアップグレード:
+1. TiUPおよびTiUPクラスタのアップグレード:
 
     ```bash
     tiup update --self
     tiup update cluster --force
     ```
 
-2.  アップグレード後、Prometheus インスタンスを使用して新しいクラスターをデプロイすると、メトリックが正常に表示されます。
+2. アップグレード後、Prometheus インスタンスを使用して新しいクラスターをデプロイすると、メトリックが正常に表示されます。
 
-3.  アップグレード後、既存のクラスターを再起動してメトリクスアドレスを報告できます。`CLUSTER_NAME`を実際のクラスター名に置き換えてください。
+3. アップグレード後、既存のクラスターを再起動してメトリクスアドレスを報告できます。`CLUSTER_NAME`を実際のクラスター名に置き換えてください。
 
     ```bash
     tiup cluster start CLUSTER_NAME
@@ -64,7 +64,7 @@ Web ページに`required component NgMonitoring is not started`が表示され�
 
 ステップ1. バージョンを確認する
 
-1.  TiUPクラスターのバージョンを確認してください。NgMonitoring はTiUP v1.9.0 以降の場合にのみデプロイされます。
+1. TiUPクラスターのバージョンを確認してください。NgMonitoring はTiUP v1.9.0 以降の場合にのみデプロイされます。
 
     ```shell
     tiup cluster --version
@@ -78,7 +78,7 @@ Web ページに`required component NgMonitoring is not started`が表示され�
     Git Ref: v1.9.0
     ```
 
-2.  TiUPクラスターのバージョンが v1.9.0 より前の場合は、 TiUPとTiUPクラスターを最新バージョンにアップグレードします。
+2. TiUPクラスターのバージョンが v1.9.0 より前の場合は、 TiUPとTiUPクラスターを最新バージョンにアップグレードします。
 
     ```shell
     tiup update --all
@@ -86,13 +86,13 @@ Web ページに`required component NgMonitoring is not started`が表示され�
 
 ステップ2. TiUPを使用して、コントロールマシンにng_port設定項目を追加します。その後、Prometheusをリロードします。
 
-1.  クラスター構成ファイルを編集モードで開きます。
+1. クラスター構成ファイルを編集モードで開きます。
 
     ```shell
     tiup cluster edit-config ${cluster-name}
     ```
 
-2.  `monitoring_servers`の下に`ng_port:12020`パラメータを追加します。
+2. `monitoring_servers`の下に`ng_port:12020`パラメータを追加します。
 
     ```
     monitoring_servers:
@@ -100,7 +100,7 @@ Web ページに`required component NgMonitoring is not started`が表示され�
       ng_port: 12020
     ```
 
-3.  Prometheus をリロードします。
+3. Prometheus をリロードします。
 
     ```shell
     tiup cluster reload ${cluster-name} --role prometheus
@@ -131,18 +131,18 @@ tiup update playground
 
 クラスターのアップグレード後に**Slow Queries**ページにエラー`unknown field`が表示される場合、そのエラーはTiDB Dashboardのサーバーフィールド（更新される可能性があります）とユーザー設定フィールド（ブラウザキャッシュ内）の差異に起因する互換性の問題に関連しています。この問題は修正されています。クラスターのバージョンがv5.0.3またはv4.0.14より前の場合は、以下の手順に従ってブラウザキャッシュをクリアしてください。
 
-1.  TiDB Dashboard ページを開きます。
+1. TiDB Dashboard ページを開きます。
 
-2.  開発者ツールを開きます。ブラウザによって開発者ツールの開き方が異なります。**メニューバー**をクリックした後、以下の手順に従ってください。
+2. 開発者ツールを開きます。ブラウザによって開発者ツールの開き方が異なります。**メニューバー**をクリックした後、以下の手順に従ってください。
 
-    -   Firefox:**メニュー**&gt; **Web 開発**&gt;**ツールの切り替え**、または**ツール**&gt; **Web 開発**&gt;**ツールの切り替え**。
-    -   Chrome:**その他のツール**&gt;**開発者ツール**。
-    -   Safari:**開発**&gt; **Webインスペクタを表示**。**開発**メニューが表示されない場合は、 **Safari** &gt;**環境設定**&gt;**詳細**に移動し、メニューバーに**開発メニューを表示**チェックボックスをオンにします。
+    - Firefox:**メニュー**&gt; **Web 開発**&gt;**ツールの切り替え**、または**ツール**&gt; **Web 開発**&gt;**ツールの切り替え**。
+    - Chrome:**その他のツール**&gt;**開発者ツール**。
+    - Safari:**開発**&gt; **Webインスペクタを表示**。**開発**メニューが表示されない場合は、 **Safari** &gt;**環境設定**&gt;**詳細**に移動し、メニューバーに**開発メニューを表示**チェックボックスをオンにします。
 
     次の例では、Chrome が使用されています。
 
     ![Opening DevTools from Chrome's main menu](/media/dashboard/dashboard-faq-devtools.png)
 
-3.  **Application**パネルを選択し、**Local Storage**メニューを展開して、 **TiDB Dashboardページのドメイン**を選択します。 **Clear All**ボタンをクリックします。
+3. **Application**パネルを選択し、**Local Storage**メニューを展開して、 **TiDB Dashboardページのドメイン**を選択します。 **Clear All**ボタンをクリックします。
 
     ![Clear the Local Storage](/media/dashboard/dashboard-faq-devtools-application.png)

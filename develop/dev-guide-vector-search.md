@@ -11,8 +11,8 @@ summary: 概念、チュートリアル、統合、リファレンス ドキュ�
 
 TiDB ベクトル検索を開始するには、次のチュートリアルを参照してください。
 
--   [Pythonで始める](/ai/quickstart-via-python.md)
--   [SQL経由で開始する](/ai/quickstart-via-sql.md)
+- [Pythonで始める](/ai/quickstart-via-python.md)
+- [SQL経由で開始する](/ai/quickstart-via-sql.md)
 
 ## 自動埋め込み {#auto-embedding}
 
@@ -48,14 +48,14 @@ RAG シナリオでの検索品質を向上させるには、ベクトル検索�
 
 ベクトル検索を実装する前に、次の制限事項に注意してください。
 
--   ベクトルあたり最大16383次元
--   ベクトル列は主キー、一意インデックス、パーティション キーとして使用することはできません。
--   ベクトルと他のデータ型間の直接キャストは行いません（文字列を中間として使用します）
+- ベクトルあたり最大16383次元
+- ベクトル列は主キー、一意インデックス、パーティション キーとして使用することはできません。
+- ベクトルと他のデータ型間の直接キャストは行いません（文字列を中間として使用します）
 
 完全なリストについては、 [ベクトル検索の制限](/ai/reference/vector-search-limitations.md)を参照してください。
 
 ## 参照 {#reference}
 
--   [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
--   [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
--   [ベクトルインデックス](/ai/reference/vector-search-index.md)
+- [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
+- [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
+- [ベクトルインデックス](/ai/reference/vector-search-index.md)

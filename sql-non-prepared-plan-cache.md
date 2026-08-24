@@ -13,10 +13,10 @@ TiDBは、 [ステートメント`Prepare` / `Execute`](/sql-prepared-plan-cache
 
 非プリペアドプランキャッシュは、 [プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)とキャッシュを共有するセッションレベルの機能です。非プリペアドプランキャッシュの基本原理は次のとおりです。
 
-1.  非プリペアドプランキャッシュを有効にすると、TiDBはまず抽象構文木（AST）に基づいてクエリをパラメータ化します。例えば、 `SELECT * FROM t WHERE b < 10 AND a = 1` `SELECT * FROM t WHERE b < ? and a = ?`としてパラメータ化されます。
-2.  次に、TiDB はパラメータ化されたクエリを使用してプラン キャッシュを検索します。
-3.  再利用可能なプランが見つかった場合は、それが直接使用され、最適化フェーズはスキップされます。
-4.  それ以外の場合、オプティマイザーは新しいプランを生成し、それをキャッシュに戻して、後続のクエリで再利用します。
+1. 非プリペアドプランキャッシュを有効にすると、TiDBはまず抽象構文木（AST）に基づいてクエリをパラメータ化します。例えば、 `SELECT * FROM t WHERE b < 10 AND a = 1` `SELECT * FROM t WHERE b < ? and a = ?`としてパラメータ化されます。
+2. 次に、TiDB はパラメータ化されたクエリを使用してプラン キャッシュを検索します。
+3. 再利用可能なプランが見つかった場合は、それが直接使用され、最適化フェーズはスキップされます。
+4. それ以外の場合、オプティマイザーは新しいプランを生成し、それをキャッシュに戻して、後続のクエリで再利用します。
 
 ## 使用法 {#usage}
 
@@ -32,26 +32,26 @@ TiDBは、 [ステートメント`Prepare` / `Execute`](/sql-prepared-plan-cache
 
 次の例は、非プリペアドプラン キャッシュを使用する方法を示しています。
 
-1.  テスト用にテーブル`t`を作成します。
+1. テスト用にテーブル`t`を作成します。
 
     ```sql
     CREATE TABLE t (a INT, b INT, KEY(b));
     ```
 
-2.  非プリペアドプラン キャッシュを有効にします。
+2. 非プリペアドプラン キャッシュを有効にします。
 
     ```sql
     SET tidb_enable_non_prepared_plan_cache = ON;
     ```
 
-3.  次の 2 つのクエリを実行します。
+3. 次の 2 つのクエリを実行します。
 
     ```sql
     SELECT * FROM t WHERE b < 10 AND a = 1;
     SELECT * FROM t WHERE b < 5 AND a = 2;
     ```
 
-4.  2 番目のクエリがキャッシュにヒットするかどうかを確認します。
+4. 2 番目のクエリがキャッシュにヒットするかどうかを確認します。
 
     ```sql
     SELECT @@last_plan_from_cache;
@@ -80,16 +80,16 @@ TiDBは、パラメータ化されたクエリに対して1つのプランのみ
 
 上記のリスクと、実行プランキャッシュが大きなメリットをもたらすのは単純なクエリのみであるという事実（クエリが複雑で実行に時間がかかる場合、実行プランキャッシュの使用はあまり役に立たない可能性があります）を考慮し、TiDBでは非プリペアドプランキャッシュのスコープに厳しい制限を設けています。制限は次のとおりです。
 
--   [プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)でサポートされていないクエリまたはプランは、非プリペアドプラン キャッシュでもサポートされません。
--   `Window`や`Having`などの複雑な演算子を含むクエリはサポートされていません。
--   3 つ以上の`Join`テーブルまたはサブクエリを含むクエリはサポートされていません。
--   `ORDER BY 1`や`GROUP BY a+1`など、 `ORDER BY`または`GROUP BY`直後に数字や式が含まれるクエリはサポートされていません`ORDER BY column_name`と`GROUP BY column_name`のみがサポートされています。
--   `SELECT * FROM t WHERE json_col = '{}'`など、 `JSON` 、 `ENUM` 、 `SET` 、または`BIT`タイプの列でフィルタリングするクエリはサポートされていません。
--   `SELECT * FROM t WHERE a is NULL`など、 `NULL`値でフィルタリングするクエリはサポートされていません。
--   パラメータ化後のパラメータ数が200を超えるクエリ（例： `SELECT * FROM t WHERE a in (1, 2, 3, ... 201)` ）は、デフォルトではサポートされません。v7.3.0以降では、システム変数[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)に[`44823`](/optimizer-fix-controls.md#44823-new-in-v730)を設定することで、この制限を変更できます。
--   仮想列、一時テーブル、ビュー、またはメモリテーブルにアクセスするクエリはサポートされていません (例: `SELECT * FROM INFORMATION_SCHEMA.COLUMNS` 、 `COLUMNS`は TiDBメモリテーブル)。
--   ヒントまたはバインディングを含むクエリはサポートされていません。
--   DML文、または`FOR UPDATE`句を含む`SELECT`文はデフォルトではサポートされていません。この制限を解除するには、 `SET tidb_enable_non_prepared_plan_cache_for_dml = ON`を実行してください。
+- [プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)でサポートされていないクエリまたはプランは、非プリペアドプラン キャッシュでもサポートされません。
+- `Window`や`Having`などの複雑な演算子を含むクエリはサポートされていません。
+- 3 つ以上の`Join`テーブルまたはサブクエリを含むクエリはサポートされていません。
+- `ORDER BY 1`や`GROUP BY a+1`など、 `ORDER BY`または`GROUP BY`直後に数字や式が含まれるクエリはサポートされていません`ORDER BY column_name`と`GROUP BY column_name`のみがサポートされています。
+- `SELECT * FROM t WHERE json_col = '{}'`など、 `JSON` 、 `ENUM` 、 `SET` 、または`BIT`タイプの列でフィルタリングするクエリはサポートされていません。
+- `SELECT * FROM t WHERE a is NULL`など、 `NULL`値でフィルタリングするクエリはサポートされていません。
+- パラメータ化後のパラメータ数が200を超えるクエリ（例： `SELECT * FROM t WHERE a in (1, 2, 3, ... 201)` ）は、デフォルトではサポートされません。v7.3.0以降では、システム変数[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)に[`44823`](/optimizer-fix-controls.md#44823-new-in-v730)を設定することで、この制限を変更できます。
+- 仮想列、一時テーブル、ビュー、またはメモリテーブルにアクセスするクエリはサポートされていません (例: `SELECT * FROM INFORMATION_SCHEMA.COLUMNS` 、 `COLUMNS`は TiDBメモリテーブル)。
+- ヒントまたはバインディングを含むクエリはサポートされていません。
+- DML文、または`FOR UPDATE`句を含む`SELECT`文はデフォルトではサポートされていません。この制限を解除するには、 `SET tidb_enable_non_prepared_plan_cache_for_dml = ON`を実行してください。
 
 After you enable this feature, the optimizer quickly evaluates the query. If it does not meet the support conditions for non-prepared plan cache, the query falls back to the regular optimization process.
 
@@ -148,19 +148,19 @@ SHOW warnings;
 
 `statements_summary`テーブルとスロークエリログでキャッシュヒット率を監視することもできます。以下は、 `statements_summary`テーブルでキャッシュヒット率を表示する方法を示しています。
 
-1.  テーブル`t`を作成します。
+1. テーブル`t`を作成します。
 
     ```sql
     CREATE TABLE t (a int);
     ```
 
-2.  非プリペアドプラン キャッシュを有効にします。
+2. 非プリペアドプラン キャッシュを有効にします。
 
     ```sql
     SET @@tidb_enable_non_prepared_plan_cache=ON;
     ```
 
-3.  次の 3 つのクエリを実行します。
+3. 次の 3 つのクエリを実行します。
 
     ```sql
     SELECT * FROM t WHERE a<1;
@@ -168,7 +168,7 @@ SHOW warnings;
     SELECT * FROM t WHERE a<3;
     ```
 
-4.  キャッシュヒット率を表示するには、 `statements_summary`テーブルをクエリします。
+4. キャッシュヒット率を表示するには、 `statements_summary`テーブルをクエリします。
 
     ```sql
     SELECT digest_text, query_sample_text, exec_count, plan_in_cache, plan_cache_hits FROM INFORMATION_SCHEMA.STATEMENTS_SUMMARY WHERE query_sample_text LIKE '%SELECT * FROM %';

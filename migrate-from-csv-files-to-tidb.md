@@ -11,15 +11,15 @@ TiDB Lightningは、CSVファイルやタブ区切り値（TSV）などの他の
 
 ## 前提条件 {#prerequisites}
 
--   [TiDB Lightningをインストールする](/migration-tools.md)。
--   [TiDB Lightningに必要なターゲットデータベース権限を取得します](/tidb-lightning/tidb-lightning-requirements.md#privileges-of-the-target-database)
+- [TiDB Lightningをインストールする](/migration-tools.md)。
+- [TiDB Lightningに必要なターゲットデータベース権限を取得します](/tidb-lightning/tidb-lightning-requirements.md#privileges-of-the-target-database)
 
 ## ステップ1. CSVファイルを準備する {#step-1-prepare-the-csv-files}
 
 すべてのCSVファイルを同じディレクトリに配置してください。TiDB LightningがすべてのCSVファイルを認識する必要がある場合は、ファイル名が以下の要件を満たす必要があります。
 
--   CSV ファイルにテーブル全体のデータが含まれている場合は、ファイル名を`${db_name}.${table_name}.csv`とします。
--   1つのテーブルのデータが複数のCSVファイルに分割されている場合は、これらのCSVファイルに数値サフィックスを追加してください。例： `${db_name}.${table_name}.003.csv` 。数値サフィックスは連続していなくても構いませんが、昇順である必要があります。また、すべてのサフィックスの長さが同じになるように、数値の前にゼロを追加する必要があります。
+- CSV ファイルにテーブル全体のデータが含まれている場合は、ファイル名を`${db_name}.${table_name}.csv`とします。
+- 1つのテーブルのデータが複数のCSVファイルに分割されている場合は、これらのCSVファイルに数値サフィックスを追加してください。例： `${db_name}.${table_name}.003.csv` 。数値サフィックスは連続していなくても構いませんが、昇順である必要があります。また、すべてのサフィックスの長さが同じになるように、数値の前にゼロを追加する必要があります。
 
 TiDB Lightning は、このディレクトリとそのサブディレクトリ内のすべての`.csv`ファイルを再帰的に検索します。
 
@@ -27,14 +27,14 @@ TiDB Lightning は、このディレクトリとそのサブディレクトリ�
 
 CSVファイルにはスキーマ情報が含まれていないため、CSVファイルからTiDBにデータをインポートする前に、対象テーブルのスキーマを作成する必要があります。対象テーブルのスキーマは、以下の2つの方法のいずれかで作成できます。
 
--   **方法 1** : TiDB Lightningを使用してターゲット テーブル スキーマを作成します。
+- **方法 1** : TiDB Lightningを使用してターゲット テーブル スキーマを作成します。
 
     必要なDDLステートメントを含むSQLファイルを作成します。
 
-    -   `CREATE DATABASE`ファイルに`${db_name}-schema-create.sql` } ステートメントを追加します。
-    -   `CREATE TABLE`ファイルに`${db_name}.${table_name}-schema.sql` } ステートメントを追加します。
+    - `CREATE DATABASE`ファイルに`${db_name}-schema-create.sql` } ステートメントを追加します。
+    - `CREATE TABLE`ファイルに`${db_name}.${table_name}-schema.sql` } ステートメントを追加します。
 
--   **方法2** ：対象テーブルのスキーマを手動で作成する。
+- **方法2** ：対象テーブルのスキーマを手動で作成する。
 
 ## ステップ3．設定ファイルを作成する {#step-3-create-the-configuration-file}
 
@@ -104,8 +104,8 @@ TiDB Lightningは、サイズが約256MiBの均一なCSVファイルからデー
 
 厳密な形式のCSVファイルでは、各フィールドは1行のみを占めます。以下の要件を満たす必要があります。
 
--   区切り文字が空です。
--   各フィールドには CR ( `\r` ) または LF ( `\n` ) は含まれていません。
+- 区切り文字が空です。
+- 各フィールドには CR ( `\r` ) または LF ( `\n` ) は含まれていません。
 
 `terminator` `strict-format` } を明示的に指定する必要があります。
 
@@ -126,8 +126,8 @@ nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
 
 インポートが開始された後、以下のいずれかの方法でインポートの進行状況を確認できます。
 
--   ログ内のキーワード`progress`を`grep`することで、インポートの進行状況を確認できます。進行状況は、デフォルトでは 5 分ごとに更新されます。
--   [モニタリングダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進行状況を確認します。
+- ログ内のキーワード`progress`を`grep`することで、インポートの進行状況を確認できます。進行状況は、デフォルトでは 5 分ごとに更新されます。
+- [モニタリングダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進行状況を確認します。
 
 TiDB Lightning はインポートが完了すると自動的に終了します。`tidb-lightning.log`の最後の行に`the whole procedure completed`が含まれているかどうかを確認してください。含まれている場合はインポートが成功しています。含まれていない場合は、インポート中にエラーが発生しました。エラーメッセージの指示に従ってエラーに対処してください。
 
@@ -183,4 +183,4 @@ trim-last-separator = true
 
 ## 次は？ {#what-s-next}
 
--   [CSVのサポートと制限事項](/tidb-lightning/tidb-lightning-data-source.md#csv)。
+- [CSVのサポートと制限事項](/tidb-lightning/tidb-lightning-data-source.md#csv)。

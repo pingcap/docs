@@ -13,16 +13,16 @@ TiDB Ansible バージョン: 3.1.0-beta
 
 ## TiDB {#tidb}
 
--   SQLオプティマイザー
-    -   SQLヒントの強化[＃12192](https://github.com/pingcap/tidb/pull/12192)
--   新機能
-    -   Follower Read機能サポートする [＃12535](https://github.com/pingcap/tidb/pull/12535)
+- SQLオプティマイザー
+    - SQLヒントの強化[＃12192](https://github.com/pingcap/tidb/pull/12192)
+- 新機能
+    - Follower Read機能サポートする [＃12535](https://github.com/pingcap/tidb/pull/12535)
 
 ## TiKV {#tikv}
 
--   分散バックアップおよび復元機能をサポート[＃5532](https://github.com/tikv/tikv/pull/5532)
--   Follower Read機能サポートする [＃5562](https://github.com/tikv/tikv/pull/5562)
+- 分散バックアップおよび復元機能をサポート[＃5532](https://github.com/tikv/tikv/pull/5532)
+- Follower Read機能サポートする [＃5562](https://github.com/tikv/tikv/pull/5562)
 
 ## PD {#pd}
 
--   分散バックアップおよび復元機能をサポート[＃1896](https://github.com/pingcap/pd/pull/1896)
+- 分散バックアップおよび復元機能をサポート[＃1896](https://github.com/pingcap/pd/pull/1896)

@@ -10,8 +10,8 @@ aliases: ['/ja/tidb/stable/vector-search-hybrid-search/','/ja/tidbcloud/vector-s
 
 TiDBにおけるハイブリッド検索の一般的なワークフローは以下のとおりです。
 
-1.  **全文検索**と**ベクトル検索**にはTiDBを使用してください。
-2.  両方の検索結果を統合するには、**リランカーを**使用してください。
+1. **全文検索**と**ベクトル検索**にはTiDBを使用してください。
+2. 両方の検索結果を統合するには、**リランカーを**使用してください。
 
 ![Hybrid Search](/media/vector-search/hybrid-search-overview.svg)
 
@@ -21,7 +21,7 @@ TiDBにおけるハイブリッド検索の一般的なワークフローは以�
 
 全文検索機能はまだ開発初期段階にあり、より多くのお客様に順次展開していく予定です。現在、全文検索機能は、以下のリージョンにおけるTiDB Cloud Starterでのみご利用いただけます。
 
--   AWS: `Oregon (us-west-2)` 、 `N. Virginia (us-east-1)` 、 `Tokyo (ap-northeast-1)` 、 `Frankfurt (eu-central-1)` 、および`Singapore (ap-southeast-1)`
+- AWS: `Oregon (us-west-2)` 、 `N. Virginia (us-east-1)` 、 `Tokyo (ap-northeast-1)` 、 `Frankfurt (eu-central-1)` 、および`Singapore (ap-southeast-1)`
 
 このチュートリアルを完了するには、サポートされているリージョンにTiDB Cloud Starterインスタンスがあることを確認してください。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
@@ -55,9 +55,9 @@ db = TiDBClient.connect(
 
 これらの接続パラメータは、次のように[TiDB Cloudコンソール](https://tidbcloud.com)から取得できます。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
+2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
 
     例えば、接続パラメータが以下のように表示される場合：
 
@@ -88,10 +88,10 @@ db = TiDBClient.connect(
 
 例として、 `chunks`という名前のテーブルを作成し、以下の列を追加します。
 
--   `id` (int): チャンクのID。
--   `text` (テキスト): チャンクのテキストコンテンツ。
--   `text_vec` (ベクトル): テキストのベクトル表現。pytidb の埋め込みモデルによって自動的に生成されます。
--   `user_id` (int): チャンクを作成したユーザーのID。
+- `id` (int): チャンクのID。
+- `text` (テキスト): チャンクのテキストコンテンツ。
+- `text_vec` (ベクトル): テキストのベクトル表現。pytidb の埋め込みモデルによって自動的に生成されます。
+- `user_id` (int): チャンクを作成したユーザーのID。
 
 ```python
 from pytidb.schema import TableModel, Field
@@ -149,8 +149,8 @@ df = (
 
 `pytidb` 2 つの融合方法をサポートしています。
 
--   `rrf` : 相互ランク融合 (デフォルト)
--   `weighted` : 加重スコア融合
+- `rrf` : 相互ランク融合 (デフォルト)
+- `weighted` : 加重スコア融合
 
 ハイブリッド検索結果を最適化するために、ご自身のユースケースに最適な融合方法を選択できます。
 
@@ -175,7 +175,7 @@ results = (
 
 パラメータ:
 
--   `k` : ゼロ除算を防ぎ、高ランクのドキュメントの影響を制御するための定数 (デフォルト: 60)。
+- `k` : ゼロ除算を防ぎ、高ランクのドキュメントの影響を制御するための定数 (デフォルト: 60)。
 
 ### 加重スコア融合 {#weighted-score-fusion}
 
@@ -202,8 +202,8 @@ results = (
 
 パラメータ:
 
--   `vs_weight` : ベクトル検索スコアの重み。
--   `fts_weight` : 全文検索スコアの重み。
+- `vs_weight` : ベクトル検索スコアの重み。
+- `fts_weight` : 全文検索スコアの重み。
 
 ## 再ランク法 {#rerank-method}
 
@@ -235,13 +235,13 @@ results = (
 
 ## 関連項目 {#see-also}
 
--   [pytidb Python SDK ドキュメント](https://github.com/pingcap/pytidb)
+- [pytidb Python SDK ドキュメント](https://github.com/pingcap/pytidb)
 
--   [Pythonによる全文検索](/ai/guides/vector-search-full-text-search-python.md)
+- [Pythonによる全文検索](/ai/guides/vector-search-full-text-search-python.md)
 
 ## フィードバックとヘルプ {#feedback-x26-help}
 
 全文検索はまだ開発初期段階であり、利用できる地域が限られています。まだ利用できない地域で全文検索を試してみたい場合、またはご意見やご質問がある場合は、お気軽にお問い合わせください。
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)

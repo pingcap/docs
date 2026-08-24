@@ -14,8 +14,8 @@ aliases: ['/ja/tidb/stable/dev-guide-unstable-result-set/','/ja/tidbcloud/dev-gu
 
 たとえば、次の 2 つのテーブルがあるとします。
 
--   `stu_info`学生情報を保存します
--   `stu_score`生徒のテストのスコアが格納されます。
+- `stu_info`学生情報を保存します
+- `stu_score`生徒のテストのスコアが格納されます。
 
 次に、次のような SQL クエリ ステートメントを記述します。
 
@@ -176,7 +176,7 @@ TiDB はストレージレイヤーからデータを並列に読み取るため
 
 `GROUP_CONCAT()`結果セットの出力を順序通りにするには、SQLセマンティクスに準拠した`ORDER BY`句にソートフィールドを追加する必要があります。次の例では、 `ORDER BY`を除いた`customer_id`を連結する`GROUP_CONCAT()`によって、結果セットが不安定になります。
 
-1.  除外`ORDER BY`
+1. 除外`ORDER BY`
 
     最初のクエリ:
 
@@ -200,7 +200,7 @@ TiDB はストレージレイヤーからデータを並列に読み取るため
     +-------------------------------------------------------------------------+
     ```
 
-2.  `ORDER BY`含む
+2. `ORDER BY`含む
 
     最初のクエリ:
 
@@ -230,6 +230,6 @@ TiDB はストレージレイヤーからデータを並列に読み取るため
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

@@ -19,16 +19,16 @@ TiDB Cloudコンソールの**Data Import**ページで**Next**をクリック�
 
 TiDB Cloud Account IDとTiDB Cloud External IDは環境およびクラスターごとに異なるため、このドキュメントに記載されている値をそのままコピーしないでください。代わりに、TiDB Cloudコンソールから取得してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で対象のクラスターに移動し、左側のナビゲーション ペインで**Data** &gt; **Import**をクリックします。
-2.  **Import data from Cloud Storage**をクリックします。
-3.  **Import Data from Cloud Storage**ページで、クラウドプロバイダーとして**Amazon S3**を選択します。
-4.  **Credentials**セクションで**Click here to create new one with AWS CloudFormation**をクリックして**Add New Role ARN**ダイアログを開き、 **Having trouble? Create Role ARN manually**を展開して、このクラスターの**TiDB Cloud Account ID**と**TiDB Cloud External ID**を表示します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で対象のクラスターに移動し、左側のナビゲーション ペインで**Data** &gt; **Import**をクリックします。
+2. **Import data from Cloud Storage**をクリックします。
+3. **Import Data from Cloud Storage**ページで、クラウドプロバイダーとして**Amazon S3**を選択します。
+4. **Credentials**セクションで**Click here to create new one with AWS CloudFormation**をクリックして**Add New Role ARN**ダイアログを開き、 **Having trouble? Create Role ARN manually**を展開して、このクラスターの**TiDB Cloud Account ID**と**TiDB Cloud External ID**を表示します。
 
 次に、IAMロールの信頼エンティティを確認します。
 
-1.  AWS マネジメントコンソールで、 **IAM** &gt;**Access Management**&gt;**Roles**に移動します。
-2.  ロールのリストで、ターゲットTiDBクラスター用に作成したロールを見つけてクリックします。ロールの概要ページが表示されます。
-3.  ロールの概要ページで、 **Trust relationships**タブをクリックすると、信頼されたエンティティが表示されます。
+1. AWS マネジメントコンソールで、 **IAM** &gt;**Access Management**&gt;**Roles**に移動します。
+2. ロールのリストで、ターゲットTiDBクラスター用に作成したロールを見つけてクリックします。ロールの概要ページが表示されます。
+3. ロールの概要ページで、 **Trust relationships**タブをクリックすると、信頼されたエンティティが表示されます。
 
 以下は信頼エンティティのサンプルです。
 
@@ -54,8 +54,8 @@ TiDB Cloud Account IDとTiDB Cloud External IDは環境およびクラスター�
 
 サンプル信頼エンティティの場合:
 
--   `380838443567`はTiDB CloudアカウントIDです。信頼エンティティのこのフィールドがTiDB CloudアカウントIDと一致していることを確認してください。
--   `696e6672612d617069a79c22fa5740944bf8bb32e4a0c4e3fe`はTiDB Cloud外部IDです。信頼できるエンティティのこのフィールドがTiDB Cloud外部IDと一致していることを確認してください。
+- `380838443567`はTiDB CloudアカウントIDです。信頼エンティティのこのフィールドがTiDB CloudアカウントIDと一致していることを確認してください。
+- `696e6672612d617069a79c22fa5740944bf8bb32e4a0c4e3fe`はTiDB Cloud外部IDです。信頼できるエンティティのこのフィールドがTiDB Cloud外部IDと一致していることを確認してください。
 
 ### IAMロールが存在するかどうかを確認する {#check-whether-the-iam-role-exists}
 
@@ -73,21 +73,21 @@ IAMロールが存在しない場合は、 [Amazon S3 アクセスを構成す�
 
 IAMユーザーの AWS アクセスキーを使用して Amazon S3 バケットにアクセスすると、次のエラーが発生する場合があります。
 
--   アクセスキーID「{access_key_id}」とシークレットアクセスキー「{secret_access_key}」を使用したソース「{bucket_uri}」へのアクセスが拒否されました。
+- アクセスキーID「{access_key_id}」とシークレットアクセスキー「{secret_access_key}」を使用したソース「{bucket_uri}」へのアクセスが拒否されました。
 
 これは、権限不足のため、 TiDB Cloud がAmazon S3 バケットにアクセスできなかったことを示しています。Amazon S3 バケットにアクセスするには、以下の権限が必要です。
 
--   `s3:GetObject`
--   `s3:ListBucket`
--   `s3:GetBucketLocation`
+- `s3:GetObject`
+- `s3:ListBucket`
+- `s3:GetBucketLocation`
 
 IAMユーザーのポリシーを確認するには、次の手順を実行します。
 
-1.  AWS マネジメントコンソールで、 **IAM** &gt;**Access Management**&gt;**Users**に移動します。
-2.  ユーザーリストで、 TiDB Cloudへのデータのインポートに使用したユーザーを見つけてクリックします。ユーザーの概要ページが表示されます。
-3.  ユーザー概要ページの**Permission policies**領域に、ポリシーの一覧が表示されます。各ポリシーごとに以下の手順を実行してください。
-    1.  ポリシーをクリックすると、ポリシーの概要ページが表示されます。
-    2.  ポリシーの概要ページで、 **{}JSON**タブをクリックして権限ポリシーを確認します。ポリシー内の`Resource`フィールドが正しく設定されていることを確認してください。
+1. AWS マネジメントコンソールで、 **IAM** &gt;**Access Management**&gt;**Users**に移動します。
+2. ユーザーリストで、 TiDB Cloudへのデータのインポートに使用したユーザーを見つけてクリックします。ユーザーの概要ページが表示されます。
+3. ユーザー概要ページの**Permission policies**領域に、ポリシーの一覧が表示されます。各ポリシーごとに以下の手順を実行してください。
+    1. ポリシーをクリックすると、ポリシーの概要ページが表示されます。
+    2. ポリシーの概要ページで、 **{}JSON**タブをクリックして権限ポリシーを確認します。ポリシー内の`Resource`フィールドが正しく設定されていることを確認してください。
 
 以下にサンプルポリシーを示します。
 
@@ -119,11 +119,11 @@ IAMユーザーのポリシーを確認するには、次の手順を実行し�
 
 ### IAMロールのポリシーを確認する {#check-the-policy-of-the-iam-role}
 
-1.  AWS マネジメントコンソールで、 **IAM** &gt;**Access Management**&gt;**Roles**に移動します。
-2.  ロールのリストで、ターゲットTiDBクラスター用に作成したロールを見つけてクリックします。ロールの概要ページが表示されます。
-3.  ロールの概要ページの**Permission policies**領域に、ポリシーの一覧が表示されます。各ポリシーごとに以下の手順を実行してください。
-    1.  ポリシーをクリックすると、ポリシーの概要ページが表示されます。
-    2.  ポリシーの概要ページで、 **{}JSON**タブをクリックして権限ポリシーを確認します。ポリシー内の`Resource`フィールドが正しく設定されていることを確認してください。
+1. AWS マネジメントコンソールで、 **IAM** &gt;**Access Management**&gt;**Roles**に移動します。
+2. ロールのリストで、ターゲットTiDBクラスター用に作成したロールを見つけてクリックします。ロールの概要ページが表示されます。
+3. ロールの概要ページの**Permission policies**領域に、ポリシーの一覧が表示されます。各ポリシーごとに以下の手順を実行してください。
+    1. ポリシーをクリックすると、ポリシーの概要ページが表示されます。
+    2. ポリシーの概要ページで、 **{}JSON**タブをクリックして権限ポリシーを確認します。ポリシー内の`Resource`フィールドが正しく設定されていることを確認してください。
 
 以下はサンプルポリシーです。
 
@@ -163,9 +163,9 @@ IAMユーザーのポリシーを確認するには、次の手順を実行し�
 
 このサンプル ポリシーでは、次の点に注意してください。
 
--   `"arn:aws:s3:::tidb-cloud-source-data/mydata/*"`の`"arn:aws:s3:::tidb-cloud-source-data"`はサンプルの S3 バケット ARN で、 `/mydata/*`はデータストレージ用に S3 バケットのルートレベルでカスタマイズできるディレクトリです。ディレクトリの末尾は`/*` （例： `"<Your S3 bucket ARN>/<Directory of your source data>/*"` ）でなければなりません。 `/*`が追加されていない場合、 `AccessDenied`エラーが発生します。
+- `"arn:aws:s3:::tidb-cloud-source-data/mydata/*"`の`"arn:aws:s3:::tidb-cloud-source-data"`はサンプルの S3 バケット ARN で、 `/mydata/*`はデータストレージ用に S3 バケットのルートレベルでカスタマイズできるディレクトリです。ディレクトリの末尾は`/*` （例： `"<Your S3 bucket ARN>/<Directory of your source data>/*"` ）でなければなりません。 `/*`が追加されていない場合、 `AccessDenied`エラーが発生します。
 
--   カスタマー管理のキー暗号化で AWS Key Management Service キー (SSE-KMS) を有効にしている場合は、次の設定がポリシーに含まれていることを確認してください。`"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"`はバケットのサンプル KMS キーです。
+- カスタマー管理のキー暗号化で AWS Key Management Service キー (SSE-KMS) を有効にしている場合は、次の設定がポリシーに含まれていることを確認してください。`"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"`はバケットのサンプル KMS キーです。
 
     ```
         {
@@ -190,17 +190,17 @@ IAMユーザーのポリシーを確認するには、次の手順を実行し�
 
 ### バケットポリシーを確認する {#check-the-bucket-policy}
 
-1.  AWS マネジメントコンソールで Amazon S3 コンソールを開き、 **Buckets**ページに移動します。バケットのリストが表示されます。
-2.  リストで対象のバケットを見つけてクリックします。バケット情報ページが表示されます。
-3.  **Permissions**タブをクリックし、 **Bucket policy**領域までスクロールダウンします。デフォルトでは、この領域にはポリシー値がありません。この領域に拒否されたポリシーが表示されている場合、データのインポート中にエラー`AccessDenied`が発生する可能性があります。
+1. AWS マネジメントコンソールで Amazon S3 コンソールを開き、 **Buckets**ページに移動します。バケットのリストが表示されます。
+2. リストで対象のバケットを見つけてクリックします。バケット情報ページが表示されます。
+3. **Permissions**タブをクリックし、 **Bucket policy**領域までスクロールダウンします。デフォルトでは、この領域にはポリシー値がありません。この領域に拒否されたポリシーが表示されている場合、データのインポート中にエラー`AccessDenied`が発生する可能性があります。
 
 拒否されたポリシーが表示された場合は、そのポリシーが現在のデータインポートに関連しているかどうかを確認してください。関連している場合は、そのポリシーをエリアから削除し、データインポートを再試行してください。
 
 ### オブジェクトの所有権を確認する {#check-the-object-ownership}
 
-1.  AWS マネジメントコンソールで Amazon S3 コンソールを開き、 **Buckets**ページに移動します。バケットのリストが表示されます。
-2.  バケットのリストで、対象のバケットを見つけてクリックします。バケット情報ページが表示されます。
-3.  バケット情報ページで**Permissions**タブをクリックし、 **Object Ownership**領域までスクロールダウンします。「Object Ownership」設定が「Bucket owner enforced」になっていることを確認してください。
+1. AWS マネジメントコンソールで Amazon S3 コンソールを開き、 **Buckets**ページに移動します。バケットのリストが表示されます。
+2. バケットのリストで、対象のバケットを見つけてクリックします。バケット情報ページが表示されます。
+3. バケット情報ページで**Permissions**タブをクリックし、 **Object Ownership**領域までスクロールダウンします。「Object Ownership」設定が「Bucket owner enforced」になっていることを確認してください。
 
     設定が「Bucket owner enforced」ではない場合、アカウントにこのバケット内のすべてのオブジェクトに対する十分な権限がないため、エラー`AccessDenied`が発生します。
 
@@ -212,14 +212,14 @@ S3バケットを暗号化する方法は複数あります。バケット内の
 
 バケットの暗号化タイプを確認するには、次の手順を実行します。
 
-1.  AWS マネジメントコンソールで Amazon S3 コンソールを開き、 **Buckets**ページに移動します。バケットのリストが表示されます。
-2.  バケットのリストで、対象のバケットを見つけてクリックします。バケット情報ページが表示されます。
-3.  バケット情報ページで、 **Properties**タブをクリックし、 **Default encryption**領域まで下にスクロールして、この領域の設定を確認します。
+1. AWS マネジメントコンソールで Amazon S3 コンソールを開き、 **Buckets**ページに移動します。バケットのリストが表示されます。
+2. バケットのリストで、対象のバケットを見つけてクリックします。バケット情報ページが表示されます。
+3. バケット情報ページで、 **Properties**タブをクリックし、 **Default encryption**領域まで下にスクロールして、この領域の設定を確認します。
 
 サーバー側暗号化には、Amazon S3 マネージドキー (SSE-S3) と AWS Key Management Service (SSE-KMS) の 2 種類があります。SSE-S3 の場合、アクセス拒否エラーが発生しないため、これ以上の確認は不要です。SSE-KMS の場合は、以下の点を確認する必要があります。
 
--   当該エリア内の AWS KMS キー ARN が下線なしの黒色で表示されている場合、その AWS KMS キーは AWS 管理キー (aws/s3) です。
--   該当エリアのAWS KMSキーARNが青色でリンク付きで表示されている場合は、そのキーARNをクリックしてキー情報ページを開きます。左側のナビゲーションバーで具体的な暗号化タイプを確認してください。AWS管理キー（aws/s3）またはカスタマー管理キーのいずれかです。
+- 当該エリア内の AWS KMS キー ARN が下線なしの黒色で表示されている場合、その AWS KMS キーは AWS 管理キー (aws/s3) です。
+- 該当エリアのAWS KMSキーARNが青色でリンク付きで表示されている場合は、そのキーARNをクリックしてキー情報ページを開きます。左側のナビゲーションバーで具体的な暗号化タイプを確認してください。AWS管理キー（aws/s3）またはカスタマー管理キーのいずれかです。
 
 <details><summary>SSE-KMSのAWS管理キー（aws/s3）の場合</summary>
 

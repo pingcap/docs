@@ -45,10 +45,10 @@ TiFlash内のテーブルのレプリカを作成するための DDL コマン�
 
 TiFlash には次の主な機能があります。
 
--   [非同期レプリケーション](#asynchronous-replication)
--   [一貫性](#consistency)
--   [賢い選択](#intelligent-choice)
--   [コンピューティングの加速](#computing-acceleration)
+- [非同期レプリケーション](#asynchronous-replication)
+- [一貫性](#consistency)
+- [賢い選択](#intelligent-choice)
+- [コンピューティングの加速](#computing-acceleration)
 
 ### 非同期レプリケーション {#asynchronous-replication}
 
@@ -56,8 +56,8 @@ TiFlash内のレプリカは、特別なロールであるRaft Learnerとして�
 
 このレプリケーション メカニズムは、自動負荷分散と高可用性という TiKV の 2 つの利点を継承しています。
 
--   TiFlash は追加のレプリケーション チャネルに依存せず、多対多の方法で TiKV からデータを直接受信します。
--   TiKV でデータが失われていない限り、いつでもTiFlashでレプリカを復元できます。
+- TiFlash は追加のレプリケーション チャネルに依存せず、多対多の方法で TiKV からデータを直接受信します。
+- TiKV でデータが失われていない限り、いつでもTiFlashでレプリカを復元できます。
 
 ### 一貫性 {#consistency}
 
@@ -75,8 +75,8 @@ TiDB は、 TiFlash (列単位) または TiKV (行単位) の使用を自動的
 
 TiFlash は、次の 2 つの方法で TiDB のコンピューティングを高速化します。
 
--   列型ストレージエンジンは読み取り操作の実行においてより効率的です。
--   TiFlash はTiDB のコンピューティング ワークロードの一部を共有します。
+- 列型ストレージエンジンは読み取り操作の実行においてより効率的です。
+- TiFlash はTiDB のコンピューティング ワークロードの一部を共有します。
 
 TiFlashは、TiKVコプロセッサーと同様にコンピューティングワークロードを分散します。TiDBは、ストレージレイヤーで完了可能なコンピューティングをプッシュダウンします。コンピューティングをプッシュダウンできるかどうかは、 TiFlashのサポート状況によって異なります。詳細については、 [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)を参照してください。
 
@@ -86,9 +86,9 @@ TiFlashを導入した後、データのレプリケーションは自動的に�
 
 TiDBを使用してTiFlashレプリカを読み取ることができます。詳細については、以下のセクションをご覧ください。
 
--   [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)
--   [TiDB を使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)
--   [MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)
+- [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)
+- [TiDB を使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)
+- [MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)
 
 <CustomContent platform="tidb">
 
@@ -100,24 +100,24 @@ TPC-H データセットでのデータのインポートからクエリまで�
 
 <CustomContent platform="tidb">
 
--   TiFlashノードを含む新しいクラスターを展開するには、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。
--   デプロイされたクラスターにTiFlashノードを追加するには、 [TiFlashクラスターのスケールアウト](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)を参照してください。
--   [TiFlashクラスターを管理](/tiflash/maintain-tiflash.md) 。
--   [TiFlashのパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md) 。
--   [TiFlashの設定](/tiflash/tiflash-configuration.md) 。
--   [TiFlashクラスターを監視する](/tiflash/monitor-tiflash.md) 。
--   [TiFlashアラートルール](/tiflash/tiflash-alert-rules.md)を学びます。
--   [TiFlashクラスターのトラブルシューティング](/tiflash/troubleshoot-tiflash.md) 。
--   [TiFlashでプッシュダウン計算をサポート](/tiflash/tiflash-supported-pushdown-calculations.md)
--   [TiFlashでのデータ検証](/tiflash/tiflash-data-validation.md)
--   [TiFlashの互換性](/tiflash/tiflash-compatibility.md)
+- TiFlashノードを含む新しいクラスターを展開するには、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。
+- デプロイされたクラスターにTiFlashノードを追加するには、 [TiFlashクラスターのスケールアウト](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)を参照してください。
+- [TiFlashクラスターを管理](/tiflash/maintain-tiflash.md) 。
+- [TiFlashのパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md) 。
+- [TiFlashの設定](/tiflash/tiflash-configuration.md) 。
+- [TiFlashクラスターを監視する](/tiflash/monitor-tiflash.md) 。
+- [TiFlashアラートルール](/tiflash/tiflash-alert-rules.md)を学びます。
+- [TiFlashクラスターのトラブルシューティング](/tiflash/troubleshoot-tiflash.md) 。
+- [TiFlashでプッシュダウン計算をサポート](/tiflash/tiflash-supported-pushdown-calculations.md)
+- [TiFlashでのデータ検証](/tiflash/tiflash-data-validation.md)
+- [TiFlashの互換性](/tiflash/tiflash-compatibility.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   [TiFlashのパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md) 。
--   [TiFlashでプッシュダウン計算をサポート](/tiflash/tiflash-supported-pushdown-calculations.md)
--   [TiFlashの互換性](/tiflash/tiflash-compatibility.md)
+- [TiFlashのパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md) 。
+- [TiFlashでプッシュダウン計算をサポート](/tiflash/tiflash-supported-pushdown-calculations.md)
+- [TiFlashの互換性](/tiflash/tiflash-compatibility.md)
 
 </CustomContent>

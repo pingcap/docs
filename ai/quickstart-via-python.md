@@ -10,19 +10,19 @@ aliases: ['/ja/tidb/stable/vector-search-get-started-using-python/','/ja/tidb/de
 
 このドキュメントに従うことで、以下のことを学ぶことができます。
 
--   TiDB Python SDKを使用してTiDBに接続します。
--   一般的な埋め込みモデルを使用してテキスト埋め込みを生成します。
--   ベクトルをTiDBテーブルに格納します。
--   ベクトル類似度を用いて意味検索を実行する。
+- TiDB Python SDKを使用してTiDBに接続します。
+- 一般的な埋め込みモデルを使用してテキスト埋め込みを生成します。
+- ベクトルをTiDBテーブルに格納します。
+- ベクトル類似度を用いて意味検索を実行する。
 
 > **Note:**
 >
-> -   ベクトル検索機能はパブリックプレビューであり、予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
-> -   ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)および[{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> - ベクトル検索機能はパブリックプレビューであり、予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> - ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)および[{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## 前提条件 {#prerequisites}
 
--   [tidbcloud.com](https://tidbcloud.com/)にアクセスしてTiDB Cloud Starterインスタンスを無料で作成するか、 [TiUP Playground](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb/#deploy-a-local-test-cluster)を使用してローカルテスト用の TiDB Self-Managedクラスタをデプロイします。
+- [tidbcloud.com](https://tidbcloud.com/)にアクセスしてTiDB Cloud Starterインスタンスを無料で作成するか、 [TiUP Playground](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb/#deploy-a-local-test-cluster)を使用してローカルテスト用の TiDB Self-Managedクラスタをデプロイします。
 
 ## インストール {#installation}
 
@@ -47,8 +47,8 @@ pip install "pytidb[models]"
 
 これらの接続パラメータは[TiDB Cloudコンソール](https://tidbcloud.com/tidbs)から取得できます。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
-2.  右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
 
 例えば、接続パラメータが以下のように表示される場合：
 
@@ -145,10 +145,10 @@ text_embed = EmbeddingFunction(
 
 例として、 `chunks`という名前のテーブルを作成し、以下の列を追加します。
 
--   `id` (int): チャンクのID。
--   `text` (テキスト): チャンクのテキストコンテンツ。
--   `text_vec` (ベクトル): テキストのベクトル埋め込み。
--   `user_id` (int): チャンクを作成したユーザーのID。
+- `id` (int): チャンクのID。
+- `text` (テキスト): チャンクのテキストコンテンツ。
+- `text_vec` (ベクトル): テキストのベクトル埋め込み。
+- `user_id` (int): チャンクを作成したユーザーのID。
 
 ```python hl_lines="6"
 from pytidb.schema import TableModel, Field, VectorField
@@ -242,4 +242,4 @@ client.drop_table("chunks")
 
 ## 次のステップ {#next-steps}
 
--   TiDB の[ベクトル検索](/ai/guides/vector-search.md)、 [全文検索](/ai/guides/vector-search-full-text-search-python.md)、 [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)の詳細については、こちらをご覧ください。
+- TiDB の[ベクトル検索](/ai/guides/vector-search.md)、 [全文検索](/ai/guides/vector-search-full-text-search-python.md)、 [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)の詳細については、こちらをご覧ください。

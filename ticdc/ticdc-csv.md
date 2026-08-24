@@ -33,9 +33,9 @@ output-field-header = false # New in v8.5.6 (only available in the TiCDC new arc
 
 ## トランザクション上の制約 {#transactional-constraints}
 
--   単一のCSVファイルでは、ある行の`commit-ts`は、次の行の`commit-ts`と同じかそれ以下です。
--   同一テーブルの同じトランザクションは、同じCSVファイルに保存されます。
--   同じトランザクションの複数のテーブルを、異なるCSVファイルに保存することができます。
+- 単一のCSVファイルでは、ある行の`commit-ts`は、次の行の`commit-ts`と同じかそれ以下です。
+- 同一テーブルの同じトランザクションは、同じCSVファイルに保存されます。
+- 同じトランザクションの複数のテーブルを、異なるCSVファイルに保存することができます。
 
 ## データストレージパス構造 {#data-storage-path-structure}
 
@@ -45,12 +45,12 @@ output-field-header = false # New in v8.5.6 (only available in the TiCDC new arc
 
 CSVファイルでは、各列は次のように定義されています。
 
--   カラム1: 操作タイプインジケータ。 `I` 、 `U` 、 `D`を含む。 `I`は`INSERT`を意味し、 `U`は`UPDATE`を意味し、 `D`は`DELETE`を意味する。
--   2カラム：テーブル名。
--   3カラム：スキーマ名。
--   4カラム：ソーストランザクションの`commit-ts` 。この列は省略可能です。
--   カラム5: `is-update`列は`output-old-value`の値が true の場合にのみ存在し、行データの変更が UPDATE イベント (列の値が true の場合) によるものか、INSERT/DELETE イベント (値が false の場合) によるものかを識別するために使用されます。
--   6カラムから最終列まで：データが変更された列が1つ以上あります。
+- カラム1: 操作タイプインジケータ。 `I` 、 `U` 、 `D`を含む。 `I`は`INSERT`を意味し、 `U`は`UPDATE`を意味し、 `D`は`DELETE`を意味する。
+- 2カラム：テーブル名。
+- 3カラム：スキーマ名。
+- 4カラム：ソーストランザクションの`commit-ts` 。この列は省略可能です。
+- カラム5: `is-update`列は`output-old-value`の値が true の場合にのみ存在し、行データの変更が UPDATE イベント (列の値が true の場合) によるものか、INSERT/DELETE イベント (値が false の場合) によるものかを識別するために使用されます。
+- 6カラムから最終列まで：データが変更された列が1つ以上あります。
 
 [TiCDCの新アーキテクチャ](/ticdc/ticdc-architecture.md)の場合、 `output-field-header = true`の場合、CSV ファイルにはヘッダー行が含まれます。ヘッダー行の列名は次のとおりです。
 

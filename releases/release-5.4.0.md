@@ -11,17 +11,17 @@ TiDB バージョン: 5.4.0
 
 バージョン5.4における主な新機能または改善点は以下のとおりです。
 
--   GBK文字セットをサポート
--   インデックスマージを使用してデータにアクセスすることをサポートします。これは、複数の列のインデックスのフィルタリング結果をマージします。
--   セッション変数を使用して古いデータを読み取ることをサポートする
--   統計情報を収集するための設定を永続化する機能をサポートする
--   TiKVのログストレージエンジンとしてRaft Engineを使用することをサポートする（実験的）
--   バックアップがクラスタに与える影響を最適化する
--   バックアップストレージとしてAzure Blobストレージの使用をサポートします。
--   TiFlashおよびMPPエンジンの安定性と性能を継続的に向上させる
--   TiDB Lightningに、既存のテーブルへのデータインポートを許可するかどうかを決定するスイッチを追加します。
--   継続的プロファイリング機能の最適化（実験的）
--   TiSparkはユーザー識別と認証をサポートしています
+- GBK文字セットをサポート
+- インデックスマージを使用してデータにアクセスすることをサポートします。これは、複数の列のインデックスのフィルタリング結果をマージします。
+- セッション変数を使用して古いデータを読み取ることをサポートする
+- 統計情報を収集するための設定を永続化する機能をサポートする
+- TiKVのログストレージエンジンとしてRaft Engineを使用することをサポートする（実験的）
+- バックアップがクラスタに与える影響を最適化する
+- バックアップストレージとしてAzure Blobストレージの使用をサポートします。
+- TiFlashおよびMPPエンジンの安定性と性能を継続的に向上させる
+- TiDB Lightningに、既存のテーブルへのデータインポートを許可するかどうかを決定するスイッチを追加します。
+- 継続的プロファイリング機能の最適化（実験的）
+- TiSparkはユーザー識別と認証をサポートしています
 
 ## 互換性の変更 {#compatibility-changes}
 
@@ -63,23 +63,23 @@ TiDB バージョン: 5.4.0
 
 ### その他 {#others}
 
--   TiDBとPDの間にインターフェースが追加されました。 `information_schema.TIDB_HOT_REGIONS_HISTORY`システムテーブルを使用する場合、TiDBは対応するバージョンのPDを使用する必要があります。
--   TiDB サーバー、PD サーバー、および TiKV サーバーは、ログ名、出力形式、ローテーションと有効期限のルールを管理するために、ログ関連パラメーターに統一された命名方法を使用し始めます。詳しくは[TiKV設定ファイル - ログ](/tikv-configuration-file.md#log-new-in-v540)をご覧ください。
--   バージョン5.4.0以降、プランキャッシュによってキャッシュされた実行計画に対してSQLバインディングを作成すると、対応するクエリに対して既にキャッシュされているプラ​​ンが無効化されます。この新しいバインディングは、バージョン5.4.0より前にキャッシュされた実行計画には影響しません。
--   v5.3 以前のバージョンでは、 [TiDB Data Migration (DM)](https://docs.pingcap.com/tidb-data-migration/v5.3/)ドキュメントは TiDB ドキュメントから独立しています。 v5.4 以降、DM ドキュメントは同じバージョンの TiDB ドキュメントに統合されています。 DM ドキュメント サイトにアクセスせずに、 [DMドキュメント](/dm/dm-overview.md)を直接読むことができます。
--   ポイントインタイムリカバリ（PITR）の実験的機能をcdclogとともに削除しました。バージョン5.4.0以降、cdclogベースのPITRおよびcdclogはサポートされなくなりました。
--   システム変数を「DEFAULT」に設定する動作をMySQLとの互換性を高める [#29680](https://github.com/pingcap/tidb/pull/29680)
--   システム変数`lc_time_names`を読み取り専用に設定する [#30084](https://github.com/pingcap/tidb/pull/30084)
--   `tidb_store_limit`のスコープを INSTANCE または GLOBAL から GLOBAL に変更する [#30756](https://github.com/pingcap/tidb/pull/30756)
--   列にゼロが含まれている場合、整数型の列を時間型の列に変換することを禁止する [#25728](https://github.com/pingcap/tidb/pull/25728)
--   浮動小数点値を挿入する際に`Inf`または`NAN`の値に対してエラーが報告されない問題を修正します [#30148](https://github.com/pingcap/tidb/pull/30148)
--   `REPLACE`ステートメントが自動 ID が範囲外の場合に他の行を誤って変更してしまう問題を修正しました [#30301](https://github.com/pingcap/tidb/pull/30301)
+- TiDBとPDの間にインターフェースが追加されました。 `information_schema.TIDB_HOT_REGIONS_HISTORY`システムテーブルを使用する場合、TiDBは対応するバージョンのPDを使用する必要があります。
+- TiDB サーバー、PD サーバー、および TiKV サーバーは、ログ名、出力形式、ローテーションと有効期限のルールを管理するために、ログ関連パラメーターに統一された命名方法を使用し始めます。詳しくは[TiKV設定ファイル - ログ](/tikv-configuration-file.md#log-new-in-v540)をご覧ください。
+- バージョン5.4.0以降、プランキャッシュによってキャッシュされた実行計画に対してSQLバインディングを作成すると、対応するクエリに対して既にキャッシュされているプラ​​ンが無効化されます。この新しいバインディングは、バージョン5.4.0より前にキャッシュされた実行計画には影響しません。
+- v5.3 以前のバージョンでは、 [TiDB Data Migration (DM)](https://docs.pingcap.com/tidb-data-migration/v5.3/)ドキュメントは TiDB ドキュメントから独立しています。 v5.4 以降、DM ドキュメントは同じバージョンの TiDB ドキュメントに統合されています。 DM ドキュメント サイトにアクセスせずに、 [DMドキュメント](/dm/dm-overview.md)を直接読むことができます。
+- ポイントインタイムリカバリ（PITR）の実験的機能をcdclogとともに削除しました。バージョン5.4.0以降、cdclogベースのPITRおよびcdclogはサポートされなくなりました。
+- システム変数を「DEFAULT」に設定する動作をMySQLとの互換性を高める [#29680](https://github.com/pingcap/tidb/pull/29680)
+- システム変数`lc_time_names`を読み取り専用に設定する [#30084](https://github.com/pingcap/tidb/pull/30084)
+- `tidb_store_limit`のスコープを INSTANCE または GLOBAL から GLOBAL に変更する [#30756](https://github.com/pingcap/tidb/pull/30756)
+- 列にゼロが含まれている場合、整数型の列を時間型の列に変換することを禁止する [#25728](https://github.com/pingcap/tidb/pull/25728)
+- 浮動小数点値を挿入する際に`Inf`または`NAN`の値に対してエラーが報告されない問題を修正します [#30148](https://github.com/pingcap/tidb/pull/30148)
+- `REPLACE`ステートメントが自動 ID が範囲外の場合に他の行を誤って変更してしまう問題を修正しました [#30301](https://github.com/pingcap/tidb/pull/30301)
 
 ## 新機能 {#new-features}
 
 ### SQL {#sql}
 
--   **TiDBはバージョン5.4.0以降、GBK文字セットをサポートしています。**
+- **TiDBはバージョン5.4.0以降、GBK文字セットをサポートしています。**
 
     バージョン 5.4.0 より前の TiDB は、 `ascii` 、 `binary` 、 `latin1` 、 `utf8` 、および`utf8mb4`文字セットをサポートしています。
 
@@ -89,7 +89,7 @@ TiDB バージョン: 5.4.0
 
 ### セキュリティ {#security}
 
--   **TiSparkはユーザー認証と認可をサポートしています。**
+- **TiSparkはユーザー認証と認可をサポートしています。**
 
     TiSpark 2.5.0以降、TiSparkはデータベースユーザー認証と、データベースまたはテーブルレベルでの読み書き権限の両方をサポートしています。この機能を有効にすることで、データ取得のためのドローなどの不正なバッチタスクの実行を防止でき、オンラインクラスタの安定性とデータセキュリティが向上します。
 
@@ -97,7 +97,7 @@ TiDB バージョン: 5.4.0
 
     [ユーザー向けドキュメント](https://docs-archive.pingcap.com/tidb/v5.4/tispark-overview#security)
 
--   **TiUPはrootユーザーの初期パスワード生成をサポートしています。**
+- **TiUPはrootユーザーの初期パスワード生成をサポートしています。**
 
     クラスター起動コマンドに`--init`パラメータが追加されました。このパラメータを使用すると、 TiUPを使用してデプロイされたTiDBクラスターにおいて、 TiUPがデータベースのrootユーザー用に強力な初期パスワードを生成します。これにより、パスワードが空のrootユーザーを使用することによるセキュリティリスクを回避し、データベースのセキュリティを確保できます。
 
@@ -105,22 +105,22 @@ TiDB バージョン: 5.4.0
 
 ### パフォーマンス {#performance}
 
--   **カラム型ストレージエンジンTiFlashおよび演算エンジンMPPの安定性とパフォーマンスの向上を継続する。**
+- **カラム型ストレージエンジンTiFlashおよび演算エンジンMPPの安定性とパフォーマンスの向上を継続する。**
 
-    -   MPPエンジンへの関数委譲をさらに強化する：
+    - MPPエンジンへの関数委譲をさらに強化する：
 
-        -   文字列関数: `LPAD()` 、 `RPAD()` 、 `STRCMP()`
-        -   日付関数: `ADDDATE(string, real)` 、 `DATE_ADD(string, real)` 、 `DATE_SUB(string, real)` 、 `SUBDATE(string, real)` 、 `QUARTER()`
+        - 文字列関数: `LPAD()` 、 `RPAD()` 、 `STRCMP()`
+        - 日付関数: `ADDDATE(string, real)` 、 `DATE_ADD(string, real)` 、 `DATE_SUB(string, real)` 、 `SUBDATE(string, real)` 、 `QUARTER()`
 
-    -   リソース利用率を向上させるための弾性スレッドプール機能を導入（実験的）
+    - リソース利用率を向上させるための弾性スレッドプール機能を導入（実験的）
 
-    -   TiKVからデータを複製する際に、行ベースのストレージ形式から列ベースのストレージ形式へのデータ変換の効率を向上させ、データ複製の全体的なパフォーマンスを50%向上させました。
+    - TiKVからデータを複製する際に、行ベースのストレージ形式から列ベースのストレージ形式へのデータ変換の効率を向上させ、データ複製の全体的なパフォーマンスを50%向上させました。
 
-    -   一部の設定項目のデフォルト値を調整することで、 TiFlashのパフォーマンスと安定性を向上させることができます。HTAPハイブリッドロード環境では、単一テーブルに対する単純なクエリのパフォーマンスが最大20%向上します。
+    - 一部の設定項目のデフォルト値を調整することで、 TiFlashのパフォーマンスと安定性を向上させることができます。HTAPハイブリッドロード環境では、単一テーブルに対する単純なクエリのパフォーマンスが最大20%向上します。
 
     ユーザードキュメント: [プッシュダウン計算に対応](/tiflash/tiflash-supported-pushdown-calculations.md)、 [tiflash.toml ファイルを設定します](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)
 
--   **セッション変数を使用して、指定された期間内の履歴データを読み取ります。**
+- **セッション変数を使用して、指定された期間内の履歴データを読み取ります。**
 
     TiDBは、 Raftコンセンサスアルゴリズムに基づいたマルチレプリカ分散データベースです。高並行性および高スループットのアプリケーションシナリオにおいて、TiDBはフォロワーレプリカによって読み取りパフォーマンスをスケールアウトし、読み取りリクエストと書き込みリクエストを分離することができます。
 
@@ -139,7 +139,7 @@ TiDB バージョン: 5.4.0
 
     [ユーザー向けドキュメント](/tidb-read-staleness.md)
 
--   **インデックスマージのためのGA**
+- **インデックスマージのためのGA**
 
     インデックスマージは、SQL最適化のための実験的機能としてTiDB v4.0で導入されました。この方法は、クエリで複数のデータ列をスキャンする必要がある場合に、条件フィルタリングを大幅に高速化します。次のクエリを例にとります。 `WHERE`ステートメントにおいて、 `OR`で接続されたフィルタリング条件にそれぞれ列*key1*と*key2の*インデックスがある場合、インデックスマージ機能はそれぞれのインデックスを同時にフィルタリングし、クエリ結果をマージして、マージされた結果を返します。
 
@@ -151,13 +151,13 @@ TiDB バージョン: 5.4.0
 
     バージョン5.4.0では、インデックスマージが一般提供開始（GA）となりました。ただし、以下の制限事項には引き続き注意が必要です。
 
-    -   インデックス マージは、選言正規形 (X <sub>1</sub> ⋁ X <sub>2</sub> ⋁ …X <sub>n</sub> ) のみをサポートします。つまり、この機能は`WHERE`句のフィルタリング条件が`OR`で接続されている場合にのみ機能します。
+    - インデックス マージは、選言正規形 (X <sub>1</sub> ⋁ X <sub>2</sub> ⋁ …X <sub>n</sub> ) のみをサポートします。つまり、この機能は`WHERE`句のフィルタリング条件が`OR`で接続されている場合にのみ機能します。
 
-    -   新規にデプロイされたv5.4.0以降のTiDBクラスタでは、この機能はデフォルトで有効になっています。以前のバージョンからアップグレードされたv5.4.0以降のTiDBクラスタでは、この機能はアップグレード前の設定を継承し、必要に応じて設定を変更できます（v4.0より前のTiDBクラスタでは、この機能は存在せず、デフォルトで無効になっています）。
+    - 新規にデプロイされたv5.4.0以降のTiDBクラスタでは、この機能はデフォルトで有効になっています。以前のバージョンからアップグレードされたv5.4.0以降のTiDBクラスタでは、この機能はアップグレード前の設定を継承し、必要に応じて設定を変更できます（v4.0より前のTiDBクラスタでは、この機能は存在せず、デフォルトで無効になっています）。
 
     [ユーザー向けドキュメント](/explain-index-merge.md)
 
--   **Raft Engineのサポート（実験的）**
+- **Raft Engineのサポート（実験的）**
 
     TiKVのログストレージエンジンとして[Raft Engine](https://github.com/tikv/raft-engine)使用をサポートします。RocksDBと比較して、 Raft EngineはTiKVのI/O書き込みトラフィックを最大40%、CPU使用率を10%削減し、特定の負荷条件下ではフォアグラウンドスループットを約5%向上させ、テールレイテンシーを20%削減します。さらに、 Raft Engineはログリサイクルの効率を向上させ、極端な条件下でのログ蓄積の問題を解決します。
 
@@ -165,7 +165,7 @@ TiDB バージョン: 5.4.0
 
     [ユーザー向けドキュメント](/tikv-configuration-file.md#raft-engine)
 
--   **`PREDICATE COLUMNS`に関する統計情報の収集をサポートする（実験的）**
+- **`PREDICATE COLUMNS`に関する統計情報の収集をサポートする（実験的）**
 
     ほとんどの場合、SQL ステートメントを実行する際に、オプティマイザは一部の列 ( `WHERE` 、`JOIN`、 `ORDER BY` `JOIN` 、および`GROUP BY`ステートメントの列など) の統計情報のみを使用します。これらの使用される列は`PREDICATE COLUMNS`と呼ばれます。
 
@@ -175,7 +175,7 @@ TiDB バージョン: 5.4.0
 
     [ユーザー向けドキュメント](/statistics.md#collect-statistics-on-some-columns)
 
--   **統計情報の同期読み込みをサポート（実験的）**
+- **統計情報の同期読み込みをサポート（実験的）**
 
     バージョン5.4.0以降、TiDBは統計情報の同期読み込み機能を導入しました。この機能はデフォルトでは無効になっています。この機能を有効にすると、SQL文の実行時に、ヒストグラム、TopN、Count-Min Sketch統計情報などの大規模な統計情報をメモリに同期的に読み込むことができるようになり、SQL最適化のための統計情報の網羅性が向上します。
 
@@ -183,7 +183,7 @@ TiDB バージョン: 5.4.0
 
 ### 安定性 {#stability}
 
--   **ANALYZE構成の永続化をサポートする**
+- **ANALYZE構成の永続化をサポートする**
 
     統計は、オプティマイザが実行計画を生成する際に参照する基本情報の一種です。統計情報の精度は、生成される実行計画の妥当性に直接影響します。統計情報の精度を確保するためには、テーブル、パーティション、インデックスごとに異なる収集構成を設定する必要がある場合があります。
 
@@ -195,13 +195,13 @@ TiDB バージョン: 5.4.0
 
 ### 高可用性とディザスタリカバリ {#high-availability-and-disaster-recovery}
 
--   **バックアップタスクがクラスタに与える影響を軽減する**
+- **バックアップタスクがクラスタに与える影響を軽減する**
 
     Backup & Restore (BR) では、自動調整機能 (デフォルトで有効) が導入されました。この機能は、クラスタのリソース使用状況を監視し、バックアップタスクで使用されるスレッド数を調整することで、クラスタに対するバックアップタスクの影響を軽減します。場合によっては、バックアップ用のクラスタハードウェアリソースを増やし、自動調整機能を有効にすると、クラスタに対するバックアップタスクの影響を 10% 以下に抑えることができます。
 
     [ユーザー向けドキュメント](/br/br-auto-tune.md)
 
--   **バックアップのターゲットストレージとしてAzure Blob Storageをサポートする**
+- **バックアップのターゲットストレージとしてAzure Blob Storageをサポートする**
 
     Backup &amp; Restore (BR) は、リモートバックアップストレージとして Azure Blob Storage をサポートしています。Azure クラウドに TiDB をデプロイしている場合、クラスタデータを Azure Blob Storage サービスにバックアップできるようになりました。
 
@@ -209,50 +209,50 @@ TiDB バージョン: 5.4.0
 
 ### データ移行 {#data-migration}
 
--   **TiDB Lightning は、データを含むテーブルへのデータのインポートを許可するかどうかを判断する新機能を導入しました。**
+- **TiDB Lightning は、データを含むテーブルへのデータのインポートを許可するかどうかを判断する新機能を導入しました。**
 
     TiDB Lightning、設定項目`incremental-import`が導入されました。これは、データを含むテーブルへのデータのインポートを許可するかどうかを決定します。デフォルト値は`false`です。並列インポートモードを使用する場合は、設定を`true`に設定する必要があります。
 
     [ユーザー向けドキュメント](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)
 
--   **TiDB Lightningは、並列インポート用のメタ情報を格納するスキーマ名を導入しました。**
+- **TiDB Lightningは、並列インポート用のメタ情報を格納するスキーマ名を導入しました。**
 
     TiDB Lightning、 `meta-schema-name`という構成項目が導入されました。並列インポートモードでは、このパラメータは、ターゲットクラスタ内の各TiDB Lightningインスタンスのメタ情報を格納するスキーマ名を指定します。デフォルト値は「lightning_metadata」です。このパラメータに設定する値は、同じ並列インポートに参加する各TiDB Lightningインスタンスで同じである必要があります。そうでない場合、インポートされたデータの正確性が保証されません。
 
     [ユーザー向けドキュメント](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)
 
--   **TiDB Lightningに重複解決機能が導入されました**
+- **TiDB Lightningに重複解決機能が導入されました**
 
     ローカルバックエンドモードでは、 TiDB Lightningはデータインポートが完了する前に重複データを出力し、その後データベースからその重複データを削除します。インポート完了後に重複データを解決し、アプリケーションルールに従って挿入する適切なデータを選択できます。後続の増分データ移行フェーズで発生する重複データによるデータ不整合を回避するため、重複データに基づいて上流のデータソースをクリーンアップすることをお勧めします。
 
     [ユーザー向けドキュメント](/tidb-lightning/tidb-lightning-error-resolution.md)
 
--   **TiDB Data Migration (DM)におけるリレーログの使用を最適化する**
+- **TiDB Data Migration (DM)におけるリレーログの使用を最適化する**
 
-    -   `enable-relay`構成で`source` スイッチを復元します。
+    - `enable-relay`構成で`source` スイッチを復元します。
 
-    -   `start-relay`および`stop-relay`コマンドを使用して、リレーログを動的に有効化および無効化することをサポートします。
+    - `start-relay`および`stop-relay`コマンドを使用して、リレーログを動的に有効化および無効化することをサポートします。
 
-    -   リレーログの状態を`source`にバインドします。 `source`どの DM-worker に移行されても、有効または無効の元の状態を維持します。
+    - リレーログの状態を`source`にバインドします。 `source`どの DM-worker に移行されても、有効または無効の元の状態を維持します。
 
-    -   リレーログのストレージパスをDM-workerの設定ファイルに移動します。
+    - リレーログのストレージパスをDM-workerの設定ファイルに移動します。
 
     [ユーザー向けドキュメント](/dm/relay-log.md)
 
--   **DMにおける<a href="/character-set-and-collation.md">照合順序</a>処理を最適化する**
+- **DMにおける<a href="/character-set-and-collation.md">照合順序</a>処理を最適化する**
 
     `collation_compatible`設定項目を追加します。値のオプションは`loose` (デフォルト) と`strict`です。
 
-    -   アプリケーションに照合順序に関する厳密な要件がなく、クエリ結果の照合順序が上流と下流で異なる可能性がある場合は、デフォルトの`loose`モードを使用してエラーの報告を回避できます。
-    -   アプリケーションで照合順序に関する厳格な要件があり、アップストリームとダウンストリーム間で照合順序を統一する必要がある場合は、 `strict`モードを使用できます。ただし、ダウンストリームがアップストリームのデフォルトの照合順序をサポートしていない場合、データレプリケーションでエラーが発生する可能性があります。
+    - アプリケーションに照合順序に関する厳密な要件がなく、クエリ結果の照合順序が上流と下流で異なる可能性がある場合は、デフォルトの`loose`モードを使用してエラーの報告を回避できます。
+    - アプリケーションで照合順序に関する厳格な要件があり、アップストリームとダウンストリーム間で照合順序を統一する必要がある場合は、 `strict`モードを使用できます。ただし、ダウンストリームがアップストリームのデフォルトの照合順序をサポートしていない場合、データレプリケーションでエラーが発生する可能性があります。
 
     [ユーザー向けドキュメント](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)
 
--   **DM の`transfer source`を最適化して、レプリケーション タスクをスムーズに実行できるようにします。**
+- **DM の`transfer source`を最適化して、レプリケーション タスクをスムーズに実行できるようにします。**
 
     DMワーカーノードの負荷が不均衡な場合、 `transfer source`コマンドを使用して、 `source`の構成を別の負荷に手動で転送できます。最適化後、 `transfer source`コマンドを使用すると、手動操作が簡素化されます。DMは他の操作を内部的に完了するため、関連するすべてのタスクを一時停止することなく、ソースをスムーズに転送できます。
 
--   **DM OpenAPIが一般提供開始（GA）となりました**
+- **DM OpenAPIが一般提供開始（GA）となりました**
 
     DMは、データソースの追加やタスク管理など、APIを介した日常的な管理をサポートしています。バージョン5.4.0では、DM OpenAPIが一般提供開始となります。
 
@@ -260,7 +260,7 @@ TiDB バージョン: 5.4.0
 
 ### 診断効率 {#diagnostic-efficiency}
 
--   **Top SQL （実験的機能）**
+- **Top SQL （実験的機能）**
 
     ソースコードを大量に消費するクエリを簡単に見つけるのに役立つ、新しい実験的機能である「Top SQL」 （デフォルトでは無効）が導入されました。
 
@@ -268,19 +268,19 @@ TiDB バージョン: 5.4.0
 
 ### TiDBデータ共有サブスクリプション {#tidb-data-share-subscription}
 
--   **TiCDCがクラスターに与える影響を最適化する**
+- **TiCDCがクラスターに与える影響を最適化する**
 
     TiCDCを使用すると、TiDBクラスタのパフォーマンスへの影響を大幅に軽減できます。テスト環境では、TiCDCがTiDBに与えるパフォーマンスへの影響を5%未満に抑えることが可能です。
 
 ### 導入と保守 {#deployment-and-maintenance}
 
--   **継続的プロファイリングの強化（実験的）**
+- **継続的プロファイリングの強化（実験的）**
 
-    -   サポートされているコンポーネントがさらに増えました: TiDB v5.4.0 では、TiDB、PD、TiKV に加えて、 TiFlashの CPU プロファイリングもサポートしています。
+    - サポートされているコンポーネントがさらに増えました: TiDB v5.4.0 では、TiDB、PD、TiKV に加えて、 TiFlashの CPU プロファイリングもサポートしています。
 
-    -   プロファイリング表示の形式がさらに充実：CPUプロファイリングとゴルーチンの結果をフレームチャートに表示できるようになりました。
+    - プロファイリング表示の形式がさらに充実：CPUプロファイリングとゴルーチンの結果をフレームチャートに表示できるようになりました。
 
-    -   サポートされているデプロイメント環境がさらに増えました: TiDB Operatorを使用してデプロイされたクラスターでも、継続的プロファイリングを使用できます。
+    - サポートされているデプロイメント環境がさらに増えました: TiDB Operatorを使用してデプロイされたクラスターでも、継続的プロファイリングを使用できます。
 
     継続的プロファイリングはデフォルトでは無効になっており、TiDB Dashboardで有効にすることができます。
 
@@ -290,144 +290,144 @@ TiDB バージョン: 5.4.0
 
 ## 改善点 {#improvements}
 
--   TiDB
+- TiDB
 
-    -   キャッシュされたクエリ プランをクリアするための`ADMIN {SESSION | INSTANCE | GLOBAL} PLAN_CACHE`構文をサポート [#30370](https://github.com/pingcap/tidb/pull/30370)
+    - キャッシュされたクエリ プランをクリアするための`ADMIN {SESSION | INSTANCE | GLOBAL} PLAN_CACHE`構文をサポート [#30370](https://github.com/pingcap/tidb/pull/30370)
 
--   TiKV
+- TiKV
 
-    -   コプロセッサーがページングAPIをサポートし、リクエストをストリームのように処理する [#11448](https://github.com/tikv/tikv/issues/11448)
-    -   読み取り操作が二次ロックの解決を待つ必要がないように、 `read-through-lock`をサポートする [#11402](https://github.com/tikv/tikv/issues/11402)
-    -   ディスク容量不足によるpanicを防ぐため、ディスク保護メカニズムを追加する [#10537](https://github.com/tikv/tikv/issues/10537)
-    -   ログのアーカイブとローテーションをサポートする [#11651](https://github.com/tikv/tikv/issues/11651)
-    -   Raftクライアントによるシステムコールを削減し、CPU効率を向上させる [#11309](https://github.com/tikv/tikv/issues/11309)
-    -   コプロセッサーが部分文字列をTiKVにプッシュダウンする機能をサポート [#11495](https://github.com/tikv/tikv/issues/11495)
-    -   Read Committed分離レベルで読み取りロックをスキップすることでスキャンパフォーマンスを向上させる [#11485](https://github.com/tikv/tikv/issues/11485)
-    -   バックアップ操作で使用されるデフォルトのスレッドプールサイズを縮小し、負荷が高い場合のスレッドプールの使用を制限する [#11000](https://github.com/tikv/tikv/issues/11000)
-    -   適用スレッドプールとストアスレッドプールのサイズを動的に調整する機能をサポートする [#11159](https://github.com/tikv/tikv/issues/11159)
-    -   `snap-generator`スレッドプールのサイズ設定をサポートする [#11247](https://github.com/tikv/tikv/issues/11247)
-    -   多数のファイルがあり、頻繁な読み書きが発生する場合に発生するグローバルロック競合の問題を最適化します [#250](https://github.com/tikv/rocksdb/pull/250)
+    - コプロセッサーがページングAPIをサポートし、リクエストをストリームのように処理する [#11448](https://github.com/tikv/tikv/issues/11448)
+    - 読み取り操作が二次ロックの解決を待つ必要がないように、 `read-through-lock`をサポートする [#11402](https://github.com/tikv/tikv/issues/11402)
+    - ディスク容量不足によるpanicを防ぐため、ディスク保護メカニズムを追加する [#10537](https://github.com/tikv/tikv/issues/10537)
+    - ログのアーカイブとローテーションをサポートする [#11651](https://github.com/tikv/tikv/issues/11651)
+    - Raftクライアントによるシステムコールを削減し、CPU効率を向上させる [#11309](https://github.com/tikv/tikv/issues/11309)
+    - コプロセッサーが部分文字列をTiKVにプッシュダウンする機能をサポート [#11495](https://github.com/tikv/tikv/issues/11495)
+    - Read Committed分離レベルで読み取りロックをスキップすることでスキャンパフォーマンスを向上させる [#11485](https://github.com/tikv/tikv/issues/11485)
+    - バックアップ操作で使用されるデフォルトのスレッドプールサイズを縮小し、負荷が高い場合のスレッドプールの使用を制限する [#11000](https://github.com/tikv/tikv/issues/11000)
+    - 適用スレッドプールとストアスレッドプールのサイズを動的に調整する機能をサポートする [#11159](https://github.com/tikv/tikv/issues/11159)
+    - `snap-generator`スレッドプールのサイズ設定をサポートする [#11247](https://github.com/tikv/tikv/issues/11247)
+    - 多数のファイルがあり、頻繁な読み書きが発生する場合に発生するグローバルロック競合の問題を最適化します [#250](https://github.com/tikv/rocksdb/pull/250)
 
--   PD
+- PD
 
-    -   過去のホットスポット情報をデフォルトで記録する [#25281](https://github.com/pingcap/tidb/issues/25281)
-    -   HTTPコンポーネントにリクエスト元を識別するための署名を追加する [#4490](https://github.com/tikv/pd/issues/4490)
-    -   TiDB Dashboardをv2021.12.31にアップデート [#4257](https://github.com/tikv/pd/issues/4257)
+    - 過去のホットスポット情報をデフォルトで記録する [#25281](https://github.com/pingcap/tidb/issues/25281)
+    - HTTPコンポーネントにリクエスト元を識別するための署名を追加する [#4490](https://github.com/tikv/pd/issues/4490)
+    - TiDB Dashboardをv2021.12.31にアップデート [#4257](https://github.com/tikv/pd/issues/4257)
 
--   TiFlash
+- TiFlash
 
-    -   ローカルオペレーター間の通信を最適化する
-    -   gRPCの非一時スレッド数を増やして、頻繁なスレッドの生成や破棄を回避する。
+    - ローカルオペレーター間の通信を最適化する
+    - gRPCの非一時スレッド数を増やして、頻繁なスレッドの生成や破棄を回避する。
 
--   ツール
+- ツール
 
-    -   Backup & Restore (BR)
+    - Backup & Restore (BR)
 
-        -   BRが暗号化バックアップを実行する際に、キーの有効性チェックを追加する [#29794](https://github.com/pingcap/tidb/issues/29794)
+        - BRが暗号化バックアップを実行する際に、キーの有効性チェックを追加する [#29794](https://github.com/pingcap/tidb/issues/29794)
 
-    -   TiCDC
+    - TiCDC
 
-        -   「EventFeed retry rate limited」ログの数を減らす [#4006](https://github.com/pingcap/tiflow/issues/4006)
-        -   多数のテーブルを複製する際のレプリケーションレイテンシーを削減する [#3900](https://github.com/pingcap/tiflow/issues/3900)
-        -   TiKVストアがダウンした際にKVクライアントが復旧するまでの時間を短縮する [#3191](https://github.com/pingcap/tiflow/issues/3191)
+        - 「EventFeed retry rate limited」ログの数を減らす [#4006](https://github.com/pingcap/tiflow/issues/4006)
+        - 多数のテーブルを複製する際のレプリケーションレイテンシーを削減する [#3900](https://github.com/pingcap/tiflow/issues/3900)
+        - TiKVストアがダウンした際にKVクライアントが復旧するまでの時間を短縮する [#3191](https://github.com/pingcap/tiflow/issues/3191)
 
-    -   TiDB Data Migration (DM)
+    - TiDB Data Migration (DM)
 
-        -   リレー有効時のCPU使用率を下げる [#2214](https://github.com/pingcap/dm/issues/2214)
+        - リレー有効時のCPU使用率を下げる [#2214](https://github.com/pingcap/dm/issues/2214)
 
-    -   TiDB Lightning
+    - TiDB Lightning
 
-        -   TiDBバックエンドモードのパフォーマンス向上のため、デフォルトで楽観的トランザクションを使用してデータを書き込むようにする [#30953](https://github.com/pingcap/tidb/pull/30953)
+        - TiDBバックエンドモードのパフォーマンス向上のため、デフォルトで楽観的トランザクションを使用してデータを書き込むようにする [#30953](https://github.com/pingcap/tidb/pull/30953)
 
-    -   Dumpling
+    - Dumpling
 
-        -   Dumplingがデータベースのバージョンを確認する際の互換性を改善 [#29500](https://github.com/pingcap/tidb/pull/29500)
-        -   `CREATE DATABASE`と`CREATE TABLE`をダンプする際に、デフォルトの照合順序を追加する [#3420](https://github.com/pingcap/tiflow/issues/3420)
+        - Dumplingがデータベースのバージョンを確認する際の互換性を改善 [#29500](https://github.com/pingcap/tidb/pull/29500)
+        - `CREATE DATABASE`と`CREATE TABLE`をダンプする際に、デフォルトの照合順序を追加する [#3420](https://github.com/pingcap/tiflow/issues/3420)
 
 ## バグ修正 {#bug-fixes}
 
--   TiDB
+- TiDB
 
-    -   クラスターをv4.xからv5.xにアップグレードする際に発生する`tidb_analyze_version`値の変更に関する問題を修正します。 [#25422](https://github.com/pingcap/tidb/issues/25422)
-    -   サブクエリで異なる照合順序を使用した場合に発生する誤った結果の問題を修正しました [#30748](https://github.com/pingcap/tidb/issues/30748)
-    -   TiDB における`concat(ifnull(time(3))`の結果が MySQL における結果と異なる問題を修正しました [#29498](https://github.com/pingcap/tidb/issues/29498)
-    -   楽観的トランザクションモードにおける潜在的なデータインデックスの不整合の問題を修正 [#30410](https://github.com/pingcap/tidb/issues/30410)
-    -   式を TiKV にプッシュダウンできない場合に IndexMerge のクエリ実行計画が誤っている問題を修正しました [#30200](https://github.com/pingcap/tidb/issues/30200)
-    -   同時実行される列型変更によってスキーマとデータの間に不整合が生じる問題を修正します [#31048](https://github.com/pingcap/tidb/issues/31048)
-    -   サブクエリが存在する場合に IndexMerge クエリの結果が間違っている問題を修正しました [#30913](https://github.com/pingcap/tidb/issues/30913)
-    -   クライアントで FetchSize が大きすぎると発生するpanic問題を修正しました [#30896](https://github.com/pingcap/tidb/issues/30896)
-    -   LEFT JOINが誤ってINNER JOINに変換される可能性がある問題を修正しました [#20510](https://github.com/pingcap/tidb/issues/20510)
-    -   `CASE-WHEN`式と照合順序を併用した場合にpanicが発生する可能性がある問題を修正しました [#30245](https://github.com/pingcap/tidb/issues/30245)
-    -   `IN`の値にバイナリ定数が含まれている場合に発生する、誤ったクエリ結果の問題を修正しました [#31261](https://github.com/pingcap/tidb/issues/31261)
-    -   CTEにサブクエリがある場合に発生する、誤ったクエリ結果の問題を修正しました [#31255](https://github.com/pingcap/tidb/issues/31255)
-    -   `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE`ステートメントを実行するとpanicが発生する問題を修正しました [#28078](https://github.com/pingcap/tidb/issues/28078)
-    -   INDEX HASH JOIN が`send on closed channel`エラーを返す問題を修正します [#31129](https://github.com/pingcap/tidb/issues/31129)
+    - クラスターをv4.xからv5.xにアップグレードする際に発生する`tidb_analyze_version`値の変更に関する問題を修正します。 [#25422](https://github.com/pingcap/tidb/issues/25422)
+    - サブクエリで異なる照合順序を使用した場合に発生する誤った結果の問題を修正しました [#30748](https://github.com/pingcap/tidb/issues/30748)
+    - TiDB における`concat(ifnull(time(3))`の結果が MySQL における結果と異なる問題を修正しました [#29498](https://github.com/pingcap/tidb/issues/29498)
+    - 楽観的トランザクションモードにおける潜在的なデータインデックスの不整合の問題を修正 [#30410](https://github.com/pingcap/tidb/issues/30410)
+    - 式を TiKV にプッシュダウンできない場合に IndexMerge のクエリ実行計画が誤っている問題を修正しました [#30200](https://github.com/pingcap/tidb/issues/30200)
+    - 同時実行される列型変更によってスキーマとデータの間に不整合が生じる問題を修正します [#31048](https://github.com/pingcap/tidb/issues/31048)
+    - サブクエリが存在する場合に IndexMerge クエリの結果が間違っている問題を修正しました [#30913](https://github.com/pingcap/tidb/issues/30913)
+    - クライアントで FetchSize が大きすぎると発生するpanic問題を修正しました [#30896](https://github.com/pingcap/tidb/issues/30896)
+    - LEFT JOINが誤ってINNER JOINに変換される可能性がある問題を修正しました [#20510](https://github.com/pingcap/tidb/issues/20510)
+    - `CASE-WHEN`式と照合順序を併用した場合にpanicが発生する可能性がある問題を修正しました [#30245](https://github.com/pingcap/tidb/issues/30245)
+    - `IN`の値にバイナリ定数が含まれている場合に発生する、誤ったクエリ結果の問題を修正しました [#31261](https://github.com/pingcap/tidb/issues/31261)
+    - CTEにサブクエリがある場合に発生する、誤ったクエリ結果の問題を修正しました [#31255](https://github.com/pingcap/tidb/issues/31255)
+    - `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE`ステートメントを実行するとpanicが発生する問題を修正しました [#28078](https://github.com/pingcap/tidb/issues/28078)
+    - INDEX HASH JOIN が`send on closed channel`エラーを返す問題を修正します [#31129](https://github.com/pingcap/tidb/issues/31129)
 
--   TiKV
+- TiKV
 
-    -   MVCC削除レコードがGCによってクリアされない問題を修正しました [#11217](https://github.com/tikv/tikv/issues/11217)
-    -   悲観的トランザクションモードでプリライト要求を再試行すると、まれにデータ不整合のリスクが発生する可能性がある問題を修正しました [#11187](https://github.com/tikv/tikv/issues/11187)
-    -   GCスキャンによってメモリオーバーフローが発生する問題を修正 [#11410](https://github.com/tikv/tikv/issues/11410)
-    -   RocksDBのフラッシュまたは圧縮時にディスク容量がいっぱいになったときにpanicが発生する問題を修正 [#11224](https://github.com/tikv/tikv/issues/11224)
+    - MVCC削除レコードがGCによってクリアされない問題を修正しました [#11217](https://github.com/tikv/tikv/issues/11217)
+    - 悲観的トランザクションモードでプリライト要求を再試行すると、まれにデータ不整合のリスクが発生する可能性がある問題を修正しました [#11187](https://github.com/tikv/tikv/issues/11187)
+    - GCスキャンによってメモリオーバーフローが発生する問題を修正 [#11410](https://github.com/tikv/tikv/issues/11410)
+    - RocksDBのフラッシュまたは圧縮時にディスク容量がいっぱいになったときにpanicが発生する問題を修正 [#11224](https://github.com/tikv/tikv/issues/11224)
 
--   PD
+- PD
 
-    -   リージョン統計が`flow-round-by-digit`の影響を受けない問題を修正します [#4295](https://github.com/tikv/pd/issues/4295)
-    -   ターゲットストアがダウンしているため、スケジューリング演算子が迅速に失敗できない問題を修正します [#3353](https://github.com/tikv/pd/issues/3353)
-    -   オフラインストアのリージョンをマージできない問題を修正 [#4119](https://github.com/tikv/pd/issues/4119)
-    -   コールドホットスポットのデータがホットスポット統計から削除できない問題を修正しました [#4390](https://github.com/tikv/pd/issues/4390)
+    - リージョン統計が`flow-round-by-digit`の影響を受けない問題を修正します [#4295](https://github.com/tikv/pd/issues/4295)
+    - ターゲットストアがダウンしているため、スケジューリング演算子が迅速に失敗できない問題を修正します [#3353](https://github.com/tikv/pd/issues/3353)
+    - オフラインストアのリージョンをマージできない問題を修正 [#4119](https://github.com/tikv/pd/issues/4119)
+    - コールドホットスポットのデータがホットスポット統計から削除できない問題を修正しました [#4390](https://github.com/tikv/pd/issues/4390)
 
--   TiFlash
+- TiFlash
 
-    -   MPPクエリが停止した際にTiFlashがpanicする可能性がある問題を修正しました。
-    -   `where <string>`句を含むクエリが誤った結果を返す問題を修正しました。
-    -   整数型の主キーの列型をより広い範囲に設定した場合に発生する可能性のあるデータ不整合の問題を修正します。
-    -   入力時刻が 1970-01-01 00:00:01 UTC より前の場合に`unix_timestamp`の動作が TiDB または MySQL の動作と一致しない問題を修正します。
-    -   TiFlashを再起動した後に`EstablishMPPConnection`エラーが返される可能性がある問題を修正しました。
-    -   TiFlashとTiDB/TiKVで`CastStringAsDecimal`の動作が一貫していない問題を修正します。
-    -   クエリ結果で`DB::Exception: Encode type of coprocessor response is not CHBlock`エラーが返される問題を修正します。
-    -   TiFlashとTiDB/TiKVで`castStringAsReal`の動作が一貫していない問題を修正します。
-    -   TiFlashの`date_add_string_xxx`関数の戻り値が MySQL の戻り値と一致しない問題を修正します。
+    - MPPクエリが停止した際にTiFlashがpanicする可能性がある問題を修正しました。
+    - `where <string>`句を含むクエリが誤った結果を返す問題を修正しました。
+    - 整数型の主キーの列型をより広い範囲に設定した場合に発生する可能性のあるデータ不整合の問題を修正します。
+    - 入力時刻が 1970-01-01 00:00:01 UTC より前の場合に`unix_timestamp`の動作が TiDB または MySQL の動作と一致しない問題を修正します。
+    - TiFlashを再起動した後に`EstablishMPPConnection`エラーが返される可能性がある問題を修正しました。
+    - TiFlashとTiDB/TiKVで`CastStringAsDecimal`の動作が一貫していない問題を修正します。
+    - クエリ結果で`DB::Exception: Encode type of coprocessor response is not CHBlock`エラーが返される問題を修正します。
+    - TiFlashとTiDB/TiKVで`castStringAsReal`の動作が一貫していない問題を修正します。
+    - TiFlashの`date_add_string_xxx`関数の戻り値が MySQL の戻り値と一致しない問題を修正します。
 
--   ツール
+- ツール
 
-    -   Backup & Restore (BR)
+    - Backup & Restore (BR)
 
-        -   リストア操作完了後にリージョン分布が不均一になる可能性がある問題を修正 [#30425](https://github.com/pingcap/tidb/issues/30425)
-        -   `'/'`バックアップストレージとして使用している場合、エンドポイントで`minio`を指定できない問題を修正しました [#30104](https://github.com/pingcap/tidb/issues/30104)
-        -   システムテーブルの同時バックアップによってテーブル名の更新が失敗し、システムテーブルを復元できない問題を修正しました [#29710](https://github.com/pingcap/tidb/issues/29710)
+        - リストア操作完了後にリージョン分布が不均一になる可能性がある問題を修正 [#30425](https://github.com/pingcap/tidb/issues/30425)
+        - `'/'`バックアップストレージとして使用している場合、エンドポイントで`minio`を指定できない問題を修正しました [#30104](https://github.com/pingcap/tidb/issues/30104)
+        - システムテーブルの同時バックアップによってテーブル名の更新が失敗し、システムテーブルを復元できない問題を修正しました [#29710](https://github.com/pingcap/tidb/issues/29710)
 
-    -   TiCDC
+    - TiCDC
 
-        -   `min.insync.replicas`が`replication-factor`より小さい場合にレプリケーションが実行できない問題を修正します [#3994](https://github.com/pingcap/tiflow/issues/3994)
-        -   `cached region`モニタリングメトリックが負の値になる問題を修正しました [#4300](https://github.com/pingcap/tiflow/issues/4300)
-        -   `mq sink write row`に監視データがない問題を修正 [#3431](https://github.com/pingcap/tiflow/issues/3431)
-        -   `sql mode`の互換性の問題を修正しました [#3810](https://github.com/pingcap/tiflow/issues/3810)
-        -   レプリケーションタスクが削除された際に発生する可能性のあるpanic問題を修正 [#3128](https://github.com/pingcap/tiflow/issues/3128)
-        -   デフォルト列値を出力する際に​​発生するpanicとデータ不整合の問題を修正しました [#3929](https://github.com/pingcap/tiflow/issues/3929)
-        -   デフォルト値が複製できない問題を修正 [#3793](https://github.com/pingcap/tiflow/issues/3793)
-        -   デッドロックによってレプリケーションタスクが停止する可能性のある問題を修正します [#4055](https://github.com/pingcap/tiflow/issues/4055)
-        -   ディスクへの書き込みが完了した際にログが出力されない問題を修正 [#3362](https://github.com/pingcap/tiflow/issues/3362)
-        -   DDLステートメント内の特殊コメントがレプリケーションタスクの停止を引き起こす問題を修正 [#3755](https://github.com/pingcap/tiflow/issues/3755)
-        -   RHEL リリースにおいて、タイムゾーンの問題によりサービスを開始できない問題を修正しました。 [#3584](https://github.com/pingcap/tiflow/issues/3584)
-        -   不正確なチェックポイントによって引き起こされる可能性のあるデータ損失の問題を修正しました [#3545](https://github.com/pingcap/tiflow/issues/3545)
-        -   コンテナ環境におけるOOM問題を修正 [#1798](https://github.com/pingcap/tiflow/issues/1798)
-        -   `config.Metadata.Timeout`の設定ミスが原因で発生するレプリケーション停止の問題を修正します [#3352](https://github.com/pingcap/tiflow/issues/3352)
+        - `min.insync.replicas`が`replication-factor`より小さい場合にレプリケーションが実行できない問題を修正します [#3994](https://github.com/pingcap/tiflow/issues/3994)
+        - `cached region`モニタリングメトリックが負の値になる問題を修正しました [#4300](https://github.com/pingcap/tiflow/issues/4300)
+        - `mq sink write row`に監視データがない問題を修正 [#3431](https://github.com/pingcap/tiflow/issues/3431)
+        - `sql mode`の互換性の問題を修正しました [#3810](https://github.com/pingcap/tiflow/issues/3810)
+        - レプリケーションタスクが削除された際に発生する可能性のあるpanic問題を修正 [#3128](https://github.com/pingcap/tiflow/issues/3128)
+        - デフォルト列値を出力する際に​​発生するpanicとデータ不整合の問題を修正しました [#3929](https://github.com/pingcap/tiflow/issues/3929)
+        - デフォルト値が複製できない問題を修正 [#3793](https://github.com/pingcap/tiflow/issues/3793)
+        - デッドロックによってレプリケーションタスクが停止する可能性のある問題を修正します [#4055](https://github.com/pingcap/tiflow/issues/4055)
+        - ディスクへの書き込みが完了した際にログが出力されない問題を修正 [#3362](https://github.com/pingcap/tiflow/issues/3362)
+        - DDLステートメント内の特殊コメントがレプリケーションタスクの停止を引き起こす問題を修正 [#3755](https://github.com/pingcap/tiflow/issues/3755)
+        - RHEL リリースにおいて、タイムゾーンの問題によりサービスを開始できない問題を修正しました。 [#3584](https://github.com/pingcap/tiflow/issues/3584)
+        - 不正確なチェックポイントによって引き起こされる可能性のあるデータ損失の問題を修正しました [#3545](https://github.com/pingcap/tiflow/issues/3545)
+        - コンテナ環境におけるOOM問題を修正 [#1798](https://github.com/pingcap/tiflow/issues/1798)
+        - `config.Metadata.Timeout`の設定ミスが原因で発生するレプリケーション停止の問題を修正します [#3352](https://github.com/pingcap/tiflow/issues/3352)
 
-    -   TiDB Data Migration (DM)
+    - TiDB Data Migration (DM)
 
-        -   `CREATE VIEW`ステートメントがデータ複製を中断する問題を修正 [#4173](https://github.com/pingcap/tiflow/issues/4173)
-        -   DDLステートメントがスキップされた後にスキーマをリセットする必要がある問題を修正します [#4177](https://github.com/pingcap/tiflow/issues/4177)
-        -   DDLステートメントがスキップされた後、テーブルチェックポイントが時間内に更新されない問題を修正しました [#4184](https://github.com/pingcap/tiflow/issues/4184)
-        -   TiDBのバージョンとパーサーのバージョン間の互換性の問題を修正しました [#4298](https://github.com/pingcap/tiflow/issues/4298)
-        -   同期メトリクスがステータスを照会した時のみ更新される問題を修正 [#4281](https://github.com/pingcap/tiflow/issues/4281)
+        - `CREATE VIEW`ステートメントがデータ複製を中断する問題を修正 [#4173](https://github.com/pingcap/tiflow/issues/4173)
+        - DDLステートメントがスキップされた後にスキーマをリセットする必要がある問題を修正します [#4177](https://github.com/pingcap/tiflow/issues/4177)
+        - DDLステートメントがスキップされた後、テーブルチェックポイントが時間内に更新されない問題を修正しました [#4184](https://github.com/pingcap/tiflow/issues/4184)
+        - TiDBのバージョンとパーサーのバージョン間の互換性の問題を修正しました [#4298](https://github.com/pingcap/tiflow/issues/4298)
+        - 同期メトリクスがステータスを照会した時のみ更新される問題を修正 [#4281](https://github.com/pingcap/tiflow/issues/4281)
 
-    -   TiDB Lightning
+    - TiDB Lightning
 
-        -   TiDB Lightningが`mysql.tidb`テーブルにアクセスする権限を持たない場合に発生する、インポート結果の誤りに関する問題を修正しました [#31088](https://github.com/pingcap/tidb/issues/31088)
-        -   TiDB Lightningの再起動時に一部のチェックがスキップされる問題を修正しました [#30772](https://github.com/pingcap/tidb/issues/30772)
-        -   S3パスが存在しない場合にTiDB Lightningがエラーを報告しない問題を修正しました [#30674](https://github.com/pingcap/tidb/pull/30674)
+        - TiDB Lightningが`mysql.tidb`テーブルにアクセスする権限を持たない場合に発生する、インポート結果の誤りに関する問題を修正しました [#31088](https://github.com/pingcap/tidb/issues/31088)
+        - TiDB Lightningの再起動時に一部のチェックがスキップされる問題を修正しました [#30772](https://github.com/pingcap/tidb/issues/30772)
+        - S3パスが存在しない場合にTiDB Lightningがエラーを報告しない問題を修正しました [#30674](https://github.com/pingcap/tidb/pull/30674)
 
-    -   TiDB Binlog
+    - TiDB Binlog
 
-        -   `CREATE PLACEMENT POLICY`ステートメントと互換性がないためDrainer が失敗する問題を修正します [#1118](https://github.com/pingcap/tidb-binlog/issues/1118)
+        - `CREATE PLACEMENT POLICY`ステートメントと互換性がないためDrainer が失敗する問題を修正します [#1118](https://github.com/pingcap/tidb-binlog/issues/1118)

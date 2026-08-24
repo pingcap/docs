@@ -214,11 +214,11 @@ SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user W
 
 <CustomContent platform="tidb">
 
--   [TiDB ユーザーアカウント管理](/user-account-management.md)
--   [MySQLとのセキュリティ互換性](/security-compatibility-with-mysql.md)
+- [TiDB ユーザーアカウント管理](/user-account-management.md)
+- [MySQLとのセキュリティ互換性](/security-compatibility-with-mysql.md)
 
 </CustomContent>
 
--   [CREATE USER](/sql-statements/sql-statement-create-user.md)
--   [DROP USER](/sql-statements/sql-statement-drop-user.md)
--   [SHOW CREATE USER](/sql-statements/sql-statement-show-create-user.md)
+- [CREATE USER](/sql-statements/sql-statement-create-user.md)
+- [DROP USER](/sql-statements/sql-statement-drop-user.md)
+- [SHOW CREATE USER](/sql-statements/sql-statement-show-create-user.md)

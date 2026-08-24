@@ -10,8 +10,8 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-langchain/','/ja/tidb/de
 
 > **Note:**
 >
-> -   ベクトル検索機能はパブリックプレビューです。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
-> -   ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)と[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> - ベクトル検索機能はパブリックプレビューです。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> - ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)と[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 > **Tip**
 >
@@ -21,15 +21,15 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-langchain/','/ja/tidb/de
 
 このチュートリアルを完了するには、以下が必要です。
 
--   [Python 3.8以降](https://www.python.org/downloads/)がインストールされていること。
--   [Jupyter Notebook](https://jupyter.org/install)がインストールされていること。
--   [Git](https://git-scm.com/downloads)がインストールされていること。
--   TiDBクラスタ。
+- [Python 3.8以降](https://www.python.org/downloads/)がインストールされていること。
+- [Jupyter Notebook](https://jupyter.org/install)がインストールされていること。
+- [Git](https://git-scm.com/downloads)がインストールされていること。
+- TiDBクラスタ。
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
--   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
 ## さあ始めましょう {#get-started}
 
@@ -72,24 +72,24 @@ from langchain_text_splitters import CharacterTextSplitter
 
 TiDB Cloud Starterインスタンスの場合、接続文字列を取得し、環境変数を設定するには、以下の手順に従ってください。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
+3. 接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **Connection Type**は`Public`に設定されています。
-    -   **Branch**は`main`に設定されています。
-    -   **Connect With**は`SQLAlchemy`に設定されています。
-    -   お使いの環境に合った**Operating System**を選択してください。
+    - **Connection Type**は`Public`に設定されています。
+    - **Branch**は`main`に設定されています。
+    - **Connect With**は`SQLAlchemy`に設定されています。
+    - お使いの環境に合った**Operating System**を選択してください。
 
-4.  **PyMySQL**タブをクリックして、接続文字列をコピーしてください。
+4. **PyMySQL**タブをクリックして、接続文字列をコピーしてください。
 
     > **Tip:**
     >
     > まだパスワードを設定していない場合は、 **Generate Password**をクリックしてランダムなパスワードを生成してください。
 
-5.  環境変数を設定します。
+5. 環境変数を設定します。
 
     このドキュメントでは、埋め込みモデルプロバイダーとして[OpenAI](https://platform.openai.com/docs/introduction)を使用します。この手順では、前の手順で取得した接続文字列と[OpenAI APIキー](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key)を指定する必要があります。
 
@@ -134,11 +134,11 @@ TiDBクラスタに合わせて接続パラメータの値を変更する必要�
 
 各パラメータの説明は以下のとおりです。
 
--   `<USERNAME>` : TiDBに接続するためのユーザー名。
--   `<PASSWORD>` : TiDBに接続するためのパスワード。
--   `<HOST>` : TiDBクラスタのホスト。
--   `<PORT>` : TiDB クラスタのポート。
--   `<DATABASE>` : 接続するデータベースの名前。
+- `<USERNAME>` : TiDBに接続するためのユーザー名。
+- `<PASSWORD>` : TiDBに接続するためのパスワード。
+- `<HOST>` : TiDBクラスタのホスト。
+- `<PORT>` : TiDB クラスタのポート。
+- `<DATABASE>` : 接続するデータベースの名前。
 
 </div>
 
@@ -341,9 +341,9 @@ vector_store.drop_vectorstore()
 
 TiDBベクトルストア内の各ドキュメントには、JSONオブジェクト内のキーと値のペアとして構造化されたメタデータを関連付けることができます。キーは常に文字列であり、値は以下のいずれかの型になります。
 
--   文字列
--   数値：整数または浮動小数点
--   ブール値: `true`または`false`
+- 文字列
+- 数値：整数または浮動小数点
+- ブール値: `true`または`false`
 
 例えば、以下は有効なメタデータペイロードの例です。
 
@@ -358,16 +358,16 @@ TiDBベクトルストア内の各ドキュメントには、JSONオブジェク
 
 利用可能なフィルターは以下のとおりです。
 
--   `$or` : 指定された条件のいずれかに一致するベクトルを選択します。
--   `$and` : 指定されたすべての条件に一致するベクトルを選択します。
--   `$eq` : 指定された値と等しい。
--   `$ne` : 指定された値と等しくありません。
--   `$gt` : 指定された値より大きい。
--   `$gte` : 指定された値以上。
--   `$lt` : 指定された値より小さい。
--   `$lte` : 指定された値以下。
--   `$in` : 指定された値の配列内。
--   `$nin` : 指定された値の配列に含まれていません。
+- `$or` : 指定された条件のいずれかに一致するベクトルを選択します。
+- `$and` : 指定されたすべての条件に一致するベクトルを選択します。
+- `$eq` : 指定された値と等しい。
+- `$ne` : 指定された値と等しくありません。
+- `$gt` : 指定された値より大きい。
+- `$gte` : 指定された値以上。
+- `$lt` : 指定された値より小さい。
+- `$lte` : 指定された値以下。
+- `$in` : 指定された値の配列内。
+- `$nin` : 指定された値の配列に含まれていません。
 
 文書のメタデータが以下のようになっている場合：
 
@@ -465,8 +465,8 @@ TiDB Vector offers advanced, high-speed vector processing capabilities, enhancin
 
 このプロセスは主に2つのステップから構成されます。
 
-1.  空港レビュー全体を対象に意味検索を行い、希望する設備に一致する空港コードを特定します。
-2.  SQLクエリを実行してこれらのコードをルート情報と統合し、ユーザーの好みに合致する航空会社と目的地を強調表示します。
+1. 空港レビュー全体を対象に意味検索を行い、希望する設備に一致する空港コードを特定します。
+2. SQLクエリを実行してこれらのコードをルート情報と統合し、ユーザーの好みに合致する航空会社と目的地を強調表示します。
 
 ### データの準備 {#prepare-data}
 
@@ -630,5 +630,5 @@ vector_store.tidb_vector_client.execute("DROP TABLE airplan_routes")
 
 ## 関連項目 {#see-also}
 
--   [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
--   [ベクトル検索インデックス](/ai/reference/vector-search-index.md)
+- [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
+- [ベクトル検索インデックス](/ai/reference/vector-search-index.md)

@@ -17,17 +17,17 @@ summary: このドキュメントでは、Sink to MySQL changefeed を使用し�
 
 ## 制限 {#restrictions}
 
--   <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>ごとに、最大 100 個の変更フィードを作成できます。
--   TiDB Cloud はTiCDC を使用して変更フィードを確立するため、同じ[TiCDCの制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)があります。
--   複製対象のテーブルに主キーまたはNULLを許容しない一意インデックスがない場合、複製中に一意制約が存在しないことで、一部の再試行シナリオにおいて、下流で重複データが挿入される可能性があります。
+- <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>ごとに、最大 100 個の変更フィードを作成できます。
+- TiDB Cloud はTiCDC を使用して変更フィードを確立するため、同じ[TiCDCの制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)があります。
+- 複製対象のテーブルに主キーまたはNULLを許容しない一意インデックスがない場合、複製中に一意制約が存在しないことで、一部の再試行シナリオにおいて、下流で重複データが挿入される可能性があります。
 
 ## 前提条件 {#prerequisites}
 
 変更フィードを作成する前に、以下の前提条件を満たす必要があります。
 
--   ネットワーク接続を設定する
--   既存データをエクスポートしてMySQLにロードする（オプション）
--   既存のデータをロードせず、増分データのみをMySQLに複製する場合は、MySQLに対応するターゲットテーブルを作成してください。
+- ネットワーク接続を設定する
+- 既存データをエクスポートしてMySQLにロードする（オプション）
+- 既存のデータをロードせず、増分データのみをMySQLに複製する場合は、MySQLに対応するターゲットテーブルを作成してください。
 
 ### ネットワーク {#network}
 
@@ -40,22 +40,22 @@ TiDB Cloud Dedicatedクラスターが MySQL サービスに接続できるこ�
 
 MySQLサービスがパブリックインターネットアクセスを持たないAWS VPC内にある場合は、以下の手順を実行してください。
 
-1.  MySQL サービスの VPC とTiDB Cloud Dedicatedクラスターの間で[VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
+1. MySQL サービスの VPC とTiDB Cloud Dedicatedクラスターの間で[VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
 
-2.  MySQLサービスが関連付けられているセキュリティグループの受信ルールを変更します。
+2. MySQLサービスが関連付けられているセキュリティグループの受信ルールを変更します。
 
     [TiDB Cloud Dedicatedクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)受信ルールに追加する必要があります。これにより、 TiDB Cloud Dedicatedクラスターから MySQL インスタンスにトラフィックが流れるようになります。
 
-3.  MySQLのURLにホスト名が含まれている場合、 TiDB CloudがMySQLサービスのDNSホスト名を解決できるようにする必要があります。
+3. MySQLのURLにホスト名が含まれている場合、 TiDB CloudがMySQLサービスのDNSホスト名を解決できるようにする必要があります。
 
-    1.  [VPCピアリング接続のDNS解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
-    2.  **Accepter DNS resolution**オプションを有効にする。
+    1. [VPCピアリング接続のDNS解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
+    2. **Accepter DNS resolution**オプションを有効にする。
 
 MySQL サービスがパブリック インターネット アクセスのない Google Cloud VPC 内にある場合は、以下の手順を実行してください。
 
-1.  MySQL サービスが Google Cloud SQL の場合、Google Cloud SQL インスタンスに関連付けられた VPC に MySQL エンドポイントを公開する必要があります。Cloud [**Cloud SQL Auth proxy**](https://cloud.google.com/sql/docs/mysql/sql-proxy)を使用する必要がある場合があります。これは Google によって開発されています。
-2.  MySQL サービスの VPC とTiDB Cloud Dedicatedクラスターの間で[VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
-3.  MySQLが配置されているVPCの受信ファイアウォールルールを変更します。
+1. MySQL サービスが Google Cloud SQL の場合、Google Cloud SQL インスタンスに関連付けられた VPC に MySQL エンドポイントを公開する必要があります。Cloud [**Cloud SQL Auth proxy**](https://cloud.google.com/sql/docs/mysql/sql-proxy)を使用する必要がある場合があります。これは Google によって開発されています。
+2. MySQL サービスの VPC とTiDB Cloud Dedicatedクラスターの間で[VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
+3. MySQLが配置されているVPCの受信ファイアウォールルールを変更します。
 
     [TiDB Cloud Dedicatedクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)イングレス ファイアウォール ルールに追加する必要があります。これにより、トラフィックがTiDB Cloud Dedicatedクラスターから MySQL エンドポイントに流れるようになります。
 
@@ -98,10 +98,10 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
 
 既存のデータを読み込むには：
 
-1.  [`tidb_gc_life_time`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)以下の 2 つの操作の合計時間よりも長く設定することで、その期間中の履歴データが TiDB によってガベージ コレクションされないようにします。
+1. [`tidb_gc_life_time`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)以下の 2 つの操作の合計時間よりも長く設定することで、その期間中の履歴データが TiDB によってガベージ コレクションされないようにします。
 
-    -   既存データのエクスポートとインポートにかかる時間
-    -   **Sink to MySQL**を作成する時間
+    - 既存データのエクスポートとインポートにかかる時間
+    - **Sink to MySQL**を作成する時間
 
     例えば：
 
@@ -109,9 +109,9 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
     SET GLOBAL tidb_gc_life_time = '720h';
     ```
 
-2.  [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用して<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>インスタンスからデータをエクスポートし、 [mydumper/myloader](https://centminmod.com/mydumper.html)などのコミュニティ ツールを使用してデータを MySQL サービスにロードします。
+2. [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用して<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>インスタンスからデータをエクスポートし、 [mydumper/myloader](https://centminmod.com/mydumper.html)などのコミュニティ ツールを使用してデータを MySQL サービスにロードします。
 
-3.  [Dumplingのエクスポートファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)のメタデータ ファイルから MySQL シンクの開始位置を取得します。
+3. [Dumplingのエクスポートファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)のメタデータ ファイルから MySQL シンクの開始位置を取得します。
 
     以下はメタデータファイルの例の一部です。 `Pos`の`SHOW MASTER STATUS`は、既存データの TSO であり、MySQL シンクの開始位置でもあります。
 
@@ -131,50 +131,50 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
 
 前提条件を満たしたら、データをMySQLに取り込むことができます。
 
-1.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の概要ページに移動し、左側のナビゲーション ペインで**Data** &gt; **Changefeed**をクリックします。
+1. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の概要ページに移動し、左側のナビゲーション ペインで**Data** &gt; **Changefeed**をクリックします。
 
-2.  **Create Changefeed**をクリックし、**宛先**として**MySQL**を選択します。
+2. **Create Changefeed**をクリックし、**宛先**として**MySQL**を選択します。
 
-3.  **Connectivity Method**で、MySQLサービスへの接続方法を選択してください。
+3. **Connectivity Method**で、MySQLサービスへの接続方法を選択してください。
 
-    -   **VPC Peering**または**Public IP**を選択した場合は、MySQLエンドポイントを入力してください。
-    -   **Private Link**を選択した場合は、[ネットワーク](#network)セクションで作成したプライベートエンドポイントを選択し、MySQLサービスのMySQLポートを入力してください。
+    - **VPC Peering**または**Public IP**を選択した場合は、MySQLエンドポイントを入力してください。
+    - **Private Link**を選択した場合は、[ネットワーク](#network)セクションで作成したプライベートエンドポイントを選択し、MySQLサービスのMySQLポートを入力してください。
 
-4.  **Authentication**欄に、MySQLサービスのユーザー名とパスワードを入力してください。
+4. **Authentication**欄に、MySQLサービスのユーザー名とパスワードを入力してください。
 
-5.  **Next**をクリックして、TiDBがMySQLに正常に接続できるかどうかをテストしてください。
+5. **Next**をクリックして、TiDBがMySQLに正常に接続できるかどうかをテストしてください。
 
-    -   はいの場合、次の設定手順に進みます。
-    -   そうでない場合は、接続エラーが表示されますので、エラーを処理してください。エラーが解決したら、もう一度**Next**をクリックしてください。
+    - はいの場合、次の設定手順に進みます。
+    - そうでない場合は、接続エラーが表示されますので、エラーを処理してください。エラーが解決したら、もう一度**Next**をクリックしてください。
 
-6.  **Table Filter**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、[テーブルフィルタルール](/table-filter.md)を参照してください。
+6. **Table Filter**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、[テーブルフィルタルール](/table-filter.md)を参照してください。
 
-    -   **Case Sensitive**：フィルタルールにおけるデータベース名とテーブル名の照合において、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
-    -   **Filter Rules**：この列でフィルタルールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加すると、 TiDB Cloud はTiDB 内のすべてのテーブルをクエリし、右側のボックスにルールに一致するテーブルのみを表示します。フィルタルールは最大 100 個まで追加できます。
-    -   **Tables with valid keys**：この列には、主キーや一意インデックスなど、有効なキーを持つテーブルが表示されます。
-    -   **Tables without valid keys**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、ダウンストリームが重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタルールを追加してこれらのテーブルを除外することもできます。たとえば、ルール`test.tbl1`を使用して、テーブル`"!test.tbl1"`除外できます。
+    - **Case Sensitive**：フィルタルールにおけるデータベース名とテーブル名の照合において、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
+    - **Filter Rules**：この列でフィルタルールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加すると、 TiDB Cloud はTiDB 内のすべてのテーブルをクエリし、右側のボックスにルールに一致するテーブルのみを表示します。フィルタルールは最大 100 個まで追加できます。
+    - **Tables with valid keys**：この列には、主キーや一意インデックスなど、有効なキーを持つテーブルが表示されます。
+    - **Tables without valid keys**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、ダウンストリームが重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタルールを追加してこれらのテーブルを除外することもできます。たとえば、ルール`test.tbl1`を使用して、テーブル`"!test.tbl1"`除外できます。
 
-7.  **Event Filter**をカスタマイズして、複製したいイベントを絞り込みます。
+7. **Event Filter**をカスタマイズして、複製したいイベントを絞り込みます。
 
-    -   **Tables matching**：この列では、イベントフィルターを適用するテーブルを設定できます。ルールの構文は、前の**Table Filter**領域で使用されているものと同じです。変更フィードごとに最大10個のイベントフィルタールールを追加できます。
-    -   **Event Filter**：以下のイベントフィルターを使用して、変更フィードから特定のイベントを除外できます。
-        -   **Ignore event**：指定されたイベントタイプを除外します。
-        -   **Ignore SQL**: 指定された式に一致する DDL イベントを除外します。たとえば、 `^drop` `DROP`で始まるステートメントを除外し、 `add column`は`ADD COLUMN`を含むステートメントを除外します。
-        -   **Ignore insert value expression**: 特定の条件を満たす`INSERT`ステートメントを除外します。たとえば、 `id >= 100`は、 `INSERT`が 100 以上である`id`ステートメントを除外します。
-        -   **新しい値の更新式を無視する**: 新しい値が指定された条件に一致する`UPDATE`ステートメントを除外します。たとえば、 `gender = 'male'`は`gender`が`male`になるような更新を除外します。
-        -   **古い値の更新を無視する式**: 古い値が指定された条件に一致する`UPDATE`ステートメントを除外します。たとえば、 `age < 18` `age`の古い値が 18 未満である場合の更新を除外します。
-        -   **Ignore delete value expression**: 指定された条件を満たす`DELETE`ステートメントを除外します。たとえば、 `name = 'john'`は`DELETE`が`name`である`'john'`ステートメントを除外します。
+    - **Tables matching**：この列では、イベントフィルターを適用するテーブルを設定できます。ルールの構文は、前の**Table Filter**領域で使用されているものと同じです。変更フィードごとに最大10個のイベントフィルタールールを追加できます。
+    - **Event Filter**：以下のイベントフィルターを使用して、変更フィードから特定のイベントを除外できます。
+        - **Ignore event**：指定されたイベントタイプを除外します。
+        - **Ignore SQL**: 指定された式に一致する DDL イベントを除外します。たとえば、 `^drop` `DROP`で始まるステートメントを除外し、 `add column`は`ADD COLUMN`を含むステートメントを除外します。
+        - **Ignore insert value expression**: 特定の条件を満たす`INSERT`ステートメントを除外します。たとえば、 `id >= 100`は、 `INSERT`が 100 以上である`id`ステートメントを除外します。
+        - **新しい値の更新式を無視する**: 新しい値が指定された条件に一致する`UPDATE`ステートメントを除外します。たとえば、 `gender = 'male'`は`gender`が`male`になるような更新を除外します。
+        - **古い値の更新を無視する式**: 古い値が指定された条件に一致する`UPDATE`ステートメントを除外します。たとえば、 `age < 18` `age`の古い値が 18 未満である場合の更新を除外します。
+        - **Ignore delete value expression**: 指定された条件を満たす`DELETE`ステートメントを除外します。たとえば、 `name = 'john'`は`DELETE`が`name`である`'john'`ステートメントを除外します。
 
-8.  **Start Replication Position**で、MySQLシンクの開始位置を設定します。
+8. **Start Replication Position**で、MySQLシンクの開始位置を設定します。
 
-    -   Dumplingを使用して[既存のデータをロードした](#load-existing-data-optional)場合は、 **[特定の TSO からレプリケーションを開始する]**を選択し、 Dumpling のエクスポートされたメタデータ ファイルから取得した TSO を入力します。
-    -   アップストリームの TiDB にデータがない場合は、 **Start replication from now on**を選択してください。
-    -   それ以外の場合は、 **Start replication from a specific time**を選択して、開始時刻をカスタマイズできます。
+    - Dumplingを使用して[既存のデータをロードした](#load-existing-data-optional)場合は、 **[特定の TSO からレプリケーションを開始する]**を選択し、 Dumpling のエクスポートされたメタデータ ファイルから取得した TSO を入力します。
+    - アップストリームの TiDB にデータがない場合は、 **Start replication from now on**を選択してください。
+    - それ以外の場合は、 **Start replication from a specific time**を選択して、開始時刻をカスタマイズできます。
 
-9.  **Next**をクリックして、変更フィードの仕様を設定してください。
+9. **Next**をクリックして、変更フィードの仕様を設定してください。
 
-    -   **Changefeed Specification**領域で、チェンジフィードで使用する<CustomContent plan="dedicated">複製容量単位（RCU）</CustomContent>チェンジフィード<CustomContent plan="premium">チェンジフィード容量ユニット（CCU）</CustomContent>の数を指定します。
-    -   **Changefeed Name**欄に、変更フィードの名前を指定します。
+    - **Changefeed Specification**領域で、チェンジフィードで使用する<CustomContent plan="dedicated">複製容量単位（RCU）</CustomContent>チェンジフィード<CustomContent plan="premium">チェンジフィード容量ユニット（CCU）</CustomContent>の数を指定します。
+    - **Changefeed Name**欄に、変更フィードの名前を指定します。
 
 10. **Next**をクリックして、変更フィードの設定を確認してください。
 

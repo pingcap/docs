@@ -10,13 +10,13 @@ aliases: ['/ja/tidb/stable/vector-search-full-text-search-python/','/ja/tidbclou
 
 TiDBの全文検索機能は、以下の機能を提供します。
 
--   **テキストデータを直接クエリする**：埋め込み処理を行わずに、任意の文字列列を直接検索できます。
+- **テキストデータを直接クエリする**：埋め込み処理を行わずに、任意の文字列列を直接検索できます。
 
--   **多言語対応**：高品質な検索のために言語を指定する必要はありません。TiDBは、同じテーブルに保存された複数の言語のドキュメントをサポートし、各ドキュメントに最適なテキストアナラ​​イザーを自動的に選択します。
+- **多言語対応**：高品質な検索のために言語を指定する必要はありません。TiDBは、同じテーブルに保存された複数の言語のドキュメントをサポートし、各ドキュメントに最適なテキストアナラ​​イザーを自動的に選択します。
 
--   **関連性順に並べる**: 広く採用されている[BM25ランキング](https://en.wikipedia.org/wiki/Okapi_BM25)アルゴリズムを使用して、検索結果を関連性順に並べ替えることができます。
+- **関連性順に並べる**: 広く採用されている[BM25ランキング](https://en.wikipedia.org/wiki/Okapi_BM25)アルゴリズムを使用して、検索結果を関連性順に並べ替えることができます。
 
--   **SQLとの完全な互換性**：事前フィルタリング、事後フィルタリング、グループ化、結合など、すべてのSQL機能を全文検索で使用できます。
+- **SQLとの完全な互換性**：事前フィルタリング、事後フィルタリング、グループ化、結合など、すべてのSQL機能を全文検索で使用できます。
 
 > **Tip:**
 >
@@ -28,7 +28,7 @@ TiDBの全文検索機能は、以下の機能を提供します。
 
 全文検索機能はまだ開発初期段階にあり、より多くのお客様に順次展開していく予定です。現在、全文検索機能は、以下のリージョンにおけるTiDB Cloud Starterでのみご利用いただけます。
 
--   AWS: `Oregon (us-west-2)` 、 `N. Virginia (us-east-1)` 、 `Tokyo (ap-northeast-1)` 、 `Frankfurt (eu-central-1)` 、および`Singapore (ap-southeast-1)`
+- AWS: `Oregon (us-west-2)` 、 `N. Virginia (us-east-1)` 、 `Tokyo (ap-northeast-1)` 、 `Frankfurt (eu-central-1)` 、および`Singapore (ap-southeast-1)`
 
 このチュートリアルを完了するには、サポートされているリージョンにTiDB Cloud Starterインスタンスがあることを確認してください。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
@@ -66,9 +66,9 @@ db = TiDBClient.connect(
 
 これらの接続パラメータは、次のように[TiDB Cloudコンソール](https://tidbcloud.com)から取得できます。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
+2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
 
     例えば、接続パラメータが以下のように表示される場合：
 
@@ -99,9 +99,9 @@ db = TiDBClient.connect(
 
 例として、 `chunks`という名前のテーブルを作成し、以下の列を追加します。
 
--   `id` (int): チャンクのID。
--   `text` (テキスト): チャンクのテキストコンテンツ。
--   `user_id` (int): チャンクを作成したユーザーのID。
+- `id` (int): チャンクのID。
+- `text` (テキスト): チャンクのテキストコンテンツ。
+- `user_id` (int): チャンクを作成したユーザーのID。
 
 ```python
 from pytidb.schema import TableModel, Field
@@ -151,13 +151,13 @@ df = (
 
 ## 関連項目 {#see-also}
 
--   [pytidb Python SDK ドキュメント](https://github.com/pingcap/pytidb)
+- [pytidb Python SDK ドキュメント](https://github.com/pingcap/pytidb)
 
--   [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)
+- [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)
 
 ## フィードバックとヘルプ {#feedback-x26-help}
 
 全文検索はまだ開発初期段階であり、利用できる地域が限られています。まだ利用できない地域で全文検索を試してみたい場合、またはご意見やご質問がある場合は、お気軽にお問い合わせください。
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)

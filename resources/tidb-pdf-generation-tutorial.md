@@ -17,19 +17,19 @@ summary: 特定のシナリオのニーズに合わせて、TiDB ドキュメン
 
 次の手順では、Docker Desktop のインストールとして macOS または Windows を例に説明します。
 
-1.  [Dockerデスクトップ](https://docs.docker.com/get-docker/)をインストールします。
+1. [Dockerデスクトップ](https://docs.docker.com/get-docker/)をインストールします。
 
-2.  macOS ターミナルまたは Windows PowerShell で`docker --version`コマンドを実行します。
+2. macOS ターミナルまたは Windows PowerShell で`docker --version`コマンドを実行します。
 
     Docker のバージョン情報が表示されれば、インストールは成功です。
 
-3.  Docker リソースを構成します。
+3. Docker リソースを構成します。
 
-    1.  Docker アプリケーションを起動し、右上隅にある歯車アイコンをクリックします。
+    1. Docker アプリケーションを起動し、右上隅にある歯車アイコンをクリックします。
 
-    2.  **[リソース]**をクリックし、**メモリ**を`8.00 GB`に設定します。
+    2. **[リソース]**をクリックし、**メモリ**を`8.00 GB`に設定します。
 
-4.  macOS ターミナルまたは Windows PowerShell で次のコマンドを実行して、TiDB PDF ドキュメントの構築に使用される Docker イメージをプルします。
+4. macOS ターミナルまたは Windows PowerShell で次のコマンドを実行して、TiDB PDF ドキュメントの構築に使用される Docker イメージをプルします。
 
     ```bash
     docker pull andelf/doc-build:0.1.9
@@ -43,19 +43,19 @@ TiDB 英語ドキュメントリポジトリ: [https://github.com/pingcap/docs](
 
 次の手順では、TiDB の英語ドキュメントを例にして、リポジトリのクローンを作成する方法を説明します。
 
-1.  TiDB 英語ドキュメント リポジトリに移動します: [https://github.com/pingcap/docs](https://github.com/pingcap/docs) 。
+1. TiDB 英語ドキュメント リポジトリに移動します: [https://github.com/pingcap/docs](https://github.com/pingcap/docs) 。
 
-2.  右上隅の[**フォーク**](https://github.com/pingcap/docs/fork)クリックし、フォークが完了するまで待ちます。
+2. 右上隅の[**フォーク**](https://github.com/pingcap/docs/fork)クリックし、フォークが完了するまで待ちます。
 
-3.  次のいずれかの方法を使用して、TiDB ドキュメント リポジトリをローカルに複製します。
+3. 次のいずれかの方法を使用して、TiDB ドキュメント リポジトリをローカルに複製します。
 
-    -   方法 1: GitHub デスクトップ クライアントを使用します。
+    - 方法 1: GitHub デスクトップ クライアントを使用します。
 
-        1.  [GitHubデスクトップ](https://desktop.github.com/)をインストールして起動します。
-        2.  GitHub Desktop で、 **File** &gt; **Clone Repository**をクリックします。
-        3.  **GitHub.com**タブをクリックし、 **Your Repositories**でフォークしたリポジトリを選択して、右下隅の**Clone**をクリックします。
+        1. [GitHubデスクトップ](https://desktop.github.com/)をインストールして起動します。
+        2. GitHub Desktop で、 **File** &gt; **Clone Repository**をクリックします。
+        3. **GitHub.com**タブをクリックし、 **Your Repositories**でフォークしたリポジトリを選択して、右下隅の**Clone**をクリックします。
 
-    -   方法 2: 次の Git コマンドを使用します。
+    - 方法 2: 次の Git コマンドを使用します。
 
         ```shell
         cd $working_dir # Replace `$working_dir` with the directory where you want the repository to be placed. For example, `cd ~/Documents/GitHub`
@@ -70,18 +70,18 @@ TiDB 英語ドキュメントリポジトリ: [https://github.com/pingcap/docs](
 
 > 推定時間: 以下の操作には 2 分しかかかりませんが、PDF の生成には 0.5 ～ 1 時間かかります。
 
-1.  ローカルの TiDB ドキュメント リポジトリ内のファイルが、アップストリーム GitHub リポジトリの最新バージョンであることを確認します。
+1. ローカルの TiDB ドキュメント リポジトリ内のファイルが、アップストリーム GitHub リポジトリの最新バージョンであることを確認します。
 
-2.  必要に応じて、TiDB ドキュメントの内容を並べ替えたり削除したりします。
+2. 必要に応じて、TiDB ドキュメントの内容を並べ替えたり削除したりします。
 
-    1.  ローカル リポジトリのルート ディレクトリにある`TOC.md`ファイルを開きます。
-    2.  `TOC.md`ファイルを編集します。例えば、不要なドキュメントの章のタイトルとリンクをすべて削除できます。
+    1. ローカル リポジトリのルート ディレクトリにある`TOC.md`ファイルを開きます。
+    2. `TOC.md`ファイルを編集します。例えば、不要なドキュメントの章のタイトルとリンクをすべて削除できます。
 
-3.  `TOC.md`ファイルに従って、すべてのドキュメントの章を 1 つの Markdown ファイルに統合します。
+3. `TOC.md`ファイルに従って、すべてのドキュメントの章を 1 つの Markdown ファイルに統合します。
 
-    1.  Docker アプリケーションを起動します。
+    1. Docker アプリケーションを起動します。
 
-    2.  PDF ドキュメントのビルド用の Docker イメージを実行するには、macOS ターミナルまたは Windows PowerShell で次のコマンドを実行します。
+    2. PDF ドキュメントのビルド用の Docker イメージを実行するには、macOS ターミナルまたは Windows PowerShell で次のコマンドを実行します。
 
         ```bash
         docker run -it -v ${doc-path}:/opt/data andelf/doc-build:0.1.9
@@ -95,13 +95,13 @@ TiDB 英語ドキュメントリポジトリ: [https://github.com/pingcap/docs](
 
         実行後、 `WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested`が返された場合は無視できます。
 
-    3.  `opt/data`ディレクトリに移動します。
+    3. `opt/data`ディレクトリに移動します。
 
         ```bash
         cd /opt/data
         ```
 
-    4.  `TOC.md`に従って、すべての Markdown ドキュメント ファイルを`doc.md`ファイルに統合します。
+    4. `TOC.md`に従って、すべての Markdown ドキュメント ファイルを`doc.md`ファイルに統合します。
 
         ```bash
         python3 scripts/merge_by_toc.py
@@ -111,7 +111,7 @@ TiDB 英語ドキュメントリポジトリ: [https://github.com/pingcap/docs](
 
         `TOC.md`と同じフォルダーに、新しく生成された`doc.md`ファイルが表示されます。
 
-4.  PDF ドキュメントを生成します:
+4. PDF ドキュメントを生成します:
 
     ```bash
     bash scripts/generate_pdf.sh

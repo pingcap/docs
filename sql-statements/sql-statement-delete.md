@@ -57,7 +57,7 @@ TiDBの`DELETE`文はMySQLと完全に互換性があります。互換性に違
 
 ## 参照 {#see-also}
 
--   [INSERT](/sql-statements/sql-statement-insert.md)
--   [SELECT](/sql-statements/sql-statement-select.md)
--   [UPDATE](/sql-statements/sql-statement-update.md)
--   [REPLACE](/sql-statements/sql-statement-replace.md)
+- [INSERT](/sql-statements/sql-statement-insert.md)
+- [SELECT](/sql-statements/sql-statement-select.md)
+- [UPDATE](/sql-statements/sql-statement-update.md)
+- [REPLACE](/sql-statements/sql-statement-replace.md)

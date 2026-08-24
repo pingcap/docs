@@ -127,118 +127,118 @@ scrape_configs:
 
 `tidb-lightning`によって提供されるメトリックは、名前空間`lightning_*`下にリストされます。
 
--   **`lightning_importer_engine`** (カウンター)
+- **`lightning_importer_engine`** (カウンター)
 
     開いているエンジン ファイルと閉じているエンジン ファイルの数をカウントします。ラベル:
 
-    -   **タイプ**：
-        -   `open`
-        -   `closed`
+    - **タイプ**：
+        - `open`
+        - `closed`
 
--   **`lightning_idle_workers`** （ゲージ）
+- **`lightning_idle_workers`** （ゲージ）
 
     アイドル状態のワーカーをカウントします。ラベル:
 
-    -   **名前**：
-        -   `table` : `table-concurrency`の余り。通常はプロセス終了まで 0 です。
-        -   `index` : `index-concurrency`の余り。通常はプロセス終了まで 0 です。
-        -   `region` : `region-concurrency`の余り。通常はプロセス終了まで 0 です。
-        -   `io` : `io-concurrency`の余り。通常は設定された値（デフォルトは 5）に近い。0 に近い場合はディスクが遅すぎることを意味する。
-        -   `closed-engine` : 終了したがまだクリーンアップされていないエンジンの数。通常はインデックス + テーブル同時実行数（デフォルトは8）に近い値です。0に近い値は、TiDB LightningがTiKV Importerよりも高速であることを意味し、 TiDB Lightningが停止する可能性があります。
+    - **名前**：
+        - `table` : `table-concurrency`の余り。通常はプロセス終了まで 0 です。
+        - `index` : `index-concurrency`の余り。通常はプロセス終了まで 0 です。
+        - `region` : `region-concurrency`の余り。通常はプロセス終了まで 0 です。
+        - `io` : `io-concurrency`の余り。通常は設定された値（デフォルトは 5）に近い。0 に近い場合はディスクが遅すぎることを意味する。
+        - `closed-engine` : 終了したがまだクリーンアップされていないエンジンの数。通常はインデックス + テーブル同時実行数（デフォルトは8）に近い値です。0に近い値は、TiDB LightningがTiKV Importerよりも高速であることを意味し、 TiDB Lightningが停止する可能性があります。
 
--   **`lightning_kv_encoder`** (カウンター)
+- **`lightning_kv_encoder`** (カウンター)
 
     オープンおよびクローズされたKVエンコーダーをカウントします。KVエンコーダーは、SQL `INSERT`文をKVペアに変換するインメモリTiDBインスタンスです。健全な状況では、正味値は制限される必要があります。ラベル：
 
-    -   **タイプ**：
-        -   `open`
-        -   `closed`
+    - **タイプ**：
+        - `open`
+        - `closed`
 
 <!---->
 
--   **`lightning_tables`** （カウンター）
+- **`lightning_tables`** （カウンター）
 
     処理されたテーブルとそのステータスをカウントします。ラベル:
 
-    -   **状態**: テーブルの状態。どのフェーズを完了する必要があるかを示します。
-        -   `pending` : まだ処理されていません
-        -   `written` : すべてのデータがエンコードされて送信されました
-        -   `closed` : 対応するすべてのエンジンファイルが閉じられています
-        -   `imported` : すべてのエンジン ファイルがターゲット クラスターにインポートされました
-        -   `altered_auto_inc` : AUTO_INCREMENT IDが変更されました
-        -   `checksum` : チェックサムを実行
-        -   `analyzed` : 統計分析を実行しました
-        -   `completed` : テーブルは完全にインポートされ、検証されました
-    -   **結果**: 現在のフェーズの結果
-        -   `success` : フェーズは正常に完了しました
-        -   `failure` : フェーズが失敗しました (完了しませんでした)
+    - **状態**: テーブルの状態。どのフェーズを完了する必要があるかを示します。
+        - `pending` : まだ処理されていません
+        - `written` : すべてのデータがエンコードされて送信されました
+        - `closed` : 対応するすべてのエンジンファイルが閉じられています
+        - `imported` : すべてのエンジン ファイルがターゲット クラスターにインポートされました
+        - `altered_auto_inc` : AUTO_INCREMENT IDが変更されました
+        - `checksum` : チェックサムを実行
+        - `analyzed` : 統計分析を実行しました
+        - `completed` : テーブルは完全にインポートされ、検証されました
+    - **結果**: 現在のフェーズの結果
+        - `success` : フェーズは正常に完了しました
+        - `failure` : フェーズが失敗しました (完了しませんでした)
 
--   **`lightning_engines`** （カウンター）
+- **`lightning_engines`** （カウンター）
 
     処理されたエンジンファイルの数とそのステータスをカウントします。ラベル:
 
-    -   **状態**: エンジンの状態。どのフェーズを完了する必要があるかを示します。
-        -   `pending` : まだ処理されていません
-        -   `written` : すべてのデータがエンコードされて送信されました
-        -   `closed` : エンジンファイルが閉じられました
-        -   `imported` : エンジンファイルがターゲットクラスターにインポートされました
-        -   `completed` : エンジンが完全にインポートされました
-    -   **結果**: 現在のフェーズの結果
-        -   `success` : フェーズは正常に完了しました
-        -   `failure` : フェーズが失敗しました (完了しませんでした)
+    - **状態**: エンジンの状態。どのフェーズを完了する必要があるかを示します。
+        - `pending` : まだ処理されていません
+        - `written` : すべてのデータがエンコードされて送信されました
+        - `closed` : エンジンファイルが閉じられました
+        - `imported` : エンジンファイルがターゲットクラスターにインポートされました
+        - `completed` : エンジンが完全にインポートされました
+    - **結果**: 現在のフェーズの結果
+        - `success` : フェーズは正常に完了しました
+        - `failure` : フェーズが失敗しました (完了しませんでした)
 
 <!---->
 
--   **`lightning_chunks`** （カウンター）
+- **`lightning_chunks`** （カウンター）
 
     処理されたチャンクの数とそのステータスをカウントします。ラベル:
 
-    -   **状態**: チャンクのステータス。チャンクがどのフェーズにあるかを示します。
-        -   `estimated` : (状態ではない) この値は現在のタスク内のチャンクの合計数を示します
-        -   `pending` : 読み込まれているがまだ処理されていない
-        -   `running` : データがエンコードされ送信されています
-        -   `finished` : チャンク全体が処理されました
-        -   `failed` : 処理中にエラーが発生しました
+    - **状態**: チャンクのステータス。チャンクがどのフェーズにあるかを示します。
+        - `estimated` : (状態ではない) この値は現在のタスク内のチャンクの合計数を示します
+        - `pending` : 読み込まれているがまだ処理されていない
+        - `running` : データがエンコードされ送信されています
+        - `finished` : チャンク全体が処理されました
+        - `failed` : 処理中にエラーが発生しました
 
--   **`lightning_import_seconds`** （ヒストグラム）
+- **`lightning_import_seconds`** （ヒストグラム）
 
     Bucketed histogram for the time needed to import a table.
 
--   **`lightning_row_read_bytes`** （ヒストグラム）
+- **`lightning_row_read_bytes`** （ヒストグラム）
 
     単一の SQL 行のサイズのバケット化されたヒストグラム。
 
--   **`lightning_row_encode_seconds`** (ヒストグラム)
+- **`lightning_row_encode_seconds`** (ヒストグラム)
 
     単一の SQL 行を KV ペアにエンコードするために必要な時間のバケット化されたヒストグラム。
 
--   **`lightning_row_kv_deliver_seconds`** (ヒストグラム)
+- **`lightning_row_kv_deliver_seconds`** (ヒストグラム)
 
     1 つの SQL 行に対応する KV ペアのセットを配信するために必要な時間のバケット化されたヒストグラム。
 
--   **`lightning_block_deliver_seconds`** （ヒストグラム）
+- **`lightning_block_deliver_seconds`** （ヒストグラム）
 
     KV ペアのブロックをインポーターに配信するために必要な時間のバケット化されたヒストグラム。
 
--   **`lightning_block_deliver_bytes`** （ヒストグラム）
+- **`lightning_block_deliver_bytes`** （ヒストグラム）
 
     インポーターに配信された KV ペアのブロックの非圧縮サイズのバケット化されたヒストグラム。
 
--   **`lightning_chunk_parser_read_block_seconds`** (ヒストグラム)
+- **`lightning_chunk_parser_read_block_seconds`** (ヒストグラム)
 
     データ ファイル パーサーがブロックを読み取るために必要な時間のバケット化されたヒストグラム。
 
--   **`lightning_checksum_seconds`** （ヒストグラム）
+- **`lightning_checksum_seconds`** （ヒストグラム）
 
     テーブルのチェックサムを計算するために必要な時間のバケット化されたヒストグラム。
 
--   **`lightning_apply_worker_seconds`** (ヒストグラム)
+- **`lightning_apply_worker_seconds`** (ヒストグラム)
 
     アイドル状態のワーカーを獲得するのに必要な時間のバケット化されたヒストグラム（ `lightning_idle_workers`ゲージも参照）。ラベル:
 
-    -   **名前**：
-        -   `table`
-        -   `index`
-        -   `region`
-        -   `io`
-        -   `closed-engine`
+    - **名前**：
+        - `table`
+        - `index`
+        - `region`
+        - `io`
+        - `closed-engine`

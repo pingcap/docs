@@ -19,51 +19,51 @@ summary: TiFlash の設定方法を学びます。
 
 #### `listen_host` {#listen_host}
 
--   TPC/HTTP などのサービスをサポートするためのリスニング ホスト。
--   これを`"0.0.0.0"`に設定することをお勧めします。これは、このマシンのすべての IP アドレスをリッスンすることを意味します。
+- TPC/HTTP などのサービスをサポートするためのリスニング ホスト。
+- これを`"0.0.0.0"`に設定することをお勧めします。これは、このマシンのすべての IP アドレスをリッスンすることを意味します。
 
 #### `tcp_port` {#tcp_port}
 
--   TiFlash TCP サービスポート。このポートは内部テストに使用され、デフォルトでは 9000 に設定されています。
--   TiFlash v7.1.0より前のバージョンでは、このポートはデフォルトで有効になっていますが、セキュリティリスクがあります。セキュリティを強化するため、このポートにアクセス制御を適用し、ホワイトリストに登録されたIPアドレスからのアクセスのみを許可することをお勧めします。TiFlash v7.1.0以降では、このポートの設定をコメントアウトすることでセキュリティリスクを回避できます。TiFlashの設定ファイルでこのポートが指定されていない場合、このポートは無効になります。
--   TiFlashデプロイメントでは、このポートを構成することは推奨され**ません**。(注: TiFlash v7.1.0 以降、 TiUP &gt;= v1.12.5 またはTiDB Operator &gt;= v1.5.0 でデプロイされたTiFlash は、デフォルトでポートを無効にし、より安全になっています。)
--   デフォルト値: `9000`
+- TiFlash TCP サービスポート。このポートは内部テストに使用され、デフォルトでは 9000 に設定されています。
+- TiFlash v7.1.0より前のバージョンでは、このポートはデフォルトで有効になっていますが、セキュリティリスクがあります。セキュリティを強化するため、このポートにアクセス制御を適用し、ホワイトリストに登録されたIPアドレスからのアクセスのみを許可することをお勧めします。TiFlash v7.1.0以降では、このポートの設定をコメントアウトすることでセキュリティリスクを回避できます。TiFlashの設定ファイルでこのポートが指定されていない場合、このポートは無効になります。
+- TiFlashデプロイメントでは、このポートを構成することは推奨され**ません**。(注: TiFlash v7.1.0 以降、 TiUP &gt;= v1.12.5 またはTiDB Operator &gt;= v1.5.0 でデプロイされたTiFlash は、デフォルトでポートを無効にし、より安全になっています。)
+- デフォルト値: `9000`
 
 #### `mark_cache_size` {#mark_cache_size}
 
--   データブロックのメタデータのキャッシュサイズ制限。通常、この値を変更する必要はありません。
--   デフォルト値: `1073741824`
+- データブロックのメタデータのキャッシュサイズ制限。通常、この値を変更する必要はありません。
+- デフォルト値: `1073741824`
 
 #### `minmax_index_cache_size` {#minmax_index_cache_size}
 
--   データブロックの最小-最大インデックスのキャッシュサイズ制限。通常、この値を変更する必要はありません。
--   デフォルト値: `1073741824`
+- データブロックの最小-最大インデックスのキャッシュサイズ制限。通常、この値を変更する必要はありません。
+- デフォルト値: `1073741824`
 
 #### `delta_index_cache_size` {#delta_index_cache_size}
 
--   DeltaIndex のキャッシュ サイズの制限。
--   デフォルト値: `0` 、制限がないことを意味します。
+- DeltaIndex のキャッシュ サイズの制限。
+- デフォルト値: `0` 、制限がないことを意味します。
 
 #### `path` {#path}
 
--   TiFlashデータのストレージパス。複数のディレクトリがある場合は、各ディレクトリをカンマで区切ってください。
--   TiDB v4.0.9以降、 `path`と[`path_realtime_mode`](#path_realtime_mode)は非推奨となりました。マルチディスク展開シナリオでパフォーマンスを向上させるには、 [`storage`](#storage-new-in-v409)セクションの設定を使用してください。
--   TiDB v5.2.0 以降、 [`storage.io_rate_limit`](#storageio_rate_limit-new-in-v520)構成を使用する必要がある場合は、同時にTiFlashデータのストレージパスを[`storage.main.dir`](#dir)に設定する必要があります。
--   `storage`構成が存在する場合、 `path`と[`path_realtime_mode`](#path_realtime_mode)構成は両方とも無視されます。
+- TiFlashデータのストレージパス。複数のディレクトリがある場合は、各ディレクトリをカンマで区切ってください。
+- TiDB v4.0.9以降、 `path`と[`path_realtime_mode`](#path_realtime_mode)は非推奨となりました。マルチディスク展開シナリオでパフォーマンスを向上させるには、 [`storage`](#storage-new-in-v409)セクションの設定を使用してください。
+- TiDB v5.2.0 以降、 [`storage.io_rate_limit`](#storageio_rate_limit-new-in-v520)構成を使用する必要がある場合は、同時にTiFlashデータのストレージパスを[`storage.main.dir`](#dir)に設定する必要があります。
+- `storage`構成が存在する場合、 `path`と[`path_realtime_mode`](#path_realtime_mode)構成は両方とも無視されます。
 
 <!-- Example: `"/tidb-data/tiflash-9000"` or `"/ssd0/tidb-data/tiflash,/ssd1/tidb-data/tiflash,/ssd2/tidb-data/tiflash"` -->
 
 #### `path_realtime_mode` {#path_realtime_mode}
 
--   `true`に設定し、 `path`に複数のディレクトリを設定した場合、最初のディレクトリに最新のデータが保存され、残りのディレクトリには古いデータが保存されます。
--   TiDB v4.0.9以降、 [`path`](#path)と`path_realtime_mode`は非推奨となりました。マルチディスク展開シナリオでパフォーマンスを向上させるには、 [`storage`](#storage-new-in-v409)セクションの設定を使用してください。
--   `storage`構成が存在する場合、 [`path`](#path)と`path_realtime_mode`構成は両方とも無視されます。
--   デフォルト値: `false`
+- `true`に設定し、 `path`に複数のディレクトリを設定した場合、最初のディレクトリに最新のデータが保存され、残りのディレクトリには古いデータが保存されます。
+- TiDB v4.0.9以降、 [`path`](#path)と`path_realtime_mode`は非推奨となりました。マルチディスク展開シナリオでパフォーマンスを向上させるには、 [`storage`](#storage-new-in-v409)セクションの設定を使用してください。
+- `storage`構成が存在する場合、 [`path`](#path)と`path_realtime_mode`構成は両方とも無視されます。
+- デフォルト値: `false`
 
 #### `tmp_path` {#tmp_path}
 
--   TiFlash一時ファイルが保存されるパス。
--   デフォルトでは、 [`path`](#path)の最初のディレクトリ、または[`storage.latest.dir`](#dir-1)に`"/tmp"`を付加したディレクトリになります。
+- TiFlash一時ファイルが保存されるパス。
+- デフォルトでは、 [`path`](#path)の最初のディレクトリ、または[`storage.latest.dir`](#dir-1)に`"/tmp"`を付加したディレクトリになります。
 
 <!-- Example: `"/tidb-data/tiflash-9000/tmp"` -->
 
@@ -73,42 +73,42 @@ summary: TiFlash の設定方法を学びます。
 
 ##### `format_version` {#format_version}
 
--   DTFile 形式。
--   デフォルト値: `7`
--   `6` `4` `7` `5` `2` `3`
-    -   `format_version = 2` : バージョン v6.0.0 未満のデフォルトの形式。
-    -   `format_version = 3` : v6.0.0 および v6.1.x のデフォルト形式。より多くのデータ検証機能が提供されます。
-    -   `format_version = 4` : バージョン v6.2.0 から v7.3.0 までのデフォルトの形式。書き込み増幅とバックグラウンド タスクのリソース消費を削減します。
-    -   `format_version = 5` : v7.3.0 で導入され、v7.4.0 から v8.3.0 までのバージョンのデフォルト形式で、小さなファイルを結合することで物理ファイルの数を削減します。
-    -   `format_version = 6` : v8.4.0 で導入され、ベクトル インデックスの構築とストレージを部分的にサポートします。
-    -   `format_version = 7` : v8.4.0 で導入され、v8.4.0 以降のバージョンのデフォルト形式で、ベクトル インデックスの構築とストレージをサポートします。
+- DTFile 形式。
+- デフォルト値: `7`
+- `6` `4` `7` `5` `2` `3`
+    - `format_version = 2` : バージョン v6.0.0 未満のデフォルトの形式。
+    - `format_version = 3` : v6.0.0 および v6.1.x のデフォルト形式。より多くのデータ検証機能が提供されます。
+    - `format_version = 4` : バージョン v6.2.0 から v7.3.0 までのデフォルトの形式。書き込み増幅とバックグラウンド タスクのリソース消費を削減します。
+    - `format_version = 5` : v7.3.0 で導入され、v7.4.0 から v8.3.0 までのバージョンのデフォルト形式で、小さなファイルを結合することで物理ファイルの数を削減します。
+    - `format_version = 6` : v8.4.0 で導入され、ベクトル インデックスの構築とストレージを部分的にサポートします。
+    - `format_version = 7` : v8.4.0 で導入され、v8.4.0 以降のバージョンのデフォルト形式で、ベクトル インデックスの構築とストレージをサポートします。
 
 #### storage.main {#storagemain}
 
 ##### `dir` {#dir-1}
 
--   メインデータを保存するディレクトリのリスト。例： `[ "/tidb-data/tiflash-9000" ]`または`[ "/ssd0/tidb-data/tiflash", "/ssd1/tidb-data/tiflash" ]` 。
--   全データの 90% 以上がディレクトリ リストに保存されます。
+- メインデータを保存するディレクトリのリスト。例： `[ "/tidb-data/tiflash-9000" ]`または`[ "/ssd0/tidb-data/tiflash", "/ssd1/tidb-data/tiflash" ]` 。
+- 全データの 90% 以上がディレクトリ リストに保存されます。
 
 ##### `capacity` {#capacity-1}
 
--   [`storage.main.dir`](#dir)内の各ディレクトリの最大ストレージ容量。例: `[10737418240, 10737418240]` 。
--   設定されていない場合、または`0`倍数に設定されている場合、実際のディスク (ディレクトリが配置されているディスク) の容量が使用されます。
--   単位: バイト`"10GB"`などの人間が読める数値はまだサポートされていないことに注意してください。
--   `capacity`リストのサイズは[`storage.main.dir`](#dir)リストのサイズと同じである必要があります。
+- [`storage.main.dir`](#dir)内の各ディレクトリの最大ストレージ容量。例: `[10737418240, 10737418240]` 。
+- 設定されていない場合、または`0`倍数に設定されている場合、実際のディスク (ディレクトリが配置されているディスク) の容量が使用されます。
+- 単位: バイト`"10GB"`などの人間が読める数値はまだサポートされていないことに注意してください。
+- `capacity`リストのサイズは[`storage.main.dir`](#dir)リストのサイズと同じである必要があります。
 
 #### storage.latest {#storagelatest}
 
 ##### `dir` {#dir-2}
 
--   最新データを保存するディレクトリのリストです。全データの約10%がこのディレクトリリストに保存されます。ここにリストされているディレクトリ（またはディレクトリ）は、 [`storage.main.dir`](#dir)よりも高いIOPSメトリックを必要とします。
--   設定されていない場合（デフォルト）、値[`storage.main.dir`](#dir)が使用されます。
+- 最新データを保存するディレクトリのリストです。全データの約10%がこのディレクトリリストに保存されます。ここにリストされているディレクトリ（またはディレクトリ）は、 [`storage.main.dir`](#dir)よりも高いIOPSメトリックを必要とします。
+- 設定されていない場合（デフォルト）、値[`storage.main.dir`](#dir)が使用されます。
 
 <!-- Example: `[]` -->
 
 ##### `capacity` {#capacity-2}
 
--   [`storage.latest.dir`](#dir-1)内の各ディレクトリの最大ストレージ容量。設定されていない場合、または`0`倍数に設定されている場合は、実際のディスク（ディレクトリが配置されているディスク）の容量が使用されます。
+- [`storage.latest.dir`](#dir-1)内の各ディレクトリの最大ストレージ容量。設定されていない場合、または`0`倍数に設定されている場合は、実際のディスク（ディレクトリが配置されているディスク）の容量が使用されます。
 
 <!-- Example: `[10737418240, 10737418240]` -->
 
@@ -118,60 +118,60 @@ I/O トラフィック制限設定を構成します。
 
 ##### `max_bytes_per_sec` {#max_bytes_per_sec}
 
--   ディスクの読み取りと書き込みの合計I/O帯域幅。この設定項目は、I/Oトラフィックを制限するかどうかを決定します。デフォルトでは無効になっています。TiFlashにおけるこのトラフィック制限は、ディスク帯域幅が小さく、特定のサイズに制限TiFlashれているクラウドストレージに適しています。
--   デフォルト値: `0` 。これは、I/O トラフィックがデフォルトで制限されないことを意味します。
--   単位: バイト
+- ディスクの読み取りと書き込みの合計I/O帯域幅。この設定項目は、I/Oトラフィックを制限するかどうかを決定します。デフォルトでは無効になっています。TiFlashにおけるこのトラフィック制限は、ディスク帯域幅が小さく、特定のサイズに制限TiFlashれているクラウドストレージに適しています。
+- デフォルト値: `0` 。これは、I/O トラフィックがデフォルトで制限されないことを意味します。
+- 単位: バイト
 
 ##### `max_read_bytes_per_sec` {#max_read_bytes_per_sec}
 
--   ディスク読み取りの合計 I/O 帯域幅。
--   設定項目`max_read_bytes_per_sec`および`max_write_bytes_per_sec` 、ディスクの読み取りと書き込みの I/O 帯域幅を個別に制限します。Google Cloud が提供する Persistent Disk など、ディスクの読み取りと書き込みの I/O 帯域幅の制限を個別に計算するクラウドストレージに使用できます。
--   `max_bytes_per_sec`の値が`0`でない場合は[`max_bytes_per_sec`](#max_bytes_per_sec)が優先されます。
--   デフォルト値: `0`
+- ディスク読み取りの合計 I/O 帯域幅。
+- 設定項目`max_read_bytes_per_sec`および`max_write_bytes_per_sec` 、ディスクの読み取りと書き込みの I/O 帯域幅を個別に制限します。Google Cloud が提供する Persistent Disk など、ディスクの読み取りと書き込みの I/O 帯域幅の制限を個別に計算するクラウドストレージに使用できます。
+- `max_bytes_per_sec`の値が`0`でない場合は[`max_bytes_per_sec`](#max_bytes_per_sec)が優先されます。
+- デフォルト値: `0`
 
 ##### `max_write_bytes_per_sec` {#max_write_bytes_per_sec}
 
--   ディスク書き込みの合計 I/O 帯域幅。
--   設定項目`max_read_bytes_per_sec`および`max_write_bytes_per_sec` 、ディスクの読み取りと書き込みの I/O 帯域幅を個別に制限します。Google Cloud が提供する Persistent Disk など、ディスクの読み取りと書き込みの I/O 帯域幅の制限を個別に計算するクラウドストレージに使用できます。
--   `max_bytes_per_sec`の値が`0`でない場合は[`max_bytes_per_sec`](#max_bytes_per_sec)が優先されます。
--   デフォルト値: `0`
+- ディスク書き込みの合計 I/O 帯域幅。
+- 設定項目`max_read_bytes_per_sec`および`max_write_bytes_per_sec` 、ディスクの読み取りと書き込みの I/O 帯域幅を個別に制限します。Google Cloud が提供する Persistent Disk など、ディスクの読み取りと書き込みの I/O 帯域幅の制限を個別に計算するクラウドストレージに使用できます。
+- `max_bytes_per_sec`の値が`0`でない場合は[`max_bytes_per_sec`](#max_bytes_per_sec)が優先されます。
+- デフォルト値: `0`
 
 ##### `foreground_write_weight` {#foreground_write_weight}
 
 <!-- The following  default configurations indicate that each type of traffic gets a weight of 25% (25 / (25 + 25 + 25 + 25) = 25%) -->
 
--   TiFlashは内部的にI/O要求を4つのタイプに分類します。フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取りです。`foreground_write_weight`はフォアグラウンド書き込みI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
--   I/O トラフィック制限が初期化されると、 TiFlash は`foreground_write_weight` 、 [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight) 、 [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight) 、 [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight)の比率に従って、これら 4 種類の要求に帯域幅を割り当てます。
--   重みが`0`に設定されている場合、対応する I/O トラフィックは制限されません。
--   デフォルト値: `25` 、帯域幅の 25% の割り当てを表します。
+- TiFlashは内部的にI/O要求を4つのタイプに分類します。フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取りです。`foreground_write_weight`はフォアグラウンド書き込みI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
+- I/O トラフィック制限が初期化されると、 TiFlash は`foreground_write_weight` 、 [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight) 、 [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight) 、 [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight)の比率に従って、これら 4 種類の要求に帯域幅を割り当てます。
+- 重みが`0`に設定されている場合、対応する I/O トラフィックは制限されません。
+- デフォルト値: `25` 、帯域幅の 25% の割り当てを表します。
 
 ##### `background_write_weight` {#background_write_weight}
 
--   TiFlashは内部的にI/O要求を4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。`background_write_weight`は、バックグラウンド書き込みI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
--   I/O トラフィック制限が初期化されると、 TiFlash は[`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight) 、 `background_write_weight` 、 [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight) 、 [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight)の比率に従って、これら 4 種類の要求に帯域幅を割り当てます。
--   重みが`0`に設定されている場合、対応する I/O トラフィックは制限されません。
--   デフォルト値: `25` 、帯域幅の 25% の割り当てを表します。
+- TiFlashは内部的にI/O要求を4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。`background_write_weight`は、バックグラウンド書き込みI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
+- I/O トラフィック制限が初期化されると、 TiFlash は[`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight) 、 `background_write_weight` 、 [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight) 、 [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight)の比率に従って、これら 4 種類の要求に帯域幅を割り当てます。
+- 重みが`0`に設定されている場合、対応する I/O トラフィックは制限されません。
+- デフォルト値: `25` 、帯域幅の 25% の割り当てを表します。
 
 ##### `foreground_read_weight` {#foreground_read_weight}
 
--   TiFlashは内部的にI/O要求を4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。`foreground_read_weight`は、フォアグラウンド読み取りI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
--   I/O トラフィック制限が初期化されると、 TiFlash は[`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight) 、 [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight) 、 `foreground_read_weight` 、 [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight)の比率に従って、これら 4 種類の要求に帯域幅を割り当てます。
--   重みが`0`に設定されている場合、対応する I/O トラフィックは制限されません。
--   デフォルト値: `25` 、帯域幅の 25% の割り当てを表します。
+- TiFlashは内部的にI/O要求を4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。`foreground_read_weight`は、フォアグラウンド読み取りI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
+- I/O トラフィック制限が初期化されると、 TiFlash は[`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight) 、 [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight) 、 `foreground_read_weight` 、 [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight)の比率に従って、これら 4 種類の要求に帯域幅を割り当てます。
+- 重みが`0`に設定されている場合、対応する I/O トラフィックは制限されません。
+- デフォルト値: `25` 、帯域幅の 25% の割り当てを表します。
 
 ##### `background_read_weight` {#background_read_weight}
 
--   TiFlashは内部的にI/O要求を4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。`background_read_weight`は、バックグラウンド読み取りI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
--   I/O トラフィック制限が初期化されると、 TiFlash は[`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight) 、 [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight) 、 [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight) 、 `background_read_weight`の比率に従って、これら 4 種類の要求に帯域幅を割り当てます。
--   重みが`0`に設定されている場合、対応する I/O トラフィックは制限されません。
--   デフォルト値: `25` 、帯域幅の 25% の割り当てを表します。
+- TiFlashは内部的にI/O要求を4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。`background_read_weight`は、バックグラウンド読み取りI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
+- I/O トラフィック制限が初期化されると、 TiFlash は[`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight) 、 [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight) 、 [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight) 、 `background_read_weight`の比率に従って、これら 4 種類の要求に帯域幅を割り当てます。
+- 重みが`0`に設定されている場合、対応する I/O トラフィックは制限されません。
+- デフォルト値: `25` 、帯域幅の 25% の割り当てを表します。
 
 ##### `auto_tune_sec` {#auto_tune_sec}
 
--   TiFlashは、現在のI/O負荷に応じて、異なるI/Oタイプのトラフィック制限を自動的に調整する機能をサポートしています。調整された帯域幅が、上記で設定した重み付け比率を超える場合があります。
--   `auto_tune_sec`自動チューニングの間隔を示します。auto_tune_sec の値が`0`の場合、自動チューニングは無効になります。
--   デフォルト値: `5`
--   単位: 秒
+- TiFlashは、現在のI/O負荷に応じて、異なるI/Oタイプのトラフィック制限を自動的に調整する機能をサポートしています。調整された帯域幅が、上記で設定した重み付け比率を超える場合があります。
+- `auto_tune_sec`自動チューニングの間隔を示します。auto_tune_sec の値が`0`の場合、自動チューニングは無効になります。
+- デフォルト値: `5`
+- 単位: 秒
 
 #### storage.s3 {#storages3}
 
@@ -179,118 +179,118 @@ I/O トラフィック制限設定を構成します。
 
 ##### `endpoint` {#endpoint}
 
--   S3エンドポイントアドレス。例: `http://s3.{region}.amazonaws.com` 。
+- S3エンドポイントアドレス。例: `http://s3.{region}.amazonaws.com` 。
 
 ##### `bucket` {#bucket}
 
--   TiFlash はすべてのデータをこのバケットに保存します。
+- TiFlash はすべてのデータをこのバケットに保存します。
 
 ##### `root` {#root}
 
--   S3 バケット内でデータが保存されるルートディレクトリ。例: `/cluster1_data` 。
+- S3 バケット内でデータが保存されるルートディレクトリ。例: `/cluster1_data` 。
 
 ##### `access_key_id` {#access_key_id}
 
--   S3 にアクセスするために使用される ACCESS_KEY_ID。
+- S3 にアクセスするために使用される ACCESS_KEY_ID。
 
 ##### `secret_access_key` {#secret_access_key}
 
--   S3 にアクセスするために使用される SECRET_ACCESS_KEY。
+- S3 にアクセスするために使用される SECRET_ACCESS_KEY。
 
 #### storage.remote.cache {#storageremotecache}
 
 ##### `dir` {#dir}
 
--   分散ストレージおよびコンピューティングアーキテクチャ内のコンピューティング ノードのローカル データ キャッシュ ディレクトリ。
+- 分散ストレージおよびコンピューティングアーキテクチャ内のコンピューティング ノードのローカル データ キャッシュ ディレクトリ。
 
 <!-- Example: `"/data1/tiflash/cache"` -->
 
 ##### `capacity` {#capacity}
 
--   例: `858993459200` (800 GiB)
+- 例: `858993459200` (800 GiB)
 
 #### フラッシュ {#flash}
 
 ##### `service_addr` {#service_addr}
 
--   TiFlashコプロセッサ サービスのリスニング アドレス。
+- TiFlashコプロセッサ サービスのリスニング アドレス。
 
 <!-- Example: `"0.0.0.0:3930"` -->
 
 ##### `compact_log_min_gap` <span class="version-mark">v7.4.0 の新機能</span> {#compact_log_min_gap-new-in-v740}
 
--   現在のRaftステート マシンによって進められた`applied_index`と最後のディスク スピル時の`applied_index`との差が`compact_log_min_gap`超えると、 TiFlash はTiKV から`CompactLog`コマンドを実行し、データをディスクにスピルします。
--   このギャップを大きくすると、 TiFlashのディスク書き込み頻度が低下し、ランダム書き込みシナリオにおける読み取りレイテンシーが短縮される可能性がありますが、メモリオーバーヘッドも増加する可能性があります。このギャップを小さくすると、 TiFlashのディスク書き込み頻度が増加し、 TiFlashのメモリ負荷が軽減される可能性があります。ただし、現段階では、このギャップを`0`に設定しても、 TiFlashのディスク書き込み頻度は TiKV よりも高くなることはありません。
--   デフォルト値を維持することをお勧めします。
--   デフォルト値: `200`
+- 現在のRaftステート マシンによって進められた`applied_index`と最後のディスク スピル時の`applied_index`との差が`compact_log_min_gap`超えると、 TiFlash はTiKV から`CompactLog`コマンドを実行し、データをディスクにスピルします。
+- このギャップを大きくすると、 TiFlashのディスク書き込み頻度が低下し、ランダム書き込みシナリオにおける読み取りレイテンシーが短縮される可能性がありますが、メモリオーバーヘッドも増加する可能性があります。このギャップを小さくすると、 TiFlashのディスク書き込み頻度が増加し、 TiFlashのメモリ負荷が軽減される可能性があります。ただし、現段階では、このギャップを`0`に設定しても、 TiFlashのディスク書き込み頻度は TiKV よりも高くなることはありません。
+- デフォルト値を維持することをお勧めします。
+- デフォルト値: `200`
 
 ##### `compact_log_min_rows`<span class="version-mark">バージョン5.0の新機能</span> {#compact_log_min_rows-new-in-v50}
 
--   TiFlashによってキャッシュされたリージョン内の行の数またはサイズが`compact_log_min_rows`または`compact_log_min_bytes`超えると、 TiFlash はTiKV から`CompactLog`コマンドを実行し、データをディスクに書き込みます。
--   デフォルト値を維持することをお勧めします。
--   デフォルト値: `40960`
+- TiFlashによってキャッシュされたリージョン内の行の数またはサイズが`compact_log_min_rows`または`compact_log_min_bytes`超えると、 TiFlash はTiKV から`CompactLog`コマンドを実行し、データをディスクに書き込みます。
+- デフォルト値を維持することをお勧めします。
+- デフォルト値: `40960`
 
 ##### `compact_log_min_bytes`<span class="version-mark">バージョン5.0の新機能</span> {#compact_log_min_bytes-new-in-v50}
 
--   TiFlashによってキャッシュされたリージョン内の行の数またはサイズが`compact_log_min_rows`または`compact_log_min_bytes`超えると、 TiFlash はTiKV から`CompactLog`コマンドを実行し、データをディスクに書き込みます。
--   デフォルト値を維持することをお勧めします。
--   デフォルト値: `33554432`
+- TiFlashによってキャッシュされたリージョン内の行の数またはサイズが`compact_log_min_rows`または`compact_log_min_bytes`超えると、 TiFlash はTiKV から`CompactLog`コマンドを実行し、データをディスクに書き込みます。
+- デフォルト値を維持することをお勧めします。
+- デフォルト値: `33554432`
 
 ##### `disaggregated_mode` {#disaggregated_mode}
 
--   この設定項目は、 TiFlash分散ストレージおよびコンピューティングアーキテクチャモードにのみ適用されます。詳細については、 [TiFlash分散ストレージおよびコンピューティングアーキテクチャと S3 サポート](/tiflash/tiflash-disaggregated-and-s3.md)を参照してください。
--   値`"tiflash_compute"`オプション: `"tiflash_write"`
+- この設定項目は、 TiFlash分散ストレージおよびコンピューティングアーキテクチャモードにのみ適用されます。詳細については、 [TiFlash分散ストレージおよびコンピューティングアーキテクチャと S3 サポート](/tiflash/tiflash-disaggregated-and-s3.md)を参照してください。
+- 値`"tiflash_compute"`オプション: `"tiflash_write"`
 
 ##### `graceful_wait_shutdown_timeout` <span class="version-mark">v8.5.4 の新機能</span> {#graceful_wait_shutdown_timeout-new-in-v854}
 
--   TiFlashサーバーをシャットダウンする際の最大待機時間を制御します。この期間中、 TiFlash は未完了の MPP タスクの実行を継続しますが、新しいタスクは受け付けません。実行中のすべての MPP タスクがこのタイムアウト前に終了した場合、 TiFlash は直ちにシャットダウンします。それ以外の場合は、待機時間が経過した後に強制的にシャットダウンされます。
--   デフォルト値: `600`
--   単位: 秒
--   TiFlashサーバーがシャットダウンを待機している間 (猶予期間中)、TiDB は新しい MPP タスクをサーバーに送信しません。
+- TiFlashサーバーをシャットダウンする際の最大待機時間を制御します。この期間中、 TiFlash は未完了の MPP タスクの実行を継続しますが、新しいタスクは受け付けません。実行中のすべての MPP タスクがこのタイムアウト前に終了した場合、 TiFlash は直ちにシャットダウンします。それ以外の場合は、待機時間が経過した後に強制的にシャットダウンされます。
+- デフォルト値: `600`
+- 単位: 秒
+- TiFlashサーバーがシャットダウンを待機している間 (猶予期間中)、TiDB は新しい MPP タスクをサーバーに送信しません。
 
 #### フラッシュプロキシ {#flashproxy}
 
 ##### `addr` {#addr}
 
--   プロキシのリスニング アドレス。
--   デフォルト値: `"127.0.0.1:20170"`
+- プロキシのリスニング アドレス。
+- デフォルト値: `"127.0.0.1:20170"`
 
 ##### `advertise-addr` {#advertise-addr}
 
--   外部アクセスアドレス`addr` 。空のままにした場合、デフォルトで`addr`が使用されます。
--   クラスターを複数のノードに展開する場合は、他のノードが`advertise-addr`を介してアクセスできることを保証する必要があります。
+- 外部アクセスアドレス`addr` 。空のままにした場合、デフォルトで`addr`が使用されます。
+- クラスターを複数のノードに展開する場合は、他のノードが`advertise-addr`を介してアクセスできることを保証する必要があります。
 
 ##### `status-addr` {#status-addr}
 
--   プロキシがメトリックまたはステータス情報を取得するリスニング アドレス。
--   デフォルト値: `"127.0.0.1:20292"`
+- プロキシがメトリックまたはステータス情報を取得するリスニング アドレス。
+- デフォルト値: `"127.0.0.1:20292"`
 
 ##### `advertise-status-addr` {#advertise-status-addr}
 
--   status-addrの外部アクセスアドレス。空のままにした場合、デフォルトで`status-addr`が使用されます。
--   クラスターを複数のノードに展開する場合は、他のノードが`advertise-status-addr`を介してアクセスできることを保証する必要があります。
+- status-addrの外部アクセスアドレス。空のままにした場合、デフォルトで`status-addr`が使用されます。
+- クラスターを複数のノードに展開する場合は、他のノードが`advertise-status-addr`を介してアクセスできることを保証する必要があります。
 
 ##### `engine-addr` {#engine-addr}
 
--   TiFlashコプロセッサ サービスの外部アクセス アドレス。
+- TiFlashコプロセッサ サービスの外部アクセス アドレス。
 
 <!-- Example: `"10.0.1.20:3930"` -->
 
 ##### `data-dir` {#data-dir}
 
--   プロキシのデータストレージパス。
+- プロキシのデータストレージパス。
 
 <!-- Example: `"/tidb-data/tiflash-9000/flash"` -->
 
 ##### `config` {#config}
 
--   プロキシの構成ファイル パス。
+- プロキシの構成ファイル パス。
 
 <!-- Example: `"/tidb-deploy/tiflash-9000/conf/tiflash-learner.toml"` -->
 
 ##### `log-file` {#log-file}
 
--   プロキシのログ パス。
+- プロキシのログ パス。
 
 <!-- Example: `"/tidb-deploy/tiflash-9000/log/tiflash_tikv.log"` -->
 
@@ -300,162 +300,162 @@ I/O トラフィック制限設定を構成します。
 
 ##### `level` {#level}
 
--   ログ レベル。
--   デフォルト値: `"info"`
--   `"info"` `"debug"` `"error"` `"warn"` `"trace"`
+- ログ レベル。
+- デフォルト値: `"info"`
+- `"info"` `"debug"` `"error"` `"warn"` `"trace"`
 
 ##### `log` {#log}
 
--   TiFlashのログです。
+- TiFlashのログです。
 
 <!-- Example: `"/tidb-deploy/tiflash-9000/log/tiflash.log"` -->
 
 ##### `errorlog` {#errorlog}
 
--   TiFlashのエラーログ。レベル`"warn"`とレベル`"error"`ログもこのログファイルに出力されます。
+- TiFlashのエラーログ。レベル`"warn"`とレベル`"error"`ログもこのログファイルに出力されます。
 
 <!-- Example: `"/tidb-deploy/tiflash-9000/log/tiflash_error.log"` -->
 
 ##### `size` {#size}
 
--   1 つのログ ファイルのサイズ。
--   デフォルト値: `"100M"`
+- 1 つのログ ファイルのサイズ。
+- デフォルト値: `"100M"`
 
 ##### `count` {#count}
 
--   保存できるログファイルの最大数。TiFlashとTiFlashエラーログの場合、保存できるログファイルの最大数はそれぞれ`count`です。
--   デフォルト値: `10`
+- 保存できるログファイルの最大数。TiFlashとTiFlashエラーログの場合、保存できるログファイルの最大数はそれぞれ`count`です。
+- デフォルト値: `10`
 
 #### ラフト {#raft}
 
 ##### `pd_addr` {#pd_addr}
 
--   PD サービス アドレス。
--   複数のアドレスはカンマで区切られます。例： `"10.0.1.11:2379,10.0.1.12:2379,10.0.1.13:2379"` 。
+- PD サービス アドレス。
+- 複数のアドレスはカンマで区切られます。例： `"10.0.1.11:2379,10.0.1.12:2379,10.0.1.13:2379"` 。
 
 #### 状態 {#status}
 
 ##### `metrics_port` {#metrics_port}
 
--   Prometheus がメトリック情報を取得するポート。
--   デフォルト値: `8234`
+- Prometheus がメトリック情報を取得するポート。
+- デフォルト値: `8234`
 
 #### プロファイル.デフォルト {#profilesdefault}
 
 ##### `dt_enable_logical_split` {#dt_enable_logical_split}
 
--   DeltaTreeストレージエンジンのセグメントで論理分割を使用するかどうかを指定します。論理分割を使用すると書き込み増幅を削減できますが、ディスク領域の無駄が発生します。
--   v6.2.0以降のバージョンでは、デフォルト値の`false`を維持し、 `true`に変更しないことを強くお勧めします。詳細については、既知の問題[＃5576](https://github.com/pingcap/tiflash/issues/5576)を参照してください。
--   デフォルト値: `false`
+- DeltaTreeストレージエンジンのセグメントで論理分割を使用するかどうかを指定します。論理分割を使用すると書き込み増幅を削減できますが、ディスク領域の無駄が発生します。
+- v6.2.0以降のバージョンでは、デフォルト値の`false`を維持し、 `true`に変更しないことを強くお勧めします。詳細については、既知の問題[＃5576](https://github.com/pingcap/tiflash/issues/5576)を参照してください。
+- デフォルト値: `false`
 
 ##### `max_threads` {#max_threads}
 
--   `max_threads`は、 TiFlash がMPP タスクを実行する際の内部スレッド同時実行数を示します。`0`に設定すると、 TiFlash は論理 CPU コアの数を同時実行数として使用します。
--   このパラメータは、システム変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610) `-1`に設定されている場合にのみ有効になります。
--   デフォルト値: `0`
+- `max_threads`は、 TiFlash がMPP タスクを実行する際の内部スレッド同時実行数を示します。`0`に設定すると、 TiFlash は論理 CPU コアの数を同時実行数として使用します。
+- このパラメータは、システム変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610) `-1`に設定されている場合にのみ有効になります。
+- デフォルト値: `0`
 
 ##### `max_memory_usage` {#max_memory_usage}
 
--   単一のクエリで生成される中間データのメモリ使用量の制限。
--   値が整数の場合、単位はバイトです。例えば、 `34359738368` 32GiBのメモリ制限を意味します。
--   値が`[0.0, 1.0)`の範囲の浮動小数点数の場合、ノードの総メモリに対する許容メモリ使用量の比率を表します。例えば、 `0.8`総メモリの 80% を意味し、 `0.0`無制限を意味します。
--   クエリがこの制限を超えるメモリを消費しようとすると、クエリは終了され、エラーが報告されます。
--   デフォルト値: `0` 、制限がないことを意味します。
+- 単一のクエリで生成される中間データのメモリ使用量の制限。
+- 値が整数の場合、単位はバイトです。例えば、 `34359738368` 32GiBのメモリ制限を意味します。
+- 値が`[0.0, 1.0)`の範囲の浮動小数点数の場合、ノードの総メモリに対する許容メモリ使用量の比率を表します。例えば、 `0.8`総メモリの 80% を意味し、 `0.0`無制限を意味します。
+- クエリがこの制限を超えるメモリを消費しようとすると、クエリは終了され、エラーが報告されます。
+- デフォルト値: `0` 、制限がないことを意味します。
 
 ##### `max_memory_usage_for_all_queries` {#max_memory_usage_for_all_queries}
 
--   すべてのクエリで生成される中間データのメモリ使用量制限。
--   値が整数の場合、単位はバイトです。例えば、 `34359738368` 32GiBのメモリ制限を意味し、 `0`制限なしを意味します。
--   v6.6.0以降では、 `[0.0, 1.0)`の範囲の浮動小数点数で値を設定できます。この数値は、許容されるメモリ使用量とノード全体のメモリ使用量の比率を表します。例えば、 `0.8`メモリの80%、 `0.0`無制限を意味します。
--   クエリがこの制限を超えるメモリを消費しようとすると、クエリは終了され、エラーが報告されます。
--   デフォルト値： `0.8` （総メモリの80%を意味します）。v6.6.0より前のバージョンでは、デフォルト値は`0` （無制限を意味します）でした。
+- すべてのクエリで生成される中間データのメモリ使用量制限。
+- 値が整数の場合、単位はバイトです。例えば、 `34359738368` 32GiBのメモリ制限を意味し、 `0`制限なしを意味します。
+- v6.6.0以降では、 `[0.0, 1.0)`の範囲の浮動小数点数で値を設定できます。この数値は、許容されるメモリ使用量とノード全体のメモリ使用量の比率を表します。例えば、 `0.8`メモリの80%、 `0.0`無制限を意味します。
+- クエリがこの制限を超えるメモリを消費しようとすると、クエリは終了され、エラーが報告されます。
+- デフォルト値： `0.8` （総メモリの80%を意味します）。v6.6.0より前のバージョンでは、デフォルト値は`0` （無制限を意味します）でした。
 
 ##### `cop_pool_size`<span class="version-mark">バージョン5.0の新機能</span> {#cop_pool_size-new-in-v50}
 
--   TiFlashコプロセッサーが同時に実行できるcopリクエストの最大数を指定します。リクエスト数がこの値を超えても、10倍以内の場合、超過したリクエストはキューに入れられます。リクエスト数がこの値の10倍を超える場合、超過したリクエストはTiFlashによって拒否されます。設定値が`0`に設定されている場合、または設定されていない場合は、デフォルト値（物理コア数の2倍）が使用されます。
--   デフォルト値: 物理コア数の2倍
+- TiFlashコプロセッサーが同時に実行できるcopリクエストの最大数を指定します。リクエスト数がこの値を超えても、10倍以内の場合、超過したリクエストはキューに入れられます。リクエスト数がこの値の10倍を超える場合、超過したリクエストはTiFlashによって拒否されます。設定値が`0`に設定されている場合、または設定されていない場合は、デフォルト値（物理コア数の2倍）が使用されます。
+- デフォルト値: 物理コア数の2倍
 
 ##### `cop_pool_handle_limit`<span class="version-mark">バージョン5.0の新機能</span> {#cop_pool_handle_limit-new-in-v50}
 
--   TiFlashコプロセッサーが同時に処理できるCOPリクエストの最大数を指定します。これには、実行中のリクエストとキューで待機中のリクエストが含まれます。リクエスト数が指定値を超えると、エラー`TiFlash Server is Busy`が返されます。
--   `-1`制限がないことを示し、 `0`デフォルト値の`10 * cop_pool_size`を使用することを示します。
+- TiFlashコプロセッサーが同時に処理できるCOPリクエストの最大数を指定します。これには、実行中のリクエストとキューで待機中のリクエストが含まれます。リクエスト数が指定値を超えると、エラー`TiFlash Server is Busy`が返されます。
+- `-1`制限がないことを示し、 `0`デフォルト値の`10 * cop_pool_size`を使用することを示します。
 
 ##### `cop_pool_max_queued_seconds`<span class="version-mark">バージョン5.0の新機能</span> {#cop_pool_max_queued_seconds-new-in-v50}
 
--   cop要求がTiFlashにキューイングできる最大時間を指定します。cop要求がこの設定で指定された値よりも長くキュー内で待機した場合、エラー`TiFlash Server is Busy`が返されます。
--   `0`以下の値は制限がないことを示します。
--   デフォルト値: `15`
+- cop要求がTiFlashにキューイングできる最大時間を指定します。cop要求がこの設定で指定された値よりも長くキュー内で待機した場合、エラー`TiFlash Server is Busy`が返されます。
+- `0`以下の値は制限がないことを示します。
+- デフォルト値: `15`
 
 ##### `batch_cop_pool_size`<span class="version-mark">バージョン5.0の新機能</span> {#batch_cop_pool_size-new-in-v50}
 
--   TiFlashコプロセッサーが同時に実行するバッチリクエストの最大数を指定します。リクエスト数が指定値を超えた場合、超過分のリクエストはキューに入れられます。設定値が`0`に設定されているか未設定の場合は、デフォルト値（物理コア数の2倍）が使用されます。
--   デフォルト値: 物理コア数の2倍
+- TiFlashコプロセッサーが同時に実行するバッチリクエストの最大数を指定します。リクエスト数が指定値を超えた場合、超過分のリクエストはキューに入れられます。設定値が`0`に設定されているか未設定の場合は、デフォルト値（物理コア数の2倍）が使用されます。
+- デフォルト値: 物理コア数の2倍
 
 ##### `manual_compact_pool_size`<span class="version-mark">バージョン6.1の新機能</span> {#manual_compact_pool_size-new-in-v61}
 
--   TiFlash がTiDB から`ALTER TABLE ... COMPACT`受信したときに同時に処理できる要求の数を指定します。
--   値が`0`に設定されている場合、デフォルト値`1`が優先されます。
--   デフォルト値: `1`
+- TiFlash がTiDB から`ALTER TABLE ... COMPACT`受信したときに同時に処理できる要求の数を指定します。
+- 値が`0`に設定されている場合、デフォルト値`1`が優先されます。
+- デフォルト値: `1`
 
 ##### `enable_elastic_threadpool`<span class="version-mark">バージョン5.4.0の新機能</span> {#enable_elastic_threadpool-new-in-v540}
 
--   エラスティック スレッド プール機能を有効にするかどうかを制御します。この機能により、 TiFlashの同時実行性の高いシナリオで CPU 使用率が大幅に向上します。
--   デフォルト値: `true`
+- エラスティック スレッド プール機能を有効にするかどうかを制御します。この機能により、 TiFlashの同時実行性の高いシナリオで CPU 使用率が大幅に向上します。
+- デフォルト値: `true`
 
 ##### `dt_compression_method` {#dt_compression_method}
 
--   TiFlashストレージエンジンの圧縮アルゴリズム。
--   デフォルト値: `LZ4`
--   値のオプション: `LZ4` 、 `zstd` 、 `LZ4HC` 。値は大文字と小文字を区別しません。
+- TiFlashストレージエンジンの圧縮アルゴリズム。
+- デフォルト値: `LZ4`
+- 値のオプション: `LZ4` 、 `zstd` 、 `LZ4HC` 。値は大文字と小文字を区別しません。
 
 ##### `dt_compression_level` {#dt_compression_level}
 
--   TiFlashストレージエンジンの圧縮レベル。
--   `dt_compression_method`が`LZ4`の場合は、この値を`1`に設定することをお勧めします。
--   この値は`-1` (圧縮率は低くなりますが、読み取りパフォーマンスは向上します) に設定するか、 `dt_compression_method`が`zstd`の場合は`1`に設定することをお勧めします。
--   `dt_compression_method`が`LZ4HC`の場合は、この値を`9`に設定することをお勧めします。
--   デフォルト値: `1`
+- TiFlashストレージエンジンの圧縮レベル。
+- `dt_compression_method`が`LZ4`の場合は、この値を`1`に設定することをお勧めします。
+- この値は`-1` (圧縮率は低くなりますが、読み取りパフォーマンスは向上します) に設定するか、 `dt_compression_method`が`zstd`の場合は`1`に設定することをお勧めします。
+- `dt_compression_method`が`LZ4HC`の場合は、この値を`9`に設定することをお勧めします。
+- デフォルト値: `1`
 
 ##### `dt_page_gc_threshold` <span class="version-mark">v6.2.0 の新機能</span> {#dt_page_gc_threshold-new-in-v620}
 
--   PageStorageデータファイル内の有効データの最小比率を指定します。PageStorageデータファイル内の有効データの比率がこの設定値を下回ると、GCがトリガーされ、ファイル内のデータが圧縮されます。
--   デフォルト値: `0.5`
+- PageStorageデータファイル内の有効データの最小比率を指定します。PageStorageデータファイル内の有効データの比率がこの設定値を下回ると、GCがトリガーされ、ファイル内のデータが圧縮されます。
+- デフォルト値: `0.5`
 
 ##### `max_bytes_before_external_group_by` <span class="version-mark">v7.0.0 の新機能</span> {#max_bytes_before_external_group_by-new-in-v700}
 
--   ハッシュ集計演算子（キー`GROUP BY`で使用可能な最大メモリを指定します。この値を超えるとディスクへの書き込みがトリガーされます。メモリ使用量がしきい値を超えると、ハッシュ集計はメモリ使用量を[ディスクへのスピル](/tiflash/tiflash-spill-disk.md)削減します。
--   デフォルト値: `0` 。これは、メモリ使用量が無制限であり、ハッシュ集計にディスクへのスピルが使用されないことを意味します。
+- ハッシュ集計演算子（キー`GROUP BY`で使用可能な最大メモリを指定します。この値を超えるとディスクへの書き込みがトリガーされます。メモリ使用量がしきい値を超えると、ハッシュ集計はメモリ使用量を[ディスクへのスピル](/tiflash/tiflash-spill-disk.md)削減します。
+- デフォルト値: `0` 。これは、メモリ使用量が無制限であり、ハッシュ集計にディスクへのスピルが使用されないことを意味します。
 
 ##### `max_bytes_before_external_sort`<span class="version-mark">バージョン7.0.0の新機能</span> {#max_bytes_before_external_sort-new-in-v700}
 
--   ソート演算子またはtopN演算子で使用可能な最大メモリを指定します。この値を超えるとディスクへの書き込みがトリガーされます。メモリ使用量がこのしきい値を超えると、ソート演算子またはtopN演算子はメモリ使用量を[ディスクへのスピル](/tiflash/tiflash-spill-disk.md)ずつ減らします。
--   デフォルト値: `0` 。これは、メモリ使用量が無制限であり、ソートや topN にディスクへのスピルが使用されないことを意味します。
+- ソート演算子またはtopN演算子で使用可能な最大メモリを指定します。この値を超えるとディスクへの書き込みがトリガーされます。メモリ使用量がこのしきい値を超えると、ソート演算子またはtopN演算子はメモリ使用量を[ディスクへのスピル](/tiflash/tiflash-spill-disk.md)ずつ減らします。
+- デフォルト値: `0` 。これは、メモリ使用量が無制限であり、ソートや topN にディスクへのスピルが使用されないことを意味します。
 
 ##### `max_bytes_before_external_join`<span class="version-mark">バージョン7.0.0の新機能</span> {#max_bytes_before_external_join-new-in-v700}
 
--   等価結合条件を持つハッシュ結合演算子で使用可能な最大メモリを指定します。この値を超えるとディスクへの書き込みがトリガーされます。メモリ使用量がしきい値を超えると、HashJoin はメモリ使用量を[ディスクへのスピル](/tiflash/tiflash-spill-disk.md)減らします。
--   デフォルト値: `0` 。これは、メモリ使用量が無制限であり、等価結合条件によるハッシュ結合ではディスクへのスピルが使用されないことを意味します。
+- 等価結合条件を持つハッシュ結合演算子で使用可能な最大メモリを指定します。この値を超えるとディスクへの書き込みがトリガーされます。メモリ使用量がしきい値を超えると、HashJoin はメモリ使用量を[ディスクへのスピル](/tiflash/tiflash-spill-disk.md)減らします。
+- デフォルト値: `0` 。これは、メモリ使用量が無制限であり、等価結合条件によるハッシュ結合ではディスクへのスピルが使用されないことを意味します。
 
 ##### `enable_resource_control`<span class="version-mark">バージョン7.4.0の新機能</span> {#enable_resource_control-new-in-v740}
 
--   TiFlashリソース制御機能を有効にするかどうかを制御します。`true`に設定すると、 TiFlashは[パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)を使用します。
--   デフォルト値: `true`
--   値`false`オプション: `true`
+- TiFlashリソース制御機能を有効にするかどうかを制御します。`true`に設定すると、 TiFlashは[パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)を使用します。
+- デフォルト値: `true`
+- 値`false`オプション: `true`
 
 ##### `task_scheduler_thread_soft_limit`<span class="version-mark">バージョン6.0.0の新機能</span> {#task_scheduler_thread_soft_limit-new-in-v600}
 
--   この項目はMinTSOスケジューラで使用されます。1つのリソースグループが使用できるスレッドの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラ](/tiflash/tiflash-mintso-scheduler.md)を参照してください。
--   デフォルト値: `5000`
+- この項目はMinTSOスケジューラで使用されます。1つのリソースグループが使用できるスレッドの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラ](/tiflash/tiflash-mintso-scheduler.md)を参照してください。
+- デフォルト値: `5000`
 
 ##### `task_scheduler_thread_hard_limit`<span class="version-mark">バージョン6.0.0の新機能</span> {#task_scheduler_thread_hard_limit-new-in-v600}
 
--   この項目はMinTSOスケジューラで使用されます。グローバルスコープ内のスレッドの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラ](/tiflash/tiflash-mintso-scheduler.md)を参照してください。
--   デフォルト値: `10000`
+- この項目はMinTSOスケジューラで使用されます。グローバルスコープ内のスレッドの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラ](/tiflash/tiflash-mintso-scheduler.md)を参照してください。
+- デフォルト値: `10000`
 
 ##### `task_scheduler_active_set_soft_limit`<span class="version-mark">バージョン6.4.0の新機能</span> {#task_scheduler_active_set_soft_limit-new-in-v640}
 
--   この項目はMinTSOスケジューラに使用されます。TiFlashで同時に実行できるクエリの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラ](/tiflash/tiflash-mintso-scheduler.md)を参照してください。
--   デフォルト値: バージョン7.4.0より前のバージョンでは、デフォルト値は`vcpu * 0.25`で、これはvCPU数の4分の1を意味します。バージョン7.4.0以降では、デフォルト値は`vcpu * 2`で、これはvCPU数の2倍を意味します。
+- この項目はMinTSOスケジューラに使用されます。TiFlashで同時に実行できるクエリの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラ](/tiflash/tiflash-mintso-scheduler.md)を参照してください。
+- デフォルト値: バージョン7.4.0より前のバージョンでは、デフォルト値は`vcpu * 0.25`で、これはvCPU数の4分の1を意味します。バージョン7.4.0以降では、デフォルト値は`vcpu * 2`で、これはvCPU数の2倍を意味します。
 
 #### セキュリティ<span class="version-mark">v4.0.5 の新機能</span> {#security-new-in-v405}
 
@@ -463,29 +463,29 @@ I/O トラフィック制限設定を構成します。
 
 ##### `redact_info_log`<span class="version-mark">バージョン5.0の新機能</span> {#redact_info_log-new-in-v50}
 
--   ログの秘匿化を有効にするかどうかを制御します。
--   デフォルト値: `false`
--   値のオプション: `true` 、 `false` 、 `"on"` 、 `"off"` 、および`"marker"` 。 `"on"` 、 `"off"` 、および`"marker"`オプションは、v8.2.0 で導入されました。
--   構成項目が`false`または`"off"`に設定されている場合、ログの秘匿化は無効になります。
--   構成項目が`true`または`"on"`に設定されている場合、ログ内のすべてのユーザー データは`?`に置き換えられます。
--   設定項目を`"marker"`に設定すると、ログ内のすべてのユーザーデータは`‹ ›`で囲まれます。ユーザーデータに`‹`または`›`が含まれている場合、 `‹`は`‹‹`に、 `›`は`››`にエスケープされます。マークされたログに基づいて、ログを表示する際にマークされた情報を非感度化するかどうかを決定できます。
--   [`tiflash-learner.toml`](#configure-the-tiflash-learnertoml-file)での tiflash-learner のログインにも`security.redact-info-log`設定する必要があることに注意してください。
+- ログの秘匿化を有効にするかどうかを制御します。
+- デフォルト値: `false`
+- 値のオプション: `true` 、 `false` 、 `"on"` 、 `"off"` 、および`"marker"` 。 `"on"` 、 `"off"` 、および`"marker"`オプションは、v8.2.0 で導入されました。
+- 構成項目が`false`または`"off"`に設定されている場合、ログの秘匿化は無効になります。
+- 構成項目が`true`または`"on"`に設定されている場合、ログ内のすべてのユーザー データは`?`に置き換えられます。
+- 設定項目を`"marker"`に設定すると、ログ内のすべてのユーザーデータは`‹ ›`で囲まれます。ユーザーデータに`‹`または`›`が含まれている場合、 `‹`は`‹‹`に、 `›`は`››`にエスケープされます。マークされたログに基づいて、ログを表示する際にマークされた情報を非感度化するかどうかを決定できます。
+- [`tiflash-learner.toml`](#configure-the-tiflash-learnertoml-file)での tiflash-learner のログインにも`security.redact-info-log`設定する必要があることに注意してください。
 
 ##### `ca_path` {#ca_path}
 
--   信頼できるSSL CAのリストを含むファイルのパス。設定する場合は、 [`cert_path`](#cert_path)と[`key_path`](#key_path)必要です。
+- 信頼できるSSL CAのリストを含むファイルのパス。設定する場合は、 [`cert_path`](#cert_path)と[`key_path`](#key_path)必要です。
 
 <!-- Example: `"/path/to/ca.pem"` -->
 
 ##### `cert_path` {#cert_path}
 
--   PEM 形式の X509 証明書が含まれるファイルのパス。
+- PEM 形式の X509 証明書が含まれるファイルのパス。
 
 <!-- Example: `"/path/to/tiflash-server.pem"` -->
 
 ##### `key_path` {#key_path}
 
--   PEM 形式の X509 キーを含むファイルのパス。
+- PEM 形式の X509 キーを含むファイルのパス。
 
 <!-- Example: `"/path/to/tiflash-server-key.pem"` -->
 
@@ -493,90 +493,90 @@ I/O トラフィック制限設定を構成します。
 
 `tiflash-learner.toml`のパラメータは基本的にTiKVと同じです。TiFlashの設定については[TiKV構成](/tikv-configuration-file.md)を参照してください。以下はよく使用されるパラメータのみを示しています。ご注意ください。
 
--   TiKV と比較して、 TiFlash Proxy には[`raftstore.snap-handle-pool-size`](#snap-handle-pool-size-new-in-v400)追加パラメーターがあります。
--   キーが`engine`の`label`は予約されており、手動で設定することはできません。
+- TiKV と比較して、 TiFlash Proxy には[`raftstore.snap-handle-pool-size`](#snap-handle-pool-size-new-in-v400)追加パラメーターがあります。
+- キーが`engine`の`label`は予約されており、手動で設定することはできません。
 
 #### ログ {#log-1}
 
 ##### `level` <span class="version-mark">v5.4.0 の新機能</span> {#level-new-in-v540}
 
--   TiFlash Proxy のログ レベル。
--   デフォルト値: `"info"`
--   `"info"` `"debug"` `"error"` `"warn"` `"trace"`
+- TiFlash Proxy のログ レベル。
+- デフォルト値: `"info"`
+- `"info"` `"debug"` `"error"` `"warn"` `"trace"`
 
 #### ログファイル {#logfile}
 
 ##### `max-backups` <span class="version-mark">5.4.0の新機能</span> {#max-backups-new-in-v540}
 
--   保存するログ ファイルの最大数。
--   このパラメータが設定されていないか、デフォルト値`0`に設定されている場合、 TiFlash Proxy はすべてのログ ファイルを保存します。
--   このパラメータを0以外の値に設定すると、 TiFlash Proxyは最大で`max-backups`で指定された数の古いログファイルを保持します。例えば、 `7`に設定すると、 TiFlash Proxyは最大で7つの古いログファイルを保持します。
--   デフォルト値: `0`
+- 保存するログ ファイルの最大数。
+- このパラメータが設定されていないか、デフォルト値`0`に設定されている場合、 TiFlash Proxy はすべてのログ ファイルを保存します。
+- このパラメータを0以外の値に設定すると、 TiFlash Proxyは最大で`max-backups`で指定された数の古いログファイルを保持します。例えば、 `7`に設定すると、 TiFlash Proxyは最大で7つの古いログファイルを保持します。
+- デフォルト値: `0`
 
 ##### `max-days` <span class="version-mark">v5.4.0 の新機能</span> {#max-days-new-in-v540}
 
--   ログ ファイルが保持される最大日数。
--   このパラメータが設定されていないか、デフォルト値`0`に設定されている場合、 TiFlash Proxy はすべてのログ ファイルを保持します。
--   このパラメータがゼロ以外の値に設定されている場合、 TiFlash Proxy は`max-days`で指定された日数後に古いログ ファイルをクリーンアップします。
--   デフォルト値: `0`
+- ログ ファイルが保持される最大日数。
+- このパラメータが設定されていないか、デフォルト値`0`に設定されている場合、 TiFlash Proxy はすべてのログ ファイルを保持します。
+- このパラメータがゼロ以外の値に設定されている場合、 TiFlash Proxy は`max-days`で指定された日数後に古いログ ファイルをクリーンアップします。
+- デフォルト値: `0`
 
 #### ラフトストア {#raftstore}
 
 ##### `apply-pool-size` {#apply-pool-size}
 
--   Raftデータをストレージにフラッシュするプール内の許容スレッド数。
+- Raftデータをストレージにフラッシュするプール内の許容スレッド数。
 
 <!-- Example: `4` -->
 
 ##### `store-pool-size` {#store-pool-size}
 
--   Raft を処理するスレッドの許容数。これはRaftstoreスレッド プールのサイズです。
+- Raft を処理するスレッドの許容数。これはRaftstoreスレッド プールのサイズです。
 
 <!-- Example: `4` -->
 
 ##### `snap-handle-pool-size` <span class="version-mark">v4.0.0 の新機能</span> {#snap-handle-pool-size-new-in-v400}
 
--   スナップショットを処理するスレッドの数。`0`に設定すると、マルチスレッド最適化は無効になります。
--   デフォルト値: `2`
+- スナップショットを処理するスレッドの数。`0`に設定すると、マルチスレッド最適化は無効になります。
+- デフォルト値: `2`
 
 #### 安全 {#security}
 
 ##### `redact-info-log`<span class="version-mark">バージョン5.0の新機能</span> {#redact-info-log-new-in-v50}
 
--   ログの秘匿化を有効にするかどうかを制御します。
--   デフォルト値: `false`
--   値のオプション: `true` 、 `false` 、 `"on"` 、 `"off"` 、および`"marker"` 。 `"on"` 、 `"off"` 、および`"marker"`オプションは、v8.3.0 で導入されました。
--   構成項目が`false`または`"off"`に設定されている場合、ログの秘匿化は無効になります。
--   構成項目が`true`または`"on"`に設定されている場合、ログ内のすべてのユーザー データは`?`に置き換えられます。
--   設定項目を`"marker"`に設定すると、ログ内のすべてのユーザーデータは`‹ ›`で囲まれます。ユーザーデータに`‹`または`›`が含まれている場合、 `‹`は`‹‹`に、 `›`は`››`にエスケープされます。マークされたログに基づいて、ログを表示する際にマークされた情報を非感度化するかどうかを決定できます。
+- ログの秘匿化を有効にするかどうかを制御します。
+- デフォルト値: `false`
+- 値のオプション: `true` 、 `false` 、 `"on"` 、 `"off"` 、および`"marker"` 。 `"on"` 、 `"off"` 、および`"marker"`オプションは、v8.3.0 で導入されました。
+- 構成項目が`false`または`"off"`に設定されている場合、ログの秘匿化は無効になります。
+- 構成項目が`true`または`"on"`に設定されている場合、ログ内のすべてのユーザー データは`?`に置き換えられます。
+- 設定項目を`"marker"`に設定すると、ログ内のすべてのユーザーデータは`‹ ›`で囲まれます。ユーザーデータに`‹`または`›`が含まれている場合、 `‹`は`‹‹`に、 `›`は`››`にエスケープされます。マークされたログに基づいて、ログを表示する際にマークされた情報を非感度化するかどうかを決定できます。
 
 #### セキュリティ.暗号化 {#securityencryption}
 
 ##### `data-encryption-method` {#data-encryption-method}
 
--   データファイルの暗号化方法。`"plaintext"`以外の値は暗号化が有効であることを意味します。その場合はマスターキーを指定する必要があります。
--   デフォルト値: `"plaintext"` 。これは、暗号化がデフォルトで無効になっていることを意味します。
--   `"aes256-ctr"` `"aes192-ctr"`オプション: `"aes128-ctr"` `"sm4-ctr"` `"plaintext"`で導入`"sm4-ctr"`れました。
+- データファイルの暗号化方法。`"plaintext"`以外の値は暗号化が有効であることを意味します。その場合はマスターキーを指定する必要があります。
+- デフォルト値: `"plaintext"` 。これは、暗号化がデフォルトで無効になっていることを意味します。
+- `"aes256-ctr"` `"aes192-ctr"`オプション: `"aes128-ctr"` `"sm4-ctr"` `"plaintext"`で導入`"sm4-ctr"`れました。
 
 ##### `data-key-rotation-period` {#data-key-rotation-period}
 
--   データ暗号化キーをローテーションする頻度を指定します。
--   デフォルト値: `7d`
+- データ暗号化キーをローテーションする頻度を指定します。
+- デフォルト値: `7d`
 
 #### セキュリティ.暗号化.マスターキー {#securityencryptionmaster-key}
 
--   暗号化が有効になっている場合、マスターキーを指定します。マスターキーの設定方法については、 [暗号化を設定する](/encryption-at-rest.md#configure-encryption)を参照してください。
+- 暗号化が有効になっている場合、マスターキーを指定します。マスターキーの設定方法については、 [暗号化を設定する](/encryption-at-rest.md#configure-encryption)を参照してください。
 
 #### セキュリティ.暗号化.以前のマスターキー {#securityencryptionprevious-master-key}
 
--   新しいマスターキーをローテーションする際に使用する古いマスターキーを指定します。設定形式は`master-key`と同じです。マスターキーの設定方法については、 [暗号化を設定する](/encryption-at-rest.md#configure-encryption)を参照してください。
+- 新しいマスターキーをローテーションする際に使用する古いマスターキーを指定します。設定形式は`master-key`と同じです。マスターキーの設定方法については、 [暗号化を設定する](/encryption-at-rest.md#configure-encryption)を参照してください。
 
 #### サーバー {#server}
 
 ##### `labels` {#labels}
 
--   `{ zone = "us-west-1", disk = "ssd" }`などのサーバー属性を指定します。ラベルを使用してレプリカをスケジュールする方法の詳細については、 [利用可能なゾーンを設定する](/tiflash/create-tiflash-replicas.md#set-available-zones)を参照してください。
--   デフォルト値: `{}`
+- `{ zone = "us-west-1", disk = "ssd" }`などのサーバー属性を指定します。ラベルを使用してレプリカをスケジュールする方法の詳細については、 [利用可能なゾーンを設定する](/tiflash/create-tiflash-replicas.md#set-available-zones)を参照してください。
+- デフォルト値: `{}`
 
 ### マルチディスク展開 {#multi-disk-deployment}
 

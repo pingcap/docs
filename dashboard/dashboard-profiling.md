@@ -19,27 +19,27 @@ summary: 手動プロファイリングを使用すると、TiDB、TiKV、PD、 
 
 現在、次のパフォーマンス データがサポートされています。
 
--   CPU: TiDB、TiKV、PD、 TiFlashインスタンスの各内部関数のCPUオーバーヘッド
+- CPU: TiDB、TiKV、PD、 TiFlashインスタンスの各内部関数のCPUオーバーヘッド
 
     > TiKV およびTiFlashインスタンスの CPU オーバーヘッドは、現在 ARMアーキテクチャではサポートされていません。
 
--   ヒープ: TiDB、TiKV、PDインスタンス上の各内部関数のメモリ消費量
+- ヒープ: TiDB、TiKV、PDインスタンス上の各内部関数のメモリ消費量
 
     > TiDBはv7.5以降、TiKVヒーププロファイルをサポートしています。TiDB Dashboardの実行環境にはPerl実行環境が必要です。Perl実行環境がない場合、エラーが発生します。
 
--   ミューテックス: TiDBおよびPDインスタンス上のミューテックスの競合状態
+- ミューテックス: TiDBおよびPDインスタンス上のミューテックスの競合状態
 
--   Goroutine: TiDB および PD インスタンス上のすべての Goroutine の実行状態と呼び出しスタック
+- Goroutine: TiDB および PD インスタンス上のすべての Goroutine の実行状態と呼び出しスタック
 
 ## ページにアクセスする {#access-the-page}
 
 次のいずれかの方法でインスタンス プロファイリング ページにアクセスできます。
 
--   TiDB Dashboardにログインしたら、左側のナビゲーション メニューで**[高度なデバッグ]** &gt; **[インスタンスのプロファイリング]** &gt; **[手動プロファイリング]**をクリックします。
+- TiDB Dashboardにログインしたら、左側のナビゲーション メニューで**[高度なデバッグ]** &gt; **[インスタンスのプロファイリング]** &gt; **[手動プロファイリング]**をクリックします。
 
     ![Access instance profiling page](/media/dashboard/dashboard-profiling-access.png)
 
--   ブラウザで[http://127.0.0.1:2379/dashboard/#/instance_profiling](http://127.0.0.1:2379/dashboard/#/instance_profiling)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
+- ブラウザで[http://127.0.0.1:2379/dashboard/#/instance_profiling](http://127.0.0.1:2379/dashboard/#/instance_profiling)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
 
 ## プロファイリングを開始 {#start-profiling}
 

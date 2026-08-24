@@ -7,8 +7,8 @@ summary: METRICS_SUMMARY システム テーブルについて学習します。
 
 TiDB クラスタには多くの監視メトリックがあります。異常な監視メトリックを容易に検出できるように、TiDB 4.0 では次の 2 つの監視サマリーテーブルが導入されています。
 
--   `information_schema.metrics_summary`
--   `information_schema.metrics_summary_by_label`
+- `information_schema.metrics_summary`
+- `information_schema.metrics_summary_by_label`
 
 > **Note:**
 >
@@ -38,12 +38,12 @@ DESC metrics_summary;
 
 フィールドの説明:
 
--   `METRICS_NAME` : 監視テーブル名。
--   `QUANTILE` : パーセンタイル。SQL文を使用して`QUANTILE`を指定することもできます。例:
-    -   `select * from metrics_summary where quantile=0.99` 0.99 パーセンタイルのデータを表示することを指定します。
-    -   `select * from metrics_summary where quantile in (0.80, 0.90, 0.99, 0.999)` 、0.8、0.90、0.99、0.999 パーセンタイルのデータを同時に表示することを指定します。
--   `SUM_VALUE` 、 `AVG_VALUE` 、 `MIN_VALUE` 、 `MAX_VALUE`それぞれ合計、平均値、最小値、最大値を意味します。
--   `COMMENT` : 対応する監視テーブルのコメント。
+- `METRICS_NAME` : 監視テーブル名。
+- `QUANTILE` : パーセンタイル。SQL文を使用して`QUANTILE`を指定することもできます。例:
+    - `select * from metrics_summary where quantile=0.99` 0.99 パーセンタイルのデータを表示することを指定します。
+    - `select * from metrics_summary where quantile in (0.80, 0.90, 0.99, 0.999)` 、0.8、0.90、0.99、0.999 パーセンタイルのデータを同時に表示することを指定します。
+- `SUM_VALUE` 、 `AVG_VALUE` 、 `MIN_VALUE` 、 `MAX_VALUE`それぞれ合計、平均値、最小値、最大値を意味します。
+- `COMMENT` : 対応する監視テーブルのコメント。
 
 例えば：
 
@@ -135,8 +135,8 @@ COMMENT      | The quantile of TiDB query durations(second)
 
 上記の例に加えて、監視サマリーテーブルを使用して、2つの期間のフルリンク監視項目を比較することで、監視データから最も大きな変化があったモジュールを迅速に特定し、ボトルネックを迅速に特定できます。次の例では、2つの期間（t1がベースライン）のすべての監視項目を比較し、これらの項目を差異の大きい順に並べ替えています。
 
--   期間t1: `("2020-03-03 17:08:00", "2020-03-03 17:11:00")`
--   期間t2: `("2020-03-03 17:18:00", "2020-03-03 17:21:00")`
+- 期間t1: `("2020-03-03 17:08:00", "2020-03-03 17:11:00")`
+- 期間t2: `("2020-03-03 17:18:00", "2020-03-03 17:21:00")`
 
 2 つの期間の監視項目は`METRICS_NAME`に従って結合され、差異値に従ってソートされます。`TIME_RANGE`はクエリ時間を指定するヒントです。
 
@@ -176,10 +176,10 @@ ORDER BY ratio DESC LIMIT 10;
 
 上記のクエリ結果から、次の情報を取得できます。
 
--   期間 t2 の`tib_slow_query_cop_process_total_time` (TiDB のスロークエリでの時間消費量`cop process` ) は、期間 t1 の 5,865 倍になります。
--   期間t2における`tidb_distsql_partial_scan_key_total_num` （TiDBの`distsql`が要求するスキャンキー数）は、期間t1の3,648倍です。期間t2における`tidb_slow_query_cop_wait_total_time` （コプロセッサーがTiDBのスロークエリのキューイングを要求する際の待機時間）は、期間t1の267倍です。
--   期間 t2 の`tikv_cop_total_response_size` (TiKVコプロセッサー要求結果のサイズ) は、期間 t1 の 192 倍になります。
--   期間 t2 (TiKVコプロセッサーによって要求されたスキャン) の`tikv_cop_scan_details`は、期間 t1 の 105 倍になります。
+- 期間 t2 の`tib_slow_query_cop_process_total_time` (TiDB のスロークエリでの時間消費量`cop process` ) は、期間 t1 の 5,865 倍になります。
+- 期間t2における`tidb_distsql_partial_scan_key_total_num` （TiDBの`distsql`が要求するスキャンキー数）は、期間t1の3,648倍です。期間t2における`tidb_slow_query_cop_wait_total_time` （コプロセッサーがTiDBのスロークエリのキューイングを要求する際の待機時間）は、期間t1の267倍です。
+- 期間 t2 の`tikv_cop_total_response_size` (TiKVコプロセッサー要求結果のサイズ) は、期間 t1 の 192 倍になります。
+- 期間 t2 (TiKVコプロセッサーによって要求されたスキャン) の`tikv_cop_scan_details`は、期間 t1 の 105 倍になります。
 
 上記の結果から、期間t2のコプロセッサーリクエストが期間t1よりもはるかに多いことがわかります。これによりTiKVコプロセッサーが過負荷になり、 `cop task`待機状態になります。期間t2に大規模なクエリが発生し、負荷がさらに増加している可能性があります。
 

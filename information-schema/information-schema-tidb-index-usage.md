@@ -46,20 +46,20 @@ DESC TIDB_INDEX_USAGE;
 
 `TIDB_INDEX_USAGE`テーブルの列は以下のとおりです。
 
--   `TABLE_SCHEMA` : インデックスを含むテーブルが属するデータベースの名前。
--   `TABLE_NAME` : インデックスを含むテーブルの名前。
--   `INDEX_NAME` : インデックスの名前。
--   `QUERY_TOTAL` : インデックスにアクセスするステートメントの総数。
--   `KV_REQ_TOTAL` : インデックスにアクセスした際に生成された KV リクエストの総数。
--   `ROWS_ACCESS_TOTAL` : インデックスにアクセスする際にスキャンされた行の総数。
--   `PERCENTAGE_ACCESS_0` : 行アクセス率（テーブル内の全行数に対するアクセスされた行の割合）が 0 になる回数。
--   `PERCENTAGE_ACCESS_0_1` : 行アクセス率が 0% ～ 1% である回数。
--   `PERCENTAGE_ACCESS_1_10` : 行アクセス率が 1% ～ 10% である回数。
--   `PERCENTAGE_ACCESS_10_20` : 行アクセス率が 10% ～ 20% の間である回数。
--   `PERCENTAGE_ACCESS_20_50` : 行アクセス率が 20% ～ 50% の間である回数。
--   `PERCENTAGE_ACCESS_50_100` : 行アクセス率が 50% ～ 100% の間である回数。
--   `PERCENTAGE_ACCESS_100` : 行アクセス率が 100% になる回数。
--   `LAST_ACCESS_TIME` : インデックスへの最新のアクセス時刻。
+- `TABLE_SCHEMA` : インデックスを含むテーブルが属するデータベースの名前。
+- `TABLE_NAME` : インデックスを含むテーブルの名前。
+- `INDEX_NAME` : インデックスの名前。
+- `QUERY_TOTAL` : インデックスにアクセスするステートメントの総数。
+- `KV_REQ_TOTAL` : インデックスにアクセスした際に生成された KV リクエストの総数。
+- `ROWS_ACCESS_TOTAL` : インデックスにアクセスする際にスキャンされた行の総数。
+- `PERCENTAGE_ACCESS_0` : 行アクセス率（テーブル内の全行数に対するアクセスされた行の割合）が 0 になる回数。
+- `PERCENTAGE_ACCESS_0_1` : 行アクセス率が 0% ～ 1% である回数。
+- `PERCENTAGE_ACCESS_1_10` : 行アクセス率が 1% ～ 10% である回数。
+- `PERCENTAGE_ACCESS_10_20` : 行アクセス率が 10% ～ 20% の間である回数。
+- `PERCENTAGE_ACCESS_20_50` : 行アクセス率が 20% ～ 50% の間である回数。
+- `PERCENTAGE_ACCESS_50_100` : 行アクセス率が 50% ～ 100% の間である回数。
+- `PERCENTAGE_ACCESS_100` : 行アクセス率が 100% になる回数。
+- `LAST_ACCESS_TIME` : インデックスへの最新のアクセス時刻。
 
 ## クラスターTIDBインデックス使用状況 {#cluster_tidb_index_usage}
 
@@ -99,10 +99,10 @@ DESC CLUSTER_TIDB_INDEX_USAGE;
 
 ## 制限事項 {#limitations}
 
--   `TIDB_INDEX_USAGE`テーブルのデータは、最大 5 分遅れる場合があります。
--   TiDBが再起動すると、 `TIDB_INDEX_USAGE`テーブルのデータがクリアされます。
--   TiDBは、テーブルに有効な統計情報がある場合にのみ、そのテーブルのインデックス使用状況を記録します。
+- `TIDB_INDEX_USAGE`テーブルのデータは、最大 5 分遅れる場合があります。
+- TiDBが再起動すると、 `TIDB_INDEX_USAGE`テーブルのデータがクリアされます。
+- TiDBは、テーブルに有効な統計情報がある場合にのみ、そのテーブルのインデックス使用状況を記録します。
 
 ## 続きを読む {#read-more}
 
--   [`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
+- [`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)

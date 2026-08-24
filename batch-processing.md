@@ -9,12 +9,12 @@ summary: パイプライン DML、非トランザクション DML、IMPORT INTO`
 
 バッチ操作のパフォーマンスを最適化するために、TiDB はバージョンの進化とともにさまざまな機能を導入しています。
 
--   データのインポート
-    -   `IMPORT INTO`ステートメント (TiDB v7.2.0 で導入され、v7.5.0 で GA になりました)
--   データの挿入、更新、削除
-    -   パイプライン DML (実験的、TiDB v8.0.0 で導入)
-    -   非トランザクションDML（TiDB v6.1.0で導入）
-    -   Batch-dml（非推奨）
+- データのインポート
+    - `IMPORT INTO`ステートメント (TiDB v7.2.0 で導入され、v7.5.0 で GA になりました)
+- データの挿入、更新、削除
+    - パイプライン DML (実験的、TiDB v8.0.0 で導入)
+    - 非トランザクションDML（TiDB v6.1.0で導入）
+    - Batch-dml（非推奨）
 
 このドキュメントでは、これらの機能の主な利点、制限事項、使用例について概説し、効率的なバッチ処理に最適なソリューションを選択できるようにします。
 
@@ -24,28 +24,28 @@ summary: パイプライン DML、非トランザクション DML、IMPORT INTO`
 
 ### 主なメリット {#key-benefits}
 
--   非常に高速なインポート速度
--   TiDB Lightningと比べて使いやすい
+- 非常に高速なインポート速度
+- TiDB Lightningと比べて使いやすい
 
 ### 制限事項 {#limitations}
 
 <CustomContent platform="tidb">
 
--   [ACID](/glossary.md#acid)保証なし
--   Subject to various usage restrictions
+- [ACID](/glossary.md#acid)保証なし
+- Subject to various usage restrictions
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   [ACID](/tidb-cloud/tidb-cloud-glossary.md#acid)保証なし
--   さまざまな使用制限の対象となります
+- [ACID](/tidb-cloud/tidb-cloud-glossary.md#acid)保証なし
+- さまざまな使用制限の対象となります
 
 </CustomContent>
 
 ### ユースケース {#use-cases}
 
--   データの移行や復旧などのデータインポートシナリオに適しています。該当する場合は、 TiDB Lightningではなく`IMPORT INTO`を使用することをお勧めします。
+- データの移行や復旧などのデータインポートシナリオに適しています。該当する場合は、 TiDB Lightningではなく`IMPORT INTO`を使用することをお勧めします。
 
 詳細については[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を参照してください。
 
@@ -57,17 +57,17 @@ summary: パイプライン DML、非トランザクション DML、IMPORT INTO`
 
 #### 主なメリット {#key-benefits}
 
--   Streams data to the storage layer during transaction execution instead of buffering it entirely in memory, allowing transaction size no longer limited by TiDB memory and supporting ultra-large-scale data processing
--   標準のDMLに比べて優れたパフォーマンスを実現
--   SQL を変更せずにシステム変数を通じて有効にすることができます
+- Streams data to the storage layer during transaction execution instead of buffering it entirely in memory, allowing transaction size no longer limited by TiDB memory and supporting ultra-large-scale data processing
+- 標準のDMLに比べて優れたパフォーマンスを実現
+- SQL を変更せずにシステム変数を通じて有効にすることができます
 
 #### 制限事項 {#limitations}
 
--   [自動コミット](/transaction-overview.md#autocommit) `INSERT`、`REPLACE`、`UPDATE`、`DELETE`ステートメントのみをサポートします
+- [自動コミット](/transaction-overview.md#autocommit) `INSERT`、`REPLACE`、`UPDATE`、`DELETE`ステートメントのみをサポートします
 
 #### ユースケース {#use-cases}
 
--   大量のデータの挿入、更新、削除などの一般的なバッチ処理タスクに適しています。
+- 大量のデータの挿入、更新、削除などの一般的なバッチ処理タスクに適しています。
 
 詳細については[パイプラインDML](/pipelined-dml.md)を参照してください。
 
@@ -77,19 +77,19 @@ summary: パイプライン DML、非トランザクション DML、IMPORT INTO`
 
 #### 主なメリット {#key-benefits}
 
--   メモリ制限を回避して、単一の SQL ステートメントを複数の小さなステートメントに分割します。
--   標準の DML よりもわずかに高速、または同等のパフォーマンスを実現します。
+- メモリ制限を回避して、単一の SQL ステートメントを複数の小さなステートメントに分割します。
+- 標準の DML よりもわずかに高速、または同等のパフォーマンスを実現します。
 
 #### 制限事項 {#limitations}
 
--   [自動コミット](/transaction-overview.md#autocommit)ステートメントのみをサポートします
--   SQL文の変更が必要
--   SQL 構文に厳しい要件を課すため、一部のステートメントは書き直しが必要になる場合があります。
--   完全なトランザクションACID保証がないため、障害発生時には文が部分的に実行される可能性がある。
+- [自動コミット](/transaction-overview.md#autocommit)ステートメントのみをサポートします
+- SQL文の変更が必要
+- SQL 構文に厳しい要件を課すため、一部のステートメントは書き直しが必要になる場合があります。
+- 完全なトランザクションACID保証がないため、障害発生時には文が部分的に実行される可能性がある。
 
 #### ユースケース {#use-cases}
 
--   大量のデータの挿入、更新、削除を伴うシナリオに適しています。ただし、その制限のため、パイプラインDMLが適用できない場合にのみ、非トランザクションDMLを検討することをお勧めします。
+- 大量のデータの挿入、更新、削除を伴うシナリオに適しています。ただし、その制限のため、パイプラインDMLが適用できない場合にのみ、非トランザクションDMLを検討することをお勧めします。
 
 詳細については[非トランザクションDML](/non-transactional-dml.md)を参照してください。
 
@@ -97,11 +97,11 @@ summary: パイプライン DML、非トランザクション DML、IMPORT INTO`
 
 TiDB v4.0より前のバージョンで利用可能だったbatch-dml機能は非推奨となり、推奨されなくなりました。この機能は、以下のシステム変数によって制御されます。
 
--   `tidb_batch_insert`
--   `tidb_batch_delete`
--   `tidb_batch_commit`
--   `tidb_enable_batch_dml`
--   `tidb_dml_batch_size`
+- `tidb_batch_insert`
+- `tidb_batch_delete`
+- `tidb_batch_commit`
+- `tidb_enable_batch_dml`
+- `tidb_dml_batch_size`
 
 データとインデックスの不一致によってデータが破損または失われるリスクがあるため、これらの変数は非推奨となり、将来のリリースでは削除される予定です。
 

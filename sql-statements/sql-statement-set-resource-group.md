@@ -28,8 +28,8 @@ ResourceGroupName ::=
 
 このステートメントを実行するには、以下の構成と権限が必要です。
 
-1.  システム変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)は`ON`に設定されています。
-2.  システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) `ON`に設定されている場合、 `SUPER`または`RESOURCE_GROUP_ADMIN`または`RESOURCE_GROUP_USER`の権限が必要です。 `OFF`に設定されている場合、これらの権限は不要です。
+1. システム変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)は`ON`に設定されています。
+2. システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) `ON`に設定されている場合、 `SUPER`または`RESOURCE_GROUP_ADMIN`または`RESOURCE_GROUP_USER`の権限が必要です。 `OFF`に設定されている場合、これらの権限は不要です。
 
 ## 例 {#examples}
 
@@ -94,7 +94,7 @@ MySQL は[SET RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/set-resour
 
 ## 参照 {#see-also}
 
--   [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
--   [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
--   [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
--   [リソース制御](/tidb-resource-control-ru-groups.md)
+- [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
+- [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
+- [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
+- [リソース制御](/tidb-resource-control-ru-groups.md)

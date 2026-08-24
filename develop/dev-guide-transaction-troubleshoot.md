@@ -84,13 +84,13 @@ MySQL などの従来のデータベースとは異なり、TiDB では、楽観
 
 再試行ロジックは次のルールに従う必要があります。
 
--   失敗した再試行回数が`max_retries`制限に達した場合、エラーをスローします。
--   SQL実行例外をキャッチするには`try ... catch ...`を使用します。以下のエラーが発生した場合は再試行してください。その他のエラーが発生した場合はロールバックしてください。
-    -   `Error 8002: can not retry select for update statement` : SELECT FOR UPDATE 書き込み競合エラー
-    -   `Error 8022: Error: KV error safe to retry` : トランザクションのコミットに失敗したエラー。
-    -   `Error 8028: Information schema is changed during the execution of the statement` : DDL 操作によってテーブル スキーマが変更され、トランザクションのコミットでエラーが発生しました。
-    -   `Error 9007: Write conflict` : 書き込み競合エラー。通常、楽観的トランザクション モードが使用されているときに、複数のトランザクションが同じデータ行を変更することによって発生します。
--   try ブロックの最後にあるトランザクションを`COMMIT` 。
+- 失敗した再試行回数が`max_retries`制限に達した場合、エラーをスローします。
+- SQL実行例外をキャッチするには`try ... catch ...`を使用します。以下のエラーが発生した場合は再試行してください。その他のエラーが発生した場合はロールバックしてください。
+    - `Error 8002: can not retry select for update statement` : SELECT FOR UPDATE 書き込み競合エラー
+    - `Error 8022: Error: KV error safe to retry` : トランザクションのコミットに失敗したエラー。
+    - `Error 8028: Information schema is changed during the execution of the statement` : DDL 操作によってテーブル スキーマが変更され、トランザクションのコミットでエラーが発生しました。
+    - `Error 9007: Write conflict` : 書き込み競合エラー。通常、楽観的トランザクション モードが使用されているときに、複数のトランザクションが同じデータ行を変更することによって発生します。
+- try ブロックの最後にあるトランザクションを`COMMIT` 。
 
 エラー コードの詳細については、 [エラーコードとトラブルシューティング](/error-codes.md)を参照してください。
 
@@ -124,10 +124,10 @@ while True:
 
 ## 参照 {#see-also}
 
--   [楽観的トランザクションにおける書き込み競合のトラブルシューティング](/troubleshoot-write-conflicts.md)
+- [楽観的トランザクションにおける書き込み競合のトラブルシューティング](/troubleshoot-write-conflicts.md)
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

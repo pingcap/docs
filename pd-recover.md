@@ -9,8 +9,8 @@ PD RecoverはPDのディザスタリカバリツールであり、正常に起�
 
 ## ソースコードからコンパイル {#compile-from-source-code}
 
--   Goモジュールが使用されるため、[Go](https://golang.org/)1.25以降が必要です。
--   [PDプロジェクト](https://github.com/pingcap/pd)のルートディレクトリで、 `make pd-recover`コマンドを使用して`bin/pd-recover`をコンパイルおよび生成します。
+- Goモジュールが使用されるため、[Go](https://golang.org/)1.25以降が必要です。
+- [PDプロジェクト](https://github.com/pingcap/pd)のルートディレクトリで、 `make pd-recover`コマンドを使用して`bin/pd-recover`をコンパイルおよび生成します。
 
 > **Note:**
 >
@@ -42,8 +42,8 @@ PD Recover インストール パッケージは、 TiDB Toolkitに含まれて�
 
 > **Note:**
 >
-> -   コマンドラインで`--data-dir`が指定されていない場合は、 `conf/pd.toml`内の`data-dir`が、生存しているPDノードの元のデータディレクトリを正しく指していることを確認してください。そうでない場合、`pd-recover`は後続の操作で失敗する可能性があります。
-> -   `conf/pd.toml`とコマンドライン引数の両方で`data-dir`が指定されている場合、 `conf/pd.toml`の`data-dir`設定が優先されます。
+> - コマンドラインで`--data-dir`が指定されていない場合は、 `conf/pd.toml`内の`data-dir`が、生存しているPDノードの元のデータディレクトリを正しく指していることを確認してください。そうでない場合、`pd-recover`は後続の操作で失敗する可能性があります。
+> - `conf/pd.toml`とコマンドライン引数の両方で`data-dir`が指定されている場合、 `conf/pd.toml`の`data-dir`設定が優先されます。
 
 ### ステップ3： `pd-recover`を使用してメタデータを修復する {#step-3-repair-metadata-using-pd-recover}
 

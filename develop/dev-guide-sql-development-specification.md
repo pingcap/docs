@@ -10,18 +10,18 @@ aliases: ['/ja/tidb/stable/dev-guide-sql-development-specification/','/ja/tidbcl
 
 ## テーブルの作成と削除 {#create-and-delete-tables}
 
--   基本原則: テーブル命名規則に従うことを前提として、アプリケーションがテーブルの作成および削除ステートメントを内部的にパッケージ化し、ビジネスプロセスの異常な中断を防ぐための判断ロジックを追加することをお勧めします。
--   詳細: アプリケーション側で異常に実行された SQL コマンドによる異常な中断を回避するために、 `if`判断を追加するには、 `create table if not exists table_name`または`drop table if exists table_name`ステートメントを推奨します。
+- 基本原則: テーブル命名規則に従うことを前提として、アプリケーションがテーブルの作成および削除ステートメントを内部的にパッケージ化し、ビジネスプロセスの異常な中断を防ぐための判断ロジックを追加することをお勧めします。
+- 詳細: アプリケーション側で異常に実行された SQL コマンドによる異常な中断を回避するために、 `if`判断を追加するには、 `create table if not exists table_name`または`drop table if exists table_name`ステートメントを推奨します。
 
 ## `SELECT *`の使用法 {#select-usage}
 
--   基本原則: クエリに`SELECT *`を使用しないでください。
--   詳細：必要に応じて適切な列を選択し、 `SELECT *`を使用してすべてのフィールドを読み取ることは避けてください。このような操作はネットワーク帯域幅を消費するためです。カバリングインデックスを効果的に活用するには、クエリ対象のフィールドをインデックスに追加することを検討してください。
+- 基本原則: クエリに`SELECT *`を使用しないでください。
+- 詳細：必要に応じて適切な列を選択し、 `SELECT *`を使用してすべてのフィールドを読み取ることは避けてください。このような操作はネットワーク帯域幅を消費するためです。カバリングインデックスを効果的に活用するには、クエリ対象のフィールドをインデックスに追加することを検討してください。
 
 ## フィールドで関数を使用する {#use-functions-on-fields}
 
--   基本原則：クエリ対象のフィールドに対して関連関数を使用できます。インデックスの失敗を避けるため、 `WHERE`句のフィルタリング対象フィールドに対しては、データ型変換関数を含むいかなる関数も使用しないでください。式インデックスの使用を検討してください。
--   詳細な説明:
+- 基本原則：クエリ対象のフィールドに対して関連関数を使用できます。インデックスの失敗を避けるため、 `WHERE`句のフィルタリング対象フィールドに対しては、データ型変換関数を含むいかなる関数も使用しないでください。式インデックスの使用を検討してください。
+- 詳細な説明:
 
     推奨されません:
 
@@ -41,17 +41,17 @@ aliases: ['/ja/tidb/stable/dev-guide-sql-development-specification/','/ja/tidbcl
 
 ## その他の仕様 {#other-specifications}
 
--   条件`WHERE`のインデックス列に対して数学演算や関数を実行しないでください。
--   `OR`を`IN`または`UNION`に置き換えてください。`IN`の数は`300`未満でなければなりません。
--   あいまいプレフィックスクエリには`%`プレフィックスを使用しないでください。
--   アプリケーションが**マルチステートメント**を使用して SQL を実行する場合、つまり複数の SQL がセミコロンで結合され、一度にクライアントに送信されて実行される場合、TiDB は最初の SQL 実行の結果のみを返します。
--   式を使用する場合は、その式がストレージレイヤー（TiKVまたはTiFlash ）へのコンピューティングのプッシュダウンをサポートしているかどうかを確認してください。サポートされていない場合は、TiDBレイヤーでメモリ消費量が増加し、OOMが発生する可能性が高くなります。ストレージレイヤーにプッシュダウンできるコンピューティングは以下の通りです。
-    -   [TiFlashはプッシュダウン計算をサポート](/tiflash/tiflash-supported-pushdown-calculations.md) 。
-    -   [TiKV - プッシュダウンの式一覧](/functions-and-operators/expressions-pushed-down.md) 。
-    -   [述語プッシュダウン](/predicate-push-down.md) 。
+- 条件`WHERE`のインデックス列に対して数学演算や関数を実行しないでください。
+- `OR`を`IN`または`UNION`に置き換えてください。`IN`の数は`300`未満でなければなりません。
+- あいまいプレフィックスクエリには`%`プレフィックスを使用しないでください。
+- アプリケーションが**マルチステートメント**を使用して SQL を実行する場合、つまり複数の SQL がセミコロンで結合され、一度にクライアントに送信されて実行される場合、TiDB は最初の SQL 実行の結果のみを返します。
+- 式を使用する場合は、その式がストレージレイヤー（TiKVまたはTiFlash ）へのコンピューティングのプッシュダウンをサポートしているかどうかを確認してください。サポートされていない場合は、TiDBレイヤーでメモリ消費量が増加し、OOMが発生する可能性が高くなります。ストレージレイヤーにプッシュダウンできるコンピューティングは以下の通りです。
+    - [TiFlashはプッシュダウン計算をサポート](/tiflash/tiflash-supported-pushdown-calculations.md) 。
+    - [TiKV - プッシュダウンの式一覧](/functions-and-operators/expressions-pushed-down.md) 。
+    - [述語プッシュダウン](/predicate-push-down.md) 。
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

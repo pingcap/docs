@@ -9,4 +9,4 @@ summary: Kubernetes 上の TiDB クラスターの自動運用システムでTiD
 
 現在、 TiDB Operator のドキュメント（TiDB on Kubernetes ドキュメントとも呼ばれます）は、TiDB のドキュメントとは独立しています。ドキュメントにアクセスするには、次のリンクをクリックしてください。
 
--   [Kubernetes 上の TiDB ドキュメント](https://docs.pingcap.com/tidb-in-kubernetes/stable/)
+- [Kubernetes 上の TiDB ドキュメント](https://docs.pingcap.com/tidb-in-kubernetes/stable/)

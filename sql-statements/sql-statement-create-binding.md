@@ -39,8 +39,8 @@ SQL ステートメントまたは履歴実行計画に従ってバインディ�
 
 履歴実行計画に従ってバインディングを作成する場合は、対応するプラン ダイジェストを指定する必要があります。
 
--   プラン ダイジェストを指定するには、文字列リテラルまたは文字列型のユーザー変数のいずれかを使用できます。
--   複数のプランダイジェストを指定して、複数のステートメントのバインディングを同時に作成できます。この場合、複数の文字列を指定し、各文字列に複数のダイジェストを含めることができます。文字列またはダイジェストはカンマで区切る必要があることに注意してください。
+- プラン ダイジェストを指定するには、文字列リテラルまたは文字列型のユーザー変数のいずれかを使用できます。
+- 複数のプランダイジェストを指定して、複数のステートメントのバインディングを同時に作成できます。この場合、複数の文字列を指定し、各文字列に複数のダイジェストを含めることができます。文字列またはダイジェストはカンマで区切る必要があることに注意してください。
 
 次の例は、SQL ステートメントに従ってバインディングを作成する方法を示しています。
 
@@ -322,8 +322,8 @@ Empty set (0.002 sec)
 
 ## 参照 {#see-also}
 
--   [DROP [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-drop-binding.md)
--   [SHOW [GLOBAL|SESSION] BINDINGS](/sql-statements/sql-statement-show-bindings.md)
--   [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
--   [オプティマイザヒント](/optimizer-hints.md)
--   [SQLプラン管理](/sql-plan-management.md)
+- [DROP [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-drop-binding.md)
+- [SHOW [GLOBAL|SESSION] BINDINGS](/sql-statements/sql-statement-show-bindings.md)
+- [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
+- [オプティマイザヒント](/optimizer-hints.md)
+- [SQLプラン管理](/sql-plan-management.md)

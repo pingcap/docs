@@ -9,23 +9,23 @@ summary: コンソールウィザードを使用して、Amazon S3からTiDB Clo
 
 > **Tip:**
 >
-> -   TiDB Cloud StarterまたはEssentialについては、 [TiDB Cloud StarterまたはEssentialにクラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)。
-> -   TiDB Cloud Dedicatedについては、[クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)を参照してください。
+> - TiDB Cloud StarterまたはEssentialについては、 [TiDB Cloud StarterまたはEssentialにクラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)。
+> - TiDB Cloud Dedicatedについては、[クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)を参照してください。
 
 ## 制限事項 {#limitations}
 
--   データの一貫性を確保するため、 TiDB Cloud Premium では、CSV ファイルを空のテーブルにのみインポートできます。対象テーブルに既にデータが含まれている場合は、ステージングテーブルにインポートしてから、 `INSERT ... SELECT`ステートメントを使用して行をコピーしてください。
--   パブリックプレビュー期間中は、ユーザーインターフェースはストレージプロバイダーとしてAmazon S3のみをサポートしています。その他のプロバイダーへの対応は、今後のリリースで追加される予定です。
--   各インポートジョブは、単一のソースパターンを1つの宛先テーブルにマッピングします。
+- データの一貫性を確保するため、 TiDB Cloud Premium では、CSV ファイルを空のテーブルにのみインポートできます。対象テーブルに既にデータが含まれている場合は、ステージングテーブルにインポートしてから、 `INSERT ... SELECT`ステートメントを使用して行をコピーしてください。
+- パブリックプレビュー期間中は、ユーザーインターフェースはストレージプロバイダーとしてAmazon S3のみをサポートしています。その他のプロバイダーへの対応は、今後のリリースで追加される予定です。
+- 各インポートジョブは、単一のソースパターンを1つの宛先テーブルにマッピングします。
 
 ## ステップ1. CSVファイルを準備する {#step-1-prepare-the-csv-files}
 
-1.  CSVファイルが256MiBを超える場合は、 TiDB Cloud Premiumが並列処理できるように、256MiB程度の小さなファイルに分割することを検討してください。
-2.  CSVファイルの名前は、 Dumplingの命名規則に従ってください。
-    -   完全な表ファイルの場合： `${db_name}.${table_name}.csv`形式を使用してください。
-    -   シャーディングされたファイル: `${db_name}.${table_name}.000001.csv`のような数値サフィックスを追加します。
-    -   圧縮ファイル: `${db_name}.${table_name}.${suffix}.csv.${compress}`形式を使用してください。
-3.  オプションのスキーマファイル（ `${db_name}-schema-create.sql` 、 `${db_name}.${table_name}-schema.sql` ）を使用すると、 TiDB Cloud Premium はデータベースとテーブルを自動的に作成できます。
+1. CSVファイルが256MiBを超える場合は、 TiDB Cloud Premiumが並列処理できるように、256MiB程度の小さなファイルに分割することを検討してください。
+2. CSVファイルの名前は、 Dumplingの命名規則に従ってください。
+    - 完全な表ファイルの場合： `${db_name}.${table_name}.csv`形式を使用してください。
+    - シャーディングされたファイル: `${db_name}.${table_name}.000001.csv`のような数値サフィックスを追加します。
+    - 圧縮ファイル: `${db_name}.${table_name}.${suffix}.csv.${compress}`形式を使用してください。
+3. オプションのスキーマファイル（ `${db_name}-schema-create.sql` 、 `${db_name}.${table_name}-schema.sql` ）を使用すると、 TiDB Cloud Premium はデータベースとテーブルを自動的に作成できます。
 
 <!--Todo
 These naming conventions are identical to the TiDB Cloud Serverless workflow. Update this section after we validate the Premium defaults.
@@ -39,40 +39,40 @@ TiDB Cloud Premiumでデータベースとテーブルを自動的に作成す�
 
 TiDB Cloud Premiumがバケットを読み取れるようにするには、以下のいずれかの方法を使用してください。
 
--   TiDB Cloudを信頼し、関連するパスに対して`s3:GetObject`および`s3:ListBucket`権限を付与するAWSロールARNを指定します。
--   同等の権限を持つAWSアクセスキー（アクセスキーIDとシークレットアクセスキー）を提供してください。
+- TiDB Cloudを信頼し、関連するパスに対して`s3:GetObject`および`s3:ListBucket`権限を付与するAWSロールARNを指定します。
+- 同等の権限を持つAWSアクセスキー（アクセスキーIDとシークレットアクセスキー）を提供してください。
 
 ウィザードには**[ここをクリックして AWS CloudFormation を使用して新しいロール ARN を作成する]**というラベルの付いたヘルプリンクが含まれています。TiDB Cloud Premium で CloudFormation スタックを事前に設定してロールを作成する必要がある場合は、このリンクをクリックしてください。
 
 ## ステップ4. Amazon S3からCSVファイルをインポートする {#step-4-import-csv-files-from-amazon-s3}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 TiDB Cloud Premiumインスタンスの名前をクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 TiDB Cloud Premiumインスタンスの名前をクリックします。
 
-2.  左側のナビゲーションペインで、 **Data** &gt; **Import**をクリックし、 **[クラウドストレージからデータをインポート]**を選択します。
+2. 左側のナビゲーションペインで、 **Data** &gt; **Import**をクリックし、 **[クラウドストレージからデータをインポート]**を選択します。
 
-3.  **Source Connection**ダイアログで：
-    -   **Storage Provider**を**Amazon S3**に設定します。
-    -   単一ファイル（ `s3://bucket/path/file.csv` ）またはフォルダ（ `s3://bucket/path/` ）の**Source Files URI**を入力します。
-    -   **AWS Role ARN**または**AWS Access Key**を選択し、認証情報を入力してください。
-    -   接続を確認するには、 **Test Bucket Access**をクリックしてください。&lt;!--Todo-- 既知のプレビューの問題: ボタンをクリックすると、成功のトーストが表示されずにアイドル状態に戻ります。--&gt;
+3. **Source Connection**ダイアログで：
+    - **Storage Provider**を**Amazon S3**に設定します。
+    - 単一ファイル（ `s3://bucket/path/file.csv` ）またはフォルダ（ `s3://bucket/path/` ）の**Source Files URI**を入力します。
+    - **AWS Role ARN**または**AWS Access Key**を選択し、認証情報を入力してください。
+    - 接続を確認するには、 **Test Bucket Access**をクリックしてください。&lt;!--Todo-- 既知のプレビューの問題: ボタンをクリックすると、成功のトーストが表示されずにアイドル状態に戻ります。--&gt;
 
-4.  **Next**をクリックし、インポートジョブに使用するTiDB SQLのユーザー名とパスワードを入力してください。必要に応じて、接続テストを実行してください。
+4. **Next**をクリックし、インポートジョブに使用するTiDB SQLのユーザー名とパスワードを入力してください。必要に応じて、接続テストを実行してください。
 
-5.  自動生成されたソースとターゲットのマッピングを確認してください。カスタムパターンと宛先テーブルを定義する必要がある場合は、自動マッピングを無効にしてください。
+5. 自動生成されたソースとターゲットのマッピングを確認してください。カスタムパターンと宛先テーブルを定義する必要がある場合は、自動マッピングを無効にしてください。
 
-6.  **Next**をクリックして事前チェックを実行してください。ファイルが見つからない、またはスキーマが互換性がないといった警告が表示された場合は、解決してください。
+6. **Next**をクリックして事前チェックを実行してください。ファイルが見つからない、またはスキーマが互換性がないといった警告が表示された場合は、解決してください。
 
-7.  **Start Import**をクリックしてジョブグループを起動します。
+7. **Start Import**をクリックしてジョブグループを起動します。
 
-8.  ジョブのステータスが**Completed**と表示されるまで監視し、その後、 TiDB Cloudにインポートされたデータを確認します。
+8. ジョブのステータスが**Completed**と表示されるまで監視し、その後、 TiDB Cloudにインポートされたデータを確認します。
 
 ## トラブルシューティング {#troubleshooting}
 
--   事前チェックでファイルがゼロと報告された場合は、S3パスとIAM権限を確認してください。
--   ジョブが**Preparing**のままになっている場合は、宛先テーブルが空であること、および必要なスキーマファイルが存在することを確認してください。
--   マッピングや認証情報を調整する必要がある場合は、**Cancel**操作を使用してジョブグループを停止してください。
+- 事前チェックでファイルがゼロと報告された場合は、S3パスとIAM権限を確認してください。
+- ジョブが**Preparing**のままになっている場合は、宛先テーブルが空であること、および必要なスキーマファイルが存在することを確認してください。
+- マッピングや認証情報を調整する必要がある場合は、**Cancel**操作を使用してジョブグループを停止してください。
 
 ## 次のステップ {#next-steps}
 
--   スクリプトによるインポートについては[MySQLコマンドラインクライアントを使用してTiDB Cloud Premiumにデータをインポートする](/tidb-cloud/premium/import-with-mysql-cli-premium.md)を参照してください。
--   IAM関連の問題については[Amazon S3からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
+- スクリプトによるインポートについては[MySQLコマンドラインクライアントを使用してTiDB Cloud Premiumにデータをインポートする](/tidb-cloud/premium/import-with-mysql-cli-premium.md)を参照してください。
+- IAM関連の問題については[Amazon S3からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。

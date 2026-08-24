@@ -52,4 +52,4 @@ TiDB の`SHOW PLUGINS`ステートメントは、MySQL と完全な互換性が�
 
 ## 参照 {#see-also}
 
--   [`ADMIN PLUGINS`](/sql-statements/sql-statement-admin.md#admin-plugins-related-statement)
+- [`ADMIN PLUGINS`](/sql-statements/sql-statement-admin.md#admin-plugins-related-statement)

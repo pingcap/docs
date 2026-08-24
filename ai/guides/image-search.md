@@ -106,6 +106,6 @@ results = table.search("orange tabby cat").limit(3).to_list()
 
 ## 参照 {#see-also}
 
--   [自動埋め込みガイド](/ai/guides/auto-embedding.md)
--   [ベクトル検索ガイド](/ai/concepts/vector-search-overview.md)
--   [画像検索の例](/ai/examples/image-search-with-pytidb.md)
+- [自動埋め込みガイド](/ai/guides/auto-embedding.md)
+- [ベクトル検索ガイド](/ai/concepts/vector-search-overview.md)
+- [画像検索の例](/ai/examples/image-search-with-pytidb.md)

@@ -20,13 +20,13 @@ summary: openssl` を使用して自己署名証明書を生成します。
 
 ## OpenSSLをインストールする {#install-openssl}
 
--   Debian または Ubuntu OS の場合:
+- Debian または Ubuntu OS の場合:
 
     ```bash
     apt install openssl
     ```
 
--   RedHat または CentOS OS の場合:
+- RedHat または CentOS OS の場合:
 
     ```bash
     yum install openssl
@@ -38,19 +38,19 @@ summary: openssl` を使用して自己署名証明書を生成します。
 
 証明機関（CA）は、デジタル証明書を発行する信頼できる機関です。実際には、管理者に証明書の発行を依頼するか、信頼できるCAを利用してください。CAは複数の証明書ペアを管理しています。ここでは、以下の手順に従って、オリジナルの証明書ペアを生成するだけで済みます。
 
-1.  CA キーを生成します:
+1. CA キーを生成します:
 
     ```bash
     openssl genrsa -out ca-key.pem 4096
     ```
 
-2.  CA 証明書を生成します。
+2. CA 証明書を生成します。
 
     ```bash
     openssl req -new -x509 -days 1000 -key ca-key.pem -out ca.pem
     ```
 
-3.  CA 証明書を検証します。
+3. CA 証明書を検証します。
 
     ```bash
     openssl x509 -text -in ca.pem -noout
@@ -60,21 +60,21 @@ summary: openssl` を使用して自己署名証明書を生成します。
 
 ### クラスタで使用される可能性のある証明書 {#certificates-that-might-be-used-in-the-cluster}
 
--   DM-master が他のコンポーネントに対して DM-master を認証するために使用する`master`証明書。
--   DM-worker が他のコンポーネントに対して DM-worker を認証するために使用する`worker`証明書。
--   DM マスターと DM ワーカーのクライアントを認証するために dmctl によって使用される`client`証明書。
+- DM-master が他のコンポーネントに対して DM-master を認証するために使用する`master`証明書。
+- DM-worker が他のコンポーネントに対して DM-worker を認証するために使用する`worker`証明書。
+- DM マスターと DM ワーカーのクライアントを認証するために dmctl によって使用される`client`証明書。
 
 ### DMマスターの証明書を発行する {#issue-certificates-for-dm-master}
 
 DM マスター インスタンスに証明書を発行するには、次の手順を実行します。
 
-1.  証明書に対応する秘密鍵を生成します。
+1. 証明書に対応する秘密鍵を生成します。
 
     ```bash
     openssl genrsa -out master-key.pem 2048
     ```
 
-2.  OpenSSL 構成テンプレート ファイルのコピーを作成します (テンプレート ファイルは複数の場所に存在する可能性があるため、実際の場所を参照してください)。
+2. OpenSSL 構成テンプレート ファイルのコピーを作成します (テンプレート ファイルは複数の場所に存在する可能性があるため、実際の場所を参照してください)。
 
     ```bash
     cp /usr/lib/ssl/openssl.cnf .
@@ -86,7 +86,7 @@ DM マスター インスタンスに証明書を発行するには、次の手�
     find / -name openssl.cnf
     ```
 
-3.  `openssl.cnf`を編集し、 `[ req ]`フィールドに`req_extensions = v3_req`を追加し、 `[ v3_req ]`フィールドに`subjectAltName = @alt_names`を追加します。最後に、新しいフィールドを作成し、上記のクラスタトポロジの説明に従って`Subject Alternative Name` (SAN) の情報を編集します。
+3. `openssl.cnf`を編集し、 `[ req ]`フィールドに`req_extensions = v3_req`を追加し、 `[ v3_req ]`フィールドに`subjectAltName = @alt_names`を追加します。最後に、新しいフィールドを作成し、上記のクラスタトポロジの説明に従って`Subject Alternative Name` (SAN) の情報を編集します。
 
     ```
     [ alt_names ]
@@ -98,35 +98,35 @@ DM マスター インスタンスに証明書を発行するには、次の手�
 
     現在、SAN の次のチェック項目がサポートされています。
 
-    -   `IP`
+    - `IP`
 
-    -   `DNS`
+    - `DNS`
 
-    -   `URI`
+    - `URI`
 
     > **Note:**
     >
     > `0.0.0.0`のような特殊な IP を接続や通信に使用する場合は、 `alt_names`にも追加する必要があります。
 
-4.  `openssl.cnf`ファイルを保存し、証明書要求ファイルを生成します。( `Common Name (e.g. server FQDN or YOUR name) []:`に入力する際に、証明書に`dm`などの共通名 (CN) を割り当てます。これは、サーバーがクライアントの ID を検証するために使用されます。各コンポーネントは、デフォルトでは検証を有効にしません。構成ファイルで有効にすることができます。)
+4. `openssl.cnf`ファイルを保存し、証明書要求ファイルを生成します。( `Common Name (e.g. server FQDN or YOUR name) []:`に入力する際に、証明書に`dm`などの共通名 (CN) を割り当てます。これは、サーバーがクライアントの ID を検証するために使用されます。各コンポーネントは、デフォルトでは検証を有効にしません。構成ファイルで有効にすることができます。)
 
     ```bash
     openssl req -new -key master-key.pem -out master-cert.pem -config openssl.cnf
     ```
 
-5.  証明書を発行して生成します。
+5. 証明書を発行して生成します。
 
     ```bash
     openssl x509 -req -days 365 -CA ca.pem -CAkey ca-key.pem -CAcreateserial -in master-cert.pem -out master-cert.pem -extensions v3_req -extfile openssl.cnf
     ```
 
-6.  証明書に SAN フィールドが含まれていることを確認します (オプション)。
+6. 証明書に SAN フィールドが含まれていることを確認します (オプション)。
 
     ```bash
     openssl x509 -text -in master-cert.pem -noout
     ```
 
-7.  現在のディレクトリに次のファイルが存在することを確認します。
+7. 現在のディレクトリに次のファイルが存在することを確認します。
 
     ```
     ca.pem
@@ -142,19 +142,19 @@ DM マスター インスタンスに証明書を発行するには、次の手�
 
 クライアント (dmctl) に証明書を発行するには、次の手順を実行します。
 
-1.  証明書に対応する秘密鍵を生成します。
+1. 証明書に対応する秘密鍵を生成します。
 
     ```bash
     openssl genrsa -out client-key.pem 2048
     ```
 
-2.  証明書要求ファイルを生成します (この手順では、証明書に共通名を割り当てることもできます。共通名は、サーバーがクライアントの ID を検証するために使用されます。各コンポーネントはデフォルトで検証を有効にしませんが、構成ファイルで有効にすることができます)。
+2. 証明書要求ファイルを生成します (この手順では、証明書に共通名を割り当てることもできます。共通名は、サーバーがクライアントの ID を検証するために使用されます。各コンポーネントはデフォルトで検証を有効にしませんが、構成ファイルで有効にすることができます)。
 
     ```bash
     openssl req -new -key client-key.pem -out client-cert.pem
     ```
 
-3.  証明書を発行して生成します。
+3. 証明書を発行して生成します。
 
     ```bash
     openssl x509 -req -days 365 -CA ca.pem -CAkey ca-key.pem -CAcreateserial -in client-cert.pem -out client-cert.pem

@@ -55,23 +55,23 @@ TiDBは、テーブルへの変更回数に基づいて、自動的に[`ANALYZE`
 
 以下の構文を使用すると、完全なデータ収集を実行できます。
 
--   `TableNameList`内のすべてのテーブルの統計情報を収集するには：
+- `TableNameList`内のすべてのテーブルの統計情報を収集するには：
 
     ```sql
     ANALYZE TABLE TableNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
--   `WITH NUM BUCKETS`は生成されるヒストグラムのバケットの最大数を指定します。
+- `WITH NUM BUCKETS`は生成されるヒストグラムのバケットの最大数を指定します。
 
--   `WITH NUM TOPN`は生成される`TOPN`の最大数を指定します。
+- `WITH NUM TOPN`は生成される`TOPN`の最大数を指定します。
 
--   `WITH NUM CMSKETCH DEPTH` CM スケッチの深さを指定します。
+- `WITH NUM CMSKETCH DEPTH` CM スケッチの深さを指定します。
 
--   `WITH NUM CMSKETCH WIDTH` CM スケッチの幅を指定します。
+- `WITH NUM CMSKETCH WIDTH` CM スケッチの幅を指定します。
 
--   `WITH NUM SAMPLES`サンプル数を指定します。
+- `WITH NUM SAMPLES`サンプル数を指定します。
 
--   `WITH FLOAT_NUM SAMPLERATE`はサンプリングレートを指定します。
+- `WITH FLOAT_NUM SAMPLERATE`はサンプリングレートを指定します。
 
 `WITH NUM SAMPLES`と`WITH FLOAT_NUM SAMPLERATE`は、サンプルを収集する2つの異なるアルゴリズムに対応しています。
 
@@ -105,8 +105,8 @@ Count-Min Sketch はハッシュ構造です。 `a = 1`や`IN`クエリ (例え�
 
 Count-Min Sketch はハッシュ構造であるため、ハッシュ衝突が発生する可能性があります。[`EXPLAIN`](/sql-statements/sql-statement-explain.md)ステートメントにおいて、同等のクエリの推定値が実際の値から大きく乖離する場合、より大きな値とより小さな値がハッシュ化されているとみなすことができます。この場合、ハッシュ衝突を回避するために、以下のいずれかの方法を取ることができます。
 
--   `WITH NUM TOPN`パラメータを変更します。TiDB は、高頻度 (上位 x) のデータを別々に格納し、その他のデータは Count-Min Sketch に格納します。そのため、より大きな値とより小さな値が一緒にハッシュ化されるのを防ぐには、 `WITH NUM TOPN`の値を増やすことができます。TiDB では、デフォルト値は 20 です。最大値は 1024 です。このパラメータの詳細については、 [手動収集](#manual-collection)を参照してください。
--   `WITH NUM CMSKETCH DEPTH`と`WITH NUM CMSKETCH WIDTH`の 2 つのパラメータを変更します。どちらもハッシュ バケットの数と衝突確率に影響します。実際のシナリオに応じて 2 つのパラメータの値を適切に増やすことでハッシュ衝突の確率を減らすことができますが、統計情報のメモリ使用量が増加します。TiDB では、 `WITH NUM CMSKETCH DEPTH`のデフォルト値は 5、 `WITH NUM CMSKETCH WIDTH`のデフォルト値は 2048 です。2 つのパラメータの詳細については、 [手動収集](#manual-collection)を参照してください。
+- `WITH NUM TOPN`パラメータを変更します。TiDB は、高頻度 (上位 x) のデータを別々に格納し、その他のデータは Count-Min Sketch に格納します。そのため、より大きな値とより小さな値が一緒にハッシュ化されるのを防ぐには、 `WITH NUM TOPN`の値を増やすことができます。TiDB では、デフォルト値は 20 です。最大値は 1024 です。このパラメータの詳細については、 [手動収集](#manual-collection)を参照してください。
+- `WITH NUM CMSKETCH DEPTH`と`WITH NUM CMSKETCH WIDTH`の 2 つのパラメータを変更します。どちらもハッシュ バケットの数と衝突確率に影響します。実際のシナリオに応じて 2 つのパラメータの値を適切に増やすことでハッシュ衝突の確率を減らすことができますが、統計情報のメモリ使用量が増加します。TiDB では、 `WITH NUM CMSKETCH DEPTH`のデフォルト値は 5、 `WITH NUM CMSKETCH WIDTH`のデフォルト値は 2048 です。2 つのパラメータの詳細については、 [手動収集](#manual-collection)を参照してください。
 
 ### トップN {#top-n}
 
@@ -140,10 +140,10 @@ TiDB が SQL ステートメントを実行する際、オプティマイザは�
 
 > **Note:**
 >
-> -   述語列に関する統計情報の収集は、 [`tidb_analyze_version = 2`](/system-variables.md#tidb_analyze_version-new-in-v510)の場合にのみ適用されます。
-> -   TiDB v7.2.0 以降、TiDB では、統計情報を収集するために`ANALYZE`コマンドを実行する際に、統計収集からスキップされる列の種類を示すシステム変数[`tidb_analyze_skip_column_types`](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720)が導入されました。このシステム変数は`tidb_analyze_version = 2`にのみ適用されます。
+> - 述語列に関する統計情報の収集は、 [`tidb_analyze_version = 2`](/system-variables.md#tidb_analyze_version-new-in-v510)の場合にのみ適用されます。
+> - TiDB v7.2.0 以降、TiDB では、統計情報を収集するために`ANALYZE`コマンドを実行する際に、統計収集からスキップされる列の種類を示すシステム変数[`tidb_analyze_skip_column_types`](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720)が導入されました。このシステム変数は`tidb_analyze_version = 2`にのみ適用されます。
 
--   特定の列に関する統計情報を収集するには、次の構文を使用します。
+- 特定の列に関する統計情報を収集するには、次の構文を使用します。
 
     ```sql
     ANALYZE TABLE TableName COLUMNS ColumnNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
@@ -151,7 +151,7 @@ TiDB が SQL ステートメントを実行する際、オプティマイザは�
 
     構文では、 `ColumnNameList`は対象列の名前リストを指定します。複数の列を指定する必要がある場合は、列名をカンマ`,`で区切ります。たとえば、 `ANALYZE table t columns a, b`のように指定します。この構文では、特定のテーブルの特定の列に関する統計情報を収集するだけでなく、そのテーブルのインデックス付き列とすべてのインデックスに関する統計情報も同時に収集します。
 
--   `PREDICATE COLUMNS`に関する統計情報を収集するには、次の構文を使用します。
+- `PREDICATE COLUMNS`に関する統計情報を収集するには、次の構文を使用します。
 
     ```sql
     ANALYZE TABLE TableName PREDICATE COLUMNS [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
@@ -173,10 +173,10 @@ TiDB が SQL ステートメントを実行する際、オプティマイザは�
 
     > **Note:**
     >
-    > -   [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables)システム テーブルにそのテーブルに対して`PREDICATE COLUMNS`が記録されていない場合、上記の構文は、そのテーブルのインデックス付き列とすべてのインデックスに関する統計情報を収集します。
-    > -   手動で列をリストアップするか、 `PREDICATE COLUMNS`を使用して収集対象から除外した列の統計情報は上書きされません。新しいタイプの SQL クエリを実行すると、オプティマイザは、そのような列に古い統計情報が存在する場合はそれを使用し、統計情報が収集されたことがない列の場合は擬似列統計情報を使用します。 `PREDICATE COLUMNS`を使用した次の ANALYZE で、これらの列の統計情報が収集されます。
+    > - [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables)システム テーブルにそのテーブルに対して`PREDICATE COLUMNS`が記録されていない場合、上記の構文は、そのテーブルのインデックス付き列とすべてのインデックスに関する統計情報を収集します。
+    > - 手動で列をリストアップするか、 `PREDICATE COLUMNS`を使用して収集対象から除外した列の統計情報は上書きされません。新しいタイプの SQL クエリを実行すると、オプティマイザは、そのような列に古い統計情報が存在する場合はそれを使用し、統計情報が収集されたことがない列の場合は擬似列統計情報を使用します。 `PREDICATE COLUMNS`を使用した次の ANALYZE で、これらの列の統計情報が収集されます。
 
--   すべての列とインデックスに関する統計情報を収集するには、次の構文を使用します。
+- すべての列とインデックスに関する統計情報を収集するには、次の構文を使用します。
 
     ```sql
     ANALYZE TABLE TableName ALL COLUMNS [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
@@ -184,19 +184,19 @@ TiDB が SQL ステートメントを実行する際、オプティマイザは�
 
 ### パーティションに関する統計情報を収集する {#collect-statistics-on-partitions}
 
--   `PartitionNameList`内の`TableName`内のすべてのパーティションに関する統計情報を収集するには、次の構文を使用します。
+- `PartitionNameList`内の`TableName`内のすべてのパーティションに関する統計情報を収集するには、次の構文を使用します。
 
     ```sql
     ANALYZE TABLE TableName PARTITION PartitionNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
--   `PartitionNameList`内の`TableName`のすべてのパーティションのインデックス統計情報を収集するには、次の構文を使用します。
+- `PartitionNameList`内の`TableName`のすべてのパーティションのインデックス統計情報を収集するには、次の構文を使用します。
 
     ```sql
     ANALYZE TABLE TableName PARTITION PartitionNameList INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
--   テーブル内のいくつかのパーティションの[いくつかの列の統計情報を収集する](/statistics.md#collect-statistics-on-some-columns)必要がある場合は、次の構文を使用します。
+- テーブル内のいくつかのパーティションの[いくつかの列の統計情報を収集する](/statistics.md#collect-statistics-on-some-columns)必要がある場合は、次の構文を使用します。
 
     ```sql
     ANALYZE TABLE TableName PARTITION PartitionNameList [COLUMNS ColumnNameList|PREDICATE COLUMNS|ALL COLUMNS] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
@@ -208,15 +208,15 @@ TiDB は、パーティション分割されたテーブルに、パーティシ
 
 一部のパーティションの統計情報が空の場合、または一部のパーティションで一部の列の統計情報が欠落している場合、収集動作は[`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730)変数によって制御されます。
 
--   グローバル統計の更新がトリガーされ、 [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730)が`OFF`の場合：
+- グローバル統計の更新がトリガーされ、 [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730)が`OFF`の場合：
 
-    -   一部のパーティションに統計情報がない場合（例えば、これまで分析されたことのない新しいパーティションなど）、グローバル統計情報の生成は中断され、パーティションに統計情報が存在しないことを示す警告メッセージが表示されます。
+    - 一部のパーティションに統計情報がない場合（例えば、これまで分析されたことのない新しいパーティションなど）、グローバル統計情報の生成は中断され、パーティションに統計情報が存在しないことを示す警告メッセージが表示されます。
 
-    -   特定のパーティションで一部の列の統計情報が存在しない場合（これらのパーティションでは、分析対象として異なる列が指定されています）、これらの列の統計情報が集計される際にグローバル統計情報の生成が中断され、特定のパーティションで一部の列の統計情報が存在しないことを示す警告メッセージが表示されます。
+    - 特定のパーティションで一部の列の統計情報が存在しない場合（これらのパーティションでは、分析対象として異なる列が指定されています）、これらの列の統計情報が集計される際にグローバル統計情報の生成が中断され、特定のパーティションで一部の列の統計情報が存在しないことを示す警告メッセージが表示されます。
 
--   グローバル統計の更新がトリガーされ、 [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730)が`ON`の場合：
+- グローバル統計の更新がトリガーされ、 [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730)が`ON`の場合：
 
-    -   一部のパーティションで、すべての列または一部の列の統計情報が欠落している場合、TiDB はグローバル統計情報の生成時にこれらの欠落したパーティション統計情報をスキップするため、グローバル統計情報の生成には影響しません。
+    - 一部のパーティションで、すべての列または一部の列の統計情報が欠落している場合、TiDB はグローバル統計情報の生成時にこれらの欠落したパーティション統計情報をスキップするため、グローバル統計情報の生成には影響しません。
 
 動的プルーニングモードでは、パーティションとテーブルの`ANALYZE`構成は同じである必要があります。したがって、`ANALYZE TABLE TableName PARTITION PartitionNameList`ステートメントの後に`COLUMNS`構成を指定した場合、または`WITH`の後に`OPTIONS`構成を指定した場合、TiDBはそれらを無視して警告を返します。
 
@@ -224,19 +224,19 @@ TiDB は、パーティション分割されたテーブルに、パーティシ
 
 > **Note:**
 >
-> -   TiDB での`ANALYZE TABLE`の実行時間は、MySQL や InnoDB よりも長くなる可能性があります。InnoDB では少数のページのみがサンプリングされますが、TiDB ではデフォルトで包括的な統計情報が完全に再構築されます。
+> - TiDB での`ANALYZE TABLE`の実行時間は、MySQL や InnoDB よりも長くなる可能性があります。InnoDB では少数のページのみがサンプリングされますが、TiDB ではデフォルトで包括的な統計情報が完全に再構築されます。
 
 TiDBは、統計情報の収集パフォーマンスを向上させるための2つのオプションを提供します。
 
--   列のサブセットに関する統計を収集します。[いくつかの列に関する統計情報を収集する](#collect-statistics-on-some-columns)をご覧ください。
--   サンプリング。
+- 列のサブセットに関する統計を収集します。[いくつかの列に関する統計情報を収集する](#collect-statistics-on-some-columns)をご覧ください。
+- サンプリング。
 
 ### 統計サンプリング {#statistics-sampling}
 
 サンプリングは`ANALYZE`ステートメントの 2 つのオプションで利用可能であり、それぞれ異なる収集アルゴリズムに対応しています。
 
--   `WITH NUM SAMPLES`は、TiDB のリザーバーサンプリング方式で実装されているサンプリングセットのサイズを指定します。テーブルが大きい場合、この方式を使用して統計情報を収集することは推奨されません。リザーバーサンプリングの中間結果セットには冗長な結果が含まれるため、メモリなどのリソースに余分な負荷がかかります。
--   `WITH FLOAT_NUM SAMPLERATE`は、v5.3.0 で導入されたサンプリング方法です。値の範囲`(0, 1]`を指定することで、サンプリングレートを設定できます。TiDB ではベルヌーイサンプリング方式で実装されており、大規模なテーブルのサンプリングに適しており、収集効率とリソース使用量の面で優れたパフォーマンスを発揮します。
+- `WITH NUM SAMPLES`は、TiDB のリザーバーサンプリング方式で実装されているサンプリングセットのサイズを指定します。テーブルが大きい場合、この方式を使用して統計情報を収集することは推奨されません。リザーバーサンプリングの中間結果セットには冗長な結果が含まれるため、メモリなどのリソースに余分な負荷がかかります。
+- `WITH FLOAT_NUM SAMPLERATE`は、v5.3.0 で導入されたサンプリング方法です。値の範囲`(0, 1]`を指定することで、サンプリングレートを設定できます。TiDB ではベルヌーイサンプリング方式で実装されており、大規模なテーブルのサンプリングに適しており、収集効率とリソース使用量の面で優れたパフォーマンスを発揮します。
 
 バージョン5.3.0より前は、TiDBはリザーバーサンプリング方式を使用して統計情報を収集していました。バージョン5.3.0以降、TiDBバージョン2の統計情報は、デフォルトでベルヌーイサンプリング方式を使用して統計情報を収集します。リザーバーサンプリング方式を再利用するには、 `WITH NUM SAMPLES`ステートメントを使用できます。
 
@@ -260,8 +260,8 @@ TiDB v6.1.0以降では、システム変数[`tidb_mem_quota_analyze`](/system-v
 >
 > 以下の提案は参考情報です。実際の状況に基づいて値を設定する必要があります。
 
--   最小値：TiDBが列数が最も多いテーブルから統計情報を収集する際の最大メモリ使用量よりも大きくする必要があります。目安として、デフォルト設定で20列のテーブルから統計情報を収集する場合、最大メモリ使用量は約800 MiBです。また、デフォルト設定で160列のテーブルから統計情報を収集する場合、最大メモリ使用量は約5 GiBです。
--   最大値：TiDBが統計情報を収集していないときは、利用可能なメモリよりも小さくする必要があります。
+- 最小値：TiDBが列数が最も多いテーブルから統計情報を収集する際の最大メモリ使用量よりも大きくする必要があります。目安として、デフォルト設定で20列のテーブルから統計情報を収集する場合、最大メモリ使用量は約800 MiBです。また、デフォルト設定で160列のテーブルから統計情報を収集する場合、最大メモリ使用量は約5 GiBです。
+- 最大値：TiDBが統計情報を収集していないときは、利用可能なメモリよりも小さくする必要があります。
 
 ## ANALYZE構成を永続化する {#persist-analyze-configurations}
 
@@ -316,8 +316,8 @@ TiDB は、最新の`ANALYZE`ステートメントで指定された新しい構
 
 `ANALYZE`ステートメント ( `COLUMNS ColumnNameList` 、 `PREDICATE COLUMNS` 、 `ALL COLUMNS`を含む) の列構成を永続化する場合は、 `tidb_persist_analyze_options`システム変数の値を`ON`に設定して[構成の永続性を分析する](#persist-analyze-configurations)機能を有効にします。 ANALYZE 構成永続化機能を有効にした後:
 
--   TiDB が統計情報を自動的に収集する場合、または列構成を指定せずに`ANALYZE`ステートメントを実行して手動で統計情報を収集する場合、TiDB は統計情報の収集に以前に保持された構成を引き続き使用します。
--   列構成を指定して`ANALYZE`ステートメントを手動で複数回実行すると、TiDB は最新の`ANALYZE`ステートメントで指定された新しい構成を使用して、以前に記録された永続構成を上書きします。
+- TiDB が統計情報を自動的に収集する場合、または列構成を指定せずに`ANALYZE`ステートメントを実行して手動で統計情報を収集する場合、TiDB は統計情報の収集に以前に保持された構成を引き続き使用します。
+- 列構成を指定して`ANALYZE`ステートメントを手動で複数回実行すると、TiDB は最新の`ANALYZE`ステートメントで指定された新しい構成を使用して、以前に記録された永続構成を上書きします。
 
 `PREDICATE COLUMNS`および統計情報が収集された列を特定するには、 [`SHOW COLUMN_STATS_USAGE`](/sql-statements/sql-statement-show-column-stats-usage.md)ステートメントを使用します。
 
@@ -366,9 +366,9 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 
 [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)変数は、TiDB によって収集される統計情報を制御します。現在、TiDB は`tidb_analyze_version = 1`と`tidb_analyze_version = 2` 2 つの統計バージョンをサポートしています。
 
--   TiDB Self-Managedの場合、v5.3.0以降、この変数のデフォルト値が`1`から`2`に変更されます。
--   TiDB Cloudの場合、v6.5.0 以降、この変数のデフォルト値が`1`から`2`に変更されます。
--   クラスターを以前のバージョンからアップグレードした場合、 `tidb_analyze_version`のデフォルト値はアップグレード後も変更されません。
+- TiDB Self-Managedの場合、v5.3.0以降、この変数のデフォルト値が`1`から`2`に変更されます。
+- TiDB Cloudの場合、v6.5.0 以降、この変数のデフォルト値が`1`から`2`に変更されます。
+- クラスターを以前のバージョンからアップグレードした場合、 `tidb_analyze_version`のデフォルト値はアップグレード後も変更されません。
 
 バージョン2は推奨される統計バージョンです。バージョン1と比較して、バージョン2ではデータ量が多い場合の多くの統計情報の精度が向上しています。また、バージョン2ではCount-Minスケッチ統計情報を収集する必要がなくなったため、収集パフォーマンスも向上しています。
 
@@ -391,7 +391,7 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 
 統計バージョン1から統計バージョン2への移行準備として、 `ANALYZE`を準備します。
 
--   `ANALYZE`ステートメントを手動で実行する場合は、分析対象のすべてのテーブルを手動で分析します。
+- `ANALYZE`ステートメントを手動で実行する場合は、分析対象のすべてのテーブルを手動で分析します。
 
     ```sql
     SELECT DISTINCT(CONCAT('ANALYZE TABLE ', table_schema, '.', table_name, ';'))
@@ -400,9 +400,9 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
     WHERE stats_ver = 1;
     ```
 
--   自動分析が有効になっているため、TiDB が`ANALYZE`ステートメントを自動的に実行する場合、 `tidb_analyze_version = 2`を設定すると、TiDB は後続の自動分析を通じて統計情報をバージョン 2 に徐々に更新します。オブジェクトに対してバージョン 2 の統計情報が収集されるまでは、TiDB は既存のバージョン 1 の統計情報を引き続き使用できます。重要なオブジェクトの移行を高速化するには、それらのオブジェクトに対して`ANALYZE`を手動で実行してください。
+- 自動分析が有効になっているため、TiDB が`ANALYZE`ステートメントを自動的に実行する場合、 `tidb_analyze_version = 2`を設定すると、TiDB は後続の自動分析を通じて統計情報をバージョン 2 に徐々に更新します。オブジェクトに対してバージョン 2 の統計情報が収集されるまでは、TiDB は既存のバージョン 1 の統計情報を引き続き使用できます。重要なオブジェクトの移行を高速化するには、それらのオブジェクトに対して`ANALYZE`を手動で実行してください。
 
--   前述のステートメントの結果が長すぎてコピー＆ペーストできない場合は、結果を一時的なテキストファイルにエクスポートし、そのファイルから次のように実行できます。
+- 前述のステートメントの結果が長すぎてコピー＆ペーストできない場合は、結果を一時的なテキストファイルにエクスポートし、そのファイルから次のように実行できます。
 
     ```sql
     SELECT DISTINCT ... INTO OUTFILE '/tmp/sql.txt';
@@ -466,8 +466,8 @@ mysql> SHOW ANALYZE STATUS [ShowLikeOrWhere];
 
 デフォルトでは、列統計のサイズに応じて、TiDB は次のように異なる方法で統計情報をロードします。
 
--   メモリ使用量が少ない統計情報（count、distinctCount、nullCountなど）については、列データが更新される限り、TiDBは対応する統計情報を自動的にメモリにロードし、SQL最適化段階で使用します。
--   メモリを大量に消費する統計情報（ヒストグラム、TopN、Count-Min Sketchなど）については、SQL実行のパフォーマンスを確保するため、TiDBは必要に応じて非同期で統計情報をロードします。ヒストグラムを例にとると、TiDBはオプティマイザがその列のヒストグラム統計情報を使用する場合にのみ、その列のヒストグラム統計情報をメモリにロードします。オンデマンドの非同期統計情報ロードはSQL実行のパフォーマンスには影響しませんが、SQL最適化に必要な統計情報が不完全になる可能性があります。
+- メモリ使用量が少ない統計情報（count、distinctCount、nullCountなど）については、列データが更新される限り、TiDBは対応する統計情報を自動的にメモリにロードし、SQL最適化段階で使用します。
+- メモリを大量に消費する統計情報（ヒストグラム、TopN、Count-Min Sketchなど）については、SQL実行のパフォーマンスを確保するため、TiDBは必要に応じて非同期で統計情報をロードします。ヒストグラムを例にとると、TiDBはオプティマイザがその列のヒストグラム統計情報を使用する場合にのみ、その列のヒストグラム統計情報をメモリにロードします。オンデマンドの非同期統計情報ロードはSQL実行のパフォーマンスには影響しませんが、SQL最適化に必要な統計情報が不完全になる可能性があります。
 
 TiDBはバージョン5.4.0以降、統計情報の同期読み込み機能を導入しました。この機能により、SQL文の実行時に、ヒストグラム、TopN、Count-Min Sketch統計情報などの大規模な統計情報をメモリに同期的に読み込むことが可能になり、SQL最適化のための統計情報の網羅性が向上します。
 
@@ -477,16 +477,16 @@ TiDBはバージョン5.4.0以降、統計情報の同期読み込み機能を�
 
 同期的に統計情報を読み込む機能を有効にした後、以下のようにさらに設定を行うことができます。
 
--   SQL最適化の待機時間がタイムアウトに達したときのTiDBの動作を制御するには、 [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540)システム変数の値を変更します。この変数のデフォルト値は`ON`で、タイムアウト後、SQL最適化プロセスではどの列に対してもヒストグラム、TopN、またはCMSketch統計情報を使用しないことを示します。この変数を`OFF`に設定すると、タイムアウト後にSQLの実行が失敗します。
--   同期的に統計情報をロードする機能が同時に処理できる列の最大数を指定するには、TiDB 設定ファイルの[`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)オプションの値を変更します。v8.2.0 以降、このオプションのデフォルト値は`0`であり、これは TiDB がサーバー構成に基づいて同時実行数を自動的に調整することを示しています。
--   同期的に統計情報をロードする機能がキャッシュできる列リクエストの最大数を指定するには、TiDB 設定ファイルの[`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540)オプションの値を変更します。デフォルト値は`1000`です。
+- SQL最適化の待機時間がタイムアウトに達したときのTiDBの動作を制御するには、 [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540)システム変数の値を変更します。この変数のデフォルト値は`ON`で、タイムアウト後、SQL最適化プロセスではどの列に対してもヒストグラム、TopN、またはCMSketch統計情報を使用しないことを示します。この変数を`OFF`に設定すると、タイムアウト後にSQLの実行が失敗します。
+- 同期的に統計情報をロードする機能が同時に処理できる列の最大数を指定するには、TiDB 設定ファイルの[`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)オプションの値を変更します。v8.2.0 以降、このオプションのデフォルト値は`0`であり、これは TiDB がサーバー構成に基づいて同時実行数を自動的に調整することを示しています。
+- 同期的に統計情報をロードする機能がキャッシュできる列リクエストの最大数を指定するには、TiDB 設定ファイルの[`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540)オプションの値を変更します。デフォルト値は`1000`です。
 
 TiDBの起動時、初期統計情報が完全にロードされる前に実行されるSQL文は、最適とは言えない実行計画となり、パフォーマンスの問題を引き起こす可能性があります。このような問題を回避するため、TiDB v7.1.0では設定パラメータ[`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)が導入されました。このオプションを使用すると、起動時に統計情報の初期化が完了した後にのみTiDBがサービスを提供するかどうかを制御できます。v7.2.0以降、このパラメータはデフォルトで有効になっています。
 
 バージョン7.1.0以降、TiDBは軽量な統計情報初期化のための[`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)を導入しました。
 
--   `lite-init-stats`の値が`true`の場合、統計初期化では、インデックスまたは列のヒストグラム、TopN、または Count-Min Sketch はメモリにロードされません。
--   `lite-init-stats`の値が`false`の場合、統計情報の初期化では、インデックスと主キーのヒストグラム、TopN、および Count-Min Sketch がメモリにロードされますが、主キー以外の列のヒストグラム、TopN、または Count-Min Sketch はメモリにロードされません。オプティマイザが特定のインデックスまたは列のヒストグラム、TopN、および Count-Min Sketch を必要とする場合、必要な統計情報が同期または非同期でメモリにロードされます。
+- `lite-init-stats`の値が`true`の場合、統計初期化では、インデックスまたは列のヒストグラム、TopN、または Count-Min Sketch はメモリにロードされません。
+- `lite-init-stats`の値が`false`の場合、統計情報の初期化では、インデックスと主キーのヒストグラム、TopN、および Count-Min Sketch がメモリにロードされますが、主キー以外の列のヒストグラム、TopN、または Count-Min Sketch はメモリにロードされません。オプティマイザが特定のインデックスまたは列のヒストグラム、TopN、および Count-Min Sketch を必要とする場合、必要な統計情報が同期または非同期でメモリにロードされます。
 
 `lite-init-stats`のデフォルト値は`true`で、これは軽量統計初期化を有効にすることを意味します。 `lite-init-stats`を`true`に設定すると、不要な統計の読み込みを回避することで、統計初期化が高速化され、TiDB のメモリ使用量が削減されます。
 
@@ -514,7 +514,7 @@ TiDBの起動時、初期統計情報が完全にロードされる前に実行�
 
 統計情報をエクスポートするためのインターフェースは以下のとおりです。
 
--   `${db_name}`データベース内の`${table_name}`テーブルの JSON 形式の統計情報を取得するには：
+- `${db_name}`データベース内の`${table_name}`テーブルの JSON 形式の統計情報を取得するには：
 
     ```
     http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}
@@ -526,7 +526,7 @@ TiDBの起動時、初期統計情報が完全にロードされる前に実行�
     curl -s http://127.0.0.1:10080/stats/dump/test/t1 -o /tmp/t1.json
     ```
 
--   `${db_name}`データベース内の`${table_name}`テーブルの特定の時刻における JSON 形式の統計情報を取得するには：
+- `${db_name}`データベース内の`${table_name}`テーブルの特定の時刻における JSON 形式の統計情報を取得するには：
 
     ```
     http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}/${yyyyMMddHHmmss}
@@ -697,8 +697,8 @@ mysql> SHOW WARNINGS;
 
 ### ロック統計の挙動 {#behaviors-of-locking-statistics}
 
--   パーティションテーブルの統計情報をロックすると、そのパーティションテーブル上のすべてのパーティションの統計情報がロックされます。
--   テーブルまたはパーティションを切り捨てると、そのテーブルまたはパーティションにかかっていた統計ロックが解除されます。
+- パーティションテーブルの統計情報をロックすると、そのパーティションテーブル上のすべてのパーティションの統計情報がロックされます。
+- テーブルまたはパーティションを切り捨てると、そのテーブルまたはパーティションにかかっていた統計ロックが解除されます。
 
 以下の表は、ロック統計の動作について説明しています。
 
@@ -716,7 +716,7 @@ mysql> SHOW WARNINGS;
 
 TiDB v6.0以降、TiDBは`KILL`ステートメントを使用して、バックグラウンドで実行中の`ANALYZE`タスクを終了することをサポートしています。バックグラウンドで実行中の`ANALYZE`タスクが多くのリソースを消費し、アプリケーションに影響を与えている場合は、次の手順で`ANALYZE`タスクを終了できます。
 
-1.  以下のSQL文を実行してください。
+1. 以下のSQL文を実行してください。
 
     ```sql
     SHOW ANALYZE STATUS
@@ -724,12 +724,12 @@ TiDB v6.0以降、TiDBは`KILL`ステートメントを使用して、バック�
 
     結果の`instance`列と`process_id`列を確認することで、TiDB インスタンス アドレスと、バックグラウンド`ANALYZE`タスクのタスク`ID`を取得できます。
 
-2.  バックグラウンドで実行されている`ANALYZE`タスクを終了します。
+2. バックグラウンドで実行されている`ANALYZE`タスクを終了します。
 
     <CustomContent platform="tidb">
 
-    -   [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が`true` (デフォルトでは`true` ) の場合、 `KILL TIDB ${id};`ステートメントを直接実行できます。ここで、 `${id}`は、前の手順で取得したバックグラウンド`ANALYZE`タスクの`ID`です。
-    -   `enable-global-kill`が`false`の場合、クライアントを使用してバックエンドの`ANALYZE`タスクを実行している TiDB インスタンスに接続し、 `KILL TIDB ${id};`ステートメントを実行する必要があります。クライアントを使用して別の TiDB インスタンスに接続する場合、またはクライアントと TiDB クラスタの間にプロキシがある場合、 `KILL`ステートメントではバックグラウンド`ANALYZE`タスクを終了できません。
+    - [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が`true` (デフォルトでは`true` ) の場合、 `KILL TIDB ${id};`ステートメントを直接実行できます。ここで、 `${id}`は、前の手順で取得したバックグラウンド`ANALYZE`タスクの`ID`です。
+    - `enable-global-kill`が`false`の場合、クライアントを使用してバックエンドの`ANALYZE`タスクを実行している TiDB インスタンスに接続し、 `KILL TIDB ${id};`ステートメントを実行する必要があります。クライアントを使用して別の TiDB インスタンスに接続する場合、またはクライアントと TiDB クラスタの間にプロキシがある場合、 `KILL`ステートメントではバックグラウンド`ANALYZE`タスクを終了できません。
 
     </CustomContent>
 
@@ -781,19 +781,19 @@ TiDB v6.0以降、TiDBは`KILL`ステートメントを使用して、バック�
 
 <CustomContent platform="tidb">
 
--   [LOAD STATS](/sql-statements/sql-statement-load-stats.md)
--   [DROP STATS](/sql-statements/sql-statement-drop-stats.md)
--   [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
--   [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
--   [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
+- [LOAD STATS](/sql-statements/sql-statement-load-stats.md)
+- [DROP STATS](/sql-statements/sql-statement-drop-stats.md)
+- [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
+- [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
+- [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   [LOAD STATS](/sql-statements/sql-statement-load-stats.md)
--   [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
--   [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
--   [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
+- [LOAD STATS](/sql-statements/sql-statement-load-stats.md)
+- [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
+- [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
+- [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
 
 </CustomContent>

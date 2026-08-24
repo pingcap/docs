@@ -216,8 +216,8 @@ TiDBはコストベースオプティマイザー（CBO）を使用して、コ�
 
 > **Note:**
 >
-> -   テーブルに別名がある場合は、ヒントでテーブル名の代わりに別名を使用します。そうしないと、ヒントは機能しません。
-> -   `read_from_storage`ヒントは[共通テーブル式](/develop/dev-guide-use-common-table-expression.md)には機能しません。
+> - テーブルに別名がある場合は、ヒントでテーブル名の代わりに別名を使用します。そうしないと、ヒントは機能しません。
+> - `read_from_storage`ヒントは[共通テーブル式](/develop/dev-guide-use-common-table-expression.md)には機能しません。
 
 ```sql
 WITH orders_group_by_month AS (
@@ -247,13 +247,13 @@ TiDBがTiFlashをどのように使用するかの詳細については、 [TiDB
 
 ## 続きを読む {#read-more}
 
--   [TiDB Cloudの HTAP クイックスタート](/tidb-cloud/tidb-cloud-htap-quickstart.md)
--   [TiDB Self-Managed向けHTAPクイックスタート](/quick-start-with-htap.md)と[TiDB Self-ManagedのHTAPを探索する](/explore-htap.md)
--   [ウィンドウ関数](/functions-and-operators/window-functions.md)
--   [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)
+- [TiDB Cloudの HTAP クイックスタート](/tidb-cloud/tidb-cloud-htap-quickstart.md)
+- [TiDB Self-Managed向けHTAPクイックスタート](/quick-start-with-htap.md)と[TiDB Self-ManagedのHTAPを探索する](/explore-htap.md)
+- [ウィンドウ関数](/functions-and-operators/window-functions.md)
+- [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

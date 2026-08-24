@@ -13,10 +13,10 @@ TiDB のロールベースアクセス制御 (RBAC) システムの実装は、M
 
 ロールとは、一連の権限の集合です。以下の操作を行うことができます。
 
--   ロールを作成します。
--   ロールを削除します。
--   ロールに権限を付与します。
--   別のユーザーにロールを付与します。ロールを有効化すると、そのユーザーはロールに関連する権限を取得できます。
+- ロールを作成します。
+- ロールを削除します。
+- ロールに権限を付与します。
+- 別のユーザーにロールを付与します。ロールを有効化すると、そのユーザーはロールに関連する権限を取得できます。
 
 ### ロールを作成する {#create-a-role}
 
@@ -159,8 +159,8 @@ SHOW GRANTS FOR 'read_user1'@'localhost' USING 'app_read';
 
 現在のユーザーの権限を確認するには、 `SHOW GRANTS`または`SHOW GRANTS FOR CURRENT_USER()`を使用します。`SHOW GRANTS`と`SHOW GRANTS FOR CURRENT_USER()`は次の点で異なります。
 
--   `SHOW GRANTS` 、現在のユーザーに対して有効なロールの権限を示します。
--   `SHOW GRANTS FOR CURRENT_USER()`の場合、有効なロールの権限は表示されません。
+- `SHOW GRANTS` 、現在のユーザーに対して有効なロールの権限を示します。
+- `SHOW GRANTS FOR CURRENT_USER()`の場合、有効なロールの権限は表示されません。
 
 ### デフォルトロールを設定する {#set-the-default-role}
 
@@ -322,8 +322,8 @@ DROP ROLE 'app_read', 'app_write';
 
 4 つのシステム[権限テーブル](/privilege-management.md#privilege-table)に加えて、RBAC システムでは 2 つの新しいシステム権限テーブルが導入されています。
 
--   `mysql.role_edges` : ロールとユーザーの承認関係を記録します。
--   `mysql.default_roles` : 各ユーザーのデフォルトのロールを記録します。
+- `mysql.role_edges` : ロールとユーザーの承認関係を記録します。
+- `mysql.default_roles` : 各ユーザーのデフォルトのロールを記録します。
 
 #### `mysql.role_edges` {#mysql-role-edges}
 
@@ -342,8 +342,8 @@ SELECT * FROM mysql.role_edges;
 1 row in set (0.00 sec)
 ```
 
--   `FROM_HOST`と`FROM_USER`それぞれロールのホスト名とユーザー名を示します。
--   `TO_HOST`と`TO_USER` 、ロールが付与されるユーザーのホスト名とユーザー名を示します。
+- `FROM_HOST`と`FROM_USER`それぞれロールのホスト名とユーザー名を示します。
+- `TO_HOST`と`TO_USER` 、ロールが付与されるユーザーのホスト名とユーザー名を示します。
 
 #### `mysql.default_roles` {#mysql-default-roles}
 
@@ -363,12 +363,12 @@ SELECT * FROM mysql.default_roles;
 2 rows in set (0.00 sec)
 ```
 
--   `HOST`と`USER`それぞれユーザーのホスト名とユーザー名を示します。
--   `DEFAULT_ROLE_HOST`と`DEFAULT_ROLE_USER` 、それぞれデフォルト ロールのホスト名とユーザー名を示します。
+- `HOST`と`USER`それぞれユーザーのホスト名とユーザー名を示します。
+- `DEFAULT_ROLE_HOST`と`DEFAULT_ROLE_USER` 、それぞれデフォルト ロールのホスト名とユーザー名を示します。
 
 ### リファレンス {#references}
 
 RBAC、ユーザー管理、権限管理は密接に関連しているため、操作の詳細については次のリソースを参照してください。
 
--   [TiDB権限管理](/privilege-management.md)
--   [TiDB ユーザーアカウント管理](/user-account-management.md)
+- [TiDB権限管理](/privilege-management.md)
+- [TiDB ユーザーアカウント管理](/user-account-management.md)

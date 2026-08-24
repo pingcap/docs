@@ -66,15 +66,15 @@ ALTER SEQUENCE sequence_name
 
 次の式関数を通じてシーケンスを制御できます。
 
--   `NEXTVAL`または`NEXT VALUE FOR`
+- `NEXTVAL`または`NEXT VALUE FOR`
 
     基本的に、どちらもシーケンスオブジェクトの次の有効な値を取得する`NEXTVAL()`関数です。`NEXTVAL()`の関数の引数は、シーケンスの`identifier`の値です。
 
--   `LASTVAL`
+- `LASTVAL`
 
     この関数は、このセッションで最後に使用された値を取得します。値が存在しない場合は`NULL`が使用されます。この関数の引数は、シーケンスの`identifier`です。
 
--   `SETVAL`
+- `SETVAL`
 
     この関数は、シーケンスの現在の値の進行を設定します。この関数の最初のパラメータはシーケンスの`identifier` 、2番目のパラメータは`num`です。
 
@@ -209,7 +209,7 @@ SELECT SETVAL(seq, 6)   // Sets the current value of a sequence to 6.
 
 ## 参照 {#see-also}
 
--   [CREATE SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
--   [DROP SEQUENCE](/sql-statements/sql-statement-drop-sequence.md)
--   [SHOW CREATE SEQUENCE](/sql-statements/sql-statement-show-create-sequence.md)
--   [シーケンス関数](/functions-and-operators/sequence-functions.md)
+- [CREATE SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
+- [DROP SEQUENCE](/sql-statements/sql-statement-drop-sequence.md)
+- [SHOW CREATE SEQUENCE](/sql-statements/sql-statement-show-create-sequence.md)
+- [シーケンス関数](/functions-and-operators/sequence-functions.md)

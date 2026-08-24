@@ -22,13 +22,13 @@ unzip \*-tripdata.zip
 
 次の方法を使用して、システム データを TiDB にインポートできます。
 
-1.  CSV ファイルの名前を変更します。
+1. CSV ファイルの名前を変更します。
 
     ```bash
     i=1; for csv in *csv; do mv $csv bikeshare.trips.$(printf "%03d" $i).csv; i=$((i+1)); done
     ```
 
-2.  データベースとテーブルを作成します。
+2. データベースとテーブルを作成します。
 
     ```sql
     CREATE SCHEMA bikeshare;
@@ -47,7 +47,7 @@ unzip \*-tripdata.zip
     );
     ```
 
-3.  次のように`tidb-lightning.toml`ファイルを作成します。
+3. 次のように`tidb-lightning.toml`ファイルを作成します。
 
     ```toml
     [tikv-importer]
@@ -67,7 +67,7 @@ unzip \*-tripdata.zip
     password = "very_secret"
     ```
 
-4.  次のコマンドを実行します。
+4. 次のコマンドを実行します。
 
     ```shell
     tiup tidb-lightning -c tidb-lightning.toml

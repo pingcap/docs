@@ -11,8 +11,8 @@ summary: TiDB グローバル ソートの使用例、制限、使用方法、�
 
 > **Note:**
 >
-> -   現在、グローバルソート処理はTiDBノードの計算リソースとメモリリソースを大量に消費しています。ユーザーの業務アプリケーションの実行中にオンラインでインデックスを追加するようなシナリオでは、クラスターに新しいTiDBノードを追加し、これらのノードに[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)変数を設定し、これらのノードに接続してタスクを作成することをお勧めします。これにより、分散フレームワークはこれらのノードにタスクをスケジュールし、他のTiDBノードからのワークロードを分離することで、 `ADD INDEX`や`IMPORT INTO`などのバックエンドタスクの実行がユーザーの業務アプリケーションに与える影響を軽減します。
-> -   グローバル ソート機能を使用する場合は、OOM を回避するために、少なくとも 16 コアの CPU と 32 GiB のメモリを備えた TiDB ノードを使用することをお勧めします。
+> - 現在、グローバルソート処理はTiDBノードの計算リソースとメモリリソースを大量に消費しています。ユーザーの業務アプリケーションの実行中にオンラインでインデックスを追加するようなシナリオでは、クラスターに新しいTiDBノードを追加し、これらのノードに[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)変数を設定し、これらのノードに接続してタスクを作成することをお勧めします。これにより、分散フレームワークはこれらのノードにタスクをスケジュールし、他のTiDBノードからのワークロードを分離することで、 `ADD INDEX`や`IMPORT INTO`などのバックエンドタスクの実行がユーザーの業務アプリケーションに与える影響を軽減します。
+> - グローバル ソート機能を使用する場合は、OOM を回避するために、少なくとも 16 コアの CPU と 32 GiB のメモリを備えた TiDB ノードを使用することをお勧めします。
 
 > **Note:**
 >
@@ -38,7 +38,7 @@ TiDBのグローバルソート機能は、データインポートとDDL（デ�
 
 グローバルソートを有効にするには、次の手順に従います。
 
-1.  DXFを有効にするには、値を[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)から`ON`に設定します。v8.1.0以降では、この変数はデフォルトで有効になっています。v8.1.0以降のバージョンで新しく作成されたクラスターでは、この手順をスキップできます。
+1. DXFを有効にするには、値を[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)から`ON`に設定します。v8.1.0以降では、この変数はデフォルトで有効になっています。v8.1.0以降のバージョンで新しく作成されたクラスターでは、この手順をスキップできます。
 
     ```sql
     SET GLOBAL tidb_enable_dist_task = ON;
@@ -46,7 +46,7 @@ TiDBのグローバルソート機能は、データインポートとDDL（デ�
 
 <CustomContent platform="tidb">
 
-2.  [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)正しいクラウドストレージパスに設定します。[例](/br/backup-and-restore-storages.md)を参照してください。
+2. [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)正しいクラウドストレージパスに設定します。[例](/br/backup-and-restore-storages.md)を参照してください。
 
     ```sql
     SET GLOBAL tidb_cloud_storage_uri = 's3://my-bucket/test-data?role-arn=arn:aws:iam::888888888888:role/my-role'
@@ -55,7 +55,7 @@ TiDBのグローバルソート機能は、データインポートとDDL（デ�
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-2.  [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)正しいクラウドストレージパスに設定します。[例](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)を参照してください。
+2. [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)正しいクラウドストレージパスに設定します。[例](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)を参照してください。
 
     ```sql
     SET GLOBAL tidb_cloud_storage_uri = 's3://my-bucket/test-data?role-arn=arn:aws:iam::888888888888:role/my-role'
@@ -85,17 +85,17 @@ TiDBのグローバルソート機能は、データインポートとDDL（デ�
 
 ### ステップ1: データをスキャンして準備する {#step-1-scan-and-prepare-data}
 
-1.  TiDB ノードが特定の範囲のデータをスキャンした後 (データ ソースは CSV データまたは TiKV のテーブル データのいずれかになります)。
+1. TiDB ノードが特定の範囲のデータをスキャンした後 (データ ソースは CSV データまたは TiKV のテーブル データのいずれかになります)。
 
-    1.  TiDB ノードはそれらをキーと値のペアにエンコードします。
-    2.  TiDB ノードは、キーと値のペアを複数のブロック データ セグメントに分類します (データ セグメントはローカルに分類されます)。各セグメントは 1 つのファイルであり、クラウドストレージにアップロードされます。
+    1. TiDB ノードはそれらをキーと値のペアにエンコードします。
+    2. TiDB ノードは、キーと値のペアを複数のブロック データ セグメントに分類します (データ セグメントはローカルに分類されます)。各セグメントは 1 つのファイルであり、クラウドストレージにアップロードされます。
 
-2.  TiDBノードは、各セグメントの実際のキーと値の範囲（統計ファイルと呼ばれます）も連続して記録します。これは、スケーラブルなソート実装のための重要な準備です。これらのファイルは、実際のデータと共にクラウドストレージにアップロードされます。
+2. TiDBノードは、各セグメントの実際のキーと値の範囲（統計ファイルと呼ばれます）も連続して記録します。これは、スケーラブルなソート実装のための重要な準備です。これらのファイルは、実際のデータと共にクラウドストレージにアップロードされます。
 
 ### ステップ2: データを分類して分配する {#step-2-sort-and-distribute-data}
 
 ステップ1では、グローバルソートプログラムはソート済みブロックのリストと対応する統計ファイルを取得します。これらの統計ファイルから、ローカルソート済みブロックの数が得られます。また、このプログラムはPDが分割と分散に使用できる実データスコープも備えています。以下の手順が実行されます。
 
-1.  統計ファイル内のレコードを並べ替えて、ほぼ均等なサイズの範囲に分割します。これは、並列で実行されるサブタスクです。
-2.  サブタスクを TiDB ノードに分散して実行します。
-3.  各 TiDB ノードは、サブタスクのデータを範囲ごとに独立して分類し、重複することなく TiKV に取り込みます。
+1. 統計ファイル内のレコードを並べ替えて、ほぼ均等なサイズの範囲に分割します。これは、並列で実行されるサブタスクです。
+2. サブタスクを TiDB ノードに分散して実行します。
+3. 各 TiDB ノードは、サブタスクのデータを範囲ごとに独立して分類し、重複することなく TiKV に取り込みます。

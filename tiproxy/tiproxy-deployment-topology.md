@@ -9,9 +9,9 @@ summary: 最小限の TiDB トポロジに基づく TiProxy の展開トポロ�
 
 その他の展開方法については、次のドキュメントを参照してください。
 
--   TiDB Operatorを使用して TiProxy をデプロイするには、 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tiproxy)ドキュメントを参照してください。
--   TiUPを使用して TiProxy をローカルに素早く展開するには、 [TiProxyをデプロイ](/tiup/tiup-playground.md#deploy-tiproxy)を参照してください。
--   TiUPを使用して TiProxy を展開するには、 [インストールと使用方法](/tiproxy/tiproxy-overview.md#installation-and-usage)を参照してください。
+- TiDB Operatorを使用して TiProxy をデプロイするには、 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tiproxy)ドキュメントを参照してください。
+- TiUPを使用して TiProxy をローカルに素早く展開するには、 [TiProxyをデプロイ](/tiup/tiup-playground.md#deploy-tiproxy)を参照してください。
+- TiUPを使用して TiProxy を展開するには、 [インストールと使用方法](/tiproxy/tiproxy-overview.md#installation-and-usage)を参照してください。
 
 TiProxy は TiDB の L7 プロキシサーバーであり、接続のバランスを取り、可能な場合はセッションを移行できます。
 
@@ -37,10 +37,10 @@ TiProxy のテンプレートの詳細については、 [TiProxyトポロジの
 
 ### 主なパラメータ {#key-parameters}
 
--   `tiproxy_servers`のインスタンス レベル`"-host"`構成では、ドメイン名ではなく IP のみがサポートされます。
--   TiProxyパラメータの詳細な説明については、 [TiProxy のコンフィグレーション](/tiproxy/tiproxy-configuration.md)を参照してください。
+- `tiproxy_servers`のインスタンス レベル`"-host"`構成では、ドメイン名ではなく IP のみがサポートされます。
+- TiProxyパラメータの詳細な説明については、 [TiProxy のコンフィグレーション](/tiproxy/tiproxy-configuration.md)を参照してください。
 
 > **Note:**
 >
-> -   設定ファイルに`tidb`ユーザーを手動で作成する必要はありません。TiUPTiUPコンポーネントは、ターゲットマシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、制御マシンと同じユーザーを維持することもできます。
-> -   デプロイメント ディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。
+> - 設定ファイルに`tidb`ユーザーを手動で作成する必要はありません。TiUPTiUPコンポーネントは、ターゲットマシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、制御マシンと同じユーザーを維持することもできます。
+> - デプロイメント ディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。

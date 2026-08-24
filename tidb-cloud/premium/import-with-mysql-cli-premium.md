@@ -9,38 +9,38 @@ summary: MySQLコマンドラインクライアント（mysql`）を使用して
 
 > **Tip:**
 >
-> -   論理インポートは、比較的小さな SQL ファイルまたは CSV ファイルに最適です。クラウドストレージからのより高速な並列インポート、または[Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)エクスポートからの複数のファイルの処理については、 [クラウドストレージからCSVファイルをTiDB Cloud Premiumにインポートする](/tidb-cloud/premium/import-csv-files-premium.md)インポートするを参照してください。
-> -   TiDB Cloud StarterまたはEssentialについては、 [MySQL CLI を介してTiDB Cloud StarterまたはEssentialにデータをインポートする](/tidb-cloud/import-with-mysql-cli-serverless.md)を参照してください。
-> -   TiDB Cloud Dedicatedについては、 [MySQL CLI を介してTiDB Cloud Dedicatedにデータをインポートする](/tidb-cloud/import-with-mysql-cli.md)を参照してください。
+> - 論理インポートは、比較的小さな SQL ファイルまたは CSV ファイルに最適です。クラウドストレージからのより高速な並列インポート、または[Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)エクスポートからの複数のファイルの処理については、 [クラウドストレージからCSVファイルをTiDB Cloud Premiumにインポートする](/tidb-cloud/premium/import-csv-files-premium.md)インポートするを参照してください。
+> - TiDB Cloud StarterまたはEssentialについては、 [MySQL CLI を介してTiDB Cloud StarterまたはEssentialにデータをインポートする](/tidb-cloud/import-with-mysql-cli-serverless.md)を参照してください。
+> - TiDB Cloud Dedicatedについては、 [MySQL CLI を介してTiDB Cloud Dedicatedにデータをインポートする](/tidb-cloud/import-with-mysql-cli.md)を参照してください。
 
 ## 前提条件 {#prerequisites}
 
 MySQLコマンドラインクライアントを使用してTiDB Cloud Premiumインスタンスにデータをインポートするには、以下の前提条件を満たす必要があります。
 
--   TiDB Cloud Premiumインスタンスへのアクセス権が付与されています。
--   ローカルコンピュータにMySQLコマンドラインクライアント（ `mysql` ）をインストールしてください。
+- TiDB Cloud Premiumインスタンスへのアクセス権が付与されています。
+- ローカルコンピュータにMySQLコマンドラインクライアント（ `mysql` ）をインストールしてください。
 
 ## ステップ1. TiDB Cloud Premiumインスタンスに接続します。 {#step-1-connect-to-your-tidb-cloud-premium-instance}
 
 MySQLコマンドラインクライアントを使用してTiDB Cloud Premiumインスタンスに接続します。初めて接続する場合は、以下の手順を実行してネットワーク接続を設定し、 TiDB SQL `root`ユーザーパスワードを生成してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。次に、ターゲットのTiDB Cloud Premium インスタンスの名前をクリックして、その概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。次に、ターゲットのTiDB Cloud Premium インスタンスの名前をクリックして、その概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
+3. 接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **Connection Type**は`Public`に設定されています。
+    - **Connection Type**は`Public`に設定されています。
 
-    -   **Connect With**は`MySQL CLI`に設定されています。
+    - **Connect With**は`MySQL CLI`に設定されています。
 
-    -   お使いの環境に合った**Operating System**を選択してください。
+    - お使いの環境に合った**Operating System**を選択してください。
 
     > **Note:**
     >
     > TiDB Cloud Premiumインスタンスでは、パブリックエンドポイントはデフォルトで無効になっています。 `Public`オプションが表示されない場合は、インスタンスの詳細ページ（**Network**タブ）でパブリックエンドポイントを有効にするか、組織の管理者に有効化を依頼してから先に進んでください。
 
-4.  **Generate Password**をクリックすると、ランダムなパスワードが生成されます。既にパスワードを設定している場合は、そのパスワードを再利用するか、変更してから先に進んでください。
+4. **Generate Password**をクリックすると、ランダムなパスワードが生成されます。既にパスワードを設定している場合は、そのパスワードを再利用するか、変更してから先に進んでください。
 
 ## ステップ2. 対象データベースとテーブルスキーマを定義する {#step-2-define-the-target-database-and-table-schema}
 
@@ -70,7 +70,7 @@ CREATE TABLE products (
 
 SQLファイルからデータをインポートするには、以下の手順を実行してください。
 
-1.  インポートするデータを含む SQL ファイル (例: `products.sql` ) を提供してください。この SQL ファイルには、次のようなデータを含む`INSERT`ステートメントが含まれている必要があります。
+1. インポートするデータを含む SQL ファイル (例: `products.sql` ) を提供してください。この SQL ファイルには、次のようなデータを含む`INSERT`ステートメントが含まれている必要があります。
 
     ```sql
     INSERT INTO products (product_id, product_name, price) VALUES
@@ -79,7 +79,7 @@ SQLファイルからデータをインポートするには、以下の手順�
         (3, 'Tablet', 299.99);
     ```
 
-2.  SQLファイルからデータをインポートするには、以下のコマンドを使用してください。
+2. SQLファイルからデータをインポートするには、以下のコマンドを使用してください。
 
     ```bash
     mysql --comments --connect-timeout 150 \
@@ -105,9 +105,9 @@ SQLファイルからデータをインポートするには、以下の手順�
 
 CSVファイルからデータをインポートするには、以下の手順を実行してください。
 
-1.  TiDB にターゲットのデータベースとテーブルが存在することを確認してください (例えば、ステップ 2 で作成した`products`テーブル)。
+1. TiDB にターゲットのデータベースとテーブルが存在することを確認してください (例えば、ステップ 2 で作成した`products`テーブル)。
 
-2.  インポートしたいデータを含むサンプルCSVファイル（例： `products.csv` ）を提供してください。以下に例を示します。
+2. インポートしたいデータを含むサンプルCSVファイル（例： `products.csv` ）を提供してください。以下に例を示します。
 
     **products.csv:**
 
@@ -118,7 +118,7 @@ CSVファイルからデータをインポートするには、以下の手順�
     3,Tablet,299.99
     ```
 
-3.  以下のコマンドを使用して、CSVファイルからデータをインポートします。
+3. 以下のコマンドを使用して、CSVファイルからデータをインポートします。
 
     ```bash
     mysql --comments --connect-timeout 150 \

@@ -13,9 +13,9 @@ summary: AWS Database Migration Service (AWS DMS) を使用して、Amazon RDS f
 
 TiDB CloudとAWS DMSについてさらに詳しく知りたい場合は、以下をご覧ください。
 
--   [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)
--   [TiDB開発者ガイド](https://docs.pingcap.com/tidbcloud/dev-guide-overview)
--   [AWS DMS ドキュメント](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.html)
+- [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)
+- [TiDB開発者ガイド](https://docs.pingcap.com/tidbcloud/dev-guide-overview)
+- [AWS DMS ドキュメント](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.html)
 
 ## AWS DMSを使う理由とは？ {#why-use-aws-dms}
 
@@ -27,9 +27,9 @@ PostgreSQL、Oracle、SQL Serverなどの異種データベースからTiDB Clou
 
 大まかに言うと、以下の手順に従ってください。
 
-1.  Oracle用のAmazon RDSソースを設定します。
-2.  TiDB Cloud Starterインスタンスを作成します。
-3.  AWS DMSを使用してデータ移行（フルロード）を設定します。
+1. Oracle用のAmazon RDSソースを設定します。
+2. TiDB Cloud Starterインスタンスを作成します。
+3. AWS DMSを使用してデータ移行（フルロード）を設定します。
 
 以下の図は、高レベルのアーキテクチャを示しています。
 
@@ -39,10 +39,10 @@ PostgreSQL、Oracle、SQL Serverなどの異種データベースからTiDB Clou
 
 始める前に、以下の前提条件をお読みください。
 
--   [AWS DMSの前提条件](/tidb-cloud/migrate-from-mysql-using-aws-dms.md#prerequisites)
--   [AWSクラウドアカウント](https://aws.amazon.com)
--   [TiDB Cloudアカウント](https://tidbcloud.com)
--   [DBeaver](https://dbeaver.io/)
+- [AWS DMSの前提条件](/tidb-cloud/migrate-from-mysql-using-aws-dms.md#prerequisites)
+- [AWSクラウドアカウント](https://aws.amazon.com)
+- [TiDB Cloudアカウント](https://tidbcloud.com)
+- [DBeaver](https://dbeaver.io/)
 
 次に、AWS DMS を使用して Amazon RDS for Oracle からTiDB Cloudへデータを移行する方法を学びます。
 
@@ -66,8 +66,8 @@ Oracle DB インスタンスの作成方法については、「Oracle DB イン
 
 以下のスクリプトを使用して、github_events テーブルに 10,000 行のデータを作成し、データを投入します。GitHub イベントデータセットは[GHアーカイブ](https://gharchive.org/)からダウンロードできます。 10,000 行のデータが含まれています。以下の SQL スクリプトを使用して Oracle で実行します。
 
--   [table_schema_oracle.sql](https://github.com/pingcap-inc/tidb-integration-script/blob/main/aws-dms/oracle_table_schema.sql)
--   [oracle_data.sql](https://github.com/pingcap-inc/tidb-integration-script/blob/main/aws-dms/oracle_data.sql)
+- [table_schema_oracle.sql](https://github.com/pingcap-inc/tidb-integration-script/blob/main/aws-dms/oracle_table_schema.sql)
+- [oracle_data.sql](https://github.com/pingcap-inc/tidb-integration-script/blob/main/aws-dms/oracle_data.sql)
 
 SQLスクリプトの実行が完了したら、Oracleのデータを確認してください。以下の例では、 [DBeaver](https://dbeaver.io/)を使用してデータを照会します。
 
@@ -75,21 +75,21 @@ SQLスクリプトの実行が完了したら、Oracleのデータを確認し�
 
 ## ステップ4. TiDB Cloud Starterインスタンスを作成する {#step-4-create-a-tidb-cloud-starter-instance}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
 
-2.  [TiDB Cloud Starterインスタンスを作成する](/tidb-cloud/tidb-cloud-quickstart.md)。
+2. [TiDB Cloud Starterインスタンスを作成する](/tidb-cloud/tidb-cloud-quickstart.md)。
 
-3.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックすると、その概要ページに移動します。
+3. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックすると、その概要ページに移動します。
 
-4.  右上隅にある**Connect**をクリックします。
+4. 右上隅にある**Connect**をクリックします。
 
-5.  **Generate Password**をクリックしてパスワードを生成し、生成されたパスワードをコピーしてください。
+5. **Generate Password**をクリックしてパスワードを生成し、生成されたパスワードをコピーしてください。
 
 ## ステップ5. AWS DMSレプリケーションインスタンスを作成する {#step-5-create-an-aws-dms-replication-instance}
 
-1.  AWS DMS コンソールの[レプリケーションインスタンス](https://console.aws.amazon.com/dms/v2/home#replicationInstances)ページに移動し、対応するリージョンに切り替えます。
+1. AWS DMS コンソールの[レプリケーションインスタンス](https://console.aws.amazon.com/dms/v2/home#replicationInstances)ページに移動し、対応するリージョンに切り替えます。
 
-2.  VPC 内に`dms.t3.large`を使用して AWS DMS レプリケーション インスタンスを作成します。
+2. VPC 内に`dms.t3.large`を使用して AWS DMS レプリケーション インスタンスを作成します。
 
     ![Create AWS DMS Instance](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-8.png)
 
@@ -99,9 +99,9 @@ SQLスクリプトの実行が完了したら、Oracleのデータを確認し�
 
 ## ステップ6．DMSエンドポイントを作成する {#step-6-create-dms-endpoints}
 
-1.  [AWS DMSコンソール](https://console.aws.amazon.com/dms/v2/home)で、左側のペインにある`Endpoints`メニュー項目をクリックします。
+1. [AWS DMSコンソール](https://console.aws.amazon.com/dms/v2/home)で、左側のペインにある`Endpoints`メニュー項目をクリックします。
 
-2.  OracleのソースエンドポイントとTiDBのターゲットエンドポイントを作成します。
+2. OracleのソースエンドポイントとTiDBのターゲットエンドポイントを作成します。
 
     以下のスクリーンショットは、ソースエンドポイントの設定を示しています。
 
@@ -125,19 +125,19 @@ AWS Schema Conversion Tool を使用してスキーマを移行する場合は�
 
 ## ステップ8. データベース移行タスクを作成する {#step-8-create-a-database-migration-task}
 
-1.  AWS DMS コンソールで、 [データ移行タスク](https://console.aws.amazon.com/dms/v2/home#tasks)ページに移動します。お住まいの地域に切り替えてください。次に、ウィンドウの右上隅にある**Create task**をクリックします。
+1. AWS DMS コンソールで、 [データ移行タスク](https://console.aws.amazon.com/dms/v2/home#tasks)ページに移動します。お住まいの地域に切り替えてください。次に、ウィンドウの右上隅にある**Create task**をクリックします。
 
     ![Create task](/media/tidb-cloud/aws-dms-to-tidb-cloud-create-task.png)
 
-2.  データベース移行タスクを作成し、**Selection rules**を指定します。
+2. データベース移行タスクを作成し、**Selection rules**を指定します。
 
     ![Create AWS DMS migration task](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-11.png)
 
     ![AWS DMS migration task selection rules](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-12.png)
 
-3.  タスクを作成し、開始し、タスクが完了するまで待ちます。
+3. タスクを作成し、開始し、タスクが完了するまで待ちます。
 
-4.  **Table statistics**をクリックしてテーブルを確認してください。スキーマ名は`ADMIN`です。
+4. **Table statistics**をクリックしてテーブルを確認してください。スキーマ名は`ADMIN`です。
 
     ![Check AWS DMS migration task](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-13.png)
 
@@ -157,5 +157,5 @@ AWS DMS を使用すると、このドキュメントの例に従って、任意
 
 ## 関連項目 {#see-also}
 
--   [AWS DMSを使用してMySQL互換データベースから移行する](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
--   [AWS DMSをTiDB Cloudに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
+- [AWS DMSを使用してMySQL互換データベースから移行する](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
+- [AWS DMSをTiDB Cloudに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)

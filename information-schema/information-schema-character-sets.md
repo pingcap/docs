@@ -50,14 +50,14 @@ SELECT * FROM `CHARACTER_SETS`;
 
 `CHARACTER_SETS`表の列の説明は次のとおりです。
 
--   `CHARACTER_SET_NAME` : 文字セットの名前。
--   `DEFAULT_COLLATE_NAME`文字セットのデフォルトの照合順序名。
--   `DESCRIPTION`文字セットの説明。
--   `MAXLEN`この文字セットに文字を格納するために必要な最大長。
+- `CHARACTER_SET_NAME` : 文字セットの名前。
+- `DEFAULT_COLLATE_NAME`文字セットのデフォルトの照合順序名。
+- `DESCRIPTION`文字セットの説明。
+- `MAXLEN`この文字セットに文字を格納するために必要な最大長。
 
 ## 参照 {#see-also}
 
--   [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
--   [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
--   [`INFORMATION_SCHEMA.COLLATIONS`](/information-schema/information-schema-collations.md)
--   [`INFORMATION_SCHEMA.COLLATION_CHARACTER_SET_APPLICABILITY`](/information-schema/information-schema-collation-character-set-applicability.md)
+- [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
+- [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
+- [`INFORMATION_SCHEMA.COLLATIONS`](/information-schema/information-schema-collations.md)
+- [`INFORMATION_SCHEMA.COLLATION_CHARACTER_SET_APPLICABILITY`](/information-schema/information-schema-collation-character-set-applicability.md)

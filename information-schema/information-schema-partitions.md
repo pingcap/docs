@@ -121,4 +121,4 @@ SUBPARTITION_ORDINAL_POSITION: NULL
 
 ## 参照 {#see-also}
 
--   [パーティションを使用してステートメントを説明する](/explain-partitions.md)
+- [パーティションを使用してステートメントを説明する](/explain-partitions.md)

@@ -11,8 +11,8 @@ Amazon AuroraからParquetファイルをエクスポートする場合は、 [A
 
 ## 前提条件 {#prerequisites}
 
--   [TiUPを使用してTiDB Lightningをインストールする](/migration-tools.md)。
--   [TiDB Lightningに必要なターゲットデータベース権限を取得します](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database)
+- [TiUPを使用してTiDB Lightningをインストールする](/migration-tools.md)。
+- [TiDB Lightningに必要なターゲットデータベース権限を取得します](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database)
 
 ## ステップ1. Parquetファイルを用意する {#step-1-prepare-the-parquet-files}
 
@@ -20,7 +20,7 @@ Amazon AuroraからParquetファイルをエクスポートする場合は、 [A
 
 Hive の各テーブルは`STORED AS PARQUET LOCATION '/path/in/hdfs'`を指定することで、Parquet ファイルにエクスポートできます。したがって、 `test`という名前のテーブルをエクスポートする必要がある場合は、次の手順を実行します。
 
-1.  Hiveで以下のSQL文を実行してください。
+1. Hiveで以下のSQL文を実行してください。
 
     ```sql
     CREATE TABLE temp STORED AS PARQUET LOCATION '/path/in/hdfs'
@@ -29,7 +29,7 @@ Hive の各テーブルは`STORED AS PARQUET LOCATION '/path/in/hdfs'`を指定�
 
     上記のステートメントを実行すると、テーブルデータはHDFSシステムに正常にエクスポートされます。
 
-2.  `hdfs dfs -get`コマンドを使用して、Parquet ファイルをローカルファイルシステムにエクスポートします。
+2. `hdfs dfs -get`コマンドを使用して、Parquet ファイルをローカルファイルシステムにエクスポートします。
 
     ```shell
     hdfs dfs -get /path/in/hdfs /path/in/local
@@ -41,22 +41,22 @@ Hive の各テーブルは`STORED AS PARQUET LOCATION '/path/in/hdfs'`を指定�
     DROP TABLE temp;
     ```
 
-3.  Hive からエクスポートされた Parquet ファイルには`.parquet`サフィックスが付いていない場合があるため、TiDB Lightning はそれらを正しく識別できません。ファイルをインポートする前に、ファイル名を変更して `.parquet`サフィックスを追加し、ファイル名全体をTiDB Lightning が認識する形式（例: `${db_name}.${table_name}.parquet`）に変更する必要があります。ファイルの種類とパターンに関する詳細については、 [TiDB Lightningデータソース](/tidb-lightning/tidb-lightning-data-source.md)を参照してください。また、正しい[カスタマイズされた表現](/tidb-lightning/tidb-lightning-data-source.md#match-customized-files)を設定することでデータ ファイルを一致させることもできます。
+3. Hive からエクスポートされた Parquet ファイルには`.parquet`サフィックスが付いていない場合があるため、TiDB Lightning はそれらを正しく識別できません。ファイルをインポートする前に、ファイル名を変更して `.parquet`サフィックスを追加し、ファイル名全体をTiDB Lightning が認識する形式（例: `${db_name}.${table_name}.parquet`）に変更する必要があります。ファイルの種類とパターンに関する詳細については、 [TiDB Lightningデータソース](/tidb-lightning/tidb-lightning-data-source.md)を参照してください。また、正しい[カスタマイズされた表現](/tidb-lightning/tidb-lightning-data-source.md#match-customized-files)を設定することでデータ ファイルを一致させることもできます。
 
-4.  すべての Parquet ファイルを、例えば`/data/my_datasource/`や`s3://my-bucket/sql-backup`のような単一のディレクトリに配置してください。TiDB Lightning は、このディレクトリとそのサブディレクトリ内のすべての`.parquet`ファイルを再帰的に検索します。
+4. すべての Parquet ファイルを、例えば`/data/my_datasource/`や`s3://my-bucket/sql-backup`のような単一のディレクトリに配置してください。TiDB Lightning は、このディレクトリとそのサブディレクトリ内のすべての`.parquet`ファイルを再帰的に検索します。
 
 ## ステップ2. 対象テーブルのスキーマを作成する {#step-2-create-the-target-table-schema}
 
 ParquetファイルからTiDBにデータをインポートする前に、ターゲットテーブルスキーマを作成する必要があります。ターゲットテーブルスキーマは、以下の2つの方法のいずれかで作成できます。
 
--   **方法 1** : TiDB Lightningを使用してターゲット テーブル スキーマを作成します。
+- **方法 1** : TiDB Lightningを使用してターゲット テーブル スキーマを作成します。
 
     必要なDDLステートメントを含むSQLファイルを作成します。
 
-    -   `CREATE DATABASE`ファイルに`${db_name}-schema-create.sql` } ステートメントを追加します。
-    -   `CREATE TABLE`ファイルに`${db_name}.${table_name}-schema.sql` } ステートメントを追加します。
+    - `CREATE DATABASE`ファイルに`${db_name}-schema-create.sql` } ステートメントを追加します。
+    - `CREATE TABLE`ファイルに`${db_name}.${table_name}-schema.sql` } ステートメントを追加します。
 
--   **方法2** ：対象テーブルのスキーマを手動で作成する。
+- **方法2** ：対象テーブルのスキーマを手動で作成する。
 
 ## ステップ3．設定ファイルを作成する {#step-3-create-the-configuration-file}
 
@@ -94,9 +94,9 @@ pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:237
 
 ## ステップ4．データのインポート {#step-4-import-the-data}
 
-1.  `tidb-lightning`を実行します。
+1. `tidb-lightning`を実行します。
 
-    -   Amazon S3 からデータをインポートする場合は、 TiDB Lightning を実行する前に、S3 バックエンドストレージへのアクセス権限を持つアカウントの SecretKey と AccessKey を環境変数として設定する必要があります。
+    - Amazon S3 からデータをインポートする場合は、 TiDB Lightning を実行する前に、S3 バックエンドストレージへのアクセス権限を持つアカウントの SecretKey と AccessKey を環境変数として設定する必要があります。
 
         ```shell
         export AWS_ACCESS_KEY_ID=${access_key}
@@ -105,20 +105,20 @@ pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:237
 
         前述の方法に加えて、 TiDB Lightning は`~/.aws/credentials`から認証情報ファイルを読み取ることもサポートしています。
 
-    -   コマンドラインでプログラムを起動すると、 `SIGHUP`シグナルを受信した後にプロセスが予期せず終了する可能性があります。この場合、 `nohup`または`screen`ツールを使用してプログラムを実行することをお勧めします。例:
+    - コマンドラインでプログラムを起動すると、 `SIGHUP`シグナルを受信した後にプロセスが予期せず終了する可能性があります。この場合、 `nohup`または`screen`ツールを使用してプログラムを実行することをお勧めします。例:
 
         ```shell
         nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
         ```
 
-2.  インポートが開始された後、以下のいずれかの方法でインポートの進行状況を確認できます。
+2. インポートが開始された後、以下のいずれかの方法でインポートの進行状況を確認できます。
 
-    -   ログ内のキーワード`progress`を`grep`することで、インポートの進行状況を確認できます。進行状況は、デフォルトでは 5 分ごとに更新されます。
-    -   [モニタリングダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進捗状況を確認してください。
+    - ログ内のキーワード`progress`を`grep`することで、インポートの進行状況を確認できます。進行状況は、デフォルトでは 5 分ごとに更新されます。
+    - [モニタリングダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進捗状況を確認してください。
 
     TiDB Lightningはインポートが完了すると自動的に終了します。
 
-3.  インポートが成功したかどうか確認してください。
+3. インポートが成功したかどうか確認してください。
 
     最終行に`tidb-lightning.log`に`the whole procedure completed`が含まれているかどうかを確認してください。含まれている場合はインポートが成功しています。含まれていない場合は、インポート中にエラーが発生しました。エラーメッセージの指示に従ってエラーに対処してください。
 

@@ -11,10 +11,10 @@ summary: データアプリのOpenAPI仕様を使用してクライアントコ�
 
 Next.jsでOpenAPI Specificationを使用する前に、以下のものが用意されていることを確認してください。
 
--   [TiDB Cloud Starterインスタンス](/tidb-cloud/create-tidb-cluster-serverless.md)または[TiDB Cloud Dedicatedクラスター](/tidb-cloud/create-tidb-cluster.md)クラスター。
--   [Node.js](https://nodejs.org/en/download)
--   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
--   [yarn](https://yarnpkg.com/getting-started/install)
+- [TiDB Cloud Starterインスタンス](/tidb-cloud/create-tidb-cluster-serverless.md)または[TiDB Cloud Dedicatedクラスター](/tidb-cloud/create-tidb-cluster.md)クラスター。
+- [Node.js](https://nodejs.org/en/download)
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- [yarn](https://yarnpkg.com/getting-started/install)
 
 このドキュメントでは、例としてTiDB Cloud Starterインスタンスを使用します。
 
@@ -57,7 +57,7 @@ SELECT * FROM test.repository;
 
 以下では、Next.jsを例として、データアプリのOpenAPI仕様を使用してクライアントコードを生成する方法を説明します。
 
-1.  `hello-repos`という名前の Next.js プロジェクトを作成します。
+1. `hello-repos`という名前の Next.js プロジェクトを作成します。
 
     公式テンプレートを使用してNext.jsプロジェクトを作成するには、次のコマンドを使用し、プロンプトが表示されたらすべてのデフォルトオプションをそのまま使用してください。
 
@@ -71,7 +71,7 @@ SELECT * FROM test.repository;
     cd hello-repos
     ```
 
-2.  依存関係をインストールします。
+2. 依存関係をインストールします。
 
     このドキュメントでは[OpenAPIジェネレーター](https://github.com/OpenAPITools/openapi-generator)を使用して、OpenAPI 仕様から API クライアント ライブラリを自動的に生成します。
 
@@ -81,11 +81,11 @@ SELECT * FROM test.repository;
     yarn add @openapitools/openapi-generator-cli --dev
     ```
 
-3.  OpenAPI仕様をダウンロードして、 `oas/doc.json`として保存してください。
+3. OpenAPI仕様をダウンロードして、 `oas/doc.json`として保存してください。
 
-    1.  TiDB Cloud[**Data Service**](https://tidbcloud.com/project/data-service)ページで、左側のペインにあるデータアプリ名をクリックすると、アプリの設定が表示されます。
-    2.  **API Specification**エリアで**Download**をクリックし、JSON形式を選択して、プロンプトが表示されたら**Authorize**をクリックします。
-    3.  ダウンロードしたファイルを`oas/doc.json`プロジェクトディレクトリに`hello-repos` }という名前で保存してください。
+    1. TiDB Cloud[**Data Service**](https://tidbcloud.com/project/data-service)ページで、左側のペインにあるデータアプリ名をクリックすると、アプリの設定が表示されます。
+    2. **API Specification**エリアで**Download**をクリックし、JSON形式を選択して、プロンプトが表示されたら**Authorize**をクリックします。
+    3. ダウンロードしたファイルを`oas/doc.json`プロジェクトディレクトリに`hello-repos` }という名前で保存してください。
 
     詳細については、 [OpenAPI仕様書をダウンロードする](/tidb-cloud/data-service-manage-data-app.md#download-the-openapi-specification)を参照してください。
 
@@ -133,7 +133,7 @@ SELECT * FROM test.repository;
     ...
     ```
 
-4.  クライアントコードを生成する：
+4. クライアントコードを生成する：
 
     ```shell
     yarn run openapi-generator-cli generate -i oas/doc.json --generator-name typescript-fetch -o gen/api
@@ -145,7 +145,7 @@ SELECT * FROM test.repository;
 
 生成されたクライアントコードを使用して、Next.jsアプリケーションを開発できます。
 
-1.  `hello-repos`プロジェクトディレクトリに、次の変数を含む`.env.local`ファイルを作成し、変数の値をデータアプリの公開鍵と秘密鍵に設定します。
+1. `hello-repos`プロジェクトディレクトリに、次の変数を含む`.env.local`ファイルを作成し、変数の値をデータアプリの公開鍵と秘密鍵に設定します。
 
     ```
     TIDBCLOUD_DATA_SERVICE_PUBLIC_KEY=YOUR_PUBLIC_KEY
@@ -154,7 +154,7 @@ SELECT * FROM test.repository;
 
     データ アプリの API キーを作成するには、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
 
-2.  `hello-repos`プロジェクトディレクトリで、 `app/page.tsx`の内容を、 `GET /repositories`エンドポイントからデータを取得して表示する以下のコードに置き換えてください。
+2. `hello-repos`プロジェクトディレクトリで、 `app/page.tsx`の内容を、 `GET /repositories`エンドポイントからデータを取得して表示する以下のコードに置き換えてください。
 
     ```js
     import {DefaultApi, Configuration} from "../gen/api"

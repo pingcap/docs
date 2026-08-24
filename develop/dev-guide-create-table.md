@@ -12,9 +12,9 @@ aliases: ['/ja/tidb/stable/dev-guide-create-table/','/ja/tidb/dev/dev-guide-crea
 
 この文書を読む前に、以下の作業が完了していることを確認してください。
 
--   [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)お読みください。
--   [データベースを作成する](/develop/dev-guide-create-database.md)。
+- [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)お読みください。
+- [データベースを作成する](/develop/dev-guide-create-database.md)。
 
 ## テーブルとは何ですか {#what-is-a-table}
 
@@ -32,8 +32,8 @@ CREATE TABLE {table_name} ( {elements} );
 
 **パラメータの説明**
 
--   `{table_name}` : 作成するテーブルの名前。
--   `{elements}` : 列定義や主キー定義など、テーブル要素をカンマで区切ったリスト。
+- `{table_name}` : 作成するテーブルの名前。
+- `{elements}` : 列定義や主キー定義など、テーブル要素をカンマで区切ったリスト。
 
 `bookshop`データベースにユーザー情報を保存するためのテーブルを作成する必要があるとします。
 
@@ -56,9 +56,9 @@ CREATE TABLE `bookshop`.`users` (
 
 **パラメータの説明**
 
--   `{column_name}` : 列名。
--   `{data_type}` : 列[データ型](/data-type-overview.md)。
--   `{column_qualification}` :**列レベルの制約**や[生成列](/generated-columns.md)句などのカラム修飾。
+- `{column_name}` : 列名。
+- `{data_type}` : 列[データ型](/data-type-overview.md)。
+- `{column_qualification}` :**列レベルの制約**や[生成列](/generated-columns.md)句などのカラム修飾。
 
 `users`テーブルに、一意の識別子`id` 、 `balance` 、 `nickname`などの列を追加できます。
 
@@ -93,9 +93,9 @@ CREATE TABLE `bookshop`.`books` (
 
 このテーブルには`users`テーブルよりも多くのデータ型が含まれています。
 
--   [整数](/data-type-numeric.md#integer-types): ディスク使用量の過剰使用やパフォーマンスへの影響（型範囲が大きすぎる場合）またはデータオーバーフロー（データ型範囲が小さすぎる場合）を避けるため、適切なサイズの型を使用することをお勧めします。
--   :[日時](/data-type-date-and-time.md)型は**、**時間値を格納できます。
--   [列挙型](/data-type-string.md#enum-type): enum型は、限られた値の選択を格納するために使用できます。
+- [整数](/data-type-numeric.md#integer-types): ディスク使用量の過剰使用やパフォーマンスへの影響（型範囲が大きすぎる場合）またはデータオーバーフロー（データ型範囲が小さすぎる場合）を避けるため、適切なサイズの型を使用することをお勧めします。
+- :[日時](/data-type-date-and-time.md)型は**、**時間値を格納できます。
+- [列挙型](/data-type-string.md#enum-type): enum型は、限られた値の選択を格納するために使用できます。
 
 ## 主キーを選択 {#select-primary-key}
 
@@ -105,9 +105,9 @@ CREATE TABLE `bookshop`.`books` (
 >
 > TiDBにおける**主キー**のデフォルト定義は、 [InnoDB](https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html) （MySQLの一般的なストレージエンジン）における定義とは異なります。
 >
-> -   **InnoDB**では、**主キー**は一意であり、nullではなく、**インデックスはクラスター化されています**。
+> - **InnoDB**では、**主キー**は一意であり、nullではなく、**インデックスはクラスター化されています**。
 >
-> -   TiDBでは、**主キー**は一意であり、NULLであってはなりません。ただし、主キーが**クラスター化インデックス**であることは保証されていません。代わりに、別のキーワードセット`CLUSTERED` / `NONCLUSTERED`によって、**主キー**が**クラスター化インデックス**であるかどうかが制御されます。キーワードが指定されていない場合は、システム変数`@@global.tidb_enable_clustered_index`によって制御されます（[クラスター化インデックス](https://docs.pingcap.com/tidb/stable/clustered-indexes)に記載のとおり）。
+> - TiDBでは、**主キー**は一意であり、NULLであってはなりません。ただし、主キーが**クラスター化インデックス**であることは保証されていません。代わりに、別のキーワードセット`CLUSTERED` / `NONCLUSTERED`によって、**主キー**が**クラスター化インデックス**であるかどうかが制御されます。キーワードが指定されていない場合は、システム変数`@@global.tidb_enable_clustered_index`によって制御されます（[クラスター化インデックス](https://docs.pingcap.com/tidb/stable/clustered-indexes)に記載のとおり）。
 
 **主キー**は`CREATE TABLE`ステートメントで定義されます。[主キー制約](/constraints.md#primary-key)制約付き列すべてに NULL 以外の値のみが含まれることを要求します。
 
@@ -136,11 +136,11 @@ TiDB は v5.0 以降、[クラスター化インデックス](/clustered-indexes
 
 現在、TiDBの***主キーを含む***テーブルは、以下の2つのカテゴリに分類されます。
 
--   `NONCLUSTERED` : テーブルの主キーは非クラスター化インデックスです。非クラスター化インデックスを持つテーブルでは、行データのキーは、TiDB によって暗黙的に割り当てられる内部`_tidb_rowid`で構成されます。主キーは基本的に一意インデックスであるため、非クラスター化インデックスを持つテーブルでは、行を格納するために少なくとも 2 つのキーと値のペアが必要です。それらは次のとおりです。
-    -   `_tidb_rowid` （キー） - 行データ（値）
-    -   主キーデータ（キー） - `_tidb_rowid` （値）
--   `CLUSTERED` : テーブルの主キーはクラスター化インデックスです。クラスター化インデックスを持つテーブルでは、行データのキーはユーザーが指定した主キーデータで構成されます。したがって、クラスター化インデックスを持つテーブルでは、行を格納するために必要なキーと値のペアは1つだけです。それは次のとおりです。
-    -   主キーデータ（キー） - 行データ（値）
+- `NONCLUSTERED` : テーブルの主キーは非クラスター化インデックスです。非クラスター化インデックスを持つテーブルでは、行データのキーは、TiDB によって暗黙的に割り当てられる内部`_tidb_rowid`で構成されます。主キーは基本的に一意インデックスであるため、非クラスター化インデックスを持つテーブルでは、行を格納するために少なくとも 2 つのキーと値のペアが必要です。それらは次のとおりです。
+    - `_tidb_rowid` （キー） - 行データ（値）
+    - 主キーデータ（キー） - `_tidb_rowid` （値）
+- `CLUSTERED` : テーブルの主キーはクラスター化インデックスです。クラスター化インデックスを持つテーブルでは、行データのキーはユーザーが指定した主キーデータで構成されます。したがって、クラスター化インデックスを持つテーブルでは、行を格納するために必要なキーと値のペアは1つだけです。それは次のとおりです。
+    - 主キーデータ（キー） - 行データ（値）
 
 [主キーを選択](#select-primary-key)で説明されているように、**クラスター化インデックス**は TiDB でキーワード`CLUSTERED`および`NONCLUSTERED`を使用して制御されます。
 
@@ -248,8 +248,8 @@ ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 
 **パラメータの説明**
 
--   `{table_name}` : テーブル名。
--   `{count}` : 複製されたレプリカの数。0 の場合、複製されたレプリカは削除されます。
+- `{table_name}` : テーブル名。
+- `{count}` : 複製されたレプリカの数。0 の場合、複製されたレプリカは削除されます。
 
 **TiFlash は**テーブルを複製します。クエリが実行されると、TiDB はコストの最適化に基づいてクエリに対して TiKV (行ベース) またはTiFlash (列ベース) を自動的に選択します。あるいは、クエリで**TiFlash**レプリカを使用するかどうかを手動で指定できます。指定方法については、 [TiDBを使用してTiFlashレプリカを読み取ります](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
 
@@ -335,49 +335,49 @@ SHOW TABLES IN `bookshop`;
 
 ### テーブル名を付ける際のガイドライン {#guidelines-to-follow-when-naming-a-table}
 
--   **完全修飾**テーブル名（例： `CREATE TABLE {database_name}. {table_name}` ）を使用してください。データベース名を指定しない場合、TiDB は**SQL セッション**で現在使用されているデータベースを使用します。SQL セッションでデータベースを指定する際に`USE {databasename};`を使用しない場合、TiDB はエラーを返します。
--   意味のあるテーブル名を使用してください。たとえば、ユーザー テーブルを作成する必要がある場合は、 `user` 、 `t_user` 、 `users`のような名前を使用するか、会社または組織の命名規則に従ってください。会社または組織に命名規則がない場合は、 [テーブル命名規則](/develop/dev-guide-object-naming-guidelines.md#table-naming-convention)を参照してください。 `t1` 、 `table1`のようなテーブル名は使用しないでください。
--   複数の単語はアンダースコアで区切られ、名前は32文字以内にすることをお勧めします。
--   異なるビジネスモジュールのテーブル用に個別の`DATABASE`を作成し、それに応じてコメントを追加してください。
+- **完全修飾**テーブル名（例： `CREATE TABLE {database_name}. {table_name}` ）を使用してください。データベース名を指定しない場合、TiDB は**SQL セッション**で現在使用されているデータベースを使用します。SQL セッションでデータベースを指定する際に`USE {databasename};`を使用しない場合、TiDB はエラーを返します。
+- 意味のあるテーブル名を使用してください。たとえば、ユーザー テーブルを作成する必要がある場合は、 `user` 、 `t_user` 、 `users`のような名前を使用するか、会社または組織の命名規則に従ってください。会社または組織に命名規則がない場合は、 [テーブル命名規則](/develop/dev-guide-object-naming-guidelines.md#table-naming-convention)を参照してください。 `t1` 、 `table1`のようなテーブル名は使用しないでください。
+- 複数の単語はアンダースコアで区切られ、名前は32文字以内にすることをお勧めします。
+- 異なるビジネスモジュールのテーブル用に個別の`DATABASE`を作成し、それに応じてコメントを追加してください。
 
 ### 列を定義する際に従うべきガイドライン {#guidelines-to-follow-when-defining-columns}
 
--   列のサポート[データ型](/data-type-overview.md)を確認し、データ型の制約に従ってデータを整理してください。列に格納するデータに適した型を選択してください。
--   主キーの選択に関する[従うべきガイドライン](#guidelines-to-follow-when-selecting-primary-key)を確認し、主キー列を使用するかどうかを決定します。
--   クラスター化インデックスを選択するための[従うべきガイドライン](#guidelines-to-follow-when-selecting-clustered-index)ガイドラインを確認し、**クラスター化インデックス**を指定するかどうかを決定してください。
--   [列制約を追加する](#add-column-constraints)チェックし、列に制約を追加するかどうかを決定します。
--   意味のある列名を使用してください。会社または組織のテーブル命名規則に従うことをお勧めします。会社または組織に対応する命名規則がない場合は、 [列名の命名規則](/develop/dev-guide-object-naming-guidelines.md#column-naming-convention)を参照してください。
+- 列のサポート[データ型](/data-type-overview.md)を確認し、データ型の制約に従ってデータを整理してください。列に格納するデータに適した型を選択してください。
+- 主キーの選択に関する[従うべきガイドライン](#guidelines-to-follow-when-selecting-primary-key)を確認し、主キー列を使用するかどうかを決定します。
+- クラスター化インデックスを選択するための[従うべきガイドライン](#guidelines-to-follow-when-selecting-clustered-index)ガイドラインを確認し、**クラスター化インデックス**を指定するかどうかを決定してください。
+- [列制約を追加する](#add-column-constraints)チェックし、列に制約を追加するかどうかを決定します。
+- 意味のある列名を使用してください。会社または組織のテーブル命名規則に従うことをお勧めします。会社または組織に対応する命名規則がない場合は、 [列名の命名規則](/develop/dev-guide-object-naming-guidelines.md#column-naming-convention)を参照してください。
 
 ### 主キーを選択する際に従うべきガイドライン {#guidelines-to-follow-when-selecting-primary-key}
 
--   テーブル内に**主キー**または**一意インデックス**を定義します。
--   意味のある**列**を**主キー**として選択するようにしてください。
--   パフォーマンス上の理由から、幅の広いテーブルを保存することは避けてください。テーブルフィールドの数が`60`を超え、1行のデータの合計サイズが`64K`超えることは推奨されません。データ長が長すぎるフィールドは、別のテーブルに分割することをお勧めします。
--   複雑なデータ型を使用することは推奨されません。
--   結合するフィールドについては、データ型が一致していることを確認し、暗黙的な型変換を避けてください。
--   単一の単調データ列に**主キー**を定義することは避けてください。単一の単調データ列（たとえば、 `AUTO_INCREMENT`属性を持つ列）を使用して**主キー**を定義すると、書き込みパフォーマンスに影響が出る可能性があります。可能であれば、 `AUTO_RANDOM`ではなく`AUTO_INCREMENT` }を使用してください。これにより、主キーの連続性および増分属性が破棄されます。
--   書き込み集中シナリオで単一の単調データ列にインデックスを作成する必要がある場合は、この単調データ列を**主キー**として定義する代わりに、 `AUTO_RANDOM`を使用してそのテーブルの**主キー**を作成するか、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)と[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)を使用して`_tidb_rowid`をシャーディングすることができます。
+- テーブル内に**主キー**または**一意インデックス**を定義します。
+- 意味のある**列**を**主キー**として選択するようにしてください。
+- パフォーマンス上の理由から、幅の広いテーブルを保存することは避けてください。テーブルフィールドの数が`60`を超え、1行のデータの合計サイズが`64K`超えることは推奨されません。データ長が長すぎるフィールドは、別のテーブルに分割することをお勧めします。
+- 複雑なデータ型を使用することは推奨されません。
+- 結合するフィールドについては、データ型が一致していることを確認し、暗黙的な型変換を避けてください。
+- 単一の単調データ列に**主キー**を定義することは避けてください。単一の単調データ列（たとえば、 `AUTO_INCREMENT`属性を持つ列）を使用して**主キー**を定義すると、書き込みパフォーマンスに影響が出る可能性があります。可能であれば、 `AUTO_RANDOM`ではなく`AUTO_INCREMENT` }を使用してください。これにより、主キーの連続性および増分属性が破棄されます。
+- 書き込み集中シナリオで単一の単調データ列にインデックスを作成する必要がある場合は、この単調データ列を**主キー**として定義する代わりに、 `AUTO_RANDOM`を使用してそのテーブルの**主キー**を作成するか、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)と[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)を使用して`_tidb_rowid`をシャーディングすることができます。
 
 ### クラスター化インデックスを選択する際に従うべきガイドライン {#guidelines-to-follow-when-selecting-clustered-index}
 
--   **クラスター化インデックス**を構築するには、 [主キーの選択に関するガイドライン](#guidelines-to-follow-when-selecting-primary-key)に従ってください。
+- **クラスター化インデックス**を構築するには、 [主キーの選択に関するガイドライン](#guidelines-to-follow-when-selecting-primary-key)に従ってください。
 
--   クラスター化インデックスを持たないテーブルと比較して、クラスター化インデックスを持つテーブルは、以下のシナリオにおいて、より優れたパフォーマンスとスループットのメリットを提供します。
-    -   データが挿入される際、クラスター化インデックスによって、ネットワークからのインデックスデータの書き込み回数が1回削減されます。
-    -   同等の条件を持つクエリが主キーのみに関係する場合、クラスター化インデックスによってネットワークからのインデックスデータの読み取り回数が1回削減されます。
-    -   範囲条件を含むクエリが主キーのみに関係する場合、クラスター化インデックスはネットワークからのインデックスデータの読み取り回数を削減します。
-    -   同等条件または範囲条件を含むクエリが主キーのプレフィックスのみに関係する場合、クラスター化インデックスはネットワークからのインデックスデータの複数回の読み取りを削減します。
+- クラスター化インデックスを持たないテーブルと比較して、クラスター化インデックスを持つテーブルは、以下のシナリオにおいて、より優れたパフォーマンスとスループットのメリットを提供します。
+    - データが挿入される際、クラスター化インデックスによって、ネットワークからのインデックスデータの書き込み回数が1回削減されます。
+    - 同等の条件を持つクエリが主キーのみに関係する場合、クラスター化インデックスによってネットワークからのインデックスデータの読み取り回数が1回削減されます。
+    - 範囲条件を含むクエリが主キーのみに関係する場合、クラスター化インデックスはネットワークからのインデックスデータの読み取り回数を削減します。
+    - 同等条件または範囲条件を含むクエリが主キーのプレフィックスのみに関係する場合、クラスター化インデックスはネットワークからのインデックスデータの複数回の読み取りを削減します。
 
--   一方、クラスター化インデックスを持つテーブルには、次のような問題が発生する可能性があります。
-    -   近い値を持つ主キーを多数挿入すると、書き込みホットスポットの問題が発生する可能性があります。 [主キーを選択する際に従うべきガイドライン](#guidelines-to-follow-when-selecting-primary-key)てください。
-    -   主キーのデータ型が64ビットより大きい場合、特にセカンダリインデックスが複数存在する場合は、テーブルデータがより多くのストレージ容量を消費します。
+- 一方、クラスター化インデックスを持つテーブルには、次のような問題が発生する可能性があります。
+    - 近い値を持つ主キーを多数挿入すると、書き込みホットスポットの問題が発生する可能性があります。 [主キーを選択する際に従うべきガイドライン](#guidelines-to-follow-when-selecting-primary-key)てください。
+    - 主キーのデータ型が64ビットより大きい場合、特にセカンダリインデックスが複数存在する場合は、テーブルデータがより多くのストレージ容量を消費します。
 
--   [クラスター化インデックスを使用するかどうかのデフォルトの動作](/clustered-indexes.md#create-a-table-with-clustered-indexes)を制御するには、システム変数`@@global.tidb_enable_clustered_index`と構成`alter-primary-key` } を使用する代わりに、クラスター化インデックスを使用するかどうかを明示的に指定できます。
+- [クラスター化インデックスを使用するかどうかのデフォルトの動作](/clustered-indexes.md#create-a-table-with-clustered-indexes)を制御するには、システム変数`@@global.tidb_enable_clustered_index`と構成`alter-primary-key` } を使用する代わりに、クラスター化インデックスを使用するかどうかを明示的に指定できます。
 
 ### `CREATE TABLE`文を実行する際に従うべきガイドライン {#guidelines-to-follow-when-executing-the-create-table-statement}
 
--   データベーススキーマの変更にクライアント側のDriverやORMを使用することは推奨されません。データベーススキーマの変更には[MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)またはGUIクライアントを使用することをお勧めします。このドキュメントでは、ほとんどのシナリオでSQLファイルを渡してデータベーススキーマを変更するために**MySQLクライアント**を使用します。
--   SQL 開発[テーブルの作成と削除に関する仕様](/develop/dev-guide-sql-development-specification.md#create-and-delete-tables)従ってください。ビジネスアプリケーション内にbuild文とdelete文をラップして判定ロジックを追加することを推奨します。
+- データベーススキーマの変更にクライアント側のDriverやORMを使用することは推奨されません。データベーススキーマの変更には[MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)またはGUIクライアントを使用することをお勧めします。このドキュメントでは、ほとんどのシナリオでSQLファイルを渡してデータベーススキーマを変更するために**MySQLクライアント**を使用します。
+- SQL 開発[テーブルの作成と削除に関する仕様](/develop/dev-guide-sql-development-specification.md#create-and-delete-tables)従ってください。ビジネスアプリケーション内にbuild文とdelete文をラップして判定ロジックを追加することを推奨します。
 
 ## あと一歩 {#one-more-step}
 
@@ -385,6 +385,6 @@ SHOW TABLES IN `bookshop`;
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

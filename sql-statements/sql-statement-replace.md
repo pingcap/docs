@@ -76,7 +76,7 @@ TiDBの`REPLACE`文はMySQLと完全に互換性があります。互換性に�
 
 ## 参照 {#see-also}
 
--   [DELETE](/sql-statements/sql-statement-delete.md)
--   [INSERT](/sql-statements/sql-statement-insert.md)
--   [SELECT](/sql-statements/sql-statement-select.md)
--   [UPDATE](/sql-statements/sql-statement-update.md)
+- [DELETE](/sql-statements/sql-statement-delete.md)
+- [INSERT](/sql-statements/sql-statement-insert.md)
+- [SELECT](/sql-statements/sql-statement-select.md)
+- [UPDATE](/sql-statements/sql-statement-update.md)

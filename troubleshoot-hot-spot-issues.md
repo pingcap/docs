@@ -37,8 +37,8 @@ Value: rowID
 
 インデックス データには、一意インデックスと非一意インデックスの 2 種類があります。
 
--   一意インデックスの場合は、上記のコーディング規則に従うことができます。
--   非一意インデックスの場合、このエンコーディングでは一意キーを構築できません。これは、同じインデックスの`tablePrefix{TableID}_indexPrefixSep{IndexID}`は同じですが、複数の行の`ColumnsValue`は同じになる可能性があるためです。非一意インデックスのエンコーディング規則は次のとおりです。
+- 一意インデックスの場合は、上記のコーディング規則に従うことができます。
+- 非一意インデックスの場合、このエンコーディングでは一意キーを構築できません。これは、同じインデックスの`tablePrefix{TableID}_indexPrefixSep{IndexID}`は同じですが、複数の行の`ColumnsValue`は同じになる可能性があるためです。非一意インデックスのエンコーディング規則は次のとおりです。
 
     ```
     Key: tablePrefix{TableID}_indexPrefixSep{IndexID}_indexedColumnsValue_rowID
@@ -63,9 +63,9 @@ TiDBのコーディングルールによれば、同一テーブルのデータ�
 
 パフォーマンスの問題は必ずしもホットスポットが原因であるとは限らず、複数の要因が絡み合っている可能性があります。問題のトラブルシューティングを行う前に、ホットスポットに関連しているかどうかを確認してください。
 
--   書き込みホットスポットを判断するには、 **TiKV トラブルシューティング**監視パネルで**Hot Write**を開き、任意の TiKV ノードのRaftstore CPU メトリック値が他のノードの値よりも大幅に高いかどうかを確認します。
+- 書き込みホットスポットを判断するには、 **TiKV トラブルシューティング**監視パネルで**Hot Write**を開き、任意の TiKV ノードのRaftstore CPU メトリック値が他のノードの値よりも大幅に高いかどうかを確認します。
 
--   読み取りホットスポットを判断するには、 **TiKV 詳細**監視パネルで**Thread_CPU**を開き、いずれかの TiKV ノードのコプロセッサ CPU メトリック値が特に高いかどうかを確認します。
+- 読み取りホットスポットを判断するには、 **TiKV 詳細**監視パネルで**Thread_CPU**を開き、いずれかの TiKV ノードのコプロセッサ CPU メトリック値が特に高いかどうかを確認します。
 
 ### TiDB Dashboardを使用してホットスポットテーブルを見つける {#use-tidb-dashboard-to-locate-hotspot-tables}
 
@@ -172,8 +172,8 @@ TiDBのコプロセッサーキャッシュ機能は、計算結果のキャッ�
 
 **参照:**
 
--   [高同時実行書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)
--   [分割リージョン](/sql-statements/sql-statement-split-region.md)
+- [高同時実行書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)
+- [分割リージョン](/sql-statements/sql-statement-split-region.md)
 
 ## 散在する読み取りホットスポット {#scatter-read-hotspots}
 

@@ -18,22 +18,22 @@ TiDB Cloud changefeed を使用すると、 TiDB Cloudから他のデータサ�
 
 > **Note:**
 >
-> -   現在、 TiDB Cloudでは、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>ごとに最大 100 件の変更フィードのみが許可されます。
-> -   現在、 TiDB Cloud、変更フィードごとに最大100個のテーブルフィルタルールしか設定できません。
-> -   [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは、変更フィード機能は利用できません。
-> -   [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンスの場合、変更フィード機能はリクエストに応じてのみ利用できます。詳細については、 [変更フィード](/tidb-cloud/essential-changefeed-overview.md)を参照してください。
+> - 現在、 TiDB Cloudでは、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>ごとに最大 100 件の変更フィードのみが許可されます。
+> - 現在、 TiDB Cloud、変更フィードごとに最大100個のテーブルフィルタルールしか設定できません。
+> - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは、変更フィード機能は利用できません。
+> - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンスの場合、変更フィード機能はリクエストに応じてのみ利用できます。詳細については、 [変更フィード](/tidb-cloud/essential-changefeed-overview.md)を参照してください。
 
 ## Changefeedページを確認する {#view-the-changefeed-page}
 
 変更フィード機能にアクセスするには、以下の手順に従ってください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Data** &gt; **Changefeed**をクリックします。チェンジフィードページが表示されます。
+2. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Data** &gt; **Changefeed**をクリックします。チェンジフィードページが表示されます。
 
 **Changefeed**ページでは、変更フィードの作成、既存の変更フィードの一覧表示、および既存の変更フィードの操作（変更フィードの拡大縮小、一時停止、再開、編集、削除など）を行うことができます。
 
@@ -43,16 +43,16 @@ TiDB Cloud changefeed を使用すると、 TiDB Cloudから他のデータサ�
 
 <CustomContent plan="premium">
 
--   [Apache Kafkaへのシンク](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
--   [MySQLにシンクする](/tidb-cloud/changefeed-sink-to-mysql.md)
+- [Apache Kafkaへのシンク](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+- [MySQLにシンクする](/tidb-cloud/changefeed-sink-to-mysql.md)
 
 </CustomContent>
 <CustomContent plan="dedicated">
 
--   [Apache Kafkaへのシンク](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
--   [MySQLにシンクする](/tidb-cloud/changefeed-sink-to-mysql.md)
--   [TiDB Cloudにシンクする](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
--   [クラウドストレージにシンクする](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
+- [Apache Kafkaへのシンク](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+- [MySQLにシンクする](/tidb-cloud/changefeed-sink-to-mysql.md)
+- [TiDB Cloudにシンクする](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
+- [クラウドストレージにシンクする](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
 
 </CustomContent>
 
@@ -62,18 +62,18 @@ TiDB Cloud changefeed を使用すると、 TiDB Cloudから他のデータサ�
 
 TiDB Cloud Dedicatedでは、変更フィードの TiCDC レプリケーション容量ユニット (RCU) を照会できます。
 
-1.  ターゲットのTiDB Cloud Dedicatedクラスターの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
-2.  確認したい対応する変更フィードを見つけて、 **Action**列の**...** &gt; **View**をクリックします。
-3.  現在のTiCDCレプリケーション容量ユニット（RCU）は、ページの**Specification**欄で確認できます。
+1. ターゲットのTiDB Cloud Dedicatedクラスターの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
+2. 確認したい対応する変更フィードを見つけて、 **Action**列の**...** &gt; **View**をクリックします。
+3. 現在のTiCDCレプリケーション容量ユニット（RCU）は、ページの**Specification**欄で確認できます。
 
 </CustomContent>
 <CustomContent plan="premium">
 
 TiDB Cloud Premiumでは、チェンジフィードのTiCDC 変更フィード容量ユニット（CCU）を照会できます。
 
-1.  ターゲットのTiDB Cloud Premium インスタンスの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
-2.  確認したい対応する変更フィードを見つけて、 **Action**列の**...** &gt; **View**をクリックします。
-3.  TiCDC 変更フィードの現在の容量ユニット（CCU）は、ページの**Specification**欄で確認できます。
+1. ターゲットのTiDB Cloud Premium インスタンスの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
+2. 確認したい対応する変更フィードを見つけて、 **Action**列の**...** &gt; **View**をクリックします。
+3. TiCDC 変更フィードの現在の容量ユニット（CCU）は、ページの**Specification**欄で確認できます。
 
 </CustomContent>
 
@@ -85,8 +85,8 @@ TiDB Cloud Premiumでは、チェンジフィードのTiCDC 変更フィード�
 
 > **Note:**
 >
-> -   TiDB Cloud Dedicatedクラスターの変更フィードをスケーリングするには、このクラスターのすべての変更フィードが 2023 年 3 月 28 日以降に作成されていることを確認してください。
-> -   TiDB Cloud Dedicatedクラスターに 2023 年 3 月 28 日より前に作成された変更フィードがある場合、このクラスターの既存の変更フィードも新しく作成された変更フィードもスケールアップまたはスケールダウンをサポートしません。
+> - TiDB Cloud Dedicatedクラスターの変更フィードをスケーリングするには、このクラスターのすべての変更フィードが 2023 年 3 月 28 日以降に作成されていることを確認してください。
+> - TiDB Cloud Dedicatedクラスターに 2023 年 3 月 28 日より前に作成された変更フィードがある場合、このクラスターの既存の変更フィードも新しく作成された変更フィードもスケールアップまたはスケールダウンをサポートしません。
 
 </CustomContent>
 <CustomContent plan="premium">
@@ -95,17 +95,17 @@ TiDB Cloud Premiumでは、チェンジフィードのTiCDC 変更フィード�
 
 </CustomContent>
 
-1.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**Changefeed**](#view-the-changefeed-page)ページに移動します。
-2.  拡大縮小したい対応する変更フィードを見つけて、 **Action**列の**...** &gt; **Scale Up/Down**をクリックします。
-3.  新しい仕様を選択してください。
-4.  **Submit**をクリックしてください。
+1. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**Changefeed**](#view-the-changefeed-page)ページに移動します。
+2. 拡大縮小したい対応する変更フィードを見つけて、 **Action**列の**...** &gt; **Scale Up/Down**をクリックします。
+3. 新しい仕様を選択してください。
+4. **Submit**をクリックしてください。
 
 スケーリング処理の完了には約10分かかります（この間、changefeedは通常通り動作します）。新しい仕様への切り替えには数秒かかります（この間、changefeedは一時停止され、自動的に再開されます）。
 
 ## 変更フィードを一時停止または再開する {#pause-or-resume-a-changefeed}
 
-1.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**Changefeed**](#view-the-changefeed-page)ページに移動します。
-2.  一時停止または再開したい該当する変更フィードを見つけて、 **Action**列の**...** &gt; **Pause/Resume**をクリックします。
+1. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**Changefeed**](#view-the-changefeed-page)ページに移動します。
+2. 一時停止または再開したい該当する変更フィードを見つけて、 **Action**列の**...** &gt; **Pause/Resume**をクリックします。
 
 ## 変更フィードを編集する {#edit-a-changefeed}
 
@@ -113,42 +113,42 @@ TiDB Cloud Premiumでは、チェンジフィードのTiCDC 変更フィード�
 >
 > TiDB Cloud現在、一時停止状態の変更フィードの編集のみが許可されています。
 
-1.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**Changefeed**](#view-the-changefeed-page)ページに移動します。
+1. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**Changefeed**](#view-the-changefeed-page)ページに移動します。
 
-2.  一時停止したい変更フィードを見つけて、 **Action**列の**...** &gt; **Pause**をクリックします。
+2. 一時停止したい変更フィードを見つけて、 **Action**列の**...** &gt; **Pause**をクリックします。
 
-3.  変更フィードのステータスが`Paused`に変更されたら、 **...** &gt; **Edit**をクリックして、対応する変更フィードを編集します。
+3. 変更フィードのステータスが`Paused`に変更されたら、 **...** &gt; **Edit**をクリックして、対応する変更フィードを編集します。
 
     TiDB Cloudはデフォルトで変更フィードの設定を自動的に行います。以下の設定を変更できます。
 
     <CustomContent plan="premium">
 
-    -   Apache Kafkaシンク：すべての設定。
-    -   MySQLシンク： **MySQL Connection**、**Table Filter**、および**Event Filter**。
+    - Apache Kafkaシンク：すべての設定。
+    - MySQLシンク： **MySQL Connection**、**Table Filter**、および**Event Filter**。
 
     </CustomContent>
     <CustomContent plan="dedicated">
 
-    -   Apache Kafkaシンク：すべての設定。
-    -   MySQLシンク： **MySQL Connection**、**Table Filter**、および**Event Filter**。
-    -   TiDB Cloudシンク: **TiDB Cloud Connection**、**Table Filter**、および**Event Filter**。
-    -   クラウドストレージシンク：**Storage Endpoint**、**Table Filter**、および**Event Filter**。
+    - Apache Kafkaシンク：すべての設定。
+    - MySQLシンク： **MySQL Connection**、**Table Filter**、および**Event Filter**。
+    - TiDB Cloudシンク: **TiDB Cloud Connection**、**Table Filter**、および**Event Filter**。
+    - クラウドストレージシンク：**Storage Endpoint**、**Table Filter**、および**Event Filter**。
 
     </CustomContent>
 
-4.  設定を編集した後、 **...** &gt; **Resume**をクリックして、対応する変更フィードを再開します。
+4. 設定を編集した後、 **...** &gt; **Resume**をクリックして、対応する変更フィードを再開します。
 
 ## 変更フィードを複製する {#duplicate-a-changefeed}
 
-1.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**Changefeed**](#view-the-changefeed-page)ページに移動します。
-2.  複製したい変更フィードを探します。**Action**列で、 **...** &gt;**Duplicate**をクリックします。
-3.  TiDB Cloudは、新しい変更フィード設定に元の設定を自動的に反映します。必要に応じて設定を確認および変更できます。
-4.  設定を確認後、 **Submit**をクリックして新しい変更フィードを作成して開始します。
+1. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**Changefeed**](#view-the-changefeed-page)ページに移動します。
+2. 複製したい変更フィードを探します。**Action**列で、 **...** &gt;**Duplicate**をクリックします。
+3. TiDB Cloudは、新しい変更フィード設定に元の設定を自動的に反映します。必要に応じて設定を確認および変更できます。
+4. 設定を確認後、 **Submit**をクリックして新しい変更フィードを作成して開始します。
 
 ## 変更フィードを削除する {#delete-a-changefeed}
 
-1.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**Changefeed**](#view-the-changefeed-page)ページに移動します。
-2.  削除したい該当する変更フィードを見つけて、 **Action**列の**...** &gt; **Delete**をクリックします。
+1. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**Changefeed**](#view-the-changefeed-page)ページに移動します。
+2. 削除したい該当する変更フィードを見つけて、 **Action**列の**...** &gt; **Delete**をクリックします。
 
 ## Changefeedの請求 {#changefeed-billing}
 
@@ -160,13 +160,13 @@ TiDB Cloudでの変更フィードの請求については、[Changefeedの請�
 
 状態は以下のように説明されます。
 
--   `CREATING` : レプリケーションタスクが作成されています。
--   `RUNNING` : レプリケーション タスクは正常に実行され、チェックポイント ts も正常に進行します。
--   `EDITING` : レプリケーションタスクが編集されています。
--   `PAUSING` : レプリケーション タスクが一時停止されています。
--   `PAUSED` : レプリケーション タスクが一時停止されました。
--   `RESUMING` : レプリケーションタスクが再開されます。
--   `DELETING` : レプリケーション タスクが削除されています。
--   `DELETED` : レプリケーション タスクが削除されました。
--   `WARNING` : レプリケーション タスクが警告を返します。回復可能なエラーのため、レプリケーションを続行できません。この状態の変更フィードは、状態が`RUNNING`に遷移するまで再開を試み続けます。この状態の変更フィードは[GCオペレーション](https://docs.pingcap.com/tidb/stable/garbage-collection-overview)ブロックします 。
--   `FAILED` : レプリケーション タスクが失敗しました。エラーが発生したため、レプリケーション タスクを再開できず、自動的に復旧することもできません。増分データのガベージコレクション(GC) の前に問題が解決された場合は、失敗した変更フィードを手動で再開できます。増分データのデフォルトの有効期間 (TTL) は 24 時間です。つまり、変更フィードが中断されてから 24 時間以内に GC メカニズムによってデータが削除されることはありません。
+- `CREATING` : レプリケーションタスクが作成されています。
+- `RUNNING` : レプリケーション タスクは正常に実行され、チェックポイント ts も正常に進行します。
+- `EDITING` : レプリケーションタスクが編集されています。
+- `PAUSING` : レプリケーション タスクが一時停止されています。
+- `PAUSED` : レプリケーション タスクが一時停止されました。
+- `RESUMING` : レプリケーションタスクが再開されます。
+- `DELETING` : レプリケーション タスクが削除されています。
+- `DELETED` : レプリケーション タスクが削除されました。
+- `WARNING` : レプリケーション タスクが警告を返します。回復可能なエラーのため、レプリケーションを続行できません。この状態の変更フィードは、状態が`RUNNING`に遷移するまで再開を試み続けます。この状態の変更フィードは[GCオペレーション](https://docs.pingcap.com/tidb/stable/garbage-collection-overview)ブロックします 。
+- `FAILED` : レプリケーション タスクが失敗しました。エラーが発生したため、レプリケーション タスクを再開できず、自動的に復旧することもできません。増分データのガベージコレクション(GC) の前に問題が解決された場合は、失敗した変更フィードを手動で再開できます。増分データのデフォルトの有効期間 (TTL) は 24 時間です。つまり、変更フィードが中断されてから 24 時間以内に GC メカニズムによってデータが削除されることはありません。

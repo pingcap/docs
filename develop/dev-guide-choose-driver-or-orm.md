@@ -10,8 +10,8 @@ aliases: ['/ja/tidb/stable/dev-guide-choose-driver-or-orm/','/ja/tidbcloud/dev-g
 >
 > TiDB は、ドライバーと ORM に対して次の 2 つのサポート レベルを提供します。
 >
-> -   **完全**: TiDB がツールのほとんどの機能と互換性があり、最新バージョンとの互換性を維持していることを示します。PingCAP は、最新バージョン[TiDB でサポートされているサードパーティ ツール](/develop/dev-guide-third-party-support.md)との互換性テストを定期的に実施します。
-> -   **互換**：対応するサードパーティ製ツールがMySQLに適合しており、TiDBはMySQLプロトコルと高い互換性があるため、TiDBはツールのほとんどの機能を使用できることを示します。ただし、PingCAPはツールのすべての機能について完全なテストを完了していないため、予期しない動作が発生する可能性があります。
+> - **完全**: TiDB がツールのほとんどの機能と互換性があり、最新バージョンとの互換性を維持していることを示します。PingCAP は、最新バージョン[TiDB でサポートされているサードパーティ ツール](/develop/dev-guide-third-party-support.md)との互換性テストを定期的に実施します。
+> - **互換**：対応するサードパーティ製ツールがMySQLに適合しており、TiDBはMySQLプロトコルと高い互換性があるため、TiDBはツールのほとんどの機能を使用できることを示します。ただし、PingCAPはツールのすべての機能について完全なテストを完了していないため、予期しない動作が発生する可能性があります。
 >
 > 詳細については[TiDB でサポートされているサードパーティ ツール](/develop/dev-guide-third-party-support.md)を参照してください。
 
@@ -93,9 +93,9 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 
 > **Note:**
 >
-> -   現在、Hibernate は[ネストされたトランザクションをサポートしていません](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres)。
+> - 現在、Hibernate は[ネストされたトランザクションをサポートしていません](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres)。
 >
-> -   TiDBはv6.2.0以降、 [SAVEPOINT](/sql-statements/sql-statement-savepoint.md)をサポートしています。`@Transactional`で`Propagation.NESTED`トランザクション伝播オプションを使用するには、つまり`@Transactional(propagation = Propagation.NESTED)`を設定するには、TiDBがv6.2.0以降であることを確認してください。
+> - TiDBはv6.2.0以降、 [SAVEPOINT](/sql-statements/sql-statement-savepoint.md)をサポートしています。`@Transactional`で`Propagation.NESTED`トランザクション伝播オプションを使用するには、つまり`@Transactional(propagation = Propagation.NESTED)`を設定するには、TiDBがv6.2.0以降であることを確認してください。
 
 サポートレベル:**フル**
 
@@ -124,8 +124,8 @@ implementation 'org.hibernate:hibernate-core:6.2.3.Final'
 implementation 'mysql:mysql-connector-java:8.0.33'
 ```
 
--   Hibernate を使用してネイティブJavaで TiDB アプリケーションを構築する例については、 [TiDBとHibernateを使ったシンプルなCRUDアプリの構築](/develop/dev-guide-sample-application-java-hibernate.md)を参照してください。
--   Spring Data JPA または Hibernate を使用して Spring で TiDB アプリケーションを構築する例については、 [Spring Bootを使用してTiDBアプリを構築する](/develop/dev-guide-sample-application-java-spring-boot.md)を参照してください。
+- Hibernate を使用してネイティブJavaで TiDB アプリケーションを構築する例については、 [TiDBとHibernateを使ったシンプルなCRUDアプリの構築](/develop/dev-guide-sample-application-java-hibernate.md)を参照してください。
+- Spring Data JPA または Hibernate を使用して Spring で TiDB アプリケーションを構築する例については、 [Spring Bootを使用してTiDBアプリを構築する](/develop/dev-guide-sample-application-java-spring-boot.md)を参照してください。
 
 さらに、 [Hibernate設定ファイル](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm) : `org.hibernate.dialect.TiDBDialect`で TiDB 方言を指定する必要があります。これは Hibernate `6.0.0.Beta2`以降でのみサポートされます。`Hibernate`バージョンが`6.0.0.Beta2`より前の場合は、まずアップグレードしてください。
 
@@ -305,6 +305,6 @@ peewee を使用して TiDB アプリケーションを構築する例につい�
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

@@ -15,45 +15,45 @@ TiDB Cloud [Data Service](https://tidbcloud.com/project/data-service)では、�
 
 Postmanにデータアプリをインポートする前に、以下のものを用意してください。
 
--   [Postman](https://www.postman.com/)アカウント
+- [Postman](https://www.postman.com/)アカウント
 
--   [Postmanデスクトップアプリ](https://www.postman.com/downloads)(オプション)。あるいは、アプリをダウンロードせずに Postman Web バージョンを使用することもできます。
+- [Postmanデスクトップアプリ](https://www.postman.com/downloads)(オプション)。あるいは、アプリをダウンロードせずに Postman Web バージョンを使用することもできます。
 
--   明確に定義された[終点](/tidb-cloud/data-service-manage-endpoint.md)が少なくとも 1 つある[データアプリ](/tidb-cloud/data-service-manage-data-app.md)。次の要件を満たすエンドポイントのみを Postman にインポートできます。
+- 明確に定義された[終点](/tidb-cloud/data-service-manage-endpoint.md)が少なくとも 1 つある[データアプリ](/tidb-cloud/data-service-manage-data-app.md)。次の要件を満たすエンドポイントのみを Postman にインポートできます。
 
-    -   対象のTiDB Cloud Starterインスタンスが選択されました。
-    -   エンドポイントパスとリクエストメソッドが設定されました。
-    -   SQL文が記述されました。
+    - 対象のTiDB Cloud Starterインスタンスが選択されました。
+    - エンドポイントパスとリクエストメソッドが設定されました。
+    - SQL文が記述されました。
 
--   データアプリ用の[APIキー](/tidb-cloud/data-service-api-key.md#create-an-api-key)。
+- データアプリ用の[APIキー](/tidb-cloud/data-service-api-key.md#create-an-api-key)。
 
 ## ステップ1. データアプリをPostmanにインポートする {#step-1-import-your-data-app-to-postman}
 
 データアプリをPostmanにインポートするには、以下の手順に従ってください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 
-2.  左側のペインで、対象のデータアプリの名前をクリックすると、その詳細が表示されます。
+2. 左側のペインで、対象のデータアプリの名前をクリックすると、その詳細が表示されます。
 
-3.  ページ右上隅にある**Run in Postman**をクリックします。インポート手順が表示されたダイアログが表示されます。
+3. ページ右上隅にある**Run in Postman**をクリックします。インポート手順が表示されたダイアログが表示されます。
 
     > **Note:**
     >
-    > -   データアプリに明確なエンドポイント（ターゲットとなるTiDB Cloud Starterインスタンス、パス、リクエストメソッド、SQLステートメントが構成されていること）が設定されていない場合、データアプリの**Run in Postman**は無効のままになります。
-    > -   Chat2Queryデータアプリの場合、 **Run in Postman**は利用できません。
+    > - データアプリに明確なエンドポイント（ターゲットとなるTiDB Cloud Starterインスタンス、パス、リクエストメソッド、SQLステートメントが構成されていること）が設定されていない場合、データアプリの**Run in Postman**は無効のままになります。
+    > - Chat2Queryデータアプリの場合、 **Run in Postman**は利用できません。
 
-4.  データアプリのインポートに関するダイアログに表示される手順に従ってください。
+4. データアプリのインポートに関するダイアログに表示される手順に従ってください。
 
-    1.  お好みに応じて、 **Run in Postman for Web**または**Run in Postman Desktop**を選択してPostmanワークスペースを開き、次に目的のワークスペースを選択してください。
+    1. お好みに応じて、 **Run in Postman for Web**または**Run in Postman Desktop**を選択してPostmanワークスペースを開き、次に目的のワークスペースを選択してください。
 
-        -   Postmanにログインしていない場合は、画面の指示に従ってまずPostmanにログインしてください。
-        -   **Run in Postman Desktop**をクリックした場合は、画面の指示に従ってPostmanデスクトップアプリを起動してください。
+        - Postmanにログインしていない場合は、画面の指示に従ってまずPostmanにログインしてください。
+        - **Run in Postman Desktop**をクリックした場合は、画面の指示に従ってPostmanデスクトップアプリを起動してください。
 
-    2.  Postmanで目的のワークスペースのページで、左側のナビゲーションメニューにある**Import**をクリックします。
+    2. Postmanで目的のワークスペースのページで、左側のナビゲーションメニューにある**Import**をクリックします。
 
-    3.  TiDB CloudダイアログからデータアプリのURLをコピーし、そのURLをPostmanに貼り付けてインポートします。
+    3. TiDB CloudダイアログからデータアプリのURLをコピーし、そのURLをPostmanに貼り付けてインポートします。
 
-5.  URLを貼り付けると、Postmanはデータアプリを新しい[コレクション](https://learning.postman.com/docs/collections/collections-overview)として自動的にインポートします。コレクション名は`TiDB Data Service - <Your App Name>`形式です。
+5. URLを貼り付けると、Postmanはデータアプリを新しい[コレクション](https://learning.postman.com/docs/collections/collections-overview)として自動的にインポートします。コレクション名は`TiDB Data Service - <Your App Name>`形式です。
 
     コレクション内では、デプロイ済みのエンドポイントは**Deployed**フォルダーに、デプロイされていないエンドポイントは**Draft**フォルダーにグループ化されます。
 
@@ -61,28 +61,28 @@ Postmanにデータアプリをインポートする前に、以下のものを�
 
 Postmanでインポートしたデータアプリを実行する前に、PostmanでデータアプリのAPIキーを次のように設定する必要があります。
 
-1.  Postman の左側のナビゲーション メニューで`TiDB Data Service - <Your App Name>`をクリックすると、右側にタブが開きます。
-2.  `TiDB Data Service - <Your App Name>`タブの下にある**Variables**タブをクリックします。
-3.  変数テーブルの**Current value**列に、データアプリの公開鍵と秘密鍵を入力してください。
-4.  `TiDB Data Service - <Your App Name>`タブの右上隅にある**Save**をクリックします。
+1. Postman の左側のナビゲーション メニューで`TiDB Data Service - <Your App Name>`をクリックすると、右側にタブが開きます。
+2. `TiDB Data Service - <Your App Name>`タブの下にある**Variables**タブをクリックします。
+3. 変数テーブルの**Current value**列に、データアプリの公開鍵と秘密鍵を入力してください。
+4. `TiDB Data Service - <Your App Name>`タブの右上隅にある**Save**をクリックします。
 
 ## ステップ3. Postmanでデータアプリを実行する {#step-3-run-data-app-in-postman}
 
 Postmanでデータアプリを実行するには、以下の手順に従ってください。
 
-1.  Postmanの左側のナビゲーションペインで、 **Deployed**または**Draft**フォルダーを展開し、エンドポイント名をクリックして右側にタブを開きます。
+1. Postmanの左側のナビゲーションペインで、 **Deployed**または**Draft**フォルダーを展開し、エンドポイント名をクリックして右側にタブを開きます。
 
-2.  `<Your Endpoint Name>`タブでは、次のようにエンドポイントを呼び出すことができます。
+2. `<Your Endpoint Name>`タブでは、次のようにエンドポイントを呼び出すことができます。
 
-    -   パラメータのないエンドポイントの場合は、 **Send**をクリックして直接呼び出すことができます。
-    -   パラメータ付きのエンドポイントの場合は、まずパラメータ値を入力してから**Send**をクリックする必要があります。
+    - パラメータのないエンドポイントの場合は、 **Send**をクリックして直接呼び出すことができます。
+    - パラメータ付きのエンドポイントの場合は、まずパラメータ値を入力してから**Send**をクリックする必要があります。
 
-        -   `GET`または`DELETE`リクエストの場合は、**Query Params**テーブルのパラメータ値を入力してください。
-        -   `POST`または`PUT`リクエストの場合は、 **Body**タブをクリックし、パラメーター値を JSON オブジェクトとして入力します。TiDB Cloud Data Service のエンドポイントで**Batch Operation**が有効になっている場合は、パラメーター値を JSON オブジェクトの配列として`items`フィールドに入力します。
+        - `GET`または`DELETE`リクエストの場合は、**Query Params**テーブルのパラメータ値を入力してください。
+        - `POST`または`PUT`リクエストの場合は、 **Body**タブをクリックし、パラメーター値を JSON オブジェクトとして入力します。TiDB Cloud Data Service のエンドポイントで**Batch Operation**が有効になっている場合は、パラメーター値を JSON オブジェクトの配列として`items`フィールドに入力します。
 
-3.  下部のペインで応答を確認してください。
+3. 下部のペインで応答を確認してください。
 
-4.  異なるパラメータ値でエンドポイントを再度呼び出したい場合は、パラメータ値を適切に編集してから、再度**Send**をクリックしてください。
+4. 異なるパラメータ値でエンドポイントを再度呼び出したい場合は、パラメータ値を適切に編集してから、再度**Send**をクリックしてください。
 
 Postman の使用法の詳細については、 [Postmanのドキュメント](https://learning.postman.com/docs)を参照してください。
 

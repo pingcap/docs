@@ -22,12 +22,12 @@ HAProxyは、LinuxカーネルのコアコントリビューターであるWilly
 
 ## 基本機能 {#basic-features}
 
--   [高可用性](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.4) : HAProxy は、正常なシャットダウンとシームレスな切り替えをサポートする高可用性を提供します。
--   [負荷分散](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#4.2-balance) : 2 つの主要なプロキシ モード (レイヤー4 とも呼ばれる TCP とレイヤー7 とも呼ばれる HTTP) がサポートされています。ラウンドロビン、Leastconn、ランダムなど、9 種類以上の負荷分散アルゴリズムがサポートされています。
--   [健康チェック](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#5.2-check) : HAProxy はサーバーの HTTP または TCP モードのステータスを定期的にチェックします。
--   [スティッキーセッション](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.6) : アプリケーションがスティッキーセッションをサポートしていない間、HAProxy はクライアントを特定のサーバーに固定することができます。
--   [SSL](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.2) : HTTPS 通信と解決がサポートされます。
--   [監視と統計](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.3) ：Web ページを通じて、サービスの状態とトラフィック フローをリアルタイムで監視できます。
+- [高可用性](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.4) : HAProxy は、正常なシャットダウンとシームレスな切り替えをサポートする高可用性を提供します。
+- [負荷分散](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#4.2-balance) : 2 つの主要なプロキシ モード (レイヤー4 とも呼ばれる TCP とレイヤー7 とも呼ばれる HTTP) がサポートされています。ラウンドロビン、Leastconn、ランダムなど、9 種類以上の負荷分散アルゴリズムがサポートされています。
+- [健康チェック](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#5.2-check) : HAProxy はサーバーの HTTP または TCP モードのステータスを定期的にチェックします。
+- [スティッキーセッション](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.6) : アプリケーションがスティッキーセッションをサポートしていない間、HAProxy はクライアントを特定のサーバーに固定することができます。
+- [SSL](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.2) : HTTPS 通信と解決がサポートされます。
+- [監視と統計](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.3) ：Web ページを通じて、サービスの状態とトラフィック フローをリアルタイムで監視できます。
 
 ## 始める前に {#before-you-begin}
 
@@ -59,13 +59,13 @@ HAProxy をデプロイする前に、ハードウェアとソフトウェアの
 
 > **Note:**
 >
-> -   サポートされているその他のオペレーティング システムの詳細については、 [HAProxyドキュメント](https://github.com/haproxy/haproxy/blob/master/INSTALL)を参照してください。
+> - サポートされているその他のオペレーティング システムの詳細については、 [HAProxyドキュメント](https://github.com/haproxy/haproxy/blob/master/INSTALL)を参照してください。
 
 #### 依存関係 {#dependencies}
 
--   エペルリリース
--   gcc
--   systemd-devel
+- エペルリリース
+- gcc
+- systemd-devel
 
 上記の依存関係をインストールするには、次のコマンドを実行します。
 
@@ -79,19 +79,19 @@ HAProxyを使用すると、負荷分散されたデータベース環境を簡�
 
 ### HAProxyをインストールする {#install-haproxy}
 
-1.  HAProxy 2.6.21 ソースコードのパッケージをダウンロードします。
+1. HAProxy 2.6.21 ソースコードのパッケージをダウンロードします。
 
     ```bash
     wget https://www.haproxy.org/download/2.6/src/haproxy-2.6.21.tar.gz
     ```
 
-2.  パッケージを抽出します。
+2. パッケージを抽出します。
 
     ```bash
     tar zxf haproxy-2.6.21.tar.gz
     ```
 
-3.  ソースコードからアプリケーションをコンパイルします。
+3. ソースコードからアプリケーションをコンパイルします。
 
     ```bash
     cd haproxy-2.6.21
@@ -100,14 +100,14 @@ HAProxyを使用すると、負荷分散されたデータベース環境を簡�
     make PREFIX=${/app/haproxy} SBINDIR=${/app/haproxy/bin} install  # Replace `${/app/haproxy}` and `${/app/haproxy/bin}` with your custom directories.
     ```
 
-4.  プロファイルを再構成します。
+4. プロファイルを再構成します。
 
     ```bash
     echo 'export PATH=/app/haproxy/bin:$PATH' >> /etc/profile
     . /etc/profile
     ```
 
-5.  インストールが成功したかどうかを確認します。
+5. インストールが成功したかどうかを確認します。
 
     ```bash
     which haproxy
@@ -220,13 +220,13 @@ haproxy -f /etc/haproxy/haproxy.cfg
 
 HAProxy を停止するには、 `kill -9`コマンドを使用します。
 
-1.  次のコマンドを実行します。
+1. 次のコマンドを実行します。
 
     ```bash
     ps -ef | grep haproxy
     ```
 
-2.  HAProxy のプロセスを終了します。
+2. HAProxy のプロセスを終了します。
 
     ```bash
     kill -9 ${haproxy.pid}

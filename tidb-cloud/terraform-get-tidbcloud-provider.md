@@ -17,13 +17,13 @@ TiDB Cloud Terraform Provider が[Terraform レジストリ](https://registry.te
 
 macOS の場合、次の手順に従ってHomebrewを使用して Terraform をインストールできます。
 
-1.  必要なすべてのHomebrewパッケージを含むリポジトリである HashiCorp tap をインストールします。
+1. 必要なすべてのHomebrewパッケージを含むリポジトリである HashiCorp tap をインストールします。
 
     ```shell
     brew tap hashicorp/tap
     ```
 
-2.  `hashicorp/tap/terraform`で Terraform をインストールします。
+2. `hashicorp/tap/terraform`で Terraform をインストールします。
 
     ```shell
     brew install hashicorp/tap/terraform
@@ -41,7 +41,7 @@ TiDB Cloud APIはHTTPダイジェスト認証を使用します。これによ�
 
 ## ステップ3. TiDB Cloud Terraform Providerをダウンロードする {#step-3-download-tidb-cloud-terraform-provider}
 
-1.  `main.tf`ファイルを作成します。
+1. `main.tf`ファイルを作成します。
 
         terraform {
           required_providers {
@@ -53,11 +53,11 @@ TiDB Cloud APIはHTTPダイジェスト認証を使用します。これによ�
           required_version = ">= 1.0.0"
         }
 
-    -   `source`属性は、 [Terraform レジストリ](https://registry.terraform.io/)からダウンロードする対象の Terraform プロバイダーを指定します。
-    -   `version`属性はオプションで、Terraformプロバイダのバージョンを指定します。指定されていない場合は、デフォルトで最新のプロバイダバージョンが使用されます。
-    -   `required_version`はオプションで、Terraform のバージョンを指定します。指定されていない場合は、デフォルトで最新の Terraform バージョンが使用されます。
+    - `source`属性は、 [Terraform レジストリ](https://registry.terraform.io/)からダウンロードする対象の Terraform プロバイダーを指定します。
+    - `version`属性はオプションで、Terraformプロバイダのバージョンを指定します。指定されていない場合は、デフォルトで最新のプロバイダバージョンが使用されます。
+    - `required_version`はオプションで、Terraform のバージョンを指定します。指定されていない場合は、デフォルトで最新の Terraform バージョンが使用されます。
 
-2.  `terraform init`コマンドを実行して、Terraform Registry からTiDB Cloud Terraform Provider をダウンロードします。
+2. `terraform init`コマンドを実行して、Terraform Registry からTiDB Cloud Terraform Provider をダウンロードします。
 
         $ terraform init
 

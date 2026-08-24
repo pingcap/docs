@@ -11,13 +11,13 @@ TiDB Toolkitには、 Dumpling （データエクスポート）、 TiDB Lightni
 
 > **Tip:**
 >
-> -   TiDB v8.5.6以降では、sync-diff-inspectorを含むほとんどのツールがTiUPから直接利用できます。デプロイ環境にインターネット接続があれば、 [TiUPコマンド](/tiup/tiup-component-management.md)1つ使用してツールをデプロイできます。 TiDB Toolkitを別途ダウンロードする必要はありません。
-> -   TiDB を Kubernetes 上にデプロイして保守する必要がある場合は、 TiDB Toolkit をダウンロードする代わりに、 [TiDB Operatorのオフラインインストール](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator#offline-installation)の手順に従ってください。
+> - TiDB v8.5.6以降では、sync-diff-inspectorを含むほとんどのツールがTiUPから直接利用できます。デプロイ環境にインターネット接続があれば、 [TiUPコマンド](/tiup/tiup-component-management.md)1つ使用してツールをデプロイできます。 TiDB Toolkitを別途ダウンロードする必要はありません。
+> - TiDB を Kubernetes 上にデプロイして保守する必要がある場合は、 TiDB Toolkit をダウンロードする代わりに、 [TiDB Operatorのオフラインインストール](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator#offline-installation)の手順に従ってください。
 
 ## 環境要件 {#environment-requirements}
 
--   オペレーティングシステム: Linux
--   アーキテクチャ：amd64またはarm64
+- オペレーティングシステム: Linux
+- アーキテクチャ：amd64またはarm64
 
 ## ダウンロードリンク {#download-link}
 

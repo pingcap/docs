@@ -13,13 +13,13 @@ summary: IMPORT INTO およびTiDB Lightning とログ バックアップおよ�
 
 ## ログバックアップおよびTiCDCとの互換性 {#compatibility-with-log-backup-and-ticdc}
 
--   TiDB Lightning [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)は、ログ バックアップおよび TiCDC と互換性があります。
+- TiDB Lightning [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)は、ログ バックアップおよび TiCDC と互換性があります。
 
--   TiDB Lightning [物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)は、ログバックアップおよびTiCDCと互換性がありません。これは、物理インポートモードがソースデータのエンコードされたKVペアをTiKVに直接取り込むため、TiKVがこの処理中に該当する変更ログを生成できないためです。変更ログが生成されないと、ログバックアップによる関連データのバックアップやTiCDCによるレプリケーションが実行できません。
+- TiDB Lightning [物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)は、ログバックアップおよびTiCDCと互換性がありません。これは、物理インポートモードがソースデータのエンコードされたKVペアをTiKVに直接取り込むため、TiKVがこの処理中に該当する変更ログを生成できないためです。変更ログが生成されないと、ログバックアップによる関連データのバックアップやTiCDCによるレプリケーションが実行できません。
 
--   クラスター内でTiDB Lightningと TiCDC を一緒に使用するには、 [TiDB Lightningとの互換性](/ticdc/ticdc-compatibility.md#compatibility-with-tidb-lightning)を参照してください。
+- クラスター内でTiDB Lightningと TiCDC を一緒に使用するには、 [TiDB Lightningとの互換性](/ticdc/ticdc-compatibility.md#compatibility-with-tidb-lightning)を参照してください。
 
--   `IMPORT INTO`はログバックアップおよびTiCDCと互換性がありません。これは、 `IMPORT INTO`ではソースデータのエンコードされたKVペアもTiKVに直接取り込まれるためです。
+- `IMPORT INTO`はログバックアップおよびTiCDCと互換性がありません。これは、 `IMPORT INTO`ではソースデータのエンコードされたKVペアもTiKVに直接取り込まれるためです。
 
 ## TiDB Lightning論理インポートモードのシナリオ {#scenarios-for-tidb-lightning-logical-import-mode}
 
@@ -43,11 +43,11 @@ TiCDC を物理インポート モードで使用することは、短期的に�
 
 次のようにさまざまなシナリオで実行できます。
 
--   シナリオ 1: テーブルを TiCDC によってダウンストリームに複製する必要はありません。
+- シナリオ 1: テーブルを TiCDC によってダウンストリームに複製する必要はありません。
 
     このシナリオでは、TiCDC の changefeed が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。これらのテーブルにバックアップや[ログバックアップ](/br/br-pitr-guide.md)が必要ないことが確実な場合は、 [TiDB Lightning構成ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)の`Lightning.check-requirements`パラメータを`false`に変更してインポートタスクを再開できます。
 
--   シナリオ 2: テーブルを TiCDC によってダウンストリームに複製する必要があります。
+- シナリオ 2: テーブルを TiCDC によってダウンストリームに複製する必要があります。
 
     このシナリオでは、TiCDC の changefeed が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。上流 TiDB クラスターの[TiDB Lightning構成ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)のパラメータ`Lightning.check-requirements`を`false`に変更し、インポートタスクを再起動する必要があります。
 
@@ -67,11 +67,11 @@ TiCDC を物理インポート モードで使用することは、短期的に�
 
 次のようにさまざまなシナリオで実行できます。
 
--   シナリオ 1: テーブルを TiCDC によってダウンストリームに複製する必要はありません。
+- シナリオ 1: テーブルを TiCDC によってダウンストリームに複製する必要はありません。
 
     このシナリオでは、TiCDC の changefeed が有効になっている場合、 `IMPORT INTO`ステートメントを送信した後に互換性チェックでエラーが報告されます。これらのテーブルを TiCDC で複製する必要がないことが確実な場合は、そのステートメントの[`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions)に`DISABLE_PRECHECK` (v8.0.0 で導入) を含めて再送信できます。これにより、データインポートタスクは互換性チェックを無視し、データを直接インポートします。
 
--   シナリオ 2: テーブルを TiCDC によってダウンストリームに複製する必要があります。
+- シナリオ 2: テーブルを TiCDC によってダウンストリームに複製する必要があります。
 
     このシナリオでは、TiCDC の changefeed が有効になっている場合、 `IMPORT INTO`ステートメントを送信した後に互換性チェックでエラーが報告されます。そのステートメントの[`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions)に`DISABLE_PRECHECK` (v8.0.0 で導入) を含めて再送信することができます。これにより、データインポートタスクは互換性チェックを無視し、データを直接インポートします。
 

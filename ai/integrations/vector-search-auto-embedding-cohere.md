@@ -18,39 +18,39 @@ TiDB Cloud は、次の[Cohere](https://cohere.com/)埋め込みモデルをネ�
 
 **Cohere Embed v3 モデル**
 
--   名前: `tidbcloud_free/cohere/embed-english-v3`
--   寸法: 1024
--   距離指標：コサイン類似度、L2
--   言語：英語
--   入力可能なテキストトークンの最大数：512個（1トークンあたり約4文字）
--   入力可能なテキスト文字数：最大2,048文字
--   価格：無料
--   TiDB Cloudがホストしています: ✅ `tidbcloud_free/cohere/embed-english-v3`
--   鍵をご持参ください：✅ `cohere/embed-english-v3.0`
+- 名前: `tidbcloud_free/cohere/embed-english-v3`
+- 寸法: 1024
+- 距離指標：コサイン類似度、L2
+- 言語：英語
+- 入力可能なテキストトークンの最大数：512個（1トークンあたり約4文字）
+- 入力可能なテキスト文字数：最大2,048文字
+- 価格：無料
+- TiDB Cloudがホストしています: ✅ `tidbcloud_free/cohere/embed-english-v3`
+- 鍵をご持参ください：✅ `cohere/embed-english-v3.0`
 
 **Cohere Multilingual Embed v3 モデル**
 
--   名前: `tidbcloud_free/cohere/embed-multilingual-v3`
--   寸法: 1024
--   距離指標：コサイン類似度、L2
--   対応言語：100以上の言語
--   入力可能なテキストトークンの最大数：512個（1トークンあたり約4文字）
--   入力可能なテキスト文字数：最大2,048文字
--   価格：無料
--   TiDB Cloudがホストしています: ✅ `tidbcloud_free/cohere/embed-multilingual-v3`
--   鍵をご持参ください：✅ `cohere/embed-multilingual-v3.0`
+- 名前: `tidbcloud_free/cohere/embed-multilingual-v3`
+- 寸法: 1024
+- 距離指標：コサイン類似度、L2
+- 対応言語：100以上の言語
+- 入力可能なテキストトークンの最大数：512個（1トークンあたり約4文字）
+- 入力可能なテキスト文字数：最大2,048文字
+- 価格：無料
+- TiDB Cloudがホストしています: ✅ `tidbcloud_free/cohere/embed-multilingual-v3`
+- 鍵をご持参ください：✅ `cohere/embed-multilingual-v3.0`
 
 あるいは、独自のCohere APIキー（BYOK）をお持ちの場合は`cohere/`プレフィックスを使用してすべてのCohereモデルをご利用いただけます。例：
 
 **Cohere Embed v4 モデル**
 
--   名前: `cohere/embed-v4.0`
--   寸法：256、512、1024、1536（デフォルト）
--   距離指標：コサイン類似度、L2
--   入力可能なテキストトークンの最大数：128,000
--   価格：Cohereが請求
--   TiDB Cloudでホストされています: ❌
--   鍵をご持参ください：✅
+- 名前: `cohere/embed-v4.0`
+- 寸法：256、512、1024、1536（デフォルト）
+- 距離指標：コサイン類似度、L2
+- 入力可能なテキストトークンの最大数：128,000
+- 価格：Cohereが請求
+- TiDB Cloudでホストされています: ❌
+- 鍵をご持参ください：✅
 
 Cohere モデルの完全なリストについては、 [Cohereのドキュメント](https://docs.cohere.com/docs/cohere-embed)を参照してください。
 
@@ -72,8 +72,8 @@ CREATE TABLE sample (
 
 > **Note:**
 >
-> -   Cohere埋め込みモデルの場合、テーブルを定義する際に、 `EMBED_TEXT()`関数で`input_type`を指定する必要があります。例えば、 `'{"input_type": "search_document", "input_type@search": "search_query"}'`は、データ挿入時に`input_type`が`search_document`に設定され、ベクトル検索時に`search_query`が自動的に適用されることを意味します。
-> -   `@search`サフィックスは、そのフィールドがベクトル検索クエリの実行時のみ有効であることを示しています。そのため、クエリを作成する際に`input_type`を再度指定する必要はありません。
+> - Cohere埋め込みモデルの場合、テーブルを定義する際に、 `EMBED_TEXT()`関数で`input_type`を指定する必要があります。例えば、 `'{"input_type": "search_document", "input_type@search": "search_query"}'`は、データ挿入時に`input_type`が`search_document`に設定され、ベクトル検索時に`search_query`が自動的に適用されることを意味します。
+> - `@search`サフィックスは、そのフィールドがベクトル検索クエリの実行時のみ有効であることを示しています。そのため、クエリを作成する際に`input_type`を再度指定する必要はありません。
 
 データ挿入とデータ照会：
 
@@ -112,18 +112,18 @@ LIMIT 2;
 
 **Embed v3**モデルと**Multilingual Embed v3**モデルの両方で、以下のオプションがサポートされています。これらのオプションは、 `additional_json_options`関数の`EMBED_TEXT()`パラメータを介して指定できます。
 
--   `input_type` (必須): 埋め込みの目的を示す特別なトークンを先頭に追加します。同じタスクの埋め込みを生成する場合は、常に同じ入力タイプを使用する必要があります。そうしないと、埋め込みが異なる意味空間にマッピングされ、互換性がなくなります。唯一の例外はセマンティック検索で、ドキュメントは`search_document`で埋め込まれ、クエリは`search_query`で埋め込まれます。
+- `input_type` (必須): 埋め込みの目的を示す特別なトークンを先頭に追加します。同じタスクの埋め込みを生成する場合は、常に同じ入力タイプを使用する必要があります。そうしないと、埋め込みが異なる意味空間にマッピングされ、互換性がなくなります。唯一の例外はセマンティック検索で、ドキュメントは`search_document`で埋め込まれ、クエリは`search_query`で埋め込まれます。
 
-    -   `search_document` : ドキュメントから埋め込みを生成し、ベクトルデータベースに保存します。
-    -   `search_query` : クエリから埋め込みを生成し、ベクトルデータベースに保存されている埋め込みに対して検索を行います。
-    -   `classification` : テキスト分類器への入力として使用される埋め込みを生成します。
-    -   `clustering` : クラスタリングタスク用の埋め込みを生成します。
+    - `search_document` : ドキュメントから埋め込みを生成し、ベクトルデータベースに保存します。
+    - `search_query` : クエリから埋め込みを生成し、ベクトルデータベースに保存されている埋め込みに対して検索を行います。
+    - `classification` : テキスト分類器への入力として使用される埋め込みを生成します。
+    - `clustering` : クラスタリングタスク用の埋め込みを生成します。
 
--   `truncate` （オプション）：APIが最大トークン長を超える入力をどのように処理するかを制御します。以下のいずれかの値を指定できます。
+- `truncate` （オプション）：APIが最大トークン長を超える入力をどのように処理するかを制御します。以下のいずれかの値を指定できます。
 
-    -   `NONE` (デフォルト): 入力が最大入力トークン長を超えた場合にエラーを返します。
-    -   `START` : 入力が収まるまで、先頭からテキストを破棄します。
-    -   `END` : 入力が収まるまで末尾からテキストを破棄します。
+    - `NONE` (デフォルト): 入力が最大入力トークン長を超えた場合にエラーを返します。
+    - `START` : 入力が収まるまで、先頭からテキストを破棄します。
+    - `END` : 入力が収まるまで末尾からテキストを破棄します。
 
 ## 使用例（BYOK） {#usage-example-byok}
 
@@ -335,7 +335,7 @@ CREATE TABLE sample (
 
 ## 関連項目 {#see-also}
 
--   [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
--   [ベクトル検索](/ai/concepts/vector-search-overview.md)
--   [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
--   [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)
+- [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
+- [ベクトル検索](/ai/concepts/vector-search-overview.md)
+- [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
+- [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)

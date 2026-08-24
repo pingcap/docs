@@ -60,6 +60,6 @@ SHOW TABLE t DISTRIBUTIONS;
 
 ## 参照 {#see-also}
 
--   [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md)
--   [`SHOW DISTRIBUTION JOBS`](/sql-statements/sql-statement-show-distribution-jobs.md)
--   [`CANCEL DISTRIBUTION JOB`](/sql-statements/sql-statement-cancel-distribution-job.md)
+- [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md)
+- [`SHOW DISTRIBUTION JOBS`](/sql-statements/sql-statement-show-distribution-jobs.md)
+- [`CANCEL DISTRIBUTION JOB`](/sql-statements/sql-statement-cancel-distribution-job.md)

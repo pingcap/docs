@@ -74,10 +74,10 @@ mysql> SELECT * FROM t1;
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
--   主キー列または複合インデックスによってカバーされる列の削除はサポートされていません。
+- 主キー列または複合インデックスによってカバーされる列の削除はサポートされていません。
 
 ## 参照 {#see-also}
 
--   [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
--   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+- [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
+- [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+- [CREATE TABLE](/sql-statements/sql-statement-create-table.md)

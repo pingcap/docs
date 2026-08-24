@@ -15,8 +15,8 @@ TiDBは、v6.5.6、v7.1.3、v7.5.1、v7.6.0以降で`FLASHBACK CLUSTER TO TSO`�
 
 > **Warning:**
 >
-> -   リカバリ時点を指定する際は、ターゲットタイムスタンプまたはTSOの有効性を確認し、PDによって現在割り当てられている最大TSOを超える将来の時刻を指定しないようにしてください（Grafana PDパネルの`Current TSO`を参照）。そうしないと、同時処理の線形一貫性とトランザクション分離レベルが侵害され、深刻なデータ正当性の問題が発生する可能性があります。
-> -   `FLASHBACK CLUSTER`の実行中、データクリーンアップ処理はトランザクションの一貫性を保証しません。 `FLASHBACK CLUSTER`が完了した後、TiDB の履歴バージョン読み取り機能 ([ステイル読み取り](/stale-read.md)または[`tidb_snapshot`](/read-historical-data.md)など) を使用する場合は、指定された履歴タイムスタンプ`FLASHBACK CLUSTER`の実行期間外であることを確認してください。FLASHBACK によって完全に復元されていないデータを含む履歴バージョンを読み取ると、同時処理の線形一貫性とトランザクション分離レベルが侵害され、深刻なデータ正当性の問題が発生する可能性があります。
+> - リカバリ時点を指定する際は、ターゲットタイムスタンプまたはTSOの有効性を確認し、PDによって現在割り当てられている最大TSOを超える将来の時刻を指定しないようにしてください（Grafana PDパネルの`Current TSO`を参照）。そうしないと、同時処理の線形一貫性とトランザクション分離レベルが侵害され、深刻なデータ正当性の問題が発生する可能性があります。
+> - `FLASHBACK CLUSTER`の実行中、データクリーンアップ処理はトランザクションの一貫性を保証しません。 `FLASHBACK CLUSTER`が完了した後、TiDB の履歴バージョン読み取り機能 ([ステイル読み取り](/stale-read.md)または[`tidb_snapshot`](/read-historical-data.md)など) を使用する場合は、指定された履歴タイムスタンプ`FLASHBACK CLUSTER`の実行期間外であることを確認してください。FLASHBACK によって完全に復元されていないデータを含む履歴バージョンを読み取ると、同時処理の線形一貫性とトランザクション分離レベルが侵害され、深刻なデータ正当性の問題が発生する可能性があります。
 
 <CustomContent platform="tidb">
 
@@ -48,7 +48,7 @@ FlashbackToTimestampStmt
 
 ## 注記 {#notes}
 
--   `FLASHBACK`ステートメントで指定する時間は、ガベージ コレクション (GC) の有効期間内である必要があります。システム変数[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) (デフォルト: `10m0s` ) は、行の以前のバージョンの保持時間を定義します。ガベージコレクションが実行された現在の`safePoint`は、次のクエリで取得できます。
+- `FLASHBACK`ステートメントで指定する時間は、ガベージ コレクション (GC) の有効期間内である必要があります。システム変数[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) (デフォルト: `10m0s` ) は、行の以前のバージョンの保持時間を定義します。ガベージコレクションが実行された現在の`safePoint`は、次のクエリで取得できます。
 
     ```sql
     SELECT * FROM mysql.tidb WHERE variable_name = 'tikv_gc_safe_point';
@@ -56,24 +56,24 @@ FlashbackToTimestampStmt
 
 <CustomContent platform='tidb'>
 
--   `SUPER`権限を持つユーザーのみが`FLASHBACK CLUSTER` SQL ステートメントを実行できます。
--   `FLASHBACK CLUSTER`は、 `ALTER TABLE ATTRIBUTE` 、 `ALTER TABLE REPLICA` `CREATE PLACEMENT POLICY` 。
--   `FLASHBACK`ステートメントで指定された時点では、完全に実行されていない DDL ステートメントは存在してはなりません。そのような DDL が存在する場合、TiDB はそれを拒否します。
--   `FLASHBACK CLUSTER`を実行する前に、TiDB は関連するすべての接続を切断し、 `FLASHBACK CLUSTER`ステートメントが完了するまで、これらのテーブルに対する読み取りおよび書き込み操作を禁止します。
--   `FLASHBACK CLUSTER`ステートメントは、実行後にキャンセルすることはできません。TiDB は成功するまで再試行を続けます。
--   `FLASHBACK CLUSTER`の実行中にデータをバックアップする必要がある場合は、[バックアップと復元](/br/br-snapshot-guide.md)を使用し、 `BackupTS`の開始時刻より前の`FLASHBACK CLUSTER`を指定することのみが可能です。さらに、 `FLASHBACK CLUSTER`の実行中、[ログバックアップ](/br/br-pitr-guide.md)有効化は失敗します。したがって、 `FLASHBACK CLUSTER`が完了した後でログ バックアップを有効にしてみてください。
--   `FLASHBACK CLUSTER`ステートメントによってメタデータ (テーブル構造、データベース構造) のロールバックが発生した場合、関連する変更は TiCDC によって複製され**ません**。そのため、タスクを手動で一時停止し、 `FLASHBACK CLUSTER`の完了を待ってから、上流と下流のスキーマ定義を手動で複製して、それらが整合していることを確認する必要があります。その後、TiCDC 変更フィードを再作成する必要があります。
+- `SUPER`権限を持つユーザーのみが`FLASHBACK CLUSTER` SQL ステートメントを実行できます。
+- `FLASHBACK CLUSTER`は、 `ALTER TABLE ATTRIBUTE` 、 `ALTER TABLE REPLICA` `CREATE PLACEMENT POLICY` 。
+- `FLASHBACK`ステートメントで指定された時点では、完全に実行されていない DDL ステートメントは存在してはなりません。そのような DDL が存在する場合、TiDB はそれを拒否します。
+- `FLASHBACK CLUSTER`を実行する前に、TiDB は関連するすべての接続を切断し、 `FLASHBACK CLUSTER`ステートメントが完了するまで、これらのテーブルに対する読み取りおよび書き込み操作を禁止します。
+- `FLASHBACK CLUSTER`ステートメントは、実行後にキャンセルすることはできません。TiDB は成功するまで再試行を続けます。
+- `FLASHBACK CLUSTER`の実行中にデータをバックアップする必要がある場合は、[バックアップと復元](/br/br-snapshot-guide.md)を使用し、 `BackupTS`の開始時刻より前の`FLASHBACK CLUSTER`を指定することのみが可能です。さらに、 `FLASHBACK CLUSTER`の実行中、[ログバックアップ](/br/br-pitr-guide.md)有効化は失敗します。したがって、 `FLASHBACK CLUSTER`が完了した後でログ バックアップを有効にしてみてください。
+- `FLASHBACK CLUSTER`ステートメントによってメタデータ (テーブル構造、データベース構造) のロールバックが発生した場合、関連する変更は TiCDC によって複製され**ません**。そのため、タスクを手動で一時停止し、 `FLASHBACK CLUSTER`の完了を待ってから、上流と下流のスキーマ定義を手動で複製して、それらが整合していることを確認する必要があります。その後、TiCDC 変更フィードを再作成する必要があります。
 
 </CustomContent>
 
 <CustomContent platform='tidb-cloud'>
 
--   `SUPER`権限を持つユーザーのみが`FLASHBACK CLUSTER` SQL ステートメントを実行できます。
--   `FLASHBACK CLUSTER`は、 `ALTER TABLE ATTRIBUTE` 、 `ALTER TABLE REPLICA` `CREATE PLACEMENT POLICY` 。
--   `FLASHBACK`ステートメントで指定された時点では、完全に実行されていない DDL ステートメントは存在してはなりません。そのような DDL が存在する場合、TiDB はそれを拒否します。
--   `FLASHBACK CLUSTER`を実行する前に、TiDB は関連するすべての接続を切断し、 `FLASHBACK CLUSTER`ステートメントが完了するまで、これらのテーブルに対する読み取りおよび書き込み操作を禁止します。
--   `FLASHBACK CLUSTER`ステートメントは、実行後にキャンセルすることはできません。TiDB は成功するまで再試行を続けます。
--   `FLASHBACK CLUSTER`ステートメントによってメタデータ (テーブル構造、データベース構造) のロールバックが発生した場合、関連する変更は TiCDC によって複製され**ません**。そのため、タスクを手動で一時停止し、 `FLASHBACK CLUSTER`の完了を待ってから、上流と下流のスキーマ定義を手動で複製して、それらが整合していることを確認する必要があります。その後、TiCDC 変更フィードを再作成する必要があります。
+- `SUPER`権限を持つユーザーのみが`FLASHBACK CLUSTER` SQL ステートメントを実行できます。
+- `FLASHBACK CLUSTER`は、 `ALTER TABLE ATTRIBUTE` 、 `ALTER TABLE REPLICA` `CREATE PLACEMENT POLICY` 。
+- `FLASHBACK`ステートメントで指定された時点では、完全に実行されていない DDL ステートメントは存在してはなりません。そのような DDL が存在する場合、TiDB はそれを拒否します。
+- `FLASHBACK CLUSTER`を実行する前に、TiDB は関連するすべての接続を切断し、 `FLASHBACK CLUSTER`ステートメントが完了するまで、これらのテーブルに対する読み取りおよび書き込み操作を禁止します。
+- `FLASHBACK CLUSTER`ステートメントは、実行後にキャンセルすることはできません。TiDB は成功するまで再試行を続けます。
+- `FLASHBACK CLUSTER`ステートメントによってメタデータ (テーブル構造、データベース構造) のロールバックが発生した場合、関連する変更は TiCDC によって複製され**ません**。そのため、タスクを手動で一時停止し、 `FLASHBACK CLUSTER`の完了を待ってから、上流と下流のスキーマ定義を手動で複製して、それらが整合していることを確認する必要があります。その後、TiCDC 変更フィードを再作成する必要があります。
 
 </CustomContent>
 

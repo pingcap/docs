@@ -318,21 +318,21 @@ EXPLAIN FORMAT = "tidb_json" SELECT id FROM t WHERE a = 1;
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
--   `EXPLAIN`の形式と TiDB の潜在的な実行計画はどちらも MySQL とは大幅に異なります。
--   TiDB は`FORMAT=JSON`または`FORMAT=TREE`オプションをサポートしていません。
--   TiDBの`FORMAT=tidb_json` 、デフォルトの`EXPLAIN`結果のJSON形式の出力です。形式とフィールドはMySQLの`FORMAT=JSON`の出力とは異なります。
+- `EXPLAIN`の形式と TiDB の潜在的な実行計画はどちらも MySQL とは大幅に異なります。
+- TiDB は`FORMAT=JSON`または`FORMAT=TREE`オプションをサポートしていません。
+- TiDBの`FORMAT=tidb_json` 、デフォルトの`EXPLAIN`結果のJSON形式の出力です。形式とフィールドはMySQLの`FORMAT=JSON`の出力とは異なります。
 
 ### `EXPLAIN FOR CONNECTION` {#explain-for-connection}
 
 `EXPLAIN FOR CONNECTION` 、現在実行中のSQLクエリ、または接続内で最後に実行されたSQLクエリの実行計画を取得するために使用されます。出力形式は`EXPLAIN`と同じです。ただし、TiDBにおける`EXPLAIN FOR CONNECTION`の実装はMySQLとは異なります。出力形式以外の違いは次のとおりです。
 
--   接続がスリープ状態の場合、MySQL は空の結果を返しますが、TiDB は最後に実行されたクエリ プランを返します。
--   現在のセッションの実行計画を取得しようとすると、MySQL はエラーを返しますが、TiDB は通常どおり結果を返します。
--   MySQL では、ログイン ユーザーがクエリ対象の接続と同じであるか、ログイン ユーザーが**`PROCESS`**権限を持っている必要があります。一方、TiDB では、ログイン ユーザーがクエリ対象の接続と同じであるか、ログイン ユーザーが**`SUPER`**権限を持っている必要があります。
+- 接続がスリープ状態の場合、MySQL は空の結果を返しますが、TiDB は最後に実行されたクエリ プランを返します。
+- 現在のセッションの実行計画を取得しようとすると、MySQL はエラーを返しますが、TiDB は通常どおり結果を返します。
+- MySQL では、ログイン ユーザーがクエリ対象の接続と同じであるか、ログイン ユーザーが**`PROCESS`**権限を持っている必要があります。一方、TiDB では、ログイン ユーザーがクエリ対象の接続と同じであるか、ログイン ユーザーが**`SUPER`**権限を持っている必要があります。
 
 ## 参照 {#see-also}
 
--   [クエリ実行計画を理解する](/explain-overview.md)
--   [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md)
--   [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
--   [TRACE](/sql-statements/sql-statement-trace.md)
+- [クエリ実行計画を理解する](/explain-overview.md)
+- [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md)
+- [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
+- [TRACE](/sql-statements/sql-statement-trace.md)

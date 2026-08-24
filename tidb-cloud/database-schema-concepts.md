@@ -17,13 +17,13 @@ TiDBにおけるデータベースとは、テーブルやインデックスな�
 
 システムデータベースは、システムテーブルを格納するためにTiDBによって作成されるデフォルトのデータベースです。TiDBは以下のシステムデータベースを提供します。
 
--   [`INFORMATION_SCHEMA`](/information-schema/information-schema.md)
+- [`INFORMATION_SCHEMA`](/information-schema/information-schema.md)
 
--   [`mysql`](/mysql-schema/mysql-schema.md)
+- [`mysql`](/mysql-schema/mysql-schema.md)
 
--   [`performance_schema`](/performance-schema/performance-schema.md)
+- [`performance_schema`](/performance-schema/performance-schema.md)
 
--   [`sys`](/sys-schema/sys-schema.md)
+- [`sys`](/sys-schema/sys-schema.md)
 
 ### `test`データベース {#test-database}
 
@@ -37,11 +37,11 @@ TiDBには`test`という名前のデフォルトデータベースが付属し�
 
 ### システムテーブル {#system-table}
 
--   `mysql`スキーマには、TiDBシステムテーブルが含まれています。この設計は、MySQLの`mysql`スキーマに似ており、 `mysql.user`などのテーブルを直接編集できます。また、MySQLの拡張機能となるテーブルも多数含まれています。
+- `mysql`スキーマには、TiDBシステムテーブルが含まれています。この設計は、MySQLの`mysql`スキーマに似ており、 `mysql.user`などのテーブルを直接編集できます。また、MySQLの拡張機能となるテーブルも多数含まれています。
 
--   情報スキーマは、ANSI 標準に準拠したシステム メタデータの表示方法を提供します。TiDB は、MySQL との互換性のために含まれているテーブルに加えて、多数のカスタム`INFORMATION_SCHEMA`テーブルも提供します。多くの`INFORMATION_SCHEMA`テーブルには、対応する`SHOW`コマンドがあります。 `INFORMATION_SCHEMA`をクエリする利点は、テーブル間で結合できることです。
+- 情報スキーマは、ANSI 標準に準拠したシステム メタデータの表示方法を提供します。TiDB は、MySQL との互換性のために含まれているテーブルに加えて、多数のカスタム`INFORMATION_SCHEMA`テーブルも提供します。多くの`INFORMATION_SCHEMA`テーブルには、対応する`SHOW`コマンドがあります。 `INFORMATION_SCHEMA`をクエリする利点は、テーブル間で結合できることです。
 
--   パフォーマンススキーマ。TiDBは、MySQLとの互換性のためにパフォーマンススキーマテーブルを実装しています。
+- パフォーマンススキーマ。TiDBは、MySQLとの互換性のためにパフォーマンススキーマテーブルを実装しています。
 
 ### キャッシュされたテーブル {#cached-table}
 
@@ -79,9 +79,9 @@ TiDB は`SPATIAL`タイプを除く、MySQL のすべてのデータタイプを
 
 インデックスには大きく分けて2種類あります。
 
--   主キー：主キー列にインデックスを作成します。
+- 主キー：主キー列にインデックスを作成します。
 
--   セカンダリインデックス：主キー以外の列のインデックス
+- セカンダリインデックス：主キー以外の列のインデックス
 
 ### 一意インデックス {#unique-indexes}
 
@@ -161,9 +161,9 @@ TiDBはバージョン6.6.0以降、実験的機能として外部キー制約�
 
 ビューは仮想テーブルとして機能し、そのスキーマはビューを作成する`SELECT`ステートメントによって定義されます。ビューを使用することには、次のような利点があります。
 
--   基となるテーブルに保存されている機密性の高いフィールドとデータのセキュリティを確保するため、安全なフィールドとデータのみをユーザーに公開する。
+- 基となるテーブルに保存されている機密性の高いフィールドとデータのセキュリティを確保するため、安全なフィールドとデータのみをユーザーに公開する。
 
--   複雑なクエリをより簡単かつ便利にするために、ビューとして頻繁に出現する複雑なクエリを定義する。
+- 複雑なクエリをより簡単かつ便利にするために、ビューとして頻繁に出現する複雑なクエリを定義する。
 
 詳細については、[ビュー](/views.md)を参照してください。
 

@@ -50,7 +50,7 @@ IDCマシン
 
 ### TiKVパラメータ設定 {#tikv-parameter-configuration}
 
--   バージョン1.0.8
+- バージョン1.0.8
 
     ```
     sync-log = false
@@ -58,7 +58,7 @@ IDCマシン
     grpc-raft-conn-num = 24
     ```
 
--   v2.0.0-rc6
+- v2.0.0-rc6
 
     ```
     sync-log = false

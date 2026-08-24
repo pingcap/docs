@@ -9,35 +9,35 @@ TiDB Cloudは、DatadogおよびNew Relicとの連携をクラスタレベルで
 
 ## 前提条件 {#prerequisites}
 
--   TiDB Cloudのサードパーティ メトリクス統合を設定するには、 TiDB Cloudで`Organization Owner`または`Project Owner`アクセス権が必要です。
+- TiDB Cloudのサードパーティ メトリクス統合を設定するには、 TiDB Cloudで`Organization Owner`または`Project Owner`アクセス権が必要です。
 
 ## 移行手順 {#migration-steps}
 
 ### ステップ1：従来のプロジェクトレベルのDatadogおよびNew Relic統合を削除します。 {#step-1-delete-the-legacy-project-level-datadog-and-new-relic-integrations}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
+2. プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  左側のナビゲーションパネルで、 **Project Settings**の下にある**Integrations**をクリックします。
+3. 左側のナビゲーションパネルで、 **Project Settings**の下にある**Integrations**をクリックします。
 
-4.  **Integrations**ページで、 **Integration to Datadog**または**Integration to New Relic**の横にある**Delete**をクリックします。
+4. **Integrations**ページで、 **Integration to Datadog**または**Integration to New Relic**の横にある**Delete**をクリックします。
 
-5.  表示されたダイアログで、 `Delete`と入力して、従来の統合機能の削除を確認します。
+5. 表示されたダイアログで、 `Delete`と入力して、従来の統合機能の削除を確認します。
 
 ### ステップ2. 各クラスターごとに新しいDatadogまたはNew Relic統合を作成します。 {#step-2-create-the-new-datadog-or-new-relic-integration-for-each-cluster}
 
 プロジェクト内の各[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して、以下の手順を繰り返してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
 
-2.  左側のナビゲーションパネルで、 **Settings** &gt; **Integrations**をクリックします。
+2. 左側のナビゲーションパネルで、 **Settings** &gt; **Integrations**をクリックします。
 
-3.  **Integrations**ページで、必要に応じて新しい統合を作成します。詳細については、 [TiDB CloudとDatadogを統合する](/tidb-cloud/monitor-datadog-integration.md)および[TiDB CloudとNew Relicを統合する](/tidb-cloud/monitor-new-relic-integration.md)を参照してください。
+3. **Integrations**ページで、必要に応じて新しい統合を作成します。詳細については、 [TiDB CloudとDatadogを統合する](/tidb-cloud/monitor-datadog-integration.md)および[TiDB CloudとNew Relicを統合する](/tidb-cloud/monitor-new-relic-integration.md)を参照してください。
 
 ## インパクトステートメント {#impact-statement}
 

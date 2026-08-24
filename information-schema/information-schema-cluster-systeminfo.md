@@ -32,12 +32,12 @@ DESC cluster_systeminfo;
 
 フィールドの説明:
 
--   `TYPE` : 表[`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)のフィールド`TYPE`に対応します。オプションの値は`tidb` 、 `pd` 、 `tikv`です。
--   `INSTANCE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)クラスター情報テーブルの`INSTANCE`フィールドに対応します。
--   `SYSTEM_TYPE` : システムタイプ。現在、 `system`システムタイプを照会できます。
--   `SYSTEM_NAME` : システム名。現在、 `sysctl`システム名を照会できます。
--   `NAME` : `sysctl`に対応する構成名。
--   `VALUE` : `sysctl`に対応する構成項目の値。
+- `TYPE` : 表[`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)のフィールド`TYPE`に対応します。オプションの値は`tidb` 、 `pd` 、 `tikv`です。
+- `INSTANCE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)クラスター情報テーブルの`INSTANCE`フィールドに対応します。
+- `SYSTEM_TYPE` : システムタイプ。現在、 `system`システムタイプを照会できます。
+- `SYSTEM_NAME` : システム名。現在、 `sysctl`システム名を照会できます。
+- `NAME` : `sysctl`に対応する構成名。
+- `VALUE` : `sysctl`に対応する構成項目の値。
 
 次の例は、 `CLUSTER_SYSTEMINFO`システム情報テーブルを使用して、クラスター内のすべてのサーバーのカーネル バージョンを照会する方法を示しています。
 

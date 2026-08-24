@@ -9,17 +9,17 @@ summary: TiDB 1.0.6は2018年1月8日にリリースされました。更新内�
 
 ## TiDB {#tidb}
 
--   [`Alter Table Auto_Increment`構文をサポートする](https://github.com/pingcap/tidb/pull/5511)
--   [コストベースの計算のバグと統計の`Null Json`問題を修正しました](https://github.com/pingcap/tidb/pull/5556)
--   [単一テーブルの書き込みホットスポットを回避するために、暗黙の行IDを分割する拡張構文をサポートします](https://github.com/pingcap/tidb/pull/5559)
--   [潜在的なDDLの問題を修正](https://github.com/pingcap/tidb/pull/5562)
--   [`curtime` 、 `sysdate` 、 `curdate`関数のタイムゾーン設定を考慮する](https://github.com/pingcap/tidb/pull/5564)
--   [`GROUP_CONCAT`関数で`SEPARATOR`構文をサポートする](https://github.com/pingcap/tidb/pull/5569)
--   [`GROUP_CONCAT`関数の間違った戻り値の型の問題を修正しました](https://github.com/pingcap/tidb/pull/5582)
+- [`Alter Table Auto_Increment`構文をサポートする](https://github.com/pingcap/tidb/pull/5511)
+- [コストベースの計算のバグと統計の`Null Json`問題を修正しました](https://github.com/pingcap/tidb/pull/5556)
+- [単一テーブルの書き込みホットスポットを回避するために、暗黙の行IDを分割する拡張構文をサポートします](https://github.com/pingcap/tidb/pull/5559)
+- [潜在的なDDLの問題を修正](https://github.com/pingcap/tidb/pull/5562)
+- [`curtime` 、 `sysdate` 、 `curdate`関数のタイムゾーン設定を考慮する](https://github.com/pingcap/tidb/pull/5564)
+- [`GROUP_CONCAT`関数で`SEPARATOR`構文をサポートする](https://github.com/pingcap/tidb/pull/5569)
+- [`GROUP_CONCAT`関数の間違った戻り値の型の問題を修正しました](https://github.com/pingcap/tidb/pull/5582)
 
 ## PD {#pd}
 
--   [ホットリージョンスケジューラのストア選択問題を修正](https://github.com/pingcap/pd/pull/898)
+- [ホットリージョンスケジューラのストア選択問題を修正](https://github.com/pingcap/pd/pull/898)
 
 ## TiKV {#tikv}
 

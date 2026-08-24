@@ -148,8 +148,8 @@ SHOW COLLATION;
 >
 > ただし、TiDB のデフォルトの照合順序は、クライアントの[接続照合順序](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html#charset-connection-system-variables)設定にも影響されます。例えば、MySQL 8.x クライアントでは、 `utf8mb4`文字セットの接続照合順序はデフォルトで`utf8mb4_0900_ai_ci`に設定されています。
 >
-> -   TiDB v7.4.0 より前では、クライアントが`utf8mb4_0900_ai_ci` [接続照合順序](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html#charset-connection-system-variables)として使用すると、TiDB は`utf8mb4_0900_ai_ci`照合順序をサポートしていないため、TiDB は TiDBサーバーのデフォルトの照合照合順序`utf8mb4_bin`を使用します。
-> -   v7.4.0 以降、クライアントが[接続照合順序](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html#charset-connection-system-variables)として`utf8mb4_0900_ai_ci`を使用する場合、TiDB はクライアントの構成に従って、デフォルトの照合順序として`utf8mb4_0900_ai_ci`を使用します。
+> - TiDB v7.4.0 より前では、クライアントが`utf8mb4_0900_ai_ci` [接続照合順序](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html#charset-connection-system-variables)として使用すると、TiDB は`utf8mb4_0900_ai_ci`照合順序をサポートしていないため、TiDB は TiDBサーバーのデフォルトの照合照合順序`utf8mb4_bin`を使用します。
+> - v7.4.0 以降、クライアントが[接続照合順序](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html#charset-connection-system-variables)として`utf8mb4_0900_ai_ci`を使用する場合、TiDB はクライアントの構成に従って、デフォルトの照合順序として`utf8mb4_0900_ai_ci`を使用します。
 
 次のステートメントを使用すると、文字セットに対応する照合順序 ( [照合のための新しいフレームワーク](#new-framework-for-collations)下) を表示できます。
 
@@ -386,15 +386,15 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 ルール:
 
--   ルール 1: `CHARACTER SET charset_name`と`COLLATE collation_name`を指定すると、 `charset_name`文字セットと`collation_name`照合順序が直接使用されます。
--   ルール 2: `CHARACTER SET charset_name`を指定して`COLLATE collation_name`を指定しない場合は、 `charset_name`文字セットとデフォルトの照合順序`charset_name`が使用されます。
--   ルール 3: `CHARACTER SET charset_name`も`COLLATE collation_name`を指定しない場合は、システム変数`character_set_connection`と`collation_connection`で指定された文字セットと照合順序が使用されます。
+- ルール 1: `CHARACTER SET charset_name`と`COLLATE collation_name`を指定すると、 `charset_name`文字セットと`collation_name`照合順序が直接使用されます。
+- ルール 2: `CHARACTER SET charset_name`を指定して`COLLATE collation_name`を指定しない場合は、 `charset_name`文字セットとデフォルトの照合順序`charset_name`が使用されます。
+- ルール 3: `CHARACTER SET charset_name`も`COLLATE collation_name`を指定しない場合は、システム変数`character_set_connection`と`collation_connection`で指定された文字セットと照合順序が使用されます。
 
 ### クライアント接続の文字セットと照合順序 {#client-connection-character-set-and-collation}
 
--   サーバーの文字セットと照合順序は、システム変数`character_set_server`と`collation_server`の値です。
+- サーバーの文字セットと照合順序は、システム変数`character_set_server`と`collation_server`の値です。
 
--   デフォルト データベースの文字セットと照合順序は、システム変数`character_set_database`と`collation_database`の値です。
+- デフォルト データベースの文字セットと照合順序は、システム変数`character_set_database`と`collation_database`の値です。
 
 `character_set_connection`と`collation_connection`を使用して、各接続の文字セットと照合順序を指定するために使用できます。`character_set_client`は、クライアントの文字セットを設定するための変数です。
 
@@ -402,7 +402,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 次のステートメントを使用して、クライアントに関連する文字セットと照合順序を設定できます。
 
--   `SET NAMES 'charset_name' [COLLATE 'collation_name']`
+- `SET NAMES 'charset_name' [COLLATE 'collation_name']`
 
     `SET NAMES`は、クライアントがサーバーに SQL ステートメントを送信するために使用する文字セットを示します。`SET NAMES utf8mb4`は、クライアントからのすべてのリクエストとサーバーからの結果に utf8mb4 が使用されることを示します。
 
@@ -416,7 +416,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
     `COLLATE`はオプションです。指定しない場合は、デフォルトの照合順序`charset_name`を使用して`collation_connection`が設定されます。
 
--   `SET CHARACTER SET 'charset_name'`
+- `SET CHARACTER SET 'charset_name'`
 
     `SET NAMES`と同様に、 `SET NAMES 'charset_name'`ステートメントは次のステートメントの組み合わせと同等です。
 
@@ -433,9 +433,9 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 ## 文字セットと照合順序の選択に関する一般的なルール {#general-rules-on-selecting-character-sets-and-collation}
 
--   ルール 1: `CHARACTER SET charset_name`と`COLLATE collation_name`を指定すると、 `charset_name`文字セットと`collation_name`照合順序が直接使用されます。
--   ルール 2: `CHARACTER SET charset_name`を指定し、 `COLLATE collation_name`を指定しない場合は、 `charset_name`文字セットとデフォルトの照合順序`charset_name`が使用されます。
--   ルール 3: `CHARACTER SET charset_name`も`COLLATE collation_name`も指定しない場合は、最適化レベルが高い文字セットと照合順序が使用されます。
+- ルール 1: `CHARACTER SET charset_name`と`COLLATE collation_name`を指定すると、 `charset_name`文字セットと`collation_name`照合順序が直接使用されます。
+- ルール 2: `CHARACTER SET charset_name`を指定し、 `COLLATE collation_name`を指定しない場合は、 `charset_name`文字セットとデフォルトの照合順序`charset_name`が使用されます。
+- ルール 3: `CHARACTER SET charset_name`も`COLLATE collation_name`も指定しない場合は、最適化レベルが高い文字セットと照合順序が使用されます。
 
 ## 文字の有効性チェック {#validity-check-of-characters}
 
@@ -578,13 +578,13 @@ ERROR 1062 (23000): Duplicate entry 'a ' for key 't.PRIMARY' -- TiDB modifies th
 
 式に異なる照合順序を持つ複数の節が含まれる場合、計算で使用される照合順序を推測する必要があります。そのルールは以下のとおりです。
 
--   明示的な`COLLATE`句の強制可能性値は`0`です。
--   2 つの文字列の照合順序に互換性がない場合は、異なる照合順序を持つ 2 つの文字列の連結の強制可能性値は`1`なります。
--   列の照合順序`CAST()` 、 `CONVERT()` 、または`BINARY()`の強制値は`2`です。
--   システム定数 ( `USER ()`または`VERSION ()`によって返される文字列) の強制値は`3`です。
--   定数の強制値は`4`です。
--   数値または中間変数の強制値は`5`です。
--   `NULL`または`NULL`から派生した式の強制値は`6`です。
+- 明示的な`COLLATE`句の強制可能性値は`0`です。
+- 2 つの文字列の照合順序に互換性がない場合は、異なる照合順序を持つ 2 つの文字列の連結の強制可能性値は`1`なります。
+- 列の照合順序`CAST()` 、 `CONVERT()` 、または`BINARY()`の強制値は`2`です。
+- システム定数 ( `USER ()`または`VERSION ()`によって返される文字列) の強制値は`3`です。
+- 定数の強制値は`4`です。
+- 数値または中間変数の強制値は`5`です。
+- `NULL`または`NULL`から派生した式の強制値は`6`です。
 
 TiDBは照合順序を推論する際に、強制性値の低い式の照合順序を優先的に使用します。2つの句の強制性値が同じ場合、以下の優先順位に従って照合順序が決定されます。
 
@@ -592,8 +592,8 @@ TiDBは照合順序を推論する際に、強制性値の低い式の照合順�
 
 次の状況では、TiDB は照合順序を推測できず、エラーを報告します。
 
--   2 つの句の照合順序が異なり、両方の句の強制可能性値が`0`の場合。
--   2 つの句の照合順序に互換性がなく、返される式の型が`String`の場合。
+- 2 つの句の照合順序が異なり、両方の句の強制可能性値が`0`の場合。
+- 2 つの句の照合順序に互換性がなく、返される式の型が`String`の場合。
 
 ## `COLLATE`句 {#collate-clause}
 

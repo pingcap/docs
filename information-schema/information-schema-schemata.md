@@ -44,8 +44,8 @@ SELECT * FROM SCHEMATA;
 
 `SCHEMATA`テーブル内のフィールドは次のように説明されます。
 
--   `CATALOG_NAME` : データベースが属するカタログ。
--   `SCHEMA_NAME` : データベース名。
--   `DEFAULT_CHARACTER_SET_NAME` : データベースのデフォルトの文字セット。
--   `DEFAULT_COLLATION_NAME` : データベースのデフォルトの照合照合順序。
--   `SQL_PATH` : この項目の値は常に`NULL` 。
+- `CATALOG_NAME` : データベースが属するカタログ。
+- `SCHEMA_NAME` : データベース名。
+- `DEFAULT_CHARACTER_SET_NAME` : データベースのデフォルトの文字セット。
+- `DEFAULT_COLLATION_NAME` : データベースのデフォルトの照合照合順序。
+- `SQL_PATH` : この項目の値は常に`NULL` 。

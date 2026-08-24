@@ -15,12 +15,12 @@ TiDBは[Percolator](https://www.usenix.org/legacy/event/osdi10/tech/full_papers/
 
 クライアントが TiDB に`COMMIT`リクエストを送信すると、TiDB は 2PC プロセスを開始します。
 
-1.  TiDB は、トランザクション内のすべてのキーから 1 つのキーをトランザクションの主キーとして選択します。
-2.  TiDBは、このコミットに関係するすべてのTiKVリージョンに`prewrite`リクエストを送信します。TiKVは、すべてのキーが正常にプレビューできるかどうかを判断します。
-3.  TiDB は、 `prewrite`リクエストがすべて成功したという結果を受け取ります。
-4.  TiDB は PD から`commit_ts`を取得します。
-5.  TiDBは、トランザクションの主キーを含むTiKVリージョンに`commit`リクエストを送信します。TiKVは`commit`リクエストを受信すると、データの有効性を確認し、 `prewrite`ステージに残っているロックを解除します。
-6.  `commit`リクエストが正常に返されると、TiDB はクライアントに成功を返します。
+1. TiDB は、トランザクション内のすべてのキーから 1 つのキーをトランザクションの主キーとして選択します。
+2. TiDBは、このコミットに関係するすべてのTiKVリージョンに`prewrite`リクエストを送信します。TiKVは、すべてのキーが正常にプレビューできるかどうかを判断します。
+3. TiDB は、 `prewrite`リクエストがすべて成功したという結果を受け取ります。
+4. TiDB は PD から`commit_ts`を取得します。
+5. TiDBは、トランザクションの主キーを含むTiKVリージョンに`commit`リクエストを送信します。TiKVは`commit`リクエストを受信すると、データの有効性を確認し、 `prewrite`ステージに残っているロックを解除します。
+6. `commit`リクエストが正常に返されると、TiDB はクライアントに成功を返します。
 
 書き込み競合はステージ`prewrite`で発生します。トランザクションが、別のトランザクションが現在のキー（ `data.commit_ts` &gt; `txn.start_ts` ）に書き込みを行っていることを検出すると、書き込み競合が発生します。
 
@@ -28,21 +28,21 @@ TiDBは[Percolator](https://www.usenix.org/legacy/event/osdi10/tech/full_papers/
 
 TiDB Grafana パネルで、 **KV エラー**の下にある次の監視メトリックを確認します。
 
--   **KV バックオフ OPS は**、TiKV によって返される 1 秒あたりのエラー メッセージの数を示します。
+- **KV バックオフ OPS は**、TiKV によって返される 1 秒あたりのエラー メッセージの数を示します。
 
     ![kv-backoff-ops](/media/troubleshooting-write-conflict-kv-backoff-ops.png)
 
     メトリック`txnlock`は書き込み競合を示します。メトリック`txnLockFast`は読み取り競合を示します。
 
--   **ロック解決 OPS は、** 1 秒あたりのトランザクション競合に関連する項目の数を示します。
+- **ロック解決 OPS は、** 1 秒あたりのトランザクション競合に関連する項目の数を示します。
 
     ![lock-resolve-ops](/media/troubleshooting-write-conflict-lock-resolve-ops.png)
 
-    -   `not_expired` 、ロックのTTLが期限切れになっていないことを示します。競合トランザクションは、TTLが期限切れになるまでロックを解決できません。
-    -   `wait_expired` 、トランザクションがロックの有効期限が切れるまで待機する必要があることを示します。
-    -   `expired`ロックのTTLが期限切れであることを示します。その後、競合トランザクションはこのロックを解決できます。
+    - `not_expired` 、ロックのTTLが期限切れになっていないことを示します。競合トランザクションは、TTLが期限切れになるまでロックを解決できません。
+    - `wait_expired` 、トランザクションがロックの有効期限が切れるまで待機する必要があることを示します。
+    - `expired`ロックのTTLが期限切れであることを示します。その後、競合トランザクションはこのロックを解決できます。
 
--   **KV 再試行期間は、** KV 要求を再送信する期間を示します。
+- **KV 再試行期間は、** KV 要求を再送信する期間を示します。
 
     ![kv-retry-duration](/media/troubleshooting-write-conflict-kv-retry-duration.png)
 
@@ -58,12 +58,12 @@ TiDBログを検索するキーワードとして`[kv:9007]Write conflict`を使
 
 上記のログの説明は次のとおりです。
 
--   `[kv:9007]Write conflict` : 書き込み間の競合を示します。
--   `txnStartTS=416617006551793665` : 現在のトランザクションの`start_ts`を示します。`pd-ctl`ツールを使用して、 `start_ts`を物理時間に変換できます。
--   `conflictStartTS=416617018650001409` : 書き込み競合トランザクションの`start_ts`を示します。
--   `conflictCommitTS=416617023093080065` : 書き込み競合トランザクションの`commit_ts`を示します。
--   `key={tableID=47, indexID=1, indexValues={string, }}` : 書き込み競合キーを示します。`tableID`は書き込み競合テーブルのIDを示します。`indexID`は書き込み競合インデックスのIDを示します。書き込み競合キーがレコードキーの場合、ログには競合が発生しているレコード（行）を示す`handle=x`が出力されます。`indexValues`は競合が発生しているインデックスの値を示します。
--   `primary={tableID=47, indexID=1, indexValues={string, }}` : 現在のトランザクションの主キー情報を示します。
+- `[kv:9007]Write conflict` : 書き込み間の競合を示します。
+- `txnStartTS=416617006551793665` : 現在のトランザクションの`start_ts`を示します。`pd-ctl`ツールを使用して、 `start_ts`を物理時間に変換できます。
+- `conflictStartTS=416617018650001409` : 書き込み競合トランザクションの`start_ts`を示します。
+- `conflictCommitTS=416617023093080065` : 書き込み競合トランザクションの`commit_ts`を示します。
+- `key={tableID=47, indexID=1, indexValues={string, }}` : 書き込み競合キーを示します。`tableID`は書き込み競合テーブルのIDを示します。`indexID`は書き込み競合インデックスのIDを示します。書き込み競合キーがレコードキーの場合、ログには競合が発生しているレコード（行）を示す`handle=x`が出力されます。`indexValues`は競合が発生しているインデックスの値を示します。
+- `primary={tableID=47, indexID=1, indexValues={string, }}` : 現在のトランザクションの主キー情報を示します。
 
 `pd-ctl`ツールを使用して、タイムスタンプを読み取り可能な時間に変換できます。
 

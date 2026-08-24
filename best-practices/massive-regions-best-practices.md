@@ -30,20 +30,20 @@ Raftstore のワークフロー図から、各リージョンのメッセージ�
 
 > **Note:**
 >
-> -   前述のRaftstoreのCPU使用率についてですが、 Raftstoreはシングルスレッドです。Raftstoreがマルチスレッドの場合は、CPU使用率のしきい値（85%）を比例的に増やすことができます。
-> -   Raftstoreスレッドには I/O 操作が存在するため、CPU 使用率は 100% に達することはありません。
+> - 前述のRaftstoreのCPU使用率についてですが、 Raftstoreはシングルスレッドです。Raftstoreがマルチスレッドの場合は、CPU使用率のしきい値（85%）を比例的に増やすことができます。
+> - Raftstoreスレッドには I/O 操作が存在するため、CPU 使用率は 100% に達することはありません。
 
 ### パフォーマンス監視 {#performance-monitoring}
 
 Grafana の**TiKV ダッシュボード**では、次の監視メトリックを確認できます。
 
--   **スレッドCPU**パネルの`Raft store CPU`
+- **スレッドCPU**パネルの`Raft store CPU`
 
     基準値： `raftstore.store-pool-size * 85%`未満。
 
     ![Check Raftstore CPU](/media/best-practices/raft-store-cpu.png)
 
--   **Raft Propose**パネルの`Propose wait duration`
+- **Raft Propose**パネルの`Propose wait duration`
 
     `Propose wait duration`は、リクエストがRaftstoreに送信されてからRaftstore が実際にリクエストの処理を開始するまでの遅延です。遅延が長い場合は、 Raftstoreがビジー状態であるか、ログ追加処理に時間がかかり、 Raftstore がリクエストを時間内に処理できないことを意味します。
 
@@ -51,13 +51,13 @@ Grafana の**TiKV ダッシュボード**では、次の監視メトリックを
 
     ![Check Propose wait duration](/media/best-practices/propose-wait-duration.png)
 
--   **Raft IO**パネルの`Commit log duration`
+- **Raft IO**パネルの`Commit log duration`
 
     `Commit log duration`は、 Raftstore が各リージョン内の大多数のメンバーにRaftログをコミットするのにかかる時間です。この指標の値が大きく変動する理由としては、以下が考えられます。
 
-    -   Raftstoreの作業負荷は大きいです。
-    -   ログ追加操作が遅いです。
-    -   ネットワークの混雑により、 Raftログをタイムリーにコミットできません。
+    - Raftstoreの作業負荷は大きいです。
+    - ログ追加操作が遅いです。
+    - ネットワークの混雑により、 Raftログをタイムリーにコミットできません。
 
     基準値: 200～500ms未満。
 
@@ -67,8 +67,8 @@ Grafana の**TiKV ダッシュボード**では、次の監視メトリックを
 
 パフォーマンスの問題の原因を突き止めたら、次の 2 つの側面から解決を試みてください。
 
--   単一の TiKV インスタンス上のリージョン数を減らす
--   単一リージョンのメッセージ数を減らす
+- 単一の TiKV インスタンス上のリージョン数を減らす
+- 単一リージョンのメッセージ数を減らす
 
 ### 方法1: Raftstoreの同時実行性を高める {#method-1-increase-raftstore-concurrency}
 
@@ -100,9 +100,9 @@ config set merge-schedule-limit 8
 
 詳細については、 [リージョン結合](https://tikv.org/docs/4.0/tasks/configure/region-merge/)および[PD設定ファイル](/pd-configuration-file.md#schedule)の次の 3 つの構成パラメータを参照してください。
 
--   [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size)
--   [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys)
--   [`merge-schedule-limit`](/pd-configuration-file.md#merge-schedule-limit)
+- [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size)
+- [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys)
+- [`merge-schedule-limit`](/pd-configuration-file.md#merge-schedule-limit)
 
 `Region Merge`パラメータのデフォルト設定はかなり保守的です。[PDスケジュールのベストプラクティス](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow)に記載されている方法を参考にすれば、 `Region Merge`プロセスを高速化できます。
 

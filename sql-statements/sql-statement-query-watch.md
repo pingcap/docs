@@ -62,4 +62,4 @@ DropQueryWatchStmt ::=
 
 ## 参照 {#see-also}
 
--   [暴走クエリ](/tidb-resource-control-runaway-queries.md)
+- [暴走クエリ](/tidb-resource-control-runaway-queries.md)

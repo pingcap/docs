@@ -31,7 +31,7 @@ summary: データ移行を使用して、Amazon Aurora MySQL、Amazon Relationa
 >
 > このセクションでは、増分データ移行に関する制限事項のみを記載しています。一般的な制限事項も併せてお読みになることをお勧めします。 [制限事項](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations)をご覧ください。
 
--   対象データベースにターゲットテーブルがまだ作成されていない場合、移行ジョブは以下のようなエラーを報告して失敗します。この場合、ターゲットテーブルを手動で作成してから、移行ジョブを再試行する必要があります。
+- 対象データベースにターゲットテーブルがまだ作成されていない場合、移行ジョブは以下のようなエラーを報告して失敗します。この場合、ターゲットテーブルを手動で作成してから、移行ジョブを再試行する必要があります。
 
     ```sql
     startLocation: [position: (mysql_bin.000016, 5122), gtid-set:
@@ -42,13 +42,13 @@ summary: データ移行を使用して、Amazon Aurora MySQL、Amazon Relationa
     tracker Raw Cause: Error 1146: Table 'zm.table1' doesn't exist
     ```
 
--   アップストリームで一部の行が削除または更新され、ダウンストリームに対応する行がない場合、移行ジョブは、アップストリームから`DELETE`および`UPDATE` DML 操作を複製する際に、削除または更新可能な行がないことを検知します。
+- アップストリームで一部の行が削除または更新され、ダウンストリームに対応する行がない場合、移行ジョブは、アップストリームから`DELETE`および`UPDATE` DML 操作を複製する際に、削除または更新可能な行がないことを検知します。
 
 増分データの移行開始位置としてGTIDを指定する場合、以下の制限事項に注意してください。
 
--   ソースデータベースでGTIDモードが有効になっていることを確認してください。
--   ソースデータベースがMySQLの場合、MySQLのバージョンは5.6以降である必要があり、ストレージエンジンはInnoDBである必要があります。
--   移行ジョブがアップストリームのセカンダリデータベースに接続する場合、 `REPLICATE CREATE TABLE ... SELECT`イベントは移行できません。これは、ステートメントが同じ GTID が割り当てられた 2 つのトランザクション ( `CREATE TABLE`と`INSERT` ) に分割されるためです。その結果、 `INSERT`ステートメントはセカンダリデータベースによって無視されます。
+- ソースデータベースでGTIDモードが有効になっていることを確認してください。
+- ソースデータベースがMySQLの場合、MySQLのバージョンは5.6以降である必要があり、ストレージエンジンはInnoDBである必要があります。
+- 移行ジョブがアップストリームのセカンダリデータベースに接続する場合、 `REPLICATE CREATE TABLE ... SELECT`イベントは移行できません。これは、ステートメントが同じ GTID が割り当てられた 2 つのトランザクション ( `CREATE TABLE`と`INSERT` ) に分割されるためです。その結果、 `INSERT`ステートメントはセカンダリデータベースによって無視されます。
 
 ## 前提条件 {#prerequisites}
 
@@ -62,8 +62,8 @@ summary: データ移行を使用して、Amazon Aurora MySQL、Amazon Relationa
 
 Amazon RDS および Amazon Aurora MySQL の場合、新しい変更可能なパラメータ グループ (デフォルトのパラメータ グループではない) を作成し、そのパラメータ グループ内の以下のパラメータを変更してから、インスタンスを再起動して変更を適用する必要があります。
 
--   `gtid_mode`
--   `enforce_gtid_consistency`
+- `gtid_mode`
+- `enforce_gtid_consistency`
 
 GTIDモードが正常に有効化されたかどうかは、以下のSQL文を実行することで確認できます。
 
@@ -123,9 +123,9 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 自己ホスト型のMySQLインスタンスでGTIDモードを有効にするには、以下の手順に従ってください。
 
-1.  適切な権限を持つMySQLクライアントを使用してMySQLサーバーに接続します。
+1. 適切な権限を持つMySQLクライアントを使用してMySQLサーバーに接続します。
 
-2.  GTIDモードを有効にするには、以下のSQL文を実行してください。
+2. GTIDモードを有効にするには、以下のSQL文を実行してください。
 
     ```sql
     -- Enable the GTID mode
@@ -138,9 +138,9 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     RESET MASTER;
     ```
 
-3.  設定変更を有効にするには、MySQLサーバーを再起動してください。
+3. 設定変更を有効にするには、MySQLサーバーを再起動してください。
 
-4.  次のSQL文を実行して、GTIDモードが正常に有効化されているかどうかを確認してください。
+4. 次のSQL文を実行して、GTIDモードが正常に有効化されているかどうかを確認してください。
 
     ```sql
     SHOW VARIABLES LIKE 'gtid_mode';
@@ -150,68 +150,68 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 ## ステップ1：データ移行ページに移動します {#step-1-go-to-the-data-migration-page}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Data** &gt; **Data Migration**をクリックします。
+2. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Data** &gt; **Data Migration**をクリックします。
 
-3.  **Data Migration**ページで、右上隅にある**Create Migration Job**をクリックします。**Create Migration Job**ページが表示されます。
+3. **Data Migration**ページで、右上隅にある**Create Migration Job**をクリックします。**Create Migration Job**ページが表示されます。
 
 ## ステップ2：ソース接続とターゲット接続を設定する {#step-2-configure-the-source-and-target-connection}
 
 **Create Migration Job**ページで、ソースとターゲットの接続を設定します。
 
-1.  職名を入力してください。職名は文字で始まり、60文字以内である必要があります。文字（AZ、az）、数字（0～9）、アンダースコア（_）、ハイフン（-）が使用可能です。
+1. 職名を入力してください。職名は文字で始まり、60文字以内である必要があります。文字（AZ、az）、数字（0～9）、アンダースコア（_）、ハイフン（-）が使用可能です。
 
-2.  ソース接続プロファイルを入力してください。
+2. ソース接続プロファイルを入力してください。
 
-    -   **Data source**：データソースの種類。
-    -   **リージョン**：データソースのリージョン。クラウドデータベースの場合のみ必要です。
-    -   **Connectivity method**: データ ソースの接続方法。<CustomContent plan="dedicated">現在、接続方法に応じて、パブリックIP、VPCピアリング、またはプライベートリンクを選択できます。</CustomContent><CustomContent plan="essential">接続方法に応じて、パブリックIPまたはプライベートリンクを選択できます。</CustomContent><CustomContent plan="premium">接続方法に応じて、パブリックリンクまたはプライベートリンク（AWSのみ）を選択できます。</CustomContent>
+    - **Data source**：データソースの種類。
+    - **リージョン**：データソースのリージョン。クラウドデータベースの場合のみ必要です。
+    - **Connectivity method**: データ ソースの接続方法。<CustomContent plan="dedicated">現在、接続方法に応じて、パブリックIP、VPCピアリング、またはプライベートリンクを選択できます。</CustomContent><CustomContent plan="essential">接続方法に応じて、パブリックIPまたはプライベートリンクを選択できます。</CustomContent><CustomContent plan="premium">接続方法に応じて、パブリックリンクまたはプライベートリンク（AWSのみ）を選択できます。</CustomContent>
 
     <CustomContent plan="dedicated">
 
-    -   **Hostname or IP address**（パブリックIPおよびVPCピアリングの場合）：データソースのホスト名またはIPアドレス。
-    -   **Service Name**（プライベートリンクの場合）：エンドポイントのサービス名。
+    - **Hostname or IP address**（パブリックIPおよびVPCピアリングの場合）：データソースのホスト名またはIPアドレス。
+    - **Service Name**（プライベートリンクの場合）：エンドポイントのサービス名。
 
     </CustomContent>
     <CustomContent plan="essential">
 
-    -   **Hostname or IP address**（パブリックIPの場合）：データソースのホスト名またはIPアドレス。
-    -   **Private Link Connection**(プライベート リンク用): [プライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md)セクションで作成したプライベート リンク接続。
+    - **Hostname or IP address**（パブリックIPの場合）：データソースのホスト名またはIPアドレス。
+    - **Private Link Connection**(プライベート リンク用): [プライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md)セクションで作成したプライベート リンク接続。
 
     </CustomContent>
     <CustomContent plan="premium">
 
-    -   **Hostname or IP address**（公開の場合）：データソースのホスト名またはIPアドレス。
-    -   **Private Endpoint**(プライベート リンク用): TiDB Cloud Premium インスタンスの**Networking** &gt; **[外部サービス向け AWS プライベート エンドポイント]**で作成したプライベート エンドポイント。または、**ここで [プライベート エンドポイントの作成] をクリックしてプライベート エンドポイント**を作成します。セットアップの詳細については、データ移行ガイドの[プライベートリンクまたはプライベートエンドポイント](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint)セクションを参照してください。
+    - **Hostname or IP address**（公開の場合）：データソースのホスト名またはIPアドレス。
+    - **Private Endpoint**(プライベート リンク用): TiDB Cloud Premium インスタンスの**Networking** &gt; **[外部サービス向け AWS プライベート エンドポイント]**で作成したプライベート エンドポイント。または、**ここで [プライベート エンドポイントの作成] をクリックしてプライベート エンドポイント**を作成します。セットアップの詳細については、データ移行ガイドの[プライベートリンクまたはプライベートエンドポイント](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint)セクションを参照してください。
 
     </CustomContent>
 
-    -   **Port**：データソースのポート番号。
-    -   **Username**：データソースのユーザー名。
-    -   **Password**：ユーザー名のパスワード。
-    -   **SSL/TLS** ：SSL/TLSを有効にする場合は、以下のいずれかの証明書を含む、データソースの証明書をアップロードする必要があります。
-        -   CA証明書のみ
-        -   クライアント証明書とクライアントキー
-        -   CA証明書、クライアント証明書、およびクライアントキー
+    - **Port**：データソースのポート番号。
+    - **Username**：データソースのユーザー名。
+    - **Password**：ユーザー名のパスワード。
+    - **SSL/TLS** ：SSL/TLSを有効にする場合は、以下のいずれかの証明書を含む、データソースの証明書をアップロードする必要があります。
+        - CA証明書のみ
+        - クライアント証明書とクライアントキー
+        - CA証明書、クライアント証明書、およびクライアントキー
 
-3.  ターゲット接続プロファイルを入力してください。
+3. ターゲット接続プロファイルを入力してください。
 
-    -   **Username**: ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>のユーザー名を入力します。
-    -   **Password**： TiDB Cloudのユーザー名のパスワードを入力してください。
+    - **Username**: ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>のユーザー名を入力します。
+    - **Password**： TiDB Cloudのユーザー名のパスワードを入力してください。
 
-4.  入力した情報を検証するには、 **Validate Connection and Next**をクリックしてください。
+4. 入力した情報を検証するには、 **Validate Connection and Next**をクリックしてください。
 
-5.  表示されたメッセージに従って行動してください。
+5. 表示されたメッセージに従って行動してください。
 
     <CustomContent plan="dedicated">
 
-    -   パブリックIPまたはVPCピアリングを使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
-    -   AWS Private Link を使用している場合、エンドポイント要求を承認するよう求められます。AWS [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)で、エンドポイントサービスを作成した AWS リージョンに切り替え、 **Endpoint services**をクリックしてエンドポイント要求を承認してください。
+    - パブリックIPまたはVPCピアリングを使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
+    - AWS Private Link を使用している場合、エンドポイント要求を承認するよう求められます。AWS [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)で、エンドポイントサービスを作成した AWS リージョンに切り替え、 **Endpoint services**をクリックしてエンドポイント要求を承認してください。
 
     </CustomContent>
     <CustomContent plan="essential">
@@ -222,8 +222,8 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
     <CustomContent plan="premium">
 
-    -   接続方法として**パブリックを**使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
-    -   **Private Link**を使用しており、選択したプライベートエンドポイントがAWSでまだ承認されていない場合は、 [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)で、エンドポイントサービスを作成したAWSリージョンに切り替え、 **Endpoint services**をクリックして、 TiDB Cloudからのエンドポイント接続要求を承認してください。
+    - 接続方法として**パブリックを**使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
+    - **Private Link**を使用しており、選択したプライベートエンドポイントがAWSでまだ承認されていない場合は、 [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)で、エンドポイントサービスを作成したAWSリージョンに切り替え、 **Endpoint services**をクリックして、 TiDB Cloudからのエンドポイント接続要求を承認してください。
 
     </CustomContent>
 
@@ -233,9 +233,9 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 **Start Position**領域では、増分データ移行の開始位置として、以下のいずれかのタイプを指定できます。
 
--   増分移行ジョブが開始される時間
--   GTID
--   Binlogファイル名と位置
+- 増分移行ジョブが開始される時間
+- GTID
+- Binlogファイル名と位置
 
 移行ジョブが開始されると、開始位置を変更することはできません。
 
@@ -269,9 +269,9 @@ SHOW MASTER STATUS;
 
 ## ステップ4：移行するオブジェクトを選択する {#step-4-choose-the-objects-to-be-migrated}
 
-1.  **Choose Objects to Migrate**ページで、移行するオブジェクトを選択します。 **All**をクリックするとすべてのオブジェクトを選択できます。 **Customize**をクリックしてから、オブジェクト名の横にあるチェックボックスをクリックしてオブジェクトを選択することもできます。
+1. **Choose Objects to Migrate**ページで、移行するオブジェクトを選択します。 **All**をクリックするとすべてのオブジェクトを選択できます。 **Customize**をクリックしてから、オブジェクト名の横にあるチェックボックスをクリックしてオブジェクトを選択することもできます。
 
-2.  **Next**をクリックしてください。
+2. **Next**をクリックしてください。
 
 ## ステップ5：事前チェック {#step-5-precheck}
 

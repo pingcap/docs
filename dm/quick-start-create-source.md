@@ -15,7 +15,7 @@ summary: データ移行 (DM) のデータ ソースを作成する方法を学�
 
 ## ステップ1: データソースを構成する {#step-1-configure-the-data-source}
 
-1.  （オプション）データソースのパスワードを暗号化する
+1. （オプション）データソースのパスワードを暗号化する
 
     DM設定ファイルでは、dmctlで暗号化されたパスワードを使用することをお勧めします。以下の例に従ってデータソースの暗号化されたパスワードを取得すれば、後で設定ファイルを書き込む際に使用できます。
 
@@ -29,7 +29,7 @@ summary: データ移行 (DM) のデータ ソースを作成する方法を学�
     MKxn0Qo3m3XOyjCnhEMtsUCm83EhGQDZ/T4=
     ```
 
-2.  データソースの設定ファイルを書き込む
+2. データソースの設定ファイルを書き込む
 
     データソースごとに、個別の設定ファイルを作成する必要があります。以下の例に従って、IDが「mysql-01」のデータソースを作成します。まず、設定ファイル`./source-mysql-01.yaml`を作成します。
 
@@ -78,7 +78,7 @@ tiup dmctl --master-addr <master-addr> operate-source create ./source-mysql-01.y
 
 データ ソースを作成したら、次のコマンドを使用してデータ ソースをクエリできます。
 
--   データ ソースの`source-id`がわかっている場合は、 `dmctl config source <source-id>`コマンドを使用してデータ ソースの構成を直接確認できます。
+- データ ソースの`source-id`がわかっている場合は、 `dmctl config source <source-id>`コマンドを使用してデータ ソースの構成を直接確認できます。
 
     ```bash
     tiup dmctl --master-addr <master-addr> config source mysql-01
@@ -99,7 +99,7 @@ tiup dmctl --master-addr <master-addr> operate-source create ./source-mysql-01.y
     }
     ```
 
--   `source-id`がわからない場合は、 `dmctl operate-source show`コマンドを使用してソース データベース リストを確認し、そこから対応するデータ ソースを見つけることができます。
+- `source-id`がわからない場合は、 `dmctl operate-source show`コマンドを使用してソース データベース リストを確認し、そこから対応するデータ ソースを見つけることができます。
 
     ```bash
     tiup dmctl --master-addr <master-addr> operate-source show

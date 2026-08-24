@@ -11,14 +11,14 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
 
 `tidbcloud_serverless_cluster`リソースの機能は次のとおりです。
 
--   TiDB Cloud Essential クラスターを作成します。
--   TiDB Cloud Essential クラスターを変更します。
--   TiDB Cloud Essential クラスターをインポートします。
--   TiDB Cloud Essential クラスターを削除します。
+- TiDB Cloud Essential クラスターを作成します。
+- TiDB Cloud Essential クラスターを変更します。
+- TiDB Cloud Essential クラスターをインポートします。
+- TiDB Cloud Essential クラスターを削除します。
 
 ## 前提条件 {#prerequisites}
 
--   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.2以降。
+- [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.2以降。
 
 ## `tidbcloud_projects`データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-tidbcloud-projects-data-source}
 
@@ -26,7 +26,7 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
 
 利用可能なすべてのプロジェクトに関する情報を取得するには、次のように`tidbcloud_projects`データ ソースを使用します。
 
-1.  [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)で作成した`main.tf`ファイルに、次のように`data`と`output`ブロックを追加します。
+1. [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)で作成した`main.tf`ファイルに、次のように`data`と`output`ブロックを追加します。
 
         terraform {
           required_providers {
@@ -50,19 +50,19 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
           value = data.tidbcloud_projects.example_project.items
         }
 
-    -   `data`ブロックを使用して、データ ソース タイプやデータ ソース名など、 TiDB Cloudのデータ ソースを定義します。
+    - `data`ブロックを使用して、データ ソース タイプやデータ ソース名など、 TiDB Cloudのデータ ソースを定義します。
 
-        -   プロジェクト データ ソースを使用するには、データ ソース タイプを`tidbcloud_projects`に設定します。
-        -   データソース名は必要に応じて定義できます。例： `"example_project"` 。
-        -   `tidbcloud_projects`データ ソースの場合、 `page`および`page_size`属性を使用して、チェックするプロジェクトの最大数を制限できます。
+        - プロジェクト データ ソースを使用するには、データ ソース タイプを`tidbcloud_projects`に設定します。
+        - データソース名は必要に応じて定義できます。例： `"example_project"` 。
+        - `tidbcloud_projects`データ ソースの場合、 `page`および`page_size`属性を使用して、チェックするプロジェクトの最大数を制限できます。
 
-    -   `output`ブロックを使用して、出力に表示されるデータ ソース情報を定義し、他の Terraform 構成が使用できるように情報を公開します。
+    - `output`ブロックを使用して、出力に表示されるデータ ソース情報を定義し、他の Terraform 構成が使用できるように情報を公開します。
 
         `output`ブロックはプログラミング言語の戻り値と同様の動作をします。詳細は[Terraformドキュメント](https://www.terraform.io/language/values/outputs)を参照してください。
 
     リソースとデータ ソースに使用可能なすべての構成を取得するには、 [Terraform プロバイダーの構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)を参照してください。
 
-2.  設定を適用するには、コマンド`terraform apply`を実行してください。続行するには、確認プロンプトで`yes`と入力してください。
+2. 設定を適用するには、コマンド`terraform apply`を実行してください。続行するには、確認プロンプトで`yes`と入力してください。
 
     プロンプトをスキップするには、 `terraform apply --auto-approve`を使用します。
 
@@ -121,9 +121,9 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
 
 `tidbcloud_serverless_cluster`リソースを使用して、 TiDB Cloud Essential クラスターを作成できます。
 
-1.  クラスターのディレクトリを作成してそこに入ります。
+1. クラスターのディレクトリを作成してそこに入ります。
 
-2.  `cluster.tf`ファイルを作成します。
+2. `cluster.tf`ファイルを作成します。
 
     以下は`cluster.tf`ファイルの例です。
 
@@ -154,11 +154,11 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
 
     `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    -   `tidbcloud_serverless_cluster`リソースを使用するには、リソース タイプを`tidbcloud_serverless_cluster`に設定します。
-    -   リソース名は必要に応じて定義できます。例： `example` 。
-    -   リソースの詳細は、プロジェクトIDと[`tidbcloud_serverless_cluster`仕様](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster)に応じて設定できます。TiDB Cloud Essentialクラスターを作成するには、リソース詳細で`auto_scaling`属性を指定する必要があります。
+    - `tidbcloud_serverless_cluster`リソースを使用するには、リソース タイプを`tidbcloud_serverless_cluster`に設定します。
+    - リソース名は必要に応じて定義できます。例： `example` 。
+    - リソースの詳細は、プロジェクトIDと[`tidbcloud_serverless_cluster`仕様](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster)に応じて設定できます。TiDB Cloud Essentialクラスターを作成するには、リソース詳細で`auto_scaling`属性を指定する必要があります。
 
-3.  `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
+3. `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 
     ```shell
     $ terraform apply
@@ -207,11 +207,11 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
 
     上記の結果では、Terraform によって実行計画が生成され、Terraform が実行するアクションが記述されています。
 
-    -   構成と状態の違いを確認できます。
-    -   `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
-    -   `known after apply` `apply`後の対応する値が取得されることを示します。
+    - 構成と状態の違いを確認できます。
+    - `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
+    - `known after apply` `apply`後の対応する値が取得されることを示します。
 
-4.  計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
+4. 計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
 
     ```shell
     Do you want to perform these actions?
@@ -226,7 +226,7 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_serverless_cluster.${resource-name}`を使用します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
+5. リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_serverless_cluster.${resource-name}`を使用します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_serverless_cluster.example
@@ -291,10 +291,10 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
 
 TiDB Cloud Essential クラスタでは、Terraform を使用してリソースを管理できます。変更可能な引数は次のとおりです。
 
--   `display_name` : クラスターの表示名。
--   `auto_scaling` : クラスターの自動スケーリング構成。
--   `endpoints.public.disabled` : パブリックエンドポイントを無効にするかどうか。
--   `automated_backup_policy.start_time` : 自動バックアップが開始される時点の UTC 時刻 ( `HH:mm`形式)。
+- `display_name` : クラスターの表示名。
+- `auto_scaling` : クラスターの自動スケーリング構成。
+- `endpoints.public.disabled` : パブリックエンドポイントを無効にするかどうか。
+- `automated_backup_policy.start_time` : 自動バックアップが開始される時点の UTC 時刻 ( `HH:mm`形式)。
 
 TiDB Cloud Essentialクラスターを変更するには、 `tidbcloud_serverless_cluster`のリソースの設定を変更し、 `terraform apply`コマンドを使用して変更を適用します。例えば、 `display_name`と`auto_scaling`リソースを次のように変更できます。
 
@@ -421,7 +421,7 @@ resource "tidbcloud_serverless_cluster" "example" {
 
 Terraform によって管理されていないTiDB Cloud Essential クラスターの場合は、インポートすることで Terraform の管理下に置くことができます。
 
-1.  新しい`tidbcloud_serverless_cluster`リソースのインポート ブロックを追加します。
+1. 新しい`tidbcloud_serverless_cluster`リソースのインポート ブロックを追加します。
 
     次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}`クラスター ID に置き換えます。
 
@@ -430,7 +430,7 @@ Terraform によって管理されていないTiDB Cloud Essential クラスタ�
           id = "${id}"
         }
 
-2.  新しい構成ファイルを生成します。
+2. 新しい構成ファイルを生成します。
 
     インポート ブロックに従って、新しい`tidbcloud_serverless_cluster`リソースの新しい構成ファイルを生成します。
 
@@ -440,7 +440,7 @@ Terraform によって管理されていないTiDB Cloud Essential クラスタ�
 
     上記のコマンドでは、既存の`.tf`名を指定しないでください。指定した場合、Terraform はエラーを返します。
 
-3.  生成された構成を確認して適用します。
+3. 生成された構成を確認して適用します。
 
     生成された構成ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
 

@@ -25,15 +25,15 @@ DM v2.0.2以降では、ソース設定ファイルでbinlogイベントフィ�
 
 一致するスキーマとテーブルにワイルドカードを使用する場合は、次の点に注意してください。
 
--   `schema-pattern`と`table-pattern` 、 `*` 、 `?` 、 `[]`を含むワイルドカードのみをサポートします。ワイルドカード一致では`*`記号は1つだけ使用でき、末尾に配置する必要があります。例えば、 `table-pattern: "t_*"`の場合、 `"t_*"`は `t_`で始まるすべてのテーブルを示します。詳細は[ワイルドカードマッチング](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)を参照してください。
+- `schema-pattern`と`table-pattern` 、 `*` 、 `?` 、 `[]`を含むワイルドカードのみをサポートします。ワイルドカード一致では`*`記号は1つだけ使用でき、末尾に配置する必要があります。例えば、 `table-pattern: "t_*"`の場合、 `"t_*"`は `t_`で始まるすべてのテーブルを示します。詳細は[ワイルドカードマッチング](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)を参照してください。
 
--   `sql-pattern`は正規表現のみをサポートします。
+- `sql-pattern`は正規表現のみをサポートします。
 
 ## パラメータの説明 {#parameter-descriptions}
 
--   [`schema-pattern` / `table-pattern`](/dm/table-selector.md) : `schema-pattern` / `table-pattern`に一致するアップストリーム MySQL または MariaDB インスタンス テーブルのbinlogイベントまたは DDL SQL ステートメントは、以下のルールによってフィルター処理されます。
+- [`schema-pattern` / `table-pattern`](/dm/table-selector.md) : `schema-pattern` / `table-pattern`に一致するアップストリーム MySQL または MariaDB インスタンス テーブルのbinlogイベントまたは DDL SQL ステートメントは、以下のルールによってフィルター処理されます。
 
--   `events` : binlogイベント配列。次の表から1つ以上の`Event`のみを選択できます。
+- `events` : binlogイベント配列。次の表から1つ以上の`Event`のみを選択できます。
 
     | イベント                         | タイプ       | 説明                                                                                         |
     | ---------------------------- | --------- | ------------------------------------------------------------------------------------------ |
@@ -78,22 +78,22 @@ DM v2.0.2以降では、ソース設定ファイルでbinlogイベントフィ�
     | `exchange table partition`   | 互換性のないDDL | 2つのテーブル間でパーティションを交換するDDL文（ `ALTER TABLE EXCHANGE PARTITION`文など）                            |
     | `coalesce table partition`   | 互換性のないDDL | テーブル内のパーティションの数を減らすDDL文（ `ALTER COALESCE PARTITION`文など）                                    |
 
--   `sql-pattern` : 指定されたDDL SQL文をフィルタリングするために使用されます。一致ルールでは正規表現がサポートされています。例： `"^DROP\\s+PROCEDURE"` 。
+- `sql-pattern` : 指定されたDDL SQL文をフィルタリングするために使用されます。一致ルールでは正規表現がサポートされています。例： `"^DROP\\s+PROCEDURE"` 。
 
--   `action` ：文字列（ `Do` / `Ignore` / `Error` ）。ルールに基づいて、以下のように判定します。
+- `action` ：文字列（ `Do` / `Ignore` / `Error` ）。ルールに基づいて、以下のように判定します。
 
-    -   `Do` : 許可リスト。binlogは次の2つの条件のいずれかでフィルタリングされます。
-        -   イベントのタイプがルールの`event`のリストにありません。
-        -   イベントの SQL ステートメントはルールの`sql-pattern`に一致しません。
-    -   `Ignore` : ブロックリスト。binlogは次の2つの条件のいずれかでフィルタリングされます。
-        -   イベントのタイプはルールの`event`のリストにあります。
-        -   イベントの SQL 文は、ルールの`sql-pattern`に一致できます。
-    -   `Error` : エラーリスト。binlogは、以下のいずれかの条件でエラーを報告します。
-        -   イベントのタイプはルールの`event`のリストにあります。
-        -   イベントの SQL 文は、ルールの`sql-pattern`に一致できます。
-    -   複数のルールが同じテーブルに一致する場合、ルールは順番に適用されます。ブロックリストはエラーリストよりも優先度が高く、エラーリストは許可リストよりも優先度が高くなります。例：
-        -   ルール`Ignore`と`Error`両方が同じテーブルに適用された場合、ルール`Ignore`が有効になります。
-        -   ルール`Error`と`Do`両方が同じテーブルに適用された場合、ルール`Error`が有効になります。
+    - `Do` : 許可リスト。binlogは次の2つの条件のいずれかでフィルタリングされます。
+        - イベントのタイプがルールの`event`のリストにありません。
+        - イベントの SQL ステートメントはルールの`sql-pattern`に一致しません。
+    - `Ignore` : ブロックリスト。binlogは次の2つの条件のいずれかでフィルタリングされます。
+        - イベントのタイプはルールの`event`のリストにあります。
+        - イベントの SQL 文は、ルールの`sql-pattern`に一致できます。
+    - `Error` : エラーリスト。binlogは、以下のいずれかの条件でエラーを報告します。
+        - イベントのタイプはルールの`event`のリストにあります。
+        - イベントの SQL 文は、ルールの`sql-pattern`に一致できます。
+    - 複数のルールが同じテーブルに一致する場合、ルールは順番に適用されます。ブロックリストはエラーリストよりも優先度が高く、エラーリストは許可リストよりも優先度が高くなります。例：
+        - ルール`Ignore`と`Error`両方が同じテーブルに適用された場合、ルール`Ignore`が有効になります。
+        - ルール`Error`と`Do`両方が同じテーブルに適用された場合、ルール`Error`が有効になります。
 
 ## 使用例 {#usage-examples}
 
@@ -103,8 +103,8 @@ DM v2.0.2以降では、ソース設定ファイルでbinlogイベントフィ�
 
 すべての削除操作をフィルタリングするには、次の 2 つのフィルタリング ルールを構成します。
 
--   `filter-table-rule`は、 `test_*`.`t_*`パターンに一致するすべてのテーブルの`TRUNCATE TABLE` 、 `DROP TABLE` 、および`DELETE STATEMENT`操作を除外します。
--   `filter-schema-rule`は`test_*`パターンに一致するすべてのスキーマの`DROP DATABASE`操作を除外します。
+- `filter-table-rule`は、 `test_*`.`t_*`パターンに一致するすべてのテーブルの`TRUNCATE TABLE` 、 `DROP TABLE` 、および`DELETE STATEMENT`操作を除外します。
+- `filter-schema-rule`は`test_*`パターンに一致するすべてのスキーマの`DROP DATABASE`操作を除外します。
 
 ```yaml
 filters:
@@ -123,8 +123,8 @@ filters:
 
 シャーディング DML ステートメントのみを移行するには、次の 2 つのフィルタリング ルールを構成します。
 
--   `do-table-rule`は、 `test_*`.`t_*`パターンに一致するすべてのテーブルの`CREATE TABLE` 、 `INSERT` 、 `UPDATE` 、および`DELETE`ステートメントのみを移行します。
--   `do-schema-rule`は、 `test_*`パターンに一致するすべてのスキーマの`CREATE DATABASE`のステートメントのみを移行します。
+- `do-table-rule`は、 `test_*`.`t_*`パターンに一致するすべてのテーブルの`CREATE TABLE` 、 `INSERT` 、 `UPDATE` 、および`DELETE`ステートメントのみを移行します。
+- `do-schema-rule`は、 `test_*`パターンに一致するすべてのスキーマの`CREATE DATABASE`のステートメントのみを移行します。
 
 > **Note:**
 >

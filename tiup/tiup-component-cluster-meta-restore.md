@@ -13,8 +13,8 @@ TiUPメタ ファイルを復元するには、 `tiup cluster meta restore`コ�
 tiup cluster meta restore <cluster-name> <backup-file> [flags]
 ```
 
--   `<cluster-name>`は操作対象となるクラスターの名前です。
--   `<backup-file>`はTiUPメタ バックアップ ファイルへのパスです。
+- `<cluster-name>`は操作対象となるクラスターの名前です。
+- `<backup-file>`はTiUPメタ バックアップ ファイルへのパスです。
 
 > **Note:**
 >
@@ -24,9 +24,9 @@ tiup cluster meta restore <cluster-name> <backup-file> [flags]
 
 ### -h, --help {#h-help}
 
--   ヘルプ情報を出力します。
--   データ型: `Boolean`
--   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
+- ヘルプ情報を出力します。
+- データ型: `Boolean`
+- このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
 ## 出力 {#output}
 

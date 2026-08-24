@@ -57,17 +57,17 @@ cd jaffle_shop
 
 このディレクトリ内:
 
--   `dbt_project.yml`は dbt プロジェクト構成ファイルであり、プロジェクト名とデータベース構成ファイルの情報が含まれています。
+- `dbt_project.yml`は dbt プロジェクト構成ファイルであり、プロジェクト名とデータベース構成ファイルの情報が含まれています。
 
--   `models`ディレクトリには、プロジェクトの SQL モデルとテーブル スキーマが含まれています。このセクションはデータ アナリストが作成します。モデルの詳細については、 [SQLモデル](https://docs.getdbt.com/docs/build/sql-models)を参照してください。
+- `models`ディレクトリには、プロジェクトの SQL モデルとテーブル スキーマが含まれています。このセクションはデータ アナリストが作成します。モデルの詳細については、 [SQLモデル](https://docs.getdbt.com/docs/build/sql-models)を参照してください。
 
--   `seeds`ディレクトリには、データベース エクスポート ツールによってダンプされた CSV ファイルが保存されます。たとえば、 Dumplingを通じて[TiDB Cloudデータをエクスポートする](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud)できます。 `jaffle_shop`プロジェクトでは、これらの CSV ファイルが処理される生データとして使用されます。
+- `seeds`ディレクトリには、データベース エクスポート ツールによってダンプされた CSV ファイルが保存されます。たとえば、 Dumplingを通じて[TiDB Cloudデータをエクスポートする](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud)できます。 `jaffle_shop`プロジェクトでは、これらの CSV ファイルが処理される生データとして使用されます。
 
 ## ステップ3：プロジェクトの設定 {#step-3-configure-the-project}
 
 プロジェクトを設定するには、以下の手順に従ってください。
 
-1.  グローバル設定を完了してください。
+1. グローバル設定を完了してください。
 
     [プロフィール項目の説明](#description-of-profile-fields)を参照し、デフォルトのグローバル プロファイル`~/.dbt/profiles.yml`編集して、 TiDB Cloudとの接続を構成できます。
 
@@ -92,7 +92,7 @@ cd jaffle_shop
 
     TiDB Cloud コンソールの接続ダイアログから`server` 、 `port` 、および`username`の値を取得できます。ダイアログを開くには、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>クラスターの名前をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。
 
-2.  プロジェクトの設定を完了してください。
+2. プロジェクトの設定を完了してください。
 
     jaffle_shop プロジェクトディレクトリで、プロジェクト設定ファイル`dbt_project.yml`を編集し、 `profile`フィールドを`jaffle_shop_tidb`に変更します。この設定により、プロジェクトは`~/.dbt/profiles.yml`ファイルで指定されているとおりにデータベースからクエリを実行できるようになります。
 
@@ -131,7 +131,7 @@ cd jaffle_shop
             materialized: view           # *.sql which in models/staging/ would bt materialized to view
     ```
 
-3.  設定を確認してください。
+3. 設定を確認してください。
 
     以下のコマンドを実行して、データベースとプロジェクトの設定が正しいかどうかを確認してください。
 
@@ -147,7 +147,7 @@ cd jaffle_shop
 
 プロジェクトの作成と設定が完了したので、次はCSVデータをロードし、ターゲットデータベースにCSVをテーブルとして具体化する段階です。
 
-1.  CSVデータを読み込み、対象データベースにテーブルとしてCSVデータを作成します。
+1. CSVデータを読み込み、対象データベースにテーブルとしてCSVデータを作成します。
 
     ```shell
     dbt seed
@@ -172,7 +172,7 @@ cd jaffle_shop
 
     結果からわかるように、シードファイルが起動され、 `analytics.raw_customers` 、 `analytics.raw_orders` 、および`analytics.raw_payments` 。
 
-2.  TiDB Cloudで結果を確認してください。
+2. TiDB Cloudで結果を確認してください。
 
     `show databases`コマンドは、dbt が作成した新しい`analytics`データベースを一覧表示します。 `show tables`コマンドは、 `analytics`データベースに、作成したテーブルに対応する 3 つのテーブルが存在することを示します。
 
@@ -224,7 +224,7 @@ cd jaffle_shop
 
 これで、設定済みのプロジェクトを実行してデータ変換を完了する準備が整いました。
 
-1.  データ変換を完了するには、dbtプロジェクトを実行してください。
+1. データ変換を完了するには、dbtプロジェクトを実行してください。
 
     ```shell
     dbt run
@@ -258,7 +258,7 @@ cd jaffle_shop
 
     結果によると、2 つのテーブル ( `analytics.customers`と`analytics.orders` ) と 3 つのビュー ( `analytics.stg_customers` 、 `analytics.stg_orders` 、および`analytics.stg_payments` ) が正常に作成されました。
 
-2.  TiDB Cloudにアクセスして、変換が成功したことを確認してください。
+2. TiDB Cloudにアクセスして、変換が成功したことを確認してください。
 
     ```sql
     mysql> USE ANALYTICS;
@@ -303,19 +303,19 @@ dbtを使用すると、プロジェクト全体の構造を表示し、すべ�
 
 視覚的なドキュメントを生成するには、以下の手順に従ってください。
 
-1.  ドキュメントを生成する：
+1. ドキュメントを生成する：
 
     ```shell
     dbt docs generate
     ```
 
-2.  サーバーを起動します：
+2. サーバーを起動します：
 
     ```shell
     dbt docs serve
     ```
 
-3.  ブラウザからドキュメントにアクセスするには、 [http://localhost:8080](http://localhost:8080)にアクセスしてください。
+3. ブラウザからドキュメントにアクセスするには、 [http://localhost:8080](http://localhost:8080)にアクセスしてください。
 
 ## プロフィール項目の説明 {#description-of-profile-fields}
 
@@ -335,21 +335,21 @@ dbt-tidb では、以下の関数を直接使用できます。使用方法に�
 
 以下の関数がサポートされています。
 
--   `bool_or`
--   `cast_bool_to_text`
--   `dateadd`
--   `datediff` 。なお、 `datediff`は dbt-util とは少し異なります。切り上げではなく切り捨てが行われます。
--   `date_trunc`
--   `hash`
--   `safe_cast`
--   `split_part`
--   `last_day`
--   `cast_bool_to_text`
--   `concat`
--   `escape_single_quotes`
--   `except`
--   `intersect`
--   `length`
--   `position`
--   `replace`
--   `right`
+- `bool_or`
+- `cast_bool_to_text`
+- `dateadd`
+- `datediff` 。なお、 `datediff`は dbt-util とは少し異なります。切り上げではなく切り捨てが行われます。
+- `date_trunc`
+- `hash`
+- `safe_cast`
+- `split_part`
+- `last_day`
+- `cast_bool_to_text`
+- `concat`
+- `escape_single_quotes`
+- `except`
+- `intersect`
+- `length`
+- `position`
+- `replace`
+- `right`

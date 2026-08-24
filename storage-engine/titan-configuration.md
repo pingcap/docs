@@ -11,13 +11,13 @@ summary: Titan の設定方法を学びます。
 
 > **Note:**
 >
-> -   TiDB v7.6.0以降、新規クラスタではTitanがデフォルトで有効化され、ワイドテーブルとJSONデータの書き込みパフォーマンスが向上します。[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)のデフォルト値は`1KB`から`32KB`に変更されました。
-> -   v7.6.0 以降のバージョンにアップグレードされた既存のクラスターは元の構成を保持します。つまり、Titan が明示的に有効になっていない場合は、引き続き RocksDB が使用されます。
-> -   クラスタをTiDB v7.6.0以降のバージョンにアップグレードする前にTitanを有効にしていた場合、アップグレード後もTitanが有効になり、アップグレード前の設定値[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)も保持されます。アップグレード前に明示的に値を設定しない場合は、アップグレード後のクラスタ構成の安定性を確保するために、旧バージョンのデフォルト値`1KB`が保持されます。
+> - TiDB v7.6.0以降、新規クラスタではTitanがデフォルトで有効化され、ワイドテーブルとJSONデータの書き込みパフォーマンスが向上します。[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)のデフォルト値は`1KB`から`32KB`に変更されました。
+> - v7.6.0 以降のバージョンにアップグレードされた既存のクラスターは元の構成を保持します。つまり、Titan が明示的に有効になっていない場合は、引き続き RocksDB が使用されます。
+> - クラスタをTiDB v7.6.0以降のバージョンにアップグレードする前にTitanを有効にしていた場合、アップグレード後もTitanが有効になり、アップグレード前の設定値[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)も保持されます。アップグレード前に明示的に値を設定しない場合は、アップグレード後のクラスタ構成の安定性を確保するために、旧バージョンのデフォルト値`1KB`が保持されます。
 
 TitanはRocksDBと互換性があるため、RocksDBを使用する既存のTiKVインスタンスでTitanを直接有効化できます。Titanを有効化するには、以下のいずれかの方法があります。
 
--   方法 1: TiUPを使用してクラスターをデプロイした場合は、次の例に示すように、 `tiup cluster edit-config ${cluster-name}`コマンドを実行して TiKV 構成ファイルを編集できます。
+- 方法 1: TiUPを使用してクラスターをデプロイした場合は、次の例に示すように、 `tiup cluster edit-config ${cluster-name}`コマンドを実行して TiKV 構成ファイルを編集できます。
 
     ```shell
     tikv:
@@ -32,14 +32,14 @@ TitanはRocksDBと互換性があるため、RocksDBを使用する既存のTiKV
 
     詳細なコマンドについては[TiUPを使用して構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 
--   方法 2: TiKV 構成ファイルを直接編集して Titan を有効にします (本番環境では推奨さ**れません**)。
+- 方法 2: TiKV 構成ファイルを直接編集して Titan を有効にします (本番環境では推奨さ**れません**)。
 
     ```toml
     [rocksdb.titan]
     enabled = true
     ```
 
--   方法3: TiDB Operatorの`${cluster_name}/tidb-cluster.yaml`構成ファイルを編集します。
+- 方法3: TiDB Operatorの`${cluster_name}/tidb-cluster.yaml`構成ファイルを編集します。
 
     ```yaml
     spec:
@@ -134,17 +134,17 @@ level-merge = false
 
 Titanを無効にするには、オプション`rocksdb.defaultcf.titan.blob-run-mode`設定します。オプション`blob-run-mode`のオプション値は次のとおりです。
 
--   オプションを`normal`に設定すると、Titan は読み取りおよび書き込み操作を通常どおり実行します。
--   オプションを`read-only`に設定すると、値のサイズに関係なく、新しく書き込まれたすべての値が RocksDB に書き込まれます。
--   このオプションを`fallback`に設定すると、新しく書き込まれたすべての値は、値のサイズに関係なく、RocksDBに書き込まれます。また、Titan BLOBファイルに保存されたすべての圧縮された値は、自動的にRocksDBに戻されます。
+- オプションを`normal`に設定すると、Titan は読み取りおよび書き込み操作を通常どおり実行します。
+- オプションを`read-only`に設定すると、値のサイズに関係なく、新しく書き込まれたすべての値が RocksDB に書き込まれます。
+- このオプションを`fallback`に設定すると、新しく書き込まれたすべての値は、値のサイズに関係なく、RocksDBに書き込まれます。また、Titan BLOBファイルに保存されたすべての圧縮された値は、自動的にRocksDBに戻されます。
 
 既存および将来のすべてのデータに対してTitanを無効にするには、以下の手順に従ってください。手順2はオンライントラフィックのパフォーマンスに大きな影響を与えるため、省略できます。実際、手順2を実行しなくても、TitanからRocksDBへのデータ移動時にデータ圧縮によって余分なI/OとCPUリソースが消費され、TiKVのI/OまたはCPUリソースが制限されている場合はパフォーマンスが低下します（最大50%低下する場合もあります）。
 
-1.  Titanを無効化したいTiKVノードの設定を更新します。設定の更新は2つの方法で行えます。
+1. Titanを無効化したいTiKVノードの設定を更新します。設定の更新は2つの方法で行えます。
 
-    -   `tiup cluster edit-config`を実行し、設定ファイルを編集して`tiup cluster reload -R tikv`を実行します。
+    - `tiup cluster edit-config`を実行し、設定ファイルを編集して`tiup cluster reload -R tikv`を実行します。
 
-    -   構成ファイルを手動で更新し、TiKV を再起動します。
+    - 構成ファイルを手動で更新し、TiKV を再起動します。
 
         ```toml
         [rocksdb.defaultcf.titan]
@@ -156,7 +156,7 @@ Titanを無効にするには、オプション`rocksdb.defaultcf.titan.blob-run
     >
     > TitanとRocksDBの両方のデータを収容するのに十分なディスク容量がない場合は、デフォルト値の`0.5` （ [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio)を使用することをお勧めします。一般的に、使用可能なディスク容量が50%未満の場合は、デフォルト値を使用することをお勧めします。これは、 `discardable-ratio = 1.0`設定するとRocksDBデータが増加し続けるためです。同時に、Titan内の既存のBLOBファイルをリサイクルするには、そのファイル内のすべてのデータをRocksDBに変換する必要があり、これは時間のかかるプロセスです。ただし、ディスクサイズが十分に大きい場合は、 `discardable-ratio = 1.0`設定すると、圧縮時にBLOBファイル自体のGCを削減できるため、帯域幅を節約できます。
 
-2.  （オプション）tikv-ctlを使用してフルコンパクションを実行します。このプロセスは大量のI/OとCPUリソースを消費します。
+2. （オプション）tikv-ctlを使用してフルコンパクションを実行します。このプロセスは大量のI/OとCPUリソースを消費します。
 
     > **Warning:**
     >
@@ -166,9 +166,9 @@ Titanを無効にするには、オプション`rocksdb.defaultcf.titan.blob-run
     tikv-ctl --pd <PD_ADDR> compact-cluster --bottommost force
     ```
 
-3.  圧縮が完了したら、 **TiKV-Details** / **Titan - kv**の下の**Blob ファイル数**メトリックが`0`に減少するまで待ちます。
+3. 圧縮が完了したら、 **TiKV-Details** / **Titan - kv**の下の**Blob ファイル数**メトリックが`0`に減少するまで待ちます。
 
-4.  TiDB v8.5.0 以降のバージョンの場合、これらの TiKV ノードの構成を更新して Titan を無効にします。
+4. TiDB v8.5.0 以降のバージョンの場合、これらの TiKV ノードの構成を更新して Titan を無効にします。
 
     > **Warning:**
     >
@@ -190,8 +190,8 @@ level-merge = true
 
 レベルマージを有効にすると、次の利点があります。
 
--   Titan 範囲クエリのパフォーマンスが大幅に向上しました。
--   Titan GC によるフォアグラウンド書き込み操作への影響を軽減し、書き込みパフォーマンスを向上させます。
--   Titan のスペース増幅とディスク使用量を削減します (デフォルト構成でのディスク使用量と比較して)。
+- Titan 範囲クエリのパフォーマンスが大幅に向上しました。
+- Titan GC によるフォアグラウンド書き込み操作への影響を軽減し、書き込みパフォーマンスを向上させます。
+- Titan のスペース増幅とディスク使用量を削減します (デフォルト構成でのディスク使用量と比較して)。
 
 したがって、Level Merge を有効にした場合の書き込み増幅は Titan の場合よりもわずかに高くなりますが、ネイティブ RocksDB の場合よりも低くなります。

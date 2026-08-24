@@ -52,125 +52,125 @@ insert into t select * from t;
 
 スロークエリの基本：
 
--   `Time` : ログの印刷時間。
--   `Query_time` : ステートメントの実行時間。
--   `Parse_time` : ステートメントの解析時間。
--   `Compile_time` : クエリ最適化の所要時間。
--   `Optimize_time` : 実行計画の最適化に要した時間。
--   `Wait_TS` : ステートメントがトランザクションのタイムスタンプを取得するまでの待機時間。
--   `Query` : SQL ステートメント。 `Query`はスローログには出力されませんが、対応するフィールドは、スローログがメモリテーブルにマッピングされた後に`Query`と呼ばれます。
--   `Digest` : SQL ステートメントのフィンガープリント。
--   `Txn_start_ts` : トランザクションの開始タイムスタンプと一意のID。この値を使用して、トランザクション関連のログを検索できます。
--   `Is_internal` : SQL ステートメントが TiDB 内部で実行されるかどうか。 `true`は、SQL ステートメントが TiDB 内部で実行されることを示し、 `false`は、SQL ステートメントがユーザーによって実行されることを示します。
--   `Index_names` : ステートメントで使用されるインデックス名。
--   `Stats` : このクエリ中に使用される統計情報の健全性状態、内部バージョン、総行数、変更された行数、およびロード状態。 `pseudo`統計情報が健全でないことを示します。オプティマイザが完全にロードされていない統計情報を使用しようとすると、内部状態も出力されます。たとえば、 `t1:439478225786634241[105000;5000][col1:allEvicted][idx1:allEvicted]`の意味は次のように理解できます。
-    -   `t1` : テーブル`t1`の統計情報は、クエリ最適化中に使用されます。
-    -   `439478225786634241` : 内部バージョン。
-    -   `105000` : 統計情報における行の総数。
-    -   `5000` : 前回の統計収集以降に変更された行数。
-    -   `col1:allEvicted` : 列`col1`の統計情報が完全には読み込まれていません。
-    -   `idx1:allEvicted` : インデックス`idx1`の統計情報が完全には読み込まれていません。
--   `Succ` : ステートメントが正常に実行されたかどうか。
--   `Backoff_time` : ステートメントが再試行を必要とするエラーに遭遇した場合の、再試行までの待機時間。このような一般的なエラーには、 `lock occurs` 、 `Region split` 、および`tikv server is busy`などがあります。
--   `Plan` : ステートメントの実行計画。 `SELECT tidb_decode_plan('xxx...')`ステートメントを実行して、具体的な実行計画を解析します。
--   `Binary_plan` : バイナリエンコードされたステートメントの実行計画。特定の実行計画を解析するには、 [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan)ステートメントを実行します。 `Plan`および`Binary_plan`フィールドには同じ情報が含まれています。ただし、これら 2 つのフィールドから解析される実行計画の形式は異なります。
--   `Prepared` : このステートメントが`Prepare`または`Execute`の要求であるかどうか。
--   `Plan_from_cache` : このステートメントが実行プランキャッシュにヒットするかどうか。
--   `Plan_from_binding` : このステートメントがバインドされた実行計画を使用するかどうか。
--   `Has_more_results` : このステートメントには、ユーザーが取得できる結果がさらにあるかどうか。
--   `Rewrite_time` : このステートメントのクエリを書き換えるのに要した時間。
--   `Preproc_subqueries` : ステートメント内で事前に実行されるサブクエリの数。たとえば、 `where id in (select if from t)`サブクエリが事前に実行される場合があります。
--   `Preproc_subqueries_time` : このステートメントのサブクエリを事前に実行するために要した時間。
--   `Exec_retry_count` : このステートメントの再試行回数。このフィールドは通常、ロックが失敗した場合にステートメントが再試行される悲観的トランザクションに使用されます。
--   `Exec_retry_time` : このステートメントの実行再試行時間。たとえば、ステートメントが合計 3 回実行された場合 (最初の 2 回は失敗)、 `Exec_retry_time`は最初の 2 回の実行の合計時間を意味します。最後の実行の時間は、 `Query_time`から`Exec_retry_time`を引いた時間です。
--   `KV_total` : このステートメントによって、TiKV またはTiFlash上のすべての RPC リクエストに費やされた時間。
--   `PD_total` : このステートメントによる PD 上のすべての RPC リクエストに費やされた時間。
--   `Backoff_total` : このステートメントの実行中にすべてのバックオフに費やされた時間。
--   `Write_sql_response_total` : このステートメントによって結果をクライアントに送信するのに要した時間。
--   `Result_rows` : クエリ結果の行数。
--   `IsExplicitTxn` : このステートメントが明示的なトランザクションに含まれているかどうか。値が`false`の場合、トランザクションは`autocommit=1`となり、ステートメントは実行後に自動的にコミットされます。
--   `Warnings` : このステートメントの実行中に生成される JSON 形式の警告。これらの警告は、一般的に[`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md)ステートメントの出力と一致しますが、より詳細な診断情報を提供する追加の警告が含まれる場合があります。これらの追加の警告は`IsExtra: true`としてマークされます。
+- `Time` : ログの印刷時間。
+- `Query_time` : ステートメントの実行時間。
+- `Parse_time` : ステートメントの解析時間。
+- `Compile_time` : クエリ最適化の所要時間。
+- `Optimize_time` : 実行計画の最適化に要した時間。
+- `Wait_TS` : ステートメントがトランザクションのタイムスタンプを取得するまでの待機時間。
+- `Query` : SQL ステートメント。 `Query`はスローログには出力されませんが、対応するフィールドは、スローログがメモリテーブルにマッピングされた後に`Query`と呼ばれます。
+- `Digest` : SQL ステートメントのフィンガープリント。
+- `Txn_start_ts` : トランザクションの開始タイムスタンプと一意のID。この値を使用して、トランザクション関連のログを検索できます。
+- `Is_internal` : SQL ステートメントが TiDB 内部で実行されるかどうか。 `true`は、SQL ステートメントが TiDB 内部で実行されることを示し、 `false`は、SQL ステートメントがユーザーによって実行されることを示します。
+- `Index_names` : ステートメントで使用されるインデックス名。
+- `Stats` : このクエリ中に使用される統計情報の健全性状態、内部バージョン、総行数、変更された行数、およびロード状態。 `pseudo`統計情報が健全でないことを示します。オプティマイザが完全にロードされていない統計情報を使用しようとすると、内部状態も出力されます。たとえば、 `t1:439478225786634241[105000;5000][col1:allEvicted][idx1:allEvicted]`の意味は次のように理解できます。
+    - `t1` : テーブル`t1`の統計情報は、クエリ最適化中に使用されます。
+    - `439478225786634241` : 内部バージョン。
+    - `105000` : 統計情報における行の総数。
+    - `5000` : 前回の統計収集以降に変更された行数。
+    - `col1:allEvicted` : 列`col1`の統計情報が完全には読み込まれていません。
+    - `idx1:allEvicted` : インデックス`idx1`の統計情報が完全には読み込まれていません。
+- `Succ` : ステートメントが正常に実行されたかどうか。
+- `Backoff_time` : ステートメントが再試行を必要とするエラーに遭遇した場合の、再試行までの待機時間。このような一般的なエラーには、 `lock occurs` 、 `Region split` 、および`tikv server is busy`などがあります。
+- `Plan` : ステートメントの実行計画。 `SELECT tidb_decode_plan('xxx...')`ステートメントを実行して、具体的な実行計画を解析します。
+- `Binary_plan` : バイナリエンコードされたステートメントの実行計画。特定の実行計画を解析するには、 [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan)ステートメントを実行します。 `Plan`および`Binary_plan`フィールドには同じ情報が含まれています。ただし、これら 2 つのフィールドから解析される実行計画の形式は異なります。
+- `Prepared` : このステートメントが`Prepare`または`Execute`の要求であるかどうか。
+- `Plan_from_cache` : このステートメントが実行プランキャッシュにヒットするかどうか。
+- `Plan_from_binding` : このステートメントがバインドされた実行計画を使用するかどうか。
+- `Has_more_results` : このステートメントには、ユーザーが取得できる結果がさらにあるかどうか。
+- `Rewrite_time` : このステートメントのクエリを書き換えるのに要した時間。
+- `Preproc_subqueries` : ステートメント内で事前に実行されるサブクエリの数。たとえば、 `where id in (select if from t)`サブクエリが事前に実行される場合があります。
+- `Preproc_subqueries_time` : このステートメントのサブクエリを事前に実行するために要した時間。
+- `Exec_retry_count` : このステートメントの再試行回数。このフィールドは通常、ロックが失敗した場合にステートメントが再試行される悲観的トランザクションに使用されます。
+- `Exec_retry_time` : このステートメントの実行再試行時間。たとえば、ステートメントが合計 3 回実行された場合 (最初の 2 回は失敗)、 `Exec_retry_time`は最初の 2 回の実行の合計時間を意味します。最後の実行の時間は、 `Query_time`から`Exec_retry_time`を引いた時間です。
+- `KV_total` : このステートメントによって、TiKV またはTiFlash上のすべての RPC リクエストに費やされた時間。
+- `PD_total` : このステートメントによる PD 上のすべての RPC リクエストに費やされた時間。
+- `Backoff_total` : このステートメントの実行中にすべてのバックオフに費やされた時間。
+- `Write_sql_response_total` : このステートメントによって結果をクライアントに送信するのに要した時間。
+- `Result_rows` : クエリ結果の行数。
+- `IsExplicitTxn` : このステートメントが明示的なトランザクションに含まれているかどうか。値が`false`の場合、トランザクションは`autocommit=1`となり、ステートメントは実行後に自動的にコミットされます。
+- `Warnings` : このステートメントの実行中に生成される JSON 形式の警告。これらの警告は、一般的に[`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md)ステートメントの出力と一致しますが、より詳細な診断情報を提供する追加の警告が含まれる場合があります。これらの追加の警告は`IsExtra: true`としてマークされます。
 
 以下の項目はトランザクションの実行に関連しています。
 
--   `Prewrite_time` : 2 フェーズ トランザクション コミットの最初のフェーズ (プリライト) の期間。
--   `Commit_time` : 2 フェーズ トランザクション コミットの第 2 フェーズ (コミット) の期間。
--   `Get_commit_ts_time` : 2 フェーズ トランザクション コミットの第 2 フェーズ (コミット) で`commit_ts`を取得するのに費やされた時間。
--   `Local_latch_wait_time` : TiDB が 2 相トランザクションコミットの第 2 相 (コミット) の前にロックを待機するのに費やす時間。
--   `Write_keys` : トランザクションが TiKV の Write CF に書き込むキーの数。
--   `Write_size` : トランザクションがコミットされたときに書き込まれるキーまたは値の合計サイズ。
--   `Prewrite_region` : 2フェーズトランザクションコミットの第1フェーズ（プリライト）に関与するTiKVリージョンの数。各リージョンはリモートプロシージャコールをトリガーします。
--   `Wait_prewrite_binlog_time` : トランザクションがコミットされたときにバイナリログを書き込むのに要した時間。v8.4.0以降、TiDB Binlogは削除され、このフィールドには値がありません。
--   `Resolve_lock_time` : トランザクションのコミット中にロックが発生した場合、ロックを解消するか、ロックの有効期限が切れるまで待機する時間。
+- `Prewrite_time` : 2 フェーズ トランザクション コミットの最初のフェーズ (プリライト) の期間。
+- `Commit_time` : 2 フェーズ トランザクション コミットの第 2 フェーズ (コミット) の期間。
+- `Get_commit_ts_time` : 2 フェーズ トランザクション コミットの第 2 フェーズ (コミット) で`commit_ts`を取得するのに費やされた時間。
+- `Local_latch_wait_time` : TiDB が 2 相トランザクションコミットの第 2 相 (コミット) の前にロックを待機するのに費やす時間。
+- `Write_keys` : トランザクションが TiKV の Write CF に書き込むキーの数。
+- `Write_size` : トランザクションがコミットされたときに書き込まれるキーまたは値の合計サイズ。
+- `Prewrite_region` : 2フェーズトランザクションコミットの第1フェーズ（プリライト）に関与するTiKVリージョンの数。各リージョンはリモートプロシージャコールをトリガーします。
+- `Wait_prewrite_binlog_time` : トランザクションがコミットされたときにバイナリログを書き込むのに要した時間。v8.4.0以降、TiDB Binlogは削除され、このフィールドには値がありません。
+- `Resolve_lock_time` : トランザクションのコミット中にロックが発生した場合、ロックを解消するか、ロックの有効期限が切れるまで待機する時間。
 
 メモリ使用量フィールド:
 
--   `Mem_max` : SQL ステートメントの実行期間中に使用される最大メモリ領域 (単位はバイト)。
+- `Mem_max` : SQL ステートメントの実行期間中に使用される最大メモリ領域 (単位はバイト)。
 
 ハードディスクの項目:
 
--   `Disk_max` : SQL ステートメントの実行期間中に使用される最大ディスク容量 (単位はバイト)。
+- `Disk_max` : SQL ステートメントの実行期間中に使用される最大ディスク容量 (単位はバイト)。
 
 ユーザーフィールド:
 
--   `User` : このステートメントを実行するユーザーの名前。
--   `Host` : このステートメントのホスト名。
--   `Conn_ID` : 接続ID（セッションID）。たとえば、キーワード`con:3`を使用して、セッションIDが`3`のログを検索できます。
--   `DB` : 現在のデータベース。
+- `User` : このステートメントを実行するユーザーの名前。
+- `Host` : このステートメントのホスト名。
+- `Conn_ID` : 接続ID（セッションID）。たとえば、キーワード`con:3`を使用して、セッションIDが`3`のログを検索できます。
+- `DB` : 現在のデータベース。
 
 TiKVコプロセッサータスクフィールド：
 
--   `Request_count` : ステートメントが送信するコプロセッサー要求の数。
--   `Total_keys` :コプロセッサーがスキャンしたキーの数。
--   `Process_time` : TiKV における SQL ステートメントの合計処理時間。データは TiKV に同時送信されるため、この値は`Query_time`を超える場合があります。
--   `Wait_time` : TiKV におけるステートメントの合計待機時間。TiKV のコプロセッサーは限られた数のスレッドを実行するため、コプロセッサーのすべてのスレッドが動作している場合、リクエストがキューに蓄積される可能性があります。キュー内のリクエストの処理に時間がかかると、後続のリクエストの待機時間が増加します。
--   `Process_keys` :コプロセッサーが処理したキーの数。 `total_keys`と比較すると、 `processed_keys`には MVCC の古いバージョンは含まれていません。 `processed_keys`と`total_keys`の間に大きな差があることから、多くの古いバージョンが存在することがわかります。
--   `Num_cop_tasks` : このステートメントによって送信されたコプロセッサータスクの数。
--   `Cop_proc_avg` : RocksDB のミューテックスなど、カウントできない待機時間を含む、cop-tasks の平均実行時間。
--   `Cop_proc_p90` : cop-tasks の P90 実行時間。
--   `Cop_proc_max` : cop-tasks の最大実行時間。
--   `Cop_proc_addr` : 実行時間が最も長い cop-task のアドレス。
--   `Cop_wait_avg` : リクエストのキューイングとスナップショットの取得時間を含む、cop-tasks の平均待機時間。
--   `Cop_wait_p90` : cop-tasks の P90 待機時間。
--   `Cop_wait_max` : cop-tasks の最大待機時間。
--   `Cop_wait_addr` : 待ち時間が最も長い cop-task のアドレス。
--   `Rocksdb_delete_skipped_count` : RocksDB がデータをスキャンする際に検出する削除済み (tombstone) キーの数。
--   `Rocksdb_key_skipped_count` : RocksDB がデータをスキャンする際に遭遇するすべてのキーの数。
--   `Rocksdb_block_cache_hit_count` : RocksDB がブロックキャッシュからデータを読み取る回数。
--   `Rocksdb_block_read_count` : RocksDB がファイルシステムからデータを読み取る回数。
--   `Rocksdb_block_read_byte` : RocksDB がファイルシステムから読み取るデータ量。
--   `Rocksdb_block_read_time` : RocksDB がファイルシステムからデータを読み取るのにかかる時間。
--   `Cop_backoff_{backoff-type}_total_times` : エラーによって発生したバックオフの合計回数。
--   `Cop_backoff_{backoff-type}_total_time` : エラーによって発生したバックオフの合計時間。
--   `Cop_backoff_{backoff-type}_max_time` : エラーによって発生したバックオフの最長時間。
--   `Cop_backoff_{backoff-type}_max_addr` : エラーによって最も長いバックオフ時間が発生した cop-task のアドレス。
--   `Cop_backoff_{backoff-type}_avg_time` : エラーによって発生するバックオフの平均時間。
--   `Cop_backoff_{backoff-type}_p90_time` : エラーによって発生した P90 パーセンタイルバックオフ時間。
+- `Request_count` : ステートメントが送信するコプロセッサー要求の数。
+- `Total_keys` :コプロセッサーがスキャンしたキーの数。
+- `Process_time` : TiKV における SQL ステートメントの合計処理時間。データは TiKV に同時送信されるため、この値は`Query_time`を超える場合があります。
+- `Wait_time` : TiKV におけるステートメントの合計待機時間。TiKV のコプロセッサーは限られた数のスレッドを実行するため、コプロセッサーのすべてのスレッドが動作している場合、リクエストがキューに蓄積される可能性があります。キュー内のリクエストの処理に時間がかかると、後続のリクエストの待機時間が増加します。
+- `Process_keys` :コプロセッサーが処理したキーの数。 `total_keys`と比較すると、 `processed_keys`には MVCC の古いバージョンは含まれていません。 `processed_keys`と`total_keys`の間に大きな差があることから、多くの古いバージョンが存在することがわかります。
+- `Num_cop_tasks` : このステートメントによって送信されたコプロセッサータスクの数。
+- `Cop_proc_avg` : RocksDB のミューテックスなど、カウントできない待機時間を含む、cop-tasks の平均実行時間。
+- `Cop_proc_p90` : cop-tasks の P90 実行時間。
+- `Cop_proc_max` : cop-tasks の最大実行時間。
+- `Cop_proc_addr` : 実行時間が最も長い cop-task のアドレス。
+- `Cop_wait_avg` : リクエストのキューイングとスナップショットの取得時間を含む、cop-tasks の平均待機時間。
+- `Cop_wait_p90` : cop-tasks の P90 待機時間。
+- `Cop_wait_max` : cop-tasks の最大待機時間。
+- `Cop_wait_addr` : 待ち時間が最も長い cop-task のアドレス。
+- `Rocksdb_delete_skipped_count` : RocksDB がデータをスキャンする際に検出する削除済み (tombstone) キーの数。
+- `Rocksdb_key_skipped_count` : RocksDB がデータをスキャンする際に遭遇するすべてのキーの数。
+- `Rocksdb_block_cache_hit_count` : RocksDB がブロックキャッシュからデータを読み取る回数。
+- `Rocksdb_block_read_count` : RocksDB がファイルシステムからデータを読み取る回数。
+- `Rocksdb_block_read_byte` : RocksDB がファイルシステムから読み取るデータ量。
+- `Rocksdb_block_read_time` : RocksDB がファイルシステムからデータを読み取るのにかかる時間。
+- `Cop_backoff_{backoff-type}_total_times` : エラーによって発生したバックオフの合計回数。
+- `Cop_backoff_{backoff-type}_total_time` : エラーによって発生したバックオフの合計時間。
+- `Cop_backoff_{backoff-type}_max_time` : エラーによって発生したバックオフの最長時間。
+- `Cop_backoff_{backoff-type}_max_addr` : エラーによって最も長いバックオフ時間が発生した cop-task のアドレス。
+- `Cop_backoff_{backoff-type}_avg_time` : エラーによって発生するバックオフの平均時間。
+- `Cop_backoff_{backoff-type}_p90_time` : エラーによって発生した P90 パーセンタイルバックオフ時間。
 
 `backoff-type`は、一般的に以下の種類が含まれます。
 
--   `tikvRPC` : TiKV への RPC リクエストの送信に失敗したために発生したバックオフ。
--   `tiflashRPC` : TiFlashへの RPC リクエストの送信に失敗したために発生したバックオフ。
--   `pdRPC` : PD への RPC リクエストの送信に失敗したために発生したバックオフ。
--   `txnLock` : ロックの競合によって発生するバックオフ。
--   `regionMiss` : リージョンが分割またはマージされた後に TiDBリージョンキャッシュ情報が古くなった場合に、リクエストの処理が失敗することによって発生するバックオフ。
--   `regionScheduling` : リージョンがスケジュールされていてLeaderが選択されていない場合、TiDB はリクエストを処理できないため、バックオフが発生します。
--   `tikvServerBusy` : TiKV の負荷が高すぎて新しいリクエストを処理できないために発生するバックオフ。
--   `tiflashServerBusy` : TiFlash の負荷が高すぎて新しいリクエストを処理できないために発生するバックオフ。
--   `tikvDiskFull` : TiKV ディスクがいっぱいになったことが原因で発生したバックオフ。
--   `txnLockFast` : データ読み取り中にロックが発生したことが原因で発生するバックオフ。
+- `tikvRPC` : TiKV への RPC リクエストの送信に失敗したために発生したバックオフ。
+- `tiflashRPC` : TiFlashへの RPC リクエストの送信に失敗したために発生したバックオフ。
+- `pdRPC` : PD への RPC リクエストの送信に失敗したために発生したバックオフ。
+- `txnLock` : ロックの競合によって発生するバックオフ。
+- `regionMiss` : リージョンが分割またはマージされた後に TiDBリージョンキャッシュ情報が古くなった場合に、リクエストの処理が失敗することによって発生するバックオフ。
+- `regionScheduling` : リージョンがスケジュールされていてLeaderが選択されていない場合、TiDB はリクエストを処理できないため、バックオフが発生します。
+- `tikvServerBusy` : TiKV の負荷が高すぎて新しいリクエストを処理できないために発生するバックオフ。
+- `tiflashServerBusy` : TiFlash の負荷が高すぎて新しいリクエストを処理できないために発生するバックオフ。
+- `tikvDiskFull` : TiKV ディスクがいっぱいになったことが原因で発生したバックオフ。
+- `txnLockFast` : データ読み取り中にロックが発生したことが原因で発生するバックオフ。
 
 リソース制御に関連する分野：
 
--   `Resource_group` : ステートメントがバインドされているリソース グループ。
--   `Request_unit_read` : ステートメントによって消費された読み取り RU の合計。
--   `Request_unit_write` : ステートメントによって消費された書き込み RU の合計。
--   `Time_queued_by_rc` : ステートメントが利用可能なリソースを待機する合計時間。
+- `Resource_group` : ステートメントがバインドされているリソース グループ。
+- `Request_unit_read` : ステートメントによって消費された読み取り RU の合計。
+- `Request_unit_write` : ステートメントによって消費された書き込み RU の合計。
+- `Time_queued_by_rc` : ステートメントが利用可能なリソースを待機する合計時間。
 
 ストレージエンジンに関連する分野：
 
--   `Storage_from_kv` : v8.5.5 で導入され、このステートメントが TiKV からデータを読み取ったかどうかを示します。
--   `Storage_from_mpp` : v8.5.5 で導入され、このステートメントがTiFlashからデータを読み取ったかどうかを示します。
+- `Storage_from_kv` : v8.5.5 で導入され、このステートメントが TiKV からデータを読み取ったかどうかを示します。
+- `Storage_from_mpp` : v8.5.5 で導入され、このステートメントがTiFlashからデータを読み取ったかどうかを示します。
 
 ## `tidb_slow_log_rules`を使用する {#use-tidb_slow_log_rules}
 
@@ -178,30 +178,30 @@ TiKVコプロセッサータスクフィールド：
 
 スロークエリログのトリガー動作は`tidb_slow_log_rules`の設定に依存します。
 
--   `tidb_slow_log_rules`が設定されていない場合、スロークエリログのトリガーは引き続き[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) (ミリ秒単位) に依存します。
--   `tidb_slow_log_rules`が設定されている場合、設定済みのルールが優先され、 [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)は無視されます。
+- `tidb_slow_log_rules`が設定されていない場合、スロークエリログのトリガーは引き続き[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) (ミリ秒単位) に依存します。
+- `tidb_slow_log_rules`が設定されている場合、設定済みのルールが優先され、 [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)は無視されます。
 
 各フィールドの意味、診断値、および背景情報の詳細については、[フィールドの説明](#fields-description)を参照してください。
 
 ### 統一されたルール構文と型制約 {#unified-rule-syntax-and-type-constraints}
 
--   ルール容量と分離: `SESSION`と`GLOBAL`はそれぞれ最大 10 個のルールをサポートします。1 つのセッションで最大 20 個のアクティブなルールを持つことができます。ルールは`;`で分離されます。
--   条件の形式: 各条件は`field_name:value`の形式を使用します。単一のルール内の複数の条件は`,`で区切られます。
--   フィールドとスコープ: フィールド名は大文字と小文字を区別しません (アンダースコアやその他の文字は保持されます)。 `SESSION`ルールは`Conn_ID`をサポートしていません。 `GLOBAL`ルールのみが`Conn_ID`をサポートしています。
--   意味の一致：
-    -   数値フィールドは`>=`を使用して照合されます。文字列フィールドとブール値フィールドは等価性 ( `=` ) を使用して照合されます。
-    -   `DB`と`Resource_group`のマッチングは、大文字と小文字を区別しません。
-    -   `>` 、 `<` 、 `!=`などの明示的な演算子はサポートされていません。
+- ルール容量と分離: `SESSION`と`GLOBAL`はそれぞれ最大 10 個のルールをサポートします。1 つのセッションで最大 20 個のアクティブなルールを持つことができます。ルールは`;`で分離されます。
+- 条件の形式: 各条件は`field_name:value`の形式を使用します。単一のルール内の複数の条件は`,`で区切られます。
+- フィールドとスコープ: フィールド名は大文字と小文字を区別しません (アンダースコアやその他の文字は保持されます)。 `SESSION`ルールは`Conn_ID`をサポートしていません。 `GLOBAL`ルールのみが`Conn_ID`をサポートしています。
+- 意味の一致：
+    - 数値フィールドは`>=`を使用して照合されます。文字列フィールドとブール値フィールドは等価性 ( `=` ) を使用して照合されます。
+    - `DB`と`Resource_group`のマッチングは、大文字と小文字を区別しません。
+    - `>` 、 `<` 、 `!=`などの明示的な演算子はサポートされていません。
 
 型制約は以下のとおりです。
 
--   数値型（ `int64` 、 `uint64` 、 `float64` ）は、いずれも`>= 0`を必要とします。負の値を指定すると、解析エラーが発生します。
-    -   `int64` : 最大値は`2^63-1`です。
-    -   `uint64` : 最大値は`2^64-1`です。
-    -   `float64` : 一般的な上限はおおよそ`1.79e308`です。現在、解析は Go の`ParseFloat`を使用して行われています。 `NaN` / `Inf`は解析できますが、常に真または常に偽となるルールにつながる可能性があります。これらを使用することは推奨されません。
--   `bool` : `true` / `false` 、 `1` / `0` 、および`t` / `f`をサポートします (大文字小文字を区別しません)。
--   `string` : 現在`,` (条件区切り文字) または`;` (ルール区切り文字) を含む文字列は、引用符 (シングルクォートまたはダブルクォート) があってもサポートされていません。エスケープ処理もサポートされていません。
--   重複するフィールド：単一のルール内で同じフィールドが複数回指定されている場合、最後に指定されたフィールドが有効になります。
+- 数値型（ `int64` 、 `uint64` 、 `float64` ）は、いずれも`>= 0`を必要とします。負の値を指定すると、解析エラーが発生します。
+    - `int64` : 最大値は`2^63-1`です。
+    - `uint64` : 最大値は`2^64-1`です。
+    - `float64` : 一般的な上限はおおよそ`1.79e308`です。現在、解析は Go の`ParseFloat`を使用して行われています。 `NaN` / `Inf`は解析できますが、常に真または常に偽となるルールにつながる可能性があります。これらを使用することは推奨されません。
+- `bool` : `true` / `false` 、 `1` / `0` 、および`t` / `f`をサポートします (大文字小文字を区別しません)。
+- `string` : 現在`,` (条件区切り文字) または`;` (ルール区切り文字) を含む文字列は、引用符 (シングルクォートまたはダブルクォート) があってもサポートされていません。エスケープ処理もサポートされていません。
+- 重複するフィールド：単一のルール内で同じフィールドが複数回指定されている場合、最後に指定されたフィールドが有効になります。
 
 ### サポートされているフィールド {#supported-fields}
 
@@ -253,37 +253,37 @@ TiKVコプロセッサータスクフィールド：
 
 ### 効果的な行動とマッチング順序 {#effective-behavior-and-matching-order}
 
--   ルール更新動作: `SET [SESSION|GLOBAL] tidb_slow_log_rules = '...'`の実行ごとに、既存のルールに追加するのではなく、そのスコープ内の既存のルールを上書きします。
--   ルールクリア動作: `SET [SESSION|GLOBAL] tidb_slow_log_rules = ''`対応するスコープ内のルールをクリアします。
--   現在のセッションに、`SESSION`ルール、現在の`Conn_ID`に対する`GLOBAL`ルール、または`Conn_ID`を含まない一般的なグローバルルールなど、適用可能な`tidb_slow_log_rules`がある場合、スロークエリログの出力はルールのマッチング結果によって決定され、 `tidb_slow_log_threshold`は使用されなくなります。
--   現在のセッションに適用可能なルールがない場合、たとえば`SESSION`と`GLOBAL`両方のルールが空の場合、または現在の`GLOBAL`に一致しない`Conn_ID`ルールのみが構成されている場合、スロークエリのログ記録は`tidb_slow_log_threshold`に依存します。単位はミリ秒であることに注意してください。
--   スローログを書き込む条件としてSQL実行時間を使用したい場合は、ルール内で`Query_time`を使用し、単位が秒であることに注意してください。
--   ルールマッチングロジック：
-    -   複数のルールは`OR`で結合され、単一のルール内の複数のフィールド条件は`AND`で結合されます。
-    -   `SESSION`スコープのルールが最初に一致します。一致するルールがない場合、TiDB は現在の`GLOBAL`に対して`Conn_ID`ルールを一致させ、続いて`GLOBAL`を含まない一般的な`Conn_ID`ルールを一致させます。
--   `SHOW VARIABLES LIKE 'tidb_slow_log_rules'`と`SELECT @@SESSION.tidb_slow_log_rules`は`SESSION`ルールテキストを返します。設定されていない場合は空の文字列を返します。 `SELECT @@GLOBAL.tidb_slow_log_rules` `GLOBAL`ルールテキストを返します。
+- ルール更新動作: `SET [SESSION|GLOBAL] tidb_slow_log_rules = '...'`の実行ごとに、既存のルールに追加するのではなく、そのスコープ内の既存のルールを上書きします。
+- ルールクリア動作: `SET [SESSION|GLOBAL] tidb_slow_log_rules = ''`対応するスコープ内のルールをクリアします。
+- 現在のセッションに、`SESSION`ルール、現在の`Conn_ID`に対する`GLOBAL`ルール、または`Conn_ID`を含まない一般的なグローバルルールなど、適用可能な`tidb_slow_log_rules`がある場合、スロークエリログの出力はルールのマッチング結果によって決定され、 `tidb_slow_log_threshold`は使用されなくなります。
+- 現在のセッションに適用可能なルールがない場合、たとえば`SESSION`と`GLOBAL`両方のルールが空の場合、または現在の`GLOBAL`に一致しない`Conn_ID`ルールのみが構成されている場合、スロークエリのログ記録は`tidb_slow_log_threshold`に依存します。単位はミリ秒であることに注意してください。
+- スローログを書き込む条件としてSQL実行時間を使用したい場合は、ルール内で`Query_time`を使用し、単位が秒であることに注意してください。
+- ルールマッチングロジック：
+    - 複数のルールは`OR`で結合され、単一のルール内の複数のフィールド条件は`AND`で結合されます。
+    - `SESSION`スコープのルールが最初に一致します。一致するルールがない場合、TiDB は現在の`GLOBAL`に対して`Conn_ID`ルールを一致させ、続いて`GLOBAL`を含まない一般的な`Conn_ID`ルールを一致させます。
+- `SHOW VARIABLES LIKE 'tidb_slow_log_rules'`と`SELECT @@SESSION.tidb_slow_log_rules`は`SESSION`ルールテキストを返します。設定されていない場合は空の文字列を返します。 `SELECT @@GLOBAL.tidb_slow_log_rules` `GLOBAL`ルールテキストを返します。
 
 ### 例 {#examples}
 
--   標準フォーマット（ `SESSION`範囲）：
+- 標準フォーマット（ `SESSION`範囲）：
 
     ```sql
     SET SESSION tidb_slow_log_rules = 'Query_time: 0.5, Is_internal: false';
     ```
 
--   無効な形式です（ `SESSION`スコープは`Conn_ID`をサポートしていません）：
+- 無効な形式です（ `SESSION`スコープは`Conn_ID`をサポートしていません）：
 
     ```sql
     SET SESSION tidb_slow_log_rules = 'Conn_ID: 12, Query_time: 0.5, Is_internal: false';
     ```
 
--   グローバルルール（すべての接続に適用）：
+- グローバルルール（すべての接続に適用）：
 
     ```sql
     SET GLOBAL tidb_slow_log_rules = 'Query_time: 0.5, Is_internal: false';
     ```
 
--   特定の接続に対するグローバルルール（ `Conn_ID:11`と`Conn_ID:12` 2 つの接続にそれぞれ適用されます）：
+- 特定の接続に対するグローバルルール（ `Conn_ID:11`と`Conn_ID:12` 2 つの接続にそれぞれ適用されます）：
 
     ```sql
     SET GLOBAL tidb_slow_log_rules = 'Conn_ID: 11, Query_time: 0.5, Is_internal: false; Conn_ID: 12, Query_time: 0.6, Process_time: 0.3, DB: db1';
@@ -291,30 +291,30 @@ TiKVコプロセッサータスクフィールド：
 
 ### 推奨事項 {#recommendations}
 
--   `tidb_slow_log_rules`単一しきい値方式に代わるように設計されています。多次元メトリック条件の組み合わせをサポートし、スロークエリのログ記録をより柔軟かつきめ細かく制御できます。
+- `tidb_slow_log_rules`単一しきい値方式に代わるように設計されています。多次元メトリック条件の組み合わせをサポートし、スロークエリのログ記録をより柔軟かつきめ細かく制御できます。
 
--   TiDBノード1台（CPUコア16個、メモリ48GiB）とTiKVノード3台（それぞれCPUコア16個、メモリ48GiB）を備えた十分なリソースが確保されたテスト環境で、sysbenchテストを繰り返したところ、多次元スロークエリログルールによって30分以内に数百万件のスローログエントリが生成されても、パフォーマンスへの影響は小さいままであることが分かりました。しかし、ログの量が数千万件に達すると、TPSが大幅に低下し、レイテンシーが著しく増加します。そのため、業務ワークロードが高い場合や、CPUとメモリのリソースが限界に近い場合は、 `tidb_slow_log_rules`を慎重に設定して、ルールが広すぎるためにログが大量に発生するのを防いでください。ログ出力レートを制限する必要がある場合は、 [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v856)を使用してスロットリングを行い、業務パフォーマンスへの影響を軽減してください。
+- TiDBノード1台（CPUコア16個、メモリ48GiB）とTiKVノード3台（それぞれCPUコア16個、メモリ48GiB）を備えた十分なリソースが確保されたテスト環境で、sysbenchテストを繰り返したところ、多次元スロークエリログルールによって30分以内に数百万件のスローログエントリが生成されても、パフォーマンスへの影響は小さいままであることが分かりました。しかし、ログの量が数千万件に達すると、TPSが大幅に低下し、レイテンシーが著しく増加します。そのため、業務ワークロードが高い場合や、CPUとメモリのリソースが限界に近い場合は、 `tidb_slow_log_rules`を慎重に設定して、ルールが広すぎるためにログが大量に発生するのを防いでください。ログ出力レートを制限する必要がある場合は、 [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v856)を使用してスロットリングを行い、業務パフォーマンスへの影響を軽減してください。
 
 ## 関連するシステム変数 {#related-system-variables}
 
--   [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-new-in-v856) : [`tidb_slow_log_rules`推奨事項](#recommendations)を参照
+- [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-new-in-v856) : [`tidb_slow_log_rules`推奨事項](#recommendations)を参照
 
--   [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) : スロークエリログのしきい値を設定します。実行時間がこのしきい値を超える SQL ステートメントは、スロークエリログに記録されます。デフォルト値は`300ms` (ミリ秒) です。
+- [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) : スロークエリログのしきい値を設定します。実行時間がこのしきい値を超える SQL ステートメントは、スロークエリログに記録されます。デフォルト値は`300ms` (ミリ秒) です。
 
     > **Tip:**
     >
     > `tidb_slow_log_rules`の時間関連フィールド（ `Query_time`や`Process_time`など）は単位として秒を使用し、小数点を含むことができますが、 [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)はミリ秒を使用します。
 
--   [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v856) : 1 秒あたりに書き込めるスロークエリログエントリの最大数を設定します。デフォルト値は`0`です。この変数は v8.5.6 で導入されました。
-    -   `0`という値は、1 秒あたりに書き込まれるスロークエリログエントリの数に制限がないことを意味します。
-    -   `0`より大きい値を指定すると、TiDBは1秒あたりに指定された数のスロークエリログエントリを書き込みます。超過分のログエントリは破棄され、スロークエリログファイルには書き込まれません。
-    -   ルールベースのスロークエリログが頻繁にトリガーされるのを防ぐため、 `tidb_slow_log_rules`を有効にした後にこの変数を設定することをお勧めします。
+- [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v856) : 1 秒あたりに書き込めるスロークエリログエントリの最大数を設定します。デフォルト値は`0`です。この変数は v8.5.6 で導入されました。
+    - `0`という値は、1 秒あたりに書き込まれるスロークエリログエントリの数に制限がないことを意味します。
+    - `0`より大きい値を指定すると、TiDBは1秒あたりに指定された数のスロークエリログエントリを書き込みます。超過分のログエントリは破棄され、スロークエリログファイルには書き込まれません。
+    - ルールベースのスロークエリログが頻繁にトリガーされるのを防ぐため、 `tidb_slow_log_rules`を有効にした後にこの変数を設定することをお勧めします。
 
--   [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len) : スロークエリログに記録されるSQLステートメントの最大長を設定します。デフォルト値は4096バイトです。
+- [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len) : スロークエリログに記録されるSQLステートメントの最大長を設定します。デフォルト値は4096バイトです。
 
--   [`tidb_redact_log`](/system-variables.md#tidb_redact_log) : スロークエリログに記録される SQL ステートメント内のユーザーデータが秘匿化され、 `?`に置き換えられるかどうかを制御します。デフォルト値は`0`で、この機能は無効になっています。
+- [`tidb_redact_log`](/system-variables.md#tidb_redact_log) : スロークエリログに記録される SQL ステートメント内のユーザーデータが秘匿化され、 `?`に置き換えられるかどうかを制御します。デフォルト値は`0`で、この機能は無効になっています。
 
--   [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) : 実行計画内の各オペレーターの物理実行情報を記録するかどうかを制御します。デフォルト値は`1`です。この機能はパフォーマンスに約 3% 影響します。この機能を有効にすると、 `Plan`の情報を次のように表示できます。
+- [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) : 実行計画内の各オペレーターの物理実行情報を記録するかどうかを制御します。デフォルト値は`1`です。この機能はパフォーマンスに約 3% 影響します。この機能を有効にすると、 `Plan`の情報を次のように表示できます。
 
     ```sql
     > select tidb_decode_plan('jAOIMAk1XzE3CTAJMQlmdW5jczpjb3VudChDb2x1bW4jNyktPkMJC/BMNQkxCXRpbWU6MTAuOTMxNTA1bXMsIGxvb3BzOjIJMzcyIEJ5dGVzCU4vQQoxCTMyXzE4CTAJMQlpbmRleDpTdHJlYW1BZ2dfOQkxCXQRSAwyNzY4LkgALCwgcnBjIG51bTogMQkMEXMQODg0MzUFK0hwcm9jIGtleXM6MjUwMDcJMjA2HXsIMgk1BWM2zwAAMRnIADcVyAAxHcEQNQlOL0EBBPBbCjMJMTNfMTYJMQkzMTI4MS44NTc4MTk5MDUyMTcJdGFibGU6dCwgaW5kZXg6aWR4KGEpLCByYW5nZTpbLWluZiw1MDAwMCksIGtlZXAgb3JkZXI6ZmFsc2UJMjUBrgnQVnsA');
@@ -349,7 +349,7 @@ set @@tidb_enable_collect_execution_info=0;
 
 TiDB 4.0 では、 `SLOW_QUERY`は、ローテーションされたスローログファイルを含む、任意の期間のスローログのクエリをサポートしています。解析する必要のあるスローログファイルを見つけるには`TIME`の範囲を指定する必要があります。 `TIME`の範囲を指定しない場合、TiDB は現在のスローログファイルのみを解析します。例:
 
--   時間範囲を指定しない場合、TiDB はスローログファイルに書き込むスロークエリデータのみを解析します。
+- 時間範囲を指定しない場合、TiDB はスローログファイルに書き込むスロークエリデータのみを解析します。
 
     ```sql
     select count(*),
@@ -366,7 +366,7 @@ TiDB 4.0 では、 `SLOW_QUERY`は、ローテーションされたスローロ�
     +----------+----------------------------+----------------------------+
     ```
 
--   例えば、 `2020-03-10 00:00:00`から`2020-03-11 00:00:00`までといった時間範囲を指定すると、TiDB はまず指定された時間範囲のスローログファイルを探し出し、次にスロークエリ情報を解析します。
+- 例えば、 `2020-03-10 00:00:00`から`2020-03-11 00:00:00`までといった時間範囲を指定すると、TiDB はまず指定された時間範囲のスローログファイルを探し出し、次にスロークエリ情報を解析します。
 
     ```sql
     select count(*),
@@ -445,7 +445,7 @@ limit 2;
 
 上位N個のSQL文を照会した後、同じフィンガープリントを使用して、同様の低速なクエリを引き続き照会します。
 
-1.  処理速度の遅い上位N件のクエリと、それに対応するSQLフィンガープリントを取得します。
+1. 処理速度の遅い上位N件のクエリと、それに対応するSQLフィンガープリントを取得します。
 
     ```sql
     select query_time, query, digest
@@ -465,7 +465,7 @@ limit 2;
     +-------------+-----------------------------+------------------------------------------------------------------+
     ```
 
-2.  同様のスロークエリをフィンガープリントを使って照会する。
+2. 同様のスロークエリをフィンガープリントを使って照会する。
 
     ```sql
     select query, query_time

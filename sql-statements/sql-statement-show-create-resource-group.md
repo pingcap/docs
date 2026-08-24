@@ -50,7 +50,7 @@ SHOW CREATE RESOURCE GROUP rg1;
 
 ## 参照 {#see-also}
 
--   [TiDBリソース制御](/tidb-resource-control-ru-groups.md)
--   [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
--   [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
--   [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
+- [TiDBリソース制御](/tidb-resource-control-ru-groups.md)
+- [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
+- [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
+- [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)

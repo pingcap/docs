@@ -15,13 +15,13 @@ summary: マシン リソースを計画し、TiDB パラメータを調整す�
 
 このセクションでは、次のような TiDB パラメータを調整してTiFlash のパフォーマンスを向上させる方法について説明します。
 
--   [MPPモードを強制的に有効にする](#forcibly-enable-the-mpp-mode)
--   [集計関数を`Join`または`Union`前の位置へプッシュダウンします](#push-down-aggregate-functions-to-a-position-before-join-or-union)
--   [`Distinct`最適化を有効にする](#enable-distinct-optimization)
--   [`ALTER TABLE ... COMPACT`ステートメントを使用してデータを圧縮する](#compact-data-using-the-alter-table--compact-statement)
--   [シャッフルハッシュ結合をブロードキャストハッシュ結合に置き換える](#replace-shuffled-hash-join-with-broadcast-hash-join)
--   [実行同時実行性を高める](#set-a-greater-execution-concurrency)
--   [`tiflash_fine_grained_shuffle_stream_count`を設定する](#configure-tiflash_fine_grained_shuffle_stream_count)
+- [MPPモードを強制的に有効にする](#forcibly-enable-the-mpp-mode)
+- [集計関数を`Join`または`Union`前の位置へプッシュダウンします](#push-down-aggregate-functions-to-a-position-before-join-or-union)
+- [`Distinct`最適化を有効にする](#enable-distinct-optimization)
+- [`ALTER TABLE ... COMPACT`ステートメントを使用してデータを圧縮する](#compact-data-using-the-alter-table--compact-statement)
+- [シャッフルハッシュ結合をブロードキャストハッシュ結合に置き換える](#replace-shuffled-hash-join-with-broadcast-hash-join)
+- [実行同時実行性を高める](#set-a-greater-execution-concurrency)
+- [`tiflash_fine_grained_shuffle_stream_count`を設定する](#configure-tiflash_fine_grained_shuffle_stream_count)
 
 ### MPPモードを強制的に有効にする {#forcibly-enable-the-mpp-mode}
 
@@ -231,13 +231,13 @@ ALTER TABLE employees COMPACT PARTITION pNorth, pEast TIFLASH REPLICA;
 
 小さなテーブルでの`Join`操作の場合、ブロードキャスト ハッシュ結合アルゴリズムにより大きなテーブルの転送を回避できるため、コンピューティング パフォーマンスが向上します。
 
--   変数[`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)は、ブロードキャストハッシュ結合アルゴリズムを使用するかどうかを制御します。テーブルサイズ（単位：バイト）がこの変数の値より小さい場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
+- 変数[`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)は、ブロードキャストハッシュ結合アルゴリズムを使用するかどうかを制御します。テーブルサイズ（単位：バイト）がこの変数の値より小さい場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
 
     ```sql
     set @@tidb_broadcast_join_threshold_size = 2000000;
     ```
 
--   変数[`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50)は、ブロードキャストハッシュ結合アルゴリズムを使用するかどうかも制御します。結合操作のオブジェクトがサブクエリに属する場合、オプティマイザはサブクエリの結果セットのサイズを推定できません。この場合、サイズは結果セットの行数によって決定されます。サブクエリの推定行数がこの変数の値より少ない場合、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
+- 変数[`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50)は、ブロードキャストハッシュ結合アルゴリズムを使用するかどうかも制御します。結合操作のオブジェクトがサブクエリに属する場合、オプティマイザはサブクエリの結果セットのサイズを推定できません。この場合、サイズは結果セットの行数によって決定されます。サブクエリの推定行数がこの変数の値より少ない場合、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
 
     ```sql
     set @@tidb_broadcast_join_threshold_count = 100000;

@@ -40,11 +40,11 @@ TiDB Cloud CLIはコマンドラインインターフェースであり、ター
 
 TiDB Cloud CLIは、一部のコマンドを簡単に使用できるよう、2つのモードを提供しています。
 
--   対話モード
+- 対話モード
 
     フラグなしでコマンドを実行することもできます（例： `ticloud config create` ）。その場合、CLIは入力を求めます。
 
--   非対話モード
+- 非対話モード
 
     `ticloud config create --profile-name <profile-name> --public-key <public-key> --private-key <private-key>`のように、コマンドを実行する際に必要なすべての引数とフラグを指定する必要があります。
 

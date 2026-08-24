@@ -56,34 +56,34 @@ DESC tiflash_segments;
 
 `TIFLASH_SEGMENTS`テーブル内のフィールドは次のように説明されます。
 
--   `TIDB_DATABASE` : TiDB内のデータベース名。セグメントはこのデータベース内のテーブルに属します。
--   `TIDB_TABLE` : TiDB内のテーブル名。セグメントはこのテーブルに属します。
--   `TABLE_ID` : セグメントが属するテーブルの内部ID。このIDはTiDBクラスタ内で一意です。
--   `IS_TOMBSTONE` : セグメントが属するテーブルがリサイクル可能かどうかを示します。`1`はテーブルがリサイクル可能であることを示します。`0`はテーブルが通常の状態であることを示します。
--   `SEGMENT_ID` : テーブル内で一意のセグメント ID。
--   `RANGE` : セグメントに含まれるデータの範囲。
--   `EPOCH` : セグメントの更新バージョン。各セグメントのバージョン番号は単調に増加します。
--   `ROWS` : セグメント内の行の合計数。
--   `SIZE` : セグメント データの合計サイズ (バイト単位)。
--   `DELTA_RATE` : デルタレイヤーの合計行数とセグメントの合計行数の比率。
--   `DELTA_MEMTABLE_ROWS` : デルタレイヤーにキャッシュされた行の合計数。
--   `DELTA_MEMTABLE_SIZE` : Deltaレイヤーにキャッシュされたデータの合計サイズ (バイト単位)。
--   `DELTA_MEMTABLE_COLUMN_FILES` : デルタレイヤーにキャッシュされたカラムファイルの数。
--   `DELTA_MEMTABLE_DELETE_RANGES` : デルタレイヤーにキャッシュされた削除範囲の数。
--   `DELTA_PERSISTED_PAGE_ID` : デルタレイヤーのディスクに保存されているデータの ID。
--   `DELTA_PERSISTED_ROWS` : デルタレイヤーに保存されたデータの行の合計数。
--   `DELTA_PERSISTED_SIZE` : Deltaレイヤーに保存されたデータの合計サイズ (バイト単位)。
--   `DELTA_PERSISTED_COLUMN_FILES` : デルタレイヤー内の永続化されたカラムファイルの数。
--   `DELTA_PERSISTED_DELETE_RANGES` : デルタレイヤーに保持される削除範囲の数。
--   `DELTA_CACHE_SIZE` : Deltaレイヤーのキャッシュのサイズ (バイト単位)。
--   `DELTA_INDEX_SIZE` : Deltaレイヤー内のインデックスのサイズ (バイト単位)。
--   `STABLE_PAGE_ID` : 安定レイヤーのデータのディスクストレージID。
--   `STABLE_ROWS` : 安定レイヤー内の行の合計数。
--   `STABLE_SIZE` : 安定レイヤーのデータの合計サイズ (バイト単位)。
--   `STABLE_DMFILES` : 安定レイヤー内の DMFiles の数。
--   `STABLE_DMFILES_ID_0` : 安定レイヤーの最初の DMFile のディスクストレージID。
--   `STABLE_DMFILES_ROWS` : 安定レイヤーの DMFile 内の行の合計数。
--   `STABLE_DMFILES_SIZE` : 安定レイヤーの DMFile 内のデータの合計サイズ (バイト単位)。
--   `STABLE_DMFILES_SIZE_ON_DISK` : 安定レイヤーで DMFile が占めるディスク領域 (バイト単位)。
--   `STABLE_DMFILES_PACKS` : 安定レイヤーの DMFile 内のパックの数。
--   `TIFLASH_INSTANCE` : TiFlashインスタンスのアドレス。
+- `TIDB_DATABASE` : TiDB内のデータベース名。セグメントはこのデータベース内のテーブルに属します。
+- `TIDB_TABLE` : TiDB内のテーブル名。セグメントはこのテーブルに属します。
+- `TABLE_ID` : セグメントが属するテーブルの内部ID。このIDはTiDBクラスタ内で一意です。
+- `IS_TOMBSTONE` : セグメントが属するテーブルがリサイクル可能かどうかを示します。`1`はテーブルがリサイクル可能であることを示します。`0`はテーブルが通常の状態であることを示します。
+- `SEGMENT_ID` : テーブル内で一意のセグメント ID。
+- `RANGE` : セグメントに含まれるデータの範囲。
+- `EPOCH` : セグメントの更新バージョン。各セグメントのバージョン番号は単調に増加します。
+- `ROWS` : セグメント内の行の合計数。
+- `SIZE` : セグメント データの合計サイズ (バイト単位)。
+- `DELTA_RATE` : デルタレイヤーの合計行数とセグメントの合計行数の比率。
+- `DELTA_MEMTABLE_ROWS` : デルタレイヤーにキャッシュされた行の合計数。
+- `DELTA_MEMTABLE_SIZE` : Deltaレイヤーにキャッシュされたデータの合計サイズ (バイト単位)。
+- `DELTA_MEMTABLE_COLUMN_FILES` : デルタレイヤーにキャッシュされたカラムファイルの数。
+- `DELTA_MEMTABLE_DELETE_RANGES` : デルタレイヤーにキャッシュされた削除範囲の数。
+- `DELTA_PERSISTED_PAGE_ID` : デルタレイヤーのディスクに保存されているデータの ID。
+- `DELTA_PERSISTED_ROWS` : デルタレイヤーに保存されたデータの行の合計数。
+- `DELTA_PERSISTED_SIZE` : Deltaレイヤーに保存されたデータの合計サイズ (バイト単位)。
+- `DELTA_PERSISTED_COLUMN_FILES` : デルタレイヤー内の永続化されたカラムファイルの数。
+- `DELTA_PERSISTED_DELETE_RANGES` : デルタレイヤーに保持される削除範囲の数。
+- `DELTA_CACHE_SIZE` : Deltaレイヤーのキャッシュのサイズ (バイト単位)。
+- `DELTA_INDEX_SIZE` : Deltaレイヤー内のインデックスのサイズ (バイト単位)。
+- `STABLE_PAGE_ID` : 安定レイヤーのデータのディスクストレージID。
+- `STABLE_ROWS` : 安定レイヤー内の行の合計数。
+- `STABLE_SIZE` : 安定レイヤーのデータの合計サイズ (バイト単位)。
+- `STABLE_DMFILES` : 安定レイヤー内の DMFiles の数。
+- `STABLE_DMFILES_ID_0` : 安定レイヤーの最初の DMFile のディスクストレージID。
+- `STABLE_DMFILES_ROWS` : 安定レイヤーの DMFile 内の行の合計数。
+- `STABLE_DMFILES_SIZE` : 安定レイヤーの DMFile 内のデータの合計サイズ (バイト単位)。
+- `STABLE_DMFILES_SIZE_ON_DISK` : 安定レイヤーで DMFile が占めるディスク領域 (バイト単位)。
+- `STABLE_DMFILES_PACKS` : 安定レイヤーの DMFile 内のパックの数。
+- `TIFLASH_INSTANCE` : TiFlashインスタンスのアドレス。

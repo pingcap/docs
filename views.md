@@ -7,8 +7,8 @@ summary: TiDB でビューを使用する方法を学習します。
 
 TiDBはビューをサポートしています。ビューは仮想テーブルとして機能し、そのスキーマはビューを作成する`SELECT`ステートメントによって定義されます。ビューを使用すると、次のような利点があります。
 
--   安全なフィールドとデータのみをユーザーに公開し、基になるテーブルに保存されている機密フィールドとデータのセキュリティを確保します。
--   頻繁に表示される複雑なクエリをビューとして定義し、複雑なクエリをより簡単に、より便利にします。
+- 安全なフィールドとデータのみをユーザーに公開し、基になるテーブルに保存されている機密フィールドとデータのセキュリティを確保します。
+- 頻繁に表示される複雑なクエリをビューとして定義し、複雑なクエリをより簡単に、より便利にします。
 
 ## クエリビュー {#query-views}
 
@@ -201,11 +201,11 @@ drop view v;
 
 現在、TiDB のビューには次の制限があります。
 
--   マテリアライズド ビューはまだサポートされていません。
--   TiDB のビューは読み取り専用であり、 `UPDATE` 、 `INSERT` 、 `DELETE` 、 `TRUNCATE`などの書き込み操作はサポートされません。
--   作成されたビューの場合、サポートされるDDL操作は`DROP [VIEW | TABLE]`です。
+- マテリアライズド ビューはまだサポートされていません。
+- TiDB のビューは読み取り専用であり、 `UPDATE` 、 `INSERT` 、 `DELETE` 、 `TRUNCATE`などの書き込み操作はサポートされません。
+- 作成されたビューの場合、サポートされるDDL操作は`DROP [VIEW | TABLE]`です。
 
 ## 参照 {#see-also}
 
--   [CREATE VIEW](/sql-statements/sql-statement-create-view.md)
--   [DROP VIEW](/sql-statements/sql-statement-drop-view.md)
+- [CREATE VIEW](/sql-statements/sql-statement-create-view.md)
+- [DROP VIEW](/sql-statements/sql-statement-drop-view.md)

@@ -7,8 +7,8 @@ summary: 特権を管理する方法を学びましょう。
 
 TiDBは、構文や権限タイプを含め、 MySQL 5.7の権限管理システムをサポートしています。また、MySQL 8.0の以下の機能もサポートしています。
 
--   TiDB 3.0以降で利用可能になったSQLロール。
--   TiDB 5.1以降では、動的な権限が可能になりました。
+- TiDB 3.0以降で利用可能になったSQLロール。
+- TiDB 5.1以降では、動的な権限が可能になりました。
 
 このドキュメントでは、権限に関連するTiDB操作、TiDB操作に必要な権限、および権限システムの実装について説明します。
 
@@ -269,27 +269,27 @@ SHOW GRANTS FOR `rw_user`@`192.168.%`;
 
 動的権限には以下が含まれます。
 
--   `BACKUP_ADMIN`
--   `RESTORE_ADMIN`
--   `SYSTEM_USER`
--   `SYSTEM_VARIABLES_ADMIN`
--   `ROLE_ADMIN`
--   `CONNECTION_ADMIN`
--   `PLACEMENT_ADMIN`は、権限所有者が配置ポリシーを作成、変更、削除できるようにします。
--   `DASHBOARD_CLIENT`は、権限所有者が TiDB Dashboardにログインできるようにします。
--   `RESTRICTED_TABLES_ADMIN`は、SEM が有効になっている場合に、権限所有者がシステム テーブルを表示できるようにします。
--   `RESTRICTED_STATUS_ADMIN`を使用すると、SEM が有効になっているときに、権限所有者は[`SHOW [GLOBAL|SESSION] STATUS`](/sql-statements/sql-statement-show-status.md)ですべてのステータス変数を表示できます。
--   `RESTRICTED_VARIABLES_ADMIN`は、SEM が有効になっている場合に、権限所有者がすべてのシステム変数を表示できるようにします。
--   `RESTRICTED_USER_ADMIN` SEM が有効になっている場合、特権所有者が SUPER ユーザーによってアクセス権を取り消されることを禁止します。
--   `RESTRICTED_CONNECTION_ADMIN`権限所有者が`RESTRICTED_USER_ADMIN`ユーザーの接続を強制終了することを許可します。この権限は`KILL`および`KILL TIDB`ステートメントに影響します。
--   `RESTRICTED_REPLICA_WRITER_ADMIN`を使用すると、TiDB クラスタで読み取り専用モードが有効になっている場合でも、権限所有者は影響を受けることなく書き込みまたは更新操作を実行できます。詳細については、 [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520)を参照してください。
+- `BACKUP_ADMIN`
+- `RESTORE_ADMIN`
+- `SYSTEM_USER`
+- `SYSTEM_VARIABLES_ADMIN`
+- `ROLE_ADMIN`
+- `CONNECTION_ADMIN`
+- `PLACEMENT_ADMIN`は、権限所有者が配置ポリシーを作成、変更、削除できるようにします。
+- `DASHBOARD_CLIENT`は、権限所有者が TiDB Dashboardにログインできるようにします。
+- `RESTRICTED_TABLES_ADMIN`は、SEM が有効になっている場合に、権限所有者がシステム テーブルを表示できるようにします。
+- `RESTRICTED_STATUS_ADMIN`を使用すると、SEM が有効になっているときに、権限所有者は[`SHOW [GLOBAL|SESSION] STATUS`](/sql-statements/sql-statement-show-status.md)ですべてのステータス変数を表示できます。
+- `RESTRICTED_VARIABLES_ADMIN`は、SEM が有効になっている場合に、権限所有者がすべてのシステム変数を表示できるようにします。
+- `RESTRICTED_USER_ADMIN` SEM が有効になっている場合、特権所有者が SUPER ユーザーによってアクセス権を取り消されることを禁止します。
+- `RESTRICTED_CONNECTION_ADMIN`権限所有者が`RESTRICTED_USER_ADMIN`ユーザーの接続を強制終了することを許可します。この権限は`KILL`および`KILL TIDB`ステートメントに影響します。
+- `RESTRICTED_REPLICA_WRITER_ADMIN`を使用すると、TiDB クラスタで読み取り専用モードが有効になっている場合でも、権限所有者は影響を受けることなく書き込みまたは更新操作を実行できます。詳細については、 [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520)を参照してください。
 
 動的権限の全セットを確認するには、 `SHOW PRIVILEGES`ステートメントを実行してください。プラグインは新しい権限を追加できるため、割り当て可能な権限のリストは、TiDB のインストール環境によって異なる場合があります。
 
 ## `SUPER`特権 {#super-privilege}
 
--   `SUPER`権限は、ユーザーがほぼすべての操作を実行できるようにします。デフォルトでは、 `root`ユーザーのみにこの権限が付与されています。他のユーザーにこの権限を付与する際は注意してください。
--   `SUPER`権限は[MySQL 8.0で非推奨になりました](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#dynamic-privileges-migration-from-super)推奨になりました。よりきめ細かいアクセス制御を提供するために[動的権限](#dynamic-privileges)に置き換えることができます。
+- `SUPER`権限は、ユーザーがほぼすべての操作を実行できるようにします。デフォルトでは、 `root`ユーザーのみにこの権限が付与されています。他のユーザーにこの権限を付与する際は注意してください。
+- `SUPER`権限は[MySQL 8.0で非推奨になりました](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#dynamic-privileges-migration-from-super)推奨になりました。よりきめ細かいアクセス制御を提供するために[動的権限](#dynamic-privileges)に置き換えることができます。
 
 ## TiDB操作に必要な権限 {#privileges-required-for-tidb-operations}
 
@@ -340,10 +340,10 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 
 ### 変更する {#alter}
 
--   `ALTER`ステートメントすべてにおいて、ユーザーは対応するテーブルに対する`ALTER`権限を持っている必要があります。
--   `ALTER...DROP`および`ALTER...RENAME TO`以外のステートメントについては、ユーザーは対応するテーブルに対して`INSERT`および`CREATE`の権限を持っている必要があります。
--   `ALTER...DROP`ステートメントを使用するには、ユーザーは対応するテーブルに対して`DROP`権限を持っている必要があります。
--   `ALTER...RENAME TO`ステートメントを実行するには、ユーザーは名前変更前にテーブルに対する`DROP`権限を持ち、名前変更後にテーブルに対する`CREATE`および`INSERT`権限ている必要があります。
+- `ALTER`ステートメントすべてにおいて、ユーザーは対応するテーブルに対する`ALTER`権限を持っている必要があります。
+- `ALTER...DROP`および`ALTER...RENAME TO`以外のステートメントについては、ユーザーは対応するテーブルに対して`INSERT`および`CREATE`の権限を持っている必要があります。
+- `ALTER...DROP`ステートメントを使用するには、ユーザーは対応するテーブルに対して`DROP`権限を持っている必要があります。
+- `ALTER...RENAME TO`ステートメントを実行するには、ユーザーは名前変更前にテーブルに対する`DROP`権限を持ち、名前変更後にテーブルに対する`CREATE`および`INSERT`権限ている必要があります。
 
 > **Note:**
 >
@@ -505,10 +505,10 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 
 次の[`mysql`システムテーブル](/mysql-schema/mysql-schema.md)すべての権限関連データが保存されているため、特別です。
 
--   `mysql.user` （ユーザーアカウント、グローバル権限）
--   `mysql.db` （データベースレベルの権限）
--   `mysql.tables_priv` （テーブルレベルの権限）
--   `mysql.columns_priv` （列レベルの権限。v8.5.6以降でサポート）
+- `mysql.user` （ユーザーアカウント、グローバル権限）
+- `mysql.db` （データベースレベルの権限）
+- `mysql.tables_priv` （テーブルレベルの権限）
+- `mysql.columns_priv` （列レベルの権限。v8.5.6以降でサポート）
 
 これらのテーブルには、データの有効範囲と権限情報が含まれています。たとえば、 `mysql.user`テーブルでは次のようになります。
 

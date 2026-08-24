@@ -44,7 +44,7 @@ http://192.168.0.123:2379/dashboard/
 
 [HAProxy](https://www.haproxy.org/)をリバースプロキシとして使用する場合は、次の手順を実行します。
 
-1.  例えば、TiDB Dashboardのリバースプロキシを`8033`ポート（例）で使用します。HAProxy設定ファイルに以下の設定を追加します。
+1. 例えば、TiDB Dashboardのリバースプロキシを`8033`ポート（例）で使用します。HAProxy設定ファイルに以下の設定を追加します。
 
     ```haproxy
     frontend tidb_dashboard_front
@@ -62,9 +62,9 @@ http://192.168.0.123:2379/dashboard/
     >
     > **このパス内のサービスのみが**リバースプロキシの背後にあることを保証するには、 `use_backend`ディレクティブの`if`部分を保持する必要があります。そうしないと、セキュリティリスクが発生する可能性があります。[TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
 
-2.  設定を有効にするには、HAProxy を再起動します。
+2. 設定を有効にするには、HAProxy を再起動します。
 
-3.  リバース プロキシが有効かどうかをテストします。HAProxy が配置されているマシンの`8033`ポートの`/dashboard/`アドレス ( `http://example.com:8033/dashboard/`など) にアクセスして、TiDB Dashboardにアクセスします。
+3. リバース プロキシが有効かどうかをテストします。HAProxy が配置されているマシンの`8033`ポートの`/dashboard/`アドレス ( `http://example.com:8033/dashboard/`など) にアクセスして、TiDB Dashboardにアクセスします。
 
 </details>
 
@@ -72,7 +72,7 @@ http://192.168.0.123:2379/dashboard/
 
 [NGINX](https://nginx.org/)リバース プロキシとして使用する場合は、次の手順を実行します。
 
-1.  TiDB Dashboardのリバースプロキシを`8033`ポート（例）で使用します。NGINX設定ファイルに以下の設定を追加します。
+1. TiDB Dashboardのリバースプロキシを`8033`ポート（例）で使用します。NGINX設定ファイルに以下の設定を追加します。
 
     ```nginx
     server {
@@ -89,13 +89,13 @@ http://192.168.0.123:2379/dashboard/
     >
     > `proxy_pass`ディレクティブの`/dashboard/`パスは必ず保持してください。これにより、このパスの下にあるサービスのみがリバースプロキシされます。そうしないと、セキュリティリスクが発生します。[TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
 
-2.  設定を有効にするには、NGINX をリロードします。
+2. 設定を有効にするには、NGINX をリロードします。
 
     ```shell
     sudo nginx -s reload
     ```
 
-3.  リバース プロキシが有効かどうかをテストします。NGINX が配置されているマシンの`8033`ポートの`/dashboard/`アドレス ( `http://example.com:8033/dashboard/`など) にアクセスして、TiDB Dashboardにアクセスします。
+3. リバース プロキシが有効かどうかをテストします。NGINX が配置されているマシンの`8033`ポートの`/dashboard/`アドレス ( `http://example.com:8033/dashboard/`など) にアクセスして、TiDB Dashboardにアクセスします。
 
 </details>
 
@@ -127,13 +127,13 @@ server_configs:
 
 デプロイされたクラスターの場合:
 
-1.  クラスターの構成ファイルを編集モードで開きます ( `CLUSTER_NAME`をクラスター名に置き換えます)。
+1. クラスターの構成ファイルを編集モードで開きます ( `CLUSTER_NAME`をクラスター名に置き換えます)。
 
     ```shell
     tiup cluster edit-config CLUSTER_NAME
     ```
 
-2.  `server_configs`の`pd`設定の下にある設定項目を変更または追加します。`server_configs`が存在しない場合は、最上位レベルに追加します。
+2. `server_configs`の`pd`設定の下にある設定項目を変更または追加します。`server_configs`が存在しない場合は、最上位レベルに追加します。
 
     ```yaml
     monitored:
@@ -169,7 +169,7 @@ server_configs:
         dashboard.public-path-prefix: /foo
     ```
 
-3.  変更した設定を有効にするには、すべての PD インスタンスに対してローリング再起動を実行します ( `CLUSTER_NAME`をクラスター名に置き換えます)。
+3. 変更した設定を有効にするには、すべての PD インスタンスに対してローリング再起動を実行します ( `CLUSTER_NAME`をクラスター名に置き換えます)。
 
     ```shell
     tiup cluster reload CLUSTER_NAME -R pd

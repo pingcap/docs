@@ -27,8 +27,8 @@ ResourceGroupName ::=
 
 > **Note:**
 >
-> -   `DROP RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)が`ON`に設定されている場合にのみ実行できます。
-> -   `default`リソース グループは予約済みであり、削除できません。
+> - `DROP RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)が`ON`に設定されている場合にのみ実行できます。
+> - `default`リソース グループは予約済みであり、削除できません。
 
 ## 例 {#examples}
 
@@ -85,6 +85,6 @@ MySQL は[DROP RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/drop-reso
 
 ## 参照 {#see-also}
 
--   [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
--   [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
--   [リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)
+- [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
+- [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
+- [リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)

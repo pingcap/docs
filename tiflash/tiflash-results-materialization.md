@@ -13,8 +13,8 @@ TiDB v6.5.0以降、 TiFlashクエリ結果をテーブルに保存すること�
 >
 > デフォルト（ [`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50) ）では、オプティマイザは[SQLモード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュダウンするかどうかをインテリジェントに決定します。
 >
-> -   現在のセッションの[SQLモード](/sql-mode.md)が厳密でない場合（つまり、 `sql_mode`の値に`STRICT_TRANS_TABLES`と`STRICT_ALL_TABLES`が含まれていない場合）、オプティマイザはTiFlashレプリカのコスト見積もりに基づいて、 `INSERT INTO SELECT`の`SELECT`サブクエリをTiFlashにプッシュダウンするかどうかをインテリジェントに決定します。このモードでは、オプティマイザのコスト見積もりを無視し、クエリをTiFlashにプッシュダウンすることを強制するには、 [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)システム変数を`ON`に設定できます。
-> -   現在のセッションの[SQLモード](/sql-mode.md)が厳密な場合 (つまり、 `sql_mode`の値に`STRICT_TRANS_TABLES`または`STRICT_ALL_TABLES`のいずれかが含まれている場合)、 `INSERT INTO SELECT`の`SELECT`サブクエリをTiFlashにプッシュダウンすることはできません。
+> - 現在のセッションの[SQLモード](/sql-mode.md)が厳密でない場合（つまり、 `sql_mode`の値に`STRICT_TRANS_TABLES`と`STRICT_ALL_TABLES`が含まれていない場合）、オプティマイザはTiFlashレプリカのコスト見積もりに基づいて、 `INSERT INTO SELECT`の`SELECT`サブクエリをTiFlashにプッシュダウンするかどうかをインテリジェントに決定します。このモードでは、オプティマイザのコスト見積もりを無視し、クエリをTiFlashにプッシュダウンすることを強制するには、 [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)システム変数を`ON`に設定できます。
+> - 現在のセッションの[SQLモード](/sql-mode.md)が厳密な場合 (つまり、 `sql_mode`の値に`STRICT_TRANS_TABLES`または`STRICT_ALL_TABLES`のいずれかが含まれている場合)、 `INSERT INTO SELECT`の`SELECT`サブクエリをTiFlashにプッシュダウンすることはできません。
 
 `INSERT INTO SELECT`の構文は次のとおりです。
 
@@ -41,11 +41,11 @@ SELECT app_name, country FROM t1;
 
 ## 一般的な推奨使用シナリオ {#typical-and-recommended-usage-scenarios}
 
--   効率的なBIソリューション
+- 効率的なBIソリューション
 
     多くの BI アプリケーションでは、分析クエリ要求が非常に重くなります。たとえば、多くのユーザーが同時にレポートにアクセスして更新する場合、BI アプリケーションは大量の同時クエリ要求を処理する必要があります。この状況に効果的に対処するには、 `INSERT INTO SELECT`を使用してレポートのクエリ結果を TiDB テーブルに保存します。その後、エンドユーザーはレポートが更新されたときに結果テーブルから直接データをクエリできるため、計算と分析が何度も繰り返されるのを回避できます。同様に、履歴分析結果を保存することで、長時間の履歴データ分析の計算量をさらに削減できます。たとえば、日次売上利益を分析するために使用されるレポート`A`がある場合、 `INSERT INTO SELECT`を使用してレポート`A`の結果を結果テーブル`T`に保存できます。その後、先月の売上利益を分析するためにレポート`B`を生成する必要がある場合は、テーブル`T`の日次分析結果を直接使用できます。この方法は、計算量を大幅に削減するだけでなく、クエリ応答速度を向上させ、システム負荷を軽減します。
 
--   TiFlashによるオンライン アプリケーションの提供
+- TiFlashによるオンライン アプリケーションの提供
 
     TiFlashがサポートする同時リクエスト数は、データ量とクエリの複雑さによって異なりますが、通常は 100 QPS を超えることはありません。`INSERT INTO SELECT`を指定してTiFlashクエリ結果を保存し、クエリ結果テーブルを使用して、同時実行性の高いオンラインリクエストをサポートできます。結果テーブルのデータは、 TiFlash の同時実行制限をはるかに下回る低頻度（例：0.5 秒間隔）でバックグラウンドで更新できますが、データの鮮度は高いレベルで維持されます。
 

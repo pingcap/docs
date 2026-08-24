@@ -14,15 +14,15 @@ Gitpodは、コードを直接記述する開発環境向けのオープンソ�
 
 ## クイックスタート {#quick-start}
 
-1.  TiDB アプリケーション開発用のサンプル コード リポジトリ[pingcap-inc/tidb-example-java](https://github.com/pingcap-inc/tidb-example-java)をフォークします。
+1. TiDB アプリケーション開発用のサンプル コード リポジトリ[pingcap-inc/tidb-example-java](https://github.com/pingcap-inc/tidb-example-java)をフォークします。
 
-2.  ブラウザのアドレスバーでサンプル コード リポジトリの URL の前に`https://gitpod.io/#`付けて、Gitpod ワークスペースを起動します。
+2. ブラウザのアドレスバーでサンプル コード リポジトリの URL の前に`https://gitpod.io/#`付けて、Gitpod ワークスペースを起動します。
 
-    -   たとえば、 `https://gitpod.io/#https://github.com/pingcap-inc/tidb-example-java` 。
+    - たとえば、 `https://gitpod.io/#https://github.com/pingcap-inc/tidb-example-java` 。
 
-    -   URL内で環境変数を設定できます。例： `https://gitpod.io/#targetFile=spring-jpa-hibernate_Makefile,targetMode=spring-jpa-hibernate/https://github.com/pingcap-inc/tidb-example-java` 。
+    - URL内で環境変数を設定できます。例： `https://gitpod.io/#targetFile=spring-jpa-hibernate_Makefile,targetMode=spring-jpa-hibernate/https://github.com/pingcap-inc/tidb-example-java` 。
 
-3.  ログインし、リストされているプロバイダーのいずれかを使用してワークスペースを起動します。例： `Github` 。
+3. ログインし、リストされているプロバイダーのいずれかを使用してワークスペースを起動します。例： `Github` 。
 
 ## デフォルトのGitpod設定と環境を使用する {#use-the-default-gitpod-configuration-and-environment}
 
@@ -170,6 +170,6 @@ Gitpodは、完全かつ自動化された、事前設定済みのクラウド�
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

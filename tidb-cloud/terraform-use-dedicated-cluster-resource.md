@@ -11,14 +11,14 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
 `tidbcloud_dedicated_cluster`リソースの機能は次のとおりです。
 
--   TiDB Cloud Dedicated クラスターを作成します。
--   TiDB Cloud Dedicated クラスターを変更します。
--   TiDB Cloud Dedicated クラスターをインポートします。
--   TiDB Cloud Dedicated クラスターを削除します。
+- TiDB Cloud Dedicated クラスターを作成します。
+- TiDB Cloud Dedicated クラスターを変更します。
+- TiDB Cloud Dedicated クラスターをインポートします。
+- TiDB Cloud Dedicated クラスターを削除します。
 
 ## 前提条件 {#prerequisites}
 
--   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
+- [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
 
 ## `tidbcloud_projects`データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-tidbcloud-projects-data-source}
 
@@ -26,7 +26,7 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
 利用可能なすべてのプロジェクトに関する情報を取得するには、次のように`tidbcloud_projects`データ ソースを使用します。
 
-1.  [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)で作成した`main.tf`ファイルに、次のように`data`と`output`ブロックを追加します。
+1. [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)で作成した`main.tf`ファイルに、次のように`data`と`output`ブロックを追加します。
 
         terraform {
           required_providers {
@@ -50,19 +50,19 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
           value = data.tidbcloud_projects.example_project.items
         }
 
-    -   `data`ブロックを使用して、データ ソース タイプやデータ ソース名など、 TiDB Cloudのデータ ソースを定義します。
+    - `data`ブロックを使用して、データ ソース タイプやデータ ソース名など、 TiDB Cloudのデータ ソースを定義します。
 
-        -   プロジェクト データ ソースを使用するには、データ ソース タイプを`tidbcloud_projects`に設定します。
-        -   データソース名は必要に応じて定義できます。例： `"example_project"` 。
-        -   `tidbcloud_projects`データ ソースの場合、 `page`および`page_size`属性を使用して、チェックするプロジェクトの最大数を制限できます。
+        - プロジェクト データ ソースを使用するには、データ ソース タイプを`tidbcloud_projects`に設定します。
+        - データソース名は必要に応じて定義できます。例： `"example_project"` 。
+        - `tidbcloud_projects`データ ソースの場合、 `page`および`page_size`属性を使用して、チェックするプロジェクトの最大数を制限できます。
 
-    -   `output`ブロックを使用して、出力に表示されるデータ ソース情報を定義し、他の Terraform 構成が使用できるように情報を公開します。
+    - `output`ブロックを使用して、出力に表示されるデータ ソース情報を定義し、他の Terraform 構成が使用できるように情報を公開します。
 
         `output`ブロックは、プログラミング言語の戻り値と同様に機能します。詳細については、 [Terraformドキュメント](https://www.terraform.io/language/values/outputs)を参照してください。
 
     リソースとデータ ソースに使用可能なすべての構成を取得するには、 [Terraform プロバイダーの構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)を参照してください。
 
-2.  設定を適用するには、コマンド`terraform apply`を実行してください。続行するには、確認プロンプトで`yes`と入力してください。
+2. 設定を適用するには、コマンド`terraform apply`を実行してください。続行するには、確認プロンプトで`yes`と入力してください。
 
     プロンプトをスキップするには、 `terraform apply --auto-approve`を使用します。
 
@@ -121,14 +121,14 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
 > **Note:**
 >
-> -   始める前に、 [TiDB Cloudコンソール](https://tidbcloud.com)で CIDR が設定されていることを確認してください。詳細については、 [CIDRを設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)を参照してください。
-> -   CIDR を管理するには[`dedicated_network_container`リソースを作成する](/tidb-cloud/terraform-use-dedicated-network-container-resource.md)も使用できます。
+> - 始める前に、 [TiDB Cloudコンソール](https://tidbcloud.com)で CIDR が設定されていることを確認してください。詳細については、 [CIDRを設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)を参照してください。
+> - CIDR を管理するには[`dedicated_network_container`リソースを作成する](/tidb-cloud/terraform-use-dedicated-network-container-resource.md)も使用できます。
 
 次のように、 `tidbcloud_dedicated_cluster`リソースを使用してTiDB Cloud Dedicated クラスターを作成できます。
 
-1.  クラスターのディレクトリを作成してそこに入ります。
+1. クラスターのディレクトリを作成してそこに入ります。
 
-2.  `cluster.tf`ファイルを作成します。
+2. `cluster.tf`ファイルを作成します。
 
     以下は`cluster.tf`ファイルの例です。
 
@@ -164,11 +164,11 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
     `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    -   `tidbcloud_dedicated_cluster`リソースを使用するには、リソース タイプを`tidbcloud_dedicated_cluster`に設定します。
-    -   リソース名は必要に応じて定義できます。例： `example_cluster` 。
-    -   リソースの詳細については、プロジェクト ID と[`tidbcloud_dedicated_cluster`仕様](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_cluster)に応じて設定できます。
+    - `tidbcloud_dedicated_cluster`リソースを使用するには、リソース タイプを`tidbcloud_dedicated_cluster`に設定します。
+    - リソース名は必要に応じて定義できます。例： `example_cluster` 。
+    - リソースの詳細については、プロジェクト ID と[`tidbcloud_dedicated_cluster`仕様](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_cluster)に応じて設定できます。
 
-3.  `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
+3. `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 
     ```shell
     $ terraform apply
@@ -223,11 +223,11 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
     上記の結果では、Terraform によって実行計画が生成され、Terraform が実行するアクションが記述されています。
 
-    -   構成と状態の違いを確認できます。
-    -   `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
-    -   `known after apply` 、 `apply`後の値が取得されることを示します。
+    - 構成と状態の違いを確認できます。
+    - `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
+    - `known after apply` 、 `apply`後の値が取得されることを示します。
 
-4.  計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
+4. 計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
 
     ```shell
     Do you want to perform these actions?
@@ -244,7 +244,7 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
     通常、 TiDB Cloud Dedicated クラスターの作成には少なくとも 10 分かかります。
 
-5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_dedicated_cluster.${resource-name}`を使用します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
+5. リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_dedicated_cluster.${resource-name}`を使用します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_dedicated_cluster.example_cluster
@@ -307,7 +307,7 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
     }
     ```
 
-6.  リモートから状態を同期する場合は、 `terraform refresh`コマンドを実行して状態を更新し、 `terraform state show tidbcloud_dedicated_cluster.${resource-name}`コマンドを実行して状態を表示します。
+6. リモートから状態を同期する場合は、 `terraform refresh`コマンドを実行して状態を更新し、 `terraform state show tidbcloud_dedicated_cluster.${resource-name}`コマンドを実行して状態を表示します。
 
     ```shell
     $ terraform refresh
@@ -382,16 +382,16 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
 TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使用してリソースを管理できます。
 
--   クラスターにTiFlashコンポーネントを追加します。
--   クラスターをスケーリングします。
--   クラスターを一時停止または再開します。
--   クラスターに[TiDBノードグループ](/tidb-cloud/tidb-node-group-overview.md)追加します。
--   クラスターの TiDB ノード グループを更新します。
--   クラスターの TiDB ノード グループを削除します。
+- クラスターにTiFlashコンポーネントを追加します。
+- クラスターをスケーリングします。
+- クラスターを一時停止または再開します。
+- クラスターに[TiDBノードグループ](/tidb-cloud/tidb-node-group-overview.md)追加します。
+- クラスターの TiDB ノード グループを更新します。
+- クラスターの TiDB ノード グループを削除します。
 
 ### TiFlashコンポーネントを追加する {#add-a-tiflash-component}
 
-1.  [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)を実行するときに使用する`cluster.tf`ファイルに、 `tiflash_node_setting`構成を追加します。
+1. [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)を実行するときに使用する`cluster.tf`ファイルに、 `tiflash_node_setting`構成を追加します。
 
     例えば：
 
@@ -401,7 +401,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
           storage_size_gi = 60
         }
 
-2.  `terraform apply`コマンドを実行します。
+2. `terraform apply`コマンドを実行します。
 
     ```shell
     $ terraform apply
@@ -475,7 +475,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
 
     上記の実行計画では、 TiFlashが追加され、1 つのリソースが変更されます。
 
-3.  計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
+3. 計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
 
     ```shell
       Enter a value: yes
@@ -486,7 +486,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
     Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
     ```
 
-4.  `terraform state show tidbcloud_dedicated_cluster.${resource-name}`を使用して状態を確認します。
+4. `terraform state show tidbcloud_dedicated_cluster.${resource-name}`を使用して状態を確認します。
 
         $ terraform state show tidbcloud_dedicated_cluster.example_cluster
 
@@ -560,7 +560,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
 
 状態が`ACTIVE`の場合、 TiDB Cloud Dedicated クラスターをスケーリングできます。
 
-1.  [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)際に使用する`cluster.tf`ファイルで、 `tidb_node_setting` 、 `tikv_node_setting` 、 `tiflash_node_setting`の設定を編集します。
+1. [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)際に使用する`cluster.tf`ファイルで、 `tidb_node_setting` 、 `tikv_node_setting` 、 `tiflash_node_setting`の設定を編集します。
 
     たとえば、TiDB ノードを 1 つ、TiKV ノードを 3 つ (スケーリング ステップが 3 であるため、TiKV ノードの数は 3 の倍数である必要があります)、およびTiFlashノードを 1 つ追加するには、次のように構成を編集します。
 
@@ -579,7 +579,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
            storage_size_gi = 200
          }
 
-2.  `terraform apply`コマンドを実行し、確認のために`yes`入力します。
+2. `terraform apply`コマンドを実行し、確認のために`yes`入力します。
 
         tidbcloud_dedicated_cluster.example_cluster: Refreshing state...
 
@@ -659,14 +659,14 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
 
 クラスターの状態が`ACTIVE`のときは一時停止し、状態が`PAUSED`のときは再開できます。
 
--   クラスターを一時停止するには`paused = true`設定します。
--   クラスターを再開するには`paused = false`設定します。
+- クラスターを一時停止するには`paused = true`設定します。
+- クラスターを再開するには`paused = false`設定します。
 
-1.  [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)を実行するときに使用する`cluster.tf`ファイルで、構成に`pause = true`を追加します。
+1. [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)を実行するときに使用する`cluster.tf`ファイルで、構成に`pause = true`を追加します。
 
         paused = true
 
-2.  `terraform apply`コマンドを実行し、プランを確認した後、 `yes`入力します。
+2. `terraform apply`コマンドを実行し、プランを確認した後、 `yes`入力します。
 
     ```shell
     $ terraform apply
@@ -742,7 +742,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
     Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
     ```
 
-3.  状態を確認するには、 `terraform state show tidbcloud_dedicated_cluster.${resource-name}`コマンドを使用します。
+3. 状態を確認するには、 `terraform state show tidbcloud_dedicated_cluster.${resource-name}`コマンドを使用します。
 
         $ terraform state show tidbcloud_dedicate_cluster.example_cluster
 
@@ -803,17 +803,17 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
              version             = "v7.5.6"
          }
 
-4.  クラスターを再開する必要がある場合は、 `paused = false`設定します。
+4. クラスターを再開する必要がある場合は、 `paused = false`設定します。
 
         paused = false
 
-5.  `terraform apply`コマンドを実行し、確認のために`yes`入力します。しばらく待つと、状態が最終的に`ACTIVE`に変更されます。
+5. `terraform apply`コマンドを実行し、確認のために`yes`入力します。しばらく待つと、状態が最終的に`ACTIVE`に変更されます。
 
 ### クラスターに TiDB ノード グループを追加する {#add-a-tidb-node-group-to-the-cluster}
 
 状態が`ACTIVE`の場合、 TiDB ノード グループをクラスターに追加できます。
 
-1.  [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)を実行するときに使用する`cluster.tf`ファイルに、 `tidbcloud_dedicated_node_group`構成を追加します。
+1. [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)を実行するときに使用する`cluster.tf`ファイルに、 `tidbcloud_dedicated_node_group`構成を追加します。
 
     たとえば、3 つのノードを持つ TiDB ノード グループを追加するには、次のように構成を編集します。
 
@@ -823,7 +823,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
             display_name = "test-node-group"
         }
 
-2.  `terraform apply`コマンドを実行し、確認のために`yes`入力します。
+2. `terraform apply`コマンドを実行し、確認のために`yes`入力します。
 
     ```shell
     $ terraform apply
@@ -860,7 +860,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-3.  状態を確認するには、 `terraform state show tidbcloud_dedicated_node_group.${resource-name}`コマンドを使用します。
+3. 状態を確認するには、 `terraform state show tidbcloud_dedicated_node_group.${resource-name}`コマンドを使用します。
 
     ```shell
     $ terraform state show tidbcloud_dedicated_node_group.example_group
@@ -898,7 +898,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
 
 クラスターの TiDB ノード グループの状態が`ACTIVE`の場合、そのグループを更新できます。
 
-1.  [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)際に使用する`cluster.tf`ファイルで、 `tidbcloud_dedicated_node_group`の設定を編集します。
+1. [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)際に使用する`cluster.tf`ファイルで、 `tidbcloud_dedicated_node_group`の設定を編集します。
 
     たとえば、ノード数を`1`に変更するには、次のように構成を編集します。
 
@@ -908,7 +908,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
             display_name = "test-node-group"
         }
 
-2.  `terraform apply`コマンドを実行し、確認のために`yes`入力します。
+2. `terraform apply`コマンドを実行し、確認のために`yes`入力します。
 
     ```shell
     $ terraform apply
@@ -1031,7 +1031,7 @@ Terraform によって管理されていない TiDB クラスターの場合は�
 
 次のように、Terraform によって作成されていないクラスターをインポートします。
 
-1.  新しい`tidbcloud_dedicated_cluster`リソースのインポート ブロックを追加します。
+1. 新しい`tidbcloud_dedicated_cluster`リソースのインポート ブロックを追加します。
 
     次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}`クラスター ID に置き換えます。
 
@@ -1040,7 +1040,7 @@ Terraform によって管理されていない TiDB クラスターの場合は�
           id = "${id}"
         }
 
-2.  新しい構成ファイルを生成します。
+2. 新しい構成ファイルを生成します。
 
     インポート ブロックに従って、新しい`tidbcloud_dedicated_cluster`リソースの新しい構成ファイルを生成します。
 
@@ -1050,7 +1050,7 @@ Terraform によって管理されていない TiDB クラスターの場合は�
 
     上記のコマンドでは、既存の`.tf`名を指定しないでください。指定した場合、Terraform はエラーを返します。
 
-3.  生成された構成を確認して適用します。
+3. 生成された構成を確認して適用します。
 
     生成された構成ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
 

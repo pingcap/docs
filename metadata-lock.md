@@ -17,22 +17,22 @@ TiDBは、オンライン非同期スキーマ変更アルゴリズムを使用�
 
 TiDB のメタデータ ロックは、次のようなすべての DDL ステートメントに適用されます。
 
--   [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
--   [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
--   [`DROP COLUMN`](/sql-statements/sql-statement-drop-column.md)
--   [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)
--   [`DROP PARTITION`](/partitioned-table.md#partition-management)
--   [`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md)
--   [`EXCHANGE PARTITION`](/partitioned-table.md#partition-management)
--   [`REORGANIZE PARTITION`](/partitioned-table.md#partition-management)
--   [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
--   [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
+- [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
+- [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
+- [`DROP COLUMN`](/sql-statements/sql-statement-drop-column.md)
+- [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)
+- [`DROP PARTITION`](/partitioned-table.md#partition-management)
+- [`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md)
+- [`EXCHANGE PARTITION`](/partitioned-table.md#partition-management)
+- [`REORGANIZE PARTITION`](/partitioned-table.md#partition-management)
+- [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
+- [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
 
 メタデータロックを有効にすると、TiDBにおけるDDLタスクの実行にパフォーマンスへの影響が出る可能性があります。この影響を軽減するために、メタデータロックを必要としないシナリオをいくつか以下に示します。
 
--   自動コミットが有効になっているクエリは`SELECT`
--   ステイル読み取りが有効になっています
--   一時テーブルにアクセスする
+- 自動コミットが有効になっているクエリは`SELECT`
+- ステイル読み取りが有効になっています
+- 一時テーブルにアクセスする
 
 ## 使用法 {#usage}
 
@@ -40,9 +40,9 @@ TiDB v6.5.0以降、メタデータロックはデフォルトで有効になり
 
 ## インパクト {#impact}
 
--   DML の場合、メタデータ ロックは実行をブロックせず、デッドロックも発生しません。
--   メタデータ ロックを有効にすると、トランザクション内のメタデータ オブジェクトの情報は最初のアクセス時に決定され、その後は変更されません。
--   DDLの場合、メタデータの状態を変更すると、古いトランザクションによってDDLがブロックされる可能性があります。以下に例を示します。
+- DML の場合、メタデータ ロックは実行をブロックせず、デッドロックも発生しません。
+- メタデータ ロックを有効にすると、トランザクション内のメタデータ オブジェクトの情報は最初のアクセス時に決定され、その後は変更されません。
+- DDLの場合、メタデータの状態を変更すると、古いトランザクションによってDDLがブロックされる可能性があります。以下に例を示します。
 
     | セッション1                                                                                     | セッション2                                                     |
     | :----------------------------------------------------------------------------------------- | :--------------------------------------------------------- |
@@ -134,5 +134,5 @@ TiDBにおけるDDL操作はオンラインDDLモードです。DDL文の実行�
 
 メタデータロックは、TiDBクラスタ内のすべてのトランザクションで使用されるメタデータのバージョン差が最大1バージョン以内であることを保証できます。この目的を達成するために、TiDBは次の2つのルールを実装しています。
 
--   DMLを実行すると、TiDBはトランザクションコンテキスト内でDMLによってアクセスされたメタデータオブジェクト（テーブル、ビュー、対応するメタデータバージョンなど）を記録します。これらのレコードは、トランザクションがコミットされるとクリーンアップされます。
--   DDL文の状態が変化すると、メタデータの最新バージョンがすべてのTiDBノードにプッシュされます。TiDBノード上でこの状態変化に関連するすべてのトランザクションで使用されるメタデータバージョンと現在のメタデータバージョンの差が2未満の場合、そのTiDBノードはメタデータオブジェクトのメタデータロックを取得したとみなされます。次の状態変化は、クラスタ内のすべてのTiDBノードがメタデータオブジェクトのメタデータロックを取得した後にのみ実行できます。
+- DMLを実行すると、TiDBはトランザクションコンテキスト内でDMLによってアクセスされたメタデータオブジェクト（テーブル、ビュー、対応するメタデータバージョンなど）を記録します。これらのレコードは、トランザクションがコミットされるとクリーンアップされます。
+- DDL文の状態が変化すると、メタデータの最新バージョンがすべてのTiDBノードにプッシュされます。TiDBノード上でこの状態変化に関連するすべてのトランザクションで使用されるメタデータバージョンと現在のメタデータバージョンの差が2未満の場合、そのTiDBノードはメタデータオブジェクトのメタデータロックを取得したとみなされます。次の状態変化は、クラスタ内のすべてのTiDBノードがメタデータオブジェクトのメタデータロックを取得した後にのみ実行できます。

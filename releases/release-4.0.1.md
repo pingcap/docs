@@ -11,45 +11,45 @@ TiDB バージョン: 4.0.1
 
 ## 新機能 {#new-features}
 
--   TiKV
+- TiKV
 
-    -   `--advertise-status-addr`開始フラグを追加して、 アドバタイズするステータスアドレスを指定します。 [＃8046](https://github.com/tikv/tikv/pull/8046)
+    - `--advertise-status-addr`開始フラグを追加して、 アドバタイズするステータスアドレスを指定します。 [＃8046](https://github.com/tikv/tikv/pull/8046)
 
--   PD
+- PD
 
-    -   組み込みの TiDB Dashboard内部プロキシをサポート [＃2511](https://github.com/pingcap/pd/pull/2511)
-    -   PDクライアントのカスタムタイムアウト設定をサポート [＃2509](https://github.com/pingcap/pd/pull/2509)
+    - 組み込みの TiDB Dashboard内部プロキシをサポート [＃2511](https://github.com/pingcap/pd/pull/2511)
+    - PDクライアントのカスタムタイムアウト設定をサポート [＃2509](https://github.com/pingcap/pd/pull/2509)
 
--   TiFlash
+- TiFlash
 
-    -   TiDBの新しい照合順序フレームワークをサポート
-    -   `If` / `BitAnd/BitOr` / `BitXor/BitNot` / `Json_length`関数をTiFlashにプッシュダウンする機能をサポート
-    -   TiFlashの大規模トランザクションの Resolve Lock ロジックをサポート
+    - TiDBの新しい照合順序フレームワークをサポート
+    - `If` / `BitAnd/BitOr` / `BitXor/BitNot` / `Json_length`関数をTiFlashにプッシュダウンする機能をサポート
+    - TiFlashの大規模トランザクションの Resolve Lock ロジックをサポート
 
--   ツール
+- ツール
 
-    -   Backup & Restore (BR)
+    - Backup & Restore (BR)
 
-        -   BRとTiDBクラスタの互換性がない問題を回避するために、 BRの起動時にバージョンチェックを追加します[＃311](https://github.com/pingcap/br/pull/311)
+        - BRとTiDBクラスタの互換性がない問題を回避するために、 BRの起動時にバージョンチェックを追加します[＃311](https://github.com/pingcap/br/pull/311)
 
 ## バグ修正 {#bug-fixes}
 
--   TiKV
+- TiKV
 
-    -   起動ログの`use-unified-pool`構成が誤って印刷される問題を修正[＃7946](https://github.com/tikv/tikv/pull/7946)
-    -   tikv-ctlが相対パスをサポートしない問題を修正 [＃7963](https://github.com/tikv/tikv/pull/7963)
-    -   ポイントセレクトのモニタリングメトリックが不正確になるバグを修正[＃8033](https://github.com/tikv/tikv/pull/8033)
-    -   ネットワーク分離が消えた後にピアが破棄されない可能性がある問題を修正[＃8006](https://github.com/tikv/tikv/pull/8006)
-    -   読み取りインデックスのリクエストで古いコミットインデックスが取得される可能性がある問題を修正しました [＃8043](https://github.com/tikv/tikv/pull/8043)
-    -   S3とGCSストレージによるバックアップとリストアの信頼性の向上[＃7917](https://github.com/tikv/tikv/pull/7917)
+    - 起動ログの`use-unified-pool`構成が誤って印刷される問題を修正[＃7946](https://github.com/tikv/tikv/pull/7946)
+    - tikv-ctlが相対パスをサポートしない問題を修正 [＃7963](https://github.com/tikv/tikv/pull/7963)
+    - ポイントセレクトのモニタリングメトリックが不正確になるバグを修正[＃8033](https://github.com/tikv/tikv/pull/8033)
+    - ネットワーク分離が消えた後にピアが破棄されない可能性がある問題を修正[＃8006](https://github.com/tikv/tikv/pull/8006)
+    - 読み取りインデックスのリクエストで古いコミットインデックスが取得される可能性がある問題を修正しました [＃8043](https://github.com/tikv/tikv/pull/8043)
+    - S3とGCSストレージによるバックアップとリストアの信頼性の向上[＃7917](https://github.com/tikv/tikv/pull/7917)
 
--   PD
+- PD
 
-    -   いくつかの状況における配置ルールの誤った設定を防ぐ[＃2516](https://github.com/pingcap/pd/pull/2516)
-    -   配置ルールを削除するとpanicが発生する可能性がある問題を修正[＃2515](https://github.com/pingcap/pd/pull/2515)
-    -   ストアの使用サイズが0の場合にストア情報を取得できないバグを修正[＃2474](https://github.com/pingcap/pd/pull/2474)
+    - いくつかの状況における配置ルールの誤った設定を防ぐ[＃2516](https://github.com/pingcap/pd/pull/2516)
+    - 配置ルールを削除するとpanicが発生する可能性がある問題を修正[＃2515](https://github.com/pingcap/pd/pull/2515)
+    - ストアの使用サイズが0の場合にストア情報を取得できないバグを修正[＃2474](https://github.com/pingcap/pd/pull/2474)
 
--   TiFlash
+- TiFlash
 
-    -   TiFlashの`bit`型列のデフォルト値が正しく解析されない問題を修正しました
-    -   TiFlashの一部のタイムゾーンにおける`1970-01-01 00:00:00 UTC`の誤算を修正
+    - TiFlashの`bit`型列のデフォルト値が正しく解析されない問題を修正しました
+    - TiFlashの一部のタイムゾーンにおける`1970-01-01 00:00:00 UTC`の誤算を修正

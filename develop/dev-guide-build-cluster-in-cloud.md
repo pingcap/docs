@@ -14,23 +14,23 @@ aliases: ['/ja/tidb/stable/dev-guide-build-cluster-in-cloud/','/ja/tidb/dev/dev-
 
 ## ステップ1. TiDB Cloud Starterインスタンスを作成します {#step-1-create-a-starter-instance} {#step-1-create-a-starter-instance}
 
-1.  TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbcloud.com/free-trial)をクリックしてアカウントを作成してください。
+1. TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbcloud.com/free-trial)をクリックしてアカウントを作成してください。
 
-2.  TiDB Cloudアカウントに[ログイン](https://tidbcloud.com/)。
+2. TiDB Cloudアカウントに[ログイン](https://tidbcloud.com/)。
 
-3.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、 **Create Resource**をクリックします。
+3. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、 **Create Resource**をクリックします。
 
-4.  **Create Resource**ページでは、デフォルトで**Starter**が選択されています。TiDB Cloud Starterインスタンスの名前を入力し、作成先のクラウドプロバイダーとリージョンを選択してください。
+4. **Create Resource**ページでは、デフォルトで**Starter**が選択されています。TiDB Cloud Starterインスタンスの名前を入力し、作成先のクラウドプロバイダーとリージョンを選択してください。
 
-5.  **Create**をクリックして、 TiDB Cloud Starterインスタンスを作成します。
+5. **Create**をクリックして、 TiDB Cloud Starterインスタンスを作成します。
 
     TiDB Cloud Starterインスタンスは、約30秒で作成されます。
 
-6.  TiDB Cloud Starterインスタンスが作成されたら、インスタンス名をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。接続ダイアログが表示されます。
+6. TiDB Cloud Starterインスタンスが作成されたら、インスタンス名をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。接続ダイアログが表示されます。
 
-7.  ダイアログで、希望する接続方法とオペレーティングシステムを選択すると、対応する接続​​文字列が表示されます。このドキュメントでは、例としてMySQLクライアントを使用します。
+7. ダイアログで、希望する接続方法とオペレーティングシステムを選択すると、対応する接続​​文字列が表示されます。このドキュメントでは、例としてMySQLクライアントを使用します。
 
-8.  **Generate Password**をクリックすると、ランダムなパスワードが生成されます。生成されたパスワードは二度と表示されないため、安全な場所に保存してください。ルートパスワードを設定しないと、 TiDB Cloud Starterインスタンスに接続できません。
+8. **Generate Password**をクリックすると、ランダムなパスワードが生成されます。生成されたパスワードは二度と表示されないため、安全な場所に保存してください。ルートパスワードを設定しないと、 TiDB Cloud Starterインスタンスに接続できません。
 
 > **Note:**
 >
@@ -38,7 +38,7 @@ aliases: ['/ja/tidb/stable/dev-guide-build-cluster-in-cloud/','/ja/tidb/dev/dev-
 
 ## ステップ2. TiDB Cloud Starterインスタンスに接続します {#step-2-connect-to-a-starter-instance} {#step-2-connect-to-a-starter-instance}
 
-1.  MySQLクライアントがインストールされていない場合は、お使いのオペレーティングシステムを選択し、以下の手順に従ってインストールしてください。
+1. MySQLクライアントがインストールされていない場合は、お使いのオペレーティングシステムを選択し、以下の手順に従ってインストールしてください。
 
 <SimpleTab>
 
@@ -109,7 +109,7 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 </SimpleTab>
 
-2.  [ステップ1](#step-1-create-a-starter-instance)で取得した接続文字列を実行します。
+2. [ステップ1](#step-1-create-a-starter-instance)で取得した接続文字列を実行します。
 
     ```shell
     mysql --connect-timeout 15 -u '<prefix>.root' -h <host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p
@@ -117,10 +117,10 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 > **Note:**
 >
-> -   TiDB Cloud Starterインスタンスに接続するときは、 [TLS接続を使用する](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters)必要があります。
-> -   TiDB Cloud Starterインスタンスへの接続時に問題が発生した場合は、 [TiDB Cloud Starterインスタンスへのセキュリティ接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters)で詳細を確認してください。
+> - TiDB Cloud Starterインスタンスに接続するときは、 [TLS接続を使用する](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters)必要があります。
+> - TiDB Cloud Starterインスタンスへの接続時に問題が発生した場合は、 [TiDB Cloud Starterインスタンスへのセキュリティ接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters)で詳細を確認してください。
 
-3.  ログインするにはパスワードを入力してください。
+3. ログインするにはパスワードを入力してください。
 
 ## ステップ3．SQLステートメントを実行する {#step-3-execute-a-sql-statement}
 
@@ -144,6 +144,6 @@ SELECT 'Hello TiDB Cloud!';
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

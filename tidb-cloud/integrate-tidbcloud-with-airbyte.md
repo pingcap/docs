@@ -11,16 +11,16 @@ summary: Airbyte TiDBコネクタの使い方を学びましょう。
 
 Airbyteは、わずか数ステップでローカル環境にデプロイできます。
 
-1.  ワークスペースに[Docker](https://www.docker.com/products/docker-desktop)をインストールします。
+1. ワークスペースに[Docker](https://www.docker.com/products/docker-desktop)をインストールします。
 
-2.  Airbyteのソースコードをクローンする。
+2. Airbyteのソースコードをクローンする。
 
     ```shell
     git clone https://github.com/airbytehq/airbyte.git && \
     cd airbyte
     ```
 
-3.  docker-composeを使用してDockerイメージを実行します。
+3. docker-composeを使用してDockerイメージを実行します。
 
     ```shell
     docker-compose up
@@ -44,27 +44,27 @@ airbyte-server      | --------------------------------------
 
 便利なことに、TiDBをソースと宛先に設定する手順は同じです。
 
-1.  サイドバーの**Sources**または**Destinations**をクリックし、TiDBタイプを選択して新しいTiDBコネクタを作成します。
+1. サイドバーの**Sources**または**Destinations**をクリックし、TiDBタイプを選択して新しいTiDBコネクタを作成します。
 
-2.  以下のパラメータを入力してください。
+2. 以下のパラメータを入力してください。
 
-    -   ホスト: <CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>クラスターのエンドポイント
-    -   ポート: データベースのポート番号
-    -   データベース：データを同期したいデータベース
-    -   ユーザー名：データベースにアクセスするためのユーザー名
-    -   パスワード：ユーザー名のパスワード
+    - ホスト: <CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>クラスターのエンドポイント
+    - ポート: データベースのポート番号
+    - データベース：データを同期したいデータベース
+    - ユーザー名：データベースにアクセスするためのユーザー名
+    - パスワード：ユーザー名のパスワード
 
     TiDB Cloudコンソールの接続ダイアログからパラメーター値を取得できます。ダイアログを開くには、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>クラスターの名前をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。
 
-3.  **SSL Connection**を有効にし、 **JDBC URLパラメータ**でTLSプロトコルを**TLSv1.2**または**TLSv1.3**に設定します。
+3. **SSL Connection**を有効にし、 **JDBC URLパラメータ**でTLSプロトコルを**TLSv1.2**または**TLSv1.3**に設定します。
 
     > **Note:**
     >
-    > -   TiDB Cloud はTLS 接続をサポートしています。TLSv1.2 および**TLSv1.3**から TLS プロトコルを選択できます。たとえば、 `enabledTLSProtocols=TLSv1.2` **。**
-    > -   JDBC を介してTiDB Cloudへの TLS 接続を無効にする場合は、JDBC URL パラメータで useSSL を`false`に設定し、SSL 接続を閉じる必要があります。たとえば、 `useSSL=false`のように設定します。
-    > -   TiDB Cloud StarterとTiDB Cloud EssentialはTLS接続のみをサポートしています。
+    > - TiDB Cloud はTLS 接続をサポートしています。TLSv1.2 および**TLSv1.3**から TLS プロトコルを選択できます。たとえば、 `enabledTLSProtocols=TLSv1.2` **。**
+    > - JDBC を介してTiDB Cloudへの TLS 接続を無効にする場合は、JDBC URL パラメータで useSSL を`false`に設定し、SSL 接続を閉じる必要があります。たとえば、 `useSSL=false`のように設定します。
+    > - TiDB Cloud StarterとTiDB Cloud EssentialはTLS接続のみをサポートしています。
 
-4.  コネクタの作成を完了するには、**Set up source**または**宛先の設定**をクリックします。次のスクリーンショットは、ソースとしてTiDBを設定した例です。
+4. コネクタの作成を完了するには、**Set up source**または**宛先の設定**をクリックします。次のスクリーンショットは、ソースとしてTiDBを設定した例です。
 
 ![TiDB source configuration](/media/tidb-cloud/integration-airbyte-parameters.jpg)
 
@@ -78,40 +78,40 @@ TiDB コネクタの詳細については、 [TiDBソース](https://docs.airbyt
 
 以下の手順では、TiDBをソースと宛先の両方として使用します。他のコネクタでは、パラメータが異なる場合があります。
 
-1.  サイドバーの**Connections**をクリックし、次に**New Connection**をクリックします。
+1. サイドバーの**Connections**をクリックし、次に**New Connection**をクリックします。
 
-2.  事前に設定した送信元と送信先を選択してください。
+2. 事前に設定した送信元と送信先を選択してください。
 
-3.  接続**Set up**パネルに移動し、 `${source_name} - ${destination-name}`などの接続名を作成します。
+3. 接続**Set up**パネルに移動し、 `${source_name} - ${destination-name}`などの接続名を作成します。
 
-4.  **Replication frequency**を**Every 24 hours**に設定すると、接続は1日に1回データを複製します。
+4. **Replication frequency**を**Every 24 hours**に設定すると、接続は1日に1回データを複製します。
 
-5.  **Destination Namespace**を**Custom format**に設定し、**Namespace Custom Format**を**test**に設定して、すべてのデータを`test`データベースに保存します。
+5. **Destination Namespace**を**Custom format**に設定し、**Namespace Custom Format**を**test**に設定して、すべてのデータを`test`データベースに保存します。
 
-6.  **Sync mode**で**Full refresh | Overwrite**を選択してください。
+6. **Sync mode**で**Full refresh | Overwrite**を選択してください。
 
     > **Tip:**
     >
     > TiDB コネクタは[増分更新と完全更新の同期](https://airbyte.com/blog/understanding-data-replication-modes)をサポートします。
     >
-    > -   インクリメンタルモードでは、Airbyteは前回の同期ジョブ以降にソースに追加されたレコードのみを読み取ります。インクリメンタルモードを使用した最初の同期は、フルリフレッシュモードと同等です。
-    > -   フルリフレッシュモードでは、Airbyteはソース内のすべてのレコードを読み取り、同期タスクごとに宛先に複製します。Airbyteの**Namespace**という名前のテーブルごとに、同期モードを個別に設定できます。
+    > - インクリメンタルモードでは、Airbyteは前回の同期ジョブ以降にソースに追加されたレコードのみを読み取ります。インクリメンタルモードを使用した最初の同期は、フルリフレッシュモードと同等です。
+    > - フルリフレッシュモードでは、Airbyteはソース内のすべてのレコードを読み取り、同期タスクごとに宛先に複製します。Airbyteの**Namespace**という名前のテーブルごとに、同期モードを個別に設定できます。
 
     ![Set up connection](/media/tidb-cloud/integration-airbyte-connection.jpg)
 
-7.  デフォルトの正規化モードを使用するには、 **Normalization & Transformation**を**Normalized tabular data**に設定するか、ジョブのdbtファイルを設定してください。
+7. デフォルトの正規化モードを使用するには、 **Normalization & Transformation**を**Normalized tabular data**に設定するか、ジョブのdbtファイルを設定してください。
 
-8.  **Set up connection**をクリックしてください。
+8. **Set up connection**をクリックしてください。
 
-9.  接続が確立されたら、 **ENABLED**をクリックして同期タスクをアクティブ化します。また、 **Sync now**をクリックすると、すぐに同期を開始できます。
+9. 接続が確立されたら、 **ENABLED**をクリックして同期タスクをアクティブ化します。また、 **Sync now**をクリックすると、すぐに同期を開始できます。
 
 ![Sync data](/media/tidb-cloud/integration-airbyte-sync.jpg)
 
 ## 制限事項 {#limitations}
 
--   TiDBコネクタは、TiCDCが提供する変更データキャプチャ（CDC）機能を使用できません。増分同期はカーソル機構に基づいて実行されます。
--   TiDB の宛先では、デフォルトの正規化モードで`timestamp`型が`varchar`型に変換されます。これは、Airbyte が送信中にタイムスタンプ型を文字列に変換し、TiDB が`cast ('2020-07-28 14:50:15+1:00' as timestamp)`をサポートしていないためです。
--   一部の大規模な ELT ミッションでは、TiDB の[トランザクション制限](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions)のパラメーターを増やす必要があります。
+- TiDBコネクタは、TiCDCが提供する変更データキャプチャ（CDC）機能を使用できません。増分同期はカーソル機構に基づいて実行されます。
+- TiDB の宛先では、デフォルトの正規化モードで`timestamp`型が`varchar`型に変換されます。これは、Airbyte が送信中にタイムスタンプ型を文字列に変換し、TiDB が`cast ('2020-07-28 14:50:15+1:00' as timestamp)`をサポートしていないためです。
+- 一部の大規模な ELT ミッションでは、TiDB の[トランザクション制限](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions)のパラメーターを増やす必要があります。
 
 ## 関連リソース {#related-resources}
 

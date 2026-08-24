@@ -13,17 +13,17 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 
 ## 前提条件 {#prerequisites}
 
--   Flashduty 機能による購読機能は、 **Enterprise**または**Premium**[サポートプラン](/tidb-cloud/connected-care-overview.md)に加入している組織のみが利用できます。
+- Flashduty 機能による購読機能は、 **Enterprise**または**Premium**[サポートプラン](/tidb-cloud/connected-care-overview.md)に加入している組織のみが利用できます。
 
 <CustomContent plan="dedicated">
 
--   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象プロジェクトへの`Project Owner`アクセス権が必要です。
+- TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象プロジェクトへの`Project Owner`アクセス権が必要です。
 
 </CustomContent>
 
 <CustomContent plan="essential,premium">
 
--   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象インスタンスへの`Project Owner`または`Instance Manager`アクセス権が必要です。
+- TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象インスタンスへの`Project Owner`または`Instance Manager`アクセス権が必要です。
 
 </CustomContent>
 
@@ -33,8 +33,8 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 
 ### ステップ1. FlashdutyのWebhook URLを生成する {#step-1-generate-a-flashduty-webhook-url}
 
-1.  [FlashDuty Prometheusとの統合](https://docs.flashcat.cloud/en/on-call/integration/alert-integration/alert-sources/prometheus)の手順に従ってWebhook URLを生成します。
-2.  生成されたウェブフックURLを保存して、次のステップで使用してください。
+1. [FlashDuty Prometheusとの統合](https://docs.flashcat.cloud/en/on-call/integration/alert-integration/alert-sources/prometheus)の手順に従ってWebhook URLを生成します。
+2. 生成されたウェブフックURLを保存して、次のステップで使用してください。
 
 ### ステップ2. TiDB Cloudから購読する {#step-2-subscribe-from-tidb-cloud}
 
@@ -46,28 +46,28 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 >
 > TiDB Cloud Dedicatedの場合、アラートの購読は現在のプロジェクト内のすべてのアラートに適用されます。プロジェクト内に複数のTiDB Cloud Dedicatedクラスタがある場合でも、購読は一度だけで済みます。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
+2. プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  左側のナビゲーションペインで、 **Alert Subscription**の下にある**Project Settings**をクリックします。
+3. 左側のナビゲーションペインで、 **Alert Subscription**の下にある**Project Settings**をクリックします。
 
-4.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
+4. **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-5.  **Subscriber Type**のドロップダウンリストから**Flashduty**を選択してください。
+5. **Subscriber Type**のドロップダウンリストから**Flashduty**を選択してください。
 
-6.  **Name**欄に名前を入力し、 **Webhook URL**欄にFlashdutyのWebhook URLを入力してください。
+6. **Name**欄に名前を入力し、 **Webhook URL**欄にFlashdutyのWebhook URLを入力してください。
 
-7.  **Test Connection**をクリックしてください。
+7. **Test Connection**をクリックしてください。
 
-    -   テストが成功すると、**Save**ボタンが表示されます。
-    -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージの指示に従って問題を解決し、接続を再試行してください。
+    - テストが成功すると、**Save**ボタンが表示されます。
+    - テストが失敗した場合は、エラーメッセージが表示されます。メッセージの指示に従って問題を解決し、接続を再試行してください。
 
-8.  購読を完了するには、 **Save**をクリックしてください。
+8. 購読を完了するには、 **Save**をクリックしてください。
 
 または、 TiDB Cloud Dedicatedクラスタの**Alert**ページの右上にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
@@ -81,22 +81,22 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 >
 > TiDB Cloud Essentialの場合、アラートの購読は現在のインスタンス内のすべてのアラートに適用されます。複数のTiDB Cloud Essentialインスタンスをお持ちの場合は、各インスタンスごとに個別に購読する必要があります。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
 
-3.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
+3. **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-4.  **Subscriber Type**のドロップダウンリストから**Flashduty**を選択してください。
+4. **Subscriber Type**のドロップダウンリストから**Flashduty**を選択してください。
 
-5.  **Name**欄に名前を入力し、 **Webhook URL**欄にFlashdutyのWebhook URLを入力してください。
+5. **Name**欄に名前を入力し、 **Webhook URL**欄にFlashdutyのWebhook URLを入力してください。
 
-6.  **Test Connection**をクリックしてください。
+6. **Test Connection**をクリックしてください。
 
-    -   テストが成功すると、**Save**ボタンが表示されます。
-    -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージの指示に従って問題を解決し、接続を再試行してください。
+    - テストが成功すると、**Save**ボタンが表示されます。
+    - テストが失敗した場合は、エラーメッセージが表示されます。メッセージの指示に従って問題を解決し、接続を再試行してください。
 
-7.  購読を完了するには、 **Save**をクリックしてください。
+7. 購読を完了するには、 **Save**をクリックしてください。
 
 または、 TiDB Cloud Essentialインスタンスの**Alert**ページの右上隅にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
@@ -108,22 +108,22 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 >
 > TiDB Cloud Premiumの場合、アラートの購読は現在のインスタンス内のすべてのアラートに適用されます。複数のTiDB Cloud Premiumインスタンスをお持ちの場合は、各インスタンスごとに個別に購読する必要があります。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
 
-3.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
+3. **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-4.  **Subscriber Type**のドロップダウンリストから**Flashduty**を選択してください。
+4. **Subscriber Type**のドロップダウンリストから**Flashduty**を選択してください。
 
-5.  **Name**欄に名前を入力し、 **Webhook URL**欄にFlashdutyのWebhook URLを入力してください。
+5. **Name**欄に名前を入力し、 **Webhook URL**欄にFlashdutyのWebhook URLを入力してください。
 
-6.  **Test Connection**をクリックしてください。
+6. **Test Connection**をクリックしてください。
 
-    -   テストが成功すると、**Save**ボタンが表示されます。
-    -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージの指示に従って問題を解決し、接続を再試行してください。
+    - テストが成功すると、**Save**ボタンが表示されます。
+    - テストが失敗した場合は、エラーメッセージが表示されます。メッセージの指示に従って問題を解決し、接続を再試行してください。
 
-7.  購読を完了するには、 **Save**をクリックしてください。
+7. 購読を完了するには、 **Save**をクリックしてください。
 
 または、 TiDB Cloud Premiumインスタンスの**Alert**ページの右上隅にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
@@ -137,28 +137,28 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 
 <CustomContent plan="dedicated">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
-2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
-3.  左側のナビゲーションペインで、 **Project Settings**の下にある**Alert Subscription**をクリックします。
-4.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **...** &gt; **Unsubscribe**をクリックします。
-5.  購読解除を確定するには、 **Unsubscribe**をクリックしてください。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
+2. プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
+3. 左側のナビゲーションペインで、 **Project Settings**の下にある**Alert Subscription**をクリックします。
+4. **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **...** &gt; **Unsubscribe**をクリックします。
+5. 購読解除を確定するには、 **Unsubscribe**をクリックしてください。
 
 </CustomContent>
 
 <CustomContent plan="essential">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
-3.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **...** &gt; **Unsubscribe**をクリックします。
-4.  購読解除を確定するには、 **Unsubscribe**をクリックしてください。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
+2. 左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
+3. **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **...** &gt; **Unsubscribe**をクリックします。
+4. 購読解除を確定するには、 **Unsubscribe**をクリックしてください。
 
 </CustomContent>
 
 <CustomContent plan="premium">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
-3.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **...** &gt; **Unsubscribe**をクリックします。
-4.  購読解除を確定するには、 **Unsubscribe**をクリックしてください。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
+2. 左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
+3. **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **...** &gt; **Unsubscribe**をクリックします。
+4. 購読解除を確定するには、 **Unsubscribe**をクリックしてください。
 
 </CustomContent>

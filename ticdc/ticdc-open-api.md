@@ -15,22 +15,22 @@ TiCDC は、TiCDC クラスターを照会および操作するための OpenAPI
 
 API を使用して、TiCDC クラスターで次のメンテナンス操作を実行できます。
 
--   [TiCDCノードのステータス情報を取得する](#get-the-status-information-of-a-ticdc-node)
--   [TiCDC クラスターのヘルスステータスを確認する](#check-the-health-status-of-a-ticdc-cluster)
--   [レプリケーションタスクを作成する](#create-a-replication-task)
--   [レプリケーションタスクを削除する](#remove-a-replication-task)
--   [レプリケーション構成を更新する](#update-the-replication-configuration)
--   [レプリケーションタスクリストをクエリする](#query-the-replication-task-list)
--   [特定のレプリケーションタスクをクエリする](#query-a-specific-replication-task)
--   [レプリケーションタスクを一時停止する](#pause-a-replication-task)
--   [Resume a replication task](#resume-a-replication-task)
--   [レプリケーションサブタスクリストを照会する](#query-the-replication-subtask-list)
--   [特定のレプリケーションサブタスクをクエリする](#query-a-specific-replication-subtask)
--   [TiCDC サービス プロセス リストを照会する](#query-the-ticdc-service-process-list)
--   [所有者ノードの退去](#evict-an-owner-node)
--   [レプリケーションタスク内のすべてのテーブルの負荷分散を手動でトリガーする](#manually-trigger-the-load-balancing-of-all-tables-in-a-replication-task)
--   [テーブルを別のノードに手動でスケジュールする](#manually-schedule-a-table-to-another-node)
--   [TiCDCサーバーのログレベルを動的に調整する](#dynamically-adjust-the-log-level-of-the-ticdc-server)
+- [TiCDCノードのステータス情報を取得する](#get-the-status-information-of-a-ticdc-node)
+- [TiCDC クラスターのヘルスステータスを確認する](#check-the-health-status-of-a-ticdc-cluster)
+- [レプリケーションタスクを作成する](#create-a-replication-task)
+- [レプリケーションタスクを削除する](#remove-a-replication-task)
+- [レプリケーション構成を更新する](#update-the-replication-configuration)
+- [レプリケーションタスクリストをクエリする](#query-the-replication-task-list)
+- [特定のレプリケーションタスクをクエリする](#query-a-specific-replication-task)
+- [レプリケーションタスクを一時停止する](#pause-a-replication-task)
+- [Resume a replication task](#resume-a-replication-task)
+- [レプリケーションサブタスクリストを照会する](#query-the-replication-subtask-list)
+- [特定のレプリケーションサブタスクをクエリする](#query-a-specific-replication-subtask)
+- [TiCDC サービス プロセス リストを照会する](#query-the-ticdc-service-process-list)
+- [所有者ノードの退去](#evict-an-owner-node)
+- [レプリケーションタスク内のすべてのテーブルの負荷分散を手動でトリガーする](#manually-trigger-the-load-balancing-of-all-tables-in-a-replication-task)
+- [テーブルを別のノードに手動でスケジュールする](#manually-schedule-a-table-to-another-node)
+- [TiCDCサーバーのログレベルを動的に調整する](#dynamically-adjust-the-log-level-of-the-ticdc-server)
 
 すべてのAPIのリクエストボディと戻り値はJSON形式です。以下のセクションでは、APIの具体的な使用方法について説明します。
 
@@ -77,11 +77,11 @@ curl -X GET http://127.0.0.1:8300/api/v1/status
 
 上記の出力のフィールドは次のように説明されます。
 
--   version: 現在の TiCDC バージョン番号。
--   git_hash: Git ハッシュ値。
--   id: ノードのキャプチャ ID。
--   pid: ノードのキャプチャプロセス PID。
--   is_owner: ノードが所有者であるかどうかを示します。
+- version: 現在の TiCDC バージョン番号。
+- git_hash: Git ハッシュ値。
+- id: ノードのキャプチャ ID。
+- pid: ノードのキャプチャプロセス PID。
+- is_owner: ノードが所有者であるかどうかを示します。
 
 ## TiCDC クラスターのヘルスステータスを確認する {#check-the-health-status-of-a-ticdc-cluster}
 
@@ -141,10 +141,10 @@ The configuration parameters of sink are as follows:
 
 `dispatchers` : MQタイプのシンクでは、ディスパッチャを使用してイベントディスパッチャを設定できます。サポートされるディスパッチャは`default` 、 `ts` 、 `index-value` 、 `table` 4つです。ディスパッチャのルールは以下のとおりです。
 
--   `default` : `table`モードでイベントを送信します。
--   `ts` : 行変更の commitTs を使用してハッシュ値を作成し、イベントをディスパッチします。
--   `index-value`: uses the name and value of the selected HandleKey column to create the hash value and dispatch events.
--   `table` : テーブルのスキーマ名とテーブル名を使用してハッシュ値を作成し、イベントをディスパッチします。
+- `default` : `table`モードでイベントを送信します。
+- `ts` : 行変更の commitTs を使用してハッシュ値を作成し、イベントをディスパッチします。
+- `index-value`: uses the name and value of the selected HandleKey column to create the hash value and dispatch events.
+- `table` : テーブルのスキーマ名とテーブル名を使用してハッシュ値を作成し、イベントをディスパッチします。
 
 `matcher` : マッチャーの一致構文はフィルター ルール構文と同じです。
 
@@ -269,11 +269,11 @@ curl -X GET http://127.0.0.1:8300/api/v1/changefeeds?state=normal
 
 上記の返された結果のフィールドは次のように説明されます。
 
--   id: レプリケーション タスクの ID。
--   状態: レプリケーション タスクの現在の状態[州](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer) 。
--   checkpoint_tso: レプリケーション タスクの現在のチェックポイントの TSO 表現。
--   checkpoint_time: レプリケーション タスクの現在のチェックポイントのフォーマットされた時間表現。
--   error: レプリケーション タスクのエラー情報。
+- id: レプリケーション タスクの ID。
+- 状態: レプリケーション タスクの現在の状態[州](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer) 。
+- checkpoint_tso: レプリケーション タスクの現在のチェックポイントの TSO 表現。
+- checkpoint_time: レプリケーション タスクの現在のチェックポイントのフォーマットされた時間表現。
+- error: レプリケーション タスクのエラー情報。
 
 ## 特定のレプリケーションタスクをクエリする {#query-a-specific-replication-task}
 

@@ -11,22 +11,22 @@ summary: MariaDBからTiDBへのデータ移行方法を学びましょう。
 
 適切な移行戦略を選択してください。
 
--   最初の戦略は、 [Dumplingでデータをダンプし、 TiDB Lightningでデータを復元する](#dump-data-with-dumpling-and-restore-data-with-tidb-lightning)です。これは MariaDB のすべてのバージョンで機能します。この戦略の欠点は、より多くのダウンタイムが必要になることです。
--   2 番目の戦略は、 [DMを使用してデータを複製する](#replicate-data-with-dm)ことです。 DM は MariaDB のすべてのバージョンをサポートしているわけではありません。サポートされているバージョンは、 [DM互換性カタログ](/dm/dm-compatibility-catalog.md#compatibility-catalog-of-tidb-data-migration)に記載されています。
+- 最初の戦略は、 [Dumplingでデータをダンプし、 TiDB Lightningでデータを復元する](#dump-data-with-dumpling-and-restore-data-with-tidb-lightning)です。これは MariaDB のすべてのバージョンで機能します。この戦略の欠点は、より多くのダウンタイムが必要になることです。
+- 2 番目の戦略は、 [DMを使用してデータを複製する](#replicate-data-with-dm)ことです。 DM は MariaDB のすべてのバージョンをサポートしているわけではありません。サポートされているバージョンは、 [DM互換性カタログ](/dm/dm-compatibility-catalog.md#compatibility-catalog-of-tidb-data-migration)に記載されています。
 
 これら2つの戦略以外にも、あなたの状況に特化した戦略が存在する可能性があります。例えば、以下のような戦略です。
 
--   オブジェクトリレーショナルマッピング（ORM）の機能を使用して、データを再デプロイおよび移行してください。
--   移行作業中は、アプリケーションを修正してMariaDBとTiDBの両方から書き込みを行えるようにしてください。
+- オブジェクトリレーショナルマッピング（ORM）の機能を使用して、データを再デプロイおよび移行してください。
+- 移行作業中は、アプリケーションを修正してMariaDBとTiDBの両方から書き込みを行えるようにしてください。
 
 この文書では、最初の2つの戦略のみを取り上げています。
 
 選択した戦略に基づいて、以下のものを準備してください。
 
--   **ダンプとリストアの**戦略について：
-    -   [Dumpling](/dumpling-overview.md)と[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)をインストールしてください。
-    -   Dumpling がデータをエクスポートするために MariaDBサーバー上で [必要な権限](/dumpling-overview.md#required-privileges)を持っていることを確認してください。
--   **データレプリケーション**戦略として、[データ移行（DM）](/dm/dm-overview.md)を設定します。
+- **ダンプとリストアの**戦略について：
+    - [Dumpling](/dumpling-overview.md)と[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)をインストールしてください。
+    - Dumpling がデータをエクスポートするために MariaDBサーバー上で [必要な権限](/dumpling-overview.md#required-privileges)を持っていることを確認してください。
+- **データレプリケーション**戦略として、[データ移行（DM）](/dm/dm-overview.md)を設定します。
 
 ## 互換性を確認してください {#check-compatibility}
 
@@ -342,21 +342,21 @@ tidb>
 
 MariaDBからTiDBへデータを移行するには、以下の手順を実行してください。
 
-1.  アプリケーションを停止してください。アプリケーションをオフラインにしてください。これにより、移行中または移行後にMariaDB内のデータが変更されることがなくなります。
+1. アプリケーションを停止してください。アプリケーションをオフラインにしてください。これにより、移行中または移行後にMariaDB内のデータが変更されることがなくなります。
 
-2.  MariaDBに[`tiup dumpling`](/dumpling-overview.md#use-dumpling-to-export-data)コマンドを使用してデータをダンプします。
+2. MariaDBに[`tiup dumpling`](/dumpling-overview.md#use-dumpling-to-export-data)コマンドを使用してデータをダンプします。
 
     ```shell
     tiup dumpling --port 3306 --host 127.0.0.1 --user root --password secret -F 256MB  -o /data/backup
     ```
 
-3.  `tiup tidb-lightning`コマンドを使用してデータを復元します。 TiDB Lightning の構成方法と実行方法の詳細については、 [TiDB Lightningを使い始めよう](/get-started-with-tidb-lightning.md)を参照してください。
+3. `tiup tidb-lightning`コマンドを使用してデータを復元します。 TiDB Lightning の構成方法と実行方法の詳細については、 [TiDB Lightningを使い始めよう](/get-started-with-tidb-lightning.md)を参照してください。
 
-4.  ユーザーアカウントと権限を移行します。ユーザーと権限を移行する方法の詳細については、[ユーザーと権限のエクスポート](#export-users-and-grants)を参照してください。
+4. ユーザーアカウントと権限を移行します。ユーザーと権限を移行する方法の詳細については、[ユーザーと権限のエクスポート](#export-users-and-grants)を参照してください。
 
-5.  アプリケーションを再構成してください。TiDBサーバーに接続できるように、アプリケーションの設定を変更する必要があります。
+5. アプリケーションを再構成してください。TiDBサーバーに接続できるように、アプリケーションの設定を変更する必要があります。
 
-6.  クリーンアップ。移行が成功したことを確認したら、MariaDB のデータの最終バックアップを作成し、サーバーを停止します。これにより、 TiUP、 Dumpling、 TiDB Lightningなどのツールを削除することもできます。
+6. クリーンアップ。移行が成功したことを確認したら、MariaDB のデータの最終バックアップを作成し、サーバーを停止します。これにより、 TiUP、 Dumpling、 TiDB Lightningなどのツールを削除することもできます。
 
 ## DMを使用してデータを複製する {#replicate-data-with-dm}
 
@@ -400,9 +400,9 @@ MariaDBからMariaDBへのレプリケーションのように、最初に初期
 
 TiDBに切り替えるには、以下の手順を実行する必要があります。
 
-1.  アプリケーションを停止してください。
-2.  レプリケーション遅延を監視してください。遅延時間は0秒になるはずです。
-3.  アプリケーションの設定を変更してTiDBに接続するようにし、再度起動してください。
+1. アプリケーションを停止してください。
+2. レプリケーション遅延を監視してください。遅延時間は0秒になるはずです。
+3. アプリケーションの設定を変更してTiDBに接続するようにし、再度起動してください。
 
 レプリケーションの遅延を確認するには、 `dmctl`を介して[`query-status <taskname>`](/dm/dm-query-status.md#detailed-query-result)を実行し、 `"synced: true"`内の`subTaskStatus`を確認します。
 

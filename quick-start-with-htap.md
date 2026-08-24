@@ -15,10 +15,10 @@ summary: TiDB HTAPをすぐに使い始める方法を学びます。
 
 TiDB HTAP を使用する前に、 [TiKV](/tikv-overview.md) 、TiDB オンライン トランザクション処理 (OLTP) 用の行ベースのストレージ エンジン、および[TiFlash](/tiflash/tiflash-overview.md) 、TiDB オンライン分析処理 (OLAP) 用の列ベースのストレージに関する基本的な知識が必要です。
 
--   HTAPのストレージエンジン：HTAPでは、行ベースストレージエンジンと列指向ストレージエンジンが共存します。どちらのストレージエンジンもデータを自動的に複製し、強力な一貫性を維持できます。行ベースストレージエンジンはOLTPパフォーマンスを最適化し、列指向ストレージエンジンはOLAPパフォーマンスを最適化します。
--   HTAP のデータ一貫性: 分散型トランザクション キー値データベースである TiKV は、 ACID準拠のトランザクション インターフェイスを提供し、 [Raftコンセンサスアルゴリズム](https://raft.github.io/raft.pdf)の実装により複数のレプリカ間のデータ一貫性と高可用性を保証します。TiKV の列指向ストレージ拡張機能であるTiFlash は、 Raft Learnerコンセンサス アルゴリズムに従って TiKV からデータをリアルタイムで複製し、TiKV とTiFlash間でデータの強力な一貫性を保証します。
--   HTAP のデータ分離: HTAP リソース分離の問題を解決するために、必要に応じて TiKV とTiFlash を異なるマシンに展開できます。
--   MPPコンピューティングエンジン： [MPP](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode)は、TiDB 5.0以降TiFlashエンジンによって提供される分散コンピューティングフレームワークであり、ノード間のデータ交換を可能にし、高性能かつ高スループットのSQLアルゴリズムを提供します。MPPモードでは、分析クエリの実行時間を大幅に短縮できます。
+- HTAPのストレージエンジン：HTAPでは、行ベースストレージエンジンと列指向ストレージエンジンが共存します。どちらのストレージエンジンもデータを自動的に複製し、強力な一貫性を維持できます。行ベースストレージエンジンはOLTPパフォーマンスを最適化し、列指向ストレージエンジンはOLAPパフォーマンスを最適化します。
+- HTAP のデータ一貫性: 分散型トランザクション キー値データベースである TiKV は、 ACID準拠のトランザクション インターフェイスを提供し、 [Raftコンセンサスアルゴリズム](https://raft.github.io/raft.pdf)の実装により複数のレプリカ間のデータ一貫性と高可用性を保証します。TiKV の列指向ストレージ拡張機能であるTiFlash は、 Raft Learnerコンセンサス アルゴリズムに従って TiKV からデータをリアルタイムで複製し、TiKV とTiFlash間でデータの強力な一貫性を保証します。
+- HTAP のデータ分離: HTAP リソース分離の問題を解決するために、必要に応じて TiKV とTiFlash を異なるマシンに展開できます。
+- MPPコンピューティングエンジン： [MPP](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode)は、TiDB 5.0以降TiFlashエンジンによって提供される分散コンピューティングフレームワークであり、ノード間のデータ交換を可能にし、高性能かつ高スループットのSQLアルゴリズムを提供します。MPPモードでは、分析クエリの実行時間を大幅に短縮できます。
 
 ## 手順 {#steps}
 
@@ -44,13 +44,13 @@ tiup playground
 >
 > 既存のデータを分析クエリに使用する場合は、 [データをTiDBに移行する](/migration-overview.md)を実行できます。独自のテスト データを設計および作成する場合は、SQL ステートメントを実行するか、関連ツールを使用して作成できます。
 
-1.  次のコマンドを実行して、テスト データ生成ツールをインストールします。
+1. 次のコマンドを実行して、テスト データ生成ツールをインストールします。
 
     ```shell
     tiup install bench
     ```
 
-2.  次のコマンドを実行してテスト データを生成します。
+2. 次のコマンドを実行してテスト データを生成します。
 
     ```shell
     tiup bench tpch --sf=1 prepare
@@ -58,7 +58,7 @@ tiup playground
 
     このコマンドの出力に`Finished`が表示される場合は、データが作成されたことを示します。
 
-3.  生成されたデータを表示するには、次の SQL ステートメントを実行します。
+3. 生成されたデータを表示するには、次の SQL ステートメントを実行します。
 
     ```sql
     SELECT
@@ -148,8 +148,8 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'test' and
 
 上記のステートメントの結果:
 
--   `AVAILABLE` 、特定のテーブルのTiFlashレプリカが利用可能かどうかを示します。`1`は利用可能、 `0`は利用不可を意味します。`AVAILABLE`フィールドが`1`になると、このステータスは変更されなくなります。
--   `PROGRESS`レプリケーションの進行状況を表します。値は0.0～1.0の範囲です。1はTiFlashレプリカのレプリケーションの進行状況が完了したことを意味します。
+- `AVAILABLE` 、特定のテーブルのTiFlashレプリカが利用可能かどうかを示します。`1`は利用可能、 `0`は利用不可を意味します。`AVAILABLE`フィールドが`1`になると、このステータスは変更されなくなります。
+- `PROGRESS`レプリケーションの進行状況を表します。値は0.0～1.0の範囲です。1はTiFlashレプリカのレプリケーションの進行状況が完了したことを意味します。
 
 ### ステップ5. HTAPを使用してデータをより速く分析する {#step-5-analyze-data-faster-using-htap}
 
@@ -194,6 +194,6 @@ limit 10;
 
 ## 次は何？ {#what-s-next}
 
--   [TiDB HTAPのアーキテクチャ](/tiflash/tiflash-overview.md#architecture)
--   [HTAPを探索する](/explore-htap.md)
--   [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)
+- [TiDB HTAPのアーキテクチャ](/tiflash/tiflash-overview.md#architecture)
+- [HTAPを探索する](/explore-htap.md)
+- [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)

@@ -18,21 +18,21 @@ OpenAI APIキー（BYOK）をお持ちの場合は、 `openai/`というプレ�
 
 **テキスト埋め込み3（小）**
 
--   名前: `openai/text-embedding-3-small`
--   寸法：512～1536（デフォルト：1536）
--   距離指標：コサイン類似度、L2
--   価格：OpenAIが課金
--   TiDB Cloudでホストされています: ❌
--   鍵をご持参ください：✅
+- 名前: `openai/text-embedding-3-small`
+- 寸法：512～1536（デフォルト：1536）
+- 距離指標：コサイン類似度、L2
+- 価格：OpenAIが課金
+- TiDB Cloudでホストされています: ❌
+- 鍵をご持参ください：✅
 
 **テキスト埋め込み3（大）**
 
--   名前: `openai/text-embedding-3-large`
--   寸法：256～3072（デフォルト：3072）
--   距離指標：コサイン類似度、L2
--   価格：OpenAIが課金
--   TiDB Cloudでホストされています: ❌
--   鍵をご持参ください：✅
+- 名前: `openai/text-embedding-3-large`
+- 寸法：256～3072（デフォルト：3072）
+- 距離指標：コサイン類似度、L2
+- 価格：OpenAIが課金
+- TiDB Cloudでホストされています: ❌
+- 鍵をご持参ください：✅
 
 利用可能なモデルの完全なリストについては、 [OpenAIドキュメント](https://platform.openai.com/docs/guides/embeddings)を参照してください。
 
@@ -266,8 +266,8 @@ SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_BASE = '';
 
 > **Note:**
 >
-> -   セキュリティ上の理由から、API ベースとして設定できるのは Azure OpenAI の URL または OpenAI の URL のみです。任意のベース URL は許可されていません。
-> -   OpenAI互換の別の埋め込みサービスを利用するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+> - セキュリティ上の理由から、API ベースとして設定できるのは Azure OpenAI の URL または OpenAI の URL のみです。任意のベース URL は許可されていません。
+> - OpenAI互換の別の埋め込みサービスを利用するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 ## オプション {#options}
 
@@ -291,7 +291,7 @@ CREATE TABLE sample (
 
 ## 関連項目 {#see-also}
 
--   [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
--   [ベクトル検索](/ai/concepts/vector-search-overview.md)
--   [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
--   [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)
+- [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
+- [ベクトル検索](/ai/concepts/vector-search-overview.md)
+- [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
+- [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)

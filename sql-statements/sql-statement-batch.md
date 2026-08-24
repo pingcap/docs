@@ -53,4 +53,4 @@ ShardableStmt ::=
 
 ## 参照 {#see-also}
 
--   [非トランザクションDMLステートメント](/non-transactional-dml.md)
+- [非トランザクションDMLステートメント](/non-transactional-dml.md)

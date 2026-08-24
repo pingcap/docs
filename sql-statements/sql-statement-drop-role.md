@@ -166,14 +166,14 @@ TiDBの`DROP ROLE`文はMySQL 8.0のロール機能と完全に互換性があ�
 
 ## 参照 {#see-also}
 
--   [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)
--   [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
--   [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md)
--   [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
--   [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
+- [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)
+- [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
+- [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md)
+- [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
+- [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
 
 <CustomContent platform="tidb">
 
--   [ロールベースアクセス制御](/role-based-access-control.md)
+- [ロールベースアクセス制御](/role-based-access-control.md)
 
 </CustomContent>

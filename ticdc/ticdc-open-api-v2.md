@@ -15,20 +15,20 @@ TiCDCは、TiCDCクラスターのクエリと操作のためのOpenAPI機能を
 
 API を使用して、TiCDC クラスターで次のメンテナンス操作を実行できます。
 
--   [TiCDCノードのステータス情報を取得する](#get-the-status-information-of-a-ticdc-node)
--   [TiCDC クラスターのヘルスステータスを確認する](#check-the-health-status-of-a-ticdc-cluster)
--   [レプリケーションタスクを作成する](#create-a-replication-task)
--   [レプリケーションタスクを削除する](#remove-a-replication-task)
--   [レプリケーション構成を更新する](#update-the-replication-configuration)
--   [レプリケーションタスクリストをクエリする](#query-the-replication-task-list)
--   [特定のレプリケーションタスクをクエリする](#query-a-specific-replication-task)
--   [レプリケーションタスクを一時停止する](#pause-a-replication-task)
--   [レプリケーションタスクを再開する](#resume-a-replication-task)
--   [レプリケーションサブタスクリストを照会する](#query-the-replication-subtask-list)
--   [特定のレプリケーションサブタスクをクエリする](#query-a-specific-replication-subtask)
--   [TiCDC サービス プロセス リストを照会する](#query-the-ticdc-service-process-list)
--   [所有者ノードの退去](#evict-an-owner-node)
--   [TiCDCサーバーのログレベルを動的に調整する](#dynamically-adjust-the-log-level-of-the-ticdc-server)
+- [TiCDCノードのステータス情報を取得する](#get-the-status-information-of-a-ticdc-node)
+- [TiCDC クラスターのヘルスステータスを確認する](#check-the-health-status-of-a-ticdc-cluster)
+- [レプリケーションタスクを作成する](#create-a-replication-task)
+- [レプリケーションタスクを削除する](#remove-a-replication-task)
+- [レプリケーション構成を更新する](#update-the-replication-configuration)
+- [レプリケーションタスクリストをクエリする](#query-the-replication-task-list)
+- [特定のレプリケーションタスクをクエリする](#query-a-specific-replication-task)
+- [レプリケーションタスクを一時停止する](#pause-a-replication-task)
+- [レプリケーションタスクを再開する](#resume-a-replication-task)
+- [レプリケーションサブタスクリストを照会する](#query-the-replication-subtask-list)
+- [特定のレプリケーションサブタスクをクエリする](#query-a-specific-replication-subtask)
+- [TiCDC サービス プロセス リストを照会する](#query-the-ticdc-service-process-list)
+- [所有者ノードの退去](#evict-an-owner-node)
+- [TiCDCサーバーのログレベルを動的に調整する](#dynamically-adjust-the-log-level-of-the-ticdc-server)
 
 すべてのAPIのリクエストボディと戻り値はJSON形式です。リクエストが成功すると、 `200 OK`メッセージが返されます。以下のセクションでは、APIの具体的な使用方法について説明します。
 
@@ -71,8 +71,8 @@ API リクエストがリソースのリスト (たとえば、すべての`Capt
 
 上記の例では、
 
--   `total` : リソースの合計数を示します。
--   `items` : このリクエストによって返されるすべてのリソースを含む配列。配列のすべての要素は同じリソースです。
+- `total` : リソースの合計数を示します。
+- `items` : このリクエストによって返されるすべてのリソースを含む配列。配列のすべての要素は同じリソースです。
 
 ## TiCDCノードのステータス情報を取得する {#get-the-status-information-of-a-ticdc-node}
 
@@ -103,12 +103,12 @@ curl -X GET http://127.0.0.1:8300/api/v2/status
 
 上記の出力のパラメータは次のとおりです。
 
--   `version` : TiCDC の現在のバージョン番号。
--   `git_hash` : Git ハッシュ値。
--   `id` : ノードのキャプチャ ID。
--   `pid` : ノードのキャプチャプロセス ID (PID)。
--   `is_owner` : ノードが所有者であるかどうかを示します。
--   `liveness` : このノードがライブかどうか。`0`は正常を意味します。`1`はノードが`graceful shutdown`状態にあることを意味します。
+- `version` : TiCDC の現在のバージョン番号。
+- `git_hash` : Git ハッシュ値。
+- `id` : ノードのキャプチャ ID。
+- `pid` : ノードのキャプチャプロセス ID (PID)。
+- `is_owner` : ノードが所有者であるかどうかを示します。
+- `liveness` : このノードがライブかどうか。`0`は正常を意味します。`1`はノードが`graceful shutdown`状態にあることを意味します。
 
 ## TiCDC クラスターのヘルスステータスを確認する {#check-the-health-status-of-a-ticdc-cluster}
 
@@ -337,10 +337,10 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 
 `sink.dispatchers` : MQタイプのシンクの場合、このパラメータを使用してイベントディスパッチャを設定できます。サポートされているディスパッチャは`default` 、 `ts` 、 `index-value` 、 `table`です。ディスパッチャのルールは以下のとおりです。
 
--   `default` : `table`モードでイベントを送信します。
--   `ts` : 行変更の commitTs を使用してハッシュ値を作成し、イベントをディスパッチします。
--   `index-value` : 選択した HandleKey 列の名前と値を使用してハッシュ値を作成し、イベントをディスパッチします。
--   `table` : テーブルのスキーマ名とテーブル名を使用してハッシュ値を作成し、イベントをディスパッチします。
+- `default` : `table`モードでイベントを送信します。
+- `ts` : 行変更の commitTs を使用してハッシュ値を作成し、イベントをディスパッチします。
+- `index-value` : 選択した HandleKey 列の名前と値を使用してハッシュ値を作成し、イベントをディスパッチします。
+- `table` : テーブルのスキーマ名とテーブル名を使用してハッシュ値を作成し、イベントをディスパッチします。
 
 `sink.dispatchers`は配列です。パラメータは以下のとおりです。
 
@@ -732,11 +732,11 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds?state=normal
 
 上記の返された結果のパラメータは次のように説明されます。
 
--   `id` : レプリケーション タスクの ID。
--   `state` : レプリケーション タスクの現在の[州](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer) 。
--   `checkpoint_tso` : レプリケーション タスクの現在のチェックポイントの TSO。
--   `checkpoint_time` : レプリケーション タスクの現在のチェックポイントのフォーマットされた時刻。
--   `error` : レプリケーション タスクのエラー情報。
+- `id` : レプリケーション タスクの ID。
+- `state` : レプリケーション タスクの現在の[州](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer) 。
+- `checkpoint_tso` : レプリケーション タスクの現在のチェックポイントの TSO。
+- `checkpoint_time` : レプリケーション タスクの現在のチェックポイントのフォーマットされた時刻。
+- `error` : レプリケーション タスクのエラー情報。
 
 ## 特定のレプリケーションタスクをクエリする {#query-a-specific-replication-task}
 
@@ -803,12 +803,12 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1/synced
 
 応答には次のフィールドが含まれます。
 
--   `synced` : このレプリケーションタスクが完了したかどうか。`true`はタスクが完了したこと、 `false`はタスクが完了していない可能性があることを意味します。`false`の場合は、 `info`フィールドとその他のフィールドの両方で具体的なステータスを確認する必要があります。
--   `sink_checkpoint_ts` : シンク モジュールのチェックポイント ts 値 (PD 時間)。
--   `puller_resolved_ts` : PD 時間での、プラー モジュールのresolved-ts値。
--   `last_synced_ts` : TiCDC によって処理された最新のデータの commit-ts 値 (PD 時間)。
--   `now_ts` : 現在の PD 時間。
--   `info` : 特に`synced`が`false`の場合、同期ステータスの判別を支援する補足情報。
+- `synced` : このレプリケーションタスクが完了したかどうか。`true`はタスクが完了したこと、 `false`はタスクが完了していない可能性があることを意味します。`false`の場合は、 `info`フィールドとその他のフィールドの両方で具体的なステータスを確認する必要があります。
+- `sink_checkpoint_ts` : シンク モジュールのチェックポイント ts 値 (PD 時間)。
+- `puller_resolved_ts` : PD 時間での、プラー モジュールのresolved-ts値。
+- `last_synced_ts` : TiCDC によって処理された最新のデータの commit-ts 値 (PD 時間)。
+- `now_ts` : 現在の PD 時間。
+- `info` : 特に`synced`が`false`の場合、同期ステータスの判別を支援する補足情報。
 
 **例2: 同期が完了していない**
 
@@ -953,8 +953,8 @@ curl -X GET http://127.0.0.1:8300/api/v2/processors
 
 パラメータの説明は次のとおりです。
 
--   `changefeed_id` : 変更フィード ID。
--   `capture_id` : キャプチャ ID。
+- `changefeed_id` : 変更フィード ID。
+- `capture_id` : キャプチャ ID。
 
 ## 特定のレプリケーションサブタスクをクエリする {#query-a-specific-replication-subtask}
 
@@ -991,7 +991,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/processors/test/561c3784-77f0-4863-ad52
 
 パラメータの説明は次のとおりです。
 
--   `table_ids` : このキャプチャで複製されるテーブル ID。
+- `table_ids` : このキャプチャで複製されるテーブル ID。
 
 ## TiCDC サービス プロセス リストを照会する {#query-the-ticdc-service-process-list}
 
@@ -1022,9 +1022,9 @@ curl -X GET http://127.0.0.1:8300/api/v2/captures
 
 パラメータの説明は次のとおりです。
 
--   `id` : キャプチャ ID。
--   `is_owner` : キャプチャが所有者であるかどうか。
--   `address` : キャプチャのアドレス。
+- `id` : キャプチャ ID。
+- `is_owner` : キャプチャが所有者であるかどうか。
+- `address` : キャプチャのアドレス。
 
 ## 所有者ノードの退去 {#evict-an-owner-node}
 

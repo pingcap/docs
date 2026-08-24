@@ -12,9 +12,9 @@ C#（「シーシャープ」と発音）は、Microsoftが開発した.NETフ�
 
 ## 前提条件 {#prerequisites}
 
--   [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download)をダウンロードしてください。
--   このチュートリアルでは`dotnet`コマンドラインツールを使用します。あるいは、Visual Studio Code IDE を使用して C# コードを操作することもできます。
--   このチュートリアルを完了するには、TiDB インスタンスへのアクセスが必要です。TiDB Cloud上の[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)インスタンスまたは[TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-dedicated)クラスター、あるいは`tiup playground`を使用して起動した TiDB Self-Managed クラスターを使用できます。
+- [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download)をダウンロードしてください。
+- このチュートリアルでは`dotnet`コマンドラインツールを使用します。あるいは、Visual Studio Code IDE を使用して C# コードを操作することもできます。
+- このチュートリアルを完了するには、TiDB インスタンスへのアクセスが必要です。TiDB Cloud上の[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)インスタンスまたは[TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-dedicated)クラスター、あるいは`tiup playground`を使用して起動した TiDB Self-Managed クラスターを使用できます。
 
 ## ステップ1. コンソールプロジェクトを設定する {#step-1-set-up-a-console-project}
 

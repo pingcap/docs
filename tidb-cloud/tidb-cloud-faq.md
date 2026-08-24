@@ -41,9 +41,9 @@ MySQLクライアントまたはドライバがサポートする言語であれ
 
 ### TiDB Cloudでは、どのバージョンのTiDBがサポートされていますか？ {#what-versions-of-tidb-are-supported-on-tidb-cloud}
 
--   2026年7月9日以降、新規のTiDB Cloud DedicatedクラスターのデフォルトのTiDBバージョンは[v8.5.7](https://docs.pingcap.com/tidb/v8.5/release-8.5.7)となります。
--   TiDB Cloud Starterインスタンスの場合、2026年2月10日以降はTiDBのバージョンは[v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3)となります。
--   TiDB Cloud Essentialインスタンスの場合、2025年4月22日以降、TiDBのバージョンは[v7.5.2](https://docs.pingcap.com/tidb/stable/release-7.5.2)となります。
+- 2026年7月9日以降、新規のTiDB Cloud DedicatedクラスターのデフォルトのTiDBバージョンは[v8.5.7](https://docs.pingcap.com/tidb/v8.5/release-8.5.7)となります。
+- TiDB Cloud Starterインスタンスの場合、2026年2月10日以降はTiDBのバージョンは[v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3)となります。
+- TiDB Cloud Essentialインスタンスの場合、2025年4月22日以降、TiDBのバージョンは[v7.5.2](https://docs.pingcap.com/tidb/stable/release-7.5.2)となります。
 
 詳細については、 [TiDB Cloudリリースノート](/tidb-cloud/releases/tidb-cloud-release-notes.md)を参照してください。
 
@@ -63,11 +63,11 @@ PREVIEWとは、 TiDB Cloudの機能またはサービスが一般提供（GA）
 
 TiDB Cloudについて学ぶ最良の方法は、ステップバイステップのチュートリアルに従うことです。まずは以下のトピックをご覧ください。
 
--   [TiDB Cloudの概要](/tidb-cloud/tidb-cloud-intro.md)
--   [さあ始めましょう](/tidb-cloud/tidb-cloud-quickstart.md)
--   [TiDB Cloud StarterまたはEssentialインスタンスを作成します](/tidb-cloud/create-tidb-cluster-serverless.md)
--   [TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)
--   [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
+- [TiDB Cloudの概要](/tidb-cloud/tidb-cloud-intro.md)
+- [さあ始めましょう](/tidb-cloud/tidb-cloud-quickstart.md)
+- [TiDB Cloud StarterまたはEssentialインスタンスを作成します](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)
+- [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
 
 ### クラスターを削除する際に、 `XXX's Org/default project/Cluster0`何を指しているのでしょうか？ {#what-does-xxx-s-org-default-project-cluster0-refer-to-when-deleting-a-cluster}
 
@@ -137,8 +137,8 @@ HTAP シナリオの詳細については、 [データプラットフォーム�
 
 TiDB Cloudでは、保存されているすべてのデータは暗号化され、すべてのネットワークトラフィックはTransport Layer Security（TLS）を使用して暗号化されます。
 
--   保存データの暗号化は、暗号化されたストレージボリュームを使用して自動化されます。
--   クライアントとTiDBクラスタまたはインスタンス間のデータ転送における暗号化は、 TiDB CloudウェブサーバーのTLSとTiDBクラスタのTLSを使用して自動化されています。
+- 保存データの暗号化は、暗号化されたストレージボリュームを使用して自動化されます。
+- クライアントとTiDBクラスタまたはインスタンス間のデータ転送における暗号化は、 TiDB CloudウェブサーバーのTLSとTiDBクラスタのTLSを使用して自動化されています。
 
 ### TiDB Cloudはどのようにして私のビジネスデータを暗号化するのですか？ {#how-does-tidb-cloud-encrypt-my-business-data}
 
@@ -160,16 +160,16 @@ TiDB Cloudでは、ニーズに応じて、 TiDB Cloud Dedicatedクラスター�
 
 TiDB Cloud Dedicatedクラスタの場合、 TiDB Cloudは以下の対策によってクラスタのセキュリティを確保します。
 
--   各クラスターごとに独立したサブアカウントとVPCを作成します。
--   外部接続を隔離するためのファイアウォールルールを設定します。
--   各クラスターに対して、サーバー側のTLS証明書とコンポーネントレベルのTLS証明書を作成し、転送中のクラスターデータを暗号化します。
--   各クラスターに対してIPアクセスルールを設定し、許可された送信元IPアドレスのみがクラスターにアクセスできるようにします。
+- 各クラスターごとに独立したサブアカウントとVPCを作成します。
+- 外部接続を隔離するためのファイアウォールルールを設定します。
+- 各クラスターに対して、サーバー側のTLS証明書とコンポーネントレベルのTLS証明書を作成し、転送中のクラスターデータを暗号化します。
+- 各クラスターに対してIPアクセスルールを設定し、許可された送信元IPアドレスのみがクラスターにアクセスできるようにします。
 
 TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスの場合、 TiDB Cloudは以下の対策によってインスタンスのセキュリティを確保します。
 
--   各インスタンスごとに独立したサブアカウントを作成します。
--   外部接続を隔離するためのファイアウォールルールを設定します。
--   インスタンスサーバーのTLS証明書を提供し、転送中のインスタンスデータを暗号化します。
+- 各インスタンスごとに独立したサブアカウントを作成します。
+- 外部接続を隔離するためのファイアウォールルールを設定します。
+- インスタンスサーバーのTLS証明書を提供し、転送中のインスタンスデータを暗号化します。
 
 ### TiDBでデータベースに接続するにはどうすればよいですか？ {#how-do-i-connect-to-my-database-in-tidb}
 
@@ -178,10 +178,10 @@ TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスの場合、 Ti
 
 TiDB Cloud Dedicatedクラスターの場合、クラスターへの接続手順は以下のように簡略化されています。
 
-1.  ネットワークを認証してください。
-2.  データベースのユーザーとログイン認証情報を設定してください。
-3.  クラスタサーバー用にTLSをダウンロードして設定してください。
-4.  SQLクライアントを選択し、 TiDB Cloud UIに自動生成された接続文字列を表示させた後、その文字列を使用してSQLクライアント経由でクラスターに接続します。
+1. ネットワークを認証してください。
+2. データベースのユーザーとログイン認証情報を設定してください。
+3. クラスタサーバー用にTLSをダウンロードして設定してください。
+4. SQLクライアントを選択し、 TiDB Cloud UIに自動生成された接続文字列を表示させた後、その文字列を使用してSQLクライアント経由でクラスターに接続します。
 
 詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
@@ -191,8 +191,8 @@ TiDB Cloud Dedicatedクラスターの場合、クラスターへの接続手順
 
 TiDB Cloud StarterまたはEssentialインスタンスの場合、インスタンスへの接続手順は以下のように簡略化されています。
 
-1.  データベースユーザーとログイン認証情報を設定します。
-2.  SQLクライアントを選択し、 TiDB Cloud UIに自動生成された接続文字列を表示させた後、その文字列を使用してSQLクライアント経由でTiDB Cloud StarterまたはEssentialインスタンスに接続します。
+1. データベースユーザーとログイン認証情報を設定します。
+2. SQLクライアントを選択し、 TiDB Cloud UIに自動生成された接続文字列を表示させた後、その文字列を使用してSQLクライアント経由でTiDB Cloud StarterまたはEssentialインスタンスに接続します。
 
 詳細については、 [TiDB Cloud StarterまたはEssentialインスタンスに接続します](/tidb-cloud/connect-to-tidb-cluster-serverless.md)を参照してください。
 

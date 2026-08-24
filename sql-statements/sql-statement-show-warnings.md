@@ -80,4 +80,4 @@ TiDBの`SHOW WARNINGS`文はMySQLと完全に互換性があります。互換�
 
 ## 参照 {#see-also}
 
--   [SHOW ERRORS](/sql-statements/sql-statement-show-errors.md)
+- [SHOW ERRORS](/sql-statements/sql-statement-show-errors.md)

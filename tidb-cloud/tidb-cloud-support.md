@@ -11,25 +11,25 @@ TiDB Cloudは、お客様のニーズに合わせてカスタマイズされた�
 
 TiDB Cloudは複数のサポートチャネルを提供しています。利用可能なオプションは、問題の種類と[サポートプラン](/tidb-cloud/connected-care-detail.md)によって異なります。
 
--   サポートチケット ( [ヘルプセンター](#access-pingcap-help-center) )
+- サポートチケット ( [ヘルプセンター](#access-pingcap-help-center) )
 
     TiDB Cloudサポート チームからの直接支援が必要な問題については、このチケット ベースのチャネルを使用してください。
 
-    -   [請求とアカウントチケット](/tidb-cloud/tidb-cloud-support.md#create-an-account-or-billing-support-ticket)はすべてのTiDB Cloudユーザーが利用できます。
-    -   有料サポートプランでは、応答時間保証付きの[テクニカルサポートチケット](/tidb-cloud/tidb-cloud-support.md#create-a-technical-support-ticket)をご利用いただけます。有料サポートプランにご加入されていない場合は、技術的なご質問についてはコミュニティチャンネルをご利用ください。
+    - [請求とアカウントチケット](/tidb-cloud/tidb-cloud-support.md#create-an-account-or-billing-support-ticket)はすべてのTiDB Cloudユーザーが利用できます。
+    - 有料サポートプランでは、応答時間保証付きの[テクニカルサポートチケット](/tidb-cloud/tidb-cloud-support.md#create-a-technical-support-ticket)をご利用いただけます。有料サポートプランにご加入されていない場合は、技術的なご質問についてはコミュニティチャンネルをご利用ください。
 
     **Enterprise**および**Premium**サポートプランには、以下の拡張機能が含まれています。詳細については、 [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)をご覧ください。
 
-    -   定義されたSLAによる応答時間の短縮
-    -   IMベースのサポートによるリアルタイムコミュニケーション
-    -   積極的なサポートプログラム、例えば[Clinic](/tidb-cloud/tidb-cloud-clinic.md)
-    -   テクニカル アカウント マネージャー (TAM) などの専任または指名されたサポート ロール
+    - 定義されたSLAによる応答時間の短縮
+    - IMベースのサポートによるリアルタイムコミュニケーション
+    - 積極的なサポートプログラム、例えば[Clinic](/tidb-cloud/tidb-cloud-clinic.md)
+    - テクニカル アカウント マネージャー (TAM) などの専任または指名されたサポート ロール
 
--   コミュニティ（ [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)と[Discord](https://discord.com/invite/KVRZBR2DrG) ）
+- コミュニティ（ [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)と[Discord](https://discord.com/invite/KVRZBR2DrG) ）
 
     これらのオープンディスカッションチャンネルは、質問をしたり、経験を共有したり、他のユーザーやPingCAPエンジニアからアドバイスを得たりするのに便利です。これらのチャンネルは、一般的な質問、使用方法の議論、緊急性のない技術的な問題などに適しています。
 
--   [TiDB.AI](https://tidb.ai/)
+- [TiDB.AI](https://tidb.ai/)
 
     TiDB.AIは、よくある技術面やドキュメント関連の質問に答えるAI搭載アシスタントです。迅速なセルフサービス型のヘルプに最適です。
 
@@ -39,56 +39,56 @@ TiDB Cloudは複数のサポートチャネルを提供しています。利用�
 
 PingCAP ヘルプ センターには、 [https://tidb.support.pingcap.com/servicedesk/customer/portals](https://tidb.support.pingcap.com/servicedesk/customer/portals)から直接アクセスすることも、次の[TiDB Cloudコンソール](https://tidbcloud.com/)の方法でアクセスすることもできます。
 
--   [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**?**をクリックし、 **Support Tickets**をクリックします。
--   [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある**Support**をクリックし、サポート プランに応じて次のいずれかを実行します。
-    -   **Basic**: **Account & Billing**領域で、 **Account/Billing issues**をクリックします。
-    -   **Developer** 、 **Enterprise** 、または**Premium** : **Talk to an expert**エリアで、 **PingCAP Help Center**をクリックします。
--   [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象リソースの行にある**...**をクリックし、 **Get Support**を選択します。
--   対象リソースの概要ページで、右上隅の**...**をクリックし、 **Get Support**を選択します。
+- [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**?**をクリックし、 **Support Tickets**をクリックします。
+- [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある**Support**をクリックし、サポート プランに応じて次のいずれかを実行します。
+    - **Basic**: **Account & Billing**領域で、 **Account/Billing issues**をクリックします。
+    - **Developer** 、 **Enterprise** 、または**Premium** : **Talk to an expert**エリアで、 **PingCAP Help Center**をクリックします。
+- [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象リソースの行にある**...**をクリックし、 **Get Support**を選択します。
+- 対象リソースの概要ページで、右上隅の**...**をクリックし、 **Get Support**を選択します。
 
 ## アカウントまたは請求サポートチケットを作成する {#create-an-account-or-billing-support-ticket}
 
 TiDB Cloudのすべてのユーザーは、請求およびアカウント関連のチケットを作成できます。アカウントまたは請求に関する問題に関するサポートチケットを作成するには、以下の手順に従ってください。
 
-1.  [PingCAP ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)にログインし、 [TiDB Cloudアカウント/請求サポート](https://tidb.support.pingcap.com/servicedesk/customer/portal/16)をクリックします。
+1. [PingCAP ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)にログインし、 [TiDB Cloudアカウント/請求サポート](https://tidb.support.pingcap.com/servicedesk/customer/portal/16)をクリックします。
 
-2.  **Submit a request**をクリックします。
+2. **Submit a request**をクリックします。
 
-3.  次のフィールドに入力します。
+3. 次のフィールドに入力します。
 
-    -   **Summary**: 質問の簡単な概要を記入します。
-    -   **TiDB Cloud Org** : 該当する場合は、関連するTiDB Cloud組織を選択します。
-    -   **TiDB Cloud Resource**: 該当する場合は、関連するTiDB Cloudクラスターを選択します。
-    -   **Description**: 問題に関する詳細を提供します。
-    -   **Severity**: 問題のビジネスへの影響を見積もり、適切な重大度を選択します。(S1 は請求やアカウントの問題には適用されません。)
+    - **Summary**: 質問の簡単な概要を記入します。
+    - **TiDB Cloud Org** : 該当する場合は、関連するTiDB Cloud組織を選択します。
+    - **TiDB Cloud Resource**: 該当する場合は、関連するTiDB Cloudクラスターを選択します。
+    - **Description**: 問題に関する詳細を提供します。
+    - **Severity**: 問題のビジネスへの影響を見積もり、適切な重大度を選択します。(S1 は請求やアカウントの問題には適用されません。)
 
-4.  **Submit**をクリックします。
+4. **Submit**をクリックします。
 
 ## テクニカルサポートチケットを作成する {#create-a-technical-support-ticket}
 
 技術的な問題に関するサポート チケットを作成するには、次の手順を実行します。
 
-1.  [PingCAP ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)にログインし、 [TiDB Cloudテクニカルサポート](https://tidb.support.pingcap.com/servicedesk/customer/portal/6)をクリックします。
+1. [PingCAP ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)にログインし、 [TiDB Cloudテクニカルサポート](https://tidb.support.pingcap.com/servicedesk/customer/portal/6)をクリックします。
 
     > **Note:**
     >
     > [TiDB Cloudテクニカルサポート](https://tidb.support.pingcap.com/servicedesk/customer/portal/6)エントリーは、 **Developer** 、 **Enterprise** 、または**Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)でのみご利用いただけます。**Basic**プランをご利用の場合は、 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)または[Discord](https://discord.com/invite/KVRZBR2DrG)のコミュニティチャンネルを通じて技術的な質問を投稿できます。PingCAPのエンジニアやコミュニティメンバーがサポートいたします。
 
-2.  **Submit a request**をクリックします。
+2. **Submit a request**をクリックします。
 
-3.  次のフィールドに入力します。
+3. 次のフィールドに入力します。
 
-    -   **Summary**: 質問の簡単な概要を記入します。
+    - **Summary**: 質問の簡単な概要を記入します。
 
-    -   **TiDB Cloud Org** : 問題に関連するTiDB Cloud組織を選択します。
+    - **TiDB Cloud Org** : 問題に関連するTiDB Cloud組織を選択します。
 
-    -   **TiDB Cloud Resource**: 該当する場合は、関連するTiDB Cloudクラスターを選択します。
+    - **TiDB Cloud Resource**: 該当する場合は、関連するTiDB Cloudクラスターを選択します。
 
-    -   **Environment**: TiDB Cloudクラスターを使用する対応する環境を選択します。
+    - **Environment**: TiDB Cloudクラスターを使用する対応する環境を選択します。
 
-    -   **Description**: 発生した問題をできるだけ詳しく記述してください。例えば、問題が発生した正確なタイムスタンプ、詳細なエラーメッセージとコールスタック、問題のトラブルシューティングや分析結果を添付してください。
+    - **Description**: 発生した問題をできるだけ詳しく記述してください。例えば、問題が発生した正確なタイムスタンプ、詳細なエラーメッセージとコールスタック、問題のトラブルシューティングや分析結果を添付してください。
 
-    -   **Severity**: 問題のビジネスへの影響を見積もり、適切な重大度を選択します。
+    - **Severity**: 問題のビジネスへの影響を見積もり、適切な重大度を選択します。
 
         | 重大度   | 説明                                                      |
         | ----- | ------------------------------------------------------- |
@@ -97,11 +97,11 @@ TiDB Cloudのすべてのユーザーは、請求およびアカウント関連�
         | S3    | 本番または非運用環境における重要でないデータベース使用の問題                          |
         | S4    | 特定の機能の動作や設定方法に関する一般的な質問。ビジネスへの影響は最小限で、妥当な期間であれば許容できる問題。 |
 
-    -   **Components**: TiDB、TiKV、PD、 TiFlashなど、問題を報告する関連するTiDB Cloudコンポーネントを選択します。
+    - **Components**: TiDB、TiKV、PD、 TiFlashなど、問題を報告する関連するTiDB Cloudコンポーネントを選択します。
 
-    -   **Affects versions**: 問題に関連するTiDB Cloudクラスターのバージョンを指定します。
+    - **Affects versions**: 問題に関連するTiDB Cloudクラスターのバージョンを指定します。
 
-4.  **Submit**をクリックします。
+4. **Submit**をクリックします。
 
 ## サポートチケットを確認する {#view-support-tickets}
 
@@ -155,8 +155,8 @@ TiDB Cloudは、デフォルトで無料の基本サポートプランを提供�
 
 サポート プランをダウングレードするには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、左下隅にある**Support**をクリックします。
-2.  切り替えるサポート プランを選択し、 **Downgrade**をクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、左下隅にある**Support**をクリックします。
+2. 切り替えるサポート プランを選択し、 **Downgrade**をクリックします。
 
     <CustomContent plan="byoc">
 

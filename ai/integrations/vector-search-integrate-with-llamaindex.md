@@ -10,8 +10,8 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-llamaindex/','/ja/tidb/d
 
 > **Note:**
 >
-> -   ベクトル検索機能はパブリックプレビューです。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
-> -   ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)と[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> - ベクトル検索機能はパブリックプレビューです。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> - ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)と[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 > **Tip**
 >
@@ -21,15 +21,15 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-llamaindex/','/ja/tidb/d
 
 このチュートリアルを完了するには、以下が必要です。
 
--   [Python 3.8以降](https://www.python.org/downloads/)がインストールされていること。
--   [Jupyter Notebook](https://jupyter.org/install)がインストールされていること。
--   [Git](https://git-scm.com/downloads)がインストールされていること。
--   TiDBクラスタ。
+- [Python 3.8以降](https://www.python.org/downloads/)がインストールされていること。
+- [Jupyter Notebook](https://jupyter.org/install)がインストールされていること。
+- [Git](https://git-scm.com/downloads)がインストールされていること。
+- TiDBクラスタ。
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
--   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
 ## さあ始めましょう {#get-started}
 
@@ -71,24 +71,24 @@ from llama_index.vector_stores.tidbvector import TiDBVectorStore
 
 TiDB Cloud Starterインスタンスの場合、接続文字列を取得し、環境変数を設定するには、以下の手順に従ってください。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
+3. 接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **Connection Type**は`Public`に設定されています。
-    -   **Branch**は`main`に設定されています。
-    -   **Connect With**は`SQLAlchemy`に設定されています。
-    -   お使いの環境に合った**Operating System**を選択してください。
+    - **Connection Type**は`Public`に設定されています。
+    - **Branch**は`main`に設定されています。
+    - **Connect With**は`SQLAlchemy`に設定されています。
+    - お使いの環境に合った**Operating System**を選択してください。
 
-4.  **PyMySQL**タブをクリックして、接続文字列をコピーしてください。
+4. **PyMySQL**タブをクリックして、接続文字列をコピーしてください。
 
     > **Tip:**
     >
     > まだパスワードを設定していない場合は、 **Generate Password**をクリックしてランダムなパスワードを生成してください。
 
-5.  環境変数を設定します。
+5. 環境変数を設定します。
 
     このドキュメントでは、埋め込みモデルプロバイダーとして[OpenAI](https://platform.openai.com/docs/introduction)を使用します。この手順では、前の手順で取得した接続文字列と[OpenAI APIキー](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key)を指定する必要があります。
 
@@ -133,11 +133,11 @@ TiDBクラスタに合わせて、接続文字列のパラメータを変更す�
 
 各パラメータの説明は以下のとおりです。
 
--   `<USERNAME>` : TiDBに接続するためのユーザー名。
--   `<PASSWORD>` : TiDBに接続するためのパスワード。
--   `<HOST>` : TiDBクラスタのホスト。
--   `<PORT>` : TiDB クラスタのポート。
--   `<DATABASE>` : 接続するデータベースの名前。
+- `<USERNAME>` : TiDBに接続するためのユーザー名。
+- `<PASSWORD>` : TiDBに接続するためのパスワード。
+- `<HOST>` : TiDBクラスタのホスト。
+- `<PORT>` : TiDB クラスタのポート。
+- `<DATABASE>` : 接続するデータベースの名前。
 
 </div>
 
@@ -312,5 +312,5 @@ Empty Response
 
 ## 関連項目 {#see-also}
 
--   [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
--   [ベクトル検索インデックス](/ai/reference/vector-search-index.md)
+- [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
+- [ベクトル検索インデックス](/ai/reference/vector-search-index.md)

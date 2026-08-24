@@ -11,9 +11,9 @@ TiDB Cloudでは、TLS接続の確立は、 TiDB Cloud Premiumインスタンス
 
 ## 前提条件 {#prerequisites}
 
--   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)または[SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)を介してTiDB Cloudにログインし、 [TiDB Cloud Premiumインスタンスを作成します](/tidb-cloud/premium/create-tidb-instance-premium.md)。
+- [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)または[SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)を介してTiDB Cloudにログインし、 [TiDB Cloud Premiumインスタンスを作成します](/tidb-cloud/premium/create-tidb-instance-premium.md)。
 
--   安全な設定でインスタンスにアクセスするためのパスワードを設定してください。
+- 安全な設定でインスタンスにアクセスするためのパスワードを設定してください。
 
     そのためには、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 TiDB Cloud Premium インスタンスの行にある**...**をクリックして、 **Change Root Password**を選択します。パスワード設定で、**Auto-generate Password**をクリックすると、数字、大文字、小文字、特殊文字を含む 16 文字のルートパスワードが自動的に生成されます。
 
@@ -21,22 +21,22 @@ TiDB Cloudでは、TLS接続の確立は、 TiDB Cloud Premiumインスタンス
 
 [TiDB Cloudコンソール](https://tidbcloud.com/)では、さまざまな接続方法の例を確認し、次のようにしてTiDB Cloud Premium インスタンスに接続できます。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 TiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動してください。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 TiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動してください。
 
-2.  右上隅の**Connect**をクリックしてください。ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。ダイアログが表示されます。
 
-3.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Connection Type**を選択します。
+3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Connection Type**を選択します。
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックして設定します。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md)を参照してください。
 
-4.  **CA cert**をクリックすると、 TiDB Cloud PremiumインスタンスへのTLS接続に必要なCA証明書をダウンロードできます。このCA証明書はデフォルトでTLS 1.2をサポートしています。
+4. **CA cert**をクリックすると、 TiDB Cloud PremiumインスタンスへのTLS接続に必要なCA証明書をダウンロードできます。このCA証明書はデフォルトでTLS 1.2をサポートしています。
 
     > **Note:**
     >
-    > -   ダウンロードしたCA証明書は、オペレーティングシステムのデフォルトのストレージパスに保存することも、別のストレージパスを指定することもできます。以降の手順では、コード例のCA証明書パスを、ご自身のCA証明書パスに置き換える必要があります。
-    > -   TiDB Cloud Premiumでは、クライアントにTLS接続の使用を強制することはなく、 [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610)変数のユーザー定義設定は現在TiDB Cloud Premiumではサポートされていません。
+    > - ダウンロードしたCA証明書は、オペレーティングシステムのデフォルトのストレージパスに保存することも、別のストレージパスを指定することもできます。以降の手順では、コード例のCA証明書パスを、ご自身のCA証明書パスに置き換える必要があります。
+    > - TiDB Cloud Premiumでは、クライアントにTLS接続の使用を強制することはなく、 [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610)変数のユーザー定義設定は現在TiDB Cloud Premiumではサポートされていません。
 
-5.  ご希望の接続方法を選択し、タブに表示されている接続文字列とサンプルコードを参照してインスタンスに接続してください。
+5. ご希望の接続方法を選択し、タブに表示されている接続文字列とサンプルコードを参照してインスタンスに接続してください。
 
 ## TiDB Cloud Premium のルート証明書を管理する {#manage-root-certificates-for-tidb-cloud-premium}
 

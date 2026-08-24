@@ -96,9 +96,9 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 
 `Point_Get`演算子からの実行情報には通常、次の情報が含まれます。
 
--   `Get:{num_rpc:1, total_time:697.051µs}` ：TiKVに送信された`Get` RPC要求の数（ `num_rpc` ）とすべてのRPC要求の合計期間（ `total_time` ）。
--   `ResolveLock:{num_rpc:1, total_time:12.117495ms}` ：TiDBはデータの読み取り時にロックに遭遇した場合、まずロックを解決する必要があります。これは通常、読み取り/書き込み競合のシナリオで発生します。この情報は、ロック解決にかかる時間を示します。
--   `regionMiss_backoff:{num:11, total_time:2010 ms},tikvRPC_backoff:{num:11, total_time:10691 ms}` : RPCリクエストが失敗した場合、TiDBはリクエストを再試行する前にバックオフ時間だけ待機します。バックオフ統計には、バックオフの種類（ `regionMiss` `tikvRPC` ）、合計待機時間（ `total_time` ）、バックオフの合計回数（ `num` ）が含まれます。
+- `Get:{num_rpc:1, total_time:697.051µs}` ：TiKVに送信された`Get` RPC要求の数（ `num_rpc` ）とすべてのRPC要求の合計期間（ `total_time` ）。
+- `ResolveLock:{num_rpc:1, total_time:12.117495ms}` ：TiDBはデータの読み取り時にロックに遭遇した場合、まずロックを解決する必要があります。これは通常、読み取り/書き込み競合のシナリオで発生します。この情報は、ロック解決にかかる時間を示します。
+- `regionMiss_backoff:{num:11, total_time:2010 ms},tikvRPC_backoff:{num:11, total_time:10691 ms}` : RPCリクエストが失敗した場合、TiDBはリクエストを再試行する前にバックオフ時間だけ待機します。バックオフ統計には、バックオフの種類（ `regionMiss` `tikvRPC` ）、合計待機時間（ `total_time` ）、バックオフの合計回数（ `num` ）が含まれます。
 
 ### Batch PointGet {#batch-point-get}
 
@@ -114,13 +114,13 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.07587ms, max_proc_keys: 16, p95_proc_keys: 16, tot_proc: 1ms, tot_wait: 1ms, copr_cache_hit_ratio: 0.00}, rpc_info:{Cop:{num_rpc:6, total_time:5.313996ms}}
 ```
 
--   `cop_task` : `cop`のタスクの実行情報が含まれます。例:
-    -   `num` : cop タスクの数。
-    -   `max` `p95` cop タスク`min`実行に費やされた実行時間の最大値、最小値、平均値、および P95 `avg` 。
-    -   `max_proc_keys`と`p95_proc_keys` ：TiKVがすべてのcopタスクでスキャンしたキー値の最大値とP95値。最大値とP95値の差が大きい場合、データ分布が不均衡になる可能性があります。
-    -   `copr_cache_hit_ratio` : `cop`タスク要求に対するコプロセッサーキャッシュのヒット率。
--   `rpc_info` : 要求タイプ別に集計された、TiKV に送信された RPC 要求の合計数と合計時間。
--   `backoff` : さまざまなタイプのバックオフとバックオフの合計待機時間が含まれます。
+- `cop_task` : `cop`のタスクの実行情報が含まれます。例:
+    - `num` : cop タスクの数。
+    - `max` `p95` cop タスク`min`実行に費やされた実行時間の最大値、最小値、平均値、および P95 `avg` 。
+    - `max_proc_keys`と`p95_proc_keys` ：TiKVがすべてのcopタスクでスキャンしたキー値の最大値とP95値。最大値とP95値の差が大きい場合、データ分布が不均衡になる可能性があります。
+    - `copr_cache_hit_ratio` : `cop`タスク要求に対するコプロセッサーキャッシュのヒット率。
+- `rpc_info` : 要求タイプ別に集計された、TiKV に送信された RPC 要求の合計数と合計時間。
+- `backoff` : さまざまなタイプのバックオフとバックオフの合計待機時間が含まれます。
 
 ### Insert {#insert}
 
@@ -130,24 +130,24 @@ cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.0758
 prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878µs, prefetch:763.8µs, rpc:{BatchGet:{num_rpc:1, total_time:699.166µs},Get:{num_rpc:1, total_time:378.276µs }}}
 ```
 
--   `prepare` : 式、デフォルト値、AUTO_INCREMENT値の計算など、書き込みの準備にかかる時間。
--   `check_insert` ：この情報は通常、 `insert ignore`文目と`insert on duplicate`文目で表示されます。これには、競合チェックやTiDBトランザクションキャッシュへのデータ書き込みに要した時間などが含まれます。この時間消費には、トランザクションのコミットに要した時間は含まれないことに注意してください。この情報には以下の情報が含まれます。
-    -   `total_time` : ステップ`check_insert`に費やされた合計時間。
-    -   `mem_insert_time` : TiDB トランザクション キャッシュにデータを書き込むのにかかる時間。
-    -   `prefetch` : TiKVから競合チェックが必要なデータを取得する時間。このステップでは、データを取得するために`Batch_Get` RPCリクエストをTiKVに送信します。
-    -   `rpc` : TiKV への RPC 要求の送信に費やされた合計時間。これには通常、 `BatchGet`と`Get` 2 種類の RPC 時間が含まれます。
-        -   `prefetch`ステップで`BatchGet` RPC 要求が送信されます。
-        -   `insert on duplicate`ステートメントが実行されると、 `Get` `duplicate update` RPC 要求が送信されます。
--   `backoff` : さまざまなタイプのバックオフとバックオフの合計待機時間が含まれます。
+- `prepare` : 式、デフォルト値、AUTO_INCREMENT値の計算など、書き込みの準備にかかる時間。
+- `check_insert` ：この情報は通常、 `insert ignore`文目と`insert on duplicate`文目で表示されます。これには、競合チェックやTiDBトランザクションキャッシュへのデータ書き込みに要した時間などが含まれます。この時間消費には、トランザクションのコミットに要した時間は含まれないことに注意してください。この情報には以下の情報が含まれます。
+    - `total_time` : ステップ`check_insert`に費やされた合計時間。
+    - `mem_insert_time` : TiDB トランザクション キャッシュにデータを書き込むのにかかる時間。
+    - `prefetch` : TiKVから競合チェックが必要なデータを取得する時間。このステップでは、データを取得するために`Batch_Get` RPCリクエストをTiKVに送信します。
+    - `rpc` : TiKV への RPC 要求の送信に費やされた合計時間。これには通常、 `BatchGet`と`Get` 2 種類の RPC 時間が含まれます。
+        - `prefetch`ステップで`BatchGet` RPC 要求が送信されます。
+        - `insert on duplicate`ステートメントが実行されると、 `Get` `duplicate update` RPC 要求が送信されます。
+- `backoff` : さまざまなタイプのバックオフとバックオフの合計待機時間が含まれます。
 
 ### IndexJoin {#indexjoin}
 
 `IndexJoin`演算子は、1つの外部ワーカーとN個の内部ワーカーを並列実行のために使用します。結合結果は外部テーブルの順序を保持します。詳細な実行プロセスは以下のとおりです。
 
-1.  外側のワーカーは N 個の外側の行を読み取り、それをタスクにラップして、結果チャネルと内側のワーカー チャネルに送信します。
-2.  内部ワーカーはタスクを受け取り、タスクからキー範囲を構築し、キー範囲に従って内部行を取得します。そして、内部行ハッシュテーブルを構築します。
-3.  メイン`IndexJoin`スレッドは結果チャネルからタスクを受け取り、内部ワーカーがタスクの処理を完了するまで待機します。
-4.  メイン`IndexJoin`スレッドは、内側の行のハッシュ テーブルを参照して、各外側の行を結合します。
+1. 外側のワーカーは N 個の外側の行を読み取り、それをタスクにラップして、結果チャネルと内側のワーカー チャネルに送信します。
+2. 内部ワーカーはタスクを受け取り、タスクからキー範囲を構築し、キー範囲に従って内部行を取得します。そして、内部行ハッシュテーブルを構築します。
+3. メイン`IndexJoin`スレッドは結果チャネルからタスクを受け取り、内部ワーカーがタスクの処理を完了するまで待機します。
+4. メイン`IndexJoin`スレッドは、内側の行のハッシュ テーブルを参照して、各外側の行を結合します。
 
 `IndexJoin`演算子には次の実行情報が含まれています。
 
@@ -155,22 +155,22 @@ prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878
 inner:{total:4.297515932s, concurrency:5, task:17, construct:97.96291ms, fetch:4.164310088s, build:35.219574ms}, probe:53.574945ms
 ```
 
--   `Inner` : 内部ワーカーの実行情報:
-    -   `total` : 内部ワーカーによって消費された合計時間。
-    -   `concurrency` : 同時内部ワーカーの数。
-    -   `task` : 内部ワーカーによって処理されたタスクの合計数。
-    -   `construct` : 内部ワーカーがタスクに対応する内部テーブル行を読み取る前の準備時間。
-    -   `fetch` : 内部ワーカーが内部テーブル行を読み取るのにかかる合計時間。
-    -   `Build` : 内部ワーカーが対応する内部テーブル行のハッシュ テーブルを構築するのにかかる合計時間。
--   `probe` : メイン`IndexJoin`スレッドが外部テーブル行と内部テーブル行のハッシュ テーブルとの結合操作を実行するのに費やした合計時間。
+- `Inner` : 内部ワーカーの実行情報:
+    - `total` : 内部ワーカーによって消費された合計時間。
+    - `concurrency` : 同時内部ワーカーの数。
+    - `task` : 内部ワーカーによって処理されたタスクの合計数。
+    - `construct` : 内部ワーカーがタスクに対応する内部テーブル行を読み取る前の準備時間。
+    - `fetch` : 内部ワーカーが内部テーブル行を読み取るのにかかる合計時間。
+    - `Build` : 内部ワーカーが対応する内部テーブル行のハッシュ テーブルを構築するのにかかる合計時間。
+- `probe` : メイン`IndexJoin`スレッドが外部テーブル行と内部テーブル行のハッシュ テーブルとの結合操作を実行するのに費やした合計時間。
 
 ### IndexHashJoin {#indexhashjoin}
 
 `IndexHashJoin`演算子の実行プロセスは`IndexJoin`演算子と同様です。`IndexHashJoin`演算子も1つの外部ワーカーとN個の内部ワーカーで並列実行されますが、出力順序は外部テーブルと一致するとは限りません。詳細な実行プロセスは以下のとおりです。
 
-1.  外側のワーカーは N 個の外側の行を読み取り、タスクを構築して、それを内側のワーカー チャネルに送信します。
-2.  内部ワーカーは内部ワーカーチャネルからタスクを受け取り、各タスクに対して以下の3つの操作を順番に実行します。a. 外部行からハッシュテーブルを構築する。b. 外部行からキー範囲を構築し、内部行を取得する。c. ハッシュテーブルをプローブし、結合結果を結果チャネルに送信する。注：ステップaとステップbは同時に実行されます。
-3.  `IndexHashJoin`のメイン スレッドは、結果チャネルから結合結果を受信します。
+1. 外側のワーカーは N 個の外側の行を読み取り、タスクを構築して、それを内側のワーカー チャネルに送信します。
+2. 内部ワーカーは内部ワーカーチャネルからタスクを受け取り、各タスクに対して以下の3つの操作を順番に実行します。a. 外部行からハッシュテーブルを構築する。b. 外部行からキー範囲を構築し、内部行を取得する。c. ハッシュテーブルをプローブし、結合結果を結果チャネルに送信する。注：ステップaとステップbは同時に実行されます。
+3. `IndexHashJoin`のメイン スレッドは、結果チャネルから結合結果を受信します。
 
 `IndexHashJoin`演算子には次の実行情報が含まれています。
 
@@ -178,24 +178,24 @@ inner:{total:4.297515932s, concurrency:5, task:17, construct:97.96291ms, fetch:4
 inner:{total:4.429220003s, concurrency:5, task:17, construct:96.207725ms, fetch:4.239324006s, build:24.567801ms, join:93.607362ms}
 ```
 
--   `Inner` : 内部ワーカーの実行情報:
-    -   `total` : 内部ワーカーによって消費された合計時間。
-    -   `concurrency` : 内部ワーカーの数。
-    -   `task` : 内部ワーカーによって処理されたタスクの合計数。
-    -   `construct` : 内部ワーカーが内部テーブルの行を読み取る前の準備時間。
-    -   `fetch` : 内部ワーカーが内部テーブル行を読み取るのに費やされた合計時間。
-    -   `Build` : 内部ワーカーが外部テーブル行のハッシュ テーブルを構築するのに費やされた合計時間。
-    -   `join` : 内部ワーカーが内部テーブル行と外部テーブル行のハッシュ テーブルを結合するのにかかる合計時間。
+- `Inner` : 内部ワーカーの実行情報:
+    - `total` : 内部ワーカーによって消費された合計時間。
+    - `concurrency` : 内部ワーカーの数。
+    - `task` : 内部ワーカーによって処理されたタスクの合計数。
+    - `construct` : 内部ワーカーが内部テーブルの行を読み取る前の準備時間。
+    - `fetch` : 内部ワーカーが内部テーブル行を読み取るのに費やされた合計時間。
+    - `Build` : 内部ワーカーが外部テーブル行のハッシュ テーブルを構築するのに費やされた合計時間。
+    - `join` : 内部ワーカーが内部テーブル行と外部テーブル行のハッシュ テーブルを結合するのにかかる合計時間。
 
 ### HashJoin {#hashjoin}
 
 `HashJoin`演算子は、内部ワーカー、外部ワーカー、および N 個の結合ワーカーで構成されます。詳細な実行プロセスは次のとおりです。
 
-1.  内部ワーカーは内部テーブルの行を読み取り、ハッシュ テーブルを構築します。
-2.  外部ワーカーは外部テーブルの行を読み取り、それをタスクにラップして結合ワーカーに送信します。
-3.  結合ワーカーは、ステップ 1 のハッシュ テーブルの構築が完了するまで待機します。
-4.  結合ワーカーは、タスク内の外部テーブルの行とハッシュ テーブルを使用して結合操作を実行し、結合結果を結果チャネルに送信します。
-5.  `HashJoin`のメイン スレッドは結果チャネルから結合結果を受信します。
+1. 内部ワーカーは内部テーブルの行を読み取り、ハッシュ テーブルを構築します。
+2. 外部ワーカーは外部テーブルの行を読み取り、それをタスクにラップして結合ワーカーに送信します。
+3. 結合ワーカーは、ステップ 1 のハッシュ テーブルの構築が完了するまで待機します。
+4. 結合ワーカーは、タスク内の外部テーブルの行とハッシュ テーブルを使用して結合操作を実行し、結合結果を結果チャネルに送信します。
+5. `HashJoin`のメイン スレッドは結果チャネルから結合結果を受信します。
 
 `HashJoin`演算子には次の実行情報が含まれています。
 
@@ -203,16 +203,16 @@ inner:{total:4.429220003s, concurrency:5, task:17, construct:96.207725ms, fetch:
 build_hash_table:{total:146.071334ms, fetch:110.338509ms, build:35.732825ms}, probe:{concurrency:5, total:857.162518ms, max:171.48271ms, probe:125.341665ms, fetch:731.820853ms}
 ```
 
--   `build_hash_table` : 内部テーブルのデータを読み取り、ハッシュテーブルの実行情報を構築します。
-    -   `total` : 合計消費時間。
-    -   `fetch` : 内部テーブルデータの読み取りに費やされた合計時間。
-    -   `build` : ハッシュ テーブルの構築に費やされた合計時間。
--   `probe` : 結合ワーカーの実行情報:
-    -   `concurrency` : 結合ワーカーの数。
-    -   `total` : すべての結合ワーカーによって消費された合計時間。
-    -   `max` : 単一の結合ワーカーが実行される最長時間。
-    -   `probe` : 外部テーブルの行とハッシュ テーブルとの結合に費やされた合計時間。
-    -   `fetch` : 結合ワーカーが外部テーブルの行データを読み取るために待機する合計時間。
+- `build_hash_table` : 内部テーブルのデータを読み取り、ハッシュテーブルの実行情報を構築します。
+    - `total` : 合計消費時間。
+    - `fetch` : 内部テーブルデータの読み取りに費やされた合計時間。
+    - `build` : ハッシュ テーブルの構築に費やされた合計時間。
+- `probe` : 結合ワーカーの実行情報:
+    - `concurrency` : 結合ワーカーの数。
+    - `total` : すべての結合ワーカーによって消費された合計時間。
+    - `max` : 単一の結合ワーカーが実行される最長時間。
+    - `probe` : 外部テーブルの行とハッシュ テーブルとの結合に費やされた合計時間。
+    - `fetch` : 結合ワーカーが外部テーブルの行データを読み取るために待機する合計時間。
 
 ### TableFullScan (TiFlash) {#tablefullscan-tiflash}
 
@@ -232,14 +232,14 @@ tiflash_scan: {
 }
 ```
 
--   `dtfile` : テーブル スキャン中の DTFile (DeltaTree ファイル) 関連情報。TiFlashレイヤーのデータ スキャン ステータスを反映します。
-    -   `total_scanned_packs` : DTFileでスキャンされたパックの総数。パックとは、 TiFlash DTFileで読み取ることができる最小単位です。デフォルトでは、8192行ごとに1パックが構成されます。
-    -   `total_skipped_packs` : DTFile 内のスキャンでスキップされたパックの総数。`WHERE`が粗集合インデックスにヒットするか、主キーの範囲フィルタリングに一致する場合、無関係なパックはスキップされます。
-    -   `total_scanned_rows` : DTFile でスキャンされた行の総数。MVCC により更新または削除のバージョンが複数ある場合、各バージョンは個別にカウントされます。
-    -   `total_skipped_rows` : DTFile 内のスキャンによってスキップされる行の合計数。
-    -   `total_rs_index_load_time` : DTFile のラフ セット インデックスの読み取りに費やされた合計時間。
-    -   `total_read_time` : DTFile データの読み取りに費やされた合計時間。
--   `total_create_snapshot_time` : テーブルスキャン中にスナップショットを作成するために使用された合計時間。
+- `dtfile` : テーブル スキャン中の DTFile (DeltaTree ファイル) 関連情報。TiFlashレイヤーのデータ スキャン ステータスを反映します。
+    - `total_scanned_packs` : DTFileでスキャンされたパックの総数。パックとは、 TiFlash DTFileで読み取ることができる最小単位です。デフォルトでは、8192行ごとに1パックが構成されます。
+    - `total_skipped_packs` : DTFile 内のスキャンでスキップされたパックの総数。`WHERE`が粗集合インデックスにヒットするか、主キーの範囲フィルタリングに一致する場合、無関係なパックはスキップされます。
+    - `total_scanned_rows` : DTFile でスキャンされた行の総数。MVCC により更新または削除のバージョンが複数ある場合、各バージョンは個別にカウントされます。
+    - `total_skipped_rows` : DTFile 内のスキャンによってスキップされる行の合計数。
+    - `total_rs_index_load_time` : DTFile のラフ セット インデックスの読み取りに費やされた合計時間。
+    - `total_read_time` : DTFile データの読み取りに費やされた合計時間。
+- `total_create_snapshot_time` : テーブルスキャン中にスナップショットを作成するために使用された合計時間。
 
 ### lock_keys実行情報 {#lock-keys-execution-information}
 
@@ -249,11 +249,11 @@ tiflash_scan: {
 lock_keys: {time:94.096168ms, region:6, keys:8, lock_rpc:274.503214ms, rpc_count:6}
 ```
 
--   `time` : `lock_keys`操作を実行する合計時間。
--   `region` : `lock_keys`操作の実行に関係する領域の数。
--   `keys` : `Lock`必要な`Key`の数。
--   `lock_rpc` ：タイプ`Lock`のRPCリクエストをTiKVに送信するのに費やされた合計時間。複数のRPCリクエストが並行して送信される可能性があるため、RPCの合計消費時間はタイプ`lock_keys`操作の合計消費時間よりも長くなる可能性があります。
--   `rpc_count` : TiKV に送信された`Lock`タイプの RPC 要求の合計数。
+- `time` : `lock_keys`操作を実行する合計時間。
+- `region` : `lock_keys`操作の実行に関係する領域の数。
+- `keys` : `Lock`必要な`Key`の数。
+- `lock_rpc` ：タイプ`Lock`のRPCリクエストをTiKVに送信するのに費やされた合計時間。複数のRPCリクエストが並行して送信される可能性があるため、RPCの合計消費時間はタイプ`lock_keys`操作の合計消費時間よりも長くなる可能性があります。
+- `rpc_count` : TiKV に送信された`Lock`タイプの RPC 要求の合計数。
 
 ### commit_txn実行情報 {#commit-txn-execution-information}
 
@@ -263,12 +263,12 @@ lock_keys: {time:94.096168ms, region:6, keys:8, lock_rpc:274.503214ms, rpc_count
 commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts:4.277455ms, commit:50.431774ms, region_num:7, write_keys:16, write_byte:536}
 ```
 
--   `prewrite` : トランザクションの 2PC コミットの`prewrite`フェーズに費やされた時間。
--   `wait_prewrite_binlog:` : 事前書き込みBinlog の書き込みを待機するのにかかる時間。
--   `get_commit_ts` : トランザクションコミットタイムスタンプを取得するのに費やされた時間。
--   `commit` : トランザクションの 2PC コミット中に`commit`フェーズで消費された時間。
--   `write_keys` : トランザクションに書き込まれた合計`keys` 。
--   `write_byte` : トランザクションで書き込まれた合計バイト数`key-value`単位はバイトです。
+- `prewrite` : トランザクションの 2PC コミットの`prewrite`フェーズに費やされた時間。
+- `wait_prewrite_binlog:` : 事前書き込みBinlog の書き込みを待機するのにかかる時間。
+- `get_commit_ts` : トランザクションコミットタイムスタンプを取得するのに費やされた時間。
+- `commit` : トランザクションの 2PC コミット中に`commit`フェーズで消費された時間。
+- `write_keys` : トランザクションに書き込まれた合計`keys` 。
+- `write_byte` : トランザクションで書き込まれた合計バイト数`key-value`単位はバイトです。
 
 ### RU（リクエストユニット）消費量 {#ru-request-unit-consumption}
 
@@ -337,7 +337,7 @@ after key/value request is processed:
 
 ## 参照 {#see-also}
 
--   [クエリ実行計画を理解する](/explain-overview.md)
--   [EXPLAIN](/sql-statements/sql-statement-explain.md)
--   [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
--   [TRACE](/sql-statements/sql-statement-trace.md)
+- [クエリ実行計画を理解する](/explain-overview.md)
+- [EXPLAIN](/sql-statements/sql-statement-explain.md)
+- [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
+- [TRACE](/sql-statements/sql-statement-trace.md)

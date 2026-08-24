@@ -7,8 +7,8 @@ summary: TiDB の JSON データ型について学習します。
 
 TiDBは、半構造化データの保存に便利な`JSON` （JavaScript Object Notation）データ型をサポートしています。`JSON`データ型は、文字列列に`JSON`形式の文字列を保存する場合と比べて、以下の利点があります。
 
--   シリアル化にはバイナリ形式を使用します。内部形式により、 `JSON`ドキュメント要素への高速な読み取りアクセスが可能になります。
--   `JSON`列に保存されたJSONドキュメントを自動検証します。有効なドキュメントのみを保存できます。
+- シリアル化にはバイナリ形式を使用します。内部形式により、 `JSON`ドキュメント要素への高速な読み取りアクセスが可能になります。
+- `JSON`列に保存されたJSONドキュメントを自動検証します。有効なドキュメントのみを保存できます。
 
 `JSON`列は、他のバイナリ型の列と同様に直接インデックス付けされませんが、生成列の形式で`JSON`ドキュメント内のフィールドをインデックス付けできます。
 
@@ -48,13 +48,13 @@ JSONドキュメント内の値には型があります。これは[`JSON_TYPE` 
 
 ## 制限 {#restrictions}
 
--   現在、TiDBはTiFlashへのプッシュダウンを限定的に`JSON`関数のみサポートしています。詳細については[プッシュダウン式](/tiflash/tiflash-supported-pushdown-calculations.md#push-down-expressions)をご覧ください。
--   TiDBバックアップ＆リストア（BR）は、v6.3.0でJSON列データのエンコード方法を変更します。そのため、JSON列を含むデータをBRを使用してv6.3.0より前のTiDBクラスターにリストアすることは推奨されません。
--   `DATE` 、 `DATETIME` 、 `TIME`などの非標準`JSON`データ型を含むデータをレプリケートする場合は、レプリケーション ツールを使用しないでください。
+- 現在、TiDBはTiFlashへのプッシュダウンを限定的に`JSON`関数のみサポートしています。詳細については[プッシュダウン式](/tiflash/tiflash-supported-pushdown-calculations.md#push-down-expressions)をご覧ください。
+- TiDBバックアップ＆リストア（BR）は、v6.3.0でJSON列データのエンコード方法を変更します。そのため、JSON列を含むデータをBRを使用してv6.3.0より前のTiDBクラスターにリストアすることは推奨されません。
+- `DATE` 、 `DATETIME` 、 `TIME`などの非標準`JSON`データ型を含むデータをレプリケートする場合は、レプリケーション ツールを使用しないでください。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
--   `BINARY`型のデータを含む JSON 列を作成すると、MySQL は現在そのデータを`STRING`型として誤ってラベル付けしますが、TiDB はそれを`BINARY`型として正しく処理します。
+- `BINARY`型のデータを含む JSON 列を作成すると、MySQL は現在そのデータを`STRING`型として誤ってラベル付けしますが、TiDB はそれを`BINARY`型として正しく処理します。
 
     ```sql
     CREATE TABLE test(a json);
@@ -72,7 +72,7 @@ JSONドキュメント内の値には型があります。これは[`JSON_TYPE` 
 
     詳細については、issue [#37443](https://github.com/pingcap/tidb/issues/37443)を参照してください。
 
--   データ型を`ENUM`または`SET`から`JSON`に変換する際、TiDB はデータ形式の正確性をチェックします。例えば、TiDB で以下の SQL 文を実行するとエラーが返されます。
+- データ型を`ENUM`または`SET`から`JSON`に変換する際、TiDB はデータ形式の正確性をチェックします。例えば、TiDB で以下の SQL 文を実行するとエラーが返されます。
 
     ```sql
     CREATE TABLE t(e ENUM('a'));
@@ -83,7 +83,7 @@ JSONドキュメント内の値には型があります。これは[`JSON_TYPE` 
 
     詳細については、issue [#9999](https://github.com/pingcap/tidb/issues/9999)を参照してください。
 
--   TiDB では、 `ORDER BY`を使用して JSON 配列または JSON オブジェクトをソートできます。
+- TiDB では、 `ORDER BY`を使用して JSON 配列または JSON オブジェクトをソートできます。
 
     MySQL では、 `ORDER BY`を使用して JSON 配列または JSON オブジェクトをソートすると、MySQL から警告が返され、ソート結果が比較演算の結果と一致しなくなります。
 
@@ -113,7 +113,7 @@ JSONドキュメント内の値には型があります。これは[`JSON_TYPE` 
 
     詳細については、issue [#37506](https://github.com/pingcap/tidb/issues/37506)を参照してください。
 
--   JSON 列にデータを挿入すると、TiDB は暗黙的にデータの値を`JSON`型に変換します。
+- JSON 列にデータを挿入すると、TiDB は暗黙的にデータの値を`JSON`型に変換します。
 
     ```sql
     CREATE TABLE t(col JSON);

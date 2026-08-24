@@ -20,9 +20,9 @@ TiDB の`SI`分離レベルでは**ファントム リード**を回避できま
 
 以下の2つの例は**、ファントムリード**がどのようなものかを示しています。
 
--   例 1:**トランザクションA は**、まずクエリに従って`n`行を取得し、次に**トランザクションB は**、これらの`m`行以外の`n`行を変更するか、**トランザクションA**のクエリに一致する`m`行を追加します。**トランザクションA**が再度クエリを実行すると、条件に一致する`n+m`行が存在することがわかります。これはファントムのようなものなので、**ファントム リード**と呼ばれます。
+- 例 1:**トランザクションA は**、まずクエリに従って`n`行を取得し、次に**トランザクションB は**、これらの`m`行以外の`n`行を変更するか、**トランザクションA**のクエリに一致する`m`行を追加します。**トランザクションA**が再度クエリを実行すると、条件に一致する`n+m`行が存在することがわかります。これはファントムのようなものなので、**ファントム リード**と呼ばれます。
 
--   例2：**管理者Aが**データベース内のすべての学生の成績を特定の点数からABCDEの成績に変更しますが、このとき**管理者Bが**特定の点数のレコードを挿入します。**管理者Aが**変更を終え、まだ変更されていないレコード（**管理者B**が挿入したレコード）が残っていることに気付いた場合、それは**ファントムリード**です。
+- 例2：**管理者Aが**データベース内のすべての学生の成績を特定の点数からABCDEの成績に変更しますが、このとき**管理者Bが**特定の点数のレコードを挿入します。**管理者Aが**変更を終え、まだ変更されていないレコード（**管理者B**が挿入したレコード）が残っていることに気付いた場合、それは**ファントムリード**です。
 
 ## SIは書き込みスキューを回避できない {#si-cannot-avoid-write-skew}
 
@@ -710,16 +710,16 @@ mysql> SELECT * FROM T2;
 
 基本原則は、トランザクションのサイズを制限することです。KVレベルでは、TiDBは単一トランザクションのサイズに制限を設けています。SQLレベルでは、1行のデータが1つのKVエントリにマッピングされ、インデックスを追加するたびに1つのKVエントリが追加されます。SQLレベルでの制限は以下のとおりです。
 
--   1行あたりのレコードの最大サイズは120MiBです。
+- 1行あたりのレコードの最大サイズは120MiBです。
 
-    -   TiDB v4.0.10 以降、v4.0.x バージョン、および TiDB v5.0.0 以降のバージョンでは、tidb-server の[`performance.txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500)設定パラメータを使用して調整できます。v4.0.10 より前のバージョンでは、値は`6 MB`です。
-    -   バージョン7.6.0以降では、 [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760)システム変数を使用して、この設定項目の値を動的に変更できます。
-    -   TiKV も単一の書き込みリクエストのデータサイズを制限していることに注意してください。単一の書き込みリクエストのデータサイズが [`raftstore.raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)(デフォルトは `8 MiB`)を超えると、TiKV はそのリクエストを拒否します。単一行が大きい場合は、TiDB の `tidb_txn_entry_size_limit` と TiKV の `raftstore.raft-entry-max-size` の両方を調整する必要があります。
+    - TiDB v4.0.10 以降、v4.0.x バージョン、および TiDB v5.0.0 以降のバージョンでは、tidb-server の[`performance.txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500)設定パラメータを使用して調整できます。v4.0.10 より前のバージョンでは、値は`6 MB`です。
+    - バージョン7.6.0以降では、 [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760)システム変数を使用して、この設定項目の値を動的に変更できます。
+    - TiKV も単一の書き込みリクエストのデータサイズを制限していることに注意してください。単一の書き込みリクエストのデータサイズが [`raftstore.raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)(デフォルトは `8 MiB`)を超えると、TiKV はそのリクエストを拒否します。単一行が大きい場合は、TiDB の `tidb_txn_entry_size_limit` と TiKV の `raftstore.raft-entry-max-size` の両方を調整する必要があります。
 
--   単一トランザクションでサポートされる最大サイズは1 TiBです。
+- 単一トランザクションでサポートされる最大サイズは1 TiBです。
 
-    -   TiDB v4.0 以降のバージョンでは、 [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)で設定できます。以前のバージョンでは、値は`100 MB`です。
-    -   TiDB v6.5.0以降のバージョンでは、この設定は推奨されなくなりました。詳細については、 [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)を参照してください。
+    - TiDB v4.0 以降のバージョンでは、 [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)で設定できます。以前のバージョンでは、値は`100 MB`です。
+    - TiDB v6.5.0以降のバージョンでは、この設定は推奨されなくなりました。詳細については、 [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)を参照してください。
 
 サイズ制限と行数制限の両方において、トランザクション実行時のエンコード処理とトランザクション用の追加キーのオーバーヘッドも考慮する必要があることに注意してください。最適なパフォーマンスを実現するには、100～500行ごとに1つのトランザクションを書き込むことをお勧めします。
 
@@ -733,6 +733,6 @@ mysql> SELECT * FROM T2;
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

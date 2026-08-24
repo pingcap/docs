@@ -9,15 +9,15 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
 > **Note:**
 >
-> -   データをクラウドストレージにストリーミングするには、TiDB クラスターのバージョンが v7.1.1 以降であることを確認してください。 TiDB Cloud Dedicatedクラスターを v7.1.1 以降にアップグレードするには、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)。
-> -   [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは、変更フィード機能は利用できません。
-> -   [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンスの場合、変更フィード機能はリクエストに応じてのみ利用できます。詳細については、 [変更フィード](/tidb-cloud/essential-changefeed-overview.md)を参照してください。
+> - データをクラウドストレージにストリーミングするには、TiDB クラスターのバージョンが v7.1.1 以降であることを確認してください。 TiDB Cloud Dedicatedクラスターを v7.1.1 以降にアップグレードするには、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)。
+> - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは、変更フィード機能は利用できません。
+> - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンスの場合、変更フィード機能はリクエストに応じてのみ利用できます。詳細については、 [変更フィード](/tidb-cloud/essential-changefeed-overview.md)を参照してください。
 
 ## 制限 {#restrictions}
 
--   TiDB Cloud Dedicatedクラスターごとに、最大 100 個のチェンジフィードを作成できます。
--   TiDB Cloud はTiCDC を使用して変更フィードを確立するため、同じ[TiCDCの制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)があります。
--   複製対象のテーブルに主キーまたはNULLを許容しない一意インデックスがない場合、複製中に一意制約が存在しないことで、一部の再試行シナリオにおいて、下流で重複データが挿入される可能性があります。
+- TiDB Cloud Dedicatedクラスターごとに、最大 100 個のチェンジフィードを作成できます。
+- TiDB Cloud はTiCDC を使用して変更フィードを確立するため、同じ[TiCDCの制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)があります。
+- 複製対象のテーブルに主キーまたはNULLを許容しない一意インデックスがない場合、複製中に一意制約が存在しないことで、一部の再試行シナリオにおいて、下流で重複データが挿入される可能性があります。
 
 ## ステップ1. 宛先を設定する {#step-1-configure-destination}
 
@@ -32,22 +32,22 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
 認証にIAMロールを使用するには、以下の手順に従ってください。
 
-1.  Amazon S3 の**宛先**ページで、 **S3 URI**を入力します。S3 バケットが TiDB クラスターと同じ AWS リージョンにあることを確認してください。
+1. Amazon S3 の**宛先**ページで、 **S3 URI**を入力します。S3 バケットが TiDB クラスターと同じ AWS リージョンにあることを確認してください。
 
-2.  **Bucket Access**で、 **AWS Role ARN**を選択します。
+2. **Bucket Access**で、 **AWS Role ARN**を選択します。
 
-3.  新しいロールARNを作成するには、**こちらをクリックしてAWS CloudFormationで新しいロールARNを作成してください**。このテンプレートは必要な権限を自動的に構成します。
+3. 新しいロールARNを作成するには、**こちらをクリックしてAWS CloudFormationで新しいロールARNを作成してください**。このテンプレートは必要な権限を自動的に構成します。
 
     ロールを手動で作成する場合は、 **Create Role ARN manually**をクリックして、 TiDB Cloudアカウント情報と必要なポリシーを確認してください。
 
-4.  IAMロールに、対象バケットに対する少なくとも以下の権限が付与されていることを確認してください。
+4. IAMロールに、対象バケットに対する少なくとも以下の権限が付与されていることを確認してください。
 
-    -   `s3:ListBucket`
-    -   `s3:PutObject`
-    -   `s3:GetObject`
-    -   `s3:DeleteObject`
+    - `s3:ListBucket`
+    - `s3:PutObject`
+    - `s3:GetObject`
+    - `s3:DeleteObject`
 
-5.  生成された**Role ARN**対応するフィールドに貼り付けてください。
+5. 生成された**Role ARN**対応するフィールドに貼り付けてください。
 
 **オプション2：AWSアクセスキー**
 
@@ -57,180 +57,180 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
 アクセスキーを使用して認証を行うには、以下の手順に従ってください。
 
-1.  Amazon S3 の**宛先**ページで、 **S3 URI**を入力します。S3 バケットが TiDB クラスターと同じ AWS リージョンにあることを確認してください。
-2.  **Bucket Access**で**AWS Access Key**を選択します。
-3.  以下の項目を入力してください。
+1. Amazon S3 の**宛先**ページで、 **S3 URI**を入力します。S3 バケットが TiDB クラスターと同じ AWS リージョンにあることを確認してください。
+2. **Bucket Access**で**AWS Access Key**を選択します。
+3. 以下の項目を入力してください。
 
-    -   **Access Key ID**
-    -   **Secret Access Key**
+    - **Access Key ID**
+    - **Secret Access Key**
 
 </div>
 <div label="GCS">
 
 **GCS**の場合、 **GCS Endpoint**を入力する前に、まずGCSバケットへのアクセス権を付与する必要があります。以下の手順に従ってください。
 
-1.  TiDB Cloudコンソールで、**Service Account ID**を記録してください。このIDは、 TiDB CloudにGCSバケットへのアクセス権を付与するために使用されます。
+1. TiDB Cloudコンソールで、**Service Account ID**を記録してください。このIDは、 TiDB CloudにGCSバケットへのアクセス権を付与するために使用されます。
 
     ![gcs\_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-endpoint.png)
 
-2.  Google Cloud コンソールで、GCS バケット用のIAMロールを作成します。
+2. Google Cloud コンソールで、GCS バケット用のIAMロールを作成します。
 
-    1.  [Google Cloud Console](https://console.cloud.google.com/)にサインインしてください。
+    1. [Google Cloud Console](https://console.cloud.google.com/)にサインインしてください。
 
-    2.  [役割](https://console.cloud.google.com/iam-admin/roles)ページに移動して、 **Create role**をクリックします。
+    2. [役割](https://console.cloud.google.com/iam-admin/roles)ページに移動して、 **Create role**をクリックします。
 
         ![Create a role](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-create-role.png)
 
-    3.  役割の名前、説明、ID、および役割の起動ステージを入力してください。役割名は、作成後に変更することはできません。
+    3. 役割の名前、説明、ID、および役割の起動ステージを入力してください。役割名は、作成後に変更することはできません。
 
-    4.  **Add permissions**をクリックします。役割に以下の権限を追加し、 **Add**をクリックします。
+    4. **Add permissions**をクリックします。役割に以下の権限を追加し、 **Add**をクリックします。
 
-        -   storage.buckets.get
-        -   storage.オブジェクト.作成
-        -   storage.オブジェクト.削除
-        -   storage.get
-        -   storage.オブジェクトリスト
-        -   storage.オブジェクト.更新
+        - storage.buckets.get
+        - storage.オブジェクト.作成
+        - storage.オブジェクト.削除
+        - storage.get
+        - storage.オブジェクトリスト
+        - storage.オブジェクト.更新
 
     ![Add permissions](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-assign-permission.png)
 
-3.  [バケツ](https://console.cloud.google.com/storage/browser)ページに移動し、 TiDB CloudがアクセスするGCSバケットを選択してください。GCSバケットは、TiDBクラスタと同じリージョンにある必要があります。
+3. [バケツ](https://console.cloud.google.com/storage/browser)ページに移動し、 TiDB CloudがアクセスするGCSバケットを選択してください。GCSバケットは、TiDBクラスタと同じリージョンにある必要があります。
 
-4.  **Bucket details**ページで、 **[権限]**タブをクリックし、 **Grant access**をクリックします。
+4. **Bucket details**ページで、 **[権限]**タブをクリックし、 **Grant access**をクリックします。
 
     ![Grant Access to the bucket ](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-grant-access-1.png)
 
-5.  バケットへのアクセスを許可するには、以下の情報を入力し、 **Save**をクリックしてください。
+5. バケットへのアクセスを許可するには、以下の情報を入力し、 **Save**をクリックしてください。
 
-    -   **New Principals**フィールドに、以前に記録した対象のTiDBクラスタの**Service Account ID**を貼り付けます。
+    - **New Principals**フィールドに、以前に記録した対象のTiDBクラスタの**Service Account ID**を貼り付けます。
 
-    -   **Select a role**ドロップダウンリストに、先ほど作成したIAMロールの名前を入力し、フィルター結果からその名前を選択します。
+    - **Select a role**ドロップダウンリストに、先ほど作成したIAMロールの名前を入力し、フィルター結果からその名前を選択します。
 
     > **Note:**
     >
     > TiDB Cloudへのアクセス権を削除するには、付与したアクセス権を削除するだけです。
 
-6.  **Bucket details**ページで、**Objects**タブをクリックします。
+6. **Bucket details**ページで、**Objects**タブをクリックします。
 
-    -   バケットの gsutil URI を取得するには、[コピー] ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs`の場合、URI は`gs://test-sink-gcs/`になります。
+    - バケットの gsutil URI を取得するには、[コピー] ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs`の場合、URI は`gs://test-sink-gcs/`になります。
 
         ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri01.png)
 
-    -   フォルダの gsutil URI を取得するには、フォルダを開き、[コピー] ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs`で、フォルダ名が`changefeed-xxx`の場合、URI は`gs://test-sink-gcs/changefeed-xxx/`になります。
+    - フォルダの gsutil URI を取得するには、フォルダを開き、[コピー] ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs`で、フォルダ名が`changefeed-xxx`の場合、URI は`gs://test-sink-gcs/changefeed-xxx/`になります。
 
         ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
 
-7.  TiDB Cloudコンソールで、Changefeedの**宛先**ページに移動し、**bucket gsutil URI**フィールドに入力します。
+7. TiDB Cloudコンソールで、Changefeedの**宛先**ページに移動し、**bucket gsutil URI**フィールドに入力します。
 
 </div>
 <div label="Azure Blob Storage">
 
 **Azure Blob Storage**の場合、まず Azure ポータルでコンテナーを構成し、SAS トークンを取得する必要があります。以下の手順に従ってください。
 
-1.  [Azureポータル](https://portal.azure.com/)で、変更フィード データを保存するコンテナーを作成します。
+1. [Azureポータル](https://portal.azure.com/)で、変更フィード データを保存するコンテナーを作成します。
 
-    1.  左側のナビゲーションペインで**Storage Accounts**をクリックし、ストレージアカウントを選択します。
-    2.  ストレージアカウントのナビゲーションメニューで、 **Data storage** &gt; **[コンテナー]**を選択し、 **+ Container**をクリックします。
-    3.  新しいコンテナの名前を入力し、匿名アクセスレベルを設定します（推奨レベルは**プライベート**です）。次に、 **[作成]**をクリックします。
+    1. 左側のナビゲーションペインで**Storage Accounts**をクリックし、ストレージアカウントを選択します。
+    2. ストレージアカウントのナビゲーションメニューで、 **Data storage** &gt; **[コンテナー]**を選択し、 **+ Container**をクリックします。
+    3. 新しいコンテナの名前を入力し、匿名アクセスレベルを設定します（推奨レベルは**プライベート**です）。次に、 **[作成]**をクリックします。
 
-2.  対象コンテナのURLを取得します。
+2. 対象コンテナのURLを取得します。
 
-    1.  コンテナ一覧から、対象のコンテナを選択してください。
-    2.  コンテナの**…**をクリックし、次に**Container properties**を選択します。
-    3.  **URL**値を後で使用するために保存します。たとえば`https://<storage_account>.blob.core.windows.net/<container>`のように保存します。
+    1. コンテナ一覧から、対象のコンテナを選択してください。
+    2. コンテナの**…**をクリックし、次に**Container properties**を選択します。
+    3. **URL**値を後で使用するために保存します。たとえば`https://<storage_account>.blob.core.windows.net/<container>`のように保存します。
 
-3.  SASトークンを生成します。
+3. SASトークンを生成します。
 
-    1.  ストレージアカウントのナビゲーション メニューで、 **Security + networking** &gt; **Shared access signature**を選択します。
+    1. ストレージアカウントのナビゲーション メニューで、 **Security + networking** &gt; **Shared access signature**を選択します。
 
-    2.  **Allowed services**セクションで、 **Blob**を選択します。
+    2. **Allowed services**セクションで、 **Blob**を選択します。
 
-    3.  **Allowed resource types**セクションで、 **Container**と**Object**を選択します。
+    3. **Allowed resource types**セクションで、 **Container**と**Object**を選択します。
 
-    4.  **Allowed permissions**セクションで、 **Read** 、 **Write** 、 **Delete** 、 **List** 、 **Create**を選択します。
+    4. **Allowed permissions**セクションで、 **Read** 、 **Write** 、 **Delete** 、 **List** 、 **Create**を選択します。
 
-    5.  SASトークンの有効期間を、ニーズを満たすのに十分な長さに指定してください。
+    5. SASトークンの有効期間を、ニーズを満たすのに十分な長さに指定してください。
 
         > **Note:**
         >
-        > -   変更フィードは継続的にイベントを書き込むため、SASトークンの有効期間が十分に長いことを確認してください。セキュリティ上の理由から、トークンは6～12ヶ月ごとに交換することをお勧めします。
-        > -   生成されたSASトークンは取り消すことができないため、有効期間を慎重に設定してください。
-        > -   継続的な可用性を確保するため、SASトークンの有効期限が切れる前に再生成および更新してください。
+        > - 変更フィードは継続的にイベントを書き込むため、SASトークンの有効期間が十分に長いことを確認してください。セキュリティ上の理由から、トークンは6～12ヶ月ごとに交換することをお勧めします。
+        > - 生成されたSASトークンは取り消すことができないため、有効期間を慎重に設定してください。
+        > - 継続的な可用性を確保するため、SASトークンの有効期限が切れる前に再生成および更新してください。
 
-    6.  **Generate SAS and connection string**をクリックし、 **SAS token**を保存します。
+    6. **Generate SAS and connection string**をクリックし、 **SAS token**を保存します。
 
         ![Generate a SAS token](/media/tidb-cloud/changefeed/sink-to-cloud-storage-azure-signature.png)
 
-4.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、Changefeed の**宛先**ページに移動し、次のフィールドに入力します。
+4. [TiDB Cloudコンソール](https://tidbcloud.com/)で、Changefeed の**宛先**ページに移動し、次のフィールドに入力します。
 
-    -   **Blob URL** ：手順2で取得したコンテナURLを入力してください。必要に応じてプレフィックスを追加できます。
-    -   **SAS Token**：ステップ3で取得した生成済みのSASトークンを入力してください。
+    - **Blob URL** ：手順2で取得したコンテナURLを入力してください。必要に応じてプレフィックスを追加できます。
+    - **SAS Token**：ステップ3で取得した生成済みのSASトークンを入力してください。
 
 </div>
 </SimpleTab>
 
 **Next**をクリックして、 TiDB Cloud DedicatedクラスターからAmazon S3、GCS、またはAzure Blob Storageへの接続を確立します。TiDB Cloudは接続が成功したかどうかを自動的にテストおよび検証します。
 
--   はいの場合、次の設定手順に進みます。
--   そうでない場合は、接続エラーが表示されますので、エラーを処理してください。エラーが解決したら、 **Next**をクリックして接続を再試行してください。
+- はいの場合、次の設定手順に進みます。
+- そうでない場合は、接続エラーが表示されますので、エラーを処理してください。エラーが解決したら、 **Next**をクリックして接続を再試行してください。
 
 ## ステップ2. レプリケーションの設定 {#step-2-configure-replication}
 
-1.  **Table Filter**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [テーブルフィルタルール](https://docs.pingcap.com/tidb/stable/ticdc-filter#changefeed-log-filters)を参照してください。
+1. **Table Filter**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [テーブルフィルタルール](https://docs.pingcap.com/tidb/stable/ticdc-filter#changefeed-log-filters)を参照してください。
 
     ![the table filter of changefeed](/media/tidb-cloud/changefeed/sink-to-s3-02-table-filter.jpg)
 
-    -   **Case Sensitive**：フィルタルールにおけるデータベース名とテーブル名の照合において、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
-    -   **Filter Rules**：この列でフィルタルールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加すると、 TiDB Cloud はTiDB 内のすべてのテーブルをクエリし、右側のボックスにルールに一致するテーブルのみを表示します。フィルタルールは最大 100 個まで追加できます。
-    -   **Tables with valid keys**：この列には、主キーや一意インデックスなど、有効なキーを持つテーブルが表示されます。
-    -   **Tables without valid keys**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、下流で重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタルールを使用してこれらのテーブルを除外することもできます。たとえば、ルール`test.tbl1`を使用して、テーブル`"!test.tbl1"` 。
+    - **Case Sensitive**：フィルタルールにおけるデータベース名とテーブル名の照合において、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
+    - **Filter Rules**：この列でフィルタルールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加すると、 TiDB Cloud はTiDB 内のすべてのテーブルをクエリし、右側のボックスにルールに一致するテーブルのみを表示します。フィルタルールは最大 100 個まで追加できます。
+    - **Tables with valid keys**：この列には、主キーや一意インデックスなど、有効なキーを持つテーブルが表示されます。
+    - **Tables without valid keys**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、下流で重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタルールを使用してこれらのテーブルを除外することもできます。たとえば、ルール`test.tbl1`を使用して、テーブル`"!test.tbl1"` 。
 
-2.  **Event Filter**をカスタマイズして、複製したいイベントを絞り込みます。
+2. **Event Filter**をカスタマイズして、複製したいイベントを絞り込みます。
 
-    -   **Tables matching**：この列では、イベントフィルターを適用するテーブルを設定できます。ルールの構文は、前の**Table Filter**領域で使用されているものと同じです。変更フィードごとに最大10個のイベントフィルタールールを追加できます。
-    -   **Event Filter**：以下のイベントフィルターを使用して、変更フィードから特定のイベントを除外できます。
-        -   **Ignore event**：指定されたイベントタイプを除外します。
-        -   **Ignore SQL**: 指定された式に一致する DDL イベントを除外します。たとえば、 `^drop` `DROP`で始まるステートメントを除外し、 `add column`は`ADD COLUMN`を含むステートメントを除外します。
-        -   **Ignore insert value expression**: 特定の条件を満たす`INSERT`ステートメントを除外します。たとえば、 `id >= 100`は、 `INSERT`が 100 以上である`id`ステートメントを除外します。
-        -   **新しい値の更新式を無視する**: 新しい値が指定された条件に一致する`UPDATE`ステートメントを除外します。たとえば、 `gender = 'male'`は`gender`が`male`になるような更新を除外します。
-        -   **古い値の更新を無視する式**: 古い値が指定された条件に一致する`UPDATE`ステートメントを除外します。たとえば、 `age < 18` `age`の古い値が 18 未満である場合の更新を除外します。
-        -   **Ignore delete value expression**: 指定された条件を満たす`DELETE`ステートメントを除外します。たとえば、 `name = 'john'`は`DELETE`が`name`である`'john'`ステートメントを除外します。
+    - **Tables matching**：この列では、イベントフィルターを適用するテーブルを設定できます。ルールの構文は、前の**Table Filter**領域で使用されているものと同じです。変更フィードごとに最大10個のイベントフィルタールールを追加できます。
+    - **Event Filter**：以下のイベントフィルターを使用して、変更フィードから特定のイベントを除外できます。
+        - **Ignore event**：指定されたイベントタイプを除外します。
+        - **Ignore SQL**: 指定された式に一致する DDL イベントを除外します。たとえば、 `^drop` `DROP`で始まるステートメントを除外し、 `add column`は`ADD COLUMN`を含むステートメントを除外します。
+        - **Ignore insert value expression**: 特定の条件を満たす`INSERT`ステートメントを除外します。たとえば、 `id >= 100`は、 `INSERT`が 100 以上である`id`ステートメントを除外します。
+        - **新しい値の更新式を無視する**: 新しい値が指定された条件に一致する`UPDATE`ステートメントを除外します。たとえば、 `gender = 'male'`は`gender`が`male`になるような更新を除外します。
+        - **古い値の更新を無視する式**: 古い値が指定された条件に一致する`UPDATE`ステートメントを除外します。たとえば、 `age < 18` `age`の古い値が 18 未満である場合の更新を除外します。
+        - **Ignore delete value expression**: 指定された条件を満たす`DELETE`ステートメントを除外します。たとえば、 `name = 'john'`は`DELETE`が`name`である`'john'`ステートメントを除外します。
 
-3.  **Start Replication Position**領域で、以下のいずれかのレプリケーション位置を選択します。
+3. **Start Replication Position**領域で、以下のいずれかのレプリケーション位置を選択します。
 
-    -   今からレプリケーションを開始します
-    -   特定の[TSO](https://docs.pingcap.com/tidb/stable/glossary#tso)からレプリケーションを開始する
-    -   特定の時間からレプリケーションを開始する
+    - 今からレプリケーションを開始します
+    - 特定の[TSO](https://docs.pingcap.com/tidb/stable/glossary#tso)からレプリケーションを開始する
+    - 特定の時間からレプリケーションを開始する
 
-4.  **Data Format**領域で、 **CSV形式**または**Canal-JSON**形式のいずれかを選択してください。
+4. **Data Format**領域で、 **CSV形式**または**Canal-JSON**形式のいずれかを選択してください。
 
      <SimpleTab>
      <div label="Configure CSV format">
 
     **CSV**形式を設定するには、以下の項目を入力してください。
 
-    -   **Binary Encode Method**：バイナリデータのエンコード方式。base64（デフォルト）または**hex**を選択できます。AWS DMSと連携する場合は、 **hex**を使用してください。
-    -   **Date Separator**：年、月、日に基づいてデータをローテーションするか、ローテーションしないかを選択します。
-    -   **区切り文字**：CSVファイル内の値を区切る文字を指定します。最も一般的に使用される区切り文字はカンマ（ `,` ）です。
-    -   **引用符**：区切り文字または特殊文字を含む値を囲むために使用する文字を指定します。通常、引用符には二重引用符（ `"` ）が使用されます。
-    -   **Null/Empty Values**：CSVファイル内でnull値または空値がどのように表現されるかを指定します。これは、データの適切な処理と解釈のために重要です。
-    -   **Include Commit Ts**：CSV行に[`commit-ts`](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#replicate-change-data-to-storage-services)を含めるかどうかを制御します。
+    - **Binary Encode Method**：バイナリデータのエンコード方式。base64（デフォルト）または**hex**を選択できます。AWS DMSと連携する場合は、 **hex**を使用してください。
+    - **Date Separator**：年、月、日に基づいてデータをローテーションするか、ローテーションしないかを選択します。
+    - **区切り文字**：CSVファイル内の値を区切る文字を指定します。最も一般的に使用される区切り文字はカンマ（ `,` ）です。
+    - **引用符**：区切り文字または特殊文字を含む値を囲むために使用する文字を指定します。通常、引用符には二重引用符（ `"` ）が使用されます。
+    - **Null/Empty Values**：CSVファイル内でnull値または空値がどのように表現されるかを指定します。これは、データの適切な処理と解釈のために重要です。
+    - **Include Commit Ts**：CSV行に[`commit-ts`](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#replicate-change-data-to-storage-services)を含めるかどうかを制御します。
 
     </div>
      <div label="Configure Canal-JSON format">
 
     Canal-JSONは、プレーンなJSONテキスト形式です。設定するには、以下のフィールドに入力してください。
 
-    -   **Date Separator**：年、月、日に基づいてデータをローテーションするか、ローテーションしないかを選択します。
-    -   **Enable TiDB Extension**: このオプションを有効にすると、TiCDC は[ウォーターマークイベント](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#watermark-event)を送信し、 [TiDB拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field)Canal-JSON メッセージに追加します。
+    - **Date Separator**：年、月、日に基づいてデータをローテーションするか、ローテーションしないかを選択します。
+    - **Enable TiDB Extension**: このオプションを有効にすると、TiCDC は[ウォーターマークイベント](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#watermark-event)を送信し、 [TiDB拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field)Canal-JSON メッセージに追加します。
 
     </div>
      </SimpleTab>
 
-5.  **Flush Parameters**領域では、次の2つの項目を設定できます。
+5. **Flush Parameters**領域では、次の2つの項目を設定できます。
 
-    -   **Flush Interval**：デフォルトでは60秒に設定されていますが、2秒から10分の範囲で調整可能です。
-    -   **File Size**：デフォルトでは64MBに設定されていますが、1MBから512MBの範囲で調整可能です。
+    - **Flush Interval**：デフォルトでは60秒に設定されていますが、2秒から10分の範囲で調整可能です。
+    - **File Size**：デフォルトでは64MBに設定されていますが、1MBから512MBの範囲で調整可能です。
 
     ![Flush Parameters](/media/tidb-cloud/changefeed/sink-to-cloud-storage-flush-parameters.jpg)
 
@@ -238,21 +238,21 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
     >
     > これら2つのパラメータは、各データベーステーブルごとにクラウドストレージに生成されるオブジェクトの数に影響します。テーブル数が多い場合、同じ設定を使用すると生成されるオブジェクトの数が増加し、結果としてクラウドストレージAPIの呼び出しコストが上昇します。そのため、リカバリポイント目標（RPO）とコスト要件に基づいて、これらのパラメータを適切に設定することをお勧めします。
 
-6.  **Split Event**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクにおける、主キーまたは一意キーを分割したUPDATEイベント](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
+6. **Split Event**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクにおける、主キーまたは一意キーを分割したUPDATEイベント](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
 
 ## ステップ3．仕様の設定 {#step-3-configure-specification}
 
 **Next**をクリックして、変更フィードの仕様を設定してください。
 
-1.  **Changefeed Specification**領域で、変更フィードで使用するレプリケーション容量ユニット（RCU）の数を指定します。
-2.  **Changefeed Name**欄に、変更フィードの名前を指定します。
+1. **Changefeed Specification**領域で、変更フィードで使用するレプリケーション容量ユニット（RCU）の数を指定します。
+2. **Changefeed Name**欄に、変更フィードの名前を指定します。
 
 ## ステップ4．構成を確認し、レプリケーションを開始する {#step-4-review-the-configuration-and-start-replication}
 
 **Next**をクリックして、変更フィードの設定を確認してください。
 
--   すべての設定が正しいことを確認したら、 **Create**をクリックして変更フィードの作成に進んでください。
--   設定を変更する必要がある場合は、 **Previous**をクリックして戻り、必要な変更を行ってください。
+- すべての設定が正しいことを確認したら、 **Create**をクリックして変更フィードの作成に進んでください。
+- 設定を変更する必要がある場合は、 **Previous**をクリックして戻り、必要な変更を行ってください。
 
 シンクはまもなく起動し、シンクの状態が**Creating**から**Running**に変わるのが確認できます。
 

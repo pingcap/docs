@@ -11,15 +11,15 @@ summary: _tidb_rowid`とは何か、いつ利用できるのか、そして安�
 
 > **Warning:**
 >
-> -   `_tidb_rowid`常にグローバルに一意であるとは限らないことに注意してください。クラスター化インデックスを使用しないパーティションテーブルの場合、 `ALTER TABLE ... EXCHANGE PARTITION`を実行すると、異なるパーティション間で`_tidb_rowid`値が重複する可能性があります。
-> -   安定した一意の識別子が必要な場合は、 `_tidb_rowid`に依存するのではなく、明示的な主キーを定義して使用してください。
+> - `_tidb_rowid`常にグローバルに一意であるとは限らないことに注意してください。クラスター化インデックスを使用しないパーティションテーブルの場合、 `ALTER TABLE ... EXCHANGE PARTITION`を実行すると、異なるパーティション間で`_tidb_rowid`値が重複する可能性があります。
+> - 安定した一意の識別子が必要な場合は、 `_tidb_rowid`に依存するのではなく、明示的な主キーを定義して使用してください。
 
 ## `_tidb_rowid`が利用可能な場合 {#when-tidb-rowid-is-available}
 
 TiDBでは、テーブルが一意の行識別子としてクラスター化された主キーを使用しない場合、各行を識別するために`_tidb_rowid`を使用します。実際には、これは次のタイプのテーブルが`_tidb_rowid`を使用することを意味します。
 
--   主キーのないテーブル
--   主キーが明示的に`NONCLUSTERED`と定義されているテーブル
+- 主キーのないテーブル
+- 主キーが明示的に`NONCLUSTERED`と定義されているテーブル
 
 `_tidb_rowid`は、クラスター化インデックスを使用するテーブル (つまり、主キーが`CLUSTERED`として定義されているテーブル。主キーが単一列か複合主キーかは関係ありません) では使用できません。
 
@@ -120,11 +120,11 @@ SELECT _tidb_rowid, a, b FROM t WHERE _tidb_rowid = 100;
 
 ## 制限 {#restrictions}
 
--   `_tidb_rowid`という名前のユーザー列を作成することはできません。
--   既存のユーザー列の名前を`_tidb_rowid`に変更することはできません。
--   `_tidb_rowid`はTiDBの内部列です。ビジネス上の主キーや長期的な識別子として扱わないでください。
--   パーティション化された非クラスター化テーブルでは、 `_tidb_rowid`の値はパーティション間で一意であることが保証されません。`EXCHANGE PARTITION`を実行した後、異なるパーティションに同じ`_tidb_rowid`の値を持つ行が含まれる可能性があります。
--   `_tidb_rowid`存在するかどうかは、テーブルのスキーマによって異なります。クラスター化インデックスを持つテーブルの場合は、行識別子として主キーを使用してください。
+- `_tidb_rowid`という名前のユーザー列を作成することはできません。
+- 既存のユーザー列の名前を`_tidb_rowid`に変更することはできません。
+- `_tidb_rowid`はTiDBの内部列です。ビジネス上の主キーや長期的な識別子として扱わないでください。
+- パーティション化された非クラスター化テーブルでは、 `_tidb_rowid`の値はパーティション間で一意であることが保証されません。`EXCHANGE PARTITION`を実行した後、異なるパーティションに同じ`_tidb_rowid`の値を持つ行が含まれる可能性があります。
+- `_tidb_rowid`存在するかどうかは、テーブルのスキーマによって異なります。クラスター化インデックスを持つテーブルの場合は、行識別子として主キーを使用してください。
 
 ## ホットスポットの問題に対処する {#address-hotspot-issues}
 
@@ -145,13 +145,13 @@ CREATE TABLE t (
 
 ## 関連する記述と変数 {#related-statements-and-variables}
 
--   [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md) ：TiDBが次に割り当てる行IDを示します
--   [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) ：ホットスポットを減らすために暗黙の行IDをシャーディングする
--   [`Clustered Indexes`](/clustered-indexes.md) : テーブルが`_tidb_rowid`の代わりに主キーを使用する場合を説明します
--   [`tidb_opt_write_row_id`](/system-variables.md#tidb_opt_write_row_id) ： `_tidb_rowid`への書き込みを許可するかどうかを制御します
+- [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md) ：TiDBが次に割り当てる行IDを示します
+- [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) ：ホットスポットを減らすために暗黙の行IDをシャーディングする
+- [`Clustered Indexes`](/clustered-indexes.md) : テーブルが`_tidb_rowid`の代わりに主キーを使用する場合を説明します
+- [`tidb_opt_write_row_id`](/system-variables.md#tidb_opt_write_row_id) ： `_tidb_rowid`への書き込みを許可するかどうかを制御します
 
 ## 関連項目 {#see-also}
 
--   [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)
--   [`AUTO_INCREMENT`](/auto-increment.md)
--   [非トランザクションDML](/non-transactional-dml.md)
+- [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)
+- [`AUTO_INCREMENT`](/auto-increment.md)
+- [非トランザクションDML](/non-transactional-dml.md)

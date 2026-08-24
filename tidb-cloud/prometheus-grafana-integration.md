@@ -11,14 +11,14 @@ TiDB Cloudは[Prometheus](https://prometheus.io/)APIエンドポイントを提�
 
 ## 前提条件 {#prerequisites}
 
--   TiDB CloudをPrometheusと統合するには、自己ホスト型またはマネージド型のPrometheusサービスが必要です。
+- TiDB CloudをPrometheusと統合するには、自己ホスト型またはマネージド型のPrometheusサービスが必要です。
 
--   TiDB Cloudのサードパーティ メトリクス統合を設定するには、TiDB Cloud で`Organization Owner`または`Instance Manager`アクセス権が必要です。統合ページを表示するには、 TiDB Cloud の組織内の対象の<CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>インスタンスにアクセスするための`Project Viewer`または`Instance Viewer`ロール以上が必要です。
+- TiDB Cloudのサードパーティ メトリクス統合を設定するには、TiDB Cloud で`Organization Owner`または`Instance Manager`アクセス権が必要です。統合ページを表示するには、 TiDB Cloud の組織内の対象の<CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>インスタンスにアクセスするための`Project Viewer`または`Instance Viewer`ロール以上が必要です。
 
 ## 制限 {#limitation}
 
--   [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは、PrometheusおよびGrafanaとの連携機能は利用できません。
--   <CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>インスタンスのステータスが**CREATING** 、 **RESTORING** 、 **PAUSED** 、または**RESUMING**の場合、Prometheus および Grafana の統合は利用できません。
+- [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは、PrometheusおよびGrafanaとの連携機能は利用できません。
+- <CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>インスタンスのステータスが**CREATING** 、 **RESTORING** 、 **PAUSED** 、または**RESUMING**の場合、Prometheus および Grafana の統合は利用できません。
 
 ## 手順 {#steps}
 
@@ -28,42 +28,42 @@ Prometheus サービスでTiDB Cloudのメトリクスを読み取るように�
 
 <CustomContent plan="essential">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで、 **Integrations** &gt; **Integration to Prometheus(PREVIEW)**をクリックします。
-3.  **Add File**をクリックすると、現在のTiDB Cloud Essentialインスタンス用の`scrape_config`ファイルが生成されて表示されます。
-4.  `scrape_config`ファイルの内容のコピーを作成して、後で使用してください。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
+2. 左側のナビゲーションペインで、 **Integrations** &gt; **Integration to Prometheus(PREVIEW)**をクリックします。
+3. **Add File**をクリックすると、現在のTiDB Cloud Essentialインスタンス用の`scrape_config`ファイルが生成されて表示されます。
+4. `scrape_config`ファイルの内容のコピーを作成して、後で使用してください。
 
 </CustomContent>
 
 <CustomContent plan="premium">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーション ペインで、 **Settings** &gt; **Integrations** &gt; **Integration to Prometheus(PREVIEW)**をクリックします。
-3.  **Add File**をクリックすると、現在のTiDB Cloud Premium インスタンス用の`scrape_config`ファイルが生成されて表示されます。
-4.  `scrape_config`ファイルの内容のコピーを作成して、後で使用してください。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
+2. 左側のナビゲーション ペインで、 **Settings** &gt; **Integrations** &gt; **Integration to Prometheus(PREVIEW)**をクリックします。
+3. **Add File**をクリックすると、現在のTiDB Cloud Premium インスタンス用の`scrape_config`ファイルが生成されて表示されます。
+4. `scrape_config`ファイルの内容のコピーを作成して、後で使用してください。
 
 </CustomContent>
 
 > **Note:**
 >
-> -   セキュリティ上の理由から、 TiDB Cloud新しく生成された`scrape_config`ファイルは一度しか表示されません。ファイルウィンドウを閉じる前に、必ず内容をコピーしてください。
-> -   忘れた場合は、 TiDB Cloudの`scrape_config`ファイルを削除して、新しいファイルを生成してください。 `scrape_config`ファイルを削除するには、ファイルを選択し、**...**をクリックしてから**Delete**をクリックします。
+> - セキュリティ上の理由から、 TiDB Cloud新しく生成された`scrape_config`ファイルは一度しか表示されません。ファイルウィンドウを閉じる前に、必ず内容をコピーしてください。
+> - 忘れた場合は、 TiDB Cloudの`scrape_config`ファイルを削除して、新しいファイルを生成してください。 `scrape_config`ファイルを削除するには、ファイルを選択し、**...**をクリックしてから**Delete**をクリックします。
 
 ### ステップ2．Prometheusとの統合 {#step-2-integrate-with-prometheus}
 
-1.  Prometheusサービスで指定された監視ディレクトリ内で、Prometheusの設定ファイルを探してください。
+1. Prometheusサービスで指定された監視ディレクトリ内で、Prometheusの設定ファイルを探してください。
 
     例えば、 `/etc/prometheus/prometheus.yml` 。
 
-2.  Prometheus の設定ファイルで、 `scrape_configs`セクションを探し、 TiDB Cloudから取得した`scrape_config`ファイルの内容をそのセクションにコピーします。
+2. Prometheus の設定ファイルで、 `scrape_configs`セクションを探し、 TiDB Cloudから取得した`scrape_config`ファイルの内容をそのセクションにコピーします。
 
-3.  Prometheusサービスで、 **Status** &gt; **Targets**を確認し、新しい`scrape_config`ファイルが読み込まれていることを確認してください。読み込まれていない場合は、Prometheusサービスを再起動する必要があるかもしれません。
+3. Prometheusサービスで、 **Status** &gt; **Targets**を確認し、新しい`scrape_config`ファイルが読み込まれていることを確認してください。読み込まれていない場合は、Prometheusサービスを再起動する必要があるかもしれません。
 
 ### ステップ3. Grafana GUIダッシュボードを使用してメトリクスを視覚化する {#step-3-use-grafana-gui-dashboards-to-visualize-the-metrics}
 
 PrometheusサービスがTiDB Cloudからメトリクスを読み取った後、Grafana GUIダッシュボードを使用して、次のようにメトリクスを視覚化できます。
 
-1.  <CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>用のGrafanaダッシュボードJSONファイルは、以下のリンクからダウンロードできます。
+1. <CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>用のGrafanaダッシュボードJSONファイルは、以下のリンクからダウンロードできます。
 
     <CustomContent plan="essential">
 
@@ -77,13 +77,13 @@ PrometheusサービスがTiDB Cloudからメトリクスを読み取った後、
 
     </CustomContent>
 
-2.  メトリクスを視覚化するには、 [このJSONをGrafana GUIにインポートしてください](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard)
+2. メトリクスを視覚化するには、 [このJSONをGrafana GUIにインポートしてください](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard)
 
     > **Note:**
     >
     > 既にPrometheusとGrafanaを使用して<CustomContent plan="essential">TiDB Cloud Essential</CustomContent>および<CustomContent plan="premium">TiDB Cloud Premium</CustomContent>インスタンスを監視しており、新たに利用可能になったメトリクスを組み込みたい場合は、既存のダッシュボードのJSONを直接更新するのではなく、新しいダッシュボードを作成することをお勧めします。
 
-3.  （オプション）パネルの追加や削除、データソースの変更、表示オプションの修正などにより、必要に応じてダッシュボードをカスタマイズできます。
+3. （オプション）パネルの追加や削除、データソースの変更、表示オプションの修正などにより、必要に応じてダッシュボードをカスタマイズできます。
 
 Grafana の使用方法の詳細については、 [Grafanaのドキュメント](https://grafana.com/docs/grafana/latest/getting-started/getting-started-prometheus/)を参照してください。
 
@@ -91,10 +91,10 @@ Grafana の使用方法の詳細については、 [Grafanaのドキュメント
 
 データセキュリティを向上させるため、 `scrape_config`ファイルベアラートークンを定期的にローテーションしてください。
 
-1.  [ステップ1](#step-1-get-a-scrape_config-file-for-prometheus)に従って、Prometheus 用の新しい`scrape_config`ファイルを作成します。
-2.  新しいファイルの内容をPrometheusの設定ファイルに追加してください。
-3.  Prometheus サービスがTiDB Cloudから読み取れることを確認したら、Prometheus 設定ファイルから古い`scrape_config`ファイルの内容を削除します。
-4.  <CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>インスタンスの**Integrations**ページで、対応する古い`scrape_config`ファイルを削除して、他のユーザーがTiDB Cloud Prometheusエンドポイントから読み取るために使用できないようにします。
+1. [ステップ1](#step-1-get-a-scrape_config-file-for-prometheus)に従って、Prometheus 用の新しい`scrape_config`ファイルを作成します。
+2. 新しいファイルの内容をPrometheusの設定ファイルに追加してください。
+3. Prometheus サービスがTiDB Cloudから読み取れることを確認したら、Prometheus 設定ファイルから古い`scrape_config`ファイルの内容を削除します。
+4. <CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>インスタンスの**Integrations**ページで、対応する古い`scrape_config`ファイルを削除して、他のユーザーがTiDB Cloud Prometheusエンドポイントから読み取るために使用できないようにします。
 
 ## Prometheusで利用可能なメトリクス {#metrics-available-to-prometheus}
 
@@ -148,6 +148,6 @@ Prometheusは、お客様の<CustomContent plan="essential">TiDB Cloud Essential
 
 ## FAQ {#faq}
 
--   なぜ同じメトリックが、GrafanaとTiDB Cloudコンソールで同時に異なる値を示すのでしょうか？
+- なぜ同じメトリックが、GrafanaとTiDB Cloudコンソールで同時に異なる値を示すのでしょうか？
 
     GrafanaとTiDB Cloudは集計計算ロジックが異なるため、表示される集計値が異なる場合があります。より詳細なメトリック値を取得するには、Grafanaの`mini step`設定を調整してください。

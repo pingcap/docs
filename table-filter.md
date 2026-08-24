@@ -17,7 +17,7 @@ TiDB 4.0以降、すべてのTiDB移行ツールは、サブセットを定義�
 
 <CustomContent platform="tidb">
 
--   [BR](/br/backup-and-restore-overview.md) :
+- [BR](/br/backup-and-restore-overview.md) :
 
     ```shell
     tiup br backup full -f 'foo*.*' -f 'bar*.*' -s 'local:///tmp/backup'
@@ -29,7 +29,7 @@ TiDB 4.0以降、すべてのTiDB移行ツールは、サブセットを定義�
 
 </CustomContent>
 
--   [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) :
+- [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) :
 
     ```shell
     tiup dumpling -f 'foo*.*' -f 'bar*.*' -P 3306 -o /tmp/data/
@@ -37,7 +37,7 @@ TiDB 4.0以降、すべてのTiDB移行ツールは、サブセットを定義�
 
 <CustomContent platform="tidb">
 
--   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) :
+- [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) :
 
     ```shell
     tiup tidb-lightning -f 'foo*.*' -f 'bar*.*' -d /tmp/data/ --backend tidb
@@ -47,7 +47,7 @@ TiDB 4.0以降、すべてのTiDB移行ツールは、サブセットを定義�
 
 <CustomContent platform="tidb-cloud">
 
--   [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview) :
+- [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview) :
 
     ```shell
     tiup tidb-lightning -f 'foo*.*' -f 'bar*.*' -d /tmp/data/ --backend tidb
@@ -59,7 +59,7 @@ TiDB 4.0以降、すべてのTiDB移行ツールは、サブセットを定義�
 
 TOMLファイル内のテーブルフィルターは[文字列の配列](https://toml.io/en/v1.0.0-rc.1#section-15)として指定されます。以下に使用例を示します。
 
--   TiDB Lightning:
+- TiDB Lightning:
 
     ```toml
     [mydumper]
@@ -68,7 +68,7 @@ TOMLファイル内のテーブルフィルターは[文字列の配列](https:/
 
 <CustomContent platform="tidb">
 
--   [TiCDC](/ticdc/ticdc-overview.md) :
+- [TiCDC](/ticdc/ticdc-overview.md) :
 
     ```toml
     [filter]
@@ -93,11 +93,11 @@ TOMLファイル内のテーブルフィルターは[文字列の配列](https:/
 
 プレーン名は、次のように有効な[識別子文字](/schema-object-names.md)のみで構成する必要があります。
 
--   数字（ `0` ～ `9` ）
--   文字（ `a` ～ `z` 、 `A` ～ `Z` ）
--   `$`
--   `_`
--   非ASCII文字（U+0080からU+10FFFF）
+- 数字（ `0` ～ `9` ）
+- 文字（ `a` ～ `z` 、 `A` ～ `Z` ）
+- `$`
+- `_`
+- 非ASCII文字（U+0080からU+10FFFF）
 
 その他のASCII文字はすべて予約されています。一部の句読点は特別な意味を持ちます。次のセクションで説明します。
 
@@ -105,10 +105,10 @@ TOMLファイル内のテーブルフィルターは[文字列の配列](https:/
 
 名前の各部分には、 [fnmatch(3)](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_13)で説明したワイルドカード記号を使用できます。
 
--   `*` — 0文字以上の文字に一致
--   `?` — 1文字に一致
--   `[a-z]` — 「a」から「z」までの間の1文字に一致します
--   `[!a-z]` — 「a」から「z」を除く 1 つの文字に一致します。
+- `*` — 0文字以上の文字に一致
+- `?` — 1文字に一致
+- `[a-z]` — 「a」から「z」までの間の1文字に一致します
+- `[!a-z]` — 「a」から「z」を除く 1 つの文字に一致します。
 
 <!---->
 
@@ -118,9 +118,9 @@ TOMLファイル内のテーブルフィルターは[文字列の配列](https:/
 
 ここでの「文字」とは、次のような Unicode コード ポイントを意味します。
 
--   U+00E9 (é) は 1 文字です。
--   U+0065 U+0301 (é) は 2 文字です。
--   U+1F926 U+1F3FF U+200D U+2640 U+FE0F (🤦🏿‍♀️) は 5 つの文字です。
+- U+00E9 (é) は 1 文字です。
+- U+0065 U+0301 (é) は 2 文字です。
+- U+1F926 U+1F3FF U+200D U+2640 U+FE0F (🤦🏿‍♀️) は 5 つの文字です。
 
 ### ファイルのインポート {#file-import}
 
@@ -166,8 +166,8 @@ tiup dumpling -f 'employees.*' -f '*.WorkOrder'
 
 簡潔性と将来の互換性のため、次のシーケンスは禁止されています。
 
--   空白をトリミングした後の行末の`\` (末尾のリテラル空白に一致させるには`[ ]`を使用します)。
--   `\`に続く任意のASCII英数字（ `[0-9a-zA-Z]` ）。特に、 `\0` 、 `\r` 、 `\n` 、 `\t`のようなC言語風のエスケープシーケンスは、現時点では意味を持ちません。
+- 空白をトリミングした後の行末の`\` (末尾のリテラル空白に一致させるには`[ ]`を使用します)。
+- `\`に続く任意のASCII英数字（ `[0-9a-zA-Z]` ）。特に、 `\0` 、 `\r` 、 `\n` 、 `\t`のようなC言語風のエスケープシーケンスは、現時点では意味を持ちません。
 
 ### 引用符付き識別子 {#quoted-identifier}
 
@@ -237,9 +237,9 @@ tiup dumpling -f '*.*' -f '!*.Password'
 >
 > TiDBツールでは、システムスキーマはデフォルト設定では常に除外されます。システムスキーマは以下のとおりです。
 >
-> -   `INFORMATION_SCHEMA`
-> -   `PERFORMANCE_SCHEMA`
-> -   `METRICS_SCHEMA`
-> -   `INSPECTION_SCHEMA`
-> -   `mysql`
-> -   `sys`
+> - `INFORMATION_SCHEMA`
+> - `PERFORMANCE_SCHEMA`
+> - `METRICS_SCHEMA`
+> - `INSPECTION_SCHEMA`
+> - `mysql`
+> - `sys`

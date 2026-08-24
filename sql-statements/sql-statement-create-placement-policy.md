@@ -80,7 +80,7 @@ Query OK, 0 rows affected (0.10 sec)
 
 ## 参照 {#see-also}
 
--   [SQLにおける配置ルール](/placement-rules-in-sql.md)
--   [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
--   [ALTER PLACEMENT POLICY](/sql-statements/sql-statement-alter-placement-policy.md)
--   [DROP PLACEMENT POLICY](/sql-statements/sql-statement-drop-placement-policy.md)
+- [SQLにおける配置ルール](/placement-rules-in-sql.md)
+- [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
+- [ALTER PLACEMENT POLICY](/sql-statements/sql-statement-alter-placement-policy.md)
+- [DROP PLACEMENT POLICY](/sql-statements/sql-statement-drop-placement-policy.md)

@@ -13,7 +13,7 @@ summary: DM 接続で TLS を有効にする方法を学習します。
 
 ### 暗号化されたデータ転送を設定して有効にする {#configure-and-enable-encrypted-data-transmission}
 
-1.  証明書を準備します。
+1. 証明書を準備します。
 
     DMマスターとDMワーカーそれぞれにサーバー証明書を別々に用意することをお勧めします。2つのコンポーネントが相互に認証できることを確認してください。dmctlでは1つのクライアント証明書を共有することもできます。
 
@@ -21,13 +21,13 @@ summary: DM 接続で TLS を有効にする方法を学習します。
 
     `openssl`を選択した場合は[自己署名証明書の生成](/dm/dm-generate-self-signed-certificates.md)を参照できます。
 
-2.  証明書を構成します。
+2. 証明書を構成します。
 
     > **Note:**
     >
     > DM-master、DM-worker、および dmctl が同じ証明書セットを使用するように構成できます。
 
-    -   DMマスター
+    - DMマスター
 
         設定ファイルまたはコマンドライン引数で設定します。
 
@@ -37,7 +37,7 @@ summary: DM 接続で TLS を有効にする方法を学習します。
         ssl-key = "/path/to/master-key.pem"
         ```
 
-    -   DMワーカー
+    - DMワーカー
 
         設定ファイルまたはコマンドライン引数で設定します。
 
@@ -47,7 +47,7 @@ summary: DM 接続で TLS を有効にする方法を学習します。
         ssl-key = "/path/to/worker-key.pem"
         ```
 
-    -   dmctl
+    - dmctl
 
         DMクラスタで暗号化通信を有効にした後、dmctlを使用してクラスタに接続する必要がある場合は、クライアント証明書を指定します。例：
 
@@ -61,7 +61,7 @@ summary: DM 接続で TLS を有効にする方法を学習します。
 
 コンポーネントの呼び出し元の ID を確認するには、証明書を生成するときに`Common Name` (CN) を使用して証明書のユーザー ID をマークし、呼び出し先の`Common Name`リストを構成して呼び出し元の ID を確認する必要があります。
 
--   DMマスター
+- DMマスター
 
     設定ファイルまたはコマンドライン引数で設定します。
 
@@ -69,7 +69,7 @@ summary: DM 接続で TLS を有効にする方法を学習します。
     cert-allowed-cn = ["dm"]
     ```
 
--   DMワーカー
+- DMワーカー
 
     設定ファイルまたはコマンドライン引数で設定します。
 
@@ -89,9 +89,9 @@ summary: DM 接続で TLS を有効にする方法を学習します。
 
 ### 上流データベースへの暗号化されたデータ転送を有効にする {#enable-encrypted-data-transmission-for-upstream-database}
 
-1.  アップストリームデータベースを設定し、暗号化サポートを有効にし、サーバー証明書を設定します。詳細な操作については、 [暗号化された接続の使用](https://dev.mysql.com/doc/refman/8.0/en/using-encrypted-connections.html)を参照してください。
+1. アップストリームデータベースを設定し、暗号化サポートを有効にし、サーバー証明書を設定します。詳細な操作については、 [暗号化された接続の使用](https://dev.mysql.com/doc/refman/8.0/en/using-encrypted-connections.html)を参照してください。
 
-2.  ソース構成ファイルで MySQL クライアント証明書を設定します。
+2. ソース構成ファイルで MySQL クライアント証明書を設定します。
 
     > **Note:**
     >
@@ -107,9 +107,9 @@ summary: DM 接続で TLS を有効にする方法を学習します。
 
 ### 下流のTiDBへの暗号化されたデータ転送を有効にする {#enable-encrypted-data-transmission-for-downstream-tidb}
 
-1.  下流TiDBが暗号化接続を使用するように設定します。詳細な操作については、 [安全な接続を使用するように TiDBサーバーを構成する](/enable-tls-between-clients-and-servers.md#configure-tidb-server-to-use-secure-connections)を参照してください。
+1. 下流TiDBが暗号化接続を使用するように設定します。詳細な操作については、 [安全な接続を使用するように TiDBサーバーを構成する](/enable-tls-between-clients-and-servers.md#configure-tidb-server-to-use-secure-connections)を参照してください。
 
-2.  タスク構成ファイルで TiDB クライアント証明書を設定します。
+2. タスク構成ファイルで TiDB クライアント証明書を設定します。
 
     > **Note:**
     >

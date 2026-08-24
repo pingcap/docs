@@ -72,41 +72,41 @@ DESC mysql.user;
 
 <CustomContent platform="tidb">
 
--   範囲：
-    -   `Host` : TiDB アカウントのホスト名を指定します。
-    -   `User` : TiDB アカウントのユーザー名を指定します。
+- 範囲：
+    - `Host` : TiDB アカウントのホスト名を指定します。
+    - `User` : TiDB アカウントのユーザー名を指定します。
 
--   特権：
+- 特権：
 
     `_priv`または`_Priv`で終わるフィールドは、ユーザーアカウントに付与される権限を定義します。例えば、 `Select_priv`ユーザーがグローバル権限`Select`を持つことを意味します。詳細については、 [TiDB操作に必要な権限](/privilege-management.md#privileges-required-for-tidb-operations)を参照してください。
 
--   セキュリティ：
-    -   `authentication_string`と`plugin` ： `authentication_string`にはユーザーアカウントの認証情報が保存されます。認証情報は、 `plugin`フィールドで指定された認証プラグインに基づいて解釈されます。
-    -   `Account_locked` : ユーザー アカウントがロックされているかどうかを示します。
-    -   `Password_reuse_history`と`Password_reuse_time` : [パスワード再利用ポリシー](/password-management.md#password-reuse-policy)に使用されます。
-    -   `User_attributes` : ユーザーのコメントとユーザー属性に関する情報を提供します。
-    -   `Token_issuer` : [`tidb_auth_token`](/security-compatibility-with-mysql.md#tidb_auth_token)認証プラグインに使用されます。
-    -   `Password_expired` 、 `Password_last_changed` 、 `Password_lifetime` : [パスワード有効期限ポリシー](/password-management.md#password-expiration-policy)に使用されます。
+- セキュリティ：
+    - `authentication_string`と`plugin` ： `authentication_string`にはユーザーアカウントの認証情報が保存されます。認証情報は、 `plugin`フィールドで指定された認証プラグインに基づいて解釈されます。
+    - `Account_locked` : ユーザー アカウントがロックされているかどうかを示します。
+    - `Password_reuse_history`と`Password_reuse_time` : [パスワード再利用ポリシー](/password-management.md#password-reuse-policy)に使用されます。
+    - `User_attributes` : ユーザーのコメントとユーザー属性に関する情報を提供します。
+    - `Token_issuer` : [`tidb_auth_token`](/security-compatibility-with-mysql.md#tidb_auth_token)認証プラグインに使用されます。
+    - `Password_expired` 、 `Password_last_changed` 、 `Password_lifetime` : [パスワード有効期限ポリシー](/password-management.md#password-expiration-policy)に使用されます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   範囲：
-    -   `Host` : TiDB アカウントのホスト名を指定します。
-    -   `User` : TiDB アカウントのユーザー名を指定します。
+- 範囲：
+    - `Host` : TiDB アカウントのホスト名を指定します。
+    - `User` : TiDB アカウントのユーザー名を指定します。
 
--   特権：
+- 特権：
 
     `_priv`または`_Priv`で終わるフィールドは、ユーザーアカウントに付与される権限を定義します。例えば、 `Select_priv`ユーザーがグローバル権限`Select`を持つことを意味します。詳細については、 [TiDB操作に必要な権限](https://docs.pingcap.com/tidb/stable/privilege-management#privileges-required-for-tidb-operations)を参照してください。
 
--   セキュリティ：
-    -   `authentication_string`と`plugin` ： `authentication_string`にはユーザーアカウントの認証情報が保存されます。認証情報は、 `plugin`フィールドで指定された認証プラグインに基づいて解釈されます。
-    -   `Account_locked` : ユーザー アカウントがロックされているかどうかを示します。
-    -   `Password_reuse_history`と`Password_reuse_time` : [パスワード再利用ポリシー](https://docs.pingcap.com/tidb/stable/password-management#password-reuse-policy)に使用されます。
-    -   `User_attributes` : ユーザーのコメントとユーザー属性に関する情報を提供します。
-    -   `Token_issuer` : [`tidb_auth_token`](https://docs.pingcap.com/tidb/stable/security-compatibility-with-mysql#tidb_auth_token)認証プラグインに使用されます。
-    -   `Password_expired` 、 `Password_last_changed` 、 `Password_lifetime` : [パスワード有効期限ポリシー](https://docs.pingcap.com/tidb/stable/password-management#password-expiration-policy)に使用されます。
+- セキュリティ：
+    - `authentication_string`と`plugin` ： `authentication_string`にはユーザーアカウントの認証情報が保存されます。認証情報は、 `plugin`フィールドで指定された認証プラグインに基づいて解釈されます。
+    - `Account_locked` : ユーザー アカウントがロックされているかどうかを示します。
+    - `Password_reuse_history`と`Password_reuse_time` : [パスワード再利用ポリシー](https://docs.pingcap.com/tidb/stable/password-management#password-reuse-policy)に使用されます。
+    - `User_attributes` : ユーザーのコメントとユーザー属性に関する情報を提供します。
+    - `Token_issuer` : [`tidb_auth_token`](https://docs.pingcap.com/tidb/stable/security-compatibility-with-mysql#tidb_auth_token)認証プラグインに使用されます。
+    - `Password_expired` 、 `Password_last_changed` 、 `Password_lifetime` : [パスワード有効期限ポリシー](https://docs.pingcap.com/tidb/stable/password-management#password-expiration-policy)に使用されます。
 
 </CustomContent>
 

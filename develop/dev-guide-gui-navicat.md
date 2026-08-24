@@ -18,14 +18,14 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
 このチュートリアルを完了するには、以下が必要です。
 
--   [Navicat Premium](https://www.navicat.com) **17.1.6**以降のバージョン。
--   Navicat Premiumの有料アカウント。
--   TiDBクラスタ。
+- [Navicat Premium](https://www.navicat.com) **17.1.6**以降のバージョン。
+- Navicat Premiumの有料アカウント。
+- TiDBクラスタ。
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
--   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
 ## TiDBに接続する {#connect-to-tidb}
 
@@ -34,78 +34,78 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 <SimpleTab>
 <div label="TiDB Cloud Starter or Essential">
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
+3. 接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **Connection Type**は`Public`に設定されています。
-    -   **Branch**は`main`に設定されています。
-    -   **Connect With**は`Navicat`に設定されています。
-    -   お使いの環境に合った**Operating System**を選択してください。
+    - **Connection Type**は`Public`に設定されています。
+    - **Branch**は`main`に設定されています。
+    - **Connect With**は`Navicat`に設定されています。
+    - お使いの環境に合った**Operating System**を選択してください。
 
-4.  **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
+4. **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
 
     > **Tip:**
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **Reset Password**をクリックして新しいパスワードを生成できます。
 
-5.  Navicat Premiumを起動し、左上隅の**Connection**をクリックし、**Vendor Filter**リストから**PingCAP**を選択し、右側のパネルで**TiDB**をダブルクリックします。
+5. Navicat Premiumを起動し、左上隅の**Connection**をクリックし、**Vendor Filter**リストから**PingCAP**を選択し、右側のパネルで**TiDB**をダブルクリックします。
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
-6.  **New Connection (TiDB)**ダイアログで、以下の接続パラメータを設定します。
+6. **New Connection (TiDB)**ダイアログで、以下の接続パラメータを設定します。
 
-    -   **Connection Name**：この接続に分かりやすい名前を付けてください。
-    -   **Host**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
-    -   **Port**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
-    -   **User Name**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
-    -   **Password**：手順4で作成したパスワードを入力してください。
+    - **Connection Name**：この接続に分かりやすい名前を付けてください。
+    - **Host**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    - **Port**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    - **User Name**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
+    - **Password**：手順4で作成したパスワードを入力してください。
 
     ![Navicat: configure connection general panel for TiDB Cloud Starter](/media/develop/navicat-premium-connection-config-serverless-general.png)
 
-7.  **SSL**タブをクリックし、 **Use SSL** 、 **Use authentication** 、 **Verify server certificate against CA**のチェックボックスを選択します。次に、 TiDB Cloud接続ダイアログから`CA`ファイルを選択し、 **CA Certificate**フィールドに貼り付けます。
+7. **SSL**タブをクリックし、 **Use SSL** 、 **Use authentication** 、 **Verify server certificate against CA**のチェックボックスを選択します。次に、 TiDB Cloud接続ダイアログから`CA`ファイルを選択し、 **CA Certificate**フィールドに貼り付けます。
 
     ![Navicat: configure connection SSL panel for TiDB Cloud Starter](/media/develop/navicat-premium-connection-config-serverless-ssl.png)
 
-8.  **Test Connection**をクリックして、対象のTiDB Cloud StarterまたはEssentialインスタンスへの接続を検証してください。
+8. **Test Connection**をクリックして、対象のTiDB Cloud StarterまたはEssentialインスタンスへの接続を検証してください。
 
-9.  接続テストが成功すると、 **Connection Successful**というメッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
+9. 接続テストが成功すると、 **Connection Successful**というメッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
 
 </div>
 <div label="TiDB Cloud Premium">
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
 
-3.  **Networking**ページで、 **Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
+3. **Networking**ページで、 **Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
 
     クライアントのIPアドレスがアクセスリストに追加されていることを確認してください。
 
-4.  左側のナビゲーションペインで**Overview**をクリックすると、インスタンスの概要ページに戻ります。
+4. 左側のナビゲーションペインで**Overview**をクリックすると、インスタンスの概要ページに戻ります。
 
-5.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+5. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-6.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
+6. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
 
-    -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
-    -   まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
-    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
-    -   **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+    - 公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
+    - まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
+    - サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
+    - **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
-7.  Navicat Premiumを起動し、左上隅の**Connect**をクリックし、**Vendor Filter**リストから**PingCAP**を選択し、右側のパネルで**TiDB**をダブルクリックします。
+7. Navicat Premiumを起動し、左上隅の**Connect**をクリックし、**Vendor Filter**リストから**PingCAP**を選択し、右側のパネルで**TiDB**をダブルクリックします。
 
-8.  **New Connection (TiDB)**ダイアログで、以下の接続パラメータを設定します。
+8. **New Connection (TiDB)**ダイアログで、以下の接続パラメータを設定します。
 
-    -   **Connection Name**：この接続に分かりやすい名前を付けてください。
-    -   **Host**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
-    -   **Port**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
-    -   **User Name**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
-    -   **Password**： TiDB Cloud Premiumインスタンスのパスワードを入力してください。
+    - **Connection Name**：この接続に分かりやすい名前を付けてください。
+    - **Host**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    - **Port**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    - **User Name**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
+    - **Password**： TiDB Cloud Premiumインスタンスのパスワードを入力してください。
 
-9.  **SSL**タブをクリックし、 **Use SSL**チェックボックスをオフにします。
+9. **SSL**タブをクリックし、 **Use SSL**チェックボックスをオフにします。
 
 10. **Test Connection**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
 
@@ -114,71 +114,71 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
+3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
 
     TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
-4.  CA証明書をダウンロードするには、 **CA cert**をクリックしてください。
+4. CA証明書をダウンロードするには、 **CA cert**をクリックしてください。
 
-5.  Navicat Premiumを起動し、左上隅の**Connect**をクリックし、**Vendor Filter**リストから**PingCAP**を選択し、右側のパネルで**TiDB**をダブルクリックします。
+5. Navicat Premiumを起動し、左上隅の**Connect**をクリックし、**Vendor Filter**リストから**PingCAP**を選択し、右側のパネルで**TiDB**をダブルクリックします。
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
-6.  **New Connection (TiDB)**ダイアログで、以下の接続パラメータを設定します。
+6. **New Connection (TiDB)**ダイアログで、以下の接続パラメータを設定します。
 
-    -   **Connection Name**：この接続に分かりやすい名前を付けてください。
-    -   **Host**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
-    -   **Port**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
-    -   **User Name**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
-    -   **Password**： TiDB Cloud Dedicatedクラスタのパスワードを入力してください。
+    - **Connection Name**：この接続に分かりやすい名前を付けてください。
+    - **Host**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    - **Port**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    - **User Name**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
+    - **Password**： TiDB Cloud Dedicatedクラスタのパスワードを入力してください。
 
     ![Navicat: configure connection general panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-general.png)
 
-7.  **SSL**タブをクリックし、 **Use SSL** 、 **Use authentication**、 **Verify server certificate against CA**チェックボックスをオンにします。次に、手順4でダウンロードしたCAファイルを**CA Certificate**フィールドに選択します。
+7. **SSL**タブをクリックし、 **Use SSL** 、 **Use authentication**、 **Verify server certificate against CA**チェックボックスをオンにします。次に、手順4でダウンロードしたCAファイルを**CA Certificate**フィールドに選択します。
 
     ![Navicat: configure connection SSL panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-ssl.png)
 
-8.  TiDB Cloud Dedicatedクラスターへの接続を検証するために、**接続テストを実行します**。
+8. TiDB Cloud Dedicatedクラスターへの接続を検証するために、**接続テストを実行します**。
 
-9.  接続テストが成功すると、 **Connection Successful**というメッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
+9. 接続テストが成功すると、 **Connection Successful**というメッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
 
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
-1.  Navicat Premiumを起動し、左上隅の**Connection**をクリックし、**Vendor Filter**リストから**PingCAP**を選択し、右側のパネルで**TiDB**をダブルクリックします。
+1. Navicat Premiumを起動し、左上隅の**Connection**をクリックし、**Vendor Filter**リストから**PingCAP**を選択し、右側のパネルで**TiDB**をダブルクリックします。
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
-2.  **New Connection (TiDB)**ダイアログで、以下の接続パラメータを設定します。
+2. **New Connection (TiDB)**ダイアログで、以下の接続パラメータを設定します。
 
-    -   **Connection Name**：この接続に分かりやすい名前を付けてください。
-    -   **Host**：TiDB Self-ManagedクラスタのIPアドレスまたはドメイン名を入力してください。
-    -   **Port**：TiDB Self-Managedクラスタのポート番号を入力してください。
-    -   **User Name**：TiDBに接続するために使用するユーザー名を入力してください。
-    -   **Password**：TiDBに接続するために使用するパスワードを入力してください。
+    - **Connection Name**：この接続に分かりやすい名前を付けてください。
+    - **Host**：TiDB Self-ManagedクラスタのIPアドレスまたはドメイン名を入力してください。
+    - **Port**：TiDB Self-Managedクラスタのポート番号を入力してください。
+    - **User Name**：TiDBに接続するために使用するユーザー名を入力してください。
+    - **Password**：TiDBに接続するために使用するパスワードを入力してください。
 
     ![Navicat: configure connection general panel for self-hosted TiDB](/media/develop/navicat-premium-connection-config-self-hosted-general.png)
 
-3.  **Test Connection**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
+3. **Test Connection**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
 
-4.  接続テストが成功すると、 **Connection Successful**というメッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
+4. 接続テストが成功すると、 **Connection Successful**というメッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
 
 </div>
 </SimpleTab>
 
 ## 次のステップ {#next-steps}
 
--   [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
--   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

@@ -11,7 +11,7 @@ v7.1.0以降、TiCDCはデータ整合性検証機能を導入しました。こ
 
 TiCDCはデフォルトでデータ整合性検証を無効にしています。有効にするには、以下の手順を実行してください。
 
-1.  [`tidb_enable_row_level_checksum`](/system-variables.md#tidb_enable_row_level_checksum-new-in-v710)システム変数を設定して、アップストリーム TiDB クラスター内の単一行データのチェックサム整合性検証機能を有効にします。
+1. [`tidb_enable_row_level_checksum`](/system-variables.md#tidb_enable_row_level_checksum-new-in-v710)システム変数を設定して、アップストリーム TiDB クラスター内の単一行データのチェックサム整合性検証機能を有効にします。
 
     ```sql
     SET GLOBAL tidb_enable_row_level_checksum = ON;
@@ -19,7 +19,7 @@ TiCDCはデフォルトでデータ整合性検証を無効にしています。
 
     この構成は新しく作成されたセッションに対してのみ有効になるため、TiDB に再接続する必要があります。
 
-2.  In the [設定ファイル](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) specified by the `--config` parameter when you create a changefeed, add the following configurations:
+2. In the [設定ファイル](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) specified by the `--config` parameter when you create a changefeed, add the following configurations:
 
     ```toml
     [integrity]
@@ -27,7 +27,7 @@ TiCDCはデフォルトでデータ整合性検証を無効にしています。
     corruption-handle-level = "warn"
     ```
 
-3.  データエンコード形式としてAvroを使用する場合は、 [`sink-uri`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)に[`enable-tidb-extension=true`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)設定する必要があります。ネットワーク転送中に数値精度が失われ、チェックサム検証エラーが発生するのを防ぐため、 [`avro-decimal-handling-mode=string`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)と[`avro-bigint-unsigned-handling-mode=string`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)設定する必要があります。以下に例を示します。
+3. データエンコード形式としてAvroを使用する場合は、 [`sink-uri`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)に[`enable-tidb-extension=true`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)設定する必要があります。ネットワーク転送中に数値精度が失われ、チェックサム検証エラーが発生するのを防ぐため、 [`avro-decimal-handling-mode=string`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)と[`avro-bigint-unsigned-handling-mode=string`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)設定する必要があります。以下に例を示します。
 
     ```shell
     cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-avro-checksum" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro&enable-tidb-extension=true&avro-decimal-handling-mode=string&avro-bigint-unsigned-handling-mode=string" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
@@ -43,7 +43,7 @@ TiCDCはデフォルトでデータ整合性検証を無効にしています。
 
 TiCDC disables data integrity validation by default. To disable this feature after enabling it, perform the following steps:
 
-1.  [Update task configuration](/ticdc/ticdc-manage-changefeed.md#update-task-configuration)で説明した`Pause Task -> Modify Configuration -> Resume Task`プロセスに従い、changefeed の`--config`パラメータで指定された構成ファイル内の`[integrity]`構成をすべて削除します。
+1. [Update task configuration](/ticdc/ticdc-manage-changefeed.md#update-task-configuration)で説明した`Pause Task -> Modify Configuration -> Resume Task`プロセスに従い、changefeed の`--config`パラメータで指定された構成ファイル内の`[integrity]`構成をすべて削除します。
 
     ```toml
     [integrity]
@@ -51,7 +51,7 @@ TiCDC disables data integrity validation by default. To disable this feature aft
     corruption-handle-level = "warn"
     ```
 
-2.  チェックサム整合性検証機能を無効にするには、上流のTiDBで次のSQL文を実行します（ [`tidb_enable_row_level_checksum`](/system-variables.md#tidb_enable_row_level_checksum-new-in-v710) ）。
+2. チェックサム整合性検証機能を無効にするには、上流のTiDBで次のSQL文を実行します（ [`tidb_enable_row_level_checksum`](/system-variables.md#tidb_enable_row_level_checksum-new-in-v710) ）。
 
     ```sql
     SET GLOBAL tidb_enable_row_level_checksum = OFF;
@@ -89,28 +89,28 @@ fn checksum(columns) {
 }
 ```
 
--   `columns`列IDでソートする必要があります。Avroスキーマでは、フィールドは既に列IDでソートされているため、 `columns`の順序をそのまま使用できます。
+- `columns`列IDでソートする必要があります。Avroスキーマでは、フィールドは既に列IDでソートされているため、 `columns`の順序をそのまま使用できます。
 
--   `encode(column)`関数は列の値をバイト列にエンコードします。エンコードのルールは列のデータ型によって異なります。具体的なルールは以下のとおりです。
+- `encode(column)`関数は列の値をバイト列にエンコードします。エンコードのルールは列のデータ型によって異なります。具体的なルールは以下のとおりです。
 
-    -   TINYINT, SMALLINT, INT, BIGINT, MEDIUMINT, and YEAR types are converted to UINT64 and encoded in little-endian. For example, the number `0x0123456789abcdef` is encoded as `hex'0x0123456789abcdef'`.
+    - TINYINT, SMALLINT, INT, BIGINT, MEDIUMINT, and YEAR types are converted to UINT64 and encoded in little-endian. For example, the number `0x0123456789abcdef` is encoded as `hex'0x0123456789abcdef'`.
 
-    -   FLOAT および DOUBLE 型は DOUBLE に変換され、その後 IEEE754 形式の UINT64 としてエンコードされます。
+    - FLOAT および DOUBLE 型は DOUBLE に変換され、その後 IEEE754 形式の UINT64 としてエンコードされます。
 
-    -   BIT, ENUM, and SET types are converted to UINT64.
+    - BIT, ENUM, and SET types are converted to UINT64.
 
-        -   BIT 型はバイナリ形式の UINT64 に変換されます。
-        -   ENUM型とSET型は、UINT64の対応するINT値に変換されます。例えば、 `SET('a','b','c')`型の列のデータ値が`'a,c'`の場合、その値は`0b101` （10進数では`5`）としてエンコードされます。
+        - BIT 型はバイナリ形式の UINT64 に変換されます。
+        - ENUM型とSET型は、UINT64の対応するINT値に変換されます。例えば、 `SET('a','b','c')`型の列のデータ値が`'a,c'`の場合、その値は`0b101` （10進数では`5`）としてエンコードされます。
 
-    -   TIMESTAMP、DATE、DURATION、DATETIME、JSON、および DECIMAL 型は、最初に STRING に変換され、次にバイトに変換されます。
+    - TIMESTAMP、DATE、DURATION、DATETIME、JSON、および DECIMAL 型は、最初に STRING に変換され、次にバイトに変換されます。
 
-    -   CHAR、VARCHAR、VARSTRING、STRING、 TEXT、および BLOB 型 (TINY、MEDIUM、および LONG を含む) は、直接バイトに変換されます。
+    - CHAR、VARCHAR、VARSTRING、STRING、 TEXT、および BLOB 型 (TINY、MEDIUM、および LONG を含む) は、直接バイトに変換されます。
 
-    -   NULL および GEOMETRY 型はチェックサム計算から除外され、この関数は空のバイトを返します。
+    - NULL および GEOMETRY 型はチェックサム計算から除外され、この関数は空のバイトを返します。
 
 Golangを使用したデータ消費とチェックサム検証の実装の詳細については、 [TiCDC 行データチェックサム検証](/ticdc/ticdc-avro-checksum-verification.md)を参照してください。
 
 > **Note:**
 >
-> -   チェックサム検証機能を有効にすると、DECIMAL型およびUNSIGNED BIGINT型のデータはSTRING型に変換されます。そのため、下流のコンシューマーコードでは、チェックサム値を計算する前に、これらのデータを対応する数値型に戻す必要があります。
-> -   チェックサム検証プロセスにはDELETEイベントは含まれません。これは、DELETEイベントにはハンドルキー列のみが含まれるのに対し、チェックサムはすべての列に基づいて計算されるためです。
+> - チェックサム検証機能を有効にすると、DECIMAL型およびUNSIGNED BIGINT型のデータはSTRING型に変換されます。そのため、下流のコンシューマーコードでは、チェックサム値を計算する前に、これらのデータを対応する数値型に戻す必要があります。
+> - チェックサム検証プロセスにはDELETEイベントは含まれません。これは、DELETEイベントにはハンドルキー列のみが含まれるのに対し、チェックサムはすべての列に基づいて計算されるためです。

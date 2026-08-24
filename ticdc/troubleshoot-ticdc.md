@@ -15,10 +15,10 @@ summary: TiCDC の使用時に発生する可能性のある問題のトラブ�
 
 ### TiCDC レプリケーション タスクが中断されたかどうかはどうすればわかりますか? {#how-do-i-know-whether-a-ticdc-replication-task-is-interrupted}
 
--   Grafanaダッシュボードで、レプリケーションタスクの監視メトリック`changefeed checkpoint` （適切な`changefeed id`選択）を確認してください。メトリック値が変化しない場合、またはメトリック`checkpoint lag`が増加し続ける場合、レプリケーションタスクが中断されている可能性があります。
--   監視メトリック`exit error count`を確認してください。メトリック値が`0`より大きい場合、レプリケーションタスクでエラーが発生しました。
--   `cdc cli changefeed list`と`cdc cli changefeed query`を実行して、レプリケーションタスクのステータスを確認します。`stopped`はタスクが停止したことを意味し、 `error`は詳細なエラーメッセージを示します。エラー発生後、TiCDCサーバーログで`error on running processor`を検索してエラースタックを確認し、トラブルシューティングを行うことができます。
--   極端なケースでは、TiCDC サービスが再起動されることがあります。トラブルシューティングのために、TiCDCサーバーログの`FATAL`レベル目のログを検索できます。
+- Grafanaダッシュボードで、レプリケーションタスクの監視メトリック`changefeed checkpoint` （適切な`changefeed id`選択）を確認してください。メトリック値が変化しない場合、またはメトリック`checkpoint lag`が増加し続ける場合、レプリケーションタスクが中断されている可能性があります。
+- 監視メトリック`exit error count`を確認してください。メトリック値が`0`より大きい場合、レプリケーションタスクでエラーが発生しました。
+- `cdc cli changefeed list`と`cdc cli changefeed query`を実行して、レプリケーションタスクのステータスを確認します。`stopped`はタスクが停止したことを意味し、 `error`は詳細なエラーメッセージを示します。エラー発生後、TiCDCサーバーログで`error on running processor`を検索してエラースタックを確認し、トラブルシューティングを行うことができます。
+- 極端なケースでは、TiCDC サービスが再起動されることがあります。トラブルシューティングのために、TiCDCサーバーログの`FATAL`レベル目のログを検索できます。
 
 ### レプリケーション タスクが手動で停止されたかどうかを確認するにはどうすればよいですか? {#how-do-i-know-whether-the-replication-task-is-stopped-manually}
 
@@ -34,25 +34,25 @@ cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id 28c43ffc
 
 次の既知のシナリオでは、レプリケーション タスクが中断される可能性があります。
 
--   ダウンストリームは引き続き異常であり、何度も再試行しても TiCDC は失敗します。
+- ダウンストリームは引き続き異常であり、何度も再試行しても TiCDC は失敗します。
 
-    -   このシナリオでは、TiCDCはタスク情報を保存します。TiCDCはPDにサービスGCセーフポイントを設定しているため、タスクチェックポイント以降のデータは有効期間`gc-ttl`内にTiKV GCによってクリーンアップされません。
+    - このシナリオでは、TiCDCはタスク情報を保存します。TiCDCはPDにサービスGCセーフポイントを設定しているため、タスクチェックポイント以降のデータは有効期間`gc-ttl`内にTiKV GCによってクリーンアップされません。
 
-    -   対処方法：ダウンストリームが正常に戻った後、 `cdc cli changefeed resume`を実行することでレプリケーション タスクを再開できます。
+    - 対処方法：ダウンストリームが正常に戻った後、 `cdc cli changefeed resume`を実行することでレプリケーション タスクを再開できます。
 
--   ダウンストリームに互換性のない SQL ステートメントがあるため、レプリケーションを続行できません。
+- ダウンストリームに互換性のない SQL ステートメントがあるため、レプリケーションを続行できません。
 
-    -   このシナリオでは、TiCDCはタスク情報を保存します。TiCDCはPDにサービスGCセーフポイントを設定しているため、タスクチェックポイント以降のデータは有効期間`gc-ttl`内にTiKV GCによってクリーンアップされません。
-    -   取り扱い手順:
-        1.  `cdc cli changefeed query`コマンドを使用してレプリケーション タスクのステータス情報を照会し、 `checkpoint-ts`の値を記録します。
-        2.  新しいタスク構成ファイルを使用して`ignore-txn-start-ts`パラメータを追加し、指定された`start-ts`に対応するトランザクションをスキップします。
-        3.  `cdc cli changefeed pause -c <changefeed-id>`を実行してレプリケーション タスクを一時停止します。
-        4.  `cdc cli changefeed update -c <changefeed-id> --config <config-file-path>`を実行して新しいタスク構成ファイルを指定します。
-        5.  `cdc cli changefeed resume -c <changefeed-id>`を実行してレプリケーション タスクを再開します。
+    - このシナリオでは、TiCDCはタスク情報を保存します。TiCDCはPDにサービスGCセーフポイントを設定しているため、タスクチェックポイント以降のデータは有効期間`gc-ttl`内にTiKV GCによってクリーンアップされません。
+    - 取り扱い手順:
+        1. `cdc cli changefeed query`コマンドを使用してレプリケーション タスクのステータス情報を照会し、 `checkpoint-ts`の値を記録します。
+        2. 新しいタスク構成ファイルを使用して`ignore-txn-start-ts`パラメータを追加し、指定された`start-ts`に対応するトランザクションをスキップします。
+        3. `cdc cli changefeed pause -c <changefeed-id>`を実行してレプリケーション タスクを一時停止します。
+        4. `cdc cli changefeed update -c <changefeed-id> --config <config-file-path>`を実行して新しいタスク構成ファイルを指定します。
+        5. `cdc cli changefeed resume -c <changefeed-id>`を実行してレプリケーション タスクを再開します。
 
 ### タスク中断後に TiCDC を再起動した後で発生する OOM を処理するにはどうすればよいですか? {#what-should-i-do-to-handle-the-oom-that-occurs-after-ticdc-is-restarted-after-a-task-interruption}
 
--   TiDBクラスタとTiCDCクラスタを最新バージョンに更新してください。OOM問題は**、v4.0.14以降のv4.0バージョン、v5.0.2以降のv5.0バージョン、および最新バージョン**で既に解決されています。
+- TiDBクラスタとTiCDCクラスタを最新バージョンに更新してください。OOM問題は**、v4.0.14以降のv4.0バージョン、v5.0.2以降のv5.0バージョン、および最新バージョン**で既に解決されています。
 
 ## レプリケーション タスクを作成するとき、または MySQL にデータをレプリケートするときに、「 `Error 1298: Unknown or incorrect time zone: 'UTC'`エラーを処理するにはどうすればよいですか? {#how-do-i-handle-the-error-1298-unknown-or-incorrect-time-zone-utc-error-when-creating-the-replication-task-or-replicating-data-to-mysql}
 
@@ -86,11 +86,11 @@ v4.0.9 以降では、レプリケーション タスクで統合ソーター機
 
 ## 変更フィードの下流にMySQLなどのデータベースがあり、TiCDCが時間のかかるDDL文を実行すると、他のすべての変更フィードがブロックされます。どうすればよいでしょうか？ {#when-the-downstream-of-a-changefeed-is-a-database-similar-to-mysql-and-ticdc-executes-a-time-consuming-ddl-statement-all-other-changefeeds-are-blocked-what-should-i-do}
 
-1.  時間のかかるDDL文を含む変更フィードの実行を一時停止します。すると、他の変更フィードがブロックされなくなったことがわかります。
-2.  TiCDC ログで`apply job`フィールドを検索し、時間のかかる DDL ステートメントの`start-ts`を確認します。
-3.  下流のDDL文を手動で実行します。実行が完了したら、以下の操作を続行します。
-4.  changefeed 設定を変更し、上記の`start-ts` `ignore-txn-start-ts`構成項目に追加します。
-5.  一時停止された変更フィードを再開します。
+1. 時間のかかるDDL文を含む変更フィードの実行を一時停止します。すると、他の変更フィードがブロックされなくなったことがわかります。
+2. TiCDC ログで`apply job`フィールドを検索し、時間のかかる DDL ステートメントの`start-ts`を確認します。
+3. 下流のDDL文を手動で実行します。実行が完了したら、以下の操作を続行します。
+4. changefeed 設定を変更し、上記の`start-ts` `ignore-txn-start-ts`構成項目に追加します。
+5. 一時停止された変更フィードを再開します。
 
 ## TiCDCを使用してチェンジフィードを作成すると、「 `[tikv:9006]GC life time is shorter than transaction duration, transaction starts at xx, GC safe point is yy`エラーが報告されます。どうすればよいでしょうか？ {#the-tikv-9006-gc-life-time-is-shorter-than-transaction-duration-transaction-starts-at-xx-gc-safe-point-is-yy-error-is-reported-when-i-use-ticdc-to-create-a-changefeed-what-should-i-do}
 
@@ -98,8 +98,8 @@ v4.0.9 以降では、レプリケーション タスクで統合ソーター機
 
 `pd-ctl service-gc-safepoint --pd <pd-addrs>`の結果に`gc_worker service_id`ない場合:
 
--   PD バージョンが v4.0.8 以前の場合、詳細については[PD号 #3128](https://github.com/tikv/pd/issues/3128)を参照してください。
--   PD を v4.0.8 以前のバージョンからそれ以降のバージョンにアップグレードする場合は、詳細については[PD号 #3366](https://github.com/tikv/pd/issues/3366)を参照してください。
+- PD バージョンが v4.0.8 以前の場合、詳細については[PD号 #3128](https://github.com/tikv/pd/issues/3128)を参照してください。
+- PD を v4.0.8 以前のバージョンからそれ以降のバージョンにアップグレードする場合は、詳細については[PD号 #3366](https://github.com/tikv/pd/issues/3366)を参照してください。
 
 ## TiCDCを使用してメッセージをKafkaに複製すると、Kafkaから`Message was too large`エラーが返されます。なぜでしょうか？ {#when-i-use-ticdc-to-replicate-messages-to-kafka-kafka-returns-the-message-was-too-large-error-why}
 
@@ -126,9 +126,9 @@ cdc cli changefeed resume -c test-cf --server=http://127.0.0.1:8300
 
 この問題のあるDDL文をスキップするには、 `ignore-txn-start-ts`パラメータを設定して、指定された`start-ts`に対応するトランザクションをスキップします。例:
 
-1.  TiCDC ログで`apply job`フィールドを検索し、時間がかかっている`start-ts`の DDL を特定します。
-2.  changefeed の設定を変更します。設定項目`ignore-txn-start-ts`に上記の`start-ts`追加します。
-3.  中断された変更フィードを再開します。
+1. TiCDC ログで`apply job`フィールドを検索し、時間がかかっている`start-ts`の DDL を特定します。
+2. changefeed の設定を変更します。設定項目`ignore-txn-start-ts`に上記の`start-ts`追加します。
+3. 中断された変更フィードを再開します。
 
 > **Note:**
 >

@@ -19,19 +19,19 @@ TiDB Cloud を使用すると、アラートの表示、アラートルールの
 
 TiDB Cloudでは、**Alerts**ページでアクティブなアラートとクローズされたアラートの両方を表示できます。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象のTiDB Cloud EssentialインスタンスまたはTiDB Cloud Dedicatedクラスタの名前をクリックすると、その概要ページに移動します。
+2. 対象のTiDB Cloud EssentialインスタンスまたはTiDB Cloud Dedicatedクラスタの名前をクリックすると、その概要ページに移動します。
 
-3.  左側のナビゲーションペインにある**Alerts**をクリックします。
+3. 左側のナビゲーションペインにある**Alerts**をクリックします。
 
-4.  **Alerts**ページには、デフォルトで有効なアラートが表示されます。各アラートについて、アラート名、トリガー時刻、期間などの情報を確認できます。
+4. **Alerts**ページには、デフォルトで有効なアラートが表示されます。各アラートについて、アラート名、トリガー時刻、期間などの情報を確認できます。
 
-5.  解決済みの警告も表示したい場合は、**Status**のドロップダウンリストをクリックして、 **Closed**または**All**を選択してください。
+5. 解決済みの警告も表示したい場合は、**Status**のドロップダウンリストをクリックして、 **Closed**または**All**を選択してください。
 
 </CustomContent>
 
@@ -39,19 +39,19 @@ TiDB Cloudでは、**Alerts**ページでアクティブなアラートとクロ
 
 TiDB Cloudでは、**Alerts**ページでアクティブなアラートとクローズされたアラートの両方を表示できます。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象のTiDB Cloud Premiumインスタンスの名前をクリックすると、その概要ページに移動します。
+2. 対象のTiDB Cloud Premiumインスタンスの名前をクリックすると、その概要ページに移動します。
 
-3.  左側のナビゲーションペインにある**Alerts**をクリックします。
+3. 左側のナビゲーションペインにある**Alerts**をクリックします。
 
-4.  **Alerts**ページには、デフォルトで有効なアラートが表示されます。各アラートについて、アラート名、トリガー時刻、期間などの情報を確認できます。
+4. **Alerts**ページには、デフォルトで有効なアラートが表示されます。各アラートについて、アラート名、トリガー時刻、期間などの情報を確認できます。
 
-5.  解決済みの警告も表示したい場合は、**Status**のドロップダウンリストをクリックして、 **Closed**または**All**を選択してください。
+5. 解決済みの警告も表示したい場合は、**Status**のドロップダウンリストをクリックして、 **Closed**または**All**を選択してください。
 
 </CustomContent>
 
@@ -59,9 +59,9 @@ TiDB Cloudでは、**Alerts**ページでアクティブなアラートとクロ
 
 TiDB Cloudでは、アラートを無効化または有効化したり、アラートのしきい値を更新したりすることで、アラートルールを編集できます。
 
-1.  **Alerts**ページで、 **Edit Rules**をクリックします。
-2.  必要に応じてアラートルールを無効化または有効化してください。
-3.  アラートルールのしきい値を更新するには、 **Edit**をクリックします。
+1. **Alerts**ページで、 **Edit Rules**をクリックします。
+2. 必要に応じてアラートルールを無効化または有効化してください。
+3. アラートルールのしきい値を更新するには、 **Edit**をクリックします。
 
     > **Tip:**
     >
@@ -71,13 +71,13 @@ TiDB Cloudでは、アラートを無効化または有効化したり、アラ�
 
 TiDB Cloudでは、以下のいずれかの方法でアラート通知を購読できます。
 
--   [メール](/tidb-cloud/monitor-alert-email.md)
--   [Slack](/tidb-cloud/monitor-alert-slack.md)
--   [Zoom](/tidb-cloud/monitor-alert-zoom.md)
--   [FlashDuty](/tidb-cloud/monitor-alert-flashduty.md)
--   [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)
--   [Webhook](/tidb-cloud/monitor-alert-webhook.md)
--   [Lark](/tidb-cloud/monitor-alert-lark.md)
+- [メール](/tidb-cloud/monitor-alert-email.md)
+- [Slack](/tidb-cloud/monitor-alert-slack.md)
+- [Zoom](/tidb-cloud/monitor-alert-zoom.md)
+- [FlashDuty](/tidb-cloud/monitor-alert-flashduty.md)
+- [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)
+- [Webhook](/tidb-cloud/monitor-alert-webhook.md)
+- [Lark](/tidb-cloud/monitor-alert-lark.md)
 
 ## TiDB Cloudに組み込まれたアラート条件 {#tidb-cloud-built-in-alert-conditions}
 
@@ -85,9 +85,9 @@ TiDB Cloudでは、以下のいずれかの方法でアラート通知を購読�
 
 > **Note:**
 >
-> -   これらの警戒状態は必ずしも問題が発生していることを意味するものではありませんが、多くの場合、新たな問題が発生する兆候を示しています。したがって、推奨される対策を講じることをお勧めします。
-> -   TiDB Cloudコンソールでアラートのしきい値を編集できます。
-> -   一部のアラートルールはデフォルトで無効になっています。必要に応じて有効にすることができます。
+> - これらの警戒状態は必ずしも問題が発生していることを意味するものではありませんが、多くの場合、新たな問題が発生する兆候を示しています。したがって、推奨される対策を講じることをお勧めします。
+> - TiDB Cloudコンソールでアラートのしきい値を編集できます。
+> - 一部のアラートルールはデフォルトで無効になっています。必要に応じて有効にすることができます。
 
 TiDB Cloudは、そのプランで利用可能[特徴](/tidb-cloud/features.md)に基づいて、 [TiDB Cloudプラン](/tidb-cloud/select-cluster-tier.md)ごとに異なるアラート ルールを提供します。
 

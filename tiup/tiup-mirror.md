@@ -53,16 +53,16 @@ Use "tiup mirror [command] --help" for more information about a command.
 tiup mirror clone <target-dir> [global-version] [flags]
 ```
 
--   `target-dir` : クローンデータが保存されるディレクトリを指定するために使用されます。
--   `global-version` : すべてのコンポーネントのグローバル バージョンをすばやく設定するために使用されます。
+- `target-dir` : クローンデータが保存されるディレクトリを指定するために使用されます。
+- `global-version` : すべてのコンポーネントのグローバル バージョンをすばやく設定するために使用されます。
 
 `tiup mirror clone`コマンドは多くのオプションフラグを提供します（将来的にはさらに追加される可能性があります）。これらのフラグは、その用途に応じて以下のカテゴリに分類できます。
 
--   クローン作成時にバージョンを一致させるためにプレフィックスマッチングを使用するかどうかを決定します
+- クローン作成時にバージョンを一致させるためにプレフィックスマッチングを使用するかどうかを決定します
 
     フラグ`--prefix`が指定された場合、クローンのバージョン番号はプレフィックスによって照合されます。例えば、 `--prefix` 「v5.0.0」と指定した場合、「v5.0.0-rc」と「v5.0.0」が一致します。
 
--   完全なクローンを使用するかどうかを決定します
+- 完全なクローンを使用するかどうかを決定します
 
     `--full`フラグを指定すると、公式ミラーを完全にクローンできます。
 
@@ -70,21 +70,21 @@ tiup mirror clone <target-dir> [global-version] [flags]
     >
     > フラグ`--full` 、およびコンポーネントバージョン`global-version`が指定されていない場合は、一部のメタ情報のみが複製されます。
 
--   特定のプラットフォームからパッケージをクローンするかどうかを決定します
+- 特定のプラットフォームからパッケージをクローンするかどうかを決定します
 
     特定のプラットフォーム用のパッケージのみをクローンしたい場合は、 `-os`と`-arch`使ってプラットフォームを指定します。例：
 
-    -   Linux のクローンを作成するには、 `tiup mirror clone <target-dir> [global-version] --os=linux`コマンドを実行します。
-    -   amd64 のクローンを作成するには、 `tiup mirror clone <target-dir> [global-version] --arch=amd64`コマンドを実行します。
-    -   linux/amd64 のクローンを作成するには、 `tiup mirror clone <target-dir> [global-version] --os=linux --arch=amd64`コマンドを実行します。
+    - Linux のクローンを作成するには、 `tiup mirror clone <target-dir> [global-version] --os=linux`コマンドを実行します。
+    - amd64 のクローンを作成するには、 `tiup mirror clone <target-dir> [global-version] --arch=amd64`コマンドを実行します。
+    - linux/amd64 のクローンを作成するには、 `tiup mirror clone <target-dir> [global-version] --os=linux --arch=amd64`コマンドを実行します。
 
--   パッケージの特定のバージョンをクローンするかどうかを決定します
+- パッケージの特定のバージョンをクローンするかどうかを決定します
 
     コンポーネントの1つのバージョンのみ（すべてのバージョンではなく）を複製したい場合は、 `--<component>=<version>`を使用してそのバージョンを指定します。例：
 
-    -   `tiup mirror clone <target-dir> --tidb v8.5.3`コマンドを実行して、TiDBコンポーネントの v8.5.3 バージョンのクローンを作成します。
-    -   `tiup mirror clone <target-dir> --tidb v8.5.3 --tikv all`コマンドを実行して、TiDBコンポーネントの v8.5.3 バージョンと TiKVコンポーネントのすべてのバージョンのクローンを作成します。
-    -   `tiup mirror clone <target-dir> v8.5.3`コマンドを実行して、クラスター内のすべてのコンポーネントの v8.5.3 バージョンを複製します。
+    - `tiup mirror clone <target-dir> --tidb v8.5.3`コマンドを実行して、TiDBコンポーネントの v8.5.3 バージョンのクローンを作成します。
+    - `tiup mirror clone <target-dir> --tidb v8.5.3 --tikv all`コマンドを実行して、TiDBコンポーネントの v8.5.3 バージョンと TiKVコンポーネントのすべてのバージョンのクローンを作成します。
+    - `tiup mirror clone <target-dir> v8.5.3`コマンドを実行して、クラスター内のすべてのコンポーネントの v8.5.3 バージョンを複製します。
 
 クローン作成後、署名キーが自動的に設定されます。
 
@@ -152,7 +152,7 @@ tiup mirror grant jdoe
 
 ### カスタムコンポーネントの操作 {#work-with-custom-components}
 
-1.  hello というカスタムコンポーネントを作成します。
+1. hello というカスタムコンポーネントを作成します。
 
     ```bash
     $ cat > hello.c << END
@@ -168,7 +168,7 @@ tiup mirror grant jdoe
 
     `package/hello-v0.0.1-linux-amd64.tar.gz`が作成されます。
 
-2.  リポジトリと秘密鍵を作成し、リポジトリに所有権を付与します。
+2. リポジトリと秘密鍵を作成し、リポジトリに所有権を付与します。
 
     ```bash
     $ tiup mirror init /tmp/m
@@ -181,7 +181,7 @@ tiup mirror grant jdoe
     tiup mirror publish hello v0.0.1 package/hello-v0.0.1-linux-amd64.tar.gz hello
     ```
 
-3.  コンポーネントを実行します。まだインストールされていない場合は、最初にダウンロードされます。
+3. コンポーネントを実行します。まだインストールされていない場合は、最初にダウンロードされます。
 
     ```bash
     $ tiup hello

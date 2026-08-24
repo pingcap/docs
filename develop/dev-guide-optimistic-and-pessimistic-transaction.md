@@ -16,9 +16,9 @@ aliases: ['/ja/tidb/stable/dev-guide-optimistic-and-pessimistic-transaction/','/
 
 以下は[書店](/develop/dev-guide-bookshop-schema-design.md)の例です。本の購入を例に挙げ、楽観的トランザクションと悲観的トランザクションの長所と短所を示しています。本の購入プロセスは主に以下の流れで構成されます。
 
-1.  在庫数量を更新する
-2.  注文を作成する
-3.  支払いをする
+1. 在庫数量を更新する
+2. 注文を作成する
+3. 支払いをする
 
 これらの操作はすべて成功するか、すべて失敗するかのいずれかになります。同時トランザクションが発生した場合、過剰販売が発生しないようにする必要があります。
 
@@ -1370,6 +1370,6 @@ mysql> SELECT * FROM users;
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

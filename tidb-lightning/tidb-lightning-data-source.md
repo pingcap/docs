@@ -49,10 +49,10 @@ rename srcdb. tgtdb. *.sql
 
 以下は、正規表現を使用してオンラインで名前を置換する例です。この例では、
 
--   データファイル`pattern`の一致ルールは`^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)`です。
--   `schema`を`'$1'`と指定すると、最初の正規表現の値`schema_regrex`は変更されません。または、 `schema` `'tgtdb'`などの文字列として指定すると、固定のターゲットデータベース名になります。
--   `table`を`'$2'`と指定すると、2番目の正規表現の値`table_regrex`は変更されません。または、 `table` `'t1'`などの文字列として指定すると、固定のターゲットテーブル名になります。
--   `type`を`'$3'` （データファイルの種類）として指定します。`type` `"table-schema"` （ `schema.sql`ファイル）または`"schema-schema"` （ `schema-create.sql`ファイル）として指定できます。
+- データファイル`pattern`の一致ルールは`^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)`です。
+- `schema`を`'$1'`と指定すると、最初の正規表現の値`schema_regrex`は変更されません。または、 `schema` `'tgtdb'`などの文字列として指定すると、固定のターゲットデータベース名になります。
+- `table`を`'$2'`と指定すると、2番目の正規表現の値`table_regrex`は変更されません。または、 `table` `'t1'`などの文字列として指定すると、固定のターゲットテーブル名になります。
+- `type`を`'$3'` （データファイルの種類）として指定します。`type` `"table-schema"` （ `schema.sql`ファイル）または`"schema-schema"` （ `schema-create.sql`ファイル）として指定できます。
 
 ```toml
 [mydumper]
@@ -103,8 +103,8 @@ compression = '$4'
 
 CSVファイルはスキーマレスです。CSVファイルをTiDBにインポートするには、テーブルスキーマを提供する必要があります。スキーマは、以下のいずれかの方法で提供できます。
 
--   DDL ステートメントを含む`${db_name}.${table_name}-schema.sql`および`${db_name}-schema-create.sql`名前のファイルを作成します。
--   TiDB にテーブル スキーマを手動で作成します。
+- DDL ステートメントを含む`${db_name}.${table_name}-schema.sql`および`${db_name}-schema-create.sql`名前のファイルを作成します。
+- TiDB にテーブル スキーマを手動で作成します。
 
 ### コンフィグレーション {#configuration}
 
@@ -145,47 +145,47 @@ trim-last-separator = false
 
 #### `separator` {#separator}
 
--   フィールドセパレーターを定義します。
+- フィールドセパレーターを定義します。
 
--   1 文字または複数文字を使用できますが、空にすることはできません。
+- 1 文字または複数文字を使用できますが、空にすることはできません。
 
--   共通の値:
+- 共通の値:
 
-    -   CSV (カンマ区切り値)の場合は`','` 。
-    -   TSV (タブ区切り値)の場合は`"\t"` 。
-    -   `"\u0001"`を指定すると ASCII 文字`0x01`が使用されます。
+    - CSV (カンマ区切り値)の場合は`','` 。
+    - TSV (タブ区切り値)の場合は`"\t"` 。
+    - `"\u0001"`を指定すると ASCII 文字`0x01`が使用されます。
 
--   LOAD DATA ステートメントの`FIELDS TERMINATED BY`オプションに対応します。
+- LOAD DATA ステートメントの`FIELDS TERMINATED BY`オプションに対応します。
 
 #### `delimiter` {#delimiter}
 
--   引用符に使用する区切り文字を定義します。
+- 引用符に使用する区切り文字を定義します。
 
--   `delimiter`が空の場合、すべてのフィールドは引用符で囲まれません。
+- `delimiter`が空の場合、すべてのフィールドは引用符で囲まれません。
 
--   共通の値:
+- 共通の値:
 
-    -   `'"'`フィールドを二重引用符で囲みます。 [RFC 4180](https://tools.ietf.org/html/rfc4180)と同じです。
-    -   `''`引用を無効にします。
+    - `'"'`フィールドを二重引用符で囲みます。 [RFC 4180](https://tools.ietf.org/html/rfc4180)と同じです。
+    - `''`引用を無効にします。
 
--   `LOAD DATA`ステートメントの`FIELDS ENCLOSED BY`オプションに対応します。
+- `LOAD DATA`ステートメントの`FIELDS ENCLOSED BY`オプションに対応します。
 
 #### `terminator` {#terminator}
 
--   行末記号を定義します。
--   `terminator`が空の場合、行末文字として`"\n"` (改行) と`"\r\n"` (復帰 + 改行) の両方が使用されます。
--   `LOAD DATA`ステートメントの`LINES TERMINATED BY`オプションに対応します。
+- 行末記号を定義します。
+- `terminator`が空の場合、行末文字として`"\n"` (改行) と`"\r\n"` (復帰 + 改行) の両方が使用されます。
+- `LOAD DATA`ステートメントの`LINES TERMINATED BY`オプションに対応します。
 
 #### `header` {#header}
 
--   *すべての*CSV ファイルにヘッダー行が含まれているかどうか。
--   `header`が`true`の場合、最初の行は*列名*として使用されます。`header`が`false`の場合、最初の行は通常のデータ行として扱われます。
+- *すべての*CSV ファイルにヘッダー行が含まれているかどうか。
+- `header`が`true`の場合、最初の行は*列名*として使用されます。`header`が`false`の場合、最初の行は通常のデータ行として扱われます。
 
 #### `not-null`と`null` {#not-null-and-null}
 
--   `not-null`設定は、すべてのフィールドが null 不可かどうかを制御します。
--   `not-null`が`false`の場合、 `null`で指定された文字列は特定の値ではなく SQL NULL に変換されます。
--   引用符で囲んでも、フィールドが null かどうかには影響しません。
+- `not-null`設定は、すべてのフィールドが null 不可かどうかを制御します。
+- `not-null`が`false`の場合、 `null`で指定された文字列は特定の値ではなく SQL NULL に変換されます。
+- 引用符で囲んでも、フィールドが null かどうかには影響しません。
 
     たとえば、次の CSV ファイルでは、
 
@@ -198,9 +198,9 @@ trim-last-separator = false
 
 #### `backslash-escape` {#backslash-escape}
 
--   フィールド内のバックスラッシュをエスケープ文字として解析するかどうか。
+- フィールド内のバックスラッシュをエスケープ文字として解析するかどうか。
 
--   `backslash-escape`が真の場合、次のシーケンスが認識され、変換されます。
+- `backslash-escape`が真の場合、次のシーケンスが認識され、変換されます。
 
     | シーケンス | 変換された                    |
     | ----- | ------------------------ |
@@ -213,13 +213,13 @@ trim-last-separator = false
 
     それ以外の場合（例えば`\"` ）、バックスラッシュは削除され、次の文字（ `"` ）がフィールドに残ります。残された文字は特別な役割（例えば区切り文字）を持たず、通常の文字として扱われます。
 
--   引用符で囲んでも、バックスラッシュがエスケープ文字として解析されるかどうかには影響しません。
+- 引用符で囲んでも、バックスラッシュがエスケープ文字として解析されるかどうかには影響しません。
 
--   `LOAD DATA`ステートメントの`FIELDS ESCAPED BY '\'`オプションに対応します。
+- `LOAD DATA`ステートメントの`FIELDS ESCAPED BY '\'`オプションに対応します。
 
 #### `trim-last-separator` {#trim-last-separator}
 
--   `separator`行末文字として扱い、すべての末尾の区切り文字を削除するかどうか。
+- `separator`行末文字として扱い、すべての末尾の区切り文字を削除するかどうか。
 
     たとえば、次の CSV ファイルでは、
 
@@ -227,10 +227,10 @@ trim-last-separator = false
     A,,B,,
     ```
 
-    -   `trim-last-separator = false`の場合、これは 5 つのフィールド`('A', '', 'B', '', '')`の行として解釈されます。
-    -   `trim-last-separator = true`の場合、これは 3 つのフィールド`('A', '', 'B')`の行として解釈されます。
+    - `trim-last-separator = false`の場合、これは 5 つのフィールド`('A', '', 'B', '', '')`の行として解釈されます。
+    - `trim-last-separator = true`の場合、これは 3 つのフィールド`('A', '', 'B')`の行として解釈されます。
 
--   このオプションは非推奨です。代わりにオプション`terminator`を使用してください。
+- このオプションは非推奨です。代わりにオプション`terminator`を使用してください。
 
     既存の構成が次の場合:
 
@@ -250,8 +250,8 @@ trim-last-separator = false
 
 TiDB Lightningは、 `LOAD DATA`文でサポートされているすべてのオプションをサポートしているわけではありません。例えば：
 
--   行頭語( `LINES STARTING BY` )は使用できません。
--   ヘッダーはスキップできません（ `IGNORE n LINES` ）、有効な列名である必要があります。
+- 行頭語( `LINES STARTING BY` )は使用できません。
+- ヘッダーはスキップできません（ `IGNORE n LINES` ）、有効な列名である必要があります。
 
 ### 厳格なフォーマット {#strict-format}
 
@@ -266,8 +266,8 @@ strict-format = true
 
 厳密なCSVファイルでは、各フィールドは1行のみに収まります。つまり、次のいずれかの条件を満たす必要があります。
 
--   区切り文字が空です。
--   各フィールドにはターミネータ自体が含まれません。デフォルト設定では、これは各フィールドに CR ( `\r` ) または LF ( `\n` ) が含まれないことを意味します。
+- 区切り文字が空です。
+- 各フィールドにはターミネータ自体が含まれません。デフォルト設定では、これは各フィールドに CR ( `\r` ) または LF ( `\n` ) が含まれないことを意味します。
 
 CSV ファイルが厳密ではなく、 `strict-format`が誤って`true`に設定されている場合、複数行にまたがるフィールドが 2 つのチャンクに分割され、解析が失敗したり、破損したデータが暗黙的にインポートされたりする可能性があります。
 
@@ -367,11 +367,11 @@ TiDB Lightningは現在、 Dumplingでエクスポートされた圧縮ファイ
 
 > **Note:**
 >
-> -   TiDB Lightningは単一の大きな圧縮ファイルを同時に解凍できないため、圧縮ファイルのサイズはインポート速度に影響します。解凍後のソースファイルは256MiB以下にすることをお勧めします。
-> -   TiDB Lightning は個別に圧縮されたデータ ファイルのみをインポートし、複数のデータ ファイルが含まれる単一の圧縮ファイルのインポートはサポートしていません。
-> -   TiDB Lightningは、 `db.table.parquet.snappy`などの他の圧縮ツールで圧縮された`parquet`ファイルをサポートしていません。`parquet`ファイルを圧縮する場合は、`parquet`ライターの圧縮形式を設定できます。
-> -   TiDB Lightning v6.4.0以降のバージョンでは、 `gzip` 、 `snappy` 、 `zstd` 圧縮データファイルのみがサポートされています。その他の種類のファイルはエラーの原因となります。ソースデータファイルが保存されているディレクトリにサポートされていない圧縮ファイルが存在する場合、タスクはエラーを報告します。このようなエラーを回避するには、サポートされていないファイルをインポートデータディレクトリから移動してください。
-> -   Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。その他の Snappy 圧縮形式はサポートされていません。
+> - TiDB Lightningは単一の大きな圧縮ファイルを同時に解凍できないため、圧縮ファイルのサイズはインポート速度に影響します。解凍後のソースファイルは256MiB以下にすることをお勧めします。
+> - TiDB Lightning は個別に圧縮されたデータ ファイルのみをインポートし、複数のデータ ファイルが含まれる単一の圧縮ファイルのインポートはサポートしていません。
+> - TiDB Lightningは、 `db.table.parquet.snappy`などの他の圧縮ツールで圧縮された`parquet`ファイルをサポートしていません。`parquet`ファイルを圧縮する場合は、`parquet`ライターの圧縮形式を設定できます。
+> - TiDB Lightning v6.4.0以降のバージョンでは、 `gzip` 、 `snappy` 、 `zstd` 圧縮データファイルのみがサポートされています。その他の種類のファイルはエラーの原因となります。ソースデータファイルが保存されているディレクトリにサポートされていない圧縮ファイルが存在する場合、タスクはエラーを報告します。このようなエラーを回避するには、サポートされていないファイルをインポートデータディレクトリから移動してください。
+> - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。その他の Snappy 圧縮形式はサポートされていません。
 
 ## カスタマイズされたファイルを一致させる {#match-customized-files}
 
@@ -396,36 +396,36 @@ table = '$2'
 type = '$3'
 ```
 
--   **schema** : 対象データベースの名前。値は次のいずれかです。
-    -   正規表現を使用して取得されたグループ インデックス (例: `$1` )。
-    -   インポートするデータベースの名前（例： `db1` ）。一致したすべてのファイルは`db1`にインポートされます。
--   **table** : 対象テーブルの名前。値は次のいずれかです。
-    -   正規表現を使用して取得されたグループ インデックス (例: `$2` )。
-    -   インポートするテーブルの名前（例： `table1` ）。一致したすべてのファイルは`table1`にインポートされます。
--   **type** : ファイルの種類。`sql` 、`parquet` 、`csv`をサポートします。値は次のとおりです。
-    -   正規表現を使用して取得されたグループ インデックス (例: `$3` )。
--   **key** : ファイル番号 (例: `${db_name}.${table_name}.001.csv`の場合は`001` 。
-    -   正規表現を使用して取得されたグループ インデックス (例: `$4` )。
+- **schema** : 対象データベースの名前。値は次のいずれかです。
+    - 正規表現を使用して取得されたグループ インデックス (例: `$1` )。
+    - インポートするデータベースの名前（例： `db1` ）。一致したすべてのファイルは`db1`にインポートされます。
+- **table** : 対象テーブルの名前。値は次のいずれかです。
+    - 正規表現を使用して取得されたグループ インデックス (例: `$2` )。
+    - インポートするテーブルの名前（例： `table1` ）。一致したすべてのファイルは`table1`にインポートされます。
+- **type** : ファイルの種類。`sql` 、`parquet` 、`csv`をサポートします。値は次のとおりです。
+    - 正規表現を使用して取得されたグループ インデックス (例: `$3` )。
+- **key** : ファイル番号 (例: `${db_name}.${table_name}.001.csv`の場合は`001` 。
+    - 正規表現を使用して取得されたグループ インデックス (例: `$4` )。
 
 ## Amazon S3からデータをインポートする {#import-data-from-amazon-s3}
 
 以下の例は、TiDB Lightningを使用して Amazon S3 からデータをインポートする方法を示しています。詳細なパラメータ設定については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)を参照してください。
 
--   ローカルに設定された権限を使用して S3 データにアクセスします。
+- ローカルに設定された権限を使用して S3 データにアクセスします。
 
     ```bash
     tiup tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
         -d 's3://my-bucket/sql-backup'
     ```
 
--   パス形式のリクエストを使用して S3 データにアクセスします。
+- パス形式のリクエストを使用して S3 データにアクセスします。
 
     ```bash
     tiup tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
         -d 's3://my-bucket/sql-backup?force-path-style=true&endpoint=http://10.154.10.132:8088'
     ```
 
--   特定の AWS IAMロール ARN を使用して S3 データにアクセスします。
+- 特定の AWS IAMロール ARN を使用して S3 データにアクセスします。
 
     ```bash
     tiup tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
@@ -434,14 +434,14 @@ type = '$3'
 
 <!---->
 
--   AWS IAMユーザーのアクセスキーを使用して S3 データにアクセスします。
+- AWS IAMユーザーのアクセスキーを使用して S3 データにアクセスします。
 
     ```bash
     tiup tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
         -d 's3://my-bucket/test-data?access_key={my_access_key}&secret_access_key={my_secret_access_key}'
     ```
 
--   AWS IAMロールアクセスキーとセッショントークンの組み合わせを使用して、S3 データにアクセスします。
+- AWS IAMロールアクセスキーとセッショントークンの組み合わせを使用して、S3 データにアクセスします。
 
     ```bash
     tiup tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
@@ -450,5 +450,5 @@ type = '$3'
 
 ## その他のリソース {#more-resources}
 
--   [Dumplingを使用してCSVファイルにエクスポートする](/dumpling-overview.md#export-to-csv-files)
--   [`LOAD DATA`](https://dev.mysql.com/doc/refman/8.0/en/load-data.html)
+- [Dumplingを使用してCSVファイルにエクスポートする](/dumpling-overview.md#export-to-csv-files)
+- [`LOAD DATA`](https://dev.mysql.com/doc/refman/8.0/en/load-data.html)

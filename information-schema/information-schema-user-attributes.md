@@ -25,9 +25,9 @@ DESC user_attributes;
 
 `USER_ATTRIBUTES`テーブル内のフィールドは次のように説明されます。
 
--   `USER` : ユーザー名。
--   `HOST` : ユーザーがTiDBに接続できるホスト。このフィールドの値が`％`の場合、ユーザーはどのホストからでもTiDBに接続できます。
--   `ATTRIBUTE` : [`CREATE USER`](/sql-statements/sql-statement-create-user.md)または[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)ステートメントで設定されるユーザーのコメントと属性。
+- `USER` : ユーザー名。
+- `HOST` : ユーザーがTiDBに接続できるホスト。このフィールドの値が`％`の場合、ユーザーはどのホストからでもTiDBに接続できます。
+- `ATTRIBUTE` : [`CREATE USER`](/sql-statements/sql-statement-create-user.md)または[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)ステートメントで設定されるユーザーのコメントと属性。
 
 次に例を示します。
 

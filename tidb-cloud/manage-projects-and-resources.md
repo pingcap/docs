@@ -13,8 +13,8 @@ summary: TiDB Cloudのリソースとプロジェクトの管理方法につい�
 
 TiDB Cloudのリソースは、管理可能なデプロイ可能な単位です。以下のいずれかになります。
 
--   TiDB Xインスタンスは、[TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloud製品です。{{{ .starter }}}、Essential、Premium<CustomContent plan="byoc">、またはBYOC</CustomContent>インスタンスなどがあります。
--   {{{ .dedicated }}}クラスター
+- TiDB Xインスタンスは、[TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloud製品です。{{{ .starter }}}、Essential、Premium<CustomContent plan="byoc">、またはBYOC</CustomContent>インスタンスなどがあります。
+- {{{ .dedicated }}}クラスター
 
 <CustomContent plan="byoc">
 
@@ -26,8 +26,8 @@ TiDB Cloudのリソースは、管理可能なデプロイ可能な単位です�
 
 TiDB Cloudでは、 [プロジェクト](/tidb-cloud/tidb-cloud-glossary.md#project)を使用してTiDB Cloudリソースを整理および管理できます。
 
--   TiDB Xインスタンスの場合、プロジェクトはオプションです。つまり、これらのインスタンスをプロジェクトにグループ化することも、組織レベルで管理することもできます。
--   TiDB Cloud Dedicatedクラスターの場合、プロジェクトが必要です。
+- TiDB Xインスタンスの場合、プロジェクトはオプションです。つまり、これらのインスタンスをプロジェクトにグループ化することも、組織レベルで管理することもできます。
+- TiDB Cloud Dedicatedクラスターの場合、プロジェクトが必要です。
 
 ## TiDB Cloudのリソースを管理する {#manage-tidb-cloud-resources}
 
@@ -47,9 +47,9 @@ TiDB Cloudリソースを作成するには、組織の[**My TiDB**](https://tid
 
 詳細については、以下の資料を参照してください。
 
--   [TiDB Cloud StarterまたはEssentialインスタンスを作成します](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [TiDB Cloud StarterまたはEssentialインスタンスを作成します](/tidb-cloud/create-tidb-cluster-serverless.md)
 
--   [TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)
+- [TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)
 
 <CustomContent plan="byoc">
 
@@ -57,7 +57,7 @@ TiDB Cloudリソースを作成するには、組織の[**My TiDB**](https://tid
 
 </CustomContent>
 
--   [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
+- [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
 
 ### TiDB Cloudのリソースを管理する {#manage-tidb-cloud-resources}
 
@@ -79,32 +79,32 @@ TiDB Cloudのリソースをプロジェクトごとにグループ化して表�
 
 プロジェクトビューでは、組織内で自分が所属しているプロジェクトを確認できます。
 
--   どのプロジェクトにも属さない TiDB X インスタンスは`Out of project`という名前のテーブルに表示されます。
--   特定のプロジェクトに属するTiDB Xインスタンスは、対応するTiDB Xプロジェクトテーブルに表示されます。
--   TiDB Cloud Dedicatedクラスターは、対応するDedicatedプロジェクトテーブルに表示されます。これらのテーブルのフォルダーアイコンには、**Dedicated**プロジェクトの種類を示す**D**の文字が付いています。
+- どのプロジェクトにも属さない TiDB X インスタンスは`Out of project`という名前のテーブルに表示されます。
+- 特定のプロジェクトに属するTiDB Xインスタンスは、対応するTiDB Xプロジェクトテーブルに表示されます。
+- TiDB Cloud Dedicatedクラスターは、対応するDedicatedプロジェクトテーブルに表示されます。これらのテーブルのフォルダーアイコンには、**Dedicated**プロジェクトの種類を示す**D**の文字が付いています。
 
 ### プロジェクトを作成する {#create-a-project}
 
 > **Note:**
 >
-> -   無料トライアルユーザーは新規プロジェクトを作成できません。
-> -   TiDB Xインスタンスの場合、プロジェクトの作成は任意です。TiDB Cloud Dedicatedクラスタの場合は、デフォルトのプロジェクトを使用するか、新しいプロジェクトを作成して管理する必要があります。
+> - 無料トライアルユーザーは新規プロジェクトを作成できません。
+> - TiDB Xインスタンスの場合、プロジェクトの作成は任意です。TiDB Cloud Dedicatedクラスタの場合は、デフォルトのプロジェクトを使用するか、新しいプロジェクトを作成して管理する必要があります。
 
 `Organization Owner`の役割をお持ちの場合は、組織内でプロジェクトを作成できます。
 
 新しいプロジェクトを作成するには、以下の手順に従ってください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Create Project**をクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Create Project**をクリックします。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  表示されたダイアログにプロジェクト名を入力してください。
+2. 表示されたダイアログにプロジェクト名を入力してください。
 
-3.  プロジェクトを作成する対象となるTiDB Cloudリソースの種類に応じて、次のいずれかの操作を行います。
+3. プロジェクトを作成する対象となるTiDB Cloudリソースの種類に応じて、次のいずれかの操作を行います。
 
-    -   プロジェクトが TiDB X インスタンス用に作成されている場合は、 **Confirm**をクリックします。
+    - プロジェクトが TiDB X インスタンス用に作成されている場合は、 **Confirm**をクリックします。
 
         <CustomContent plan="starter,essential,premium,dedicated">
 
@@ -123,7 +123,7 @@ TiDB Cloudのリソースをプロジェクトごとにグループ化して表�
 
         </CustomContent>
 
-    -   プロジェクトがTiDB Cloud Dedicatedクラスター用に作成されている場合は、 **Create for Dedicated Cluster**オプションを選択し、プロジェクトの [顧客管理型暗号化キー（CMEK）](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)と[メンテナンスウィンドウ](/tidb-cloud/configure-maintenance-window.md)を構成して、 **Confirm**をクリックします。
+    - プロジェクトがTiDB Cloud Dedicatedクラスター用に作成されている場合は、 **Create for Dedicated Cluster**オプションを選択し、プロジェクトの [顧客管理型暗号化キー（CMEK）](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)と[メンテナンスウィンドウ](/tidb-cloud/configure-maintenance-window.md)を構成して、 **Confirm**をクリックします。
 
 ### プロジェクトを管理する {#manage-a-project}
 
@@ -131,16 +131,16 @@ TiDB Cloudのリソースをプロジェクトごとにグループ化して表�
 
 プロジェクトを管理するには、以下の手順に従ってください。
 
-1.  TiDB Cloudコンソールで、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
+1. TiDB Cloudコンソールで、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  プロジェクトビューで、対象のプロジェクトを見つけて、次のように管理します。
+2. プロジェクトビューで、対象のプロジェクトを見つけて、次のように管理します。
 
-    -   TiDB X プロジェクトとTiDB Dedicatedプロジェクトの両方で、ターゲット プロジェクトの行にある**[...]**をクリックして、プロジェクトの名前変更やプロジェクトへのメンバーの招待など、プロジェクトに対してクイック アクションを実行できます。詳細については、[プロジェクトへのアクセスを管理する](/tidb-cloud/manage-user-access.md)を参照してください。
-    -   TiDB Dedicatedプロジェクトの場合、対象プロジェクトの行にある<MDSvgIcon name="icon-project-settings" />アイコンをクリックすると、プロジェクトごとにTiDB Cloud Dedicatedクラスターのネットワーク、メンテナンス、アラートの購読、暗号化アクセスなどの設定を管理できます。
+    - TiDB X プロジェクトとTiDB Dedicatedプロジェクトの両方で、ターゲット プロジェクトの行にある**[...]**をクリックして、プロジェクトの名前変更やプロジェクトへのメンバーの招待など、プロジェクトに対してクイック アクションを実行できます。詳細については、[プロジェクトへのアクセスを管理する](/tidb-cloud/manage-user-access.md)を参照してください。
+    - TiDB Dedicatedプロジェクトの場合、対象プロジェクトの行にある<MDSvgIcon name="icon-project-settings" />アイコンをクリックすると、プロジェクトごとにTiDB Cloud Dedicatedクラスターのネットワーク、メンテナンス、アラートの購読、暗号化アクセスなどの設定を管理できます。
 
 ### TiDB Xインスタンスをプロジェクト間で移動する {#move-a-tidb-x-instance-between-projects}
 
@@ -152,17 +152,17 @@ TiDB Cloudのリソースをプロジェクトごとにグループ化して表�
 
 TiDB Xインスタンスを移動するには、以下の手順を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
-2.  プロジェクトビューで、移動する TiDB X インスタンスを含むプロジェクトフォルダーを展開し、対象の TiDB X インスタンスの**...**をクリックしてから、 **Move**をクリックします。
+2. プロジェクトビューで、移動する TiDB X インスタンスを含むプロジェクトフォルダーを展開し、対象の TiDB X インスタンスの**...**をクリックしてから、 **Move**をクリックします。
 
     > **Tip:**
     >
     > TiDB Xインスタンスがどのプロジェクトにも含まれていない場合、それは**Out of project**フォルダに表示されます。
 
-3.  表示されたダイアログで、次のいずれかの操作を行います。
+3. 表示されたダイアログで、次のいずれかの操作を行います。
 
-    -   TiDB Xインスタンスをプロジェクトに移動するには、 **To a project**を選択し、ドロップダウンリストから対象のプロジェクトを選択します。
-    -   TiDB X インスタンスをどのプロジェクトからも移動するには、 **Outside any project**を選択します。
+    - TiDB Xインスタンスをプロジェクトに移動するには、 **To a project**を選択し、ドロップダウンリストから対象のプロジェクトを選択します。
+    - TiDB X インスタンスをどのプロジェクトからも移動するには、 **Outside any project**を選択します。
 
-4.  **Move**をクリックします。
+4. **Move**をクリックします。

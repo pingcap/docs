@@ -50,5 +50,5 @@ TiDBの`DROP DATABASE`文はMySQLと完全に互換性があります。互換�
 
 ## 参照 {#see-also}
 
--   [CREATE DATABASE](/sql-statements/sql-statement-create-database.md)
--   [ALTER DATABASE](/sql-statements/sql-statement-alter-database.md)
+- [CREATE DATABASE](/sql-statements/sql-statement-create-database.md)
+- [ALTER DATABASE](/sql-statements/sql-statement-alter-database.md)

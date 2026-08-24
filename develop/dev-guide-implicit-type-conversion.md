@@ -14,20 +14,20 @@ SQL ステートメントの述語の両側のデータ型が一致しない場�
 
 TiDB における暗黙的な型変換のルールは次のとおりです。
 
--   引数の一方または両方が`NULL`の場合、比較の結果は`NULL`になります。NULL 安全な`<=>`比較演算子は変換を必要としません。NULL `<=>` NULL は`true`となるためです。
--   比較演算の両方の引数が文字列の場合、それらは文字列として比較されます。
--   両方の引数が整数の場合、それらは整数として比較されます。
--   数値との比較を行わない場合、16 進値はバイナリ文字列として扱われます。
--   引数の一方が小数値の場合、比較はもう一方の引数に依存します。もう一方の引数が小数値または整数値の場合、その引数は小数値と比較されます。もう一方の引数が浮動小数点値の場合、その引数は浮動小数点値と比較されます。
--   引数の 1 つが`TIMESTAMP`列または`DATETIME`列で、もう 1 つの引数が定数の場合、比較が実行される前に定数はタイムスタンプに変換されます。
--   それ以外の場合、引数は浮動小数点数 ( `DOUBLE`型) として比較されます。
+- 引数の一方または両方が`NULL`の場合、比較の結果は`NULL`になります。NULL 安全な`<=>`比較演算子は変換を必要としません。NULL `<=>` NULL は`true`となるためです。
+- 比較演算の両方の引数が文字列の場合、それらは文字列として比較されます。
+- 両方の引数が整数の場合、それらは整数として比較されます。
+- 数値との比較を行わない場合、16 進値はバイナリ文字列として扱われます。
+- 引数の一方が小数値の場合、比較はもう一方の引数に依存します。もう一方の引数が小数値または整数値の場合、その引数は小数値と比較されます。もう一方の引数が浮動小数点値の場合、その引数は浮動小数点値と比較されます。
+- 引数の 1 つが`TIMESTAMP`列または`DATETIME`列で、もう 1 つの引数が定数の場合、比較が実行される前に定数はタイムスタンプに変換されます。
+- それ以外の場合、引数は浮動小数点数 ( `DOUBLE`型) として比較されます。
 
 ## 暗黙的な型変換によって生じる結果 {#consequences-caused-by-implicit-type-conversion}
 
 暗黙的な型変換は、人間とコンピュータのインタラクションの利便性を向上させます。ただし、アプリケーションコードでは暗黙的な型変換の使用は避けてください。以下の問題が発生する可能性があります。
 
--   インデックスの無効性
--   精度の低下
+- インデックスの無効性
+- 精度の低下
 
 ### インデックスの無効性 {#index-invalidity}
 
@@ -80,6 +80,6 @@ SELECT * FROM `t1` WHERE `a` BETWEEN '12123123' AND '1111222211111111200000';
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

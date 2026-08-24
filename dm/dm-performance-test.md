@@ -13,9 +13,9 @@ MySQL -&gt; DM -&gt; TiDB という単純な移行データフローを使用し
 
 ## テスト環境をデプロイ {#deploy-test-environment}
 
--   すべてのデフォルト構成で、 TiUPを使用して TiDB テスト クラスターをデプロイ。
--   MySQL サービスをデプロイ。binlogの`ROW`モードを有効にし、その他の設定項目はデフォルト設定を使用します。
--   DM ワーカーと DM マスターを使用して DM クラスターをデプロイ。
+- すべてのデフォルト構成で、 TiUPを使用して TiDB テスト クラスターをデプロイ。
+- MySQL サービスをデプロイ。binlogの`ROW`モードを有効にし、その他の設定項目はデフォルト設定を使用します。
+- DM ワーカーと DM マスターを使用して DM クラスターをデプロイ。
 
 ## パフォーマンステスト {#performance-test}
 
@@ -46,9 +46,9 @@ sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=330
 
 #### データ移行タスクを作成する {#create-a-data-migration-task}
 
-1.  アップストリームMySQLソースを作成し、 `source-id`を`source-1`に設定します。詳細は[データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)を参照してください。
+1. アップストリームMySQLソースを作成し、 `source-id`を`source-1`に設定します。詳細は[データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)を参照してください。
 
-2.  移行タスクを作成します（モード`full` ）。タスク設定テンプレートは次のとおりです。
+2. 移行タスクを作成します（モード`full` ）。タスク設定テンプレートは次のとおりです。
 
   ```yaml
   ---
@@ -84,8 +84,8 @@ sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=330
 
 > **Note:**
 >
-> -   複数のスレッドを使用して単一のテーブルから同時にデータをエクスポートするには、設定項目`mydumpers`のオプション`rows`を使用します。これにより、データのエクスポートが高速化されます。
-> -   異なる構成でのパフォーマンスをテストするには、 `mysql-instances`構成の`loader-thread`と、 `mydumpers`構成項目の`rows`と`threads`を調整できます。
+> - 複数のスレッドを使用して単一のテーブルから同時にデータをエクスポートするには、設定項目`mydumpers`のオプション`rows`を使用します。これにより、データのエクスポートが高速化されます。
+> - 異なる構成でのパフォーマンスをテストするには、 `mysql-instances`構成の`loader-thread`と、 `mydumpers`構成項目の`rows`と`threads`を調整できます。
 
 #### テスト結果を取得する {#get-test-results}
 
@@ -105,9 +105,9 @@ DM-worker のログを確認してください。`all data files have been finis
 
 #### データ移行タスクを作成する {#create-a-data-migration-task}
 
-1.  アップストリームMySQLのソースを作成します。`source-id`を`source-1`に設定します（ [完全インポートベンチマークケース](#full-import-benchmark-case)でソースを作成済みの場合は、再度作成する必要はありません）。詳細は[データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)を参照してください。
+1. アップストリームMySQLのソースを作成します。`source-id`を`source-1`に設定します（ [完全インポートベンチマークケース](#full-import-benchmark-case)でソースを作成済みの場合は、再度作成する必要はありません）。詳細は[データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)を参照してください。
 
-2.  DM移行タスク（モード`all` ）を作成します。タスク設定ファイルの例を以下に示します。
+2. DM移行タスク（モード`all` ）を作成します。タスク設定ファイルの例を以下に示します。
 
   ```yaml
   ---

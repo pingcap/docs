@@ -54,7 +54,7 @@ explain analyze select count(*) from test.t;
 
 次の 2 つの構成レベルでエンジンを指定できます。
 
--   TiDBインスタンスレベル、つまりINSTANCEレベル。TiDB設定ファイルに以下の設定項目を追加します。
+- TiDBインスタンスレベル、つまりINSTANCEレベル。TiDB設定ファイルに以下の設定項目を追加します。
 
     ```
     [isolation-read]
@@ -63,7 +63,7 @@ explain analyze select count(*) from test.t;
 
     **INSTANCE レベルのデフォルト設定は`["tikv", "tidb", "tiflash"]`です。**
 
--   SESSIONレベル。設定するには次のステートメントを使用します。
+- SESSIONレベル。設定するには次のステートメントを使用します。
 
     ```sql
     set @@session.tidb_isolation_read_engines = "engine list separated by commas";
@@ -131,7 +131,7 @@ select /*+ read_from_storage(tiflash[alias_a,alias_b]) */ ... from table_name_1 
 
 > **Note:**
 >
-> -   v4.0.3 より前では、読み取り専用でない SQL ステートメント (たとえば、 `INSERT INTO ... SELECT` 、 `SELECT ... FOR UPDATE` 、 `UPDATE ...` 、 `DELETE ...` ) でTiFlashレプリカから読み取る動作は未定義です。
-> -   v4.0.3 から v6.2.0 までのバージョンでは、TiDB はデータの正確性を保証するために、非読み取り専用 SQL 文のTiFlashレプリカを内部的に無視します。つまり、 [スマートな選択](#smart-selection)の場合、TiDB はTiFlash以外のレプリカを自動的に選択します。 [エンジン分離](#engine-isolation) （ TiFlashレプリカ**のみを**指定）の場合、TiDB はエラーを報告します。 [手動ヒント](#manual-hint)の場合、TiDB はヒントを無視します。
-> -   バージョン v6.3.0 から v7.0.0 では、 TiFlashレプリカが有効になっている場合、 [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630)変数を使用して、TiDB が非読み取り専用 SQL ステートメントにTiFlashレプリカを使用するかどうかを制御できます。
-> -   v7.1.0 以降、 TiFlashレプリカが有効になっていて、現在のセッションの[SQLモード](/sql-mode.md)が厳密でない場合 (つまり、 `sql_mode`値に`STRICT_TRANS_TABLES`または`STRICT_ALL_TABLES`が含まれていない場合)、TiDB はコスト見積もりに基づいて、非読み取り専用 SQL ステートメントにTiFlashレプリカを使用するかどうかを自動的に決定します。
+> - v4.0.3 より前では、読み取り専用でない SQL ステートメント (たとえば、 `INSERT INTO ... SELECT` 、 `SELECT ... FOR UPDATE` 、 `UPDATE ...` 、 `DELETE ...` ) でTiFlashレプリカから読み取る動作は未定義です。
+> - v4.0.3 から v6.2.0 までのバージョンでは、TiDB はデータの正確性を保証するために、非読み取り専用 SQL 文のTiFlashレプリカを内部的に無視します。つまり、 [スマートな選択](#smart-selection)の場合、TiDB はTiFlash以外のレプリカを自動的に選択します。 [エンジン分離](#engine-isolation) （ TiFlashレプリカ**のみを**指定）の場合、TiDB はエラーを報告します。 [手動ヒント](#manual-hint)の場合、TiDB はヒントを無視します。
+> - バージョン v6.3.0 から v7.0.0 では、 TiFlashレプリカが有効になっている場合、 [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630)変数を使用して、TiDB が非読み取り専用 SQL ステートメントにTiFlashレプリカを使用するかどうかを制御できます。
+> - v7.1.0 以降、 TiFlashレプリカが有効になっていて、現在のセッションの[SQLモード](/sql-mode.md)が厳密でない場合 (つまり、 `sql_mode`値に`STRICT_TRANS_TABLES`または`STRICT_ALL_TABLES`が含まれていない場合)、TiDB はコスト見積もりに基づいて、非読み取り専用 SQL ステートメントにTiFlashレプリカを使用するかどうかを自動的に決定します。

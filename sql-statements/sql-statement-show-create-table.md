@@ -35,7 +35,7 @@ TiDBの`SHOW CREATE TABLE`文はMySQLと完全に互換性があります。互�
 
 ## 参照 {#see-also}
 
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
--   [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
--   [SHOW [FULL] TABLES](/sql-statements/sql-statement-show-tables.md)
--   [SHOW [FULL] COLUMNS FROM](/sql-statements/sql-statement-show-columns-from.md)
+- [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+- [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
+- [SHOW [FULL] TABLES](/sql-statements/sql-statement-show-tables.md)
+- [SHOW [FULL] COLUMNS FROM](/sql-statements/sql-statement-show-columns-from.md)

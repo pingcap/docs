@@ -10,12 +10,12 @@ aliases: ['/ja/tidb/stable/dev-guide-third-party-tools-compatibility/','/ja/tidb
 >
 > [サポートされていない機能](/mysql-compatibility.md#unsupported-features)セクションには、次のものを含む、TiDB でサポートされていない機能がリストされています。
 >
-> -   ストアドプロシージャと関数
-> -   トリガー
-> -   イベント
-> -   ユーザー定義関数
-> -   `SPATIAL`関数、データ型、インデックス
-> -   `XA`構文
+> - ストアドプロシージャと関数
+> - トリガー
+> - イベント
+> - ユーザー定義関数
+> - `SPATIAL`関数、データ型、インデックス
+> - `XA`構文
 >
 > 上記の機能がサポートされていないのは想定された動作であり、このドキュメントには記載されていません。詳細については、 [MySQLとの互換性](/mysql-compatibility.md)を参照してください。
 
@@ -43,8 +43,8 @@ MySQLは、データベースに対して実行された操作の合計数を追
 
 これらの変数は使用しないでください。よくあるシナリオの一つは監視です。TiDBは監視性に優れているため、サーバーステータス変数からのクエリは必要ありません。監視サービスの詳細については、以下のドキュメントを参照してください。
 
--   TiDB Cloudドキュメント: [TiDBクラスタを監視する](/tidb-cloud/monitor-tidb-cluster.md) .
--   TiDB Self-Managed ドキュメント: [TiDB 監視フレームワークの概要](/tidb-monitoring-framework.md) .
+- TiDB Cloudドキュメント: [TiDBクラスタを監視する](/tidb-cloud/monitor-tidb-cluster.md) .
+- TiDB Self-Managed ドキュメント: [TiDB 監視フレームワークの概要](/tidb-monitoring-framework.md) .
 
 ### TiDBはエラーメッセージで`TIMESTAMP`と`DATETIME`を区別します {#tidb-distinguishes-between-timestamp-and-datetime-in-error-messages}
 
@@ -104,8 +104,8 @@ TiDB では`NO_BACKSLASH_ESCAPES`と`\`を使用しないでください。SQL �
 
 TiDBはプロトコルのパラメータ`SERVER_QUERY_NO_GOOD_INDEX_USED`と`SERVER_QUERY_NO_INDEX_USED`を設定しません。そのため、以下のパラメータが実際の状況と矛盾した値として返されます。
 
--   `com.mysql.cj.protocol.ServerSession.noIndexUsed()`
--   `com.mysql.cj.protocol.ServerSession.noGoodIndexUsed()`
+- `com.mysql.cj.protocol.ServerSession.noIndexUsed()`
+- `com.mysql.cj.protocol.ServerSession.noGoodIndexUsed()`
 
 **回避方法**
 
@@ -159,8 +159,8 @@ MySQL Connector/J 8.0.31 以前のバージョンを、MySQL サーバー 5.7.5 
 
 TiDB では、次の方法でもこれを修正します。
 
--   クライアント側: このバグは**pingcap/mysql-connector-j**で修正されており、公式の MySQL Connector/J の代わりに[pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j)を使用できます。
--   サーバー側: この互換性の問題は TiDB v6.3.0 以降で修正されており、サーバーをv6.3.0 以降のバージョンにアップグレードできます。
+- クライアント側: このバグは**pingcap/mysql-connector-j**で修正されており、公式の MySQL Connector/J の代わりに[pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j)を使用できます。
+- サーバー側: この互換性の問題は TiDB v6.3.0 以降で修正されており、サーバーをv6.3.0 以降のバージョンにアップグレードできます。
 
 ## Sequelizeとの互換性 {#compatibility-with-sequelize}
 
@@ -170,15 +170,15 @@ TiDB では、次の方法でもこれを修正します。
 
 サポートされていない機能は次のとおりです。
 
--   [`GEOMETRY`](https://github.com/pingcap/tidb/issues/6347)はサポートされていません。
--   整数主キーの変更はサポートされていません。
--   `PROCEDURE`はサポートされていません。
--   `READ-UNCOMMITTED`と`SERIALIZABLE` [分離レベル](/system-variables.md#transaction_isolation)はサポートされていません。
--   列の`AUTO_INCREMENT`属性の変更はデフォルトでは許可されません。
--   `FULLTEXT` 、 `HASH` 、 `SPATIAL`インデックスはサポートされていません。
--   `sequelize.queryInterface.showIndex(Model.tableName);`はサポートされていません。
--   `sequelize.options.databaseVersion`はサポートされていません。
--   [`queryInterface.addColumn`](https://sequelize.org/api/v6/class/src/dialects/abstract/query-interface.js~queryinterface#instance-method-addColumn)を使用した外部キ​​ー参照の追加はサポートされていません。
+- [`GEOMETRY`](https://github.com/pingcap/tidb/issues/6347)はサポートされていません。
+- 整数主キーの変更はサポートされていません。
+- `PROCEDURE`はサポートされていません。
+- `READ-UNCOMMITTED`と`SERIALIZABLE` [分離レベル](/system-variables.md#transaction_isolation)はサポートされていません。
+- 列の`AUTO_INCREMENT`属性の変更はデフォルトでは許可されません。
+- `FULLTEXT` 、 `HASH` 、 `SPATIAL`インデックスはサポートされていません。
+- `sequelize.queryInterface.showIndex(Model.tableName);`はサポートされていません。
+- `sequelize.options.databaseVersion`はサポートされていません。
+- [`queryInterface.addColumn`](https://sequelize.org/api/v6/class/src/dialects/abstract/query-interface.js~queryinterface#instance-method-addColumn)を使用した外部キ​​ー参照の追加はサポートされていません。
 
 ### 整数主キーの変更はサポートされていません {#modification-of-integer-primary-key-is-not-supported}
 
@@ -218,6 +218,6 @@ TiDB がサポートする分離レベル`REPEATABLE-READ`または`READ-COMMITT
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

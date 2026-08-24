@@ -7,10 +7,10 @@ summary: TiDB のEXPLAINステートメントによって返される実行計�
 
 TiDB は、インデックスを利用してクエリの実行を高速化するいくつかの演算子をサポートしています。
 
--   [`IndexLookup`](#indexlookup)
--   [`IndexReader`](#indexreader)
--   [`Point_Get`と`Batch_Point_Get`](#point_get-and-batch_point_get)
--   [`IndexFullScan`](#indexfullscan)
+- [`IndexLookup`](#indexlookup)
+- [`IndexReader`](#indexreader)
+- [`Point_Get`と`Batch_Point_Get`](#point_get-and-batch_point_get)
+- [`IndexFullScan`](#indexfullscan)
 
 このドキュメントの例は、次のサンプル データに基づいています。
 
@@ -89,8 +89,8 @@ EXPLAIN SELECT * FROM t1 WHERE intkey >= 99 AND intkey <= 103;
 
 `IndexLookup`演算子には 2 つの子ノードがあります。
 
--   `├─IndexRangeScan_8(Build)`演算子は`intkey`インデックスの範囲スキャンを実行し、内部の`RowID` (このテーブルの場合は主キー) の値を取得します。
--   次に、 `└─TableRowIDScan_9(Probe)`演算子はテーブル データから完全な行を取得します。
+- `├─IndexRangeScan_8(Build)`演算子は`intkey`インデックスの範囲スキャンを実行し、内部の`RowID` (このテーブルの場合は主キー) の値を取得します。
+- 次に、 `└─TableRowIDScan_9(Probe)`演算子はテーブル データから完全な行を取得します。
 
 `IndexLookup`タスクには2つのステップが必要なため、多数の行が一致するシナリオでは、SQLオプティマイザーは[統計](/statistics.md)に基づいて`TableFullScan`演算子を選択する可能性があります。次の例では、多数の行が`intkey > 100`条件に一致するため、 `TableFullScan`が選択されます。
 
