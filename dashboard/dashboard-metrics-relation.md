@@ -9,11 +9,11 @@ TiDB Dashboardのメトリクス関係グラフは、v4.0.7で導入された機
 
 ## アクセスグラフ {#access-graph}
 
-TiDB Dashboardにログイン後、左側のナビゲーション メニューで**[クラスタ診断]**をクリックすると、メトリック関係グラフを生成するページが表示されます。
+TiDB Dashboardにログイン後、左側のナビゲーション メニューで**Cluster Diagnostics**をクリックすると、メトリック関係グラフを生成するページが表示されます。
 
 ![Metrics relation graph homepage](/media/dashboard/dashboard-metrics-relation-home-v650.png)
 
-**範囲開始時刻**と**範囲期間**を設定した後、 **メトリック関係の生成**をクリックすると、メトリック関係グラフのページが表示されます。
+**Range Start Time**と**Range Duration**を設定した後、 **Generate Metrics Relation**をクリックすると、メトリック関係グラフのページが表示されます。
 
 ## グラフを理解する {#understand-graph}
 

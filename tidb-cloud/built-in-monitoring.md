@@ -9,7 +9,7 @@ TiDB Cloudは、TiDBリソースの標準メトリック一式を収集し、メ
 
 ## メトリクスページを確認する {#view-the-metrics-page}
 
-**メトリクス**ページでメトリクスを表示するには、以下の手順に従ってください。
+**Metrics**ページでメトリクスを表示するには、以下の手順に従ってください。
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象リソースの名前をクリックすると、その概要ページに移動します。
 
@@ -17,7 +17,7 @@ TiDB Cloudは、TiDBリソースの標準メトリック一式を収集し、メ
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  左側のナビゲーションペインで、 **[監視]** &gt; **[メトリクス]**をクリックします。
+2.  左側のナビゲーションペインで、 **Monitoring** &gt; **Metrics**をクリックします。
 
 ## メトリクス保持ポリシー {#metrics-retention-policy}
 
@@ -27,7 +27,7 @@ TiDB Cloudでは、メトリクスデータは7日間保持されます。
 
 ## TiDB Cloud Dedicatedクラスターのメトリクス {#metrics-for-tidb-cloud-dedicated-clusters}
 
-以下のセクションでは、TiDB Cloud Dedicatedクラスターの**メトリクス**ページに表示されるメトリクスについて説明します。
+以下のセクションでは、TiDB Cloud Dedicatedクラスターの**Metrics**ページに表示されるメトリクスについて説明します。
 
 ### 概要 {#overview}
 
@@ -94,7 +94,7 @@ TiDB Cloudでは、メトリクスデータは7日間保持されます。
 
 ## TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスのメトリクス {#metrics-for-tidb-cloud-starter-and-tidb-cloud-essential-instances}
 
-**メトリクス**ページには、TiDB Cloud StarterとTiDB Cloud Essentialインスタンスのメトリクスを表示する2つのタブがあります。
+**Metrics**ページには、TiDB Cloud StarterとTiDB Cloud Essentialインスタンスのメトリクスを表示する2つのタブがあります。
 
 -   **Instance Overview**：インスタンスレベルの主要なメトリクスを表示します。
 -   **Database Status**：データベースレベルの主要なメトリックを表示します。

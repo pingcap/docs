@@ -21,11 +21,11 @@ TiDB v6.6.0以降、高速プランバインディング機能が導入されま
 
 #### 実行計画をバインドする {#bind-an-execution-plan}
 
-1.  **プランのバインド**をクリックします。**プランのバインド**ダイアログボックスが表示されます。
+1.  **Plan Binding**をクリックします。 **Plan Binding**ダイアログボックスが表示されます。
 
     ![Fast plan binding - not bound - entry](/media/dashboard/dashboard-quick-binding-entry-notbound.png)
 
-2.  バインドするプランを選択し、 **バインド**をクリックします。
+2.  バインドするプランを選択し、 **Bind**をクリックします。
 
     ![Fast plan binding - popup](/media/dashboard/dashboard-quick-binding-popup-notbound.png)
 
@@ -35,7 +35,7 @@ TiDB v6.6.0以降、高速プランバインディング機能が導入されま
 
 #### 既存のバインディングを削除する {#drop-an-existing-binding}
 
-1.  既存のバインディングを持つSQL文のページで、 **プランバインディング**をクリックします。 **プランバインディング**ダイアログボックスが表示されます。
+1.  既存のバインディングを持つSQL文のページで、 **Plan Binding**をクリックします。 **Plan Binding**ダイアログボックスが表示されます。
 
     ![Fast plan binding - bound - entry](/media/dashboard/dashboard-quick-binding-entry-bound.png)
 
@@ -43,7 +43,7 @@ TiDB v6.6.0以降、高速プランバインディング機能が導入されま
 
     ![Fast plan binding - popup - bound](/media/dashboard/dashboard-quick-binding-popup-bound.png)
 
-3.  バインドが削除されると、 **「バインドされていません」という**ラベルが表示されます。
+3.  バインドが削除されると、 **Not bound**ラベルが表示されます。
 
     ![Fast plan binding - popup](/media/dashboard/dashboard-quick-binding-popup-notbound.png)
 
@@ -70,7 +70,7 @@ TiDB v6.6.0以降、高速プランバインディング機能が導入されま
 
 ### SQLサンプル {#sql-sample}
 
-アイテムの詳細情報を表示するには、 **展開**をクリックします。詳細情報をクリップボードにコピーするには、 **コピー**をクリックします。
+アイテムの詳細情報を表示するには、 **Expand**をクリックします。詳細情報をクリップボードにコピーするには、 **Copy**をクリックします。
 
 ### 実行計画 {#execution-plans}
 
@@ -114,7 +114,7 @@ SQL ステートメントの基本情報、実行時間、コプロセッサー�
 
 #### 基本タブ {#basic-tab}
 
-SQL実行の基本情報には、テーブル名、インデックス名、実行回数、合計レイテンシーが含まれます。 **説明**列には各フィールドの詳細な説明が表示されます。
+SQL実行の基本情報には、テーブル名、インデックス名、実行回数、合計レイテンシーが含まれます。 **Description**列には各フィールドの詳細な説明が表示されます。
 
 ![Basic information](/media/dashboard/dashboard-statement-plans-basic.png)
 
@@ -130,7 +130,7 @@ SQL実行の基本情報には、テーブル名、インデックス名、実�
 
 #### コプロセッサー読み取りタブ {#coprocessor-read-tab}
 
-**コプロセッサー読み取り**タブをクリックすると、コプロセッサー読み取りに関連する情報が表示されます。
+**Coprocessor Read**タブをクリックすると、コプロセッサー読み取りに関連する情報が表示されます。
 
 ![Coprocessor read](/media/dashboard/dashboard-statement-plans-cop-read.png)
 

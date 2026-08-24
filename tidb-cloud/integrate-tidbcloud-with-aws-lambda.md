@@ -98,7 +98,7 @@ AWS リソースを作成する際に`us-east-1`以外の別の AWS リージョ
 
         2.  `aws-lambda-cloudformation/dist/index.zip`ファイルを確認してください。
 
-        3.  `index.zip`ファイルを右クリックして、 **[ダウンロード]**を選択します。
+        3.  `index.zip`ファイルを右クリックして、 **Download**を選択します。
 
 4.  再構築したコードバンドルを、ご自身のS3バケットにアップロードしてください。
 
@@ -117,9 +117,9 @@ AWS CloudFormation を使用して書店プロジェクトを設定するには�
 2.  **Create Stack** &gt; **With new resources (standard)**をクリックします。
 3.  **Create Stack**ページで、スタックの作成プロセスを完了します。
 
-    1.  **前提条件**の領域で、 **Choose an existing template**を選択します。
+    1.  **Prerequisite**の領域で、 **Choose an existing template**を選択します。
 
-    2.  **Specify template**領域で、 **Upload a template file**を選択し、 **Choose file**をクリックしてテンプレート ファイル (YAML または JSON) をアップロードし、 **[次へ]**をクリックします。
+    2.  **Specify template**領域で、 **Upload a template file**を選択し、 **Choose file**をクリックしてテンプレート ファイル (YAML または JSON) をアップロードし、 **Next**をクリックします。
 
         まだファイルをお持ちでない場合は、 [GitHub](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest)からダウンロードしてください。このファイルには、プロジェクトに必要なリソースを作成するAWS CloudFormationテンプレートが含まれています。
 
@@ -160,7 +160,7 @@ AWS CloudFormation を使用して書店プロジェクトを設定するには�
 
 1.  AWS マネジメント コンソールで[APIゲートウェイサービス](https://console.aws.amazon.com/apigateway)サービスにアクセスし、 `TiDBCloudApiGatewayV2` API をクリックし、左側のペインで**API: TiDBCloudApiGatewayV2**をクリックします。
 
-2.  **概要**ページから`Invoke URL`をコピーしてください。この URL が API エンドポイントとして機能します。
+2.  **Overview**ページから`Invoke URL`をコピーしてください。この URL が API エンドポイントとして機能します。
 
     ![API Gateway Invoke URL](/media/develop/aws-lambda-get-apigateway-invoke-url.png)
 

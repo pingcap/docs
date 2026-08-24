@@ -18,19 +18,19 @@ aliases: ['/ja/tidb/stable/dev-guide-build-cluster-in-cloud/','/ja/tidb/dev/dev-
 
 2.  TiDB Cloudアカウントに[ログイン](https://tidbcloud.com/)。
 
-3.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、 **リソースの作成**をクリックします。
+3.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、 **Create Resource**をクリックします。
 
-4.  **リソースの作成**ページでは、デフォルトで**Starter**が選択されています。TiDB Cloud Starterインスタンスの名前を入力し、作成先のクラウドプロバイダーとリージョンを選択してください。
+4.  **Create Resource**ページでは、デフォルトで**Starter**が選択されています。TiDB Cloud Starterインスタンスの名前を入力し、作成先のクラウドプロバイダーとリージョンを選択してください。
 
-5.  **作成**をクリックして、 TiDB Cloud Starterインスタンスを作成します。
+5.  **Create**をクリックして、 TiDB Cloud Starterインスタンスを作成します。
 
     TiDB Cloud Starterインスタンスは、約30秒で作成されます。
 
-6.  TiDB Cloud Starterインスタンスが作成されたら、インスタンス名をクリックして概要ページに移動し、右上隅の**接続**をクリックします。接続ダイアログが表示されます。
+6.  TiDB Cloud Starterインスタンスが作成されたら、インスタンス名をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。接続ダイアログが表示されます。
 
 7.  ダイアログで、希望する接続方法とオペレーティングシステムを選択すると、対応する接続​​文字列が表示されます。このドキュメントでは、例としてMySQLクライアントを使用します。
 
-8.  **「パスワードを生成」をクリックすると、ランダムなパスワード**が生成されます。生成されたパスワードは二度と表示されないため、安全な場所に保存してください。ルートパスワードを設定しないと、 TiDB Cloud Starterインスタンスに接続できません。
+8.  **Generate Password**をクリックすると、ランダムなパスワードが生成されます。生成されたパスワードは二度と表示されないため、安全な場所に保存してください。ルートパスワードを設定しないと、 TiDB Cloud Starterインスタンスに接続できません。
 
 > **Note:**
 >

@@ -54,7 +54,7 @@ TiDB Cloudプランに応じて、適切なプライベートエンドポイン�
 ### ステップ1. TiDB Cloud StarterまたはEssentialインスタンスを選択します {#step-1-choose-a-tidb-instance} {#step-1-choose-a-tidb-instance}
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの名前をクリックすると、その概要ページに移動します。
-2.  右上隅の**接続**をクリックしてください。接続ダイアログが表示されます。
+2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 3.  **Connection Type**ドロップダウンリストで、 **Private Endpoint**を選択します。
 4.  **Service Name**、**Availability Zone ID** 、**Region ID**をメモしておいてください。
 
@@ -71,13 +71,13 @@ AWS マネジメントコンソールを使用して VPC インターフェイ�
 
 1.  [AWS マネジメントコンソール](https://aws.amazon.com/console/)コンソールにサインインし、 [https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/)で Amazon VPC コンソールを開きます。
 
-2.  ナビゲーションペインの**エンドポイント**をクリックし、右上隅の**Create Endpoint**をクリックします。
+2.  ナビゲーションペインの**Endpoints**をクリックし、右上隅の**Create Endpoint**をクリックします。
 
     **Create endpoint**ページが表示されます。
 
     ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
 
-3.  **NLBとGWLBを使用するエンドポイントサービス**を選択します。
+3.  **Endpoint services that use NLBs and GWLBs**を選択します。
 
 4.  [ステップ1](#step-1-choose-a-tidb-instance)で見つけたサービス名を入力します。
 
@@ -85,7 +85,7 @@ AWS マネジメントコンソールを使用して VPC インターフェイ�
 
 6.  ドロップダウンリストからVPCを選択します。 **Additional settings**を展開し、 **Enable DNS name**チェックボックスをオンにします。
 
-7.  **サブネット**領域で、 TiDB Cloud StarterまたはEssentialインスタンスが配置されているアベイラビリティゾーンを選択し、サブネットIDを選択します。
+7.  **Subnets**領域で、 TiDB Cloud StarterまたはEssentialインスタンスが配置されているアベイラビリティゾーンを選択し、サブネットIDを選択します。
 
 8.  **Security groups**領域で、適切なセキュリティグループを選択してください。
 
@@ -126,7 +126,7 @@ AWSインターフェースエンドポイントを作成した後、対象のTi
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの名前をクリックすると、その概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+2.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
 
 3.  **Private Endpoint**セクションまでスクロールダウンし、**Authorized Networks**表を探してください。
 
@@ -143,14 +143,14 @@ AWSインターフェースエンドポイントを作成した後、対象のTi
     > -   **Authorized Networks**テーブルを空のままにした場合、デフォルトで全てのプライベートエンドポイント接続が許可されます。
     > -   クラウドリージョンからのすべてのプライベートエンドポイント接続を許可するには（テストまたはオープンアクセスのため）、 **Your VPC Endpoint ID**フィールドにアスタリスク( `*` )を1つ入力します。
 
-5.  **送信**をクリックしてください。
+5.  **Submit**をクリックしてください。
 
 ### ステップ4. TiDB Cloud StarterまたはEssentialインスタンスに接続します {#step-4-connect-to-your-tidb} {#step-4-connect-to-your-tidb}
 
 インターフェースエンドポイントを作成したら、 TiDB Cloudコンソールに戻り、以下の手順を実行してください。
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックすると、その概要ページに移動します。
-2.  右上隅の**接続**をクリックしてください。接続ダイアログが表示されます。
+2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 3.  **Connection Type**ドロップダウンリストで、 **Private Endpoint**を選択します。
 4.  **Connect With**ドロップダウンリストから、希望する接続方法を選択してください。対応する接続​​文字列がダイアログの下部に表示されます。
 5.  接続文字列を使用して、 TiDB Cloud StarterまたはEssentialインスタンスに接続します。
@@ -311,6 +311,6 @@ AWS Management Console でプライベートDNSを有効にするには、次の
 
 ### プライベートDNSを有効にした後、プライベートエンドポイント経由でTiDB Cloud StarterまたはEssentialインスタンスに接続できません。なぜでしょうか？ {#i-cannot-connect-to-a-tidb-cloud-starter-or-essential-instance-via-a-private-endpoint-after-enabling-private-dns-why}
 
-AWS マネジメント コンソールで**、** VPC エンドポイントのセキュリティ グループを適切に設定する必要がある場合があります。VPC &gt;**エンドポイント**に移動します。VPC エンドポイントを右クリックし、適切な**Manage security groups**を選択します。VPC 内に、EC2 インスタンスからのポート 4000 またはお客様定義のポートへの受信アクセスを許可する適切なセキュリティ グループを設定します。
+AWS マネジメント コンソールで、VPC エンドポイントのセキュリティ グループを適切に設定する必要がある場合があります。**VPC** &gt; **Endpoints**に移動します。VPC エンドポイントを右クリックし、適切な**Manage security groups**を選択します。VPC 内に、EC2 インスタンスからのポート 4000 またはお客様定義のポートへの受信アクセスを許可する適切なセキュリティ グループを設定します。
 
 ![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)

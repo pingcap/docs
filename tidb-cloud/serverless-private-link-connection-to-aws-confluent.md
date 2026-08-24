@@ -22,8 +22,8 @@ summary: AWS エンドポイント サービス プライベート リンク接�
 
 AWS アカウント ID とアベイラビリティーゾーンを表示するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[ネットワーク]**をクリックします。
-2.  **[外部サービス向け AWS プライベートエンドポイント]**領域で、**[外部サービス向けプライベートエンドポイントの作成]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで **Settings** > **Networking** をクリックします。
+2.  **AWS Private Endpoints for External Services** 領域で、**Create Private Endpoint for External Services** をクリックします。
 3.  表示されたダイアログで、AWS アカウント ID とアベイラビリティーゾーンを見つけることができます。
 
 ## ステップ1. Confluent Cloudネットワークをセットアップする {#step-1-set-up-a-confluent-cloud-network}
@@ -38,7 +38,7 @@ Confluent Cloud ネットワークは次の要件を満たしている必要が�
 
 Confluent Cloud ネットワークの一意の名前を取得するには、次の手順を実行します。
 
-1.  [Confluent クラウド コンソール](https://confluent.cloud/)で[**環境**](https://confluent.cloud/environments)ページに移動し、Confluent Cloud ネットワークが配置されている環境をクリックします。
+1.  [Confluent クラウド コンソール](https://confluent.cloud/)で[**Environments**](https://confluent.cloud/environments)ページに移動し、Confluent Cloud ネットワークが配置されている環境をクリックします。
 2.  **Network management**をクリックし、 **For dedicated clusters**を選択して、作成したネットワークを見つけます。
 3.  Confluent Cloud ネットワークの DNS サブドメインを取得するには、**Network overview**ページに移動します。
 4.  DNSサブドメインからConfluent Cloudネットワークの一意の名前を抽出します。例えば、DNSサブドメインが`use1-az1.domnprzqrog.us-east-1.aws.confluent.cloud`の場合、一意の名前は`domnprzqrog.us-east-1`です。

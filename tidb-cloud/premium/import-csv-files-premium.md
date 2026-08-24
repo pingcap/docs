@@ -92,7 +92,7 @@ CSVファイルをTiDB Cloud Premiumにインポートするには、以下の�
 <SimpleTab>
 <div label="Amazon S3">
 
-1.  対象のTiDB Cloud Premiumインスタンスの**インポート**ページを開きます。
+1.  対象のTiDB Cloud Premiumインスタンスの**Import**ページを開きます。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
@@ -100,23 +100,23 @@ CSVファイルをTiDB Cloud Premiumにインポートするには、以下の�
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**データ** &gt; **インポート**をクリックします。
+    2.  対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
-2.  **クラウドストレージからデータをインポート**をクリックします。
+2.  **Import data from Cloud Storage**をクリックします。
 
-3.  **クラウドストレージからデータをインポート**ページで、以下の情報を入力してください。
+3.  **Import Data from Cloud Storage**ページで、以下の情報を入力してください。
 
     -   **Storage Provider**： **Amazon S3**を選択してください。
     -   **Source Files URI** ：
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`s3://[bucket_name]/[data_source_folder]/[file_name].csv`の形式で入力します。例: `s3://sampledata/ingest/TableName.01.csv` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`s3://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `s3://sampledata/ingest/` 。
-    -   **認証情報**: AWS ロール ARN または AWS アクセス キーを使用してバケットにアクセスできます。詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
+    -   **Credential**: AWS ロール ARN または AWS アクセス キーを使用してバケットにアクセスできます。詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
         -   **AWS Role ARN** : AWS ロール ARN の値を入力してください。新しいロールを作成する必要がある場合は、 **[ここをクリックして AWS CloudFormation を使用して新しいロールを作成] をクリックし**、ガイド付き手順に従って、提供されているテンプレートを起動し、 IAM警告を確認し、スタックを作成し、生成された ARN をTiDB Cloud Premium にコピーしてください。
         -   **AWS Access Key**：AWSアクセスキーIDとAWSシークレットアクセスキーを入力してください。
     -   **Test Bucket Access**：認証情報が正しく入力された後、このボタンをクリックして、 TiDB Cloud Premiumがバケットにアクセスできることを確認してください。
     -   **Target Connection**：インポートを実行するTiDBのユーザー名とパスワードを入力してください。必要に応じて、 **Test Connection**をクリックして認証情報を検証してください。
 
-4.  **次へ**をクリックしてください。
+4.  **Next**をクリックしてください。
 
 5.  **Source Files Mapping**セクションでは、 TiDB Cloud Premiumがバケットをスキャンし、ソースファイルと宛先テーブル間のマッピングを提案します。
 
@@ -124,7 +124,7 @@ CSVファイルをTiDB Cloud Premiumにインポートするには、以下の�
 
     > **Note:**
     >
-    > **Source Files URI**で単一のファイルが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションは表示されず、 TiDB Cloud Premiumは**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
+    > **Source Files URI**で単一のファイルが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションは表示されず、 TiDB Cloud Premiumは**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
     -   [ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)ソース ファイルとターゲット テーブルに適用するには、自動マッピングを有効のままにしておきます。データ形式として**CSV**を選択したままにしておきます。
 
@@ -136,18 +136,18 @@ CSVファイルをTiDB Cloud Premiumにインポートするには、以下の�
     >
     > 手動マッピング機能は近日中に利用可能になります。切り替え機能が利用可能になったら、自動マッピングオプションをオフにして、マッピングを手動で設定してください。
     >
-    > -   **ソース**: `TableName.01.csv`のようなファイル名パターンを入力してください。ワイルドカード`*`と`?`がサポートされています (例: `my-data*.csv` )。
+    > -   **Source**: `TableName.01.csv`のようなファイル名パターンを入力してください。ワイルドカード`*`と`?`がサポートされています (例: `my-data*.csv` )。
     > -   **Target Database**と**Target Table**：一致したファイルの宛先オブジェクトを選択します。
 
 6.  TiDB Cloud Premiumはソースパスを自動的にスキャンします。スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックしてください。
 
-7.  インポートの進行状況が**完了**と表示されたら、インポートされたテーブルを確認してください。
+7.  インポートの進行状況が**Completed**と表示されたら、インポートされたテーブルを確認してください。
 
 </div>
 
 <div label="Alibaba Cloud Object Storage Service (OSS)">
 
-1.  対象のTiDB Cloud Premiumインスタンスの**インポート**ページを開きます。
+1.  対象のTiDB Cloud Premiumインスタンスの**Import**ページを開きます。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
@@ -155,11 +155,11 @@ CSVファイルをTiDB Cloud Premiumにインポートするには、以下の�
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**データ** &gt; **インポート**をクリックします。
+    2.  対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
-2.  **クラウドストレージからデータをインポート**をクリックします。
+2.  **Import data from Cloud Storage**をクリックします。
 
-3.  **クラウドストレージからデータをインポート**ページで、以下の情報を入力してください。
+3.  **Import Data from Cloud Storage**ページで、以下の情報を入力してください。
 
     -   **Storage Provider**： **Alibaba Cloud OSS**を選択してください。
     -   **Source Files URI** ：
@@ -169,7 +169,7 @@ CSVファイルをTiDB Cloud Premiumにインポートするには、以下の�
     -   **Test Bucket Access**：認証情報が正しく入力された後、このボタンをクリックして、 TiDB Cloud Premiumがバケットにアクセスできることを確認してください。
     -   **Target Connection**：インポートを実行するTiDBのユーザー名とパスワードを入力してください。必要に応じて、 **Test Connection**をクリックして認証情報を検証してください。
 
-4.  **次へ**をクリックしてください。
+4.  **Next**をクリックしてください。
 
 5.  **Source Files Mapping**セクションでは、 TiDB Cloud Premiumがバケットをスキャンし、ソースファイルと宛先テーブル間のマッピングを提案します。
 
@@ -177,7 +177,7 @@ CSVファイルをTiDB Cloud Premiumにインポートするには、以下の�
 
     > **Note:**
     >
-    > **Source Files URI**で単一のファイルが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションは表示されず、 TiDB Cloud Premiumは**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
+    > **Source Files URI**で単一のファイルが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションは表示されず、 TiDB Cloud Premiumは**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
     -   [ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)ソース ファイルとターゲット テーブルに適用するには、自動マッピングを有効のままにしておきます。データ形式として**CSV**を選択したままにしておきます。
 
@@ -189,12 +189,12 @@ CSVファイルをTiDB Cloud Premiumにインポートするには、以下の�
     >
     > 手動マッピング機能は近日中に利用可能になります。切り替え機能が利用可能になったら、自動マッピングオプションをオフにして、マッピングを手動で設定してください。
     >
-    > -   **ソース**: `TableName.01.csv`のようなファイル名パターンを入力してください。ワイルドカード`*`と`?`がサポートされています (例: `my-data*.csv` )。
+    > -   **Source**: `TableName.01.csv`のようなファイル名パターンを入力してください。ワイルドカード`*`と`?`がサポートされています (例: `my-data*.csv` )。
     > -   **Target Database**と**Target Table**：一致したファイルの宛先オブジェクトを選択します。
 
 6.  TiDB Cloud Premiumはソースパスを自動的にスキャンします。スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックしてください。
 
-7.  インポートの進行状況が**完了**と表示されたら、インポートされたテーブルを確認してください。
+7.  インポートの進行状況が**Completed**と表示されたら、インポートされたテーブルを確認してください。
 
 </div>
 
@@ -219,4 +219,4 @@ CSVファイルをTiDB Cloud Premiumにインポートするには、以下の�
 
 ### インポートされたテーブルに行が0件あります {#zero-rows-in-the-imported-tables}
 
-インポートの進行状況が**完了**と表示されたら、インポートされたテーブルを確認してください。行数がゼロの場合は、入力したバケットURIに一致するデータファイルがなかったことを意味します。この場合は、正しいソースファイルを指定するか、既存のファイルを[データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って名前変更するか、または**Advanced Settings**を使用して変更することで問題を解決してください。その後、再度テーブルをインポートしてください。
+インポートの進行状況が**Completed**と表示されたら、インポートされたテーブルを確認してください。行数がゼロの場合は、入力したバケットURIに一致するデータファイルがなかったことを意味します。この場合は、正しいソースファイルを指定するか、既存のファイルを[データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って名前変更するか、または**Advanced Settings**を使用して変更することで問題を解決してください。その後、再度テーブルをインポートしてください。

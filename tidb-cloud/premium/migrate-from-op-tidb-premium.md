@@ -143,7 +143,7 @@ AWS コンソールでアクセスキーを作成します。詳細について�
 
 2.  右上にあるナビゲーションバーでユーザー名を選択し、 **My Security Credentials**をクリックします。
 
-3.  アクセスキーを作成するには、 **Create access key**をクリックします。次に、 **Download .csv file**を選択して、アクセスキー ID とシークレット アクセスキーをコンピュータの CSV ファイルに保存します。このファイルは安全な場所に保存してください。このダイアログボックスを閉じると、シークレット アクセスキーには再度アクセスできなくなります。CSV ファイルをダウンロードしたら、 **閉じる**を選択します。アクセスキーを作成すると、キー ペアはデフォルトで有効になり、すぐに使用できます。
+3.  アクセスキーを作成するには、 **Create access key**をクリックします。次に、 **Download .csv file**を選択して、アクセスキー ID とシークレット アクセスキーをコンピュータの CSV ファイルに保存します。このファイルは安全な場所に保存してください。このダイアログボックスを閉じると、シークレット アクセスキーには再度アクセスできなくなります。CSV ファイルをダウンロードしたら、 **Close**を選択します。アクセスキーを作成すると、キー ペアはデフォルトで有効になり、すぐに使用できます。
 
     ![Create access key](/media/tidb-cloud/op-to-cloud-create-access-key01.png)
 
@@ -204,8 +204,8 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、対象のTiDB Cloud Premium インスタンスのアカウント ID と外部 ID を取得します。
 
     1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象インスタンスの名前をクリックします。
-    2.  左側のナビゲーションペインで、 **[データ]** &gt; **[インポート]**をクリックします。
-    3.  **クラウドストレージからデータをインポート** &gt; **Amazon S3**を選択します。
+    2.  左側のナビゲーションペインで、 **Data** &gt; **Import**をクリックします。
+    3.  **Import data from Cloud Storage** &gt; **Amazon S3**を選択します。
     4.  ウィザードに表示される**Account ID**と**External ID**をメモしておいてください。これらの値はCloudFormationテンプレートに埋め込まれています。
 
 2.  **Source Connection**ダイアログで、 **AWS Role ARN**を選択し、 **[AWS CloudFormation で新しいものを作成するにはここをクリックしてください]**をクリックし、画面上のガイダンスに従います。組織が CloudFormation スタックを起動できない場合は、 [IAMロールを手動で作成する](#manually-create-the-iam-role-optional)を参照してください。
@@ -213,8 +213,8 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
     1.  AWSコンソールで、あらかじめ入力済みのCloudFormationテンプレートを開きます。
     2.  役割名を入力し、権限を確認し、 IAM警告を承認してください。
     3.  スタックを作成し、ステータスが**CREATE_COMPLETE**に変わるまで待ちます。
-    4.  **出力**タブで、新しく生成されたロールARNをコピーします。
-    5.  TiDB Cloud Premiumに戻り、ロールARNを貼り付けて**確認**をクリックします。ウィザードは、以降のインポートジョブのためにARNを保存します。
+    4.  **Outputs**タブで、新しく生成されたロールARNをコピーします。
+    5.  TiDB Cloud Premiumに戻り、ロールARNを貼り付けて**Confirm**をクリックします。ウィザードは、以降のインポートジョブのためにARNを保存します。
 
 3.  インポートウィザードの残りの手順に進み、プロンプトが表示されたら保存したロールARNを使用してください。
 
@@ -280,15 +280,15 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 2.  TiCDCがTiDB Cloud Premiumに接続できるように許可します。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
-    2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
-    3.  **ネットワーク設定**ページで、 **Add IP Address**をクリックします。
-    4.  表示されたダイアログで、 **[IP アドレスを使用する]**を選択し、 [ **+** ] をクリックし、 **IP Address**フィールドに TiCDCコンポーネントのパブリック IP アドレスを入力して、 **[確認]**をクリックします。これで、TiCDC はTiDB Cloud Premium にアクセスできるようになりました。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
+    2.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
+    3.  **Networking**ページで、 **Add IP Address**をクリックします。
+    4.  表示されたダイアログで、 **[IP アドレスを使用する]**を選択し、 [ **+** ] をクリックし、 **IP Address**フィールドに TiCDCコンポーネントのパブリック IP アドレスを入力して、 **Confirm**をクリックします。これで、TiCDC はTiDB Cloud Premium にアクセスできるようになりました。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
 
 3.  下流のTiDB Cloud Premiumインスタンスの接続情報を取得します。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
-    2.  右上隅の**接続**をクリックしてください。
-    3.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**Connection Type**を選択し、 **接続先**ドロップダウンリストから**Connect With**を選択します。
+    2.  右上隅の**Connect**をクリックしてください。
+    3.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **Connect With**ドロップダウンリストから**General**を選択します。
     4.  接続情報から、インスタンスのホスト IP アドレスとポートを取得できます。詳細については、 [公共回線経由で接続する](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
 
 4.  増分レプリケーションタスクを作成して実行します。アップストリームクラスターで、以下を実行します。
