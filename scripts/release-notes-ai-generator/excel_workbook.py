@@ -11,6 +11,7 @@ from typing import Any, Callable
 
 from openpyxl.styles import PatternFill
 from openpyxl.utils import get_column_letter
+from openpyxl.worksheet.worksheet import Worksheet
 
 from .ai_client import build_generation_prompt
 from .constants import (
@@ -59,7 +60,7 @@ SAME_SERIES_REASON_HEADER = "reason"
 MAX_ROW_FILES_SUMMARY_CHARS = 40000
 
 
-def prepare_sheet_columns(sheet: Any) -> dict[str, int]:
+def prepare_sheet_columns(sheet: Worksheet) -> dict[str, int]:
     header = get_header(sheet)
     missing = sorted(REQUIRED_HEADERS - set(header))
     if missing:
@@ -93,7 +94,10 @@ def prepare_sheet_columns(sheet: Any) -> dict[str, int]:
     return header
 
 
-def set_doc_impact_column_width(sheet: Any, header: dict[str, int]) -> None:
+def set_doc_impact_column_width(
+    sheet: Worksheet,
+    header: dict[str, int],
+) -> None:
     column_letter = get_column_letter(header[DOC_IMPACT_HEADER])
     sheet.column_dimensions[column_letter].width = DOC_IMPACT_COLUMN_WIDTH
 
@@ -188,7 +192,14 @@ def restore_row(sheet: Any, row_number: int, snapshot: dict[str, Any]) -> None:
         cell.value = cell_snapshot["value"]
         cell._style = copy.copy(cell_snapshot["style"])
         cell.number_format = cell_snapshot["number_format"]
-        cell._hyperlink = copy.copy(cell_snapshot["hyperlink"]) if cell_snapshot["hyperlink"] else None
+        cell.hyperlink = (
+            copy.copy(cell_snapshot["hyperlink"])
+            if cell_snapshot["hyperlink"]
+            else None
+        )
+        # The public hyperlink setter updates the hyperlink reference, but it can
+        # also populate an empty value. Restore the exact snapshotted value.
+        cell.value = cell_snapshot["value"]
         cell.comment = copy.copy(cell_snapshot["comment"]) if cell_snapshot["comment"] else None
 
 
@@ -544,8 +555,8 @@ def copy_header_with_reason(source_sheet: Any, target_sheet: Any) -> int:
 def ensure_same_series_reason_header(source_sheet: Any, target_sheet: Any) -> int:
     reason_col = find_header_column(target_sheet, SAME_SERIES_REASON_HEADER)
     if not reason_col:
-        reason_col = max(source_sheet.max_column, target_sheet.max_column) + 1
         copy_missing_header_cells(source_sheet, target_sheet)
+        reason_col = target_sheet.max_column + 1
         target_sheet.cell(row=1, column=reason_col, value=SAME_SERIES_REASON_HEADER)
         return reason_col
 
@@ -558,12 +569,16 @@ def ensure_same_series_reason_header(source_sheet: Any, target_sheet: Any) -> in
 
 
 def copy_missing_header_cells(source_sheet: Any, target_sheet: Any) -> None:
-    for column in range(1, source_sheet.max_column + 1):
-        if not str_value(target_sheet.cell(row=1, column=column).value):
-            copy_cell(
-                source_sheet.cell(row=1, column=column),
-                target_sheet.cell(row=1, column=column),
-            )
+    target_header = get_header(target_sheet)
+    for name, source_column in get_header(source_sheet).items():
+        if name in target_header:
+            continue
+        target_column = target_sheet.max_column + 1
+        copy_cell(
+            source_sheet.cell(row=1, column=source_column),
+            target_sheet.cell(row=1, column=target_column),
+        )
+        target_header[name] = target_column
 
 
 def find_header_column(sheet: Any, header_name: str) -> int | None:
@@ -588,10 +603,15 @@ def append_row_with_reason(
     target_dimension.outlineLevel = source_dimension.outlineLevel
     target_dimension.collapsed = source_dimension.collapsed
 
-    for column in range(1, source_sheet.max_column + 1):
+    source_header = get_header(source_sheet)
+    target_header = get_header(target_sheet)
+    for name, source_column in source_header.items():
+        target_column = target_header.get(name)
+        if not target_column:
+            continue
         copy_cell(
-            source_sheet.cell(row=row_number, column=column),
-            target_sheet.cell(row=target_row, column=column),
+            source_sheet.cell(row=row_number, column=source_column),
+            target_sheet.cell(row=target_row, column=target_column),
         )
     target_sheet.cell(row=target_row, column=reason_col, value=reason)
 

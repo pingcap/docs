@@ -8,7 +8,7 @@ from pathlib import Path
 
 import openpyxl
 
-from .ai_client import AzureOpenAIClient, CodexAIClient
+from .ai_client import DEFAULT_CODEX_MODEL, AzureOpenAIClient, CodexAIClient
 from .excel_workbook import (
     NOT_NEEDED_SHEET_NAME,
     clear_doc_impact_column,
@@ -51,7 +51,7 @@ def parse_args() -> argparse.Namespace:
     gen_parser = subparsers.add_parser(
         "generate",
         help=(
-            "Phase 1: Process the Excel workbook — run preprocessing, call AI to "
+            "Phase 1: Process the Excel workbook. Run preprocessing, call AI to "
             "generate release notes and analyze documentation impact, and write "
             "results back to Excel. "
             "Does NOT produce a Markdown file."
@@ -98,7 +98,8 @@ def add_generate_args(parser: argparse.ArgumentParser) -> None:
             "AI provider to use. 'codex' runs the Codex CLI as a subprocess "
             "(requires codex to be installed). 'azure' calls Azure OpenAI via the "
             "OpenAI Python SDK (requires AZURE_OPENAI_KEY and AZURE_OPENAI_BASE_URL "
-            "or OPENAI_BASE_URL environment variables). Default: codex."
+            "or OPENAI_BASE_URL, plus a deployment name from --ai-model or "
+            "AZURE_OPENAI_DEPLOYMENT). Default: codex."
         ),
     )
     parser.add_argument(
@@ -108,8 +109,11 @@ def add_generate_args(parser: argparse.ArgumentParser) -> None:
     )
     parser.add_argument(
         "--ai-model",
-        default=AzureOpenAIClient.DEFAULT_MODEL,
-        help="Model name. Passed to codex exec with -m, or used as the model parameter for Azure OpenAI.",
+        help=(
+            "Model name for Codex, or deployment name for Azure OpenAI. "
+            f"Default for Codex: {DEFAULT_CODEX_MODEL}. For Azure OpenAI, pass "
+            "the deployment name or set AZURE_OPENAI_DEPLOYMENT."
+        ),
     )
     parser.add_argument(
         "--involve-ai-generation",
@@ -241,18 +245,24 @@ def run_generate(args: argparse.Namespace) -> int:
         base_branch_start_date = parse_date_value(args.scope_base_branch_start_date)
         if not base_branch_start_date:
             raise ValueError("--scope-base-branch-start-date must use YYYY-MM-DD format")
+    involve_ai_generation = args.involve_ai_generation == "ON"
+    if involve_ai_generation:
+        validate_positive_int("--ai-timeout", args.ai_timeout)
 
     try:
         token = load_github_token()
     except ValueError as exc:
         raise SystemExit(f"error: {exc}") from None
     github = GitHubClient(token)
-    involve_ai_generation = args.involve_ai_generation == "ON"
     if involve_ai_generation:
         if args.ai_provider == "azure":
             ai = AzureOpenAIClient(args.ai_model, args.ai_timeout)
         else:
-            ai = CodexAIClient(args.ai_command, args.ai_model, args.ai_timeout)
+            ai = CodexAIClient(
+                args.ai_command,
+                args.ai_model or DEFAULT_CODEX_MODEL,
+                args.ai_timeout,
+            )
     else:
         ai = None
 

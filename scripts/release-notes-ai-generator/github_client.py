@@ -106,10 +106,14 @@ class GitHubClient:
             return min(max(wait_seconds, 1), self.max_rate_limit_sleep)
         return min(2 ** attempt, self.max_rate_limit_sleep)
 
-    def get_pull(self, pr_url: str) -> PullInfo:
+    def get_pull(self, pr_url: str, include_files: bool = True) -> PullInfo:
         owner, repo, number = parse_github_url(pr_url, "pull")
         pull = self.get_json(f"/repos/{owner}/{repo}/pulls/{number}")
-        files_summary = self.get_pull_files_summary(owner, repo, number)
+        files_summary = (
+            self.get_pull_files_summary(owner, repo, number)
+            if include_files
+            else ""
+        )
         return PullInfo(
             url=pr_url,
             title=str(pull.get("title") or ""),
@@ -161,6 +165,7 @@ class GitHubClient:
             )
             if not isinstance(files, list) or not files:
                 break
+            page_size = len(files)
             for item in files:
                 if len(lines) >= max_files or total_chars >= max_total_chars:
                     truncated = True
@@ -183,6 +188,8 @@ class GitHubClient:
                 lines.append(block)
                 total_chars += len(block)
             page += 1
+            if page_size < 100:
+                break
         if not lines:
             return "No changed-file information is available."
         if truncated:
@@ -196,8 +203,32 @@ class GitHubClient:
         base: str,
         state: str = "closed",
         max_pages: int = 10,
+        direction: str = "asc",
     ) -> list[PullInfo]:
+        pulls, _truncated = self.list_pulls_for_base_with_state(
+            owner,
+            repo,
+            base,
+            state=state,
+            max_pages=max_pages,
+            direction=direction,
+        )
+        return pulls
+
+    def list_pulls_for_base_with_state(
+        self,
+        owner: str,
+        repo: str,
+        base: str,
+        state: str = "closed",
+        max_pages: int = 10,
+        direction: str = "asc",
+    ) -> tuple[list[PullInfo], bool]:
+        if direction not in {"asc", "desc"}:
+            raise ValueError("direction must be 'asc' or 'desc'")
+
         pulls: list[PullInfo] = []
+        truncated = False
         for page in range(1, max_pages + 1):
             data = self.get_api_json(
                 f"/repos/{owner}/{repo}/pulls",
@@ -205,7 +236,7 @@ class GitHubClient:
                     "state": state,
                     "base": base,
                     "sort": "created",
-                    "direction": "asc",
+                    "direction": direction,
                     "per_page": 100,
                     "page": page,
                 },
@@ -231,14 +262,15 @@ class GitHubClient:
             if len(data) < 100:
                 break
         else:
+            truncated = True
             print(
                 "GitHub pull list may be truncated after "
-                f"{max_pages * 100} PRs for {owner}/{repo} base {base}; "
-                "increase max_pages if cherry-pick detection looks incomplete",
+                f"{max_pages * 100} {direction}-ordered PRs for {owner}/{repo} "
+                f"base {base}",
                 file=sys.stderr,
                 flush=True,
             )
-        return pulls
+        return pulls, truncated
 
     def get_original_author_for_cherry_pick(
         self, row_number: int, cp_pr_link: str, cp_pr_title: str, current_author: str
@@ -247,7 +279,7 @@ class GitHubClient:
         target_ref = find_original_pr_reference(cp_pr_title, default_owner, default_repo)
         if not target_ref:
             try:
-                cp_info = self.get_pull(cp_pr_link)
+                cp_info = self.get_pull(cp_pr_link, include_files=False)
                 target_ref = (
                     find_original_pr_reference(cp_info.head_ref, default_owner, default_repo)
                     or find_original_pr_reference(cp_info.title, default_owner, default_repo)
@@ -272,7 +304,10 @@ class GitHubClient:
         target_owner, target_repo, target_number = target_ref
         target_pr_link = f"https://github.com/{target_owner}/{target_repo}/pull/{target_number}"
         try:
-            return self.get_pull(target_pr_link).author or current_author
+            return (
+                self.get_pull(target_pr_link, include_files=False).author
+                or current_author
+            )
         except Exception as exc:  # noqa: BLE001
             print(
                 f"Row {row_number}: failed to find the non-bot author for "

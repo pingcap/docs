@@ -13,6 +13,7 @@ import tempfile
 import textwrap
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlsplit, urlunsplit
 
 from .constants import (
     DOC_IMPACT_PROMPT_TEMPLATE,
@@ -28,6 +29,7 @@ from .models import (
 )
 
 logger = logging.getLogger(__name__)
+DEFAULT_CODEX_MODEL = "gpt-5.4"
 
 
 class AIClient:
@@ -161,7 +163,6 @@ class CodexAIClient(AIClient):
 class AzureOpenAIClient(AIClient):
     """AI client that calls Azure OpenAI via the OpenAI Python SDK."""
 
-    DEFAULT_MODEL = "gpt-5.4"
     MAX_OUTPUT_TOKENS = 16384
     TEMPERATURE = 0.1
     REASONING_MODEL_PREFIXES = ("o1", "o3", "o4", "gpt-5")
@@ -184,29 +185,71 @@ class AzureOpenAIClient(AIClient):
                 "AZURE_OPENAI_BASE_URL or OPENAI_BASE_URL environment variable "
                 "is required when using --ai-provider azure"
             )
+        deployment = (model or os.environ.get("AZURE_OPENAI_DEPLOYMENT", "")).strip()
+        if not deployment:
+            raise ValueError(
+                "An Azure OpenAI deployment name is required when using "
+                "--ai-provider azure. Pass it with --ai-model or set "
+                "AZURE_OPENAI_DEPLOYMENT."
+            )
+        base_url = azure_openai_v1_base_url(base_url)
         self.client = OpenAI(api_key=key, base_url=base_url, timeout=timeout)
         if not hasattr(self.client, "responses"):
             raise ValueError(
                 "The installed OpenAI Python SDK does not support the Responses API. "
                 "Install a newer 'openai' package version before using --ai-provider azure."
             )
-        self.model = model or self.DEFAULT_MODEL
+        self.model = deployment
 
     def _is_reasoning_model(self) -> bool:
         model_lower = self.model.lower()
         return any(model_lower.startswith(p) for p in self.REASONING_MODEL_PREFIXES)
 
-    def _run(self, prompt: str, _output_schema: dict[str, Any]) -> str:
+    def _run(self, prompt: str, output_schema: dict[str, Any]) -> str:
         kwargs: dict[str, Any] = {
             "model": self.model,
             "input": [{"role": "user", "content": prompt}],
             "max_output_tokens": self.MAX_OUTPUT_TOKENS,
+            "text": {
+                "format": {
+                    "type": "json_schema",
+                    "name": "release_note_generation",
+                    "strict": True,
+                    "schema": output_schema,
+                }
+            },
         }
         logger.debug("Azure OpenAI prompt:\n%s", prompt)
         if not self._is_reasoning_model():
             kwargs["temperature"] = self.TEMPERATURE
         response = self.client.responses.create(**kwargs)
+        if response.status != "completed":
+            reason = getattr(response.incomplete_details, "reason", None)
+            error = getattr(response, "error", None)
+            details = reason or error or "no failure details"
+            raise RuntimeError(
+                f"Azure OpenAI response ended with status {response.status!r}: {details}"
+            )
         return response.output_text.strip()
+
+
+def azure_openai_v1_base_url(base_url: str) -> str:
+    """Normalize an Azure OpenAI endpoint to the v1 API base URL."""
+    parsed = urlsplit(base_url.strip())
+    if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+        raise ValueError("Azure OpenAI base URL must be an absolute HTTP(S) URL")
+    if parsed.query or parsed.fragment:
+        raise ValueError("Azure OpenAI base URL must not contain a query or fragment")
+
+    path = parsed.path.rstrip("/")
+    if not path:
+        path = "/openai/v1"
+    elif path != "/openai/v1":
+        raise ValueError(
+            "Azure OpenAI base URL must be the resource endpoint or end with "
+            "'/openai/v1/'"
+        )
+    return urlunsplit((parsed.scheme, parsed.netloc, path + "/", "", ""))
 
 
 def is_executable_available(executable: str) -> bool:

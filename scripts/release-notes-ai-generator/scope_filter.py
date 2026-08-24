@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+import sys
 from dataclasses import dataclass
 from datetime import date, datetime
 from pathlib import Path
@@ -62,7 +63,10 @@ class ScopeContext:
     github: Any
     base_branch_start_date: date | None = None
     timeline: list[TimelineRelease] | None = None
-    release_branch_pulls: dict[tuple[str, str, str], list[PullInfo]] | None = None
+    release_branch_pulls: dict[
+        tuple[str, str, str, str],
+        tuple[list[PullInfo], bool],
+    ] | None = None
 
     def __post_init__(self) -> None:
         if self.timeline is None:
@@ -146,8 +150,8 @@ def find_header_column(sheet: Any, header_name: str) -> int | None:
 def ensure_reason_header(source_sheet: Any, target_sheet: Any) -> int:
     reason_col = find_header_column(target_sheet, REASON_HEADER)
     if not reason_col:
-        reason_col = max(source_sheet.max_column, target_sheet.max_column) + 1
         copy_missing_header_cells(source_sheet, target_sheet)
+        reason_col = target_sheet.max_column + 1
         target_sheet.cell(row=1, column=reason_col, value=REASON_HEADER)
         return reason_col
 
@@ -160,12 +164,16 @@ def ensure_reason_header(source_sheet: Any, target_sheet: Any) -> int:
 
 
 def copy_missing_header_cells(source_sheet: Any, target_sheet: Any) -> None:
-    for column in range(1, source_sheet.max_column + 1):
-        if not str_value(target_sheet.cell(row=1, column=column).value):
-            copy_cell(
-                source_sheet.cell(row=1, column=column),
-                target_sheet.cell(row=1, column=column),
-            )
+    target_header = get_header(target_sheet)
+    for name, source_column in get_header(source_sheet).items():
+        if name in target_header:
+            continue
+        target_column = target_sheet.max_column + 1
+        copy_cell(
+            source_sheet.cell(row=1, column=source_column),
+            target_sheet.cell(row=1, column=target_column),
+        )
+        target_header[name] = target_column
 
 
 def append_row_with_reason(source_sheet: Any, target_sheet: Any, row_number: int, reason: str) -> None:
@@ -178,10 +186,15 @@ def append_row_with_reason(source_sheet: Any, target_sheet: Any, row_number: int
     target_dimension.outlineLevel = source_dimension.outlineLevel
     target_dimension.collapsed = source_dimension.collapsed
 
-    for column in range(1, source_sheet.max_column + 1):
+    source_header = get_header(source_sheet)
+    target_header = get_header(target_sheet)
+    for name, source_column in source_header.items():
+        target_column = target_header.get(name)
+        if not target_column:
+            continue
         copy_cell(
-            source_sheet.cell(row=row_number, column=column),
-            target_sheet.cell(row=target_row, column=column),
+            source_sheet.cell(row=row_number, column=source_column),
+            target_sheet.cell(row=target_row, column=target_column),
         )
     target_sheet.cell(row=target_row, column=reason_col, value=reason)
 
@@ -251,14 +264,25 @@ def major_release_out_of_scope_reason(
             f"{latest_zero.version.release_branch} branch start date {branch_start.isoformat()}"
         )
 
-    cherry_pick = find_release_branch_cherry_pick(context, latest_zero, owner, repo, pr_link)
-    if not cherry_pick:
-        return None
-    cherry_pick_date = parse_date_value(cherry_pick.merged_at)
+    cherry_pick, search_complete = find_release_branch_cherry_pick(
+        context,
+        latest_zero,
+        owner,
+        repo,
+        pr_link,
+    )
+    cherry_pick_date = parse_date_value(cherry_pick.merged_at) if cherry_pick else None
     if cherry_pick_date and cherry_pick_date < latest_zero.release_date:
         return (
             f"Cherry-pick PR {cherry_pick.url} merged on {cherry_pick_date.isoformat()} "
             f"before {latest_zero.display_version} release date {latest_zero.release_date.isoformat()}"
+        )
+    if not search_complete:
+        print(
+            f"Cherry-pick search is incomplete for {pr_link} on "
+            f"{owner}/{repo} {latest_zero.version.release_branch}; keeping the row in scope",
+            file=sys.stderr,
+            flush=True,
         )
     return None
 
@@ -269,11 +293,12 @@ def estimated_release_branch_start_date(
     owner: str,
     repo: str,
 ) -> date | None:
-    branch_pulls = release_branch_pulls(
+    branch_pulls, _complete = release_branch_pulls(
         context,
         owner,
         repo,
         latest_zero.version.release_branch,
+        direction="asc",
     )
     created_dates = [parse_date_value(pull.created_at) for pull in branch_pulls]
     created_dates = [value for value in created_dates if value]
@@ -286,16 +311,18 @@ def find_release_branch_cherry_pick(
     owner: str,
     repo: str,
     pr_link: str,
-) -> PullInfo | None:
+) -> tuple[PullInfo | None, bool]:
     _owner, _repo, number = parse_github_url(pr_link, "pull")
 
     candidates = []
-    for pull in release_branch_pulls(
+    branch_pulls, truncated = release_branch_pulls(
         context,
         owner,
         repo,
         latest_zero.version.release_branch,
-    ):
+        direction="desc",
+    )
+    for pull in branch_pulls:
         haystack = "\n".join([pull.title, pull.body, pull.head_ref, pull.url])
         if references_original_pr(haystack, owner, repo, number, pr_link):
             candidates.append(pull)
@@ -304,10 +331,13 @@ def find_release_branch_cherry_pick(
         pull for pull in candidates if parse_date_value(pull.merged_at)
     ]
     if not merged_candidates:
-        return None
-    return min(
-        merged_candidates,
-        key=lambda pull: parse_date_value(pull.merged_at) or date.max,
+        return None, not truncated
+    return (
+        min(
+            merged_candidates,
+            key=lambda pull: parse_date_value(pull.merged_at) or date.max,
+        ),
+        not truncated,
     )
 
 
@@ -346,15 +376,24 @@ def parse_supported_scope_repo(pr_link: str) -> tuple[str, str] | None:
     return owner, repo
 
 
-def release_branch_pulls(context: ScopeContext, owner: str, repo: str, branch: str) -> list[PullInfo]:
+def release_branch_pulls(
+    context: ScopeContext,
+    owner: str,
+    repo: str,
+    branch: str,
+    direction: str,
+) -> tuple[list[PullInfo], bool]:
     assert context.release_branch_pulls is not None
-    cache_key = (owner, repo, branch)
+    cache_key = (owner, repo, branch, direction)
     if cache_key not in context.release_branch_pulls:
-        context.release_branch_pulls[cache_key] = context.github.list_pulls_for_base(
+        context.release_branch_pulls[
+            cache_key
+        ] = context.github.list_pulls_for_base_with_state(
             owner,
             repo,
             branch,
             state="closed",
+            direction=direction,
         )
     return context.release_branch_pulls[cache_key]
 

@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import copy
-from typing import Any, Iterable
+from collections.abc import Iterable
+from typing import Any
 
 from .constants import (
     COMPONENT_ALIASES,
@@ -95,6 +96,9 @@ def copy_cell(source_cell: Any, target_cell: Any) -> None:
     if source_cell.number_format:
         target_cell.number_format = source_cell.number_format
     if source_cell.hyperlink:
-        target_cell._hyperlink = copy.copy(source_cell.hyperlink)
+        target_cell.hyperlink = copy.copy(source_cell.hyperlink)
+        # The public setter corrects the target reference and can populate an
+        # empty value, so restore the source value after assigning the link.
+        target_cell.value = source_cell.value
     if source_cell.comment:
         target_cell.comment = copy.copy(source_cell.comment)

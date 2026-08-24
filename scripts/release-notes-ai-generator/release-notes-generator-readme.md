@@ -4,10 +4,10 @@
 
 The generator uses a two-phase workflow:
 
-1. **`generate`** (Phase 1): Processes the source Excel workbook — runs preprocessing, calls AI to generate release notes, and writes results back to Excel. Automatically skips rows that already have valid AI-generated notes, so re-running after an interruption resumes from where it left off.
+1. **`generate`** (Phase 1): Processes the source Excel workbook. It runs preprocessing, calls AI to generate release notes, and writes results back to Excel. It automatically skips rows that already have valid AI-generated notes, so re-running after an interruption resumes from where it left off.
 2. **`export-markdown`** (Phase 2): Reads the processed Excel and exports a Markdown release note file. Does not call AI or modify the Excel.
 
-The source workbook is never overwritten. All processing results are written to a processed workbook (`<original-name>_processed.xlsx`).
+The source workbook is not overwritten by default. All processing results are written to a processed workbook (`<original-name>_processed.xlsx`) unless `--output-excel` explicitly points to the source workbook.
 
 ## What it does
 
@@ -55,7 +55,7 @@ The generator does not create a complete formal release note. It does not genera
 - Prepare a GitHub token with access to the public repositories and set the GitHub token in the `GITHUB_TOKEN` environment variable:
 
     ```bash
-    export GITHUB_TOKEN=<your-github-token>
+    export GITHUB_TOKEN="your-github-token"
     ```
 
 - Prepare the AI settings in your environment.
@@ -63,11 +63,12 @@ The generator does not create a complete formal release note. It does not genera
 - If you use `--ai-provider azure` instead, set the following environment variables:
 
     ```bash
-    export AZURE_OPENAI_KEY=<your-key>
-    export AZURE_OPENAI_BASE_URL=<your-endpoint>
+    export AZURE_OPENAI_KEY="your-key"
+    export AZURE_OPENAI_BASE_URL="https://your-resource.openai.azure.com"
+    export AZURE_OPENAI_DEPLOYMENT="your-deployment-name"
     ```
 
-    The installed `openai` Python package must support the Responses API used by the generator.
+    `AZURE_OPENAI_BASE_URL` can be the Azure OpenAI resource endpoint or the full endpoint ending in `/openai/v1/`. The installed `openai` Python package must support the Responses API used by the generator.
 
 - If you use Codex CLI, install and log in to Codex CLI. The default `--ai-command` uses `codex exec`, so the installed Codex CLI must support `exec`, `--sandbox read-only`, `--ephemeral`, `--output-schema`, `--output-last-message`, and `-m <model>`.
 
@@ -86,8 +87,8 @@ Use Azure OpenAI:
 cd scripts
 python3 -m release-notes-ai-generator generate \
     --version 8.5.8 \
-    --excel </path/to/release-note-excel.xlsx> \
-    --releases-dir </path/to/releases-folder> \
+    --excel /path/to/release-note-excel.xlsx \
+    --releases-dir ../releases \
     --ai-provider azure
 ```
 
@@ -98,7 +99,7 @@ cd scripts
 python3 -m release-notes-ai-generator generate \
     --version 8.5.8 \
     --excel /path/to/release-note-excel.xlsx \
-    --releases-dir </path/to/releases-folder>
+    --releases-dir ../releases
 ```
 
 ### Phase 2: Export Markdown from processed Excel
@@ -108,9 +109,9 @@ After Phase 1 is fully complete, export the Markdown:
 ```bash
 cd scripts
 python3 -m release-notes-ai-generator export-markdown \
-    --version <tidb-version, for example 8.5.8> \
-    --excel </path/to/release-note-excel_processed.xlsx> \
-    --releases-dir </path/to/releases-folder> \
+    --version 8.5.8 \
+    --excel /path/to/release-note-excel_processed.xlsx \
+    --releases-dir ../releases
 ```
 
 ## Option descriptions
@@ -125,7 +126,7 @@ python3 -m release-notes-ai-generator export-markdown \
 | `--sheet <sheet-name>` | No | `pr_for_release_note` | Workbook sheet to process. |
 | `--ai-provider <provider>` | No | `codex` | AI provider to use. `codex` runs the Codex CLI as a subprocess. `azure` calls Azure OpenAI via the OpenAI Python SDK. |
 | `--ai-command <command>` | No | `codex --ask-for-approval never exec --sandbox read-only --ephemeral` | Command used to invoke the AI generator (only used with `--ai-provider codex`). |
-| `--ai-model <model>` | No | `gpt-5.4` | Model name. Passed to `codex exec` with `-m`, or used as the model parameter for Azure OpenAI. |
+| `--ai-model <model>` | No | `gpt-5.4` for Codex; `AZURE_OPENAI_DEPLOYMENT` for Azure OpenAI | Model name passed to `codex exec` with `-m`, or the Azure OpenAI deployment name. |
 | `--involve-ai-generation <ON\|OFF>` | No | `ON` | Whether to generate release notes and analyze variable or configuration documentation impact with AI. Use `OFF` to skip AI analysis and only run preprocessing. |
 | `--ai-timeout <seconds>` | No | `600` | Timeout in seconds for each AI command invocation. |
 | `--ai-workers <count>` | No | `3` | Number of concurrent AI command invocations. |
