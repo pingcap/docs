@@ -62,7 +62,7 @@ PoC 用の[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-d
 
 1.  PoC申請フォームにご記入ください。
 
-    [TiDB Cloudコンソール](https://tidbcloud.com/)で、右下隅の**[?]**をクリックし、 **Contact Sales**をクリックして、 **[Apply for PoC]** を選択して申請フォームに入力します。
+    [TiDB Cloudコンソール](https://tidbcloud.com/)で、右下隅の**?**をクリックし、 **Contact Sales**をクリックして、 **Apply for PoC**を選択して申請フォームに入力します。
 
     フォームを送信すると、 TiDB Cloudサポートチームが申請内容を確認し、ご連絡いたします。申請が承認され次第、アカウントにクレジットが付与されます。また、PingCAP サポートエンジニアにご連絡いただければ、PoC の手順をサポートし、PoC がスムーズに実行されるようサポートいたします。
 

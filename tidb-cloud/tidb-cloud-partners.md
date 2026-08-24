@@ -26,7 +26,7 @@ TiDB Cloudパートナーには 2 つの種類があります。
 再販業者には、日常の管理タスクを管理する 2 つの方法があります。
 
 -   [TiDB Cloudパートナーコンソール](https://partner-console.tidbcloud.com)
--   パートナー管理 API。オープン API ドキュメントは、 TiDB Cloudパートナー コンソールの**サポート**ページでご覧いただけます。
+-   パートナー管理 API。オープン API ドキュメントは、 TiDB Cloudパートナー コンソールの**Support**ページでご覧いただけます。
 
 ## マネージドサービスプロバイダー（MSP） {#managed-service-provider-msp}
 

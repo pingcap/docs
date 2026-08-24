@@ -9,7 +9,7 @@ summary: TiDB Cloudコンソールでデータベースユーザーとロール�
 
 > **Note:**
 >
-> -   **SQL Users**ページはパブリックプレビューであり、リクエストがあった場合のみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)**？**をクリックし、**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **Description**フィールドに「SQLユーザーページの申請」と入力して、 **Submit**をクリックします。
+> -   **SQL Users**ページはパブリックプレビューであり、リクエストがあった場合のみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**?**をクリックし、**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **Description**フィールドに「SQLユーザーページの申請」と入力して、 **Submit**をクリックします。
 > -   データベースのユーザーと役割[組織およびプロジェクトのユーザーと役割](/tidb-cloud/manage-user-access.md)から独立しています。データベース ユーザーは TiDB クラスター内のデータベースにアクセスするために使用され、組織およびプロジェクト ユーザーは[TiDB Cloudコンソール](https://tidbcloud.com/)内の組織およびプロジェクトにアクセスするために使用されます。
 > -   **SQL Users**ページに加えて、SQL クライアントを使用してクラスターに接続し、SQL ステートメントを作成することによって、データベース ユーザーとロールを管理することもできます。詳細については、 [TiDBユーザーアカウント管理](https://docs.pingcap.com/tidb/dev/user-account-management)を参照してください。
 
@@ -78,7 +78,7 @@ SQLユーザーのパスワードまたはロールを編集するには、以�
 
 1.  クラスターの[**SQL Users**](/tidb-cloud/configure-sql-users.md#view-sql-users)ページに移動します。
 
-2.  編集する SQL ユーザーの行で、 **[アクション**] 列の**[...** ] をクリックし、 **Edit**をクリックします。
+2.  編集する SQL ユーザーの行で、 **Action** 列の **...** をクリックし、 **Edit**をクリックします。
 
     SQLユーザー設定用のダイアログが表示されます。
 
@@ -94,7 +94,7 @@ SQLユーザーを削除するには、以下の手順を実行してくださ�
 
 1.  クラスターの[**SQL Users**](/tidb-cloud/configure-sql-users.md#view-sql-users)ページに移動します。
 
-2.  削除する SQL ユーザーの行で、 **[アクション**] 列の**[...]**をクリックし、 **Delete**をクリックします。
+2.  削除する SQL ユーザーの行で、 **Action** 列の **...** をクリックし、 **Delete**をクリックします。
 
     > **Note:**
     >

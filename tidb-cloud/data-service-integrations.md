@@ -39,4 +39,4 @@ summary: TiDB Cloudコンソールで、 TiDB CloudデータアプリをGPTやDi
 
 データアプリを[Dify](https://dify.ai/)と統合することで、ベクトル距離計算、高度な類似性検索、ベクトル解析などのインテリジェントな機能を追加し、アプリケーションを強化できます。
 
-データアプリをDifyと連携させるには、 [GPT統合](#integrate-your-data-app-with-gpts)の場合と同じ手順に従ってください。唯一の違いは、 **[連携]**タブの**[Difyとの連携]**エリアで**Get Configuration**をクリックする必要がある点です。
+データアプリをDifyと連携させるには、 [GPT統合](#integrate-your-data-app-with-gpts)の場合と同じ手順に従ってください。唯一の違いは、 **Integrations**タブの**Integrate with Dify**エリアで**Get Configuration**をクリックする必要がある点です。

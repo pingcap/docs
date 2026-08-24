@@ -74,11 +74,11 @@ TiDB Cloudクラスターでエラーが発生した場合は、ドキュメン�
 
 ### 移行タスクが中断され、「ドライバー: 接続不良」または「無効な接続」というエラーが含まれています。 {#the-migration-task-is-interrupted-and-contains-the-error-driver-bad-connection-or-invalid-connection}
 
-このエラーは、ダウンストリームの TiDB クラスタへの接続に失敗したことを意味します。ダウンストリームの TiDB クラスタが正常な状態（ `Available`および`Modifying`を含む）であり、ジョブで指定されたユーザー名とパスワードで接続できるかどうかを確認してください。ダウンストリームの TiDB クラスタが利用可能であることを確認したら、 **[再起動]**をクリックしてタスクを再開してみてください。
+このエラーは、ダウンストリームの TiDB クラスタへの接続に失敗したことを意味します。ダウンストリームの TiDB クラスタが正常な状態（ `Available`および`Modifying`を含む）であり、ジョブで指定されたユーザー名とパスワードで接続できるかどうかを確認してください。ダウンストリームの TiDB クラスタが利用可能であることを確認したら、 **Restart**をクリックしてタスクを再開してみてください。
 
 ### エラーメッセージ：「指定されたユーザー名とパスワードを使用してTiDBクラスタに接続できませんでした。TiDBクラスタが起動しており、指定されたユーザー名とパスワードで接続できることを確認してください。」 {#error-message-failed-to-connect-to-the-tidb-cluster-using-the-given-user-and-password-please-make-sure-tidb-cluster-is-up-and-can-be-connected-to-using-the-given-user-and-password}
 
-TiDB クラスターへの接続に失敗しました。TiDB クラスターが正常な状態（ `Available`および`Modifying`を含む）であるかどうかを確認することをお勧めします。ジョブで指定されたユーザー名とパスワードを使用して接続できます。TiDB クラスターが利用可能であることを確認したら、 **[再起動]**をクリックしてタスクを再開してみてください。
+TiDB クラスターへの接続に失敗しました。TiDB クラスターが正常な状態（ `Available`および`Modifying`を含む）であるかどうかを確認することをお勧めします。ジョブで指定されたユーザー名とパスワードを使用して接続できます。TiDB クラスターが利用可能であることを確認したら、 **Restart**をクリックしてタスクを再開してみてください。
 
 ### エラーメッセージ：「TiDBクラスタのストレージが不足しています。TiKVのノードストレージを増やしてください。」 {#error-message-tidb-cluster-storage-is-not-enough-please-increase-the-node-storage-of-tikv}
 
@@ -92,7 +92,7 @@ TiDB クラスターのストレージが不足しています。 [TiKVノード
 
 ダウンストリームのTiDBクラスタでスキーマを作成できませんでした。このエラーは、アップストリームのMySQLで使用されている照合順序がTiDBクラスタでサポートされていないことを意味します。
 
-この問題を解決するには、 [サポートされている照合順序](/character-set-and-collation.md#character-sets-and-collations-supported-by-tidb)に基づいて TiDB クラスターにスキーマを作成し、 **[再起動]**をクリックしてタスクを再開します。
+この問題を解決するには、 [サポートされている照合順序](/character-set-and-collation.md#character-sets-and-collations-supported-by-tidb)に基づいて TiDB クラスターにスキーマを作成し、 **Restart**をクリックしてタスクを再開します。
 
 ### エラーメッセージ：「LOCK TABLES ... アクセスが拒否されました」 {#error-message-lock-tables-access-denied}
 

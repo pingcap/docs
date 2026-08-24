@@ -89,7 +89,7 @@ Cloud Organization SSO を有効にするには、次の手順を実行します
     >
     > Cloud Organization SSO を有効にすると、URL を変更できなくなります。組織のメンバーは、カスタム URL を使用してのみTiDB Cloudにログインできるようになります。後で設定済みの URL を変更する必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-5.  **[I understand and confirm]**チェックボックスをクリックし、 **Enable**をクリックします。
+5.  **I understand and confirm**チェックボックスをクリックし、 **Enable**をクリックします。
 
     > **Note:**
     >

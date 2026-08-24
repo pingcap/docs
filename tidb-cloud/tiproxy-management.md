@@ -104,7 +104,7 @@ TiProxyの請求書を表示するには、以下の手順を実行してくだ�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)では、左上隅のコンボボックスを使用して、対象の組織に切り替えてください。
 2.  左側のナビゲーションペインで**Billing**をクリックします。 **Billing**ページでは、デフォルトで**Bills**タブが表示されます。
-3.  **Summary by Service**セクションでは、TiProxy ノードのコストは**TiDB Dedicated**の下に表示され、TiProxy のデータ転送コストは**データ転送 &gt; 同一リージョン**に含まれています。
+3.  **Summary by Service**セクションでは、TiProxy ノードのコストは**TiDB Dedicated**の下に表示され、TiProxy のデータ転送コストは**Data Transfer > Same Region**に含まれています。
 
 ![TiProxy Billing](/media/tidb-cloud/tiproxy-billing.png)
 

@@ -18,7 +18,7 @@ summary: TiDB Cloudコンソールでパスワードを管理し、多要素認�
 
 1.  TiDB Cloud [サインアップ](https://tidbcloud.com/free-trial)ページに移動し、登録情報を入力します。
 
-2.  プライバシー ポリシーとサービス契約を読み、 **[プライバシー ポリシーとサービス契約に同意する]**を選択します。
+2.  プライバシー ポリシーとサービス契約を読み、 **I agree to the Privacy Policy and Services Agreement**を選択します。
 
 3.  **Sign up**をクリックします。
 
