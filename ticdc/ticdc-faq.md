@@ -413,7 +413,7 @@ TiCDC v6.5.2より前のバージョンでは、TiCDCをダウンストリーム
 2. TiCDCはDDLステートメントのレプリケーションを継続します。複数のDDLステートメントがある場合、TiCDCは通常それらを順番にレプリケーションします。
 3. DDL ステートメントがダウンストリームで実行された後、TiCDC は DDL `commitTS`の後に実行された DML ステートメントのレプリケーションを続行します。
 
-`ADD INDEX` および `CREATE INDEX` については、ダウンストリームが TiDB の場合、TiCDC は changefeed レプリケーションのレイテンシーへの影響を最小限に抑えるために、これらの DDL を非同期に実行し、ダウンストリームでの実行完了を待たずに戻ります。詳細については、 [ `ADD INDEX`および`CREATE INDEX` DDLの非同期実行](/ticdc/ticdc-ddl.md#asynchronous-execution-of-add-index-and-create-index-ddls)を参照してください。
+`ADD INDEX` および `CREATE INDEX` については、ダウンストリームが TiDB の場合、TiCDC は changefeed レプリケーションのレイテンシーへの影響を最小限に抑えるために、これらの DDL を非同期に実行し、ダウンストリームでの実行完了を待たずに戻ります。詳細については、 [`ADD INDEX`および`CREATE INDEX` DDLの非同期実行](/ticdc/ticdc-ddl.md#asynchronous-execution-of-add-index-and-create-index-ddls)を参照してください。
 
 ## アップストリーム データとダウンストリーム データが一貫しているかどうかをどのように確認すればよいですか? {#how-should-i-check-whether-the-upstream-and-downstream-data-is-consistent}
 

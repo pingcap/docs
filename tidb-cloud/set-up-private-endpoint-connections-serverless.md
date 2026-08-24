@@ -161,7 +161,6 @@ AWSインターフェースエンドポイントを作成した後、対象のTi
 >
 > VPCエンドポイントを作成する際に、 `private-dns-enabled cannot be set because there is already a conflicting DNS domain for gatewayXX-privatelink.XX.prod.aws.tidbcloud.com in the VPC vpc-XXXXX`というエラーが発生した場合は、そのVPC内に既にプライベートエンドポイントが存在します。同じプライベートDNS名で別のエンドポイントを作成する必要はありません。
 
-
 ## AWSでプライベートエンドポイントを設定する（エンドポイント占有モデル） {#set-up-a-private-endpoint-with-aws-endpoint-exclusive-model}
 
 > **Note:**

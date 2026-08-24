@@ -700,6 +700,7 @@ mysql> SELECT * FROM t1;
 </CustomContent>
 
 ### max_user_connections <span class="version-mark">New in v8.5.7</span>
+
 - スコープ: GLOBAL
 - クラスターに永続化: Yes
 - ヒント [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) への適用: No
@@ -806,6 +807,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
     - TiDBインスタンスが多数存在するTiDBクラスタでは、リージョン情報に対する要求の同時発生率が高いため、PDリーダーに高いCPU負荷がかかります。
 
 ### performance_schema_session_connect_attrs_size <span class="version-mark">New in v8.5.7</span>
+
 - スコープ: GLOBAL
 - クラスターへの永続化: Yes
 - ヒント [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) への適用: No
@@ -2047,6 +2049,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - この変数は、非推奨の batch-dml 機能を有効にするかどうかを制御します。有効にすると、特定のステートメントが複数のトランザクションに分割される可能性があり、これは非アトミックであるため、慎重に使用する必要があります。batch-dml を使用する場合は、操作対象のデータに対して同時実行操作がないことを確認する必要があります。これを機能させるには、 `tidb_batch_dml_size`に正の値を指定し、 `tidb_batch_insert`と`tidb_batch_delete`の少なくとも 1 つを有効にする必要があります。
 
 ### `tidb_enable_batch_query_region` <span class="version-mark">New in v8.5.7</span>
+
 - スコープ: GLOBAL
 - クラスターへの永続化: Yes
 - ヒント [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) への適用: No
@@ -2339,6 +2342,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - この変数は、DML ステートメントの[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)機能を有効にするかどうかを制御します。
 
 ### tidb_enable_cache_prepare_stmt <span class="version-mark">New in v8.5.7</span>
+
 > **Warning:**
 >
 > 現在、この変数は実験的です。本番環境での使用は推奨されません。この変数は事前の通知なく変更または削除される可能性があります。バグを見つけた場合は、GitHub で [issue](https://github.com/pingcap/tidb/issues) を報告できます。
@@ -2838,6 +2842,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - この変数は、ステートメントサマリー機能を有効にするかどうかを制御するために使用されます。有効にすると、SQL実行時間などのSQL実行情報が`information_schema.STATEMENTS_SUMMARY`システムテーブルに記録され、SQLパフォーマンスの問題を特定してトラブルシューティングするために利用されます。
 
 ### tidb_enable_strict_not_null_check <span class="version-mark">New in v8.5.7</span>
+
 - スコープ: SESSION | GLOBAL
 - クラスターへの永続化: Yes
 - ヒント [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) への適用: No
@@ -4491,6 +4496,7 @@ mysql> desc select count(distinct a) from test.t;
 - この変数は`SELECT`リスト内のサブクエリを含むすべてのクエリに対して、オプティマイザが[`NO_DECORRELATE()`](/optimizer-hints.md#no_decorrelate)ヒントを適用するかどうかを制御します。
 
 ### tidb_opt_enable_alternative_logical_plans <span class="version-mark">New in v8.5.7</span>
+
 - スコープ: SESSION | GLOBAL
 - クラスターへの永続化: Yes
 - ヒント [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) への適用: Yes
