@@ -120,7 +120,7 @@ grep "connect to PD cluster" {{/path/to}}/tikv.log
 
 #### モニターから割り当てられたIDを取得する（推奨） {#get-allocated-id-from-the-monitor-recommended}
 
-モニターから割り当てられたIDを取得するには、表示しているメトリックが**前回のPDリーダー**のメトリックであることを確認する必要があります。また、PDダッシュボードの**現在のID割り当て**パネルから、最大の割り当て済みIDを取得できます。
+モニターから割り当てられたIDを取得するには、表示しているメトリックが**前回のPDリーダー**のメトリックであることを確認する必要があります。また、PDダッシュボードの**Current ID allocation**パネルから、最大の割り当て済みIDを取得できます。
 
 #### PDログから割り当てられたIDを取得する {#get-allocated-id-from-pd-log}
 

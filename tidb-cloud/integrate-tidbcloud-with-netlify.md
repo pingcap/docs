@@ -99,7 +99,7 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
 </div>
 <div label="TiDB Cloud console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)では、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットリソースの名前をクリックして概要ページに移動し、右上隅の**接続**をクリックします。表示されたダイアログで、接続文字列から以下の接続パラメータを取得できます。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)では、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットリソースの名前をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。表示されたダイアログで、接続文字列から以下の接続パラメータを取得できます。
 
     -   `${host}`
     -   `${port}`
@@ -136,7 +136,7 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
     netlify init
     ```
 
-    プロンプトが表示されたら、 **新しいサイトを作成して設定する**を選択し、GitHub にアクセス権を付与してください。その他のオプションはすべてデフォルト値を使用してください。
+    プロンプトが表示されたら、 **Create & configure a new site**を選択し、GitHub にアクセス権を付与してください。その他のオプションはすべてデフォルト値を使用してください。
 
     ```shell
     Adding local .netlify folder to .gitignore file...

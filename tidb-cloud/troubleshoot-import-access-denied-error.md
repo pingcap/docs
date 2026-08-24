@@ -17,6 +17,15 @@ TiDB Cloudコンソールの**Data Import**ページで**Next**をクリック�
 
 ### 信頼エンティティを確認する {#check-the-trust-entity}
 
+TiDB Cloud Account IDとTiDB Cloud External IDは環境およびクラスターごとに異なるため、このドキュメントに記載されている値をそのままコピーしないでください。代わりに、TiDB Cloudコンソールから取得してください。
+
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で対象のクラスターに移動し、左側のナビゲーション ペインで**Data** &gt; **Import**をクリックします。
+2.  **Import data from Cloud Storage**をクリックします。
+3.  **Import Data from Cloud Storage**ページで、クラウドプロバイダーとして**Amazon S3**を選択します。
+4.  **Credentials**セクションで**Click here to create new one with AWS CloudFormation**をクリックして**Add New Role ARN**ダイアログを開き、 **Having trouble? Create Role ARN manually**を展開して、このクラスターの**TiDB Cloud Account ID**と**TiDB Cloud External ID**を表示します。
+
+次に、IAMロールの信頼エンティティを確認します。
+
 1.  AWS マネジメントコンソールで、 **IAM** &gt;**Access Management**&gt;**Roles**に移動します。
 2.  ロールのリストで、ターゲットTiDBクラスター用に作成したロールを見つけてクリックします。ロールの概要ページが表示されます。
 3.  ロールの概要ページで、 **Trust relationships**タブをクリックすると、信頼されたエンティティが表示されます。

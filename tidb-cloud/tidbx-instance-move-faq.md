@@ -68,7 +68,7 @@ TiDB Cloudは、異なるリソースタイプとユースケースに対応す�
 それは、現在のプロジェクトの構造によって異なります。
 
 -   プロジェクトにTiDB Cloud StarterおよびEssentialインスタンスのみが含まれている場合、 TiDB Cloudは2026年4月15日に自動的にプロジェクトをTiDB Xプロジェクトに変換します。追加の操作は必要ありません。
--   プロジェクトにTiDB Cloud DedicatedクラスターとTiDB Cloud StarterまたはEssentialインスタンスの両方が含まれている場合、 TiDB Cloudコンソールは、上部のバナーにある**[Move & Unlock]**をクリックして、 TiDB Cloud StarterおよびEssentialインスタンスを新しい TiDB X プロジェクトに移動するように促します。
+-   プロジェクトにTiDB Cloud DedicatedクラスターとTiDB Cloud StarterまたはEssentialインスタンスの両方が含まれている場合、 TiDB Cloudコンソールは、上部のバナーにある**Move & Unlock**をクリックして、 TiDB Cloud StarterおよびEssentialインスタンスを新しい TiDB X プロジェクトに移動するように促します。
 
 ## 誰が移行作業を実行できますか？ {#who-can-perform-the-migration}
 
@@ -99,7 +99,7 @@ TiDB Cloudのリソースごとに異なるプロジェクトタイプが導入�
 >
 > TiDB Cloud Dedicatedクラスターは、移行後も元のプロジェクト内に残ります。したがって、この移行はTiDB Cloud Dedicatedクラスターに影響を与えません。
 
-あなたが`Organization Owner`の場合は、上部のバナーにある**[Move & Unlock]**をクリックし、移行ウィザードに従って移行を完了してください。
+あなたが`Organization Owner`の場合は、上部のバナーにある**Move & Unlock**をクリックし、移行ウィザードに従って移行を完了してください。
 
 移行ウィザードには、移行対象となるTiDB Cloud StarterおよびEssentialインスタンスのリストが表示され、新しい TiDB X プロジェクトの新しい名前を指定できます。
 

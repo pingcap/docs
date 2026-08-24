@@ -102,10 +102,10 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
 
 2.  対象の{{{ .premium }}}<CustomContent plan="byoc">または{{{ .byoc }}}</CustomContent>インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Export**をクリックします。
 
-3.  **エクスポート**ページで、右上隅にある**Export Data**をクリックします。次に、以下の設定を行います。
+3.  **Export**ページで、右上隅にある**Export Data**をクリックします。次に、以下の設定を行います。
 
     - **Task Name**：エクスポートタスクの名前を入力してください。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
-    - **Source Connection**：{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスの**ユーザー名**と**パスワード**を入力し、**Test Connection**をクリックして認証情報を確認します。
+    - **Source Connection**：{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスの**Username**と**Password**を入力し、**Test Connection**をクリックして認証情報を確認します。
     - **Target Connection**：
         - **Storage Provider**：Amazon S3を選択してください。
         - **Folder URI**：`s3://<bucket-name>/<folder-path>/`形式でAmazon S3のURIを入力してください。
@@ -114,9 +114,9 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
             - **AWS Access Key**：バケットへのアクセス権限を持つアクセスキーIDとアクセスキーシークレットを入力してください。
     - **Exported Data**：エクスポートするデータベースまたはテーブルを選択してください。
     - **Data Format**：**SQL**または**CSV**を選択してください。
-    - **圧縮**：**Gzip**、**Snappy**、**Zstd**、または**None**を選択してください。
+    - **Compression**：**Gzip**、**Snappy**、**Zstd**、または**None**を選択してください。
 
-4.  **エクスポート**をクリックします。
+4.  **Export**をクリックします。
 
 ### データをAzure Blob Storageにエクスポートする {#export-data-to-azure-blob-storage}
 
@@ -128,7 +128,7 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
 
 2.  対象の {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで **Data** > **Export** をクリックします。
 
-3.  **エクスポート**ページで、右上隅にある**Export Data**をクリックします。次に、以下の設定を行います。
+3.  **Export**ページで、右上隅にある**Export Data**をクリックします。次に、以下の設定を行います。
 
     - **Task Name**：エクスポートタスクの名前を入力してください。デフォルト値は `SNAPSHOT_{snapshot_time}` です。
     - **Source Connection**：{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスの **Username** と **Password** を入力し、**Test Connection** をクリックして認証情報を確認します。
@@ -138,9 +138,9 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
         - **SAS Token**：コンテナーへのアクセス権限を持つ SAS トークンを入力します。[Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/) を使用して SAS トークンを作成することを推奨します。詳細については、[外部ストレージへのアクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access) を参照してください。
     - **Exported Data**：エクスポートするデータベースまたはテーブルを選択してください。
     - **Data Format**：**SQL** または **CSV** を選択してください。
-    - **圧縮**：**Gzip**、**Snappy**、**Zstd**、または **None** を選択してください。
+    - **Compression**：**Gzip**、**Snappy**、**Zstd**、または **None** を選択してください。
 
-4.  **エクスポート**をクリックします。
+4.  **Export**をクリックします。
 
 ### データをAlibaba Cloud OSSにエクスポート {#export-data-to-alibaba-cloud-oss}
 
@@ -152,7 +152,7 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
 
 2.  対象の{{{ .premium }}}<CustomContent plan="byoc">または{{{ .byoc }}}</CustomContent>インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Export**をクリックします。
 
-3.  **エクスポート**ページで、右上隅にある**Export Data**をクリックします。
+3.  **Export**ページで、右上隅にある**Export Data**をクリックします。
 
     - **Task Name**：エクスポートタスクの名前を入力してください。デフォルト値は `SNAPSHOT_{snapshot_time}` です。
     - **Source Connection**：{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスの **Username** と **Password** を入力し、**Test Connection** をクリックして認証情報を確認します。
@@ -162,9 +162,9 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
         - **AccessKey ID** と **AccessKey Secret**：バケットへのアクセス権限を持つ AccessKey ID と AccessKey Secret を入力してください。
     - **Exported Data**：エクスポートするデータベースまたはテーブルを選択してください。
     - **Data Format**：**SQL** または **CSV** を選択してください。
-    - **圧縮**：**Gzip**、**Snappy**、**Zstd**、または **None** を選択してください。
+    - **Compression**：**Gzip**、**Snappy**、**Zstd**、または **None** を選択してください。
 
-4.  **エクスポート**をクリックします。
+4.  **Export**をクリックします。
 
 ### エクスポートタスクをキャンセルする {#cancel-an-export-task}
 
@@ -178,8 +178,8 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
 
 2. 対象の {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで **Data** > **Export** をクリックします。
 
-3.  **エクスポート**ページで、エクスポートタスク一覧を表示します。
+3.  **Export**ページで、エクスポートタスク一覧を表示します。
 
-4.  キャンセルしたいエクスポートタスクを選択し、 **[アクション]**をクリックします。
+4.  キャンセルしたいエクスポートタスクを選択し、 **Action**をクリックします。
 
-5.  ドロップダウンリストから**キャンセル**を選択してください。なお、キャンセルできるのは**実行中**ステータスのエクスポートタスクのみです。
+5.  ドロップダウンリストから**Cancel**を選択してください。なお、キャンセルできるのは**Running**ステータスのエクスポートタスクのみです。

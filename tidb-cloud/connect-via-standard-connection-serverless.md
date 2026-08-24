@@ -24,7 +24,7 @@ TiDB Cloudプランに応じて、適切なエンドポイントモデルを選�
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**接続**をクリックしてください。接続ダイアログが表示されます。
+2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
 3.  ダイアログでは、接続タイプのデフォルト設定を`Public`のままにして、希望する接続方法とオペレーティングシステムを選択して、対応する接続​​文字列を取得します。
 
@@ -49,7 +49,7 @@ TiDB Cloudプランに応じて、適切なエンドポイントモデルを選�
 
     </CustomContent>
 
-4.  TiDB Cloudでは、TiDB Cloud Starterインスタンス用に[ブランチ](https://docs.pingcap.com/tidbcloud/branch-overview/?plan=starter)を作成できます。ブランチが作成されると、**ブランチの**ドロップダウンリストからブランチに接続できます。 `main` TiDB Cloud Starterインスタンス自体を表します。
+4.  TiDB Cloudでは、TiDB Cloud Starterインスタンス用に[ブランチ](https://docs.pingcap.com/tidbcloud/branch-overview/?plan=starter)を作成できます。ブランチが作成されると、**Branch**のドロップダウンリストからブランチに接続できます。 `main` TiDB Cloud Starterインスタンス自体を表します。
 
 5.  まだパスワードを設定していない場合は、 **Generate Password**をクリックしてランダムなパスワードを生成してください。生成されたパスワードは二度と表示されませんので、安全な場所に保存してください。
 
@@ -97,11 +97,11 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのパブリッ
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+2.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
 
-3.  **ネットワーク設定**ページで、 **Public Endpoint**の**Public Endpoint**をクリックします。確認ダイアログが表示されます。
+3.  **Networking**ページで、 **Public Endpoint**の**Disable**をクリックします。確認ダイアログが表示されます。
 
-4.  確認ダイアログで**無効にする**をクリックしてください。
+4.  確認ダイアログで**Disable**をクリックしてください。
 
 パブリックエンドポイントを無効にすると、接続ダイアログの**Connection Type**ドロップダウンリストにある`Public`エントリが無効になります。ユーザーがパブリックエンドポイントからTiDB Cloud StarterまたはEssentialインスタンスにアクセスしようとすると、エラーが発生します。
 
@@ -113,9 +113,9 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのパブリッ
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+2.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
 
-3.  **ネットワークの**ページで、 **[有効にする]**をクリックします。
+3.  **Networking**のページで、 **Enable**をクリックします。
 
 ## 次は？ {#what-s-next}
 

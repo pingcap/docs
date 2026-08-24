@@ -143,7 +143,8 @@ AWS コンソールでアクセスキーを作成します。詳細について�
 
 2.  右上にあるナビゲーションバーでユーザー名を選択し、 **My Security Credentials**をクリックします。
 
-3.  アクセスキーを作成するには、 **Create access key**をクリックします。次に、 **Download .csv file**を選択して、アクセスキー ID とシークレットアクセスキーをコンピュータの CSV ファイルに保存します。このファイルは安全な場所に保存してください。このダイアログボックスを閉じると、シークレットアクセスキーには再度アクセスできなくなります。CSV ファイルをダウンロードしたら、 **閉じる**を選択します。アクセスキーを作成すると、キーペアはデフォルトで有効になり、すぐに使用できます。
+3.  アクセスキーを作成するには、 **Create access key**をクリックします。次に、 **Download .csv file**を選択して、アクセスキー ID とシークレットアクセスキーをコンピュータの CSV ファイルに保存します。このファイルは安全な場所に保存してください。このダイアログボックスを閉じると、シークレットアクセスキーには再度アクセスできなくなります。CSV ファイルをダウンロードしたら、 **Close**を選択します。アクセスキーを作成すると、キーペアはデフォルトで有効になり、すぐに使用できます。
+
     ![Create access key](/media/tidb-cloud/op-to-cloud-create-access-key01.png)
 
     ![Download CSV file](/media/tidb-cloud/op-to-cloud-create-access-key02.png)
@@ -283,17 +284,17 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 2.  TiCDCがTiDB Cloudに接続できるようにします。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲット リソースの名前をクリックして、その概要ページに移動します。
-    2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+    2.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
     3.  TiDB Cloudのプランに応じて、TiCDCがTiDB Cloudに接続できるようにするために、以下のいずれかの操作を行ってください。
 
-        -   TiDB Cloud StarterまたはEssentialの場合は、 **Authorized Networks**セクションで**Add rule**をクリックします。表示されたダイアログで、TiCDCコンポーネントのパブリック IP アドレスを使用するファイアウォールルールを追加し、 **[保存]**をクリックします。詳細については、 [パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md#create-and-manage-a-firewall-rule)を参照してください。
-        -   TiDB Cloud Dedicatedの場合は、 **Add IP Address**をクリックします。表示されたダイアログで、 **[IP アドレスを使用する]**を選択し、 [ **+]**をクリックし、TiCDCコンポーネントのパブリック IP アドレスを**IP Address**フィールドに入力して、 **[確認]**をクリックします。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
+        -   TiDB Cloud StarterまたはEssentialの場合は、 **Authorized Networks**セクションで**Add rule**をクリックします。表示されたダイアログで、TiCDCコンポーネントのパブリック IP アドレスを使用するファイアウォールルールを追加し、 **Save**をクリックします。詳細については、 [パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md#create-and-manage-a-firewall-rule)を参照してください。
+        -   TiDB Cloud Dedicatedの場合は、 **Add IP Address**をクリックします。表示されたダイアログで、 **Use IP addresses**を選択し、 **+**をクリックし、TiCDCコンポーネントのパブリック IP アドレスを**IP Address**フィールドに入力して、 **Confirm**をクリックします。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
 
 3.  下流のTiDB Cloudリソースの接続情報を取得します。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloudリソースの名前をクリックして、その概要ページに移動します。
-    2.  右上隅の**接続**をクリックしてください。
-    3.  接続ダイアログで、 **接続タイプ**ドロップダウンリストから**Connection Type**を選択し、 **接続先**ドロップダウンリストから**Connect With**を選択します。
+    2.  右上隅の**Connect**をクリックしてください。
+    3.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **Connect With**ドロップダウンリストから**General**を選択します。
     4.  接続情報から、 TiDB Cloudリソースのホスト IP アドレスとポートを取得できます。詳細については、 [公共回線経由で接続する](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
 
 4.  増分レプリケーションタスクを作成して実行します。アップストリームクラスターで、以下を実行します。

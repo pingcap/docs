@@ -22,7 +22,7 @@ summary: TiDB Dashboard診断レポートでは、基本情報、診断情報、
 
 ![Sample report](/media/dashboard/dashboard-diagnostics-example-table.png)
 
-上の画像では、上部の青い枠内の**Total Time Consume（総消費時間）**がレポート名です。下部の赤い枠内の情報は、このレポートの内容と各フィールドの意味を説明しています。
+上の画像では、上部の青い枠内の**Total Time Consume**がレポート名です。下部の赤い枠内の情報は、このレポートの内容と各フィールドの意味を説明しています。
 
 このレポートでは、いくつかの小さなボタンについて次のように説明しています。
 

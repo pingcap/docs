@@ -16,7 +16,7 @@ summary: Amazon MSK プロビジョニングされたプライベートリンク
 
 AWS アカウント ID とアベイラビリティーゾーンを表示するには:
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**[設定]** &gt; **[ネットワーク]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
 2.  **[外部サービス向け AWS プライベートエンドポイント]**領域で、**[外部サービス向けプライベートエンドポイントを作成]**をクリックします。
 3.  ダイアログで、AWS アカウント ID とアベイラビリティーゾーンをメモします。
 
@@ -25,7 +25,7 @@ AWS アカウント ID とアベイラビリティーゾーンを表示するに
 始める前に、Amazon MSK プロビジョニングされたクラスターについて次の点を確認してください。
 
 -   **リージョンと AZ** : Amazon MSK プロビジョニングされたクラスターは、 TiDB Cloud Essentialクラスターと同じ AWS リージョンにあり、MSK クラスターのアベイラビリティーゾーンはTiDB Cloudクラスターと同じです。
--   MSK クラスターには**認証**: [SASL/SCRAM認証](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html)が必要です。
+-   MSK クラスターには**Authentication**: [SASL/SCRAM認証](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html)が必要です。
 -   **Broker type**: ブローカー`t4.small`タイプは使用しないでください。プライベートリンクをサポートしていません。
 
 詳細な要件については、 [単一リージョンでの Amazon MSK マルチ VPC プライベート接続](https://docs.aws.amazon.com/msk/latest/developerguide/aws-access-mult-vpc.html#mvpc-requirements)を参照してください。
@@ -148,7 +148,7 @@ SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同
 
 クラスターがアクティブになった後、MSKクラスターの場合は[マルチVPC接続を有効にする](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-turn-on.html) 。AWS PrivateLinkにはマルチVPC接続が必要です。TiDB Cloudから接続するには、SASL/SCRAM認証を有効にする必要があります。
 
-クラスターのステータスが**更新中**から**アクティブ**に再度変わるまで待ちます。
+クラスターのステータスが**Updating**から**Active**に再度変わるまで待ちます。
 
 ## ステップ 5. TiDB Cloudで Amazon MSK プロビジョニングされたプライベートリンク接続を作成する {#step-5-create-an-amazon-msk-provisioned-private-link-connection-in-tidb-cloud}
 

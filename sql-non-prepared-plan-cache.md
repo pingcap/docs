@@ -99,7 +99,7 @@ After you enable this feature, the optimizer quickly evaluates the query. If it 
 
 ただし、この機能は、クエリがサポートされているかどうかの判断、クエリのパラメータ化、キャッシュ内のプランの検索など、メモリとCPUのオーバーヘッドを増加させます。ワークロード内のクエリの大部分をキャッシュで処理できない場合、この機能を有効にするとパフォーマンスに悪影響を与える可能性があります。
 
-この場合、Grafanaの**プランキャッシュを使用しているクエリOPS**パネルの「 `non-prepared`メトリックと**プランキャッシュミスOPS**パネルの「 `non-prepared-unsupported`メトリックを確認する必要があります。ほとんどのクエリがサポートされておらず、プランキャッシュにヒットできるクエリがごくわずかである場合は、この機能を無効にできます。
+この場合、Grafanaの**Queries Using Plan Cache OPS**パネルの「 `non-prepared`メトリックと**Plan Cache Miss OPS**パネルの「 `non-prepared-unsupported`メトリックを確認する必要があります。ほとんどのクエリがサポートされておらず、プランキャッシュにヒットできるクエリがごくわずかである場合は、この機能を無効にできます。
 
 ![non-prepared-unsupported](/media/non-prepapred-plan-cache-unsupprot.png)
 

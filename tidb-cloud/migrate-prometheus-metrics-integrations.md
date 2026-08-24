@@ -25,9 +25,9 @@ Prometheusとの連携を移行するには、以下の手順を実行してく�
 
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  左側のナビゲーションパネルで、 **プロジェクト設定**の下にある**Project Settings**をクリックします。
+3.  左側のナビゲーションパネルで、 **Project Settings**の下にある**Project Settings**をクリックします。
 
-4.  **[統合]** &gt; **Integration to Prometheus (BETA)**モジュールで、 **[Scrape_config Files]**を選択し、 **[削除]**をクリックします。
+4.  **Integrations** &gt; **Integration to Prometheus (BETA)**モジュールで、 **[Scrape_config Files]**を選択し、 **Delete**をクリックします。
 
 5.  表示されたダイアログで、 `Delete`と入力して、従来の統合機能の削除を確認します。
 
@@ -37,9 +37,9 @@ Prometheusとの連携を移行するには、以下の手順を実行してく�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
 
-2.  左側のナビゲーションパネルで、 **[設定]** &gt; **[統合]**をクリックします。
+2.  左側のナビゲーションパネルで、 **Settings** &gt; **Integrations**をクリックします。
 
-3.  **[統合]**ページで、新しい Prometheus 統合を作成します。詳細については、 [TiDB CloudをPrometheusおよびGrafanaと統合する](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)を参照してください。
+3.  **Integrations**ページで、新しい Prometheus 統合を作成します。詳細については、 [TiDB CloudをPrometheusおよびGrafanaと統合する](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)を参照してください。
 
 ## プロジェクトレベルのPrometheus統合を削除した場合の影響（ベータ版） {#impact-of-deleting-the-project-level-prometheus-integration-beta}
 

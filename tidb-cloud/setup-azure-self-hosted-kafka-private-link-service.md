@@ -35,14 +35,14 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 3.  [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターから Kafka デプロイメント情報を取得します。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com)で[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲットクラスターの名前をクリックして概要ページに移動します。
-    2.  左側のナビゲーションペインで、 **[データ]** &gt; **[Changefeed] を**クリックします。
+    2.  左側のナビゲーションペインで、 **Data** &gt; **Changefeed**をクリックします。
     3.  **Changefeed**ページで、右上隅の**Create Changefeed**をクリックし、次の情報を入力します。
-        1.  **宛先**で、 **Kafka**を選択します。
+        1.  **Destination**で、 **Kafka**を選択します。
         2.  **Connectivity Method**で**Private Link**を選択します。
     4.  続行する前に、 TiDB Cloud Azureアカウントのリージョン情報とサブスクリプションを**リマインダー**に書き留めておいてください。この情報は、TiDB CloudがKafka Private Linkサービスにアクセスできるように承認する際に使用します。
     5.  一意のランダム文字列を指定して、Kafka プライベートリンクサービス用の**Kafka Advertised Listener Pattern**を生成します。
         1.  一意のランダム文字列を入力してください。数字または小文字のみ使用できます。この文字列は、後ほど**Kafka Advertised Listener Pattern**を生成する際に使用します。
-        2.  **「使用状況を確認して生成」をクリックすると、**ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズリスナーを組み立てるために使用される**Kafka Advertised Listener Pattern**が生成されます。
+        2.  **Check usage and generate**をクリックすると、ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズリスナーを組み立てるために使用される**Kafka Advertised Listener Pattern**が生成されます。
 
 すべてのデプロイメント情報をメモしてください。後でKafka Private Linkサービスを設定する際に必要になります。
 
@@ -66,45 +66,45 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 
 1.  [Azureポータル](https://portal.azure.com/)にログインし、 [仮想ネットワーク](https://portal.azure.com/#browse/Microsoft.Network%2FvirtualNetworks)ページに移動して、 **+ Create**をクリックして仮想ネットワークを作成します。
 
-2.  **[基本]**タブで、 **[サブスクリプション]** 、 **Resource group** 、および**[リージョン]**を選択し、 **[仮想ネットワーク名]**フィールドに名前 (たとえば、 `kafka-pls-vnet` ) を入力して、 **[次へ]**をクリックします。
+2.  **Basic**タブで、 **Subscription** 、 **Resource group** 、および**Region**を選択し、 **[仮想ネットワーク名]**フィールドに名前 (たとえば、 `kafka-pls-vnet` ) を入力して、 **Next**をクリックします。
 
-3.  **[セキュリティ]**タブで、Azure Bastion を有効にし、 **[次へ]**をクリックします。
+3.  **Security**タブで、Azure Bastion を有効にし、 **Next**をクリックします。
 
 4.  **IP addresses**タブで、次の操作を行います。
 
     1.  仮想ネットワークのアドレス空間を設定します (例: `10.0.0.0/16` )。
     2.  ブローカーのサブネットを作成するには、 **[サブネットの追加]**をクリックし、次の情報を入力して、 **[追加]**をクリックします。
 
-        -   **名前**: `brokers-subnet`
+        -   **Name**: `brokers-subnet`
         -   **IPアドレス範囲**: `10.0.0.0/24`
-        -   **サイズ**: `/24 (256 addresses)`
+        -   **Size**: `/24 (256 addresses)`
 
         デフォルトでは`AzureBastionSubnet`が作成されます。
 
-5.  情報を確認するには、 **確認 + 作成**をクリックします。
+5.  情報を確認するには、 **Review + create**をクリックします。
 
-6.  **[作成]を**クリックします。
+6.  **Create**をクリックします。
 
 #### 2. Kafkaブローカーを設定する {#2-set-up-kafka-brokers}
 
 **2.1. ブローカーノードを作成する**
 
 1.  [Azureポータル](https://portal.azure.com/)にログインし、 [仮想マシン](https://portal.azure.com/#view/Microsoft_Azure_ComputeHub/ComputeHubMenuBlade/~/virtualMachinesBrowse)ページに移動して**+ Create**をクリックし、 **[Azure 仮想マシン]**を選択します。
-2.  **[基本]**タブで、**サブスクリプション**、**Resource group**、**リージョン**を選択し、次の情報を入力して、 **[次へ: ディスク]**をクリックします。
+2.  **Basic**タブで、**Subscription**、**Resource group**、**Region**を選択し、次の情報を入力して、 **[次へ: ディスク]**をクリックします。
     -   **仮想マシン名**: `broker-node`
     -   **Availability options**: `Availability zone`
     -   **Zone options**: `Self-selected zone`
     -   `Zone 3` `Zone 2`**Availability zone**: `Zone 1`
-    -   **画像**： `Ubuntu Server 24.04 LTS - x64 Gen2`
+    -   **Image**： `Ubuntu Server 24.04 LTS - x64 Gen2`
     -   **VM architecture:** `x64`
-    -   **サイズ**: `Standard_D2s_v3`
+    -   **Size**: `Standard_D2s_v3`
     -   **Authentication type**: `SSH public key`
-    -   **ユーザー名**: `azureuser`
+    -   **Username**: `azureuser`
     -   **SSH public key source:** `Generate new key pair`
     -   **Key pair name**: `kafka_broker_key`
     -   **Public inbound ports**: `Allow selected ports`
     -   **Select inbound ports**: `SSH (22)`
-3.  **Next : Networking**をクリックし、 **[ネットワーク]**タブに次の情報を入力します。
+3.  **Next : Networking**をクリックし、 **Networking**タブに次の情報を入力します。
     -   **Virtual network**： `kafka-pls-vnet`
     -   **サブネット**: `brokers-subnet`
     -   **Public IP** : `None`
@@ -112,9 +112,9 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     -   **Public inbound ports**: `Allow selected ports`
     -   受信ポートを選択: `SSH (22)`
     -   **Load balancing options**: `None`
-4.  情報を確認するには、 **確認 + 作成**をクリックします。
-5.  **作成**をクリックします。**Generate new key pair**メッセージが表示されます。
-6.  **「秘密鍵をダウンロードしてリソースを作成」をクリックして、**秘密鍵をローカルマシンにダウンロードします。仮想マシンの作成の進行状況を確認できます。
+4.  情報を確認するには、 **Review + create**をクリックします。
+5.  **Create**をクリックします。**Generate new key pair**メッセージが表示されます。
+6.  **Download private key and create resource**をクリックして、秘密鍵をローカルマシンにダウンロードします。仮想マシンの作成の進行状況を確認できます。
 
 **2.2. Kafka ランタイムバイナリの準備**
 
@@ -125,11 +125,11 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 2.  ブローカーノードの各ページで、左側のナビゲーションペインの**Connect > Bastion**をクリックし、次の情報を入力します。
 
     -   **Authentication Type**: `SSH Private Key from Local File`
-    -   **ユーザー名**: `azureuser`
+    -   **Username**: `azureuser`
     -   **Local File**: 以前にダウンロードした秘密鍵ファイルを選択します
-    -   **新しいブラウザタブで開く**オプションを選択します
+    -   **Open in new browser tab**オプションを選択します
 
-3.  ブローカーノードの各ページで**接続**をクリックすると、Linuxターミナルで新しいブラウザタブが開きます。3つのブローカーノードごとに、Linuxターミナルで3つのブラウザタブを開く必要があります。
+3.  ブローカーノードの各ページで**Connect**をクリックすると、Linuxターミナルで新しいブラウザタブが開きます。3つのブローカーノードごとに、Linuxターミナルで3つのブラウザタブを開く必要があります。
 
 4.  各 Linux ターミナルで次のコマンドを実行して、各ブローカーノードにバイナリをダウンロードします。
 
@@ -428,16 +428,16 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 1.  [Azureポータル](https://portal.azure.com/)にログインし、 [負荷分散](https://portal.azure.com/#view/Microsoft_Azure_Network/LoadBalancingHubMenuBlade/~/loadBalancers)ページに移動して、 **+ Create**をクリックしてロードバランサーを作成します。
 
-2.  **[基本]**タブで、**サブスクリプション**、**Resource group**、**リージョン**を選択し、次のインスタンス情報を入力して、 **[次へ: フロントエンド IP 構成 &gt;]**をクリックします。
+2.  **Basic**タブで、**Subscription**、**Resource group**、**Region**を選択し、次のインスタンス情報を入力して、 **[次へ: フロントエンド IP 構成 &gt;]**をクリックします。
 
-    -   **名前**: `kafka-lb`
+    -   **Name**: `kafka-lb`
     -   **SKU** : `Standard`
-    -   **タイプ**: `Internal`
-    -   **ティア**: `Regional`
+    -   **Type**: `Internal`
+    -   **Tier**: `Regional`
 
-3.  **Frontend IP configuration**タブで、 **[+ フロントエンド IP 構成の追加]**をクリックし、次の情報を入力して**[保存]**をクリックし、 **[次へ: バックエンド プール &gt;]**をクリックします。
+3.  **Frontend IP configuration**タブで、 **[+ フロントエンド IP 構成の追加]**をクリックし、次の情報を入力して**Save**をクリックし、 **[次へ: バックエンド プール &gt;]**をクリックします。
 
-    -   **名前**: `kafka-lb-ip`
+    -   **Name**: `kafka-lb-ip`
     -   **IP version**: `IPv4`
     -   **Virtual network**： `kafka-pls-vnet`
     -   **サブネット**: `brokers-subnet`
@@ -454,55 +454,55 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
     1.  ルール1
 
-        -   **名前**: `rule1`
+        -   **Name**: `rule1`
         -   **IP version**: `IPv4`
         -   **Frontend IP address**: `kafka-lb-ip`
         -   **Backend pool**: `pool1`
-        -   **プロトコル**： `TCP`
-        -   **ポート**: `9093`
+        -   **Protocol**： `TCP`
+        -   **Port**: `9093`
         -   **Backend port**: `39092`
         -   **Health probe**: **Create New**をクリックし、プローブ情報を入力します。
-            -   **名前**: `kafka-lb-hp`
-            -   **プロトコル**： `TCP`
-            -   **ポート**: `39092`
+            -   **Name**: `kafka-lb-hp`
+            -   **Protocol**： `TCP`
+            -   **Port**: `39092`
 
     2.  ルール2
 
-        -   **名前**: `rule2`
+        -   **Name**: `rule2`
         -   **IP version**: `IPv4`
         -   **Frontend IP address**: `kafka-lb-ip`
         -   **Backend pool**: `pool2`
-        -   **プロトコル**： `TCP`
-        -   **ポート**: `9094`
+        -   **Protocol**： `TCP`
+        -   **Port**: `9094`
         -   **Backend port**: `39092`
         -   **Health probe**: **Create New**をクリックし、プローブ情報を入力します。
-            -   **名前**: `kafka-lb-hp`
-            -   **プロトコル**： `TCP`
-            -   **ポート**: `39092`
+            -   **Name**: `kafka-lb-hp`
+            -   **Protocol**： `TCP`
+            -   **Port**: `39092`
 
     3.  ルール3
 
-        -   **名前**: `rule3`
+        -   **Name**: `rule3`
         -   **IP version**: `IPv4`
         -   **Frontend IP address**: `kafka-lb-ip`
         -   **Backend pool**: `pool3`
-        -   **プロトコル**： `TCP`
-        -   **ポート**: `9095`
+        -   **Protocol**： `TCP`
+        -   **Port**: `9095`
         -   **Backend port**: `39092`
         -   **Health probe**: **Create New**をクリックし、プローブ情報を入力します。
-            -   **名前**: `kafka-lb-hp`
-            -   **プロトコル**： `TCP`
-            -   **ポート**: `39092`
+            -   **Name**: `kafka-lb-hp`
+            -   **Protocol**： `TCP`
+            -   **Port**: `39092`
 
 6.  **Next : Outbound rule**をクリックし、 **Next : Tags >**をクリックしてから、 **[次へ: 確認と作成]**をクリックして情報を確認します。
 
-7.  **[作成]を**クリックします。
+7.  **Create**をクリックします。
 
 ### 2. プライベートリンクサービスを設定する {#2-set-up-private-link-service}
 
 1.  [Azureポータル](https://portal.azure.com/)にログインし、 [プライベートリンクサービス](https://portal.azure.com/#view/Microsoft_Azure_Network/PrivateLinkCenterBlade/~/privatelinkservices)ページに移動して、 **+ Create**をクリックし、Kafka ロードバランサーのプライベートリンクサービスを作成します。
 
-2.  **[基本]**タブで、 **[サブスクリプ**ション]、 **Resource group** 、 **[リージョン]**を選択し、[**名前]**フィールドに`kafka-pls`入力して、 **[次へ: 送信設定 &gt;]**をクリックします。
+2.  **Basic**タブで、 **Subscription** 、 **Resource group** 、 **Region**を選択し、 **Name**フィールドに`kafka-pls`と入力して、 **[次へ: 送信設定 &gt;]**をクリックします。
 
 3.  **Outbound settings**タブで、次のようにパラメータを入力し、 **Next : Access security &gt;**をクリックします。
 
@@ -515,15 +515,15 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
     -   **表示**については、 **Restricted by subscription**または**Anyone with your alias**を選択します。
     -   **Subscription-level access and auto-approval**については、**Add subscriptions**をクリックして、 [前提条件](#prerequisites)で取得したTiDB Cloud Azure アカウントのサブスクリプションを追加します。
 
-5.  **Next : Tags >**をクリックし、 **次へ: 確認と作成 &gt;**をクリックして情報を確認します。
+5.  **Next : Tags >**をクリックし、 **Next : Review + create &gt;**をクリックして情報を確認します。
 
-6.  **作成**をクリックします。操作が完了したら、後で使用するためにプライベートリンクサービスのエイリアスを書き留めておきます。
+6.  **Create**をクリックします。操作が完了したら、後で使用するためにプライベートリンクサービスのエイリアスを書き留めておきます。
 
 ## ステップ3. TiDB Cloudから接続する {#step-3-connect-from-tidb-cloud}
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、クラスターが**Private Link**経由で Kafka クラスターに接続するための変更フィードを作成します。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)を参照してください。
 
-2.  **「ChangeFeed ターゲットの構成」&gt;「接続方法」&gt;「プライベートリンク」**に進むときは、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
+2.  **Configure the changefeed target** &gt; **Connectivity Method** &gt; **Private Link**に進むときは、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
 
     -   **Kafka Advertised Listener Pattern**: [前提条件](#prerequisites)で**Kafka Advertised Listener Pattern**を生成するために使用する一意のランダム文字列。
     -   **プライベートリンクサービスのエイリアス**: [2. プライベートリンクサービスを設定する](#2-set-up-private-link-service)で取得したプライベートリンクサービスのエイリアス。

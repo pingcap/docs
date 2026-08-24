@@ -76,11 +76,11 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
 
-2.  概要ページで、右上隅の**接続**をクリックし、 **接続先**ドロップダウンリストから`Serverless Driver`を選択してから、 **「パスワードを生成」をクリックしてランダムなパスワード**を作成します。
+2.  概要ページで、右上隅の**Connect**をクリックし、 **Connect With**ドロップダウンリストから`Serverless Driver`を選択してから、 **Generate Password**をクリックしてランダムなパスワードを作成します。
 
     > **Tip:**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **パスワードをリセット**をクリックして新しいパスワードを生成できます。
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **Reset Password**をクリックして新しいパスワードを生成できます。
 
     接続文字列は次のようになります。
 
@@ -192,11 +192,11 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
 
-2.  概要ページで、右上隅の**接続**をクリックし、 **接続先**ドロップダウンリストから`Serverless Driver`を選択してから、 **「パスワードを生成」をクリックしてランダムなパスワード**を作成します。
+2.  概要ページで、右上隅の**Connect**をクリックし、 **Connect With**ドロップダウンリストから`Serverless Driver`を選択してから、 **Generate Password**をクリックしてランダムなパスワードを作成します。
 
     > **Tip:**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **パスワードをリセット**をクリックして新しいパスワードを生成できます。
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **Reset Password**をクリックして新しいパスワードを生成できます。
 
     接続文字列は次のようになります。
 

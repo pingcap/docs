@@ -156,7 +156,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>名前をクリックして概要ページに移動し、左側のナビゲーションペインで**[データ]** &gt; **Data Migration**をクリックします。
+2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Data Migration**をクリックします。
 
 3.  **Data Migration**ページで、右上隅にある**Create Migration Job**をクリックします。**Create Migration Job**ページが表示されます。
 
@@ -187,13 +187,13 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     <CustomContent plan="premium">
 
     -   **Hostname or IP address**（公開の場合）：データソースのホスト名またはIPアドレス。
-    -   **Private Endpoint**(プライベートリンク用): TiDB Cloud Premium インスタンスの**[ネットワーキング]** &gt; **[外部サービス向け AWS プライベートエンドポイント]**で作成したプライベートエンドポイント。または、**ここで [プライベートエンドポイントの作成] をクリックしてプライベートエンドポイント**を作成します。セットアップの詳細については、データ移行ガイドの[プライベートリンクまたはプライベートエンドポイント](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint)セクションを参照してください。
+    -   **Private Endpoint**(プライベートリンク用): TiDB Cloud Premium インスタンスの**Networking** &gt; **[外部サービス向け AWS プライベートエンドポイント]**で作成したプライベートエンドポイント。または、**ここで [プライベートエンドポイントの作成] をクリックしてプライベートエンドポイント**を作成します。セットアップの詳細については、データ移行ガイドの[プライベートリンクまたはプライベートエンドポイント](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint)セクションを参照してください。
 
     </CustomContent>
 
-    -   **ポート**：データソースのポート番号。
-    -   **ユーザー名**：データソースのユーザー名。
-    -   **パスワード**：ユーザー名のパスワード。
+    -   **Port**：データソースのポート番号。
+    -   **Username**：データソースのユーザー名。
+    -   **Password**：ユーザー名のパスワード。
     -   **SSL/TLS** ：SSL/TLSを有効にする場合は、以下のいずれかの証明書を含む、データソースの証明書をアップロードする必要があります。
         -   CA証明書のみ
         -   クライアント証明書とクライアントキー
@@ -201,8 +201,8 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 3.  ターゲット接続プロファイルを入力してください。
 
-    -   **ユーザー名**: ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>のユーザー名を入力します。
-    -   **パスワード**： TiDB Cloudのユーザー名のパスワードを入力してください。
+    -   **Username**: ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>のユーザー名を入力します。
+    -   **Password**： TiDB Cloudのユーザー名のパスワードを入力してください。
 
 4.  入力した情報を検証するには、 **Validate Connection and Next**をクリックしてください。
 
@@ -269,13 +269,13 @@ SHOW MASTER STATUS;
 
 ## ステップ4：移行するオブジェクトを選択する {#step-4-choose-the-objects-to-be-migrated}
 
-1.  **Choose Objects to Migrate**ページで、移行するオブジェクトを選択します。 **すべて**をクリックするとすべてのオブジェクトを選択できます。 **カスタマイズ**をクリックしてから、オブジェクト名の横にあるチェックボックスをクリックしてオブジェクトを選択することもできます。
+1.  **Choose Objects to Migrate**ページで、移行するオブジェクトを選択します。 **All**をクリックするとすべてのオブジェクトを選択できます。 **Customize**をクリックしてから、オブジェクト名の横にあるチェックボックスをクリックしてオブジェクトを選択することもできます。
 
-2.  **次へ**をクリックしてください。
+2.  **Next**をクリックしてください。
 
 ## ステップ5：事前チェック {#step-5-precheck}
 
-**事前チェック**ページでは、事前チェックの結果を確認できます。事前チェックが失敗した場合は、 **失敗**または**「警告」の**詳細に従って操作を行い、再度**Check again**チェックしてください。
+**Precheck**ページでは、事前チェックの結果を確認できます。事前チェックが失敗した場合は、 **Failed**または**Warning**の詳細に従って操作を行い、再度**Check again**をクリックして再チェックしてください。
 
 チェック項目の一部にのみ警告が表示されている場合は、リスクを評価し、警告を無視するかどうかを検討できます。すべての警告を無視した場合、移行ジョブは自動的に次のステップに進みます。
 
@@ -283,7 +283,7 @@ SHOW MASTER STATUS;
 
 事前チェック項目の詳細については、 [移行タスクの事前チェック](https://docs.pingcap.com/tidb/stable/dm-precheck)を参照してください。
 
-すべてのチェック項目が**合格**と表示されたら、 **次へ**をクリックしてください。
+すべてのチェック項目が**Pass**と表示されたら、 **Next**をクリックしてください。
 
 <CustomContent plan="essential">
 
@@ -305,7 +305,7 @@ SHOW MASTER STATUS;
 
 ## ステップ6：仕様を選択して移行を開始する {#step-6-choose-a-spec-and-start-migration}
 
-**仕様を選択して移行を開始**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [データ移行の仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)を参照してください。
+**Choose a Spec and Start Migration**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [データ移行の仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)を参照してください。
 
 仕様を選択したら、 **Create Job and Start**をクリックして移行を開始します。
 

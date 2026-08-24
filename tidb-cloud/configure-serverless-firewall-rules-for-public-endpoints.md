@@ -43,11 +43,11 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにファイア
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+2.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
 
-3.  **ネットワーク設定**ページで、**Public Endpoint**が無効になっている場合は有効にしてください。
+3.  **Networking**ページで、**Public Endpoint**が無効になっている場合は有効にしてください。
 
-4.  （オプション）新しく作成したTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスでは、 TiDB Cloud はデフォルトで**Allow_all_public_connections を**有効にします。特定の IP アドレスまたは範囲へのアクセスを制限するには、 **Allow_all_public_connections**の行にある**...**をクリックし、次に**Delete を**クリックします。
+4.  （オプション）新しく作成したTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスでは、 TiDB Cloud はデフォルトで**Allow_all_public_connections**を有効にします。特定の IP アドレスまたは範囲へのアクセスを制限するには、 **Allow_all_public_connections**の行にある**...**をクリックし、次に**Delete**をクリックします。
 
 5.  **Authorized Networks**セクションで、 **Add rule**をクリックし、許可するIPアドレスまたはIPアドレス範囲を追加します。
 
@@ -65,7 +65,7 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにファイア
         >
         > ファイアウォールを開放すると、指定されたIPアドレスまたはIPアドレス範囲からの管理者、ユーザー、およびアプリケーションは、有効な認証情報を持つTiDB Cloud StarterまたはEssentialインスタンス上の任意のデータベースにアクセスできるようになります。
 
-6.  **保存**をクリックしてください。
+6.  **Save**をクリックしてください。
 
 ## 次は？ {#what-s-next}
 

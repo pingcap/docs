@@ -27,7 +27,7 @@ TiDB Cloud Starter クラスターを MCPサーバーとして構成すると、
 
 TiDB CloudでTiDB Cloud Starter クラスターを作成したら、次の手順を実行してそれを AI ツールに接続します。
 
-1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページで、ターゲットクラスターの名前をクリックして概要ページに移動します。次に、右上隅の**Use with AI Tools**をクリックします。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、ターゲットクラスターの名前をクリックして概要ページに移動します。次に、右上隅の**Use with AI Tools**をクリックします。
 
 2.  **Access `your_cluster_name` with AI tools**ダイアログで、AI ツールがアクセスする**Branch**と**Database**を選択します。
 

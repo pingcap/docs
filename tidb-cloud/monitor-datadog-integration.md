@@ -34,7 +34,7 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 
 -   Datadog統合は、[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは利用できません。
 
--   クラスターの状態が**作成中** 、 **復元中** 、 **一時停止中** 、 **再開中**の場合は、Datadog の統合は利用できません。
+-   クラスターの状態が**CREATING** 、 **RESTORING** 、 **PAUSED** 、 **RESUMING**の場合は、Datadog の統合は利用できません。
 
 -   Datadogとの統合が設定されているクラスターが削除されると、それに関連付けられている統合サービスも削除されます。
 
@@ -49,18 +49,18 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[統合]**をクリックします。
+2.  左側のナビゲーションペインで、 **Settings** &gt; **Integrations**をクリックします。
 
-3.  **統合**ページで、 **Integration to Datadog**をクリックします。
+3.  **Integrations**ページで、 **Integration to Datadog**をクリックします。
 
 4.  Datadog APIキーを入力し、Datadogサイトを選択してください。
 
 5.  **Test Integration**をクリックします。
 
-    -   テストが成功すると、 **確認**ボタンが表示されます。
+    -   テストが成功すると、 **Confirm**ボタンが表示されます。
     -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、統合を再試行してください。
 
-6.  統合を完了するには、 **確認**をクリックしてください。
+6.  統合を完了するには、 **Confirm**をクリックしてください。
 
 </div>
 <div label="Datadog integration (Beta)">
@@ -69,18 +69,18 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  左側のナビゲーションペインで、 **プロジェクト設定**の下にある**Project Settings**をクリックします。
+3.  左側のナビゲーションペインで、 **Project Settings**の下にある**Project Settings**をクリックします。
 
-4.  **統合**ページで、 **Integration to Datadog (BETA)**をクリックします。
+4.  **Integrations**ページで、 **Integration to Datadog (BETA)**をクリックします。
 
 5.  Datadog APIキーを入力し、Datadogサイトを選択してください。
 
 6.  **Test Integration**をクリックします。
 
-    -   テストが成功すると、 **確認**ボタンが表示されます。
+    -   テストが成功すると、 **Confirm**ボタンが表示されます。
     -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、統合を再試行してください。
 
-7.  統合を完了するには、 **確認**をクリックしてください。
+7.  統合を完了するには、 **Confirm**をクリックしてください。
 
 </div>
 </SimpleTab>
@@ -93,18 +93,18 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 
 1.  [Datadog](https://app.datadoghq.com)にログインします。
 2.  Datadog の[**TiDB Cloud統合**ページ](https://app.datadoghq.com/account/settings#integrations/tidb-cloud)に移動します。
-3.  **コンフィグレーション**タブで、 **Install Integration**をクリックします。
+3.  **Configuration**タブで、 **Install Integration**をクリックします。
 
     -   クラスターレベルの Datadog 統合の場合、 [**TiDB Cloud Dynamic Tracker**](https://app.datadoghq.com/dash/integration/32021/tidb-cloud-dynamic-tracker)ダッシュボードが[**Dashboard List**](https://app.datadoghq.com/dashboard/lists)に表示されます。
     -   従来のプロジェクトレベルの Datadog 統合 (ベータ版) の場合、 [**TiDB Cloud Cluster Overview**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview)ダッシュボードが[**Dashboard List**](https://app.datadoghq.com/dashboard/lists)に表示されます。
 
 ## 事前に構築されたダッシュボードを確認する {#view-the-pre-built-dashboard}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、 **統合**ページに移動します。
-2.  **Datadog**セクションの**ダッシュボード**リンクをクリックしてください。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、 **Integrations**ページに移動します。
+2.  **Datadog**セクションの**Dashboard**リンクをクリックしてください。
 
-    -   クラスタレベルのDatadog統合の場合、**ダッシュボード**リンクをクリックすると、拡張バージョンで導入された最新のメトリクスを含む新しいダッシュボードが開きます。
-    -   従来のプロジェクトレベルのDatadog統合（ベータ版）の場合、**ダッシュボード**リンクをクリックすると従来のダッシュボードが開きますが、そこにはクラスタレベルのDatadog統合で導入された最新のメトリクスは含まれていません。
+    -   クラスタレベルのDatadog統合の場合、**Dashboard**リンクをクリックすると、拡張バージョンで導入された最新のメトリクスを含む新しいダッシュボードが開きます。
+    -   従来のプロジェクトレベルのDatadog統合（ベータ版）の場合、**Dashboard**リンクをクリックすると従来のダッシュボードが開きますが、そこにはクラスタレベルのDatadog統合で導入された最新のメトリクスは含まれていません。
 
 ## Datadogで利用可能な指標 {#metrics-available-to-datadog}
 

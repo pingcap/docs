@@ -29,7 +29,7 @@ Prometheus サービスでTiDB Cloudのメトリクスを読み取るように�
 <CustomContent plan="essential">
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで、 **[統合]** &gt; **Integration to Prometheus(PREVIEW)**をクリックします。
+2.  左側のナビゲーションペインで、 **Integrations** &gt; **Integration to Prometheus(PREVIEW)**をクリックします。
 3.  **Add File**をクリックすると、現在のTiDB Cloud Essentialインスタンス用の`scrape_config`ファイルが生成されて表示されます。
 4.  `scrape_config`ファイルの内容のコピーを作成して、後で使用してください。
 
@@ -38,7 +38,7 @@ Prometheus サービスでTiDB Cloudのメトリクスを読み取るように�
 <CustomContent plan="premium">
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで、 **[設定]** &gt; **[統合]** &gt; **Integration to Prometheus(PREVIEW)**をクリックします。
+2.  左側のナビゲーションペインで、 **Settings** &gt; **Integrations** &gt; **Integration to Prometheus(PREVIEW)**をクリックします。
 3.  **Add File**をクリックすると、現在のTiDB Cloud Premium インスタンス用の`scrape_config`ファイルが生成されて表示されます。
 4.  `scrape_config`ファイルの内容のコピーを作成して、後で使用してください。
 
@@ -47,7 +47,7 @@ Prometheus サービスでTiDB Cloudのメトリクスを読み取るように�
 > **Note:**
 >
 > -   セキュリティ上の理由から、 TiDB Cloud新しく生成された`scrape_config`ファイルは一度しか表示されません。ファイルウィンドウを閉じる前に、必ず内容をコピーしてください。
-> -   忘れた場合は、 TiDB Cloudの`scrape_config`ファイルを削除して、新しいファイルを生成してください。 `scrape_config`ファイルを削除するには、ファイルを選択し、[ **...]**をクリックしてから**[削除]**をクリックします。
+> -   忘れた場合は、 TiDB Cloudの`scrape_config`ファイルを削除して、新しいファイルを生成してください。 `scrape_config`ファイルを削除するには、ファイルを選択し、**...**をクリックしてから**Delete**をクリックします。
 
 ### ステップ2．Prometheusとの統合 {#step-2-integrate-with-prometheus}
 
@@ -57,7 +57,7 @@ Prometheus サービスでTiDB Cloudのメトリクスを読み取るように�
 
 2.  Prometheus の設定ファイルで、 `scrape_configs`セクションを探し、 TiDB Cloudから取得した`scrape_config`ファイルの内容をそのセクションにコピーします。
 
-3.  Prometheusサービスで、 **[ステータス]** &gt; **[ターゲット]**を確認し、新しい`scrape_config`ファイルが読み込まれていることを確認してください。読み込まれていない場合は、Prometheusサービスを再起動する必要があるかもしれません。
+3.  Prometheusサービスで、 **Status** &gt; **Targets**を確認し、新しい`scrape_config`ファイルが読み込まれていることを確認してください。読み込まれていない場合は、Prometheusサービスを再起動する必要があるかもしれません。
 
 ### ステップ3. Grafana GUIダッシュボードを使用してメトリクスを視覚化する {#step-3-use-grafana-gui-dashboards-to-visualize-the-metrics}
 
@@ -94,7 +94,7 @@ Grafana の使用方法の詳細については、 [Grafanaのドキュメント
 1.  [ステップ1](#step-1-get-a-scrape_config-file-for-prometheus)に従って、Prometheus 用の新しい`scrape_config`ファイルを作成します。
 2.  新しいファイルの内容をPrometheusの設定ファイルに追加してください。
 3.  Prometheus サービスがTiDB Cloudから読み取れることを確認したら、Prometheus 設定ファイルから古い`scrape_config`ファイルの内容を削除します。
-4.  <CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>インスタンスの**統合**ページで、対応する古い`scrape_config`ファイルを削除して、他のユーザーがTiDB Cloud Prometheusエンドポイントから読み取るために使用できないようにします。
+4.  <CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>インスタンスの**Integrations**ページで、対応する古い`scrape_config`ファイルを削除して、他のユーザーがTiDB Cloud Prometheusエンドポイントから読み取るために使用できないようにします。
 
 ## Prometheusで利用可能なメトリクス {#metrics-available-to-prometheus}
 

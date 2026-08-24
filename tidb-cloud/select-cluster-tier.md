@@ -109,7 +109,7 @@ TiDB Cloudは、 TiDB Cloud StarterまたはTiDB Cloud Essentialの各インス�
 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのプレフィックスを取得するには、以下の手順を実行してください。
 
 1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
-2.  対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、右上隅の**接続**をクリックします。接続ダイアログが表示されます。
+2.  対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。接続ダイアログが表示されます。
 3.  ダイアログで、接続文字列からプレフィックスを取得します。
 
 ## TiDB Cloud Premium {#premium} {#premium}

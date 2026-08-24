@@ -79,9 +79,9 @@ Cloud Organization SSO を有効にするには、次の手順を実行します
 
 1.  `Organization Owner`ロールを持つユーザーとして[TiDB Cloudコンソール](https://tidbcloud.com)にログインし、左上隅のコンボボックスを使用して対象の組織に切り替えます。
 
-2.  左側のナビゲーションペインで、 **Organization Settings** &gt; **[認証]**をクリックします。
+2.  左側のナビゲーションペインで、 **Organization Settings** &gt; **Authentication**をクリックします。
 
-3.  **[認証]**ページで、 **[有効にする]**をクリックします。
+3.  **Authentication**ページで、 **Enable**をクリックします。
 
 4.  ダイアログで、組織のカスタム URL を入力します。この URL はTiDB Cloud内で一意である必要があります。
 
@@ -89,7 +89,7 @@ Cloud Organization SSO を有効にするには、次の手順を実行します
     >
     > Cloud Organization SSO を有効にすると、URL を変更できなくなります。組織のメンバーは、カスタム URL を使用してのみTiDB Cloudにログインできるようになります。後で設定済みの URL を変更する必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-5.  **[I understand and confirm]**チェックボックスをクリックし、 **[有効にする]**をクリックします。
+5.  **I understand and confirm**チェックボックスをクリックし、 **Enable**をクリックします。
 
     > **Note:**
     >
@@ -121,7 +121,7 @@ Cloud Organization SSO を有効にした後、次のようにユーザー名と
         >
         > 電子メールドメインを構成している場合は、設定を保存する前に、 TiDB Cloudによってロックアウトされないように、現在ログインに使用している電子メールドメインを必ず追加してください。
 
-4.  **［保存］**をクリックします。
+4.  **Save**をクリックします。
 
 ### OIDC と SAML のドメインを追加して検証する {#add-and-verify-domains-for-oidc-and-saml}
 
@@ -158,7 +158,7 @@ TiDB Cloudでは、OIDC認証方式はデフォルトで無効になっていま
 
 3.  メソッドの詳細では、以下を設定できます。
 
-    -   **名前**
+    -   **Name**
 
         カスタム ログインページに表示される OIDC 認証方法の名前を指定します。
 
@@ -180,7 +180,7 @@ TiDB Cloudでは、OIDC認証方式はデフォルトで無効になっていま
         >
         > 設定を保存する前に、TiDB Cloud からロックアウトされないように、現在ログインに使用している検証済みのメールドメインを必ず含めてください。
 
-4.  **［保存］**をクリックします。
+4.  **Save**をクリックします。
 
 ### SAML認証方法を設定する {#configure-the-saml-authentication-method}
 
@@ -201,7 +201,7 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
 
 3.  メソッドの詳細では、以下を設定できます。
 
-    -   **名前**
+    -   **Name**
 
         カスタム ログインページに表示される SAML 認証方法の名前を指定します。
 
@@ -233,7 +233,7 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
 
         **SCIM Provisioning Accounts** を有効にする前に、プロビジョニングするユーザーのメールドメインを追加して検証し、 **Allowed Email Domains** フィールドで設定してください。
 
-4.  **［保存］**をクリックします。
+4.  **Save**をクリックします。
 
 #### SCIMプロビジョニングを構成する {#configure-scim-provisioning}
 
@@ -266,8 +266,9 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
 3.  TiDB Cloudで、アイデンティティ プロバイダーからプッシュされたグループを表示します。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボボックスを使用して対象の組織に切り替えます。
-    2.  左側のナビゲーションペインで、 **Organization Settings** &gt; **[認証]**をクリックします。
-    3.  **グループ**タブをクリックします。IDプロバイダーから同期されたグループが表示されます。    4.  グループ内のユーザーを表示するには、 **[ビュー]**をクリックします。
+    2.  左側のナビゲーションペインで、 **Organization Settings** &gt; **Authentication**をクリックします。
+    3.  **Groups**タブをクリックします。IDプロバイダーから同期されたグループが表示されます。
+    4.  グループ内のユーザーを表示するには、 **View**をクリックします。
 
 4.  TiDB Cloudで、アイデンティティ プロバイダーからプッシュされたグループにロールを付与します。
 

@@ -97,13 +97,13 @@ TiDBは、リテラルとバインド変数を`?`に置き換えることで、S
 
 #### スロークエリページ {#slow-queries-page}
 
-[TiDB Dashboard](/dashboard/dashboard-overview.md)で[**スロークエリ**ページ](/dashboard/dashboard-slow-query.md)に移動して次の項目を見つけます。
+[TiDB Dashboard](/dashboard/dashboard-overview.md)で[**Slow Queries**ページ](/dashboard/dashboard-slow-query.md)に移動して次の項目を見つけます。
 
 -   最も遅い SQL クエリ。
 -   TiKV から最も多くのデータを読み取る SQL クエリ。
 -   詳細な実行分析を行うには、クエリをクリックして`EXPLAIN ANALYZE`を出力します。
 
-**スロークエリ**ページにはSQL実行頻度は表示されません。クエリの実行時間が単一インスタンスの[`tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold)設定項目を超えた場合、このページにそのクエリが表示されます。
+**Slow Queries**ページにはSQL実行頻度は表示されません。クエリの実行時間が単一インスタンスの[`tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold)設定項目を超えた場合、このページにそのクエリが表示されます。
 
 ![slow-query-default](/media/sql-tuning/slow-query-default.png)
 

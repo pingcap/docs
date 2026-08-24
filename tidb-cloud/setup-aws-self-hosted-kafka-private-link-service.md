@@ -48,7 +48,8 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
     5.  **Number of AZs**を選択します。この例では、 **3 AZs**を選択します。KafkaクラスターをデプロイするAZのIDをメモしておいてください。AZ名とAZ IDの関係を知りたい場合は、 [AWS リソースのアベイラビリティゾーン ID](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)を参照してください。
     6.  Kafka プライベートリンクサービスに固有の**Kafka Advertised Listener Pattern**を入力します。
         1.  一意のランダム文字列を入力してください。数字または小文字のみ使用できます。この文字列は、後ほど**Kafka Advertised Listener Pattern**を生成する際に使用します。
-        2.  **使用状況を確認して生成**をクリックすると、ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズリスナーを組み立てるために使用される**Kafka Advertised Listener Pattern**が生成されます。
+        2.  **Check usage and generate**をクリックすると、ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズリスナーを組み立てるために使用される**Kafka Advertised Listener Pattern**が生成されます。
+
 </CustomContent>
 <CustomContent plan="premium">
 

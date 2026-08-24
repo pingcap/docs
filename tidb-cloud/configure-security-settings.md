@@ -19,7 +19,7 @@ TiDB Cloud Dedicatedクラスタの場合、ルートパスワードと接続を
 
 2.  対象のTiDB Cloud Dedicatedクラスターの行で、[ **...]**をクリックし、 **Password Settings**を選択します。
 
-3.  TiDB Cloud Dedicatedクラスターに接続するためのルートパスワードを設定し、 **[保存]**をクリックします。
+3.  TiDB Cloud Dedicatedクラスターに接続するためのルートパスワードを設定し、 **Save**をクリックします。
 
     **Auto-generate Password**をクリックすると、ランダムなパスワードが生成されます。生成されたパスワードは二度と表示されませんので、安全な場所に保存してください。
 
