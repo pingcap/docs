@@ -35,5 +35,5 @@ summary: TiDB 2.0.10およびTiDB Ansible 2.0.10は、2018年12月18日にリリ
 
 ## TiKV {#tikv}
 
--   遅延を最適化するために、リーダーを新しく作成されたピアに転送しないでください[#3929](https://github.com/tikv/tikv/pull/3929)
+-   遅延を最適化するために、リーダーを新しく作成されたピアに転送しないようにします[#3929](https://github.com/tikv/tikv/pull/3929)
 -   冗長なリージョンハートビートを修正[#3930](https://github.com/tikv/tikv/pull/3930)

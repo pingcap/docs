@@ -21,7 +21,7 @@ summary: TiDB 2.0.5は2018年7月6日にリリースされ、システムの互�
     -   SQL文の改行を削除し、ユーザー情報を追加することで、スロークエリの形式を最適化します[#6920](https://github.com/pingcap/tidb/pull/6920)
     -   コメントで複数のアスタリスクをサポート [#6858](https://github.com/pingcap/tidb/pull/6858)
 -   バグ修正
-    -   `KILL QUERY`常に SUPER 権限必要となる問題を修正 [#7003](https://github.com/pingcap/tidb/pull/7003)
+    -   `KILL QUERY`が常に SUPER 権限を必要とする問題を修正 [#7003](https://github.com/pingcap/tidb/pull/7003)
     -   ユーザー数が1024を超えるとログインに失敗する可能性がある問題を修正しました[#6986](https://github.com/pingcap/tidb/pull/6986)
     -   符号なし`float`データ`double`挿入に関する問題を修正[#6940](https://github.com/pingcap/tidb/pull/6940)
     -   一部のMariaDBクライアントのpanic問題を解決するために`COM_FIELD_LIST`コマンドの互換性を修正しました [#6929](https://github.com/pingcap/tidb/pull/6929)
