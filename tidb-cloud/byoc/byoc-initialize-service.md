@@ -11,7 +11,11 @@ After deploying your BYOC infrastructure, create a resource pool, create your fi
 
 You can now provision resource pools and TiDB instances directly via the TiDB Cloud console.
 
-1. Create a resource pool. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and follow the instructions in [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md) to create a resource pool in the target cloud provider and region. When creating the resource pool, select Zonal or Regional high availability based on your workload requirements. Instances created or restored in the resource pool inherit its high availability mode.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and then follow the instructions in [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md) to create a resource pool in the target cloud provider and region. 
+
+    >**Note:**
+    >
+    > When creating the resource pool, select **Zonal** or **Regional** high availability based on your workload requirements. {{{ .byoc }}} instances created or restored in the resource pool inherit the high availability mode of the pool.
 
 2. After the resource pool becomes **Active**, follow the instructions in [Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md) to create a new instance in the resource pool.
 
