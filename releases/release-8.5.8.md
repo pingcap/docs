@@ -60,6 +60,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Fix the issue that the TiKV In-Memory Engine might stop updating region labels after an etcd compaction error, causing the label watch to retry indefinitely [#19792](https://github.com/tikv/tikv/issues/19792) @[akashchakrabortymsc-cmd](https://github.com/akashchakrabortymsc-cmd) <!-- component: tikv --> <!-- pr: https://github.com/tikv/tikv/pull/19898 -->
     - Fix the issue that Region leader transfer might be blocked indefinitely when in-memory engine cache warmup is stuck and repeated transfer requests arrive before the ACK deadline [#19776](https://github.com/tikv/tikv/issues/19776) @[overvenus](https://github.com/overvenus) <!-- component: tikv --> <!-- pr: https://github.com/tikv/tikv/pull/19921 -->
     - Fix the issue that TiKV might apply unnecessary write flow control during transient RocksDB compaction spikes [#19667](https://github.com/tikv/tikv/issues/19667) @[hbisheng](https://github.com/hbisheng) <!-- component: tikv --> <!-- pr: https://github.com/tikv/tikv/pull/19828 -->
+    - Fix the issue that TiKV might permanently block Raft connections when PD temporarily returns a store-not-found error before the target store completes registration [#19980](https://github.com/tikv/tikv/issues/19980) @[LykxSassinator](https://github.com/LykxSassinator) <!-- component: tikv --> <!-- pr: https://github.com/tikv/tikv/pull/19999 --> <!-- exported-on-2026-08-24 -->
+    - Fix the issue that external SST ingestion in TiKV no longer allows foreground writes, which increases write latency during ingestion [#19954](https://github.com/tikv/tikv/issues/19954) @[gengliqi](https://github.com/gengliqi) <!-- component: tikv --> <!-- pr: https://github.com/tikv/tikv/pull/19977 --> <!-- exported-on-2026-08-24 -->
 
 + PD
 
@@ -68,6 +70,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Fix the issue that PD GlobalConfig gRPC APIs might access etcd keys outside the intended namespace when a client specifies an arbitrary `ConfigPath` or a path-like configuration name [#11079](https://github.com/tikv/pd/issues/11079) @[rleungx](https://github.com/rleungx) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11075 -->
     - Fix the issue that PD might establish outbound gRPC connections to caller-selected addresses supplied through `pd-forwarded-host` instead of restricting forwarding targets to the current PD leader's advertised client URLs [#11070](https://github.com/tikv/pd/issues/11070) @[rleungx](https://github.com/rleungx) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11091 -->
     - Fix the issue that the resource group client might permanently send `NaN` token requests when a newly created resource group controller races with the periodic state update [#11022](https://github.com/tikv/pd/issues/11022) @[JmPotato](https://github.com/JmPotato) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11028 -->
+    - Fix the issue that a new Resource Control client might receive zero RU allocation after a PD Resource Manager leader handoff or when a new TiDB instance joins, which can cause temporary latency spikes or `ERROR 8252 Exceeded resource group quota limitation` [#11148](https://github.com/tikv/pd/issues/11148) @[JmPotato](https://github.com/JmPotato) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11150 --> <!-- exported-on-2026-08-24 -->
+
++ TiFlash
+
+    - Fix the issue that TiFlash resource control might leave local admission controller tokens at a low level, causing requests to remain queued or be unexpectedly throttled during traffic bursts [#10996](https://github.com/pingcap/tiflash/issues/10996) @[yongman](https://github.com/yongman) <!-- component: tiflash --> <!-- pr: https://github.com/pingcap/tiflash/pull/11015 --> <!-- exported-on-2026-08-24 -->
 
 + Tools
 
