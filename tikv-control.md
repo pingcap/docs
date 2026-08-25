@@ -21,65 +21,67 @@ TiKV Control ( `tikv-ctl` ) は、クラスターの管理に使用される TiK
 tiup ctl:v<CLUSTER_VERSION> tikv
 ```
 
-    Starting component `ctl`: /home/tidb/.tiup/components/ctl/v4.0.8/ctl tikv
-    TiKV Control (tikv-ctl)
-    Release Version:   4.0.8
-    Edition:           Community
-    Git Commit Hash:   83091173e960e5a0f5f417e921a0801d2f6635ae
-    Git Commit Branch: heads/refs/tags/v4.0.8
-    UTC Build Time:    2020-10-30 08:40:33
-    Rust Version:      rustc 1.42.0-nightly (0de96d37f 2019-12-19)
-    Enable Features:   jemalloc mem-profiling portable sse protobuf-codec
-    Profile:           dist_release
+```
+Starting component `ctl`: /home/tidb/.tiup/components/ctl/v4.0.8/ctl tikv
+TiKV Control (tikv-ctl)
+Release Version:   4.0.8
+Edition:           Community
+Git Commit Hash:   83091173e960e5a0f5f417e921a0801d2f6635ae
+Git Commit Branch: heads/refs/tags/v4.0.8
+UTC Build Time:    2020-10-30 08:40:33
+Rust Version:      rustc 1.42.0-nightly (0de96d37f 2019-12-19)
+Enable Features:   jemalloc mem-profiling portable sse protobuf-codec
+Profile:           dist_release
 
-    A tool for interacting with TiKV deployments.
-    USAGE:
-        TiKV Control (tikv-ctl) [FLAGS] [OPTIONS] [SUBCOMMAND]
-    FLAGS:
-        -h, --help                    Prints help information
-            --skip-paranoid-checks    Skip paranoid checks when open rocksdb
-        -V, --version                 Prints version information
-    OPTIONS:
-            --ca-path <ca-path>              Set the CA certificate path
-            --cert-path <cert-path>          Set the certificate path
-            --config <config>                TiKV config path, by default it's <deploy-dir>/conf/tikv.toml
-            --data-dir <data-dir>            TiKV data directory path, check <deploy-dir>/scripts/run.sh to get it
-            --decode <decode>                Decode a key in escaped format
-            --encode <encode>                Encode a key in escaped format
-            --to-hex <escaped-to-hex>        Convert an escaped key to hex key
-            --to-escaped <hex-to-escaped>    Convert a hex key to escaped key
-            --host <host>                    Set the remote host
-            --key-path <key-path>            Set the private key path
-            --log-level <log-level>          Set the log level [default: warn]
-            --pd <pd>                        Set the address of pd
-    SUBCOMMANDS:
-        bad-regions           Get all regions with corrupt raft
-        cluster               Print the cluster id
-        compact               Compact a column family in a specified range
-        compact-cluster       Compact the whole cluster in a specified range in one or more column families
-        consistency-check     Force a consistency-check for a specified region
-        decrypt-file          Decrypt an encrypted file
-        diff                  Calculate difference of region keys from different dbs
-        dump-snap-meta        Dump snapshot meta file
-        encryption-meta       Dump encryption metadata
-        fail                  Inject failures to TiKV and recovery
-        help                  Prints this message or the help of the given subcommand(s)
-        metrics               Print the metrics
-        modify-tikv-config    Modify tikv config, eg. tikv-ctl --host ip:port modify-tikv-config -n
-                              rocksdb.defaultcf.disable-auto-compactions -v true
-        mvcc                  Print the mvcc value
-        print                 Print the raw value
-        raft                  Print a raft log entry
-        raw-scan              Print all raw keys in the range
-        recover-mvcc          Recover mvcc data on one node by deleting corrupted keys
-        recreate-region       Recreate a region with given metadata, but alloc new id for it
-        region-properties     Show region properties
-        scan                  Print the range db range
-        size                  Print region size
-        split-region          Split the region
-        store                 Print the store id
-        tombstone             Set some regions on the node to tombstone by manual
-        unsafe-recover        Unsafely recover the cluster when the majority replicas are failed
+A tool for interacting with TiKV deployments.
+USAGE:
+    TiKV Control (tikv-ctl) [FLAGS] [OPTIONS] [SUBCOMMAND]
+FLAGS:
+    -h, --help                    Prints help information
+        --skip-paranoid-checks    Skip paranoid checks when open rocksdb
+    -V, --version                 Prints version information
+OPTIONS:
+        --ca-path <ca-path>              Set the CA certificate path
+        --cert-path <cert-path>          Set the certificate path
+        --config <config>                TiKV config path, by default it's <deploy-dir>/conf/tikv.toml
+        --data-dir <data-dir>            TiKV data directory path, check <deploy-dir>/scripts/run.sh to get it
+        --decode <decode>                Decode a key in escaped format
+        --encode <encode>                Encode a key in escaped format
+        --to-hex <escaped-to-hex>        Convert an escaped key to hex key
+        --to-escaped <hex-to-escaped>    Convert a hex key to escaped key
+        --host <host>                    Set the remote host
+        --key-path <key-path>            Set the private key path
+        --log-level <log-level>          Set the log level [default: warn]
+        --pd <pd>                        Set the address of pd
+SUBCOMMANDS:
+    bad-regions           Get all regions with corrupt raft
+    cluster               Print the cluster id
+    compact               Compact a column family in a specified range
+    compact-cluster       Compact the whole cluster in a specified range in one or more column families
+    consistency-check     Force a consistency-check for a specified region
+    decrypt-file          Decrypt an encrypted file
+    diff                  Calculate difference of region keys from different dbs
+    dump-snap-meta        Dump snapshot meta file
+    encryption-meta       Dump encryption metadata
+    fail                  Inject failures to TiKV and recovery
+    help                  Prints this message or the help of the given subcommand(s)
+    metrics               Print the metrics
+    modify-tikv-config    Modify tikv config, eg. tikv-ctl --host ip:port modify-tikv-config -n
+                          rocksdb.defaultcf.disable-auto-compactions -v true
+    mvcc                  Print the mvcc value
+    print                 Print the raw value
+    raft                  Print a raft log entry
+    raw-scan              Print all raw keys in the range
+    recover-mvcc          Recover mvcc data on one node by deleting corrupted keys
+    recreate-region       Recreate a region with given metadata, but alloc new id for it
+    region-properties     Show region properties
+    scan                  Print the range db range
+    size                  Print region size
+    split-region          Split the region
+    store                 Print the store id
+    tombstone             Set some regions on the node to tombstone by manual
+    unsafe-recover        Unsafely recover the cluster when the majority replicas are failed
+```
 
 `tiup ctl:v<CLUSTER_VERSION> tikv`の後に対応するパラメータとサブコマンドを追加できます。
 
@@ -101,7 +103,9 @@ tiup ctl:v<CLUSTER_VERSION> tikv
     tikv-ctl --pd 127.0.0.1:2379 compact-cluster
     ```
 
-        store:"127.0.0.1:20160" compact db:KV cf:default range:([], []) success!
+    ```
+    store:"127.0.0.1:20160" compact db:KV cf:default range:([], []) success!
+    ```
 
 - ローカルモード:
 
@@ -151,22 +155,24 @@ tikv-ctl --host 127.0.0.1:20160 raft region -r 1239
 
 出力は次のようになります。
 
-    "region id": 1239
-    "region state": {
-        id: 1239,
-        start_key: 7480000000000000FF4E5F728000000000FF1443770000000000FA,
-        end_key: 7480000000000000FF4E5F728000000000FF21C4420000000000FA,
-        region_epoch: {conf_ver: 1 version: 43},
-        peers: [ {id: 1240 store_id: 1 role: Voter} ]
-    }
-    "raft state": {
-        hard_state {term: 8 vote: 5 commit: 7}
-        last_index: 8)
-    }
-    "apply state": {
-        applied_index: 8 commit_index: 8 commit_term: 8
-        truncated_state {index: 5 term: 5}
-    }
+```
+"region id": 1239
+"region state": {
+    id: 1239,
+    start_key: 7480000000000000FF4E5F728000000000FF1443770000000000FA,
+    end_key: 7480000000000000FF4E5F728000000000FF21C4420000000000FA,
+    region_epoch: {conf_ver: 1 version: 43},
+    peers: [ {id: 1240 store_id: 1 role: Voter} ]
+}
+"raft state": {
+    hard_state {term: 8 vote: 5 commit: 7}
+    last_index: 8)
+}
+"apply state": {
+    applied_index: 8 commit_index: 8 commit_term: 8
+    truncated_state {index: 5 term: 5}
+}
+```
 
 特定のキー範囲に含まれるリージョンを照会するには、次のコマンドを使用します。
 
@@ -179,18 +185,20 @@ tikv-ctl --host 127.0.0.1:20160 raft region --start 7480000000000000FF4E5F728000
 
 出力は次のようになります。
 
-    "region state": {
-        id: 1009
-        start_key: 7480000000000000FF4E5F728000000000FF21C4420000000000FA,
-        end_key: 7480000000000000FF5000000000000000F8,
-        ...
-    }
-    "region state": {
-        id: 1239
-        start_key: 7480000000000000FF4E5F728000000000FF06C6D60000000000FA,
-        end_key: 7480000000000000FF4E5F728000000000FF1443770000000000FA,
-        ...
-    }
+```
+"region state": {
+    id: 1009
+    start_key: 7480000000000000FF4E5F728000000000FF21C4420000000000FA,
+    end_key: 7480000000000000FF5000000000000000F8,
+    ...
+}
+"region state": {
+    id: 1239
+    start_key: 7480000000000000FF4E5F728000000000FF06C6D60000000000FA,
+    end_key: 7480000000000000FF4E5F728000000000FF1443770000000000FA,
+    ...
+}
+```
 
 ### リージョンサイズを表示する {#view-the-region-size}
 
@@ -202,10 +210,12 @@ tikv-ctl --data-dir /path/to/tikv size -r 2
 
 出力は次のようになります。
 
-    region id: 2
-    cf default region size: 799.703 MB
-    cf write region size: 41.250 MB
-    cf lock region size: 27616
+```
+region id: 2
+cf default region size: 799.703 MB
+cf write region size: 41.250 MB
+cf lock region size: 27616
+```
 
 ### スキャンして特定の範囲のMVCCを表示する {#scan-to-view-mvcc-of-a-specific-range}
 
@@ -215,11 +225,13 @@ tikv-ctl --data-dir /path/to/tikv size -r 2
 tikv-ctl --data-dir /path/to/tikv scan --from 'zm' --limit 2 --show-cf lock,default,write
 ```
 
-    key: zmBootstr\377a\377pKey\000\000\377\000\000\373\000\000\000\000\000\377\000\000s\000\000\000\000\000\372
-             write cf value: start_ts: 399650102814441473 commit_ts: 399650102814441475 short_value: "20"
-    key: zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\000\000\000\371
-             write cf value: start_ts: 399650105239273474 commit_ts: 399650105239273475 short_value: "\000\000\000\000\000\000\000\002"
-             write cf value: start_ts: 399650105199951882 commit_ts: 399650105213059076 short_value: "\000\000\000\000\000\000\000\001"
+```
+key: zmBootstr\377a\377pKey\000\000\377\000\000\373\000\000\000\000\000\377\000\000s\000\000\000\000\000\372
+         write cf value: start_ts: 399650102814441473 commit_ts: 399650102814441475 short_value: "20"
+key: zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\000\000\000\371
+         write cf value: start_ts: 399650105239273474 commit_ts: 399650105239273475 short_value: "\000\000\000\000\000\000\000\002"
+         write cf value: start_ts: 399650105199951882 commit_ts: 399650105213059076 short_value: "\000\000\000\000\000\000\000\001"
+```
 
 ### 指定されたキーのMVCCを表示する {#view-mvcc-of-a-given-key}
 
@@ -229,9 +241,11 @@ tikv-ctl --data-dir /path/to/tikv scan --from 'zm' --limit 2 --show-cf lock,defa
 tikv-ctl --data-dir /path/to/tikv mvcc -k "zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\000\000\000\371" --show-cf=lock,write,default
 ```
 
-    key: zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\000\000\000\371
-             write cf value: start_ts: 399650105239273474 commit_ts: 399650105239273475 short_value: "\000\000\000\000\000\000\000\002"
-             write cf value: start_ts: 399650105199951882 commit_ts: 399650105213059076 short_value: "\000\000\000\000\000\000\000\001"
+```
+key: zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\000\000\000\371
+         write cf value: start_ts: 399650105239273474 commit_ts: 399650105239273475 short_value: "\000\000\000\000\000\000\000\002"
+         write cf value: start_ts: 399650105199951882 commit_ts: 399650105213059076 short_value: "\000\000\000\000\000\000\000\001"
+```
 
 このコマンドでは、キーは生のキーのエスケープされた形式でもあります。
 
@@ -245,10 +259,12 @@ tikv-ctl --data-dir /path/to/tikv mvcc -k "zmDB:29\000\000\377\000\374\000\000\0
 tikv-ctl --data-dir /var/lib/tikv raw-scan --from 'zt' --limit 2 --cf default
 ```
 
-    key: "zt\200\000\000\000\000\000\000\377\005_r\200\000\000\000\000\377\000\000\001\000\000\000\000\000\372\372b2,^\033\377\364", value: "\010\002\002\002%\010\004\002\010root\010\006\002\000\010\010\t\002\010\n\t\002\010\014\t\002\010\016\t\002\010\020\t\002\010\022\t\002\010\024\t\002\010\026\t\002\010\030\t\002\010\032\t\002\010\034\t\002\010\036\t\002\010 \t\002\010\"\t\002\010s\t\002\010&\t\002\010(\t\002\010*\t\002\010,\t\002\010.\t\002\0100\t\002\0102\t\002\0104\t\002"
-    key: "zt\200\000\000\000\000\000\000\377\025_r\200\000\000\000\000\377\000\000\023\000\000\000\000\000\372\372b2,^\033\377\364", value: "\010\002\002&slow_query_log_file\010\004\002P/usr/local/mysql/data/localhost-slow.log"
+```
+key: "zt\200\000\000\000\000\000\000\377\005_r\200\000\000\000\000\377\000\000\001\000\000\000\000\000\372\372b2,^\033\377\364", value: "\010\002\002\002%\010\004\002\010root\010\006\002\000\010\010\t\002\010\n\t\002\010\014\t\002\010\016\t\002\010\020\t\002\010\022\t\002\010\024\t\002\010\026\t\002\010\030\t\002\010\032\t\002\010\034\t\002\010\036\t\002\010 \t\002\010\"\t\002\010s\t\002\010&\t\002\010(\t\002\010*\t\002\010,\t\002\010.\t\002\0100\t\002\0102\t\002\0104\t\002"
+key: "zt\200\000\000\000\000\000\000\377\025_r\200\000\000\000\000\377\000\000\023\000\000\000\000\000\372\372b2,^\033\377\364", value: "\010\002\002&slow_query_log_file\010\004\002P/usr/local/mysql/data/localhost-slow.log"
 
-    Total scanned keys: 2
+Total scanned keys: 2
+```
 
 ### 特定のキー値を印刷する {#print-a-specific-key-value}
 
@@ -262,16 +278,18 @@ tikv-ctl --data-dir /var/lib/tikv raw-scan --from 'zt' --limit 2 --cf default
 tikv-ctl --host localhost:20160 region-properties -r 2
 ```
 
-    num_files: 0
-    num_entries: 0
-    num_deletes: 0
-    mvcc.min_ts: 18446744073709551615
-    mvcc.max_ts: 0
-    mvcc.num_rows: 0
-    mvcc.num_puts: 0
-    mvcc.num_versions: 0
-    mvcc.max_row_versions: 0
-    middle_key_by_approximate_size:
+```
+num_files: 0
+num_entries: 0
+num_deletes: 0
+mvcc.min_ts: 18446744073709551615
+mvcc.max_ts: 0
+mvcc.num_rows: 0
+mvcc.num_puts: 0
+mvcc.num_versions: 0
+mvcc.max_row_versions: 0
+middle_key_by_approximate_size:
+```
 
 これらのプロパティは、 リージョンが正常かどうかをチェックするために使用できます。正常でない場合は、これらのプロパティを使用してリージョン を修正できます。例えば、 リージョン を手動で`middle_key_approximate_size`ずつ分割するなどです。
 
@@ -331,7 +349,9 @@ pd-ctl operator add remove-peer <region_id> <store_id>
 tikv-ctl --data-dir /path/to/tikv tombstone -p 127.0.0.1:2379 -r <region_id>
 ```
 
-    success!
+```
+success!
+```
 
 ただし、場合によっては、このリージョンのこのピアを PD から簡単に削除できないため、 `tikv-ctl`の`--force`のオプションを指定して、ピアを強制的にtombstoneに設定することができます。
 
@@ -339,7 +359,9 @@ tikv-ctl --data-dir /path/to/tikv tombstone -p 127.0.0.1:2379 -r <region_id>
 tikv-ctl --data-dir /path/to/tikv tombstone -p 127.0.0.1:2379 -r <region_id>,<region_id> --force
 ```
 
-    success!
+```
+success!
+```
 
 > **Note:**
 >
@@ -375,7 +397,9 @@ TiKVの起動中にリージョンのチェックを回避するには、 `tombs
 tikv-ctl --data-dir /path/to/tikv bad-regions
 ```
 
-    all regions are healthy
+```
+all regions are healthy
+```
 
 コマンドが正常に実行された場合、上記の情報が出力されます。コマンドが失敗した場合、不良リージョンのリストが出力されます。現在検出可能なエラーには、 `last index` `commit index`不一致と、 Raftログの消失が含まれます。スナップショットファイルの破損など、その他`apply index`条件については、さらなるサポートが必要です。
 
@@ -406,7 +430,9 @@ tikv-ctl --data-dir /path/to/tikv bad-regions
 tikv-ctl --host ip:port modify-tikv-config -n storage.block-cache.capacity -v 10GB
 ```
 
-    success
+```
+success
+```
 
 `shared block cache`が無効の場合は、 `write` CF に`block cache size`設定します。
 
@@ -414,13 +440,17 @@ tikv-ctl --host ip:port modify-tikv-config -n storage.block-cache.capacity -v 10
 tikv-ctl --host ip:port modify-tikv-config -n rocksdb.writecf.block-cache-size -v 256MB
 ```
 
-    success
+```
+success
+```
 
 ```shell
 tikv-ctl --host ip:port modify-tikv-config -n raftdb.defaultcf.disable-auto-compactions -v true
 ```
 
-    success
+```
+success
+```
 
 圧縮レート制限によって圧縮保留バイトが蓄積される場合は、 `rate-limiter-auto-tuned`モードを無効にするか、圧縮フローの制限を高く設定します。
 
@@ -428,13 +458,17 @@ tikv-ctl --host ip:port modify-tikv-config -n raftdb.defaultcf.disable-auto-comp
 tikv-ctl --host ip:port modify-tikv-config -n rocksdb.rate-limiter-auto-tuned -v false
 ```
 
-    success
+```
+success
+```
 
 ```shell
 tikv-ctl --host ip:port modify-tikv-config -n rocksdb.rate-bytes-per-sec -v "1GB"
 ```
 
-    success
+```
+success
+```
 
 ### 複数のレプリカの障害からリージョンにサービスを強制的に回復させる（非推奨） {#force-regions-to-recover-services-from-failure-of-multiple-replicas-deprecated}
 
@@ -456,7 +490,9 @@ tikv-ctl --host ip:port modify-tikv-config -n rocksdb.rate-bytes-per-sec -v "1GB
 tikv-ctl --data-dir /path/to/tikv unsafe-recover remove-fail-stores -s 3 -r 1001,1002
 ```
 
-    success!
+```
+success!
+```
 
 ```shell
 tikv-ctl --data-dir /path/to/tikv unsafe-recover remove-fail-stores -s 4,5 --all-regions
@@ -515,9 +551,11 @@ tikv-ctl ldb --hex manifest_dump --path=/tmp/db/MANIFEST-000001
 
 データファイルの暗号化情報をダンプするには、サブコマンド`encryption-meta dump-file`を使用します。TiKV デプロイメントに`data-dir`を指定するには、TiKV 構成ファイルを作成する必要があります。
 
-    # conf.toml
-    [storage]
-    data-dir = "/path/to/tikv/data"
+```
+# conf.toml
+[storage]
+data-dir = "/path/to/tikv/data"
+```
 
 `--path`オプションは、対象のデータファイルへの絶対パスまたは相対パスを指定するために使用できます。データファイルが暗号化されていない場合、コマンドは空の出力を返すことがあります。`--path`を指定しない場合は、すべてのデータファイルの暗号化情報が出力されます。
 
@@ -525,18 +563,22 @@ tikv-ctl ldb --hex manifest_dump --path=/tmp/db/MANIFEST-000001
 tikv-ctl --config=./conf.toml encryption-meta dump-file --path=/path/to/tikv/data/db/CURRENT
 ```
 
-    /path/to/tikv/data/db/CURRENT: key_id: 9291156302549018620 iv: E3C2FDBF63FC03BFC28F265D7E78283F method: Aes128Ctr
+```
+/path/to/tikv/data/db/CURRENT: key_id: 9291156302549018620 iv: E3C2FDBF63FC03BFC28F265D7E78283F method: Aes128Ctr
+```
 
 データ暗号化キーをダンプするには、サブコマンド`encryption-meta dump-key`を使用します。 `data-dir`に加えて、設定ファイルで現在使用されているマスターキーも指定する必要があります。マスターキーの設定方法については、 [保存時の暗号化](/encryption-at-rest.md)を参照してください。また、このコマンドでは`security.encryption.previous-master-key`設定は無視され、マスターキーのローテーションは実行されません。
 
-    # conf.toml
-    [storage]
-    data-dir = "/path/to/tikv/data"
+```
+# conf.toml
+[storage]
+data-dir = "/path/to/tikv/data"
 
-    [security.encryption.master-key]
-    type = "kms"
-    key-id = "0987dcba-09fe-87dc-65ba-ab0987654321"
-    region = "us-west-2"
+[security.encryption.master-key]
+type = "kms"
+key-id = "0987dcba-09fe-87dc-65ba-ab0987654321"
+region = "us-west-2"
+```
 
 マスターキーがAWS KMSキーの場合、 `tikv-ctl` KMSキーへのアクセス権を持っている必要があります。AWS KMSキーへのアクセス権は、環境変数、AWSデフォルト設定ファイル、またはIAMロールのいずれか適切な方法で`tikv-ctl`に付与できます。使用方法についてはAWSドキュメントを参照してください。
 
@@ -548,18 +590,22 @@ tikv-ctl --config=./conf.toml encryption-meta dump-file --path=/path/to/tikv/dat
 tikv-ctl --config=./conf.toml encryption-meta dump-key
 ```
 
-    This action will expose encryption key(s) as plaintext. Do not output the result in file on disk.
-    Type "I consent" to continue, anything else to exit: I consent
-    current key id: 9291156302549018620
-    9291156302549018620: key: 8B6B6B8F83D36BE2467ED55D72AE808B method: Aes128Ctr creation_time: 1592938357
+```
+This action will expose encryption key(s) as plaintext. Do not output the result in file on disk.
+Type "I consent" to continue, anything else to exit: I consent
+current key id: 9291156302549018620
+9291156302549018620: key: 8B6B6B8F83D36BE2467ED55D72AE808B method: Aes128Ctr creation_time: 1592938357
+```
 
 ```shell
 tikv-ctl --config=./conf.toml encryption-meta dump-key --ids=9291156302549018620
 ```
 
-    This action will expose encryption key(s) as plaintext. Do not output the result in file on disk.
-    Type "I consent" to continue, anything else to exit: I consent
-    9291156302549018620: key: 8B6B6B8F83D36BE2467ED55D72AE808B method: Aes128Ctr creation_time: 1592938357
+```
+This action will expose encryption key(s) as plaintext. Do not output the result in file on disk.
+Type "I consent" to continue, anything else to exit: I consent
+9291156302549018620: key: 8B6B6B8F83D36BE2467ED55D72AE808B method: Aes128Ctr creation_time: 1592938357
+```
 
 > **Note:**
 >
@@ -579,22 +625,24 @@ TiKV内の破損したSSTファイルは、TiKVプロセスにpanicを引き起�
 tikv-ctl --data-dir </path/to/tikv> bad-ssts --pd <endpoint>
 ```
 
-    --------------------------------------------------------
-    corruption info:
-    data/tikv-21107/db/000014.sst: Corruption: Bad table magic number: expected 9863518390377041911, found 759105309091689679 in data/tikv-21107/db/000014.sst
+```
+--------------------------------------------------------
+corruption info:
+data/tikv-21107/db/000014.sst: Corruption: Bad table magic number: expected 9863518390377041911, found 759105309091689679 in data/tikv-21107/db/000014.sst
 
-    sst meta:
-    14:552997[1 .. 5520]['0101' seq:1, type:1 .. '7A7480000000000000FF0F5F728000000000FF0002160000000000FAFA13AB33020BFFFA' seq:2032, type:1] at level 0 for Column family "default"  (ID 0)
-    it isn't easy to handle local data, start key:0101
+sst meta:
+14:552997[1 .. 5520]['0101' seq:1, type:1 .. '7A7480000000000000FF0F5F728000000000FF0002160000000000FAFA13AB33020BFFFA' seq:2032, type:1] at level 0 for Column family "default"  (ID 0)
+it isn't easy to handle local data, start key:0101
 
-    overlap region:
-    RegionInfo { region: id: 4 end_key: 7480000000000000FF0500000000000000F8 region_epoch { conf_ver: 1 version: 2 } peers { id: 5 store_id: 1 }, leader: Some(id: 5 store_id: 1) }
+overlap region:
+RegionInfo { region: id: 4 end_key: 7480000000000000FF0500000000000000F8 region_epoch { conf_ver: 1 version: 2 } peers { id: 5 store_id: 1 }, leader: Some(id: 5 store_id: 1) }
 
-    refer operations:
-    tikv-ctl ldb --db=/path/to/tikv/db unsafe_remove_sst_file 000014
-    tikv-ctl --data-dir=/path/to/tikv tombstone -r 4 --pd <endpoint>
-    --------------------------------------------------------
-    corruption analysis has completed
+refer operations:
+tikv-ctl ldb --db=/path/to/tikv/db unsafe_remove_sst_file 000014
+tikv-ctl --data-dir=/path/to/tikv tombstone -r 4 --pd <endpoint>
+--------------------------------------------------------
+corruption analysis has completed
+```
 
 上記の出力から、破損した SST ファイルの情報が最初に印刷され、次にメタ情報が印刷されていることがわかります。
 
@@ -612,25 +660,29 @@ v6.5.4およびv7.3.0以降、TiKVはリゾルバの最新の詳細情報を取�
 
 次に例を示します。
 
-    ./tikv-ctl --host 127.0.0.1:20160 get-region-read-progress -r 14 --log --min-start-ts 0
+```
+./tikv-ctl --host 127.0.0.1:20160 get-region-read-progress -r 14 --log --min-start-ts 0
+```
 
 出力は次のようになります。
 
-    Region read progress:
-        exist: true,
-        safe_ts: 0,
-        applied_index: 92,
-        pending front item (oldest) ts: 0,
-        pending front item (oldest) applied index: 0,
-        pending back item (latest) ts: 0,
-        pending back item (latest) applied index: 0,
-        paused: false,
-    Resolver:
-        exist: true,
-        resolved_ts: 0,
-        tracked index: 92,
-        number of locks: 0,
-        number of transactions: 0,
-        stopped: false,
+```
+Region read progress:
+    exist: true,
+    safe_ts: 0,
+    applied_index: 92,
+    pending front item (oldest) ts: 0,
+    pending front item (oldest) applied index: 0,
+    pending back item (latest) ts: 0,
+    pending back item (latest) applied index: 0,
+    paused: false,
+Resolver:
+    exist: true,
+    resolved_ts: 0,
+    tracked index: 92,
+    number of locks: 0,
+    number of transactions: 0,
+    stopped: false,
+```
 
 このサブコマンドは、 ステイル読み取りおよびsafe-tsに関連する問題の診断に役立ちます。詳細については、 [TiKV におけるステイル読み取りと safe-ts の理解](/troubleshoot-stale-read.md)を参照してください。

@@ -35,13 +35,17 @@ summary: tidb_read_staleness` システム変数を使用して履歴データ�
     create table t (c int);
     ```
 
-        Query OK, 0 rows affected (0.01 sec)
+    ```
+    Query OK, 0 rows affected (0.01 sec)
+    ```
 
     ```sql
     insert into t values (1), (2), (3);
     ```
 
-        Query OK, 3 rows affected (0.00 sec)
+    ```
+    Query OK, 3 rows affected (0.00 sec)
+    ```
 
 2. 表のデータを確認してください:
 
@@ -49,14 +53,16 @@ summary: tidb_read_staleness` システム変数を使用して履歴データ�
     select * from t;
     ```
 
-        +------+
-        | c    |
-        +------+
-        |    1 |
-        |    2 |
-        |    3 |
-        +------+
-        3 rows in set (0.00 sec)
+    ```
+    +------+
+    | c    |
+    +------+
+    |    1 |
+    |    2 |
+    |    3 |
+    +------+
+    3 rows in set (0.00 sec)
+    ```
 
 3. 行内のデータを更新します。
 
@@ -64,7 +70,9 @@ summary: tidb_read_staleness` システム変数を使用して履歴データ�
     update t set c=22 where c=2;
     ```
 
-        Query OK, 1 row affected (0.00 sec)
+    ```
+    Query OK, 1 row affected (0.00 sec)
+    ```
 
 4. データが更新されたことを確認します。
 
@@ -72,14 +80,16 @@ summary: tidb_read_staleness` システム変数を使用して履歴データ�
     select * from t;
     ```
 
-        +------+
-        | c    |
-        +------+
-        |    1 |
-        |   22 |
-        |    3 |
-        +------+
-        3 rows in set (0.00 sec)
+    ```
+    +------+
+    | c    |
+    +------+
+    |    1 |
+    |   22 |
+    |    3 |
+    +------+
+    3 rows in set (0.00 sec)
+    ```
 
 5. システム変数`tidb_read_staleness`を設定します。
 
@@ -91,7 +101,9 @@ summary: tidb_read_staleness` システム変数を使用して履歴データ�
     set @@tidb_read_staleness="-5";
     ```
 
-        Query OK, 0 rows affected (0.00 sec)
+    ```
+    Query OK, 0 rows affected (0.00 sec)
+    ```
 
     > **Note:**
     >
@@ -104,14 +116,16 @@ summary: tidb_read_staleness` システム変数を使用して履歴データ�
     select * from t;
     ```
 
-        +------+
-        | c    |
-        +------+
-        |    1 |
-        |    2 |
-        |    3 |
-        +------+
-        3 rows in set (0.00 sec)
+    ```
+    +------+
+    | c    |
+    +------+
+    |    1 |
+    |    2 |
+    |    3 |
+    +------+
+    3 rows in set (0.00 sec)
+    ```
 
 6. 次のようにこの変数を設定解除すると、TiDB は最新のデータを読み取ることができます。
 
@@ -119,17 +133,21 @@ summary: tidb_read_staleness` システム変数を使用して履歴データ�
     set @@tidb_read_staleness="";
     ```
 
-        Query OK, 0 rows affected (0.00 sec)
+    ```
+    Query OK, 0 rows affected (0.00 sec)
+    ```
 
     ```sql
     select * from t;
     ```
 
-        +------+
-        | c    |
-        +------+
-        |    1 |
-        |   22 |
-        |    3 |
-        +------+
-        3 rows in set (0.00 sec)
+    ```
+    +------+
+    | c    |
+    +------+
+    |    1 |
+    |   22 |
+    |    3 |
+    +------+
+    3 rows in set (0.00 sec)
+    ```

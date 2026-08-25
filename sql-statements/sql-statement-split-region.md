@@ -216,10 +216,12 @@ SPLIT TABLE t1 INDEX idx4 BY ("a", "2000-01-01 00:00:01"), ("b", "2019-04-17 14:
 
 このステートメントは、4つのリージョンを分割するための3つの値を指定します。各リージョンの範囲は次のとおりです。
 
-    region1  [ minIndexValue               , ("a", "2000-01-01 00:00:01"))
-    region2  [("a", "2000-01-01 00:00:01") , ("b", "2019-04-17 14:26:19"))
-    region3  [("b", "2019-04-17 14:26:19") , ("c", "")                   )
-    region4  [("c", "")                    , maxIndexValue               )
+```
+region1  [ minIndexValue               , ("a", "2000-01-01 00:00:01"))
+region2  [("a", "2000-01-01 00:00:01") , ("b", "2019-04-17 14:26:19"))
+region3  [("b", "2019-04-17 14:26:19") , ("c", "")                   )
+region4  [("c", "")                    , maxIndexValue               )
+```
 
 ### パーティション化されたテーブルのリージョンを分割する {#split-regions-for-partitioned-tables}
 
@@ -370,10 +372,12 @@ CREATE TABLE t (a INT, b INT, INDEX idx1(a)) SHARD_ROW_ID_BITS = 4 PRE_SPLIT_REG
 
 4つの表リージョンの範囲は以下のとおりです。
 
-    region1:   [ -inf      ,  1<<61 )
-    region2:   [ 1<<61     ,  2<<61 )
-    region3:   [ 2<<61     ,  3<<61 )
-    region4:   [ 3<<61     ,  +inf  )
+```
+region1:   [ -inf      ,  1<<61 )
+region2:   [ 1<<61     ,  2<<61 )
+region3:   [ 2<<61     ,  3<<61 )
+region4:   [ 3<<61     ,  +inf  )
+```
 
 <CustomContent platform="tidb">
 

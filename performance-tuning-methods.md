@@ -94,12 +94,11 @@ TiDBは、SQL処理パスとデータベース時間を継続的に測定・収�
     > KVリクエストの合計時間が実行時間よりも長くなるのは正常です。これは、TiDBエグゼキューターが複数のTiKVに同時にKVリクエストを送信する可能性があるためです。その結果、KVリクエストの合計待機時間が実行時間よりも長くなります。前述のTPC-Cワークロードでは、トランザクションがコミットされる際に、TiDBは`Prewrite`つと`Commit`リクエストを複数のTiKVに同時に送信します。したがって、この例では、 `Prewrite` 、 `Commit` 、 `PessimisticLock`リクエストの合計時間は明らかに実行時間よりも長くなります。
     >
     > - `execute`実行時間は、KVリクエストの合計時間と`tso_wait`目の実行時間の合計よりも大幅に長くなる可能性があります。これは、SQL実行時間のほとんどがTiDBエグゼキュータ内で費やされていることを意味します。以下に、よくある2つの例を示します。
-
-          > - Example 1: After TiDB executor reads a large amount of data from TiKV, it needs to do complex join and aggregation inside TiDB, which consumes a lot of time.
-
-    <!---->
-
-          > - Example 2: The application experiences serious write statement lock conflicts. Frequent lock retries result in long `Retried execution time`.
+    >
+    > ```
+    > - Example 1: After TiDB executor reads a large amount of data from TiKV, it needs to do complex join and aggregation inside TiDB, which consumes a lot of time.
+    > - Example 2: The application experiences serious write statement lock conflicts. Frequent lock retries result in long `Retried execution time`.
+    > ```
 
 **例2: OLTP読み取り中心のワークロード**
 

@@ -27,8 +27,10 @@ TiKVが提供する分散ストレージをベースに、TiDBは優れたトラ
 
 各データ行は、次の規則に従って (キー、値) キーと値のペアとしてエンコードされます。
 
-    Key:   tablePrefix{TableID}_recordPrefixSep{RowID}
-    Value: [col1, col2, col3, col4]
+```
+Key:   tablePrefix{TableID}_recordPrefixSep{RowID}
+Value: [col1, col2, col3, col4]
+```
 
 `tablePrefix`と`recordPrefixSep`はどちらも、キー空間内の他のデータを区別するために使用される特別な文字列定数です。これらの文字列定数の正確な値は[マッピング関係の概要](#summary-of-mapping-relationships)で紹介されています。
 
@@ -38,21 +40,27 @@ TiDBは主キーとセカンダリインデックス（一意インデックス�
 
 主キーと一意インデックスの場合、キーと値のペアに基づいて対応する`RowID`すばやく見つける必要があるため、このようなキーと値のペアは次のようにエンコードされます。
 
-    Key:   tablePrefix{TableID}_indexPrefixSep{IndexID}_indexedColumnsValue
-    Value: RowID
+```
+Key:   tablePrefix{TableID}_indexPrefixSep{IndexID}_indexedColumnsValue
+Value: RowID
+```
 
 一意性制約を満たす必要のない通常のセカンダリインデックスでは、1つのキーが複数の行に対応する場合があります。キーの範囲に応じて対応する行を`RowID`クエリする必要があります。したがって、キーと値のペアは以下の規則に従ってエンコードする必要があります。
 
-    Key:   tablePrefix{TableID}_indexPrefixSep{IndexID}_indexedColumnsValue_{RowID}
-    Value: null
+```
+Key:   tablePrefix{TableID}_indexPrefixSep{IndexID}_indexedColumnsValue_{RowID}
+Value: null
+```
 
 ### マッピング関係の概要 {#summary-of-mapping-relationships}
 
 上記のすべてのエンコード規則の`tablePrefix` 、 `recordPrefixSep` 、および`indexPrefixSep` 、KV をキー空間内の他のデータと区別するために使用される文字列定数であり、次のように定義されます。
 
-    tablePrefix     = []byte{'t'}
-    recordPrefixSep = []byte{'r'}
-    indexPrefixSep  = []byte{'i'}
+```
+tablePrefix     = []byte{'t'}
+recordPrefixSep = []byte{'r'}
+indexPrefixSep  = []byte{'i'}
+```
 
 また、上記のエンコード方式では、テーブルデータやインデックスデータのキーエンコード方式に関係なく、テーブル内のすべての行は同じキープレフィックスを持ち、インデックスのすべてのデータも同じプレフィックスを持つことに注意してください。同じプレフィックスを持つデータは、このようにTiKVのキー空間に一緒に配置されます。したがって、エンコード前とエンコード後の比較が同じになるようにサフィックス部分のエンコード方式を注意深く設計することで、テーブルデータまたはインデックスデータをTiKVに順序どおりに格納できます。このエンコード方式を使用すると、テーブル内のすべての行データはTiKVのキー空間で`RowID`ずつ整然と並べられ、特定のインデックスのデータもインデックスデータの特定の値に従ってキー空間に順番に配置されます（ `indexedColumnsValue` ）。
 
@@ -73,21 +81,27 @@ CREATE TABLE User (
 
 テーブルに 3 行のデータがあるとします。
 
-    1, "TiDB", "SQL Layer", 10
-    2, "TiKV", "KV Engine", 20
-    3, "PD", "Manager", 30
+```
+1, "TiDB", "SQL Layer", 10
+2, "TiKV", "KV Engine", 20
+3, "PD", "Manager", 30
+```
 
 各データ行は (Key, Value) のキーと値のペアにマッピングされており、テーブルには`int`型の主キーがあるため、値`RowID`はこの主キーの値です。テーブルの`TableID`が`10`あるとすると、TiKV に保存されているテーブルデータは次のようになります。
 
-    t10_r1 --> ["TiDB", "SQL  Layer", 10]
-    t10_r2 --> ["TiKV", "KV  Engine", 20]
-    t10_r3 --> ["PD", " Manager", 30]
+```
+t10_r1 --> ["TiDB", "SQL  Layer", 10]
+t10_r2 --> ["TiKV", "KV  Engine", 20]
+t10_r3 --> ["PD", " Manager", 30]
+```
 
 このテーブルには、主キーに加えて、一意ではない通常のセカンダリインデックス`idxAge`があります。`IndexID`が`1`であるとすると、TiKV に保存されるインデックスデータは次のようになります。
 
-    t10_i1_10_1 --> null
-    t10_i1_20_2 --> null
-    t10_i1_30_3 --> null
+```
+t10_i1_10_1 --> null
+t10_i1_20_2 --> null
+t10_i1_30_3 --> null
+```
 
 上記の例は、TiDB におけるリレーショナル モデルからキー値モデルへのマッピングルールと、このマッピング スキームの背後にある考慮事項を示しています。
 

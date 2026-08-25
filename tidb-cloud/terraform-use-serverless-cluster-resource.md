@@ -28,27 +28,29 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Sta
 
 1. [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)で作成した`main.tf`ファイルに、次のように`data`と`output`ブロックを追加します。
 
-        terraform {
-          required_providers {
-            tidbcloud = {
-              source = "tidbcloud/tidbcloud"
-            }
-          }
+    ```
+    terraform {
+      required_providers {
+        tidbcloud = {
+          source = "tidbcloud/tidbcloud"
         }
+      }
+    }
 
-        provider "tidbcloud" {
-          public_key = "your_public_key"
-          private_key = "your_private_key"
-        }
+    provider "tidbcloud" {
+      public_key = "your_public_key"
+      private_key = "your_private_key"
+    }
 
-        data "tidbcloud_projects" "example_project" {
-          page      = 1
-          page_size = 10
-        }
+    data "tidbcloud_projects" "example_project" {
+      page      = 1
+      page_size = 10
+    }
 
-        output "projects" {
-          value = data.tidbcloud_projects.example_project.items
-        }
+    output "projects" {
+      value = data.tidbcloud_projects.example_project.items
+    }
+    ```
 
     - `data`ブロックを使用して、データソース タイプやデータソース名など、 TiDB Cloudのデータソースを定義します。
 
@@ -127,29 +129,31 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Sta
 
     以下は`cluster.tf`ファイルの例です。
 
-        terraform {
-          required_providers {
-            tidbcloud = {
-              source = "tidbcloud/tidbcloud"
-            }
-          }
+    ```
+    terraform {
+      required_providers {
+        tidbcloud = {
+          source = "tidbcloud/tidbcloud"
         }
+      }
+    }
 
-        provider "tidbcloud" {
-          public_key = "your_public_key"
-          private_key = "your_private_key"
-        }
+    provider "tidbcloud" {
+      public_key = "your_public_key"
+      private_key = "your_private_key"
+    }
 
-        resource "tidbcloud_serverless_cluster" "example" {
-          project_id = "1372813089454000000"
-          display_name = "test-tf"
-          spending_limit = {
-            monthly = 1
-          }
-          region = {
-            name = "regions/aws-us-east-1"
-          }
-        }
+    resource "tidbcloud_serverless_cluster" "example" {
+      project_id = "1372813089454000000"
+      display_name = "test-tf"
+      spending_limit = {
+        monthly = 1
+      }
+      region = {
+        name = "regions/aws-us-east-1"
+      }
+    }
+    ```
 
     `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
@@ -295,16 +299,18 @@ TiDB Cloud Starterクラスタでは、Terraformを使用してリソースを�
 
 TiDB Cloud Starterクラスターを変更するには、 `tidbcloud_serverless_cluster`のリソースの構成を変更し、 `terraform apply`コマンドを使用して変更を適用します。例えば、 `display_name`と`spending_limit`次のように変更できます。
 
-    resource "tidbcloud_serverless_cluster" "example" {
-      project_id = "1372813089454000000"
-      display_name = "test-tf-modified"
-      spending_limit = {
-        monthly = 2
-      }
-      region = {
-        name = "regions/aws-us-east-1"
-      }
-    }
+```
+resource "tidbcloud_serverless_cluster" "example" {
+  project_id = "1372813089454000000"
+  display_name = "test-tf-modified"
+  spending_limit = {
+    monthly = 2
+  }
+  region = {
+    name = "regions/aws-us-east-1"
+  }
+}
+```
 
 次に、 `terraform apply`コマンドを実行して変更を適用します。
 
@@ -419,10 +425,12 @@ Terraform によって管理されていないTiDB Cloud Starter クラスター
 
     次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}`クラスター ID に置き換えます。
 
-        import {
-          to = tidbcloud_serverless_cluster.example
-          id = "${id}"
-        }
+    ```
+    import {
+      to = tidbcloud_serverless_cluster.example
+      id = "${id}"
+    }
+    ```
 
 2. 新しい構成ファイルを生成します。
 
@@ -533,4 +541,6 @@ Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
 
 ここで、 `terraform show`コマンドを実行すると、リソースが破棄されているため、管理対象リソースは表示されません。
 
-    $ terraform show
+```
+$ terraform show
+```

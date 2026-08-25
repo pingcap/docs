@@ -67,7 +67,9 @@ CREATE TEMPORARY TABLE users (
 );
 ```
 
-    Query OK, 0 rows affected (0.01 sec)
+```
+Query OK, 0 rows affected (0.01 sec)
+```
 
 `users`にデータを挿入すると、セッション A のローカル一時テーブル`users`にデータが挿入されます。
 
@@ -75,18 +77,22 @@ CREATE TEMPORARY TABLE users (
 INSERT INTO users(id, name, city) VALUES(1001, 'Davis', 'LosAngeles');
 ```
 
-    Query OK, 1 row affected (0.00 sec)
+```
+Query OK, 1 row affected (0.00 sec)
+```
 
 ```sql
 SELECT * FROM users;
 ```
 
-    +------+-------+------------+
-    | id   | name  | city       |
-    +------+-------+------------+
-    | 1001 | Davis | LosAngeles |
-    +------+-------+------------+
-    1 row in set (0.00 sec)
+```
++------+-------+------------+
+| id   | name  | city       |
++------+-------+------------+
+| 1001 | Davis | LosAngeles |
++------+-------+------------+
+1 row in set (0.00 sec)
+```
 
 セッション B でローカル一時テーブル`users`を作成しても、セッション A の通常のテーブル`users`またはローカル一時テーブル`users`と競合しません。セッション B がテーブル`users`アクセスすると、セッション B のローカル一時テーブル`users`にアクセスします。
 
@@ -99,7 +105,9 @@ CREATE TEMPORARY TABLE users (
 );
 ```
 
-    Query OK, 0 rows affected (0.01 sec)
+```
+Query OK, 0 rows affected (0.01 sec)
+```
 
 `users`にデータを挿入すると、セッション B のローカル一時テーブル`users`にもデータが挿入されます。
 
@@ -107,18 +115,22 @@ CREATE TEMPORARY TABLE users (
 INSERT INTO users(id, name, city) VALUES(1001, 'James', 'NewYork');
 ```
 
-    Query OK, 1 row affected (0.00 sec)
+```
+Query OK, 1 row affected (0.00 sec)
+```
 
 ```sql
 SELECT * FROM users;
 ```
 
-    +------+-------+---------+
-    | id   | name  | city    |
-    +------+-------+---------+
-    | 1001 | James | NewYork |
-    +------+-------+---------+
-    1 row in set (0.00 sec)
+```
++------+-------+---------+
+| id   | name  | city    |
++------+-------+---------+
+| 1001 | James | NewYork |
++------+-------+---------+
+1 row in set (0.00 sec)
+```
 
 ### MySQL 一時テーブルとの互換性 {#compatibility-with-mysql-temporary-tables}
 
@@ -169,7 +181,9 @@ CREATE GLOBAL TEMPORARY TABLE users (
 ) ON COMMIT DELETE ROWS;
 ```
 
-    Query OK, 0 rows affected (0.01 sec)
+```
+Query OK, 0 rows affected (0.01 sec)
+```
 
 `users`に書き込まれたデータは現在のトランザクションに表示されます。
 
@@ -177,24 +191,30 @@ CREATE GLOBAL TEMPORARY TABLE users (
 BEGIN;
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 ```sql
 INSERT INTO users(id, name, city) VALUES(1001, 'Davis', 'LosAngeles');
 ```
 
-    Query OK, 1 row affected (0.00 sec)
+```
+Query OK, 1 row affected (0.00 sec)
+```
 
 ```sql
 SELECT * FROM users;
 ```
 
-    +------+-------+------------+
-    | id   | name  | city       |
-    +------+-------+------------+
-    | 1001 | Davis | LosAngeles |
-    +------+-------+------------+
-    1 row in set (0.00 sec)
+```
++------+-------+------------+
+| id   | name  | city       |
++------+-------+------------+
+| 1001 | Davis | LosAngeles |
++------+-------+------------+
+1 row in set (0.00 sec)
+```
 
 トランザクションが終了すると、データは自動的にクリアされます。
 
@@ -202,13 +222,17 @@ SELECT * FROM users;
 COMMIT;
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 ```sql
 SELECT * FROM users;
 ```
 
-    Empty set (0.00 sec)
+```
+Empty set (0.00 sec)
+```
 
 セッション A で`users`が作成されると、セッション B は`users`テーブルに対して読み取りと書き込みも実行できるようになります。
 
@@ -216,7 +240,9 @@ SELECT * FROM users;
 SELECT * FROM users;
 ```
 
-    Empty set (0.00 sec)
+```
+Empty set (0.00 sec)
+```
 
 > **Note:**
 >

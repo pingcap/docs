@@ -15,41 +15,43 @@ summary: TiUPを使用してオンライン TiDB クラスターを展開およ�
 tiup cluster
 ```
 
-    Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.12.3/cluster
-    Deploy a TiDB cluster for production
+```
+Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.12.3/cluster
+Deploy a TiDB cluster for production
 
-    Usage:
-      tiup cluster [command]
+Usage:
+  tiup cluster [command]
 
-    Available Commands:
-      check       Precheck a cluster
-      deploy      Deploy a cluster for production
-      start       Start a TiDB cluster
-      stop        Stop a TiDB cluster
-      restart     Restart a TiDB cluster
-      scale-in    Scale in a TiDB cluster
-      scale-out   Scale out a TiDB cluster
-      destroy     Destroy a specified cluster
-      clean       (Experimental) Clean up a specified cluster
-      upgrade     Upgrade a specified TiDB cluster
-      display     Display information of a TiDB cluster
-      list        List all clusters
-      audit       Show audit log of cluster operation
-      import      Import an existing TiDB cluster from TiDB-Ansible
-      edit-config Edit TiDB cluster config
-      reload      Reload a TiDB cluster's config and restart if needed
-      patch       Replace the remote package with a specified package and restart the service
-      help        Help about any command
+Available Commands:
+  check       Precheck a cluster
+  deploy      Deploy a cluster for production
+  start       Start a TiDB cluster
+  stop        Stop a TiDB cluster
+  restart     Restart a TiDB cluster
+  scale-in    Scale in a TiDB cluster
+  scale-out   Scale out a TiDB cluster
+  destroy     Destroy a specified cluster
+  clean       (Experimental) Clean up a specified cluster
+  upgrade     Upgrade a specified TiDB cluster
+  display     Display information of a TiDB cluster
+  list        List all clusters
+  audit       Show audit log of cluster operation
+  import      Import an existing TiDB cluster from TiDB-Ansible
+  edit-config Edit TiDB cluster config
+  reload      Reload a TiDB cluster's config and restart if needed
+  patch       Replace the remote package with a specified package and restart the service
+  help        Help about any command
 
-    Flags:
-      -c, --concurrency int     Maximum number of concurrent tasks allowed (defaults to `5`)
-          --format string       (EXPERIMENTAL) The format of output, available values are [default, json] (default "default")
-      -h, --help                help for tiup
-          --ssh string          (Experimental) The executor type. Optional values are 'builtin', 'system', and 'none'.
-          --ssh-timeout uint    Timeout in seconds to connect a host via SSH. Operations that don't need an SSH connection are ignored. (default 5)
-      -v, --version            TiUP version
-          --wait-timeout uint   Timeout in seconds to wait for an operation to complete. Inapplicable operations are ignored. (defaults to `120`)
-      -y, --yes                 Skip all confirmations and assumes 'yes'
+Flags:
+  -c, --concurrency int     Maximum number of concurrent tasks allowed (defaults to `5`)
+      --format string       (EXPERIMENTAL) The format of output, available values are [default, json] (default "default")
+  -h, --help                help for tiup
+      --ssh string          (Experimental) The executor type. Optional values are 'builtin', 'system', and 'none'.
+      --ssh-timeout uint    Timeout in seconds to connect a host via SSH. Operations that don't need an SSH connection are ignored. (default 5)
+  -v, --version            TiUP version
+      --wait-timeout uint   Timeout in seconds to wait for an operation to complete. Inapplicable operations are ignored. (defaults to `120`)
+  -y, --yes                 Skip all confirmations and assumes 'yes'
+```
 
 ## クラスターをデプロイ {#deploy-the-cluster}
 
@@ -168,10 +170,12 @@ Deployed cluster `prod-cluster` successfully
 tiup cluster list
 ```
 
-    Starting /root/.tiup/components/cluster/v1.12.3/cluster list
-    Name          User  Version    Path                                               PrivateKey
-    ----          ----  -------    ----                                               ----------
-    prod-cluster  tidb  v8.5.4    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
+```
+Starting /root/.tiup/components/cluster/v1.12.3/cluster list
+Name          User  Version    Path                                               PrivateKey
+----          ----  -------    ----                                               ----------
+prod-cluster  tidb  v8.5.4    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
+```
 
 ## クラスターを起動する {#start-the-cluster}
 
@@ -193,26 +197,28 @@ TiUPは、クラスター内の各コンポーネントのステータスを表�
 tiup cluster display prod-cluster
 ```
 
-    Starting /root/.tiup/components/cluster/v1.12.3/cluster display prod-cluster
-    TiDB Cluster: prod-cluster
-    TiDB Version: v8.5.4
-    ID                  Role        Host          Ports                            OS/Arch       Status  Data Dir              Deploy Dir
-    --                  ----        ----          -----                            -------       ------  --------              ----------
-    172.16.5.134:3000   grafana     172.16.5.134  3000                             linux/x86_64  Up      -                     deploy/grafana-3000
-    172.16.5.134:2379   pd          172.16.5.134  2379/2380                        linux/x86_64  Up|L    data/pd-2379          deploy/pd-2379
-    172.16.5.139:2379   pd          172.16.5.139  2379/2380                        linux/x86_64  Up|UI   data/pd-2379          deploy/pd-2379
-    172.16.5.140:2379   pd          172.16.5.140  2379/2380                        linux/x86_64  Up      data/pd-2379          deploy/pd-2379
-    172.16.5.134:9090   prometheus  172.16.5.134  9090                             linux/x86_64  Up      data/prometheus-9090  deploy/prometheus-9090
-    172.16.5.134:4000   tidb        172.16.5.134  4000/10080                       linux/x86_64  Up      -                     deploy/tidb-4000
-    172.16.5.139:4000   tidb        172.16.5.139  4000/10080                       linux/x86_64  Up      -                     deploy/tidb-4000
-    172.16.5.140:4000   tidb        172.16.5.140  4000/10080                       linux/x86_64  Up      -                     deploy/tidb-4000
-    172.16.5.141:9000   tiflash     172.16.5.141  9000/8123/3930/20170/20292/8234  linux/x86_64  Up      data/tiflash-9000     deploy/tiflash-9000
-    172.16.5.142:9000   tiflash     172.16.5.142  9000/8123/3930/20170/20292/8234  linux/x86_64  Up      data/tiflash-9000     deploy/tiflash-9000
-    172.16.5.143:9000   tiflash     172.16.5.143  9000/8123/3930/20170/20292/8234  linux/x86_64  Up      data/tiflash-9000     deploy/tiflash-9000
-    172.16.5.134:20160  tikv        172.16.5.134  20160/20180                      linux/x86_64  Up      data/tikv-20160       deploy/tikv-20160
-    172.16.5.139:20160  tikv        172.16.5.139  20160/20180                      linux/x86_64  Up      data/tikv-20160       deploy/tikv-20160
-    172.16.5.140:20160  tikv        172.16.5.140  20160/20180                      linux/x86_64  Up      data/tikv-20160       deploy/tikv-20160
-    172.16.5.144:6000   tiproxy     172.16.5.144  6000/3080                        linux/x86_64  Up      -                     deploy/tiproxy-6000
+```
+Starting /root/.tiup/components/cluster/v1.12.3/cluster display prod-cluster
+TiDB Cluster: prod-cluster
+TiDB Version: v8.5.4
+ID                  Role        Host          Ports                            OS/Arch       Status  Data Dir              Deploy Dir
+--                  ----        ----          -----                            -------       ------  --------              ----------
+172.16.5.134:3000   grafana     172.16.5.134  3000                             linux/x86_64  Up      -                     deploy/grafana-3000
+172.16.5.134:2379   pd          172.16.5.134  2379/2380                        linux/x86_64  Up|L    data/pd-2379          deploy/pd-2379
+172.16.5.139:2379   pd          172.16.5.139  2379/2380                        linux/x86_64  Up|UI   data/pd-2379          deploy/pd-2379
+172.16.5.140:2379   pd          172.16.5.140  2379/2380                        linux/x86_64  Up      data/pd-2379          deploy/pd-2379
+172.16.5.134:9090   prometheus  172.16.5.134  9090                             linux/x86_64  Up      data/prometheus-9090  deploy/prometheus-9090
+172.16.5.134:4000   tidb        172.16.5.134  4000/10080                       linux/x86_64  Up      -                     deploy/tidb-4000
+172.16.5.139:4000   tidb        172.16.5.139  4000/10080                       linux/x86_64  Up      -                     deploy/tidb-4000
+172.16.5.140:4000   tidb        172.16.5.140  4000/10080                       linux/x86_64  Up      -                     deploy/tidb-4000
+172.16.5.141:9000   tiflash     172.16.5.141  9000/8123/3930/20170/20292/8234  linux/x86_64  Up      data/tiflash-9000     deploy/tiflash-9000
+172.16.5.142:9000   tiflash     172.16.5.142  9000/8123/3930/20170/20292/8234  linux/x86_64  Up      data/tiflash-9000     deploy/tiflash-9000
+172.16.5.143:9000   tiflash     172.16.5.143  9000/8123/3930/20170/20292/8234  linux/x86_64  Up      data/tiflash-9000     deploy/tiflash-9000
+172.16.5.134:20160  tikv        172.16.5.134  20160/20180                      linux/x86_64  Up      data/tikv-20160       deploy/tikv-20160
+172.16.5.139:20160  tikv        172.16.5.139  20160/20180                      linux/x86_64  Up      data/tikv-20160       deploy/tikv-20160
+172.16.5.140:20160  tikv        172.16.5.140  20160/20180                      linux/x86_64  Up      data/tikv-20160       deploy/tikv-20160
+172.16.5.144:6000   tiproxy     172.16.5.144  6000/3080                        linux/x86_64  Up      -                     deploy/tiproxy-6000
+```
 
 `Status`列は、 `Up`または`Down`を使用して、サービスが正常に実行されているかどうかを示します。
 
@@ -262,26 +268,28 @@ tiup cluster scale-in prod-cluster -N 172.16.5.140:20160
 tiup cluster display prod-cluster
 ```
 
-    Starting /root/.tiup/components/cluster/v1.12.3/cluster display prod-cluster
-    TiDB Cluster: prod-cluster
-    TiDB Version: v8.5.4
-    ID                  Role        Host          Ports                            OS/Arch       Status   Data Dir              Deploy Dir
-    --                  ----        ----          -----                            -------       ------   --------              ----------
-    172.16.5.134:3000   grafana     172.16.5.134  3000                             linux/x86_64  Up       -                     deploy/grafana-3000
-    172.16.5.134:2379   pd          172.16.5.134  2379/2380                        linux/x86_64  Up|L     data/pd-2379          deploy/pd-2379
-    172.16.5.139:2379   pd          172.16.5.139  2379/2380                        linux/x86_64  Up|UI    data/pd-2379          deploy/pd-2379
-    172.16.5.140:2379   pd          172.16.5.140  2379/2380                        linux/x86_64  Up       data/pd-2379          deploy/pd-2379
-    172.16.5.134:9090   prometheus  172.16.5.134  9090                             linux/x86_64  Up       data/prometheus-9090  deploy/prometheus-9090
-    172.16.5.134:4000   tidb        172.16.5.134  4000/10080                       linux/x86_64  Up       -                     deploy/tidb-4000
-    172.16.5.139:4000   tidb        172.16.5.139  4000/10080                       linux/x86_64  Up       -                     deploy/tidb-4000
-    172.16.5.140:4000   tidb        172.16.5.140  4000/10080                       linux/x86_64  Up       -                     deploy/tidb-4000
-    172.16.5.141:9000   tiflash     172.16.5.141  9000/8123/3930/20170/20292/8234  linux/x86_64  Up       data/tiflash-9000     deploy/tiflash-9000
-    172.16.5.142:9000   tiflash     172.16.5.142  9000/8123/3930/20170/20292/8234  linux/x86_64  Up       data/tiflash-9000     deploy/tiflash-9000
-    172.16.5.143:9000   tiflash     172.16.5.143  9000/8123/3930/20170/20292/8234  linux/x86_64  Up       data/tiflash-9000     deploy/tiflash-9000
-    172.16.5.134:20160  tikv        172.16.5.134  20160/20180                      linux/x86_64  Up       data/tikv-20160       deploy/tikv-20160
-    172.16.5.139:20160  tikv        172.16.5.139  20160/20180                      linux/x86_64  Up       data/tikv-20160       deploy/tikv-20160
-    172.16.5.140:20160  tikv        172.16.5.140  20160/20180                      linux/x86_64  Offline  data/tikv-20160       deploy/tikv-20160
-    172.16.5.144:6000   tiproxy     172.16.5.144  6000/3080                        linux/x86_64  Up       -                     deploy/tiproxy-6000
+```
+Starting /root/.tiup/components/cluster/v1.12.3/cluster display prod-cluster
+TiDB Cluster: prod-cluster
+TiDB Version: v8.5.4
+ID                  Role        Host          Ports                            OS/Arch       Status   Data Dir              Deploy Dir
+--                  ----        ----          -----                            -------       ------   --------              ----------
+172.16.5.134:3000   grafana     172.16.5.134  3000                             linux/x86_64  Up       -                     deploy/grafana-3000
+172.16.5.134:2379   pd          172.16.5.134  2379/2380                        linux/x86_64  Up|L     data/pd-2379          deploy/pd-2379
+172.16.5.139:2379   pd          172.16.5.139  2379/2380                        linux/x86_64  Up|UI    data/pd-2379          deploy/pd-2379
+172.16.5.140:2379   pd          172.16.5.140  2379/2380                        linux/x86_64  Up       data/pd-2379          deploy/pd-2379
+172.16.5.134:9090   prometheus  172.16.5.134  9090                             linux/x86_64  Up       data/prometheus-9090  deploy/prometheus-9090
+172.16.5.134:4000   tidb        172.16.5.134  4000/10080                       linux/x86_64  Up       -                     deploy/tidb-4000
+172.16.5.139:4000   tidb        172.16.5.139  4000/10080                       linux/x86_64  Up       -                     deploy/tidb-4000
+172.16.5.140:4000   tidb        172.16.5.140  4000/10080                       linux/x86_64  Up       -                     deploy/tidb-4000
+172.16.5.141:9000   tiflash     172.16.5.141  9000/8123/3930/20170/20292/8234  linux/x86_64  Up       data/tiflash-9000     deploy/tiflash-9000
+172.16.5.142:9000   tiflash     172.16.5.142  9000/8123/3930/20170/20292/8234  linux/x86_64  Up       data/tiflash-9000     deploy/tiflash-9000
+172.16.5.143:9000   tiflash     172.16.5.143  9000/8123/3930/20170/20292/8234  linux/x86_64  Up       data/tiflash-9000     deploy/tiflash-9000
+172.16.5.134:20160  tikv        172.16.5.134  20160/20180                      linux/x86_64  Up       data/tikv-20160       deploy/tikv-20160
+172.16.5.139:20160  tikv        172.16.5.139  20160/20180                      linux/x86_64  Up       data/tikv-20160       deploy/tikv-20160
+172.16.5.140:20160  tikv        172.16.5.140  20160/20180                      linux/x86_64  Offline  data/tikv-20160       deploy/tikv-20160
+172.16.5.144:6000   tiproxy     172.16.5.144  6000/3080                        linux/x86_64  Up       -                     deploy/tiproxy-6000
+```
 
 PD がノード上のデータを他の TiKV ノードにスケジュールすると、このノードは自動的に削除されます。
 
@@ -441,26 +449,28 @@ alertmanager_servers:
 tiup cluster patch --help
 ```
 
-    Replace the remote package with a specified package and restart the service
+```
+Replace the remote package with a specified package and restart the service
 
-    Usage:
-      cluster patch <cluster-name> <package-path> [flags]
+Usage:
+  cluster patch <cluster-name> <package-path> [flags]
 
-    Flags:
-      -h, --help                    help for patch
-      -N, --node strings            Specify the nodes
-          --offline                 Patch a stopped cluster
-          --overwrite               Use this package in the future scale-out operations
-      -R, --role strings            Specify the roles
-          --transfer-timeout uint   Timeout in seconds when transferring PD and TiKV store leaders, also for TiCDC drain one capture (default 600)
+Flags:
+  -h, --help                    help for patch
+  -N, --node strings            Specify the nodes
+      --offline                 Patch a stopped cluster
+      --overwrite               Use this package in the future scale-out operations
+  -R, --role strings            Specify the roles
+      --transfer-timeout uint   Timeout in seconds when transferring PD and TiKV store leaders, also for TiCDC drain one capture (default 600)
 
-    Global Flags:
-      -c, --concurrency int     max number of parallel tasks allowed (default 5)
-          --format string       (EXPERIMENTAL) The format of output, available values are [default, json] (default "default")
-          --ssh string          (EXPERIMENTAL) The executor type: 'builtin', 'system', 'none'.
-          --ssh-timeout uint    Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
-          --wait-timeout uint   Timeout in seconds to wait for an operation to complete, ignored for operations that don't fit. (default 120)
-      -y, --yes                 Skip all confirmations and assumes 'yes'
+Global Flags:
+  -c, --concurrency int     max number of parallel tasks allowed (default 5)
+      --format string       (EXPERIMENTAL) The format of output, available values are [default, json] (default "default")
+      --ssh string          (EXPERIMENTAL) The executor type: 'builtin', 'system', 'none'.
+      --ssh-timeout uint    Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
+      --wait-timeout uint   Timeout in seconds to wait for an operation to complete, ignored for operations that don't fit. (default 120)
+  -y, --yes                 Skip all confirmations and assumes 'yes'
+```
 
 TiDB ホットフィックス パッケージが`/tmp/tidb-hotfix.tar.gz`にあり、クラスター内のすべての TiDB パッケージを置き換える場合は、次のコマンドを実行します。
 
@@ -484,23 +494,25 @@ TiUPがリリースされる前は、TiDBクラスタのデプロイにTiDB Ansi
 tiup cluster import --help
 ```
 
-    Import an exist TiDB cluster from TiDB-Ansible
+```
+Import an exist TiDB cluster from TiDB-Ansible
 
-    Usage:
-      cluster import [flags]
+Usage:
+  cluster import [flags]
 
-    Flags:
-      -d, --dir string         The path to TiDB-Ansible directory
-      -h, --help               help for import
-          --inventory string   The name of inventory file (default "inventory.ini")
-          --no-backup          Don't backup ansible dir, useful when there're multiple inventory files
-      -r, --rename NAME        Rename the imported cluster to NAME
+Flags:
+  -d, --dir string         The path to TiDB-Ansible directory
+  -h, --help               help for import
+      --inventory string   The name of inventory file (default "inventory.ini")
+      --no-backup          Don't backup ansible dir, useful when there're multiple inventory files
+  -r, --rename NAME        Rename the imported cluster to NAME
 
-    Global Flags:
-          --ssh string        (Experimental) The executor type. Optional values are 'builtin', 'system', and 'none'.
-          --wait-timeout int  Timeout of waiting the operation
-          --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
-      -y, --yes               Skip all confirmations and assumes 'yes'
+Global Flags:
+      --ssh string        (Experimental) The executor type. Optional values are 'builtin', 'system', and 'none'.
+      --wait-timeout int  Timeout of waiting the operation
+      --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
+  -y, --yes               Skip all confirmations and assumes 'yes'
+```
 
 次のいずれかのコマンドを使用して、TiDB Ansible クラスターをインポートできます。
 
@@ -531,14 +543,16 @@ Flags:
 tiup cluster audit
 ```
 
-    Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.12.3/cluster audit
-    ID      Time                       Command
-    --      ----                       -------
-    4BLhr0  2025-11-27T23:55:09+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test v8.5.4 /tmp/topology.yaml
-    4BKWjF  2025-11-27T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test v8.5.4 /tmp/topology.yaml
-    4BKVwH  2025-11-27T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test v8.5.4 /tmp/topology.yaml
-    4BKKH1  2025-11-27T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster destroy test
-    4BKKDx  2025-11-27T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test v8.5.4 /tmp/topology.yaml
+```
+Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.12.3/cluster audit
+ID      Time                       Command
+--      ----                       -------
+4BLhr0  2025-11-27T23:55:09+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test v8.5.4 /tmp/topology.yaml
+4BKWjF  2025-11-27T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test v8.5.4 /tmp/topology.yaml
+4BKVwH  2025-11-27T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test v8.5.4 /tmp/topology.yaml
+4BKKH1  2025-11-27T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster destroy test
+4BKKDx  2025-11-27T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test v8.5.4 /tmp/topology.yaml
+```
 
 最初の列は`audit-id`です。特定のコマンドの実行ログを表示するには、次のようにコマンドの`audit-id`をフラグとして渡します。
 

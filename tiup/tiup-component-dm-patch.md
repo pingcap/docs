@@ -91,12 +91,14 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 出力：
 
-    Release Version: v5.3.0
+```
+Release Version: v5.3.0
 
-    Git Commit Hash: 20626babf21fc381d4364646c40dd84598533d66
-    Git Branch: heads/refs/tags/v5.3.0
-    UTC Build Time: 2021-11-29 08:29:49
-    Go Version: go version go1.16.4 linux/amd64
+Git Commit Hash: 20626babf21fc381d4364646c40dd84598533d66
+Git Branch: heads/refs/tags/v5.3.0
+UTC Build Time: 2021-11-29 08:29:49
+Go Version: go version go1.16.4 linux/amd64
+```
 
 ### パッチパッケージを準備し、DMクラスタに適用する {#prepare-the-patch-package-and-apply-it-to-the-dm-cluster}
 
@@ -131,28 +133,32 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
     出力：
 
-        Cluster type:       dm
-        Cluster name:       dm-test
-        Cluster version:    v5.3.0
-        Deploy user:        tidb
-        SSH type:           builtin
-        ID                  Role                 Host           Ports      OS/Arch       Status     Data Dir                              Deploy Dir
-        --                  ----                 ----           -----      -------       ------     --------                              ----------
-        172.16.100.21:9093  alertmanager         172.16.100.21  9093/9094  linux/x86_64  Up         /home/tidb/dm/data/alertmanager-9093  /home/tidb/dm/deploy/alertmanager-9093
-        172.16.100.21:8261  dm-master            172.16.100.21  8261/8291  linux/x86_64  Healthy|L  /home/tidb/dm/data/dm-master-8261     /home/tidb/dm/deploy/dm-master-8261
-        172.16.100.21:8262  dm-worker            172.16.100.21  8262       linux/x86_64  Free       /home/tidb/dm/data/dm-worker-8262     /home/tidb/dm/deploy/dm-worker-8262
-        172.16.100.21:3000  grafana              172.16.100.21  3000       linux/x86_64  Up         -                                     /home/tidb/dm/deploy/grafana-3000
-        172.16.100.21:9090  prometheus           172.16.100.21  9090       linux/x86_64  Up         /home/tidb/dm/data/prometheus-9090    /home/tidb/dm/deploy/prometheus-9090
-        Total nodes: 5
+    ```
+    Cluster type:       dm
+    Cluster name:       dm-test
+    Cluster version:    v5.3.0
+    Deploy user:        tidb
+    SSH type:           builtin
+    ID                  Role                 Host           Ports      OS/Arch       Status     Data Dir                              Deploy Dir
+    --                  ----                 ----           -----      -------       ------     --------                              ----------
+    172.16.100.21:9093  alertmanager         172.16.100.21  9093/9094  linux/x86_64  Up         /home/tidb/dm/data/alertmanager-9093  /home/tidb/dm/deploy/alertmanager-9093
+    172.16.100.21:8261  dm-master            172.16.100.21  8261/8291  linux/x86_64  Healthy|L  /home/tidb/dm/data/dm-master-8261     /home/tidb/dm/deploy/dm-master-8261
+    172.16.100.21:8262  dm-worker            172.16.100.21  8262       linux/x86_64  Free       /home/tidb/dm/data/dm-worker-8262     /home/tidb/dm/deploy/dm-worker-8262
+    172.16.100.21:3000  grafana              172.16.100.21  3000       linux/x86_64  Up         -                                     /home/tidb/dm/deploy/grafana-3000
+    172.16.100.21:9090  prometheus           172.16.100.21  9090       linux/x86_64  Up         /home/tidb/dm/data/prometheus-9090    /home/tidb/dm/deploy/prometheus-9090
+    Total nodes: 5
+    ```
 
     指定されたノードまたは指定されたロールにホットフィックスを適用します。`-N`と`-R`の両方が指定されている場合は、共通部分が採用されます。
 
-        # Apply hotfix to a specified node.
-        tiup dm patch dm-test dm-master-hotfix-linux-amd64.tar.gz -N 172.16.100.21:8261
-        tiup dm patch dm-test dm-worker-hotfix-linux-amd64.tar.gz -N 172.16.100.21:8262
-        # Apply hotfix to a specified role.
-        tiup dm patch dm-test dm-master-hotfix-linux-amd64.tar.gz -R dm-master
-        tiup dm patch dm-test dm-worker-hotfix-linux-amd64.tar.gz -R dm-worker
+    ```
+    # Apply hotfix to a specified node.
+    tiup dm patch dm-test dm-master-hotfix-linux-amd64.tar.gz -N 172.16.100.21:8261
+    tiup dm patch dm-test dm-worker-hotfix-linux-amd64.tar.gz -N 172.16.100.21:8262
+    # Apply hotfix to a specified role.
+    tiup dm patch dm-test dm-master-hotfix-linux-amd64.tar.gz -R dm-master
+    tiup dm patch dm-test dm-worker-hotfix-linux-amd64.tar.gz -R dm-worker
+    ```
 
 4. 修正プログラムの適用結果を照会します。
 
@@ -162,11 +168,13 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
     出力：
 
-        Release Version: v5.3.0-20211230
-        Git Commit Hash: ca7070c45013c24d34bd9c1e936071253451d707
-        Git Branch: heads/refs/tags/v5.3.0-20211230
-        UTC Build Time: 2022-01-05 14:19:02
-        Go Version: go version go1.16.4 linux/amd64
+    ```
+    Release Version: v5.3.0-20211230
+    Git Commit Hash: ca7070c45013c24d34bd9c1e936071253451d707
+    Git Branch: heads/refs/tags/v5.3.0-20211230
+    UTC Build Time: 2022-01-05 14:19:02
+    Go Version: go version go1.16.4 linux/amd64
+    ```
 
     クラスター情報はそれに応じて変更されます。
 
@@ -176,19 +184,21 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
     出力：
 
-        Starting component `dm`: /root/.tiup/components/dm/v1.8.1/tiup-dm display dm-test
-        Cluster type:       dm
-        Cluster name:       dm-test
-        Cluster version:    v5.3.0
-        Deploy user:        tidb
-        SSH type:           builtin
-        ID                  Role                 Host           Ports      OS/Arch       Status     Data Dir                              Deploy Dir
-        --                  ----                 ----           -----      -------       ------     --------                              ----------
-        172.16.100.21:9093  alertmanager         172.16.100.21  9093/9094  linux/x86_64  Up         /home/tidb/dm/data/alertmanager-9093  /home/tidb/dm/deploy/alertmanager-9093
-        172.16.100.21:8261  dm-master (patched)  172.16.100.21  8261/8291  linux/x86_64  Healthy|L  /home/tidb/dm/data/dm-master-8261     /home/tidb/dm/deploy/dm-master-8261
-        172.16.100.21:8262  dm-worker (patched)  172.16.100.21  8262       linux/x86_64  Free       /home/tidb/dm/data/dm-worker-8262     /home/tidb/dm/deploy/dm-worker-8262
-        172.16.100.21:3000  grafana              172.16.100.21  3000       linux/x86_64  Up         -                                     /home/tidb/dm/deploy/grafana-3000
-        172.16.100.21:9090  prometheus           172.16.100.21  9090       linux/x86_64  Up         /home/tidb/dm/data/prometheus-9090    /home/tidb/dm/deploy/prometheus-9090
-        Total nodes: 5
+    ```
+    Starting component `dm`: /root/.tiup/components/dm/v1.8.1/tiup-dm display dm-test
+    Cluster type:       dm
+    Cluster name:       dm-test
+    Cluster version:    v5.3.0
+    Deploy user:        tidb
+    SSH type:           builtin
+    ID                  Role                 Host           Ports      OS/Arch       Status     Data Dir                              Deploy Dir
+    --                  ----                 ----           -----      -------       ------     --------                              ----------
+    172.16.100.21:9093  alertmanager         172.16.100.21  9093/9094  linux/x86_64  Up         /home/tidb/dm/data/alertmanager-9093  /home/tidb/dm/deploy/alertmanager-9093
+    172.16.100.21:8261  dm-master (patched)  172.16.100.21  8261/8291  linux/x86_64  Healthy|L  /home/tidb/dm/data/dm-master-8261     /home/tidb/dm/deploy/dm-master-8261
+    172.16.100.21:8262  dm-worker (patched)  172.16.100.21  8262       linux/x86_64  Free       /home/tidb/dm/data/dm-worker-8262     /home/tidb/dm/deploy/dm-worker-8262
+    172.16.100.21:3000  grafana              172.16.100.21  3000       linux/x86_64  Up         -                                     /home/tidb/dm/deploy/grafana-3000
+    172.16.100.21:9090  prometheus           172.16.100.21  9090       linux/x86_64  Up         /home/tidb/dm/data/prometheus-9090    /home/tidb/dm/deploy/prometheus-9090
+    Total nodes: 5
+    ```
 
 [&lt;&lt; 前のページに戻る - TiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

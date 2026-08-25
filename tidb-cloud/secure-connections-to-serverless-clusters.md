@@ -57,23 +57,33 @@ JavaやGoなど、クライアントがシステムのルートCAストアをデ
 
 **macOS**
 
-    /etc/ssl/cert.pem
+```
+/etc/ssl/cert.pem
+```
 
 **Debian / Ubuntu / Arch**
 
-    /etc/ssl/certs/ca-certificates.crt
+```
+/etc/ssl/certs/ca-certificates.crt
+```
 
 **RedHat / Fedora / CentOS / Mageia**
 
-    /etc/pki/tls/certs/ca-bundle.crt
+```
+/etc/pki/tls/certs/ca-bundle.crt
+```
 
 **Alpine**
 
-    /etc/ssl/cert.pem
+```
+/etc/ssl/cert.pem
+```
 
 **OpenSUSE**
 
-    /etc/ssl/ca-bundle.pem
+```
+/etc/ssl/ca-bundle.pem
+```
 
 **Windows**
 

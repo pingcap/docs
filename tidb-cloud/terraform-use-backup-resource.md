@@ -25,67 +25,73 @@ summary: tidbcloud_backup` リソースを使用してTiDB Cloudクラスター�
 
     例えば：
 
-        terraform {
-         required_providers {
-           tidbcloud = {
-             source = "tidbcloud/tidbcloud"
-           }
-         }
-        }
+    ```
+    terraform {
+     required_providers {
+       tidbcloud = {
+         source = "tidbcloud/tidbcloud"
+       }
+     }
+    }
 
-        provider "tidbcloud" {
-         public_key = "your_public_key"
-         private_key = "your_private_key"
-        }
-        resource "tidbcloud_backup" "example_backup" {
-          project_id  = "1372813089189561287"
-          cluster_id  = "1379661944630234067"
-          name        = "firstBackup"
-          description = "create by terraform"
-        }
+    provider "tidbcloud" {
+     public_key = "your_public_key"
+     private_key = "your_private_key"
+    }
+    resource "tidbcloud_backup" "example_backup" {
+      project_id  = "1372813089189561287"
+      cluster_id  = "1379661944630234067"
+      name        = "firstBackup"
+      description = "create by terraform"
+    }
+    ```
 
     ファイル内のリソース値 (プロジェクト ID やクラスタ ID など) を独自のものに置き換える必要があります。
 
     Terraform を使用してクラスター リソース (たとえば、 `example_cluster` ) を管理している場合は、実際のプロジェクト ID とクラスター ID を指定せずに、次のように`tidbcloud_backup`リソースを構成することもできます。
 
-        resource "tidbcloud_backup" "example_backup" {
-          project_id  = tidbcloud_cluster.example_cluster.project_id
-          cluster_id  = tidbcloud_cluster.example_cluster.id
-          name        = "firstBackup"
-          description = "create by terraform"
-        }
+    ```
+    resource "tidbcloud_backup" "example_backup" {
+      project_id  = tidbcloud_cluster.example_cluster.project_id
+      cluster_id  = tidbcloud_cluster.example_cluster.id
+      name        = "firstBackup"
+      description = "create by terraform"
+    }
+    ```
 
 3. `terraform apply`コマンドを実行します。
 
-        $ terraform apply
+    ```
+    $ terraform apply
 
-        tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
+    tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
 
-        Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
-          + create
+    Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+      + create
 
-        Terraform will perform the following actions:
+    Terraform will perform the following actions:
 
-          # tidbcloud_backup.example_backup will be created
-          + resource "tidbcloud_backup" "example_backup" {
-              + cluster_id       = "1379661944630234067"
-              + create_timestamp = (known after apply)
-              + description      = "create by terraform"
-              + id               = (known after apply)
-              + name             = "firstBackup"
-              + project_id       = "1372813089189561287"
-              + size             = (known after apply)
-              + status           = (known after apply)
-              + type             = (known after apply)
-            }
+      # tidbcloud_backup.example_backup will be created
+      + resource "tidbcloud_backup" "example_backup" {
+          + cluster_id       = "1379661944630234067"
+          + create_timestamp = (known after apply)
+          + description      = "create by terraform"
+          + id               = (known after apply)
+          + name             = "firstBackup"
+          + project_id       = "1372813089189561287"
+          + size             = (known after apply)
+          + status           = (known after apply)
+          + type             = (known after apply)
+        }
 
-        Plan: 1 to add, 0 to change, 0 to destroy.
+    Plan: 1 to add, 0 to change, 0 to destroy.
 
-        Do you want to perform these actions?
-          Terraform will perform the actions described above.
-          Only 'yes' will be accepted to approve.
+    Do you want to perform these actions?
+      Terraform will perform the actions described above.
+      Only 'yes' will be accepted to approve.
 
-          Enter a value:
+      Enter a value:
+    ```
 
 4. バックアップを作成するには`yes`と入力します。
 
@@ -101,39 +107,43 @@ summary: tidbcloud_backup` リソースを使用してTiDB Cloudクラスター�
 
 5. `terraform state show tidbcloud_backup.${resource-name}`を使用してバックアップのステータスを確認します。
 
-        $ terraform state show tidbcloud_backup.example_backup
+    ```
+    $ terraform state show tidbcloud_backup.example_backup
 
-        # tidbcloud_backup.example_backup:
-        resource "tidbcloud_backup" "example_backup" {
-            cluster_id       = "1379661944630234067"
-            create_timestamp = "2022-08-26T07:56:10Z"
-            description      = "create by terraform"
-            id               = "1350048"
-            name             = "firstBackup"
-            project_id       = "1372813089189561287"
-            size             = "0"
-            status           = "PENDING"
-            type             = "MANUAL"
-        }
+    # tidbcloud_backup.example_backup:
+    resource "tidbcloud_backup" "example_backup" {
+        cluster_id       = "1379661944630234067"
+        create_timestamp = "2022-08-26T07:56:10Z"
+        description      = "create by terraform"
+        id               = "1350048"
+        name             = "firstBackup"
+        project_id       = "1372813089189561287"
+        size             = "0"
+        status           = "PENDING"
+        type             = "MANUAL"
+    }
+    ```
 
 6. 数分お待ちください。その後、 `terraform refersh`を使用してステータスを更新します。
 
-        $ terraform refresh
-        tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
-        tidbcloud_backup.example_backup: Refreshing state... [id=1350048]
-        $ terraform state show tidbcloud_backup.example_backup
-        # tidbcloud_backup.example_backup:
-        resource "tidbcloud_backup" "example_backup" {
-            cluster_id       = "1379661944630234067"
-            create_timestamp = "2022-08-26T07:56:10Z"
-            description      = "create by terraform"
-            id               = "1350048"
-            name             = "firstBackup"
-            project_id       = "1372813089189561287"
-            size             = "198775"
-            status           = "SUCCESS"
-            type             = "MANUAL"
-        }
+    ```
+    $ terraform refresh
+    tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
+    tidbcloud_backup.example_backup: Refreshing state... [id=1350048]
+    $ terraform state show tidbcloud_backup.example_backup
+    # tidbcloud_backup.example_backup:
+    resource "tidbcloud_backup" "example_backup" {
+        cluster_id       = "1379661944630234067"
+        create_timestamp = "2022-08-26T07:56:10Z"
+        description      = "create by terraform"
+        id               = "1350048"
+        name             = "firstBackup"
+        project_id       = "1372813089189561287"
+        size             = "198775"
+        status           = "SUCCESS"
+        type             = "MANUAL"
+    }
+    ```
 
 ステータスが`SUCCESS`に変わると、クラスターのバックアップが作成されたことを示します。作成後はバックアップを更新できないことに注意してください。
 
@@ -147,16 +157,20 @@ summary: tidbcloud_backup` リソースを使用してTiDB Cloudクラスター�
 
 バックアップを削除するには、対応する`backup.tf`ファイルが配置されているバックアップディレクトリに移動し、 `terraform destroy`コマンドを実行して`tidbcloud_backup`リソースを破棄します。
 
-    $ terraform destroy
+```
+$ terraform destroy
 
-    Plan: 0 to add, 0 to change, 1 to destroy.
+Plan: 0 to add, 0 to change, 1 to destroy.
 
-    Do you really want to destroy all resources?
-    Terraform will destroy all your managed infrastructure, as shown above.
-    There is no undo. Only 'yes' will be accepted to confirm.
+Do you really want to destroy all resources?
+Terraform will destroy all your managed infrastructure, as shown above.
+There is no undo. Only 'yes' will be accepted to confirm.
 
-    Enter a value: yes
+Enter a value: yes
+```
 
 ここで、コマンド`terraform show`を実行すると、リソースがクリアされているため何も表示されません。
 
-    $ terraform show
+```
+$ terraform show
+```
