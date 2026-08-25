@@ -32,7 +32,7 @@ summary: TiDB 2.1.2およびTiDB Ansible 2.1.2は、2018年12月22日にリリ�
 -   TiDB Lightning
     -   Lightning でサポートされる最小のクラスタバージョンを TiDB 2.1.0 にする
     -   Lightning で解析された`JSON`データを含むファイルのコンテンツエラーを修正しました [#144](https://github.com/pingcap/tidb-tools/issues/144)
-    -   チェックポイントを使用してLightningを再起動した後に`Too many open engines`発生する問題を修正しました
+    -   チェックポイントを使用してLightningを再起動した後に`Too many open engines`が発生する問題を修正しました
 -   TiDB Binlog
     -   Drainer がKafka にデータを書き込む際のボトルネックを解消
     -   TiDB Binlogの Kafka バージョンをサポート

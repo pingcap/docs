@@ -13,7 +13,7 @@ summary: TiDB 2.1.6およびTiDB Ansible 2.1.6は、2019年3月15日にリリー
     -   `TIDB_INLJ` のヒントで両方のテーブルが指定されている場合、コストに基づいて外側のテーブルを選択するようにプランナーを最適化します。 [#9615](https://github.com/pingcap/tidb/pull/9615)
     -   `IndexScan`正しく選択されない場合がある問題を修正[#9587](https://github.com/pingcap/tidb/pull/9587)
     -   サブクエリの`agg`関数のチェックにおけるMySQLとの非互換性を修正 [#9551](https://github.com/pingcap/tidb/pull/9551)
-    -   パニックを回避するために、 `show stats_histograms`有効な列のみを出力する[#9502](https://github.com/pingcap/tidb/pull/9502)
+    -   パニックを回避するために、 `show stats_histograms`が有効な列のみを出力する[#9502](https://github.com/pingcap/tidb/pull/9502)
 
 -   サーバ
     -   Binlog 有効/無効にする`log_bin`変数をサポートします [#9634](https://github.com/pingcap/tidb/pull/9634)

@@ -56,7 +56,7 @@ TiDB Ansible バージョン: 3.0.0-beta.1
     -   サポート`CREATE ROLE` [#9461](https://github.com/pingcap/tidb/pull/9461)
 -   サーバ
     -   現在のTiDBインスタンスの情報を取得するためのHTTPインターフェース`/debug/zip`を追加する [#9651](https://github.com/pingcap/tidb/pull/9651)
-    -   PumpまたはDrainerのステータスを確認するためのSQL文`show pump status`と`show drainer status`サポートします[#9456](https://github.com/pingcap/tidb/pull/9456)
+    -   PumpまたはDrainerのステータスを確認するためのSQL文`show pump status`と`show drainer status`をサポートします[#9456](https://github.com/pingcap/tidb/pull/9456)
     -   SQL文を使用してPumpまたはDrainerのステータスを変更する機能をサポート[#9789](https://github.com/pingcap/tidb/pull/9789)
     -   遅いSQL文を簡単に追跡できるように、SQLテキストにHASHフィンガープリントを追加することをサポート[#9662](https://github.com/pingcap/tidb/pull/9662)
     -   binlogの有効化状態を制御するための`log_bin`システム変数 (デフォルトでは "0") を追加します。現在は状態の確認のみをサポートしています[#9343](https://github.com/pingcap/tidb/pull/9343)
@@ -64,7 +64,7 @@ TiDB Ansible バージョン: 3.0.0-beta.1
     -   `INFORMATION_SCHEMA.SLOW_QUERY`メモリテーブルを使用してスローログのクエリをサポート [#9290](https://github.com/pingcap/tidb/pull/9290)
     -   TiDBに表示されるMySQLのバージョンを5.7.10から5.7.25に変更する[#9553](https://github.com/pingcap/tidb/pull/9553)
     -   [ログ形式](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md)統合してツールによる収集と分析を容易にする
-    -   統計に基づいて実際のデータ量と推定データ量の差を記録するための監視項目`high_error_rate_feedback_total`追加します。 [#9209](https://github.com/pingcap/tidb/pull/9209)
+    -   統計に基づいて実際のデータ量と推定データ量の差を記録するための監視項目`high_error_rate_feedback_total`を追加します。 [#9209](https://github.com/pingcap/tidb/pull/9209)
     -   データベースディメンションにQPS監視項目を追加します。これは、構成項目を使用して有効にできます。 [#9151](https://github.com/pingcap/tidb/pull/9151)
 -   DDL
     -   DDLタスクの再試行回数を制限するために、 `ddl_error_count_limit`グローバル変数（デフォルトでは「512」）を追加します（この回数が制限を超えると、DDLタスクはキャンセルされます） [#9295](https://github.com/pingcap/tidb/pull/9295)
@@ -87,10 +87,10 @@ TiDB Ansible バージョン: 3.0.0-beta.1
 
 -   コプロセッサーの計算実行フレームワークを最適化し、TableScanセクションを実装することで、単一のTableScanのパフォーマンスが5％〜30％向上しました。
     -   `BatchRows`行と`BatchColumn`列の定義を実装する [#3660](https://github.com/tikv/tikv/pull/3660)
-    -   `VectorLike`実装して、エンコードされたデータとデコードされたデータに同じ方法でアクセスできるようにする[#4242](https://github.com/tikv/tikv/pull/4242)
+    -   `VectorLike`を実装して、エンコードされたデータとデコードされたデータに同じ方法でアクセスできるようにする[#4242](https://github.com/tikv/tikv/pull/4242)
     -   `BatchExecutor`インターフェースに定義し、リクエストを`BatchExecutor` に変換する方法を実装する [#4243](https://github.com/tikv/tikv/pull/4243)
     -   式ツリーをRPN形式に変換する実装[#4329](https://github.com/tikv/tikv/pull/4329)
-    -   計算を高速化するためにベクトル化演算子`BatchTableScanExecutor`実装する[#4351](https://github.com/tikv/tikv/pull/4351)
+    -   計算を高速化するためにベクトル化演算子`BatchTableScanExecutor`を実装する[#4351](https://github.com/tikv/tikv/pull/4351)
 -   [ログ形式](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md)統合してツールによる収集と分析を容易にする
 -   ローカルリーダーを使用してRaw Readインターフェースで読み取ることをサポート [#4222](https://github.com/tikv/tikv/pull/4222)
 -   構成情報に関するメトリックを追加する[#4206](https://github.com/tikv/tikv/pull/4206)

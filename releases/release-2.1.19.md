@@ -23,7 +23,7 @@ TiDB Ansible バージョン: 2.1.19
     -   `WHERE`句に一意キー等号条件が含まれている場合に推定行数が`1`より大きくなる問題を修正しました。 [#13385](https://github.com/pingcap/tidb/pull/13385)
 -   SQL実行エンジン
     -   `ConvertJSONToInt` で`unit64`中間結果として`int64`を使用するときに精度オーバーフローが発生する問題を修正しました。 [#13036](https://github.com/pingcap/tidb/pull/13036)
-    -   クエリに`SLEEP`関数が含まれている場合（たとえば`select 1 from (select sleep(1)) t;)` ）、列の整理によってクエリ内の`sleep(1)`無効になる問題を修正しました[#13039](https://github.com/pingcap/tidb/pull/13039)
+    -   クエリに`SLEEP`関数が含まれている場合（たとえば`select 1 from (select sleep(1)) t;)` ）、列の整理によってクエリ内の`sleep(1)`が無効になる問題を修正しました[#13039](https://github.com/pingcap/tidb/pull/13039)
     -   `INSERT ON DUPLICATE UPDATE`文で`Chunk`再利用してメモリのオーバーヘッドを削減します [#12999](https://github.com/pingcap/tidb/pull/12999)
     -   `slow_query`テーブルにトランザクション関連のフィールドを追加します。 [#13129](https://github.com/pingcap/tidb/pull/13129)
         -   `Prewrite_time`
@@ -41,7 +41,7 @@ TiDB Ansible バージョン: 2.1.19
     -   パーティションテーブルで`ADMIN CHECK TABLE`実行をサポート [#13143](https://github.com/pingcap/tidb/pull/13143)
     -   列属性として`ON UPDATE CURRENT_TIMESTAMP`を使用し、浮動小数点精度を指定した場合、 `SHOW CREATE TABLE`などのステートメントの精度が不完全になる問題を修正しました[#12462](https://github.com/pingcap/tidb/pull/12462)
     -   列削除、修正、または変更するときに外部キーがチェックされないため、 `SELECT * FROM information_schema.KEY_COLUMN_USAGE`文の実行時にpanicが発生する問題を修正しました。 [#14162](https://github.com/pingcap/tidb/pull/14162)
-    -   TiDB で`Streaming`有効になっている場合に返されるデータが重複する可能性がある問題を修正しました [#13255](https://github.com/pingcap/tidb/pull/13255)
+    -   TiDB で`Streaming`が有効になっている場合に返されるデータが重複する可能性がある問題を修正しました [#13255](https://github.com/pingcap/tidb/pull/13255)
     -   夏時間による`Invalid time format`エラーを修正 [#13624](https://github.com/pingcap/tidb/pull/13624)
     -   整数を符号なし浮動小数点型または小数型に変換すると精度が失われ、データが正しくなくなる問題を修正[#13756](https://github.com/pingcap/tidb/pull/13756)
     -   `Quote`関数が`NULL`値処理するときに誤ったタイプの値が返される問題を修正しました [#13681](https://github.com/pingcap/tidb/pull/13681)

@@ -19,7 +19,7 @@ TiDB Ansible バージョン: 2.1.14
 -   負荷に基づいてAUTO_INCREMENT IDによって割り当てられた増分ギャップを自動的に調整する機能をサポート [#10997](https://github.com/pingcap/tidb/pull/10997)
 -   クエリ終了時にメモリ情報`Distsql` `MemTracker`正しく消去されない問題を修正[#10971](https://github.com/pingcap/tidb/pull/10971)
 -   クエリのメモリ使用量を説明するために、 `information_schema.processlist`表に`MEM`列を追加します。 [#10896](https://github.com/pingcap/tidb/pull/10896)
--   クエリの最大実行時間を制御するグローバルシステム変数を`max_execution_time`追加する[#10940](https://github.com/pingcap/tidb/pull/10940)
+-   クエリの最大実行時間を制御する`max_execution_time`グローバルシステム変数を追加する[#10940](https://github.com/pingcap/tidb/pull/10940)
 -   サポートされていない集計関数の使用によって発生するpanicを修正[#10911](https://github.com/pingcap/tidb/pull/10911)
 -   `load data`文が失敗した場合、最後のトランザクションに自動ロールバック機能を追加します[#10862](https://github.com/pingcap/tidb/pull/10862)
 -   `OOMAction`構成項目が`Cancel` に設定されている場合に TiDB が誤った結果を返す場合がある問題を修正しました。 [#11016](https://github.com/pingcap/tidb/pull/11016)

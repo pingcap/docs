@@ -17,7 +17,7 @@ TiDB Ansible バージョン: 2.1.18
     -   フィードバックで分割すると無効なクエリ範囲が表示される可能性がある問題を修正しました [#12172](https://github.com/pingcap/tidb/pull/12172)
     -   PointGetプランで権限チェックが正しく行われない問題を修正 [#12341](https://github.com/pingcap/tidb/pull/12341)
     -   Limit演算子を`IndexLookUpReader`実行ロジックにプッシュすることで、 `select ... limit ... offset …`文の実行パフォーマンスを最適化します。 [#12380](https://github.com/pingcap/tidb/pull/12380)
-    -   `ORDER BY` `GROUP BY` [#12514](https://github.com/pingcap/tidb/pull/12514) `LIMIT OFFSET`使用をサポート
+    -   `ORDER BY`、`GROUP BY`、`LIMIT OFFSET`でのパラメータの使用をサポート [#12514](https://github.com/pingcap/tidb/pull/12514)
     -   パーティションテーブル`IndexJoin`が誤った結果を返す問題を修正[#12713](https://github.com/pingcap/tidb/pull/12713)
     -   日付文字列とフォーマット文字列が一致しない場合に、TiDBの`str_to_date`関数がMySQLとは異なる結果を返す問題を修正しました[#12757](https://github.com/pingcap/tidb/pull/12757)
     -   クエリ条件に`cast`関数が含まれている場合に外部結合が誤って内部結合に変換される問題を修正しました[#12791](https://github.com/pingcap/tidb/pull/12791)

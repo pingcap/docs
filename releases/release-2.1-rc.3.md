@@ -22,7 +22,7 @@ summary: TiDB 2.1 RC3は2018年9月29日にリリースされ、安定性、互�
     -   ポイントクエリですべての NULL 値が取得される列によって発生する「インデックス範囲外」panicを修正[#7790](https://github.com/pingcap/tidb/pull/7790)
 -   サーバ
     -   設定ファイル内のメモリクォータが有効にならない問題を修正[#7729](https://github.com/pingcap/tidb/pull/7729)
-    -   各ステートメント実行優先度を設定するためのシステム変数`tidb_force_priority`追加します。 [#7694](https://github.com/pingcap/tidb/pull/7694)
+    -   各ステートメントの実行優先度を設定するためのシステム変数`tidb_force_priority`を追加します。 [#7694](https://github.com/pingcap/tidb/pull/7694)
     -   `admin show slow`文を使用してスロークエリログを取得することをサポートします [#7785](https://github.com/pingcap/tidb/pull/7785)
 -   互換性
     -   `information_schema.schemata` で`charset/collation`の結果が正しくない問題を修正 [#7751](https://github.com/pingcap/tidb/pull/7751)

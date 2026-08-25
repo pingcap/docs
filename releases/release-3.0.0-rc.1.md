@@ -26,7 +26,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     -   論理最適化フェーズで集計関数を削除するときに、誤った実行を防ぐために`GROUP_CONCAT`特別に処理します[#9967](https://github.com/pingcap/tidb/pull/9967)
     -   フィルタが定数場合、結合演算子の子ノードにフィルタを適切にプッシュダウンします。 [#9848](https://github.com/pingcap/tidb/pull/9848)
     -   MySQL との非互換性を防ぐために、論理最適化フェーズで列をプルーニングするときに`RAND()`などのいくつかの関数を特別に処理します。 [#10064](https://github.com/pingcap/tidb/pull/10064)
-    -   `FAST ANALYZE`サポートします。これは、領域全体をスキャンするのではなく、領域をサンプリングすることで統計収集を高速化します。この機能は変数`tidb_enable_fast_analyze`によって制御されます[#10258](https://github.com/pingcap/tidb/pull/10258)
+    -   `FAST ANALYZE`をサポートします。これは、領域全体をスキャンするのではなく、領域をサンプリングすることで統計収集を高速化します。この機能は変数`tidb_enable_fast_analyze`によって制御されます[#10258](https://github.com/pingcap/tidb/pull/10258)
     -   SQL文の実行計画のバインドを実行することで実行の安定性を確保するSQL計画管理をサポートします。この機能は現在ベータ版であり、SELECT文のバインド実行計画のみをサポートします。本番環境での使用は推奨されません[#10284](https://github.com/pingcap/tidb/pull/10284)
 
 -   実行エンジン
@@ -36,7 +36,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
 
 -   サーバ
     -   TiDB の起動時にのみ DDL 所有者にブートストラップの実行を許可する[#10029](https://github.com/pingcap/tidb/pull/10029)
-    -   トランザクション分離レベルをSERIALIZABLE に設定するときにTiDBがエラーを報告しないようにするために、変数`tidb_skip_isolation_level_check`追加します。 [#10065](https://github.com/pingcap/tidb/pull/10065)
+    -   トランザクション分離レベルをSERIALIZABLE に設定するときにTiDBがエラーを報告しないようにするために、変数`tidb_skip_isolation_level_check`を追加します。 [#10065](https://github.com/pingcap/tidb/pull/10065)
     -   暗黙的なコミット時間とSQL実行時間をスローログにマージする [#10294](https://github.com/pingcap/tidb/pull/10294)
         -   SQL ロールのサポート (RBAC権限管理)
         -   サポート`SHOW GRANT` [#10016](https://github.com/pingcap/tidb/pull/10016)
@@ -67,8 +67,8 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     -   後続のリクエストをブロックしないように、失敗する可能性のある「提案」および「読み取り」リクエストを迅速にドロップすることをサポートします。
     -   リースのデッドロック問題を修正
 -   ホットストアがキーの統計情報を正しく生成しない問題を修正 [#1487](https://github.com/pingcap/pd/pull/1487)
--   単一のPDノードからPDクラスターを強制的に再構築するサポート [#1485](https://github.com/pingcap/pd/pull/1485)
--   `regionScatterer`無効な`OperatorStep` を生成する可能性がある問題を修正 [#1482](https://github.com/pingcap/pd/pull/1482)
+-   単一のPDノードからPDクラスターを強制的に再構築することをサポート [#1485](https://github.com/pingcap/pd/pull/1485)
+-   `regionScatterer`が無効な`OperatorStep` を生成する可能性がある問題を修正 [#1482](https://github.com/pingcap/pd/pull/1482)
 -   `MergeRegion`オペレータの短すぎるタイムアウト問題を修正 [#1495](https://github.com/pingcap/pd/pull/1495)
 -   ホットリージョンのスケジュールに高い優先度を与えるサポート[#1492](https://github.com/pingcap/pd/pull/1492)
 -   PDサーバー側でTSOリクエストの処理時間を記録するためのメトリックを追加します [#1502](https://github.com/pingcap/pd/pull/1502)
@@ -115,7 +115,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     -   Pumpにローカルストレージへの非同期フラッシュを許可する`storage.sync-log`設定項目を追加する [#509](https://github.com/pingcap/tidb-binlog/pull/509)
     -   PumpとDrainer間の通信のトラフィック圧縮をサポート [#495](https://github.com/pingcap/tidb-binlog/pull/495)
     -   異なるSQLモードでのDDLクエリの解析をサポートするために、 Drainerに`syncer.sql-mode`構成項目を追加します。 [#511](https://github.com/pingcap/tidb-binlog/pull/511)
-    -   レプリケーションを必要としないテーブルを除外するための構成項目を`syncer.ignore-table`追加します[#520](https://github.com/pingcap/tidb-binlog/pull/520)
+    -   レプリケーションを必要としないテーブルを除外するための`syncer.ignore-table`設定項目を追加します[#520](https://github.com/pingcap/tidb-binlog/pull/520)
 
 -   Lightning
     -   行IDまたはデフォルトの列値を使用して、ダンプファイルで欠落した列データを入力します。 [#170](https://github.com/pingcap/tidb-lightning/pull/170)
@@ -128,7 +128,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
 
 -   sync-diff-inspector
     -   チェックポイントをサポートし、検証ステータスを記録し、再起動後に最後に保存したポイントから検証を続行します[#224](https://github.com/pingcap/tidb-tools/pull/224)
-    -   チェックサム計算してデータの整合性をチェックするための構成項目`only-use-checksum`追加します [#215](https://github.com/pingcap/tidb-tools/pull/215)
+    -   チェックサムを計算してデータの整合性をチェックするための`only-use-checksum`設定項目を追加します [#215](https://github.com/pingcap/tidb-tools/pull/215)
 
 ## TiDB Ansible {#tidb-ansible}
 

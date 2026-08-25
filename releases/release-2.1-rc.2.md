@@ -49,8 +49,8 @@ summary: TiDB 2.1 RC2は2018年9月14日にリリースされ、安定性、SQL�
     -   TiDBクラスタを起動するときにグローバルシステムのタイムゾーンを設定する [#7638](https://github.com/pingcap/tidb/pull/7638)
 -   互換性
     -   `Year`型に符号なしフラグを追加 [#7542](https://github.com/pingcap/tidb/pull/7542)
-    -   `Prepare`モードで`Year`型の結果の長さ`Execute`設定する問題を修正 [#7525](https://github.com/pingcap/tidb/pull/7525)
-    -   `Prepare`モードで`Execute`タイムスタンプを挿入する問題を修正[#7506](https://github.com/pingcap/tidb/pull/7506)
+    -   `Prepare`/`Execute`モードで`Year`型の結果の長さを設定する問題を修正 [#7525](https://github.com/pingcap/tidb/pull/7525)
+    -   `Prepare`/`Execute`モードでゼロタイムスタンプを挿入する問題を修正[#7506](https://github.com/pingcap/tidb/pull/7506)
     -   整数除算のエラー処理の問題を修正 [#7492](https://github.com/pingcap/tidb/pull/7492)
     -   `ComStmtSendLongData` 処理時の互換性の問題を修正 [#7485](https://github.com/pingcap/tidb/pull/7485)
     -   文字列を整数に変換するプロセス中のエラー処理の問題を修正 [#7483](https://github.com/pingcap/tidb/pull/7483)

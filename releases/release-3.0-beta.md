@@ -17,7 +17,7 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
 -   SQLオプティマイザー
     -   `AggregationElimination` の最適化ルールを再サポート [#7676](https://github.com/pingcap/tidb/pull/7676)
     -   `NOT EXISTS`サブクエリを最適化し、Anti Semi Join に変換する [#7842](https://github.com/pingcap/tidb/pull/7842)
-    -   新しいCascadesオプティマイザーをサポートするために、変数`tidb_enable_cascades_planner`追加します。現在、Cascadesオプティマイザーはまだ完全に実装されておらず、デフォルトではオフになっています[#7879](https://github.com/pingcap/tidb/pull/7879)
+    -   新しいCascadesオプティマイザーをサポートするために、変数`tidb_enable_cascades_planner`を追加します。現在、Cascadesオプティマイザーはまだ完全に実装されておらず、デフォルトではオフになっています[#7879](https://github.com/pingcap/tidb/pull/7879)
     -   トランザクションのインデックス結合の使用をサポート [#7877](https://github.com/pingcap/tidb/pull/7877)
     -   外部結合の定数伝播を最適化し、結合結果の外部テーブルに関連するフィルタリング条件を外部結合を介して外部テーブルにプッシュダウンできるようにすることで、外部結合の無駄な計算を減らし、実行パフォーマンスを向上させます[#7794](https://github.com/pingcap/tidb/pull/7794)
     -   投影除去の最適化ルールを集計除去の後の位置に調整し、冗長な`Project`演算子回避する [#7909](https://github.com/pingcap/tidb/pull/7909)
@@ -31,7 +31,7 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
     -   複数のテーブルを結合する際の結合順序の選択を最適化するために貪欲アルゴリズム`Join Reorder`を導入する[#8394](https://github.com/pingcap/tidb/pull/8394)
     -   サポートビュー[#8757](https://github.com/pingcap/tidb/pull/8757)
     -   サポートウィンドウ機能[#8630](https://github.com/pingcap/tidb/pull/8630)
-    -   `TIDB_INLJ`有効になっていない場合にクライアントに警告を返し、ユーザビリティを向上させる[#9037](https://github.com/pingcap/tidb/pull/9037)
+    -   `TIDB_INLJ`が有効になっていない場合にクライアントに警告を返し、ユーザビリティを向上させる[#9037](https://github.com/pingcap/tidb/pull/9037)
     -   フィルタリング条件とテーブル統計に基づいてフィルタリングされたデータの統計を推測する機能をサポート[#7921](https://github.com/pingcap/tidb/pull/7921)
     -   レンジパーティションのパーティションプルーニング最適化ルールの改善 [#8885](https://github.com/pingcap/tidb/pull/8885)
 -   SQLエグゼキュータ
@@ -64,9 +64,9 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
     -   `tidb_batch_commit`変数を使用して、ステートメントの数に基づいてトランザクションを複数のトランザクションに分割することをサポートします。 [#8293](https://github.com/pingcap/tidb/pull/8293)
     -   `ADMIN SHOW SLOW`ステートメントを使用してスローログをチェックするサポート [#7785](https://github.com/pingcap/tidb/pull/7785)
 -   互換性
-    -   `ALLOW_INVALID_DATES` SQLモードサポート [#9027](https://github.com/pingcap/tidb/pull/9027)
-    -   CSVファイルのフォールトトレランスを`LoadData`向上[#9005](https://github.com/pingcap/tidb/pull/9005)
-    -   MySQL 3.20ハンドシェイクプロトコルサポート [#8812](https://github.com/pingcap/tidb/pull/8812)
+    -   `ALLOW_INVALID_DATES` SQLモードをサポート [#9027](https://github.com/pingcap/tidb/pull/9027)
+    -   CSVファイルに対する`LoadData`のフォールトトレランスを向上[#9005](https://github.com/pingcap/tidb/pull/9005)
+    -   MySQL 3.20ハンドシェイクプロトコルをサポート [#8812](https://github.com/pingcap/tidb/pull/8812)
     -   符号なし`bigint`列をAUTO_INCREMENT列として使用することをサポート [#8181](https://github.com/pingcap/tidb/pull/8181)
     -   `SHOW CREATE DATABASE IF NOT EXISTS`構文サポートする [#8926](https://github.com/pingcap/tidb/pull/8926)
     -   フィルタリング条件にユーザー変数が含まれている場合、述語プッシュダウン操作を放棄して、ユーザー変数を使用してウィンドウ関数の動作をモックするMySQLの動作との互換性を改善しました[#8412](https://github.com/pingcap/tidb/pull/8412)
@@ -85,7 +85,7 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
 
 ## PD {#pd}
 
--   リージョンメタデータを個別に格納するには`RegionStorage`追加[#1237](https://github.com/pingcap/pd/pull/1237)
+-   リージョンメタデータを個別に格納するために`RegionStorage`を追加[#1237](https://github.com/pingcap/pd/pull/1237)
 -   シャッフルホットリージョンスケジューラを追加 [#1361](https://github.com/pingcap/pd/pull/1361)
 -   スケジュールパラメータ関連のメトリックを追加する [#1406](https://github.com/pingcap/pd/pull/1406)
 -   クラスターラベル関連のメトリクスを追加する [#1402](https://github.com/pingcap/pd/pull/1402)

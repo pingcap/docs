@@ -19,7 +19,7 @@ summary: TiDB 2.0.8は2018年10月16日にリリースされ、システムの�
     -   `TIMESTAMP`インデックスを追加したときにタイムゾーンが正しく処理されない問題を修正しました [#7812](https://github.com/pingcap/tidb/pull/7812)
     -   一部の状況で統計モジュールによって発生するメモリリークの問題を修正[#7864](https://github.com/pingcap/tidb/pull/7864)
     -   一部の異常な状況で`ANALYZE`の結果が取得できない問題を修正 [#7871](https://github.com/pingcap/tidb/pull/7871)
-    -   関数`SYSDATE`折り畳まないでください。返される結果が正しいことを確認するためです[#7894](https://github.com/pingcap/tidb/pull/7894)
+    -   関数`SYSDATE`を折り畳まないようにし、返される結果が正しいことを確認します [#7894](https://github.com/pingcap/tidb/pull/7894)
     -   いくつかの状況でpanic`substring_index`問題を修正[#7896](https://github.com/pingcap/tidb/pull/7896)
     -   一部の状況で`OUTER JOIN`が誤って`INNER JOIN`に変換される問題を修正[#7899](https://github.com/pingcap/tidb/pull/7899)
 
