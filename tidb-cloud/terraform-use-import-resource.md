@@ -9,16 +9,16 @@ summary: tidbcloud_import` リソースを使用してインポートタスク�
 
 `tidbcloud_import`リソースの機能は次のとおりです。
 
--   TiDB Cloudクラスターのインポートタスクを作成します。
--   ローカルディスクまたは Amazon S3 バケットからデータをインポートします。
--   進行中のインポートタスクをキャンセルします。
+- TiDB Cloudクラスターのインポートタスクを作成します。
+- ローカルディスクまたは Amazon S3 バケットからデータをインポートします。
+- 進行中のインポートタスクをキャンセルします。
 
 ## 前提条件 {#prerequisites}
 
--   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
--   TiDB Cloudクラスターを作成するには、次のいずれかのドキュメントを参照してください。
-    -   [TiDB Cloud Starter または Essential クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
-    -   [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
+- [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
+- TiDB Cloudクラスターを作成するには、次のいずれかのドキュメントを参照してください。
+    - [TiDB Cloud Starter または Essential クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
+    - [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
 
 ## インポートタスクを作成して実行する {#create-and-run-an-import-task}
 
@@ -30,13 +30,13 @@ summary: tidbcloud_import` リソースを使用してインポートタスク�
 >
 > ローカルファイルのインポートは、 TiDB Cloud Starter またはTiDB Cloud Essential クラスターでのみサポートされ、 TiDB Cloud Dedicated クラスターではサポートされません。
 
-1.  インポート用のCSVファイルを作成します。例:
+1. インポート用のCSVファイルを作成します。例:
 
         id;name;age
         1;Alice;20
         2;Bob;30
 
-2.  ディレクトリ`import`を作成し、その中にディレクトリ`main.tf`を作成します。例:
+2. ディレクトリ`import`を作成し、その中にディレクトリ`main.tf`を作成します。例:
 
         terraform {
          required_providers {
@@ -68,7 +68,7 @@ summary: tidbcloud_import` リソースを使用してインポートタスク�
 
     ファイル内のリソース値（プロジェクトID、クラスタID、CSVパスなど）をご自身のものに置き換えてください。 `csv_format`の詳細は [設定ページ](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format)に記載されています。
 
-3.  `terraform apply`コマンドを実行してインポートタスクを作成し、 `yes`入力して作成を確認し、インポートを開始します。
+3. `terraform apply`コマンドを実行してインポートタスクを作成し、 `yes`入力して作成を確認し、インポートを開始します。
 
         $ terraform apply
         ...
@@ -83,7 +83,7 @@ summary: tidbcloud_import` リソースを使用してインポートタスク�
         tidbcloud_import.example_local: Creating...
         tidbcloud_import.example_local: Creation complete after 6s [id=781074]
 
-4.  `terraform state show tidbcloud_import.${resource-name}`を使用してインポートタスクのステータスを確認します。
+4. `terraform state show tidbcloud_import.${resource-name}`を使用してインポートタスクのステータスを確認します。
 
         $ terraform state show tidbcloud_import.example_local
         # tidbcloud_import.example_local:
@@ -122,7 +122,7 @@ summary: tidbcloud_import` リソースを使用してインポートタスク�
             type                          = "LOCAL"
         }
 
-5.  数分後にステータスを更新するには`terraform refresh`を使用します。
+5. 数分後にステータスを更新するには`terraform refresh`を使用します。
 
         $ terraform refresh && terraform state show tidbcloud_import.example_local
         tidbcloud_import.example_local: Refreshing state... [id=781074]
@@ -164,7 +164,7 @@ summary: tidbcloud_import` リソースを使用してインポートタスク�
 
     ステータスが`COMPLETED`に変わると、インポートタスクが完了したことを示します。
 
-6.  MySQL CLI でインポートされたデータを確認します。
+6. MySQL CLI でインポートされたデータを確認します。
 
         mysql> SELECT * FROM test.import_test;
         +------+-------+------+
@@ -181,7 +181,7 @@ summary: tidbcloud_import` リソースを使用してインポートタスク�
 >
 > TiDB Cloud がAmazon S3 バケット内のファイルにアクセスできるようにするには、まず[Amazon S3 アクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)を実行する必要があります。
 
-1.  ディレクトリ`import`を作成し、その中にディレクトリ`main.tf`を作成します。例:
+1. ディレクトリ`import`を作成し、その中にディレクトリ`main.tf`を作成します。例:
 
         terraform {
           required_providers {
@@ -214,7 +214,7 @@ summary: tidbcloud_import` リソースを使用してインポートタスク�
           source_url   = "your_url"
         }
 
-2.  `terraform apply`コマンドを実行してインポートタスクを作成し、 `yes`入力して作成を確認し、インポートを開始します。
+2. `terraform apply`コマンドを実行してインポートタスクを作成し、 `yes`入力して作成を確認し、インポートを開始します。
 
         $ terraform apply
         ...
@@ -231,7 +231,7 @@ summary: tidbcloud_import` リソースを使用してインポートタスク�
         tidbcloud_import.example_s3_parquet: Creating...
         tidbcloud_import.example_s3_parquet: Creation complete after 4s [id=781076]
 
-3.  `terraform refresh`と`terraform state show tidbcloud_import.${resource-name}`を使用して、インポートタスクのステータスを更新および確認します。
+3. `terraform refresh`と`terraform state show tidbcloud_import.${resource-name}`を使用して、インポートタスクのステータスを更新および確認します。
 
 ## インポートタスクを更新する {#update-an-import-task}
 

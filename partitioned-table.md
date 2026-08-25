@@ -11,8 +11,8 @@ summary: TiDBにおけるパーティショニングの使い方を学びまし�
 
 このセクションでは、TiDB のパーティショニングの種類を紹介します。現在、TiDB は[範囲分割](#range-partitioning)、[範囲列パーティショニング](#range-columns-partitioning)ショニング、 [List パーティショニング](#list-partitioning)、 [List COLUMNS パーティショニング](#list-columns-partitioning)、[ハッシュパーティショニング](#hash-partitioning)、および[キーパーティショニング](#key-partitioning)をサポートしています。
 
--   範囲パーティショニング、範囲列パーティショニング、List パーティショニング、およびList COLUMNS パーティショニングは、アプリケーション内での大量の削除によって引き起こされるパフォーマンスの問題を解決し、パーティションを迅速に削除するために使用されます。
--   ハッシュパーティショニングとキーパーティショニングは、書き込み回数が多いシナリオでデータを分散するために使用されます。ハッシュパーティショニングと比較して、キーパーティショニングは複数の列のデータ分散と、非整数列によるパーティショニングをサポートします。
+- 範囲パーティショニング、範囲列パーティショニング、List パーティショニング、およびList COLUMNS パーティショニングは、アプリケーション内での大量の削除によって引き起こされるパフォーマンスの問題を解決し、パーティションを迅速に削除するために使用されます。
+- ハッシュパーティショニングとキーパーティショニングは、書き込み回数が多いシナリオでデータを分散するために使用されます。ハッシュパーティショニングと比較して、キーパーティショニングは複数の列のデータ分散と、非整数列によるパーティショニングをサポートします。
 
 ### 範囲分割 {#range-partitioning}
 
@@ -148,9 +148,9 @@ PARTITION BY RANGE ( UNIX_TIMESTAMP(report_updated) ) (
 
 範囲分割は、以下の条件の1つ以上が満たされる場合に特に有効です。
 
--   古いデータを削除したい場合、前の例の`employees` `ALTER TABLE employees DROP PARTITION p0;` `DELETE FROM employees WHERE YEAR(separated) <= 1990;`操作を実行するよりも高速です。
--   時刻や日付の値を含む列、または他の系列から得られた値を含む列を使用したい場合。
--   パーティショニングに使用される列に対して、頻繁にクエリを実行する必要があります。たとえば、 `EXPLAIN SELECT COUNT(*) FROM employees WHERE separated BETWEEN '2000-01-01' AND '2000-12-31' GROUP BY store_id;`のようなクエリを実行すると、他のパーティション`p2`の条件に一致しないため、 `WHERE`パーティション内のデータのみをスキャンする必要があることを TiDB は迅速に認識できます。
+- 古いデータを削除したい場合、前の例の`employees` `ALTER TABLE employees DROP PARTITION p0;` `DELETE FROM employees WHERE YEAR(separated) <= 1990;`操作を実行するよりも高速です。
+- 時刻や日付の値を含む列、または他の系列から得られた値を含む列を使用したい場合。
+- パーティショニングに使用される列に対して、頻繁にクエリを実行する必要があります。たとえば、 `EXPLAIN SELECT COUNT(*) FROM employees WHERE separated BETWEEN '2000-01-01' AND '2000-12-31' GROUP BY store_id;`のようなクエリを実行すると、他のパーティション`p2`の条件に一致しないため、 `WHERE`パーティション内のデータのみをスキャンする必要があることを TiDB は迅速に認識できます。
 
 ### 範囲列パーティショニング {#range-columns-partitioning}
 
@@ -296,10 +296,10 @@ ALTER TABLE table_name LAST PARTITION LESS THAN (<expression>)
 
 #### INTERVALパーティショニングの詳細と制限事項 {#interval-partitioning-details-and-limitations}
 
--   INTERVALパーティショニング機能は、 `CREATE/ALTER TABLE`構文のみを使用します。メタデータに変更はないため、新しい構文で作成または変更されたテーブルは引き続きMySQLと互換性があります。
--   MySQLとの互換性を維持するため、 `SHOW CREATE TABLE`の出力形式に変更はありません。
--   新しい`ALTER`構文は、INTERVAL に準拠する既存のテーブルに適用されます。これらのテーブルを`INTERVAL`構文で作成する必要はありません。
--   `INTERVAL`パーティショニングに`RANGE COLUMNS`構文を使用する場合、パーティショニングキーとして指定できる列は`INTEGER` 、 `DATE` 、または`DATETIME`型の単一の列のみです。
+- INTERVALパーティショニング機能は、 `CREATE/ALTER TABLE`構文のみを使用します。メタデータに変更はないため、新しい構文で作成または変更されたテーブルは引き続きMySQLと互換性があります。
+- MySQLとの互換性を維持するため、 `SHOW CREATE TABLE`の出力形式に変更はありません。
+- 新しい`ALTER`構文は、INTERVAL に準拠する既存のテーブルに適用されます。これらのテーブルを`INTERVAL`構文で作成する必要はありません。
+- `INTERVAL`パーティショニングに`RANGE COLUMNS`構文を使用する場合、パーティショニングキーとして指定できる列は`INTEGER` 、 `DATE` 、または`DATETIME`型の単一の列のみです。
 
 ### List パーティショニング {#list-partitioning}
 
@@ -685,9 +685,9 @@ PARTITIONS 2;
 
 バージョン6.4.0以降、TiDBはMySQLの`PARTITION BY LINEAR HASH`構文の解析をサポートしていますが、その中の`LINEAR`キーワードは無視します。MySQLリニアハッシュパーティションの既存のDDLおよびDMLステートメントがある場合は、TiDBで変更せずに実行できます。
 
--   MySQL の線形ハッシュパーティションの`CREATE`ステートメントの場合、TiDB は非線形ハッシュパーティションテーブルを作成します (TiDB には線形ハッシュパーティションテーブルはありません)。パーティション数が 2 のべき乗の場合、TiDB ハッシュパーティションテーブルの行は MySQL の線形ハッシュパーティションテーブルと同じように分散されます。それ以外の場合、TiDB でのこれらの行の分散は MySQL とは異なります。これは、非線形パーティションテーブルは単純な「パーティション数の剰余」を使用するのに対し、線形パーティションテーブルは「次の 2 のべき乗の剰余」を使用し、パーティション数と次の 2 のべき乗の間の値を折り返す」ためです。詳細については、 [#38450](https://github.com/pingcap/tidb/issues/38450)を参照してください。
+- MySQL の線形ハッシュパーティションの`CREATE`ステートメントの場合、TiDB は非線形ハッシュパーティションテーブルを作成します (TiDB には線形ハッシュパーティションテーブルはありません)。パーティション数が 2 のべき乗の場合、TiDB ハッシュパーティションテーブルの行は MySQL の線形ハッシュパーティションテーブルと同じように分散されます。それ以外の場合、TiDB でのこれらの行の分散は MySQL とは異なります。これは、非線形パーティションテーブルは単純な「パーティション数の剰余」を使用するのに対し、線形パーティションテーブルは「次の 2 のべき乗の剰余」を使用し、パーティション数と次の 2 のべき乗の間の値を折り返す」ためです。詳細については、 [#38450](https://github.com/pingcap/tidb/issues/38450)を参照してください。
 
--   MySQL の線形ハッシュパーティションのその他のすべてのステートメントについては、パーティション数が 2 のべき乗でない場合、行の分散方法が異なることを除いて、TiDB では MySQL と同じように動作します。この違いにより、 [パーティション選択](#partition-selection)、 `TRUNCATE PARTITION` 、および`EXCHANGE PARTITION`の結果は MySQL とは異なります。
+- MySQL の線形ハッシュパーティションのその他のすべてのステートメントについては、パーティション数が 2 のべき乗でない場合、行の分散方法が異なることを除いて、TiDB では MySQL と同じように動作します。この違いにより、 [パーティション選択](#partition-selection)、 `TRUNCATE PARTITION` 、および`EXCHANGE PARTITION`の結果は MySQL とは異なります。
 
 ### TiDBが線形キーパーティションを処理する方法 {#how-tidb-handles-linear-key-partitions}
 
@@ -835,16 +835,16 @@ Empty set (0.00 sec)
 
 `RANGE` 、 `RANGE COLUMNS` 、 `LIST` 、および`LIST COLUMNS`パーティションテーブルの場合、パーティションは次のように管理できます。
 
--   `ALTER TABLE <table name> ADD PARTITION (<partition specification>)`ステートメントを使用してパーティションを追加します。
--   `ALTER TABLE <table name> DROP PARTITION <list of partitions>`ステートメントを使用してパーティションを削除します。
--   `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>`ステートメントを使用して、指定されたパーティションからすべてのデータを削除します。 `TRUNCATE PARTITION`のロジックは[`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md)と似ていますが、パーティションを対象としています。
--   `ALTER TABLE <table name> REORGANIZE PARTITION <list of partitions> INTO (<new partition definitions>)`ステートメントを使用して、パーティションをマージ、分割、またはその他の変更します。
+- `ALTER TABLE <table name> ADD PARTITION (<partition specification>)`ステートメントを使用してパーティションを追加します。
+- `ALTER TABLE <table name> DROP PARTITION <list of partitions>`ステートメントを使用してパーティションを削除します。
+- `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>`ステートメントを使用して、指定されたパーティションからすべてのデータを削除します。 `TRUNCATE PARTITION`のロジックは[`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md)と似ていますが、パーティションを対象としています。
+- `ALTER TABLE <table name> REORGANIZE PARTITION <list of partitions> INTO (<new partition definitions>)`ステートメントを使用して、パーティションをマージ、分割、またはその他の変更します。
 
 `HASH`および`KEY`パーティションテーブルの場合、パーティションは次のように管理できます。
 
--   `ALTER TABLE <table name> COALESCE PARTITION <number of partitions to decrease by>`ステートメントを使用してパーティション数を減らします。この操作では、テーブル全体を新しいパーティション数にオンラインでコピーすることにより、パーティションが再編成されます。
--   `ALTER TABLE <table name> ADD PARTITION <number of partitions to increase by | (additional partition definitions)>`ステートメントを使用してパーティション数を増やします。この操作では、テーブル全体を新しいパーティション数にオンラインでコピーすることにより、パーティションが再編成されます。
--   `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>`ステートメントを使用して、指定されたパーティションからすべてのデータを削除します。 `TRUNCATE PARTITION`のロジックは[`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md)と似ていますが、パーティションを対象としています。
+- `ALTER TABLE <table name> COALESCE PARTITION <number of partitions to decrease by>`ステートメントを使用してパーティション数を減らします。この操作では、テーブル全体を新しいパーティション数にオンラインでコピーすることにより、パーティションが再編成されます。
+- `ALTER TABLE <table name> ADD PARTITION <number of partitions to increase by | (additional partition definitions)>`ステートメントを使用してパーティション数を増やします。この操作では、テーブル全体を新しいパーティション数にオンラインでコピーすることにより、パーティションが再編成されます。
+- `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>`ステートメントを使用して、指定されたパーティションからすべてのデータを削除します。 `TRUNCATE PARTITION`のロジックは[`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md)と似ていますが、パーティションを対象としています。
 
 `EXCHANGE PARTITION`は`RENAME TABLE t1 TO t1_tmp, t2 TO t1, t1_tmp TO t2`のようなテーブルの名前を変更するのと同様に、パーティションと非パーティションテーブルを交換することで機能します。
 
@@ -856,18 +856,18 @@ TiDBには`EXCHANGE PARTITION`に影響を与える可能性のある特定の�
 
 <CustomContent platform="tidb">
 
--   [SQLにおける配置ルール](/placement-rules-in-sql.md): 配置ポリシーは同じです。
+- [SQLにおける配置ルール](/placement-rules-in-sql.md): 配置ポリシーは同じです。
 
 </CustomContent>
 
--   [TiFlash](/tikv-overview.md) ： TiFlashレプリカの数は同数です。
--   [クラスター化インデックス](/clustered-indexes.md): パーティション化テーブルと非パーティション化テーブルは両方とも`CLUSTERED` 、または両方とも`NONCLUSTERED`です。
+- [TiFlash](/tikv-overview.md) ： TiFlashレプリカの数は同数です。
+- [クラスター化インデックス](/clustered-indexes.md): パーティション化テーブルと非パーティション化テーブルは両方とも`CLUSTERED` 、または両方とも`NONCLUSTERED`です。
 
 さらに、 `EXCHANGE PARTITION`と他のコンポーネントとの互換性には制限があります。パーティション化されたテーブルとパーティション化されていないテーブルは、同じ定義を持つ必要があります。
 
--   TiFlash: パーティション化されたテーブルとパーティション化されていないテーブルのTiFlashレプリカ定義が異なる場合、 `EXCHANGE PARTITION`操作は実行できません。
--   TiCDC: TiCDC は、パーティション化されたテーブルとパーティション化されていないテーブルの両方に主キーまたは一意キーが存在する場合に`EXCHANGE PARTITION`操作を複製します。それ以外の場合は、TiCDC は操作を複製しません。
--   TiDB LightningおよびBR: TiDB Lightningを使用したインポート時、またはBRを使用したリストア時に`EXCHANGE PARTITION`操作を実行しないでください。
+- TiFlash: パーティション化されたテーブルとパーティション化されていないテーブルのTiFlashレプリカ定義が異なる場合、 `EXCHANGE PARTITION`操作は実行できません。
+- TiCDC: TiCDC は、パーティション化されたテーブルとパーティション化されていないテーブルの両方に主キーまたは一意キーが存在する場合に`EXCHANGE PARTITION`操作を複製します。それ以外の場合は、TiCDC は操作を複製しません。
+- TiDB LightningおよびBR: TiDB Lightningを使用したインポート時、またはBRを使用したリストア時に`EXCHANGE PARTITION`操作を実行しないでください。
 
 ### 範囲、範囲列、リスト、およびリスト列パーティションの管理 {#manage-range-range-columns-list-and-list-columns-partitions}
 
@@ -976,9 +976,9 @@ ALTER TABLE member_level REORGANIZE PARTITION l1_2,l3,l4,l5,l6 INTO
 
 パーティションを再編成する際には、以下の重要な点に注意してください。
 
--   パーティションの再編成（パーティションのマージや分割を含む）を行うと、一覧表示されているパーティションが新しいパーティション定義のセットに変わりますが、パーティショニングの種類（たとえば、リスト型を範囲型に変更したり、範囲列型を範囲型に変更したり）は変更できません。
+- パーティションの再編成（パーティションのマージや分割を含む）を行うと、一覧表示されているパーティションが新しいパーティション定義のセットに変わりますが、パーティショニングの種類（たとえば、リスト型を範囲型に変更したり、範囲列型を範囲型に変更したり）は変更できません。
 
--   範囲パーティションテーブルの場合、その中の隣接するパーティションのみを再編成できます。
+- 範囲パーティションテーブルの場合、その中の隣接するパーティションのみを再編成できます。
 
     ```sql
     ALTER TABLE members REORGANIZE PARTITION p1800,p2000 INTO (PARTITION p2000 VALUES LESS THAN (2100));
@@ -988,7 +988,7 @@ ALTER TABLE member_level REORGANIZE PARTITION l1_2,l3,l4,l5,l6 INTO
     ERROR 8200 (HY000): Unsupported REORGANIZE PARTITION of RANGE; not adjacent partitions
     ```
 
--   範囲パーティションテーブルの場合、範囲の末尾を変更するには、 `VALUES LESS THAN`で定義された新しい末尾が、最後のパーティション内の既存の行をすべてカバーしている必要があります。そうでない場合、既存の行が範囲に収まらなくなり、エラーが報告されます。
+- 範囲パーティションテーブルの場合、範囲の末尾を変更するには、 `VALUES LESS THAN`で定義された新しい末尾が、最後のパーティション内の既存の行をすべてカバーしている必要があります。そうでない場合、既存の行が範囲に収まらなくなり、エラーが報告されます。
 
     ```sql
     INSERT INTO members VALUES (313, "John", "Doe", "2022-11-22", NULL);
@@ -1000,7 +1000,7 @@ ALTER TABLE member_level REORGANIZE PARTITION l1_2,l3,l4,l5,l6 INTO
     ERROR 1526 (HY000): Table has no partition for value 2022
     ```
 
--   リストパーティションテーブルの場合、パーティションに定義された値のセットを変更するには、新しい定義がそのパーティション内の既存の値を網羅している必要があります。そうでない場合は、エラーが報告されます。
+- リストパーティションテーブルの場合、パーティションに定義された値のセットを変更するには、新しい定義がそのパーティション内の既存の値を網羅している必要があります。そうでない場合は、エラーが報告されます。
 
     ```sql
     INSERT INTO member_level (id, level) values (313, 6);
@@ -1011,7 +1011,7 @@ ALTER TABLE member_level REORGANIZE PARTITION l1_2,l3,l4,l5,l6 INTO
     ERROR 1526 (HY000): Table has no partition for value 6
     ```
 
--   パーティションの再編成後、対応するパーティションの統計情報は古くなっているため、次の警告が表示されます。この場合、 [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)ステートメントを使用して統計情報を更新できます。
+- パーティションの再編成後、対応するパーティションの統計情報は古くなっているため、次の警告が表示されます。この場合、 [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)ステートメントを使用して統計情報を更新できます。
 
     ```sql
     +---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1197,14 +1197,14 @@ SELECT fname, lname, region_code, dob
 
 オプティマイザは、次の 2 つのシナリオにおいて`WHERE`条件に基づいてパーティションをプルーニングすることができます。
 
--   パーティション列 = 定数
--   partition_column IN (constant1, constant2, ..., constantN)
+- パーティション列 = 定数
+- partition_column IN (constant1, constant2, ..., constantN)
 
 現在、パーティションプルーニングは`LIKE`条件では機能しません。
 
 ### パーティションプルーニングが有効なケース {#some-cases-for-partition-pruning-to-take-effect}
 
-1.  パーティションプルーニングは、パーティションテーブル上のクエリ条件を使用するため、プランナーの最適化ルールに従ってクエリ条件をパーティションテーブルにプッシュダウンできない場合、このクエリにはパーティションプルーニングは適用されません。
+1. パーティションプルーニングは、パーティションテーブル上のクエリ条件を使用するため、プランナーの最適化ルールに従ってクエリ条件をパーティションテーブルにプッシュダウンできない場合、このクエリにはパーティションプルーニングは適用されません。
 
     例えば：
 
@@ -1227,7 +1227,7 @@ SELECT fname, lname, region_code, dob
 
     このクエリでは、 `t2.x > 5` `t1`パーティションテーブルにプッシュダウンできないため、このクエリに対してパーティションプルーニングは適用されません。
 
-2.  パーティションプルーニングはプラン最適化フェーズで行われるため、フィルタ条件が実行フェーズまで不明な場合には適用されません。
+2. パーティションプルーニングはプラン最適化フェーズで行われるため、フィルタ条件が実行フェーズまで不明な場合には適用されません。
 
     例えば：
 
@@ -1243,23 +1243,23 @@ SELECT fname, lname, region_code, dob
 
     このクエリは`t2`から行を読み取り、その結果を`t1`のサブクエリに使用します。理論的には、サブクエリ内の`t1.x > val`式によってパーティションプルーニングのメリットが得られる可能性がありますが、実行フェーズで発生するため、ここでは効果がありません。
 
-3.  現在の実装上の制限により、クエリ条件をTiKVにプッシュダウンできない場合、パーティションプルーニングで使用できません。
+3. 現在の実装上の制限により、クエリ条件をTiKVにプッシュダウンできない場合、パーティションプルーニングで使用できません。
 
     `fn(col)`式を例にとってみましょう。TiKV コプロセッサがこの`fn`関数をサポートしている場合、計画最適化フェーズ中に述語プッシュダウンルールに従って`fn(col)`リーフノード (つまり、パーティションテーブル) にプッシュダウンされ、パーティションプルーニングに使用できます。
 
     TiKVコプロセッサがこの`fn`関数をサポートしていない場合、 `fn(col)`はリーフノードにプッシュダウンされません。代わりに、リーフノードの上位にある`Selection`ノードになります。現在のパーティションプルーニングの実装では、このようなプランツリーはサポートされていません。
 
-4.  ハッシュおよびキーのパーティションタイプの場合、パーティションプルーニングでサポートされるクエリは、等しい条件のみです。
+4. ハッシュおよびキーのパーティションタイプの場合、パーティションプルーニングでサポートされるクエリは、等しい条件のみです。
 
-5.  範囲パーティションの場合、パーティションプルーニングを有効にするには、パーティション式が`col`または`fn(col)`の形式である必要があり、クエリ条件は`>` 、 `<` 、 `=` 、 `>=` } 、および`<=`のいずれかである必要があります。パーティション式が`fn(col)`の形式の場合、 `fn`関数は単調である必要があります。
+5. 範囲パーティションの場合、パーティションプルーニングを有効にするには、パーティション式が`col`または`fn(col)`の形式である必要があり、クエリ条件は`>` 、 `<` 、 `=` 、 `>=` } 、および`<=`のいずれかである必要があります。パーティション式が`fn(col)`の形式の場合、 `fn`関数は単調である必要があります。
 
     `fn`関数が単調である場合、任意の`x`および`y`に対して、 `x > y`ならば`fn(x) > fn(y)`となります。この`fn`関数は厳密に単調であると言えます。任意の`x`および`y`に対して、 `x > y`ならば`fn(x) >= fn(y)`となります。この場合、 `fn`は「単調」とも呼ばれます。理論的には、すべての単調関数はパーティションプルーニングによってサポートされます。
 
     現在、TiDBのパーティションプルーニングは、以下の単調関数のみをサポートしています。
 
-    -   [`UNIX_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md)
-    -   [`TO_DAYS()`](/functions-and-operators/date-and-time-functions.md)
-    -   [`EXTRACT(<time unit> FROM <DATETIME/DATE/TIME column>)`](/functions-and-operators/date-and-time-functions.md) 。 `DATE`列と`DATETIME`列の場合、 `YEAR`と`YEAR_MONTH`時間単位は単調関数とみなされます。 `TIME`列の場合、 `HOUR` 、 `HOUR_MINUTE` 、 `HOUR_SECOND`および`HOUR_MICROSECOND`は単調関数とみなされます。 `WEEK`は、 `EXTRACT`におけるパーティションプルーニングの時間単位としてサポートされていないことに注意してください。
+    - [`UNIX_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md)
+    - [`TO_DAYS()`](/functions-and-operators/date-and-time-functions.md)
+    - [`EXTRACT(<time unit> FROM <DATETIME/DATE/TIME column>)`](/functions-and-operators/date-and-time-functions.md) 。 `DATE`列と`DATETIME`列の場合、 `YEAR`と`YEAR_MONTH`時間単位は単調関数とみなされます。 `TIME`列の場合、 `HOUR` 、 `HOUR_MINUTE` 、 `HOUR_SECOND`および`HOUR_MICROSECOND`は単調関数とみなされます。 `WEEK`は、 `EXTRACT`におけるパーティションプルーニングの時間単位としてサポートされていないことに注意してください。
 
     例えば、パーティション式は単純な列です。
 
@@ -1402,11 +1402,11 @@ SELECT store_id, COUNT(department_id) AS c
 
 このセクションでは、TiDBにおけるパーティションテーブルに関するいくつかの制限事項と制約事項について説明します。
 
--   [`ALTER TABLE ... CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)ステートメントを使用してパーティションテーブルの列の型を変更することはサポートされていません。
--   [`ALTER TABLE ... CACHE`](/cached-tables.md)ステートメントを使用してパーティションテーブルをキャッシュテーブルに設定することはサポートされていません。
--   TiDB の[一時テーブル](/temporary-tables.md)パーティション化されたテーブルと互換性**がありません**。
--   パーティションテーブルでの[外部キー](/foreign-key.md)の作成はサポートされていません。
--   [`ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])`](/optimizer-hints.md#order_indext1_name-idx1_name--idx2_name-)ヒントは、パーティション化されたテーブルとその関連インデックスには機能しません。パーティション化されたテーブルのインデックスは順番に読み取ることができないためです。
+- [`ALTER TABLE ... CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)ステートメントを使用してパーティションテーブルの列の型を変更することはサポートされていません。
+- [`ALTER TABLE ... CACHE`](/cached-tables.md)ステートメントを使用してパーティションテーブルをキャッシュテーブルに設定することはサポートされていません。
+- TiDB の[一時テーブル](/temporary-tables.md)パーティション化されたテーブルと互換性**がありません**。
+- パーティションテーブルでの[外部キー](/foreign-key.md)の作成はサポートされていません。
+- [`ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])`](/optimizer-hints.md#order_indext1_name-idx1_name--idx2_name-)ヒントは、パーティション化されたテーブルとその関連インデックスには機能しません。パーティション化されたテーブルのインデックスは順番に読み取ることができないためです。
 
 ### パーティショニングキー、主キー、一意キー {#partitioning-keys-primary-keys-and-unique-keys}
 
@@ -1914,7 +1914,7 @@ mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 
 
 ### 動的プルーニングモードでパーティションテーブルの統計情報を更新する {#update-statistics-of-partitioned-tables-in-dynamic-pruning-mode}
 
-1.  パーティション化されたテーブルをすべて特定します。
+1. パーティション化されたテーブルをすべて特定します。
 
     ```sql
     SELECT DISTINCT CONCAT(TABLE_SCHEMA,'.', TABLE_NAME)
@@ -1932,7 +1932,7 @@ mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 
     1 row in set (0.02 sec)
     ```
 
-2.  すべてのパーティションテーブルの統計情報を更新するためのステートメントを生成します。
+2. すべてのパーティションテーブルの統計情報を更新するためのステートメントを生成します。
 
     ```sql
     SELECT DISTINCT CONCAT('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;')
@@ -1952,7 +1952,7 @@ mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 
 
     `ALL COLUMNS`を必要な列に変更できます。
 
-3.  バッチ更新ステートメントをファイルにエクスポートします。
+3. バッチ更新ステートメントをファイルにエクスポートします。
 
     ```shell
     mysql --host xxxx --port xxxx -u root -p -e "SELECT DISTINCT CONCAT('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;') \
@@ -1961,7 +1961,7 @@ mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 
         AND TABLE_SCHEMA NOT IN ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');" | tee gatherGlobalStats.sql
     ```
 
-4.  バッチ更新を実行する：
+4. バッチ更新を実行する：
 
     `source`コマンドを実行する前に、SQL ステートメントを処理してください。
 

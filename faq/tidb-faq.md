@@ -33,9 +33,9 @@ TiDBクラスタは、TiDBサーバー、PD（Placement Driver）サーバー、
 
 ### TiDB、TiKV、PD (Placement Driver) のそれぞれの責任は何ですか? {#what-is-the-respective-responsibility-of-tidb-tikv-and-pd-placement-driver}
 
--   TiDB は SQL コンピューティングレイヤーとして機能し、主に SQL の解析、クエリプランの指定、エグゼキュータの生成を担当します。
--   TiKVは分散型のキーバリューストレージエンジンとして動作し、実データの保存に使用されます。つまり、TiKVはTiDBのストレージエンジンです。
--   PD は TiDB のクラスター マネージャーとして機能し、TiKV メタデータを管理し、タイムスタンプを割り当て、データの配置と負荷分散の決定を行います。
+- TiDB は SQL コンピューティングレイヤーとして機能し、主に SQL の解析、クエリプランの指定、エグゼキュータの生成を担当します。
+- TiKVは分散型のキーバリューストレージエンジンとして動作し、実データの保存に使用されます。つまり、TiKVはTiDBのストレージエンジンです。
+- PD は TiDB のクラスター マネージャーとして機能し、TiKV メタデータを管理し、タイムスタンプを割り当て、データの配置と負荷分散の決定を行います。
 
 ### TiDB は使いやすいですか? {#is-it-easy-to-use-tidb}
 
@@ -82,9 +82,9 @@ Usage of ./bin/tidb-server:
 
 ### TiDB ドキュメントの他に、TiDB の知識を習得する方法はありますか? {#in-addition-to-the-tidb-documentation-are-there-any-other-ways-to-acquire-tidb-knowledge}
 
--   [TiDBドキュメント](https://docs.pingcap.com/) : TiDB 関連の知識を得るための最も重要かつタイムリーな方法。
--   [TiDBブログ](https://www.pingcap.com/blog/) : 技術記事、製品の洞察、ケーススタディを学びます。
--   [PingCAP教育](https://www.pingcap.com/education/?from=en) : オンライン コースや認定プログラムを受講します。
+- [TiDBドキュメント](https://docs.pingcap.com/) : TiDB 関連の知識を得るための最も重要かつタイムリーな方法。
+- [TiDBブログ](https://www.pingcap.com/blog/) : 技術記事、製品の洞察、ケーススタディを学びます。
+- [PingCAP教育](https://www.pingcap.com/education/?from=en) : オンライン コースや認定プログラムを受講します。
 
 ### TiDB ユーザー名の長さ制限は何ですか? {#what-is-the-length-limit-for-the-tidb-user-name}
 
@@ -92,8 +92,8 @@ Usage of ./bin/tidb-server:
 
 ### TiDB の列数と行サイズの制限は何ですか? {#what-are-the-limits-on-the-number-of-columns-and-row-size-in-tidb}
 
--   TiDB の列の最大数はデフォルトで 1017 に設定されています。この数は最大 4096 まで調整できます。
--   1行あたりの最大サイズはデフォルトで6MBです。最大120MBまで増やすことができます。
+- TiDB の列の最大数はデフォルトで 1017 に設定されています。この数は最大 4096 まで調整できます。
+- 1行あたりの最大サイズはデフォルトで6MBです。最大120MBまで増やすことができます。
 
 詳細については[TiDB の制限](/tidb-limitations.md)を参照してください。
 
@@ -107,8 +107,8 @@ Atomikosの2つのデータソースを設定したら、JDBCドライブをXA�
 
 ### TiDB は、パフォーマンスを損なうことなく、列指向ストレージエンジン (TiFlash) への大量の同時`INSERT`または`UPDATE`操作をどのようにサポートできるでしょうか? {#how-could-tidb-support-high-concurrent-insert-or-update-operations-to-the-columnar-storage-engine-tiflash-without-hurting-performance}
 
--   [TiFlash](/tiflash/tiflash-overview.md) 、列指向エンジンの変更を処理するために DeltaTree という特別な構造が導入されています。
--   TiFlash はRaftグループにおいてラーナーとして動作するため、ログコミットや書き込みの投票は行いません。つまり、DML 操作はTiFlashの確認応答を待つ必要がなく、そのためTiFlashによって OLTP パフォーマンスが低下することはありません。さらに、 TiFlashと TiKV は別々のインスタンスで動作するため、相互に影響を与えることはありません。
+- [TiFlash](/tiflash/tiflash-overview.md) 、列指向エンジンの変更を処理するために DeltaTree という特別な構造が導入されています。
+- TiFlash はRaftグループにおいてラーナーとして動作するため、ログコミットや書き込みの投票は行いません。つまり、DML 操作はTiFlashの確認応答を待つ必要がなく、そのためTiFlashによって OLTP パフォーマンスが低下することはありません。さらに、 TiFlashと TiKV は別々のインスタンスで動作するため、相互に影響を与えることはありません。
 
 ### TiFlash はどのような一貫性を提供しますか? {#what-kind-of-consistency-does-tiflash-provide}
 

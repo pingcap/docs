@@ -7,17 +7,17 @@ summary: 組み込みの埋め込みモデルを使用して、テキストデ�
 
 この例では、 [pytidb](https://github.com/pingcap/pytidb)クライアントで[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)機能を使用する方法を示します。
 
-1.  `pytidb`クライアントを使用してTiDBに接続します。
-2.  自動埋め込み用に構成されたVectorFieldを持つテーブルを定義します。
-3.  プレーンテキストデータを挿入してください。埋め込みデータはバックグラウンドで自動的に生成されます。
-4.  自然言語クエリを使用してベクトル検索を実行します。埋め込みベクトルは透過的に生成されます。
+1. `pytidb`クライアントを使用してTiDBに接続します。
+2. 自動埋め込み用に構成されたVectorFieldを持つテーブルを定義します。
+3. プレーンテキストデータを挿入してください。埋め込みデータはバックグラウンドで自動的に生成されます。
+4. 自然言語クエリを使用してベクトル検索を実行します。埋め込みベクトルは透過的に生成されます。
 
 ## 前提条件 {#prerequisites}
 
 始める前に、以下のものを用意してください。
 
--   **Python (&gt;=3.10)** : [Python](https://www.python.org/downloads/) 3.10以降のバージョンをインストールしてください。
--   **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
+- **Python (&gt;=3.10)** : [Python](https://www.python.org/downloads/) 3.10以降のバージョンをインストールしてください。
+- **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
 
 ## 実行方法 {#how-to-run}
 
@@ -38,9 +38,9 @@ pip install -r reqs.txt
 
 ### ステップ3．環境変数を設定する {#step-3-set-environment-variables}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
-2.  右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
-3.  接続パラメータに応じて環境変数を以下のように設定してください。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
+3. 接続パラメータに応じて環境変数を以下のように設定してください。
 
 ```bash
 cat > .env <<EOF
@@ -84,4 +84,4 @@ id: 3, text: LlamaIndex is a Python library for building AI-powered applications
 
 ## 関連リソース {#related-resources}
 
--   **ソースコード**： [GitHubで見る](https://github.com/pingcap/pytidb/tree/main/examples/auto_embedding)
+- **ソースコード**： [GitHubで見る](https://github.com/pingcap/pytidb/tree/main/examples/auto_embedding)

@@ -28,12 +28,12 @@ Info: {"upstream_id":7277814241002263370,"namespace":"default","id":"simple-repl
 
 各パラメータの意味は次のとおりです。
 
--   `--server` : TiCDC クラスター内の TiCDCサーバーのアドレス。
--   `--changefeed-id` : レプリケーションタスクのID。形式は正規表現`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`一致する必要があります。IDが指定されていない場合、TiCDCは自動的にUUID（バージョン4形式）をIDとして生成します。
--   `--sink-uri` ：レプリケーションタスクのダウンストリームアドレス。[シンクURIを使用してPulsarを構成する](#sink-uri)を参照してください。
--   `--start-ts` : チェンジフィードの開始TSO。TiCDCクラスターはこのTSOからデータのプルを開始します。デフォルト値は現在時刻です。
--   `--target-ts` : チェンジフィードのターゲットTSO。TiCDCクラスターはこのTSOでデータのプルを停止します。デフォルトでは空であり、TiCDCはデータのプルを自動的に停止しません。
--   `--config` : changefeed設定ファイル[TiCDC チェンジフィード構成パラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
+- `--server` : TiCDC クラスター内の TiCDCサーバーのアドレス。
+- `--changefeed-id` : レプリケーションタスクのID。形式は正規表現`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`一致する必要があります。IDが指定されていない場合、TiCDCは自動的にUUID（バージョン4形式）をIDとして生成します。
+- `--sink-uri` ：レプリケーションタスクのダウンストリームアドレス。[シンクURIを使用してPulsarを構成する](#sink-uri)を参照してください。
+- `--start-ts` : チェンジフィードの開始TSO。TiCDCクラスターはこのTSOからデータのプルを開始します。デフォルト値は現在時刻です。
+- `--target-ts` : チェンジフィードのターゲットTSO。TiCDCクラスターはこのTSOでデータのプルを停止します。デフォルトでは空であり、TiCDCはデータのプルを自動的に停止しません。
+- `--config` : changefeed設定ファイル[TiCDC チェンジフィード構成パラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 ## Sink URIとchangefeed configを使用してPulsarを構成する {#use-sink-uri-and-changefeed-config-to-configure-pulsar}
 
@@ -138,8 +138,8 @@ send-timeout=30
 
 ### ベストプラクティス {#best-practice}
 
--   チェンジフィードを作成する際は、パラメータ`protocol`を指定する必要があります。現在、Pulsarへのデータレプリケーションにはプロトコル`canal-json`のみがサポートされています。
--   `pulsar-producer-cache-size`パラメータは、Pulsarクライアントにキャッシュされるプロデューサーの数を示します。Pulsarでは各プロデューサーが1つのトピックにしか対応できないため、TiCDCはプロデューサーのキャッシュにLRU方式を採用しており、デフォルトの制限は10240です。複製する必要があるトピックの数がデフォルト値よりも多い場合は、この数を増やす必要があります。
+- チェンジフィードを作成する際は、パラメータ`protocol`を指定する必要があります。現在、Pulsarへのデータレプリケーションにはプロトコル`canal-json`のみがサポートされています。
+- `pulsar-producer-cache-size`パラメータは、Pulsarクライアントにキャッシュされるプロデューサーの数を示します。Pulsarでは各プロデューサーが1つのトピックにしか対応できないため、TiCDCはプロデューサーのキャッシュにLRU方式を採用しており、デフォルトの制限は10240です。複製する必要があるトピックの数がデフォルト値よりも多い場合は、この数を増やす必要があります。
 
 ### TLS暗号化伝送 {#tls-encrypted-transmission}
 
@@ -171,7 +171,7 @@ tls-key-file-path="/data/pulsar/tls-key-file"
 
 以下は、Pulsar でトークン認証を使用する場合のサンプル構成です。
 
--   トークン
+- トークン
 
     シンクURI:
 
@@ -186,7 +186,7 @@ tls-key-file-path="/data/pulsar/tls-key-file"
     authentication-token = "xxxxxxxxxxxxx"
     ```
 
--   ファイルからのトークン
+- ファイルからのトークン
 
     シンクURI:
 
@@ -202,7 +202,7 @@ tls-key-file-path="/data/pulsar/tls-key-file"
     token-from-file="/data/pulsar/token-file.txt"
     ```
 
--   mTLS認証
+- mTLS認証
 
     シンクURI:
 
@@ -222,7 +222,7 @@ tls-key-file-path="/data/pulsar/tls-key-file"
     tls-trust-certs-file-path="/data/pulsar/tls-trust-certs-file"
     ```
 
--   OAuth2認証
+- OAuth2認証
 
     v7.5.1 および v8.0.0 以降、TiCDC は Pulsar の OAuth2 認証をサポートしています。
 
@@ -265,10 +265,10 @@ dispatchers = [
 ]
 ```
 
--   マッチャールールに一致するテーブルは、対応するトピック式で指定されたポリシーに従ってディスパッチされます。例えば、テーブル`test3.aa` `Topic expression 2`に従ってディスパッチされ、テーブル`test5.aa` `Topic expression 3`に従ってディスパッチされます。
--   複数のマッチャールールに一致するテーブルの場合、最初に一致するトピック式に従ってディスパッチされます。例えば、テーブル`test1.aa` `Topic expression 1`に従ってディスパッチされます。
--   どのマッチャーにも一致しないテーブルの場合、対応するデータ変更イベントは`-sink-uri`で指定されたデフォルトトピックに送信されます。例えば、テーブル`test10.aa`デフォルトトピックに送信されます。
--   マッチャールールに一致するもののトピックディスパッチャーが指定されていないテーブルの場合、対応するデータ変更は`-sink-uri`で指定されたデフォルトトピックに送信されます。例えば、テーブル`test6.abc`デフォルトトピックに送信されます。
+- マッチャールールに一致するテーブルは、対応するトピック式で指定されたポリシーに従ってディスパッチされます。例えば、テーブル`test3.aa` `Topic expression 2`に従ってディスパッチされ、テーブル`test5.aa` `Topic expression 3`に従ってディスパッチされます。
+- 複数のマッチャールールに一致するテーブルの場合、最初に一致するトピック式に従ってディスパッチされます。例えば、テーブル`test1.aa` `Topic expression 1`に従ってディスパッチされます。
+- どのマッチャーにも一致しないテーブルの場合、対応するデータ変更イベントは`-sink-uri`で指定されたデフォルトトピックに送信されます。例えば、テーブル`test10.aa`デフォルトトピックに送信されます。
+- マッチャールールに一致するもののトピックディスパッチャーが指定されていないテーブルの場合、対応するデータ変更は`-sink-uri`で指定されたデフォルトトピックに送信されます。例えば、テーブル`test6.abc`デフォルトトピックに送信されます。
 
 ### トピックディスパッチャ {#topic-dispatcher}
 
@@ -276,27 +276,27 @@ dispatchers = [
 
 トピック表現の形式は`[tenant_and_namespace][prefix]{schema}[middle][{table}][suffix]`です。各部分の意味は次のとおりです。
 
--   `tenant_and_namespace` ：オプション。トピックのテナントと名前空間を表します（例： `persistent://abc/def/` ）。設定されていない場合は、トピックがPulsarのデフォルトテナント`public`のデフォルト名前空間`default`にあることを意味します。
--   `prefix` : オプション。トピック名のプレフィックスを表します。
--   `{schema}` : オプション。データベース名を表します。
--   `middle` : オプション。データベース名とテーブル名の間の区切り文字を表します。
--   `{table}` : オプション。テーブル名を表します。
--   `suffix` : オプション。トピック名のサフィックスを表します。
+- `tenant_and_namespace` ：オプション。トピックのテナントと名前空間を表します（例： `persistent://abc/def/` ）。設定されていない場合は、トピックがPulsarのデフォルトテナント`public`のデフォルト名前空間`default`にあることを意味します。
+- `prefix` : オプション。トピック名のプレフィックスを表します。
+- `{schema}` : オプション。データベース名を表します。
+- `middle` : オプション。データベース名とテーブル名の間の区切り文字を表します。
+- `{table}` : オプション。テーブル名を表します。
+- `suffix` : オプション。トピック名のサフィックスを表します。
 
 `prefix` 、 `middle` 、 `suffix` 、大文字と小文字（ `a-z` 、 `A-Z` ）、数字（ `0-9` ）、ドット（ `.` ）、アンダースコア（ `_` ）、ハイフン（ `-` ）のみをサポートします。 `{schema}`と`{table}`小文字でなければなりません。 `{Schema}`や`{TABLE}`などの大文字を含むプレースホルダは無効です。
 
 以下に例をいくつか示します。
 
--   `matcher = ['test1.table1', 'test2.table2'], topic = "hello_{schema}_{table}"`
-    -   テーブル`test1.table1`に対応するデータ変更イベントは、 `hello_test1_table1`という名前のトピックに送信されます。
-    -   テーブル`test2.table2`に対応するデータ変更イベントは、 `hello_test2_table2`という名前のトピックに送信されます。
+- `matcher = ['test1.table1', 'test2.table2'], topic = "hello_{schema}_{table}"`
+    - テーブル`test1.table1`に対応するデータ変更イベントは、 `hello_test1_table1`という名前のトピックに送信されます。
+    - テーブル`test2.table2`に対応するデータ変更イベントは、 `hello_test2_table2`という名前のトピックに送信されます。
 
--   `matcher = ['test3.*', 'test4.*'], topic = "hello_{schema}_world"`
-    -   `test3`下にあるすべてのテーブルのデータ変更イベントは、 `hello_test3_world`という名前のトピックに送信されます。
-    -   `test4`下にあるすべてのテーブルのデータ変更イベントは、 `hello_test4_world`という名前のトピックに送信されます。
+- `matcher = ['test3.*', 'test4.*'], topic = "hello_{schema}_world"`
+    - `test3`下にあるすべてのテーブルのデータ変更イベントは、 `hello_test3_world`という名前のトピックに送信されます。
+    - `test4`下にあるすべてのテーブルのデータ変更イベントは、 `hello_test4_world`という名前のトピックに送信されます。
 
--   `matcher = ['*.*'], topic = "{schema}_{table}"`
-    -   TiCDCがリッスンするすべてのテーブルは、ルール`databaseName_tableName`に従って別々のトピックに送信されます。例えば、テーブル`test.account`の場合、TiCDCはデータ変更ログをトピック`test_account`に送信します。
+- `matcher = ['*.*'], topic = "{schema}_{table}"`
+    - TiCDCがリッスンするすべてのテーブルは、ルール`databaseName_tableName`に従って別々のトピックに送信されます。例えば、テーブル`test.account`の場合、TiCDCはデータ変更ログをトピック`test_account`に送信します。
 
 ### DDLイベントをディスパッチする {#dispatch-ddl-events}
 
@@ -310,12 +310,12 @@ dispatchers = [
 
 たとえば、 `matcher = ['test.*'], topic = {schema}_{table}`ような`dispatchers`構成の場合、DDL イベントは次のように送信されます。
 
--   DDLイベントが単一のテーブルのみに関係する場合、DDLイベントはそのまま適切なトピックにディスパッチされます。例えば、DDLイベント`DROP TABLE test.table1`の場合、イベントは`test_table1`という名前のトピックにディスパッチされます。
+- DDLイベントが単一のテーブルのみに関係する場合、DDLイベントはそのまま適切なトピックにディスパッチされます。例えば、DDLイベント`DROP TABLE test.table1`の場合、イベントは`test_table1`という名前のトピックにディスパッチされます。
 
--   DDLイベントが複数のテーブルに関係する場合（ `RENAME TABLE` 、 `DROP TABLE` 、 `DROP VIEW`のいずれも複数のテーブルに関係する可能性があります）、単一のDDLイベントは複数のイベントに分割され、適切なトピックにディスパッチされます。例えば、DDLイベント`RENAME TABLE test.table1 TO test.table10, test.table2 TO test.table20`の場合、処理は次のようになります。
+- DDLイベントが複数のテーブルに関係する場合（ `RENAME TABLE` 、 `DROP TABLE` 、 `DROP VIEW`のいずれも複数のテーブルに関係する可能性があります）、単一のDDLイベントは複数のイベントに分割され、適切なトピックにディスパッチされます。例えば、DDLイベント`RENAME TABLE test.table1 TO test.table10, test.table2 TO test.table20`の場合、処理は次のようになります。
 
-    -   `RENAME TABLE test.table1 TO test.table10`の DDL イベントを`test_table1`という名前のトピックにディスパッチします。
-    -   `RENAME TABLE test.table2 TO test.table20`の DDL イベントを`test_table2`という名前のトピックにディスパッチします。
+    - `RENAME TABLE test.table1 TO test.table10`の DDL イベントを`test_table1`という名前のトピックにディスパッチします。
+    - `RENAME TABLE test.table2 TO test.table20`の DDL イベントを`test_table2`という名前のトピックにディスパッチします。
 
 ### パーティションディスパッチャ {#partition-dispatcher}
 
@@ -325,8 +325,8 @@ dispatchers = [
 
 発送ルールは以下のとおりです。
 
--   `default` : デフォルトでは、イベントはスキーマ名とテーブル名によってディスパッチされます。これは`table`を指定した場合と同じです。
--   `ts` : 行変更の commitT を使用してハッシュ計算を実行し、イベントをディスパッチします。
--   `index-value` : テーブルの主キーまたは一意インデックスの値を使用してハッシュ計算を実行し、イベントをディスパッチします。
--   `table` : スキーマ名とテーブル名を使用してハッシュ計算を実行し、イベントをディスパッチします。
--   その他の自己定義文字列: 自己定義文字列は Pulsar メッセージのキーとして直接使用され、Pulsar プロデューサーはこのキー値をディスパッチに使用します。
+- `default` : デフォルトでは、イベントはスキーマ名とテーブル名によってディスパッチされます。これは`table`を指定した場合と同じです。
+- `ts` : 行変更の commitT を使用してハッシュ計算を実行し、イベントをディスパッチします。
+- `index-value` : テーブルの主キーまたは一意インデックスの値を使用してハッシュ計算を実行し、イベントをディスパッチします。
+- `table` : スキーマ名とテーブル名を使用してハッシュ計算を実行し、イベントをディスパッチします。
+- その他の自己定義文字列: 自己定義文字列は Pulsar メッセージのキーとして直接使用され、Pulsar プロデューサーはこのキー値をディスパッチに使用します。

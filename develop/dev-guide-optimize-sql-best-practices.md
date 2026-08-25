@@ -133,8 +133,8 @@ DELETE FROM t;
 
 TiDBはオンラインのインデックス追加操作をサポートしています。[ADD INDEX](/sql-statements/sql-statement-add-index.md)または[CREATE INDEX](/sql-statements/sql-statement-create-index.md)文でインデックスを追加できます。テーブルへのデータの読み取りと書き込みはブロックされません。以下のシステム変数を変更することで、インデックス追加操作のフェーズ`re-organize`における同時実行性とバッチサイズを調整できます。
 
--   [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)
--   [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)
+- [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)
+- [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)
 
 オンラインアプリケーションへの影響を軽減するため、インデックス追加操作のデフォルトの速度は低速に設定されています。インデックス追加操作の対象列が読み取り負荷のみ、またはオンラインワークロードに直接関連していない場合は、上記の変数の値を適切に増やすことで、インデックス追加操作を高速化できます。
 
@@ -160,10 +160,10 @@ SET @@global.tidb_ddl_reorg_batch_size = 128;
 
 ### 参照 {#see-also}
 
--   [高同時実行書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)
+- [高同時実行書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

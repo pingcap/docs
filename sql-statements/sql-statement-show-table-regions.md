@@ -30,31 +30,31 @@ TableName ::=
 
 `SHOW TABLE REGIONS`を実行すると、次の列が返されます。
 
--   `REGION_ID` :リージョンID。
--   `START_KEY` :リージョンの開始キー。
--   `END_KEY` :リージョンの終了キー。
--   `LEADER_ID` :リージョンのLeaderID 。
--   `LEADER_STORE_ID` :リージョンリーダーが所在するストア (TiKV) の ID。
--   `PEERS` : すべてのリージョンレプリカのID。
--   `SCATTERING` :リージョンがスケジュールされているかどうか。 `1`は true を意味します。
--   `WRITTEN_BYTES` : 1回のハートビートサイクルでリージョンに書き込まれるデータの推定量。単位はバイトです。
--   `READ_BYTES` : 1回のハートビートサイクルでリージョンから読み取られたデータの推定量。単位はバイトです。
--   `APPROXIMATE_SIZE(MB)` :リージョン内の推定データ量。単位はメガバイト (MB) です。
--   `APPROXIMATE_KEYS` :リージョン内のキーの推定数。
+- `REGION_ID` :リージョンID。
+- `START_KEY` :リージョンの開始キー。
+- `END_KEY` :リージョンの終了キー。
+- `LEADER_ID` :リージョンのLeaderID 。
+- `LEADER_STORE_ID` :リージョンリーダーが所在するストア (TiKV) の ID。
+- `PEERS` : すべてのリージョンレプリカのID。
+- `SCATTERING` :リージョンがスケジュールされているかどうか。 `1`は true を意味します。
+- `WRITTEN_BYTES` : 1回のハートビートサイクルでリージョンに書き込まれるデータの推定量。単位はバイトです。
+- `READ_BYTES` : 1回のハートビートサイクルでリージョンから読み取られたデータの推定量。単位はバイトです。
+- `APPROXIMATE_SIZE(MB)` :リージョン内の推定データ量。単位はメガバイト (MB) です。
+- `APPROXIMATE_KEYS` :リージョン内のキーの推定数。
 
 <CustomContent platform="tidb">
 
--   `SCHEDULING_CONSTRAINTS` :リージョンが属するテーブルまたはパーティションに関連付けられた[配置ポリシー設定](/placement-rules-in-sql.md)。
+- `SCHEDULING_CONSTRAINTS` :リージョンが属するテーブルまたはパーティションに関連付けられた[配置ポリシー設定](/placement-rules-in-sql.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   `SCHEDULING_CONSTRAINTS` :リージョンが属するテーブルまたはパーティションに関連付けられた配置ポリシー設定。
+- `SCHEDULING_CONSTRAINTS` :リージョンが属するテーブルまたはパーティションに関連付けられた配置ポリシー設定。
 
 </CustomContent>
 
--   `SCHEDULING_STATE` : 配置ポリシーを持つリージョンのスケジューリング状態。
+- `SCHEDULING_STATE` : 配置ポリシーを持つリージョンのスケジューリング状態。
 
 > **Note:**
 >
@@ -130,8 +130,8 @@ mysql> SHOW TABLE t1 REGIONS;
 
 上記の出力は、リージョン96が分割され、新しいリージョン98が作成されたことを示しています。表内の残りのリージョンは、分割操作の影響を受けませんでした。これは、出力統計によって確認できます。
 
--   `TOTAL_SPLIT_REGION`は、新しく分割されたリージョンの数を示します。この例では、その数は 1 です。
--   `SCATTER_FINISH_RATIO`新しく分割されたリージョンが正常に分散される割合を示します。 `1.0` 、すべてのリージョンが分散されたことを意味します。
+- `TOTAL_SPLIT_REGION`は、新しく分割されたリージョンの数を示します。この例では、その数は 1 です。
+- `SCATTER_FINISH_RATIO`新しく分割されたリージョンが正常に分散される割合を示します。 `1.0` 、すべてのリージョンが分散されたことを意味します。
 
 より詳細な例については、以下を参照してください。
 
@@ -152,10 +152,10 @@ mysql> SHOW TABLE t REGIONS;
 
 上記の例では：
 
--   テーブル t は 6 つの領域に対応しています。これらの領域では、 `102` 、 `106` 、 `110` 、 `114` 、および`3`に行データが格納され、 `98`にインデックスデータが格納されます。
--   リージョン`START_KEY`の`END_KEY`および`102`について、 `t_43`はテーブルのプレフィックスと ID を示します。 `_r`テーブル t のレコード データのプレフィックスです。 `_i`はインデックスデータのプレフィックスです。
--   リージョン`102` 、 `START_KEY` 、および`END_KEY`では、 `[-inf, 20000)`の範囲内のストレージデータが格納されます。同様に、領域 ( `106` 、 `110` 、 `114` 、 `3` ) におけるデータ格納範囲も計算できます。
--   リージョン`98`にはインデックスデータが格納されます。テーブル t のインデックスデータの開始キーは`t_43_i`であり、これはリージョン`98`の範囲内にあります。
+- テーブル t は 6 つの領域に対応しています。これらの領域では、 `102` 、 `106` 、 `110` 、 `114` 、および`3`に行データが格納され、 `98`にインデックスデータが格納されます。
+- リージョン`START_KEY`の`END_KEY`および`102`について、 `t_43`はテーブルのプレフィックスと ID を示します。 `_r`テーブル t のレコード データのプレフィックスです。 `_i`はインデックスデータのプレフィックスです。
+- リージョン`102` 、 `START_KEY` 、および`END_KEY`では、 `[-inf, 20000)`の範囲内のストレージデータが格納されます。同様に、領域 ( `106` 、 `110` 、 `114` 、 `3` ) におけるデータ格納範囲も計算できます。
+- リージョン`98`にはインデックスデータが格納されます。テーブル t のインデックスデータの開始キーは`t_43_i`であり、これはリージョン`98`の範囲内にあります。
 
 ストア1のテーブルtに対応するリージョンを確認するには、 `WHERE`句を使用します。
 
@@ -204,5 +204,5 @@ test> SHOW TABLE t REGIONS;
 
 ## 参照 {#see-also}
 
--   [SPLIT REGION](/sql-statements/sql-statement-split-region.md)
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+- [SPLIT REGION](/sql-statements/sql-statement-split-region.md)
+- [CREATE TABLE](/sql-statements/sql-statement-create-table.md)

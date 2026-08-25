@@ -18,7 +18,7 @@ TiDBはMySQL互換データベースであり、 TiDB Cloud Starterはフルマ�
 
 このチュートリアルを完了するには、以下が必要です。
 
--   お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
 ## TiDB Cloud StarterでWordPressを実行する {#run-wordpress-with-tidb-cloud-starter}
 
@@ -35,13 +35,13 @@ cd wordpress-tidb-docker
 
 ### ステップ2：依存関係をインストールする {#step-2-install-dependencies}
 
-1.  サンプルリポジトリでは、WordPressを起動するために[Docker](https://www.docker.com/)と[Docker Compose](https://docs.docker.com/compose/)が必要です。既にインストール済みであれば、この手順はスキップできます。WordPressはLinux環境（Ubuntuなど）で実行することを強くお勧めします。DockerとDocker Composeをインストールするには、次のコマンドを実行してください。
+1. サンプルリポジトリでは、WordPressを起動するために[Docker](https://www.docker.com/)と[Docker Compose](https://docs.docker.com/compose/)が必要です。既にインストール済みであれば、この手順はスキップできます。WordPressはLinux環境（Ubuntuなど）で実行することを強くお勧めします。DockerとDocker Composeをインストールするには、次のコマンドを実行してください。
 
     ```shell
     sudo sh install.sh
     ```
 
-2.  サンプル リポジトリには、サブモジュールとして[TiDB互換性プラグイン](https://github.com/pingcap/wordpress-tidb-plugin)が含まれています。次のコマンドを実行してサブモジュールを更新します。
+2. サンプル リポジトリには、サブモジュールとして[TiDB互換性プラグイン](https://github.com/pingcap/wordpress-tidb-plugin)が含まれています。次のコマンドを実行してサブモジュールを更新します。
 
     ```shell
     git submodule update --init --recursive
@@ -51,30 +51,30 @@ cd wordpress-tidb-docker
 
 TiDB Cloud StarterへのWordPressデータベース接続を設定します。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
+3. 接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **Connection Type**は`Public`に設定されています。
-    -   **Connect With**は`WordPress`に設定されています。
-    -   **Operating System**は`Debian/Ubuntu/Arch`に設定されています。
-    -   **Database**は、使用したいデータベースに設定されます。たとえば、 `test` 。
+    - **Connection Type**は`Public`に設定されています。
+    - **Connect With**は`WordPress`に設定されています。
+    - **Operating System**は`Debian/Ubuntu/Arch`に設定されています。
+    - **Database**は、使用したいデータベースに設定されます。たとえば、 `test` 。
 
-4.  **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
+4. **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
 
     > **Tip:**
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **Reset Password**をクリックして新しいパスワードを生成できます。
 
-5.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
+5. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
     cp .env.example .env
     ```
 
-6.  対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+6. 対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```dotenv
     TIDB_HOST='{HOST}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
@@ -86,23 +86,23 @@ TiDB Cloud StarterへのWordPressデータベース接続を設定します。
 
     プレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。デフォルトでは、 TiDB Cloud Starterには`test`データベースが付属しています。TiDB Cloud Starterインスタンスで既に別のデータベースを作成している場合は、 `test`データベース名に置き換えてください。
 
-7.  `.env`ファイルを保存します。
+7. `.env`ファイルを保存します。
 
 ### ステップ4： TiDB Cloud StarterでWordPressを起動する {#step-4-start-wordpress-with-tidb-cloud-starter}
 
-1.  WordPressをDockerコンテナとして実行するには、以下のコマンドを実行してください。
+1. WordPressをDockerコンテナとして実行するには、以下のコマンドを実行してください。
 
     ```shell
     docker compose up -d
     ```
 
-2.  ローカルマシンでコンテナを起動した場合は[localhost](http://localhost/)にアクセスしてWordPressサイトをセットアップし、リモートマシンでWordPressが実行されている場合は`http://<your_instance_ip>`にアクセスしてください。
+2. ローカルマシンでコンテナを起動した場合は[localhost](http://localhost/)にアクセスしてWordPressサイトをセットアップし、リモートマシンでWordPressが実行されている場合は`http://<your_instance_ip>`にアクセスしてください。
 
 ### ステップ5：データベース接続を確認する {#step-5-confirm-the-database-connection}
 
-1.  TiDB CloudコンソールでTiDB Cloud Starterインスタンスの接続ダイアログを閉じ、 **SQLエディタ**ページを開きます。
-2.  左側の**Schemas**タブで、WordPressに接続したデータベースをクリックします。
-3.  そのデータベースのテーブル一覧に、WordPressのテーブル（ `wp_posts`や`wp_comments`など）が表示されていることを確認してください。
+1. TiDB CloudコンソールでTiDB Cloud Starterインスタンスの接続ダイアログを閉じ、 **SQLエディタ**ページを開きます。
+2. 左側の**Schemas**タブで、WordPressに接続したデータベースをクリックします。
+3. そのデータベースのテーブル一覧に、WordPressのテーブル（ `wp_posts`や`wp_comments`など）が表示されていることを確認してください。
 
 ## お困りですか？ {#need-help}
 

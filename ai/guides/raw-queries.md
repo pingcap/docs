@@ -37,11 +37,11 @@ client.execute(
 
 `client.query()`メソッドは、いくつかのヘルパー メソッドを含む`SQLQueryResult`インスタンスを返します。
 
--   `to_pydantic()`
--   `to_list()`
--   `to_pandas()`
--   `to_rows()`
--   `scalar()`
+- `to_pydantic()`
+- `to_list()`
+- `to_pandas()`
+- `to_rows()`
+- `scalar()`
 
 #### Pydantic モデルとして {#as-pydantic-model}
 

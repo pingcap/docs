@@ -14,28 +14,28 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、 [TiDB Clou
 
 ## 前提条件 {#prerequisites}
 
--   [Git](https://git-scm.com/)
+- [Git](https://git-scm.com/)
 
--   [JDK](https://openjdk.org/install/) 11以降
+- [JDK](https://openjdk.org/install/) 11以降
 
--   [Maven](https://maven.apache.org/install.html)3.8以上
+- [Maven](https://maven.apache.org/install.html)3.8以上
 
--   [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)バージョン 2
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)バージョン 2
 
--   [AWSサーバーレスアプリケーションモデルコマンドラインインターフェイス（AWS SAM CLI）](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) 1.58.0以降
+- [AWSサーバーレスアプリケーションモデルコマンドラインインターフェイス（AWS SAM CLI）](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) 1.58.0以降
 
--   次の要件を持つ AWS [IDおよびアクセス管理（IAM）ユーザー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html):
+- 次の要件を持つ AWS [IDおよびアクセス管理（IAM）ユーザー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html):
 
-    -   ユーザーは[アクセスキー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)を使用して AWS にアクセスできます。
-    -   ユーザーには以下の権限が付与されています。
+    - ユーザーは[アクセスキー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)を使用して AWS にアクセスできます。
+    - ユーザーには以下の権限が付与されています。
 
-        -   `AWSCertificateManagerFullAccess` : [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/)読み書きに使用されます。
-        -   `AWSCloudFormationFullAccess` : SAM CLI は[AWS CloudFormation](https://aws.amazon.com/cloudformation/)を使用して AWS リソースを宣言します。
-        -   `AmazonS3FullAccess` : AWS CloudFormation は[Amazon S3](https://aws.amazon.com/s3/?nc2=h_ql_prod_fs_s3)を使用して公開します。
-        -   `AWSLambda_FullAccess` : 現在、Amazon AppFlow 用の新しいコネクタを実装する方法は[AWS Lambda](https://aws.amazon.com/lambda/?nc2=h_ql_prod_fs_lbd)のみです。
-        -   `IAMFullAccess` : SAM CLI はコネクタ用に`ConnectorFunctionRole`を作成する必要があります。
+        - `AWSCertificateManagerFullAccess` : [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/)読み書きに使用されます。
+        - `AWSCloudFormationFullAccess` : SAM CLI は[AWS CloudFormation](https://aws.amazon.com/cloudformation/)を使用して AWS リソースを宣言します。
+        - `AmazonS3FullAccess` : AWS CloudFormation は[Amazon S3](https://aws.amazon.com/s3/?nc2=h_ql_prod_fs_s3)を使用して公開します。
+        - `AWSLambda_FullAccess` : 現在、Amazon AppFlow 用の新しいコネクタを実装する方法は[AWS Lambda](https://aws.amazon.com/lambda/?nc2=h_ql_prod_fs_lbd)のみです。
+        - `IAMFullAccess` : SAM CLI はコネクタ用に`ConnectorFunctionRole`を作成する必要があります。
 
--   [Salesforce](https://developer.salesforce.com)アカウント。
+- [Salesforce](https://developer.salesforce.com)アカウント。
 
 ## ステップ1. TiDBコネクタを登録する {#step-1-register-a-tidb-connector}
 
@@ -49,20 +49,20 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 ### Lambda関数を構築してアップロードする {#build-and-upload-a-lambda}
 
-1.  パッケージを作成する：
+1. パッケージを作成する：
 
     ```bash
     cd tidb-appflow-integration
     mvn clean package
     ```
 
-2.  （オプション）AWSアクセスキーIDとシークレットアクセスキーを設定していない場合は、設定してください。
+2. （オプション）AWSアクセスキーIDとシークレットアクセスキーを設定していない場合は、設定してください。
 
     ```bash
     aws configure
     ```
 
-3.  JARパッケージをLambda関数としてアップロードしてください。
+3. JARパッケージをLambda関数としてアップロードしてください。
 
     ```bash
     sam deploy --guided
@@ -70,10 +70,10 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
     > **Note:**
     >
-    > -   `--guided`オプションでは、プロンプトが表示され、デプロイの手順を案内します。入力内容は構成ファイルに保存され、デフォルトでは`samconfig.toml`というファイルになります。
-    > -   `stack_name`デプロイする AWS Lambda の名前を指定します。
-    > -   このガイドでは、TiDB Cloud Starterのクラウドプロバイダーとして AWS を使用しています。ソースまたは宛先として Amazon S3 を使用するには、AWS Lambda の`region`を Amazon S3 と同じに設定する必要があります。
-    > -   既に`sam deploy --guided`を実行したことがある場合は、代わりに`sam deploy`を実行するだけで、SAM CLI は設定ファイル`samconfig.toml`を使用して操作を簡素化します。
+    > - `--guided`オプションでは、プロンプトが表示され、デプロイの手順を案内します。入力内容は構成ファイルに保存され、デフォルトでは`samconfig.toml`というファイルになります。
+    > - `stack_name`デプロイする AWS Lambda の名前を指定します。
+    > - このガイドでは、TiDB Cloud Starterのクラウドプロバイダーとして AWS を使用しています。ソースまたは宛先として Amazon S3 を使用するには、AWS Lambda の`region`を Amazon S3 と同じに設定する必要があります。
+    > - 既に`sam deploy --guided`を実行したことがある場合は、代わりに`sam deploy`を実行するだけで、SAM CLI は設定ファイル`samconfig.toml`を使用して操作を簡素化します。
 
     以下のような出力が表示された場合、このLambda関数は正常にデプロイされています。
 
@@ -81,21 +81,21 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     Successfully created/updated stack - <stack_name> in <region>
     ```
 
-4.  [AWS Lambdaコンソール](https://console.aws.amazon.com/lambda/home)にアクセスすると、先ほどアップロードしたLambda関数が表示されます。ウィンドウの右上隅で正しいリージョンを選択する必要があることに注意してください。
+4. [AWS Lambdaコンソール](https://console.aws.amazon.com/lambda/home)にアクセスすると、先ほどアップロードしたLambda関数が表示されます。ウィンドウの右上隅で正しいリージョンを選択する必要があることに注意してください。
 
     ![lambda dashboard](/media/develop/aws-appflow-step-lambda-dashboard.png)
 
 ### Lambdaを使用してコネクタを登録します {#use-lambda-to-register-a-connector}
 
-1.  [AWS マネジメントコンソール](https://console.aws.amazon.com)コンソールで、 [Amazon AppFlow &gt; コネクタ](https://console.aws.amazon.com/appflow/home#/gallery)クリックし、 **Register a new connector**をクリックします。
+1. [AWS マネジメントコンソール](https://console.aws.amazon.com)コンソールで、 [Amazon AppFlow &gt; コネクタ](https://console.aws.amazon.com/appflow/home#/gallery)クリックし、 **Register a new connector**をクリックします。
 
     ![register connector](/media/develop/aws-appflow-step-register-connector.png)
 
-2.  **Register a new connector**ダイアログで、アップロードしたLambda関数を選択し、コネクタ名を使用してコネクタラベルを指定します。
+2. **Register a new connector**ダイアログで、アップロードしたLambda関数を選択し、コネクタ名を使用してコネクタラベルを指定します。
 
     ![register connector dialog](/media/develop/aws-appflow-step-register-connector-dialog.png)
 
-3.  **Register**をクリックします。すると、TiDBコネクタが正常に登録されます。
+3. **Register**をクリックします。すると、TiDBコネクタが正常に登録されます。
 
 ## ステップ2. フローを作成する {#step-2-create-a-flow}
 
@@ -113,7 +113,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 **ソースの詳細**と**宛先の詳細**を選択してください。TiDBコネクタはどちらにも使用できます。
 
-1.  ソース名を選択してください。このドキュメントでは、例として**Salesforceを**ソースとして使用します。
+1. ソース名を選択してください。このドキュメントでは、例として**Salesforceを**ソースとして使用します。
 
     ![salesforce source](/media/develop/aws-appflow-step-salesforce-source.png)
 
@@ -121,13 +121,13 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
     ![salesforce data](/media/develop/aws-appflow-step-salesforce-data.png)
 
-2.  **Connect**をクリックしてください。
+2. **Connect**をクリックしてください。
 
-    1.  **Connect to Salesforce**ダイアログで、この接続の名前を指定し、 **Continue**をクリックします。
+    1. **Connect to Salesforce**ダイアログで、この接続の名前を指定し、 **Continue**をクリックします。
 
         ![connect to salesforce](/media/develop/aws-appflow-step-connect-to-salesforce.png)
 
-    2.  「許可」をクリックして、AWSがSalesforceデータを読み取ることを**許可する**ことを確認してください。
+    2. 「許可」をクリックして、AWSがSalesforceデータを読み取ることを**許可する**ことを確認してください。
 
         ![allow salesforce](/media/develop/aws-appflow-step-allow-salesforce.png)
 
@@ -135,11 +135,11 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     >
     > 会社がすでに Salesforce の Professional Edition を使用している場合、REST API はデフォルトでは有効になっていません。 REST API を使用するには、新しい Developer Edition の登録が必要になる場合があります。詳細については、 [Salesforceフォーラムトピック](https://developer.salesforce.com/forums/?id=906F0000000D9Y2IAK)を参照してください。
 
-3.  **Destination details**エリアで、接続先として**TiDB-Connector**を選択します。 **Connect**ボタンが表示されます。
+3. **Destination details**エリアで、接続先として**TiDB-Connector**を選択します。 **Connect**ボタンが表示されます。
 
     ![tidb dest](/media/develop/aws-appflow-step-tidb-dest.png)
 
-4.  **Connect**をクリックする前に、Salesforce **Account**オブジェクト用に TiDB に`sf_account`テーブルを作成する必要があります。このテーブルスキーマは[Amazon AppFlow のチュートリアル](https://docs.aws.amazon.com/appflow/latest/userguide/flow-tutorial-set-up-source.html)にあるサンプルデータとは異なることに注意してください。
+4. **Connect**をクリックする前に、Salesforce **Account**オブジェクト用に TiDB に`sf_account`テーブルを作成する必要があります。このテーブルスキーマは[Amazon AppFlow のチュートリアル](https://docs.aws.amazon.com/appflow/latest/userguide/flow-tutorial-set-up-source.html)にあるサンプルデータとは異なることに注意してください。
 
     ```sql
     CREATE TABLE `sf_account` (
@@ -153,13 +153,13 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     );
     ```
 
-5.  `sf_account`テーブルが作成されたら、 **[接続]**をクリックします。接続ダイアログが表示されます。
+5. `sf_account`テーブルが作成されたら、 **[接続]**をクリックします。接続ダイアログが表示されます。
 
-6.  **TiDBコネクタへの接続**ダイアログで、 TiDB Cloud Starterインスタンスの接続プロパティを入力します。TiDB Cloud Starterの場合、 **TLS**オプションを`Yes`に設定する必要があります。これにより、TiDBコネクタがTLS接続を使用できるようになります。次に、 **[接続]**をクリックします。
+6. **TiDBコネクタへの接続**ダイアログで、 TiDB Cloud Starterインスタンスの接続プロパティを入力します。TiDB Cloud Starterの場合、 **TLS**オプションを`Yes`に設定する必要があります。これにより、TiDBコネクタがTLS接続を使用できるようになります。次に、 **[接続]**をクリックします。
 
     ![tidb connection message](/media/develop/aws-appflow-step-tidb-connection-message.png)
 
-7.  これで、接続時に指定したデータベース内のすべてのテーブルを取得できます。ドロップダウンリストから**sf_account**テーブルを選択してください。
+7. これで、接続時に指定したデータベース内のすべてのテーブルを取得できます。ドロップダウンリストから**sf_account**テーブルを選択してください。
 
     ![database](/media/develop/aws-appflow-step-database.png)
 
@@ -167,7 +167,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
     ![complete flow](/media/develop/aws-appflow-step-complete-flow.png)
 
-8.  **Error handling**領域で、 **Stop the current flow run**を選択します。**Flow trigger**領域で、 **Run on demand**トリガータイプを選択します。これは、フローを手動で実行する必要があることを意味します。次に、 **Next**をクリックします。
+8. **Error handling**領域で、 **Stop the current flow run**を選択します。**Flow trigger**領域で、 **Run on demand**トリガータイプを選択します。これは、フローを手動で実行する必要があることを意味します。次に、 **Next**をクリックします。
 
     ![complete step1](/media/develop/aws-appflow-step-complete-step1.png)
 
@@ -175,7 +175,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 Salesforce の**Account**オブジェクトのフィールドを TiDB の`sf_account`テーブルにマッピングし、 **[次へ]**をクリックします。
 
--   `sf_account`テーブルは TiDB に新しく作成されましたが、空です。
+- `sf_account`テーブルは TiDB に新しく作成されましたが、空です。
 
     ```sql
     test> SELECT * FROM sf_account;
@@ -185,18 +185,18 @@ Salesforce の**Account**オブジェクトのフィールドを TiDB の`sf_acc
     +----+------+------+---------------+--------+----------+
     ```
 
--   マッピングルールを設定するには、左側でソースフィールド名を選択し、右側で宛先フィールド名を選択します。次に、 **Map fields**をクリックすると、ルールが設定されます。
+- マッピングルールを設定するには、左側でソースフィールド名を選択し、右側で宛先フィールド名を選択します。次に、 **Map fields**をクリックすると、ルールが設定されます。
 
     ![add mapping rule](/media/develop/aws-appflow-step-add-mapping-rule.png)
 
--   このドキュメントでは、以下のマッピングルール（ソースフィールド名→宛先フィールド名）が必要です。
+- このドキュメントでは、以下のマッピングルール（ソースフィールド名→宛先フィールド名）が必要です。
 
-    -   アカウントID -&gt; id
-    -   アカウント名 -&gt; 名前
-    -   アカウントタイプ -&gt; タイプ
-    -   請求先州/都道府県 -&gt; billing_state
-    -   アカウント評価 -&gt; 評価
-    -   産業 -&gt; 産業
+    - アカウントID -&gt; id
+    - アカウント名 -&gt; 名前
+    - アカウントタイプ -&gt; タイプ
+    - 請求先州/都道府県 -&gt; billing_state
+    - アカウント評価 -&gt; 評価
+    - 産業 -&gt; 産業
 
     ![mapping a rule](/media/develop/aws-appflow-step-mapping-a-rule.png)
 
@@ -249,13 +249,13 @@ test> SELECT * FROM sf_account;
 
 ## 注目すべきこと {#noteworthy-things}
 
--   何か問題が発生した場合は、AWS マネジメントコンソールの[CloudWatch](https://console.aws.amazon.com/cloudwatch/home)ページにアクセスしてログを取得できます。
--   このドキュメントの手順は、 [Amazon AppFlow Custom Connector SDK を使用したカスタムコネクタの構築](https://aws.amazon.com/blogs/compute/building-custom-connectors-using-the-amazon-appflow-custom-connector-sdk/)に基づいています。
--   [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)は本番環境では**ありません**。
--   長くなりすぎないように、このドキュメントの例では`Insert`戦略のみを示していますが、 `Update`および`Upsert`戦略もテスト済みで使用できます。
+- 何か問題が発生した場合は、AWS マネジメントコンソールの[CloudWatch](https://console.aws.amazon.com/cloudwatch/home)ページにアクセスしてログを取得できます。
+- このドキュメントの手順は、 [Amazon AppFlow Custom Connector SDK を使用したカスタムコネクタの構築](https://aws.amazon.com/blogs/compute/building-custom-connectors-using-the-amazon-appflow-custom-connector-sdk/)に基づいています。
+- [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)は本番環境では**ありません**。
+- 長くなりすぎないように、このドキュメントの例では`Insert`戦略のみを示していますが、 `Update`および`Upsert`戦略もテスト済みで使用できます。
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

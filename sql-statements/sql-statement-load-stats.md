@@ -40,4 +40,4 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## 参照 {#see-also}
 
--   [統計](/statistics.md)
+- [統計](/statistics.md)

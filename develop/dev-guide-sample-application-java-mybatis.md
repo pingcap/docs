@@ -10,9 +10,9 @@ TiDBはMySQL互換のデータベースであり、 [MyBatis](https://mybatis.or
 
 このチュートリアルでは、TiDBとMyBatisを使用して以下のタスクを実行する方法を学ぶことができます。
 
--   環境をセットアップしてください。
--   MyBatisを使用してTiDBに接続します。
--   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
+- 環境をセットアップしてください。
+- MyBatisを使用してTiDBに接続します。
+- アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
 
 > **Note:**
 >
@@ -22,15 +22,15 @@ TiDBはMySQL互換のデータベースであり、 [MyBatis](https://mybatis.or
 
 このチュートリアルを完了するには、以下が必要です。
 
--   **Java Development Kit (JDK) 17**以降が必要です。業務要件や個人のニーズに応じて、 [OpenJDK](https://openjdk.org/)または[Oracle JDK](https://www.oracle.com/hk/java/technologies/downloads/)を選択できます。
--   [Maven](https://maven.apache.org/install.html)**3.8**以上。
--   [Git](https://git-scm.com/downloads) 。
--   TiDBクラスタ。
+- **Java Development Kit (JDK) 17**以降が必要です。業務要件や個人のニーズに応じて、 [OpenJDK](https://openjdk.org/)または[Oracle JDK](https://www.oracle.com/hk/java/technologies/downloads/)を選択できます。
+- [Maven](https://maven.apache.org/install.html)**3.8**以上。
+- [Git](https://git-scm.com/downloads) 。
+- TiDBクラスタ。
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
--   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
 ## TiDBに接続するには、サンプルアプリを実行してください。 {#run-the-sample-app-to-connect-to-tidb}
 
@@ -52,37 +52,37 @@ cd tidb-java-mybatis-quickstart
 <SimpleTab>
 <div label="TiDB Cloud Starter or Essential">
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
+3. 接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **Connection Type**は`Public`に設定されています。
+    - **Connection Type**は`Public`に設定されています。
 
-    -   **Branch**は`main`に設定されています。
+    - **Branch**は`main`に設定されています。
 
-    -   **Connect With**は`General`に設定されています。
+    - **Connect With**は`General`に設定されています。
 
-    -   お使いの環境に合った**Operating System**を選択してください。
+    - お使いの環境に合った**Operating System**を選択してください。
 
     > **Tip:**
     >
     > プログラムがWindows Subsystem for Linux（WSL）上で実行されている場合は、対応するLinuxディストリビューションに切り替えてください。
 
-4.  **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
+4. **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
 
     > **Tip:**
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **Reset Password**をクリックして新しいパスワードを生成できます。
 
-5.  `env.sh.example`をコピーして`env.sh`に名前を変更するには、次のコマンドを実行します。
+5. `env.sh.example`をコピーして`env.sh`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
     cp env.sh.example env.sh
     ```
 
-6.  対応する接続​​文字列`env.sh`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+6. 対応する接続​​文字列`env.sh`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
@@ -97,37 +97,37 @@ cd tidb-java-mybatis-quickstart
 
     TiDB Cloud Starter は安全な接続を必要とします。そのため、 `USE_SSL`の値を`true`に設定する必要があります。
 
-7.  `env.sh`ファイルを保存します。
+7. `env.sh`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Premium">
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
 
-3.  **Networking**ページで、**Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
+3. **Networking**ページで、**Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
 
     クライアントのIPアドレスがアクセスリストに追加されていることを確認してください。
 
-4.  左側のナビゲーションペインで**Overview**をクリックすると、インスタンスの概要ページに戻ります。
+4. 左側のナビゲーションペインで**Overview**をクリックすると、インスタンスの概要ページに戻ります。
 
-5.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+5. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-6.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
+6. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
 
-    -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
-    -   まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
-    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
-    -   **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+    - 公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
+    - まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
+    - サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
+    - **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
-7.  `env.sh.example`をコピーして`env.sh`に名前を変更するには、次のコマンドを実行します。
+7. `env.sh.example`をコピーして`env.sh`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
     cp env.sh.example env.sh
     ```
 
-8.  対応する接続​​文字列`env.sh`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+8. 対応する接続​​文字列`env.sh`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -140,28 +140,28 @@ cd tidb-java-mybatis-quickstart
 
     必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。
 
-9.  `env.sh`ファイルを保存します。
+9. `env.sh`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **CA cert**をクリックしてCA証明書をダウンロードします。
+3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **CA cert**をクリックしてCA証明書をダウンロードします。
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
 
     TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
-4.  `env.sh.example`をコピーして`env.sh`に名前を変更するには、次のコマンドを実行します。
+4. `env.sh.example`をコピーして`env.sh`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
     cp env.sh.example env.sh
     ```
 
-5.  対応する接続​​文字列`env.sh`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+5. 対応する接続​​文字列`env.sh`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -174,18 +174,18 @@ cd tidb-java-mybatis-quickstart
 
     必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。
 
-6.  `env.sh`ファイルを保存します。
+6. `env.sh`ファイルを保存します。
 
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
-1.  `env.sh.example`をコピーして`env.sh`に名前を変更するには、次のコマンドを実行します。
+1. `env.sh.example`をコピーして`env.sh`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
     cp env.sh.example env.sh
     ```
 
-2.  対応する接続​​文字列`env.sh`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+2. 対応する接続​​文字列`env.sh`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'
@@ -198,20 +198,20 @@ cd tidb-java-mybatis-quickstart
 
     プレースホルダー`{}`を接続パラメータに置き換え、 `USE_SSL` `false`に設定してください。TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
 
-3.  `env.sh`ファイルを保存します。
+3. `env.sh`ファイルを保存します。
 
 </div>
 </SimpleTab>
 
 ### ステップ3：コードを実行して結果を確認する {#step-3-run-the-code-and-check-the-result}
 
-1.  サンプルコードを実行するには、以下のコマンドを実行してください。
+1. サンプルコードを実行するには、以下のコマンドを実行してください。
 
     ```shell
     make
     ```
 
-2.  [期待される出力.txt](https://github.com/tidb-samples/tidb-java-mybatis-quickstart/blob/main/Expected-Output.txt)をチェックして、出力が一致するかどうかを確認してください。
+2. [期待される出力.txt](https://github.com/tidb-samples/tidb-java-mybatis-quickstart/blob/main/Expected-Output.txt)をチェックして、出力が一致するかどうかを確認してください。
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
@@ -345,13 +345,13 @@ public SqlSessionFactory getSessionFactory() {
 
 ## 次のステップ {#next-steps}
 
--   MyBatis の使用法について詳しくは[MyBatisのドキュメント](http://www.mybatis.org/mybatis-3/)ご覧ください。
--   [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
--   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
--   Java開発者向けのコース「 [JavaからTiDBを操作する](https://eng.edu.pingcap.com/catalog/info/id:212)を通じて学習します。
+- MyBatis の使用法について詳しくは[MyBatisのドキュメント](http://www.mybatis.org/mybatis-3/)ご覧ください。
+- [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- Java開発者向けのコース「 [JavaからTiDBを操作する](https://eng.edu.pingcap.com/catalog/info/id:212)を通じて学習します。
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

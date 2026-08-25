@@ -35,13 +35,13 @@ tiup cluster start ${cluster-name}
 
 コマンドに`-R`または`-N`パラメータを追加することで、一部のコンポーネントのみを起動できます。例：
 
--   このコマンドは PDコンポーネントのみを起動します。
+- このコマンドは PDコンポーネントのみを起動します。
 
     ```bash
     tiup cluster start ${cluster-name} -R pd
     ```
 
--   このコマンドは、ホスト`1.2.3.4`と`1.2.3.5`のPDコンポーネントのみを起動します。
+- このコマンドは、ホスト`1.2.3.4`と`1.2.3.5`のPDコンポーネントのみを起動します。
 
     ```bash
     tiup cluster start ${cluster-name} -N 1.2.3.4:2379,1.2.3.5:2379
@@ -63,15 +63,15 @@ tiup cluster display ${cluster-name}
 
 クラスタの稼働中にコンポーネントのパラメータを変更する必要がある場合は、コマンド`edit-config`を実行してください。詳細な手順は次のとおりです。
 
-1.  クラスターの構成ファイルを編集モードで開きます。
+1. クラスターの構成ファイルを編集モードで開きます。
 
     ```bash
     tiup cluster edit-config ${cluster-name}
     ```
 
-2.  パラメータを設定します。
+2. パラメータを設定します。
 
-    -   構成がコンポーネントに対してグローバルに有効な場合は、 `server_configs`を編集します。
+    - 構成がコンポーネントに対してグローバルに有効な場合は、 `server_configs`を編集します。
 
         ```
         server_configs:
@@ -79,7 +79,7 @@ tiup cluster display ${cluster-name}
             log.slow-threshold: 300
         ```
 
-    -   特定のノードで設定を有効にする場合は、ノードの`config`で設定を編集します。
+    - 特定のノードで設定を有効にする場合は、ノードの`config`で設定を編集します。
 
         ```
         tidb_servers:
@@ -95,7 +95,7 @@ tiup cluster display ${cluster-name}
 
     コンポーネントの構成パラメータの詳細については、 [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example) 、 [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/release-8.5/etc/config-template.toml) 、および[PD `config.toml.example`](https://github.com/tikv/pd/blob/release-8.5/conf/config.toml)を参照してください。
 
-3.  `reload`コマンドを実行して、構成をローリング更新し、対応するコンポーネントを再起動します。
+3. `reload`コマンドを実行して、構成をローリング更新し、対応するコンポーネントを再起動します。
 
     ```bash
     tiup cluster reload ${cluster-name} [-N <nodes>] [-R <roles>]
@@ -164,8 +164,8 @@ tiup cluster rename ${cluster-name} ${new-name}
 
 > **Note:**
 >
-> -   クラスターの名前を変更する操作により、監視システム (Prometheus および Grafana) が再起動されます。
-> -   クラスターの名前を変更した後、古いクラスター名を持つパネルがGrafanaに残る場合があります。これらのパネルは手動で削除する必要があります。
+> - クラスターの名前を変更する操作により、監視システム (Prometheus および Grafana) が再起動されます。
+> - クラスターの名前を変更した後、古いクラスター名を持つパネルがGrafanaに残る場合があります。これらのパネルは手動で削除する必要があります。
 
 ## クラスターを停止する {#stop-the-cluster}
 
@@ -181,13 +181,13 @@ tiup cluster stop ${cluster-name}
 
 `start`コマンドと同様に、 `stop`コマンドでも`-R`または`-N`パラメータを追加することで、一部のコンポーネントを停止できます。例:
 
--   このコマンドは TiDBコンポーネントのみを停止します。
+- このコマンドは TiDBコンポーネントのみを停止します。
 
     ```bash
     tiup cluster stop ${cluster-name} -R tidb
     ```
 
--   このコマンドは、ホスト`1.2.3.4`と`1.2.3.5`の TiDB コンポーネントのみを停止します。
+- このコマンドは、ホスト`1.2.3.4`と`1.2.3.5`の TiDB コンポーネントのみを停止します。
 
     ```bash
     tiup cluster stop ${cluster-name} -N 1.2.3.4:4000,1.2.3.5:4000
@@ -197,37 +197,37 @@ tiup cluster stop ${cluster-name}
 
 クラスタデータのクリーンアップ操作では、すべてのサービスが停止し、データディレクトリまたはログディレクトリがクリーンアップされます。この操作は元に戻すことができませんので、**慎重に**進めてください。
 
--   クラスター内のすべてのサービスのデータをクリーンアップしますが、ログは保持します。
+- クラスター内のすべてのサービスのデータをクリーンアップしますが、ログは保持します。
 
     ```bash
     tiup cluster clean ${cluster-name} --data
     ```
 
--   クラスター内のすべてのサービスのログをクリーンアップしますが、データは保持します。
+- クラスター内のすべてのサービスのログをクリーンアップしますが、データは保持します。
 
     ```bash
     tiup cluster clean ${cluster-name} --log
     ```
 
--   クラスター内のすべてのサービスのデータとログをクリーンアップします。
+- クラスター内のすべてのサービスのデータとログをクリーンアップします。
 
     ```bash
     tiup cluster clean ${cluster-name} --all
     ```
 
--   Prometheus 以外のすべてのサービスのログとデータをクリーンアップします。
+- Prometheus 以外のすべてのサービスのログとデータをクリーンアップします。
 
     ```bash
     tiup cluster clean ${cluster-name} --all --ignore-role prometheus
     ```
 
--   `172.16.13.11:9000`インスタンスを除くすべてのサービスのログとデータをクリーンアップします。
+- `172.16.13.11:9000`インスタンスを除くすべてのサービスのログとデータをクリーンアップします。
 
     ```bash
     tiup cluster clean ${cluster-name} --all --ignore-node 172.16.13.11:9000
     ```
 
--   `172.16.13.12`ノードを除くすべてのサービスのログとデータをクリーンアップします。
+- `172.16.13.12`ノードを除くすべてのサービスのログとデータをクリーンアップします。
 
     ```bash
     tiup cluster clean ${cluster-name} --all --ignore-node 172.16.13.12
@@ -272,13 +272,13 @@ grafana_servers:
 
 #### VictoriaMetrics リモート書き込みを有効にする {#enable-victoriametrics-remote-write}
 
-1.  クラスター構成を編集します。
+1. クラスター構成を編集します。
 
     ```bash
     tiup cluster edit-config ${cluster-name}
     ```
 
-2.  `monitoring_servers`の下で`prom_remote_write_to_vm`を`true`に設定します:
+2. `monitoring_servers`の下で`prom_remote_write_to_vm`を`true`に設定します:
 
     ```yaml
     monitoring_servers:
@@ -287,7 +287,7 @@ grafana_servers:
         prom_remote_write_to_vm: true
     ```
 
-3.  変更を適用するには、構成を再ロードします。
+3. 変更を適用するには、構成を再ロードします。
 
     ```bash
     tiup cluster reload ${cluster-name} -R prometheus
@@ -295,13 +295,13 @@ grafana_servers:
 
 #### デフォルトのデータソースをVictoriaMetricsに切り替える {#switch-the-default-data-source-to-victoriametrics}
 
-1.  クラスター構成を編集します。
+1. クラスター構成を編集します。
 
     ```bash
     tiup cluster edit-config ${cluster-name}
     ```
 
-2.  `grafana_servers`の下で`use_vm_as_datasource`を`true`に設定します:
+2. `grafana_servers`の下で`use_vm_as_datasource`を`true`に設定します:
 
     ```yaml
     grafana_servers:
@@ -310,7 +310,7 @@ grafana_servers:
         use_vm_as_datasource: true
     ```
 
-3.  変更を適用するには、構成を再ロードします。
+3. 変更を適用するには、構成を再ロードします。
 
     ```bash
     tiup cluster reload ${cluster-name} -R grafana
@@ -320,13 +320,13 @@ grafana_servers:
 
 切り替え前に生成された履歴メトリックを表示する必要がある場合は、次のように Grafana のデータソースを切り替えます。
 
-1.  クラスター構成を編集します。
+1. クラスター構成を編集します。
 
     ```bash
     tiup cluster edit-config ${cluster-name}
     ```
 
-2.  `grafana_servers`の下で、 `use_vm_as_datasource`をコメントアウトします。
+2. `grafana_servers`の下で、 `use_vm_as_datasource`をコメントアウトします。
 
     ```yaml
     grafana_servers:
@@ -335,13 +335,13 @@ grafana_servers:
         # use_vm_as_datasource: true
     ```
 
-3.  変更を適用するには、構成をリロードします。
+3. 変更を適用するには、構成をリロードします。
 
     ```bash
     tiup cluster reload ${cluster-name} -R grafana
     ```
 
-4.  VictoriaMetrics に戻るには、 [デフォルトのデータソースをVictoriaMetricsに切り替える](#switch-the-default-data-source-to-victoriametrics)の手順を繰り返します。
+4. VictoriaMetrics に戻るには、 [デフォルトのデータソースをVictoriaMetricsに切り替える](#switch-the-default-data-source-to-victoriametrics)の手順を繰り返します。
 
 ### 古い指標とサービスをクリーンアップする {#clean-up-old-metrics-and-services}
 
@@ -349,13 +349,13 @@ grafana_servers:
 
 #### Prometheusをエージェントモードに設定する {#set-prometheus-to-agent-mode}
 
-1.  クラスター構成を編集します。
+1. クラスター構成を編集します。
 
     ```bash
     tiup cluster edit-config ${cluster-name}
     ```
 
-2.  `monitoring_servers`の下で、 `enable_prom_agent_mode`を`true`に設定し、 `prom_remote_write_to_vm`と`use_vm_as_datasource`が正しく設定されていることを確認します。
+2. `monitoring_servers`の下で、 `enable_prom_agent_mode`を`true`に設定し、 `prom_remote_write_to_vm`と`use_vm_as_datasource`が正しく設定されていることを確認します。
 
     ```yaml
     monitoring_servers:
@@ -369,7 +369,7 @@ grafana_servers:
         use_vm_as_datasource: true
     ```
 
-3.  変更を適用するには、構成をリロードします。
+3. 変更を適用するには、構成をリロードします。
 
     ```bash
     tiup cluster reload ${cluster-name} -R prometheus
@@ -377,7 +377,7 @@ grafana_servers:
 
 #### 期限切れのデータディレクトリを削除する {#remove-expired-data-directories}
 
-1.  設定ファイルで、監視サーバーの`data_dir`パスを見つけます。
+1. 設定ファイルで、監視サーバーの`data_dir`パスを見つけます。
 
     ```yaml
     monitoring_servers:
@@ -386,7 +386,7 @@ grafana_servers:
         data_dir: "/tidb-data/prometheus-8249"
     ```
 
-2.  データディレクトリを削除します。
+2. データディレクトリを削除します。
 
     ```bash
     rm -rf /tidb-data/prometheus-8249

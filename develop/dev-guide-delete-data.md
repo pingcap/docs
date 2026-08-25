@@ -12,9 +12,9 @@ aliases: ['/ja/tidb/stable/dev-guide-delete-data/','/ja/tidb/dev/dev-guide-delet
 
 この文書を読む前に、以下のものを準備してください。
 
--   [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)
--   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)、データベース[データベースを作成する](/develop/dev-guide-create-database.md)、[テーブルを作成する](/develop/dev-guide-create-table.md)、 [セカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md)を読む
--   [データを挿入する](/develop/dev-guide-insert-data.md)
+- [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)
+- [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)、データベース[データベースを作成する](/develop/dev-guide-create-database.md)、[テーブルを作成する](/develop/dev-guide-create-table.md)、 [セカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md)を読む
+- [データを挿入する](/develop/dev-guide-insert-data.md)
 
 ## SQL構文 {#sql-syntax}
 
@@ -35,15 +35,15 @@ DELETE FROM {table} WHERE {filter}
 
 データを削除する際に従うべきベストプラクティスを以下に示します。
 
--   `WHERE`ステートメントには、必ず`DELETE`句を指定してください。 `WHERE`句が指定されていない場合、TiDB はテーブル内の***すべての行***を削除します。
+- `WHERE`ステートメントには、必ず`DELETE`句を指定してください。 `WHERE`句が指定されていない場合、TiDB はテーブル内の***すべての行***を削除します。
 
--   TiDB では 1 つのトランザクションのサイズが制限されているため (たとえば、1 万行以上)、大量の行を削除する場合は[一括削除](#bulk-delete)を使用します (段階[トランザクションの合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)。
+- TiDB では 1 つのトランザクションのサイズが制限されているため (たとえば、1 万行以上)、大量の行を削除する場合は[一括削除](#bulk-delete)を使用します (段階[トランザクションの合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)。
 
--   テーブル内のすべてのデータを削除する場合は、 `DELETE`ステートメントを使用しないでください。代わりに、 [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)ステートメントを使用してください。
+- テーブル内のすべてのデータを削除する場合は、 `DELETE`ステートメントを使用しないでください。代わりに、 [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)ステートメントを使用してください。
 
--   パフォーマンスに関する考慮事項については、[パフォーマンスに関する考慮事項](#performance-considerations)を参照してください。
+- パフォーマンスに関する考慮事項については、[パフォーマンスに関する考慮事項](#performance-considerations)を参照してください。
 
--   大量のデータを削除する必要があるシナリオでは、[非トランザクション一括削除](#non-transactional-bulk-delete)パフォーマンスが大幅に向上します。ただし、これにより削除のトランザクションが失われるため、ロールバック**できません**。正しい操作を選択していることを確認してください。
+- 大量のデータを削除する必要があるシナリオでは、[非トランザクション一括削除](#non-transactional-bulk-delete)パフォーマンスが大幅に向上します。ただし、これにより削除のトランザクションが失われるため、ロールバック**できません**。正しい操作を選択していることを確認してください。
 
 ## 例 {#example}
 
@@ -165,8 +165,8 @@ with connection:
 
 > **Note:**
 >
-> -   `rated_at`フィールドは、[日付と時刻の種類](/data-type-date-and-time.md)種類の`DATETIME`タイプです。タイムゾーンに関係なく、TiDB にリテラル数量として保存されていると想定できます。一方、 `TIMESTAMP`タイプはタイムスタンプを保存するため、異なるタイム[タイムゾーン](/configure-time-zone.md)には異なる時刻文字列が表示されます。
-> -   MySQLと同様に、 `TIMESTAMP`データ型は[2038年の問題](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。2038より大きい値を格納する場合は、 `DATETIME`型を使用することをお勧めします。
+> - `rated_at`フィールドは、[日付と時刻の種類](/data-type-date-and-time.md)種類の`DATETIME`タイプです。タイムゾーンに関係なく、TiDB にリテラル数量として保存されていると想定できます。一方、 `TIMESTAMP`タイプはタイムスタンプを保存するため、異なるタイム[タイムゾーン](/configure-time-zone.md)には異なる時刻文字列が表示されます。
+> - MySQLと同様に、 `TIMESTAMP`データ型は[2038年の問題](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。2038より大きい値を格納する場合は、 `DATETIME`型を使用することをお勧めします。
 
 ## パフォーマンスに関する考慮事項 {#performance-considerations}
 
@@ -386,6 +386,6 @@ BATCH ON `rated_at` LIMIT 1000 DELETE FROM `ratings` WHERE `rated_at` >= "2022-0
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

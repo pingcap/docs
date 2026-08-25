@@ -9,7 +9,7 @@ TiDB Cloud は、 [Prometheusとの統合](/tidb-cloud/monitor-prometheus-and-gr
 
 ## 前提条件 {#prerequisites}
 
--   TiDB Cloudのサードパーティ メトリクス統合を設定するには、 TiDB Cloudで`Organization Owner`または`Project Owner`アクセス権が必要です。
+- TiDB Cloudのサードパーティ メトリクス統合を設定するには、 TiDB Cloudで`Organization Owner`または`Project Owner`アクセス権が必要です。
 
 ## 移行手順 {#migration-steps}
 
@@ -17,29 +17,29 @@ Prometheusとの連携を移行するには、以下の手順を実行してく�
 
 ### ステップ1. 従来のプロジェクトレベルのPrometheus統合を削除します（ベータ版） {#step-1-delete-the-legacy-project-level-prometheus-integrations-beta}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
+2. プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  左側のナビゲーションパネルで、 **Project Settings**の下にある**Project Settings**をクリックします。
+3. 左側のナビゲーションパネルで、 **Project Settings**の下にある**Project Settings**をクリックします。
 
-4.  **Integrations** &gt; **Integration to Prometheus (BETA)**モジュールで、 **[Scrape_config Files]**を選択し、 **Delete**をクリックします。
+4. **Integrations** &gt; **Integration to Prometheus (BETA)**モジュールで、 **[Scrape_config Files]**を選択し、 **Delete**をクリックします。
 
-5.  表示されたダイアログで、 `Delete`と入力して、従来の統合機能の削除を確認します。
+5. 表示されたダイアログで、 `Delete`と入力して、従来の統合機能の削除を確認します。
 
 ### ステップ2. 各クラスターに対して、新しいクラスターレベルのPrometheus統合を作成します。 {#step-2-create-a-new-cluster-level-prometheus-integration-for-each-cluster}
 
 プロジェクト内の各[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して、以下の手順を繰り返してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
 
-2.  左側のナビゲーションパネルで、 **Settings** &gt; **Integrations**をクリックします。
+2. 左側のナビゲーションパネルで、 **Settings** &gt; **Integrations**をクリックします。
 
-3.  **Integrations**ページで、新しい Prometheus 統合を作成します。詳細については、 [TiDB CloudをPrometheusおよびGrafanaと統合する](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)を参照してください。
+3. **Integrations**ページで、新しい Prometheus 統合を作成します。詳細については、 [TiDB CloudをPrometheusおよびGrafanaと統合する](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)を参照してください。
 
 ## プロジェクトレベルのPrometheus統合を削除した場合の影響（ベータ版） {#impact-of-deleting-the-project-level-prometheus-integration-beta}
 

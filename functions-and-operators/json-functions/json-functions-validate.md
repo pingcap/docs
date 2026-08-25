@@ -380,11 +380,11 @@ SELECT JSON_SCHEMA_VALID('{"anyOf": [{"type": "string"},{"type": "integer"}]}', 
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
--   `JSON_SCHEMA_VALID()`で検証するスキーマが無効な場合 (例えば`{"type": "sting"}` )、MySQL はそれを受け入れるかもしれませんが、TiDB はエラーを返します。 `"sting"`にはスペルミスがあり、正しくは`"string"`であるべきであることに注意してください。
--   MySQLは、JSONスキーマ標準の古いドラフト版を使用しています。
+- `JSON_SCHEMA_VALID()`で検証するスキーマが無効な場合 (例えば`{"type": "sting"}` )、MySQL はそれを受け入れるかもしれませんが、TiDB はエラーを返します。 `"sting"`にはスペルミスがあり、正しくは`"string"`であるべきであることに注意してください。
+- MySQLは、JSONスキーマ標準の古いドラフト版を使用しています。
 
 ## 関連項目 {#see-also}
 
--   [JSONスキーマリファレンス](https://json-schema.org/understanding-json-schema/reference)
--   [JSON関数の概要](/functions-and-operators/json-functions.md)
--   [JSONデータタイプ](/data-type-json.md)
+- [JSONスキーマリファレンス](https://json-schema.org/understanding-json-schema/reference)
+- [JSON関数の概要](/functions-and-operators/json-functions.md)
+- [JSONデータタイプ](/data-type-json.md)

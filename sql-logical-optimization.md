@@ -9,12 +9,12 @@ summary: SQL論理最適化の章では、TiDBクエリプラン生成におけ�
 
 この章では、次の重要な書き換えについて説明します。
 
--   [サブクエリ関連の最適化](/subquery-optimization.md)
--   [カラムの剪定](/column-pruning.md)
--   [相関サブクエリの非相関](/correlated-subquery-optimization.md)
--   [最大/最小を排除](/max-min-eliminate.md)
--   [Predicate Push Down](/predicate-push-down.md)
--   [パーティションプルーニング](/partition-pruning.md)
--   [TopN と Limit 演算子のプッシュダウン](/topn-limit-push-down.md)
--   [Join Reorder](/join-reorder.md)
--   [ウィンドウ関数からTopNまたはLimitを導出する](/derive-topn-from-window.md)
+- [サブクエリ関連の最適化](/subquery-optimization.md)
+- [カラムの剪定](/column-pruning.md)
+- [相関サブクエリの非相関](/correlated-subquery-optimization.md)
+- [最大/最小を排除](/max-min-eliminate.md)
+- [Predicate Push Down](/predicate-push-down.md)
+- [パーティションプルーニング](/partition-pruning.md)
+- [TopN と Limit 演算子のプッシュダウン](/topn-limit-push-down.md)
+- [Join Reorder](/join-reorder.md)
+- [ウィンドウ関数からTopNまたはLimitを導出する](/derive-topn-from-window.md)

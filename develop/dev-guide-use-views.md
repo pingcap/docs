@@ -12,8 +12,8 @@ aliases: ['/ja/tidb/stable/dev-guide-use-views/','/ja/tidbcloud/dev-guide-use-vi
 
 TiDBはビューをサポートしています。ビューは仮想テーブルとして機能し、そのスキーマはビューを作成する`SELECT`ステートメントによって定義されます。
 
--   安全なフィールドとデータのみをユーザーに公開するビューを作成することで、基になるテーブル内の機密フィールドとデータのセキュリティを確保できます。
--   頻繁に使用される複雑なクエリのビューを作成して、複雑なクエリをより簡単に、より便利に実行できます。
+- 安全なフィールドとデータのみをユーザーに公開するビューを作成することで、基になるテーブル内の機密フィールドとデータのセキュリティを確保できます。
+- 頻繁に使用される複雑なクエリのビューを作成して、複雑なクエリをより簡単に、より便利に実行できます。
 
 ## ビューを作成する {#create-a-view}
 
@@ -51,8 +51,8 @@ TiDB がビューをクエリする場合、ビューに関連付けられた`SE
 
 現在、TiDB のビューは`ALTER VIEW view_name AS query;`をサポートしていませんが、次の 2 つの方法でビューを「更新」できます。
 
--   `DROP VIEW view_name;`ステートメントで古いビューを削除し、 `CREATE VIEW view_name AS query;`ステートメントで新しいビューを作成してビューを更新します。
--   同じ名前の既存のビューを上書きするには、 `CREATE OR REPLACE VIEW view_name AS query;`ステートメントを使用します。
+- `DROP VIEW view_name;`ステートメントで古いビューを削除し、 `CREATE VIEW view_name AS query;`ステートメントで新しいビューを作成してビューを更新します。
+- 同じ名前の既存のビューを上書きするには、 `CREATE OR REPLACE VIEW view_name AS query;`ステートメントを使用します。
 
 ```sql
 CREATE OR REPLACE VIEW book_with_ratings AS
@@ -118,14 +118,14 @@ TiDB のビューの制限については、 [ビューの制限](/views.md#limi
 
 ## 続きを読む {#read-more}
 
--   [ビュー](/views.md)
--   [CREATE VIEW](/sql-statements/sql-statement-create-view.md)
--   [DROP VIEW](/sql-statements/sql-statement-drop-view.md)
--   [ビューを使用したEXPLAINステートメント](/explain-views.md)
--   [TiFlink: TiKV と Flink を使用した強整合性マテリアライズド ビュー](https://github.com/tiflink/tiflink)
+- [ビュー](/views.md)
+- [CREATE VIEW](/sql-statements/sql-statement-create-view.md)
+- [DROP VIEW](/sql-statements/sql-statement-drop-view.md)
+- [ビューを使用したEXPLAINステートメント](/explain-views.md)
+- [TiFlink: TiKV と Flink を使用した強整合性マテリアライズド ビュー](https://github.com/tiflink/tiflink)
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

@@ -25,11 +25,11 @@ TiDB Cloud で {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }
 
 {{{ .premium }}}<CustomContent plan="byoc"> および {{{ .byoc }}}</CustomContent> には、2 種類のネットワーク接続タイプがあります。
 
--   [プライベートエンドポイント](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)(推奨)
+- [プライベートエンドポイント](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)(推奨)
 
     プライベートエンドポイント接続は、VPC内のSQLクライアントがAWS PrivateLink経由でサービスに安全にアクセスできるようにするプライベートエンドポイントを提供します。AWS PrivateLinkは、簡素化されたネットワーク管理で、データベースサービスへの高度に安全な一方向アクセスを提供します。
 
--   [公開エンドポイント](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)
+- [公開エンドポイント](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)
 
     標準接続では公開エンドポイントが提供されるため、ノートパソコンからSQLクライアントを介して {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスに接続できます。
 

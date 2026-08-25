@@ -32,9 +32,9 @@ summary: アプリケーションでフィルタリングを使用する方法�
 }
 ```
 
--   `<key>` : キーは、列名、JSON フィールドにアクセスするための JSON パス式 ( [メタデータフィルタリング](/ai/guides/vector-search.md#metadata-filtering)参照)、または[論理演算子](#logical-operators)になります。
--   `<operator>` : 演算子は[比較演算子](#compare-operators)または[包含演算子](#inclusion-operators)になります。
--   `<value>` : 値は演算子に応じてスカラー値または配列になります。
+- `<key>` : キーは、列名、JSON フィールドにアクセスするための JSON パス式 ( [メタデータフィルタリング](/ai/guides/vector-search.md#metadata-filtering)参照)、または[論理演算子](#logical-operators)になります。
+- `<operator>` : 演算子は[比較演算子](#compare-operators)または[包含演算子](#inclusion-operators)になります。
+- `<value>` : 値は演算子に応じてスカラー値または配列になります。
 
 **例: `created_at`が 2024-01-01 より大きいレコードをフィルタリングする**
 

@@ -11,9 +11,9 @@ summary: AIモデルを使用して、自然言語によるクエリをSQL文に
 
 始める前に、以下のものを用意してください。
 
--   **Python (&gt;=3.10)** : [Python](https://www.python.org/downloads/) 3.10以降のバージョンをインストールしてください。
--   **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
--   **OpenAI API キー**: [OpenAI](https://platform.openai.com/api-keys)から OpenAI API キーを取得します。
+- **Python (&gt;=3.10)** : [Python](https://www.python.org/downloads/) 3.10以降のバージョンをインストールしてください。
+- **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
+- **OpenAI API キー**: [OpenAI](https://platform.openai.com/api-keys)から OpenAI API キーを取得します。
 
 ## 実行方法 {#how-to-run}
 
@@ -42,9 +42,9 @@ streamlit run app.py
 
 ブラウザを開いて`http://localhost:8501`にアクセスしてください。
 
-1.  左側のサイドバーにOpenAI APIキーを入力してください。
-2.  左側のサイドバーにTiDB接続文字列を入力してください。例： `mysql+pymysql://root@localhost:4000/test`
+1. 左側のサイドバーにOpenAI APIキーを入力してください。
+2. 左側のサイドバーにTiDB接続文字列を入力してください。例： `mysql+pymysql://root@localhost:4000/test`
 
 ## 関連リソース {#related-resources}
 
--   **ソースコード**： [GitHubで見る](https://github.com/pingcap/pytidb/tree/main/examples/text2sql)
+- **ソースコード**： [GitHubで見る](https://github.com/pingcap/pytidb/tree/main/examples/text2sql)

@@ -25,13 +25,13 @@ WITH t_topN AS (SELECT a FROM t1 ORDER BY a LIMIT 3) SELECT * FROM (SELECT ROW_N
 
 この機能を有効にした後、次のいずれかの操作を実行して無効にすることができます。
 
--   セッション変数[`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)を`OFF`に設定します。
--   [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)に記載されている手順に従います。
+- セッション変数[`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)を`OFF`に設定します。
+- [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)に記載されている手順に従います。
 
 ## 制限事項 {#limitations}
 
--   SQL 書き換えでは`ROW_NUMBER()`ウィンドウ関数のみがサポートされます。
--   TiDB は、 `ROW_NUMBER()`の結果をフィルタリングし、フィルタ条件が`<`または`<=`の場合にのみ SQL を書き換えることができます。
+- SQL 書き換えでは`ROW_NUMBER()`ウィンドウ関数のみがサポートされます。
+- TiDB は、 `ROW_NUMBER()`の結果をフィルタリングし、フィルタ条件が`<`または`<=`の場合にのみ SQL を書き換えることができます。
 
 ## 使用例 {#usage-examples}
 

@@ -10,21 +10,21 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-jinaai-embedding/','/ja/
 
 > **Note:**
 >
-> -   ベクトル検索機能はパブリックプレビューです。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
-> -   ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)および[{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> - ベクトル検索機能はパブリックプレビューです。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> - ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)および[{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## 前提条件 {#prerequisites}
 
 このチュートリアルを完了するには、以下が必要です。
 
--   [Python 3.8以降](https://www.python.org/downloads/)がインストールされていること。
--   [Git](https://git-scm.com/downloads)がインストールされていること。
--   TiDBクラスタ。
+- [Python 3.8以降](https://www.python.org/downloads/)がインストールされていること。
+- [Git](https://git-scm.com/downloads)がインストールされていること。
+- TiDBクラスタ。
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
--   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
 ## サンプルアプリを実行します {#run-the-sample-app}
 
@@ -65,31 +65,31 @@ Jina AIのAPIキーを[Jina AI 埋め込み API](https://jina.ai/embeddings/)ペ
 
 TiDB Cloud Starterインスタンスの場合、接続文字列を取得し、環境変数を設定するには、以下の手順に従ってください。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
+3. 接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **Connection Type**は`Public`に設定されています。
+    - **Connection Type**は`Public`に設定されています。
 
-    -   **Branch**は`main`に設定されています。
+    - **Branch**は`main`に設定されています。
 
-    -   **Connect With**は`SQLAlchemy`に設定されています。
+    - **Connect With**は`SQLAlchemy`に設定されています。
 
-    -   お使いの環境に合った**Operating System**を選択してください。
+    - お使いの環境に合った**Operating System**を選択してください。
 
     > **Tip:**
     >
     > プログラムがWindows Subsystem for Linux（WSL）上で実行されている場合は、対応するLinuxディストリビューションに切り替えてください。
 
-4.  **PyMySQL**タブに切り替えて、**コピー**アイコンをクリックして接続文字列をコピーします。
+4. **PyMySQL**タブに切り替えて、**コピー**アイコンをクリックして接続文字列をコピーします。
 
     > **Tip:**
     >
     > まだパスワードを設定していない場合は、 **Create password**をクリックしてランダムなパスワードを生成してください。
 
-5.  ターミナルで Jina AI API キーと TiDB 接続文字列を環境変数として設定するか、以下の環境変数を含む`.env`ファイルを作成してください。
+5. ターミナルで Jina AI API キーと TiDB 接続文字列を環境変数として設定するか、以下の環境変数を含む`.env`ファイルを作成してください。
 
     ```dotenv
     JINAAI_API_KEY="****"
@@ -117,11 +117,11 @@ export TIDB_DATABASE_URL="mysql+pymysql://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<D
 
 各パラメータの説明は以下のとおりです。
 
--   `<USERNAME>` : TiDBに接続するためのユーザー名。
--   `<PASSWORD>` : TiDBに接続するためのパスワード。
--   `<HOST>` : TiDBクラスタのホスト。
--   `<PORT>` : TiDB クラスタのポート。
--   `<DATABASE>` : 接続するデータベースの名前。
+- `<USERNAME>` : TiDBに接続するためのユーザー名。
+- `<PASSWORD>` : TiDBに接続するためのパスワード。
+- `<HOST>` : TiDBクラスタのホスト。
+- `<PORT>` : TiDB クラスタのポート。
+- `<DATABASE>` : 接続するデータベースの名前。
 
 </div>
 
@@ -220,8 +220,8 @@ class Document(Base):
 
 > **Note:**
 >
-> -   ベクトル列の次元は、埋め込みモデルによって生成される埋め込みの次元と一致していなければなりません。
-> -   この例では、 `jina-embeddings-v2-base-en`モデルによって生成される埋め込みの次元は`768`です。
+> - ベクトル列の次元は、埋め込みモデルによって生成される埋め込みの次元と一致していなければなりません。
+> - この例では、 `jina-embeddings-v2-base-en`モデルによって生成される埋め込みの次元は`768`です。
 
 ### Jina AIで埋め込みを作成し、TiDBに保存します。 {#create-embeddings-with-jina-ai-and-store-in-tidb}
 
@@ -276,5 +276,5 @@ with Session(engine) as session:
 
 ## 関連項目 {#see-also}
 
--   [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
--   [ベクトル検索インデックス](/ai/reference/vector-search-index.md)
+- [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
+- [ベクトル検索インデックス](/ai/reference/vector-search-index.md)

@@ -32,16 +32,16 @@ DESC cluster_load;
 
 フィールドの説明:
 
--   `TYPE` : 表[`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)のフィールド`TYPE`に対応します。オプションの値は`tidb` 、 `pd` 、 `tikv`です。
--   `INSTANCE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)クラスター情報テーブルの`INSTANCE`フィールドに対応します。
--   `DEVICE_TYPE` : ハードウェアタイプ。現在、 `cpu` 、 `memory` 、 `disk` 、 `net`タイプを照会できます。
--   `DEVICE_NAME` : ハードウェア名`DEVICE_NAME`の値は`DEVICE_TYPE`に応じて変化します。
-    -   `cpu` : ハードウェア名は cpu です。
-    -   `disk` : ディスク名。
-    -   `net` : ネットワークカード名。
-    -   `memory` : ハードウェア名はメモリです。
--   `NAME` : 異なる負荷タイプ。例えば、CPU `load15`は`load1` `load5` 3つの負荷タイプがあり、それぞれ1分、5分、15分以内のCPUの平均負荷を意味します。
--   `VALUE` : ハードウェア負荷の値。例えば、 `1min` 、 `5min` 、 `15min`それぞれ、1分、5分、15分以内のハードウェアの平均負荷を意味します。
+- `TYPE` : 表[`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)のフィールド`TYPE`に対応します。オプションの値は`tidb` 、 `pd` 、 `tikv`です。
+- `INSTANCE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)クラスター情報テーブルの`INSTANCE`フィールドに対応します。
+- `DEVICE_TYPE` : ハードウェアタイプ。現在、 `cpu` 、 `memory` 、 `disk` 、 `net`タイプを照会できます。
+- `DEVICE_NAME` : ハードウェア名`DEVICE_NAME`の値は`DEVICE_TYPE`に応じて変化します。
+    - `cpu` : ハードウェア名は cpu です。
+    - `disk` : ディスク名。
+    - `net` : ネットワークカード名。
+    - `memory` : ハードウェア名はメモリです。
+- `NAME` : 異なる負荷タイプ。例えば、CPU `load15`は`load1` `load5` 3つの負荷タイプがあり、それぞれ1分、5分、15分以内のCPUの平均負荷を意味します。
+- `VALUE` : ハードウェア負荷の値。例えば、 `1min` 、 `5min` 、 `15min`それぞれ、1分、5分、15分以内のハードウェアの平均負荷を意味します。
 
 次の例は、 `CLUSTER_LOAD`テーブルを使用して CPU の現在の負荷情報を照会する方法を示しています。
 

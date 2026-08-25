@@ -13,43 +13,43 @@ TiDB バージョン: 6.1.5
 
 ## 互換性の変更 {#compatibility-changes}
 
--   2023年2月20日以降、TiDBおよびTiDB Dashboardの新しいバージョン（v6.1.5を含む）では、 [テレメトリ機能](/telemetry.md)がデフォルトで無効化され、使用状況情報は収集されず、PingCAPと共有されません。これらのバージョンにアップグレードする前に、クラスターがデフォルトのテレメトリ設定を使用している場合、アップグレード後にテレメトリ機能が無効化されます。具体的なバージョンについては、 [TiDB リリース タイムライン](/releases/release-timeline.md)を参照してください。
+- 2023年2月20日以降、TiDBおよびTiDB Dashboardの新しいバージョン（v6.1.5を含む）では、 [テレメトリ機能](/telemetry.md)がデフォルトで無効化され、使用状況情報は収集されず、PingCAPと共有されません。これらのバージョンにアップグレードする前に、クラスターがデフォルトのテレメトリ設定を使用している場合、アップグレード後にテレメトリ機能が無効化されます。具体的なバージョンについては、 [TiDB リリース タイムライン](/releases/release-timeline.md)を参照してください。
 
-    -   [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402)システム変数のデフォルト値が`ON`から`OFF`に変更されます。
-    -   TiDB [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)構成項目のデフォルト値が`true`から`false`に変更されます。
-    -   PD [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry)構成項目のデフォルト値が`true`から`false`に変更されます。
+    - [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402)システム変数のデフォルト値が`ON`から`OFF`に変更されます。
+    - TiDB [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)構成項目のデフォルト値が`true`から`false`に変更されます。
+    - PD [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry)構成項目のデフォルト値が`true`から`false`に変更されます。
 
--   v1.11.3 以降、新規に導入されたTiUPではテレメトリ機能がデフォルトで無効化され、使用状況情報は収集されません。v1.11.3 より前のバージョンのTiUPから v1.11.3 以降のバージョンにアップグレードした場合、テレメトリ機能はアップグレード前と同じ状態を維持します。
+- v1.11.3 以降、新規に導入されたTiUPではテレメトリ機能がデフォルトで無効化され、使用状況情報は収集されません。v1.11.3 より前のバージョンのTiUPから v1.11.3 以降のバージョンにアップグレードした場合、テレメトリ機能はアップグレード前と同じ状態を維持します。
 
 ## 改善点 {#improvements}
 
--   TiDB
+- TiDB
 
-    -   `AUTO_RANDOM`列をクラスター化複合インデックスの最初の列としてサポートします [＃38572](https://github.com/pingcap/tidb/issues/38572) @[tangenta](https://github.com/tangenta)
+    - `AUTO_RANDOM`列をクラスター化複合インデックスの最初の列としてサポートします [＃38572](https://github.com/pingcap/tidb/issues/38572) @[tangenta](https://github.com/tangenta)
 
 ## バグ修正 {#bug-fixes}
 
--   TiDB
+- TiDB
 
-    -   データ競合により TiDB が再起動する可能性がある問題を修正しました [＃27725](https://github.com/pingcap/tidb/issues/27725) @[XuHuaiyu](https://github.com/XuHuaiyu)
-    -   Read Committed分離レベルが使用されている場合、 `UPDATE`文が最新のデータを読み取らない可能性がある問題を修正しました[＃41581](https://github.com/pingcap/tidb/issues/41581) @[cfzjywxk](https://github.com/cfzjywxk)
-
-<!---->
-
--   PD
-
-    -   `ReportMinResolvedTS`の呼び出しが頻繁に発生する PD OOM 問題を修正しました [＃5965](https://github.com/tikv/pd/issues/5965) @[HunDunDM](https://github.com/HunDunDM)
+    - データ競合により TiDB が再起動する可能性がある問題を修正しました [＃27725](https://github.com/pingcap/tidb/issues/27725) @[XuHuaiyu](https://github.com/XuHuaiyu)
+    - Read Committed分離レベルが使用されている場合、 `UPDATE`文が最新のデータを読み取らない可能性がある問題を修正しました[＃41581](https://github.com/pingcap/tidb/issues/41581) @[cfzjywxk](https://github.com/cfzjywxk)
 
 <!---->
 
--   ツール
+- PD
 
-    -   TiCDC
+    - `ReportMinResolvedTS`の呼び出しが頻繁に発生する PD OOM 問題を修正しました [＃5965](https://github.com/tikv/pd/issues/5965) @[HunDunDM](https://github.com/HunDunDM)
 
-        -   レプリケーション遅延が過度に高い場合に、REDOログを適用するとOOMが発生する可能性がある問題を修正[＃8085](https://github.com/pingcap/tiflow/issues/8085) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        -   REDOログがメタへの書き込みを有効にするとパフォーマンスが低下する問題を修正しました [＃8074](https://github.com/pingcap/tiflow/issues/8074) @[CharlesCheung96](https://github.com/CharlesCheung96)
+<!---->
 
-    -   TiDB Data Migration (DM)
+- ツール
 
-        -   `binlog-schema delete`コマンドが実行に失敗する問題を修正 [＃7373](https://github.com/pingcap/tiflow/issues/7373) @[liumengya94](https://github.com/liumengya94)
-        -   最後のbinlogがスキップされたDDL の場合にチェックポイントが進まない問題を修正しました [＃8175](https://github.com/pingcap/tiflow/issues/8175) @[D3Hunter](https://github.com/D3Hunter)
+    - TiCDC
+
+        - レプリケーション遅延が過度に高い場合に、REDOログを適用するとOOMが発生する可能性がある問題を修正[＃8085](https://github.com/pingcap/tiflow/issues/8085) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - REDOログがメタへの書き込みを有効にするとパフォーマンスが低下する問題を修正しました [＃8074](https://github.com/pingcap/tiflow/issues/8074) @[CharlesCheung96](https://github.com/CharlesCheung96)
+
+    - TiDB Data Migration (DM)
+
+        - `binlog-schema delete`コマンドが実行に失敗する問題を修正 [＃7373](https://github.com/pingcap/tiflow/issues/7373) @[liumengya94](https://github.com/liumengya94)
+        - 最後のbinlogがスキップされたDDL の場合にチェックポイントが進まない問題を修正しました [＃8175](https://github.com/pingcap/tiflow/issues/8175) @[D3Hunter](https://github.com/D3Hunter)

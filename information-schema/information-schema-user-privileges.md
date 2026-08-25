@@ -122,11 +122,11 @@ SELECT * FROM USER_PRIVILEGES;
 
 `USER_PRIVILEGES`テーブル内のフィールドは次のように説明されます。
 
--   `GRANTEE` : 許可されたユーザーの名前。形式は`'user_name'@'host_name'`です。
--   `TABLE_CATALOG` : テーブルが属するカタログの名前。この値は常に`def` 。
--   `PRIVILEGE_TYPE` : 付与する権限の種類。各行には1つの権限の種類のみが表示されます。
--   `IS_GRANTABLE` : `GRANT OPTION`権限がある場合、値は`YES`なります。それ以外の場合、値は`NO`になります。
+- `GRANTEE` : 許可されたユーザーの名前。形式は`'user_name'@'host_name'`です。
+- `TABLE_CATALOG` : テーブルが属するカタログの名前。この値は常に`def` 。
+- `PRIVILEGE_TYPE` : 付与する権限の種類。各行には1つの権限の種類のみが表示されます。
+- `IS_GRANTABLE` : `GRANT OPTION`権限がある場合、値は`YES`なります。それ以外の場合、値は`NO`になります。
 
 ## 参照 {#see-also}
 
--   [`SHOW GRANTS`](/sql-statements/sql-statement-show-grants.md)
+- [`SHOW GRANTS`](/sql-statements/sql-statement-show-grants.md)

@@ -19,16 +19,16 @@ aliases: ['/ja/tidb/stable/dev-guide-get-data-from-single-table/','/ja/tidb/dev/
 <SimpleTab groupId="platform">
 <div label="TiDB Cloud" value="tidb-cloud">
 
-1.  [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
-2.  [Bookshopアプリケーションのテーブルスキーマとサンプルデータをインポートします](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data)
-3.  [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)。
+1. [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+2. [Bookshopアプリケーションのテーブルスキーマとサンプルデータをインポートします](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data)
+3. [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)。
 
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
-1.  [TiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)。
-2.  [Bookshopアプリケーションのテーブルスキーマとサンプルデータをインポートします](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data)
-3.  [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)。
+1. [TiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)。
+2. [Bookshopアプリケーションのテーブルスキーマとサンプルデータをインポートします](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data)
+3. [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)。
 
 </div>
 </SimpleTab>
@@ -72,10 +72,10 @@ SELECT id, name FROM authors;
 
 Javaでは、著者の基本情報を格納するために、クラス`Author`[価格帯](/data-type-numeric.md)[データ型](/data-type-overview.md)応じて適切なJavaデータ型を選択する必要があります。例：
 
--   `Int`型のデータを格納するには、 `int`型の変数を使用します。
--   `Long`型のデータを格納するには、 `bigint`型の変数を使用します。
--   `Short`型のデータを格納するには、 `tinyint`型の変数を使用します。
--   `String`型のデータを格納するには、 `varchar`型の変数を使用します。
+- `Int`型のデータを格納するには、 `int`型の変数を使用します。
+- `Long`型のデータを格納するには、 `bigint`型の変数を使用します。
+- `Short`型のデータを格納するには、 `tinyint`型の変数を使用します。
+- `String`型のデータを格納するには、 `varchar`型の変数を使用します。
 
 ```java
 public class Author {
@@ -380,6 +380,6 @@ public List<AuthorCount> getAuthorCountsByBirthYear() throws SQLException {
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

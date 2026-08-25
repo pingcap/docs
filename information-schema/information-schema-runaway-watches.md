@@ -137,14 +137,14 @@ RESOURCE_GROUP_NAME: default
 
 `RUNAWAY_WATCHES`テーブルの各列フィールドの意味は次のとおりです。
 
--   `ID` : ウォッチアイテムのID。
--   `RESOURCE_GROUP_NAME` : リソースグループの名前。
--   `START_TIME` : 開始時刻。
--   `END_TIME` ：終了時刻。 `UNLIMITED`は、ウォッチアイテムの有効期間が無制限であることを意味します。
--   `WATCH` : クイック識別のマッチタイプ。値は次のとおりです。
-    -   `Plan`は、プランダイジェストが一致したことを示します。この場合、 `WATCH_TEXT`列にプランダイジェストが表示されます。
-    -   `Similar`は、SQL ダイジェストが一致したことを示します。この場合、 `WATCH_TEXT`列に SQL ダイジェストが表示されます。
-    -   `Exact`は、SQLテキストが一致したことを示します。この場合、 `WATCH_TEXT`列にSQLテキストが表示されます。
--   `SOURCE` ：監視対象アイテムの発生源。 `QUERY_LIMIT`ルールによって識別された場合は、識別されたTiDB IPアドレスが表示されます。手動で追加された場合は、 `manual`が表示されます。
--   `ACTION` : 識別後の対応する操作。
--   `RULE` : 識別ルール。現在の 3 つのルールは`ElapsedTime` 、 `ProcessedKeys` 、および`RequestUnit`です。形式は`ProcessedKeys = 666(10)`で、 `666`は実際の値、 `10`はしきい値です。
+- `ID` : ウォッチアイテムのID。
+- `RESOURCE_GROUP_NAME` : リソースグループの名前。
+- `START_TIME` : 開始時刻。
+- `END_TIME` ：終了時刻。 `UNLIMITED`は、ウォッチアイテムの有効期間が無制限であることを意味します。
+- `WATCH` : クイック識別のマッチタイプ。値は次のとおりです。
+    - `Plan`は、プランダイジェストが一致したことを示します。この場合、 `WATCH_TEXT`列にプランダイジェストが表示されます。
+    - `Similar`は、SQL ダイジェストが一致したことを示します。この場合、 `WATCH_TEXT`列に SQL ダイジェストが表示されます。
+    - `Exact`は、SQLテキストが一致したことを示します。この場合、 `WATCH_TEXT`列にSQLテキストが表示されます。
+- `SOURCE` ：監視対象アイテムの発生源。 `QUERY_LIMIT`ルールによって識別された場合は、識別されたTiDB IPアドレスが表示されます。手動で追加された場合は、 `manual`が表示されます。
+- `ACTION` : 識別後の対応する操作。
+- `RULE` : 識別ルール。現在の 3 つのルールは`ElapsedTime` 、 `ProcessedKeys` 、および`RequestUnit`です。形式は`ProcessedKeys = 666(10)`で、 `666`は実際の値、 `10`はしきい値です。

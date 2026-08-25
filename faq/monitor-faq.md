@@ -7,8 +7,8 @@ summary: TiDB モニタリングに関連する FAQ について説明します�
 
 このドキュメントでは、TiDB 監視に関連する FAQ をまとめています。
 
--   Prometheus 監視フレームワークの詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
--   監視の主な指標の詳細については、 [主要な指標](/grafana-overview-dashboard.md)を参照してください。
+- Prometheus 監視フレームワークの詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
+- 監視の主な指標の詳細については、 [主要な指標](/grafana-overview-dashboard.md)を参照してください。
 
 ## 主要な指標を監視するより良い方法はありますか? {#is-there-a-better-way-of-monitoring-the-key-metrics}
 

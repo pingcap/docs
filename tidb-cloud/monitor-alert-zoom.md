@@ -13,19 +13,19 @@ TiDB Cloud は、Zoom、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メール
 
 ## 前提条件 {#prerequisites}
 
--   Zoom経由での登録機能は、**Enterprise**または**Premium**サポートプランに加入している組織のみが利用できます。
+- Zoom経由での登録機能は、**Enterprise**または**Premium**サポートプランに加入している組織のみが利用できます。
 
--   Zoomで受信Webhookチャットボットを追加および設定するには、Zoomアカウントの管理者権限が必要です。
+- Zoomで受信Webhookチャットボットを追加および設定するには、Zoomアカウントの管理者権限が必要です。
 
 <CustomContent plan="dedicated">
 
--   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象プロジェクトへの`Project Owner`アクセス権が必要です。
+- TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象プロジェクトへの`Project Owner`アクセス権が必要です。
 
 </CustomContent>
 
 <CustomContent plan="essential,premium">
 
--   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象インスタンスへの`Project Owner`または`Instance Manager`アクセス権が必要です。
+- TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象インスタンスへの`Project Owner`または`Instance Manager`アクセス権が必要です。
 
 </CustomContent>
 
@@ -33,28 +33,28 @@ TiDB Cloud は、Zoom、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メール
 
 ### ステップ1. Zoom Incoming Webhookアプリを追加する {#step-1-add-the-zoom-incoming-webhook-app}
 
-1.  [Zoomアプリマーケットプレイス](https://marketplace.zoom.us/)にアカウント管理者としてサインインします。
-2.  Zoom App Marketplaceの[受信Webhookアプリ](https://marketplace.zoom.us/apps/eH_dLuquRd-VYcOsNGy-hQ)ページに移動し、 **Add**をクリックしてこのアプリを追加します。アプリが事前承認されていない場合は、Zoom 管理者に連絡して、アカウントに対してこのアプリを承認してもらいます。詳細については、 [アプリの承認とアプリリクエストの管理](https://support.zoom.us/hc/en-us/articles/360027829671)を参照してください。
-3.  アプリが必要とする権限を確認し、 **Authorize**をクリックして受信Webhookアプリを追加します。
+1. [Zoomアプリマーケットプレイス](https://marketplace.zoom.us/)にアカウント管理者としてサインインします。
+2. Zoom App Marketplaceの[受信Webhookアプリ](https://marketplace.zoom.us/apps/eH_dLuquRd-VYcOsNGy-hQ)ページに移動し、 **Add**をクリックしてこのアプリを追加します。アプリが事前承認されていない場合は、Zoom 管理者に連絡して、アカウントに対してこのアプリを承認してもらいます。詳細については、 [アプリの承認とアプリリクエストの管理](https://support.zoom.us/hc/en-us/articles/360027829671)を参照してください。
+3. アプリが必要とする権限を確認し、 **Authorize**をクリックして受信Webhookアプリを追加します。
 
 ### ステップ2. ZoomのWebhook URLを生成する {#step-2-generate-a-zoom-webhook-url}
 
-1.  Zoomデスクトップクライアントにサインインしてください。
+1. Zoomデスクトップクライアントにサインインしてください。
 
-2.  **Team Chat**タブをクリックしてください。
+2. **Team Chat**タブをクリックしてください。
 
-3.  **Apps**の下にある**Incoming Webhook**を見つけて選択するか、上記からメッセージを受信したいチャットチャネルを選択してください。
+3. **Apps**の下にある**Incoming Webhook**を見つけて選択するか、上記からメッセージを受信したいチャットチャネルを選択してください。
 
-4.  新しい接続を作成するには、次のコマンドを入力してください。 `${connectionName}`部分を、接続したい名前（例： `tidbcloud-alerts`に置き換えてください。
+4. 新しい接続を作成するには、次のコマンドを入力してください。 `${connectionName}`部分を、接続したい名前（例： `tidbcloud-alerts`に置き換えてください。
 
     ```shell
     /inc connect ${connectionName}
     ```
 
-5.  このコマンドを実行すると、以下の詳細情報が返されます。
+5. このコマンドを実行すると、以下の詳細情報が返されます。
 
-    -   **Endpoint**。次の形式のウェブフック URL が提供されます: `https://integrations.zoom.us/chat/webhooks/incomingwebhook/XXXXXXXXXXXXXXXXXXXXXXXX` 。
-    -   **Verification Token**
+    - **Endpoint**。次の形式のウェブフック URL が提供されます: `https://integrations.zoom.us/chat/webhooks/incomingwebhook/XXXXXXXXXXXXXXXXXXXXXXXX` 。
+    - **Verification Token**
 
 ### ステップ3. TiDB Cloudから購読する {#step-3-subscribe-from-tidb-cloud}
 
@@ -68,24 +68,24 @@ TiDB Cloud Dedicatedクラスターのアラート通知を購読するには、
 >
 > TiDB Cloud Dedicatedの場合、アラートの購読は現在のプロジェクト内のすべてのアラートに適用されます。プロジェクト内に複数のTiDB Cloud Dedicatedクラスタがある場合でも、購読は一度だけで済みます。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
-2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
+2. プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  左側のナビゲーションペインで、 **Alert Subscription**の下にある**Project Settings**をクリックします。
+3. 左側のナビゲーションペインで、 **Alert Subscription**の下にある**Project Settings**をクリックします。
 
-4.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
+4. **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-5.  **購読者タイプの**ドロップダウンリストから**Zoom**を選択してください。
+5. **購読者タイプの**ドロップダウンリストから**Zoom**を選択してください。
 
-6.  **Name**欄に名前を、 **URL**欄にZoomのWebhook URLを、 **Token**欄に認証トークンを入力してください。
+6. **Name**欄に名前を、 **URL**欄にZoomのWebhook URLを、 **Token**欄に認証トークンを入力してください。
 
-7.  **Test Connection**をクリックしてください。
+7. **Test Connection**をクリックしてください。
 
-    -   テストが成功すると、**Save**ボタンが表示されます。
-    -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、接続を再試行してください。
+    - テストが成功すると、**Save**ボタンが表示されます。
+    - テストが失敗した場合は、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、接続を再試行してください。
 
-8.  購読を完了するには、 **Save**をクリックしてください。
+8. 購読を完了するには、 **Save**をクリックしてください。
 
 または、対象のTiDB Cloud Dedicatedクラスタの**アラート**ページの右上にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
@@ -101,22 +101,22 @@ TiDB Cloud Essentialインスタンスのアラート通知を購読するには
 >
 > TiDB Cloud Essentialの場合、アラートの購読は現在のインスタンス内のすべてのアラートに適用されます。複数のTiDB Cloud Essentialインスタンスをお持ちの場合は、各インスタンスごとに個別に購読する必要があります。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
 
-3.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
+3. **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-4.  **購読者タイプの**ドロップダウンリストから**Zoom**を選択してください。
+4. **購読者タイプの**ドロップダウンリストから**Zoom**を選択してください。
 
-5.  **Name**欄に名前を、 **URL**欄にZoomのWebhook URLを、 **Token**欄に認証トークンを入力してください。
+5. **Name**欄に名前を、 **URL**欄にZoomのWebhook URLを、 **Token**欄に認証トークンを入力してください。
 
-6.  **Test Connection**をクリックしてください。
+6. **Test Connection**をクリックしてください。
 
-    -   テストが成功すると、**Save**ボタンが表示されます。
-    -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージの指示に従って問題を解決し、接続を再試行してください。
+    - テストが成功すると、**Save**ボタンが表示されます。
+    - テストが失敗した場合は、エラーメッセージが表示されます。メッセージの指示に従って問題を解決し、接続を再試行してください。
 
-7.  購読を完了するには、 **Save**をクリックしてください。
+7. 購読を完了するには、 **Save**をクリックしてください。
 
 または、対象のTiDB Cloud Essentialインスタンスの**アラート**ページの右上隅にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
@@ -130,22 +130,22 @@ TiDB Cloud Premiumインスタンスのアラート通知を購読するには�
 >
 > TiDB Cloud Premiumの場合、アラートの購読は現在のインスタンス内のすべてのアラートに適用されます。複数のTiDB Cloud Premiumインスタンスをお持ちの場合は、各インスタンスごとに個別に購読する必要があります。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
 
-3.  **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
+3. **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-4.  **購読者タイプの**ドロップダウンリストから**Zoom**を選択してください。
+4. **購読者タイプの**ドロップダウンリストから**Zoom**を選択してください。
 
-5.  **Name**欄に名前を、 **URL**欄にZoomのWebhook URLを、 **Token**欄に認証トークンを入力してください。
+5. **Name**欄に名前を、 **URL**欄にZoomのWebhook URLを、 **Token**欄に認証トークンを入力してください。
 
-6.  **Test Connection**をクリックしてください。
+6. **Test Connection**をクリックしてください。
 
-    -   テストが成功すると、**Save**ボタンが表示されます。
-    -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージの指示に従って問題を解決し、接続を再試行してください。
+    - テストが成功すると、**Save**ボタンが表示されます。
+    - テストが失敗した場合は、エラーメッセージが表示されます。メッセージの指示に従って問題を解決し、接続を再試行してください。
 
-7.  購読を完了するには、 **Save**をクリックしてください。
+7. 購読を完了するには、 **Save**をクリックしてください。
 
 または、対象のTiDB Cloud Premiumインスタンスの**アラート**ページの右上にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
@@ -159,28 +159,28 @@ TiDB Cloud Premiumインスタンスのアラート通知を購読するには�
 
 <CustomContent plan="dedicated">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
-2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
-3.  左側のナビゲーションペインで、 **Project Settings**の下にある**Alert Subscription**をクリックします。
-4.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **Unsubscribe**をクリックします。
-5.  購読解除を確定するには、 **Unsubscribe**をクリックしてください。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
+2. プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
+3. 左側のナビゲーションペインで、 **Project Settings**の下にある**Alert Subscription**をクリックします。
+4. **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **Unsubscribe**をクリックします。
+5. 購読解除を確定するには、 **Unsubscribe**をクリックしてください。
 
 </CustomContent>
 
 <CustomContent plan="essential">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
-3.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **Unsubscribe**をクリックします。
-4.  購読解除を確定するには、 **Unsubscribe**をクリックしてください。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
+2. 左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
+3. **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **Unsubscribe**をクリックします。
+4. 購読解除を確定するには、 **Unsubscribe**をクリックしてください。
 
 </CustomContent>
 
 <CustomContent plan="premium">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
-3.  **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **Unsubscribe**をクリックします。
-4.  購読解除を確定するには、 **Unsubscribe**をクリックしてください。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
+2. 左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
+3. **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **Unsubscribe**をクリックします。
+4. 購読解除を確定するには、 **Unsubscribe**をクリックしてください。
 
 </CustomContent>

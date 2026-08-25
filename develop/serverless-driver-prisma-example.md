@@ -8,8 +8,8 @@ aliases: ['/ja/tidbcloud/serverless-driver-prisma-example/']
 
 [Prisma](https://www.prisma.io/docs)は、開発者が直感的、効率的、安全な方法でデータベースを操作できるようにするオープンソースの次世代 ORM (オブジェクト リレーショナル マッピング) です。 TiDB Cloudは[@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter)を提供しており、 [TiDB Cloud Serverless Driver](/develop/serverless-driver.md)で HTTPS 経由で[Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client)を使用できるようにします。従来の TCP 方法と比較して、[@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter)は次の利点があります。
 
--   サーバーレス環境におけるPrisma Clientのパフォーマンス向上
--   エッジ環境でPrisma Clientを使用できる機能
+- サーバーレス環境におけるPrisma Clientのパフォーマンス向上
+- エッジ環境でPrisma Clientを使用できる機能
 
 このチュートリアルでは、サーバーレス環境およびエッジ環境で[@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter)を使用する方法について説明します。
 
@@ -82,20 +82,20 @@ const prisma = new PrismaClient({ adapter });
 
 このチュートリアルを完了するには、以下のものが必要です。
 
--   [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
--   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 、またはお好みのパッケージマネージャーを使用してください。
--   TiDB Cloud Starterインスタンス。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 、またはお好みのパッケージマネージャーを使用してください。
+- TiDB Cloud Starterインスタンス。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
-1.  `prisma-example`という名前のプロジェクトを作成します。
+1. `prisma-example`という名前のプロジェクトを作成します。
 
     ```
     mkdir prisma-example
     cd prisma-example
     ```
 
-2.  `@tidbcloud/prisma-adapter`ドライバーアダプター、 `@tidbcloud/serverless`TiDB Cloud Serverless Driver、および Prisma CLI をインストールします。
+2. `@tidbcloud/prisma-adapter`ドライバーアダプター、 `@tidbcloud/serverless`TiDB Cloud Serverless Driver、および Prisma CLI をインストールします。
 
     以下のコマンドはパッケージマネージャーとしてnpmを使用します。 `npm install @tidbcloud/serverless`を実行すると、プロジェクトディレクトリに`node_modules`ディレクトリと`package.json`ファイルが作成されます。
 
@@ -105,7 +105,7 @@ const prisma = new PrismaClient({ adapter });
     npm install prisma --save-dev
     ```
 
-3.  `package.json`ファイルで、 `type: "module"`を追加して ES モジュールを指定します。
+3. `package.json`ファイルで、 `type: "module"`を追加して ES モジュールを指定します。
 
    ```json
    {
@@ -123,13 +123,13 @@ const prisma = new PrismaClient({ adapter });
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1.  TiDB Cloud Starterインスタンスの概要ページで、右上隅の**Connect**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
+1. TiDB Cloud Starterインスタンスの概要ページで、右上隅の**Connect**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
 
     ```
     mysql://[username]:[password]@[host]:4000/[database]?sslaccept=strict
     ```
 
-2.  プロジェクトのルートディレクトリに、 `.env`という名前のファイルを作成し、次のように`DATABASE_URL`という名前の環境変数を定義し、この変数内のプレースホルダー`[]`を接続文字列内の対応するパラメータに置き換えます。
+2. プロジェクトのルートディレクトリに、 `.env`という名前のファイルを作成し、次のように`DATABASE_URL`という名前の環境変数を定義し、この変数内のプレースホルダー`[]`を接続文字列内の対応するパラメータに置き換えます。
 
     ```dotenv
     DATABASE_URL='mysql://[username]:[password]@[host]:4000/[database]?sslaccept=strict'
@@ -139,7 +139,7 @@ const prisma = new PrismaClient({ adapter });
     >
     > `@tidbcloud/prisma-adapter` 、HTTPS 経由の Prisma Clientの使用のみをサポートします。 [Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate)および[Prisma Introspect](https://www.prisma.io/docs/concepts/components/introspection)では、従来の TCP 接続が引き続き使用されます。 Prisma Client のみを使用する必要がある場合は、 `DATABASE_URL`を`mysql://[username]:[password]@[host]/[database]`形式に簡素化できます。
 
-3.  `dotenv`ファイルから環境変数を読み込むには、 `.env` } をインストールしてください。
+3. `dotenv`ファイルから環境変数を読み込むには、 `.env` } をインストールしてください。
 
    ```
    npm install dotenv
@@ -147,7 +147,7 @@ const prisma = new PrismaClient({ adapter });
 
 ### ステップ3．スキーマを定義する {#step-3-define-your-schema}
 
-1.  `schema.prisma`という名前のファイルを作成します。このファイルに、 `driverAdapters`プレビュー機能を含め、 `DATABASE_URL`環境変数を参照します。以下にファイルの例を示します。
+1. `schema.prisma`という名前のファイルを作成します。このファイルに、 `driverAdapters`プレビュー機能を含め、 `DATABASE_URL`環境変数を参照します。以下にファイルの例を示します。
 
    ```
    // schema.prisma
@@ -162,7 +162,7 @@ const prisma = new PrismaClient({ adapter });
    } 
    ```
 
-2.  `schema.prisma`ファイルで、データベーステーブルのデータモデルを定義します。次の例では、 `user`という名前のデータモデルが定義されています。
+2. `schema.prisma`ファイルで、データベーステーブルのデータモデルを定義します。次の例では、 `user`という名前のデータモデルが定義されています。
 
    ```
    // schema.prisma
@@ -184,7 +184,7 @@ const prisma = new PrismaClient({ adapter });
    }
    ```
 
-3.  データベースをPrismaスキーマと同期させます。TiDB Cloud Starterインスタンスでデータベーステーブルを手動で作成するか、Prisma CLIを使用して次のように自動的に作成することができます。
+3. データベースをPrismaスキーマと同期させます。TiDB Cloud Starterインスタンスでデータベーステーブルを手動で作成するか、Prisma CLIを使用して次のように自動的に作成することができます。
 
     ```
     npx prisma db push
@@ -192,7 +192,7 @@ const prisma = new PrismaClient({ adapter });
 
     このコマンドは、 `user`を使用した HTTPS 接続ではなく、従来の TCP 接続を通じてTiDB Cloud Starterインスタンスに`@tidbcloud/prisma-adapter`します。これは、Prisma Migrate と同じエンジンを使用しているためです。このコマンドの詳細については、 [スキーマのプロトタイプを作成します](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push)を参照してください。
 
-4.  Prisma Clientを生成する：
+4. Prisma Clientを生成する：
 
     ```
     npx prisma generate
@@ -202,7 +202,7 @@ const prisma = new PrismaClient({ adapter });
 
 ### ステップ4．CRUD操作を実行する {#step-4-execute-crud-operations}
 
-1.  `hello-word.js`という名前のファイルを作成し、以下のコードを追加してPrisma Clientを初期化します。
+1. `hello-word.js`という名前のファイルを作成し、以下のコードを追加してPrisma Clientを初期化します。
 
    ```js
    import { PrismaTiDBCloud } from '@tidbcloud/prisma-adapter';
@@ -218,7 +218,7 @@ const prisma = new PrismaClient({ adapter });
    const prisma = new PrismaClient({ adapter });
    ```
 
-2.  Prisma Client を使用して、いくつかの CRUD 操作を実行します。例:
+2. Prisma Client を使用して、いくつかの CRUD 操作を実行します。例:
 
    ```js
    // Insert
@@ -241,7 +241,7 @@ const prisma = new PrismaClient({ adapter });
    })
    ```
 
-3.  Prisma Client を使用してトランザクション操作を実行します。例:
+3. Prisma Client を使用してトランザクション操作を実行します。例:
 
    ```js
    const createUser1 = prisma.user.create({
@@ -280,5 +280,5 @@ const prisma = new PrismaClient({ adapter });
 
 Vercel Edge FunctionsやCloudflare Workersなどのエッジ環境では`@tidbcloud/prisma-adapter` v5.11.0以降のバージョンを使用できます。
 
--   [Vercel Edge 関数の例](https://github.com/tidbcloud/serverless-driver-example/tree/main/prisma/prisma-vercel-example)
--   [Cloudflare Workersの例](https://github.com/tidbcloud/serverless-driver-example/tree/main/prisma/prisma-cloudflare-worker-example)
+- [Vercel Edge 関数の例](https://github.com/tidbcloud/serverless-driver-example/tree/main/prisma/prisma-vercel-example)
+- [Cloudflare Workersの例](https://github.com/tidbcloud/serverless-driver-example/tree/main/prisma/prisma-cloudflare-worker-example)

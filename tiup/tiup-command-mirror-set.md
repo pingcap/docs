@@ -17,8 +17,8 @@ tiup mirror set <mirror-addr> [flags]
 
 `<mirror-addr>`はミラー アドレスであり、次の 2 つの形式があります。
 
--   ネットワークアドレス: `http`または`https`で始まります。例: `http://172.16.5.5:8080` 、 `https://tiup-mirrors.pingcap.com` 。
--   ローカルファイルパス: ミラーディレクトリの絶対パス。例: `/path/to/local-tiup-mirror` 。
+- ネットワークアドレス: `http`または`https`で始まります。例: `http://172.16.5.5:8080` 、 `https://tiup-mirrors.pingcap.com` 。
+- ローカルファイルパス: ミラーディレクトリの絶対パス。例: `/path/to/local-tiup-mirror` 。
 
 ## オプション {#option}
 
@@ -40,8 +40,8 @@ tiup mirror set <mirror-addr> -r /path/to/local/root.json
 
 上記の手順では、 `wget`コマンドの前にミラーが攻撃された場合、ルート証明書が正しくないことが分かります。`wget`コマンドの後にミラーが攻撃された場合、 TiUPはミラーがルート証明書と一致しないことを検出します。
 
--   データ型: `String`
--   デフォルト: `{mirror-dir}/root.json`
+- データ型: `String`
+- デフォルト: `{mirror-dir}/root.json`
 
 ## 出力 {#output}
 

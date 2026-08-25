@@ -21,8 +21,8 @@ tiup install <component1>[:version] [component2...N] [flags]
 
 ## 出力 {#output}
 
--   通常、コンポーネントのダウンロード情報を出力します。
--   コンポーネントが存在しない場合は、エラー`The component "%s" not found`が報告されます。
--   バージョンが存在しない場合は、エラー`version %s not supported by component %s`が報告されます。
+- 通常、コンポーネントのダウンロード情報を出力します。
+- コンポーネントが存在しない場合は、エラー`The component "%s" not found`が報告されます。
+- バージョンが存在しない場合は、エラー`version %s not supported by component %s`が報告されます。
 
 [&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)

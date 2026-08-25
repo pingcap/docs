@@ -17,20 +17,20 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 <CustomContent language="en,zh">
 
--   TiDB Cloudを使用してパスワードを管理できるように、メールアドレスとパスワードで登録するか、Google、GitHub、またはMicrosoftアカウントで登録することができます。
--   AWS Marketplace をご利用の方は、AWS Marketplace からサインアップすることもできます。サインアップするには、 [AWS Marketplace](https://aws.amazon.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
--   Azure Marketplace をご利用の方は、Azure Marketplace からサインアップすることもできます。サインアップするには、 [Azure Marketplace](https://azuremarketplace.microsoft.com)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
--   Google Cloud Marketplace をご利用の方は、Google Cloud Marketplace からサインアップすることもできます。サインアップするには、 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
--   Alibaba Cloud Marketplace ユーザーの場合は、Alibaba Cloud Marketplace を通じてサインアップすることもできます。これを行うには、[アリババクラウドマーケットプレイス](https://marketplace.alibabacloud.com/)で`TiDB Cloud`を検索し、 TiDB Cloudにサブスクライブし、画面上の指示に従ってTiDB Cloudアカウントを設定します。
+- TiDB Cloudを使用してパスワードを管理できるように、メールアドレスとパスワードで登録するか、Google、GitHub、またはMicrosoftアカウントで登録することができます。
+- AWS Marketplace をご利用の方は、AWS Marketplace からサインアップすることもできます。サインアップするには、 [AWS Marketplace](https://aws.amazon.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
+- Azure Marketplace をご利用の方は、Azure Marketplace からサインアップすることもできます。サインアップするには、 [Azure Marketplace](https://azuremarketplace.microsoft.com)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
+- Google Cloud Marketplace をご利用の方は、Google Cloud Marketplace からサインアップすることもできます。サインアップするには、 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
+- Alibaba Cloud Marketplace ユーザーの場合は、Alibaba Cloud Marketplace を通じてサインアップすることもできます。これを行うには、[アリババクラウドマーケットプレイス](https://marketplace.alibabacloud.com/)で`TiDB Cloud`を検索し、 TiDB Cloudにサブスクライブし、画面上の指示に従ってTiDB Cloudアカウントを設定します。
 
 </CustomContent>
 
 <CustomContent language="ja">
 
--   TiDB Cloudを使用してパスワードを管理できるように、メールアドレスとパスワードで登録するか、Google、GitHub、またはMicrosoftアカウントで登録することができます。
--   AWS Marketplace をご利用の方は、AWS Marketplace からサインアップすることもできます。サインアップするには、 [AWS Marketplace](https://aws.amazon.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
--   Azure Marketplace をご利用の方は、Azure Marketplace からサインアップすることもできます。サインアップするには、 [Azure Marketplace](https://azuremarketplace.microsoft.com)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
--   Google Cloud Marketplace をご利用の方は、Google Cloud Marketplace からサインアップすることもできます。サインアップするには、 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
+- TiDB Cloudを使用してパスワードを管理できるように、メールアドレスとパスワードで登録するか、Google、GitHub、またはMicrosoftアカウントで登録することができます。
+- AWS Marketplace をご利用の方は、AWS Marketplace からサインアップすることもできます。サインアップするには、 [AWS Marketplace](https://aws.amazon.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
+- Azure Marketplace をご利用の方は、Azure Marketplace からサインアップすることもできます。サインアップするには、 [Azure Marketplace](https://azuremarketplace.microsoft.com)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
+- Google Cloud Marketplace をご利用の方は、Google Cloud Marketplace からサインアップすることもできます。サインアップするには、 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
 
 </CustomContent>
 
@@ -38,33 +38,33 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 `Organization Owner`または`Project Owner`の役割に属している場合は、次のようにしてTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを作成できます。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-2.  **Create Resource**をクリックします。
+2. **Create Resource**をクリックします。
 
-3.  プランを選択してください。
+3. プランを選択してください。
 
     **Starter**インスタンスから開始し、後でニーズの増大に応じて**Essential**インスタンスにアップグレードできます。詳細については、[プランを選択してください](/tidb-cloud/select-cluster-tier.md)ご覧ください。
 
-4.  インスタンスの名前を入力し、次にインスタンスをホストするクラウドプロバイダーとリージョンを選択してください。
+4. インスタンスの名前を入力し、次にインスタンスをホストするクラウドプロバイダーとリージョンを選択してください。
 
-5.  （オプション）このインスタンスを管理対象プロジェクトにグループ化するには、 **Group Your Instance in a Project**をクリックし、インスタンスのターゲットプロジェクトを選択します。組織内にプロジェクトがない場合は、 **Create a Project**をクリックして作成できます。
+5. （オプション）このインスタンスを管理対象プロジェクトにグループ化するには、 **Group Your Instance in a Project**をクリックし、インスタンスのターゲットプロジェクトを選択します。組織内にプロジェクトがない場合は、 **Create a Project**をクリックして作成できます。
 
-6.  インスタンスの容量を更新します。
+6. インスタンスの容量を更新します。
 
-    -   **Starter**プラン：
+    - **Starter**プラン：
 
-        -   TiDB Cloud Starterインスタンスの利用限度額を更新できます。利用限度額を0に設定すると、インスタンスは無料のままです。利用限度額を0より大きい値に設定する場合は、 TiDB Cloud Starterインスタンスを作成する前にクレジットカードを追加する必要があります。
+        - TiDB Cloud Starterインスタンスの利用限度額を更新できます。利用限度額を0に設定すると、インスタンスは無料のままです。利用限度額を0より大きい値に設定する場合は、 TiDB Cloud Starterインスタンスを作成する前にクレジットカードを追加する必要があります。
 
-        -   デフォルトでは、各組織は最大 5 つ [無料のTiDB Cloud Starterインスタンス](/tidb-cloud/select-cluster-tier.md#starter)を作成できます。追加のTiDB Cloud Starterインスタンスを作成するには、クレジット カードを追加し、使用制限を指定する必要があります。
+        - デフォルトでは、各組織は最大 5 つ [無料のTiDB Cloud Starterインスタンス](/tidb-cloud/select-cluster-tier.md#starter)を作成できます。追加のTiDB Cloud Starterインスタンスを作成するには、クレジット カードを追加し、使用制限を指定する必要があります。
 
-    -   **Essential**プラン：
+    - **Essential**プラン：
 
-        -   TiDB Cloud Essentialインスタンスでは、リクエストキャパシティユニット（RCU）の最小数と最大数の両方を指定する必要があります。
+        - TiDB Cloud Essentialインスタンスでは、リクエストキャパシティユニット（RCU）の最小数と最大数の両方を指定する必要があります。
 
-        -   RCUは、ワークロード用にプロビジョニングされたコンピューティングリソースを表します。TiDB Cloudは、需要に基づいて、この範囲内でTiDB Cloud Essentialインスタンスを自動的にスケーリングします。
+        - RCUは、ワークロード用にプロビジョニングされたコンピューティングリソースを表します。TiDB Cloudは、需要に基づいて、この範囲内でTiDB Cloud Essentialインスタンスを自動的にスケーリングします。
 
-7.  **Create**をクリックします。
+7. **Create**をクリックします。
 
     インスタンス作成プロセスが開始され、約30秒でインスタンスが作成されます。
 

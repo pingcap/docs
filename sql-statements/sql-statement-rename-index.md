@@ -55,8 +55,8 @@ TiDBの`RENAME INDEX`文はMySQLと完全に互換性があります。互換性
 
 ## 参照 {#see-also}
 
--   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
--   [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
--   [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
--   [SHOW INDEXES [FROM|IN]](/sql-statements/sql-statement-show-indexes.md)
--   [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
+- [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+- [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
+- [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
+- [SHOW INDEXES [FROM|IN]](/sql-statements/sql-statement-show-indexes.md)
+- [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)

@@ -130,5 +130,5 @@ GROUP BY
 
 ## 参照 {#see-also}
 
--   [JSON関数の概要](/functions-and-operators/json-functions.md)
--   [JSONデータ型](/data-type-json.md)
+- [JSON関数の概要](/functions-and-operators/json-functions.md)
+- [JSONデータ型](/data-type-json.md)

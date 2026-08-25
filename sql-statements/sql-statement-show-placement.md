@@ -13,9 +13,9 @@ summary: TiDBにおけるSHOW PLACEMENTの使用方法。
 
 このステートメントは`Scheduling_State`フィールドがPlacement Driver(PD) が配置スケジュールに関して現在行っている進捗状況を示す結果セットを返します。
 
--   `PENDING` : PD はまだ配置のスケジュールを開始していません。これは、配置ルールが意味的には正しいものの、現在のところクラスタで満たすことができないことを示している可能性があります。たとえば、 `FOLLOWERS=4`なのに、フォロワー候補となる TiKV ストアが 3 つしかない場合などです。
--   `INPROGRESS` : PD は現在配置のスケジュールを調整中です。
--   `SCHEDULED` : PD は配置を正常にスケジュールしました。
+- `PENDING` : PD はまだ配置のスケジュールを開始していません。これは、配置ルールが意味的には正しいものの、現在のところクラスタで満たすことができないことを示している可能性があります。たとえば、 `FOLLOWERS=4`なのに、フォロワー候補となる TiKV ストアが 3 つしかない場合などです。
+- `INPROGRESS` : PD は現在配置のスケジュールを調整中です。
+- `SCHEDULED` : PD は配置を正常にスケジュールしました。
 
 ## 概要 {#synopsis}
 
@@ -53,6 +53,6 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## 参照 {#see-also}
 
--   [SQLにおける配置ルール](/placement-rules-in-sql.md)
--   [SHOW PLACEMENT FOR](/sql-statements/sql-statement-show-placement-for.md)
--   [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)
+- [SQLにおける配置ルール](/placement-rules-in-sql.md)
+- [SHOW PLACEMENT FOR](/sql-statements/sql-statement-show-placement-for.md)
+- [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)

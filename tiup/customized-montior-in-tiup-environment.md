@@ -11,11 +11,11 @@ TiUPを使用して TiDB クラスターをデプロイすると、 TiUP はProm
 
 > **Note:**
 >
-> -   監視サーバーの構成ファイルを直接変更しないでください。これらの変更は、デプロイメント、スケールアウト、スケールイン、リロードなどの後続のTiUP操作によって上書きされるためです。
+> - 監視サーバーの構成ファイルを直接変更しないでください。これらの変更は、デプロイメント、スケールアウト、スケールイン、リロードなどの後続のTiUP操作によって上書きされるためです。
 >
-> -   監視サーバーがTiUPによって展開および管理されていない場合は、このドキュメントを参照する代わりに、監視サーバーの構成ファイルを直接変更できます。
+> - 監視サーバーがTiUPによって展開および管理されていない場合は、このドキュメントを参照する代わりに、監視サーバーの構成ファイルを直接変更できます。
 >
-> -   この機能はTiUP v1.9.0以降でサポートされています。そのため、この機能を使用する前にTiUPのバージョンをご確認ください。
+> - この機能はTiUP v1.9.0以降でサポートされています。そのため、この機能を使用する前にTiUPのバージョンをご確認ください。
 
 ## Prometheusの設定をカスタマイズする {#customize-prometheus-configurations}
 
@@ -23,9 +23,9 @@ TiUPを使用して TiDB クラスターをデプロイすると、 TiUP はProm
 
 ### Prometheusルール設定をカスタマイズする {#customize-prometheus-rule-configuration}
 
-1.  ルール構成ファイルをカスタマイズし、 TiUP が配置されているマシンのディレクトリの下に配置します。
+1. ルール構成ファイルをカスタマイズし、 TiUP が配置されているマシンのディレクトリの下に配置します。
 
-2.  topology.yaml ファイルで、カスタマイズされたルール構成ファイルのディレクトリに`rule_dir`設定します。
+2. topology.yaml ファイルで、カスタマイズされたルール構成ファイルのディレクトリに`rule_dir`設定します。
 
     以下は、topology.yaml ファイル内の monitored_servers の構成例です。
 
@@ -39,9 +39,9 @@ TiUPを使用して TiDB クラスターをデプロイすると、 TiUP はProm
 
 ### Prometheusのスクレイプ設定をカスタマイズする {#customize-prometheus-scrape-configuration}
 
-1.  TiDB クラスターの topology.yaml ファイルを開きます。
+1. TiDB クラスターの topology.yaml ファイルを開きます。
 
-2.  `monitoring_servers`構成で、 `additional_scrape_conf`フィールドを追加します。
+2. `monitoring_servers`構成で、 `additional_scrape_conf`フィールドを追加します。
 
     以下は、topology.yaml ファイル内の monitored_servers の構成例です。
 
@@ -98,9 +98,9 @@ TiUP v1.17.0 以降では、トポロジーファイルで Prometheus グロー�
 
 ### Grafanaダッシュボードをカスタマイズする {#customize-grafana-dashboard}
 
-1.  Grafana ダッシュボードの構成ファイルをカスタマイズし、 TiUPが配置されているマシンのディレクトリの下に配置します。
+1. Grafana ダッシュボードの構成ファイルをカスタマイズし、 TiUPが配置されているマシンのディレクトリの下に配置します。
 
-2.  topology.yaml ファイルで、カスタマイズされたダッシュボード構成ファイルのディレクトリに`dashboard_dir`設定します。
+2. topology.yaml ファイルで、カスタマイズされたダッシュボード構成ファイルのディレクトリに`dashboard_dir`設定します。
 
     以下は、topology.yaml ファイル内の grafana_servers の構成例です。
 
@@ -114,9 +114,9 @@ TiUP v1.17.0 以降では、トポロジーファイルで Prometheus グロー�
 
 ### その他のGrafana設定をカスタマイズする {#customize-other-grafana-configurations}
 
-1.  TiDB クラスターの topology.yaml ファイルを開きます。
+1. TiDB クラスターの topology.yaml ファイルを開きます。
 
-2.  `grafana_servers`構成に他の構成項目を追加します。
+2. `grafana_servers`構成に他の構成項目を追加します。
 
     以下は、topology.yaml ファイルの`[log.file] level`フィールドと`smtp`フィールドの構成例です。
 

@@ -38,5 +38,5 @@ Query OK, 0 rows affected (0.01 sec)
 
 ## 参照 {#see-also}
 
--   [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md)
--   [`SHOW DISTRIBUTION JOBS`](/sql-statements/sql-statement-show-distribution-jobs.md)
+- [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md)
+- [`SHOW DISTRIBUTION JOBS`](/sql-statements/sql-statement-show-distribution-jobs.md)

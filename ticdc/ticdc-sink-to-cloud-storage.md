@@ -7,8 +7,8 @@ summary: TiCDC を使用してデータをストレージサービスに複製�
 
 TiDB v6.5.0以降、TiCDCはAmazon S3、GCS、Azure Blob Storage、NFSなどのストレージサービスへの行変更イベントの保存をサポートします。本ドキュメントでは、TiCDCを使用してこれらのストレージサービスに増分データをレプリケートするチェンジフィードの作成方法と、データの保存方法について説明します。本ドキュメントの構成は以下のとおりです。
 
--   [ストレージサービスにデータを複製する方法](#replicate-change-data-to-storage-services) 。
--   [ストレージサービスにデータを保存する方法](#storage-path-structure) 。
+- [ストレージサービスにデータを複製する方法](#replicate-change-data-to-storage-services) 。
+- [ストレージサービスにデータを保存する方法](#storage-path-structure) 。
 
 ## 変更データをストレージサービスに複製する {#replicate-change-data-to-storage-services}
 
@@ -27,12 +27,12 @@ cdc cli changefeed create \
 Info: {"upstream_id":7171388873935111376,"namespace":"default","id":"simple-replication-task","sink_uri":"s3://logbucket/storage_test?protocol=canal-json","create_time":"2025-08-14T18:52:05.566016967+08:00","start_ts":437706850431664129,"engine":"unified","config":{"case_sensitive":false,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":false,"sync_point_interval":600000000000,"sync_point_retention":86400000000000,"filter":{"rules":["*.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"canal-json","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v8.5.3"}
 ```
 
--   `--server` : TiCDC クラスター内の任意の TiCDCサーバーのアドレス。
--   `--changefeed-id` : チェンジフィードのID。形式は正規表現`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`に一致する必要があります。このIDが指定されていない場合、TiCDCは自動的にUUID（バージョン4形式）をIDとして生成します。
--   `--sink-uri` : チェンジフィードのダウンストリームアドレス。詳細は[シンクURIを構成する](#configure-sink-uri)参照。
--   `--start-ts` : チェンジフィードの開始TSO。TiCDCはこのTSOからデータのプルを開始します。デフォルト値は現在時刻です。
--   `--target-ts` : チェンジフィードの終了TSO。TiCDCはこのTSOまでデータのプルを停止します。デフォルト値は空で、TiCDCはデータのプルを自動的に停止しません。
--   `--config` : チェンジフィードの設定ファイル。詳細は[TiCDC チェンジフィード構成パラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
+- `--server` : TiCDC クラスター内の任意の TiCDCサーバーのアドレス。
+- `--changefeed-id` : チェンジフィードのID。形式は正規表現`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`に一致する必要があります。このIDが指定されていない場合、TiCDCは自動的にUUID（バージョン4形式）をIDとして生成します。
+- `--sink-uri` : チェンジフィードのダウンストリームアドレス。詳細は[シンクURIを構成する](#configure-sink-uri)参照。
+- `--start-ts` : チェンジフィードの開始TSO。TiCDCはこのTSOからデータのプルを開始します。デフォルト値は現在時刻です。
+- `--target-ts` : チェンジフィードの終了TSO。TiCDCはこのTSOまでデータのプルを停止します。デフォルト値は空で、TiCDCはデータのプルを自動的に停止しません。
+- `--config` : チェンジフィードの設定ファイル。詳細は[TiCDC チェンジフィード構成パラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 ## シンクURIを構成する {#configure-sink-uri}
 
@@ -71,26 +71,26 @@ URI の`[query_parameters]`には、次のパラメータを設定できます�
 
 データを複製する前に、Amazon S3 のディレクトリに適切なアクセス権限を設定する必要があります。
 
--   TiCDC に必要な最小限`s3:PutObject`権限: `s3:ListBucket` 、および`s3:GetObject` 。
--   changefeed 構成項目`sink.cloud-storage-config.flush-concurrency` 1 より大きい場合、つまり単一ファイルの並列アップロードが有効になっている場合は、 [リストパーツ](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)に関連する権限を追加する必要があります。
-    -   `s3:AbortMultipartUpload`
-    -   `s3:ListMultipartUploadParts`
-    -   `s3:ListBucketMultipartUploads`
+- TiCDC に必要な最小限`s3:PutObject`権限: `s3:ListBucket` 、および`s3:GetObject` 。
+- changefeed 構成項目`sink.cloud-storage-config.flush-concurrency` 1 より大きい場合、つまり単一ファイルの並列アップロードが有効になっている場合は、 [リストパーツ](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)に関連する権限を追加する必要があります。
+    - `s3:AbortMultipartUpload`
+    - `s3:ListMultipartUploadParts`
+    - `s3:ListBucketMultipartUploads`
 
 レプリケーションデータストレージディレクトリを作成していない場合は、 [バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)を参照して指定リージョンに S3 バケットを作成してください。必要に応じて、 [フォルダを使用して Amazon S3 コンソールでオブジェクトを整理する](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html)を参照してバケット内にフォルダを作成することもできます。
 
 次の方法で Amazon S3 にアクセスできるようにアカウントを設定できます。
 
--   方法1: アクセスキーを指定する
+- 方法1: アクセスキーを指定する
 
     アクセスキーとシークレットアクセスキーを指定した場合、それらに基づいて認証が行われます。URIでキーを指定する方法に加えて、以下の方法がサポートされています。
 
-    -   TiCDC は環境変数`$AWS_ACCESS_KEY_ID`と`$AWS_SECRET_ACCESS_KEY`読み取ります。
-    -   TiCDC は環境変数`$AWS_ACCESS_KEY`と`$AWS_SECRET_KEY`読み取ります。
-    -   TiCDC は、 `$AWS_SHARED_CREDENTIALS_FILE`環境変数で指定されたパスにある共有資格情報ファイルを読み取ります。
-    -   TiCDC は`~/.aws/credentials`パスにある共有資格情報ファイルを読み取ります。
+    - TiCDC は環境変数`$AWS_ACCESS_KEY_ID`と`$AWS_SECRET_ACCESS_KEY`読み取ります。
+    - TiCDC は環境変数`$AWS_ACCESS_KEY`と`$AWS_SECRET_KEY`読み取ります。
+    - TiCDC は、 `$AWS_SHARED_CREDENTIALS_FILE`環境変数で指定されたパスにある共有資格情報ファイルを読み取ります。
+    - TiCDC は`~/.aws/credentials`パスにある共有資格情報ファイルを読み取ります。
 
--   方法2: IAMロールに基づくアクセス
+- 方法2: IAMロールに基づくアクセス
 
     TiCDCサーバーを実行している EC2 インスタンスに[Amazon S3 にアクセスするための権限が設定されたIAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html)関連付けます。セットアップが成功すると、TiCDC は追加設定なしで Amazon S3 内の対応するディレクトリに直接アクセスできるようになります。
 
@@ -105,9 +105,9 @@ URI の`[query_parameters]`には、次のパラメータを設定できます�
 
 GCSへのアクセスに使用するアカウントは、アクセスキーを指定することで設定できます。認証は指定された`credentials-file`に基づいて行われます。URIでキーを指定することに加えて、以下の方法がサポートされています。
 
--   TiCDC は、 `$GOOGLE_APPLICATION_CREDENTIALS`環境変数で指定されたパスにあるファイルを読み取ります。
--   TiCDC はファイル`~/.config/gcloud/application_default_credentials.json`を読み取ります。
--   TiCDC は、クラスターが GCE または GAE で実行されているときに、メタデータサーバーから資格情報を取得します。
+- TiCDC は、 `$GOOGLE_APPLICATION_CREDENTIALS`環境変数で指定されたパスにあるファイルを読み取ります。
+- TiCDC はファイル`~/.config/gcloud/application_default_credentials.json`を読み取ります。
+- TiCDC は、クラスターが GCE または GAE で実行されているときに、メタデータサーバーから資格情報を取得します。
 
 </div>
 <div label="Azure Blob Storage" value="azure">
@@ -120,15 +120,15 @@ GCSへのアクセスに使用するアカウントは、アクセスキーを�
 
 次の方法で、Azure Blob Storage にアクセスするようにアカウントを構成できます。
 
--   方法1: 共有アクセス署名を指定する
+- 方法1: 共有アクセス署名を指定する
 
     URIに`account-name`と`sas-token`設定した場合、このパラメーターで指定されたストレージアカウント名と共有アクセス署名トークンが使用されます。共有アクセス署名トークンには`&`文字が含まれているため、URIに追加する前に`%26`としてエンコードする必要があります。パーセントエンコードを使用して、 `sas-token`全体を直接エンコードすることもできます。
 
--   方法2: アクセスキーを指定する
+- 方法2: アクセスキーを指定する
 
     URIで`account-name`と`account-key`設定した場合、このパラメータで指定されたストレージアカウント名とキーが使用されます。URIでキーファイルを指定するだけでなく、TiCDCは環境変数`$AZURE_STORAGE_KEY`からキーを読み取ることもできます。
 
--   方法3: Azure ADを使用してバックアップを復元する
+- 方法3: Azure ADを使用してバックアップを復元する
 
     環境変数`$AZURE_CLIENT_ID` `$AZURE_TENANT_ID`設定し`$AZURE_CLIENT_SECRET` 。
 
@@ -159,27 +159,27 @@ GCSへのアクセスに使用するアカウントは、アクセスキーを�
 {scheme}://{prefix}/{schema}/{table}/{table-version-separator}/{partition-separator}/{date-separator}/CDC{num}.{extension}
 ```
 
--   `scheme` :ストレージタイプを指定します (例: `s3` 、 `gcs` 、 `azure` 、 `file` 。
--   `prefix` : ユーザー定義の親ディレクトリを指定します (例: `s3:// **bucket/bbb/ccc**` 。
--   `schema` : スキーマ名を指定します (例: `s3://bucket/bbb/ccc/ **test**` 。
--   `table` : テーブル名を指定します (例: `s3://bucket/bbb/ccc/test/ **table1**` 。
--   `table-version-separator` : テーブルバージョンでパスを区切る区切り文字を指定します (例: `s3://bucket/bbb/ccc/test/table1/ **9999**` )。
--   `partition-separator` : テーブルパーティションによってパスを区切るセパレーターを指定します (例: `s3://bucket/bbb/ccc/test/table1/9999/ **20**` 。
--   `date-separator` : トランザクションのコミット日に基づいてファイルを分類します。デフォルト値は`day`です。値のオプションは次のとおりです。
-    -   `none` : `date-separator`なし。たとえば、バージョン`test.table1`が`9999`であるすべてのファイルは`s3://bucket/bbb/ccc/test/table1/9999`に保存されます。
-    -   `year` : 区切り文字はトランザクションのコミット日の年です (例: `s3://bucket/bbb/ccc/test/table1/9999/ **2022**` 。
-    -   `month` : 区切り文字はトランザクションコミット日の年と月です。例: `s3://bucket/bbb/ccc/test/table1/9999/ **2022-01**` 。
-    -   `day` : 区切り文字はトランザクションコミット日の年、月、日です。例: `s3://bucket/bbb/ccc/test/table1/9999/ **2022-01-02**` 。
--   `num` : データの変更を記録したファイルのシリアル番号を保存します (例: `s3://bucket/bbb/ccc/test/table1/9999/2022-01-02/CDC **000005** .csv` 。
--   `extension` : ファイルの拡張子を指定します。TiDB v6.5.0 は CSV および Canal-JSON 形式をサポートしています。
+- `scheme` :ストレージタイプを指定します (例: `s3` 、 `gcs` 、 `azure` 、 `file` 。
+- `prefix` : ユーザー定義の親ディレクトリを指定します (例: `s3:// **bucket/bbb/ccc**` 。
+- `schema` : スキーマ名を指定します (例: `s3://bucket/bbb/ccc/ **test**` 。
+- `table` : テーブル名を指定します (例: `s3://bucket/bbb/ccc/test/ **table1**` 。
+- `table-version-separator` : テーブルバージョンでパスを区切る区切り文字を指定します (例: `s3://bucket/bbb/ccc/test/table1/ **9999**` )。
+- `partition-separator` : テーブルパーティションによってパスを区切るセパレーターを指定します (例: `s3://bucket/bbb/ccc/test/table1/9999/ **20**` 。
+- `date-separator` : トランザクションのコミット日に基づいてファイルを分類します。デフォルト値は`day`です。値のオプションは次のとおりです。
+    - `none` : `date-separator`なし。たとえば、バージョン`test.table1`が`9999`であるすべてのファイルは`s3://bucket/bbb/ccc/test/table1/9999`に保存されます。
+    - `year` : 区切り文字はトランザクションのコミット日の年です (例: `s3://bucket/bbb/ccc/test/table1/9999/ **2022**` 。
+    - `month` : 区切り文字はトランザクションコミット日の年と月です。例: `s3://bucket/bbb/ccc/test/table1/9999/ **2022-01**` 。
+    - `day` : 区切り文字はトランザクションコミット日の年、月、日です。例: `s3://bucket/bbb/ccc/test/table1/9999/ **2022-01-02**` 。
+- `num` : データの変更を記録したファイルのシリアル番号を保存します (例: `s3://bucket/bbb/ccc/test/table1/9999/2022-01-02/CDC **000005** .csv` 。
+- `extension` : ファイルの拡張子を指定します。TiDB v6.5.0 は CSV および Canal-JSON 形式をサポートしています。
 
 > **Note:**
 >
 > テーブル バージョンは次のシナリオで変更されます。
 >
-> -   アップストリーム TiDB はテーブルに対して DDL 操作を実行します。
-> -   TiCDC はノード間でテーブルをスケジュールします。
-> -   テーブルが属する変更フィードが再開されます。
+> - アップストリーム TiDB はテーブルに対して DDL 操作を実行します。
+> - TiCDC はノード間でテーブルをスケジュールします。
+> - テーブルが属する変更フィードが再開されます。
 >
 > テーブルバージョンの変更はテーブルスキーマの変更を意味するものではないことに注意してください。例えば、列にコメントを追加しても、スキーマファイルの内容は変更されません。
 
@@ -215,7 +215,7 @@ CDC000005.csv
 }
 ```
 
--   `checkpoint-ts` : `commit-ts`が`checkpoint-ts`より小さいトランザクションは、ダウンストリームのターゲットストレージに書き込まれます。
+- `checkpoint-ts` : `commit-ts`が`checkpoint-ts`より小さいトランザクションは、ダウンストリームのターゲットストレージに書き込まれます。
 
 ### DDLイベント {#ddl-events}
 
@@ -223,8 +223,8 @@ CDC000005.csv
 
 アップストリームテーブルの DDL イベントによってテーブル バージョンが変更されると、TiCDC は自動的に次の処理を実行します。
 
--   データ変更レコードを書き込むための新しいパスに切り替えます。例えば、バージョン`test.table1`が`441349361156227074`に変更されると、TiCDCはデータ変更レコードを書き込むためのパスを`s3://bucket/bbb/ccc/test/table1/441349361156227074/2022-01-02/`に変更します。
--   テーブルスキーマ情報を格納するために、次のパスにスキーマファイルを生成します。
+- データ変更レコードを書き込むための新しいパスに切り替えます。例えば、バージョン`test.table1`が`441349361156227074`に変更されると、TiCDCはデータ変更レコードを書き込むためのパスを`s3://bucket/bbb/ccc/test/table1/441349361156227074/2022-01-02/`に変更します。
+- テーブルスキーマ情報を格納するために、次のパスにスキーマファイルを生成します。
 
     ```shell
     {scheme}://{prefix}/{schema}/{table}/meta/schema_{table-version}_{hash}.json
@@ -271,21 +271,21 @@ CDC000005.csv
 }
 ```
 
--   `Table` : テーブル名。
--   `Schema` : スキーマ名。
--   `Version` :ストレージシンクのプロトコル バージョン。
--   `TableVersion` : テーブルバージョン。
--   `Query` : DDL ステートメント。
--   `Type` : DDL タイプ。
--   `TableColumns` : 1 つ以上のマップの配列。各マップはソーステーブル内の列を表します。
-    -   `ColumnName` :カラム名。
-    -   `ColumnType` :カラムの種類。詳細は[データ型](#data-type)を参照してください。
-    -   `ColumnLength` :カラムの長さ。詳細は[データ型](#data-type)参照。
-    -   `ColumnPrecision` :カラムの精度。詳細は[データ型](#data-type)を参照してください。
-    -   `ColumnScale` : 小数点以下の桁数（スケール）。詳細は[データ型](#data-type)参照。
-    -   `ColumnNullable` : このオプションの値が`true`の場合、列は NULL になることができます。
-    -   `ColumnIsPk` : このオプションの値が`true`の場合、列は主キーの一部になります。
--   `TableColumnsTotal` : `TableColumns`配列のサイズ。
+- `Table` : テーブル名。
+- `Schema` : スキーマ名。
+- `Version` :ストレージシンクのプロトコル バージョン。
+- `TableVersion` : テーブルバージョン。
+- `Query` : DDL ステートメント。
+- `Type` : DDL タイプ。
+- `TableColumns` : 1 つ以上のマップの配列。各マップはソーステーブル内の列を表します。
+    - `ColumnName` :カラム名。
+    - `ColumnType` :カラムの種類。詳細は[データ型](#data-type)を参照してください。
+    - `ColumnLength` :カラムの長さ。詳細は[データ型](#data-type)参照。
+    - `ColumnPrecision` :カラムの精度。詳細は[データ型](#data-type)を参照してください。
+    - `ColumnScale` : 小数点以下の桁数（スケール）。詳細は[データ型](#data-type)参照。
+    - `ColumnNullable` : このオプションの値が`true`の場合、列は NULL になることができます。
+    - `ColumnIsPk` : このオプションの値が`true`の場合、列は主キーの一部になります。
+- `TableColumnsTotal` : `TableColumns`配列のサイズ。
 
 ### データベースレベルのDDLイベント {#ddl-events-at-the-database-level}
 
@@ -318,8 +318,8 @@ CDC000005.csv
 
 TiDBの整数型は`IT[(M)] [UNSIGNED]`と定義され、
 
--   `IT`は整数型で、 `TINYINT` 、 `SMALLINT` 、 `MEDIUMINT` 、 `INT` 、 `BIGINT` 、または`BIT`になります。
--   `M`はタイプの表示幅です。
+- `IT`は整数型で、 `TINYINT` 、 `SMALLINT` 、 `MEDIUMINT` 、 `INT` 、 `BIGINT` 、または`BIT`になります。
+- `M`はタイプの表示幅です。
 
 整数型はスキーマファイル内で次のように定義されます。
 
@@ -335,9 +335,9 @@ TiDBの整数型は`IT[(M)] [UNSIGNED]`と定義され、
 
 TiDBの10進数型は`DT[(M,D)][UNSIGNED]`と定義され、
 
--   `DT`は浮動小数点型で、 `FLOAT` 、 `DOUBLE` 、 `DECIMAL` 、または`NUMERIC`になります。
--   `M`はデータ型の精度、つまり合計桁数です。
--   `D`は小数点以下の桁数です。
+- `DT`は浮動小数点型で、 `FLOAT` 、 `DOUBLE` 、 `DECIMAL` 、または`NUMERIC`になります。
+- `M`はデータ型の精度、つまり合計桁数です。
+- `D`は小数点以下の桁数です。
 
 10 進型はスキーマファイルで次のように定義されます。
 
@@ -354,7 +354,7 @@ TiDBの10進数型は`DT[(M,D)][UNSIGNED]`と定義され、
 
 TiDBの日付型は`DT`と定義され、
 
--   `DT`は日付型で、 `DATE`または`YEAR`になります。
+- `DT`は日付型で、 `DATE`または`YEAR`になります。
 
 日付タイプはスキーマファイルで次のように定義されます。
 
@@ -367,8 +367,8 @@ TiDBの日付型は`DT`と定義され、
 
 TiDBの時間型は`TT[(M)]`と定義され、
 
--   `TT`は時間のタイプで、 `TIME` 、 `DATETIME` 、または`TIMESTAMP`になります。
--   `M`は 0 から 6 までの範囲の秒の精度です。
+- `TT`は時間のタイプで、 `TIME` 、 `DATETIME` 、または`TIMESTAMP`になります。
+- `M`は 0 から 6 までの範囲の秒の精度です。
 
 時間タイプはスキーマファイルで次のように定義されます。
 
@@ -384,8 +384,8 @@ TiDBの時間型は`TT[(M)]`と定義され、
 
 TiDBの文字列型は`ST[(M)]`として定義され、
 
--   `ST`は文字列型で、 `CHAR` 、 `VARCHAR` 、 `TEXT` 、 `BINARY` 、 `BLOB` 、または`JSON`になります。
--   `M`は文字列の最大長です。
+- `ST`は文字列型で、 `CHAR` 、 `VARCHAR` 、 `TEXT` 、 `BINARY` 、 `BLOB` 、または`JSON`になります。
+- `M`は文字列の最大長です。
 
 文字列型はスキーマファイル内で次のように定義されます。
 

@@ -11,5 +11,5 @@ SQL 文では、 [`SELECT`](/sql-statements/sql-statement-select.md)文の`ORDER
 
 リテラル、列名、 `NULL` 、組み込み関数、演算子などを使用して式を記述できます。
 
--   TiDB が TiKV へのプッシュダウンをサポートする式については、 [プッシュダウンの式のリスト](/functions-and-operators/expressions-pushed-down.md)を参照してください。
--   TiDB が[TiFlash](/tiflash/tiflash-overview.md)へのプッシュダウンをサポートする式については、 [プッシュダウン式](/tiflash/tiflash-supported-pushdown-calculations.md#push-down-expressions)を参照してください。
+- TiDB が TiKV へのプッシュダウンをサポートする式については、 [プッシュダウンの式のリスト](/functions-and-operators/expressions-pushed-down.md)を参照してください。
+- TiDB が[TiFlash](/tiflash/tiflash-overview.md)へのプッシュダウンをサポートする式については、 [プッシュダウン式](/tiflash/tiflash-supported-pushdown-calculations.md#push-down-expressions)を参照してください。

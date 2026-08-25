@@ -13,18 +13,18 @@ summary: AWS エンドポイントサービス プライベートリンク接続
 
 ## 前提条件 {#prerequisites}
 
--   [Confluent Cloud](https://confluent.cloud/)のアカウントがあること。
+- [Confluent Cloud](https://confluent.cloud/)のアカウントがあること。
 
--   TiDB Cloud Essential は AWS でホストされており、アクティブです。後で使用するために、以下の詳細情報を取得して保存してください。
+- TiDB Cloud Essential は AWS でホストされており、アクティブです。後で使用するために、以下の詳細情報を取得して保存してください。
 
-    -   AWSアカウントID
-    -   可用性ゾーン（AZ）
+    - AWSアカウントID
+    - 可用性ゾーン（AZ）
 
 AWS アカウント ID とアベイラビリティーゾーンを表示するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで **Settings** > **Networking** をクリックします。
-2.  **AWS Private Endpoints for External Services** 領域で、**Create Private Endpoint for External Services** をクリックします。
-3.  表示されたダイアログで、AWS アカウント ID とアベイラビリティーゾーンを見つけることができます。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで **Settings** > **Networking** をクリックします。
+2. **AWS Private Endpoints for External Services** 領域で、**Create Private Endpoint for External Services** をクリックします。
+3. 表示されたダイアログで、AWS アカウント ID とアベイラビリティーゾーンを見つけることができます。
 
 ## ステップ1. Confluent Cloudネットワークをセットアップする {#step-1-set-up-a-confluent-cloud-network}
 
@@ -32,17 +32,17 @@ AWS アカウント ID とアベイラビリティーゾーンを表示するに
 
 Confluent Cloud ネットワークは次の要件を満たしている必要があります。
 
--   タイプ: ネットワークは**PrivateLink**ネットワークである必要があります。
--   リージョンの一致: ネットワークは、 TiDB Cloud Essential クラスターと同じ AWS リージョンに存在する必要があります。
--   AZ (アベイラビリティゾーン) の可用性: ネットワークのアベイラビリティゾーンは、 TiDB Cloud Essential クラスターのアベイラビリティゾーンと重複している必要があります。
+- タイプ: ネットワークは**PrivateLink**ネットワークである必要があります。
+- リージョンの一致: ネットワークは、 TiDB Cloud Essential クラスターと同じ AWS リージョンに存在する必要があります。
+- AZ (アベイラビリティゾーン) の可用性: ネットワークのアベイラビリティゾーンは、 TiDB Cloud Essential クラスターのアベイラビリティゾーンと重複している必要があります。
 
 Confluent Cloud ネットワークの一意の名前を取得するには、次の手順を実行します。
 
-1.  [Confluent クラウド コンソール](https://confluent.cloud/)で[**Environments**](https://confluent.cloud/environments)ページに移動し、Confluent Cloud ネットワークが配置されている環境をクリックします。
-2.  **Network management**をクリックし、 **For dedicated clusters**を選択して、作成したネットワークを見つけます。
-3.  Confluent Cloud ネットワークの DNS サブドメインを取得するには、**Network overview**ページに移動します。
-4.  DNSサブドメインからConfluent Cloudネットワークの一意の名前を抽出します。例えば、DNSサブドメインが`use1-az1.domnprzqrog.us-east-1.aws.confluent.cloud`の場合、一意の名前は`domnprzqrog.us-east-1`です。
-5.  後で使用するために一意の名前を保存します。
+1. [Confluent クラウド コンソール](https://confluent.cloud/)で[**Environments**](https://confluent.cloud/environments)ページに移動し、Confluent Cloud ネットワークが配置されている環境をクリックします。
+2. **Network management**をクリックし、 **For dedicated clusters**を選択して、作成したネットワークを見つけます。
+3. Confluent Cloud ネットワークの DNS サブドメインを取得するには、**Network overview**ページに移動します。
+4. DNSサブドメインからConfluent Cloudネットワークの一意の名前を抽出します。例えば、DNSサブドメインが`use1-az1.domnprzqrog.us-east-1.aws.confluent.cloud`の場合、一意の名前は`domnprzqrog.us-east-1`です。
+5. 後で使用するために一意の名前を保存します。
 
 ## ステップ2. ネットワークにPrivateLinkアクセスを追加する {#step-2-add-a-privatelink-access-to-the-network}
 
@@ -50,8 +50,8 @@ Confluent Cloud ネットワークの一意の名前を取得するには、次�
 
 プロセス中に、次の操作を行う必要があります。
 
--   [前提条件](#prerequisites)で取得したTiDB Cloud AWS アカウント ID を入力します。
--   Confluent Cloud によって提供される`VPC Service Endpoint` 、後で使用するために、通常は`com.amazonaws.vpce.<region>.vpce-svc-xxxxxxxxxxxxxxxxx`形式で保存します。
+- [前提条件](#prerequisites)で取得したTiDB Cloud AWS アカウント ID を入力します。
+- Confluent Cloud によって提供される`VPC Service Endpoint` 、後で使用するために、通常は`com.amazonaws.vpce.<region>.vpce-svc-xxxxxxxxxxxxxxxxx`形式で保存します。
 
 ## ステップ3. ネットワークの下にConfluent Cloud専用クラスタを作成する {#step-3-create-a-confluent-cloud-dedicated-cluster-under-the-network}
 
@@ -61,7 +61,7 @@ Confluent Cloud ネットワークの一意の名前を取得するには、次�
 
 TiDB Cloudでプライベートリンク接続を作成するには、次の手順を実行します。
 
-1.  Confluent Cloud の`VPC Service Endpoint`を使用して、 TiDB Cloudにプライベートリンク接続を作成します。
+1. Confluent Cloud の`VPC Service Endpoint`を使用して、 TiDB Cloudにプライベートリンク接続を作成します。
 
     詳細については[AWS エンドポイントサービスプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-aws-endpoint-service-private-link-connection)を参照してください。
 
@@ -69,6 +69,6 @@ TiDB Cloudでプライベートリンク接続を作成するには、次の手�
     >
     > AWS 上の Confluent Cloud Dedicated クラスターの場合、 TiDB Cloudからのエンドポイント接続リクエストを手動で承認するために、AWS コンソールのエンドポイントサービスの詳細ページに移動する必要はありません。Confluent Cloud が自動的に処理します。
 
-2.  TiDB Cloudのデータフロー サービスが Confluent クラスターにアクセスできるように、Confluent Cloud サービス ドメインをプライベートリンク接続に接続します。
+2. TiDB Cloudのデータフロー サービスが Confluent クラスターにアクセスできるように、Confluent Cloud サービス ドメインをプライベートリンク接続に接続します。
 
     詳細については[プライベートリンク接続にドメインを添付する](/tidb-cloud/serverless-private-link-connection.md#attach-domains-to-a-private-link-connection)を参照してください。

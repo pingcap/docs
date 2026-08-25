@@ -10,27 +10,27 @@ aliases: ['/ja/tidbcloud/serverless-driver-node-example/']
 
 > **Note:**
 >
-> -   このドキュメントの手順は、 TiDB Cloud Starterインスタンスに加えて、 TiDB Cloud Essentialインスタンスでも適用できます。
-> -   Cloudflare Workers、Vercel Edge Functions、および Netlify Edge Functions でTiDB Cloud Serverless Driverを使用する方法については、[自動車販売に関する洞察](https://car-sales-insight.vercel.app/)と[サンプルリポジトリ](https://github.com/tidbcloud/car-sales-insight)を確認してください。
+> - このドキュメントの手順は、 TiDB Cloud Starterインスタンスに加えて、 TiDB Cloud Essentialインスタンスでも適用できます。
+> - Cloudflare Workers、Vercel Edge Functions、および Netlify Edge Functions でTiDB Cloud Serverless Driverを使用する方法については、[自動車販売に関する洞察](https://car-sales-insight.vercel.app/)と[サンプルリポジトリ](https://github.com/tidbcloud/car-sales-insight)を確認してください。
 
 ## 始める前に {#before-you-begin}
 
 このステップバイステップのチュートリアルを完了するには、以下のものが必要です。
 
--   [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
--   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 、またはお好みのパッケージマネージャーを使用してください。
--   TiDB Cloud Starterインスタンス。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 、またはお好みのパッケージマネージャーを使用してください。
+- TiDB Cloud Starterインスタンス。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
 ## ステップ1. ローカルのNode.jsプロジェクトを作成する {#step-1-create-a-local-node-js-project}
 
-1.  `node-example`という名前のプロジェクトを作成します。
+1. `node-example`という名前のプロジェクトを作成します。
 
     ```shell
     mkdir node-example
     cd node-example
     ```
 
-2.  npmまたはお好みのパッケージマネージャーを使用して、 TiDB Cloud Serverless Driverをインストールしてください。
+2. npmまたはお好みのパッケージマネージャーを使用して、 TiDB Cloud Serverless Driverをインストールしてください。
 
     以下のコマンドは、npm を使用したインストールを例として示しています。このコマンドを実行すると、プロジェクトディレクトリ内に`node_modules`ディレクトリと`package.json`ファイルが作成されます。
 
@@ -42,13 +42,14 @@ aliases: ['/ja/tidbcloud/serverless-driver-node-example/']
 
 TiDB Cloud Serverless Driverは、CommonJSモジュールとESモジュールの両方をサポートしています。以下の手順では、ESモジュールの使用例を示します。
 
-1.  TiDB Cloud Starterインスタンスの概要ページで、右上隅の**Connect**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
+1. TiDB Cloud Starterインスタンスの概要ページで、右上隅の**Connect**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
 
     ```
+
    mysql://[username]:[password]@[host]/[database]
     ```
 
-2.  `package.json`ファイルで、 `type: "module"`を追加して ES モジュールを指定します。
+2. `package.json`ファイルで、 `type: "module"`を追加して ES モジュールを指定します。
 
     例えば：
 
@@ -61,7 +62,7 @@ TiDB Cloud Serverless Driverは、CommonJSモジュールとESモジュールの
     }
     ```
 
-3.  プロジェクトディレクトリに`index.js`という名前のファイルを作成し、以下のコードを追加してください。
+3. プロジェクトディレクトリに`index.js`という名前のファイルを作成し、以下のコードを追加してください。
 
     ```js
     import { connect } from '@tidbcloud/serverless'
@@ -70,7 +71,7 @@ TiDB Cloud Serverless Driverは、CommonJSモジュールとESモジュールの
     console.log(await conn.execute("show tables"))
     ```
 
-4.  以下のコマンドでプロジェクトを実行してください。
+4. 以下のコマンドでプロジェクトを実行してください。
 
     ```
     node index.js
@@ -80,13 +81,13 @@ TiDB Cloud Serverless Driverは、CommonJSモジュールとESモジュールの
 
 Node.js 18.0.0 より前のバージョンを使用しており、グローバルな`fetch`関数がない場合は、以下の手順で`fetch`を取得できます。
 
-1.  `fetch`を提供するパッケージをインストールしてください。例えば`undici`などです。
+1. `fetch`を提供するパッケージをインストールしてください。例えば`undici`などです。
 
     ```
     npm install undici
     ```
 
-2.  `fetch`関数を`connect`関数に渡します。
+2. `fetch`関数を`connect`関数に渡します。
 
     ```js
     import { connect } from '@tidbcloud/serverless'

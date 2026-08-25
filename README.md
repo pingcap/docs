@@ -10,16 +10,16 @@ TiDB ドキュメント内の特定のコンテンツを自由に並べ替えた
 
 現在、公式ドキュメントは次の 2 つの言語をサポートしています。
 
--   `en` : [英語のドキュメント](https://docs.pingcap.com/tidb/stable)
--   `zh` : [中国語のドキュメント](https://docs.pingcap.com/zh/tidb/stable)
+- `en` : [英語のドキュメント](https://docs.pingcap.com/tidb/stable)
+- `zh` : [中国語のドキュメント](https://docs.pingcap.com/zh/tidb/stable)
 
 Google翻訳を使えば、ドキュメントを様々な言語で閲覧できます。例えば：
 
--   `fr` : [フランス語のドキュメント](https://docs-pingcap-com.translate.goog/tidb/stable?_x_tr_sl=auto&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp&_x_tr_hist=true)
--   `ja` : [日本語のドキュメント](https://docs-pingcap-com.translate.goog/tidb/stable?_x_tr_sl=auto&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp&_x_tr_hist=true)
--   `ko` : [韓国語のドキュメント](https://docs-pingcap-com.translate.goog/tidb/stable?_x_tr_sl=auto&_x_tr_tl=ko&_x_tr_hl=en&_x_tr_pto=wapp&_x_tr_hist=true)
--   `de` : [ドイツ語のドキュメント](https://docs-pingcap-com.translate.goog/tidb/stable?_x_tr_sl=auto&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp&_x_tr_hist=true)
--   `es` : [スペイン語のドキュメント](https://docs-pingcap-com.translate.goog/tidb/stable?_x_tr_sl=auto&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp&_x_tr_hist=true)
+- `fr` : [フランス語のドキュメント](https://docs-pingcap-com.translate.goog/tidb/stable?_x_tr_sl=auto&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp&_x_tr_hist=true)
+- `ja` : [日本語のドキュメント](https://docs-pingcap-com.translate.goog/tidb/stable?_x_tr_sl=auto&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp&_x_tr_hist=true)
+- `ko` : [韓国語のドキュメント](https://docs-pingcap-com.translate.goog/tidb/stable?_x_tr_sl=auto&_x_tr_tl=ko&_x_tr_hl=en&_x_tr_pto=wapp&_x_tr_hist=true)
+- `de` : [ドイツ語のドキュメント](https://docs-pingcap-com.translate.goog/tidb/stable?_x_tr_sl=auto&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp&_x_tr_hist=true)
+- `es` : [スペイン語のドキュメント](https://docs-pingcap-com.translate.goog/tidb/stable?_x_tr_sl=auto&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp&_x_tr_hist=true)
 
 ## ドキュメントのバージョン {#documentation-versions}
 

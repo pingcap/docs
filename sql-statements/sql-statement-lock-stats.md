@@ -138,6 +138,6 @@ mysql> SHOW WARNINGS;
 
 ## 参照 {#see-also}
 
--   [統計](/statistics.md#lock-statistics)
--   [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
--   [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
+- [統計](/statistics.md#lock-statistics)
+- [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
+- [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)

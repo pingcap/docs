@@ -27,9 +27,9 @@ TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェ�
 
 ### TiDB コンポーネントの推奨構成は何ですか? {#whats-the-recommended-configuration-of-tidb-components}
 
--   TiDB は CPU とメモリに対して高い要件があります。
--   PDはクラスタのメタデータを保存し、頻繁に読み取りおよび書き込みリクエストが発生します。そのため、高いI/Oディスクを必要とします。ディスクパフォ​​ーマンスが低いと、クラスタ全体のパフォーマンスに影響します。SSDディスクの使用をお勧めします。また、リージョン数が多いほど、CPUとメモリの要件が高くなります。
--   TiKVはCPU、メモリ、ディスクに対する要件が厳しく、SSDの使用が必須です。
+- TiDB は CPU とメモリに対して高い要件があります。
+- PDはクラスタのメタデータを保存し、頻繁に読み取りおよび書き込みリクエストが発生します。そのため、高いI/Oディスクを必要とします。ディスクパフォ​​ーマンスが低いと、クラスタ全体のパフォーマンスに影響します。SSDディスクの使用をお勧めします。また、リージョン数が多いほど、CPUとメモリの要件が高くなります。
+- TiKVはCPU、メモリ、ディスクに対する要件が厳しく、SSDの使用が必須です。
 
 詳細は[ソフトウェアとハ​​ードウェアの推奨事項](/hardware-and-software-requirements.md)参照。
 
@@ -51,11 +51,11 @@ TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェ�
 
 ### TiDB でスロークエリログを個別に記録するにはどうすればよいですか? スロークエリの SQL ステートメントを見つけるにはどうすればよいでしょうか? {#how-to-separately-record-the-slow-query-log-in-tidb-how-to-locate-the-slow-query-sql-statement}
 
-1.  TiDBのスロークエリの定義は、TiDB設定ファイルにあります。`tidb_slow_log_threshold: 300`は、スロークエリのしきい値（単位：ミリ秒）を設定するために使用されます。
+1. TiDBのスロークエリの定義は、TiDB設定ファイルにあります。`tidb_slow_log_threshold: 300`は、スロークエリのしきい値（単位：ミリ秒）を設定するために使用されます。
 
-2.  スロークエリが発生した場合、Grafana を使用してスロークエリが発生している`tidb-server`インスタンスとスロークエリの時刻を特定し、該当ノードのログに記録された SQL 文の情報を見つけることができます。
+2. スロークエリが発生した場合、Grafana を使用してスロークエリが発生している`tidb-server`インスタンスとスロークエリの時刻を特定し、該当ノードのログに記録された SQL 文の情報を見つけることができます。
 
-3.  ログに加えて、 `ADMIN SHOW SLOW`コマンドを使用してスロークエリも表示できます。詳細は[`ADMIN SHOW SLOW`コマンド](/identify-slow-queries.md#admin-show-slow-command)を参照してください。
+3. ログに加えて、 `ADMIN SHOW SLOW`コマンドを使用してスロークエリも表示できます。詳細は[`ADMIN SHOW SLOW`コマンド](/identify-slow-queries.md#admin-show-slow-command)を参照してください。
 
 ### TiDB クラスターを初めてデプロイしたときに TiKV の`label`が構成されていなかった場合、 `label`構成を追加するにはどうすればよいですか? {#how-to-add-the-label-configuration-if-label-of-tikv-was-not-configured-when-i-deployed-the-tidb-cluster-for-the-first-time}
 
@@ -71,13 +71,13 @@ TiDB `label`の設定は、クラスタのデプロイメントアーキテク�
 
 以下の例では`ioengine=psync` （同期I/O）を使用しているため、 `iodepth`通常`1`に固定され、同時実行性は主に`numjobs`によって制御されます。ファイルシステムキャッシュをバイパスするには、 `direct=1`設定することをお勧めします。
 
--   ランダム読み取りテスト:
+- ランダム読み取りテスト:
 
     ```bash
     ./fio -ioengine=psync -bs=32k -direct=1 -thread -rw=randread -time_based -size=10G -filename=fio_randread_test.txt -name='fio randread test' -iodepth=1 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_result.json
     ```
 
--   シーケンシャル書き込みとランダム読み取りの混合テスト:
+- シーケンシャル書き込みとランダム読み取りの混合テスト:
 
     ```bash
     ./fio -ioengine=psync -bs=32k -direct=1 -thread -rw=randrw -percentage_random=100,0 -time_based -size=10G -filename=fio_randread_write_test.txt -name='fio mixed randread and sequential write test' -iodepth=1 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_write_test.json

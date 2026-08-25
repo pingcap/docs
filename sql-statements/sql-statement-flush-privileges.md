@@ -38,10 +38,10 @@ TiDBの`FLUSH PRIVILEGES`文はMySQLと完全に互換性があります。互�
 
 ## 参照 {#see-also}
 
--   [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
+- [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
 
 <CustomContent platform="tidb">
 
--   [権限管理](/privilege-management.md)
+- [権限管理](/privilege-management.md)
 
 </CustomContent>

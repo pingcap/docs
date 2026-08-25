@@ -11,25 +11,25 @@ PingCAP Clinicは、 [Diagクライアント](https://github.com/pingcap/diag) �
 
 ## ユーザーシナリオ {#user-scenarios}
 
--   PingCAP テクニカルサポートからリモートで支援を受ける際にクラスターの問題を正確に特定し、迅速に解決するには、Diag を使用して診断データを収集し、収集したデータを Clinic Server にアップロードして、データアクセス リンクをテクニカルサポートに提供することができます。
--   クラスターが正常に実行されており、クラスターのステータスを確認する必要がある場合は、Diag を使用して診断データを収集し、そのデータを Clinic Server にアップロードして、Health Report の結果を表示できます。
+- PingCAP テクニカルサポートからリモートで支援を受ける際にクラスターの問題を正確に特定し、迅速に解決するには、Diag を使用して診断データを収集し、収集したデータを Clinic Server にアップロードして、データアクセス リンクをテクニカルサポートに提供することができます。
+- クラスターが正常に実行されており、クラスターのステータスを確認する必要がある場合は、Diag を使用して診断データを収集し、そのデータを Clinic Server にアップロードして、Health Report の結果を表示できます。
 
 > **Note:**
 >
-> -   以下のデータ収集およびアップロード方法は[TiUPを使用して展開されたクラスター](/production-deployment-using-tiup.md)に**のみ**適用されます。Kubernetes 上のTiDB Operatorを使用してデプロイされたクラスターの場合は、 [TiDB Operator環境向けPingCAP Clinic](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
-> -   PingCAP Clinicによって収集された診断データは、クラスターの問題のトラブルシューティングに**のみ**使用されます。
+> - 以下のデータ収集およびアップロード方法は[TiUPを使用して展開されたクラスター](/production-deployment-using-tiup.md)に**のみ**適用されます。Kubernetes 上のTiDB Operatorを使用してデプロイされたクラスターの場合は、 [TiDB Operator環境向けPingCAP Clinic](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
+> - PingCAP Clinicによって収集された診断データは、クラスターの問題のトラブルシューティングに**のみ**使用されます。
 
 ## 前提条件 {#prerequisites}
 
 PingCAP Clinicを使用する前に、Diag をインストールし、データをアップロードするための環境を準備する必要があります。
 
-1.  TiUPがインストールされているコントロールマシンで、次のコマンドを実行して Diag をインストールします。
+1. TiUPがインストールされているコントロールマシンで、次のコマンドを実行して Diag をインストールします。
 
     ```bash
     tiup install diag
     ```
 
-2.  Clinic Serverにログインします。
+2. Clinic Serverにログインします。
 
     <SimpleTab groupId="clinicServer">
     <div label="Clinic Server for international users" value="clinic-us">
@@ -47,33 +47,33 @@ PingCAP Clinicを使用する前に、Diag をインストールし、データ�
     </div>
     </SimpleTab>
 
-3.  Clinic Server 上に組織を作成します。組織は TiDB クラスターの集合です。作成した組織に診断データをアップロードできます。
+3. Clinic Server 上に組織を作成します。組織は TiDB クラスターの集合です。作成した組織に診断データをアップロードできます。
 
-4.  データをアップロードするには、アクセストークンを取得してください。Diag を通じて収集したデータをアップロードする際は、データが安全に分離されていることを確認するために、ユーザー認証用のトークンが必要です。Clinic Serverから既にトークンを取得している場合は、そのトークンを再利用できます。
+4. データをアップロードするには、アクセストークンを取得してください。Diag を通じて収集したデータをアップロードする際は、データが安全に分離されていることを確認するために、ユーザー認証用のトークンが必要です。Clinic Serverから既にトークンを取得している場合は、そのトークンを再利用できます。
 
     ![An example of a token](/media/clinic-get-token.png)
 
     > **Note:**
     >
-    > -   データセキュリティのため、TiDBはトークン作成時にのみトークン情報を表示します。トークン情報を紛失した場合は、古いトークンを削除して新しいトークンを作成できます。
-    > -   トークンはデータのアップロードにのみ使用されます。
+    > - データセキュリティのため、TiDBはトークン作成時にのみトークン情報を表示します。トークン情報を紛失した場合は、古いトークンを削除して新しいトークンを作成できます。
+    > - トークンはデータのアップロードにのみ使用されます。
 
-5.  Diag にトークンと`region`設定します。
+5. Diag にトークンと`region`設定します。
 
-    -   `clinic.token`設定するには、次のコマンドを実行します。
+    - `clinic.token`設定するには、次のコマンドを実行します。
 
         ```bash
         tiup diag config clinic.token ${token-value}
         ```
 
-    -   `clinic.region`設定するには、次のコマンドを実行します。
+    - `clinic.region`設定するには、次のコマンドを実行します。
 
     `region` 、データの圧縮に使用する暗号化証明書と、データのアップロード時に使用する対象サービスを決定します。例:
 
     > **Note:**
     >
-    > -   Diag v0.9.0 以降のバージョンでは設定`region`サポートされます。
-    > -   Diag v0.9.0より前のバージョンでは、データはデフォルトで中国リージョンのClinic Serverにアップロードされます。これらのバージョンで`region`設定するには、 `tiup update diag`コマンドを実行してDiagを最新バージョンにアップグレードし、その後Diagで`region`設定してください。
+    > - Diag v0.9.0 以降のバージョンでは設定`region`サポートされます。
+    > - Diag v0.9.0より前のバージョンでは、データはデフォルトで中国リージョンのClinic Serverにアップロードされます。これらのバージョンで`region`設定するには、 `tiup update diag`コマンドを実行してDiagを最新バージョンにアップグレードし、その後Diagで`region`設定してください。
 
     <SimpleTab groupId="clinicServer">
      <div label="Clinic Server for international users" value="clinic-us">
@@ -97,13 +97,13 @@ PingCAP Clinicを使用する前に、Diag をインストールし、データ�
 
     </SimpleTab>
 
-6.  (オプション) ログの秘匿化を有効にします。
+6. (オプション) ログの秘匿化を有効にします。
 
     TiDBが詳細なログ情報を提供する場合、ログに機密情報（ユーザーデータなど）が出力される可能性があります。ローカルログおよびClinic Serverへの機密情報の漏洩を防ぎたい場合は、TiDB側でログの秘匿化を有効にすることができます。詳細については、 [ログの秘匿化](/log-redaction.md#log-redaction-in-tidb-side)をご覧ください。
 
 ## 手順 {#steps}
 
-1.  Diag を実行して診断データを収集します。
+1. Diag を実行して診断データを収集します。
 
     たとえば、現在の時刻に基づいて 4 時間前から 2 時間前までの診断データを収集するには、次のコマンドを実行します。
 
@@ -115,13 +115,13 @@ PingCAP Clinicを使用する前に、Diag をインストールし、データ�
 
     収集が完了すると、Diag は収集されたデータが保存されているフォルダー パスを提供します。
 
-2.  収集したデータをClinic Serverにアップロードします。
+2. 収集したデータをClinic Serverにアップロードします。
 
     > **Note:**
     >
     > アップロードするデータ（収集されたデータを含む圧縮ファイル）のサイズは3GB**以下に**してください。3GBを超える場合、データのアップロードは失敗します。
 
-    -   クラスターが配置されているネットワークがインターネットにアクセスできる場合は、次のコマンドを使用して、収集されたデータを含むフォルダーを直接アップロードできます。
+    - クラスターが配置されているネットワークがインターネットにアクセスできる場合は、次のコマンドを使用して、収集されたデータを含むフォルダーを直接アップロードできます。
 
         ```bash
         tiup diag upload ${filepath}
@@ -133,20 +133,20 @@ PingCAP Clinicを使用する前に、Diag をインストールし、データ�
         >
         > この方法でデータをアップロードする場合は、Diag v0.9.0以降のバージョンを使用する必要があります。Diagのバージョンは実行時に取得できます。Diagのバージョンが0.9.0より前のバージョンの場合は、 `tiup update diag`コマンドを使用してDiagを最新バージョンにアップグレードできます。
 
-    -   クラスターが設置されているネットワークがインターネットにアクセスできない場合は、収集したデータをパックしてアップロードする必要があります。詳細は[方法2. データをパックしてアップロードする](/clinic/clinic-user-guide-for-tiup.md#method-2-pack-and-upload-data)ご覧ください。
+    - クラスターが設置されているネットワークがインターネットにアクセスできない場合は、収集したデータをパックしてアップロードする必要があります。詳細は[方法2. データをパックしてアップロードする](/clinic/clinic-user-guide-for-tiup.md#method-2-pack-and-upload-data)ご覧ください。
 
-3.  アップロードが完了したら、コマンド出力の`Download URL`からデータアクセス リンクを取得します。
+3. アップロードが完了したら、コマンド出力の`Download URL`からデータアクセス リンクを取得します。
 
     デフォルトでは、診断データには、クラスター名、クラスター トポロジ情報、収集された診断データ内のログ コンテンツ、収集されたデータ内のメトリックに基づいて再構成された Grafana ダッシュボード情報が含まれます。
 
     データを使用してクラスターの問題を自分でトラブルシューティングすることも、PingCAP テクニカルサポート スタッフにデータアクセス リンクを提供してリモート トラブルシューティングを容易にすることもできます。
 
-4.  ヘルスレポートの結果を表示する
+4. ヘルスレポートの結果を表示する
 
     データがアップロードされると、Clinic Server はバックグラウンドで自動的にデータを処理します。ヘルスレポートは約5～15分で生成されます。診断データリンクを開き、「ヘルスレポート」をクリックすると、レポートをご覧いただけます。
 
 ## 次は何？ {#what-s-next}
 
--   [PingCAP Clinicの概要](/clinic/clinic-introduction.md)
--   [PingCAP Clinicを使用したクラスターのトラブルシューティング](/clinic/clinic-user-guide-for-tiup.md)
--   [PingCAP Clinic診断データ](/clinic/clinic-data-instruction-for-tiup.md)
+- [PingCAP Clinicの概要](/clinic/clinic-introduction.md)
+- [PingCAP Clinicを使用したクラスターのトラブルシューティング](/clinic/clinic-user-guide-for-tiup.md)
+- [PingCAP Clinic診断データ](/clinic/clinic-data-instruction-for-tiup.md)

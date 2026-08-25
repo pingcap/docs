@@ -17,9 +17,9 @@ TiDBはバージョン5.1以降、ロックビュー機能をサポートして�
 
 これらのテーブルの詳細な紹介については、次のドキュメントを参照してください。
 
--   [`TIDB_TRX`および`CLUSTER_TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) : 現在の TiDB ノードまたはクラスター全体で実行中のすべてのトランザクションの情報 (トランザクションがロック待機状態にあるかどうか、ロック待機時間、トランザクションで実行されたステートメントのダイジェストなど) を提供します。
--   [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md) : ブロックしているトランザクションとブロックされたトランザクションの`start_ts` 、ブロックされた SQL ステートメントのダイジェスト、待機が発生したキーなど、悲観的ロック待機情報を TiKV で提供します。
--   [`DEADLOCKS`と`CLUSTER_DEADLOCKS`](/information-schema/information-schema-deadlocks.md) : デッドロック ループ内のトランザクション間の待機関係、トランザクションで現在実行されているステートメントのダイジェスト、待機が発生しているキーなど、現在の TiDB ノードまたはクラスター全体で最近発生したいくつかのデッドロックイベントの情報を提供します。
+- [`TIDB_TRX`および`CLUSTER_TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) : 現在の TiDB ノードまたはクラスター全体で実行中のすべてのトランザクションの情報 (トランザクションがロック待機状態にあるかどうか、ロック待機時間、トランザクションで実行されたステートメントのダイジェストなど) を提供します。
+- [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md) : ブロックしているトランザクションとブロックされたトランザクションの`start_ts` 、ブロックされた SQL ステートメントのダイジェスト、待機が発生したキーなど、悲観的ロック待機情報を TiKV で提供します。
+- [`DEADLOCKS`と`CLUSTER_DEADLOCKS`](/information-schema/information-schema-deadlocks.md) : デッドロック ループ内のトランザクション間の待機関係、トランザクションで現在実行されているステートメントのダイジェスト、待機が発生しているキーなど、現在の TiDB ノードまたはクラスター全体で最近発生したいくつかのデッドロックイベントの情報を提供します。
 
 > **Note:**
 >
@@ -171,15 +171,15 @@ Txn0はPrewriteフェーズを完了し、Commitフェーズに入ります。�
 
 TiDB クラスター内の読み取り/書き込み競合は、次の方法で検出できます。
 
-1.  TiDBサーバーのメトリックとログの監視
+1. TiDBサーバーのメトリックとログの監視
 
-    -   Grafanaによるデータの監視
+    - Grafanaによるデータの監視
 
         TiDBダッシュボードの`KV Errors`パネル目では、 `Lock Resolve OPS`の`not_expired`と`KV Backoff OPS`の`tikvLockFast` `resolve`トランザクションにおける読み取り/書き込み競合を確認するために使用できる監視メトリックです。すべてのメトリックの値が上昇している場合、読み取り/書き込み競合が多数発生している可能性があります。`not_expired`項目は、トランザクションのロックがタイムアウトしていないことを意味します。`resolve`項目は、他のトランザクションがロックのクリーンアップを試みていることを意味します。`tikvLockFast`項目は、読み取り/書き込み競合が発生していることを意味します。
 
         ![KV-backoff-txnLockFast-optimistic](/media/troubleshooting-lock-pic-09.png) ![KV-Errors-resolve-optimistic](/media/troubleshooting-lock-pic-08.png)
 
-    -   TiDBサーバーのログ
+    - TiDBサーバーのログ
 
         読み取り/書き込みの競合がある場合は、TiDB ログに次のメッセージが表示されます。
 
@@ -187,12 +187,12 @@ TiDB クラスター内の読み取り/書き込み競合は、次の方法で�
         [INFO] [coprocessor.go:743] ["[TIME_COP_PROCESS] resp_time:406.038899ms txnStartTS:416643508703592451 region_id:8297 store_addr:10.8.1.208:20160 backoff_ms:255 backoff_types:[txnLockFast,txnLockFast] kv_process_ms:333 scan_total_write:0 scan_processed_write:0 scan_total_data:0 scan_processed_data:0 scan_total_lock:0 scan_processed_lock:0"]
         ```
 
-        -   txnStartTS: 読み取り要求を送信しているトランザクションのstart_ts。上記のログでは、 `416643508703592451`がstart_tsです。
-        -   backoff_types: 読み取り/書き込み競合が発生し、読み取り要求がバックオフと再試行を実行する場合、再試行のタイプは`TxnLockFast`なります。
-        -   backoff_ms: 読み取りリクエストがバックオフとリトライに要した時間。単位はミリ秒です。上記のログでは、読み取りリクエストはバックオフとリトライに255ミリ秒を費やしています。
-        -   region_id: 読み取り要求のターゲット キーに対応するリージョンID。
+        - txnStartTS: 読み取り要求を送信しているトランザクションのstart_ts。上記のログでは、 `416643508703592451`がstart_tsです。
+        - backoff_types: 読み取り/書き込み競合が発生し、読み取り要求がバックオフと再試行を実行する場合、再試行のタイプは`TxnLockFast`なります。
+        - backoff_ms: 読み取りリクエストがバックオフとリトライに要した時間。単位はミリ秒です。上記のログでは、読み取りリクエストはバックオフとリトライに255ミリ秒を費やしています。
+        - region_id: 読み取り要求のターゲット キーに対応するリージョンID。
 
-2.  TiKVサーバーのログ
+2. TiKVサーバーのログ
 
     読み取り/書き込みの競合がある場合は、TiKV ログに次のメッセージが表示されます。
 
@@ -202,17 +202,17 @@ TiDB クラスター内の読み取り/書き込み競合は、次の方法で�
 
     このメッセージは、TiDBで読み取り/書き込み競合が発生したことを示しています。読み取り要求のターゲットキーは別のトランザクションによってロックされています。ロックは、コミットされていない楽観的トランザクションと、プリライトフェーズ後のコミットされていない悲観的トランザクションによって発生しています。
 
-    -   primary_lock: ターゲット キーがプライマリ ロックによってロックされていることを示します。
-    -   lock_version: ロックを所有するトランザクションの start_ts。
-    -   key: ロックされる対象キー。
-    -   lock_ttl: ロックの TTL (Time To Live)
-    -   txn_size: ロックを所有するトランザクションのリージョン内にあるキーの数。
+    - primary_lock: ターゲット キーがプライマリ ロックによってロックされていることを示します。
+    - lock_version: ロックを所有するトランザクションの start_ts。
+    - key: ロックされる対象キー。
+    - lock_ttl: ロックの TTL (Time To Live)
+    - txn_size: ロックを所有するトランザクションのリージョン内にあるキーの数。
 
 解決策:
 
--   読み取り/書き込み競合が発生すると、自動的にバックオフと再試行が実行されます。上記の例のように、Txn1 にはバックオフと再試行が適用されます。再試行の初回時間は10ミリ秒、最長は3000ミリ秒、合計時間は最大20000ミリ秒です。
+- 読み取り/書き込み競合が発生すると、自動的にバックオフと再試行が実行されます。上記の例のように、Txn1 にはバックオフと再試行が適用されます。再試行の初回時間は10ミリ秒、最長は3000ミリ秒、合計時間は最大20000ミリ秒です。
 
--   TiDB コントロールのサブコマンド[`decoder`](/tidb-control.md#the-decoder-command)を使用して、指定したキーに対応する行のテーブル ID と行 ID を表示できます。
+- TiDB コントロールのサブコマンド[`decoder`](/tidb-control.md#the-decoder-command)を使用して、指定したキーに対応する行のテーブル ID と行 ID を表示できます。
 
     ```sh
     ./tidb-ctl decoder "t\x00\x00\x00\x00\x00\x00\x00\x1c_r\x00\x00\x00\x00\x00\x00\x00\xfa"
@@ -233,9 +233,9 @@ TiDBダッシュボードの`KV Errors`パネルには、トランザクショ�
 
 解決策:
 
--   監視中にtxnLockが少量発生しても、あまり気にする必要はありません。バックオフとリトライはバックグラウンドで自動的に実行されます。リトライの初回は100ミリ秒、最大1回のリトライ時間は3000ミリ秒です。
--   `KV Backoff OPS`に「txnLock」操作が多すぎる場合は、アプリケーション側から書き込み競合の原因を分析することをお勧めします。
--   アプリケーションで書き込み-書き込み競合が発生するシナリオの場合は、悲観的トランザクションモードを使用することを強くお勧めします。
+- 監視中にtxnLockが少量発生しても、あまり気にする必要はありません。バックオフとリトライはバックグラウンドで自動的に実行されます。リトライの初回は100ミリ秒、最大1回のリトライ時間は3000ミリ秒です。
+- `KV Backoff OPS`に「txnLock」操作が多すぎる場合は、アプリケーション側から書き込み競合の原因を分析することをお勧めします。
+- アプリケーションで書き込み-書き込み競合が発生するシナリオの場合は、悲観的トランザクションモードを使用することを強くお勧めします。
 
 ### LockNotFoundエラー {#locknotfound-error}
 
@@ -243,7 +243,7 @@ TiDBダッシュボードの`KV Errors`パネルには、トランザクショ�
 
 「LockNotFound」エラーがあるかどうかは、次の方法で確認できます。
 
-1.  TiDBサーバーのログを確認する
+1. TiDBサーバーのログを確認する
 
     「TxnLockNotFound」エラーが発生した場合、TiDB ログ メッセージは次のようになります。
 
@@ -251,10 +251,10 @@ TiDBダッシュボードの`KV Errors`パネルには、トランザクショ�
     [WARN] [session.go:446] ["commit failed"] [conn=149370] ["finished txn"="Txn{state=invalid}"] [error="[kv:6]Error: KV error safe to retry tikv restarts txn: Txn(Mvcc(TxnLockNotFound{ start_ts: 412720515987275779, commit_ts: 412720519984971777, key: [116, 128, 0, 0, 0, 0, 1, 111, 16, 95, 114, 128, 0, 0, 0, 0, 0, 0, 2] })) [try again later]"]
     ```
 
-    -   start_ts: 他のトランザクションによってロックがロールバックされたためにエラー`TxnLockNotFound`を出力したトランザクションのstart_ts。上記のログでは、 `412720515987275779`がstart_tsです。
-    -   commit_ts: エラー`TxnLockNotFound`を出力したトランザクションのcommit_ts。上記のログでは、 `412720519984971777`がcommit_tsです。
+    - start_ts: 他のトランザクションによってロックがロールバックされたためにエラー`TxnLockNotFound`を出力したトランザクションのstart_ts。上記のログでは、 `412720515987275779`がstart_tsです。
+    - commit_ts: エラー`TxnLockNotFound`を出力したトランザクションのcommit_ts。上記のログでは、 `412720519984971777`がcommit_tsです。
 
-2.  TiKVサーバーのログを確認する
+2. TiKVサーバーのログを確認する
 
     「TxnLockNotFound」エラーが発生した場合、TiKV ログ メッセージは次のようになります。
 
@@ -264,7 +264,7 @@ TiDBダッシュボードの`KV Errors`パネルには、トランザクショ�
 
 解決策:
 
--   start_ts と commit_ts 間の時間間隔を確認することで、コミット時間が TTL 時間を超えているかどうかを確認できます。
+- start_ts と commit_ts 間の時間間隔を確認することで、コミット時間が TTL 時間を超えているかどうかを確認できます。
 
     PD 制御ツールを使用して時間間隔を確認します。
 
@@ -273,9 +273,9 @@ TiDBダッシュボードの`KV Errors`パネルには、トランザクショ�
     tiup ctl:v<CLUSTER_VERSION> pd tso [commit_ts]
     ```
 
--   書き込みパフォーマンスが遅いかどうかをチェックすることをお勧めします。書き込みパフォーマンスが遅いと、トランザクションのコミットの効率が低下し、ロックがクリアされる可能性があります。
+- 書き込みパフォーマンスが遅いかどうかをチェックすることをお勧めします。書き込みパフォーマンスが遅いと、トランザクションのコミットの効率が低下し、ロックがクリアされる可能性があります。
 
--   TiDB トランザクションの再試行を無効にする場合は、アプリケーション側で例外をキャッチして再試行する必要があります。
+- TiDB トランザクションの再試行を無効にする場合は、アプリケーション側で例外をキャッチして再試行する必要があります。
 
 ## 悲観的ロックの競合のトラブルシューティング {#troubleshoot-pessimistic-lock-conflicts}
 
@@ -303,8 +303,8 @@ err="pessimistic lock retry limit reached"
 
 解決策:
 
--   上記エラーが頻繁に発生する場合は、アプリケーション側からの調整をお勧めします。
--   同一行（同一キー）への同時ロックが多く、頻繁に競合が発生する業務の場合は、システム変数[`tidb_pessimistic_txn_fair_locking`](/system-variables.md#tidb_pessimistic_txn_fair_locking-new-in-v700)の有効化を検討してください。ただし、この変数を有効にすると、ロック競合が発生するトランザクションのスループット低下（平均レイテンシーの増加）が多少発生する可能性がある点にご注意ください。新規に導入されたクラスターでは、この変数はデフォルトで有効化（ `ON` ）されています。
+- 上記エラーが頻繁に発生する場合は、アプリケーション側からの調整をお勧めします。
+- 同一行（同一キー）への同時ロックが多く、頻繁に競合が発生する業務の場合は、システム変数[`tidb_pessimistic_txn_fair_locking`](/system-variables.md#tidb_pessimistic_txn_fair_locking-new-in-v700)の有効化を検討してください。ただし、この変数を有効にすると、ロック競合が発生するトランザクションのスループット低下（平均レイテンシーの増加）が多少発生する可能性がある点にご注意ください。新規に導入されたクラスターでは、この変数はデフォルトで有効化（ `ON` ）されています。
 
 ### ロック待機タイムアウトを超えました {#lock-wait-timeout-exceeded}
 
@@ -318,7 +318,7 @@ ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction
 
 解決策:
 
--   上記のエラーが頻繁に発生する場合は、アプリケーションロジックを調整することをお勧めします。
+- 上記のエラーが頻繁に発生する場合は、アプリケーションロジックを調整することをお勧めします。
 
 ### TTLマネージャがタイムアウトしました {#ttl-manager-has-timed-out}
 
@@ -332,8 +332,8 @@ TTL manager has timed out, pessimistic locks may expire, please commit or rollba
 
 解決策:
 
--   まず、アプリケーションロジックを最適化できるかどうかを確認します。例えば、大規模なトランザクションはTiDBのトランザクションサイズ制限に達する可能性があり、それを複数の小さなトランザクションに分割できます。
--   また、アプリケーションのトランザクション ロジックに合わせて関連パラメータを適切に調整することもできます。
+- まず、アプリケーションロジックを最適化できるかどうかを確認します。例えば、大規模なトランザクションはTiDBのトランザクションサイズ制限に達する可能性があり、それを複数の小さなトランザクションに分割できます。
+- また、アプリケーションのトランザクション ロジックに合わせて関連パラメータを適切に調整することもできます。
 
 ### ロックを取得しようとしたときにデッドロックが見つかりました {#deadlock-found-when-trying-to-get-lock}
 
@@ -347,5 +347,5 @@ TTL manager has timed out, pessimistic locks may expire, please commit or rollba
 
 解決策:
 
--   デッドロックの原因を確認するのが難しい場合は、v5.1以降のバージョンでは、 `INFORMATION_SCHEMA.DEADLOCKS`または`INFORMATION_SCHEMA.CLUSTER_DEADLOCKS`システムテーブルをクエリして、デッドロック待機チェーンの情報を取得することをお勧めします。詳細については、 [デッドロックエラー](#deadlock-errors)セクションと[`DEADLOCKS`テーブル](/information-schema/information-schema-deadlocks.md)ドキュメントを参照してください。
--   デッドロックが頻繁に発生する場合は、そのような発生を減らすために、アプリケーション内のトランザクション クエリ ロジックを調整する必要があります。
+- デッドロックの原因を確認するのが難しい場合は、v5.1以降のバージョンでは、 `INFORMATION_SCHEMA.DEADLOCKS`または`INFORMATION_SCHEMA.CLUSTER_DEADLOCKS`システムテーブルをクエリして、デッドロック待機チェーンの情報を取得することをお勧めします。詳細については、 [デッドロックエラー](#deadlock-errors)セクションと[`DEADLOCKS`テーブル](/information-schema/information-schema-deadlocks.md)ドキュメントを参照してください。
+- デッドロックが頻繁に発生する場合は、そのような発生を減らすために、アプリケーション内のトランザクション クエリ ロジックを調整する必要があります。

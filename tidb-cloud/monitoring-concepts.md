@@ -26,11 +26,11 @@ TiDB Cloudのモニタリング機能は、TiDBのパフォーマンスを監視
 
 組み込みアラートとは、 TiDB Cloud EssentialインスタンスおよびTiDB Cloud Dedicatedクラスタの監視を支援するためにTiDB Cloudが提供するアラートメカニズムのことです。現在、 TiDB Cloudは以下の3種類のアラートを提供しています。
 
--   リソース使用状況アラート
+- リソース使用状況アラート
 
--   データ移行に関する警告
+- データ移行に関する警告
 
--   変更フィードアラート
+- 変更フィードアラート
 
 TiDB Cloudコンソールの「アラート」ページでは、 TiDB Cloud EssentialインスタンスまたはTiDB Cloud Dedicatedクラスタのアラートを表示したり、アラートルールを編集したり、アラート通知メールを購読したりできます。
 
@@ -40,8 +40,8 @@ TiDB Cloudコンソールの「アラート」ページでは、 TiDB Cloud Esse
 
 TiDB Cloudでは、イベントはTiDB Cloudリソースの変更を示します。
 
--   TiDB Cloud StarterおよびEssentialインスタンスの場合、 TiDB Cloudはインスタンスレベルで履歴イベントをログに記録します。
--   TiDB Cloud Dedicatedクラスタの場合、 TiDB Cloudはクラスタレベルで履歴イベントをログに記録します。
+- TiDB Cloud StarterおよびEssentialインスタンスの場合、 TiDB Cloudはインスタンスレベルで履歴イベントをログに記録します。
+- TiDB Cloud Dedicatedクラスタの場合、 TiDB Cloudはクラスタレベルで履歴イベントをログに記録します。
 
 **Events**ページでは、イベントの種類、ステータス、メッセージ、トリガー時刻、トリガーユーザーなど、記録されたイベントを確認できます。
 
@@ -53,11 +53,11 @@ TiDB Cloudでは、イベントはTiDB Cloudリソースの変更を示します
 
 TiDB Cloud、以下のサードパーティ製メトリクスサービスのいずれかを統合して、 TiDB Cloudアラートを受信したり、 TiDB Cloud Dedicatedクラスタのパフォーマンスメトリクスを表示したりできます。
 
--   [Datadogとの連携](/tidb-cloud/monitor-datadog-integration.md)
+- [Datadogとの連携](/tidb-cloud/monitor-datadog-integration.md)
 
--   [PrometheusとGrafanaの統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
+- [PrometheusとGrafanaの統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
 
--   [New Relicとの連携](/tidb-cloud/monitor-new-relic-integration.md)
+- [New Relicとの連携](/tidb-cloud/monitor-new-relic-integration.md)
 
 </CustomContent>
 

@@ -57,4 +57,4 @@ TiDBの`DO`文はMySQLと完全に互換性があります。互換性に違い�
 
 ## 参照 {#see-also}
 
--   [SELECT](/sql-statements/sql-statement-select.md)
+- [SELECT](/sql-statements/sql-statement-select.md)

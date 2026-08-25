@@ -23,7 +23,7 @@ summary: tidb_external_ts` 変数を使用して履歴データを読み取る�
 
 このセクションでは、 `tidb_external_ts`変数を使用して履歴データを読み取る方法を例とともに説明します。
 
-1.  テーブルを作成し、テーブルにいくつかの行を挿入します。
+1. テーブルを作成し、テーブルにいくつかの行を挿入します。
 
     ```sql
     CREATE TABLE t (c INT);
@@ -37,7 +37,7 @@ summary: tidb_external_ts` 変数を使用して履歴データを読み取る�
 
         Query OK, 3 rows affected (0.00 sec)
 
-2.  表内のデータを表示する。
+2. 表内のデータを表示する。
 
     ```sql
     SELECT * FROM t;
@@ -52,7 +52,7 @@ summary: tidb_external_ts` 変数を使用して履歴データを読み取る�
         +------+
         3 rows in set (0.00 sec)
 
-3.  セット`tidb_external_ts` ～ `@@tidb_current_ts` :
+3. セット`tidb_external_ts` ～ `@@tidb_current_ts` :
 
     ```sql
     START TRANSACTION;
@@ -60,7 +60,7 @@ summary: tidb_external_ts` 変数を使用して履歴データを読み取る�
     COMMIT;
     ```
 
-4.  新しい行を挿入し、挿入されたことを確認します。
+4. 新しい行を挿入し、挿入されたことを確認します。
 
     ```sql
     INSERT INTO t VALUES (4);
@@ -82,7 +82,7 @@ summary: tidb_external_ts` 変数を使用して履歴データを読み取る�
         +------+
         4 rows in set (0.00 sec)
 
-5.  `tidb_enable_external_ts_read`を`ON`に設定し、表内のデータを表示します。
+5. `tidb_enable_external_ts_read`を`ON`に設定し、表内のデータを表示します。
 
     ```sql
     SET tidb_enable_external_ts_read=ON;

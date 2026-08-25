@@ -55,8 +55,8 @@ TiKV、TiDB、およびPD情報ログには、デバッグ用のユーザーデ�
 
 TiKVは現在、 CTRモードでAES128、AES192、AES256、またはSM4（バージョン6.3.0以降のみ）を使用したデータ暗号化をサポートしています。TiKVはエンベロープ暗号化を使用します。そのため、暗号化を有効にすると、TiKVでは2種類の鍵が使用されます。
 
--   マスターキー。マスターキーはユーザーによって提供され、TiKVが生成するデータキーを暗号化するために使用されます。マスターキーの管理はTiKVの外部で行われます。
--   データキー。データキーはTiKVによって生成され、実際にデータの暗号化に使用されるキーです。
+- マスターキー。マスターキーはユーザーによって提供され、TiKVが生成するデータキーを暗号化するために使用されます。マスターキーの管理はTiKVの外部で行われます。
+- データキー。データキーはTiKVによって生成され、実際にデータの暗号化に使用されるキーです。
 
 同じマスターキーを複数のTiKVインスタンスで共有できます。本番でマスターキーを提供する場合は、KMS経由が推奨されます。現在、TiKVは[AWS](https://docs.aws.amazon.com/kms/index.html) 、 [Googleクラウド](https://cloud.google.com/security/products/security-key-management?hl=en) 、 [Azure](https://learn.microsoft.com/en-us/azure/key-vault/)でKMS暗号化をサポートしています。KMS暗号化を有効にするには、KMS経由でカスタマーマスターキー（CMK）を作成し、設定ファイルを使用してTiKVにCMKキーIDを提供する必要があります。TiKVがKMS CMKにアクセスできない場合、起動または再起動に失敗します。
 
@@ -76,18 +76,18 @@ data-encryption-method = "aes128-ctr"
 data-key-rotation-period = "168h" # 7 days
 ```
 
--   `data-encryption-method`は、暗号化アルゴリズムを指定します。指定可能な値は`"aes128-ctr"` 、 `"aes192-ctr"` 、 `"aes256-ctr"` 、 `"sm4-ctr"` （v6.3.0以降のバージョンのみ）、 `"plaintext"`です。デフォルト値は`"plaintext"`で、暗号化はデフォルトで無効になっています。
+- `data-encryption-method`は、暗号化アルゴリズムを指定します。指定可能な値は`"aes128-ctr"` 、 `"aes192-ctr"` 、 `"aes256-ctr"` 、 `"sm4-ctr"` （v6.3.0以降のバージョンのみ）、 `"plaintext"`です。デフォルト値は`"plaintext"`で、暗号化はデフォルトで無効になっています。
 
-    -   新しい TiKV クラスターまたは既存の TiKV クラスターの場合、暗号化が有効になった後に書き込まれたデータのみが暗号化されることが保証されます。
-    -   暗号化を有効にした後に無効にするには、構成ファイルから`data-encryption-method`を削除するか、その値を`"plaintext"`に設定して、TiKV を再起動します。
-    -   暗号化アルゴリズムを変更するには、値`data-encryption-method`をサポートされている暗号化アルゴリズムに置き換え、TiKVを再起動します。置き換え後、新しいデータが書き込まれると、以前の暗号化アルゴリズムで生成された暗号化ファイルが、新しい暗号化アルゴリズムで生成されたファイルに徐々に書き換えられます。
+    - 新しい TiKV クラスターまたは既存の TiKV クラスターの場合、暗号化が有効になった後に書き込まれたデータのみが暗号化されることが保証されます。
+    - 暗号化を有効にした後に無効にするには、構成ファイルから`data-encryption-method`を削除するか、その値を`"plaintext"`に設定して、TiKV を再起動します。
+    - 暗号化アルゴリズムを変更するには、値`data-encryption-method`をサポートされている暗号化アルゴリズムに置き換え、TiKVを再起動します。置き換え後、新しいデータが書き込まれると、以前の暗号化アルゴリズムで生成された暗号化ファイルが、新しい暗号化アルゴリズムで生成されたファイルに徐々に書き換えられます。
 
--   `data-key-rotation-period`は、TiKV がキーをローテーションする頻度を指定します。
+- `data-key-rotation-period`は、TiKV がキーをローテーションする頻度を指定します。
 
 暗号化が有効になっている場合（つまり、 `data-encryption-method`の値が`"plaintext"`ではない場合）、次のいずれかの方法でマスターキーを指定する必要があります。
 
--   [KMS経由でマスターキーを指定する](#specify-a-master-key-via-kms)
--   [ファイル経由でマスターキーを指定する](#specify-a-master-key-via-a-file)
+- [KMS経由でマスターキーを指定する](#specify-a-master-key-via-kms)
+- [ファイル経由でマスターキーを指定する](#specify-a-master-key-via-a-file)
 
 #### KMS経由でマスターキーを指定する {#specify-a-master-key-via-kms}
 
@@ -101,10 +101,10 @@ TiKVは、AWS、Google Cloud、Azureの3つのプラットフォームでKMS暗�
 
 AWS でキーを作成するには、次の手順を実行します。
 
-1.  AWS コンソールの[AWS KMS](https://console.aws.amazon.com/kms)に移動します。
-2.  コンソールの右上隅で正しい地域が選択されていることを確認してください。
-3.  **[キーの作成]**をクリックし、キーの種類として**[対称]**を選択します。
-4.  キーのエイリアスを設定します。
+1. AWS コンソールの[AWS KMS](https://console.aws.amazon.com/kms)に移動します。
+2. コンソールの右上隅で正しい地域が選択されていることを確認してください。
+3. **[キーの作成]**をクリックし、キーの種類として**[対称]**を選択します。
+4. キーのエイリアスを設定します。
 
 AWS CLI を使用して操作を実行することもできます。
 
@@ -138,14 +138,14 @@ AWSでも[マルチリージョンキー](https://docs.aws.amazon.com/kms/latest
 
 Google Cloud でキーを作成するには、次の手順を行います。
 
-1.  Google Cloud コンソールの[キー管理](https://console.cloud.google.com/security/kms/keyrings)ページに移動します。
-2.  **Create key ring**をクリックします。キーリングの名前を入力し、キーリングの場所を選択して、 **Create**をクリックします。キーリングの場所は、TiDBクラスターがデプロイされているリージョンをカバーする必要があります。
-3.  前の手順で作成したキーリングを選択し、キーリングの詳細ページで**Create Key**をクリックします。
-4.  キーの名前を入力し、次のようにキー情報を設定して、 **Create**をクリックします。
+1. Google Cloud コンソールの[キー管理](https://console.cloud.google.com/security/kms/keyrings)ページに移動します。
+2. **Create key ring**をクリックします。キーリングの名前を入力し、キーリングの場所を選択して、 **Create**をクリックします。キーリングの場所は、TiDBクラスターがデプロイされているリージョンをカバーする必要があります。
+3. 前の手順で作成したキーリングを選択し、キーリングの詳細ページで**Create Key**をクリックします。
+4. キーの名前を入力し、次のようにキー情報を設定して、 **Create**をクリックします。
 
-    -   **保護レベル**:**ソフトウェア**または**HSM**
-    -   **鍵マテリアル**:**生成された鍵**
-    -   **目的**:**対称暗号化/復号化**
+    - **保護レベル**:**ソフトウェア**または**HSM**
+    - **鍵マテリアル**:**生成された鍵**
+    - **目的**:**対称暗号化/復号化**
 
 この操作は gcloud CLI を使用して実行することもできます。
 
@@ -170,8 +170,8 @@ vendor = "gcp"
 credential-file-path = "/path/to/credential.json"
 ```
 
--   `key-id` KMS CMK のキー ID を指定します。
--   `vendor = "gcp"` の場合、`credential-file-path`は検証資格情報ファイルのパスを指定します。現在、このファイルではサービスアカウントと認証ユーザーの2種類の資格情報がサポートされています。TiKVの実行環境が既に[アプリケーションのデフォルト資格情報](https://cloud.google.com/docs/authentication/application-default-credentials)で構成されている場合は、 `credential-file-path`設定する必要はありません。
+- `key-id` KMS CMK のキー ID を指定します。
+- `vendor = "gcp"` の場合、`credential-file-path`は検証資格情報ファイルのパスを指定します。現在、このファイルではサービスアカウントと認証ユーザーの2種類の資格情報がサポートされています。TiKVの実行環境が既に[アプリケーションのデフォルト資格情報](https://cloud.google.com/docs/authentication/application-default-credentials)で構成されている場合は、 `credential-file-path`設定する必要はありません。
 
 Google Cloud KMS シナリオで Workload Identity Federation (WIF) を使用する必要がある場合は、代わりに `gcp_v2` を使用します。
 
@@ -185,9 +185,9 @@ vendor = "gcp_v2"
 credential-file-path = "/path/to/external-account.json"
 ```
 
--   `vendor = "gcp_v2"` の場合、明示的な資格情報では Service Account と `external_account` のみがサポートされます。
--   ADC によって生成された `authorized_user` JSON を使用している場合、その JSON を `credential-file-path` として直接設定することはできません。この場合は、`credential-file-path` を省略し、TiKV が実行環境内の[アプリケーションのデフォルト資格情報](https://cloud.google.com/docs/authentication/application-default-credentials)を通じて認証情報を取得するようにします。
--   古い `vendor = "gcp"` では、明示的な資格情報として `external_account` を使用することがサポートされていないため、この方法では WIF を使用できません。
+- `vendor = "gcp_v2"` の場合、明示的な資格情報では Service Account と `external_account` のみがサポートされます。
+- ADC によって生成された `authorized_user` JSON を使用している場合、その JSON を `credential-file-path` として直接設定することはできません。この場合は、`credential-file-path` を省略し、TiKV が実行環境内の[アプリケーションのデフォルト資格情報](https://cloud.google.com/docs/authentication/application-default-credentials)を通じて認証情報を取得するようにします。
+- 古い `vendor = "gcp"` では、明示的な資格情報として `external_account` を使用することがサポートされていないため、この方法では WIF を使用できません。
 
 </div>
 <div label="Azure KMS">
@@ -266,11 +266,11 @@ region = "us-west-2"
 
 TiKVをGrafanaでデプロイしている場合は、保存時の暗号化を監視するために、 **TiKV-Details**ダッシュボードの**Encryption**パネルを確認できます。確認すべきメトリクスがいくつかあります。
 
--   暗号化の初期化: TiKV起動時に暗号化が初期化された場合は1、それ以外の場合は0。マスターキーのローテーションの場合、暗号化が初期化された後は、TiKVは以前のマスターキーにアクセスする必要はありません。
--   暗号化データキー：既存のデータキーの数。データキーのローテーションが発生するたびに、この数は1ずつ増加します。この指標を使用して、データキーのローテーションが期待どおりに機能しているかどうかを監視します。
--   暗号化ファイル: 現在存在する暗号化データファイルの数。この数とデータディレクトリ内の既存のデータファイル数を比較することで、暗号化されていないクラスタの暗号化を有効にする際に、暗号化されるデータの量を推定できます。
--   暗号化メタファイルサイズ: 暗号化メタデータファイルのサイズ。
--   読み取り/書き込み暗号化メタ期間: 暗号化のメタデータを操作するための追加のオーバーヘッド。
+- 暗号化の初期化: TiKV起動時に暗号化が初期化された場合は1、それ以外の場合は0。マスターキーのローテーションの場合、暗号化が初期化された後は、TiKVは以前のマスターキーにアクセスする必要はありません。
+- 暗号化データキー：既存のデータキーの数。データキーのローテーションが発生するたびに、この数は1ずつ増加します。この指標を使用して、データキーのローテーションが期待どおりに機能しているかどうかを監視します。
+- 暗号化ファイル: 現在存在する暗号化データファイルの数。この数とデータディレクトリ内の既存のデータファイル数を比較することで、暗号化されていないクラスタの暗号化を有効にする際に、暗号化されるデータの量を推定できます。
+- 暗号化メタファイルサイズ: 暗号化メタデータファイルのサイズ。
+- 読み取り/書き込み暗号化メタ期間: 暗号化のメタデータを操作するための追加のオーバーヘッド。
 
 デバッグのために、 `tikv-ctl`コマンドを使用すると、ファイルの暗号化に使用された暗号化方式やデータキーID、データキーのリストなどの暗号化メタデータをダンプできます。この操作により機密データが漏洩する可能性があるため、本番での使用は推奨されません。[TiKV Control](/tikv-control.md#dump-encryption-metadata)ドキュメントを参照してください。
 
@@ -293,8 +293,8 @@ TiKVが暗号化メタデータを管理する際に発生するI/Oおよびミ�
 
 TiFlashが現在サポートしている暗号化アルゴリズムは、TiKVがCTRモードでサポートしているアルゴリズム（AES128、AES192、AES256、SM4（v6.4.0以降のバージョンのみ））と一致しています。TiFlashはエンベロープ暗号化も使用します。そのため、暗号化を有効にすると、 TiFlashでは2種類の鍵が使用されます。
 
--   マスターキー。マスターキーはユーザーによって提供され、 TiFlashが生成するデータキーを暗号化するために使用されます。マスターキーの管理はTiFlashの外部で行われます。
--   データキー。データキーはTiFlashによって生成され、実際にデータの暗号化に使用されるキーです。
+- マスターキー。マスターキーはユーザーによって提供され、 TiFlashが生成するデータキーを暗号化するために使用されます。マスターキーの管理はTiFlashの外部で行われます。
+- データキー。データキーはTiFlashによって生成され、実際にデータの暗号化に使用されるキーです。
 
 同じマスターキーを複数のTiFlashインスタンスで共有できるほか、 TiFlashと TiKV 間で共有することもできます。本番でマスターキーを提供する場合は、AWS KMS を使用することをお勧めします。また、カスタムキーを使用したい場合は、ファイル経由でマスターキーを提供することも可能です。マスターキーの生成方法とフォーマットは TiKV と同じです。
 
@@ -436,13 +436,13 @@ BRを使用して Azure Blob Storage にデータをバックアップする場�
 
 バックアップデータの暗号化範囲を指定するには、次の 2 つの方法のいずれかを使用できます。
 
--   `backup`コマンドに`--azblob.encryption-scope`オプションを含め、スコープ名に設定します。
+- `backup`コマンドに`--azblob.encryption-scope`オプションを含め、スコープ名に設定します。
 
     ```shell
     tiup br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>" --azblob.encryption-scope scope1
     ```
 
--   URI に`encryption-scope`を含め、スコープ名に設定します。
+- URI に`encryption-scope`を含め、スコープ名に設定します。
 
     ```shell
     tiup br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>?encryption-scope=scope1"
@@ -460,19 +460,19 @@ tiup br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>"
 
 バックアップデータの暗号化キーを指定するには、次の 3 つの方法のいずれかを使用できます。
 
--   `backup`コマンドに`--azblob.encryption-key`オプションを含め、AES256 暗号化キーを設定します。
+- `backup`コマンドに`--azblob.encryption-key`オプションを含め、AES256 暗号化キーを設定します。
 
     ```shell
     tiup br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>" --azblob.encryption-key <aes256-key>
     ```
 
--   URIに`encryption-key`を含め、AES256暗号化キーを設定します。キーに`&`や`%`などのURI予約文字が含まれている場合は、事前にパーセントエンコードする必要があります。
+- URIに`encryption-key`を含め、AES256暗号化キーを設定します。キーに`&`や`%`などのURI予約文字が含まれている場合は、事前にパーセントエンコードする必要があります。
 
     ```shell
     tiup br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>?encryption-key=<aes256-key>"
     ```
 
--   環境変数`AZURE_ENCRYPTION_KEY`にAES256暗号化キーを設定します。実行前に、環境変数に設定された暗号化キーを忘れないように必ず覚えておいてください。
+- 環境変数`AZURE_ENCRYPTION_KEY`にAES256暗号化キーを設定します。実行前に、環境変数に設定された暗号化キーを忘れないように必ず覚えておいてください。
 
     ```shell
     export AZURE_ENCRYPTION_KEY=<aes256-key>
@@ -483,19 +483,19 @@ tiup br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>"
 
 バックアップを復元する際には、暗号化キーを指定する必要があります。例：
 
--   `restore`コマンドに`--azblob.encryption-key`オプションを含めます。
+- `restore`コマンドに`--azblob.encryption-key`オプションを含めます。
 
     ```shell
     tiup br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>" --azblob.encryption-key <aes256-key>
     ```
 
--   URIに`encryption-key`を含めます:
+- URIに`encryption-key`を含めます:
 
     ```shell
     tiup br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>?encryption-key=<aes256-key>"
     ```
 
--   `AZURE_ENCRYPTION_KEY`環境変数を設定します。
+- `AZURE_ENCRYPTION_KEY`環境変数を設定します。
 
     ```shell
     export AZURE_ENCRYPTION_KEY=<aes256-key>

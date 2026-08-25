@@ -36,9 +36,9 @@ TiDB のノード数、vCPU、RAM を構成できます。
 >
 > TiDB の vCPU と RAM サイズが**4 vCPU、16 GiB**に設定されている場合、次の制限に注意してください。
 >
-> -   TiDB のノード数は 1 または 2 にのみ設定でき、TiKV のノード数は 3 に固定されています。
-> -   4 vCPU TiDB は 4 vCPU TiKV でのみ使用できます。
-> -   TiFlashは利用できません。
+> - TiDB のノード数は 1 または 2 にのみ設定でき、TiKV のノード数は 3 に固定されています。
+> - 4 vCPU TiDB は 4 vCPU TiKV でのみ使用できます。
+> - TiFlashは利用できません。
 >
 > **4 vCPU、16 GiB**の TiDB は、学習、テスト、およびトライアル用途向けに設計されています。プレプロダクション環境や、小規模でクリティカルでないワークロードに適しています。ただし、パフォーマンスの制限があるため、本格的な本番環境への本番は推奨され**ません**。本番でのコスト削減と SLA 保証が必要な場合は、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)クラスタープランのご利用をご検討ください。
 
@@ -50,8 +50,8 @@ TiDB のノード数、vCPU、RAM を構成できます。
 
 例えば：
 
--   TiDB ノードが 9 台の場合、パフォーマンス偏差係数は約 5% となるため、TiDB パフォーマンスは単一の TiDB ノードの約`9 * (1 - 5%) = 8.55`倍の性能になります。
--   TiDB ノードが 16 個ある場合、パフォーマンス偏差係数は約 10% なので、TiDB パフォーマンスは単一の TiDB ノードの`16 * (1 - 10%) = 14.4`倍のパフォーマンスになります。
+- TiDB ノードが 9 台の場合、パフォーマンス偏差係数は約 5% となるため、TiDB パフォーマンスは単一の TiDB ノードの約`9 * (1 - 5%) = 8.55`倍の性能になります。
+- TiDB ノードが 16 個ある場合、パフォーマンス偏差係数は約 10% なので、TiDB パフォーマンスは単一の TiDB ノードの`16 * (1 - 10%) = 14.4`倍のパフォーマンスになります。
 
 TiDB ノードの指定されたレイテンシーでは、TiDB のパフォーマンスは読み取り/書き込み比率によって異なります。
 
@@ -102,9 +102,9 @@ TiKV のノード数、vCPU と RAM、ストレージを構成できます。
 >
 > TiKV の vCPU と RAM サイズが**4 vCPU、16 GiB**に設定されている場合、次の制限に注意してください。
 >
-> -   TiDB のノード数は 1 または 2 にのみ設定でき、TiKV のノード数は 3 に固定されています。
-> -   4 vCPU TiKV は 4 vCPU TiDB でのみ使用できます。
-> -   TiFlashは利用できません。
+> - TiDB のノード数は 1 または 2 にのみ設定でき、TiKV のノード数は 3 に固定されています。
+> - 4 vCPU TiKV は 4 vCPU TiDB でのみ使用できます。
+> - TiFlashは利用できません。
 >
 > **4 vCPU、16 GiB**の TiKV は、学習、テスト、およびトライアル用途向けに設計されています。プレプロダクション環境や、小規模でクリティカルでないワークロードに適しています。ただし、パフォーマンスの制限があるため、本格的な本番環境への本番は推奨され**ません**。本番でのコスト削減と SLA 保証が必要な場合は、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)クラスタープランのご利用をご検討ください。
 
@@ -140,8 +140,8 @@ TiDBのパフォーマンスと同様に、TiKVのパフォーマンスはTiKV�
 
 例えば：
 
--   TiKV ノードが 9 個ある場合、パフォーマンス偏差係数は約 5% なので、TiKV パフォーマンスは単一の TiKV ノードのパフォーマンスの約`9 * (1 - 5%) = 8.55`倍になります。
--   TiKV ノードが 18 個ある場合、パフォーマンス偏差係数は約 10% なので、TiKV パフォーマンスは単一の TiKV ノードの`18 * (1 - 10%) = 16.2`倍のパフォーマンスになります。
+- TiKV ノードが 9 個ある場合、パフォーマンス偏差係数は約 5% なので、TiKV パフォーマンスは単一の TiKV ノードのパフォーマンスの約`9 * (1 - 5%) = 8.55`倍になります。
+- TiKV ノードが 18 個ある場合、パフォーマンス偏差係数は約 10% なので、TiKV パフォーマンスは単一の TiKV ノードの`18 * (1 - 10%) = 16.2`倍のパフォーマンスになります。
 
 TiKV ノードの指定されたレイテンシーでは、TiKV のパフォーマンスは読み取りと書き込みの比率によって異なります。
 
@@ -190,9 +190,9 @@ TiKVノード数が8未満の場合、パフォーマンス偏差係数はほぼ
 
 TiDB Cloud は、AWS でホストされる[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して次の TiKVストレージタイプを提供します。
 
--   [Basicストレージ](#basic-storage)
--   [Standardストレージ](#standard-storage)
--   [Performance+Plusストレージ](#performance-and-plus-storage)
+- [Basicストレージ](#basic-storage)
+- [Standardストレージ](#standard-storage)
+- [Performance+Plusストレージ](#performance-and-plus-storage)
 
 #### Basicストレージ {#basic-storage}
 
@@ -200,8 +200,8 @@ Basicストレージは、Standardストレージよりもパフォーマンス�
 
 Basicストレージタイプは、AWS でホストされている次のクラスターに自動的に適用されます。
 
--   2025 年 4 月 1 日より前に作成された既存のクラスター。
--   v7.5.5、v8.1.2、または v8.5.0 より前のバージョンの TiDB で作成された新しいクラスター。
+- 2025 年 4 月 1 日より前に作成された既存のクラスター。
+- v7.5.5、v8.1.2、または v8.5.0 より前のバージョンの TiDB で作成された新しいクラスター。
 
 #### Standardストレージ {#standard-storage}
 
@@ -223,10 +223,10 @@ TiFlashのノード数、vCPU と RAM、ストレージを構成できます。
 
 サポートされている vCPU と RAM のサイズは次のとおりです。
 
--   8 vCPU、64 GiB
--   16 vCPU、128 GiB
--   32 vCPU、128 GiB
--   32 vCPU、256 GiB
+- 8 vCPU、64 GiB
+- 16 vCPU、128 GiB
+- 32 vCPU、128 GiB
+- 32 vCPU、256 GiB
 
 TiDB または TiKV の vCPU と RAM サイズが**4 vCPU、16 GiB**に設定されている場合、 TiFlash は使用できません。
 
@@ -260,8 +260,8 @@ TiFlashノードの最小数: `min((800 GiB * 2 + 100 GiB * 1) / 1024 GiB, max(2
 
 TiDB Cloud は、AWS でホストされる[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して次のTiFlashストレージタイプを提供します。
 
--   [Basicストレージ](#basic-storage-1)
--   [Plusストレージ](#plus-storage)
+- [Basicストレージ](#basic-storage-1)
+- [Plusストレージ](#plus-storage)
 
 #### Basicストレージ {#basic-storage}
 

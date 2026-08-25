@@ -15,27 +15,27 @@ summary: このガイドでは、CursorエディタでTiDB MCPサーバーを設
 
 始める前に、以下のものを用意してください。
 
--   **Cursor** ： [cursor.com](https://cursor.com)からCursorをダウンロードしてインストールしてください。
--   **Python (&gt;=3.10) と uv** : Python (3.10 以降) と`uv`がインストールされていることを確認します。 [インストールガイド](https://docs.astral.sh/uv/getting-started/installation/)に従って`uv`をインストールします。
--   **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
+- **Cursor** ： [cursor.com](https://cursor.com)からCursorをダウンロードしてインストールしてください。
+- **Python (&gt;=3.10) と uv** : Python (3.10 以降) と`uv`がインストールされていることを確認します。 [インストールガイド](https://docs.astral.sh/uv/getting-started/installation/)に従って`uv`をインストールします。
+- **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
 
 ## TiDB Cloud Starterに接続する（推奨） {#connect-to-tidb-cloud-starter-recommended}
 
 TiDB Cloudコンソールを使用して、 TiDB Cloud Starterインスタンスの認証情報でCursor構成を作成します。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動し、右上隅の**Use with AI Tools**をクリックします。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動し、右上隅の**Use with AI Tools**をクリックします。
 
-2.  表示されたダイアログで、Cursorがアクセスする**Branch**と**Database**を選択します。
+2. 表示されたダイアログで、Cursorがアクセスする**Branch**と**Database**を選択します。
 
-3.  ダイアログに表示される**Prerequisites**リストを確認し、不足している依存関係があればインストールしてください。
+3. ダイアログに表示される**Prerequisites**リストを確認し、不足している依存関係があればインストールしてください。
 
-4.  ルートパスワードを設定します。
+4. ルートパスワードを設定します。
 
-    -   まだパスワードを設定していない場合は、**Generate Password**をクリックして、生成されたパスワードを安全な場所に保存してください（パスワードは一度しか表示されません）。
-    -   パスワードが既に存在する場合は、 **Enter the password for easy setup**欄に入力してください。
-    -   パスワードを忘れた場合は、 **Prerequisites**セクションの**Reset password**をクリックして新しいパスワードを生成してください。
+    - まだパスワードを設定していない場合は、**Generate Password**をクリックして、生成されたパスワードを安全な場所に保存してください（パスワードは一度しか表示されません）。
+    - パスワードが既に存在する場合は、 **Enter the password for easy setup**欄に入力してください。
+    - パスワードを忘れた場合は、 **Prerequisites**セクションの**Reset password**をクリックして新しいパスワードを生成してください。
 
-5.  **Cursor**タブを選択し、 **Add to Cursor**をクリックしてから、Cursorで**Install**をクリックします。
+5. **Cursor**タブを選択し、 **Add to Cursor**をクリックしてから、Cursorで**Install**をクリックします。
 
 ## 手動設定（任意のTiDBクラスタ） {#manual-configuration-any-tidb-cluster}
 
@@ -64,6 +64,6 @@ TiDB Cloudコンソールを使用して、 TiDB Cloud Starterインスタンス
 
 TiDB MCPサーバーのインストールで問題が発生した場合は、CursorのMCPログを確認してください。
 
-1.  エディタ上部のメインメニューで、 **[ビュー]** &gt; **[出力]**をクリックします。
-2.  **出力**パネルのドロップダウンメニューから**MCP**を選択してください。
-3.  `[error] Could not start MCP server tidb-mcp-server: Error: spawn uvx ENOENT`のようなエラーが表示される場合は、 `uvx`コマンドがシステム環境変数`$PATH`に存在しない可能性があります。macOS ユーザーの場合は、 `uvx`を実行して`brew install uv` 。
+1. エディタ上部のメインメニューで、 **[ビュー]** &gt; **[出力]**をクリックします。
+2. **出力**パネルのドロップダウンメニューから**MCP**を選択してください。
+3. `[error] Could not start MCP server tidb-mcp-server: Error: spawn uvx ENOENT`のようなエラーが表示される場合は、 `uvx`コマンドがシステム環境変数`$PATH`に存在しない可能性があります。macOS ユーザーの場合は、 `uvx`を実行して`brew install uv` 。

@@ -7,10 +7,10 @@ summary: 対応するアップストリームテーブルよりも多くの列�
 
 このドキュメントでは、対応する上流テーブルよりも多くの列を持つ下流TiDBテーブルにデータを移行する際に必要な追加手順について説明します。通常の移行手順については、以下の移行シナリオをご覧ください。
 
--   [小規模データセットをMySQLからTiDBに移行する](/migrate-small-mysql-to-tidb.md)
--   [大規模データセットをMySQLからTiDBに移行する](/migrate-large-mysql-to-tidb.md)
--   [小さなデータセットの MySQL シャードを TiDB に移行してマージする](/migrate-small-mysql-shards-to-tidb.md)
--   [大規模データセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
+- [小規模データセットをMySQLからTiDBに移行する](/migrate-small-mysql-to-tidb.md)
+- [大規模データセットをMySQLからTiDBに移行する](/migrate-large-mysql-to-tidb.md)
+- [小さなデータセットの MySQL シャードを TiDB に移行してマージする](/migrate-small-mysql-shards-to-tidb.md)
+- [大規模データセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
 
 ## DM を使用して、より多くの列を持つ下流の TiDB テーブルにデータを移行します {#use-dm-to-migrate-data-to-a-downstream-tidb-table-with-more-columns}
 
@@ -55,7 +55,7 @@ DM がダウンストリームテーブルスキーマを使用してアップ�
 
 このような場合、 `binlog-schema`コマンドを使用して、データソースから移行するテーブルのテーブルスキーマを設定できます。指定するテーブルスキーマは、DM によって複製されるbinlogイベントデータに対応している必要があります。シャーディングされたテーブルを移行する場合は、シャーディングされたテーブルごとに、binlogイベントデータを解析するためのテーブルスキーマを DM で設定する必要があります。手順は以下のとおりです。
 
-1.  DMでSQLファイルを作成し、上流のテーブルスキーマに対応する`CREATE TABLE`ステートメントをファイルに追加します。例えば、次のテーブルスキーマを`log.messages.sql`に保存します。DM v6.0以降のバージョンでは、SQLファイルを作成せずに、 `--from-source`または`--from-target`フラグを追加することでテーブルスキーマを更新できます。詳細は[移行するテーブルのテーブルスキーマを管理する](/dm/dm-manage-schema.md)を参照してください。
+1. DMでSQLファイルを作成し、上流のテーブルスキーマに対応する`CREATE TABLE`ステートメントをファイルに追加します。例えば、次のテーブルスキーマを`log.messages.sql`に保存します。DM v6.0以降のバージョンでは、SQLファイルを作成せずに、 `--from-source`または`--from-target`フラグを追加することでテーブルスキーマを更新できます。詳細は[移行するテーブルのテーブルスキーマを管理する](/dm/dm-manage-schema.md)を参照してください。
 
     ```sql
     # Upstream table schema
@@ -65,7 +65,7 @@ DM がダウンストリームテーブルスキーマを使用してアップ�
     )
     ```
 
-2.  `binlog-schema`コマンドを使用して、データソースから移行するテーブルのテーブルスキーマを設定します。この時点で、データ移行タスクは上記の`Column count doesn't match`エラーにより一時停止状態になっているはずです。
+2. `binlog-schema`コマンドを使用して、データソースから移行するテーブルのテーブルスキーマを設定します。この時点で、データ移行タスクは上記の`Column count doesn't match`エラーにより一時停止状態になっているはずです。
 
     {{< copyable "shell-regular" >}}
 
@@ -93,7 +93,7 @@ DM がダウンストリームテーブルスキーマを使用してアップ�
     tiup dmctl --master-addr 172.16.10.71:8261 binlog-schema update -s mysql-01 task-test -d log -t message log.message.sql
     ```
 
-3.  一時停止状態の移行タスクを再開するには、 `resume-task`コマンドを使用します。
+3. 一時停止状態の移行タスクを再開するには、 `resume-task`コマンドを使用します。
 
     {{< copyable "shell-regular" >}}
 
@@ -101,7 +101,7 @@ DM がダウンストリームテーブルスキーマを使用してアップ�
     tiup dmctl --master-addr ${advertise-addr} resume-task ${task-name}
     ```
 
-4.  `query-status`コマンドを使用して、データ移行タスクが正しく実行されていることを確認します。
+4. `query-status`コマンドを使用して、データ移行タスクが正しく実行されていることを確認します。
 
     {{< copyable "shell-regular" >}}
 

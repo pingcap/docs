@@ -12,21 +12,21 @@ aliases: ['/ja/tidb/stable/vector-search-get-started-using-python/','/ja/tidb/de
 
 > **Note:**
 >
-> -   ベクトル検索機能はベータ版です。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
-> -   ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)で利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> - ベクトル検索機能はベータ版です。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> - ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)で利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## 前提条件 {#prerequisites}
 
 このチュートリアルを完了するには、以下が必要です。
 
--   [Python 3.8以降](https://www.python.org/downloads/)がインストールされていること。
--   [Git](https://git-scm.com/downloads)がインストールされていること。
--   TiDBクラスタ。
+- [Python 3.8以降](https://www.python.org/downloads/)がインストールされていること。
+- [Git](https://git-scm.com/downloads)がインストールされていること。
+- TiDBクラスタ。
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
--   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
 ## さあ始めましょう {#get-started}
 
@@ -50,8 +50,8 @@ touch example.py
 pip install sqlalchemy pymysql sentence-transformers tidb-vector python-dotenv
 ```
 
--   `tidb-vector` : TiDBベクトル検索と対話するためのPythonクライアント。
--   [`sentence-transformers`](https://sbert.net) : テキストから[ベクトル埋め込み](/ai/concepts/vector-search-overview.md#vector-embedding)を生成するための事前トレーニング済みモデルを提供する Python ライブラリです。
+- `tidb-vector` : TiDBベクトル検索と対話するためのPythonクライアント。
+- [`sentence-transformers`](https://sbert.net) : テキストから[ベクトル埋め込み](/ai/concepts/vector-search-overview.md#vector-embedding)を生成するための事前トレーニング済みモデルを提供する Python ライブラリです。
 
 ### ステップ3．TiDB接続文字列を設定する {#step-3-configure-the-tidb-connection-string}
 
@@ -62,31 +62,31 @@ pip install sqlalchemy pymysql sentence-transformers tidb-vector python-dotenv
 
 TiDB Cloud Starterインスタンスの場合、接続文字列を取得し、環境変数を設定するには、以下の手順を実行してください。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
+3. 接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **Connection Type**は`Public`に設定されています。
+    - **Connection Type**は`Public`に設定されています。
 
-    -   **Branch**は`main`に設定されています。
+    - **Branch**は`main`に設定されています。
 
-    -   **Connect With**は`SQLAlchemy`に設定されています。
+    - **Connect With**は`SQLAlchemy`に設定されています。
 
-    -   お使いの環境に合った**Operating System**を選択してください。
+    - お使いの環境に合った**Operating System**を選択してください。
 
     > **Tip:**
     >
     > プログラムがWindows Subsystem for Linux（WSL）上で実行されている場合は、対応するLinuxディストリビューションに切り替えてください。
 
-4.  **PyMySQL**タブをクリックして、接続文字列をコピーしてください。
+4. **PyMySQL**タブをクリックして、接続文字列をコピーしてください。
 
     > **Tip:**
     >
     > まだパスワードを設定していない場合は、 **Generate Password**をクリックしてランダムなパスワードを生成してください。
 
-5.  Python プロジェクトのルートディレクトリに`.env`ファイルを作成し、接続文字列を貼り付けます。
+5. Python プロジェクトのルートディレクトリに`.env`ファイルを作成し、接続文字列を貼り付けます。
 
     以下はmacOSの例です。
 
@@ -108,11 +108,11 @@ TiDBをローカルマシンで実行している場合、 `<HOST>`はデフォ�
 
 各パラメータの説明は以下のとおりです。
 
--   `<USER>` : TiDBに接続するためのユーザー名。
--   `<PASSWORD>` : TiDBに接続するためのパスワード。
--   `<HOST>` : TiDBクラスタのホスト。
--   `<PORT>` : TiDB クラスタのポート。
--   `<DATABASE>` : 接続するデータベースの名前。
+- `<USER>` : TiDBに接続するためのユーザー名。
+- `<PASSWORD>` : TiDBに接続するためのパスワード。
+- `<HOST>` : TiDBクラスタのホスト。
+- `<PORT>` : TiDB クラスタのポート。
+- `<DATABASE>` : 接続するデータベースの名前。
 
 </div>
 
@@ -232,5 +232,5 @@ Search result ("a swimming animal"):
 
 ## 関連項目 {#see-also}
 
--   [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
--   [ベクトル検索インデックス](/ai/reference/vector-search-index.md)
+- [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
+- [ベクトル検索インデックス](/ai/reference/vector-search-index.md)

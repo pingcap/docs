@@ -39,12 +39,12 @@ Empty set (0.01 sec)
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
--   TiDBは構文`ROLLBACK AND [NO] RELEASE`を解析しますが、無視します。この機能はMySQLでトランザクションのロールバック直後にクライアントセッションを切断するために使用されます。TiDBでは、代わりにクライアントドライバの`mysql_close()`機能を使用することをお勧めします。
--   TiDBは構文`ROLLBACK AND [NO] CHAIN`を解析しますが、無視します。この機能はMySQLで使用され、現在のトランザクションがロールバックされている間に、同じ分離レベルで新しいトランザクションを即座に開始します。TiDBでは、代わりに新しいトランザクションを開始することが推奨されます。
+- TiDBは構文`ROLLBACK AND [NO] RELEASE`を解析しますが、無視します。この機能はMySQLでトランザクションのロールバック直後にクライアントセッションを切断するために使用されます。TiDBでは、代わりにクライアントドライバの`mysql_close()`機能を使用することをお勧めします。
+- TiDBは構文`ROLLBACK AND [NO] CHAIN`を解析しますが、無視します。この機能はMySQLで使用され、現在のトランザクションがロールバックされている間に、同じ分離レベルで新しいトランザクションを即座に開始します。TiDBでは、代わりに新しいトランザクションを開始することが推奨されます。
 
 ## 参照 {#see-also}
 
--   [SAVEPOINT](/sql-statements/sql-statement-savepoint.md)
--   [COMMIT](/sql-statements/sql-statement-commit.md)
--   [BEGIN](/sql-statements/sql-statement-begin.md)
--   [START TRANSACTION](/sql-statements/sql-statement-start-transaction.md)
+- [SAVEPOINT](/sql-statements/sql-statement-savepoint.md)
+- [COMMIT](/sql-statements/sql-statement-commit.md)
+- [BEGIN](/sql-statements/sql-statement-begin.md)
+- [START TRANSACTION](/sql-statements/sql-statement-start-transaction.md)

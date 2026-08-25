@@ -7,8 +7,8 @@ summary: コマンドラインツールまたは OpenAPI を使用して TiCDC �
 
 v8.1.0 以降、TiCDC は Mutual Transport Layer Security (mTLS) または TiDB のユーザー名とパスワードを使用したクライアント認証をサポートします。
 
--   mTLS 認証はトランスポートレイヤーでのセキュリティ制御を提供し、TiCDC がクライアント ID を検証できるようにします。
--   TiDB のユーザー名とパスワード認証は、アプリケーションレイヤーでセキュリティ制御を提供し、許可されたユーザーのみが TiCDC ノードを通じてログインできるようにします。
+- mTLS 認証はトランスポートレイヤーでのセキュリティ制御を提供し、TiCDC がクライアント ID を検証できるようにします。
+- TiDB のユーザー名とパスワード認証は、アプリケーションレイヤーでセキュリティ制御を提供し、許可されたユーザーのみが TiCDC ノードを通じてログインできるようにします。
 
 これら 2 つの認証方法は、さまざまなシナリオやセキュリティ要件を満たすために、単独で使用することも、組み合わせて使用することもできます。
 
@@ -18,7 +18,7 @@ v8.1.0 以降、TiCDC は Mutual Transport Layer Security (mTLS) または TiDB 
 
 ## クライアント認証にmTLSを使用する {#use-mtls-for-client-authentication}
 
-1.  TiCDCサーバーで、 `security.mtls`パラメータを`true`に設定して、mTLS 認証を有効にします。
+1. TiCDCサーバーで、 `security.mtls`パラメータを`true`に設定して、mTLS 認証を有効にします。
 
     ```toml
     [security]
@@ -26,20 +26,20 @@ v8.1.0 以降、TiCDC は Mutual Transport Layer Security (mTLS) または TiDB 
     mtls = true
     ```
 
-2.  クライアント証明書を構成します。
+2. クライアント証明書を構成します。
 
     <SimpleTab groupId="cdc">
      <div label="TiCDC command-line tool" value="cdc-cli">
 
     [TiCDC コマンドラインツール](/ticdc/ticdc-manage-changefeed.md)を使用する場合、以下の方法でクライアント証明書を指定できます。TiCDC は以下の順序でクライアント証明書の読み取りを試みます。
 
-    1.  コマンドラインパラメータ`--cert`と`--key`使用して、証明書と秘密鍵を指定します。サーバーが自己署名証明書を使用している場合は、パラメータ`--ca`を使用して信頼できる CA 証明書も指定する必要があります。
+    1. コマンドラインパラメータ`--cert`と`--key`使用して、証明書と秘密鍵を指定します。サーバーが自己署名証明書を使用している場合は、パラメータ`--ca`を使用して信頼できる CA 証明書も指定する必要があります。
 
         ```bash
         cdc cli changefeed list --cert client.crt --key client.key --ca ca.crt
         ```
 
-    2.  環境変数`TICDC_CERT_PATH` 、および`TICDC_CA_PATH` `TICDC_KEY_PATH`して、証明書、秘密キー、および CA 証明書へのパスを指定します。
+    2. 環境変数`TICDC_CERT_PATH` 、および`TICDC_CA_PATH` `TICDC_KEY_PATH`して、証明書、秘密キー、および CA 証明書へのパスを指定します。
 
         ```bash
         export TICDC_CERT_PATH=client.crt
@@ -47,7 +47,7 @@ v8.1.0 以降、TiCDC は Mutual Transport Layer Security (mTLS) または TiDB 
         export TICDC_CA_PATH=ca.crt
         ```
 
-    3.  共有資格情報ファイル`~/.ticdc/credentials`を使用して証明書を指定します。 `cdc cli configure-credentials`コマンドを使用して設定を変更できます。
+    3. 共有資格情報ファイル`~/.ticdc/credentials`を使用して証明書を指定します。 `cdc cli configure-credentials`コマンドを使用して設定を変更できます。
 
     </div>
 
@@ -64,13 +64,13 @@ v8.1.0 以降、TiCDC は Mutual Transport Layer Security (mTLS) または TiDB 
 
 ## クライアント認証にTiDBのユーザー名とパスワードを使用する {#use-tidb-username-and-password-for-client-authentication}
 
-1.  [ユーザーを作成する](/sql-statements/sql-statement-create-user.md) TiDB に追加し、ユーザーに TiCDC ノードからログインする権限を付与します。
+1. [ユーザーを作成する](/sql-statements/sql-statement-create-user.md) TiDB に追加し、ユーザーに TiCDC ノードからログインする権限を付与します。
 
     ```sql
     CREATE USER 'test'@'ticdc_ip_address' IDENTIFIED BY 'password';
     ```
 
-2.  TiCDCサーバーで、ユーザー名とパスワードの認証を有効にするために`security.client-user-required`と`security.client-allowed-user`設定します。
+2. TiCDCサーバーで、ユーザー名とパスワードの認証を有効にするために`security.client-user-required`と`security.client-allowed-user`設定します。
 
     ```toml
     [security]
@@ -80,33 +80,33 @@ v8.1.0 以降、TiCDC は Mutual Transport Layer Security (mTLS) または TiDB 
     client-allowed-user = ["test"]
     ```
 
-3.  手順 1 で作成したユーザーのユーザー名とパスワードを指定します。
+3. 手順 1 で作成したユーザーのユーザー名とパスワードを指定します。
 
     <SimpleTab groupId="cdc">
      <div label="TiCDC command-line tool" value="cdc-cli">
 
     [TiCDC コマンドラインツール](/ticdc/ticdc-manage-changefeed.md)を使用する場合、以下の方法でユーザー名とパスワードを指定できます。TiCDC は以下の順序でクライアント証明書の読み取りを試みます。
 
-    1.  コマンドラインパラメータ`--user`と`--password`を使用してユーザー名とパスワードを指定します。
+    1. コマンドラインパラメータ`--user`と`--password`を使用してユーザー名とパスワードを指定します。
 
         ```bash
         cdc cli changefeed list --user test --password password
         ```
 
-    2.  コマンドラインパラメータ`--user`を使用してユーザー名を指定します。次に、ターミナルにパスワードを入力します。
+    2. コマンドラインパラメータ`--user`を使用してユーザー名を指定します。次に、ターミナルにパスワードを入力します。
 
         ```bash
         cdc cli changefeed list --user test
         ```
 
-    3.  環境変数`TICDC_USER`と`TICDC_PASSWORD`を使用してユーザー名とパスワードを指定します。
+    3. 環境変数`TICDC_USER`と`TICDC_PASSWORD`を使用してユーザー名とパスワードを指定します。
 
         ```bash
         export TICDC_USER=test
         export TICDC_PASSWORD=password
         ```
 
-    4.  共有資格情報ファイル`~/.ticdc/credentials`を使用してユーザー名とパスワードを指定します。 `cdc cli configure-credentials`コマンドを使用して設定を変更できます。
+    4. 共有資格情報ファイル`~/.ticdc/credentials`を使用してユーザー名とパスワードを指定します。 `cdc cli configure-credentials`コマンドを使用して設定を変更できます。
 
     </div>
 

@@ -45,33 +45,33 @@ Connected Care サービスには、 **Basic** 、 **Developer** (従来の**Sta
 
 Connected Care サービスのサポートプランでは、次のようなまったく新しい機能セットが導入されています。
 
--   Connected: Clinic Service
+- Connected: Clinic Service
 
     この機能は、高度な監視および診断サービスであるClinicを提供します。このサービスは、詳細な分析と実用的な洞察に基づいて、パフォーマンスの問題を迅速に特定し、データベースを最適化し、全体的なパフォーマンスを向上させるように設計されています。詳細については、 [Connected: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)をご覧ください。
 
--   Connected: IMでのAIチャット
+- Connected: IMでのAIチャット
 
     この機能を使用すると、インスタントメッセージ（IM）ツールを介してAIアシスタントとチャットし、質問への回答をすぐに受け取ることができます。詳細については、 [Connected: IMでのAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)をご覧ください。
 
--   Connected: TiDB Cloudアラートの IM サブスクリプション
+- Connected: TiDB Cloudアラートの IM サブスクリプション
 
     この機能を使用すると、IMツール経由でアラート通知を簡単に購読でき、重要な更新情報を常に把握できます。詳細については、 [Slackで登録する](/tidb-cloud/monitor-alert-slack.md)、[Zoomで登録する](/tidb-cloud/monitor-alert-zoom.md)、[Flashdutyで登録する](/tidb-cloud/monitor-alert-flashduty.md)、[PagerDutyで登録する](/tidb-cloud/monitor-alert-pagerduty.md)、[Webhookで登録する](/tidb-cloud/monitor-alert-webhook.md)、および[Larkで登録する](/tidb-cloud/monitor-alert-lark.md)をご覧ください。
 
--   Connected: IMチケットの作成とサブスクリプションの更新
+- Connected: IMチケットの作成とサブスクリプションの更新
 
     この機能を使用すると、IMツールを通じてサポートチケットを作成し、サポートチケットの更新情報を購読できます。詳細については、 [Slack 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-slack-ticket-creation.md)と[Larkでチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-lark-ticket-creation.md)ご覧ください。
 
--   Connected: サポートチケットの IM によるやり取り
+- Connected: サポートチケットの IM によるやり取り
 
     この機能により、IMツールを介してサポートチケットを迅速に作成し、やり取りすることで、効率的なコミュニケーションを実現できます。詳細については、 [Slack経由でサポートチケットとやり取りする](/tidb-cloud/connected-slack-ticket-interaction.md)と[Lark経由でサポートチケットとやり取りする](/tidb-cloud/connected-lark-ticket-interaction.md)ご覧ください。
 
 これらの新機能により、Connected Care サービスは、より優れた接続性、よりパーソナライズされたサポート、さまざまな顧客ニーズに対応するコスト効率の高いソリューションを提供します。
 
--   新しい**Enterprise**および**Premium**プラン: Clinic の高度な監視サービス、 TiDB Cloudアラートの IM サブスクリプション、チケット更新の IM サブスクリプション、IM での AI チャット、サポートチケットの IM 対話を通じて、最新のコミュニケーション ツールと高度な AI 機能を提供します。
+- 新しい**Enterprise**および**Premium**プラン: Clinic の高度な監視サービス、 TiDB Cloudアラートの IM サブスクリプション、チケット更新の IM サブスクリプション、IM での AI チャット、サポートチケットの IM 対話を通じて、最新のコミュニケーション ツールと高度な AI 機能を提供します。
 
--   新しい**Developer**プラン:**Basic**プランと同じコミュニティ チャネル ( [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)と[Discord](https://discord.com/invite/KVRZBR2DrG) ) と[TiDB.AI](https://tidb.ai/)サポートへのアクセスに加え、直接接続とテクニカルサポートへの無制限のアクセスが提供されます。
+- 新しい**Developer**プラン:**Basic**プランと同じコミュニティ チャネル ( [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)と[Discord](https://discord.com/invite/KVRZBR2DrG) ) と[TiDB.AI](https://tidb.ai/)サポートへのアクセスに加え、直接接続とテクニカルサポートへの無制限のアクセスが提供されます。
 
--   新しい**Basic**プラン: コミュニティ チャネル ( [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)と[Discord](https://discord.com/invite/KVRZBR2DrG) ) に参加して他のコミュニティ メンバーと交流したり、 [TiDB.AI](https://tidb.ai/)を使用して技術サポートを受けることができます。
+- 新しい**Basic**プラン: コミュニティ チャネル ( [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)と[Discord](https://discord.com/invite/KVRZBR2DrG) ) に参加して他のコミュニティ メンバーと交流したり、 [TiDB.AI](https://tidb.ai/)を使用して技術サポートを受けることができます。
 
 ## Connected Careへの移行 {#transition-to-connected-care}
 

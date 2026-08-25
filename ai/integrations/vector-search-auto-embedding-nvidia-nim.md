@@ -20,14 +20,14 @@ NVIDIA NIM 上でホストされている埋め込みモデルは、独自の[NV
 
 ## bge-m3 {#bge-m3}
 
--   名前: `nvidia_nim/baai/bge-m3`
--   寸法: 1024
--   距離指標：コサイン類似度、L2
--   入力可能なテキストトークンの最大数：8,192
--   価格：NVIDIAが請求
--   TiDB Cloudでホストされています: ❌
--   鍵をご持参ください：✅
--   ドキュメント： [https://docs.api.nvidia.com/nim/reference/baai-bge-m3](https://docs.api.nvidia.com/nim/reference/baai-bge-m3)
+- 名前: `nvidia_nim/baai/bge-m3`
+- 寸法: 1024
+- 距離指標：コサイン類似度、L2
+- 入力可能なテキストトークンの最大数：8,192
+- 価格：NVIDIAが請求
+- TiDB Cloudでホストされています: ❌
+- 鍵をご持参ください：✅
+- ドキュメント： [https://docs.api.nvidia.com/nim/reference/baai-bge-m3](https://docs.api.nvidia.com/nim/reference/baai-bge-m3)
 
 例：
 
@@ -249,7 +249,7 @@ LIMIT 3;
 
 ## 関連項目 {#see-also}
 
--   [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
--   [ベクトル検索](/ai/concepts/vector-search-overview.md)
--   [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
--   [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)
+- [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
+- [ベクトル検索](/ai/concepts/vector-search-overview.md)
+- [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
+- [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)

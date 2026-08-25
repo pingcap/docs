@@ -51,9 +51,9 @@ CONSTRAINT_CATALOG: def
 
 `TIDB_CHECK_CONSTRAINTS`テーブル内のフィールドは次のように説明されます。
 
--   `CONSTRAINT_CATALOG` : 制約のカタログ。常に`def`です。
--   `CONSTRAINT_SCHEMA` : 制約のスキーマ。
--   `CONSTRAINT_NAME` : 制約の名前。
--   `CHECK_CLAUSE` : チェック制約の句。
--   `TABLE_NAME` : 制約が配置されているテーブルの名前。
--   `TABLE_ID` : 制約が配置されているテーブルの ID。
+- `CONSTRAINT_CATALOG` : 制約のカタログ。常に`def`です。
+- `CONSTRAINT_SCHEMA` : 制約のスキーマ。
+- `CONSTRAINT_NAME` : 制約の名前。
+- `CHECK_CLAUSE` : チェック制約の句。
+- `TABLE_NAME` : 制約が配置されているテーブルの名前。
+- `TABLE_ID` : 制約が配置されているテーブルの ID。

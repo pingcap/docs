@@ -47,9 +47,9 @@ TiDB Lightningは、インポート中に進行状況をローカルファイル
 
 TiDB Lightningでは、テーブルのチェックサムは、そのテーブル内の各KVペアの内容から計算される3つの数値のセットです。これらの数値はそれぞれ以下のとおりです。
 
--   KVペアの数、
--   すべてのKVペアの合計長さ、および
--   各ペアの[CRC-64-ECMA](https://en.wikipedia.org/wiki/Cyclic_redundancy_check)値のビット単位の XOR です。
+- KVペアの数、
+- すべてのKVペアの合計長さ、および
+- 各ペアの[CRC-64-ECMA](https://en.wikipedia.org/wiki/Cyclic_redundancy_check)値のビット単位の XOR です。
 
 TiDB Lightning [インポートされたデータを検証する](/tidb-lightning/tidb-lightning-faq.md#how-to-ensure-the-integrity-of-the-imported-data) 、各テーブルの[ローカル](/tidb-lightning/tidb-lightning-glossary.md#local-checksum)と[リモートチェックサム](/tidb-lightning/tidb-lightning-glossary.md#remote-checksum)を比較することで、このチェックを実行します。いずれのペアも一致しない場合、プログラムは停止します。このチェックは、 `post-restore.checksum`設定を`false`に設定することでスキップできます。
 

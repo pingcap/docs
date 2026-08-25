@@ -37,22 +37,22 @@ Records: 2  Duplicates: 0  Warnings: 0
 
 `EXPLAIN`は実際のクエリを実行しません。[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)クエリを実行し、 `EXPLAIN`情報を表示します。これは、選択された実行計画が最適ではないケースを診断するのに役立ちます。`EXPLAIN`使用例については、以下のドキュメントをご覧ください。
 
--   [インデックス](/explain-indexes.md)
--   [テーブル結合](/explain-joins.md)
--   [サブクエリ](/explain-subqueries.md)
--   [集計](/explain-aggregation.md)
--   [ビュー](/explain-views.md)
--   [パーティション](/explain-partitions.md)
+- [インデックス](/explain-indexes.md)
+- [テーブル結合](/explain-joins.md)
+- [サブクエリ](/explain-subqueries.md)
+- [集計](/explain-aggregation.md)
+- [ビュー](/explain-views.md)
+- [パーティション](/explain-partitions.md)
 
 ## EXPLAIN出力を理解する {#understand-explain-output}
 
 以下は、上記の`EXPLAIN`のステートメントの出力について説明しています。
 
--   `id` 、SQL文の実行に必要な演算子またはサブタスクの名前を表します。詳細については[オペレーターの概要](#operator-overview)を参照してください。
--   `estRows` 、TiDB が処理すると予想される行数の推定値を示します。この数値は、アクセス方法が主キーまたは一意キーに基づいている場合など、辞書情報に基づく場合もあれば、CMSketch やヒストグラムなどの統計情報に基づく場合もあります。
--   `task`作業者が作業を行っている場所を示します。詳細は[タスクの概要](#task-overview)ご覧ください。
--   `access object` 、アクセスされているテーブル、パーティション、およびインデックスを示します。また、上記の例ではインデックスの列`a`が使用されているため、インデックスの各部分も表示されます。これは、複合インデックスがある場合に役立ちます。
--   `operator info`アクセスに関する追加情報を表示します。詳細については[オペレーター情報の概要](#operator-info-overview)ご覧ください。
+- `id` 、SQL文の実行に必要な演算子またはサブタスクの名前を表します。詳細については[オペレーターの概要](#operator-overview)を参照してください。
+- `estRows` 、TiDB が処理すると予想される行数の推定値を示します。この数値は、アクセス方法が主キーまたは一意キーに基づいている場合など、辞書情報に基づく場合もあれば、CMSketch やヒストグラムなどの統計情報に基づく場合もあります。
+- `task`作業者が作業を行っている場所を示します。詳細は[タスクの概要](#task-overview)ご覧ください。
+- `access object` 、アクセスされているテーブル、パーティション、およびインデックスを示します。また、上記の例ではインデックスの列`a`が使用されているため、インデックスの各部分も表示されます。これは、複合インデックスがある場合に役立ちます。
+- `operator info`アクセスに関する追加情報を表示します。詳細については[オペレーター情報の概要](#operator-info-overview)ご覧ください。
 
 > **Note:**
 >
@@ -131,18 +131,18 @@ Records: 2  Duplicates: 0  Warnings: 0
 
 演算子とは、クエリ結果を返す際に実行される特定のステップです。テーブルスキャン（ディスクまたはTiKVブロックキャッシュ）を実行する演算子は以下のとおりです。
 
--   **TableFullScan** : テーブル全体のスキャン
--   **TableRangeScan** : 指定された範囲でテーブルをスキャンします
--   **TableRowIDScan** : RowIDに基づいてテーブルデータをスキャンします。通常、インデックス読み取り操作の後に、一致するデータ行を取得します。
--   **IndexFullScan** : テーブルデータではなくインデックスがスキャンされる点を除いて、「フルテーブルスキャン」に似ています。
--   **IndexRangeScan** : 指定された範囲でインデックスをスキャンします。
+- **TableFullScan** : テーブル全体のスキャン
+- **TableRangeScan** : 指定された範囲でテーブルをスキャンします
+- **TableRowIDScan** : RowIDに基づいてテーブルデータをスキャンします。通常、インデックス読み取り操作の後に、一致するデータ行を取得します。
+- **IndexFullScan** : テーブルデータではなくインデックスがスキャンされる点を除いて、「フルテーブルスキャン」に似ています。
+- **IndexRangeScan** : 指定された範囲でインデックスをスキャンします。
 
 TiDBは、TiKV/ TiFlashからスキャンされたデータまたは計算結果を集約します。データ集約演算子は以下のカテゴリに分類できます。
 
--   **TableReader** : TiKV の`TableFullScan`や`TableRangeScan`の基礎となる演算子によって取得されたデータを集計します。
--   **IndexReader** : TiKV の`IndexFullScan`や`IndexRangeScan`の基礎となる演算子によって取得されたデータを集計します。
--   **IndexLookUp** : まず、 `Build`側でスキャンされたRowID（TiKV内）を集計します。次に、 `Probe`側でこれらのRowIDに基づいてTiKVからデータを正確に読み取ります。`Build`側には`IndexFullScan`や`IndexRangeScan`などの演算子があり、 `Probe`側には`TableRowIDScan`演算子があります。
--   **IndexMerge** : `IndexLookUp`と同様です。`IndexMerge` `IndexLookupReader`の拡張と見なすことができます。`IndexMerge`は複数のインデックスの同時読み取りをサポートします。`Build`は多数あり、 `Probe`は1つです。`IndexMerge`の実行プロセスは`IndexLookUp`と同じです。
+- **TableReader** : TiKV の`TableFullScan`や`TableRangeScan`の基礎となる演算子によって取得されたデータを集計します。
+- **IndexReader** : TiKV の`IndexFullScan`や`IndexRangeScan`の基礎となる演算子によって取得されたデータを集計します。
+- **IndexLookUp** : まず、 `Build`側でスキャンされたRowID（TiKV内）を集計します。次に、 `Probe`側でこれらのRowIDに基づいてTiKVからデータを正確に読み取ります。`Build`側には`IndexFullScan`や`IndexRangeScan`などの演算子があり、 `Probe`側には`TableRowIDScan`演算子があります。
+- **IndexMerge** : `IndexLookUp`と同様です。`IndexMerge` `IndexLookupReader`の拡張と見なすことができます。`IndexMerge`は複数のインデックスの同時読み取りをサポートします。`Build`は多数あり、 `Probe`は1つです。`IndexMerge`の実行プロセスは`IndexLookUp`と同じです。
 
 構造はツリー構造のように見えますが、クエリの実行において子ノードが親ノードより先に完了している必要は必ずしもありません。TiDBはクエリ内並列処理をサポートしているため、より正確な表現は、子ノードが親ノード*に流れ込む*というものです。親ノード、子ノード、兄弟ノードの演算子によって、クエリの一部が並列実行される可能性*があります*。
 
@@ -154,11 +154,11 @@ TiDBは、TiKV/ TiFlashからスキャンされたデータまたは計算結果
 
 > **Note:**
 >
-> -   インデックスを使用するには、条件が*検索引数可能*でなければなりません。例えば、条件`YEAR(date_column) < 1992`はインデックスを使用できませんが、 `date_column < '1992-01-01`では使用できます。
-> -   同じタイプのデータと[文字セットと照合順序](/character-set-and-collation.md)を比較することをお勧めします。タイプが混在すると、追加の`cast`操作が必要になるか、インデックスが使用できなくなる可能性があります。
-> -   `AND` （積集合）と`OR` （和集合）を使用して、1つの列の範囲クエリ条件を組み合わせることもできます。多次元複合インデックスの場合は、複数の列で条件を使用できます。例えば、複合インデックス`(a, b, c)`の場合：
->     -   `a`同等のクエリである場合は、 `b`のクエリ範囲を計算し続けます。 `b`同等のクエリである場合は、 `c`のクエリ範囲を計算し続けます。
->     -   それ以外の場合、 `a`同等でないクエリであれば、 `a`範囲しか把握できません。
+> - インデックスを使用するには、条件が*検索引数可能*でなければなりません。例えば、条件`YEAR(date_column) < 1992`はインデックスを使用できませんが、 `date_column < '1992-01-01`では使用できます。
+> - 同じタイプのデータと[文字セットと照合順序](/character-set-and-collation.md)を比較することをお勧めします。タイプが混在すると、追加の`cast`操作が必要になるか、インデックスが使用できなくなる可能性があります。
+> - `AND` （積集合）と`OR` （和集合）を使用して、1つの列の範囲クエリ条件を組み合わせることもできます。多次元複合インデックスの場合は、複数の列で条件を使用できます。例えば、複合インデックス`(a, b, c)`の場合：
+>     - `a`同等のクエリである場合は、 `b`のクエリ範囲を計算し続けます。 `b`同等のクエリである場合は、 `c`のクエリ範囲を計算し続けます。
+>     - それ以外の場合、 `a`同等でないクエリであれば、 `a`範囲しか把握できません。
 
 ### タスクの概要 {#task-overview}
 
@@ -170,8 +170,8 @@ SQL最適化の目標の一つは、計算を可能な限りTiKVに委ねるこ�
 
 `operator info` 、どの条件をプッシュダウンできたかなどの有用な情報を表示できます。
 
--   `range: [1,1]` 、クエリのwhere句の述語（ `a = 1` ）がTiKV（タスクは`cop[tikv]` ）にプッシュダウンされたことを示しています。
--   `keep order:false` 、このクエリのセマンティクスでは TiKV が結果を順番に返す必要がないことを示しています。クエリが順序付けを必要とするように変更された場合（例えば`SELECT * FROM t WHERE a = 1 ORDER BY id` ）、この条件は`keep order:true`になります。
--   `stats:pseudo` 、 `estRows`に示されている推定値が正確ではない可能性があることを示しています。TiDB はバックグラウンド処理の一環として定期的に統計を更新します。`ANALYZE TABLE t`を実行して手動で更新することもできます。
+- `range: [1,1]` 、クエリのwhere句の述語（ `a = 1` ）がTiKV（タスクは`cop[tikv]` ）にプッシュダウンされたことを示しています。
+- `keep order:false` 、このクエリのセマンティクスでは TiKV が結果を順番に返す必要がないことを示しています。クエリが順序付けを必要とするように変更された場合（例えば`SELECT * FROM t WHERE a = 1 ORDER BY id` ）、この条件は`keep order:true`になります。
+- `stats:pseudo` 、 `estRows`に示されている推定値が正確ではない可能性があることを示しています。TiDB はバックグラウンド処理の一環として定期的に統計を更新します。`ANALYZE TABLE t`を実行して手動で更新することもできます。
 
 `EXPLAIN`文の実行後、異なる演算子は異なる情報を出力します。オプティマイザヒントを使用してオプティマイザの動作を制御し、それによって物理演算子の選択を制御できます。例えば、 `/*+ HASH_JOIN(t1, t2) */`オプティマイザが`Hash Join`アルゴリズムを使用することを意味します。詳細については、 [オプティマイザヒント](/optimizer-hints.md)を参照してください。

@@ -9,19 +9,19 @@ summary: tidbcloud_backup` リソースを使用してTiDB Cloudクラスター�
 
 `tidbcloud_backup`リソースの機能は次のとおりです。
 
--   TiDB Cloud Dedicated クラスターのバックアップを作成します。
--   TiDB Cloud Dedicated クラスターのバックアップを削除します。
+- TiDB Cloud Dedicated クラスターのバックアップを作成します。
+- TiDB Cloud Dedicated クラスターのバックアップを削除します。
 
 ## 前提条件 {#prerequisites}
 
--   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
--   このドキュメントで紹介されているバックアップと復元機能は、TiDB Cloud Starter またはTiDB Cloud Essential クラスターではご利用いただけません`tidbcloud_backup`リソースを使用するには、 TiDB Cloud Dedicated クラスターを作成してください。
+- [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
+- このドキュメントで紹介されているバックアップと復元機能は、TiDB Cloud Starter またはTiDB Cloud Essential クラスターではご利用いただけません`tidbcloud_backup`リソースを使用するには、 TiDB Cloud Dedicated クラスターを作成してください。
 
 ## `tidbcloud_backup`リソースを使用してバックアップを作成する {#create-a-backup-with-the-tidbcloud-backup-resource}
 
-1.  バックアップ用のディレクトリを作成してそこに入ります。
+1. バックアップ用のディレクトリを作成してそこに入ります。
 
-2.  `backup.tf`ファイルを作成します。
+2. `backup.tf`ファイルを作成します。
 
     例えば：
 
@@ -55,7 +55,7 @@ summary: tidbcloud_backup` リソースを使用してTiDB Cloudクラスター�
           description = "create by terraform"
         }
 
-3.  `terraform apply`コマンドを実行します。
+3. `terraform apply`コマンドを実行します。
 
         $ terraform apply
 
@@ -87,7 +87,7 @@ summary: tidbcloud_backup` リソースを使用してTiDB Cloudクラスター�
 
           Enter a value:
 
-4.  バックアップを作成するには`yes`と入力します。
+4. バックアップを作成するには`yes`と入力します。
 
     ```
       Enter a value: yes
@@ -99,7 +99,7 @@ summary: tidbcloud_backup` リソースを使用してTiDB Cloudクラスター�
 
     ```
 
-5.  `terraform state show tidbcloud_backup.${resource-name}`を使用してバックアップのステータスを確認します。
+5. `terraform state show tidbcloud_backup.${resource-name}`を使用してバックアップのステータスを確認します。
 
         $ terraform state show tidbcloud_backup.example_backup
 
@@ -116,7 +116,7 @@ summary: tidbcloud_backup` リソースを使用してTiDB Cloudクラスター�
             type             = "MANUAL"
         }
 
-6.  数分お待ちください。その後、 `terraform refersh`を使用してステータスを更新します。
+6. 数分お待ちください。その後、 `terraform refersh`を使用してステータスを更新します。
 
         $ terraform refresh
         tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]

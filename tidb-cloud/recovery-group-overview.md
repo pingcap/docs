@@ -13,9 +13,9 @@ TiDB Cloudリカバリグループを使用すると、 TiDB Cloud Dedicated ク
 
 ![Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-overview.png)
 
--   リカバリグループ: 2つのクラスタ間で複製されるデータベースのグループ
--   プライマリクラスタ: アプリケーションによってデータベースがアクティブに書き込まれるクラスタ
--   セカンダリクラスタ: データベースのレプリカが配置されているクラスタ
+- リカバリグループ: 2つのクラスタ間で複製されるデータベースのグループ
+- プライマリクラスタ: アプリケーションによってデータベースがアクティブに書き込まれるクラスタ
+- セカンダリクラスタ: データベースのレプリカが配置されているクラスタ
 
 > **Note**
 >
@@ -23,9 +23,9 @@ TiDB Cloudリカバリグループを使用すると、 TiDB Cloud Dedicated ク
 
 ## 主な機能と制限 {#key-features-and-limitations}
 
--   現在、AWS でホストされているTiDB Cloud Dedicated クラスターのみがリカバリグループをサポートしています。
--   リカバリグループは 2 つのクラスター間に確立されます。
--   リカバリグループでは、データベースの双方向レプリケーションはサポートされません。
+- 現在、AWS でホストされているTiDB Cloud Dedicated クラスターのみがリカバリグループをサポートしています。
+- リカバリグループは 2 つのクラスター間に確立されます。
+- リカバリグループでは、データベースの双方向レプリケーションはサポートされません。
 
 > **Warning**
 >
@@ -33,5 +33,5 @@ TiDB Cloudリカバリグループを使用すると、 TiDB Cloud Dedicated ク
 
 ## 次は何？ {#what-s-next}
 
--   リカバリグループの使用を開始するには、 [データベース復旧グループの作成](/tidb-cloud/recovery-group-get-started.md)を参照してください。
--   リカバリグループの使用方法については、 [データベースのフェイルオーバーと再保護](/tidb-cloud/recovery-group-failover.md)を参照してください。
+- リカバリグループの使用を開始するには、 [データベース復旧グループの作成](/tidb-cloud/recovery-group-get-started.md)を参照してください。
+- リカバリグループの使用方法については、 [データベースのフェイルオーバーと再保護](/tidb-cloud/recovery-group-failover.md)を参照してください。

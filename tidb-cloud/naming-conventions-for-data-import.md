@@ -7,8 +7,8 @@ summary: データインポート時のCSV、Parquet、 Aurora Snapshot、およ
 
 TiDB Cloudには、CSV、Parquet、 Aurora Snapshot、SQLといったファイル形式でデータをインポートできます。データが正常にインポートされるようにするには、以下の2種類のファイルを準備する必要があります。
 
--   **Schema file**。データベーススキーマファイル（オプション）とテーブルスキーマファイルを、両方ともSQL形式（ `.sql` ）で準備します。テーブルスキーマファイルが提供されていない場合は、対象データベースに該当するテーブルを事前に手動で作成する必要があります。
--   **Data file**。データインポート用の命名規則に準拠したデータファイルを用意してください。データファイル名が要件を満たしていない場合は、[**File Pattern**](#file-pattern)を使用してインポートタスクを実行することをお勧めします。そうしないと、インポートタスクはインポート対象のデータファイルをスキャンできません。
+- **Schema file**。データベーススキーマファイル（オプション）とテーブルスキーマファイルを、両方ともSQL形式（ `.sql` ）で準備します。テーブルスキーマファイルが提供されていない場合は、対象データベースに該当するテーブルを事前に手動で作成する必要があります。
+- **Data file**。データインポート用の命名規則に準拠したデータファイルを用意してください。データファイル名が要件を満たしていない場合は、[**File Pattern**](#file-pattern)を使用してインポートタスクを実行することをお勧めします。そうしないと、インポートタスクはインポート対象のデータファイルをスキャンできません。
 
 ## スキーマファイルの命名規則 {#naming-conventions-for-schema-files}
 
@@ -16,13 +16,13 @@ TiDB Cloudには、CSV、Parquet、 Aurora Snapshot、SQLといったファイ�
 
 スキーマファイルの命名規則は以下のとおりです。
 
--   データベーススキーマファイル（オプション）： `${db_name}-schema-create.sql`
--   テーブルスキーマファイル: `${db_name}.${table_name}-schema.sql`
+- データベーススキーマファイル（オプション）： `${db_name}-schema-create.sql`
+- テーブルスキーマファイル: `${db_name}.${table_name}-schema.sql`
 
 以下はデータベーススキーマファイルの例です。
 
--   名前: `import_db-schema-create.sql`
--   ファイルの内容:
+- 名前: `import_db-schema-create.sql`
+- ファイルの内容:
 
     ```sql
     CREATE DATABASE import_db;
@@ -30,8 +30,8 @@ TiDB Cloudには、CSV、Parquet、 Aurora Snapshot、SQLといったファイ�
 
 以下はテーブルスキーマファイルの例です。
 
--   名前: `import_db.test_table-schema.sql`
--   ファイルの内容:
+- 名前: `import_db.test_table-schema.sql`
+- ファイルの内容:
 
     ```sql
     CREATE TABLE test_table (
@@ -52,19 +52,19 @@ CSVファイルをインポートする際は、データファイルに以下�
 
 `${suffix}`はオプションであり、 *`xxx`*任意の数字で、以下のいずれかの形式になります。
 
--   *`.xxx`* 、例えば`.01`
--   *`._xxx_xxx_xxx`* 、例えば`._0_0_01`
--   *`_xxx_xxx_xxx`* 、例えば`_0_0_01`
+- *`.xxx`* 、例えば`.01`
+- *`._xxx_xxx_xxx`* 、例えば`._0_0_01`
+- *`_xxx_xxx_xxx`* 、例えば`_0_0_01`
 
 `${compress}`は圧縮フォーマットであり、オプションです。TiDB Cloud は、 `.gzip` 、 `.gz` 、 `.zstd` 、 `.zst` 、および`.snappy` 。
 
 例えば、以下のすべてのファイルのターゲットデータベースとテーブルは`import_db`と`test_table`です。
 
--   `import_db.test_table.csv`
--   `import_db.test_table.01.csv`
--   `import_db.test_table._0_0_01.csv`
--   `import_db.test_table_0_0_01.csv`
--   `import_db.test_table_0_0_01.csv.gz`
+- `import_db.test_table.csv`
+- `import_db.test_table.01.csv`
+- `import_db.test_table._0_0_01.csv`
+- `import_db.test_table_0_0_01.csv`
+- `import_db.test_table_0_0_01.csv.gz`
 
 > **Note:**
 >
@@ -78,8 +78,8 @@ Parquetファイルをインポートする際は、データファイルに以�
 
 例えば：
 
--   `import_db.test_table.parquet`
--   `import_db.test_table.01.parquet`
+- `import_db.test_table.parquet`
+- `import_db.test_table.01.parquet`
 
 ### Auroraのスナップショット {#aurora-snapshot}
 
@@ -87,9 +87,9 @@ Aurora Snapshot ファイルの場合、 `.parquet`フォルダー内の`${db_na
 
 例えば：
 
--   `import_db.test_table/mydata.parquet`
--   `import_db.test_table/part001/mydata.parquet`
--   `import_db.test_table/part002/mydata-part002.parquet`
+- `import_db.test_table/mydata.parquet`
+- `import_db.test_table/part001/mydata.parquet`
+- `import_db.test_table/part002/mydata-part002.parquet`
 
 ### SQL {#sql}
 
@@ -99,17 +99,17 @@ SQLファイルをインポートする際は、データファイルに以下�
 
 `${suffix}`はオプションであり、 *`xxx`*任意の数字で、以下のいずれかの形式になります。
 
--   *`.xxx`* 、例えば`.01`
--   *`._xxx_xxx_xxx`* 、例えば`._0_0_01`
--   *`_xxx_xxx_xxx`* 、例えば`_0_0_01`
+- *`.xxx`* 、例えば`.01`
+- *`._xxx_xxx_xxx`* 、例えば`._0_0_01`
+- *`_xxx_xxx_xxx`* 、例えば`_0_0_01`
 
 `${compress}`は圧縮フォーマットであり、オプションです。TiDB Cloud は、 `.gzip` 、 `.gz` 、 `.zstd` 、 `.zst` 、および`.snappy` 。
 
 例えば：
 
--   `import_db.test_table.sql`
--   `import_db.test_table.01.sql`
--   `import_db.test_table.01.sql.gz`
+- `import_db.test_table.sql`
+- `import_db.test_table.01.sql`
+- `import_db.test_table.01.sql.gz`
 
 TiDB Dumplingを使用してデフォルト設定でSQLファイルをエクスポートした場合、デフォルトで命名規則に準拠します。
 
@@ -123,5 +123,5 @@ TiDB Dumplingを使用してデフォルト設定でSQLファイルをエクス�
 
 インポートウィザードの**Destination Mapping**ステップで、 **Use TiDB file naming conventions for automatic mapping**の選択を解除し、 **Source** 、 **Target Database** 、 **Target Table**の各フィールドに入力します。**Source**フィールドには`*`および`?`ワイルドカードをサポートするファイル名パターンを指定できます。
 
--   CSV ファイルについては[ステップ4. CSVファイルをTiDB Cloudにインポートする](/tidb-cloud/import-csv-files.md#step-4-import-csv-files-to-tidb-cloud)。
--   Parquet ファイルについては、 [ステップ4. ParquetファイルをTiDB Cloudにインポートする](/tidb-cloud/import-parquet-files.md#step-4-import-parquet-files-to-tidb-cloud)。
+- CSV ファイルについては[ステップ4. CSVファイルをTiDB Cloudにインポートする](/tidb-cloud/import-csv-files.md#step-4-import-csv-files-to-tidb-cloud)。
+- Parquet ファイルについては、 [ステップ4. ParquetファイルをTiDB Cloudにインポートする](/tidb-cloud/import-parquet-files.md#step-4-import-parquet-files-to-tidb-cloud)。

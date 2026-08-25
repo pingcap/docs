@@ -15,8 +15,8 @@ Syncpoint 機能を有効にすると、 [一貫性のあるスナップショ�
 
 Syncpoint機能を有効にするには、レプリケーションタスクの作成時にchangefeed構成項目の値を`enable-sync-point`から`true`に設定します。Syncpointを有効にすると、TiCDCは以下の情報を下流のTiDBクラスターに書き込みます。
 
-1.  レプリケーション中、TiCDC は定期的に ( `sync-point-interval`で設定) アップストリームとダウンストリームの間でスナップショットを調整し、アップストリームとダウンストリームの TSO 対応をダウンストリーム`tidb_cdc.syncpoint_v1`テーブルに保存します。
-2.  レプリケーション中、TiCDC は定期的に ( `sync-point-interval`で設定) `SET GLOBAL tidb_external_ts = @@tidb_current_ts`を実行し、バックアップ クラスターにレプリケートされた一貫性のあるスナップショット ポイントを設定します。
+1. レプリケーション中、TiCDC は定期的に ( `sync-point-interval`で設定) アップストリームとダウンストリームの間でスナップショットを調整し、アップストリームとダウンストリームの TSO 対応をダウンストリーム`tidb_cdc.syncpoint_v1`テーブルに保存します。
+2. レプリケーション中、TiCDC は定期的に ( `sync-point-interval`で設定) `SET GLOBAL tidb_external_ts = @@tidb_current_ts`を実行し、バックアップ クラスターにレプリケートされた一貫性のあるスナップショット ポイントを設定します。
 
 次の TiCDC 構成例では、レプリケーションタスクの作成時に Syncpoint を有効にします。
 
@@ -64,11 +64,11 @@ select * from tidb_cdc.syncpoint_v1;
 
 前述の`syncpoint_v1`表のフィールドの説明は次のとおりです。
 
--   `ticdc_cluster_id` : このレコード内の TiCDC クラスターの ID。
--   `changefeed` : このレコード内の変更フィードのID。異なるTiCDCクラスターに同じ名前の変更フィードが存在する可能性があるため、変更フィードによって挿入された`ts-map` IDをTiCDCクラスターIDと変更フィードIDで確認する必要があります。
--   `primary_ts` : アップストリーム データベース スナップショットのタイムスタンプ。
--   `secondary_ts` : ダウンストリームデータベース スナップショットのタイムスタンプ。
--   `created_at` : このレコードが挿入された時刻。
+- `ticdc_cluster_id` : このレコード内の TiCDC クラスターの ID。
+- `changefeed` : このレコード内の変更フィードのID。異なるTiCDCクラスターに同じ名前の変更フィードが存在する可能性があるため、変更フィードによって挿入された`ts-map` IDをTiCDCクラスターIDと変更フィードIDで確認する必要があります。
+- `primary_ts` : アップストリーム データベース スナップショットのタイムスタンプ。
+- `secondary_ts` : ダウンストリームデータベース スナップショットのタイムスタンプ。
+- `created_at` : このレコードが挿入された時刻。
 
 ### ステップ2: スナップショットを構成する {#step-2-configure-snapshot}
 
@@ -94,13 +94,13 @@ select * from tidb_cdc.syncpoint_v1;
 
 ## 注記 {#notes}
 
--   チェンジフィードを作成する前に、changefeed構成項目`enable-sync-point`の値が`true`に設定されていることを確認してください。この設定によってのみ、同期ポイントが有効になり、 `ts-map`がダウンストリームに保存されます。構成項目`sync-point-interval`のデフォルト形式は`"h m s"` （例えば`"1h30m30s"`で、最小値は`"30s"`です。完全な構成情報については、 [TiCDC タスク構成ファイル](/ticdc/ticdc-changefeed-config.md)を参照してください。
--   Syncpointを使用してデータ検証を実行する場合、TiKVのガベージコレクション（GC）時間を変更する必要があります。これは、データチェック中にスナップショットに対応する履歴データがGCによって収集されないようにするためです。GC時間を1時間に変更し、チェック後に設定を復元することをお勧めします。
--   上記の例では`Datasource config`の部分のみを示しています。完全な設定については[sync-diff-inspector ユーザーガイド](/sync-diff-inspector/sync-diff-inspector-overview.md)を参照してください。
--   v6.4.0 以降では、 `SYSTEM_VARIABLES_ADMIN`または`SUPER`権限を持つ changefeed のみが TiCDC Syncpoint 機能を使用できます。
--   v8.2.0 以降、TiCDC は`primary_ts`値の生成ルールに次の調整を加えます。
+- チェンジフィードを作成する前に、changefeed構成項目`enable-sync-point`の値が`true`に設定されていることを確認してください。この設定によってのみ、同期ポイントが有効になり、 `ts-map`がダウンストリームに保存されます。構成項目`sync-point-interval`のデフォルト形式は`"h m s"` （例えば`"1h30m30s"`で、最小値は`"30s"`です。完全な構成情報については、 [TiCDC タスク構成ファイル](/ticdc/ticdc-changefeed-config.md)を参照してください。
+- Syncpointを使用してデータ検証を実行する場合、TiKVのガベージコレクション（GC）時間を変更する必要があります。これは、データチェック中にスナップショットに対応する履歴データがGCによって収集されないようにするためです。GC時間を1時間に変更し、チェック後に設定を復元することをお勧めします。
+- 上記の例では`Datasource config`の部分のみを示しています。完全な設定については[sync-diff-inspector ユーザーガイド](/sync-diff-inspector/sync-diff-inspector-overview.md)を参照してください。
+- v6.4.0 以降では、 `SYSTEM_VARIABLES_ADMIN`または`SUPER`権限を持つ changefeed のみが TiCDC Syncpoint 機能を使用できます。
+- v8.2.0 以降、TiCDC は`primary_ts`値の生成ルールに次の調整を加えます。
 
-    -   TiCDC が新しい`primary_ts`を生成するときは、その値は`sync-point-interval`の整数倍である必要があります。
-    -   TiCDCは、新しいチェンジフィードごとに初期値`primary_ts`を計算します。この初期値は、チェンジフィードの開始時刻（ `startTs` ）以上であり、 `sync-point-interval`の最小の整数倍です。
+    - TiCDC が新しい`primary_ts`を生成するときは、その値は`sync-point-interval`の整数倍である必要があります。
+    - TiCDCは、新しいチェンジフィードごとに初期値`primary_ts`を計算します。この初期値は、チェンジフィードの開始時刻（ `startTs` ）以上であり、 `sync-point-interval`の最小の整数倍です。
 
     この設定は、データレプリケーション中に異なる変更フィードの同期ポイントを揃えるために使用されます。例えば、複数の下流クラスタは、 [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)のステートメントを実行することで、同じ`primary_ts`の同期ポイントの`secondary_ts`の状態に復元することができ、下流クラスタ間でデータの一貫性を確保できます。

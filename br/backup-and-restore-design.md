@@ -9,15 +9,15 @@ summary: TiDBは、Backup & Restore（BR）とTiDB Operatorを使用したクラ
 
 各バックアップおよび復元機能のアーキテクチャの詳細については、次のドキュメントを参照してください。
 
--   完全なデータのバックアップと復元
+- 完全なデータのバックアップと復元
 
-    -   [スナップショットデータをバックアップする](/br/br-snapshot-architecture.md#process-of-backup)
-    -   [スナップショットバックアップデータを復元する](/br/br-snapshot-architecture.md#process-of-restore)
+    - [スナップショットデータをバックアップする](/br/br-snapshot-architecture.md#process-of-backup)
+    - [スナップショットバックアップデータを復元する](/br/br-snapshot-architecture.md#process-of-restore)
 
--   データ変更ログのバックアップ
+- データ変更ログのバックアップ
 
-    -   [ログバックアップ: KVデータの変更のバックアップ](/br/br-log-architecture.md#process-of-log-backup)
+    - [ログバックアップ: KVデータの変更のバックアップ](/br/br-log-architecture.md#process-of-log-backup)
 
--   ポイントインタイムリカバリ（PITR）
+- ポイントインタイムリカバリ（PITR）
 
-    -   [PITR](/br/br-log-architecture.md#process-of-pitr)
+    - [PITR](/br/br-log-architecture.md#process-of-pitr)

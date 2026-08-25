@@ -28,8 +28,8 @@ summary: シャードの小さなデータセットを MySQL から TiDB に移�
 
 移行を開始する前に、次のタスクが完了していることを確認してください。
 
--   [TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)
--   [DMワーカーに必要な権限](/dm/dm-worker-intro.md)
+- [TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)
+- [DMワーカーに必要な権限](/dm/dm-worker-intro.md)
 
 ### シャードテーブルの競合をチェックする {#check-conflicts-for-the-sharded-tables}
 
@@ -170,10 +170,10 @@ block-allow-list:           # filter or only migrate all operations of some data
 
 タスク ファイル内の`routes` 、およびその他`filters`構成の詳細については、次のドキュメントを参照してください。
 
--   [テーブルルーティング](/dm/dm-table-routing.md)
--   [ブロックと許可のテーブルリスト](/dm/dm-block-allow-table-lists.md)
--   [Binlogイベントフィルター](/filter-binlog-event.md)
--   [SQL 式を使用して特定の行の変更をフィルタリングする](/filter-dml-event.md)
+- [テーブルルーティング](/dm/dm-table-routing.md)
+- [ブロックと許可のテーブルリスト](/dm/dm-block-allow-table-lists.md)
+- [Binlogイベントフィルター](/filter-binlog-event.md)
+- [SQL 式を使用して特定の行の変更をフィルタリングする](/filter-dml-event.md)
 
 ## ステップ3. タスクを開始する {#step-3-start-the-task}
 
@@ -210,22 +210,22 @@ tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 
 Grafana またはログを通じて、移行タスクの履歴と内部運用メトリックを表示できます。
 
--   Grafana経由
+- Grafana経由
 
     TiUPを使用してDMクラスターをデプロイする際に、Prometheus、Alertmanager、Grafanaが正しくデプロイされていれば、GrafanaでDMの監視メトリクスを確認できます。具体的には、デプロイ時に指定したIPアドレスとポート番号をGrafanaに入力し、DMダッシュボードを選択してください。
 
--   ログ経由
+- ログ経由
 
     DM の実行中、DM-master、DM-worker、dmctl は、移行タスクに関する情報を含むログを出力します。各コンポーネントのログディレクトリは以下のとおりです。
 
-    -   DMマスターログディレクトリ：DMマスタープロセスパラメータ`--log-file`で指定されます。DMがTiUPを使用して展開されている場合、ログディレクトリは`/dm-deploy/dm-master-8261/log/`です。
-    -   DMワーカーログディレクトリ：DMワーカープロセスパラメータ`--log-file`で指定します。DMがTiUPを使用してデプロイされている場合、ログディレクトリは`/dm-deploy/dm-worker-8262/log/`です。
+    - DMマスターログディレクトリ：DMマスタープロセスパラメータ`--log-file`で指定されます。DMがTiUPを使用して展開されている場合、ログディレクトリは`/dm-deploy/dm-master-8261/log/`です。
+    - DMワーカーログディレクトリ：DMワーカープロセスパラメータ`--log-file`で指定します。DMがTiUPを使用してデプロイされている場合、ログディレクトリは`/dm-deploy/dm-worker-8262/log/`です。
 
 ## 参照 {#see-also}
 
--   [大規模データセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md) 。
--   [シャードテーブルからのデータのマージと移行](/dm/feature-shard-merge.md)
--   [シャード統合シナリオにおけるデータ移行のベストプラクティス](/dm/shard-merge-best-practices.md)
--   [エラーの処理](/dm/dm-error-handling.md)
--   [パフォーマンスの問題に対処する](/dm/dm-handle-performance-issues.md)
--   [FAQ](/dm/dm-faq.md)
+- [大規模データセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md) 。
+- [シャードテーブルからのデータのマージと移行](/dm/feature-shard-merge.md)
+- [シャード統合シナリオにおけるデータ移行のベストプラクティス](/dm/shard-merge-best-practices.md)
+- [エラーの処理](/dm/dm-error-handling.md)
+- [パフォーマンスの問題に対処する](/dm/dm-handle-performance-issues.md)
+- [FAQ](/dm/dm-faq.md)

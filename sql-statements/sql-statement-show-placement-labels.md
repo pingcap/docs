@@ -40,6 +40,6 @@ SHOW PLACEMENT LABELS;
 
 ## 参照 {#see-also}
 
--   [SQLにおける配置ルール](/placement-rules-in-sql.md)
--   [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
--   [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)
+- [SQLにおける配置ルール](/placement-rules-in-sql.md)
+- [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
+- [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)

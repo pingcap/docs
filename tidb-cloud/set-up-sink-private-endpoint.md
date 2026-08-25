@@ -13,16 +13,16 @@ summary: 変更フィードのプライベートエンドポイントを設定�
 
 ## 前提条件 {#prerequisites}
 
--   プライベートエンドポイント作成の権限を確認する
--   ネットワーク接続を設定する
+- プライベートエンドポイント作成の権限を確認する
+- ネットワーク接続を設定する
 
 ### 権限 {#permissions}
 
 組織内で次のいずれかのロールを持つユーザーのみが、変更フィードのプライベートエンドポイントを作成できます。
 
--   `Organization Owner`
--   `Project Owner`
--   `Project Data Access Read-Write`
+- `Organization Owner`
+- `Project Owner`
+- `Project Data Access Read-Write`
 
 TiDB Cloudのロールの詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)を参照してください。
 
@@ -35,8 +35,8 @@ TiDB Cloudのロールの詳細については、 [ユーザーロール](/tidb-
 
 changefeed ダウンストリーム サービスが AWS でホストされている場合は、次の情報を収集します。
 
--   ダウンストリーム サービスのプライベートエンドポイントサービスの名前
--   ダウンストリーム サービスがデプロイされているアベイラビリティゾーン (AZ)
+- ダウンストリーム サービスのプライベートエンドポイントサービスの名前
+- ダウンストリーム サービスがデプロイされているアベイラビリティゾーン (AZ)
 
 ダウンストリーム サービスでプライベートエンドポイントサービスが利用できない場合は、手順[ステップ 2. Kafka クラスターをプライベートリンクサービスとして公開する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)に従ってロードバランサーとプライベートリンクサービスを設定します。
 
@@ -61,15 +61,15 @@ changefeed ダウンストリーム サービスが Azure でホストされて�
 
 ## ステップ1. クラスターのネットワークページを開きます {#step-1-open-the-networking-page-for-your-cluster}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
 
-2.  [**クラスター**](https://tidbcloud.com/project/clusters)ページで、ターゲットクラスターの名前をクリックして、概要ページに移動します。
+2. [**クラスター**](https://tidbcloud.com/project/clusters)ページで、ターゲットクラスターの名前をクリックして、概要ページに移動します。
 
     > **Tip:**
     >
     > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-3.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
+3. 左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
 
 ## ステップ2. 変更フィードのプライベートエンドポイントを構成する {#step-2-configure-the-private-endpoint-for-changefeeds}
 
@@ -78,66 +78,66 @@ changefeed ダウンストリーム サービスが Azure でホストされて�
 <SimpleTab>
 <div label="AWS">
 
-1.  **Networking**ページで、 **[外部サービス用 AWS プライベートエンドポイント]**セクションの**[外部サービス用プライベートエンドポイントの作成]**をクリックします。
+1. **Networking**ページで、 **[外部サービス用 AWS プライベートエンドポイント]**セクションの**[外部サービス用プライベートエンドポイントの作成]**をクリックします。
 
-2.  **Create Private Endpoint for External Services**ダイアログで、プライベートエンドポイントの名前を入力します。
+2. **Create Private Endpoint for External Services**ダイアログで、プライベートエンドポイントの名前を入力します。
 
-3.  リマインダーに従って、 TiDB Cloudの[AWS プリンシパル](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts)にエンドポイントの作成を承認します。
+3. リマインダーに従って、 TiDB Cloudの[AWS プリンシパル](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts)にエンドポイントの作成を承認します。
 
-4.  セクション[ネットワーク](#network)で収集した**Endpoint Service Name**を入力します。
+4. セクション[ネットワーク](#network)で収集した**Endpoint Service Name**を入力します。
 
-5.  **Number of AZs**を選択します。AZ の数と AZ ID が Kafka のデプロイメントと一致していることを確認してください。
+5. **Number of AZs**を選択します。AZ の数と AZ ID が Kafka のデプロイメントと一致していることを確認してください。
 
-6.  このプライベートエンドポイントが Apache Kafka 用に作成される場合は、 **Kafka 用のアドバタイズドリスナーを構成する**チェックボックスを選択します。
+6. このプライベートエンドポイントが Apache Kafka 用に作成される場合は、 **Kafka 用のアドバタイズドリスナーを構成する**チェックボックスを選択します。
 
-7.  **TiDB Managed**ドメインまたは**カスタム**ドメインのいずれかを使用して、Kafka のアドバタイズされたリスナーを構成します。
+7. **TiDB Managed**ドメインまたは**カスタム**ドメインのいずれかを使用して、Kafka のアドバタイズされたリスナーを構成します。
 
-    -   アドバタイズされたリスナーに**TiDB Managed**ドメインを使用するには、 **Domain Pattern**フィールドに一意の文字列を入力し、 **Generate**をクリックします。TiDB は、各アベイラビリティゾーンのサブドメインを持つブローカーアドレスを生成します。
-    -   アドバタイズされたリスナーに独自の**Custom**ドメインを使用するには、ドメイン タイプを**Custom**に切り替え、 **Custom Domain**フィールドにルート ドメインを入力し、**Check**をクリックして、各アベイラビリティーゾーンのブローカー サブドメインを指定します。
+    - アドバタイズされたリスナーに**TiDB Managed**ドメインを使用するには、 **Domain Pattern**フィールドに一意の文字列を入力し、 **Generate**をクリックします。TiDB は、各アベイラビリティゾーンのサブドメインを持つブローカーアドレスを生成します。
+    - アドバタイズされたリスナーに独自の**Custom**ドメインを使用するには、ドメイン タイプを**Custom**に切り替え、 **Custom Domain**フィールドにルート ドメインを入力し、**Check**をクリックして、各アベイラビリティーゾーンのブローカー サブドメインを指定します。
 
-8.  **Create**をクリックして構成を検証し、プライベートエンドポイントを作成します。
+8. **Create**をクリックして構成を検証し、プライベートエンドポイントを作成します。
 
 </div>
 
 <div label="Google Cloud">
 
-1.  **Networking**ページで、 **[外部サービス用 Google Cloud プライベートエンドポイント]**セクションの**[外部サービス用プライベートエンドポイントの作成]**をクリックします。
+1. **Networking**ページで、 **[外部サービス用 Google Cloud プライベートエンドポイント]**セクションの**[外部サービス用プライベートエンドポイントの作成]**をクリックします。
 
-2.  **Create Private Endpoint for External Services**ダイアログで、プライベートエンドポイントの名前を入力します。
+2. **Create Private Endpoint for External Services**ダイアログで、プライベートエンドポイントの名前を入力します。
 
-3.  リマインダーに従って、 TiDB Cloudの[Google Cloud プロジェクト](https://cloud.google.com/resource-manager/docs/creating-managing-projects)にエンドポイントの作成を事前承認するよう許可するか、エンドポイント接続要求を受け取ったら手動で承認します。
+3. リマインダーに従って、 TiDB Cloudの[Google Cloud プロジェクト](https://cloud.google.com/resource-manager/docs/creating-managing-projects)にエンドポイントの作成を事前承認するよう許可するか、エンドポイント接続要求を受け取ったら手動で承認します。
 
-4.  セクション[ネットワーク](#network)で収集した**Service Attachment**を入力します。
+4. セクション[ネットワーク](#network)で収集した**Service Attachment**を入力します。
 
-5.  このプライベートエンドポイントが Apache Kafka 用に作成される場合は、 **Kafka 用のアドバタイズドリスナーを構成する**チェックボックスを選択します。
+5. このプライベートエンドポイントが Apache Kafka 用に作成される場合は、 **Kafka 用のアドバタイズドリスナーを構成する**チェックボックスを選択します。
 
-6.  **TiDB Managed**ドメインまたは**カスタム**ドメインのいずれかを使用して、Kafka のアドバタイズされたリスナーを構成します。
+6. **TiDB Managed**ドメインまたは**カスタム**ドメインのいずれかを使用して、Kafka のアドバタイズされたリスナーを構成します。
 
-    -   アドバタイズされたリスナーに**TiDB Managed**ドメインを使用するには、 **Domain Pattern**フィールドに一意の文字列を入力し、 **Generate**をクリックします。TiDB は、各アベイラビリティゾーンのサブドメインを持つブローカーアドレスを生成します。
-    -   アドバタイズされたリスナーに独自の**Custom**ドメインを使用するには、ドメイン タイプを**Custom**に切り替え、 **Custom Domain**フィールドにルート ドメインを入力し、**Check**をクリックして、各アベイラビリティーゾーンのブローカー サブドメインを指定します。
+    - アドバタイズされたリスナーに**TiDB Managed**ドメインを使用するには、 **Domain Pattern**フィールドに一意の文字列を入力し、 **Generate**をクリックします。TiDB は、各アベイラビリティゾーンのサブドメインを持つブローカーアドレスを生成します。
+    - アドバタイズされたリスナーに独自の**Custom**ドメインを使用するには、ドメイン タイプを**Custom**に切り替え、 **Custom Domain**フィールドにルート ドメインを入力し、**Check**をクリックして、各アベイラビリティーゾーンのブローカー サブドメインを指定します。
 
-7.  **Create**をクリックして構成を検証し、プライベートエンドポイントを作成します。
+7. **Create**をクリックして構成を検証し、プライベートエンドポイントを作成します。
 
 </div>
 
 <div label="Azure">
 
-1.  **Networking**ページで、 **[外部サービス用 Azure プライベートエンドポイント]**セクションの**[外部サービス用プライベートエンドポイントの作成]**をクリックします。
+1. **Networking**ページで、 **[外部サービス用 Azure プライベートエンドポイント]**セクションの**[外部サービス用プライベートエンドポイントの作成]**をクリックします。
 
-2.  **Create Private Endpoint for External Services**ダイアログで、プライベートエンドポイントの名前を入力します。
+2. **Create Private Endpoint for External Services**ダイアログで、プライベートエンドポイントの名前を入力します。
 
-3.  変更フィードを作成する前に、リマインダーに従って、 TiDB Cloudの Azure サブスクリプションを承認するか、エイリアスを持つすべてのユーザーが Private Link サービスにアクセスできるようにしてください。Private Link サービスの可視性に関する詳細については、Azure ドキュメントの[制御サービスの公開](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview#control-service-exposure)を参照してください。
+3. 変更フィードを作成する前に、リマインダーに従って、 TiDB Cloudの Azure サブスクリプションを承認するか、エイリアスを持つすべてのユーザーが Private Link サービスにアクセスできるようにしてください。Private Link サービスの可視性に関する詳細については、Azure ドキュメントの[制御サービスの公開](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview#control-service-exposure)を参照してください。
 
-4.  セクション[ネットワーク](#network)で収集した**プライベートリンクサービスのエイリアス**を入力します。
+4. セクション[ネットワーク](#network)で収集した**プライベートリンクサービスのエイリアス**を入力します。
 
-5.  このプライベートエンドポイントが Apache Kafka 用に作成される場合は、 **Kafka 用のアドバタイズドリスナーを構成する**チェックボックスを選択します。
+5. このプライベートエンドポイントが Apache Kafka 用に作成される場合は、 **Kafka 用のアドバタイズドリスナーを構成する**チェックボックスを選択します。
 
-6.  **TiDB Managed**ドメインまたは**カスタム**ドメインのいずれかを使用して、Kafka のアドバタイズされたリスナーを構成します。
+6. **TiDB Managed**ドメインまたは**カスタム**ドメインのいずれかを使用して、Kafka のアドバタイズされたリスナーを構成します。
 
-    -   アドバタイズされたリスナーに**TiDB Managed**ドメインを使用するには、 **Domain Pattern**フィールドに一意の文字列を入力し、 **Generate**をクリックします。TiDB は、各アベイラビリティゾーンのサブドメインを持つブローカーアドレスを生成します。
-    -   アドバタイズされたリスナーに独自の**Custom**ドメインを使用するには、ドメイン タイプを**Custom**に切り替え、 **Custom Domain**フィールドにルート ドメインを入力し、**Check**をクリックして、各アベイラビリティーゾーンのブローカー サブドメインを指定します。
+    - アドバタイズされたリスナーに**TiDB Managed**ドメインを使用するには、 **Domain Pattern**フィールドに一意の文字列を入力し、 **Generate**をクリックします。TiDB は、各アベイラビリティゾーンのサブドメインを持つブローカーアドレスを生成します。
+    - アドバタイズされたリスナーに独自の**Custom**ドメインを使用するには、ドメイン タイプを**Custom**に切り替え、 **Custom Domain**フィールドにルート ドメインを入力し、**Check**をクリックして、各アベイラビリティーゾーンのブローカー サブドメインを指定します。
 
-7.  **Create**をクリックして構成を検証し、プライベートエンドポイントを作成します。
+7. **Create**をクリックして構成を検証し、プライベートエンドポイントを作成します。
 
 </div>
 </SimpleTab>

@@ -106,8 +106,8 @@ TableSample ::=
 
 > **Note:**
 >
-> -   バージョン 8.5.6 以降、TiDB は`FOR UPDATE OF`句でテーブルエイリアスの使用をサポートしています。下位互換性を維持するために、エイリアスが定義されている場合でもベース テーブル名を参照できますが、明示的なエイリアスの使用を推奨する警告が表示されます。クエリが異なるデータベースにまたがる同じ名前の複数のテーブル (たとえば`FROM db1.t, db2.t FOR UPDATE OF t` ) に関係する場合、TiDB は現在のデータベース コンテキストではなく、 `FROM`句の順序に基づいて、対象テーブルを左から右に照合するようになりました。曖昧さを避けるため、 `FOR UPDATE OF`句でデータベース名を指定するか、エイリアスを使用することをお勧めします。
-> -   v6.6.0以降、TiDBは[リソース制御](/tidb-resource-control-ru-groups.md)サポートしています。この機能を使用すると、異なるリソースグループで異なる優先度のSQLステートメントを実行できます。これらのリソースグループに適切なクォータと優先度を設定することで、異なる優先度のSQLステートメントのスケジューリングをより適切に制御できます。リソース制御が有効になっている場合、ステートメントの優先度（ `HIGH_PRIORITY` ）は適用されなくなります。 を使用して、異なるSQLステートメントの[リソース制御](/tidb-resource-control-ru-groups.md)使用量を管理することをお勧めします。
+> - バージョン 8.5.6 以降、TiDB は`FOR UPDATE OF`句でテーブルエイリアスの使用をサポートしています。下位互換性を維持するために、エイリアスが定義されている場合でもベース テーブル名を参照できますが、明示的なエイリアスの使用を推奨する警告が表示されます。クエリが異なるデータベースにまたがる同じ名前の複数のテーブル (たとえば`FROM db1.t, db2.t FOR UPDATE OF t` ) に関係する場合、TiDB は現在のデータベース コンテキストではなく、 `FROM`句の順序に基づいて、対象テーブルを左から右に照合するようになりました。曖昧さを避けるため、 `FOR UPDATE OF`句でデータベース名を指定するか、エイリアスを使用することをお勧めします。
+> - v6.6.0以降、TiDBは[リソース制御](/tidb-resource-control-ru-groups.md)サポートしています。この機能を使用すると、異なるリソースグループで異なる優先度のSQLステートメントを実行できます。これらのリソースグループに適切なクォータと優先度を設定することで、異なる優先度のSQLステートメントのスケジューリングをより適切に制御できます。リソース制御が有効になっている場合、ステートメントの優先度（ `HIGH_PRIORITY` ）は適用されなくなります。 を使用して、異なるSQLステートメントの[リソース制御](/tidb-resource-control-ru-groups.md)使用量を管理することをお勧めします。
 
 ## 例 {#examples}
 
@@ -160,14 +160,14 @@ mysql> SELECT AVG(s_quantity), COUNT(s_quantity) FROM stock;
 
 > **Note:**
 >
-> -   この記述はTiDB Self-Managedにのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
-> -   このステートメントは、Amazon S3 や GCS などの[外部ストレージ](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)へのクエリ結果の書き込みをサポートしていません。
+> - この記述はTiDB Self-Managedにのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
+> - このステートメントは、Amazon S3 や GCS などの[外部ストレージ](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)へのクエリ結果の書き込みをサポートしていません。
 
 ステートメントでは、以下の句を使用して出力ファイルの形式を指定できます。
 
--   `FIELDS TERMINATED BY` : ファイル内のフィールド区切り文字を指定します。たとえば、 `','`と指定するとカンマ区切り値 (CSV) が出力され、 `'\t'`と指定するとタブ区切り値 (TSV) が出力されます。
--   `FIELDS ENCLOSED BY` : ファイル内の各フィールドを囲む文字を指定します。
--   `LINES TERMINATED BY` : ファイル内の行末文字を指定します。特定の文字で行を終了したい場合に使用します。
+- `FIELDS TERMINATED BY` : ファイル内のフィールド区切り文字を指定します。たとえば、 `','`と指定するとカンマ区切り値 (CSV) が出力され、 `'\t'`と指定するとタブ区切り値 (TSV) が出力されます。
+- `FIELDS ENCLOSED BY` : ファイル内の各フィールドを囲む文字を指定します。
+- `LINES TERMINATED BY` : ファイル内の行末文字を指定します。特定の文字で行を終了したい場合に使用します。
 
 `t`テーブルがあり、以下の3つの列があると仮定します。
 
@@ -229,14 +229,14 @@ Query OK, 3 rows affected (0.00 sec)
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
--   構文`SELECT ... INTO @variable`はサポートされていません。
--   構文`SELECT ... INTO DUMPFILE`はサポートされていません。
--   構文`SELECT .. GROUP BY expr`は、 MySQL 5.7のように`GROUP BY expr ORDER BY expr`を暗示しません。TiDB は代わりに MySQL 8.0 の動作に一致し、デフォルトの順序を暗示しません。
--   `SELECT ... TABLESAMPLE ...`という構文は、他のデータベースシステムや[ISO/IEC 9075-2](https://standards.iso.org/iso-iec/9075/-2/ed-6/en/)規格との互換性のために設計された TiDB 拡張機能ですが、現在 MySQL ではサポートされていません。
+- 構文`SELECT ... INTO @variable`はサポートされていません。
+- 構文`SELECT ... INTO DUMPFILE`はサポートされていません。
+- 構文`SELECT .. GROUP BY expr`は、 MySQL 5.7のように`GROUP BY expr ORDER BY expr`を暗示しません。TiDB は代わりに MySQL 8.0 の動作に一致し、デフォルトの順序を暗示しません。
+- `SELECT ... TABLESAMPLE ...`という構文は、他のデータベースシステムや[ISO/IEC 9075-2](https://standards.iso.org/iso-iec/9075/-2/ed-6/en/)規格との互換性のために設計された TiDB 拡張機能ですが、現在 MySQL ではサポートされていません。
 
 ## 参照 {#see-also}
 
--   [INSERT](/sql-statements/sql-statement-insert.md)
--   [DELETE](/sql-statements/sql-statement-delete.md)
--   [UPDATE](/sql-statements/sql-statement-update.md)
--   [REPLACE](/sql-statements/sql-statement-replace.md)
+- [INSERT](/sql-statements/sql-statement-insert.md)
+- [DELETE](/sql-statements/sql-statement-delete.md)
+- [UPDATE](/sql-statements/sql-statement-update.md)
+- [REPLACE](/sql-statements/sql-statement-replace.md)

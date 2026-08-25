@@ -7,10 +7,10 @@ summary: 演算子の優先順位、比較関数と演算子、論理演算子�
 
 このドキュメントでは、演算子の優先順位、比較関数と演算子、論理演算子、および代入演算子について説明します。
 
--   [演算子の優先順位](#operator-precedence)
--   [比較関数と演算子](#comparison-functions-and-operators)
--   [論理演算子](#logical-operators)
--   [代入演算子](#assignment-operators)
+- [演算子の優先順位](#operator-precedence)
+- [比較関数と演算子](#comparison-functions-and-operators)
+- [論理演算子](#logical-operators)
+- [代入演算子](#assignment-operators)
 
 | 名前                                                                                                         | 説明                                                                                                                                                                   |
 | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -21,7 +21,7 @@ summary: 演算子の優先順位、比較関数と演算子、論理演算子�
 | [BINARY](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#operator_binary)                        | 文字列をバイナリ文字列に変換する                                                                                                                                                     |
 | [＆](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-and)                       | ビット AND                                                                                                                                                               |
 | [〜](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-invert)                    | ビット NOT                                                                                                                                                                |
-| [|](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-or)                        | ビット OR                                                                                                                                                                |
+| [|](<https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-or>)                        | ビット OR                                                                                                                                                                |
 | [^](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-xor)                       | ビット XOR                                                                                                                                                            |
 | [CASE](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#operator_case)                    | ケース演算子                                                                                                                                                               |
 | [DIV](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_div)                       | 整数除算                                                                                                                                                                 |
@@ -48,7 +48,7 @@ summary: 演算子の優先順位、比較関数と演算子、論理演算子�
 | [!=, `&lt;&gt;`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-equal)     | 等しくない演算子                                                                                                                                                             |
 | [NOT LIKE](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_not-like)       | 単純なパターンマッチングの否定                                                                                                                                                      |
 | [NOT REGEXP](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_not-regexp)                        | REGEXPの否定                                                                                                                                                            |
-| [OR, ||](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_or)                       | 論理和                                                                                                                                                                  |
+| [OR, ||](<https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_or>)                       | 論理和                                                                                                                                                                  |
 | [+](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_plus)                       | 加算演算子                                                                                                                                                                |
 | [REGEXP](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp)                                | 正規表現を使用したパターンマッチング                                                                                                                                                   |
 | [&gt;&gt;](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_right-shift)                | 右シフト                                                                                                                                                                 |
@@ -59,7 +59,7 @@ summary: 演算子の優先順位、比較関数と演算子、論理演算子�
 
 ## サポートされていない演算子 {#unsupported-operators}
 
--   [`SOUNDS LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#operator_sounds-like)
+- [`SOUNDS LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#operator_sounds-like)
 
 ## 演算子の優先順位 {#operator-precedence}
 
@@ -124,7 +124,7 @@ OR, ||
 | -------------------------------------------------------------------------------------- | -------- |
 | [AND, &&](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_and) | 論理積      |
 | [NOT](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_not)   | 値を否定する  |
-| [OR, ||](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_or)   | 論理和      |
+| [OR, ||](<https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_or>)   | 論理和      |
 | [XOR](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_xor)  | 論理排他的論理和 |
 
 詳細は[MySQL の GROUP BY の扱い](https://dev.mysql.com/doc/refman/8.0/en/group-by-handling.html)参照。
@@ -140,4 +140,4 @@ OR, ||
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
--   MySQL は`ILIKE`演算子をサポートしていません。
+- MySQL は`ILIKE`演算子をサポートしていません。

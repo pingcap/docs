@@ -9,22 +9,22 @@ summary: TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにさ
 
 > **Tip:**
 >
-> -   TiDB Cloud Dedicatedクラスターに接続する方法については、 [TiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
-> -   このドキュメントでは、TiDB Cloud StarterおよびTiDB Cloud Essentialのネットワーク接続方法について説明します。特定のツール、ドライバ、または ORM を介して TiDB に接続する方法については、 [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)を参照してください。
+> - TiDB Cloud Dedicatedクラスターに接続する方法については、 [TiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
+> - このドキュメントでは、TiDB Cloud StarterおよびTiDB Cloud Essentialのネットワーク接続方法について説明します。特定のツール、ドライバ、または ORM を介して TiDB に接続する方法については、 [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)を参照してください。
 
 ## ネットワーク接続方法 {#network-connection-methods}
 
 TiDB Cloud上にTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスが作成されたら、以下のいずれかの方法で接続できます。
 
--   直接接続
+- 直接接続
 
     直接接続とは、TCP を介した MySQL ネイティブ接続システムのことです。MySQL 接続をサポートするツールであれば、MySQL などを使用してTiDB Cloud StarterまたはEssential [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)に接続できます。 。
 
--   [Data Service（PREVIEW）](/tidb-cloud/data-service-overview.md)
+- [Data Service（PREVIEW）](/tidb-cloud/data-service-overview.md)
 
     TiDB CloudにはData Service機能があり、カスタムAPIエンドポイントを使用してHTTPSリクエスト経由でAWS上でホストされているTiDB Cloud Starterインスタンスに接続できます。直接接続とは異なり、Data Serviceは生のSQLではなくRESTful APIを介してTiDB Cloud StarterまたはEssentialインスタンスのデータにアクセスします。
 
--   [サーバーレスDriver（PREVIEW）](/develop/serverless-driver.md)
+- [サーバーレスDriver（PREVIEW）](/develop/serverless-driver.md)
 
     TiDB CloudはJavaScript用のサーバーレスドライバを提供しており、これにより、エッジ環境にあるTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに、直接接続時と同様の操作感で接続できます。
 
@@ -40,11 +40,11 @@ TiDB Cloud上にTiDB Cloud StarterまたはTiDB Cloud Essentialインスタン�
 
 TiDB Cloud StarterとTiDB Cloud Essentialには、2種類のネットワーク接続タイプがあります。
 
--   [プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)(推奨)
+- [プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)(推奨)
 
     プライベートエンドポイント接続は、VPC内のSQLクライアントがAWS PrivateLink経由でサービスに安全にアクセスできるようにするプライベートエンドポイントを提供します。AWS PrivateLinkは、簡素化されたネットワーク管理で、データベースサービスへの高度に安全な一方向アクセスを提供します。
 
--   [公開エンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)
+- [公開エンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)
 
     標準接続では公開エンドポイントが提供されるため、ノートパソコンからSQLクライアントを介してTiDB Cloud StarterまたはEssentialインスタンスに接続できます。
 

@@ -17,18 +17,18 @@ TiDB は、特別なクライアントやドライバーを使用せずに、標
 
 > **Note:**
 >
-> -   データが更新または削除された場合でも、SQL インターフェースを使用してその履歴バージョンを読み取ることができます。
-> -   履歴データを読み取る場合、TiDB は、現在のテーブル構造が異なっていても、古いテーブル構造を持つデータを返します。
+> - データが更新または削除された場合でも、SQL インターフェースを使用してその履歴バージョンを読み取ることができます。
+> - 履歴データを読み取る場合、TiDB は、現在のテーブル構造が異なっていても、古いテーブル構造を持つデータを返します。
 
 ## TiDBが履歴バージョンからデータを読み取る方法 {#how-tidb-reads-data-from-history-versions}
 
 [`tidb_snapshot`](/system-variables.md#tidb_snapshot)のシステム変数は、履歴データの読み取りをサポートするために導入されました。`tidb_snapshot`の変数について：
 
--   変数は`SESSION`スコープ内で有効です。
--   その値は`SET`ステートメントを使用して変更できます。
--   変数のデータ型はテキストです。
--   この変数はTSO（Timestamp Oracle）とdatetimeを受け入れます。TSOはPDから取得される、グローバルに一意なタイムサービスです。受け入れられるdatetimeの形式は「2016-10-08 16:45:26.999」です。通常、datetimeは秒単位の精度で設定できます（例：「2016-10-08 16:45:26」）。
--   変数が設定されると、TiDBはその値をタイムスタンプとしてスナップショットを作成します。これはデータ構造のみを対象としており、オーバーヘッドは発生しません。その後、すべての`SELECT`操作はこのスナップショットからデータを読み取ります。
+- 変数は`SESSION`スコープ内で有効です。
+- その値は`SET`ステートメントを使用して変更できます。
+- 変数のデータ型はテキストです。
+- この変数はTSO（Timestamp Oracle）とdatetimeを受け入れます。TSOはPDから取得される、グローバルに一意なタイムサービスです。受け入れられるdatetimeの形式は「2016-10-08 16:45:26.999」です。通常、datetimeは秒単位の精度で設定できます（例：「2016-10-08 16:45:26」）。
+- 変数が設定されると、TiDBはその値をタイムスタンプとしてスナップショットを作成します。これはデータ構造のみを対象としており、オーバーヘッドは発生しません。その後、すべての`SELECT`操作はこのスナップショットからデータを読み取ります。
 
 > **Note:**
 >
@@ -44,12 +44,12 @@ TiDBでは、ガベージコレクション（GC）が定期的に実行され�
 
 以下の点に特に注意してください。
 
--   [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) : このシステム変数は、以前の変更の保持時間を構成するために使用されます (デフォルト: `10m0s` )。
--   `SELECT * FROM mysql.tidb WHERE variable_name = 'tikv_gc_safe_point'`の出力。これは、履歴データを読み取れる現在の`safePoint`です。ガベージコレクションプロセスが実行されるたびに更新されます。
+- [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) : このシステム変数は、以前の変更の保持時間を構成するために使用されます (デフォルト: `10m0s` )。
+- `SELECT * FROM mysql.tidb WHERE variable_name = 'tikv_gc_safe_point'`の出力。これは、履歴データを読み取れる現在の`safePoint`です。ガベージコレクションプロセスが実行されるたびに更新されます。
 
 ## 例 {#example}
 
-1.  初期段階では、テーブルを作成し、いくつかの行のデータを挿入します。
+1. 初期段階では、テーブルを作成し、いくつかの行のデータを挿入します。
 
     ```sql
     mysql> create table t (c int);
@@ -59,7 +59,7 @@ TiDBでは、ガベージコレクション（GC）が定期的に実行され�
     Query OK, 3 rows affected (0.00 sec)
     ```
 
-2.  表内のデータを表示する。
+2. 表内のデータを表示する。
 
     ```sql
     mysql> select * from t;
@@ -73,7 +73,7 @@ TiDBでは、ガベージコレクション（GC）が定期的に実行され�
     3 rows in set (0.00 sec)
     ```
 
-3.  テーブルのタイムスタンプを表示する。
+3. テーブルのタイムスタンプを表示する。
 
     ```sql
     mysql> select now();
@@ -85,14 +85,14 @@ TiDBでは、ガベージコレクション（GC）が定期的に実行され�
     1 row in set (0.00 sec)
     ```
 
-4.  1 行のデータを更新します。
+4. 1 行のデータを更新します。
 
     ```sql
     mysql> update t set c=22 where c=2;
     Query OK, 1 row affected (0.00 sec)
     ```
 
-5.  データが更新されていることを確認します。
+5. データが更新されていることを確認します。
 
     ```sql
     mysql> select * from t;
@@ -106,7 +106,7 @@ TiDBでは、ガベージコレクション（GC）が定期的に実行され�
     3 rows in set (0.00 sec)
     ```
 
-6.  スコープがセッションである`tidb_snapshot`変数を設定します。この変数は、値の直前のバージョンを読み取れるように設定されます。
+6. スコープがセッションである`tidb_snapshot`変数を設定します。この変数は、値の直前のバージョンを読み取れるように設定されます。
 
     > **Note:**
     >
@@ -135,7 +135,7 @@ TiDBでは、ガベージコレクション（GC）が定期的に実行され�
     3 rows in set (0.00 sec)
     ```
 
-7.  変数`tidb_snapshot` "" (空の文字列) に設定すると、最新バージョンからデータを読み取ることができます。
+7. 変数`tidb_snapshot` "" (空の文字列) に設定すると、最新バージョンからデータを読み取ることができます。
 
     ```sql
     mysql> set @@tidb_snapshot="";
@@ -172,6 +172,6 @@ SET GLOBAL tidb_gc_life_time="60m";
 
 以前のバージョンからデータを復元するには、次のいずれかの方法を使用できます。
 
--   単純なケースでは、変数`tidb_snapshot`を設定した後に[`SELECT`](/sql-statements/sql-statement-select.md)を使用して出力をコピーして貼り付けるか、 `SELECT ... INTO OUTFILE`を使用し、後で[`LOAD DATA`](/sql-statements/sql-statement-load-data.md)を使用してデータをインポートします。
+- 単純なケースでは、変数`tidb_snapshot`を設定した後に[`SELECT`](/sql-statements/sql-statement-select.md)を使用して出力をコピーして貼り付けるか、 `SELECT ... INTO OUTFILE`を使用し、後で[`LOAD DATA`](/sql-statements/sql-statement-load-data.md)を使用してデータをインポートします。
 
--   履歴スナップショットをエクスポートするには[Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-historical-data-snapshots-of-tidb)を使用します。Dumplingは、より大きなデータセットのエクスポートに適しています。
+- 履歴スナップショットをエクスポートするには[Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-historical-data-snapshots-of-tidb)を使用します。Dumplingは、より大きなデータセットのエクスポートに適しています。

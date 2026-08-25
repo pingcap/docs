@@ -52,5 +52,5 @@ SELECT * FROM SESSION_VARIABLES ORDER BY variable_name LIMIT 10;
 
 `SESSION_VARIABLES`表の列の説明は次のとおりです。
 
--   `VARIABLE_NAME` : データベース内のセッションレベル変数の名前。
--   `VARIABLE_VALUE` : データベース内のセッションレベルの変数の値。
+- `VARIABLE_NAME` : データベース内のセッションレベル変数の名前。
+- `VARIABLE_VALUE` : データベース内のセッションレベルの変数の値。

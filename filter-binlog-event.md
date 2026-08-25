@@ -7,10 +7,10 @@ summary: データを移行するときにbinlogイベントをフィルター�
 
 このドキュメントでは、DMを使用して継続的な増分データレプリケーションを実行する際に、 binlogイベントをフィルタリングする方法について説明します。レプリケーションの詳細な手順については、シナリオごとに以下のドキュメントを参照してください。
 
--   [小規模データセットをMySQLからTiDBに移行する](/migrate-small-mysql-to-tidb.md)
--   [大規模データセットをMySQLからTiDBに移行する](/migrate-large-mysql-to-tidb.md)
--   [小さなデータセットの MySQL シャードを TiDB に移行してマージする](/migrate-small-mysql-shards-to-tidb.md)
--   [大規模データセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
+- [小規模データセットをMySQLからTiDBに移行する](/migrate-small-mysql-to-tidb.md)
+- [大規模データセットをMySQLからTiDBに移行する](/migrate-large-mysql-to-tidb.md)
+- [小さなデータセットの MySQL シャードを TiDB に移行してマージする](/migrate-small-mysql-shards-to-tidb.md)
+- [大規模データセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
 
 ## コンフィグレーション {#configuration}
 
@@ -26,9 +26,9 @@ filters:
     action: Ignore
 ```
 
--   `schema-pattern` / `table-pattern` : 一致するスキーマまたはテーブルをフィルターします
+- `schema-pattern` / `table-pattern` : 一致するスキーマまたはテーブルをフィルターします
 
--   `events` : binlogイベントをフィルタリングします。サポートされているイベントは以下の表のとおりです。
+- `events` : binlogイベントをフィルタリングします。サポートされているイベントは以下の表のとおりです。
 
     | イベント         | カテゴリ | 説明                |
     | ------------ | ---- | ----------------- |
@@ -51,19 +51,19 @@ filters:
     | drop index    | DDL  | インデックス削除イベント      |
     | alter table    | DDL  | テーブル変更イベント        |
 
--   `sql-pattern` : 指定されたDDL SQL文をフィルタリングします。マッチングルールでは正規表現の使用がサポートされています。
+- `sql-pattern` : 指定されたDDL SQL文をフィルタリングします。マッチングルールでは正規表現の使用がサポートされています。
 
--   `action` ： `Do`または`Ignore`
+- `action` ： `Do`または`Ignore`
 
-    -   `Do` : 許可リスト。以下の2つの条件のいずれかを満たす場合、 binlogイベントは複製されます。
+    - `Do` : 許可リスト。以下の2つの条件のいずれかを満たす場合、 binlogイベントは複製されます。
 
-        -   イベントはルール設定と一致します。
-        -   sql-pattern が指定されており、イベントの SQL ステートメントが sql-pattern オプションのいずれかと一致します。
+        - イベントはルール設定と一致します。
+        - sql-pattern が指定されており、イベントの SQL ステートメントが sql-pattern オプションのいずれかと一致します。
 
-    -   `Ignore` ：ブロックリスト。以下の2つの条件のいずれかを満たす場合、 binlogイベントはフィルタリングされます。
+    - `Ignore` ：ブロックリスト。以下の2つの条件のいずれかを満たす場合、 binlogイベントはフィルタリングされます。
 
-        -   イベントはルール設定と一致します。
-        -   sql-pattern が指定されており、イベントの SQL ステートメントが sql-pattern オプションのいずれかと一致します。
+        - イベントはルール設定と一致します。
+        - sql-pattern が指定されており、イベントの SQL ステートメントが sql-pattern オプションのいずれかと一致します。
 
     `Do`と`Ignore`両方が設定されている場合、 `Ignore`の方が`Do`よりも優先されます。つまり、 `Ignore`と`Do`両方の条件を満たすイベントは除外されます。
 

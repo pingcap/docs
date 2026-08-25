@@ -260,8 +260,8 @@ conn.execute(`select ...`, [], {
 >
 > TiDB Cloud Serverless Driverの設定変更点：
 >
-> -   v0.0.7: SQL レベル オプション`isolation`を追加します。
-> -   v0.0.10: 接続レベル構成`decoders`と SQL レベルオプション`decoders`を追加します。
+> - v0.0.7: SQL レベル オプション`isolation`を追加します。
+> - v0.0.10: 接続レベル構成`decoders`と SQL レベルオプション`decoders`を追加します。
 
 ## 特徴 {#features}
 
@@ -320,31 +320,31 @@ TiDBとJavaScript間の型マッピングは以下のとおりです。
 >
 > TiDB Cloud Serverless Driverのデータ型マッピングの変更点：
 >
-> -   v0.1.0: `BINARY` 、 `VARBINARY` 、 `TINYBLOB` 、 `BLOB` 、 `MEDIUMBLOB` 、 `LONGBLOB` 、および`BIT`型は、 `Uint8Array`ではなく、 `string` }として返されるようになりました。
+> - v0.1.0: `BINARY` 、 `VARBINARY` 、 `TINYBLOB` 、 `BLOB` 、 `MEDIUMBLOB` 、 `LONGBLOB` 、および`BIT`型は、 `Uint8Array`ではなく、 `string` }として返されるようになりました。
 
 ### ORM連携 {#orm-integrations}
 
 TiDB Cloud Serverless Driverは、以下のORMと統合されています。
 
--   [TiDB Cloud Serverless Driver Kysely 方言](https://github.com/tidbcloud/kysely)。
--   [TiDB Cloud Serverless Driver Prisma アダプター](https://github.com/tidbcloud/prisma-adapter)。
+- [TiDB Cloud Serverless Driver Kysely 方言](https://github.com/tidbcloud/kysely)。
+- [TiDB Cloud Serverless Driver Prisma アダプター](https://github.com/tidbcloud/prisma-adapter)。
 
 ## 価格設定 {#pricing}
 
 TiDB Cloud Serverless Driver自体は無料ですが、ドライバーを使用してデータにアクセスすると[リクエストユニット（RU）](https://docs.pingcap.com/tidbcloud/tidb-cloud-glossary#request-unit-ru)とストレージの使用量が発生します。
 
--   TiDB Cloud Starterインスタンスの料金は、 [TiDB Cloud Starter の価格](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)モデルに従います。
--   TiDB Cloud Essentialインスタンスの場合、価格は[TiDB Cloud Essential の価格設定](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)モデルに従います。
+- TiDB Cloud Starterインスタンスの料金は、 [TiDB Cloud Starter の価格](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)モデルに従います。
+- TiDB Cloud Essentialインスタンスの場合、価格は[TiDB Cloud Essential の価格設定](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)モデルに従います。
 
 ## 制限事項 {#limitations}
 
 現在、TiDB Cloud Serverless Driverの使用には以下の制限があります。
 
--   1回のクエリで最大10,000行まで取得できます。
--   一度に実行できるSQL文は1つだけです。1つのクエリで複数のSQL文を実行することは、現時点ではサポートされていません。
--   [プライベートエンドポイント](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections-serverless.md)との接続にはまだ対応していません。
--   サーバーは、クロスオリジンリソース共有（CORS）を介して、許可されていないブラウザからのリクエストをブロックし、認証情報を保護します。そのため、TiDB Cloud Serverless Driverはバックエンドサービスからのみ使用できます。
+- 1回のクエリで最大10,000行まで取得できます。
+- 一度に実行できるSQL文は1つだけです。1つのクエリで複数のSQL文を実行することは、現時点ではサポートされていません。
+- [プライベートエンドポイント](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections-serverless.md)との接続にはまだ対応していません。
+- サーバーは、クロスオリジンリソース共有（CORS）を介して、許可されていないブラウザからのリクエストをブロックし、認証情報を保護します。そのため、TiDB Cloud Serverless Driverはバックエンドサービスからのみ使用できます。
 
 ## 次は？ {#what-s-next}
 
--   [ローカルのNode.jsプロジェクトでTiDB Cloud Serverless Driverを使用する](/develop/serverless-driver-node-example.md)方法を学びましょう。
+- [ローカルのNode.jsプロジェクトでTiDB Cloud Serverless Driverを使用する](/develop/serverless-driver-node-example.md)方法を学びましょう。

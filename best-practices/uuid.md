@@ -12,9 +12,9 @@ UUID（Universally Unique Identifiers）は、分散データベースにおけ�
 
 UUID を主キーとして使用すると、 [`AUTO_INCREMENT`](/auto-increment.md)整数と比較して次の利点があります。
 
--   UUIDは複数のシステムで競合のリスクなく生成できます。場合によっては、TiDBへのネットワーク通信回数を削減し、パフォーマンスを向上させることができます。
--   UUID は、ほとんどのプログラミング言語とデータベースシステムでサポートされています。
--   URLの一部として使用される場合、UUIDは列挙攻撃に対して脆弱ではありません。一方、 `AUTO_INCREMENT`数字を使用すると、請求書IDやユーザーIDを推測される可能性があります。
+- UUIDは複数のシステムで競合のリスクなく生成できます。場合によっては、TiDBへのネットワーク通信回数を削減し、パフォーマンスを向上させることができます。
+- UUID は、ほとんどのプログラミング言語とデータベースシステムでサポートされています。
+- URLの一部として使用される場合、UUIDは列挙攻撃に対して脆弱ではありません。一方、 `AUTO_INCREMENT`数字を使用すると、請求書IDやユーザーIDを推測される可能性があります。
 
 ## ベストプラクティス {#best-practices}
 
@@ -56,8 +56,8 @@ CREATE TABLE `uuid_demo_2` (
 
 Key Visualizer の詳細については、次のドキュメントを参照してください。
 
--   TiDB Self-Managedの場合は[Key Visualizer](/dashboard/dashboard-key-visualizer.md)
--   TiDB Cloudの場合は[Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
+- TiDB Self-Managedの場合は[Key Visualizer](/dashboard/dashboard-key-visualizer.md)
+- TiDB Cloudの場合は[Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
 
 ## MySQLとの互換性 {#mysql-compatibility}
 

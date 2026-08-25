@@ -17,14 +17,14 @@ summary: TiDB Cloudでユーザーが制御するログのマスキングを有�
 
 <CustomContent plan="dedicated">
 
--   TiDB Cloudでは、組織の**Organization Owner**または**Project Owner**の役割を担っている必要があります。
--   TiDB Cloud Dedicatedクラスターが`paused`状態にある場合、ログのマスキングを有効または無効にすることはできません。
+- TiDB Cloudでは、組織の**Organization Owner**または**Project Owner**の役割を担っている必要があります。
+- TiDB Cloud Dedicatedクラスターが`paused`状態にある場合、ログのマスキングを有効または無効にすることはできません。
 
 </CustomContent>
 
 <CustomContent plan="premium">
 
--   TiDB Cloudにおいて、組織の**Organization Owner**の役割を担っている必要があります。
+- TiDB Cloudにおいて、組織の**Organization Owner**の役割を担っている必要があります。
 
 </CustomContent>
 
@@ -36,58 +36,58 @@ summary: TiDB Cloudでユーザーが制御するログのマスキングを有�
 
 ログのマスキングを無効にするには、以下の手順を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
 
-2.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の名前をクリックして、その概要ページに移動します。
+2. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の名前をクリックして、その概要ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-3.  左側のナビゲーションペインで、 **Settings** &gt; **Security**をクリックします。
+3. 左側のナビゲーションペインで、 **Settings** &gt; **Security**をクリックします。
 
-4.  **Execution Log Redaction**セクションでは、秘匿化機能がデフォルトで**Enabled**になっていることがわかります。
+4. **Execution Log Redaction**セクションでは、秘匿化機能がデフォルトで**Enabled**になっていることがわかります。
 
-5.  **Disable**をクリックします。ログのマスキングを無効にすることのリスクを説明する警告が表示されます。
+5. **Disable**をクリックします。ログのマスキングを無効にすることのリスクを説明する警告が表示されます。
 
-6.  無効化を確認してください。
+6. 無効化を確認してください。
 
 ログのマスキングを無効にした後、以下の点に注意してください。
 
--   この変更は、新規のデータベース接続にのみ適用されます。
--   既存の接続には影響はありません。変更を有効にするには、既存の接続を再接続する必要があります。
--   新規セッションのログは今後秘匿化されなくなります。
+- この変更は、新規のデータベース接続にのみ適用されます。
+- 既存の接続には影響はありません。変更を有効にするには、既存の接続を再接続する必要があります。
+- 新規セッションのログは今後秘匿化されなくなります。
 
 ## 更新されたログを確認してください {#check-the-updated-logs}
 
 ログのマスキングが無効になった後に更新されたログを確認するには、次の手順を実行します。
 
-1.  クエリの実行速度が遅いことが原因で発生するパフォーマンスの問題をシミュレートします。たとえば、次の SQL ステートメントを実行します。
+1. クエリの実行速度が遅いことが原因で発生するパフォーマンスの問題をシミュレートします。たとえば、次の SQL ステートメントを実行します。
 
     ```sql
     SELECT *, SLEEP(2) FROM users WHERE email LIKE "%useremail%";
     ```
 
-2.  スロークエリログが更新されるまで数分お待ちください。
+2. スロークエリログが更新されるまで数分お待ちください。
 
-3.  ログを確認して、機密データが削除されていないことを確認してください。
+3. ログを確認して、機密データが削除されていないことを確認してください。
 
 ## ログの秘匿化を有効にする {#enable-log-redaction}
 
 データセキュリティを維持するため、診断またはメンテナンス作業が完了したらすぐに、以下の手順で**ログのマスキングを有効にしてください**。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
 
-2.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の名前をクリックして、その概要ページに移動します。
+2. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の名前をクリックして、その概要ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-3.  左側のナビゲーションペインで、 **Settings** &gt; **Security**をクリックします。
+3. 左側のナビゲーションペインで、 **Settings** &gt; **Security**をクリックします。
 
-4.  **Execution Log Redaction**セクションでは、秘匿化機能が**Disabled**になっていることがわかります。
+4. **Execution Log Redaction**セクションでは、秘匿化機能が**Disabled**になっていることがわかります。
 
-5.  有効にするには、 **Enable**をクリックしてください。
+5. 有効にするには、 **Enable**をクリックしてください。
 
-6.  変更内容を新しいセッションに反映させるには、データベースに再接続してください。
+6. 変更内容を新しいセッションに反映させるには、データベースに再接続してください。

@@ -9,10 +9,10 @@ v5.4.0以降、 TiDB Lightningを設定して、無効な型変換や一意キ�
 
 このドキュメントでは、TiDB Lightning のエラーの種類、エラーのクエリ方法、および例を紹介します。以下の設定項目が関係します。
 
--   `lightning.max-error` : 型エラーの許容閾値
--   `conflict.strategy` : 競合`conflict.max-record-rows` `conflict.threshold`に関連する構成
--   `tikv-importer.duplicate-resolution` (v8.0.0 で非推奨となり、将来のリリースで削除される予定): 物理インポートモードでのみ使用できる競合処理構成
--   `lightning.task-info-schema-name` : TiDB Lightningが競合を検出したときに競合するデータが格納されるデータベース
+- `lightning.max-error` : 型エラーの許容閾値
+- `conflict.strategy` : 競合`conflict.max-record-rows` `conflict.threshold`に関連する構成
+- `tikv-importer.duplicate-resolution` (v8.0.0 で非推奨となり、将来のリリースで削除される予定): 物理インポートモードでのみ使用できる競合処理構成
+- `lightning.task-info-schema-name` : TiDB Lightningが競合を検出したときに競合するデータが格納されるデータベース
 
 詳細については[TiDB Lightning （タスク）](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)を参照してください。
 
@@ -29,19 +29,19 @@ max-error = 0
 
 上記の構成では、次のエラーがカバーされます。
 
--   無効な値 (例: INT 列に`'Text'`を設定する)。
--   数値オーバーフロー（例：TINYINT列に`500`を設定する）
--   文字列オーバーフロー（例：VARCHAR(5)列に`'Very Long Text'`を設定する）。
--   日付と時刻がゼロ (つまり`'0000-00-00'`と`'2021-12-00'` )。
--   NOT NULL 列に NULL を設定します。
--   生成列式の評価に失敗しました。
--   カラム数が一致しません。行内の値の数がテーブルの列数と一致しません。
--   その他の SQL エラー。
+- 無効な値 (例: INT 列に`'Text'`を設定する)。
+- 数値オーバーフロー（例：TINYINT列に`500`を設定する）
+- 文字列オーバーフロー（例：VARCHAR(5)列に`'Very Long Text'`を設定する）。
+- 日付と時刻がゼロ (つまり`'0000-00-00'`と`'2021-12-00'` )。
+- NOT NULL 列に NULL を設定します。
+- 生成列式の評価に失敗しました。
+- カラム数が一致しません。行内の値の数がテーブルの列数と一致しません。
+- その他の SQL エラー。
 
 以下のエラーは常に致命的であり、 `lightning.max-error`を変更してもスキップすることはできません。
 
--   元の CSV、SQL、または Parquet ファイルの構文エラー (閉じられていない引用符など)。
--   I/O、ネットワーク、またはシステムの権限エラー。
+- 元の CSV、SQL、または Parquet ファイルの構文エラー (閉じられていない引用符など)。
+- I/O、ネットワーク、またはシステムの権限エラー。
 
 ## 競合エラー {#conflict-errors}
 
@@ -53,13 +53,13 @@ max-error = 0
 
 TiDB Lightning がインポート中にエラーに遭遇した場合、終了時にターミナルとログファイルの両方にこれらのエラーに関する統計の概要が出力されます。
 
--   ターミナルのエラーレポートは次の表のようになります。
+- ターミナルのエラーレポートは次の表のようになります。
 
     |   | エラーの種類 | エラー数 | エラーデータテーブル                            |
     | - | ------ | ---- | ------------------------------------- |
     | 1 | データ型   | 1000 | `lightning_task_info` `type_error_v1` |
 
--   TiDB Lightningログファイル内のエラーレポートは次のとおりです。
+- TiDB Lightningログファイル内のエラーレポートは次のとおりです。
 
     ```shell
     [2022/03/13 05:33:57.736 +08:00] [WARN] [errormanager.go:459] ["Detect 1000 data type errors in total, please refer to table `lightning_task_info`.`type_error_v1` for more details"]
@@ -151,25 +151,25 @@ CREATE VIEW conflict_view AS
 >
 > エラーレポートにはファイルオフセットが記録されますが、行番号や列番号を取得するのは非効率的です。以下のコマンドを使用すると、バイト位置（例えば183）の近くまで素早くジャンプできます。
 >
-> -   シェル、最初の数行を出力します。
+> - シェル、最初の数行を出力します。
 >
 >     ```shell
 >     head -c 183 file.csv | tail
 >     ```
 >
-> -   シェルは、次の数行を出力します。
+> - シェルは、次の数行を出力します。
 >
 >     ```shell
 >     tail -c +183 file.csv | head
 >     ```
 >
-> -   vim — `:goto 183`または`183go`
+> - vim — `:goto 183`または`183go`
 
 ## 例 {#example}
 
 この例では、いくつかの既知のエラーを含むデータソースが準備されます。
 
-1.  データベースとテーブルスキーマを準備します。
+1. データベースとテーブルスキーマを準備します。
 
     ```shell
     mkdir example && cd example
@@ -178,7 +178,7 @@ CREATE VIEW conflict_view AS
     echo 'CREATE TABLE t(a TINYINT PRIMARY KEY, b VARCHAR(12) NOT NULL UNIQUE);' > example.t-schema.sql
     ```
 
-2.  データを準備します。
+2. データを準備します。
 
     ```shell
     cat <<EOF > example.t.1.sql
@@ -197,7 +197,7 @@ CREATE VIEW conflict_view AS
     EOF
     ```
 
-3.  TiDB Lightningを構成して厳密な SQL モードを有効にし、ローカルバックエンドを使用してデータをインポートし、重複を置き換え、最大 10 個のエラーをスキップします。
+3. TiDB Lightningを構成して厳密な SQL モードを有効にし、ローカルバックエンドを使用してデータをインポートし、重複を置き換え、最大 10 個のエラーをスキップします。
 
     ```shell
     cat <<EOF > config.toml
@@ -223,13 +223,13 @@ CREATE VIEW conflict_view AS
     EOF
     ```
 
-4.  TiDB Lightningを実行します。すべてのエラーがスキップされるため、このコマンドは正常に終了します。
+4. TiDB Lightningを実行します。すべてのエラーがスキップされるため、このコマンドは正常に終了します。
 
     ```shell
     tiup tidb-lightning -c config.toml
     ```
 
-5.  インポートされたテーブルに次の 2 つの通常の行のみが含まれていることを確認します。
+5. インポートされたテーブルに次の 2 つの通常の行のみが含まれていることを確認します。
 
     ```sql
     $ mysql -u root -h 127.0.0.1 -P 4000 -e 'select * from example.t'
@@ -241,7 +241,7 @@ CREATE VIEW conflict_view AS
     +---+-----+
     ```
 
-6.  `type_error_v1`テーブルに型変換を含む 3 つの行が含まれているかどうかを確認します。
+6. `type_error_v1`テーブルに型変換を含む 3 つの行が含まれているかどうかを確認します。
 
     ```sql
     $ mysql -u root -h 127.0.0.1 -P 4000 -e 'select * from lightning_task_info.type_error_v1;' -E
@@ -274,7 +274,7 @@ CREATE VIEW conflict_view AS
        row_data: (600,'six hundred')
     ```
 
-7.  `conflict_error_v3`テーブルに、一意/主キーの競合がある 4 つの行が含まれているかどうかを確認します。
+7. `conflict_error_v3`テーブルに、一意/主キーの競合がある 4 つの行が含まれているかどうかを確認します。
 
     ```sql
     $ mysql -u root -h 127.0.0.1 -P 4000 -e 'select * from lightning_task_info.conflict_error_v3;' --binary-as-hex -E

@@ -9,10 +9,10 @@ summary: 2023 年 8 月 31 日のTiDB Cloud Console メンテナンスの詳細 
 
 ## メンテナンスウィンドウ {#maintenance-window}
 
--   日付: 2023-08-31
--   開始時刻: 8:00 (UTC+0)
--   終了時刻: 10:00 (UTC+0)
--   所要時間: 約2時間
+- 日付: 2023-08-31
+- 開始時刻: 8:00 (UTC+0)
+- 終了時刻: 10:00 (UTC+0)
+- 所要時間: 約2時間
 
 > **Note:**
 >
@@ -28,59 +28,59 @@ TiDB Cloudコンソールのメタデータサービスをアップグレード�
 
 ### TiDB Cloudコンソール UI の影響を受ける機能 {#affected-features-of-tidb-cloud-console-ui}
 
--   クラスタレベル
-    -   クラスタ管理
-        -   クラスターを作成する
-        -   クラスターを削除する
-        -   スケールクラスター
-        -   クラスターを一時停止または再開する
-        -   クラスターのパスワードを変更する
-        -   クラスタートラフィックフィルターを変更する
-    -   インポート
-        -   インポートジョブを作成する
-    -   データ移行
-        -   移行ジョブを作成する
-    -   チェンジフィード
-        -   チェンジフィードジョブを作成する
-    -   バックアップ
-        -   手動バックアップジョブを作成する
-        -   自動バックアップジョブ
-    -   復元する
-        -   復元ジョブを作成する
-    -   データベース監査ログ
-        -   接続性をテストする
-        -   アクセスレコードの追加または削除
-        -   データベース監査ログを有効または無効にする
-        -   データベース監査ログを再開する
--   プロジェクトレベル
-    -   ネットワークアクセス
-        -   プライベートエンドポイントを作成する
-        -   プライベートエンドポイントを削除する
-        -   VPCピアリングを追加する
-        -   VPC ピアリングの削除
-    -   メンテナンス
-        -   メンテナンスウィンドウを変更する
-        -   タスクを延期する
-    -   ごみ箱
-        -   クラスターを削除する
-        -   バックアップを削除する
-        -   クラスターを復元する
+- クラスタレベル
+    - クラスタ管理
+        - クラスターを作成する
+        - クラスターを削除する
+        - スケールクラスター
+        - クラスターを一時停止または再開する
+        - クラスターのパスワードを変更する
+        - クラスタートラフィックフィルターを変更する
+    - インポート
+        - インポートジョブを作成する
+    - データ移行
+        - 移行ジョブを作成する
+    - チェンジフィード
+        - チェンジフィードジョブを作成する
+    - バックアップ
+        - 手動バックアップジョブを作成する
+        - 自動バックアップジョブ
+    - 復元する
+        - 復元ジョブを作成する
+    - データベース監査ログ
+        - 接続性をテストする
+        - アクセスレコードの追加または削除
+        - データベース監査ログを有効または無効にする
+        - データベース監査ログを再開する
+- プロジェクトレベル
+    - ネットワークアクセス
+        - プライベートエンドポイントを作成する
+        - プライベートエンドポイントを削除する
+        - VPCピアリングを追加する
+        - VPC ピアリングの削除
+    - メンテナンス
+        - メンテナンスウィンドウを変更する
+        - タスクを延期する
+    - ごみ箱
+        - クラスターを削除する
+        - バックアップを削除する
+        - クラスターを復元する
 
 ### TiDB Cloud API の影響を受ける機能 {#affected-features-of-tidb-cloud-api}
 
--   クラスタ管理
-    -   [クラスターの作成](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateCluster)
-    -   [クラスターの削除](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/DeleteCluster)
-    -   [クラスターの更新](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)
-    -   [作成AwsCmek](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateAwsCmek)
--   バックアップ
-    -   [バックアップの作成](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Backup/operation/CreateBackup)
-    -   [バックアップの削除](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Backup/operation/DeleteBackup)
--   復元する
-    -   [復元タスクの作成](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Restore/operation/CreateRestoreTask)
--   インポート
-    -   [インポートタスクの作成](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Import/operation/CreateImportTask)
-    -   [インポートタスクの更新](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Import/operation/UpdateImportTask)
+- クラスタ管理
+    - [クラスターの作成](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateCluster)
+    - [クラスターの削除](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/DeleteCluster)
+    - [クラスターの更新](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)
+    - [作成AwsCmek](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateAwsCmek)
+- バックアップ
+    - [バックアップの作成](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Backup/operation/CreateBackup)
+    - [バックアップの削除](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Backup/operation/DeleteBackup)
+- 復元する
+    - [復元タスクの作成](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Restore/operation/CreateRestoreTask)
+- インポート
+    - [インポートタスクの作成](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Import/operation/CreateImportTask)
+    - [インポートタスクの更新](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Import/operation/UpdateImportTask)
 
 ## 完了と再開 {#completion-and-resumption}
 

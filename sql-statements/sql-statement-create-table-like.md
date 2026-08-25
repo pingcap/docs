@@ -63,5 +63,5 @@ TiDBの`CREATE TABLE LIKE`文はMySQLと完全に互換性があります。互�
 
 ## 参照 {#see-also}
 
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
--   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+- [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+- [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)

@@ -14,8 +14,8 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 
 > **Note:**
 >
-> -   ベクトル検索機能はパブリックプレビューです。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
-> -   ベクトル検索機能は、 [TiDB Self-Managed](/overview.md) と [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> - ベクトル検索機能はパブリックプレビューです。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> - ベクトル検索機能は、 [TiDB Self-Managed](/overview.md) と [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 > **Tip**
 >
@@ -25,11 +25,11 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 
 このチュートリアルを完了するには、以下が必要です。
 
--   [Python 3.11以降](https://www.python.org/downloads/)インストールされています
+- [Python 3.11以降](https://www.python.org/downloads/)インストールされています
 
--   [pip](https://pypi.org/project/pip/)がインストールされました
+- [pip](https://pypi.org/project/pip/)がインストールされました
 
--   [AWS CLI](https://aws.amazon.com/cli/)がインストールされました
+- [AWS CLI](https://aws.amazon.com/cli/)がインストールされました
 
     AWS CLI プロファイルがサポートされている[Amazon Bedrock](https://aws.amazon.com/bedrock/)リージョンに設定されていることを確認してください。サポートされている地域のリストは[Amazon Bedrock リージョン](https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html)でご覧いただけます。サポートされているリージョンに切り替えるには、次のコマンドを実行します。
 
@@ -37,14 +37,14 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
     aws configure set region <your-region>
     ```
 
--   TiDB Cloud Starterインスタンス
+- TiDB Cloud Starterインスタンス
 
     お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/tidb-cloud/select-cluster-tier.md#starter)。
 
--   [Amazon Bedrockに必要な権限](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html)AWS アカウントと次のモデルへのアクセス:
+- [Amazon Bedrockに必要な権限](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html)AWS アカウントと次のモデルへのアクセス:
 
-    -   **Amazon Titan Embeddings** ( `amazon.titan-embed-text-v2:0` ) は、テキスト埋め込みを生成するために使用されます。
-    -   テキスト生成に使用される**Meta Llama 3** （ `us.meta.llama3-2-3b-instruct-v1:0` ）
+    - **Amazon Titan Embeddings** ( `amazon.titan-embed-text-v2:0` ) は、テキスト埋め込みを生成するために使用されます。
+    - テキスト生成に使用される**Meta Llama 3** （ `us.meta.llama3-2-3b-instruct-v1:0` ）
 
     アクセス権がない場合は、 [Amazon Bedrock基盤モデルへのアクセスをリクエストする](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html#getting-started-model-access)手順に従ってください。
 
@@ -56,31 +56,31 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 
 [TiDB Cloudコンソール](https://tidbcloud.com/)からTiDB接続情報を取得し、開発環境の環境変数を以下のように設定してください。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
+3. 接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **Connection Type**は`Public`に設定されています。
+    - **Connection Type**は`Public`に設定されています。
 
-    -   **Branch**は`main`に設定されています。
+    - **Branch**は`main`に設定されています。
 
-    -   **Connect With**は`General`に設定されています。
+    - **Connect With**は`General`に設定されています。
 
-    -   お使いの環境に合った**Operating System**を選択してください。
+    - お使いの環境に合った**Operating System**を選択してください。
 
     > **Tip:**
     >
     > プログラムがWindows Subsystem for Linux（WSL）上で実行されている場合は、対応するLinuxディストリビューションに切り替えてください。
 
-4.  **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
+4. **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
 
     > **Tip:**
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **Reset Password**をクリックして新しいパスワードを生成できます。
 
-5.  環境変数を設定するには、ターミナルで以下のコマンドを実行してください。コマンド内のプレースホルダーは、接続ダイアログから取得した対応する接続​​パラメータに置き換える必要があります。
+5. 環境変数を設定するには、ターミナルで以下のコマンドを実行してください。コマンド内のプレースホルダーは、接続ダイアログから取得した対応する接続​​パラメータに置き換える必要があります。
 
     ```shell
     export TIDB_HOST=<your-tidb-host>
@@ -92,20 +92,20 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 
 ### ステップ2. Python仮想環境をセットアップする {#step-2-set-up-the-python-virtual-environment}
 
-1.  `demo.py`という名前の Python ファイルを作成します。
+1. `demo.py`という名前の Python ファイルを作成します。
 
     ```shell
     touch demo.py
     ```
 
-2.  依存関係を管理するための仮想環境を作成してアクティブ化する：
+2. 依存関係を管理するための仮想環境を作成してアクティブ化する：
 
     ```shell
     python3 -m venv env
     source env/bin/activate  # On Windows, use env\Scripts\activate
     ```
 
-3.  必要な依存関係をインストールします。
+3. 必要な依存関係をインストールします。
 
     ```shell
     pip install SQLAlchemy==2.0.30 PyMySQL==1.1.0 tidb-vector==0.0.9 pydantic==2.7.1 boto3
@@ -151,10 +151,10 @@ Base = declarative_base()
 
 Amazon Bedrock ランタイム クライアントは、次のパラメーターを受け入れる`invoke_model` API を提供します。
 
--   `modelId` : Amazon Bedrock で利用可能な基盤モデルのモデル ID。
--   `accept` : 入力リクエストのタイプ。
--   `contentType` : 入力のコンテンツタイプ。
--   `body` : プロンプトと設定で構成される JSON 文字列ペイロード。
+- `modelId` : Amazon Bedrock で利用可能な基盤モデルのモデル ID。
+- `accept` : 入力リクエストのタイプ。
+- `contentType` : 入力のコンテンツタイプ。
+- `body` : プロンプトと設定で構成される JSON 文字列ペイロード。
 
 `demo.py`に次のコードを追加して、 `invoke_model` API を呼び出し、Amazon Titan Text Embeddings を使用してテキスト埋め込みを生成し、Meta Llama 3 から応答を取得します。
 
@@ -261,7 +261,7 @@ def save_entities_with_embedding(session, contents):
 
 ### ステップ8．アプリケーションを実行する {#step-8-run-the-application}
 
-1.  `demo.py`に、データベースセッションを確立し、埋め込みを TiDB に保存し、例となる質問 (「TiDB とは何ですか？」など) を尋ね、モデルから結果を生成するための以下のコードを追加します。
+1. `demo.py`に、データベースセッションを確立し、埋め込みを TiDB に保存し、例となる質問 (「TiDB とは何ですか？」など) を尋ね、モデルから結果を生成するための以下のコードを追加します。
 
     ```python
     if __name__ == "__main__":
@@ -288,7 +288,7 @@ def save_entities_with_embedding(session, contents):
             print(f"Generated answer: {result}")
     ```
 
-2.  `demo.py`へのすべての変更を保存し、スクリプトを実行します。
+2. `demo.py`へのすべての変更を保存し、スクリプトを実行します。
 
     ```shell
     python3 demo.py
@@ -320,5 +320,5 @@ def save_entities_with_embedding(session, contents):
 
 ## 関連項目 {#see-also}
 
--   [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
--   [ベクトル検索インデックス](/ai/reference/vector-search-index.md)
+- [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
+- [ベクトル検索インデックス](/ai/reference/vector-search-index.md)

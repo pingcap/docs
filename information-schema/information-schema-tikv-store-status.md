@@ -47,22 +47,22 @@ DESC TIKV_STORE_STATUS;
 
 `TIKV_STORE_STATUS`テーブルの列の説明は以下のとおりです。
 
--   `STORE_ID` : ストアのID。
--   `ADDRESS` : ストアのアドレス。
--   `STORE_STATE` : ストア状態の識別子。これは`STORE_STATE_NAME`に対応します。
--   `STORE_STATE_NAME` : ストア状態の名前。名前は`Up` 、 `Offline` 、または`Tombstone` 。
--   `LABEL` : ストアのラベルセット。
--   `VERSION` : ストアのバージョン番号。
--   `CAPACITY` : ストアのストレージ容量。
--   `AVAILABLE` : ストアの残りのストレージ容量。
--   `LEADER_COUNT` : ストアのリーダーの数。
--   `LEADER_WEIGHT` : ストアのリーダーウェイト。
--   `LEADER_SCORE` : ストアのリーダースコア。
--   `LEADER_SIZE` : ストア上のすべてのリーダーのおおよその合計データサイズ (MB)。
--   `REGION_COUNT` : ストアのリージョン数。
--   `REGION_WEIGHT` : ストアのリージョンウェイト。
--   `REGION_SCORE` : ストアのリージョンスコア。
--   `REGION_SIZE` : ストア上のすべてのリージョンのおおよその合計データサイズ (MB)。
--   `START_TS` : ストアが開始された時のタイムスタンプ。
--   `LAST_HEARTBEAT_TS` : ストアから送信された最後のハートビートのタイムスタンプ。
--   `UPTIME` : ストアが起動してからの合計時間。
+- `STORE_ID` : ストアのID。
+- `ADDRESS` : ストアのアドレス。
+- `STORE_STATE` : ストア状態の識別子。これは`STORE_STATE_NAME`に対応します。
+- `STORE_STATE_NAME` : ストア状態の名前。名前は`Up` 、 `Offline` 、または`Tombstone` 。
+- `LABEL` : ストアのラベルセット。
+- `VERSION` : ストアのバージョン番号。
+- `CAPACITY` : ストアのストレージ容量。
+- `AVAILABLE` : ストアの残りのストレージ容量。
+- `LEADER_COUNT` : ストアのリーダーの数。
+- `LEADER_WEIGHT` : ストアのリーダーウェイト。
+- `LEADER_SCORE` : ストアのリーダースコア。
+- `LEADER_SIZE` : ストア上のすべてのリーダーのおおよその合計データサイズ (MB)。
+- `REGION_COUNT` : ストアのリージョン数。
+- `REGION_WEIGHT` : ストアのリージョンウェイト。
+- `REGION_SCORE` : ストアのリージョンスコア。
+- `REGION_SIZE` : ストア上のすべてのリージョンのおおよその合計データサイズ (MB)。
+- `START_TS` : ストアが開始された時のタイムスタンプ。
+- `LAST_HEARTBEAT_TS` : ストアから送信された最後のハートビートのタイムスタンプ。
+- `UPTIME` : ストアが起動してからの合計時間。

@@ -9,14 +9,14 @@ summary: DBスナップショットを使用して、Amazon AuroraからTiDBへ�
 
 移行全体は2つのプロセスから構成されます。
 
--   TiDB Lightningを使用してTiDBに完全なデータをインポートします
--   DMを使用して増分データをTiDBに複製する（オプション）
+- TiDB Lightningを使用してTiDBに完全なデータをインポートします
+- DMを使用して増分データをTiDBに複製する（オプション）
 
 ## 前提条件 {#prerequisites}
 
--   [DumplingとTiDB Lightningをインストールする](/migration-tools.md)。ターゲット側で対応するテーブルを手動で作成する場合は、 Dumplingをインストールしないでください。
--   [Dumplingに必要な上流データベース権限を取得します](/dumpling-overview.md#required-privileges)
--   [TiDB Lightningに必要なターゲットデータベース権限を取得します](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database)
+- [DumplingとTiDB Lightningをインストールする](/migration-tools.md)。ターゲット側で対応するテーブルを手動で作成する場合は、 Dumplingをインストールしないでください。
+- [Dumplingに必要な上流データベース権限を取得します](/dumpling-overview.md#required-privileges)
+- [TiDB Lightningに必要なターゲットデータベース権限を取得します](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database)
 
 ## TiDBに全データをインポートする {#import-full-data-to-tidb}
 
@@ -90,7 +90,7 @@ nohup tiup tidb-lightning -config tidb-lightning-schema.toml > nohup.out 2>&1 &
 
 #### 2.1 Amazon AuroraのスナップショットをAmazon S3にエクスポートする {#2-1-export-an-amazon-aurora-snapshot-to-amazon-s3}
 
-1.  後続の増分移行のために、Amazon Auroraのbinlogの名前と場所を取得します。Amazon Auroraで`SHOW MASTER STATUS`コマンドを実行し、現在のbinlogの位置を記録します。
+1. 後続の増分移行のために、Amazon Auroraのbinlogの名前と場所を取得します。Amazon Auroraで`SHOW MASTER STATUS`コマンドを実行し、現在のbinlogの位置を記録します。
 
     ```sql
     SHOW MASTER STATUS;
@@ -107,7 +107,7 @@ nohup tiup tidb-lightning -config tidb-lightning-schema.toml > nohup.out 2>&1 &
     1 row in set (0.012 sec)
     ```
 
-2.  Amazon Auroraスナップショットをエクスポートします。詳細な手順については、 [DBスナップショットデータをAmazon S3にエクスポートする](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html)を参照してください。binlogの位置を取得したら、5 分以内にスナップショットをエクスポートします。そうしないと、記録されたbinlogの位置が古くなり、増分レプリケーション中にデータの競合が発生する可能性があります。
+2. Amazon Auroraスナップショットをエクスポートします。詳細な手順については、 [DBスナップショットデータをAmazon S3にエクスポートする](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html)を参照してください。binlogの位置を取得したら、5 分以内にスナップショットをエクスポートします。そうしないと、記録されたbinlogの位置が古くなり、増分レプリケーション中にデータの競合が発生する可能性があります。
 
 #### 2.2 データファイル用のTiDB Lightning構成ファイルを作成する {#2-2-create-the-tidb-lightning-configuration-file-for-the-data-file}
 
@@ -152,7 +152,7 @@ TiDBクラスターでTLSを有効にする必要がある場合は、 [TiDB Lig
 
 #### 2.3 TiDBへの全データのインポート {#2-3-import-full-data-to-tidb}
 
-1.  TiDB Lightningを使用して、Amazon AuroraのスナップショットからTiDBにデータをインポートします。
+1. TiDB Lightningを使用して、Amazon AuroraのスナップショットからTiDBにデータをインポートします。
 
     ```shell
     export AWS_ACCESS_KEY_ID=${access_key}
@@ -160,12 +160,12 @@ TiDBクラスターでTLSを有効にする必要がある場合は、 [TiDB Lig
     nohup tiup tidb-lightning -config tidb-lightning-data.toml > nohup.out 2>&1 &
     ```
 
-2.  インポートが開始された後、以下のいずれかの方法でインポートの進行状況を確認できます。
+2. インポートが開始された後、以下のいずれかの方法でインポートの進行状況を確認できます。
 
-    -   ログ内のキーワード`progress`を`grep`することで、インポートの進行状況を確認できます。進行状況は、デフォルトでは 5 分ごとに更新されます。
-    -   [モニタリングダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進捗状況を確認します。
+    - ログ内のキーワード`progress`を`grep`することで、インポートの進行状況を確認できます。進行状況は、デフォルトでは 5 分ごとに更新されます。
+    - [モニタリングダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進捗状況を確認します。
 
-3.  TiDB Lightning はインポートが完了すると自動的に終了します。`tidb-lightning.log`の最後の行に`the whole procedure completed`が含まれているかどうかを確認してください。含まれている場合はインポートが成功しています。含まれていない場合は、インポート中にエラーが発生しました。エラーメッセージの指示に従ってエラーに対処してください。
+3. TiDB Lightning はインポートが完了すると自動的に終了します。`tidb-lightning.log`の最後の行に`the whole procedure completed`が含まれているかどうかを確認してください。含まれている場合はインポートが成功しています。含まれていない場合は、インポート中にエラーが発生しました。エラーメッセージの指示に従ってエラーに対処してください。
 
 > **Note:**
 >
@@ -177,12 +177,12 @@ TiDBクラスターでTLSを有効にする必要がある場合は、 [TiDB Lig
 
 ### 前提条件 {#prerequisites}
 
--   [DMをインストール](/dm/deploy-a-dm-cluster-using-tiup.md)。
--   [DMに必要なソースデータベースとターゲットデータベースの権限を取得します](/dm/dm-worker-intro.md)
+- [DMをインストール](/dm/deploy-a-dm-cluster-using-tiup.md)。
+- [DMに必要なソースデータベースとターゲットデータベースの権限を取得します](/dm/dm-worker-intro.md)
 
 ### ステップ1：データソースを作成する {#step-1-create-the-data-source}
 
-1.  `source1.yaml`ファイルは以下の手順で作成します。
+1. `source1.yaml`ファイルは以下の手順で作成します。
 
     ```yaml
     # Must be unique.
@@ -197,7 +197,7 @@ TiDBクラスターでTLSを有効にする必要がある場合は、 [TiDB Lig
       port: 3306
     ```
 
-2.  次のコマンドを実行して、 `tiup dmctl`を使用してデータソース構成を DM クラスターにロードします。
+2. 次のコマンドを実行して、 `tiup dmctl`を使用してデータソース構成を DM クラスターにロードします。
 
     ```shell
     tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
@@ -298,13 +298,13 @@ TiUPを使用してDMをデプロイした際に、Prometheus、Alertmanager、�
 
 DMが実行されている間、DM-worker、DM-master、およびdmctlは関連情報をログに出力します。これらのコンポーネントのログディレクトリは以下のとおりです。
 
--   DM-master: DM-master プロセスパラメータ`--log-file`で指定されます。TiUPを使用して DM をデプロイする場合、ログディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`になります。
--   DM-worker: DM-worker プロセスパラメータ`--log-file`で指定されます。TiUPを使用して DM をデプロイする場合、ログディレクトリはデフォルトで`/dm-deploy/dm-worker-8262/log/`になります。
+- DM-master: DM-master プロセスパラメータ`--log-file`で指定されます。TiUPを使用して DM をデプロイする場合、ログディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`になります。
+- DM-worker: DM-worker プロセスパラメータ`--log-file`で指定されます。TiUPを使用して DM をデプロイする場合、ログディレクトリはデフォルトで`/dm-deploy/dm-worker-8262/log/`になります。
 
 ## 次は？ {#what-s-next}
 
--   [移行タスクを一時停止する](/dm/dm-pause-task.md)。
--   [移行タスクを再開する](/dm/dm-resume-task.md)。
--   [移行タスクを停止します](/dm/dm-stop-task.md)。
--   [クラスタデータソースとタスク構成のエクスポートとインポート](/dm/dm-export-import-config.md)。
--   [失敗したDDLステートメントを処理する](/dm/handle-failed-ddl-statements.md)。
+- [移行タスクを一時停止する](/dm/dm-pause-task.md)。
+- [移行タスクを再開する](/dm/dm-resume-task.md)。
+- [移行タスクを停止します](/dm/dm-stop-task.md)。
+- [クラスタデータソースとタスク構成のエクスポートとインポート](/dm/dm-export-import-config.md)。
+- [失敗したDDLステートメントを処理する](/dm/handle-failed-ddl-statements.md)。

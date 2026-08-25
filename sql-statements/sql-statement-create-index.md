@@ -149,36 +149,36 @@ DROP INDEX idx1 ON t1;
 
 式インデックス or 関数インデックスには、さまざまな種類の式が含まれます。正確性を確保するため、式インデックスの作成には、完全にテストされた一部の関数のみが許可されています。つまり、本番環境では、これらの関数のみが式で使用できます。これらの関数は、 [`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520)変数を照会することで取得できます。現在、許可されている関数は以下のとおりです。
 
--   [`JSON_ARRAY()`](/functions-and-operators/json-functions.md)
--   [`JSON_ARRAY_APPEND()`](/functions-and-operators/json-functions.md)
--   [`JSON_ARRAY_INSERT()`](/functions-and-operators/json-functions.md)
--   [`JSON_CONTAINS()`](/functions-and-operators/json-functions.md)
--   [`JSON_CONTAINS_PATH()`](/functions-and-operators/json-functions.md)
--   [`JSON_DEPTH()`](/functions-and-operators/json-functions.md)
--   [`JSON_EXTRACT()`](/functions-and-operators/json-functions.md)
--   [`JSON_INSERT()`](/functions-and-operators/json-functions.md)
--   [`JSON_KEYS()`](/functions-and-operators/json-functions.md)
--   [`JSON_LENGTH()`](/functions-and-operators/json-functions.md)
--   [`JSON_MERGE_PATCH()`](/functions-and-operators/json-functions.md)
--   [`JSON_MERGE_PRESERVE()`](/functions-and-operators/json-functions.md)
--   [`JSON_OBJECT()`](/functions-and-operators/json-functions.md)
--   [`JSON_PRETTY()`](/functions-and-operators/json-functions.md)
--   [`JSON_QUOTE()`](/functions-and-operators/json-functions.md)
--   [`JSON_REMOVE()`](/functions-and-operators/json-functions.md)
--   [`JSON_REPLACE()`](/functions-and-operators/json-functions.md)
--   [`JSON_SCHEMA_VALID()`](/functions-and-operators/json-functions/json-functions-validate.md)
--   [`JSON_SEARCH()`](/functions-and-operators/json-functions.md)
--   [`JSON_SET()`](/functions-and-operators/json-functions.md)
--   [`JSON_STORAGE_SIZE()`](/functions-and-operators/json-functions.md)
--   [`JSON_TYPE()`](/functions-and-operators/json-functions.md)
--   [`JSON_UNQUOTE()`](/functions-and-operators/json-functions.md)
--   [`JSON_VALID()`](/functions-and-operators/json-functions.md)
--   [`LOWER()`](/functions-and-operators/string-functions.md#lower)
--   [`MD5()`](/functions-and-operators/encryption-and-compression-functions.md)
--   [`REVERSE()`](/functions-and-operators/string-functions.md#reverse)
--   [`TIDB_SHARD()`](/functions-and-operators/tidb-functions.md#tidb_shard)
--   [`UPPER()`](/functions-and-operators/string-functions.md#upper)
--   [`VITESS_HASH()`](/functions-and-operators/tidb-functions.md)
+- [`JSON_ARRAY()`](/functions-and-operators/json-functions.md)
+- [`JSON_ARRAY_APPEND()`](/functions-and-operators/json-functions.md)
+- [`JSON_ARRAY_INSERT()`](/functions-and-operators/json-functions.md)
+- [`JSON_CONTAINS()`](/functions-and-operators/json-functions.md)
+- [`JSON_CONTAINS_PATH()`](/functions-and-operators/json-functions.md)
+- [`JSON_DEPTH()`](/functions-and-operators/json-functions.md)
+- [`JSON_EXTRACT()`](/functions-and-operators/json-functions.md)
+- [`JSON_INSERT()`](/functions-and-operators/json-functions.md)
+- [`JSON_KEYS()`](/functions-and-operators/json-functions.md)
+- [`JSON_LENGTH()`](/functions-and-operators/json-functions.md)
+- [`JSON_MERGE_PATCH()`](/functions-and-operators/json-functions.md)
+- [`JSON_MERGE_PRESERVE()`](/functions-and-operators/json-functions.md)
+- [`JSON_OBJECT()`](/functions-and-operators/json-functions.md)
+- [`JSON_PRETTY()`](/functions-and-operators/json-functions.md)
+- [`JSON_QUOTE()`](/functions-and-operators/json-functions.md)
+- [`JSON_REMOVE()`](/functions-and-operators/json-functions.md)
+- [`JSON_REPLACE()`](/functions-and-operators/json-functions.md)
+- [`JSON_SCHEMA_VALID()`](/functions-and-operators/json-functions/json-functions-validate.md)
+- [`JSON_SEARCH()`](/functions-and-operators/json-functions.md)
+- [`JSON_SET()`](/functions-and-operators/json-functions.md)
+- [`JSON_STORAGE_SIZE()`](/functions-and-operators/json-functions.md)
+- [`JSON_TYPE()`](/functions-and-operators/json-functions.md)
+- [`JSON_UNQUOTE()`](/functions-and-operators/json-functions.md)
+- [`JSON_VALID()`](/functions-and-operators/json-functions.md)
+- [`LOWER()`](/functions-and-operators/string-functions.md#lower)
+- [`MD5()`](/functions-and-operators/encryption-and-compression-functions.md)
+- [`REVERSE()`](/functions-and-operators/string-functions.md#reverse)
+- [`TIDB_SHARD()`](/functions-and-operators/tidb-functions.md#tidb_shard)
+- [`UPPER()`](/functions-and-operators/string-functions.md#upper)
+- [`VITESS_HASH()`](/functions-and-operators/tidb-functions.md)
 
 上記のリストに含まれていない関数は、十分にテストされておらず、本番環境での関数は推奨されません。これらは実験的とみなされます。演算子、 `CAST` 、 `CASE WHEN`などの他の式も実験的とみなされ、本番環境での本番は推奨されません。
 
@@ -198,13 +198,13 @@ allow-expression-index = true
 >
 > 式インデックス内の式には、以下の内容を含めることはできません。
 >
-> -   `RAND()`や`NOW()`などの揮発性関数。
-> -   [システム変数](/system-variables.md)と[ユーザー変数](/user-defined-variables.md)。
-> -   サブクエリ。
-> -   [`AUTO_INCREMENT`](/auto-increment.md)列。tidb_enable_auto_increment_in_generated (システム変数) の値を`true`に設定することで[`tidb_enable_auto_increment_in_generated`](/system-variables.md#tidb_enable_auto_increment_in_generated)この制限を解除できます。
-> -   [ウィンドウ関数](/functions-and-operators/window-functions.md)。
-> -   `CREATE TABLE t (j JSON, INDEX k (((j,j))));`のような ROW関数。
-> -   [集計関数](/functions-and-operators/aggregate-group-by-functions.md)。
+> - `RAND()`や`NOW()`などの揮発性関数。
+> - [システム変数](/system-variables.md)と[ユーザー変数](/user-defined-variables.md)。
+> - サブクエリ。
+> - [`AUTO_INCREMENT`](/auto-increment.md)列。tidb_enable_auto_increment_in_generated (システム変数) の値を`true`に設定することで[`tidb_enable_auto_increment_in_generated`](/system-variables.md#tidb_enable_auto_increment_in_generated)この制限を解除できます。
+> - [ウィンドウ関数](/functions-and-operators/window-functions.md)。
+> - `CREATE TABLE t (j JSON, INDEX k (((j,j))));`のような ROW関数。
+> - [集計関数](/functions-and-operators/aggregate-group-by-functions.md)。
 >
 > 式インデックスは暗黙的に名前を取得します（例： `_V$_{index_name}_{index_offset}` ）。既に列に付けられている名前で新しい式インデックスを作成しようとすると、エラーが発生します。また、同じ名前で新しい列を追加しようとした場合も、エラーが発生します。
 >
@@ -355,16 +355,16 @@ Query OK, 1 row affected (0.00 sec)
 
 ### 制限事項 {#limitations}
 
--   空のJSON配列の場合、対応するインデックスレコードは生成されません。
--   `CAST(... AS ... ARRAY)`のターゲットタイプは`BINARY` 、 `JSON` 、 `YEAR` 、 `FLOAT` 、および`DECIMAL`いずれにもなりません。ソースタイプは JSON である必要があります。
--   多値インデックスをソートに使用することはできません。
--   JSON配列に対してのみ、多値インデックスを作成できます。
--   多値インデックスは、主キーまたは外部キーとして使用することはできません。
--   多値インデックスが使用する追加のストレージ領域は、1行あたりの配列要素の平均数×通常のセカンダリインデックスが使用する領域に等しくなります。
--   通常のインデックスと比較して、多値インデックスではDML操作によって変更されるインデックスレコードの数が多くなるため、多値インデックスは通常のインデックスよりもパフォーマンスに大きな影響を与えます。
--   多値インデックスは式インデックスの特殊なタイプであるため、式インデックスと同様の制限があります。
--   テーブルが多値インデックスを使用している場合、 BR、TiCDC、またはTiDB Lightningを使用して、v6.6.0より前のTiDBクラスタにテーブルをバックアップ、レプリケート、またはインポートすることはできません。
--   複雑な条件を含むクエリの場合、TiDB は多値インデックスを選択できない場合があります。多値インデックスでサポートされる条件パターンについては、 [多値インデックスを使用する](/choose-index.md#use-multi-valued-indexes)を参照してください。
+- 空のJSON配列の場合、対応するインデックスレコードは生成されません。
+- `CAST(... AS ... ARRAY)`のターゲットタイプは`BINARY` 、 `JSON` 、 `YEAR` 、 `FLOAT` 、および`DECIMAL`いずれにもなりません。ソースタイプは JSON である必要があります。
+- 多値インデックスをソートに使用することはできません。
+- JSON配列に対してのみ、多値インデックスを作成できます。
+- 多値インデックスは、主キーまたは外部キーとして使用することはできません。
+- 多値インデックスが使用する追加のストレージ領域は、1行あたりの配列要素の平均数×通常のセカンダリインデックスが使用する領域に等しくなります。
+- 通常のインデックスと比較して、多値インデックスではDML操作によって変更されるインデックスレコードの数が多くなるため、多値インデックスは通常のインデックスよりもパフォーマンスに大きな影響を与えます。
+- 多値インデックスは式インデックスの特殊なタイプであるため、式インデックスと同様の制限があります。
+- テーブルが多値インデックスを使用している場合、 BR、TiCDC、またはTiDB Lightningを使用して、v6.6.0より前のTiDBクラスタにテーブルをバックアップ、レプリケート、またはインポートすることはできません。
+- 複雑な条件を含むクエリの場合、TiDB は多値インデックスを選択できない場合があります。多値インデックスでサポートされる条件パターンについては、 [多値インデックスを使用する](/choose-index.md#use-multi-valued-indexes)を参照してください。
 
 ## Partial indexes <span class="version-mark">v8.5.7 の新機能</span> {#partial-indexes-new-in-v857}
 
@@ -515,34 +515,34 @@ TiDB v8.0.0以降では、システム変数[`tidb_opt_use_invisible_indexes`](/
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
--   TiDB Self-Managed およびTiDB Cloud Dedicatedは`FULLTEXT`構文の解析をサポートしていますが、 `FULLTEXT` 、 `HASH` 、および`SPATIAL`インデックスの使用はサポートしていません。
+- TiDB Self-Managed およびTiDB Cloud Dedicatedは`FULLTEXT`構文の解析をサポートしていますが、 `FULLTEXT` 、 `HASH` 、および`SPATIAL`インデックスの使用はサポートしていません。
 
     > **Note:**
     >
     > 現在、特定の AWS リージョンのTiDB Cloud Starterインスタンスのみが[`FULLTEXT`構文と索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)をサポートしています。
 
--   TiDB は、MySQL との互換性のために、 `HASH` 、 `BTREE` 、 `RTREE`などのインデックス タイプを構文で受け入れますが、それらを無視します。
+- TiDB は、MySQL との互換性のために、 `HASH` 、 `BTREE` 、 `RTREE`などのインデックス タイプを構文で受け入れますが、それらを無視します。
 
--   降順インデックスはサポートされていません（ MySQL 5.7と同様）。
+- 降順インデックスはサポートされていません（ MySQL 5.7と同様）。
 
--   `CLUSTERED`タイプの主キーをテーブルに追加することはサポートされていません。 `CLUSTERED`タイプの主キーの詳細については、[クラスター化インデックス](/clustered-indexes.md)を参照してください。
+- `CLUSTERED`タイプの主キーをテーブルに追加することはサポートされていません。 `CLUSTERED`タイプの主キーの詳細については、[クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
--   式インデックスはビューと互換性がありません。ビューを使用してクエリを実行する場合、式インデックスを同時に使用することはできません。
+- 式インデックスはビューと互換性がありません。ビューを使用してクエリを実行する場合、式インデックスを同時に使用することはできません。
 
--   式インデックスはバインディングとの互換性に問題があります。式インデックスの式に定数が含まれている場合、対応するクエリ用に作成されるバインディングのスコープが拡張されます。たとえば、式インデックスの式が`a+1`で、対応するクエリ条件が`a+1 > 2`であるとします。この場合、作成されるバインディングは`a+? > ?`となり、 `a+2 > 2`のような条件を持つクエリも式インデックスの使用を強制され、実行計画が最適化されません。さらに、これは SQL プラン管理 (SPM) におけるベースラインのキャプチャとベースラインの進化にも影響します。
+- 式インデックスはバインディングとの互換性に問題があります。式インデックスの式に定数が含まれている場合、対応するクエリ用に作成されるバインディングのスコープが拡張されます。たとえば、式インデックスの式が`a+1`で、対応するクエリ条件が`a+1 > 2`であるとします。この場合、作成されるバインディングは`a+? > ?`となり、 `a+2 > 2`のような条件を持つクエリも式インデックスの使用を強制され、実行計画が最適化されません。さらに、これは SQL プラン管理 (SPM) におけるベースラインのキャプチャとベースラインの進化にも影響します。
 
--   多値インデックスを使用して書き込まれるデータは、定義されたデータ型と正確に一致する必要があります。そうしないと、データの書き込みは失敗します。詳細については、 [多値インデックスを作成する](/sql-statements/sql-statement-create-index.md#create-multi-valued-indexes)を参照してください。
+- 多値インデックスを使用して書き込まれるデータは、定義されたデータ型と正確に一致する必要があります。そうしないと、データの書き込みは失敗します。詳細については、 [多値インデックスを作成する](/sql-statements/sql-statement-create-index.md#create-multi-valued-indexes)を参照してください。
 
--   `GLOBAL`インデックスオプションを使用して`UNIQUE KEY`を[グローバルインデックス](/global-indexes.md)として設定することは、[パーティション化されたテーブル](/partitioned-table.md)に対するTiDBの拡張機能であり、MySQLとは互換性がありません。
+- `GLOBAL`インデックスオプションを使用して`UNIQUE KEY`を[グローバルインデックス](/global-indexes.md)として設定することは、[パーティション化されたテーブル](/partitioned-table.md)に対するTiDBの拡張機能であり、MySQLとは互換性がありません。
 
 ## 参照 {#see-also}
 
--   [インデックス選択](/choose-index.md)
--   [インデックス問題の解決方法](/wrong-index-solution.md)
--   [ADD INDEX](/sql-statements/sql-statement-add-index.md)
--   [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
--   [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
--   [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
--   [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
--   [EXPLAIN](/sql-statements/sql-statement-explain.md)
+- [インデックス選択](/choose-index.md)
+- [インデックス問題の解決方法](/wrong-index-solution.md)
+- [ADD INDEX](/sql-statements/sql-statement-add-index.md)
+- [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
+- [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
+- [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
+- [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
+- [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+- [EXPLAIN](/sql-statements/sql-statement-explain.md)

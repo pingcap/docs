@@ -69,6 +69,6 @@ mysql> SHOW STATS_LOCKED;
 
 ## 参照 {#see-also}
 
--   [統計](/statistics.md#lock-statistics)
--   [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
--   [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
+- [統計](/statistics.md#lock-statistics)
+- [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
+- [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)

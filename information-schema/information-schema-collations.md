@@ -46,17 +46,17 @@ SELECT * FROM collations WHERE character_set_name='utf8mb4';
 
 `COLLATIONS`表の列の説明は次のとおりです。
 
--   `COLLATION_NAME` :照合順序の名前。
--   `CHARACTER_SET_NAME` :照合順序が属する文字セットの名前。
--   `ID` :照合順序の ID。
--   `IS_DEFAULT` : この照合順序が、それが属する文字セットのデフォルトの照合順序であるかどうか。
--   `IS_COMPILED` : 文字セットがサーバーにコンパイルされているかどうか。
--   `SORTLEN` :照合順序が文字をソートするときに割り当てられるメモリの最小長。
--   `PAD_ATTRIBUTE` : 文字列の比較中に末尾のスペースを無視するかどうか。`PAD SPACE`は末尾のスペースが無視されることを意味し (たとえば、 `'abc'` `'abc   '`と等しい)、 `NO PAD`は末尾のスペースが重要であることを意味します (たとえば、 `'abc'` `'abc   '`等しくありません)。
+- `COLLATION_NAME` :照合順序の名前。
+- `CHARACTER_SET_NAME` :照合順序が属する文字セットの名前。
+- `ID` :照合順序の ID。
+- `IS_DEFAULT` : この照合順序が、それが属する文字セットのデフォルトの照合順序であるかどうか。
+- `IS_COMPILED` : 文字セットがサーバーにコンパイルされているかどうか。
+- `SORTLEN` :照合順序が文字をソートするときに割り当てられるメモリの最小長。
+- `PAD_ATTRIBUTE` : 文字列の比較中に末尾のスペースを無視するかどうか。`PAD SPACE`は末尾のスペースが無視されることを意味し (たとえば、 `'abc'` `'abc   '`と等しい)、 `NO PAD`は末尾のスペースが重要であることを意味します (たとえば、 `'abc'` `'abc   '`等しくありません)。
 
 ## 参照 {#see-also}
 
--   [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
--   [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
--   [`INFORMATION_SCHEMA.CHARACTER_SETS`](/information-schema/information-schema-character-sets.md)
--   [`INFORMATION_SCHEMA.COLLATION_CHARACTER_SET_APPLICABILITY`](/information-schema/information-schema-collation-character-set-applicability.md)
+- [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
+- [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
+- [`INFORMATION_SCHEMA.CHARACTER_SETS`](/information-schema/information-schema-character-sets.md)
+- [`INFORMATION_SCHEMA.COLLATION_CHARACTER_SET_APPLICABILITY`](/information-schema/information-schema-collation-character-set-applicability.md)

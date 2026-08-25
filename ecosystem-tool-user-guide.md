@@ -19,10 +19,10 @@ TiUPは、 Golangで記述されたクラスタ管理コンポーネントで[Ti
 
 TiUPの基本は次のとおりです。
 
--   [用語と概念](/tiup/tiup-terminology-and-concepts.md)
--   [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)
--   [TiUPコマンドを使用してTiUPコンポーネントを管理する](/tiup/tiup-component-management.md)
--   適用可能な TiDB バージョン: v4.0 以降
+- [用語と概念](/tiup/tiup-terminology-and-concepts.md)
+- [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)
+- [TiUPコマンドを使用してTiUPコンポーネントを管理する](/tiup/tiup-component-management.md)
+- 適用可能な TiDB バージョン: v4.0 以降
 
 ### Kubernetes 上で TiDBをデプロイて運用する - TiDB Operator {#deploy-and-operate-tidb-on-kubernetes-tidb-operator}
 
@@ -30,9 +30,9 @@ TiUPの基本は次のとおりです。
 
 TiDB Operatorの基本は次のとおりです。
 
--   [TiDB Operatorアーキテクチャ](https://docs.pingcap.com/tidb-in-kubernetes/stable/architecture)
--   [Kubernetes でTiDB Operatorを使い始める](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started/)
--   適用可能な TiDB バージョン: v2.1 以降
+- [TiDB Operatorアーキテクチャ](https://docs.pingcap.com/tidb-in-kubernetes/stable/architecture)
+- [Kubernetes でTiDB Operatorを使い始める](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started/)
+- 適用可能な TiDB バージョン: v2.1 以降
 
 ## データ管理ツール {#data-management-tools}
 
@@ -44,18 +44,18 @@ TiDB は、インポートとエクスポート、バックアップと復元、
 
 DM の基本は次のとおりです。
 
--   出典: MySQL/MariaDB
--   ターゲット: TiDB クラスター
--   サポートされている TiDB バージョン: すべてのバージョン
--   Kubernetes サポート: Kubernetes に TiDB DM をデプロイするには[TiDB Operator](https://github.com/pingcap/tidb-operator)を使用します。
+- 出典: MySQL/MariaDB
+- ターゲット: TiDB クラスター
+- サポートされている TiDB バージョン: すべてのバージョン
+- Kubernetes サポート: Kubernetes に TiDB DM をデプロイするには[TiDB Operator](https://github.com/pingcap/tidb-operator)を使用します。
 
 データ量が1TB未満の場合は、DMを使用してMySQL/MariaDBからTiDBに直接データを移行することをお勧めします。移行プロセスには、完全なデータ移行と増分データレプリケーションが含まれます。
 
 データ量が 1 TB を超える場合は、次の手順を実行します。
 
-1.  MySQL/MariaDB から完全なデータをエクスポートするには、 [Dumpling](/dumpling-overview.md)を使用します。
-2.  [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して、手順 1 でエクスポートしたデータを TiDB クラスターにインポートします。
-3.  TiDB DM を使用して、MySQL/MariaDB から TiDB に増分データを複製します。
+1. MySQL/MariaDB から完全なデータをエクスポートするには、 [Dumpling](/dumpling-overview.md)を使用します。
+2. [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して、手順 1 でエクスポートしたデータを TiDB クラスターにインポートします。
+3. TiDB DM を使用して、MySQL/MariaDB から TiDB に増分データを複製します。
 
 > **Note:**
 >
@@ -67,10 +67,10 @@ DM の基本は次のとおりです。
 
 Dumplingの基本は次のとおりです。
 
--   出典: MySQL/TiDB クラスター
--   出力: SQL/CSV ファイル
--   サポートされている TiDB バージョン: すべてのバージョン
--   Kubernetesサポート: いいえ
+- 出典: MySQL/TiDB クラスター
+- 出力: SQL/CSV ファイル
+- サポートされている TiDB バージョン: すべてのバージョン
+- Kubernetesサポート: いいえ
 
 > **Note:**
 >
@@ -82,17 +82,17 @@ Dumplingの基本は次のとおりです。
 
 TiDB Lightning は次のモードをサポートしています。
 
--   `Physical Import Mode` : TiDB Lightningはデータを順序付けられたキーと値のペアに解析し、TiKVに直接インポートします。このモードは通常、テラバイト単位の大容量データを新しいクラスターにインポートするために使用されます。インポート中、クラスターはサービスを提供できません。
--   `Logical Import Mode` : このモードでは、バックエンドとしてTiDB/MySQLを使用します。`Physical Import Mode`よりも速度が遅いですが、オンラインで実行できます。また、MySQLへのデータインポートもサポートしています。
+- `Physical Import Mode` : TiDB Lightningはデータを順序付けられたキーと値のペアに解析し、TiKVに直接インポートします。このモードは通常、テラバイト単位の大容量データを新しいクラスターにインポートするために使用されます。インポート中、クラスターはサービスを提供できません。
+- `Logical Import Mode` : このモードでは、バックエンドとしてTiDB/MySQLを使用します。`Physical Import Mode`よりも速度が遅いですが、オンラインで実行できます。また、MySQLへのデータインポートもサポートしています。
 
 TiDB Lightningの基本は次のとおりです。
 
--   データソース:
-    -   Dumplingの出力ファイル
-    -   その他の互換性のあるCSVファイル
-    -   Amazon Aurora、Apache Hive、またはSnowflakeからエクスポートされたParquetファイル
--   サポートされている TiDB バージョン: v2.1 以降
--   Kubernetes サポート: はい。詳細は[TiDB Lightningを使用して Kubernetes 上の TiDB クラスターにデータを迅速に復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning)を参照してください。
+- データソース:
+    - Dumplingの出力ファイル
+    - その他の互換性のあるCSVファイル
+    - Amazon Aurora、Apache Hive、またはSnowflakeからエクスポートされたParquetファイル
+- サポートされている TiDB バージョン: v2.1 以降
+- Kubernetes サポート: はい。詳細は[TiDB Lightningを使用して Kubernetes 上の TiDB クラスターにデータを迅速に復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning)を参照してください。
 
 > **Note:**
 >
@@ -104,14 +104,14 @@ TiDB Lightningの基本は次のとおりです。
 
 BRの基本は次のとおりです。
 
--   入力および出力データソース
+- 入力および出力データソース
 
-    -   スナップショットのバックアップと復元: [SST + `backupmeta`ファイル](/br/br-snapshot-architecture.md#backup-files)
-    -   ログバックアップとPITR: [ログバックアップファイル](/br/br-log-architecture.md#log-backup-files)
+    - スナップショットのバックアップと復元: [SST + `backupmeta`ファイル](/br/br-snapshot-architecture.md#backup-files)
+    - ログバックアップとPITR: [ログバックアップファイル](/br/br-log-architecture.md#log-backup-files)
 
--   サポートされている TiDB バージョン: v4.0 以降
+- サポートされている TiDB バージョン: v4.0 以降
 
--   Kubernetes サポート: はい。詳細は[BRを使用して S3 互換ストレージにデータをバックアップする](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-to-aws-s3-using-br)と[BRを使用して S3 互換ストレージからデータを復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-aws-s3-using-br)を参照してください。
+- Kubernetes サポート: はい。詳細は[BRを使用して S3 互換ストレージにデータをバックアップする](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-to-aws-s3-using-br)と[BRを使用して S3 互換ストレージからデータを復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-aws-s3-using-br)を参照してください。
 
 ### 増分データレプリケーション - TiCDC {#incremental-data-replication-ticdc}
 
@@ -119,9 +119,9 @@ BRの基本は次のとおりです。
 
 TiCDC の基本は次のとおりです。
 
--   出典: TiDB クラスター
--   対象: TiDB クラスター、MySQL、Kafka、Confluent
--   サポートされている TiDB バージョン: v4.0.6 以降
+- 出典: TiDB クラスター
+- 対象: TiDB クラスター、MySQL、Kafka、Confluent
+- サポートされている TiDB バージョン: v4.0.6 以降
 
 ### sync-diff-inspector {#sync-diff-inspector}
 
@@ -129,6 +129,6 @@ TiCDC の基本は次のとおりです。
 
 sync-diff-inspector の基本は次のとおりです。
 
--   出典: MySQL/TiDB クラスター
--   ターゲット: MySQL/TiDB クラスター
--   サポートされている TiDB バージョン: すべてのバージョン
+- 出典: MySQL/TiDB クラスター
+- ターゲット: MySQL/TiDB クラスター
+- サポートされている TiDB バージョン: すべてのバージョン

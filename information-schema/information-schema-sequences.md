@@ -78,8 +78,8 @@ SEQUENCE_SCHEMA: test
 
 ## 参照 {#see-also}
 
--   [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)
--   [`SHOW CREATE SEQUENCE`](/sql-statements/sql-statement-show-create-sequence.md)
--   [`ALTER SEQUENCE`](/sql-statements/sql-statement-alter-sequence.md)
--   [`DROP SEQUENCE`](/sql-statements/sql-statement-drop-sequence.md)
--   [シーケンス関数](/functions-and-operators/sequence-functions.md)
+- [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)
+- [`SHOW CREATE SEQUENCE`](/sql-statements/sql-statement-show-create-sequence.md)
+- [`ALTER SEQUENCE`](/sql-statements/sql-statement-alter-sequence.md)
+- [`DROP SEQUENCE`](/sql-statements/sql-statement-drop-sequence.md)
+- [シーケンス関数](/functions-and-operators/sequence-functions.md)

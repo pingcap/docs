@@ -23,9 +23,9 @@ summary: TiDBデータベースにおけるADD INDEXの使用方法の概要。
 
 > **Warning:**
 >
-> -   TiDB クラスターで DDL ステートメントが実行されている間は、TiDB クラスターをアップグレード**しないでください**(通常、 `ADD INDEX`や列型の変更など、時間のかかる DDL ステートメントの場合)。
-> -   アップグレードを行う前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスタで実行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスタで DDL ジョブが実行されている場合は、クラスタをアップグレードする前に、DDL ジョブの実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルしてください。
-> -   さらに、クラスタのアップグレード中は、DDLステートメントを一切実行**しないでください**。実行すると、未定義の動作が発生する可能性があります。
+> - TiDB クラスターで DDL ステートメントが実行されている間は、TiDB クラスターをアップグレード**しないでください**(通常、 `ADD INDEX`や列型の変更など、時間のかかる DDL ステートメントの場合)。
+> - アップグレードを行う前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスタで実行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスタで DDL ジョブが実行されている場合は、クラスタをアップグレードする前に、DDL ジョブの実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルしてください。
+> - さらに、クラスタのアップグレード中は、DDLステートメントを一切実行**しないでください**。実行すると、未定義の動作が発生する可能性があります。
 >
 > TiDB を v7.1.0 から以降のバージョンにアップグレードする場合は、前述の制限を無視できます。詳細については、 [TiDBのスムーズアップグレードの制限事項](/smooth-upgrade-tidb.md)を参照してください。
 
@@ -94,31 +94,31 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
--   TiDB は、MySQL との互換性のために、 `HASH` 、 `BTREE` 、 `RTREE`などのインデックス タイプを構文で受け入れますが、それらを無視します。
+- TiDB は、MySQL との互換性のために、 `HASH` 、 `BTREE` 、 `RTREE`などのインデックス タイプを構文で受け入れますが、それらを無視します。
 
--   `SPATIAL`インデックスはサポートされていません。
+- `SPATIAL`インデックスはサポートされていません。
 
--   TiDB Self-Managed およびTiDB Cloud Dedicated は`FULLTEXT`構文の解析をサポートしていますが、 `FULLTEXT`インデックスの使用はサポートしていません。
+- TiDB Self-Managed およびTiDB Cloud Dedicated は`FULLTEXT`構文の解析をサポートしていますが、 `FULLTEXT`インデックスの使用はサポートしていません。
 
     > **Note:**
     >
     > 現在、特定の AWS リージョンのTiDB Cloud Starterインスタンスのみが[`FULLTEXT`構文と索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)をサポートしています。
 
--   降順インデックスはサポートされていません（ MySQL 5.7と同様）。
+- 降順インデックスはサポートされていません（ MySQL 5.7と同様）。
 
--   `CLUSTERED`タイプの主キーをテーブルに追加することはサポートされていません。 `CLUSTERED`タイプの主キーの詳細については、[クラスター化インデックス](/clustered-indexes.md)を参照してください。
+- `CLUSTERED`タイプの主キーをテーブルに追加することはサポートされていません。 `CLUSTERED`タイプの主キーの詳細については、[クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
--   `GLOBAL`インデックスオプションを使用して`PRIMARY KEY`または`UNIQUE INDEX`を[グローバルインデックス](/global-indexes.md)として設定することは、[パーティション化されたテーブル](/partitioned-table.md)に対するTiDBの拡張機能であり、MySQLとは互換性がありません。
+- `GLOBAL`インデックスオプションを使用して`PRIMARY KEY`または`UNIQUE INDEX`を[グローバルインデックス](/global-indexes.md)として設定することは、[パーティション化されたテーブル](/partitioned-table.md)に対するTiDBの拡張機能であり、MySQLとは互換性がありません。
 
 ## 参照 {#see-also}
 
--   [インデックス選択](/choose-index.md)
--   [インデックス問題の解決方法](/wrong-index-solution.md)
--   [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
--   [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
--   [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
--   [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
--   [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
--   [EXPLAIN](/sql-statements/sql-statement-explain.md)
--   [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)
+- [インデックス選択](/choose-index.md)
+- [インデックス問題の解決方法](/wrong-index-solution.md)
+- [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
+- [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
+- [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
+- [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
+- [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
+- [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+- [EXPLAIN](/sql-statements/sql-statement-explain.md)
+- [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)

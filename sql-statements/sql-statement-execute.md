@@ -41,5 +41,5 @@ TiDBの`EXECUTE`文はMySQLと完全に互換性があります。互換性に�
 
 ## 参照 {#see-also}
 
--   [PREPARE](/sql-statements/sql-statement-prepare.md)
--   [DEALLOCATE](/sql-statements/sql-statement-deallocate.md)
+- [PREPARE](/sql-statements/sql-statement-prepare.md)
+- [DEALLOCATE](/sql-statements/sql-statement-deallocate.md)

@@ -15,40 +15,40 @@ summary: TiDB Cloudのブランチ機能をGitHubと連携させる方法を学�
 
 この文書では、以下のトピックについて説明します。
 
-1.  TiDB Cloud BranchingをGitHubと統合する方法
-2.  TiDB Cloud Branchingアプリはどのように動作しますか？
-3.  本番のTiDB Cloud Starterインスタンスではなく、ブランチを使用してすべてのプルリクエストをテストするブランチベースのCIワークフローを構築する方法
+1. TiDB Cloud BranchingをGitHubと統合する方法
+2. TiDB Cloud Branchingアプリはどのように動作しますか？
+3. 本番のTiDB Cloud Starterインスタンスではなく、ブランチを使用してすべてのプルリクエストをテストするブランチベースのCIワークフローを構築する方法
 
 ## 始める前に {#before-you-begin}
 
 統合を行う前に、以下のものがすべて揃っていることを確認してください。
 
--   GitHubアカウント
--   アプリケーション用のGitHubリポジトリ
--   [TiDB Cloud Starterインスタンス](/tidb-cloud/create-tidb-cluster-serverless.md)
+- GitHubアカウント
+- アプリケーション用のGitHubリポジトリ
+- [TiDB Cloud Starterインスタンス](/tidb-cloud/create-tidb-cluster-serverless.md)
 
 ## TiDB Cloud BranchingをGitHubリポジトリと統合する {#integrate-branching-with-your-github-repository}
 
 TiDB Cloud BranchingをGitHubリポジトリと統合するには、以下の手順に従ってください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
 
-2.  左側のナビゲーションペインで**Branches**をクリックします。
+2. 左側のナビゲーションペインで**Branches**をクリックします。
 
-3.  **Branches**ページの右上隅にある**Connect to GitHub**をクリックします。
+3. **Branches**ページの右上隅にある**Connect to GitHub**をクリックします。
 
-    -   GitHubにログインしていない場合は、まずGitHubにログインするよう求められます。
-    -   初めてこの連携機能を使用する場合は、 **TiDB Cloud Branching**アプリの認証を求められます。
+    - GitHubにログインしていない場合は、まずGitHubにログインするよう求められます。
+    - 初めてこの連携機能を使用する場合は、 **TiDB Cloud Branching**アプリの認証を求められます。
 
     <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/branch/github-authorize.png" width="80%" />
 
-4.  **Connect to GitHub**ダイアログで、 **GitHub Account**ドロップダウンリストからGitHubアカウントを選択します。
+4. **Connect to GitHub**ダイアログで、 **GitHub Account**ドロップダウンリストからGitHubアカウントを選択します。
 
     リストにあなたのアカウントが存在しない場合は、 **Install Other Account**をクリックし、画面の指示に従ってアカウントをインストールしてください。
 
-5.  **GitHub Repository**ドロップダウンリストから、対象のリポジトリを選択してください。リストが長い場合は、リポジトリ名を入力して検索することもできます。
+5. **GitHub Repository**ドロップダウンリストから、対象のリポジトリを選択してください。リストが長い場合は、リポジトリ名を入力して検索することもできます。
 
-6.  **Connect**をクリックすると、 TiDB Cloud StarterインスタンスとGitHubリポジトリが接続されます。
+6. **Connect**をクリックすると、 TiDB Cloud StarterインスタンスとGitHubリポジトリが接続されます。
 
     <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/branch/github-connect.png" width="40%" />
 
@@ -100,8 +100,8 @@ github:
 
 TiDB Cloud Branchingアプリがブランチの更新をどのように処理するかを指定します。
 
--   `reset`に設定されている場合、 TiDB Cloud Branching アプリは既存のブランチを最新のデータで更新します。
--   `reserve`に設定されている場合、 TiDB Cloud Branching アプリは最新のコミット用に新しいブランチを作成します。
+- `reset`に設定されている場合、 TiDB Cloud Branching アプリは既存のブランチを最新のデータで更新します。
+- `reserve`に設定されている場合、 TiDB Cloud Branching アプリは最新のコミット用に新しいブランチを作成します。
 
 ```yaml
 github:
@@ -127,9 +127,9 @@ github:
 
 ワークフローを作成するための主な手順は以下のとおりです。
 
-1.  [TiDB Cloud BranchingをGitHubリポジトリと統合する](#integrate-branching-with-your-github-repository)。
+1. [TiDB Cloud BranchingをGitHubリポジトリと統合する](#integrate-branching-with-your-github-repository)。
 
-2.  支店の接続情報を取得します。
+2. 支店の接続情報を取得します。
 
     [wait-for-tidbcloud-branch](https://github.com/tidbcloud/wait-for-tidbcloud-branch)アクションを使用すると、ブランチの準備が整うまで待機し、ブランチの接続情報を取得できます。
 
@@ -152,10 +152,10 @@ github:
             echo "The password is ${{ steps.wait-for-branch.outputs.password }}"
     ```
 
-    -   `token` : GitHub が自動的に[GitHubトークン](https://docs.github.com/en/actions/security-guides/automatic-token-authentication)を作成します。そのまま使用できます。
-    -   `public-key`および`private-key` : TiDB Cloud [APIキー](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)。
+    - `token` : GitHub が自動的に[GitHubトークン](https://docs.github.com/en/actions/security-guides/automatic-token-authentication)を作成します。そのまま使用できます。
+    - `public-key`および`private-key` : TiDB Cloud [APIキー](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)。
 
-3.  テストコードを修正してください。
+3. テストコードを修正してください。
 
     テストコードを修正して、GitHub Actions からの接続情報を受け入れるようにしてください。たとえば、 [ライブデモ](https://github.com/shiyuhang0/tidbcloud-branch-gorm-example)で示されているように、環境を介して接続情報を受け入れることができます。
 
@@ -163,8 +163,8 @@ github:
 
 以下の例を通して、ブランチング機能を備えたGitHub連携の使い方を学びましょう。
 
--   [分岐GORMの例](https://github.com/tidbcloud/branching-gorm-example)
--   [分岐するDjangoの例](https://github.com/tidbcloud/branching-django-example)
--   [分岐レールの例](https://github.com/tidbcloud/branching-rails-example)
+- [分岐GORMの例](https://github.com/tidbcloud/branching-gorm-example)
+- [分岐するDjangoの例](https://github.com/tidbcloud/branching-django-example)
+- [分岐レールの例](https://github.com/tidbcloud/branching-rails-example)
 
 ブランチングGitHubとの連携機能を使わずに、ブランチングCI/CDワークフローを構築することも可能です。例えば、 [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli)とGitHub Actionsを使用して、CI/CDワークフローをカスタマイズできます。

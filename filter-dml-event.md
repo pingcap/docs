@@ -7,10 +7,10 @@ summary: SQL 式を使用して DML イベントをフィルター処理する�
 
 このドキュメントでは、DMを使用して継続的な増分データレプリケーションを実行する際に、SQL式を使用してbinlogイベントをフィルタリングする方法を紹介します。レプリケーションの詳細な手順については、以下のドキュメントを参照してください。
 
--   [小規模データセットをMySQLからTiDBに移行する](/migrate-small-mysql-to-tidb.md)
--   [大規模データセットをMySQLからTiDBに移行する](/migrate-large-mysql-to-tidb.md)
--   [小さなデータセットの MySQL シャードを TiDB に移行してマージする](/migrate-small-mysql-shards-to-tidb.md)
--   [大規模データセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
+- [小規模データセットをMySQLからTiDBに移行する](/migrate-small-mysql-to-tidb.md)
+- [大規模データセットをMySQLからTiDBに移行する](/migrate-large-mysql-to-tidb.md)
+- [小さなデータセットの MySQL シャードを TiDB に移行してマージする](/migrate-small-mysql-shards-to-tidb.md)
+- [大規模データセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
 
 増分データレプリケーションを実行する際に、 [Binlogイベントフィルター](/filter-binlog-event.md)を使用して特定の種類のbinlogイベントをフィルタリングできます。例えば、アーカイブや監査などの目的で、 `DELETE`イベントを下流に複製しないように選択できます。ただし、 Binlogイベントフィルタは、より細かい粒度が求められる行の`DELETE`のイベントをフィルタリングするかどうかを判断できません。
 
@@ -56,18 +56,18 @@ MySQL [test]> select * from tbl;
 
 ## コンフィグレーションパラメータと説明 {#configuration-parameters-and-description}
 
--   `schema` : 一致させる上流スキーマの名前。ワイルドカード一致や通常の一致はサポートされていません。
--   `table` : 照合するアップストリームテーブルの名前。ワイルドカードによる照合や通常の照合はサポートされていません。
--   `insert-value-expr` : `INSERT`種類のbinlogイベント (WRITE_ROWS_EVENT) によって伝達される値に適用される式を設定します。この式は、同じ設定項目内で`update-old-value-expr` 、 `update-new-value-expr` 、または`delete-value-expr`と同時に使用することはできません。
--   `update-old-value-expr` : `UPDATE`種類のbinlogイベント（UPDATE_ROWS_EVENT）によって保持される古い値に適用される式を設定します。この式は、同じ設定項目内で`insert-value-expr`または`delete-value-expr`と同時に使用することはできません。
--   `update-new-value-expr` : `UPDATE`種類のbinlogイベント（UPDATE_ROWS_EVENT）によって送信される新しい値に適用される式を設定します。この式は、同じ設定項目内で`insert-value-expr`または`delete-value-expr`と同時に使用することはできません。
--   `delete-value-expr` : `DELETE`種類のbinlogイベント (DELETE_ROWS_EVENT) によって伝達される値に適用される式を設定します。この式は`insert-value-expr` 、 `update-old-value-expr` 、または`update-new-value-expr`と同時に使用することはできません。
+- `schema` : 一致させる上流スキーマの名前。ワイルドカード一致や通常の一致はサポートされていません。
+- `table` : 照合するアップストリームテーブルの名前。ワイルドカードによる照合や通常の照合はサポートされていません。
+- `insert-value-expr` : `INSERT`種類のbinlogイベント (WRITE_ROWS_EVENT) によって伝達される値に適用される式を設定します。この式は、同じ設定項目内で`update-old-value-expr` 、 `update-new-value-expr` 、または`delete-value-expr`と同時に使用することはできません。
+- `update-old-value-expr` : `UPDATE`種類のbinlogイベント（UPDATE_ROWS_EVENT）によって保持される古い値に適用される式を設定します。この式は、同じ設定項目内で`insert-value-expr`または`delete-value-expr`と同時に使用することはできません。
+- `update-new-value-expr` : `UPDATE`種類のbinlogイベント（UPDATE_ROWS_EVENT）によって送信される新しい値に適用される式を設定します。この式は、同じ設定項目内で`insert-value-expr`または`delete-value-expr`と同時に使用することはできません。
+- `delete-value-expr` : `DELETE`種類のbinlogイベント (DELETE_ROWS_EVENT) によって伝達される値に適用される式を設定します。この式は`insert-value-expr` 、 `update-old-value-expr` 、または`update-new-value-expr`と同時に使用することはできません。
 
 > **Note:**
 >
-> -   `update-old-value-expr`と`update-new-value-expr`を一緒に設定できます。
-> -   `update-old-value-expr`と`update-new-value-expr`一緒に設定されている場合、「更新 + 古い値」が`update-old-value-expr`一致し**、** 「更新 + 新しい値」が`update-new-value-expr`一致する行がフィルタリングされます。
-> -   `update-old-value-expr`と`update-new-value-expr`のいずれかが設定されている場合、設定された式によって**行の変更全体**をフィルタリングするかどうかが決定されます。つまり、古い値の削除と新しい値の挿入が全体としてフィルタリングされます。
+> - `update-old-value-expr`と`update-new-value-expr`を一緒に設定できます。
+> - `update-old-value-expr`と`update-new-value-expr`一緒に設定されている場合、「更新 + 古い値」が`update-old-value-expr`一致し**、** 「更新 + 新しい値」が`update-new-value-expr`一致する行がフィルタリングされます。
+> - `update-old-value-expr`と`update-new-value-expr`のいずれかが設定されている場合、設定された式によって**行の変更全体**をフィルタリングするかどうかが決定されます。つまり、古い値の削除と新しい値の挿入が全体としてフィルタリングされます。
 
 SQL式は1つの列でも複数の列でも使用できます。また、TiDBでサポートされているSQL関数（ `c % 2 = 0` 、 `a*a + b*b = c*c` 、 `ts > NOW()`など）も使用できます。
 

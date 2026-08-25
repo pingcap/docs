@@ -8,16 +8,16 @@ aliases: ['/ja/tidb/stable/dev-guide-update-data/','/ja/tidb/dev/dev-guide-updat
 
 このドキュメントでは、さまざまなプログラミング言語を使用して、以下のSQL文でTiDBのデータを更新する方法について説明します。
 
--   [UPDATE](/sql-statements/sql-statement-update.md): 指定されたテーブル内のデータを変更するために使用されます。
--   [INSERT ON DUPLICATE KEY UPDATE](/sql-statements/sql-statement-insert.md): データの挿入、および主キーまたは一意キーの競合が発生した場合のデータの更新に使用します。複数の一意キー（主キーを含む）がある場合は、このステートメントの使用は**推奨されません**。これは、このステートメントが一意キー（主キーを含む）の競合を検出するとすぐにデータを更新するためです。複数の行で競合が発生した場合、更新されるのは1行のみです。
+- [UPDATE](/sql-statements/sql-statement-update.md): 指定されたテーブル内のデータを変更するために使用されます。
+- [INSERT ON DUPLICATE KEY UPDATE](/sql-statements/sql-statement-insert.md): データの挿入、および主キーまたは一意キーの競合が発生した場合のデータの更新に使用します。複数の一意キー（主キーを含む）がある場合は、このステートメントの使用は**推奨されません**。これは、このステートメントが一意キー（主キーを含む）の競合を検出するとすぐにデータを更新するためです。複数の行で競合が発生した場合、更新されるのは1行のみです。
 
 ## 始める前に {#before-you-start}
 
 この文書を読む前に、以下のものを準備してください。
 
--   [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)、データベース[データベースを作成する](/develop/dev-guide-create-database.md)、[テーブルを作成する](/develop/dev-guide-create-table.md)、 [セカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md)読んでください。
--   `UPDATE`データを取得したい場合は、最初に[データを挿入する](/develop/dev-guide-insert-data.md)必要があります。
+- [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)、データベース[データベースを作成する](/develop/dev-guide-create-database.md)、[テーブルを作成する](/develop/dev-guide-create-table.md)、 [セカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md)読んでください。
+- `UPDATE`データを取得したい場合は、最初に[データを挿入する](/develop/dev-guide-insert-data.md)必要があります。
 
 ## `UPDATE`を使用する {#use-update}
 
@@ -49,8 +49,8 @@ UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {fil
 
 データ更新に関するベストプラクティスを以下に示します。
 
--   `WHERE`ステートメントには、必ず`UPDATE`句を指定してください。 `UPDATE`ステートメントに`WHERE`句がない場合、TiDB はテーブル内の***すべての行***を更新します。
--   大量の行 (たとえば、1 万行以上) を更新する必要がある場合は[一括更新](#bulk-update)を使用します。 TiDB は 1 つのトランザクションのサイズを制限しているため ( [トランザクションの合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)、一度にあまりにも多くのデータ更新が行われると、長時間ロックが保持されすぎたり ([悲観的トランザクション](/pessimistic-transaction.md))、競合が発生したり ([楽観的トランザクション](/optimistic-transaction.md)) されます。
+- `WHERE`ステートメントには、必ず`UPDATE`句を指定してください。 `UPDATE`ステートメントに`WHERE`句がない場合、TiDB はテーブル内の***すべての行***を更新します。
+- 大量の行 (たとえば、1 万行以上) を更新する必要がある場合は[一括更新](#bulk-update)を使用します。 TiDB は 1 つのトランザクションのサイズを制限しているため ( [トランザクションの合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)、一度にあまりにも多くのデータ更新が行われると、長時間ロックが保持されすぎたり ([悲観的トランザクション](/pessimistic-transaction.md))、競合が発生したり ([楽観的トランザクション](/optimistic-transaction.md)) されます。
 
 ### `UPDATE`例 {#update-example}
 
@@ -105,8 +105,8 @@ INSERT INTO {table} ({columns}) VALUES ({values})
 
 ### `INSERT ON DUPLICATE KEY UPDATE`のベストプラクティス {#insert-on-duplicate-key-update-best-practices}
 
--   `INSERT ON DUPLICATE KEY UPDATE`は、一意キーが 1 つだけのテーブルでのみ使用してください。このステートメントは***、一意キー***(主キーを含む) の競合が検出された場合、データを更新します。競合する行が複数ある場合、更新されるのは 1 行のみです。したがって、競合する行が 1 つだけであることを保証できない限り、一意キーが複数あるテーブルで`INSERT ON DUPLICATE KEY UPDATE`ステートメントを使用することはお勧めしません。
--   データを作成または更新する際に、このステートメントを使用してください。
+- `INSERT ON DUPLICATE KEY UPDATE`は、一意キーが 1 つだけのテーブルでのみ使用してください。このステートメントは***、一意キー***(主キーを含む) の競合が検出された場合、データを更新します。競合する行が複数ある場合、更新されるのは 1 行のみです。したがって、競合する行が 1 つだけであることを保証できない限り、一意キーが複数あるテーブルで`INSERT ON DUPLICATE KEY UPDATE`ステートメントを使用することはお勧めしません。
+- データを作成または更新する際に、このステートメントを使用してください。
 
 ### `INSERT ON DUPLICATE KEY UPDATE`例 {#insert-on-duplicate-key-update-example}
 
@@ -395,7 +395,7 @@ public class BatchUpdateExample {
 }
 ```
 
--   `hibernate.cfg.xml`設定:
+- `hibernate.cfg.xml`設定:
 
 ```xml
 <?xml version='1.0' encoding='utf-8'?>
@@ -429,6 +429,6 @@ public class BatchUpdateExample {
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

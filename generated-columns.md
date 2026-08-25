@@ -137,14 +137,14 @@ desc select a+1 from t where a+1=3;
 
 JSON と生成列の現在の制限は次のとおりです。
 
--   保存生成列を`ALTER TABLE`経由で追加することはできません。
--   `ALTER TABLE`文を使用して、保存生成列を通常の列に変換したり、通常の列を保存生成列に変換したりすることはできません。
--   保存生成列の式を`ALTER TABLE`ステートメントを通じて変更することはできません。
--   [JSON関数](/functions-and-operators/json-functions.md)すべてがサポートされているわけではありません。
--   [`NULLIF()`関数](/functions-and-operators/control-flow-functions.md#nullif)はサポートされていません。代わりに[`CASE`関数](/functions-and-operators/control-flow-functions.md#case)を使用してください。
--   現在、生成列インデックスの置換ルールは、生成列が仮想生成列である場合にのみ有効です。保存生成列には適用されませんが、生成列自体を直接使用することでインデックスを使用することは可能です。
--   次の関数と式は生成列の定義では許可されておらず、使用すると TiDB によってエラーが返されます。
+- 保存生成列を`ALTER TABLE`経由で追加することはできません。
+- `ALTER TABLE`文を使用して、保存生成列を通常の列に変換したり、通常の列を保存生成列に変換したりすることはできません。
+- 保存生成列の式を`ALTER TABLE`ステートメントを通じて変更することはできません。
+- [JSON関数](/functions-and-operators/json-functions.md)すべてがサポートされているわけではありません。
+- [`NULLIF()`関数](/functions-and-operators/control-flow-functions.md#nullif)はサポートされていません。代わりに[`CASE`関数](/functions-and-operators/control-flow-functions.md#case)を使用してください。
+- 現在、生成列インデックスの置換ルールは、生成列が仮想生成列である場合にのみ有効です。保存生成列には適用されませんが、生成列自体を直接使用することでインデックスを使用することは可能です。
+- 次の関数と式は生成列の定義では許可されておらず、使用すると TiDB によってエラーが返されます。
 
-    -   `RAND` 、 `UUID` 、 `CURRENT_TIMESTAMP`などの非決定論的な関数と式。
-    -   `CONNECTION_ID`や`CURRENT_USER`など、セッション固有またはグローバル状態に依存する関数。
-    -   `GET_LOCK` 、 `RELEASE_LOCK` 、 `SLEEP`など、システム状態に影響を与えたり、システムとの対話を実行したりする関数。
+    - `RAND` 、 `UUID` 、 `CURRENT_TIMESTAMP`などの非決定論的な関数と式。
+    - `CONNECTION_ID`や`CURRENT_USER`など、セッション固有またはグローバル状態に依存する関数。
+    - `GET_LOCK` 、 `RELEASE_LOCK` 、 `SLEEP`など、システム状態に影響を与えたり、システムとの対話を実行したりする関数。

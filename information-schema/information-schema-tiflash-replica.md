@@ -31,10 +31,10 @@ DESC TIFLASH_REPLICA;
 
 `TIFLASH_REPLICA`テーブル内のフィールドは次のように説明されます。
 
--   `TABLE_SCHEMA` : テーブルが属するデータベースの名前。
--   `TABLE_NAME` : テーブルの名前。
--   `TABLE_ID` : テーブルの内部 ID。TiDB クラスター内で一意です。
--   `REPLICA_COUNT` : TiFlashレプリカの数。
--   `LOCATION_LABELS` : TiFlashレプリカが作成されるときに設定される LocationLabelList。
--   `AVAILABLE` : テーブルのTiFlashレプリカが利用可能かどうかを示します。値が`1` （利用可能）の場合、TiDB オプティマイザーはクエリコストに基づいて、クエリを TiKV またはTiFlashにプッシュダウンするかをインテリジェントに選択します。値が`0` （利用不可）の場合、TiDB はクエリをTiFlashにプッシュダウンしません。このフィールドの値が`1` （利用可能）になると、それ以上変化しなくなります。
--   `PROGRESS` : TiFlashレプリカのレプリケーションの進行状況。小数点以下2桁の精度で分単位です。このフィールドのスコープは`[0, 1]`です。`AVAILABLE`が`1`で`PROGRESS`が1未満の場合、 TiFlashレプリカはTiKVより大幅に遅れており、データレプリケーションの待機タイムアウトにより、 TiFlashにプッシュダウンされたクエリは失敗する可能性があります。
+- `TABLE_SCHEMA` : テーブルが属するデータベースの名前。
+- `TABLE_NAME` : テーブルの名前。
+- `TABLE_ID` : テーブルの内部 ID。TiDB クラスター内で一意です。
+- `REPLICA_COUNT` : TiFlashレプリカの数。
+- `LOCATION_LABELS` : TiFlashレプリカが作成されるときに設定される LocationLabelList。
+- `AVAILABLE` : テーブルのTiFlashレプリカが利用可能かどうかを示します。値が`1` （利用可能）の場合、TiDB オプティマイザーはクエリコストに基づいて、クエリを TiKV またはTiFlashにプッシュダウンするかをインテリジェントに選択します。値が`0` （利用不可）の場合、TiDB はクエリをTiFlashにプッシュダウンしません。このフィールドの値が`1` （利用可能）になると、それ以上変化しなくなります。
+- `PROGRESS` : TiFlashレプリカのレプリケーションの進行状況。小数点以下2桁の精度で分単位です。このフィールドのスコープは`[0, 1]`です。`AVAILABLE`が`1`で`PROGRESS`が1未満の場合、 TiFlashレプリカはTiKVより大幅に遅れており、データレプリケーションの待機タイムアウトにより、 TiFlashにプッシュダウンされたクエリは失敗する可能性があります。

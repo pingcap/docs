@@ -26,8 +26,8 @@ summary: TiDB クラスターのハイブリッド展開トポロジについて
 
 ### トポロジテンプレート {#topology-templates}
 
--   [ハイブリッド展開のためのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-multi-instance.yaml)
--   [ハイブリッド展開のための複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-multi-instance.yaml)
+- [ハイブリッド展開のためのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-multi-instance.yaml)
+- [ハイブリッド展開のための複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-multi-instance.yaml)
 
 上記の TiDB クラスター トポロジファイルの構成項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
@@ -35,42 +35,42 @@ summary: TiDB クラスターのハイブリッド展開トポロジについて
 
 このセクションでは、単一マシンに複数のインスタンスをデプロイする際の主要なパラメータについて説明します。これは主に、単一マシンにTiDBとTiKVの複数のインスタンスをデプロイするシナリオで使用されます。以下の計算方法に従って、結果を構成テンプレートに入力する必要があります。
 
--   TiKVの設定を最適化する
+- TiKVの設定を最適化する
 
-    -   `readpool`スレッドプールに自己適応するように設定します。`readpool.unified.max-thread-count`パラメータを設定することで、 `readpool.storage`と`readpool.coprocessor`が統合スレッドプールを共有し、それぞれ自己適応スイッチを設定できます。
+    - `readpool`スレッドプールに自己適応するように設定します。`readpool.unified.max-thread-count`パラメータを設定することで、 `readpool.storage`と`readpool.coprocessor`が統合スレッドプールを共有し、それぞれ自己適応スイッチを設定できます。
 
-        -   `readpool.storage`と`readpool.coprocessor`有効にする:
+        - `readpool.storage`と`readpool.coprocessor`有効にする:
 
             ```yaml
             readpool.storage.use-unified-pool: true
             readpool.coprocessor.use-unified-pool: true
             ```
 
-        -   計算方法：
+        - 計算方法：
 
             ```
             readpool.unified.max-thread-count = cores * 0.8 / the number of TiKV instances
             ```
 
-    -   storageCF（すべてのRocksDB列ファミリー）をメモリに適応させるように設定するには、 `storage.block-cache.capacity`パラメータを設定することで、CFがメモリ使用量を自動的に調整できるようになります。
+    - storageCF（すべてのRocksDB列ファミリー）をメモリに適応させるように設定するには、 `storage.block-cache.capacity`パラメータを設定することで、CFがメモリ使用量を自動的に調整できるようになります。
 
-        -   計算方法：
+        - 計算方法：
 
             ```
             storage.block-cache.capacity = (MEM_TOTAL * 0.5 / the number of TiKV instances)
             ```
 
-    -   複数の TiKV インスタンスが同じ物理ディスクにデプロイされている場合は、TiKV 構成に`capacity`パラメータを追加します。
+    - 複数の TiKV インスタンスが同じ物理ディスクにデプロイされている場合は、TiKV 構成に`capacity`パラメータを追加します。
 
         ```
         raftstore.capacity = disk total capacity / the number of TiKV instances
         ```
 
--   ラベルスケジュール設定
+- ラベルスケジュール設定
 
     1台のマシンに複数のTiKVインスタンスがデプロイされているため、物理マシンがダウンすると、 Raftグループはデフォルトの3つのレプリカのうち2つを失い、クラスターが利用できなくなる可能性があります。この問題に対処するには、ラベルを使用してPDのスマートスケジューリングを有効にします。これにより、 Raftグループは同一マシン上の複数のTiKVインスタンスに2つ以上のレプリカを持つようになります。
 
-    -   TiKV構成
+    - TiKV構成
 
         同じ物理マシンに対して同じホストレベルのラベル情報が構成されています。
 
@@ -80,7 +80,7 @@ summary: TiDB クラスターのハイブリッド展開トポロジについて
             host: tikv1
         ```
 
-    -   PD構成
+    - PD構成
 
         PD がリージョンを識別してスケジュールできるようにするには、PD のラベル タイプを構成します。
 
@@ -89,17 +89,17 @@ summary: TiDB クラスターのハイブリッド展開トポロジについて
           replication.location-labels: ["host"]
         ```
 
--   `numa_node`コアバインディング
+- `numa_node`コアバインディング
 
-    -   インスタンスパラメータモジュールで、対応するパラメータ`numa_node`を設定し、CPUコアの数を追加します。
+    - インスタンスパラメータモジュールで、対応するパラメータ`numa_node`を設定し、CPUコアの数を追加します。
 
-    -   NUMAを使用してコアをバインドする前に、numactlツールがインストールされていること、および物理マシンのCPU情報を確認してください。その後、パラメータを設定してください。
+    - NUMAを使用してコアをバインドする前に、numactlツールがインストールされていること、および物理マシンのCPU情報を確認してください。その後、パラメータを設定してください。
 
-    -   `numa_node`パラメータは`numactl --membind`構成に対応します。
+    - `numa_node`パラメータは`numactl --membind`構成に対応します。
 
 > **Note:**
 >
-> -   構成ファイル テンプレートを編集するときは、必要なパラメータ、IP、ポート、およびディレクトリを変更します。
-> -   各コンポーネントは、グローバルポートの`<deploy_dir>/<components_name>-<port>`デフォルトでポート`deploy_dir`として使用します。例えば、TiDBがポート`4001`を指定した場合、そのポート`deploy_dir`デフォルトで`/tidb-deploy/tidb-4001`なります。したがって、マルチインスタンスのシナリオでは、デフォルト以外のポートを指定する場合、ディレクトリを再度指定する必要はありません。
-> -   設定ファイルに`tidb`ユーザーを手動で作成する必要はありません。TiUPTiUPコンポーネントは、ターゲットマシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、コントロールマシンと同じユーザーを維持することもできます。
-> -   デプロイメントディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。
+> - 構成ファイル テンプレートを編集するときは、必要なパラメータ、IP、ポート、およびディレクトリを変更します。
+> - 各コンポーネントは、グローバルポートの`<deploy_dir>/<components_name>-<port>`デフォルトでポート`deploy_dir`として使用します。例えば、TiDBがポート`4001`を指定した場合、そのポート`deploy_dir`デフォルトで`/tidb-deploy/tidb-4001`なります。したがって、マルチインスタンスのシナリオでは、デフォルト以外のポートを指定する場合、ディレクトリを再度指定する必要はありません。
+> - 設定ファイルに`tidb`ユーザーを手動で作成する必要はありません。TiUPTiUPコンポーネントは、ターゲットマシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、コントロールマシンと同じユーザーを維持することもできます。
+> - デプロイメントディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。

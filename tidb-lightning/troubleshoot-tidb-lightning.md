@@ -15,9 +15,9 @@ TiDB Lightning が遅くなる理由はいくつかあります。
 
 **原因 1** : `region-concurrency`設定が高すぎるため、スレッドの競合が発生し、パフォーマンスが低下します。
 
-1.  設定は、ログの先頭から`region-concurrency`を検索すると見つかります。
-2.  TiDB Lightning が他のサービス (TiKV Importer など) と同じマシンを共有する場合、 `region-concurrency`をCPU コアの合計数の 75% に**手動で**設定する必要があります。
-3.  CPUクォータ（例えばKubernetesの設定による制限）がある場合、 TiDB Lightningはそれを読み取れない可能性があります。この場合も、 `region-concurrency`を**手動で**減らす必要があります。
+1. 設定は、ログの先頭から`region-concurrency`を検索すると見つかります。
+2. TiDB Lightning が他のサービス (TiKV Importer など) と同じマシンを共有する場合、 `region-concurrency`をCPU コアの合計数の 75% に**手動で**設定する必要があります。
+3. CPUクォータ（例えばKubernetesの設定による制限）がある場合、 TiDB Lightningはそれを読み取れない可能性があります。この場合も、 `region-concurrency`を**手動で**減らす必要があります。
 
 **原因 2** : テーブルスキーマが複雑すぎます。
 
@@ -76,25 +76,25 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 
 `checksum mismatched`を含む行は情報`total_kvs: x vs y`を提供します。ここで、 `x`はインポートの完了後にターゲットクラスターによって計算されたキーと値のペア (KV ペア) の数を示し、 `y`はローカルデータソースによって生成されたキーと値のペアの数を示します。
 
--   `x`が大きい場合は、ターゲットクラスター内にさらに多くの KV ペアが存在することを意味します。
-    -   インポート前にこのテーブルが空でなかったために、データのチェックサムに影響が出ている可能性があります。また、 TiDB Lightning が以前に障害を起こしてシャットダウンしたものの、正常に再起動しなかった可能性もあります。
--   `y`が大きい場合は、ローカルデータソースにさらに多くの KV ペアが存在することを意味します。
-    -   ターゲットデータベースのチェックサムがすべて0の場合、インポートが実行されていないことを意味します。クラスターがビジー状態のため、データを受信できない可能性があります。
-    -   エクスポートされたデータに、重複した値を持つ UNIQUE KEY や PRIMARY KEY などの重複データが含まれている可能性があります。また、下流のテーブル構造では大文字と小文字が区別されないのに対し、データは大文字と小文字が区別される可能性があります。
--   その他の考えられる理由
-    -   データソースが機械生成で、 Dumplingによってバックアップされていない場合は、データがテーブルの制限に準拠していることを確認してください。例えば、AUTO_INCREMENT 列は 0 ではなく正の値である必要があります。
+- `x`が大きい場合は、ターゲットクラスター内にさらに多くの KV ペアが存在することを意味します。
+    - インポート前にこのテーブルが空でなかったために、データのチェックサムに影響が出ている可能性があります。また、 TiDB Lightning が以前に障害を起こしてシャットダウンしたものの、正常に再起動しなかった可能性もあります。
+- `y`が大きい場合は、ローカルデータソースにさらに多くの KV ペアが存在することを意味します。
+    - ターゲットデータベースのチェックサムがすべて0の場合、インポートが実行されていないことを意味します。クラスターがビジー状態のため、データを受信できない可能性があります。
+    - エクスポートされたデータに、重複した値を持つ UNIQUE KEY や PRIMARY KEY などの重複データが含まれている可能性があります。また、下流のテーブル構造では大文字と小文字が区別されないのに対し、データは大文字と小文字が区別される可能性があります。
+- その他の考えられる理由
+    - データソースが機械生成で、 Dumplingによってバックアップされていない場合は、データがテーブルの制限に準拠していることを確認してください。例えば、AUTO_INCREMENT 列は 0 ではなく正の値である必要があります。
 
 **ソリューション**：
 
-1.  `tidb-lightning-ctl`を使用して破損したデータを削除し、テーブル構造とデータを確認して、 TiDB Lightningを再起動して、影響を受けるテーブルを再度インポートします。
+1. `tidb-lightning-ctl`を使用して破損したデータを削除し、テーブル構造とデータを確認して、 TiDB Lightningを再起動して、影響を受けるテーブルを再度インポートします。
 
     ```sh
     tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=all
     ```
 
-2.  ターゲットデータベースの負荷を軽減するために、チェックポイント (変更`[checkpoint] dsn` ) を保存するために外部データベースの使用を検討してください。
+2. ターゲットデータベースの負荷を軽減するために、チェックポイント (変更`[checkpoint] dsn` ) を保存するために外部データベースの使用を検討してください。
 
-3.  TiDB Lightningが不適切に再起動された場合は、 FAQの「 [TiDB Lightningを適切に再起動する方法](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning) 」セクションも参照してください。
+3. TiDB Lightningが不適切に再起動された場合は、 FAQの「 [TiDB Lightningを適切に再起動する方法](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning) 」セクションも参照してください。
 
 ### `Checkpoint for … has invalid status:` (エラーコード) {#checkpoint-for--has-invalid-status-error-code}
 
@@ -118,11 +118,11 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 **ソリューション**：
 
-1.  ファイル全体が UTF-8 または GB-18030 になるようにスキーマを修正します。
+1. ファイル全体が UTF-8 または GB-18030 になるようにスキーマを修正します。
 
-2.  ターゲットデータベース内の影響を受けるテーブルを手動で`CREATE` 。
+2. ターゲットデータベース内の影響を受けるテーブルを手動で`CREATE` 。
 
-3.  `[mydumper] character-set = "binary"`を設定するとチェックをスキップします。ただし、これにより対象データベースに文字化けが発生する可能性があります。
+3. `[mydumper] character-set = "binary"`を設定するとチェックをスキップします。ただし、これにより対象データベースに文字化けが発生する可能性があります。
 
 ### `[sql2kv] sql encode error = [types:1292]invalid time format: '{1970 1 1 …}'` {#sql2kv-sql-encode-error--types1292invalid-time-format-1970-1-1-}
 
@@ -130,7 +130,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 **ソリューション**：
 
-1.  TiDB Lightningとソースデータベースが同じタイムゾーンを使用していることを確認します。
+1. TiDB Lightningとソースデータベースが同じタイムゾーンを使用していることを確認します。
 
     TiDB Lightning を直接実行する場合、 `$TZ`環境変数を使用してタイムゾーンを強制できます。
 
@@ -139,7 +139,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
     TZ='Asia/Shanghai' bin/tidb-lightning -config tidb-lightning.toml
     ```
 
-2.  クラスター全体で同じ最新バージョン`tzdata` (バージョン 2018i 以上) が使用されていることを確認します。
+2. クラスター全体で同じ最新バージョン`tzdata` (バージョン 2018i 以上) が使用されていることを確認します。
 
     CentOS では、 `yum info tzdata`を実行してインストールされているバージョンとアップデートの有無を確認します。`yum upgrade tzdata`を実行してパッケージをアップグレードします。
 
@@ -149,8 +149,8 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 **解決**：
 
--   制限を動的に増やすには、 [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760)システム変数を使用します。
--   TiKVにも同様の制限があることに注意してください。1回の書き込みリクエストのデータサイズが[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size) （デフォルトでは`8MiB` ）を超えると、TiKVはこのリクエストの処理を拒否します。テーブルに大きなサイズの行がある場合は、両方の設定を変更する必要があります。
+- 制限を動的に増やすには、 [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760)システム変数を使用します。
+- TiKVにも同様の制限があることに注意してください。1回の書き込みリクエストのデータサイズが[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size) （デフォルトでは`8MiB` ）を超えると、TiKVはこのリクエストの処理を拒否します。テーブルに大きなサイズの行がある場合は、両方の設定を変更する必要があります。
 
 ### TiDB Lightningがモードを切り替えるときに、 `rpc error: code = Unimplemented ...` {#encounter-rpc-error-code--unimplemented--when-tidb-lightning-switches-the-mode}
 
@@ -158,8 +158,8 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 **ソリューション**：
 
--   クラスター内にTiFlashノードがある場合は、クラスターを`v4.0.0-rc.2`以上のバージョンに更新できます。
--   クラスターをアップグレードしない場合は、 TiFlash を一時的に無効にします。
+- クラスター内にTiFlashノードがある場合は、クラスターを`v4.0.0-rc.2`以上のバージョンに更新できます。
+- クラスターをアップグレードしない場合は、 TiFlash を一時的に無効にします。
 
 ### `tidb lightning encountered error: TiDB version too old, expected '>=4.0.0', found '3.0.18'` {#tidb-lightning-encountered-error-tidb-version-too-old-expected-400-found-3018}
 
@@ -182,7 +182,7 @@ TiDBはMySQLのすべての文字セットをサポートしているわけで�
 
 ### `invalid compression type ...` {#invalid-compression-type-}
 
--   TiDB Lightning v6.4.0以降のバージョンでは、 `gzip` `snappy`圧縮データファイルのみがサポートされています。その他の種類の圧縮ファイルを使用するとエラーが発生します。ソースデータファイルが保存されているディレクトリにサポートされていない圧縮ファイルが存在する場合、タスクがエラーを報告します。このようなエラーを回避するには、サポートされていないファイルをインポートデータディレクトリから移動してください。詳細については、 [圧縮ファイル](/tidb-lightning/tidb-lightning-data-source.md#compressed-files)を参照してください。
+- TiDB Lightning v6.4.0以降のバージョンでは、 `gzip` `snappy`圧縮データファイルのみがサポートされています。その他の種類の圧縮ファイルを使用するとエラーが発生します。ソースデータファイルが保存されているディレクトリにサポートされていない圧縮ファイルが存在する場合、タスクがエラーを報告します。このようなエラーを回避するには、サポートされていないファイルをインポートデータディレクトリから移動してください。詳細については、 [圧縮ファイル](/tidb-lightning/tidb-lightning-data-source.md#compressed-files)を参照してください。
 
 > **Note:**
 >

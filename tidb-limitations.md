@@ -49,8 +49,8 @@ summary: TiDB の使用制限について学習します。
 
 <CustomContent platform="tidb">
 
--   上限値`Columns`は[`table-column-count-limit`](/tidb-configuration-file.md#table-column-count-limit-new-in-v50)で変更できます。
--   上限値`Indexes`は[`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50)で変更できます。
+- 上限値`Columns`は[`table-column-count-limit`](/tidb-configuration-file.md#table-column-count-limit-new-in-v50)で変更できます。
+- 上限値`Indexes`は[`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50)で変更できます。
 
 </CustomContent>
 

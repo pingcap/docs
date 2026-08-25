@@ -9,23 +9,23 @@ summary: TiDB Cloudコンソールでデータベースユーザーとロール�
 
 > **Note:**
 >
-> -   **SQL Users**ページはパブリックプレビューであり、リクエストがあった場合のみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**?**をクリックし、**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **Description**フィールドに「SQLユーザーページの申請」と入力して、 **Submit**をクリックします。
-> -   データベースのユーザーと役割[組織およびプロジェクトのユーザーと役割](/tidb-cloud/manage-user-access.md)から独立しています。データベースユーザーは TiDB クラスター内のデータベースにアクセスするために使用され、組織およびプロジェクト ユーザーは[TiDB Cloudコンソール](https://tidbcloud.com/)内の組織およびプロジェクトにアクセスするために使用されます。
-> -   **SQL Users**ページに加えて、SQL クライアントを使用してクラスターに接続し、SQL ステートメントを作成することによって、データベースユーザーとロールを管理することもできます。詳細については、 [TiDBユーザーアカウント管理](https://docs.pingcap.com/tidb/dev/user-account-management)を参照してください。
+> - **SQL Users**ページはパブリックプレビューであり、リクエストがあった場合のみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**?**をクリックし、**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **Description**フィールドに「SQLユーザーページの申請」と入力して、 **Submit**をクリックします。
+> - データベースのユーザーと役割[組織およびプロジェクトのユーザーと役割](/tidb-cloud/manage-user-access.md)から独立しています。データベースユーザーは TiDB クラスター内のデータベースにアクセスするために使用され、組織およびプロジェクト ユーザーは[TiDB Cloudコンソール](https://tidbcloud.com/)内の組織およびプロジェクトにアクセスするために使用されます。
+> - **SQL Users**ページに加えて、SQL クライアントを使用してクラスターに接続し、SQL ステートメントを作成することによって、データベースユーザーとロールを管理することもできます。詳細については、 [TiDBユーザーアカウント管理](https://docs.pingcap.com/tidb/dev/user-account-management)を参照してください。
 
 ## データベースユーザーの役割 {#roles-of-database-users}
 
 TiDB Cloudでは、ロールベースのアクセス制御のために、組み込みロールと複数のカスタムロール（利用可能な場合）の両方をSQLユーザーに付与できます。
 
--   組み込みの役割
+- 組み込みの役割
 
     TiDB Cloudには、SQLユーザーのデータベースアクセスを制御するための組み込みロールがいくつか用意されています。これらの組み込みロールのいずれかをSQLユーザーに付与することができます。
 
-    -   `Database Admin`
-    -   `Database Read-Write`
-    -   `Database Read-Only`
+    - `Database Admin`
+    - `Database Read-Write`
+    - `Database Read-Only`
 
--   カスタムロール
+- カスタムロール
 
     組み込みロールに加えて、クラスターに[`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)ステートメントを使用して作成されたカスタムロールがある場合、 TiDB CloudコンソールでSQLユーザーを作成または編集する際に、これらのカスタムロールをSQLユーザーに付与することもできます。
 
@@ -33,56 +33,56 @@ SQLユーザーに組み込みロールと複数のカスタムロールの両�
 
 ## 前提条件 {#prerequisites}
 
--   **SQL Users**ページを使用してデータベースユーザーとロールを管理するには、組織の`Organization Owner`ロール、またはプロジェクトの`Project Owner`ロールに属している必要があります。
--   プロジェクトの`Project Data Access Read-Write`または`Project Data Access Read-Only`ロールに属している場合、データベースユーザーはそのプロジェクトの**SQL Users**ページでのみ表示できます。
+- **SQL Users**ページを使用してデータベースユーザーとロールを管理するには、組織の`Organization Owner`ロール、またはプロジェクトの`Project Owner`ロールに属している必要があります。
+- プロジェクトの`Project Data Access Read-Write`または`Project Data Access Read-Only`ロールに属している場合、データベースユーザーはそのプロジェクトの**SQL Users**ページでのみ表示できます。
 
 ## SQLユーザーを確認する {#view-sql-users}
 
 クラスターの SQL ユーザーを表示するには、次の手順を実行します。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象リソースの名前をクリックすると、その概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象リソースの名前をクリックすると、その概要ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  左側のナビゲーションペインで、 **Settings** &gt; **SQL Users**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** &gt; **SQL Users**をクリックします。
 
 ## SQLユーザーを作成する {#create-a-sql-user}
 
 クラスター用のSQLユーザーを作成するには、次の手順を実行します。
 
-1.  クラスターの[**SQL Users**](/tidb-cloud/configure-sql-users.md#view-sql-users)ページに移動します。
+1. クラスターの[**SQL Users**](/tidb-cloud/configure-sql-users.md#view-sql-users)ページに移動します。
 
-2.  右上隅の**Create SQL User**をクリックしてください。
+2. 右上隅の**Create SQL User**をクリックしてください。
 
     SQLユーザー設定用のダイアログが表示されます。
 
-3.  ダイアログで、SQLユーザーの情報を以下のように入力してください。
+3. ダイアログで、SQLユーザーの情報を以下のように入力してください。
 
-    1.  SQLユーザーの名前を入力してください。
-    2.  SQLユーザーのパスワードを作成するか、 TiDB Cloudにユーザーのパスワードを自動生成させるかのいずれかを選択してください。
-    3.  SQLユーザーにロールを付与します。
+    1. SQLユーザーの名前を入力してください。
+    2. SQLユーザーのパスワードを作成するか、 TiDB Cloudにユーザーのパスワードを自動生成させるかのいずれかを選択してください。
+    3. SQLユーザーにロールを付与します。
 
-        -   **Built-in Role**：**Built-in Role**ドロップダウンリストから、SQL ユーザーの組み込みロールを選択する必要があります。
+        - **Built-in Role**：**Built-in Role**ドロップダウンリストから、SQL ユーザーの組み込みロールを選択する必要があります。
 
-        -   **Custom Role**：クラスターに[`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)ステートメントを使用して作成されたカスタムロールがある場合、**Custom Role**ドロップダウンリストからロールを選択することで、SQLユーザーにカスタムロールを付与できます。そうでない場合、**Custom Roles**ドロップダウンリストは表示されません。
+        - **Custom Role**：クラスターに[`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)ステートメントを使用して作成されたカスタムロールがある場合、**Custom Role**ドロップダウンリストからロールを選択することで、SQLユーザーにカスタムロールを付与できます。そうでない場合、**Custom Roles**ドロップダウンリストは表示されません。
 
     各SQLユーザーに対して、組み込みロールと複数のカスタムロール（存在する場合）を付与できます。
 
-4.  **Create**をクリックします。
+4. **Create**をクリックします。
 
 ## SQLユーザーを編集する {#edit-a-sql-user}
 
 SQLユーザーのパスワードまたはロールを編集するには、以下の手順を実行します。
 
-1.  クラスターの[**SQL Users**](/tidb-cloud/configure-sql-users.md#view-sql-users)ページに移動します。
+1. クラスターの[**SQL Users**](/tidb-cloud/configure-sql-users.md#view-sql-users)ページに移動します。
 
-2.  編集する SQL ユーザーの行で、 **Action** 列の **...** をクリックし、 **Edit**をクリックします。
+2. 編集する SQL ユーザーの行で、 **Action** 列の **...** をクリックし、 **Edit**をクリックします。
 
     SQLユーザー設定用のダイアログが表示されます。
 
-3.  ダイアログで、必要に応じてユーザーのパスワードと役割を編集し、 **Update**をクリックします。
+3. ダイアログで、必要に応じてユーザーのパスワードと役割を編集し、 **Update**をクリックします。
 
     > **Note:**
     >
@@ -92,12 +92,12 @@ SQLユーザーのパスワードまたはロールを編集するには、以�
 
 SQLユーザーを削除するには、以下の手順を実行してください。
 
-1.  クラスターの[**SQL Users**](/tidb-cloud/configure-sql-users.md#view-sql-users)ページに移動します。
+1. クラスターの[**SQL Users**](/tidb-cloud/configure-sql-users.md#view-sql-users)ページに移動します。
 
-2.  削除する SQL ユーザーの行で、 **Action** 列の **...** をクリックし、 **Delete**をクリックします。
+2. 削除する SQL ユーザーの行で、 **Action** 列の **...** をクリックし、 **Delete**をクリックします。
 
     > **Note:**
     >
     > デフォルトの`<prefix>.root`ユーザーは削除をサポートしていません。
 
-3.  削除を確認してください。
+3. 削除を確認してください。

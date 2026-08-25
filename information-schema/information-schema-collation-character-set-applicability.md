@@ -45,12 +45,12 @@ SELECT * FROM COLLATION_CHARACTER_SET_APPLICABILITY WHERE character_set_name='ut
 
 `COLLATION_CHARACTER_SET_APPLICABILITY`表の列の説明は次のとおりです。
 
--   `COLLATION_NAME` :照合順序の名前。
--   `CHARACTER_SET_NAME` :照合順序が属する文字セットの名前。
+- `COLLATION_NAME` :照合順序の名前。
+- `CHARACTER_SET_NAME` :照合順序が属する文字セットの名前。
 
 ## 参照 {#see-also}
 
--   [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
--   [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
--   [`INFORMATION_SCHEMA.CHARACTER_SETS`](/information-schema/information-schema-character-sets.md)
--   [`INFORMATION_SCHEMA.COLLATIONS`](/information-schema/information-schema-collations.md)
+- [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
+- [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
+- [`INFORMATION_SCHEMA.CHARACTER_SETS`](/information-schema/information-schema-character-sets.md)
+- [`INFORMATION_SCHEMA.COLLATIONS`](/information-schema/information-schema-collations.md)

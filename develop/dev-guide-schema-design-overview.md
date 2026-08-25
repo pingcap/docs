@@ -14,9 +14,9 @@ aliases: ['/ja/tidb/stable/dev-guide-schema-design-overview/','/ja/tidb/dev/dev-
 
 一般的な用語を区別するために、TiDBで使用される用語に関する簡単な合意事項を以下に示します。
 
--   一般的な用語との混同を避けるため 本ドキュメントでは、**データベース**とは論理オブジェクトを指し、 **TiDBと**[データベース](https://en.wikipedia.org/wiki/Database)TiDB自体を指し、**クラスターとは**実行中のTiDBデプロイメントを指します。
+- 一般的な用語との混同を避けるため 本ドキュメントでは、**データベース**とは論理オブジェクトを指し、 **TiDBと**[データベース](https://en.wikipedia.org/wiki/Database)TiDB自体を指し、**クラスターとは**実行中のTiDBデプロイメントを指します。
 
--   TiDB は MySQL 互換の構文を使用します。この**構文**では、スキーマはデータベース内の論理オブジェクトの代わりに一般用語[スキーマ](https://en.wiktionary.org/wiki/schema)を意味します。詳細については、 [MySQLドキュメント](https://dev.mysql.com/doc/refman/8.0/en/create-database.html)を参照してください。スキーマを論理オブジェクトとして持つデータベース (たとえば、 [PostgreSQL](https://www.postgresql.org/docs/current/ddl-schemas.html) 、 [オラクル](https://docs.oracle.com/en/database/oracle/oracle-database/21/tdddg/creating-managing-schema-objects.html)、 [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-schema?view=sql-server-ver15) ) から移行する場合は、この違いに必ず注意してください。
+- TiDB は MySQL 互換の構文を使用します。この**構文**では、スキーマはデータベース内の論理オブジェクトの代わりに一般用語[スキーマ](https://en.wiktionary.org/wiki/schema)を意味します。詳細については、 [MySQLドキュメント](https://dev.mysql.com/doc/refman/8.0/en/create-database.html)を参照してください。スキーマを論理オブジェクトとして持つデータベース (たとえば、 [PostgreSQL](https://www.postgresql.org/docs/current/ddl-schemas.html) 、 [オラクル](https://docs.oracle.com/en/database/oracle/oracle-database/21/tdddg/creating-managing-schema-objects.html)、 [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-schema?view=sql-server-ver15) ) から移行する場合は、この違いに必ず注意してください。
 
 ### データベース {#database}
 
@@ -36,15 +36,15 @@ TiDBには`test`という名前のデフォルトデータベースが付属し�
 
 インデックスには大きく分けて2種類あります。
 
--   **主キー**：主キー列に対するインデックス。
--   **セカンダリインデックス**：主キー以外の列に設定されるインデックス。
+- **主キー**：主キー列に対するインデックス。
+- **セカンダリインデックス**：主キー以外の列に設定されるインデックス。
 
 > **Note:**
 >
 > TiDBでは、**主キー**のデフォルト定義は[InnoDB](https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html) （MySQLの一般的なストレージエンジン）とは異なります。
 >
-> -   InnoDBでは、**主キー**の定義は一意であり、nullではなく、**クラスター化されたインデックス**です。
-> -   TiDB では、**プライマリ キー**の定義は一意であり、NULL ではありません。ただし、プライマリ キーが**クラスター化インデックス**であるとは限りません。プライマリ キーがクラスター化インデックスであるかどうかを指定するには、 `CLUSTERED`ステートメントの`NONCLUSTERED`の後に、予約されていないキーワード`PRIMARY KEY`または`CREATE TABLE`追加します。ステートメントでこれらのキーワードが明示的に指定されていない場合、デフォルトの動作はシステム変数`@@global.tidb_enable_clustered_index`によって制御されます。詳細については、[クラスター化インデックス](/clustered-indexes.md)を参照してください。
+> - InnoDBでは、**主キー**の定義は一意であり、nullではなく、**クラスター化されたインデックス**です。
+> - TiDB では、**プライマリ キー**の定義は一意であり、NULL ではありません。ただし、プライマリ キーが**クラスター化インデックス**であるとは限りません。プライマリ キーがクラスター化インデックスであるかどうかを指定するには、 `CLUSTERED`ステートメントの`NONCLUSTERED`の後に、予約されていないキーワード`PRIMARY KEY`または`CREATE TABLE`追加します。ステートメントでこれらのキーワードが明示的に指定されていない場合、デフォルトの動作はシステム変数`@@global.tidb_enable_clustered_index`によって制御されます。詳細については、[クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
 #### 専門索引 {#specialized-indexes}
 
@@ -54,9 +54,9 @@ TiDBには`test`という名前のデフォルトデータベースが付属し�
 
 TiDBは、**テーブル**と同じレベルで以下の論理オブジェクトをサポートしています。
 
--   [ビュー](/views.md): ビューは仮想テーブルとして機能し、そのスキーマはビューを作成する`SELECT`ステートメントによって定義されます。
--   [シーケンス](/sql-statements/sql-statement-create-sequence.md): シーケンスはシーケンシャルデータを生成し、保存します。
--   [一時テーブル](/temporary-tables.md): データが永続的ではないテーブル。
+- [ビュー](/views.md): ビューは仮想テーブルとして機能し、そのスキーマはビューを作成する`SELECT`ステートメントによって定義されます。
+- [シーケンス](/sql-statements/sql-statement-create-sequence.md): シーケンスはシーケンシャルデータを生成し、保存します。
+- [一時テーブル](/temporary-tables.md): データが永続的ではないテーブル。
 
 ## アクセス制御 {#access-control}
 
@@ -72,6 +72,6 @@ TiDB は、ユーザーベースとロールベースの両方のアクセス制
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

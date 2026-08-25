@@ -21,13 +21,13 @@ AWS PrivateLink を利用したエンドポイント接続は、安全かつプ�
 
 プライベートエンドポイントおよびエンドポイントサービスのより詳細な定義については、以下のAWSドキュメントを参照してください。
 
--   [AWS PrivateLinkとは何ですか？](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html)
--   [AWS PrivateLinkの概念](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html)
+- [AWS PrivateLinkとは何ですか？](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html)
+- [AWS PrivateLinkの概念](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html)
 
 ## 制限 {#restrictions}
 
--   対象インスタンスの `Organization Owner`、`Project Owner`、または `Instance Owner` ロールを持つユーザーのみがプライベートエンドポイント接続を作成できます。
--   接続先のプライベートエンドポイントと {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスは、**同じリージョン** に配置されている必要があります。
+- 対象インスタンスの `Organization Owner`、`Project Owner`、または `Instance Owner` ロールを持つユーザーのみがプライベートエンドポイント接続を作成できます。
+- 接続先のプライベートエンドポイントと {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスは、**同じリージョン** に配置されている必要があります。
 
 ## 前提条件 {#prerequisites}
 
@@ -199,17 +199,17 @@ AWS マネジメントコンソールでプライベート DNS を有効にす�
 
 プライベートエンドポイントの可能なステータスは、以下のように説明されます。
 
--   **Not Configured**：エンドポイントサービスは作成されていますが、プライベートエンドポイントはまだ作成されていません。
--   **Pending**：処理待ちです。
--   **Active**：プライベートエンドポイントは使用可能です。この状態ではプライベートエンドポイントを編集することはできません。
--   **Deleting**：プライベートエンドポイントが削除されています。
--   **Failed**：プライベートエンドポイントの作成に失敗しました。該当行の**Edit**をクリックすると、作成を再試行できます。
+- **Not Configured**：エンドポイントサービスは作成されていますが、プライベートエンドポイントはまだ作成されていません。
+- **Pending**：処理待ちです。
+- **Active**：プライベートエンドポイントは使用可能です。この状態ではプライベートエンドポイントを編集することはできません。
+- **Deleting**：プライベートエンドポイントが削除されています。
+- **Failed**：プライベートエンドポイントの作成に失敗しました。該当行の**Edit**をクリックすると、作成を再試行できます。
 
 プライベートエンドポイントサービスの可能なステータスは、以下のように説明されます。
 
--   **Creating**：エンドポイントサービスを作成中です。これには3～5分かかります。
--   **Active**：プライベートエンドポイントが作成されるかどうかに関わらず、エンドポイントサービスが作成されます。
--   **Deleting**：エンドポイントサービスまたはインスタンスが削除されています。これには3～5分かかります。
+- **Creating**：エンドポイントサービスを作成中です。これには3～5分かかります。
+- **Active**：プライベートエンドポイントが作成されるかどうかに関わらず、エンドポイントサービスが作成されます。
+- **Deleting**：エンドポイントサービスまたはインスタンスが削除されています。これには3～5分かかります。
 
 ## トラブルシューティング {#troubleshooting}
 

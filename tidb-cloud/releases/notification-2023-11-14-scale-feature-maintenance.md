@@ -9,9 +9,9 @@ summary: 2023 年 11 月 14 日のTiDB Cloud Dedicated Scale 機能メンテナ�
 
 ## メンテナンスウィンドウ {#maintenance-window}
 
--   開始時刻: 2023-11-14 16:00 (UTC+0)
--   終了時刻: 2023-11-21 16:00 (UTC+0)
--   期間: 7日間
+- 開始時刻: 2023-11-14 16:00 (UTC+0)
+- 終了時刻: 2023-11-21 16:00 (UTC+0)
+- 期間: 7日間
 
 > **Note:**
 >
@@ -23,15 +23,15 @@ summary: 2023 年 11 月 14 日のTiDB Cloud Dedicated Scale 機能メンテナ�
 
 ### TiDB Cloudコンソール UI の影響を受ける機能 {#affected-features-of-tidb-cloud-console-ui}
 
--   クラスタレベル
-    -   クラスタ管理
-        -   クラスターを変更する
-            -   TiDB、TiKV、またはTiFlashノードの vCPU と RAM を変更します。
+- クラスタレベル
+    - クラスタ管理
+        - クラスターを変更する
+            - TiDB、TiKV、またはTiFlashノードの vCPU と RAM を変更します。
 
 ### TiDB Cloud API の影響を受ける機能 {#affected-features-of-tidb-cloud-api}
 
--   クラスタ管理
-    -   [クラスターの更新](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)
+- クラスタ管理
+    - [クラスターの更新](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)
 
 ## 完了と再開 {#completion-and-resumption}
 

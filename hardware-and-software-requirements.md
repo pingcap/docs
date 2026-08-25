@@ -19,34 +19,34 @@ summary: TiDBの導入と実行に関するソフトウェアおよびハード�
 
 TiDBはv8.5 LTSにおいて、様々なオペレーティングシステムとCPUアーキテクチャの組み合わせに対して、多段階の品質基準を保証します。
 
--   TiDBは、以下のオペレーティングシステムとCPUアーキテクチャの組み合わせにおいて、**エンタープライズレベルの本番品質を提供し**、製品機能は包括的かつ体系的に検証されています。
+- TiDBは、以下のオペレーティングシステムとCPUアーキテクチャの組み合わせにおいて、**エンタープライズレベルの本番品質を提供し**、製品機能は包括的かつ体系的に検証されています。
 
     <table><thead><tr><th>オペレーティングシステム</th><th>サポートされているCPUアーキテクチャ</th></tr></thead><tbody><tr><td>Red Hat Enterprise Linux 9.4 以降の 9.x バージョン</td><td><ul><li>x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> Red Hat Enterprise Linux 8.6 以降の 8.x バージョン</td><td><ul><li>x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> Amazon Linux 2</td><td><ul><li> x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> Amazon Linux 2023</td><td><ul><li> x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> Rocky Linux 9.1以降</td><td><ul><li>x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> Kylin V10 SP1/SP2/SP3（SP3はv7.5.5以降でサポートされています）</td><td><ul><li> x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> UnionTech OS (UOS) V20</td><td><ul><li> x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> openEuler 22.03 LTS SP1/SP3</td><td><ul><li> x86_64</li><li> ARM 64</li></ul></td></tr></tbody></table>
 
     > **Warning:**
     >
-    > -   [CentOS Linux サポート終了](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/)よると、CentOS Linux 7 のアップストリーム サポートは 2024 年 6 月 30 日に終了しました。
-    >     -   TiDBをアップグレードする前に、オペレーティングシステムのバージョンを確認してください。TiDB v8.4.0 DMRおよびv8.5.0では、glibc 2.17のサポートが終了し、CentOS Linux 7のサポートとテストも終了しました。Rocky Linux 9.1以降のバージョンを使用することをお勧めします。CentOS 7上のTiDBクラスタをv8.4.0またはv8.5.0にアップグレードすると、クラスタが利用できなくなるリスクがあります。
-    >     -   CentOS Linux 7 をまだ使用しているユーザーを支援するために、v8.5.1 以降、TiDB は glibc 2.17 のサポートを再開し、CentOS Linux 7 のテストを再開し、CentOS Linux 7 と互換性を持つようになりました。ただし、CentOS Linux の EOL ステータスのため、CentOS Linux 7 の[公式発表およびセキュリティに関するガイダンス](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol)を確認し、Rocky Linux 9.1 や TiDB が本番用にサポートするオペレーティングシステムに移行することを強くお勧めします。 後で。
-    > -   [Red Hat Enterprise Linux ライフサイクル](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates)によると、Red Hat Enterprise Linux 7 のメンテナンスサポートは 2024 年 6 月 30 日に終了しました。TiDB は、8.4 DMR バージョン以降、Red Hat Enterprise Linux 7 のサポートを終了します。Rocky Linux 9.1 以降のバージョンを使用することをお勧めします。Red Hat Enterprise Linux 7 上の TiDB クラスタを v8.4.0 以降にアップグレードすると、クラスタが使用できなくなります。TiDB をアップグレードする前に、オペレーティングシステムのバージョンを確認してください。
+    > - [CentOS Linux サポート終了](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/)よると、CentOS Linux 7 のアップストリーム サポートは 2024 年 6 月 30 日に終了しました。
+    >     - TiDBをアップグレードする前に、オペレーティングシステムのバージョンを確認してください。TiDB v8.4.0 DMRおよびv8.5.0では、glibc 2.17のサポートが終了し、CentOS Linux 7のサポートとテストも終了しました。Rocky Linux 9.1以降のバージョンを使用することをお勧めします。CentOS 7上のTiDBクラスタをv8.4.0またはv8.5.0にアップグレードすると、クラスタが利用できなくなるリスクがあります。
+    >     - CentOS Linux 7 をまだ使用しているユーザーを支援するために、v8.5.1 以降、TiDB は glibc 2.17 のサポートを再開し、CentOS Linux 7 のテストを再開し、CentOS Linux 7 と互換性を持つようになりました。ただし、CentOS Linux の EOL ステータスのため、CentOS Linux 7 の[公式発表およびセキュリティに関するガイダンス](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol)を確認し、Rocky Linux 9.1 や TiDB が本番用にサポートするオペレーティングシステムに移行することを強くお勧めします。 後で。
+    > - [Red Hat Enterprise Linux ライフサイクル](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates)によると、Red Hat Enterprise Linux 7 のメンテナンスサポートは 2024 年 6 月 30 日に終了しました。TiDB は、8.4 DMR バージョン以降、Red Hat Enterprise Linux 7 のサポートを終了します。Rocky Linux 9.1 以降のバージョンを使用することをお勧めします。Red Hat Enterprise Linux 7 上の TiDB クラスタを v8.4.0 以降にアップグレードすると、クラスタが使用できなくなります。TiDB をアップグレードする前に、オペレーティングシステムのバージョンを確認してください。
 
     > **Note:**
     >
     > Red Hat Enterprise Linux 9.x のサポートは[TiUP](https://github.com/pingcap/tiup/releases) v1.16.5 から開始されます。
 
--   以下のオペレーティングシステムとCPUアーキテクチャの組み合わせであれば、TiDBのコンパイル、ビルド、デプロイが可能です。さらに、OLTP、OLAP、およびデータツールの基本機能も利用できます。ただし、これらの組み合わせは包括的かつ体系的なテストを受けていないため、TiDBは**エンタープライズレベルの本番品質を保証するものではありません**。
+- 以下のオペレーティングシステムとCPUアーキテクチャの組み合わせであれば、TiDBのコンパイル、ビルド、デプロイが可能です。さらに、OLTP、OLAP、およびデータツールの基本機能も利用できます。ただし、これらの組み合わせは包括的かつ体系的なテストを受けていないため、TiDBは**エンタープライズレベルの本番品質を保証するものではありません**。
 
     <table><thead><tr><th>オペレーティングシステム</th><th>サポートされているCPUアーキテクチャ</th></tr></thead><tbody><tr><td>macOS 12 (Monterey) 以降</td><td><ul><li>x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> Oracle Enterprise Linux 8以降</td><td>x86_64</td></tr><tr><td> Ubuntu LTS 20.04以降</td><td>x86_64</td></tr><tr><td> CentOS Stream 8</td><td><ul><li> x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> Debian 10 (Buster) 以降</td><td>x86_64</td></tr><tr><td> Fedora 38以降</td><td>x86_64</td></tr><tr><td> openSUSE Leap v15.5以降（Tumbleweedを除く）</td><td> x86_64</td></tr><tr><td> SUSE Linux Enterprise Server 15</td><td> x86_64</td></tr></tbody></table>
 
     > **Note:**
     >
-    > -   Oracle Enterprise Linuxの場合、TiDBはRed Hat互換カーネル（RHCK）をサポートしており、Oracle Enterprise Linuxが提供するUnbreakable Enterprise Kernelはサポートしていません。
-    > -   TiDBの今後のバージョンでは、Ubuntu 16.04のサポートは終了します。Ubuntu 18.04以降へのアップグレードを強くお勧めします。
-    > -   CentOS Stream 8 は、2024 年 5 月 31 日に[ビルド終了](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/)。
+    > - Oracle Enterprise Linuxの場合、TiDBはRed Hat互換カーネル（RHCK）をサポートしており、Oracle Enterprise Linuxが提供するUnbreakable Enterprise Kernelはサポートしていません。
+    > - TiDBの今後のバージョンでは、Ubuntu 16.04のサポートは終了します。Ubuntu 18.04以降へのアップグレードを強くお勧めします。
+    > - CentOS Stream 8 は、2024 年 5 月 31 日に[ビルド終了](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/)。
 
--   前述の 2 つの表に記載されているオペレーティングシステムの 32 ビット版を使用している場合、TiDB は 32 ビットオペレーティングシステムおよび対応する CPUアーキテクチャ上でコンパイル、ビルド、またはデプロイできることが**保証されません**。また、TiDB は 32 ビットオペレーティングシステムに積極的に対応しません。
+- 前述の 2 つの表に記載されているオペレーティングシステムの 32 ビット版を使用している場合、TiDB は 32 ビットオペレーティングシステムおよび対応する CPUアーキテクチャ上でコンパイル、ビルド、またはデプロイできることが**保証されません**。また、TiDB は 32 ビットオペレーティングシステムに積極的に対応しません。
 
--   上記に記載されていない他のオペレーティングシステムバージョンでも動作する可能性はありますが、公式にはサポートされていません。
+- 上記に記載されていない他のオペレーティングシステムバージョンでも動作する可能性はありますが、公式にはサポートされていません。
 
 ### TiDBのコンパイルと実行に必要なライブラリ {#libraries-required-for-compiling-and-running-tidb}
 
@@ -63,8 +63,8 @@ TiDBの実行に必要なライブラリ：glibc（バージョン2.28-151.el8�
 
 以下のCPUアーキテクチャがサポートされています。
 
--   x86_64。 TiDB v6.6.0 以降では、 [x86-64-v2命令セット](https://developers.redhat.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level)が必要です。
--   ARM 64
+- x86_64。 TiDB v6.6.0 以降では、 [x86-64-v2命令セット](https://developers.redhat.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level)が必要です。
+- ARM 64
 
 ## ソフトウェア要件 {#software-requirements}
 
@@ -104,11 +104,11 @@ TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェ�
 
 > **Note:**
 >
-> -   テスト環境では、TiDBとPDのインスタンスを同じサーバーにデプロイできます。
-> -   性能関連のテストにおいては、テスト結果の正確性を保証するため、性能の低いストレージおよびネットワークハードウェア構成を使用しないでください。
-> -   TiKVサーバーには、読み書き速度を向上させるためにNVMe SSDの使用をお勧めします。
-> -   機能をテストして確認するだけの場合は、 [TiDB クイックスタートガイド](/quick-start-with-tidb.md)に従って単一マシンに TiDB を展開してください。
-> -   バージョン 6.3.0 以降、Linux AMD64アーキテクチャでTiFlash をデプロイするには、CPU が AVX2 命令セットをサポートしている必要があります。 `grep avx2 /proc/cpuinfo`に出力があることを確認してください。Linux ARM64アーキテクチャでTiFlash をデプロイするには、CPU が ARMv8 命令セットアーキテクチャをサポートしている必要があります。 `grep 'crc32' /proc/cpuinfo | grep 'asimd'`に出力があることを確認してください。命令セット拡張機能を使用することで、TiFlash のベクトル化エンジンはより優れたパフォーマンスを発揮できます。
+> - テスト環境では、TiDBとPDのインスタンスを同じサーバーにデプロイできます。
+> - 性能関連のテストにおいては、テスト結果の正確性を保証するため、性能の低いストレージおよびネットワークハードウェア構成を使用しないでください。
+> - TiKVサーバーには、読み書き速度を向上させるためにNVMe SSDの使用をお勧めします。
+> - 機能をテストして確認するだけの場合は、 [TiDB クイックスタートガイド](/quick-start-with-tidb.md)に従って単一マシンに TiDB を展開してください。
+> - バージョン 6.3.0 以降、Linux AMD64アーキテクチャでTiFlash をデプロイするには、CPU が AVX2 命令セットをサポートしている必要があります。 `grep avx2 /proc/cpuinfo`に出力があることを確認してください。Linux ARM64アーキテクチャでTiFlash をデプロイするには、CPU が ARMv8 命令セットアーキテクチャをサポートしている必要があります。 `grep 'crc32' /proc/cpuinfo | grep 'asimd'`に出力があることを確認してください。命令セット拡張機能を使用することで、TiFlash のベクトル化エンジンはより優れたパフォーマンスを発揮できます。
 
 ### 本番環境 {#production-environment}
 
@@ -124,21 +124,21 @@ TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェ�
 
 > **Note:**
 >
-> -   本番環境では、TiDBとPDのインスタンスを同じサーバーにデプロイできます。ただし、より高いパフォーマンスと信頼性を求める場合は、それぞれを別々にデプロイすることをお勧めします。
-> -   本番環境では、TiDB、TiKV、およびTiFlashをそれぞれ最低8コアのCPUで構成することを強く推奨します。より高いパフォーマンスを得るには、さらに高い構成をお勧めします。
-> -   PCIe SSDを使用する場合はTiKVハードディスクの容量を4TB以内に、通常のSSDを使用する場合は1.5TB以内に抑えることをお勧めします。
-> -   AWS、Google Cloud、Azureなどのクラウドプロバイダー上にTiDBクラスタをデプロイする場合は、インスタンスストアではなくクラウドディスクをTiKVノードに使用することをお勧めします。
+> - 本番環境では、TiDBとPDのインスタンスを同じサーバーにデプロイできます。ただし、より高いパフォーマンスと信頼性を求める場合は、それぞれを別々にデプロイすることをお勧めします。
+> - 本番環境では、TiDB、TiKV、およびTiFlashをそれぞれ最低8コアのCPUで構成することを強く推奨します。より高いパフォーマンスを得るには、さらに高い構成をお勧めします。
+> - PCIe SSDを使用する場合はTiKVハードディスクの容量を4TB以内に、通常のSSDを使用する場合は1.5TB以内に抑えることをお勧めします。
+> - AWS、Google Cloud、Azureなどのクラウドプロバイダー上にTiDBクラスタをデプロイする場合は、インスタンスストアではなくクラウドディスクをTiKVノードに使用することをお勧めします。
 >
->     -   インスタンスストアボリュームのデータ耐久性は比較的低いです。インスタンスストアのライフサイクルは仮想マシンのライフサイクルと連動しています。インスタンスの再起動、停止、移行、ハードウェア障害、またはメンテナンスが行われると、データが失われる可能性があります。ほとんどのクラウドプロバイダーは、インスタンスストアを一時的なストレージとして明示的に分類しています。たとえば、 [AWSドキュメント](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Storage.html)によると、「インスタンスストアボリューム上のデータは、関連付けられたインスタンスの存続期間中のみ保持されます。インスタンスを停止、休止状態、または終了すると、インスタンスストアボリューム上のデータはすべて失われます。」
->     -   インスタンスストアボリュームは通常、スナップショットやノード間・リージョン間のレプリケーションをサポートしていません。そのため、データの破損やハードウェア障害が発生した場合、迅速なデータ復旧は困難です。
->     -   インスタンスストアの容量はインスタンスタイプに紐づいており、個別にスケーリングすることはできません。
+>     - インスタンスストアボリュームのデータ耐久性は比較的低いです。インスタンスストアのライフサイクルは仮想マシンのライフサイクルと連動しています。インスタンスの再起動、停止、移行、ハードウェア障害、またはメンテナンスが行われると、データが失われる可能性があります。ほとんどのクラウドプロバイダーは、インスタンスストアを一時的なストレージとして明示的に分類しています。たとえば、 [AWSドキュメント](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Storage.html)によると、「インスタンスストアボリューム上のデータは、関連付けられたインスタンスの存続期間中のみ保持されます。インスタンスを停止、休止状態、または終了すると、インスタンスストアボリューム上のデータはすべて失われます。」
+>     - インスタンスストアボリュームは通常、スナップショットやノード間・リージョン間のレプリケーションをサポートしていません。そのため、データの破損やハードウェア障害が発生した場合、迅速なデータ復旧は困難です。
+>     - インスタンスストアの容量はインスタンスタイプに紐づいており、個別にスケーリングすることはできません。
 
 TiFlashを導入する前に、以下の項目に注意してください。
 
--   TiFlash は[複数のディスクに展開されています](/tiflash/tiflash-configuration.md#multi-disk-deployment)。
--   TiFlashデータディレクトリの最初のディスクとして、TiKVデータのリアルタイムレプリケーションをバッファリングするために、高性能SSDを使用することをお勧めします。このディスクの性能は、PCIe SSDなど、TiKVと同等以上である必要があります。ディスク容量は、総容量の10%以上でなければなりません。そうでない場合、このノードのボトルネックになる可能性があります。他のディスクには通常のSSDを使用することもできますが、より高性能なPCIe SSDを使用すると、パフォーマンスが向上することに注意してください。
--   TiFlashはTiKVとは別のノードにデプロイすることをお勧めします。どうしても同じノードにTiFlashとTiKVをデプロイする必要がある場合は、CPUコア数とメモリ容量を増やし、互いに干渉しないようにTiFlashとTiKVを異なるディスクにデプロイするようにしてください。
--   TiFlashディスクの総容量は、次のように計算されます: `the data volume of the entire TiKV cluster to be replicated / the number of TiKV replicas * the number of TiFlash replicas` 。たとえば、TiKV の計画容量が 1 TB、TiKV レプリカ数が 3、 TiFlashレプリカ数が 2 の場合、推奨されるTiFlashの総容量は`1024 GB / 3 * 2`です。一部のテーブルのデータのみを複製することもできます。その場合は、複製するテーブルのデータ量に応じてTiFlash の容量を決定します。
+- TiFlash は[複数のディスクに展開されています](/tiflash/tiflash-configuration.md#multi-disk-deployment)。
+- TiFlashデータディレクトリの最初のディスクとして、TiKVデータのリアルタイムレプリケーションをバッファリングするために、高性能SSDを使用することをお勧めします。このディスクの性能は、PCIe SSDなど、TiKVと同等以上である必要があります。ディスク容量は、総容量の10%以上でなければなりません。そうでない場合、このノードのボトルネックになる可能性があります。他のディスクには通常のSSDを使用することもできますが、より高性能なPCIe SSDを使用すると、パフォーマンスが向上することに注意してください。
+- TiFlashはTiKVとは別のノードにデプロイすることをお勧めします。どうしても同じノードにTiFlashとTiKVをデプロイする必要がある場合は、CPUコア数とメモリ容量を増やし、互いに干渉しないようにTiFlashとTiKVを異なるディスクにデプロイするようにしてください。
+- TiFlashディスクの総容量は、次のように計算されます: `the data volume of the entire TiKV cluster to be replicated / the number of TiKV replicas * the number of TiFlash replicas` 。たとえば、TiKV の計画容量が 1 TB、TiKV レプリカ数が 3、 TiFlashレプリカ数が 2 の場合、推奨されるTiFlashの総容量は`1024 GB / 3 * 2`です。一部のテーブルのデータのみを複製することもできます。その場合は、複製するテーブルのデータ量に応じてTiFlash の容量を決定します。
 
 TiCDCを導入する前に、500GB以上のPCIe SSDディスクにTiCDCを導入することを推奨します。
 
@@ -190,12 +190,12 @@ TiDBは、データベースメトリクスの可視化に[Grafana](https://graf
 
 前述のTiFlashソフトウェアおよびハードウェア要件は、結合されたストレージとコンピューティングアーキテクチャに関するものです。 v7.0.0 以降、 TiFlash は[分散型ストレージおよびコンピューティングアーキテクチャ](/tiflash/tiflash-disaggregated-and-s3.md)をサポートします。このアーキテクチャでは、 TiFlash は書き込みノードと計算ノードの 2 種類のノードに分割されます。これらのノードの要件は次のとおりです。
 
--   ソフトウェア: 結合されたストレージとコンピューティングアーキテクチャと同じままです。 [OSおよびプラットフォームの要件](#os-and-platform-requirements)を参照してください。
--   ネットワーク ポート: 結合されたストレージとコンピューティングアーキテクチャと同じままです。[ネットワーク](#network-requirements)を参照してください。
--   ディスク容量:
-    -   TiFlash書き込みノード： TiFlashレプリカの追加時およびリージョンレプリカの移行時に、データをAmazon S3にアップロードする前にローカルバッファとして使用されるディスク容量は、少なくとも200GB以上設定することをお勧めします。また、Amazon S3と互換性のあるオブジェクトストレージが必要です。
-    -   TiFlash計算ノード：パフォーマンス向上のため、主に書き込みノードから読み取ったデータをキャッシュする目的で、最低でも100GBのディスク容量を設定することをお勧めします。計算ノードのキャッシュが満杯になる場合がありますが、これは正常な動作です。
--   CPUとメモリの要件については、以下のセクションで説明します。
+- ソフトウェア: 結合されたストレージとコンピューティングアーキテクチャと同じままです。 [OSおよびプラットフォームの要件](#os-and-platform-requirements)を参照してください。
+- ネットワーク ポート: 結合されたストレージとコンピューティングアーキテクチャと同じままです。[ネットワーク](#network-requirements)を参照してください。
+- ディスク容量:
+    - TiFlash書き込みノード： TiFlashレプリカの追加時およびリージョンレプリカの移行時に、データをAmazon S3にアップロードする前にローカルバッファとして使用されるディスク容量は、少なくとも200GB以上設定することをお勧めします。また、Amazon S3と互換性のあるオブジェクトストレージが必要です。
+    - TiFlash計算ノード：パフォーマンス向上のため、主に書き込みノードから読み取ったデータをキャッシュする目的で、最低でも100GBのディスク容量を設定することをお勧めします。計算ノードのキャッシュが満杯になる場合がありますが、これは正常な動作です。
+- CPUとメモリの要件については、以下のセクションで説明します。
 
 ### 開発環境およびテスト環境 {#development-and-test-environments}
 

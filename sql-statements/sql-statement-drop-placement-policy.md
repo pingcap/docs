@@ -65,7 +65,7 @@ Query OK, 0 rows affected (0.21 sec)
 
 ## 参照 {#see-also}
 
--   [SQLにおける配置ルール](/placement-rules-in-sql.md)
--   [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
--   [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)
--   [ALTER PLACEMENT POLICY](/sql-statements/sql-statement-alter-placement-policy.md)
+- [SQLにおける配置ルール](/placement-rules-in-sql.md)
+- [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
+- [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)
+- [ALTER PLACEMENT POLICY](/sql-statements/sql-statement-alter-placement-policy.md)

@@ -15,8 +15,8 @@ summary: TiDB Vector SearchをOpenAI互換の埋め込みモデルと統合し�
 
 OpenAI Embedding APIは広く利用されているため、多くのプロバイダーが以下のような互換性のあるAPIを提供しています。
 
--   [Ollama](https://ollama.com/)
--   [vLLM](https://vllm.ai/)
+- [Ollama](https://ollama.com/)
+- [vLLM](https://vllm.ai/)
 
 TiDB Python SDK [pytidb](https://github.com/pingcap/pytidb) 、OpenAI 互換の埋め込みサービスと統合するための`EmbeddingFunction`クラスを提供します。
 
@@ -55,9 +55,9 @@ openai_like_embed = EmbeddingFunction(
 
 パラメータは以下のとおりです。
 
--   `model_name` : 使用するモデルを指定します。 `openai/{model_name}`の形式を使用してください。
--   `api_base` : OpenAI互換の埋め込みAPIサービスのベースURL。
--   `api_key` : 埋め込みAPIサービスで認証するために使用されるAPIキー。
+- `model_name` : 使用するモデルを指定します。 `openai/{model_name}`の形式を使用してください。
+- `api_base` : OpenAI互換の埋め込みAPIサービスのベースURL。
+- `api_key` : 埋め込みAPIサービスで認証するために使用されるAPIキー。
 
 **例：Ollamaを`nomic-embed-text`モデルで使用する**
 

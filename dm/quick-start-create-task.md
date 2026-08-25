@@ -11,8 +11,8 @@ summary: DM クラスターがデプロイされた後に移行タスクを作�
 
 次のサンプル シナリオに基づいてデータ移行タスクを作成するとします。
 
--   binlogを有効にした 2 つの MySQL インスタンスと 1 つの TiDB インスタンスをローカルにデプロイ。
--   DM クラスターの DM マスターを使用して、クラスターとデータ移行タスクを管理します。
+- binlogを有効にした 2 つの MySQL インスタンスと 1 つの TiDB インスタンスをローカルにデプロイ。
+- DM クラスターの DM マスターを使用して、クラスターとデータ移行タスクを管理します。
 
 各ノードの情報は以下の通りです。
 
@@ -36,7 +36,7 @@ docker run --rm --name mysql-3307 -p 3307:3307 -e MYSQL_ALLOW_EMPTY_PASSWORD=tru
 
 ### データを準備する {#prepare-data}
 
--   サンプルデータをmysql-3306に書き込みます。
+- サンプルデータをmysql-3306に書き込みます。
 
     ```sql
     drop database if exists `sharding1`;
@@ -48,7 +48,7 @@ docker run --rm --name mysql-3307 -p 3307:3307 -e MYSQL_ALLOW_EMPTY_PASSWORD=tru
     insert into t2 (id, uid, name) values (3,20001, 'José Arcadio Buendía'), (4,20002, 'Úrsula Iguarán'), (5,20003, 'José Arcadio');
     ```
 
--   サンプルデータをmysql-3307に書き込みます。
+- サンプルデータをmysql-3307に書き込みます。
 
     ```sql
     drop database if exists `sharding2`;
@@ -83,8 +83,8 @@ mv tidb-latest-linux-amd64/bin/tidb-server ./
 
 > **Note:**
 >
-> -   データベースにパスワードがない場合、この手順をスキップできます。
-> -   DM v1.0.6 以降のバージョンでは、プレーンテキスト パスワードを使用してソース情報を構成できます。
+> - データベースにパスワードがない場合、この手順をスキップできます。
+> - DM v1.0.6 以降のバージョンでは、プレーンテキスト パスワードを使用してソース情報を構成できます。
 
 安全上の理由から、暗号化されたパスワードを設定して使用することをお勧めします。dmctlを使用してMySQL/TiDBのパスワードを暗号化できます。パスワードが「123456」だと仮定します。
 
@@ -139,7 +139,7 @@ MySQL2 の場合、上記のコマンドの設定ファイルを MySQL2 の設�
 
 ここで、これらのシャードテーブルをTiDBの`db_target.t_target`テーブルに移行する必要があるとします。手順は以下のとおりです。
 
-1.  タスクの設定ファイルを作成します。
+1. タスクの設定ファイルを作成します。
 
     ```yaml
     ---
@@ -182,7 +182,7 @@ MySQL2 の場合、上記のコマンドの設定ファイルを MySQL2 の設�
         target-schema: db_target
     ```
 
-2.  dmctl を使用してタスクを作成するには、上記の設定を`conf/task.yaml`ファイルに書き込みます。
+2. dmctl を使用してタスクを作成するには、上記の設定を`conf/task.yaml`ファイルに書き込みます。
 
     ```bash
     ./dmctl --master-addr 127.0.0.1:8261 start-task conf/task.yaml

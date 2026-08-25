@@ -10,9 +10,9 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-overview/']
 
 自動埋め込み機能を使用するための基本的なワークフローは以下のとおりです。
 
-1.  `EMBED_TEXT()`を使用して、テキスト列と生成されたベクトル列を持つ**テーブルを定義します**。
-2.  **テキストデータを挿入すると**、ベクトルが自動的に生成され保存されます。
-3.  **テキストを使用してクエリを実行します**。 `VEC_EMBED_COSINE_DISTANCE()`または`VEC_EMBED_L2_DISTANCE()`を使用して、意味的に類似したコンテンツを検索します。
+1. `EMBED_TEXT()`を使用して、テキスト列と生成されたベクトル列を持つ**テーブルを定義します**。
+2. **テキストデータを挿入すると**、ベクトルが自動的に生成され保存されます。
+3. **テキストを使用してクエリを実行します**。 `VEC_EMBED_COSINE_DISTANCE()`または`VEC_EMBED_L2_DISTANCE()`を使用して、意味的に類似したコンテンツを検索します。
 
 > **Note:**
 >
@@ -103,8 +103,8 @@ LIMIT 3;
 
 > **Note:**
 >
-> -   ベクトルインデックスを定義する場合は、 `VEC_COSINE_DISTANCE()`または`VEC_L2_DISTANCE()`を使用します。
-> -   クエリを実行する際は、 `VEC_EMBED_COSINE_DISTANCE()`または`VEC_EMBED_L2_DISTANCE()`を使用してください。
+> - ベクトルインデックスを定義する場合は、 `VEC_COSINE_DISTANCE()`または`VEC_L2_DISTANCE()`を使用します。
+> - クエリを実行する際は、 `VEC_EMBED_COSINE_DISTANCE()`または`VEC_EMBED_L2_DISTANCE()`を使用してください。
 
 ## 利用可能なテキスト埋め込みモデル {#available-text-embedding-models}
 
@@ -171,8 +171,8 @@ VEC_EMBED_L2_DISTANCE(vector_column, "query_text")
 
 TiDBは、さまざまな埋め込みプロバイダーやモデルとの統合のための統一インターフェースを提供します。
 
--   **プログラムによる使用**：特定のプロバイダーまたはモデル用の埋め込み関数を作成するには、AI SDK の`EmbeddingFunction`クラスを使用します。
--   **SQL の使用法**: `EMBED_TEXT`関数を使用して、テキストデータから直接埋め込みを生成します。
+- **プログラムによる使用**：特定のプロバイダーまたはモデル用の埋め込み関数を作成するには、AI SDK の`EmbeddingFunction`クラスを使用します。
+- **SQL の使用法**: `EMBED_TEXT`関数を使用して、テキストデータから直接埋め込みを生成します。
 
 `EmbeddingFunction`クラスを使用すると、さまざまな埋め込みプロバイダーやモデルを操作できます。
 
@@ -186,20 +186,20 @@ TiDBは、さまざまな埋め込みプロバイダーやモデルとの統合�
 
 **パラメータ:**
 
--   `model_name` *(必須)* : 使用する埋め込みモデルを`{provider_name}/{model_name}`の形式で指定します。
+- `model_name` *(必須)* : 使用する埋め込みモデルを`{provider_name}/{model_name}`の形式で指定します。
 
--   `dimensions` *(オプション)* : 出力ベクトル埋め込みの次元数。指定しない場合、モデルにデフォルトの次元がない場合は、初期化時にテスト文字列が埋め込まれ、実際の次元が自動的に決定されます。
+- `dimensions` *(オプション)* : 出力ベクトル埋め込みの次元数。指定しない場合、モデルにデフォルトの次元がない場合は、初期化時にテスト文字列が埋め込まれ、実際の次元が自動的に決定されます。
 
--   `api_key` *（オプション）* ：埋め込みサービスにアクセスするためのAPIキー。明示的に設定されていない場合は、プロバイダのデフォルト環境変数からキーを取得します。
+- `api_key` *（オプション）* ：埋め込みサービスにアクセスするためのAPIキー。明示的に設定されていない場合は、プロバイダのデフォルト環境変数からキーを取得します。
 
--   `api_base` *(オプション)* : 埋め込みAPIサービスのベースURL。
+- `api_base` *(オプション)* : 埋め込みAPIサービスのベースURL。
 
--   `use_server` *(オプション)* : TiDB Cloud のホスト型埋め込みサービスを使用するかどうか。TiDB Cloud Starterの場合は、デフォルトで`True`になります。
+- `use_server` *(オプション)* : TiDB Cloud のホスト型埋め込みサービスを使用するかどうか。TiDB Cloud Starterの場合は、デフォルトで`True`になります。
 
--   `multimodal` *(オプション)* : マルチモーダル埋め込みモデルを使用するかどうか。有効にすると、 `use_server`は自動的に`False`に設定され、埋め込みサービスがクライアント側で呼び出されます。
+- `multimodal` *(オプション)* : マルチモーダル埋め込みモデルを使用するかどうか。有効にすると、 `use_server`は自動的に`False`に設定され、埋め込みサービスがクライアント側で呼び出されます。
 
 ## 関連項目 {#see-also}
 
--   [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
--   [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
--   [ベクトル検索インデックス](/ai/reference/vector-search-index.md)
+- [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
+- [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
+- [ベクトル検索インデックス](/ai/reference/vector-search-index.md)

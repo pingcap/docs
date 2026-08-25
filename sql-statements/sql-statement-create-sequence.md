@@ -65,15 +65,15 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
 
 次の式関数を通じてシーケンスを制御できます。
 
--   `NEXTVAL`または`NEXT VALUE FOR`
+- `NEXTVAL`または`NEXT VALUE FOR`
 
     基本的に、どちらもシーケンスオブジェクトの次の有効な値を取得する`NEXTVAL()`関数です。`NEXTVAL()`の関数の引数は、シーケンスの`identifier`の値です。
 
--   `LASTVAL`
+- `LASTVAL`
 
     この関数は、このセッションで最後に使用された値を取得します。値が存在しない場合は`NULL`が使用されます。この関数の引数は、シーケンスの`identifier`です。
 
--   `SETVAL`
+- `SETVAL`
 
     この関数は、シーケンスの現在の値の進行を設定します。この関数の最初のパラメータはシーケンスの`identifier` 、2番目のパラメータは`num`です。
 
@@ -83,7 +83,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
 
 ## 例 {#examples}
 
--   デフォルトのパラメータを使用してシーケンス オブジェクトを作成します。
+- デフォルトのパラメータを使用してシーケンス オブジェクトを作成します。
 
     ```sql
     CREATE SEQUENCE seq;
@@ -93,7 +93,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     Query OK, 0 rows affected (0.06 sec)
     ```
 
--   シーケンス オブジェクトの次の値を取得するには、 `NEXTVAL()`関数を使用します。
+- シーケンス オブジェクトの次の値を取得するには、 `NEXTVAL()`関数を使用します。
 
     ```sql
     SELECT NEXTVAL(seq);
@@ -108,7 +108,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     1 row in set (0.02 sec)
     ```
 
--   このセッションでのシーケンス オブジェクトへの最後の呼び出しによって生成された値を取得するには、 `LASTVAL()`関数を使用します。
+- このセッションでのシーケンス オブジェクトへの最後の呼び出しによって生成された値を取得するには、 `LASTVAL()`関数を使用します。
 
     ```sql
     SELECT LASTVAL(seq);
@@ -123,7 +123,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     1 row in set (0.02 sec)
     ```
 
--   シーケンス オブジェクトの現在の値 (または現在の位置) を設定するには、 `SETVAL()`関数を使用します。
+- シーケンス オブジェクトの現在の値 (または現在の位置) を設定するには、 `SETVAL()`関数を使用します。
 
     ```sql
     SELECT SETVAL(seq, 10);
@@ -138,7 +138,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     1 row in set (0.01 sec)
     ```
 
--   `next value for`構文を使用して、シーケンスの次の値を取得することもできます。
+- `next value for`構文を使用して、シーケンスの次の値を取得することもできます。
 
     ```sql
     SELECT next value for seq;
@@ -153,7 +153,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     1 row in set (0.00 sec)
     ```
 
--   デフォルトのカスタム パラメータを使用してシーケンス オブジェクトを作成します。
+- デフォルトのカスタム パラメータを使用してシーケンス オブジェクトを作成します。
 
     ```sql
     CREATE SEQUENCE seq2 start 3 increment 2 minvalue 1 maxvalue 10 cache 3;
@@ -163,7 +163,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     Query OK, 0 rows affected (0.01 sec)
     ```
 
--   このセッションでシーケンス オブジェクトが使用されていない場合、 `LASTVAL()`関数は`NULL`値を返します。
+- このセッションでシーケンス オブジェクトが使用されていない場合、 `LASTVAL()`関数は`NULL`値を返します。
 
     ```sql
     SELECT LASTVAL(seq2);
@@ -178,7 +178,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     1 row in set (0.01 sec)
     ```
 
--   シーケンス オブジェクトの`NEXTVAL()`関数の最初の有効な値は、 `START`パラメータの値です。
+- シーケンス オブジェクトの`NEXTVAL()`関数の最初の有効な値は、 `START`パラメータの値です。
 
     ```sql
     SELECT NEXTVAL(seq2);
@@ -193,7 +193,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     1 row in set (0.00 sec)
     ```
 
--   `SETVAL()`関数はシーケンス オブジェクトの現在の値を変更できますが、次の値の等差数列の規則を変更することはできません。
+- `SETVAL()`関数はシーケンス オブジェクトの現在の値を変更できますが、次の値の等差数列の規則を変更することはできません。
 
     ```sql
     SELECT SETVAL(seq2, 6);
@@ -208,7 +208,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     1 row in set (0.00 sec)
     ```
 
--   `NEXTVAL()`を使用して次の値を取得する場合、次の値はシーケンスによって定義された等差数列の規則に従います。
+- `NEXTVAL()`を使用して次の値を取得する場合、次の値はシーケンスによって定義された等差数列の規則に従います。
 
     ```sql
     SELECT next value for seq2;
@@ -223,7 +223,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     1 row in set (0.00 sec)
     ```
 
--   次の例のように、シーケンスの次の値を列のデフォルト値として使用できます。
+- 次の例のように、シーケンスの次の値を列のデフォルト値として使用できます。
 
     ```sql
     CREATE table t(a int default next value for seq2);
@@ -233,7 +233,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     Query OK, 0 rows affected (0.02 sec)
     ```
 
--   次の例では、値が指定されていないため、デフォルト値の`seq2`が使用されます。
+- 次の例では、値が指定されていないため、デフォルト値の`seq2`が使用されます。
 
     ```sql
     INSERT into t values();
@@ -256,7 +256,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     1 row in set (0.00 sec)
     ```
 
--   次の例では、値が指定されていないため、デフォルト値の`seq2`が使用されます。しかし、次の値`seq2`は上記の例で定義された範囲（ `CREATE SEQUENCE seq2 start 3 increment 2 minvalue 1 maxvalue 10 cache 3;` ）外であるため、エラーが返されます。
+- 次の例では、値が指定されていないため、デフォルト値の`seq2`が使用されます。しかし、次の値`seq2`は上記の例で定義された範囲（ `CREATE SEQUENCE seq2 start 3 increment 2 minvalue 1 maxvalue 10 cache 3;` ）外であるため、エラーが返されます。
 
     ```sql
     INSERT into t values();
@@ -284,7 +284,7 @@ select SETVAL(seq, 6)   // Sets the current value of a sequence to 6.
 
 ## 参照 {#see-also}
 
--   [ALTER SEQUENCE](/sql-statements/sql-statement-alter-sequence.md)
--   [DROP SEQUENCE](/sql-statements/sql-statement-drop-sequence.md)
--   [SHOW CREATE SEQUENCE](/sql-statements/sql-statement-show-create-sequence.md)
--   [シーケンス関数](/functions-and-operators/sequence-functions.md)
+- [ALTER SEQUENCE](/sql-statements/sql-statement-alter-sequence.md)
+- [DROP SEQUENCE](/sql-statements/sql-statement-drop-sequence.md)
+- [SHOW CREATE SEQUENCE](/sql-statements/sql-statement-show-create-sequence.md)
+- [シーケンス関数](/functions-and-operators/sequence-functions.md)

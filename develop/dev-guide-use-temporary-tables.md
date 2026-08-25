@@ -48,8 +48,8 @@ LIMIT 50;
 
 TiDB の一時テーブルは、ローカル一時テーブルとグローバル一時テーブルの 2 種類に分かれています。
 
--   ローカル一時テーブルの場合、テーブル定義とテーブル内のデータは現在のセッションでのみ参照可能です。このタイプは、セッション中の中間データを一時的に保存するのに適しています。
--   グローバル一時テーブルの場合、テーブル定義はTiDBクラスタ全体から参照可能で、テーブル内のデータは現在のトランザクションからのみ参照可能です。このタイプは、トランザクション中の中間データを一時的に保存するのに適しています。
+- ローカル一時テーブルの場合、テーブル定義とテーブル内のデータは現在のセッションでのみ参照可能です。このタイプは、セッション中の中間データを一時的に保存するのに適しています。
+- グローバル一時テーブルの場合、テーブル定義はTiDBクラスタ全体から参照可能で、テーブル内のデータは現在のトランザクションからのみ参照可能です。このタイプは、トランザクション中の中間データを一時的に保存するのに適しています。
 
 ### ローカル一時テーブルを作成する {#create-a-local-temporary-table}
 
@@ -257,10 +257,10 @@ TiDB の一時テーブルの制限については、 [他の TiDB 機能との�
 
 ## 続きを読む {#read-more}
 
--   [一時テーブル](/temporary-tables.md)
+- [一時テーブル](/temporary-tables.md)
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

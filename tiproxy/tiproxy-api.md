@@ -27,7 +27,7 @@ curl http://127.0.0.1:3080/api/admin/config/
 
 クエリパラメータは次のとおりです。
 
--   `format` : (オプション) 返される設定の形式を指定します。値のオプションは`json`と`toml`です。デフォルト値は`toml`です。
+- `format` : (オプション) 返される設定の形式を指定します。値のオプションは`json`と`toml`です。デフォルト値は`toml`です。
 
 ### 例 {#example}
 
@@ -58,7 +58,7 @@ level='warning'
 
 次の例では、他の構成項目は変更せずに、 `log.level` `'warning'`に設定します。
 
-1.  現在の TiProxy 構成を取得します。
+1. 現在の TiProxy 構成を取得します。
 
     ```bash
     curl http://127.0.0.1:3080/api/admin/config/
@@ -72,7 +72,7 @@ level='warning'
     level = 'info'
     ```
 
-2.  `test.toml`ファイルで`log.level`の値を指定し、 `PUT /api/admin/config/`リクエストを送信して`log.level`の値を更新します。
+2. `test.toml`ファイルで`log.level`の値を指定し、 `PUT /api/admin/config/`リクエストを送信して`log.level`の値を更新します。
 
     ```shell
     $ cat test.toml
@@ -81,7 +81,7 @@ level='warning'
     $ curl -X PUT --data-binary @test.toml http://127.0.0.1:3080/api/admin/config/
     ```
 
-3.  変更された TiProxy 構成を取得します。
+3. 変更された TiProxy 構成を取得します。
 
     ```bash
     curl http://127.0.0.1:3080/api/admin/config/

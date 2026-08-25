@@ -14,28 +14,28 @@ aliases: ['/ja/tidbcloud/secure-connections-to-serverless-tier-clusters']
 
 ## 前提条件 {#prerequisites}
 
--   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)または[SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)経由でTiDB Cloudにログインします。
--   [TiDB Cloudクラスターを作成する](/tidb-cloud/tidb-cloud-quickstart.md) 。
+- [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)または[SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)経由でTiDB Cloudにログインします。
+- [TiDB Cloudクラスターを作成する](/tidb-cloud/tidb-cloud-quickstart.md) 。
 
 ## TiDB Cloudクラスターへの TLS 接続 {#tls-connection-to-a-tidb-cloud-cluster}
 
 [TiDB Cloudコンソール](https://tidbcloud.com/)では、さまざまな接続方法の例を取得し、次のようにTiDB Cloudクラスターに接続できます。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、クラスターの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、クラスターの名前をクリックして概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックします。ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックします。ダイアログが表示されます。
 
-3.  ダイアログでは、接続タイプのデフォルト設定を`Public`のままにして、希望する接続方法とオペレーティングシステムを選択します。
+3. ダイアログでは、接続タイプのデフォルト設定を`Public`のままにして、希望する接続方法とオペレーティングシステムを選択します。
 
-4.  パスワードをまだ設定していない場合は、 **Generate Password**をクリックして、クラスター用のランダムパスワードを生成します。パスワードはサンプル接続文字列に自動的に埋め込まれ、クラスターへの接続が簡単になります。
+4. パスワードをまだ設定していない場合は、 **Generate Password**をクリックして、クラスター用のランダムパスワードを生成します。パスワードはサンプル接続文字列に自動的に埋め込まれ、クラスターへの接続が簡単になります。
 
     > **Note:**
     >
-    > -   ランダム パスワードは、大文字、小文字、数字、特殊文字を含む 16 文字で構成されます。
-    > -   このダイアログを閉じると、生成されたパスワードは表示されなくなりますので、安全な場所に保存してください。パスワードを忘れた場合は、このダイアログの**Reset Password**をクリックしてリセットできます。
-    > -   TiDB Cloudクラスターにはインターネット経由でアクセスできます。他の場所でパスワードを使用する必要がある場合は、データベースのセキュリティを確保するためにパスワードをリセットすることをお勧めします。
+    > - ランダム パスワードは、大文字、小文字、数字、特殊文字を含む 16 文字で構成されます。
+    > - このダイアログを閉じると、生成されたパスワードは表示されなくなりますので、安全な場所に保存してください。パスワードを忘れた場合は、このダイアログの**Reset Password**をクリックしてリセットできます。
+    > - TiDB Cloudクラスターにはインターネット経由でアクセスできます。他の場所でパスワードを使用する必要がある場合は、データベースのセキュリティを確保するためにパスワードをリセットすることをお勧めします。
 
-5.  接続文字列を使用してクラスターに接続します。
+5. 接続文字列を使用してクラスターに接続します。
 
     > **Note:**
     >
@@ -79,8 +79,8 @@ JavaやGoなど、クライアントがシステムのルートCAストアをデ
 
 WindowsはCAルートへの特定のパスを提供していません。代わりに、 [レジストリ](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores)を使用して証明書を保存します。そのため、WindowsでCAルートパスを指定するには、次の手順に従います。
 
-1.  [ISRGルートX1証明書](https://letsencrypt.org/certs/isrgrootx1.pem)をダウンロードし、 `<path_to_ca>`などの任意のパスに保存します。
-2.  TiDB Cloudクラスターに接続するときは、パス ( `<path_to_ca>` ) を CA ルートパスとして使用します。
+1. [ISRGルートX1証明書](https://letsencrypt.org/certs/isrgrootx1.pem)をダウンロードし、 `<path_to_ca>`などの任意のパスに保存します。
+2. TiDB Cloudクラスターに接続するときは、パス ( `<path_to_ca>` ) を CA ルートパスとして使用します。
 
 ## よくある質問 {#faqs}
 

@@ -7,9 +7,9 @@ summary: TiDBのタイムゾーン設定は、`time_zone`システム変数に�
 
 TiDBのタイムゾーンは、システム変数[`time_zone`](/system-variables.md#time_zone)によって決定されます。セッションレベルまたはグローバルレベルで設定できます。`time_zone`のデフォルト値は`SYSTEM`です。`SYSTEM`に対応する実際のタイムゾーンは、TiDBクラスタのブートストラップが初期化される際に設定されます。詳細なロジックは次のとおりです。
 
-1.  TiDB は`TZ`環境変数の使用を優先します。
-2.  `TZ`環境変数が失敗した場合、TiDB は`/etc/localtime`ソフト リンクからタイムゾーンを読み取ります。
-3.  上記の両方の方法が失敗した場合、TiDB はシステムタイムゾーンとして`UTC`を使用します。
+1. TiDB は`TZ`環境変数の使用を優先します。
+2. `TZ`環境変数が失敗した場合、TiDB は`/etc/localtime`ソフト リンクからタイムゾーンを読み取ります。
+3. 上記の両方の方法が失敗した場合、TiDB はシステムタイムゾーンとして`UTC`を使用します。
 
 ## タイムゾーン設定を表示する {#view-time-zone-settings}
 
@@ -23,13 +23,13 @@ SELECT @@global.time_zone, @@session.time_zone, @@global.system_time_zone;
 
 TiDB では、 `time_zone`システム変数の値は次のいずれかの形式で設定できます。
 
--   `SYSTEM` (デフォルト値) は、タイムゾーンがシステムのタイムゾーンと同じであることを示します。
--   UTC オフセット（`'+10:00'`または`'-6:00'`など）。
--   `'Europe/Helsinki'` 、 `'US/Eastern'` 、 `'MET'`などの名前付きタイムゾーン。
+- `SYSTEM` (デフォルト値) は、タイムゾーンがシステムのタイムゾーンと同じであることを示します。
+- UTC オフセット（`'+10:00'`または`'-6:00'`など）。
+- `'Europe/Helsinki'` 、 `'US/Eastern'` 、 `'MET'`などの名前付きタイムゾーン。
 
 ニーズに応じて、次のように TiDB のタイムゾーンをグローバルレベルまたはセッションレベルで設定できます。
 
--   TiDB のタイムゾーンをグローバルレベルで設定します。
+- TiDB のタイムゾーンをグローバルレベルで設定します。
 
     ```sql
     SET GLOBAL time_zone = ${time-zone-value};
@@ -41,7 +41,7 @@ TiDB では、 `time_zone`システム変数の値は次のいずれかの形式
     SET GLOBAL time_zone = 'UTC';
     ```
 
--   セッションレベルで TiDB のタイムゾーンを設定します。
+- セッションレベルで TiDB のタイムゾーンを設定します。
 
     ```sql
     SET time_zone = ${time-zone-value};
@@ -110,13 +110,13 @@ select * from t;
 
 ## タイムゾーン設定に関する重要な考慮事項 {#important-considerations-for-time-zone-settings}
 
--   `TIMESTAMP`と`DATETIME`値の変換中にはタイムゾーンが関係し、現在のセッションの`time_zone`に基づいて処理されます。
--   データ移行では、プライマリ データベースとセカンダリ データベースのタイムゾーン設定が一致しているかどうかに特に注意する必要があります。
--   正確なタイムスタンプを取得するには、ネットワークタイムプロトコル（NTP）または高精度時間プロトコル（PTP）サービスを使用して信頼性の高いクロックを設定することを強くお勧めします。NTPサービスの確認方法については、 [NTPサービスを確認してインストールする](/check-before-deployment.md#check-and-install-the-ntp-service)を参照してください。
--   夏時間を採用しているタイムゾーンを使用すると、特にそれらのタイムスタンプを使用して計算を実行するときに、タイムスタンプがあいまいになったり、タイムスタンプが存在しなくなったりする可能性があることに注意してください。
--   MySQLは[`mysql_tzinfo_to_sql`](https://dev.mysql.com/doc/refman/8.4/en/mysql-tzinfo-to-sql.html)を使用して、オペレーティングシステムのタイムゾーンデータベースを`mysql`データベースのテーブルに変換します。一方、TiDBはオペレーティングシステムのタイムゾーンデータベースからタイムゾーンデータファイルを直接読み取り、Goプログラミング言語に組み込まれたタイムゾーン処理機能を活用します。
+- `TIMESTAMP`と`DATETIME`値の変換中にはタイムゾーンが関係し、現在のセッションの`time_zone`に基づいて処理されます。
+- データ移行では、プライマリ データベースとセカンダリ データベースのタイムゾーン設定が一致しているかどうかに特に注意する必要があります。
+- 正確なタイムスタンプを取得するには、ネットワークタイムプロトコル（NTP）または高精度時間プロトコル（PTP）サービスを使用して信頼性の高いクロックを設定することを強くお勧めします。NTPサービスの確認方法については、 [NTPサービスを確認してインストールする](/check-before-deployment.md#check-and-install-the-ntp-service)を参照してください。
+- 夏時間を採用しているタイムゾーンを使用すると、特にそれらのタイムスタンプを使用して計算を実行するときに、タイムスタンプがあいまいになったり、タイムスタンプが存在しなくなったりする可能性があることに注意してください。
+- MySQLは[`mysql_tzinfo_to_sql`](https://dev.mysql.com/doc/refman/8.4/en/mysql-tzinfo-to-sql.html)を使用して、オペレーティングシステムのタイムゾーンデータベースを`mysql`データベースのテーブルに変換します。一方、TiDBはオペレーティングシステムのタイムゾーンデータベースからタイムゾーンデータファイルを直接読み取り、Goプログラミング言語に組み込まれたタイムゾーン処理機能を活用します。
 
 ## 参照 {#see-also}
 
--   [日付と時刻のデータ型](/data-type-date-and-time.md)
--   [データと時間関数](/functions-and-operators/date-and-time-functions.md)
+- [日付と時刻のデータ型](/data-type-date-and-time.md)
+- [データと時間関数](/functions-and-operators/date-and-time-functions.md)

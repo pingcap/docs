@@ -51,8 +51,8 @@ SELECT /*+ HASH_JOIN(@sel_1 t1@sel_1, t3) */ * FROM (SELECT t1.a, t1.b FROM t t1
 
 上で説明したように、ヒント内のクエリブロックの名前は次の方法で指定できます。
 
--   ヒントの最初のパラメータとしてクエリブロック名を設定し、他のパラメータとはスペースで区切ってください。このセクションにリストされているすべてのヒントには、 `QB_NAME`に加えて、オプションの隠しパラメータ`@QB_NAME`も存在します。このパラメータを使用することで、ヒントの有効範囲を指定できます。
--   パラメータ内のテーブル名に`@QB_NAME`を追加して、このテーブルがどのクエリブロックに属するかを明示的に指定します。
+- ヒントの最初のパラメータとしてクエリブロック名を設定し、他のパラメータとはスペースで区切ってください。このセクションにリストされているすべてのヒントには、 `QB_NAME`に加えて、オプションの隠しパラメータ`@QB_NAME`も存在します。このパラメータを使用することで、ヒントの有効範囲を指定できます。
+- パラメータ内のテーブル名に`@QB_NAME`を追加して、このテーブルがどのクエリブロックに属するかを明示的に指定します。
 
 > **Note:**
 >
@@ -236,8 +236,8 @@ SELECT /*+ SHUFFLE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 > **Note:**
 >
-> -   このヒントを使用する前に、現在のTiDBクラスタがクエリでTiFlash MPPモードの使用をサポートしていることを確認してください。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
-> -   このヒントは、 [`HASH_JOIN_BUILD`ヒント](#hash_join_buildt1_name--tl_name-)および[`HASH_JOIN_PROBE`ヒント](#hash_join_probet1_name--tl_name-)と組み合わせて使用して、シャッフル結合アルゴリズムのビルド側とプローブ側を制御できます。
+> - このヒントを使用する前に、現在のTiDBクラスタがクエリでTiFlash MPPモードの使用をサポートしていることを確認してください。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
+> - このヒントは、 [`HASH_JOIN_BUILD`ヒント](#hash_join_buildt1_name--tl_name-)および[`HASH_JOIN_PROBE`ヒント](#hash_join_probet1_name--tl_name-)と組み合わせて使用して、シャッフル結合アルゴリズムのビルド側とプローブ側を制御できます。
 
 ### BROADCAST_JOIN(t1_name [, tl_name ...]) {#broadcast_joint1_name--tl_name-}
 
@@ -249,8 +249,8 @@ SELECT /*+ BROADCAST_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 > **Note:**
 >
-> -   このヒントを使用する前に、現在のTiDBクラスタがクエリでTiFlash MPPモードの使用をサポートしていることを確認してください。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
-> -   このヒントは、 [`HASH_JOIN_BUILD`ヒント](#hash_join_buildt1_name--tl_name-)および[`HASH_JOIN_PROBE`ヒント](#hash_join_probet1_name--tl_name-)と組み合わせて使用して、ブロードキャスト結合アルゴリズムのビルド側とプローブ側を制御できます。
+> - このヒントを使用する前に、現在のTiDBクラスタがクエリでTiFlash MPPモードの使用をサポートしていることを確認してください。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
+> - このヒントは、 [`HASH_JOIN_BUILD`ヒント](#hash_join_buildt1_name--tl_name-)および[`HASH_JOIN_PROBE`ヒント](#hash_join_probet1_name--tl_name-)と組み合わせて使用して、ブロードキャスト結合アルゴリズムのビルド側とプローブ側を制御できます。
 
 ### NO_DECORRELATE() {#no_decorrelate}
 
@@ -417,8 +417,8 @@ EXPLAIN SELECT /*+ ORDER_INDEX(t, a) */ a FROM t ORDER BY a LIMIT 10;
 
 > **Note:**
 >
-> -   クエリ自体がインデックスを順番に読み取る必要がない場合（つまり、ヒントがない場合、オプティマイザはいかなる状況でもインデックスを順番に読み取るプランを生成しません）、ヒント`ORDER_INDEX`を使用するとエラー`Can't find a proper physical plan for this query`が発生します。この場合、対応するヒント`ORDER_INDEX`を削除する必要があります。
-> -   パーティションテーブルのインデックスは順番に読み取ることができないため、パーティションテーブルとその関連インデックスでは`ORDER_INDEX`ヒントを使用しないでください。
+> - クエリ自体がインデックスを順番に読み取る必要がない場合（つまり、ヒントがない場合、オプティマイザはいかなる状況でもインデックスを順番に読み取るプランを生成しません）、ヒント`ORDER_INDEX`を使用するとエラー`Can't find a proper physical plan for this query`が発生します。この場合、対応するヒント`ORDER_INDEX`を削除する必要があります。
+> - パーティションテーブルのインデックスは順番に読み取ることができないため、パーティションテーブルとその関連インデックスでは`ORDER_INDEX`ヒントを使用しないでください。
 
 ### NO_ORDER_INDEX(t1_name, idx1_name [, idx2_name ...]) {#no_order_indext1_name-idx1_name--idx2_name-}
 
@@ -471,15 +471,15 @@ EXPLAIN SELECT /*+ INDEX_LOOKUP_PUSHDOWN(t1, a) */ a, b FROM t1;
 
 `INDEX_LOOKUP_PUSHDOWN`ヒントには現在次の制限があります。
 
--   キャッシュされたテーブルと一時テーブルはサポートされていません。
--   [グローバルインデックス](/global-indexes.md)を使用したクエリはサポートされていません。
--   [多値インデックス](/choose-index.md#use-multi-valued-indexes)を使用したクエリはサポートされていません。
--   `REPEATABLE-READ`以外の分離レベルはサポートされていません。
--   [Follower Read](/follower-read.md)はサポートされていません。
--   [ステイル読み取り](/stale-read.md)と[`tidb_snapshot`を使用して履歴データを読み取る](/read-historical-data.md)はサポートされていません。
--   プッシュダウンされた`LocalIndexLookUp`演算子は`keep order`をサポートしていません。実行計画にインデックス列に基づく`ORDER BY`が含まれている場合、クエリは通常の`IndexLookUp`にフォールバックします。
--   プッシュダウンされた`LocalIndexLookUp`演算子は、ページング モードでのコプロセッサー要求の送信をサポートしていません。
--   プッシュダウンされた`LocalIndexLookUp`演算子は[コプロセッサーキャッシュ](/coprocessor-cache.md)をサポートしません。
+- キャッシュされたテーブルと一時テーブルはサポートされていません。
+- [グローバルインデックス](/global-indexes.md)を使用したクエリはサポートされていません。
+- [多値インデックス](/choose-index.md#use-multi-valued-indexes)を使用したクエリはサポートされていません。
+- `REPEATABLE-READ`以外の分離レベルはサポートされていません。
+- [Follower Read](/follower-read.md)はサポートされていません。
+- [ステイル読み取り](/stale-read.md)と[`tidb_snapshot`を使用して履歴データを読み取る](/read-historical-data.md)はサポートされていません。
+- プッシュダウンされた`LocalIndexLookUp`演算子は`keep order`をサポートしていません。実行計画にインデックス列に基づく`ORDER BY`が含まれている場合、クエリは通常の`IndexLookUp`にフォールバックします。
+- プッシュダウンされた`LocalIndexLookUp`演算子は、ページング モードでのコプロセッサー要求の送信をサポートしていません。
+- プッシュダウンされた`LocalIndexLookUp`演算子は[コプロセッサーキャッシュ](/coprocessor-cache.md)をサポートしません。
 
 ### NO_INDEX_LOOKUP_PUSHDOWN(t1_name)<span class="version-mark">バージョン8.5.5の新機能</span> {#no_index_lookup_pushdownt1_name-new-in-v855}
 
@@ -552,12 +552,12 @@ SELECT /*+ LEADING(t1, t2) */ * FROM t1, t2, t3 WHERE t1.id = t2.id and t2.id = 
 
 `LEADING`ヒントは次の状況では有効になりません。
 
--   `LEADING`ヒントが複数指定されています。
--   `LEADING`ヒントで指定されたテーブル名が存在しません。
--   `LEADING`ヒントに重複したテーブル名が指定されています。
--   オプティマイザーは、ヒント`LEADING`で指定された順序に従って結合操作を実行できません。
--   `straight_join()`ヒントがすでに存在します。
--   クエリには、外部結合とデカルト積が含まれています。
+- `LEADING`ヒントが複数指定されています。
+- `LEADING`ヒントで指定されたテーブル名が存在しません。
+- `LEADING`ヒントに重複したテーブル名が指定されています。
+- オプティマイザーは、ヒント`LEADING`で指定された順序に従って結合操作を実行できません。
+- `straight_join()`ヒントがすでに存在します。
+- クエリには、外部結合とデカルト積が含まれています。
 
 上記の状況では、警告が生成されます。
 
@@ -597,8 +597,8 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
 >
 > `MERGE()`は単純な CTE クエリにのみ適用されます。以下の状況には適用されません。
 >
-> -   [再帰CTE](https://docs.pingcap.com/tidb/stable/dev-guide-use-common-table-expression#recursive-cte)
-> -   集計演算子、ウィンドウ関数、 `DISTINCT`など、展開できないインラインを含むサブクエリ。
+> - [再帰CTE](https://docs.pingcap.com/tidb/stable/dev-guide-use-common-table-expression#recursive-cte)
+> - 集計演算子、ウィンドウ関数、 `DISTINCT`など、展開できないインラインを含むサブクエリ。
 >
 > CTE 参照の数が多すぎると、クエリのパフォーマンスがデフォルトのマテリアライゼーション動作よりも低下する可能性があります。
 
@@ -614,7 +614,7 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
 >
 > `@QueryBlockName`と直後の`.ViewName@QueryBlockName`の間には空白があります。そうでない場合、 `.ViewName@QueryBlockName`は`QueryBlockName`の一部として扱われます。例えば、 `QB_NAME(v2_1, v2@SEL_1 .@SEL_1)`は有効ですが、 `QB_NAME(v2_1, v2@SEL_1.@SEL_1)`は正しく解析できません。
 
--   単一のビューとサブクエリのない単純なステートメントの場合、次の例では、ビュー`v`の最初のクエリブロック名を指定します。
+- 単一のビューとサブクエリのない単純なステートメントの場合、次の例では、ビュー`v`の最初のクエリブロック名を指定します。
 
     ```sql
     SELECT /* Comment: The name of the current query block is the default @SEL_1 */ * FROM v;
@@ -629,7 +629,7 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
     SELECT /*+ QB_NAME(v_1, v) USE_INDEX(t@v_1, idx) */ * FROM v;
     ```
 
--   ネストされたビューとサブクエリを含む複雑なステートメントの場合、次の例では、ビュー`v1`と`v2`の 2 つのクエリブロックのそれぞれの名前を指定します。
+- ネストされたビューとサブクエリを含む複雑なステートメントの場合、次の例では、ビュー`v1`と`v2`の 2 つのクエリブロックのそれぞれの名前を指定します。
 
     ```sql
     SELECT /* Comment: The name of the current query block is the default @SEL_1 */ * FROM v2 JOIN (
@@ -659,43 +659,43 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
 
 > **Note:**
 >
-> -   ビューでグローバルヒントを使用するには、対応する`QB_NAME`ヒントをビューに定義する必要があります。そうしないと、グローバルヒントは有効になりません。
+> - ビューでグローバルヒントを使用するには、対応する`QB_NAME`ヒントをビューに定義する必要があります。そうしないと、グローバルヒントは有効になりません。
 >
-> -   ヒントを使用してビュー内の複数のテーブル名を指定する場合、同じヒントに表示されるテーブル名が同じビューの同じクエリブロック内にあることを確認する必要があります。
+> - ヒントを使用してビュー内の複数のテーブル名を指定する場合、同じヒントに表示されるテーブル名が同じビューの同じクエリブロック内にあることを確認する必要があります。
 >
-> -   最も外側のクエリブロックのビューで`QB_NAME`ヒントを定義すると、次のようになります。
+> - 最も外側のクエリブロックのビューで`QB_NAME`ヒントを定義すると、次のようになります。
 >
->     -   `QB_NAME`のビューリストの最初の項目において、 `@SEL_`が明示的に宣言されていない場合、デフォルトは`QB_NAME`が定義されているクエリブロックの位置と一致します。つまり、クエリ`SELECT /*+ QB_NAME(qb1, v2) */ * FROM v2 JOIN (SELECT /*+ QB_NAME(qb2, v2) */ * FROM v2) vv;`は`SELECT /*+ QB_NAME(qb1, v2@SEL_1) */ * FROM v2 JOIN (SELECT /*+ QB_NAME(qb2, v2@SEL_2) */ * FROM v2) vv;`と同等です。
->     -   `QB_NAME`ビューリストの最初の項目以外の項目については、 `@SEL_1`のみを省略できます。つまり、現在のビューの最初のクエリブロックで`@SEL_1`が宣言されている場合、 `@SEL_1`を省略できます。それ以外の場合、 `@SEL_`は省略できません。上記の例の場合：
+>     - `QB_NAME`のビューリストの最初の項目において、 `@SEL_`が明示的に宣言されていない場合、デフォルトは`QB_NAME`が定義されているクエリブロックの位置と一致します。つまり、クエリ`SELECT /*+ QB_NAME(qb1, v2) */ * FROM v2 JOIN (SELECT /*+ QB_NAME(qb2, v2) */ * FROM v2) vv;`は`SELECT /*+ QB_NAME(qb1, v2@SEL_1) */ * FROM v2 JOIN (SELECT /*+ QB_NAME(qb2, v2@SEL_2) */ * FROM v2) vv;`と同等です。
+>     - `QB_NAME`ビューリストの最初の項目以外の項目については、 `@SEL_1`のみを省略できます。つまり、現在のビューの最初のクエリブロックで`@SEL_1`が宣言されている場合、 `@SEL_1`を省略できます。それ以外の場合、 `@SEL_`は省略できません。上記の例の場合：
 >
->         -   ビュー`v2`の最初のクエリブロックは`QB_NAME(v2_1, v2)`として宣言できます。
->         -   ビュー`v2`の 2 番目のクエリブロックは`QB_NAME(v2_2, v2.@SEL_2)`として宣言できます。
->         -   ビュー`v1`の最初のクエリブロックは`QB_NAME(v1_1, v2.v1@SEL_2)`として宣言できます。
->         -   ビュー`v1`の 2 番目のクエリブロックは`QB_NAME(v1_2, v2.v1@SEL_2 .@SEL_2)`として宣言できます。
+>         - ビュー`v2`の最初のクエリブロックは`QB_NAME(v2_1, v2)`として宣言できます。
+>         - ビュー`v2`の 2 番目のクエリブロックは`QB_NAME(v2_2, v2.@SEL_2)`として宣言できます。
+>         - ビュー`v1`の最初のクエリブロックは`QB_NAME(v1_1, v2.v1@SEL_2)`として宣言できます。
+>         - ビュー`v1`の 2 番目のクエリブロックは`QB_NAME(v1_2, v2.v1@SEL_2 .@SEL_2)`として宣言できます。
 
 ### ステップ2: ターゲットヒントを追加する {#step-2-add-the-target-hints}
 
 ビューのクエリブロックに`QB_NAME`ヒントを定義した後、ビュー内で有効にするために、必要な[クエリブロックで有効になるヒント](#hints-that-take-effect-in-query-blocks)ヒントを`ViewName@QueryBlockName`の形式で追加できます。例：
 
--   ビュー`v2`の最初のクエリブロックに`MERGE_JOIN()`ヒントを指定します。
+- ビュー`v2`の最初のクエリブロックに`MERGE_JOIN()`ヒントを指定します。
 
     ```sql
     SELECT /*+ QB_NAME(v2_1, v2) merge_join(t@v2_1) */ * FROM v2;
     ```
 
--   ビュー`v2`の 2 番目のクエリブロックにヒント`MERGE_JOIN()`と`STREAM_AGG()`を指定します。
+- ビュー`v2`の 2 番目のクエリブロックにヒント`MERGE_JOIN()`と`STREAM_AGG()`を指定します。
 
     ```sql
     SELECT /*+ QB_NAME(v2_2, v2.@SEL_2) merge_join(t1@v2_2) stream_agg(@v2_2) */ * FROM v2;
     ```
 
--   ビュー`v1`の最初のクエリブロックに`HASH_JOIN()`ヒントを指定します。
+- ビュー`v1`の最初のクエリブロックに`HASH_JOIN()`ヒントを指定します。
 
     ```sql
     SELECT /*+ QB_NAME(v1_1, v2.v1@SEL_2) hash_join(t@v1_1) */ * FROM v2;
     ```
 
--   ビュー`v1`の 2 番目のクエリブロックにヒント`HASH_JOIN()`と`HASH_AGG()`を指定します。
+- ビュー`v1`の 2 番目のクエリブロックにヒント`HASH_JOIN()`と`HASH_AGG()`を指定します。
 
     ```sql
     SELECT /*+ QB_NAME(v1_2, v2.v1@SEL_2 .@SEL_2) hash_join(t1@v1_2) hash_agg(@v1_2) */ * FROM v2;
@@ -723,8 +723,8 @@ select /*+ NO_INDEX_MERGE() */ * from t where t.a > 0 or t.b > 0;
 
 > **Note:**
 >
-> -   `NO_INDEX_MERGE`は`USE_INDEX_MERGE`よりも優先度が高くなります。両方のヒントが使用されている場合、 `USE_INDEX_MERGE`は効果がありません。
-> -   サブクエリの場合、 `NO_INDEX_MERGE`サブクエリの最も外側のレベルに配置された場合にのみ有効になります。
+> - `NO_INDEX_MERGE`は`USE_INDEX_MERGE`よりも優先度が高くなります。両方のヒントが使用されている場合、 `USE_INDEX_MERGE`は効果がありません。
+> - サブクエリの場合、 `NO_INDEX_MERGE`サブクエリの最も外側のレベルに配置された場合にのみ有効になります。
 
 ### USE_TOJA(boolean_value) {#use_tojaboolean_value}
 
@@ -788,8 +788,8 @@ prepare stmt from 'select  /*+ IGNORE_PLAN_CACHE() */ * from t where t.id = ?';
 
 > **Warning:**
 >
-> -   予期しない動作が発生する可能性があるため、明示的にサポートされていない変数を変更しないことを強くお勧めします。
-> -   サブクエリに`SET_VAR`を記述しないでください。記述すると、効果が得られない可能性があります。詳細については、 [`SET_VAR`サブクエリに記述すると効果を発揮しません](#set_var-does-not-take-effect-when-written-in-subqueries)を参照してください。
+> - 予期しない動作が発生する可能性があるため、明示的にサポートされていない変数を変更しないことを強くお勧めします。
+> - サブクエリに`SET_VAR`を記述しないでください。記述すると、効果が得られない可能性があります。詳細については、 [`SET_VAR`サブクエリに記述すると効果を発揮しません](#set_var-does-not-take-effect-when-written-in-subqueries)を参照してください。
 
 次に例を示します。
 
@@ -825,8 +825,8 @@ SELECT /*+ STRAIGHT_JOIN() */ * FROM t t1, t t2 WHERE t1.a = t2.a;
 
 > **Note:**
 >
-> -   `STRAIGHT_JOIN`は`LEADING`よりも優先度が高くなります。両方のヒントが使用されている場合、 `LEADING`は効果がありません。
-> -   `STRAIGHT_JOIN`ヒントよりも一般的な`LEADING`ヒントを使用することをお勧めします。
+> - `STRAIGHT_JOIN`は`LEADING`よりも優先度が高くなります。両方のヒントが使用されている場合、 `LEADING`は効果がありません。
+> - `STRAIGHT_JOIN`ヒントよりも一般的な`LEADING`ヒントを使用することをお勧めします。
 
 ### NTH_PLAN(N) {#nth_plann}
 
@@ -1086,8 +1086,8 @@ EXPLAIN SELECT /*+ leading(t1, t3), inl_join(t3) */ * FROM t1, t2, t3 WHERE t1.i
 
 `Can't find a proper physical plan for this query`エラーは次のシナリオで発生する可能性があります。
 
--   クエリ自体はインデックスを順番に読み取る必要はありません。つまり、このクエリでは、ヒントを使用しない限り、オプティマイザはインデックスを順番に読み取るプランを生成しません。この場合、ヒント`ORDER_INDEX`が指定されていると、このエラーが発生します。この問題を解決するには、対応するヒント`ORDER_INDEX`を削除してください。
--   クエリは、 `NO_JOIN`に関連するヒントを使用して、可能なすべての結合方法を除外します。
+- クエリ自体はインデックスを順番に読み取る必要はありません。つまり、このクエリでは、ヒントを使用しない限り、オプティマイザはインデックスを順番に読み取るプランを生成しません。この場合、ヒント`ORDER_INDEX`が指定されていると、このエラーが発生します。この問題を解決するには、対応するヒント`ORDER_INDEX`を削除してください。
+- クエリは、 `NO_JOIN`に関連するヒントを使用して、可能なすべての結合方法を除外します。
 
 ```sql
 CREATE TABLE t1 (a INT);
@@ -1096,7 +1096,7 @@ EXPLAIN SELECT /*+ NO_HASH_JOIN(t1), NO_MERGE_JOIN(t1) */ * FROM t1, t2 WHERE t1
 ERROR 1815 (HY000): Internal : Can't find a proper physical plan for this query
 ```
 
--   システム変数[`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-v712-and-v740)は`OFF`に設定され、他のすべての結合タイプも除外されます。
+- システム変数[`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-v712-and-v740)は`OFF`に設定され、他のすべての結合タイプも除外されます。
 
 ```sql
 CREATE TABLE t1 (a INT);

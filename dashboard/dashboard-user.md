@@ -11,31 +11,31 @@ TiDB SQLユーザーを制御および管理する方法の詳細については
 
 ## 必要な権限 {#required-privileges}
 
--   接続された TiDBサーバーで[セキュリティ強化モード（SEM）](/system-variables.md#tidb_enable_enhanced_security)が有効になっていない場合に TiDB Dashboardにアクセスするには、SQL ユーザーに次の**すべての**権限が必要です。
+- 接続された TiDBサーバーで[セキュリティ強化モード（SEM）](/system-variables.md#tidb_enable_enhanced_security)が有効になっていない場合に TiDB Dashboardにアクセスするには、SQL ユーザーに次の**すべての**権限が必要です。
 
-    -   プロセス
-    -   データベースを表示
-    -   設定
-    -   ダッシュボードクライアント
+    - プロセス
+    - データベースを表示
+    - 設定
+    - ダッシュボードクライアント
 
--   接続された TiDBサーバーで[セキュリティ強化モード（SEM）](/system-variables.md#tidb_enable_enhanced_security)が有効になっているときに TiDB Dashboardにアクセスするには、SQL ユーザーに次の**すべての**権限が必要です。
+- 接続された TiDBサーバーで[セキュリティ強化モード（SEM）](/system-variables.md#tidb_enable_enhanced_security)が有効になっているときに TiDB Dashboardにアクセスするには、SQL ユーザーに次の**すべての**権限が必要です。
 
-    -   プロセス
-    -   データベースを表示
-    -   設定
-    -   ダッシュボードクライアント
-    -   制限付きテーブル管理者
-    -   制限付きステータス管理者
-    -   制限付き変数管理者
+    - プロセス
+    - データベースを表示
+    - 設定
+    - ダッシュボードクライアント
+    - 制限付きテーブル管理者
+    - 制限付きステータス管理者
+    - 制限付き変数管理者
 
--   TiDB Dashboardにサインインした後、インターフェイス上の構成を変更するには、SQL ユーザーに次の権限も必要です。
+- TiDB Dashboardにサインインした後、インターフェイス上の構成を変更するには、SQL ユーザーに次の権限も必要です。
 
-    -   システム変数管理者
+    - システム変数管理者
 
--   TiDB Dashboardにサインインした後、インターフェース上の[高速バインド実行計画](/dashboard/dashboard-statement-details.md#fast-plan-binding)機能を使用するには、SQL ユーザーに次の権限も必要です。
+- TiDB Dashboardにサインインした後、インターフェース上の[高速バインド実行計画](/dashboard/dashboard-statement-details.md#fast-plan-binding)機能を使用するには、SQL ユーザーに次の権限も必要です。
 
-    -   システム変数管理者
-    -   SUPER
+    - システム変数管理者
+    - SUPER
 
 > **Note:**
 >
@@ -47,7 +47,7 @@ SQL ユーザーが前述の権限要件を満たしていない場合、以下�
 
 ## 例: TiDB Dashboardにアクセスするための最小権限の SQL ユーザーを作成する {#example-create-a-least-privileged-sql-user-to-access-tidb-dashboard}
 
--   接続された TiDBサーバーで[セキュリティ強化モード（SEM）](/system-variables.md#tidb_enable_enhanced_security)が有効になっていない場合、TiDB Dashboardにサインインできる SQL ユーザー`dashboardAdmin`を作成するには、次の SQL ステートメントを実行します。
+- 接続された TiDBサーバーで[セキュリティ強化モード（SEM）](/system-variables.md#tidb_enable_enhanced_security)が有効になっていない場合、TiDB Dashboardにサインインできる SQL ユーザー`dashboardAdmin`を作成するには、次の SQL ステートメントを実行します。
 
     ```sql
     CREATE USER 'dashboardAdmin'@'%' IDENTIFIED BY '<YOUR_PASSWORD>';
@@ -63,7 +63,7 @@ SQL ユーザーが前述の権限要件を満たしていない場合、以下�
     GRANT SUPER ON *.* TO 'dashboardAdmin'@'%';
     ```
 
--   接続先のTiDBサーバーで[セキュリティ強化モード（SEM）](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合は、まずSEMを無効にし、以下のSQL文を実行して、TiDB DashboardにサインインできるSQLユーザー`dashboardAdmin`を作成します。ユーザーを作成したら、SEMを再度有効にします。
+- 接続先のTiDBサーバーで[セキュリティ強化モード（SEM）](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合は、まずSEMを無効にし、以下のSQL文を実行して、TiDB DashboardにサインインできるSQLユーザー`dashboardAdmin`を作成します。ユーザーを作成したら、SEMを再度有効にします。
 
     ```sql
     CREATE USER 'dashboardAdmin'@'%' IDENTIFIED BY '<YOUR_PASSWORD>';
@@ -86,7 +86,7 @@ SQL ユーザーが前述の権限要件を満たしていない場合、以下�
 
 次の例は、 [ロールベースのアクセス制御（RBAC）](/role-based-access-control.md)メカニズムを通じて TiDB Dashboardにアクセスするためのロールとユーザーを作成する方法を示しています。
 
-1.  TiDB Dashboardのすべての権限要件を満たす`dashboard_access`ロールを作成します。
+1. TiDB Dashboardのすべての権限要件を満たす`dashboard_access`ロールを作成します。
 
     ```sql
     CREATE ROLE 'dashboard_access';
@@ -97,7 +97,7 @@ SQL ユーザーが前述の権限要件を満たしていない場合、以下�
     GRANT SUPER ON *.* TO 'dashboardAdmin'@'%';    
     ```
 
-2.  `dashboard_access`ロールを他のユーザーに付与し、 `dashboard_access`デフォルトのロールとして設定します。
+2. `dashboard_access`ロールを他のユーザーに付与し、 `dashboard_access`デフォルトのロールとして設定します。
 
     ```sql
     CREATE USER 'dashboardAdmin'@'%' IDENTIFIED BY '<YOUR_PASSWORD>';

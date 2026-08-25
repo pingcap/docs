@@ -9,15 +9,15 @@ summary: 変更フィード用のプライベートエンドポイントを設�
 
 ## 前提条件 {#prerequisites}
 
--   プライベートエンドポイント作成の権限を確認してください
--   ネットワーク接続を設定する
+- プライベートエンドポイント作成の権限を確認してください
+- ネットワーク接続を設定する
 
 ### 権限 {#permissions}
 
 変更フィード用のプライベートエンドポイントを作成できるのは、組織内で以下のいずれか1つの役割を持つユーザーのみです。
 
--   `Organization Owner`
--   対応するインスタンスの`Instance Manager`
+- `Organization Owner`
+- 対応するインスタンスの`Instance Manager`
 
 TiDB Cloudのロールの詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)を参照してください。
 
@@ -30,11 +30,11 @@ TiDB Cloudのロールの詳細については、 [ユーザーロール](/tidb-
 
 変更フィードのダウンストリームサービスがAWS上でホストされている場合は、接続タイプに応じて以下の情報を収集してください。
 
--   **AWS Endpoint Service**: ダウンストリームサービスのエンドポイントサービス名と、ダウンストリームサービスがデプロイされている可用性ゾーン（AZ）。
+- **AWS Endpoint Service**: ダウンストリームサービスのエンドポイントサービス名と、ダウンストリームサービスがデプロイされている可用性ゾーン（AZ）。
 
     ダウンストリーム サービスでプライベートエンドポイントサービスを利用できない場合は、 [ステップ2. Kafkaクラスタをプライベートリンクサービスとして公開する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)プライベートリンクサービスとして公開することで、ロードバランサーとプライベートリンクサービスを設定します。
 
--   **Amazon MSK Provisioned**: Amazon MSK ProvisionedクラスターのARN。変更フィード用のAmazon MSK Provisionedクラスターの作成方法については、[AWS PrivateLink 経由で Amazon MSK Provisioned クラスターを設定する](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)を参照してください。
+- **Amazon MSK Provisioned**: Amazon MSK ProvisionedクラスターのARN。変更フィード用のAmazon MSK Provisionedクラスターの作成方法については、[AWS PrivateLink 経由で Amazon MSK Provisioned クラスターを設定する](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)を参照してください。
 
 </div>
 
@@ -44,8 +44,8 @@ TiDB Cloudのロールの詳細については、 [ユーザーロール](/tidb-
 
 変更フィードのダウンストリームサービスがAlibaba Cloudでホストされている場合は、以下の情報を収集してください。
 
--   ダウンストリームサービスのプライベートエンドポイントサービスの名前
--   ダウンストリームサービスがデプロイされている可用性ゾーン（AZ）
+- ダウンストリームサービスのプライベートエンドポイントサービスの名前
+- ダウンストリームサービスがデプロイされている可用性ゾーン（AZ）
 
 TiDB Cloud VPCへのアクセスを許可するには、エンドポイントサービスの許可リストにTiDB CloudのAlibaba CloudアカウントIDを追加する必要があります。
 
@@ -58,15 +58,15 @@ TiDB Cloud VPCへのアクセスを許可するには、エンドポイントサ
 
 ## ステップ1. インスタンスのネットワークページを開きます。 {#step-1-open-the-networking-page-for-your-instance}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
 
-2.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Premiumインスタンスの名前をクリックすると、その概要ページに移動します。
+2. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Premiumインスタンスの名前をクリックすると、その概要ページに移動します。
 
     > **Tip:**
     >
     > 左上隅にあるコンボボックスを使用して、組織とインスタンスを切り替えることができます。
 
-3.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
+3. 左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
 
 ## ステップ2．変更フィード用のプライベートエンドポイントを設定する {#step-2-configure-the-private-endpoint-for-changefeeds}
 
@@ -82,34 +82,34 @@ AWS では、ダウンストリームサービスに応じて接続タイプを�
 
 **AWS Endpoint Service**
 
-1.  **Networking**ページで、 **AWS Private Endpoints for External Services**セクションの**Create Private Endpoint for External Services**をクリックします。
+1. **Networking**ページで、 **AWS Private Endpoints for External Services**セクションの**Create Private Endpoint for External Services**をクリックします。
 
-2.  表示されたダイアログで、プライベートエンドポイントの名前を入力します。
+2. 表示されたダイアログで、プライベートエンドポイントの名前を入力します。
 
-3.  リマインダーに従って、 TiDB Cloudの[AWSプリンシパル](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts)にエンドポイントを作成する権限を与えます。
+3. リマインダーに従って、 TiDB Cloudの[AWSプリンシパル](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts)にエンドポイントを作成する権限を与えます。
 
-4.  [ネットワーク](#network)セクションで収集した**Endpoint Service Name**を入力し、接続タイプとして**AWS Endpoint Service**を選択します。
+4. [ネットワーク](#network)セクションで収集した**Endpoint Service Name**を入力し、接続タイプとして**AWS Endpoint Service**を選択します。
 
-5.  **Number of AZs**を選択してください。AZの数とAZ IDが、Kafkaのデプロイメントと一致していることを確認してください。
+5. **Number of AZs**を選択してください。AZの数とAZ IDが、Kafkaのデプロイメントと一致していることを確認してください。
 
-6.  このプライベートエンドポイントがApache Kafka用に作成された場合は、 **Configure Advertised Listener for Kafka**チェックボックスを選択します。
+6. このプライベートエンドポイントがApache Kafka用に作成された場合は、 **Configure Advertised Listener for Kafka**チェックボックスを選択します。
 
-7.  **TiDB Managed**ドメインまたは**Custom**ドメインのいずれかを使用して、Kafka用のアドバタイズドリスナーを設定します。
+7. **TiDB Managed**ドメインまたは**Custom**ドメインのいずれかを使用して、Kafka用のアドバタイズドリスナーを設定します。
 
-    -   アドバタイズされたリスナーに**TiDB Managed**ドメインを使用するには、 **Domain Pattern**フィールドに一意の文字列を入力し、 **Generate**をクリックします。TiDB Cloud は、各アベイラビリティゾーンごとにサブドメインを含むブローカーアドレスを生成します。
-    -   アドバタイズされたリスナーに独自の**Custom**ドメインを使用するには、ドメインタイプを**Custom**に切り替え、**Custom Domain**フィールドにルートドメインを入力し、 **Check**をクリックしてから、各アベイラビリティゾーンのブローカーサブドメインを指定します。
+    - アドバタイズされたリスナーに**TiDB Managed**ドメインを使用するには、 **Domain Pattern**フィールドに一意の文字列を入力し、 **Generate**をクリックします。TiDB Cloud は、各アベイラビリティゾーンごとにサブドメインを含むブローカーアドレスを生成します。
+    - アドバタイズされたリスナーに独自の**Custom**ドメインを使用するには、ドメインタイプを**Custom**に切り替え、**Custom Domain**フィールドにルートドメインを入力し、 **Check**をクリックしてから、各アベイラビリティゾーンのブローカーサブドメインを指定します。
 
-8.  **Create**をクリックして設定を検証し、プライベートエンドポイントを作成します。
+8. **Create**をクリックして設定を検証し、プライベートエンドポイントを作成します。
 
 **Amazon MSK Provisioned**
 
-1.  **Networking**ページで、 **AWS Private Endpoints for External Services**セクションの**Create Private Endpoint for External Services**をクリックします。
+1. **Networking**ページで、 **AWS Private Endpoints for External Services**セクションの**Create Private Endpoint for External Services**をクリックします。
 
-2.  表示されたダイアログで、プライベートエンドポイントの名前を入力し、接続タイプとして**AWS MSK Provisioned**を選択します。
+2. 表示されたダイアログで、プライベートエンドポイントの名前を入力し、接続タイプとして**AWS MSK Provisioned**を選択します。
 
-3.  Amazon MSK Provisionedクラスターの**MSK Cluster ARN**を入力します。変更フィード用のAmazon MSK Provisionedクラスターの作成方法については、[AWS PrivateLink 経由で Amazon MSK Provisioned クラスターを設定する](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)を参照してください。
+3. Amazon MSK Provisionedクラスターの**MSK Cluster ARN**を入力します。変更フィード用のAmazon MSK Provisionedクラスターの作成方法については、[AWS PrivateLink 経由で Amazon MSK Provisioned クラスターを設定する](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)を参照してください。
 
-4.  **Create**をクリックして設定を検証し、プライベートエンドポイントを作成します。
+4. **Create**をクリックして設定を検証し、プライベートエンドポイントを作成します。
 
 </div>
 
@@ -117,24 +117,24 @@ AWS では、ダウンストリームサービスに応じて接続タイプを�
 
 <div label="Alibaba Cloud">
 
-1.  **Networking**ページで、 **Alibaba Cloud Private Endpoints for External Services**セクションの**Create Private Endpoint for External Services**をクリックします。
+1. **Networking**ページで、 **Alibaba Cloud Private Endpoints for External Services**セクションの**Create Private Endpoint for External Services**をクリックします。
 
-2.  **Create Private Endpoint for External Services**ダイアログで、プライベートエンドポイントの名前を入力します。
+2. **Create Private Endpoint for External Services**ダイアログで、プライベートエンドポイントの名前を入力します。
 
-3.  リマインダーに従って、TiDB Cloud の Alibaba Cloud アカウント ID をエンドポイントサービスのホワイトリストに追加して、 TiDB Cloud VPC アクセスを許可します。詳細については、 [エンドポイントサービスの許可リストにおけるアカウントIDの管理](https://www.alibabacloud.com/help/en/privatelink/user-guide/add-and-manage-service-whitelists)を参照してください。
+3. リマインダーに従って、TiDB Cloud の Alibaba Cloud アカウント ID をエンドポイントサービスのホワイトリストに追加して、 TiDB Cloud VPC アクセスを許可します。詳細については、 [エンドポイントサービスの許可リストにおけるアカウントIDの管理](https://www.alibabacloud.com/help/en/privatelink/user-guide/add-and-manage-service-whitelists)を参照してください。
 
-4.  [ネットワーク](#network)セクションで収集した**Endpoint Service Name**を入力します。
+4. [ネットワーク](#network)セクションで収集した**Endpoint Service Name**を入力します。
 
-5.  **Number of AZs**を選択してください。AZの数とAZ IDが、Kafkaのデプロイメントと一致していることを確認してください。
+5. **Number of AZs**を選択してください。AZの数とAZ IDが、Kafkaのデプロイメントと一致していることを確認してください。
 
-6.  このプライベートエンドポイントがApache Kafka用に作成された場合は、 **Configure Advertised Listener for Kafka**チェックボックスを選択します。
+6. このプライベートエンドポイントがApache Kafka用に作成された場合は、 **Configure Advertised Listener for Kafka**チェックボックスを選択します。
 
-7.  **TiDB Managed**ドメインまたは**Custom**ドメインのいずれかを使用して、Kafka用のアドバタイズドリスナーを設定します。
+7. **TiDB Managed**ドメインまたは**Custom**ドメインのいずれかを使用して、Kafka用のアドバタイズドリスナーを設定します。
 
-    -   アドバタイズされたリスナーに**TiDB Managed**ドメインを使用するには、 **Domain Pattern**フィールドに一意の文字列を入力し、 **Generate**をクリックします。TiDB は、各アベイラビリティゾーンごとにサブドメインを含むブローカーアドレスを生成します。
-    -   アドバタイズされたリスナーに独自の**Custom**ドメインを使用するには、ドメインタイプを**Custom**に切り替え、**Custom Domain**フィールドにルートドメインを入力し、 **Check**をクリックしてから、各アベイラビリティゾーンのブローカーサブドメインを指定します。
+    - アドバタイズされたリスナーに**TiDB Managed**ドメインを使用するには、 **Domain Pattern**フィールドに一意の文字列を入力し、 **Generate**をクリックします。TiDB は、各アベイラビリティゾーンごとにサブドメインを含むブローカーアドレスを生成します。
+    - アドバタイズされたリスナーに独自の**Custom**ドメインを使用するには、ドメインタイプを**Custom**に切り替え、**Custom Domain**フィールドにルートドメインを入力し、 **Check**をクリックしてから、各アベイラビリティゾーンのブローカーサブドメインを指定します。
 
-8.  **Create**をクリックして設定を検証し、プライベートエンドポイントを作成します。
+8. **Create**をクリックして設定を検証し、プライベートエンドポイントを作成します。
 
 </div>
 </CustomContent>

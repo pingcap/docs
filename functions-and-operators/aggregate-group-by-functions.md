@@ -27,12 +27,12 @@ summary: TiDB でサポートされている集計関数について学習しま
 | [`JSON_ARRAYAGG()`](/functions-and-operators/json-functions/json-functions-aggregate.md#json_arrayagg)               | 結果セットを単一のJSON配列として返します                |
 | [`JSON_OBJECTAGG()`](/functions-and-operators/json-functions/json-functions-aggregate.md#json_objectagg)             | 結果セットをキーと値のペアを含む単一のJSONオブジェクトとして返します。 |
 
--   特に明記しない限り、グループ関数は`NULL`値を無視します。
--   `GROUP BY`句を含まないステートメントでグループ関数を使用すると、すべての行をグループ化するのと同じになります。
+- 特に明記しない限り、グループ関数は`NULL`値を無視します。
+- `GROUP BY`句を含まないステートメントでグループ関数を使用すると、すべての行をグループ化するのと同じになります。
 
 さらに、TiDB は次の集計関数も提供します。
 
--   `APPROX_PERCENTILE(expr, constant_integer_expr)`
+- `APPROX_PERCENTILE(expr, constant_integer_expr)`
 
     この関数は`expr`のパーセンタイルを返します。引数`constant_integer_expr`は、 `[1,100]`の範囲の定数整数であるパーセンタイル値を示します。パーセンタイル P <sub>k</sub> （ `k`はパーセンタイルを表します）は、データセット内に P <sub>k</sub>以下の値が少なくとも`k%`あることを示します。
 
@@ -59,7 +59,7 @@ summary: TiDB でサポートされている集計関数について学習しま
     1 row in set (0.00 sec)
     ```
 
--   `APPROX_COUNT_DISTINCT(expr, [expr...])`
+- `APPROX_COUNT_DISTINCT(expr, [expr...])`
 
     この関数は、異なる値の数を数える点では`COUNT(DISTINCT)`に似ていますが、近似値を返します。`BJKST`アルゴリズムを使用することで、べき乗分布を持つ大規模なデータセットを処理する際のメモリ消費量を大幅に削減します。さらに、低カーディナリティデータの場合、この関数はCPU使用率を効率的に維持しながら高い精度を実現します。
 
@@ -134,8 +134,8 @@ select distinct a, b from t order by c;
 
 MySQL では、 `DISTINCT`と`ORDER BY`含むクエリは、 `ORDER BY`式のいずれかが以下の条件の少なくとも 1 つを満たしていない場合、無効として拒否されます。
 
--   式は`SELECT`リストの1に等しい
--   式によって参照され、クエリの選択されたテーブルに属するすべての列は、 `SELECT`リストの要素です。
+- 式は`SELECT`リストの1に等しい
+- 式によって参照され、クエリの選択されたテーブルに属するすべての列は、 `SELECT`リストの要素です。
 
 しかし、TiDB では上記のクエリは有効です。詳細については、 [＃4254](https://github.com/pingcap/tidb/issues/4254)を参照してください。
 

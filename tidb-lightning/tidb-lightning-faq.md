@@ -25,8 +25,8 @@ TiDB Lightningのバージョンはクラスターと同じである必要があ
 
 ## TiDB Lightningを適切に再起動するにはどうすればよいですか? {#how-to-properly-restart-tidb-lightning}
 
-1.  [`tidb-lightning`プロセスを停止する](#how-to-stop-the-tidb-lightning-process) 。
-2.  新しい`tidb-lightning`タスクを開始します。以前の開始コマンド（例: `nohup tiup tidb-lightning -config tidb-lightning.toml`）を実行します。
+1. [`tidb-lightning`プロセスを停止する](#how-to-stop-the-tidb-lightning-process) 。
+2. 新しい`tidb-lightning`タスクを開始します。以前の開始コマンド（例: `nohup tiup tidb-lightning -config tidb-lightning.toml`）を実行します。
 
 ## インポートされたデータの整合性を確保するにはどうすればよいですか? {#how-to-ensure-the-integrity-of-the-imported-data}
 
@@ -51,8 +51,8 @@ ADMIN CHECKSUM TABLE `schema`.`table`;
 
 TiDB Lightning は以下をサポートします:
 
--   [Dumpling](/dumpling-overview.md) 、CSV ファイル、および[Amazon Auroraによって生成された Apache Parquet ファイル](/migrate-aurora-to-tidb.md) 、Apache Hive、Snowflake によってエクスポートされたファイルをインポートします。
--   ローカルディスクまたは Amazon S3ストレージからデータを読み取ります。
+- [Dumpling](/dumpling-overview.md) 、CSV ファイル、および[Amazon Auroraによって生成された Apache Parquet ファイル](/migrate-aurora-to-tidb.md) 、Apache Hive、Snowflake によってエクスポートされたファイルをインポートします。
+- ローカルディスクまたは Amazon S3ストレージからデータを読み取ります。
 
 ## TiDB Lightning はスキーマとテーブルの作成をスキップできますか? {#could-tidb-lightning-skip-creating-schema-and-tables}
 
@@ -77,7 +77,7 @@ sql-mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"
 
 `tidb-lightning`プロセスを停止するには、展開方法に応じて対応する操作を選択できます。
 
--   手動デプロイの場合： `tidb-lightning`フォアグラウンドで実行されている場合は、 <kbd>Ctrl</kbd> + <kbd>C</kbd>を押して終了します。それ以外の場合は、 `ps aux | grep tidb-lightning`コマンドを使用してプロセス ID を取得し、 `kill -2 ${PID}`コマンドを使用してプロセスを終了します。
+- 手動デプロイの場合： `tidb-lightning`フォアグラウンドで実行されている場合は、 <kbd>Ctrl</kbd> + <kbd>C</kbd>を押して終了します。それ以外の場合は、 `ps aux | grep tidb-lightning`コマンドを使用してプロセス ID を取得し、 `kill -2 ${PID}`コマンドを使用してプロセスを終了します。
 
 ## TiDB Lightning は1 ギガビット ネットワークカードで使用できますか? {#can-tidb-lightning-be-used-with-1-gigabit-network-card}
 
@@ -89,12 +89,12 @@ TiDB Lightning は、10 ギガビット ネットワークカードで使用す�
 
 デフォルト設定のレプリカ数3の場合、ターゲットTiKVクラスターに必要な容量はデータソースの6倍になります。「2」という倍数は、以下の要素がデータソースに反映されていないため、控えめな見積もりです。
 
--   インデックスが占めるスペース
--   RocksDBにおける空間増幅
+- インデックスが占めるスペース
+- RocksDBにおける空間増幅
 
 ## TiDB Lightningに関連付けられたすべての中間データを完全に破棄するにはどうすればよいですか? {#how-to-completely-destroy-all-intermediate-data-associated-with-tidb-lightning}
 
-1.  チェックポイント ファイルを削除します。
+1. チェックポイント ファイルを削除します。
 
     ```sh
     tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-remove=all
@@ -102,14 +102,14 @@ TiDB Lightning は、10 ギガビット ネットワークカードで使用す�
 
     何らかの理由でこのコマンドを実行できない場合は、ファイル`/tmp/tidb_lightning_checkpoint.pb`を手動で削除してみてください。
 
-2.  Local-backend を使用している場合は、構成内の`sorted-kv-dir`ディレクトリを削除します。
+2. Local-backend を使用している場合は、構成内の`sorted-kv-dir`ディレクトリを削除します。
 
-3.  必要に応じて、TiDB クラスター上に作成されたすべてのテーブルとデータベースを削除します。
+3. 必要に応じて、TiDB クラスター上に作成されたすべてのテーブルとデータベースを削除します。
 
-4.  残留メタデータをクリーンアップします。以下のいずれかの条件に該当する場合は、メタデータスキーマを手動でクリーンアップする必要があります。
+4. 残留メタデータをクリーンアップします。以下のいずれかの条件に該当する場合は、メタデータスキーマを手動でクリーンアップする必要があります。
 
-    -   TiDB Lightning v5.1.xおよびv5.2.xバージョンの場合、 `tidb-lightning-ctl`コマンドではターゲットクラスタ内のメタデータスキーマがクリーンアップされません。手動でクリーンアップする必要があります。
-    -   チェックポイント ファイルを手動で削除した場合は、ダウンストリーム メタデータ スキーマを手動でクリーンアップする必要があります。そうしないと、後続のインポートの正確性が影響を受ける可能性があります。
+    - TiDB Lightning v5.1.xおよびv5.2.xバージョンの場合、 `tidb-lightning-ctl`コマンドではターゲットクラスタ内のメタデータスキーマがクリーンアップされません。手動でクリーンアップする必要があります。
+    - チェックポイント ファイルを手動で削除した場合は、ダウンストリーム メタデータ スキーマを手動でクリーンアップする必要があります。そうしないと、後続のインポートの正確性が影響を受ける可能性があります。
 
     メタデータをクリーンアップするには、次のコマンドを使用します。
 
@@ -119,7 +119,7 @@ TiDB Lightning は、10 ギガビット ネットワークカードで使用す�
 
 ## TiDB Lightningのランタイムgoroutine情報を取得する方法 {#how-to-get-the-runtime-goroutine-information-of-tidb-lightning}
 
-1.  TiDB Lightningの設定ファイルで[`status-port`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-configuration)が指定されている場合は、この手順をスキップしてください。それ以外の場合は、 `status-port`を有効にするためにTiDB Lightningに USR1 信号を送信する必要があります。
+1. TiDB Lightningの設定ファイルで[`status-port`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-configuration)が指定されている場合は、この手順をスキップしてください。それ以外の場合は、 `status-port`を有効にするためにTiDB Lightningに USR1 信号を送信する必要があります。
 
     `ps`などのコマンドを使用してTiDB Lightningのプロセス ID (PID) を取得し、次のコマンドを実行します。
 
@@ -129,7 +129,7 @@ TiDB Lightning は、10 ギガビット ネットワークカードで使用す�
 
     TiDB Lightningのログを確認します。`starting HTTP server` / `start HTTP server` / `started HTTP server`のログに、新たに有効化された`status-port`が表示されます。
 
-2.  `http://<lightning-ip>:<status-port>/debug/pprof/goroutine?debug=2`アクセスして、goroutine 情報を取得します。
+2. `http://<lightning-ip>:<status-port>/debug/pprof/goroutine?debug=2`アクセスして、goroutine 情報を取得します。
 
 ## TiDB Lightning がSQL の配置ルールと互換性がないのはなぜですか? {#why-is-tidb-lightning-not-compatible-with-placement-rules-in-sql}
 
@@ -163,22 +163,22 @@ TiDB LightningでSQLの配置ルールを使用するには、データをター
 
 手順は次のとおりです。
 
-1.  データ分散トポロジを計画します。
-2.  TiKV および PD に必要なラベルを構成します。
-3.  配置ルール ポリシーを作成し、作成したポリシーをターゲットテーブルに適用します。
-4.  TiDB Lightningを使用して、データをターゲットテーブルにインポートします。
+1. データ分散トポロジを計画します。
+2. TiKV および PD に必要なラベルを構成します。
+3. 配置ルール ポリシーを作成し、作成したポリシーをターゲットテーブルに適用します。
+4. TiDB Lightningを使用して、データをターゲットテーブルにインポートします。
 
 ## TiDB LightningとDumplingを使用してスキーマをコピーするにはどうすればよいですか? {#how-can-i-use-tidb-lightning-and-dumpling-to-copy-a-schema}
 
 あるスキーマから新しいスキーマにスキーマ定義とテーブルデータの両方をコピーしたい場合は、このセクションの手順に従ってください。この例では、スキーマ`test`のコピーを`test2`という新しいスキーマに作成する方法を説明します。
 
-1.  必要なスキーマのみを選択するには、 `-B test`を使用して元のスキーマのバックアップを作成します。
+1. 必要なスキーマのみを選択するには、 `-B test`を使用して元のスキーマのバックアップを作成します。
 
     ```
     tiup dumpling -B test -o /tmp/bck1
     ```
 
-2.  次の内容のファイルを`/tmp/tidb-lightning.toml`に作成します。
+2. 次の内容のファイルを`/tmp/tidb-lightning.toml`に作成します。
 
     ```toml
     [tidb]
@@ -207,7 +207,7 @@ TiDB LightningでSQLの配置ルールを使用するには、データをター
 
     この設定ファイルでは、元のダンプで使用されたスキーマ名とは異なるスキーマ名を使用するため、 `schema = 'test2'`を設定します。ファイル名はテーブル名を決定するために使用されます。
 
-3.  この構成ファイルを使用してインポートを実行します。
+3. この構成ファイルを使用してインポートを実行します。
 
     ```
     tiup tidb-lightning -config /tmp/tidb-lightning.toml

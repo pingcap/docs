@@ -21,7 +21,7 @@ summary: TiDB をデプロイする前に環境チェック操作について学
 
 `/dev/nvme0n1`データ ディスクを例に挙げます。
 
-1.  データ ディスクを表示する。
+1. データ ディスクを表示する。
 
     ```bash
     fdisk -l
@@ -31,7 +31,7 @@ summary: TiDB をデプロイする前に環境チェック操作について学
     Disk /dev/nvme0n1: 1000 GB
     ```
 
-2.  パーティションを作成します。
+2. パーティションを作成します。
 
     ```bash
     parted -s -a optimal /dev/nvme0n1 mklabel gpt -- mkpart primary ext4 1 -1
@@ -48,13 +48,13 @@ summary: TiDB をデプロイする前に環境チェック操作について学
     >
     > パーティションのデバイス番号を表示するには、 `lsblk`コマンドを使用します。NVMe ディスクの場合、生成されるデバイス番号は通常`nvme0n1p1`です。通常のディスク (たとえば、 `/dev/sdb` ) の場合、生成されるデバイス番号は通常`sdb1`です。
 
-3.  データ ディスクを ext4 ファイルシステムにフォーマットします。
+3. データ ディスクを ext4 ファイルシステムにフォーマットします。
 
     ```bash
     mkfs.ext4 /dev/nvme0n1p1
     ```
 
-4.  データ ディスクのパーティション UUIDを表示する。
+4. データ ディスクのパーティション UUIDを表示する。
 
     この例では、nvme0n1p1 の UUID は`c51eb23b-195c-4061-92a9-3fad812cc12f`です。
 
@@ -73,7 +73,7 @@ summary: TiDB をデプロイする前に環境チェック操作について学
     └─nvme0n1p1 ext4         c51eb23b-195c-4061-92a9-3fad812cc12f
     ```
 
-5.  `/etc/fstab`ファイルを編集し、 `nodelalloc`マウントオプションを追加します。
+5. `/etc/fstab`ファイルを編集し、 `nodelalloc`マウントオプションを追加します。
 
     ```bash
     vi /etc/fstab
@@ -83,7 +83,7 @@ summary: TiDB をデプロイする前に環境チェック操作について学
     UUID=c51eb23b-195c-4061-92a9-3fad812cc12f /data1 ext4 defaults,nodelalloc,noatime 0 2
     ```
 
-6.  データ ディスクをマウントします。
+6. データ ディスクをマウントします。
 
     ```bash
     mkdir /data1 && \
@@ -91,7 +91,7 @@ summary: TiDB をデプロイする前に環境チェック操作について学
     mount -a
     ```
 
-7.  次のコマンドを使用して確認します。
+7. 次のコマンドを使用して確認します。
 
     ```bash
     mount -t ext4
@@ -107,10 +107,10 @@ summary: TiDB をデプロイする前に環境チェック操作について学
 
 TiDB は動作に十分な量のメモリを必要とします。TiDB が使用するメモリがスワップアウトされ、その後スワップインされると、レイテンシーの急上昇が発生する可能性があります。安定したパフォーマンスを維持したい場合は、システムスワップを恒久的に無効化することをお勧めしますが、メモリ不足時に OOM 問題が発生する可能性があります。このような OOM 問題を回避したい場合は、恒久的に無効化するのではなく、スワップ優先度を下げるだけで済みます。
 
--   スワップを有効化して使用すると、パフォーマンスのジッター問題が発生する可能性があります。低レイテンシかつ安定性が重要なデータベースサービスでは、オペレーティングシステム層のスワップを恒久的に無効化することをお勧めします。スワップを恒久的に無効化するには、以下の方法があります。
+- スワップを有効化して使用すると、パフォーマンスのジッター問題が発生する可能性があります。低レイテンシかつ安定性が重要なデータベースサービスでは、オペレーティングシステム層のスワップを恒久的に無効化することをお勧めします。スワップを恒久的に無効化するには、以下の方法があります。
 
-    -   オペレーティングシステムの初期化フェーズでは、スワップパーティション ディスクを個別にパーティション分割しないでください。
-    -   オペレーティングシステムの初期化フェーズ中に既に別のスワップパーティション ディスクをパーティション分割し、スワップを有効にしている場合は、次のコマンドを実行してスワップを無効にします。
+    - オペレーティングシステムの初期化フェーズでは、スワップパーティション ディスクを個別にパーティション分割しないでください。
+    - オペレーティングシステムの初期化フェーズ中に既に別のスワップパーティション ディスクをパーティション分割し、スワップを有効にしている場合は、次のコマンドを実行してスワップを無効にします。
 
         ```bash
         echo "vm.swappiness = 0">> /etc/sysctl.conf
@@ -118,7 +118,7 @@ TiDB は動作に十分な量のメモリを必要とします。TiDB が使用�
         swapoff -a && swapon -a
         ```
 
--   ホストメモリが不足している場合、システムスワップを無効にするとOOM問題が発生する可能性が高くなります。スワップを永続的に無効にする代わりに、次のコマンドを実行してスワップ優先度を下げることができます。
+- ホストメモリが不足している場合、システムスワップを無効にするとOOM問題が発生する可能性が高くなります。スワップを永続的に無効にする代わりに、次のコマンドを実行してスワップ優先度を下げることができます。
 
     ```bash
     echo "vm.swappiness = 0">> /etc/sysctl.conf
@@ -129,11 +129,11 @@ TiDB は動作に十分な量のメモリを必要とします。TiDB が使用�
 
 TiDBの一部の操作では、サーバーへの一時ファイルの書き込みが必要となるため、TiDBを実行するオペレーティングシステムユーザーに、対象ディレクトリへの読み書き権限が十分にあることを確認する必要があります。TiDBインスタンスを`root`権限で起動していない場合は、ディレクトリの権限を確認し、正しく設定する必要があります。
 
--   TiDB作業領域
+- TiDB作業領域
 
     ハッシュテーブルの構築やソートなど、大量のメモリを消費する操作では、メモリ消費量を削減し、安定性を向上させるために、一時データをディスクに書き込むことがあります。書き込み先のディスク上の場所は、設定項目[`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path)で定義されます。デフォルト設定では、TiDBを実行するユーザーに、オペレーティングシステムの一時フォルダ（通常は`/tmp` ）への読み取りおよび書き込み権限があることを確認してください。
 
--   `Fast Online DDL`作業領域
+- `Fast Online DDL`作業領域
 
     変数[`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) `ON` (v6.5.0 以降のバージョンではデフォルト値) に設定されている場合、 `Fast Online DDL`が有効になり、一部の DDL 操作ではファイルシステム内の一時ファイルの読み取りと書き込みが必要になります。場所は設定項目[`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)で定義されます。TiDB を実行するユーザーが、オペレーティングシステムのそのディレクトリに対する読み取りおよび書き込み権限を持っていることを確認する必要があります。デフォルトのディレクトリ`/tmp/tidb`は tmpfs (一時ファイルシステム) を使用します。ディスクディレクトリを明示的に指定することをお勧めします。以下は`/data/tidb-deploy/tempdir`例として使用しています。
 
@@ -163,26 +163,26 @@ TiDBクラスターでは、読み取り・書き込みリクエストやデー�
 
 このセクションでは、ターゲットマシンのファイアウォール サービスを停止および無効にする方法について説明します。
 
-1.  ファイアウォールの状態を確認してください。以下の例では、CentOS Linuxリリース7.7.1908（Core）を使用しています。
+1. ファイアウォールの状態を確認してください。以下の例では、CentOS Linuxリリース7.7.1908（Core）を使用しています。
 
     ```shell
     sudo firewall-cmd --state
     sudo systemctl status firewalld.service
     ```
 
-2.  ファイアウォール サービスを停止します。
+2. ファイアウォール サービスを停止します。
 
     ```bash
     sudo systemctl stop firewalld.service
     ```
 
-3.  ファイアウォール サービスの自動起動を無効にします。
+3. ファイアウォール サービスの自動起動を無効にします。
 
     ```bash
     sudo systemctl disable firewalld.service
     ```
 
-4.  ファイアウォールのステータスを確認します。
+4. ファイアウォールのステータスを確認します。
 
     ```bash
     sudo systemctl status firewalld.service
@@ -283,7 +283,7 @@ TiDB は、 ACIDモデルにおけるトランザクションの線形一貫性�
 
 NTP サービスがインストールされ、NTPサーバーと正常に同期しているかどうかを確認するには、次の手順を実行します。
 
-1.  次のコマンドを実行します。`running`が返された場合、NTPサービスは実行中です。
+1. 次のコマンドを実行します。`running`が返された場合、NTPサービスは実行中です。
 
     ```bash
     sudo systemctl status ntpd.service
@@ -295,7 +295,7 @@ NTP サービスがインストールされ、NTPサーバーと正常に同期�
     Active: active (running) since 一 2017-12-18 13:13:19 CST; 3s ago
     ```
 
-    -   `Unit ntpd.service could not be found.`が返された場合は、次のコマンドを試して、システムが NTP とのクロック同期を実行するために`ntpd`ではなく`chronyd`を使用するように設定されているかどうかを確認します。
+    - `Unit ntpd.service could not be found.`が返された場合は、次のコマンドを試して、システムが NTP とのクロック同期を実行するために`ntpd`ではなく`chronyd`を使用するように設定されているかどうかを確認します。
 
         ```bash
         sudo systemctl status chronyd.service
@@ -311,7 +311,7 @@ NTP サービスがインストールされ、NTPサーバーと正常に同期�
 
         システムが`chronyd`を使用するように構成されている場合は、手順 3 に進みます。
 
-2.  `ntpstat`コマンドを実行して、NTP サービスが NTPサーバーと同期しているかどうかを確認します。
+2. `ntpstat`コマンドを実行して、NTP サービスが NTPサーバーと同期しているかどうかを確認します。
 
     > **Note:**
     >
@@ -321,7 +321,7 @@ NTP サービスがインストールされ、NTPサーバーと正常に同期�
     ntpstat
     ```
 
-    -   `synchronised to NTP server` (NTPサーバーと同期中) を返す場合、同期プロセスは正常です。
+    - `synchronised to NTP server` (NTPサーバーと同期中) を返す場合、同期プロセスは正常です。
 
         ```
         synchronised to NTP server (85.199.214.101) at stratum 2
@@ -329,19 +329,19 @@ NTP サービスがインストールされ、NTPサーバーと正常に同期�
         polling server every 1024 s
         ```
 
-    -   次の状況は、NTP サービスが正常に同期していないことを示しています。
+    - 次の状況は、NTP サービスが正常に同期していないことを示しています。
 
         ```
         unsynchronised
         ```
 
-    -   次の状況は、NTP サービスが正常に実行されていないことを示しています。
+    - 次の状況は、NTP サービスが正常に実行されていないことを示しています。
 
         ```
         Unable to talk to NTP daemon. Is it running?
         ```
 
-3.  `chronyc tracking`コマンドを実行して、Chrony サービスが NTPサーバーと同期しているかどうかを確認します。
+3. `chronyc tracking`コマンドを実行して、Chrony サービスが NTPサーバーと同期しているかどうかを確認します。
 
     > **Note:**
     >
@@ -351,7 +351,7 @@ NTP サービスがインストールされ、NTPサーバーと正常に同期�
     chronyc tracking
     ```
 
-    -   コマンドが`Leap status     : Normal`を返す場合、同期プロセスは正常です。
+    - コマンドが`Leap status     : Normal`を返す場合、同期プロセスは正常です。
 
         ```
         Reference ID    : 5EC69F0A (ntp1.time.nl)
@@ -369,19 +369,19 @@ NTP サービスがインストールされ、NTPサーバーと正常に同期�
         Leap status     : Normal
         ```
 
-    -   コマンドが次の結果を返す場合、同期でエラーが発生しています。
+    - コマンドが次の結果を返す場合、同期でエラーが発生しています。
 
         ```
         Leap status    : Not synchronised
         ```
 
-    -   コマンドが次の結果を返す場合、 `chronyd`サービスは正常に実行されていません。
+    - コマンドが次の結果を返す場合、 `chronyd`サービスは正常に実行されていません。
 
         ```
         506 Cannot talk to daemon
         ```
 
-    -   オフセットが大きすぎると思われる場合は、コマンド`chronyc makestep`を実行してすぐに時間オフセットを修正できます。そうでない場合は、 `chronyd`を実行して徐々に時間オフセットを修正します。
+    - オフセットが大きすぎると思われる場合は、コマンド`chronyc makestep`を実行してすぐに時間オフセットを修正できます。そうでない場合は、 `chronyd`を実行して徐々に時間オフセットを修正します。
 
 NTPサービスの同期をできるだけ早く開始するには、次のコマンドを実行してください。`pool.ntp.org`をNTPサーバーに置き換えてください。
 
@@ -403,18 +403,18 @@ sudo systemctl enable ntpd.service
 
 本番環境の TiDB の場合、次の方法でオペレーティングシステム構成を最適化することをお勧めします。
 
--   [透過的巨大ページ（THP）](/tune-operating-system.md#memorytransparent-huge-page-thp)を無効にします。データベースのメモリアクセスは通常、スパースです。高位メモリが著しく断片化されると、THP によるメモリ割り当てのレイテンシーが増大する可能性があります。したがって、パフォーマンスの変動を避けるため、THP を無効にすることをお勧めします。
+- [透過的巨大ページ（THP）](/tune-operating-system.md#memorytransparent-huge-page-thp)を無効にします。データベースのメモリアクセスは通常、スパースです。高位メモリが著しく断片化されると、THP によるメモリ割り当てのレイテンシーが増大する可能性があります。したがって、パフォーマンスの変動を避けるため、THP を無効にすることをお勧めします。
 
--   ストレージ媒体の[I/Oスケジューラ](/tune-operating-system.md#io-scheduler)を設定します。
+- ストレージ媒体の[I/Oスケジューラ](/tune-operating-system.md#io-scheduler)を設定します。
 
-    -   高速SSDストレージの場合、カーネルのデフォルトのI/Oスケジューリング操作によってパフォーマンスが低下する可能性があります。 I/Oスケジューラを`noop`や`none`などの先入先出（FIFO）に設定することをお勧めします。この設定により、カーネルはI/Oリクエストをスケジューリングなしで直接ハードウェアに渡すことができるため、パフォーマンスが向上します。
-    -   NVMeストレージの場合、デフォルトのI/Oスケジューラは`none`なので、調整は必要ありません。
+    - 高速SSDストレージの場合、カーネルのデフォルトのI/Oスケジューリング操作によってパフォーマンスが低下する可能性があります。 I/Oスケジューラを`noop`や`none`などの先入先出（FIFO）に設定することをお勧めします。この設定により、カーネルはI/Oリクエストをスケジューリングなしで直接ハードウェアに渡すことができるため、パフォーマンスが向上します。
+    - NVMeストレージの場合、デフォルトのI/Oスケジューラは`none`なので、調整は必要ありません。
 
--   CPU周波数を動的に制御する[cpufreqモジュール](/tune-operating-system.md#cpufrequency-scaling)の`performance`モードを選択します。CPU周波数を動的な調整なしでサポートされている最高動作周波数に固定すると、パフォーマンスが最大限に発揮されます。
+- CPU周波数を動的に制御する[cpufreqモジュール](/tune-operating-system.md#cpufrequency-scaling)の`performance`モードを選択します。CPU周波数を動的な調整なしでサポートされている最高動作周波数に固定すると、パフォーマンスが最大限に発揮されます。
 
 これらのパラメータを確認して構成する手順は次のとおりです。
 
-1.  THP が有効か無効かを確認するには、次のコマンドを実行します。
+1. THP が有効か無効かを確認するには、次のコマンドを実行します。
 
     ```bash
     cat /sys/kernel/mm/transparent_hugepage/enabled
@@ -428,7 +428,7 @@ sudo systemctl enable ntpd.service
     >
     > `[always] madvise never`が出力された場合、THP が有効になっています。無効にする必要があります。
 
-2.  次のコマンドを実行して、データディレクトリが配置されているディスクのI/O Scheduler を確認します。
+2. 次のコマンドを実行して、データディレクトリが配置されているディスクのI/O Scheduler を確認します。
 
     データディレクトリで SD または VD デバイスを使用している場合は、次のコマンドを実行してI/Oスケジューラを確認します。
 
@@ -460,7 +460,7 @@ sudo systemctl enable ntpd.service
     >
     > `[none] mq-deadline kyber bfq`は、NVMe デバイスが`none` I/Oスケジューラを使用しており、変更の必要がないことを示します。
 
-3.  ディスクの`ID_SERIAL`を確認するには、次のコマンドを実行します。
+3. ディスクの`ID_SERIAL`を確認するには、次のコマンドを実行します。
 
     ```bash
     udevadm info --name=/dev/sdb | grep ID_SERIAL
@@ -473,10 +473,10 @@ sudo systemctl enable ntpd.service
 
     > **Note:**
     >
-    > -   複数のディスクにデータディレクトリが割り当てられている場合は、各ディスクの`ID_SERIAL`を記録するために、各ディスクに対して上記のコマンドを実行する必要があります。
-    > -   デバイスが`noop`または`none`スケジューラを使用している場合は、 `ID_SERIAL`を記録したり、udev ルールや調整されたプロファイルを構成したりする必要はありません。
+    > - 複数のディスクにデータディレクトリが割り当てられている場合は、各ディスクの`ID_SERIAL`を記録するために、各ディスクに対して上記のコマンドを実行する必要があります。
+    > - デバイスが`noop`または`none`スケジューラを使用している場合は、 `ID_SERIAL`を記録したり、udev ルールや調整されたプロファイルを構成したりする必要はありません。
 
-4.  cpufreq モジュールの電源ポリシーを確認するには、次のコマンドを実行します。
+4. cpufreq モジュールの電源ポリシーを確認するには、次のコマンドを実行します。
 
     ```bash
     cpupower frequency-info --policy
@@ -492,11 +492,11 @@ sudo systemctl enable ntpd.service
     >
     > `The governor "powersave"`が出力された場合、 cpufreq モジュールの電源ポリシーは`powersave`です。これを`performance`に変更する必要があります。仮想マシンまたはクラウドホストを使用している場合、出力は通常`Unable to determine current policy`であり、何も変更する必要はありません。
 
-5.  オペレーティングシステムの最適なパラメータを構成します。
+5. オペレーティングシステムの最適なパラメータを構成します。
 
-    -   方法 1:tuned を使用する (推奨)
+    - 方法 1:tuned を使用する (推奨)
 
-        1.  現在のオペレーティングシステムの調整されたプロファイルを表示するには、 `tuned-adm list`コマンドを実行します。
+        1. 現在のオペレーティングシステムの調整されたプロファイルを表示するには、 `tuned-adm list`コマンドを実行します。
 
             ```bash
             tuned-adm list
@@ -519,7 +519,7 @@ sudo systemctl enable ntpd.service
 
             出力`Current active profile: balanced`は、現在のオペレーティングシステムの調整済みプロファイルが`balanced`あることを意味します。現在のプロファイルに基づいてオペレーティングシステムの構成を最適化することをお勧めします。
 
-        2.  新しい調整プロファイルを作成します。
+        2. 新しい調整プロファイルを作成します。
 
             ```bash
             mkdir /etc/tuned/balanced-tidb-optimal/
@@ -543,7 +543,7 @@ sudo systemctl enable ntpd.service
 
             出力`include=balanced`は、オペレーティングシステムの最適化構成を現在の`balanced`プロファイルに追加することを意味します。
 
-        3.  新しく調整されたプロファイルを適用します。
+        3. 新しく調整されたプロファイルを適用します。
 
             > **Note:**
             >
@@ -553,9 +553,9 @@ sudo systemctl enable ntpd.service
             tuned-adm profile balanced-tidb-optimal
             ```
 
-    -   方法2：スクリプトを使用して設定する。既に方法1を使用している場合は、この方法をスキップしてください。
+    - 方法2：スクリプトを使用して設定する。既に方法1を使用している場合は、この方法をスキップしてください。
 
-        1.  デフォルトのカーネルバージョンを確認するには、 `grubby`コマンドを実行します。
+        1. デフォルトのカーネルバージョンを確認するには、 `grubby`コマンドを実行します。
 
             > **Note:**
             >
@@ -569,7 +569,7 @@ sudo systemctl enable ntpd.service
             /boot/vmlinuz-3.10.0-957.el7.x86_64
             ```
 
-        2.  カーネル構成を変更するには、 `grubby --update-kernel`を実行します。
+        2. カーネル構成を変更するには、 `grubby --update-kernel`を実行します。
 
             ```bash
             grubby --args="transparent_hugepage=never" --update-kernel `grubby --default-kernel`
@@ -579,7 +579,7 @@ sudo systemctl enable ntpd.service
             >
             > `--update-kernel`の後に実際のバージョン番号（ `--update-kernel /boot/vmlinuz-3.10.0-957.el7.x86_64`や`ALL` ）を指定することもできます。
 
-        3.  変更されたデフォルトのカーネル構成を確認するには、 `grubby --info`を実行します。
+        3. 変更されたデフォルトのカーネル構成を確認するには、 `grubby --info`を実行します。
 
             ```bash
             grubby --info /boot/vmlinuz-3.10.0-957.el7.x86_64
@@ -598,14 +598,14 @@ sudo systemctl enable ntpd.service
             title=CentOS Linux (3.10.0-957.el7.x86_64) 7 (Core)
             ```
 
-        4.  THP を直ちに無効にするには、現在のカーネル構成を変更します。
+        4. THP を直ちに無効にするには、現在のカーネル構成を変更します。
 
             ```bash
             echo never > /sys/kernel/mm/transparent_hugepage/enabled
             echo never > /sys/kernel/mm/transparent_hugepage/defrag
             ```
 
-        5.  udev スクリプトでI/Oスケジューラを設定します。
+        5. udev スクリプトでI/Oスケジューラを設定します。
 
             ```bash
             vi /etc/udev/rules.d/60-tidb-schedulers.rules
@@ -617,7 +617,7 @@ sudo systemctl enable ntpd.service
 
             ```
 
-        6.  udev スクリプトを適用します。
+        6. udev スクリプトを適用します。
 
             > **Note:**
             >
@@ -628,7 +628,7 @@ sudo systemctl enable ntpd.service
             udevadm trigger --type=devices --action=change
             ```
 
-        7.  CPU 電力ポリシーを構成するサービスを作成します。
+        7. CPU 電力ポリシーを構成するサービスを作成します。
 
             ```bash
             cat  >> /etc/systemd/system/cpupower.service << EOF
@@ -642,7 +642,7 @@ sudo systemctl enable ntpd.service
             EOF
             ```
 
-        8.  CPU 電源ポリシー構成サービスを適用します。
+        8. CPU 電源ポリシー構成サービスを適用します。
 
             ```bash
             systemctl daemon-reload
@@ -650,7 +650,7 @@ sudo systemctl enable ntpd.service
             systemctl start cpupower.service
             ```
 
-6.  THP のステータスを確認するには、次のコマンドを実行します。
+6. THP のステータスを確認するには、次のコマンドを実行します。
 
     ```bash
     cat /sys/kernel/mm/transparent_hugepage/enabled
@@ -660,7 +660,7 @@ sudo systemctl enable ntpd.service
     always madvise [never]
     ```
 
-7.  次のコマンドを実行して、データディレクトリが配置されているディスクのI/Oスケジューラを確認します。
+7. 次のコマンドを実行して、データディレクトリが配置されているディスクのI/Oスケジューラを確認します。
 
     ```bash
     cat /sys/block/sd[bc]/queue/scheduler
@@ -671,7 +671,7 @@ sudo systemctl enable ntpd.service
     [noop] deadline cfq
     ```
 
-8.  cpufreq モジュールの電源ポリシーを確認するには、次のコマンドを実行します。
+8. cpufreq モジュールの電源ポリシーを確認するには、次のコマンドを実行します。
 
     ```bash
     cpupower frequency-info --policy
@@ -683,7 +683,7 @@ sudo systemctl enable ntpd.service
                   The governor "performance" may decide which speed to use within this range.
     ```
 
-9.  `sysctl`パラメータを変更するには、次のコマンドを実行します。
+9. `sysctl`パラメータを変更するには、次のコマンドを実行します。
 
     ```bash
     echo "fs.file-max = 1000000">> /etc/sysctl.conf
@@ -700,10 +700,10 @@ sudo systemctl enable ntpd.service
 
     > **Note:**
     >
-    > -   `vm.min_free_kbytes`は、システムによって予約される空きメモリの最小量 (KiB 単位) を制御する Linux カーネルパラメータです。
-    > -   `vm.min_free_kbytes`に設定すると、メモリ回収メカニズムに影響します。設定値が大きすぎると利用可能なメモリが減少し、小さすぎるとメモリ要求速度がバックグラウンド回収速度を超え、メモリ回収が発生し、結果としてメモリ割り当てが遅延する可能性があります。
-    > -   `vm.min_free_kbytes`を少なくとも`1048576` KiB（1 GiB）に設定することをお勧めします。[NUMAがインストールされている](/check-before-deployment.md#install-the-numactl-tool)場合は、 `number of NUMA nodes * 1048576` KiBに設定することをお勧めします。
-    > -   Linux カーネル 4.11 以前を実行しているシステムの場合は、 `net.ipv4.tcp_tw_recycle = 0`を設定することをお勧めします。
+    > - `vm.min_free_kbytes`は、システムによって予約される空きメモリの最小量 (KiB 単位) を制御する Linux カーネルパラメータです。
+    > - `vm.min_free_kbytes`に設定すると、メモリ回収メカニズムに影響します。設定値が大きすぎると利用可能なメモリが減少し、小さすぎるとメモリ要求速度がバックグラウンド回収速度を超え、メモリ回収が発生し、結果としてメモリ割り当てが遅延する可能性があります。
+    > - `vm.min_free_kbytes`を少なくとも`1048576` KiB（1 GiB）に設定することをお勧めします。[NUMAがインストールされている](/check-before-deployment.md#install-the-numactl-tool)場合は、 `number of NUMA nodes * 1048576` KiBに設定することをお勧めします。
+    > - Linux カーネル 4.11 以前を実行しているシステムの場合は、 `net.ipv4.tcp_tw_recycle = 0`を設定することをお勧めします。
 
 10. ユーザーの`limits.conf`ファイルを構成するには、次のコマンドを実行します。
 
@@ -724,17 +724,17 @@ sudo systemctl enable ntpd.service
 
 SSH相互信頼を設定する際は、すべてのターゲットノードで`tidb`ユーザーを作成して使用することをお勧めします。通常、TiDBではすべてのノードで同じユーザーを使用する必要はありません。ただし、以下のシナリオではユーザーの一貫性に注意してください。
 
--   Backup & Restore (BR) の使用: すべてのBRおよび TiDB 関連の操作を同じユーザーで実行することを強くお勧めします。
--   NFSなどのネットワークストレージを使用する場合：ユーザーがすべてのノードで同じUIDとGIDを持っていることを確認してください。NFSは、基盤となるUIDとGIDに基づいてファイルアクセス権限を決定します。ノード間でUIDまたはGIDが異なる場合、またはBRを実行しているユーザーがTiDBを実行しているユーザーと異なる場合（特に`sudo`権限がない場合）、バックアップまたはリストア操作中に権限拒否エラーが発生する可能性があります。
+- Backup & Restore (BR) の使用: すべてのBRおよび TiDB 関連の操作を同じユーザーで実行することを強くお勧めします。
+- NFSなどのネットワークストレージを使用する場合：ユーザーがすべてのノードで同じUIDとGIDを持っていることを確認してください。NFSは、基盤となるUIDとGIDに基づいてファイルアクセス権限を決定します。ノード間でUIDまたはGIDが異なる場合、またはBRを実行しているユーザーがTiDBを実行しているユーザーと異なる場合（特に`sudo`権限がない場合）、バックアップまたはリストア操作中に権限拒否エラーが発生する可能性があります。
 
-1.  それぞれ`root`ユーザーアカウントを使用してターゲットマシンにログインし、 `tidb`ユーザーを作成してログイン パスワードを設定します。
+1. それぞれ`root`ユーザーアカウントを使用してターゲットマシンにログインし、 `tidb`ユーザーを作成してログイン パスワードを設定します。
 
     ```bash
     useradd -m -d /home/tidb tidb
     passwd tidb
     ```
 
-2.  パスワードなしで sudo を設定するには、次のコマンドを実行し、ファイルの末尾に`tidb ALL=(ALL) NOPASSWD: ALL`追加します。
+2. パスワードなしで sudo を設定するには、次のコマンドを実行し、ファイルの末尾に`tidb ALL=(ALL) NOPASSWD: ALL`追加します。
 
     ```bash
     visudo
@@ -744,14 +744,14 @@ SSH相互信頼を設定する際は、すべてのターゲットノードで`t
     tidb ALL=(ALL) NOPASSWD: ALL
     ```
 
-3.  `tidb`ユーザーでコントロールマシンにログインし、以下のコマンドを実行します。`10.0.1.1`をターゲットマシンの IP アドレスに置き換え、プロンプトが表示されたらターゲットマシンの`tidb`ユーザーパスワードを入力します。コマンド実行後、SSH 相互信頼が既に作成されています。これは他のマシンにも適用されます。新しく作成された`tidb`ユーザーには`.ssh`ディレクトリがありません。このようなディレクトリを作成するには、RSA キーを生成するコマンドを実行します。コントロールマシンに TiDB コンポーネントを展開するには、コントロールマシンとコントロールマシン自体の相互信頼を設定します。
+3. `tidb`ユーザーでコントロールマシンにログインし、以下のコマンドを実行します。`10.0.1.1`をターゲットマシンの IP アドレスに置き換え、プロンプトが表示されたらターゲットマシンの`tidb`ユーザーパスワードを入力します。コマンド実行後、SSH 相互信頼が既に作成されています。これは他のマシンにも適用されます。新しく作成された`tidb`ユーザーには`.ssh`ディレクトリがありません。このようなディレクトリを作成するには、RSA キーを生成するコマンドを実行します。コントロールマシンに TiDB コンポーネントを展開するには、コントロールマシンとコントロールマシン自体の相互信頼を設定します。
 
     ```bash
     ssh-keygen -t rsa
     ssh-copy-id -i ~/.ssh/id_rsa.pub 10.0.1.1
     ```
 
-4.  `tidb`ユーザーアカウントを使用してコントロールマシンにログインし、 `ssh`を使用してターゲットマシンの IP アドレスにログインします。パスワードを入力する必要がなく、正常にログインできれば、SSH 相互信頼が正常に設定されています。
+4. `tidb`ユーザーアカウントを使用してコントロールマシンにログインし、 `ssh`を使用してターゲットマシンの IP アドレスにログインします。パスワードを入力する必要がなく、正常にログインできれば、SSH 相互信頼が正常に設定されています。
 
     ```bash
     ssh 10.0.1.1
@@ -761,7 +761,7 @@ SSH相互信頼を設定する際は、すべてのターゲットノードで`t
     [tidb@10.0.1.1 ~]$
     ```
 
-5.  `tidb`ユーザーでターゲットマシンにログインした後、以下のコマンドを実行します。パスワードを入力する必要がなく、 `root`ユーザーに切り替えられる場合は、 `tidb`ユーザーのパスワードなしのsudoが正常に設定されています。
+5. `tidb`ユーザーでターゲットマシンにログインした後、以下のコマンドを実行します。パスワードを入力する必要がなく、 `root`ユーザーに切り替えられる場合は、 `tidb`ユーザーのパスワードなしのsudoが正常に設定されています。
 
     ```bash
     sudo -su root
@@ -777,8 +777,8 @@ SSH相互信頼を設定する際は、すべてのターゲットノードで`t
 
 > **Note:**
 >
-> -   NUMA を使用してコアをバインドすることは、CPU リソースを分離する方法であり、高度に構成された物理マシンに複数のインスタンスを展開するのに適しています。
-> -   `tiup cluster deploy`を使用してデプロイメントを完了したら、 `exec`コマンドを使用してクラスターレベルの管理操作を実行できます。
+> - NUMA を使用してコアをバインドすることは、CPU リソースを分離する方法であり、高度に構成された物理マシンに複数のインスタンスを展開するのに適しています。
+> - `tiup cluster deploy`を使用してデプロイメントを完了したら、 `exec`コマンドを使用してクラスターレベルの管理操作を実行できます。
 
 NUMA ツールをインストールするには、次の 2 つの方法のいずれかを実行します。
 
@@ -790,13 +790,13 @@ sudo yum -y install numactl
 
 **方法 2** : `tiup cluster exec`コマンドを実行して、既存のクラスターに NUMA を一括インストールします。
 
-1.  [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってクラスター`tidb-test`を展開します。TiDB クラスターをインストールしている場合は、この手順をスキップできます。
+1. [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってクラスター`tidb-test`を展開します。TiDB クラスターをインストールしている場合は、この手順をスキップできます。
 
     ```bash
     tiup cluster deploy tidb-test v6.1.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
-2.  `sudo`権限を使用して`tiup cluster exec`コマンドを実行し、 `tidb-test`クラスター内のすべてのターゲットマシンに NUMA をインストールします。
+2. `sudo`権限を使用して`tiup cluster exec`コマンドを実行し、 `tidb-test`クラスター内のすべてのターゲットマシンに NUMA をインストールします。
 
     ```bash
     tiup cluster exec tidb-test --sudo --command "yum -y install numactl"

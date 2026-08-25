@@ -7,8 +7,8 @@ summary: TiDBにおけるIMPORT INTOの使用方法の概要。
 
 `IMPORT INTO`ステートメントを使用すると、 TiDB Lightningの[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を介して TiDB にデータをインポートできます。 `IMPORT INTO` 、次の 2 つの方法で使用できます。
 
--   `IMPORT INTO ... FROM FILE` : `CSV` 、 `SQL` 、 `PARQUET`などの形式のデータファイルを TiDB の空のテーブルにインポートします。
--   `IMPORT INTO ... FROM SELECT` : `SELECT`ステートメントのクエリ結果を TiDB の空のテーブルにインポートします。また、 [`AS OF TIMESTAMP`](/as-of-timestamp.md)でクエリされた履歴データをインポートするためにも使用できます。
+- `IMPORT INTO ... FROM FILE` : `CSV` 、 `SQL` 、 `PARQUET`などの形式のデータファイルを TiDB の空のテーブルにインポートします。
+- `IMPORT INTO ... FROM SELECT` : `SELECT`ステートメントのクエリ結果を TiDB の空のテーブルにインポートします。また、 [`AS OF TIMESTAMP`](/as-of-timestamp.md)でクエリされた履歴データをインポートするためにも使用できます。
 
 <CustomContent platform="tidb">
 
@@ -20,45 +20,45 @@ summary: TiDBにおけるIMPORT INTOの使用方法の概要。
 
 ## 制限 {#restrictions}
 
--   `IMPORT INTO`データベース内の既存の空のテーブルへのデータのインポートのみをサポートしています。
--   `IMPORT INTO` 、同じテーブルの他のパーティションに既にデータが含まれている場合、空のパーティションへのデータインポートをサポートしていません。インポート操作を行うには、対象テーブルが完全に空である必要があります。
--   `IMPORT INTO`[一時テーブル](/temporary-tables.md)またはキャッシュ[キャッシュされたテーブル](/cached-tables.md)へのデータのインポートをサポートしていません。
--   `IMPORT INTO`トランザクションまたはロールバックをサポートしていません。明示的なトランザクション ( `IMPORT INTO` / { `BEGIN`内) で`END`を実行するとエラーが返されます。
--   `IMPORT INTO`は、[バックアップと復元](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)、 [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) 、 [インデックス追加処理の高速化](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)、 TiDB Lightning を使用したデータインポート、TiCDC を使用したデータレプリケーション、または[特定時点復旧（PITR）](https://docs.pingcap.com/tidb/stable/br-log-architecture)などの機能との同時作業をサポートしていません。互換性の詳細については、 [TiDB Lightningと`IMPORT INTO`の、TiCDCおよびログバックアップとの互換性](https://docs.pingcap.com/tidb/stable/tidb-lightning-compatibility-and-scenarios)を参照してください。
--   データインポート処理中は、対象テーブルに対してDDLまたはDML操作を実行したり、対象データベースに対して[`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)を実行したりしないでください。これらの操作は、インポートの失敗やデータの不整合を引き起こす可能性があります。また、インポート処理中に読み取り操作を実行することも推奨さ**れません**。読み取られるデータに不整合が生じる可能性があるためです。読み取りおよび書き込み操作は、インポートが完了した後にのみ実行してください。
--   インポートプロセスはシステムリソースを大幅に消費します。 TiDB セルフマネージドの場合、パフォーマンスを向上させるために、少なくとも 32 コアと 64 GiB のメモリを備えた TiDB ノードを使用することをお勧めします。 TiDB はインポート中にソートされたデータを TiDB [一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)に書き込むため、フラッシュメモリなどの TiDB 自己管理用の高性能ストレージメディアを構成することをお勧めします。詳細については、 [物理インポートモードの制限](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode#requirements-and-restrictions)を参照してください。
--   TiDB Self-Managedの場合、TiDB [一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)は少なくとも90 GiBの空き容量が必要です。インポートするデータ量と同等以上のストレージ容量を割り当てることをお勧めします。
--   1つのインポートジョブは、1つのターゲットテーブルへのデータインポートのみをサポートします。
--   `IMPORT INTO` TiDB クラスタのアップグレード時にはサポートされません。
--   インポートするデータに、主キーまたはNULL以外の一意インデックスの競合が発生するレコードが含まれていないことを確認してください。競合が発生すると、インポート処理が失敗する可能性があります。
--   既知の問題: TiDBノード構成ファイル内のPDアドレスがクラスタの現在のPDトポロジと一致しない場合`IMPORT INTO`タスクが失敗する可能性があります。この不一致は、PDが以前にスケールインされたものの、TiDB構成ファイルがそれに応じて更新されなかった場合や、構成ファイルの更新後にTiDBノードが再起動されなかった場合などに発生する可能性があります。
+- `IMPORT INTO`データベース内の既存の空のテーブルへのデータのインポートのみをサポートしています。
+- `IMPORT INTO` 、同じテーブルの他のパーティションに既にデータが含まれている場合、空のパーティションへのデータインポートをサポートしていません。インポート操作を行うには、対象テーブルが完全に空である必要があります。
+- `IMPORT INTO`[一時テーブル](/temporary-tables.md)またはキャッシュ[キャッシュされたテーブル](/cached-tables.md)へのデータのインポートをサポートしていません。
+- `IMPORT INTO`トランザクションまたはロールバックをサポートしていません。明示的なトランザクション ( `IMPORT INTO` / { `BEGIN`内) で`END`を実行するとエラーが返されます。
+- `IMPORT INTO`は、[バックアップと復元](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)、 [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) 、 [インデックス追加処理の高速化](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)、 TiDB Lightning を使用したデータインポート、TiCDC を使用したデータレプリケーション、または[特定時点復旧（PITR）](https://docs.pingcap.com/tidb/stable/br-log-architecture)などの機能との同時作業をサポートしていません。互換性の詳細については、 [TiDB Lightningと`IMPORT INTO`の、TiCDCおよびログバックアップとの互換性](https://docs.pingcap.com/tidb/stable/tidb-lightning-compatibility-and-scenarios)を参照してください。
+- データインポート処理中は、対象テーブルに対してDDLまたはDML操作を実行したり、対象データベースに対して[`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)を実行したりしないでください。これらの操作は、インポートの失敗やデータの不整合を引き起こす可能性があります。また、インポート処理中に読み取り操作を実行することも推奨さ**れません**。読み取られるデータに不整合が生じる可能性があるためです。読み取りおよび書き込み操作は、インポートが完了した後にのみ実行してください。
+- インポートプロセスはシステムリソースを大幅に消費します。 TiDB セルフマネージドの場合、パフォーマンスを向上させるために、少なくとも 32 コアと 64 GiB のメモリを備えた TiDB ノードを使用することをお勧めします。 TiDB はインポート中にソートされたデータを TiDB [一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)に書き込むため、フラッシュメモリなどの TiDB 自己管理用の高性能ストレージメディアを構成することをお勧めします。詳細については、 [物理インポートモードの制限](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode#requirements-and-restrictions)を参照してください。
+- TiDB Self-Managedの場合、TiDB [一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)は少なくとも90 GiBの空き容量が必要です。インポートするデータ量と同等以上のストレージ容量を割り当てることをお勧めします。
+- 1つのインポートジョブは、1つのターゲットテーブルへのデータインポートのみをサポートします。
+- `IMPORT INTO` TiDB クラスタのアップグレード時にはサポートされません。
+- インポートするデータに、主キーまたはNULL以外の一意インデックスの競合が発生するレコードが含まれていないことを確認してください。競合が発生すると、インポート処理が失敗する可能性があります。
+- 既知の問題: TiDBノード構成ファイル内のPDアドレスがクラスタの現在のPDトポロジと一致しない場合`IMPORT INTO`タスクが失敗する可能性があります。この不一致は、PDが以前にスケールインされたものの、TiDB構成ファイルがそれに応じて更新されなかった場合や、構成ファイルの更新後にTiDBノードが再起動されなかった場合などに発生する可能性があります。
 
 ### `IMPORT INTO ... FROM FILE`制限 {#import-into-from-file-restrictions}
 
--   TiDB Self-Managedの場合、各`IMPORT INTO`タスクは10 TiB以内のデータインポートをサポートします。 機能を有効にすると、各`IMPORT INTO`タスク[グローバルソート](/tidb-global-sort.md)40 TiB以内のデータインポートをサポートします。
--   [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)の場合、インポートするデータが 500 GiB を超える場合は、少なくとも 16 コアの TiDB ノードを使用し、[グローバルソート](/tidb-global-sort.md)機能を有効にすることをお勧めします。そうすると、各`IMPORT INTO`タスクは 40 TiB 以内のデータのインポートをサポートします。インポートするデータが 500 GiB 以内である場合、または TiDB ノードのコア数が 16 未満の場合は、[グローバルソート](/tidb-global-sort.md)機能を有効にしないことをお勧めします。
--   `IMPORT INTO ... FROM FILE`の実行は、インポートが完了するまで現在の接続をブロックします。ステートメントを非同期で実行するには、 `DETACHED`オプションを追加してください。
--   最大 16 個の`IMPORT INTO`タスクを各クラスターで同時に実行できます ( [TiDB分散実行フレームワーク（DXF）の使用制限](/tidb-distributed-execution-framework.md#limitation)を参照)。クラスターに十分なリソースが不足している場合、またはタスクの最大数に達している場合、新しく送信されたインポートタスクは実行のためにキューに入れられます。
--   データのインポートに[グローバルソート](/tidb-global-sort.md)機能を使用する場合、 `THREAD`オプションの値は少なくとも`8`である必要があります。
--   [グローバルソート](/tidb-global-sort.md)機能を使用してデータをインポートする場合、エンコード後の 1 行のデータサイズは 32 MiB を超えてはなりません。
--   [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)が有効になっていないときに作成されたすべての`IMPORT INTO`タスクは、タスクが送信されたノードで直接実行され、後で DXF が有効になった後でも、他の TiDB ノードで実行するようにスケジュールされません。DXF が有効になった後は、S3 または GCS からデータをインポートする新しく作成された`IMPORT INTO`タスクのみが、自動的にスケジュールされるか、他の TiDB ノードにフェイルオーバーして実行されます。
+- TiDB Self-Managedの場合、各`IMPORT INTO`タスクは10 TiB以内のデータインポートをサポートします。 機能を有効にすると、各`IMPORT INTO`タスク[グローバルソート](/tidb-global-sort.md)40 TiB以内のデータインポートをサポートします。
+- [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)の場合、インポートするデータが 500 GiB を超える場合は、少なくとも 16 コアの TiDB ノードを使用し、[グローバルソート](/tidb-global-sort.md)機能を有効にすることをお勧めします。そうすると、各`IMPORT INTO`タスクは 40 TiB 以内のデータのインポートをサポートします。インポートするデータが 500 GiB 以内である場合、または TiDB ノードのコア数が 16 未満の場合は、[グローバルソート](/tidb-global-sort.md)機能を有効にしないことをお勧めします。
+- `IMPORT INTO ... FROM FILE`の実行は、インポートが完了するまで現在の接続をブロックします。ステートメントを非同期で実行するには、 `DETACHED`オプションを追加してください。
+- 最大 16 個の`IMPORT INTO`タスクを各クラスターで同時に実行できます ( [TiDB分散実行フレームワーク（DXF）の使用制限](/tidb-distributed-execution-framework.md#limitation)を参照)。クラスターに十分なリソースが不足している場合、またはタスクの最大数に達している場合、新しく送信されたインポートタスクは実行のためにキューに入れられます。
+- データのインポートに[グローバルソート](/tidb-global-sort.md)機能を使用する場合、 `THREAD`オプションの値は少なくとも`8`である必要があります。
+- [グローバルソート](/tidb-global-sort.md)機能を使用してデータをインポートする場合、エンコード後の 1 行のデータサイズは 32 MiB を超えてはなりません。
+- [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)が有効になっていないときに作成されたすべての`IMPORT INTO`タスクは、タスクが送信されたノードで直接実行され、後で DXF が有効になった後でも、他の TiDB ノードで実行するようにスケジュールされません。DXF が有効になった後は、S3 または GCS からデータをインポートする新しく作成された`IMPORT INTO`タスクのみが、自動的にスケジュールされるか、他の TiDB ノードにフェイルオーバーして実行されます。
 
 ### `IMPORT INTO ... FROM SELECT`制限 {#import-into-from-select-restrictions}
 
--   `IMPORT INTO ... FROM SELECT` 、現在のユーザーが接続している TiDB ノードでのみ実行でき、インポートが完了するまで現在の接続をブロックします。
--   `IMPORT INTO ... FROM SELECT` 、 `THREAD`と`DISABLE_PRECHECK` 2 つのインポート[インポートオプション](#withoptions)のみをサポートします。
--   `IMPORT INTO ... FROM SELECT` `SHOW IMPORT JOB(s)`や`CANCEL IMPORT JOB <job-id>`などのタスク管理ステートメントをサポートしていません。
--   TiDB では、 `SELECT`ステートメントのクエリ結果全体を格納するのに十分なスペースが必要です ( `DISK_QUOTA`オプション[一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)設定は現在サポートされていません)。
--   [`tidb_snapshot`](/read-historical-data.md)を使用した履歴データのインポートはサポートされていません。
--   `SELECT`句の構文は複雑なため、 `WITH`内の`IMPORT INTO`パラメーターがこれと競合し、 `GROUP BY ... [WITH ROLLUP]`のような解析エラーが発生する可能性があります。複雑な`SELECT`ステートメント用にビューを作成し、インポートには`IMPORT INTO ... FROM SELECT * FROM view_name`を使用することをお勧めします。または、 `SELECT` `IMPORT INTO ... FROM (SELECT ...) WITH ...`句のスコープを明確にすることもできます。
+- `IMPORT INTO ... FROM SELECT` 、現在のユーザーが接続している TiDB ノードでのみ実行でき、インポートが完了するまで現在の接続をブロックします。
+- `IMPORT INTO ... FROM SELECT` 、 `THREAD`と`DISABLE_PRECHECK` 2 つのインポート[インポートオプション](#withoptions)のみをサポートします。
+- `IMPORT INTO ... FROM SELECT` `SHOW IMPORT JOB(s)`や`CANCEL IMPORT JOB <job-id>`などのタスク管理ステートメントをサポートしていません。
+- TiDB では、 `SELECT`ステートメントのクエリ結果全体を格納するのに十分なスペースが必要です ( `DISK_QUOTA`オプション[一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)設定は現在サポートされていません)。
+- [`tidb_snapshot`](/read-historical-data.md)を使用した履歴データのインポートはサポートされていません。
+- `SELECT`句の構文は複雑なため、 `WITH`内の`IMPORT INTO`パラメーターがこれと競合し、 `GROUP BY ... [WITH ROLLUP]`のような解析エラーが発生する可能性があります。複雑な`SELECT`ステートメント用にビューを作成し、インポートには`IMPORT INTO ... FROM SELECT * FROM view_name`を使用することをお勧めします。または、 `SELECT` `IMPORT INTO ... FROM (SELECT ...) WITH ...`句のスコープを明確にすることもできます。
 
 ## インポートの前提条件 {#prerequisites-for-import}
 
 `IMPORT INTO`を使用してデータをインポートする前に、以下の要件を満たしていることを確認してください。
 
--   インポート対象のテーブルは既にTiDB内に作成されており、空の状態です。
--   対象クラスターには、インポートするデータを保存するのに十分な空き容量があります。
--   TiDB Self-Managed の場合、 現在のセッションに接続されている TiDB ノードの空き容量[一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)90 GiB 以上必要です[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が有効になっており、インポートするデータが S3 または GCS から取得される場合は、クラスタ内の各 TiDB ノードの一時ディレクトリに十分なディスク容量があることを確認してください。
+- インポート対象のテーブルは既にTiDB内に作成されており、空の状態です。
+- 対象クラスターには、インポートするデータを保存するのに十分な空き容量があります。
+- TiDB Self-Managed の場合、 現在のセッションに接続されている TiDB ノードの空き容量[一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)90 GiB 以上必要です[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が有効になっており、インポートするデータが S3 または GCS から取得される場合は、クラスタ内の各 TiDB ノードの一時ディレクトリに十分なディスク容量があることを確認してください。
 
 ## 必要な権限 {#required-privileges}
 
@@ -100,8 +100,8 @@ OptionItem ::=
 
 これは、データファイル内の各フィールドがターゲットテーブルの列にどのように対応するかを指定します。また、フィールドを変数にマッピングしてインポート時に特定のフィールドをスキップしたり、 `SetClause`で使用したりすることもできます。
 
--   このパラメータが指定されていない場合、データファイルの各行のフィールド数は、対象テーブルの列数と一致する必要があります。フィールドは、対応する列に順番にインポートされます。
--   このパラメータを指定する場合、指定する列数または変数数は、データファイルの各行のフィールド数と一致していなければなりません。
+- このパラメータが指定されていない場合、データファイルの各行のフィールド数は、対象テーブルの列数と一致する必要があります。フィールドは、対応する列に順番にインポートされます。
+- このパラメータを指定する場合、指定する列数または変数数は、データファイルの各行のフィールド数と一致していなければなりません。
 
 ### セット条項 {#setclause}
 
@@ -113,9 +113,9 @@ OptionItem ::=
 
 これはデータファイルのストレージの場所を指定するもので、Amazon S3またはGCSのURIパス、あるいはTiDBのローカルファイルパスを指定できます。
 
--   Amazon S3 または GCS URI パス: URI 設定の詳細については、[外部ストレージサービスのURI形式](/external-storage-uri.md)を参照してください。
+- Amazon S3 または GCS URI パス: URI 設定の詳細については、[外部ストレージサービスのURI形式](/external-storage-uri.md)を参照してください。
 
--   TiDB ローカルファイルパス: 絶対パスである必要があり、ファイル拡張子は`.csv` 、 `.sql` 、または`.parquet`である必要があります。このパスに対応するファイルが、現在のユーザーが接続している TiDB ノードに保存されていること、およびユーザーが`FILE`権限を持っていることを確認してください。
+- TiDB ローカルファイルパス: 絶対パスである必要があり、ファイル拡張子は`.csv` 、 `.sql` 、または`.parquet`である必要があります。このパスに対応するファイルが、現在のユーザーが接続している TiDB ノードに保存されていること、およびユーザーが`FILE`権限を持っていることを確認してください。
 
 > **Note:**
 >
@@ -123,12 +123,12 @@ OptionItem ::=
 
 `fileLocation`パラメータでは、単一のファイルを指定するか、 `*`および`[]`ワイルドカードを使用して、インポートする複数のファイルに一致させることができます。ワイルドカードはファイル名にのみ使用できることに注意してください。ディレクトリには一致せず、サブディレクトリ内のファイルも再帰的に一致しません。Amazon S3 に保存されているファイルを例にとると、パラメータは次のように設定できます。
 
--   単一ファイルをインポートします: `s3://<bucket-name>/path/to/data/foo.csv`
--   指定されたパスにあるすべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/*`
--   指定されたパスにある、 `.csv`サフィックスを持つすべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/*.csv`
--   指定されたパスにある`foo`接頭辞を持つすべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/foo*`
--   指定されたパス`foo`という接頭辞と`.csv`という接尾辞を持つすべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/foo*.csv`
--   `1.csv`と`2.csv`を指定されたパス`s3://<bucket-name>/path/to/data/[12].csv`にインポートします。
+- 単一ファイルをインポートします: `s3://<bucket-name>/path/to/data/foo.csv`
+- 指定されたパスにあるすべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/*`
+- 指定されたパスにある、 `.csv`サフィックスを持つすべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/*.csv`
+- 指定されたパスにある`foo`接頭辞を持つすべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/foo*`
+- 指定されたパス`foo`という接頭辞と`.csv`という接尾辞を持つすべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/foo*.csv`
+- `1.csv`と`2.csv`を指定されたパス`s3://<bucket-name>/path/to/data/[12].csv`にインポートします。
 
 ### 形式 {#format}
 
@@ -171,12 +171,12 @@ OptionItem ::=
 
 TiDB Self-Managed の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3、GCS、および TiDB ローカルストレージに保存されているファイルからのデータインポートをサポートしています。 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3 および GCS に保存されているファイルからのデータインポートをサポートしています。 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3 および Alibaba Cloud OSS に保存されているファイルからのデータインポートをサポートしています。
 
--   Amazon S3 または GCS に保存されているデータファイルの場合、 `IMPORT INTO ... FROM FILE` [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)での実行をサポートしています。
+- Amazon S3 または GCS に保存されているデータファイルの場合、 `IMPORT INTO ... FROM FILE` [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)での実行をサポートしています。
 
-    -   DXF が有効になっている場合 ( [tidb_enable_dist_task](/system-variables.md#tidb_enable_dist_task-new-in-v710)が`ON`の場合)、 `IMPORT INTO`データインポートジョブを複数のサブジョブに分割し、これらのサブジョブを異なる TiDB ノードに分散して実行することで、インポート効率を向上させます。
-    -   DXF が無効になっている場合、 `IMPORT INTO ... FROM FILE`現在のユーザーが接続している TiDB ノードでの実行のみをサポートします。
+    - DXF が有効になっている場合 ( [tidb_enable_dist_task](/system-variables.md#tidb_enable_dist_task-new-in-v710)が`ON`の場合)、 `IMPORT INTO`データインポートジョブを複数のサブジョブに分割し、これらのサブジョブを異なる TiDB ノードに分散して実行することで、インポート効率を向上させます。
+    - DXF が無効になっている場合、 `IMPORT INTO ... FROM FILE`現在のユーザーが接続している TiDB ノードでの実行のみをサポートします。
 
--   TiDBにローカルに保存されているデータファイルについては、 `IMPORT INTO ... FROM FILE`現在ユーザーが接続しているTiDBノードでのみ実行がサポートされます。そのため、データファイルは現在ユーザーが接続しているTiDBノードに配置する必要があります。プロキシまたはロードバランサー経由でTiDBにアクセスする場合、TiDBにローカルに保存されているデータファイルをインポートすることはできません。
+- TiDBにローカルに保存されているデータファイルについては、 `IMPORT INTO ... FROM FILE`現在ユーザーが接続しているTiDBノードでのみ実行がサポートされます。そのため、データファイルは現在ユーザーが接続しているTiDBノードに配置する必要があります。プロキシまたはロードバランサー経由でTiDBにアクセスする場合、TiDBにローカルに保存されているデータファイルをインポートすることはできません。
 
 ### 圧縮ファイル {#compressed-files}
 
@@ -190,8 +190,8 @@ TiDB Self-Managed の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3、GCS、
 
 > **Note:**
 >
-> -   Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
-> -   TiDB Lightningは単一の大きな圧縮ファイルを同時に解凍できないため、圧縮ファイルのサイズがインポート速度に影響します。解凍後のソースファイルのサイズは256MiB以下にすることをお勧めします。
+> - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
+> - TiDB Lightningは単一の大きな圧縮ファイルを同時に解凍できないため、圧縮ファイルのサイズがインポート速度に影響します。解凍後のソースファイルのサイズは256MiB以下にすることをお勧めします。
 
 ### グローバルソート {#global-sort}
 
@@ -203,9 +203,9 @@ TiDB Self-Managed の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3、GCS、
 
 以下のシナリオでは、KV値の範囲が大きく重複する可能性があります。
 
--   各サブジョブに割り当てられたデータファイルの行に重複する主キー範囲がある場合、各サブジョブのエンコードによって生成されるデータKVも重複します。
-    -   `IMPORT INTO` 、データファイルの走査順序に基づいてサブジョブを分割します。通常は、ファイル名で辞書順にソートされます。
--   対象テーブルに多数のインデックスが存在する場合、またはインデックス列の値がデータファイル内に分散している場合、各サブジョブのエンコードによって生成されるインデックスKVも重複します。
+- 各サブジョブに割り当てられたデータファイルの行に重複する主キー範囲がある場合、各サブジョブのエンコードによって生成されるデータKVも重複します。
+    - `IMPORT INTO` 、データファイルの走査順序に基づいてサブジョブを分割します。通常は、ファイル名で辞書順にソートされます。
+- 対象テーブルに多数のインデックスが存在する場合、またはインデックス列の値がデータファイル内に分散している場合、各サブジョブのエンコードによって生成されるインデックスKVも重複します。
 
 [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)が有効になっている場合、 `CLOUD_STORAGE_URI` `IMPORT INTO`を指定するか、システム変数[`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)を使用してエンコードされた KV データのターゲットストレージアドレスを指定することで、[グローバルソート](/tidb-global-sort.md)を有効にできます。現在、グローバルソートはストレージアドレスとして Amazon S3 の使用をサポートしています。グローバルソートが有効になっている場合、 `IMPORT INTO`はエンコードされた KV データをクラウドストレージに書き込み、クラウドストレージでグローバルソートを実行し、グローバルにソートされたインデックスとテーブルデータを TiKV に並列にインポートします。これにより、KV の重複によって発生する問題が防止され、インポートの安定性とパフォーマンスが向上します。
 
@@ -218,8 +218,8 @@ SET GLOBAL tidb_server_memory_limit='75%';
 
 > **Note:**
 >
-> -   ソースデータファイル内のキーバリュー範囲の重複が少ない場合、グローバルソートを有効にするとインポートのパフォーマンスが低下する可能性があります。これは、グローバルソートを有効にすると、TiDB はグローバルソート操作とそれに続くインポートに進む前に、すべてのサブジョブにおけるローカルソートの完了を待つ必要があるためです。
-> -   Global Sortを使用したインポート処理が完了すると、Global Sort用にクラウドストレージに保存されたファイルは、バックグラウンドスレッドで非同期的にクリーンアップされます。
+> - ソースデータファイル内のキーバリュー範囲の重複が少ない場合、グローバルソートを有効にするとインポートのパフォーマンスが低下する可能性があります。これは、グローバルソートを有効にすると、TiDB はグローバルソート操作とそれに続くインポートに進む前に、すべてのサブジョブにおけるローカルソートの完了を待つ必要があるためです。
+> - Global Sortを使用したインポート処理が完了すると、Global Sort用にクラウドストレージに保存されたファイルは、バックグラウンドスレッドで非同期的にクリーンアップされます。
 
 ### 出力 {#output}
 
@@ -299,13 +299,13 @@ IMPORT INTO t FROM '/path/to/file-0[13].csv';
 
 #### Amazon S3またはGCSからデータファイルをインポートする {#import-data-files-from-amazon-s3-or-gcs}
 
--   Amazon S3からデータファイルをインポートする：
+- Amazon S3からデータファイルをインポートする：
 
     ```sql
     IMPORT INTO t FROM 's3://bucket-name/test.csv?access-key=XXX&secret-access-key=XXX';
     ```
 
--   GCSからデータファイルをインポートする：
+- GCSからデータファイルをインポートする：
 
     ```sql
     IMPORT INTO t FROM 'gs://import/test.csv?credentials-file=${credentials-file-path}';
@@ -369,7 +369,7 @@ IMPORT INTO t FROM SELECT * FROM src AS OF TIMESTAMP '2024-02-27 11:38:00';
 
 ## 参照 {#see-also}
 
--   [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
--   [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
--   [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)
--   [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)
+- [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
+- [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
+- [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)
+- [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)

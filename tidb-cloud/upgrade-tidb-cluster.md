@@ -17,15 +17,15 @@ TiDB バージョンが低すぎる場合、 TiDB Cloud は定期的に均一に
 
 <CustomContent language="en,zh">
 
--   クラウドプロバイダー: AWS、Azure、Google Cloud、または Alibaba Cloud
--   クラスタ名: xxx
+- クラウドプロバイダー: AWS、Azure、Google Cloud、または Alibaba Cloud
+- クラスタ名: xxx
 
 </CustomContent>
 
 <CustomContent language="ja">
 
--   クラウドプロバイダー: AWS、Azure、または Google Cloud
--   クラスタ名: xxx
+- クラウドプロバイダー: AWS、Azure、または Google Cloud
+- クラスタ名: xxx
 
 </CustomContent>
 

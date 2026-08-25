@@ -9,9 +9,9 @@ TiDB Cloud StarterまたはTiDB Cloud Essential[Apache Parquet](https://parquet.
 
 > **Note:**
 >
-> -   TiDB Cloud Dedicatedについては、[クラウドストレージからParquetファイルをTiDB Cloud Dedicatedにインポートする](/tidb-cloud/import-parquet-files.md)。
-> -   TiDB Cloud は、空のテーブルへの Parquet ファイルのインポートのみをサポートしています。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントの手順に従って一時的な空のテーブルにデータをインポートし、 `INSERT SELECT`ステートメントを使用してデータを対象の既存のテーブルにコピーします。
-> -   Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
+> - TiDB Cloud Dedicatedについては、[クラウドストレージからParquetファイルをTiDB Cloud Dedicatedにインポートする](/tidb-cloud/import-parquet-files.md)。
+> - TiDB Cloud は、空のテーブルへの Parquet ファイルのインポートのみをサポートしています。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントの手順に従って一時的な空のテーブルにデータをインポートし、 `INSERT SELECT`ステートメントを使用してデータを対象の既存のテーブルにコピーします。
+> - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
 
 ## ステップ1. Parquetファイルを準備する {#step-1-prepare-the-parquet-files}
 
@@ -19,21 +19,21 @@ TiDB Cloud StarterまたはTiDB Cloud Essential[Apache Parquet](https://parquet.
 >
 > 現在、 TiDB Cloud、[サポートされているデータ型](#supported-data-types)のデータ型を含む Parquet ファイルのインポートはサポートされていません。インポートする Parquet ファイルにこれらのデータ型が含まれている場合は、まず (例: `STRING` ) を使用して Parquet ファイルを再生成する必要があります。または、AWS Glue などのサービスを使用してデータ型を簡単に変換することもできます。
 >
-> -   `LIST`
-> -   `NEST STRUCT`
-> -   `BOOL`
-> -   `ARRAY`
-> -   `MAP`
+> - `LIST`
+> - `NEST STRUCT`
+> - `BOOL`
+> - `ARRAY`
+> - `MAP`
 
-1.  Parquetファイルが256MBを超える場合は、それぞれ約256MBのサイズの小さなファイルに分割することを検討してください。
+1. Parquetファイルが256MBを超える場合は、それぞれ約256MBのサイズの小さなファイルに分割することを検討してください。
 
     TiDB Cloudは非常に大きなParquetファイルのインポートをサポートしていますが、256MB程度の複数の入力ファイルを使用した場合に最高のパフォーマンスを発揮します。これは、 TiDB Cloudが複数のファイルを並列処理できるため、インポート速度を大幅に向上させることができるからです。
 
-2.  Parquetファイルの名前は以下のようにしてください。
+2. Parquetファイルの名前は以下のようにしてください。
 
-    -   Parquet ファイルにテーブル全体のデータがすべて含まれている場合は、ファイルを`${db_name}.${table_name}.parquet`形式で命名してください。この形式は、データをインポートする際に`${db_name}.${table_name}`テーブルにマッピングされます。
+    - Parquet ファイルにテーブル全体のデータがすべて含まれている場合は、ファイルを`${db_name}.${table_name}.parquet`形式で命名してください。この形式は、データをインポートする際に`${db_name}.${table_name}`テーブルにマッピングされます。
 
-    -   1つのテーブルのデータが複数のParquetファイルに分割されている場合は、これらのParquetファイルに数値サフィックスを追加してください。例えば、 `${db_name}.${table_name}.000001.parquet`と`${db_name}.${table_name}.000002.parquet`のようにです。数値サフィックスは連続していなくても構いませんが、昇順である必要があります。また、すべてのサフィックスの長さが同じになるように、数値の前にゼロを追加する必要があります。
+    - 1つのテーブルのデータが複数のParquetファイルに分割されている場合は、これらのParquetファイルに数値サフィックスを追加してください。例えば、 `${db_name}.${table_name}.000001.parquet`と`${db_name}.${table_name}.000002.parquet`のようにです。数値サフィックスは連続していなくても構いませんが、昇順である必要があります。また、すべてのサフィックスの長さが同じになるように、数値の前にゼロを追加する必要があります。
 
     > **Note:**
     >
@@ -43,11 +43,11 @@ TiDB Cloud StarterまたはTiDB Cloud Essential[Apache Parquet](https://parquet.
 
 Parquetファイルにはスキーマ情報が含まれていないため、ParquetファイルからTiDB Cloudにデータをインポートする前に、以下のいずれかの方法を使用してテーブルスキーマを作成する必要があります。
 
--   方法1： TiDB Cloudで、ソースデータ用のターゲットデータベースとテーブルを作成します。
+- 方法1： TiDB Cloudで、ソースデータ用のターゲットデータベースとテーブルを作成します。
 
--   方法2：Parquetファイルが配置されているAmazon S3、GCS、Azure Blob Storage、またはAlibaba Cloud Object Storage Serviceのディレクトリで、ソースデータのターゲットテーブルスキーマファイルを次のように作成します。
+- 方法2：Parquetファイルが配置されているAmazon S3、GCS、Azure Blob Storage、またはAlibaba Cloud Object Storage Serviceのディレクトリで、ソースデータのターゲットテーブルスキーマファイルを次のように作成します。
 
-    1.  ソースデータ用のデータベーススキーマファイルを作成します。
+    1. ソースデータ用のデータベーススキーマファイルを作成します。
 
         [ステップ1](#step-1-prepare-the-parquet-files)の命名規則に従ってParquetファイルが作成されている場合、データベーススキーマファイルはデータインポートにおいてオプションです。そうでない場合は、データベーススキーマファイルは必須です。
 
@@ -59,7 +59,7 @@ Parquetファイルにはスキーマ情報が含まれていないため、Parq
         CREATE DATABASE mydb;
         ```
 
-    2.  ソースデータ用のテーブルスキーマファイルを作成します。
+    2. ソースデータ用のテーブルスキーマファイルを作成します。
 
         Parquet ファイルが格納されている Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service ディレクトリにテーブルスキーマファイルを含めない場合、 TiDB Cloud はデータのインポート時に対応するテーブルを作成しません。
 
@@ -82,15 +82,15 @@ Parquetファイルにはスキーマ情報が含まれていないため、Parq
 
 TiDB CloudがAmazon S3、GCS、Azure Blob Storage、またはAlibaba Cloud Object Storage Serviceバケット内のParquetファイルにアクセスできるようにするには、次のいずれかの操作を行います。
 
--   Parquet ファイルが Amazon S3 にある場合は、 TiDB Cloud StarterまたはEssentialインスタンスに対して[Amazon S3へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)。
+- Parquet ファイルが Amazon S3 にある場合は、 TiDB Cloud StarterまたはEssentialインスタンスに対して[Amazon S3へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)。
 
     バケットにアクセスするには、AWS アクセスキーまたはロール ARN のいずれかを使用できます。完了したら、[ステップ4](#step-4-import-parquet-files)で必要となるため、アクセスキー (アクセスキー ID とシークレットアクセスキーを含む) またはロール ARN の値をメモしておいてください。
 
--   Parquet ファイルが GCS にある場合は、 TiDB Cloud StarterまたはEssentialインスタンスに対して[GCSへのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)。
+- Parquet ファイルが GCS にある場合は、 TiDB Cloud StarterまたはEssentialインスタンスに対して[GCSへのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)。
 
--   Parquet ファイルが Azure Blob Storage に配置されている場合は、 TiDB Cloud StarterまたはEssentialインスタンスの[Azure Blob Storageへのアクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)。
+- Parquet ファイルが Azure Blob Storage に配置されている場合は、 TiDB Cloud StarterまたはEssentialインスタンスの[Azure Blob Storageへのアクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)。
 
--   Parquet ファイルが Alibaba Cloud Object Storage Service (OSS) にある場合は、 TiDB Cloud StarterまたはEssentialインスタンスの[Alibaba Cloud Object Storage Service (OSS) へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)。
+- Parquet ファイルが Alibaba Cloud Object Storage Service (OSS) にある場合は、 TiDB Cloud StarterまたはEssentialインスタンスの[Alibaba Cloud Object Storage Service (OSS) へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)。
 
 ## ステップ4．Parquetファイルをインポートする {#step-4-import-parquet-files}
 
@@ -99,31 +99,31 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 <SimpleTab>
 <div label="Amazon S3">
 
-1.  対象のTiDB Cloud StarterまたはEssentialインスタンスの**Import**ページを開きます。
+1. 対象のTiDB Cloud StarterまたはEssentialインスタンスの**Import**ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+    1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
         > **Tip:**
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
+    2. 対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
-2.  **Import data from Cloud Storage**をクリックします。
+2. **Import data from Cloud Storage**をクリックします。
 
-3.  **Import Data from Cloud Storage**ページで、以下の情報を入力してください。
+3. **Import Data from Cloud Storage**ページで、以下の情報を入力してください。
 
-    -   **Storage Provider**： **Amazon S3**を選択してください。
-    -   **Source Files URI** ：
-        -   1 つのファイルをインポートする場合は、ソースファイルの URI を`s3://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `s3://sampledata/ingest/TableName.01.parquet` 。
-        -   複数のファイルをインポートする場合は、ソースフォルダのURIを`s3://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `s3://sampledata/ingest/` 。
-    -   **Credential**: AWS ロール ARN または AWS アクセスキーを使用してバケットにアクセスできます。詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
-        -   **AWS Role ARN** ：AWSロールARNの値を入力してください。
-        -   **AWS Access Key**：AWSアクセスキーIDとAWSシークレットアクセスキーを入力してください。
+    - **Storage Provider**： **Amazon S3**を選択してください。
+    - **Source Files URI** ：
+        - 1 つのファイルをインポートする場合は、ソースファイルの URI を`s3://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `s3://sampledata/ingest/TableName.01.parquet` 。
+        - 複数のファイルをインポートする場合は、ソースフォルダのURIを`s3://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `s3://sampledata/ingest/` 。
+    - **Credential**: AWS ロール ARN または AWS アクセスキーを使用してバケットにアクセスできます。詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
+        - **AWS Role ARN** ：AWSロールARNの値を入力してください。
+        - **AWS Access Key**：AWSアクセスキーIDとAWSシークレットアクセスキーを入力してください。
 
-4.  **Next**をクリックしてください。
+4. **Next**をクリックしてください。
 
-5.  **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
+5. **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
     **Source Files URI**でディレクトリが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションがデフォルトで選択されます。
 
@@ -131,50 +131,50 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
     >
     > **Source Files URI**で単一のファイルが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションは表示されず、 TiDB Cloudは**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
-    -   TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマップできるようにするには、このオプションを選択したままにして、データ形式として**Parquet**を選択します。
+    - TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマップできるようにするには、このオプションを選択したままにして、データ形式として**Parquet**を選択します。
 
-    -   ソース Parquet ファイルをターゲットのデータベースおよびテーブルに関連付けるためのマッピングルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
+    - ソース Parquet ファイルをターゲットのデータベースおよびテーブルに関連付けるためのマッピングルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
 
-        -   **Source**: ファイル名のパターンを`[file_name].parquet`の形式で入力してください。例: `TableName.01.parquet` 。ワイルドカードを使用して複数のファイルを照合することもできます。 `*`と`?`ワイルドカードのみがサポートされています。
+        - **Source**: ファイル名のパターンを`[file_name].parquet`の形式で入力してください。例: `TableName.01.parquet` 。ワイルドカードを使用して複数のファイルを照合することもできます。 `*`と`?`ワイルドカードのみがサポートされています。
 
-            -   `my-data?.parquet` : `my-data` `my-data1.parquet`や`my-data2.parquet`のような 1 文字が続くすべての Parquet ファイルに一致します。
-            -   `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data-2023.parquet`や`my-data-final.parquet`などです。
+            - `my-data?.parquet` : `my-data` `my-data1.parquet`や`my-data2.parquet`のような 1 文字が続くすべての Parquet ファイルに一致します。
+            - `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data-2023.parquet`や`my-data-final.parquet`などです。
 
-        -   **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
+        - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
 
-6.  **Next**をクリックしてください。TiDB Cloudがソースファイルを適切にスキャンします。
+6. **Next**をクリックしてください。TiDB Cloudがソースファイルを適切にスキャンします。
 
-7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
+7. スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
-8.  インポートの進行状況が**Completed**と表示されたら、インポートされたテーブルを確認してください。
+8. インポートの進行状況が**Completed**と表示されたら、インポートされたテーブルを確認してください。
 
 </div>
 
 <div label="Google Cloud">
 
-1.  対象のTiDB Cloud StarterまたはEssentialインスタンスの**Import**ページを開きます。
+1. 対象のTiDB Cloud StarterまたはEssentialインスタンスの**Import**ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+    1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
         > **Tip:**
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
+    2. 対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
-2.  **Import data from Cloud Storage**をクリックします。
+2. **Import data from Cloud Storage**をクリックします。
 
-3.  **Import Data from Cloud Storage**ページで、以下の情報を入力してください。
+3. **Import Data from Cloud Storage**ページで、以下の情報を入力してください。
 
-    -   **Storage Provider**： **Google Cloud Storage**を選択してください。
-    -   **Source Files URI** ：
-        -   1 つのファイルをインポートする場合は、ソースファイルの URI を`[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `[gcs|gs]://sampledata/ingest/TableName.01.parquet` 。
-        -   複数のファイルをインポートする場合は、ソースフォルダのURIを`[gcs|gs]://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `[gcs|gs]://sampledata/ingest/` 。
-    -   **Credential**: GCS IAM役割サービスアカウント キーを使用してバケットにアクセスできます。詳細については、 [GCSへのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)を参照してください。
+    - **Storage Provider**： **Google Cloud Storage**を選択してください。
+    - **Source Files URI** ：
+        - 1 つのファイルをインポートする場合は、ソースファイルの URI を`[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `[gcs|gs]://sampledata/ingest/TableName.01.parquet` 。
+        - 複数のファイルをインポートする場合は、ソースフォルダのURIを`[gcs|gs]://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `[gcs|gs]://sampledata/ingest/` 。
+    - **Credential**: GCS IAM役割サービスアカウント キーを使用してバケットにアクセスできます。詳細については、 [GCSへのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)を参照してください。
 
-4.  **Next**をクリックしてください。
+4. **Next**をクリックしてください。
 
-5.  **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
+5. **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
     **Source Files URI**でディレクトリが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションがデフォルトで選択されます。
 
@@ -182,50 +182,50 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
     >
     > **Source Files URI**で単一のファイルが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションは表示されず、 TiDB Cloudは**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
-    -   TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**Parquet**を選択します。
+    - TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**Parquet**を選択します。
 
-    -   ソース Parquet ファイルをターゲットのデータベースおよびテーブルに関連付けるためのマッピングルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
+    - ソース Parquet ファイルをターゲットのデータベースおよびテーブルに関連付けるためのマッピングルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
 
-        -   **Source**: ファイル名のパターンを`[file_name].parquet`の形式で入力してください。例: `TableName.01.parquet` 。ワイルドカードを使用して複数のファイルを照合することもできます。 `*`と`?`ワイルドカードのみがサポートされています。
+        - **Source**: ファイル名のパターンを`[file_name].parquet`の形式で入力してください。例: `TableName.01.parquet` 。ワイルドカードを使用して複数のファイルを照合することもできます。 `*`と`?`ワイルドカードのみがサポートされています。
 
-            -   `my-data?.parquet` : `my-data` `my-data1.parquet`や`my-data2.parquet`のような 1 文字が続くすべての Parquet ファイルに一致します。
-            -   `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data-2023.parquet`や`my-data-final.parquet`などです。
+            - `my-data?.parquet` : `my-data` `my-data1.parquet`や`my-data2.parquet`のような 1 文字が続くすべての Parquet ファイルに一致します。
+            - `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data-2023.parquet`や`my-data-final.parquet`などです。
 
-        -   **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
+        - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
 
-6.  **Next**をクリックしてください。TiDB Cloudがソースファイルを適切にスキャンします。
+6. **Next**をクリックしてください。TiDB Cloudがソースファイルを適切にスキャンします。
 
-7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
+7. スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
-8.  インポートの進行状況が**Completed**と表示されたら、インポートされたテーブルを確認してください。
+8. インポートの進行状況が**Completed**と表示されたら、インポートされたテーブルを確認してください。
 
 </div>
 
 <div label="Azure Blob Storage">
 
-1.  対象のTiDB Cloud StarterまたはEssentialインスタンスの**Import**ページを開きます。
+1. 対象のTiDB Cloud StarterまたはEssentialインスタンスの**Import**ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+    1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
         > **Tip:**
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
+    2. 対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
-2.  **Import data from Cloud Storage**をクリックします。
+2. **Import data from Cloud Storage**をクリックします。
 
-3.  **Import Data from Cloud Storage**ページで、以下の情報を入力してください。
+3. **Import Data from Cloud Storage**ページで、以下の情報を入力してください。
 
-    -   **Storage Provider**： **Azure Blob Storage**を選択します。
-    -   **Source Files URI** ：
-        -   1 つのファイルをインポートする場合は、ソースファイルの URI を`[azure|https]://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `[azure|https]://sampledata/ingest/TableName.01.parquet` 。
-        -   複数のファイルをインポートする場合は、ソースフォルダのURIを`[azure|https]://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `[azure|https]://sampledata/ingest/` 。
-    -   **Credential**: Shared Access Signature (SAS) トークンを使用してバケットにアクセスできます。詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)を参照してください。
+    - **Storage Provider**： **Azure Blob Storage**を選択します。
+    - **Source Files URI** ：
+        - 1 つのファイルをインポートする場合は、ソースファイルの URI を`[azure|https]://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `[azure|https]://sampledata/ingest/TableName.01.parquet` 。
+        - 複数のファイルをインポートする場合は、ソースフォルダのURIを`[azure|https]://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `[azure|https]://sampledata/ingest/` 。
+    - **Credential**: Shared Access Signature (SAS) トークンを使用してバケットにアクセスできます。詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)を参照してください。
 
-4.  **Next**をクリックしてください。
+4. **Next**をクリックしてください。
 
-5.  **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
+5. **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
     **Source Files URI**でディレクトリが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションがデフォルトで選択されます。
 
@@ -233,50 +233,50 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
     >
     > **Source Files URI**で単一のファイルが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションは表示されず、 TiDB Cloudは**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
-    -   TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**Parquet**を選択します。
+    - TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**Parquet**を選択します。
 
-    -   ソース Parquet ファイルをターゲットのデータベースおよびテーブルに関連付けるためのマッピングルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
+    - ソース Parquet ファイルをターゲットのデータベースおよびテーブルに関連付けるためのマッピングルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
 
-        -   **Source**: ファイル名のパターンを`[file_name].parquet`の形式で入力してください。例: `TableName.01.parquet` 。ワイルドカードを使用して複数のファイルを照合することもできます。 `*`と`?`ワイルドカードのみがサポートされています。
+        - **Source**: ファイル名のパターンを`[file_name].parquet`の形式で入力してください。例: `TableName.01.parquet` 。ワイルドカードを使用して複数のファイルを照合することもできます。 `*`と`?`ワイルドカードのみがサポートされています。
 
-            -   `my-data?.parquet` : `my-data` `my-data1.parquet`や`my-data2.parquet`のような 1 文字が続くすべての Parquet ファイルに一致します。
-            -   `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data-2023.parquet`や`my-data-final.parquet`などです。
+            - `my-data?.parquet` : `my-data` `my-data1.parquet`や`my-data2.parquet`のような 1 文字が続くすべての Parquet ファイルに一致します。
+            - `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data-2023.parquet`や`my-data-final.parquet`などです。
 
-        -   **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
+        - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
 
-6.  **Next**をクリックしてください。TiDB Cloudがソースファイルを適切にスキャンします。
+6. **Next**をクリックしてください。TiDB Cloudがソースファイルを適切にスキャンします。
 
-7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
+7. スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
-8.  インポートの進行状況が**Completed**と表示されたら、インポートされたテーブルを確認してください。
+8. インポートの進行状況が**Completed**と表示されたら、インポートされたテーブルを確認してください。
 
 </div>
 
 <div label="Alibaba Cloud Object Storage Service (OSS)">
 
-1.  対象のTiDB Cloud StarterまたはEssentialインスタンスの**Import**ページを開きます。
+1. 対象のTiDB Cloud StarterまたはEssentialインスタンスの**Import**ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+    1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
         > **Tip:**
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
+    2. 対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
 
-2.  **Import data from Cloud Storage**をクリックします。
+2. **Import data from Cloud Storage**をクリックします。
 
-3.  **Import Data from Cloud Storage**ページで、以下の情報を入力してください。
+3. **Import Data from Cloud Storage**ページで、以下の情報を入力してください。
 
-    -   **Storage Provider**： **Alibaba Cloud OSS**を選択してください。
-    -   **Source Files URI** ：
-        -   1 つのファイルをインポートする場合は、ソースファイルの URI を`oss://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `oss://sampledata/ingest/TableName.01.parquet` 。
-        -   複数のファイルをインポートする場合は、ソースフォルダのURIを`oss://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `oss://sampledata/ingest/` 。
-    -   **Credential** : AccessKey ペアを使用してバケットにアクセスできます。詳細については、 [Alibaba Cloudオブジェクトストレージサービス（OSS）へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)を参照してください。
+    - **Storage Provider**： **Alibaba Cloud OSS**を選択してください。
+    - **Source Files URI** ：
+        - 1 つのファイルをインポートする場合は、ソースファイルの URI を`oss://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `oss://sampledata/ingest/TableName.01.parquet` 。
+        - 複数のファイルをインポートする場合は、ソースフォルダのURIを`oss://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `oss://sampledata/ingest/` 。
+    - **Credential** : AccessKey ペアを使用してバケットにアクセスできます。詳細については、 [Alibaba Cloudオブジェクトストレージサービス（OSS）へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)を参照してください。
 
-4.  **Next**をクリックしてください。
+4. **Next**をクリックしてください。
 
-5.  **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
+5. **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
     **Source Files URI**でディレクトリが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションがデフォルトで選択されます。
 
@@ -284,22 +284,22 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
     >
     > **Source Files URI**で単一のファイルが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションは表示されず、 TiDB Cloudは**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
-    -   TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**Parquet**を選択します。
+    - TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**Parquet**を選択します。
 
-    -   ソース Parquet ファイルをターゲットのデータベースおよびテーブルに関連付けるためのマッピングルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
+    - ソース Parquet ファイルをターゲットのデータベースおよびテーブルに関連付けるためのマッピングルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
 
-        -   **Source**: ファイル名のパターンを`[file_name].parquet`の形式で入力してください。例: `TableName.01.parquet` 。ワイルドカードを使用して複数のファイルを照合することもできます。 `*`と`?`ワイルドカードのみがサポートされています。
+        - **Source**: ファイル名のパターンを`[file_name].parquet`の形式で入力してください。例: `TableName.01.parquet` 。ワイルドカードを使用して複数のファイルを照合することもできます。 `*`と`?`ワイルドカードのみがサポートされています。
 
-            -   `my-data?.parquet` : `my-data` `my-data1.parquet`や`my-data2.parquet`のような 1 文字が続くすべての Parquet ファイルに一致します。
-            -   `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data-2023.parquet`や`my-data-final.parquet`などです。
+            - `my-data?.parquet` : `my-data` `my-data1.parquet`や`my-data2.parquet`のような 1 文字が続くすべての Parquet ファイルに一致します。
+            - `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data-2023.parquet`や`my-data-final.parquet`などです。
 
-        -   **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
+        - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
 
-6.  **Next**をクリックしてください。TiDB Cloudがソースファイルを適切にスキャンします。
+6. **Next**をクリックしてください。TiDB Cloudがソースファイルを適切にスキャンします。
 
-7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
+7. スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
 
-8.  インポートの進行状況が**Completed**と表示されたら、インポートされたテーブルを確認してください。
+8. インポートの進行状況が**Completed**と表示されたら、インポートされたテーブルを確認してください。
 
 </div>
 
@@ -309,15 +309,15 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
 インポートエラーが発生した場合は、以下の手順を実行してください。
 
-1.  部分的にインポートされたテーブルを削除します。
+1. 部分的にインポートされたテーブルを削除します。
 
-2.  テーブルスキーマファイルを確認してください。エラーがある場合は、テーブルスキーマファイルを修正してください。
+2. テーブルスキーマファイルを確認してください。エラーがある場合は、テーブルスキーマファイルを修正してください。
 
-3.  Parquetファイル内のデータ型を確認してください。
+3. Parquetファイル内のデータ型を確認してください。
 
     Parquet ファイルにサポートされていないデータ型 (たとえば、 `NEST STRUCT` 、 `ARRAY` 、または`MAP` ) が含まれている場合は、サポートされているデータ[サポートされているデータ型](#supported-data-types)(たとえば、 `STRING` )。
 
-4.  インポートタスクをもう一度実行してみてください。
+4. インポートタスクをもう一度実行してみてください。
 
 ## サポートされているデータ型 {#supported-data-types}
 

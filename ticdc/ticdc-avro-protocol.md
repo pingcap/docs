@@ -50,9 +50,9 @@ TiCDC は DML イベントを Kafka イベントに変換し、イベントの�
         ]
     }
 
--   `{{TableName}}`イベントが発生したテーブルの名前を示します。
--   `{{Namespace}}`は Avro の名前空間です。
--   `{{ColumnValueBlock}}`データの各列の形式を定義します。
+- `{{TableName}}`イベントが発生したテーブルの名前を示します。
+- `{{Namespace}}`は Avro の名前空間です。
+- `{{ColumnValueBlock}}`データの各列の形式を定義します。
 
 キーの`fields`には、主キー列または一意インデックス列のみが含まれます。
 
@@ -74,9 +74,9 @@ TiCDC は DML イベントを Kafka イベントに変換し、イベントの�
 >
 > Avro プロトコルは、DML イベントを次のようにエンコードします。
 >
-> -   削除イベントの場合、Avro はキー部分のみをエンコードします。値部分は空です。
-> -   挿入イベントの場合、Avro はすべての列データを値部分にエンコードします。
-> -   更新イベントの場合、Avro は値部分に更新されるすべての列データのみをエンコードします。
+> - 削除イベントの場合、Avro はキー部分のみをエンコードします。値部分は空です。
+> - 挿入イベントの場合、Avro はすべての列データを値部分にエンコードします。
+> - 更新イベントの場合、Avro は値部分に更新されるすべての列データのみをエンコードします。
 >
 > Avroプロトコルは、UpdateイベントとDeleteイベントの古い値をエンコードしません。さらに、削除を識別するために`null`レコードを使用するほとんどのConfluentシンクコネクタ（ `delete.on.null` ）との互換性を確保するため、 `enable-tidb-extension`が有効になっている場合でも、Deleteイベントには`_tidb_commit_ts`などの拡張情報は含まれません。これらの機能が必要な場合は、Canal-JSONやDebeziumなどの他のプロトコルの使用を検討してください。
 
@@ -84,9 +84,9 @@ TiCDC は DML イベントを Kafka イベントに変換し、イベントの�
 
 デフォルトでは、AvroはDMLイベント内の変更された行のデータのみを収集し、データ変更の種類やTiDB固有のCommitTS（トランザクションの一意の識別子）は収集しません。この問題に対処するため、TiCDCはAvroプロトコルメッセージに以下の3つのTiDB拡張フィールドを導入しています。`sink-uri`で`enable-tidb-extension`を`true` （デフォルトは`false` ）に設定すると、TiCDCはメッセージ生成時にこれらの3つのフィールドをAvroメッセージに追加します。
 
--   `_tidb_op` : DML タイプ。「c」は挿入を示し、「u」は更新を示します。
--   `_tidb_commit_ts` : トランザクションの一意の識別子。
--   `_tidb_commit_physical_time` : トランザクション識別子内の物理的なタイムスタンプ。
+- `_tidb_op` : DML タイプ。「c」は挿入を示し、「u」は更新を示します。
+- `_tidb_commit_ts` : トランザクションの一意の識別子。
+- `_tidb_commit_physical_time` : トランザクション識別子内の物理的なタイムスタンプ。
 
 以下は設定例です。
 
@@ -157,9 +157,9 @@ dispatchers = [
         ]
     }
 
--   `{{ColumnName}}`列名を示します。
--   `{{TIDB_TYPE}}`は TiDB 内の型を示します。これは SQL 型との 1 対 1 のマッピングではありません。
--   `{{AVRO_TYPE}}` [Avro仕様](https://avro.apache.org/docs/++version++/specification)内のタイプを示します。
+- `{{ColumnName}}`列名を示します。
+- `{{TIDB_TYPE}}`は TiDB 内の型を示します。これは SQL 型との 1 対 1 のマッピングではありません。
+- `{{AVRO_TYPE}}` [Avro仕様](https://avro.apache.org/docs/++version++/specification)内のタイプを示します。
 
 | SQLの型             | TiDBの型             | AVRO_TYPE | 説明                                                                                                |
 | ----------------- | ----------------- | --------- | ------------------------------------------------------------------------------------------------- |
@@ -197,15 +197,15 @@ dispatchers = [
 
 Avro プロトコルでは、他の 2 つの`sink-uri`パラメータ`avro-decimal-handling-mode`と`avro-bigint-unsigned-handling-mode`もカラムデータ形式に影響する可能性があります。
 
--   `avro-decimal-handling-mode` 、Avro が小数フィールドを処理する方法を制御します。これには以下が含まれます。
+- `avro-decimal-handling-mode` 、Avro が小数フィールドを処理する方法を制御します。これには以下が含まれます。
 
-    -   文字列: Avro は小数フィールドを文字列として処理します。
-    -   precise: Avro は 10 進フィールドをバイトとして処理します。
+    - 文字列: Avro は小数フィールドを文字列として処理します。
+    - precise: Avro は 10 進フィールドをバイトとして処理します。
 
--   `avro-bigint-unsigned-handling-mode` 、Avro が BIGINT UNSIGNED フィールドを処理する方法を制御します。これには以下が含まれます。
+- `avro-bigint-unsigned-handling-mode` 、Avro が BIGINT UNSIGNED フィールドを処理する方法を制御します。これには以下が含まれます。
 
-    -   文字列: Avro は BIGINT UNSIGNED フィールドを文字列として処理します。
-    -   long: AvroはBIGINT UNSIGNEDフィールドを64ビット符号付き整数として扱います。値が`9223372036854775807`より大きい場合、オーバーフローが発生します。
+    - 文字列: Avro は BIGINT UNSIGNED フィールドを文字列として処理します。
+    - long: AvroはBIGINT UNSIGNEDフィールドを64ビット符号付き整数として扱います。値が`9223372036854775807`より大きい場合、オーバーフローが発生します。
 
 以下は設定例です。
 
@@ -283,8 +283,8 @@ TiCDC Avro プロトコルは[`io.confluent.kafka.serializers.KafkaAvroDeseriali
 
 コンシューマー プログラムは、次のルールによって DML イベントタイプを区別できます。
 
--   Key部分のみの場合はDeleteイベントになります。
--   キーと値の両方がある場合、挿入イベントまたは更新イベントのいずれかです。[TiDB拡張フィールド](#tidb-extension-fields)が有効になっている場合は、 `_tidb_op`フィールドを使用して挿入イベントか更新イベントかを識別できます。TiDB拡張フィールドが有効になっていない場合は、それらを区別できません。
+- Key部分のみの場合はDeleteイベントになります。
+- キーと値の両方がある場合、挿入イベントまたは更新イベントのいずれかです。[TiDB拡張フィールド](#tidb-extension-fields)が有効になっている場合は、 `_tidb_op`フィールドを使用して挿入イベントか更新イベントかを識別できます。TiDB拡張フィールドが有効になっていない場合は、それらを区別できません。
 
 ## トピックの分布 {#topic-distribution}
 

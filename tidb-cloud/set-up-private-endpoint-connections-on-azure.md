@@ -11,11 +11,11 @@ summary: Azureプライベートリンクを介してTiDB Cloud Dedicatedクラ�
 
 > **Tip:**
 >
-> -   AWS のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [AWS PrivateLink を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
-> -   Google Cloud のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
-> -   プライベートエンドポイントを介してTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、以下のドキュメントを参照してください。
->     -   [AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
->     -   [Alibaba Cloudプライベートエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+> - AWS のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [AWS PrivateLink を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
+> - Google Cloud のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
+> - プライベートエンドポイントを介してTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、以下のドキュメントを参照してください。
+>     - [AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+>     - [Alibaba Cloudプライベートエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
 
 </CustomContent>
 
@@ -23,9 +23,9 @@ summary: Azureプライベートリンクを介してTiDB Cloud Dedicatedクラ�
 
 > **Tip:**
 >
-> -   AWS のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [AWS PrivateLink を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
-> -   Google Cloud のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
-> -   プライベートエンドポイント経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、 [AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
+> - AWS のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [AWS PrivateLink を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
+> - Google Cloud のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
+> - プライベートエンドポイント経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、 [AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
 
 </CustomContent>
 
@@ -39,31 +39,31 @@ Azure Private Link のアーキテクチャは次のとおりです: [^1]
 
 プライベートエンドポイントとエンドポイントサービスのより詳細な定義については、以下のAzureドキュメントを参照してください。
 
--   [Azureプライベートリンクとは何ですか？](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview)
--   [プライベートエンドポイントとは何ですか？](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview)
--   [プライベートエンドポイントを作成する](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip)
+- [Azureプライベートリンクとは何ですか？](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview)
+- [プライベートエンドポイントとは何ですか？](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview)
+- [プライベートエンドポイントを作成する](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip)
 
 ## 制限 {#restrictions}
 
--   `Organization Owner`および`Project Owner`ロールのみがプライベートエンドポイントを作成できます。
--   接続するプライベートエンドポイントとTiDBクラスタは、同じリージョンに配置されている必要があります。
+- `Organization Owner`および`Project Owner`ロールのみがプライベートエンドポイントを作成できます。
+- 接続するプライベートエンドポイントとTiDBクラスタは、同じリージョンに配置されている必要があります。
 
 ## Azure Private Link を使用してプライベートエンドポイントを設定する {#set-up-a-private-endpoint-with-azure-private-link}
 
 プライベートエンドポイント経由でTiDB Cloud Dedicatedクラスタに接続するには、以下の手順を実行してください。
 
-1.  [TiDBクラスタを選択してください](#step-1-select-a-tidb-cluster)
-2.  [Azureプライベートエンドポイントを作成する](#step-2-create-an-azure-private-endpoint)
-3.  [エンドポイントを受け入れる](#step-3-accept-the-endpoint)
-4.  [TiDBクラスターに接続します](#step-4-connect-to-your-tidb-cluster)
+1. [TiDBクラスタを選択してください](#step-1-select-a-tidb-cluster)
+2. [Azureプライベートエンドポイントを作成する](#step-2-create-an-azure-private-endpoint)
+3. [エンドポイントを受け入れる](#step-3-accept-the-endpoint)
+4. [TiDBクラスターに接続します](#step-4-connect-to-your-tidb-cluster)
 
 複数のクラスターがある場合は、Azure Private Link を使用して接続する各クラスターに対して、これらの手順を繰り返す必要があります。
 
 ### ステップ1. TiDBクラスタを選択します {#step-1-select-a-tidb-cluster}
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Dedicatedクラスタの名前をクリックすると、その概要ページに移動します。
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
-3.  **Connection Type**ドロップダウンリストで**Private Endpoint**を選択し、 **Create Private Endpoint Connection**をクリックして、 **Create Azure Private Endpoint Connection**ダイアログを開きます。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Dedicatedクラスタの名前をクリックすると、その概要ページに移動します。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+3. **Connection Type**ドロップダウンリストで**Private Endpoint**を選択し、 **Create Private Endpoint Connection**をクリックして、 **Create Azure Private Endpoint Connection**ダイアログを開きます。
 
 > **Note:**
 >
@@ -71,44 +71,44 @@ Azure Private Link のアーキテクチャは次のとおりです: [^1]
 
 ### ステップ2. Azureプライベートエンドポイントを作成する {#step-2-create-an-azure-private-endpoint}
 
-1.  **Create Azure Private Endpoint Connection**ダイアログで、プライベートリンクサービスのTiDB CloudリソースIDをコピーし、後で使用するためにダイアログを開いたままにしておきます。
+1. **Create Azure Private Endpoint Connection**ダイアログで、プライベートリンクサービスのTiDB CloudリソースIDをコピーし、後で使用するためにダイアログを開いたままにしておきます。
 
     > **Note:**
     >
     > TiDB Cloud Dedicatedの各クラスターに対して、対応するエンドポイントサービスは、クラスター作成後3～4分で自動的に作成されます。
 
-2.  AzureポータルまたはAzure CLIを使用して、プライベートエンドポイントを作成します。
+2. AzureポータルまたはAzure CLIを使用して、プライベートエンドポイントを作成します。
 
 <SimpleTab>
 <div label="Use Azure portal">
 
-1.  [Azureポータル](https://portal.azure.com/)にログインします。
-2.  **Private endpoints**を検索し、検索結果から**Private endpoints**を選択してください。
-3.  **Private endpoint**ページで、 **+ Create**をクリックします。
-4.  **Basics**タブで、プロジェクトとインスタンスの情報を入力し、 **Next: Resource**をクリックします。
-5.  **Resource**タブで、**connection method**として**Connect to an Azure resource by resource ID or alias**を選択し、コピーしたTiDB Cloudリソース ID を**Resource ID or alias**フィールドに貼り付けます。
-6.  引き続き**Next**をクリックして残りの構成タブに進み、必要な設定を完了します。次に、 **Create**をクリックしてプライベートエンドポイントを作成してデプロイします。 Azure のデプロイが完了するまでに数秒かかる場合があります。詳細については、Azure ドキュメントの[プライベートエンドポイントを作成する](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip#create-a-private-endpoint)を参照してください。
-7.  プライベートエンドポイントの作成とデプロイが完了したら、 **Go to resource**をクリックし、以下の手順を実行してください。
+1. [Azureポータル](https://portal.azure.com/)にログインします。
+2. **Private endpoints**を検索し、検索結果から**Private endpoints**を選択してください。
+3. **Private endpoint**ページで、 **+ Create**をクリックします。
+4. **Basics**タブで、プロジェクトとインスタンスの情報を入力し、 **Next: Resource**をクリックします。
+5. **Resource**タブで、**connection method**として**Connect to an Azure resource by resource ID or alias**を選択し、コピーしたTiDB Cloudリソース ID を**Resource ID or alias**フィールドに貼り付けます。
+6. 引き続き**Next**をクリックして残りの構成タブに進み、必要な設定を完了します。次に、 **Create**をクリックしてプライベートエンドポイントを作成してデプロイします。 Azure のデプロイが完了するまでに数秒かかる場合があります。詳細については、Azure ドキュメントの[プライベートエンドポイントを作成する](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip#create-a-private-endpoint)を参照してください。
+7. プライベートエンドポイントの作成とデプロイが完了したら、 **Go to resource**をクリックし、以下の手順を実行してください。
 
-    -   左側のナビゲーションペインで**Settings** ＞ **Properties**をクリックし、後で使用するために**Resource ID**をコピーしてください。
+    - 左側のナビゲーションペインで**Settings** ＞ **Properties**をクリックし、後で使用するために**Resource ID**をコピーしてください。
 
         ![Azure private endpoint resource ID](/media/tidb-cloud/azure-private-endpoint-resource-id.png)
 
-    -   左側のナビゲーションペインで**Settings** ＞ **DNS configuration**をクリックし、後で使用するために**IP address**をコピーしてください。
+    - 左側のナビゲーションペインで**Settings** ＞ **DNS configuration**をクリックし、後で使用するために**IP address**をコピーしてください。
 
         ![Azure private endpoint DNS IP](/media/tidb-cloud/azure-private-endpoint-dns-ip.png)
 
 </div>
 <div label="Use Azure CLI">
 
-1.  Azure CLI にサインインして、サブスクリプションを選択してください。
+1. Azure CLI にサインインして、サブスクリプションを選択してください。
 
     ```bash
     az login
     az account set --subscription ${your_subscription_id}
     ```
 
-2.  **Create Azure Private Endpoint Connection**ダイアログからコピーしたTiDB CloudリソースIDを使用して、プライベートエンドポイントを作成します。
+2. **Create Azure Private Endpoint Connection**ダイアログからコピーしたTiDB CloudリソースIDを使用して、プライベートエンドポイントを作成します。
 
     ```bash
     az network private-endpoint create \
@@ -121,7 +121,7 @@ Azure Private Link のアーキテクチャは次のとおりです: [^1]
       --location ${your_region}
     ```
 
-3.  プライベートエンドポイントの**Resource ID**を取得します。
+3. プライベートエンドポイントの**Resource ID**を取得します。
 
     ```bash
     az network private-endpoint show \
@@ -131,7 +131,7 @@ Azure Private Link のアーキテクチャは次のとおりです: [^1]
       --output tsv
     ```
 
-4.  DNS設定からプライベートエンドポイントの**IP address**を取得します。
+4. DNS設定からプライベートエンドポイントの**IP address**を取得します。
 
     ```bash
     az network private-endpoint show \
@@ -146,17 +146,17 @@ Azure Private Link のアーキテクチャは次のとおりです: [^1]
 
 ### ステップ3. エンドポイントを受け入れる {#step-3-accept-the-endpoint}
 
-1.  TiDB Cloudコンソールの**Create Azure Private Endpoint Connection**ダイアログに戻り、コピーした**Resource ID**と**IP address**それぞれのフィールドに貼り付けます。
-2.  **Verify Endpoint**をクリックして、プライベートエンドポイントへのアクセスを検証してください。エラーが発生した場合は、エラーメッセージの手順に従ってトラブルシューティングを行い、再度お試しください。
-3.  検証が成功したら、 **Accept Endpoint**をクリックして、プライベートエンドポイントからの接続を承認してください。
+1. TiDB Cloudコンソールの**Create Azure Private Endpoint Connection**ダイアログに戻り、コピーした**Resource ID**と**IP address**それぞれのフィールドに貼り付けます。
+2. **Verify Endpoint**をクリックして、プライベートエンドポイントへのアクセスを検証してください。エラーが発生した場合は、エラーメッセージの手順に従ってトラブルシューティングを行い、再度お試しください。
+3. 検証が成功したら、 **Accept Endpoint**をクリックして、プライベートエンドポイントからの接続を承認してください。
 
 ### ステップ4. TiDBクラスターに接続します {#step-4-connect-to-your-tidb-cluster}
 
 エンドポイント接続を承認すると、接続ダイアログにリダイレクトされます。
 
-1.  プライベートエンドポイントの接続ステータスが**Active**になるまでお待ちください（約5分）。ステータスを確認するには、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックして、 **Networking**ページに移動してください。
-2.  **Connect With**ドロップダウンリストから、希望する接続方法を選択してください。対応する接続​​文字列がダイアログの下部に表示されます。
-3.  接続文字列を使用してクラスターに接続してください。
+1. プライベートエンドポイントの接続ステータスが**Active**になるまでお待ちください（約5分）。ステータスを確認するには、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックして、 **Networking**ページに移動してください。
+2. **Connect With**ドロップダウンリストから、希望する接続方法を選択してください。対応する接続​​文字列がダイアログの下部に表示されます。
+3. 接続文字列を使用してクラスターに接続してください。
 
 ### プライベートエンドポイントの状態参照 {#private-endpoint-status-reference}
 
@@ -164,16 +164,16 @@ Azure Private Link のアーキテクチャは次のとおりです: [^1]
 
 プライベートエンドポイントの可能なステータスは、以下のように説明されます。
 
--   **発見**： TiDB Cloudは、リクエストを受け入れる前にエンドポイントサービスに関連付けられたプライベートエンドポイントを自動的に検出できるため、別のエンドポイントを作成する必要がなくなります。
--   **Pending**：処理待ち。
--   **Active**：プライベートエンドポイントは使用可能です。このステータスのプライベートエンドポイントは編集できません。
--   **Deleting**：プライベートエンドポイントが削除されています。
--   **Failed**：プライベートエンドポイントの作成に失敗しました。該当行の**Edit**をクリックすると、作成を再試行できます。
+- **発見**： TiDB Cloudは、リクエストを受け入れる前にエンドポイントサービスに関連付けられたプライベートエンドポイントを自動的に検出できるため、別のエンドポイントを作成する必要がなくなります。
+- **Pending**：処理待ち。
+- **Active**：プライベートエンドポイントは使用可能です。このステータスのプライベートエンドポイントは編集できません。
+- **Deleting**：プライベートエンドポイントが削除されています。
+- **Failed**：プライベートエンドポイントの作成に失敗しました。該当行の**Edit**をクリックすると、作成を再試行できます。
 
 プライベートエンドポイントサービスの可能なステータスは、以下のように説明されます。
 
--   **Creating**：エンドポイントサービスが作成されています。これには3～5分かかります。
--   **Active**：プライベートエンドポイントが作成されるかどうかに関わらず、エンドポイントサービスが作成されます。
+- **Creating**：エンドポイントサービスが作成されています。これには3～5分かかります。
+- **Active**：プライベートエンドポイントが作成されるかどうかに関わらず、エンドポイントサービスが作成されます。
 
 ## トラブルシューティング {#troubleshooting}
 

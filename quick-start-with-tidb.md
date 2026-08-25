@@ -7,8 +7,8 @@ summary: TiUP Playgroundを使ってTiDB Self-Managedを素早く使い始める
 
 このガイドでは、TiDB Self-Managed を最も迅速に使い始める方法を説明します。非本番環境では、以下のいずれかの方法で TiDB データベースをデプロイできます。
 
--   [ローカルテストクラスターをデプロイ](#deploy-a-local-test-cluster)(macOSおよびLinux用)
--   [単一のマシン上で本番デプロイをシミュレートする](#simulate-production-deployment-on-a-single-machine)(Linux のみ)
+- [ローカルテストクラスターをデプロイ](#deploy-a-local-test-cluster)(macOSおよびLinux用)
+- [単一のマシン上で本番デプロイをシミュレートする](#simulate-production-deployment-on-a-single-machine)(Linux のみ)
 
 さらに、 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_quick_start)でTiDBの機能を試すこともできます。
 
@@ -16,9 +16,9 @@ summary: TiUP Playgroundを使ってTiDB Self-Managedを素早く使い始める
 >
 > このガイドで説明する導入方法は、クイックスタート**のみを目的として**おり、本番や包括的な機能・安定性テスト**には適していません**。
 >
-> -   セルフホスト型実本番クラスターをデプロイするには、[本番インストールガイド](/production-deployment-using-tiup.md)ガイドを参照してください。
-> -   TiDB を Kubernetes にデプロイするには、 [Kubernetes 上で TiDB を使い始める](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started)を参照してください。
-> -   クラウドで TiDB を管理するには、 [TiDB Cloudクイックスタート](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)を参照してください。
+> - セルフホスト型実本番クラスターをデプロイするには、[本番インストールガイド](/production-deployment-using-tiup.md)ガイドを参照してください。
+> - TiDB を Kubernetes にデプロイするには、 [Kubernetes 上で TiDB を使い始める](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started)を参照してください。
+> - クラウドで TiDB を管理するには、 [TiDB Cloudクイックスタート](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)を参照してください。
 
 ## ローカルテストクラスターをデプロイ {#deploy-a-local-test-cluster}
 
@@ -29,7 +29,7 @@ summary: TiUP Playgroundを使ってTiDB Self-Managedを素早く使い始める
 
 分散システムである基本的なTiDBテストクラスタは、通常、2つのTiDBインスタンス、3つのTiKVインスタンス、3つのPDインスタンス、およびオプションのTiFlashインスタンスで構成されます。TiUP Playgroundを使用すると、以下の手順に従ってテストクラスタをすばやくセットアップできます。
 
-1.  TiUPをダウンロードしてインストールしてください：
+1. TiUPをダウンロードしてインストールしてください：
 
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
@@ -55,7 +55,7 @@ summary: TiUP Playgroundを使ってTiDB Self-Managedを素早く使い始める
     >
     > TiDBはv5.2.0以降、Appleシリコンチップを使用するマシン上で`tiup playground`を実行することをサポートしています。
 
-2.  グローバル環境変数を宣言します。
+2. グローバル環境変数を宣言します。
 
     > **Note:**
     >
@@ -65,18 +65,18 @@ summary: TiUP Playgroundを使ってTiDB Self-Managedを素早く使い始める
     source ${your_shell_profile}
     ```
 
-3.  現在のセッションでクラスターを起動します。
+3. 現在のセッションでクラスターを起動します。
 
     > **Note:**
     >
-    > -   以下の方法で運用されるPlaygroundの場合、デプロイとテストが完了すると、 TiUPは自動的にクラスタデータをクリーンアップします。コマンドを再実行すると、新しいクラスタが作成されます。
-    > -   データをストレージに保持する場合は、クラスターの起動時に`--tag`フラグを追加します。詳細については、 [TiDBクラスタの起動時に、データを保存するタグを指定します](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data)を参照してください。
+    > - 以下の方法で運用されるPlaygroundの場合、デプロイとテストが完了すると、 TiUPは自動的にクラスタデータをクリーンアップします。コマンドを再実行すると、新しいクラスタが作成されます。
+    > - データをストレージに保持する場合は、クラスターの起動時に`--tag`フラグを追加します。詳細については、 [TiDBクラスタの起動時に、データを保存するタグを指定します](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data)を参照してください。
     >
     >     ```shell
     >     tiup playground --tag ${tag_name}
     >     ```
 
-    -   最新バージョンの TiDB クラスタを、TiDB インスタンス 1 つ、TiKV インスタンス 1 つ、PD インスタンス 1 つ、 TiFlashインスタンス 1 つで起動するには、次のコマンドを実行します。
+    - 最新バージョンの TiDB クラスタを、TiDB インスタンス 1 つ、TiKV インスタンス 1 つ、PD インスタンス 1 つ、 TiFlashインスタンス 1 つで起動するには、次のコマンドを実行します。
 
         ```shell
         tiup playground
@@ -94,7 +94,7 @@ summary: TiUP Playgroundを使ってTiDB Self-Managedを素早く使い始める
         Grafana:         http://127.0.0.1:3000
         ```
 
-    -   TiDBのバージョンと各コンポーネントのインスタンス数を指定するには、次のようなコマンドを実行します。
+    - TiDBのバージョンと各コンポーネントのインスタンス数を指定するには、次のようなコマンドを実行します。
 
         ```shell
         tiup playground v8.5.4 --db 2 --pd 3 --kv 3
@@ -104,35 +104,35 @@ summary: TiUP Playgroundを使ってTiDB Self-Managedを素早く使い始める
 
         利用可能なすべてのバージョンを表示するには、 `tiup list tidb`を実行してください。
 
-4.  TiDBクラスタのエンドポイントにアクセスするには、新しいセッションを開始してください。
+4. TiDBクラスタのエンドポイントにアクセスするには、新しいセッションを開始してください。
 
-    -   TiDBデータベースに接続します。
+    - TiDBデータベースに接続します。
 
-        -   TiUPクライアントを使用してTiDBに接続してください。
+        - TiUPクライアントを使用してTiDBに接続してください。
 
             ```shell
             tiup client
             ```
 
-        -   あるいは、MySQLクライアントを使用してTiDBに接続することもできます。
+        - あるいは、MySQLクライアントを使用してTiDBに接続することもできます。
 
             ```shell
             mysql --host 127.0.0.1 --port 4000 -u root
             ```
 
-    -   Prometheus: [http://127.0.0.1:9090](http://127.0.0.1:9090) 。
+    - Prometheus: [http://127.0.0.1:9090](http://127.0.0.1:9090) 。
 
-    -   [TiDB Dashboard](/dashboard/dashboard-intro.md): [http://127.0.0.1:2379/dashboard](http://127.0.0.1:2379/dashboard) 。デフォルトのユーザー名は`root`で、パスワードは空です。
+    - [TiDB Dashboard](/dashboard/dashboard-intro.md): [http://127.0.0.1:2379/dashboard](http://127.0.0.1:2379/dashboard) 。デフォルトのユーザー名は`root`で、パスワードは空です。
 
-    -   Grafana: [http://127.0.0.1:3000](http://127.0.0.1:3000) 。デフォルトのユーザー名とパスワードはどちらも`admin`です。
+    - Grafana: [http://127.0.0.1:3000](http://127.0.0.1:3000) 。デフォルトのユーザー名とパスワードはどちらも`admin`です。
 
-5.  (オプション) 分析用に[TiFlashにデータをロードする](/tiflash/tiflash-overview.md#use-tiflash)。
+5. (オプション) 分析用に[TiFlashにデータをロードする](/tiflash/tiflash-overview.md#use-tiflash)。
 
-6.  テスト後にクラスターをクリーンアップしてください。
+6. テスト後にクラスターをクリーンアップしてください。
 
-    1.  上記のTiDBサービスを停止するには、 <kbd>Control</kbd> + <kbd>C</kbd>を押してください。
+    1. 上記のTiDBサービスを停止するには、 <kbd>Control</kbd> + <kbd>C</kbd>を押してください。
 
-    2.  サービス停止後、以下のコマンドを実行してください。
+    2. サービス停止後、以下のコマンドを実行してください。
 
         ```shell
         tiup clean --all
@@ -147,7 +147,7 @@ summary: TiUP Playgroundを使ってTiDB Self-Managedを素早く使い始める
 
 分散システムである基本的なTiDBテストクラスタは、通常、2つのTiDBインスタンス、3つのTiKVインスタンス、3つのPDインスタンス、およびオプションのTiFlashインスタンスで構成されます。TiUP Playgroundを使用すると、以下の手順に従ってテストクラスタをすばやくセットアップできます。
 
-1.  TiUPをダウンロードしてインストールしてください：
+1. TiUPをダウンロードしてインストールしてください：
 
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
@@ -169,7 +169,7 @@ summary: TiUP Playgroundを使ってTiDB Self-Managedを素早く使い始める
 
     上記の出力に表示されているシェルプロファイルのパスをメモしておいてください。次のステップでこのパスを使用する必要があります。
 
-2.  グローバル環境変数を宣言します。
+2. グローバル環境変数を宣言します。
 
     > **Note:**
     >
@@ -179,18 +179,18 @@ summary: TiUP Playgroundを使ってTiDB Self-Managedを素早く使い始める
     source ${your_shell_profile}
     ```
 
-3.  現在のセッションでクラスターを起動します。
+3. 現在のセッションでクラスターを起動します。
 
     > **Note:**
     >
-    > -   以下の方法で運用されるPlaygroundの場合、デプロイとテストが完了すると、 TiUPは自動的にクラスタデータをクリーンアップします。コマンドを再実行すると、新しいクラスタが作成されます。
-    > -   データをストレージに保持する場合は、クラスターの起動時に`--tag`フラグを追加します。詳細については、 [TiDBクラスタの起動時に、データを保存するタグを指定します](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data)を参照してください。
+    > - 以下の方法で運用されるPlaygroundの場合、デプロイとテストが完了すると、 TiUPは自動的にクラスタデータをクリーンアップします。コマンドを再実行すると、新しいクラスタが作成されます。
+    > - データをストレージに保持する場合は、クラスターの起動時に`--tag`フラグを追加します。詳細については、 [TiDBクラスタの起動時に、データを保存するタグを指定します](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data)を参照してください。
     >
     >     ```shell
     >     tiup playground --tag ${tag_name}
     >     ```
 
-    -   最新バージョンの TiDB クラスタを、TiDB インスタンス 1 つ、TiKV インスタンス 1 つ、PD インスタンス 1 つ、 TiFlashインスタンス 1 つで起動するには、次のコマンドを実行します。
+    - 最新バージョンの TiDB クラスタを、TiDB インスタンス 1 つ、TiKV インスタンス 1 つ、PD インスタンス 1 つ、 TiFlashインスタンス 1 つで起動するには、次のコマンドを実行します。
 
         ```shell
         tiup playground
@@ -208,7 +208,7 @@ summary: TiUP Playgroundを使ってTiDB Self-Managedを素早く使い始める
         Grafana:         http://127.0.0.1:3000
         ```
 
-    -   TiDBのバージョンと各コンポーネントのインスタンス数を指定するには、次のようなコマンドを実行します。
+    - TiDBのバージョンと各コンポーネントのインスタンス数を指定するには、次のようなコマンドを実行します。
 
         ```shell
         tiup playground v8.5.4 --db 2 --pd 3 --kv 3
@@ -216,35 +216,35 @@ summary: TiUP Playgroundを使ってTiDB Self-Managedを素早く使い始める
 
         利用可能なすべてのバージョンを表示するには、 `tiup list tidb`を実行してください。
 
-4.  TiDBクラスタのエンドポイントにアクセスするには、新しいセッションを開始してください。
+4. TiDBクラスタのエンドポイントにアクセスするには、新しいセッションを開始してください。
 
-    -   TiDBデータベースに接続します。
+    - TiDBデータベースに接続します。
 
-        -   TiUPクライアントを使用してTiDBに接続してください。
+        - TiUPクライアントを使用してTiDBに接続してください。
 
             ```shell
             tiup client
             ```
 
-        -   あるいは、MySQLクライアントを使用してTiDBに接続することもできます。
+        - あるいは、MySQLクライアントを使用してTiDBに接続することもできます。
 
             ```shell
             mysql --host 127.0.0.1 --port 4000 -u root
             ```
 
-    -   Prometheus: [http://127.0.0.1:9090](http://127.0.0.1:9090) 。
+    - Prometheus: [http://127.0.0.1:9090](http://127.0.0.1:9090) 。
 
-    -   [TiDB Dashboard](/dashboard/dashboard-intro.md): [http://127.0.0.1:2379/dashboard](http://127.0.0.1:2379/dashboard) 。デフォルトのユーザー名は`root`で、パスワードは空です。
+    - [TiDB Dashboard](/dashboard/dashboard-intro.md): [http://127.0.0.1:2379/dashboard](http://127.0.0.1:2379/dashboard) 。デフォルトのユーザー名は`root`で、パスワードは空です。
 
-    -   Grafana: [http://127.0.0.1:3000](http://127.0.0.1:3000) 。デフォルトのユーザー名とパスワードはどちらも`admin`です。
+    - Grafana: [http://127.0.0.1:3000](http://127.0.0.1:3000) 。デフォルトのユーザー名とパスワードはどちらも`admin`です。
 
-5.  (オプション) 分析用に[TiFlashにデータをロードする](/tiflash/tiflash-overview.md#use-tiflash)。
+5. (オプション) 分析用に[TiFlashにデータをロードする](/tiflash/tiflash-overview.md#use-tiflash)。
 
-6.  テスト後にクラスターをクリーンアップしてください。
+6. テスト後にクラスターをクリーンアップしてください。
 
-    1.  <kbd>Control</kbd> + <kbd>C</kbd>を押してプロセスを停止します。
+    1. <kbd>Control</kbd> + <kbd>C</kbd>を押してプロセスを停止します。
 
-    2.  サービス停止後、以下のコマンドを実行してください。
+    2. サービス停止後、以下のコマンドを実行してください。
 
         ```shell
         tiup clean --all
@@ -267,8 +267,8 @@ summary: TiUP Playgroundを使ってTiDB Self-Managedを素早く使い始める
 
 TiDBクラスタをデプロイする前に、ターゲットマシンが以下の要件を満たしていることを確認してください。
 
--   CentOS 7.3以降のバージョンがインストールされています。
--   Linux OSはインターネットにアクセスできる環境にあり、TiDBおよび関連ソフトウェアのインストールパッケージをダウンロードするにはインターネット接続が必要です。
+- CentOS 7.3以降のバージョンがインストールされています。
+- Linux OSはインターネットにアクセスできる環境にあり、TiDBおよび関連ソフトウェアのインストールパッケージをダウンロードするにはインターネット接続が必要です。
 
 TiDBクラスタの最小トポロジーは、以下のインスタンスで構成されます。
 
@@ -286,12 +286,12 @@ TiDBクラスタの最小トポロジーは、以下のインスタンスで構�
 
 対象マシンに対するその他の要件は以下のとおりです。
 
--   `root`ユーザーとそのパスワードが必要です。
--   [対象マシンのファイアウォールサービスを停止します](/check-before-deployment.md#check-the-firewall-service-of-target-machines)、または、TiDB クラスターノードに必要なポートを開きます。
--   現在、 TiUPクラスタは、x86_64（AMD64）およびARMアーキテクチャへのTiDBのデプロイをサポートしています。
+- `root`ユーザーとそのパスワードが必要です。
+- [対象マシンのファイアウォールサービスを停止します](/check-before-deployment.md#check-the-firewall-service-of-target-machines)、または、TiDB クラスターノードに必要なポートを開きます。
+- 現在、 TiUPクラスタは、x86_64（AMD64）およびARMアーキテクチャへのTiDBのデプロイをサポートしています。
 
-    -   AMD64アーキテクチャでは、CentOS 7.3以降のバージョンを使用することをお勧めします。
-    -   ARMアーキテクチャではCentOS 7.6（1810）を使用することをお勧めします。
+    - AMD64アーキテクチャでは、CentOS 7.3以降のバージョンを使用することをお勧めします。
+    - ARMアーキテクチャではCentOS 7.6（1810）を使用することをお勧めします。
 
 ### デプロイ {#deploy}
 
@@ -299,13 +299,13 @@ TiDBクラスタの最小トポロジーは、以下のインスタンスで構�
 >
 > 対象マシンには、通常のユーザーまたは`root`ユーザーとしてログインできます。以下の手順で`root`ユーザーを例として使用します。
 
-1.  TiUPをダウンロードしてインストールしてください：
+1. TiUPをダウンロードしてインストールしてください：
 
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-2.  グローバル環境変数を宣言します。
+2. グローバル環境変数を宣言します。
 
     > **Note:**
     >
@@ -315,28 +315,28 @@ TiDBクラスタの最小トポロジーは、以下のインスタンスで構�
     source ${your_shell_profile}
     ```
 
-3.  TiUPのクラスタコンポーネントをインストールします。
+3. TiUPのクラスタコンポーネントをインストールします。
 
     ```shell
     tiup cluster
     ```
 
-4.  TiUPクラスタが既にマシンにインストールされている場合は、ソフトウェアバージョンを更新してください。
+4. TiUPクラスタが既にマシンにインストールされている場合は、ソフトウェアバージョンを更新してください。
 
     ```shell
     tiup update --self && tiup update cluster
     ```
 
-5.  rootユーザー権限を使用して、 `sshd`サービスの接続制限を増やしてください。これは、 TiUP が複数のマシンへのデプロイをシミュレートする必要があるためです。
+5. rootユーザー権限を使用して、 `sshd`サービスの接続制限を増やしてください。これは、 TiUP が複数のマシンへのデプロイをシミュレートする必要があるためです。
 
-    1.  `/etc/ssh/sshd_config`を変更し、 `MaxSessions`を`20`に設定します。
-    2.  `sshd`サービスを再起動してください。
+    1. `/etc/ssh/sshd_config`を変更し、 `MaxSessions`を`20`に設定します。
+    2. `sshd`サービスを再起動してください。
 
         ```shell
         service sshd restart
         ```
 
-6.  クラスターを作成して起動します。
+6. クラスターを作成して起動します。
 
     次のテンプレートに従って[トポロジー構成ファイル](/tiup/tiup-cluster-topology-reference.md)を作成および編集し、 `topo.yaml`という名前を付けます。
 
@@ -401,20 +401,20 @@ TiDBクラスタの最小トポロジーは、以下のインスタンスで構�
      - host: 10.0.1.1
     ```
 
-    -   `user: "tidb"` : `tidb`システムユーザー (デプロイ時に自動的に作成されます) を使用して、クラスタの内部管理を実行します。デフォルトでは、ポート 22 を使用して SSH 経由でターゲットマシンにログインします。
-    -   `replication.enable-placement-rules` : このPDパラメータは、 TiFlashが正常に動作するように設定されます。
-    -   `host` : ターゲットマシンのIPアドレス。
+    - `user: "tidb"` : `tidb`システムユーザー (デプロイ時に自動的に作成されます) を使用して、クラスタの内部管理を実行します。デフォルトでは、ポート 22 を使用して SSH 経由でターゲットマシンにログインします。
+    - `replication.enable-placement-rules` : このPDパラメータは、 TiFlashが正常に動作するように設定されます。
+    - `host` : ターゲットマシンのIPアドレス。
 
-7.  クラスターデプロイコマンドを実行します。
+7. クラスターデプロイコマンドを実行します。
 
     ```shell
     tiup cluster deploy <cluster-name> <version> ./topo.yaml --user root -p
     ```
 
-    -   `<cluster-name>` : クラスター名を設定します。
-    -   `<version>` : TiDB クラスタのバージョンを設定します (例`v8.5.4`)。サポートされているすべての TiDB バージョンは、`tiup list tidb`コマンドを実行することで確認できます。
-    -   `--user` : 環境を初期化するユーザーを指定します。
-    -   `-p` : ターゲットマシンへの接続に使用するパスワードを指定します。
+    - `<cluster-name>` : クラスター名を設定します。
+    - `<version>` : TiDB クラスタのバージョンを設定します (例`v8.5.4`)。サポートされているすべての TiDB バージョンは、`tiup list tidb`コマンドを実行することで確認できます。
+    - `--user` : 環境を初期化するユーザーを指定します。
+    - `-p` : ターゲットマシンへの接続に使用するパスワードを指定します。
 
         > **Note:**
         >
@@ -427,39 +427,39 @@ TiDBクラスタの最小トポロジーは、以下のインスタンスで構�
     Input SSH password:
     ```
 
-8.  クラスターを起動します。
+8. クラスターを起動します。
 
     ```shell
     tiup cluster start <cluster-name>
     ```
 
-9.  クラスタエンドポイントにアクセスします。
+9. クラスタエンドポイントにアクセスします。
 
-    -   MySQLクライアントをインストールしてください。既にインストール済みの場合は、この手順をスキップしてください。
+    - MySQLクライアントをインストールしてください。既にインストール済みの場合は、この手順をスキップしてください。
 
         ```shell
         yum -y install mysql
         ```
 
-    -   MySQLクライアントを使用してTiDBデータベースに接続します。パスワードは空欄です。
+    - MySQLクライアントを使用してTiDBデータベースに接続します。パスワードは空欄です。
 
         ```shell
         mysql -h 10.0.1.1 -P 4000 -u root
         ```
 
-    -   Grafana: [http://{grafana-ip}:3000](http://%7Bgrafana-ip%7D:3000) 。デフォルトのユーザー名とパスワードはどちらも`admin`です。
+    - Grafana: [http://{grafana-ip}:3000](http://%7Bgrafana-ip%7D:3000) 。デフォルトのユーザー名とパスワードはどちらも`admin`です。
 
-    -   TiDB [http://{pd-ip}:2379/dashboard](http://%7Bpd-ip%7D:2379/dashboard) [TiDB Dashboard](/dashboard/dashboard-intro.md)。デフォルトのユーザー名は`root`で、パスワードは空です。
+    - TiDB [http://{pd-ip}:2379/dashboard](http://%7Bpd-ip%7D:2379/dashboard) [TiDB Dashboard](/dashboard/dashboard-intro.md)。デフォルトのユーザー名は`root`で、パスワードは空です。
 
 10. （オプション）クラスタ一覧とトポロジーを表示する。
 
-    -   クラスター一覧を表示するには：
+    - クラスター一覧を表示するには：
 
         ```shell
         tiup cluster list
         ```
 
-    -   クラスターのトポロジーとステータスを表示するには：
+    - クラスターのトポロジーとステータスを表示するには：
 
         ```shell
         tiup cluster display <cluster-name>
@@ -469,9 +469,9 @@ TiDBクラスタの最小トポロジーは、以下のインスタンスで構�
 
 11. テスト後にクラスターをクリーンアップしてください。
 
-    1.  上記のTiDBサービスを停止するには、 <kbd>Control</kbd> + <kbd>C</kbd>を押してください。
+    1. 上記のTiDBサービスを停止するには、 <kbd>Control</kbd> + <kbd>C</kbd>を押してください。
 
-    2.  サービス停止後、以下のコマンドを実行してください。
+    2. サービス停止後、以下のコマンドを実行してください。
 
         ```shell
         tiup clean --all
@@ -481,22 +481,22 @@ TiDBクラスタの最小トポロジーは、以下のインスタンスで構�
 
 ローカルテスト環境用にTiDBクラスタをデプロイしたばかりの場合は、次の手順を実行してください。
 
--   TiDB における基本的な SQL 操作については、 [TiDBにおける基本的なSQL操作](/basic-sql-operations.md)を参照してください。
--   データをTiDBに移行するを参照して、TiDBにデータを[データをTiDBに移行する](/migration-overview.md)することもできます。
--   TiUPを使用して TiDB クラスターを管理する方法について詳しくは、 [TiUPの概要](/tiup/tiup-overview.md)を参照してください。
+- TiDB における基本的な SQL 操作については、 [TiDBにおける基本的なSQL操作](/basic-sql-operations.md)を参照してください。
+- データをTiDBに移行するを参照して、TiDBにデータを[データをTiDBに移行する](/migration-overview.md)することもできます。
+- TiUPを使用して TiDB クラスターを管理する方法について詳しくは、 [TiUPの概要](/tiup/tiup-overview.md)を参照してください。
 
 本番環境にTiDBクラスタをデプロイする準備が整ったら、次の手順に進んでください。
 
--   [TiUPを使用してTiDBをデプロイ](/production-deployment-using-tiup.md)
--   あるいは、 [Kubernetes 上の TiDB](https://docs.pingcap.com/tidb-in-kubernetes/stable)ドキュメントを参照して、 TiDB Operator を使用してクラウド上に TiDB をデプロイすることもできます。
+- [TiUPを使用してTiDBをデプロイ](/production-deployment-using-tiup.md)
+- あるいは、 [Kubernetes 上の TiDB](https://docs.pingcap.com/tidb-in-kubernetes/stable)ドキュメントを参照して、 TiDB Operator を使用してクラウド上に TiDB をデプロイすることもできます。
 
 アプリケーション開発者で、TiDBを使用してアプリケーションを迅速に構築したい場合は、以下の手順に従ってください。
 
--   [開発者ガイドの概要](https://docs.pingcap.com/developer/)
--   [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)
--   [応用例](/develop/dev-guide-sample-application-java-jdbc.md)
+- [開発者ガイドの概要](https://docs.pingcap.com/developer/)
+- [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)
+- [応用例](/develop/dev-guide-sample-application-java-jdbc.md)
 
 TiFlashを使った分析ソリューションをお探しの場合は、以下の手順に従ってください。
 
--   [TiFlashの概要](/tiflash/tiflash-overview.md)
--   [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)
+- [TiFlashの概要](/tiflash/tiflash-overview.md)
+- [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)

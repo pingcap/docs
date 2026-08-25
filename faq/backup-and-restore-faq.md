@@ -17,8 +17,8 @@ TiDB v5.4.0以降、 BRはバックアップタスクの自動チューニング
 
 TiKVは[動的構成](/tikv-control.md#modify-the-tikv-configuration-dynamically)チューニング機能をサポートしています。この機能は、クラスターを再起動せずに以下の方法で有効化または無効化できます。
 
--   自動調整を無効にする: TiKV 構成項目[`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)を`false`に設定します。
--   自動チューニングを有効にする： `backup.enable-auto-tune`を`true`に設定します。v5.3.x から v5.4.0 以降のバージョンにアップグレードしたクラスターでは、自動チューニング機能はデフォルトで無効になっています。手動で有効にする必要があります。
+- 自動調整を無効にする: TiKV 構成項目[`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)を`false`に設定します。
+- 自動チューニングを有効にする： `backup.enable-auto-tune`を`true`に設定します。v5.3.x から v5.4.0 以降のバージョンにアップグレードしたクラスターでは、自動チューニング機能はデフォルトで無効になっています。手動で有効にする必要があります。
 
 `tikv-ctl`を使用して自動調整を有効または無効にするには、 [オートチューンを使用する](/br/br-auto-tune.md#use-auto-tune)を参照してください。
 
@@ -119,9 +119,9 @@ failed to refresh meta for database with schemaID=124, dbName=pitr_test: [ddl:82
 
 ### br コマンドラインツールを使用して復元されたデータが TiCDC のアップストリームクラスターに複製できないのはなぜですか? {#why-does-data-restored-using-br-command-line-tool-cannot-be-replicated-to-the-upstream-cluster-of-ticdc}
 
--   **BRを使用して復元されたデータは、ダウンストリームに複製できません**。これは、 BR がSST ファイルを直接インポートしますが、ダウンストリームクラスタがアップストリームからこれらのファイルを取得できないためです。
+- **BRを使用して復元されたデータは、ダウンストリームに複製できません**。これは、 BR がSST ファイルを直接インポートしますが、ダウンストリームクラスタがアップストリームからこれらのファイルを取得できないためです。
 
--   v4.0.3より前のバージョンでは、復元中に生成されたDDLジョブによって、TiCDCで予期しないDDL実行が発生する可能性があります。そのため、TiCDCの上流クラスターで復元を実行する必要がある場合は、brコマンドラインツールを使用して復元したすべてのテーブルをTiCDCのブロックリストに追加してください。
+- v4.0.3より前のバージョンでは、復元中に生成されたDDLジョブによって、TiCDCで予期しないDDL実行が発生する可能性があります。そのため、TiCDCの上流クラスターで復元を実行する必要がある場合は、brコマンドラインツールを使用して復元したすべてのテーブルをTiCDCのブロックリストに追加してください。
 
 [`filter.rules`](https://github.com/pingcap/tiflow/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16)を使用して、TiCDC のブロックリストを構成できます。
 
@@ -131,8 +131,8 @@ TiDB v6.0.0以降、デフォルト値の[`new_collations_enabled_on_first_boots
 
 以前のバージョンのTiDBクラスタでデータをバックアップし、そのデータをv6.0.0以降のバージョンのTiDBクラスタにリストアするとします。この場合、上流クラスタと下流クラスタの間で値`new_collations_enabled_on_first_bootstrap`が一致しているかどうかを手動で確認する必要があります。
 
--   値が一貫している場合は、復元コマンドに`--check-requirements=false`を追加して、この構成チェックをスキップできます。
--   値が矛盾している場合に強制的に復元を実行すると、 BR はデータ検証エラーを報告します。
+- 値が一貫している場合は、復元コマンドに`--check-requirements=false`を追加して、この構成チェックをスキップできます。
+- 値が矛盾している場合に強制的に復元を実行すると、 BR はデータ検証エラーを報告します。
 
 ### 配置ルールをクラスターに復元するとエラーが発生するのはなぜですか? {#why-does-an-error-occur-when-i-restore-placement-rules-to-a-cluster}
 
@@ -186,7 +186,7 @@ TiKVがバックアップディレクトリにアクセスできるかどうか�
 
 したがって、データを復元する前に、次の手順に従って権限を確認することをお勧めします。
 
-1.  プロセス クエリ用の Linux コマンドを実行します。
+1. プロセス クエリ用の Linux コマンドを実行します。
 
     ```bash
     ps aux | grep tikv-server
@@ -212,7 +212,7 @@ TiKVがバックアップディレクトリにアクセスできるかどうか�
     tidb_ouo
     ```
 
-2.  `tiup`コマンドを使用して、クラスターの起動情報を照会します。
+2. `tiup`コマンドを使用して、クラスターの起動情報を照会します。
 
     ```bash
     tiup cluster list
@@ -228,7 +228,7 @@ TiKVがバックアップディレクトリにアクセスできるかどうか�
     tidb_cluster  tidb_ouo  v5.0.2   /root/.tiup/storage/cluster/clusters/tidb_cluster  /root/.tiup/storage/cluster/clusters/tidb_cluster/ssh/id_rsa
     ```
 
-3.  バックアップディレクトリの権限を確認してください。例えば、 `backup`はバックアップデータのストレージ先です。
+3. バックアップディレクトリの権限を確認してください。例えば、 `backup`はバックアップデータのストレージ先です。
 
     ```bash
     ls -al backup
@@ -257,9 +257,9 @@ br restore full -f '*.*' -f '!mysql.*' -f 'mysql.usertable' -s $external_storage
 
 上記のコマンドでは、
 
--   `-f '*.*'`はデフォルトのルールを上書きするために使用されます
--   `-f '!mysql.*'`特に指定がない限り、 `mysql`テーブルを復元しないようにBRに指示します。
--   `-f 'mysql.usertable'` `mysql.usertable`復元する必要があることを示します。
+- `-f '*.*'`はデフォルトのルールを上書きするために使用されます
+- `-f '!mysql.*'`特に指定がない限り、 `mysql`テーブルを復元しないようにBRに指示します。
+- `-f 'mysql.usertable'` `mysql.usertable`復元する必要があることを示します。
 
 `mysql.usertable`を復元する必要がある場合は、次のコマンドを実行します。
 
@@ -269,9 +269,9 @@ br restore full -f 'mysql.usertable' -s $external_storage_url --with-sys-table
 
 [テーブルフィルター](/table-filter.md#syntax)設定しても、 **BR は次のシステムテーブルを復元しないこと**に注意してください。
 
--   統計表（ `mysql.stat_*` ）。ただし、統計は復元可能です。[統計のバックアップ](/br/br-snapshot-manual.md#back-up-statistics)を参照してください。
--   システム変数テーブル（ `mysql.tidb` `mysql.global_variables`
--   [その他のシステムテーブル](https://github.com/pingcap/tidb/blob/release-8.5/br/pkg/restore/snap_client/systable_restore.go#L31)
+- 統計表（ `mysql.stat_*` ）。ただし、統計は復元可能です。[統計のバックアップ](/br/br-snapshot-manual.md#back-up-statistics)を参照してください。
+- システム変数テーブル（ `mysql.tidb` `mysql.global_variables`
+- [その他のシステムテーブル](https://github.com/pingcap/tidb/blob/release-8.5/br/pkg/restore/snap_client/systable_restore.go#L31)
 
 ### 復元中に`cannot find rewrite rule`というエラーに対処するにはどうすればよいですか? {#how-to-deal-with-the-error-of-cannot-find-rewrite-rule-during-restoration}
 
@@ -301,9 +301,9 @@ v4.0.9では、 BRはデフォルトで統計情報をバックアップしま�
 
 次の理由により、単一のクラスターのデータを復元するために複数の復元タスクを同時に開始することは**強く推奨されません**。
 
--   BR がデータを復元すると、PD のグローバル設定の一部が変更されます。そのため、複数の復元タスクを同時に実行すると、これらの設定が誤って上書きされ、クラスタの状態が異常になる可能性があります。
--   BR はデータの復元に大量のクラスター リソースを消費するため、実際には復元タスクを並列で実行しても復元速度は限られた範囲でしか向上しません。
--   データの復元のために複数の復元タスクを並行して実行するテストは行われていないため、成功することは保証されません。
+- BR がデータを復元すると、PD のグローバル設定の一部が変更されます。そのため、複数の復元タスクを同時に実行すると、これらの設定が誤って上書きされ、クラスタの状態が異常になる可能性があります。
+- BR はデータの復元に大量のクラスター リソースを消費するため、実際には復元タスクを並列で実行しても復元速度は限られた範囲でしか向上しません。
+- データの復元のために複数の復元タスクを並行して実行するテストは行われていないため、成功することは保証されません。
 
 ### BR はテーブルの`SHARD_ROW_ID_BITS`と`PRE_SPLIT_REGIONS`情報をバックアップしますか? 復元されたテーブルには複数のリージョンがありますか? {#does-br-back-up-the-shard_row_id_bits-and-pre_split_regions-information-of-a-table-does-the-restored-table-have-multiple-regions}
 

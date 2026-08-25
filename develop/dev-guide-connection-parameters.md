@@ -12,9 +12,9 @@ aliases: ['/ja/tidb/stable/dev-guide-connection-parameters/','/ja/tidb/dev/dev-g
 >
 > この文書では、以下のセクションは[TiDBを使用したJavaアプリケーション開発のベストプラクティス](/develop/java-app-best-practices.md)から抜粋したものです。
 >
-> -   [接続数を設定する](#configure-the-number-of-connections)
-> -   [プローブ構成](#probe-configuration)
-> -   [接続パラメータ](#connection-parameters)
+> - [接続数を設定する](#configure-the-number-of-connections)
+> - [プローブ構成](#probe-configuration)
+> - [接続パラメータ](#connection-parameters)
 
 ## 接続プール {#connection-pool}
 
@@ -26,8 +26,8 @@ Javaには[Tomcat JDBC](https://tomcat.apache.org/tomcat-10.1-doc/jdbc-pool.html
 
 接続プールのサイズは、アプリケーションのニーズに合わせて適切に調整するのが一般的です。HikariCPを例にとってみましょう。
 
--   **maximumPoolSize** : コネクションプール内の最大接続数。この値が大きすぎると、TiDB は不要な接続を維持するためにリソースを消費します。この値が小さすぎると、アプリケーションの接続が遅くなります。したがって、アプリケーションの特性に応じてこの値を構成する必要があります。詳細については、 [プールのサイズについて](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing)を参照してください。
--   **minimumIdle** ：接続プール内のアイドル接続の最小数。主に、アプリケーションがアイドル状態のときに突発的なリクエストに対応するために、一部の接続を確保するために使用されます。アプリケーションの特性に合わせて設定する必要があります。
+- **maximumPoolSize** : コネクションプール内の最大接続数。この値が大きすぎると、TiDB は不要な接続を維持するためにリソースを消費します。この値が小さすぎると、アプリケーションの接続が遅くなります。したがって、アプリケーションの特性に応じてこの値を構成する必要があります。詳細については、 [プールのサイズについて](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing)を参照してください。
+- **minimumIdle** ：接続プール内のアイドル接続の最小数。主に、アプリケーションがアイドル状態のときに突発的なリクエストに対応するために、一部の接続を確保するために使用されます。アプリケーションの特性に合わせて設定する必要があります。
 
 アプリケーションは、接続の使用が終了したら、その接続を返却する必要があります。接続プールの問題を早期に発見するために、アプリケーションは適切な接続プール監視ツール（ **metricRegistry**など）を使用することをお勧めします。
 
@@ -40,25 +40,25 @@ TiDBサーバーがシャットダウン、メンテナンスのために再起�
 <SimpleTab>
 <div label="HikariCP">
 
--   **`maxLifetime`** ：プール内の接続の最大有効期間。
+- **`maxLifetime`** ：プール内の接続の最大有効期間。
 
 </div>
 
 <div label="tomcat-jdbc">
 
--   **`maxAge`** ：プール内の接続の最大有効期間。
+- **`maxAge`** ：プール内の接続の最大有効期間。
 
 </div>
 
 <div label="c3p0">
 
--   **`maxConnectionAge`** ：接続プールにおける接続の最大有効期間。
+- **`maxConnectionAge`** ：接続プールにおける接続の最大有効期間。
 
 </div>
 
 <div label="dbcp">
 
--   **`maxConnLifetimeMillis`** ：接続プールにおける接続の最大有効期間。
+- **`maxConnLifetimeMillis`** ：接続プールにおける接続の最大有効期間。
 
 </div>
 </SimpleTab>
@@ -67,8 +67,8 @@ TiDBサーバーがシャットダウン、メンテナンスのために再起�
 
 接続プールは、以下のようにクライアントからTiDBへの永続的な接続を維持します。
 
--   バージョン5.4より前のTiDBでは、デフォルトでは（エラーが報告されない限り）クライアント接続を積極的に閉じることはありません。
--   バージョン5.4以降、TiDBはデフォルトで`28800`秒間（つまり`8`時間）の非アクティブ状態が続くとクライアント接続を自動的に閉じます。このタイムアウト設定は、TiDBとMySQL互換の`wait_timeout`変数を使用して制御できます。詳細については、 [JDBCクエリタイムアウト](/develop/dev-guide-timeouts-in-tidb.md#jdbc-query-timeout)を参照してください。
+- バージョン5.4より前のTiDBでは、デフォルトでは（エラーが報告されない限り）クライアント接続を積極的に閉じることはありません。
+- バージョン5.4以降、TiDBはデフォルトで`28800`秒間（つまり`8`時間）の非アクティブ状態が続くとクライアント接続を自動的に閉じます。このタイムアウト設定は、TiDBとMySQL互換の`wait_timeout`変数を使用して制御できます。詳細については、 [JDBCクエリタイムアウト](/develop/dev-guide-timeouts-in-tidb.md#jdbc-query-timeout)を参照してください。
 
 さらに、クライアントとTiDBの間には、 [LVS](https://en.wikipedia.org/wiki/Linux_Virtual_Server)や[HAProxy](https://en.wikipedia.org/wiki/HAProxy)ようなネットワークプロキシが存在する場合があります。これらのプロキシは通常、特定のアイドル期間（プロキシのアイドル設定によって決定されます）が経過すると、接続を自動的にクリーンアップします。接続プールは、プロキシのアイドル設定を監視するだけでなく、キープアライブのために接続を維持またはプローブする必要もあります。
 
@@ -82,9 +82,9 @@ The last packet sent successfully to the server was 3600000 milliseconds ago. Th
 
 `n`が非常に大きな値 (上記の例の`3600000`など) の場合、この接続は長時間アイドル状態になり、その後プロキシによって閉じられた可能性が高いです。通常の解決策は、プロキシのアイドル設定の値を増やし、接続プールが次のことを実行できるようにすることです。
 
--   接続を使用する前に、毎回接続が利用可能かどうかを確認してください。
--   別のスレッドを使用して、接続が利用可能かどうかを定期的に確認してください。
--   接続を維持するために、定期的にテストクエリを送信してください。
+- 接続を使用する前に、毎回接続が利用可能かどうかを確認してください。
+- 別のスレッドを使用して、接続が利用可能かどうかを定期的に確認してください。
+- 接続を維持するために、定期的にテストクエリを送信してください。
 
 接続プールの実装によっては、上記の方法のうち1つ以上がサポートされている場合があります。対応する設定については、接続プールのドキュメントを参照してください。
 
@@ -100,9 +100,9 @@ connections = ((core_count * 2) + effective_spindle_count)
 
 式中の各パラメータの説明は以下のとおりです。
 
--   **接続数**：取得された接続のサイズ。
--   **core_count** ：CPUコアの数。
--   **effective_spindle_count** ：ハードドライブの数（ [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)ではありません）。回転するハードディスクはそれぞれスピンドルと呼ばれるためです。たとえば、16台のディスクで構成されたRAIDサーバーを使用している場合、 **effective_spindle_count**は16になります。HDD**は**通常、一度に1つのリクエストしか処理できないため、この式は実際にはサーバーが同時に処理できるI/Oリクエストの数を測定しています。
+- **接続数**：取得された接続のサイズ。
+- **core_count** ：CPUコアの数。
+- **effective_spindle_count** ：ハードドライブの数（ [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)ではありません）。回転するハードディスクはそれぞれスピンドルと呼ばれるためです。たとえば、16台のディスクで構成されたRAIDサーバーを使用している場合、 **effective_spindle_count**は16になります。HDD**は**通常、一度に1つのリクエストしか処理できないため、この式は実際にはサーバーが同時に処理できるI/Oリクエストの数を測定しています。
 
 特に、 [式](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#the-formula)下の次の注記に注意してください。
 
@@ -118,9 +118,9 @@ connections = ((core_count * 2) + effective_spindle_count)
 
 このメモは以下を示しています。
 
--   **core_countは**、 [ハイパースレッディング](https://en.wikipedia.org/wiki/Hyper-threading)有効にするかどうかに関わらず、物理コアの数です。
--   データが完全にキャッシュされると、 **effective_spindle_count を**`0`に設定する必要があります。キャッシュのヒット率が低下すると、カウントは実際の数値である`HDD`に近づきます。
--   **この計算式が*SSD*にも有効かどうかは検証されておらず、不明である。**
+- **core_countは**、 [ハイパースレッディング](https://en.wikipedia.org/wiki/Hyper-threading)有効にするかどうかに関わらず、物理コアの数です。
+- データが完全にキャッシュされると、 **effective_spindle_count を**`0`に設定する必要があります。キャッシュのヒット率が低下すると、カウントは実際の数値である`HDD`に近づきます。
+- **この計算式が*SSD*にも有効かどうかは検証されておらず、不明である。**
 
 SSDを使用する場合は、経験に基づき、以下の式を使用することをお勧めします。
 
@@ -136,15 +136,15 @@ connections = (number of cores * 4)
 
 最適なサイズを選ぶための基本的なルールをいくつかご紹介します。
 
--   ネットワークまたはストレージのレイテンシーが高い場合は、最大接続数を増やしてレイテンシーによる待ち時間を短縮してください。スレッドがレイテンシーによってブロックされた場合でも、他のスレッドが処理を引き継いで処理を続行できます。
--   サーバー上に複数のサービスがデプロイされており、各サービスがそれぞれ独立した接続プールを持っている場合は、すべての接続プールへの最大接続数の合計を考慮してください。
+- ネットワークまたはストレージのレイテンシーが高い場合は、最大接続数を増やしてレイテンシーによる待ち時間を短縮してください。スレッドがレイテンシーによってブロックされた場合でも、他のスレッドが処理を引き継いで処理を続行できます。
+- サーバー上に複数のサービスがデプロイされており、各サービスがそれぞれ独立した接続プールを持っている場合は、すべての接続プールへの最大接続数の合計を考慮してください。
 
 ## 接続パラメータ {#connection-parameters}
 
 Javaアプリケーションは、さまざまなフレームワークでカプセル化されたできます。ほとんどのフレームワークでは、データベースサーバーとのやり取りを行うために、最下層でJDBC APIが呼び出されます。JDBCに関しては、以下の点に重点を置くことをお勧めします。
 
--   JDBC APIの使用方法の選択
--   API実装者のパラメータ設定
+- JDBC APIの使用方法の選択
+- API実装者のパラメータ設定
 
 ### JDBC API {#jdbc-api}
 
@@ -174,13 +174,13 @@ OLTP（オンライン・トランザクション処理）シナリオでは、�
 
 JDBCでは通常、以下の2つの処理方法が使用されます。
 
--   最初の方法: [**FetchSizeを**`Integer.MIN_VALUE`に設定します](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-implementation-notes.html#ResultSet)クライアントがキャッシュしないようにします。クライアントは`StreamingResult`を介してネットワーク接続から実行結果を読み取ります。
+- 最初の方法: [**FetchSizeを**`Integer.MIN_VALUE`に設定します](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-implementation-notes.html#ResultSet)クライアントがキャッシュしないようにします。クライアントは`StreamingResult`を介してネットワーク接続から実行結果を読み取ります。
 
     クライアントがストリーミング読み取り方式を使用する場合、クエリを実行するためにステートメントを引き続き使用する前に、読み取りを完了するか、 `resultset`閉じる必要があります。そうしないと、エラー`No statements may be issued when any streaming result sets are open and in use on a given connection. Ensure that you have called .close() on any active streaming result sets before attempting more queries.`が返されます。
 
     クライアントが読み取りを完了するか、 `resultset`閉じる前にクエリでこのようなエラーが発生するのを回避するには、URLに`clobberStreamingResults=true`パラメータを追加できます。そうすると、 `resultset`自動的に閉じられますが、前のストリーミングクエリで読み取られる結果セットは失われます。
 
--   2つ目の方法：まず正の整数として[`FetchSize`設定](http://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html)設定し、次にJDBC URLで`useCursorFetch = true`設定することで、カーソルフェッチを使用します。
+- 2つ目の方法：まず正の整数として[`FetchSize`設定](http://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html)設定し、次にJDBC URLで`useCursorFetch = true`設定することで、カーソルフェッチを使用します。
 
 TiDBは両方の方法をサポートしていますが、実装がよりシンプルで実行効率も優れているため、 `FetchSize`から`Integer.MIN_VALUE`に設定する最初の方法を使用することをお勧めします。
 
@@ -196,27 +196,27 @@ JDBCは通常、JDBC URLパラメータの形式で実装関連の設定を提�
 
 このセクションでは、 `Prepare`に関連するパラメータを紹介します。
 
--   **useServerPrepStmts**
+- **useServerPrepStmts**
 
     **useServerPrepStmts は**デフォルトで`false`に設定されています。つまり、Prepare API を使用する場合でも、「prepare」操作はクライアント側でのみ実行されます。サーバーの解析オーバーヘッドを回避するため、同じ SQL ステートメントで Prepare API を複数回使用する場合は、この設定を`true`に設定することをお勧めします。
 
     この設定が既に有効になっていることを確認するには、次の操作を実行してください。
 
-    -   TiDB モニタリング ダッシュボードに移動し、 **[クエリ概要]** &gt; **[インスタンス別 CPS]**からリクエスト コマンド タイプを確認します。
-    -   リクエストで`COM_QUERY` `COM_STMT_EXECUTE`または`COM_STMT_PREPARE`に置き換えられている場合、この設定は既に有効になっていることを意味します。
+    - TiDB モニタリング ダッシュボードに移動し、 **[クエリ概要]** &gt; **[インスタンス別 CPS]**からリクエスト コマンド タイプを確認します。
+    - リクエストで`COM_QUERY` `COM_STMT_EXECUTE`または`COM_STMT_PREPARE`に置き換えられている場合、この設定は既に有効になっていることを意味します。
 
--   **`cachePrepStmts`**
+- **`cachePrepStmts`**
 
     `useServerPrepStmts=true`ではサーバーがプリペアドステートメントを実行できますが、デフォルトではクライアントは実行後にプリペアドステートメントを閉じ、再利用しません。つまり、「準備」操作はテキストファイルの実行ほど効率的ではありません。この問題を解決するには、 `useServerPrepStmts=true`設定した後、 `cachePrepStmts=true`設定することをお勧めします。これにより、クライアントはプリペアドステートメントをキャッシュできるようになります。
 
     この設定が既に有効になっていることを確認するには、次の操作を実行してください。
 
-    -   TiDB モニタリング ダッシュボードに移動し、 **[クエリ概要]** &gt; **[インスタンス別 CPS]**からリクエスト コマンド タイプを確認します。
-    -   リクエスト内の`COM_STMT_EXECUTE`の数が`COM_STMT_PREPARE`の数よりはるかに多い場合、この設定は既に有効になっていることを意味します。
+    - TiDB モニタリング ダッシュボードに移動し、 **[クエリ概要]** &gt; **[インスタンス別 CPS]**からリクエスト コマンド タイプを確認します。
+    - リクエスト内の`COM_STMT_EXECUTE`の数が`COM_STMT_PREPARE`の数よりはるかに多い場合、この設定は既に有効になっていることを意味します。
 
     さらに、 `useConfigs=maxPerformance`設定すると、 `cachePrepStmts=true`含む複数のパラメータが同時に設定されます。
 
--   **prepStmtCacheSqlLimit**
+- **prepStmtCacheSqlLimit**
 
     `cachePrepStmts`設定が完了したら、 `prepStmtCacheSqlLimit`設定（デフォルト値は`256` ）にも注意してください。この設定は、クライアントにキャッシュされるプリペアドステートメントの最大長を制御します。
 
@@ -224,17 +224,17 @@ JDBCは通常、JDBC URLパラメータの形式で実装関連の設定を提�
 
     次のような場合は、この設定が小さすぎるかどうかを確認する必要があります。
 
-    -   TiDB モニタリング ダッシュボードに移動し、 **[クエリ概要]** &gt; **[インスタンス別 CPS]**からリクエスト コマンド タイプを確認します。
-    -   そして、 `cachePrepStmts=true`設定されているが、 `COM_STMT_PREPARE`は依然として`COM_STMT_EXECUTE`とほぼ等しく、 `COM_STMT_CLOSE`存在することがわかった。
+    - TiDB モニタリング ダッシュボードに移動し、 **[クエリ概要]** &gt; **[インスタンス別 CPS]**からリクエスト コマンド タイプを確認します。
+    - そして、 `cachePrepStmts=true`設定されているが、 `COM_STMT_PREPARE`は依然として`COM_STMT_EXECUTE`とほぼ等しく、 `COM_STMT_CLOSE`存在することがわかった。
 
--   **prepStmtCacheSize**
+- **prepStmtCacheSize**
 
     **prepStmtCacheSize は**、キャッシュされるプリペアドステートメントの数を制御します（デフォルト値は`25`です）。アプリケーションで多くの種類の SQL ステートメントを「準備」する必要があり、プリペアドステートメントを再利用したい場合は、この値を増やすことができます。
 
     この設定が既に有効になっていることを確認するには、次の操作を実行してください。
 
-    -   TiDB モニタリング ダッシュボードに移動し、 **[クエリ概要]** &gt; **[インスタンス別 CPS]**からリクエスト コマンド タイプを確認します。
-    -   リクエスト内の`COM_STMT_EXECUTE`の数が`COM_STMT_PREPARE`の数よりはるかに多い場合、この設定は既に有効になっていることを意味します。
+    - TiDB モニタリング ダッシュボードに移動し、 **[クエリ概要]** &gt; **[インスタンス別 CPS]**からリクエスト コマンド タイプを確認します。
+    - リクエスト内の`COM_STMT_EXECUTE`の数が`COM_STMT_PREPARE`の数よりはるかに多い場合、この設定は既に有効になっていることを意味します。
 
 #### バッチ関連パラメータ {#batch-related-parameters}
 
@@ -312,6 +312,6 @@ TiDB はタイムアウトを制御するために 2 つの MySQL 互換パラ�
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)か[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)についてコミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)か[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)についてコミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

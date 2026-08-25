@@ -32,10 +32,10 @@ Snowflakeは、Twitterが提案する分散ID生成ソリューションです�
 | 1bit |     28bits    | 22bits         | 13bits   |
 ```
 
--   符号: 1ビットの固定長。生成されるIDが常に正の数であることを示すために`0`に固定されます。
--   デルタ秒: デフォルトは28ビット。現在の時刻を、あらかじめ設定されたタイムベース（デフォルトは`2016-05-20` ）に対する増分値（秒）で表します。28ビットでは最大約8.7年までサポートできます。
--   ワーカーノードID：デフォルトでは22ビット。マシンIDを表します。通常、アプリケーションプロセスの開始時に中央IDジェネレータから取得されます。一般的な中央IDジェネレータには、AUTO_INCREMENT列やZooKeeperなどがあります。デフォルトの割り当てポリシーは「discard-as-you-go（実行時に破棄）」で、プロセスは再起動時に新しいワーカーノードIDを再取得します。22ビットでは最大約420万回の起動をサポートできます。
--   シーケンス: デフォルトでは13ビット。1秒あたりの同時実行シーケンス数。13ビットでは1秒あたり8192の同時実行シーケンスをサポートできます。
+- 符号: 1ビットの固定長。生成されるIDが常に正の数であることを示すために`0`に固定されます。
+- デルタ秒: デフォルトは28ビット。現在の時刻を、あらかじめ設定されたタイムベース（デフォルトは`2016-05-20` ）に対する増分値（秒）で表します。28ビットでは最大約8.7年までサポートできます。
+- ワーカーノードID：デフォルトでは22ビット。マシンIDを表します。通常、アプリケーションプロセスの開始時に中央IDジェネレータから取得されます。一般的な中央IDジェネレータには、AUTO_INCREMENT列やZooKeeperなどがあります。デフォルトの割り当てポリシーは「discard-as-you-go（実行時に破棄）」で、プロセスは再起動時に新しいワーカーノードIDを再取得します。22ビットでは最大約420万回の起動をサポートできます。
+- シーケンス: デフォルトでは13ビット。1秒あたりの同時実行シーケンス数。13ビットでは1秒あたり8192の同時実行シーケンスをサポートできます。
 
 ## 番号割り当てソリューション {#number-allocation-solution}
 
@@ -53,6 +53,6 @@ Snowflakeは、Twitterが提案する分散ID生成ソリューションです�
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

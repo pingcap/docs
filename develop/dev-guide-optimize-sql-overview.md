@@ -8,32 +8,32 @@ aliases: ['/ja/tidb/stable/dev-guide-optimize-sql-overview/','/ja/tidbcloud/dev-
 
 このドキュメントでは、TiDBにおけるSQL文のパフォーマンスを最適化する方法を紹介します。良好なパフォーマンスを得るには、まず以下の点に着目してください。
 
--   SQLパフォーマンスチューニング
--   スキーマ設計: アプリケーションのワークロードパターンに基づいて、トランザクションの競合やホットスポットを回避するためにテーブルスキーマを変更する必要がある場合があります。
+- SQLパフォーマンスチューニング
+- スキーマ設計: アプリケーションのワークロードパターンに基づいて、トランザクションの競合やホットスポットを回避するためにテーブルスキーマを変更する必要がある場合があります。
 
 ## SQLパフォーマンスチューニング {#sql-performance-tuning}
 
 良好な SQL ステートメントのパフォーマンスを得るには、次のガイドラインに従ってください。
 
--   スキャンする行数はできるだけ少なくしてください。必要なデータのみをスキャンし、余分なデータのスキャンは避けることをお勧めします。
--   適切なインデックスを使用してください。SQLの`WHERE`句の列に対応するインデックスがあることを確認してください。インデックスがない場合、文はフルテーブルスキャンを必要とし、パフォーマンスが低下します。
--   適切な結合タイプを使用してください。クエリに含まれるテーブルの相対的なサイズに基づいて、適切な結合タイプを選択することが重要です。通常、TiDBのコストベースオプティマイザは、パフォーマンスが最も高い結合タイプを選択します。ただし、場合によっては、より適切な結合タイプを手動で指定する必要があることもあります。
--   適切なストレージエンジンを使用してください。OLTPとOLAPのハイブリッドワークロードには、 TiFlashエンジンが推奨されます。詳細については、 [HTAPクエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)を参照してください。
+- スキャンする行数はできるだけ少なくしてください。必要なデータのみをスキャンし、余分なデータのスキャンは避けることをお勧めします。
+- 適切なインデックスを使用してください。SQLの`WHERE`句の列に対応するインデックスがあることを確認してください。インデックスがない場合、文はフルテーブルスキャンを必要とし、パフォーマンスが低下します。
+- 適切な結合タイプを使用してください。クエリに含まれるテーブルの相対的なサイズに基づいて、適切な結合タイプを選択することが重要です。通常、TiDBのコストベースオプティマイザは、パフォーマンスが最も高い結合タイプを選択します。ただし、場合によっては、より適切な結合タイプを手動で指定する必要があることもあります。
+- 適切なストレージエンジンを使用してください。OLTPとOLAPのハイブリッドワークロードには、 TiFlashエンジンが推奨されます。詳細については、 [HTAPクエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)を参照してください。
 
 ## スキーマ設計 {#schema-design}
 
 [SQLパフォーマンスのチューニング](#sql-performance-tuning)後もアプリケーションのパフォーマンスがまだ良好でない場合は、次の問題を回避するためにスキーマ設計とデータアクセス パターンを確認する必要がある可能性があります。
 
--   トランザクションの競合。トランザクションの競合を診断して解決する方法については、 [ロック競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)を参照してください。
--   ホットスポット。ホットスポットの診断と解決方法については、 [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。
+- トランザクションの競合。トランザクションの競合を診断して解決する方法については、 [ロック競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)を参照してください。
+- ホットスポット。ホットスポットの診断と解決方法については、 [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。
 
 ### 参照 {#see-also}
 
--   [TiDB Cloudの SQL性能チューニング](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
--   [TiDB Self-ManagedのSQL性能チューニング](/sql-tuning-overview.md)
+- [TiDB Cloudの SQL性能チューニング](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
+- [TiDB Self-ManagedのSQL性能チューニング](/sql-tuning-overview.md)
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

@@ -9,10 +9,10 @@ summary: データ移行に関する FAQ について説明します。
 
 移行関連ツールに関するよくある質問については、以下のリストの対応するリンクをクリックしてください。
 
--   [バックアップと復元に関するよくある質問](/faq/backup-and-restore-faq.md)
--   [TiDB Lightningに関するよくある質問](/tidb-lightning/tidb-lightning-faq.md)
--   [TiDB Data Migration (DM) に関するよくある質問](/dm/dm-faq.md)
--   [TiCDC よくある質問](/ticdc/ticdc-faq.md)
+- [バックアップと復元に関するよくある質問](/faq/backup-and-restore-faq.md)
+- [TiDB Lightningに関するよくある質問](/tidb-lightning/tidb-lightning-faq.md)
+- [TiDB Data Migration (DM) に関するよくある質問](/dm/dm-faq.md)
+- [TiCDC よくある質問](/ticdc/ticdc-faq.md)
 
 ## 完全なデータのエクスポートとインポート {#full-data-export-and-import}
 
@@ -24,13 +24,13 @@ TiDB はほとんどの MySQL 構文をサポートしているため、ほと�
 
 他の論理エラーが発生していない場合、再試行とEOFエラーはネットワークの問題が原因である可能性があります。まずはツールを使用してネットワーク接続を確認することをお勧めします。次の例では、トラブルシューティングに[iperf](https://iperf.fr/)を使用しています。
 
--   再試行と EOF エラーが発生したサーバー側ノードで次のコマンドを実行します。
+- 再試行と EOF エラーが発生したサーバー側ノードで次のコマンドを実行します。
 
     ```shell
     iperf3 -s
     ```
 
--   再試行と EOF エラーが発生したクライアント側ノードで次のコマンドを実行します。
+- 再試行と EOF エラーが発生したクライアント側ノードで次のコマンドを実行します。
 
     ```shell
     iperf3 -c <server-IP>
@@ -73,18 +73,18 @@ TiDBサービスを再起動し、設定ファイルにパラメータ`-skip-gra
 
 TiDB のデータをエクスポートするには、次の方法を使用できます。
 
--   Dumplingを使用してデータをエクスポートします。詳細については、 [Dumplingのドキュメント](/dumpling-overview.md)を参照してください。
--   mysqldump と`WHERE`句を使用してデータをエクスポートします。
--   MySQL クライアントを使用して、 `select`の結果をファイルにエクスポートします。
+- Dumplingを使用してデータをエクスポートします。詳細については、 [Dumplingのドキュメント](/dumpling-overview.md)を参照してください。
+- mysqldump と`WHERE`句を使用してデータをエクスポートします。
+- MySQL クライアントを使用して、 `select`の結果をファイルにエクスポートします。
 
 ### Db2 または Oracle から TiDB に移行するにはどうすればよいでしょうか? {#how-to-migrate-from-db2-or-oracle-to-tidb}
 
 Db2 または Oracle から TiDB にすべてのデータを移行するか、段階的に移行する場合は、次のソリューションを参照してください。
 
--   OGG、Gateway、CDC (Change Data Capture) などの Oracle の公式移行ツールを使用します。
--   データをインポートおよびエクスポートするためのプログラムを開発します。
--   スプールをテキストファイルとしてエクスポートし、Load infile を使用してデータをインポートします。
--   サードパーティのデータ移行ツールを使用します。
+- OGG、Gateway、CDC (Change Data Capture) などの Oracle の公式移行ツールを使用します。
+- データをインポートおよびエクスポートするためのプログラムを開発します。
+- スプールをテキストファイルとしてエクスポートし、Load infile を使用してデータをインポートします。
+- サードパーティのデータ移行ツールを使用します。
 
 現在はOGGの使用が推奨されています。
 
@@ -94,7 +94,7 @@ Sqoopでは、 `--batch`各バッチで100個の`statement`文をコミットす
 
 2つの解決策:
 
--   次のように`-Dsqoop.export.records.per.statement=10`オプションを追加します。
+- 次のように`-Dsqoop.export.records.per.statement=10`オプションを追加します。
 
     ```bash
     sqoop export \
@@ -107,14 +107,14 @@ Sqoopでは、 `--batch`各バッチで100個の`statement`文をコミットす
         --batch
     ```
 
--   単一の TiDB トランザクション内のステートメントの制限数を増やすこともできますが、これにより消費されるメモリが増加します。
+- 単一の TiDB トランザクション内のステートメントの制限数を増やすこともできますが、これにより消費されるメモリが増加します。
 
 ### Dumpling がテーブルをエクスポートするときに`The local disk space is insufficient`エラーを返したり、アップストリーム データベースのメモリ不足を引き起こしたりする原因になるのはなぜですか? {#why-does-dumpling-return-the-local-disk-space-is-insufficient-error-or-cause-the-upstream-database-to-run-out-of-memory-when-exporting-a-table}
 
 この問題には次の原因が考えられます。
 
--   データベースの主キーが均等に分散されていません (たとえば、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)有効にした場合)。
--   アップストリーム データベースは TiDB であり、エクスポートされたテーブルはパーティションテーブルです。
+- データベースの主キーが均等に分散されていません (たとえば、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)有効にした場合)。
+- アップストリーム データベースは TiDB であり、エクスポートされたテーブルはパーティションテーブルです。
 
 上記のケースでは、 Dumpling はエクスポート時に過度に大きなデータチャンクを分割し、過度に大きな結果を含むクエリを送信します。この問題に対処するには、 Dumplingの最新バージョンを入手してください。
 
@@ -174,5 +174,5 @@ Google Cloud Spanner には[同様の制限](https://cloud.google.com/spanner/do
 
 ### TiDB のデータ読み込み速度を向上させるにはどうすればよいでしょうか? {#how-to-improve-the-data-loading-speed-in-tidb}
 
--   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)ツールは分散データインポート用に開発されています。パフォーマンス上の理由から、データインポートプロセスは完全なトランザクション処理を実行しないことに注意してください。そのため、インポートプロセス中にインポートされるデータのACID制約は保証されません。インポートされたデータのACID制約は、インポートプロセス全体が終了した後にのみ保証されます。したがって、適用可能なシナリオは主に、新規データ（新規テーブルや新規インデックスなど）のインポート、またはフルバックアップとリストア（元のテーブルを切り捨ててからデータをインポートする）です。
--   TiDBへのデータロードは、ディスクとクラスタ全体の状態に関連しています。データをロードする際は、ホストのディスク使用率、TiClientエラー、バックオフ、スレッドCPUなどのメトリクスに注目してください。これらのメトリクスを用いてボトルネックを分析できます。
+- [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)ツールは分散データインポート用に開発されています。パフォーマンス上の理由から、データインポートプロセスは完全なトランザクション処理を実行しないことに注意してください。そのため、インポートプロセス中にインポートされるデータのACID制約は保証されません。インポートされたデータのACID制約は、インポートプロセス全体が終了した後にのみ保証されます。したがって、適用可能なシナリオは主に、新規データ（新規テーブルや新規インデックスなど）のインポート、またはフルバックアップとリストア（元のテーブルを切り捨ててからデータをインポートする）です。
+- TiDBへのデータロードは、ディスクとクラスタ全体の状態に関連しています。データをロードする際は、ホストのディスク使用率、TiClientエラー、バックオフ、スレッドCPUなどのメトリクスに注目してください。これらのメトリクスを用いてボトルネックを分析できます。

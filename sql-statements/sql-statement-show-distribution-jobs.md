@@ -42,6 +42,6 @@ SHOW DISTRIBUTION JOBS;
 
 ## 参照 {#see-also}
 
--   [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md)
--   [`SHOW TABLE DISTRIBUTION`](/sql-statements/sql-statement-show-table-distribution.md)
--   [`CANCEL DISTRIBUTION JOB`](/sql-statements/sql-statement-cancel-distribution-job.md)
+- [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md)
+- [`SHOW TABLE DISTRIBUTION`](/sql-statements/sql-statement-show-table-distribution.md)
+- [`CANCEL DISTRIBUTION JOB`](/sql-statements/sql-statement-cancel-distribution-job.md)

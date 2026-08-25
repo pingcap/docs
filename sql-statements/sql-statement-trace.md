@@ -98,4 +98,4 @@ TRACE FORMAT='log' SELECT * FROM mysql.user;
 
 ## 参照 {#see-also}
 
--   [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md)
+- [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md)

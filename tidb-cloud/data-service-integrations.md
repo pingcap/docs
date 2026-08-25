@@ -15,15 +15,15 @@ summary: TiDB Cloudコンソールで、 TiDB CloudデータアプリをGPTやDi
 
 データアプリをGPTと統合するには、以下の手順を実行してください。
 
-1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
+1. プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 
-2.  左側のペインで、対象のデータアプリを見つけ、対象のデータアプリの名前をクリックし、次に**Integrations**タブをクリックします。
+2. 左側のペインで、対象のデータアプリを見つけ、対象のデータアプリの名前をクリックし、次に**Integrations**タブをクリックします。
 
-3.  **Integrate with GPTs**領域で、 **Get Configuration**をクリックします。
+3. **Integrate with GPTs**領域で、 **Get Configuration**をクリックします。
 
     ![Get Configuration](/media/tidb-cloud/data-service/GPTs1.png)
 
-4.  表示されたダイアログボックスには、以下の項目が表示されます。
+4. 表示されたダイアログボックスには、以下の項目が表示されます。
 
     ａ． **API Specification URL** : データアプリの OpenAPI 仕様の URL をコピーします。詳細については、 [OpenAPI仕様を使用する](/tidb-cloud/data-service-manage-data-app.md#use-the-openapi-specification)を参照してください。
 
@@ -33,7 +33,7 @@ summary: TiDB Cloudコンソールで、 TiDB CloudデータアプリをGPTやDi
 
     ![GPTs Dialog Box](/media/tidb-cloud/data-service/GPTs2.png)
 
-5.  コピーしたAPI仕様のURLとエンコードされたAPIキーをGPT構成で使用してください。
+5. コピーしたAPI仕様のURLとエンコードされたAPIキーをGPT構成で使用してください。
 
 ## データアプリをDifyと連携させましょう {#integrate-your-data-app-with-dify}
 

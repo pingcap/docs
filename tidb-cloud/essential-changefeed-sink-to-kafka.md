@@ -11,31 +11,31 @@ summary: このドキュメントでは、TiDB Cloud Essentialから Apache Kafk
 >
 > 現在、 TiDB Cloud Essentialの変更フィード機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、以下の手順に従ってください。
 >
-> 1.  [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある?をクリックします**。** 。
-> 2.  **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。
-> 3.  チケットを作成します。「説明」欄に「changefeedへの申請」と入力します。
-> 4.  **Submit**をクリックしてください。
+> 1. [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある?をクリックします**。** 。
+> 2. **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。
+> 3. チケットを作成します。「説明」欄に「changefeedへの申請」と入力します。
+> 4. **Submit**をクリックしてください。
 
 ## 制限 {#restrictions}
 
--   TiDB Cloud Essentialインスタンスごとに、最大10個の変更フィードを作成できます。
--   現在、 TiDB Cloud Essentialは、Kafkaブローカーへの接続に自己署名TLS証明書をアップロードすることをサポートしていません。
--   TiDB Cloud EssentialはTiCDCを使用して変更フィードを確立するため、同じ[TiCDCの制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)があります。
--   複製対象のテーブルに主キーまたはNULLを許容しない一意インデックスがない場合、複製中に一意制約が存在しないことで、一部の再試行シナリオにおいて、ターゲットで重複データが挿入される可能性があります。
+- TiDB Cloud Essentialインスタンスごとに、最大10個の変更フィードを作成できます。
+- 現在、 TiDB Cloud Essentialは、Kafkaブローカーへの接続に自己署名TLS証明書をアップロードすることをサポートしていません。
+- TiDB Cloud EssentialはTiCDCを使用して変更フィードを確立するため、同じ[TiCDCの制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)があります。
+- 複製対象のテーブルに主キーまたはNULLを許容しない一意インデックスがない場合、複製中に一意制約が存在しないことで、一部の再試行シナリオにおいて、ターゲットで重複データが挿入される可能性があります。
 
 ## 前提条件 {#prerequisites}
 
 Apache Kafkaにデータをストリーミングするためのチェンジフィードを作成する前に、以下の前提条件を満たす必要があります。
 
--   ネットワーク接続を設定する
--   Kafka ACL認証の権限を追加する
+- ネットワーク接続を設定する
+- Kafka ACL認証の権限を追加する
 
 ### ネットワーク {#network}
 
 TiDB Cloud EssentialインスタンスがApache Kafkaサービスに接続できることを確認してください。接続方法は以下のいずれかを選択できます。
 
--   プライベートリンク接続：セキュリティコンプライアンスを満たし、ネットワーク品質を確保します。
--   公共ネットワーク：迅速なセットアップに適しています。
+- プライベートリンク接続：セキュリティコンプライアンスを満たし、ネットワーク品質を確保します。
+- 公共ネットワーク：迅速なセットアップに適しています。
 
 <SimpleTab>
 <div label="Private Link Connection">
@@ -46,10 +46,10 @@ TiDB Cloud Essentialは現在、セルフホスト型Kafka、Confluent Cloud Ded
 
 Kafkaのデプロイメントとクラウドプロバイダーに基づいてプライベートリンク接続を設定するには、以下のガイドを参照してください。
 
--   [プライベートリンク接続を介してAWS上のConfluent Cloudに接続します](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
--   [プライベートリンク接続を介してAWSセルフホスト型Kafkaに接続します](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
--   [プライベートリンク接続を介してAlibaba Cloudセルフホスト型Kafkaに接続する](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
--   [プライベートリンク接続を介してAmazon MSK Provisionedに接続します](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)
+- [プライベートリンク接続を介してAWS上のConfluent Cloudに接続します](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
+- [プライベートリンク接続を介してAWSセルフホスト型Kafkaに接続します](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
+- [プライベートリンク接続を介してAlibaba Cloudセルフホスト型Kafkaに接続する](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
+- [プライベートリンク接続を介してAmazon MSK Provisionedに接続します](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)
 
 </div>
 
@@ -66,16 +66,16 @@ Apache Kafkaサービスへのパブリックアクセスを提供する場合�
 
 TiDB Cloud Essential の変更フィードが Apache Kafka にデータをストリーミングし、Kafka トピックを自動的に作成できるようにするには、Kafka に次の権限が追加されていることを確認してください。
 
--   Kafka のトピック リソース タイプに`Create`および`Write`権限が追加されます。
--   Kafka のクラスタリソース タイプに`DescribeConfigs`権限が追加されます。
+- Kafka のトピック リソース タイプに`Create`および`Write`権限が追加されます。
+- Kafka のクラスタリソース タイプに`DescribeConfigs`権限が追加されます。
 
 たとえば、Kafka クラスターが Confluent Cloud にある場合、詳細については、Confluent ドキュメントの[リソース](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)と[ACLの追加](https://docs.confluent.io/platform/current/security/authorization/acls/manage-acls.html#add-acls)を参照してください。
 
 ## ステップ1. Apache Kafka の変更フィードを作成する {#step-1-create-a-changefeed-for-apache-kafka}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
-2.  対象のTiDB Cloud Essentialインスタンスの概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Changefeed**をクリックします。
-3.  **Create Changefeed**をクリックし、次に**Destination**として**Kafka**を選択します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
+2. 対象のTiDB Cloud Essentialインスタンスの概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Changefeed**をクリックします。
+3. **Create Changefeed**をクリックし、次に**Destination**として**Kafka**を選択します。
 
 ## ステップ2. changefeedターゲットを設定する {#step-2-configure-the-changefeed-target}
 
@@ -84,130 +84,130 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 <SimpleTab>
 <div label="Public">
 
-1.  **Connectivity Method**で**Public**を選択し、Kafkaブローカーのエンドポイントを入力します。複数のエンドポイントはカンマ`,`を使用して区切ることができます。
+1. **Connectivity Method**で**Public**を選択し、Kafkaブローカーのエンドポイントを入力します。複数のエンドポイントはカンマ`,`を使用して区切ることができます。
 
-2.  Kafkaの認証設定に応じて、**Authentication**オプションを選択してください。
+2. Kafkaの認証設定に応じて、**Authentication**オプションを選択してください。
 
-    -   Kafkaで認証が必要ない場合は、デフォルトオプションの**Disable**のままにしてください。
-    -   Kafkaで認証が必要な場合は、該当する認証タイプを選択し、認証に使用するKafkaアカウントの**user name**と**パスワード**を入力してください。
+    - Kafkaで認証が必要ない場合は、デフォルトオプションの**Disable**のままにしてください。
+    - Kafkaで認証が必要な場合は、該当する認証タイプを選択し、認証に使用するKafkaアカウントの**user name**と**パスワード**を入力してください。
 
-3.  **Kafka Version**については、ご使用のKafkaのバージョンに基づいて、 **Kafka v2**または**Kafka v3**を選択してください。
+3. **Kafka Version**については、ご使用のKafkaのバージョンに基づいて、 **Kafka v2**または**Kafka v3**を選択してください。
 
-4.  この変更フィード内のデータの**Compression**タイプを選択してください。
+4. この変更フィード内のデータの**Compression**タイプを選択してください。
 
-5.  Kafkaで**TLS Encryption**オプションを有効にしてください。
+5. Kafkaで**TLS Encryption**オプションを有効にしてください。
 
-6.  **Next**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
+6. **Next**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
 
 </div>
 <div label="Private Link">
 
-1.  **Connectivity Method**で**Private Link**を選択します。
+1. **Connectivity Method**で**Private Link**を選択します。
 
-2.  **Private Link Connection**で、[ネットワーク](#network)セクションで作成したプライベートリンク接続を選択します。プライベートリンク接続のアベイラビリティゾーンが、Kafkaデプロイメントのアベイラビリティゾーンと一致していることを確認してください。
+2. **Private Link Connection**で、[ネットワーク](#network)セクションで作成したプライベートリンク接続を選択します。プライベートリンク接続のアベイラビリティゾーンが、Kafkaデプロイメントのアベイラビリティゾーンと一致していることを確認してください。
 
-3.  [ネットワーク](#network)セクションで取得した**Bootstrap Port**を入力してください。Amazon MSKプロビジョニング済みプライベートリンク接続を使用している場合は、このフィールドはスキップできます。
+3. [ネットワーク](#network)セクションで取得した**Bootstrap Port**を入力してください。Amazon MSKプロビジョニング済みプライベートリンク接続を使用している場合は、このフィールドはスキップできます。
 
-4.  Kafkaの認証設定に応じて、**Authentication**オプションを選択してください。
+4. Kafkaの認証設定に応じて、**Authentication**オプションを選択してください。
 
-    -   Kafkaで認証が必要ない場合は、デフォルトオプションの**Disable**のままにしてください。
-    -   Kafkaで認証が必要な場合は、該当する認証タイプを選択し、認証に使用するKafkaアカウントの**user name**と**パスワード**を入力してください。
+    - Kafkaで認証が必要ない場合は、デフォルトオプションの**Disable**のままにしてください。
+    - Kafkaで認証が必要な場合は、該当する認証タイプを選択し、認証に使用するKafkaアカウントの**user name**と**パスワード**を入力してください。
 
-5.  **Kafka Version**については、ご使用のKafkaのバージョンに基づいて、 **Kafka v2**または**Kafka v3**を選択してください。
+5. **Kafka Version**については、ご使用のKafkaのバージョンに基づいて、 **Kafka v2**または**Kafka v3**を選択してください。
 
-6.  この変更フィード内のデータの**Compression**タイプを選択してください。
+6. この変更フィード内のデータの**Compression**タイプを選択してください。
 
-7.  Kafkaで**TLS Encryption**オプションを有効にしてください。
+7. Kafkaで**TLS Encryption**オプションを有効にしてください。
 
-8.  KafkaでTLS SNI検証が必要な場合は、 **TLS Server Name**を入力してください。例： `Confluent Cloud Dedicated clusters` 。
+8. KafkaでTLS SNI検証が必要な場合は、 **TLS Server Name**を入力してください。例： `Confluent Cloud Dedicated clusters` 。
 
-9.  **Next**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
+9. **Next**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
 
 </div>
 </SimpleTab>
 
 ## ステップ3．チェンジフィードを設定する {#step-3-set-the-changefeed}
 
-1.  **Table Filter**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [テーブルフィルタルール](https://docs.pingcap.com/tidb/stable/table-filter/#syntax)を参照してください。
+1. **Table Filter**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [テーブルフィルタルール](https://docs.pingcap.com/tidb/stable/table-filter/#syntax)を参照してください。
 
-    -   **Replication Scope**：有効なキーを持つテーブルのみをレプリケートするか、選択したすべてのテーブルをレプリケートするかを選択できます。
-    -   **Filter Rules**：この列でフィルタルールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加して**Apply**をクリックすると、 TiDB Cloud はTiDB 内のすべてのテーブルをクエリし、**Filter results**の下にルールに一致するテーブルのみを表示します。
-    -   **Case Sensitive**：フィルタルールにおけるデータベース名とテーブル名の照合において、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
-    -   **有効なキーで結果をフィルタリングする**：この列には、主キーや一意インデックスなど、有効なキーを持つテーブルが表示されます。
-    -   **有効なキーのない結果をフィルタリングする**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、ダウンストリームが重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタルールを追加してこれらのテーブルを除外することもできます。たとえば、ルール`test.tbl1`を使用して、テーブル`"!test.tbl1"`を除外できます。
+    - **Replication Scope**：有効なキーを持つテーブルのみをレプリケートするか、選択したすべてのテーブルをレプリケートするかを選択できます。
+    - **Filter Rules**：この列でフィルタルールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加して**Apply**をクリックすると、 TiDB Cloud はTiDB 内のすべてのテーブルをクエリし、**Filter results**の下にルールに一致するテーブルのみを表示します。
+    - **Case Sensitive**：フィルタルールにおけるデータベース名とテーブル名の照合において、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
+    - **有効なキーで結果をフィルタリングする**：この列には、主キーや一意インデックスなど、有効なキーを持つテーブルが表示されます。
+    - **有効なキーのない結果をフィルタリングする**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、ダウンストリームが重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタルールを追加してこれらのテーブルを除外することもできます。たとえば、ルール`test.tbl1`を使用して、テーブル`"!test.tbl1"`を除外できます。
 
-2.  **Event Filter**をカスタマイズして、複製したいイベントを絞り込みます。
+2. **Event Filter**をカスタマイズして、複製したいイベントを絞り込みます。
 
-    -   **Tables matching**：この列では、イベントフィルターを適用するテーブルを設定できます。ルールの構文は、前の**Table Filter**領域で使用されているものと同じです。
-    -   **Event Filter**：無視したいイベントを選択できます。
+    - **Tables matching**：この列では、イベントフィルターを適用するテーブルを設定できます。ルールの構文は、前の**Table Filter**領域で使用されているものと同じです。
+    - **Event Filter**：無視したいイベントを選択できます。
 
-3.  **Column Selector**カスタマイズして、イベントから列を選択し、選択した列に関連するデータ変更のみを下流に送信します。
+3. **Column Selector**カスタマイズして、イベントから列を選択し、選択した列に関連するデータ変更のみを下流に送信します。
 
-    -   **Tables matching**：列セレクターを適用するテーブルを指定します。どのルールにも一致しないテーブルの場合、すべての列が送信されます。
-    -   **Column Selector**：一致したテーブルのどの列をダウンストリームに送信するかを指定します。
+    - **Tables matching**：列セレクターを適用するテーブルを指定します。どのルールにも一致しないテーブルの場合、すべての列が送信されます。
+    - **Column Selector**：一致したテーブルのどの列をダウンストリームに送信するかを指定します。
 
     マッチングルールの詳細については、 [カラムセレクター](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-kafka/#column-selectors)を参照してください。
 
-4.  **Data Format**領域で、希望するKafkaメッセージのフォーマットを選択してください。
+4. **Data Format**領域で、希望するKafkaメッセージのフォーマットを選択してください。
 
-    -   Avroは、コンパクトで高速なバイナリデータフォーマットであり、豊富なデータ構造を備え、様々なフローシステムで広く利用されています。詳細については、 [Avroデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol)を参照してください。
-    -   Canal-JSONは、解析が容易なプレーンなJSONテキスト形式です。詳細については、 [Canal-JSONデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-canal-json)を参照してください。
-    -   オープンプロトコルは、監視、キャッシュ、全文インデックス作成、分析エンジン、および異なるデータベース間のプライマリとセカンダリのレプリケーションのためのデータソースを提供する行レベルのデータ変更通知プロトコルです。詳細については、 [オープンプロトコルデータフォーマット](https://docs.pingcap.com/tidb/stable/ticdc-open-protocol)を参照してください。
-    -   Debeziumは、データベースの変更をキャプチャするためのツールです。キャプチャされた各データベース変更を「イベント」と呼ばれるメッセージに変換し、これらのイベントをKafkaに送信します。詳細については、 [Debeziumデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-debezium)を参照してください。
+    - Avroは、コンパクトで高速なバイナリデータフォーマットであり、豊富なデータ構造を備え、様々なフローシステムで広く利用されています。詳細については、 [Avroデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol)を参照してください。
+    - Canal-JSONは、解析が容易なプレーンなJSONテキスト形式です。詳細については、 [Canal-JSONデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-canal-json)を参照してください。
+    - オープンプロトコルは、監視、キャッシュ、全文インデックス作成、分析エンジン、および異なるデータベース間のプライマリとセカンダリのレプリケーションのためのデータソースを提供する行レベルのデータ変更通知プロトコルです。詳細については、 [オープンプロトコルデータフォーマット](https://docs.pingcap.com/tidb/stable/ticdc-open-protocol)を参照してください。
+    - Debeziumは、データベースの変更をキャプチャするためのツールです。キャプチャされた各データベース変更を「イベント」と呼ばれるメッセージに変換し、これらのイベントをKafkaに送信します。詳細については、 [Debeziumデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-debezium)を参照してください。
 
-5.  TiDB拡張フィールドをKafkaメッセージ本文に追加する場合は、 **TiDB Extension**オプションを有効にしてください。
+5. TiDB拡張フィールドをKafkaメッセージ本文に追加する場合は、 **TiDB Extension**オプションを有効にしてください。
 
     TiDB 拡張フィールドの詳細については、 [Avroデータ形式のTiDB拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields)フィールド」および[Canal-JSONデータ形式のTiDB拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field)を参照してください。
 
-6.  データ形式として**Avro**を選択すると、ページにAvro固有の設定項目が表示されます。これらの設定項目は、以下のように入力できます。
+6. データ形式として**Avro**を選択すると、ページにAvro固有の設定項目が表示されます。これらの設定項目は、以下のように入力できます。
 
-    -   **Decimal**および**Unsigned BigInt**の設定では、 TiDB CloudがKafkaメッセージ内のdecimal型およびunsigned bigint型のデータ型をどのように処理するかを指定します。
-    -   **Schema Registry**領域で、スキーマレジストリのエンドポイントを入力します。**HTTP Authentication**を有効にする場合は、ユーザー名とパスワードを入力します。
+    - **Decimal**および**Unsigned BigInt**の設定では、 TiDB CloudがKafkaメッセージ内のdecimal型およびunsigned bigint型のデータ型をどのように処理するかを指定します。
+    - **Schema Registry**領域で、スキーマレジストリのエンドポイントを入力します。**HTTP Authentication**を有効にする場合は、ユーザー名とパスワードを入力します。
 
-7.  **Topic Distribution**エリアで配信モードを選択し、選択したモードに応じてトピック名の設定を入力します。
+7. **Topic Distribution**エリアで配信モードを選択し、選択したモードに応じてトピック名の設定を入力します。
 
     データ形式として**Avro**を選択した場合、 **Distribution Mode**ドロップダウンリストでは**[テーブルごとの変更ログをKafkaトピックに配信する]**モードのみを選択できます。
 
     配信モードは、変更フィードがKafkaトピックを作成する方法を制御します。テーブルごと、データベースごと、またはすべての変更ログに対して1つのトピックを作成するかを選択できます。
 
-    -   **テーブルごとに変更ログをKafkaトピックに配信する**
+    - **テーブルごとに変更ログをKafkaトピックに配信する**
 
         変更フィードでテーブルごとに専用のKafkaトピックを作成する場合は、このモードを選択します。そうすると、テーブルのすべてのKafkaメッセージが専用のKafkaトピックに送信されます。トピックのプレフィックス、データベース名とテーブル名の間の区切り文字、およびサフィックスを設定することで、テーブルのトピック名をカスタマイズできます。たとえば、区切り文字を`_`に設定すると、トピック名は`<Prefix><DatabaseName>_<TableName><Suffix>`の形式になります。
 
         スキーマ作成イベントなど、行以外のイベントの変更ログについては、 **Default Topic Name**フィールドにトピック名を指定できます。変更フィードは、指定されたトピックに基づいて、これらの変更ログを収集するためのトピックを作成します。
 
-    -   **データベースごとに変更ログをKafkaトピックに配信する**
+    - **データベースごとに変更ログをKafkaトピックに配信する**
 
         変更フィードでデータベースごとに専用のKafkaトピックを作成する場合は、このモードを選択してください。そうすると、データベースのすべてのKafkaメッセージが専用のKafkaトピックに送信されます。トピックのプレフィックスとサフィックスを設定することで、データベースのトピック名をカスタマイズできます。
 
         解決済みTsイベントなど、行以外のイベントの変更ログについては、 **Default Topic Name**フィールドにトピック名を指定できます。変更フィードは、指定されたトピックに基づいて、これらの変更ログを収集するためのトピックを作成します。
 
-    -   **すべての変更ログを、指定された1つのKafkaトピックに送信する**
+    - **すべての変更ログを、指定された1つのKafkaトピックに送信する**
 
         変更フィードで全ての変更ログに対して1つのKafkaトピックを作成する場合は、このモードを選択してください。そうすると、変更フィード内のすべてのKafkaメッセージが1つのKafkaトピックに送信されます。トピック名は**Topic Name**フィールドで指定できます。
 
-8.  **Partition Distribution**領域では、Kafkaメッセージの送信先パーティションを決定できます。**すべてのテーブルに対して単一のパーティションディスパッチャを**定義することも、**テーブルごとに異なるパーティションディスパッチャを**定義することもできます。TiDB Cloudは、次の4種類のディスパッチャを提供しています。
+8. **Partition Distribution**領域では、Kafkaメッセージの送信先パーティションを決定できます。**すべてのテーブルに対して単一のパーティションディスパッチャを**定義することも、**テーブルごとに異なるパーティションディスパッチャを**定義することもできます。TiDB Cloudは、次の4種類のディスパッチャを提供しています。
 
-    -   **主キーまたはインデックス値に基づいて変更ログをKafkaパーティションに分散します。**
+    - **主キーまたはインデックス値に基づいて変更ログをKafkaパーティションに分散します。**
 
         変更フィードでテーブルのKafkaメッセージを異なるパーティションに送信する場合は、この分散方法を選択してください。行の変更ログの主キーまたはインデックス値によって、変更ログの送信先パーティションが決まります。主キーを使用する場合は、 **Index Name**フィールドを空のままにしてください。この分散方法は、パーティションのバランスを改善し、行レベルの順序性を確保します。
 
-    -   **変更ログをテーブルごとにKafkaパーティションに分散する**
+    - **変更ログをテーブルごとにKafkaパーティションに分散する**
 
         変更フィードによってテーブルのKafkaメッセージを1つのKafkaパーティションに送信する場合は、この分散方法を選択してください。行の変更ログのテーブル名によって、変更ログが送信されるパーティションが決まります。この分散方法はテーブルの順序性を保証しますが、パーティションのバランスが崩れる可能性があります。
 
-    -   **変更ログをタイムスタンプに基づいてKafkaパーティションに分散する**
+    - **変更ログをタイムスタンプに基づいてKafkaパーティションに分散する**
 
         変更フィードがKafkaメッセージをランダムに異なるKafkaパーティションに送信するようにするには、この分散方法を選択してください。行の変更ログの commitTs によって、変更ログが送信されるパーティションが決まります。この分散方法は、パーティションのバランスを改善し、各パーティションの順序性を確保します。ただし、データ項目の複数の変更が異なるパーティションに送信され、異なるコンシューマーのコンシューマー処理の進行状況が異なる場合があり、データの不整合が発生する可能性があります。そのため、コンシューマーは、複数のパーティションからのデータを消費する前に commitTs でソートする必要があります。
 
-    -   **変更ログを列の値に基づいてKafkaパーティションに分散する**
+    - **変更ログを列の値に基づいてKafkaパーティションに分散する**
 
         テーブルのKafkaメッセージを異なるパーティションに送信するように変更フィードを設定したい場合は、この配信方法を選択してください。行の変更ログで指定された列の値によって、変更ログの送信先パーティションが決まります。この配信方法は、各パーティション内の順序性を保証し、同じ列値を持つ変更ログが同じパーティションに送信されることを保証します。
 
-9.  **Topic Configuration**領域で、以下の数値を設定してください。changefeedは、これらの数値に基づいてKafkaトピックを自動的に作成します。
+9. **Topic Configuration**領域で、以下の数値を設定してください。changefeedは、これらの数値に基づいてKafkaトピックを自動的に作成します。
 
-    -   **Replication Factor**：各KafkaメッセージがレプリケートされるKafkaサーバーの数を制御します。有効な値の範囲は、 [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas)からKafkaブローカーの数までです。
-    -   **Partition Number**：トピックに存在するパーティションの数を制御します。有効な値の範囲は`[1, 10 * the number of Kafka brokers]`です。
+    - **Replication Factor**：各KafkaメッセージがレプリケートされるKafkaサーバーの数を制御します。有効な値の範囲は、 [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas)からKafkaブローカーの数までです。
+    - **Partition Number**：トピックに存在するパーティションの数を制御します。有効な値の範囲は`[1, 10 * the number of Kafka brokers]`です。
 
 10. **Split Event**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクにおける、主キーまたは一意キーを分割したUPDATEイベント](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
 
@@ -215,6 +215,6 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 
 ## ステップ4．変更フィードを確認して作成する {#step-4-review-and-create-your-changefeed}
 
-1.  **Changefeed Name**欄に、変更フィードの名前を指定します。
-2.  設定した変更フィードの設定をすべて確認してください。必要に応じて**Previous**をクリックして変更してください。
-3.  すべての設定が正しければ、 **Submit**をクリックして変更フィードを作成します。
+1. **Changefeed Name**欄に、変更フィードの名前を指定します。
+2. 設定した変更フィードの設定をすべて確認してください。必要に応じて**Previous**をクリックして変更してください。
+3. すべての設定が正しければ、 **Submit**をクリックして変更フィードを作成します。

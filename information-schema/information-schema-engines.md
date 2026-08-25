@@ -41,13 +41,13 @@ SELECT * FROM engines;
 
 `ENGINES`表の列の説明は次のとおりです。
 
--   `ENGINES` :ストレージエンジンの名前。
--   `SUPPORT` :サーバーがストレージエンジンに対して持つサポートレベル。TiDBでは、この値は常に`DEFAULT`です。
--   `COMMENT` :ストレージエンジンに関する簡単なコメント。
--   `TRANSACTIONS` :ストレージエンジンがトランザクションをサポートするかどうか。
--   `XA` :ストレージエンジンが XA トランザクションをサポートするかどうか。
--   `SAVEPOINTS` :ストレージエンジンが`savepoints`サポートするかどうか。
+- `ENGINES` :ストレージエンジンの名前。
+- `SUPPORT` :サーバーがストレージエンジンに対して持つサポートレベル。TiDBでは、この値は常に`DEFAULT`です。
+- `COMMENT` :ストレージエンジンに関する簡単なコメント。
+- `TRANSACTIONS` :ストレージエンジンがトランザクションをサポートするかどうか。
+- `XA` :ストレージエンジンが XA トランザクションをサポートするかどうか。
+- `SAVEPOINTS` :ストレージエンジンが`savepoints`サポートするかどうか。
 
 ## 参照 {#see-also}
 
--   [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)
+- [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)

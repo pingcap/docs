@@ -33,20 +33,20 @@ ADMIN RESUME DDL JOBS job_id [, job_id] ...;
 
 > **Note:**
 >
-> -   クラスタのアップグレード中は、実行中のDDLジョブが一時停止され、アップグレード中に開始されたDDLジョブも一時停止されます。アップグレード後、一時停止されていたすべてのDDLジョブは再開されます。アップグレード中の一時停止と再開の操作は自動的に実行されます。詳細は[TiDB スムーズアップグレード](/smooth-upgrade-tidb.md)ご覧ください。
-> -   このステートメントは複数のDDLジョブを再開できます。[`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)ステートメントを使用して、DDLジョブの`job_id`を取得できます。
-> -   その他のステータス ( `paused`以外) の DDL ジョブは再開できず、再開操作は失敗します。
-> -   ジョブを複数回再開しようとすると、TiDB はエラー`Error Number: 8261`報告します。
+> - クラスタのアップグレード中は、実行中のDDLジョブが一時停止され、アップグレード中に開始されたDDLジョブも一時停止されます。アップグレード後、一時停止されていたすべてのDDLジョブは再開されます。アップグレード中の一時停止と再開の操作は自動的に実行されます。詳細は[TiDB スムーズアップグレード](/smooth-upgrade-tidb.md)ご覧ください。
+> - このステートメントは複数のDDLジョブを再開できます。[`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)ステートメントを使用して、DDLジョブの`job_id`を取得できます。
+> - その他のステータス ( `paused`以外) の DDL ジョブは再開できず、再開操作は失敗します。
+> - ジョブを複数回再開しようとすると、TiDB はエラー`Error Number: 8261`報告します。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
 >
-> -   クラスタのアップグレード中は、実行中のDDLジョブが一時停止され、アップグレード中に開始されたDDLジョブも一時停止されます。アップグレード後、一時停止されていたすべてのDDLジョブは再開されます。アップグレード中の一時停止と再開の操作は自動的に実行されます。詳細は[TiDB スムーズアップグレード](https://docs.pingcap.com/tidb/stable/smooth-upgrade-tidb)ご覧ください。
-> -   このステートメントは複数のDDLジョブを再開できます。[`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)ステートメントを使用して、DDLジョブの`job_id`を取得できます。
-> -   その他のステータス ( `paused`以外) の DDL ジョブは再開できず、再開操作は失敗します。
-> -   ジョブを複数回再開しようとすると、TiDB はエラー`Error Number: 8261`報告します。
+> - クラスタのアップグレード中は、実行中のDDLジョブが一時停止され、アップグレード中に開始されたDDLジョブも一時停止されます。アップグレード後、一時停止されていたすべてのDDLジョブは再開されます。アップグレード中の一時停止と再開の操作は自動的に実行されます。詳細は[TiDB スムーズアップグレード](https://docs.pingcap.com/tidb/stable/smooth-upgrade-tidb)ご覧ください。
+> - このステートメントは複数のDDLジョブを再開できます。[`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)ステートメントを使用して、DDLジョブの`job_id`を取得できます。
+> - その他のステータス ( `paused`以外) の DDL ジョブは再開できず、再開操作は失敗します。
+> - ジョブを複数回再開しようとすると、TiDB はエラー`Error Number: 8261`報告します。
 
 </CustomContent>
 
@@ -56,7 +56,7 @@ ADMIN RESUME DDL JOBS job_id [, job_id] ...;
 
 ## 参照 {#see-also}
 
--   [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
--   [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
--   [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)
--   [`ADMIN ALTER DDL`](/sql-statements/sql-statement-admin-alter-ddl.md)
+- [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
+- [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
+- [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)
+- [`ADMIN ALTER DDL`](/sql-statements/sql-statement-admin-alter-ddl.md)

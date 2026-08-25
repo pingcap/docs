@@ -27,39 +27,39 @@ DESC data_lock_waits;
 
 `DATA_LOCK_WAITS`テーブル内の各列フィールドの意味は次のとおりです。
 
--   `KEY` : ロックを待機しているキー（16 進形式）。
--   `KEY_INFO` : `KEY`の詳細情報。[キー情報](#key_info)セクションを参照してください。
--   `TRX_ID` : ロックを待機しているトランザクションのID。このIDはトランザクションの`start_ts`でもあります。
--   `CURRENT_HOLDING_TRX_ID` : 現在ロックを保持しているトランザクションのID。このIDはトランザクションの`start_ts`でもあります。
--   `SQL_DIGEST` : ロック待機中のトランザクションで現在ブロックされている SQL ステートメントのダイジェスト。
--   `SQL_DIGEST_TEXT` : ロック待機中のトランザクションで現在ブロックされている正規化されたSQL文（引数とフォーマットのないSQL文）。これは`SQL_DIGEST`に相当します。
+- `KEY` : ロックを待機しているキー（16 進形式）。
+- `KEY_INFO` : `KEY`の詳細情報。[キー情報](#key_info)セクションを参照してください。
+- `TRX_ID` : ロックを待機しているトランザクションのID。このIDはトランザクションの`start_ts`でもあります。
+- `CURRENT_HOLDING_TRX_ID` : 現在ロックを保持しているトランザクションのID。このIDはトランザクションの`start_ts`でもあります。
+- `SQL_DIGEST` : ロック待機中のトランザクションで現在ブロックされている SQL ステートメントのダイジェスト。
+- `SQL_DIGEST_TEXT` : ロック待機中のトランザクションで現在ブロックされている正規化されたSQL文（引数とフォーマットのないSQL文）。これは`SQL_DIGEST`に相当します。
 
 > **Warning:**
 >
-> -   [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみがこのテーブルをクエリできます。
-> -   現在、楽観的トランザクションの場合、フィールド`SQL_DIGEST`とフィールド`SQL_DIGEST_TEXT`は`null` （使用不可）になっています。回避策として、ブロックの原因となっているSQL文を特定するには、このテーブルを[`CLUSTER_TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)と結合して、楽観的トランザクションのすべてのSQL文を取得できます。
-> -   `DATA_LOCK_WAITS`テーブルの情報は、クエリ実行中にすべての TiKV ノードからリアルタイムで取得されます。現在、クエリに`WHERE`条件が含まれている場合でも、情報収集はすべての TiKV ノードに対して実行されます。クラスターの規模が大きく、負荷が高い場合、このテーブルへのクエリはパフォーマンスジッターのリスクを引き起こす可能性があります。したがって、実際の状況に応じて使用してください。
-> -   異なる TiKV ノードからの情報が、同じ時刻のスナップショットであるとは限りません。
-> -   `SQL_DIGEST`列の情報（SQLダイジェスト）は、正規化されたSQL文から計算されたハッシュ値です。`SQL_DIGEST_TEXT`列の情報は、内部的にステートメントサマリーテーブルから照会されるため、対応するステートメントが内部的に見つからない可能性があります。SQLダイジェストとステートメントサマリーテーブルの詳細については、 [ステートメントサマリーテーブル](/statement-summary-tables.md)を参照してください。
+> - [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみがこのテーブルをクエリできます。
+> - 現在、楽観的トランザクションの場合、フィールド`SQL_DIGEST`とフィールド`SQL_DIGEST_TEXT`は`null` （使用不可）になっています。回避策として、ブロックの原因となっているSQL文を特定するには、このテーブルを[`CLUSTER_TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)と結合して、楽観的トランザクションのすべてのSQL文を取得できます。
+> - `DATA_LOCK_WAITS`テーブルの情報は、クエリ実行中にすべての TiKV ノードからリアルタイムで取得されます。現在、クエリに`WHERE`条件が含まれている場合でも、情報収集はすべての TiKV ノードに対して実行されます。クラスターの規模が大きく、負荷が高い場合、このテーブルへのクエリはパフォーマンスジッターのリスクを引き起こす可能性があります。したがって、実際の状況に応じて使用してください。
+> - 異なる TiKV ノードからの情報が、同じ時刻のスナップショットであるとは限りません。
+> - `SQL_DIGEST`列の情報（SQLダイジェスト）は、正規化されたSQL文から計算されたハッシュ値です。`SQL_DIGEST_TEXT`列の情報は、内部的にステートメントサマリーテーブルから照会されるため、対応するステートメントが内部的に見つからない可能性があります。SQLダイジェストとステートメントサマリーテーブルの詳細については、 [ステートメントサマリーテーブル](/statement-summary-tables.md)を参照してください。
 
 ## `KEY_INFO` {#key_info}
 
 `KEY_INFO`列は`KEY`列の詳細情報です。情報はJSON形式で表示されます。各フィールドの説明は以下の通りです。
 
--   `"db_id"` : キーが属するスキーマの ID。
--   `"db_name"` : キーが属するスキーマの名前。
--   `"table_id"` : キーが属するテーブルの ID。
--   `"table_name"` : キーが属するテーブルの名前。
--   `"partition_id"` : キーが配置されているパーティションの ID。
--   `"partition_name"` : キーが配置されているパーティションの名前。
--   `"handle_type"` : 行キー（つまり、データ行を格納するキー）のハンドルタイプ。可能な値は次のとおりです。
-    -   `"int"` : ハンドル タイプは int です。つまり、ハンドルは行 ID です。
-    -   `"common"` : ハンドルの型が int64 ではありません。クラスター化インデックスが有効な場合、この型は非 int 型の主キーに表示されます。
-    -   `"unknown"` : ハンドル タイプは現在サポートされていません。
--   `"handle_value"` : ハンドル値。
--   `"index_id"` : インデックスキー（インデックスを格納するキー）が属するインデックス ID。
--   `"index_name"` : インデックスキーが属するインデックスの名前。
--   `"index_values"` : インデックスキー内のインデックス値。
+- `"db_id"` : キーが属するスキーマの ID。
+- `"db_name"` : キーが属するスキーマの名前。
+- `"table_id"` : キーが属するテーブルの ID。
+- `"table_name"` : キーが属するテーブルの名前。
+- `"partition_id"` : キーが配置されているパーティションの ID。
+- `"partition_name"` : キーが配置されているパーティションの名前。
+- `"handle_type"` : 行キー（つまり、データ行を格納するキー）のハンドルタイプ。可能な値は次のとおりです。
+    - `"int"` : ハンドル タイプは int です。つまり、ハンドルは行 ID です。
+    - `"common"` : ハンドルの型が int64 ではありません。クラスター化インデックスが有効な場合、この型は非 int 型の主キーに表示されます。
+    - `"unknown"` : ハンドル タイプは現在サポートされていません。
+- `"handle_value"` : ハンドル値。
+- `"index_id"` : インデックスキー（インデックスを格納するキー）が属するインデックス ID。
+- `"index_name"` : インデックスキーが属するインデックスの名前。
+- `"index_values"` : インデックスキー内のインデックス値。
 
 上記のフィールドのうち、該当しない、または現在利用できない場合、そのフィールドはクエリ結果から省略されます。例えば、行キー情報には`index_id` 、 `index_name` 、 `index_values`は含まれません。インデックスキーには`handle_type`と`handle_value`は含まれません。非パーティションテーブルでは`partition_id`と`partition_name`は表示されません。削除されたテーブルのキー情報では`table_name` 、 `db_id` 、 `db_name` 、 `index_name`などのスキーマ情報を取得できず、テーブルがパーティションテーブルであるかどうかを区別できません。
 
@@ -90,12 +90,12 @@ CURRENT_HOLDING_TRX_ID: 426790590082449409
 
 <CustomContent platform="tidb">
 
--   [ロックの競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)
+- [ロックの競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   [トランザクションエラーの処理](/develop/dev-guide-transaction-troubleshoot.md)
+- [トランザクションエラーの処理](/develop/dev-guide-transaction-troubleshoot.md)
 
 </CustomContent>

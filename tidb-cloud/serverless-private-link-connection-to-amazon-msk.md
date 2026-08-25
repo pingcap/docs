@@ -9,31 +9,31 @@ summary: Amazon MSK プロビジョニングされたプライベートリンク
 
 ## TiDB Cloud Essentialの前提条件 {#prerequisites-for-essential} {#prerequisites-for-essential}
 
--   TiDB Cloud Essentialクラスターは AWS でホストされており、アクティブです。後で使用するために、以下の情報を取得して保存してください。
+- TiDB Cloud Essentialクラスターは AWS でホストされており、アクティブです。後で使用するために、以下の情報を取得して保存してください。
 
-    -   AWSアカウントID
-    -   可用性ゾーン（AZ）
+    - AWSアカウントID
+    - 可用性ゾーン（AZ）
 
 AWS アカウント ID とアベイラビリティーゾーンを表示するには:
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
-2.  **[外部サービス向け AWS プライベートエンドポイント]**領域で、**[外部サービス向けプライベートエンドポイントを作成]**をクリックします。
-3.  ダイアログで、AWS アカウント ID とアベイラビリティーゾーンをメモします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
+2. **[外部サービス向け AWS プライベートエンドポイント]**領域で、**[外部サービス向けプライベートエンドポイントを作成]**をクリックします。
+3. ダイアログで、AWS アカウント ID とアベイラビリティーゾーンをメモします。
 
 ## Amazon MSK プロビジョニングクラスターの前提条件 {#prerequisites-for-the-amazon-msk-provisioned-cluster}
 
 始める前に、Amazon MSK プロビジョニングされたクラスターについて次の点を確認してください。
 
--   **リージョンと AZ** : Amazon MSK プロビジョニングされたクラスターは、 TiDB Cloud Essentialクラスターと同じ AWS リージョンにあり、MSK クラスターのアベイラビリティーゾーンはTiDB Cloudクラスターと同じです。
--   MSK クラスターには**Authentication**: [SASL/SCRAM認証](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html)が必要です。
--   **Broker type**: ブローカー`t4.small`タイプは使用しないでください。プライベートリンクをサポートしていません。
+- **リージョンと AZ** : Amazon MSK プロビジョニングされたクラスターは、 TiDB Cloud Essentialクラスターと同じ AWS リージョンにあり、MSK クラスターのアベイラビリティーゾーンはTiDB Cloudクラスターと同じです。
+- MSK クラスターには**Authentication**: [SASL/SCRAM認証](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html)が必要です。
+- **Broker type**: ブローカー`t4.small`タイプは使用しないでください。プライベートリンクをサポートしていません。
 
 詳細な要件については、 [単一リージョンでの Amazon MSK マルチ VPC プライベート接続](https://docs.aws.amazon.com/msk/latest/developerguide/aws-access-mult-vpc.html#mvpc-requirements)を参照してください。
 
 Amazon MSK プロビジョニングされたクラスターがない場合は、 TiDB Cloud Essentialクラスターと同じリージョンおよび同じアベイラビリティーゾーンに[1つ作成する](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html) 、作成されたクラスターに[SASL/SCRAM認証を設定する](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html) 。
 
--   **Secret name**: シークレット名は`AmazonMSK_`で始まる必要があります。
--   **暗号化**：デフォルトの暗号化キーは使用しないでください。シークレット用に新しいカスタムAWS KMSキーを作成してください。
+- **Secret name**: シークレット名は`AmazonMSK_`で始まる必要があります。
+- **暗号化**：デフォルトの暗号化キーは使用しないでください。シークレット用に新しいカスタムAWS KMSキーを作成してください。
 
 ## ステップ1. TiDB Cloudアクセス用にKafka ACLを設定する {#step-1-set-up-kafka-acls-for-tidb-cloud-access}
 
@@ -44,9 +44,9 @@ TiDB Cloud がAmazon MSK プロビジョニングクラスターにアクセス�
 
 この方法を使用して、SASL/SCRAM 認証を使用して MSK クラスターと同じ VPC に ACL を作成します。
 
-1.  MSK クラスターが配置されている VPC に EC2 インスタンス (Linux) を作成し、SSH で接続します。
+1. MSK クラスターが配置されている VPC に EC2 インスタンス (Linux) を作成し、SSH で接続します。
 
-2.  Kafka と OpenJDK をダウンロードします。
+2. Kafka と OpenJDK をダウンロードします。
 
     ```shell
     wget https://archive.apache.org/dist/kafka/3.7.1/kafka_2.13-3.7.1.tgz
@@ -55,13 +55,13 @@ TiDB Cloud がAmazon MSK プロビジョニングクラスターにアクセス�
     tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz
     ```
 
-3.  環境を設定します。パスを実際のパスに置き換えてください。
+3. 環境を設定します。パスを実際のパスに置き換えてください。
 
     ```shell
     export PATH=$PATH:/home/ec2-user/jdk-22.0.2/bin
     ```
 
-4.  以下の内容を含む`scram-client.properties`という名前のファイルを作成します。`username`と`pswd`をSASL/SCRAMの認証情報に置き換えてください。
+4. 以下の内容を含む`scram-client.properties`という名前のファイルを作成します。`username`と`pswd`をSASL/SCRAMの認証情報に置き換えてください。
 
     ```properties
     security.protocol=SASL_SSL
@@ -71,7 +71,7 @@ TiDB Cloud がAmazon MSK プロビジョニングクラスターにアクセス�
         password="pswd";
     ```
 
-5.  ACLを作成します。`bootstrap-server`を MSKブートストラップサーバーのアドレスとポート（例： `b-2.xxxxx.c18.kafka.us-east-1.amazonaws.com:9096` ）に置き換え、必要に応じてKafkaへのパスを置き換えます。
+5. ACLを作成します。`bootstrap-server`を MSKブートストラップサーバーのアドレスとポート（例： `b-2.xxxxx.c18.kafka.us-east-1.amazonaws.com:9096` ）に置き換え、必要に応じてKafkaへのパスを置き換えます。
 
     ```shell
     /home/ec2-user/kafka_2.13-3.7.1/bin/kafka-acls.sh --bootstrap-server <bootstrap-server> --command-config scram-client.properties --add --allow-principal User:<username> --operation All --topic '*'
@@ -87,9 +87,9 @@ TiDB Cloud がAmazon MSK プロビジョニングクラスターにアクセス�
 
 SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同じ VPC 内に ACL を作成できますIAMユーザーまたはロールには、MSK 権限用の**Amazon MSK**および**Apache Kafka API が**必要です。
 
-1.  MSK クラスターが配置されている VPC に EC2 インスタンス (Linux) を作成し、SSH で接続します。
+1. MSK クラスターが配置されている VPC に EC2 インスタンス (Linux) を作成し、SSH で接続します。
 
-2.  Kafka、OpenJDK、AWS MSK IAM認証 JAR をダウンロードします。
+2. Kafka、OpenJDK、AWS MSK IAM認証 JAR をダウンロードします。
 
     ```shell
     wget https://archive.apache.org/dist/kafka/3.7.1/kafka_2.13-3.7.1.tgz
@@ -99,7 +99,7 @@ SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同
     wget https://github.com/aws/aws-msk-iam-auth/releases/download/v2.3.5/aws-msk-iam-auth-2.3.5-all.jar
     ```
 
-3.  環境を設定します。パスと資格情報を独自の値に置き換えてください。
+3. 環境を設定します。パスと資格情報を独自の値に置き換えてください。
 
     ```shell
     export PATH=$PATH:/home/ec2-user/jdk-22.0.2/bin
@@ -108,7 +108,7 @@ SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同
     export AWS_SECRET_ACCESS_KEY=<your-secret-access-key>
     ```
 
-4.  次の内容を含む`iam-client.properties`という名前のファイルを作成します。
+4. 次の内容を含む`iam-client.properties`という名前のファイルを作成します。
 
     ```properties
     security.protocol=SASL_SSL
@@ -117,7 +117,7 @@ SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同
     sasl.client.callback.handler.class=software.amazon.msk.auth.iam.IAMClientCallbackHandler
     ```
 
-5.  ACLを作成します。`bootstrap-server`を MSKブートストラップサーバーのアドレスとポート（例： `b-1.xxxxx.c18.kafka.us-east-1.amazonaws.com:9098` ）に置き換え、必要に応じてKafkaへのパスを置き換えます。
+5. ACLを作成します。`bootstrap-server`を MSKブートストラップサーバーのアドレスとポート（例： `b-1.xxxxx.c18.kafka.us-east-1.amazonaws.com:9098` ）に置き換え、必要に応じてKafkaへのパスを置き換えます。
 
     ```shell
     /home/ec2-user/kafka_2.13-3.7.1/bin/kafka-acls.sh --bootstrap-server <bootstrap-server> --command-config iam-client.properties --add --allow-principal User:<username> --operation All --topic '*'
@@ -134,9 +134,9 @@ SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同
 
 次のクラスター構成プロパティを更新します。
 
--   セット`auto.create.topics.enable=true` 。
--   `allow.everyone.if.no.acl.found=false`追加します (SASL/SCRAM に必要)。
--   その他のプロパティは変更せず、必要に応じて調整します。
+- セット`auto.create.topics.enable=true` 。
+- `allow.everyone.if.no.acl.found=false`追加します (SASL/SCRAM に必要)。
+- その他のプロパティは変更せず、必要に応じて調整します。
 
 変更を適用し、クラスターのステータスが**Updating**から**Active**に変わるまで待ちます。
 

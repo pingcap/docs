@@ -15,7 +15,7 @@ summary: TiUP Playground を使用してデータ移行環境をすばやくセ�
 
 [TiUP](/tiup/tiup-overview.md)はクラスタ運用・保守ツールです。Playground機能を使用すると、開発・テスト用にTiDBデータベースとTiDB DMを備えた一時的なローカル環境を迅速に起動できます。
 
-1.  TiUPをインストールします:
+1. TiUPをインストールします:
 
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
@@ -35,13 +35,13 @@ summary: TiUP Playground を使用してデータ移行環境をすばやくセ�
     > tiup update --self
     > ```
 
-2.  ターゲット TiDB データベースと DM コンポーネントを使用してTiUP Playground を起動します。
+2. ターゲット TiDB データベースと DM コンポーネントを使用してTiUP Playground を起動します。
 
     ```shell
     tiup playground v8.5.3 --dm-master 1 --dm-worker 1 --tiflash 0 --without-monitor
     ```
 
-3.  出力で TiDB と DM が実行されているかどうかを確認して環境を確認します。
+3. 出力で TiDB と DM が実行されているかどうかを確認して環境を確認します。
 
     ```text
     TiDB Playground Cluster is started, enjoy!
@@ -51,7 +51,7 @@ summary: TiUP Playground を使用してデータ移行環境をすばやくセ�
     TiDB Dashboard:  http://127.0.0.1:2379/dashboard
     ```
 
-4.  現在のターミナルで`tiup playground`を実行したままにして、次の手順のために新しいターミナルを開きます。
+4. 現在のターミナルで`tiup playground`を実行したままにして、次の手順のために新しいターミナルを開きます。
 
     このPlayground環境は、ターゲットTiDBデータベースとレプリケーションエンジン（DMマスターとDMワーカー）の実行プロセスを提供します。MySQL（ソース）→ DM（レプリケーションエンジン）→ TiDB（ターゲット）というデータフローを処理します。
 
@@ -65,7 +65,7 @@ summary: TiUP Playground を使用してデータ移行環境をすばやくセ�
 
 Docker を使用すると、テスト用の MySQL 8.0 インスタンスをすばやくデプロイできます。
 
-1.  MySQL 8.0 Docker コンテナを実行します。
+1. MySQL 8.0 Docker コンテナを実行します。
 
     ```shell
     docker run --name mysql80 \
@@ -74,13 +74,13 @@ Docker を使用すると、テスト用の MySQL 8.0 インスタンスをす�
         -d mysql:8.0
     ```
 
-2.  MySQLに接続します。
+2. MySQLに接続します。
 
     ```shell
     docker exec -it mysql80 mysql -uroot -pMyPassw0rd!
     ```
 
-3.  DM テストに必要な権限を持つ専用ユーザーを作成します。
+3. DM テストに必要な権限を持つ専用ユーザーを作成します。
 
     ```sql
     CREATE USER 'tidb-dm'@'%'
@@ -94,7 +94,7 @@ Docker を使用すると、テスト用の MySQL 8.0 インスタンスをす�
     >
     > MySQL ソースがマネージド MySQL サービス（Amazon RDS、Aurora、ApsaraDB RDS for MySQL、Azure Database for MySQL、Google Cloud SQL など）の場合は、 `LOCK TABLES`権限も付与してください。詳細については、 [DM-worker privileges](/dm/dm-worker-intro.md#upstream-database-user-privileges)を参照してください。
 
-4.  サンプルデータを作成します。
+4. サンプルデータを作成します。
 
     ```sql
     CREATE DATABASE hello;
@@ -116,32 +116,32 @@ Docker を使用すると、テスト用の MySQL 8.0 インスタンスをす�
 
 macOS では、 [Homebrew](https://brew.sh)を使用して MySQL 8.0 をローカルにすばやくインストールして起動できます。
 
-1.  Homebrewを更新し、MySQL 8.0 をインストールします。
+1. Homebrewを更新し、MySQL 8.0 をインストールします。
 
     ```shell
     brew update
     brew install mysql@8.0
     ```
 
-2.  MySQL コマンドをシステム パスでアクセスできるようにします。
+2. MySQL コマンドをシステム パスでアクセスできるようにします。
 
     ```shell
     brew link mysql@8.0 --force
     ```
 
-3.  MySQL サービスを開始します。
+3. MySQL サービスを開始します。
 
     ```shell
     brew services start mysql@8.0
     ```
 
-4.  `root`ユーザーとして MySQL に接続します。
+4. `root`ユーザーとして MySQL に接続します。
 
     ```shell
     mysql -uroot
     ```
 
-5.  DM テストに必要な権限を持つ専用ユーザーを作成します。
+5. DM テストに必要な権限を持つ専用ユーザーを作成します。
 
     ```sql
     CREATE USER 'tidb-dm'@'%'
@@ -155,7 +155,7 @@ macOS では、 [Homebrew](https://brew.sh)を使用して MySQL 8.0 をロー�
     >
     > MySQL ソースがマネージド MySQL サービス（Amazon RDS、Aurora、ApsaraDB RDS for MySQL、Azure Database for MySQL、Google Cloud SQL など）の場合は、 `LOCK TABLES`権限も付与してください。詳細については、 [DM-worker privileges](/dm/dm-worker-intro.md#upstream-database-user-privileges)を参照してください。
 
-6.  サンプルデータを作成します。
+6. サンプルデータを作成します。
 
     ```sql
     CREATE DATABASE hello;
@@ -177,44 +177,44 @@ macOS では、 [Homebrew](https://brew.sh)を使用して MySQL 8.0 をロー�
 
 CentOS などのEnterprise Linux ディストリビューションでは、MySQL Yum リポジトリから MySQL 8.0 をインストールできます。
 
-1.  [MySQL Yumリポジトリのダウンロードページ](https://dev.mysql.com/downloads/repo/yum)から MySQL Yum リポジトリ パッケージをダウンロードしてインストールします。Linux バージョン 9 以外の場合は、次の URL の`el9` (Enterprise Linux バージョン 9) を置き換え、MySQL バージョン 8.0 の場合は`mysql80`そのままにする必要があります。
+1. [MySQL Yumリポジトリのダウンロードページ](https://dev.mysql.com/downloads/repo/yum)から MySQL Yum リポジトリ パッケージをダウンロードしてインストールします。Linux バージョン 9 以外の場合は、次の URL の`el9` (Enterprise Linux バージョン 9) を置き換え、MySQL バージョン 8.0 の場合は`mysql80`そのままにする必要があります。
 
     ```shell
     sudo yum install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
     ```
 
-2.  MySQLをインストールします。
+2. MySQLをインストールします。
 
     ```shell
     sudo yum install -y mysql-community-server --nogpgcheck
     ```
 
-3.  MySQLを起動します。
+3. MySQLを起動します。
 
     ```shell
     sudo systemctl start mysqld
     ```
 
-4.  MySQL ログで一時的な root パスワードを見つけます。
+4. MySQL ログで一時的な root パスワードを見つけます。
 
     ```shell
     sudo grep 'temporary password' /var/log/mysqld.log
     ```
 
-5.  一時パスワードを使用して`root`ユーザーとして MySQL に接続します。
+5. 一時パスワードを使用して`root`ユーザーとして MySQL に接続します。
 
     ```shell
     mysql -uroot -p
     ```
 
-6.  `root`パスワードをリセットします:
+6. `root`パスワードをリセットします:
 
     ```sql
     ALTER USER 'root'@'localhost'
         IDENTIFIED BY 'MyPassw0rd!';
     ```
 
-7.  DM テストに必要な権限を持つ専用ユーザーを作成します。
+7. DM テストに必要な権限を持つ専用ユーザーを作成します。
 
     ```sql
     CREATE USER 'tidb-dm'@'%'
@@ -224,7 +224,7 @@ CentOS などのEnterprise Linux ディストリビューションでは、MySQL
     GRANT PROCESS, BACKUP_ADMIN, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, SELECT ON *.* TO 'tidb-dm'@'%';
     ```
 
-8.  サンプルデータを作成します。
+8. サンプルデータを作成します。
 
     ```sql
     CREATE DATABASE hello;
@@ -246,32 +246,32 @@ CentOS などのEnterprise Linux ディストリビューションでは、MySQL
 
 Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストールできます。
 
-1.  パッケージリストを更新します:
+1. パッケージリストを更新します:
 
     ```shell
     sudo apt-get update
     ```
 
-2.  MySQLをインストールします。
+2. MySQLをインストールします。
 
     ```shell
     sudo apt-get install -y mysql-server
     ```
 
-3.  `mysql`サービスが実行されているかどうかを確認し、必要に応じてサービスを開始します。
+3. `mysql`サービスが実行されているかどうかを確認し、必要に応じてサービスを開始します。
 
     ```shell
     sudo systemctl status mysql
     sudo systemctl start mysql
     ```
 
-4.  ソケット認証を使用して`root`ユーザーとして MySQL に接続します。
+4. ソケット認証を使用して`root`ユーザーとして MySQL に接続します。
 
     ```shell
     sudo mysql
     ```
 
-5.  DM テストに必要な権限を持つ専用ユーザーを作成します。
+5. DM テストに必要な権限を持つ専用ユーザーを作成します。
 
     ```sql
     CREATE USER 'tidb-dm'@'%'
@@ -281,7 +281,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
     GRANT PROCESS, BACKUP_ADMIN, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, SELECT ON *.* TO 'tidb-dm'@'%';
     ```
 
-6.  サンプルデータを作成します。
+6. サンプルデータを作成します。
 
     ```sql
     CREATE DATABASE hello;
@@ -305,7 +305,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
 
 ソースMySQLデータベースを準備したら、TiDB DMをそのデータベースに接続するための設定を行います。そのためには、接続の詳細を含むソース設定ファイルを作成し、 `dmctl`ツールを使用して設定を適用します。
 
-1.  ソース構成ファイル`mysql-01.yaml`を作成します。
+1. ソース構成ファイル`mysql-01.yaml`を作成します。
 
     > **Note:**
     >
@@ -320,7 +320,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
       port: 3306
     ```
 
-2.  DM データソースを作成します。
+2. DM データソースを作成します。
 
     ```shell
     tiup dmctl --master-addr 127.0.0.1:8261 operate-source create mysql-01.yaml
@@ -330,7 +330,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
 
 ソースデータベースを設定したら、TiDB DM で移行タスクを作成できます。このタスクは、ソース MySQL インスタンスを参照し、ターゲット TiDB データベースへの接続詳細を定義します。
 
-1.  DMタスク構成ファイル`tiup-playground-task.yaml`を作成します。
+1. DMタスク構成ファイル`tiup-playground-task.yaml`を作成します。
 
     ```yaml
     # Task
@@ -349,7 +349,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
       password: ""                # If the password is not empty, it is recommended to use a password encrypted with dmctl.
     ```
 
-2.  構成ファイルを使用してタスクを開始します。
+2. 構成ファイルを使用してタスクを開始します。
 
     ```shell
     tiup dmctl --master-addr 127.0.0.1:8261 start-task tiup-playground-task.yaml
@@ -359,19 +359,19 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
 
 移行タスクを開始したら、データレプリケーションが期待どおりに動作しているかどうかを確認します。`dmctl`を使用してタスクのステータスを確認し、ターゲット TiDB データベースに接続して、ソース MySQL データベースからデータが正常に複製されていることを確認します。
 
-1.  TiDB DM タスクのステータスを確認します。
+1. TiDB DM タスクのステータスを確認します。
 
     ```shell
     tiup dmctl --master-addr 127.0.0.1:8261 query-status
     ```
 
-2.  ターゲット TiDB データベースに接続します。
+2. ターゲット TiDB データベースに接続します。
 
     ```shell
     mysql --host 127.0.0.1 --port 4000 -u root --prompt 'tidb> '
     ```
 
-3.  複製されたデータを確認します。[ステップ2](#step-2-prepare-a-source-database-optional)でサンプルデータを作成した場合、MySQLソースデータベースからターゲットTiDBデータベースに複製されたテーブル`hello_tidb`が表示されます。
+3. 複製されたデータを確認します。[ステップ2](#step-2-prepare-a-source-database-optional)でサンプルデータを作成した場合、MySQLソースデータベースからターゲットTiDBデータベースに複製されたテーブル`hello_tidb`が表示されます。
 
     ```sql
     SELECT * FROM hello.hello_tidb;
@@ -392,11 +392,11 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
 
 テストが完了したら、 TiUP Playground を停止し、ソース MySQL インスタンス (テスト用に作成された場合) を削除し、不要なファイルを削除することで、環境をクリーンアップできます。
 
-1.  TiUP Playgroundを停止します。
+1. TiUP Playgroundを停止します。
 
     TiUP Playground が実行中のターミナルで、 <kbd>Control</kbd> + <kbd>C</kbd>を押してプロセスを終了します。これにより、すべての TiDB および DM コンポーネントが停止し、ターゲット環境が削除されます。
 
-2.  ソース MySQL インスタンスを停止して削除します。
+2. ソース MySQL インスタンスを停止して削除します。
 
     [ステップ2](#step-2-prepare-a-source-database-optional)でテスト用のソース MySQL インスタンスを作成した場合は、次の手順に従ってそれを停止し、削除します。
 
@@ -461,13 +461,13 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
 
     </SimpleTab>
 
-3.  TiDB DM 構成ファイルが不要になった場合は削除します。
+3. TiDB DM 構成ファイルが不要になった場合は削除します。
 
     ```shell
     rm mysql-01.yaml tiup-playground-task.yaml
     ```
 
-4.  TiUPが不要になった場合は、アンインストールできます。
+4. TiUPが不要になった場合は、アンインストールできます。
 
     ```shell
     rm -rf ~/.tiup
@@ -477,7 +477,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
 
 テスト環境でソース MySQL データベースからターゲット TiDB データベースにデータを移行するタスクを正常に作成したので、次の操作を実行できます。
 
--   探索[TiDB DM の機能](/dm/dm-overview.md)
--   [TiDB DMアーキテクチャ](/dm/dm-arch.md)について学ぶ
--   セットアップ[概念実証または本番環境用の TiDB DM](/dm/deploy-a-dm-cluster-using-tiup.md)
--   高度な設定[DMタスク](/dm/dm-task-configuration-guide.md)
+- 探索[TiDB DM の機能](/dm/dm-overview.md)
+- [TiDB DMアーキテクチャ](/dm/dm-arch.md)について学ぶ
+- セットアップ[概念実証または本番環境用の TiDB DM](/dm/deploy-a-dm-cluster-using-tiup.md)
+- 高度な設定[DMタスク](/dm/dm-task-configuration-guide.md)

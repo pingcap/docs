@@ -14,13 +14,13 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 
 ## バックアップページを確認する {#view-the-backup-page}
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックすると、その概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックすると、その概要ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  左側のナビゲーションペインで、 **Data** &gt; **Backup**をクリックします。
+2. 左側のナビゲーションペインで、 **Data** &gt; **Backup**をクリックします。
 
 ## 自動バックアップ {#automatic-backups}
 
@@ -36,29 +36,29 @@ TiDB Cloudはデータを自動的にバックアップするため、災害発�
 | Backup Retention   | 1日                      | 最大30日間                            | 最大30日間               |
 | Backup Time   | 固定時間                    | 設定可能                              | 設定可能                 |
 
--   **Backup Cycle**とは、バックアップが実行される頻度のことです。
+- **Backup Cycle**とは、バックアップが実行される頻度のことです。
 
--   **Backup Retention**とは、バックアップが保持される期間のことです。期限切れのバックアップは復元できません。
+- **Backup Retention**とは、バックアップが保持される期間のことです。期限切れのバックアップは復元できません。
 
-    -   無料のTiDB Cloud Starterインスタンスの場合、バックアップの保持期間は1日間です。
-    -   TiDB Cloud Starter （利用限度額が0より大きい場合）またはTiDB Cloud Essentialインスタンスの場合、バックアップの保持期間を1日から30日の間の任意の値に設定できます。デフォルトの保持期間は14日です。
+    - 無料のTiDB Cloud Starterインスタンスの場合、バックアップの保持期間は1日間です。
+    - TiDB Cloud Starter （利用限度額が0より大きい場合）またはTiDB Cloud Essentialインスタンスの場合、バックアップの保持期間を1日から30日の間の任意の値に設定できます。デフォルトの保持期間は14日です。
 
--   **Backup Time**とは、バックアップのスケジュールが開始される時刻です。最終的なバックアップ時刻は、設定されたバックアップ時刻よりも遅れる場合があることにご注意ください。
+- **Backup Time**とは、バックアップのスケジュールが開始される時刻です。最終的なバックアップ時刻は、設定されたバックアップ時刻よりも遅れる場合があることにご注意ください。
 
-    -   無料のTiDB Cloud Starterインスタンスの場合、バックアップ時間はランダムに固定された時間になります。
-    -   TiDB Cloud Starter （利用限度額が0より大きい場合）またはTiDB Cloud Essentialインスタンスの場合、バックアップ間隔を30分ごとに設定できます。デフォルト値はランダムに固定された時間です。
+    - 無料のTiDB Cloud Starterインスタンスの場合、バックアップ時間はランダムに固定された時間になります。
+    - TiDB Cloud Starter （利用限度額が0より大きい場合）またはTiDB Cloud Essentialインスタンスの場合、バックアップ間隔を30分ごとに設定できます。デフォルト値はランダムに固定された時間です。
 
 ### バックアップ設定を構成する {#configure-the-backup-setting}
 
 TiDB Cloud Essentialインスタンスのバックアップ時間を設定するには、以下の手順を実行します。
 
-1.  TiDB Cloud StarterまたはEssentialインスタンスの[**Backup**](#view-the-backup-page)ページに移動します。
+1. TiDB Cloud StarterまたはEssentialインスタンスの[**Backup**](#view-the-backup-page)ページに移動します。
 
-2.  **Backup Setting**をクリックしてください。すると**Backup Setting**ウィンドウが開きます。ここで、必要に応じて自動バックアップの設定を構成できます。
+2. **Backup Setting**をクリックしてください。すると**Backup Setting**ウィンドウが開きます。ここで、必要に応じて自動バックアップの設定を構成できます。
 
-3.  **Backup Time**で、毎日のバックアップの開始時刻を設定します。
+3. **Backup Time**で、毎日のバックアップの開始時刻を設定します。
 
-4.  **Confirm**をクリックしてください。
+4. **Confirm**をクリックしてください。
 
 ## 復元する {#restore}
 
@@ -68,12 +68,12 @@ TiDB Cloudは、偶発的なデータ損失や破損が発生した場合にデ�
 
 TiDB Cloudは、 TiDB Cloud StarterまたはEssentialインスタンスのスナップショット復元と特定時点への復元をサポートしています。
 
--   **Snapshot Restore**：特定のバックアップスナップショットからTiDB Cloud StarterまたはEssentialインスタンスを復元します。
+- **Snapshot Restore**：特定のバックアップスナップショットからTiDB Cloud StarterまたはEssentialインスタンスを復元します。
 
--   **Point-in-Time Restore（PREVIEW）** ： TiDB Cloud Essentialインスタンスを特定の時点の状態に復元します。
+- **Point-in-Time Restore（PREVIEW）** ： TiDB Cloud Essentialインスタンスを特定の時点の状態に復元します。
 
-    -   TiDB Cloud Starterインスタンス：サポートされていません。
-    -   TiDB Cloud Essentialインスタンス：バックアップ保持期間内の任意の時点に復元できますが、 TiDB Cloud Essentialインスタンスの作成時刻より前、または現在時刻の1分前より後には復元できません。
+    - TiDB Cloud Starterインスタンス：サポートされていません。
+    - TiDB Cloud Essentialインスタンス：バックアップ保持期間内の任意の時点に復元できますが、 TiDB Cloud Essentialインスタンスの作成時刻より前、または現在時刻の1分前より後には復元できません。
 
 ### 復元先 {#restore-destination}
 
@@ -93,39 +93,39 @@ TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンス�
 
 新しいTiDB Cloud StarterまたはEssentialインスタンスにデータを復元するには、以下の手順に従ってください。
 
-1.  TiDB Cloud StarterまたはEssentialインスタンスの[**Backup**](#view-the-backup-page)ページに移動します。
+1. TiDB Cloud StarterまたはEssentialインスタンスの[**Backup**](#view-the-backup-page)ページに移動します。
 
-2.  **Restore**をクリックしてください。
+2. **Restore**をクリックしてください。
 
-3.  **Restore Mode**では、特定のバックアップから復元するか、任意の時点から復元するかを選択できます。
+3. **Restore Mode**では、特定のバックアップから復元するか、任意の時点から復元するかを選択できます。
 
      <SimpleTab>
      <div label="Snapshot Restore">
 
     選択したバックアップスナップショットから復元するには、次の手順を実行します。
 
-    1.  **Snapshot Restore**をクリックします。
-    2.  復元元のバックアップスナップショットを選択してください。
+    1. **Snapshot Restore**をクリックします。
+    2. 復元元のバックアップスナップショットを選択してください。
 
     </div>
      <div label="Point-in-Time Restore">
 
     TiDB Cloud Essentialインスタンスを特定の時点に復元するには、以下の手順を実行してください。
 
-    1.  **Point-in-Time Restore**をクリックします。
-    2.  復元したい日時を選択してください。
+    1. **Point-in-Time Restore**をクリックします。
+    2. 復元したい日時を選択してください。
 
     </div>
      </SimpleTab>
 
-4.  新しいインスタンスの名前を入力してください。
+4. 新しいインスタンスの名前を入力してください。
 
-5.  必要に応じて容量を更新してください。
+5. 必要に応じて容量を更新してください。
 
-    -   TiDB Cloud Starterインスタンスの場合、 [無料割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)よりも多くのリソースが必要な場合は、毎月の支出制限を設定してください。
-    -   TiDB Cloud Essentialインスタンスの場合、最小RCUと最大RCUを設定し、必要に応じて詳細設定を構成してください。
+    - TiDB Cloud Starterインスタンスの場合、 [無料割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)よりも多くのリソースが必要な場合は、毎月の支出制限を設定してください。
+    - TiDB Cloud Essentialインスタンスの場合、最小RCUと最大RCUを設定し、必要に応じて詳細設定を構成してください。
 
-6.  **Restore**をクリックして復元プロセスを開始してください。
+6. **Restore**をクリックして復元プロセスを開始してください。
 
 復元処理が開始されると、 TiDB Cloud StarterまたはEssentialインスタンスのステータスが**Restoring**に変わります。復元が完了し、ステータスが**Available**に変わるまで、 TiDB Cloud StarterまたはEssentialインスタンスは利用できません。
 
@@ -137,26 +137,26 @@ TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンス�
 
 ごみ箱から削除されたTiDB Cloud Essentialインスタンスを復元するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、右上隅の**...**をクリックして、 **Recycle Bin**をクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、右上隅の**...**をクリックして、 **Recycle Bin**をクリックします。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  **Recycle Bin**ページで、 **Essential**タブをクリックすると、 TiDB Cloud Essentialインスタンスのごみ箱に移動します。
+2. **Recycle Bin**ページで、 **Essential**タブをクリックすると、 TiDB Cloud Essentialインスタンスのごみ箱に移動します。
 
-3.  復元したいTiDB Cloud Essentialインスタンスを見つけて、 **&gt;**ボタンをクリックして、そのインスタンスで使用可能なバックアップを展開します。
+3. 復元したいTiDB Cloud Essentialインスタンスを見つけて、 **&gt;**ボタンをクリックして、そのインスタンスで使用可能なバックアップを展開します。
 
     > **Note:**
     >
     > TiDB Cloud Essentialインスタンス**にバックアップがない**場合、削除されたインスタンスはごみ箱に表示されません。
 
-4.  復元したいバックアップの行で、 **...**をクリックし、次に**Restore**を選択します。
+4. 復元したいバックアップの行で、 **...**をクリックし、次に**Restore**を選択します。
 
-5.  **Restore**ページで、[新しいインスタンスに復元する](#restore-to-a-new-instance)と同じ手順に従って、バックアップを新しいインスタンスに復元します。
+5. **Restore**ページで、[新しいインスタンスに復元する](#restore-to-a-new-instance)と同じ手順に従って、バックアップを新しいインスタンスに復元します。
 
 ## 制限事項 {#limitations}
 
--   TiFlashレプリカが有効になっている場合、データの再構築がTiFlash内で行われるため、復元後一定期間は利用できなくなります。
--   TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスでは、手動バックアップはサポートされていません。
--   TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスで、1 TiBを超えるデータが含まれている場合、デフォルトでは新しいインスタンスへの復元はサポートされません。より大規模なデータセットに関するサポートが必要な場合は[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+- TiFlashレプリカが有効になっている場合、データの再構築がTiFlash内で行われるため、復元後一定期間は利用できなくなります。
+- TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスでは、手動バックアップはサポートされていません。
+- TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスで、1 TiBを超えるデータが含まれている場合、デフォルトでは新しいインスタンスへの復元はサポートされません。より大規模なデータセットに関するサポートが必要な場合は[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。

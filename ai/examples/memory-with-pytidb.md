@@ -9,10 +9,10 @@ summary: チャットボットや対話型AIアプリケーション向けに、
 
 ほんの数行のコードで、過去のやり取りを記憶し、時間の経過とともに文脈を構築していく対話型AIを作成できます。
 
--   **永続メモリ**：セッションをまたいでの会話やユーザー操作を記憶します
--   **対話型チャット**：Web UIまたはコマンドラインインターフェースのいずれかを使用します。
--   **マルチユーザーサポート**：ユーザーごとに個別のメモリコンテキストを保持します
--   **リアルタイムメモリ表示**：ウェブインターフェースに保存されているメモリを表示します
+- **永続メモリ**：セッションをまたいでの会話やユーザー操作を記憶します
+- **対話型チャット**：Web UIまたはコマンドラインインターフェースのいずれかを使用します。
+- **マルチユーザーサポート**：ユーザーごとに個別のメモリコンテキストを保持します
+- **リアルタイムメモリ表示**：ウェブインターフェースに保存されているメモリを表示します
 
 <p align="center"><img src="https://docs-download.pingcap.com/media/images/docs/ai/ai-agent-with-memory-powered-by-tidb.png" alt="TiDBを搭載したメモリ付きAIエージェント" width="700"/><p align="center"> <i>TiDBを搭載したメモリ付きAIエージェント</i></p></p>
 
@@ -20,9 +20,9 @@ summary: チャットボットや対話型AIアプリケーション向けに、
 
 始める前に、以下のものを用意してください。
 
--   **Python (&gt;=3.10)** : [Python](https://www.python.org/downloads/) 3.10以降のバージョンをインストールしてください。
--   **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
--   **OpenAI API キー**: [OpenAI](https://platform.openai.com/api-keys)から OpenAI API キーを取得します。
+- **Python (&gt;=3.10)** : [Python](https://www.python.org/downloads/) 3.10以降のバージョンをインストールしてください。
+- **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
+- **OpenAI API キー**: [OpenAI](https://platform.openai.com/api-keys)から OpenAI API キーを取得します。
 
 ## 実行方法 {#how-to-run}
 
@@ -45,9 +45,9 @@ pip install -r reqs.txt
 
 ### ステップ3．環境変数を設定する {#step-3-set-environment-variables}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
-2.  右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
-3.  接続パラメータに応じて環境変数を以下のように設定してください。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
+3. 接続パラメータに応じて環境変数を以下のように設定してください。
 
 ```bash
 cat > .env <<EOF
@@ -85,16 +85,16 @@ python main.py
 
 ウェブアプリケーションでは、AIアシスタントと対話できます。UIには以下のコンポーネントが含まれています。
 
--   **サイドバー**：ユーザー設定とチャットリスト。
--   **メインチャットエリア**：AIアシスタントとのチャットインターフェース。
--   **メモリビューア**：保存されている情報をリアルタイムで表示するメモリビューア。
+- **サイドバー**：ユーザー設定とチャットリスト。
+- **メインチャットエリア**：AIアシスタントとのチャットインターフェース。
+- **メモリビューア**：保存されている情報をリアルタイムで表示するメモリビューア。
 
 メモリの仕組みを理解するには、以下の手順に従ってください。
 
-1.  デフォルトのチャットセッションで自己紹介をしてください。例えば、「こんにちは、ジョンです。ソフトウェアエンジニアとして働いていて、ギターが大好きです。」など。
-2.  入力された情報はメモリビューアで確認できます。
-3.  新しいチャットセッションを開始するには、サイドバーの**New chat**をクリックしてください。
-4.  新しいチャットセッションで「私は誰ですか？」と質問してください。AIが過去の会話からあなたの情報を記憶します。
+1. デフォルトのチャットセッションで自己紹介をしてください。例えば、「こんにちは、ジョンです。ソフトウェアエンジニアとして働いていて、ギターが大好きです。」など。
+2. 入力された情報はメモリビューアで確認できます。
+3. 新しいチャットセッションを開始するには、サイドバーの**New chat**をクリックしてください。
+4. 新しいチャットセッションで「私は誰ですか？」と質問してください。AIが過去の会話からあなたの情報を記憶します。
 
 ## コマンドラインアプリケーションでメモリを操作する {#interact-with-memory-in-command-line-application}
 
@@ -132,4 +132,4 @@ Goodbye!
 
 ## 関連リソース {#related-resources}
 
--   **ソースコード**： [GitHubで見る](https://github.com/pingcap/pytidb/tree/main/examples/memory)
+- **ソースコード**： [GitHubで見る](https://github.com/pingcap/pytidb/tree/main/examples/memory)

@@ -11,31 +11,31 @@ summary: データ移行のテーブルルーティング、 binlogイベント�
 
 テーブルセレクターは`schema-pattern`で次の 2 つのワイルドカード文字`table-pattern`を使用します。
 
--   アスタリスク文字（ `*` 、「スター」とも呼ばれる）
+- アスタリスク文字（ `*` 、「スター」とも呼ばれる）
 
-    -   `*` 0文字以上の文字に一致します。例えば、 `doc*` `doc`と`document`に一致しますが、 `dodo`は一致しません。
-    -   `*`単語の末尾にのみ配置できます。例えば、 `doc*`サポートされていますが、 `do*c`サポートされていません。
+    - `*` 0文字以上の文字に一致します。例えば、 `doc*` `doc`と`document`に一致しますが、 `dodo`は一致しません。
+    - `*`単語の末尾にのみ配置できます。例えば、 `doc*`サポートされていますが、 `do*c`サポートされていません。
 
--   疑問符（ `?` ）
+- 疑問符（ `?` ）
 
     `?` 、空文字を除く 1 つの文字と一致します。
 
 ## 試合ルール {#match-rules}
 
--   `schema-pattern`を空にすることはできません。
--   `table-pattern`空でも構いません。空に設定すると、 `schema-pattern`に従って`schema`のみが一致します。
--   `table-pattern`が空でない場合、 `schema` `schema-pattern`に従ってマッチングされ、 `table` `table-pattern`に従ってマッチングされます。 `schema`と`table`両方が正常にマッチングされた場合にのみ、マッチング結果を取得できます。
+- `schema-pattern`を空にすることはできません。
+- `table-pattern`空でも構いません。空に設定すると、 `schema-pattern`に従って`schema`のみが一致します。
+- `table-pattern`が空でない場合、 `schema` `schema-pattern`に従ってマッチングされ、 `table` `table-pattern`に従ってマッチングされます。 `schema`と`table`両方が正常にマッチングされた場合にのみ、マッチング結果を取得できます。
 
 ## 使用例 {#usage-examples}
 
--   スキーマ名に`schema_`プレフィックスを持つすべてのスキーマとテーブルを一致させます。
+- スキーマ名に`schema_`プレフィックスを持つすべてのスキーマとテーブルを一致させます。
 
     ```yaml
     schema-pattern: "schema_*"
     table-pattern: ""
     ```
 
--   スキーマ名に`schema_`プレフィックスが付き、テーブル名に`table_`プレフィックスが付いたすべてのテーブルを一致させます。
+- スキーマ名に`schema_`プレフィックスが付き、テーブル名に`table_`プレフィックスが付いたすべてのテーブルを一致させます。
 
     ```yaml
     schema-pattern = "schema_*"

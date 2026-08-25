@@ -35,8 +35,8 @@ TiDB は、MySQL 8.0 で利用可能な[情報関数](https://dev.mysql.com/doc/
 BENCHMARK(count, expression)
 ```
 
--   `count` : 式を実行する回数。
--   `expression` : 繰り返し実行される式。
+- `count` : 式を実行する回数。
+- `expression` : 繰り返し実行される式。
 
 例：
 
@@ -214,9 +214,9 @@ TABLE t1;
 
 > **Note**
 >
-> -   TiDBでは、 [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache)を指定するとMySQLが返す結果と異なる結果になる可能性があります。この不一致は、TiDBが各ノードにIDをキャッシュするため、IDの順序が乱れたり、IDに空白が生じたりする可能性があるためです。アプリケーションで厳密なID順序の維持が不可欠な場合は、 [MySQL互換モード](/auto-increment.md#mysql-compatibility-mode)を有効にすることができます。
+> - TiDBでは、 [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache)を指定するとMySQLが返す結果と異なる結果になる可能性があります。この不一致は、TiDBが各ノードにIDをキャッシュするため、IDの順序が乱れたり、IDに空白が生じたりする可能性があるためです。アプリケーションで厳密なID順序の維持が不可欠な場合は、 [MySQL互換モード](/auto-increment.md#mysql-compatibility-mode)を有効にすることができます。
 >
-> -   上の例ではIDが2ずつ増加しますが、MySQLでは同じシナリオでIDが1ずつ増加します。互換性に関する詳細は[AUTO_INCREMENT ID](/mysql-compatibility.md#auto-increment-id)を参照してください。
+> - 上の例ではIDが2ずつ増加しますが、MySQLでは同じシナリオでIDが1ずつ増加します。互換性に関する詳細は[AUTO_INCREMENT ID](/mysql-compatibility.md#auto-increment-id)を参照してください。
 
 `LAST_INSERT_ID(expr)`関数は式を引数として受け取り、その値を`LAST_INSERT_ID()`次回呼び出し時に保存します。MySQL互換のシーケンス生成メソッドとして使用できます。TiDBは[シーケンス関数](/functions-and-operators/sequence-functions.md)もサポートしています。
 
@@ -317,8 +317,8 @@ Store: tikv
 
 ## サポートされていない関数 {#unsupported-functions}
 
--   `CHARSET()`
--   `COERCIBILITY()`
--   `COLLATION()`
--   `ICU_VERSION()`
--   `ROLES_GRAPHML()`
+- `CHARSET()`
+- `COERCIBILITY()`
+- `COLLATION()`
+- `ICU_VERSION()`
+- `ROLES_GRAPHML()`

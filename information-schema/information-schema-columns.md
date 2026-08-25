@@ -80,31 +80,31 @@ CHARACTER_MAXIMUM_LENGTH: NULL
 
 `COLUMNS`表の列の説明は次のとおりです。
 
--   `TABLE_CATALOG` : 列を含むテーブルが属するカタログの名前。値は常に`def` 。
--   `TABLE_SCHEMA` : 列を含むテーブルが配置されているスキーマの名前。
--   `TABLE_NAME` : 列を含むテーブルの名前。
--   `COLUMN_NAME` : 列の名前。
--   `ORDINAL_POSITION` : テーブル内の列の位置。
--   `COLUMN_DEFAULT` : 列のデフォルト値。明示的なデフォルト値が`NULL`の場合、または列定義に`default`句が含まれていない場合、この値は`NULL`なります。
--   `IS_NULLABLE` : 列がNULL値可能かどうか。列がNULL値を格納できる場合、この値は`YES` 、そうでない場合は`NO`なります。
--   `DATA_TYPE` : 列内のデータのタイプ。
--   `CHARACTER_MAXIMUM_LENGTH` : 文字列列の場合、文字の最大長。
--   `CHARACTER_OCTET_LENGTH` : 文字列列の場合、最大長（バイト単位）。
--   `NUMERIC_PRECISION` : 数値型列の数値精度。
--   `NUMERIC_SCALE` : 数値型列の数値スケール。
--   `DATETIME_PRECISION` : 時刻型列の場合、秒の小数部の精度。
--   `CHARACTER_SET_NAME` : 文字列列の文字セットの名前。
--   `COLLATION_NAME` : 文字列列の照合順序の名前。
--   `COLUMN_TYPE` : 列のタイプ。
--   `COLUMN_KEY` : この列がインデックスされているかどうか。このフィールドには次の値が含まれます。
-    -   空: この列にはインデックスが付いていません。または、この列にはインデックスが付いていて、複数列の一意でないインデックスの 2 番目の列です。
-    -   `PRI` : この列は主キーまたは複数の主キーの 1 つです。
-    -   `UNI` : この列は、一意インデックスの最初の列です。
-    -   `MUL` : 列は、特定の値が複数回出現することを許可される、一意でないインデックスの最初の列です。
--   `EXTRA` : 指定された列の追加情報。
--   `PRIVILEGES` : 現在のユーザーがこの列に対して持つ権限。現在、この値はTiDBで固定されており、常に`select,insert,update,references`です。
--   `COLUMN_COMMENT` : 列定義に含まれるコメント。
--   `GENERATION_EXPRESSION` : 生成列の場合、この値は列の値を計算するために使用された式を表示します。非生成列の場合、この値は空です。
+- `TABLE_CATALOG` : 列を含むテーブルが属するカタログの名前。値は常に`def` 。
+- `TABLE_SCHEMA` : 列を含むテーブルが配置されているスキーマの名前。
+- `TABLE_NAME` : 列を含むテーブルの名前。
+- `COLUMN_NAME` : 列の名前。
+- `ORDINAL_POSITION` : テーブル内の列の位置。
+- `COLUMN_DEFAULT` : 列のデフォルト値。明示的なデフォルト値が`NULL`の場合、または列定義に`default`句が含まれていない場合、この値は`NULL`なります。
+- `IS_NULLABLE` : 列がNULL値可能かどうか。列がNULL値を格納できる場合、この値は`YES` 、そうでない場合は`NO`なります。
+- `DATA_TYPE` : 列内のデータのタイプ。
+- `CHARACTER_MAXIMUM_LENGTH` : 文字列列の場合、文字の最大長。
+- `CHARACTER_OCTET_LENGTH` : 文字列列の場合、最大長（バイト単位）。
+- `NUMERIC_PRECISION` : 数値型列の数値精度。
+- `NUMERIC_SCALE` : 数値型列の数値スケール。
+- `DATETIME_PRECISION` : 時刻型列の場合、秒の小数部の精度。
+- `CHARACTER_SET_NAME` : 文字列列の文字セットの名前。
+- `COLLATION_NAME` : 文字列列の照合順序の名前。
+- `COLUMN_TYPE` : 列のタイプ。
+- `COLUMN_KEY` : この列がインデックスされているかどうか。このフィールドには次の値が含まれます。
+    - 空: この列にはインデックスが付いていません。または、この列にはインデックスが付いていて、複数列の一意でないインデックスの 2 番目の列です。
+    - `PRI` : この列は主キーまたは複数の主キーの 1 つです。
+    - `UNI` : この列は、一意インデックスの最初の列です。
+    - `MUL` : 列は、特定の値が複数回出現することを許可される、一意でないインデックスの最初の列です。
+- `EXTRA` : 指定された列の追加情報。
+- `PRIVILEGES` : 現在のユーザーがこの列に対して持つ権限。現在、この値はTiDBで固定されており、常に`select,insert,update,references`です。
+- `COLUMN_COMMENT` : 列定義に含まれるコメント。
+- `GENERATION_EXPRESSION` : 生成列の場合、この値は列の値を計算するために使用された式を表示します。非生成列の場合、この値は空です。
 
 対応する`SHOW`ステートメントは次のとおりです。
 
@@ -125,4 +125,4 @@ SHOW COLUMNS FROM t1 FROM test;
 
 ## 参照 {#see-also}
 
--   [`SHOW COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)
+- [`SHOW COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)

@@ -45,9 +45,9 @@ INSERT INTO users (id,age,last_login) VALUES (NULL,123,NULL);
 Query OK, 1 row affected (0.03 sec)
 ```
 
--   最初の`INSERT`文は、 `AUTO_INCREMENT`列に`NULL`を割り当てることができるため成功します。TiDBはシーケンス番号を自動的に生成します。
--   2 番目の`INSERT`ステートメントは、 `age`列が`NOT NULL`として定義されているため失敗します。
--   3番目の`INSERT`文は、 `last_login`列が明示的に`NOT NULL`として定義されていないため成功します。NULL値はデフォルトで許可されています。
+- 最初の`INSERT`文は、 `AUTO_INCREMENT`列に`NULL`を割り当てることができるため成功します。TiDBはシーケンス番号を自動的に生成します。
+- 2 番目の`INSERT`ステートメントは、 `age`列が`NOT NULL`として定義されているため失敗します。
+- 3番目の`INSERT`文は、 `last_login`列が明示的に`NOT NULL`として定義されていないため成功します。NULL値はデフォルトで許可されています。
 
 ## チェック {#check}
 
@@ -65,22 +65,22 @@ TiDB の`CHECK`制約の構文は MySQL と同じです。
 
 構文の説明:
 
--   `[]` : `[]`内の内容はオプションです。
--   `CONSTRAINT [symbol]` : `CHECK`の制約の名前を指定します。
--   `CHECK (expr)` : 制約条件を指定します。ここで、 `expr`はブール式である必要があります。テーブルの各行について、この式の計算結果は`TRUE` 、 `FALSE` 、または`UNKNOWN` ( `NULL`値の場合) のいずれかである必要があります。ある行の計算結果が`FALSE`の場合、制約に違反していることを示します。
--   `[NOT] ENFORCED` : 制約チェックを実装するかどうかを指定します。これを使用して、制約`CHECK`有効または無効にすることができます。
+- `[]` : `[]`内の内容はオプションです。
+- `CONSTRAINT [symbol]` : `CHECK`の制約の名前を指定します。
+- `CHECK (expr)` : 制約条件を指定します。ここで、 `expr`はブール式である必要があります。テーブルの各行について、この式の計算結果は`TRUE` 、 `FALSE` 、または`UNKNOWN` ( `NULL`値の場合) のいずれかである必要があります。ある行の計算結果が`FALSE`の場合、制約に違反していることを示します。
+- `[NOT] ENFORCED` : 制約チェックを実装するかどうかを指定します。これを使用して、制約`CHECK`有効または無効にすることができます。
 
 ### `CHECK`制約を追加する {#add-check-constraints}
 
 TiDB では、 [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)または[`ALTER TABLE`](/sql-statements/sql-statement-modify-column.md)ステートメントのいずれかを使用して、テーブルに`CHECK`制約を追加できます。
 
--   `CREATE TABLE`ステートメントを使用して`CHECK`制約を追加する例:
+- `CREATE TABLE`ステートメントを使用して`CHECK`制約を追加する例:
 
     ```sql
     CREATE TABLE t(a INT CHECK(a > 10) NOT ENFORCED, b INT, c INT, CONSTRAINT c1 CHECK (b > c));
     ```
 
--   `ALTER TABLE`ステートメントを使用して`CHECK`制約を追加する例:
+- `ALTER TABLE`ステートメントを使用して`CHECK`制約を追加する例:
 
     ```sql
     ALTER TABLE t ADD CONSTRAINT CHECK (1 < c);
@@ -123,8 +123,8 @@ ALTER TABLE t DROP CONSTRAINT t_chk_1;
 
 テーブルに[`CHECK`制約を追加する](#add-check-constraints)設定すると、データの挿入または更新時に TiDB が制約チェックを実装する必要があるかどうかを指定できます。
 
--   `NOT ENFORCED`を指定すると、TiDB はデータの挿入または更新時に制約条件をチェックしません。
--   `NOT ENFORCED`が指定されていないか`ENFORCED`が指定されている場合、TiDB はデータの挿入または更新中に制約条件をチェックします。
+- `NOT ENFORCED`を指定すると、TiDB はデータの挿入または更新時に制約条件をチェックしません。
+- `NOT ENFORCED`が指定されていないか`ENFORCED`が指定されている場合、TiDB はデータの挿入または更新中に制約条件をチェックします。
 
 制約を追加するときに`[NOT] ENFORCED`を指定するだけでなく、 `ALTER TABLE`ステートメントを使用して`CHECK`制約を有効または無効にすることもできます。例：
 
@@ -134,8 +134,8 @@ ALTER TABLE t ALTER CONSTRAINT c1 NOT ENFORCED;
 
 ### MySQLとの互換性 {#mysql-compatibility}
 
--   列（例： `ALTER TABLE t ADD COLUMN a CHECK(a > 0)` ）の追加時に`CHECK`制約を追加することはサポートされていません。この場合、列のみが正常に追加され、TiDBは`CHECK`制約を無視し、エラーを報告しません。
--   `ALTER TABLE t CHANGE a b int CHECK(b > 0)`を使用して`CHECK`制約を追加することはサポートされていません。この文を実行すると、TiDBはエラーを報告します。
+- 列（例： `ALTER TABLE t ADD COLUMN a CHECK(a > 0)` ）の追加時に`CHECK`制約を追加することはサポートされていません。この場合、列のみが正常に追加され、TiDBは`CHECK`制約を無視し、エラーを報告しません。
+- `ALTER TABLE t CHANGE a b int CHECK(b > 0)`を使用して`CHECK`制約を追加することはサポートされていません。この文を実行すると、TiDBはエラーを報告します。
 
 ## 一意キー {#unique-key}
 
@@ -251,7 +251,7 @@ ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
 
 悲観的トランザクションのパフォーマンスを向上させるには、変数[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)を`OFF`に設定できます。これにより、TiDB は一意インデックスの一意制約チェックを（このインデックスが次にロックを必要とするとき、またはトランザクションがコミットされるときまで）延期し、対応する悲観的ロックをスキップします。この変数を使用する際は、以下の点に注意してください。
 
--   遅延された一意制約チェックのため、悲観的トランザクションをコミットすると、TiDB は一意制約を満たさない結果を読み取り、エラー`Duplicate entry`を返す場合があります。このエラーが発生すると、TiDB は現在のトランザクションをロールバックします。
+- 遅延された一意制約チェックのため、悲観的トランザクションをコミットすると、TiDB は一意制約を満たさない結果を読み取り、エラー`Duplicate entry`を返す場合があります。このエラーが発生すると、TiDB は現在のトランザクションをロールバックします。
 
     次の例では、ロックを`bill`にスキップするため、TiDB は一意性制約を満たさない結果を取得する可能性があります。
 
@@ -287,7 +287,7 @@ ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
     ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
     ```
 
--   この変数が無効になっている場合、データの書き込みを必要とする悲観的トランザクションをコミットすると、 `Write conflict`エラーが返される可能性があります。このエラーが発生すると、TiDBは現在のトランザクションをロールバックします。
+- この変数が無効になっている場合、データの書き込みを必要とする悲観的トランザクションをコミットすると、 `Write conflict`エラーが返される可能性があります。このエラーが発生すると、TiDBは現在のトランザクションをロールバックします。
 
     次の例のように、2つの同時トランザクションが同じテーブルにデータを挿入する必要がある場合、悲観的ロックをスキップすると、トランザクションをコミットしたときにTiDBはエラー`Write conflict`を返します。そして、トランザクションはロールバックされます。
 
@@ -320,9 +320,9 @@ ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
     ERROR 9007 (HY000): Write conflict, txnStartTS=435688780611190794, conflictStartTS=435688783311536129, conflictCommitTS=435688783311536130, key={tableID=74, indexID=1, indexValues={bill, }} primary={tableID=74, indexID=1, indexValues={bill, }}, reason=LazyUniquenessCheck [try again later]
     ```
 
--   この変数が無効になっている場合、複数の悲観的トランザクション間で書き込み競合が発生すると、他の悲観的トランザクションがコミットされた際に悲観的ロックが強制的にロールバックされ、エラー`Pessimistic lock not found`が発生する可能性があります。このエラーが発生した場合、悲観的トランザクションの一意制約チェックを延期することが、アプリケーションのシナリオに適していないことを意味します。この場合、競合を回避するようにアプリケーションロジックを調整するか、エラー発生後にトランザクションを再試行することを検討してください。
+- この変数が無効になっている場合、複数の悲観的トランザクション間で書き込み競合が発生すると、他の悲観的トランザクションがコミットされた際に悲観的ロックが強制的にロールバックされ、エラー`Pessimistic lock not found`が発生する可能性があります。このエラーが発生した場合、悲観的トランザクションの一意制約チェックを延期することが、アプリケーションのシナリオに適していないことを意味します。この場合、競合を回避するようにアプリケーションロジックを調整するか、エラー発生後にトランザクションを再試行することを検討してください。
 
--   この変数が無効になっている場合、悲観的トランザクションで DML ステートメントを実行するとエラー`8147: LazyUniquenessCheckFailure`が返される可能性があります。
+- この変数が無効になっている場合、悲観的トランザクションで DML ステートメントを実行するとエラー`8147: LazyUniquenessCheckFailure`が返される可能性があります。
 
     > **Note:**
     >
@@ -341,7 +341,7 @@ ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
     ERROR 8147 (23000): transaction aborted because lazy uniqueness check is enabled and an error occurred: [kv:1062]Duplicate entry 'bill' for key 'users.username'
     ```
 
--   この変数が無効になっている場合、 `1062 Duplicate entry`エラーは現在の SQL 文に起因しない可能性があります。そのため、トランザクションが同じ名前のインデックスを持つ複数のテーブルを操作する場合、 `1062`エラーメッセージを確認して、実際にどのインデックスにエラーが発生しているかを特定する必要があります。
+- この変数が無効になっている場合、 `1062 Duplicate entry`エラーは現在の SQL 文に起因しない可能性があります。そのため、トランザクションが同じ名前のインデックスを持つ複数のテーブルを操作する場合、 `1062`エラーメッセージを確認して、実際にどのインデックスにエラーが発生しているかを特定する必要があります。
 
 ## 主キー {#primary-key}
 
@@ -381,9 +381,9 @@ CREATE TABLE t4 (a INT NOT NULL, b INT NOT NULL, PRIMARY KEY (a,b));
 Query OK, 0 rows affected (0.10 sec)
 ```
 
--   列`a`が主キーとして定義されており、NULL 値が許可されないため、テーブル`t2`を作成できませんでした。
--   テーブルには主キーを 1 つしか持てないため、テーブル`t3`を作成できませんでした。
--   主キーは 1 つしか存在できませんが、TiDB では複数の列を複合主キーとして定義することがサポートされているため、テーブル`t4`が正常に作成されました。
+- 列`a`が主キーとして定義されており、NULL 値が許可されないため、テーブル`t2`を作成できませんでした。
+- テーブルには主キーを 1 つしか持てないため、テーブル`t3`を作成できませんでした。
+- 主キーは 1 つしか存在できませんが、TiDB では複数の列を複合主キーとして定義することがサポートされているため、テーブル`t4`が正常に作成されました。
 
 上記のルールに加えて、TiDBは現在、 `NONCLUSTERED`型の主キーの追加と削除のみをサポートしています。例えば：
 

@@ -15,57 +15,57 @@ summary: TiDB Cloud Dedicatedクラスターの作成方法を学びましょう
 
 TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbcloud.com/signup)をクリックしてアカウントを作成してください。
 
--   TiDB Cloudを使用してパスワードを管理できるように、メールアドレスとパスワードで登録するか、Google、GitHub、またはMicrosoftアカウントで登録することができます。
--   AWS Marketplace をご利用の方は、AWS Marketplace からサインアップすることもできます。サインアップするには、 [AWS Marketplace](https://aws.amazon.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
--   Azure Marketplace をご利用の方は、Azure Marketplace からサインアップすることもできます。サインアップするには、 [Azure Marketplace](https://azuremarketplace.microsoft.com)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
--   Google Cloud Marketplace をご利用の方は、Google Cloud Marketplace からサインアップすることもできます。サインアップするには、 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
+- TiDB Cloudを使用してパスワードを管理できるように、メールアドレスとパスワードで登録するか、Google、GitHub、またはMicrosoftアカウントで登録することができます。
+- AWS Marketplace をご利用の方は、AWS Marketplace からサインアップすることもできます。サインアップするには、 [AWS Marketplace](https://aws.amazon.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
+- Azure Marketplace をご利用の方は、Azure Marketplace からサインアップすることもできます。サインアップするには、 [Azure Marketplace](https://azuremarketplace.microsoft.com)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
+- Google Cloud Marketplace をご利用の方は、Google Cloud Marketplace からサインアップすることもできます。サインアップするには、 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
 
 ## ステップ1. TiDB Cloud Dedicatedクラスタを作成する {#step-1-create-a-tidb-cloud-dedicated-cluster}
 
 `Organization Owner`または`Project Owner`の役割を担っている場合は、次のようにしてTiDB Cloud Dedicatedクラスターを作成できます。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  **Create Resource**をクリックします。
+2. **Create Resource**をクリックします。
 
-3.  **Create Resource**ページで**Dedicated**を選択し、クラスタ情報を次のように構成します。
+3. **Create Resource**ページで**Dedicated**を選択し、クラスタ情報を次のように構成します。
 
-    1.  TiDB Cloud Dedicatedクラスターのプロジェクトを選択してください。組織内にプロジェクトがない場合は、 **Create a Project**をクリックして作成できます。
+    1. TiDB Cloud Dedicatedクラスターのプロジェクトを選択してください。組織内にプロジェクトがない場合は、 **Create a Project**をクリックして作成できます。
 
-    2.  TiDB Cloud Dedicatedクラスターの名前を入力してください。
+    2. TiDB Cloud Dedicatedクラスターの名前を入力してください。
 
-    3.  クラウドプロバイダーと、クラスターをホストするリージョンを選択してください。
-
-        > **Note:**
-        >
-        > -   [AWS Marketplace](https://aws.amazon.com/marketplace)を通じてTiDB Cloudにサインアップした場合、クラウドプロバイダーは AWS となり、 TiDB Cloudで変更することはできません。
-        > -   [Azure Marketplace](https://azuremarketplace.microsoft.com)を通じてTiDB Cloudにサインアップした場合、クラウドプロバイダーは Azure Cloud となり、 TiDB Cloudで変更することはできません。
-        > -   [Google Cloud Marketplace](https://console.cloud.google.com/marketplace)を通じてTiDB Cloudに登録した場合、クラウドプロバイダーは Google Cloud となり、 TiDB Cloudで変更することはできません。
-
-    4.  TiDB、TiKV、 TiFlashの[クラスターサイズ](/tidb-cloud/size-your-cluster.md)をそれぞれ設定します (オプション)。
-
-    5.  必要に応じて、デフォルトのポート番号を更新してください。
-
-    6.  このリージョンにCIDRが設定されていない場合は、CIDRを設定する必要があります。**Project CIDR**フィールドが表示されない場合は、このリージョンにCIDRが既に設定されていることを意味します。
+    3. クラウドプロバイダーと、クラスターをホストするリージョンを選択してください。
 
         > **Note:**
         >
-        > -   TiDB Cloudは、このリージョンで最初のクラスターが作成される際に、このCIDRを持つVPCを作成します。このリージョン内の同じプロジェクトの以降のすべてのクラスターは、このVPCを使用します。
-        > -   CIDRを設定する際は、アプリケーションが配置されているVPCのCIDRと競合しないようにしてください。VPCが作成されると、CIDRを変更することはできません。
+        > - [AWS Marketplace](https://aws.amazon.com/marketplace)を通じてTiDB Cloudにサインアップした場合、クラウドプロバイダーは AWS となり、 TiDB Cloudで変更することはできません。
+        > - [Azure Marketplace](https://azuremarketplace.microsoft.com)を通じてTiDB Cloudにサインアップした場合、クラウドプロバイダーは Azure Cloud となり、 TiDB Cloudで変更することはできません。
+        > - [Google Cloud Marketplace](https://console.cloud.google.com/marketplace)を通じてTiDB Cloudに登録した場合、クラウドプロバイダーは Google Cloud となり、 TiDB Cloudで変更することはできません。
 
-4.  右側のクラスター情報と請求情報を確認してください。
+    4. TiDB、TiKV、 TiFlashの[クラスターサイズ](/tidb-cloud/size-your-cluster.md)をそれぞれ設定します (オプション)。
 
-5.  支払い方法を登録していない場合は、右下隅の**Add Credit Card**をクリックしてください。
+    5. 必要に応じて、デフォルトのポート番号を更新してください。
+
+    6. このリージョンにCIDRが設定されていない場合は、CIDRを設定する必要があります。**Project CIDR**フィールドが表示されない場合は、このリージョンにCIDRが既に設定されていることを意味します。
+
+        > **Note:**
+        >
+        > - TiDB Cloudは、このリージョンで最初のクラスターが作成される際に、このCIDRを持つVPCを作成します。このリージョン内の同じプロジェクトの以降のすべてのクラスターは、このVPCを使用します。
+        > - CIDRを設定する際は、アプリケーションが配置されているVPCのCIDRと競合しないようにしてください。VPCが作成されると、CIDRを変更することはできません。
+
+4. 右側のクラスター情報と請求情報を確認してください。
+
+5. 支払い方法を登録していない場合は、右下隅の**Add Credit Card**をクリックしてください。
 
     > **Note:**
     >
     > [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com) 、または[Google Cloud Marketplace](https://console.cloud.google.com/marketplace)経由でTiDB Cloudに登録した場合、AWSアカウント、Azureアカウント、またはGoogle Cloudアカウントから直接支払いを行うことができますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりすることはできません。
 
-6.  **Create**をクリックします。
+6. **Create**をクリックします。
 
     TiDB Cloudクラスタの作成には約20～30分かかります。作成が完了すると、 TiDB Cloudコンソールから通知が届きます。
 
@@ -77,9 +77,9 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 TiDB Cloud Dedicatedクラスターの作成が完了したら、以下の手順に従ってルートパスワードを設定してください。
 
-1.  クラスター概要ページの右上隅にある**...**をクリックし、 **Password Settings**を選択します。
+1. クラスター概要ページの右上隅にある**...**をクリックし、 **Password Settings**を選択します。
 
-2.  クラスターに接続するためのルートパスワードを設定し、 **Save**をクリックします。
+2. クラスターに接続するためのルートパスワードを設定し、 **Save**をクリックします。
 
     **Auto-generate Password**をクリックすると、ランダムなパスワードが生成されます。生成されたパスワードは二度と表示されないため、安全な場所に保存してください。
 

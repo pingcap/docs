@@ -13,11 +13,11 @@ TiDB Cloud **Enterprise** [サポートプラン](/tidb-cloud/connected-care-det
 
 ## サポートチケットを作成する {#create-a-support-ticket}
 
-1.  Larkの**PingCAP Support Group**で、 `@PingCAP Support Bot`メンションし、メッセージで問題を説明してください。そうすると、ボットがあなただけに閲覧可能な一時的なカードメッセージを送信します。
+1. Larkの**PingCAP Support Group**で、 `@PingCAP Support Bot`メンションし、メッセージで問題を説明してください。そうすると、ボットがあなただけに閲覧可能な一時的なカードメッセージを送信します。
 
     ![lark-ticket-creation-1](/media/tidb-cloud/connected-lark-ticket-creation-1.png)
 
-2.  カードの**Reporter**フィールドに[TiDB Cloudコンソール](https://tidbcloud.com/)に使用するメール アドレスを入力し、必要に応じて他のフィールドに入力して、 **Submit**をクリックしてチケットを作成します。
+2. カードの**Reporter**フィールドに[TiDB Cloudコンソール](https://tidbcloud.com/)に使用するメール アドレスを入力し、必要に応じて他のフィールドに入力して、 **Submit**をクリックしてチケットを作成します。
 
     ![lark-ticket-creation-2](/media/tidb-cloud/connected-lark-ticket-creation-2.png)
 
@@ -35,7 +35,7 @@ TiDB Cloud **Enterprise** [サポートプラン](/tidb-cloud/connected-care-det
 
 ## よくある質問 {#faqs}
 
--   チケットのステータスを確認するにはどうすればいいですか?
+- チケットのステータスを確認するにはどうすればいいですか?
 
     チケット作成時に使用したメールアドレスで[PingCAP ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/user/requests)にログインしてください。現在のアカウントのすべての過去のチケットとそのステータスを確認できます。
 

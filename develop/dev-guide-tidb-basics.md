@@ -7,9 +7,9 @@ summary: トランザクション メカニズムやアプリケーションが 
 
 TiDB を使い始める前に、TiDB がどのように動作するかに関するいくつかの重要なメカニズムを理解する必要があります。
 
--   TiDB でのトランザクションの仕組みを理解するには[TiDBトランザクションの概要](/transaction-overview.md) 、アプリケーション開発に必要なトランザクションの知識については[アプリケーション開発者向けトランザクションノート](/develop/dev-guide-transaction-overview.md)をお読みください。
--   [アプリケーションがTiDBと対話する方法](#the-way-applications-interact-with-tidb)理解する。
--   分散データベース TiDB およびTiDB Cloud を構築するためのコア コンポーネントと概念を学習するには、無料のオンライン コース[TiDBの紹介](https://eng.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide)を参照してください。
+- TiDB でのトランザクションの仕組みを理解するには[TiDBトランザクションの概要](/transaction-overview.md) 、アプリケーション開発に必要なトランザクションの知識については[アプリケーション開発者向けトランザクションノート](/develop/dev-guide-transaction-overview.md)をお読みください。
+- [アプリケーションがTiDBと対話する方法](#the-way-applications-interact-with-tidb)理解する。
+- 分散データベース TiDB およびTiDB Cloud を構築するためのコア コンポーネントと概念を学習するには、無料のオンライン コース[TiDBの紹介](https://eng.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide)を参照してください。
 
 ## TiDBトランザクションメカニズム {#tidb-transaction-mechanisms}
 
@@ -29,18 +29,18 @@ TiDB は MySQL プロトコルおよび MySQL 構文と互換性があるため�
 
 ## 続きを読む {#read-more}
 
--   [クイックスタート](/develop/dev-guide-build-cluster-in-cloud.md)
--   [DriverまたはORMを選択](/develop/dev-guide-choose-driver-or-orm.md)
--   [TiDBに接続する](https://docs.pingcap.com/tidb/v8.5/dev-guide-connect-to-tidb/)
--   [データベーススキーマ設計](/develop/dev-guide-schema-design-overview.md)
--   [データの書き込み](/develop/dev-guide-insert-data.md)
--   [データの読み取り](/develop/dev-guide-get-data-from-single-table.md)
--   [トランザクション](/develop/dev-guide-transaction-overview.md)
--   [最適化する](/develop/dev-guide-optimize-sql-overview.md)
--   [アプリケーション例](/develop/dev-guide-sample-application-java-spring-boot.md)
+- [クイックスタート](/develop/dev-guide-build-cluster-in-cloud.md)
+- [DriverまたはORMを選択](/develop/dev-guide-choose-driver-or-orm.md)
+- [TiDBに接続する](https://docs.pingcap.com/tidb/v8.5/dev-guide-connect-to-tidb/)
+- [データベーススキーマ設計](/develop/dev-guide-schema-design-overview.md)
+- [データの書き込み](/develop/dev-guide-insert-data.md)
+- [データの読み取り](/develop/dev-guide-get-data-from-single-table.md)
+- [トランザクション](/develop/dev-guide-transaction-overview.md)
+- [最適化する](/develop/dev-guide-optimize-sql-overview.md)
+- [アプリケーション例](/develop/dev-guide-sample-application-java-spring-boot.md)
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

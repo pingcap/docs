@@ -15,19 +15,19 @@ summary: TiUP no-sudo モードを使用してオンライン TiDB クラスタ�
 
 このドキュメントでは、 `tidb`ユーザーを例に挙げます。
 
-1.  すべてのターゲットマシンに`root`ユーザーとしてログインし、 `tidb`という名前のユーザーを作成し、このユーザーのシステムリソース制限を次のように構成します。
+1. すべてのターゲットマシンに`root`ユーザーとしてログインし、 `tidb`という名前のユーザーを作成し、このユーザーのシステムリソース制限を次のように構成します。
 
     > **Note:**
     >
     > no-sudo モードでは、 `tidb`ユーザーに対してパスワードなしの sudo を構成する必要はありません。つまり、 `tidb`ユーザーを`sudoers`ファイルに追加する必要はありません。
 
-    1.  `tidb`ユーザーを追加します:
+    1. `tidb`ユーザーを追加します:
 
         ```shell
         adduser tidb
         ```
 
-    2.  `tidb`ユーザーのリソース制限を構成します。
+    2. `tidb`ユーザーのリソース制限を構成します。
 
         ```shell
         cat << EOF >>/etc/security/limits.conf
@@ -40,9 +40,9 @@ summary: TiUP no-sudo モードを使用してオンライン TiDB クラスタ�
         EOF
         ```
 
-2.  各ターゲットマシンで、ユーザー`tidb`の`systemd user`モードを起動します。この手順は必須ですので、スキップしないでください。
+2. 各ターゲットマシンで、ユーザー`tidb`の`systemd user`モードを起動します。この手順は必須ですので、スキップしないでください。
 
-    1.  `tidb`ユーザーを使用して`XDG_RUNTIME_DIR`環境変数を設定します。
+    1. `tidb`ユーザーを使用して`XDG_RUNTIME_DIR`環境変数を設定します。
 
         ```shell
         sudo -iu tidb  # Switch to the tidb user
@@ -51,7 +51,7 @@ summary: TiUP no-sudo モードを使用してオンライン TiDB クラスタ�
         source ~/.bashrc.d/systemd
         ```
 
-    2.  `root`ユーザーを使用してユーザー サービスを開始します。
+    2. `root`ユーザーを使用してユーザー サービスを開始します。
 
         ```shell
         $ uid=$(id -u tidb) # Get the ID of the tidb user
@@ -74,9 +74,9 @@ summary: TiUP no-sudo モードを使用してオンライン TiDB クラスタ�
                   └─3358 /usr/bin/pulseaudio --daemonize=no --log-target=journal
         ```
 
-    3.  `systemctl --user`を実行します。エラーが発生しない場合は、 `systemd user`モードが正常に開始されたことを示します。
+    3. `systemctl --user`を実行します。エラーが発生しない場合は、 `systemd user`モードが正常に開始されたことを示します。
 
-3.  `root`ユーザーを使用して次のコマンドを実行し、 systemd ユーザー`tidb`の lingering を有効にします。
+3. `root`ユーザーを使用して次のコマンドを実行し、 systemd ユーザー`tidb`の lingering を有効にします。
 
     ```shell
     loginctl enable-linger tidb
@@ -85,15 +85,15 @@ summary: TiUP no-sudo モードを使用してオンライン TiDB クラスタ�
 
     参考として、systemd のドキュメント[systemd ユーザーインスタンスの自動起動](https://wiki.archlinux.org/title/Systemd/User#Automatic_start-up_of_systemd_user_instances)を読んでみてください。
 
-4.  制御マシンで`ssh-keygen`を使用してキーを生成します。
+4. 制御マシンで`ssh-keygen`を使用してキーを生成します。
 
     ```shell
     ssh-keygen
     ```
 
-5.  SSH 信頼を確立するには、公開キーをクラスター内の他のマシンにコピーします。
+5. SSH 信頼を確立するには、公開キーをクラスター内の他のマシンにコピーします。
 
-    -   `tidb`ユーザーにパスワードを設定している場合は、 `ssh-copy-id`コマンドを使用して公開キーをターゲットマシンにコピーできます。
+    - `tidb`ユーザーにパスワードを設定している場合は、 `ssh-copy-id`コマンドを使用して公開キーをターゲットマシンにコピーできます。
 
         ```shell
         ssh-copy-id tidb@host
@@ -101,7 +101,7 @@ summary: TiUP no-sudo モードを使用してオンライン TiDB クラスタ�
 
         `host`をターゲットマシンのホスト名に置き換え、クラスター内の他の各マシンでこのコマンドを実行する必要があります。
 
-    -   別の方法で公開鍵をコピーする場合は、コピー後に`/home/tidb/.ssh/authorized_keys`ファイルの権限を必ず確認してください。
+    - 別の方法で公開鍵をコピーする場合は、コピー後に`/home/tidb/.ssh/authorized_keys`ファイルの権限を必ず確認してください。
 
         ```shell
         chown -R tidb:tidb /home/tidb/.ssh/authorized_keys
@@ -110,13 +110,13 @@ summary: TiUP no-sudo モードを使用してオンライン TiDB クラスタ�
 
 ## トポロジファイルを準備する {#prepare-the-topology-file}
 
-1.  次のコマンドを実行してトポロジファイルを生成します。
+1. 次のコマンドを実行してトポロジファイルを生成します。
 
     ```shell
     tiup cluster template > topology.yaml
     ```
 
-2.  トポロジファイルを編集します。
+2. トポロジファイルを編集します。
 
     通常モードと比較して、 TiUPをno-sudoモードで使用する場合は、 `topology.yaml`ファイルの`global`モジュールに`systemd_mode: "user"`の行を追加する必要があります。`systemd_mode`パラメータは、`systemd user`モードを使用するかどうかを設定するために使用されます。このパラメータが設定されていない場合、デフォルト値は`system`で、sudo権限が必要であることを意味します。
 
@@ -200,7 +200,7 @@ tiup cluster upgrade mycluster v8.2.0
 
 ## FAQ {#faq}
 
-### &lt;user@.service&gt; の起動時に`Trying to run as user instance, but $XDG_RUNTIME_DIR is not set.`エラーが発生します。 {#the-trying-to-run-as-user-instance-but-xdg-runtime-dir-is-not-set-error-occurs-when-starting-x3c-user-service}
+### &lt;<user@.service>&gt; の起動時に`Trying to run as user instance, but $XDG_RUNTIME_DIR is not set.`エラーが発生します。 {#the-trying-to-run-as-user-instance-but-xdg-runtime-dir-is-not-set-error-occurs-when-starting-x3c-user-service}
 
 この問題は、 `/etc/pam.d/system-auth.ued`ファイルに`pam_systemd.so`存在しないために発生する可能性があります。
 

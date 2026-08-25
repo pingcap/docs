@@ -26,9 +26,9 @@ TiDBの導入タイプに基づいて手順を選択してください。
 
 [TiDB Cloud Starterインスタンスを作成する](https://tidbcloud.com/free-trial/)、次のように Web コンソールから接続パラメータを取得できます。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
-2.  右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
-3.  接続パラメータをコードまたは環境変数にコピーしてください。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
+3. 接続パラメータをコードまたは環境変数にコピーしてください。
 
 サンプルコード：
 
@@ -85,9 +85,9 @@ db = TiDBClient.connect(
 
 [TiDB Cloud Starterインスタンスを作成する](https://tidbcloud.com/free-trial/)、次のように Web コンソールから接続パラメータを取得できます。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
-2.  右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが一覧表示されます。
-3.  接続パラメータをコピーし、以下の形式で接続文字列を作成してください。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが一覧表示されます。
+3. 接続パラメータをコピーし、以下の形式で接続文字列を作成してください。
 
 ```python title="main.py"
 from pytidb import TiDBClient
@@ -139,7 +139,7 @@ db = TiDBClient(db_engine=db_engine)
 
 TiDBデータベースに接続後、以下のガイドを参照してデータの操作方法を学ぶことができます。
 
--   [テーブルの操作](/ai/guides/tables.md): TiDB でテーブルを定義および管理する方法を学びます。
--   [ベクトル検索](/ai/guides/vector-search.md): ベクトル埋め込みを使用してセマンティック検索を実行します。
--   [全文検索](/ai/guides/vector-search-full-text-search-python.md): キーワードベースの検索を使用してドキュメントを取得します。
--   [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md): ベクトル検索と全文検索を組み合わせて、より関連性の高い結果を取得します。
+- [テーブルの操作](/ai/guides/tables.md): TiDB でテーブルを定義および管理する方法を学びます。
+- [ベクトル検索](/ai/guides/vector-search.md): ベクトル埋め込みを使用してセマンティック検索を実行します。
+- [全文検索](/ai/guides/vector-search-full-text-search-python.md): キーワードベースの検索を使用してドキュメントを取得します。
+- [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md): ベクトル検索と全文検索を組み合わせて、より関連性の高い結果を取得します。
