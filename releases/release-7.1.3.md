@@ -49,7 +49,7 @@ TiDB バージョン: 7.1.3
 
     -   TiDB Lightning
 
-        -   PDリーダーの変更による`GetTS`失敗に対して再試行メカニズムを追加（ @[lance6716](https://github.com/lance6716) [#45301](https://github.com/pingcap/tidb/issues/45301)
+        -   PDリーダーの変更による`GetTS`失敗に対して再試行メカニズムを追加 [#45301](https://github.com/pingcap/tidb/issues/45301) @[lance6716](https://github.com/lance6716)
 
 ## バグ修正 {#bug-fixes}
 

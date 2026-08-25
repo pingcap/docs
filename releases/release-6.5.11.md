@@ -13,7 +13,7 @@ TiDBバージョン: 6.5.11
 
 ## 互換性の変更 {#compatibility-changes}
 
--   TiKV構成項目[`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)のスコープを変更します。
+-   TiKV設定項目[`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)のスコープを変更します。
 
     -   v6.5.11 より前の v6.5.x バージョンでは、この構成項目は TiKV ノード間の gRPC メッセージの圧縮アルゴリズムにのみ影響します。
     -   v6.5.11以降、この設定項目はTiKVからTiDBに送信されるgRPC応答メッセージの圧縮アルゴリズムにも影響します。圧縮を有効にすると、CPUリソースの消費量が増加する可能性があります[#17176](https://github.com/tikv/tikv/issues/17176) @[ekexium](https://github.com/ekexium)

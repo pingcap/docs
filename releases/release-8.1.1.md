@@ -15,8 +15,8 @@ TiDB バージョン: 8.1.1
 
 -   TiDB Lightningを使用してCSVファイルをインポートする際、並列性とインポートパフォーマンスを向上させるために大きなCSVファイルを複数の小さなCSVファイルに分割するために`strict-format = true`設定する場合は、明示的に`terminator`を指定する必要があります。値は`\r` 、または`\r\n` `\n`かです。行末文字を指定しないと、CSVファイルデータの解析時に例外が発生する可能性があります[#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
 -   [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用してCSVファイルをインポートする際、 `SPLIT_FILE`パラメータを指定して大きなCSVファイルを複数の小さなCSVファイルに分割し、同時実行性とインポートパフォーマンスを向上させる場合は、行末文字`LINES_TERMINATED_BY`を明示的に指定する必要があります。値は`\r` 、 `\n` 、または`\r\n`です。行末文字を指定しないと、CSVファイルデータの解析時に例外が発生する可能性があります[#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
--   並列計算中のディスクオーバーフローによるクエリ結果の誤りを回避するため、変数[`tidb_enable_parallel_hashagg_spill`](https://docs.pingcap.com/tidb/v8.1/system-variables#tidb_enable_parallel_hashagg_spill-new-in-v800)のデフォルト値を`ON`から`OFF`に変更してください。v8.0.0またはv8.1.0からv8.1.1にアップグレードしたクラスターの場合、この変数はアップグレード後もデフォルト値の`ON`のままとなるため、手動で`OFF`に変更することをお勧めします[#55290](https://github.com/pingcap/tidb/issues/55290) @[xzhangxian1008](https://github.com/xzhangxian1008)
--   TiKV構成項目[`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)のスコープを変更します。
+-   並列計算中のディスクオーバーフローによるクエリ結果の誤りを回避するため、変数[`tidb_enable_parallel_hashagg_spill`](https://docs.pingcap.com/tidb/v8.1/system-variables#tidb_enable_parallel_hashagg_spill-new-in-v800)のデフォルト値を`ON`から`OFF`に変更します。v8.0.0またはv8.1.0からv8.1.1にアップグレードしたクラスターの場合、この変数はアップグレード後もデフォルト値の`ON`のままとなるため、手動で`OFF`に変更することをお勧めします[#55290](https://github.com/pingcap/tidb/issues/55290) @[xzhangxian1008](https://github.com/xzhangxian1008)
+-   TiKV設定項目[`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)のスコープを変更します。
 
     -   v8.1.0 では、この構成項目は TiKV ノード間の gRPC メッセージの圧縮アルゴリズムにのみ影響します。
     -   v8.1.1以降、この設定項目はTiKVからTiDBに送信されるgRPC応答メッセージの圧縮アルゴリズムにも影響します。圧縮を有効にすると、CPUリソースの消費量が増加する可能性があります[#17176](https://github.com/tikv/tikv/issues/17176) @[ekexium](https://github.com/ekexium)
