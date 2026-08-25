@@ -43,7 +43,7 @@ To view resource pool details, click the name of a resource pool on the **Resour
 
 The resource pool details page includes the following information:
 
-- **High Availability**: shows whether the resource pool uses Zonal or Regional high availability. This value is read-only. You cannot change the high availability mode or availability zone placement after the resource pool is created.
+- **High Availability**: shows whether the resource pool uses zonal or regional high availability. This value is read-only. You cannot change the high availability mode or availability zone placement after the resource pool is created.
 - **Pool vCPU Usage**: shows the current provisioned TiDB vCPU and additional vCPU provision.
 - **Instances in This Pool**: lists the BYOC instances that run in this resource pool.
 - **Metrics**: shows vCPU usage and physical storage usage trends.
