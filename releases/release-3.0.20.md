@@ -31,7 +31,7 @@ TiDB バージョン: 3.0.20
 
     -   悲観的トランザクションのトランザクションステータスの誤ったキャッシュを修正[#21706](https://github.com/pingcap/tidb/pull/21706)
     -   `INFORMATION_SCHEMA.TIDB_HOT_REGIONS` をクエリするときに発生する不正確な統計の問題を修正しました [#21319](https://github.com/pingcap/tidb/pull/21319)
-    -   データベース名が純粋な下位表現でない場合、データが正しく削除れない可能性がある問題を修正しました`DELETE` [#21205](https://github.com/pingcap/tidb/pull/21205)
+    -   データベース名が純粋な下位表現でない場合、`DELETE`がデータを正しく削除しない可能性がある問題を修正しました [#21205](https://github.com/pingcap/tidb/pull/21205)
     -   再帰ビュー構築時に発生するスタックオーバーフローの問題を修正 [#21000](https://github.com/pingcap/tidb/pull/21000)
     -   TiKVクライアントのgoroutineリークの問題を修正 [#20863](https://github.com/pingcap/tidb/pull/20863)
     -   `year`型の誤ったデフォルトのゼロ値を修正 [#20828](https://github.com/pingcap/tidb/pull/20828)

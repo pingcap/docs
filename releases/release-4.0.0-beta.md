@@ -25,7 +25,7 @@ TiDB Ansible バージョン: 4.0.0-beta
 -   スローログのレベルを通常のログのレベルから切り離す[#12359](https://github.com/pingcap/tidb/pull/12359)
 -   `oom-use-tmp-storage`パラメータ（デフォルトは`true` ）を追加して、単一の SQL 文の実行でメモリ使用量が`mem-quota-query`超え、SQL に`Hash Join` [#11832](https://github.com/pingcap/tidb/pull/11832) [#11937](https://github.com/pingcap/tidb/pull/11937) が含まれている場合に、一時ファイルを使用して中間結果をキャッシュするかどうかを制御します。 [#12067](https://github.com/pingcap/tidb/pull/12067) [#12116](https://github.com/pingcap/tidb/pull/12116)
 -   `create index`を使用して式インデックスを作成し、 `drop index`を使用して式インデックスを削除すること`alter table`サポートします。 [#14117](https://github.com/pingcap/tidb/pull/14117)
--   切り捨てられたSQL出力の数を減らすには、パラメータ`query-log-max-len`のデフォルト値を`4096`に増やしてください。このパラメータは動的に調整できます[#12491](https://github.com/pingcap/tidb/pull/12491)
+-   切り捨てられたSQL出力の数を減らすには、パラメータ`query-log-max-len`のデフォルト値を`4096`に増やします。このパラメータは動的に調整できます[#12491](https://github.com/pingcap/tidb/pull/12491)
 -   列属性に`AutoRandom`キーワードを追加して、システムが主キーにランダムな整数を自動的に割り当てるかどうかを制御できるようになりました。これにより、 `AUTO_INCREMENT`主キーによって引き起こされるホットスポット問題が回避されます。 [#13127](https://github.com/pingcap/tidb/pull/13127)
 -   サポートテーブルロック[#11038](https://github.com/pingcap/tidb/pull/11038)
 -   条件付きフィルタリングで`ADMIN SHOW DDL JOBS`の`LIKE`または`WHERE`句の使用をサポート [#12484](https://github.com/pingcap/tidb/pull/12484)

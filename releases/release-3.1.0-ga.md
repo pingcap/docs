@@ -89,5 +89,5 @@ TiDB Ansible バージョン: 3.1.0 GA
 
     -   Backup & Restore (BR)
 
-        -   `checksum`操作が無効になっているにもかかわらずが実行される問題を修正しました [#223](https://github.com/pingcap/br/pull/223)
+        -   `checksum`操作が無効になっているにもかかわらず実行される問題を修正しました [#223](https://github.com/pingcap/br/pull/223)
         -   TiDBが`auto-random`または`alter-pk` を有効にすると増分バックアップが失敗する問題を修正 [#231](https://github.com/pingcap/br/pull/231) [#230](https://github.com/pingcap/br/pull/230)

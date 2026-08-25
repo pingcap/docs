@@ -23,7 +23,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
     -   単調に増加するインデックス列に対する増分`Analyze`操作をサポートする [#10355](https://github.com/pingcap/tidb/pull/10355)
     -   `Order By`節のNULL値は無視する [#10488](https://github.com/pingcap/tidb/pull/10488)
     -   列情報を簡素化する際の`UnionAll`論理演算子の誤ったスキーマ情報計算を修正 [#10384](https://github.com/pingcap/tidb/pull/10384)
-    -   `Not`演算子プッシュダウンするときに元の式を変更しないでください [#10363](https://github.com/pingcap/tidb/pull/10363/files)
+    -   `Not`演算子をプッシュダウンするときに元の式を変更しないようにします [#10363](https://github.com/pingcap/tidb/pull/10363/files)
     -   ヒストグラムの`dump`相関`load`サポート [#10573](https://github.com/pingcap/tidb/pull/10573)
 
 -   実行エンジン
@@ -78,7 +78,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
 
 -   Raftstore
     -   ラフトストアCPUの消費を減らすために休止状態リージョンをサポートする[#4591](https://github.com/tikv/tikv/pull/4591)
-    -   リーダーがラーナー[#4653](https://github.com/tikv/tikv/pull/4653) `ReadIndex`リクエストに返信しない問題を修正
+    -   リーダーがラーナーの`ReadIndex`リクエストに返信しない問題を修正 [#4653](https://github.com/tikv/tikv/pull/4653)
     -   一部のケースでリーダーの転送に失敗する問題を修正[#4684](https://github.com/tikv/tikv/pull/4684)
     -   いくつかのケースでダーティリードの問題を修正[#4688](https://github.com/tikv/tikv/pull/4688)
     -   スナップショットで適用されたデータが失われる場合がある問題を修正[#4716](https://github.com/tikv/tikv/pull/4716)

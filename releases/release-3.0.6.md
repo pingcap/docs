@@ -40,7 +40,7 @@ TiDB Ansible バージョン: 3.0.6
         -   `performance_schema.tidb_profile_cpu`
         -   `performance_schema.tidb_profile_goroutines`
     -   クエリが悲観的ロックを待機しているときにコマンド`kill`が機能しない問題を修正[#12989](https://github.com/pingcap/tidb/pull/12989)
-    -   悲観的ロックの取得に失敗し、トランザクションが単一のキー変更のみを伴う場合は、非同期ロールバックを実行しないでください。 [#12707](https://github.com/pingcap/tidb/pull/12707)
+    -   悲観的ロックの取得に失敗し、トランザクションが単一のキー変更のみを伴う場合は、非同期ロールバックを実行しないようにします。 [#12707](https://github.com/pingcap/tidb/pull/12707)
     -   領域分割のリクエストに対する応答が空の場合にpanicする問題を修正[#13092](https://github.com/pingcap/tidb/pull/13092)
     -   `PessimisticLock`ロックエラーを返したときに不要なバックオフを回避する[#13116](https://github.com/pingcap/tidb/pull/13116)
     -   認識されない構成オプション警告ログを出力して構成をチェックする TiDB の動作を変更します。 [#13272](https://github.com/pingcap/tidb/pull/13272)

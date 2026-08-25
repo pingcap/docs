@@ -52,7 +52,7 @@ TiDB バージョン: 4.0.12
 
     -   TiCDC
 
-        -   ユーザーが現在のタイムスタンプ[#1497](https://github.com/pingcap/tiflow/pull/1497) `start-ts`日前または`checkpoint-ts`日前に変更フィードを作成または再開するときに、二重の確認を追加します。
+        -   ユーザーが現在のタイムスタンプの1日前の`start-ts`または`checkpoint-ts`で変更フィードを作成または再開するときに、二重の確認を追加します。 [#1497](https://github.com/pingcap/tiflow/pull/1497)
         -   古い値機能用の Grafana パネルを追加する [#1571](https://github.com/pingcap/tiflow/pull/1571)
 
     -   Backup & Restore (BR)
@@ -67,7 +67,7 @@ TiDB バージョン: 4.0.12
     -   TiDB Lightning
 
         -   予期しないエラーを回避するために、 TiDB Lightningを実行する前に TiDB クラスターのバージョンを確認してください[#787](https://github.com/pingcap/br/pull/787)
-        -   TiDB Lightningが`cancel`エラーに遭遇したら、すぐに失敗しましょう [#867](https://github.com/pingcap/br/pull/867)
+        -   TiDB Lightningが`cancel`エラーに遭遇したら、すぐに失敗するようにします [#867](https://github.com/pingcap/br/pull/867)
         -   メモリ使用量とパフォーマンスのバランスをとるために、 `tikv-importer.engine-mem-cache-size`と`tikv-importer.local-writer-mem-cache-size`構成項目を追加します[#866](https://github.com/pingcap/br/pull/866)
         -   インポート速度を上げるために、TiDB Lightningのローカルバックエンドで`batch split region`並列実行します[#868](https://github.com/pingcap/br/pull/868)
         -   TiDB Lightningを使用してS3ストレージからデータをインポートする場合、 TiDB Lightningは`s3:ListBucket`権限必要としなくなりました。 [#919](https://github.com/pingcap/br/pull/919)
