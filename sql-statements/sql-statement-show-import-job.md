@@ -9,8 +9,8 @@ summary: TiDB での SHOW IMPORT の使用法の概要。
 
 ## 必要な権限 {#required-privileges}
 
--   `SHOW IMPORT JOBS` : ユーザーが権限`SUPER`持っている場合、このステートメントは TiDB 内のすべてのインポートジョブを表示します。それ以外の場合は、現在のユーザーが作成したジョブのみを表示します。
--   `SHOW IMPORT JOB <job-id>` : インポートジョブの作成者または`SUPER`権限を持つユーザーのみがこのステートメントを使用して特定のジョブを表示できます。
+- `SHOW IMPORT JOBS` : ユーザーが権限`SUPER`持っている場合、このステートメントは TiDB 内のすべてのインポートジョブを表示します。それ以外の場合は、現在のユーザーが作成したジョブのみを表示します。
+- `SHOW IMPORT JOB <job-id>` : インポートジョブの作成者または`SUPER`権限を持つユーザーのみがこのステートメントを使用して特定のジョブを表示できます。
 
 ## 概要 {#synopsis}
 
@@ -74,5 +74,5 @@ SHOW IMPORT JOB 60001;
 
 ## 参照 {#see-also}
 
--   [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
--   [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
+- [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
+- [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)

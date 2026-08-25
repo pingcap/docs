@@ -47,8 +47,8 @@ SELECT * FROM table_constraints WHERE constraint_type='UNIQUE';
 
 `TABLE_CONSTRAINTS`テーブル内のフィールドは次のように説明されます。
 
--   `CONSTRAINT_CATALOG` : 制約が属するカタログの名前。この値は常に`def` 。
--   `CONSTRAINT_SCHEMA` : 制約が属するデータベースの名前。
--   `CONSTRAINT_NAME` : 制約の名前。
--   `TABLE_NAME` : テーブルの名前。
--   `CONSTRAINT_TYPE` : 制約の種類。値は`UNIQUE` 、 `PRIMARY KEY` 、または`FOREIGN KEY`のいずれかです。`UNIQUE`と`PRIMARY KEY`の情報は、 `SHOW INDEX`ステートメントの実行結果と同様です。
+- `CONSTRAINT_CATALOG` : 制約が属するカタログの名前。この値は常に`def` 。
+- `CONSTRAINT_SCHEMA` : 制約が属するデータベースの名前。
+- `CONSTRAINT_NAME` : 制約の名前。
+- `TABLE_NAME` : テーブルの名前。
+- `CONSTRAINT_TYPE` : 制約の種類。値は`UNIQUE` 、 `PRIMARY KEY` 、または`FOREIGN KEY`のいずれかです。`UNIQUE`と`PRIMARY KEY`の情報は、 `SHOW INDEX`ステートメントの実行結果と同様です。

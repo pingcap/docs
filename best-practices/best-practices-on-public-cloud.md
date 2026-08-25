@@ -65,21 +65,21 @@ sdd           1033.00   4132.00   1141.33  31685.33   571.00    0.94 100.00
 
 さまざまなパブリッククラウドに推奨されるミドルレンジ ディスクは次のとおりです。
 
--   AWSでは[gp3](https://aws.amazon.com/ebs/general-purpose/)推奨されます。gp3ボリュームは、ボリュームサイズに関係なく、3000 IOPSと125 MB/秒のスループットを無料で割り当てることができ、通常はRaft Engineに十分な値です。
+- AWSでは[gp3](https://aws.amazon.com/ebs/general-purpose/)推奨されます。gp3ボリュームは、ボリュームサイズに関係なく、3000 IOPSと125 MB/秒のスループットを無料で割り当てることができ、通常はRaft Engineに十分な値です。
 
--   Google Cloudでは[pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/)推奨されています。IOPSとMBPSは割り当てられたディスクサイズによって異なります。パフォーマンス要件を満たすには、 Raft Engineに200GBを割り当てることを推奨します。Raft Raft Engineはそれほど大きな容量を必要としませんが、最適なパフォーマンスを確保できます。
+- Google Cloudでは[pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/)推奨されています。IOPSとMBPSは割り当てられたディスクサイズによって異なります。パフォーマンス要件を満たすには、 Raft Engineに200GBを割り当てることを推奨します。Raft Raft Engineはそれほど大きな容量を必要としませんが、最適なパフォーマンスを確保できます。
 
--   Azureでは[プレミアム SSD v2](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2)推奨されます。AWS gp3と同様に、Premium SSD v2はボリュームサイズに関係なく、3000 IOPSと125 MB/秒のスループットを無料で割り当てることができ、通常はRaft Engineに十分です。
+- Azureでは[プレミアム SSD v2](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2)推奨されます。AWS gp3と同様に、Premium SSD v2はボリュームサイズに関係なく、3000 IOPSと125 MB/秒のスループットを無料で割り当てることができ、通常はRaft Engineに十分です。
 
 #### ハイエンドディスク {#high-end-disk}
 
 Raft Engineのレイテンシーをさらに低減したい場合は、ハイエンドディスクの使用を検討してください。以下は、各パブリッククラウドで推奨されるハイエンドディスクです。
 
--   AWSでは[io2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html)が推奨されます。ディスクサイズとIOPSは、お客様の特定の要件に応じてプロビジョニングできます。
+- AWSでは[io2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html)が推奨されます。ディスクサイズとIOPSは、お客様の特定の要件に応じてプロビジョニングできます。
 
--   Google Cloud では[pd-extreme](https://cloud.google.com/compute/docs/disks#disk-types/)推奨されます。ディスクサイズ、IOPS、MBPS をプロビジョニングできますが、64 個以上の CPU コアを持つインスタンスでのみ利用可能です。
+- Google Cloud では[pd-extreme](https://cloud.google.com/compute/docs/disks#disk-types/)推奨されます。ディスクサイズ、IOPS、MBPS をプロビジョニングできますが、64 個以上の CPU コアを持つインスタンスでのみ利用可能です。
 
--   Azure では[Ultra Disk](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#ultra-disks)が推奨されます。ディスクサイズ、IOPS、MBPS は、お客様の特定の要件に応じてプロビジョニングできます。
+- Azure では[Ultra Disk](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#ultra-disks)が推奨されます。ディスクサイズ、IOPS、MBPS は、お客様の特定の要件に応じてプロビジョニングできます。
 
 ### 例 1: AWS でソーシャル ネットワーク ワークロードを実行する {#example-1-run-a-social-network-workload-on-aws}
 
@@ -87,9 +87,9 @@ AWS は、20 GB [gp3](https://aws.amazon.com/ebs/general-purpose/)ボリュー�
 
 書き込み集中型のソーシャル ネットワーク アプリケーション ワークロードに AWS 上の専用の 20 GB [gp3](https://aws.amazon.com/ebs/general-purpose/) Raft Engineディスクを使用すると、次のような改善が見られますが、推定コストはわずか 0.4% しか増加しません。
 
--   QPS（1秒あたりのクエリ数）が17.5%増加
--   挿入文の平均レイテンシーが18.7%減少
--   挿入ステートメントの p99レイテンシーが 45.6% 減少しました。
+- QPS（1秒あたりのクエリ数）が17.5%増加
+- 挿入文の平均レイテンシーが18.7%減少
+- 挿入ステートメントの p99レイテンシーが 45.6% 減少しました。
 
 | メトリック            | 共有Raft Engineディスク | 専用Raft Engineディスク | 違い （％） |
 | ---------------- | ----------------- | ----------------- | ------ |
@@ -101,8 +101,8 @@ AWS は、20 GB [gp3](https://aws.amazon.com/ebs/general-purpose/)ボリュー�
 
 Azure 上のRaft Engineに専用の 32 GB [Ultra Disk](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#ultra-disks)を使用すると、次の改善が見られます。
 
--   Sysbench `oltp_read_write`ワークロード: QPS が 17.8% 増加し、平均レイテンシーが 15.6% 減少しました。
--   TPC-C ワークロード: QPS が 27.6% 増加し、平均レイテンシーが 23.1% 減少しました。
+- Sysbench `oltp_read_write`ワークロード: QPS が 17.8% 増加し、平均レイテンシーが 15.6% 減少しました。
+- TPC-C ワークロード: QPS が 27.6% 増加し、平均レイテンシーが 23.1% 減少しました。
 
 | メトリック        | 作業負荷                     | 共有Raft Engineディスク | 専用Raft Engineディスク | 違い （％） |
 | ------------ | ------------------------ | ----------------- | ----------------- | ------ |
@@ -145,9 +145,9 @@ Google Cloud の[ライブマイグレーション機能](https://cloud.google.c
 
 Google Cloud によって開始されたライブマイグレーション イベントを検出し、これらのイベントによるパフォーマンスへの影響を軽減するために、TiDB は Google のメタデータ[例](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/compute/metadata/main.py)に基づく[スクリプトを見る](https://github.com/PingCAP-QE/tidb-google-maintenance)提供します。このスクリプトを TiDB、TiKV、PD ノードにデプロイして、メンテナンス イベントを検出できます。メンテナンス イベントが検出されると、中断を最小限に抑え、クラスタの動作を最適化するために、次のように適切なアクションが自動的に実行されます。
 
--   TiDB: TiDBノードをオフラインにし、TiDBポッドを削除します。これは、TiDBインスタンスのノードプールが自動スケールに設定され、TiDB専用になっていることを前提としています。ノード上で実行されている他のポッドに中断が発生する可能性があり、切断されたノードは自動スケーラーによって回収されることが想定されます。
--   TiKV: メンテナンス中に、影響を受ける TiKV ストアのリーダーを削除します。
--   PD: 現在の PD インスタンスが PD リーダーである場合、リーダーを辞任します。
+- TiDB: TiDBノードをオフラインにし、TiDBポッドを削除します。これは、TiDBインスタンスのノードプールが自動スケールに設定され、TiDB専用になっていることを前提としています。ノード上で実行されている他のポッドに中断が発生する可能性があり、切断されたノードは自動スケーラーによって回収されることが想定されます。
+- TiKV: メンテナンス中に、影響を受ける TiKV ストアのリーダーを削除します。
+- PD: 現在の PD インスタンスが PD リーダーである場合、リーダーを辞任します。
 
 この監視スクリプトは、Kubernetes 環境での TiDB の強化された管理機能を提供する[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/tidb-operator-overview)を使用してデプロイされた TiDB クラスター用に特別に設計されていることに注意することが重要です。
 
@@ -196,9 +196,9 @@ set global tidb_tso_client_batch_max_wait_time = 2; # default: 0
 
 チューニング後、次の効果が見られます。
 
--   1 秒あたりの TSO リクエストは 64,800 に減少します。
--   CPU 使用率は約 4,600% から 1,400% に大幅に減少しました。
--   P999 値`PD server TSO handle time`が 2ms から 0.5ms に減少します。
+- 1 秒あたりの TSO リクエストは 64,800 に減少します。
+- CPU 使用率は約 4,600% から 1,400% に大幅に減少しました。
+- P999 値`PD server TSO handle time`が 2ms から 0.5ms に減少します。
 
 これらの改善は、チューニング調整によって、安定した TSO 処理パフォーマンスを維持しながら、PDサーバーの CPU 使用率を正常に削減できたことを示しています。
 

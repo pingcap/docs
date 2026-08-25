@@ -11,20 +11,20 @@ TiDB v5.1.0以降、Reorg-Dataを必要とする列型の変更がサポート�
 
 以下は、Reorg-Data を必要とする列タイプの変更の一般的な例です。
 
--   `VARCHAR`を`BIGINT`に変更
--   `DECIMAL`精度の変更
--   `VARCHAR(10)`の長さを`VARCHAR(5)`に短縮する
+- `VARCHAR`を`BIGINT`に変更
+- `DECIMAL`精度の変更
+- `VARCHAR(10)`の長さを`VARCHAR(5)`に短縮する
 
 v8.5.5以降、TiDBは、以前はReorg-Dataを必要としていた一部の列型変更を最適化します。以下の条件が満たされた場合、TiDBはテーブル全体ではなく、影響を受けるインデックスのみを再構築するため、実行効率が向上します。
 
--   現在のセッションでは、厳密な[SQLモード](/sql-mode.md) ( `sql_mode`は`STRICT_TRANS_TABLES`または`STRICT_ALL_TABLES`が含まれます ) が使用されます。
--   テーブルにはTiFlashレプリカがありません。
--   型変換中にデータが切り捨てられるリスクはありません。
+- 現在のセッションでは、厳密な[SQLモード](/sql-mode.md) ( `sql_mode`は`STRICT_TRANS_TABLES`または`STRICT_ALL_TABLES`が含まれます ) が使用されます。
+- テーブルにはTiFlashレプリカがありません。
+- 型変換中にデータが切り捨てられるリスクはありません。
 
 この最適化は、次の型変更シナリオにのみ適用されます。
 
--   `BIGINT`から`INT`ような整数型間の変換
--   `VARCHAR(200)`から`VARCHAR(100)`など、文字セットが変更されない文字列型間の変換
+- `BIGINT`から`INT`ような整数型間の変換
+- `VARCHAR(200)`から`VARCHAR(100)`など、文字セットが変更されない文字列型間の変換
 
 > **Note:**
 >
@@ -74,20 +74,26 @@ ColumnName ::=
 CREATE TABLE t1 (id int not null primary key AUTO_INCREMENT, col1 INT);
 ```
 
-    Query OK, 0 rows affected (0.11 sec)
+```
+Query OK, 0 rows affected (0.11 sec)
+```
 
 ```sql
 INSERT INTO t1 (col1) VALUES (1),(2),(3),(4),(5);
 ```
 
-    Query OK, 5 rows affected (0.02 sec)
-    Records: 5  Duplicates: 0  Warnings: 0
+```
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+```
 
 ```sql
 ALTER TABLE t1 MODIFY col1 BIGINT;
 ```
 
-    Query OK, 0 rows affected (0.09 sec)
+```
+Query OK, 0 rows affected (0.09 sec)
+```
 
 ```sql
 SHOW CREATE TABLE t1\G
@@ -110,20 +116,26 @@ Create Table: CREATE TABLE `t1` (
 CREATE TABLE t1 (id int not null primary key AUTO_INCREMENT, col1 INT);
 ```
 
-    Query OK, 0 rows affected (0.11 sec)
+```
+Query OK, 0 rows affected (0.11 sec)
+```
 
 ```sql
 INSERT INTO t1 (col1) VALUES (12345),(67890);
 ```
 
-    Query OK, 2 rows affected (0.00 sec)
-    Records: 2  Duplicates: 0  Warnings: 0
+```
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+```
 
 ```sql
 ALTER TABLE t1 MODIFY col1 VARCHAR(5);
 ```
 
-    Query OK, 0 rows affected (2.52 sec)
+```
+Query OK, 0 rows affected (2.52 sec)
+```
 
 ```sql
 SHOW CREATE TABLE t1\G
@@ -142,18 +154,22 @@ CREATE TABLE `t1` (
 
 > **Note:**
 >
-> -   TiDBは、変更されたデータ型が既存のデータ行と競合する場合にエラーを返します。上記の例では、TiDBは次のエラーを返します。
+> - TiDBは、変更されたデータ型が既存のデータ行と競合する場合にエラーを返します。上記の例では、TiDBは次のエラーを返します。
 >
->         alter table t1 modify column col1 varchar(4);
->         ERROR 1406 (22001): Data Too Long, field len 4, data len 5
+>    ```
+>    alter table t1 modify column col1 varchar(4);
+>    ERROR 1406 (22001): Data Too Long, field len 4, data len 5
+>    ```
 >
-> -   非同期コミット機能との互換性のため、 [メタデータロック](/metadata-lock.md)無効になっている場合、DDL ステートメントは、Reorg-Data への処理を開始する前に一定期間 (約 2.5 秒) 待機します。
+> - 非同期コミット機能との互換性のため、 [メタデータロック](/metadata-lock.md)無効になっている場合、DDL ステートメントは、Reorg-Data への処理を開始する前に一定期間 (約 2.5 秒) 待機します。
 >
->         Query OK, 0 rows affected (2.52 sec)
+>    ```
+>    Query OK, 0 rows affected (2.52 sec)
+>    ```
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
--   主キー列のReorg-Data型の変更はサポートされていませんが、Meta-Only型の変更はサポートされています。例：
+- 主キー列のReorg-Data型の変更はサポートされていませんが、Meta-Only型の変更はサポートされています。例：
 
     ```sql
     CREATE TABLE t (a int primary key);
@@ -173,7 +189,7 @@ CREATE TABLE `t1` (
     Query OK, 0 rows affected (0.01 sec)
     ```
 
--   生成列の列型の変更はサポートされていません。例:
+- 生成列の列型の変更はサポートされていません。例:
 
     ```sql
     CREATE TABLE t (a INT, b INT as (a+1));
@@ -181,7 +197,7 @@ CREATE TABLE `t1` (
     ERROR 8200 (HY000): Unsupported modify column: column is generated
     ```
 
--   パーティションテーブルの列の型の変更はサポートされていません。例:
+- パーティションテーブルの列の型の変更はサポートされていません。例:
 
     ```sql
     CREATE TABLE t (c1 INT, c2 INT, c3 INT) partition by range columns(c1) ( partition p0 values less than (10), partition p1 values less than (maxvalue));
@@ -189,7 +205,7 @@ CREATE TABLE `t1` (
     ERROR 8200 (HY000): Unsupported modify column: table is partition table
     ```
 
--   TiDB と MySQL 間の`cast`関数の動作に関する互換性の問題により、一部のデータ型 (たとえば、一部の TIME 型、BIT、SET、ENUM、JSON) から他の型への変更はサポートされていません。
+- TiDB と MySQL 間の`cast`関数の動作に関する互換性の問題により、一部のデータ型 (たとえば、一部の TIME 型、BIT、SET、ENUM、JSON) から他の型への変更はサポートされていません。
 
     ```sql
     CREATE TABLE t (a DECIMAL(13, 7));
@@ -199,8 +215,8 @@ CREATE TABLE `t1` (
 
 ## 参照 {#see-also}
 
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
--   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
--   [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
--   [DROP COLUMN](/sql-statements/sql-statement-drop-column.md)
--   [CHANGE COLUMN](/sql-statements/sql-statement-change-column.md)
+- [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+- [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+- [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
+- [DROP COLUMN](/sql-statements/sql-statement-drop-column.md)
+- [CHANGE COLUMN](/sql-statements/sql-statement-change-column.md)

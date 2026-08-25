@@ -47,7 +47,7 @@ CONSTRAINT_CATALOG: def
 
 `CHECK_CONSTRAINTS`テーブル内のフィールドは次のように説明されます。
 
--   `CONSTRAINT_CATALOG` : 制約のカタログ。常に`def`です。
--   `CONSTRAINT_SCHEMA` : 制約のスキーマ。
--   `CONSTRAINT_NAME` : 制約の名前。
--   `CHECK_CLAUSE` : チェック制約の句。
+- `CONSTRAINT_CATALOG` : 制約のカタログ。常に`def`です。
+- `CONSTRAINT_SCHEMA` : 制約のスキーマ。
+- `CONSTRAINT_NAME` : 制約の名前。
+- `CHECK_CLAUSE` : チェック制約の句。

@@ -14,20 +14,20 @@ aliases: ['/ja/tidb/stable/dev-guide-insert-data/','/ja/tidb/dev/dev-guide-inser
 
 この文書を読む前に、以下のものを準備してください。
 
--   [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)、データベース[データベースを作成する](/develop/dev-guide-create-database.md)、[テーブルを作成する](/develop/dev-guide-create-table.md)、 [セカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md)を読む
+- [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)、データベース[データベースを作成する](/develop/dev-guide-create-database.md)、[テーブルを作成する](/develop/dev-guide-create-table.md)、 [セカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md)を読む
 
 ## 行を挿入する {#insert-rows}
 
 複数の行のデータを挿入する方法は2つあります。たとえば、 **3人**の選手のデータを挿入する必要がある場合などです。
 
--   **複数行挿入ステートメント**：
+- **複数行挿入ステートメント**：
 
     ```sql
     INSERT INTO `player` (`id`, `coins`, `goods`) VALUES (1, 1000, 1), (2, 230, 2), (3, 300, 5);
     ```
 
--   複数の**単一行挿入ステートメント**：
+- 複数の**単一行挿入ステートメント**：
 
     ```sql
     INSERT INTO `player` (`id`, `coins`, `goods`) VALUES (1, 1000, 1);
@@ -112,9 +112,9 @@ jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPr
 
 Javaでの完全な例については、以下を参照してください。
 
--   [JDBCを使用してTiDBに接続する](/develop/dev-guide-sample-application-java-jdbc.md)
--   [Hibernateを使用してTiDBに接続する](/develop/dev-guide-sample-application-java-hibernate.md)
--   [Spring Bootを使用してTiDBに接続する](/develop/dev-guide-sample-application-java-spring-boot.md)
+- [JDBCを使用してTiDBに接続する](/develop/dev-guide-sample-application-java-jdbc.md)
+- [Hibernateを使用してTiDBに接続する](/develop/dev-guide-sample-application-java-hibernate.md)
+- [Spring Bootを使用してTiDBに接続する](/develop/dev-guide-sample-application-java-spring-boot.md)
 
 </div>
 
@@ -188,8 +188,8 @@ func buildBulkInsertSQL(amount int) string {
 
 Golangでの完全な例については、以下を参照してください。
 
--   [Go-MySQL-Driverを使用してTiDBに接続する](/develop/dev-guide-sample-application-golang-sql-driver.md)
--   [GORMを使用してTiDBに接続する](/develop/dev-guide-sample-application-golang-gorm.md)
+- [Go-MySQL-Driverを使用してTiDBに接続する](/develop/dev-guide-sample-application-golang-sql-driver.md)
+- [GORMを使用してTiDBに接続する](/develop/dev-guide-sample-application-golang-gorm.md)
 
 </div>
 
@@ -215,11 +215,11 @@ with get_connection(autocommit=True) as connection:
 
 Pythonでの完全な例については、以下を参照してください。
 
--   [PyMySQLを使用してTiDBに接続する](/develop/dev-guide-sample-application-python-pymysql.md)
--   [mysqlclientを使用してTiDBに接続します](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart)
--   [MySQL Connector/Pythonを使用してTiDBに接続する](/develop/dev-guide-sample-application-python-mysql-connector.md)
--   [SQLAlchemyを使用してTiDBに接続する](/develop/dev-guide-sample-application-python-sqlalchemy.md)
--   [peeweeを使用してTiDBに接続します](/develop/dev-guide-sample-application-python-peewee.md)
+- [PyMySQLを使用してTiDBに接続する](/develop/dev-guide-sample-application-python-pymysql.md)
+- [mysqlclientを使用してTiDBに接続します](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart)
+- [MySQL Connector/Pythonを使用してTiDBに接続する](/develop/dev-guide-sample-application-python-mysql-connector.md)
+- [SQLAlchemyを使用してTiDBに接続する](/develop/dev-guide-sample-application-python-sqlalchemy.md)
+- [peeweeを使用してTiDBに接続します](/develop/dev-guide-sample-application-python-peewee.md)
 
 </div>
 
@@ -234,18 +234,18 @@ TiDBに大量のデータを迅速にインポートする必要がある場合�
 <SimpleTab groupId="platform">
 <div label="TiDB Cloud" value="tidb-cloud">
 
--   データエクスポート： [Dumpling](/dumpling-overview.md)を使用して、MySQLまたはTiDBデータをローカルストレージまたはクラウドストレージにエクスポートします。TiDB Cloud StarterまたはEssentialインスタンスの場合は、 [TiDB Cloudコンソール](https://tidbcloud.com/)の[エクスポート](/tidb-cloud/serverless-export.md)機能を使用して、より効率的にデータをエクスポートすることもできます。
--   データのインポート: [TiDB Cloudコンソール](https://tidbcloud.com/)の[インポート](/tidb-cloud/import-sample-data.md)機能を使用します。 Dumplingでエクスポートしたデータをインポートしたり、ローカルの CSV ファイルをインポートしたり、[クラウドストレージからCSVファイルをTiDB Cloudにインポートする](/tidb-cloud/import-csv-files.md)ことができます。
--   データレプリケーション： [TiDB Cloudコンソール](https://tidbcloud.com/)の[TiDB Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)機能を使用します。 MySQL 互換データベースを TiDB にレプリケートできます。また、ソースデータベースからのシャーディングされたインスタンスとテーブルのマージおよび移行もサポートしています。
--   データのバックアップと復元: [TiDB Cloudコンソール](https://tidbcloud.com/)の[バックアップ](/tidb-cloud/backup-and-restore.md)機能を使用します。 Dumplingと比較して、バックアップと復元はビッグ データのシナリオにより適しています。
+- データエクスポート： [Dumpling](/dumpling-overview.md)を使用して、MySQLまたはTiDBデータをローカルストレージまたはクラウドストレージにエクスポートします。TiDB Cloud StarterまたはEssentialインスタンスの場合は、 [TiDB Cloudコンソール](https://tidbcloud.com/)の[エクスポート](/tidb-cloud/serverless-export.md)機能を使用して、より効率的にデータをエクスポートすることもできます。
+- データのインポート: [TiDB Cloudコンソール](https://tidbcloud.com/)の[インポート](/tidb-cloud/import-sample-data.md)機能を使用します。 Dumplingでエクスポートしたデータをインポートしたり、ローカルの CSV ファイルをインポートしたり、[クラウドストレージからCSVファイルをTiDB Cloudにインポートする](/tidb-cloud/import-csv-files.md)ことができます。
+- データレプリケーション： [TiDB Cloudコンソール](https://tidbcloud.com/)の[TiDB Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)機能を使用します。 MySQL 互換データベースを TiDB にレプリケートできます。また、ソースデータベースからのシャーディングされたインスタンスとテーブルのマージおよび移行もサポートしています。
+- データのバックアップと復元: [TiDB Cloudコンソール](https://tidbcloud.com/)の[バックアップ](/tidb-cloud/backup-and-restore.md)機能を使用します。 Dumplingと比較して、バックアップと復元はビッグ データのシナリオにより適しています。
 
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
--   データエクスポート： [Dumpling](/dumpling-overview.md) 。MySQLまたはTiDBのデータをローカルまたはAmazon S3にエクスポートできます。
--   データインポート: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 。 **Dumpling**でエクスポートされたデータ、 **CSV**ファイル、 [Amazon AuroraからTiDBへのデータ移行](/migrate-aurora-to-tidb.md)をインポートできます。ローカルディスクまたは Amazon S3 クラウドディスクからのデータの読み取りもサポートします。
--   データレプリケーション： [TiDB Data Migration](/dm/dm-overview.md)MySQL、MariaDB、Amazon AuroraデータベースをTiDBにレプリケートできます。また、ソースデータベースからのシャーディングされたインスタンスとテーブルのマージおよび移行もサポートしています。
--   データのバックアップと復元:[Backup & Restore (BR)](/br/backup-and-restore-overview.md) 。 **Dumpling**と比較して、 **BR**は***ビッグデータの***シナリオにより適しています。
+- データエクスポート： [Dumpling](/dumpling-overview.md) 。MySQLまたはTiDBのデータをローカルまたはAmazon S3にエクスポートできます。
+- データインポート: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 。 **Dumpling**でエクスポートされたデータ、 **CSV**ファイル、 [Amazon AuroraからTiDBへのデータ移行](/migrate-aurora-to-tidb.md)をインポートできます。ローカルディスクまたは Amazon S3 クラウドディスクからのデータの読み取りもサポートします。
+- データレプリケーション： [TiDB Data Migration](/dm/dm-overview.md)MySQL、MariaDB、Amazon AuroraデータベースをTiDBにレプリケートできます。また、ソースデータベースからのシャーディングされたインスタンスとテーブルのマージおよび移行もサポートしています。
+- データのバックアップと復元:[Backup & Restore (BR)](/br/backup-and-restore-overview.md) 。 **Dumpling**と比較して、 **BR**は***ビッグデータの***シナリオにより適しています。
 
 </div>
 </SimpleTab>
@@ -276,13 +276,13 @@ ERROR 8216 (HY000): Invalid auto random: Explicit insertion on auto_random colum
 
 このエラーに対処するには、2つの解決策があります。
 
--   （推奨）挿入ステートメントからこの列を削除し、TiDB が初期化した`AUTO_RANDOM`の値を使用してください。これは`AUTO_RANDOM`のセマンティクスに適合します。
+- （推奨）挿入ステートメントからこの列を削除し、TiDB が初期化した`AUTO_RANDOM`の値を使用してください。これは`AUTO_RANDOM`のセマンティクスに適合します。
 
     ```sql
     INSERT INTO `bookshop`.`users` (`balance`, `nickname`) VALUES (0.00, 'nicky');
     ```
 
--   この列を指定する***必要が***あることが確実な場合は、 [`SET`ステートメント](https://docs.pingcap.com/tidb/stable/sql-statement-set-variable)を使用できます。 ユーザー変数を変更することで、挿入時に`AUTO_RANDOM`の列を指定できるようにします。
+- この列を指定する***必要が***あることが確実な場合は、 [`SET`ステートメント](https://docs.pingcap.com/tidb/stable/sql-statement-set-variable)を使用できます。 ユーザー変数を変更することで、挿入時に`AUTO_RANDOM`の列を指定できるようにします。
 
     ```sql
     SET @@allow_auto_random_explicit_insert = true;
@@ -295,6 +295,6 @@ TiDB では、HTAP 機能により、データの挿入時に追加の操作を�
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

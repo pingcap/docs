@@ -18,13 +18,13 @@ Gemini APIキー（BYOK）をお持ちの場合は、 `gemini/`プレフィッ�
 
 **Gemini埋め込み-001**
 
--   名前: `gemini/gemini-embedding-001`
--   寸法：128～3072（デフォルト：3072）
--   距離指標：コサイン類似度、L2
--   入力可能なテキストトークンの最大数：2,048
--   価格：Googleが課金
--   TiDB Cloudでホストされています: ❌
--   鍵をご持参ください：✅
+- 名前: `gemini/gemini-embedding-001`
+- 寸法：128～3072（デフォルト：3072）
+- 距離指標：コサイン類似度、L2
+- 入力可能なテキストトークンの最大数：2,048
+- 価格：Googleが課金
+- TiDB Cloudでホストされています: ❌
+- 鍵をご持参ください：✅
 
 利用可能なモデルの完全なリストについては、 [Geminiのドキュメント](https://ai.google.dev/gemini-api/docs/embeddings)を参照してください。
 
@@ -281,7 +281,7 @@ CREATE TABLE sample (
 
 ## 関連項目 {#see-also}
 
--   [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
--   [ベクトル検索](/ai/concepts/vector-search-overview.md)
--   [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
--   [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)
+- [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
+- [ベクトル検索](/ai/concepts/vector-search-overview.md)
+- [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
+- [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)

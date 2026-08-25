@@ -9,12 +9,12 @@ summary: サブクエリに関連する最適化を理解します。
 
 サブクエリは通常、次のような状況で使用されます。
 
--   `... </=/!=/>/ ALL (SELECT ... FROM ...)`
--   `NOT IN (SELECT ... FROM ...)`
--   `IN (SELECT ... FROM ..)`
--   `NOT EXISTS (SELECT ... FROM ...)`
--   `EXISTS (SELECT ... FROM ...)`
--   `... >/>=/</<=/=/!= (SELECT ... FROM ...)`
+- `... </=/!=/>/ ALL (SELECT ... FROM ...)`
+- `NOT IN (SELECT ... FROM ...)`
+- `IN (SELECT ... FROM ..)`
+- `NOT EXISTS (SELECT ... FROM ...)`
+- `EXISTS (SELECT ... FROM ...)`
+- `... >/>=/</<=/=/!= (SELECT ... FROM ...)`
 
 サブクエリには、 `select * from t where t.a in (select * from t2 where t.b=t2.b)`ようにサブクエリ以外の列が含まれる場合があります。サブクエリ内の`t.b`列はサブクエリに属しておらず、サブクエリの外部から導入されています。このようなサブクエリは通常「相関サブクエリ」と呼ばれ、外部から導入された列は「相関列」と呼ばれます。相関サブクエリの最適化については、 [相関サブクエリの非相関](/correlated-subquery-optimization.md)を参照してください。この記事では、相関列を含まないサブクエリに焦点を当てています。
 
@@ -24,20 +24,20 @@ summary: サブクエリに関連する最適化を理解します。
 
 この場合、 `ALL`と`ANY` `MAX`と`MIN`に置き換えることができます。テーブルが空の場合、 `MAX(EXPR)`と`MIN(EXPR)`の結果は NULL になります。 `EXPR`の結果に`NULL`含まれる場合も同様です。 `EXPR`の結果に`NULL`が含まれるかどうかは式の最終結果に影響を与える可能性があるため、完全な書き換えは次のようになります。
 
--   `t.id < all (select s.id from s)`は`t.id < min(s.id) and if(sum(s.id is null) != 0, null, true)`に書き換えられる
--   `t.id > any (select s.id from s)`は`t.id > max(s.id) or if(sum(s.id is null) != 0, null, false)`に書き換えられる
+- `t.id < all (select s.id from s)`は`t.id < min(s.id) and if(sum(s.id is null) != 0, null, true)`に書き換えられる
+- `t.id > any (select s.id from s)`は`t.id > max(s.id) or if(sum(s.id is null) != 0, null, false)`に書き換えられる
 
 ## `... != ANY (SELECT ... FROM ...)` {#any-select-from}
 
 この場合、サブクエリのすべての値が一意であれば、クエリをそれらと比較するだけで十分です。サブクエリ内の異なる値の数が複数ある場合は、不等式が存在する必要があります。したがって、このようなサブクエリは次のように書き換えることができます。
 
--   `select * from t where t.id != any (select s.id from s)`は`select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s) where (t.id != s.id or cnt_distinct > 1)`に書き換えられる
+- `select * from t where t.id != any (select s.id from s)`は`select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s) where (t.id != s.id or cnt_distinct > 1)`に書き換えられる
 
 ## `... = ALL (SELECT ... FROM ...)` {#all-select-from}
 
 この場合、サブクエリ内の異なる値の数が複数ある場合、この式の結果は必ず偽になります。そのため、TiDBではこのようなサブクエリは次のような形式に書き換えられます。
 
--   `select * from t where t.id = all (select s.id from s)`は`select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s ) where (t.id = s.id and cnt_distinct <= 1)`に書き換えられる
+- `select * from t where t.id = all (select s.id from s)`は`select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s ) where (t.id = s.id and cnt_distinct <= 1)`に書き換えられる
 
 ## `... IN (SELECT ... FROM ...)` {#in-select-from}
 

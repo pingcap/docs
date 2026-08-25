@@ -7,25 +7,25 @@ summary: TiDBスナップショットのバックアップと復元コマンド�
 
 このドキュメントでは、次のようなアプリケーションシナリオに応じて、TiDB スナップショットのバックアップと復元のコマンドについて説明します。
 
--   [クラスターのスナップショットをバックアップする](#back-up-cluster-snapshots)
--   [データベースまたはテーブルをバックアップする](#back-up-a-database-or-a-table)
-    -   [データベースをバックアップする](#back-up-a-database)
-    -   [テーブルをバックアップする](#back-up-a-table)
-    -   [テーブルフィルターを使用して複数のテーブルをバックアップする](#back-up-multiple-tables-with-table-filter)
--   [統計のバックアップ](#back-up-statistics)
--   [バックアップデータを暗号化する](#encrypt-the-backup-data)
--   [クラスタースナップショットを復元する](#restore-cluster-snapshots)
--   [データベースまたはテーブルを復元する](#restore-a-database-or-a-table)
-    -   [データベースを復元する](#restore-a-database)
-    -   [テーブルを復元する](#restore-a-table)
-    -   [テーブルフィルターを使用して複数のテーブルを復元する](#restore-multiple-tables-with-table-filter)
-    -   [`mysql`スキーマから実行プランバインディングを復元する](#restore-execution-plan-bindings-from-the-mysql-schema)
--   [暗号化されたスナップショットを復元する](#restore-encrypted-snapshots)
+- [クラスターのスナップショットをバックアップする](#back-up-cluster-snapshots)
+- [データベースまたはテーブルをバックアップする](#back-up-a-database-or-a-table)
+    - [データベースをバックアップする](#back-up-a-database)
+    - [テーブルをバックアップする](#back-up-a-table)
+    - [テーブルフィルターを使用して複数のテーブルをバックアップする](#back-up-multiple-tables-with-table-filter)
+- [統計のバックアップ](#back-up-statistics)
+- [バックアップデータを暗号化する](#encrypt-the-backup-data)
+- [クラスタースナップショットを復元する](#restore-cluster-snapshots)
+- [データベースまたはテーブルを復元する](#restore-a-database-or-a-table)
+    - [データベースを復元する](#restore-a-database)
+    - [テーブルを復元する](#restore-a-table)
+    - [テーブルフィルターを使用して複数のテーブルを復元する](#restore-multiple-tables-with-table-filter)
+    - [`mysql`スキーマから実行プランバインディングを復元する](#restore-execution-plan-bindings-from-the-mysql-schema)
+- [暗号化されたスナップショットを復元する](#restore-encrypted-snapshots)
 
 スナップショットのバックアップと復元の詳細については、以下を参照してください。
 
--   [スナップショットのバックアップと復元ガイド](/br/br-snapshot-guide.md)
--   [バックアップと復元のユースケース](/br/backup-and-restore-use-cases.md)
+- [スナップショットのバックアップと復元ガイド](/br/br-snapshot-guide.md)
+- [バックアップと復元のユースケース](/br/backup-and-restore-use-cases.md)
 
 ## クラスターのスナップショットをバックアップする {#back-up-cluster-snapshots}
 
@@ -41,13 +41,13 @@ tiup br backup full \
 
 上記のコマンドでは、次のようになります。
 
--   `--backupts` : スナップショットの時点。形式は[TSO](/tso.md)またはタイムスタンプ（例： `400036290571534337` 、 `2024-06-28 13:30:00 +08:00`です。このスナップショットのデータがガベージコレクションされた場合、 `tiup br backup`コマンドはエラーを返し、 'br' は終了します。このパラメータを指定しない場合、 `br`バックアップ開始時刻に対応するスナップショットを選択します。
--   `--log-file` : `br`ログが書き込まれる対象ファイル。
+- `--backupts` : スナップショットの時点。形式は[TSO](/tso.md)またはタイムスタンプ（例： `400036290571534337` 、 `2024-06-28 13:30:00 +08:00`です。このスナップショットのデータがガベージコレクションされた場合、 `tiup br backup`コマンドはエラーを返し、 'br' は終了します。このパラメータを指定しない場合、 `br`バックアップ開始時刻に対応するスナップショットを選択します。
+- `--log-file` : `br`ログが書き込まれる対象ファイル。
 
 > **Note:**
 >
-> -   v8.5.0 以降、 BRツールは、バックアップ パフォーマンスを向上させるために、フルバックアップ中のテーブルレベルのチェックサム計算をデフォルトで無効にします ( `--checksum=false` )。
-> -   BRツールは既にGCへの自己適応をサポートしています。バックアップ中にTiDBのGCセーフポイントが先に進まないように、PDのタイムスタンプ`backupTS` （デフォルトでは最新のPDタイムスタンプ）をPDの`safePoint`に自動的に登録することで、GC設定を手動で設定する必要がなくなります。
+> - v8.5.0 以降、 BRツールは、バックアップ パフォーマンスを向上させるために、フルバックアップ中のテーブルレベルのチェックサム計算をデフォルトで無効にします ( `--checksum=false` )。
+> - BRツールは既にGCへの自己適応をサポートしています。バックアップ中にTiDBのGCセーフポイントが先に進まないように、PDのタイムスタンプ`backupTS` （デフォルトでは最新のPDタイムスタンプ）をPDの`safePoint`に自動的に登録することで、GC設定を手動で設定する必要がなくなります。
 
 バックアップ中は、ターミナルに以下のようにプログレスバーが表示されます。プログレスバーが100%に達すると、バックアップが完了します。
 
@@ -148,9 +148,9 @@ BRはバックアップ側でのバックアップデータの暗号化と[Amazo
 
 TiDB v5.3.0 以降では、次のパラメータを設定することでバックアップデータを暗号化できます。
 
--   `--crypter.method` : 暗号化アルゴリズム`aes128-ctr` `aes192-ctr`または`aes256-ctr`のいずれかになります。デフォルト値は`plaintext`で、データは暗号化されません。
--   `--crypter.key` : 16進文字列形式の暗号化キー。アルゴリズム`aes128-ctr`の場合は128ビット（16バイト）、アルゴリズム`aes192-ctr`の場合は24バイト、アルゴリズム`aes256-ctr`の場合は32バイトのキーです。
--   `--crypter.key-file` : キーファイル。`crypter.key`を渡さずに、キーが保存されているファイルパスをパラメータとして直接渡すこともできます。
+- `--crypter.method` : 暗号化アルゴリズム`aes128-ctr` `aes192-ctr`または`aes256-ctr`のいずれかになります。デフォルト値は`plaintext`で、データは暗号化されません。
+- `--crypter.key` : 16進文字列形式の暗号化キー。アルゴリズム`aes128-ctr`の場合は128ビット（16バイト）、アルゴリズム`aes192-ctr`の場合は24バイト、アルゴリズム`aes256-ctr`の場合は32バイトのキーです。
+- `--crypter.key-file` : キーファイル。`crypter.key`を渡さずに、キーが保存されているファイルパスをパラメータとして直接渡すこともできます。
 
 次に例を示します。
 
@@ -164,8 +164,8 @@ tiup br backup full\
 
 > **Note:**
 >
-> -   キーが失われると、バックアップデータをクラスターに復元できなくなります。
-> -   暗号化機能は、 `br`および TiDB クラスタ v5.3.0 以降で使用する必要があります。暗号化されたバックアップデータは、v5.3.0 より前のクラスタでは復元できません。
+> - キーが失われると、バックアップデータをクラスターに復元できなくなります。
+> - 暗号化機能は、 `br`および TiDB クラスタ v5.3.0 以降で使用する必要があります。暗号化されたバックアップデータは、v5.3.0 より前のクラスタでは復元できません。
 
 ## クラスタースナップショットを復元する {#restore-cluster-snapshots}
 
@@ -182,9 +182,9 @@ tiup br restore full \
 
 上記のコマンドでは、次のようになります。
 
--   `--with-sys-table` : BR は、アカウント権限データ、SQL バインディング、統計情報など、**一部のシステムテーブルのデータ**を復元します（ [統計のバックアップ](/br/br-snapshot-manual.md#back-up-statistics)を参照）。ただし、統計テーブル（ `mysql.stat_*` ）とシステム変数テーブル（ `mysql.tidb`および`mysql.global_variables` ）は復元されません。詳細については、 [`mysql`スキーマ内のテーブルを復元する](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)を参照してください。
--   `--ratelimit` : 復元タスクを実行する**TiKVあたりの**最大速度。単位はMiB/sです。
--   `--log-file` : `br`ログが書き込まれる対象ファイル。
+- `--with-sys-table` : BR は、アカウント権限データ、SQL バインディング、統計情報など、**一部のシステムテーブルのデータ**を復元します（ [統計のバックアップ](/br/br-snapshot-manual.md#back-up-statistics)を参照）。ただし、統計テーブル（ `mysql.stat_*` ）とシステム変数テーブル（ `mysql.tidb`および`mysql.global_variables` ）は復元されません。詳細については、 [`mysql`スキーマ内のテーブルを復元する](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)を参照してください。
+- `--ratelimit` : 復元タスクを実行する**TiKVあたりの**最大速度。単位はMiB/sです。
+- `--log-file` : `br`ログが書き込まれる対象ファイル。
 
 復元中は、ターミナルに以下のプログレスバーが表示されます。プログレスバーが100%に達すると、復元タスクが完了します。 `br` 、データのセキュリティを確保するため、復元されたデータの検証を行います。
 

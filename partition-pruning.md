@@ -224,9 +224,9 @@ explain select * from t where x between 7 and 14;
 
 `fn`関数が単調である場合、任意の`x`と`y`に対して、また`x > y`であれば`fn(x) > fn(y)` 。したがって、この`fn`関数は厳密に単調であると言えます。任意の`x`と`y`に対して、 `x > y`であれば`fn(x) >= fn(y)` 。この場合、 `fn` 「単調」と言えるでしょう。理論的には、厳密に単調であるかどうかにかかわらず、すべての単調関数がパーティションプルーニングによってサポートされます。現在、TiDBは次の単調関数のみをサポートしています。
 
--   [`UNIX_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md)
--   [`TO_DAYS()`](/functions-and-operators/date-and-time-functions.md)
--   [`EXTRACT(<time unit> FROM <DATETIME/DATE/TIME column>)`](/functions-and-operators/date-and-time-functions.md) 。`DATE`列および`DATETIME`列の場合、 `YEAR`および`YEAR_MONTH`時間単位は単調関数とみなされます。`TIME`列の場合、 `HOUR` 、 `HOUR_MINUTE` 、 `HOUR_SECOND` 、および`HOUR_MICROSECOND`は単調関数とみなされます。パーティションプルーニングでは、 `EXTRACT`で`WEEK`は時間単位としてサポートされていないことに注意してください。
+- [`UNIX_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md)
+- [`TO_DAYS()`](/functions-and-operators/date-and-time-functions.md)
+- [`EXTRACT(<time unit> FROM <DATETIME/DATE/TIME column>)`](/functions-and-operators/date-and-time-functions.md) 。`DATE`列および`DATETIME`列の場合、 `YEAR`および`YEAR_MONTH`時間単位は単調関数とみなされます。`TIME`列の場合、 `HOUR` 、 `HOUR_MINUTE` 、 `HOUR_SECOND` 、および`HOUR_MICROSECOND`は単調関数とみなされます。パーティションプルーニングでは、 `EXTRACT`で`WEEK`は時間単位としてサポートされていないことに注意してください。
 
 たとえば、パーティションプルーニングは、パーティション式が`fn(col)`形式 ( `fn`は単調関数`to_days`の場合に有効になります。
 

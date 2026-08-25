@@ -9,9 +9,9 @@ summary: 2024年4月9日に実施されるTiDB Cloud監視機能のメンテナ�
 
 ## メンテナンスウィンドウ {#maintenance-window}
 
--   開始時刻：2024年4月9日 08:00 (UTC+0)
--   終了時刻：2024年4月9日 12:00 (UTC+0)
--   所要時間：4時間
+- 開始時刻：2024年4月9日 08:00 (UTC+0)
+- 終了時刻：2024年4月9日 12:00 (UTC+0)
+- 所要時間：4時間
 
 ## インパクト {#impact}
 
@@ -19,20 +19,20 @@ summary: 2024年4月9日に実施されるTiDB Cloud監視機能のメンテナ�
 
 メンテナンス期間中は、以下の地域における監視機能に影響が出ます。
 
--   TiDB Cloud Dedicatedクラスター：
-    -   クラウドプロバイダー：AWS、リージョン：オレゴン（us-west-2）
-    -   クラウドプロバイダー：AWS、リージョン：ソウル（ap-northeast-2）
-    -   クラウドプロバイダー：AWS、リージョン：フランクフルト（eu-central-1）
-    -   クラウドプロバイダー：AWS、リージョン：オレゴン（us-west-2）
-    -   クラウドプロバイダー：Google Cloud、リージョン：オレゴン（us-west1）
-    -   クラウドプロバイダー：Google Cloud、リージョン：東京（asia-northeast1）
-    -   クラウドプロバイダー：Google Cloud、リージョン：シンガポール（asia-southeast1）
-    -   クラウドプロバイダー：Google Cloud、リージョン：アイオワ（us-central1）
-    -   クラウドプロバイダー：Google Cloud、リージョン：台湾（asia-east1）
+- TiDB Cloud Dedicatedクラスター：
+    - クラウドプロバイダー：AWS、リージョン：オレゴン（us-west-2）
+    - クラウドプロバイダー：AWS、リージョン：ソウル（ap-northeast-2）
+    - クラウドプロバイダー：AWS、リージョン：フランクフルト（eu-central-1）
+    - クラウドプロバイダー：AWS、リージョン：オレゴン（us-west-2）
+    - クラウドプロバイダー：Google Cloud、リージョン：オレゴン（us-west1）
+    - クラウドプロバイダー：Google Cloud、リージョン：東京（asia-northeast1）
+    - クラウドプロバイダー：Google Cloud、リージョン：シンガポール（asia-southeast1）
+    - クラウドプロバイダー：Google Cloud、リージョン：アイオワ（us-central1）
+    - クラウドプロバイダー：Google Cloud、リージョン：台湾（asia-east1）
 
--   TiDB Cloud Starterインスタンス：
-    -   クラウドプロバイダー：AWS、リージョン：フランクフルト（eu-central-1）
-    -   クラウドプロバイダー：AWS、リージョン：オレゴン（us-west-2）
+- TiDB Cloud Starterインスタンス：
+    - クラウドプロバイダー：AWS、リージョン：フランクフルト（eu-central-1）
+    - クラウドプロバイダー：AWS、リージョン：オレゴン（us-west-2）
 
 ### 影響を受ける監視機能 {#affected-monitoring-features}
 
@@ -40,9 +40,9 @@ summary: 2024年4月9日に実施されるTiDB Cloud監視機能のメンテナ�
 >
 > 今回のメンテナンスは、TiDBクラスタの監視機能のみに影響します。その他の機能には影響はありません。TiDBクラスタの管理や、読み書き操作、その他の操作は通常どおり実行できます。
 
--   **Metrics** ページは、数回にわたり短時間（それぞれ20分未満）一時的に利用できなくなります。
--   **Slow Query** ページは、数回の短い期間（それぞれ5分未満）に一時的に利用できなくなります。
--   Prometheus、DataDog、NewRelicとのメトリクス統合には、ブレークポイントが存在する可能性があります。
+- **Metrics** ページは、数回にわたり短時間（それぞれ20分未満）一時的に利用できなくなります。
+- **Slow Query** ページは、数回の短い期間（それぞれ5分未満）に一時的に利用できなくなります。
+- Prometheus、DataDog、NewRelicとのメトリクス統合には、ブレークポイントが存在する可能性があります。
 
 ## 完了と再開 {#completion-and-resumption}
 

@@ -73,9 +73,9 @@ mysql> show status;
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
--   このステートメントは MySQL と互換性があります。
+- このステートメントは MySQL と互換性があります。
 
 ## 参照 {#see-also}
 
--   [SHOW [GLOBAL|SESSION] STATUS](/sql-statements/sql-statement-show-status.md)
--   [サーバーステータス変数](/status-variables.md)
+- [SHOW [GLOBAL|SESSION] STATUS](/sql-statements/sql-statement-show-status.md)
+- [サーバーステータス変数](/status-variables.md)

@@ -60,5 +60,5 @@ SHOW STATS_BUCKETS WHERE Table_name='t';
 
 ## 参照 {#see-also}
 
--   [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)
--   [統計入門](/statistics.md)
+- [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)
+- [統計入門](/statistics.md)

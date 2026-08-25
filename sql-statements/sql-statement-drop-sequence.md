@@ -46,6 +46,6 @@ Query OK, 0 rows affected (0.03 sec)
 
 ## 参照 {#see-also}
 
--   [CREATE SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
--   [ALTER SEQUENCE](/sql-statements/sql-statement-alter-sequence.md)
--   [SHOW CREATE SEQUENCE](/sql-statements/sql-statement-show-create-sequence.md)
+- [CREATE SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
+- [ALTER SEQUENCE](/sql-statements/sql-statement-alter-sequence.md)
+- [SHOW CREATE SEQUENCE](/sql-statements/sql-statement-show-create-sequence.md)

@@ -36,10 +36,10 @@ config export [--dir directory]
 
 ### パラメータの説明 {#parameter-explanation}
 
--   `dir` :
-    -   オプション
-    -   エクスポートするファイルパスを指定します
-    -   デフォルト値は`./configs`です
+- `dir` :
+    - オプション
+    - エクスポートするファイルパスを指定します
+    - デフォルト値は`./configs`です
 
 ### 返された結果 {#returned-results}
 
@@ -65,10 +65,10 @@ config import [--dir directory]
 
 ### パラメータの説明 {#parameter-explanation}
 
--   `dir` :
-    -   オプション
-    -   インポートするファイルパスを指定します
-    -   デフォルト値は`./configs`です
+- `dir` :
+    - オプション
+    - インポートするファイルパスを指定します
+    - デフォルト値は`./configs`です
 
 ### 返された結果 {#returned-results}
 

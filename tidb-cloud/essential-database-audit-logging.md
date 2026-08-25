@@ -36,26 +36,26 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 
 TiDB Cloud Essentialは、以下のいずれかの条件が満たされた場合に新しい監査ログファイルを生成します。
 
--   現在のログファイルがローテーションサイズ（デフォルトでは100MiB）に達しました。
--   前回のログ生成から、ローテーション間隔（デフォルトでは1時間）が経過しました。内部スケジューリングメカニズムによっては、ログ生成が数分遅れる場合があります。
+- 現在のログファイルがローテーションサイズ（デフォルトでは100MiB）に達しました。
+- 前回のログ生成から、ローテーション間隔（デフォルトでは1時間）が経過しました。内部スケジューリングメカニズムによっては、ログ生成が数分遅れる場合があります。
 
 ## 監査ログの場所 {#audit-logging-locations}
 
 監査ログは以下の場所に保存できます。
 
--   [Amazon S3](https://aws.amazon.com/s3/)
--   [Google Cloud Storage](https://cloud.google.com/storage)
--   [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
--   [Alibaba Cloudオブジェクトストレージサービス（OSS）](https://www.alibabacloud.com/product/oss)
+- [Amazon S3](https://aws.amazon.com/s3/)
+- [Google Cloud Storage](https://cloud.google.com/storage)
+- [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
+- [Alibaba Cloudオブジェクトストレージサービス（OSS）](https://www.alibabacloud.com/product/oss)
 
 ### Amazon S3 {#amazon-s3}
 
 監査ログをAmazon S3に保存するには、以下の情報を提供する必要があります。
 
--   URI: `s3://<bucket-name>/<folder-path>/`
--   アクセス認証情報：以下のいずれかを選択してください。
-    -   `s3:PutObject`権限を持つ[アクセスキー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)。
-    -   `s3:PutObject`権限を持つ[ロールARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) 。ロールARNの使用は、AWSでホストされているクラスターのみでサポートされています。
+- URI: `s3://<bucket-name>/<folder-path>/`
+- アクセス認証情報：以下のいずれかを選択してください。
+    - `s3:PutObject`権限を持つ[アクセスキー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)。
+    - `s3:PutObject`権限を持つ[ロールARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) 。ロールARNの使用は、AWSでホストされているクラスターのみでサポートされています。
 
 詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
 
@@ -63,8 +63,8 @@ TiDB Cloud Essentialは、以下のいずれかの条件が満たされた場合
 
 監査ログをGoogle Cloud Storageに保存するには、以下の情報を提供する必要があります。
 
--   URI: `gs://<bucket-name>/<folder-path>/`
--   アクセス資格情報: `storage.objects.create`および`storage.objects.delete`権限を持つサービス[サービスアカウントキー](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)。
+- URI: `gs://<bucket-name>/<folder-path>/`
+- アクセス資格情報: `storage.objects.create`および`storage.objects.delete`権限を持つサービス[サービスアカウントキー](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)。
 
 詳細については、 [GCSへのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)を参照してください。
 
@@ -72,8 +72,8 @@ TiDB Cloud Essentialは、以下のいずれかの条件が満たされた場合
 
 Azure Blob Storage に監査ログを保存するには、以下の情報を提供する必要があります。
 
--   URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`または`https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
--   [共有アクセス署名（SAS）トークン](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)資格情報: `Read`および`Write`および { `Container` `Object`権限を持つ共有アクセス宣言（SAS） ブラウザ。
+- URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`または`https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
+- [共有アクセス署名（SAS）トークン](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)資格情報: `Read`および`Write`および { `Container` `Object`権限を持つ共有アクセス宣言（SAS） ブラウザ。
 
 詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)を参照してください。
 
@@ -81,8 +81,8 @@ Azure Blob Storage に監査ログを保存するには、以下の情報を提�
 
 Alibaba Cloud OSSに監査ログを保存するには、以下の情報を提供する必要があります。
 
--   URI: `oss://<bucket-name>/<folder-path>/`
--   アクセス資格情報: OSS バケットへのデータのエクスポートを許可する`oss:PutObject`および`oss:GetBucketInfo`権限を持つ[アクセスキーペア](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)キーペア。
+- URI: `oss://<bucket-name>/<folder-path>/`
+- アクセス資格情報: OSS バケットへのデータのエクスポートを許可する`oss:PutObject`および`oss:GetBucketInfo`権限を持つ[アクセスキーペア](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)キーペア。
 
 詳細については、 [Alibaba Cloudオブジェクトストレージサービス（OSS）へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)を参照してください。
 
@@ -92,12 +92,12 @@ Alibaba Cloud OSSに監査ログを保存するには、以下の情報を提供
 
 フィルタルールには以下のフィールドが含まれます。
 
--   `users` : 監査イベントをフィルタリングするためのユーザー名のリスト。ワイルドカード`%`を使用すると、任意のユーザー名に一致させることができます。
--   `filters` : フィルタオブジェクトのリスト。各フィルタオブジェクトには、次のフィールドが含まれます。
+- `users` : 監査イベントをフィルタリングするためのユーザー名のリスト。ワイルドカード`%`を使用すると、任意のユーザー名に一致させることができます。
+- `filters` : フィルタオブジェクトのリスト。各フィルタオブジェクトには、次のフィールドが含まれます。
 
-    -   `classes` : 監査イベントをフィルタリングするためのイベントクラスのリスト。例: `["QUERY", "EXECUTE"]` 。
-    -   `tables` : テーブルフィルターのリスト。詳細については、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter/)を参照してください。
-    -   `statusCodes` : 監査イベントをフィルタリングするためのステータスコードのリスト。 `1`は成功、 `0`は失敗を意味します。
+    - `classes` : 監査イベントをフィルタリングするためのイベントクラスのリスト。例: `["QUERY", "EXECUTE"]` 。
+    - `tables` : テーブルフィルターのリスト。詳細については、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter/)を参照してください。
+    - `statusCodes` : 監査イベントをフィルタリングするためのステータスコードのリスト。 `1`は成功、 `0`は失敗を意味します。
 
 以下の表は、データベース監査ログにおけるすべてのイベントクラスを示しています。
 
@@ -141,19 +141,19 @@ TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、 TiDB Cloud Es
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
+2. 対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
 
-3.  **DB Audit Logging**ページで、 **Enable**をクリックします。
+3. **DB Audit Logging**ページで、 **Enable**をクリックします。
 
-4.  監査ログのストレージの場所を選択し、必要な情報を入力します。次に、 **Test Connection and Next**または**Next**をクリックします。利用可能なストレージの場所の詳細については、[監査ログの場所](#audit-logging-locations)を参照してください。
+4. 監査ログのストレージの場所を選択し、必要な情報を入力します。次に、 **Test Connection and Next**または**Next**をクリックします。利用可能なストレージの場所の詳細については、[監査ログの場所](#audit-logging-locations)を参照してください。
 
-5.  **Database Audit Logging Settings**ダイアログで、ログファイルのローテーションとログのマスキング設定を入力し、 **Save**をクリックします。
+5. **Database Audit Logging Settings**ダイアログで、ログファイルのローテーションとログのマスキング設定を入力し、 **Save**をクリックします。
 
 </div>
 
@@ -177,17 +177,17 @@ TiDB Cloud Essentialインスタンスの監査ログは、有効化後に編集
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
+2. 対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
 
-3.  **DB Audit Logging**ページで、 **Settings**をクリックします。
+3. **DB Audit Logging**ページで、 **Settings**をクリックします。
 
-4.  **Database Audit Logging Settings**ダイアログで、ログファイルのローテーションまたはログのマスキング設定を更新し、 **Save**をクリックします。
+4. **Database Audit Logging Settings**ダイアログで、ログファイルのローテーションまたはログのマスキング設定を更新し、 **Save**をクリックします。
 
 </div>
 
@@ -209,17 +209,17 @@ TiDB Cloud Essentialインスタンスの監査ログを無効にすることが
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
+2. 対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
 
-3.  **DB Audit Logging**ページで、右上隅の**...**をクリックし、次に**Disable**にします。
+3. **DB Audit Logging**ページで、右上隅の**...**をクリックし、次に**Disable**にします。
 
-4.  **Disable DB Audit Logging**ダイアログで、 **Disable**をクリックします。
+4. **Disable DB Audit Logging**ダイアログで、 **Disable**をクリックします。
 
 </div>
 
@@ -245,17 +245,17 @@ ticloud serverless audit-log config update -c <cluster-id> --disabled=true
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
+2. 対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
 
-3.  **DB Audit Logging**ページで、 **Add Filter Rule**をクリックします。
+3. **DB Audit Logging**ページで、 **Add Filter Rule**をクリックします。
 
-4.  **Add Filter Rule**ダイアログで、 **Filter Name** 、 **SQL Users** 、および**Filter Rule**フィールドに入力し、 **Confirm**をクリックします。これらのフィールドの詳細については、[監査ログフィルタルール](#audit-logging-filter-rules)を参照してください。
+4. **Add Filter Rule**ダイアログで、 **Filter Name** 、 **SQL Users** 、および**Filter Rule**フィールドに入力し、 **Confirm**をクリックします。これらのフィールドの詳細については、[監査ログフィルタルール](#audit-logging-filter-rules)を参照してください。
 
 </div>
 
@@ -275,17 +275,17 @@ ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-n
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
+2. 対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
 
-3.  **DB Audit Logging**ページで、編集するフィルタルールを見つけ、その行の**...**をクリックしてから、 **Edit**をクリックします。
+3. **DB Audit Logging**ページで、編集するフィルタルールを見つけ、その行の**...**をクリックしてから、 **Edit**をクリックします。
 
-4.  **Edit Filter Rule**ダイアログで、 **Filter Name**または**Filter Rule**フィールドを更新し、 **Confirm**をクリックします。
+4. **Edit Filter Rule**ダイアログで、 **Filter Name**または**Filter Rule**フィールドを更新し、 **Confirm**をクリックします。
 
 </div>
 
@@ -305,15 +305,15 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
+2. 対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
 
-3.  **DB Audit Logging**ページで、無効にしたいフィルタルールを見つけ、トグルをオフにしてフィルタルールを無効にします。
+3. **DB Audit Logging**ページで、無効にしたいフィルタルールを見つけ、トグルをオフにしてフィルタルールを無効にします。
 
 </div>
 
@@ -333,17 +333,17 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
+2. 対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
 
-3.  **DB Audit Logging**ページで、削除するフィルタルールを見つけて、 **...**をクリックします。
+3. **DB Audit Logging**ページで、削除するフィルタルールを見つけて、 **...**をクリックします。
 
-4.  **Delete**をクリックし、次に**I understand. Delete it**をクリックしてください。
+4. **Delete**をクリックし、次に**I understand. Delete it**をクリックしてください。
 
 </div>
 

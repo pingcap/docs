@@ -58,12 +58,12 @@ Query OK, 0 rows affected (0.30 sec)
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
--   `CLUSTERED`型の主キーの削除はサポートされていません。 `CLUSTERED`型の主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
+- `CLUSTERED`型の主キーの削除はサポートされていません。 `CLUSTERED`型の主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
 ## 参照 {#see-also}
 
--   [SHOW INDEXES [FROM|IN]](/sql-statements/sql-statement-show-indexes.md)
--   [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
--   [ADD INDEX](/sql-statements/sql-statement-add-index.md)
--   [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
--   [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
+- [SHOW INDEXES [FROM|IN]](/sql-statements/sql-statement-show-indexes.md)
+- [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
+- [ADD INDEX](/sql-statements/sql-statement-add-index.md)
+- [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
+- [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)

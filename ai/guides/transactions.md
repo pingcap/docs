@@ -26,5 +26,5 @@ with client.session() as session:
 
 ## 参照 {#see-also}
 
--   [TiDB 開発者ガイド - トランザクション](/develop/dev-guide-transaction-overview.md)
--   [TiDB ドキュメント - SQL リファレンス - トランザクション](/transaction-overview.md)
+- [TiDB 開発者ガイド - トランザクション](/develop/dev-guide-transaction-overview.md)
+- [TiDB ドキュメント - SQL リファレンス - トランザクション](/transaction-overview.md)

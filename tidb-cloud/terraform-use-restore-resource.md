@@ -9,12 +9,12 @@ summary: tidbcloud_restore` リソースを使用して復元タスクを作成�
 
 `tidbcloud_restore`リソースの機能は次のとおりです。
 
--   バックアップに応じて、 TiDB Cloud Dedicated クラスターの復元タスクを作成します。
+- バックアップに応じて、 TiDB Cloud Dedicated クラスターの復元タスクを作成します。
 
 ## 前提条件 {#prerequisites}
 
--   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
--   このドキュメントで紹介されているバックアップと復元機能は、TiDB Cloud Starter およびTiDB Cloud Essential クラスターではご利用いただけません`tidbcloud_restore`リソースを使用するには、 TiDB Cloud Dedicated クラスターを作成してください。
+- [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
+- このドキュメントで紹介されているバックアップと復元機能は、TiDB Cloud Starter およびTiDB Cloud Essential クラスターではご利用いただけません`tidbcloud_restore`リソースを使用するには、 TiDB Cloud Dedicated クラスターを作成してください。
 
 ## 復元タスクを作成する {#create-a-restore-task}
 
@@ -24,9 +24,9 @@ summary: tidbcloud_restore` リソースを使用して復元タスクを作成�
 >
 > 小さいノードサイズから同じまたは大きいノードサイズにのみデータを復元できます。
 
-1.  復元用のディレクトリを作成してそこに入ります。
+1. 復元用のディレクトリを作成してそこに入ります。
 
-2.  `restore.tf`ファイルを作成します。
+2. `restore.tf`ファイルを作成します。
 
     例えば：
 
@@ -37,6 +37,7 @@ summary: tidbcloud_restore` リソースを使用して復元タスクを作成�
          source = "tidbcloud/tidbcloud"
        }
      }
+
    }
 
    provider "tidbcloud" {
@@ -70,7 +71,7 @@ summary: tidbcloud_restore` リソースを使用して復元タスクを作成�
     }
     ```
 
-3.  `terraform apply`コマンドを実行し、確認のために`yes`入力します。
+3. `terraform apply`コマンドを実行し、確認のために`yes`入力します。
 
     ```
     $ terraform apply
@@ -133,7 +134,7 @@ summary: tidbcloud_restore` リソースを使用して復元タスクを作成�
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-4.  `terraform state show tidbcloud_restore.${resource-name}`コマンドを使用して、復元タスクのステータスを確認します。
+4. `terraform state show tidbcloud_restore.${resource-name}`コマンドを使用して、復元タスクのステータスを確認します。
 
     ```
     $ terraform state show tidbcloud_restore.example_restore
@@ -177,9 +178,9 @@ summary: tidbcloud_restore` リソースを使用して復元タスクを作成�
 
     復元タスクのステータスは`PENDING` 、クラスターのステータスは`INITIALIZING`であることがわかります。
 
-5.  数分お待ちください。その後、 `terraform refersh`を使用してステータスを更新してください。
+5. 数分お待ちください。その後、 `terraform refersh`を使用してステータスを更新してください。
 
-6.  クラスターのステータスが`AVAILABLE`に変わると、復元タスクは`RUNNING`なり、最終的に`SUCCESS`になります。
+6. クラスターのステータスが`AVAILABLE`に変わると、復元タスクは`RUNNING`なり、最終的に`SUCCESS`になります。
 
 復元されたクラスターはTerraformによって管理されないことに注意してください。これらは[インポートする](/tidb-cloud/terraform-use-cluster-resource.md#import-a-cluster)ことで管理できます。
 

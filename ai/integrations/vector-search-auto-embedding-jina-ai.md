@@ -20,23 +20,23 @@ Jina AI APIキー（BYOK）をお持ちの場合は、 `jina_ai/`プレフィッ
 
 **jina-embeddings-v4**
 
--   名前: `jina_ai/jina-embeddings-v4`
--   寸法: 2048
--   距離指標：コサイン類似度、L2
--   入力可能なテキストトークンの最大数：32,768
--   価格：Jina AIによる課金
--   TiDB Cloudでホストされています: ❌
--   鍵をご持参ください：✅
+- 名前: `jina_ai/jina-embeddings-v4`
+- 寸法: 2048
+- 距離指標：コサイン類似度、L2
+- 入力可能なテキストトークンの最大数：32,768
+- 価格：Jina AIによる課金
+- TiDB Cloudでホストされています: ❌
+- 鍵をご持参ください：✅
 
 **jina-embeddings-v3**
 
--   名前: `jina_ai/jina-embeddings-v3`
--   寸法: 1024
--   距離指標：コサイン類似度、L2
--   入力可能なテキストトークンの最大数：8,192
--   価格：Jina AIによる課金
--   TiDB Cloudでホストされています: ❌
--   鍵をご持参ください：✅
+- 名前: `jina_ai/jina-embeddings-v3`
+- 寸法: 1024
+- 距離指標：コサイン類似度、L2
+- 入力可能なテキストトークンの最大数：8,192
+- 価格：Jina AIによる課金
+- TiDB Cloudでホストされています: ❌
+- 鍵をご持参ください：✅
 
 利用可能なモデルの完全なリストについては、 [Jina AI ドキュメント](https://jina.ai/embeddings/)を参照してください。
 
@@ -259,7 +259,7 @@ CREATE TABLE sample (
 
 ## 関連項目 {#see-also}
 
--   [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
--   [ベクトル検索](/ai/concepts/vector-search-overview.md)
--   [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
--   [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)
+- [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
+- [ベクトル検索](/ai/concepts/vector-search-overview.md)
+- [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
+- [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)

@@ -133,4 +133,4 @@ TiDBの`SHOW [FULL] COLUMNS FROM`文はMySQLと完全に互換性があります
 
 ## 参照 {#see-also}
 
--   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+- [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)

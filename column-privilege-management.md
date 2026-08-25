@@ -15,8 +15,8 @@ summary: TiDBは、MySQL互換の列レベルの権限管理メカニズムを�
 
 列レベルの権限を付与および取り消すための構文は、テーブルレベルの権限の構文と似ていますが、以下の点が異なります。
 
--   列名リストは**、テーブル名**の後ではなく、**権限タイプ**の後に記述してください。
--   複数の列名はカンマで区切られます（ `,` ）。
+- 列名リストは**、テーブル名**の後ではなく、**権限タイプ**の後に記述してください。
+- 複数の列名はカンマで区切られます（ `,` ）。
 
 ```sql
 GRANT priv_type(col_name [, col_name] ...) [, priv_type(col_name [, col_name] ...)] ...
@@ -30,9 +30,9 @@ REVOKE priv_type(col_name [, col_name] ...) [, priv_type(col_name [, col_name] .
 
 どこ：
 
--   `priv_type`は`SELECT` 、 `INSERT` 、 `UPDATE` 、および`REFERENCES` 。
--   `ON`句では、例えば`test.tbl`のようにテーブルを指定する必要があります。
--   単一の`GRANT`または`REVOKE`ステートメントには、複数の特権項目を含めることができ、各特権項目は独自の列名のリストを指定できます。
+- `priv_type`は`SELECT` 、 `INSERT` 、 `UPDATE` 、および`REFERENCES` 。
+- `ON`句では、例えば`test.tbl`のようにテーブルを指定する必要があります。
+- 単一の`GRANT`または`REVOKE`ステートメントには、複数の特権項目を含めることができ、各特権項目は独自の列名のリストを指定できます。
 
 例えば、次のステートメントは`SELECT`の`col1`に対する権限と、 `col2`の`UPDATE`の`col3`に対する権限をユーザーに付与します。
 
@@ -91,9 +91,9 @@ SHOW GRANTS FOR 'newuser'@'%';
 
 列レベルの権限を付与または取り消した後、TiDB は SQL ステートメントで参照されている列に対して権限チェックを実行します。例:
 
--   `SELECT`ステートメント: `SELECT`列の権限は、 `SELECT`リストで参照される列、および`WHERE` 、 `ORDER BY` 、その他の句に影響します。
--   `UPDATE`ステートメント: `SET`句で更新される列には`UPDATE`列権限が必要です。式または条件で読み込まれる列には、通常、 `SELECT`列権限も必要です。
--   `INSERT`ステートメント: `INSERT`列の権限を必要とする列が書き込まれます。 `INSERT INTO t VALUES (...)`テーブル定義の順序ですべての列に値を書き込むことと同じです。
+- `SELECT`ステートメント: `SELECT`列の権限は、 `SELECT`リストで参照される列、および`WHERE` 、 `ORDER BY` 、その他の句に影響します。
+- `UPDATE`ステートメント: `SET`句で更新される列には`UPDATE`列権限が必要です。式または条件で読み込まれる列には、通常、 `SELECT`列権限も必要です。
+- `INSERT`ステートメント: `INSERT`列の権限を必要とする列が書き込まれます。 `INSERT INTO t VALUES (...)`テーブル定義の順序ですべての列に値を書き込むことと同じです。
 
 次の例では、ユーザー`newuser`は`col1`を照会し、 `col3`を更新することしかできません。
 
@@ -123,8 +123,8 @@ TiDBの列レベルの権限は、一般的にMySQLと互換性があります�
 
 ビューに対して`SELECT`権限チェックを実行する場合、MySQLとTiDBでは以下の点が異なります。
 
--   MySQLはまずビューの内部クエリ内の列を削除し、次に内部テーブルの列権限をチェックするため、状況によってはチェックが比較的緩やかになる場合があります。
--   TiDBは権限チェックの前に列の削除を行わないため、追加の列権限が必要になる場合があります。
+- MySQLはまずビューの内部クエリ内の列を削除し、次に内部テーブルの列権限をチェックするため、状況によってはチェックが比較的緩やかになる場合があります。
+- TiDBは権限チェックの前に列の削除を行わないため、追加の列権限が必要になる場合があります。
 
 ```sql
 -- Prepare the environment by logging in as root
@@ -167,6 +167,6 @@ SELECT * FROM v;
 
 ## 関連項目 {#see-also}
 
--   [権限管理](/privilege-management.md)
--   [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
--   [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
+- [権限管理](/privilege-management.md)
+- [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
+- [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md)

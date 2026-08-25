@@ -9,9 +9,9 @@ summary: TiDB CloudをZapierを使って5000以上のアプリに接続する方
 
 Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)を使用すると、次のことが可能になります。
 
--   MySQL互換のHTAPデータベースであるTiDBを使用してください。ローカルでの構築は不要です。
--   TiDB Cloudの管理をより簡単にします。
--   TiDB Cloudを5000以上のアプリに接続して、ワークフローを自動化しましょう。
+- MySQL互換のHTAPデータベースであるTiDBを使用してください。ローカルでの構築は不要です。
+- TiDB Cloudの管理をより簡単にします。
+- TiDB Cloudを5000以上のアプリに接続して、ワークフローを自動化しましょう。
 
 このガイドでは、Zapier 上のTiDB Cloudアプリの概要と使用例について説明します。
 
@@ -25,9 +25,9 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 始める前に必要なもの：
 
--   [Zapierアカウント](https://zapier.com/app/login)。
--   [GitHubアカウント](https://github.com/login)。
--   [TiDB Cloudアカウント](https://tidbcloud.com/signup)と TiDB Cloud Starterインスタンス。詳細については、 [TiDB Cloudクイックスタート](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-starter-instance)を参照してください。
+- [Zapierアカウント](https://zapier.com/app/login)。
+- [GitHubアカウント](https://github.com/login)。
+- [TiDB Cloudアカウント](https://tidbcloud.com/signup)と TiDB Cloud Starterインスタンス。詳細については、 [TiDB Cloudクイックスタート](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-starter-instance)を参照してください。
 
 ### ステップ1：テンプレートを入手する {#step-1-get-the-template}
 
@@ -37,85 +37,85 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 エディターページでは、トリガーとアクションを確認できます。トリガーをクリックして設定してください。
 
-1.  アプリとイベントを選択
+1. アプリとイベントを選択
 
     テンプレートにはアプリとイベントがデフォルトで設定されているため、ここでは何もする必要はありません。 **Continue**をクリックしてください。
 
-2.  アカウントを選択
+2. アカウントを選択
 
     TiDB Cloudに接続するGitHubアカウントを選択してください。新規アカウントを接続することも、既存のアカウントを選択することもできます。設定が完了したら、 **Continue**をクリックしてください。
 
-3.  トリガーの設定
+3. トリガーの設定
 
     テンプレートでは、デフォルトでトリガーが設定されています。 **Continue**をクリックしてください。
 
-4.  テストトリガー
+4. テストトリガー
 
     **Test trigger**をクリックします。トリガーが正常に設定されると、GitHubアカウントから新しいグローバルイベントのデータが表示されます。 **Continue**をクリックします。
 
 ### ステップ3： `Find Table in TiDB Cloud`アクションを設定する {#step-3-set-up-the-find-table-in-tidb-cloud-action}
 
-1.  アプリとイベントを選択
+1. アプリとイベントを選択
 
     テンプレートで設定されているデフォルト値`Find Table`そのまま使用します。 **Continue**をクリックします。
 
-2.  アカウントを選択
+2. アカウントを選択
 
-    1.  **Sign in**ボタンをクリックすると、新しいログインページにリダイレクトされます。
-    2.  ログインページで、公開キーと秘密キーを入力します。 TiDB Cloud API キーを取得するには、 [TiDB Cloud APIドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)ドキュメントの手順に従ってください。
-    3.  **Continue**をクリックしてください。
+    1. **Sign in**ボタンをクリックすると、新しいログインページにリダイレクトされます。
+    2. ログインページで、公開キーと秘密キーを入力します。 TiDB Cloud API キーを取得するには、 [TiDB Cloud APIドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)ドキュメントの手順に従ってください。
+    3. **Continue**をクリックしてください。
 
     ![Account](/media/tidb-cloud/zapier/zapier-tidbcloud-account.png)
 
-3.  アクションを設定する
+3. アクションを設定する
 
     この手順では、イベントデータを保存するTiDB Cloud Starterインスタンス内のテーブルを指定する必要があります。テーブルがまだ作成されていない場合は、この手順で作成できます。
 
-    1.  ドロップダウンリストからプロジェクト名とインスタンス名を選択してください。TiDB Cloud Starterインスタンスの接続情報が自動的に表示されます。
+    1. ドロップダウンリストからプロジェクト名とインスタンス名を選択してください。TiDB Cloud Starterインスタンスの接続情報が自動的に表示されます。
 
         ![Set up project name and instance name](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-project-and-cluster.png)
 
-    2.  パスワードを入力してください。
+    2. パスワードを入力してください。
 
-    3.  ドロップダウンリストからデータベースを選択してください。
+    3. ドロップダウンリストからデータベースを選択してください。
 
         ![Set up database name](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-databse.png)
 
         Zapierは、入力されたパスワードを使用してTiDB Cloudからデータベースを検索します。TiDB Cloud Starterインスタンスにデータベースが見つからない場合は、パスワードを再入力してページを更新してください。
 
-    4.  **The table you want to search**ボックスに`github_global_event`と入力します。テーブルが存在しない場合、テンプレートは次の DDL を使用してテーブルを作成します。 **Continue**をクリックします。
+    4. **The table you want to search**ボックスに`github_global_event`と入力します。テーブルが存在しない場合、テンプレートは次の DDL を使用してテーブルを作成します。 **Continue**をクリックします。
 
         ![The create table DDL](/media/tidb-cloud/zapier/zapier-tidbcloud-create-table-ddl.png)
 
-4.  テストアクション
+4. テストアクション
 
     **Test action**をクリックすると、Zapierがテーブルを作成します。テストをスキップすることも可能で、その場合はワークフローが初めて実行されるときにテーブルが作成されます。
 
 ### ステップ4： `Create Row in TiDB Cloud`設定する {#step-4-set-up-the-create-row-in-tidb-cloud-action}
 
-1.  アプリとイベントを選択
+1. アプリとイベントを選択
 
     テンプレートで設定されているデフォルト値をそのまま使用します。 **Continue**をクリックしてください。
 
-2.  アカウントを選択
+2. アカウントを選択
 
     `Find Table in TiDB Cloud`アクションを設定する際に選択したアカウントを選択します。 **Continue**をクリックします。
 
     ![Choose account](/media/tidb-cloud/zapier/zapier-tidbcloud-choose-account.png)
 
-3.  アクションを設定する
+3. アクションを設定する
 
-    1.  前の手順と同様に、**Project Name**、**Cluster Name**、 **TiDB Password**、**Database Name**を入力してください。
+    1. 前の手順と同様に、**Project Name**、**Cluster Name**、 **TiDB Password**、**Database Name**を入力してください。
 
-    2.  **Table Name**で、ドロップダウンリストから**github_global_event**テーブルを選択します。テーブルの列が表示されます。
+    2. **Table Name**で、ドロップダウンリストから**github_global_event**テーブルを選択します。テーブルの列が表示されます。
 
         ![Table columns](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-columns.png)
 
-    3.  **Columns**ボックスで、トリガーから対応するデータを選択します。すべての列を入力し、 **Continue**をクリックします。
+    3. **Columns**ボックスで、トリガーから対応するデータを選択します。すべての列を入力し、 **Continue**をクリックします。
 
         ![Fill in Columns](/media/tidb-cloud/zapier/zapier-fill-in-tidbcloud-triggers-data.png)
 
-4.  テストアクション
+4. テストアクション
 
     **Test action**をクリックして、テーブルに新しい行を作成します。TiDB Cloud Starterインスタンスを確認すると、データが正常に書き込まれていることが確認できます。
 
@@ -177,11 +177,11 @@ TiDB Cloudには、Zapierで直接使用できるテンプレートがいくつ�
 
 以下に例を示します。
 
--   [GoogleスプレッドシートにTiDB Cloudの新しい行を複製する](https://zapier.com/apps/google-sheets/integrations/tidb-cloud/1134881/duplicate-new-tidb-cloud-rows-in-google-sheets)。
--   [新しいカスタムTiDBクエリからGmail経由でメールを送信する](https://zapier.com/apps/gmail/integrations/tidb-cloud/1134903/send-emails-via-gmail-from-new-custom-tidb-queries)。
--   [新たに捕捉したウェブフックからTiDB Cloudに行を追加する](https://zapier.com/apps/tidb-cloud/integrations/webhook/1134955/add-rows-to-tidb-cloud-from-newly-caught-webhooks)。
--   [新しいSalesforce連絡先をTiDB行に保存します](https://zapier.com/apps/salesforce/integrations/tidb-cloud/1134923/store-new-salesforce-contacts-on-tidb-rows)。
--   [再開機能付きの新しいGmailメール用にTiDB行を作成し、Slackに直接通知を送信する](https://zapier.com/apps/gmail/integrations/slack/1135456/create-tidb-rows-for-new-gmail-emails-with-resumes-and-send-direct-slack-notifications)
+- [GoogleスプレッドシートにTiDB Cloudの新しい行を複製する](https://zapier.com/apps/google-sheets/integrations/tidb-cloud/1134881/duplicate-new-tidb-cloud-rows-in-google-sheets)。
+- [新しいカスタムTiDBクエリからGmail経由でメールを送信する](https://zapier.com/apps/gmail/integrations/tidb-cloud/1134903/send-emails-via-gmail-from-new-custom-tidb-queries)。
+- [新たに捕捉したウェブフックからTiDB Cloudに行を追加する](https://zapier.com/apps/tidb-cloud/integrations/webhook/1134955/add-rows-to-tidb-cloud-from-newly-caught-webhooks)。
+- [新しいSalesforce連絡先をTiDB行に保存します](https://zapier.com/apps/salesforce/integrations/tidb-cloud/1134923/store-new-salesforce-contacts-on-tidb-rows)。
+- [再開機能付きの新しいGmailメール用にTiDB行を作成し、Slackに直接通知を送信する](https://zapier.com/apps/gmail/integrations/slack/1135456/create-tidb-rows-for-new-gmail-emails-with-resumes-and-send-direct-slack-notifications)
 
 ## FAQ {#faq}
 
@@ -209,11 +209,11 @@ API 内のアイテムが複数の異なるポーリングに存在する場合�
 
 `New Row`トリガーは、重複排除を行う`id`フィールドを生成するために、柔軟な戦略も使用します。トリガーは`id`フィールドを次の順序で生成します。
 
-1.  結果に`id`列が含まれている場合は、 `id`列を使用します。
-2.  トリガー構成で`Dedupe Key`を指定する場合は、 `Dedupe Key`を使用してください。
-3.  テーブルに主キーがある場合は、その主キーを使用します。主キーが複数ある場合は、最初の列を使用します。
-4.  テーブルに一意キーがある場合は、その一意キーを使用してください。
-5.  表の最初の列を使用してください。
+1. 結果に`id`列が含まれている場合は、 `id`列を使用します。
+2. トリガー構成で`Dedupe Key`を指定する場合は、 `Dedupe Key`を使用してください。
+3. テーブルに主キーがある場合は、その主キーを使用します。主キーが複数ある場合は、最初の列を使用します。
+4. テーブルに一意キーがある場合は、その一意キーを使用してください。
+5. 表の最初の列を使用してください。
 
 **新規行（カスタムクエリ）トリガー**
 
@@ -227,9 +227,9 @@ API 内のアイテムが複数の異なるポーリングに存在する場合�
 
 `Find or create`アクションを使用すると、リソースが存在しない場合に作成できます。以下に例を示します。
 
-1.  `Find Table`アクションを選択してください
+1. `Find Table`アクションを選択してください
 
-2.  `set up action`ステップで、 `Create TiDB Cloud Table if it doesn’t exist yet?`ボックスにチェックを入れて、 `find and create`を有効にします。
+2. `set up action`ステップで、 `Create TiDB Cloud Table if it doesn’t exist yet?`ボックスにチェックを入れて、 `find and create`を有効にします。
 
     ![Find and create](/media/tidb-cloud/zapier/zapier-tidbcloud-find-and-create.png)
 

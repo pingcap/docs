@@ -60,10 +60,10 @@ TiDBの`SHOW INDEXES [FROM|IN]`文はMySQLと完全に互換性があります�
 
 ## 参照 {#see-also}
 
--   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
--   [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
--   [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
--   [`information_schema.TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)
--   [`information_schema.TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)
--   [`information_schema.KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)
--   [`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
+- [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+- [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
+- [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
+- [`information_schema.TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)
+- [`information_schema.TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)
+- [`information_schema.KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)
+- [`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)

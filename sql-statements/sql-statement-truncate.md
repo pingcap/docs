@@ -61,7 +61,7 @@ TiDBの`TRUNCATE`文はMySQLと完全に互換性があります。互換性に�
 
 ## 参照 {#see-also}
 
--   [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
--   [DELETE](/sql-statements/sql-statement-delete.md)
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
--   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+- [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
+- [DELETE](/sql-statements/sql-statement-delete.md)
+- [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+- [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)

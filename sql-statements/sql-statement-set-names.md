@@ -75,6 +75,6 @@ TiDBの`SET [NAMES|CHARACTER SET]`文はMySQLと完全に互換性がありま�
 
 ## 参照 {#see-also}
 
--   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
--   [`SET <variable>`](/sql-statements/sql-statement-set-variable.md)
--   [文字セットと照合順序のサポート](/character-set-and-collation.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [`SET <variable>`](/sql-statements/sql-statement-set-variable.md)
+- [文字セットと照合順序のサポート](/character-set-and-collation.md)

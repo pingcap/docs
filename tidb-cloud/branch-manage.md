@@ -9,8 +9,8 @@ summary: TiDB Cloudブランチの管理方法を学びましょう。
 
 ## 必要なアクセス {#required-access}
 
--   [ブランチを作成する](#create-a-branch)または[ブランチに接続する](#connect-to-a-branch)には、組織の`Organization Owner`ロール、またはターゲット プロジェクトの`Project Owner`ロールに属している必要があります。
--   プロジェクト内のブランチを表示する場合は、そのプロジェクトに属している必要があります。
+- [ブランチを作成する](#create-a-branch)または[ブランチに接続する](#connect-to-a-branch)には、組織の`Organization Owner`ロール、またはターゲット プロジェクトの`Project Owner`ロールに属している必要があります。
+- プロジェクト内のブランチを表示する場合は、そのプロジェクトに属している必要があります。
 
 権限の詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)を参照してください。
 
@@ -22,23 +22,23 @@ summary: TiDB Cloudブランチの管理方法を学びましょう。
 
 ブランチを作成するには、以下の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
 
-2.  左側のナビゲーションペインで**Branches**をクリックします。
+2. 左側のナビゲーションペインで**Branches**をクリックします。
 
-3.  **Branches**ページの右上隅にある**Create Branch**をクリックします。ダイアログが表示されます。
+3. **Branches**ページの右上隅にある**Create Branch**をクリックします。ダイアログが表示されます。
 
     または、既存の親ブランチからブランチを作成するには、対象の親ブランチの行を見つけて、 **[アクション**] 列の**[...]** &gt; **[ブランチの作成] を**クリックします。
 
-4.  **Create Branch**ダイアログで、以下のオプションを設定します。
+4. **Create Branch**ダイアログで、以下のオプションを設定します。
 
-    -   **Name**：ブランチの名前を入力してください。
-    -   **Parent branch**：元のTiDB Cloud Starterインスタンス、あるいは既存のブランチを選択します。`main` は現在のインスタンスを表します。
-    -   **Include data up to**: 次のいずれかを選択してください:
-        -   **Current point in time**：現在の状態からブランチを作成します。
-        -   **Specific date and time**：指定した時間からブランチを作成します。
+    - **Name**：ブランチの名前を入力してください。
+    - **Parent branch**：元のTiDB Cloud Starterインスタンス、あるいは既存のブランチを選択します。`main` は現在のインスタンスを表します。
+    - **Include data up to**: 次のいずれかを選択してください:
+        - **Current point in time**：現在の状態からブランチを作成します。
+        - **Specific date and time**：指定した時間からブランチを作成します。
 
-5.  **Create**をクリックします。
+5. **Create**をクリックします。
 
 TiDB Cloud Starterインスタンスのデータサイズにもよりますが、ブランチの作成は数分で完了します。
 
@@ -46,8 +46,8 @@ TiDB Cloud Starterインスタンスのデータサイズにもよりますが�
 
 TiDB Cloud Starterインスタンスのブランチを表示するには、以下の手順を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで**Branches**をクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+2. 左側のナビゲーションペインで**Branches**をクリックします。
 
     TiDB Cloud Starterインスタンスのブランチリストは、右側のペインに表示されます。
 
@@ -55,30 +55,30 @@ TiDB Cloud Starterインスタンスのブランチを表示するには、以�
 
 ブランチに接続するには、以下の手順を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで**Branches**をクリックします。
-3.  接続する対象ブランチの行で、 **Action**列の**…**をクリックします。
-4.  ドロップダウンリストから**Connect**をクリックします。接続情報の入力ダイアログが表示されます。
-5.  ルートパスワードを作成またはリセットするには、 **Generate Password**または**Reset Password**をクリックしてください。
-6.  接続情報を使用してブランチに接続します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+2. 左側のナビゲーションペインで**Branches**をクリックします。
+3. 接続する対象ブランチの行で、 **Action**列の**…**をクリックします。
+4. ドロップダウンリストから**Connect**をクリックします。接続情報の入力ダイアログが表示されます。
+5. ルートパスワードを作成またはリセットするには、 **Generate Password**または**Reset Password**をクリックしてください。
+6. 接続情報を使用してブランチに接続します。
 
 または、 TiDB Cloud Starterインスタンスの概要ページから接続文字列を取得することもできます。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
-2.  右上隅の**Connect**をクリックしてください。
-3.  `Branch`ドロップダウンリストから接続先のブランチを選択してください。
-4.  ルートパスワードを作成またはリセットするには、 **Generate Password**または**Reset Password**をクリックしてください。
-5.  接続情報を使用してブランチに接続します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+2. 右上隅の**Connect**をクリックしてください。
+3. `Branch`ドロップダウンリストから接続先のブランチを選択してください。
+4. ルートパスワードを作成またはリセットするには、 **Generate Password**または**Reset Password**をクリックしてください。
+5. 接続情報を使用してブランチに接続します。
 
 ## ブランチを削除する {#delete-a-branch}
 
 ブランチを削除するには、以下の手順を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで**Branches**をクリックします。
-3.  削除する対象ブランチの行で、 **Action**列の**…**をクリックします。
-4.  ドロップダウンリストの**Delete**をクリックしてください。
-5.  削除を確認してください。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+2. 左側のナビゲーションペインで**Branches**をクリックします。
+3. 削除する対象ブランチの行で、 **Action**列の**…**をクリックします。
+4. ドロップダウンリストの**Delete**をクリックしてください。
+5. 削除を確認してください。
 
 ## ブランチをリセットする {#reset-a-branch}
 
@@ -90,12 +90,12 @@ TiDB Cloud Starterインスタンスのブランチを表示するには、以�
 
 ブランチをリセットするには、以下の手順を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで**Branches**をクリックします。
-3.  リセットする対象ブランチの行で、 **Action**列の**…**をクリックします。
-4.  ドロップダウンリストの**Reset**をクリックしてください。
-5.  リセットを確認してください。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+2. 左側のナビゲーションペインで**Branches**をクリックします。
+3. リセットする対象ブランチの行で、 **Action**列の**…**をクリックします。
+4. ドロップダウンリストの**Reset**をクリックしてください。
+5. リセットを確認してください。
 
 ## 次は？ {#what-s-next}
 
--   [TiDB Cloud BranchingをGitHub CI/CDパイプラインに統合する](/tidb-cloud/branch-github-integration.md)
+- [TiDB Cloud BranchingをGitHub CI/CDパイプラインに統合する](/tidb-cloud/branch-github-integration.md)

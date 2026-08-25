@@ -71,6 +71,6 @@ mysql> SHOW WARNINGS;
 
 ## 参照 {#see-also}
 
--   [統計](/statistics.md#lock-statistics)
--   [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
--   [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
+- [統計](/statistics.md#lock-statistics)
+- [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
+- [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)

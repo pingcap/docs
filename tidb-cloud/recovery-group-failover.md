@@ -21,21 +21,21 @@ summary: TiDB Cloudクラスタ間でデータベースのフェイルオーバ�
 
 災害発生時には、リカバリグループを使用してデータベースをセカンダリクラスタにフェイルオーバーできます。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)では、左上隅のコンボボックスを使用して、対象のプロジェクトに切り替えてください。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)では、左上隅のコンボボックスを使用して、対象のプロジェクトに切り替えてください。
 
-2.  左側のナビゲーションペインで、 **Recovery Group**をクリックします。
+2. 左側のナビゲーションペインで、 **Recovery Group**をクリックします。
 
-3.  **Recovery Group**ページで、フェイルオーバーを実行するリカバリグループの名前を探します。
+3. **Recovery Group**ページで、フェイルオーバーを実行するリカバリグループの名前を探します。
 
-4.  リカバリグループの**Action**メニューをクリックし、 **Failover**をクリックします。フェールオーバーダイアログが表示されます。
+4. リカバリグループの**Action**メニューをクリックし、 **Failover**をクリックします。フェールオーバーダイアログが表示されます。
 
     > **Warning**
     >
     > フェイルオーバーを実行すると、既存のレプリケーション関係が切断されます。
 
-5.  プライマリコピーに昇格させるセカンダリTiDB Cloudクラスタを選択します。選択したクラスタが正常な状態であることを確認してください。
+5. プライマリコピーに昇格させるセカンダリTiDB Cloudクラスタを選択します。選択したクラスタが正常な状態であることを確認してください。
 
-6.  確認画面に**Failover**と入力し、 **I understand, failover group**をクリックしてフェイルオーバーを開始し、フェイルオーバーが引き起こす可能性のある混乱について理解していることを確認してください。
+6. 確認画面に**Failover**と入力し、 **I understand, failover group**をクリックしてフェイルオーバーを開始し、フェイルオーバーが引き起こす可能性のある混乱について理解していることを確認してください。
 
     ![Fail Over Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-failover.png)
 
@@ -47,11 +47,11 @@ summary: TiDB Cloudクラスタ間でデータベースのフェイルオーバ�
 
 ![Unprotected Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-unprotected.png)
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)では、左上隅のコンボボックスを使用して、対象のプロジェクトに切り替えてください。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)では、左上隅のコンボボックスを使用して、対象のプロジェクトに切り替えてください。
 
-2.  左側のナビゲーションペインで、 **Recovery Group**をクリックします。
+2. 左側のナビゲーションペインで、 **Recovery Group**をクリックします。
 
-3.  **Recovery Group**ページで、再保護したいリカバリグループの名前を探します。
+3. **Recovery Group**ページで、再保護したいリカバリグループの名前を探します。
 
     > **Note**
     >
@@ -61,8 +61,8 @@ summary: TiDB Cloudクラスタ間でデータベースのフェイルオーバ�
     >
     > 再保護操作を実行するために必要なデータレプリケーションの一環として、選択されたデータベースの内容は、ターゲットのTiDB Cloud Dedicatedクラスター上で、（新しい）プライマリクラスターのデータベースの内容に置き換えられます。ターゲットのTiDB Cloud Dedicatedクラスター上の固有のコンテンツを保持したい場合は、再保護操作を実行する前にバックアップを完了してください。
 
-4.  リカバリグループの**Action**メニューをクリックし、 **Reprotect**をクリックします。再保護ダイアログが表示されます。
+4. リカバリグループの**Action**メニューをクリックし、 **Reprotect**をクリックします。再保護ダイアログが表示されます。
 
-5.  再保護操作を開始するには、 **Reprotect**をクリックして再保護操作を確定してください。
+5. 再保護操作を開始するには、 **Reprotect**をクリックして再保護操作を確定してください。
 
     ![Reprotect Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-reprotected.png)

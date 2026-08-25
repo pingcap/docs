@@ -11,7 +11,7 @@ summary: TiFlashクラスターを保守する際の一般的な操作を学習�
 
 TiFlash のバージョンを確認するには、次の 2 つの方法があります。
 
--   TiFlashのバイナリファイル名が`tiflash`の場合、 `./tiflash version`コマンドを実行することでバージョンを確認できます。
+- TiFlashのバイナリファイル名が`tiflash`の場合、 `./tiflash version`コマンドを実行することでバージョンを確認できます。
 
     ただし、上記のコマンドを実行するには、 `libtiflash_proxy.so`動的ライブラリを含むディレクトリパスを`LD_LIBRARY_PATH`環境変数に追加する必要があります。これは、 TiFlashの実行が`libtiflash_proxy.so`動的ライブラリに依存しているためです。
 
@@ -21,7 +21,7 @@ TiFlash のバージョンを確認するには、次の 2 つの方法があり
     LD_LIBRARY_PATH=./ ./tiflash version
     ```
 
--   TiFlash のログを参照して、 TiFlash のバージョンを確認してください。ログのパスについては、 [`tiflash.toml`ファイル](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)の`[logger]`部分を参照してください。例えば、以下のようになります。
+- TiFlash のログを参照して、 TiFlash のバージョンを確認してください。ログのパスについては、 [`tiflash.toml`ファイル](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)の`[logger]`部分を参照してください。例えば、以下のようになります。
 
     ```
     <information>: TiFlash version: TiFlash 0.2.0 master-375035282451103999f3863c691e2fc2

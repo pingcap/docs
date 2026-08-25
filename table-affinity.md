@@ -17,17 +17,17 @@ PDアフィニティスケジューリングを有効にし、テーブルの`AF
 
 テーブルレベルのデータ アフィニティを使用する前に、次の制限に注意してください。
 
--   この機能は[PDマイクロサービスモード](/pd-microservices.md)では有効になりません。
--   この機能は[一時テーブル](/temporary-tables.md)および[ビュー](/views.md)では動作しません。
--   [パーティションテーブル](/partitioned-table.md)データアフィニティが設定されると、**パーティションの追加、削除、再編成、スワップなど、テーブルのパーティション構成の変更はサポートされなくなります**。パーティション構成を変更するには、まずそのテーブルのアフィニティ設定を削除する必要があります。
--   **大容量データを扱う場合、ディスク容量を事前に評価してください**。アフィニティを有効にすると、PDはテーブルまたはパーティションのリージョンを、少数のTiKVノードの同じサブセットに優先的にスケジュールします。データ量の多いテーブルやパーティションの場合、これによりこれらのノードのディスク使用量が大幅に増加する可能性があります。事前にディスク容量を評価し、監視することをお勧めします。
--   データアフィニティは、Leaderとボーターレプリカの分散にのみ影響します。テーブルにLearnerレプリカ（ TiFlashなど）がある場合、それらの分散はアフィニティ設定の影響を受けません。
+- この機能は[PDマイクロサービスモード](/pd-microservices.md)では有効になりません。
+- この機能は[一時テーブル](/temporary-tables.md)および[ビュー](/views.md)では動作しません。
+- [パーティションテーブル](/partitioned-table.md)データアフィニティが設定されると、**パーティションの追加、削除、再編成、スワップなど、テーブルのパーティション構成の変更はサポートされなくなります**。パーティション構成を変更するには、まずそのテーブルのアフィニティ設定を削除する必要があります。
+- **大容量データを扱う場合、ディスク容量を事前に評価してください**。アフィニティを有効にすると、PDはテーブルまたはパーティションのリージョンを、少数のTiKVノードの同じサブセットに優先的にスケジュールします。データ量の多いテーブルやパーティションの場合、これによりこれらのノードのディスク使用量が大幅に増加する可能性があります。事前にディスク容量を評価し、監視することをお勧めします。
+- データアフィニティは、Leaderとボーターレプリカの分散にのみ影響します。テーブルにLearnerレプリカ（ TiFlashなど）がある場合、それらの分散はアフィニティ設定の影響を受けません。
 
 ## 前提条件 {#prerequisites}
 
 PDアフィニティスケジューリングはデフォルトで無効になっています。テーブルまたはパーティションのアフィニティを設定する前に、この機能を有効にして設定する必要があります。
 
-1.  アフィニティスケジューリングを有効にするには、PD 構成項目[`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855) `0`より大きい値に設定します。
+1. アフィニティスケジューリングを有効にするには、PD 構成項目[`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855) `0`より大きい値に設定します。
 
     たとえば、次のコマンドは値を`4`に設定し、PD が最大 4 つのアフィニティスケジューリング タスクを同時に実行できるようにします。
 
@@ -35,7 +35,7 @@ PDアフィニティスケジューリングはデフォルトで無効になっ
     pd-ctl config set schedule.affinity-schedule-limit 4
     ```
 
-2.  （オプション）必要に応じてPD設定項目[`schedule.max-affinity-merge-region-size`](/pd-configuration-file.md#max-affinity-merge-region-size-new-in-v855)を変更します。デフォルト値は`256` MiB です。これは、同じアフィニティグループ内の隣接する小さなリージョンを自動的にマージするためのサイズしきい値を制御します。`0`に設定すると、アフィニティグループ内の隣接する小さなリージョンの自動マージが無効になります。
+2. （オプション）必要に応じてPD設定項目[`schedule.max-affinity-merge-region-size`](/pd-configuration-file.md#max-affinity-merge-region-size-new-in-v855)を変更します。デフォルト値は`256` MiB です。これは、同じアフィニティグループ内の隣接する小さなリージョンを自動的にマージするためのサイズしきい値を制御します。`0`に設定すると、アフィニティグループ内の隣接する小さなリージョンの自動マージが無効になります。
 
 ## 使用法 {#usage}
 
@@ -84,27 +84,27 @@ ALTER TABLE t1 AFFINITY = '';
 
 テーブルまたはパーティションのアフィニティ情報は、次の方法で表示できます。
 
--   [`SHOW AFFINITY`](/sql-statements/sql-statement-show-affinity.md)番目のステートメントを実行します。`Status`の列には、アフィニティが有効になっているテーブルまたはパーティションと、それらのスケジュールステータスが表示されます。`Status`の列の値の意味は次のとおりです。
+- [`SHOW AFFINITY`](/sql-statements/sql-statement-show-affinity.md)番目のステートメントを実行します。`Status`の列には、アフィニティが有効になっているテーブルまたはパーティションと、それらのスケジュールステータスが表示されます。`Status`の列の値の意味は次のとおりです。
 
-    -   `Pending` : リーダーまたは投票者がまだ決定されていない場合など、PD はテーブルまたはパーティションのアフィニティスケジューリングを開始していません。
-    -   `Preparing` : PD はアフィニティ要件を満たすようにリージョンをスケジュールしています。
-    -   `Stable` : すべてのリージョンが目標配布に到達しました。
+    - `Pending` : リーダーまたは投票者がまだ決定されていない場合など、PD はテーブルまたはパーティションのアフィニティスケジューリングを開始していません。
+    - `Preparing` : PD はアフィニティ要件を満たすようにリージョンをスケジュールしています。
+    - `Stable` : すべてのリージョンが目標配布に到達しました。
 
--   [`INFORMATION_SCHEMA.TABLES`](/information-schema/information-schema-tables.md)テーブルをクエリし、 `TIDB_AFFINITY`列でテーブルのアフィニティ レベルを確認します。
+- [`INFORMATION_SCHEMA.TABLES`](/information-schema/information-schema-tables.md)テーブルをクエリし、 `TIDB_AFFINITY`列でテーブルのアフィニティ レベルを確認します。
 
--   [`INFORMATION_SCHEMA.PARTITIONS`](/information-schema/information-schema-partitions.md)テーブルをクエリし、パーティションのアフィニティ レベルの`TIDB_AFFINITY`列を確認します。
+- [`INFORMATION_SCHEMA.PARTITIONS`](/information-schema/information-schema-partitions.md)テーブルをクエリし、パーティションのアフィニティ レベルの`TIDB_AFFINITY`列を確認します。
 
 ## 注記 {#notes}
 
--   **リージョンの自動分割**：リージョンがアフィニティグループに属し、アフィニティが有効な場合、リージョンが過剰に作成されてアフィニティ効果が弱まるのを防ぐため、そのリージョンの自動分割はデフォルトで無効になっています。自動分割は、リージョンサイズが[`schedule.max-affinity-merge-region-size`](/pd-configuration-file.md#max-affinity-merge-region-size-new-in-v855)の4倍を超えた場合にのみトリガーされます。TiKVまたはPD以外のコンポーネントによってトリガーされる分割（ [`SPLIT TABLE`](/sql-statements/sql-statement-split-region.md)によってトリガーされる手動分割など）には、この制限は適用されません。
+- **リージョンの自動分割**：リージョンがアフィニティグループに属し、アフィニティが有効な場合、リージョンが過剰に作成されてアフィニティ効果が弱まるのを防ぐため、そのリージョンの自動分割はデフォルトで無効になっています。自動分割は、リージョンサイズが[`schedule.max-affinity-merge-region-size`](/pd-configuration-file.md#max-affinity-merge-region-size-new-in-v855)の4倍を超えた場合にのみトリガーされます。TiKVまたはPD以外のコンポーネントによってトリガーされる分割（ [`SPLIT TABLE`](/sql-statements/sql-statement-split-region.md)によってトリガーされる手動分割など）には、この制限は適用されません。
 
--   **縮退および有効期限切れのメカニズム**：アフィニティグループ内の対象のリーダーまたは投票者をホストするTiKVノードが利用できなくなった場合（例えば、ノード障害やディスク容量不足など）、Leaderが排除された場合、または既存の配置ルールと競合した場合、PDはアフィニティグループを縮退状態としてマークします。縮退中は、対応するテーブルまたはパーティションのアフィニティスケジューリングが一時停止されます。
+- **縮退および有効期限切れのメカニズム**：アフィニティグループ内の対象のリーダーまたは投票者をホストするTiKVノードが利用できなくなった場合（例えば、ノード障害やディスク容量不足など）、Leaderが排除された場合、または既存の配置ルールと競合した場合、PDはアフィニティグループを縮退状態としてマークします。縮退中は、対応するテーブルまたはパーティションのアフィニティスケジューリングが一時停止されます。
 
-    -   影響を受けたノードが 10 分以内に回復した場合、PD は元のアフィニティ設定に基づいてスケジュールを再開します。
-    -   影響を受けたノードが10分以内に回復しない場合、アフィニティグループは期限切れとしてマークされます。この時点で、PDは通常のスケジューリング動作を復元し（ [`SHOW AFFINITY`](/sql-statements/sql-statement-show-affinity.md)の状態が`Pending`に戻ります）、アフィニティグループ内のリーダーと投票者を自動的に更新して、アフィニティスケジューリングを再度有効にします。
+    - 影響を受けたノードが 10 分以内に回復した場合、PD は元のアフィニティ設定に基づいてスケジュールを再開します。
+    - 影響を受けたノードが10分以内に回復しない場合、アフィニティグループは期限切れとしてマークされます。この時点で、PDは通常のスケジューリング動作を復元し（ [`SHOW AFFINITY`](/sql-statements/sql-statement-show-affinity.md)の状態が`Pending`に戻ります）、アフィニティグループ内のリーダーと投票者を自動的に更新して、アフィニティスケジューリングを再度有効にします。
 
 ## 関連するステートメントと構成 {#related-statements-and-configurations}
 
--   [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)と[`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)の`AFFINITY`オプション
--   [`SHOW AFFINITY`](/sql-statements/sql-statement-show-affinity.md)
--   PD構成項目: [`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855)と[`schedule.max-affinity-merge-region-size`](/pd-configuration-file.md#max-affinity-merge-region-size-new-in-v855)
+- [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)と[`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)の`AFFINITY`オプション
+- [`SHOW AFFINITY`](/sql-statements/sql-statement-show-affinity.md)
+- PD構成項目: [`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855)と[`schedule.max-affinity-merge-region-size`](/pd-configuration-file.md#max-affinity-merge-region-size-new-in-v855)

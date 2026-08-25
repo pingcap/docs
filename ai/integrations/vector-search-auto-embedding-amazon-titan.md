@@ -18,16 +18,16 @@ TiDB Cloud は、次の[Amazon Titan埋め込みモデル](https://docs.aws.amaz
 
 **Amazon Titan テキスト埋め込み V2 モデル**
 
--   名前: `tidbcloud_free/amazon/titan-embed-text-v2`
--   寸法: 1024 (デフォルト)、512、256
--   距離指標：コサイン類似度、L2
--   対応言語：英語（プレビュー版では100以上の言語に対応）
--   典型的な使用例：RAG、文書検索、再ランキング、分類
--   入力可能なテキストトークンの最大数：8,192
--   入力可能なテキスト文字数：最大50,000文字
--   価格：無料
--   TiDB Cloudがホストしています: ✅
--   鍵をご持参ください：❌
+- 名前: `tidbcloud_free/amazon/titan-embed-text-v2`
+- 寸法: 1024 (デフォルト)、512、256
+- 距離指標：コサイン類似度、L2
+- 対応言語：英語（プレビュー版では100以上の言語に対応）
+- 典型的な使用例：RAG、文書検索、再ランキング、分類
+- 入力可能なテキストトークンの最大数：8,192
+- 入力可能なテキスト文字数：最大50,000文字
+- 価格：無料
+- TiDB Cloudがホストしています: ✅
+- 鍵をご持参ください：❌
 
 このモデルの詳細については、 [Amazon Bedrock のドキュメント](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html)を参照してください。
 
@@ -80,8 +80,8 @@ LIMIT 2;
 
 `additional_json_options` `EMBED_TEXT()` } パラメータを使用して、以下のオプションを指定できます。
 
--   `normalize` (オプション): 出力埋め込みを正規化するかどうか。デフォルトは`true`です。
--   `dimensions` (オプション): 出力埋め込みの次元数。サポートされている値: `1024` (デフォルト)、 `512` 、および`256` 。
+- `normalize` (オプション): 出力埋め込みを正規化するかどうか。デフォルトは`true`です。
+- `dimensions` (オプション): 出力埋め込みの次元数。サポートされている値: `1024` (デフォルト)、 `512` 、および`256` 。
 
 **例：別の次元を使用する**
 
@@ -129,7 +129,7 @@ LIMIT 2;
 
 ## 関連項目 {#see-also}
 
--   [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
--   [ベクトル検索](/ai/concepts/vector-search-overview.md)
--   [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
--   [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)
+- [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
+- [ベクトル検索](/ai/concepts/vector-search-overview.md)
+- [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
+- [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)

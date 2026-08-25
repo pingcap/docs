@@ -23,36 +23,42 @@ summary: tidb_external_ts` 変数を使用して履歴データを読み取る�
 
 このセクションでは、 `tidb_external_ts`変数を使用して履歴データを読み取る方法を例とともに説明します。
 
-1.  テーブルを作成し、テーブルにいくつかの行を挿入します。
+1. テーブルを作成し、テーブルにいくつかの行を挿入します。
 
     ```sql
     CREATE TABLE t (c INT);
     ```
 
-        Query OK, 0 rows affected (0.01 sec)
+    ```
+    Query OK, 0 rows affected (0.01 sec)
+    ```
 
     ```sql
     INSERT INTO t VALUES (1), (2), (3);
     ```
 
-        Query OK, 3 rows affected (0.00 sec)
+    ```
+    Query OK, 3 rows affected (0.00 sec)
+    ```
 
-2.  表内のデータを表示する。
+2. 表内のデータを表示する。
 
     ```sql
     SELECT * FROM t;
     ```
 
-        +------+
-        | c    |
-        +------+
-        |    1 |
-        |    2 |
-        |    3 |
-        +------+
-        3 rows in set (0.00 sec)
+    ```
+    +------+
+    | c    |
+    +------+
+    |    1 |
+    |    2 |
+    |    3 |
+    +------+
+    3 rows in set (0.00 sec)
+    ```
 
-3.  セット`tidb_external_ts` ～ `@@tidb_current_ts` :
+3. セット`tidb_external_ts` ～ `@@tidb_current_ts` :
 
     ```sql
     START TRANSACTION;
@@ -60,42 +66,48 @@ summary: tidb_external_ts` 変数を使用して履歴データを読み取る�
     COMMIT;
     ```
 
-4.  新しい行を挿入し、挿入されたことを確認します。
+4. 新しい行を挿入し、挿入されたことを確認します。
 
     ```sql
     INSERT INTO t VALUES (4);
     ```
 
-        Query OK, 1 row affected (0.001 sec)
+    ```
+    Query OK, 1 row affected (0.001 sec)
+    ```
 
     ```sql
     SELECT * FROM t;
     ```
 
-        +------+
-        | id   |
-        +------+
-        |    1 |
-        |    2 |
-        |    3 |
-        |    4 |
-        +------+
-        4 rows in set (0.00 sec)
+    ```
+    +------+
+    | id   |
+    +------+
+    |    1 |
+    |    2 |
+    |    3 |
+    |    4 |
+    +------+
+    4 rows in set (0.00 sec)
+    ```
 
-5.  `tidb_enable_external_ts_read`を`ON`に設定し、表内のデータを表示します。
+5. `tidb_enable_external_ts_read`を`ON`に設定し、表内のデータを表示します。
 
     ```sql
     SET tidb_enable_external_ts_read=ON;
     SELECT * FROM t;
     ```
 
-        +------+
-        | c    |
-        +------+
-        |    1 |
-        |    2 |
-        |    3 |
-        +------+
-        3 rows in set (0.00 sec)
+    ```
+    +------+
+    | c    |
+    +------+
+    |    1 |
+    |    2 |
+    |    3 |
+    +------+
+    3 rows in set (0.00 sec)
+    ```
 
     新しい行が挿入される前にタイムスタンプに`tidb_external_ts`設定されるため、 `tidb_enable_external_ts_read`有効になった後は新しく挿入された行は返されません。

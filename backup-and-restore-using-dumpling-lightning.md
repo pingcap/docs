@@ -13,21 +13,21 @@ summary: DumplingとTiDB Lightningを使用して、TiDBの完全なデータを
 
 ## 要件 {#requirements}
 
--   Dumplingをインストールしてください：
+- Dumplingをインストールしてください：
 
     ```shell
     tiup install dumpling
     ```
 
--   TiDB Lightningをインストールする：
+- TiDB Lightningをインストールする：
 
     ```shell
     tiup install tidb-lightning
     ```
 
--   [Dumplingに必要なソースデータベース権限を付与する](/dumpling-overview.md#export-data-from-tidb-or-mysql)
+- [Dumplingに必要なソースデータベース権限を付与する](/dumpling-overview.md#export-data-from-tidb-or-mysql)
 
--   [TiDB Lightningに必要なターゲットデータベース権限を付与します](/tidb-lightning/tidb-lightning-requirements.md#privileges-of-the-target-database)
+- [TiDB Lightningに必要なターゲットデータベース権限を付与します](/tidb-lightning/tidb-lightning-requirements.md#privileges-of-the-target-database)
 
 ## リソース要件 {#resource-requirements}
 
@@ -41,8 +41,8 @@ summary: DumplingとTiDB Lightningを使用して、TiDBの完全なデータを
 
 バックアップタスクのデータをローカルディスクに保存する必要がある場合は、以下の制限事項に注意してください。
 
--   Dumplingには、データソース全体を保存できる（またはエクスポートされるすべての上流テーブルを保存できる）ディスク容量が必要です。必要なスペースを計算するには、 [ターゲットデータベースのストレージ要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。
--   インポート処理中、 TiDB Lightningはソート済みのキーと値のペアを保存するための一時的な領域を必要とします。ディスク容量は、データソースの最大の単一テーブルを格納できるのに十分な量が必要です。
+- Dumplingには、データソース全体を保存できる（またはエクスポートされるすべての上流テーブルを保存できる）ディスク容量が必要です。必要なスペースを計算するには、 [ターゲットデータベースのストレージ要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。
+- インポート処理中、 TiDB Lightningはソート済みのキーと値のペアを保存するための一時的な領域を必要とします。ディスク容量は、データソースの最大の単一テーブルを格納できるのに十分な量が必要です。
 
 **Note:** DumplingによってMySQLからエクスポートされる正確なデータ量を計算することは困難ですが、次のSQLステートメントを使用して`information_schema.tables`テーブルの`DATA_LENGTH`フィールドを要約することで、データ量を推定できます。
 
@@ -79,12 +79,12 @@ LIMIT
 
 ターゲットの TiKV クラスターには、インポートされたデータを保存するのに十分なディスク容量が必要です。[標準ハードウェア要件](/hardware-and-software-requirements.md)に加えて、ターゲットの TiKV クラスターのストレージ容量は**、データソースのサイズ × <a href="/faq/manage-cluster-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it">レプリカ数</a>× 2**よりも大きくなければなりません。たとえば、クラスターがデフォルトで 3 つのレプリカを使用する場合、ターゲットの TiKV クラスターは、データソースのサイズの 6 倍よりも大きなストレージ容量が必要です。この式に x 2 が含まれている理由は次のとおりです。
 
--   インデックスには余分な容量が必要になる場合があります。
--   RocksDBには空間増幅がある。
+- インデックスには余分な容量が必要になる場合があります。
+- RocksDBには空間増幅がある。
 
 ## Dumplingを使用してフルデータをバックアップします {#use-dumpling-to-back-up-full-data}
 
-1.  TiDBからAmazon S3の`s3://my-bucket/sql-backup`に全データをエクスポートするには、次のコマンドを実行します。
+1. TiDBからAmazon S3の`s3://my-bucket/sql-backup`に全データをエクスポートするには、次のコマンドを実行します。
 
     ```shell
     tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MiB -B my_db1 -f 'my_db1.table[12]' -o 's3://my-bucket/sql-backup'
@@ -94,11 +94,11 @@ LIMIT
 
     Dumplingのその他の構成については、 [Dumplingのオプション一覧](/dumpling-overview.md#option-list-of-dumpling)を参照してください。
 
-2.  エクスポートが完了すると、ディレクトリ`s3://my-bucket/sql-backup`でバックアップファイルを確認できます。
+2. エクスポートが完了すると、ディレクトリ`s3://my-bucket/sql-backup`でバックアップファイルを確認できます。
 
 ## TiDB Lightningを使用して完全なデータを復元します。 {#use-tidb-lightning-to-restore-full-data}
 
-1.  `tidb-lightning.toml`ファイルを編集して、Dumplingを使用して`s3://my-bucket/sql-backup`にバックアップされた完全なデータを、ターゲットのTiDBクラスターにインポートします。
+1. `tidb-lightning.toml`ファイルを編集して、Dumplingを使用して`s3://my-bucket/sql-backup`にバックアップされた完全なデータを、ターゲットのTiDBクラスターにインポートします。
 
     ```toml
     [lightning]
@@ -129,7 +129,7 @@ LIMIT
 
     TiDB Lightning構成の詳細については、 [TiDB Lightningの構成](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
-2.  `tidb-lightning`を実行してインポートを開始します。コマンドラインでプログラムを直接起動すると、 `SIGHUP`シグナルを受信した後にプロセスが予期せず終了する可能性があります。この場合、 `nohup`または`screen`ツールを使用してプログラムを実行することをお勧めします。例:
+2. `tidb-lightning`を実行してインポートを開始します。コマンドラインでプログラムを直接起動すると、 `SIGHUP`シグナルを受信した後にプロセスが予期せず終了する可能性があります。この場合、 `nohup`または`screen`ツールを使用してプログラムを実行することをお勧めします。例:
 
     S3 からデータをインポートする場合は、S3ストレージパスにアクセスできる SecretKey と AccessKey を環境変数としてTiDB Lightningノードに渡してください。また、 `~/.aws/credentials`から認証情報を読み取ることもできます。
 
@@ -139,9 +139,9 @@ LIMIT
     nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
     ```
 
-3.  インポートが開始されたら、ログ内のキーワード`progress`を`grep`することで、インポートの進行状況を確認できます。進行状況は、デフォルトでは 5 分ごとに更新されます。
+3. インポートが開始されたら、ログ内のキーワード`progress`を`grep`することで、インポートの進行状況を確認できます。進行状況は、デフォルトでは 5 分ごとに更新されます。
 
-4.  TiDB Lightning はインポートが完了すると自動的に終了します。`tidb-lightning.log`の最後の行に`the whole procedure completed`が含まれているかどうかを確認してください。含まれている場合はインポートが成功しています。含まれていない場合は、インポート中にエラーが発生しました。エラーメッセージの指示に従ってエラーに対処してください。
+4. TiDB Lightning はインポートが完了すると自動的に終了します。`tidb-lightning.log`の最後の行に`the whole procedure completed`が含まれているかどうかを確認してください。含まれている場合はインポートが成功しています。含まれていない場合は、インポート中にエラーが発生しました。エラーメッセージの指示に従ってエラーに対処してください。
 
 > **Note:**
 >

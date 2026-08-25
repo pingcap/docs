@@ -146,19 +146,19 @@ SELECT * FROM tables LIMIT 2000 OFFSET 0
 
 Oracle では、次の場合に`NULL`値が`ORDER BY`句によってソートされます。
 
--   `ORDER BY column ASC`ステートメントでは、最後に`NULL`値が返されます。
+- `ORDER BY column ASC`ステートメントでは、最後に`NULL`値が返されます。
 
--   `ORDER BY column DESC`ステートメントでは、最初に`NULL`値が返されます。
+- `ORDER BY column DESC`ステートメントでは、最初に`NULL`値が返されます。
 
--   `ORDER BY column [ASC|DESC] NULLS FIRST`文では、 `NULL`値が非NULL値の前に返されます。非NULL値は、 `ASC|DESC`で指定された昇順または降順で返されます。
+- `ORDER BY column [ASC|DESC] NULLS FIRST`文では、 `NULL`値が非NULL値の前に返されます。非NULL値は、 `ASC|DESC`で指定された昇順または降順で返されます。
 
--   `ORDER BY column [ASC|DESC] NULLS LAST`文では、非 NULL 値の後に`NULL`値が返されます。非 NULL 値は、 `ASC|DESC`で指定された昇順または降順で返されます。
+- `ORDER BY column [ASC|DESC] NULLS LAST`文では、非 NULL 値の後に`NULL`値が返されます。非 NULL 値は、 `ASC|DESC`で指定された昇順または降順で返されます。
 
 TiDB では、次の場合に`NULL`値が`ORDER BY`句によってソートされます。
 
--   `ORDER BY column ASC`ステートメントでは、最初に`NULL`値が返されます。
+- `ORDER BY column ASC`ステートメントでは、最初に`NULL`値が返されます。
 
--   `ORDER BY column DESC`ステートメントでは、最後に`NULL`値が返されます。
+- `ORDER BY column DESC`ステートメントでは、最後に`NULL`値が返されます。
 
 次の表は、Oracle と TiDB の同等の`ORDER BY`ステートメントの例を示しています。
 

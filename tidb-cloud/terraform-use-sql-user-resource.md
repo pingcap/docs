@@ -9,17 +9,17 @@ summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザ
 
 `tidbcloud_sql_user`リソースの機能は次のとおりです。
 
--   TiDB Cloud SQL ユーザーを作成します。
--   TiDB Cloud SQL ユーザーを変更します。
--   TiDB Cloud SQL ユーザーをインポートします。
--   TiDB Cloud SQL ユーザーを削除します。
+- TiDB Cloud SQL ユーザーを作成します。
+- TiDB Cloud SQL ユーザーを変更します。
+- TiDB Cloud SQL ユーザーをインポートします。
+- TiDB Cloud SQL ユーザーを削除します。
 
 ## 前提条件 {#prerequisites}
 
--   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
--   TiDB Cloudクラスターを作成するには、次のいずれかのドキュメントを参照してください。
-    -   [TiDB Cloud Starter または Essential クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
-    -   [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
+- [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
+- TiDB Cloudクラスターを作成するには、次のいずれかのドキュメントを参照してください。
+    - [TiDB Cloud Starter または Essential クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
+    - [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
 
 ## SQLユーザーを作成する {#create-a-sql-user}
 
@@ -27,38 +27,40 @@ summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザ
 
 次の例は、TiDB Cloud SQL ユーザーを作成する方法を示しています。
 
-1.  SQL ユーザーのディレクトリを作成してそこに入ります。
+1. SQL ユーザーのディレクトリを作成してそこに入ります。
 
-2.  `sql_user.tf`ファイルを作成します。
+2. `sql_user.tf`ファイルを作成します。
 
-        terraform {
-          required_providers {
-            tidbcloud = {
-              source = "tidbcloud/tidbcloud"
-            }
-          }
+    ```
+    terraform {
+      required_providers {
+        tidbcloud = {
+          source = "tidbcloud/tidbcloud"
         }
+      }
+    }
 
-        provider "tidbcloud" {
-          public_key = "your_public_key"
-          private_key = "your_private_key"
-        }
+    provider "tidbcloud" {
+      public_key = "your_public_key"
+      private_key = "your_private_key"
+    }
 
-        resource "tidbcloud_sql_user" "example" {
-          cluster_id   = "your_cluster_id"
-          user_name    = "example_user"
-          password     = "example_password"
-          builtin_role = "role_admin"
-        }
+    resource "tidbcloud_sql_user" "example" {
+      cluster_id   = "your_cluster_id"
+      user_name    = "example_user"
+      password     = "example_password"
+      builtin_role = "role_admin"
+    }
+    ```
 
     `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    -   `tidbcloud_sql_user`リソースを使用するには、リソース タイプを`tidbcloud_sql_user`に設定します。
-    -   リソース名は必要に応じて定義できます。例： `example` 。
-    -   TiDB Cloud Starter またはTiDB Cloud Essential クラスターの SQL ユーザーの場合、 `user_name`と組み込みロール`role_readonly`および`role_readwrite`ユーザー プレフィックスで始まる必要があり、 `tidbcloud_serverless_cluster`データソースを実行することでユーザー プレフィックスを取得できます。
-    -   SQL ユーザー指定情報を取得するには、 [`tidbcloud_sql_user` (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/sql_user)を参照してください。
+    - `tidbcloud_sql_user`リソースを使用するには、リソース タイプを`tidbcloud_sql_user`に設定します。
+    - リソース名は必要に応じて定義できます。例： `example` 。
+    - TiDB Cloud Starter またはTiDB Cloud Essential クラスターの SQL ユーザーの場合、 `user_name`と組み込みロール`role_readonly`および`role_readwrite`ユーザー プレフィックスで始まる必要があり、 `tidbcloud_serverless_cluster`データソースを実行することでユーザー プレフィックスを取得できます。
+    - SQL ユーザー指定情報を取得するには、 [`tidbcloud_sql_user` (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/sql_user)を参照してください。
 
-3.  `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
+3. `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 
     ```shell
     $ terraform apply
@@ -88,11 +90,11 @@ summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザ
 
     上記の結果では、Terraform によって実行計画が生成され、Terraform が実行するアクションが記述されます。
 
-    -   構成と状態の違いを確認できます。
-    -   `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
-    -   `known after apply` `apply`後の対応する値が取得されることを示します。
+    - 構成と状態の違いを確認できます。
+    - `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
+    - `known after apply` `apply`後の対応する値が取得されることを示します。
 
-4.  計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
+4. 計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
 
     ```shell
     Do you want to perform these actions?
@@ -107,7 +109,7 @@ summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザ
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_sql_user.${resource-name}`を使用します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
+5. リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_sql_user.${resource-name}`を使用します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_sql_user.example                 
@@ -124,18 +126,20 @@ summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザ
 
 次のように、Terraform を使用して SQL ユーザーのパスワードまたはユーザー ロールを変更できます。
 
-1.  [SQLユーザーを作成する](#create-a-sql-user)ときに使用する`sql_user.tf`ファイルで、 `password` 、 `builtin_role` 、および`custom_roles` (該当する場合) を変更します。
+1. [SQLユーザーを作成する](#create-a-sql-user)ときに使用する`sql_user.tf`ファイルで、 `password` 、 `builtin_role` 、および`custom_roles` (該当する場合) を変更します。
 
     例えば：
 
-        resource "tidbcloud_sql_user" "example" {
-          cluster_id = 10423692645600000000
-          user_name = "example_user"
-          password = "updated_example_password"
-          builtin_role = "role_readonly"
-        }
+    ```
+    resource "tidbcloud_sql_user" "example" {
+      cluster_id = 10423692645600000000
+      user_name = "example_user"
+      password = "updated_example_password"
+      builtin_role = "role_readonly"
+    }
+    ```
 
-2.  `terraform apply`コマンドを実行します。
+2. `terraform apply`コマンドを実行します。
 
     ```shell
     $ terraform apply
@@ -167,7 +171,7 @@ summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザ
 
     上記の実行計画では、パスワードと組み込みロールが変更されます。
 
-3.  計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
+3. 計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
 
     ```shell
       Enter a value: yes
@@ -178,16 +182,18 @@ summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザ
     Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
     ```
 
-4.  `terraform state show tidbcloud_sql_user.${resource-name}`を使用して状態を確認します。
+4. `terraform state show tidbcloud_sql_user.${resource-name}`を使用して状態を確認します。
 
-        $ terraform state show tidbcloud_sql_user.example
-        # tidbcloud_sql_user.example:
-        resource "tidbcloud_sql_user" "example" {
-            builtin_role = "role_readonly"
-            cluster_id   = "10423692645600000000"
-            password     = (sensitive value)
-            user_name    = "example_user"
-        }
+    ```
+    $ terraform state show tidbcloud_sql_user.example
+    # tidbcloud_sql_user.example:
+    resource "tidbcloud_sql_user" "example" {
+        builtin_role = "role_readonly"
+        cluster_id   = "10423692645600000000"
+        password     = (sensitive value)
+        user_name    = "example_user"
+    }
+    ```
 
 `builtin_role`は`role_readonly`に変更されます。`password`はセンシティブな値であるため表示されません。
 
@@ -197,16 +203,18 @@ Terraform で管理されていないTiDB Cloud SQL ユーザーの場合は、T
 
 たとえば、Terraform によって作成されていない SQL ユーザーを次のようにインポートできます。
 
-1.  新しい`tidbcloud_sql_user`リソースのインポート ブロックを追加します。
+1. 新しい`tidbcloud_sql_user`リソースのインポート ブロックを追加します。
 
     次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` `cluster_id,user_name`の形式に置き換えます。
 
-        import {
-          to = tidbcloud_sql_user.example
-          id = "${id}"
-        }
+    ```
+    import {
+      to = tidbcloud_sql_user.example
+      id = "${id}"
+    }
+    ```
 
-2.  新しい構成ファイルを生成します。
+2. 新しい構成ファイルを生成します。
 
     インポート ブロックに従って、新しい`tidbcloud_sql_user`リソースの新しい構成ファイルを生成します。
 
@@ -218,7 +226,7 @@ Terraform で管理されていないTiDB Cloud SQL ユーザーの場合は、T
 
     その後、カレントディレクトリに`generated.tf`ファイルが作成され、そこにインポートされたリソースの設定が含まれます。ただし、必須の引数`password`設定されていないため、プロバイダーはエラーをスローします。生成された設定ファイルで、引数`password`の値を`tidbcloud_sql_user`リソースに置き換えることができます。
 
-3.  生成された構成を確認して適用します。
+3. 生成された構成を確認して適用します。
 
     生成された構成ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
 
@@ -271,4 +279,6 @@ SQL ユーザーを削除するには、 `tidbcloud_sql_user`リソースの構�
 
 ここで、コマンド`terraform show`を実行すると、リソースがクリアされているため何も表示されません。
 
-    $ terraform show
+```
+$ terraform show
+```

@@ -77,4 +77,4 @@ TiDBの`SHOW [GLOBAL|SESSION] VARIABLES`文はMySQLと完全に互換性があ�
 
 ## 参照 {#see-also}
 
--   [`SET [GLOBAL|SESSION]`](/sql-statements/sql-statement-set-variable.md)
+- [`SET [GLOBAL|SESSION]`](/sql-statements/sql-statement-set-variable.md)

@@ -37,13 +37,13 @@ MySQL と同様に、TiDB にはシステムテーブルも含まれており、
 
 ### TiDBを安全に停止するにはどうすればよいですか？ {#how-to-safely-stop-tidb}
 
--   ロードバランサーが稼働している場合（推奨）：ロードバランサーを停止し、SQL文`SHUTDOWN`を実行します。その後、TiDBは[`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50)で指定された期間、すべてのセッションが終了するまで待機します。その後、TiDBは停止します。
+- ロードバランサーが稼働している場合（推奨）：ロードバランサーを停止し、SQL文`SHUTDOWN`を実行します。その後、TiDBは[`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50)で指定された期間、すべてのセッションが終了するまで待機します。その後、TiDBは停止します。
 
--   ロードバランサーが実行されていない場合： `SHUTDOWN`ステートメントを実行します。その後、TiDB コンポーネントは正常に停止されます。
+- ロードバランサーが実行されていない場合： `SHUTDOWN`ステートメントを実行します。その後、TiDB コンポーネントは正常に停止されます。
 
 ### TiDBで`kill`は実行できますか？ {#can-kill-be-executed-in-tidb}
 
--   DMLステートメントを無効化する：
+- DMLステートメントを無効化する：
 
     まず`information_schema.cluster_processlist`を使用して TiDB インスタンスのアドレスとセッション ID を見つけ、次に kill コマンドを実行します。
 
@@ -51,7 +51,7 @@ MySQL と同様に、TiDB にはシステムテーブルも含まれており、
 
     TiDB のバージョンが v6.1.0 より前、またはグローバル キル機能が有効になっていない場合、 `kill session_id`デフォルトでは有効になりません。DML ステートメントを終了するには、クライアントを DML ステートメントを実行している TiDB インスタンスに直接接続してから、 `kill tidb session_id`ステートメントを実行する必要があります。クライアントが別の TiDB インスタンスに接続している場合、またはクライアントと TiDB クラスタの間にプロキシがある場合、 `kill tidb session_id`ステートメントが別の TiDB インスタンスにルーティングされ、別のセッションが誤って終了する可能性があります。詳細については、[`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
 
--   DDL ステートメントを強制終了するには、まず`admin show ddl jobs`を使用して終了する必要のある DDL ジョブの ID を見つけ、次に`admin cancel ddl jobs 'job_id' [, 'job_id'] ...`を実行します。詳細については、 [`ADMIN`ステートメント](/sql-statements/sql-statement-admin.md)を参照してください。
+- DDL ステートメントを強制終了するには、まず`admin show ddl jobs`を使用して終了する必要のある DDL ジョブの ID を見つけ、次に`admin cancel ddl jobs 'job_id' [, 'job_id'] ...`を実行します。詳細については、 [`ADMIN`ステートメント](/sql-statements/sql-statement-admin.md)を参照してください。
 
 ### TiDBはセッションタイムアウトをサポートしていますか？ {#does-tidb-support-session-timeout}
 
@@ -65,9 +65,9 @@ TiDB のバージョン管理の詳細については、 [TiDB のバージョ�
 
 TiDBは、低コストで簡単にクラスタを管理できるいくつかの機能と[ツール](/ecosystem-tool-user-guide.md)を提供しています。
 
--   保守作業においては、 [TiUP](/tiup/tiup-documentation-guide.md)パッケージマネージャーとして機能し、デプロイ、スケーリング、アップグレード、その他の保守作業を簡素化します。
--   モニタリングのために、 [TiDB監視フレームワーク](/tidb-monitoring-framework.md)[Prometheus](https://prometheus.io/)を使用してモニタリングとパフォーマンスのメトリクスを保存し、[Grafana](https://grafana.com/grafana/)を使用してこれらのメトリクスを視覚化します。数百のメトリクスを備えた数十の組み込みパネルが利用可能です。
--   トラブルシューティングについては、 [TiDBトラブルシューティングマップ](/tidb-troubleshooting-map.md)TiDBサーバーとその他のコンポーネントの一般的な問題がまとめられています。関連する問題が発生した場合は、このマップを使用して問題を診断し、解決できます。
+- 保守作業においては、 [TiUP](/tiup/tiup-documentation-guide.md)パッケージマネージャーとして機能し、デプロイ、スケーリング、アップグレード、その他の保守作業を簡素化します。
+- モニタリングのために、 [TiDB監視フレームワーク](/tidb-monitoring-framework.md)[Prometheus](https://prometheus.io/)を使用してモニタリングとパフォーマンスのメトリクスを保存し、[Grafana](https://grafana.com/grafana/)を使用してこれらのメトリクスを視覚化します。数百のメトリクスを備えた数十の組み込みパネルが利用可能です。
+- トラブルシューティングについては、 [TiDBトラブルシューティングマップ](/tidb-troubleshooting-map.md)TiDBサーバーとその他のコンポーネントの一般的な問題がまとめられています。関連する問題が発生した場合は、このマップを使用して問題を診断し、解決できます。
 
 ### TiDBのマスターバージョンには、どのような違いがありますか？ {#what-s-the-difference-between-various-tidb-master-versions}
 
@@ -75,8 +75,8 @@ TiDB コミュニティは非常に活発です。エンジニアは機能の最
 
 TiDB を導入するには、[TiUPを使用する](/production-deployment-using-tiup.md)、または[TiDB Operatorを使用する](https://docs.pingcap.com/tidb-in-kubernetes/stable)ことをお勧めします。 TiDBではバージョン番号を一元管理しています。次のいずれかの方法を使用してバージョン番号を表示できます。
 
--   `select tidb_version()`
--   `tidb-server -V`
+- `select tidb_version()`
+- `tidb-server -V`
 
 ### TiDB用のグラフィカルなデプロイメントツールはありますか？ {#is-there-a-graphical-deployment-tool-for-tidb}
 
@@ -86,26 +86,26 @@ TiDB を導入するには、[TiUPを使用する](/production-deployment-using-
 
 TiDBクラスタは、オンラインサービスを中断することなくスケールアウトできます。
 
--   クラスターが[TiUP](/production-deployment-using-tiup.md)を使用してデプロイされている場合は、 [TiUPを使用してTiDBクラスタをスケーリングする](/scale-tidb-using-tiup.md)を参照してください。
--   Kubernetes 上の[TiDB Operator](/tidb-operator-overview.md)を使用してクラスターがデプロイされている場合は、 [Kubernetes上でTiDBを手動でスケーリングする](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)を参照してください。
+- クラスターが[TiUP](/production-deployment-using-tiup.md)を使用してデプロイされている場合は、 [TiUPを使用してTiDBクラスタをスケーリングする](/scale-tidb-using-tiup.md)を参照してください。
+- Kubernetes 上の[TiDB Operator](/tidb-operator-overview.md)を使用してクラスターがデプロイされている場合は、 [Kubernetes上でTiDBを手動でスケーリングする](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)を参照してください。
 
 ### TiDBを水平方向にスケールするにはどうすればよいですか？ {#how-to-scale-tidb-horizontally}
 
 ビジネスの成長に伴い、データベースは以下の3つのボトルネックに直面する可能性があります。
 
--   ストレージリソースが不足している、つまりディスク容量が足りないということです。
+- ストレージリソースが不足している、つまりディスク容量が足りないということです。
 
--   CPU使用率が高いなど、コンピューティングリソースの不足。
+- CPU使用率が高いなど、コンピューティングリソースの不足。
 
--   書き込みおよび読み込み容量が不足しています。
+- 書き込みおよび読み込み容量が不足しています。
 
 TiDBは、ビジネスの成長に合わせて拡張できます。
 
--   ディスク容量が不足している場合は、TiKVノードを追加するだけで簡単に容量を増やすことができます。新しいノードが起動すると、PDは他のノードから新しいノードへデータを自動的に移行します。
+- ディスク容量が不足している場合は、TiKVノードを追加するだけで簡単に容量を増やすことができます。新しいノードが起動すると、PDは他のノードから新しいノードへデータを自動的に移行します。
 
--   コンピューティングリソースが不足している場合は、TiDBノードまたはTiKVノードを追加する前に、まずCPU使用率を確認してください。TiDBノードを追加したら、ロードバランサーで設定できます。
+- コンピューティングリソースが不足している場合は、TiDBノードまたはTiKVノードを追加する前に、まずCPU使用率を確認してください。TiDBノードを追加したら、ロードバランサーで設定できます。
 
--   容量が不足する場合は、TiDBノードとTiKVノードの両方を追加できます。
+- 容量が不足する場合は、TiDBノードとTiKVノードの両方を追加できます。
 
 ### Percolatorが分散ロックを使用し、クラッシュクライアントがロックを保持している場合、ロックは解放されないのでしょうか？ {#if-percolator-uses-distributed-locks-and-the-crash-client-keeps-the-lock-will-the-lock-not-be-released}
 
@@ -123,8 +123,8 @@ TiDBは、ビジネスの成長に合わせて拡張できます。
 
 理由は2つあります。
 
--   この2つの結果は異なる方法で計算されます。 `information_schema.tables.data_length`は各行の平均長を計算して推定した値ですが、TiKV監視パネルのストアサイズは単一のTiKVインスタンス内のデータファイル（RocksDBのSSTファイル）の長さを合計したものです。
--   `information_schema.tables.data_length`は論理値であり、ストアサイズは物理値です。トランザクションの複数のバージョンによって生成された冗長データは論理値には含まれませんが、物理値ではTiKVによって圧縮されます。
+- この2つの結果は異なる方法で計算されます。 `information_schema.tables.data_length`は各行の平均長を計算して推定した値ですが、TiKV監視パネルのストアサイズは単一のTiKVインスタンス内のデータファイル（RocksDBのSSTファイル）の長さを合計したものです。
+- `information_schema.tables.data_length`は論理値であり、ストアサイズは物理値です。トランザクションの複数のバージョンによって生成された冗長データは論理値には含まれませんが、物理値ではTiKVによって圧縮されます。
 
 ### なぜトランザクションは非同期コミットまたはワンフェーズコミット機能を使用しないのですか？ {#why-does-the-transaction-not-use-the-async-commit-or-the-one-phase-commit-feature}
 
@@ -162,8 +162,8 @@ PD Controlを使用すると、TiKVストアの状態情報を確認できます
 
 ### PDにおける`leader-schedule-limit`と`region-schedule-limit`というスケジューリングパラメータの違いは何ですか？ {#what-is-the-difference-between-the-leader-schedule-limit-and-region-schedule-limit-scheduling-parameters-in-pd}
 
--   `leader-schedule-limit`スケジューリング パラメータは、さまざまな TiKV サーバーのLeader数をバランスさせるために使用され、クエリ処理の負荷に影響します。
--   `region-schedule-limit`スケジューリング パラメータは、異なる TiKV サーバーのレプリカ数をバランスさせるために使用され、異なるノードのデータ量に影響を与えます。
+- `leader-schedule-limit`スケジューリング パラメータは、さまざまな TiKV サーバーのLeader数をバランスさせるために使用され、クエリ処理の負荷に影響します。
+- `region-schedule-limit`スケジューリング パラメータは、異なる TiKV サーバーのレプリカ数をバランスさせるために使用され、異なるノードのデータ量に影響を与えます。
 
 ### 各リージョンにおけるレプリカの数は設定可能ですか？設定可能な場合、どのように設定すればよいですか？ {#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it}
 
@@ -179,8 +179,8 @@ pd-ctlツールを使用すると、クラスターの一般的な状態を確�
 
 オフラインノードは通常、TiKVノードを指します。オフライン処理が完了したかどうかは、pd-ctlまたはモニターで確認できます。ノードがオフラインになったら、以下の手順を実行してください。
 
-1.  オフラインノード上で、関連するサービスを手動で停止してください。
-2.  Prometheus設定ファイルから、対応するノードの`node_exporter`データを削除します。
+1. オフラインノード上で、関連するサービスを手動で停止してください。
+2. Prometheus設定ファイルから、対応するノードの`node_exporter`データを削除します。
 
 ## TiDBサーバー管理 {#tidb-server-management}
 
@@ -194,9 +194,9 @@ pd-ctlツールを使用すると、クラスターの一般的な状態を確�
 
 処理時間は状況によって異なります。一般的には、以下の3つのシナリオが考えられます。
 
-1.  対応するデータテーブルの行数が比較的少ない場合の`Add Index`操作：約3秒
-2.  対応するデータテーブルの行数が比較的多い場合の`Add Index`操作: 処理時間は、特定の行数と当時の QPS によって異なります ( `Add Index`操作は、通常の SQL 操作よりも優先度が低くなります)。
-3.  その他のDDL操作：約1秒
+1. 対応するデータテーブルの行数が比較的少ない場合の`Add Index`操作：約3秒
+2. 対応するデータテーブルの行数が比較的多い場合の`Add Index`操作: 処理時間は、特定の行数と当時の QPS によって異なります ( `Add Index`操作は、通常の SQL 操作よりも優先度が低くなります)。
+3. その他のDDL操作：約1秒
 
 DDLリクエストを受信するTiDBサーバーインスタンスが、DDLオーナーがいるTiDBサーバーインスタンスと同じ場合、上記の1番目と3番目のシナリオでは、数十ミリ秒から数百ミリ秒しかかからない可能性があります。
 
@@ -204,10 +204,10 @@ DDLリクエストを受信するTiDBサーバーインスタンスが、DDLオ�
 
 考えられる理由：
 
--   複数のDDLステートメントを同時に実行する場合、最後の数個のDDLステートメントの実行速度が遅くなる可能性があります。これは、TiDBクラスタではDDLステートメントが直列に実行されるためです。
--   クラスターが正常に起動した後、最初のDDL操作の実行には通常30秒程度かかる場合があります。これは、TiDBクラスターがDDLステートメントを処理するリーダーを選出しているためです。
--   TiDB の起動後最初の 10 分間の DDL ステートメントの処理時間は、以下の条件を満たす場合、通常よりもはるかに長くなります。1) TiDB を停止する際に、TiDB が通常のように PD と通信できない場合 (停電の場合を含む)。2) TiDB が`kill -9`コマンドで停止されたため、TiDB が PD から登録データを適時にクリーンアップできない場合。この期間中に DDL ステートメントを実行すると、各 DDL の状態変更に対して、2 * リース (リース = 45 秒) の待機時間が必要になります。
--   クラスタ内のTiDBサーバーとPDサーバー間で通信障害が発生した場合、TiDBサーバーはPDサーバーからバージョン情報をタイムリーに取得または更新できません。この場合、各DDLの状態処理にはリース期間の2倍の時間待機する必要があります。
+- 複数のDDLステートメントを同時に実行する場合、最後の数個のDDLステートメントの実行速度が遅くなる可能性があります。これは、TiDBクラスタではDDLステートメントが直列に実行されるためです。
+- クラスターが正常に起動した後、最初のDDL操作の実行には通常30秒程度かかる場合があります。これは、TiDBクラスターがDDLステートメントを処理するリーダーを選出しているためです。
+- TiDB の起動後最初の 10 分間の DDL ステートメントの処理時間は、以下の条件を満たす場合、通常よりもはるかに長くなります。1) TiDB を停止する際に、TiDB が通常のように PD と通信できない場合 (停電の場合を含む)。2) TiDB が`kill -9`コマンドで停止されたため、TiDB が PD から登録データを適時にクリーンアップできない場合。この期間中に DDL ステートメントを実行すると、各 DDL の状態変更に対して、2 * リース (リース = 45 秒) の待機時間が必要になります。
+- クラスタ内のTiDBサーバーとPDサーバー間で通信障害が発生した場合、TiDBサーバーはPDサーバーからバージョン情報をタイムリーに取得または更新できません。この場合、各DDLの状態処理にはリース期間の2倍の時間待機する必要があります。
 
 ### TiDBのバックエンドストレージエンジンとしてS3を使用できますか？ {#can-i-use-s3-as-the-backend-storage-engine-in-tidb}
 
@@ -284,14 +284,14 @@ GROUP BY
 
 上記のステートメントを使用する際は、ステートメント内の以下のフィールドを適切に入力および置換する必要があります。
 
--   `@dbname` : データベースの名前。
--   `@table_name` : 対象テーブルの名前。
+- `@dbname` : データベースの名前。
+- `@table_name` : 対象テーブルの名前。
 
 さらに、上記のステートメントでは、
 
--   `store_size_amplification`クラスタ圧縮率の平均値を示します。 `SELECT * FROM METRICS_SCHEMA.store_size_amplification;`を使用してこの情報を照会する以外にも、 **Grafana Monitoring PD - 統計バランス**パネルで各ノードの**サイズ増幅**メトリックを確認することもできます。クラスタ圧縮率の平均値は、すべてのノードのサイズ増幅の平均値です。
--   `Approximate_Size`圧縮前のレプリカ内のテーブルのサイズを示します。これは概算値であり、正確な値ではないことに注意してください。
--   `Disk_Size`圧縮後のテーブルのサイズを示します。これは概算値であり、 `Approximate_Size`および`store_size_amplification`に基づいて計算できます。
+- `store_size_amplification`クラスタ圧縮率の平均値を示します。 `SELECT * FROM METRICS_SCHEMA.store_size_amplification;`を使用してこの情報を照会する以外にも、 **Grafana Monitoring PD - 統計バランス**パネルで各ノードの**サイズ増幅**メトリックを確認することもできます。クラスタ圧縮率の平均値は、すべてのノードのサイズ増幅の平均値です。
+- `Approximate_Size`圧縮前のレプリカ内のテーブルのサイズを示します。これは概算値であり、正確な値ではないことに注意してください。
+- `Disk_Size`圧縮後のテーブルのサイズを示します。これは概算値であり、 `Approximate_Size`および`store_size_amplification`に基づいて計算できます。
 
 ## TiKVサーバー管理 {#tikv-server-management}
 
@@ -325,23 +325,23 @@ SQL の配置ルールは、レプリカ数、 Raftの役割、配置場所、�
 
 TiKVはRocksDBのカラムファミリー（CF）機能を実装しています。デフォルトでは、KVデータはRocksDB内の3つのCF（デフォルト、書き込み、ロック）に格納されます。
 
--   デフォルトのCFには実際のデータが保存され、対応するパラメータは`[rocksdb.defaultcf]`にあります。
--   書き込みCFにはデータバージョン情報（MVCC）とインデックス関連データが格納され、対応するパラメータは`[rocksdb.writecf]`にあります。
--   ロックCFにはロック情報が保存され、システムはデフォルトのパラメータを使用します。
--   Raft RocksDB インスタンスはRaftログを保存します。デフォルトの CF は主にRaftログを保存し、対応するパラメータは`[raftdb.defaultcf]`にあります。
--   すべてのCFには、データブロックをキャッシュしてRocksDBの読み取り速度を向上させるための共有ブロックキャッシュがあります。ブロックキャッシュのサイズは`block-cache-size`パラメータで制御されます。このパラメータの値が大きいほど、より多くのホットデータをキャッシュでき、読み取り操作に有利になります。同時に、システムメモリの消費量も増加します。
--   各CFには個別の書き込みバッファがあり、そのサイズは`write-buffer-size`パラメータによって制御されます。
+- デフォルトのCFには実際のデータが保存され、対応するパラメータは`[rocksdb.defaultcf]`にあります。
+- 書き込みCFにはデータバージョン情報（MVCC）とインデックス関連データが格納され、対応するパラメータは`[rocksdb.writecf]`にあります。
+- ロックCFにはロック情報が保存され、システムはデフォルトのパラメータを使用します。
+- Raft RocksDB インスタンスはRaftログを保存します。デフォルトの CF は主にRaftログを保存し、対応するパラメータは`[raftdb.defaultcf]`にあります。
+- すべてのCFには、データブロックをキャッシュしてRocksDBの読み取り速度を向上させるための共有ブロックキャッシュがあります。ブロックキャッシュのサイズは`block-cache-size`パラメータで制御されます。このパラメータの値が大きいほど、より多くのホットデータをキャッシュでき、読み取り操作に有利になります。同時に、システムメモリの消費量も増加します。
+- 各CFには個別の書き込みバッファがあり、そのサイズは`write-buffer-size`パラメータによって制御されます。
 
 ### TiKVチャンネルが満員なのはなぜですか？ {#why-is-the-tikv-channel-full}
 
--   Raftstoreスレッドの処理速度が遅すぎるか、I/O によってブロックされています。RaftstoreのCPU 使用状況を確認できます。
--   TiKVは（CPUやディスクI/Oなど）ビジー状態であり、処理しきれません。
+- Raftstoreスレッドの処理速度が遅すぎるか、I/O によってブロックされています。RaftstoreのCPU 使用状況を確認できます。
+- TiKVは（CPUやディスクI/Oなど）ビジー状態であり、処理しきれません。
 
 ### TiKVはなぜ頻繁にリージョンリーダーを切り替えるのか？ {#why-does-tikv-frequently-switch-region-leader}
 
--   ネットワークの問題により、ノード間の通信が停止します。障害レポートの監視状況を確認できます。
--   元のメインLeaderのノードが停止したため、Followerへの接続が時間内に完了しませんでした。
--   Raftstoreのスレッドが詰まってしまった。
+- ネットワークの問題により、ノード間の通信が停止します。障害レポートの監視状況を確認できます。
+- 元のメインLeaderのノードが停止したため、Followerへの接続が時間内に完了しませんでした。
+- Raftstoreのスレッドが詰まってしまった。
 
 ### ノードがダウンした場合、サービスに影響はありますか？影響がある場合、どのくらいの期間影響しますか？ {#if-a-node-is-down-will-the-service-be-affected-if-yes-how-long}
 
@@ -371,11 +371,11 @@ TiKVには同様のパラメータはありませんが、TiKVではコミット
 
 WALは順序付き書き込みに属し、現在、固有の構成は適用されていません。推奨される構成は以下のとおりです。
 
--   SSD
--   RAID 10を推奨
--   RAIDカードのキャッシュ戦略とオペレーティングシステムのI/Oスケジューリング戦略：現時点では特定のベストプラクティスはありません。Linux 7以降ではデフォルト設定を使用できます。
--   NUMA: 特に推奨はありません。メモリ割り当て戦略には`interleave = all`を使用できます。
--   ファイルシステム: ext4
+- SSD
+- RAID 10を推奨
+- RAIDカードのキャッシュ戦略とオペレーティングシステムのI/Oスケジューリング戦略：現時点では特定のベストプラクティスはありません。Linux 7以降ではデフォルト設定を使用できます。
+- NUMA: 特に推奨はありません。メモリ割り当て戦略には`interleave = all`を使用できます。
+- ファイルシステム: ext4
 
 ### TiKVアーキテクチャにおけるRaftと複数のレプリカの組み合わせは、絶対的なデータ安全性を実現できるのか？ {#can-raft-multiple-replicas-in-the-tikv-architecture-achieve-absolute-data-safety}
 
@@ -395,8 +395,8 @@ TiKVはインターフェースを個別に呼び出すことをサポートし�
 
 ### コプロセッサーコンポーネントは何のために使用されるのですか？ {#what-is-the-coprocessor-component-used-for}
 
--   TiDBとTiKV間のデータ伝送を削減する
--   TiKVの分散コンピューティングリソースを最大限に活用して、コンピューティングプッシュダウンを実行します。
+- TiDBとTiKV間のデータ伝送を削減する
+- TiKVの分散コンピューティングリソースを最大限に活用して、コンピューティングプッシュダウンを実行します。
 
 ### エラーメッセージ`IO error: No space left on device While appending to file`が表示されます。 {#the-error-message-io-error-no-space-left-on-device-while-appending-to-file-is-displayed}
 
@@ -410,8 +410,8 @@ TiKVのメモリ使用量は主にRocksDBのブロックキャッシュによる
 
 TiDBのバージョンとTiKV API V2が有効になっているかどうか（ [`storage.api-version = 2`](/tikv-configuration-file.md#api-version-new-in-v610) ）によって異なります。
 
--   TiDBのバージョンがv6.1.0以降で、TiKV API V2が有効になっている場合、TiDBデータとRawKVデータを同じTiKVクラスタに保存できます。
--   それ以外の場合は、TiDBデータ（またはトランザクションAPIを使用して作成されたデータ）のキー形式がRawKV APIを使用して作成されたデータ（または他のRawKVベースのサービスからのデータ）と互換性がないため、答えは「いいえ」となります。
+- TiDBのバージョンがv6.1.0以降で、TiKV API V2が有効になっている場合、TiDBデータとRawKVデータを同じTiKVクラスタに保存できます。
+- それ以外の場合は、TiDBデータ（またはトランザクションAPIを使用して作成されたデータ）のキー形式がRawKV APIを使用して作成されたデータ（または他のRawKVベースのサービスからのデータ）と互換性がないため、答えは「いいえ」となります。
 
 ## TiDBテスト {#tidb-testing}
 
@@ -431,9 +431,9 @@ TiDB v8.5.0 のパフォーマンスについて知るには、 TiDB Cloud Dedic
 
 ### TiDBのクラスタ容量（QPS）とノード数の関係はどうなっていますか？TiDBはMySQLと比べてどうですか？ {#what-s-the-relationship-between-the-tidb-cluster-capacity-qps-and-the-number-of-nodes-how-does-tidb-compare-to-mysql}
 
--   ノード数が10個以内の場合、TiDBの書き込み容量（挿入TPS）とノード数の関係は、おおよそ40%の線形増加を示します。MySQLはシングルノード書き込み方式を採用しているため、書き込み容量を拡張することはできません。
--   MySQLでは、セカンダリデータベースを追加することで読み取り容量を増やすことができますが、書き込み容量はシャーディングを使用しない限り増やすことはできません。しかし、シャーディングには多くの問題があります。
--   TiDBでは、ノードを追加することで、読み取り容量と書き込み容量の両方を容易に増やすことができます。
+- ノード数が10個以内の場合、TiDBの書き込み容量（挿入TPS）とノード数の関係は、おおよそ40%の線形増加を示します。MySQLはシングルノード書き込み方式を採用しているため、書き込み容量を拡張することはできません。
+- MySQLでは、セカンダリデータベースを追加することで読み取り容量を増やすことができますが、書き込み容量はシャーディングを使用しない限り増やすことはできません。しかし、シャーディングには多くの問題があります。
+- TiDBでは、ノードを追加することで、読み取り容量と書き込み容量の両方を容易に増やすことができます。
 
 ### 当社のDBAによるMySQLとTiDBのパフォーマンステストの結果、スタンドアロンのTiDBのパフォーマンスはMySQLほど良くないことが分かりました。 {#the-performance-test-of-mysql-and-tidb-by-our-dba-shows-that-the-performance-of-a-standalone-tidb-is-not-as-good-as-mysql}
 

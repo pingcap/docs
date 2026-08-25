@@ -15,11 +15,11 @@ summary: n8nにおけるTiDB Cloudノードの使い方を学びましょう。
 
 ## 前提条件： TiDB Cloud APIキーを取得する {#prerequisites-get-tidb-cloud-api-key}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)では、左上隅のコンボボックスを使用して、対象の組織に切り替えてください。
-2.  左側のナビゲーションペインで、 **Organization Settings** &gt; **API Keys**をクリックします。
-3.  **API Keys**ページで、 **Create API Key**をクリックします。
-4.  APIキーの説明を入力し、 **Next**をクリックしてください。
-5.  作成したAPIキーをコピーしてn8nで後で使用するようにし、 **Done**をクリックしてください。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)では、左上隅のコンボボックスを使用して、対象の組織に切り替えてください。
+2. 左側のナビゲーションペインで、 **Organization Settings** &gt; **API Keys**をクリックします。
+3. **API Keys**ページで、 **Create API Key**をクリックします。
+4. APIキーの説明を入力し、 **Next**をクリックしてください。
+5. 作成したAPIキーをコピーしてn8nで後で使用するようにし、 **Done**をクリックしてください。
 
 詳細については、 [TiDB Cloud APIの概要](https://docs.pingcap.com/api/tidb-cloud-api-overview)を参照してください。
 
@@ -30,8 +30,8 @@ summary: n8nにおけるTiDB Cloudノードの使い方を学びましょう。
 <SimpleTab>
 <div label="npm">
 
-1.  作業スペースに[Node.js](https://nodejs.org/en/download/)をインストールしてください。
-2.  `npx`から n8n をダウンロードして起動します。
+1. 作業スペースに[Node.js](https://nodejs.org/en/download/)をインストールしてください。
+2. `npx`から n8n をダウンロードして起動します。
 
     ```shell
     npx n8n
@@ -40,8 +40,8 @@ summary: n8nにおけるTiDB Cloudノードの使い方を学びましょう。
 </div>
 <div label="Docker">
 
-1.  ワークスペースに[Docker](https://www.docker.com/products/docker-desktop)をインストールします。
-2.  `docker`から n8n をダウンロードして起動します。
+1. ワークスペースに[Docker](https://www.docker.com/products/docker-desktop)をインストールします。
+2. `docker`から n8n をダウンロードして起動します。
 
     ```shell
     docker run -it --rm --name n8n -p 5678:5678 -v ~/.n8n:/home/node/.n8n n8nio/n8n
@@ -56,11 +56,11 @@ n8nを起動したら、 [localhost:5678](http://localhost:5678)にアクセス�
 
 TiDB Cloudノードは、npmリポジトリでは`n8n-nodes-tidb-cloud`という名前です。n8nでTiDB Cloudを制御するには、このノードを手動でインストールする必要があります。
 
-1.  [localhost:5678](http://localhost:5678)ページで、n8nをセルフホスティングするためのオーナーアカウントを作成します。
-2.  **Settings**&gt;**Community nodes**に移動してください。
-3.  **Install a community node**をクリックしてください。
-4.  **npm Package Name**フィールドに`n8n-nodes-tidb-cloud`と入力します。
-5.  **Install**をクリックしてください。
+1. [localhost:5678](http://localhost:5678)ページで、n8nをセルフホスティングするためのオーナーアカウントを作成します。
+2. **Settings**&gt;**Community nodes**に移動してください。
+3. **Install a community node**をクリックしてください。
+4. **npm Package Name**フィールドに`n8n-nodes-tidb-cloud`と入力します。
+5. **Install**をクリックしてください。
 
 その後、**TiDB Cloud**の検索バーで**TiDB Cloud**ノードを検索し、ワークスペースにドラッグすることでTiDB Cloudノードを使用できます。
 
@@ -70,11 +70,11 @@ TiDB Cloudノードは、npmリポジトリでは`n8n-nodes-tidb-cloud`という
 
 この使用例のワークフローでは、以下のノードを使用します。
 
--   [スケジュールトリガー](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.scheduletrigger/)
--   [RSSを読む](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.rssfeedread/)
--   [コード](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.code/)
--   [Gmail](https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.gmail/)
--   [TiDB Cloudノード](https://www.npmjs.com/package/n8n-nodes-tidb-cloud)
+- [スケジュールトリガー](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.scheduletrigger/)
+- [RSSを読む](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.rssfeedread/)
+- [コード](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.code/)
+- [Gmail](https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.gmail/)
+- [TiDB Cloudノード](https://www.npmjs.com/package/n8n-nodes-tidb-cloud)
 
 最終的なワークフローは次の画像のようになります。
 
@@ -84,15 +84,15 @@ TiDB Cloudノードは、npmリポジトリでは`n8n-nodes-tidb-cloud`という
 
 TiDB Cloud Starterインスタンスをお持ちでない場合は、このノードを使用してインスタンスを作成できます。そうでない場合は、この操作をスキップしても構いません。
 
-1.  **Workflows**パネルに移動し、 **Add workflow**をクリックします。
-2.  新しいワークフローワークスペースで、右上隅の**+**をクリックし、 **All**フィールドを選択します。
-3.  `TiDB Cloud`を検索して、ワークスペースにドラッグします。
-4.  TiDB Cloudノードの認証情報（TiDB Cloud APIキー）を入力してください。
-5.  **Project**一覧から、プロジェクトを選択してください。
-6.  **操作**リストで、 `Create Serverless Cluster`を選択します。
-7.  **Cluster Name**ボックスに、 TiDB Cloud Starterインスタンスの名前を入力します。
-8.  **リージョン**リストから地域を選択してください。
-9.  **Password**欄に、 TiDB Cloud Starterインスタンスへのログインに使用するパスワードを入力してください。
+1. **Workflows**パネルに移動し、 **Add workflow**をクリックします。
+2. 新しいワークフローワークスペースで、右上隅の**+**をクリックし、 **All**フィールドを選択します。
+3. `TiDB Cloud`を検索して、ワークスペースにドラッグします。
+4. TiDB Cloudノードの認証情報（TiDB Cloud APIキー）を入力してください。
+5. **Project**一覧から、プロジェクトを選択してください。
+6. **操作**リストで、 `Create Serverless Cluster`を選択します。
+7. **Cluster Name**ボックスに、 TiDB Cloud Starterインスタンスの名前を入力します。
+8. **リージョン**リストから地域を選択してください。
+9. **Password**欄に、 TiDB Cloud Starterインスタンスへのログインに使用するパスワードを入力してください。
 10. ノードを実行するには、 **Execute Node**をクリックしてください。
 
 > **Note:**
@@ -103,37 +103,37 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、このノ�
 
 #### ワークフローの開始点として手動トリガーを使用する {#use-a-manual-trigger-as-the-workflow-s-starter}
 
-1.  ワークフローがまだ作成されていない場合は、**Workflows**パネルに移動して、 **Start from scratch**をクリックしてください。既にワークフローを作成している場合は、この手順をスキップしてください。
-2.  右上隅の**+**をクリックして、 `schedule trigger`を検索します。
-3.  手動トリガーノードをワークスペースにドラッグし、ノードをダブルクリックします。**パラメーター**ダイアログが表示されます。
-4.  ルールを以下のように設定してください。
+1. ワークフローがまだ作成されていない場合は、**Workflows**パネルに移動して、 **Start from scratch**をクリックしてください。既にワークフローを作成している場合は、この手順をスキップしてください。
+2. 右上隅の**+**をクリックして、 `schedule trigger`を検索します。
+3. 手動トリガーノードをワークスペースにドラッグし、ノードをダブルクリックします。**パラメーター**ダイアログが表示されます。
+4. ルールを以下のように設定してください。
 
-    -   **Trigger Interval**： `Days`
-    -   **Days Between Triggers**： `1`
-    -   **Trigger at Hour**： `8am`
-    -   **Trigger at Minute**: `0`
+    - **Trigger Interval**： `Days`
+    - **Days Between Triggers**： `1`
+    - **Trigger at Hour**： `8am`
+    - **Trigger at Minute**: `0`
 
 このトリガーは、毎朝午前8時にワークフローを実行します。
 
 #### データ挿入に使用するテーブルを作成します。 {#create-a-table-used-to-insert-data}
 
-1.  手動トリガーノードの右側にある**+**をクリックします。
+1. 手動トリガーノードの右側にある**+**をクリックします。
 
-2.  `TiDB Cloud`を検索してワークスペースに追加します。
+2. `TiDB Cloud`を検索してワークスペースに追加します。
 
-3.  **パラメーター**ダイアログで、 TiDB Cloudノードの認証情報を入力します。認証情報は、 TiDB Cloud APIキーです。
+3. **パラメーター**ダイアログで、 TiDB Cloudノードの認証情報を入力します。認証情報は、 TiDB Cloud APIキーです。
 
-4.  **Project**一覧から、プロジェクトを選択してください。
+4. **Project**一覧から、プロジェクトを選択してください。
 
-5.  **操作**リストで、 `Execute SQL`を選択します。
+5. **操作**リストで、 `Execute SQL`を選択します。
 
-6.  TiDB Cloud Starterインスタンスを選択してください。リストに新しいインスタンスが表示されない場合は、インスタンスの作成が完了するまで数分お待ちください。
+6. TiDB Cloud Starterインスタンスを選択してください。リストに新しいインスタンスが表示されない場合は、インスタンスの作成が完了するまで数分お待ちください。
 
-7.  **User**一覧からユーザーを選択してください。TiDB Cloudは常にデフォルトユーザーを作成するため、手動で作成する必要はありません。
+7. **User**一覧からユーザーを選択してください。TiDB Cloudは常にデフォルトユーザーを作成するため、手動で作成する必要はありません。
 
-8.  **Database**ボックスに`test`と入力します。
+8. **Database**ボックスに`test`と入力します。
 
-9.  データベースのパスワードを入力してください。
+9. データベースのパスワードを入力してください。
 
 10. **SQL**ボックスに、次のSQLを入力してください。
 
@@ -145,27 +145,27 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、このノ�
 
 #### Hacker NewsのRSSフィードを入手する {#get-the-hacker-news-rss}
 
-1.  TiDB Cloudノードの右側にある**+**をクリックします。
-2.  `RSS Read`を検索してワークスペースに追加します。
-3.  **URL**ボックスに`https://hnrss.org/frontpage`と入力します。
+1. TiDB Cloudノードの右側にある**+**をクリックします。
+2. `RSS Read`を検索してワークスペースに追加します。
+3. **URL**ボックスに`https://hnrss.org/frontpage`と入力します。
 
 #### TiDBにデータを挿入する {#insert-data-to-tidb}
 
-1.  RSS Readノードの右側にある**+**をクリックしてください。
-2.  `TiDB Cloud`を検索してワークスペースに追加します。
-3.  以前のTiDB Cloudノードで入力した認証情報を選択してください。
-4.  **Project**一覧から、プロジェクトを選択してください。
-5.  **操作**リストで、 `Insert`を選択します。
-6.  **Cluster** 、 **User** 、 **Database** 、 **Password**の各ボックスに、それぞれ対応する値を入力してください。
-7.  **Table**ボックスに、 `hacker_news_briefing`表を入力します。
-8.  **Columns**ボックスに`creator, title, link, pubdate, comments, content, guid, isodate`と入力します。
+1. RSS Readノードの右側にある**+**をクリックしてください。
+2. `TiDB Cloud`を検索してワークスペースに追加します。
+3. 以前のTiDB Cloudノードで入力した認証情報を選択してください。
+4. **Project**一覧から、プロジェクトを選択してください。
+5. **操作**リストで、 `Insert`を選択します。
+6. **Cluster** 、 **User** 、 **Database** 、 **Password**の各ボックスに、それぞれ対応する値を入力してください。
+7. **Table**ボックスに、 `hacker_news_briefing`表を入力します。
+8. **Columns**ボックスに`creator, title, link, pubdate, comments, content, guid, isodate`と入力します。
 
 #### メッセージを作成する {#build-message}
 
-1.  RSSフィードの「読む」ノードの右側にある**+**をクリックします。
-2.  `code`を検索してワークスペースに追加します。
-3.  `Run Once for All Items`モードを選択してください。
-4.  **JavaScript**ボックスに、以下のコードをコピー＆ペーストしてください。
+1. RSSフィードの「読む」ノードの右側にある**+**をクリックします。
+2. `code`を検索してワークスペースに追加します。
+3. `Run Once for All Items`モードを選択してください。
+4. **JavaScript**ボックスに、以下のコードをコピー＆ペーストしてください。
 
     ```javascript
     let message = "";
@@ -198,15 +198,15 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、このノ�
 
 #### Gmailでメッセージを送信 {#send-message-by-gmail}
 
-1.  コードノードの右側にある**+**をクリックします。
-2.  `gmail`を検索してワークスペースに追加します。
-3.  Gmail ノードの認証情報を入力します。詳細な手順については、 [n8nドキュメント](https://docs.n8n.io/integrations/builtin/credentials/google/oauth-single-service/)ドキュメントを参照してください。
-4.  **Resource**リストで、 `Message`を選択します。
-5.  **操作**リストで、 `Send`を選択します。
-6.  **To**欄にメールアドレスを入力してください。
-7.  **件名**欄に`Hacker News Briefing`と入力します。
-8.  **Email Type**ボックスで、 `HTML`を選択します。
-9.  **Message**ボックスで、 `Expression`をクリックし、 `{{ $json["response"] }}`と入力します。
+1. コードノードの右側にある**+**をクリックします。
+2. `gmail`を検索してワークスペースに追加します。
+3. Gmail ノードの認証情報を入力します。詳細な手順については、 [n8nドキュメント](https://docs.n8n.io/integrations/builtin/credentials/google/oauth-single-service/)ドキュメントを参照してください。
+4. **Resource**リストで、 `Message`を選択します。
+5. **操作**リストで、 `Send`を選択します。
+6. **To**欄にメールアドレスを入力してください。
+7. **件名**欄に`Hacker News Briefing`と入力します。
+8. **Email Type**ボックスで、 `HTML`を選択します。
+9. **Message**ボックスで、 `Expression`をクリックし、 `{{ $json["response"] }}`と入力します。
 
     > **Note:**
     >
@@ -226,11 +226,11 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、このノ�
 
 TiDB Cloudノードは[通常のノード](https://docs.n8n.io/workflows/nodes/#regular-nodes)として機能し、次の 5 つの操作のみをサポートします。
 
--   **Create Serverless Cluster**: TiDB Cloud Starterインスタンスを作成します。
--   **Execute SQL**：TiDBでSQL文を実行します。
--   **Delete**：TiDB内の行を削除します。
--   **Insert** ：TiDBに行を挿入します。
--   **Update**: TiDB の行を更新します。
+- **Create Serverless Cluster**: TiDB Cloud Starterインスタンスを作成します。
+- **Execute SQL**：TiDBでSQL文を実行します。
+- **Delete**：TiDB内の行を削除します。
+- **Insert** ：TiDBに行を挿入します。
+- **Update**: TiDB の行を更新します。
 
 ### フィールズ {#fields}
 
@@ -239,70 +239,70 @@ TiDB Cloudノードは[通常のノード](https://docs.n8n.io/workflows/nodes/#
 <SimpleTab>
 <div label="Create Serverless Cluster">
 
--   **TiDB Cloud API の認証情報**: TiDB Cloud API キーのみをサポートします。 APIキーの作成方法については、 [TiDB Cloud APIキーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
--   **Project**： TiDB Cloudプロジェクト名。
--   **操作**: このノードの操作。サポートされているすべての操作については、[サポート対象のオペレーション](#supported-operations)を参照してください。
--   **Cluster**： TiDB Cloud Starterインスタンスの名前を入力してください。
--   **リージョン**：リージョン名。TiDB Cloud Starterインスタンスをデプロイするリージョンを選択してください。通常は、アプリケーションのデプロイ先に最も近いリージョンを選択してください。
--   **Password**：rootパスワード。新しいTiDB Cloud Starterインスタンスのパスワードを設定してください。
+- **TiDB Cloud API の認証情報**: TiDB Cloud API キーのみをサポートします。 APIキーの作成方法については、 [TiDB Cloud APIキーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
+- **Project**： TiDB Cloudプロジェクト名。
+- **操作**: このノードの操作。サポートされているすべての操作については、[サポート対象のオペレーション](#supported-operations)を参照してください。
+- **Cluster**： TiDB Cloud Starterインスタンスの名前を入力してください。
+- **リージョン**：リージョン名。TiDB Cloud Starterインスタンスをデプロイするリージョンを選択してください。通常は、アプリケーションのデプロイ先に最も近いリージョンを選択してください。
+- **Password**：rootパスワード。新しいTiDB Cloud Starterインスタンスのパスワードを設定してください。
 
 </div>
 <div label="Execute SQL">
 
--   **TiDB Cloud API の認証情報**: TiDB Cloud API キーのみをサポートします。 APIキーの作成方法については、 [TiDB Cloud APIキーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
--   **Project**： TiDB Cloudプロジェクト名。
--   **操作**: このノードの操作。サポートされているすべての操作については、[サポート対象のオペレーション](#supported-operations)を参照してください。
--   **Cluster**： TiDB Cloud Starterインスタンスの名前。既存のインスタンスを1つ選択してください。
--   **Password**： TiDB Cloud Starterインスタンスのパスワード。
--   **User**： TiDB Cloud Starterインスタンスのユーザー名。
--   **Database**：データベース名。
--   **SQL** ：実行するSQL文。
+- **TiDB Cloud API の認証情報**: TiDB Cloud API キーのみをサポートします。 APIキーの作成方法については、 [TiDB Cloud APIキーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
+- **Project**： TiDB Cloudプロジェクト名。
+- **操作**: このノードの操作。サポートされているすべての操作については、[サポート対象のオペレーション](#supported-operations)を参照してください。
+- **Cluster**： TiDB Cloud Starterインスタンスの名前。既存のインスタンスを1つ選択してください。
+- **Password**： TiDB Cloud Starterインスタンスのパスワード。
+- **User**： TiDB Cloud Starterインスタンスのユーザー名。
+- **Database**：データベース名。
+- **SQL** ：実行するSQL文。
 
 </div>
 <div label="Delete">
 
--   **TiDB Cloud API の認証情報**: TiDB Cloud API キーのみをサポートします。 APIキーの作成方法については、 [TiDB Cloud APIキーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
--   **Project**： TiDB Cloudプロジェクト名。
--   **操作**: このノードの操作。サポートされているすべての操作については、[支援活動](#supported-operations)を参照してください。
--   **Cluster**： TiDB Cloud Starterインスタンスの名前。既存のインスタンスを1つ選択してください。
--   **Password**： TiDB Cloud Starterインスタンスのパスワード。
--   **User**： TiDB Cloud Starterインスタンスのユーザー名。
--   **Database**：データベース名。
--   **Table**：テーブル名。 `From list`モードを使用してテーブル名を選択するか、 `Name`モードを使用してテーブル名を手動で入力できます。
--   **Delete Key**：データベース内のどの行を削除するかを決定するアイテムのプロパティ名。アイテムとは、あるノードから別のノードに送信されるデータのことです。ノードは、受信データの各アイテムに対してアクションを実行します。n8n のアイテムの詳細については、 [n8nドキュメント](https://docs.n8n.io/workflows/items/)を参照してください。
+- **TiDB Cloud API の認証情報**: TiDB Cloud API キーのみをサポートします。 APIキーの作成方法については、 [TiDB Cloud APIキーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
+- **Project**： TiDB Cloudプロジェクト名。
+- **操作**: このノードの操作。サポートされているすべての操作については、[支援活動](#supported-operations)を参照してください。
+- **Cluster**： TiDB Cloud Starterインスタンスの名前。既存のインスタンスを1つ選択してください。
+- **Password**： TiDB Cloud Starterインスタンスのパスワード。
+- **User**： TiDB Cloud Starterインスタンスのユーザー名。
+- **Database**：データベース名。
+- **Table**：テーブル名。 `From list`モードを使用してテーブル名を選択するか、 `Name`モードを使用してテーブル名を手動で入力できます。
+- **Delete Key**：データベース内のどの行を削除するかを決定するアイテムのプロパティ名。アイテムとは、あるノードから別のノードに送信されるデータのことです。ノードは、受信データの各アイテムに対してアクションを実行します。n8n のアイテムの詳細については、 [n8nドキュメント](https://docs.n8n.io/workflows/items/)を参照してください。
 
 </div>
 <div label="Insert">
 
--   **TiDB Cloud API の認証情報**: TiDB Cloud API キーのみをサポートします。 APIキーの作成方法については、 [TiDB Cloud APIキーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
--   **Project**： TiDB Cloudプロジェクト名。
--   **操作**: このノードの操作。サポートされているすべての操作については、[支援活動](#supported-operations)を参照してください。
--   **Cluster**： TiDB Cloud Starterインスタンスの名前。既存のインスタンスを1つ選択してください。
--   **Password**： TiDB Cloud Starterインスタンスのパスワード。
--   **User**： TiDB Cloud Starterインスタンスのユーザー名。
--   **Database**：データベース名。
--   **Table**：テーブル名。 `From list`モードを使用してテーブル名を選択するか、 `Name`モードを使用してテーブル名を手動で入力できます。
--   **Columns**：入力項目のプロパティをカンマで区切ったリストで、新しい行の列として使用されます。項目とは、あるノードから別のノードに送信されるデータのことです。ノードは、受信データの各項目に対してアクションを実行します。n8n の項目に関する詳細は、 [n8nドキュメント](https://docs.n8n.io/workflows/items/)を参照してください。
+- **TiDB Cloud API の認証情報**: TiDB Cloud API キーのみをサポートします。 APIキーの作成方法については、 [TiDB Cloud APIキーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
+- **Project**： TiDB Cloudプロジェクト名。
+- **操作**: このノードの操作。サポートされているすべての操作については、[支援活動](#supported-operations)を参照してください。
+- **Cluster**： TiDB Cloud Starterインスタンスの名前。既存のインスタンスを1つ選択してください。
+- **Password**： TiDB Cloud Starterインスタンスのパスワード。
+- **User**： TiDB Cloud Starterインスタンスのユーザー名。
+- **Database**：データベース名。
+- **Table**：テーブル名。 `From list`モードを使用してテーブル名を選択するか、 `Name`モードを使用してテーブル名を手動で入力できます。
+- **Columns**：入力項目のプロパティをカンマで区切ったリストで、新しい行の列として使用されます。項目とは、あるノードから別のノードに送信されるデータのことです。ノードは、受信データの各項目に対してアクションを実行します。n8n の項目に関する詳細は、 [n8nドキュメント](https://docs.n8n.io/workflows/items/)を参照してください。
 
 </div>
 <div label="Update">
 
--   **TiDB Cloud API の認証情報**: TiDB Cloud API キーのみをサポートします。 APIキーの作成方法については、 [TiDB Cloud APIキーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
--   **Project**： TiDB Cloudプロジェクト名。
--   **操作**: このノードの操作。サポートされているすべての操作については、[支援活動](#supported-operations)を参照してください。
--   **Cluster**： TiDB Cloud Starterインスタンスの名前。既存のインスタンスを1つ選択してください。
--   **Password**： TiDB Cloud Starterインスタンスのパスワード。
--   **User**： TiDB Cloud Starterインスタンスのユーザー名。
--   **Database**：データベース名。
--   **Table**：テーブル名。 `From list`モードを使用してテーブル名を選択するか、 `Name`モードを使用してテーブル名を手動で入力できます。
--   **Update Key**: データベース内のどの行を更新するかを決定するアイテムのプロパティ名。アイテムとは、あるノードから別のノードに送信されるデータのことです。ノードは、受信データの各アイテムに対してアクションを実行します。n8n のアイテムの詳細については、 [n8nドキュメント](https://docs.n8n.io/workflows/items/)を参照してください。
--   **Columns**：入力項目のプロパティをカンマで区切ったリスト。更新対象の行の列として使用されます。
+- **TiDB Cloud API の認証情報**: TiDB Cloud API キーのみをサポートします。 APIキーの作成方法については、 [TiDB Cloud APIキーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
+- **Project**： TiDB Cloudプロジェクト名。
+- **操作**: このノードの操作。サポートされているすべての操作については、[支援活動](#supported-operations)を参照してください。
+- **Cluster**： TiDB Cloud Starterインスタンスの名前。既存のインスタンスを1つ選択してください。
+- **Password**： TiDB Cloud Starterインスタンスのパスワード。
+- **User**： TiDB Cloud Starterインスタンスのユーザー名。
+- **Database**：データベース名。
+- **Table**：テーブル名。 `From list`モードを使用してテーブル名を選択するか、 `Name`モードを使用してテーブル名を手動で入力できます。
+- **Update Key**: データベース内のどの行を更新するかを決定するアイテムのプロパティ名。アイテムとは、あるノードから別のノードに送信されるデータのことです。ノードは、受信データの各アイテムに対してアクションを実行します。n8n のアイテムの詳細については、 [n8nドキュメント](https://docs.n8n.io/workflows/items/)を参照してください。
+- **Columns**：入力項目のプロパティをカンマで区切ったリスト。更新対象の行の列として使用されます。
 
 </div>
 </SimpleTab>
 
 ### 制限事項 {#limitations}
 
--   通常、 **Execute SQL**操作では1つのSQLステートメントしか実行できません。1つの操作で複数のステートメントを実行する場合は、 [`tidb_multi_statement_mode`](https://docs.pingcap.com/tidbcloud/system-variables#tidb_multi_statement_mode-new-in-v4011)手動で有効にする必要があります。
--   **Delete**および**Update**操作では、キーとして1つのフィールドを指定する必要があります。たとえば、 `Delete Key`を`id`に設定すると、 `DELETE FROM table WHERE id = ${item.id}`を実行するのと同等になります。現在、**Delete**および**Update**操作では、キーを1つだけ指定できます。
--   **Insert**および**Update**操作の場合、**Columns**フィールドにカンマ区切りのリストを指定する必要があり、フィールド名は入力項目のプロパティ名と同じでなければなりません。
+- 通常、 **Execute SQL**操作では1つのSQLステートメントしか実行できません。1つの操作で複数のステートメントを実行する場合は、 [`tidb_multi_statement_mode`](https://docs.pingcap.com/tidbcloud/system-variables#tidb_multi_statement_mode-new-in-v4011)手動で有効にする必要があります。
+- **Delete**および**Update**操作では、キーとして1つのフィールドを指定する必要があります。たとえば、 `Delete Key`を`id`に設定すると、 `DELETE FROM table WHERE id = ${item.id}`を実行するのと同等になります。現在、**Delete**および**Update**操作では、キーを1つだけ指定できます。
+- **Insert**および**Update**操作の場合、**Columns**フィールドにカンマ区切りのリストを指定する必要があり、フィールド名は入力項目のプロパティ名と同じでなければなりません。

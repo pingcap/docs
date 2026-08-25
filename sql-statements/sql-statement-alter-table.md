@@ -7,9 +7,9 @@ summary: TiDB データベースの ALTER TABLE の使用法の概要。
 
 この文は、既存のテーブルを新しいテーブル構造に適合するように変更します。文`ALTER TABLE`は次の目的で使用できます。
 
--   [`ADD`](/sql-statements/sql-statement-add-index.md) 、 [`DROP`](/sql-statements/sql-statement-drop-index.md) 、または[`RENAME`](/sql-statements/sql-statement-rename-index.md)インデックス
--   [`ADD`](/sql-statements/sql-statement-add-column.md) [`DROP`](/sql-statements/sql-statement-drop-column.md)または[`MODIFY`](/sql-statements/sql-statement-modify-column.md) [`CHANGE`](/sql-statements/sql-statement-change-column.md)
--   [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)テーブルデータ
+- [`ADD`](/sql-statements/sql-statement-add-index.md) 、 [`DROP`](/sql-statements/sql-statement-drop-index.md) 、または[`RENAME`](/sql-statements/sql-statement-rename-index.md)インデックス
+- [`ADD`](/sql-statements/sql-statement-add-column.md) [`DROP`](/sql-statements/sql-statement-drop-column.md)または[`MODIFY`](/sql-statements/sql-statement-modify-column.md) [`CHANGE`](/sql-statements/sql-statement-change-column.md)
+- [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)テーブルデータ
 
 ## 概要 {#synopsis}
 
@@ -156,37 +156,37 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 
 TiDB の`ALTER TABLE`には次の主な制限が適用されます。
 
--   `ALTER TABLE`つのステートメントで複数のスキーマオブジェクトを変更する場合:
+- `ALTER TABLE`つのステートメントで複数のスキーマオブジェクトを変更する場合:
 
-    -   同じオブジェクトを複数回変更することはサポートされていません。
-    -   TiDBは**実行前に**テーブルスキーマに従ってステートメントを検証します。例えば、 `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT AFTER c1;`を実行すると、列`c1`テーブルに存在しないためエラーが返されます。
-    -   `ALTER TABLE`ステートメントの場合、TiDB での実行順序は左から右への変更が 1 つずつ順番に実行されるため、場合によっては MySQL と互換性がありません。
+    - 同じオブジェクトを複数回変更することはサポートされていません。
+    - TiDBは**実行前に**テーブルスキーマに従ってステートメントを検証します。例えば、 `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT AFTER c1;`を実行すると、列`c1`テーブルに存在しないためエラーが返されます。
+    - `ALTER TABLE`ステートメントの場合、TiDB での実行順序は左から右への変更が 1 つずつ順番に実行されるため、場合によっては MySQL と互換性がありません。
 
--   主キー列の[再編成データ](/sql-statements/sql-statement-modify-column.md#reorg-data-change)種類の変更はサポートされていません。
+- 主キー列の[再編成データ](/sql-statements/sql-statement-modify-column.md#reorg-data-change)種類の変更はサポートされていません。
 
--   パーティション化されたテーブル上の列タイプの変更はサポートされていません。
+- パーティション化されたテーブル上の列タイプの変更はサポートされていません。
 
--   生成列の列タイプの変更はサポートされていません。
+- 生成列の列タイプの変更はサポートされていません。
 
--   一部のデータ型 (たとえば、一部の TIME、Bit、Set、Enum、JSON 型) の変更は、TiDB と MySQL 間の`CAST`関数の動作の互換性の問題によりサポートされていません。
+- 一部のデータ型 (たとえば、一部の TIME、Bit、Set、Enum、JSON 型) の変更は、TiDB と MySQL 間の`CAST`関数の動作の互換性の問題によりサポートされていません。
 
--   `AFFINITY`オプションは TiDB 拡張構文です。テーブルで`AFFINITY`有効にすると、パーティションの追加、削除、再編成、スワップなど、そのテーブルのパーティションスキームを変更できなくなります。パーティションスキームを変更するには、まず`AFFINITY`を削除する必要があります。
+- `AFFINITY`オプションは TiDB 拡張構文です。テーブルで`AFFINITY`有効にすると、パーティションの追加、削除、再編成、スワップなど、そのテーブルのパーティションスキームを変更できなくなります。パーティションスキームを変更するには、まず`AFFINITY`を削除する必要があります。
 
--   空間データ型はサポートされていません。
+- 空間データ型はサポートされていません。
 
--   `ALTER TABLE t CACHE | NOCACHE`はMySQL構文に対するTiDB拡張です。詳細については[キャッシュされたテーブル](/cached-tables.md)を参照してください。
+- `ALTER TABLE t CACHE | NOCACHE`はMySQL構文に対するTiDB拡張です。詳細については[キャッシュされたテーブル](/cached-tables.md)を参照してください。
 
 詳細な制限については[MySQLとの互換性](/mysql-compatibility.md#ddl-operations)を参照してください。
 
 ## 参照 {#see-also}
 
--   [MySQLとの互換性](/mysql-compatibility.md#ddl-operations)
--   [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
--   [DROP COLUMN](/sql-statements/sql-statement-drop-column.md)
--   [ADD INDEX](/sql-statements/sql-statement-add-index.md)
--   [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
--   [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
--   [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
--   [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
--   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+- [MySQLとの互換性](/mysql-compatibility.md#ddl-operations)
+- [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
+- [DROP COLUMN](/sql-statements/sql-statement-drop-column.md)
+- [ADD INDEX](/sql-statements/sql-statement-add-index.md)
+- [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
+- [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
+- [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
+- [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+- [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
+- [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)

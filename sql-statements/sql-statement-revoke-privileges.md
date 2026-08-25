@@ -96,15 +96,15 @@ ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
--   TiDB では、 `REVOKE <privileges>`ステートメントが正常に実行されると、実行結果は現在の接続に直ちに有効になります。一方[MySQLでは、一部の権限では、実行結果は後続の接続でのみ有効になります](https://dev.mysql.com/doc/refman/8.0/en/privilege-changes.html)。詳細については、 [TiDB #39356](https://github.com/pingcap/tidb/issues/39356)を参照してください。
+- TiDB では、 `REVOKE <privileges>`ステートメントが正常に実行されると、実行結果は現在の接続に直ちに有効になります。一方[MySQLでは、一部の権限では、実行結果は後続の接続でのみ有効になります](https://dev.mysql.com/doc/refman/8.0/en/privilege-changes.html)。詳細については、 [TiDB #39356](https://github.com/pingcap/tidb/issues/39356)を参照してください。
 
 ## 参照 {#see-also}
 
--   [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
--   [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
+- [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
+- [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
 
 <CustomContent platform="tidb">
 
--   [権限管理](/privilege-management.md)
+- [権限管理](/privilege-management.md)
 
 </CustomContent>

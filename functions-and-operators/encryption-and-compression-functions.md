@@ -71,13 +71,13 @@ SELECT AES_ENCRYPT(0x616263,'secret');
 
 `COMPRESS(expr)`関数は入力データ`expr`の圧縮バージョンを返します。
 
--   引数が`NULL`の場合、関数は`NULL`を返します。
--   引数が空の文字列の場合、関数は長さ 0 の値を返します。
+- 引数が`NULL`の場合、関数は`NULL`を返します。
+- 引数が空の文字列の場合、関数は長さ 0 の値を返します。
 
 長さがゼロ以外の引数の場合、関数は次の構造を持つバイナリ文字列を返します。
 
--   バイト0～3: 非圧縮時の長さ
--   バイト4から最後まで: zlib圧縮データ
+- バイト0～3: 非圧縮時の長さ
+- バイト4から最後まで: zlib圧縮データ
 
 ```sql
 SELECT COMPRESS(0x414243);
@@ -299,13 +299,13 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
 
 例:
 
--   パスワードの複雑さのチェックを有効にするには、 [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)システム変数を`ON`に設定します。
+- パスワードの複雑さのチェックを有効にするには、 [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)システム変数を`ON`に設定します。
 
     ```sql
     SET GLOBAL validate_password.enable=ON;
     ```
 
--   パスワード検証関連のシステム変数を表示する。
+- パスワード検証関連のシステム変数を表示する。
 
     ```sql
     SHOW VARIABLES LIKE 'validate_password.%';
@@ -327,7 +327,7 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
     8 rows in set (0.01 sec)
     ```
 
--   空の文字列のパスワード強度をチェックします`0`が返されます。
+- 空の文字列のパスワード強度をチェックします`0`が返されます。
 
     ```sql
     SELECT VALIDATE_PASSWORD_STRENGTH('');
@@ -342,7 +342,7 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
     1 row in set (0.00 sec)
     ```
 
--   短い文字列`abcdef`のパスワード強度をチェックすると、 `25`が返されます。
+- 短い文字列`abcdef`のパスワード強度をチェックすると、 `25`が返されます。
 
     ```sql
     SELECT VALIDATE_PASSWORD_STRENGTH('abcdef');
@@ -357,7 +357,7 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
     1 row in set (0.00 sec)
     ```
 
--   長い文字列`abcdefghi`のパスワード強度をチェックすると、 `50`が返されます。この文字列はデフォルト値の[`validate_password.length`](/system-variables.md#validate_passwordlength-new-in-v650)よりも長いです。
+- 長い文字列`abcdefghi`のパスワード強度をチェックすると、 `50`が返されます。この文字列はデフォルト値の[`validate_password.length`](/system-variables.md#validate_passwordlength-new-in-v650)よりも長いです。
 
     ```sql
     SELECT VALIDATE_PASSWORD_STRENGTH('abcdefghi');
@@ -372,7 +372,7 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
     1 row in set (0.00 sec)
     ```
 
--   文字列に大文字を追加しても、パスワードの強度は向上しません。
+- 文字列に大文字を追加しても、パスワードの強度は向上しません。
 
     ```sql
     SELECT VALIDATE_PASSWORD_STRENGTH('Abcdefghi');
@@ -387,7 +387,7 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
     1 row in set (0.01 sec)
     ```
 
--   文字列に数字を追加しても、パスワードの強度は向上しません。
+- 文字列に数字を追加しても、パスワードの強度は向上しません。
 
     ```sql
     SELECT VALIDATE_PASSWORD_STRENGTH('Abcdefghi123');
@@ -402,7 +402,7 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
     1 row in set (0.00 sec)
     ```
 
--   最後に、文字列に特殊文字を追加すると、パスワードの強度が`100`になり、強力なパスワードであることを示します。
+- 最後に、文字列に特殊文字を追加すると、パスワードの強度が`100`になり、強力なパスワードであることを示します。
 
     ```sql
     SELECT VALIDATE_PASSWORD_STRENGTH('Abcdefghi123%$#');
@@ -419,10 +419,10 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
 
 ## サポートされていない関数 {#unsupported-functions}
 
--   TiDB は、MySQL Enterpriseでのみ利用可能な関数をサポートしていません[問題 #2632](https://github.com/pingcap/tidb/issues/2632)。
+- TiDB は、MySQL Enterpriseでのみ利用可能な関数をサポートしていません[問題 #2632](https://github.com/pingcap/tidb/issues/2632)。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
--   TiDB は`STATEMENT_DIGEST()`および`STATEMENT_DIGEST_TEXT()`関数をサポートしていません。
--   TiDB は、MySQL 8.0.30 で追加された[`AES_ENCRYPT()`](#aes_encrypt)と[`AES_DECRYPT`](#aes_decrypt)の`kdf_name` 、 `salt` 、 `iterations`引数をサポートしていません。
--   MySQL は[`SM3()`](#sm3)関数を実装していません。
+- TiDB は`STATEMENT_DIGEST()`および`STATEMENT_DIGEST_TEXT()`関数をサポートしていません。
+- TiDB は、MySQL 8.0.30 で追加された[`AES_ENCRYPT()`](#aes_encrypt)と[`AES_DECRYPT`](#aes_decrypt)の`kdf_name` 、 `salt` 、 `iterations`引数をサポートしていません。
+- MySQL は[`SM3()`](#sm3)関数を実装していません。

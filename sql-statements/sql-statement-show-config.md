@@ -79,4 +79,4 @@ SHOW CONFIG LIKE 'tidb';
 
 ## 参照 {#see-also}
 
--   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)

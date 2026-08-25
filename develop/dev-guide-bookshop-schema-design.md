@@ -14,8 +14,8 @@ Bookshopは、さまざまなジャンルの本を購入したり、読んだ本
 
 Bookshopアプリケーションのテーブル構造とデータをインポートするには、以下のインポート方法のいずれかを選択してください。
 
--   [TiDB Self-Managed: `tiup demo`経由](#tidb-self-managed-via-tiup-demo)。
--   [TiDB Cloud：インポート機能経由](#tidb-cloud-via-the-import-feature)。
+- [TiDB Self-Managed: `tiup demo`経由](#tidb-self-managed-via-tiup-demo)。
+- [TiDB Cloud：インポート機能経由](#tidb-cloud-via-the-import-feature)。
 
 ### TiDB Self-Managed: `tiup demo`経由 {#tidb-self-managed-via-tiup-demo}
 
@@ -59,11 +59,11 @@ tiup demo bookshop prepare -U <username> -H <endpoint> -P 4000 -p <password>
 
 例えば、以下のコマンドを実行すると、次のものが生成されます。
 
--   `--users`パラメータを介して取得した 200,000 行のユーザー情報
--   `--books`パラメータを介して50万行の書籍情報を取得
--   `--authors`パラメータによる 100,000 行の著者情報
--   `--ratings`パラメータによる 1,000,000 行の評価レコード
--   `--orders`パラメータを介して1,000,000行の注文レコードを取得
+- `--users`パラメータを介して取得した 200,000 行のユーザー情報
+- `--books`パラメータを介して50万行の書籍情報を取得
+- `--authors`パラメータによる 100,000 行の著者情報
+- `--ratings`パラメータによる 1,000,000 行の評価レコード
+- `--orders`パラメータを介して1,000,000行の注文レコードを取得
 
 ```shell
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --drop-tables
@@ -73,36 +73,36 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
 
 ### TiDB Cloud：インポート機能経由 {#tidb-cloud-via-the-import-feature}
 
-1.  対象のTiDB Cloudリソースの**Import**ページを開きます。
+1. 対象のTiDB Cloudリソースの**Import**ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+    1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
         > **Tip:**
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象リソースの名前をクリックして概要ページに移動し、左側のナビゲーションペインにある**Import**をクリックします。
+    2. 対象リソースの名前をクリックして概要ページに移動し、左側のナビゲーションペインにある**Import**をクリックします。
 
-2.  **Import data from Cloud Storage**を選択し、次に**Amazon S3**をクリックします。
+2. **Import data from Cloud Storage**を選択し、次に**Amazon S3**をクリックします。
 
-3.  **Import Data from Amazon S3**ページで、以下のソースデータ情報を設定してください。
+3. **Import Data from Amazon S3**ページで、以下のソースデータ情報を設定してください。
 
-    -   **Import File Count**： TiDB Cloud Starterの場合は、 **Multiple files**を選択してください。このフィールドはTiDB Cloud Dedicatedでは利用できません。
-    -   **Included Schema Files**：**Yes**を選択してください。
-    -   **Data Format**: SELECT **SQL** 。
-    -   **Folder URI** : `s3://developer.pingcap.com/bookshop/`を入力してください。
-    -   **Bucket Access**: **AWS Role ARN**を選択します。
-    -   **Role ARN** : `arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access`を入力してください。
+    - **Import File Count**： TiDB Cloud Starterの場合は、 **Multiple files**を選択してください。このフィールドはTiDB Cloud Dedicatedでは利用できません。
+    - **Included Schema Files**：**Yes**を選択してください。
+    - **Data Format**: SELECT **SQL** 。
+    - **Folder URI** : `s3://developer.pingcap.com/bookshop/`を入力してください。
+    - **Bucket Access**: **AWS Role ARN**を選択します。
+    - **Role ARN** : `arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access`を入力してください。
 
     この例では、以下のデータが事前に生成されます。
 
-    -   20万行のユーザー情報
-    -   50万行の書籍情報
-    -   著者情報10万行
-    -   1,000,000行の評価記録
-    -   1,000,000行の注文記録
+    - 20万行のユーザー情報
+    - 50万行の書籍情報
+    - 著者情報10万行
+    - 1,000,000行の評価記録
+    - 1,000,000行の注文記録
 
-4.  **Connect** ＞ **Start Import**をクリックしてインポート処理を開始し、 TiDB Cloudインポート完了をお待ちください。
+4. **Connect** ＞ **Start Import**をクリックしてインポート処理を開始し、 TiDB Cloudインポート完了をお待ちください。
 
 データをTiDB Cloudにインポートまたは移行する方法の詳細については、 [TiDB Cloud移行の概要](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview)を参照してください。
 
@@ -277,6 +277,6 @@ CREATE TABLE `bookshop`.`orders` (
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

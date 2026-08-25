@@ -129,8 +129,8 @@ Original_sql: select * from t1 where b = ?
 
 ## 参照 {#see-also}
 
--   [CREATE [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-create-binding.md)
--   [DROP [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-drop-binding.md)
--   [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
--   [オプティマイザヒント](/optimizer-hints.md)
--   [SQLプラン管理](/sql-plan-management.md)
+- [CREATE [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-create-binding.md)
+- [DROP [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-drop-binding.md)
+- [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
+- [オプティマイザヒント](/optimizer-hints.md)
+- [SQLプラン管理](/sql-plan-management.md)

@@ -86,8 +86,8 @@ TiDB は、次の`DirectResourceGroupOption`をサポートします。ここで
 
 > **Note:**
 >
-> -   `CREATE RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)が`ON`に設定されている場合にのみ実行できます。 TiDB は、クラスタ初期化時に`default`リソースグループを自動的に作成します。 このリソースグループの`RU_PER_SEC`のデフォルト値は`UNLIMITED` ( `INT`型の最大値、つまり`2147483647`に相当) であり、 `BURSTABLE`モードです。いずれのリソースグループにも紐付けられていないすべてのリクエストは、自動的にこの`default`リソースグループに紐付けられます。別のリソースグループの新しい構成を作成する場合は、必要に応じて`default`リソースグループの構成を変更することをお勧めします。
-> -   現在、 `default`リソースグループのみが`BACKGROUND`構成の変更をサポートしています。
+> - `CREATE RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)が`ON`に設定されている場合にのみ実行できます。 TiDB は、クラスタ初期化時に`default`リソースグループを自動的に作成します。 このリソースグループの`RU_PER_SEC`のデフォルト値は`UNLIMITED` ( `INT`型の最大値、つまり`2147483647`に相当) であり、 `BURSTABLE`モードです。いずれのリソースグループにも紐付けられていないすべてのリクエストは、自動的にこの`default`リソースグループに紐付けられます。別のリソースグループの新しい構成を作成する場合は、必要に応じて`default`リソースグループの構成を変更することをお勧めします。
+> - 現在、 `default`リソースグループのみが`BACKGROUND`構成の変更をサポートしています。
 
 ## 例 {#examples}
 
@@ -141,7 +141,7 @@ MySQL は[CREATE RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/create-
 
 ## 参照 {#see-also}
 
--   [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
--   [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
--   [ユーザーにバインドされているリソースグループを変更する](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)
--   [リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)
+- [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
+- [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
+- [ユーザーにバインドされているリソースグループを変更する](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)
+- [リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)

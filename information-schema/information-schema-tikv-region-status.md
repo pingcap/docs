@@ -48,26 +48,26 @@ DESC TIKV_REGION_STATUS;
 
 `TIKV_REGION_STATUS`テーブルの列の説明は以下のとおりです。
 
--   `REGION_ID` :リージョンの ID 。
--   `START_KEY` :リージョンの開始キーの値。
--   `END_KEY` :リージョンの終了キーの値。
--   `TABLE_ID` :リージョンが属するテーブルのID。
--   `DB_NAME` : `TABLE_ID`が属するデータベースの名前。
--   `TABLE_NAME` :リージョンが属するテーブルの名前。
--   `IS_INDEX` :リージョンデータがインデックスであるかどうか。0 はインデックスではないことを意味し、1 はインデックスであることを意味します。現在のリージョンにテーブルデータとインデックスデータの両方が含まれている場合、レコードの行が複数になり、 `IS_INDEX`はそれぞれ 0 と 1 になります。
--   `INDEX_ID` :リージョンが属するインデックスのID。 `IS_INDEX`が 0 の場合、この列の値は NULL になります。
--   `INDEX_NAME` :リージョンが属するインデックスの名前。 `IS_INDEX`が 0 の場合、この列の値は NULL になります。
--   `IS_PARTITION` :リージョンが属するテーブルがパーティション化されているかどうか。
--   `PARTITION_ID` :リージョンが属するテーブルがパーティション化されている場合、この列にはリージョンが属するパーティションの ID が表示されます。
--   `PARTITION_NAME` :リージョンが属するテーブルがパーティション化されている場合、この列にはリージョンが属するパーティションの名前が表示されます。
--   `EPOCH_CONF_VER` :リージョン構成のバージョン番号。ピアが追加または削除されると、バージョン番号が増加します。
--   `EPOCH_VERSION` :リージョンの現在のバージョン番号。リージョンが分割または統合されると、バージョン番号が増加します。
--   `WRITTEN_BYTES` :リージョンに書き込まれたデータ量（バイト）。
--   `READ_BYTES` :リージョンから読み取られたデータ量（バイト）。
--   `APPROXIMATE_SIZE` :リージョンのおおよそのデータサイズ (MB)。
--   `APPROXIMATE_KEYS` :リージョン内のキーのおおよその数。
--   `REPLICATIONSTATUS_STATE` :リージョンの現在のレプリケーション状態。状態は`UNKNOWN` 、 `SIMPLE_MAJORITY` 、または`INTEGRITY_OVER_LABEL`のいずれかになります。
--   `REPLICATIONSTATUS_STATEID` : `REPLICATIONSTATUS_STATE`に対応する識別子。
+- `REGION_ID` :リージョンの ID 。
+- `START_KEY` :リージョンの開始キーの値。
+- `END_KEY` :リージョンの終了キーの値。
+- `TABLE_ID` :リージョンが属するテーブルのID。
+- `DB_NAME` : `TABLE_ID`が属するデータベースの名前。
+- `TABLE_NAME` :リージョンが属するテーブルの名前。
+- `IS_INDEX` :リージョンデータがインデックスであるかどうか。0 はインデックスではないことを意味し、1 はインデックスであることを意味します。現在のリージョンにテーブルデータとインデックスデータの両方が含まれている場合、レコードの行が複数になり、 `IS_INDEX`はそれぞれ 0 と 1 になります。
+- `INDEX_ID` :リージョンが属するインデックスのID。 `IS_INDEX`が 0 の場合、この列の値は NULL になります。
+- `INDEX_NAME` :リージョンが属するインデックスの名前。 `IS_INDEX`が 0 の場合、この列の値は NULL になります。
+- `IS_PARTITION` :リージョンが属するテーブルがパーティション化されているかどうか。
+- `PARTITION_ID` :リージョンが属するテーブルがパーティション化されている場合、この列にはリージョンが属するパーティションの ID が表示されます。
+- `PARTITION_NAME` :リージョンが属するテーブルがパーティション化されている場合、この列にはリージョンが属するパーティションの名前が表示されます。
+- `EPOCH_CONF_VER` :リージョン構成のバージョン番号。ピアが追加または削除されると、バージョン番号が増加します。
+- `EPOCH_VERSION` :リージョンの現在のバージョン番号。リージョンが分割または統合されると、バージョン番号が増加します。
+- `WRITTEN_BYTES` :リージョンに書き込まれたデータ量（バイト）。
+- `READ_BYTES` :リージョンから読み取られたデータ量（バイト）。
+- `APPROXIMATE_SIZE` :リージョンのおおよそのデータサイズ (MB)。
+- `APPROXIMATE_KEYS` :リージョン内のキーのおおよその数。
+- `REPLICATIONSTATUS_STATE` :リージョンの現在のレプリケーション状態。状態は`UNKNOWN` 、 `SIMPLE_MAJORITY` 、または`INTEGRITY_OVER_LABEL`のいずれかになります。
+- `REPLICATIONSTATUS_STATEID` : `REPLICATIONSTATUS_STATE`に対応する識別子。
 
 また、 `top confver` 、 `top read` 、 `top write`操作を、 `ORDER BY X LIMIT Y` `EPOCH_CONF_VER`列に対する`WRITTEN_BYTES`操作によって`READ_BYTES` 。
 

@@ -10,9 +10,9 @@ TiDBはMySQL互換のデータベースであり、 [mysql2](https://github.com/
 
 このチュートリアルでは、Next.jsでTiDBとmysql2を使用して以下のタスクを実行する方法を学びます。
 
--   環境をセットアップしてください。
--   mysql2を使用してTiDBに接続します。
--   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
+- 環境をセットアップしてください。
+- mysql2を使用してTiDBに接続します。
+- アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
 
 > **Note**
 >
@@ -22,14 +22,14 @@ TiDBはMySQL互換のデータベースであり、 [mysql2](https://github.com/
 
 このチュートリアルを完了するには、以下が必要です。
 
--   [Node.js **18**](https://nodejs.org/en/download/)以降。
--   [Git](https://git-scm.com/downloads) 。
--   TiDBクラスタ。
+- [Node.js **18**](https://nodejs.org/en/download/)以降。
+- [Git](https://git-scm.com/downloads) 。
+- TiDBクラスタ。
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
--   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
 ## TiDBに接続するには、サンプルアプリを実行してください。 {#run-the-sample-app-to-connect-to-tidb}
 
@@ -64,31 +64,31 @@ npm install
 
 <div label="TiDB Cloud Starter or Essential">
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックします。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックします。接続ダイアログが表示されます。
 
-3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
+3. 接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **Connection Type**は`Public`に設定されています。
+    - **Connection Type**は`Public`に設定されています。
 
-    -   **Branch**は`main`に設定されています。
+    - **Branch**は`main`に設定されています。
 
-    -   **Connect With**は`General`に設定されています。
+    - **Connect With**は`General`に設定されています。
 
-    -   お使いの環境に合った**Operating System**を選択してください。
+    - お使いの環境に合った**Operating System**を選択してください。
 
     > **Note**
     >
     > Node.jsアプリケーションでは、SSL CA証明書を提供する必要はありません。Node.jsはTLS（SSL）接続を確立する際に、デフォルトで組み込みの[Mozilla CA証明書](https://wiki.mozilla.org/CA/Included_Certificates)を使用するためです。
 
-4.  **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
+4. **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
 
     > **Tip**
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **Reset Password**をクリックして新しいパスワードを生成できます。
 
-5.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
+5. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
     ```bash
     # Linux
@@ -100,7 +100,7 @@ npm install
     Copy-Item ".env.example" -Destination ".env"
     ```
 
-6.  対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+6. 対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```bash
     TIDB_HOST='{gateway-region}.aws.tidbcloud.com'
@@ -113,32 +113,32 @@ npm install
 
     `{}`内のプレースホルダーを、接続ダイアログで取得した値に置き換えてください。
 
-7.  `.env`ファイルを保存します。
+7. `.env`ファイルを保存します。
 
 </div>
 
 <div label="TiDB Cloud Premium">
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
 
-3.  **Networking**ページで、**Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
+3. **Networking**ページで、**Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
 
     クライアントのIPアドレスがアクセスリストに追加されていることを確認してください。
 
-4.  左側のナビゲーションペインで**Overview**をクリックすると、インスタンスの概要ページに戻ります。
+4. 左側のナビゲーションペインで**Overview**をクリックすると、インスタンスの概要ページに戻ります。
 
-5.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+5. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-6.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
+6. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
 
-    -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
-    -   まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
-    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
-    -   **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+    - 公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
+    - まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
+    - サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
+    - **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
-7.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
+7. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
     ```bash
     # Linux
@@ -150,7 +150,7 @@ npm install
     Copy-Item ".env.example" -Destination ".env"
     ```
 
-8.  対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+8. 対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```bash
     TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -163,13 +163,13 @@ npm install
 
     `{}`内のプレースホルダーを、接続ダイアログで取得した値に置き換えてください。
 
-9.  `.env`ファイルを保存します。
+9. `.env`ファイルを保存します。
 
 </div>
 
 <div label="TiDB Self-Managed" value="tidb">
 
-1.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
+1. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
     ```bash
     # Linux
@@ -181,7 +181,7 @@ npm install
     Copy-Item ".env.example" -Destination ".env"
     ```
 
-2.  対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+2. 対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```bash
     TIDB_HOST='{tidb_server_host}'
@@ -194,7 +194,7 @@ npm install
 
     `{}`内のプレースホルダーを、 **[接続]**ウィンドウで取得した値に置き換えてください。TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空欄です。
 
-3.  `.env`ファイルを保存します。
+3. `.env`ファイルを保存します。
 
 </div>
 
@@ -202,17 +202,17 @@ npm install
 
 ### ステップ4：コードを実行して結果を確認する {#step-4-run-the-code-and-check-the-result}
 
-1.  アプリケーションを起動します:
+1. アプリケーションを起動します:
 
     ```bash
     npm run dev
     ```
 
-2.  ブラウザを開いて`http://localhost:3000`にアクセスしてください。（実際のポート番号は端末で確認してください。デフォルトは`3000`です。）
+2. ブラウザを開いて`http://localhost:3000`にアクセスしてください。（実際のポート番号は端末で確認してください。デフォルトは`3000`です。）
 
-3.  サンプルコードを実行するには、 **RUN SQL**をクリックしてください。
+3. サンプルコードを実行するには、 **RUN SQL**をクリックしてください。
 
-4.  ターミナルの出力を確認してください。出力が以下の例と似ていれば、接続は成功しています。
+4. ターミナルの出力を確認してください。出力が以下の例と似ていれば、接続は成功しています。
 
     ```json
     {
@@ -314,19 +314,19 @@ console.log(rsh.affectedRows);
 
 ## 役立つメモ {#useful-notes}
 
--   [接続プール](https://github.com/sidorares/node-mysql2#using-connection-pools)を使用してデータベース接続を管理することで、接続の頻繁な確立と切断によって発生するパフォーマンスのオーバーヘッドを削減できます。
--   SQL インジェクションを回避するには、 [プリペアドステートメント](https://github.com/sidorares/node-mysql2#using-prepared-statements)を使用することをお勧めします。
--   複雑な SQL ステートメントがあまり含まれないシナリオでは、[Sequelize](https://sequelize.org/)、 [TypeORM](https://typeorm.io/) 、または[Prisma](https://www.prisma.io/)などの ORM フレームワークを使用すると、開発効率が大幅に向上します。
+- [接続プール](https://github.com/sidorares/node-mysql2#using-connection-pools)を使用してデータベース接続を管理することで、接続の頻繁な確立と切断によって発生するパフォーマンスのオーバーヘッドを削減できます。
+- SQL インジェクションを回避するには、 [プリペアドステートメント](https://github.com/sidorares/node-mysql2#using-prepared-statements)を使用することをお勧めします。
+- 複雑な SQL ステートメントがあまり含まれないシナリオでは、[Sequelize](https://sequelize.org/)、 [TypeORM](https://typeorm.io/) 、または[Prisma](https://www.prisma.io/)などの ORM フレームワークを使用すると、開発効率が大幅に向上します。
 
 ## 次のステップ {#next-steps}
 
--   ORM と Next.js を使用して複雑なアプリケーションを構築する方法の詳細については、 [書店デモ](https://github.com/pingcap/tidb-prisma-vercel-demo)を参照してください。
--   node-mysql2 ドライバーの使用方法の詳細については[node-mysql2 のドキュメント](https://sidorares.github.io/node-mysql2/docs/documentation)を参照してください。
--   [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
--   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- ORM と Next.js を使用して複雑なアプリケーションを構築する方法の詳細については、 [書店デモ](https://github.com/pingcap/tidb-prisma-vercel-demo)を参照してください。
+- node-mysql2 ドライバーの使用方法の詳細については[node-mysql2 のドキュメント](https://sidorares.github.io/node-mysql2/docs/documentation)を参照してください。
+- [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

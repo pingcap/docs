@@ -41,15 +41,15 @@ SHOW AFFINITY;
 
 各列の意味は次のとおりです。
 
--   `Leader_store_id` 、 `Voter_store_ids` : PDによって記録されたTiKVストアのID。テーブルまたはパーティションのターゲットLeaderとVoterレプリカをホストするストアを示します。アフィニティグループのターゲットレプリカの場所が決定されていない場合、または[`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855) `0`に設定されている場合、値は`NULL`と表示されます。
--   `Status` : アフィニティスケジューリングの現在の状態を示します。可能な値は次のとおりです。
-    -   `Pending` : リーダーまたは投票者がまだ決定されていない場合など、PD はテーブルまたはパーティションのアフィニティスケジューリングを開始していません。
-    -   `Preparing` : PD はアフィニティ要件を満たすようにリージョンをスケジュールしています。
-    -   `Stable` : すべてのリージョンが目標配布に到達しました。
--   `Region_count` : アフィニティグループ内の現在のリージョン数。
--   `Affinity_region_count` : 現在アフィニティレプリカ分散要件を満たしているリージョンの数。
-    -   `Affinity_region_count` `Region_count`未満の場合、一部のリージョンがアフィニティに基づいてレプリカのスケジュールをまだ完了していないことを示します。
-    -   `Affinity_region_count` `Region_count`に等しい場合、アフィニティに基づくレプリカのスケジューリングが完了していることを示します。つまり、関連するすべてのリージョンの分散がアフィニティ要件を満たしていることを意味します。ただし、これは関連するリージョンのマージ操作が完了したことを示すものではありません。
+- `Leader_store_id` 、 `Voter_store_ids` : PDによって記録されたTiKVストアのID。テーブルまたはパーティションのターゲットLeaderとVoterレプリカをホストするストアを示します。アフィニティグループのターゲットレプリカの場所が決定されていない場合、または[`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855) `0`に設定されている場合、値は`NULL`と表示されます。
+- `Status` : アフィニティスケジューリングの現在の状態を示します。可能な値は次のとおりです。
+    - `Pending` : リーダーまたは投票者がまだ決定されていない場合など、PD はテーブルまたはパーティションのアフィニティスケジューリングを開始していません。
+    - `Preparing` : PD はアフィニティ要件を満たすようにリージョンをスケジュールしています。
+    - `Stable` : すべてのリージョンが目標配布に到達しました。
+- `Region_count` : アフィニティグループ内の現在のリージョン数。
+- `Affinity_region_count` : 現在アフィニティレプリカ分散要件を満たしているリージョンの数。
+    - `Affinity_region_count` `Region_count`未満の場合、一部のリージョンがアフィニティに基づいてレプリカのスケジュールをまだ完了していないことを示します。
+    - `Affinity_region_count` `Region_count`に等しい場合、アフィニティに基づくレプリカのスケジューリングが完了していることを示します。つまり、関連するすべてのリージョンの分散がアフィニティ要件を満たしていることを意味します。ただし、これは関連するリージョンのマージ操作が完了したことを示すものではありません。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
@@ -57,5 +57,5 @@ SHOW AFFINITY;
 
 ## 参照 {#see-also}
 
--   [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)
--   [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
+- [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)
+- [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)

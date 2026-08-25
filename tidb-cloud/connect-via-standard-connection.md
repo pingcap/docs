@@ -19,25 +19,25 @@ summary: パブリック接続を使用してTiDB Cloudクラスターに接続�
 
 パブリック接続を介してTiDB Cloud Dedicatedクラスターに接続するには、以下の手順を実行してください。
 
-1.  対象のTiDB Cloud Dedicatedクラスタの概要ページを開きます。
+1. 対象のTiDB Cloud Dedicatedクラスタの概要ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+    1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
         > **Tip:**
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックすると、その概要ページに移動します。
+    2. 対象のTiDB Cloud Dedicatedクラスターの名前をクリックすると、その概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
+3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、 [IP アクセス リストを設定する](/tidb-cloud/configure-ip-access-list.md)の手順に従って設定してください。
 
-4.  **CA cert**をクリックすると、TiDBクラスターへのTLS接続に必要なCA証明書をダウンロードできます。このCA証明書は、デフォルトでTLS 1.2バージョンをサポートしています。
+4. **CA cert**をクリックすると、TiDBクラスターへのTLS接続に必要なCA証明書をダウンロードできます。このCA証明書は、デフォルトでTLS 1.2バージョンをサポートしています。
 
-5.  ご希望の接続方法を選択し、タブに表示されている接続文字列とサンプルコードを参照して、 TiDB Cloud Dedicatedクラスターに接続してください。
+5. ご希望の接続方法を選択し、タブに表示されている接続文字列とサンプルコードを参照して、 TiDB Cloud Dedicatedクラスターに接続してください。
 
 ## 次は？ {#what-s-next}
 

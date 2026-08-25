@@ -11,9 +11,9 @@ OAuth（Open Authorization）は、ユーザーに代わってリソースへの
 
 OAuthの最新バージョンである[OAuth 2.0](https://oauth.net/2/)は、認証における業界標準プロトコルとなりました。OAuth 2.0の主な利点は次のとおりです。
 
--   セキュリティ: トークンベースの認証を使用することで、OAuth 2.0 はパスワードの盗難や不正アクセスのリスクを最小限に抑えます。
--   利便性: 複数の資格情報を管理することなく、データへのアクセスを許可および取り消すことができます。
--   アクセス制御: サードパーティ アプリケーションに付与するアクセス レベルを正確に指定して、必要な権限のみが付与されるようにすることができます。
+- セキュリティ: トークンベースの認証を使用することで、OAuth 2.0 はパスワードの盗難や不正アクセスのリスクを最小限に抑えます。
+- 利便性: 複数の資格情報を管理することなく、データへのアクセスを許可および取り消すことができます。
+- アクセス制御: サードパーティ アプリケーションに付与するアクセス レベルを正確に指定して、必要な権限のみが付与されるようにすることができます。
 
 ## OAuth 付与タイプ {#oauth-grant-types}
 
@@ -31,8 +31,8 @@ OAuthフレームワークは、さまざまなユースケースに合わせて
 
 OAuth 2.0 デバイスコード付与タイプを使用して、 TiDB Cloud CLI にアクセスできます。
 
--   [ticloud認証ログイン](/tidb-cloud/ticloud-auth-login.md) : TiDB Cloudで認証する
--   [ticloud 認証ログアウト](/tidb-cloud/ticloud-auth-logout.md) : TiDB Cloudからログアウト
+- [ticloud認証ログイン](/tidb-cloud/ticloud-auth-login.md) : TiDB Cloudで認証する
+- [ticloud 認証ログアウト](/tidb-cloud/ticloud-auth-logout.md) : TiDB Cloudからログアウト
 
 アプリがOAuthを使用してTiDB Cloudにアクセスする必要がある場合は、 [クラウド＆テクノロジーパートナーになる](https://www.pingcap.com/partners/become-a-partner/) （**Partner Program**で**Cloud & Technology Partner**を選択）にリクエストを送信してください。担当者からご連絡いたします。
 
@@ -40,8 +40,8 @@ OAuth 2.0 デバイスコード付与タイプを使用して、 TiDB Cloud CLI 
 
 次のように、 TiDB Cloudコンソールで承認された OAuth アプリケーションのレコードを表示できます。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、<mdsvgicon name="icon-top-account-settings">左下隅にあります。</mdsvgicon>
-2.  **Account Settings**をクリックします。
-3.  **Authorized OAuth Apps**タブをクリックします。承認済みのOAuthアプリケーションが表示されます。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、<mdsvgicon name="icon-top-account-settings">左下隅にあります。</mdsvgicon>
+2. **Account Settings**をクリックします。
+3. **Authorized OAuth Apps**タブをクリックします。承認済みのOAuthアプリケーションが表示されます。
 
 **Revoke**をクリックすると、いつでも承認を取り消すことができます。

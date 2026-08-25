@@ -33,43 +33,43 @@ ReferenceOption
 
 外部キーの命名は、以下の規則に従います。
 
--   `CONSTRAINT identifier`で名前が指定されている場合は、指定された名前が使用されます。
--   `CONSTRAINT identifier`に名前が指定されていない場合でも、 `FOREIGN KEY identifier`に名前が指定されている場合は、 `FOREIGN KEY identifier`に指定された名前が使用されます。
--   `CONSTRAINT identifier`も`FOREIGN KEY identifier`も名前を指定しない場合、 `fk_1` 、 `fk_2` 、 `fk_3`などの名前が自動的に生成されます。
--   外部キー名は、現在のテーブル内で一意である必要があります。そうでない場合、外部キーの作成時にエラー`ERROR 1826: Duplicate foreign key constraint name 'fk'`が報告されます。
+- `CONSTRAINT identifier`で名前が指定されている場合は、指定された名前が使用されます。
+- `CONSTRAINT identifier`に名前が指定されていない場合でも、 `FOREIGN KEY identifier`に名前が指定されている場合は、 `FOREIGN KEY identifier`に指定された名前が使用されます。
+- `CONSTRAINT identifier`も`FOREIGN KEY identifier`も名前を指定しない場合、 `fk_1` 、 `fk_2` 、 `fk_3`などの名前が自動的に生成されます。
+- 外部キー名は、現在のテーブル内で一意である必要があります。そうでない場合、外部キーの作成時にエラー`ERROR 1826: Duplicate foreign key constraint name 'fk'`が報告されます。
 
 ## 制限 {#restrictions}
 
 外部キーを作成する際には、以下の条件を満たす必要があります。
 
--   親テーブルも子テーブルも、一時テーブルではありません。
+- 親テーブルも子テーブルも、一時テーブルではありません。
 
--   ユーザーは親テーブルに対して`REFERENCES`権限を持っています。
+- ユーザーは親テーブルに対して`REFERENCES`権限を持っています。
 
--   親テーブルと子テーブルの外部キーによって参照される列は、同じデータ型であり、同じサイズ、精度、長さ、文字セット、および照合順序を持っています。
+- 親テーブルと子テーブルの外部キーによって参照される列は、同じデータ型であり、同じサイズ、精度、長さ、文字セット、および照合順序を持っています。
 
--   外部キーの列は、自身を参照することはできません。
+- 外部キーの列は、自身を参照することはできません。
 
--   外部キーの列と参照先の親テーブルの列には同じインデックスが設定されており、インデックス内の列の順序は外部キーの列の順序と一致しています。これは、外部キー制約チェックを実行する際に、インデックスを使用してテーブル全体のスキャンを回避するためです。
+- 外部キーの列と参照先の親テーブルの列には同じインデックスが設定されており、インデックス内の列の順序は外部キーの列の順序と一致しています。これは、外部キー制約チェックを実行する際に、インデックスを使用してテーブル全体のスキャンを回避するためです。
 
-    -   親テーブルに対応する外部キーインデックスがない場合、エラー`ERROR 1822: Failed to add the foreign key constraint. Missing index for constraint 'fk' in the referenced table 't'`が報告されます。
-    -   子テーブルに対応する外部キーインデックスが存在しない場合、外部キーと同じ名前のインデックスが自動的に作成されます。
+    - 親テーブルに対応する外部キーインデックスがない場合、エラー`ERROR 1822: Failed to add the foreign key constraint. Missing index for constraint 'fk' in the referenced table 't'`が報告されます。
+    - 子テーブルに対応する外部キーインデックスが存在しない場合、外部キーと同じ名前のインデックスが自動的に作成されます。
 
--   `BLOB`または`TEXT`型の列に外部キーを作成することはサポートされていません。
+- `BLOB`または`TEXT`型の列に外部キーを作成することはサポートされていません。
 
--   パーティションテーブルに外部キーを作成することはサポートされていません。
+- パーティションテーブルに外部キーを作成することはサポートされていません。
 
--   仮想生成列に外部キーを作成することはサポートされていません。
+- 仮想生成列に外部キーを作成することはサポートされていません。
 
 ## 参照操作 {#reference-operations}
 
 `UPDATE`または`DELETE`操作が親テーブルの外部キー値に影響を与える場合、子テーブルの対応する外部キー値は、外部キー定義の`ON UPDATE`または`ON DELETE`句で定義された参照操作によって決定されます。参照操作には、次のものが含まれます。
 
--   `CASCADE` : `UPDATE`または`DELETE`操作が親テーブルに影響を与える場合、子テーブルの対応する行を自動的に更新または削除します。カスケード操作は深さ優先で実行されます。
--   `SET NULL` : `UPDATE`または`DELETE`操作が親テーブルに影響を与える場合、子テーブルの対応する外部キー列を自動的に`NULL`に設定します。
--   `RESTRICT` : 子テーブルに一致する行が含まれている場合、 `UPDATE`または`DELETE`操作を拒否します。
--   `NO ACTION` : `RESTRICT`と同じです。
--   `SET DEFAULT` : `RESTRICT`と同じです。
+- `CASCADE` : `UPDATE`または`DELETE`操作が親テーブルに影響を与える場合、子テーブルの対応する行を自動的に更新または削除します。カスケード操作は深さ優先で実行されます。
+- `SET NULL` : `UPDATE`または`DELETE`操作が親テーブルに影響を与える場合、子テーブルの対応する外部キー列を自動的に`NULL`に設定します。
+- `RESTRICT` : 子テーブルに一致する行が含まれている場合、 `UPDATE`または`DELETE`操作を拒否します。
+- `NO ACTION` : `RESTRICT`と同じです。
+- `SET DEFAULT` : `RESTRICT`と同じです。
 
 親テーブルに一致する外部キー値がない場合、子テーブルに対する`INSERT`または`UPDATE`操作は拒否されます。
 
@@ -170,16 +170,16 @@ TiDBは外部キー制約チェックをサポートしており、これはシ�
 
 外部キー制約チェックを無効にした場合の影響は以下のとおりです。
 
--   外部キーによって参照されている親テーブルを削除する場合、削除が成功するのは、外部キー制約チェックが無効になっている場合のみです。
--   データベースにデータをインポートする際、テーブルの作成順序が外部キーの依存関係の順序と異なる場合があり、その結果、テーブルの作成が失敗する可能性があります。外部キー制約チェックを無効にした場合にのみ、テーブルを正常に作成できます。さらに、外部キー制約チェックを無効にすることで、データインポートの速度を向上させることができます。
--   データベースにデータをインポートする際、子テーブルのデータが先にインポートされるとエラーが発生します。外部キー制約チェックを無効にした場合にのみ、子テーブルのデータを正常にインポートできます。
--   実行される`ALTER TABLE`操作に外部キーの変更が含まれる場合、この操作は外部キー制約チェックが無効になっている場合にのみ成功します。
+- 外部キーによって参照されている親テーブルを削除する場合、削除が成功するのは、外部キー制約チェックが無効になっている場合のみです。
+- データベースにデータをインポートする際、テーブルの作成順序が外部キーの依存関係の順序と異なる場合があり、その結果、テーブルの作成が失敗する可能性があります。外部キー制約チェックを無効にした場合にのみ、テーブルを正常に作成できます。さらに、外部キー制約チェックを無効にすることで、データインポートの速度を向上させることができます。
+- データベースにデータをインポートする際、子テーブルのデータが先にインポートされるとエラーが発生します。外部キー制約チェックを無効にした場合にのみ、子テーブルのデータを正常にインポートできます。
+- 実行される`ALTER TABLE`操作に外部キーの変更が含まれる場合、この操作は外部キー制約チェックが無効になっている場合にのみ成功します。
 
 外部キー制約チェックが無効になっている場合、以下のシナリオを除き、外部キー制約チェックおよび参照操作は実行されません。
 
--   `ALTER TABLE`の実行によって外部キーの定義が誤っている可能性がある場合でも、実行中にエラーが報告されます。
--   外部キーに必要なインデックスを削除する場合は、まず外部キー自体を削除する必要があります。そうしないと、エラーが発生します。
--   外部キーを作成した際に、関連する条件や制約を満たしていない場合、エラーが報告されます。
+- `ALTER TABLE`の実行によって外部キーの定義が誤っている可能性がある場合でも、実行中にエラーが報告されます。
+- 外部キーに必要なインデックスを削除する場合は、まず外部キー自体を削除する必要があります。そうしないと、エラーが発生します。
+- 外部キーを作成した際に、関連する条件や制約を満たしていない場合、エラーが報告されます。
 
 ## ロック {#locking}
 
@@ -207,9 +207,9 @@ Create Table: CREATE TABLE `child` (
 
 外部キーに関する情報は、以下のいずれかのシステムテーブルを使用して取得することもできます。
 
--   [`INFORMATION_SCHEMA.KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)
--   [`INFORMATION_SCHEMA.TABLE_CONSTRAINTS`](/information-schema/information-schema-table-constraints.md)
--   [`INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS`](/information-schema/information-schema-referential-constraints.md)
+- [`INFORMATION_SCHEMA.KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)
+- [`INFORMATION_SCHEMA.TABLE_CONSTRAINTS`](/information-schema/information-schema-table-constraints.md)
+- [`INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS`](/information-schema/information-schema-referential-constraints.md)
 
 以下に例を示します。
 
@@ -311,18 +311,18 @@ Create Table | CREATE TABLE `child` (
 
 <CustomContent platform="tidb">
 
--   [DM](/dm/dm-overview.md) : v8.5.6以降、DMは実験的機能として外部キー制約を使用するテーブルのレプリケーションをサポートしています。サポートされているシナリオと制限事項については、 [DM互換性カタログ](/dm/dm-compatibility-catalog.md#foreign-key-cascade-operations)を参照してください。 v8.5.6より前のバージョンでは、DMはTiDBへのデータレプリケーション時に[`foreign_key_checks`](/system-variables.md#foreign_key_checks)システム変数を無効にするため、カスケード操作はダウンストリームクラスタにレプリケートされません。
--   [TiCDC](/ticdc/ticdc-overview.md) v6.6.0 は外部キーに対応しています。以前のバージョンの TiCDC では、外部キーを持つテーブルをレプリケートする際にエラーが発生する場合があります。TiCDC バージョン 6.6.0 より前のバージョンを使用する場合は、ダウンストリーム TiDB クラスタの`foreign_key_checks`を無効にすることをお勧めします。
--   [BR](/br/backup-and-restore-overview.md) v6.6.0 は外部キーに対応しています。以前のバージョンのBRでは、外部キーを持つテーブルを v6.6.0 以降のクラスタに復元する際にエラーが発生する場合があります。v6.6.0 より前のバージョンのBRを使用する場合は、クラスタを復元する前に、ダウンストリーム TiDB クラスタの`foreign_key_checks`無効にすることをお勧めします。
--   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用する場合、対象テーブルで外部キーが使用されている場合は、データのインポート前にダウンストリーム TiDB クラスタの`foreign_key_checks`を無効にすることをお勧めします。v6.6.0 より前のバージョンでは、このシステム変数を無効にしても効果がなく、ダウンストリームデータベースユーザーに`REFERENCES`権限を付与するか、ダウンストリームデータベースに対象テーブルを事前に手動で作成して、スムーズなデータインポートを確保する必要があります。
+- [DM](/dm/dm-overview.md) : v8.5.6以降、DMは実験的機能として外部キー制約を使用するテーブルのレプリケーションをサポートしています。サポートされているシナリオと制限事項については、 [DM互換性カタログ](/dm/dm-compatibility-catalog.md#foreign-key-cascade-operations)を参照してください。 v8.5.6より前のバージョンでは、DMはTiDBへのデータレプリケーション時に[`foreign_key_checks`](/system-variables.md#foreign_key_checks)システム変数を無効にするため、カスケード操作はダウンストリームクラスタにレプリケートされません。
+- [TiCDC](/ticdc/ticdc-overview.md) v6.6.0 は外部キーに対応しています。以前のバージョンの TiCDC では、外部キーを持つテーブルをレプリケートする際にエラーが発生する場合があります。TiCDC バージョン 6.6.0 より前のバージョンを使用する場合は、ダウンストリーム TiDB クラスタの`foreign_key_checks`を無効にすることをお勧めします。
+- [BR](/br/backup-and-restore-overview.md) v6.6.0 は外部キーに対応しています。以前のバージョンのBRでは、外部キーを持つテーブルを v6.6.0 以降のクラスタに復元する際にエラーが発生する場合があります。v6.6.0 より前のバージョンのBRを使用する場合は、クラスタを復元する前に、ダウンストリーム TiDB クラスタの`foreign_key_checks`無効にすることをお勧めします。
+- [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用する場合、対象テーブルで外部キーが使用されている場合は、データのインポート前にダウンストリーム TiDB クラスタの`foreign_key_checks`を無効にすることをお勧めします。v6.6.0 より前のバージョンでは、このシステム変数を無効にしても効果がなく、ダウンストリームデータベースユーザーに`REFERENCES`権限を付与するか、ダウンストリームデータベースに対象テーブルを事前に手動で作成して、スムーズなデータインポートを確保する必要があります。
 
 </CustomContent>
 
--   [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)外国語キーに対応しています。
+- [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)外国語キーに対応しています。
 
 <CustomContent platform="tidb">
 
--   [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用してアップストリーム データベースとダウンストリームデータベースの間でデータを比較するときに、データベースのバージョンが異なり、[下流のTiDBに無効な外部キーがあります](#compatibility-between-tidb-versions)がある場合、sync-diff-inspector はテーブルスキーマの不整合エラーを報告することがあります。これは、TiDB v6.6.0 が無効な外部キーに対する`/* FOREIGN KEY INVALID */`コメントを追加しているためです。
+- [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用してアップストリーム データベースとダウンストリームデータベースの間でデータを比較するときに、データベースのバージョンが異なり、[下流のTiDBに無効な外部キーがあります](#compatibility-between-tidb-versions)がある場合、sync-diff-inspector はテーブルスキーマの不整合エラーを報告することがあります。これは、TiDB v6.6.0 が無効な外部キーに対する`/* FOREIGN KEY INVALID */`コメントを追加しているためです。
 
 </CustomContent>
 

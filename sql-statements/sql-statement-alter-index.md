@@ -104,13 +104,13 @@ Query OK, 0 rows affected (0.02 sec)
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
--   TiDB の不可視インデックスは、MySQL 8.0 の同等の機能に基づいてモデル化されています。
--   MySQL と同様に、TiDB では`PRIMARY KEY`インデックスを不可視にすることはできません。
+- TiDB の不可視インデックスは、MySQL 8.0 の同等の機能に基づいてモデル化されています。
+- MySQL と同様に、TiDB では`PRIMARY KEY`インデックスを不可視にすることはできません。
 
 ## 参照 {#see-also}
 
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
--   [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
--   [ADD INDEX](/sql-statements/sql-statement-add-index.md)
--   [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
--   [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
+- [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+- [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
+- [ADD INDEX](/sql-statements/sql-statement-add-index.md)
+- [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
+- [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)

@@ -105,12 +105,12 @@ scrape_configs:
 
 TiDB、PD、TiKV などのコンポーネントのアラーム ルールを有効にするには、対応するコンポーネントのアラーム ルール ファイルを個別にダウンロードし、アラーム ルール ファイルの構成を Prometheus 構成ファイルに追加します。
 
--   TiDB: [`tidb.rules.yml`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/metrics/alertmanager/tidb.rules.yml)
--   PD: [`pd.rules.yml`](https://github.com/tikv/pd/blob/release-8.5/metrics/alertmanager/pd.rules.yml)
--   TiKV: [`tikv.rules.yml`](https://github.com/tikv/tikv/blob/release-8.5/metrics/alertmanager/tikv.rules.yml)
--   TiFlash: [`tiflash.rules.yml`](https://github.com/pingcap/tiflash/blob/release-8.5/metrics/alertmanager/tiflash.rules.yml)
--   TiCDC: [`ticdc.rules.yml`](https://github.com/pingcap/tiflow/blob/release-8.5/metrics/alertmanager/ticdc.rules.yml)
--   TiDB Lightning： [`lightning.rules.yml`](https://github.com/pingcap/tidb/blob/release-8.5/br/metrics/alertmanager/lightning.rules.yml)
+- TiDB: [`tidb.rules.yml`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/metrics/alertmanager/tidb.rules.yml)
+- PD: [`pd.rules.yml`](https://github.com/tikv/pd/blob/release-8.5/metrics/alertmanager/pd.rules.yml)
+- TiKV: [`tikv.rules.yml`](https://github.com/tikv/tikv/blob/release-8.5/metrics/alertmanager/tikv.rules.yml)
+- TiFlash: [`tiflash.rules.yml`](https://github.com/pingcap/tiflash/blob/release-8.5/metrics/alertmanager/tiflash.rules.yml)
+- TiCDC: [`ticdc.rules.yml`](https://github.com/pingcap/tiflow/blob/release-8.5/metrics/alertmanager/ticdc.rules.yml)
+- TiDB Lightning： [`lightning.rules.yml`](https://github.com/pingcap/tidb/blob/release-8.5/br/metrics/alertmanager/lightning.rules.yml)
 
 ```ini
 rule_files:
@@ -198,50 +198,50 @@ Grafana サービスを開始します。
 
 ### ステップ1: Prometheusデータソースを追加する {#step-1-add-a-prometheus-data-source}
 
-1.  Grafana Web インターフェースにログインします。
+1. Grafana Web インターフェースにログインします。
 
-    -   デフォルトアドレス: [http://localhost:3000](http://localhost:3000)
+    - デフォルトアドレス: [http://localhost:3000](http://localhost:3000)
 
-    -   デフォルトアカウント: admin
+    - デフォルトアカウント: admin
 
-    -   デフォルトのパスワード: admin
+    - デフォルトのパスワード: admin
 
     > **Note:**
     >
     > **Change Password**手順では、 **Skip**を選択できます。
 
-2.  Grafana サイドバー メニューで、**コンフィグレーション**内の**データソース**をクリックします。
+2. Grafana サイドバー メニューで、**コンフィグレーション**内の**データソース**をクリックします。
 
-3.  **データソースの追加を**クリックします。
+3. **データソースの追加を**クリックします。
 
-4.  データソース情報を指定します。
+4. データソース情報を指定します。
 
-    -   データソースの**名前**を指定します。
-    -   **タイプ**には**Prometheus**を選択します。
-    -   **URL**には、Prometheus アドレスを指定します。
-    -   必要に応じて他のフィールドを指定します。
+    - データソースの**名前**を指定します。
+    - **タイプ**には**Prometheus**を選択します。
+    - **URL**には、Prometheus アドレスを指定します。
+    - 必要に応じて他のフィールドを指定します。
 
-5.  新しいデータソースを保存するには、 **[追加]**をクリックします。
+5. 新しいデータソースを保存するには、 **[追加]**をクリックします。
 
 ### ステップ2: Grafanaダッシュボードをインポートする {#step-2-import-a-grafana-dashboard}
 
 PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッシュボードをインポートするには、それぞれ次の手順を実行します。
 
-1.  Grafana ロゴをクリックしてサイドバー メニューを開きます。
+1. Grafana ロゴをクリックしてサイドバー メニューを開きます。
 
-2.  サイドバー メニューで、 **[ダッシュボード]** -&gt; **[インポート]**をクリックして、 **[ダッシュボードのインポート]**ウィンドウを開きます。
+2. サイドバー メニューで、 **[ダッシュボード]** -&gt; **[インポート]**をクリックして、 **[ダッシュボードのインポート]**ウィンドウを開きます。
 
-3.  **Upload .json File**をクリックして JSON ファイルをアップロードします ( [pingcap/tidb](https://github.com/pingcap/tidb/tree/release-8.5/pkg/metrics/grafana) [tikv/tikv](https://github.com/tikv/tikv/tree/release-8.5/metrics/grafana)、および[tikv/pd](https://github.com/tikv/pd/tree/release-8.5/metrics/grafana)から TiDB Grafana 構成ファイルをダウンロードします)。
+3. **Upload .json File**をクリックして JSON ファイルをアップロードします ( [pingcap/tidb](https://github.com/pingcap/tidb/tree/release-8.5/pkg/metrics/grafana) [tikv/tikv](https://github.com/tikv/tikv/tree/release-8.5/metrics/grafana)、および[tikv/pd](https://github.com/tikv/pd/tree/release-8.5/metrics/grafana)から TiDB Grafana 構成ファイルをダウンロードします)。
 
     > **Note:**
     >
     > TiKV、PD、および TiDB Dashboardの場合、対応する JSON ファイルは`tikv_summary.json` 、 `tikv_details.json` 、 `tikv_trouble_shooting.json` 、 `pd.json` 、 `tidb.json` 、および`tidb_summary.json`です。
 
-4.  **[ロード]**をクリックします。
+4. **[ロード]**をクリックします。
 
-5.  Prometheus データソースを選択します。
+5. Prometheus データソースを選択します。
 
-6.  **Import**をクリックします。Prometheusダッシュボードがインポートされます。
+6. **Import**をクリックします。Prometheusダッシュボードがインポートされます。
 
 ## コンポーネントメトリックを表示する {#view-component-metrics}
 
@@ -251,27 +251,27 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
 
 クラスター コンポーネントの次のメトリックを取得できます。
 
--   **TiDBサーバー:**
+- **TiDBサーバー:**
 
-    -   レイテンシーとスループットを監視するためのクエリ処理時間
-    -   DDLプロセス監視
-    -   TiKVクライアント関連の監視
-    -   PDクライアント関連の監視
+    - レイテンシーとスループットを監視するためのクエリ処理時間
+    - DDLプロセス監視
+    - TiKVクライアント関連の監視
+    - PDクライアント関連の監視
 
--   **PDサーバー:**
+- **PDサーバー:**
 
-    -   コマンドが実行される合計回数
-    -   特定のコマンドが失敗した合計回数
-    -   コマンドが成功するまでの期間
-    -   コマンドが失敗する期間
-    -   コマンドが終了して結果を返すまでの時間
+    - コマンドが実行される合計回数
+    - 特定のコマンドが失敗した合計回数
+    - コマンドが成功するまでの期間
+    - コマンドが失敗する期間
+    - コマンドが終了して結果を返すまでの時間
 
--   **TiKVサーバー:**
+- **TiKVサーバー:**
 
-    -   ガベージコレクション（GC）監視
-    -   TiKVコマンドが実行される合計回数
-    -   スケジューラがコマンドを実行する期間
-    -   Raftの提案コマンドの総回数
-    -   Raftがコマンドを実行する期間
-    -   Raftコマンドが失敗した合計回数
-    -   Raftが準備完了状態を処理する合計回数
+    - ガベージコレクション（GC）監視
+    - TiKVコマンドが実行される合計回数
+    - スケジューラがコマンドを実行する期間
+    - Raftの提案コマンドの総回数
+    - Raftがコマンドを実行する期間
+    - Raftコマンドが失敗した合計回数
+    - Raftが準備完了状態を処理する合計回数

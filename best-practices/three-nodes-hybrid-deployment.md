@@ -88,8 +88,8 @@ RocksDBスレッドプールは、コンパクションジョブとフラッシ�
 
 このテストでは、 `rocksdb.max-background-jobs`の値は`3`に、 `rocksdb.max-sub-compactions`の値は`1`に設定されています。TPC-C負荷での12時間テスト中、書き込みストールは発生しませんでした。実際の負荷に応じて2つのパラメータ値を最適化する際には、監視指標に基づいて値を徐々に下げることができます。
 
--   書き込み停止が発生する場合は、値を`rocksdb.max-background-jobs`増やします。
--   書き込み停止が続く場合は、値`rocksdb.max-sub-compactions`を`2`または`3`に設定します。
+- 書き込み停止が発生する場合は、値を`rocksdb.max-background-jobs`増やします。
+- 書き込み停止が続く場合は、値`rocksdb.max-sub-compactions`を`2`または`3`に設定します。
 
 #### `rocksdb.rate-bytes-per-sec` {#rocksdb-rate-bytes-per-sec}
 

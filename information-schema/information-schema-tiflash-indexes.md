@@ -41,17 +41,17 @@ DESC TIFLASH_INDEXES;
 
 `TIFLASH_INDEXES`テーブル内のフィールドは次のように説明されます。
 
--   `TIDB_DATABASE` : テーブルが属するデータベースの名前。
--   `TIDB_TABLE` : テーブルの名前。
--   `TABLE_ID` : テーブルの内部 ID。TiDB クラスター内で一意です。
--   `COLUMN_NAME` : インデックスが構築される列の名前。
--   `INDEX_NAME` : インデックスの名前。
--   `COLUMN_ID` : インデックスが構築される列の ID。
--   `INDEX_ID` : インデックスの ID。
--   `INDEX_KIND` : インデックスのタイプ。
--   `ROWS_STABLE_INDEXED` : 安定レイヤーがインデックス構築を完了したTiFlashレプリカ内の行数。
--   `ROWS_STABLE_NOT_INDEXED` : 安定レイヤーがインデックス構築を完了していないTiFlashレプリカ内の行数。
--   `ROWS_DELTA_INDEXED` : Deltaレイヤーがインデックス構築を完了したTiFlashレプリカ内の行数。
--   `ROWS_DELTA_NOT_INDEXED` : Deltaレイヤーがインデックス構築を完了していないTiFlashレプリカ内の行数。
--   `ERROR_MESSAGE` : インデックス構築中に発生した回復不能なエラーの詳細。
--   `TIFLASH_INSTANCE` : インデックス構築タスクを実行するTiFlashインスタンスのアドレス。
+- `TIDB_DATABASE` : テーブルが属するデータベースの名前。
+- `TIDB_TABLE` : テーブルの名前。
+- `TABLE_ID` : テーブルの内部 ID。TiDB クラスター内で一意です。
+- `COLUMN_NAME` : インデックスが構築される列の名前。
+- `INDEX_NAME` : インデックスの名前。
+- `COLUMN_ID` : インデックスが構築される列の ID。
+- `INDEX_ID` : インデックスの ID。
+- `INDEX_KIND` : インデックスのタイプ。
+- `ROWS_STABLE_INDEXED` : 安定レイヤーがインデックス構築を完了したTiFlashレプリカ内の行数。
+- `ROWS_STABLE_NOT_INDEXED` : 安定レイヤーがインデックス構築を完了していないTiFlashレプリカ内の行数。
+- `ROWS_DELTA_INDEXED` : Deltaレイヤーがインデックス構築を完了したTiFlashレプリカ内の行数。
+- `ROWS_DELTA_NOT_INDEXED` : Deltaレイヤーがインデックス構築を完了していないTiFlashレプリカ内の行数。
+- `ERROR_MESSAGE` : インデックス構築中に発生した回復不能なエラーの詳細。
+- `TIFLASH_INSTANCE` : インデックス構築タスクを実行するTiFlashインスタンスのアドレス。

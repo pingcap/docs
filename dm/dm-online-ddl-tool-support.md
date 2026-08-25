@@ -13,8 +13,8 @@ MySQLエコシステムでは、gh-ostやpt-oscなどのツールが広く使用
 
 ## 制限 {#restrictions}
 
--   DM は gh-ost と pt-osc のみをサポートします。
--   `online-ddl`を有効にすると、増分レプリケーションに対応するチェックポイントは、オンライン DDL 実行中であってはなりません。例えば、上流のオンライン DDL 操作がbinlogの`position-A`で開始され、 `position-B`で終了する場合、増分レプリケーションの開始点は`position-A`より前、または`position-B`より後にする必要があります。それ以外の場合、エラーが発生します。詳細は[FAQ](/dm/dm-faq.md#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-online-ddl-true-is-set)を参照してください。
+- DM は gh-ost と pt-osc のみをサポートします。
+- `online-ddl`を有効にすると、増分レプリケーションに対応するチェックポイントは、オンライン DDL 実行中であってはなりません。例えば、上流のオンライン DDL 操作がbinlogの`position-A`で開始され、 `position-B`で終了する場合、増分レプリケーションの開始点は`position-A`より前、または`position-B`より後にする必要があります。それ以外の場合、エラーが発生します。詳細は[FAQ](/dm/dm-faq.md#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-online-ddl-true-is-set)を参照してください。
 
 ## パラメータを設定する {#configure-parameters}
 
@@ -23,7 +23,7 @@ MySQLエコシステムでは、gh-ostやpt-oscなどのツールが広く使用
 
 v2.0.5 以降のバージョンでは、 `task`構成ファイル内の`online-ddl`構成項目を使用する必要があります。
 
--   アップストリーム MySQL/MariaDB (同時に) が gh-ost または pt-osc ツールを使用する場合は、タスク構成ファイルで`online-ddl`から`true`設定します。
+- アップストリーム MySQL/MariaDB (同時に) が gh-ost または pt-osc ツールを使用する場合は、タスク構成ファイルで`online-ddl`から`true`設定します。
 
 ```yml
 online-ddl: true
@@ -39,13 +39,13 @@ online-ddl: true
 
 v2.0.5 より前 (v2.0.5 を除く) では、 `task`設定ファイル内の`online-ddl-scheme`設定項目を使用する必要があります。
 
--   アップストリーム MySQL/MariaDB が gh-ost ツールを使用する場合は、タスク構成ファイルで設定します。
+- アップストリーム MySQL/MariaDB が gh-ost ツールを使用する場合は、タスク構成ファイルで設定します。
 
 ```yml
 online-ddl-scheme: "gh-ost"
 ```
 
--   アップストリーム MySQL/MariaDB が pt ツールを使用する場合は、タスク構成ファイルで設定します。
+- アップストリーム MySQL/MariaDB が pt ツールを使用する場合は、タスク構成ファイルで設定します。
 
 ```yml
 online-ddl-scheme: "pt"

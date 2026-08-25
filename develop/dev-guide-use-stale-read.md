@@ -97,9 +97,9 @@ SELECT id, title, type, price FROM books AS OF TIMESTAMP '2022-04-20 15:20:00' O
 
 正確な時間を指定することに加えて、次のことも指定できます。
 
--   `AS OF TIMESTAMP NOW() - INTERVAL 10 SECOND` 10 秒前の最新データを照会します。
--   `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')` `2016-10-08 16:45:26`から`2016-10-08 16:45:29`の間の最新データを照会します。
--   `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() -INTERVAL 20 SECOND, NOW())` 20 秒以内に最新のデータを照会します。
+- `AS OF TIMESTAMP NOW() - INTERVAL 10 SECOND` 10 秒前の最新データを照会します。
+- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')` `2016-10-08 16:45:26`から`2016-10-08 16:45:29`の間の最新データを照会します。
+- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() -INTERVAL 20 SECOND, NOW())` 20 秒以内に最新のデータを照会します。
 
 指定するタイムスタンプまたは間隔は、現在の時刻より早すぎたり遅すぎたりしないようにしてください。また、 `NOW()`はデフォルトで秒精度となります。より高い精度を実現するには、パラメータを追加することができます。例えば、 `NOW(3)`ではミリ秒精度となります。詳細については、 [MySQLドキュメント](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_now)を参照してください。
 
@@ -495,12 +495,12 @@ public static class StaleReadHelper{
 
 ## 続きを読む {#read-more}
 
--   [ステイル読み取りの使用シナリオ](/stale-read.md)
--   [`AS OF TIMESTAMP`句を使用して履歴データを読み取る](/as-of-timestamp.md)
--   [`tidb_read_staleness`システム変数を使用して履歴データを読み取る](/tidb-read-staleness.md)
+- [ステイル読み取りの使用シナリオ](/stale-read.md)
+- [`AS OF TIMESTAMP`句を使用して履歴データを読み取る](/as-of-timestamp.md)
+- [`tidb_read_staleness`システム変数を使用して履歴データを読み取る](/tidb-read-staleness.md)
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

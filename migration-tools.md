@@ -15,75 +15,75 @@ TiDB は、完全なデータ移行、増分データ移行、バックアップ
 
 ## <a href="/dm/dm-overview.md">TiDB Data Migration (DM)</a> {#tidb-data-migration-dm}
 
--   **ユーザーシナリオ**: MySQL互換データベースからTiDBへのデータ移行
--   **アップストリーム**: MySQL、MariaDB、 Aurora
--   **下流**：TiDB
--   **利点**：
-    -   完全なデータ移行と増分レプリケーションをサポートする、便利で統合されたデータ移行タスク管理ツール
-    -   フィルタリングテーブルと操作をサポート
-    -   シャードのマージと移行をサポート
--   **制限事項**：データのインポート速度はTiDB Lightning [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)とほぼ同等で、TiDB Lightning [物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)よりも大幅に遅くなります。そのため、1TiB未満のデータ全体を移行する場合は、DMを使用することをお勧めします。
+- **ユーザーシナリオ**: MySQL互換データベースからTiDBへのデータ移行
+- **アップストリーム**: MySQL、MariaDB、 Aurora
+- **下流**：TiDB
+- **利点**：
+    - 完全なデータ移行と増分レプリケーションをサポートする、便利で統合されたデータ移行タスク管理ツール
+    - フィルタリングテーブルと操作をサポート
+    - シャードのマージと移行をサポート
+- **制限事項**：データのインポート速度はTiDB Lightning [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)とほぼ同等で、TiDB Lightning [物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)よりも大幅に遅くなります。そのため、1TiB未満のデータ全体を移行する場合は、DMを使用することをお勧めします。
 
 ## <a href="/tidb-lightning/tidb-lightning-overview.md">TiDB Lightning</a> {#tidb-lightning}
 
--   **ユーザーシナリオ**: TiDBへの完全なデータのインポート
--   **上流（インポートされたソースファイル）** :
-    -   Dumplingからエクスポートされたファイル
-    -   Amazon Aurora、Apache Hive、Snowflake によってエクスポートされた Parquet ファイル
-    -   CSVファイル
-    -   ローカルディスクまたは Amazon S3 からのデータ
--   **下流**：TiDB
--   **利点**：
-    -   大量のデータを迅速にインポートし、TiDB クラスタ内の特定のテーブルを迅速に初期化することをサポートします。
-    -   インポートの進行状況を保存するチェックポイントをサポートし、再起動後、`tidb-lightning`は中断したところからインポートを続行します
-    -   データフィルタリングをサポート
--   **制限事項**：
-    -   データのインポートに[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)を使用すると、インポートプロセス中に TiDB クラスターはサービスを提供できません。
-    -   TiDB サービスに影響を与えたくない場合は、 TiDB Lightning [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md)に従ってデータのインポートを実行してください。
+- **ユーザーシナリオ**: TiDBへの完全なデータのインポート
+- **上流（インポートされたソースファイル）** :
+    - Dumplingからエクスポートされたファイル
+    - Amazon Aurora、Apache Hive、Snowflake によってエクスポートされた Parquet ファイル
+    - CSVファイル
+    - ローカルディスクまたは Amazon S3 からのデータ
+- **下流**：TiDB
+- **利点**：
+    - 大量のデータを迅速にインポートし、TiDB クラスタ内の特定のテーブルを迅速に初期化することをサポートします。
+    - インポートの進行状況を保存するチェックポイントをサポートし、再起動後、`tidb-lightning`は中断したところからインポートを続行します
+    - データフィルタリングをサポート
+- **制限事項**：
+    - データのインポートに[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)を使用すると、インポートプロセス中に TiDB クラスターはサービスを提供できません。
+    - TiDB サービスに影響を与えたくない場合は、 TiDB Lightning [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md)に従ってデータのインポートを実行してください。
 
 ## <a href="/dumpling-overview.md">Dumpling</a> {#dumpling}
 
--   **ユーザーシナリオ**: MySQLまたはTiDBからの完全なデータエクスポート
--   **アップストリーム**: MySQL、TiDB
--   **下流（出力ファイル）** : SQL、CSV
--   **利点**：
-    -   データのフィルタリングを容易にするテーブルフィルタ機能をサポート
-    -   Amazon S3へのデータのエクスポートをサポート
--   **おすすめ**：
-    -   エクスポートしたデータを TiDB 以外のデータベースに復元する場合は、 Dumplingを使用することをお勧めします。
-    -   エクスポートしたデータを別の TiDB クラスターに復元する場合は、Backup & Restore (BR) を使用することをお勧めします。
+- **ユーザーシナリオ**: MySQLまたはTiDBからの完全なデータエクスポート
+- **アップストリーム**: MySQL、TiDB
+- **下流（出力ファイル）** : SQL、CSV
+- **利点**：
+    - データのフィルタリングを容易にするテーブルフィルタ機能をサポート
+    - Amazon S3へのデータのエクスポートをサポート
+- **おすすめ**：
+    - エクスポートしたデータを TiDB 以外のデータベースに復元する場合は、 Dumplingを使用することをお勧めします。
+    - エクスポートしたデータを別の TiDB クラスターに復元する場合は、Backup & Restore (BR) を使用することをお勧めします。
 
 ## <a href="/ticdc/ticdc-overview.md">TiCDC</a> {#ticdc}
 
--   **ユーザーシナリオ**：このツールは、TiKVの変更ログをプルすることで実装されます。これにより、クラスターデータを上流のTSOと整合性のある状態に復元し、他のシステムがデータ変更をサブスクライブできるようになります。
--   **上流**：TiDB
--   **ダウンストリーム**: TiDB、MySQL、Kafka、MQ、Confluent、Amazon S3、GCS、Azure Blob Storage、NFS などのストレージサービス。
--   **利点**：TiCDCオープンプロトコルを提供する
--   **制限事項**：TiCDCは、少なくとも1つの有効なインデックスを持つテーブルのみを複製します。以下のシナリオはサポートされていません。
-    -   RawKV のみを使用する TiKV クラスター。
-    -   DDL 操作`CREATE SEQUENCE`と TiDB の`SEQUENCE`関数。
+- **ユーザーシナリオ**：このツールは、TiKVの変更ログをプルすることで実装されます。これにより、クラスターデータを上流のTSOと整合性のある状態に復元し、他のシステムがデータ変更をサブスクライブできるようになります。
+- **上流**：TiDB
+- **ダウンストリーム**: TiDB、MySQL、Kafka、MQ、Confluent、Amazon S3、GCS、Azure Blob Storage、NFS などのストレージサービス。
+- **利点**：TiCDCオープンプロトコルを提供する
+- **制限事項**：TiCDCは、少なくとも1つの有効なインデックスを持つテーブルのみを複製します。以下のシナリオはサポートされていません。
+    - RawKV のみを使用する TiKV クラスター。
+    - DDL 操作`CREATE SEQUENCE`と TiDB の`SEQUENCE`関数。
 
 ## <a href="/br/backup-and-restore-overview.md">Backup & Restore (BR)</a> {#backup--restore-br}
 
--   **ユーザーシナリオ**: データのバックアップとリストアによって大量の TiDB クラスターデータを移行する
--   **上流**：TiDB
--   **下流（出力ファイル）** : SST、backup.meta ファイル、backup.lock ファイル
--   **利点**：
-    -   別のTiDBクラスタへのデータ移行に適しています
-    -   災害復旧のための外部ストレージへのデータバックアップをサポート
--   **制限事項**：
-    -   BR がTiCDC の上流クラスターにデータを復元する場合、復元されたデータは TiCDC によって下流に複製できません。
-    -   BR は、 `mysql.tidb`テーブルで同じ`new_collation_enabled`値を持つクラスター間の操作のみをサポートします。
+- **ユーザーシナリオ**: データのバックアップとリストアによって大量の TiDB クラスターデータを移行する
+- **上流**：TiDB
+- **下流（出力ファイル）** : SST、backup.meta ファイル、backup.lock ファイル
+- **利点**：
+    - 別のTiDBクラスタへのデータ移行に適しています
+    - 災害復旧のための外部ストレージへのデータバックアップをサポート
+- **制限事項**：
+    - BR がTiCDC の上流クラスターにデータを復元する場合、復元されたデータは TiCDC によって下流に複製できません。
+    - BR は、 `mysql.tidb`テーブルで同じ`new_collation_enabled`値を持つクラスター間の操作のみをサポートします。
 
 ## <a href="/sync-diff-inspector/sync-diff-inspector-overview.md">sync-diff-inspector</a> {#sync-diff-inspector}
 
--   **ユーザーシナリオ**: MySQLプロトコルを使用してデータベースに保存されたデータを比較する
--   **アップストリーム**: TiDB、MySQL
--   **下流**: TiDB、MySQL
--   **利点**: 少量のデータが不整合なシナリオでデータを修復するために使用できます
--   **制限事項**：
-    -   MySQL と TiDB 間のデータ移行ではオンライン チェックはサポートされていません。
-    -   JSON、BIT、BINARY、BLOB などのタイプのデータはサポートされていません。
+- **ユーザーシナリオ**: MySQLプロトコルを使用してデータベースに保存されたデータを比較する
+- **アップストリーム**: TiDB、MySQL
+- **下流**: TiDB、MySQL
+- **利点**: 少量のデータが不整合なシナリオでデータを修復するために使用できます
+- **制限事項**：
+    - MySQL と TiDB 間のデータ移行ではオンライン チェックはサポートされていません。
+    - JSON、BIT、BINARY、BLOB などのタイプのデータはサポートされていません。
 
 ## TiUPを使用してツールをインストールする {#install-tools-using-tiup}
 
@@ -162,5 +162,5 @@ tiup update --self && tiup update dm
 
 ## 参照 {#see-also}
 
--   [TiUPをオフラインでデプロイ](/production-deployment-using-tiup.md#deploy-tiup-offline)
--   [バイナリでツールをダウンロードしてインストールする](/download-ecosystem-tools.md)
+- [TiUPをオフラインでデプロイ](/production-deployment-using-tiup.md#deploy-tiup-offline)
+- [バイナリでツールをダウンロードしてインストールする](/download-ecosystem-tools.md)

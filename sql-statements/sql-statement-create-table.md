@@ -177,8 +177,8 @@ NextValueForSequence ::=
 
 > **Note:**
 >
-> -   `split-table`設定オプションはデフォルトで有効になっています。このオプションを有効にすると、新しく作成されるテーブルごとに個別のリージョンが作成されます。詳細は、 [TiDB設定ファイル](/tidb-configuration-file.md)を参照してください。
-> -   `AFFINITY`を使用する前に、アフィニティが有効になっているテーブルのパーティショニング スキームの変更 (パーティションの追加、削除、再編成、または交換など) はサポートされておらず、一時テーブルまたはビューで`AFFINITY`を構成することもサポートされていないことに注意してください。
+> - `split-table`設定オプションはデフォルトで有効になっています。このオプションを有効にすると、新しく作成されるテーブルごとに個別のリージョンが作成されます。詳細は、 [TiDB設定ファイル](/tidb-configuration-file.md)を参照してください。
+> - `AFFINITY`を使用する前に、アフィニティが有効になっているテーブルのパーティショニング スキームの変更 (パーティションの追加、削除、再編成、または交換など) はサポートされておらず、一時テーブルまたはビューで`AFFINITY`を構成することもサポートされていないことに注意してください。
 
 </CustomContent>
 
@@ -186,8 +186,8 @@ NextValueForSequence ::=
 
 > **Note:**
 >
-> -   TiDBは、新しく作成されたテーブルごとに個別のリージョンを作成します。
-> -   `AFFINITY`を使用する前に、アフィニティが有効になっているテーブルのパーティショニング スキームの変更 (パーティションの追加、削除、再編成、または交換など) はサポートされておらず、一時テーブルまたはビューで`AFFINITY`を構成することもサポートされていないことに注意してください。
+> - TiDBは、新しく作成されたテーブルごとに個別のリージョンを作成します。
+> - `AFFINITY`を使用する前に、アフィニティが有効になっているテーブルのパーティショニング スキームの変更 (パーティションの追加、削除、再編成、または交換など) はサポートされておらず、一時テーブルまたはビューで`AFFINITY`を構成することもサポートされていないことに注意してください。
 
 </CustomContent>
 
@@ -271,38 +271,38 @@ mysql> DESC t1;
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
--   空間型を除くすべてのデータ型がサポートされています。
+- 空間型を除くすべてのデータ型がサポートされています。
 
--   TiDB は、MySQL との互換性のために、 `HASH` 、 `BTREE` 、 `RTREE`などのインデックス タイプを構文で受け入れますが、それらを無視します。
+- TiDB は、MySQL との互換性のために、 `HASH` 、 `BTREE` 、 `RTREE`などのインデックス タイプを構文で受け入れますが、それらを無視します。
 
--   TiDB Self-Managed およびTiDB Cloud Dedicatedは`FULLTEXT`構文の解析をサポートしていますが、 `FULLTEXT`インデックスの使用はサポートしていません。
+- TiDB Self-Managed およびTiDB Cloud Dedicatedは`FULLTEXT`構文の解析をサポートしていますが、 `FULLTEXT`インデックスの使用はサポートしていません。
 
     > **Note:**
     >
     > 現在、特定の AWS リージョンのTiDB Cloud Starterインスタンスのみが[`FULLTEXT`構文と索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)をサポートしています。
 
--   `GLOBAL`インデックスオプションを使用して`PRIMARY KEY`または`UNIQUE INDEX`を[グローバルインデックス](/global-indexes.md)として設定することは、[パーティション化されたテーブル](/partitioned-table.md)に対するTiDBの拡張機能であり、MySQLとは互換性がありません。
+- `GLOBAL`インデックスオプションを使用して`PRIMARY KEY`または`UNIQUE INDEX`を[グローバルインデックス](/global-indexes.md)として設定することは、[パーティション化されたテーブル](/partitioned-table.md)に対するTiDBの拡張機能であり、MySQLとは互換性がありません。
 
 <CustomContent platform="tidb">
 
--   互換性のために、 `index_col_name`属性は、デフォルトで最大長3072バイトの長さオプションをサポートしています。長さの制限は`max-index-length`設定オプションで変更できます。詳細は、 [TiDB設定ファイル](/tidb-configuration-file.md#max-index-length)を参照してください。
+- 互換性のために、 `index_col_name`属性は、デフォルトで最大長3072バイトの長さオプションをサポートしています。長さの制限は`max-index-length`設定オプションで変更できます。詳細は、 [TiDB設定ファイル](/tidb-configuration-file.md#max-index-length)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   互換性のために、 `index_col_name`属性は、最大長制限3072バイトの長さオプションをサポートしています。
+- 互換性のために、 `index_col_name`属性は、最大長制限3072バイトの長さオプションをサポートしています。
 
 </CustomContent>
 
--   `[ASC | DESC]`内の`index_col_name`は現在解析されますが無視されます (MySQL 5.7互換の動作)。
--   `COMMENT`属性は`WITH PARSER`オプションをサポートしていません。
--   TiDBは、デフォルトでは1つのテーブルで1017列、最大4096列をサポートします。InnoDBにおける対応する列数の制限は1017列、MySQLにおけるハードリミットは4096列です。詳細は[TiDBの制限事項](/tidb-limitations.md)を参照してください。
--   TiDB は`HASH` 、 `RANGE` 、 `LIST` 、および`KEY`サポートしています[パーティショニングの種類](/partitioned-table.md#partitioning-types)されていないパーティションタイプの場合、TiDB は`Warning: Unsupported partition type %s, treat as normal table`を返します。ここで、 `%s`はサポートされていない特定のパーティションタイプです。
+- `[ASC | DESC]`内の`index_col_name`は現在解析されますが無視されます (MySQL 5.7互換の動作)。
+- `COMMENT`属性は`WITH PARSER`オプションをサポートしていません。
+- TiDBは、デフォルトでは1つのテーブルで1017列、最大4096列をサポートします。InnoDBにおける対応する列数の制限は1017列、MySQLにおけるハードリミットは4096列です。詳細は[TiDBの制限事項](/tidb-limitations.md)を参照してください。
+- TiDB は`HASH` 、 `RANGE` 、 `LIST` 、および`KEY`サポートしています[パーティショニングの種類](/partitioned-table.md#partitioning-types)されていないパーティションタイプの場合、TiDB は`Warning: Unsupported partition type %s, treat as normal table`を返します。ここで、 `%s`はサポートされていない特定のパーティションタイプです。
 
 ## 参照 {#see-also}
 
--   [データ型](/data-type-overview.md)
--   [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
--   [CREATE TABLE LIKE](/sql-statements/sql-statement-create-table-like.md)
--   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+- [データ型](/data-type-overview.md)
+- [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
+- [CREATE TABLE LIKE](/sql-statements/sql-statement-create-table-like.md)
+- [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)

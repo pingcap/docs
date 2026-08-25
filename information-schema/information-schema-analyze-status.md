@@ -59,22 +59,22 @@ SELECT * FROM information_schema.analyze_status;
 
 `ANALYZE_STATUS`テーブルのフィールドは、次のように説明されます。
 
--   `TABLE_SCHEMA` : テーブルが属するデータベースの名前。
--   `TABLE_NAME` : テーブルの名前。
--   `PARTITION_NAME` :パーティションテーブルの名前。
--   `JOB_INFO` : `ANALYZE`タスクの情報。インデックスが分析される場合、この情報にはインデックス名が含まれます。 `tidb_analyze_version = 2`の場合、この情報にはサンプルレートなどの構成項目が含まれます。
--   `PROCESSED_ROWS` : 処理された行数。
--   `START_TIME` : `ANALYZE`タスクの開始時刻。
--   `END_TIME` : `ANALYZE`タスクの終了時刻。
--   `STATE` : `ANALYZE`タスクの実行ステータス。値は`pending` 、 `running` 、 `finished`または`failed` 。
--   `FAIL_REASON` : タスクが失敗した理由。実行が成功した場合は、値は`NULL`になります。
--   `INSTANCE` : タスクを実行する TiDB インスタンス。
--   `PROCESS_ID` : タスクを実行するプロセスID。
--   `REMAINING_SECONDS` : タスクが完了するまでの推定残り時間（秒）。
--   `PROGRESS` : タスクの進捗状況。
--   `ESTIMATED_TOTAL_ROWS` : タスクによって分析する必要のある行の総数。
+- `TABLE_SCHEMA` : テーブルが属するデータベースの名前。
+- `TABLE_NAME` : テーブルの名前。
+- `PARTITION_NAME` :パーティションテーブルの名前。
+- `JOB_INFO` : `ANALYZE`タスクの情報。インデックスが分析される場合、この情報にはインデックス名が含まれます。 `tidb_analyze_version = 2`の場合、この情報にはサンプルレートなどの構成項目が含まれます。
+- `PROCESSED_ROWS` : 処理された行数。
+- `START_TIME` : `ANALYZE`タスクの開始時刻。
+- `END_TIME` : `ANALYZE`タスクの終了時刻。
+- `STATE` : `ANALYZE`タスクの実行ステータス。値は`pending` 、 `running` 、 `finished`または`failed` 。
+- `FAIL_REASON` : タスクが失敗した理由。実行が成功した場合は、値は`NULL`になります。
+- `INSTANCE` : タスクを実行する TiDB インスタンス。
+- `PROCESS_ID` : タスクを実行するプロセスID。
+- `REMAINING_SECONDS` : タスクが完了するまでの推定残り時間（秒）。
+- `PROGRESS` : タスクの進捗状況。
+- `ESTIMATED_TOTAL_ROWS` : タスクによって分析する必要のある行の総数。
 
 ## 関連項目 {#see-also}
 
--   [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
--   [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)
+- [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
+- [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)

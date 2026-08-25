@@ -9,9 +9,9 @@ summary: このドキュメントでは、データ移行構成ファイルの�
 
 ## DMプロセス構成ファイル {#dm-process-configuration-files}
 
--   `dm-master.toml` : DMマスタープロセスの実行に関する設定ファイル。DMマスターのトポロジ情報とログが含まれます。詳細については、 [DMマスターコンフィグレーションファイル](/dm/dm-master-configuration-file.md)を参照してください。
--   `dm-worker.toml` : DMワーカープロセスの実行に関する設定ファイル。DMワーカーのトポロジ情報とログが含まれます。詳細は[DMワーカーコンフィグレーションファイル](/dm/dm-worker-configuration-file.md)を参照してください。
--   `source.yaml` : MySQLやMariaDBなどの上流データベースの設定。詳細は[上流データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
+- `dm-master.toml` : DMマスタープロセスの実行に関する設定ファイル。DMマスターのトポロジ情報とログが含まれます。詳細については、 [DMマスターコンフィグレーションファイル](/dm/dm-master-configuration-file.md)を参照してください。
+- `dm-worker.toml` : DMワーカープロセスの実行に関する設定ファイル。DMワーカーのトポロジ情報とログが含まれます。詳細は[DMワーカーコンフィグレーションファイル](/dm/dm-worker-configuration-file.md)を参照してください。
+- `source.yaml` : MySQLやMariaDBなどの上流データベースの設定。詳細は[上流データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
 ## DM移行タスクの構成 {#dm-migration-task-configuration}
 
@@ -19,9 +19,9 @@ summary: このドキュメントでは、データ移行構成ファイルの�
 
 データ移行タスクを作成するには、次の手順に従います。
 
-1.  [dmctl を使用してデータソース構成を DM クラスターにロードします](/dm/dm-manage-source.md#operate-data-source) 。
-2.  [タスクコンフィグレーションガイド](/dm/dm-task-configuration-guide.md)の説明を参考に設定ファイル`your_task.yaml`を作成します。
-3.  [dmctlを使用してデータ移行タスクを作成する](/dm/dm-create-task.md) 。
+1. [dmctl を使用してデータソース構成を DM クラスターにロードします](/dm/dm-manage-source.md#operate-data-source) 。
+2. [タスクコンフィグレーションガイド](/dm/dm-task-configuration-guide.md)の説明を参考に設定ファイル`your_task.yaml`を作成します。
+3. [dmctlを使用してデータ移行タスクを作成する](/dm/dm-create-task.md) 。
 
 ### 重要な概念 {#important-concepts}
 

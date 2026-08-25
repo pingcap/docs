@@ -80,8 +80,8 @@ summary: TiDB Cloudリソースの監視方法を学びましょう。
 
 TiDB Cloudでは、次のページから、 <CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>クラスターの一般的に使用されるメトリクスを表示できます。
 
--   **Overview**ページ
--   **Metrics**ページ
+- **Overview**ページ
+- **Metrics**ページ
 
 ### 概要ページ {#overview-page}
 
@@ -89,13 +89,13 @@ TiDB Cloudでは、次のページから、 <CustomContent plan="starter">TiDB C
 
 概要ページで指標を表示するには、以下の手順に従ってください。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象リソースの名前をクリックすると、その概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象リソースの名前をクリックすると、その概要ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  **Core Metrics**セクションを確認してください。
+2. **Core Metrics**セクションを確認してください。
 
 ### 指標ページ {#metrics-page}
 
@@ -103,12 +103,12 @@ TiDB Cloudでは、次のページから、 <CustomContent plan="starter">TiDB C
 
 **Metrics**ページで指標を表示するには、以下の手順に従ってください。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象リソースの名前をクリックすると、その概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象リソースの名前をクリックすると、その概要ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  左側のナビゲーションペインで、 **Monitoring** &gt; **Metrics**をクリックします。
+2. 左側のナビゲーションペインで、 **Monitoring** &gt; **Metrics**をクリックします。
 
 詳細については、 [TiDB Cloud の組み込みメトリクス](/tidb-cloud/built-in-monitoring.md)を参照してください。

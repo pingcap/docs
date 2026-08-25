@@ -35,8 +35,8 @@ SQL ステートメントまたは SQL ダイジェストに従ってバイン�
 
 SQL ダイジェストに従ってバインディングを削除する場合は、対応する SQL ダイジェストを指定する必要があります。
 
--   プランダイジェストを指定するには、文字列リテラルまたは文字列型のユーザー変数のいずれかを使用できます。
--   複数の文字列値を指定し、各文字列に複数のダイジェストを含めることができます。文字列またはダイジェストはカンマで区切る必要があることに注意してください。
+- プランダイジェストを指定するには、文字列リテラルまたは文字列型のユーザー変数のいずれかを使用できます。
+- 複数の文字列値を指定し、各文字列に複数のダイジェストを含めることができます。文字列またはダイジェストはカンマで区切る必要があることに注意してください。
 
 次の例は、SQL ステートメントに従ってバインディングを削除する方法を示しています。
 
@@ -208,8 +208,8 @@ Empty set (0.002 sec)
 
 ## 参照 {#see-also}
 
--   [CREATE [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-create-binding.md)
--   [SHOW [GLOBAL|SESSION] BINDINGS](/sql-statements/sql-statement-show-bindings.md)
--   [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
--   [オプティマイザヒント](/optimizer-hints.md)
--   [SQLプラン管理](/sql-plan-management.md)
+- [CREATE [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-create-binding.md)
+- [SHOW [GLOBAL|SESSION] BINDINGS](/sql-statements/sql-statement-show-bindings.md)
+- [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
+- [オプティマイザヒント](/optimizer-hints.md)
+- [SQLプラン管理](/sql-plan-management.md)

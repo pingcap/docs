@@ -7,9 +7,9 @@ summary: TiDB Cloud CLI を使用して、TiDB Cloud StarterおよびEssential�
 
 TiDB Cloud は、ターミナルから数行のコマンドでTiDB Cloudとやり取りできるコマンドラインインターフェイス (CLI) [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli)を提供しています。たとえば、 `ticloud`を使用して、次の操作を簡単に実行できます。
 
--   TiDB Cloud StarterまたはEssentialインスタンスの作成、削除、一覧表示を行います。
--   TiDB Cloud StarterまたはEssentialインスタンスにデータをインポートします。
--   TiDB Cloud StarterまたはEssentialインスタンスからデータをエクスポートします。
+- TiDB Cloud StarterまたはEssentialインスタンスの作成、削除、一覧表示を行います。
+- TiDB Cloud StarterまたはEssentialインスタンスにデータをインポートします。
+- TiDB Cloud StarterまたはEssentialインスタンスからデータをエクスポートします。
 
 > **Note:**
 >
@@ -17,7 +17,7 @@ TiDB Cloud は、ターミナルから数行のコマンドでTiDB Cloudとや�
 
 ## 始める前に {#before-you-begin}
 
--   TiDB Cloudアカウントを持っていること。お持ちでない場合は、[無料トライアルに登録する](https://tidbcloud.com/free-trial)。
+- TiDB Cloudアカウントを持っていること。お持ちでない場合は、[無料トライアルに登録する](https://tidbcloud.com/free-trial)。
 
 ## インストール {#installation}
 
@@ -26,41 +26,41 @@ TiDB Cloud は、ターミナルから数行のコマンドでTiDB Cloudとや�
 
 macOS または Linux の場合、 `ticloud`次のいずれかの方法を使用してインストールできます。
 
--   スクリプト経由でインストールする（推奨）
+- スクリプト経由でインストールする（推奨）
 
     ```shell
     curl https://raw.githubusercontent.com/tidbcloud/tidbcloud-cli/main/install.sh | sh
     ```
 
--   [TiUP](https://tiup.io/)経由でインストール
+- [TiUP](https://tiup.io/)経由でインストール
 
     ```shell
     tiup install cloud
     ```
 
--   手動でインストール
+- 手動でインストール
 
     [リリース](https://github.com/tidbcloud/tidbcloud-cli/releases/latest)ページからコンパイル済みのバイナリをダウンロードし、インストール先の任意の場所にコピーしてください。
 
--   GitHub Actionsにインストールする
+- GitHub Actionsにインストールする
 
     GitHub Actions で`ticloud`を設定するには、 [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli)を使用します。
 
 MySQLコマンドラインクライアントがインストールされていない場合は、インストールしてください。パッケージマネージャーを使用してインストールできます。
 
--   Debianベースのディストリビューション：
+- Debianベースのディストリビューション：
 
     ```shell
     sudo apt-get install mysql-client
     ```
 
--   RPMベースのディストリビューション：
+- RPMベースのディストリビューション：
 
     ```shell
     sudo yum install mysql
     ```
 
--   macOS:
+- macOS:
 
     ```shell
     brew install mysql-client
@@ -72,11 +72,11 @@ MySQLコマンドラインクライアントがインストールされていな
 
 Windowsの場合、 `ticloud`以下のいずれかの方法でインストールできます。
 
--   手動でインストール
+- 手動でインストール
 
     [リリース](https://github.com/tidbcloud/tidbcloud-cli/releases/latest)ページからコンパイル済みのバイナリをダウンロードし、インストール先の場所にコピーしてください。
 
--   GitHub Actionsにインストールする
+- GitHub Actionsにインストールする
 
     GitHub Actions で`ticloud`を設定するには、 [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli)を使用します。
 
@@ -97,7 +97,7 @@ MySQL コマンドライン クライアントがインストールされてい�
 
 TiDB Cloud CLI を使用して TiDB Cloud Starterインスタンスを作成する前に、ユーザープロファイルを作成するか、 TiDB Cloudにログインする必要があります。
 
--   [TiDB Cloud APIキー](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)を使用してユーザープロファイルを作成します。
+- [TiDB Cloud APIキー](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)を使用してユーザープロファイルを作成します。
 
     ```shell
     ticloud config create
@@ -107,7 +107,7 @@ TiDB Cloud CLI を使用して TiDB Cloud Starterインスタンスを作成す�
     >
     > プロファイル名には`.`を含めて**はいけません**。
 
--   TiDB Cloudに認証情報を使用してログインしてください。
+- TiDB Cloudに認証情報を使用してログインしてください。
 
     ```shell
     ticloud auth login

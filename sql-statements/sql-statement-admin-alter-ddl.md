@@ -15,8 +15,8 @@ summary: TiDBデータベースにおけるADMIN ALTER DDL JOBS`の使用方法�
 ADMIN ALTER DDL JOBS 101 THREAD = 8;
 ```
 
--   `101` : DDL ジョブの ID を示します。この ID は、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)を実行することで取得できます。
--   `THREAD` : DDL ジョブの同時実行数を示します。システム変数[`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)を使用して初期値を構成できます。
+- `101` : DDL ジョブの ID を示します。この ID は、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)を実行することで取得できます。
+- `THREAD` : DDL ジョブの同時実行数を示します。システム変数[`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)を使用して初期値を構成できます。
 
 `ADMIN ALTER DDL JOBS`ステートメントでサポートされている DDL ジョブ タイプには、 `ADD INDEX` 、 `MODIFY COLUMN` 、および`REORGANIZE PARTITION`が含まれます。その他の DDL ジョブ タイプの場合、 `ADMIN ALTER DDL JOBS`を実行すると`unsupported DDL operation`エラーが返されます。
 
@@ -24,11 +24,11 @@ ADMIN ALTER DDL JOBS 101 THREAD = 8;
 
 以下は、さまざまなDDLジョブでサポートされているパラメータと、それに対応するシステム変数です。
 
--   `ADD INDEX` :
+- `ADD INDEX` :
 
-    -   `THREAD` : DDL ジョブの同時実行数。初期値は`tidb_ddl_reorg_worker_cnt`で設定されます。
-    -   `BATCH_SIZE` : バッチサイズ。初期値は[`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)で設定されます。
-    -   `MAX_WRITE_SPEED` : 各 TiKV にインデックス レコードをインポートするための最大帯域幅制限。初期値は[`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850)によって設定されます。
+    - `THREAD` : DDL ジョブの同時実行数。初期値は`tidb_ddl_reorg_worker_cnt`で設定されます。
+    - `BATCH_SIZE` : バッチサイズ。初期値は[`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)で設定されます。
+    - `MAX_WRITE_SPEED` : 各 TiKV にインデックス レコードをインポートするための最大帯域幅制限。初期値は[`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850)によって設定されます。
 
     TiDB バージョン v8.5.5 より前のバージョンでは、上記のパラメータは[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が無効になった後に送信され実行されている`ADD INDEX`ジョブに対してのみ機能することに注意してください。
 
@@ -40,13 +40,13 @@ ADMIN ALTER DDL JOBS 101 THREAD = 8;
 
 </CustomContent>
 
--   `MODIFY COLUMN` :
-    -   `THREAD` : DDL ジョブの同時実行数。初期値は`tidb_ddl_reorg_worker_cnt`で設定されます。
-    -   `BATCH_SIZE` : バッチサイズ。初期値は`tidb_ddl_reorg_batch_size`で設定されます。
+- `MODIFY COLUMN` :
+    - `THREAD` : DDL ジョブの同時実行数。初期値は`tidb_ddl_reorg_worker_cnt`で設定されます。
+    - `BATCH_SIZE` : バッチサイズ。初期値は`tidb_ddl_reorg_batch_size`で設定されます。
 
--   `REORGANIZE PARTITION` :
-    -   `THREAD` : DDL ジョブの同時実行数。初期値は`tidb_ddl_reorg_worker_cnt`で設定されます。
-    -   `BATCH_SIZE` : バッチサイズ。初期値は`tidb_ddl_reorg_batch_size`で設定されます。
+- `REORGANIZE PARTITION` :
+    - `THREAD` : DDL ジョブの同時実行数。初期値は`tidb_ddl_reorg_worker_cnt`で設定されます。
+    - `BATCH_SIZE` : バッチサイズ。初期値は`tidb_ddl_reorg_batch_size`で設定されます。
 
 前述のパラメータの値の範囲は、対応するシステム変数の値の範囲と一致しています。
 
@@ -95,7 +95,7 @@ AlterJobOption ::=
 
 ## 参照 {#see-also}
 
--   [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
--   [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
--   [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)
--   [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)
+- [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
+- [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
+- [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)
+- [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)

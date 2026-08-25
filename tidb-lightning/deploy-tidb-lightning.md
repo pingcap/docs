@@ -7,12 +7,12 @@ summary: TiDB Lightningをデプロイ、大量の新しいデータを迅速に
 
 このドキュメントでは、TiDB Lightningを使用してデータをインポートするためのハードウェア要件と、手動でのデプロイ方法について説明します。ハードウェアリソースの要件は、インポートモードによって異なります。詳細については、以下のドキュメントを参照してください。
 
--   [物理インポートモードの要件と制限](/tidb-lightning/tidb-lightning-physical-import-mode.md#requirements-and-restrictions)
--   [論理インポートモードの要件と制限](/tidb-lightning/tidb-lightning-logical-import-mode.md)
+- [物理インポートモードの要件と制限](/tidb-lightning/tidb-lightning-physical-import-mode.md#requirements-and-restrictions)
+- [論理インポートモードの要件と制限](/tidb-lightning/tidb-lightning-logical-import-mode.md)
 
 ## TiUPを使用したオンライン展開 (推奨) {#online-deployment-using-tiup-recommended}
 
-1.  次のコマンドを使用してTiUPをインストールします。
+1. 次のコマンドを使用してTiUPをインストールします。
 
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
@@ -20,7 +20,7 @@ summary: TiDB Lightningをデプロイ、大量の新しいデータを迅速に
 
     このコマンドは、 TiUP を環境変数`PATH`に自動的に追加します。 TiUP を使用するには、新しいターミナルセッションを開始するか、 `source ~/.bashrc`を実行する必要があります。（環境によっては`source ~/.profile`を実行する必要がある場合があります。具体的なコマンドについては、 TiUPの出力を確認してください。）
 
-2.  TiUPを使用してTiDB Lightningをインストールします。
+2. TiUPを使用してTiDB Lightningをインストールします。
 
     ```shell
     tiup install tidb-lightning

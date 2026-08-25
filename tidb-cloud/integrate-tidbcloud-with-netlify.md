@@ -17,15 +17,15 @@ summary: TiDB CloudクラスターをNetlifyプロジェクトに接続する方
 
 NetlifyアカウントとCLIをお持ちであることが前提となります。お持ちでない場合は、以下のリンクを参照して作成してください。
 
--   [Netlifyアカウントに登録する](https://app.netlify.com/signup)。
--   [Netlify CLI を入手](https://docs.netlify.com/cli/get-started/)。
+- [Netlifyアカウントに登録する](https://app.netlify.com/signup)。
+- [Netlify CLI を入手](https://docs.netlify.com/cli/get-started/)。
 
 ### TiDB CloudアカウントとTiDB Cloudリソース {#a-tidb-cloud-account-and-a-tidb-cloud-resource}
 
 アカウントとTiDB Cloudリソースをお持ちであることが前提となります。お持ちでない場合は、以下の手順に従って作成してください。
 
--   [TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを作成します](/tidb-cloud/create-tidb-cluster-serverless.md)
--   [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
+- [TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを作成します](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
 
 TiDB Cloudのリソース1つで、複数のNetlifyサイトに接続できます。
 
@@ -41,9 +41,9 @@ TiDB Cloudは、すぐに開発を始められるように、TypeScriptとNext.j
 
 ### サンプルプロジェクトをフォークして、自分のスペースにクローンしてください。 {#fork-the-example-project-and-clone-it-to-your-own-space}
 
-1.  [Next.jsとPrismaを使用したフルスタックの例](https://github.com/tidbcloud/nextjs-prisma-example)リポジトリを自分のGitHubリポジトリにフォークします。
+1. [Next.jsとPrismaを使用したフルスタックの例](https://github.com/tidbcloud/nextjs-prisma-example)リポジトリを自分のGitHubリポジトリにフォークします。
 
-2.  フォークしたリポジトリを自分のスペースにクローンしてください。
+2. フォークしたリポジトリを自分のスペースにクローンしてください。
 
     ```shell
     git clone https://github.com/${your_username}/nextjs-prisma-example.git
@@ -63,13 +63,13 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
 >
 > Cloud CLI をインストールしていない場合は、次の手順を実行する前に、 [TiDB Cloud CLI クイックスタート](/tidb-cloud/get-started-with-cli.md)を参照して簡単にインストールしてください。
 
-1.  TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの接続文字列を対話モードで取得します。
+1. TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの接続文字列を対話モードで取得します。
 
     ```shell
     ticloud cluster connect-info
     ```
 
-2.  プロンプトに従って、 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンス、クライアント、およびオペレーティングシステムを選択してください。なお、このドキュメントで使用されているクライアントは`Prisma`です。
+2. プロンプトに従って、 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンス、クライアント、およびオペレーティングシステムを選択してください。なお、このドキュメントで使用されているクライアントは`Prisma`です。
 
     ```
     Choose the cluster
@@ -93,20 +93,20 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
     >
     > 後で接続文字列を使用する際は、以下の点に注意してください。
     >
-    > -   接続文字列内のパラメータを実際の値に置き換えてください。
-    > -   このドキュメントのサンプルアプリでは新しいデータベースが必要なので、 `<Database>`固有の新しい名前に置き換える必要があります。
+    > - 接続文字列内のパラメータを実際の値に置き換えてください。
+    > - このドキュメントのサンプルアプリでは新しいデータベースが必要なので、 `<Database>`固有の新しい名前に置き換える必要があります。
 
 </div>
 <div label="TiDB Cloud console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)では、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットリソースの名前をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。表示されたダイアログで、接続文字列から以下の接続パラメータを取得できます。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)では、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットリソースの名前をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。表示されたダイアログで、接続文字列から以下の接続パラメータを取得できます。
 
-    -   `${host}`
-    -   `${port}`
-    -   `${user}`
-    -   `${password}`
+    - `${host}`
+    - `${port}`
+    - `${user}`
+    - `${password}`
 
-2.  以下の接続文字列に接続パラメータを入力してください。
+2. 以下の接続文字列に接続パラメータを入力してください。
 
     ```shell
     mysql://<User>:<Password>@<Host>:<Port>/<Database>?sslaccept=strict
@@ -116,21 +116,21 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
     >
     > 後で接続文字列を使用する際は、以下の点に注意してください。
     >
-    > -   接続文字列内のパラメータを実際の値に置き換えてください。
-    > -   このドキュメントのサンプルアプリでは新しいデータベースが必要なので、 `<Database>`固有の新しい名前に置き換える必要があります。
+    > - 接続文字列内のパラメータを実際の値に置き換えてください。
+    > - このドキュメントのサンプルアプリでは新しいデータベースが必要なので、 `<Database>`固有の新しい名前に置き換える必要があります。
 
 </div>
 </SimpleTab>
 
 ## ステップ2. サンプルアプリをNetlifyにデプロイ {#step-2-deploy-the-example-app-to-netlify}
 
-1.  Netlify CLIで、Netlifyアカウントを認証し、アクセストークンを取得します。
+1. Netlify CLIで、Netlifyアカウントを認証し、アクセストークンを取得します。
 
     ```shell
     netlify login
     ```
 
-2.  自動セットアップを開始します。この手順では、継続的デプロイのためにリポジトリを接続するため、Netlify CLI がリポジトリ上にデプロイキーとウェブフックを作成するためのアクセス権が必要です。
+2. 自動セットアップを開始します。この手順では、継続的デプロイのためにリポジトリを接続するため、Netlify CLI がリポジトリ上にデプロイキーとウェブフックを作成するためのアクセス権が必要です。
 
     ```shell
     netlify init
@@ -177,7 +177,7 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
     netlify open   Open the Netlify admin URL of your site
     ```
 
-3.  環境変数を設定します。自分のスペースと Netlify スペースからTiDB Cloudに接続するには、 [ステップ1](#step-1-get-the-example-project-and-the-connection-string)で取得した接続文字列として`DATABASE_URL`を設定する必要があります。
+3. 環境変数を設定します。自分のスペースと Netlify スペースからTiDB Cloudに接続するには、 [ステップ1](#step-1-get-the-example-project-and-the-connection-string)で取得した接続文字列として`DATABASE_URL`を設定する必要があります。
 
     ```shell
     # set the environment variable for your own space
@@ -197,7 +197,7 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
     netlify env:list
     ```
 
-4.  アプリをローカルでビルドし、スキーマをTiDB Cloudリソースに移行します。
+4. アプリをローカルでビルドし、スキーマをTiDB Cloudリソースに移行します。
 
     > **Tip:**
     >
@@ -208,7 +208,7 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
     npm run netlify-build
     ```
 
-5.  アプリケーションをローカル環境で実行してください。ローカル開発サーバーを起動して、サイトをプレビューできます。
+5. アプリケーションをローカル環境で実行してください。ローカル開発サーバーを起動して、サイトをプレビューできます。
 
     ```shell
     netlify dev
@@ -216,7 +216,7 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
 
     次に、ブラウザで`http://localhost:3000/`にアクセスして、そのUIを探索してください。
 
-6.  アプリを Netlify にデプロイ。ローカルプレビューで問題がなければ、次のコマンドを使用してサイトを Netlify にデプロイできます。 `--trigger`ローカルファイルをアップロードせずにデプロイすることを意味します。ローカルで変更を加えた場合は、GitHub リポジトリにコミットされていることを確認してください。
+6. アプリを Netlify にデプロイ。ローカルプレビューで問題がなければ、次のコマンドを使用してサイトを Netlify にデプロイできます。 `--trigger`ローカルファイルをアップロードせずにデプロイすることを意味します。ローカルで変更を加えた場合は、GitHub リポジトリにコミットされていることを確認してください。
 
     ```shell
     netlify deploy --prod --trigger
@@ -230,9 +230,9 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
 
 エッジ機能を使用するには、以下の手順に従ってください。
 
-1.  プロジェクトのルートディレクトリに`netlify/edge-functions`という名前のディレクトリを作成します。
+1. プロジェクトのルートディレクトリに`netlify/edge-functions`という名前のディレクトリを作成します。
 
-2.  ディレクトリ内に`hello.ts`という名前のファイルを作成し、以下のコードを追加してください。
+2. ディレクトリ内に`hello.ts`という名前のファイルを作成し、以下のコードを追加してください。
 
     ```typescript
     import { connect } from 'https://esm.sh/@tidbcloud/serverless'
@@ -246,13 +246,13 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
     export const config = { path: "/api/hello" };
     ```
 
-3.  `DATABASE_URL`環境変数を設定してください。接続情報は[TiDB Cloudコンソール](https://tidbcloud.com/)から取得できます。 .
+3. `DATABASE_URL`環境変数を設定してください。接続情報は[TiDB Cloudコンソール](https://tidbcloud.com/)から取得できます。 .
 
     ```shell
     netlify env:set DATABASE_URL 'mysql://<username>:<password>@<host>/<database>'
     ```
 
-4.  Netlifyにエッジ機能をデプロイ。
+4. Netlifyにエッジ機能をデプロイ。
 
     ```shell
     netlify deploy --prod --trigger

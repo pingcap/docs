@@ -9,8 +9,8 @@ TiDB Cloud API v1beta2は、 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tie
 
 現在、 TiDB Cloud Premium のリソースを管理するには、以下の v1beta2 API を使用できます。
 
--   [TiDB Cloud Premium API](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium) ： TiDB Cloud Premiumインスタンス、バックアップ、リージョンを管理します。このAPIには以下のリソースが含まれています。
+- [TiDB Cloud Premium API](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium) ： TiDB Cloud Premiumインスタンス、バックアップ、リージョンを管理します。このAPIには以下のリソースが含まれています。
 
-    -   **TiDB Cloud Premiumインスタンス**：パスワード、CA証明書、クラウドプロバイダー情報など、 TiDB Cloud Premiumインスタンスのライフサイクルと構成を管理します。
-    -   **バックアップ**： TiDB Cloud Premiumインスタンスのバックアップを管理します。バックアップベースのリストア機能も含まれます。
-    -   **リージョン**： TiDB Cloud Premiumインスタンスを作成するために利用可能なリージョンを取得します。
+    - **TiDB Cloud Premiumインスタンス**：パスワード、CA証明書、クラウドプロバイダー情報など、 TiDB Cloud Premiumインスタンスのライフサイクルと構成を管理します。
+    - **バックアップ**： TiDB Cloud Premiumインスタンスのバックアップを管理します。バックアップベースのリストア機能も含まれます。
+    - **リージョン**： TiDB Cloud Premiumインスタンスを作成するために利用可能なリージョンを取得します。

@@ -8,8 +8,8 @@ aliases: ['/ja/tidb/stable/dev-guide-prepared-statement/','/ja/tidbcloud/dev-gui
 
 A [プリペアドステートメント](/sql-statements/sql-statement-prepare.md) 、パラメータのみが異なる複数のSQL文をテンプレート化します。SQL文とパラメータを分離します。これにより、SQL文の以下の側面を改善できます。
 
--   **セキュリティ**: パラメータとステートメントが分離されているため、 [SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)攻撃のリスクを回避します。
--   **パフォーマンス**: ステートメントは TiDBサーバー上で事前に解析されるため、後続の実行ではパラメータのみが渡され、SQL ステートメント全体の解析、SQL ステートメント文字列の結合、およびネットワーク転送のコストが節約されます。
+- **セキュリティ**: パラメータとステートメントが分離されているため、 [SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)攻撃のリスクを回避します。
+- **パフォーマンス**: ステートメントは TiDBサーバー上で事前に解析されるため、後続の実行ではパラメータのみが渡され、SQL ステートメント全体の解析、SQL ステートメント文字列の結合、およびネットワーク転送のコストが節約されます。
 
 ほとんどのアプリケーションでは、SQL文を列挙できます。限られた数のSQL文で、アプリケーション全体のデータクエリを完了できます。そのため、プリペアドステートメントを使用するのがベストプラクティスです。
 
@@ -218,9 +218,9 @@ jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPr
 
 Javaの完全な例については、以下を参照してください。
 
--   [JDBC で TiDB に接続する](/develop/dev-guide-sample-application-java-jdbc.md)
--   [Hibernate で TiDB に接続する](/develop/dev-guide-sample-application-java-hibernate.md)
--   [Spring BootでTiDBに接続する](/develop/dev-guide-sample-application-java-spring-boot.md)
+- [JDBC で TiDB に接続する](/develop/dev-guide-sample-application-java-jdbc.md)
+- [Hibernate で TiDB に接続する](/develop/dev-guide-sample-application-java-hibernate.md)
+- [Spring BootでTiDBに接続する](/develop/dev-guide-sample-application-java-spring-boot.md)
 
 </div>
 
@@ -228,6 +228,6 @@ Javaの完全な例については、以下を参照してください。
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

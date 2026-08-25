@@ -9,19 +9,19 @@ TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサー
 
 > **Note:**
 >
-> -   現在、 TiDB Cloud Essentialの変更フィード機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、以下の手順に従ってください。
+> - 現在、 TiDB Cloud Essentialの変更フィード機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、以下の手順に従ってください。
 >
->     1.  [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある?をクリックします**。** 。
->     2.  **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。
->     3.  チケットを作成します。「説明」欄に「changefeedへの申請」と入力します。
->     4.  **Submit**をクリックしてください。
-> -   TiDB Cloud Essentialインスタンスごとに最大10個の変更フィードが許可されています。
-> -   [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは、変更フィード機能は利用できません。
+>     1. [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある?をクリックします**。** 。
+>     2. **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。
+>     3. チケットを作成します。「説明」欄に「changefeedへの申請」と入力します。
+>     4. **Submit**をクリックしてください。
+> - TiDB Cloud Essentialインスタンスごとに最大10個の変更フィードが許可されています。
+> - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは、変更フィード機能は利用できません。
 
 ## 制限 {#restrictions}
 
--   Changefeeds は、 `RENAME TABLE`のように、単一の`RENAME TABLE t1 TO t3, t2 TO t4` } ステートメントで複数のテーブルの名前を変更する DDL ステートメントをサポートしていません。このステートメントを実行すると、Changefeed のデータレプリケーションが永続的に中断されます。
--   変更フィードのスループットは約20 MiB/秒です。増分データ量がこの制限を超える場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+- Changefeeds は、 `RENAME TABLE`のように、単一の`RENAME TABLE t1 TO t3, t2 TO t4` } ステートメントで複数のテーブルの名前を変更する DDL ステートメントをサポートしていません。このステートメントを実行すると、Changefeed のデータレプリケーションが永続的に中断されます。
+- 変更フィードのスループットは約20 MiB/秒です。増分データ量がこの制限を超える場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 ## 対応地域 {#supported-regions}
 
@@ -38,13 +38,13 @@ TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサー
 
 変更フィード機能にアクセスするには、以下の手順に従ってください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Changefeed**をクリックします。変更フィードページが表示されます。
+2. 対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Changefeed**をクリックします。変更フィードページが表示されます。
 
 **Changefeed**ページでは、変更フィードの作成、既存の変更フィードの一覧表示、および既存の変更フィードの操作（変更フィードの一時停止、再開、編集、削除など）を行うことができます。
 
@@ -52,8 +52,8 @@ TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサー
 
 変更フィードを作成するには、チュートリアルを参照してください。
 
--   [Apache Kafkaへのシンク](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
--   [MySQLにシンクする](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
+- [Apache Kafkaへのシンク](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
+- [MySQLにシンクする](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
 
 ## 変更フィードを確認する {#view-a-changefeed}
 
@@ -62,9 +62,9 @@ TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサー
 <SimpleTab>
 <div label="Console">
 
-1.  ターゲットのTiDB Cloud Essentialインスタンスの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
-2.  表示したい該当する変更フィードを見つけて、 **Action**列の**...** &gt; **View**をクリックします。
-3.  変更フィードの詳細（設定、ステータス、メトリクスなど）を確認できます。
+1. ターゲットのTiDB Cloud Essentialインスタンスの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
+2. 表示したい該当する変更フィードを見つけて、 **Action**列の**...** &gt; **View**をクリックします。
+3. 変更フィードの詳細（設定、ステータス、メトリクスなど）を確認できます。
 
 </div>
 
@@ -86,8 +86,8 @@ TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、変更フィ�
 <SimpleTab>
 <div label="Console">
 
-1.  ターゲットのTiDB Cloud Essentialインスタンスの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
-2.  一時停止または再開したい該当する変更フィードを見つけて、 **Action**列の**...** &gt; **Pause/Resume**をクリックします。
+1. ターゲットのTiDB Cloud Essentialインスタンスの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
+2. 一時停止または再開したい該当する変更フィードを見つけて、 **Action**列の**...** &gt; **Pause/Resume**をクリックします。
 
 </div>
 
@@ -119,18 +119,18 @@ ticloud serverless changefeed resume -c <cluster-id> --changefeed-id <changefeed
 <SimpleTab>
 <div label="Console">
 
-1.  ターゲットのTiDB Cloud Essentialインスタンスの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
+1. ターゲットのTiDB Cloud Essentialインスタンスの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
 
-2.  一時停止したい変更フィードを見つけて、 **Action**列の**...** &gt; **Pause**をクリックします。
+2. 一時停止したい変更フィードを見つけて、 **Action**列の**...** &gt; **Pause**をクリックします。
 
-3.  変更フィードのステータスが`Paused`に変更されたら、 **...** &gt; **Edit**をクリックして、対応する変更フィードを編集します。
+3. 変更フィードのステータスが`Paused`に変更されたら、 **...** &gt; **Edit**をクリックして、対応する変更フィードを編集します。
 
     TiDB Cloudはデフォルトで変更フィードの設定を自動的に行います。以下の設定を変更できます。
 
-    -   Apache Kafkaシンク：**Destination**、**Connection**、**Start Position**を除くすべての設定
-    -   MySQLシンク：**Destination**、**Connection**、**Start Position**を除くすべての設定
+    - Apache Kafkaシンク：**Destination**、**Connection**、**Start Position**を除くすべての設定
+    - MySQLシンク：**Destination**、**Connection**、**Start Position**を除くすべての設定
 
-4.  設定を編集した後、 **...** &gt; **Resume**をクリックして、対応する変更フィードを再開します。
+4. 設定を編集した後、 **...** &gt; **Resume**をクリックして、対応する変更フィードを再開します。
 
 </div>
 
@@ -153,10 +153,10 @@ ticloud serverless changefeed edit --cluster-id <cluster-id> --changefeed-id <ch
 
 ## 変更フィードを複製する {#duplicate-a-changefeed}
 
-1.  ターゲットのTiDB Cloud Essentialインスタンスの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
-2.  複製したい変更フィードを探します。**Action**列で、 **...** &gt;**Duplicate**をクリックします。
-3.  TiDB Cloudは、新しい変更フィード設定に元の設定を自動的に反映します。必要に応じて設定を確認および変更できます。
-4.  設定を確認後、 **Submit**をクリックして新しい変更フィードを作成して開始します。
+1. ターゲットのTiDB Cloud Essentialインスタンスの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
+2. 複製したい変更フィードを探します。**Action**列で、 **...** &gt;**Duplicate**をクリックします。
+3. TiDB Cloudは、新しい変更フィード設定に元の設定を自動的に反映します。必要に応じて設定を確認および変更できます。
+4. 設定を確認後、 **Submit**をクリックして新しい変更フィードを作成して開始します。
 
 ## 変更フィードを削除する {#delete-a-changefeed}
 
@@ -165,8 +165,8 @@ TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、変更フィ�
 <SimpleTab>
 <div label="Console">
 
-1.  ターゲットのTiDB Cloud Essentialインスタンスの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
-2.  削除したい変更フィードを見つけて、 **Action**列の**...** &gt; **Delete**をクリックします。
+1. ターゲットのTiDB Cloud Essentialインスタンスの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
+2. 削除したい変更フィードを見つけて、 **Action**列の**...** &gt; **Delete**をクリックします。
 
 </div>
 
@@ -193,9 +193,9 @@ ticloud serverless changefeed delete --cluster-id <cluster-id> --changefeed-id <
 
 各州は以下のように説明されます。
 
--   `CREATING` : 変更フィードが作成されています。
--   `CREATE_FAILED` : 変更フィードの作成に失敗しました。変更フィードを削除して、新しいものを作成する必要があります。
--   `RUNNING` : changefeed は正常に実行され、checkpoint-ts も正常に進行します。
--   `PAUSED` : 変更フィードが一時停止されています。
--   `WARNING` : 変更フィードが警告を返します。回復可能なエラーのため、変更フィードは続行できません。この状態の変更フィードは、状態が`RUNNING`に遷移するまで再開を試み続けます。この状態の変更フィードは[GCオペレーション](https://docs.pingcap.com/tidb/stable/garbage-collection-overview)ブロックします 。
--   `RUNNING_FAILED` : 変更フィードが失敗しました。何らかのエラーにより、変更フィードを再開できず、自動的に復旧することもできません。増分データのガベージコレクション(GC) の前に問題が解決された場合は、失敗した変更フィードを手動で再開できます。増分データのデフォルトの有効期限 (TTL) は 24 時間です。つまり、変更フィードが中断されてから 24 時間以内に GC メカニズムによってデータが削除されることはありません。
+- `CREATING` : 変更フィードが作成されています。
+- `CREATE_FAILED` : 変更フィードの作成に失敗しました。変更フィードを削除して、新しいものを作成する必要があります。
+- `RUNNING` : changefeed は正常に実行され、checkpoint-ts も正常に進行します。
+- `PAUSED` : 変更フィードが一時停止されています。
+- `WARNING` : 変更フィードが警告を返します。回復可能なエラーのため、変更フィードは続行できません。この状態の変更フィードは、状態が`RUNNING`に遷移するまで再開を試み続けます。この状態の変更フィードは[GCオペレーション](https://docs.pingcap.com/tidb/stable/garbage-collection-overview)ブロックします 。
+- `RUNNING_FAILED` : 変更フィードが失敗しました。何らかのエラーにより、変更フィードを再開できず、自動的に復旧することもできません。増分データのガベージコレクション(GC) の前に問題が解決された場合は、失敗した変更フィードを手動で再開できます。増分データのデフォルトの有効期限 (TTL) は 24 時間です。つまり、変更フィードが中断されてから 24 時間以内に GC メカニズムによってデータが削除されることはありません。

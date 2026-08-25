@@ -17,27 +17,27 @@ TiCDCの新しいアーキテクチャは、TiDBクラスタv7.5.0以降をサ�
 
 論理インポートモードでは、 TiDB Lightning はSQL ステートメントを実行してデータをインポートします。このモードは TiCDC と互換性があります。TiDB Lightning の論理インポートモードを TiCDC でデータレプリケーションに使用するには、次の手順を実行します。
 
-1.  チェンジフィードを作成します。詳細については、 [レプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)を参照してください。
-2.  TiDB Lightningを起動し、論理インポートモードを使用してデータをインポートします。詳細については、 [論理インポートモードを使用する](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md)を参照してください。
+1. チェンジフィードを作成します。詳細については、 [レプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)を参照してください。
+2. TiDB Lightningを起動し、論理インポートモードを使用してデータをインポートします。詳細については、 [論理インポートモードを使用する](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md)を参照してください。
 
 物理インポートモードでは、 TiDB Lightning はSST ファイルを TiKV に挿入することでデータをインポートします。TiCDC はこのモードと互換性がなく、物理インポートモードでインポートされたデータの複製をサポートしていません。TiDB Lightning の物理インポートモードと TiCDC の両方を使用する必要がある場合は、ダウンストリームシステムに基づいて、以下のいずれかのソリューションを選択してください。
 
--   ダウンストリームがTiDBクラスタである場合は、以下の手順を実行してください。
+- ダウンストリームがTiDBクラスタである場合は、以下の手順を実行してください。
 
-    1.  データの一貫性を確保するため、 TiDB Lightningを使用してデータをアップストリームとダウンストリームの両方のTiDBクラスタにインポートしてください。
-    2.  変更フィードを作成して、SQL を通じて書き込まれた後続の増分データをレプリケートします。詳細については、 [レプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)を参照してください。
+    1. データの一貫性を確保するため、 TiDB Lightningを使用してデータをアップストリームとダウンストリームの両方のTiDBクラスタにインポートしてください。
+    2. 変更フィードを作成して、SQL を通じて書き込まれた後続の増分データをレプリケートします。詳細については、 [レプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)を参照してください。
 
--   ダウンストリームがTiDBクラスタでない場合は、以下の手順を実行してください。
+- ダウンストリームがTiDBクラスタでない場合は、以下の手順を実行してください。
 
-    1.  TiDB Lightningの入力ファイルをインポートするには、ダウンストリームシステムが提供するオフラインインポートツールを使用してください。
-    2.  変更フィードを作成して、SQL を通じて書き込まれた後続の増分データをレプリケートします。詳細については、 [レプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)を参照してください。
+    1. TiDB Lightningの入力ファイルをインポートするには、ダウンストリームシステムが提供するオフラインインポートツールを使用してください。
+    2. 変更フィードを作成して、SQL を通じて書き込まれた後続の増分データをレプリケートします。詳細については、 [レプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)を参照してください。
 
 ## TiFlashとの互換性 {#compatibility-with-tiflash}
 
 現在、TiCDC を使用してテーブルを下流の TiDB クラスタにレプリケートする場合、テーブルのTiFlashレプリカを作成することはサポートされていません。つまり、TiCDC は、次のようなTiFlash関連の DDL ステートメントのレプリケートをサポートしていません。
 
--   `ALTER TABLE table_name SET TIFLASH REPLICA count;`
--   `ALTER DATABASE db_name SET TIFLASH REPLICA count;`
+- `ALTER TABLE table_name SET TIFLASH REPLICA count;`
+- `ALTER DATABASE db_name SET TIFLASH REPLICA count;`
 
 ## 以前のバージョンからのアップグレードに関する互換性に関する注意事項 {#compatibility-notes-for-upgrading-from-earlier-versions}
 
@@ -49,9 +49,9 @@ TiCDC をクラシックアーキテクチャから新しいアーキテクチ�
 
 アップグレードが、両方ともクラシックアーキテクチャを使用する TiCDC デプロイメント間で行われる場合、マイナーバージョン間のローリングアップグレードがサポートされます。ただし、メジャーバージョン間のアップグレード (たとえば、v8.5.0 -&gt; v8.5.3 はマイナーバージョンアップグレード、v8.1.x -&gt; v8.5.x はメジャーバージョンアップグレード) の場合、 **TiDB クラスタのローリングアップグレード中にチェンジフィードを実行し続けることは推奨されません**。メジャーバージョンアップグレードの場合は、次の手順を順番に実行してください。
 
-1.  すべての変更フィードを一時停止します。
-2.  TiDBクラスタに対してローリングアップグレードを実行します。
-3.  アップグレード完了後、すべての変更フィードを再開してください。
+1. すべての変更フィードを一時停止します。
+2. TiDBクラスタに対してローリングアップグレードを実行します。
+3. アップグレード完了後、すべての変更フィードを再開してください。
 
 例えば、クラスターをv8.5.4からv8.5.5にアップグレードする場合、 TiUPを使用してクラスターを管理している場合は、以下のコマンドを参照してください。以下の例では`linux-amd64`を使用しています。他のプラットフォームの場合は、環境に合わせてパッケージ名のプラットフォーム情報を置き換えてください。
 
@@ -79,10 +79,10 @@ TiCDC クラシック アーキテクチャと新しいアーキテクチャの�
 
 ## CLIと設定ファイルの互換性 {#cli-and-configuration-file-compatibility}
 
--   TiCDC v4.0.0では、 `ignore-txn-commit-ts`が削除され、 `ignore-txn-start-ts`が追加されました。これは`start_ts`を使用してトランザクションをフィルタリングします。
--   TiCDC v4.0.2 では、 `db-dbs` / `db-tables` / `ignore-dbs` / `ignore-tables`が削除され、 `rules`が追加されました。これは、データベースとテーブルに新しいフィルタルールを使用します。フィルタ構文の詳細については、[テーブルフィルター](/table-filter.md)を参照してください。
--   TiCDC v6.2.0 以降、 `cdc cli`は TiCDC Open API を介して TiCDCサーバーと直接やり取りし、PD へのアクセスは不要です。 `--pd`サブコマンドの`cdc cli`パラメータは非推奨となり、TiCDCサーバーアドレスを指定するために`--server`パラメータが追加されました。 `--server` `--pd` } を使用してください。
--   バージョン6.4.0以降、 `SYSTEM_VARIABLES_ADMIN`または`SUPER`の権限を持つチェンジフィードのみがTiCDC Syncpoint機能を使用できます。
+- TiCDC v4.0.0では、 `ignore-txn-commit-ts`が削除され、 `ignore-txn-start-ts`が追加されました。これは`start_ts`を使用してトランザクションをフィルタリングします。
+- TiCDC v4.0.2 では、 `db-dbs` / `db-tables` / `ignore-dbs` / `ignore-tables`が削除され、 `rules`が追加されました。これは、データベースとテーブルに新しいフィルタルールを使用します。フィルタ構文の詳細については、[テーブルフィルター](/table-filter.md)を参照してください。
+- TiCDC v6.2.0 以降、 `cdc cli`は TiCDC Open API を介して TiCDCサーバーと直接やり取りし、PD へのアクセスは不要です。 `--pd`サブコマンドの`cdc cli`パラメータは非推奨となり、TiCDCサーバーアドレスを指定するために`--server`パラメータが追加されました。 `--server` `--pd` } を使用してください。
+- バージョン6.4.0以降、 `SYSTEM_VARIABLES_ADMIN`または`SUPER`の権限を持つチェンジフィードのみがTiCDC Syncpoint機能を使用できます。
 
 ## 互換性の問題に対処する {#handle-compatibility-issues}
 
@@ -92,17 +92,17 @@ TiCDC クラシック アーキテクチャと新しいアーキテクチャの�
 
 TiCDC v5.0.0-rc の`cdc cli`ツールを使用して v4.0.x TiCDC クラスターを操作する場合、次のような異常な状況が発生する可能性があります。
 
--   TiCDC クラスターが v4.0.8 以前のバージョンである場合、v5.0.0-rc `cdc cli`ツールを使用してレプリケーションタスクを作成すると、クラスターの異常が発生し、レプリケーションタスクが停止する可能性があります。
+- TiCDC クラスターが v4.0.8 以前のバージョンである場合、v5.0.0-rc `cdc cli`ツールを使用してレプリケーションタスクを作成すると、クラスターの異常が発生し、レプリケーションタスクが停止する可能性があります。
 
--   TiCDC クラスターが v4.0.9 以降のバージョンである場合、v5.0.0-rc `cdc cli`ツールを使用してレプリケーションタスクを作成すると、古い値と統合ソーター機能がデフォルトで予期せず有効になります。
+- TiCDC クラスターが v4.0.9 以降のバージョンである場合、v5.0.0-rc `cdc cli`ツールを使用してレプリケーションタスクを作成すると、古い値と統合ソーター機能がデフォルトで予期せず有効になります。
 
 解決策：
 
 TiCDCクラスタのバージョンに対応する`cdc`実行可能ファイルを使用して、以下の操作を実行します。
 
-1.  v5.0.0-rc `cdc cli`ツールを使用して作成された変更フィードを削除します。たとえば、 `tiup cdc:v4.0.9 cli changefeed remove -c xxxx --pd=xxxxx --force`コマンドを実行します。
-2.  レプリケーションタスクが停止している場合は、TiCDCクラスタを再起動してください。たとえば、 `tiup cluster restart <cluster_name> -R cdc`コマンドを実行します。
-3.  変更フィードを再作成します。たとえば、 `tiup cdc:v4.0.9 cli changefeed create --sink-uri=xxxx --pd=xxx`コマンドを実行します。
+1. v5.0.0-rc `cdc cli`ツールを使用して作成された変更フィードを削除します。たとえば、 `tiup cdc:v4.0.9 cli changefeed remove -c xxxx --pd=xxxxx --force`コマンドを実行します。
+2. レプリケーションタスクが停止している場合は、TiCDCクラスタを再起動してください。たとえば、 `tiup cluster restart <cluster_name> -R cdc`コマンドを実行します。
+3. 変更フィードを再作成します。たとえば、 `tiup cdc:v4.0.9 cli changefeed create --sink-uri=xxxx --pd=xxx`コマンドを実行します。
 
 > **Note:**
 >

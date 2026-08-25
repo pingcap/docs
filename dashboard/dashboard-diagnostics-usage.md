@@ -31,13 +31,13 @@ T2: `2020-03-10 13:24:30` ～ `2020-03-10 13:27:30` 。この範囲ではQPSが�
 
 上記の診断結果は、診断時間中に大きなクエリが存在する可能性があることを示しています。上記のレポートの各**DETAIL**は以下のように説明されています。
 
--   `tidb_qps` : QPSが0.93倍減少しました。
--   `tidb_query_duration` : P999 クエリのレイテンシーが1.54 倍増加しました。
--   `tidb_cop_duration` : P999 コプロセッサ要求の処理レイテンシーが 2.48 倍に増加しました。
--   `tidb_kv_write_num` : P999 TiDB トランザクションで書き込まれた KV の数は 7.61 倍に増加しました。
--   `tikv_cop_scan_keys_total_nun` : TiKVコプロセッサーによってスキャンされるキー/値の数が 3 つの TiKV インスタンスで大幅に改善されました。
--   `pd_operator_step_finish_total_count`では、転属リーダー数が2.45倍に増加しており、異常時間帯のスケジュールが正常時間帯のスケジュールよりも高くなっていることがわかります。
--   このレポートは、スロークエリが存在する可能性があることを示しており、SQL文を使用してスロークエリを照会できることを示しています。SQL文の実行結果は次のとおりです。
+- `tidb_qps` : QPSが0.93倍減少しました。
+- `tidb_query_duration` : P999 クエリのレイテンシーが1.54 倍増加しました。
+- `tidb_cop_duration` : P999 コプロセッサ要求の処理レイテンシーが 2.48 倍に増加しました。
+- `tidb_kv_write_num` : P999 TiDB トランザクションで書き込まれた KV の数は 7.61 倍に増加しました。
+- `tikv_cop_scan_keys_total_nun` : TiKVコプロセッサーによってスキャンされるキー/値の数が 3 つの TiKV インスタンスで大幅に改善されました。
+- `pd_operator_step_finish_total_count`では、転属リーダー数が2.45倍に増加しており、異常時間帯のスケジュールが正常時間帯のスケジュールよりも高くなっていることがわかります。
+- このレポートは、スロークエリが存在する可能性があることを示しており、SQL文を使用してスロークエリを照会できることを示しています。SQL文の実行結果は次のとおりです。
 
 ```sql
 SELECT * FROM (SELECT count(*), min(time), sum(query_time) AS sum_query_time, sum(Process_time) AS sum_process_time, sum(Wait_time) AS sum_wait_time, sum(Commit_time), sum(Request_count), sum(process_keys), sum(Write_keys), max(Cop_proc_max), min(query),min(prev_stmt), digest FROM information_schema.CLUSTER_SLOW_QUERY WHERE time >= '2020-03-10 13:24:30' AND time < '2020-03-10 13:27:30' AND Is_internal = false GROUP BY digest) AS t1 WHERE t1.digest NOT IN (SELECT digest FROM information_schema.CLUSTER_SLOW_QUERY WHERE time >= '2020-03-10 13:21:00' AND time < '2020-03-10 13:24:00' GROUP BY digest) ORDER BY t1.sum_query_time DESC limit 10\G

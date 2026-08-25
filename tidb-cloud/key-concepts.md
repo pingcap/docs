@@ -39,8 +39,8 @@ TiDB Cloud Dedicated を使用すると、データ量やワークロードの�
 
 TiDB Cloudは、サポートされているすべてのプランで高い可用性を保証します。
 
--   TiDB Cloud Starter、 TiDB Cloud Essential、およびTiDB Cloud Premium については、[TiDB Cloudにおける高可用性](/tidb-cloud/serverless-high-availability.md)を参照してください。
--   TiDB Cloud Dedicatedについては、 [TiDB Cloud Dedicatedにおける高可用性](/tidb-cloud/high-availability-with-multi-az.md)を参照してください。
+- TiDB Cloud Starter、 TiDB Cloud Essential、およびTiDB Cloud Premium については、[TiDB Cloudにおける高可用性](/tidb-cloud/serverless-high-availability.md)を参照してください。
+- TiDB Cloud Dedicatedについては、 [TiDB Cloud Dedicatedにおける高可用性](/tidb-cloud/high-availability-with-multi-az.md)を参照してください。
 
 ## 監視 {#monitoring}
 

@@ -13,11 +13,11 @@ TiDB MCP Serverは、自然言語による指示を用いてTiDBデータベー�
 
 MCPはクライアント/サーバーアーキテクチャを採用しており、ホストアプリケーションが複数の外部サーバーに接続できるようになっている。
 
--   **ホスト**：Claude DesktopやCursorなどのIDEといった、MCPサーバーへの接続を開始するAI搭載アプリケーション。
+- **ホスト**：Claude DesktopやCursorなどのIDEといった、MCPサーバーへの接続を開始するAI搭載アプリケーション。
 
--   **クライアント**：ホストアプリケーションに組み込まれたコンポーネントで、個々のMCPサーバーと1対1の接続を確立する。
+- **クライアント**：ホストアプリケーションに組み込まれたコンポーネントで、個々のMCPサーバーと1対1の接続を確立する。
 
--   **サーバー**： **TiDB MCPサーバー**などの外部サービスで、クライアントが外部システムとやり取りするためのツール、コンテキスト、およびプロンプトを提供します。
+- **サーバー**： **TiDB MCPサーバー**などの外部サービスで、クライアントが外部システムとやり取りするためのツール、コンテキスト、およびプロンプトを提供します。
 
 **TiDB MCPサーバーは**、MCP互換サーバーであり、MCPクライアントがTiDBデータベースとやり取りするためのツールとコンテキストを提供します。
 
@@ -25,16 +25,16 @@ MCPはクライアント/サーバーアーキテクチャを採用しており�
 
 始める前に、以下のものを用意してください。
 
--   **MCP 互換クライアント**: 例:[Cursor](/ai/integrations/tidb-mcp-cursor.md)や[Claude Desktop](/ai/integrations/tidb-mcp-claude-desktop.md)。
--   **Python (&gt;=3.10) と uv** : Python (3.10 以降) と`uv`がインストールされていることを確認します。 [インストールガイド](https://docs.astral.sh/uv/getting-started/installation/)に従って`uv`をインストールします。
--   **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
+- **MCP 互換クライアント**: 例:[Cursor](/ai/integrations/tidb-mcp-cursor.md)や[Claude Desktop](/ai/integrations/tidb-mcp-claude-desktop.md)。
+- **Python (&gt;=3.10) と uv** : Python (3.10 以降) と`uv`がインストールされていることを確認します。 [インストールガイド](https://docs.astral.sh/uv/getting-started/installation/)に従って`uv`をインストールします。
+- **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
 
 ## サポートされているMCPクライアント {#supported-mcp-clients}
 
 TiDB MCPサーバーを特定のMCPクライアントで使用する詳細な例については、以下のガイドを参照してください。
 
--   [Cursor](/ai/integrations/tidb-mcp-cursor.md)
--   [Claude Desktop](/ai/integrations/tidb-mcp-claude-desktop.md)
+- [Cursor](/ai/integrations/tidb-mcp-cursor.md)
+- [Claude Desktop](/ai/integrations/tidb-mcp-claude-desktop.md)
 
 上記のリストにMCPクライアントが含まれていない場合は、以下のセットアップ手順に従ってください。
 
@@ -42,8 +42,8 @@ TiDB MCPサーバーを特定のMCPクライアントで使用する詳細な例
 
 TiDB MCPサーバーは、MCPクライアントとの統合に関して2つのモードをサポートしています。
 
--   標準入出力（STDIO）モード（デフォルト）
--   サーバー送信イベント（SSE）モード
+- 標準入出力（STDIO）モード（デフォルト）
+- サーバー送信イベント（SSE）モード
 
 TiDB MCPサーバーはデフォルトでSTDIOモードを使用するため、事前にスタンドアロンサーバーを起動する必要はありません。
 
@@ -53,13 +53,13 @@ MCPクライアントでTiDB MCPサーバーを設定するには、以下のい
 
 STDIOモードを使用してMCPクライアントにTiDB MCPサーバーを設定するには、以下の手順を実行してください。
 
-1.  MCPサーバーの設定方法については、MCPクライアントのドキュメントを参照してください。
+1. MCPサーバーの設定方法については、MCPクライアントのドキュメントを参照してください。
 
-2.  TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動します。
+2. TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動します。
 
-3.  接続パラメータを取得するには、右上隅の**Connect**をクリックしてください。
+3. 接続パラメータを取得するには、右上隅の**Connect**をクリックしてください。
 
-4.  AIアプリケーションの設定ファイルの`mcpServers`セクションで、接続パラメータを使用してTiDB MCPサーバーを設定します。
+4. AIアプリケーションの設定ファイルの`mcpServers`セクションで、接続パラメータを使用してTiDB MCPサーバーを設定します。
 
     MCP設定ファイルの例：
 
@@ -84,13 +84,13 @@ STDIOモードを使用してMCPクライアントにTiDB MCPサーバーを設�
 
 MCPクライアントでSSEモードを使用してTiDB MCPサーバーを設定するには、以下の手順を実行してください。
 
-1.  MCPサーバーの設定方法については、MCPクライアントのドキュメントを参照してください。
+1. MCPサーバーの設定方法については、MCPクライアントのドキュメントを参照してください。
 
-2.  TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動します。
+2. TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動します。
 
-3.  接続パラメータを取得するには、右上隅の**Connect**をクリックしてください。
+3. 接続パラメータを取得するには、右上隅の**Connect**をクリックしてください。
 
-4.  接続パラメータを含む`.env`ファイルを作成します。
+4. 接続パラメータを含む`.env`ファイルを作成します。
 
     `.env`ファイルの例:
 
@@ -104,13 +104,13 @@ MCPクライアントでSSEモードを使用してTiDB MCPサーバーを設定
     EOF
     ```
 
-5.  `--transport sse`オプションを指定して TiDB MCP サーバーを起動します。
+5. `--transport sse`オプションを指定して TiDB MCP サーバーを起動します。
 
     ```bash
     uvx --from "pytidb[mcp]" tidb-mcp-server --transport sse
     ```
 
-6.  `TiDB` MCPサーバー構成を、AIアプリケーション構成ファイルの`mcpServers`セクションに追加します。
+6. `TiDB` MCPサーバー構成を、AIアプリケーション構成ファイルの`mcpServers`セクションに追加します。
 
     ```json
     {
@@ -128,36 +128,36 @@ TiDB MCPサーバーは、MCPクライアントに以下の操作（ツール）
 
 **データベース管理**
 
--   `show_databases` - TiDB Cloud Starterインスタンス内のすべてのデータベースを表示します
+- `show_databases` - TiDB Cloud Starterインスタンス内のすべてのデータベースを表示します
 
-    -   `username` : データベースユーザー名（文字列、オプション）
-    -   `password` : データベースパスワード（文字列、オプション）
+    - `username` : データベースユーザー名（文字列、オプション）
+    - `password` : データベースパスワード（文字列、オプション）
 
--   `switch_database` - 特定のデータベースに切り替える
+- `switch_database` - 特定のデータベースに切り替える
 
-    -   `db_name` : 切り替え先のデータベース名（文字列、必須）
-    -   `username` : データベースユーザー名（文字列、オプション）
-    -   `password` : データベースパスワード（文字列、オプション）
+    - `db_name` : 切り替え先のデータベース名（文字列、必須）
+    - `username` : データベースユーザー名（文字列、オプション）
+    - `password` : データベースパスワード（文字列、オプション）
 
--   `show_tables` - 現在のデータベース内のすべてのテーブルを表示します
+- `show_tables` - 現在のデータベース内のすべてのテーブルを表示します
 
 **SQLクエリと実行**
 
--   `db_query` - 読み取り専用のSQLクエリを実行します
+- `db_query` - 読み取り専用のSQLクエリを実行します
 
-    -   `sql_stmt` : SQLクエリステートメント（文字列、必須）
+    - `sql_stmt` : SQLクエリステートメント（文字列、必須）
 
--   `db_execute` - SQLステートメント（DMLまたはDDL）を実行します
+- `db_execute` - SQLステートメント（DMLまたはDDL）を実行します
 
-    -   `sql_stmts` : 単一のSQL文、またはSQL文の配列（文字列または配列、必須）
+    - `sql_stmts` : 単一のSQL文、またはSQL文の配列（文字列または配列、必須）
 
 **ユーザー管理**
 
--   `db_create_user` - 新しいデータベースユーザーを作成します
+- `db_create_user` - 新しいデータベースユーザーを作成します
 
-    -   `username` : 新規ユーザーの名前（文字列、必須）
-    -   `password` : 新規ユーザーのパスワード（文字列、必須）
+    - `username` : 新規ユーザーの名前（文字列、必須）
+    - `password` : 新規ユーザーのパスワード（文字列、必須）
 
--   `db_remove_user` - 既存のデータベースユーザーを削除します
+- `db_remove_user` - 既存のデータベースユーザーを削除します
 
-    -   `username` : 削除するユーザーの名前（文字列、必須）
+    - `username` : 削除するユーザーの名前（文字列、必須）

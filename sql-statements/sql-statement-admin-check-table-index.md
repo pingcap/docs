@@ -10,8 +10,8 @@ category: reference
 
 以下はサポートされていません。
 
--   [FOREIGN KEY制約](/foreign-key.md)を確認しています。
--   [クラスター化された主キー](/clustered-indexes.md)が使用されている場合は、PRIMARY KEY インデックスをチェックします。
+- [FOREIGN KEY制約](/foreign-key.md)を確認しています。
+- [クラスター化された主キー](/clustered-indexes.md)が使用されている場合は、PRIMARY KEY インデックスをチェックします。
 
 `ADMIN CHECK [TABLE|INDEX]`で問題が見つかった場合は、インデックスを削除して再作成することで解決できます。問題が解決しない場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)ことができます。
 
@@ -19,9 +19,9 @@ category: reference
 
 `ADMIN CHECK TABLE`文は、次の手順を実行してテーブルをチェックします。
 
-1.  各インデックスについて、インデックス内のレコード数がテーブル内のレコード数と同じかどうかを確認します。
+1. 各インデックスについて、インデックス内のレコード数がテーブル内のレコード数と同じかどうかを確認します。
 
-2.  各インデックスごとに、各行の値をループし、その値をテーブル内の値と比較します。
+2. 各インデックスごとに、各行の値をループし、その値をテーブル内の値と比較します。
 
 `ADMIN CHECK INDEX`ステートメントを使用すると、指定されたインデックスのみがチェックされます。
 
@@ -65,4 +65,4 @@ ADMIN CHECK INDEX tbl_name idx_name (lower_val, upper_val) [, (lower_val, upper_
 
 ## 参照 {#see-also}
 
--   [`ADMIN REPAIR`](/sql-statements/sql-statement-admin.md#admin-repair-statement)
+- [`ADMIN REPAIR`](/sql-statements/sql-statement-admin.md#admin-repair-statement)

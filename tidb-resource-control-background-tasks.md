@@ -19,28 +19,28 @@ v7.4.0以降、 [TiDB リソース制御](/tidb-resource-control-ru-groups.md)�
 
 ## `BACKGROUND`パラメータ {#background-parameters}
 
--   `TASK_TYPES` : バックグラウンドタスクとして管理する必要があるタスクの種類を指定します。複数のタスクの種類を指定する場合は、カンマ ( `,` ) で区切ります。
--   `UTILIZATION_LIMIT` : 各 TiKV ノード上でバックグラウンドタスクが消費できるリソースの最大割合（0～100）を制限します。デフォルトでは、TiKV はノードの総リソースとフォアグラウンドタスクが現在占有しているリソースに基づいて、バックグラウンドタスクに利用可能なリソースを計算します。`UTILIZATION_LIMIT`を設定すると、バックグラウンドタスクに割り当てられるリソースはこの制限を超えません。
+- `TASK_TYPES` : バックグラウンドタスクとして管理する必要があるタスクの種類を指定します。複数のタスクの種類を指定する場合は、カンマ ( `,` ) で区切ります。
+- `UTILIZATION_LIMIT` : 各 TiKV ノード上でバックグラウンドタスクが消費できるリソースの最大割合（0～100）を制限します。デフォルトでは、TiKV はノードの総リソースとフォアグラウンドタスクが現在占有しているリソースに基づいて、バックグラウンドタスクに利用可能なリソースを計算します。`UTILIZATION_LIMIT`を設定すると、バックグラウンドタスクに割り当てられるリソースはこの制限を超えません。
 
 TiDB は次の種類のバックグラウンドタスクをサポートしています。
 
 <CustomContent platform="tidb">
 
--   `import` : [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)または[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用してインポートタスクを実行します。TiDB Lightning の物理インポートモードと論理インポートモードの両方がサポートされています。
--   `br` : [BR](/br/backup-and-restore-overview.md)を使用してバックアップおよび復元タスクを実行します。PITR はサポートされていません。
--   `ddl` : Reorg DDL のバッチデータ書き戻しフェーズ中のリソース使用量を制御します。
--   `stats` : 手動で実行されるか、TiDB によって自動的にトリガーされる[統計を収集する](/statistics.md#collect-statistics)タスク。
--   `background` : 予約済みのタスクタイプ。システム変数[`tidb_request_source_type`](/system-variables.md#tidb_request_source_type-new-in-v740)を使用して、現在のセッションのタスクタイプを`background`として指定できます。
+- `import` : [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)または[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用してインポートタスクを実行します。TiDB Lightning の物理インポートモードと論理インポートモードの両方がサポートされています。
+- `br` : [BR](/br/backup-and-restore-overview.md)を使用してバックアップおよび復元タスクを実行します。PITR はサポートされていません。
+- `ddl` : Reorg DDL のバッチデータ書き戻しフェーズ中のリソース使用量を制御します。
+- `stats` : 手動で実行されるか、TiDB によって自動的にトリガーされる[統計を収集する](/statistics.md#collect-statistics)タスク。
+- `background` : 予約済みのタスクタイプ。システム変数[`tidb_request_source_type`](/system-variables.md#tidb_request_source_type-new-in-v740)を使用して、現在のセッションのタスクタイプを`background`として指定できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   `import` : [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)を使用してインポートタスクを実行します。TiDB Lightningの物理インポートモードと論理インポートモードの両方がサポートされています。
--   `br` : [BR](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)を使用してバックアップおよび復元タスクを実行します。PITR はサポートされていません。
--   `ddl` : Reorg DDL のバッチデータ書き戻しフェーズ中のリソース使用量を制御します。
--   `stats` : 手動で実行されるか、TiDB によって自動的にトリガーされる[統計を収集する](/statistics.md#collect-statistics)タスク。
--   `background` : 予約済みのタスクタイプ。システム変数[`tidb_request_source_type`](/system-variables.md#tidb_request_source_type-new-in-v740)を使用して、現在のセッションのタスクタイプを`background`として指定できます。
+- `import` : [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)を使用してインポートタスクを実行します。TiDB Lightningの物理インポートモードと論理インポートモードの両方がサポートされています。
+- `br` : [BR](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)を使用してバックアップおよび復元タスクを実行します。PITR はサポートされていません。
+- `ddl` : Reorg DDL のバッチデータ書き戻しフェーズ中のリソース使用量を制御します。
+- `stats` : 手動で実行されるか、TiDB によって自動的にトリガーされる[統計を収集する](/statistics.md#collect-statistics)タスク。
+- `background` : 予約済みのタスクタイプ。システム変数[`tidb_request_source_type`](/system-variables.md#tidb_request_source_type-new-in-v740)を使用して、現在のセッションのタスクタイプを`background`として指定できます。
 
 </CustomContent>
 
@@ -52,25 +52,25 @@ TiDB は次の種類のバックグラウンドタスクをサポートしてい
 
 ## 例 {#examples}
 
-1.  `br`と`ddl`バックグラウンドタスクとしてマークし、バックグラウンドタスクのリソース制限を 30% に設定して、リソースグループ`default`を変更します。
+1. `br`と`ddl`バックグラウンドタスクとしてマークし、バックグラウンドタスクのリソース制限を 30% に設定して、リソースグループ`default`を変更します。
 
     ```sql
     ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES='br,ddl', UTILIZATION_LIMIT=30);
     ```
 
-2.  `default`リソースグループを変更して、バックグラウンドタスクの種類を既定値に戻します。
+2. `default`リソースグループを変更して、バックグラウンドタスクの種類を既定値に戻します。
 
     ```sql
     ALTER RESOURCE GROUP `default` BACKGROUND=NULL;
     ```
 
-3.  `default`リソースグループを変更して、バックグラウンドタスクの種類を空に設定します。この場合、このリソースグループのすべてのタスクはバックグラウンドタスクとして扱われません。
+3. `default`リソースグループを変更して、バックグラウンドタスクの種類を空に設定します。この場合、このリソースグループのすべてのタスクはバックグラウンドタスクとして扱われません。
 
     ```sql
     ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES="");
     ```
 
-4.  `default`リソースグループのバックグラウンドタスクの種類を表示する。
+4. `default`リソースグループのバックグラウンドタスクの種類を表示する。
 
     ```sql
     SELECT * FROM information_schema.resource_groups WHERE NAME="default";
@@ -86,7 +86,7 @@ TiDB は次の種類のバックグラウンドタスクをサポートしてい
     +---------+------------+----------+-----------+-------------+-------------------------------------------+
     ```
 
-5.  現在のセッションのタスクを明示的にバックグラウンドタイプとしてマークするには、 `tidb_request_source_type`を使用してタスクタイプを明示的に指定します。例を以下に示します。
+5. 現在のセッションのタスクを明示的にバックグラウンドタイプとしてマークするには、 `tidb_request_source_type`を使用してタスクタイプを明示的に指定します。例を以下に示します。
 
     ```sql
     SET @@tidb_request_source_type="background";

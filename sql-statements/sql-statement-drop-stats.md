@@ -94,4 +94,4 @@ Empty set (0.00 sec)
 
 ## 参照 {#see-also}
 
--   [統計入門](/statistics.md)
+- [統計入門](/statistics.md)

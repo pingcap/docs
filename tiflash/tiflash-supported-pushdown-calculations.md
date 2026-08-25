@@ -11,23 +11,23 @@ summary: TiFlashでサポートされているプッシュダウン計算につ�
 
 TiFlash は次の演算子のプッシュダウンをサポートしています。
 
--   TableScan: テーブルからデータを読み取ります。
--   選択: データをフィルタリングします。
--   HashAgg: [ハッシュ集計](/explain-aggregation.md#hash-aggregation)アルゴリズムに基づいてデータ集約を実行します。
--   StreamAgg: [ストリーム集計](/explain-aggregation.md#stream-aggregation)アルゴリズムに基づいてデータ集約を実行します。SteamAgg は`GROUP BY`条件なしの集約のみをサポートします。
--   TopN: TopN 計算を実行します。
--   制限: 制限計算を実行します。
--   投影: 投影計算を実行します。
--   HashJoin: [ハッシュ結合](/explain-joins.md#hash-join)アルゴリズムを使用して結合計算を実行しますが、次の条件が適用されます。
-    -   演算子は[MPPモード](/tiflash/use-tiflash-mpp-mode.md)でのみ押すことができます。
-    -   サポートされている結合は、Inner Join、Left Join、Semi Join、Anti Semi Join、Left Semi Join、および Anti Left Semi Join です。
-    -   上記の結合は、Equi Join と Non-Equi Join（Cartesian Join または Null 対応 Semi Join）の両方をサポートしています。Cartesian Join または Null 対応 Semi Join を計算する際には、Shuffle Hash Join アルゴリズムではなく、Broadcast アルゴリズムが使用されます。
--   [ウィンドウ関数](/functions-and-operators/window-functions.md) : 現在、 TiFlash は`ROW_NUMBER()` 、 `RANK()` 、 `DENSE_RANK()` 、 `LEAD()` 、 `LAG()` 、 `FIRST_VALUE()` 、 `LAST_VALUE()`をサポートしています。
+- TableScan: テーブルからデータを読み取ります。
+- 選択: データをフィルタリングします。
+- HashAgg: [ハッシュ集計](/explain-aggregation.md#hash-aggregation)アルゴリズムに基づいてデータ集約を実行します。
+- StreamAgg: [ストリーム集計](/explain-aggregation.md#stream-aggregation)アルゴリズムに基づいてデータ集約を実行します。SteamAgg は`GROUP BY`条件なしの集約のみをサポートします。
+- TopN: TopN 計算を実行します。
+- 制限: 制限計算を実行します。
+- 投影: 投影計算を実行します。
+- HashJoin: [ハッシュ結合](/explain-joins.md#hash-join)アルゴリズムを使用して結合計算を実行しますが、次の条件が適用されます。
+    - 演算子は[MPPモード](/tiflash/use-tiflash-mpp-mode.md)でのみ押すことができます。
+    - サポートされている結合は、Inner Join、Left Join、Semi Join、Anti Semi Join、Left Semi Join、および Anti Left Semi Join です。
+    - 上記の結合は、Equi Join と Non-Equi Join（Cartesian Join または Null 対応 Semi Join）の両方をサポートしています。Cartesian Join または Null 対応 Semi Join を計算する際には、Shuffle Hash Join アルゴリズムではなく、Broadcast アルゴリズムが使用されます。
+- [ウィンドウ関数](/functions-and-operators/window-functions.md) : 現在、 TiFlash は`ROW_NUMBER()` 、 `RANK()` 、 `DENSE_RANK()` 、 `LEAD()` 、 `LAG()` 、 `FIRST_VALUE()` 、 `LAST_VALUE()`をサポートしています。
 
 TiDBでは、演算子はツリー構造で編成されます。演算子をTiFlashにプッシュダウンするには、以下のすべての前提条件を満たす必要があります。
 
--   その子演算子はすべてTiFlashにプッシュダウンできます。
--   演算子に式が含まれている場合 (ほとんどの演算子には式が含まれています)、演算子のすべての式をTiFlashにプッシュダウンできます。
+- その子演算子はすべてTiFlashにプッシュダウンできます。
+- 演算子に式が含まれている場合 (ほとんどの演算子には式が含まれています)、演算子のすべての式をTiFlashにプッシュダウンできます。
 
 ## プッシュダウン式 {#push-down-expressions}
 
@@ -49,17 +49,17 @@ TiFlash は次のプッシュダウン式をサポートしています。
 
 ## 制限 {#restrictions}
 
--   Bit、Set、Geometry 型を含む式は、 TiFlashにプッシュダウンできません。
+- Bit、Set、Geometry 型を含む式は、 TiFlashにプッシュダウンできません。
 
--   `DATE_ADD()` 、 `DATE_SUB()` 、 `ADDDATE()` 、 `SUBDATE()`関数は、以下の間隔タイプのみをサポートします。他の間隔タイプを使用した場合、 TiFlashはエラーを報告します。
+- `DATE_ADD()` 、 `DATE_SUB()` 、 `ADDDATE()` 、 `SUBDATE()`関数は、以下の間隔タイプのみをサポートします。他の間隔タイプを使用した場合、 TiFlashはエラーを報告します。
 
-    -   日
-    -   週
-    -   月
-    -   年
-    -   時間
-    -   分
-    -   2番
+    - 日
+    - 週
+    - 月
+    - 年
+    - 時間
+    - 分
+    - 2番
 
 クエリがサポートされていないプッシュダウン計算に遭遇した場合、TiDBは残りの計算を完了する必要があり、 TiFlashの高速化効果に大きな影響を与える可能性があります。現在サポートされていない演算子と式は、将来のバージョンでサポートされる可能性があります。
 

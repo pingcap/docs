@@ -17,9 +17,9 @@ tiup dm help [command] [flags]
 
 ### -h, --help {#h-help}
 
--   ヘルプ情報を出力します。
--   データ型: `BOOLEAN`
--   デフォルト: false
+- ヘルプ情報を出力します。
+- データ型: `BOOLEAN`
+- デフォルト: false
 
 ## 出力 {#output}
 

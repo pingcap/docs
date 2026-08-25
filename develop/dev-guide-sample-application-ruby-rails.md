@@ -10,9 +10,9 @@ TiDBはMySQL互換のデータベースであり、 [Rails](https://github.com/r
 
 このチュートリアルでは、TiDBとRailsを使用して以下のタスクを実行する方法を学ぶことができます。
 
--   環境をセットアップしてください。
--   Railsを使用してTiDBに接続します。
--   アプリケーションをビルドして実行します。オプションで、ActiveRecord ORM を使用した基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
+- 環境をセットアップしてください。
+- Railsを使用してTiDBに接続します。
+- アプリケーションをビルドして実行します。オプションで、ActiveRecord ORM を使用した基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
 
 > **Note:**
 >
@@ -22,15 +22,15 @@ TiDBはMySQL互換のデータベースであり、 [Rails](https://github.com/r
 
 このチュートリアルを完了するには、以下が必要です。
 
--   [Ruby](https://www.ruby-lang.org/en/)>= 3.0 がマシンにインストールされている
--   あなたのマシンにインストールされている[Bundler](https://bundler.io/)
--   お使いのマシンに[Git](https://git-scm.com/downloads)がインストールされています
--   TiDBクラスタが稼働中
+- [Ruby](https://www.ruby-lang.org/en/)>= 3.0 がマシンにインストールされている
+- あなたのマシンにインストールされている[Bundler](https://bundler.io/)
+- お使いのマシンに[Git](https://git-scm.com/downloads)がインストールされています
+- TiDBクラスタが稼働中
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
--   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
 ## TiDBに接続するには、サンプルアプリを実行してください。 {#run-the-sample-app-to-connect-to-tidb}
 
@@ -70,21 +70,21 @@ bundle add mysql2 dotenv
 <SimpleTab>
 <div label="TiDB Cloud Starter or Essential">
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、**Connect With**ドロップダウンリストから`Rails`を選択し、 **Connection Type**のデフォルト設定を`Public`のままにします。
+3. 接続ダイアログで、**Connect With**ドロップダウンリストから`Rails`を選択し、 **Connection Type**のデフォルト設定を`Public`のままにします。
 
-4.  まだパスワードを設定していない場合は、 **Generate Password**をクリックしてランダムなパスワードを生成してください。
+4. まだパスワードを設定していない場合は、 **Generate Password**をクリックしてランダムなパスワードを生成してください。
 
-5.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
+5. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
     cp .env.example .env
     ```
 
-6.  `.env`ファイルを編集し、 `DATABASE_URL`環境変数を次のように設定し、接続ダイアログから接続文字列をコピーして変数の値として使用します。
+6. `.env`ファイルを編集し、 `DATABASE_URL`環境変数を次のように設定し、接続ダイアログから接続文字列をコピーして変数の値として使用します。
 
     ```dotenv
     DATABASE_URL='mysql2://{user}:{password}@{host}:{port}/{database_name}?ssl_mode=verify_identity'
@@ -94,64 +94,64 @@ bundle add mysql2 dotenv
     >
     > [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、パブリックエンドポイントを使用する際には、 `ssl_mode=verify_identity`クエリパラメータを使用して TLS 接続を有効にする**必要があります**。
 
-7.  `.env`ファイルを保存します。
+7. `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Premium">
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
 
-3.  **Networking**ページで、**Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
+3. **Networking**ページで、**Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
 
     クライアントのIPアドレスがアクセスリストに追加されていることを確認してください。
 
-4.  左側のナビゲーションペインで**Overview**をクリックすると、インスタンスの概要ページに戻ります。
+4. 左側のナビゲーションペインで**Overview**をクリックすると、インスタンスの概要ページに戻ります。
 
-5.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+5. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-6.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
+6. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
 
-    -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
-    -   まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
-    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
-    -   **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+    - 公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
+    - まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
+    - サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
+    - **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
-7.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
+7. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
     cp .env.example .env
     ```
 
-8.  `.env`ファイルを編集し、 `DATABASE_URL`環境変数を以下のように設定し、接続ダイアログで対応するプレースホルダー`{}`接続パラメータに置き換えます。
+8. `.env`ファイルを編集し、 `DATABASE_URL`環境変数を以下のように設定し、接続ダイアログで対応するプレースホルダー`{}`接続パラメータに置き換えます。
 
     ```dotenv
     DATABASE_URL='mysql2://{user}:{password}@{host}:{port}/{database_name}'
     ```
 
-9.  `.env`ファイルを保存します。
+9. `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **CA cert**をクリックしてCA証明書をダウンロードします。
+3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **CA cert**をクリックしてCA証明書をダウンロードします。
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
 
     TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
-4.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
+4. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
     cp .env.example .env
     ```
 
-5.  `.env`ファイルを編集し、 `DATABASE_URL`環境変数を次のように設定し、接続ダイアログから接続文字列をコピーして変数の値として設定し、 `sslca`クエリパラメータを接続ダイアログからダウンロードした CA 証明書のファイルパスに設定します。
+5. `.env`ファイルを編集し、 `DATABASE_URL`環境変数を次のように設定し、接続ダイアログから接続文字列をコピーして変数の値として設定し、 `sslca`クエリパラメータを接続ダイアログからダウンロードした CA 証明書のファイルパスに設定します。
 
     ```dotenv
     DATABASE_URL='mysql2://{user}:{password}@{host}:{port}/{database}?ssl_mode=verify_identity&sslca=/path/to/ca.pem'
@@ -163,18 +163,18 @@ bundle add mysql2 dotenv
     >
     > TLS接続を有効にするには、 `ssl_mode`クエリパラメータの値を`verify_identity`に変更し、 `sslca`の値を接続ダイアログからダウンロードしたCA証明書のファイルパスに変更してください。
 
-6.  `.env`ファイルを保存します。
+6. `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
-1.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
+1. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
     cp .env.example .env
     ```
 
-2.  `.env`ファイルを編集し、 `DATABASE_URL`環境変数を次のように設定し、 `{user}` 、 `{password}` 、 `{host}` 、 `{port}` 、および`{database}`独自の TiDB 接続情報に置き換えてください。
+2. `.env`ファイルを編集し、 `DATABASE_URL`環境変数を次のように設定し、 `{user}` 、 `{password}` 、 `{host}` 、 `{port}` 、および`{database}`独自の TiDB 接続情報に置き換えてください。
 
     ```dotenv
     DATABASE_URL='mysql2://{user}:{password}@{host}:{port}/{database}'
@@ -182,27 +182,27 @@ bundle add mysql2 dotenv
 
     TiDBをローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空です。
 
-3.  `.env`ファイルを保存します。
+3. `.env`ファイルを保存します。
 
 </div>
 </SimpleTab>
 
 ### ステップ4：コードを実行して結果を確認する {#step-4-run-the-code-and-check-the-result}
 
-1.  データベースとテーブルを作成します。
+1. データベースとテーブルを作成します。
 
     ```shell
     bundle exec rails db:create
     bundle exec rails db:migrate
     ```
 
-2.  サンプルデータにシード値を設定します。
+2. サンプルデータにシード値を設定します。
 
     ```shell
     bundle exec rails db:seed
     ```
 
-3.  サンプルコードを実行するには、以下のコマンドを実行してください。
+3. サンプルコードを実行するには、以下のコマンドを実行してください。
 
     ```shell
     bundle exec rails runner ./quickstart.rb
@@ -297,21 +297,21 @@ player.destroy
 
 デフォルトでは、mysql2 gem（ActiveRecord ORMがTiDBに接続するために使用）は、ファイルが見つかるまで特定の順序で既存のCA証明書を検索します。
 
-1.  /etc/ssl/certs/ca-certificates.crt # Debian / Ubuntu / Gentoo / Arch / Slackware
-2.  /etc/pki/tls/certs/ca-bundle.crt # RedHat / Fedora / CentOS / Mageia / Vercel / Netlify
-3.  /etc/ssl/ca-bundle.pem # OpenSUSE
-4.  /etc/ssl/cert.pem # MacOS / Alpine (Dockerコンテナ)
+1. /etc/ssl/certs/ca-certificates.crt # Debian / Ubuntu / Gentoo / Arch / Slackware
+2. /etc/pki/tls/certs/ca-bundle.crt # RedHat / Fedora / CentOS / Mageia / Vercel / Netlify
+3. /etc/ssl/ca-bundle.pem # OpenSUSE
+4. /etc/ssl/cert.pem # MacOS / Alpine (Dockerコンテナ)
 
 CA証明書のパスを手動で指定することも可能ですが、異なるマシンや環境によってCA証明書の保存場所が異なる場合があるため、複数の環境に展開するシナリオでは、この方法は大きな不便をもたらす可能性があります。そのため、 `sslca`を`nil`に設定することで、柔軟性と異なる環境への展開の容易性を確保できます。
 
 ## 次のステップ {#next-steps}
 
--   ActiveRecord ORM の使用法について詳しくは[ActiveRecordのドキュメント](https://guides.rubyonrails.org/active_record_basics.html)ご覧ください。
--   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)[データを削除する](/develop/dev-guide-delete-data.md)SQL [トランザクション](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)などの章を読んで、[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)、TiDB アプリケーション開発のベストプラクティスを学びましょう。
--   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- ActiveRecord ORM の使用法について詳しくは[ActiveRecordのドキュメント](https://guides.rubyonrails.org/active_record_basics.html)ご覧ください。
+- [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)[データを削除する](/develop/dev-guide-delete-data.md)SQL [トランザクション](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)などの章を読んで、[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)、TiDB アプリケーション開発のベストプラクティスを学びましょう。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

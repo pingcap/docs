@@ -65,9 +65,9 @@ mysql> SHOW GLOBAL STATUS;
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
--   このステートメントは MySQL と互換性があります。
+- このステートメントは MySQL と互換性があります。
 
 ## 参照 {#see-also}
 
--   [FLUSH STATUS](/sql-statements/sql-statement-flush-status.md)
--   [サーバーステータス変数](/status-variables.md)
+- [FLUSH STATUS](/sql-statements/sql-statement-flush-status.md)
+- [サーバーステータス変数](/status-variables.md)

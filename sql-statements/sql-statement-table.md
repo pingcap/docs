@@ -83,5 +83,5 @@ TABLE t1 LIMIT 1;
 
 ## 参照 {#see-also}
 
--   [`SELECT`](/sql-statements/sql-statement-select.md)
--   [MySQLの`TABLE`文](https://dev.mysql.com/doc/refman/8.0/en/table.html)
+- [`SELECT`](/sql-statements/sql-statement-select.md)
+- [MySQLの`TABLE`文](https://dev.mysql.com/doc/refman/8.0/en/table.html)

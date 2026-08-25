@@ -12,9 +12,9 @@ TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの
 
 ## 前提条件 {#prerequisites}
 
--   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)または[SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)を使用してTiDB Cloudにログインし、次に[TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)。
+- [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)または[SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)を使用してTiDB Cloudにログインし、次に[TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)。
 
--   安全な設定でクラスターにアクセスするためのパスワードを設定します。
+- 安全な設定でクラスターにアクセスするためのパスワードを設定します。
 
     これを行うには、プロジェクトの[**My TiDB**](https://tidbcloud.com/project/clusters)ページに移動し、 TiDB Cloud Dedicatedクラスターの行にある**...**をクリックし、 **Password Settings**を選択します。パスワード設定で「パスワードの**Auto-generate Password**をクリックすると、数字、大文字、小文字、特殊文字を含む16文字のルートパスワードが自動的に生成されます。
 
@@ -22,22 +22,22 @@ TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの
 
 [TiDB Cloudコンソール](https://tidbcloud.com/)では、さまざまな接続方法の例を取得し、次のようにTiDB Cloud Dedicated クラスターに接続できます。
 
-1.  プロジェクトの[**My TiDB**](https://tidbcloud.com/project/clusters)ページに移動し、 TiDB Cloud Dedicated クラスターの名前をクリックして概要ページに移動します。
+1. プロジェクトの[**My TiDB**](https://tidbcloud.com/project/clusters)ページに移動し、 TiDB Cloud Dedicated クラスターの名前をクリックして概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックします。ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックします。ダイアログが表示されます。
 
-3.  接続ダイアログで、 **[接続タイプ]**ドロップダウンリストから**Connection Type**を選択します。
+3. 接続ダイアログで、 **[接続タイプ]**ドロップダウンリストから**Connection Type**を選択します。
 
     IPアクセスリストを設定していない場合は、初回接続前に**Configure IP Access List**をクリックして設定してください。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
 
-4.  **CA cert**をクリックして、TiDBクラスタへのTLS接続用のCA証明書をダウンロードしてください。CA証明書はデフォルトでTLS 1.2バージョンをサポートしています。
+4. **CA cert**をクリックして、TiDBクラスタへのTLS接続用のCA証明書をダウンロードしてください。CA証明書はデフォルトでTLS 1.2バージョンをサポートしています。
 
     > **Note:**
     >
-    > -   ダウンロードしたCA証明書は、オペレーティングシステムのデフォルトのストレージパスに保存することも、別のストレージパスを指定することもできます。以降の手順では、コード例のCA証明書パスをご自身のCA証明書パスに置き換える必要があります。
-    > -   TiDB Cloud Dedicated では、クライアントに TLS 接続の使用を強制しません。また、 [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610)変数のユーザー定義構成は現在TiDB Cloud Dedicated ではサポートされていません。
+    > - ダウンロードしたCA証明書は、オペレーティングシステムのデフォルトのストレージパスに保存することも、別のストレージパスを指定することもできます。以降の手順では、コード例のCA証明書パスをご自身のCA証明書パスに置き換える必要があります。
+    > - TiDB Cloud Dedicated では、クライアントに TLS 接続の使用を強制しません。また、 [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610)変数のユーザー定義構成は現在TiDB Cloud Dedicated ではサポートされていません。
 
-5.  希望する接続方法を選択し、タブ上の接続文字列とサンプルコードを参照してクラスターに接続します。
+5. 希望する接続方法を選択し、タブ上の接続文字列とサンプルコードを参照してクラスターに接続します。
 
 次の例は、MySQL、MyCLI、JDBC、Python、Go、Node.js の接続文字列を示しています。
 
@@ -52,9 +52,9 @@ mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-vers
 
 パラメータの説明：
 
--   `--ssl-mode=VERIFY_IDENTITY`では、MySQL CLI クライアントは TLS を有効にし、 TiDB Cloud Dedicated クラスターを検証することを強制します。
--   `--ssl-ca=<CA_path>`を使用して、ダウンロードした TiDB クラスター`ca.pem`のローカルパスを指定します。
--   TLSプロトコルのバージョンを制限するには、 `--tls-version=TLSv1.2`を使用します。TLS 1.3を使用する場合は、バージョンを`TLSv1.3`に設定できます。
+- `--ssl-mode=VERIFY_IDENTITY`では、MySQL CLI クライアントは TLS を有効にし、 TiDB Cloud Dedicated クラスターを検証することを強制します。
+- `--ssl-ca=<CA_path>`を使用して、ダウンロードした TiDB クラスター`ca.pem`のローカルパスを指定します。
+- TLSプロトコルのバージョンを制限するには、 `--tls-version=TLSv1.2`を使用します。TLS 1.3を使用する場合は、バージョンを`TLSv1.3`に設定できます。
 
 </div>
 
@@ -68,8 +68,8 @@ mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clust
 
 パラメータの説明：
 
--   `--ssl-ca=<CA_path>`を使用して、ダウンロードした TiDB クラスター`ca.pem`のローカルパスを指定します。
--   `--ssl-verify-server-cert`でTiDB Cloud Dedicated クラスターを検証します。
+- `--ssl-ca=<CA_path>`を使用して、ダウンロードした TiDB クラスター`ca.pem`のローカルパスを指定します。
+- `--ssl-verify-server-cert`でTiDB Cloud Dedicated クラスターを検証します。
 
 </div>
 
@@ -87,35 +87,37 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 
 詳細なコード例を表示するには、 **show example usage**をクリックします。
 
-    import com.mysql.jdbc.Driver;
-    import java.sql.*;
+```
+import com.mysql.jdbc.Driver;
+import java.sql.*;
 
-    class Main {
-      public static void main(String args[]) throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        try {
-          Connection conn = DriverManager.getConnection("jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=root&password=<your_password>&sslMode=VERIFY_IDENTITY&tlsVersions=TLSv1.2&trustCertificateKeyStoreUrl=file:<your_custom_truststore_path>&trustCertificateKeyStorePassword=<your_truststore_password>");
-          Statement stmt = conn.createStatement();
-          try {
-            ResultSet rs = stmt.executeQuery("SELECT DATABASE();");
-            if (rs.next()) {
-              System.out.println("using db:" + rs.getString(1));
-            }
-          } catch (Exception e) {
-            System.out.println("exec error:" + e);
-          }
-        } catch (Exception e) {
-          System.out.println("connect error:" + e);
+class Main {
+  public static void main(String args[]) throws SQLException, ClassNotFoundException {
+    Class.forName("com.mysql.cj.jdbc.Driver");
+    try {
+      Connection conn = DriverManager.getConnection("jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=root&password=<your_password>&sslMode=VERIFY_IDENTITY&tlsVersions=TLSv1.2&trustCertificateKeyStoreUrl=file:<your_custom_truststore_path>&trustCertificateKeyStorePassword=<your_truststore_password>");
+      Statement stmt = conn.createStatement();
+      try {
+        ResultSet rs = stmt.executeQuery("SELECT DATABASE();");
+        if (rs.next()) {
+          System.out.println("using db:" + rs.getString(1));
         }
+      } catch (Exception e) {
+        System.out.println("exec error:" + e);
       }
+    } catch (Exception e) {
+      System.out.println("connect error:" + e);
     }
+  }
+}
+```
 
 パラメータの説明：
 
--   TLS を有効にしてTiDB Cloud Dedicated クラスターを検証するには、 `sslMode=VERIFY_IDENTITY`を設定します。
--   TLSプロトコルのバージョンを制限するには、 `enabledTLSProtocols=TLSv1.2`を設定します。TLS 1.3を使用する場合は、バージョンを`TLSv1.3`に設定できます。
--   カスタム トラストストアのパスに`trustCertificateKeyStoreUrl`を設定します。
--   トラストストアのパスワードを`trustCertificateKeyStorePassword`に設定します。
+- TLS を有効にしてTiDB Cloud Dedicated クラスターを検証するには、 `sslMode=VERIFY_IDENTITY`を設定します。
+- TLSプロトコルのバージョンを制限するには、 `enabledTLSProtocols=TLSv1.2`を設定します。TLS 1.3を使用する場合は、バージョンを`TLSv1.3`に設定できます。
+- カスタム トラストストアのパスに`trustCertificateKeyStoreUrl`を設定します。
+- トラストストアのパスワードを`trustCertificateKeyStorePassword`に設定します。
 
 </div>
 
@@ -123,24 +125,28 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 
 ここでは、 [mysqlクライアント](https://pypi.org/project/mysqlclient/)の TLS 接続構成が例として使用されています。
 
-    host="tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com", user="root", password="<your_password>", port=4000, database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "ca.pem"}
+```
+host="tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com", user="root", password="<your_password>", port=4000, database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "ca.pem"}
+```
 
 詳細なコード例を表示するには、 **show example usage**をクリックします。
 
-    import MySQLdb
+```
+import MySQLdb
 
-    connection = MySQLdb.connect(host="tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com", port=4000, user="root", password="<your_password>", database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "ca.pem"})
+connection = MySQLdb.connect(host="tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com", port=4000, user="root", password="<your_password>", database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "ca.pem"})
 
-    with connection:
-        with connection.cursor() as cursor:
-            cursor.execute("SELECT DATABASE();")
-            m = cursor.fetchone()
-            print(m[0])
+with connection:
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT DATABASE();")
+        m = cursor.fetchone()
+        print(m[0])
+```
 
 パラメータの説明：
 
--   TLS を有効にしてTiDB Cloud Dedicated クラスターを検証するには、 `ssl_mode="VERIFY_IDENTITY"`を設定します。
--   `ssl={"ca": "<CA_path>"}`を使用して、ダウンロードした TiDB クラスター`ca.pem`のローカルパスを指定します。
+- TLS を有効にしてTiDB Cloud Dedicated クラスターを検証するには、 `ssl_mode="VERIFY_IDENTITY"`を設定します。
+- `ssl={"ca": "<CA_path>"}`を使用して、ダウンロードした TiDB クラスター`ca.pem`のローカルパスを指定します。
 
 </div>
 
@@ -148,69 +154,73 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 
 ここでは、 [Go-MySQL-ドライバー](https://github.com/go-sql-driver/mysql)の TLS 接続構成が例として使用されています。
 
-    rootCertPool := x509.NewCertPool()
-    pem, err := ioutil.ReadFile("ca.pem")
-    if err != nil {
-        log.Fatal(err)
-    }
-    if ok := rootCertPool.AppendCertsFromPEM(pem); !ok {
-        log.Fatal("Failed to append PEM.")
-    }
-    mysql.RegisterTLSConfig("tidb", &tls.Config{
-        RootCAs:    rootCertPool,
-        MinVersion: tls.VersionTLS12,
-        ServerName: "tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com",
-    })
+```
+rootCertPool := x509.NewCertPool()
+pem, err := ioutil.ReadFile("ca.pem")
+if err != nil {
+    log.Fatal(err)
+}
+if ok := rootCertPool.AppendCertsFromPEM(pem); !ok {
+    log.Fatal("Failed to append PEM.")
+}
+mysql.RegisterTLSConfig("tidb", &tls.Config{
+    RootCAs:    rootCertPool,
+    MinVersion: tls.VersionTLS12,
+    ServerName: "tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com",
+})
 
-    db, err := sql.Open("mysql", "root:<your_password>@tcp(tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000)/test?tls=tidb")
+db, err := sql.Open("mysql", "root:<your_password>@tcp(tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000)/test?tls=tidb")
+```
 
 詳細なコード例を表示するには、 **show example usage**をクリックします。
 
-    package main
-    import (
-      "crypto/tls"
-      "crypto/x509"
-      "database/sql"
-      "fmt"
-      "io/ioutil"
-      "log"
+```
+package main
+import (
+  "crypto/tls"
+  "crypto/x509"
+  "database/sql"
+  "fmt"
+  "io/ioutil"
+  "log"
 
-      "github.com/go-sql-driver/mysql"
-    )
-    func main() {
-      rootCertPool := x509.NewCertPool()
-      pem, err := ioutil.ReadFile("ca.pem")
-      if err != nil {
-        log.Fatal(err)
-      }
-      if ok := rootCertPool.AppendCertsFromPEM(pem); !ok {
-        log.Fatal("Failed to append PEM.")
-      }
-      mysql.RegisterTLSConfig("tidb", &tls.Config{
-        RootCAs:    rootCertPool,
-        MinVersion: tls.VersionTLS12,
-        ServerName: "tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com",
-      })
-      db, err := sql.Open("mysql", "root:<your_password>@tcp(tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000)/test?tls=tidb")
-      if err != nil {
-        log.Fatal("failed to connect database", err)
-      }
-      defer db.Close()
+  "github.com/go-sql-driver/mysql"
+)
+func main() {
+  rootCertPool := x509.NewCertPool()
+  pem, err := ioutil.ReadFile("ca.pem")
+  if err != nil {
+    log.Fatal(err)
+  }
+  if ok := rootCertPool.AppendCertsFromPEM(pem); !ok {
+    log.Fatal("Failed to append PEM.")
+  }
+  mysql.RegisterTLSConfig("tidb", &tls.Config{
+    RootCAs:    rootCertPool,
+    MinVersion: tls.VersionTLS12,
+    ServerName: "tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com",
+  })
+  db, err := sql.Open("mysql", "root:<your_password>@tcp(tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000)/test?tls=tidb")
+  if err != nil {
+    log.Fatal("failed to connect database", err)
+  }
+  defer db.Close()
 
-      var dbName string
-      err = db.QueryRow("SELECT DATABASE();").Scan(&dbName)
-      if err != nil {
-        log.Fatal("failed to execute query", err)
-      }
-      fmt.Println(dbName)
-    }
+  var dbName string
+  err = db.QueryRow("SELECT DATABASE();").Scan(&dbName)
+  if err != nil {
+    log.Fatal("failed to execute query", err)
+  }
+  fmt.Println(dbName)
+}
+```
 
 パラメータの説明：
 
--   TLS 接続構成に`tls.Config`を登録して、TLS を有効にし、 TiDB Cloud Dedicated クラスターを検証します。
--   TLS プロトコルのバージョンを制限するには`MinVersion: tls.VersionTLS12`を設定します。
--   TiDB Cloud Dedicated のホスト名を確認するには`ServerName: "<host>"`を設定します。
--   新しい TLS 構成を登録したくない場合は、接続文字列に`tls=true`を設定するだけです。
+- TLS 接続構成に`tls.Config`を登録して、TLS を有効にし、 TiDB Cloud Dedicated クラスターを検証します。
+- TLS プロトコルのバージョンを制限するには`MinVersion: tls.VersionTLS12`を設定します。
+- TiDB Cloud Dedicated のホスト名を確認するには`ServerName: "<host>"`を設定します。
+- 新しい TLS 構成を登録したくない場合は、接続文字列に`tls=true`を設定するだけです。
 
 </div>
 
@@ -218,52 +228,56 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 
 ここでは、 [MySQL2](https://www.npmjs.com/package/mysql2)の TLS 接続構成が例として使用されています。
 
-    var connection = mysql.createConnection({
-      host: 'tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com',
-      port: 4000,
-      user: 'root',
-      password: '<your_password>',
-      database: 'test',
-      ssl: {
-        ca: fs.readFileSync('ca.pem'),
-        minVersion: 'TLSv1.2',
-        rejectUnauthorized: true
-      }
-    });
+```
+var connection = mysql.createConnection({
+  host: 'tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com',
+  port: 4000,
+  user: 'root',
+  password: '<your_password>',
+  database: 'test',
+  ssl: {
+    ca: fs.readFileSync('ca.pem'),
+    minVersion: 'TLSv1.2',
+    rejectUnauthorized: true
+  }
+});
+```
 
 詳細なコード例を表示するには、 **show example usage**をクリックします。
 
-    var mysql = require('mysql2');
-    var fs = require('fs');
-    var connection = mysql.createConnection({
-      host: 'tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com',
-      port: 4000,
-      user: 'root',
-      password: '<your_password>',
-      database: 'test',
-      ssl: {
-        ca: fs.readFileSync('ca.pem'),
-        minVersion: 'TLSv1.2',
-        rejectUnauthorized: true
-      }
-    });
-    connection.connect(function(err) {
-      if (err) {
-        throw err
-      }
-      connection.query('SELECT DATABASE();', function(err, rows) {
-        if (err) {
-          throw err
-        }
-        console.log(rows[0]['DATABASE()']);
-        connection.end()
-      });
-    });
+```
+var mysql = require('mysql2');
+var fs = require('fs');
+var connection = mysql.createConnection({
+  host: 'tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com',
+  port: 4000,
+  user: 'root',
+  password: '<your_password>',
+  database: 'test',
+  ssl: {
+    ca: fs.readFileSync('ca.pem'),
+    minVersion: 'TLSv1.2',
+    rejectUnauthorized: true
+  }
+});
+connection.connect(function(err) {
+  if (err) {
+    throw err
+  }
+  connection.query('SELECT DATABASE();', function(err, rows) {
+    if (err) {
+      throw err
+    }
+    console.log(rows[0]['DATABASE()']);
+    connection.end()
+  });
+});
+```
 
 パラメータの説明：
 
--   TLSプロトコルのバージョンを制限するには、 `ssl: {minVersion: 'TLSv1.2'}`を設定します。TLS 1.3を使用する場合は、バージョンを`TLSv1.3`に設定できます。
--   ダウンロードした TiDB クラスター`ca.pem`のローカル CA パスを読み取るには`ssl: {ca: fs.readFileSync('<CA_path>')}`を設定します。
+- TLSプロトコルのバージョンを制限するには、 `ssl: {minVersion: 'TLSv1.2'}`を設定します。TLS 1.3を使用する場合は、バージョンを`TLSv1.3`に設定できます。
+- ダウンロードした TiDB クラスター`ca.pem`のローカル CA パスを読み取るには`ssl: {ca: fs.readFileSync('<CA_path>')}`を設定します。
 
 </div>
 </SimpleTab>

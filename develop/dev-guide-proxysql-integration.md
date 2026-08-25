@@ -10,9 +10,9 @@ aliases: ['/ja/tidb/stable/dev-guide-proxysql-integration/','/ja/tidb/dev/dev-gu
 
 TiDBとProxySQLについてさらに詳しく知りたい場合は、以下のリンクが参考になります。
 
--   [TiDB Cloud](https://docs.pingcap.com/tidbcloud)
--   [TiDB開発者ガイド](https://docs.pingcap.com/developer/)
--   [ProxySQLドキュメント](https://proxysql.com/documentation/)
+- [TiDB Cloud](https://docs.pingcap.com/tidbcloud)
+- [TiDB開発者ガイド](https://docs.pingcap.com/developer/)
+- [ProxySQLドキュメント](https://proxysql.com/documentation/)
 
 ## ProxySQLとは何ですか？ {#what-is-proxysql}
 
@@ -22,9 +22,9 @@ ProxySQLは、高速性、効率性、使いやすさを追求してゼロから
 
 ## ProxySQLとの連携の理由とは？ {#why-proxysql-integration}
 
--   ProxySQL は、TiDB と対話する際のレイテンシーを短縮することで、アプリケーションのパフォーマンスを向上させるのに役立ちます。 Lambda などのサーバーレス関数を使用したスケーラブルなアプリケーションでワークロードが非決定的で急増する可能性がある場合や、大量のデータを読み込むクエリを実行するアプリケーションを構築している場合など、何を構築しているかに関係なく。 [接続プーリング](https://proxysql.com/documentation/detailed-answers-on-faq/)や[頻繁に使用されるクエリをキャッシュする](https://proxysql.com/documentation/query-cache/)可能性をキャッシュするなどの ProxySQL の強力な機能を活用することで、アプリケーションはすぐにメリットを得ることができます。
--   ProxySQL は、ProxySQL で利用できる簡単に設定できる機能である[クエリルール](#query-rules)利用することで、SQL インジェクションなどの SQL 脆弱性に対するアプリケーション セキュリティ保護の追加レイヤーとして機能します。
--   [ProxySQL](https://github.com/sysown/proxysql)と[TiDB](https://github.com/pingcap/tidb)どちらもオープンソースプロジェクトであるため、ベンダーロックインの心配がないというメリットを享受できます。
+- ProxySQL は、TiDB と対話する際のレイテンシーを短縮することで、アプリケーションのパフォーマンスを向上させるのに役立ちます。 Lambda などのサーバーレス関数を使用したスケーラブルなアプリケーションでワークロードが非決定的で急増する可能性がある場合や、大量のデータを読み込むクエリを実行するアプリケーションを構築している場合など、何を構築しているかに関係なく。 [接続プーリング](https://proxysql.com/documentation/detailed-answers-on-faq/)や[頻繁に使用されるクエリをキャッシュする](https://proxysql.com/documentation/query-cache/)可能性をキャッシュするなどの ProxySQL の強力な機能を活用することで、アプリケーションはすぐにメリットを得ることができます。
+- ProxySQL は、ProxySQL で利用できる簡単に設定できる機能である[クエリルール](#query-rules)利用することで、SQL インジェクションなどの SQL 脆弱性に対するアプリケーション セキュリティ保護の追加レイヤーとして機能します。
+- [ProxySQL](https://github.com/sysown/proxysql)と[TiDB](https://github.com/pingcap/tidb)どちらもオープンソースプロジェクトであるため、ベンダーロックインの心配がないというメリットを享受できます。
 
 ## デプロイメントアーキテクチャ {#deployment-architecture}
 
@@ -40,18 +40,18 @@ TiDB と ProxySQL を連携させる最も一般的な方法は、アプリケ�
 
 このセクションでは、開発環境で TiDB と ProxySQL を統合する方法について説明します。ProxySQL 統合を開始するには、すべての[前提条件](#prerequisite)完了後。
 
--   オプション 1: [TiDB CloudとProxySQLを統合する](#option-1-integrate-tidb-cloud-with-proxysql)
--   オプション 2: [TiDB Self-ManagedをProxySQLと統合する](#option-2-integrate-tidb-self-managed-with-proxysql)
+- オプション 1: [TiDB CloudとProxySQLを統合する](#option-1-integrate-tidb-cloud-with-proxysql)
+- オプション 2: [TiDB Self-ManagedをProxySQLと統合する](#option-2-integrate-tidb-self-managed-with-proxysql)
 
 ### 前提条件 {#prerequisites}
 
 選択するオプションによっては、以下のパッケージが必要になる場合があります。
 
--   [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
--   [Docker](https://docs.docker.com/get-docker/)
--   [Python 3](https://www.python.org/downloads/)
--   [Docker Compose](https://docs.docker.com/compose/install/linux/)
--   [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [Docker](https://docs.docker.com/get-docker/)
+- [Python 3](https://www.python.org/downloads/)
+- [Docker Compose](https://docs.docker.com/compose/install/linux/)
+- [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)
 
 以下のインストール手順に従ってください。
 
@@ -59,8 +59,8 @@ TiDB と ProxySQL を連携させる最も一般的な方法は、アプリケ�
 
 <div label="macOS" value="macOS">
 
-1.  Docker[ダウンロード](https://docs.docker.com/get-docker/)して起動します (Docker デスクトップには既に Docker Compose が含まれています)。
-2.  Pythonと`mysql-client`をインストールするには、次のコマンドを実行してください。
+1. Docker[ダウンロード](https://docs.docker.com/get-docker/)して起動します (Docker デスクトップには既に Docker Compose が含まれています)。
+2. Pythonと`mysql-client`をインストールするには、次のコマンドを実行してください。
 
     ```bash
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -81,17 +81,17 @@ systemctl start docker
 
 <div label="Windows" value="Windows">
 
--   Gitをダウンロードしてインストールしてください。
+- Gitをダウンロードしてインストールしてください。
 
-    1.  [Git Windows ダウンロード](https://git-scm.com/download/win)ページから**64 ビット Git for Windows セットアップ**パッケージをダウンロードします。
-    2.  セットアップウィザードの手順に従ってGitパッケージをインストールしてください。デフォルトのインストール設定を使用する場合は、 **Next**を数回クリックしてください。
+    1. [Git Windows ダウンロード](https://git-scm.com/download/win)ページから**64 ビット Git for Windows セットアップ**パッケージをダウンロードします。
+    2. セットアップウィザードの手順に従ってGitパッケージをインストールしてください。デフォルトのインストール設定を使用する場合は、 **Next**を数回クリックしてください。
 
         ![proxysql-windows-git-install](/media/develop/proxysql-windows-git-install.png)
 
--   MySQL Shellをダウンロードしてインストールしてください。
+- MySQL Shellをダウンロードしてインストールしてください。
 
-    1.  [MySQL Community Server のダウンロード](https://dev.mysql.com/downloads/mysql/)ページから MySQL インストーラーの ZIP ファイルをダウンロードします。
-    2.  ファイルを解凍し、 `mysql.exe`フォルダ内の`bin` } を探します。Git Bash で`bin`フォルダのパスをシステム変数に追加し、 `PATH`変数に設定する必要があります。
+    1. [MySQL Community Server のダウンロード](https://dev.mysql.com/downloads/mysql/)ページから MySQL インストーラーの ZIP ファイルをダウンロードします。
+    2. ファイルを解凍し、 `mysql.exe`フォルダ内の`bin` } を探します。Git Bash で`bin`フォルダのパスをシステム変数に追加し、 `PATH`変数に設定する必要があります。
 
         ```bash
         echo 'export PATH="(your bin folder)":$PATH' >>~/.bash_profile
@@ -105,14 +105,14 @@ systemctl start docker
         source ~/.bash_profile
         ```
 
--   Dockerをダウンロードしてインストールしてください。
+- Dockerをダウンロードしてインストールしてください。
 
-    1.  [Dockerのダウンロード](https://www.docker.com/products/docker-desktop/)ページからDocker Desktopインストーラーをダウンロードします。
-    2.  インストーラーをダブルクリックして実行してください。インストールが完了すると、再起動を促すメッセージが表示されます。
+    1. [Dockerのダウンロード](https://www.docker.com/products/docker-desktop/)ページからDocker Desktopインストーラーをダウンロードします。
+    2. インストーラーをダブルクリックして実行してください。インストールが完了すると、再起動を促すメッセージが表示されます。
 
         ![proxysql-windows-docker-install](/media/develop/proxysql-windows-docker-install.png)
 
--   [Pythonのダウンロード](https://www.python.org/downloads/)ページから最新の Python 3 インストーラーをダウンロードして実行します。
+- [Pythonのダウンロード](https://www.python.org/downloads/)ページから最新の Python 3 インストーラーをダウンロードして実行します。
 
 </div>
 
@@ -124,15 +124,15 @@ systemctl start docker
 
 #### ステップ1. TiDB Cloud Starterインスタンスを作成する {#step-1-create-a-tidb-cloud-starter-instance}
 
-1.  [無料のTiDB Cloud Starterインスタンスを作成します](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-starter-instance) TiDB Cloud Starterインスタンスに設定した root パスワードを覚えておいてください。
-2.  後で使用するために、 TiDB Cloud Starterインスタンスのホスト名、ポート番号、およびユーザー名を取得してください。
+1. [無料のTiDB Cloud Starterインスタンスを作成します](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-starter-instance) TiDB Cloud Starterインスタンスに設定した root パスワードを覚えておいてください。
+2. 後で使用するために、 TiDB Cloud Starterインスタンスのホスト名、ポート番号、およびユーザー名を取得してください。
 
-    1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックすると、その概要ページに移動します。
-    2.  概要ページで、 **[接続]**ペインを見つけて、 `Endpoint` 、 `Port` 、および`User`フィールドをコピーします。ここで`Endpoint`はTiDB Cloud Starterインスタンスのホスト名です。
+    1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックすると、その概要ページに移動します。
+    2. 概要ページで、 **[接続]**ペインを見つけて、 `Endpoint` 、 `Port` 、および`User`フィールドをコピーします。ここで`Endpoint`はTiDB Cloud Starterインスタンスのホスト名です。
 
 #### ステップ2. ProxySQL構成ファイルを生成する {#step-2-generate-proxysql-configuration-files}
 
-1.  TiDB および ProxySQL 用の[統合例のコードリポジトリ](https://github.com/pingcap-inc/tidb-proxysql-integration)クローンを作成します。
+1. TiDB および ProxySQL 用の[統合例のコードリポジトリ](https://github.com/pingcap-inc/tidb-proxysql-integration)クローンを作成します。
 
      <SimpleTab groupId="os">
 
@@ -162,7 +162,7 @@ systemctl start docker
 
      </SimpleTab>
 
-2.  `tidb-cloud-connect`フォルダに移動します。
+2. `tidb-cloud-connect`フォルダに移動します。
 
      <SimpleTab groupId="os">
 
@@ -192,7 +192,7 @@ systemctl start docker
 
      </SimpleTab>
 
-3.  `proxysql-config.py`を実行してProxySQL構成ファイルを生成します。
+3. `proxysql-config.py`を実行してProxySQL構成ファイルを生成します。
 
      <SimpleTab groupId="os">
 
@@ -236,7 +236,7 @@ systemctl start docker
 
 #### ステップ3. ProxySQLの設定 {#step-3-configure-proxysql}
 
-1.  Dockerを起動します。Dockerが既に起動している場合は、この手順をスキップしてください。
+1. Dockerを起動します。Dockerが既に起動している場合は、この手順をスキップしてください。
 
      <SimpleTab groupId="os">
 
@@ -262,7 +262,7 @@ systemctl start docker
 
      </SimpleTab>
 
-2.  ProxySQLイメージをプルし、バックグラウンドでProxySQLコンテナを起動します。
+2. ProxySQLイメージをプルし、バックグラウンドでProxySQLコンテナを起動します。
 
      <SimpleTab groupId="os">
 
@@ -292,7 +292,7 @@ systemctl start docker
 
      </SimpleTab>
 
-3.  ProxySQL と統合するには、次のコマンドを実行します。このコマンドは、 **ProxySQL 管理インターフェース**内で`proxysql-prepare.sql`を実行します。
+3. ProxySQL と統合するには、次のコマンドを実行します。このコマンドは、 **ProxySQL 管理インターフェース**内で`proxysql-prepare.sql`を実行します。
 
      <SimpleTab groupId="os">
 
@@ -326,10 +326,10 @@ systemctl start docker
     >
     > `proxysql-prepare.sql`スクリプトは、以下の処理を実行します。
     >
-    > 1.  TiDB Cloud Starterインスタンスのユーザー名とパスワードを使用してユーザーを追加します。
-    > 2.  ユーザーを監視アカウントに割り当てます。
-    > 3.  TiDB Cloud Starterインスタンスをホストリストに追加します。
-    > 4.  ProxySQLとTiDB Cloud Starterインスタンス間の安全な接続を有効にします。
+    > 1. TiDB Cloud Starterインスタンスのユーザー名とパスワードを使用してユーザーを追加します。
+    > 2. ユーザーを監視アカウントに割り当てます。
+    > 3. TiDB Cloud Starterインスタンスをホストリストに追加します。
+    > 4. ProxySQLとTiDB Cloud Starterインスタンス間の安全な接続を有効にします。
     >
     > より深く理解するには、 `proxysql-prepare.sql`ファイルを確認することを強くお勧めします。 ProxySQL 構成の詳細については、 [ProxySQLのドキュメント](https://proxysql.com/documentation/proxysql-configuration/)を参照してください。
 
@@ -353,7 +353,7 @@ systemctl start docker
 
 #### ステップ4. ProxySQL経由でTiDBに接続する {#step-4-connect-to-tidb-through-proxysql}
 
-1.  TiDB Cloud Starterインスタンスに接続するには、 `proxysql-connect.py`を実行します。スクリプトは自動的に MySQL クライアントを起動し、 [ステップ2](#step-2-generate-proxysql-configuration-files)で指定したユーザー名とパスワードを使用して接続します。
+1. TiDB Cloud Starterインスタンスに接続するには、 `proxysql-connect.py`を実行します。スクリプトは自動的に MySQL クライアントを起動し、 [ステップ2](#step-2-generate-proxysql-configuration-files)で指定したユーザー名とパスワードを使用して接続します。
 
      <SimpleTab groupId="os">
 
@@ -383,7 +383,7 @@ systemctl start docker
 
      </SimpleTab>
 
-2.  TiDB Cloud Starterインスタンスに接続した後、次のSQL文を使用して接続を検証できます。
+2. TiDB Cloud Starterインスタンスに接続した後、次のSQL文を使用して接続を検証できます。
 
     ```sql
     SELECT VERSION();
@@ -395,7 +395,7 @@ systemctl start docker
     >
     > ***デバッグの場合：*** TiDB Cloud Starterインスタンスに接続できない場合は、ファイル`tidb-cloud-connect.cnf` 、 `proxysql-prepare.sql` 、および`proxysql-connect.py`を確認してください。提供したサーバー情報が利用可能で正しいことを確認してください。
 
-3.  コンテナを停止して削除し、前のディレクトリに戻るには、次のコマンドを実行します。
+3. コンテナを停止して削除し、前のディレクトリに戻るには、次のコマンドを実行します。
 
      <SimpleTab groupId="os">
 
@@ -434,7 +434,7 @@ systemctl start docker
 
 以下の手順では、ProxySQL と TiDB をそれぞれポート`6033`と`4000`にセットアップしますので、これらのポートが使用可能であることを確認してください。
 
-1.  Dockerを起動します。Dockerが既に起動している場合は、この手順をスキップしてください。
+1. Dockerを起動します。Dockerが既に起動している場合は、この手順をスキップしてください。
 
      <SimpleTab groupId="os">
 
@@ -460,7 +460,7 @@ systemctl start docker
 
      </SimpleTab>
 
-2.  TiDB および ProxySQL 用の[統合例のコードリポジトリ](https://github.com/pingcap-inc/tidb-proxysql-integration)クローンを作成します。
+2. TiDB および ProxySQL 用の[統合例のコードリポジトリ](https://github.com/pingcap-inc/tidb-proxysql-integration)クローンを作成します。
 
      <SimpleTab groupId="os">
 
@@ -490,7 +490,7 @@ systemctl start docker
 
      </SimpleTab>
 
-3.  ProxySQLとTiDBの最新イメージを取得します。
+3. ProxySQLとTiDBの最新イメージを取得します。
 
      <SimpleTab groupId="os">
 
@@ -520,7 +520,7 @@ systemctl start docker
 
      </SimpleTab>
 
-4.  TiDBとProxySQLの両方をコンテナとして実行する統合環境を起動します。
+4. TiDBとProxySQLの両方をコンテナとして実行する統合環境を起動します。
 
      <SimpleTab groupId="os">
 
@@ -552,7 +552,7 @@ systemctl start docker
 
     ProxySQL `6033`ポートにログインするには、 `root`ユーザー名と空のパスワードを使用できます。
 
-5.  ProxySQL経由でTiDBに接続する：
+5. ProxySQL経由でTiDBに接続する：
 
      <SimpleTab groupId="os">
 
@@ -582,7 +582,7 @@ systemctl start docker
 
      </SimpleTab>
 
-6.  TiDB Self-Managedクラスタに接続した後、次のSQLステートメントを使用して接続を検証できます。
+6. TiDB Self-Managedクラスタに接続した後、次のSQLステートメントを使用して接続を検証できます。
 
     ```sql
     SELECT VERSION();
@@ -590,7 +590,7 @@ systemctl start docker
 
     TiDBのバージョンが表示されていれば、ProxySQL経由でTiDBコンテナへの接続は成功しています。
 
-7.  コンテナを停止して削除し、前のディレクトリに戻るには、次のコマンドを実行します。
+7. コンテナを停止して削除し、前のディレクトリに戻るには、次のコマンドを実行します。
 
      <SimpleTab groupId="os">
 
@@ -643,7 +643,7 @@ ProxySQLは様々なプラットフォームにインストールできます。
 
 #### ステップ2. ProxySQLをインストールする {#step-2-install-proxysql}
 
-1.  YUMリポジトリにProxySQLを追加する：
+1. YUMリポジトリにProxySQLを追加する：
 
     ```bash
     cat > /etc/yum.repos.d/proxysql.repo << EOF
@@ -655,13 +655,13 @@ ProxySQLは様々なプラットフォームにインストールできます。
     EOF
     ```
 
-2.  ProxySQLをインストールします。
+2. ProxySQLをインストールします。
 
     ```bash
     yum install -y proxysql
     ```
 
-3.  ProxySQLを起動します。
+3. ProxySQLを起動します。
 
     ```bash
     systemctl start proxysql
@@ -679,7 +679,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
 ##### オプション1：管理インターフェースを使用してProxySQLを設定する {#option-1-configure-proxysql-using-the-admin-interface}
 
-1.  ProxySQLの内部設定を再構成するには、任意のMySQLコマンドラインクライアントからアクセスできる標準のProxySQL管理インターフェースを使用します（デフォルトではポート`6032`で利用可能です）。
+1. ProxySQLの内部設定を再構成するには、任意のMySQLコマンドラインクライアントからアクセスできる標準のProxySQL管理インターフェースを使用します（デフォルトではポート`6032`で利用可能です）。
 
     ```bash
     mysql -u admin -padmin -h 127.0.0.1 -P6032 --prompt 'ProxySQL Admin> '
@@ -687,7 +687,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
     上記の手順を実行すると、ProxySQLの管理画面が表示されます。
 
-2.  使用するTiDB Cloud Dedicatedクラスターを構成します。ProxySQL に 1 つまたは複数のTiDB Cloud Dedicatedクラスターを追加できます。たとえば、次のステートメントは 1 つのTiDB Cloud Dedicatedクラスターを追加します。 `<tidb cloud dedicated cluster host>`と`<tidb cloud dedicated cluster port>`を、ご使用のTiDB Cloud Dedicatedエンドポイントとポートに置き換える必要があります (デフォルトのポートは`4000`です)。
+2. 使用するTiDB Cloud Dedicatedクラスターを構成します。ProxySQL に 1 つまたは複数のTiDB Cloud Dedicatedクラスターを追加できます。たとえば、次のステートメントは 1 つのTiDB Cloud Dedicatedクラスターを追加します。 `<tidb cloud dedicated cluster host>`と`<tidb cloud dedicated cluster port>`を、ご使用のTiDB Cloud Dedicatedエンドポイントとポートに置き換える必要があります (デフォルトのポートは`4000`です)。
 
     ```sql
     INSERT INTO mysql_servers(hostgroup_id, hostname, port) 
@@ -703,11 +703,11 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
     > **Note:**
     >
-    > -   `hostgroup_id` : ホストグループの ID を指定します。ProxySQL はホストグループを使用してクラスタを管理します。SQL トラフィックをこれらのクラスタに均等に分散するには、負荷分散が必要な複数のクラスタを同じホストグループに構成できます。読み取りと書き込みなどの目的でクラスタを区別するには、異なるホストグループを使用するように構成できます。
-    > -   `hostname` : TiDB Cloud Dedicatedクラスターのエンドポイント。
-    > -   `port` : TiDB Cloud Dedicatedクラスターのポート。
+    > - `hostgroup_id` : ホストグループの ID を指定します。ProxySQL はホストグループを使用してクラスタを管理します。SQL トラフィックをこれらのクラスタに均等に分散するには、負荷分散が必要な複数のクラスタを同じホストグループに構成できます。読み取りと書き込みなどの目的でクラスタを区別するには、異なるホストグループを使用するように構成できます。
+    > - `hostname` : TiDB Cloud Dedicatedクラスターのエンドポイント。
+    > - `port` : TiDB Cloud Dedicatedクラスターのポート。
 
-3.  プロキシログインユーザーを設定して、ユーザーがTiDB Cloud Dedicatedクラスタに対して適切な権限を持っていることを確認してください。以下のステートメントでは、「 *tidb cloud dedicated cluster username* 」と「 *tidb cloud dedicated cluster password* 」を、実際のTiDB Cloud Dedicatedクラスタのユーザー名とパスワードに置き換えてください。
+3. プロキシログインユーザーを設定して、ユーザーがTiDB Cloud Dedicatedクラスタに対して適切な権限を持っていることを確認してください。以下のステートメントでは、「 *tidb cloud dedicated cluster username* 」と「 *tidb cloud dedicated cluster password* 」を、実際のTiDB Cloud Dedicatedクラスタのユーザー名とパスワードに置き換えてください。
 
     ```sql
     INSERT INTO mysql_users(
@@ -726,17 +726,17 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
     > **Note:**
     >
-    > -   `username` : TiDB ユーザー名。
-    > -   `password` : TiDB パスワード。
-    > -   `active` : ユーザーがアクティブかどうかを制御します。 `1`ユーザーが**アクティブ**でログインに使用できることを示し、 `0`はユーザーが非アクティブであることを示します。
-    > -   `default_hostgroup` : ユーザーが使用するデフォルトのホストグループ。クエリ ルールがトラフィックを特定のホストグループに上書きしない限り、SQL トラフィックはこのホストグループに分散されます。
-    > -   `transaction_persistent` : `1`は、永続的なトランザクションを示します。ユーザーが接続内でトランザクションを開始すると、トランザクションがコミットまたはロールバックされるまで、すべてのクエリステートメントは同じホスト グループにルーティングされます。
+    > - `username` : TiDB ユーザー名。
+    > - `password` : TiDB パスワード。
+    > - `active` : ユーザーがアクティブかどうかを制御します。 `1`ユーザーが**アクティブ**でログインに使用できることを示し、 `0`はユーザーが非アクティブであることを示します。
+    > - `default_hostgroup` : ユーザーが使用するデフォルトのホストグループ。クエリ ルールがトラフィックを特定のホストグループに上書きしない限り、SQL トラフィックはこのホストグループに分散されます。
+    > - `transaction_persistent` : `1`は、永続的なトランザクションを示します。ユーザーが接続内でトランザクションを開始すると、トランザクションがコミットまたはロールバックされるまで、すべてのクエリステートメントは同じホスト グループにルーティングされます。
 
 ##### オプション2：設定ファイルを使用してProxySQLを設定する {#option-2-configure-proxysql-using-a-configuration-file}
 
 このオプションは、ProxySQL を構成するための代替方法としてのみ考慮してください。詳細については、 [設定ファイルによるProxySQLの設定](https://github.com/sysown/proxysql#configuring-proxysql-through-the-config-file)を参照してください。
 
-1.  既存のSQLiteデータベース（設定が内部的に保存されている場所）をすべて削除します。
+1. 既存のSQLiteデータベース（設定が内部的に保存されている場所）をすべて削除します。
 
     ```bash
     rm /var/lib/proxysql/proxysql.db
@@ -746,7 +746,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
     >
     > SQLiteデータベースファイルを削除すると、ProxySQL管理インターフェースを使用して行った設定変更はすべて失われます。
 
-2.  必要に応じて設定ファイル`/etc/proxysql.cnf`を変更してください。例:
+2. 必要に応じて設定ファイル`/etc/proxysql.cnf`を変更してください。例:
 
     ```
     mysql_servers:
@@ -775,10 +775,10 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
     前述の例では：
 
-    -   `address`および`port` : TiDB Cloud Dedicatedクラスターのエンドポイントとポートを指定します。
-    -   `username`および`password` : TiDB Cloud Dedicatedクラスターのユーザー名とパスワードを指定します。
+    - `address`および`port` : TiDB Cloud Dedicatedクラスターのエンドポイントとポートを指定します。
+    - `username`および`password` : TiDB Cloud Dedicatedクラスターのユーザー名とパスワードを指定します。
 
-3.  ProxySQLを再起動してください。
+3. ProxySQLを再起動してください。
 
     ```bash
     systemctl restart proxysql
@@ -804,7 +804,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 >
 > 以下の手順では、TiDBとProxySQLのコンテナイメージを使用してクエリルールを設定します。まだプルしていない場合は、詳細な手順について[統合セクション](#option-2-integrate-tidb-self-managed-with-proxysql)を参照してください。
 
-1.  TiDB および ProxySQL 用の[統合例のコードリポジトリ](https://github.com/pingcap-inc/tidb-proxysql-integration)クローンを作成します。前の手順ですでにクローンを作成している場合は、この手順をスキップしてください。
+1. TiDB および ProxySQL 用の[統合例のコードリポジトリ](https://github.com/pingcap-inc/tidb-proxysql-integration)クローンを作成します。前の手順ですでにクローンを作成している場合は、この手順をスキップしてください。
 
      <SimpleTab groupId="os">
 
@@ -834,7 +834,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
      </SimpleTab>
 
-2.  ProxySQLルールのサンプルディレクトリに移動します。
+2. ProxySQLルールのサンプルディレクトリに移動します。
 
      <SimpleTab groupId="os">
 
@@ -864,7 +864,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
      </SimpleTab>
 
-3.  以下のコマンドを実行して、2つのTiDBコンテナと1つのProxySQLコンテナを起動します。
+3. 以下のコマンドを実行して、2つのTiDBコンテナと1つのProxySQLコンテナを起動します。
 
      <SimpleTab groupId="os">
 
@@ -896,10 +896,10 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
     全てが順調に進めば、以下のコンテナが起動されます。
 
-    -   ポート`4001`および`4002`を介して公開される TiDB クラスタの 2 つの Docker コンテナ
-    -   ポート`6034`を介して公開される ProxySQL Docker コンテナが 1 つあります。
+    - ポート`4001`および`4002`を介して公開される TiDB クラスタの 2 つの Docker コンテナ
+    - ポート`6034`を介して公開される ProxySQL Docker コンテナが 1 つあります。
 
-4.  2 つの TiDB コンテナでは、 `mysql`を使用して同様のスキーマ定義を持つテーブルを作成し、次に異なるデータ ( `'tidb-server01-port-4001'` 、 `'tidb-server02-port-4002'` ) を挿入してこれらのコンテナを識別します。
+4. 2 つの TiDB コンテナでは、 `mysql`を使用して同様のスキーマ定義を持つテーブルを作成し、次に異なるデータ ( `'tidb-server01-port-4001'` 、 `'tidb-server02-port-4002'` ) を挿入してこれらのコンテナを識別します。
 
      <SimpleTab groupId="os">
 
@@ -959,7 +959,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
      </SimpleTab>
 
-5.  ProxySQL を構成するには、次のコマンドを実行します。このコマンドは、ProxySQL 管理インターフェイス内で`proxysql-prepare.sql`を実行し、TiDB コンテナと ProxySQL 間のプロキシ接続を確立します。
+5. ProxySQL を構成するには、次のコマンドを実行します。このコマンドは、ProxySQL 管理インターフェイス内で`proxysql-prepare.sql`を実行し、TiDB コンテナと ProxySQL 間のプロキシ接続を確立します。
 
      <SimpleTab groupId="os">
 
@@ -993,25 +993,25 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
     >
     > `proxysql-prepare.sql`は以下のことを行います。
     >
-    > -   `hostgroup_id`を持つ TiDB クラスタを`0`および`1`として ProxySQL に追加します。
-    > -   空のパスワードを持つユーザー`root`を追加し、 `default_hostgroup`を`0`に設定します。
-    > -   `^SELECT.*FOR UPDATE$`ルールを追加し、 `rule_id`を`1`として、 `destination_hostgroup`を`0`として追加します。SQL ステートメントがこのルールに一致する場合、リクエストは`hostgroup`を`0`として TiDB クラスタに転送されます。
-    > -   `^SELECT`ルールを追加し、 `rule_id`を`2`として、 `destination_hostgroup`を`1`として追加します。SQL ステートメントがこのルールに一致する場合、リクエストは`hostgroup`を`1`として TiDB クラスタに転送されます。
+    > - `hostgroup_id`を持つ TiDB クラスタを`0`および`1`として ProxySQL に追加します。
+    > - 空のパスワードを持つユーザー`root`を追加し、 `default_hostgroup`を`0`に設定します。
+    > - `^SELECT.*FOR UPDATE$`ルールを追加し、 `rule_id`を`1`として、 `destination_hostgroup`を`0`として追加します。SQL ステートメントがこのルールに一致する場合、リクエストは`hostgroup`を`0`として TiDB クラスタに転送されます。
+    > - `^SELECT`ルールを追加し、 `rule_id`を`2`として、 `destination_hostgroup`を`1`として追加します。SQL ステートメントがこのルールに一致する場合、リクエストは`hostgroup`を`1`として TiDB クラスタに転送されます。
     >
     > より深く理解するには、 `proxysql-prepare.sql`ファイルを確認することを強くお勧めします。 ProxySQL 構成の詳細については、 [ProxySQLのドキュメント](https://proxysql.com/documentation/proxysql-configuration/)を参照してください。
 
     ProxySQLパターンがクエリルールとどのように一致するかについての追加情報は以下のとおりです。
 
-    -   ProxySQL は`rule_id`の昇順でルールを 1 つずつ照合しようとします。
-    -   `^`記号は SQL ステートメントの開始と一致し、 `$`終了と一致します。
+    - ProxySQL は`rule_id`の昇順でルールを 1 つずつ照合しようとします。
+    - `^`記号は SQL ステートメントの開始と一致し、 `$`終了と一致します。
 
     ProxySQLの正規表現とパターンマッチングの詳細については、ProxySQLドキュメントの[mysql-query_processor_regex](https://proxysql.com/documentation/global-variables/mysql-variables/#mysql-query_processor_regex)を参照してください。
 
     パラメータの完全なリストについては、ProxySQLドキュメントの[mysql_query_rules](https://proxysql.com/documentation/main-runtime/#mysql_query_rules)を参照してください。
 
-6.  設定を確認し、クエリルールが正しく機能するかどうかをチェックしてください。
+6. 設定を確認し、クエリルールが正しく機能するかどうかをチェックしてください。
 
-    1.  `root`ユーザーとしてProxySQL MySQLインターフェースにログインしてください。
+    1. `root`ユーザーとしてProxySQL MySQLインターフェースにログインしてください。
 
          <SimpleTab groupId="os">
 
@@ -1041,9 +1041,9 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
          </SimpleTab>
 
-    2.  以下のSQL文を実行してください。
+    2. 以下のSQL文を実行してください。
 
-        -   `SELECT`ステートメントを実行します。
+        - `SELECT`ステートメントを実行します。
 
             ```sql
             SELECT * FROM test.tidb_server;
@@ -1051,7 +1051,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
             このステートメントは、ルールID `2`に一致し、ステートメントを`hostgroup 1`上の TiDB クラスタに転送します。
 
-        -   `SELECT ... FOR UPDATE`ステートメントを実行します。
+        - `SELECT ... FOR UPDATE`ステートメントを実行します。
 
             ```sql
             SELECT * FROM test.tidb_server FOR UPDATE;
@@ -1059,7 +1059,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
             このステートメントは、ルールID `1`に一致し、ステートメントを`hostgroup 0`上の TiDB クラスタに転送します。
 
-        -   トランザクションを開始する:
+        - トランザクションを開始する:
 
             ```sql
             BEGIN;
@@ -1091,9 +1091,9 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
         +--------------------------------+
         ```
 
-    3.  MySQLクライアントをいつでも終了するには、 `quit`と入力して<kbd>Enterキー</kbd>を押してください。
+    3. MySQLクライアントをいつでも終了するには、 `quit`と入力して<kbd>Enterキー</kbd>を押してください。
 
-7.  コンテナを停止して削除し、前のディレクトリに戻るには、次のコマンドを実行します。
+7. コンテナを停止して削除し、前のディレクトリに戻るには、次のコマンドを実行します。
 
      <SimpleTab groupId="os">
 
@@ -1128,6 +1128,6 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

@@ -13,8 +13,8 @@ VitessのバックエンドはMySQLベースであるため、VitessからTiDB�
 
 データサイズが 10 TiB を超える場合は、2 つの手順でインポートを実行することをお勧めします。
 
-1.  既存のデータをインポートするには、 DumplingとTiDB Lightning を使用します。
-2.  DM を使用して増分データをインポートします。
+1. 既存のデータをインポートするには、 DumplingとTiDB Lightning を使用します。
+2. DM を使用して増分データをインポートします。
 
 これらのツールに加えて、 [Vitess用Debeziumコネクタ](https://debezium.io/documentation/reference/connectors/vitess.html)も使用できます。このコネクタを使用すると、 [Kafka Connect](https://kafka.apache.org/documentation/#connect)または[Apache Flink](https://nightlies.apache.org/flink/flink-docs-stable/)を使用して、Vitess から TiDB に変更をストリーミングできます。
 
@@ -26,11 +26,11 @@ VitessとTiDBはどちらもMySQLプロトコルとSQL方言をサポートし�
 
 次の 2 つの例は、 DumplingとTiDB Lightningが連携して Vitess から TiDB にデータを移行する方法を示しています。
 
--   この例では、 TiDB Lightning は[論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)を使用します。これは、最初にデータを SQL ステートメントにエンコードし、次に SQL ステートメントを実行してデータをインポートします。
+- この例では、 TiDB Lightning は[論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)を使用します。これは、最初にデータを SQL ステートメントにエンコードし、次に SQL ステートメントを実行してデータをインポートします。
 
     ![Vitess to TiDB Migration with TiDB backend](/media/vitess_to_tidb.png)
 
--   この例では、 TiDB Lightning は[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)を使用してデータを TiKV に直接取り込みます。
+- この例では、 TiDB Lightning は[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)を使用してデータを TiKV に直接取り込みます。
 
     ![Vitess to TiDB Migration with local backend](/media/vitess_to_tidb_dumpling_local.png)
 

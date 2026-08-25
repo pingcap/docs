@@ -53,12 +53,12 @@ show config where type='tikv' and name='log.level'
 
 > **Note:**
 >
-> -   TiKV設定項目を動的に変更すると、TiKV設定ファイルは自動的に更新されます。ただし、 `tiup edit-config`を実行して対応する設定項目も変更する必要があります。そうしないと、 `upgrade`や`reload`などの操作によって変更内容が上書きされてしまいます。設定項目の変更方法の詳細については、 [TiUPを使用して構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
-> -   `tiup edit-config`を実行した後、 `tiup reload`を実行する必要はありません。
+> - TiKV設定項目を動的に変更すると、TiKV設定ファイルは自動的に更新されます。ただし、 `tiup edit-config`を実行して対応する設定項目も変更する必要があります。そうしないと、 `upgrade`や`reload`などの操作によって変更内容が上書きされてしまいます。設定項目の変更方法の詳細については、 [TiUPを使用して構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
+> - `tiup edit-config`を実行した後、 `tiup reload`を実行する必要はありません。
 
 `set config`ステートメントを使用すると、インスタンス アドレスまたはコンポーネントタイプに応じて、単一のインスタンスの構成またはすべてのインスタンスの構成を変更できます。
 
--   すべての TiKV インスタンスの構成を変更します。
+- すべての TiKV インスタンスの構成を変更します。
 
 > **Note:**
 >
@@ -68,7 +68,7 @@ show config where type='tikv' and name='log.level'
 set config tikv `split.qps-threshold`=1000;
 ```
 
--   単一の TiKV インスタンスの構成を変更します。
+- 単一の TiKV インスタンスの構成を変更します。
 
     ```sql
     set config "127.0.0.1:20180" `split.qps-threshold`=1000;
@@ -238,8 +238,8 @@ show warnings;
 
 上記の表で、`{db-name}`または`{db-name}.{cf-name}`プレフィックスを持つパラメータはRocksDB関連の設定です。`db-name`のオプション値は`rocksdb`と`raftdb`です。
 
--   `db-name`が`rocksdb`の場合、 `cf-name`のオプションの値は`defaultcf` 、 `writecf` 、 `lockcf` 、および`raftcf`です。
--   `db-name`が`raftdb`のとき、 `cf-name`の値は`defaultcf`になります。
+- `db-name`が`rocksdb`の場合、 `cf-name`のオプションの値は`defaultcf` 、 `writecf` 、 `lockcf` 、および`raftcf`です。
+- `db-name`が`raftdb`のとき、 `cf-name`の値は`defaultcf`になります。
 
 詳細なパラメータの説明については[TiKVコンフィグレーションファイル](/tikv-configuration-file.md)を参照してください。
 

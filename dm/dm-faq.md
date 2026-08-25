@@ -15,8 +15,8 @@ Alibaba Cloud RDS の主キーのないアップストリームテーブルの�
 
 互換性に関する既知の問題は次のとおりです。
 
--   **Alibaba Cloud RDS**では、主キーのないアップストリームテーブルの場合、そのbinlog には非表示の主キー列がまだ含まれており、元のテーブル構造と一致していません。
--   **HUAWEI Cloud RDS**では、 binlogファイルの直接読み取りはサポートされていません。詳細については、 [HUAWEI Cloud RDS はBinlogバックアップファイルを直接読み取ることができますか?](https://support.huaweicloud.com/en-us/rds_faq/rds_faq_0210.html)を参照してください。
+- **Alibaba Cloud RDS**では、主キーのないアップストリームテーブルの場合、そのbinlog には非表示の主キー列がまだ含まれており、元のテーブル構造と一致していません。
+- **HUAWEI Cloud RDS**では、 binlogファイルの直接読み取りはサポートされていません。詳細については、 [HUAWEI Cloud RDS はBinlogバックアップファイルを直接読み取ることができますか?](https://support.huaweicloud.com/en-us/rds_faq/rds_faq_0210.html)を参照してください。
 
 ## タスク構成のブロックおよび許可リストの正規表現は`non-capturing (?!)`をサポートしていますか? {#does-the-regular-expression-of-the-block-and-allow-list-in-the-task-configuration-support-non-capturing-}
 
@@ -42,14 +42,14 @@ TiDBでサポートされていないDDL文に遭遇した場合は、dmctlを�
 
 データ移行中に例外が発生し、データ移行タスクを再開できない場合は、タスクをリセットしてデータを再移行する必要があります。
 
-1.  異常なデータ移行タスクを停止するには、 `stop-task`コマンドを実行します。
+1. 異常なデータ移行タスクを停止するには、 `stop-task`コマンドを実行します。
 
-2.  ダウンストリームに移行されたデータを消去します。
+2. ダウンストリームに移行されたデータを消去します。
 
-3.  データ移行タスクを再開するには、次のいずれかの方法を使用します。
+3. データ移行タスクを再開するには、次のいずれかの方法を使用します。
 
-    -   タスク設定ファイルで新しいタスク名を指定します。次に、 `start-task {task-config-file}`を実行します。
-    -   `start-task --remove-meta {task-config-file}`を実行します。
+    - タスク設定ファイルで新しいタスク名を指定します。次に、 `start-task {task-config-file}`を実行します。
+    - `start-task --remove-meta {task-config-file}`を実行します。
 
 ## `online-ddl: true`を設定した後、gh-ost テーブルに関連する DDL 操作によって返されたエラーをどのように処理しますか? {#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-online-ddl-true-is-set}
 
@@ -63,20 +63,20 @@ TiDBでサポートされていないDDL文に遭遇した場合は、dmctlを�
 
 ただし、メモリ内の DDL 情報は、次の 2 つの方法のいずれかで取得されます。
 
--   DM [`alter ghost_table`操作中に gh-ost テーブルを処理する](/dm/feature-online-ddl.md#online-schema-change-gh-ost)および`ghost_table`の DDL 情報を記録します。
--   DM ワーカーが再起動されてタスクが開始されると、DM は`dm_meta.{task_name}_onlineddl`から DDL を読み取ります。
+- DM [`alter ghost_table`操作中に gh-ost テーブルを処理する](/dm/feature-online-ddl.md#online-schema-change-gh-ost)および`ghost_table`の DDL 情報を記録します。
+- DM ワーカーが再起動されてタスクが開始されると、DM は`dm_meta.{task_name}_onlineddl`から DDL を読み取ります。
 
 そのため、増分レプリケーションのプロセスにおいて、指定されたPosが`alter ghost_table` DDLをスキップしたにもかかわらず、そのPosがgh-ostのオンラインDDLプロセス中である場合、ghost_tableはメモリまたは`dm_meta.{task_name}_onlineddl`に正しく書き込まれません。このような場合、上記のエラーが返されます。
 
 このエラーは次の手順で回避できます。
 
-1.  タスクの`online-ddl-scheme`または`online-ddl`構成を削除します。
+1. タスクの`online-ddl-scheme`または`online-ddl`構成を削除します。
 
-2.  `block-allow-list.ignore-tables`で`_{table_name}_gho` 、 `_{table_name}_ghc` 、 `_{table_name}_del`を設定します。
+2. `block-allow-list.ignore-tables`で`_{table_name}_gho` 、 `_{table_name}_ghc` 、 `_{table_name}_del`を設定します。
 
-3.  ダウンストリーム TiDB でアップストリーム DDL を手動で実行します。
+3. ダウンストリーム TiDB でアップストリーム DDL を手動で実行します。
 
-4.  gh-ost プロセス後の位置に Pos が複製されたら、 `online-ddl-scheme`または`online-ddl`構成を再度有効にして、 `block-allow-list.ignore-tables`をコメントアウトします。
+4. gh-ost プロセス後の位置に Pos が複製されたら、 `online-ddl-scheme`または`online-ddl`構成を再度有効にして、 `block-allow-list.ignore-tables`をコメントアウトします。
 
 ## 既存のデータ移行タスクにテーブルを追加するにはどうすればよいですか? {#how-to-add-tables-to-the-existing-data-migration-tasks}
 
@@ -104,28 +104,28 @@ MySQLはエクスポート時にスナップショットを指定できないた
 
 既存の移行タスクに対応するグローバルチェックポイント（ `is_global=1` ）の位置情報を`checkpoint-T` （例： `(mysql-bin.000100, 1234)` ）として記録します。移行タスクに追加するテーブルのフルエクスポート`metedata` （または`Sync`ステージにある別のデータ移行タスクのチェックポイント）の位置情報を`checkpoint-S` （例： `(mysql-bin.000099, 5678)` ）として記録します。以下の手順でテーブルを移行タスクに追加できます。
 
-1.  既存の移行タスクを停止するには、 `stop-task`を使用します。追加するテーブルが実行中の別の移行タスクに属している場合は、そのタスクも停止してください。
+1. 既存の移行タスクを停止するには、 `stop-task`を使用します。追加するテーブルが実行中の別の移行タスクに属している場合は、そのタスクも停止してください。
 
-2.  MySQLクライアントを使用して下流のTiDBデータベースに接続し、既存の移行タスクに対応するチェックポイントテーブルの情報を、 `checkpoint-T`と`checkpoint-S`の間の小さい方の値に手動で更新します。この例では`(mysql- bin.000099, 5678)`です。
+2. MySQLクライアントを使用して下流のTiDBデータベースに接続し、既存の移行タスクに対応するチェックポイントテーブルの情報を、 `checkpoint-T`と`checkpoint-S`の間の小さい方の値に手動で更新します。この例では`(mysql- bin.000099, 5678)`です。
 
-    -   更新するチェックポイント テーブルは、スキーマ`{dm_meta}`の`{task-name}_syncer_checkpoint`です。
+    - 更新するチェックポイント テーブルは、スキーマ`{dm_meta}`の`{task-name}_syncer_checkpoint`です。
 
-    -   更新するチェックポイント行は`id=(source-id)`と`is_global=1`と一致します。
+    - 更新するチェックポイント行は`id=(source-id)`と`is_global=1`と一致します。
 
-    -   更新するチェックポイント列は`binlog_name`と`binlog_pos`です。
+    - 更新するチェックポイント列は`binlog_name`と`binlog_pos`です。
 
-3.  再入実行を確実にするために、タスクの`syncers`に`safe-mode: true`を設定します。
+3. 再入実行を確実にするために、タスクの`syncers`に`safe-mode: true`を設定します。
 
-4.  `start-task`を使用してタスクを開始します。
+4. `start-task`を使用してタスクを開始します。
 
-5.  `query-status`までタスクの状態を観察します。`syncerBinlog`が `checkpoint-T`と`checkpoint-S`のうち大きい方の値を超えた場合、 `safe-mode`を元の値に戻し、タスクを再開します。この例では`(mysql-bin.000100, 1234)`です。
+5. `query-status`までタスクの状態を観察します。`syncerBinlog`が `checkpoint-T`と`checkpoint-S`のうち大きい方の値を超えた場合、 `safe-mode`を元の値に戻し、タスクを再開します。この例では`(mysql-bin.000100, 1234)`です。
 
 ## `packet for query is too large. Try adjusting the 'max_allowed_packet' variable` ？ {#how-to-handle-the-error-packet-for-query-is-too-large-try-adjusting-the-max_allowed_packet-variable-that-occurs-during-the-full-import}
 
 以下のパラメータをデフォルトの 67108864 (64M) より大きい値に設定します。
 
--   TiDBサーバーのグローバル変数: `max_allowed_packet` 。
--   タスク設定ファイル内の設定項目： `target-database.max-allowed-packet` 。詳細は[DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
+- TiDBサーバーのグローバル変数: `max_allowed_packet` 。
+- タスク設定ファイル内の設定項目： `target-database.max-allowed-packet` 。詳細は[DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
 
 ## DM 1.0 クラスターの既存の DM 移行タスクが DM 2.0 以降のクラスターで実行されているときに発生するエラー`Error 1054: Unknown column 'binlog_gtid' in 'field list'`を処理する方法を教えてください。 {#how-to-handle-the-error-error-1054-unknown-column-binlog_gtid-in-field-list-that-occurs-when-existing-dm-migration-tasks-of-an-dm-10-cluster-are-running-on-a-dm-20-or-newer-cluster}
 
@@ -145,8 +145,8 @@ DM v2.0 以降、増分データレプリケーションを続行するために
 
 構成項目`block-allow-list`と`table-route`を確認します。
 
--   `block-allow-list`の下にある上流のデータベースとテーブルの名前を設定する必要があります。`do-tables`の前に「~」を追加すると、正規表現を使用して名前を一致させることができます。
--   `table-route` 、テーブル名の一致に正規表現ではなくワイルドカード文字を使用します。例えば、 `table_parttern_[0-63]` `table_parttern_0`から`table_pattern_6`までの 7 つのテーブルのみに一致します。
+- `block-allow-list`の下にある上流のデータベースとテーブルの名前を設定する必要があります。`do-tables`の前に「~」を追加すると、正規表現を使用して名前を一致させることができます。
+- `table-route` 、テーブル名の一致に正規表現ではなくワイルドカード文字を使用します。例えば、 `table_parttern_[0-63]` `table_parttern_0`から`table_pattern_6`までの 7 つのテーブルのみに一致します。
 
 ## DM がアップストリームからレプリケートしていないのに、 `replicate lag`モニター メトリックにデータが表示されないのはなぜですか? {#why-does-the-replicate-lag-monitor-metric-show-no-data-when-dm-is-not-replicating-from-upstream}
 
@@ -160,9 +160,9 @@ DM 1.0では、監視データを生成するには`enable-heartbeat`を有効�
 
 まず、以下の点を確認して確認する必要があります。
 
--   レプリケーションタスクで`disable-detect`が構成されていません (v2.0.7 以前のバージョン)。
--   データは手動でも他のレプリケーション プログラムによっても挿入されません。
--   このテーブルに関連付けられた DML フィルターは構成されていません。
+- レプリケーションタスクで`disable-detect`が構成されていません (v2.0.7 以前のバージョン)。
+- データは手動でも他のレプリケーション プログラムによっても挿入されません。
+- このテーブルに関連付けられた DML フィルターは構成されていません。
 
 トラブルシューティングを容易にするために、まず下流のTiDBインスタンスの一般的なログファイルを収集し、その後[TiDBコミュニティSlackチャンネル](https://tidbcommunity.slack.com/archives/CH7TTLL7P)でテクニカルサポートに問い合わせることができます。次の例は、一般的なログファイルを収集する方法を示しています。
 
@@ -205,22 +205,22 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
 
 この問題に対する解決策は次の 2 つです。
 
--   データ量が少ない (1 TB 未満) 場合、またはタスクがシャーディングされたテーブルをマージする場合は、次の手順を実行します。
+- データ量が少ない (1 TB 未満) 場合、またはタスクがシャーディングされたテーブルをマージする場合は、次の手順を実行します。
 
-    1.  ダウンストリームデータベースにインポートされたデータをクリーンアップします。
-    2.  エクスポートされたデータのディレクトリ内のすべてのファイルを削除します。
-    3.  dmctl を使用してタスクを削除し、コマンド`start-task --remove-meta`を実行して新しいタスクを作成します。
+    1. ダウンストリームデータベースにインポートされたデータをクリーンアップします。
+    2. エクスポートされたデータのディレクトリ内のすべてのファイルを削除します。
+    3. dmctl を使用してタスクを削除し、コマンド`start-task --remove-meta`を実行して新しいタスクを作成します。
 
     新しいタスクが開始したら、冗長な DM ワーカーノードが存在しないことを確認し、完全インポート中に DM クラスターの再起動やアップグレードを行わないようにすることをお勧めします。
 
--   データ量が大きい場合 (1 TB を超える場合) は、次の手順を実行します。
+- データ量が大きい場合 (1 TB を超える場合) は、次の手順を実行します。
 
-    1.  ダウンストリームデータベースにインポートされたデータをクリーンアップします。
-    2.  データを処理する DM ワーカーノードに TiDB-Lightningをデプロイします。
-    3.  DM ダンプユニットがエクスポートするデータをインポートするには、TiDB-Lightning のローカルバックエンド モードを使用します。
-    4.  完全インポートが完了したら、次の方法でタスク構成ファイルを編集し、タスクを再起動します。
-        -   `task-mode`を`incremental`に変更します。
-        -   ダンプユニットが出力するメタデータファイルに記録されている位置に値`mysql-instance.meta.pos`を設定します。
+    1. ダウンストリームデータベースにインポートされたデータをクリーンアップします。
+    2. データを処理する DM ワーカーノードに TiDB-Lightningをデプロイします。
+    3. DM ダンプユニットがエクスポートするデータをインポートするには、TiDB-Lightning のローカルバックエンド モードを使用します。
+    4. 完全インポートが完了したら、次の方法でタスク構成ファイルを編集し、タスクを再起動します。
+        - `task-mode`を`incremental`に変更します。
+        - ダンプユニットが出力するメタデータファイルに記録されている位置に値`mysql-instance.meta.pos`を設定します。
 
 ## 増分タスク中に再起動すると、DM がエラー`ERROR 1236 (HY000): The slave is connecting using CHANGE MASTER TO MASTER_AUTO_POSITION = 1, but the master has purged binary logs containing GTIDs that the slave requires.`はなぜですか? {#why-does-dm-report-the-error-error-1236-hy000-the-slave-is-connecting-using-change-master-to-master_auto_position--1-but-the-master-has-purged-binary-logs-containing-gtids-that-the-slave-requires-if-it-restarts-during-an-incremental-task}
 
@@ -230,29 +230,29 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
 
 次の方法で設定することで、この問題を事前に回避できます。
 
-1.  移行タスクが完了する前に必要なbinlogファイルが誤って削除されるのを防ぐため、上流のMySQLデータベースの値を`expire_logs_days`に増やしてください。データ量が多い場合は、タスクを高速化するために、DumplingとTiDB Lightningを同時に使用することをお勧めします。
-2.  このタスクのリレーログ機能を有効にすると、binlogの位置が消去されていても DM がリレーログからデータを読み取ることができます。
+1. 移行タスクが完了する前に必要なbinlogファイルが誤って削除されるのを防ぐため、上流のMySQLデータベースの値を`expire_logs_days`に増やしてください。データ量が多い場合は、タスクを高速化するために、DumplingとTiDB Lightningを同時に使用することをお勧めします。
+2. このタスクのリレーログ機能を有効にすると、binlogの位置が消去されていても DM がリレーログからデータを読み取ることができます。
 
 ## クラスターがTiUP v1.3.0 または v1.3.1 を使用してデプロイされている場合、DM クラスターの Grafana ダッシュボードに`failed to fetch dashboard`と表示されるのはなぜですか? {#why-does-the-grafana-dashboard-of-a-dm-cluster-display-failed-to-fetch-dashboard-if-the-cluster-is-deployed-using-tiup-v130-or-v131}
 
 これはTiUPの既知のバグで、 TiUP v1.3.2 で修正されています。この問題に対する解決策は以下の2つです。
 
--   解決策1:
-    1.  コマンド`tiup update --self && tiup update dm`を使用して、 TiUP を新しいバージョンにアップグレードします。
-    2.  クラスター内の Grafana ノードをスケールインからスケールアウトして、Grafana サービスを再起動します。
--   解決策2:
-    1.  `deploy/grafana-$port/bin/public`フォルダをバックアップします。
-    2.  [TiUP DMオフラインパッケージ](https://download.pingcap.com/tidb-dm-v2.0.1-linux-amd64.tar.gz)をダウンロードして解凍します。
-    3.  オフライン パッケージの`grafana-v4.0.3-**.tar.gz`を解凍します。
-    4.  フォルダー`deploy/grafana-$port/bin/public`を `grafana-v4.0.3-**.tar.gz`のフォルダー`public`に置き換えます。
-    5.  `tiup dm restart $cluster_name -R grafana`を実行して Grafana サービスを再起動します。
+- 解決策1:
+    1. コマンド`tiup update --self && tiup update dm`を使用して、 TiUP を新しいバージョンにアップグレードします。
+    2. クラスター内の Grafana ノードをスケールインからスケールアウトして、Grafana サービスを再起動します。
+- 解決策2:
+    1. `deploy/grafana-$port/bin/public`フォルダをバックアップします。
+    2. [TiUP DMオフラインパッケージ](https://download.pingcap.com/tidb-dm-v2.0.1-linux-amd64.tar.gz)をダウンロードして解凍します。
+    3. オフライン パッケージの`grafana-v4.0.3-**.tar.gz`を解凍します。
+    4. フォルダー`deploy/grafana-$port/bin/public`を `grafana-v4.0.3-**.tar.gz`のフォルダー`public`に置き換えます。
+    5. `tiup dm restart $cluster_name -R grafana`を実行して Grafana サービスを再起動します。
 
 ## DM v2.0 では、タスクで`enable-relay`と`enable-gtid`が同時に有効になっている場合、コマンド`query-status`のクエリ結果に、Syncer チェックポイント GTID が連続していないと表示されるのはなぜですか? {#in-dm-v20-why-does-the-query-result-of-the-command-query-status-show-that-the-syncer-checkpoint-gtids-are-inconsecutive-if-the-task-has-enable-relay-and-enable-gtid-enabled-at-the-same-time}
 
 これはDMの既知のバグで、DM v2.0.2で修正されています。このバグは、以下の2つの条件が同時に満たされた場合に発生します。
 
-1.  ソース構成ファイルでは、パラメータ`enable-relay`と`enable-gtid`は`true`に設定されています。
-2.  アップストリームデータベースは**MySQLセカンダリデータベース**です。コマンド`show binlog events in '<newest-binlog>' limit 2`を実行してデータベースの`previous_gtids`をクエリすると、次の例のように結果が不連続になります。
+1. ソース構成ファイルでは、パラメータ`enable-relay`と`enable-gtid`は`true`に設定されています。
+2. アップストリームデータベースは**MySQLセカンダリデータベース**です。コマンド`show binlog events in '<newest-binlog>' limit 2`を実行してデータベースの`previous_gtids`をクエリすると、次の例のように結果が不連続になります。
 
 ```
 mysql> show binlog events in 'mysql-bin.000005' limit 2;
@@ -330,25 +330,25 @@ query-status test
 
 この例では、データソース`mysql1`の`syncerBinlogGtid`が連続していません。この場合、データ損失に対処するには、次のいずれかの方法を実行できます。
 
--   現在の時刻から完全エクスポート タスクのメタデータに記録された位置までのアップストリーム バイナリ ログが消去されていない場合は、次の手順を実行できます。
-    1.  現在のタスクを停止し、連続しない GTID を持つすべてのデータソースを削除します。
-    2.  すべてのソース構成ファイルで`enable-relay`を`false`に設定します。
-    3.  連続しない GTID を持つデータソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポート タスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成します。
-    4.  増分タスクの`task.yaml`に`syncers.safe-mode`を`true`に設定し、タスクを再開します。
-    5.  増分タスクがすべての欠落データをダウンストリームに複製した後、タスクを停止し、 `task.yaml`の`safe-mode`を`false`に変更します。
-    6.  タスクを再度開始します。
--   アップストリーム バイナリ ログが消去されたが、ローカルリレーログが残っている場合は、次の手順を実行できます。
-    1.  現在のタスクを停止します。
-    2.  連続しない GTID を持つデータソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポート タスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成します。
-    3.  増分タスクの`task.yaml`で、 `binlog-gtid`の前の値を`previous_gtids`の前の値に変更します。上記の例では、 `1-y`を`6-y`に変更します。
-    4.  `task.yaml`の`syncers.safe-mode`を`true`に設定し、タスクを再開します。
-    5.  増分タスクがすべての欠落データをダウンストリームに複製した後、タスクを停止し、 `task.yaml`の`safe-mode`を`false`に変更します。
-    6.  タスクを再度開始します。
-    7.  データソースを再起動し、ソース構成ファイルで`enable-relay`または`enable-gtid`を`false`に設定します。
--   上記の条件がいずれも満たされていない場合、またはタスクのデータ量が少ない場合は、次の手順を実行できます。
-    1.  ダウンストリームデータベースにインポートされたデータをクリーンアップします。
-    2.  データソースを再起動し、ソース構成ファイルで`enable-relay`または`enable-gtid`を`false`に設定します。
-    3.  新しいタスクを作成し、コマンド`start-task task.yaml --remove-meta`を実行して、データを最初から再度移行します。
+- 現在の時刻から完全エクスポート タスクのメタデータに記録された位置までのアップストリーム バイナリ ログが消去されていない場合は、次の手順を実行できます。
+    1. 現在のタスクを停止し、連続しない GTID を持つすべてのデータソースを削除します。
+    2. すべてのソース構成ファイルで`enable-relay`を`false`に設定します。
+    3. 連続しない GTID を持つデータソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポート タスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成します。
+    4. 増分タスクの`task.yaml`に`syncers.safe-mode`を`true`に設定し、タスクを再開します。
+    5. 増分タスクがすべての欠落データをダウンストリームに複製した後、タスクを停止し、 `task.yaml`の`safe-mode`を`false`に変更します。
+    6. タスクを再度開始します。
+- アップストリーム バイナリ ログが消去されたが、ローカルリレーログが残っている場合は、次の手順を実行できます。
+    1. 現在のタスクを停止します。
+    2. 連続しない GTID を持つデータソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポート タスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成します。
+    3. 増分タスクの`task.yaml`で、 `binlog-gtid`の前の値を`previous_gtids`の前の値に変更します。上記の例では、 `1-y`を`6-y`に変更します。
+    4. `task.yaml`の`syncers.safe-mode`を`true`に設定し、タスクを再開します。
+    5. 増分タスクがすべての欠落データをダウンストリームに複製した後、タスクを停止し、 `task.yaml`の`safe-mode`を`false`に変更します。
+    6. タスクを再度開始します。
+    7. データソースを再起動し、ソース構成ファイルで`enable-relay`または`enable-gtid`を`false`に設定します。
+- 上記の条件がいずれも満たされていない場合、またはタスクのデータ量が少ない場合は、次の手順を実行できます。
+    1. ダウンストリームデータベースにインポートされたデータをクリーンアップします。
+    2. データソースを再起動し、ソース構成ファイルで`enable-relay`または`enable-gtid`を`false`に設定します。
+    3. 新しいタスクを作成し、コマンド`start-task task.yaml --remove-meta`を実行して、データを最初から再度移行します。
 
 上記の 1 番目と 2 番目のソリューションで正常にレプリケートできるデータソース (上記の例の`mysql2`など) の場合は、増分タスクを設定するときに、 `subTaskStatus.sync`の`syncerBinlog`と`syncerBinlogGtid`情報を使用して関連する`mysql-instances.meta`を構成します。
 
@@ -382,19 +382,19 @@ flush local meta, Rawcause: open relay-dir/xxx.000001/relay.metayyyy: no such fi
 
 上記のエラーは次の場合に発生する可能性があります。
 
--   DM は v2.0.1 以前から v2.0.2 - v2.0.6 にアップグレードされており、アップグレード前にリレーログが開始され、アップグレード後に再起動されます。
--   stop-relay コマンドを実行してリレーログを一時停止してから再開します。
+- DM は v2.0.1 以前から v2.0.2 - v2.0.6 にアップグレードされており、アップグレード前にリレーログが開始され、アップグレード後に再起動されます。
+- stop-relay コマンドを実行してリレーログを一時停止してから再開します。
 
 次のオプションによりこのエラーを回避できます。
 
--   リレーログを再起動:
+- リレーログを再起動:
 
     ```
     » stop-relay -s sourceID workerName
     » start-relay -s sourceID workerName
     ```
 
--   DM を v2.0.7 以降のバージョンにアップグレードします。
+- DM を v2.0.7 以降のバージョンにアップグレードします。
 
 ## ロード ユニットが`Unknown character set`エラーを報告するのはなぜですか? {#why-does-the-load-unit-report-the-unknown-character-set-error}
 

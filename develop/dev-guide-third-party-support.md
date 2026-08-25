@@ -16,8 +16,8 @@ TiDB は[MySQLプロトコルとの高い互換性](/mysql-compatibility.md)あ�
 
 PingCAP はコミュニティと連携し、サードパーティツールに対して次のサポート レベルを提供します。
 
--   ***完全***：TiDB は対応するサードパーティ製ツールのほとんどの機能と既に互換性があり、最新バージョンとの互換性も維持していることを示します。PingCAP は、ツールの最新バージョンとの互換性テストを定期的に実施します。
--   ***互換***：対応するサードパーティ製ツールがMySQLに適合しており、TiDBはMySQLプロトコルと高い互換性があるため、TiDBはツールのほとんどの機能を使用できることを示します。ただし、PingCAPはツールのすべての機能について完全なテストを完了していないため、予期しない動作が発生する可能性があります。
+- ***完全***：TiDB は対応するサードパーティ製ツールのほとんどの機能と既に互換性があり、最新バージョンとの互換性も維持していることを示します。PingCAP は、ツールの最新バージョンとの互換性テストを定期的に実施します。
+- ***互換***：対応するサードパーティ製ツールがMySQLに適合しており、TiDBはMySQLプロトコルと高い互換性があるため、TiDBはツールのほとんどの機能を使用できることを示します。ただし、PingCAPはツールのすべての機能について完全なテストを完了していないため、予期しない動作が発生する可能性があります。
 
 > **Note:**
 >
@@ -63,6 +63,6 @@ PingCAP はコミュニティと連携し、サードパーティツールに対
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

@@ -10,9 +10,9 @@ TiDBはMySQL互換のデータベースであり、PythonはPythonで人気の[P
 
 このチュートリアルでは、TiDBとpeeweeを使用して以下のタスクを実行する方法を学ぶことができます。
 
--   環境をセットアップしてください。
--   peeweeを使用してTiDBに接続します。
--   アプリケーションをビルドして実行します。必要に応じて、基本的なCRUD操作のサンプルコードスニペットも利用できます。
+- 環境をセットアップしてください。
+- peeweeを使用してTiDBに接続します。
+- アプリケーションをビルドして実行します。必要に応じて、基本的なCRUD操作のサンプルコードスニペットも利用できます。
 
 > **Note:**
 >
@@ -22,14 +22,14 @@ TiDBはMySQL互換のデータベースであり、PythonはPythonで人気の[P
 
 このチュートリアルを完了するには、以下が必要です。
 
--   [Python 3.8以降](https://www.python.org/downloads/)。
--   [Git](https://git-scm.com/downloads) 。
--   TiDBクラスタ。
+- [Python 3.8以降](https://www.python.org/downloads/)。
+- [Git](https://git-scm.com/downloads) 。
+- TiDBクラスタ。
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
--   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
 ## TiDBに接続するには、サンプルアプリを実行してください。 {#run-the-sample-app-to-connect-to-tidb}
 
@@ -63,37 +63,37 @@ peeweeは、複数のデータベースを扱うORMライブラリです。デ�
 <SimpleTab>
 <div label="TiDB Cloud Starter or Essential">
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
+3. 接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **Connection Type**は`Public`に設定されています。
+    - **Connection Type**は`Public`に設定されています。
 
-    -   **Branch**は`main`に設定されています。
+    - **Branch**は`main`に設定されています。
 
-    -   **Connect With**は`General`に設定されています。
+    - **Connect With**は`General`に設定されています。
 
-    -   お使いの環境に合った**Operating System**を選択してください。
+    - お使いの環境に合った**Operating System**を選択してください。
 
     > **Tip:**
     >
     > プログラムがWindows Subsystem for Linux（WSL）上で実行されている場合は、対応するLinuxディストリビューションに切り替えてください。
 
-4.  **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
+4. **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
 
     > **Tip:**
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **Reset Password**をクリックして新しいパスワードを生成できます。
 
-5.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
+5. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
     cp .env.example .env
     ```
 
-6.  対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+6. 対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```dotenv
     TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
@@ -106,37 +106,37 @@ peeweeは、複数のデータベースを扱うORMライブラリです。デ�
 
     必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。
 
-7.  `.env`ファイルを保存します。
+7. `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Premium">
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
 
-3.  **Networking**ページで、**Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
+3. **Networking**ページで、**Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
 
     クライアントのIPアドレスがアクセスリストに追加されていることを確認してください。
 
-4.  左側のナビゲーションペインで**Overview**をクリックすると、インスタンスの概要ページに戻ります。
+4. 左側のナビゲーションペインで**Overview**をクリックすると、インスタンスの概要ページに戻ります。
 
-5.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+5. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-6.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
+6. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
 
-    -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
-    -   まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
-    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
-    -   **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+    - 公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
+    - まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
+    - サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
+    - **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
-7.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
+7. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
     cp .env.example .env
     ```
 
-8.  対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+8. 対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```dotenv
     TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -148,28 +148,28 @@ peeweeは、複数のデータベースを扱うORMライブラリです。デ�
 
     必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。
 
-9.  `.env`ファイルを保存します。
+9. `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **CA cert**をクリックしてCA証明書をダウンロードします。
+3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **CA cert**をクリックしてCA証明書をダウンロードします。
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
 
     TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
-4.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
+4. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
     cp .env.example .env
     ```
 
-5.  対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+5. 対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```dotenv
     TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -182,18 +182,18 @@ peeweeは、複数のデータベースを扱うORMライブラリです。デ�
 
     必ず、プレースホルダー`{}`を接続ダイアログから取得した接続パラメータに置き換え、 `CA_PATH`前の手順でダウンロードした証明書のパスに設定してください。
 
-6.  `.env`ファイルを保存します。
+6. `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
-1.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
+1. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
     cp .env.example .env
     ```
 
-2.  対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+2. 対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```dotenv
     TIDB_HOST='{tidb_server_host}'
@@ -205,20 +205,20 @@ peeweeは、複数のデータベースを扱うORMライブラリです。デ�
 
     プレースホルダー`{}`を接続パラメータに置き換え、 `CA_PATH`の行を削除してください。TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空欄です。
 
-3.  `.env`ファイルを保存します。
+3. `.env`ファイルを保存します。
 
 </div>
 </SimpleTab>
 
 ### ステップ4：コードを実行して結果を確認する {#step-4-run-the-code-and-check-the-result}
 
-1.  サンプルコードを実行するには、以下のコマンドを実行してください。
+1. サンプルコードを実行するには、以下のコマンドを実行してください。
 
     ```shell
     python peewee_example.py
     ```
 
-2.  [期待される出力.txt](https://github.com/tidb-samples/tidb-python-peewee-quickstart/blob/main/Expected-Output.txt)をチェックして、出力が一致するかどうかを確認してください。
+2. [期待される出力.txt](https://github.com/tidb-samples/tidb-python-peewee-quickstart/blob/main/Expected-Output.txt)をチェックして、出力が一致するかどうかを確認してください。
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
@@ -335,12 +335,12 @@ Player.delete().where(Player.coins == 100).execute()
 
 ## 次のステップ {#next-steps}
 
--   Peeweeの使い方の詳細については、[Peeweeのドキュメント](https://docs.peewee-orm.com/)をご覧ください。
--   [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
--   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- Peeweeの使い方の詳細については、[Peeweeのドキュメント](https://docs.peewee-orm.com/)をご覧ください。
+- [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

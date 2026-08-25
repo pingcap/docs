@@ -11,14 +11,14 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
 `tidbcloud_dedicated_cluster`リソースの機能は次のとおりです。
 
--   TiDB Cloud Dedicated クラスターを作成します。
--   TiDB Cloud Dedicated クラスターを変更します。
--   TiDB Cloud Dedicated クラスターをインポートします。
--   TiDB Cloud Dedicated クラスターを削除します。
+- TiDB Cloud Dedicated クラスターを作成します。
+- TiDB Cloud Dedicated クラスターを変更します。
+- TiDB Cloud Dedicated クラスターをインポートします。
+- TiDB Cloud Dedicated クラスターを削除します。
 
 ## 前提条件 {#prerequisites}
 
--   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
+- [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
 
 ## `tidbcloud_projects`データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-tidbcloud-projects-data-source}
 
@@ -26,43 +26,45 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
 利用可能なすべてのプロジェクトに関する情報を取得するには、次のように`tidbcloud_projects`データソースを使用します。
 
-1.  [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)で作成した`main.tf`ファイルに、次のように`data`と`output`ブロックを追加します。
+1. [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)で作成した`main.tf`ファイルに、次のように`data`と`output`ブロックを追加します。
 
-        terraform {
-          required_providers {
-            tidbcloud = {
-              source = "tidbcloud/tidbcloud"
-            }
-          }
+    ```
+    terraform {
+      required_providers {
+        tidbcloud = {
+          source = "tidbcloud/tidbcloud"
         }
+      }
+    }
 
-        provider "tidbcloud" {
-          public_key = "your_public_key"
-          private_key = "your_private_key"
-        }
+    provider "tidbcloud" {
+      public_key = "your_public_key"
+      private_key = "your_private_key"
+    }
 
-        data "tidbcloud_projects" "example_project" {
-          page      = 1
-          page_size = 10
-        }
+    data "tidbcloud_projects" "example_project" {
+      page      = 1
+      page_size = 10
+    }
 
-        output "projects" {
-          value = data.tidbcloud_projects.example_project.items
-        }
+    output "projects" {
+      value = data.tidbcloud_projects.example_project.items
+    }
+    ```
 
-    -   `data`ブロックを使用して、データソース タイプやデータソース名など、 TiDB Cloudのデータソースを定義します。
+    - `data`ブロックを使用して、データソース タイプやデータソース名など、 TiDB Cloudのデータソースを定義します。
 
-        -   プロジェクト データソースを使用するには、データソース タイプを`tidbcloud_projects`に設定します。
-        -   データソース名は必要に応じて定義できます。例： `"example_project"` 。
-        -   `tidbcloud_projects`データソースの場合、 `page`および`page_size`属性を使用して、チェックするプロジェクトの最大数を制限できます。
+        - プロジェクト データソースを使用するには、データソース タイプを`tidbcloud_projects`に設定します。
+        - データソース名は必要に応じて定義できます。例： `"example_project"` 。
+        - `tidbcloud_projects`データソースの場合、 `page`および`page_size`属性を使用して、チェックするプロジェクトの最大数を制限できます。
 
-    -   `output`ブロックを使用して、出力に表示されるデータソース情報を定義し、他の Terraform 構成が使用できるように情報を公開します。
+    - `output`ブロックを使用して、出力に表示されるデータソース情報を定義し、他の Terraform 構成が使用できるように情報を公開します。
 
         `output`ブロックは、プログラミング言語の戻り値と同様に機能します。詳細については、 [Terraformドキュメント](https://www.terraform.io/language/values/outputs)を参照してください。
 
     リソースとデータソースに使用可能なすべての構成を取得するには、 [Terraform プロバイダーの構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)を参照してください。
 
-2.  設定を適用するには、コマンド`terraform apply`を実行してください。続行するには、確認プロンプトで`yes`と入力してください。
+2. 設定を適用するには、コマンド`terraform apply`を実行してください。続行するには、確認プロンプトで`yes`と入力してください。
 
     プロンプトをスキップするには、 `terraform apply --auto-approve`を使用します。
 
@@ -121,54 +123,56 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
 > **Note:**
 >
-> -   始める前に、 [TiDB Cloudコンソール](https://tidbcloud.com)で CIDR が設定されていることを確認してください。詳細については、 [CIDRを設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)を参照してください。
-> -   CIDR を管理するには[`dedicated_network_container`リソースを作成する](/tidb-cloud/terraform-use-dedicated-network-container-resource.md)も使用できます。
+> - 始める前に、 [TiDB Cloudコンソール](https://tidbcloud.com)で CIDR が設定されていることを確認してください。詳細については、 [CIDRを設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)を参照してください。
+> - CIDR を管理するには[`dedicated_network_container`リソースを作成する](/tidb-cloud/terraform-use-dedicated-network-container-resource.md)も使用できます。
 
 次のように、 `tidbcloud_dedicated_cluster`リソースを使用してTiDB Cloud Dedicated クラスターを作成できます。
 
-1.  クラスターのディレクトリを作成してそこに入ります。
+1. クラスターのディレクトリを作成してそこに入ります。
 
-2.  `cluster.tf`ファイルを作成します。
+2. `cluster.tf`ファイルを作成します。
 
     以下は`cluster.tf`ファイルの例です。
 
-        terraform {
-          required_providers {
-            tidbcloud = {
-              source = "tidbcloud/tidbcloud"
-            }
-          }
+    ```
+    terraform {
+      required_providers {
+        tidbcloud = {
+          source = "tidbcloud/tidbcloud"
         }
+      }
+    }
 
-        provider "tidbcloud" {
-          public_key = "your_public_key"
-          private_key = "your_private_key"
-        }
+    provider "tidbcloud" {
+      public_key = "your_public_key"
+      private_key = "your_private_key"
+    }
 
-        resource "tidbcloud_dedicated_cluster" "example_cluster" {
-          display_name  = "your_display_name"
-          region_id     = "your_region_id"
-          port          = 4000
-          root_password = "your_root_password"
-          tidb_node_setting = {
-           node_spec_key = "2C4G"
-           node_count    = 1
-          }
-          tikv_node_setting = {
-           node_spec_key   = "2C4G"
-           node_count      = 3
-           storage_size_gi = 60
-           storage_type    = "Standard"
-          }
-        }
+    resource "tidbcloud_dedicated_cluster" "example_cluster" {
+      display_name  = "your_display_name"
+      region_id     = "your_region_id"
+      port          = 4000
+      root_password = "your_root_password"
+      tidb_node_setting = {
+       node_spec_key = "2C4G"
+       node_count    = 1
+      }
+      tikv_node_setting = {
+       node_spec_key   = "2C4G"
+       node_count      = 3
+       storage_size_gi = 60
+       storage_type    = "Standard"
+      }
+    }
+    ```
 
     `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    -   `tidbcloud_dedicated_cluster`リソースを使用するには、リソース タイプを`tidbcloud_dedicated_cluster`に設定します。
-    -   リソース名は必要に応じて定義できます。例： `example_cluster` 。
-    -   リソースの詳細については、プロジェクト ID と[`tidbcloud_dedicated_cluster`仕様](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_cluster)に応じて設定できます。
+    - `tidbcloud_dedicated_cluster`リソースを使用するには、リソース タイプを`tidbcloud_dedicated_cluster`に設定します。
+    - リソース名は必要に応じて定義できます。例： `example_cluster` 。
+    - リソースの詳細については、プロジェクト ID と[`tidbcloud_dedicated_cluster`仕様](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_cluster)に応じて設定できます。
 
-3.  `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
+3. `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 
     ```shell
     $ terraform apply
@@ -223,11 +227,11 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
     上記の結果では、Terraform によって実行計画が生成され、Terraform が実行するアクションが記述されています。
 
-    -   構成と状態の違いを確認できます。
-    -   `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
-    -   `known after apply` 、 `apply`後の値が取得されることを示します。
+    - 構成と状態の違いを確認できます。
+    - `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
+    - `known after apply` 、 `apply`後の値が取得されることを示します。
 
-4.  計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
+4. 計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
 
     ```shell
     Do you want to perform these actions?
@@ -244,7 +248,7 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
     通常、 TiDB Cloud Dedicated クラスターの作成には少なくとも 10 分かかります。
 
-5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_dedicated_cluster.${resource-name}`を使用します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
+5. リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_dedicated_cluster.${resource-name}`を使用します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_dedicated_cluster.example_cluster
@@ -307,7 +311,7 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
     }
     ```
 
-6.  リモートから状態を同期する場合は、 `terraform refresh`コマンドを実行して状態を更新し、 `terraform state show tidbcloud_dedicated_cluster.${resource-name}`コマンドを実行して状態を表示します。
+6. リモートから状態を同期する場合は、 `terraform refresh`コマンドを実行して状態を更新し、 `terraform state show tidbcloud_dedicated_cluster.${resource-name}`コマンドを実行して状態を表示します。
 
     ```shell
     $ terraform refresh
@@ -382,26 +386,28 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
 TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使用してリソースを管理できます。
 
--   クラスターにTiFlashコンポーネントを追加します。
--   クラスターをスケーリングします。
--   クラスターを一時停止または再開します。
--   クラスターに[TiDBノードグループ](/tidb-cloud/tidb-node-group-overview.md)追加します。
--   クラスターの TiDB ノードグループを更新します。
--   クラスターの TiDB ノードグループを削除します。
+- クラスターにTiFlashコンポーネントを追加します。
+- クラスターをスケーリングします。
+- クラスターを一時停止または再開します。
+- クラスターに[TiDBノードグループ](/tidb-cloud/tidb-node-group-overview.md)追加します。
+- クラスターの TiDB ノードグループを更新します。
+- クラスターの TiDB ノードグループを削除します。
 
 ### TiFlashコンポーネントを追加する {#add-a-tiflash-component}
 
-1.  [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)を実行するときに使用する`cluster.tf`ファイルに、 `tiflash_node_setting`構成を追加します。
+1. [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)を実行するときに使用する`cluster.tf`ファイルに、 `tiflash_node_setting`構成を追加します。
 
     例えば：
 
-        tiflash_node_setting = {
-          node_spec_key = "2C4G"
-          node_count = 3
-          storage_size_gi = 60
-        }
+    ```
+    tiflash_node_setting = {
+      node_spec_key = "2C4G"
+      node_count = 3
+      storage_size_gi = 60
+    }
+    ```
 
-2.  `terraform apply`コマンドを実行します。
+2. `terraform apply`コマンドを実行します。
 
     ```shell
     $ terraform apply
@@ -475,7 +481,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
 
     上記の実行計画では、 TiFlashが追加され、1 つのリソースが変更されます。
 
-3.  計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
+3. 計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
 
     ```shell
       Enter a value: yes
@@ -486,73 +492,75 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
     Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
     ```
 
-4.  `terraform state show tidbcloud_dedicated_cluster.${resource-name}`を使用して状態を確認します。
+4. `terraform state show tidbcloud_dedicated_cluster.${resource-name}`を使用して状態を確認します。
 
-        $ terraform state show tidbcloud_dedicated_cluster.example_cluster
+    ```
+    $ terraform state show tidbcloud_dedicated_cluster.example_cluster
 
-        # tidbcloud_dedicated_cluster.example_cluster:
-        resource "tidbcloud_dedicated_cluster" "example_cluster" {
-            annotations         = {
-                "tidb.cloud/available-features" = "DISABLE_PUBLIC_LB,PRIVATELINK,DELEGATE_USER"
-                "tidb.cloud/has-set-password"   = "false"
-            }
-            cloud_provider      = "aws"
-            cluster_id          = "1379661944600000000"
-            create_time         = "2025-06-06 06:25:29.878 +0000 UTC"
-            created_by          = "apikey-XXXXXXXX"
-            display_name        = "test-tf"
-            labels              = {
-                "tidb.cloud/organization" = "60000"
-                "tidb.cloud/project"      = "3100000"
-            }
-            port                = 4000
-            project_id          = "3100000"
-            region_display_name = "Oregon (us-west-2)"
-            region_id           = "aws-us-west-2"
-            state               = "ACTIVE"
-            tidb_node_setting   = {
-                endpoints               = [
-                    {
-                        connection_type = "PUBLIC"
-                        host            = "tidb.taiqixxxxxxx.clusters.dev.tidb-cloud.com"
-                        port            = 4000
-                    },
-                    {
-                        connection_type = "VPC_PEERING"
-                        host            = "private-tidb.taiqixxxxxxx.clusters.dev.tidb-cloud.com"
-                        port            = 4000
-                    },
-                    {
-                        connection_type = "PRIVATE_ENDPOINT"
-                        host            = null
-                        port            = 4000
-                    },
-                ]
-                is_default_group        = true
-                node_count              = 1
-                node_group_display_name = "DefaultGroup"
-                node_group_id           = "1931960832833000000"
-                node_spec_display_name  = "2 vCPU, 4 GiB beta"
-                node_spec_key           = "2C4G"
-                state                   = "ACTIVE"
-            }
-            tiflash_node_setting = {
-                node_count             = 3
-                node_spec_display_name = "2 vCPU, 4 GiB"
-                node_spec_key          = "2C4G"
-                storage_size_gi        = 60
-                storage_type           = "Basic"
-            }
-            tikv_node_setting   = {
-                node_count             = 3
-                node_spec_display_name = "2 vCPU, 4 GiB"
-                node_spec_key          = "2C4G"
-                storage_size_gi        = 60
-                storage_type           = "Standard"
-            }
-            update_time         = "2025-06-06 08:31:42.974 +0000 UTC"
-            version             = "v7.5.6"
+    # tidbcloud_dedicated_cluster.example_cluster:
+    resource "tidbcloud_dedicated_cluster" "example_cluster" {
+        annotations         = {
+            "tidb.cloud/available-features" = "DISABLE_PUBLIC_LB,PRIVATELINK,DELEGATE_USER"
+            "tidb.cloud/has-set-password"   = "false"
         }
+        cloud_provider      = "aws"
+        cluster_id          = "1379661944600000000"
+        create_time         = "2025-06-06 06:25:29.878 +0000 UTC"
+        created_by          = "apikey-XXXXXXXX"
+        display_name        = "test-tf"
+        labels              = {
+            "tidb.cloud/organization" = "60000"
+            "tidb.cloud/project"      = "3100000"
+        }
+        port                = 4000
+        project_id          = "3100000"
+        region_display_name = "Oregon (us-west-2)"
+        region_id           = "aws-us-west-2"
+        state               = "ACTIVE"
+        tidb_node_setting   = {
+            endpoints               = [
+                {
+                    connection_type = "PUBLIC"
+                    host            = "tidb.taiqixxxxxxx.clusters.dev.tidb-cloud.com"
+                    port            = 4000
+                },
+                {
+                    connection_type = "VPC_PEERING"
+                    host            = "private-tidb.taiqixxxxxxx.clusters.dev.tidb-cloud.com"
+                    port            = 4000
+                },
+                {
+                    connection_type = "PRIVATE_ENDPOINT"
+                    host            = null
+                    port            = 4000
+                },
+            ]
+            is_default_group        = true
+            node_count              = 1
+            node_group_display_name = "DefaultGroup"
+            node_group_id           = "1931960832833000000"
+            node_spec_display_name  = "2 vCPU, 4 GiB beta"
+            node_spec_key           = "2C4G"
+            state                   = "ACTIVE"
+        }
+        tiflash_node_setting = {
+            node_count             = 3
+            node_spec_display_name = "2 vCPU, 4 GiB"
+            node_spec_key          = "2C4G"
+            storage_size_gi        = 60
+            storage_type           = "Basic"
+        }
+        tikv_node_setting   = {
+            node_count             = 3
+            node_spec_display_name = "2 vCPU, 4 GiB"
+            node_spec_key          = "2C4G"
+            storage_size_gi        = 60
+            storage_type           = "Standard"
+        }
+        update_time         = "2025-06-06 08:31:42.974 +0000 UTC"
+        version             = "v7.5.6"
+    }
+    ```
 
 状態`MODIFYING`は、クラスターが変更中であることを示します。変更が完了すると、状態は`ACTIVE`に変わります。
 
@@ -560,98 +568,102 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
 
 状態が`ACTIVE`の場合、 TiDB Cloud Dedicated クラスターをスケーリングできます。
 
-1.  [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)際に使用する`cluster.tf`ファイルで、 `tidb_node_setting` 、 `tikv_node_setting` 、 `tiflash_node_setting`の設定を編集します。
+1. [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)際に使用する`cluster.tf`ファイルで、 `tidb_node_setting` 、 `tikv_node_setting` 、 `tiflash_node_setting`の設定を編集します。
 
     たとえば、TiDB ノードを 1 つ、TiKV ノードを 3 つ (スケーリング ステップが 3 であるため、TiKV ノードの数は 3 の倍数である必要があります)、およびTiFlashノードを 1 つ追加するには、次のように構成を編集します。
 
-         tidb_node_setting = {
-           node_spec_key = "8C16G"
-           node_count = 2
-         }
-         tikv_node_setting = {
-           node_spec_key = "8C32G"
-           node_count = 6
-           storage_size_gi = 200
-         }
-         tiflash_node_setting = {
-           node_spec_key = "8C64G"
-           node_count = 4
-           storage_size_gi = 200
-         }
+    ```
+     tidb_node_setting = {
+       node_spec_key = "8C16G"
+       node_count = 2
+     }
+     tikv_node_setting = {
+       node_spec_key = "8C32G"
+       node_count = 6
+       storage_size_gi = 200
+     }
+     tiflash_node_setting = {
+       node_spec_key = "8C64G"
+       node_count = 4
+       storage_size_gi = 200
+     }
+    ```
 
-2.  `terraform apply`コマンドを実行し、確認のために`yes`入力します。
+2. `terraform apply`コマンドを実行し、確認のために`yes`入力します。
 
-        tidbcloud_dedicated_cluster.example_cluster: Refreshing state...
+    ```
+    tidbcloud_dedicated_cluster.example_cluster: Refreshing state...
 
-        Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
-          ~ update in-place
+    Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+      ~ update in-place
 
-        Terraform will perform the following actions:
+    Terraform will perform the following actions:
 
-          # tidbcloud_dedicated_cluster.example_cluster will be updated in-place
-          ~ resource "tidbcloud_dedicated_cluster" "example_cluster" {
-              ~ annotations          = {
-                  - "tidb.cloud/available-features" = "DISABLE_PUBLIC_LB,PRIVATELINK,DELEGATE_USER"
-                  - "tidb.cloud/has-set-password"   = "false"
-                } -> (known after apply)
-              ~ labels               = {
-                  - "tidb.cloud/organization" = "60205"
-                  - "tidb.cloud/project"      = "3199728"
-                } -> (known after apply)
-              + pause_plan           = (known after apply)
-              ~ state                = "ACTIVE" -> (known after apply)
-              ~ tidb_node_setting    = {
-                  ~ endpoints               = [
-                      - {
-                          - connection_type = "PUBLIC"
-                          - host            = "tidb.nwdkyh1smmxk.clusters.dev.tidb-cloud.com"
-                          - port            = 4000
-                        },
-                      - {
-                          - connection_type = "VPC_PEERING"
-                          - host            = "private-tidb.nwdkyh1smmxk.clusters.dev.tidb-cloud.com"
-                          - port            = 4000
-                        },
-                      - {
-                          - connection_type = "PRIVATE_ENDPOINT"
-                          - host            = "privatelink-19320029.nwdkyh1smmxk.clusters.dev.tidb-cloud.com"
-                          - port            = 4000
-                        },
-                    ] -> (known after apply)
-                  ~ node_count              = 3 -> 2
-                  ~ node_spec_display_name  = "8 vCPU, 16 GiB" -> (known after apply)
-                  ~ state                   = "ACTIVE" -> (known after apply)
-                    # (5 unchanged attributes hidden)
-                }
-              ~ tiflash_node_setting = {
-                  ~ node_count             = 3 -> 4
-                  ~ node_spec_display_name = "8 vCPU, 64 GiB" -> (known after apply)
-                  ~ storage_type           = "Basic" -> (known after apply)
-                    # (2 unchanged attributes hidden)
-                }
-              ~ tikv_node_setting    = {
-                  ~ node_count             = 3 -> 6
-                  ~ node_spec_display_name = "8 vCPU, 32 GiB" -> (known after apply)
-                  ~ storage_type           = "Standard" -> (known after apply)
-                    # (2 unchanged attributes hidden)
-                }
-              ~ update_time          = "2025-06-09 09:29:25.678 +0000 UTC" -> (known after apply)
-              ~ version              = "v7.5.6" -> (known after apply)
-                # (9 unchanged attributes hidden)
+      # tidbcloud_dedicated_cluster.example_cluster will be updated in-place
+      ~ resource "tidbcloud_dedicated_cluster" "example_cluster" {
+          ~ annotations          = {
+              - "tidb.cloud/available-features" = "DISABLE_PUBLIC_LB,PRIVATELINK,DELEGATE_USER"
+              - "tidb.cloud/has-set-password"   = "false"
+            } -> (known after apply)
+          ~ labels               = {
+              - "tidb.cloud/organization" = "60205"
+              - "tidb.cloud/project"      = "3199728"
+            } -> (known after apply)
+          + pause_plan           = (known after apply)
+          ~ state                = "ACTIVE" -> (known after apply)
+          ~ tidb_node_setting    = {
+              ~ endpoints               = [
+                  - {
+                      - connection_type = "PUBLIC"
+                      - host            = "tidb.nwdkyh1smmxk.clusters.dev.tidb-cloud.com"
+                      - port            = 4000
+                    },
+                  - {
+                      - connection_type = "VPC_PEERING"
+                      - host            = "private-tidb.nwdkyh1smmxk.clusters.dev.tidb-cloud.com"
+                      - port            = 4000
+                    },
+                  - {
+                      - connection_type = "PRIVATE_ENDPOINT"
+                      - host            = "privatelink-19320029.nwdkyh1smmxk.clusters.dev.tidb-cloud.com"
+                      - port            = 4000
+                    },
+                ] -> (known after apply)
+              ~ node_count              = 3 -> 2
+              ~ node_spec_display_name  = "8 vCPU, 16 GiB" -> (known after apply)
+              ~ state                   = "ACTIVE" -> (known after apply)
+                # (5 unchanged attributes hidden)
             }
+          ~ tiflash_node_setting = {
+              ~ node_count             = 3 -> 4
+              ~ node_spec_display_name = "8 vCPU, 64 GiB" -> (known after apply)
+              ~ storage_type           = "Basic" -> (known after apply)
+                # (2 unchanged attributes hidden)
+            }
+          ~ tikv_node_setting    = {
+              ~ node_count             = 3 -> 6
+              ~ node_spec_display_name = "8 vCPU, 32 GiB" -> (known after apply)
+              ~ storage_type           = "Standard" -> (known after apply)
+                # (2 unchanged attributes hidden)
+            }
+          ~ update_time          = "2025-06-09 09:29:25.678 +0000 UTC" -> (known after apply)
+          ~ version              = "v7.5.6" -> (known after apply)
+            # (9 unchanged attributes hidden)
+        }
 
-        Plan: 0 to add, 1 to change, 0 to destroy.
+    Plan: 0 to add, 1 to change, 0 to destroy.
 
-        Do you want to perform these actions?
-          Terraform will perform the actions described above.
-          Only 'yes' will be accepted to approve.
+    Do you want to perform these actions?
+      Terraform will perform the actions described above.
+      Only 'yes' will be accepted to approve.
 
-          Enter a value: yes
+      Enter a value: yes
 
-        tidbcloud_dedicated_cluster.example_cluster: Modifying...
-        tidbcloud_dedicated_cluster.example_cluster: Still modifying... [10s elapsed]
+    tidbcloud_dedicated_cluster.example_cluster: Modifying...
+    tidbcloud_dedicated_cluster.example_cluster: Still modifying... [10s elapsed]
 
-        Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
+    Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
+    ```
 
 プロセスが完了するまでお待ちください。スケーリングが完了すると、状態は`ACTIVE`に変わります。
 
@@ -659,14 +671,16 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
 
 クラスターの状態が`ACTIVE`のときは一時停止し、状態が`PAUSED`のときは再開できます。
 
--   クラスターを一時停止するには`paused = true`設定します。
--   クラスターを再開するには`paused = false`設定します。
+- クラスターを一時停止するには`paused = true`設定します。
+- クラスターを再開するには`paused = false`設定します。
 
-1.  [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)を実行するときに使用する`cluster.tf`ファイルで、構成に`pause = true`を追加します。
+1. [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)を実行するときに使用する`cluster.tf`ファイルで、構成に`pause = true`を追加します。
 
-        paused = true
+    ```
+    paused = true
+    ```
 
-2.  `terraform apply`コマンドを実行し、プランを確認した後、 `yes`入力します。
+2. `terraform apply`コマンドを実行し、プランを確認した後、 `yes`入力します。
 
     ```shell
     $ terraform apply
@@ -742,88 +756,94 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
     Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
     ```
 
-3.  状態を確認するには、 `terraform state show tidbcloud_dedicated_cluster.${resource-name}`コマンドを使用します。
+3. 状態を確認するには、 `terraform state show tidbcloud_dedicated_cluster.${resource-name}`コマンドを使用します。
 
-        $ terraform state show tidbcloud_dedicate_cluster.example_cluster
+    ```
+    $ terraform state show tidbcloud_dedicate_cluster.example_cluster
 
-        resource "tidbcloud_dedicated_cluster" "example_cluster" {
-             annotations         = {
-                 "tidb.cloud/available-features" = "DISABLE_PUBLIC_LB,PRIVATELINK,DELEGATE_USER"
-                 "tidb.cloud/has-set-password"   = "false"
-             }
-             cloud_provider      = "aws"
-             cluster_id          = "1379661944600000000"
-             create_time         = "2025-06-06 06:25:29.878 +0000 UTC"
-             created_by          = "apikey-XXXXXXXX"
-             display_name        = "test-tf"
-             labels              = {
-                 "tidb.cloud/organization" = "60000"
-                 "tidb.cloud/project"      = "3100000"
-             } 
-             paused              = true
-             port                = 4000
-             project_id          = "3100000"
-             region_display_name = "Oregon (us-west-2)"
-             region_id           = "aws-us-west-2"
-             state               = "PAUSED"
-             tidb_node_setting   = {
-                 endpoints               = [
-                     {
-                         connection_type = "PUBLIC"
-                         host            = "tidb.taiqixxxxxxx.clusters.dev.tidb-cloud.com"
-                         port            = 4000
-                     },
-                     {
-                         connection_type = "VPC_PEERING"
-                         host            = "private-tidb.taiqixxxxxxx.clusters.dev.tidb-cloud.com"
-                         port            = 4000
-                     },
-                     {
-                         connection_type = "PRIVATE_ENDPOINT"
-                         host            = null
-                         port            = 4000
-                     },
-                 ]
-                 is_default_group        = true
-                 node_count              = 1
-                 node_group_display_name = "DefaultGroup"
-                 node_group_id           = "1931960832833000000"
-                 node_spec_display_name  = "2 vCPU, 4 GiB beta"
-                 node_spec_key           = "2C4G"
-                 state                   = "ACTIVE"
-             }
-             tikv_node_setting   = {
-                 node_count             = 3
-                 node_spec_display_name = "2 vCPU, 4 GiB"
-                 node_spec_key          = "2C4G"
-                 storage_size_gi        = 60
-                 storage_type           = "Standard"
-             }
-             update_time         = "2025-06-06 06:31:42.974 +0000 UTC"
-             version             = "v7.5.6"
+    resource "tidbcloud_dedicated_cluster" "example_cluster" {
+         annotations         = {
+             "tidb.cloud/available-features" = "DISABLE_PUBLIC_LB,PRIVATELINK,DELEGATE_USER"
+             "tidb.cloud/has-set-password"   = "false"
          }
+         cloud_provider      = "aws"
+         cluster_id          = "1379661944600000000"
+         create_time         = "2025-06-06 06:25:29.878 +0000 UTC"
+         created_by          = "apikey-XXXXXXXX"
+         display_name        = "test-tf"
+         labels              = {
+             "tidb.cloud/organization" = "60000"
+             "tidb.cloud/project"      = "3100000"
+         } 
+         paused              = true
+         port                = 4000
+         project_id          = "3100000"
+         region_display_name = "Oregon (us-west-2)"
+         region_id           = "aws-us-west-2"
+         state               = "PAUSED"
+         tidb_node_setting   = {
+             endpoints               = [
+                 {
+                     connection_type = "PUBLIC"
+                     host            = "tidb.taiqixxxxxxx.clusters.dev.tidb-cloud.com"
+                     port            = 4000
+                 },
+                 {
+                     connection_type = "VPC_PEERING"
+                     host            = "private-tidb.taiqixxxxxxx.clusters.dev.tidb-cloud.com"
+                     port            = 4000
+                 },
+                 {
+                     connection_type = "PRIVATE_ENDPOINT"
+                     host            = null
+                     port            = 4000
+                 },
+             ]
+             is_default_group        = true
+             node_count              = 1
+             node_group_display_name = "DefaultGroup"
+             node_group_id           = "1931960832833000000"
+             node_spec_display_name  = "2 vCPU, 4 GiB beta"
+             node_spec_key           = "2C4G"
+             state                   = "ACTIVE"
+         }
+         tikv_node_setting   = {
+             node_count             = 3
+             node_spec_display_name = "2 vCPU, 4 GiB"
+             node_spec_key          = "2C4G"
+             storage_size_gi        = 60
+             storage_type           = "Standard"
+         }
+         update_time         = "2025-06-06 06:31:42.974 +0000 UTC"
+         version             = "v7.5.6"
+     }
+    ```
 
-4.  クラスターを再開する必要がある場合は、 `paused = false`設定します。
+4. クラスターを再開する必要がある場合は、 `paused = false`設定します。
 
-        paused = false
+    ```
+    paused = false
+    ```
 
-5.  `terraform apply`コマンドを実行し、確認のために`yes`入力します。しばらく待つと、状態が最終的に`ACTIVE`に変更されます。
+5. `terraform apply`コマンドを実行し、確認のために`yes`入力します。しばらく待つと、状態が最終的に`ACTIVE`に変更されます。
 
 ### クラスターに TiDB ノードグループを追加する {#add-a-tidb-node-group-to-the-cluster}
 
 状態が`ACTIVE`の場合、 TiDB ノードグループをクラスターに追加できます。
 
-1.  [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)を実行するときに使用する`cluster.tf`ファイルに、 `tidbcloud_dedicated_node_group`構成を追加します。
+1. [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)を実行するときに使用する`cluster.tf`ファイルに、 `tidbcloud_dedicated_node_group`構成を追加します。
 
     たとえば、3 つのノードを持つ TiDB ノードグループを追加するには、次のように構成を編集します。
 
-        resource "tidbcloud_dedicated_node_group" "example_group" {
-            cluster_id = tidbcloud_dedicated_cluster.example_cluster.cluster_id
-            node_count = 3
-            display_name = "test-node-group"
-        }
+    ```
+    resource "tidbcloud_dedicated_node_group" "example_group" {
+        cluster_id = tidbcloud_dedicated_cluster.example_cluster.cluster_id
+        node_count = 3
+        display_name = "test-node-group"
+    }
+    ```
 
-2.  `terraform apply`コマンドを実行し、確認のために`yes`入力します。
+2. `terraform apply`コマンドを実行し、確認のために`yes`入力します。
 
     ```shell
     $ terraform apply
@@ -860,7 +880,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-3.  状態を確認するには、 `terraform state show tidbcloud_dedicated_node_group.${resource-name}`コマンドを使用します。
+3. 状態を確認するには、 `terraform state show tidbcloud_dedicated_node_group.${resource-name}`コマンドを使用します。
 
     ```shell
     $ terraform state show tidbcloud_dedicated_node_group.example_group
@@ -898,17 +918,19 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
 
 クラスターの TiDB ノードグループの状態が`ACTIVE`の場合、そのグループを更新できます。
 
-1.  [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)際に使用する`cluster.tf`ファイルで、 `tidbcloud_dedicated_node_group`の設定を編集します。
+1. [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)際に使用する`cluster.tf`ファイルで、 `tidbcloud_dedicated_node_group`の設定を編集します。
 
     たとえば、ノード数を`1`に変更するには、次のように構成を編集します。
 
-        resource "tidbcloud_dedicated_node_group" "example_group" {
-            cluster_id = tidbcloud_dedicated_cluster.example_cluster.cluster_id
-            node_count = 1
-            display_name = "test-node-group"
-        }
+    ```
+    resource "tidbcloud_dedicated_node_group" "example_group" {
+        cluster_id = tidbcloud_dedicated_cluster.example_cluster.cluster_id
+        node_count = 1
+        display_name = "test-node-group"
+    }
+    ```
 
-2.  `terraform apply`コマンドを実行し、確認のために`yes`入力します。
+2. `terraform apply`コマンドを実行し、確認のために`yes`入力します。
 
     ```shell
     $ terraform apply
@@ -1023,7 +1045,9 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
 
 ここで、コマンド`terraform show`を実行すると、リソースがクリアされているため何も表示されません。
 
-    $ terraform show
+```
+$ terraform show
+```
 
 ## クラスターをインポートする {#import-a-cluster}
 
@@ -1031,16 +1055,18 @@ Terraform によって管理されていない TiDB クラスターの場合は�
 
 次のように、Terraform によって作成されていないクラスターをインポートします。
 
-1.  新しい`tidbcloud_dedicated_cluster`リソースのインポート ブロックを追加します。
+1. 新しい`tidbcloud_dedicated_cluster`リソースのインポート ブロックを追加します。
 
     次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}`クラスター ID に置き換えます。
 
-        import {
-          to = tidbcloud_dedicated_cluster.example_cluster
-          id = "${id}"
-        }
+    ```
+    import {
+      to = tidbcloud_dedicated_cluster.example_cluster
+      id = "${id}"
+    }
+    ```
 
-2.  新しい構成ファイルを生成します。
+2. 新しい構成ファイルを生成します。
 
     インポート ブロックに従って、新しい`tidbcloud_dedicated_cluster`リソースの新しい構成ファイルを生成します。
 
@@ -1050,7 +1076,7 @@ Terraform によって管理されていない TiDB クラスターの場合は�
 
     上記のコマンドでは、既存の`.tf`名を指定しないでください。指定した場合、Terraform はエラーを返します。
 
-3.  生成された構成を確認して適用します。
+3. 生成された構成を確認して適用します。
 
     生成された構成ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
 
@@ -1168,4 +1194,6 @@ TiDB Cloud Dedicated クラスターを削除するには、 `tidbcloud_dedicate
 
 ここで、 `terraform show`コマンドを実行すると、リソースがクリアされているため、管理対象リソースは表示されません。
 
-    $ terraform show
+```
+$ terraform show
+```

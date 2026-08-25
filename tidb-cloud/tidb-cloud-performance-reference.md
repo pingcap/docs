@@ -33,8 +33,8 @@ auto-inc=false
 
 テストスケール:
 
--   TiDB (4 vCPU、16 GiB) * 1; TiKV (4 vCPU、16 GiB) * 3
--   TiDB (4 vCPU、16 GiB) * 2; TiKV (4 vCPU、16 GiB) * 3
+- TiDB (4 vCPU、16 GiB) *1; TiKV (4 vCPU、16 GiB)* 3
+- TiDB (4 vCPU、16 GiB) *2; TiKV (4 vCPU、16 GiB)* 3
 
 テスト結果:
 
@@ -58,12 +58,12 @@ auto-inc=false
 
 テストスケール:
 
--   TiDB (8 vCPU、16 GiB) * 2; TiKV (8 vCPU、32 GiB) * 3
--   TiDB (8 vCPU、16 GiB) * 4; TiKV (8 vCPU、32 GiB) * 3
--   TiDB (8 vCPU、16 GiB) * 4; TiKV (8 vCPU、32 GiB) * 6
--   TiDB (8 vCPU、16 GiB) * 6; TiKV (8 vCPU、32 GiB) * 9
--   TiDB (8 vCPU、16 GiB) * 9; TiKV (8 vCPU、32 GiB) * 6
--   TiDB (8 vCPU、16 GiB) * 12; TiKV (8 vCPU、32 GiB) * 9
+- TiDB (8 vCPU、16 GiB) *2; TiKV (8 vCPU、32 GiB)* 3
+- TiDB (8 vCPU、16 GiB) *4; TiKV (8 vCPU、32 GiB)* 3
+- TiDB (8 vCPU、16 GiB) *4; TiKV (8 vCPU、32 GiB)* 6
+- TiDB (8 vCPU、16 GiB) *6; TiKV (8 vCPU、32 GiB)* 9
+- TiDB (8 vCPU、16 GiB) *9; TiKV (8 vCPU、32 GiB)* 6
+- TiDB (8 vCPU、16 GiB) *12; TiKV (8 vCPU、32 GiB)* 9
 
 テスト結果:
 
@@ -119,8 +119,8 @@ auto-inc=false
 
 テストスケール:
 
--   TiDB (16 vCPU、32 GiB) * 1; TiKV (16 vCPU、64 GiB) * 3
--   TiDB (16 vCPU、32 GiB) * 2; TiKV (16 vCPU、64 GiB) * 3
+- TiDB (16 vCPU、32 GiB) *1; TiKV (16 vCPU、64 GiB)* 3
+- TiDB (16 vCPU、32 GiB) *2; TiKV (16 vCPU、64 GiB)* 3
 
 テスト結果:
 
@@ -144,8 +144,8 @@ auto-inc=false
 
 テストスケール:
 
--   TiDB (32 vCPU、64 GiB) * 1; TiKV (32 vCPU、128 GiB) * 3
--   TiDB (32 vCPU、64 GiB) * 2; TiKV (32 vCPU、128 GiB) * 3
+- TiDB (32 vCPU、64 GiB) *1; TiKV (32 vCPU、128 GiB)* 3
+- TiDB (32 vCPU、64 GiB) *2; TiKV (32 vCPU、128 GiB)* 3
 
 テスト結果:
 

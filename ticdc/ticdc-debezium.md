@@ -804,11 +804,11 @@ TiCDC は WATERMARK イベントを Kafka メッセージにエンコードし�
 
 TiCDC Debeziumメッセージのデータ形式マッピングは基本的に[Debeziumデータ型マッピングルール](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-data-types)に準拠しており、これはMySQL用Debeziumコネクタのネイティブメッセージと概ね一致しています。ただし、一部のデータ型については、TiCDC DebeziumメッセージとDebeziumコネクタメッセージの間に以下の違いがあります。
 
--   現在、TiDB は、GEOMETRY、LINESTRING、POLYGON、MULTIPOINT、MULTILINESTRING、MULTIPOLYGON、GEOMETRYCOLLECTION などの空間データ型をサポートしていません。
+- 現在、TiDB は、GEOMETRY、LINESTRING、POLYGON、MULTIPOINT、MULTILINESTRING、MULTIPOLYGON、GEOMETRYCOLLECTION などの空間データ型をサポートしていません。
 
--   Varchar、String、VarString、TinyBlob、MediumBlob、BLOB、LongBlobなどの文字列型データ型の場合、列にBINARYフラグが付いている場合、TiCDCはBase64でエンコードした後、String型としてエンコードします。列にBINARYフラグが付いていない場合は、TiCDCは直接String型としてエンコードします。ネイティブDebeziumコネクタは、 `binary.handling.mode`に従って異なる方法でエンコードします。
+- Varchar、String、VarString、TinyBlob、MediumBlob、BLOB、LongBlobなどの文字列型データ型の場合、列にBINARYフラグが付いている場合、TiCDCはBase64でエンコードした後、String型としてエンコードします。列にBINARYフラグが付いていない場合は、TiCDCは直接String型としてエンコードします。ネイティブDebeziumコネクタは、 `binary.handling.mode`に従って異なる方法でエンコードします。
 
--   TiCDCは、 DECIMALとNUMERIC含むDecimalデータ型をfloat64型で表現します。ネイティブのDebeziumコネクタは、データ型の精度に応じて、float32またはfloat64でエンコードします。
+- TiCDCは、 DECIMALとNUMERIC含むDecimalデータ型をfloat64型で表現します。ネイティブのDebeziumコネクタは、データ型の精度に応じて、float32またはfloat64でエンコードします。
 
 - TiCDC は REAL を DOUBLE に変換し、長さが 1 の場合は BOOLEAN を TINYINT(1) に変換します。
 

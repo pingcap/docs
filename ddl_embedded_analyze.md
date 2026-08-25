@@ -7,8 +7,8 @@ summary: このドキュメントでは、新しく作成または再編成さ�
 
 このドキュメントでは、次の 2 種類の DDL ステートメントに組み込まれている`ANALYZE`機能について説明します。
 
--   新しいインデックスを作成するDDL文: [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
--   既存のインデックスを再編成する DDL ステートメント: [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)と[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
+- 新しいインデックスを作成するDDL文: [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
+- 既存のインデックスを再編成する DDL ステートメント: [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)と[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
 
 この機能を有効にすると、TiDBは新規または再編成されたインデックスがユーザーに表示される前に、自動的に`ANALYZE` （統計収集）操作を実行します。これにより、インデックスの作成または再編成後に一時的に統計が利用できなくなることによる、オプティマイザの推定値の不正確さや潜在的なプラン変更を防止できます。
 
@@ -113,8 +113,8 @@ ADMIN SHOW DDL JOBS 1;
 
 `tidb_stats_update_during_ddl`が`ON`の場合、インデックスの再編成を行う[`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)または[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)を実行すると、Reorg フェーズの完了後に埋め込まれた`ANALYZE`操作も実行されます。このメカニズムは`ADD INDEX`の場合と同じです。
 
--   インデックスが表示される前に統計の収集を開始します。
--   `ANALYZE`がタイムアウトすると、 [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)と[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) `ANALYZE`完了を同期的に待つのをやめ、後続の処理を続行します。これにより、インデックスがユーザーにとってより早く表示されます。つまり、 `ANALYZE`非同期的に完了すると、インデックス統計が更新されます。
+- インデックスが表示される前に統計の収集を開始します。
+- `ANALYZE`がタイムアウトすると、 [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)と[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) `ANALYZE`完了を同期的に待つのをやめ、後続の処理を続行します。これにより、インデックスがユーザーにとってより早く表示されます。つまり、 `ANALYZE`非同期的に完了すると、インデックス統計が更新されます。
 
 例えば：
 

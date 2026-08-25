@@ -12,22 +12,22 @@ aliases: ['/ja/tidb/stable/high-concurrency-best-practices/','/ja/tidb/dev/high-
 
 このドキュメントは、読者がTiDBの基礎を理解していることを前提としています。まず、TiDBの基礎を解説した以下の3つのブログ記事と、 [TiDB ベストプラクティス](https://www.pingcap.com/blog/tidb-best-practice/)読みいただくことをお勧めします。
 
--   [データストレージ](https://www.pingcap.com/blog/tidb-internal-data-storage/)
--   [コンピューティング](https://www.pingcap.com/blog/tidb-internal-computing/)
--   [スケジュール](https://www.pingcap.com/blog/tidb-internal-scheduling/)
+- [データストレージ](https://www.pingcap.com/blog/tidb-internal-data-storage/)
+- [コンピューティング](https://www.pingcap.com/blog/tidb-internal-computing/)
+- [スケジュール](https://www.pingcap.com/blog/tidb-internal-scheduling/)
 
 ## 同時書き込みの多いシナリオ {#highly-concurrent-write-intensive-scenario}
 
 高度な同時書き込みシナリオは、決済や清算などのアプリケーションでバッチタスクを実行する際によく発生します。このシナリオには、次のような特徴があります。
 
--   膨大な量のデータ
--   履歴データを短時間でデータベースにインポートする必要性
--   短時間でデータベースから大量のデータを読み取る必要がある
+- 膨大な量のデータ
+- 履歴データを短時間でデータベースにインポートする必要性
+- 短時間でデータベースから大量のデータを読み取る必要がある
 
 これらの機能は TiDB に次のような課題をもたらします。
 
--   書き込み容量または読み取り容量は線形に拡張可能である必要があります。
--   大量のデータが同時に書き込まれてもデータベースのパフォーマンスは安定しており、低下しません。
+- 書き込み容量または読み取り容量は線形に拡張可能である必要があります。
+- 大量のデータが同時に書き込まれてもデータベースのパフォーマンスは安定しており、低下しません。
 
 分散データベースでは、すべてのノードの能力を最大限に活用し、単一のノードがボトルネックにならないようにすることが重要です。
 
@@ -210,8 +210,8 @@ ORDER BY
 create table t (a int, b int) SHARD_ROW_ID_BITS = 4 PRE_SPLIT_REGIONS=3;
 ```
 
--   `SHARD_ROW_ID_BITS = 4` 、 `tidb_rowid`の値が 16 (16=2^4) の範囲にランダムに分散されることを意味します。
--   `PRE_SPLIT_REGIONS=3` 、テーブルが作成後に 8 (2^3) 個のリージョンに事前に分割されることを意味します。
+- `SHARD_ROW_ID_BITS = 4` 、 `tidb_rowid`の値が 16 (16=2^4) の範囲にランダムに分散されることを意味します。
+- `PRE_SPLIT_REGIONS=3` 、テーブルが作成後に 8 (2^3) 個のリージョンに事前に分割されることを意味します。
 
 テーブル`t`にデータの書き込みが開始されると、データは事前​​に分割された 8 つのリージョンに書き込まれます。これにより、テーブルの作成後に 1 つのリージョンのみが存在する場合に発生する可能性のあるホットスポットの問題が回避されます。
 

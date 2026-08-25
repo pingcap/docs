@@ -56,5 +56,5 @@ TiDBの`SHOW GRANTS`文はMySQLと完全に互換性があります。互換性�
 
 ## 参照 {#see-also}
 
--   [SHOW CREATE USER](/sql-statements/sql-statement-show-create-user.md)
--   [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
+- [SHOW CREATE USER](/sql-statements/sql-statement-show-create-user.md)
+- [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)

@@ -111,11 +111,11 @@ SELECT * FROM information_schema.metrics_tables WHERE table_name='tidb_query_dur
 
 フィールドの説明:
 
--   `TABLE_NAME` : `metrics_schema`のテーブル名に対応します。この例では、テーブル名は`tidb_query_duration`です。
--   `PROMQL` : 監視テーブルの動作原理は、まずSQL文を`PromQL`にマッピングし、次にPrometheusにデータを要求し、Prometheusの結果をSQLクエリ結果に変換することです。このフィールドは`PromQL`の式テンプレートです。監視テーブルのデータをクエリすると、クエリ条件を使用してこのテンプレート内の変数が書き換えられ、最終的なクエリ式が生成されます。
--   `LABELS` : 監視項目のラベル。`tidb_query_duration`は`instance`と`sql_type`の 2 つのラベルがあります。
--   `QUANTILE` : パーセンタイル。ヒストグラム型の監視データの場合、デフォルトのパーセンタイルが指定されます。このフィールドの値が`0`の場合、監視テーブルに対応する監視項目はヒストグラムではないことを意味します。
--   `COMMENT` : 監視テーブルの説明。`tidb_query_duration`テーブルは、TiDBクエリ実行のパーセンタイル時間（P999/P99/P90のクエリ時間など）を照会するために使用されていることがわかります。単位は秒です。
+- `TABLE_NAME` : `metrics_schema`のテーブル名に対応します。この例では、テーブル名は`tidb_query_duration`です。
+- `PROMQL` : 監視テーブルの動作原理は、まずSQL文を`PromQL`にマッピングし、次にPrometheusにデータを要求し、Prometheusの結果をSQLクエリ結果に変換することです。このフィールドは`PromQL`の式テンプレートです。監視テーブルのデータをクエリすると、クエリ条件を使用してこのテンプレート内の変数が書き換えられ、最終的なクエリ式が生成されます。
+- `LABELS` : 監視項目のラベル。`tidb_query_duration`は`instance`と`sql_type`の 2 つのラベルがあります。
+- `QUANTILE` : パーセンタイル。ヒストグラム型の監視データの場合、デフォルトのパーセンタイルが指定されます。このフィールドの値が`0`の場合、監視テーブルに対応する監視項目はヒストグラムではないことを意味します。
+- `COMMENT` : 監視テーブルの説明。`tidb_query_duration`テーブルは、TiDBクエリ実行のパーセンタイル時間（P999/P99/P90のクエリ時間など）を照会するために使用されていることがわかります。単位は秒です。
 
 `tidb_query_duration`テーブルのスキーマをクエリするには、次のステートメントを実行します。
 
@@ -137,10 +137,10 @@ SHOW CREATE TABLE metrics_schema.tidb_query_duration;
 +---------------------+--------------------------------------------------------------------------------------------------------------------+
 ```
 
--   `time` : 監視項目の時間。
--   `instance`と`sql_type` : `tidb_query_duration`監視項目のラベル。`instance`は監視アドレスを意味します。`sql_type`は実行された SQL 文の種類を意味します。
--   `quantile` : パーセンタイル。ヒストグラム型の監視項目にはこの列があり、クエリのパーセンタイル時間を示します。例えば、 `quantile = 0.9` P90の時間をクエリすることを意味します。
--   `value` : 監視項目の値。
+- `time` : 監視項目の時間。
+- `instance`と`sql_type` : `tidb_query_duration`監視項目のラベル。`instance`は監視アドレスを意味します。`sql_type`は実行された SQL 文の種類を意味します。
+- `quantile` : パーセンタイル。ヒストグラム型の監視項目にはこの列があり、クエリのパーセンタイル時間を示します。例えば、 `quantile = 0.9` P90の時間をクエリすることを意味します。
+- `value` : 監視項目の値。
 
 次の文は`2020-03-25 23:42:00` [ `2020-03-25 23:40:00` ]の範囲内のP99時間を照会します。
 
@@ -166,8 +166,8 @@ SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AND tim
 
 上記のクエリ結果の最初の行は、2020年3月25日 23:40:00の時点において、TiDBインスタンス`172.16.5.40:10089`において、 `Insert`文のP99実行時間が0.509929485256秒であることを意味します。他の行も同様の意味を持ちます。`sql_type`の列のその他の値は、以下のように記述されます。
 
--   `Select` : `select`型のステートメントが実行されます。
--   `internal` : 統計情報を更新し、グローバル変数を取得するために使用される TiDB の内部 SQL ステートメント。
+- `Select` : `select`型のステートメントが実行されます。
+- `internal` : 統計情報を更新し、グローバル変数を取得するために使用される TiDB の内部 SQL ステートメント。
 
 上記のステートメントの実行計画を表示するには、次のステートメントを実行します。
 
@@ -188,12 +188,12 @@ DESC SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AN
 
 [ `2020-03-25 23:40:00` , `2020-03-25 23:42:00` ] の範囲では、各ラベルに3つの時間値しかないことに気づくかもしれません。実行計画では、 `step`の値は1分であり、これらの値の間隔は1分であることを意味します。`step`は次の2つのセッション変数によって決定されます。
 
--   `tidb_metric_query_step` : クエリ解決ステップ幅。Prometheusから`query_range`データを取得するには、 `start_time` 、 `end_time` 、 `step`を指定する必要があります。 `step` 、この変数の値が使用されます。
--   `tidb_metric_query_range_duration` : 監視データが照会されると、 `PROMQL`の`$ RANGE_DURATION`のフィールドの値がこの変数の値に置き換えられます。デフォルト値は60秒です。
+- `tidb_metric_query_step` : クエリ解決ステップ幅。Prometheusから`query_range`データを取得するには、 `start_time` 、 `end_time` 、 `step`を指定する必要があります。 `step` 、この変数の値が使用されます。
+- `tidb_metric_query_range_duration` : 監視データが照会されると、 `PROMQL`の`$ RANGE_DURATION`のフィールドの値がこの変数の値に置き換えられます。デフォルト値は60秒です。
 
 監視項目の値を異なる粒度で表示するには、監視テーブルをクエリする前に、上記の2つのセッション変数を変更します。例：
 
-1.  2 つのセッション変数の値を変更し、時間の粒度を 30 秒に設定します。
+1. 2 つのセッション変数の値を変更し、時間の粒度を 30 秒に設定します。
 
     > **Note:**
     >
@@ -204,7 +204,7 @@ DESC SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AN
     set @@tidb_metric_query_range_duration=30;
     ```
 
-2.  `tidb_query_duration`監視項目に対して、以下のようにクエリを実行します。結果から、3分間の時間範囲内で、各ラベルに6つの時間値があり、各値の間隔は30秒であることがわかります。
+2. `tidb_query_duration`監視項目に対して、以下のようにクエリを実行します。結果から、3分間の時間範囲内で、各ラベルに6つの時間値があり、各値の間隔は30秒であることがわかります。
 
     ```sql
     select * from metrics_schema.tidb_query_duration where value is not null and time>='2020-03-25 23:40:00' and time <= '2020-03-25 23:42:00' and quantile=0.99;
@@ -232,7 +232,7 @@ DESC SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AN
     +---------------------+-------------------+----------+----------+-----------------+
     ```
 
-3.  実行計画を表示する。結果から、実行計画の`PromQL`と`step`値が30秒に変更されていることも確認できます。
+3. 実行計画を表示する。結果から、実行計画の`PromQL`と`step`値が30秒に変更されていることも確認できます。
 
     ```sql
     desc select * from metrics_schema.tidb_query_duration where value is not null and time>='2020-03-25 23:40:00' and time <= '2020-03-25 23:42:00' and quantile=0.99;

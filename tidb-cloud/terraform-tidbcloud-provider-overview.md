@@ -11,17 +11,17 @@ summary: Terraform を使用してTiDB Cloudリソースを作成、管理、更
 
 リソースのプロビジョニングとインフラストラクチャ ワークフローを自動化する簡単な方法を探している場合は、次の機能を提供するTiDB Cloud Terraform Provider を試してみてください。
 
--   プロジェクト情報を取得します。
--   サポートされているクラウドプロバイダー、リージョン、ノードサイズなどのクラスター仕様情報を取得します。
--   クラスターの作成、スケーリング、一時停止、再開など、TiDB クラスターを管理します。
--   クラスターのバックアップを作成および削除します。
--   クラスターの復元タスクを作成します。
+- プロジェクト情報を取得します。
+- サポートされているクラウドプロバイダー、リージョン、ノードサイズなどのクラスター仕様情報を取得します。
+- クラスターの作成、スケーリング、一時停止、再開など、TiDB クラスターを管理します。
+- クラスターのバックアップを作成および削除します。
+- クラスターの復元タスクを作成します。
 
 ## 要件 {#requirements}
 
--   [TiDB Cloudアカウント](https://tidbcloud.com/free-trial)
--   [Terraformバージョン](https://www.terraform.io/downloads.html) &gt;= 1.0
--   [Goバージョン](https://golang.org/doc/install) &gt;= 1.18 (ローカルで[TiDB Cloud Terraform プロバイダー](https://github.com/tidbcloud/terraform-provider-tidbcloud)ビルドする場合にのみ必要)
+- [TiDB Cloudアカウント](https://tidbcloud.com/free-trial)
+- [Terraformバージョン](https://www.terraform.io/downloads.html) &gt;= 1.0
+- [Goバージョン](https://golang.org/doc/install) &gt;= 1.18 (ローカルで[TiDB Cloud Terraform プロバイダー](https://github.com/tidbcloud/terraform-provider-tidbcloud)ビルドする場合にのみ必要)
 
 ## サポートされているリソースとデータソース {#supported-resources-and-data-sources}
 
@@ -29,28 +29,28 @@ summary: Terraform を使用してTiDB Cloudリソースを作成、管理、更
 
 TiDB Cloud は次のリソースとデータソースをサポートしています。
 
--   リソース
+- リソース
 
-    -   `tidbcloud_cluster`
-    -   `tidbcloud_backup`
-    -   `tidbcloud_restore`
-    -   `tidbcloud_import`
+    - `tidbcloud_cluster`
+    - `tidbcloud_backup`
+    - `tidbcloud_restore`
+    - `tidbcloud_import`
 
--   データソース
+- データソース
 
-    -   `tidbcloud_projects`
-    -   `tidbcloud_cluster_specs`
-    -   `tidbcloud_clusters`
-    -   `tidbcloud_restores`
-    -   `tidbcloud_backups`
+    - `tidbcloud_projects`
+    - `tidbcloud_cluster_specs`
+    - `tidbcloud_clusters`
+    - `tidbcloud_restores`
+    - `tidbcloud_backups`
 
 リソースとデータソースの使用可能なすべての構成を取得するには、[構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)を参照してください。
 
 ## 次のステップ {#next-step}
 
--   [Terraformについて詳しくはこちら](https://www.terraform.io/docs)
--   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)
--   [`tidbcloud_serverless_cluster`リソースを使用する](/tidb-cloud/terraform-use-serverless-cluster-resource.md)
--   [`tidbcloud_dedicated_cluster`リソースを使用する](/tidb-cloud/terraform-use-dedicated-cluster-resource.md)
--   [`tidbcloud_backup`リソースを使用する](/tidb-cloud/terraform-use-backup-resource.md)
--   [`tidbcloud_restore`リソースを使用する](/tidb-cloud/terraform-use-restore-resource.md)
+- [Terraformについて詳しくはこちら](https://www.terraform.io/docs)
+- [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)
+- [`tidbcloud_serverless_cluster`リソースを使用する](/tidb-cloud/terraform-use-serverless-cluster-resource.md)
+- [`tidbcloud_dedicated_cluster`リソースを使用する](/tidb-cloud/terraform-use-dedicated-cluster-resource.md)
+- [`tidbcloud_backup`リソースを使用する](/tidb-cloud/terraform-use-backup-resource.md)
+- [`tidbcloud_restore`リソースを使用する](/tidb-cloud/terraform-use-restore-resource.md)

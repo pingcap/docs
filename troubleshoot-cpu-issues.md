@@ -15,9 +15,9 @@ summary: 読み取りおよび書き込みのレイテンシーが長くなる�
 
 #### 現象 {#phenomenon}
 
--   スローログにクエリ実行計画が出力されている場合は、プランを直接確認できます。`select tidb_decode_plan('xxx...')`ステートメントを実行すると、詳細な実行計画を解析できます。
--   モニター内のスキャンされたキーの数が異常に増加し、スローログでは`Scan Keys`の数が多くなります。
--   TiDBにおけるSQL実行時間は、MySQLなどの他のデータベースと比べて大きく異なります。他のデータベースの実行計画と比較することで、例えば`Join Order`異なるかどうかなどを確認できます。
+- スローログにクエリ実行計画が出力されている場合は、プランを直接確認できます。`select tidb_decode_plan('xxx...')`ステートメントを実行すると、詳細な実行計画を解析できます。
+- モニター内のスキャンされたキーの数が異常に増加し、スローログでは`Scan Keys`の数が多くなります。
+- TiDBにおけるSQL実行時間は、MySQLなどの他のデータベースと比べて大きく異なります。他のデータベースの実行計画と比較することで、例えば`Join Order`異なるかどうかなどを確認できます。
 
 #### 考えられる理由 {#possible-reason}
 
@@ -25,16 +25,16 @@ summary: 読み取りおよび書き込みのレイテンシーが長くなる�
 
 #### トラブルシューティング方法 {#troubleshooting-methods}
 
--   統計情報を更新する
-    -   `analyze table`手動で実行し、統計の正確性を維持するために、 `crontab`コマンドを使用して`analyze`定期的に実行します。
-    -   `auto analyze`を自動的に実行します。`analyze ratio`のしきい値を下げ、情報収集の頻度を上げ、実行の開始時刻と終了時刻を設定します。以下の例をご覧ください。
-        -   `set global tidb_auto_analyze_ratio=0.2;`
-        -   `set global tidb_auto_analyze_start_time='00:00 +0800';`
-        -   `set global tidb_auto_analyze_end_time='06:00 +0800';`
--   実行計画をバインドする
-    -   アプリケーションの SQL ステートメントを変更し、 `use index`を実行して、列のインデックスを一貫して使用します。
-    -   3.0バージョンでは、アプリケーションのSQL文を変更する必要はありません。`create global binding`を使用して、 `force index`のバインディングSQL文を作成します。
-    -   4.0 バージョンでは[SQLプラン管理](/sql-plan-management.md)サポートされており、不安定な実行計画によるパフォーマンスの低下を回避します。
+- 統計情報を更新する
+    - `analyze table`手動で実行し、統計の正確性を維持するために、 `crontab`コマンドを使用して`analyze`定期的に実行します。
+    - `auto analyze`を自動的に実行します。`analyze ratio`のしきい値を下げ、情報収集の頻度を上げ、実行の開始時刻と終了時刻を設定します。以下の例をご覧ください。
+        - `set global tidb_auto_analyze_ratio=0.2;`
+        - `set global tidb_auto_analyze_start_time='00:00 +0800';`
+        - `set global tidb_auto_analyze_end_time='06:00 +0800';`
+- 実行計画をバインドする
+    - アプリケーションの SQL ステートメントを変更し、 `use index`を実行して、列のインデックスを一貫して使用します。
+    - 3.0バージョンでは、アプリケーションのSQL文を変更する必要はありません。`create global binding`を使用して、 `force index`のバインディングSQL文を作成します。
+    - 4.0 バージョンでは[SQLプラン管理](/sql-plan-management.md)サポートされており、不安定な実行計画によるパフォーマンスの低下を回避します。
 
 ### PD異常 {#pd-anomalies}
 
@@ -44,27 +44,27 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 
 #### 考えられる理由 {#possible-reasons}
 
--   ディスクの問題です。PDノードが配置されているディスクのI/O負荷が最大になっています。PDノードが、I/O需要の高い他のコンポーネントと同時にデプロイされていないか、またディスクの健全性を確認してください。Grafanaのモニターメトリクス（**ディスクパフォーマンス**、**レイテンシー**/**負荷**）を確認することで原因を確認できます。必要に応じて、FIOツールを使用してディスクのチェックを実行することもできます。
+- ディスクの問題です。PDノードが配置されているディスクのI/O負荷が最大になっています。PDノードが、I/O需要の高い他のコンポーネントと同時にデプロイされていないか、またディスクの健全性を確認してください。Grafanaのモニターメトリクス（**ディスクパフォーマンス**、**レイテンシー**/**負荷**）を確認することで原因を確認できます。必要に応じて、FIOツールを使用してディスクのチェックを実行することもできます。
 
--   PDピア間のネットワークに問題が発生しています。PDログには`lost the TCP streaming connection`が表示されています。Grafana -&gt; **PD** -&gt; **etcd**モニターの`round trip`を確認して、PDノード間のネットワークに問題が発生し**て**いないか確認し、原因を検証する必要があります。
+- PDピア間のネットワークに問題が発生しています。PDログには`lost the TCP streaming connection`が表示されています。Grafana -&gt; **PD** -&gt; **etcd**モニターの`round trip`を確認して、PDノード間のネットワークに問題が発生し**て**いないか確認し、原因を検証する必要があります。
 
--   サーバーの負荷が高いです。ログには`server is likely overloaded`が表示されています。
+- サーバーの負荷が高いです。ログには`server is likely overloaded`が表示されています。
 
--   PD がLeaderを選出できません: PD ログには`lease is not expired`が表示されます。[この号](https://github.com/etcd-io/etcd/issues/10355)は v3.0.x および v2.1.19 で修正されました。
+- PD がLeaderを選出できません: PD ログには`lease is not expired`が表示されます。[この号](https://github.com/etcd-io/etcd/issues/10355)は v3.0.x および v2.1.19 で修正されました。
 
--   リーダー選出が遅い。リージョンの読み込み時間が長い。この問題は、PDログで`grep "regions cost"`を実行することで確認できます。結果が`load 460927 regions cost 11.77099s`秒など秒単位の場合、リージョンの読み込みが遅いことを意味します。v3.0では、 `use-region-storage`を`true`に設定することで`region storage`機能を有効にでき、リージョンの読み込み時間を大幅に短縮できます。
+- リーダー選出が遅い。リージョンの読み込み時間が長い。この問題は、PDログで`grep "regions cost"`を実行することで確認できます。結果が`load 460927 regions cost 11.77099s`秒など秒単位の場合、リージョンの読み込みが遅いことを意味します。v3.0では、 `use-region-storage`を`true`に設定することで`region storage`機能を有効にでき、リージョンの読み込み時間を大幅に短縮できます。
 
--   TiDBとPD間のネットワークに問題があります。Grafana -&gt; **blackbox_exporter** -&gt; **ping レイテンシー**モニターにアクセスして、TiDBからPD Leaderへのネットワークが正常に動作しているかどうかを確認してください。
+- TiDBとPD間のネットワークに問題があります。Grafana -&gt; **blackbox_exporter** -&gt; **ping レイテンシー**モニターにアクセスして、TiDBからPD Leaderへのネットワークが正常に動作しているかどうかを確認してください。
 
--   PDは`FATAL`エラーを報告しますが、ログには`range failed to find revision pair`が表示されます。この問題はv3.0.8（ [＃2040](https://github.com/pingcap/pd/pull/2040) ）で修正されました。
+- PDは`FATAL`エラーを報告しますが、ログには`range failed to find revision pair`が表示されます。この問題はv3.0.8（ [＃2040](https://github.com/pingcap/pd/pull/2040) ）で修正されました。
 
--   `/api/v1/regions`インターフェースを使用する場合、リージョンが多すぎるとPD OOMが発生する可能性があります。この問題はv3.0.8 ( [＃1986](https://github.com/pingcap/pd/pull/1986) ) で修正されました。
+- `/api/v1/regions`インターフェースを使用する場合、リージョンが多すぎるとPD OOMが発生する可能性があります。この問題はv3.0.8 ( [＃1986](https://github.com/pingcap/pd/pull/1986) ) で修正されました。
 
--   ローリングアップグレード中にPD OOMが発生しました。gRPCメッセージのサイズに制限がなく、モニターでは`TCP InSegs`が比較的大きいと表示されます。この問題はv3.0.6（ [＃1952](https://github.com/pingcap/pd/pull/1952) ）で修正されました。
+- ローリングアップグレード中にPD OOMが発生しました。gRPCメッセージのサイズに制限がなく、モニターでは`TCP InSegs`が比較的大きいと表示されます。この問題はv3.0.6（ [＃1952](https://github.com/pingcap/pd/pull/1952) ）で修正されました。
 
--   PDがパニックになります。[バグを報告する](https://github.com/tikv/pd/issues/new?labels=kind/bug&template=bug-report.md) 。
+- PDがパニックになります。[バグを報告する](https://github.com/tikv/pd/issues/new?labels=kind/bug&template=bug-report.md) 。
 
--   その他の原因。`curl http://127.0.0.1:2379/debug/pprof/goroutine?debug=2`を実行してgoroutineを取得し、 [バグを報告する](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&template=bug-report.md)。
+- その他の原因。`curl http://127.0.0.1:2379/debug/pprof/goroutine?debug=2`を実行してgoroutineを取得し、 [バグを報告する](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&template=bug-report.md)。
 
 ### TiKVの異常 {#tikv-anomalies}
 
@@ -74,28 +74,28 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 
 #### 考えられる理由 {#possible-reasons}
 
--   `gRPC duration`のメトリックを確認してください。このメトリックは、TiKVにおけるgRPCリクエストの合計実行時間を表します。TiKVの`gRPC duration`とTiDBの`KV duration`を比較することで、潜在的なネットワークの問題を特定できます。例えば、gRPCの実行時間は短いのにTiDBのKV実行時間が長い場合、TiDBとTiKV間のネットワークレイテンシーが高いか、TiDBとTiKV間のNIC帯域幅が完全に占有されている可能性があります。
+- `gRPC duration`のメトリックを確認してください。このメトリックは、TiKVにおけるgRPCリクエストの合計実行時間を表します。TiKVの`gRPC duration`とTiDBの`KV duration`を比較することで、潜在的なネットワークの問題を特定できます。例えば、gRPCの実行時間は短いのにTiDBのKV実行時間が長い場合、TiDBとTiKV間のネットワークレイテンシーが高いか、TiDBとTiKV間のNIC帯域幅が完全に占有されている可能性があります。
 
--   TiKVが再開されたため再選。
-    -   TiKVがパニック状態になった後、 `systemd`引き上げられ、正常に動作します。panicが発生したかどうかは、TiKVのログを確認することで確認できます。この問題は予期せぬものであるため、発生した場合は[バグを報告する](https://github.com/tikv/tikv/issues/new?template=bug-report.md) 。
-    -   TiKVは第三者によって停止または強制終了され、その後`systemd`によってプルアップされます。`dmesg`とTiKVログを確認して原因を確認してください。
-    -   TiKV は OOM であり、再起動を引き起こします。
-    -   `THP` (Transparent Hugepage) を動的に調整しているため、TiKV がハングします。
+- TiKVが再開されたため再選。
+    - TiKVがパニック状態になった後、 `systemd`引き上げられ、正常に動作します。panicが発生したかどうかは、TiKVのログを確認することで確認できます。この問題は予期せぬものであるため、発生した場合は[バグを報告する](https://github.com/tikv/tikv/issues/new?template=bug-report.md) 。
+    - TiKVは第三者によって停止または強制終了され、その後`systemd`によってプルアップされます。`dmesg`とTiKVログを確認して原因を確認してください。
+    - TiKV は OOM であり、再起動を引き起こします。
+    - `THP` (Transparent Hugepage) を動的に調整しているため、TiKV がハングします。
 
--   モニターを確認してください：TiKV RocksDB が書き込みストールに遭遇し、再選出が行われます。モニター**Grafana** -&gt; **TiKV-details** -&gt; **errors**に`server is busy`が表示されているかどうかを確認してください。
+- モニターを確認してください：TiKV RocksDB が書き込みストールに遭遇し、再選出が行われます。モニター**Grafana** -&gt; **TiKV-details** -&gt; **errors**に`server is busy`が表示されているかどうかを確認してください。
 
--   ネットワーク分離のため再選。
+- ネットワーク分離のため再選。
 
--   `block-cache`設定が大きすぎる場合、TiKV OOM が発生する可能性があります。問題の原因を確認するには、 **Grafana**モニターで該当するインスタンスを選択し、RocksDB の`block cache size`を確認してください。同時に、 `[storage.block-cache] capacity = # "1GB"`パラメータが正しく設定されているかどうかを確認してください。デフォルトでは、 **TiKV**の`block-cache`マシンの総メモリの`45%`に設定されています。コンテナに TiKV をデプロイする際には、このパラメータを明示的に指定する必要があります。TiKV は物理マシンのメモリを取得するため、コンテナのメモリ制限を超える可能性があります。
+- `block-cache`設定が大きすぎる場合、TiKV OOM が発生する可能性があります。問題の原因を確認するには、 **Grafana**モニターで該当するインスタンスを選択し、RocksDB の`block cache size`を確認してください。同時に、 `[storage.block-cache] capacity = # "1GB"`パラメータが正しく設定されているかどうかを確認してください。デフォルトでは、 **TiKV**の`block-cache`マシンの総メモリの`45%`に設定されています。コンテナに TiKV をデプロイする際には、このパラメータを明示的に指定する必要があります。TiKV は物理マシンのメモリを取得するため、コンテナのメモリ制限を超える可能性があります。
 
--   コプロセッサーは大量の大きなクエリを受信し、大量のデータを返します。gRPCはコプロセッサがデータを返すのに間に合うようにデータを送信できず、OOMが発生します。原因を確認するには、モニター**Grafana** -&gt; **TiKV詳細**-&gt;**コプロセッサ概要**で、 `response size` `network outbound`トラフィックを超えているかどうかを確認してください。
+- コプロセッサーは大量の大きなクエリを受信し、大量のデータを返します。gRPCはコプロセッサがデータを返すのに間に合うようにデータを送信できず、OOMが発生します。原因を確認するには、モニター**Grafana** -&gt; **TiKV詳細**-&gt;**コプロセッサ概要**で、 `response size` `network outbound`トラフィックを超えているかどうかを確認してください。
 
 ### 単一の TiKV スレッドのボトルネック {#bottleneck-of-a-single-tikv-thread}
 
 TiKV にはボトルネックになる可能性のある単一スレッドがいくつかあります。
 
--   TiKVインスタンス内のリージョンが多すぎると、単一のgRPCスレッドがボトルネックになります（ **Grafana** -&gt; **TiKV詳細**-&gt;**スレッドCPU/gRPC CPU Per Thread**メトリックを確認してください）。v3.x以降のバージョンでは、 `Hibernate Region`有効にするとこの問題を解決できます。
--   v3.0 より前のバージョンでは、raftstore スレッドまたは apply スレッドがボトルネックになる場合 ( **Grafana** -&gt; **TiKV-details** -&gt; **Thread CPU/raft store CPU**および**Async apply CPU**メトリックが`80%`超える)、TiKV (v2.x) インスタンスをスケールアウトするか、マルチスレッド対応の v3.x にアップグレードできます。
+- TiKVインスタンス内のリージョンが多すぎると、単一のgRPCスレッドがボトルネックになります（ **Grafana** -&gt; **TiKV詳細**-&gt;**スレッドCPU/gRPC CPU Per Thread**メトリックを確認してください）。v3.x以降のバージョンでは、 `Hibernate Region`有効にするとこの問題を解決できます。
+- v3.0 より前のバージョンでは、raftstore スレッドまたは apply スレッドがボトルネックになる場合 ( **Grafana** -&gt; **TiKV-details** -&gt; **Thread CPU/raft store CPU**および**Async apply CPU**メトリックが`80%`超える)、TiKV (v2.x) インスタンスをスケールアウトするか、マルチスレッド対応の v3.x にアップグレードできます。
 
 ### CPU負荷が増加する {#cpu-load-increases}
 
@@ -105,8 +105,8 @@ CPU リソースの使用量がボトルネックになります。
 
 #### 考えられる理由 {#possible-reasons}
 
--   ホットスポットの問題
--   全体的な負荷が高い。TiDBのスロークエリと負荷の高いクエリを確認してください。インデックスを追加するか、クエリをバッチ処理で実行することで、実行中のクエリを最適化してください。別の解決策としては、クラスターをスケールアウトすることです。
+- ホットスポットの問題
+- 全体的な負荷が高い。TiDBのスロークエリと負荷の高いクエリを確認してください。インデックスを追加するか、クエリをバッチ処理で実行することで、実行中のクエリを最適化してください。別の解決策としては、クラスターをスケールアウトすることです。
 
 ## その他の原因 {#other-causes}
 
@@ -134,6 +134,6 @@ CPU リソースの使用量がボトルネックになります。
 
 TiDBのトランザクションは、マルチバージョン同時実行制御（MVCC）メカニズムを採用しています。新しく書き込まれたデータが古いデータを上書きする場合、古いデータは置き換えられず、両方のバージョンのデータが保存されます。タイムスタンプは異なるバージョンを区別するために使用されます。GCのタスクは、古くなったデータをクリアすることです。
 
--   ロック解決フェーズでは、TiKVに大量のリクエスト`scan_lock`が作成されます。これはgRPC関連のメトリクスで確認できます。これらのリクエスト`scan_lock`は、すべてのリージョンを呼び出します。
--   範囲の削除のフェーズでは、TiKV に少数の (またはまったくない) `unsafe_destroy_range`が送信されます。これは、gRPC 関連のメトリックと**GC タスク**パネルで確認できます。
--   Do GC フェーズでは、各 TiKV はデフォルトでマシン上のリーダーリージョンをスキャンし、各リーダーに対して GC を実行します。これは、 **GC タスク**パネルで確認できます。
+- ロック解決フェーズでは、TiKVに大量のリクエスト`scan_lock`が作成されます。これはgRPC関連のメトリクスで確認できます。これらのリクエスト`scan_lock`は、すべてのリージョンを呼び出します。
+- 範囲の削除のフェーズでは、TiKV に少数の (またはまったくない) `unsafe_destroy_range`が送信されます。これは、gRPC 関連のメトリックと**GC タスク**パネルで確認できます。
+- Do GC フェーズでは、各 TiKV はデフォルトでマシン上のリーダーリージョンをスキャンし、各リーダーに対して GC を実行します。これは、 **GC タスク**パネルで確認できます。

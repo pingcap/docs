@@ -58,10 +58,10 @@ TABLE SESSION_CONNECT_ATTRS;
 
 `SESSION_CONNECT_ATTRS`テーブル内のフィールドは次のように説明されます。
 
--   `PROCESSLIST_ID` : セッションのプロセスリスト ID。
--   `ATTR_NAME` : 属性名。
--   `ATTR_VALUE` : 属性値。
--   `ORDINAL_POSITION` : 名前/値のペアの順序位置。
+- `PROCESSLIST_ID` : セッションのプロセスリスト ID。
+- `ATTR_NAME` : 属性名。
+- `ATTR_VALUE` : 属性値。
+- `ORDINAL_POSITION` : 名前/値のペアの順序位置。
 
 ## サイズ制限と切り捨て {#size-limit-and-truncation}
 

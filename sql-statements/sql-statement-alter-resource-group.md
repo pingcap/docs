@@ -90,9 +90,9 @@ TiDB は、次の`DirectResourceGroupOption`をサポートします。ここで
 
 > **Note:**
 >
-> -   `ALTER RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)が`ON`に設定されている場合にのみ実行できます。
-> -   `ALTER RESOURCE GROUP`ステートメントは、指定されていないパラメーターを変更せずに、増分的な変更をサポートします。ただし、 `QUERY_LIMIT`と`BACKGROUND`は全体として使用されるため、部分的に変更することはできません。
-> -   現在、 `default`リソースグループのみが`BACKGROUND`構成の変更をサポートしています。
+> - `ALTER RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)が`ON`に設定されている場合にのみ実行できます。
+> - `ALTER RESOURCE GROUP`ステートメントは、指定されていないパラメーターを変更せずに、増分的な変更をサポートします。ただし、 `QUERY_LIMIT`と`BACKGROUND`は全体として使用されるため、部分的に変更することはできません。
+> - 現在、 `default`リソースグループのみが`BACKGROUND`構成の変更をサポートしています。
 
 ## 例 {#examples}
 
@@ -182,6 +182,6 @@ MySQL は[ALTER RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/alter-re
 
 ## 参照 {#see-also}
 
--   [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
--   [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
--   [リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)
+- [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
+- [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
+- [リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)

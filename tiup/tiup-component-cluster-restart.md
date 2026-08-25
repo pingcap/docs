@@ -23,9 +23,9 @@ tiup cluster restart <cluster-name> [flags]
 
 ### -N, --node {#n-node}
 
--   再起動するノードを指定します。このオプションの値は、ノードIDのカンマ区切りのリストです。ノードIDは、コマンド`tiup cluster display`で返される[クラスターステータステーブル](/tiup/tiup-component-cluster-display.md)の最初の列から取得できます。
--   データ型: `STRING`
--   このオプションを指定しない場合、 TiUP はデフォルトですべてのノードを再起動します。
+- 再起動するノードを指定します。このオプションの値は、ノードIDのカンマ区切りのリストです。ノードIDは、コマンド`tiup cluster display`で返される[クラスターステータステーブル](/tiup/tiup-component-cluster-display.md)の最初の列から取得できます。
+- データ型: `STRING`
+- このオプションを指定しない場合、 TiUP はデフォルトですべてのノードを再起動します。
 
 > **Note:**
 >
@@ -33,9 +33,9 @@ tiup cluster restart <cluster-name> [flags]
 
 ### -R, --role {#r-role}
 
--   再起動するノードのロールを指定します。このオプションの値は、ノードのロールをカンマ区切りでリストしたものです。ノードのロールは、 `tiup cluster display`コマンドで返される[クラスターステータステーブル](/tiup/tiup-component-cluster-display.md)の2列目から取得できます。
--   データ型: `STRING`
--   このオプションを指定しない場合、 TiUP はデフォルトですべてのロールのノードを再起動します。
+- 再起動するノードのロールを指定します。このオプションの値は、ノードのロールをカンマ区切りでリストしたものです。ノードのロールは、 `tiup cluster display`コマンドで返される[クラスターステータステーブル](/tiup/tiup-component-cluster-display.md)の2列目から取得できます。
+- データ型: `STRING`
+- このオプションを指定しない場合、 TiUP はデフォルトですべてのロールのノードを再起動します。
 
 > **Note:**
 >
@@ -43,9 +43,9 @@ tiup cluster restart <cluster-name> [flags]
 
 ### -h, --help {#h-help}
 
--   ヘルプ情報を出力します。
--   データ型: `BOOLEAN`
--   このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- ヘルプ情報を出力します。
+- データ型: `BOOLEAN`
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
 
 ## 出力 {#outputs}
 

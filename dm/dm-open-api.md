@@ -9,13 +9,13 @@ DM は、 [dmctlツール](/dm/dmctl-introduction.md)の機能と同様に、DM 
 
 OpenAPI を有効にするには、次のいずれかの操作を実行します。
 
--   DM クラスターがバイナリを使用して直接デプロイされている場合は、DM マスター構成ファイルに次の構成を追加します。
+- DM クラスターがバイナリを使用して直接デプロイされている場合は、DM マスター構成ファイルに次の構成を追加します。
 
     ```toml
     openapi = true
     ```
 
--   DM クラスターがTiUPを使用してデプロイされている場合は、トポロジファイルに次の構成を追加します。
+- DM クラスターがTiUPを使用してデプロイされている場合は、トポロジファイルに次の構成を追加します。
 
     ```yaml
     server_configs:
@@ -25,54 +25,54 @@ OpenAPI を有効にするには、次のいずれかの操作を実行します
 
 > **Note:**
 >
-> -   DMはOpenAPI 3.0.0標準に準拠した[仕様書](https://github.com/pingcap/tiflow/blob/release-8.5/dm/openapi/spec/dm.yaml)提供します。このドキュメントには、すべてのリクエストパラメータと戻り値が含まれています。このドキュメントのyamlをコピーして、 [Swaggerエディター](https://editor.swagger.io/)でプレビューできます。
+> - DMはOpenAPI 3.0.0標準に準拠した[仕様書](https://github.com/pingcap/tiflow/blob/release-8.5/dm/openapi/spec/dm.yaml)提供します。このドキュメントには、すべてのリクエストパラメータと戻り値が含まれています。このドキュメントのyamlをコピーして、 [Swaggerエディター](https://editor.swagger.io/)でプレビューできます。
 >
-> -   DM マスターノードを展開した後、 `http://{master-addr}/api/v1/docs`アクセスしてドキュメントをオンラインでプレビューできます。
+> - DM マスターノードを展開した後、 `http://{master-addr}/api/v1/docs`アクセスしてドキュメントをオンラインでプレビューできます。
 >
-> -   設定ファイルでサポートされている一部の機能は、OpenAPIではサポートされていません。これらの機能は完全には連携されていません。本番環境では、 [設定ファイル](/dm/dm-config-overview.md)を使用することをお勧めします。
+> - 設定ファイルでサポートされている一部の機能は、OpenAPIではサポートされていません。これらの機能は完全には連携されていません。本番環境では、 [設定ファイル](/dm/dm-config-overview.md)を使用することをお勧めします。
 
 API を使用して、DM クラスターで次のメンテナンス操作を実行できます。
 
 ## クラスターを管理するためのAPI {#apis-for-managing-clusters}
 
--   [DMマスターノードの情報を取得する](#get-the-information-of-a-dm-master-node)
--   [DMマスターノードを停止する](#stop-a-dm-master-node)
--   [DMワーカーノードの情報を取得する](#get-the-information-of-a-dm-worker-node)
--   [DMワーカーノードを停止する](#stop-a-dm-worker-node)
+- [DMマスターノードの情報を取得する](#get-the-information-of-a-dm-master-node)
+- [DMマスターノードを停止する](#stop-a-dm-master-node)
+- [DMワーカーノードの情報を取得する](#get-the-information-of-a-dm-worker-node)
+- [DMワーカーノードを停止する](#stop-a-dm-worker-node)
 
 ## データソースを管理するためのAPI {#apis-for-managing-data-sources}
 
--   [データソースを作成する](#create-a-data-source)
--   [データソースを取得する](#get-a-data-source)
--   [データソースを削除する](#delete-the-data-source)
--   [データソースを更新する](#update-a-data-source)
--   [データソースを有効にする](#enable-a-data-source)
--   [データソースを無効にする](#disable-a-data-source)
--   [データソースの情報を取得する](#get-the-information-of-a-data-source)
--   [データソースリストを取得する](#get-the-data-source-list)
--   [データソースのリレーログ機能を開始する](#start-the-relay-log-feature-for-data-sources)
--   [データソースのリレーログ機能を停止する](#stop-the-relay-log-feature-for-data-sources)
--   [不要になったリレーログファイルを消去する](#purge-relay-log-files-that-are-no-longer-required)
--   [データソースとDMワーカー間のバインディングを変更する](#change-the-bindings-between-the-data-source-and-dm-workers)
--   [データソースのスキーマ名のリストを取得する](#get-the-list-of-schema-names-of-a-data-source)
--   [データソース内の指定されたスキーマのテーブル名のリストを取得します](#get-the-list-of-table-names-of-a-specified-schema-in-a-data-source)
+- [データソースを作成する](#create-a-data-source)
+- [データソースを取得する](#get-a-data-source)
+- [データソースを削除する](#delete-the-data-source)
+- [データソースを更新する](#update-a-data-source)
+- [データソースを有効にする](#enable-a-data-source)
+- [データソースを無効にする](#disable-a-data-source)
+- [データソースの情報を取得する](#get-the-information-of-a-data-source)
+- [データソースリストを取得する](#get-the-data-source-list)
+- [データソースのリレーログ機能を開始する](#start-the-relay-log-feature-for-data-sources)
+- [データソースのリレーログ機能を停止する](#stop-the-relay-log-feature-for-data-sources)
+- [不要になったリレーログファイルを消去する](#purge-relay-log-files-that-are-no-longer-required)
+- [データソースとDMワーカー間のバインディングを変更する](#change-the-bindings-between-the-data-source-and-dm-workers)
+- [データソースのスキーマ名のリストを取得する](#get-the-list-of-schema-names-of-a-data-source)
+- [データソース内の指定されたスキーマのテーブル名のリストを取得します](#get-the-list-of-table-names-of-a-specified-schema-in-a-data-source)
 
 ## レプリケーションタスクを管理するためのAPI {#apis-for-managing-replication-tasks}
 
--   [レプリケーションタスクを作成する](#create-a-replication-task)
--   [レプリケーションタスクを取得する](#get-a-replication-task)
--   [レプリケーションタスクを削除する](#delete-a-replication-task)
--   [レプリケーションタスクを更新する](#update-a-replication-task)
--   [レプリケーションタスクを開始する](#start-a-replication-task)
--   [レプリケーションタスクを停止する](#stop-a-replication-task)
--   [レプリケーションタスクの情報を取得する](#get-the-information-of-a-replication-task)
--   [レプリケーションタスクリストを取得する](#get-the-replication-task-list)
--   [レプリケーションタスクの移行ルールを取得する](#get-the-migration-rules-of-a-replication-task)
--   [レプリケーションタスクに関連付けられているデータソースのスキーマ名のリストを取得します](#get-the-list-of-schema-names-of-the-data-source-that-is-associated-with-a-replication-task)
--   [レプリケーションタスクに関連付けられたデータソース内の指定されたスキーマのテーブル名のリストを取得します](#get-the-list-of-table-names-of-a-specified-schema-in-the-data-source-that-is-associated-with-a-replication-task)
--   [レプリケーションタスクに関連付けられているデータソースのスキーマの CREATE ステートメントを取得します](#get-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task)
--   [レプリケーションタスクに関連付けられているデータソースのスキーマのCREATEステートメントを更新します](#update-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task)
--   [レプリケーションタスクに関連付けられているデータソースのスキーマを削除します](#delete-a-schema-of-the-data-source-that-is-associated-with-a-replication-task)
+- [レプリケーションタスクを作成する](#create-a-replication-task)
+- [レプリケーションタスクを取得する](#get-a-replication-task)
+- [レプリケーションタスクを削除する](#delete-a-replication-task)
+- [レプリケーションタスクを更新する](#update-a-replication-task)
+- [レプリケーションタスクを開始する](#start-a-replication-task)
+- [レプリケーションタスクを停止する](#stop-a-replication-task)
+- [レプリケーションタスクの情報を取得する](#get-the-information-of-a-replication-task)
+- [レプリケーションタスクリストを取得する](#get-the-replication-task-list)
+- [レプリケーションタスクの移行ルールを取得する](#get-the-migration-rules-of-a-replication-task)
+- [レプリケーションタスクに関連付けられているデータソースのスキーマ名のリストを取得します](#get-the-list-of-schema-names-of-the-data-source-that-is-associated-with-a-replication-task)
+- [レプリケーションタスクに関連付けられたデータソース内の指定されたスキーマのテーブル名のリストを取得します](#get-the-list-of-table-names-of-a-specified-schema-in-the-data-source-that-is-associated-with-a-replication-task)
+- [レプリケーションタスクに関連付けられているデータソースのスキーマの CREATE ステートメントを取得します](#get-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task)
+- [レプリケーションタスクに関連付けられているデータソースのスキーマのCREATEステートメントを更新します](#update-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task)
+- [レプリケーションタスクに関連付けられているデータソースのスキーマを削除します](#delete-a-schema-of-the-data-source-that-is-associated-with-a-replication-task)
 
 次のセクションでは、API の具体的な使用方法について説明します。
 

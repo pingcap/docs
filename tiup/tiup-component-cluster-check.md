@@ -41,12 +41,12 @@ summary: TiUP クラスタは、ハードウェアとソフトウェア環境が
 
 次のカーネルパラメータの値を確認します。
 
--   `net.ipv4.tcp_tw_recycle` : 0
--   `net.ipv4.tcp_syncookies` : 0
--   `net.core.somaxconn` : 32768
--   `vm.swappiness` : 0
--   `vm.overcommit_memory` ：0または1
--   `fs.file-max` : 1000000
+- `net.ipv4.tcp_tw_recycle` : 0
+- `net.ipv4.tcp_syncookies` : 0
+- `net.core.somaxconn` : 32768
+- `vm.swappiness` : 0
+- `vm.overcommit_memory` ：0または1
+- `fs.file-max` : 1000000
 
 ### 透過的な巨大ページ (THP) {#transparent-huge-pages-thp}
 
@@ -122,9 +122,9 @@ ext4パーティションのマウントオプションを確認してくださ�
 
 フレキシブル I/O テスター (fio) を使用して、次の 3 つのテスト項目を含む、 `data_dir`が配置されているディスクのパフォーマンスをテストします。
 
--   fio_randread_write_latency
--   fio_randread_write
--   fio_randread
+- fio_randread_write_latency
+- fio_randread_write
+- fio_randread
 
 > **Note:**
 >
@@ -136,9 +136,9 @@ ext4パーティションのマウントオプションを確認してくださ�
 tiup cluster check <topology.yml | cluster-name> [flags]
 ```
 
--   クラスターがまだデプロイされていない場合は、クラスターのデプロイに使用する[トポロジー.yml](/tiup/tiup-cluster-topology-reference.md)ファイルを渡す必要があります。このファイルの内容に従って、 tiup-clusterは対応するマシンに接続し、チェックを実行します。
--   クラスターがすでにデプロイされている場合は、チェック オブジェクトとして`<cluster-name>`を使用できます。
--   既存のクラスターのスケールアウト YAML ファイルをチェックする場合は、チェック オブジェクトとして`<scale-out.yml>`と`<cluster-name>`両方を使用できます。
+- クラスターがまだデプロイされていない場合は、クラスターのデプロイに使用する[トポロジー.yml](/tiup/tiup-cluster-topology-reference.md)ファイルを渡す必要があります。このファイルの内容に従って、 tiup-clusterは対応するマシンに接続し、チェックを実行します。
+- クラスターがすでにデプロイされている場合は、チェック オブジェクトとして`<cluster-name>`を使用できます。
+- 既存のクラスターのスケールアウト YAML ファイルをチェックする場合は、チェック オブジェクトとして`<scale-out.yml>`と`<cluster-name>`両方を使用できます。
 
 > **Note:**
 >
@@ -148,15 +148,15 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 ### - 適用する {#apply}
 
--   失敗したチェック項目の自動修復を試みます。現在、 tiup-cluster は以下のチェック項目のみを修復しようとします。
-    -   SELinux
-    -   ファイアウォール
-    -   irqバランス
-    -   カーネルパラメータ
-    -   システム制限
-    -   THP (透過的巨大ページ)
--   データ型: `BOOLEAN`
--   このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- 失敗したチェック項目の自動修復を試みます。現在、 tiup-cluster は以下のチェック項目のみを修復しようとします。
+    - SELinux
+    - ファイアウォール
+    - irqバランス
+    - カーネルパラメータ
+    - システム制限
+    - THP (透過的巨大ページ)
+- データ型: `BOOLEAN`
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
 
 > **Note:**
 >
@@ -168,10 +168,10 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 ### - クラスタ {#cluster}
 
--   チェックがデプロイ済みのクラスターを対象としていることを示します。
--   データ型: `BOOLEAN`
--   このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
--   コマンド形式:
+- チェックがデプロイ済みのクラスターを対象としていることを示します。
+- データ型: `BOOLEAN`
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- コマンド形式:
 
     ```shell
     tiup cluster check <topology.yml | cluster-name> --cluster [flags]
@@ -179,8 +179,8 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 > **Note:**
 >
-> -   `tiup cluster check <cluster-name>`コマンドを使用する場合は、 `--cluster`オプション`tiup cluster check <cluster-name> --cluster`を追加する必要があります。
-> -   `tiup cluster check`では、次のコマンド形式を使用して、既存のクラスターの`scale-out.yml`ファイルを確認することもサポートされています。
+> - `tiup cluster check <cluster-name>`コマンドを使用する場合は、 `--cluster`オプション`tiup cluster check <cluster-name> --cluster`を追加する必要があります。
+> - `tiup cluster check`では、次のコマンド形式を使用して、既存のクラスターの`scale-out.yml`ファイルを確認することもサポートされています。
 >
 >     ```shell
 >     tiup cluster check <cluster-name> scale-out.yml --cluster --user root [-p] [-i /home/root/.ssh/gcp_rsa]
@@ -188,9 +188,9 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 ### -N, --node {#n-node}
 
--   チェックするノードを指定します。このオプションの値は、ノードIDのカンマ区切りのリストです。ノードIDは、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドで返されるクラスターステータステーブルの最初の列から取得できます。
--   データ型: `STRINGS`
--   コマンドでこのオプションを指定しない場合は、デフォルトですべてのノードがチェックされます。
+- チェックするノードを指定します。このオプションの値は、ノードIDのカンマ区切りのリストです。ノードIDは、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドで返されるクラスターステータステーブルの最初の列から取得できます。
+- データ型: `STRINGS`
+- コマンドでこのオプションを指定しない場合は、デフォルトですべてのノードがチェックされます。
 
 > **Note:**
 >
@@ -198,9 +198,9 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 ### -R, --role {#r-role}
 
--   チェックするロールを指定します。このオプションの値は、ノードロールのコンマ区切りのリストです。ノードのロールは、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドで返されるクラスターステータステーブルの2列目から取得できます。
--   データ型: `STRINGS`
--   コマンドでこのオプションを指定しない場合は、すべてのロールがデフォルトでチェックされます。
+- チェックするロールを指定します。このオプションの値は、ノードロールのコンマ区切りのリストです。ノードのロールは、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドで返されるクラスターステータステーブルの2列目から取得できます。
+- データ型: `STRINGS`
+- コマンドでこのオプションを指定しない場合は、すべてのロールがデフォルトでチェックされます。
 
 > **Note:**
 >
@@ -208,27 +208,27 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 ### --enable-CPU {#enable-cpu}
 
--   CPUコア数のチェックを有効にします。
--   データ型: `BOOLEAN`
--   このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- CPUコア数のチェックを有効にします。
+- データ型: `BOOLEAN`
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
 
 ### --enable-disk {#enable-disk}
 
--   fio ディスク パフォーマンス テストを有効にします。
--   データ型: `BOOLEAN`
--   このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- fio ディスク パフォーマンス テストを有効にします。
+- データ型: `BOOLEAN`
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
 
 ### --enable-mem {#enable-mem}
 
--   メモリサイズのチェックを有効にします。
--   データ型: `BOOLEAN`
--   このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- メモリサイズのチェックを有効にします。
+- データ型: `BOOLEAN`
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
 
 ### --u, --user {#u-user}
 
--   ターゲットマシンに接続するためのユーザー名を指定します。指定されたユーザーは、ターゲットマシン上でパスワード不要のsudo root権限を持っている必要があります。
--   データ型: `STRING`
--   コマンドでこのオプションを指定しない場合は、コマンドを実行したユーザーがデフォルト値として使用されます。
+- ターゲットマシンに接続するためのユーザー名を指定します。指定されたユーザーは、ターゲットマシン上でパスワード不要のsudo root権限を持っている必要があります。
+- データ型: `STRING`
+- コマンドでこのオプションを指定しない場合は、コマンドを実行したユーザーがデフォルト値として使用されます。
 
 > **Note:**
 >
@@ -236,9 +236,9 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 ### -i, --identity_file {#i-identity-file}
 
--   ターゲットマシンに接続するためのキー ファイルを指定します。
--   データ型: `STRING`
--   このオプションはデフォルトで有効になっており、 `~/.ssh/id_rsa` (デフォルト値) が渡されます。
+- ターゲットマシンに接続するためのキー ファイルを指定します。
+- データ型: `STRING`
+- このオプションはデフォルトで有効になっており、 `~/.ssh/id_rsa` (デフォルト値) が渡されます。
 
 > **Note:**
 >
@@ -246,25 +246,25 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 ### -p, --password {#p-password}
 
--   ターゲットマシンに接続するときにパスワードを使用してログインします。
-    -   クラスターに`--cluster`オプションが追加された場合、パスワードはクラスターのデプロイ時にトポロジファイルに指定されたユーザーのパスワードになります。
-    -   クラスターにオプション`--cluster`が追加されていない場合、パスワードはオプション`-u/--user`で指定されたユーザーのパスワードになります。
--   データ型: `BOOLEAN`
--   このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- ターゲットマシンに接続するときにパスワードを使用してログインします。
+    - クラスターに`--cluster`オプションが追加された場合、パスワードはクラスターのデプロイ時にトポロジファイルに指定されたユーザーのパスワードになります。
+    - クラスターにオプション`--cluster`が追加されていない場合、パスワードはオプション`-u/--user`で指定されたユーザーのパスワードになります。
+- データ型: `BOOLEAN`
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
 
 ### -h, --help {#h-help}
 
--   関連するコマンドのヘルプ情報を出力します。
--   データ型: `BOOLEAN`
--   このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- 関連するコマンドのヘルプ情報を出力します。
+- データ型: `BOOLEAN`
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
 
 ## 出力 {#output}
 
 次のフィールドを含むテーブル:
 
--   `Node` : ターゲットノード
--   `Check` : チェック項目
--   `Result` : チェック結果（合格、警告、不合格）
--   `Message` : 結果の説明
+- `Node` : ターゲットノード
+- `Check` : チェック項目
+- `Result` : チェック結果（合格、警告、不合格）
+- `Message` : 結果の説明
 
 [&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

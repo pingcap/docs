@@ -13,8 +13,8 @@ TiUPは、環境変数`TIUP_MIRRORS`を介してミラーソースを指定す�
 
 非公式ミラーを使用した後、公式ミラーに戻して使用する場合は、以下のいずれかの措置を講じてください。
 
--   `TIUP_MIRRORS`変数を公式ミラー アドレス`https://tiup-mirrors.pingcap.com`に設定します。
--   `TIUP_MIRRORS`変数が設定されていないことを確認してから、 `tiup mirror set https://tiup-mirrors.pingcap.com`コマンドを実行します。
+- `TIUP_MIRRORS`変数を公式ミラー アドレス`https://tiup-mirrors.pingcap.com`に設定します。
+- `TIUP_MIRRORS`変数が設定されていないことを確認してから、 `tiup mirror set https://tiup-mirrors.pingcap.com`コマンドを実行します。
 
 ## 独自のコンポーネントをTiUPミラーに組み込むにはどうすればよいでしょうか? {#how-do-i-put-my-own-component-into-the-tiup-mirrors}
 
@@ -28,9 +28,9 @@ TiUP Playgroundコンポーネントは、主にLinuxまたはmacOSオペレー�
 
 トポロジファイルの作成方法については、 [これらのテンプレート](https://github.com/pingcap/tiup/tree/master/embed/examples/cluster)を参照してください。テンプレートには以下が含まれます。
 
--   マルチDC展開トポロジ
--   最小限の展開トポロジ
--   完全なトポロジファイル
+- マルチDC展開トポロジ
+- 最小限の展開トポロジ
+- 完全なトポロジファイル
 
 テンプレートとニーズに基づいてトポロジファイルを編集できます。
 

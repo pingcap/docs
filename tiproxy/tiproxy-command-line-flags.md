@@ -13,17 +13,17 @@ summary: TiProxy のコマンドライン起動フラグについて学習しま
 
 ### `--advertise-addr` {#advertise-addr}
 
--   クライアントがこの TiProxy インスタンスに接続するために使用するアドレスを指定します。
--   タイプ: `string`
--   デフォルト: `""`
--   このフラグは、 TiUPまたはTiDB Operatorを使用して TiProxy をデプロイすると自動的に設定されます。設定されていない場合は、TiProxy インスタンスの外部 IP アドレスが使用されます。
+- クライアントがこの TiProxy インスタンスに接続するために使用するアドレスを指定します。
+- タイプ: `string`
+- デフォルト: `""`
+- このフラグは、 TiUPまたはTiDB Operatorを使用して TiProxy をデプロイすると自動的に設定されます。設定されていない場合は、TiProxy インスタンスの外部 IP アドレスが使用されます。
 
 ### `--config` {#config}
 
--   TiProxy 構成ファイルのパスを指定します。
--   タイプ: `string`
--   デフォルト: `""`
--   設定ファイルを指定する必要があります。詳細な設定項目については、 [TiProxy を設定する](/tiproxy/tiproxy-configuration.md)を参照してください。設定ファイルが変更されると、TiProxyは自動的に設定を再読み込みするため、設定ファイルを直接変更しないでください。[`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md)または[`kubectl edit tc`](https://docs.pingcap.com/tidb-in-kubernetes/stable/modify-tidb-configuration)を実行して設定を変更することをお勧めします。
+- TiProxy 構成ファイルのパスを指定します。
+- タイプ: `string`
+- デフォルト: `""`
+- 設定ファイルを指定する必要があります。詳細な設定項目については、 [TiProxy を設定する](/tiproxy/tiproxy-configuration.md)を参照してください。設定ファイルが変更されると、TiProxyは自動的に設定を再読み込みするため、設定ファイルを直接変更しないでください。[`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md)または[`kubectl edit tc`](https://docs.pingcap.com/tidb-in-kubernetes/stable/modify-tidb-configuration)を実行して設定を変更することをお勧めします。
 
 ## TiProxy コントロール {#tiproxy-control}
 
@@ -79,51 +79,51 @@ tiproxyctl --host 127.0.0.1 --port 3080 config get
 
 #### `--host` {#host}
 
--   TiProxyサーバーのアドレスを指定します。
--   タイプ: `string`
--   デフォルト: `localhost`
+- TiProxyサーバーのアドレスを指定します。
+- タイプ: `string`
+- デフォルト: `localhost`
 
 #### `--port` {#port}
 
--   TiProxy API ゲートウェイのポート番号を指定します。
--   タイプ: `int`
--   デフォルト: `3080`
+- TiProxy API ゲートウェイのポート番号を指定します。
+- タイプ: `int`
+- デフォルト: `3080`
 
 #### `--log_encoder` {#log-encoder}
 
--   `tiproxyctl`のログ形式を指定します。
--   タイプ: `string`
--   デフォルト: `"tidb"`
--   デフォルトではTiDBと同じログ形式が使用されます。ただし、次のいずれかを指定することもできます。
+- `tiproxyctl`のログ形式を指定します。
+- タイプ: `string`
+- デフォルト: `"tidb"`
+- デフォルトではTiDBと同じログ形式が使用されます。ただし、次のいずれかを指定することもできます。
 
-    -   `console` : より人間が読みやすい形式
-    -   `json` : 構造化されたログ形式
+    - `console` : より人間が読みやすい形式
+    - `json` : 構造化されたログ形式
 
 #### `--log_level` {#log-level}
 
--   tiproxyctl のログレベルを指定します。
--   タイプ: `string`
--   デフォルト: `"warn"`
--   `debug` `info` `error`でき`panic` `warn`
+- tiproxyctl のログレベルを指定します。
+- タイプ: `string`
+- デフォルト: `"warn"`
+- `debug` `info` `error`でき`panic` `warn`
 
 #### `-k, --insecure` {#k-insecure}
 
--   サーバーにダイヤルするときに TLS CA 検証をスキップするかどうかを指定します。
--   タイプ: `boolean`
--   デフォルト: `false`
--   テストに使用されます。
+- サーバーにダイヤルするときに TLS CA 検証をスキップするかどうかを指定します。
+- タイプ: `boolean`
+- デフォルト: `false`
+- テストに使用されます。
 
 #### `--ca` {#ca}
 
--   サーバーにダイヤルするときに CA を指定します。
--   タイプ: `string`
--   デフォルト: `""`
+- サーバーにダイヤルするときに CA を指定します。
+- タイプ: `string`
+- デフォルト: `""`
 
 #### `--cert` {#cert}
 
--   サーバーにダイヤルするときに証明書を指定します。
--   タイプ: `string`
--   デフォルト: `""`
+- サーバーにダイヤルするときに証明書を指定します。
+- タイプ: `string`
+- デフォルト: `""`
 
 ### コマンド {#commands}
 
@@ -163,8 +163,8 @@ level = 'warning'
 
 オプション:
 
--   `--output` : (必須) トラフィックファイルを保存するディレクトリを指定します。
--   `--duration` : (必須) キャプチャ期間を指定します。単位は`m` (分)、 `h` (時間)、 `d` (日) のいずれかです。例えば、 `--duration=1h`を指定すると 1 時間のトラフィックがキャプチャされます。
+- `--output` : (必須) トラフィックファイルを保存するディレクトリを指定します。
+- `--duration` : (必須) キャプチャ期間を指定します。単位は`m` (分)、 `h` (時間)、 `d` (日) のいずれかです。例えば、 `--duration=1h`を指定すると 1 時間のトラフィックがキャプチャされます。
 
 例：
 
@@ -180,10 +180,10 @@ tiproxyctl traffic capture --host 10.0.1.10 --port 3080 --output="/tmp/traffic" 
 
 オプション:
 
--   `--username` : (必須) 再生用のデータベースユーザー名を指定します。
--   `--password` : (オプション) ユーザー名のパスワードを指定します。デフォルト値は空の文字列`""`です。
--   `--input` : (必須) トラフィックファイルを含むディレクトリを指定します。
--   `--speed` : (オプション) 再生速度の乗数を指定します。範囲は`[0.1, 10]`です。デフォルト値は`1`で、元の速度で再生されます。
+- `--username` : (必須) 再生用のデータベースユーザー名を指定します。
+- `--password` : (オプション) ユーザー名のパスワードを指定します。デフォルト値は空の文字列`""`です。
+- `--input` : (必須) トラフィックファイルを含むディレクトリを指定します。
+- `--speed` : (オプション) 再生速度の乗数を指定します。範囲は`[0.1, 10]`です。デフォルト値は`1`で、元の速度で再生されます。
 
 例：
 
@@ -203,9 +203,9 @@ tiproxyctl traffic replay --host 10.0.1.10 --port 3080 --username="u1" --passwor
 
 出力の`status`フィールドはタスクのステータスを示し、次の値が可能です。
 
--   `done` : タスクは正常に完了しました。
--   `canceled` : タスクはキャンセルされました。理由は`error`フィールドで確認できます。
--   `running` ：タスクは実行中です。完了率は`progress`フィールドで確認できます。
+- `done` : タスクは正常に完了しました。
+- `canceled` : タスクはキャンセルされました。理由は`error`フィールドで確認できます。
+- `running` ：タスクは実行中です。完了率は`progress`フィールドで確認できます。
 
 出力例:
 

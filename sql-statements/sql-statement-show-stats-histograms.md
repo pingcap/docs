@@ -75,5 +75,5 @@ SHOW STATS_HISTOGRAMS WHERE table_name = 't2';
 
 ## 参照 {#see-also}
 
--   [ANALYZE](/sql-statements/sql-statement-analyze-table.md)
--   [統計入門](/statistics.md)
+- [ANALYZE](/sql-statements/sql-statement-analyze-table.md)
+- [統計入門](/statistics.md)

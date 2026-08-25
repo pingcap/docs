@@ -210,9 +210,9 @@ TiDBはSQL構文レベルでは`LEFT SEMI JOIN table_name`サポートしてい�
 
 TiDB は、次の一般的なテーブル結合アルゴリズムをサポートしています。
 
--   [インデックス結合](/explain-joins.md#index-join)
--   [ハッシュ結合](/explain-joins.md#hash-join)
--   [マージ結合](/explain-joins.md#merge-join)
+- [インデックス結合](/explain-joins.md#index-join)
+- [ハッシュ結合](/explain-joins.md#hash-join)
+- [マージ結合](/explain-joins.md#merge-join)
 
 オプティマイザは、結合対象テーブルのデータ量などの要因に基づいて、適切な結合アルゴリズムを選択します。クエリが結合にどのアルゴリズムを使用しているかは、 `EXPLAIN`ステートメントで確認できます。
 
@@ -231,10 +231,10 @@ LIMIT 10;
 
 結合アルゴリズムに関連するヒント:
 
--   [MERGE_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#merge_joint1_name--tl_name-)
--   [INL_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#inl_joint1_name--tl_name-)
--   [INL_HASH_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#inl_hash_join)
--   [HASH_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#hash_joint1_name--tl_name-)
+- [MERGE_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#merge_joint1_name--tl_name-)
+- [INL_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#inl_joint1_name--tl_name-)
+- [INL_HASH_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#inl_hash_join)
+- [HASH_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#hash_joint1_name--tl_name-)
 
 ## 注文を結合する {#join-orders}
 
@@ -252,11 +252,11 @@ WHERE b.id = ba.book_id AND ba.author_id = a.id;
 
 ## 参照 {#see-also}
 
--   [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
--   [結合したテーブルの再配置の概要](/join-reorder.md)
+- [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
+- [結合したテーブルの再配置の概要](/join-reorder.md)
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信する](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
+- [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信する](/support.md)

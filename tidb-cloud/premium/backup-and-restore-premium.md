@@ -25,18 +25,18 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 
 > **Tip:**
 >
-> -   TiDB Cloud Dedicatedクラスター上のデータをバックアップおよび復元する方法については、 [TiDB Cloud Dedicatedデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)復元」を参照してください。
-> -   TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのデータをバックアップおよび復元する方法については、 [TiDB Cloud StarterまたはEssentialデータのバックアップと復元](/tidb-cloud/backup-and-restore-serverless.md)を参照してください。
+> - TiDB Cloud Dedicatedクラスター上のデータをバックアップおよび復元する方法については、 [TiDB Cloud Dedicatedデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)復元」を参照してください。
+> - TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのデータをバックアップおよび復元する方法については、 [TiDB Cloud StarterまたはEssentialデータのバックアップと復元](/tidb-cloud/backup-and-restore-serverless.md)を参照してください。
 
 ## バックアップページを確認する {#view-the-backup-page}
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象の{{{ .premium }}}<CustomContent plan="byoc">または{{{ .byoc }}}</CustomContent>インスタンスの名前をクリックすると、その概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象の{{{ .premium }}}<CustomContent plan="byoc">または{{{ .byoc }}}</CustomContent>インスタンスの名前をクリックすると、その概要ページに移動します。
 
     > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  左側のナビゲーションペインで、 **Data** &gt; **Backup**をクリックします。
+2. 左側のナビゲーションペインで、 **Data** &gt; **Backup**をクリックします。
 
 ## 自動バックアップ {#automatic-backups}
 
@@ -144,9 +144,9 @@ PITR を使用すると、保持期間内の任意の時点にデータを復元
 
 {{{ .premium }}}<CustomContent plan="byoc">または{{{ .byoc }}}</CustomContent>インスタンスの既存のバックアップファイルを削除するには、以下の手順を実行してください。
 
-1.  インスタンスの[**Backup**](#view-the-backup-page)ページに移動します。
+1. インスタンスの[**Backup**](#view-the-backup-page)ページに移動します。
 
-2.  削除したいバックアップファイルを見つけて、 **[アクション]**列の**[...]** &gt; **[削除]**をクリックします。
+2. 削除したいバックアップファイルを見つけて、 **[アクション]**列の**[...]** &gt; **[削除]**をクリックします。
 
     > **Note:**
     >
@@ -169,23 +169,23 @@ TiDB Cloud Premiumは、自動バックアップに加えて、手動バック�
 
 ### 主な特徴 {#key-characteristics}
 
--   **保持と削除**：自動バックアップとは異なり、手動バックアップは保持ポリシーに基づいて自動的に削除されません。明示的に削除するまで保持されます。インスタンスを削除すると、その手動バックアップはごみ箱に移動し、手動で削除するまでそこに残ります。
+- **保持と削除**：自動バックアップとは異なり、手動バックアップは保持ポリシーに基づいて自動的に削除されません。明示的に削除するまで保持されます。インスタンスを削除すると、その手動バックアップはごみ箱に移動し、手動で削除するまでそこに残ります。
 
--   **Storage location**：手動バックアップは、TiDBが管理するクラウドストレージに保存されます。
+- **Storage location**：手動バックアップは、TiDBが管理するクラウドストレージに保存されます。
 
--   **コスト**：手動バックアップは、削除するまで保持されるため、追加料金が発生します。
+- **コスト**：手動バックアップは、削除するまで保持されるため、追加料金が発生します。
 
--   **制限事項**：手動バックアップは、ポイントインタイムリカバリ（PITR）や部分バックアップ（テーブルレベルまたはデータベースレベルのバックアップなど）をサポートしていません。手動バックアップを既存のインスタンスに復元することはできません。復元操作ごとに新しいインスタンスが作成されます。
+- **制限事項**：手動バックアップは、ポイントインタイムリカバリ（PITR）や部分バックアップ（テーブルレベルまたはデータベースレベルのバックアップなど）をサポートしていません。手動バックアップを既存のインスタンスに復元することはできません。復元操作ごとに新しいインスタンスが作成されます。
 
--   **権限**： `Organization Owner`と`Instance Manager`の両方が手動バックアップを作成できます。システム管理の手動バックアップを復元できるのは`Organization Owner`のみです。
+- **権限**： `Organization Owner`と`Instance Manager`の両方が手動バックアップを作成できます。システム管理の手動バックアップを復元できるのは`Organization Owner`のみです。
 
 ### 手動バックアップを作成する {#create-a-manual-backup}
 
-1.  インスタンスの[**Backup**](#view-the-backup-page)ページに移動します。
+1. インスタンスの[**Backup**](#view-the-backup-page)ページに移動します。
 
-2.  右上隅の**...**をクリックし、次に**Manual Backup**をクリックします。
+2. 右上隅の**...**をクリックし、次に**Manual Backup**をクリックします。
 
-3.  操作を確認してください。バックアップはTiDB Cloudに保存され、**バックアップリスト**に表示されます。
+3. 操作を確認してください。バックアップはTiDB Cloudに保存され、**バックアップリスト**に表示されます。
 
 TiDB Cloudコンソールでは、外部ストレージの認証情報を入力することなく、手動バックアップを直接復元できます。
 
@@ -197,11 +197,11 @@ TiDB Cloudは、偶発的なデータ損失や破損が発生した場合にデ�
 
 TiDB Cloudは、インスタンスのスナップショット復元と特定時点への復元をサポートしています。
 
--   **Snapshot Restore**：特定のバックアップスナップショットからインスタンスを復元します。この方法は、自動バックアップと手動バックアップの両方の復元に使用できます。**Backup List**では、手動バックアップには**Manual**タイプと**Permanent**有効期限ステータスが表示されます。
+- **Snapshot Restore**：特定のバックアップスナップショットからインスタンスを復元します。この方法は、自動バックアップと手動バックアップの両方の復元に使用できます。**Backup List**では、手動バックアップには**Manual**タイプと**Permanent**有効期限ステータスが表示されます。
 
--   **Point-in-Time Restore**：インスタンスを特定の時点の状態に復元します。
+- **Point-in-Time Restore**：インスタンスを特定の時点の状態に復元します。
 
-    -   Premium<CustomContent plan="byoc"> または BYOC</CustomContent> インスタンス：過去7日間の任意の時点に復元できますが、インスタンス作成時刻より前、または現在時刻の1分前より後の時点には復元できません。なお、手動バックアップではPITRはサポートされていません。
+    - Premium<CustomContent plan="byoc"> または BYOC</CustomContent> インスタンス：過去7日間の任意の時点に復元できますが、インスタンス作成時刻より前、または現在時刻の1分前より後の時点には復元できません。なお、手動バックアップではPITRはサポートされていません。
 
 ### 復元先 {#restore-destination}
 
@@ -211,32 +211,32 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
 
 新しい {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスにデータを復元するには、以下の手順に従ってください。
 
-1.  インスタンスの[**Backup**](#view-the-backup-page)ページに移動します。
+1. インスタンスの[**Backup**](#view-the-backup-page)ページに移動します。
 
-2.  **Restore**をクリックしてください。
+2. **Restore**をクリックしてください。
 
-3.  **Select Backup**ページで、使用する**Restore Mode**を選択します。特定のバックアップスナップショットから復元することも、特定の時点に復元することもできます。
+3. **Select Backup**ページで、使用する**Restore Mode**を選択します。特定のバックアップスナップショットから復元することも、特定の時点に復元することもできます。
 
      <SimpleTab>
      <div label="Snapshot Restore">
 
     選択したバックアップスナップショットから復元するには、次の手順を実行します。
 
-    1.  **Snapshot Restore**をクリックします。
-    2.  復元元のバックアップスナップショットを選択してください。
+    1. **Snapshot Restore**をクリックします。
+    2. 復元元のバックアップスナップショットを選択してください。
 
     </div>
      <div label="Point-in-Time Restore">
 
     Premium<CustomContent plan="byoc"> または BYOC</CustomContent> インスタンスを特定の時点に復元するには、以下の手順を実行してください。
 
-    1.  **Point-in-Time Restore**をクリックします。
-    2.  復元したい日時を選択してください。
+    1. **Point-in-Time Restore**をクリックします。
+    2. 復元したい日時を選択してください。
 
     </div>
      </SimpleTab>
 
-4.  **Next**をクリックして、 **Restore to a New Instance**ページに進んでください。
+4. **Next**をクリックして、 **Restore to a New Instance**ページに進んでください。
 
 5. 新しい {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスを復元用に構成します。手順は <CustomContent plan="premium">[{{{ .premium }}} インスタンスの作成](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent> を参照してください。
 
@@ -250,7 +250,7 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
     >
     > 新しいインスタンスは、デフォルトではバックアップと同じクラウドプロバイダーとリージョンを使用します。
 
-6.  **Restore**をクリックして復元プロセスを開始してください。
+6. **Restore**をクリックして復元プロセスを開始してください。
 
     復元処理が開始されると、インスタンスの状態は最初に**Creating**に変わります。作成が完了すると、 **Restoring**に変わります。復元が完了し、状態が**Available**に変わるまで、インスタンスは利用できません。
 
@@ -258,7 +258,7 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
 
 ごみ箱から削除した {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスを復元するには、以下の手順を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、右上隅の**[...]**をクリックして、 **Recycle Bin**をクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、右上隅の**[...]**をクリックして、 **Recycle Bin**をクリックします。
 
     > **Tip:**
     >
@@ -268,9 +268,9 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
 
 3. 復元したい<CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent>インスタンスを見つけて、**>** ボタンをクリックし、そのインスタンスで利用可能なバックアップを展開します。
 
-4.  復元したいバックアップの行で、 **...**をクリックし、次に**Restore**を選択します。
+4. 復元したいバックアップの行で、 **...**をクリックし、次に**Restore**を選択します。
 
-5.  **Restore**ページで、[新しいインスタンスに復元する](#restore-to-a-new-instance)と同じ手順に従って、バックアップを新しいインスタンスに復元します。
+5. **Restore**ページで、[新しいインスタンスに復元する](#restore-to-a-new-instance)と同じ手順に従って、バックアップを新しいインスタンスに復元します。
 
 <CustomContent plan="premium">
 
@@ -280,16 +280,16 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
 
 TiDB Cloud Dedicatedクラスターによって生成されたバックアップを復元するには、次の手順に従ってください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。右上隅にある**[...]**をクリックし、 **Restore from Another Plan**をクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。右上隅にある**[...]**をクリックし、 **Restore from Another Plan**をクリックします。
 
-2.  **Select Backup**ページで、対象のTiDB Cloud Dedicatedクラスターを含むプロジェクトを選択します。TiDB Cloud Dedicatedクラスターを選択し、復元するバックアップ スナップショットを選択して、 **Next**をクリックします。
+2. **Select Backup**ページで、対象のTiDB Cloud Dedicatedクラスターを含むプロジェクトを選択します。TiDB Cloud Dedicatedクラスターを選択し、復元するバックアップ スナップショットを選択して、 **Next**をクリックします。
 
     > **Note:**
     >
-    > -   バックアップスナップショットを含むTiDB Cloud Dedicatedクラスターが、選択したプロジェクト内で**Active**または**Deleted**のいずれかの状態になっていることを確認してください。
-    > -   スナップショットは、 TiDB Cloud Premiumがサポートするリージョン内に配置する必要があります。リージョンがサポートされていない場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)に連絡してTiDB Cloud Premium用の新しいリージョンを開設するか、別のバックアップスナップショットを選択してください。
+    > - バックアップスナップショットを含むTiDB Cloud Dedicatedクラスターが、選択したプロジェクト内で**Active**または**Deleted**のいずれかの状態になっていることを確認してください。
+    > - スナップショットは、 TiDB Cloud Premiumがサポートするリージョン内に配置する必要があります。リージョンがサポートされていない場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)に連絡してTiDB Cloud Premium用の新しいリージョンを開設するか、別のバックアップスナップショットを選択してください。
 
-3.  **Restore**ページで、[新しいインスタンスに復元する](#restore-to-a-new-instance)と同じ手順に従って、バックアップを新しいインスタンスに復元します。
+3. **Restore**ページで、[新しいインスタンスに復元する](#restore-to-a-new-instance)と同じ手順に従って、バックアップを新しいインスタンスに復元します。
 
 </CustomContent>
 
@@ -384,13 +384,13 @@ TiDB Cloud Dedicatedクラスターによって生成されたバックアップ
 
 アクセスキーを設定するには、以下の手順に従ってください。
 
-1.  IAMユーザーとアクセスキーを作成します。
+1. IAMユーザーとアクセスキーを作成します。
 
-    1.  IAMユーザーを作成します。詳細については、 [AWSアカウントにIAMユーザーを作成する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console)を参照してください。
-    2.  AWSアカウントIDまたはアカウントエイリアス、およびIAMユーザー名とパスワードを使用して[IAMコンソール](https://console.aws.amazon.com/iam)にサインインしてください。
-    3.  アクセスキーを作成します。詳細については、 [IAMユーザーのアクセスキーを管理する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)を参照してください。
+    1. IAMユーザーを作成します。詳細については、 [AWSアカウントにIAMユーザーを作成する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console)を参照してください。
+    2. AWSアカウントIDまたはアカウントエイリアス、およびIAMユーザー名とパスワードを使用して[IAMコンソール](https://console.aws.amazon.com/iam)にサインインしてください。
+    3. アクセスキーを作成します。詳細については、 [IAMユーザーのアクセスキーを管理する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)を参照してください。
 
-2.  IAMユーザーに権限を付与します。
+2. IAMユーザーに権限を付与します。
 
     タスクに必要な権限のみを含むポリシーを作成し、それをIAMユーザーにアタッチします。{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスにデータを復元するには、`s3:GetObject`、`s3:GetBucketLocation`、および `s3:ListBucket` 権限を付与します。
 

@@ -35,9 +35,9 @@ TiDB CloudコンソールまたはTiDB Cloud CLI を使用して、AWS Endpoint 
 
 AWS エンドポイントサービスが次の条件を満たしていることを確認します。
 
--   TiDB Cloudクラスターと同じリージョンに存在します。
--   TiDB Cloudアカウント ID を**Allow principals**リストに追加します。
--   TiDB Cloudクラスターと重複する可用性ゾーンがあります。
+- TiDB Cloudクラスターと同じリージョンに存在します。
+- TiDB Cloudアカウント ID を**Allow principals**リストに追加します。
+- TiDB Cloudクラスターと重複する可用性ゾーンがあります。
 
 アカウント ID と可用性ゾーンの情報は、**Create Private Endpoint for External Services**ダイアログの下部で取得するか、次のコマンドを実行して取得できます。
 
@@ -48,30 +48,30 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
+2. ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
 
-3.  **AWS Private Endpoints for External Services**領域で、**Create Private Endpoint for External Services**をクリックします。
+3. **AWS Private Endpoints for External Services**領域で、**Create Private Endpoint for External Services**をクリックします。
 
     > **Note:**
     >
     > - TiDB Cloud Essential インスタンスが 2026 年 7 月 1 日以降に作成されている場合、**Create Private Endpoint for External Services** をクリックすると、エンドポイント専用モードでプライベートリンク接続が作成されます。このモードでは、各 {{{ .essential }}} インスタンスが独自のスタンドアロンプライベートエンドポイントを使用するため、接続時に[アカウントプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を含める必要がありません。
     > - TiDB Cloud Essential インスタンスが 2026 年 7 月 1 日より前に作成されている場合、**Create Private Endpoint for External Services** をクリックすると、エンドポイント共有モードでプライベートリンク接続が作成されます。このモードでは、同じ AWS Region 内の複数の {{{ .essential }}} インスタンスで 1 つのプライベートエンドポイントを共有できます。
 
-4.  **Create Private Endpoint for External Services**ダイアログで、必要な情報を入力します。
+4. **Create Private Endpoint for External Services**ダイアログで、必要な情報を入力します。
 
-    -   **Private Link Connection Name**: プライベートリンク接続の名前を入力します。
-    -   **Connection Type**： **AWS Endpoint Service**を選択します。このオプションが表示されない場合は、クラスターがAWS上に作成されていることを確認してください。
-    -   **Endpoint Service Name**: AWS エンドポイントサービス名を入力します (例: `com.amazonaws.vpce.<region>.vpce-svc-xxxxxxxxxxxxxxxxx` )。
+    - **Private Link Connection Name**: プライベートリンク接続の名前を入力します。
+    - **Connection Type**： **AWS Endpoint Service**を選択します。このオプションが表示されない場合は、クラスターがAWS上に作成されていることを確認してください。
+    - **Endpoint Service Name**: AWS エンドポイントサービス名を入力します (例: `com.amazonaws.vpce.<region>.vpce-svc-xxxxxxxxxxxxxxxxx` )。
 
-5.  **Create**をクリックします。
+5. **Create**をクリックします。
 
-6.  [AWSコンソール](https://console.aws.amazon.com)のエンドポイントサービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を承認します。
+6. [AWSコンソール](https://console.aws.amazon.com)のエンドポイントサービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を承認します。
 
 </div>
 
@@ -79,13 +79,13 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
 TiDB Cloud CLI を使用してプライベートリンク接続を作成するには:
 
-1.  次のコマンドを実行します。
+1. 次のコマンドを実行します。
 
     ```shell
     ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type AWS_ENDPOINT_SERVICE --aws.endpoint-service-name <endpoint-service-name>
     ```
 
-2.  [AWSコンソール](https://console.aws.amazon.com)のエンドポイントサービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を承認します。
+2. [AWSコンソール](https://console.aws.amazon.com)のエンドポイントサービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を承認します。
 
 </div>
 </SimpleTab>
@@ -96,28 +96,28 @@ TiDB Cloudコンソールを使用して、Amazon MSK プロビジョニング�
 
 Amazon MSK プロビジョニングプライベートリンク接続を作成する前に、Amazon MSK プロビジョニングクラスターでマルチVPC接続が有効になっていることを確認してください。詳細については、 [プライベートリンク接続経由​​でプロビジョニングされた Amazon MSK に接続する](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)を参照してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
+2. ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
 
-3.  **AWS Private Endpoints for External Services**領域で、**Create Private Endpoint for External Services**をクリックします。
+3. **AWS Private Endpoints for External Services**領域で、**Create Private Endpoint for External Services**をクリックします。
 
     > **Note:**
     >
     > - TiDB Cloud Essential インスタンスが 2026 年 7 月 1 日以降に作成されている場合、**Create Private Endpoint for External Services** をクリックすると、エンドポイント専用モードでプライベートリンク接続が作成されます。このモードでは、各 {{{ .essential }}} インスタンスが独自のスタンドアロンプライベートエンドポイントを使用するため、接続時に[アカウントプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を含める必要がありません。
     > - TiDB Cloud Essential インスタンスが 2026 年 7 月 1 日より前に作成されている場合、**Create Private Endpoint for External Services** をクリックすると、エンドポイント共有モードでプライベートリンク接続が作成されます。このモードでは、同じ AWS Region 内の複数の {{{ .essential }}} インスタンスで 1 つのプライベートエンドポイントを共有できます。
 
-4.  **Create Private Endpoint for External Services**ダイアログで、必要な情報を入力します。
+4. **Create Private Endpoint for External Services**ダイアログで、必要な情報を入力します。
 
-    -   **Private Link Connection Name**: プライベートリンク接続の名前を入力します。
-    -   **Connection Type**： **Amazon MSK Provisioned**を選択します。このオプションが表示されない場合は、クラスターがAWS上に作成されていることを確認してください。
-    -   **MSK Cluster ARN** : Amazon MSK プロビジョニングされたクラスターの ARN を入力します (例: `arn:aws:kafka:us-east-1:385595570414:cluster/<msk-name>/xxxx` )。
+    - **Private Link Connection Name**: プライベートリンク接続の名前を入力します。
+    - **Connection Type**： **Amazon MSK Provisioned**を選択します。このオプションが表示されない場合は、クラスターがAWS上に作成されていることを確認してください。
+    - **MSK Cluster ARN** : Amazon MSK プロビジョニングされたクラスターの ARN を入力します (例: `arn:aws:kafka:us-east-1:385595570414:cluster/<msk-name>/xxxx` )。
 
-5.  **Create**をクリックします。
+5. **Create**をクリックします。
 
 ## Alibaba Cloud Endpoint Service のプライベートリンク接続を作成する {#create-an-alibaba-cloud-endpoint-service-private-link-connection}
 
@@ -125,9 +125,9 @@ TiDB CloudコンソールまたはTiDB Cloud CLI を使用して、Alibaba Cloud
 
 Alibaba Cloud エンドポイントサービスが次の条件を満たしていることを確認します。
 
--   TiDB Cloudクラスターと同じリージョンに存在します。
--   TiDB Cloudアカウント ID を**Service Whitelist**に追加します。
--   TiDB Cloudクラスターと重複する可用性ゾーンがあります。
+- TiDB Cloudクラスターと同じリージョンに存在します。
+- TiDB Cloudアカウント ID を**Service Whitelist**に追加します。
+- TiDB Cloudクラスターと重複する可用性ゾーンがあります。
 
 アカウント ID と可用性ゾーンの情報は、**Create Private Endpoint for External Services**ダイアログの下部で取得するか、次のコマンドを実行して取得できます。
 
@@ -138,30 +138,30 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
+2. ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
 
-3.  **Alibaba Cloud Private Endpoints for External Services**領域で、**Create Private Endpoint for External Services**をクリックします。
+3. **Alibaba Cloud Private Endpoints for External Services**領域で、**Create Private Endpoint for External Services**をクリックします。
 
     > **Note:**
     >
     > - TiDB Cloud Essential インスタンスが 2026 年 7 月 1 日以降に作成されている場合、**Create Private Endpoint for External Services** をクリックすると、エンドポイント専用モードでプライベートリンク接続が作成されます。このモードでは、各 {{{ .essential }}} インスタンスが独自のスタンドアロンプライベートエンドポイントを使用するため、接続時に[アカウントプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を含める必要がありません。
     > - TiDB Cloud Essential インスタンスが 2026 年 7 月 1 日より前に作成されている場合、**Create Private Endpoint for External Services** をクリックすると、エンドポイント共有モードでプライベートリンク接続が作成されます。このモードでは、同じ Alibaba Cloud Region 内の複数の {{{ .essential }}} インスタンスで 1 つのプライベートエンドポイントを共有できます。
 
-4.  **Create Private Endpoint for External Services**ダイアログで、必要な情報を入力します。
+4. **Create Private Endpoint for External Services**ダイアログで、必要な情報を入力します。
 
-    -   **Private Link Connection Name**: プライベートリンク接続の名前を入力します。
-    -   **Connection Type**： **Alibaba Cloud Endpoint Service**を選択します。このオプションが表示されない場合は、クラスターがAlibaba Cloud上に作成されていることを確認してください。
-    -   **Endpoint Service Name**: Alibaba Cloud エンドポイントサービス名を入力します (例: `com.aliyuncs.privatelink.<region>.epsrv-xxxxxxxxxxxxxxxxx` )。
+    - **Private Link Connection Name**: プライベートリンク接続の名前を入力します。
+    - **Connection Type**： **Alibaba Cloud Endpoint Service**を選択します。このオプションが表示されない場合は、クラスターがAlibaba Cloud上に作成されていることを確認してください。
+    - **Endpoint Service Name**: Alibaba Cloud エンドポイントサービス名を入力します (例: `com.aliyuncs.privatelink.<region>.epsrv-xxxxxxxxxxxxxxxxx` )。
 
-5.  **Create**をクリックします。
+5. **Create**をクリックします。
 
-6.  [Alibaba Cloudコンソール](https://console.alibabacloud.com)のエンドポイントサービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を許可します。
+6. [Alibaba Cloudコンソール](https://console.alibabacloud.com)のエンドポイントサービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を許可します。
 
 </div>
 
@@ -169,13 +169,13 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
 TiDB Cloud CLI を使用してプライベートリンク接続を作成するには:
 
-1.  次のコマンドを実行します。
+1. 次のコマンドを実行します。
 
     ```shell
     ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type ALICLOUD_ENDPOINT_SERVICE --alicloud.endpoint-service-name <endpoint-service-name>
     ```
 
-2.  [Alibaba Cloudコンソール](https://console.alibabacloud.com)のエンドポイントサービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を許可します。
+2. [Alibaba Cloudコンソール](https://console.alibabacloud.com)のエンドポイントサービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を許可します。
 
 </div>
 </SimpleTab>
@@ -201,22 +201,22 @@ TiDB CloudコンソールまたはTiDB Cloud CLI を使用して、ドメイン�
 
 TiDB Cloudコンソールを使用してドメインをプライベートリンク接続に接続するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
+2. ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
 
-3.  クラウドプロバイダーの**Private Endpoints for External Services**領域で、対象のプライベートリンク接続を選択し、 **...**をクリックします。
+3. クラウドプロバイダーの**Private Endpoints for External Services**領域で、対象のプライベートリンク接続を選択し、 **...**をクリックします。
 
-4.  **Attach Domains**をクリックします。
+4. **Attach Domains**をクリックします。
 
-5.  **Attach Domains**ダイアログで、ドメインの種類を選択します。
+5. **Attach Domains**ダイアログで、ドメインの種類を選択します。
 
-    -   **TiDB Cloud Managed**：ドメインはTiDB Cloudによって自動的に生成されます。生成されたドメインの名前には、そのドメインの一意の名前が付与されます。例えば、生成されたドメインが`*.use1-az1.dvs6nl5jgveztmla3pxkxgh76i.aws.plc.tidbcloud.com`の場合、一意の名前は`dvs6nl5jgveztmla3pxkxgh76i`になります。 **Attach Domains**をクリックして確定します。
-    -   **Confluent Cloud** : Confluent Cloud Dedicatedクラスタからドメインを生成するために提供された一意の名前を入力し、 **Attach Domains**をクリックして確定します。一意の名前の取得方法の詳細については、 [プライベートリンク接続を介してConfluent Cloudに接続する](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md#step-1-set-up-a-confluent-cloud-network)を参照してください。
+    - **TiDB Cloud Managed**：ドメインはTiDB Cloudによって自動的に生成されます。生成されたドメインの名前には、そのドメインの一意の名前が付与されます。例えば、生成されたドメインが`*.use1-az1.dvs6nl5jgveztmla3pxkxgh76i.aws.plc.tidbcloud.com`の場合、一意の名前は`dvs6nl5jgveztmla3pxkxgh76i`になります。 **Attach Domains**をクリックして確定します。
+    - **Confluent Cloud** : Confluent Cloud Dedicatedクラスタからドメインを生成するために提供された一意の名前を入力し、 **Attach Domains**をクリックして確定します。一意の名前の取得方法の詳細については、 [プライベートリンク接続を介してConfluent Cloudに接続する](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md#step-1-set-up-a-confluent-cloud-network)を参照してください。
 
 </div>
 
@@ -224,13 +224,13 @@ TiDB Cloudコンソールを使用してドメインをプライベートリン�
 
 TiDB Cloud CLI を使用してTiDB Cloud管理対象ドメインをアタッチするには、次の手順を実行します。
 
-1.  `dry run`を使用すると、アタッチするドメインをプレビューできます。次のステップで使用する一意の名前が出力されます。
+1. `dry run`を使用すると、アタッチするドメインをプレビューできます。次のステップで使用する一意の名前が出力されます。
 
     ```shell
     ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --dry-run
     ```
 
-2.  前の手順で取得した一意の名前でドメインを添付します。
+2. 前の手順で取得した一意の名前でドメインを添付します。
 
     ```shell
     ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --unique-name <unique-name>
@@ -254,17 +254,17 @@ TiDB CloudコンソールまたはTiDB Cloud CLI を使用して、プライベ�
 
 TiDB Cloudコンソールを使用してプライベートリンク接続からドメインをデタッチするには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
+2. ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
 
-3.  クラウドプロバイダーの**Private Endpoints for External Services**領域で、対象のプライベートリンク接続を選択し、 **...**をクリックします。
+3. クラウドプロバイダーの**Private Endpoints for External Services**領域で、対象のプライベートリンク接続を選択し、 **...**をクリックします。
 
-4.  **Detach Domains**をクリックし、切り離しを確認します。
+4. **Detach Domains**をクリックし、切り離しを確認します。
 
 </div>
 
@@ -272,13 +272,13 @@ TiDB Cloudコンソールを使用してプライベートリンク接続から�
 
 TiDB Cloud CLI を使用してプライベートリンク接続からドメインをデタッチするには、次の手順を実行します。
 
-1.  プライベートリンク接続の詳細を取得して`attach-domain-id`を見つけます:
+1. プライベートリンク接続の詳細を取得して`attach-domain-id`を見つけます:
 
     ```shell
     ticloud serverless private-link-connection get -c <cluster-id> --private-link-connection-id <private-link-connection-id>
     ```
 
-2.  `attach-domain-id`でドメインを切り離します:
+2. `attach-domain-id`でドメインを切り離します:
 
     ```shell
      ticloud serverless private-link-connection detach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --attach-domain-id <attach-domain-id>
@@ -296,17 +296,17 @@ TiDB CloudコンソールまたはTiDB Cloud CLI を使用してプライベー�
 
 TiDB Cloudコンソールを使用してプライベートリンク接続を削除するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
     > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
+2. ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
 
-3.  クラウドプロバイダーの**Private Endpoints for External Services**領域で、対象のプライベートリンク接続を選択し、 **...**をクリックします。
+3. クラウドプロバイダーの**Private Endpoints for External Services**領域で、対象のプライベートリンク接続を選択し、 **...**をクリックします。
 
-4.  **Delete**をクリックし、削除を確認します。
+4. **Delete**をクリックし、削除を確認します。
 
 </div>
 
@@ -323,9 +323,9 @@ ticloud serverless private-link-connection delete -c <cluster-id> --private-link
 
 ## 参照 {#see-also}
 
--   [プライベートリンク接続を介してConfluent Cloudに接続する](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
--   [プライベートリンク接続経由​​で Amazon RDS に接続する](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md)
--   [プライベートリンク接続経由​​でプロビジョニングされた Amazon MSK に接続する](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)
--   [プライベートリンク接続を介して Alibaba Cloud ApsaraDB RDS for MySQL に接続する](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md)
--   [プライベートリンク接続を介して AWS セルフホスト Kafka に接続する](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
--   [プライベートリンク接続を介して Alibaba Cloud Self-Hosted Kafka に接続する](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
+- [プライベートリンク接続を介してConfluent Cloudに接続する](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
+- [プライベートリンク接続経由​​で Amazon RDS に接続する](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md)
+- [プライベートリンク接続経由​​でプロビジョニングされた Amazon MSK に接続する](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)
+- [プライベートリンク接続を介して Alibaba Cloud ApsaraDB RDS for MySQL に接続する](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md)
+- [プライベートリンク接続を介して AWS セルフホスト Kafka に接続する](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
+- [プライベートリンク接続を介して Alibaba Cloud Self-Hosted Kafka に接続する](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)

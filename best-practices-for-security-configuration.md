@@ -17,8 +17,8 @@ TiDBのセキュリティは、データの整合性と機密性を保護する�
 
 このリスクを回避するには、デプロイメント中にルートパスワードを設定することをお勧めします。
 
--   TiUPを使用したデプロイメントの場合は、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md#step-7-start-a-tidb-cluster)を参照して、ルートユーザーのランダム パスワードを生成します。
--   TiDB Operatorを使用したデプロイメントの場合は、 [初期アカウントとパスワードを設定する](https://docs.pingcap.com/tidb-in-kubernetes/stable/initialize-a-cluster#set-initial-account-and-password)を参照して root パスワードを設定してください。
+- TiUPを使用したデプロイメントの場合は、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md#step-7-start-a-tidb-cluster)を参照して、ルートユーザーのランダム パスワードを生成します。
+- TiDB Operatorを使用したデプロイメントの場合は、 [初期アカウントとパスワードを設定する](https://docs.pingcap.com/tidb-in-kubernetes/stable/initialize-a-cluster#set-initial-account-and-password)を参照して root パスワードを設定してください。
 
 [`--initialize-secure`](/command-line-flags-for-tidb-configuration.md#--initialize-secure)オプションを使用して、初期ルートユーザーのネットワーク アクセスを制限することもできます。
 
@@ -34,11 +34,11 @@ TiDBのインストールにはデフォルトでGrafanaコンポーネントが
 
 TiDBの導入中は、Grafanaのパスワードを強力なものに変更し、システムのセキュリティを確保するために定期的に更新することをお勧めします。Grafanaのパスワードを変更する手順は次のとおりです。
 
--   Grafana に初めてログインしたら、プロンプトに従ってパスワードを変更します。
+- Grafana に初めてログインしたら、プロンプトに従ってパスワードを変更します。
 
     ![Grafana Password Reset Guide](/media/grafana-password-reset1.png)
 
--   パスワードを変更するには、Grafana 個人設定センターにアクセスします。
+- パスワードを変更するには、Grafana 個人設定センターにアクセスします。
 
     ![Grafana Password Reset Guide](/media/grafana-password-reset2.png)
 
@@ -54,13 +54,13 @@ TiDB DashboardはTiDB SQLユーザーとアカウントシステムを共有し�
 
 TiDB Dashboardは、デフォルトでは信頼できるユーザー向けに設計されています。デフォルトのポートには、TiDB Dashboardに加えて追加のAPIインターフェースが含まれています。外部ネットワークや信頼できないユーザーからのTiDB Dashboardへのアクセスを許可する場合は、セキュリティ上の脆弱性を回避するために、以下の対策を講じてください。
 
--   ファイアウォールまたはその他のメカニズムを使用して、デフォルトの`2379`ポートを信頼できるドメインに制限し、外部ユーザーによるアクセスを防止します。
+- ファイアウォールまたはその他のメカニズムを使用して、デフォルトの`2379`ポートを信頼できるドメインに制限し、外部ユーザーによるアクセスを防止します。
 
     > **Note:**
     >
     > TiDB、TiKV、その他のコンポーネントは、PDクライアントポートを介してPDコンポーネントと通信する必要があります。コンポーネント間の内部ネットワークアクセスをブロックしないでください。ブロックすると、クラスターが利用できなくなります。
 
--   [リバースプロキシを構成する](/dashboard/dashboard-ops-reverse-proxy.md#use-tidb-dashboard-behind-a-reverse-proxy) 、別のポート上の外部ユーザーに TiDB Dashboard サービスを安全に提供します。
+- [リバースプロキシを構成する](/dashboard/dashboard-ops-reverse-proxy.md#use-tidb-dashboard-behind-a-reverse-proxy) 、別のポート上の外部ユーザーに TiDB Dashboard サービスを安全に提供します。
 
 ## 内部ポートを保護する {#protect-internal-ports}
 

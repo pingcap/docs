@@ -27,14 +27,14 @@ Data Service のエンドポイントは、SQL 文を実行するためにカス
 
 Data Serviceを使用すると、TiDB CloudをHTTPS対応のあらゆるアプリケーションやサービスとシームレスに統合できます。以下に、典型的な使用シナリオをいくつかご紹介します。
 
--   モバイル アプリケーションまたは Web アプリケーションから TiDB クラスターのデータベースに直接アクセスします。
--   サーバーレス エッジ関数を使用してエンドポイントを呼び出し、データベース接続プールによって発生するスケーラビリティの問題を回避します。
--   データソースとしてData Serviceを使用することで、 TiDB Cloudをデータ可視化プロジェクトに統合できます。これにより、データベース接続のユーザー名とパスワードの漏洩を防ぎ、APIのセキュリティと使いやすさが向上します。
--   MySQLインターフェースがサポートしていない環境からデータベースに接続します。これにより、データへのアクセスにおける柔軟性と選択肢が広がります。
+- モバイル アプリケーションまたは Web アプリケーションから TiDB クラスターのデータベースに直接アクセスします。
+- サーバーレス エッジ関数を使用してエンドポイントを呼び出し、データベース接続プールによって発生するスケーラビリティの問題を回避します。
+- データソースとしてData Serviceを使用することで、 TiDB Cloudをデータ可視化プロジェクトに統合できます。これにより、データベース接続のユーザー名とパスワードの漏洩を防ぎ、APIのセキュリティと使いやすさが向上します。
+- MySQLインターフェースがサポートしていない環境からデータベースに接続します。これにより、データへのアクセスにおける柔軟性と選択肢が広がります。
 
 ## 次は何か {#what-s-next}
 
--   [Data Serviceを始める](/tidb-cloud/data-service-get-started.md)
--   [Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)
--   [データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)
--   [エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)
+- [Data Serviceを始める](/tidb-cloud/data-service-get-started.md)
+- [Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)
+- [データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)
+- [エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)

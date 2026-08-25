@@ -28,14 +28,14 @@ TiDB Cloud は、実行された SQL ステートメントなど、データベ�
 
 ## 前提条件 {#prerequisites}
 
--   TiDB Cloud Dedicated クラスターを使用しています。
+- TiDB Cloud Dedicated クラスターを使用しています。
 
     > **Note:**
     >
-    > -   データベース監査ログは、 TiDB Cloud Starter では使用できません。
-    > -   TiDB Cloud Essential については、 [TiDB Cloud Essential のデータベース監査ログ (PREVIEW)](/tidb-cloud/essential-database-audit-logging.md)を参照してください。
+    > - データベース監査ログは、 TiDB Cloud Starter では使用できません。
+    > - TiDB Cloud Essential については、 [TiDB Cloud Essential のデータベース監査ログ (PREVIEW)](/tidb-cloud/essential-database-audit-logging.md)を参照してください。
 
--   組織内で`Organization Owner`または`Project Owner`ロールに所属しています。それ以外の場合、 TiDB Cloudコンソールでデータベース監査関連のオプションは表示されません。詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)ご覧ください。
+- 組織内で`Organization Owner`または`Project Owner`ロールに所属しています。それ以外の場合、 TiDB Cloudコンソールでデータベース監査関連のオプションは表示されません。詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)ご覧ください。
 
 ## 監査ログを有効にする {#enable-audit-logging}
 
@@ -61,24 +61,24 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の AWS �
 
 #### ステップ2. Amazon S3アクセスを構成する {#step-2-configure-amazon-s3-access}
 
-1.  監査ログを有効にする TiDB クラスターのTiDB Cloudアカウント ID と外部 ID を取得します。
+1. 監査ログを有効にする TiDB クラスターのTiDB Cloudアカウント ID と外部 ID を取得します。
 
-    1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+    1. TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
         > **Tip:**
         >
         > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2.  ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
+    2. ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
 
-    3.  **DB Audit Logging**ページで、右上隅の**Enable**をクリックします。
+    3. **DB Audit Logging**ページで、右上隅の**Enable**をクリックします。
 
-    4.  **Database Audit Log Storage Configuration**ダイアログで、 **AWS IAM Policy Settings**セクションを見つけて、後で使用するために**TiDB Cloud Account ID**と**TiDB Cloud External ID**を記録します。
+    4. **Database Audit Log Storage Configuration**ダイアログで、 **AWS IAM Policy Settings**セクションを見つけて、後で使用するために**TiDB Cloud Account ID**と**TiDB Cloud External ID**を記録します。
 
-2.  [AWS Management Console](https://console.aws.amazon.com/)で、 **IAM** &gt; **Access Management** &gt; **Policies**に移動し、書き込み専用権限`s3:PutObject`を持つIAMポリシーがあるかどうかを確認します。
+2. [AWS Management Console](https://console.aws.amazon.com/)で、 **IAM** &gt; **Access Management** &gt; **Policies**に移動し、書き込み専用権限`s3:PutObject`を持つIAMポリシーがあるかどうかを確認します。
 
-    -   はいの場合は、後で使用するために一致したポリシーを記録します。
-    -   そうでない場合は、 **IAM** &gt; **Access Management** &gt; **Policies** &gt; **Create Policy**に移動し、次のポリシー テンプレートに従ってIAMポリシーを定義します。
+    - はいの場合は、後で使用するために一致したポリシーを記録します。
+    - そうでない場合は、 **IAM** &gt; **Access Management** &gt; **Policies** &gt; **Create Policy**に移動し、次のポリシー テンプレートに従ってIAMポリシーを定義します。
 
         ```json
         {
@@ -95,32 +95,32 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の AWS �
 
         テンプレート内の`<Your S3 bucket ARN>`は、監査ログファイルが書き込まれるS3バケットのAmazonリソースネーム（ARN）です。S3バケットの**Properties**タブに移動し、 **Bucket Overview**エリアでARN値を確認できます。 `"Resource"`フィールドでは、ARNの後に`/*`を追加する必要があります。例えば、ARNが`arn:aws:s3:::tidb-cloud-test`の場合、 `"Resource"`フィールドの値を`"arn:aws:s3:::tidb-cloud-test/*"`に設定する必要があります。
 
-3.  **IAM** &gt; **Access Management** &gt; **Roles**に移動し、前に記録したTiDB Cloudアカウント ID と外部 ID に対応する信頼エンティティを持つロールがすでに存在するかどうかを確認します。
+3. **IAM** &gt; **Access Management** &gt; **Roles**に移動し、前に記録したTiDB Cloudアカウント ID と外部 ID に対応する信頼エンティティを持つロールがすでに存在するかどうかを確認します。
 
-    -   はいの場合は、後で使用するために一致したロールを記録します。
-    -   そうでない場合は、 **Create role**をクリックし、信頼エンティティタイプとして**Another AWS account**を選択し、 **Account ID**フィールドにTiDB CloudのアカウントIDを入力します。次に、 **Require External ID**オプションを選択し、 **External ID**フィールドにTiDB Cloudの外部IDを入力します。
+    - はいの場合は、後で使用するために一致したロールを記録します。
+    - そうでない場合は、 **Create role**をクリックし、信頼エンティティタイプとして**Another AWS account**を選択し、 **Account ID**フィールドにTiDB CloudのアカウントIDを入力します。次に、 **Require External ID**オプションを選択し、 **External ID**フィールドにTiDB Cloudの外部IDを入力します。
 
-4.  **IAM** &gt; **Access Management** &gt; **Roles**で、前の手順のロール名をクリックして**Summary**ページに移動し、次の手順を実行します。
+4. **IAM** &gt; **Access Management** &gt; **Roles**で、前の手順のロール名をクリックして**Summary**ページに移動し、次の手順を実行します。
 
-    1.  **Permissions**タブで、書き込み専用権限`s3:PutObject`を持つ記録済みのポリシーがロールにアタッチされているかどうかを確認します。アタッチされていない場合は、 **Attach Policies**を選択し、必要なポリシーを検索して**Attach Policy**をクリックします。
-    2.  **Summary**ページに戻り、**Role ARN**値をクリップボードにコピーします。
+    1. **Permissions**タブで、書き込み専用権限`s3:PutObject`を持つ記録済みのポリシーがロールにアタッチされているかどうかを確認します。アタッチされていない場合は、 **Attach Policies**を選択し、必要なポリシーを検索して**Attach Policy**をクリックします。
+    2. **Summary**ページに戻り、**Role ARN**値をクリップボードにコピーします。
 
 #### ステップ3. 監査ログを有効にする {#step-3-enable-audit-logging}
 
 TiDB Cloudコンソールで、 TiDB Cloudアカウント ID と外部 ID 値を取得した**[データベース監査ログストレージ設定]**ダイアログボックスに戻り、次の手順を実行します。
 
-1.  **Bucket URI**フィールドに、監査ログファイルが書き込まれる S3 バケットの URI を入力します。
+1. **Bucket URI**フィールドに、監査ログファイルが書き込まれる S3 バケットの URI を入力します。
 
-2.  **Bucket Region**ドロップダウンリストで、バケットが配置されている AWS リージョンを選択します。
+2. **Bucket Region**ドロップダウンリストで、バケットが配置されている AWS リージョンを選択します。
 
-3.  **Role ARN**フィールドに、 [ステップ2. Amazon S3アクセスを構成する](#step-2-configure-amazon-s3-access)でコピーしたロール ARN 値を入力します。
+3. **Role ARN**フィールドに、 [ステップ2. Amazon S3アクセスを構成する](#step-2-configure-amazon-s3-access)でコピーしたロール ARN 値を入力します。
 
-4.  **Test Connection and Next**をクリックして、 TiDB Cloud がバケットにアクセスして書き込むことができるかどうかを確認します。接続に成功すると、ダイアログはデータベース監査ログ設定の次のステップに進みます。
+4. **Test Connection and Next**をクリックして、 TiDB Cloud がバケットにアクセスして書き込むことができるかどうかを確認します。接続に成功すると、ダイアログはデータベース監査ログ設定の次のステップに進みます。
 
 > **Note:**
 >
-> -   監査ログを有効にした後、バケットのURI、場所、またはARNに新しい変更を加えた場合は、監査ログを無効にしてから再度有効にする必要があります。
-> -   TiDB Cloud の Amazon S3 へのアクセスを削除するには、AWS マネジメントコンソールでこのクラスターに付与された信頼ポリシーを削除するだけです。
+> - 監査ログを有効にした後、バケットのURI、場所、またはARNに新しい変更を加えた場合は、監査ログを無効にしてから再度有効にする必要があります。
+> - TiDB Cloud の Amazon S3 へのアクセスを削除するには、AWS マネジメントコンソールでこのクラスターに付与された信頼ポリシーを削除するだけです。
 
 ### Google Cloud の監査ログを有効にする {#enable-audit-logging-for-google-cloud}
 
@@ -134,55 +134,55 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の Googl
 
 #### ステップ2. GCSアクセスを構成する {#step-2-configure-gcs-access}
 
-1.  監査ログを有効にする TiDB クラスタの Google Cloud サービスアカウント ID を取得します。
+1. 監査ログを有効にする TiDB クラスタの Google Cloud サービスアカウント ID を取得します。
 
-    1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+    1. TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
         > **Tip:**
         >
         > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2.  ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
+    2. ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
 
-    3.  **DB Audit Logging**ページで、右上隅の**Enable**をクリックします。
+    3. **DB Audit Logging**ページで、右上隅の**Enable**をクリックします。
 
-    4.  **[データベース監査ログストレージ設定]**ダイアログで、 **[Google Cloud Service アカウント ID]**セクションを見つけて、後で使用するために**Service Account ID**を記録します。
+    4. **[データベース監査ログストレージ設定]**ダイアログで、 **[Google Cloud Service アカウント ID]**セクションを見つけて、後で使用するために**Service Account ID**を記録します。
 
-2.  [Google Cloud console](https://console.cloud.google.com/)で、 **IAM & Admin** &gt; **Roles**に移動し、ストレージバケット内のオブジェクトに対する次の書き込み専用権限を持つロールが存在するかどうかを確認します。
+2. [Google Cloud console](https://console.cloud.google.com/)で、 **IAM & Admin** &gt; **Roles**に移動し、ストレージバケット内のオブジェクトに対する次の書き込み専用権限を持つロールが存在するかどうかを確認します。
 
-    -   storage.objects.create
-    -   storage.objects.delete
+    - storage.objects.create
+    - storage.objects.delete
 
     はいの場合は、後で使用するためにTiDBクラスターの一致したロールを記録してください。いいえの場合は、 **IAM & Admin** &gt; **Roles** &gt; **CREATE ROLE**に移動して、TiDBクラスターのロールを定義してください。
 
-3.  **[Cloud Storage]** &gt; **[ブラウザ]**に移動し、 TiDB Cloudがアクセスする GCS バケットを選択して、 **SHOW INFO PANEL**をクリックします。
+3. **[Cloud Storage]** &gt; **[ブラウザ]**に移動し、 TiDB Cloudがアクセスする GCS バケットを選択して、 **SHOW INFO PANEL**をクリックします。
 
     パネルが表示されます。
 
-4.  パネルで、 **ADD PRINCIPAL**をクリックします。
+4. パネルで、 **ADD PRINCIPAL**をクリックします。
 
     プリンシパルを追加するためのダイアログボックスが表示されます。
 
-5.  ダイアログボックスで、次の手順を実行します。
+5. ダイアログボックスで、次の手順を実行します。
 
-    1.  **New Principals**フィールドに、TiDB クラスタの Google Cloud サービスアカウント ID を貼り付けます。
-    2.  **Role**ドロップダウンリストで、ターゲット TiDB クラスターのロールを選択します。
-    3.  **SAVE**をクリックします。
+    1. **New Principals**フィールドに、TiDB クラスタの Google Cloud サービスアカウント ID を貼り付けます。
+    2. **Role**ドロップダウンリストで、ターゲット TiDB クラスターのロールを選択します。
+    3. **SAVE**をクリックします。
 
 #### ステップ3. 監査ログを有効にする {#step-3-enable-audit-logging}
 
 TiDB Cloudコンソールで、 Google Cloud サービスアカウント ID を取得した**[データベース監査ログストレージ設定]**ダイアログボックスに戻り、次の手順を実行します。
 
-1.  **Bucket URI**フィールドに、完全な GCS バケット名を入力します。
+1. **Bucket URI**フィールドに、完全な GCS バケット名を入力します。
 
-2.  **Bucket Region**フィールドで、バケットが配置されている GCS リージョンを選択します。
+2. **Bucket Region**フィールドで、バケットが配置されている GCS リージョンを選択します。
 
-3.  **Test Connection and Next**をクリックして、 TiDB Cloud がバケットにアクセスして書き込むことができるかどうかを確認します。接続に成功すると、ダイアログはデータベース監査ログ設定の次のステップに進みます。
+3. **Test Connection and Next**をクリックして、 TiDB Cloud がバケットにアクセスして書き込むことができるかどうかを確認します。接続に成功すると、ダイアログはデータベース監査ログ設定の次のステップに進みます。
 
 > **Note:**
 >
-> -   監査ログを有効にした後、バケットのURIまたは場所に新たな変更を加えた場合は、監査ログを無効にしてから再度有効にする必要があります。
-> -   TiDB Cloud の GCS バケットへのアクセスを削除するには、Google Cloud コンソールでこのクラスタに付与された信頼ポリシーを削除します。
+> - 監査ログを有効にした後、バケットのURIまたは場所に新たな変更を加えた場合は、監査ログを無効にしてから再度有効にする必要があります。
+> - TiDB Cloud の GCS バケットへのアクセスを削除するには、Google Cloud コンソールでこのクラスタに付与された信頼ポリシーを削除します。
 
 ### Azureの監査ログを有効にする {#enable-audit-logging-for-azure}
 
@@ -196,61 +196,61 @@ TiDB Cloudがデータベース監査ログを書き込む宛先として、組�
 
 #### ステップ2. Azure Blob Storageアクセスを構成する {#step-2-configure-azure-blob-storage-access}
 
-1.  [Azureポータル](https://portal.azure.com/)で、データベース監査ログを保存するために使用するコンテナを作成します。
+1. [Azureポータル](https://portal.azure.com/)で、データベース監査ログを保存するために使用するコンテナを作成します。
 
-    1.  Azure ポータルの左側のナビゲーション ウィンドウで、 **Storage Accounts**をクリックし、データベース監査ログを保存するストレージアカウントをクリックします。
+    1. Azure ポータルの左側のナビゲーション ウィンドウで、 **Storage Accounts**をクリックし、データベース監査ログを保存するストレージアカウントをクリックします。
 
         > **Tip:**
         >
         > 左側のナビゲーションペインが非表示になっている場合は、左上隅のメニュー ボタンをクリックして表示を切り替えます。
 
-    2.  選択したストレージアカウントのナビゲーション ウィンドウで、 **Data storage > Containers**をクリックし、 **+ Container**をクリックして**New container**ウィンドウを開きます。
+    2. 選択したストレージアカウントのナビゲーション ウィンドウで、 **Data storage > Containers**をクリックし、 **+ Container**をクリックして**New container**ウィンドウを開きます。
 
-    3.  **New container**ペインで、新しいコンテナの名前を入力し、匿名アクセスレベル（推奨レベルは**Private** （匿名アクセスなし））を設定して、 **Create**をクリックします。数秒以内に新しいコンテナが作成され、コンテナリストに表示されます。
+    3. **New container**ペインで、新しいコンテナの名前を入力し、匿名アクセスレベル（推奨レベルは**Private** （匿名アクセスなし））を設定して、 **Create**をクリックします。数秒以内に新しいコンテナが作成され、コンテナリストに表示されます。
 
-2.  ターゲット コンテナの URL を取得します。
+2. ターゲット コンテナの URL を取得します。
 
-    1.  コンテナー リストで、対象のコンテナーを選択し、コンテナーの**[...]**をクリックして、 **Container properties**を選択します。
-    2.  表示されたプロパティ ページで、後で使用するために**URL**値をコピーし、コンテナー リストに戻ります。
+    1. コンテナー リストで、対象のコンテナーを選択し、コンテナーの**[...]**をクリックして、 **Container properties**を選択します。
+    2. 表示されたプロパティ ページで、後で使用するために**URL**値をコピーし、コンテナー リストに戻ります。
 
-3.  ターゲット コンテナーの SAS トークンを生成します。
+3. ターゲット コンテナーの SAS トークンを生成します。
 
-    1.  コンテナー リストで、ターゲット コンテナーを選択し、コンテナーの**[...]**をクリックして、 **Generate SAS**を選択します。
+    1. コンテナー リストで、ターゲット コンテナーを選択し、コンテナーの**[...]**をクリックして、 **Generate SAS**を選択します。
 
-    2.  表示された**Generate SAS**ペインで、**Signing method**として**Account key**を選択します。
+    2. 表示された**Generate SAS**ペインで、**Signing method**として**Account key**を選択します。
 
-    3.  **Permissions**ドロップダウンリストで、 **Read** 、 **Write** 、 **Create**を選択して、監査ログファイルの書き込みを許可します。
+    3. **Permissions**ドロップダウンリストで、 **Read** 、 **Write** 、 **Create**を選択して、監査ログファイルの書き込みを許可します。
 
-    4.  **[開始] フィールド**と**[有効期限]**フィールドで、SAS トークンの有効期間を指定します。
+    4. **[開始] フィールド**と**[有効期限]**フィールドで、SAS トークンの有効期間を指定します。
 
         > **Note:**
         >
-        > -   監査機能はストレージアカウントに監査ログを継続的に書き込む必要があるため、SASトークンの有効期間は十分に長くなければなりません。ただし、有効期間が長すぎるとトークン漏洩のリスクが高まります。セキュリティ上、SASトークンは6～12か月ごとに交換することをお勧めします。
-        > -   生成された SAS トークンは取り消すことができないため、有効期間を慎重に設定する必要があります。
-        > -   監査ログの継続的な可用性を確保するために、SAS トークンの有効期限が切れる前に必ず再生成して更新してください。
+        > - 監査機能はストレージアカウントに監査ログを継続的に書き込む必要があるため、SASトークンの有効期間は十分に長くなければなりません。ただし、有効期間が長すぎるとトークン漏洩のリスクが高まります。セキュリティ上、SASトークンは6～12か月ごとに交換することをお勧めします。
+        > - 生成された SAS トークンは取り消すことができないため、有効期間を慎重に設定する必要があります。
+        > - 監査ログの継続的な可用性を確保するために、SAS トークンの有効期限が切れる前に必ず再生成して更新してください。
 
-    5.  **Allowed protocols**については、安全なアクセスを確保するために**HTTPS only**を選択します。
+    5. **Allowed protocols**については、安全なアクセスを確保するために**HTTPS only**を選択します。
 
-    6.  **[SAS トークンと URL の生成]**をクリックし、表示される**Blob SAS token**を後で使用するためにコピーします。
+    6. **[SAS トークンと URL の生成]**をクリックし、表示される**Blob SAS token**を後で使用するためにコピーします。
 
 #### ステップ3. 監査ログを有効にする {#step-3-enable-audit-logging}
 
-1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+1. TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
     > **Tip:**
     >
     > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
+2. ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
 
-3.  **DB Audit Logging**ページで、右上隅の**Enable**をクリックします。
+3. **DB Audit Logging**ページで、右上隅の**Enable**をクリックします。
 
-4.  **Database Audit Log Storage Configuration**ダイアログで、 [ステップ2. Azure BLOBアクセスを構成する](#step-2-configure-azure-blob-storage-access)から取得した BLOB URL と SAS トークンを指定します。
+4. **Database Audit Log Storage Configuration**ダイアログで、 [ステップ2. Azure BLOBアクセスを構成する](#step-2-configure-azure-blob-storage-access)から取得した BLOB URL と SAS トークンを指定します。
 
-    -   **Blob URL**フィールドに、監査ログが保存されるコンテナの URL を入力します。
-    -   **SAS Token**フィールドに、コンテナーにアクセスするための SAS トークンを入力します。
+    - **Blob URL**フィールドに、監査ログが保存されるコンテナの URL を入力します。
+    - **SAS Token**フィールドに、コンテナーにアクセスするための SAS トークンを入力します。
 
-5.  **Test Connection and Next**をクリックして、TiDB Cloud がコンテナにアクセスして書き込むことができるかどうかを確認します。接続に成功すると、ダイアログはデータベース監査ログ設定の次のステップに進みます。
+5. **Test Connection and Next**をクリックして、TiDB Cloud がコンテナにアクセスして書き込むことができるかどうかを確認します。接続に成功すると、ダイアログはデータベース監査ログ設定の次のステップに進みます。
 
 > **Note:**
 >
@@ -284,19 +284,19 @@ TiDB Cloudがデータベース監査ログを書き込む宛先として、組�
 
 クラスターの監査フィルタールールを指定するには、次の手順を実行します。
 
-1.  **DB Audit Logging**ページで、 **Audit Filters**セクションの**Add Filter Rule**をクリックして、監査フィルタルールを追加します。
+1. **DB Audit Logging**ページで、 **Audit Filters**セクションの**Add Filter Rule**をクリックして、監査フィルタルールを追加します。
 
-2.  **Add Filter Rule**ダイアログで、次の項目を設定します。
+2. **Add Filter Rule**ダイアログで、次の項目を設定します。
 
-    -   **Filter Name**: フィルタルールの名前を入力します。
-    -   **SQL User**: `<user>@<host>` 形式で SQL ユーザーを入力します。ユーザー名とホスト名では、0 文字以上に一致させるために `%`、ちょうど 1 文字に一致させるために `_` を使用できます。`@` 記号と `<host>` は省略可能です。
-    -   **Filter Events**: ログに記録するイベントを選択します。サポートされているフィルタイベントについては、[監査フィルタイベント](#audit-filter-events)を参照してください。
+    - **Filter Name**: フィルタルールの名前を入力します。
+    - **SQL User**: `<user>@<host>` 形式で SQL ユーザーを入力します。ユーザー名とホスト名では、0 文字以上に一致させるために `%`、ちょうど 1 文字に一致させるために `_` を使用できます。`@` 記号と `<host>` は省略可能です。
+    - **Filter Events**: ログに記録するイベントを選択します。サポートされているフィルタイベントについては、[監査フィルタイベント](#audit-filter-events)を参照してください。
 
-3.  **Confirm**をクリックしてフィルタルールを追加します。
+3. **Confirm**をクリックしてフィルタルールを追加します。
 
 > **Note:**
 >
-> -   監査ログはクラスターリソースを消費するため、フィルタールールの指定には注意が必要です。リソース使用量を最小限に抑えるには、可能な限り、監査ログを特定のユーザーとイベントに限定するフィルタールールを指定してください。
+> - 監査ログはクラスターリソースを消費するため、フィルタールールの指定には注意が必要です。リソース使用量を最小限に抑えるには、可能な限り、監査ログを特定のユーザーとイベントに限定するフィルタールールを指定してください。
 
 ## 監査ログを確認する {#view-audit-logs}
 

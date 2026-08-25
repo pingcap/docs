@@ -50,36 +50,46 @@ TiFlash は古いデータの圧縮をバックグラウンドで自動的に開
 
 デフォルトでは、セッションレベルとグローバルレベルで変数は`tiflash_fastscan=OFF`設定されており、FastScan機能は無効です。変数情報を表示するには、次のステートメントを使用します。
 
-    show variables like 'tiflash_fastscan';
+```
+show variables like 'tiflash_fastscan';
 
-    +------------------+-------+
-    | Variable_name    | Value |
-    +------------------+-------+
-    | tiflash_fastscan | OFF   |
-    +------------------+-------+
++------------------+-------+
+| Variable_name    | Value |
++------------------+-------+
+| tiflash_fastscan | OFF   |
++------------------+-------+
+```
 
 <!---->
 
-    show global variables like 'tiflash_fastscan';
+```
+show global variables like 'tiflash_fastscan';
 
-    +------------------+-------+
-    | Variable_name    | Value |
-    +------------------+-------+
-    | tiflash_fastscan | OFF   |
-    +------------------+-------+
++------------------+-------+
+| Variable_name    | Value |
++------------------+-------+
+| tiflash_fastscan | OFF   |
++------------------+-------+
+```
 
 変数`tiflash_fastscan`セッションレベルとグローバルレベルで設定できます。現在のセッションでFastScanを有効にするには、次のステートメントを使用します。
 
-    set session tiflash_fastscan=ON;
+```
+set session tiflash_fastscan=ON;
+```
 
 グローバルレベルで`tiflash_fastscan`設定することもできます。新しい設定は新しいセッションで有効になりますが、現在のセッションと以前のセッションには適用されません。また、新しいセッションでは、セッションレベルとグローバルレベルの両方の`tiflash_fastscan`に新しい値が設定されます。
 
-    set global tiflash_fastscan=ON;
+```
+set global tiflash_fastscan=ON;
+```
 
 次のステートメントを使用して FastScan を無効にすることができます。
 
-    set session tiflash_fastscan=OFF;
-    set global tiflash_fastscan=OFF;
+```
+set session tiflash_fastscan=OFF;
+set global tiflash_fastscan=OFF;
+```
 
 ## FastScanの仕組み {#mechanism-of-fastscan}
 
@@ -87,9 +97,9 @@ TiFlashのストレージレイヤーのデータは、デルタレイヤーと�
 
 デフォルトでは、FastScan は有効になっておらず、TableScan オペレーターは次の手順でデータを処理します。
 
-1.  データの読み取り: Deltaレイヤーと Stableレイヤーに個別のデータ ストリームを作成し、それぞれのデータを読み取ります。
-2.  ソートマージ: 手順 1 で作成したデータ ストリームをマージします。次に、(主キー列、タイムスタンプ列) の順序でソートしたデータを返します。
-3.  範囲フィルター: データ範囲に従って、手順 2 で生成されたデータをフィルターし、データを返します。
-4.  MVCC +カラムフィルター: 手順 3 で生成されたデータを MVCC (つまり、主キー列とタイムスタンプ列に従ってデータバージョンをフィルター処理) および列 (つまり、不要な列をフィルター処理) を通じてフィルター処理し、データを返します。
+1. データの読み取り: Deltaレイヤーと Stableレイヤーに個別のデータ ストリームを作成し、それぞれのデータを読み取ります。
+2. ソートマージ: 手順 1 で作成したデータ ストリームをマージします。次に、(主キー列、タイムスタンプ列) の順序でソートしたデータを返します。
+3. 範囲フィルター: データ範囲に従って、手順 2 で生成されたデータをフィルターし、データを返します。
+4. MVCC +カラムフィルター: 手順 3 で生成されたデータを MVCC (つまり、主キー列とタイムスタンプ列に従ってデータバージョンをフィルター処理) および列 (つまり、不要な列をフィルター処理) を通じてフィルター処理し、データを返します。
 
 FastScanは、データの一貫性をある程度犠牲にすることで、クエリ速度を向上させます。通常のスキャンプロセスにおけるステップ2とステップ4のMVCC部分はFastScanでは省略されるため、クエリパフォーマンスが向上します。

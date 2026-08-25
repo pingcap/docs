@@ -29,11 +29,11 @@ DTFileはデータファイルディレクトリの`stable`フォルダに保存
 
 TiFlash は自動と手動の両方のデータ検証をサポートしています。
 
--   自動データ検証:
-    -   v6.0.0 以降のバージョンでは、デフォルトで V3 検証メカニズムが使用されます。
-    -   v6.0.0 より前のバージョンでは、デフォルトで V2 検証メカニズムが使用されます。
-    -   検証メカニズムを手動で切り替えるには、 [TiFlash設定ファイル](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)を参照してください。ただし、デフォルト設定はテストによって検証されているため、推奨されます。
--   手動データ検証[`DTTool inspect`](/tiflash/tiflash-command-line-flags.md#dttool-inspect)を参照してください。
+- 自動データ検証:
+    - v6.0.0 以降のバージョンでは、デフォルトで V3 検証メカニズムが使用されます。
+    - v6.0.0 より前のバージョンでは、デフォルトで V2 検証メカニズムが使用されます。
+    - 検証メカニズムを手動で切り替えるには、 [TiFlash設定ファイル](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)を参照してください。ただし、デフォルト設定はテストによって検証されているため、推奨されます。
+- 手動データ検証[`DTTool inspect`](/tiflash/tiflash-command-line-flags.md#dttool-inspect)を参照してください。
 
 > **Warning:**
 >

@@ -13,9 +13,9 @@ TiDB Dashboard UIは、v4.0以降のバージョンのPDコンポーネントに
 
 標準の TiDB クラスターをデプロイする方法については、次のドキュメントを参照してください。
 
--   [TiDB Self-Managedのクイックスタート](/quick-start-with-tidb.md)
--   [本番環境にTiDBをデプロイ](/production-deployment-using-tiup.md)
--   [Kubernetes環境のデプロイメント](https://docs.pingcap.com/tidb-in-kubernetes/stable/access-dashboard)
+- [TiDB Self-Managedのクイックスタート](/quick-start-with-tidb.md)
+- [本番環境にTiDBをデプロイ](/production-deployment-using-tiup.md)
+- [Kubernetes環境のデプロイメント](https://docs.pingcap.com/tidb-in-kubernetes/stable/access-dashboard)
 
 > **Note:**
 >
@@ -72,8 +72,8 @@ tiup ctl:v<CLUSTER_VERSION> pd -u http://127.0.0.1:2379 config set dashboard-add
 
 上記のコマンドでは、
 
--   `127.0.0.1:2379`任意の PD インスタンスの IP とポートに置き換えます。
--   `9.9.9.9:2379` TiDB Dashboard サービスを実行する新しい PD インスタンスの IP とポートに置き換えます。
+- `127.0.0.1:2379`任意の PD インスタンスの IP とポートに置き換えます。
+- `9.9.9.9:2379` TiDB Dashboard サービスを実行する新しい PD インスタンスの IP とポートに置き換えます。
 
 変更が有効になっているかどうかを確認するには、 `tiup cluster display`コマンドを使用します ( `CLUSTER_NAME`をクラスター名に置き換えます)。
 
@@ -127,6 +127,6 @@ TiDB Dashboardを提供するPDインスタンスを手動で指定すること�
 
 ## 次は何か {#what-s-next}
 
--   TiDB Dashboard UI にアクセスしてログインする方法については、 [TiDB Dashboardにアクセスする](/dashboard/dashboard-access.md)を参照してください。
+- TiDB Dashboard UI にアクセスしてログインする方法については、 [TiDB Dashboardにアクセスする](/dashboard/dashboard-access.md)を参照してください。
 
--   ファイアウォールの設定など、TiDB Dashboardのセキュリティを強化する方法については、 [TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
+- ファイアウォールの設定など、TiDB Dashboardのセキュリティを強化する方法については、 [TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。

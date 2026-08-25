@@ -9,60 +9,60 @@ summary: TiDB 1.0は、MySQLとの互換性、SQLの最適化、安定性、そ�
 
 ## TiDB {#tidb}
 
--   SQL クエリ オプティマイザー:
-    -   コストモデルを調整する
-    -   プッシュダウンを分析する
-    -   関数シグネチャプッシュダウン
--   内部データ形式を最適化して中間データのサイズを削減します
--   MySQLとの互換性を強化する
--   `NO_SQL_CACHE`構文をサポートし、ストレージエンジンのキャッシュ使用量を制限します
--   ハッシュアグリゲータ演算子をリファクタリングしてメモリ使用量を削減する
--   ストリームアグリゲーターオペレーターをサポートする
+- SQL クエリ オプティマイザー:
+    - コストモデルを調整する
+    - プッシュダウンを分析する
+    - 関数シグネチャプッシュダウン
+- 内部データ形式を最適化して中間データのサイズを削減します
+- MySQLとの互換性を強化する
+- `NO_SQL_CACHE`構文をサポートし、ストレージエンジンのキャッシュ使用量を制限します
+- ハッシュアグリゲータ演算子をリファクタリングしてメモリ使用量を削減する
+- ストリームアグリゲーターオペレーターをサポートする
 
 ## PD {#pd}
 
--   読み取りフローベースのバランス調整をサポート
--   ストアのウェイトとウェイトベースのバランス設定をサポート
+- 読み取りフローベースのバランス調整をサポート
+- ストアのウェイトとウェイトベースのバランス設定をサポート
 
 ## TiKV {#tikv}
 
--   コプロセッサーはより多くのプッシュダウン関数をサポートするようになりました
--   サンプリング操作のプッシュダウンをサポート
--   スペースを素早く確保するために手動でデータ圧縮をトリガーすることをサポート
--   パフォーマンスと安定性を向上
--   デバッグ用のデバッグAPIを追加する
--   TiSpark ベータ版リリース:
--   サポート構成フレームワーク
--   ThriftSever/JDBCおよびSpark SQLをサポート
+- コプロセッサーはより多くのプッシュダウン関数をサポートするようになりました
+- サンプリング操作のプッシュダウンをサポート
+- スペースを素早く確保するために手動でデータ圧縮をトリガーすることをサポート
+- パフォーマンスと安定性を向上
+- デバッグ用のデバッグAPIを追加する
+- TiSpark ベータ版リリース:
+- サポート構成フレームワーク
+- ThriftSever/JDBCおよびSpark SQLをサポート
 
 ## 了承 {#acknowledgement}
 
 ### 以下の企業およびチームに特別な感謝を申し上げます {#special-thanks-to-the-following-enterprises-and-teams}
 
--   Archon
--   Mobike
--   Samsung Electronics
--   SpeedyCloud
--   Tencent Cloud
--   UCloud
+- Archon
+- Mobike
+- Samsung Electronics
+- SpeedyCloud
+- Tencent Cloud
+- UCloud
 
 ### 以下の組織および個人からのオープンソースソフトウェアとサービスに感謝します {#thanks-to-the-open-source-software-and-services-from-the-following-organizations-and-individuals}
 
--   Asta Xie
--   CNCF
--   CoreOS
--   Databricks
--   Docker
--   GitHub
--   Grafana
--   gRPC
--   Jepsen
--   Kubernetes
--   Namazu
--   Prometheus
--   Red Hat
--   RocksDB Team
--   Rust Team
+- Asta Xie
+- CNCF
+- CoreOS
+- Databricks
+- Docker
+- GitHub
+- Grafana
+- gRPC
+- Jepsen
+- Kubernetes
+- Namazu
+- Prometheus
+- Red Hat
+- RocksDB Team
+- Rust Team
 
 ### 個々の貢献者に感謝 {#thanks-to-the-individual-contributors}
 

@@ -10,10 +10,10 @@ TiDBはMySQL互換データベース、 [AWS Lambda関数](https://aws.amazon.co
 
 このチュートリアルでは、AWS Lambda FunctionsでTiDBとmysql2を使用して以下のタスクを実行する方法を学びます。
 
--   環境をセットアップしてください。
--   mysql2を使用してTiDBに接続します。
--   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
--   AWS Lambda関数をデプロイ。
+- 環境をセットアップしてください。
+- mysql2を使用してTiDBに接続します。
+- アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
+- AWS Lambda関数をデプロイ。
 
 > **Note**
 >
@@ -23,17 +23,17 @@ TiDBはMySQL互換データベース、 [AWS Lambda関数](https://aws.amazon.co
 
 このチュートリアルを完了するには、以下が必要です。
 
--   [Node.js **18**](https://nodejs.org/en/download/)以降。
--   [Git](https://git-scm.com/downloads) 。
--   TiDBクラスタ。
--   管理者権限を持つ[AWSユーザー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html)。
--   [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
--   [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
+- [Node.js **18**](https://nodejs.org/en/download/)以降。
+- [Git](https://git-scm.com/downloads) 。
+- TiDBクラスタ。
+- 管理者権限を持つ[AWSユーザー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html)。
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
--   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
 AWSアカウントまたはユーザーをお持ちでない場合は、 [Lambda入門](https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html)ガイドの手順に従って作成できます。
 
@@ -70,31 +70,31 @@ npm install
 
 <div label="TiDB Cloud Starter or Essential">
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**Connect**をクリックします。接続ダイアログが表示されます。
+2. 右上隅の**Connect**をクリックします。接続ダイアログが表示されます。
 
-3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
+3. 接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **Connection Type**は`Public`に設定されています。
+    - **Connection Type**は`Public`に設定されています。
 
-    -   **Branch**は`main`に設定されています。
+    - **Branch**は`main`に設定されています。
 
-    -   **Connect With**は`General`に設定されています。
+    - **Connect With**は`General`に設定されています。
 
-    -   お使いの環境に合った**Operating System**を選択してください。
+    - お使いの環境に合った**Operating System**を選択してください。
 
     > **Note**
     >
     > Node.jsアプリケーションでは、SSL CA証明書を提供する必要はありません。Node.jsはTLS（SSL）接続を確立する際に、デフォルトで組み込みの[Mozilla CA証明書](https://wiki.mozilla.org/CA/Included_Certificates)を使用するためです。
 
-4.  **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
+4. **Generate Password**をクリックすると、ランダムなパスワードが生成されます。
 
     > **Tip**
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **Reset Password**をクリックして新しいパスワードを作成できます。
 
-5.  対応する接続​​文字列をコピーして`env.json`に貼り付けてください。以下に例を示します。
+5. 対応する接続​​文字列をコピーして`env.json`に貼り付けてください。以下に例を示します。
 
     ```json
     {
@@ -114,26 +114,26 @@ npm install
 
 <div label="TiDB Cloud Premium">
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
 
-2.  左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
 
-3.  **Networking**ページで、**Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
+3. **Networking**ページで、**Public Endpoint**の**Enable**をクリックし、次に**Add IP Address**をクリックします。
 
     クライアントのIPアドレスがアクセスリストに追加されていることを確認してください。
 
-4.  左側のナビゲーションペインで**Overview**をクリックすると、インスタンスの概要ページに戻ります。
+4. 左側のナビゲーションペインで**Overview**をクリックすると、インスタンスの概要ページに戻ります。
 
-5.  右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
+5. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-6.  接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
+6. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
 
-    -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
-    -   まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
-    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
-    -   **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+    - 公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
+    - まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
+    - サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
+    - **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
-7.  対応する接続​​文字列をコピーして`env.json`に貼り付けてください。以下に例を示します。
+7. 対応する接続​​文字列をコピーして`env.json`に貼り付けてください。以下に例を示します。
 
     ```json
     {
@@ -175,21 +175,21 @@ npm install
 
 ### ステップ4：コードを実行して結果を確認する {#step-4-run-the-code-and-check-the-result}
 
-1.  （前提条件） [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)をインストールしてください。
+1. （前提条件） [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)をインストールしてください。
 
-2.  バンドルを作成する:
+2. バンドルを作成する:
 
     ```bash
     npm run build
     ```
 
-3.  サンプルLambda関数を呼び出します。
+3. サンプルLambda関数を呼び出します。
 
     ```bash
     sam local invoke --env-vars env.json -e events/event.json "tidbHelloWorldFunction"
     ```
 
-4.  ターミナルの出力を確認してください。出力が以下の例と似ていれば、接続は成功しています。
+4. ターミナルの出力を確認してください。出力が以下の例と似ていれば、接続は成功しています。
 
     ```bash
     {"statusCode":200,"body":"{\"results\":[{\"Hello World\":\"Hello World\"}]}"}
@@ -203,15 +203,15 @@ AWS Lambda関数は、 [SAM CLI](#sam-cli-deployment-recommended)または[AWS L
 
 ### SAM CLIの導入（推奨） {#sam-cli-deployment-recommended}
 
-1.  ([前提条件](#prerequisites)) [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)をインストールします。
+1. ([前提条件](#prerequisites)) [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)をインストールします。
 
-2.  バンドルを作成する:
+2. バンドルを作成する:
 
     ```bash
     npm run build
     ```
 
-3.  [`template.yml`](https://github.com/tidb-samples/tidb-aws-lambda-quickstart/blob/main/template.yml)の環境変数を更新してください。
+3. [`template.yml`](https://github.com/tidb-samples/tidb-aws-lambda-quickstart/blob/main/template.yml)の環境変数を更新してください。
 
     ```yaml
     Environment:
@@ -222,7 +222,7 @@ AWS Lambda関数は、 [SAM CLI](#sam-cli-deployment-recommended)または[AWS L
         TIDB_PASSWORD: {password}
     ```
 
-4.  AWS 環境変数を設定します ( [短期資格](https://docs.aws.amazon.com/cli/latest/userguide/cli-authentication-short-term.html)を参照)。
+4. AWS 環境変数を設定します ( [短期資格](https://docs.aws.amazon.com/cli/latest/userguide/cli-authentication-short-term.html)を参照)。
 
     ```bash
     export AWS_ACCESS_KEY_ID={your_access_key_id}
@@ -230,7 +230,7 @@ AWS Lambda関数は、 [SAM CLI](#sam-cli-deployment-recommended)または[AWS L
     export AWS_SESSION_TOKEN={your_session_token}
     ```
 
-5.  AWS Lambda関数をデプロイ：
+5. AWS Lambda関数をデプロイ：
 
     ```bash
     sam deploy --guided
@@ -267,7 +267,7 @@ AWS Lambda関数は、 [SAM CLI](#sam-cli-deployment-recommended)または[AWS L
 
 ### Webコンソールの展開 {#web-console-deployment}
 
-1.  バンドルを作成する:
+1. バンドルを作成する:
 
     ```bash
     npm run build
@@ -277,22 +277,22 @@ AWS Lambda関数は、 [SAM CLI](#sam-cli-deployment-recommended)または[AWS L
     # dist/index.zip
     ```
 
-2.  [AWS Lambdaコンソール](https://console.aws.amazon.com/lambda/home#/functions)コンソールにアクセスしてください。
+2. [AWS Lambdaコンソール](https://console.aws.amazon.com/lambda/home#/functions)コンソールにアクセスしてください。
 
-3.  [Lambda関数の作成](https://docs.aws.amazon.com/lambda/latest/dg/lambda-nodejs.html)の手順に従って、Node.js Lambda 関数を作成します。
+3. [Lambda関数の作成](https://docs.aws.amazon.com/lambda/latest/dg/lambda-nodejs.html)の手順に従って、Node.js Lambda 関数を作成します。
 
-4.  [Lambda デプロイメントパッケージ](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip)の手順に従って、 `dist/index.zip`ファイルをアップロードします。
+4. [Lambda デプロイメントパッケージ](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip)の手順に従って、 `dist/index.zip`ファイルをアップロードします。
 
-5.  Lambda 関数で[対応する接続​​文字列をコピーして設定します](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)
+5. Lambda 関数で[対応する接続​​文字列をコピーして設定します](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)
 
-    1.  Lambda コンソールの[Functions](https://console.aws.amazon.com/lambda/home#/functions)ページで、 **Configuration**タブを選択し、 **Environment variables**を選択します。
-    2.  **Edit**を選択してください。
-    3.  データベースへのアクセス資格情報を追加するには、以下の手順を実行してください。
-        -   **Add environment variable**を選択し、 **Key**に`TIDB_HOST`と入力し、 **Value**にホスト名を入力します。
-        -   **Add environment variable**を選択し、 **Key**に`TIDB_PORT`と入力し、 **Value**にポート番号を入力します（デフォルトは4000です）。
-        -   **Add environment variable**を選択し、 **Key**に`TIDB_USER`と入力し、 **Value**にユーザー名を入力します。
-        -   **Add environment variable**を選択し、 **Key**に`TIDB_PASSWORD`と入力し、 **Value**にデータベース作成時に選択したパスワードを入力します。
-        -   **Save**を選択してください。
+    1. Lambda コンソールの[Functions](https://console.aws.amazon.com/lambda/home#/functions)ページで、 **Configuration**タブを選択し、 **Environment variables**を選択します。
+    2. **Edit**を選択してください。
+    3. データベースへのアクセス資格情報を追加するには、以下の手順を実行してください。
+        - **Add environment variable**を選択し、 **Key**に`TIDB_HOST`と入力し、 **Value**にホスト名を入力します。
+        - **Add environment variable**を選択し、 **Key**に`TIDB_PORT`と入力し、 **Value**にポート番号を入力します（デフォルトは4000です）。
+        - **Add environment variable**を選択し、 **Key**に`TIDB_USER`と入力し、 **Value**にユーザー名を入力します。
+        - **Add environment variable**を選択し、 **Key**に`TIDB_PASSWORD`と入力し、 **Value**にデータベース作成時に選択したパスワードを入力します。
+        - **Save**を選択してください。
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
@@ -384,22 +384,22 @@ console.log(rsh.affectedRows);
 
 ## 役立つメモ {#useful-notes}
 
--   [接続プール](https://github.com/sidorares/node-mysql2#using-connection-pools)を使用してデータベース接続を管理することで、接続の頻繁な確立と切断によって発生するパフォーマンスのオーバーヘッドを削減できます。
--   SQL インジェクションを回避するには、 [プリペアドステートメント](https://github.com/sidorares/node-mysql2#using-prepared-statements)を使用することをお勧めします。
--   複雑な SQL ステートメントがあまり含まれないシナリオでは、[Sequelize](https://sequelize.org/)、 [TypeORM](https://typeorm.io/) 、または[Prisma](https://www.prisma.io/)などの ORM フレームワークを使用すると、開発効率が大幅に向上します。
--   アプリケーション用の RESTful API を構築するには、 [AWS LambdaをAPI Gatewayで使用する](https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html)お勧めします。
--   TiDB Cloud Starterと AWS Lambda を使用した高性能アプリケーションの設計については、 [このブログ](https://aws.amazon.com/blogs/apn/designing-high-performance-applications-using-serverless-tidb-cloud-and-aws-lambda/)を参照してください。
+- [接続プール](https://github.com/sidorares/node-mysql2#using-connection-pools)を使用してデータベース接続を管理することで、接続の頻繁な確立と切断によって発生するパフォーマンスのオーバーヘッドを削減できます。
+- SQL インジェクションを回避するには、 [プリペアドステートメント](https://github.com/sidorares/node-mysql2#using-prepared-statements)を使用することをお勧めします。
+- 複雑な SQL ステートメントがあまり含まれないシナリオでは、[Sequelize](https://sequelize.org/)、 [TypeORM](https://typeorm.io/) 、または[Prisma](https://www.prisma.io/)などの ORM フレームワークを使用すると、開発効率が大幅に向上します。
+- アプリケーション用の RESTful API を構築するには、 [AWS LambdaをAPI Gatewayで使用する](https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html)お勧めします。
+- TiDB Cloud Starterと AWS Lambda を使用した高性能アプリケーションの設計については、 [このブログ](https://aws.amazon.com/blogs/apn/designing-high-performance-applications-using-serverless-tidb-cloud-and-aws-lambda/)を参照してください。
 
 ## 次のステップ {#next-steps}
 
--   AWS Lambda関数でTiDBを使用する方法の詳細については、 [TiDB-Lambda統合/aws-lambda-bookstoreデモ](https://github.com/pingcap/TiDB-Lambda-integration/blob/main/aws-lambda-bookstore/README.md)ご覧ください。また、AWS API Gatewayを使用して、アプリケーション用のRESTful APIを構築することもできます。
--   `mysql2`の使用法について詳しくは、 [`mysql2`のドキュメント](https://sidorares.github.io/node-mysql2/docs/documentation)ご覧ください。
--   AWS Lambda の使用方法の詳細については[AWS `Lambda`の開発者ガイド](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)ご覧ください。
--   [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
--   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- AWS Lambda関数でTiDBを使用する方法の詳細については、 [TiDB-Lambda統合/aws-lambda-bookstoreデモ](https://github.com/pingcap/TiDB-Lambda-integration/blob/main/aws-lambda-bookstore/README.md)ご覧ください。また、AWS API Gatewayを使用して、アプリケーション用のRESTful APIを構築することもできます。
+- `mysql2`の使用法について詳しくは、 [`mysql2`のドキュメント](https://sidorares.github.io/node-mysql2/docs/documentation)ご覧ください。
+- AWS Lambda の使用方法の詳細については[AWS `Lambda`の開発者ガイド](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)ご覧ください。
+- [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

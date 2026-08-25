@@ -13,14 +13,14 @@ Starting from v7.1.0, when you upgrade TiDB to a later version, TiDB supports sm
 
 機能がスイッチによって制御される必要があるかどうかに応じて、スムーズアップグレードを使用する方法は 2 つあります。
 
--   この機能はデフォルトで有効になっており、スイッチによる制御は不要です。現在、この方法をサポートしているバージョンはv7.1.0、v7.1.1、v7.2.0、v7.3.0です。具体的には、以下のバージョンがサポートされています。
-    -   Upgrade from v7.1.0 to v7.1.1, v7.2.0, or v7.3.0
-    -   Upgrade from v7.1.1 to v7.2.0 or v7.3.0
-    -   Upgrade from v7.2.0 to v7.3.0
+- この機能はデフォルトで有効になっており、スイッチによる制御は不要です。現在、この方法をサポートしているバージョンはv7.1.0、v7.1.1、v7.2.0、v7.3.0です。具体的には、以下のバージョンがサポートされています。
+    - Upgrade from v7.1.0 to v7.1.1, v7.2.0, or v7.3.0
+    - Upgrade from v7.1.1 to v7.2.0 or v7.3.0
+    - Upgrade from v7.2.0 to v7.3.0
 
--   この機能はデフォルトで無効になっていますが、 `/upgrade/start`リクエストを送信することで有効にできます。詳細は[TiDB HTTP API](https://github.com/pingcap/tidb/blob/release-8.5/docs/tidb_http_api.md)を参照してください。サポートされているバージョンは次のとおりです。
-    -   Upgrade from v7.1.2 and later v7.1 versions (that is, v7.1.x, where x >= 2) to v7.4.0 and later versions
-    -   Upgrade from v7.4.0 to later versions
+- この機能はデフォルトで無効になっていますが、 `/upgrade/start`リクエストを送信することで有効にできます。詳細は[TiDB HTTP API](https://github.com/pingcap/tidb/blob/release-8.5/docs/tidb_http_api.md)を参照してください。サポートされているバージョンは次のとおりです。
+    - Upgrade from v7.1.2 and later v7.1 versions (that is, v7.1.x, where x >= 2) to v7.4.0 and later versions
+    - Upgrade from v7.4.0 to later versions
 
 特定のバージョンでサポートされているアップグレード方法については、次の表を参照してください。
 
@@ -38,8 +38,8 @@ Starting from v7.1.0, when you upgrade TiDB to a later version, TiDB supports sm
 
 Before the smooth upgrade feature is introduced, there are the following limitations on DDL operations during the upgrade process:
 
--   アップグレードプロセス中に DDL 操作を実行すると、TiDB で未定義の動作が発生する可能性があります。
--   DDL 操作中に TiDB をアップグレードすると、TiDB で未定義の動作が発生する可能性があります。
+- アップグレードプロセス中に DDL 操作を実行すると、TiDB で未定義の動作が発生する可能性があります。
+- DDL 操作中に TiDB をアップグレードすると、TiDB で未定義の動作が発生する可能性があります。
 
 These limitations can be summarized as that you need to ensure that there are no user-initiated DDL operations during the upgrade process. After the smooth upgrade feature is introduced, TiDB is no longer subject to this limitation during the upgrade process.
 
@@ -59,15 +59,15 @@ v1.14.0以降、 TiUPはこの機能を自動的にサポートします。つ�
 
 You can take the following steps to upgrade TiDB manually or by using a script:
 
-1.  クラスター内の任意の TiDB ノードに HTTP アップグレード開始要求を送信します`curl -X POST http://{TiDBIP}:10080/upgrade/start` .
-    -   The TiDB cluster enters the **Upgrading** state.
-    -   The DDL operations to be performed are paused.
+1. クラスター内の任意の TiDB ノードに HTTP アップグレード開始要求を送信します`curl -X POST http://{TiDBIP}:10080/upgrade/start` .
+    - The TiDB cluster enters the **Upgrading** state.
+    - The DDL operations to be performed are paused.
 
-2.  Replace the TiDB binary and perform a rolling upgrade. This process is the same as the original upgrade process.
-    -   システム DDL 操作はアップグレードプロセス中に実行されます。
+2. Replace the TiDB binary and perform a rolling upgrade. This process is the same as the original upgrade process.
+    - システム DDL 操作はアップグレードプロセス中に実行されます。
 
-3.  クラスター内のすべての TiDB ノードが正常にアップグレードされたら、任意の TiDB ノードに HTTP アップグレード完了要求を送信します`curl -X POST http://{TiDBIP}:10080/upgrade/finish` .
-    -   ユーザーの一時停止された DDL 操作が再開されます。
+3. クラスター内のすべての TiDB ノードが正常にアップグレードされたら、任意の TiDB ノードに HTTP アップグレード完了要求を送信します`curl -X POST http://{TiDBIP}:10080/upgrade/finish` .
+    - ユーザーの一時停止された DDL 操作が再開されます。
 
 ## Limitations {#limitations}
 
@@ -79,26 +79,26 @@ You can take the following steps to upgrade TiDB manually or by using a script:
 
 ### ユーザー操作の制限 {#limitations-on-user-operations}
 
--   アップグレードする前に、次の制限を考慮してください。
+- アップグレードする前に、次の制限を考慮してください。
 
-    -   クラスタ内にキャンセル中のDDLジョブがある場合、つまり実行中のDDLジョブがユーザーによってキャンセルされている場合、キャンセル中のジョブは一時停止できないため、TiDBはジョブのキャンセルを再試行します。再試行が失敗した場合はエラーが報告され、アップグレードは終了します。
-    -   現在ご使用の TiDB バージョンが v8.1.0 より前で、TiDB Distributed eXecution Framework (DXF) が有効になっている場合は、 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)を`OFF`に設定して無効にしてください。実行中の分散タスク`ADD INDEX`と`IMPORT INTO`すべて完了していることを確認してください。または、これらのタスクをキャンセルし、アップグレードが完了するまで待ってから再開することもできます。そうしないと、アップグレード中の`ADD INDEX`操作によってデータインデックスの不整合が発生する可能性があります。現在ご使用の TiDB バージョンが v8.1.0 以降の場合は、DXF を無効にする必要はなく、この制限は無視してかまいません。
+    - クラスタ内にキャンセル中のDDLジョブがある場合、つまり実行中のDDLジョブがユーザーによってキャンセルされている場合、キャンセル中のジョブは一時停止できないため、TiDBはジョブのキャンセルを再試行します。再試行が失敗した場合はエラーが報告され、アップグレードは終了します。
+    - 現在ご使用の TiDB バージョンが v8.1.0 より前で、TiDB Distributed eXecution Framework (DXF) が有効になっている場合は、 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)を`OFF`に設定して無効にしてください。実行中の分散タスク`ADD INDEX`と`IMPORT INTO`すべて完了していることを確認してください。または、これらのタスクをキャンセルし、アップグレードが完了するまで待ってから再開することもできます。そうしないと、アップグレード中の`ADD INDEX`操作によってデータインデックスの不整合が発生する可能性があります。現在ご使用の TiDB バージョンが v8.1.0 以降の場合は、DXF を無効にする必要はなく、この制限は無視してかまいません。
 
--   TiUPを使用して TiDB をアップグレードするシナリオでは、 TiUPアップグレードにはタイムアウト期間があるため、アップグレード前にクラスターのキューで待機している DDL ジョブが多数 (300 を超える) ある場合、アップグレードが失敗する可能性があります。
+- TiUPを使用して TiDB をアップグレードするシナリオでは、 TiUPアップグレードにはタイムアウト期間があるため、アップグレード前にクラスターのキューで待機している DDL ジョブが多数 (300 を超える) ある場合、アップグレードが失敗する可能性があります。
 
--   アップグレード中は、次の操作は許可されません。
+- アップグレード中は、次の操作は許可されません。
 
-    -   システムテーブル ( `mysql.*` 、 `information_schema.*` 、 `performance_schema.*` 、および`metrics_schema.*` ) に対して DDL 操作を実行します。
-    -   DDL ジョブを手動でキャンセルします: `ADMIN CANCEL DDL JOBS job_id [, job_id] ...;` .
-    -   データをインポートします。
+    - システムテーブル ( `mysql.*` 、 `information_schema.*` 、 `performance_schema.*` 、および`metrics_schema.*` ) に対して DDL 操作を実行します。
+    - DDL ジョブを手動でキャンセルします: `ADMIN CANCEL DDL JOBS job_id [, job_id] ...;` .
+    - データをインポートします。
 
 ### ツールの制限 {#limitations-on-tools}
 
--   アップグレード中は、次のツールの使用はサポートされません。
+- アップグレード中は、次のツールの使用はサポートされません。
 
-    -   BR: BRは一時停止中のDDLジョブをTiDBに複製する可能性があります。一時停止中のDDLジョブは自動的に再開できないため、後でDDLジョブが停止する可能性があります。
+    - BR: BRは一時停止中のDDLジョブをTiDBに複製する可能性があります。一時停止中のDDLジョブは自動的に再開できないため、後でDDLジョブが停止する可能性があります。
 
-    -   DM および TiCDC: アップグレードプロセス中に DM または TiCDC を使用して SQL ステートメントを TiDB にインポートする場合、SQL ステートメントの 1 つに DDL 操作が含まれていると、インポート操作がブロックされ、未定義のエラーが発生する可能性があります。
+    - DM および TiCDC: アップグレードプロセス中に DM または TiCDC を使用して SQL ステートメントを TiDB にインポートする場合、SQL ステートメントの 1 つに DDL 操作が含まれていると、インポート操作がブロックされ、未定義のエラーが発生する可能性があります。
 
 ### プラグインの制限 {#limitation-on-plugins}
 

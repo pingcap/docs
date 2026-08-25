@@ -20,13 +20,13 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-huggingface/']
 
 ## 多言語対応E5ラージ {#multilingual-e5-large}
 
--   名前: `huggingface/intfloat/multilingual-e5-large`
--   寸法: 1024
--   距離指標：コサイン類似度、L2
--   価格：Hugging Faceによる課金
--   TiDB Cloudでホストされています: ❌
--   鍵をご持参ください：✅
--   プロジェクトホームページ： [https://huggingface.co/intfloat/multilingual-e5-large](https://huggingface.co/intfloat/multilingual-e5-large)
+- 名前: `huggingface/intfloat/multilingual-e5-large`
+- 寸法: 1024
+- 距離指標：コサイン類似度、L2
+- 価格：Hugging Faceによる課金
+- TiDB Cloudでホストされています: ❌
+- 鍵をご持参ください：✅
+- プロジェクトホームページ： [https://huggingface.co/intfloat/multilingual-e5-large](https://huggingface.co/intfloat/multilingual-e5-large)
 
 例：
 
@@ -64,13 +64,13 @@ LIMIT 2;
 
 ## bge-m3 {#bge-m3}
 
--   名前: `huggingface/BAAI/bge-m3`
--   寸法: 1024
--   距離指標：コサイン類似度、L2
--   価格：Hugging Faceによる課金
--   TiDB Cloudでホストされています: ❌
--   鍵をご持参ください：✅
--   プロジェクトホームページ： [https://huggingface.co/BAAI/bge-m3](https://huggingface.co/BAAI/bge-m3)
+- 名前: `huggingface/BAAI/bge-m3`
+- 寸法: 1024
+- 距離指標：コサイン類似度、L2
+- 価格：Hugging Faceによる課金
+- TiDB Cloudでホストされています: ❌
+- 鍵をご持参ください：✅
+- プロジェクトホームページ： [https://huggingface.co/BAAI/bge-m3](https://huggingface.co/BAAI/bge-m3)
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_HUGGINGFACE_API_KEY = 'your-huggingface-api-key-here';
@@ -106,13 +106,13 @@ LIMIT 2;
 
 ## all-MiniLM-L6-v2 {#all-minilm-l6-v2}
 
--   名前: `huggingface/sentence-transformers/all-MiniLM-L6-v2`
--   寸法: 384
--   距離指標：コサイン類似度、L2
--   価格：Hugging Faceによる課金
--   TiDB Cloudでホストされています: ❌
--   鍵をご持参ください：✅
--   プロジェクトホームページ： [https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
+- 名前: `huggingface/sentence-transformers/all-MiniLM-L6-v2`
+- 寸法: 384
+- 距離指標：コサイン類似度、L2
+- 価格：Hugging Faceによる課金
+- TiDB Cloudでホストされています: ❌
+- 鍵をご持参ください：✅
+- プロジェクトホームページ： [https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
 
 例：
 
@@ -150,13 +150,13 @@ LIMIT 2;
 
 ## all-mpnet-base-v2 {#all-mpnet-base-v2}
 
--   名前: `huggingface/sentence-transformers/all-mpnet-base-v2`
--   寸法: 768
--   距離指標：コサイン類似度、L2
--   価格：Hugging Faceによる課金
--   TiDB Cloudでホストされています: ❌
--   鍵をご持参ください：✅
--   プロジェクトホームページ： [https://huggingface.co/sentence-transformers/all-mpnet-base-v2](https://huggingface.co/sentence-transformers/all-mpnet-base-v2)
+- 名前: `huggingface/sentence-transformers/all-mpnet-base-v2`
+- 寸法: 768
+- 距離指標：コサイン類似度、L2
+- 価格：Hugging Faceによる課金
+- TiDB Cloudでホストされています: ❌
+- 鍵をご持参ください：✅
+- プロジェクトホームページ： [https://huggingface.co/sentence-transformers/all-mpnet-base-v2](https://huggingface.co/sentence-transformers/all-mpnet-base-v2)
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_HUGGINGFACE_API_KEY = 'your-huggingface-api-key-here';
@@ -196,14 +196,14 @@ LIMIT 2;
 >
 > このモデルでは、Hugging Face Inference APIが不安定になる可能性があります。
 
--   名前: `huggingface/Qwen/Qwen3-Embedding-0.6B`
--   寸法: 1024
--   距離指標：コサイン類似度、L2
--   入力可能なテキストトークンの最大数：512
--   価格：Hugging Faceによる課金
--   TiDB Cloudでホストされています: ❌
--   鍵をご持参ください：✅
--   プロジェクトホームページ： [https://huggingface.co/Qwen/Qwen3-Embedding-0.6B](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B)
+- 名前: `huggingface/Qwen/Qwen3-Embedding-0.6B`
+- 寸法: 1024
+- 距離指標：コサイン類似度、L2
+- 入力可能なテキストトークンの最大数：512
+- 価格：Hugging Faceによる課金
+- TiDB Cloudでホストされています: ❌
+- 鍵をご持参ください：✅
+- プロジェクトホームページ： [https://huggingface.co/Qwen/Qwen3-Embedding-0.6B](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B)
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_HUGGINGFACE_API_KEY = 'your-huggingface-api-key-here';
@@ -323,7 +323,7 @@ for doc in results:
 
 ## 関連項目 {#see-also}
 
--   [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
--   [ベクトル検索](/ai/concepts/vector-search-overview.md)
--   [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
--   [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)
+- [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
+- [ベクトル検索](/ai/concepts/vector-search-overview.md)
+- [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
+- [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)

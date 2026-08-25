@@ -104,5 +104,5 @@ TiDBにおける`SHOW COLLATION`文の使用法はMySQLと完全に互換性が�
 
 ## 参照 {#see-also}
 
--   [SHOW CHARACTER SET](/sql-statements/sql-statement-show-character-set.md)
--   [文字セットと照合順序](/character-set-and-collation.md)
+- [SHOW CHARACTER SET](/sql-statements/sql-statement-show-character-set.md)
+- [文字セットと照合順序](/character-set-and-collation.md)

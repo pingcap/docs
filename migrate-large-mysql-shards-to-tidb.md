@@ -15,25 +15,25 @@ MySQL シャードのデータサイズが 1 TiB 未満の場合は、[小規模
 
 このドキュメントでは、以下の手順に従ってデータを移行する方法を説明します。
 
-1.  Dumplingを使用して完全なデータをエクスポートします。この例では、2つの上流データベースからそれぞれ2つのテーブルをエクスポートします。
+1. Dumplingを使用して完全なデータをエクスポートします。この例では、2つの上流データベースからそれぞれ2つのテーブルをエクスポートします。
 
-    -   `table1`から`table2`と`my_db1`をエクスポートします。
-    -   `table3`から`table4`と`my_db2`をエクスポートします。
+    - `table1`から`table2`と`my_db1`をエクスポートします。
+    - `table3`から`table4`と`my_db2`をエクスポートします。
 
-2.  TiDB Lightning を起動して、データを TiDB の`mydb.table5`に移行します。
+2. TiDB Lightning を起動して、データを TiDB の`mydb.table5`に移行します。
 
-3.  （オプション）TiDB DMを使用して増分レプリケーションを実行します。
+3. （オプション）TiDB DMを使用して増分レプリケーションを実行します。
 
 ## 前提条件 {#prerequisites}
 
 作業を開始する前に、移行作業の準備として以下のドキュメントを参照してください。
 
--   [TiUPを使用してDMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)
--   [TiUPを使用してDumplingとライトニングをデプロイ](/migration-tools.md)
--   [Dumplingに必要なターゲットデータベース権限](/dumpling-overview.md#export-data-from-tidb-or-mysql)
--   [TiDB Lightningに必要なターゲットデータベース権限](/tidb-lightning/tidb-lightning-requirements.md)
--   [TiDB Lightningのダウンストリームストレージスペース](/tidb-lightning/tidb-lightning-requirements.md)
--   [DMワーカーに必要な権限](/dm/dm-worker-intro.md)
+- [TiUPを使用してDMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)
+- [TiUPを使用してDumplingとライトニングをデプロイ](/migration-tools.md)
+- [Dumplingに必要なターゲットデータベース権限](/dumpling-overview.md#export-data-from-tidb-or-mysql)
+- [TiDB Lightningに必要なターゲットデータベース権限](/tidb-lightning/tidb-lightning-requirements.md)
+- [TiDB Lightningのダウンストリームストレージスペース](/tidb-lightning/tidb-lightning-requirements.md)
+- [DMワーカーに必要な権限](/dm/dm-worker-intro.md)
 
 ### シャーディングされたテーブルの競合をチェックする {#check-conflicts-for-sharded-tables}
 
@@ -118,9 +118,9 @@ TiDB Lightningによる移行を開始する前に、チェックポイントの
 
 TiDB Lightningタスクが回復不能なエラー（データ破損など）によりクラッシュした場合、チェックポイントから再開せず、エラーを報告してタスクを終了します。インポートされたデータの安全性を確保するため、他の手順に進む前に`tidb-lightning-ctl`コマンドを使用してこれらのエラーを解決する必要があります。オプションは次のとおりです。
 
--   --checkpoint-error-destroy: このオプションを使用すると、失敗したターゲットテーブルへのデータインポートを最初からやり直すことができます。そのためには、まずそれらのテーブル内の既存のデータをすべて削除する必要があります。
--   --checkpoint-error-ignore: マイグレーションが失敗した場合、このオプションはエラーが発生しなかったかのようにエラー状態をクリアします。
--   --checkpoint-remove: このオプションは、エラーの有無に関わらず、すべてのチェックポイントを削除します。
+- --checkpoint-error-destroy: このオプションを使用すると、失敗したターゲットテーブルへのデータインポートを最初からやり直すことができます。そのためには、まずそれらのテーブル内の既存のデータをすべて削除する必要があります。
+- --checkpoint-error-ignore: マイグレーションが失敗した場合、このオプションはエラーが発生しなかったかのようにエラー状態をクリアします。
+- --checkpoint-remove: このオプションは、エラーの有無に関わらず、すべてのチェックポイントを削除します。
 
 詳細については、 [TiDB Lightningチェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)を参照してください。
 
@@ -143,7 +143,7 @@ CREATE TABLE `table5` (
 
 `tidb-lightning`を開始するには、以下の手順に従ってください。
 
-1.  toml ファイルを編集します。次の例では`tidb-lightning.toml`が使用されています。
+1. toml ファイルを編集します。次の例では`tidb-lightning.toml`が使用されています。
 
     ```toml
     [lightning]
@@ -193,7 +193,7 @@ CREATE TABLE `table5` (
     pd-addr = "${ip}:${port}"
     ```
 
-2.  `tidb-lightning`を実行します。シェルでプログラム名を直接呼び出してプログラムを実行すると、SIGHUP シグナルを受信した後にプロセスが予期せず終了する可能性があります。 `nohup` 、 `screen` 、 `tiup`などのツールを使用してプログラムを実行し、プロセスをシェルのバックグラウンドで実行することをお勧めします。S3 から移行する場合は、Amazon S3 バックエンド ストアにアクセスできるアカウントの SecretKey と AccessKey を環境変数として Lightning ノードに渡す必要があります。 `~/.aws/credentials`からの認証情報ファイルの読み取りもサポートされています。例:
+2. `tidb-lightning`を実行します。シェルでプログラム名を直接呼び出してプログラムを実行すると、SIGHUP シグナルを受信した後にプロセスが予期せず終了する可能性があります。 `nohup` 、 `screen` 、 `tiup`などのツールを使用してプログラムを実行し、プロセスをシェルのバックグラウンドで実行することをお勧めします。S3 から移行する場合は、Amazon S3 バックエンド ストアにアクセスできるアカウントの SecretKey と AccessKey を環境変数として Lightning ノードに渡す必要があります。 `~/.aws/credentials`からの認証情報ファイルの読み取りもサポートされています。例:
 
     ```shell
     export AWS_ACCESS_KEY_ID=${access_key}
@@ -201,10 +201,10 @@ CREATE TABLE `table5` (
     nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
     ```
 
-3.  移行タスクを開始した後、以下のいずれかの方法で進捗状況を確認できます。
+3. 移行タスクを開始した後、以下のいずれかの方法で進捗状況を確認できます。
 
-    -   `grep`ツールを使用して、ログファイル内でキーワード`progress`を検索してください。デフォルトでは、進行状況を報告するメッセージが5分ごとにログファイルに書き込まれます。
-    -   監視ダッシュボードから進捗状況を確認します。詳細については、 [TiDB Lightningモニタリング](/tidb-lightning/monitor-tidb-lightning.md)を参照してください。
+    - `grep`ツールを使用して、ログファイル内でキーワード`progress`を検索してください。デフォルトでは、進行状況を報告するメッセージが5分ごとにログファイルに書き込まれます。
+    - 監視ダッシュボードから進捗状況を確認します。詳細については、 [TiDB Lightningモニタリング](/tidb-lightning/monitor-tidb-lightning.md)を参照してください。
 
 TiDB Lightning はインポートが完了すると自動的に終了します。`tidb-lightning.log`の最後の行に`the whole procedure completed`が含まれているかどうかを確認してください。含まれている場合はインポートが成功しています。含まれていない場合は、インポート中にエラーが発生しました。エラーメッセージの指示に従ってエラーに対処してください。
 
@@ -357,25 +357,25 @@ tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 
 移行タスクの履歴や内部運用指標は、Grafanaまたはログを通じて確認できます。
 
--   Grafana経由
+- Grafana経由
 
     TiUPを使用してDMクラスタをデプロイする際に、Prometheus、Alertmanager、およびGrafanaが正しくデプロイされていれば、GrafanaでDMの監視メトリクスを表示できます。具体的には、デプロイ時に指定したIPアドレスとポートをGrafanaに入力し、DMダッシュボードを選択してください。
 
--   ログ経由
+- ログ経由
 
     DMが実行されている場合、DM-master、DM-worker、およびdmctlは、移行タスクに関する情報を含むログを出力します。各コンポーネントのログディレクトリは以下のとおりです。
 
-    -   DM-master ログディレクトリ: これは、DM-master コマンドラインパラメータ`--log-file`で指定されます。DM がTiUPを使用してデプロイされている場合、ログディレクトリは`/dm-deploy/dm-master-8261/log/`です。
-    -   DM-worker のログディレクトリ: これは、DM-worker コマンドラインパラメータ`--log-file`で指定されます。DM がTiUPを使用してデプロイされている場合、ログディレクトリは`/dm-deploy/dm-worker-8262/log/`です。
+    - DM-master ログディレクトリ: これは、DM-master コマンドラインパラメータ`--log-file`で指定されます。DM がTiUPを使用してデプロイされている場合、ログディレクトリは`/dm-deploy/dm-master-8261/log/`です。
+    - DM-worker のログディレクトリ: これは、DM-worker コマンドラインパラメータ`--log-file`で指定されます。DM がTiUPを使用してデプロイされている場合、ログディレクトリは`/dm-deploy/dm-worker-8262/log/`です。
 
 ## 関連項目 {#see-also}
 
--   [Dumpling](/dumpling-overview.md)
--   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)
--   [悲観的モードと楽観的モード](/dm/feature-shard-merge.md)
--   [データ移行タスクを一時停止する](/dm/dm-pause-task.md)
--   [データ移行タスクを再開する](/dm/dm-resume-task.md)
--   [データ移行タスクを停止する](/dm/dm-stop-task.md)
--   [クラスターのデータソースのエクスポートとインポート、およびタスクコンフィグレーション](/dm/dm-export-import-config.md)
--   [失敗したDDLステートメントを処理する](/dm/handle-failed-ddl-statements.md)
--   [エラーを処理する](/dm/dm-error-handling.md)
+- [Dumpling](/dumpling-overview.md)
+- [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)
+- [悲観的モードと楽観的モード](/dm/feature-shard-merge.md)
+- [データ移行タスクを一時停止する](/dm/dm-pause-task.md)
+- [データ移行タスクを再開する](/dm/dm-resume-task.md)
+- [データ移行タスクを停止する](/dm/dm-stop-task.md)
+- [クラスターのデータソースのエクスポートとインポート、およびタスクコンフィグレーション](/dm/dm-export-import-config.md)
+- [失敗したDDLステートメントを処理する](/dm/handle-failed-ddl-statements.md)
+- [エラーを処理する](/dm/dm-error-handling.md)

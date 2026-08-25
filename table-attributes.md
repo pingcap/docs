@@ -27,31 +27,31 @@ summary: TiDB のテーブル属性機能の使用方法を学習します。
 
 テーブル属性は`key=value`の形式です。複数の属性はカンマで区切られます。以下の例では、 `t`変更するテーブル名、 `p`変更するパーティション名です。 `[]`の項目はオプションです。
 
--   テーブルまたはパーティションの属性を設定します。
+- テーブルまたはパーティションの属性を設定します。
 
     ```sql
     ALTER TABLE t [PARTITION p] ATTRIBUTES [=] 'key=value[, key1=value1...]';
     ```
 
--   テーブルまたはパーティションの属性をリセットします。
+- テーブルまたはパーティションの属性をリセットします。
 
     ```sql
     ALTER TABLE t [PARTITION p] ATTRIBUTES [=] DEFAULT;
     ```
 
--   すべてのテーブルとパーティションの属性を表示します。
+- すべてのテーブルとパーティションの属性を表示します。
 
     ```sql
     SELECT * FROM information_schema.attributes;
     ```
 
--   テーブルまたはパーティションに設定された属性を確認します。
+- テーブルまたはパーティションに設定された属性を確認します。
 
     ```sql
     SELECT * FROM information_schema.attributes WHERE id='schema/t[/p]';
     ```
 
--   特定の属性を持つすべてのテーブルとパーティションを表示します。
+- 特定の属性を持つすべてのテーブルとパーティションを表示します。
 
     ```sql
     SELECT * FROM information_schema.attributes WHERE attributes LIKE '%key%';
@@ -84,37 +84,37 @@ ALTER TABLE t PARTITION p ATTRIBUTES[=]'key=value1';
 
 ### 使用法 {#usage}
 
--   テーブルのリージョンが結合されないようにします。
+- テーブルのリージョンが結合されないようにします。
 
     ```sql
     ALTER TABLE t ATTRIBUTES 'merge_option=deny';
     ```
 
--   テーブルに属するリージョンの結合を許可します。
+- テーブルに属するリージョンの結合を許可します。
 
     ```sql
     ALTER TABLE t ATTRIBUTES 'merge_option=allow';
     ```
 
--   テーブルの属性をリセットします。
+- テーブルの属性をリセットします。
 
     ```sql
     ALTER TABLE t ATTRIBUTES DEFAULT;
     ```
 
--   パーティションのリージョンが結合されるのを防ぎます。
+- パーティションのリージョンが結合されるのを防ぎます。
 
     ```sql
     ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=deny';
     ```
 
--   パーティションに属するリージョンの結合を許可します。
+- パーティションに属するリージョンの結合を許可します。
 
     ```sql
     ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=allow';
     ```
 
--   `merge_option`属性が構成されているすべてのテーブルまたはパーティションを表示します。
+- `merge_option`属性が構成されているすべてのテーブルまたはパーティションを表示します。
 
     ```sql
     SELECT * FROM information_schema.attributes WHERE attributes LIKE '%merge_option%';
@@ -133,8 +133,8 @@ ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=allow';
 
 > **Note:**
 >
-> -   パーティションを持つテーブルの場合、 `merge_option`属性がテーブルレベルでのみ設定されている場合、 `merge_option=allow`であっても、テーブルはデフォルトで実際のパーティション数に応じて複数のリージョンに分割されます。すべてのリージョンをマージするには、 [テーブルの属性をリセットする](#usage)を実行する必要があります。
-> -   `merge_option`属性を使用する場合は、PD設定パラメータ[`split-merge-interval`](/pd-configuration-file.md#split-merge-interval)に注意する必要があります。`merge_option`属性が設定されていない場合、リージョンが条件を満たしている場合、 `split-merge-interval`で指定された間隔後にリージョンをマージできます`merge_option`属性が設定されている場合、PDは`merge_option`設定に基づいて、指定された間隔後にリージョンをマージするかどうかを決定します。
+> - パーティションを持つテーブルの場合、 `merge_option`属性がテーブルレベルでのみ設定されている場合、 `merge_option=allow`であっても、テーブルはデフォルトで実際のパーティション数に応じて複数のリージョンに分割されます。すべてのリージョンをマージするには、 [テーブルの属性をリセットする](#usage)を実行する必要があります。
+> - `merge_option`属性を使用する場合は、PD設定パラメータ[`split-merge-interval`](/pd-configuration-file.md#split-merge-interval)に注意する必要があります。`merge_option`属性が設定されていない場合、リージョンが条件を満たしている場合、 `split-merge-interval`で指定された間隔後にリージョンをマージできます`merge_option`属性が設定されている場合、PDは`merge_option`設定に基づいて、指定された間隔後にリージョンをマージするかどうかを決定します。
 
 </CustomContent>
 
@@ -142,7 +142,7 @@ ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=allow';
 
 > **Note:**
 >
-> -   パーティションを持つテーブルの場合、 `merge_option`属性がテーブルレベルでのみ設定されている場合、 `merge_option=allow`であっても、テーブルはデフォルトで実際のパーティション数に応じて複数のリージョンに分割されます。すべてのリージョンをマージするには、 [テーブルの属性をリセットする](#usage)を実行する必要があります。
-> -   `merge_option`の属性が設定されていない場合、リージョンが条件を満たしていれば、1時間後にリージョンを統合できます。`merge_option`属性が設定されている場合、PDは`merge_option`設定に基づいて、1時間後にリージョンを統合するかどうかを決定します。
+> - パーティションを持つテーブルの場合、 `merge_option`属性がテーブルレベルでのみ設定されている場合、 `merge_option=allow`であっても、テーブルはデフォルトで実際のパーティション数に応じて複数のリージョンに分割されます。すべてのリージョンをマージするには、 [テーブルの属性をリセットする](#usage)を実行する必要があります。
+> - `merge_option`の属性が設定されていない場合、リージョンが条件を満たしていれば、1時間後にリージョンを統合できます。`merge_option`属性が設定されている場合、PDは`merge_option`設定に基づいて、1時間後にリージョンを統合するかどうかを決定します。
 
 </CustomContent>

@@ -28,13 +28,13 @@ SQL を試して、MySQL クエリと TiDB の互換性をテストするには�
 
 SQLは、その関数に応じて以下の4種類に分類されます。
 
--   **DDL（データ定義言語）** ：データベース、テーブル、ビュー、インデックスなどのデータベースオブジェクトを定義するために使用されます。
+- **DDL（データ定義言語）** ：データベース、テーブル、ビュー、インデックスなどのデータベースオブジェクトを定義するために使用されます。
 
--   **DML（データ操作言語）** ：アプリケーション関連のレコードを操作するために使用されます。
+- **DML（データ操作言語）** ：アプリケーション関連のレコードを操作するために使用されます。
 
--   **DQL（データクエリ言語）** ：条件付きフィルタリング後にレコードをクエリするために使用されます。
+- **DQL（データクエリ言語）** ：条件付きフィルタリング後にレコードをクエリするために使用されます。
 
--   **DCL（データ制御言語）** ：アクセス権限とセキュリティレベルを定義するために使用されます。
+- **DCL（データ制御言語）** ：アクセス権限とセキュリティレベルを定義するために使用されます。
 
 以下では主にDMLとDQLについて紹介します。 DDL と DCL の詳細については、 [TiDBでSQLを探求しよう](/basic-sql-operations.md)または[SQL Statement Overview](/sql-statements/sql-statement-overview.md)を参照してください。
 
@@ -105,6 +105,6 @@ SELECT * FROM person WHERE id < 5;
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
--   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

@@ -9,15 +9,15 @@ summary: Lightning とアーキテクチャ全体について学びます。
 
 TiDB Lightning は次のファイル形式をサポートしています。
 
--   [Dumpling](/dumpling-overview.md)によってエクスポートされたファイル
--   CSVファイル
--   [Amazon Auroraによって生成された Apache Parquet ファイル](/migrate-aurora-to-tidb.md) 、Apache Hive、またはSnowflake
+- [Dumpling](/dumpling-overview.md)によってエクスポートされたファイル
+- CSVファイル
+- [Amazon Auroraによって生成された Apache Parquet ファイル](/migrate-aurora-to-tidb.md) 、Apache Hive、またはSnowflake
 
 TiDB Lightning は次のソースからデータを読み取ることができます。
 
--   ローカル
--   [Amazon S3](/external-storage-uri.md#amazon-s3-uri-format)
--   [Google Cloud Storage](/external-storage-uri.md#gcs-uri-format)
+- ローカル
+- [Amazon S3](/external-storage-uri.md#amazon-s3-uri-format)
+- [Google Cloud Storage](/external-storage-uri.md#gcs-uri-format)
 
 > **Note:**
 >
@@ -29,9 +29,9 @@ TiDB Lightning は次のソースからデータを読み取ることができ�
 
 TiDB Lightning は、 `backend`で設定された 2 つのインポートモードをサポートしています。インポートモードによって、TiDB へのデータのインポート方法が決まります。
 
--   [物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md) : TiDB Lightningは、まずデータをキーと値のペアにエンコードし、ローカルの一時ディレクトリに保存します。次に、これらのキーと値のペアを各TiKVノードにアップロードし、最後にTiKV 取り込みインターフェースを呼び出してTiKVのRocksDBにデータを挿入します。初期インポートを実行する必要がある場合は、インポート速度が速い物理インポートモードを検討してください。物理インポートモードのバックエンドは`local`です。
+- [物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md) : TiDB Lightningは、まずデータをキーと値のペアにエンコードし、ローカルの一時ディレクトリに保存します。次に、これらのキーと値のペアを各TiKVノードにアップロードし、最後にTiKV 取り込みインターフェースを呼び出してTiKVのRocksDBにデータを挿入します。初期インポートを実行する必要がある場合は、インポート速度が速い物理インポートモードを検討してください。物理インポートモードのバックエンドは`local`です。
 
--   [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md) : TiDB Lightning はまずデータをSQL文にエンコードし、その後、これらのSQL文を直接実行してデータをインポートします。インポート対象のクラスターが本番の場合、またはインポート対象のテーブルに既にデータが含まれている場合は、論理インポートモードを使用してください。論理インポートモードのバックエンドは`tidb`です。
+- [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md) : TiDB Lightning はまずデータをSQL文にエンコードし、その後、これらのSQL文を直接実行してデータをインポートします。インポート対象のクラスターが本番の場合、またはインポート対象のテーブルに既にデータが含まれている場合は、論理インポートモードを使用してください。論理インポートモードのバックエンドは`tidb`です。
 
 | インポートモード                       | 物理インポートモード                                                                   | 論理インポートモード      |
 | :----------------------------- | :--------------------------------------------------------------------------- | :-------------- |

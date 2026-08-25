@@ -17,9 +17,9 @@ RELEASE SAVEPOINT identifier
 >
 > [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)無効になっている場合、悲観的トランザクションで`SAVEPOINT`を使用することはできません。
 
--   `SAVEPOINT` 、現在のトランザクションに指定された名前のセーブポイントを設定するために使用されます。同じ名前のセーブポイントが既に存在する場合、それは削除され、同じ名前の新しいセーブポイントが設定されます。
+- `SAVEPOINT` 、現在のトランザクションに指定された名前のセーブポイントを設定するために使用されます。同じ名前のセーブポイントが既に存在する場合、それは削除され、同じ名前の新しいセーブポイントが設定されます。
 
--   `ROLLBACK TO SAVEPOINT` 、指定された名前のセーブポイントまでトランザクションをロールバックしますが、トランザクション自体は終了しません。セーブポイント以降にテーブルデータに加えられたデータ変更はロールバック時に元に戻され、セーブポイント以降のすべてのセーブポイントは削除されます。悲観的トランザクションでは、トランザクションによって保持されているロックはロールバックされません。代わりに、トランザクション終了時にロックが解放されます。
+- `ROLLBACK TO SAVEPOINT` 、指定された名前のセーブポイントまでトランザクションをロールバックしますが、トランザクション自体は終了しません。セーブポイント以降にテーブルデータに加えられたデータ変更はロールバック時に元に戻され、セーブポイント以降のすべてのセーブポイントは削除されます。悲観的トランザクションでは、トランザクションによって保持されているロックはロールバックされません。代わりに、トランザクション終了時にロックが解放されます。
 
     `ROLLBACK TO SAVEPOINT`のステートメントで指定されたセーブポイントが存在しない場合は、ステートメントは次のエラーを返します。
 
@@ -27,7 +27,7 @@ RELEASE SAVEPOINT identifier
     ERROR 1305 (42000): SAVEPOINT identifier does not exist
     ```
 
--   `RELEASE SAVEPOINT`文は、現在のトランザクションをコミットまたはロールバックせずに、指定されたセーブポイントとそれ以降の**すべてのセーブポイントを**現在のトランザクションから削除します。指定された名前のセーブポイントが存在しない場合は、次のエラーが返されます。
+- `RELEASE SAVEPOINT`文は、現在のトランザクションをコミットまたはロールバックせずに、指定されたセーブポイントとそれ以降の**すべてのセーブポイントを**現在のトランザクションから削除します。指定された名前のセーブポイントが存在しない場合は、次のエラーが返されます。
 
     ```
     ERROR 1305 (42000): SAVEPOINT identifier does not exist
@@ -157,8 +157,8 @@ TiDB は MySQL 構文`ROLLBACK WORK TO SAVEPOINT ...`サポートしていませ
 
 ## 参照 {#see-also}
 
--   [COMMIT](/sql-statements/sql-statement-commit.md)
--   [ROLLBACK](/sql-statements/sql-statement-rollback.md)
--   [START TRANSACTION](/sql-statements/sql-statement-start-transaction.md)
--   [TiDB 楽観的トランザクションモード](/optimistic-transaction.md)
--   [TiDB 悲観的トランザクションモード](/pessimistic-transaction.md)
+- [COMMIT](/sql-statements/sql-statement-commit.md)
+- [ROLLBACK](/sql-statements/sql-statement-rollback.md)
+- [START TRANSACTION](/sql-statements/sql-statement-start-transaction.md)
+- [TiDB 楽観的トランザクションモード](/optimistic-transaction.md)
+- [TiDB 悲観的トランザクションモード](/pessimistic-transaction.md)

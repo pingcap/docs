@@ -11,8 +11,8 @@ summary: tiup cluster renameコマンドは、デプロイ後にクラスター�
 >
 > TiUPクラスターの`dashboard_dir`フィールドが`grafana_servers`に設定されている場合、コマンド`tiup cluster rename`を実行してクラスターの名前を変更した後、次の追加手順が必要になります。
 >
-> -   ローカル ダッシュボード ディレクトリ内の`*.json`ファイルについては、各ファイルの`datasource`フィールドを新しいクラスター名に更新します。`datasource`の値はクラスターの名前である必要があるためです。
-> -   コマンド`tiup cluster reload -R grafana`を実行します。
+> - ローカル ダッシュボード ディレクトリ内の`*.json`ファイルについては、各ファイルの`datasource`フィールドを新しいクラスター名に更新します。`datasource`の値はクラスターの名前である必要があるためです。
+> - コマンド`tiup cluster reload -R grafana`を実行します。
 
 ## 構文 {#syntax}
 
@@ -20,16 +20,16 @@ summary: tiup cluster renameコマンドは、デプロイ後にクラスター�
 tiup cluster rename <old-cluster-name> <new-cluster-name> [flags]
 ```
 
--   `<old-cluster-name>` : 古いクラスター名。
--   `<new-cluster-name>` : 新しいクラスター名。
+- `<old-cluster-name>` : 古いクラスター名。
+- `<new-cluster-name>` : 新しいクラスター名。
 
 ## オプション {#options}
 
 ### -h, --help {#h-help}
 
--   ヘルプ情報を出力します。
--   データ型: `BOOLEAN`
--   このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- ヘルプ情報を出力します。
+- データ型: `BOOLEAN`
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
 
 ## 出力 {#outputs}
 

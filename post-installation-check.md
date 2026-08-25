@@ -23,19 +23,19 @@ tiup cluster display tidb-test
 
 ### TiDB Dashboardを使用する {#use-tidb-dashboard}
 
-1.  `${pd-ip}:${pd-port}/dashboard`で TiDB Dashboardにログインします。ユーザー名とパスワードは TiDB `root`ユーザーと同じです。`root`パスワードを変更した場合は、変更後のパスワードを入力してください。デフォルトではパスワードは空です。
+1. `${pd-ip}:${pd-port}/dashboard`で TiDB Dashboardにログインします。ユーザー名とパスワードは TiDB `root`ユーザーと同じです。`root`パスワードを変更した場合は、変更後のパスワードを入力してください。デフォルトではパスワードは空です。
 
     ![TiDB-Dashboard](/media/tiup/tidb-dashboard.png)
 
-2.  ホーム ページには、TiDB クラスター内のノード情報が表示されます。
+2. ホーム ページには、TiDB クラスター内のノード情報が表示されます。
 
     ![TiDB-Dashboard-status](/media/tiup/tidb-dashboard-status.png)
 
 ### Grafanaを使用する {#use-grafana}
 
-1.  `${Grafana-ip}:3000`でGrafanaモニタリングにログインします。デフォルトのユーザー名とパスワードはどちらも`admin`です。
+1. `${Grafana-ip}:3000`でGrafanaモニタリングにログインします。デフォルトのユーザー名とパスワードはどちらも`admin`です。
 
-2.  TiDB ポートの状態と負荷監視情報を確認するには、 **[概要]**をクリックします。
+2. TiDB ポートの状態と負荷監視情報を確認するには、 **[概要]**をクリックします。
 
     ![Grafana-overview](/media/tiup/grafana-overview.png)
 
@@ -69,7 +69,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 ### データベース操作 {#database-operations}
 
--   TiDB のバージョンを確認します。
+- TiDB のバージョンを確認します。
 
     ```sql
     select tidb_version()\G
@@ -91,7 +91,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     1 row in set (0.00 sec)
     ```
 
--   `pingcap`という名前のデータベースを作成します。
+- `pingcap`という名前のデータベースを作成します。
 
     ```sql
     create database pingcap;
@@ -115,7 +115,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     Database changed
     ```
 
--   `tab_tidb`という名前のテーブルを作成します。
+- `tab_tidb`という名前のテーブルを作成します。
 
     ```sql
     CREATE TABLE `tab_tidb` (
@@ -133,7 +133,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     Query OK, 0 rows affected (0.11 sec)
     ```
 
--   データを挿入:
+- データを挿入:
 
     ```sql
     insert into `tab_tidb` values (1,'TiDB',5,'TiDB-v5.0.0');
@@ -145,7 +145,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     Query OK, 1 row affected (0.03 sec)
     ```
 
--   `tab_tidb`のエントリを表示する:
+- `tab_tidb`のエントリを表示する:
 
     ```sql
     select * from tab_tidb;
@@ -162,7 +162,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     1 row in set (0.00 sec)
     ```
 
--   TiKV のストア状態、 `store_id` 、容量、および稼働時間を表示する。
+- TiKV のストア状態、 `store_id` 、容量、および稼働時間を表示する。
 
     ```sql
     select STORE_ID,ADDRESS,STORE_STATE,STORE_STATE_NAME,CAPACITY,AVAILABLE,UPTIME from INFORMATION_SCHEMA.TIKV_STORE_STATUS;
@@ -181,7 +181,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     3 rows in set (0.00 sec)
     ```
 
--   TiDB を終了します:
+- TiDB を終了します:
 
     ```sql
     exit

@@ -69,10 +69,10 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2);
 
 上記のクエリ結果から、TiDBがインデックス結合操作`IndexJoin_15`を使用してサブクエリを結合および変換していることがわかります。実行計画では、実行プロセスは次のようになります。
 
-1.  TiKV 側のインデックススキャン演算子`└─IndexFullScan_26` 、 `t2.t1_id`列の値を読み取ります。
-2.  `└─StreamAgg_34`演算子の一部のタスクは、TiKV 内の`t1_id`の値を重複排除します。
-3.  演算子`├─StreamAgg_44(Build)`のいくつかのタスクは、TiDB内の`t1_id`値を重複排除します。重複排除は集計関数`firstrow(test.t2.t1_id)`によって実行されます。
-4.  演算結果はテーブル`t1`の主キーと結合されます。結合条件は`eq(test.t1.id, test.t2.t1_id)`です。
+1. TiKV 側のインデックススキャン演算子`└─IndexFullScan_26` 、 `t2.t1_id`列の値を読み取ります。
+2. `└─StreamAgg_34`演算子の一部のタスクは、TiKV 内の`t1_id`の値を重複排除します。
+3. 演算子`├─StreamAgg_44(Build)`のいくつかのタスクは、TiDB内の`t1_id`値を重複排除します。重複排除は集計関数`firstrow(test.t2.t1_id)`によって実行されます。
+4. 演算結果はテーブル`t1`の主キーと結合されます。結合条件は`eq(test.t1.id, test.t2.t1_id)`です。
 
 ## 内部結合（一意のサブクエリ） {#inner-join-unique-subquery}
 
@@ -204,13 +204,13 @@ tidb> EXPLAIN SELECT * FROM t WHERE (a,b) IN (SELECT * FROM s);
 
 TiDB v6.3.0 は、null 認識アンチ結合 (NAAJ) を次のように最適化します。
 
--   null 対応等価条件 (NA-EQ) を使用してハッシュ結合を構築する
+- null 対応等価条件 (NA-EQ) を使用してハッシュ結合を構築する
 
     集合演算子は等価条件を導入します。この条件では、条件の両側の演算子の`NULL`値に対して特別な処理が必要です。null対応を必要とする等価条件はNA-EQと呼ばれます。以前のバージョンとは異なり、TiDB v6.3.0ではNA-EQを以前のように処理せず、結合後の他の条件にNA-EQを配置し、直積を照合した後に結果セットの正当性を判定します。
 
     TiDB v6.3.0以降、ハッシュ結合の構築には、弱められた等価条件であるNA-EQが引き続き使用されます。これにより、走査が必要なマッチングデータ量が削減され、マッチング処理が高速化されます。構築テーブルにおける`DISTINCT()`値の合計割合がほぼ100%の場合、加速効果はさらに顕著になります。
 
--   `NULL`の特別なプロパティを使用して、一致する結果を返す速度を向上します。
+- `NULL`の特別なプロパティを使用して、一致する結果を返す速度を向上します。
 
     反準結合は連言正規形（CNF）であるため、結合のどちらかの側に`NULL`があれば、結果は確定的になります。この特性を利用することで、マッチング処理全体の戻り値を高速化できます。
 
@@ -261,10 +261,10 @@ tidb> EXPLAIN SELECT * FROM t WHERE (a, b) NOT IN (SELECT * FROM s);
 
 ## 他の種類のサブクエリを使用してステートメントを説明する {#explain-statements-using-other-types-of-subqueries}
 
--   [MPPモードでステートメントを説明する](/explain-mpp.md)
--   [インデックスを使用するステートメントを説明する](/explain-indexes.md)
--   [テーブル結合を使用する文を説明する](/explain-joins.md)
--   [集計を使用するステートメントを説明する](/explain-aggregation.md)
--   [ビューを使用してステートメントを説明する](/explain-views.md)
--   [パーティションを使用したステートメントの説明](/explain-partitions.md)
--   [インデックスマージを使用したステートメントの説明](/explain-index-merge.md)
+- [MPPモードでステートメントを説明する](/explain-mpp.md)
+- [インデックスを使用するステートメントを説明する](/explain-indexes.md)
+- [テーブル結合を使用する文を説明する](/explain-joins.md)
+- [集計を使用するステートメントを説明する](/explain-aggregation.md)
+- [ビューを使用してステートメントを説明する](/explain-views.md)
+- [パーティションを使用したステートメントの説明](/explain-partitions.md)
+- [インデックスマージを使用したステートメントの説明](/explain-index-merge.md)

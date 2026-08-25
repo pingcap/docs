@@ -13,7 +13,7 @@ TiDB v7.6.0 では、テーブル作成の高速化をサポートするシス�
 
 ## TiDBツールとの互換性 {#compatibility-with-tidb-tools}
 
--   TiDB v8.3.0より前のバージョンでは、 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) `tidb_enable_fast_create_table`によって作成されたテーブルのレプリケーションをサポートしていませんでした。v8.3.0以降では、TiCDCはこれらのテーブルを適切にレプリケーションできます。
+- TiDB v8.3.0より前のバージョンでは、 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) `tidb_enable_fast_create_table`によって作成されたテーブルのレプリケーションをサポートしていませんでした。v8.3.0以降では、TiCDCはこれらのテーブルを適切にレプリケーションできます。
 
 ## 制限 {#limitation}
 

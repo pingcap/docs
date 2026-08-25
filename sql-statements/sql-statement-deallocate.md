@@ -51,5 +51,5 @@ TiDBの`DEALLOCATE`文はMySQLと完全に互換性があります。互換性�
 
 ## 参照 {#see-also}
 
--   [PREPARE](/sql-statements/sql-statement-prepare.md)
--   [EXECUTE](/sql-statements/sql-statement-execute.md)
+- [PREPARE](/sql-statements/sql-statement-prepare.md)
+- [EXECUTE](/sql-statements/sql-statement-execute.md)

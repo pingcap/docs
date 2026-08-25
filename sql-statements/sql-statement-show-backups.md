@@ -102,5 +102,5 @@ SHOW BACKUPS WHERE `Progress` < 25.0;
 
 ## 参照 {#see-also}
 
--   [BACKUP](/sql-statements/sql-statement-backup.md)
--   [RESTORE](/sql-statements/sql-statement-restore.md)
+- [BACKUP](/sql-statements/sql-statement-backup.md)
+- [RESTORE](/sql-statements/sql-statement-restore.md)

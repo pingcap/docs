@@ -13,41 +13,41 @@ TiDB Cloud Starter クラスターを MCPサーバーとして構成すると、
 
 このガイドを完了するには、次のものが必要です。
 
--   TiDB Cloud Starter クラスター。まだお持ちでない場合は、 [TiDB Cloud Starterクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)を実行できます。
--   [Python 3.11以上](https://www.python.org/downloads/)がインストールされていること。
--   [uv](https://docs.astral.sh/uv/getting-started/installation/)がインストールされていること。
--   MCP をサポートする AI 開発ツール:
+- TiDB Cloud Starter クラスター。まだお持ちでない場合は、 [TiDB Cloud Starterクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)を実行できます。
+- [Python 3.11以上](https://www.python.org/downloads/)がインストールされていること。
+- [uv](https://docs.astral.sh/uv/getting-started/installation/)がインストールされていること。
+- MCP をサポートする AI 開発ツール:
 
-    -   [Cursor](https://cursor.com)
-    -   [Claude Code](https://claude.com/product/claude-code)
-    -   [Visual Studio Code](https://code.visualstudio.com)
-    -   [Windsurf](https://windsurf.com)
+    - [Cursor](https://cursor.com)
+    - [Claude Code](https://claude.com/product/claude-code)
+    - [Visual Studio Code](https://code.visualstudio.com)
+    - [Windsurf](https://windsurf.com)
 
 ## AIツールに接続する {#connect-to-ai-tools}
 
 TiDB CloudでTiDB Cloud Starter クラスターを作成したら、次の手順を実行してそれを AI ツールに接続します。
 
-1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、ターゲットクラスターの名前をクリックして概要ページに移動します。次に、右上隅の**Use with AI Tools**をクリックします。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、ターゲットクラスターの名前をクリックして概要ページに移動します。次に、右上隅の**Use with AI Tools**をクリックします。
 
-2.  **Access `your_cluster_name` with AI tools**ダイアログで、AI ツールがアクセスする**Branch**と**Database**を選択します。
+2. **Access `your_cluster_name` with AI tools**ダイアログで、AI ツールがアクセスする**Branch**と**Database**を選択します。
 
-3.  記載されているすべての**Prerequisites**を満たしていることを確認してください。満たしていない場合は、画面の指示に従って必要な依存関係をインストールしてください。
+3. 記載されているすべての**Prerequisites**を満たしていることを確認してください。満たしていない場合は、画面の指示に従って必要な依存関係をインストールしてください。
 
-4.  パスワードを設定します。
+4. パスワードを設定します。
 
-    -   まだパスワードを設定していない場合は、 **Generate Password**をクリックしてランダムなパスワードを生成します。
+    - まだパスワードを設定していない場合は、 **Generate Password**をクリックしてランダムなパスワードを生成します。
 
         生成されたパスワードは再度表示されないため、パスワードは安全な場所に保存してください。
 
-    -   すでにパスワードを設定している場合は、 **Enter the password for easy setup**フィールドにパスワードを入力します。
+    - すでにパスワードを設定している場合は、 **Enter the password for easy setup**フィールドにパスワードを入力します。
 
-    -   パスワードを忘れた場合は、 **Prerequisites**セクションの**Reset password**をクリックして、新しいパスワードを生成します。
+    - パスワードを忘れた場合は、 **Prerequisites**セクションの**Reset password**をクリックして、新しいパスワードを生成します。
 
         パスワードをリセットすると、既存のすべての root ユーザーセッションが切断されることに注意してください。
 
-5.  AI ツールのタブを選択します: **Cursor** 、 **Claude Code** 、 **VS Code** 、または**Windsurf** 。
+5. AI ツールのタブを選択します: **Cursor** 、 **Claude Code** 、 **VS Code** 、または**Windsurf** 。
 
-6.  選択したツールのセットアップ手順を完了します。
+6. 選択したツールのセットアップ手順を完了します。
 
     詳細については[ツール固有の設定](#tool-specific-setup)を参照してください。
 
@@ -57,8 +57,8 @@ TiDB CloudでTiDB Cloud Starter クラスターを作成したら、次の手順
 
 Cursor を TiDB の MCP クライアントとして構成するには、次のいずれかの方法を使用できます。
 
--   **方法 1** : [TiDB Cloudコンソール](https://tidbcloud.com)の**Access `your_cluster_name` with AI tools**ダイアログで、**Add to Cursor**をクリックしてCursorを起動し、**Install**をクリックします。
--   **方法 2** : 次の構成を`.cursor/mcp.json`ファイルに手動で追加します。
+- **方法 1** : [TiDB Cloudコンソール](https://tidbcloud.com)の**Access `your_cluster_name` with AI tools**ダイアログで、**Add to Cursor**をクリックしてCursorを起動し、**Install**をクリックします。
+- **方法 2** : 次の構成を`.cursor/mcp.json`ファイルに手動で追加します。
 
     ```json
     {
@@ -81,7 +81,7 @@ Cursor を TiDB の MCP クライアントとして構成するには、次の�
 
 Claude Code を TiDB の MCP クライアントとして構成するには、次のいずれかの方法を使用できます。
 
--   **方法 1** : [TiDB Cloudコンソール](https://tidbcloud.com/)の**Access `your_cluster_name` with AI tools**ダイアログからセットアップ コマンドをコピーし、ターミナルで実行します。
+- **方法 1** : [TiDB Cloudコンソール](https://tidbcloud.com/)の**Access `your_cluster_name` with AI tools**ダイアログからセットアップ コマンドをコピーし、ターミナルで実行します。
 
     ```bash
     claude mcp add --transport stdio TiDB \
@@ -93,7 +93,7 @@ Claude Code を TiDB の MCP クライアントとして構成するには、次
       -- uvx --from 'pytidb[mcp]' 'tidb-mcp-server'
     ```
 
--   **方法2** ：プロジェクトレベル`.mcp.json`ファイルに以下の設定を追加します。詳細については、 [Claude Codeのドキュメント](https://code.claude.com/docs/en/mcp#project-scope)を参照してください。
+- **方法2** ：プロジェクトレベル`.mcp.json`ファイルに以下の設定を追加します。詳細については、 [Claude Codeのドキュメント](https://code.claude.com/docs/en/mcp#project-scope)を参照してください。
 
     ```json
     {
@@ -118,8 +118,8 @@ Claude Code を TiDB の MCP クライアントとして構成するには、次
 
 VS Code を TiDB の MCP クライアントとして構成するには、次のいずれかの方法を使用できます。
 
--   **方法 1** : [TiDB Cloudコンソール](https://tidbcloud.com/)の**Access `your_cluster_name` with AI tools**ダイアログで、 **Add to VS Code**をクリックして VS Code を起動し、 **Install**をクリックします。
--   **方法 2** : `.vscode/mcp.json`ファイルに次の構成を追加します。
+- **方法 1** : [TiDB Cloudコンソール](https://tidbcloud.com/)の**Access `your_cluster_name` with AI tools**ダイアログで、 **Add to VS Code**をクリックして VS Code を起動し、 **Install**をクリックします。
+- **方法 2** : `.vscode/mcp.json`ファイルに次の構成を追加します。
 
     ```json
     {
@@ -164,5 +164,5 @@ TiDB MCPプラグインをWindsurfに追加するには、 `mcp_config.json`フ�
 
 ## 参照 {#see-also}
 
--   [TiDB + Vector Search を試す](/ai/quickstart-via-python.md)
--   [開発者ガイドの概要](https://docs.pingcap.com/developer/)
+- [TiDB + Vector Search を試す](/ai/quickstart-via-python.md)
+- [開発者ガイドの概要](https://docs.pingcap.com/developer/)

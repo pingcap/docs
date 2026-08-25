@@ -19,38 +19,48 @@ Cloudflare WorkersはV8エンジン上で動作するため、直接TCP接続を
 
 この記事の手順を試す前に、以下のものを準備する必要があります。
 
--   [TiDB Cloudアカウント](https://tidbcloud.com/signup)。
--   TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンス。お持ちでない場合は、 [TiDB Cloud StarterまたはEssentialインスタンスを作成します](/tidb-cloud/create-tidb-cluster-serverless.md)を参照してください。
--   [Cloudflare Workersアカウント](https://dash.cloudflare.com/login)。
--   [npm](https://docs.npmjs.com/about-npm)がインストールされています。
+- [TiDB Cloudアカウント](https://tidbcloud.com/signup)。
+- TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンス。お持ちでない場合は、 [TiDB Cloud StarterまたはEssentialインスタンスを作成します](/tidb-cloud/create-tidb-cluster-serverless.md)を参照してください。
+- [Cloudflare Workersアカウント](https://dash.cloudflare.com/login)。
+- [npm](https://docs.npmjs.com/about-npm)がインストールされています。
 
 ## ステップ1：Wranglerをセットアップする {#step-1-set-up-wrangler}
 
 [Wrangler](https://developers.cloudflare.com/workers/wrangler/)Cloudflare Worker の公式 CLI です。これを使用して、Worker の生成、構築、プレビュー、および公開を行うことができます。
 
-1.  Wranglerをインストールする：
+1. Wranglerをインストールする：
 
-        npm install wrangler
+   ```
+   npm install wrangler
+   ```
 
-2.  Wranglerを認証するには、wrangler loginを実行します。
+2. Wranglerを認証するには、wrangler loginを実行します。
 
-        wrangler login
+    ```
+    wrangler login
+    ```
 
-3.  Wranglerを使用してワーカープロジェクトを作成します。
+3. Wranglerを使用してワーカープロジェクトを作成します。
 
-        wrangler init tidb-cloud-cloudflare
+    ```
+    wrangler init tidb-cloud-cloudflare
+    ```
 
-4.  端末に、プロジェクトに関する一連の質問が表示されます。すべての質問に対して、デフォルト値を選択してください。
+4. 端末に、プロジェクトに関する一連の質問が表示されます。すべての質問に対して、デフォルト値を選択してください。
 
 ## ステップ2：TiDB Cloud Serverless Driverをインストールする {#step-2-install-the-serverless-driver}
 
-1.  プロジェクトディレクトリを入力してください：
+1. プロジェクトディレクトリを入力してください：
 
-        cd tidb-cloud-cloudflare
+    ```
+    cd tidb-cloud-cloudflare
+    ```
 
-2.  npmを使用してTiDB Cloud Serverless Driverをインストールします。
+2. npmを使用してTiDB Cloud Serverless Driverをインストールします。
 
-        npm install @tidbcloud/serverless
+    ```
+    npm install @tidbcloud/serverless
+    ```
 
     これにより`package.json`にサーバーレスドライバの依存関係が追加されます。
 
@@ -81,7 +91,9 @@ export default {
 
 `DATABASE_URL`は`mysql://username:password@host/database`の形式に従います。環境変数は wrangler cli を使用して設定できます。
 
-    wrangler secret put <DATABASE_URL>
+```
+wrangler secret put <DATABASE_URL>
+```
 
 Cloudflare Workers ダッシュボードから`DATABASE_URL`シークレットを編集することもできます。
 
@@ -91,13 +103,15 @@ Cloudflare Workers ダッシュボードから`DATABASE_URL`シークレット�
 
 プロジェクトディレクトリで、以下のコマンドを実行してください。
 
-    npx wrangler deploy
+```
+npx wrangler deploy
+```
 
 ## ステップ6：Cloudflare Workersを試してみる {#step-6-try-your-cloudflare-workers}
 
-1.  [Cloudflareダッシュボード](https://dash.cloudflare.com)に移動してワーカーを見つけます。ワーカーの URL は概要ページで確認できます。
+1. [Cloudflareダッシュボード](https://dash.cloudflare.com)に移動してワーカーを見つけます。ワーカーの URL は概要ページで確認できます。
 
-2.  そのURLにアクセスすれば、結果が表示されます。
+2. そのURLにアクセスすれば、結果が表示されます。
 
 ## 例 {#examples}
 

@@ -9,9 +9,9 @@ SQLの配置ルールは、SQL文を使用してTiKVクラスタ内のデータ�
 
 この機能は、以下のユースケースに対応できます。
 
--   複数のデータセンターにデータをデプロイ、高可用性戦略を最適化するためのルールを設定します。
--   異なるアプリケーションの複数のデータベースを統合し、異なるユーザーのデータを物理的に分離することで、インスタンス内の異なるユーザーの分離要件を満たします。
--   アプリケーションの可用性とデータの信頼性を向上させるため、重要なデータのレプリカ数を増やしてください。
+- 複数のデータセンターにデータをデプロイ、高可用性戦略を最適化するためのルールを設定します。
+- 異なるアプリケーションの複数のデータベースを統合し、異なるユーザーのデータを物理的に分離することで、インスタンス内の異なるユーザーの分離要件を満たします。
+- アプリケーションの可用性とデータの信頼性を向上させるため、重要なデータのレプリカ数を増やしてください。
 
 > **Note:**
 >
@@ -34,9 +34,9 @@ SQL の配置ルール機能を使用すると、[配置ポリシーを作成し
 
 ## 制限事項 {#limitations}
 
--   メンテナンスを簡素化するため、クラスター内の配置ポリシーの数を10以下に制限することをお勧めします。
--   配置ポリシーを適用するテーブルとパーティションの総数は、10,000以下に制限することをお勧めします。ポリシーを適用するテーブルやパーティションが多すぎると、PD（配置データベース）の計算負荷が増加し、サービスパフォーマンスに影響を与える可能性があります。
--   複雑な配置ポリシーを使用するよりも、本書に記載されている例に従ってSQLの配置ルール機能を使用することをお勧めします。
+- メンテナンスを簡素化するため、クラスター内の配置ポリシーの数を10以下に制限することをお勧めします。
+- 配置ポリシーを適用するテーブルとパーティションの総数は、10,000以下に制限することをお勧めします。ポリシーを適用するテーブルやパーティションが多すぎると、PD（配置データベース）の計算負荷が増加し、サービスパフォーマンスに影響を与える可能性があります。
+- 複雑な配置ポリシーを使用するよりも、本書に記載されている例に従ってSQLの配置ルール機能を使用することをお勧めします。
 
 ## 前提条件 {#prerequisites}
 
@@ -90,7 +90,7 @@ SHOW PLACEMENT LABELS;
 
 ### 配置ポリシーを作成して添付する {#create-and-attach-placement-policies}
 
-1.  配置ポリシーを作成するには、 [`CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-create-placement-policy.md)ステートメントを使用します。
+1. 配置ポリシーを作成するには、 [`CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-create-placement-policy.md)ステートメントを使用します。
 
     ```sql
     CREATE PLACEMENT POLICY myplacementpolicy PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
@@ -98,12 +98,12 @@ SHOW PLACEMENT LABELS;
 
     このステートメントでは、
 
-    -   `PRIMARY_REGION="us-east-1"`オプションは、 `region`ラベルのノードに`us-east-1`としてRaftリーダーを配置することを意味します。
-    -   `REGIONS="us-east-1,us-west-1"`オプションは、 `region`ラベルが`us-east-1`のノードと`region`ラベルが`us-west-1`のノードに Raft Followers を配置することを意味します。
+    - `PRIMARY_REGION="us-east-1"`オプションは、 `region`ラベルのノードに`us-east-1`としてRaftリーダーを配置することを意味します。
+    - `REGIONS="us-east-1,us-west-1"`オプションは、 `region`ラベルが`us-east-1`のノードと`region`ラベルが`us-west-1`のノードに Raft Followers を配置することを意味します。
 
     構成可能な配置オプションとその意味の詳細については、「[配置オプション](#placement-option-reference)を参照してください。
 
-2.  テーブルまたはパーティションテーブルに配置ポリシーを適用するには、 `CREATE TABLE`または`ALTER TABLE`ステートメントを使用して、そのテーブルまたはパーティションテーブルの配置ポリシーを指定します。
+2. テーブルまたはパーティションテーブルに配置ポリシーを適用するには、 `CREATE TABLE`または`ALTER TABLE`ステートメントを使用して、そのテーブルまたはパーティションテーブルの配置ポリシーを指定します。
 
     ```sql
     CREATE TABLE t1 (a INT) PLACEMENT POLICY=myplacementpolicy;
@@ -115,7 +115,7 @@ SHOW PLACEMENT LABELS;
 
 ### 配置ポリシーを表示する {#view-placement-policies}
 
--   既存の配置ポリシーを表示するには、 [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md)ステートメントを使用できます。
+- 既存の配置ポリシーを表示するには、 [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md)ステートメントを使用できます。
 
     ```sql
     SHOW CREATE PLACEMENT POLICY myplacementpolicy\G
@@ -125,7 +125,7 @@ SHOW PLACEMENT LABELS;
     1 row in set (0.00 sec)
     ```
 
--   特定のテーブルに紐づけられた配置ポリシーを表示するには、 [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)ステートメントを使用できます。
+- 特定のテーブルに紐づけられた配置ポリシーを表示するには、 [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)ステートメントを使用できます。
 
     ```sql
     SHOW CREATE TABLE t1\G
@@ -137,7 +137,7 @@ SHOW PLACEMENT LABELS;
     1 row in set (0.00 sec)
     ```
 
--   クラスタ内の配置ポリシーの定義を表示するには、 [`INFORMATION_SCHEMA.PLACEMENT_POLICIES`](/information-schema/information-schema-placement-policies.md)システムテーブルをクエリします。
+- クラスタ内の配置ポリシーの定義を表示するには、 [`INFORMATION_SCHEMA.PLACEMENT_POLICIES`](/information-schema/information-schema-placement-policies.md)システムテーブルをクエリします。
 
     ```sql
     SELECT * FROM information_schema.placement_policies\G
@@ -157,19 +157,19 @@ SHOW PLACEMENT LABELS;
     1 row in set
     ```
 
--   クラスタ内の配置ポリシーに関連付けられているすべてのテーブルを表示するには、 `information_schema.tables`システムテーブルの`tidb_placement_policy_name`列をクエリします。
+- クラスタ内の配置ポリシーに関連付けられているすべてのテーブルを表示するには、 `information_schema.tables`システムテーブルの`tidb_placement_policy_name`列をクエリします。
 
     ```sql
     SELECT * FROM information_schema.tables WHERE tidb_placement_policy_name IS NOT NULL;
     ```
 
--   クラスタ内の配置ポリシーが関連付けられているすべてのパーティションを表示するには、 `information_schema.partitions`システムテーブルの`tidb_placement_policy_name`列をクエリします。
+- クラスタ内の配置ポリシーが関連付けられているすべてのパーティションを表示するには、 `information_schema.partitions`システムテーブルの`tidb_placement_policy_name`列をクエリします。
 
     ```sql
     SELECT * FROM information_schema.partitions WHERE tidb_placement_policy_name IS NOT NULL;
     ```
 
--   すべてのオブジェクトに適用される配置ポリシーは*非同期的に*適用されます。配置ポリシーのスケジューリングの進行状況を確認するには、 [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md)ステートメントを使用できます。
+- すべてのオブジェクトに適用される配置ポリシーは*非同期的に*適用されます。配置ポリシーのスケジューリングの進行状況を確認するには、 [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md)ステートメントを使用できます。
 
     ```sql
     SHOW PLACEMENT;
@@ -236,8 +236,8 @@ DROP PLACEMENT POLICY myplacementpolicy;
 
 > **Note:**
 >
-> -   `LEADER_CONSTRAINTS`配置オプションはリスト形式のみをサポートしています。
-> -   リスト形式と辞書形式はどちらも YAML パーサーに基づいていますが、YAML 構文は場合によっては正しく解析されないことがあります。たとえば、 `"{+region=east:1,+region=west:2}"` ( `:`の後にスペースがない場合) は、 `'{"+region=east:1": null, "+region=west:2": null}'`と誤って解析される可能性があり、これは予期しない結果です。しかし、 `"{+region=east: 1,+region=west: 2}"` `:`の後にスペースがある場合) `'{"+region=east": 1, "+region=west": 2}'`と正しく解析されます。したがって、 `:`の後にスペースを追加することをお勧めします。
+> - `LEADER_CONSTRAINTS`配置オプションはリスト形式のみをサポートしています。
+> - リスト形式と辞書形式はどちらも YAML パーサーに基づいていますが、YAML 構文は場合によっては正しく解析されないことがあります。たとえば、 `"{+region=east:1,+region=west:2}"` ( `:`の後にスペースがない場合) は、 `'{"+region=east:1": null, "+region=west:2": null}'`と誤って解析される可能性があり、これは予期しない結果です。しかし、 `"{+region=east: 1,+region=west: 2}"` `:`の後にスペースがある場合) `'{"+region=east": 1, "+region=west": 2}'`と正しく解析されます。したがって、 `:`の後にスペースを追加することをお勧めします。
 
 ## 基本的な例 {#basic-examples}
 
@@ -314,11 +314,11 @@ PARTITION BY RANGE( YEAR(purchased) ) (
 
 テーブル内のパーティションに配置ポリシーが指定されていない場合、パーティションはテーブルからポリシー（存在する場合）を継承しようとします。テーブルに[グローバルインデックス](/global-indexes.md)がある場合、インデックスはテーブルと同じ配置ポリシーを適用します。上記の例では、次のようになります。
 
--   `p0`パーティションには`storageforhistorydata`ポリシーが適用されます。
--   `p4`パーティションには`storagefornewdata`ポリシーが適用されます。
--   `p1` 、 `p2` 、および`p3`パーティションは、テーブル`t1`から継承された`companystandardpolicy`ポリシーを適用します。
--   グローバルインデックス`idx`は、テーブル`t1`と同じ`companystandardpolicy`配置ポリシーを適用します。
--   テーブル`t1`に対して配置ポリシーが指定されていない場合、 `p1` 、 `p2` 、 `p3`パーティションとグローバルインデックス`idx`データベースのデフォルトポリシーまたはグローバルのデフォルトポリシーを継承します。
+- `p0`パーティションには`storageforhistorydata`ポリシーが適用されます。
+- `p4`パーティションには`storagefornewdata`ポリシーが適用されます。
+- `p1` 、 `p2` 、および`p3`パーティションは、テーブル`t1`から継承された`companystandardpolicy`ポリシーを適用します。
+- グローバルインデックス`idx`は、テーブル`t1`と同じ`companystandardpolicy`配置ポリシーを適用します。
+- テーブル`t1`に対して配置ポリシーが指定されていない場合、 `p1` 、 `p2` 、 `p3`パーティションとグローバルインデックス`idx`データベースのデフォルトポリシーまたはグローバルのデフォルトポリシーを継承します。
 
 これらのパーティションに配置ポリシーを適用した後、次の例のように、特定のパーティションの配置ポリシーを変更できます。
 
@@ -361,8 +361,8 @@ CREATE PLACEMENT POLICY singleaz CONSTRAINTS="[+region=us-east-1]" SURVIVAL_PREF
 
 配置ポリシーを作成した後、必要に応じて対応するテーブルにそれらを添付できます。
 
--   `multiaz`配置ポリシーが添付されたテーブルの場合、データは異なるリージョンの3つのレプリカに配置され、データの分離というリージョン間生存目標を満たすことが最優先され、次にゾーン間生存目標、最後にホスト間生存目標が優先されます。
--   `singleaz`配置ポリシーが添付されたテーブルの場合、データはまず`us-east-1`リージョンの3つのレプリカに配置され、その後、データ分離のゾーン間生存目標を満たします。
+- `multiaz`配置ポリシーが添付されたテーブルの場合、データは異なるリージョンの3つのレプリカに配置され、データの分離というリージョン間生存目標を満たすことが最優先され、次にゾーン間生存目標、最後にホスト間生存目標が優先されます。
+- `singleaz`配置ポリシーが添付されたテーブルの場合、データはまず`us-east-1`リージョンの3つのレプリカに配置され、その後、データ分離のゾーン間生存目標を満たします。
 
 <CustomContent platform="tidb">
 
@@ -429,10 +429,10 @@ CREATE PLACEMENT POLICY eastandwest PRIMARY_REGION="us-east-1" REGIONS="us-east-
 CREATE TABLE t1 (a INT) PLACEMENT POLICY=eastandwest;
 ```
 
--   `PRIMARY_REGION`リーダーの配布地域を指定します。このオプションでは、1 つの地域のみを指定できます。
--   `SCHEDULE`オプションは、TiDB がフォロワーの分布をどのようにバランスさせるかを指定します。
-    -   デフォルトの`EVEN`スケジューリングルールは、すべてのリージョンにわたってフォロワーが均等に分散されることを保証します。
-    -   `PRIMARY_REGION` (つまり`us-east-1` ) に十分な数のFollowerレプリカを配置したい場合は、 `MAJORITY_IN_PRIMARY`スケジューリングルールを使用できます。このスケジューリングルールは、可用性を多少犠牲にする代わりに、トランザクションのレイテンシーを低減します。プライマリリージョンが障害を起こした場合、 `MAJORITY_IN_PRIMARY`自動フェイルオーバーを提供しません。
+- `PRIMARY_REGION`リーダーの配布地域を指定します。このオプションでは、1 つの地域のみを指定できます。
+- `SCHEDULE`オプションは、TiDB がフォロワーの分布をどのようにバランスさせるかを指定します。
+    - デフォルトの`EVEN`スケジューリングルールは、すべてのリージョンにわたってフォロワーが均等に分散されることを保証します。
+    - `PRIMARY_REGION` (つまり`us-east-1` ) に十分な数のFollowerレプリカを配置したい場合は、 `MAJORITY_IN_PRIMARY`スケジューリングルールを使用できます。このスケジューリングルールは、可用性を多少犠牲にする代わりに、トランザクションのレイテンシーを低減します。プライマリリージョンが障害を起こした場合、 `MAJORITY_IN_PRIMARY`自動フェイルオーバーを提供しません。
 
 ## データ分離の例 {#data-isolation-examples}
 
@@ -455,10 +455,10 @@ PLACEMENT POLICY=app_list
 
 ## 他の機能との互換性 {#compatibility-with-other-features}
 
--   一時テーブルは配置ポリシーをサポートしていません。
--   配置ポリシーは、保存されているデータが正しい TiKV ノードに存在することを保証するだけであり、転送中のデータ (ユーザーからのクエリまたは内部操作によるもの) が特定のリージョンでのみ発生することを保証するものではありません。
--   データのTiFlashレプリカを構成するには、配置ポリシーを使用するのではなく、 [TiFlashのレプリカを作成する](/tiflash/create-tiflash-replicas.md)必要があります。
--   `PRIMARY_REGION`および`REGIONS`の設定には、構文糖衣ルールが許可されています。今後は、 `PRIMARY_RACK` 、 `PRIMARY_ZONE` 、および`PRIMARY_HOST`のバリエーションを追加する予定です。 [問題番号18030](https://github.com/pingcap/tidb/issues/18030)を参照してください。
+- 一時テーブルは配置ポリシーをサポートしていません。
+- 配置ポリシーは、保存されているデータが正しい TiKV ノードに存在することを保証するだけであり、転送中のデータ (ユーザーからのクエリまたは内部操作によるもの) が特定のリージョンでのみ発生することを保証するものではありません。
+- データのTiFlashレプリカを構成するには、配置ポリシーを使用するのではなく、 [TiFlashのレプリカを作成する](/tiflash/create-tiflash-replicas.md)必要があります。
+- `PRIMARY_REGION`および`REGIONS`の設定には、構文糖衣ルールが許可されています。今後は、 `PRIMARY_RACK` 、 `PRIMARY_ZONE` 、および`PRIMARY_HOST`のバリエーションを追加する予定です。 [問題番号18030](https://github.com/pingcap/tidb/issues/18030)を参照してください。
 
 ## ツールとの互換性 {#compatibility-with-tools}
 
