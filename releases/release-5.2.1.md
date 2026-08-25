@@ -13,8 +13,8 @@ TiDB バージョン: 5.2.1
 
 -   TiDB
 
-    -   実行中に発生するエラーを修正しました。これは、パーティションテーブルで集計演算子をプッシュダウンする際に、スキーマ列の浅いコピーが行われることが原因で発生します[＃27797](https://github.com/pingcap/tidb/issues/27797) [＃26554](https://github.com/pingcap/tidb/issues/26554)
+    -   実行中に発生するエラーを修正しました。これは、パーティションテーブルで集計演算子をプッシュダウンする際に、スキーマ列の浅いコピーが行われることが原因で発生します[#27797](https://github.com/pingcap/tidb/issues/27797) [#26554](https://github.com/pingcap/tidb/issues/26554)
 
 -   TiKV
 
-    -   リージョン移行時にRaftstoreのデッドロックによりTiKVが利用できなくなる問題を修正しました。回避策としては、スケジュールを無効にし、利用できないTiKVを再起動してください[＃10909](https://github.com/tikv/tikv/issues/10909)
+    -   リージョン移行時にRaftstoreのデッドロックによりTiKVが利用できなくなる問題を修正しました。回避策としては、スケジュールを無効にし、利用できないTiKVを再起動してください[#10909](https://github.com/tikv/tikv/issues/10909)

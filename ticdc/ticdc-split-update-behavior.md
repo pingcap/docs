@@ -10,11 +10,11 @@ summary: TiCDC が UPDATE` イベントを分割するかどうかに関する�
 v6.5.10、v7.1.6、v7.5.2、v8.1.1、v8.2.0以降では、MySQLシンクを使用する場合、テーブルのレプリケーション要求を受信したTiCDCノードは、下流へのレプリケーションを開始する前に、PDから現在のタイムスタンプ`thresholdTS`を取得します。このタイムスタンプの値に基づいて、TiCDCは`UPDATE`イベントを分割するかどうかを決定します。
 
 -   1 つまたは複数の`UPDATE`変更を含むトランザクションの場合、トランザクション`commitTS` `thresholdTS`未満であれば、TiCDC は`UPDATE`イベントを`DELETE`イベントと`INSERT`イベントに分割してから、それらを Sorter モジュールに書き込みます。
--   トランザクション`commitTS`が`thresholdTS`以上である`UPDATE`イベントの場合、TiCDC はそれらを分割しません。詳細については、GitHub の問題[＃10918](https://github.com/pingcap/tiflow/issues/10918)を参照してください。
+-   トランザクション`commitTS`が`thresholdTS`以上である`UPDATE`イベントの場合、TiCDC はそれらを分割しません。詳細については、GitHub の問題[#10918](https://github.com/pingcap/tiflow/issues/10918)を参照してください。
 
 > **Note:**
 >
-> v8.1.0では、MySQL Sinkを使用する場合、TiCDCは`thresholdTS`値に基づいて`UPDATE`イベントを分割するかどうかを決定しますが、 `thresholdTS`取得方法は異なります。具体的には、v8.1.0では、 `thresholdTS` TiCDC起動時にPDから取得される現在のタイムスタンプですが、この方法はマルチノードシナリオでデータの不整合の問題を引き起こす可能性があります。詳細については、GitHubのissue [＃11219](https://github.com/pingcap/tiflow/issues/11219)ご覧ください。
+> v8.1.0では、MySQL Sinkを使用する場合、TiCDCは`thresholdTS`値に基づいて`UPDATE`イベントを分割するかどうかを決定しますが、 `thresholdTS`取得方法は異なります。具体的には、v8.1.0では、 `thresholdTS` TiCDC起動時にPDから取得される現在のタイムスタンプですが、この方法はマルチノードシナリオでデータの不整合の問題を引き起こす可能性があります。詳細については、GitHubのissue [#11219](https://github.com/pingcap/tiflow/issues/11219)ご覧ください。
 
 この動作の変更 (つまり、 `thresholdTS`に基づいて`UPDATE`イベントを分割するかどうかを決定する) により、TiCDC が受信した`UPDATE`イベントの順序が正しくない可能性があり、その結果、分割された`DELETE`と`INSERT`イベントの順序が間違ってしまう可能性がある、下流のデータの不整合の問題が解決されます。
 
@@ -76,7 +76,7 @@ UPDATE t SET a = 3 WHERE a = 2;
 
 ### 単一の`UPDATE`変更を含むトランザクション {#transactions-containing-a-single-update-change}
 
-v6.5.3、v7.1.1、v7.2.0以降、MySQL以外のシンクを使用する場合、単一の更新変更のみを含むトランザクションにおいて、主キーまたはnull以外の一意インデックス値が`UPDATE`イベントで変更されると、TiCDCはこのイベントを`DELETE`つと`INSERT`イベントに分割します。詳細については、GitHubのissue [＃9086](https://github.com/pingcap/tiflow/issues/9086)ご覧ください。
+v6.5.3、v7.1.1、v7.2.0以降、MySQL以外のシンクを使用する場合、単一の更新変更のみを含むトランザクションにおいて、主キーまたはnull以外の一意インデックス値が`UPDATE`イベントで変更されると、TiCDCはこのイベントを`DELETE`つと`INSERT`イベントに分割します。詳細については、GitHubのissue [#9086](https://github.com/pingcap/tiflow/issues/9086)ご覧ください。
 
 この変更は主に、CSVおよびAVROプロトコル使用時にTiCDCがデフォルトで新しい値のみを出力し、古い値は出力しないという問題に対処します。この問題により、主キーまたは非NULLの一意インデックス値が変更された場合、コンシューマーは新しい値しか受信できず、変更前の値を処理する（例えば、古い値を削除する）ことができなくなります。次のSQLを例に挙げましょう。
 
@@ -90,7 +90,7 @@ UPDATE t SET a = 2 WHERE a = 1;
 
 ### 複数の`UPDATE`変更を含むトランザクション {#transactions-containing-multiple-update-changes}
 
-v6.5.4、v7.1.2、v7.4.0以降、複数の変更を含むトランザクションにおいて、 `UPDATE`イベントで主キーまたはNULL以外の一意インデックス値が変更された場合、TiCDCはイベントを`DELETE`と`INSERT`イベントに分割し、すべてのイベントが`INSERT`のイベントの前の`DELETE`のイベントのシーケンスに従うようにします。詳細については、GitHubのissue [＃9430](https://github.com/pingcap/tiflow/issues/9430)ご覧ください。
+v6.5.4、v7.1.2、v7.4.0以降、複数の変更を含むトランザクションにおいて、 `UPDATE`イベントで主キーまたはNULL以外の一意インデックス値が変更された場合、TiCDCはイベントを`DELETE`と`INSERT`イベントに分割し、すべてのイベントが`INSERT`のイベントの前の`DELETE`のイベントのシーケンスに従うようにします。詳細については、GitHubのissue [#9430](https://github.com/pingcap/tiflow/issues/9430)ご覧ください。
 
 この変更は主に、Kafkaシンクまたはその他のシンクからリレーショナルデータベースへのデータ変更の書き込み時、あるいは同様の操作を実行する際にコンシューマーが遭遇する可能性のある、主キーまたは一意キーの競合に関する潜在的な問題に対処します。この問題は、TiCDCが受信した`UPDATE`イベントの順序が誤っている可能性があることに起因します。
 
@@ -114,7 +114,7 @@ COMMIT;
 
 ### 主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御する {#control-whether-to-split-primary-or-unique-key-update-events}
 
-v6.5.10、v7.1.6、v7.5.3、v8.1.1以降、MySQL以外のシンクを使用する場合、TiCDCはGitHub Issue [＃11211](https://github.com/pingcap/tiflow/issues/11211)に記載されているように、 `output-raw-change-event`パラメータを介して主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御できるようになりました。このパラメータの具体的な動作は次のとおりです。
+v6.5.10、v7.1.6、v7.5.3、v8.1.1以降、MySQL以外のシンクを使用する場合、TiCDCはGitHub Issue [#11211](https://github.com/pingcap/tiflow/issues/11211)に記載されているように、 `output-raw-change-event`パラメータを介して主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御できるようになりました。このパラメータの具体的な動作は次のとおりです。
 
 -   `output-raw-change-event = false`設定すると、主キーまたは null 以外の一意インデックス値が`UPDATE`イベントで変更された場合、TiCDC はイベントを`DELETE`と`INSERT`イベントに分割し、すべてのイベントが`INSERT`イベントの前の`DELETE`イベントのシーケンスに従うようにします。
 -   `output-raw-change-event = true`設定すると、TiCDCは`UPDATE`イベントを分割せず、 [MySQL以外のシンクの主キーまたは一意キーの`UPDATE`イベントを分割する](/ticdc/ticdc-split-update-behavior.md#split-primary-or-unique-key-update-events-for-non-mysql-sinks)で説明した問題への対処はコンシューマー側で行います。そうしないと、データの不整合が発生するリスクがあります。テーブルの主キーがクラスター化インデックスである場合、主キーへの更新はTiDB内で依然として`DELETE`つと`INSERT`イベントに分割されますが、この動作は`output-raw-change-event`パラメータの影響を受けません。
@@ -129,7 +129,7 @@ v6.5.10、v7.1.6、v7.5.3、v8.1.1以降、MySQL以外のシンクを使用す�
 | --------------- | ------- | ---------------------------------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------- |
 | バージョン6.5.2以下    | 全て      | ✗                                              | ✓                                            |                                                                                    |
 | v6.5.3 / v6.5.4 | Canal/オープン | ✗                                              | ✓                                            |                                                                                    |
-| バージョン6.5.3      | CSV/Avro | ✗                                              | ✗                                            | 分割しますが、並べ替えは行いません。[＃9086](https://github.com/pingcap/tiflow/issues/9658)を参照してください。 |
+| バージョン6.5.3      | CSV/Avro | ✗                                              | ✗                                            | 分割しますが、並べ替えは行いません。[#9086](https://github.com/pingcap/tiflow/issues/9658)を参照してください。 |
 | バージョン6.5.4      | Canal/オープン | ✗                                              | ✗                                            | 複数の変更を含むトランザクションのみを分割して並べ替える                                                       |
 | v6.5.5 ～ v6.5.9 | 全て      | ✓                                              | ✗                                            |                                                                                    |
 | = v6.5.10       | 全て      | ✓ (デフォルト値: `output-raw-change-event = false` ) | ✓ （オプション： `output-raw-change-event = true` ） |                                                                                    |
@@ -140,7 +140,7 @@ v6.5.10、v7.1.6、v7.5.3、v8.1.1以降、MySQL以外のシンクを使用す�
 | --------------- | ------- | ---------------------------------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------- |
 | バージョン7.1.0      | 全て      | ✗                                              | ✓                                            |                                                                                    |
 | バージョン7.1.1      | Canal/オープン | ✗                                              | ✓                                            |                                                                                    |
-| バージョン7.1.1      | CSV/Avro | ✗                                              | ✗                                            | 分割しますが、並べ替えは行いません。[＃9086](https://github.com/pingcap/tiflow/issues/9658)を参照してください。 |
+| バージョン7.1.1      | CSV/Avro | ✗                                              | ✗                                            | 分割しますが、並べ替えは行いません。[#9086](https://github.com/pingcap/tiflow/issues/9658)を参照してください。 |
 | v7.1.2 ~ v7.1.5 | 全て      | ✓                                              | ✗                                            |                                                                                    |
 | = v7.1.6        | 全て      | ✓ (デフォルト値: `output-raw-change-event = false` ) | ✓ （オプション： `output-raw-change-event = true` ） |                                                                                    |
 

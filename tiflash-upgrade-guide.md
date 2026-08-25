@@ -106,7 +106,7 @@ TiFlash v6.2.0はデフォルトでPageStorage V3バージョン[`format_version
 
 > **Note:**
 >
-> 以下のパッチバージョンには既知の問題（問題[＃9039](https://github.com/pingcap/tiflash/issues/9039) ）があります。これらのバージョンにアップグレードすると、 TiFlashデータが破損する可能性があります。
+> 以下のパッチバージョンには既知の問題（問題[#9039](https://github.com/pingcap/tiflash/issues/9039) ）があります。これらのバージョンにアップグレードすると、 TiFlashデータが破損する可能性があります。
 >
 > -   v6.5.0 から v6.5.9
 > -   バージョン6.6.0

@@ -42,7 +42,7 @@ TiKVは[動的構成](/tikv-control.md#modify-the-tikv-configuration-dynamically
 
 ### クラスターはネットワークパーティション障害から回復しましたが、ログバックアップタスクの進行状況のチェックポイントがまだ再開されません。なぜでしょうか？ {#the-cluster-has-recovered-from-the-network-partition-failure-but-the-checkpoint-of-the-log-backup-task-progress-still-does-not-resume-why}
 
-問題: [＃13126](https://github.com/tikv/tikv/issues/13126)
+問題: [#13126](https://github.com/tikv/tikv/issues/13126)
 
 クラスター内でネットワークパーティション障害が発生すると、バックアップタスクはログのバックアップを続行できなくなります。一定の再試行時間後、タスクは状態`ERROR`に設定されます。この時点で、バックアップタスクは停止しています。
 

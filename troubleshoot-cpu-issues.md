@@ -56,11 +56,11 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 
 -   TiDBとPD間のネットワークに問題があります。Grafana -&gt; **blackbox_exporter** -&gt; **ping レイテンシー**モニターにアクセスして、TiDBからPD Leaderへのネットワークが正常に動作しているかどうかを確認してください。
 
--   PDは`FATAL`エラーを報告しますが、ログには`range failed to find revision pair`が表示されます。この問題はv3.0.8（ [＃2040](https://github.com/pingcap/pd/pull/2040) ）で修正されました。
+-   PDは`FATAL`エラーを報告しますが、ログには`range failed to find revision pair`が表示されます。この問題はv3.0.8（ [#2040](https://github.com/pingcap/pd/pull/2040) ）で修正されました。
 
--   `/api/v1/regions`インターフェースを使用する場合、リージョンが多すぎるとPD OOMが発生する可能性があります。この問題はv3.0.8 ( [＃1986](https://github.com/pingcap/pd/pull/1986) ) で修正されました。
+-   `/api/v1/regions`インターフェースを使用する場合、リージョンが多すぎるとPD OOMが発生する可能性があります。この問題はv3.0.8 ( [#1986](https://github.com/pingcap/pd/pull/1986) ) で修正されました。
 
--   ローリングアップグレード中にPD OOMが発生しました。gRPCメッセージのサイズに制限がなく、モニターでは`TCP InSegs`が比較的大きいと表示されます。この問題はv3.0.6（ [＃1952](https://github.com/pingcap/pd/pull/1952) ）で修正されました。
+-   ローリングアップグレード中にPD OOMが発生しました。gRPCメッセージのサイズに制限がなく、モニターでは`TCP InSegs`が比較的大きいと表示されます。この問題はv3.0.6（ [#1952](https://github.com/pingcap/pd/pull/1952) ）で修正されました。
 
 -   PDがパニックになります。[バグを報告する](https://github.com/tikv/pd/issues/new?labels=kind/bug&template=bug-report.md) 。
 
