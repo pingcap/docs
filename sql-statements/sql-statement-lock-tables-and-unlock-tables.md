@@ -13,16 +13,16 @@ TiDBでは、クライアントセッションがテーブルロックを取得�
 
 `LOCK TABLES` 、現在のクライアントセッションのテーブルロックを取得します。ロック対象となる各オブジェクトに対して`LOCK TABLES`および`SELECT`権限を持っている場合は、共通テーブルのテーブルロックを取得できます。
 
-`UNLOCK TABLES`は、現在のセッションによって保持されているすべてのテーブル ロックを明示的に解放します。`LOCK TABLES`は、新しいロックを取得する前に、現在のセッションによって保持されているすべてのテーブル ロックを暗黙的に解放します。
+`UNLOCK TABLES`は、現在のセッションによって保持されているすべてのテーブルロックを明示的に解放します。`LOCK TABLES`は、新しいロックを取得する前に、現在のセッションによって保持されているすべてのテーブルロックを暗黙的に解放します。
 
 テーブルロックは、他のセッションによる読み取りや書き込みから保護します。 `WRITE`ロックを保持しているセッションは、 `DROP TABLE`や`TRUNCATE TABLE`などのテーブルレベルの操作を実行できます。
 
 > **Note:**
 >
-> テーブル ロック機能はデフォルトで無効になっています。
+> テーブルロック機能はデフォルトで無効になっています。
 >
-> -   TiDB Self-Managed の場合、テーブル ロック機能を有効にするには、すべての TiDB インスタンスの構成ファイルで[`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400) ～ `true`設定する必要があります。
-> -   TiDB Cloud Dedicated の場合、テーブル ロック機能を有効にするには、 [TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)連絡して[`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400)を`true`に設定する必要があります。
+> -   TiDB Self-Managed の場合、テーブルロック機能を有効にするには、すべての TiDB インスタンスの構成ファイルで[`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400) ～ `true`設定する必要があります。
+> -   TiDB Cloud Dedicated の場合、テーブルロック機能を有効にするには、 [TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)連絡して[`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400)を`true`に設定する必要があります。
 > -   [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、 [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400)から`true`設定はサポートされていません。
 
 ## 概要 {#synopsis}
@@ -71,7 +71,7 @@ ERROR 8020 (HY000): Table 't1' was locked in WRITE by server: f4799bcb-cad7-4285
 
 上記のエラーメッセージは、TiDB `f4799bcb-cad7-4285-8a6d-23d3555173f1`の ID `2199023255959`のセッションが既にテーブル`t1`の`WRITE`ロックを保持していることを示しています。したがって、現在のセッションはテーブル`t1`の`READ`ロックを取得できません。
 
-`LOCK TABLES`つのステートメントで同じテーブル ロックを複数回取得することはできません。
+`LOCK TABLES`つのステートメントで同じテーブルロックを複数回取得することはできません。
 
 ```sql
 > LOCK TABLES t WRITE, t READ;
@@ -89,9 +89,9 @@ ERROR 1066 (42000): Not unique table/alias: 't'
 
 ## テーブルロックの制限と条件 {#table-locking-restrictions-and-conditions}
 
-テーブル ロックを保持しているセッションを安全に終了するには、 `KILL`を使用できます。
+テーブルロックを保持しているセッションを安全に終了するには、 `KILL`を使用できます。
 
-次のデータベース内のテーブルに対してテーブル ロックを取得することはできません。
+次のデータベース内のテーブルに対してテーブルロックを取得することはできません。
 
 -   `INFORMATION_SCHEMA`
 -   `PERFORMANCE_SCHEMA`
@@ -108,4 +108,4 @@ ERROR 1066 (42000): Not unique table/alias: 't'
 
 ### テーブルロックの解除 {#table-lock-release}
 
-TiDB セッションでトランザクションが明示的に開始されると (たとえば、 `BEGIN`ステートメントを使用)、TiDB はセッションによって保持されているテーブル ロックを暗黙的に解放しませんが、MySQL は解放します。
+TiDB セッションでトランザクションが明示的に開始されると (たとえば、 `BEGIN`ステートメントを使用)、TiDB はセッションによって保持されているテーブルロックを暗黙的に解放しませんが、MySQL は解放します。

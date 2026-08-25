@@ -28,7 +28,7 @@ TiDB 2.0では、リージョンの健全性はPDメトリック監視ページ�
 
 ## ステートメントカウントモニターの`selectsimplefull`の意味は何ですか? {#what-is-the-meaning-of-selectsimplefull-in-statement-count-monitor}
 
-これは完全なテーブルスキャンを意味しますが、テーブルは小さなシステム テーブルである可能性があります。
+これは完全なテーブルスキャンを意味しますが、テーブルは小さなシステムテーブルである可能性があります。
 
 ## モニターの`QPS`と`Statement OPS`の違いは何ですか? {#what-is-the-difference-between-qps-and-statement-ops-in-the-monitor}
 

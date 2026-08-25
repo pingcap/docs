@@ -158,7 +158,7 @@ SELECT User, Host, max_user_connections FROM mysql.user WHERE User='newuser10';
 1 row in set (0.01 sec)
 ```
 
-リソース グループ`rg1`を使用するユーザーを作成します。
+リソースグループ`rg1`を使用するユーザーを作成します。
 
 ```sql
 CREATE USER 'newuser11'@'%' RESOURCE GROUP rg1;

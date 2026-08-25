@@ -26,7 +26,7 @@ DM-worker は、TiDB Data Migration (DM) のコンポーネントであり、DM-
 
 ### ダンプ処理装置 {#dump-processing-unit}
 
-ダンプ処理ユニットは、アップストリームの MySQL/MariaDB から完全なデータをローカル ディスクにダンプします。
+ダンプ処理ユニットは、アップストリームの MySQL/MariaDB から完全なデータをローカルディスクにダンプします。
 
 ### ロード処理装置 {#load-processing-unit}
 
@@ -38,7 +38,7 @@ Binlogログレプリケーション/同期処理ユニットは、上流の MyS
 
 ## DMワーカーに必要な権限 {#privileges-required-by-dm-worker}
 
-このセクションでは、DM-worker に必要な上流および下流のデータベース ユーザーの権限と、それぞれの処理ユニットに必要なユーザー権限について説明します。
+このセクションでは、DM-worker に必要な上流および下流のデータベースユーザーの権限と、それぞれの処理ユニットに必要なユーザー権限について説明します。
 
 ### 上流データベースユーザー権限 {#upstream-database-user-privileges}
 
@@ -135,7 +135,7 @@ GRANT SELECT ON `db1`.* TO 'your_user'@'your_wildcard_of_host';
 
 ### 下流データベースユーザー権限 {#downstream-database-user-privileges}
 
-ダウンストリーム データベース (TiDB) ユーザーには、次の権限が必要です。
+ダウンストリームデータベース (TiDB) ユーザーには、次の権限が必要です。
 
 | 権限       | 範囲          |
 | :------- | :---------- |

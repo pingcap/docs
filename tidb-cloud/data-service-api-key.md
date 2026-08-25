@@ -26,7 +26,7 @@ TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access
 
 -   TiDB Cloud Data Serviceでは、デフォルトではAPIキーごとに1分あたり最大100件のリクエスト（rpm）が許可されています。
 
-    API キーのレート制限は、キーを[作成する](#create-an-api-key)または[編集](#edit-an-api-key)するときに編集できます。サポートされている値の範囲は、 `1`から`1000`です。 1 分あたりのリクエストがレート制限を超えると、API は`429`エラーを返します。 API キーごとに 1000 rpm を超える割り当てを取得するには、サポート チームに[リクエストを送信する](https://tidb.support.pingcap.com/)ことができます。
+    API キーのレート制限は、キーを[作成する](#create-an-api-key)または[編集](#edit-an-api-key)するときに編集できます。サポートされている値の範囲は、 `1`から`1000`です。 1 分あたりのリクエストがレート制限を超えると、API は`429`エラーを返します。 API キーごとに 1000 rpm を超える割り当てを取得するには、サポートチームに[リクエストを送信する](https://tidb.support.pingcap.com/)ことができます。
 
     各APIリクエストは、制限に関する以下のヘッダーを返します。
 
@@ -108,7 +108,7 @@ TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access
 
     3.  （オプション）APIキーの希望するレート制限を設定します。
 
-        1 分あたりのリクエストがレート制限を超えると、API は`429`エラーを返します。 API キーごとに 1 分あたり 1000 リクエスト (rpm) を超える割り当てを取得するには、サポート チームに[リクエストを送信する](https://tidb.support.pingcap.com/)ことができます。
+        1 分あたりのリクエストがレート制限を超えると、API は`429`エラーを返します。 API キーごとに 1 分あたり 1000 リクエスト (rpm) を超える割り当てを取得するには、サポートチームに[リクエストを送信する](https://tidb.support.pingcap.com/)ことができます。
 
     4.  （オプション）APIキーの有効期限を設定します。
 

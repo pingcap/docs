@@ -1,6 +1,6 @@
 ---
 title: Data Check in the Sharding Scenario
-summary: シャーディング シナリオでのデータ チェックについて学習します。
+summary: シャーディング シナリオでのデータチェックについて学習します。
 ---
 
 # シャーディングシナリオにおけるデータチェック {#data-check-in-the-sharding-scenario}
@@ -75,7 +75,7 @@ target-table = "table-0"     # The name of the target table
     target-check-tables = ["test.table-0"]
 ```
 
-アップストリームのシャード テーブルが多数あり、すべてのシャード テーブルの命名規則に次のようなパターンがある場合は、構成に`table-rules`を使用できます。
+アップストリームのシャードテーブルが多数あり、すべてのシャードテーブルの命名規則に次のようなパターンがある場合は、構成に`table-rules`を使用できます。
 
 ![shard-table-replica-2](/media/shard-table-replica-2.png)
 

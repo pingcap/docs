@@ -7,7 +7,7 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
 このドキュメントでは、 `tidbcloud_dedicated_cluster`リソースを使用して[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターを管理する方法について説明します。
 
-また、 `tidbcloud_projects`データ ソースで必要な情報を取得し、 `tidbcloud_dedicated_node_group`リソースを使用してTiDB Cloud Dedicated クラスターの TiDB ノード グループを管理する方法も学習します。
+また、 `tidbcloud_projects`データソースで必要な情報を取得し、 `tidbcloud_dedicated_node_group`リソースを使用してTiDB Cloud Dedicated クラスターの TiDB ノードグループを管理する方法も学習します。
 
 `tidbcloud_dedicated_cluster`リソースの機能は次のとおりです。
 
@@ -24,7 +24,7 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
 各TiDB Cloud Dedicatedクラスタはプロジェクトに属します。TiDB Cloud Dedicatedクラスタを作成する前に、クラスタを作成するプロジェクトのIDを取得する必要があります。`project_id`が指定されていない場合は、デフォルトのプロジェクトが使用されます。
 
-利用可能なすべてのプロジェクトに関する情報を取得するには、次のように`tidbcloud_projects`データ ソースを使用します。
+利用可能なすべてのプロジェクトに関する情報を取得するには、次のように`tidbcloud_projects`データソースを使用します。
 
 1.  [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)で作成した`main.tf`ファイルに、次のように`data`と`output`ブロックを追加します。
 
@@ -50,17 +50,17 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
           value = data.tidbcloud_projects.example_project.items
         }
 
-    -   `data`ブロックを使用して、データ ソース タイプやデータ ソース名など、 TiDB Cloudのデータ ソースを定義します。
+    -   `data`ブロックを使用して、データソース タイプやデータソース名など、 TiDB Cloudのデータソースを定義します。
 
-        -   プロジェクト データ ソースを使用するには、データ ソース タイプを`tidbcloud_projects`に設定します。
+        -   プロジェクト データソースを使用するには、データソース タイプを`tidbcloud_projects`に設定します。
         -   データソース名は必要に応じて定義できます。例： `"example_project"` 。
-        -   `tidbcloud_projects`データ ソースの場合、 `page`および`page_size`属性を使用して、チェックするプロジェクトの最大数を制限できます。
+        -   `tidbcloud_projects`データソースの場合、 `page`および`page_size`属性を使用して、チェックするプロジェクトの最大数を制限できます。
 
-    -   `output`ブロックを使用して、出力に表示されるデータ ソース情報を定義し、他の Terraform 構成が使用できるように情報を公開します。
+    -   `output`ブロックを使用して、出力に表示されるデータソース情報を定義し、他の Terraform 構成が使用できるように情報を公開します。
 
         `output`ブロックは、プログラミング言語の戻り値と同様に機能します。詳細については、 [Terraformドキュメント](https://www.terraform.io/language/values/outputs)を参照してください。
 
-    リソースとデータ ソースに使用可能なすべての構成を取得するには、 [Terraform プロバイダーの構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)を参照してください。
+    リソースとデータソースに使用可能なすべての構成を取得するには、 [Terraform プロバイダーの構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)を参照してください。
 
 2.  設定を適用するには、コマンド`terraform apply`を実行してください。続行するには、確認プロンプトで`yes`と入力してください。
 
@@ -386,8 +386,8 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
 -   クラスターをスケーリングします。
 -   クラスターを一時停止または再開します。
 -   クラスターに[TiDBノードグループ](/tidb-cloud/tidb-node-group-overview.md)追加します。
--   クラスターの TiDB ノード グループを更新します。
--   クラスターの TiDB ノード グループを削除します。
+-   クラスターの TiDB ノードグループを更新します。
+-   クラスターの TiDB ノードグループを削除します。
 
 ### TiFlashコンポーネントを追加する {#add-a-tiflash-component}
 
@@ -809,13 +809,13 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
 
 5.  `terraform apply`コマンドを実行し、確認のために`yes`入力します。しばらく待つと、状態が最終的に`ACTIVE`に変更されます。
 
-### クラスターに TiDB ノード グループを追加する {#add-a-tidb-node-group-to-the-cluster}
+### クラスターに TiDB ノードグループを追加する {#add-a-tidb-node-group-to-the-cluster}
 
-状態が`ACTIVE`の場合、 TiDB ノード グループをクラスターに追加できます。
+状態が`ACTIVE`の場合、 TiDB ノードグループをクラスターに追加できます。
 
 1.  [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)を実行するときに使用する`cluster.tf`ファイルに、 `tidbcloud_dedicated_node_group`構成を追加します。
 
-    たとえば、3 つのノードを持つ TiDB ノード グループを追加するには、次のように構成を編集します。
+    たとえば、3 つのノードを持つ TiDB ノードグループを追加するには、次のように構成を編集します。
 
         resource "tidbcloud_dedicated_node_group" "example_group" {
             cluster_id = tidbcloud_dedicated_cluster.example_cluster.cluster_id
@@ -896,7 +896,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
 
 ### クラスターのTiDBノードグループを更新する {#update-a-tidb-node-group-of-the-cluster}
 
-クラスターの TiDB ノード グループの状態が`ACTIVE`の場合、そのグループを更新できます。
+クラスターの TiDB ノードグループの状態が`ACTIVE`の場合、そのグループを更新できます。
 
 1.  [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)際に使用する`cluster.tf`ファイルで、 `tidbcloud_dedicated_node_group`の設定を編集します。
 
@@ -960,9 +960,9 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
     Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
     ```
 
-### クラスターの TiDB ノード グループを削除します {#delete-a-tidb-node-group-of-the-cluster}
+### クラスターの TiDB ノードグループを削除します {#delete-a-tidb-node-group-of-the-cluster}
 
-クラスターの TiDB ノード グループを削除するには、 `dedicated_node_group`リソースの構成を削除し、 `terraform apply`コマンドを使用してリソースを破棄します。
+クラスターの TiDB ノードグループを削除するには、 `dedicated_node_group`リソースの構成を削除し、 `terraform apply`コマンドを使用してリソースを破棄します。
 
 ```shell
   $ terraform apply

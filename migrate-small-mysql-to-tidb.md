@@ -7,7 +7,7 @@ summary: 小さなデータセットを MySQL から TiDB に移行する方法�
 
 このドキュメントでは、TiDB Data Migration (DM) を使用して、MySQL から TiDB へ小規模データセットを移行する方法について説明します。移行モードは完全移行モードと増分レプリケーションモードです。このドキュメントにおける「小規模データセット」とは、1 TiB 未満のデータサイズを指します。
 
-移行速度は、テーブル スキーマ内のインデックスの数、ハードウェア、ネットワーク環境などの複数の要因に応じて、30 GB/時間から 50 GB/時間まで変化します。<!--The migration process using DM is shown in the figure below.-->
+移行速度は、テーブルスキーマ内のインデックスの数、ハードウェア、ネットワーク環境などの複数の要因に応じて、30 GB/時間から 50 GB/時間まで変化します。<!--The migration process using DM is shown in the figure below.-->
 
 <!--/media/dm/migrate-with-dm.png-->
 
@@ -34,7 +34,7 @@ from:
   port: 3306
 ```
 
-次に、次のコマンドを実行して、 `tiup dmctl`を使用してデータ ソース構成を DM クラスターにロードします。
+次に、次のコマンドを実行して、 `tiup dmctl`を使用してデータソース構成を DM クラスターにロードします。
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
@@ -45,7 +45,7 @@ tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 | パラメータ                   | 説明                                                                    |
 | :---------------------- | :-------------------------------------------------------------------- |
 | `--master-addr`         | `dmctl`が接続するクラスタ内の任意のDMマスターノードの`{advertise-addr}`例：172.16.10.71:8261。 |
-| `operate-source create` | データ ソースを DM クラスターにロードします。                                             |
+| `operate-source create` | データソースを DM クラスターにロードします。                                             |
 
 ## ステップ2. 移行タスクを作成する {#step-2-create-the-migration-task}
 

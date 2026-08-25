@@ -31,17 +31,17 @@ DMSリソースを作成する前に、DMSがTiDB Cloudクラスターと通信�
 
 <div label="TiDB Cloud Starter or Essential">
 
-TiDB Cloud Starter またはTiDB Cloud Essential の場合、クライアントはパブリック エンドポイントまたはプライベート エンドポイントを介してクラスターに接続できます。
+TiDB Cloud Starter またはTiDB Cloud Essential の場合、クライアントはパブリックエンドポイントまたはプライベートエンドポイントを介してクラスターに接続できます。
 
 <CustomContent language="en,zh">
 
--   [パブリックエンドポイント経由でTiDB Cloud Starter または Essential クラスターに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)場合、次のいずれかを実行して、DMS レプリケーション インスタンスがインターネットにアクセスできることを確認します。
+-   [パブリックエンドポイント経由でTiDB Cloud Starter または Essential クラスターに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)場合、次のいずれかを実行して、DMS レプリケーションインスタンスがインターネットにアクセスできることを確認します。
 
     -   レプリケーションインスタンスをパブリックサブネットにデプロイし、 **Public accessible**を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)を参照してください。
 
     -   レプリケーションインスタンスをプライベートサブネットにデプロイし、プライベートサブネット内のトラフィックをパブリックサブネットにルーティングします。この場合、少なくとも3つのサブネット（プライベートサブネット2つとパブリックサブネット1つ）が必要です。2つのプライベートサブネットは、レプリケーションインスタンスが存在するサブネットグループを形成します。次に、パブリックサブネットにNATゲートウェイを作成し、2つのプライベートサブネットのトラフィックをNATゲートウェイにルーティングする必要があります。詳細については、 [プライベートサブネットからインターネットにアクセスする](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)を参照してください。
 
--   プライベート エンドポイント経由でTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続するには、次のドキュメントを参照して、まずプライベート エンドポイントを設定し、プライベート サブネットにレプリケーション インスタンスをデプロイします。
+-   プライベートエンドポイント経由でTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続するには、次のドキュメントを参照して、まずプライベートエンドポイントを設定し、プライベートサブネットにレプリケーションインスタンスをデプロイします。
 
     -   [AWS PrivateLink 経由でTiDB Cloud Starter または Essential に接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
     -   [Alibaba Cloud プライベートエンドポイント経由でTiDB Cloud Starter または Essential に接続します](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
@@ -50,13 +50,13 @@ TiDB Cloud Starter またはTiDB Cloud Essential の場合、クライアント�
 
 <CustomContent language="ja">
 
--   [パブリックエンドポイント経由でTiDB Cloud Starter または Essential クラスターに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)場合、次のいずれかを実行して、DMS レプリケーション インスタンスがインターネットにアクセスできることを確認します。
+-   [パブリックエンドポイント経由でTiDB Cloud Starter または Essential クラスターに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)場合、次のいずれかを実行して、DMS レプリケーションインスタンスがインターネットにアクセスできることを確認します。
 
     -   レプリケーションインスタンスをパブリックサブネットにデプロイし、 **Public accessible**を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)を参照してください。
 
     -   レプリケーションインスタンスをプライベートサブネットにデプロイし、プライベートサブネット内のトラフィックをパブリックサブネットにルーティングします。この場合、少なくとも3つのサブネット（プライベートサブネット2つとパブリックサブネット1つ）が必要です。2つのプライベートサブネットは、レプリケーションインスタンスが存在するサブネットグループを形成します。次に、パブリックサブネットにNATゲートウェイを作成し、2つのプライベートサブネットのトラフィックをNATゲートウェイにルーティングする必要があります。詳細については、 [プライベートサブネットからインターネットにアクセスする](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)を参照してください。
 
--   プライベート エンドポイント経由でTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続するには、まず[AWS PrivateLink 経由でTiDB Cloud Starter または Essential に接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してプライベート エンドポイントを設定し、レプリケーション インスタンスをプライベート サブネットにデプロイします。
+-   プライベートエンドポイント経由でTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続するには、まず[AWS PrivateLink 経由でTiDB Cloud Starter または Essential に接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してプライベートエンドポイントを設定し、レプリケーションインスタンスをプライベートサブネットにデプロイします。
 
 </CustomContent>
 
@@ -64,7 +64,7 @@ TiDB Cloud Starter またはTiDB Cloud Essential の場合、クライアント�
 
 <div label="TiDB Cloud Dedicated">
 
-TiDB Cloud Dedicated の場合、クライアントはパブリック エンドポイント、プライベート エンドポイント、または VPC ピアリングを介してクラスターに接続できます。
+TiDB Cloud Dedicated の場合、クライアントはパブリックエンドポイント、プライベートエンドポイント、または VPC ピアリングを介してクラスターに接続できます。
 
 -   [パブリックエンドポイント経由でTiDB Cloud Dedicated クラスターに接続する](/tidb-cloud/connect-via-standard-connection.md)については、DMS レプリケーションインスタンスがインターネットにアクセスできることを確認するために、次のいずれかを実行します。さらに、レプリケーションインスタンスまたは NAT ゲートウェイのパブリック IP アドレスをクラスターの[IPアクセスリスト](/tidb-cloud/configure-ip-access-list.md)に追加する必要があります。
 
@@ -72,9 +72,9 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
     -   レプリケーションインスタンスをプライベートサブネットにデプロイし、プライベートサブネット内のトラフィックをパブリックサブネットにルーティングします。この場合、少なくとも3つのサブネット（プライベートサブネット2つとパブリックサブネット1つ）が必要です。2つのプライベートサブネットは、レプリケーションインスタンスが存在するサブネットグループを形成します。次に、パブリックサブネットにNATゲートウェイを作成し、2つのプライベートサブネットのトラフィックをNATゲートウェイにルーティングする必要があります。詳細については、 [プライベートサブネットからインターネットにアクセスする](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)を参照してください。
 
--   プライベート エンドポイント経由でTiDB Cloud Dedicated クラスターに接続するには、 [プライベートエンドポイントを設定する](/tidb-cloud/set-up-private-endpoint-connections.md) 、プライベート サブネットにレプリケーション インスタンスをデプロイします。
+-   プライベートエンドポイント経由でTiDB Cloud Dedicated クラスターに接続するには、 [プライベートエンドポイントを設定する](/tidb-cloud/set-up-private-endpoint-connections.md) 、プライベートサブネットにレプリケーションインスタンスをデプロイします。
 
--   VPC ピアリング経由でTiDB Cloud Dedicated クラスターに接続するには、 [VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md) 、プライベート サブネットにレプリケーション インスタンスをデプロイします。
+-   VPC ピアリング経由でTiDB Cloud Dedicated クラスターに接続するには、 [VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md) 、プライベートサブネットにレプリケーションインスタンスをデプロイします。
 
 </div>
 </SimpleTab>
@@ -100,7 +100,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
     -   **Network type - new**: **IPv4**を選択します。
     -   **Virtual private cloud (VPC) for IPv4**: 必要な VPC を選択します。
-    -   **Replication subnet group**: レプリケーション インスタンスのサブネット グループを選択します。
+    -   **Replication subnet group**: レプリケーションインスタンスのサブネット グループを選択します。
     -   **Public accessible**: ネットワーク構成に基づいて設定します。
 
     ![Connectivity and security](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-connectivity-security.png)
@@ -119,7 +119,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
     ![Create endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-create-endpoint.png)
 
-2.  **Create endpoint**をクリックして、ターゲット データベース エンドポイントを作成します。
+2.  **Create endpoint**をクリックして、ターゲットデータベース エンドポイントを作成します。
 
 3.  **Endpoint type**セクションで、 **Source endpoint**または**Target endpoint**を選択します。
 

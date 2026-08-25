@@ -1,6 +1,6 @@
 ---
 title: Response and HTTP Status Codes of Data Service
-summary: このドキュメントでは、TiDB CloudのData Serviceの応答と HTTP ステータス コードについて説明します。
+summary: このドキュメントでは、TiDB CloudのData Serviceの応答と HTTP ステータスコードについて説明します。
 ---
 
 # Data Serviceの応答とHTTPステータスコード {#response-and-http-status-codes-of-data-service}
@@ -250,7 +250,7 @@ HTTPステータスコードが`200`で、 `data.result.code`フィールドに�
 
 ### 408 {#408}
 
-このステータス コードは、リクエストがエンドポイントのタイムアウト期間を超えたことを示します。エンドポイントのタイムアウトを変更するには、 [プロパティを構成する](/tidb-cloud/data-service-manage-endpoint.md#configure-properties)を参照してください。
+このステータスコードは、リクエストがエンドポイントのタイムアウト期間を超えたことを示します。エンドポイントのタイムアウトを変更するには、 [プロパティを構成する](/tidb-cloud/data-service-manage-endpoint.md#configure-properties)を参照してください。
 
 回答例は以下のとおりです。
 
@@ -276,7 +276,7 @@ HTTPステータスコードが`200`で、 `data.result.code`フィールドに�
 
 ### 429 {#429}
 
-このステータス コードは、リクエストが API キーのレート制限を超えていることを示します。さらに多くの割り当てが必要な場合は、サポート チームに[リクエストを送信する](https://tidb.support.pingcap.com/)ください。
+このステータスコードは、リクエストが API キーのレート制限を超えていることを示します。さらに多くの割り当てが必要な場合は、サポートチームに[リクエストを送信する](https://tidb.support.pingcap.com/)ください。
 
 回答例は以下のとおりです。
 

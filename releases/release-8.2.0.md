@@ -13,7 +13,7 @@ TiDB バージョン: 8.2.0
 
 バージョン8.2.0では、以下の主要な機能と改善点が導入されています。
 
-<table><thead><tr><th>カテゴリ</th><th>機能／改善点</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.2/tiproxy-load-balance">TiProxyは複数のロードバランシングポリシーをサポートしています。</a></td><td> TiDB v8.2.0では、TiProxyはステータス、接続数、健全性、メモリ、CPU、ロケーションなど、さまざまな要素に基づいてTiDBノードを評価し、ランク付けします。 <code>policy</code>構成項目で指定された負荷分散ポリシーに従って、TiProxyはデータベース操作を実行する最適なTiDBノードを動的に選択します。これにより、リソース使用率全体が最適化され、クラスタのパフォーマンスが向上し、スループットが増加します。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.2/system-variables#tidb_enable_parallel_hashagg_spill-new-in-v800">TiDB の並列 HashAgg アルゴリズムはディスク スピル (GA) をサポートします</a></td><td>HashAgg は、同じフィールド値を持つ行を効率的に集計するために TiDB で広く使用されている集計演算子です。TiDB v8.0.0 では、処理速度をさらに向上させる実験的機能として parallel HashAgg が導入されました。メモリリソースが不足している場合、parallel HashAgg は一時的にソートされたデータをディスクに書き出すことで、過剰なメモリ使用による潜在的な OOM リスクを回避します。これにより、ノードの安定性を維持しながらクエリ パフォーマンスが向上します。v8.2.0 では、この機能が一般提供 (GA) となり、デフォルトで有効になっているため、 <code>tidb_executor_concurrency</code>を使用して parallel HashAgg の同時実行性を安全に構成できます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.2/tidb-configuration-file#stats-load-concurrency-new-in-v540">統計情報の読み込み効率を最大10倍向上</a></td><td>SaaSやPaaSサービスなど、テーブルとパーティションの数が多いクラスタでは、統計情報のロード効率を改善することで、TiDBインスタンスの起動速度低下の問題を解決し、統計情報の動的ロードの成功率を高めることができます。この改善により、統計情報のロード失敗によるパフォーマンス低下が軽減され、クラスタの安定性が向上します。</td></tr><tr><td rowspan="1">データベースの運用と可観測性</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.2/tidb-resource-control#bind-resource-groups">リソースグループの切り替えに対する特権制御を導入する</a></td><td>リソース制御は広く利用されているため、リソースグループの切り替えに関する権限制御は、データベースユーザーによるリソースの不正使用を防ぎ、管理者によるリソース使用全体の保護を強化し、クラスタの安定性を向上させることができる。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>機能／改善点</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.2/tiproxy-load-balance">TiProxyは複数のロードバランシングポリシーをサポートしています。</a></td><td> TiDB v8.2.0では、TiProxyはステータス、接続数、健全性、メモリ、CPU、ロケーションなど、さまざまな要素に基づいてTiDBノードを評価し、ランク付けします。 <code>policy</code>構成項目で指定された負荷分散ポリシーに従って、TiProxyはデータベース操作を実行する最適なTiDBノードを動的に選択します。これにより、リソース使用率全体が最適化され、クラスタのパフォーマンスが向上し、スループットが増加します。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.2/system-variables#tidb_enable_parallel_hashagg_spill-new-in-v800">TiDB の並列 HashAgg アルゴリズムはディスクスピル (GA) をサポートします</a></td><td>HashAgg は、同じフィールド値を持つ行を効率的に集計するために TiDB で広く使用されている集計演算子です。TiDB v8.0.0 では、処理速度をさらに向上させる実験的機能として parallel HashAgg が導入されました。メモリリソースが不足している場合、parallel HashAgg は一時的にソートされたデータをディスクに書き出すことで、過剰なメモリ使用による潜在的な OOM リスクを回避します。これにより、ノードの安定性を維持しながらクエリパフォーマンスが向上します。v8.2.0 では、この機能が一般提供 (GA) となり、デフォルトで有効になっているため、 <code>tidb_executor_concurrency</code>を使用して parallel HashAgg の同時実行性を安全に構成できます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.2/tidb-configuration-file#stats-load-concurrency-new-in-v540">統計情報の読み込み効率を最大10倍向上</a></td><td>SaaSやPaaSサービスなど、テーブルとパーティションの数が多いクラスタでは、統計情報のロード効率を改善することで、TiDBインスタンスの起動速度低下の問題を解決し、統計情報の動的ロードの成功率を高めることができます。この改善により、統計情報のロード失敗によるパフォーマンス低下が軽減され、クラスタの安定性が向上します。</td></tr><tr><td rowspan="1">データベースの運用と可観測性</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.2/tidb-resource-control#bind-resource-groups">リソースグループの切り替えに対する特権制御を導入する</a></td><td>リソース制御は広く利用されているため、リソースグループの切り替えに関する権限制御は、データベースユーザーによるリソースの不正使用を防ぎ、管理者によるリソース使用全体の保護を強化し、クラスタの安定性を向上させることができる。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -35,7 +35,7 @@ TiDB バージョン: 8.2.0
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_executor_concurrency-new-in-v50)を参照してください。
 
--   TiDB の並列 HashAgg アルゴリズムは、ディスク スピル (GA) をサポートしています。 [#35637](https://github.com/pingcap/tidb/issues/35637) @[xzhangxian1008](https://github.com/xzhangxian1008)
+-   TiDB の並列 HashAgg アルゴリズムは、ディスクスピル (GA) をサポートしています。 [#35637](https://github.com/pingcap/tidb/issues/35637) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
     TiDB v8.0.0 では、実験的機能としてディスクスピルをサポートする並列 HashAgg アルゴリズムが導入されました。v8.2.0 では、この機能が一般提供 (GA) されます。並列 HashAgg アルゴリズムを使用すると、TiDB はメモリ使用量に基づいて自動的にデータスピルをトリガーし、クエリのパフォーマンスとデータスループットのバランスを取ります。この機能はデフォルトで有効になっています。この機能を制御するシステム変数`tidb_enable_parallel_hashagg_spill`は、今後のリリースで非推奨となります。
 
@@ -107,7 +107,7 @@ TiDB バージョン: 8.2.0
 
 -   TiFlashログの感度低下を強化 [#8977](https://github.com/pingcap/tiflash/issues/8977) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
-    TiDB v8.0.0 では、ログの匿名化機能が強化され、TiDB ログ内のユーザー データがマーカー`‹ ›`で囲まれるかどうかを制御できるようになりました。マークされたログに基づいて、ログを表示する際にマークされた情報を削除するかどうかを決定できるため、ログの匿名化の柔軟性が向上します。v8.2.0 では、 TiFlash でログの匿名化に関する同様の機能強化が導入されています。この機能を使用するには、 TiFlash構成項目`security.redact_info_log`を`marker`に設定します。
+    TiDB v8.0.0 では、ログの匿名化機能が強化され、TiDB ログ内のユーザーデータがマーカー`‹ ›`で囲まれるかどうかを制御できるようになりました。マークされたログに基づいて、ログを表示する際にマークされた情報を削除するかどうかを決定できるため、ログの匿名化の柔軟性が向上します。v8.2.0 では、 TiFlash でログの匿名化に関する同様の機能強化が導入されています。この機能を使用するには、 TiFlash構成項目`security.redact_info_log`を`marker`に設定します。
 
     詳細については、 [ドキュメント](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)を参照してください。
 
@@ -115,7 +115,7 @@ TiDB バージョン: 8.2.0
 
 -   複数の変更フィード間で TiCDC 同期ポイントを調整する [#11212](https://github.com/pingcap/tiflow/issues/11212) @[hongyunyan](https://github.com/hongyunyan)
 
-    バージョン 8.2.0 より前は、複数のチェンジフィード間で TiCDC 同期ポイントを整合させるのは困難でした。チェンジフィードの作成時に、他のチェンジフィードの同期ポイントと整合するように、チェンジフィードの`startTs` `sync-point-interval`構成の倍数として作成されます。この変更により、同じ`sync-point-interval`構成を持つ複数のチェンジフィード間で同期ポイントを整合させることが可能になり、複数のダウンストリーム クラスタの整合が簡素化され、機能が向上します。
+    バージョン 8.2.0 より前は、複数のチェンジフィード間で TiCDC 同期ポイントを整合させるのは困難でした。チェンジフィードの作成時に、他のチェンジフィードの同期ポイントと整合するように、チェンジフィードの`startTs` `sync-point-interval`構成の倍数として作成されます。この変更により、同じ`sync-point-interval`構成を持つ複数のチェンジフィード間で同期ポイントを整合させることが可能になり、複数のダウンストリームクラスタの整合が簡素化され、機能が向上します。
 
     詳細については、 [ドキュメント](/ticdc/ticdc-upstream-downstream-check.md#notes)を参照してください。
 
@@ -133,11 +133,11 @@ TiDB バージョン: 8.2.0
 
 ### 動作の変更 {#behavior-changes}
 
--   TiDB Lightningを使用して CSV ファイルをインポートする場合、 `strict-format = true`を設定して大きな CSV ファイルを複数の小さな CSV ファイルに分割し、同時実行性とインポート パフォーマンスを向上させる場合は、 `terminator`明示的に指定する必要があります。指定できる値は、 `\r` 、 `\n` 、または`\r\n`です。行末文字を指定しないと、CSV ファイル データの解析時に例外が発生する可能性があります。 [#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
+-   TiDB Lightningを使用して CSV ファイルをインポートする場合、 `strict-format = true`を設定して大きな CSV ファイルを複数の小さな CSV ファイルに分割し、同時実行性とインポートパフォーマンスを向上させる場合は、 `terminator`明示的に指定する必要があります。指定できる値は、 `\r` 、 `\n` 、または`\r\n`です。行末文字を指定しないと、CSV ファイル データの解析時に例外が発生する可能性があります。 [#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
 
--   [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用して CSV ファイルをインポートする場合、大きな CSV ファイルを複数の小さな CSV ファイルに分割して同時実行性とインポート パフォーマンスを向上させるために`SPLIT_FILE`パラメーターを指定すると、行末文字`LINES_TERMINATED_BY`を明示的に指定する必要があります。指定できる値は`\r` 、 `\n` 、または`\r\n`です。行末文字を指定しないと、CSV ファイル データの解析時に例外が発生する可能性があります。 [#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
+-   [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用して CSV ファイルをインポートする場合、大きな CSV ファイルを複数の小さな CSV ファイルに分割して同時実行性とインポートパフォーマンスを向上させるために`SPLIT_FILE`パラメーターを指定すると、行末文字`LINES_TERMINATED_BY`を明示的に指定する必要があります。指定できる値は`\r` 、 `\n` 、または`\r\n`です。行末文字を指定しないと、CSV ファイル データの解析時に例外が発生する可能性があります。 [#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
 
--   BR v8.2.0 より前は、TiCDC レプリケーション タスクを持つクラスタで[BRデータ復元](/br/backup-and-restore-overview.md)を実行することはサポートされていませんでした。v8.2.0 以降、 BR はTiCDC のデータ復元に関する制限を緩和しました。復元対象データの BackupTS (バックアップ時刻) が changefeed [`CheckpointTS`](/ticdc/ticdc-classic-architecture.md#checkpointts) (現在のレプリケーションの進行状況を示すタイムスタンプ) より前であれば、 BR は正常にデータ復元を進めることができます。 `BackupTS`は通常かなり前であることを考慮すると、ほとんどのシナリオで、 BR はTiCDC レプリケーション タスクを持つクラスタのデータ復元をサポートしていると考えられます。 [#53131](https://github.com/pingcap/tidb/issues/53131) @[YuJuncen](https://github.com/YuJuncen)
+-   BR v8.2.0 より前は、TiCDC レプリケーションタスクを持つクラスタで[BRデータ復元](/br/backup-and-restore-overview.md)を実行することはサポートされていませんでした。v8.2.0 以降、 BR はTiCDC のデータ復元に関する制限を緩和しました。復元対象データの BackupTS (バックアップ時刻) が changefeed [`CheckpointTS`](/ticdc/ticdc-classic-architecture.md#checkpointts) (現在のレプリケーションの進行状況を示すタイムスタンプ) より前であれば、 BR は正常にデータ復元を進めることができます。 `BackupTS`は通常かなり前であることを考慮すると、ほとんどのシナリオで、 BR はTiCDC レプリケーションタスクを持つクラスタのデータ復元をサポートしていると考えられます。 [#53131](https://github.com/pingcap/tidb/issues/53131) @[YuJuncen](https://github.com/YuJuncen)
 
 ### MySQLとの互換性 {#mysql-compatibility}
 
@@ -168,7 +168,7 @@ TiDB バージョン: 8.2.0
 
 ### システムテーブル {#system-tables}
 
--   [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)および[`INFORMATION_SCHEMA.CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md#cluster_processlist)システム テーブルに`SESSION_ALIAS`フィールドを追加して、現在のセッションのエイリアスを表示します。 [#46889](https://github.com/pingcap/tidb/issues/46889) @[lcwangchao](https://github.com/lcwangchao)
+-   [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)および[`INFORMATION_SCHEMA.CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md#cluster_processlist)システムテーブルに`SESSION_ALIAS`フィールドを追加して、現在のセッションのエイリアスを表示します。 [#46889](https://github.com/pingcap/tidb/issues/46889) @[lcwangchao](https://github.com/lcwangchao)
 
 ### コンパイラバージョン {#compiler-versions}
 
@@ -221,7 +221,7 @@ TiDB バージョン: 8.2.0
 -   PD
 
     -   リージョンハートビート処理のパフォーマンスを改善 [#7897](https://github.com/tikv/pd/issues/7897) @[nolouch](https://github.com/nolouch)@[rleungx](https://github.com/rleungx) @[JmPotato](https://github.com/JmPotato)
-    -   pd-ctl は、バイトまたはクエリ次元によるホット リージョンのクエリをサポートします [#7369](https://github.com/tikv/pd/issues/7369) @[lhy1024](https://github.com/lhy1024)
+    -   pd-ctl は、バイトまたはクエリ次元によるホットリージョンのクエリをサポートします [#7369](https://github.com/tikv/pd/issues/7369) @[lhy1024](https://github.com/lhy1024)
 
 -   TiFlash
 

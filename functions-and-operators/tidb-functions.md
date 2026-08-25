@@ -18,7 +18,7 @@ summary: TiDB 固有の関数の使用法について学習します。
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key)                 | TiDBエンコードされたキーエントリを、 `_tidb_rowid`と`table_id`含むJSON構造にデコードします。これらのエンコードされたキーは、一部のシステムテーブルやログ出力で確認できます。                                                                                                                                           |
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan)               | TiDB 実行計画をデコードします。                                                                                                                                                                                                                              |
 | [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | クラスター内の一連の SQL ダイジェストに対応する正規化された SQL ステートメント (形式と引数のない形式) を照会します。                                                                                                                                                                                |
-| [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key)     | インデックス キーをエンコードします。                                                                                                                                                                                                                              |
+| [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key)     | インデックスキーをエンコードします。                                                                                                                                                                                                                              |
 | [`TIDB_ENCODE_RECORD_KEY()`](#tidb_encode_record_key)   | レコード キーをエンコードします。                                                                                                                                                                                                                                |
 | [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest)   | クエリ文字列のダイジェストを取得します。                                                                                                                                                                                                                             |
 | [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner)             | 接続しているTiDBインスタンスがDDLオーナーであるかどうかを確認します。DDLオーナーとは、クラスター内の他のすべてのノードに代わってDDLステートメントを実行する役割を担うTiDBインスタンスです。                                                                                                                                           |
@@ -43,7 +43,7 @@ summary: TiDB 固有の関数の使用法について学習します。
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key)                 | TiDBエンコードされたキーエントリを、 `_tidb_rowid`と`table_id`含むJSON構造にデコードします。これらのエンコードされたキーは、一部のシステムテーブルやログ出力で確認できます。                                                                                                                                                                      |
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan)               | TiDB 実行計画をデコードします。                                                                                                                                                                                                                                                         |
 | [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | クラスター内の一連の SQL ダイジェストに対応する正規化された SQL ステートメント (形式と引数のない形式) を照会します。                                                                                                                                                                                                           |
-| [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key)     | インデックス キーをエンコードします。                                                                                                                                                                                                                                                         |
+| [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key)     | インデックスキーをエンコードします。                                                                                                                                                                                                                                                         |
 | [`TIDB_ENCODE_RECORD_KEY()`](#tidb_encode_record_key)   | レコード キーをエンコードします。                                                                                                                                                                                                                                                           |
 | [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest)   | クエリ文字列のダイジェストを取得します。                                                                                                                                                                                                                                                        |
 | [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner)             | 接続しているTiDBインスタンスがDDLオーナーであるかどうかを確認します。DDLオーナーとは、クラスター内の他のすべてのノードに代わってDDLステートメントを実行する役割を担うTiDBインスタンスです。                                                                                                                                                                      |
@@ -65,7 +65,7 @@ summary: TiDB 固有の関数の使用法について学習します。
 
 例:
 
-ユーザー`user1`を作成し、リソース グループ`rg1`と`rg2` 2 つのリソース グループを作成し、ユーザー`user1`リソース グループ`rg1`にバインドします。
+ユーザー`user1`を作成し、リソースグループ`rg1`と`rg2` 2 つのリソースグループを作成し、ユーザー`user1`リソースグループ`rg1`にバインドします。
 
 ```sql
 CREATE USER 'user1';
@@ -74,7 +74,7 @@ CREATE RESOURCE GROUP rg2 RU_PER_SEC = 2000;
 ALTER USER 'user1' RESOURCE GROUP `rg1`;
 ```
 
-`user1`を使用してログインし、現在のユーザーにバインドされているリソース グループを表示します。
+`user1`を使用してログインし、現在のユーザーにバインドされているリソースグループを表示します。
 
 ```sql
 SELECT CURRENT_RESOURCE_GROUP();
@@ -89,7 +89,7 @@ SELECT CURRENT_RESOURCE_GROUP();
 1 row in set (0.00 sec)
 ```
 
-`SET RESOURCE GROUP`を実行して、現在のセッションのリソース グループを`rg2`に設定し、現在のユーザーにバインドされているリソース グループを表示します。
+`SET RESOURCE GROUP`を実行して、現在のセッションのリソースグループを`rg2`に設定し、現在のユーザーにバインドされているリソースグループを表示します。
 
 ```sql
 SET RESOURCE GROUP `rg2`;
@@ -497,7 +497,7 @@ SELECT *, TIDB_ROW_CHECKSUM() FROM t WHERE id = 1;
 
 -   シナリオ:
 
-    -   一意のセカンダリ インデックス上のキーが単調に増加または減少することによって書き込みホットスポットが発生し、インデックスに整数型のフィールドが含まれています。
+    -   一意のセカンダリインデックス上のキーが単調に増加または減少することによって書き込みホットスポットが発生し、インデックスに整数型のフィールドが含まれています。
     -   このSQL文は、セカンダリインデックスの全フィールドに基づいて等価性クエリを実行します。これは、 `SELECT`独立したクエリとして、または`UPDATE` 、 `DELETE`などによって生成された内部クエリとして実行されます。等価性クエリには、 `a = 1`または`a IN (1, 2, ......)` 2つの方法があります。
 
 -   制限事項:
@@ -601,7 +601,7 @@ TIDB_ENCODE_INDEX_KEY(<db_name>, <table_name>, <index_name>, <index_columns>...,
     -   主キーが`CLUSTERED`で、単一列の整数の場合、ハンドル値は主キー列の値になります。
     -   主キーが`CLUSTERED`で、複合主キーまたは非整数型 (共通ハンドル) の場合、ハンドル値はすべての主キー列の値を順番に含んだものになります。
 
-次の例は、異なる主キー タイプで複合セカンダリ インデックス`idx(c1, c2)`に対してこの関数を呼び出す方法を示しています。
+次の例は、異なる主キー タイプで複合セカンダリインデックス`idx(c1, c2)`に対してこの関数を呼び出す方法を示しています。
 
 ```sql
 -- For tables without a primary key or with a NONCLUSTERED primary key, use the _tidb_rowid column.
@@ -662,7 +662,7 @@ TIDB_ENCODE_RECORD_KEY(<db_name>, <table_name>, <handle_columns>...)
 
 パラメータの説明:
 
--   `<db_name>` : ターゲット テーブルを含むデータベースの名前。
+-   `<db_name>` : ターゲットテーブルを含むデータベースの名前。
 -   `<table_name>` : 対象テーブルの名前。パーティションテーブルの場合は、 `<table_name>`にパーティション名を指定できます（例： `'t(p0)'` ）。
 -   `<handle_columns>...` : 対応する行のハンドル（行キー）値。ハンドルの正確な構成は、テーブルの主キーの種類（例えば、主キーが`CLUSTERED` （共通ハンドル）であるか、非表示列`_tidb_rowid`を使用しているかなど）によって異なります。詳細については、 [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key)の`<handle_columns>...`の説明を参照してください。
 

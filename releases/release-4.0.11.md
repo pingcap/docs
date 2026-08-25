@@ -63,7 +63,7 @@ TiDB バージョン: 4.0.11
     -   TiDB Lightning
 
         -   インポートパフォーマンスを向上させるためにテーブルを並列に作成する[＃502](https://github.com/pingcap/tidb-lightning/pull/502)
-        -   エンジンの合計サイズがリージョンサイズより小さい場合は、リージョンの分割をスキップしてインポート パフォーマンスを向上させます。 [＃524](https://github.com/pingcap/tidb-lightning/pull/524)
+        -   エンジンの合計サイズがリージョンサイズより小さい場合は、リージョンの分割をスキップしてインポートパフォーマンスを向上させます。 [＃524](https://github.com/pingcap/tidb-lightning/pull/524)
         -   インポート進行状況バーを追加し、復元進行状況の精度を最適化します[＃506](https://github.com/pingcap/tidb-lightning/pull/506)
 
 ## バグ修正 {#bug-fixes}

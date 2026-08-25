@@ -32,4 +32,4 @@ summary: TiDB 1.0.8がリリースされました。このアップデートに�
 -   [コプロセッサーの合計に`Decimal`を使用する](https://github.com/pingcap/tikv/pull/2754)
 -   [受信したスナップショットのメタデータを強制的に同期して安全性を確保します](https://github.com/pingcap/tikv/pull/2758)
 
-1.0.7 から 1.0.8 にアップグレードするには、PD -&gt; TiKV -&gt; TiDB のローリング アップグレード順序に従います。
+1.0.7 から 1.0.8 にアップグレードするには、PD -&gt; TiKV -&gt; TiDB のローリングアップグレード順序に従います。

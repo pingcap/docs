@@ -79,7 +79,7 @@ TiDB バージョン: 7.5.7
     -   `ALTER RANGE meta SET PLACEMENT POLICY` のキー範囲が正しくない問題を修正しました [＃60888](https://github.com/pingcap/tidb/issues/60888) @[nolouch](https://github.com/nolouch)
     -   Grafanaの**Stats Healthy Distribution**パネルのデータが正しくない可能性がある問題を修正しました[＃57176](https://github.com/pingcap/tidb/issues/57176) @[hawkingrei](https://github.com/hawkingrei)
     -   `latin1_bin`の比較動作が`utf8mb4_bin`および`utf8_bin` と異なる問題を修正しました [＃60701](https://github.com/pingcap/tidb/issues/60701) @[hawkingrei](https://github.com/hawkingrei)
-    -   メタデータ ロック (MDL) を無効にした後、スキーマ バージョン更新に失敗して DDL 操作が停止する問題を修正しました。 [＃61210](https://github.com/pingcap/tidb/issues/61210) @[wjhuang2016](https://github.com/wjhuang2016)
+    -   メタデータロック (MDL) を無効にした後、スキーマバージョン更新に失敗して DDL 操作が停止する問題を修正しました。 [＃61210](https://github.com/pingcap/tidb/issues/61210) @[wjhuang2016](https://github.com/wjhuang2016)
     -   特定のシナリオでログの秘匿化が有効にならない問題を修正[＃59279](https://github.com/pingcap/tidb/issues/59279) @[tangenta](https://github.com/tangenta)
     -   修正コントロール#44855が有効になっている場合にTiDBセッションがクラッシュする可能性がある問題を修正[＃59762](https://github.com/pingcap/tidb/issues/59762) @[winoros](https://github.com/winoros)
     -   `IndexLookup`オペレータが`context canceled`エラーに遭遇したときに冗長なログエントリを削除します [＃61072](https://github.com/pingcap/tidb/issues/61072) @[yibin87](https://github.com/yibin87)
@@ -104,7 +104,7 @@ TiDB バージョン: 7.5.7
     -   列またはインデックスの統計情報が欠落している場合、 `JOIN`行数推定が非常に不正確になる可能性がある問題を修正しました[＃61602](https://github.com/pingcap/tidb/issues/61602) @[qw4990](https://github.com/qw4990)
     -   システム変数`tidb_cost_model_version`のデフォルト値が誤って設定されている問題を修正[＃61565](https://github.com/pingcap/tidb/issues/61565) @[hawkingrei](https://github.com/hawkingrei)
     -   テーブルの最初の列が仮想生成列の場合に統計が正しくない可能性がある問題を修正しました [＃61606](https://github.com/pingcap/tidb/issues/61606) @[winoros](https://github.com/winoros)
-    -   述語の簡素化でプラン キャッシュが誤ってスキップされる問題を修正しました [＃61513](https://github.com/pingcap/tidb/issues/61513) @[hawkingrei](https://github.com/hawkingrei)
+    -   述語の簡素化でプランキャッシュが誤ってスキップされる問題を修正しました [＃61513](https://github.com/pingcap/tidb/issues/61513) @[hawkingrei](https://github.com/hawkingrei)
     -   インデックスの追加中に`ADMIN CANCEL DDL JOBS`を実行すると、インデックスの追加プロセスがハングする問題を修正しました。 [＃61087](https://github.com/pingcap/tidb/issues/61087) @[tangenta](https://github.com/tangenta)
     -   一部の内部 SQL 実行が失敗した後でも`ADMIN CHECK`が成功を返す問題を修正[＃61612](https://github.com/pingcap/tidb/issues/61612) @[joechenrh](https://github.com/joechenrh)
     -   マルチスキーマ変更で複数のインデックスを追加した後にデータとインデックスが不整合になる問題を修正 [＃61255](https://github.com/pingcap/tidb/issues/61255) @[tangenta](https://github.com/tangenta)
@@ -145,7 +145,7 @@ TiDB バージョン: 7.5.7
     -   Backup & Restore (BR)
 
         -   PITRが3072バイトを超えるインデックスの復元に失敗する問題を修正[＃58430](https://github.com/pingcap/tidb/issues/58430) @[YuJuncen](https://github.com/YuJuncen)
-        -   大量のデータを転送するときに Azure Blob Storage へのログ バックアップのアップロードが遅くなる問題を修正[＃18410](https://github.com/tikv/tikv/issues/18410) @[YuJuncen](https://github.com/YuJuncen)
+        -   大量のデータを転送するときに Azure Blob Storage へのログバックアップのアップロードが遅くなる問題を修正[＃18410](https://github.com/tikv/tikv/issues/18410) @[YuJuncen](https://github.com/YuJuncen)
         -   `-f` でテーブルをフィルタリングするときに、 BR が対応するテーブルがクラスター内に存在するかどうかをチェックしない問題を修正しました。 [＃61592](https://github.com/pingcap/tidb/issues/61592) @[RidRisR](https://github.com/RidRisR)
 
     -   TiCDC

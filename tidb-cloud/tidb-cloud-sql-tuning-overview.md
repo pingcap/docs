@@ -25,7 +25,7 @@ TiDB Cloudには、スロークエリを分析するのに役立つツールが�
 
 TiDB Cloudコンソールには、 [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページ上に[**SQL Statement**](/tidb-cloud/tune-performance.md#statement-analysis)タブが用意されています。このタブでは、TiDB Cloudリソース上のすべてのデータベースの SQL ステートメントの実行統計情報を収集します。これを使用して、合計または単一の実行に長い時間を要する SQL ステートメントを特定し、分析することができます。
 
-このページでは、構造が同じ SQL クエリ (クエリ パラメータが一致しない場合でも) は、同じ SQL ステートメントにグループ化されることに注意してください。たとえば、 `SELECT * FROM employee WHERE id IN (1, 2, 3)`と`select * from EMPLOYEE where ID in (4, 5)`は、どちらも同じ SQL ステートメント`select * from employee where id in (...)`の一部です。
+このページでは、構造が同じ SQL クエリ (クエリパラメータが一致しない場合でも) は、同じ SQL ステートメントにグループ化されることに注意してください。たとえば、 `SELECT * FROM employee WHERE id IN (1, 2, 3)`と`select * from EMPLOYEE where ID in (4, 5)`は、どちらも同じ SQL ステートメント`select * from employee where id in (...)`の一部です。
 
 **SQL Statement**でいくつかの重要な情報を確認できます。
 
@@ -55,7 +55,7 @@ TiDBによって選択された実行計画が最適でない場合は、 EXPLAI
 
 `parser`による元のクエリテキストの解析と基本的な妥当性検証の後、TiDB はまずクエリに対して論理的に同等の変更を行います。詳細については、 [SQL論理最適化](/sql-logical-optimization.md)を参照してください。
 
-これらの等価性の変更により、クエリは論理実行計画で扱いやすくなります。等価性の変更後、TiDB は元のクエリと等価なクエリ プラン構造を取得し、データ分布と演算子の特定の実行オーバーヘッドに基づいて最終的な実行計画を取得します。詳細については、 [SQLの物理的最適化](/sql-physical-optimization.md)を参照してください。
+これらの等価性の変更により、クエリは論理実行計画で扱いやすくなります。等価性の変更後、TiDB は元のクエリと等価なクエリプラン構造を取得し、データ分布と演算子の特定の実行オーバーヘッドに基づいて最終的な実行計画を取得します。詳細については、 [SQLの物理的最適化](/sql-physical-optimization.md)を参照してください。
 
 また、プリペアドプランキャッシュで紹介したように、TiDB は、 `PREPARE`ステートメントの実行時に実行計画の作成オーバーヘッドを削減するために、[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)を提供しています。
 
@@ -77,7 +77,7 @@ SQLクエリが遅くなる最も一般的な原因は、 `SELECT`ステート�
 
 ### インデックスのベストプラクティス {#index-best-practices}
 
-[インデックス作成のベストプラクティス](/develop/dev-guide-index-best-practice.md)には、インデックスの作成とインデックスの使用に関するベスト プラクティスが含まれています。
+[インデックス作成のベストプラクティス](/develop/dev-guide-index-best-practice.md)には、インデックスの作成とインデックスの使用に関するベストプラクティスが含まれています。
 
 インデックスの作成速度はデフォルトでは控えめですが、シナリオによっては[変数の変更](/develop/dev-guide-optimize-sql-best-practices.md#add-index-best-practices)によってインデックス作成プロセスを高速化できます。
 

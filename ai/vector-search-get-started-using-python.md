@@ -120,7 +120,7 @@ TiDBをローカルマシンで実行している場合、 `<HOST>`はデフォ�
 
 ### ステップ4．埋め込みモデルを初期化する {#step-4-initialize-the-embedding-model}
 
-[埋め込みモデル](/ai/concepts/vector-search-overview.md#embedding-model)データを[ベクトル埋め込み](/ai/concepts/vector-search-overview.md#vector-embedding)に変換します。この例では、テキスト埋め込みに事前トレーニング済みモデル[**msmarco-MiniLM-L12-cos-v5**](https://huggingface.co/sentence-transformers/msmarco-MiniLM-L12-cos-v5)を使用します。 `sentence-transformers`ライブラリによって提供されるこの軽量モデルは、テキスト データを 384 次元のベクトル埋め込みに変換します。
+[埋め込みモデル](/ai/concepts/vector-search-overview.md#embedding-model)データを[ベクトル埋め込み](/ai/concepts/vector-search-overview.md#vector-embedding)に変換します。この例では、テキスト埋め込みに事前トレーニング済みモデル[**msmarco-MiniLM-L12-cos-v5**](https://huggingface.co/sentence-transformers/msmarco-MiniLM-L12-cos-v5)を使用します。 `sentence-transformers`ライブラリによって提供されるこの軽量モデルは、テキストデータを 384 次元のベクトル埋め込みに変換します。
 
 モデルを設定するには、次のコードを`example.py`ファイルにコピーしてください。このコードは`SentenceTransformer`インスタンスを初期化し、後で使用するために`text_to_embedding()`関数を定義します。
 

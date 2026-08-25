@@ -5,7 +5,7 @@ summary: TiDBデータベースにおけるQUERY WATCHの使用方法の概要�
 
 # QUERY WATCH {#query-watch}
 
-`QUERY WATCH`ステートメントは、リソース グループ内の暴走クエリの監視リストを手動で管理するために使用されます。
+`QUERY WATCH`ステートメントは、リソースグループ内の暴走クエリの監視リストを手動で管理するために使用されます。
 
 > **Note:**
 >

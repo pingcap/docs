@@ -89,7 +89,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 -   Fast Online DDL による一意インデックス作成のサポート [#40730](https://github.com/pingcap/tidb/issues/40730) @[tangenta](https://github.com/tangenta)
 
-    TiDB v6.5.0 では、Fast Online DDL による通常のセカンダリ インデックスの作成がサポートされています。TiDB v7.0.0 では、Fast Online DDL によるユニーク インデックスの作成がサポートされています。v6.1.0 と比較して、大規模テーブルへのユニーク インデックスの追加は、パフォーマンスの向上により数倍高速化されることが期待されます。
+    TiDB v6.5.0 では、Fast Online DDL による通常のセカンダリインデックスの作成がサポートされています。TiDB v7.0.0 では、Fast Online DDL によるユニーク インデックスの作成がサポートされています。v6.1.0 と比較して、大規模テーブルへのユニーク インデックスの追加は、パフォーマンスの向上により数倍高速化されることが期待されます。
 
     詳細については、[ドキュメント](/best-practices/ddl-introduction.md)を参照してください。
 
@@ -131,14 +131,14 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     バージョン7.0.0では、TiDBは統計情報の収集ロジックをさらに最適化し、収集時間を約25%短縮しました。この最適化により、大規模データベースクラスタの運用効率と安定性が向上し、統計情報の収集がクラスタのパフォーマンスに与える影響が軽減されます。
 
--   MPP 最適化のための新しいオプティマイザー ヒントを追加 [#39710](https://github.com/pingcap/tidb/issues/39710) @[Reminiscent](https://github.com/Reminiscent)
+-   MPP 最適化のための新しいオプティマイザーヒントを追加 [#39710](https://github.com/pingcap/tidb/issues/39710) @[Reminiscent](https://github.com/Reminiscent)
 
     バージョン7.0.0では、TiDBはMPP実行計画の生成に影響を与える一連のオプティマイザヒントを追加しました。
 
     -   [`SHUFFLE_JOIN()`](/optimizer-hints.md#shuffle_joint1_name--tl_name-) : MPP で有効になります。指定されたテーブルに対してシャッフル結合アルゴリズムを使用するようにオプティマイザに指示します。
     -   [`BROADCAST_JOIN()`](/optimizer-hints.md#broadcast_joint1_name--tl_name-) : MPP で有効になります。指定されたテーブルに対してブロードキャスト結合アルゴリズムを使用するようにオプティマイザに指示します。
     -   [`MPP_1PHASE_AGG()`](/optimizer-hints.md#mpp_1phase_agg) ：MPP（最大パフォーマンス）に有効です。指定されたクエリブロック内のすべての集計関数に対して、オプティマイザに1フェーズ集計アルゴリズムを使用するように指示します。
-    -   [`MPP_2PHASE_AGG()`](/optimizer-hints.md#mpp_2phase_agg) : MPP で有効になります。指定されたクエリ ブロック内のすべての集計関数に対して、2 段階集計アルゴリズムを使用するようにオプティマイザに指示します。
+    -   [`MPP_2PHASE_AGG()`](/optimizer-hints.md#mpp_2phase_agg) : MPP で有効になります。指定されたクエリブロック内のすべての集計関数に対して、2 段階集計アルゴリズムを使用するようにオプティマイザに指示します。
 
     MPPオプティマイザのヒントを使用すると、HTAPクエリに介入して、HTAPワークロードのパフォーマンスと安定性を向上させることができます。
 
@@ -156,7 +156,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 -   `prefer-leader`オプションをサポートします。このオプションは、読み取り操作の可用性を高め、不安定なネットワーク状況での応答レイテンシーを低減します。 [#40905](https://github.com/pingcap/tidb/issues/40905) @[LykxSassinator](https://github.com/LykxSassinator)
 
-    TiDB のデータ読み取り動作は、システム変数[`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)で制御できます。v7.0.0 では、この変数に`prefer-leader`オプションが追加されました。この変数を`prefer-leader`に設定すると、TiDB はリーダー レプリカを選択して読み取り操作を実行することを優先します。ディスクやネットワークのパフォーマンス変動などによりリーダー レプリカの処理速度が著しく低下した場合、TiDB は利用可能な他のフォロワー レプリカを選択して読み取り操作を実行し、可用性を高め、応答レイテンシーを削減します。
+    TiDB のデータ読み取り動作は、システム変数[`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)で制御できます。v7.0.0 では、この変数に`prefer-leader`オプションが追加されました。この変数を`prefer-leader`に設定すると、TiDB はリーダーレプリカを選択して読み取り操作を実行することを優先します。ディスクやネットワークのパフォーマンス変動などによりリーダーレプリカの処理速度が著しく低下した場合、TiDB は利用可能な他のフォロワー レプリカを選択して読み取り操作を実行し、可用性を高め、応答レイテンシーを削減します。
 
     詳細については、[ドキュメント](/develop/dev-guide-use-follower-read.md)を参照してください。
 
@@ -209,7 +209,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 -   `LOAD DATA`ステートメントの機能を強化し、クラウドストレージからのデータインポートをサポートする (実験的) [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716)
 
-    TiDB v7.0.0 より前は、 `LOAD DATA`ステートメントではクライアント側からのデータ ファイルのインポートしかできませんでした。クラウドストレージからデータをインポートするには、 TiDB Lightningを使用する必要がありました。しかし、 TiDB Lightning を別途デプロイすると、追加のデプロイおよび管理コストが発生します。v7.0.0 では、 `LOAD DATA`ステートメントを使用してクラウドストレージから直接データをインポートできます。この機能の例を以下に示します。
+    TiDB v7.0.0 より前は、 `LOAD DATA`ステートメントではクライアント側からのデータファイルのインポートしかできませんでした。クラウドストレージからデータをインポートするには、 TiDB Lightningを使用する必要がありました。しかし、 TiDB Lightning を別途デプロイすると、追加のデプロイおよび管理コストが発生します。v7.0.0 では、 `LOAD DATA`ステートメントを使用してクラウドストレージから直接データをインポートできます。この機能の例を以下に示します。
 
     -   Amazon S3およびGoogle Cloud StorageからTiDBへのデータインポートをサポートします。ワイルドカードを使用して、複数のソースファイルを一度にTiDBにインポートすることをサポートします。
     -   `DEFINED NULL BY`を使用して null を定義することをサポートします。
@@ -365,7 +365,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
         -   MQ シンクに Large Row モニタリング メトリクスを追加します [#8286](https://github.com/pingcap/tiflow/issues/8286) @[Rustin170506](https://github.com/Rustin170506)
 
-        -   リージョンに複数のテーブルのデータが含まれるシナリオで、TiKV ノードと TiCDC ノード間のネットワーク トラフィックを削減します [#6346](https://github.com/pingcap/tiflow/issues/6346) @[overvenus](https://github.com/overvenus)
+        -   リージョンに複数のテーブルのデータが含まれるシナリオで、TiKV ノードと TiCDC ノード間のネットワークトラフィックを削減します [#6346](https://github.com/pingcap/tiflow/issues/6346) @[overvenus](https://github.com/overvenus)
 
         -   Checkpoint TSとResolved TSのP99メトリクスパネルをラグ分析パネルに移動します [#8524](https://github.com/pingcap/tiflow/issues/8524) @[Rustin170506](https://github.com/Rustin170506)
 
@@ -375,7 +375,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     -   TiDB Lightning
 
-        -   TiDB Lightning物理インポート モードは、データ インポートとインデックス インポートの分離をサポートし、インポート速度と安定性を向上させます [#42132](https://github.com/pingcap/tidb/issues/42132) @[sleepymole](https://github.com/sleepymole)
+        -   TiDB Lightning物理インポートモードは、データインポートとインデックス インポートの分離をサポートし、インポート速度と安定性を向上させます [#42132](https://github.com/pingcap/tidb/issues/42132) @[sleepymole](https://github.com/sleepymole)
 
             `add-index-by-sql`パラメータを追加します。デフォルト値は`false`で、これはTiDB Lightning が行データとインデックスデータの両方を KV ペアにエンコードし、それらをまとめて TiKV にインポートすることを意味します。これを`true`に設定すると、 TiDB Lightningデータのインポート後に`ADD INDEX` SQL ステートメントを使用してインデックスを追加し、インポートの速度と安定性を向上させます。
 
@@ -396,7 +396,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
     -   プリペアドプランキャッシュが有効になっている場合に、フルインデックススキャンでエラーが発生する可能性がある問題を修正しました [#42150](https://github.com/pingcap/tidb/issues/42150) @[fzzf678](https://github.com/fzzf678)
     -   `IFNULL(NOT NULL COLUMN, ...)`が間違った結果を返す可能性がある問題を修正 [#41734](https://github.com/pingcap/tidb/issues/41734) @[LittleFall](https://github.com/LittleFall)
     -   パーティションテーブル内のすべてのデータが単一のリージョンにある場合に、TiDBが誤った結果を生成する可能性がある問題を修正します [#41801](https://github.com/pingcap/tidb/issues/41801) @[Defined2014](https://github.com/Defined2014)
-    -   TiDB で、異なるパーティション テーブルが単一の SQL ステートメントに現れる場合に誤った結果が生成される可能性がある問題を修正しました [#42135](https://github.com/pingcap/tidb/issues/42135) @[mjonss](https://github.com/mjonss)
+    -   TiDB で、異なるパーティションテーブルが単一の SQL ステートメントに現れる場合に誤った結果が生成される可能性がある問題を修正しました [#42135](https://github.com/pingcap/tidb/issues/42135) @[mjonss](https://github.com/mjonss)
     -   パーティションテーブルに新しいインデックスを追加した後、パーティションパーティションテーブルで統計情報の自動収集が正しくトリガーされない可能性がある問題を修正しました [#41638](https://github.com/pingcap/tidb/issues/41638) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     -   TiDBが統計情報を2回連続で収集した後に誤った列統計情報を読み取る可能性がある問題を修正 [#42073](https://github.com/pingcap/tidb/issues/42073) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     -   プリペアドプランキャッシュが有効になっている場合に IndexMerge が誤った結果を生成する可能性がある問題を修正しました [#41828](https://github.com/pingcap/tidb/issues/41828) @[qw4990](https://github.com/qw4990)
@@ -404,7 +404,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
     -   非 BIGINT 符号なし整数が文字列/10 進数と比較したときに誤った結果を生成する可能性がある問題を修正 [#41736](https://github.com/pingcap/tidb/issues/41736) @[LittleFall](https://github.com/LittleFall)
     -   メモリ制限超過により以前の`ANALYZE`ステートメントが強制終了されると、同じセッション内の現在の`ANALYZE`ステートメントも強制終了される可能性がある問題を修正しました [#41825](https://github.com/pingcap/tidb/issues/41825) @[XuHuaiyu](https://github.com/XuHuaiyu)
     -   バッチコプロセッサの情報収集プロセス中にデータ競合が発生する可能性がある問題を修正しました [#41412](https://github.com/pingcap/tidb/issues/41412) @[you06](https://github.com/you06)
-    -   アサーション エラーによりパーティション テーブルの MVCC 情報が印刷できない問題を修正 [#40629](https://github.com/pingcap/tidb/issues/40629) @[ekexium](https://github.com/ekexium)
+    -   アサーション エラーによりパーティションテーブルの MVCC 情報が印刷できない問題を修正 [#40629](https://github.com/pingcap/tidb/issues/40629) @[ekexium](https://github.com/ekexium)
     -   フェアロックモードで存在しないキーにロックが追加される問題を修正 [#41527](https://github.com/pingcap/tidb/issues/41527) @[ekexium](https://github.com/ekexium)
     -   `INSERT IGNORE`および`REPLACE`ステートメントが値を変更しないキーをロックしない問題を修正 [#42121](https://github.com/pingcap/tidb/issues/42121) @[zyguan](https://github.com/zyguan)
 
@@ -438,7 +438,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
         -   `stopped`ステータスの変更フィードが自動的に再起動する可能性がある問題を修正 [#8330](https://github.com/pingcap/tiflow/issues/8330) @[sdojjy](https://github.com/sdojjy)
         -   すべてのダウンストリーム Kafka サーバーが利用できないときに TiCDCサーバーがパニックになる問題を修正 [#8523](https://github.com/pingcap/tiflow/issues/8523) @[3AceShowHand](https://github.com/3AceShowHand)
         -   ダウンストリームがMySQLで、実行されたステートメントがTiDBと互換性がない場合にデータが失われる可能性がある問題を修正します [#8453](https://github.com/pingcap/tiflow/issues/8453) @[asddongmen](https://github.com/asddongmen)
-        -   ローリング アップグレードが TiCDC OOM を引き起こす可能性がある問題、またはチェックポイントがスタックする問題を修正 [#8329](https://github.com/pingcap/tiflow/issues/8329) @[overvenus](https://github.com/overvenus)
+        -   ローリングアップグレードが TiCDC OOM を引き起こす可能性がある問題、またはチェックポイントがスタックする問題を修正 [#8329](https://github.com/pingcap/tiflow/issues/8329) @[overvenus](https://github.com/overvenus)
         -   Kubernetes で TiCDC クラスターの正常なアップグレードが失敗する問題を修正 [#8484](https://github.com/pingcap/tiflow/issues/8484) @[overvenus](https://github.com/overvenus)
 
     -   TiDB Data Migration (DM)

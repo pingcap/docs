@@ -431,7 +431,7 @@ TiDB Cloud Dedicatedクラスターによって生成されたバックアップ
 
 > **Note:**
 >
-> TiDB Cloudはアクセス キーを保存しません。セキュリティを維持するため、インポートまたはエクスポートのタスクが完了した後[アクセスキーを削除する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)。
+> TiDB Cloudはアクセスキーを保存しません。セキュリティを維持するため、インポートまたはエクスポートのタスクが完了した後[アクセスキーを削除する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)。
 
 <CustomContent plan="premium">
 

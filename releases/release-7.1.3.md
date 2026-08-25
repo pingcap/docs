@@ -111,7 +111,7 @@ TiDB バージョン: 7.1.3
 
     -   `CALIBRATE RESOURCE` を実行すると TiDB Dashboardの`resource_manager_resource_unit`メトリックが空になる問題を修正しました [＃45166](https://github.com/pingcap/tidb/issues/45166) @[CabinfeverB](https://github.com/CabinfeverB)
     -   ワークロードによる調整ページでエラーが報告される問題を修正しました [＃48162](https://github.com/pingcap/tidb/issues/48162) @[CabinfeverB](https://github.com/CabinfeverB)
-    -   リソース グループを削除すると DDL の原子性が損なわれる可能性がある問題を修正しました [＃45050](https://github.com/pingcap/tidb/issues/45050) @[glorv](https://github.com/glorv)
+    -   リソースグループを削除すると DDL の原子性が損なわれる可能性がある問題を修正しました [＃45050](https://github.com/pingcap/tidb/issues/45050) @[glorv](https://github.com/glorv)
     -   PDリーダーが転送され、新しいリーダーとPDクライアントの間にネットワークパーティションがある場合、PDクライアントがリーダーの情報を更新できない問題を修正しました。 [＃7416](https://github.com/tikv/pd/issues/7416) @[CabinfeverB](https://github.com/CabinfeverB)
     -   大規模クラスタに複数の TiKV ノードを追加すると、TiKVハートビートレポートが遅くなったり停止したりする可能性がある問題を修正しました[＃7248](https://github.com/tikv/pd/issues/7248) @[rleungx](https://github.com/rleungx)
     -   TiDB DashboardがPD `trace`データを正しく読み取れない問題を修正[＃7253](https://github.com/tikv/pd/issues/7253) @[nolouch](https://github.com/nolouch)

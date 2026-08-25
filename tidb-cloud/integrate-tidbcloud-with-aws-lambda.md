@@ -44,7 +44,7 @@ AWS CloudFormationは、Secrets Manager、API Gateway、Lambda関数など、プ
 
 -   [Postman](https://www.postman.com/)や[カール](https://curl.se/)などのAPIテストツール。このドキュメントのほとんどの例では cURL を使用します。 Windows ユーザーには Postman をお勧めします。
 
--   プロジェクトの[最新リリースのアセット](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest)ローカル マシンにダウンロードします。これには、 `cloudformation_template.yml`および`cloudformation_template.json`ファイルが含まれます。
+-   プロジェクトの[最新リリースのアセット](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest)ローカルマシンにダウンロードします。これには、 `cloudformation_template.yml`および`cloudformation_template.json`ファイルが含まれます。
 
 > **Note:**
 >
@@ -158,7 +158,7 @@ AWS CloudFormation を使用して書店プロジェクトを設定するには�
 
 スタックが作成されたら、プロジェクトは次のように使用できます。
 
-1.  AWS マネジメント コンソールで[APIゲートウェイサービス](https://console.aws.amazon.com/apigateway)サービスにアクセスし、 `TiDBCloudApiGatewayV2` API をクリックし、左側のペインで**API: TiDBCloudApiGatewayV2**をクリックします。
+1.  AWS マネジメントコンソールで[APIゲートウェイサービス](https://console.aws.amazon.com/apigateway)サービスにアクセスし、 `TiDBCloudApiGatewayV2` API をクリックし、左側のペインで**API: TiDBCloudApiGatewayV2**をクリックします。
 
 2.  **Overview**ページから`Invoke URL`をコピーしてください。この URL が API エンドポイントとして機能します。
 

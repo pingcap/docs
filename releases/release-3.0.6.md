@@ -19,7 +19,7 @@ TiDB Ansible バージョン: 3.0.6
     -   SQLバインディングで引用符が正しく処理されない問題を修正 [＃13117](https://github.com/pingcap/tidb/pull/13117)
     -   `select max(_tidb_rowid) from t`シナリオを最適化してテーブル全体のスキャンを回避する[＃13095](https://github.com/pingcap/tidb/pull/13095)
     -   クエリステートメントに変数代入式が含まれている場合にクエリ結果が正しくない問題を修正しました[＃13231](https://github.com/pingcap/tidb/pull/13231)
-    -   `UPDATE`ステートメントにサブクエリと生成列の両方が含まれている場合に結果が正しくない問題を修正しました。`UPDATE`ステートメントに異なるソース データベースからの同じ名前のテーブルが 2 つ含まれている場合に発生するステートメント実行エラーを修正しました[＃13350](https://github.com/pingcap/tidb/pull/13350)
+    -   `UPDATE`ステートメントにサブクエリと生成列の両方が含まれている場合に結果が正しくない問題を修正しました。`UPDATE`ステートメントに異なるソースデータベースからの同じ名前のテーブルが 2 つ含まれている場合に発生するステートメント実行エラーを修正しました[＃13350](https://github.com/pingcap/tidb/pull/13350)
     -   ポイントクエリのサポート`_tidb_rowid` [＃13416](https://github.com/pingcap/tidb/pull/13416)
     -   パーティションテーブル統計の不適切な使用により、生成されたクエリ実行計画が正しくない問題を修正しました[＃13628](https://github.com/pingcap/tidb/pull/13628)
 -   SQL実行エンジン
@@ -85,7 +85,7 @@ TiDB Ansible バージョン: 3.0.6
 
 -   各フィルターに`ActOn`ディメンションを追加して、各スケジューラとチェッカーがフィルターの影響を受けることを示します。また、使用されていない2つのフィルター（ `disconnectFilter`と`rejectLeaderFilter` を削除します。 [＃1911](https://github.com/pingcap/pd/pull/1911)
 -   PD でタイムスタンプを生成するのに 5 ミリ秒以上かかる場合は警告ログを出力します。 [＃1867](https://github.com/pingcap/pd/pull/1867)
--   利用できないエンドポイントをクライアントに渡すときにクライアントのログ レベルを下げる [＃1856](https://github.com/pingcap/pd/pull/1856)
+-   利用できないエンドポイントをクライアントに渡すときにクライアントのログレベルを下げる [＃1856](https://github.com/pingcap/pd/pull/1856)
 -   gRPCメッセージパッケージが`region_syncer`レプリケーションプロセスで最大サイズを超える可能性がある問題を修正 [＃1952](https://github.com/pingcap/pd/pull/1952)
 
 ## ツール {#tools}

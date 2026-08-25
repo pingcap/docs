@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/vector-search-functions-and-operators/','/ja/tidbclou
 
 # ベクトル関数と演算子 {#vector-functions-and-operators}
 
-このドキュメントでは、ベクトル データ型で使用できる関数と演算子の一覧を示します。
+このドキュメントでは、ベクトルデータ型で使用できる関数と演算子の一覧を示します。
 
 > **Note:**
 >
@@ -310,7 +310,7 @@ SELECT VEC_AS_TEXT('[1.000, 2.5]');
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
-ベクトル関数と、ベクトル データ型に対する組み込み関数および演算子の拡張使用は TiDB 固有のものであり、MySQL ではサポートされていません。
+ベクトル関数と、ベクトルデータ型に対する組み込み関数および演算子の拡張使用は TiDB 固有のものであり、MySQL ではサポートされていません。
 
 ## 参照 {#see-also}
 

@@ -21,7 +21,7 @@ URI の基本的な形式は次のとおりです。
 -   `host` : `bucket name`
 -   `parameters` :
 
-    -   `access-key` : アクセス キーを指定します。
+    -   `access-key` : アクセスキーを指定します。
     -   `secret-access-key` : 秘密アクセスキーを指定します。
     -   `session-token` : 一時セッショントークンを指定します。BRはv7.6.0以降でこのパラメータをサポートしています。
     -   `use-accelerate-endpoint` : Amazon S3 の高速エンドポイントを使用するかどうかを指定します (デフォルトは`false` )。
@@ -58,7 +58,7 @@ tiup cdc:v7.5.0 cli changefeed create \
 -   `host` : `bucket name`
 -   `parameters` :
 
-    -   `access-key` : アクセス キーを指定します。
+    -   `access-key` : アクセスキーを指定します。
 
     -   `secret-access-key` : 秘密アクセスキーを指定します。
 
@@ -129,7 +129,7 @@ gcs://external/test.csv?credentials-file=${credentials-file-path}
 -   `parameters` :
 
     -   `account-name` :ストレージのアカウント名を指定します。
-    -   `account-key` : アクセス キーを指定します。
+    -   `account-key` : アクセスキーを指定します。
     -   `sas-token` : 共有アクセス署名 (SAS) トークンを指定します。
     -   `access-tier` : アップロードされたオブジェクトのアクセス層を指定します（例： `Hot` 、 `Cool` 、 `Archive` ）。既定値は、ストレージアカウントのデフォルトのアクセス層です。
     -   `encryption-scope` : サーバー側の暗号化に[暗号化範囲](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-scope-manage?tabs=powershell#upload-a-blob-with-an-encryption-scope)を指定します。

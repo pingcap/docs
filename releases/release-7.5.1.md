@@ -31,10 +31,10 @@ TiDB バージョン: 7.5.1
 
         リソースグループを使用してアプリケーションのワークロードを分離するユーザーが増えるにつれ、リソースコントロールはリソースグループに基づいた拡張データを提供します。これにより、リソースグループのワークロードと設定を監視し、次のような問題を迅速に特定し、正確に診断できるようになります。
 
-        -   [スロークエリ](/identify-slow-queries.md) : リソース グループ名、リソース ユニット (RU) の消費量、およびリソースの待機時間を追加します。
-        -   [ステートメントサマリーテーブル](/statement-summary-tables.md) : リソース グループ名、RU 消費量、リソースの待機時間を追加します。
+        -   [スロークエリ](/identify-slow-queries.md) : リソースグループ名、リソース ユニット (RU) の消費量、およびリソースの待機時間を追加します。
+        -   [ステートメントサマリーテーブル](/statement-summary-tables.md) : リソースグループ名、RU 消費量、リソースの待機時間を追加します。
         -   システム変数[`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014)に、SQL文によって消費されたリソース量[ロシア](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)を示す新しいエントリ`ru_consumption`を追加します。この変数を使用して、セッション内の最後の文のリソース消費量を取得できます。
-        -   リソース グループに基づいてデータベース メトリックを追加します: QPS/TPS、実行時間 (P999/P99/P95)、障害数、接続数。
+        -   リソースグループに基づいてデータベース メトリックを追加します: QPS/TPS、実行時間 (P999/P99/P95)、障害数、接続数。
 
     -   `CANCEL IMPORT JOB`文を同期文に変更します。 [＃48736](https://github.com/pingcap/tidb/issues/48736) @[D3Hunter](https://github.com/D3Hunter)
 
@@ -174,10 +174,10 @@ TiDB バージョン: 7.5.1
 
 -   PD
 
-    -   リソース グループをバッチでクエリすると PD がpanicになる可能性がある問題を修正しました [＃7206](https://github.com/tikv/pd/issues/7206) @[nolouch](https://github.com/nolouch)
+    -   リソースグループをバッチでクエリすると PD がpanicになる可能性がある問題を修正しました [＃7206](https://github.com/tikv/pd/issues/7206) @[nolouch](https://github.com/nolouch)
     -   PDが`systemd` で起動したときにリソース制限を読み取れない問題を修正 [＃7628](https://github.com/tikv/pd/issues/7628) @[bufferflies](https://github.com/bufferflies)
     -   PD ディスクレイテンシーの継続的なジッタにより、PD が新しいリーダーを選択できない可能性がある問題を修正しました。 [＃7251](https://github.com/tikv/pd/issues/7251) @[HuSharp](https://github.com/HuSharp)
-    -   PD のネットワーク パーティションにより、スケジュールがすぐに開始されない可能性がある問題を修正[＃7016](https://github.com/tikv/pd/issues/7016) @[HuSharp](https://github.com/HuSharp)
+    -   PD のネットワークパーティションにより、スケジュールがすぐに開始されない可能性がある問題を修正[＃7016](https://github.com/tikv/pd/issues/7016) @[HuSharp](https://github.com/HuSharp)
     -   リーダースイッチ後にPD監視項目`learner-peer-count`古い値を同期しない問題を修正 [＃7728](https://github.com/tikv/pd/issues/7728) @[CabinfeverB](https://github.com/CabinfeverB)
     -   PDリーダーが転送され、新しいリーダーとPDクライアントの間にネットワークパーティションがある場合、PDクライアントがリーダーの情報を更新できない問題を修正しました。 [＃7416](https://github.com/tikv/pd/issues/7416) @[CabinfeverB](https://github.com/CabinfeverB)
     -   Gin Web Framework のバージョンを v1.8.1 から v1.9.1 にアップグレードして、いくつかのセキュリティ問題を修正しました[＃7438](https://github.com/tikv/pd/issues/7438) @[niubell](https://github.com/niubell)
@@ -195,7 +195,7 @@ TiDB バージョン: 7.5.1
     -   短いクエリが正常に実行され、過剰な情報ログが出力される問題を修正しました。 [＃8592](https://github.com/pingcap/tiflash/issues/8592) @[windtalker](https://github.com/windtalker)
     -   クエリの低速化によりメモリ使用量が大幅に増加する問題を修正 [＃8564](https://github.com/pingcap/tiflash/issues/8564) @[JinheLin](https://github.com/JinheLin)
     -   `lowerUTF8`と`upperUTF8`関数で、大文字と小文字が異なるバイトを占めることができない問題を修正しました。 [＃8484](https://github.com/pingcap/tiflash/issues/8484) @[gengliqi](https://github.com/gengliqi)
-    -   ストリーム読み取り中に複数のパーティション テーブルをスキャンするときに発生する可能性のある OOM 問題を修正しました。 [＃8505](https://github.com/pingcap/tiflash/issues/8505) @[gengliqi](https://github.com/gengliqi)
+    -   ストリーム読み取り中に複数のパーティションテーブルをスキャンするときに発生する可能性のある OOM 問題を修正しました。 [＃8505](https://github.com/pingcap/tiflash/issues/8505) @[gengliqi](https://github.com/gengliqi)
     -   クエリ中にTiFlash がメモリ制限に遭遇した場合のメモリリークの問題を修正しました [＃8447](https://github.com/pingcap/tiflash/issues/8447) @[JinheLin](https://github.com/JinheLin)
     -   TiFlash が同時 DDL 実行中に競合に遭遇した場合のTiFlash panic問題を修正[＃8578](https://github.com/pingcap/tiflash/issues/8578) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   `ALTER TABLE ... MODIFY COLUMN ... NOT NULL`を実行した後にTiFlash がパニックを起こし、null 許容列が非 null 許容に変更される問題を修正しました。 [＃8419](https://github.com/pingcap/tiflash/issues/8419) @[JaySon-Huang](https://github.com/JaySon-Huang)
@@ -211,13 +211,13 @@ TiDB バージョン: 7.5.1
     -   Backup & Restore (BR)
 
         -   TiKVノードにリーダーがいないためにデータの復元が遅くなる問題を修正しました [＃50566](https://github.com/pingcap/tidb/issues/50566) @[Leavrth](https://github.com/Leavrth)
-        -   `--filter`オプションを指定した後でも、完全な復元を行うにはターゲット クラスターが空である必要があるという問題を修正しました[＃51009](https://github.com/pingcap/tidb/issues/51009) @[3pointer](https://github.com/3pointer)
+        -   `--filter`オプションを指定した後でも、完全な復元を行うにはターゲットクラスターが空である必要があるという問題を修正しました[＃51009](https://github.com/pingcap/tidb/issues/51009) @[3pointer](https://github.com/3pointer)
         -   データの復元に失敗した後、チェックポイントから再開するとエラー`the target cluster is not fresh`が発生する問題を修正しました[＃50232](https://github.com/pingcap/tidb/issues/50232) @[Leavrth](https://github.com/Leavrth)
         -   ログバックアップタスクを停止すると TiDB がクラッシュする問題を修正[＃50839](https://github.com/pingcap/tidb/issues/50839) @[YuJuncen](https://github.com/YuJuncen)
         -   古いバージョンのバックアップからデータを復元するときに`Unsupported collation`エラーが報告される問題を修正しました [＃49466](https://github.com/pingcap/tidb/issues/49466) @[3pointer](https://github.com/3pointer)
         -   タスク初期化中にPDへの接続に失敗すると、ログバックアップタスクは開始できるが正常に動作しない問題を修正[＃16056](https://github.com/tikv/tikv/issues/16056) @[YuJuncen](https://github.com/YuJuncen)
         -   BRが外部ストレージファイルに対して誤ったURIを生成する問題を修正 [＃48452](https://github.com/pingcap/tidb/issues/48452) @[3AceShowHand](https://github.com/3AceShowHand)
-        -   同じノードで TiKV IP アドレスを変更した後にログ バックアップが停止する問題を修正しました [＃50445](https://github.com/pingcap/tidb/issues/50445) @[3pointer](https://github.com/3pointer)
+        -   同じノードで TiKV IP アドレスを変更した後にログバックアップが停止する問題を修正しました [＃50445](https://github.com/pingcap/tidb/issues/50445) @[3pointer](https://github.com/3pointer)
         -   S3 からファイル コンテンツを読み取っているときにエラーが発生した場合にBR が再試行できない問題を修正しました [＃49942](https://github.com/pingcap/tidb/issues/49942) @[Leavrth](https://github.com/Leavrth)
 
     -   TiCDC
@@ -237,4 +237,4 @@ TiDB バージョン: 7.5.1
     -   TiDB Data Migration (DM)
 
         -   下流のテーブル構造に`shard_row_id_bits` が含まれている場合に移行タスクエラーが発生する問題を修正しました [＃10308](https://github.com/pingcap/tiflow/issues/10308) @[GMHDBJD](https://github.com/GMHDBJD)
-        -   DM が「イベント タイプ切り捨てが無効です」というエラーに遭遇し、アップグレードが失敗する問題を修正しました[＃10282](https://github.com/pingcap/tiflow/issues/10282) @[GMHDBJD](https://github.com/GMHDBJD)
+        -   DM が「イベントタイプ切り捨てが無効です」というエラーに遭遇し、アップグレードが失敗する問題を修正しました[＃10282](https://github.com/pingcap/tiflow/issues/10282) @[GMHDBJD](https://github.com/GMHDBJD)

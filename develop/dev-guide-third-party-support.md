@@ -1,10 +1,10 @@
 ---
 title: Third-Party Tools Supported by TiDB
-summary: TiDB でサポートされているサードパーティ ツールについて説明します。
+summary: TiDB でサポートされているサードパーティツールについて説明します。
 aliases: ['/ja/tidb/stable/dev-guide-third-party-support/','/ja/tidb/dev/dev-guide-third-party-support/','/ja/tidbcloud/dev-guide-third-party-support/']
 ---
 
-# TiDB でサポートされているサードパーティ ツール {#third-party-tools-supported-by-tidb}
+# TiDB でサポートされているサードパーティツール {#third-party-tools-supported-by-tidb}
 
 > **Note:**
 >
@@ -14,7 +14,7 @@ TiDB は[MySQLプロトコルとの高い互換性](/mysql-compatibility.md)あ�
 
 ## サポートレベル {#support-level}
 
-PingCAP はコミュニティと連携し、サードパーティ ツールに対して次のサポート レベルを提供します。
+PingCAP はコミュニティと連携し、サードパーティツールに対して次のサポート レベルを提供します。
 
 -   ***完全***：TiDB は対応するサードパーティ製ツールのほとんどの機能と既に互換性があり、最新バージョンとの互換性も維持していることを示します。PingCAP は、ツールの最新バージョンとの互換性テストを定期的に実施します。
 -   ***互換***：対応するサードパーティ製ツールがMySQLに適合しており、TiDBはMySQLプロトコルと高い互換性があるため、TiDBはツールのほとんどの機能を使用できることを示します。ただし、PingCAPはツールのすべての機能について完全なテストを完了していないため、予期しない動作が発生する可能性があります。

@@ -1,6 +1,6 @@
 ---
 title: Best Practices for DDL Execution in TiDB
-summary: TiDB での DDL ステートメントの実装方法、オンライン変更プロセス、およびベスト プラクティスについて学習します。
+summary: TiDB での DDL ステートメントの実装方法、オンライン変更プロセス、およびベストプラクティスについて学習します。
 aliases: ['/ja/tidb/stable/ddl-introduction/','/ja/tidbcloud/ddl-introduction/']
 ---
 
@@ -20,7 +20,7 @@ TiDBはオンラインDDLをサポートしています。つまり、データ�
 
 対象となるDDLオブジェクトに含まれるデータを操作するかどうかによって、DDL文は次の種類に分類されます。
 
--   **論理 DDL ステートメント**: 論理 DDL ステートメントは通常、テーブル名の変更や列名の変更など、オブジェクトに格納されているデータを処理せずに、データベース オブジェクトのメタデータのみを変更します。
+-   **論理 DDL ステートメント**: 論理 DDL ステートメントは通常、テーブル名の変更や列名の変更など、オブジェクトに格納されているデータを処理せずに、データベースオブジェクトのメタデータのみを変更します。
 
     TiDBでは、論理DDL文は「汎用DDL」とも呼ばれます。これらの文は通常、実行時間が短く、完了までに数十ミリ秒または数秒しかかからないことがよくあります。そのため、システムリソースをあまり消費せず、アプリケーションのワークロードにも影響を与えません。
 
@@ -78,7 +78,7 @@ absent -> delete only -> write only -> write reorg -> public
 <SimpleTab>
 <div label="Parallel DDL framework starting from v6.2.0">
 
-TiDB v6.2.0 より前では、所有者は一度に同じタイプ (論理または物理) の DDL タスクを 1 つしか実行できないため、制限が比較的厳しく、ユーザー エクスペリエンスに影響します。
+TiDB v6.2.0 より前では、所有者は一度に同じタイプ (論理または物理) の DDL タスクを 1 つしか実行できないため、制限が比較的厳しく、ユーザーエクスペリエンスに影響します。
 
 DDLタスク間に依存関係がない場合、並列実行はデータの正確性と一貫性に影響を与えません。例えば、ユーザーAがテーブル`T1`にインデックスを追加し、ユーザーBがテーブル`T2`から列を削除するとします。これらの2つのDDL文は並列実行可能です。
 
@@ -123,7 +123,7 @@ TiDB v6.2.0 より前では、DDL 実行フレームワークには次の制限�
 
 -   TiKV クラスターには、それぞれ論理 DDL と物理 DDL を処理するキュー`general job queue`と`add index job queue` 2 つのキューのみがあります。
 -   DDL 所有者は常に先入先出方式で DDL ジョブを処理します。
--   DDL 所有者は、一度に同じタイプ (論理または物理) の DDL タスクを 1 つだけ実行できます。これは比較的厳格であり、ユーザー エクスペリエンスに影響します。
+-   DDL 所有者は、一度に同じタイプ (論理または物理) の DDL タスクを 1 つだけ実行できます。これは比較的厳格であり、ユーザーエクスペリエンスに影響します。
 
 これらの制限により、意図しないDDLブロッキング動作が発生する可能性があります。詳細については、 [SQL FAQ - DDL実行](https://docs.pingcap.com/tidb/stable/sql-faq#ddl-execution)を参照してください。
 
@@ -138,7 +138,7 @@ TiDB v6.2.0 より前では、DDL 実行フレームワークには次の制限�
 
 -   [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt) : この変数は、バックフィルの同時実行を制御する DDL 操作の再編成ワーカーの数を設定します。
 
--   [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size) : この変数は、`re-organize`フェーズの DDL 操作のバッチ サイズを設定し、バックフィルされるデータの量を制御します。
+-   [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size) : この変数は、`re-organize`フェーズの DDL 操作のバッチサイズを設定し、バックフィルされるデータの量を制御します。
 
     推奨値:
 

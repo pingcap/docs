@@ -167,9 +167,9 @@ SELECT User, Host, max_user_connections FROM mysql.user WHERE User='newuser';
 1 row in set (0.01 sec)
 ```
 
-### ユーザーにバインドされているリソース グループを変更する {#modify-the-resource-group-bound-to-the-user}
+### ユーザーにバインドされているリソースグループを変更する {#modify-the-resource-group-bound-to-the-user}
 
-`ALTER USER ... RESOURCE GROUP`を使用して、ユーザー`newuser` ～ `rg1`のリソース グループを変更します。
+`ALTER USER ... RESOURCE GROUP`を使用して、ユーザー`newuser` ～ `rg1`のリソースグループを変更します。
 
 ```sql
 ALTER USER 'newuser' RESOURCE GROUP rg1;
@@ -179,7 +179,7 @@ ALTER USER 'newuser' RESOURCE GROUP rg1;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-現在のユーザーにバインドされているリソース グループを表示する。
+現在のユーザーにバインドされているリソースグループを表示する。
 
 ```sql
 SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user WHERE user = "newuser";
@@ -194,7 +194,7 @@ SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user W
 1 row in set (0.02 sec)
 ```
 
-ユーザーをリソース グループからバインド解除します。つまり、ユーザーを`default`リソース グループにバインドします。
+ユーザーをリソースグループからバインド解除します。つまり、ユーザーを`default`リソースグループにバインドします。
 
 ```sql
 ALTER USER 'newuser' RESOURCE GROUP `default`;

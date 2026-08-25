@@ -72,7 +72,7 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 | ログ             | `ticdc.log`                                                               | `--include=log`                                   |
 | エラーログ          | `ticdc_stderr.log`                                                        | `--include=log`                                   |
 | コンフィグレーションファイル | `ticdc.toml`                                                              | `--include=config`                                |
-| デバッグデータ        | `info.txt` `status.txt` `changefeeds.txt` `captures.txt` `processors.txt` | `--include=debug` (Diag はデフォルトではこのデータ タイプを収集しません) |
+| デバッグデータ        | `info.txt` `status.txt` `changefeeds.txt` `captures.txt` `processors.txt` | `--include=debug` (Diag はデフォルトではこのデータタイプを収集しません) |
 
 ### Prometheus監視データ {#prometheus-monitoring-data}
 
@@ -85,8 +85,8 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 
 | データ型        | エクスポートされたファイル          | PingCAP Clinicによるデータ収集パラメータ                                                                  |
 | :---------- | :--------------------- | :----------------------------------------------------------------------------------------- |
-| TiDB システム変数 | `mysql.tidb.csv`       | `--include=db_vars` (Diag はデフォルトではこのデータ タイプを収集しません。このデータ タイプを収集する必要がある場合は、データベース資格情報が必要です) |
-|             | `global_variables.csv` | `--include=db_vars` (Diag はデフォルトではこのデータ タイプを収集しません)                                        |
+| TiDB システム変数 | `mysql.tidb.csv`       | `--include=db_vars` (Diag はデフォルトではこのデータタイプを収集しません。このデータタイプを収集する必要がある場合は、データベース資格情報が必要です) |
+|             | `global_variables.csv` | `--include=db_vars` (Diag はデフォルトではこのデータタイプを収集しません)                                        |
 
 ### クラスタノードのシステム情報 {#system-information-of-the-cluster-node}
 
@@ -149,6 +149,6 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 ログの種類:
 
 -   `std` : ファイル名に`stderr`含まれるログファイル。
--   `rocksdb` : プレフィックスが`rocksdb` 、サフィックスが`.info`ログ ファイル。
--   `slow` : クエリ ログ ファイルが遅い。
--   `unknown` : 上記のいずれの種類にも一致しないログ ファイル。
+-   `rocksdb` : プレフィックスが`rocksdb` 、サフィックスが`.info`ログファイル。
+-   `slow` : クエリログファイルが遅い。
+-   `unknown` : 上記のいずれの種類にも一致しないログファイル。

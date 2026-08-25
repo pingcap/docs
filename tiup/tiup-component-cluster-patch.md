@@ -7,10 +7,10 @@ summary: tiup cluster patch` コマンドを使用すると、実行中のクラ
 
 クラスターの実行中にサービスのバイナリを動的に置き換える必要がある場合（つまり、置き換えプロセス中もクラスターを利用可能な状態に保つ必要がある場合）、 `tiup cluster patch`コマンドを使用できます。コマンドの実行後、 TiUP は以下の処理を実行します。
 
--   置換用のバイナリ パッケージをターゲット マシンにアップロードします。
+-   置換用のバイナリパッケージをターゲットマシンにアップロードします。
 -   ターゲット サービスが TiKV やTiFlashなどのストレージサービスの場合、 TiUP はまず API 経由で関連ノードをオフラインにします。
 -   対象サービスを停止します。
--   バイナリ パッケージを解凍し、サービスを置き換えます。
+-   バイナリパッケージを解凍し、サービスを置き換えます。
 -   対象サービスを開始します。
 
 ## 構文 {#syntax}
@@ -20,7 +20,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 ```
 
 -   `<cluster-name>` : 操作対象となるクラスターの名前。
--   `<package-path>` : 置換に使用されるバイナリ パッケージへのパス。
+-   `<package-path>` : 置換に使用されるバイナリパッケージへのパス。
 
 ### 準備 {#preparation}
 
@@ -45,7 +45,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
     mkdir -p /tmp/package && cd /tmp/package
     ```
 
-4.  元のバイナリ パッケージを抽出します。
+4.  元のバイナリパッケージを抽出します。
 
     ```shell
     tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz
@@ -57,7 +57,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
     find .
     ```
 
-6.  バイナリ ファイルまたは構成ファイルを一時ディレクトリ内の対応する場所にコピーします。
+6.  バイナリファイルまたは構成ファイルを一時ディレクトリ内の対応する場所にコピーします。
 
 7.  すべてのファイルを一時ディレクトリにパックします。
 

@@ -1,6 +1,6 @@
 ---
 title: sys Schema
-summary: sys` スキーマ内のシステム テーブルについて学習します。
+summary: sys` スキーマ内のシステムテーブルについて学習します。
 ---
 
 # `sys`スキーマ {#sys-schema}

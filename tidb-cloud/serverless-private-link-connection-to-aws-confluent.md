@@ -1,6 +1,6 @@
 ---
 title: Connect to Confluent Cloud on AWS via a Private Link Connection
-summary: AWS エンドポイント サービス プライベート リンク接続を使用して AWS 上の Confluent Cloud Dedicated クラスターに接続する方法を学習します。
+summary: AWS エンドポイントサービス プライベートリンク接続を使用して AWS 上の Confluent Cloud Dedicated クラスターに接続する方法を学習します。
 ---
 
 # プライベートリンク接続を介して AWS 上の Confluent Cloud に接続する {#connect-to-confluent-cloud-on-aws-via-a-private-link-connection}
@@ -9,7 +9,7 @@ summary: AWS エンドポイント サービス プライベート リンク接�
 
 > **Note**
 >
-> AWS 上のすべての Confluent Cloud クラスター タイプのうち、プライベート リンク接続をサポートするのは Confluent Cloud Dedicated クラスターのみです。
+> AWS 上のすべての Confluent Cloud クラスター タイプのうち、プライベートリンク接続をサポートするのは Confluent Cloud Dedicated クラスターのみです。
 
 ## 前提条件 {#prerequisites}
 
@@ -22,7 +22,7 @@ summary: AWS エンドポイント サービス プライベート リンク接�
 
 AWS アカウント ID とアベイラビリティーゾーンを表示するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで **Settings** > **Networking** をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで **Settings** > **Networking** をクリックします。
 2.  **AWS Private Endpoints for External Services** 領域で、**Create Private Endpoint for External Services** をクリックします。
 3.  表示されたダイアログで、AWS アカウント ID とアベイラビリティーゾーンを見つけることができます。
 
@@ -34,7 +34,7 @@ Confluent Cloud ネットワークは次の要件を満たしている必要が�
 
 -   タイプ: ネットワークは**PrivateLink**ネットワークである必要があります。
 -   リージョンの一致: ネットワークは、 TiDB Cloud Essential クラスターと同じ AWS リージョンに存在する必要があります。
--   AZ (アベイラビリティ ゾーン) の可用性: ネットワークのアベイラビリティ ゾーンは、 TiDB Cloud Essential クラスターのアベイラビリティ ゾーンと重複している必要があります。
+-   AZ (アベイラビリティゾーン) の可用性: ネットワークのアベイラビリティゾーンは、 TiDB Cloud Essential クラスターのアベイラビリティゾーンと重複している必要があります。
 
 Confluent Cloud ネットワークの一意の名前を取得するには、次の手順を実行します。
 
@@ -59,9 +59,9 @@ Confluent Cloud ネットワークの一意の名前を取得するには、次�
 
 ## ステップ4. TiDB Cloudでプライベートリンク接続を作成する {#step-4-create-a-private-link-connection-in-tidb-cloud}
 
-TiDB Cloudでプライベート リンク接続を作成するには、次の手順を実行します。
+TiDB Cloudでプライベートリンク接続を作成するには、次の手順を実行します。
 
-1.  Confluent Cloud の`VPC Service Endpoint`を使用して、 TiDB Cloudにプライベート リンク接続を作成します。
+1.  Confluent Cloud の`VPC Service Endpoint`を使用して、 TiDB Cloudにプライベートリンク接続を作成します。
 
     詳細については[AWS エンドポイントサービスプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-aws-endpoint-service-private-link-connection)を参照してください。
 
@@ -69,6 +69,6 @@ TiDB Cloudでプライベート リンク接続を作成するには、次の手
     >
     > AWS 上の Confluent Cloud Dedicated クラスターの場合、 TiDB Cloudからのエンドポイント接続リクエストを手動で承認するために、AWS コンソールのエンドポイントサービスの詳細ページに移動する必要はありません。Confluent Cloud が自動的に処理します。
 
-2.  TiDB Cloudのデータフロー サービスが Confluent クラスターにアクセスできるように、Confluent Cloud サービス ドメインをプライベート リンク接続に接続します。
+2.  TiDB Cloudのデータフロー サービスが Confluent クラスターにアクセスできるように、Confluent Cloud サービス ドメインをプライベートリンク接続に接続します。
 
     詳細については[プライベートリンク接続にドメインを添付する](/tidb-cloud/serverless-private-link-connection.md#attach-domains-to-a-private-link-connection)を参照してください。

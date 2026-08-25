@@ -16,10 +16,10 @@ summary: 完全バックアップと復元のためのBRと、増分データレ
 1.  **リスクの事前チェック**: クラスターの状態とソリューションの実現可能性を確認します。
 2.  **新しいクラスターを準備します**。古いクラスターの完全バックアップから新しいクラスターを作成し、それをターゲット バージョンにアップグレードします。
 3.  **増分データを複製する**: TiCDC を使用して順方向データ複製チャネルを確立します。
-4.  **切り替えと検証**: 多次元検証を実行し、ビジネス トラフィックを新しいクラスターに切り替え、TiCDC リバース レプリケーション チャネルを設定します。
+4.  **切り替えと検証**: 多次元検証を実行し、ビジネストラフィックを新しいクラスターに切り替え、TiCDC リバース レプリケーション チャネルを設定します。
 5.  **ステータスの監視**：リバースレプリケーションチャネルを維持します。監視期間終了後、環境をクリーンアップします。
 
-**ロールバック プラン**: 移行およびアップグレード プロセス中に新しいクラスターで問題が発生した場合、いつでもビジネス トラフィックを元のクラスターに戻すことができます。
+**ロールバック プラン**: 移行およびアップグレードプロセス中に新しいクラスターで問題が発生した場合、いつでもビジネストラフィックを元のクラスターに戻すことができます。
 
 以下のセクションでは、TiDB クラスターの移行とアップグレードに関する標準化されたプロセスと一般的な手順について説明します。コマンド例は、TiDB Self-Managed環境に基づいています。
 
@@ -33,7 +33,7 @@ summary: 完全バックアップと復元のためのBRと、増分データレ
 
     -   **テーブルスキーマの要件**：レプリケートするテーブルに有効なインデックスが含まれていることを確認してください。詳細については、 [TiCDC有効インデックス](/ticdc/ticdc-overview.md#valid-index)を参照してください。
     -   **機能制限**：TiCDCはシーケンスDDLレプリケーションまたはTiFlash DDLレプリケーションをサポートしていません。詳細については、 [TiCDC がサポートしていないシナリオ](/ticdc/ticdc-overview.md#unsupported-scenarios)を参照してください。
-    -   **ベスト プラクティス**: スイッチオーバー中に TiCDC のアップストリーム クラスターで DDL 操作を実行しないでください。
+    -   **ベストプラクティス**: スイッチオーバー中に TiCDC のアップストリームクラスターで DDL 操作を実行しないでください。
 
 -   BRの互換性を確認します。
 
@@ -65,7 +65,7 @@ SET GLOBAL tidb_gc_life_time=60h;
 
 完全なデータを新しいクラスターに移行するときは、次の点に注意してください。
 
--   **バージョンの互換性**: バックアップと復元に使用されるBRバージョンは、古いクラスターのメジャー バージョンと一致する必要があります。
+-   **バージョンの互換性**: バックアップと復元に使用されるBRバージョンは、古いクラスターのメジャーバージョンと一致する必要があります。
 
 -   **パフォーマンスへの影響**： BRバックアップはシステムリソースを消費します。ビジネスへの影響を最小限に抑えるには、オフピーク時間帯にバックアップを実行してください。
 
@@ -76,7 +76,7 @@ SET GLOBAL tidb_gc_life_time=60h;
 
 -   **コンフィグレーションの整合性**：古いクラスタと新しいクラスタの構成が[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)であることを確認してください。同一でない場合、 BRの復元は失敗します。
 
--   **システム テーブルの復元**: BR復元中に`--with-sys-table`オプションを使用して、システム テーブル データを復元します。
+-   **システムテーブルの復元**: BR復元中に`--with-sys-table`オプションを使用して、システムテーブルデータを復元します。
 
 完全なデータを新しいクラスターに移行するには、次の手順を実行します。
 
@@ -125,7 +125,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 
 > **Note:**
 >
-> TiCDCコンポーネントのバージョンは、古いクラスターのメジャー バージョンと一致する必要があります。
+> TiCDCコンポーネントのバージョンは、古いクラスターのメジャーバージョンと一致する必要があります。
 
 -   Changefeedタスクを作成し、データ損失を防ぐために、増分レプリケーションの開始点（ `${tso}` ）を[ステップ2](#step-2-prepare-the-new-cluster)で記録したバックアップTSOと正確に設定します。
 
@@ -133,7 +133,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
     tiup ctl:${cluster_version} cdc changefeed create --server http://${cdc_host}:${cdc_port} --sink-uri="mysql://${username}:${password}@${tidb_endpoint}:${port}" --config config.toml --start-ts ${tso}
     ```
 
--   レプリケーション タスクのステータスを確認し、 `tso`または`checkpoint`継続的に進んでいることを確認します。
+-   レプリケーションタスクのステータスを確認し、 `tso`または`checkpoint`継続的に進んでいることを確認します。
 
     ```shell
     tiup ctl:${cluster_version} cdc changefeed list --server http://${cdc_host}:${cdc_port}
@@ -153,12 +153,12 @@ tiup cluster start <new_cluster_name>     # Start the cluster
     }]
     ```
 
-増分データ レプリケーション中は、レプリケーション チャネルの状態を継続的に監視し、必要に応じて設定を調整します。
+増分データレプリケーション中は、レプリケーション チャネルの状態を継続的に監視し、必要に応じて設定を調整します。
 
 -   レイテンシ メトリック: `Changefeed checkpoint lag`が 5 分以内などの許容範囲内に留まることを確認します。
 -   スループットの健全性: `Sink flush rows/s`が一貫してビジネス書き込みレートを超えていることを確認します。
 -   エラーとアラート: TiCDC ログとアラート情報を定期的に確認してください。
--   (オプション) テスト データ レプリケーション: テスト データを更新し、Changefeed がそれを新しいクラスターに正しく複製することを確認します。
+-   (オプション) テストデータレプリケーション: テストデータを更新し、Changefeed がそれを新しいクラスターに正しく複製することを確認します。
 -   (オプション) TiCDC 構成項目[`gc-ttl`](/ticdc/ticdc-server-config.md#gc-ttl)を調整します (デフォルトは 24 時間)。
 
     レプリケーションタスクが利用できない、または中断され、時間内に解決できない場合、 `gc-ttl` TiCDC に必要なデータがガベージコレクション(GC) によって消去されることなく TiKV に保持されることを保証します。この期間を超えると、レプリケーションタスクは`failed`状態になり、回復できなくなります。この場合、PD の GC セーフポイントは引き続き前進し、プロセスを再開するには新しいバックアップが必要になります。
@@ -177,7 +177,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 
 -   [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)のスナップショット設定と TiCDC の[同期ポイント](/ticdc/ticdc-upstream-downstream-check.md)機能を組み合わせることで、Changefeed レプリケーションを停止することなくデータの整合性を検証できます。詳細については、 [上流および下流のクラスタのデータ検証とスナップショットの読み取り](/ticdc/ticdc-upstream-downstream-check.md)を参照してください。
 
--   テーブルの行数の比較など、ビジネス データの手動検証を実行します。
+-   テーブルの行数の比較など、ビジネスデータの手動検証を実行します。
 
 ### 3. 環境設定を完了する {#3-finalize-the-environment-setup}
 
@@ -188,7 +188,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 -   AUTO_INCREMENT列: 新しいクラスター内のAUTO_INCREMENT ID キャッシュをクリアします。
 -   統計: 統計を手動で収集するか、新しいクラスターで自動収集を有効にします。
 
-さらに、新しいクラスターをスケールアウトして、予想されるワークロードを処理し、アラート サブスクリプション、スケジュールされた統計収集スクリプト、データ バックアップ スクリプトなどの運用タスクを移行することもできます。
+さらに、新しいクラスターをスケールアウトして、予想されるワークロードを処理し、アラート サブスクリプション、スケジュールされた統計収集スクリプト、データバックアップ スクリプトなどの運用タスクを移行することもできます。
 
 ## ステップ4: ビジネストラフィックの切り替えとロールバック {#step-4-switch-business-traffic-and-rollback}
 
@@ -208,7 +208,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 
 1.  古いクラスタがビジネストラフィックを処理できないように、アプリケーションサービスを停止します。アクセスをさらに制限するには、次のいずれかの方法を使用します。
 
-    -   古いクラスター内のユーザー アカウントをロックします。
+    -   古いクラスター内のユーザーアカウントをロックします。
 
         ```sql
         ALTER USER ACCOUNT LOCK;
@@ -235,7 +235,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
     -   TiCDC が追いついたら、新しいクラスターから`down-tso`を取得します。
     -   [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)ツールを使用して、 `up-tso`と`down-tso`の新しいクラスターと古いクラスター間のデータの一貫性を比較します。
 
-4.  フォワード Changefeed レプリケーション タスクを一時停止します。
+4.  フォワード Changefeed レプリケーションタスクを一時停止します。
 
     ```shell
     tiup ctl:${cluster_version} cdc changefeed pause --server http://${cdc_host}:${cdc_port} -c <changefeedid>
@@ -261,7 +261,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 
 7.  新しいクラスターから古いクラスターへのリバースレプリケーションを設定します。
 
-    1.  古いクラスター内のユーザー アカウントのロックを解除し、読み取り/書き込みモードを復元します。
+    1.  古いクラスター内のユーザーアカウントのロックを解除し、読み取り/書き込みモードを復元します。
 
         ```sql
         ALTER USER ACCOUNT UNLOCK;
@@ -285,14 +285,14 @@ tiup cluster start <new_cluster_name>     # Start the cluster
         tiup ctl:${cluster_version} cdc changefeed list --server http://${cdc_host}:${cdc_port}
         ```
 
-8.  ビジネス トラフィックを新しいクラスターにリダイレクトします。
+8.  ビジネストラフィックを新しいクラスターにリダイレクトします。
 
 9.  次の Grafana パネルを使用して、新しいクラスターの負荷と動作ステータスを監視します。
 
     -   [**TiDBダッシュボード &gt; クエリサマリー**](/grafana-tidb-dashboard.md#query-summary) : 期間、QPS、失敗したクエリ OPM メトリックを確認します。
     -   [**TiDBダッシュボード &gt; サーバー**](/grafana-tidb-dashboard.md#server) :**接続数**メトリックを監視して、ノード間で接続が均等に分散されていることを確認します。
 
-この時点で、ビジネス トラフィックは新しいクラスターに正常に切り替えられ、TiCDC リバース レプリケーション チャネルが確立されます。
+この時点で、ビジネストラフィックは新しいクラスターに正常に切り替えられ、TiCDC リバース レプリケーション チャネルが確立されます。
 
 ### 3. 緊急ロールバックを実行する {#3-execute-emergency-rollback}
 
@@ -310,7 +310,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
     1.  新しいクラスターへのビジネス アクセスを停止します。
     2.  ビジネス アカウントを再認証し、古いクラスターへの読み取り/書き込みアクセスを復元します。
     3.  リバース レプリケーション リンクをチェックし、TiCDC が追いついていることを確認し、新しいクラスターと古いクラスター間のデータの一貫性を検証します。
-    4.  ビジネス トラフィックを古いクラスターにリダイレクトします。
+    4.  ビジネストラフィックを古いクラスターにリダイレクトします。
 
 ## ステップ5：クリーンアップ {#step-5-clean-up}
 

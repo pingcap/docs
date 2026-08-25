@@ -5,7 +5,7 @@ summary: データ移行を使用して、Amazon Aurora MySQL、Amazon Relationa
 
 # データ移行を使用して、MySQL互換データベースからTiDB Cloudへ増分データのみを移行する {#migrate-only-incremental-data-from-mysql-compatible-databases-to-tidb-cloud-using-data-migration}
 
-このドキュメントでは、TiDB Cloud コンソールのデータ移行機能を使用して、クラウド プロバイダー (Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、Google Cloud SQL for MySQL、Azure Database for MySQL、または Alibaba Cloud RDS) 上の MySQL 互換データベース、または自己ホスト型のソース データベースから、 TiDB Cloudコンソールのデータ移行機能を使用して、増分データを<CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent> <CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>に移行する方法について説明します。
+このドキュメントでは、TiDB Cloud コンソールのデータ移行機能を使用して、クラウドプロバイダー (Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、Google Cloud SQL for MySQL、Azure Database for MySQL、または Alibaba Cloud RDS) 上の MySQL 互換データベース、または自己ホスト型のソースデータベースから、 TiDB Cloudコンソールのデータ移行機能を使用して、増分データを<CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent> <CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>に移行する方法について説明します。
 
 <CustomContent plan="essential">
 
@@ -156,7 +156,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**Data** &gt; **Data Migration**をクリックします。
+2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Data Migration**をクリックします。
 
 3.  **Data Migration**ページで、右上隅にある**Create Migration Job**をクリックします。**Create Migration Job**ページが表示されます。
 
@@ -170,7 +170,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
     -   **Data source**：データソースの種類。
     -   **リージョン**：データソースのリージョン。クラウドデータベースの場合のみ必要です。
-    -   **Connectivity method**: データ ソースの接続方法。<CustomContent plan="dedicated">現在、接続方法に応じて、パブリックIP、VPCピアリング、またはプライベートリンクを選択できます。</CustomContent><CustomContent plan="essential">接続方法に応じて、パブリックIPまたはプライベートリンクを選択できます。</CustomContent><CustomContent plan="premium">接続方法に応じて、パブリックリンクまたはプライベートリンク（AWSのみ）を選択できます。</CustomContent>
+    -   **Connectivity method**: データソースの接続方法。<CustomContent plan="dedicated">現在、接続方法に応じて、パブリックIP、VPCピアリング、またはプライベートリンクを選択できます。</CustomContent><CustomContent plan="essential">接続方法に応じて、パブリックIPまたはプライベートリンクを選択できます。</CustomContent><CustomContent plan="premium">接続方法に応じて、パブリックリンクまたはプライベートリンク（AWSのみ）を選択できます。</CustomContent>
 
     <CustomContent plan="dedicated">
 
@@ -181,13 +181,13 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     <CustomContent plan="essential">
 
     -   **Hostname or IP address**（パブリックIPの場合）：データソースのホスト名またはIPアドレス。
-    -   **Private Link Connection**(プライベート リンク用): [プライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md)セクションで作成したプライベート リンク接続。
+    -   **Private Link Connection**(プライベートリンク用): [プライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md)セクションで作成したプライベートリンク接続。
 
     </CustomContent>
     <CustomContent plan="premium">
 
     -   **Hostname or IP address**（公開の場合）：データソースのホスト名またはIPアドレス。
-    -   **Private Endpoint**(プライベート リンク用): TiDB Cloud Premium インスタンスの**Networking** &gt; **[外部サービス向け AWS プライベート エンドポイント]**で作成したプライベート エンドポイント。または、**ここで [プライベート エンドポイントの作成] をクリックしてプライベート エンドポイント**を作成します。セットアップの詳細については、データ移行ガイドの[プライベートリンクまたはプライベートエンドポイント](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint)セクションを参照してください。
+    -   **Private Endpoint**(プライベートリンク用): TiDB Cloud Premium インスタンスの**Networking** &gt; **[外部サービス向け AWS プライベートエンドポイント]**で作成したプライベートエンドポイント。または、**ここで [プライベートエンドポイントの作成] をクリックしてプライベートエンドポイント**を作成します。セットアップの詳細については、データ移行ガイドの[プライベートリンクまたはプライベートエンドポイント](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint)セクションを参照してください。
 
     </CustomContent>
 

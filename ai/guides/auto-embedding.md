@@ -5,7 +5,7 @@ summary: アプリケーションで自動埋め込みを使用する方法を�
 
 # 自動埋め込み {#auto-embedding}
 
-自動埋め込み機能は、テキスト データのベクトル埋め込みを自動的に生成します。
+自動埋め込み機能は、テキストデータのベクトル埋め込みを自動的に生成します。
 
 > **Note:**
 >
@@ -17,7 +17,7 @@ summary: アプリケーションで自動埋め込みを使用する方法を�
 
 ### ステップ1. 埋め込み関数を定義する {#step-1-define-an-embedding-function}
 
-テキスト データのベクトル埋め込みを生成するための埋め込み関数を定義します。
+テキストデータのベクトル埋め込みを生成するための埋め込み関数を定義します。
 
 ```python
 from pytidb.embeddings import EmbeddingFunction
@@ -29,7 +29,7 @@ embed_func = EmbeddingFunction(
 
 ### ステップ2. テーブルとベクトルフィールドを作成する {#step-2-create-a-table-and-a-vector-field}
 
-テーブル スキーマにベクトル フィールドを作成するには、 `embed_func.VectorField()`を使用します。
+テーブルスキーマにベクトルフィールドを作成するには、 `embed_func.VectorField()`を使用します。
 
 自動埋め込みを有効にするには、埋め込みたいフィールドに`source_field`設定します。
 

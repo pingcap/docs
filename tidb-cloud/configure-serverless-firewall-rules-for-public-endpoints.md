@@ -13,7 +13,7 @@ summary: TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスへの
 
 ## 公開エンドポイント {#public-endpoints}
 
-TiDB Cloud StarterまたはEssentialインスタンスでパブリック アクセスを設定すると、パブリック エンドポイント経由でインスタンスにアクセスできるようになります。つまり、 TiDB Cloud StarterまたはEssentialインスタンスはインターネット経由でアクセス可能になります。パブリック エンドポイントは、公開されている DNS アドレスです。「承認済みネットワーク」とは、TiDB Cloud StarterまたはEssentialインスタンスへのアクセスを許可する IP アドレスの範囲を指します。これらのアクセス許可は、**ファイアウォール ルール**によって適用されます。
+TiDB Cloud StarterまたはEssentialインスタンスでパブリックアクセスを設定すると、パブリックエンドポイント経由でインスタンスにアクセスできるようになります。つまり、 TiDB Cloud StarterまたはEssentialインスタンスはインターネット経由でアクセス可能になります。パブリックエンドポイントは、公開されている DNS アドレスです。「承認済みネットワーク」とは、TiDB Cloud StarterまたはEssentialインスタンスへのアクセスを許可する IP アドレスの範囲を指します。これらのアクセス許可は、**ファイアウォールルール**によって適用されます。
 
 ### 公共アクセスの特徴 {#characteristics-of-public-access}
 
@@ -37,7 +37,7 @@ TiDB Cloud はこのリストを定期的に更新し、予約済みの IP ア�
 
 ## ファイアウォールルールの作成と管理 {#create-and-manage-a-firewall-rule}
 
-このセクションでは、TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのファイアウォール ルールを管理する方法について説明します。パブリック エンドポイントを使用する場合、インスタンスへの接続はファイアウォール ルールで指定された IP アドレスに制限されます。
+このセクションでは、TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのファイアウォールルールを管理する方法について説明します。パブリックエンドポイントを使用する場合、インスタンスへの接続はファイアウォールルールで指定された IP アドレスに制限されます。
 
 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにファイアウォールルールを追加するには、次の手順を実行します。
 

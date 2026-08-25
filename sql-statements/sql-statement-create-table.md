@@ -298,7 +298,7 @@ mysql> DESC t1;
 -   `[ASC | DESC]`内の`index_col_name`は現在解析されますが無視されます (MySQL 5.7互換の動作)。
 -   `COMMENT`属性は`WITH PARSER`オプションをサポートしていません。
 -   TiDBは、デフォルトでは1つのテーブルで1017列、最大4096列をサポートします。InnoDBにおける対応する列数の制限は1017列、MySQLにおけるハードリミットは4096列です。詳細は[TiDBの制限事項](/tidb-limitations.md)を参照してください。
--   TiDB は`HASH` 、 `RANGE` 、 `LIST` 、および`KEY`サポートしています[パーティショニングの種類](/partitioned-table.md#partitioning-types)されていないパーティション タイプの場合、TiDB は`Warning: Unsupported partition type %s, treat as normal table`を返します。ここで、 `%s`はサポートされていない特定のパーティション タイプです。
+-   TiDB は`HASH` 、 `RANGE` 、 `LIST` 、および`KEY`サポートしています[パーティショニングの種類](/partitioned-table.md#partitioning-types)されていないパーティションタイプの場合、TiDB は`Warning: Unsupported partition type %s, treat as normal table`を返します。ここで、 `%s`はサポートされていない特定のパーティションタイプです。
 
 ## 参照 {#see-also}
 

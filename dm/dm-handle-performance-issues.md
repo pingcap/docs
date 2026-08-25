@@ -29,7 +29,7 @@ summary: DM に存在する可能性のある一般的なパフォーマンス�
 
 -   単一データセンター内でのデータ移行では、 binlogデータの読み取りはパフォーマンスのボトルネックにはなりません。値が`read binlog event duration`に設定されている場合は、DM-workerとMySQL/MariaDB間のネットワーク接続を確認してください。
 
--   地理的に分散された環境でのデータ移行では、DM ワーカーと MySQL/MariaDB を 1 つのデータ センターにデプロイし、TiDB クラスターをターゲット データ センターにデプロイするようにしてください。
+-   地理的に分散された環境でのデータ移行では、DM ワーカーと MySQL/MariaDB を 1 つのデータセンターにデプロイし、TiDB クラスターをターゲット データセンターにデプロイするようにしてください。
 
 アップストリーム データベースからbinlogデータを読み取るプロセスには、次のサブプロセスが含まれます。
 
@@ -66,7 +66,7 @@ Binlogレプリケーションユニットのパフォーマンス問題を診�
 
 Binlogレプリケーションユニットは、設定に応じて、上流のMySQL/MariaDBからbinlogイベントを読み取るか、リレーログファイルから読み取るかを決定します。関連するパフォーマンスメトリックは`read binlog event duration`で、通常は数マイクロ秒から数十マイクロ秒の範囲です。
 
--   DM のBinlogレプリケーション処理ユニットがアップストリーム MySQL/MariaDB からbinlogイベントを読み取る場合、問題を特定して解決するには、「リレー ログ ユニット」セクションの[binlogデータを読み取る](#read-binlog-data)を参照してください。
+-   DM のBinlogレプリケーション処理ユニットがアップストリーム MySQL/MariaDB からbinlogイベントを読み取る場合、問題を特定して解決するには、「リレーログユニット」セクションの[binlogデータを読み取る](#read-binlog-data)を参照してください。
 
 -   DMのBinlogレプリケーション処理ユニットがリレーログファイルからbinlogイベントを読み取る場合、 `binlog event size`が大きすぎない場合、 `read binlog event duration`の値はマイクロ秒単位にする必要があります。`read binlog event duration`が大きすぎる場合は、ディスクの読み取りパフォーマンスを確認してください。書き込みパフォーマンスの低下を回避するには、DMワーカーにローカルSSDを使用してください。
 
@@ -78,7 +78,7 @@ Binlogレプリケーションユニットは、DMLを構築し、DDLを解析�
 
 ### 下流にSQL文を書き込む {#write-sql-statements-to-downstream}
 
-Binlogレプリケーション ユニットが変換された SQL ステートメントをダウンストリームに書き込む場合、関連するパフォーマンス メトリックは`DML queue remain length`と`transaction execution latency`なります。
+Binlogレプリケーション ユニットが変換された SQL ステートメントをダウンストリームに書き込む場合、関連するパフォーマンスメトリックは`DML queue remain length`と`transaction execution latency`なります。
 
 DMはbinlogイベントからSQL文を構築した後、 `worker-count`キューを使用してこれらの文を下流に同時に書き込みます。ただし、監視エントリが過度に多くなりすぎないようにするため、DMは同時キューのIDに対して`8`を法とする演算を実行します。つまり、すべての同時キューは`q_0`から`q_7`までの1つのアイテムに対応します。
 

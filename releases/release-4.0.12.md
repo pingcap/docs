@@ -83,7 +83,7 @@ TiDB バージョン: 4.0.12
     -   自動分析が時間範囲外で実行される問題を修正[＃23219](https://github.com/pingcap/tidb/pull/23219)
     -   `CAST`関数が`point get`プランのエラーを無視する可能性がある問題を修正しました [＃23211](https://github.com/pingcap/tidb/pull/23211)
     -   `CurrentDB`が空の場合に SPM が有効にならないバグを修正[＃23209](https://github.com/pingcap/tidb/pull/23209)
-    -   IndexMerge プランでテーブル フィルターが間違っている可能性がある問題を修正しました [＃23165](https://github.com/pingcap/tidb/pull/23165)
+    -   IndexMerge プランでテーブルフィルターが間違っている可能性がある問題を修正しました [＃23165](https://github.com/pingcap/tidb/pull/23165)
     -   `NULL`定数の戻り値の型で予期しない`NotNullFlag`が発生する問題を修正 [＃23135](https://github.com/pingcap/tidb/pull/23135)
     -   テキストタイプで照合順序が処理されない可能性があるバグを修正 [＃23092](https://github.com/pingcap/tidb/pull/23092)
     -   範囲パーティションが`IN`式を誤って処理する可能性がある問題を修正しました [＃23074](https://github.com/pingcap/tidb/pull/23074)

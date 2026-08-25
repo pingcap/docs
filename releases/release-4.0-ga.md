@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0 GA Release Notes
-summary: TiDB 4.0.0 GA は 2020 年 5 月 28 日にリリースされました。このバージョンでは、大規模トランザクションのエラー メッセージが最適化され、Changefeed` 構成ファイルの使いやすさが向上し、新しい構成項目とさまざまな構文および関数のサポートが追加され、TiKV、 TiFlash、PD、およびツールの複数のバグと問題が修正され、PD の新しい監視項目とさまざまな機能のサポートが追加され、Backup & Restore (BR) と TiCDC のさまざまな問題が修正されました。
+summary: TiDB 4.0.0 GA は 2020 年 5 月 28 日にリリースされました。このバージョンでは、大規模トランザクションのエラーメッセージが最適化され、Changefeed` 構成ファイルの使いやすさが向上し、新しい構成項目とさまざまな構文および関数のサポートが追加され、TiKV、 TiFlash、PD、およびツールの複数のバグと問題が修正され、PD の新しい監視項目とさまざまな機能のサポートが追加され、Backup & Restore (BR) と TiCDC のさまざまな問題が修正されました。
 ---
 
 # TiDB 4.0 GA リリースノート {#tidb-4-0-ga-release-notes}
@@ -50,7 +50,7 @@ TiDB バージョン: 4.0.0
     -   `ascii_bin`と`latin1_bin`エンコードの照合順序規則をサポート [＃7919](https://github.com/tikv/tikv/pull/7919)
 
 -   PD
-    -   組み込み TiDB Dashboardリバース プロキシ リソース プレフィックスの指定をサポート [＃2457](https://github.com/pingcap/pd/pull/2457)
+    -   組み込み TiDB Dashboardリバースプロキシ リソース プレフィックスの指定をサポート [＃2457](https://github.com/pingcap/pd/pull/2457)
     -   PDクライアントリージョンのインターフェースで`pending peer`と`down peer`情報を返すことをサポート [＃2443](https://github.com/pingcap/pd/pull/2443)
     -   `Direction of hotspot move leader` `Direction of hotspot move peer` `Hot cache read entry number`監視項目追加する [＃2448](https://github.com/pingcap/pd/pull/2448)
 

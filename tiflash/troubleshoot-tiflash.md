@@ -33,7 +33,7 @@ TiFlash は様々な理由により正常に起動しない場合があります
 
     仮想マシンにデプロイするときにこの問題が発生した場合は、VM の CPUアーキテクチャを Haswell に変更してから、 TiFlash を再デプロイしてみてください。
 
-上記の方法で問題を解決できない場合は、TiFlashログ ファイルを収集し、PingCAP またはコミュニティから[サポートを受けて](/support.md)ください。
+上記の方法で問題を解決できない場合は、TiFlashログファイルを収集し、PingCAP またはコミュニティから[サポートを受けて](/support.md)ください。
 
 ## 一部のクエリでは`Region Unavailable`エラーが返されます。 {#some-queries-return-the-region-unavailable-error}
 
@@ -43,7 +43,7 @@ TiFlashのワークロードが大きすぎてTiFlashデータのレプリケー
 
 ## データファイルの破損 {#data-file-corruption}
 
-データ ファイルの破損を処理するには、次の手順に従います。
+データファイルの破損を処理するには、次の手順に従います。
 
 1.  対応するTiFlashノードを停止するには、 [TiFlashノードをダウンさせる](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 2.  TiFlashノードの関連データを削除します。
@@ -214,7 +214,7 @@ TiDB クラスターを展開した後、 TiFlashレプリカの作成が継続�
     pd-ctl operator add remove-peer <region-id> <tiflash-store-id>
     ```
 
-上記のすべてのチェックに合格しても問題が解決しない場合は、 [データはTiFlashに複製されません](#data-is-not-replicated-to-tiflash)の手順に従って、どのコンポーネントまたはデータ レプリケーション プロセスで問題が発生しているかを特定します。
+上記のすべてのチェックに合格しても問題が解決しない場合は、 [データはTiFlashに複製されません](#data-is-not-replicated-to-tiflash)の手順に従って、どのコンポーネントまたはデータレプリケーションプロセスで問題が発生しているかを特定します。
 
 ## データはTiFlashに複製されません {#data-is-not-replicated-to-tiflash}
 

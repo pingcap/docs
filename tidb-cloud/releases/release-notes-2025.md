@@ -1,11 +1,11 @@
 ---
 title: TiDB Cloud Release Notes in 2025
-summary: 2025 年のTiDB Cloudのリリース ノートについて説明します。
+summary: 2025 年のTiDB Cloudのリリースノートについて説明します。
 ---
 
 # 2025年のTiDB Cloudリリースノート {#tidb-cloud-release-notes-in-2025}
 
-このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
+このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが記載されています。
 
 ## 2025年12月30日 {#december-30-2025}
 
@@ -19,7 +19,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
         ハイライト:
 
-        -   スケーリング操作およびローリング アップグレード中に永続的なクライアント接続を維持します。
+        -   スケーリング操作およびローリングアップグレード中に永続的なクライアント接続を維持します。
         -   リソース利用率を向上させるために、TiDB ノード全体にトラフィックを均等に分散します。
 
         詳細については[TiProxyの概要](/tidb-cloud/tiproxy-overview-for-cloud.md)を参照してください。
@@ -30,11 +30,11 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
         changefeed 機能は現在、バージョン[TiDB Cloudコンソール](https://tidbcloud.com)と[TiDB Cloud CLI](/tidb-cloud/cli-reference.md) for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)の両方でベータ版としてご利用いただけます。この機能により、TiDB Cloudから他のデータサービスへのデータストリーミングが可能になり、現在 Apache Kafka と MySQL が送信先としてサポートされています。
 
-    -   ダウンストリーム リソースのプライベート リンク接続の構成をサポートします。
+    -   ダウンストリーム リソースのプライベートリンク接続の構成をサポートします。
 
         プライベートリンク接続は、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)の[TiDB Cloudコンソール](https://tidbcloud.com)と[TiDB Cloud CLI](/tidb-cloud/cli-reference.md)両方で利用できるようになりました。この機能により、TiDB Cloudと下流リソース（MySQL、Apache Kafka など）間のプライベートかつ直接的な接続を確立できます。これは、 TiDB Cloudからお客様のインフラストラクチャへの接続を開始する変更フィードやその他のデータフローサービスとの統合向けにカスタマイズされています。
 
-        詳細については[Dataflow のプライベート リンク接続](/tidb-cloud/serverless-private-link-connection.md)を参照してください。
+        詳細については[Dataflow のプライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md)を参照してください。
 
 ## 2025年12月16日 {#december-16-2025}
 
@@ -70,7 +70,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   **TiDB Cloud Starter とTiDB Cloud Essential**
 
-    -   [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)クラスターのクラスター レベルで**統合された統合**ページを追加します。
+    -   [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)クラスターのクラスターレベルで**統合された統合**ページを追加します。
 
         -   クラスターの**Integrations**ページで、すべてのサードパーティ統合を統合します。以下のリストは、ユースケース別にまとめたこれらの統合の概要です。
             -   **デプロイ**: AWS Lambda、Cloudflare Workers、Gitpod、Netlify、Terraform、WordPress
@@ -81,7 +81,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
             -   **Python** : Django、mysqlclient、MySQL Connector/Python、peewee、PyMySQL、SQLAlchemy
             -   **Node.js** : mysql.js、Next.js、node-mysql2、Prisma、Sequelize、TypeORM
             -   **Ruby** : mysql2、Rails
-        -   検出可能性を向上させるために、統合エントリ[Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)と[AWS Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md)クラスター レベルに移動します。
+        -   検出可能性を向上させるために、統合エントリ[Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)と[AWS Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md)クラスターレベルに移動します。
         -   新しい統合をリクエストするための**Suggest Integration**を追加します。
 
 **APIの変更**
@@ -104,7 +104,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
         統合手順については、 [TiDB Cloud をPrometheus および Grafana と統合する](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)を参照してください。
 
-        既存の Prometheus 統合をクラスター レベルに移行するには、 [Prometheus統合の移行](/tidb-cloud/migrate-prometheus-metrics-integrations.md)を参照してください。
+        既存の Prometheus 統合をクラスターレベルに移行するには、 [Prometheus統合の移行](/tidb-cloud/migrate-prometheus-metrics-integrations.md)を参照してください。
 
 ## 2025年11月18日 {#november-18-2025}
 
@@ -172,13 +172,13 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   **TiDB Cloud Dedicated**
 
-    -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では、 [チェンジフィード](/tidb-cloud/changefeed-overview.md)プライベート エンドポイント機能が強化され、構成が簡素化され、セキュリティが向上し、データ シンクの柔軟性が向上します。
+    -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では、 [チェンジフィード](/tidb-cloud/changefeed-overview.md)プライベートエンドポイント機能が強化され、構成が簡素化され、セキュリティが向上し、データ シンクの柔軟性が向上します。
 
-        -   **簡素化された構成**: プライベート エンドポイントの作成が変更フィードの作成から独立し、同じプロジェクト内の複数の変更フィードが単一のプライベート エンドポイントを共有できるようになり、冗長な構成が削減されます。
-        -   **MySQL のプライベート リンク シンク**: MySQL にデータをシンクするためのより安全な方法を提供し、プライベート リンク経由で別のTiDB Cloud Dedicated クラスターにデータを直接シンクすることもサポートするようになりました。
-        -   **カスタム ドメインのサポート**: セルフホスト型 Kafka サービスを使用する場合、データ シンクのカスタム ドメインを構成して、セキュリティを強化し、サーバーの再起動を必要とせずに、アドバタイズされたリスナーの更新をより柔軟に行うことができます。
+        -   **簡素化された構成**: プライベートエンドポイントの作成が変更フィードの作成から独立し、同じプロジェクト内の複数の変更フィードが単一のプライベートエンドポイントを共有できるようになり、冗長な構成が削減されます。
+        -   **MySQL のプライベートリンク シンク**: MySQL にデータをシンクするためのより安全な方法を提供し、プライベートリンク経由で別のTiDB Cloud Dedicated クラスターにデータを直接シンクすることもサポートするようになりました。
+        -   **カスタムドメインのサポート**: セルフホスト型 Kafka サービスを使用する場合、データ シンクのカスタムドメインを構成して、セキュリティを強化し、サーバーの再起動を必要とせずに、アドバタイズされたリスナーの更新をより柔軟に行うことができます。
 
-        詳細については[Changefeeds のプライベート エンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)を参照してください。
+        詳細については[Changefeeds のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)を参照してください。
 
     -   現在、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して[Prometheus 統合（PREVIEW）](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)が使用可能です。
 
@@ -251,7 +251,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
         統合手順については、 [TiDB CloudとDatadogの統合](/tidb-cloud/monitor-datadog-integration.md)と[TiDB CloudとNew Relicの統合](/tidb-cloud/monitor-new-relic-integration.md)を参照してください。
 
-        既存の Datadog と New Relic の統合をクラスター レベルに移行するには、 [DatadogとNew Relicの統合の移行](/tidb-cloud/migrate-metrics-integrations.md)を参照してください。
+        既存の Datadog と New Relic の統合をクラスターレベルに移行するには、 [DatadogとNew Relicの統合の移行](/tidb-cloud/migrate-metrics-integrations.md)を参照してください。
 
 ## 2025年9月23日 {#september-23-2025}
 
@@ -267,9 +267,9 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
         分割動作の詳細については、 [MySQL以外のシンクの主キーまたは一意キーの`UPDATE`イベントを分割する](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
 
-    -   Google Cloud でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに新しいノード サイズ`32 vCPU, 64 GiB`を指定します。
+    -   Google Cloud でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに新しいノードサイズ`32 vCPU, 64 GiB`を指定します。
 
-        この新しいノード サイズは、TiDB ノードで使用できます。
+        この新しいノードサイズは、TiDB ノードで使用できます。
 
 ## 2025年9月16日 {#september-16-2025}
 
@@ -390,7 +390,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     試す方法:
 
-    -   [TiDB Cloudコンソール](https://tidbcloud.com/)から、クラスターを作成するときにクラウド プロバイダーとして Alibaba Cloud を選択して、Essential オプションを表示します。
+    -   [TiDB Cloudコンソール](https://tidbcloud.com/)から、クラスターを作成するときにクラウドプロバイダーとして Alibaba Cloud を選択して、Essential オプションを表示します。
     -   [Alibaba Cloud Marketplaceへの掲載](https://www.alibabacloud.com/en/marketplace/tidb?_p_lc=1)経由で Essential にアクセスすることもできます。
 
     今後は、Alibaba Cloud のリージョン カバレッジを拡大し、AWS サポートを追加する予定です。
@@ -443,8 +443,8 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     -   **クラスタ**: TiDB Cloud Dedicated クラスターをより柔軟に管理します。
     -   **リージョン**: TiDB Cloud Dedicated クラスターをデプロイできるすべてのクラウド リージョンを表示します。
-    -   **プライベート エンドポイント接続**: クラスターの安全でプライベートな接続を設定します。
-    -   **Import**: クラスターのデータ インポート タスクを管理します。
+    -   **プライベートエンドポイント接続**: クラスターの安全でプライベートな接続を設定します。
+    -   **Import**: クラスターのデータインポートタスクを管理します。
 
     詳細については[TiDB Cloud Dedicated API](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated/)を参照してください。
 
@@ -452,14 +452,14 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     -   **クラスタ**: TiDB Cloud Starter または Essential クラスターをより柔軟に管理します。
     -   **ブランチ**: クラスターのブランチを管理します。
-    -   **Export**: クラスターのデータ エクスポート タスクを管理します。
-    -   **Import**: クラスターのデータ インポート タスクを管理します。
+    -   **Export**: クラスターのデータエクスポート タスクを管理します。
+    -   **Import**: クラスターのデータインポートタスクを管理します。
 
     詳細については[TiDB Cloud Starterと基本 API](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless/)を参照してください。
 
 -   TiDB Cloud IAM API (v1beta1) は、組織レベルとプロジェクトレベルの両方で API キー管理のロールベースのアクセス制御 (RBAC) をサポートします。
 
-    セキュリティとアクセス制御を強化するために、組織レベルまたはプロジェクト レベルで API キーのロールを設定できます。
+    セキュリティとアクセス制御を強化するために、組織レベルまたはプロジェクトレベルで API キーのロールを設定できます。
 
     詳細については[TiDB CloudIAM API](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam/)を参照してください。
 
@@ -487,7 +487,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   Google Cloud でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに新しいノード サイズ`32 vCPU, 128 GiB`を指定します。
+-   Google Cloud でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに新しいノードサイズ`32 vCPU, 128 GiB`を指定します。
 
     この新しいサイズは、TiDB、TiKV、およびTiFlashノードで使用できます。
 
@@ -507,7 +507,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
     詳細については、次のドキュメントを参照してください。
 
     -   [サンプルデータをTiDB Cloud Serverlessにインポートする](/tidb-cloud/import-sample-data-serverless.md)
-    -   [クラウド ストレージからTiDB Cloud Serverless に CSV ファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)
+    -   [クラウドストレージからTiDB Cloud Serverless に CSV ファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)
     -   [Cloud Storage からTiDB Cloud Serverless に Apache Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files-serverless.md)
 
 ## 2025年7月15日 {#july-15-2025}
@@ -554,25 +554,25 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **コンソールの変更**
 
--   左側のナビゲーション ペインを改良して、全体的なナビゲーション エクスペリエンスを向上させます。
+-   左側のナビゲーションペインを改良して、全体的なナビゲーション エクスペリエンスを向上させます。
 
-    -   新しい<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="" style="width: calc(1.25rem * var(--mantine-scale)); height: calc(1.25rem * var(--mantine-scale));"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M9 3v18M7.8 3h8.4c1.68 0 2.52 0 3.162.327a3 3 0 0 1 1.311 1.311C21 5.28 21 6.12 21 7.8v8.4c0 1.68 0 2.52-.327 3.162a3 3 0 0 1-1.311 1.311C18.72 21 17.88 21 16.2 21H7.8c-1.68 0-2.52 0-3.162-.327a3 3 0 0 1-1.311-1.311C3 18.72 3 17.88 3 16.2V7.8c0-1.68 0-2.52.327-3.162a3 3 0 0 1 1.311-1.311C5.28 3 6.12 3 7.8 3" stroke-width="inherit"></path></svg>アイコンが左上隅に表示されるようになりました。これにより、必要に応じて左側のナビゲーション ペインを簡単に非表示または表示できます。
+    -   新しい<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="" style="width: calc(1.25rem * var(--mantine-scale)); height: calc(1.25rem * var(--mantine-scale));"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M9 3v18M7.8 3h8.4c1.68 0 2.52 0 3.162.327a3 3 0 0 1 1.311 1.311C21 5.28 21 6.12 21 7.8v8.4c0 1.68 0 2.52-.327 3.162a3 3 0 0 1-1.311 1.311C18.72 21 17.88 21 16.2 21H7.8c-1.68 0-2.52 0-3.162-.327a3 3 0 0 1-1.311-1.311C3 18.72 3 17.88 3 16.2V7.8c0-1.68 0-2.52.327-3.162a3 3 0 0 1 1.311-1.311C5.28 3 6.12 3 7.8 3" stroke-width="inherit"></path></svg>アイコンが左上隅に表示されるようになりました。これにより、必要に応じて左側のナビゲーションペインを簡単に非表示または表示できます。
 
-    -   左上隅にコンボ ボックスが追加され、組織、プロジェクト、クラスターを 1 つの中央の場所から簡単に切り替えられるようになりました。
+    -   左上隅にコンボボックスが追加され、組織、プロジェクト、クラスターを 1 つの中央の場所から簡単に切り替えられるようになりました。
 
         <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/tidb-cloud-combo-box.png" width="200" />
 
-    -   左側のナビゲーション ペインに表示されるエントリは、コンボ ボックスの現在の選択内容に応じて動的に調整されるようになり、最も関連性の高い機能に集中できるようになります。
+    -   左側のナビゲーションペインに表示されるエントリは、コンボボックスの現在の選択内容に応じて動的に調整されるようになり、最も関連性の高い機能に集中できるようになります。
 
-    -   すぐにアクセスできるように、**サポート**、**通知**、アカウント エントリが、すべてのコンソール ページの左側のナビゲーション ペインの下部に常に表示されるようになりました。
+    -   すぐにアクセスできるように、**サポート**、**通知**、アカウント エントリが、すべてのコンソール ページの左側のナビゲーションペインの下部に常に表示されるようになりました。
 
 ## 2025年6月4日 {#june-4-2025}
 
 **一般的な変更**
 
--   Microsoft Azure の[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)がパブリック プレビューで利用できるようになりました。
+-   Microsoft Azure の[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)がパブリックプレビューで利用できるようになりました。
 
-    このリリースにより、 TiDB Cloud はAWS、Google Cloud、Azure の 3 つの主要なパブリック クラウド プラットフォームすべてをサポートするようになり、ビジネス ニーズとクラウド戦略に最適な場所にTiDB Cloud Dedicated クラスターを展開できるようになりました。
+    このリリースにより、 TiDB Cloud はAWS、Google Cloud、Azure の 3 つの主要なパブリッククラウド プラットフォームすべてをサポートするようになり、ビジネス ニーズとクラウド戦略に最適な場所にTiDB Cloud Dedicated クラスターを展開できるようになりました。
 
     -   AWS および Google Cloud で利用可能なすべてのコア機能は、Azure で完全にサポートされています。
     -   Azure サポートは現在、米国東部 2、東日本、東南アジアの 3 つのリージョンで利用可能であり、近日中にさらに多くのリージョンで利用可能になる予定です。
@@ -581,7 +581,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
     Azure でTiDB Cloud Dedicated をすぐに使い始めるには、次のドキュメントを参照してください。
 
     -   [Azure 上にTiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
-    -   [Azure プライベート エンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
+    -   [Azure プライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
     -   [Azure 上のTiDB Cloud Dedicatedクラスターにデータをインポートする](/tidb-cloud/import-csv-files.md)
 
 -   Prometheus 統合により、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの監視機能を強化するためのメトリックがさらに提供されます。
@@ -634,7 +634,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     詳細については[TiFlashノードストレージ](/tidb-cloud/size-your-cluster.md#tiflash-node-storage)を参照してください。
 
--   メンテナンス タスクを構成および再スケジュールするための直感的なオプションを提供することで、メンテナンス ウィンドウの構成エクスペリエンスを強化します。
+-   メンテナンス タスクを構成および再スケジュールするための直感的なオプションを提供することで、メンテナンスウィンドウの構成エクスペリエンスを強化します。
 
     詳細については[メンテナンスウィンドウを構成する](/tidb-cloud/configure-maintenance-window.md)を参照してください。
 
@@ -677,7 +677,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [TiDBノードグループ](/tidb-cloud/tidb-node-group-overview.md)機能が、AWS と Google Cloud でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して一般提供 (GA) されました。
 
-    この機能により、単一クラスター内で**きめ細かなコンピューティング リソースの分離**が可能になり、マルチテナントまたはマルチワークロードのシナリオでパフォーマンスとリソース割り当てを最適化できます。
+    この機能により、単一クラスター内で**きめ細かなコンピューティングリソースの分離**が可能になり、マルチテナントまたはマルチワークロードのシナリオでパフォーマンスとリソース割り当てを最適化できます。
 
     **主な利点:**
 
@@ -688,7 +688,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     -   **簡素化された管理**：
 
-        -   すべてのノード グループを単一のクラスター内で管理し、運用オーバーヘッドを削減します。
+        -   すべてのノードグループを単一のクラスター内で管理し、運用オーバーヘッドを削減します。
         -   需要に応じてグループを個別にスケールします。
 
     メリットの詳細については[技術ブログ](https://www.pingcap.com/blog/tidb-cloud-node-groups-scaling-workloads-predictable-performance/)ご覧ください。開始するには[TiDBノードグループの管理](/tidb-cloud/tidb-node-group-management.md)ご覧ください。
@@ -713,11 +713,11 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **コンソールの変更**
 
--   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスター内のパブリック エンドポイントのファイアウォール ルールをサポートします。
+-   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスター内のパブリックエンドポイントのファイアウォールルールをサポートします。
 
     TiDB Cloud Serverless クラスターのファイアウォールルールを設定して、パブリックエンドポイント経由のアクセスを制御できるようになりました。[TiDB Cloudコンソール](https://tidbcloud.com/)で許可する IP アドレスまたは範囲を直接指定することで、セキュリティを強化できます。
 
-    詳細については[パブリックエンドポイント用のTiDB Cloud Serverless ファイアウォール ルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)を参照してください。
+    詳細については[パブリックエンドポイント用のTiDB Cloud Serverless ファイアウォールルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)を参照してください。
 
 ## 2025年3月18日 {#march-18-2025}
 
@@ -727,7 +727,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     詳細については[TiDBノードグループの概要](/tidb-cloud/tidb-node-group-overview.md)を参照してください。
 
--   AWS にデプロイされた[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのTiDB Cloudにデータベース監査ログ ファイルを保存することをサポートします。
+-   AWS にデプロイされた[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのTiDB Cloudにデータベース監査ログファイルを保存することをサポートします。
 
     これらの監査ログファイルは、 TiDB Cloudから直接ダウンロードできます。この機能はリクエストに応じてのみ利用可能であることにご注意ください。
 
@@ -741,7 +741,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **コンソールの変更**
 
--   TiDB Cloudの新しいサポート サービスである Connected Care を紹介します。
+-   TiDB Cloudの新しいサポートサービスである Connected Care を紹介します。
 
     Connected Care サービスは、最新のコミュニケーション ツール、プロアクティブなサポート、高度な AI 機能を通じてTiDB Cloudとの接続を強化し、シームレスで顧客中心のエクスペリエンスを実現するように設計されています。
 
@@ -750,13 +750,13 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
     -   **Clinic Service**: パフォーマンスを最適化するための高度な監視と診断。
     -   **IM での AI チャット**: インスタント メッセージ (IM) ツールを通じて AI による即時サポートを受けることができます。
     -   **アラートとチケット更新の IM サブスクリプション**: IM 経由でアラートとチケットの進行状況に関する最新情報を入手します。
-    -   **サポート チケットの IM 対話**: IM ツールを使用してサポート チケットを作成し、対話します。
+    -   **サポートチケットの IM 対話**: IM ツールを使用してサポートチケットを作成し、対話します。
 
     詳細については[Connected Careの概要](/tidb-cloud/connected-care-overview.md)を参照してください。
 
 -   GCS および Azure Blob Storage から[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターへのデータのインポートをサポートします。
 
-    TiDB Cloud Serverless は、Google Cloud Storage (GCS) および Azure Blob Storage からのデータのインポートをサポートするようになりました。認証には、Google Cloud サービス アカウント キーまたは Azure Shared Access Signature (SAS) トークンを使用できます。この機能により、TiDB Cloud Serverless へのデータ移行が簡素化されます。
+    TiDB Cloud Serverless は、Google Cloud Storage (GCS) および Azure Blob Storage からのデータのインポートをサポートするようになりました。認証には、Google Cloud サービスアカウント キーまたは Azure Shared Access Signature (SAS) トークンを使用できます。この機能により、TiDB Cloud Serverless へのデータ移行が簡素化されます。
 
     詳細については、 [Amazon S3、GCS、または Azure Blob Storage からTiDB Cloud Serverless に CSV ファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)および[Amazon S3、GCS、または Azure Blob Storage から Apache Parquet ファイルをTiDB Cloud Serverless にインポートする](/tidb-cloud/import-parquet-files-serverless.md)を参照してください。
 
@@ -790,9 +790,9 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     Private Connect は、クラウドプロバイダーの Private Link または Private Service Connect テクノロジーを活用し、 TiDB Cloud VPC 内の変更フィードがプライベート IP アドレスを使用してお客様の VPC 内の Kafka に接続できるようにします。これにより、Kafka がTiDB Cloud VPC 内で直接ホストされているかのように扱われます。この機能は、VPC CIDR の競合を防止し、セキュリティコンプライアンス要件を満たすのに役立ちます。
 
-    -   AWS の Apache Kafka の場合は、 [AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)手順に従ってネットワーク接続を構成します。
+    -   AWS の Apache Kafka の場合は、 [AWS でセルフホスト型 Kafka プライベートリンクサービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)手順に従ってネットワーク接続を構成します。
 
-    -   Google Cloud の Apache Kafka の場合は、 [Google Cloud でセルフホスト型 Kafka プライベート サービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)手順に従ってネットワーク接続を構成します。
+    -   Google Cloud の Apache Kafka の場合は、 [Google Cloud でセルフホスト型 Kafka プライベートサービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)手順に従ってネットワーク接続を構成します。
 
     この機能を使用すると、追加の[プライベートデータリンクのコスト](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost)が発生することに注意してください。
 

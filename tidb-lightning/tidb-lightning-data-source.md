@@ -1,13 +1,13 @@
 ---
 title: TiDB Lightning Data Sources
-summary: TiDB Lightningでサポートされているすべてのデータ ソースについて説明します。
+summary: TiDB Lightningでサポートされているすべてのデータソースについて説明します。
 ---
 
 # TiDB Lightningデータソース {#tidb-lightning-data-sources}
 
-TiDB Lightning は、CSV、SQL、Parquet ファイルなど、複数のデータ ソースから TiDB クラスターへのデータのインポートをサポートしています。
+TiDB Lightning は、CSV、SQL、Parquet ファイルなど、複数のデータソースから TiDB クラスターへのデータのインポートをサポートしています。
 
-TiDB Lightningのデータ ソースを指定するには、次の構成を使用します。
+TiDB Lightningのデータソースを指定するには、次の構成を使用します。
 
 ```toml
 [mydumper]
@@ -104,7 +104,7 @@ compression = '$4'
 CSVファイルはスキーマレスです。CSVファイルをTiDBにインポートするには、テーブルスキーマを提供する必要があります。スキーマは、以下のいずれかの方法で提供できます。
 
 -   DDL ステートメントを含む`${db_name}.${table_name}-schema.sql`および`${db_name}-schema-create.sql`名前のファイルを作成します。
--   TiDB にテーブル スキーマを手動で作成します。
+-   TiDB にテーブルスキーマを手動で作成します。
 
 ### コンフィグレーション {#configuration}
 
@@ -368,7 +368,7 @@ TiDB Lightningは現在、 Dumplingでエクスポートされた圧縮ファイ
 > **Note:**
 >
 > -   TiDB Lightningは単一の大きな圧縮ファイルを同時に解凍できないため、圧縮ファイルのサイズはインポート速度に影響します。解凍後のソースファイルは256MiB以下にすることをお勧めします。
-> -   TiDB Lightning は個別に圧縮されたデータ ファイルのみをインポートし、複数のデータ ファイルが含まれる単一の圧縮ファイルのインポートはサポートしていません。
+> -   TiDB Lightning は個別に圧縮されたデータファイルのみをインポートし、複数のデータファイルが含まれる単一の圧縮ファイルのインポートはサポートしていません。
 > -   TiDB Lightningは、 `db.table.parquet.snappy`などの他の圧縮ツールで圧縮された`parquet`ファイルをサポートしていません。`parquet`ファイルを圧縮する場合は、`parquet`ライターの圧縮形式を設定できます。
 > -   TiDB Lightning v6.4.0以降のバージョンでは、 `gzip` 、 `snappy` 、 `zstd` 圧縮データファイルのみがサポートされています。その他の種類のファイルはエラーの原因となります。ソースデータファイルが保存されているディレクトリにサポートされていない圧縮ファイルが存在する場合、タスクはエラーを報告します。このようなエラーを回避するには、サポートされていないファイルをインポートデータディレクトリから移動してください。
 > -   Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。その他の Snappy 圧縮形式はサポートされていません。
@@ -377,7 +377,7 @@ TiDB Lightningは現在、 Dumplingでエクスポートされた圧縮ファイ
 
 TiDB Lightningは、命名パターンに従ったデータファイルのみを認識します。場合によっては、データファイルが命名パターンに従っていない可能性があり、その場合、ファイルのインポートなしでデータのインポートが短時間で完了します。
 
-この問題を解決するには、カスタマイズした式でデータ ファイルを一致させるために`[[mydumper.files]]`を使用します。
+この問題を解決するには、カスタマイズした式でデータファイルを一致させるために`[[mydumper.files]]`を使用します。
 
 S3にエクスポートされたAuroraスナップショットを例に挙げます。Parquetファイルの完全パスは`S3://some-bucket/some-subdir/some-database/some-database.some-table/part-00000-c5a881bb-58ff-4ee6-1111-b41ecff340a3-c000.gz.parquet`です。
 

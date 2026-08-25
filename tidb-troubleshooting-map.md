@@ -199,11 +199,11 @@ CPU ボトルネックとトランザクションの競合によって引き起�
 
 ### 3.8 ロックの競合 {#38-lock-conflicts}
 
-TiDB は完全な分散トランザクションをサポートします。 v3.0 以降、TiDB は楽観的トランザクション モードと悲観的トランザクション モードを提供します。ロック関連の問題のトラブルシューティング方法、および楽観的ロックと悲観的ロックの競合の処理方法については、[ロックの競合をトラブルシューティングする](/troubleshoot-lock-conflicts.md)を参照してください。
+TiDB は完全な分散トランザクションをサポートします。 v3.0 以降、TiDB は楽観的トランザクションモードと悲観的トランザクションモードを提供します。ロック関連の問題のトラブルシューティング方法、および楽観的ロックと悲観的ロックの競合の処理方法については、[ロックの競合をトラブルシューティングする](/troubleshoot-lock-conflicts.md)を参照してください。
 
 ### 3.9 データと指標の不整合 {#39-inconsistency-between-data-and-indexes}
 
-TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントの実行時に、データとインデックスの一貫性をチェックします。チェックの結果、レコードのキーと値、および対応するインデックスのキーと値が一致しない、つまり、行データを格納するキーと値のペアと、そのインデックスを格納する対応するキーと値のペアが一致しない（例えば、インデックスが多すぎる、またはインデックスが欠落している）ことが判明した場合、TiDB はデータ不整合エラーを報告し、関連するエラーをエラー ログに出力。
+TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントの実行時に、データとインデックスの一貫性をチェックします。チェックの結果、レコードのキーと値、および対応するインデックスのキーと値が一致しない、つまり、行データを格納するキーと値のペアと、そのインデックスを格納する対応するキーと値のペアが一致しない（例えば、インデックスが多すぎる、またはインデックスが欠落している）ことが判明した場合、TiDB はデータ不整合エラーを報告し、関連するエラーをエラーログに出力。
 
 不整合エラーとチェックを回避する方法の詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)を参照してください。
 
@@ -401,24 +401,24 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 -   6.1.2 `Access denied for user 'root'@'172.31.43.27' (using password: YES)` `query status`を実行したとき、またはログを確認したときに表示されます。
 
     -   すべてのDM設定ファイル内のデータベース関連のパスワードは`dmctl`で暗号化する必要があります。データベースパスワードが空の場合は、パスワードを暗号化する必要はありません。バージョン1.0.6以降では、平文パスワードを使用できます。
-    -   DM 操作中、アップストリームおよびダウンストリーム データベースのユーザーは、対応する読み取りおよび書き込み権限を持っている必要があります。データ移行も、データ複製タスクの開始時に自動的に[対応する権限を事前チェックします](/dm/dm-precheck.md)。
+    -   DM 操作中、アップストリームおよびダウンストリームデータベースのユーザーは、対応する読み取りおよび書き込み権限を持っている必要があります。データ移行も、データ複製タスクの開始時に自動的に[対応する権限を事前チェックします](/dm/dm-precheck.md)。
     -   DM クラスターに異なるバージョンの DM-worker/DM-master/dmctl をデプロイするには、 [AskTUGに関するケーススタディ](https://pingkai.cn/tidbcommunity/forum/t/topic/1049/5)を参照してください。
 
--   6.1.3 レプリケーション タスクが`driver: bad connection`エラーで中断されました。
+-   6.1.3 レプリケーションタスクが`driver: bad connection`エラーで中断されました。
 
     -   `driver: bad connection`エラーは、DM と下流の TiDB データベース間の接続で異常が発生したこと (ネットワーク障害や TiDB の再起動など) と、現在のリクエストのデータがまだ TiDB に送信されていないことを示しています。
 
         -   DM 1.0.0 GA より前のバージョンでは、 `stop-task`を実行してタスクを停止し、 `start-task`を実行してタスクを再起動します。
         -   DM 1.0.0 GA以降のバージョンでは、この種のエラーに対する自動再試行メカニズムが追加されています。詳細は[#265](https://github.com/pingcap/dm/pull/265)を参照してください。
 
--   6.1.4 レプリケーション タスクが`invalid connection`エラーで中断されました。
+-   6.1.4 レプリケーションタスクが`invalid connection`エラーで中断されました。
 
-    -   `invalid connection`エラーは、DM と下流の TiDB データベース間の接続で異常 (ネットワーク障害、TiDB の再起動、TiKV のビジーなど) が発生し、現在のリクエストのデータの一部が TiDB に送信されたことを示しています。DM はレプリケーション タスクで下流にデータを同時にレプリケートする機能があるため、タスクが中断されるといくつかのエラーが発生する可能性があります。これらのエラーは`query-status`または`query-error`を実行して確認できます。
+    -   `invalid connection`エラーは、DM と下流の TiDB データベース間の接続で異常 (ネットワーク障害、TiDB の再起動、TiKV のビジーなど) が発生し、現在のリクエストのデータの一部が TiDB に送信されたことを示しています。DM はレプリケーションタスクで下流にデータを同時にレプリケートする機能があるため、タスクが中断されるといくつかのエラーが発生する可能性があります。これらのエラーは`query-status`または`query-error`を実行して確認できます。
 
         -   増分レプリケーション処理中に`invalid connection`エラーのみが発生した場合、DM はタスクを自動的に再試行します。
         -   DM がリトライしない、またはバージョン問題のために自動的にリトライできない場合 (自動リトライは v1.0.0-rc.1 で導入されました)、 `stop-task`を使用してタスクを停止し、 `start-task`を使用してタスクを再起動します。
 
--   6.1.5 リレーユニットがエラー`event from * in * diff from passed-in event *`を報告するか、レプリケーション タスクがbinlogの取得または解析に失敗するエラー（例: `get binlog error ERROR 1236 (HY000) and binlog checksum mismatch, data may be corrupted returned`で中断される。
+-   6.1.5 リレーユニットがエラー`event from * in * diff from passed-in event *`を報告するか、レプリケーションタスクがbinlogの取得または解析に失敗するエラー（例: `get binlog error ERROR 1236 (HY000) and binlog checksum mismatch, data may be corrupted returned`で中断される。
 
     -   DMがリレーログを取得するプロセス、または増分レプリケーションのプロセス中に、アップストリームのbinlogファイルのサイズが4GBを超えると、次の2つのエラーが発生する可能性があります。
 
@@ -438,7 +438,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
         -   `relay.meta`に記録されたbinlogイベントにより、不完全なリカバリプロセスがトリガーされ、誤ったGTID情報が記録されます。この問題はv1.0.2で修正されていますが、それ以前のバージョンでは発生する可能性があります。 <!--See [case-764](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case764.md).-->
 
--   6.1.7 DM レプリケーション プロセスでエラー`Error 1366: incorrect utf8 value eda0bdedb29d(\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd)`が返されます。
+-   6.1.7 DM レプリケーションプロセスでエラー`Error 1366: incorrect utf8 value eda0bdedb29d(\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd)`が返されます。
 
     -   この値は MySQL 8.0 または TiDB には正常に書き込めませんが、 MySQL 5.7には書き込めます。 `tidb_skip_utf8_check`パラメータを有効にすることで、データ形式のチェックをスキップできます。
 
@@ -505,7 +505,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     TiKVコプロセッサが長いキューに入っている理由を調査する必要があります。
 
--   7.1.3 `region_cache.go`は`switch region peer to next due to send request fail`を多数報告し、エラー メッセージは`context deadline exceeded`です。
+-   7.1.3 `region_cache.go`は`switch region peer to next due to send request fail`を多数報告し、エラーメッセージは`context deadline exceeded`です。
 
     TiKV へのリクエストがタイムアウトし、リージョン キャッシュがリクエストを他のノードに切り替えるようにトリガーされました。ログの`grep "<addr> cancelled`フィールドで`addr`コマンドを引き続き実行し、 `grep`の結果に応じて以下の手順を実行してください。
 

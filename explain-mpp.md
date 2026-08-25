@@ -7,7 +7,7 @@ summary: TiDB のEXPLAINステートメントによって返される実行計�
 
 TiDBは、 [MPPモード](/tiflash/use-tiflash-mpp-mode.md)を使用したクエリ実行をサポートしています。MPPモードでは、TiDBオプティマイザはMPP用の実行計画を生成します。MPPモードは、 [TiFlash](/tiflash/tiflash-overview.md)にレプリカを持つテーブルでのみ使用できることに注意してください。
 
-このドキュメントの例は、次のサンプル データに基づいています。
+このドキュメントの例は、次のサンプルデータに基づいています。
 
 ```sql
 CREATE TABLE t1 (id int, value int);
@@ -52,7 +52,7 @@ EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
 +------------------------------------+---------+-------------------+---------------+----------------------------------------------------+
 ```
 
-上記の実行計画には、2 つのクエリ フラグメントが含まれています。
+上記の実行計画には、2 つのクエリフラグメントが含まれています。
 
 -   1 つ目は`[TableFullScan_25, HashAgg_9, ExchangeSender_28]`で、主に第 1 段階の集約を担当します。
 -   2 番目は`[ExchangeReceiver_29, HashAgg_27, Projection_26, ExchangeSender_30]`で、主に第 2 段階の集約を担当します。
@@ -70,7 +70,7 @@ MPPは結合操作にもよく適用されます。TiDBのMPPモードは、以�
 -   シャッフルハッシュ結合：HashPartition交換タイプを使用して、結合操作からの入力データをシャッフルします。その後、上流のMPPタスクが同じパーティション内のデータを結合します。
 -   ブロードキャスト結合: 結合操作内の小さなテーブルのデータを各ノードにブロードキャストし、その後各ノードはデータを個別に結合します。
 
-以下は、シャッフル ハッシュ結合の一般的な実行計画です。
+以下は、シャッフルハッシュ結合の一般的な実行計画です。
 
 ```sql
 SET tidb_broadcast_join_threshold_count=0;
@@ -100,9 +100,9 @@ EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
 
 上記の実行計画では、
 
--   クエリ フラグメント`[TableFullScan_20, Selection_21, ExchangeSender_22]`はテーブル b からデータを読み取り、上流の MPP タスクにデータをシャッフルします。
--   クエリ フラグメント`[TableFullScan_16, Selection_17, ExchangeSender_18]`はテーブル a からデータを読み取り、上流の MPP タスクにデータをシャッフルします。
--   クエリ フラグメント`[ExchangeReceiver_19, ExchangeReceiver_23, HashJoin_44, ExchangeSender_47]`はすべてのデータを結合し、TiDB に返します。
+-   クエリフラグメント`[TableFullScan_20, Selection_21, ExchangeSender_22]`はテーブル b からデータを読み取り、上流の MPP タスクにデータをシャッフルします。
+-   クエリフラグメント`[TableFullScan_16, Selection_17, ExchangeSender_18]`はテーブル a からデータを読み取り、上流の MPP タスクにデータをシャッフルします。
+-   クエリフラグメント`[ExchangeReceiver_19, ExchangeReceiver_23, HashJoin_44, ExchangeSender_47]`はすべてのデータを結合し、TiDB に返します。
 
 Broadcast Join の一般的な実行計画は次のとおりです。
 
@@ -129,8 +129,8 @@ EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
 
 上記の実行計画では、
 
--   クエリ フラグメント`[TableFullScan_17, Selection_18, ExchangeSender_19]` 、小さなテーブル (テーブル a) からデータを読み取り、大きなテーブル (テーブル b) のデータを含む各ノードにデータをブロードキャストします。
--   クエリ フラグメント`[TableFullScan_21, Selection_22, ExchangeReceiver_20, HashJoin_43, ExchangeSender_46]`はすべてのデータを結合し、TiDB に返します。
+-   クエリフラグメント`[TableFullScan_17, Selection_18, ExchangeSender_19]` 、小さなテーブル (テーブル a) からデータを読み取り、大きなテーブル (テーブル b) のデータを含む各ノードにデータをブロードキャストします。
+-   クエリフラグメント`[TableFullScan_21, Selection_22, ExchangeReceiver_20, HashJoin_43, ExchangeSender_46]`はすべてのデータを結合し、TiDB に返します。
 
 ## MPPモードでの`EXPLAIN ANALYZE`文 {#explain-analyze-statements-in-the-mpp-mode}
 

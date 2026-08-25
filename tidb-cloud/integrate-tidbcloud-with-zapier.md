@@ -62,7 +62,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 2.  アカウントを選択
 
     1.  **Sign in**ボタンをクリックすると、新しいログインページにリダイレクトされます。
-    2.  ログイン ページで、公開キーと秘密キーを入力します。 TiDB Cloud API キーを取得するには、 [TiDB Cloud APIドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)ドキュメントの手順に従ってください。
+    2.  ログインページで、公開キーと秘密キーを入力します。 TiDB Cloud API キーを取得するには、 [TiDB Cloud APIドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)ドキュメントの手順に従ってください。
     3.  **Continue**をクリックしてください。
 
     ![Account](/media/tidb-cloud/zapier/zapier-tidbcloud-account.png)

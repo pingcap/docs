@@ -5,7 +5,7 @@ summary: ticloud serverless audit-log filter-rule template` のリファレン�
 
 # ticloud serverless audit-log filter-rule template {#ticloud-serverless-audit-log-filter-rule-template}
 
-TiDB Cloud Essential クラスターの監査ログ フィルター ルール テンプレートを表示します。
+TiDB Cloud Essential クラスターの監査ログフィルタールール テンプレートを表示します。
 
 ```shell
 ticloud serverless audit-log filter-rule template [flags]
@@ -30,15 +30,15 @@ ticloud serverless audit-log filter-rule template --cluster-id <cluster-id>
 | フラグ                  | 説明                  | 必須  | 注記                                   |
 | -------------------- | ------------------- | --- | ------------------------------------ |
 | -c, --cluster-id 文字列 | クラスターの ID。          | いいえ | 非対話型モードでのみ動作します。                     |
-| -h, --help           | このコマンドのヘルプ情報を表示します。 | いいえ | インタラクティブ モードと非インタラクティブ モードの両方で動作します。 |
+| -h, --help           | このコマンドのヘルプ情報を表示します。 | いいえ | インタラクティブモードと非インタラクティブモードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}
 
 | フラグ               | 説明                        | 必須  | 注記                                   |
 | ----------------- | ------------------------- | --- | ------------------------------------ |
-| -D, --debug        | デバッグ モードを有効にします。          | いいえ | インタラクティブ モードと非インタラクティブ モードの両方で動作します。 |
+| -D, --debug        | デバッグ モードを有効にします。          | いいえ | インタラクティブモードと非インタラクティブモードの両方で動作します。 |
 | --no-color             | カラー出力を無効にします。             | いいえ | 非対話型モードでのみ動作します。                     |
-| -P, --profile 文字列 | 構成ファイルから使用するプロファイルを指定します。 | いいえ | インタラクティブ モードと非インタラクティブ モードの両方で動作します。 |
+| -P, --profile 文字列 | 構成ファイルから使用するプロファイルを指定します。 | いいえ | インタラクティブモードと非インタラクティブモードの両方で動作します。 |
 
 ## フィードバック {#feedback}
 

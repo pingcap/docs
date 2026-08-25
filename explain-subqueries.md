@@ -7,7 +7,7 @@ summary: TiDB のEXPLAINステートメントによって返される実行計�
 
 TiDBはサブクエリのパフォーマンスを向上させるために[いくつかの最適化](/subquery-optimization.md)を実行します。このドキュメントでは、一般的なサブクエリに対するこれらの最適化のいくつかと、 `EXPLAIN`の出力の解釈方法について説明します。
 
-このドキュメントの例は、次のサンプル データに基づいています。
+このドキュメントの例は、次のサンプルデータに基づいています。
 
 ```sql
 CREATE TABLE t1 (id BIGINT NOT NULL PRIMARY KEY auto_increment, pad1 BLOB, pad2 BLOB, pad3 BLOB, int_col INT NOT NULL DEFAULT 0);
@@ -69,7 +69,7 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2);
 
 上記のクエリ結果から、TiDBがインデックス結合操作`IndexJoin_15`を使用してサブクエリを結合および変換していることがわかります。実行計画では、実行プロセスは次のようになります。
 
-1.  TiKV 側のインデックス スキャン演算子`└─IndexFullScan_26` 、 `t2.t1_id`列の値を読み取ります。
+1.  TiKV 側のインデックススキャン演算子`└─IndexFullScan_26` 、 `t2.t1_id`列の値を読み取ります。
 2.  `└─StreamAgg_34`演算子の一部のタスクは、TiKV 内の`t1_id`の値を重複排除します。
 3.  演算子`├─StreamAgg_44(Build)`のいくつかのタスクは、TiDB内の`t1_id`値を重複排除します。重複排除は集計関数`firstrow(test.t2.t1_id)`によって実行されます。
 4.  演算結果はテーブル`t1`の主キーと結合されます。結合条件は`eq(test.t1.id, test.t2.t1_id)`です。

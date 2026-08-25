@@ -41,7 +41,7 @@ DESC CLIENT_ERRORS_SUMMARY_GLOBAL;
 フィールドの説明:
 
 -   `ERROR_NUMBER` : 返された MySQL 互換エラー番号。
--   `ERROR_MESSAGE` : エラー番号に一致するエラー メッセージ (プリペアドステートメント形式)。
+-   `ERROR_MESSAGE` : エラー番号に一致するエラーメッセージ (プリペアドステートメント形式)。
 -   `ERROR_COUNT` : このエラーが返された回数。
 -   `WARNING_COUNT` : この警告が返された回数。
 -   `FIRST_SEEN` : このエラー (または警告) が最初に送信されたとき。

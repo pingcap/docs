@@ -21,7 +21,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 -   `--changefeed-id` : レプリケーションタスクのID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`正規表現に一致する必要があります。このIDが指定されていない場合、TiCDCは自動的にUUID（バージョン4形式）をIDとして生成します。
 
--   `--sink-uri` : レプリケーション タスクのダウンストリーム アドレス。 `--sink-uri`は、次の形式に従って設定します。現在、このスキームは`mysql` 、 `tidb` 、および`kafka`をサポートしています。
+-   `--sink-uri` : レプリケーションタスクのダウンストリーム アドレス。 `--sink-uri`は、次の形式に従って設定します。現在、このスキームは`mysql` 、 `tidb` 、および`kafka`をサポートしています。
 
     ```
     [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
@@ -192,7 +192,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 -   changefeed のダウンストリームが MQ シンクの場合、`dispatchers` を使用してイベントディスパッチャを設定できます。v8.5.7 以降、[新しい TiCDC アーキテクチャ](/ticdc/ticdc-architecture.md) では、`dispatchers` を使用してテーブルルーティングを設定し、アップストリームテーブルを特定のダウンストリームデータベース名またはテーブル名にマッピングすることもできます。詳細については、[TiCDC テーブルルーティング](/ticdc/ticdc-table-routing.md) を参照してください。
 -   バージョン6.1.0以降、TiDBはパーティションとトピックという2種類のイベントディスパッチャをサポートしています。
 -   マッチャーのマッチング構文は、フィルタルールの構文と同じです。
--   ダウンストリーム MQ が Pulsar の場合、 `partition`のルーティング ルールが`ts` 、 `index-value` 、 `table` 、または`default`にも指定されていない場合、各 Pulsar メッセージは、キーとして設定した文字列を使用してルーティングされます。たとえば、マッチャーのルーティング ルールを文字列`code`として指定した場合、そのマッチャーに一致するすべての Pulsar メッセージは`code`をキーとしてルーティングされます。
+-   ダウンストリーム MQ が Pulsar の場合、 `partition`のルーティングルールが`ts` 、 `index-value` 、 `table` 、または`default`にも指定されていない場合、各 Pulsar メッセージは、キーとして設定した文字列を使用してルーティングされます。たとえば、マッチャーのルーティングルールを文字列`code`として指定した場合、そのマッチャーに一致するすべての Pulsar メッセージは`code`をキーとしてルーティングされます。
 
 #### `column-selectors` <span class="version-mark">v7.5.0の新機能）</span> {#column-selectors-new-in-v750}
 

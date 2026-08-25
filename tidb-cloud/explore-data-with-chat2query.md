@@ -42,7 +42,7 @@ SQLエディタの推奨される使用例は以下のとおりです。
 
 ## AIによるSQLクエリ生成を有効または無効にする {#enable-or-disable-ai-to-generate-sql-queries}
 
-PingCAP は、ユーザーのデータのプライバシーとセキュリティを最優先事項としています。 SQL エディターの Chat2Query の AI 機能は、データ自体ではなく、データベース スキーマにアクセスして SQL クエリを生成することのみが必要です。詳細については、 [Chat2Queryのプライバシーに関するFAQ](https://www.pingcap.com/privacy-policy/privacy-chat2query)を参照してください。
+PingCAP は、ユーザーのデータのプライバシーとセキュリティを最優先事項としています。 SQL エディターの Chat2Query の AI 機能は、データ自体ではなく、データベーススキーマにアクセスして SQL クエリを生成することのみが必要です。詳細については、 [Chat2Queryのプライバシーに関するFAQ](https://www.pingcap.com/privacy-policy/privacy-chat2query)を参照してください。
 
 Chat2Queryに初めてアクセスすると、PingCAPとAmazon Bedrockがお客様のコードスニペットを使用してサービスを調査および改善することを許可するかどうかを尋ねるダイアログが表示されます。
 
@@ -160,7 +160,7 @@ Chat2Queryでは、以下の手順でChat2Queryデータアプリにアクセス
 1.  右上隅の**…**をクリックし、次に**Access Chat2Query via API**をクリックします。
 2.  表示されたダイアログで、次のいずれかの操作を行います。
 
-    -   新しい Chat2Query データ アプリを作成するには、 **New Chat2Query Data App**をクリックします。
+    -   新しい Chat2Query データアプリを作成するには、 **New Chat2Query Data App**をクリックします。
     -   既存のChat2Queryデータアプリにアクセスするには、対象のデータアプリの名前をクリックしてください。
 
 詳細については、 [Chat2Query API を使い始めましょう](/tidb-cloud/use-chat2query-api.md)を参照してください。

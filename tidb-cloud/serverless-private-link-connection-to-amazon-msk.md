@@ -16,7 +16,7 @@ summary: Amazon MSK プロビジョニングされたプライベートリンク
 
 AWS アカウント ID とアベイラビリティーゾーンを表示するには:
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**Settings** &gt; **Networking**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
 2.  **[外部サービス向け AWS プライベートエンドポイント]**領域で、**[外部サービス向けプライベートエンドポイントを作成]**をクリックします。
 3.  ダイアログで、AWS アカウント ID とアベイラビリティーゾーンをメモします。
 
@@ -152,6 +152,6 @@ SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同
 
 ## ステップ 5. TiDB Cloudで Amazon MSK プロビジョニングされたプライベートリンク接続を作成する {#step-5-create-an-amazon-msk-provisioned-private-link-connection-in-tidb-cloud}
 
-MSK クラスターの`ARN`を使用して、 TiDB Cloudにプライベート リンク接続を作成します。
+MSK クラスターの`ARN`を使用して、 TiDB Cloudにプライベートリンク接続を作成します。
 
 詳細については[Amazon MSK プロビジョニングされたプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection)を参照してください。

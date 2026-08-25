@@ -145,7 +145,7 @@ summary: tidbcloud_backup` リソースを使用してTiDB Cloudクラスター�
 
 ## バックアップを削除する {#delete-a-backup}
 
-バックアップを削除するには、対応する`backup.tf`ファイルが配置されているバックアップ ディレクトリに移動し、 `terraform destroy`コマンドを実行して`tidbcloud_backup`リソースを破棄します。
+バックアップを削除するには、対応する`backup.tf`ファイルが配置されているバックアップディレクトリに移動し、 `terraform destroy`コマンドを実行して`tidbcloud_backup`リソースを破棄します。
 
     $ terraform destroy
 

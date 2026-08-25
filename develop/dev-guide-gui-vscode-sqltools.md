@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-gui-vscode-sqltools/','/ja/tidb/dev/dev-gui
 
 # Visual Studio Codeを使用してTiDBに接続する {#connect-to-tidb-with-visual-studio-code}
 
-TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code)](https://code.visualstudio.com/)は軽量かつ強力なソース コード エディターです。このチュートリアルでは、TiDB を[公式ドライバー](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql)としてサポートする[SQLツール](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)拡張機能を使用します。
+TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code)](https://code.visualstudio.com/)は軽量かつ強力なソースコード エディターです。このチュートリアルでは、TiDB を[公式ドライバー](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql)としてサポートする[SQLツール](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)拡張機能を使用します。
 
 このチュートリアルでは、Visual Studio Code を使用して TiDB に接続する方法を学ぶことができます。
 

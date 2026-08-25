@@ -7,7 +7,7 @@ summary: TiDB Cloud Starter クラスターを、Cursor、Claude Code、VS Code�
 
 このドキュメントでは、Cursor、Claude Code、Visual Studio Code (VS Code)、Windsurf などのモデル コンテキスト プロトコル (MCP) をサポートする AI 搭載開発ツールにTiDB Cloud Starter クラスターを接続する方法について説明します。
 
-TiDB Cloud Starter クラスターを MCPサーバーとして構成すると、開発ツールの AI アシスタントを有効にして、データベース スキーマを照会し、データ モデルを理解し、コンテキストに応じたコード提案を生成できるようになります。
+TiDB Cloud Starter クラスターを MCPサーバーとして構成すると、開発ツールの AI アシスタントを有効にして、データベーススキーマを照会し、データモデルを理解し、コンテキストに応じたコード提案を生成できるようになります。
 
 ## 始める前に {#before-you-begin}
 
@@ -43,7 +43,7 @@ TiDB CloudでTiDB Cloud Starter クラスターを作成したら、次の手順
 
     -   パスワードを忘れた場合は、 **Prerequisites**セクションの**Reset password**をクリックして、新しいパスワードを生成します。
 
-        パスワードをリセットすると、既存のすべての root ユーザー セッションが切断されることに注意してください。
+        パスワードをリセットすると、既存のすべての root ユーザーセッションが切断されることに注意してください。
 
 5.  AI ツールのタブを選択します: **Cursor** 、 **Claude Code** 、 **VS Code** 、または**Windsurf** 。
 

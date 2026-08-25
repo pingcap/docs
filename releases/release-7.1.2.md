@@ -137,7 +137,7 @@ TiDB バージョン: 7.1.2
 
 -   PD
 
-    -   v2 スケジューラ アルゴリズムでホット リージョンがスケジュールされない可能性がある問題を修正しました [＃6645](https://github.com/tikv/pd/issues/6645) @[lhy1024](https://github.com/lhy1024)
+    -   v2 スケジューラ アルゴリズムでホットリージョンがスケジュールされない可能性がある問題を修正しました [＃6645](https://github.com/tikv/pd/issues/6645) @[lhy1024](https://github.com/lhy1024)
     -   TLSハンドシェイクにより空のクラスタでCPU使用率が上昇する可能性がある問題を修正 [＃6913](https://github.com/tikv/pd/issues/6913) @[nolouch](https://github.com/nolouch)
     -   PDノード間の注入エラーによりPD panicが発生する可能性がある問題を修正しました [＃6858](https://github.com/tikv/pd/issues/6858) @[HuSharp](https://github.com/HuSharp)
     -   ストア情報の同期によりPDリーダーが終了し、 で停止する可能性がある問題を修正しました。 [＃6918](https://github.com/tikv/pd/issues/6918) @[rleungx](https://github.com/rleungx)
@@ -203,7 +203,7 @@ TiDB バージョン: 7.1.2
         -   DM が大文字と小文字を区別しない照合順序で競合を正しく処理できない問題を修正しました [＃9489](https://github.com/pingcap/tiflow/issues/9489) @[hihihuhu](https://github.com/hihihuhu)
         -   DM バリデーターのデッドロック問題を修正し、再試行を強化しました。 [＃9257](https://github.com/pingcap/tiflow/issues/9257) @[D3Hunter](https://github.com/D3Hunter)
         -   楽観的モードでタスクを再開するときに DM がすべての DML をスキップする問題を修正しました [＃9588](https://github.com/pingcap/tiflow/issues/9588) @[GMHDBJD](https://github.com/GMHDBJD)
-        -   オンライン DDL をスキップするときに DM が上流のテーブル スキーマを適切に追跡できない問題を修正しました [＃9587](https://github.com/pingcap/tiflow/issues/9587) @[GMHDBJD](https://github.com/GMHDBJD)
+        -   オンライン DDL をスキップするときに DM が上流のテーブルスキーマを適切に追跡できない問題を修正しました [＃9587](https://github.com/pingcap/tiflow/issues/9587) @[GMHDBJD](https://github.com/GMHDBJD)
         -   DMが楽観的モードでパーティションDDLをスキップする問題を修正 [＃9788](https://github.com/pingcap/tiflow/issues/9788) @[GMHDBJD](https://github.com/GMHDBJD)
 
     -   TiDB Lightning

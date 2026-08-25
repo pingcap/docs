@@ -251,7 +251,7 @@ production:
 
 > **Note**
 >
-> [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、パブリック エンドポイントを使用する際には**、** `ssl_mode`の`verify_identity`クエリ パラメータを`DATABASE_URL`に設定して TLS 接続を有効にする必要がありますが、mysql2 gem が特定の順序で既存の CA 証明書を検索してファイルが見つかるまで検索するため、 `DATABASE_URL`を介して SSL CA 証明書を指定する必要**はあり**ません。
+> [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、パブリックエンドポイントを使用する際には**、** `ssl_mode`の`verify_identity`クエリパラメータを`DATABASE_URL`に設定して TLS 接続を有効にする必要がありますが、mysql2 gem が特定の順序で既存の CA 証明書を検索してファイルが見つかるまで検索するため、 `DATABASE_URL`を介して SSL CA 証明書を指定する必要**はあり**ません。
 
 ### データを挿入する {#insert-data}
 
@@ -307,7 +307,7 @@ CA証明書のパスを手動で指定することも可能ですが、異なる
 ## 次のステップ {#next-steps}
 
 -   ActiveRecord ORM の使用法について詳しくは[ActiveRecordのドキュメント](https://guides.rubyonrails.org/active_record_basics.html)ご覧ください。
--   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)[データを削除する](/develop/dev-guide-delete-data.md)SQL [トランザクション](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)などの章を読んで、[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)、TiDB アプリケーション開発のベスト プラクティスを学びましょう。
+-   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)[データを削除する](/develop/dev-guide-delete-data.md)SQL [トランザクション](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)などの章を読んで、[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)、TiDB アプリケーション開発のベストプラクティスを学びましょう。
 -   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}

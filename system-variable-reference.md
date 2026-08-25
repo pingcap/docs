@@ -440,7 +440,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/develop/java-app-best-practices.md)
+-   [TiDB を使用したJavaアプリケーション開発のベストプラクティス](/develop/java-app-best-practices.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#interactive_timeout)
 -   [TiDBクラスタ管理に関する FAQ](/faq/manage-cluster-faq.md)
@@ -527,7 +527,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/develop/java-app-best-practices.md)
+-   [TiDB を使用したJavaアプリケーション開発のベストプラクティス](/develop/java-app-best-practices.md)
 -   [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
 -   [オプティマイザヒント](/optimizer-hints.md)
 -   [SQL プラン管理 (SPM)](/sql-plan-management.md)
@@ -1471,7 +1471,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [システム変数](/system-variables.md#tidb_enable_clustered_index-new-in-v50)
 -   [TiDB バックアップと復元の概要](/br/backup-and-restore-overview.md)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
--   [TiDB データベース スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)
+-   [TiDB データベーススキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)
 -   [TiDB Lightningコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)
 -   [TiDB 6.4.0 リリースノート](/releases/release-6.4.0.md)
 -   [TiDB 5.0 リリースノート](/releases/release-5.0.0.md)
@@ -1687,7 +1687,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/develop/java-app-best-practices.md)
+-   [TiDB を使用したJavaアプリケーション開発のベストプラクティス](/develop/java-app-best-practices.md)
 -   [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
 -   [システム変数](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)
 -   [TiDB 8.3.0 リリースノート](/releases/release-8.3.0.md)
@@ -2051,7 +2051,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/develop/java-app-best-practices.md)
+-   [TiDB を使用したJavaアプリケーション開発のベストプラクティス](/develop/java-app-best-practices.md)
 -   [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
 -   [ディスク流出時の暗号化機能を有効にする](/enable-disk-spill-encrypt.md)
 -   [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
@@ -4507,7 +4507,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/develop/java-app-best-practices.md)
+-   [TiDB を使用したJavaアプリケーション開発のベストプラクティス](/develop/java-app-best-practices.md)
 -   [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#wait_timeout)

@@ -3,7 +3,7 @@ title: TiDB Control User Guide
 summary: デバッグ用の TiDB ステータス情報を取得するには、TiDB コントロールを使用します。
 ---
 
-# TiDB コントロール ユーザー ガイド {#tidb-control-user-guide}
+# TiDB コントロール ユーザーガイド {#tidb-control-user-guide}
 
 TiDB ControlはTiDBのコマンドラインツールであり、通常はデバッグのためにTiDBのステータス情報を取得するために使用されます。このドキュメントでは、TiDB Controlの機能とその使用方法について説明します。
 
@@ -13,7 +13,7 @@ TiDB ControlはTiDBのコマンドラインツールであり、通常はデバ�
 
 ## TiDBコントロールを入手 {#get-tidb-control}
 
-TiDB Control は、 TiUPを使用してインストールするか、ソース コードからコンパイルすることで入手できます。
+TiDB Control は、 TiUPを使用してインストールするか、ソースコードからコンパイルすることで入手できます。
 
 > **Note:**
 >
@@ -26,7 +26,7 @@ TiUPをインストールした後、 `tiup ctl:v<CLUSTER_VERSION> tidb`コマ�
 ### ソースコードからコンパイルする {#compile-from-source-code}
 
 -   コンパイル環境要件: [Go](https://golang.org/) 1.25以降
--   コンパイル手順: [TiDB制御プロジェクト](https://github.com/pingcap/tidb-ctl)のルート ディレクトリに移動し、 `make`コマンドを使用してコンパイルし、 `tidb-ctl`を生成します。
+-   コンパイル手順: [TiDB制御プロジェクト](https://github.com/pingcap/tidb-ctl)のルートディレクトリに移動し、 `make`コマンドを使用してコンパイルし、 `tidb-ctl`を生成します。
 -   コンパイル ドキュメント: ヘルプ ファイルは`doc`ディレクトリにあります。ヘルプ ファイルが失われた場合、または更新する場合は、 `make doc`コマンドを使用してヘルプ ファイルを生成します。
 
 ## 使い方の紹介 {#usage-introduction}
@@ -67,8 +67,8 @@ TiDBコントロールは複数のコマンド層で構成されています。�
 
 使用方法の詳細を取得するには、 `tidb-ctl schema -h`を使用します。 `schema`コマンド自体には、 `in`と`tid` 2つのサブコマンドがあります。
 
--   `in` 、データベース名を通じてデータベース内のすべてのテーブルのテーブル スキーマを取得するために使用されます。
--   `tid` 、データベース全体で一意の`table_id`を使用してテーブル スキーマを取得するために使用されます。
+-   `in` 、データベース名を通じてデータベース内のすべてのテーブルのテーブルスキーマを取得するために使用されます。
+-   `tid` 、データベース全体で一意の`table_id`を使用してテーブルスキーマを取得するために使用されます。
 
 ### グローバルオプション {#global-options}
 
@@ -92,7 +92,7 @@ TiDBコントロールは複数のコマンド層で構成されています。�
 
 #### `in`サブコマンド {#the-in-subcommand}
 
-`in` 、データベース名を通じてデータベース内のすべてのテーブルのテーブル スキーマを取得するために使用されます。
+`in` 、データベース名を通じてデータベース内のすべてのテーブルのテーブルスキーマを取得するために使用されます。
 
 ```bash
 tidb-ctl schema in <database name>
@@ -120,7 +120,7 @@ tidb-ctl schema in <database name>
 
 -   テーブル名を指定する場合は、 `tidb-ctl schema in <database> -n <table name>`を使用してフィルタリングします。
 
-    たとえば、 `tidb-ctl schema in mysql -n db` `mysql`データベース内の`db`テーブルのテーブル スキーマを返します。
+    たとえば、 `tidb-ctl schema in mysql -n db` `mysql`データベース内の`db`テーブルのテーブルスキーマを返します。
 
     ```json
     {
@@ -157,7 +157,7 @@ tidb-ctl schema in <database name>
 }
 ```
 
-`in`サブコマンドと同様に、デフォルトの TiDB サービス アドレスとステータス ポートを使用しない場合は、 `--host`および`--port`オプションを使用してホストとポートを指定します。
+`in`サブコマンドと同様に、デフォルトの TiDB サービス アドレスとステータスポートを使用しない場合は、 `--host`および`--port`オプションを使用してホストとポートを指定します。
 
 #### `base64decode`コマンド {#the-base64decode-command}
 
@@ -237,7 +237,7 @@ tidb-ctl base64decode [table_id] [base64_data]
 
 ### `decoder`コマンド {#the-decoder-command}
 
--   次の例は、インデックス キーのデコードと同様に、行キーをデコードする方法を示しています。
+-   次の例は、インデックスキーのデコードと同様に、行キーをデコードする方法を示しています。
 
     ```shell
     $ ./tidb-ctl decoder "t\x00\x00\x00\x00\x00\x00\x00\x1c_r\x00\x00\x00\x00\x00\x00\x00\xfa"

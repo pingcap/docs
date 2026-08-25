@@ -32,7 +32,7 @@ TiDB バージョン: 4.0.8
     -   `Selectivity()` の貪欲探索手順で選択性の低いインデックスを優先する [＃20154](https://github.com/pingcap/tidb/pull/20154)
     -   コプロセッサー実行時統計にRPC実行時情報をさらに記録します。 [＃19264](https://github.com/pingcap/tidb/pull/19264)
     -   スローログの解析を高速化してクエリパフォーマンスを向上させる[＃20556](https://github.com/pingcap/tidb/pull/20556)
-    -   SQL オプティマイザが潜在的な新しいプランを検証しているときに、より多くのデバッグ情報を記録するために、プラン バインディング ステージ中にタイムアウト実行計画を待機します[＃20530](https://github.com/pingcap/tidb/pull/20530)
+    -   SQL オプティマイザが潜在的な新しいプランを検証しているときに、より多くのデバッグ情報を記録するために、プランバインディング ステージ中にタイムアウト実行計画を待機します[＃20530](https://github.com/pingcap/tidb/pull/20530)
     -   スローログに実行再試行時間を追加し、スロークエリの結果[＃20495](https://github.com/pingcap/tidb/pull/20495) [＃20494](https://github.com/pingcap/tidb/pull/20494)
     -   `table_storage_stats`システムテーブルを追加する [＃20431](https://github.com/pingcap/tidb/pull/20431)
     -   `INSERT` `REPLACE`のRPC実行時統計情報`UPDATE`追加する[＃20430](https://github.com/pingcap/tidb/pull/20430)

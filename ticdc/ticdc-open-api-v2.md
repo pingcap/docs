@@ -36,7 +36,7 @@ API を使用して、TiCDC クラスターで次のメンテナンス操作を�
 
 ## APIエラーメッセージテンプレート {#api-error-message-template}
 
-API リクエストの送信後にエラーが発生した場合、返されるエラー メッセージは次の形式になります。
+API リクエストの送信後にエラーが発生した場合、返されるエラーメッセージは次の形式になります。
 
 ```json
 {
@@ -45,7 +45,7 @@ API リクエストの送信後にエラーが発生した場合、返される�
 }
 ```
 
-上記の JSON 出力では、 `error_msg`エラー メッセージを示し、 `error_code`対応するエラー コードを示します。
+上記の JSON 出力では、 `error_msg`エラーメッセージを示し、 `error_code`対応するエラーコードを示します。
 
 ## APIリストインターフェースの戻り形式 {#return-format-of-the-api-list-interface}
 
@@ -130,7 +130,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 {}
 ```
 
-クラスターが正常でない場合、応答はエラー メッセージを含む JSON オブジェクトになります。
+クラスターが正常でない場合、応答はエラーメッセージを含む JSON オブジェクトになります。
 
 ## レプリケーションタスクを作成する {#create-a-replication-task}
 
@@ -376,7 +376,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 
 ### 例 {#example}
 
-次のリクエストは、ID が`test5`で`blackhome://` `sink_uri`あるレプリケーション タスクを作成します。
+次のリクエストは、ID が`test5`で`blackhome://` `sink_uri`あるレプリケーションタスクを作成します。
 
 ```shell
 curl -X POST -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/changefeeds -d '{"changefeed_id":"test5","sink_uri":"blackhole://"}'
@@ -500,18 +500,18 @@ curl -X POST -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/ch
 | :---------------- | :---------------------------------------------------------------------------------- |
 | `admin_job_type`  | `INTEGER`タイプ。管理ジョブのタイプ。                                                             |
 | `checkpoint_time` | `STRING`タイプ。レプリケーションタスクの現在のチェックポイントのフォーマットされた時刻。                                    |
-| `checkpoint_ts`   | `STRING`タイプ。レプリケーション タスクの現在のチェックポイントの TSO。                                          |
+| `checkpoint_ts`   | `STRING`タイプ。レプリケーションタスクの現在のチェックポイントの TSO。                                          |
 | `config`          | レプリケーションタスクの設定。構造と意味は、レプリケーションタスク作成時の`replica_config`の設定と同じです。                      |
 | `create_time`     | `STRING`型。レプリケーションタスクが作成された時刻。                                                      |
 | `creator_version` | `STRING`タイプ。レプリケーションタスク作成時の TiCDC バージョン。                                            |
-| `error`           | レプリケーション タスク エラー。                                                                   |
-| `id`              | `STRING`タイプ。レプリケーション タスク ID。                                                        |
-| `resolved_ts`     | `UINT64`タイプ。レプリケーション タスクは ts を解決しました。                                               |
-| `sink_uri`        | `STRING`タイプ。レプリケーション タスク シンクの URI。                                                  |
+| `error`           | レプリケーションタスク エラー。                                                                   |
+| `id`              | `STRING`タイプ。レプリケーションタスク ID。                                                        |
+| `resolved_ts`     | `UINT64`タイプ。レプリケーションタスクは ts を解決しました。                                               |
+| `sink_uri`        | `STRING`タイプ。レプリケーションタスク シンクの URI。                                                  |
 | `start_ts`        | `UINT64`タイプ。レプリケーションタスクが開始されます。                                                     |
 | `state`           | `STRING`型。レプリケーションタスクのステータス。`normal` 、 `stopped` 、 `error` 、 `failed` 、または`finished`になります。 |
 | `target_ts`       | `UINT64`タイプ。レプリケーションタスクのターゲット ts。                                                   |
-| `task_status`     | レプリケーション タスクのディスパッチの詳細なステータス。                                                       |
+| `task_status`     | レプリケーションタスクのディスパッチの詳細なステータス。                                                       |
 
 `task_status`パラメータは次のように記述されます。
 
@@ -542,11 +542,11 @@ curl -X POST -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/ch
 
 | パラメータ名          | 説明                                  |
 | :-------------- | :---------------------------------- |
-| `changefeed_id` | 削除するレプリケーション タスク (changefeed) の ID。 |
+| `changefeed_id` | 削除するレプリケーションタスク (changefeed) の ID。 |
 
 ### 例 {#example}
 
-次のリクエストは、ID `test1`のレプリケーション タスクを削除します。
+次のリクエストは、ID `test1`のレプリケーションタスクを削除します。
 
 ```shell
 curl -X DELETE http://127.0.0.1:8300/api/v2/changefeeds/test1
@@ -570,7 +570,7 @@ changefeed 設定を変更するには、 `pause the replication task -> modify 
 
 | パラメータ名          | 説明                                  |
 | :-------------- | :---------------------------------- |
-| `changefeed_id` | 更新するレプリケーション タスク (changefeed) の ID。 |
+| `changefeed_id` | 更新するレプリケーションタスク (changefeed) の ID。 |
 
 #### リクエスト本体のパラメータ {#parameters-for-the-request-body}
 
@@ -672,7 +672,7 @@ changefeed 設定を変更するには、 `pause the replication task -> modify 
 
 ### 例 {#example}
 
-次のリクエストは、ID `test1`のレプリケーション タスクの`target_ts` `32`に更新します。
+次のリクエストは、ID `test1`のレプリケーションタスクの`target_ts` `32`に更新します。
 
 ```shell
 curl -X PUT -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/changefeeds/test1 -d '{"target_ts":32}'
@@ -698,11 +698,11 @@ curl -X PUT -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/cha
 
 `state`の値のオプションは`all` 、 `normal` 、 `stopped` 、 `error` 、 `failed` 、 `finished`です。
 
-このパラメータを指定しない場合は、 `normal` 、 `stopped` 、または`failed`状態のレプリケーション タスクの基本情報がデフォルトで返されます。
+このパラメータを指定しない場合は、 `normal` 、 `stopped` 、または`failed`状態のレプリケーションタスクの基本情報がデフォルトで返されます。
 
 ### 例 {#example}
 
-次のリクエストは、状態`normal`にあるすべてのレプリケーション タスクの基本情報を照会します。
+次のリクエストは、状態`normal`にあるすべてのレプリケーションタスクの基本情報を照会します。
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v2/changefeeds?state=normal
@@ -732,11 +732,11 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds?state=normal
 
 上記の返された結果のパラメータは次のように説明されます。
 
--   `id` : レプリケーション タスクの ID。
--   `state` : レプリケーション タスクの現在の[州](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer) 。
--   `checkpoint_tso` : レプリケーション タスクの現在のチェックポイントの TSO。
--   `checkpoint_time` : レプリケーション タスクの現在のチェックポイントのフォーマットされた時刻。
--   `error` : レプリケーション タスクのエラー情報。
+-   `id` : レプリケーションタスクの ID。
+-   `state` : レプリケーションタスクの現在の[州](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer) 。
+-   `checkpoint_tso` : レプリケーションタスクの現在のチェックポイントの TSO。
+-   `checkpoint_time` : レプリケーションタスクの現在のチェックポイントのフォーマットされた時刻。
+-   `error` : レプリケーションタスクのエラー情報。
 
 ## 特定のレプリケーションタスクをクエリする {#query-a-specific-replication-task}
 
@@ -752,11 +752,11 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds?state=normal
 
 | パラメータ名          | 説明                                   |
 | :-------------- | :----------------------------------- |
-| `changefeed_id` | クエリするレプリケーション タスク (changefeed) の ID。 |
+| `changefeed_id` | クエリするレプリケーションタスク (changefeed) の ID。 |
 
 ### 例 {#example}
 
-次のリクエストは、ID `test1`のレプリケーション タスクの詳細情報を照会します。
+次のリクエストは、ID `test1`のレプリケーションタスクの詳細情報を照会します。
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1
@@ -778,11 +778,11 @@ JSONレスポンスボディの意味は[レプリケーションタスクを作
 
 | パラメータ名          | 説明                                   |
 | :-------------- | :----------------------------------- |
-| `changefeed_id` | クエリするレプリケーション タスク (changefeed) の ID。 |
+| `changefeed_id` | クエリするレプリケーションタスク (changefeed) の ID。 |
 
 ### 例 {#examples}
 
-次のリクエストは、ID `test1`のレプリケーション タスクの同期ステータスを照会します。
+次のリクエストは、ID `test1`のレプリケーションタスクの同期ステータスを照会します。
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1/synced
@@ -867,11 +867,11 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1/synced
 
 | パラメータ名          | 説明                                    |
 | :-------------- | :------------------------------------ |
-| `changefeed_id` | 一時停止するレプリケーション タスク (changefeed) の ID。 |
+| `changefeed_id` | 一時停止するレプリケーションタスク (changefeed) の ID。 |
 
 ### 例 {#example}
 
-次のリクエストは、ID `test1`のレプリケーション タスクを一時停止します。
+次のリクエストは、ID `test1`のレプリケーションタスクを一時停止します。
 
 ```shell
 curl -X POST http://127.0.0.1:8300/api/v2/changefeeds/test1/pause
@@ -893,7 +893,7 @@ curl -X POST http://127.0.0.1:8300/api/v2/changefeeds/test1/pause
 
 | パラメータ名          | 説明                                  |
 | :-------------- | :---------------------------------- |
-| `changefeed_id` | 再開するレプリケーション タスク (changefeed) の ID。 |
+| `changefeed_id` | 再開するレプリケーションタスク (changefeed) の ID。 |
 
 #### リクエスト本体のパラメータ {#parameters-for-the-request-body}
 
@@ -905,11 +905,11 @@ curl -X POST http://127.0.0.1:8300/api/v2/changefeeds/test1/pause
 
 | パラメータ名                    | 説明                                                                    |
 | :------------------------ | :-------------------------------------------------------------------- |
-| `overwrite_checkpoint_ts` | `UINT64`タイプ。レプリケーション タスク (changefeed) を再開するときにチェックポイント TSO を再割り当てします。 |
+| `overwrite_checkpoint_ts` | `UINT64`タイプ。レプリケーションタスク (changefeed) を再開するときにチェックポイント TSO を再割り当てします。 |
 
 ### 例 {#example}
 
-次のリクエストは、ID `test1`のレプリケーション タスクを再開します。
+次のリクエストは、ID `test1`のレプリケーションタスクを再開します。
 
 ```shell
 curl -X POST http://127.0.0.1:8300/api/v2/changefeeds/test1/resume -d '{}'
@@ -970,8 +970,8 @@ curl -X GET http://127.0.0.1:8300/api/v2/processors
 
 | パラメータ名          | 説明                             |
 | :-------------- | :----------------------------- |
-| `changefeed_id` | クエリするレプリケーション サブタスクの変更フィード ID。 |
-| `capture_id`    | クエリするレプリケーション サブタスクのキャプチャ ID。  |
+| `changefeed_id` | クエリするレプリケーションサブタスクの変更フィード ID。 |
+| `capture_id`    | クエリするレプリケーションサブタスクのキャプチャ ID。  |
 
 ### 例 {#example}
 
@@ -1058,7 +1058,7 @@ curl -X POST http://127.0.0.1:8300/api/v2/owner/resign
 
 | パラメータ名      | 説明          |
 | :---------- | :---------- |
-| `log_level` | 設定するログ レベル。 |
+| `log_level` | 設定するログレベル。 |
 
 `log_level` 、「debug」、「info」、「warn」、「error」、「dpanic」、「panic」、「fatal」の[zapが提供するログレベル](https://godoc.org/go.uber.org/zap#UnmarshalText)サポートします。
 

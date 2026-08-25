@@ -9,9 +9,9 @@ summary: プライベートエンドポイントを介してTiDB Cloud Starter�
 
 > **Tip:**
 >
-> -   AWS のプライベート エンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [AWS PrivateLink を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
-> -   Azure のプライベート エンドポイントを介してTiDB Cloud Dedicatedクラスターに接続する方法については、 [Azureプライベートリンクを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)D dedicated クラスターに接続する」を参照してください。
-> -   Google Cloud のプライベート エンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
+> -   AWS のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [AWS PrivateLink を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
+> -   Azure のプライベートエンドポイントを介してTiDB Cloud Dedicatedクラスターに接続する方法については、 [Azureプライベートリンクを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)D dedicated クラスターに接続する」を参照してください。
+> -   Google Cloud のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
 
 TiDB Cloudは、 AWS VPC内でホストされているTiDB Cloudサービスへの[AWSプライベートリンク](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc)を介した高度に安全な一方向アクセスをサポートしています。まるでサービスがお客様自身のVPC内にあるかのように動作します。お客様のVPC内にプライベートエンドポイントが公開され、権限があればそのエンドポイントを介してTiDB Cloudサービスへの接続を作成できます。
 
@@ -311,6 +311,6 @@ AWS Management Console でプライベートDNSを有効にするには、次の
 
 ### プライベートDNSを有効にした後、プライベートエンドポイント経由でTiDB Cloud StarterまたはEssentialインスタンスに接続できません。なぜでしょうか？ {#i-cannot-connect-to-a-tidb-cloud-starter-or-essential-instance-via-a-private-endpoint-after-enabling-private-dns-why}
 
-AWS マネジメント コンソールで、VPC エンドポイントのセキュリティ グループを適切に設定する必要がある場合があります。**VPC** &gt; **Endpoints**に移動します。VPC エンドポイントを右クリックし、適切な**Manage security groups**を選択します。VPC 内に、EC2 インスタンスからのポート 4000 またはお客様定義のポートへの受信アクセスを許可する適切なセキュリティ グループを設定します。
+AWS マネジメントコンソールで、VPC エンドポイントのセキュリティグループを適切に設定する必要がある場合があります。**VPC** &gt; **Endpoints**に移動します。VPC エンドポイントを右クリックし、適切な**Manage security groups**を選択します。VPC 内に、EC2 インスタンスからのポート 4000 またはお客様定義のポートへの受信アクセスを許可する適切なセキュリティグループを設定します。
 
 ![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)

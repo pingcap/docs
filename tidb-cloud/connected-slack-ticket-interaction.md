@@ -1,21 +1,21 @@
 ---
 title: Interact with Support Tickets via Slack
-summary: サポート チケットの Slack でのやり取りに関する詳細情報を紹介します。
+summary: サポートチケットの Slack でのやり取りに関する詳細情報を紹介します。
 ---
 
 # Slack経由でサポートチケットとやり取りする {#interact-with-support-tickets-via-slack}
 
-**Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)に加入している顧客向けに、 TiDB Cloud は、サポート チケットのより包括的なやり取りと管理をサポートするために、 [Slack](https://slack.com/)で**PingCAP Support Bot**と呼ばれるチケット ボットを提供します。
+**Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)に加入している顧客向けに、 TiDB Cloud は、サポートチケットのより包括的なやり取りと管理をサポートするために、 [Slack](https://slack.com/)で**PingCAP Support Bot**と呼ばれるチケット ボットを提供します。
 
 > **Note:**
 >
 > Slackのチケットサポート機能はリクエストに応じてご利用いただけます。この機能をご利用になりたい場合は、 TiDB Cloudサポート<a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>までご連絡いただくか、担当のテクニカルアカウントマネージャー（TAM）までお問い合わせください。
 
-**PingCAP Support Bot**を使用して Slack でサポート チケットを作成できます。
+**PingCAP Support Bot**を使用して Slack でサポートチケットを作成できます。
 
 ![Create a support ticket in Slack](/media/tidb-cloud/connected-slack-ticket-interaction-creation.gif)
 
-Slack でサポート チケットに直接返信することもできます。
+Slack でサポートチケットに直接返信することもできます。
 
 ![Reply to a support ticket in Slack](/media/tidb-cloud/connected-slack-ticket-interaction-reply.gif)
 
@@ -37,7 +37,7 @@ Slackのサポートチャンネルで、 **PingCAP Support Bot**をメンショ
 
 サポートエンジニアのチケットへのコメントはSlackのメッセージスレッドに同期されるため、ユーザーはサポートポータルに移動してコメントを確認する必要はありません。ユーザーはこのメッセージスレッドに直接返信することができ、返信はチケットシステムに同期されます。
 
-これにより、**Premium**サポート プランに加入している顧客は、Slack を離れることなく、チケットをすばやく作成、対応、管理できるようになります。
+これにより、**Premium**サポートプランに加入している顧客は、Slack を離れることなく、チケットをすばやく作成、対応、管理できるようになります。
 
 ![slack-ticket-interaction-4](/media/tidb-cloud/connected-slack-ticket-interaction-4.png)
 
@@ -49,4 +49,4 @@ Slackのサポートチャンネルで、 **PingCAP Support Bot**をメンショ
 
 ## サポートにお問い合わせください {#contact-support}
 
-ヘルプや質問がある場合は、 <a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>のサポート チームにお問い合わせください。
+ヘルプや質問がある場合は、 <a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>のサポートチームにお問い合わせください。

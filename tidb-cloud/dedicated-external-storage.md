@@ -39,19 +39,19 @@ TiDB Cloudのバケットアクセスを設定し、以下の手順でロールA
 
 2.  AWS マネジメントコンソールで、Amazon S3 バケット用のマネージドポリシーを作成します。
 
-    1.  AWS マネジメント コンソールにサインインし、 [https://console.aws.amazon.com/s3/](https://console.aws.amazon.com/s3/)で Amazon S3 コンソールを開きます。
+    1.  AWS マネジメントコンソールにサインインし、 [https://console.aws.amazon.com/s3/](https://console.aws.amazon.com/s3/)で Amazon S3 コンソールを開きます。
 
     2.  **バケット**一覧から、ソースデータが入っているバケットの名前を選択し、 **Copy ARN**をクリックしてS3バケットのARNを取得します（例： `arn:aws:s3:::tidb-cloud-source-data` ）。後で使用するために、バケットのARNをメモしておいてください。
 
         ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
 
-    3.  [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)でIAMコンソールを開き、左側のナビゲーション ペインで**[ポリシー]**をクリックし、 **Create Policy**をクリックします。
+    3.  [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)でIAMコンソールを開き、左側のナビゲーションペインで**[ポリシー]**をクリックし、 **Create Policy**をクリックします。
 
         ![Create a policy](/media/tidb-cloud/aws-create-policy.png)
 
     4.  **Create policy**ページで、 **JSON**タブをクリックします。
 
-    5.  以下のアクセス ポリシー テンプレートをコピーして、ポリシー テキスト フィールドに貼り付けてください。
+    5.  以下のアクセスポリシー テンプレートをコピーして、ポリシー テキスト フィールドに貼り付けてください。
 
         ````json
         {
@@ -111,7 +111,7 @@ TiDB Cloudのバケットアクセスを設定し、以下の手順でロールA
 
 3.  AWS マネジメントコンソールで、 TiDB Cloudのアクセスロールを作成し、ロール ARN を取得します。
 
-    1.  [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)のIAMコンソールで、左側のナビゲーション ペインの**[ロール]**をクリックし、 **Create role**をクリックします。
+    1.  [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)のIAMコンソールで、左側のナビゲーションペインの**[ロール]**をクリックし、 **Create role**をクリックします。
 
         ![Create a role](/media/tidb-cloud/aws-create-role.png)
 
@@ -152,7 +152,7 @@ TiDB Cloudのバケットアクセスを設定し、以下の手順でロールA
 
 > **Note:**
 >
-> TiDB Cloudはアクセス キーを保存しません。インポートが完了したら、 [アクセスキーを削除する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)ことをお勧めします。
+> TiDB Cloudはアクセスキーを保存しません。インポートが完了したら、 [アクセスキーを削除する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)ことをお勧めします。
 
 ## GCSへのアクセスを設定する {#configure-gcs-access}
 
@@ -230,7 +230,7 @@ TiDB Cloud DedicatedがAzure Blobコンテナにアクセスできるように�
 
 1.  [Azureストレージアカウント](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts)ページで、コンテナーが属するストレージアカウントをクリックします。
 
-2.  ストレージアカウントのナビゲーション ペインで、 **Security + networking** &gt; **Shared access signature**をクリックします。
+2.  ストレージアカウントのナビゲーションペインで、 **Security + networking** &gt; **Shared access signature**をクリックします。
 
     ![sas-position](/media/tidb-cloud/dedicated-external-storage/azure-sas-position.png)
 

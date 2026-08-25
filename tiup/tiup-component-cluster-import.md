@@ -66,6 +66,6 @@ tiup cluster import [flags]
 
 ## 出力 {#output}
 
-インポート プロセスのログを表示します。
+インポートプロセスのログを表示します。
 
 [&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

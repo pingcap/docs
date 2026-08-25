@@ -40,7 +40,7 @@ ticloud serverless update -c <cluster-id> --labels "{\"label1\":\"value1\"}"
 | -c, --cluster-id string | クラスターの ID を指定します。           | はい  | 非対話型モードでのみ動作します。         |   |
 | -n, --display-name string  | クラスターの新しい名前を指定します。          | いいえ | 非対話型モードでのみ動作します。         | 。 |
 | --labels string         | クラスターの新しいラベルを指定します。         | いいえ | 非対話型モードでのみ動作します。         |   |
-| --disable-public-endpoint | クラスターのパブリック エンドポイントを無効にします。 | いいえ | 非対話型モードでのみ動作します。         |   |
+| --disable-public-endpoint | クラスターのパブリックエンドポイントを無効にします。 | いいえ | 非対話型モードでのみ動作します。         |   |
 | -h, --help           | このコマンドのヘルプ情報を表示します。         | いいえ | 非対話型モードと対話型モードの両方で動作します。 |   |
 
 ## 継承されたフラグ {#inherited-flags}

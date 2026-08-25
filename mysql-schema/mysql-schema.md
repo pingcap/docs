@@ -31,7 +31,7 @@ summary: TiDBのシステムテーブルについて学びましょう。
 
     -   `bootstrapped` : TiDBクラスタが初期化されているかどうか。この値は読み取り専用であり、変更できません。
     -   `tidb_server_version` : TiDB の初期化時のバージョン情報。この値は読み取り専用であり、変更できません。
-    -   `system_tz` : TiDB のシステム タイム ゾーン。
+    -   `system_tz` : TiDB のシステム タイムゾーン。
     -   `new_collation_enabled` : TiDB が[照合順序のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にしたかどうか。この値は読み取り専用であり、変更できないことに注意してください。
     -   `cluster_id` （v8.5.6で追加）：TiDBクラスタの一意の識別子。この値は読み取り専用であり、変更できません。
 
@@ -92,8 +92,8 @@ summary: TiDBのシステムテーブルについて学びましょう。
 
 ## メタデータロックに関連するシステムテーブル {#system-tables-related-to-metadata-locks}
 
--   [`tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md) : メタデータ ロックのビュー。これを使用して、現在ブロックされている DDL ステートメントに関する情報を表示できます。[メタデータロック](/metadata-lock.md)も参照してください。
--   `tidb_mdl_info` : TiDB が内部的に使用して、ノード間でメタデータ ロックを同期します。
+-   [`tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md) : メタデータロックのビュー。これを使用して、現在ブロックされている DDL ステートメントに関する情報を表示できます。[メタデータロック](/metadata-lock.md)も参照してください。
+-   `tidb_mdl_info` : TiDB が内部的に使用して、ノード間でメタデータロックを同期します。
 
 ## DDLステートメントに関連するシステムテーブル {#system-tables-related-to-ddl-statements}
 

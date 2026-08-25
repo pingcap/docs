@@ -26,7 +26,7 @@ tiup dm [command] [flags]
 -   サポート値:
 
     -   `builtin` : tiup-clusterの組み込み easyssh クライアントを SSH クライアントとして使用します。
-    -   `system` : 現在のオペレーティング システムのデフォルトの SSH クライアントを使用します。
+    -   `system` : 現在のオペレーティングシステムのデフォルトの SSH クライアントを使用します。
     -   `none` : SSHクライアントは使用されません。デプロイメントは現在のマシンのみに適用されます。
 
 -   コマンドでこのオプションを指定しない場合は、デフォルト値として`builtin`が使用されます。
@@ -64,7 +64,7 @@ tiup dm [command] [flags]
 ## コマンドリスト {#command-list}
 
 -   [import](/tiup/tiup-component-dm-import.md) : DM-Ansible によってデプロイされた DM v1.0 クラスターをインポートします。
--   [template](/tiup/tiup-component-dm-template.md) : トポロジ テンプレートを出力します。
+-   [template](/tiup/tiup-component-dm-template.md) : トポロジテンプレートを出力します。
 -   [deploy](/tiup/tiup-component-dm-deploy.md) : 指定されたトポロジに基づいてクラスターをデプロイします。
 -   [list](/tiup/tiup-component-dm-list.md) : デプロイされたクラスターのリストを照会します。
 -   [display](/tiup/tiup-component-dm-display.md) : 指定されたクラスターのステータスを表示します。
@@ -84,5 +84,4 @@ tiup dm [command] [flags]
 -   [enable](/tiup/tiup-component-dm-enable.md) : マシンの再起動後にクラスター サービスを自動的に有効化します。
 -   [disable](/tiup/tiup-component-dm-disable.md) : マシンの再起動後にクラスター サービスの自動有効化を無効にします。
 -   [help](/tiup/tiup-component-dm-help.md) : ヘルプ情報を出力します。
-
 [&lt;&lt; 前のページに戻る - TiUP参照コンポーネントリスト](/tiup/tiup-reference.md#component-list)

@@ -28,7 +28,7 @@ summary: TiDB SQLに関連する FAQ について説明します。
 
 TiDBにはコストベースのオプティマイザが搭載されています。ほとんどの場合、オプティマイザが最適なクエリプランを選択します。オプティマイザがうまく機能しない場合でも、 [オプティマイザヒント](/optimizer-hints.md)を使用してオプティマイザに介入することができます。
 
-さらに、 [SQLバインディング](/sql-plan-management.md#sql-binding)を使用して、特定の SQL ステートメントのクエリ プランを修正することもできます。
+さらに、 [SQLバインディング](/sql-plan-management.md#sql-binding)を使用して、特定の SQL ステートメントのクエリプランを修正することもできます。
 
 ## 特定の SQL ステートメントの実行を防ぐにはどうすればよいでしょうか? {#how-to-prevent-the-execution-of-a-particular-sql-statement}
 
@@ -140,7 +140,7 @@ TiDBのデフォルトの文字セットは`utf8mb4`です。文字列はmemcomp
 
 トランザクション内のステートメントの最大数は、デフォルトでは 5000 です。
 
-楽観的トランザクション モードでトランザクションの再試行が有効になっている場合、デフォルトの上限は 5000 です[`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit)パラメータを使用して制限を調整できます。
+楽観的トランザクションモードでトランザクションの再試行が有効になっている場合、デフォルトの上限は 5000 です[`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit)パラメータを使用して制限を調整できます。
 
 ## TiDB で、後から挿入されたデータのAUTO_INCREMENT ID が、前に挿入されたデータのAUTO_INCREMENT ID よりも小さくなるのはなぜですか? {#why-does-the-auto-increment-id-of-the-later-inserted-data-is-smaller-than-that-of-the-earlier-inserted-data-in-tidb}
 
@@ -223,7 +223,7 @@ TiDBは、 [グローバル](/system-variables.md#tidb_force_priority)単位ま�
     REPLACE HIGH_PRIORITY | LOW_PRIORITY | DELAYED INTO table_name;
     ```
 
-2.  フル テーブル スキャン ステートメントは、自動的に低い優先度に調整されます。 [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) 、デフォルトで低い優先度を持ちます。
+2.  フルテーブルスキャン ステートメントは、自動的に低い優先度に調整されます。 [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) 、デフォルトで低い優先度を持ちます。
 
 ## TiDB での`auto analyze`のトリガー戦略は何ですか? {#whats-the-trigger-strategy-for-auto-analyze-in-tidb}
 
@@ -444,8 +444,8 @@ RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganiz
 ### DDL ジョブを表示するにはどうすればいいですか? {#how-to-view-the-ddl-job}
 
 -   `ADMIN SHOW DDL` : 実行中のDDLジョブを表示する
--   `ADMIN SHOW DDL JOBS` : 現在の DDL ジョブ キュー内のすべての結果 (実行中および実行待ちのタスクを含む) と、完了した DDL ジョブ キューの最後の 10 件の結果を表示します。
--   `ADMIN SHOW DDL JOBS QUERIES 'job_id' [, 'job_id'] ...` : `job_id`に対応する DDL タスクの元の SQL ステートメントを表示します。`job_id`は実行中の DDL ジョブと DDL 履歴ジョブ キュー内の最後の 10 件の結果のみを検索します。
+-   `ADMIN SHOW DDL JOBS` : 現在の DDL ジョブキュー内のすべての結果 (実行中および実行待ちのタスクを含む) と、完了した DDL ジョブキューの最後の 10 件の結果を表示します。
+-   `ADMIN SHOW DDL JOBS QUERIES 'job_id' [, 'job_id'] ...` : `job_id`に対応する DDL タスクの元の SQL ステートメントを表示します。`job_id`は実行中の DDL ジョブと DDL 履歴ジョブキュー内の最後の 10 件の結果のみを検索します。
 
 ### TiDB は CBO (コストベース最適化) をサポートしていますか? サポートしている場合、どの程度サポートしていますか? {#does-tidb-support-cbo-cost-based-optimization-if-yes-to-what-extent}
 

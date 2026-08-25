@@ -135,8 +135,8 @@ sequenceDiagram
 スナップショットバックアップでは、以下の種類のファイルが生成されます。
 
 -   `SST`ファイル: TiKV ノードがバックアップするデータを格納します。 `SST`ファイルのサイズは、リージョンのサイズと同じです。
--   `backupmeta`ファイル: バックアップ タスクのメタデータを格納します。これには、すべてのバックアップ ファイルの数、キー範囲、サイズ、および各バックアップ ファイルのハッシュ (sha256) 値が含まれます。
--   `backup.lock`ファイル: 複数のバックアップ タスクが同じディレクトリにデータを保存するのを防ぎます。
+-   `backupmeta`ファイル: バックアップタスクのメタデータを格納します。これには、すべてのバックアップファイルの数、キー範囲、サイズ、および各バックアップファイルのハッシュ (sha256) 値が含まれます。
+-   `backup.lock`ファイル: 複数のバックアップタスクが同じディレクトリにデータを保存するのを防ぎます。
 
 ### SSTファイルの命名形式 {#naming-format-of-sst-files}
 
@@ -160,7 +160,7 @@ sequenceDiagram
 ### SSTファイルの保存形式 {#storage-format-of-sst-files}
 
 -   SST ファイルのストレージ形式の詳細については、 [RocksDBブロックベーステーブル形式](https://github.com/facebook/rocksdb/wiki/Rocksdb-BlockBasedTable-Format)を参照してください。
--   SST ファイルのバックアップ データのエンコード形式の詳細については、[テーブルデータのキー値へのマッピング](/tidb-computing.md#mapping-table-data-to-key-value)を参照してください。
+-   SST ファイルのバックアップデータのエンコード形式の詳細については、[テーブルデータのキー値へのマッピング](/tidb-computing.md#mapping-table-data-to-key-value)を参照してください。
 
 ### バックアップファイルの構造 {#structure-of-backup-files}
 

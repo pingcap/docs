@@ -32,7 +32,7 @@ Grafanaは、メトリクスを分析および視覚化するためのオープ�
 -   {TiDB_Cluster_name}-Disk-Performance: ディスク パフォーマンスに関連するメトリックを監視します。
 -   {TiDB_Cluster_name}-Kafka-Overview: Kafka に関連するメトリックを監視します。
 -   {TiDB_Cluster_name}-Lightning: TiDB Lightningに関連するメトリックを監視します。
--   {TiDB_Cluster_name}-Node_exporter: オペレーティング システムに関連するメトリックを監視します。
+-   {TiDB_Cluster_name}-Node_exporter: オペレーティングシステムに関連するメトリックを監視します。
 -   {TiDB_Cluster_name}-概要: 重要なコンポーネントに関連する監視の概要。
 -   {TiDB_Cluster_name}-PD: PDサーバーに関連するメトリックを監視します。
 -   {TiDB_Cluster_name}-Performance-Read: 読み取りパフォーマンスに関連するメトリックを監視します。

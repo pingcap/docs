@@ -6,23 +6,23 @@ aliases: ['/ja/tidb/stable/vector-search-data-types/','/ja/tidbcloud/vector-sear
 
 # ベクトルデータ型 {#vector-data-types}
 
-ベクトルは、 `[0.3, 0.5, -0.1, ...]`などの浮動小数点数のシーケンスです。TiDB は、AI アプリケーションで広く使用されているベクトル埋め込みを効率的に保存およびクエリするために特別に最適化されたベクトル データ型を提供します。
+ベクトルは、 `[0.3, 0.5, -0.1, ...]`などの浮動小数点数のシーケンスです。TiDB は、AI アプリケーションで広く使用されているベクトル埋め込みを効率的に保存およびクエリするために特別に最適化されたベクトルデータ型を提供します。
 
 > **Note:**
 >
 > -   ベクトルデータ型はパブリックプレビューであり、予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 > -   ベクトルデータ型は[TiDB Self-Managed](/overview.md) および [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)で使用できます。TiDB Self-Managed の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
 
-現在、次のベクトル データ型が利用可能です。
+現在、次のベクトルデータ型が利用可能です。
 
 -   `VECTOR` : 任意の次元の単精度浮動小数点数のシーケンス。
 -   `VECTOR(D)` : 固定次元`D`を持つ単精度浮動小数点数のシーケンス。
 
-ベクトル データ型を使用すると、 [`JSON`](/data-type-json.md)型を使用する場合に比べて次の利点があります。
+ベクトルデータ型を使用すると、 [`JSON`](/data-type-json.md)型を使用する場合に比べて次の利点があります。
 
--   ベクトル インデックスのサポート: ベクトルの検索を高速化するために[ベクトル検索インデックス](/ai/reference/vector-search-index.md)を構築できます。
+-   ベクトルインデックスのサポート: ベクトルの検索を高速化するために[ベクトル検索インデックス](/ai/reference/vector-search-index.md)を構築できます。
 -   次元の強制: 異なる次元のベクトルの挿入を禁止する次元を指定できます。
--   最適化されたストレージ形式: ベクトル データ型はベクトル データの処理に最適化されており、 `JSON`型と比較して優れたスペース効率とパフォーマンスを実現します。
+-   最適化されたストレージ形式: ベクトルデータ型はベクトルデータの処理に最適化されており、 `JSON`型と比較して優れたスペース効率とパフォーマンスを実現します。
 
 ## 構文 {#syntax}
 
@@ -59,7 +59,7 @@ ERROR 1105 (HY000): Invalid vector text: [5, ]
 ERROR 1105 (HY000): vector has 2 dimensions, does not fit VECTOR(3)
 ```
 
-ベクトル データ型で使用できる関数と演算子については、 [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)を参照してください。
+ベクトルデータ型で使用できる関数と演算子については、 [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)を参照してください。
 
 ベクトル検索インデックスの構築と使用の詳細については、 [ベクトル検索インデックス](/ai/reference/vector-search-index.md)を参照してください。
 
@@ -231,15 +231,15 @@ Vector と String 間のキャストを行うには、次の関数を使用し�
 
 現在、 Vector と他のデータ型（ `JSON`など）間の直接キャストはサポートされていません。この制限を回避するには、SQL文でキャストする際の中間データ型として String を使用してください。
 
-テーブルに格納されているベクトル データ型の列は、 `ALTER TABLE ... MODIFY COLUMN ...`を使用して他のデータ型に変換できないことに注意してください。
+テーブルに格納されているベクトルデータ型の列は、 `ALTER TABLE ... MODIFY COLUMN ...`を使用して他のデータ型に変換できないことに注意してください。
 
 ## 制限 {#restrictions}
 
-ベクトル データ型の制限については、 [ベクトル検索の制限](/ai/reference/vector-search-limitations.md)および[ベクトルインデックスの制限](/ai/reference/vector-search-index.md#restrictions)を参照してください。
+ベクトルデータ型の制限については、 [ベクトル検索の制限](/ai/reference/vector-search-limitations.md)および[ベクトルインデックスの制限](/ai/reference/vector-search-index.md#restrictions)を参照してください。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
-ベクトル データ型は TiDB 固有であり、MySQL ではサポートされていません。
+ベクトルデータ型は TiDB 固有であり、MySQL ではサポートされていません。
 
 ## 参照 {#see-also}
 

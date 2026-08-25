@@ -38,7 +38,7 @@ Prometheus サービスでTiDB Cloudのメトリクスを読み取るように�
 <CustomContent plan="premium">
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーション ペインで、 **Settings** &gt; **Integrations** &gt; **Integration to Prometheus(PREVIEW)**をクリックします。
+2.  左側のナビゲーションペインで、 **Settings** &gt; **Integrations** &gt; **Integration to Prometheus(PREVIEW)**をクリックします。
 3.  **Add File**をクリックすると、現在のTiDB Cloud Premium インスタンス用の`scrape_config`ファイルが生成されて表示されます。
 4.  `scrape_config`ファイルの内容のコピーを作成して、後で使用してください。
 

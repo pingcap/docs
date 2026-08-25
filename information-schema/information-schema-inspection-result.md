@@ -155,7 +155,7 @@ select * from information_schema.inspection_result where rule='critical-error';
 
 診断モジュールには一連のルールが含まれています。これらのルールは、既存の監視テーブルとクラスタ情報テーブルを照会した後、結果をしきい値と比較します。結果がしきい値を超えた場合、 `warning`または`critical`診断が生成され、対応する情報が`details`列に表示されます。
 
-`inspection_rules`システム テーブルをクエリすることによって、既存の診断ルールをクエリできます。
+`inspection_rules`システムテーブルをクエリすることによって、既存の診断ルールをクエリできます。
 
 ```sql
 select * from information_schema.inspection_rules where type='inspection';
@@ -175,7 +175,7 @@ select * from information_schema.inspection_rules where type='inspection';
 
 ### `config`診断ルール {#config-diagnostic-rule}
 
-`config`診断ルールでは、 `CLUSTER_CONFIG`のシステム テーブルをクエリすることによって、次の 2 つの診断ルールが実行されます。
+`config`診断ルールでは、 `CLUSTER_CONFIG`のシステムテーブルをクエリすることによって、次の 2 つの診断ルールが実行されます。
 
 -   同じコンポーネントの設定値が一貫しているかどうかを確認します。すべての設定項目でこの整合性チェックが実行されるわけではありません。整合性チェックの許可リストは次のとおりです。
 
@@ -242,7 +242,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
 `critical-error`診断ルールでは、次の 2 つの診断ルールが実行されます。
 
--   メトリック スキーマ内の関連する監視システム テーブルをクエリして、クラスターに次のエラーがあるかどうかを検出します。
+-   メトリック スキーマ内の関連する監視システムテーブルをクエリして、クラスターに次のエラーがあるかどうかを検出します。
 
     | コンポーネント   | エラー名                    | 監視テーブル                             | エラーの説明                                       |
     | ---- | ----------------------- | ---------------------------------- | -------------------------------------------- |
@@ -253,11 +253,11 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
     | TiKV | チャネルがいっぱいです             | tikv_チャンネルの合計数                     | TiKV で「チャネルがいっぱいです」というエラーが発生します。             |
     | TiKV | tikv_engine_write_stall | tikv_engine_write_stall            | TiKV で「ストール」エラーが発生します。                       |
 
--   `metrics_schema.up`監視テーブルと`CLUSTER_LOG`システム テーブルを照会して、コンポーネントが再起動されているかどうかを確認します。
+-   `metrics_schema.up`監視テーブルと`CLUSTER_LOG`システムテーブルを照会して、コンポーネントが再起動されているかどうかを確認します。
 
 ### `threshold-check`診断ルール {#threshold-check-diagnostic-rule}
 
-`threshold-check`診断ルールは、メトリック スキーマ内の関連する監視システム テーブルを照会して、クラスター内の次のメトリックがしきい値を超えているかどうかを確認します。
+`threshold-check`診断ルールは、メトリック スキーマ内の関連する監視システムテーブルを照会して、クラスター内の次のメトリックがしきい値を超えているかどうかを確認します。
 
 | コンポーネント   | 監視メトリック              | 監視テーブル                              | 期待値       | 説明                                                                                                               |
 | :--- | :------------------- | :---------------------------------- | :-------- | :--------------------------------------------------------------------------------------------------------------- |

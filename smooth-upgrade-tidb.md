@@ -1,17 +1,17 @@
 ---
 title: TiDB Smooth Upgrade
-summary: このドキュメントでは、DDL 操作を手動でキャンセルせずに TiDB クラスターのアップグレードをサポートする、TiDB のスムーズ アップグレード機能について説明します。
+summary: このドキュメントでは、DDL 操作を手動でキャンセルせずに TiDB クラスターのアップグレードをサポートする、TiDB のスムーズアップグレード機能について説明します。
 ---
 
 # TiDB スムーズアップグレード {#tidb-smooth-upgrade}
 
-このドキュメントでは、DDL 操作を手動でキャンセルせずに TiDB クラスターのアップグレードをサポートする、TiDB のスムーズ アップグレード機能について説明します。
+このドキュメントでは、DDL 操作を手動でキャンセルせずに TiDB クラスターのアップグレードをサポートする、TiDB のスムーズアップグレード機能について説明します。
 
 Starting from v7.1.0, when you upgrade TiDB to a later version, TiDB supports smooth upgrade. This feature removes the limitations during the upgrade process and provides a more user-friendly upgrade experience. Note that you need to ensure that there are no user-initiated DDL operations during the upgrade process.
 
 ## サポートされているバージョン {#supported-versions}
 
-機能がスイッチによって制御される必要があるかどうかに応じて、スムーズ アップグレードを使用する方法は 2 つあります。
+機能がスイッチによって制御される必要があるかどうかに応じて、スムーズアップグレードを使用する方法は 2 つあります。
 
 -   この機能はデフォルトで有効になっており、スイッチによる制御は不要です。現在、この方法をサポートしているバージョンはv7.1.0、v7.1.1、v7.2.0、v7.3.0です。具体的には、以下のバージョンがサポートされています。
     -   Upgrade from v7.1.0 to v7.1.1, v7.2.0, or v7.3.0
@@ -31,14 +31,14 @@ Starting from v7.1.0, when you upgrade TiDB to a later version, TiDB supports sm
 | バージョン7.1.1                       | v7.2.0 または v7.3.0        | スムーズなアップグレードが自動的にサポートされます。追加の操作は必要ありません。                                                                                                             | Experimental機能です。                                                                                   |
 | バージョン7.2.0                       | バージョン7.3.0               | スムーズなアップグレードが自動的にサポートされます。追加の操作は必要ありません。                                                                                                             | Experimental機能です。                                                                                   |
 | [v7.1.2、v7.2.0)                  | [v7.1.2、v7.2.0)          | `/upgrade/start` HTTPリクエストを送信することでスムーズなアップグレードが可能になります。方法は[TiUPを使用する](#use-tiup-to-upgrade)と[その他のアップグレード方法](#other-upgrade-methods) 2つあります。          | When smooth upgrade is not enabled, ensure that no DDL operations are performed during the upgrade. |
-| [v7.1.2、v7.2.0) または &gt;= v7.4.0 | = v7.4.0                 | `/upgrade/start` HTTPリクエストを送信することでスムーズなアップグレードが可能になります。方法は[TiUPを使用する](#use-tiup-to-upgrade)と[Other upgrade methods](#other-upgrade-methods) 2つがあります。 | スムーズ アップグレードが有効になっていない場合は、アップグレード中に DDL 操作が実行されないようにしてください。                                         |
+| [v7.1.2、v7.2.0) または &gt;= v7.4.0 | = v7.4.0                 | `/upgrade/start` HTTPリクエストを送信することでスムーズなアップグレードが可能になります。方法は[TiUPを使用する](#use-tiup-to-upgrade)と[Other upgrade methods](#other-upgrade-methods) 2つがあります。 | スムーズアップグレードが有効になっていない場合は、アップグレード中に DDL 操作が実行されないようにしてください。                                         |
 | v7.1.0、v7.1.1、v7.2.0、および v7.3.0  | = v7.4.0                 | スムーズなアップグレードはサポートされません。                                                                                                                              |                                                                                                     |
 
 ## Feature introduction {#feature-introduction}
 
 Before the smooth upgrade feature is introduced, there are the following limitations on DDL operations during the upgrade process:
 
--   アップグレード プロセス中に DDL 操作を実行すると、TiDB で未定義の動作が発生する可能性があります。
+-   アップグレードプロセス中に DDL 操作を実行すると、TiDB で未定義の動作が発生する可能性があります。
 -   DDL 操作中に TiDB をアップグレードすると、TiDB で未定義の動作が発生する可能性があります。
 
 These limitations can be summarized as that you need to ensure that there are no user-initiated DDL operations during the upgrade process. After the smooth upgrade feature is introduced, TiDB is no longer subject to this limitation during the upgrade process.
@@ -64,14 +64,14 @@ You can take the following steps to upgrade TiDB manually or by using a script:
     -   The DDL operations to be performed are paused.
 
 2.  Replace the TiDB binary and perform a rolling upgrade. This process is the same as the original upgrade process.
-    -   システム DDL 操作はアップグレード プロセス中に実行されます。
+    -   システム DDL 操作はアップグレードプロセス中に実行されます。
 
 3.  クラスター内のすべての TiDB ノードが正常にアップグレードされたら、任意の TiDB ノードに HTTP アップグレード完了要求を送信します`curl -X POST http://{TiDBIP}:10080/upgrade/finish` .
     -   ユーザーの一時停止された DDL 操作が再開されます。
 
 ## Limitations {#limitations}
 
-スムーズ アップグレード機能を使用する場合は、次の制限に注意してください。
+スムーズアップグレード機能を使用する場合は、次の制限に注意してください。
 
 > **Note:**
 >
@@ -88,7 +88,7 @@ You can take the following steps to upgrade TiDB manually or by using a script:
 
 -   アップグレード中は、次の操作は許可されません。
 
-    -   システム テーブル ( `mysql.*` 、 `information_schema.*` 、 `performance_schema.*` 、および`metrics_schema.*` ) に対して DDL 操作を実行します。
+    -   システムテーブル ( `mysql.*` 、 `information_schema.*` 、 `performance_schema.*` 、および`metrics_schema.*` ) に対して DDL 操作を実行します。
     -   DDL ジョブを手動でキャンセルします: `ADMIN CANCEL DDL JOBS job_id [, job_id] ...;` .
     -   データをインポートします。
 
@@ -98,7 +98,7 @@ You can take the following steps to upgrade TiDB manually or by using a script:
 
     -   BR: BRは一時停止中のDDLジョブをTiDBに複製する可能性があります。一時停止中のDDLジョブは自動的に再開できないため、後でDDLジョブが停止する可能性があります。
 
-    -   DM および TiCDC: アップグレード プロセス中に DM または TiCDC を使用して SQL ステートメントを TiDB にインポートする場合、SQL ステートメントの 1 つに DDL 操作が含まれていると、インポート操作がブロックされ、未定義のエラーが発生する可能性があります。
+    -   DM および TiCDC: アップグレードプロセス中に DM または TiCDC を使用して SQL ステートメントを TiDB にインポートする場合、SQL ステートメントの 1 つに DDL 操作が含まれていると、インポート操作がブロックされ、未定義のエラーが発生する可能性があります。
 
 ### プラグインの制限 {#limitation-on-plugins}
 

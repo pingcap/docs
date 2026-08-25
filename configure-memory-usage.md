@@ -58,15 +58,15 @@ tidb-server インスタンスのメモリ使用量が総メモリの一定割�
 >
 > ハイブリッド展開シナリオでは、物理マシン全体の合計メモリしきい値ではなく、単一の tidb-server インスタンスのメモリ使用量しきい値は`tidb_server_memory_limit`になります。
 
-## INFORMATION_SCHEMA システム テーブルを使用して、現在の tidb-server インスタンスのメモリ使用量を表示する {#view-the-memory-usage-of-the-current-tidb-server-instance-using-the-information_schema-system-table}
+## INFORMATION_SCHEMA システムテーブルを使用して、現在の tidb-server インスタンスのメモリ使用量を表示する {#view-the-memory-usage-of-the-current-tidb-server-instance-using-the-information_schema-system-table}
 
-現在のインスタンスまたはクラスターのメモリ使用量を表示するには、システム テーブル[`INFORMATION_SCHEMA.(CLUSTER_)MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md)をクエリします。
+現在のインスタンスまたはクラスターのメモリ使用量を表示するには、システムテーブル[`INFORMATION_SCHEMA.(CLUSTER_)MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md)をクエリします。
 
 現在のインスタンスまたはクラスターのメモリ関連の操作と実行基準を確認するには、システムテーブル[`INFORMATION_SCHEMA.(CLUSTER_)MEMORY_USAGE_OPS_HISTORY`](/information-schema/information-schema-memory-usage-ops-history.md)をクエリします。このテーブルには、インスタンスごとに最新の50件のレコードが保持されます。
 
 ## 過剰なメモリ使用量のアラームをトリガーする {#trigger-the-alarm-of-excessive-memory-usage}
 
-tidb-server インスタンスのメモリ使用量がメモリしきい値 (デフォルトでは合計メモリの 70%) を超え、次のいずれかの条件が満たされると、TiDB は関連するステータス ファイルを記録し、アラーム ログを出力。
+tidb-server インスタンスのメモリ使用量がメモリしきい値 (デフォルトでは合計メモリの 70%) を超え、次のいずれかの条件が満たされると、TiDB は関連するステータスファイルを記録し、アラーム ログを出力。
 
 -   メモリ使用量がメモリしきい値を超えるのは初めてです。
 -   メモリ使用量がメモリしきい値を超えており、前回のアラームから 60 秒以上経過しています。
@@ -76,7 +76,7 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
 
 過剰なメモリ使用量のアラームがトリガーされると、TiDB は次のアクションを実行します。
 
--   TiDB は、TiDB ログ ファイル[`filename`](/tidb-configuration-file.md#filename)が配置されているディレクトリに次の情報を記録します。
+-   TiDB は、TiDB ログファイル[`filename`](/tidb-configuration-file.md#filename)が配置されているディレクトリに次の情報を記録します。
 
     -   現在実行中のすべてのSQL文の中で、メモリ使用量が最も多い上位10個のSQL文と実行時間が最も長い上位10個のSQL文に関する情報
     -   ゴルーチンスタック情報
@@ -104,20 +104,20 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
 
 3.  `select * from t t1 join t t2 join t t3 order by t1.a`を実行します。この SQL 文は 10 億件のレコードを出力し、大量のメモリを消費するため、アラームがトリガーされます。
 
-4.  システムメモリの合計、現在のシステムメモリ使用量、tidb-server インスタンスのメモリ使用量、およびステータス ファイルのディレクトリを記録する`tidb.log`ファイルを確認します。
+4.  システムメモリの合計、現在のシステムメモリ使用量、tidb-server インスタンスのメモリ使用量、およびステータスファイルのディレクトリを記録する`tidb.log`ファイルを確認します。
 
     ```
     [2022/10/11 16:39:02.281 +08:00] [WARN] [memoryusagealarm.go:212] ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"] ["is tidb_server_memory_limit set"=false] ["system memory total"=33682427904] ["system memory usage"=22120655360] ["tidb-server memory usage"=21468556992] [memory-usage-alarm-ratio=0.85] ["record path"=/tiup/deploy/tidb-4000/log/oom_record]
     ```
 
-    上記のサンプル ログ ファイルのフィールドは次のように説明されています。
+    上記のサンプル ログファイルのフィールドは次のように説明されています。
 
     -   `is tidb_server_memory_limit set`は [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)が設定されているかどうかを示します。
     -   `system memory total`は現在のシステムの合計メモリを示します。
     -   `system memory usage`は現在のシステムメモリ使用量を示します。
     -   `tidb-server memory usage`は、tidb-server インスタンスのメモリ使用量を示します。
     -   `memory-usage-alarm-ratio`はシステム変数[`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)の値を示します。
-    -   `record path`はステータス ファイルのディレクトリを示します。
+    -   `record path`はステータスファイルのディレクトリを示します。
 
 5.  ステータスファイルのディレクトリ（上記の例ではディレクトリ`/tiup/deploy/tidb-4000/log/oom_record` ）を確認すると、対応するタイムスタンプ（例： `record2022-10-09T17:18:38+08:00` ）を持つレコードディレクトリが表示されます。レコードディレクトリには、 `goroutinue` 、 `heap` 、 `running_sql`の3つのファイルが含まれています。これらの3つのファイルには、ステータスファイルが記録された時刻が末尾に付加されます。これらのファイルには、それぞれ、ゴルーチンのスタック情報、ヒープメモリの使用状況、アラーム発生時の実行SQL情報が記録されています。 `running_sql`の内容については、 [`expensive-queries`](/identify-expensive-queries.md)を参照してください。
 
@@ -140,16 +140,16 @@ TiDBが使用するトランザクションモデルでは、トランザクシ�
 TiDBは、実行演算子のディスクへの書き込みをサポートしています。SQL実行のメモリ使用量がメモリクォータを超えた場合、tidb-serverは実行演算子の中間データをディスクに書き出すことで、メモリ負荷を軽減します。ディスクへの書き込みをサポートする演算子には、Sort、MergeJoin、HashJoin、HashAggなどがあります。
 
 -   ディスクスピル動作は、 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 、 [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) 、 [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path) 、および[`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota)パラメータによって共同で制御されます。
--   ディスク スピルがトリガーされると、TiDB はキーワード`memory exceeds quota, spill to disk now`または`memory exceeds quota, set aggregate mode to spill-mode`を含むログを出力します。
+-   ディスクスピルがトリガーされると、TiDB はキーワード`memory exceeds quota, spill to disk now`または`memory exceeds quota, set aggregate mode to spill-mode`を含むログを出力します。
 -   Sort、MergeJoin、およびHashJoin演算子のディスクスピルはv4.0.0で導入されました。HashAgg演算子の非並列アルゴリズムのディスクスピルはv5.2.0で導入されました。HashAgg演算子の並列アルゴリズムのディスクスピルはv8.0.0で実験的機能として導入され、v8.2.0で一般提供（GA）されました。TopN演算子のディスクスピルはv8.3.0で導入されました。
 -   [`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800)システム変数を使用して、ディスクスピルをサポートする並列HashAggアルゴリズムを有効にするかどうかを制御できます。この変数は将来のリリースで廃止される予定です。
--   Sort、MergeJoin、HashJoin、HashAgg、または TopN を含む SQL 実行によって OOM が発生すると、TiDB はデフォルトでディスク スピルをトリガーします。
+-   Sort、MergeJoin、HashJoin、HashAgg、または TopN を含む SQL 実行によって OOM が発生すると、TiDB はデフォルトでディスクスピルをトリガーします。
 
 > **Note:**
 >
 > HashAgg のディスクスピルは、 `DISTINCT`集計関数を含む SQL 実行をサポートしていません。`DISTINCT`集計関数を含む SQL 実行でメモリ使用量が多すぎる場合、ディスクスピルは適用されません。
 
-次の例では、メモリを消費する SQL ステートメントを使用して、HashAgg のディスク スピル機能を示します。
+次の例では、メモリを消費する SQL ステートメントを使用して、HashAgg のディスクスピル機能を示します。
 
 1.  SQL ステートメントのメモリクォータを 1 GB (デフォルトは 1 GB) に設定します。
 
@@ -165,7 +165,7 @@ TiDBは、実行演算子のディスクへの書き込みをサポートして�
     [tidb]> explain analyze select /*+ HASH_AGG() */ count(*) from t t1 join t t2 join t t3 group by t1.a, t2.a, t3.a;
     ```
 
-    この SQL ステートメントを実行するとメモリが大量に消費されるため、次の「メモリ クォータ不足」エラー メッセージが返されます。
+    この SQL ステートメントを実行するとメモリが大量に消費されるため、次の「メモリクォータ不足」エラーメッセージが返されます。
 
     ```sql
     ERROR 1105 (HY000): Out Of Memory Quota![conn_id=3]

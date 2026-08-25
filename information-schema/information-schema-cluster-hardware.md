@@ -39,7 +39,7 @@ DESC cluster_hardware;
     -   `cpu` : ハードウェア名は cpu です。
     -   `memory` : ハードウェア名はメモリです。
     -   `disk` : ディスク名。
-    -   `net` : ネットワーク カード名。
+    -   `net` : ネットワークカード名。
 -   `NAME` : ハードウェアの異なる情報名。例えば、CPUには`cpu-logical-cores`と`cpu-physical-cores`という2つの情報名があり、それぞれ論理コア番号と物理コア番号を意味します。
 -   `VALUE` : ディスクボリュームや CPU コア数などの対応するハードウェア情報の値。
 

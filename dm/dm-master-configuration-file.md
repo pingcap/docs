@@ -50,7 +50,7 @@ secret-key-path = "/path/to/secret/key"
 
 #### `log-level` {#log-level}
 
--   ログ レベルを指定します。
+-   ログレベルを指定します。
 -   デフォルト値: `info`
 -   `fatal` `warn` `info` `error` `debug`
 
@@ -68,7 +68,7 @@ secret-key-path = "/path/to/secret/key"
 
 #### `peer-urls` {#peer-urls}
 
--   DM マスター ノードのピア URL を指定します。
+-   DM マスターノードのピア URL を指定します。
 
 #### `advertise-peer-urls` {#advertise-peer-urls}
 
@@ -76,7 +76,7 @@ secret-key-path = "/path/to/secret/key"
 
 #### `initial-cluster` {#initial-cluster}
 
--   値`initial-cluster`は、初期クラスター内のすべての DM マスター ノードの[`advertise-peer-urls`](#advertise-peer-urls)値の組み合わせです。
+-   値`initial-cluster`は、初期クラスター内のすべての DM マスターノードの[`advertise-peer-urls`](#advertise-peer-urls)値の組み合わせです。
 
 #### `join` {#join}
 

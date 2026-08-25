@@ -22,7 +22,7 @@ tiup br backup full --pd "${PD_IP}:2379" \
 
 -   `backup` : `tiup br`のサブコマンド。
 -   `full` : `tiup br backup`のサブコマンド。
--   `-s` (または`--storage` ): バックアップ ファイルが保存されるパスを指定するオプション。`"s3://backup-data/snapshot-202209081330/"`は`-s`のパラメーターです。
+-   `-s` (または`--storage` ): バックアップファイルが保存されるパスを指定するオプション。`"s3://backup-data/snapshot-202209081330/"`は`-s`のパラメーターです。
 -   `--pd` : PD サービス アドレスを指定するオプション`"${PD_IP}:2379"`は`--pd`のパラメーターです。
 
 ### コマンドとサブコマンド {#commands-and-sub-commands}
@@ -30,9 +30,9 @@ tiup br backup full --pd "${PD_IP}:2379" \
 `tiup br`コマンドは複数のサブコマンドの階層で構成されています。現在、br コマンドラインツールには以下のサブコマンドがあります。
 
 -   `tiup br backup` : TiDB クラスターのデータをバックアップするために使用されます。
--   `tiup br log` : ログ バックアップ タスクの開始と管理に使用されます。
--   `tiup br restore` : TiDB クラスターのバックアップ データを復元するために使用されます。
--   `tiup br debug` : バックアップ メタデータの解析、バックアップ データのチェックなどに使用されます。
+-   `tiup br log` : ログバックアップタスクの開始と管理に使用されます。
+-   `tiup br restore` : TiDB クラスターのバックアップデータを復元するために使用されます。
+-   `tiup br debug` : バックアップメタデータの解析、バックアップデータのチェックなどに使用されます。
 
 `tiup br backup`および`tiup br restore`は次のサブコマンドが含まれます。
 
@@ -42,12 +42,12 @@ tiup br backup full --pd "${PD_IP}:2379" \
 
 `tiup br debug`には次のサブコマンドが含まれます。
 
--   `checksum` : (隠しパラメーター) バックアップ データの整合性をオフラインでチェックし、すべてのバックアップ ファイルが[`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)で計算された CRC64 チェックサム結果と一致することを確認するために使用されます。
+-   `checksum` : (隠しパラメーター) バックアップデータの整合性をオフラインでチェックし、すべてのバックアップファイルが[`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)で計算された CRC64 チェックサム結果と一致することを確認するために使用されます。
 -   `backupmeta` : バックアップデータファイル間に交差が存在するかどうかを確認するために使用されます。通常、バックアップデータファイルは交差しません。
 -   `decode` : 完全バックアップのメタデータファイル`backupmeta` JSON形式に解析するために使用されます。さらに、 `--field`パラメータを使用して特定のフィールドを解析することもできます。
--   `encode` : 完全バックアップの`backupmeta.json`メタデータ ファイルを、データの復元中に使用される protobuf 形式にエンコードするために使用されます。
+-   `encode` : 完全バックアップの`backupmeta.json`メタデータファイルを、データの復元中に使用される protobuf 形式にエンコードするために使用されます。
 -   `reset-pd-config-as-default` : (非推奨) データ回復プロセス中に変更された PD 構成をデフォルト構成に復元するために使用されます。
--   `search-log-backup` : ログ バックアップ データ内の特定のキー情報を検索するために使用されます。
+-   `search-log-backup` : ログバックアップデータ内の特定のキー情報を検索するために使用されます。
 
 ### 一般的なオプション {#common-options}
 
@@ -75,7 +75,7 @@ tiup br backup full --pd "${PD_IP}:2379" \
 
 ## ログバックアップのコマンド {#commands-of-log-backup}
 
-ログ バックアップを開始し、ログ バックアップ タスクを管理するには、 `tiup br log`コマンドを実行します。
+ログバックアップを開始し、ログバックアップタスクを管理するには、 `tiup br log`コマンドを実行します。
 
 -   [ログバックアップタスクを開始する](/br/br-pitr-manual.md#start-a-log-backup-task)
 -   [ログバックアップのステータスを照会する](/br/br-pitr-manual.md#query-the-log-backup-status)

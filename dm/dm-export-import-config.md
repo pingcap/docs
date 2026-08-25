@@ -1,15 +1,15 @@
 ---
 title: Export and Import Data Sources and Task Configuration of Clusters
-summary: DM を使用するときに、データ ソースとクラスターのタスク構成をエクスポートおよびインポートする方法を学習します。
+summary: DM を使用するときに、データソースとクラスターのタスク構成をエクスポートおよびインポートする方法を学習します。
 ---
 
 # データソースのエクスポートとインポート、およびクラスターのタスクコンフィグレーション {#export-and-import-data-sources-and-task-configuration-of-clusters}
 
-`config`コマンドは、クラスターのデータ ソースとタスク構成をエクスポートおよびインポートするために使用されます。
+`config`コマンドは、クラスターのデータソースとタスク構成をエクスポートおよびインポートするために使用されます。
 
 > **Note:**
 >
-> v2.0.5 より前のクラスターの場合は、dmctl (&gt;= v2.0.5 かつ &lt; v8.0.0) を使用して、データ ソースおよびタスク構成ファイルをエクスポートおよびインポートできます。
+> v2.0.5 より前のクラスターの場合は、dmctl (&gt;= v2.0.5 かつ &lt; v8.0.0) を使用して、データソースおよびタスク構成ファイルをエクスポートおよびインポートできます。
 
 ```bash
 » help config
@@ -28,7 +28,7 @@ Use "dmctl config [command] --help" for more information about a command.
 
 ## クラスターのデータソースとタスク構成をエクスポートする {#export-the-data-source-and-task-configuration-of-clusters}
 
-`export`コマンドを使用して、クラスターのデータ ソースとタスク構成を指定されたファイルにエクスポートできます。
+`export`コマンドを使用して、クラスターのデータソースとタスク構成を指定されたファイルにエクスポートできます。
 
 ```bash
 config export [--dir directory]
@@ -53,7 +53,7 @@ export configs to directory `/tmp/configs` succeed
 
 ## クラスターのデータソースとタスク構成をインポートする {#import-the-data-source-and-task-configuration-of-clusters}
 
-`import`コマンドを使用して、指定されたファイルからクラスターのデータ ソースとタスク構成をインポートできます。
+`import`コマンドを使用して、指定されたファイルからクラスターのデータソースとタスク構成をインポートできます。
 
 ```bash
 config import [--dir directory]

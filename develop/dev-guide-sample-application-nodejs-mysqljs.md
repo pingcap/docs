@@ -273,7 +273,7 @@ conn.end();
 
 > **Note**
 >
-> TiDB Cloud StarterおよびTiDB Cloud Essentialでは、パブリック エンドポイントを使用する場合、 `TIDB_ENABLE_SSL`を介して TLS 接続を有効にする**必要があります**。ただし、Node.js はデフォルトで組み込みの Mozilla CA を使用するため、 `TIDB_CA_PATH`を介して SSL CA 証明書を指定する必要はありません。この組み込みの[Mozilla CA証明書](https://wiki.mozilla.org/CA/Included_Certificates)はTiDB Cloud Starterによって信頼されています。
+> TiDB Cloud StarterおよびTiDB Cloud Essentialでは、パブリックエンドポイントを使用する場合、 `TIDB_ENABLE_SSL`を介して TLS 接続を有効にする**必要があります**。ただし、Node.js はデフォルトで組み込みの Mozilla CA を使用するため、 `TIDB_CA_PATH`を介して SSL CA 証明書を指定する必要はありません。この組み込みの[Mozilla CA証明書](https://wiki.mozilla.org/CA/Included_Certificates)はTiDB Cloud Starterによって信頼されています。
 
 ### データを挿入する {#insert-data}
 
@@ -351,7 +351,7 @@ conn.query('DELETE FROM players WHERE id = ?;', [1], (err, ok) => {
 
     > **Note**
     >
-    > `mysqljs/mysql`パッケージはまだプリペアド ステートメントをサポートしておらず、クライアント側で値をエスケープするだけです (関連する問題:[mysqljs/mysql#274](https://github.com/mysqljs/mysql/issues/274) )。
+    > `mysqljs/mysql`パッケージはまだプリペアドステートメントをサポートしておらず、クライアント側で値をエスケープするだけです (関連する問題:[mysqljs/mysql#274](https://github.com/mysqljs/mysql/issues/274) )。
     >
     > SQLインジェクション攻撃を回避したり、バッチ挿入/更新の効率を向上させたりするためにこの機能を使用したい場合は、代わりに[mysql2](https://github.com/sidorares/node-mysql2)パッケージを使用することをお勧めします。
 
@@ -362,7 +362,7 @@ conn.query('DELETE FROM players WHERE id = ?;', [1], (err, ok) => {
 ## 次のステップ {#next-steps}
 
 -   mysql.js ドライバーの使用方法の詳細については[mysql.jsのドキュメント](https://github.com/mysqljs/mysql#readme)を参照してください。
--   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md)、SQL [トランザクション](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)などの章を読んで、TiDB アプリケーション開発のベスト プラクティスを学びましょう。
+-   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md)、SQL [トランザクション](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)などの章を読んで、TiDB アプリケーション開発のベストプラクティスを学びましょう。
 -   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}

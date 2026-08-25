@@ -11,7 +11,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 このドキュメントでは、 `tidbcloud_cluster`リソースを使用してTiDB Cloudクラスターを管理する方法を学習できます。
 
-さらに、データ ソース`tidbcloud_projects`と`tidbcloud_cluster_specs`を使用して必要な情報を取得する方法も学習します。
+さらに、データソース`tidbcloud_projects`と`tidbcloud_cluster_specs`を使用して必要な情報を取得する方法も学習します。
 
 `tidbcloud_cluster`リソースの機能は次のとおりです。
 
@@ -27,7 +27,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 各 TiDB クラスターはプロジェクトに属します。TiDB クラスターを作成する前に、クラスターを作成するプロジェクトの ID を取得する必要があります。
 
-利用可能なすべてのプロジェクトの情報を表示するには、次のように`tidbcloud_projects`データ ソースを使用します。
+利用可能なすべてのプロジェクトの情報を表示するには、次のように`tidbcloud_projects`データソースを使用します。
 
 1.  [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)を実行すると作成される`main.tf`ファイルに、次のように`data`と`output`ブロックを追加します。
 
@@ -54,17 +54,17 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
           value = data.tidbcloud_projects.example_project.items
         }
 
-    -   `data`ブロックを使用して、データ ソース タイプやデータ ソース名など、 TiDB Cloudのデータ ソースを定義します。
+    -   `data`ブロックを使用して、データソース タイプやデータソース名など、 TiDB Cloudのデータソースを定義します。
 
-        -   プロジェクト データ ソースを使用するには、データ ソース タイプを`tidbcloud_projects`に設定します。
+        -   プロジェクト データソースを使用するには、データソース タイプを`tidbcloud_projects`に設定します。
         -   データソース名は、必要に応じて定義できます。例："example_project"。
-        -   `tidbcloud_projects`データ ソースの場合、 `page`および`page_size`属性を使用して、チェックするプロジェクトの最大数を制限できます。
+        -   `tidbcloud_projects`データソースの場合、 `page`および`page_size`属性を使用して、チェックするプロジェクトの最大数を制限できます。
 
-    -   `output`ブロックを使用して、出力に表示されるデータ ソース情報を定義し、他の Terraform 構成が使用できるように情報を公開します。
+    -   `output`ブロックを使用して、出力に表示されるデータソース情報を定義し、他の Terraform 構成が使用できるように情報を公開します。
 
         `output`ブロックはプログラミング言語の戻り値と同様に機能します。詳細は[Terraform ドキュメント](https://www.terraform.io/language/values/outputs)を参照してください。
 
-    リソースとデータ ソースの使用可能なすべての構成を取得するには、[構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)を参照してください。
+    リソースとデータソースの使用可能なすべての構成を取得するには、[構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)を参照してください。
 
 2.  設定を適用するには、コマンド`terraform apply`を実行してください。続行するには、確認プロンプトで`yes`と入力してください。
 
@@ -121,9 +121,9 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 ## `tidbcloud_cluster_specs`データソースを使用してクラスター仕様情報を取得する {#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source}
 
-クラスターを作成する前に、使用可能なすべての構成値 (サポートされているクラウド プロバイダー、リージョン、ノード サイズなど) が含まれるクラスター仕様情報を取得する必要があります。
+クラスターを作成する前に、使用可能なすべての構成値 (サポートされているクラウドプロバイダー、リージョン、ノードサイズなど) が含まれるクラスター仕様情報を取得する必要があります。
 
-クラスター仕様情報を取得するには、次のように`tidbcloud_cluster_specs`データ ソースを使用できます。
+クラスター仕様情報を取得するには、次のように`tidbcloud_cluster_specs`データソースを使用できます。
 
 1.  `main.tf`ファイルを次のように編集します。
 
@@ -254,7 +254,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 結果は次のとおりです。
 
--   `cloud_provider`は、TiDB クラスターをホストできるクラウド プロバイダーです。
+-   `cloud_provider`は、TiDB クラスターをホストできるクラウドプロバイダーです。
 -   `region`は`cloud_provider`の領域です。
 -   `node_quantity_range`最小ノード数とノードをスケーリングするステップを示します。
 -   `node_size`はノードのサイズです。

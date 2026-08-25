@@ -81,7 +81,7 @@ mysql> SHOW WARNINGS;
 
 -   インデックスが特定の順序を満たすかどうかを選択します。インデックスの読み取りでは特定の列セットの順序が保証されるため、クエリの順序を満たすインデックスは、この次元で満たさないインデックスよりも優れています。
 
--   インデックスが[グローバルインデックス](/global-indexes.md)かどうか。パーティション テーブルでは、グローバル インデックスにより、通常のインデックスと比較して SQL の cop タスクの数が効果的に削減され、全体的なパフォーマンスが向上します。
+-   インデックスが[グローバルインデックス](/global-indexes.md)かどうか。パーティションテーブルでは、グローバルインデックスにより、通常のインデックスと比較して SQL の cop タスクの数が効果的に削減され、全体的なパフォーマンスが向上します。
 
 上記次元において、インデックス`idx_a`が 3 つの次元すべてにおいてインデックス`idx_b`と同等以上のパフォーマンスを発揮し、かつ 1 つの次元において`idx_b`よりも優れたパフォーマンスを発揮する場合、 `idx_a`が優先されます。 `EXPLAIN FORMAT = 'verbose' ...`ステートメントを実行する際に、スカイラインプルーニングによって一部のインデックスが除外された場合、TiDB は、スカイラインプルーニングによる除外後に残ったインデックスを一覧表示する NOTE レベルの警告を出力します。
 
@@ -145,7 +145,7 @@ mysql> SHOW WARNINGS;
 
 ## 多値インデックスを使用する {#use-multi-valued-indexes}
 
-[多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)は通常のインデックスとは異なります。 TiDB は現在、多値インデックスにアクセスするために[インデックスマージ](/explain-index-merge.md)のみを使用します。したがって、データ アクセスに多値インデックスを使用するには、システム変数[`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40)の値が`ON`に設定されていることを確認してください。
+[多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)は通常のインデックスとは異なります。 TiDB は現在、多値インデックスにアクセスするために[インデックスマージ](/explain-index-merge.md)のみを使用します。したがって、データアクセスに多値インデックスを使用するには、システム変数[`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40)の値が`ON`に設定されていることを確認してください。
 
 多値インデックスの制限事項については、 [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md#limitations)を参照してください。
 

@@ -63,7 +63,7 @@ CREATE TABLE `sale` (
 
 ## ステップ1. データソースを読み込む {#step-1-load-data-sources}
 
-`source1.yaml`という新しいデータ ソース ファイルを作成し、DM にアップストリーム データ ソースを構成して、次のコンテンツを追加します。
+`source1.yaml`という新しいデータソースファイルを作成し、DM にアップストリームデータソースを構成して、次のコンテンツを追加します。
 
 ```yaml
 # Configuration.
@@ -90,9 +90,9 @@ tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 | パラメータ                   | 説明                                                                 |
 | ----------------------- | ------------------------------------------------------------------ |
 | `--master-addr`         | dmctlが接続するクラスタ内の任意のDMマスターノードの`{advertise-addr}`例：172.16.10.71:8261 |
-| `operate-source create` | データ ソースを DM クラスターにロードします。                                          |
+| `operate-source create` | データソースを DM クラスターにロードします。                                          |
 
-すべてのデータ ソースが DM クラスターに追加されるまで、上記の手順を繰り返します。
+すべてのデータソースが DM クラスターに追加されるまで、上記の手順を繰り返します。
 
 ## ステップ2. 移行タスクを構成する {#step-2-configure-the-migration-task}
 

@@ -33,7 +33,7 @@ stop-task [-s "mysql-replica-01"]  task-name
 ## フラグの説明 {#flags-description}
 
 -   `-s` : (オプション) 停止する移行タスクのサブタスクが実行されるMySQLソースを指定します。このパラメータが設定されている場合、指定されたMySQLソース上のサブタスクのみが停止されます。
--   `task-name | task-file` : (必須) タスク名またはタスク ファイル パスを指定します。
+-   `task-name | task-file` : (必須) タスク名またはタスク ファイルパスを指定します。
 
 ## 返された結果 {#returned-results}
 

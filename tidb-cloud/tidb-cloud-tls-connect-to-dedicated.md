@@ -26,7 +26,7 @@ TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの
 
 2.  右上隅の**Connect**をクリックします。ダイアログが表示されます。
 
-3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**Connection Type**を選択します。
+3.  接続ダイアログで、 **[接続タイプ]**ドロップダウンリストから**Connection Type**を選択します。
 
     IPアクセスリストを設定していない場合は、初回接続前に**Configure IP Access List**をクリックして設定してください。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
 
@@ -37,7 +37,7 @@ TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの
     > -   ダウンロードしたCA証明書は、オペレーティングシステムのデフォルトのストレージパスに保存することも、別のストレージパスを指定することもできます。以降の手順では、コード例のCA証明書パスをご自身のCA証明書パスに置き換える必要があります。
     > -   TiDB Cloud Dedicated では、クライアントに TLS 接続の使用を強制しません。また、 [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610)変数のユーザー定義構成は現在TiDB Cloud Dedicated ではサポートされていません。
 
-5.  希望する接続方法を選択し、タブ上の接続文字列とサンプル コードを参照してクラスターに接続します。
+5.  希望する接続方法を選択し、タブ上の接続文字列とサンプルコードを参照してクラスターに接続します。
 
 次の例は、MySQL、MyCLI、JDBC、Python、Go、Node.js の接続文字列を示しています。
 
@@ -53,7 +53,7 @@ mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-vers
 パラメータの説明：
 
 -   `--ssl-mode=VERIFY_IDENTITY`では、MySQL CLI クライアントは TLS を有効にし、 TiDB Cloud Dedicated クラスターを検証することを強制します。
--   `--ssl-ca=<CA_path>`を使用して、ダウンロードした TiDB クラスター`ca.pem`のローカル パスを指定します。
+-   `--ssl-ca=<CA_path>`を使用して、ダウンロードした TiDB クラスター`ca.pem`のローカルパスを指定します。
 -   TLSプロトコルのバージョンを制限するには、 `--tls-version=TLSv1.2`を使用します。TLS 1.3を使用する場合は、バージョンを`TLSv1.3`に設定できます。
 
 </div>
@@ -68,7 +68,7 @@ mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clust
 
 パラメータの説明：
 
--   `--ssl-ca=<CA_path>`を使用して、ダウンロードした TiDB クラスター`ca.pem`のローカル パスを指定します。
+-   `--ssl-ca=<CA_path>`を使用して、ダウンロードした TiDB クラスター`ca.pem`のローカルパスを指定します。
 -   `--ssl-verify-server-cert`でTiDB Cloud Dedicated クラスターを検証します。
 
 </div>
@@ -77,7 +77,7 @@ mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clust
 
 ここでは、 [MySQL Connector/J](https://dev.mysql.com/doc/connector-j/en/)の TLS 接続構成が例として使用されています。
 
-TiDB クラスター CA をダウンロードした後、それをオペレーティング システムにインポートする場合は、 `keytool -importcert -alias TiDBCACert -file ca.pem -keystore <your_custom_truststore_path> -storepass <your_truststore_password>`コマンドを使用できます。
+TiDB クラスター CA をダウンロードした後、それをオペレーティングシステムにインポートする場合は、 `keytool -importcert -alias TiDBCACert -file ca.pem -keystore <your_custom_truststore_path> -storepass <your_truststore_password>`コマンドを使用できます。
 
 ```shell
 /* Be sure to replace the parameters in the following connection string. */
@@ -140,7 +140,7 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 パラメータの説明：
 
 -   TLS を有効にしてTiDB Cloud Dedicated クラスターを検証するには、 `ssl_mode="VERIFY_IDENTITY"`を設定します。
--   `ssl={"ca": "<CA_path>"}`を使用して、ダウンロードした TiDB クラスター`ca.pem`のローカル パスを指定します。
+-   `ssl={"ca": "<CA_path>"}`を使用して、ダウンロードした TiDB クラスター`ca.pem`のローカルパスを指定します。
 
 </div>
 

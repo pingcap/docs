@@ -53,7 +53,7 @@ TiDB バージョン: 5.0.2
     -   Backup & Restore (BR)
 
         -   曖昧なエラーメッセージを明確にする[＃1132](https://github.com/pingcap/br/pull/1132)
-        -   バックアップのクラスタ バージョンの確認をサポート[＃1091](https://github.com/pingcap/br/pull/1091)
+        -   バックアップのクラスタバージョンの確認をサポート[＃1091](https://github.com/pingcap/br/pull/1091)
         -   `mysql`スキーマのシステムテーブルのバックアップと復元をサポート[＃1143](https://github.com/pingcap/br/pull/1143) [＃1078](https://github.com/pingcap/br/pull/1078)
 
     -   Dumpling
@@ -117,7 +117,7 @@ TiDB バージョン: 5.0.2
         -   MySQLにデータを複製する際に`SUPER`権限を必要とする`explicit_defaults_for_timestamp`の更新を元に戻す[＃1750](https://github.com/pingcap/tiflow/pull/1750)
         -   シンクフロー制御をサポートし、メモリオーバーフローのリスクを軽減します[＃1840](https://github.com/pingcap/tiflow/pull/1840)
         -   テーブルを移動する際にレプリケーションタスクが停止する可能性があるバグを修正[＃1828](https://github.com/pingcap/tiflow/pull/1828)
-        -   TiCDC チェンジフィード チェックポイントの停滞により TiKV GC セーフ ポイントがブロックされる問題を修正しました[＃1759](https://github.com/pingcap/tiflow/pull/1759)
+        -   TiCDC チェンジフィード チェックポイントの停滞により TiKV GC セーフポイントがブロックされる問題を修正しました[＃1759](https://github.com/pingcap/tiflow/pull/1759)
 
     -   Backup & Restore (BR)
 

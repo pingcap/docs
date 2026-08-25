@@ -276,13 +276,13 @@ TiDB Cloudは、概念実証（PoC）ユーザー向けに一定数のクレジ�
 
 <CustomContent language="en,zh">
 
-組織内で`Organization Owner`または`Organization Billing Manager`の役割を担っている場合は、 TiDB Cloudアカウントをクラウド プロバイダー (AWS、Azure、Google Cloud、または Alibaba Cloud) の請求アカウントにリンクできます。それ以外の場合は、このセクションをスキップしてください。
+組織内で`Organization Owner`または`Organization Billing Manager`の役割を担っている場合は、 TiDB Cloudアカウントをクラウドプロバイダー (AWS、Azure、Google Cloud、または Alibaba Cloud) の請求アカウントにリンクできます。それ以外の場合は、このセクションをスキップしてください。
 
 </CustomContent>
 
 <CustomContent language="ja">
 
-組織内で`Organization Owner`または`Organization Billing Manager`の役割を担っている場合は、 TiDB Cloudアカウントをクラウド プロバイダー (AWS、Azure、または Google Cloud) の請求アカウントにリンクできます。それ以外の場合は、このセクションをスキップしてください。
+組織内で`Organization Owner`または`Organization Billing Manager`の役割を担っている場合は、 TiDB Cloudアカウントをクラウドプロバイダー (AWS、Azure、または Google Cloud) の請求アカウントにリンクできます。それ以外の場合は、このセクションをスキップしてください。
 
 </CustomContent>
 

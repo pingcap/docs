@@ -47,7 +47,7 @@ TiDB Cloudコンソールには、ユーザー応答時間のトラブルシュ�
 -   [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) :
 
     -   **SQL Statement**を使用すると、ページ上のSQL実行を直接観察し、システムテーブルをクエリすることなくパフォーマンスの問題を簡単に特定できます。SQL文をクリックすると、クエリの実行計画をさらに詳しく表示して、トラブルシューティングや分析を行うことができます。SQLパフォーマンスチューニングの詳細については、 [SQLチューニングの概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)を参照してください。
-    -   **Key Visualizer**を使用すると、TiDB のデータ アクセス パターンとデータ ホットスポットを観察できます。
+    -   **Key Visualizer**を使用すると、TiDB のデータアクセス パターンとデータ ホットスポットを観察できます。
 
 -   [**Metrics**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) : このページでは、リクエスト単位、使用済みストレージサイズ、1 秒あたりのクエリ数、平均クエリ実行時間などのメトリックを表示できます。
 
@@ -79,7 +79,7 @@ TiDB Cloudコンソールには、ユーザー応答時間のトラブルシュ�
 
 #### 遅いSQLクエリを最適化する {#optimize-slow-sql-queries}
 
-SQL パフォーマンス チューニングの詳細については、 [SQLチューニングの概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)を参照してください。
+SQL パフォーマンスチューニングの詳細については、 [SQLチューニングの概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)を参照してください。
 
 #### ホットスポットの問題を解決する {#resolve-hotstpot-issues}
 

@@ -109,7 +109,7 @@ FAQ が多数ある場合は、この機能用に個別のFAQドキュメント�
 
 このセクションでは、ユーザーが読みたいと思う可能性のある次のような関連ドキュメントを提供します。
 
--   TiFlash のバージョン、重要なログ、システム テーブルを表示するには、 [TiFlashクラスタを管理](/tiflash/maintain-tiflash.md)を参照してください。
+-   TiFlash のバージョン、重要なログ、システムテーブルを表示するには、 [TiFlashクラスタを管理](/tiflash/maintain-tiflash.md)を参照してください。
 -   TiFlashノードを削除する必要がある場合は、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 
 次のような、ユーザーが興味を持ちそうなドキュメントを直接提供することもできます。

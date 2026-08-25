@@ -65,7 +65,7 @@ TiDBプライマリクラスタとセカンダリクラスタのデプロイ方�
 
 TiCDCを導入する際は、セカンダリクラスタとTiCDCを一緒に導入・管理する必要があり、両者間のネットワークが接続されている必要があることに注意してください。
 
--   既存のプライマリ クラスターに TiCDC をデプロイするには、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)を参照してください。
+-   既存のプライマリクラスターに TiCDC をデプロイするには、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)を参照してください。
 -   新しいプライマリクラスタとTiCDCをデプロイするには、以下のデプロイテンプレートを使用し、必要に応じて構成パラメータを変更してください。
 
     ```yaml
@@ -145,7 +145,7 @@ s3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0
 
 #### データの移行 {#migrate-data}
 
-[バックアップと復元機能](/br/backup-and-restore-overview.md)を使用して、プライマリ クラスターからセカンダリ クラスターにデータを移行します。
+[バックアップと復元機能](/br/backup-and-restore-overview.md)を使用して、プライマリクラスターからセカンダリクラスターにデータを移行します。
 
 1.  GCを無効にします。増分移行中に新しく書き込まれたデータが削除されないようにするには、バックアップ前にアップストリームクラスタのGCを無効にする必要があります。こうすることで、履歴データが削除されるのを防ぐことができます。
 
@@ -210,7 +210,7 @@ s3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0
 
 #### 増分データを複製する {#replicate-incremental-data}
 
-前のセクションで説明したようにデータを移行した後、 **BackupTS**からプライマリ クラスターからセカンダリ クラスターに増分データを複製できます。
+前のセクションで説明したようにデータを移行した後、 **BackupTS**からプライマリクラスターからセカンダリクラスターに増分データを複製できます。
 
 1.  変更フィードを作成します。
 

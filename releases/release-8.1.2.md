@@ -73,7 +73,7 @@ TiDB バージョン: 8.1.2
     -   `IndexNestedLoopHashJoin` のデータ競合問題を修正 [＃49692](https://github.com/pingcap/tidb/issues/49692) @[solotzg](https://github.com/solotzg)
     -   `StreamAggExec`分の`groupOffset`空の場合に TiDB がpanicを起こす可能性がある問題を修正しました [＃53867](https://github.com/pingcap/tidb/issues/53867) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   相関サブクエリと CTE を含むクエリを実行すると、TiDB がハングしたり、誤った結果が返されたりする問題を修正しました。 [＃55551](https://github.com/pingcap/tidb/issues/55551) @[guo-shaoge](https://github.com/guo-shaoge)
-    -   インデックス追加中の再試行によって発生するデータ インデックスの不整合の問題を修正しました [＃55808](https://github.com/pingcap/tidb/issues/55808) @[lance6716](https://github.com/lance6716)
+    -   インデックス追加中の再試行によって発生するデータインデックスの不整合の問題を修正しました [＃55808](https://github.com/pingcap/tidb/issues/55808) @[lance6716](https://github.com/lance6716)
     -   整数型の列に小さい表示幅を指定すると`out of range`エラーが発生する可能性がある問題を修正しました。 [＃55837](https://github.com/pingcap/tidb/issues/55837) @[windtalker](https://github.com/windtalker)
     -   `LOAD DATA ... REPLACE INTO`操作でデータの不整合が発生する問題を修正[＃56408](https://github.com/pingcap/tidb/issues/56408) @[fzzf678](https://github.com/fzzf678)
     -   `columnEvaluator`入力チャンク内の列参照を識別できず、SQL 文を実行すると`runtime error: index out of range`が発生する問題を修正しました。 [＃53713](https://github.com/pingcap/tidb/issues/53713) @[AilinKid](https://github.com/AilinKid)
@@ -117,17 +117,17 @@ TiDB バージョン: 8.1.2
     -   乱数ジェネレータの頻繁な作成によって発生するパフォーマンスジッターの問題を修正しました [＃8674](https://github.com/tikv/pd/issues/8674) @[rleungx](https://github.com/rleungx)
     -   ホットスポット キャッシュのメモリリーク問題を修正 [＃8698](https://github.com/tikv/pd/issues/8698) @[lhy1024](https://github.com/lhy1024)
     -   ラベル統計のメモリリーク問題を修正 [＃8700](https://github.com/tikv/pd/issues/8700) @[lhy1024](https://github.com/lhy1024)
-    -   削除されたリソース グループが監視パネルに引き続き表示される問題を修正しました [＃8716](https://github.com/tikv/pd/issues/8716) @[AndreMouche](https://github.com/AndreMouche)
+    -   削除されたリソースグループが監視パネルに引き続き表示される問題を修正しました [＃8716](https://github.com/tikv/pd/issues/8716) @[AndreMouche](https://github.com/AndreMouche)
     -   マイクロサービスモードでPDリーダーが切り替えられたときにスケジューリングサーバーでデータ競合が発生する可能性がある問題を修正しました [＃8538](https://github.com/tikv/pd/issues/8538) @[lhy1024](https://github.com/lhy1024)
     -   `evict-leader-scheduler`で間違ったパラメータを使用すると、PD がエラーを正しく報告せず、一部のスケジューラが利用できなくなる問題を修正しました[＃8619](https://github.com/tikv/pd/issues/8619) @[rleungx](https://github.com/rleungx)
-    -   リソース グループ セレクターがどのパネルでも有効にならない問題を修正しました [＃56572](https://github.com/pingcap/tidb/issues/56572) @[glorv](https://github.com/glorv)
+    -   リソースグループセレクターがどのパネルでも有効にならない問題を修正しました [＃56572](https://github.com/pingcap/tidb/issues/56572) @[glorv](https://github.com/glorv)
 
 -   TiFlash
 
     -   複数のリージョンがスナップショットを同時に適用しているときに発生する誤ったリージョン重複チェックの失敗によりTiFlash がpanicになる可能性がある問題を修正しました。 [＃9329](https://github.com/pingcap/tiflash/issues/9329) @[CalvinNeo](https://github.com/CalvinNeo)
     -   2番目のパラメータが負のの場合に`SUBSTRING()`関数が誤った結果を返す問題を修正しました [＃9604](https://github.com/pingcap/tiflash/issues/9604) @[guo-shaoge](https://github.com/guo-shaoge)
     -   遅延マテリアライゼーションが有効になっている場合に一部のクエリでエラーが報告される可能性がある問題を修正[＃9472](https://github.com/pingcap/tiflash/issues/9472) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    -   テーブルに無効な文字を含むデフォルト値を持つビット型の列が含まれている場合、 TiFlash がテーブル スキーマを解析できない問題を修正しました。 [＃9461](https://github.com/pingcap/tiflash/issues/9461) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    -   テーブルに無効な文字を含むデフォルト値を持つビット型の列が含まれている場合、 TiFlash がテーブルスキーマを解析できない問題を修正しました。 [＃9461](https://github.com/pingcap/tiflash/issues/9461) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   TiFlashでサポートされていない一部の JSON関数がTiFlash にプッシュダウンされる問題を修正しました [＃9444](https://github.com/pingcap/tiflash/issues/9444) @[windtalker](https://github.com/windtalker)
     -   特定のケースで関数`CAST AS DECIMAL`の結果の符号が正しくない問題を修正[＃9301](https://github.com/pingcap/tiflash/issues/9301) @[guo-shaoge](https://github.com/guo-shaoge)
     -   分散ストレージおよびコンピューティングアーキテクチャで、 TiFlash書き込みノードの読み取りスナップショットがタイムリーにリリースされない問題を修正しました。 [＃9298](https://github.com/pingcap/tiflash/issues/9298) @[JinheLin](https://github.com/JinheLin)
@@ -149,9 +149,9 @@ TiDB バージョン: 8.1.2
     -   TiCDC
 
         -   PullerモジュールのResolved TSレイテンシーモニタリングで誤った値が表示される問題を修正しました [＃11561](https://github.com/pingcap/tiflow/issues/11561) @[wlwilliamx](https://github.com/wlwilliamx)
-        -   `enable-table-across-nodes`有効にすると、リージョン分割中にテーブルの一部のスパン レプリケーション タスクが失われる可能性がある問題を修正しました。 [＃11675](https://github.com/pingcap/tiflow/issues/11675) @[wk989898](https://github.com/wk989898)
+        -   `enable-table-across-nodes`有効にすると、リージョン分割中にテーブルの一部のスパン レプリケーションタスクが失われる可能性がある問題を修正しました。 [＃11675](https://github.com/pingcap/tiflow/issues/11675) @[wk989898](https://github.com/wk989898)
         -   やり直しモジュールがエラーを正しく報告できない問題を修正しました [＃11744](https://github.com/pingcap/tiflow/issues/11744) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        -   TiDB DDL 所有者の変更中に DDL タスクのスキーマ バージョンが非増分になったときに、TiCDC が誤って DDL タスクを破棄する問題を修正[＃11714](https://github.com/pingcap/tiflow/issues/11714) @[wlwilliamx](https://github.com/wlwilliamx)
+        -   TiDB DDL 所有者の変更中に DDL タスクのスキーマバージョンが非増分になったときに、TiCDC が誤って DDL タスクを破棄する問題を修正[＃11714](https://github.com/pingcap/tiflow/issues/11714) @[wlwilliamx](https://github.com/wlwilliamx)
         -   チェンジフィードチェックポイントの**barrier-ts**監視メトリックが不正確になる可能性がある問題を修正しました[＃11553](https://github.com/pingcap/tiflow/issues/11553) @[3AceShowHand](https://github.com/3AceShowHand)
 
     -   TiDB Data Migration (DM)

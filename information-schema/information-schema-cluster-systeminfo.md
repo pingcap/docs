@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_SYSTEMINFO
-summary: CLUSTER_SYSTEMINFO` カーネル パラメータ テーブルについて学習します。
+summary: CLUSTER_SYSTEMINFO` カーネルパラメータ テーブルについて学習します。
 ---
 
 # CLUSTER_SYSTEMINFO {#cluster-systeminfo}
@@ -39,7 +39,7 @@ DESC cluster_systeminfo;
 -   `NAME` : `sysctl`に対応する構成名。
 -   `VALUE` : `sysctl`に対応する構成項目の値。
 
-次の例は、 `CLUSTER_SYSTEMINFO`システム情報テーブルを使用して、クラスター内のすべてのサーバーのカーネル バージョンを照会する方法を示しています。
+次の例は、 `CLUSTER_SYSTEMINFO`システム情報テーブルを使用して、クラスター内のすべてのサーバーのカーネルバージョンを照会する方法を示しています。
 
 ```sql
 SELECT * FROM cluster_systeminfo WHERE name LIKE '%kernel.osrelease%'

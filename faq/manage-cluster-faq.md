@@ -29,7 +29,7 @@ TiKVデータは[`--data-dir`](/command-line-flags-for-tikv-configuration.md#--d
 
 ### TiDBのシステムテーブルとは何ですか？ {#what-are-the-system-tables-in-tidb}
 
-MySQL と同様に、TiDB にはシステム テーブルも含まれており、サーバーの実行時に必要な情報を保存するために使用されます。 [TiDBシステムテーブル](/mysql-schema/mysql-schema.md)を参照してください。
+MySQL と同様に、TiDB にはシステムテーブルも含まれており、サーバーの実行時に必要な情報を保存するために使用されます。 [TiDBシステムテーブル](/mysql-schema/mysql-schema.md)を参照してください。
 
 ### TiDB/PD/TiKVのログはどこにありますか？ {#where-are-the-tidb-pd-tikv-logs}
 
@@ -239,7 +239,7 @@ TiDB が SQL ステートメントを実行する際、各オペレータが 10,
 
 ### TiDBでテーブルのサイズを推定するにはどうすればよいですか？ {#how-do-i-estimate-the-size-of-a-table-in-tidb}
 
-TiDB のテーブルのサイズを推定するには、次のクエリ ステートメントを使用できます。
+TiDB のテーブルのサイズを推定するには、次のクエリステートメントを使用できます。
 
 ```sql
 SELECT

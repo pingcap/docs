@@ -36,11 +36,11 @@ MetricsToolは[https://metricstool.pingcap.net/](https://metricstool.pingcap.net
 
 MetricsToolによってエクスポートされるスナップショットファイルには、取得時の実際の値が含まれています。また、Visualizerを使用すると、レンダリングされたグラフをライブGrafanaダッシュボードのように操作でき、シリーズの切り替え、より狭い時間範囲へのズームイン、特定の時点の正確な値の確認などの操作が可能です。これにより、MetricsToolは画像やPDFよりもはるかに強力になります。
 
-### スナップショット ファイルには何が含まれていますか? {#what-are-included-in-the-snapshot-file}
+### スナップショットファイルには何が含まれていますか? {#what-are-included-in-the-snapshot-file}
 
 スナップショットファイルには、選択した時間範囲におけるすべてのグラフとパネルの値が含まれます。データソースの元のメトリックは保存されません（そのため、ビジュアライザーでクエリ式を編集することはできません）。
 
-### Visualizer はアップロードされたスナップショット ファイルを PingCAP のサーバーに保存しますか? {#will-the-visualizer-save-the-uploaded-snapshot-files-in-pingcap-s-servers}
+### Visualizer はアップロードされたスナップショットファイルを PingCAP のサーバーに保存しますか? {#will-the-visualizer-save-the-uploaded-snapshot-files-in-pingcap-s-servers}
 
 いいえ、Visualizerはスナップショットファイルをすべてブラウザ内で解析します。PingCAPには何も送信されません。機密性の高いソースから受信したスナップショットファイルは自由に閲覧でき、Visualizerを通じて第三者に漏洩する心配はありません。
 

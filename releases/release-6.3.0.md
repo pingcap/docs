@@ -49,7 +49,7 @@ TiDBバージョン: 6.3.0-DMR
 
 -   DDL変更時のDML成功率を向上させるための軽量メタデータロックを提供する（実験的） [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016)
 
-    TiDB は、変更されるメタデータ オブジェクトをサポートするために、オンライン非同期スキーマ変更アルゴリズムを使用します。トランザクションが実行されると、トランザクションの開始時に対応するメタデータ スナップショットを取得します。トランザクション中にメタデータが変更された場合、データの一貫性を確保するために、TiDB は`Information schema is changed`エラーを返し、トランザクションはコミットに失敗します。この問題を解決するために、TiDB v6.3.0 では、オンライン DDL アルゴリズムに[メタデータロック](/metadata-lock.md)が導入されました。可能な限り DML エラーを回避するために、TiDB はテーブル メタデータの変更中に DML と DDL の優先順位を調整し、実行中の DDL が古いメタデータを持つ DML のコミットを待つようにします。
+    TiDB は、変更されるメタデータオブジェクトをサポートするために、オンライン非同期スキーマ変更アルゴリズムを使用します。トランザクションが実行されると、トランザクションの開始時に対応するメタデータスナップショットを取得します。トランザクション中にメタデータが変更された場合、データの一貫性を確保するために、TiDB は`Information schema is changed`エラーを返し、トランザクションはコミットに失敗します。この問題を解決するために、TiDB v6.3.0 では、オンライン DDL アルゴリズムに[メタデータロック](/metadata-lock.md)が導入されました。可能な限り DML エラーを回避するために、TiDB はテーブルメタデータの変更中に DML と DDL の優先順位を調整し、実行中の DDL が古いメタデータを持つ DML のコミットを待つようにします。
 
 -   インデックス追加のパフォーマンスを向上させ、DML トランザクションへの影響を軽減します (実験的) [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037)
 
@@ -67,7 +67,7 @@ TiDBバージョン: 6.3.0-DMR
 
 -   TiDB JDBC は SM3 アルゴリズムによる認証をサポート [#25](https://github.com/pingcap/mysql-connector-j/issues/25) @[lastincisor](https://github.com/lastincisor)
 
-    ユーザー パスワードの認証には、クライアント側のサポートが必要です。 [JDBCはSM3アルゴリズムをサポートしています](/develop/dev-guide-choose-driver-or-orm.md#java-drivers)ので、TiDB-JDBC経由でSM3認証を使用してTiDBに接続できるようになります。
+    ユーザーパスワードの認証には、クライアント側のサポートが必要です。 [JDBCはSM3アルゴリズムをサポートしています](/develop/dev-guide-choose-driver-or-orm.md#java-drivers)ので、TiDB-JDBC経由でSM3認証を使用してTiDBに接続できるようになります。
 
 ### 可観測性 {#observability}
 
@@ -77,7 +77,7 @@ TiDBバージョン: 6.3.0-DMR
 
 -   スローログと`TRACE`ステートメントの出力強化 [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk)
 
-    TiDB v6.3.0 では、スロー ログと`TRACE`の出力が強化されています。TiDB の解析から KV RocksDB によるディスクへの書き込みまでの SQL クエリの[フルリンク期間](/latency-breakdown.md)を観察できるため、診断機能がさらに強化されます。
+    TiDB v6.3.0 では、スローログと`TRACE`の出力が強化されています。TiDB の解析から KV RocksDB によるディスクへの書き込みまでの SQL クエリの[フルリンク期間](/latency-breakdown.md)を観察できるため、診断機能がさらに強化されます。
 
 -   TiDB Dashboardはデッドロック履歴情報を提供します [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk)
 
@@ -97,7 +97,7 @@ TiDBバージョン: 6.3.0-DMR
 
     この機能はバージョン6.2.0では実験的に提供されており、バージョン6.3.0で正式リリースとなります。
 
--   TiFlashデータ レプリケーションのパフォーマンスが向上 [#5237](https://github.com/pingcap/tiflash/issues/5237) @[breezewish](https://github.com/breezewish)
+-   TiFlashデータレプリケーションのパフォーマンスが向上 [#5237](https://github.com/pingcap/tiflash/issues/5237) @[breezewish](https://github.com/breezewish)
 
     TiFlashは、TiKVからのデータレプリケーションにRaftプロトコルを使用します。v6.3.0より前は、大量のレプリカデータのレプリケーションに時間がかかることがよくありました。TiDB v6.3.0では、 TiFlashのデータレプリケーションメカニズムが最適化され、レプリケーション速度が大幅に向上しました。BRを使用してデータをリカバリする場合、 TiDB Lightningを使用してデータをインポートする場合、または新しいTiFlashレプリカを追加する場合、 TiFlashレプリカのレプリケーションがより迅速に行われます。TiFlashを使用したクエリもより迅速に実行できます。さらに、 TiFlashレプリカのスケールアップ、スケールダウン、またはレプリカ数の変更時にも、 TiFlashレプリカはより迅速に安全でバランスの取れた状態に到達します。
 
@@ -113,7 +113,7 @@ TiDBバージョン: 6.3.0-DMR
 
     TiDB v6.3.0 では、新しい結合[ヌル値認識型アンチジョイン（NAAJ）](/explain-subqueries.md#null-aware-anti-semi-join-not-in-and--all-subqueries)が導入されています。 NAAJ は、コレクション操作を処理するときに、コレクションが空であるか、 `NULL`であるかを認識できます。これにより`IN`や`= ANY`などの操作の実行効率が最適化され、SQL パフォーマンスが向上します。
 
--   ハッシュ結合のビルド終了を制御するオプティマイザー ヒントを追加 [#35439](https://github.com/pingcap/tidb/issues/35439) @[Reminiscent](https://github.com/Reminiscent)
+-   ハッシュ結合のビルド終了を制御するオプティマイザーヒントを追加 [#35439](https://github.com/pingcap/tidb/issues/35439) @[Reminiscent](https://github.com/Reminiscent)
 
     バージョン6.3.0では、TiDBオプティマイザに、ハッシュ結合、そのプローブ終了、および構築終了を指定するための2つのヒント、 `HASH_JOIN_BUILD()`と`HASH_JOIN_PROBE()`が導入されました。オプティマイザが最適な実行計画を選択できない場合、これらのヒントを使用してプランに介入できます。
 
@@ -139,7 +139,7 @@ TiDBバージョン: 6.3.0-DMR
 
 -   統計情報が古くなった場合に統計情報を読み込むデフォルトポリシーを変更する [#27601](https://github.com/pingcap/tidb/issues/27601) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
 
-    v5.3.0 では、統計情報が古くなったときのオプティマイザの動作を制御するために、システム変数[`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530)が導入されました。デフォルト値は`ON`で、これは旧バージョンの動作を維持することを意味します。つまり、SQL ステートメントに関係するオブジェクトの統計情報が古くなった場合、オプティマイザは (テーブルの総行数以外の) 統計情報はもはや信頼できないと判断し、代わりに擬似統計情報を使用します。実際のユーザー シナリオのテストと分析の結果、v6.3.0 以降、デフォルト値`tidb_enable_pseudo_for_outdated_stats`は`OFF`に変更されました。統計情報が古くなっても、オプティマイザはテーブル上の統計情報を使用するため、実行計画がより安定します。
+    v5.3.0 では、統計情報が古くなったときのオプティマイザの動作を制御するために、システム変数[`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530)が導入されました。デフォルト値は`ON`で、これは旧バージョンの動作を維持することを意味します。つまり、SQL ステートメントに関係するオブジェクトの統計情報が古くなった場合、オプティマイザは (テーブルの総行数以外の) 統計情報はもはや信頼できないと判断し、代わりに擬似統計情報を使用します。実際のユーザーシナリオのテストと分析の結果、v6.3.0 以降、デフォルト値`tidb_enable_pseudo_for_outdated_stats`は`OFF`に変更されました。統計情報が古くなっても、オプティマイザはテーブル上の統計情報を使用するため、実行計画がより安定します。
 
 -   Titan の無効化が GA に@[tabokie](https://github.com/tabokie)
 
@@ -147,7 +147,7 @@ TiDBバージョン: 6.3.0-DMR
 
 -   グローバル統計が準備できていない場合は、 `static`パーティションプルーニングを使用します [#37535](https://github.com/pingcap/tidb/issues/37535) @[Yisaer](https://github.com/Yisaer)
 
-    [`dynamic pruning`](/partitioned-table.md#dynamic-pruning-mode)が有効になっている場合、オプティマイザは[世界の統計](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)に基づいて実行計画を選択します。グローバル統計が完全に収集される前に擬似統計を使用すると、パフォーマンスが低下する可能性があります。v6.3.0 では、グローバル統計の収集が完了する前に`dynamic`プルーニング モードを有効にすると、グローバル統計が完全に収集されるまで TiDB は`static`モードのままになります。これにより、パーティション プルーニングの設定を変更したときのパフォーマンスの安定性が確保されます。
+    [`dynamic pruning`](/partitioned-table.md#dynamic-pruning-mode)が有効になっている場合、オプティマイザは[世界の統計](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)に基づいて実行計画を選択します。グローバル統計が完全に収集される前に擬似統計を使用すると、パフォーマンスが低下する可能性があります。v6.3.0 では、グローバル統計の収集が完了する前に`dynamic`プルーニングモードを有効にすると、グローバル統計が完全に収集されるまで TiDB は`static`モードのままになります。これにより、パーティションプルーニングの設定を変更したときのパフォーマンスの安定性が確保されます。
 
 ### 使いやすさ {#ease-of-use}
 
@@ -181,7 +181,7 @@ TiDBバージョン: 6.3.0-DMR
 
 -   BRは AWS S3 オブジェクト ロックをサポートします [#13442](https://github.com/tikv/tikv/issues/13442) @[3pointer](https://github.com/3pointer)
 
-    [S3オブジェクトロック](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html)を有効にすることで、AWS 上のバックアップ データが改ざんまたは削除されないように保護できます。
+    [S3オブジェクトロック](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html)を有効にすることで、AWS 上のバックアップデータが改ざんまたは削除されないように保護できます。
 
 ### データ移行 {#data-migration}
 
@@ -195,11 +195,11 @@ TiDBバージョン: 6.3.0-DMR
 
 -   TiCDCは、地理的に分散した複数のデータソースからデータを複製できるデプロイメントトポロジーをサポートしています [#5301](https://github.com/pingcap/tiflow/issues/5301) @[sdojjy](https://github.com/sdojjy)
 
-    v6.3.0 以降、単一の TiDB クラスターから複数の地理的に分散されたデータ システムへのデータの複製をサポートするために、 [TiCDCは複数のIDCに展開できます](/ticdc/deploy-ticdc.md) 。この機能は、地理的に分散されたデータ レプリケーションおよび展開トポロジの機能を提供するのに役立ちます。
+    v6.3.0 以降、単一の TiDB クラスターから複数の地理的に分散されたデータ システムへのデータの複製をサポートするために、 [TiCDCは複数のIDCに展開できます](/ticdc/deploy-ticdc.md) 。この機能は、地理的に分散されたデータレプリケーションおよび展開トポロジの機能を提供するのに役立ちます。
 
 -   TiCDCは、アップストリームとダウンストリーム間でスナップショットの一貫性を維持することをサポートしています（同期ポイント） [#6977](https://github.com/pingcap/tiflow/issues/6977) @[asddongmen](https://github.com/asddongmen)
 
-    ディザスタリカバリのためのデータ レプリケーションのシナリオでは、TiCDC は、ダウンストリーム スナップショットがアップストリーム スナップショットと一貫性を保つように [定期的に下流データのスナップショットを維持する](/ticdc/ticdc-upstream-downstream-check.md)をサポートします。この機能により、TiCDC は読み取りと書き込みが分離されるシナリオをより適切にサポートし、コストの削減に役立ちます。
+    ディザスタリカバリのためのデータレプリケーションのシナリオでは、TiCDC は、ダウンストリーム スナップショットがアップストリーム スナップショットと一貫性を保つように [定期的に下流データのスナップショットを維持する](/ticdc/ticdc-upstream-downstream-check.md)をサポートします。この機能により、TiCDC は読み取りと書き込みが分離されるシナリオをより適切にサポートし、コストの削減に役立ちます。
 
 -   TiCDC はグレースフル アップグレードをサポート [#4757](https://github.com/pingcap/tiflow/issues/4757) @[overvenus](https://github.com/overvenus)@[3AceShowHand](https://github.com/3AceShowHand)
 
@@ -244,8 +244,8 @@ TiDBバージョン: 6.3.0-DMR
 | TiDB           | [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)                                        | 新しく追加された | TiDB が一時データを格納するために使用するファイルシステム上の場所を指定します。機能が TiDB ノードでローカルストレージを必要とする場合、TiDB は対応する一時データをこの場所に格納します。デフォルト値は`/tmp/tidb`です。                                                                                      |
 | TiKV           | [`auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)              | 新しく追加された | スレッドプールのサイズを自動的に調整するかどうかを制御します。有効にすると、現在のCPU使用率に基づいてUnifyReadPoolスレッドプールのサイズを自動的に調整することで、TiKVの読み取りパフォーマンスが最適化されます。                                                                                               |
 | TiKV           | [`data-encryption-method`](/tikv-configuration-file.md#data-encryption-method)                        | 変更     | 新しい値オプション`sm4-ctr`が導入されました。この設定項目が`sm4-ctr`に設定されている場合、データは保存される前に SM4 を使用して暗号化されます。                                                                                                                              |
-| TiKV           | [`enable-log-recycle`](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)                    | 新しく追加された | Raft Engineで古いログ ファイルを再利用するかどうかを決定します。有効にすると、論理的に削除されたログ ファイルは再利用のために予約されます。これにより、書き込みワークロードのロング テールレイテンシーが削減されます。この設定項目は[フォーマットバージョン](/tikv-configuration-file.md#format-version-new-in-v630)が 2 以上の場合のみ使用できます。 |
-| TiKV           | [`format-version`](/tikv-configuration-file.md#format-version-new-in-v630)                            | 新しく追加された | Raft Engineのログ ファイルのバージョンを指定します。デフォルトのログ ファイル バージョンは、TiKV v6.3.0 より前のバージョンでは`1`です。ログ ファイルは、TiKV &gt;= v6.1.0 で読み取ることができます。デフォルトのログ ファイル バージョンは、TiKV v6.3.0 以降では`2`です。TiKV v6.3.0 以降では、ログ ファイルを読み取ることができます。       |
+| TiKV           | [`enable-log-recycle`](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)                    | 新しく追加された | Raft Engineで古いログファイルを再利用するかどうかを決定します。有効にすると、論理的に削除されたログファイルは再利用のために予約されます。これにより、書き込みワークロードのロングテールレイテンシーが削減されます。この設定項目は[フォーマットバージョン](/tikv-configuration-file.md#format-version-new-in-v630)が 2 以上の場合のみ使用できます。 |
+| TiKV           | [`format-version`](/tikv-configuration-file.md#format-version-new-in-v630)                            | 新しく追加された | Raft Engineのログファイルのバージョンを指定します。デフォルトのログファイル バージョンは、TiKV v6.3.0 より前のバージョンでは`1`です。ログファイルは、TiKV &gt;= v6.1.0 で読み取ることができます。デフォルトのログファイル バージョンは、TiKV v6.3.0 以降では`2`です。TiKV v6.3.0 以降では、ログファイルを読み取ることができます。       |
 | TiKV           | [`log-backup.enable`](/tikv-configuration-file.md#enable-new-in-v620)                                 | 変更     | バージョン6.3.0以降、デフォルト値が`false`から`true`に変更されました。                                                                                                                                                                     |
 | TiKV           | [`log-backup.max-flush-interval`](/tikv-configuration-file.md#max-flush-interval-new-in-v620)         | 変更     | バージョン6.3.0以降、デフォルト値が`5min`から`3min`に変更されました。                                                                                                                                                                      |
 | PD             | [診断を有効にする](/pd-configuration-file.md#enable-diagnostic-new-in-v630)                                   | 新しく追加された | 診断機能を有効にするかどうかを制御します。デフォルト値は`false`です。                                                                                                                                                                           |
@@ -357,7 +357,7 @@ TiDBバージョン: 6.3.0-DMR
     -   JSON集計関数で単精度浮動小数点数が使用できない問題を修正 [#37287](https://github.com/pingcap/tidb/issues/37287) @[YangKeao](https://github.com/YangKeao)
     -   `UNION`演算子が予期しない空の結果を返す可能性がある問題を修正 [#36903](https://github.com/pingcap/tidb/issues/36903) @[tiancaiamao](https://github.com/tiancaiamao)
     -   `castRealAsTime`式の結果が MySQL と一致しない問題を修正します [#37462](https://github.com/pingcap/tidb/issues/37462) @[mengxin9014](https://github.com/mengxin9014)
-    -   悲観的DML 操作が非一意インデックス キーをロックする問題を修正 [#36235](https://github.com/pingcap/tidb/issues/36235) @[ekexium](https://github.com/ekexium)
+    -   悲観的DML 操作が非一意インデックスキーをロックする問題を修正 [#36235](https://github.com/pingcap/tidb/issues/36235) @[ekexium](https://github.com/ekexium)
     -   `auto-commit`の変更がトランザクションコミットの動作に影響を与える問題を修正 [#36581](https://github.com/pingcap/tidb/issues/36581) @[cfzjywxk](https://github.com/cfzjywxk)
     -   DML実行エンジンを使用した`EXPLAIN ANALYZE`ステートメントがトランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました [#37373](https://github.com/pingcap/tidb/issues/37373) @[cfzjywxk](https://github.com/cfzjywxk)
     -   UPDATE 文が場合によっては誤って投影を削除し、 `Can't find column` エラーが発生する問題を修正しました。 [#37568](https://github.com/pingcap/tidb/issues/37568) @[AilinKid](https://github.com/AilinKid)

@@ -38,7 +38,7 @@ summary: {{{ .essential }}} と Premium における変更フィードの課金�
 
 ### 価格 {#price}
 
-現在、 {{{ .essential }}} と Premium はパブリック プレビュー段階にあります。価格の詳細については、以下のページを参照してください:
+現在、 {{{ .essential }}} と Premium はパブリックプレビュー段階にあります。価格の詳細については、以下のページを参照してください:
 
 - [{{{ .essential }}} の料金詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)
 - [{{{ .premium }}} の料金詳細](https://www.pingcap.com/tidb-cloud-premium-pricing-details/)

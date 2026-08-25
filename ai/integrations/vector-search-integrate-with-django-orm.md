@@ -208,7 +208,7 @@ if TIDB_CA_PATH:
     }
 ```
 
-プロジェクトのルート ディレクトリに`.env`ファイルを作成し、環境変数`TIDB_HOST` 、 `TIDB_PORT` 、 `TIDB_USERNAME` 、 `TIDB_PASSWORD` 、 `TIDB_DATABASE` 、および`TIDB_CA_PATH` TiDB の実際の値で設定できます。
+プロジェクトのルートディレクトリに`.env`ファイルを作成し、環境変数`TIDB_HOST` 、 `TIDB_PORT` 、 `TIDB_USERNAME` 、 `TIDB_PASSWORD` 、 `TIDB_DATABASE` 、および`TIDB_CA_PATH` TiDB の実際の値で設定できます。
 
 ### ベクトルテーブルを作成する {#create-vector-tables}
 

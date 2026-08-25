@@ -118,7 +118,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 ### --restart-timeout {#--restart-timeout}
 
--   ローリング アップグレード中にコンポーネントをアップグレードした後の待機時間を指定します。
+-   ローリングアップグレード中にコンポーネントをアップグレードした後の待機時間を指定します。
 -   データ型: `STRINGS` [`golang time.ParseDuration`](https://pkg.go.dev/time#ParseDuration)で解析できるすべての型がサポートされます。
 -   デフォルト: `0`
 -   このオプションを指定しないと、コンポーネントのアップグレード後に待機時間は発生しません。

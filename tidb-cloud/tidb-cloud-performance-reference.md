@@ -27,7 +27,7 @@ mysql-ignore-errors=1062,2013,8028,9002,9007
 auto-inc=false
 ```
 
-このドキュメントでは、トランザクション モデル`Read Only`、`Read Write`、および`Write Only`は、それぞれ読み取りワークロード、混合ワークロード、および書き込みワークロードを表します。
+このドキュメントでは、トランザクションモデル`Read Only`、`Read Write`、および`Write Only`は、それぞれ読み取りワークロード、混合ワークロード、および書き込みワークロードを表します。
 
 ## 4 vCPU パフォーマンス {#4-vcpu-performance}
 

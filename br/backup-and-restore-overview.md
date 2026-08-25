@@ -84,7 +84,7 @@ TiDB BRは以下の機能を提供します。
 
 -   フルバックアップを復元する
 
-    -   クラスターのスナップショット バックアップの復元: スナップショット バックアップ データを、空のクラスター、またはデータの競合がないクラスター (同じスキーマまたはテーブルを持つ) に復元できます。詳細については、 [スナップショットバックアップを復元する](/br/br-snapshot-guide.md#restore-cluster-snapshots)を参照してください。さらに、バックアップ データから特定のデータベースまたはテーブルを復元し、不要なデータを除外することができます。詳細については、 [バックアップデータから特定のデータベースまたはテーブルを復元する](/br/br-snapshot-guide.md#restore-a-database-or-a-table)を参照してください。
+    -   クラスターのスナップショットバックアップの復元: スナップショットバックアップデータを、空のクラスター、またはデータの競合がないクラスター (同じスキーマまたはテーブルを持つ) に復元できます。詳細については、 [スナップショットバックアップを復元する](/br/br-snapshot-guide.md#restore-cluster-snapshots)を参照してください。さらに、バックアップデータから特定のデータベースまたはテーブルを復元し、不要なデータを除外することができます。詳細については、 [バックアップデータから特定のデータベースまたはテーブルを復元する](/br/br-snapshot-guide.md#restore-a-database-or-a-table)を参照してください。
 
 -   任意の時点へのデータ復元（PITR）
 
@@ -93,7 +93,7 @@ TiDB BRは以下の機能を提供します。
 #### TiDBクラスターのパフォーマンスと影響を回復する {#restore-performance-and-impact-on-tidb-clusters}
 
 -   データの復元はスケーラブルな速度で実行されます。通常、速度は TiKV ノードあたり 1 GiB/秒です。詳細については、 [パフォーマンスとインパクトを回復](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore)をご覧ください。
--   各 TiKV ノードでは、PITR は 30 GiB/h でログ データを復元できます。詳細については、 [PITRのパフォーマンスと影響](/br/br-pitr-guide.md#performance-capabilities-of-pitr)ご覧ください。
+-   各 TiKV ノードでは、PITR は 30 GiB/h でログデータを復元できます。詳細については、 [PITRのパフォーマンスと影響](/br/br-pitr-guide.md#performance-capabilities-of-pitr)ご覧ください。
 
 ## バックアップストレージ {#backup-storage}
 
@@ -112,9 +112,9 @@ TiDBの一部の機能が有効化または無効化されている場合、バ�
 | --------------------- | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | GBK文字セット              |                                                  | v5.4.0より前のバージョンのBRは`charset=GBK`テーブルの復元をサポートしていません。また、v5.4.0より前のTiDBクラスタへの`charset=GBK`テーブルのリカバリをサポートするBRのバージョンもありません。                                                                                                                                                                                                                                                                         |
 | クラスター化インデックス          | [#565](https://github.com/pingcap/br/issues/565) | リストア時にグローバル変数`tidb_enable_clustered_index`の値がバックアップ時の値と一致していることを確認してください。一致しない場合、 `default not found`エラーやデータインデックスの不整合など、データの不整合が発生する可能性があります。                                                                                                                                                                                                                                                 |
-| 新しい照合順序               | [#352](https://github.com/pingcap/br/issues/352) | 復元中の`new_collation_enabled`テーブル内の`mysql.tidb`変数の値がバックアップ中の値と一致していることを確認してください。そうしないと、データ インデックスの不整合が発生し、チェックサムが失敗する可能性があります。詳細については、 [FAQ - BRが`new_collations_enabled_on_first_bootstrap`不一致を報告するのはなぜですか？](/faq/backup-and-restore-faq.md#why-is-new_collation_enabled-mismatch-reported-during-restore)を参照してください。                                                                             |
+| 新しい照合順序               | [#352](https://github.com/pingcap/br/issues/352) | 復元中の`new_collation_enabled`テーブル内の`mysql.tidb`変数の値がバックアップ中の値と一致していることを確認してください。そうしないと、データインデックスの不整合が発生し、チェックサムが失敗する可能性があります。詳細については、 [FAQ - BRが`new_collations_enabled_on_first_bootstrap`不一致を報告するのはなぜですか？](/faq/backup-and-restore-faq.md#why-is-new_collation_enabled-mismatch-reported-during-restore)を参照してください。                                                                             |
 | グローバル一時テーブル           |                                                  | データのバックアップと復元には、 BRのバージョン5.3.0以降を使用していることを確認してください。そうでない場合、バックアップ対象のグローバル一時テーブルの定義でエラーが発生します。                                                                                                                                                                                                                                                                                                  |
-| TiDB Lightning物理インポート |                                                  | アップストリーム データベースがTiDB Lightningの物理インポート モードを使用している場合、ログ バックアップでデータをバックアップできません。データのインポート後に完全バックアップを実行することをお勧めします。詳細については、 [上流データベースがTiDB Lightningを使用して物理インポートモードでデータをインポートすると、ログバックアップ機能が利用できなくなります。なぜでしょうか？](/faq/backup-and-restore-faq.md#when-the-upstream-database-imports-data-using-tidb-lightning-in-the-physical-import-mode-the-log-backup-feature-becomes-unavailable-why)を参照してください。 |
+| TiDB Lightning物理インポート |                                                  | アップストリーム データベースがTiDB Lightningの物理インポートモードを使用している場合、ログバックアップでデータをバックアップできません。データのインポート後に完全バックアップを実行することをお勧めします。詳細については、 [上流データベースがTiDB Lightningを使用して物理インポートモードでデータをインポートすると、ログバックアップ機能が利用できなくなります。なぜでしょうか？](/faq/backup-and-restore-faq.md#when-the-upstream-database-imports-data-using-tidb-lightning-in-the-physical-import-mode-the-log-backup-feature-becomes-unavailable-why)を参照してください。 |
 | TiCDC                 |                                                  | BR v8.2.0 以降: リストア対象のクラスターにチェンジフィードがあり、チェンジフィードの[CheckpointTS](/ticdc/ticdc-classic-architecture.md#checkpointts)が BackupTS より前の場合、 BR はリストアを実行しません。 BRバージョン v8.2.0 より前: リストア対象のクラスターにアクティブな TiCDC チェンジフィードがある場合、 BR はリストアを実行しません。                                                                                                                                                             |
 | ベクトル検索                |                                                  | データのバックアップと復元には、 BR v8.4.0 以降のバージョンを使用していることを確認してください。テーブルを で復元することは [ベクトルデータ型](/ai/reference/vector-search-data-types.md)v8.4.0 より前の TiDB クラスタではサポートされていません。                                                                                                                                                                                                                                  |
 
@@ -126,7 +126,7 @@ TiDBの一部の機能が有効化または無効化されている場合、バ�
 
 バックアップとリストアを実行する前に、 BR はTiDB クラスタのバージョンを自身のバージョンと比較し、互換性を確認します。バージョンに互換性がない場合、 BR はエラーを報告して終了します。バージョンチェックを強制的にスキップするには、 `--check-requirements=false`を設定します。バージョンチェックをスキップすると、データに互換性の問題が生じる可能性があることに注意してください。
 
-バージョン 7.0.0 以降、TiDB は SQL ステートメントによるバックアップおよびリストア操作を段階的にサポートしています。そのため、クラスタ データのバックアップおよびリストアを行う際には、TiDB クラスタと同じメジャー バージョンのBRツールを使用することを強く推奨します。また、メジャー バージョンをまたいでのデータ バックアップおよびリストア操作は避けてください。これにより、リストア操作のスムーズな実行とデータの一貫性が確保されます。バージョン 7.6.0 以降、 BR はデフォルトで一部の`mysql`システム テーブルにデータをリストアします。つまり、 `--with-sys-table`オプションはデフォルトで`true`に設定されます。異なるバージョンの TiDB クラスタにデータを復元する際に、システム テーブルのスキーマが異なるために`[BR:Restore:ErrRestoreIncompatibleSys]incompatible system table`と同様のエラーが発生した場合は、 `--with-sys-table=false`を設定してシステム テーブルの復元をスキップし、このエラーを回避できます。
+バージョン 7.0.0 以降、TiDB は SQL ステートメントによるバックアップおよびリストア操作を段階的にサポートしています。そのため、クラスタデータのバックアップおよびリストアを行う際には、TiDB クラスタと同じメジャーバージョンのBRツールを使用することを強く推奨します。また、メジャーバージョンをまたいでのデータバックアップおよびリストア操作は避けてください。これにより、リストア操作のスムーズな実行とデータの一貫性が確保されます。バージョン 7.6.0 以降、 BR はデフォルトで一部の`mysql`システムテーブルにデータをリストアします。つまり、 `--with-sys-table`オプションはデフォルトで`true`に設定されます。異なるバージョンの TiDB クラスタにデータを復元する際に、システムテーブルのスキーマが異なるために`[BR:Restore:ErrRestoreIncompatibleSys]incompatible system table`と同様のエラーが発生した場合は、 `--with-sys-table=false`を設定してシステムテーブルの復元をスキップし、このエラーを回避できます。
 
 #### TiDB v6.6.0より前のBRバージョン互換性マトリックス {#br-version-compatibility-matrix-before-tidb-v660}
 
@@ -134,7 +134,7 @@ TiDB v6.6.0より前のBRの互換性情報は以下のとおりです。
 
 | バックアップバージョン（縦軸）／復元バージョン（横軸）                            | TiDB v6.0に復元する                                                                                                       | TiDB v6.1に復元する | TiDB v6.2に復元する | TiDB v6.3、v6.4、またはv6.5に復元してください。 | TiDB v6.6に復元する           |
 | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- | -------------- | -------------- | -------------------------------- | ------------------------ |
-| TiDB v6.0、v6.1、v6.2、v6.3、v6.4、または v6.5 スナップショット バックアップ | 互換性あり（既知の問題[#36379](https://github.com/pingcap/tidb/issues/36379) ：バックアップデータに空のスキーマが含まれている場合、 BR がエラーを報告する可能性があります。） | 互換性がある         | 互換性がある         | 互換性がある                           | 互換性あり（BRはv6.6である必要があります） |
+| TiDB v6.0、v6.1、v6.2、v6.3、v6.4、または v6.5 スナップショットバックアップ | 互換性あり（既知の問題[#36379](https://github.com/pingcap/tidb/issues/36379) ：バックアップデータに空のスキーマが含まれている場合、 BR がエラーを報告する可能性があります。） | 互換性がある         | 互換性がある         | 互換性がある                           | 互換性あり（BRはv6.6である必要があります） |
 | TiDB v6.3、v6.4、v6.5、またはv6.6のログバックアップ                   | 互換性がない                                                                                                               | 互換性がない         | 互換性がない         | 互換性がある                           | 互換性がある                   |
 
 #### TiDB v6.5.0とv8.5.0間のBRバージョン互換性マトリックス {#br-version-compatibility-matrix-between-tidb-v650-and-v850}
@@ -169,7 +169,7 @@ TiDB v6.6.0より前のBRの互換性情報は以下のとおりです。
 > **Note:**
 >
 > -   システムテーブル以外のデータのみがバックアップされる場合（フルバックアップまたはログバックアップ）、すべてのバージョンは互換性があります。
-> -   `mysql`システム テーブルの復元が互換性のないシナリオでは、 `--with-sys-table=false`を設定してすべてのシステム テーブルの復元をスキップするか、より細かいフィルターを使用して互換性のないシステム テーブルのみをスキップすることで問題を解決できます。たとえば、 `--filter '*.*' --filter "__TiDB_BR_Temporary_*.*" --filter '!mysql.*' --filter 'mysql.bind_info' --filter 'mysql.user' --filter 'mysql.global_priv' --filter 'mysql.global_grants' --filter 'mysql.default_roles' --filter 'mysql.role_edges' --filter '!sys.*' --filter '!INFORMATION_SCHEMA.*' --filter '!PERFORMANCE_SCHEMA.*' --filter '!METRICS_SCHEMA.*' --filter '!INSPECTION_SCHEMA.*'`などです。
+> -   `mysql`システムテーブルの復元が互換性のないシナリオでは、 `--with-sys-table=false`を設定してすべてのシステムテーブルの復元をスキップするか、より細かいフィルターを使用して互換性のないシステムテーブルのみをスキップすることで問題を解決できます。たとえば、 `--filter '*.*' --filter "__TiDB_BR_Temporary_*.*" --filter '!mysql.*' --filter 'mysql.bind_info' --filter 'mysql.user' --filter 'mysql.global_priv' --filter 'mysql.global_grants' --filter 'mysql.default_roles' --filter 'mysql.role_edges' --filter '!sys.*' --filter '!INFORMATION_SCHEMA.*' --filter '!PERFORMANCE_SCHEMA.*' --filter '!METRICS_SCHEMA.*' --filter '!INSPECTION_SCHEMA.*'`などです。
 > -   `-`該当するシナリオに互換性の制限がないことを意味します。
 
 ## 関連項目 {#see-also}

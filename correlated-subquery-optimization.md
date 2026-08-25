@@ -48,7 +48,7 @@ explain select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.
 
 上記は最適化が効いた例です。 `HashJoin_11`通常の`inner join`です。
 
-次に、 `NO_DECORRELATE`オプティマイザ ヒントを使用して、サブクエリの非相関化を実行しないようにオプティマイザに指示できます。
+次に、 `NO_DECORRELATE`オプティマイザヒントを使用して、サブクエリの非相関化を実行しないようにオプティマイザに指示できます。
 
 ```sql
 explain select * from t1 where t1.a < (select /*+ NO_DECORRELATE() */ sum(t2.a) from t2 where t2.b = t1.b);

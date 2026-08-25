@@ -48,7 +48,7 @@ TiDBには`test`という名前のデフォルトデータベースが付属し�
 
 #### 専門索引 {#specialized-indexes}
 
-さまざまなユーザー シナリオのクエリ パフォーマンスを向上させるために、TiDB はいくつかの特殊なタイプのインデックスを提供します。各タイプの詳細については、[インデックスと制約](/basic-features.md#indexing-and-constraints)を参照してください。
+さまざまなユーザーシナリオのクエリパフォーマンスを向上させるために、TiDB はいくつかの特殊なタイプのインデックスを提供します。各タイプの詳細については、[インデックスと制約](/basic-features.md#indexing-and-constraints)を参照してください。
 
 ### その他のサポートされている論理オブジェクト {#other-supported-logical-objects}
 
@@ -60,7 +60,7 @@ TiDBは、**テーブル**と同じレベルで以下の論理オブジェクト
 
 ## アクセス制御 {#access-control}
 
-TiDB は、ユーザーベースとロールベースの両方のアクセス制御をサポートします。ユーザーがデータ オブジェクトおよびデータ スキーマを表示、変更、または削除できるようにするには、[ユーザー](/user-account-management.md)に直接[権限](/privilege-management.md)付与するか、[役割](/role-based-access-control.md)を通じて[権限](/privilege-management.md)ユーザーに付与します。
+TiDB は、ユーザーベースとロールベースの両方のアクセス制御をサポートします。ユーザーがデータオブジェクトおよびデータ スキーマを表示、変更、または削除できるようにするには、[ユーザー](/user-account-management.md)に直接[権限](/privilege-management.md)付与するか、[役割](/role-based-access-control.md)を通じて[権限](/privilege-management.md)ユーザーに付与します。
 
 ## データベーススキーマの変更 {#database-schema-changes}
 

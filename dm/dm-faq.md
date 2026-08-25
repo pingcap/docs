@@ -11,11 +11,11 @@ summary: TiDB Data Migration (DM) に関するよくある質問 (FAQ) につい
 
 現在、DMはMySQLまたはMariaDBの標準バージョンのbinlogのデコードのみをサポートしています。Alibaba Cloud RDSやその他のクラウドデータベースではテストされていません。binlogが標準形式であることが確認できれば、サポートされます。
 
-Alibaba Cloud RDS の主キーのないアップストリーム テーブルの場合、そのbinlogに非表示の主キー列が含まれたままになり、元のテーブル構造と一致しないという既知の問題があります。
+Alibaba Cloud RDS の主キーのないアップストリームテーブルの場合、そのbinlogに非表示の主キー列が含まれたままになり、元のテーブル構造と一致しないという既知の問題があります。
 
 互換性に関する既知の問題は次のとおりです。
 
--   **Alibaba Cloud RDS**では、主キーのないアップストリーム テーブルの場合、そのbinlog には非表示の主キー列がまだ含まれており、元のテーブル構造と一致していません。
+-   **Alibaba Cloud RDS**では、主キーのないアップストリームテーブルの場合、そのbinlog には非表示の主キー列がまだ含まれており、元のテーブル構造と一致していません。
 -   **HUAWEI Cloud RDS**では、 binlogファイルの直接読み取りはサポートされていません。詳細については、 [HUAWEI Cloud RDS はBinlogバックアップファイルを直接読み取ることができますか?](https://support.huaweicloud.com/en-us/rds_faq/rds_faq_0210.html)を参照してください。
 
 ## タスク構成のブロックおよび許可リストの正規表現は`non-capturing (?!)`をサポートしていますか? {#does-the-regular-expression-of-the-block-and-allow-list-in-the-task-configuration-support-non-capturing-}
@@ -141,7 +141,7 @@ DM v2.0 以降、増分データレプリケーションを続行するために
 
 このエラーをさらに分析するには、エラーメッセージとログファイルを確認してください。原因としては、権限不足のためにダンプユニットが正しいメタデータファイルを生成していないことが考えられます。
 
-## シャーディングされたスキーマとテーブルを複製するときに DM が致命的なエラーを報告しないのに、ダウンストリーム データが失われるのはなぜですか? {#why-does-dm-report-no-fatal-error-when-replicating-sharded-schemas-and-tables-but-downstream-data-is-lost}
+## シャーディングされたスキーマとテーブルを複製するときに DM が致命的なエラーを報告しないのに、ダウンストリームデータが失われるのはなぜですか? {#why-does-dm-report-no-fatal-error-when-replicating-sharded-schemas-and-tables-but-downstream-data-is-lost}
 
 構成項目`block-allow-list`と`table-route`を確認します。
 
@@ -152,7 +152,7 @@ DM v2.0 以降、増分データレプリケーションを続行するために
 
 DM 1.0では、監視データを生成するには`enable-heartbeat`を有効にする必要があります。DM 2.0以降のバージョンでは、この機能はサポートされていないため、監視メトリック`replicate lag`にはデータが存在しないことが想定されます。
 
-## DM がタスクを開始しているときに、 `context deadline exceeded`を示すエラー メッセージの`RawCause`で`fail to initial unit Sync of subtask`エラーを処理する方法を教えてください。 {#how-to-handle-the-error-fail-to-initial-unit-sync-of-subtask-when-dm-is-starting-a-task-with-the-rawcause-in-the-error-message-showing-context-deadline-exceeded}
+## DM がタスクを開始しているときに、 `context deadline exceeded`を示すエラーメッセージの`RawCause`で`fail to initial unit Sync of subtask`エラーを処理する方法を教えてください。 {#how-to-handle-the-error-fail-to-initial-unit-sync-of-subtask-when-dm-is-starting-a-task-with-the-rawcause-in-the-error-message-showing-context-deadline-exceeded}
 
 これはDM 2.0.0バージョンの既知の問題であり、DM 2.0.1バージョンで修正される予定です。レプリケーションタスクで処理するテーブル数が多い場合に発生する可能性があります。TiUPを使用してDMをデプロイしている場合は、DMをナイトリーバージョンにアップグレードすることでこの問題を修正できます。または、GitHubの[DMのリリースページ](https://github.com/pingcap/tiflow/releases)から2.0.0-hotfixバージョンをダウンロードし、実行ファイルを手動で置き換えることもできます。
 
@@ -160,7 +160,7 @@ DM 1.0では、監視データを生成するには`enable-heartbeat`を有効�
 
 まず、以下の点を確認して確認する必要があります。
 
--   レプリケーション タスクで`disable-detect`が構成されていません (v2.0.7 以前のバージョン)。
+-   レプリケーションタスクで`disable-detect`が構成されていません (v2.0.7 以前のバージョン)。
 -   データは手動でも他のレプリケーション プログラムによっても挿入されません。
 -   このテーブルに関連付けられた DML フィルターは構成されていません。
 
@@ -173,17 +173,17 @@ curl -X POST -d "tidb_general_log=1" http://{TiDBIP}:10080/settings
 curl -X POST -d "tidb_general_log=0" http://{TiDBIP}:10080/settings
 ```
 
-`duplicate entry`エラーが発生した場合は、競合データを含むレコードのログ ファイルを確認する必要があります。
+`duplicate entry`エラーが発生した場合は、競合データを含むレコードのログファイルを確認する必要があります。
 
 ## 一部の監視パネルに`No data point`と表示されるのはなぜですか? {#why-do-some-monitoring-panels-show-no-data-point}
 
-一部のパネルにデータが表示されないのは正常です。例えば、エラーが報告されていない場合、DDLロックがない場合、またはリレーログ機能が有効になっていない場合、対応するパネルには`No data point`が表示されます。各パネルの詳細については、 [DM モニタリング メトリック](/dm/monitor-a-dm-cluster.md)を参照してください。
+一部のパネルにデータが表示されないのは正常です。例えば、エラーが報告されていない場合、DDLロックがない場合、またはリレーログ機能が有効になっていない場合、対応するパネルには`No data point`が表示されます。各パネルの詳細については、 [DM モニタリングメトリック](/dm/monitor-a-dm-cluster.md)を参照してください。
 
 ## DM v1.0 では、タスクにエラーがある場合にコマンド`sql-skip`一部のステートメントをスキップできないのはなぜですか? {#in-dm-v10-why-does-the-command-sql-skip-fail-to-skip-some-statements-when-the-task-is-in-error}
 
 まず、 `sql-skip`を実行した後もbinlogの位置が進んでいるかどうかを確認する必要があります。進んでいる場合は、 `sql-skip`が有効になっていることを意味します。このエラーが繰り返し発生する理由は、アップストリームがサポートされていない複数の DDL 文を送信しているためです。`sql-skip -s <sql-pattern>`を使用して、これらの文に一致するパターンを設定できます。
 
-場合によっては、エラー メッセージに`parse statement`情報が含まれます。次に例を示します。
+場合によっては、エラーメッセージに`parse statement`情報が含まれます。次に例を示します。
 
 ```
 if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to ignore it.\n\t : parse statement: line 1 column 11 near \"EVENT `event_del_big_table` \r\nDISABLE\" %!!(MISSING)(EXTRA string=ALTER EVENT `event_del_big_table` \r\nDISABLE
@@ -199,7 +199,7 @@ DM v6.0以降、 `sql-skip`と`handle-error`が`binlog`に置き換えられま�
 
 DM-worker のログファイルを確認し、 `change count`を含む行を探してください。その行の`new count`が0 でない場合、セーフモードが有効になっています。セーフモードが有効になっている理由を確認するには、セーフモードがいつ発生するか、またそれ以前にエラーが報告されているかどうかを確認してください。
 
-## DM v2.0 では、タスク中に DM が再起動すると、完全インポート タスクが失敗するのはなぜですか? {#in-dm-v20-why-does-the-full-import-task-fail-if-dm-restarts-during-the-task}
+## DM v2.0 では、タスク中に DM が再起動すると、完全インポートタスクが失敗するのはなぜですか? {#in-dm-v20-why-does-the-full-import-task-fail-if-dm-restarts-during-the-task}
 
 DM v2.0.1 以前のバージョンでは、完全インポートが完了する前に DM が再起動すると、上流のデータソースと DM ワーカーノード間のバインディングが変更される可能性があります。例えば、ダンプユニットの中間データが DM ワーカーノード A にあるにもかかわらず、ロードユニットが DM ワーカーノード B で実行されている場合、操作が失敗する可能性があります。
 
@@ -207,31 +207,31 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
 
 -   データ量が少ない (1 TB 未満) 場合、またはタスクがシャーディングされたテーブルをマージする場合は、次の手順を実行します。
 
-    1.  ダウンストリーム データベースにインポートされたデータをクリーンアップします。
+    1.  ダウンストリームデータベースにインポートされたデータをクリーンアップします。
     2.  エクスポートされたデータのディレクトリ内のすべてのファイルを削除します。
     3.  dmctl を使用してタスクを削除し、コマンド`start-task --remove-meta`を実行して新しいタスクを作成します。
 
-    新しいタスクが開始したら、冗長な DM ワーカー ノードが存在しないことを確認し、完全インポート中に DM クラスターの再起動やアップグレードを行わないようにすることをお勧めします。
+    新しいタスクが開始したら、冗長な DM ワーカーノードが存在しないことを確認し、完全インポート中に DM クラスターの再起動やアップグレードを行わないようにすることをお勧めします。
 
 -   データ量が大きい場合 (1 TB を超える場合) は、次の手順を実行します。
 
-    1.  ダウンストリーム データベースにインポートされたデータをクリーンアップします。
+    1.  ダウンストリームデータベースにインポートされたデータをクリーンアップします。
     2.  データを処理する DM ワーカーノードに TiDB-Lightningをデプロイします。
-    3.  DM ダンプ ユニットがエクスポートするデータをインポートするには、TiDB-Lightning のローカル バックエンド モードを使用します。
+    3.  DM ダンプユニットがエクスポートするデータをインポートするには、TiDB-Lightning のローカルバックエンド モードを使用します。
     4.  完全インポートが完了したら、次の方法でタスク構成ファイルを編集し、タスクを再起動します。
         -   `task-mode`を`incremental`に変更します。
         -   ダンプユニットが出力するメタデータファイルに記録されている位置に値`mysql-instance.meta.pos`を設定します。
 
 ## 増分タスク中に再起動すると、DM がエラー`ERROR 1236 (HY000): The slave is connecting using CHANGE MASTER TO MASTER_AUTO_POSITION = 1, but the master has purged binary logs containing GTIDs that the slave requires.`はなぜですか? {#why-does-dm-report-the-error-error-1236-hy000-the-slave-is-connecting-using-change-master-to-master_auto_position--1-but-the-master-has-purged-binary-logs-containing-gtids-that-the-slave-requires-if-it-restarts-during-an-incremental-task}
 
-このエラーは、ダンプ ユニットによって出力されたメタデータ ファイルに記録されたアップストリームbinlogの位置が、完全な移行中に消去されたことを示します。
+このエラーは、ダンプユニットによって出力されたメタデータファイルに記録されたアップストリームbinlogの位置が、完全な移行中に消去されたことを示します。
 
-この問題が発生した場合は、タスクを一時停止し、ダウンストリーム データベースに移行されたすべてのデータを削除して、 `--remove-meta`オプションで新しいタスクを開始する必要があります。
+この問題が発生した場合は、タスクを一時停止し、ダウンストリームデータベースに移行されたすべてのデータを削除して、 `--remove-meta`オプションで新しいタスクを開始する必要があります。
 
 次の方法で設定することで、この問題を事前に回避できます。
 
 1.  移行タスクが完了する前に必要なbinlogファイルが誤って削除されるのを防ぐため、上流のMySQLデータベースの値を`expire_logs_days`に増やしてください。データ量が多い場合は、タスクを高速化するために、DumplingとTiDB Lightningを同時に使用することをお勧めします。
-2.  このタスクのリレー ログ機能を有効にすると、binlogの位置が消去されていても DM がリレー ログからデータを読み取ることができます。
+2.  このタスクのリレーログ機能を有効にすると、binlogの位置が消去されていても DM がリレーログからデータを読み取ることができます。
 
 ## クラスターがTiUP v1.3.0 または v1.3.1 を使用してデプロイされている場合、DM クラスターの Grafana ダッシュボードに`failed to fetch dashboard`と表示されるのはなぜですか? {#why-does-the-grafana-dashboard-of-a-dm-cluster-display-failed-to-fetch-dashboard-if-the-cluster-is-deployed-using-tiup-v130-or-v131}
 
@@ -331,26 +331,26 @@ query-status test
 この例では、データソース`mysql1`の`syncerBinlogGtid`が連続していません。この場合、データ損失に対処するには、次のいずれかの方法を実行できます。
 
 -   現在の時刻から完全エクスポート タスクのメタデータに記録された位置までのアップストリーム バイナリ ログが消去されていない場合は、次の手順を実行できます。
-    1.  現在のタスクを停止し、連続しない GTID を持つすべてのデータ ソースを削除します。
+    1.  現在のタスクを停止し、連続しない GTID を持つすべてのデータソースを削除します。
     2.  すべてのソース構成ファイルで`enable-relay`を`false`に設定します。
-    3.  連続しない GTID を持つデータ ソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポート タスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成します。
+    3.  連続しない GTID を持つデータソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポート タスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成します。
     4.  増分タスクの`task.yaml`に`syncers.safe-mode`を`true`に設定し、タスクを再開します。
     5.  増分タスクがすべての欠落データをダウンストリームに複製した後、タスクを停止し、 `task.yaml`の`safe-mode`を`false`に変更します。
     6.  タスクを再度開始します。
--   アップストリーム バイナリ ログが消去されたが、ローカル リレー ログが残っている場合は、次の手順を実行できます。
+-   アップストリーム バイナリ ログが消去されたが、ローカルリレーログが残っている場合は、次の手順を実行できます。
     1.  現在のタスクを停止します。
-    2.  連続しない GTID を持つデータ ソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポート タスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成します。
+    2.  連続しない GTID を持つデータソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポート タスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成します。
     3.  増分タスクの`task.yaml`で、 `binlog-gtid`の前の値を`previous_gtids`の前の値に変更します。上記の例では、 `1-y`を`6-y`に変更します。
     4.  `task.yaml`の`syncers.safe-mode`を`true`に設定し、タスクを再開します。
     5.  増分タスクがすべての欠落データをダウンストリームに複製した後、タスクを停止し、 `task.yaml`の`safe-mode`を`false`に変更します。
     6.  タスクを再度開始します。
-    7.  データ ソースを再起動し、ソース構成ファイルで`enable-relay`または`enable-gtid`を`false`に設定します。
+    7.  データソースを再起動し、ソース構成ファイルで`enable-relay`または`enable-gtid`を`false`に設定します。
 -   上記の条件がいずれも満たされていない場合、またはタスクのデータ量が少ない場合は、次の手順を実行できます。
-    1.  ダウンストリーム データベースにインポートされたデータをクリーンアップします。
-    2.  データ ソースを再起動し、ソース構成ファイルで`enable-relay`または`enable-gtid`を`false`に設定します。
+    1.  ダウンストリームデータベースにインポートされたデータをクリーンアップします。
+    2.  データソースを再起動し、ソース構成ファイルで`enable-relay`または`enable-gtid`を`false`に設定します。
     3.  新しいタスクを作成し、コマンド`start-task task.yaml --remove-meta`を実行して、データを最初から再度移行します。
 
-上記の 1 番目と 2 番目のソリューションで正常にレプリケートできるデータ ソース (上記の例の`mysql2`など) の場合は、増分タスクを設定するときに、 `subTaskStatus.sync`の`syncerBinlog`と`syncerBinlogGtid`情報を使用して関連する`mysql-instances.meta`を構成します。
+上記の 1 番目と 2 番目のソリューションで正常にレプリケートできるデータソース (上記の例の`mysql2`など) の場合は、増分タスクを設定するときに、 `subTaskStatus.sync`の`syncerBinlog`と`syncerBinlogGtid`情報を使用して関連する`mysql-instances.meta`を構成します。
 
 ## DM v2.0 では、 `heartbeat`機能が有効になっている仮想 IP 環境で DM ワーカーと MySQL インスタンス間の接続を切り替えるときに、「ハートビート構成が以前使用したものと異なります: serverID が等しくありません」というエラーをどのように処理すればよいですか? {#in-dm-v20-how-do-i-handle-the-error-heartbeat-config-is-different-from-previous-used-serverid-not-equal-when-switching-the-connection-between-dm-workers-and-mysql-instances-in-a-virtual-ip-environment-with-the-heartbeat-feature-enabled}
 
@@ -382,8 +382,8 @@ flush local meta, Rawcause: open relay-dir/xxx.000001/relay.metayyyy: no such fi
 
 上記のエラーは次の場合に発生する可能性があります。
 
--   DM は v2.0.1 以前から v2.0.2 - v2.0.6 にアップグレードされており、アップグレード前にリレー ログが開始され、アップグレード後に再起動されます。
--   stop-relay コマンドを実行してリレー ログを一時停止してから再開します。
+-   DM は v2.0.1 以前から v2.0.2 - v2.0.6 にアップグレードされており、アップグレード前にリレーログが開始され、アップグレード後に再起動されます。
+-   stop-relay コマンドを実行してリレーログを一時停止してから再開します。
 
 次のオプションによりこのエラーを回避できます。
 

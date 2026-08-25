@@ -5,7 +5,7 @@ summary: ticloud serverless audit-log filter-rule list` のリファレンス。
 
 # ticloud serverless audit-log filter-rule list {#ticloud-serverless-audit-log-filter-rule-list}
 
-TiDB Cloud Essential クラスターの監査ログ フィルター ルールを一覧表示します。
+TiDB Cloud Essential クラスターの監査ログフィルタールールを一覧表示します。
 
 ```shell
 ticloud serverless audit-log filter-rule list [flags]
@@ -13,19 +13,19 @@ ticloud serverless audit-log filter-rule list [flags]
 
 ## 例 {#examples}
 
-対話モードですべての監査ログ フィルタ ルールを一覧表示します。
+対話モードですべての監査ログフィルタルールを一覧表示します。
 
 ```shell
 ticloud serverless audit-log filter-rule list
 ```
 
-非対話型モードですべての監査ログ フィルタ ルールを一覧表示します。
+非対話型モードですべての監査ログフィルタルールを一覧表示します。
 
 ```shell
 ticloud serverless audit-log filter-rule list -c <cluster-id>
 ```
 
-非対話型モードで JSON 形式のすべての監査ログ フィルター ルールを一覧表示します。
+非対話型モードで JSON 形式のすべての監査ログフィルタールールを一覧表示します。
 
 ```shell
 ticloud serverless audit-log filter-rule list -c <cluster-id> -o json
@@ -36,16 +36,16 @@ ticloud serverless audit-log filter-rule list -c <cluster-id> -o json
 | フラグ                  | 説明                                                                        | 必須  | 注記                                   |
 | -------------------- | ------------------------------------------------------------------------- | --- | ------------------------------------ |
 | -c, --cluster-id 文字列 | クラスターの ID。                                                                | いいえ | 非対話型モードでのみ動作します。                     |
-| -o, --output          | 出力形式を指定します。有効な値は`human` （デフォルト）または`json`です。完全な結果を得るには、 `json`形式を使用してください。 | いいえ | インタラクティブ モードと非インタラクティブ モードの両方で動作します。 |
-| -h, --help           | このコマンドのヘルプ情報を表示します。                                                       | いいえ | インタラクティブ モードと非インタラクティブ モードの両方で動作します。 |
+| -o, --output          | 出力形式を指定します。有効な値は`human` （デフォルト）または`json`です。完全な結果を得るには、 `json`形式を使用してください。 | いいえ | インタラクティブモードと非インタラクティブモードの両方で動作します。 |
+| -h, --help           | このコマンドのヘルプ情報を表示します。                                                       | いいえ | インタラクティブモードと非インタラクティブモードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}
 
 | フラグ               | 説明                        | 必須  | 注記                                   |
 | ----------------- | ------------------------- | --- | ------------------------------------ |
-| -D, --debug       | デバッグ モードを有効にします。          | いいえ | インタラクティブ モードと非インタラクティブ モードの両方で動作します。 |
+| -D, --debug       | デバッグ モードを有効にします。          | いいえ | インタラクティブモードと非インタラクティブモードの両方で動作します。 |
 | --no-color             | カラー出力を無効にします。             | いいえ | 非対話型モードでのみ動作します。                     |
-| -P, --profile 文字列 | 構成ファイルから使用するプロファイルを指定します。 | いいえ | インタラクティブ モードと非インタラクティブ モードの両方で動作します。 |
+| -P, --profile 文字列 | 構成ファイルから使用するプロファイルを指定します。 | いいえ | インタラクティブモードと非インタラクティブモードの両方で動作します。 |
 
 ## フィードバック {#feedback}
 

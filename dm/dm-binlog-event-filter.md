@@ -1,6 +1,6 @@
 ---
 title: TiDB Data Migration Binlog Event Filter
-summary: DM のbinlogイベント フィルター機能の使用方法を学習します。
+summary: DM のbinlogイベントフィルター機能の使用方法を学習します。
 ---
 
 # TiDB データ移行Binlogイベントフィルター {#tidb-data-migration-binlog-event-filter}

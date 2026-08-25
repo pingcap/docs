@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.4 Release Notes
-summary: TiDB 5.4 では、GBK 文字セット、インデックス マージ、古いデータの読み取り、統計構成の永続化、および TiKV のログストレージエンジンとしてのRaft Engine の使用がサポートされます。また、バックアップの影響が改善され、Azure Blobストレージがサポートされ、 TiFlashと MPP エンジンが強化されます。互換性の変更には、新しいシステム変数と構成ファイル パラメーターが含まれます。その他の改善点には、SQL、セキュリティ、パフォーマンス、安定性、高可用性、データ移行、診断効率、およびデプロイメントが含まれます。バグ修正では、TiDB、TiKV、PD、 TiFlash、 BR、TiCDC、DM、 TiDB Lightning、および TiDB Binlogの問題に対処します。
+summary: TiDB 5.4 では、GBK 文字セット、インデックスマージ、古いデータの読み取り、統計構成の永続化、および TiKV のログストレージエンジンとしてのRaft Engine の使用がサポートされます。また、バックアップの影響が改善され、Azure Blobストレージがサポートされ、 TiFlashと MPP エンジンが強化されます。互換性の変更には、新しいシステム変数と構成ファイル パラメーターが含まれます。その他の改善点には、SQL、セキュリティ、パフォーマンス、安定性、高可用性、データ移行、診断効率、およびデプロイメントが含まれます。バグ修正では、TiDB、TiKV、PD、 TiFlash、 BR、TiCDC、DM、 TiDB Lightning、および TiDB Binlogの問題に対処します。
 ---
 
 # TiDB 5.4 リリースノート {#tidb-5-4-release-notes}
@@ -42,13 +42,13 @@ TiDB バージョン: 5.4.0
 | TiKV           | [`snap-generator-pool-size`](/tikv-configuration-file.md#snap-generator-pool-size-new-in-v540)                  | 新しく追加された | `snap-generator`スレッドプールのサイズ。デフォルト値は`2`です。                                                                                                                                                                                                                                                                             |
 | TiKV           | `log.file.max-size` 、 `log.file.max-days` 、 `log.file.max-backups`                                              | 新しく追加された | 詳細については、 [TiKVコンフィグレーションファイル - `log.file`](/tikv-configuration-file.md#logfile-new-in-v540)を参照してください。                                                                                                                                                                                                                 |
 | TiKV           | `raft-engine`                                                                                                   | 新しく追加された | `enable` 、 `dir` 、 `batch-compression-threshold` 、 `bytes-per-sync` 、 `target-file-size` 、 `purge-threshold` 、 `recovery-mode` 、 `recovery-read-block-size` 、 `recovery-read-block-size` 、および`recovery-threads`含まれます。詳細は、 [TiKVコンフィグレーションファイル - `raft-engine`](/tikv-configuration-file.md#raft-engine)を参照してください。     |
-| TiKV           | [`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)                           | 新しく追加された | v5.3.0 では、デフォルト値は`false`です。v5.4.0 以降では、デフォルト値は`true`に変更されました。このパラメータは、クラスタのリソース使用率が高い場合に、バックアップ タスクで使用されるリソースを制限してクラスタへの影響を軽減するかどうかを制御します。デフォルト設定では、バックアップ タスクの速度が低下する可能性があります。                                                                                                                                       |
+| TiKV           | [`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)                           | 新しく追加された | v5.3.0 では、デフォルト値は`false`です。v5.4.0 以降では、デフォルト値は`true`に変更されました。このパラメータは、クラスタのリソース使用率が高い場合に、バックアップタスクで使用されるリソースを制限してクラスタへの影響を軽減するかどうかを制御します。デフォルト設定では、バックアップタスクの速度が低下する可能性があります。                                                                                                                                       |
 | TiKV           | `log-level` 、 `log-format` 、 `log-file` 、 `log-rotation-size`                                                   | 変更     | TiKV ログ パラメータの名前は、TiDB ログ パラメータと互換性のある名前`log.level` 、 `log.format` 、 `log.file.filename` 、および`log.enable-timestamp` 。古いパラメータのみを設定し、その値をデフォルト値以外に設定した場合、古いパラメータは新しいパラメータと互換性があります。古いパラメータと新しいパラメータの両方を設定した場合、新しいパラメータが有効になります。詳細については、[TiKVコンフィグレーションファイル - ログ](/tikv-configuration-file.md#log-new-in-v540)を参照してください。 |
 | TiKV           | `log-rotation-timespan`                                                                                         | 削除済み     | ログファイルのローテーション間隔。この間隔が経過すると、ログファイルがローテーションされます。これは、現在のログファイルのファイル名にタイムスタンプが追加され、新しいログファイルが作成されることを意味します。                                                                                                                                                                                                              |
 | TiKV           | `allow-remove-leader`                                                                                           | 削除済み     | メインスイッチの削除を許可するかどうかを決定します。                                                                                                                                                                                                                                                                                            |
 | TiKV           | `raft-msg-flush-interval`                                                                                       | 削除済み     | Raftメッセージがバッチで送信される間隔を決定します。Raftメッセージは、この設定項目で指定された間隔ごとにバッチで送信されます。                                                                                                                                                                                                                                                   |
 | PD             | [`log.level`](/pd-configuration-file.md#level)                                                                  | 変更     | デフォルト値が「INFO」から「info」に変更され、大文字と小文字を区別しないことが保証されます。                                                                                                                                                                                                                                                                    |
-| TiFlash        | [`profile.default.enable_elastic_threadpool`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | 新しく追加された | エラスティック スレッド プール機能を有効にするか無効にするかを決定します。この設定項目を有効にすると、高並行処理シナリオでのTiFlash CPU 使用率が大幅に向上します。デフォルト値は`false`です。                                                                                                                                                                                                             |
+| TiFlash        | [`profile.default.enable_elastic_threadpool`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | 新しく追加された | エラスティックスレッドプール機能を有効にするか無効にするかを決定します。この設定項目を有効にすると、高並行処理シナリオでのTiFlash CPU 使用率が大幅に向上します。デフォルト値は`false`です。                                                                                                                                                                                                             |
 | TiFlash        | [`storage.format_version`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                    | 新しく追加された | DTFile のバージョンを指定します。デフォルト値は`2`で、このバージョンではハッシュがデータファイルに埋め込まれます。値を`3`に設定することもできます。 `3`の場合、データファイルにはメタデータとトークンデータのチェックサムが含まれ、複数のハッシュアルゴリズムがサポートされます。                                                                                                                                                                     |
 | TiFlash        | [`logger.count`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                              | 変更     | デフォルト値は`10`に変更されます。                                                                                                                                                                                                                                                                                                   |
 | TiFlash        | [`status.metrics_port`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                       | 変更     | デフォルト値は`8234`に変更されます。                                                                                                                                                                                                                                                                                                 |
@@ -151,7 +151,7 @@ TiDB バージョン: 5.4.0
 
     バージョン5.4.0では、インデックスマージが一般提供開始（GA）となりました。ただし、以下の制限事項には引き続き注意が必要です。
 
-    -   インデックス マージは、選言正規形 (X <sub>1</sub> ⋁ X <sub>2</sub> ⋁ …X <sub>n</sub> ) のみをサポートします。つまり、この機能は`WHERE`句のフィルタリング条件が`OR`で接続されている場合にのみ機能します。
+    -   インデックスマージは、選言正規形 (X <sub>1</sub> ⋁ X <sub>2</sub> ⋁ …X <sub>n</sub> ) のみをサポートします。つまり、この機能は`WHERE`句のフィルタリング条件が`OR`で接続されている場合にのみ機能します。
 
     -   新規にデプロイされたv5.4.0以降のTiDBクラスタでは、この機能はデフォルトで有効になっています。以前のバージョンからアップグレードされたv5.4.0以降のTiDBクラスタでは、この機能はアップグレード前の設定を継承し、必要に応じて設定を変更できます（v4.0より前のTiDBクラスタでは、この機能は存在せず、デフォルトで無効になっています）。
 
@@ -171,7 +171,7 @@ TiDB バージョン: 5.4.0
 
     バージョン5.4.0以降では、 [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)システム変数の値を`ON`に設定することで、TiDBが`PREDICATE COLUMNS`を収集できるようになります。
 
-    設定後、TiDB は`PREDICATE COLUMNS`情報を 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease)ごとに`mysql.column_stats_usage`システム テーブルに書き込みます。ビジネスのクエリ パターンが安定している場合は、 `ANALYZE TABLE TableName PREDICATE COLUMNS`構文を使用して`PREDICATE COLUMNS`列のみの統計情報を収集することで、統計情報の収集オーバーヘッドを大幅に削減できます。
+    設定後、TiDB は`PREDICATE COLUMNS`情報を 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease)ごとに`mysql.column_stats_usage`システムテーブルに書き込みます。ビジネスのクエリパターンが安定している場合は、 `ANALYZE TABLE TableName PREDICATE COLUMNS`構文を使用して`PREDICATE COLUMNS`列のみの統計情報を収集することで、統計情報の収集オーバーヘッドを大幅に削減できます。
 
     [ユーザー向けドキュメント](/statistics.md#collect-statistics-on-some-columns)
 
@@ -248,7 +248,7 @@ TiDB バージョン: 5.4.0
 
     [ユーザー向けドキュメント](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)
 
--   **DM の`transfer source`を最適化して、レプリケーション タスクをスムーズに実行できるようにします。**
+-   **DM の`transfer source`を最適化して、レプリケーションタスクをスムーズに実行できるようにします。**
 
     DMワーカーノードの負荷が不均衡な場合、 `transfer source`コマンドを使用して、 `source`の構成を別の負荷に手動で転送できます。最適化後、 `transfer source`コマンドを使用すると、手動操作が簡素化されます。DMは他の操作を内部的に完了するため、関連するすべてのタスクを一時停止することなく、ソースをスムーズに転送できます。
 
@@ -292,7 +292,7 @@ TiDB バージョン: 5.4.0
 
 -   TiDB
 
-    -   キャッシュされたクエリ プランをクリアするための`ADMIN {SESSION | INSTANCE | GLOBAL} PLAN_CACHE`構文をサポート [#30370](https://github.com/pingcap/tidb/pull/30370)
+    -   キャッシュされたクエリプランをクリアするための`ADMIN {SESSION | INSTANCE | GLOBAL} PLAN_CACHE`構文をサポート [#30370](https://github.com/pingcap/tidb/pull/30370)
 
 -   TiKV
 

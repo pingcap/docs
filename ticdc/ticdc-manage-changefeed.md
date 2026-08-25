@@ -9,7 +9,7 @@ summary: TiCDC 変更フィードを管理する方法を学びます。
 
 ## レプリケーションタスクを作成する {#create-a-replication-task}
 
-レプリケーション タスクを作成するには、次のコマンドを実行します。
+レプリケーションタスクを作成するには、次のコマンドを実行します。
 
 ```shell
 cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task"
@@ -23,7 +23,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 ## レプリケーションタスクリストをクエリする {#query-the-replication-task-list}
 
-レプリケーション タスク リストを照会するには、次のコマンドを実行します。
+レプリケーションタスクリストを照会するには、次のコマンドを実行します。
 
 ```shell
 cdc cli changefeed list --server=http://10.0.10.25:8300
@@ -42,10 +42,10 @@ cdc cli changefeed list --server=http://10.0.10.25:8300
 ```
 
 -   `checkpoint` 、TiCDC がこの時点より前にデータをダウンストリームにすでに複製していることを示します。
--   `state`レプリケーション タスクの状態を示します。
-    -   `normal` : レプリケーション タスクは正常に実行されます。
-    -   `stopped` : レプリケーション タスクが停止されています (手動で一時停止されています)。
-    -   `error` : レプリケーション タスクが停止しました (エラーにより)。
+-   `state`レプリケーションタスクの状態を示します。
+    -   `normal` : レプリケーションタスクは正常に実行されます。
+    -   `stopped` : レプリケーションタスクが停止されています (手動で一時停止されています)。
+    -   `error` : レプリケーションタスクが停止しました (エラーにより)。
     -   `removed` : レプリケーションタスクは削除されています。この状態のタスクは、 `--all`オプションを指定した場合のみ表示されます。このオプションを指定せずにこれらのタスクを表示するには、 `changefeed query`コマンドを実行してください。
     -   `finished` : レプリケーションタスクが完了しました（データは`target-ts`にレプリケートされています）。この状態のタスクは、 `--all`オプションを指定した場合のみ表示されます。このオプションを指定せずにこれらのタスクを表示するには、 `changefeed query`コマンドを実行してください。
 
@@ -146,11 +146,11 @@ cdc cli changefeed query --server=http://10.0.10.25:8300 --changefeed-id=simple-
         -   `1` : タスクは一時停止されています。タスクが一時停止されると、複製されたすべての`processor`秒が終了します。タスクの設定とレプリケーション状態は保持されるため、 `checkpoint-ts`からタスクを再開できます。
         -   `2` : タスクが再開されます。レプリケーションタスクは`checkpoint-ts`から再開されます。
         -   `3` : タスクは削除されます。タスクが削除されると、すべての`processor`が終了し、レプリケーションタスクの設定情報はクリアされます。レプリケーションステータスのみが保持され、後続のクエリに使用されます。
--   `task-status`クエリされた変更フィード内の各レプリケーション サブタスクの状態を示します。
+-   `task-status`クエリされた変更フィード内の各レプリケーションサブタスクの状態を示します。
 
 ## レプリケーションタスクを一時停止する {#pause-a-replication-task}
 
-レプリケーション タスクを一時停止するには、次のコマンドを実行します。
+レプリケーションタスクを一時停止するには、次のコマンドを実行します。
 
 ```shell
 cdc cli changefeed pause --server=http://10.0.10.25:8300 --changefeed-id simple-replication-task
@@ -158,17 +158,17 @@ cdc cli changefeed pause --server=http://10.0.10.25:8300 --changefeed-id simple-
 
 上記のコマンドでは、次のようになります。
 
--   `--changefeed-id=uuid` 、一時停止するレプリケーション タスクに対応する変更フィード ID を表します。
+-   `--changefeed-id=uuid` 、一時停止するレプリケーションタスクに対応する変更フィード ID を表します。
 
 ## レプリケーションタスクを再開する {#resume-a-replication-task}
 
-一時停止されたレプリケーション タスクを再開するには、次のコマンドを実行します。
+一時停止されたレプリケーションタスクを再開するには、次のコマンドを実行します。
 
 ```shell
 cdc cli changefeed resume --server=http://10.0.10.25:8300 --changefeed-id simple-replication-task
 ```
 
--   `--changefeed-id=uuid` 、再開するレプリケーション タスクに対応する変更フィード ID を表します。
+-   `--changefeed-id=uuid` 、再開するレプリケーションタスクに対応する変更フィード ID を表します。
 -   `--overwrite-checkpoint-ts` : v6.2.0以降では、レプリケーションタスクを再開する開始TSOを指定できます。TiCDCは指定されたTSOからデータのプルを開始します。引数には`now`または特定のTSO（434873584621453313など）を指定できます。指定するTSOは、GCセーフポイントからCurrentTSOまでの範囲内である必要があります。この引数を指定しない場合、TiCDCはデフォルトで現在の`checkpoint-ts`からデータを複製します。現在のTSO値`checkpoint-ts`を確認するには、 `cdc cli changefeed list`コマンドを使用します。
 -   `--no-confirm` : レプリケーションが再開されたときに、関連情報を確認する必要はありません。デフォルトは`false`です。
 
@@ -179,7 +179,7 @@ cdc cli changefeed resume --server=http://10.0.10.25:8300 --changefeed-id simple
 
 ## レプリケーションタスクを削除する {#remove-a-replication-task}
 
-レプリケーション タスクを削除するには、次のコマンドを実行します。
+レプリケーションタスクを削除するには、次のコマンドを実行します。
 
 ```shell
 cdc cli changefeed remove --server=http://10.0.10.25:8300 --changefeed-id simple-replication-task
@@ -187,7 +187,7 @@ cdc cli changefeed remove --server=http://10.0.10.25:8300 --changefeed-id simple
 
 上記のコマンドでは、次のようになります。
 
--   `--changefeed-id=uuid`を削除するレプリケーション タスクに対応する変更フィードの ID を表します。
+-   `--changefeed-id=uuid`を削除するレプリケーションタスクに対応する変更フィードの ID を表します。
 
 ## タスク構成の更新 {#update-task-configuration}
 
@@ -223,7 +223,7 @@ cdc cli changefeed resume -c test-cf --server=http://10.0.10.25:8300
     ]
     ```
 
--   特定のレプリケーション タスクのステータスに対応する特定の変更フィードに対してクエリを実行します。
+-   特定のレプリケーションタスクのステータスに対応する特定の変更フィードに対してクエリを実行します。
 
     ```shell
     cdc cli processor query --server=http://10.0.10.25:8300 --changefeed-id=simple-replication-task --capture-id=b293999a-4168-4988-a4f4-35d9589b226b

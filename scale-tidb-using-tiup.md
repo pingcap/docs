@@ -5,7 +5,7 @@ summary: TiUPを使用して TiDB クラスターをスケーリングする方�
 
 # TiUPを使用して TiDBクラスタをスケールする {#scale-a-tidb-cluster-using-tiup}
 
-TiDB クラスターの容量は、オンライン サービスを中断することなく増減できます。
+TiDB クラスターの容量は、オンラインサービスを中断することなく増減できます。
 
 このドキュメントでは、 TiUPを使用して TiDB、TiKV、PD、TiCDC、またはTiFlashクラスターをスケーリングする方法について説明します。TiUPをインストールしていない場合は、 [ステップ2. 制御マシンにTiUPをデプロイ](/production-deployment-using-tiup.md#step-2-deploy-tiup-on-the-control-machine)の手順を参照してください。
 
@@ -380,7 +380,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
     tiup cluster display <cluster-name>
     ```
 
-4.  削除されたTiFlashノードのステータスが`Tombstone`になったら、削除されたノードの情報をTiUPトポロジから削除します (TiUP は`Tombstone`ノードの関連データ ファイルを自動的にクリーンアップします)。
+4.  削除されたTiFlashノードのステータスが`Tombstone`になったら、削除されたノードの情報をTiUPトポロジから削除します (TiUP は`Tombstone`ノードの関連データファイルを自動的にクリーンアップします)。
 
     ```shell
     tiup cluster prune <cluster-name>
@@ -392,7 +392,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
 1.  このTiFlashノードに対応するストア ID を表示するには、pd-ctl の store コマンドを使用します。
 
-    -   [pd-ctl](/pd-control.md)に store コマンドを入力します (バイナリ ファイルは tidb-ansible ディレクトリの`resources/bin`の下にあります)。
+    -   [pd-ctl](/pd-control.md)に store コマンドを入力します (バイナリファイルは tidb-ansible ディレクトリの`resources/bin`の下にあります)。
 
     -   TiUPデプロイメントを使用する場合は、 `pd-ctl` `tiup ctl:v<CLUSTER_VERSION> pd`に置き換えます。
 
@@ -420,7 +420,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
 3.  TiFlashプロセスを停止する前に、 TiFlashノードのストアが消えるか、 `state_name` `Tombstone`になるまで待ちます。
 
-4.  削除されたノードの情報をTiUPトポロジから削除します (TiUP は`Tombstone`ノードの関連データ ファイルを自動的にクリーンアップします)。
+4.  削除されたノードの情報をTiUPトポロジから削除します (TiUP は`Tombstone`ノードの関連データファイルを自動的にクリーンアップします)。
 
     ```shell
     tiup cluster prune <cluster-name>

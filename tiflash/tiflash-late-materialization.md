@@ -62,7 +62,7 @@ SHOW GLOBAL VARIABLES LIKE 'tidb_opt_enable_late_materialization';
 +--------------------------------------+-------+
 ```
 
-`tidb_opt_enable_late_materialization`変数は、セッション レベルまたはグローバル レベルで変更できます。
+`tidb_opt_enable_late_materialization`変数は、セッションレベルまたはグローバルレベルで変更できます。
 
 -   現在のセッションでTiFlash の遅延マテリアライゼーションを無効にするには、次のステートメントを使用します。
 
@@ -70,13 +70,13 @@ SHOW GLOBAL VARIABLES LIKE 'tidb_opt_enable_late_materialization';
     SET SESSION tidb_opt_enable_late_materialization=OFF;
     ```
 
--   グローバル レベルでTiFlash の遅延マテリアライゼーションを無効にするには、次のステートメントを使用します。
+-   グローバルレベルでTiFlash の遅延マテリアライゼーションを無効にするには、次のステートメントを使用します。
 
     ```sql
     SET GLOBAL tidb_opt_enable_late_materialization=OFF;
     ```
 
-    この設定後、新しいセッションでは、セッション レベルとグローバル レベルの両方で`tidb_opt_enable_late_materialization`変数がデフォルトで有効になります。
+    この設定後、新しいセッションでは、セッションレベルとグローバルレベルの両方で`tidb_opt_enable_late_materialization`変数がデフォルトで有効になります。
 
 TiFlash の遅延マテリアライゼーションを有効にするには、次のステートメントを使用します。
 

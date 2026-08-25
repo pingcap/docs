@@ -1,6 +1,6 @@
 ---
 title: Upstream and Downstream Clusters Data Validation and Snapshot Read
-summary: TiDB アップストリーム クラスターとダウンストリーム クラスターのデータを確認する方法を学習します。
+summary: TiDB アップストリームクラスターとダウンストリームクラスターのデータを確認する方法を学習します。
 ---
 
 # 上流および下流のクラスタのデータ検証とスナップショットの読み取り {#upstream-and-downstream-clusters-data-validation-and-snapshot-read}
@@ -18,7 +18,7 @@ Syncpoint機能を有効にするには、レプリケーションタスクの�
 1.  レプリケーション中、TiCDC は定期的に ( `sync-point-interval`で設定) アップストリームとダウンストリームの間でスナップショットを調整し、アップストリームとダウンストリームの TSO 対応をダウンストリーム`tidb_cdc.syncpoint_v1`テーブルに保存します。
 2.  レプリケーション中、TiCDC は定期的に ( `sync-point-interval`で設定) `SET GLOBAL tidb_external_ts = @@tidb_current_ts`を実行し、バックアップ クラスターにレプリケートされた一貫性のあるスナップショット ポイントを設定します。
 
-次の TiCDC 構成例では、レプリケーション タスクの作成時に Syncpoint を有効にします。
+次の TiCDC 構成例では、レプリケーションタスクの作成時に Syncpoint を有効にします。
 
 ```toml
 # Enables SyncPoint.
@@ -47,7 +47,7 @@ sync-point-retention = "1h"
 >
 > データ一貫性検証を実行する前に、 [同期ポイント機能を有効にしました](#enable-syncpoint)あることを確認してください。
 
-アップストリーム クラスターとダウンストリーム クラスターのデータを検証するには、sync-diff-inspector で`snapshot`設定するだけです。
+アップストリームクラスターとダウンストリームクラスターのデータを検証するには、sync-diff-inspector で`snapshot`設定するだけです。
 
 ### ステップ1: `ts-map`を取得する {#step-1-obtain-ts-map}
 
@@ -67,7 +67,7 @@ select * from tidb_cdc.syncpoint_v1;
 -   `ticdc_cluster_id` : このレコード内の TiCDC クラスターの ID。
 -   `changefeed` : このレコード内の変更フィードのID。異なるTiCDCクラスターに同じ名前の変更フィードが存在する可能性があるため、変更フィードによって挿入された`ts-map` IDをTiCDCクラスターIDと変更フィードIDで確認する必要があります。
 -   `primary_ts` : アップストリーム データベース スナップショットのタイムスタンプ。
--   `secondary_ts` : ダウンストリーム データベース スナップショットのタイムスタンプ。
+-   `secondary_ts` : ダウンストリームデータベース スナップショットのタイムスタンプ。
 -   `created_at` : このレコードが挿入された時刻。
 
 ### ステップ2: スナップショットを構成する {#step-2-configure-snapshot}

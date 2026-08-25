@@ -823,7 +823,7 @@ Empty set (0.00 sec)
 
 > **Note:**
 >
-> TiDB のハッシュ パーティションによる`NULL`値は[MySQLパーティショニングがNULLをどのように処理するか](https://dev.mysql.com/doc/refman/8.0/en/partitioning-handling-nulls.html)で説明されているのと同じ方法で処理されますが、これは MySQL の実際の動作と一致しません。言い換えれば、この場合の MySQL の実装はそのドキュメントと一致していません。
+> TiDB のハッシュパーティションによる`NULL`値は[MySQLパーティショニングがNULLをどのように処理するか](https://dev.mysql.com/doc/refman/8.0/en/partitioning-handling-nulls.html)で説明されているのと同じ方法で処理されますが、これは MySQL の実際の動作と一致しません。言い換えれば、この場合の MySQL の実装はそのドキュメントと一致していません。
 >
 > この場合、TiDBの実際の動作はこの文書の説明と一致しています。
 
@@ -871,7 +871,7 @@ TiDBには`EXCHANGE PARTITION`に影響を与える可能性のある特定の�
 
 ### 範囲、範囲列、リスト、およびリスト列パーティションの管理 {#manage-range-range-columns-list-and-list-columns-partitions}
 
-このセクションでは、以下の SQL ステートメントによって作成されたパーティション テーブルを例として、範囲パーティションとリスト パーティションの管理方法を示します。
+このセクションでは、以下の SQL ステートメントによって作成されたパーティションテーブルを例として、範囲パーティションとリストパーティションの管理方法を示します。
 
 ```sql
 CREATE TABLE members (
@@ -1024,7 +1024,7 @@ ALTER TABLE member_level REORGANIZE PARTITION l1_2,l3,l4,l5,l6 INTO
 
 ### ハッシュとキーのパーティションを管理する {#manage-hash-and-key-partitions}
 
-このセクションでは、次の SQL ステートメントで作成されたパーティションテーブルを例として、ハッシュ パーティションの管理方法を示します。キー パーティションについても、同じ管理ステートメントを使用できます。
+このセクションでは、次の SQL ステートメントで作成されたパーティションテーブルを例として、ハッシュパーティションの管理方法を示します。キー パーティションについても、同じ管理ステートメントを使用できます。
 
 ```sql
 CREATE TABLE example (
@@ -1148,7 +1148,7 @@ ALTER TABLE member_level PARTITION BY RANGE(level)
  PARTITION pMax VALUES LESS THAN (MAXVALUE));
 ```
 
-パーティション化パーティションテーブルをパーティション化する場合、またはすでにパーティションテーブルを再パーティション化する場合、必要に応じてインデックスを[グローバルインデックス](/global-indexes.md)インデックスまたはローカル インデックスに更新できます。
+パーティション化パーティションテーブルをパーティション化する場合、またはすでにパーティションテーブルを再パーティション化する場合、必要に応じてインデックスを[グローバルインデックス](/global-indexes.md)インデックスまたはローカルインデックスに更新できます。
 
 ```sql
 CREATE TABLE t1 (
@@ -1225,7 +1225,7 @@ SELECT fname, lname, region_code, dob
     explain select * from t1 left join t2 on t1.x = t2.x and t2.x > 5;
     ```
 
-    このクエリでは、 `t2.x > 5` `t1`パーティションテーブルにプッシュダウンできないため、このクエリに対してパーティション プルーニングは適用されません。
+    このクエリでは、 `t2.x > 5` `t1`パーティションテーブルにプッシュダウンできないため、このクエリに対してパーティションプルーニングは適用されません。
 
 2.  パーティションプルーニングはプラン最適化フェーズで行われるため、フィルタ条件が実行フェーズまで不明な場合には適用されません。
 
@@ -1402,7 +1402,7 @@ SELECT store_id, COUNT(department_id) AS c
 
 このセクションでは、TiDBにおけるパーティションテーブルに関するいくつかの制限事項と制約事項について説明します。
 
--   [`ALTER TABLE ... CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)ステートメントを使用してパーティション テーブルの列の型を変更することはサポートされていません。
+-   [`ALTER TABLE ... CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)ステートメントを使用してパーティションテーブルの列の型を変更することはサポートされていません。
 -   [`ALTER TABLE ... CACHE`](/cached-tables.md)ステートメントを使用してパーティションテーブルをキャッシュテーブルに設定することはサポートされていません。
 -   TiDB の[一時テーブル](/temporary-tables.md)パーティション化されたテーブルと互換性**がありません**。
 -   パーティションテーブルでの[外部キー](/foreign-key.md)の作成はサポートされていません。
@@ -1607,7 +1607,7 @@ ERROR 8264 (HY000): Global Index is needed for index 'a', since the unique index
 
 ### グローバルインデックス {#global-indexes}
 
-グローバル インデックスの詳細については、[グローバルインデックス](/global-indexes.md)を参照してください。
+グローバルインデックスの詳細については、[グローバルインデックス](/global-indexes.md)を参照してください。
 
 ### 関数に関連する分割制限 {#partitioning-limitations-relating-to-functions}
 
@@ -1725,15 +1725,15 @@ select * from t;
 
 ## 動的プルーニングモード {#dynamic-pruning-mode}
 
-TiDB は、 `dynamic`または`static`モードでパーティションテーブルにアクセスします。 v6.3.0 以降、 `dynamic`モードがデフォルトで使用されます。ただし、動的パーティショニングは、完全なテーブルレベルの統計、つまりグローバル統計が収集された後にのみ有効になります。グローバル統計の収集が完了する前に`dynamic`プルーニング モードを有効にすると、TiDB はグローバル統計が完全に収集されるまで`static`モードのままになります。グローバル統計の詳細については、 [動的プルーニングモードでパーティションテーブルの統計情報を収集する](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)。
+TiDB は、 `dynamic`または`static`モードでパーティションテーブルにアクセスします。 v6.3.0 以降、 `dynamic`モードがデフォルトで使用されます。ただし、動的パーティショニングは、完全なテーブルレベルの統計、つまりグローバル統計が収集された後にのみ有効になります。グローバル統計の収集が完了する前に`dynamic`プルーニングモードを有効にすると、TiDB はグローバル統計が完全に収集されるまで`static`モードのままになります。グローバル統計の詳細については、 [動的プルーニングモードでパーティションテーブルの統計情報を収集する](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)。
 
 ```sql
 set @@session.tidb_partition_prune_mode = 'dynamic'
 ```
 
-手動の ANALYZE および通常のクエリでは、セッション レベルの`tidb_partition_prune_mode`設定が使用されます。バックグラウンドでの`auto-analyze`操作では、グローバルな`tidb_partition_prune_mode`設定が使用されます。
+手動の ANALYZE および通常のクエリでは、セッションレベルの`tidb_partition_prune_mode`設定が使用されます。バックグラウンドでの`auto-analyze`操作では、グローバルな`tidb_partition_prune_mode`設定が使用されます。
 
-`static`モードでは、パーティション テーブルはパーティション レベルの統計情報を使用します。 `dynamic`モードでは、パーティション テーブルはテーブル レベルのグローバル統計情報を使用します。
+`static`モードでは、パーティションテーブルはパーティションレベルの統計情報を使用します。 `dynamic`モードでは、パーティションテーブルはテーブルレベルのグローバル統計情報を使用します。
 
 `static`モードから`dynamic`モードに切り替える際は、統計情報を手動で確認して収集する必要があります。これは、 `dynamic`モードに切り替えた後、パーティション化されたテーブルにはパーティションレベルの統計情報のみが存在し、テーブルレベルの統計情報は存在しないためです。グローバル統計情報は、次の`auto-analyze`操作時にのみ収集されます。
 
@@ -1780,7 +1780,7 @@ show stats_meta where table_name like "t";
 
 スクリプトを使用して、すべてのパーティション化されたテーブルの統計を更新することもできます。詳細については、 [動的プルーニングモードでパーティションテーブルの統計情報を更新する](#update-statistics-of-partitioned-tables-in-dynamic-pruning-mode)を参照してください。
 
-テーブルレベルの統計情報が準備できたら、グローバルな動的プルーニング モードを有効にできます。これは、すべての SQL ステートメントと`auto-analyze`操作に有効です。
+テーブルレベルの統計情報が準備できたら、グローバルな動的プルーニングモードを有効にできます。これは、すべての SQL ステートメントと`auto-analyze`操作に有効です。
 
 ```sql
 set global tidb_partition_prune_mode = dynamic
@@ -1910,7 +1910,7 @@ mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 
 
 例2から、 `dynamic`モードでは、クエリを実行するとIndexJoinを使用した実行計画が選択されることがわかります。
 
-現在、 `static`プルーニング モードは、プリペアドステートメントと非プリペアドステートメントの両方のプラン キャッシュをサポートしていません。
+現在、 `static`プルーニングモードは、プリペアドステートメントと非プリペアドステートメントの両方のプランキャッシュをサポートしていません。
 
 ### 動的プルーニングモードでパーティションテーブルの統計情報を更新する {#update-statistics-of-partitioned-tables-in-dynamic-pruning-mode}
 

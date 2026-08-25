@@ -54,7 +54,7 @@ ls `tiup --binary tiproxy`ctl
 
 コンパイル環境要件: [Go](https://golang.org/) 1.21以降
 
-コンパイル手順: [TiProxyプロジェクト](https://github.com/pingcap/tiproxy)のルート ディレクトリに移動し、 `make`コマンドを使用してコンパイルし、 `tiproxyctl`を生成します。
+コンパイル手順: [TiProxyプロジェクト](https://github.com/pingcap/tiproxy)のルートディレクトリに移動し、 `make`コマンドを使用してコンパイルし、 `tiproxyctl`を生成します。
 
 ```shell
 git clone https://github.com/pingcap/tiproxy.git
@@ -101,7 +101,7 @@ tiproxyctl --host 127.0.0.1 --port 3080 config get
 
 #### `--log_level` {#log-level}
 
--   tiproxyctl のログ レベルを指定します。
+-   tiproxyctl のログレベルを指定します。
 -   タイプ: `string`
 -   デフォルト: `"warn"`
 -   `debug` `info` `error`でき`panic` `warn`
@@ -163,7 +163,7 @@ level = 'warning'
 
 オプション:
 
--   `--output` : (必須) トラフィック ファイルを保存するディレクトリを指定します。
+-   `--output` : (必須) トラフィックファイルを保存するディレクトリを指定します。
 -   `--duration` : (必須) キャプチャ期間を指定します。単位は`m` (分)、 `h` (時間)、 `d` (日) のいずれかです。例えば、 `--duration=1h`を指定すると 1 時間のトラフィックがキャプチャされます。
 
 例：
@@ -180,14 +180,14 @@ tiproxyctl traffic capture --host 10.0.1.10 --port 3080 --output="/tmp/traffic" 
 
 オプション:
 
--   `--username` : (必須) 再生用のデータベース ユーザー名を指定します。
+-   `--username` : (必須) 再生用のデータベースユーザー名を指定します。
 -   `--password` : (オプション) ユーザー名のパスワードを指定します。デフォルト値は空の文字列`""`です。
--   `--input` : (必須) トラフィック ファイルを含むディレクトリを指定します。
+-   `--input` : (必須) トラフィックファイルを含むディレクトリを指定します。
 -   `--speed` : (オプション) 再生速度の乗数を指定します。範囲は`[0.1, 10]`です。デフォルト値は`1`で、元の速度で再生されます。
 
 例：
 
-次のコマンドは、ユーザー名`u1`とパスワード`123456`を使用して`10.0.1.10:3080`の TiProxy インスタンスに接続し、TiProxy インスタンスの`/tmp/traffic`ディレクトリからトラフィック ファイルを読み取り、元の速度の 2 倍でトラフィックを再生します。
+次のコマンドは、ユーザー名`u1`とパスワード`123456`を使用して`10.0.1.10:3080`の TiProxy インスタンスに接続し、TiProxy インスタンスの`/tmp/traffic`ディレクトリからトラフィックファイルを読み取り、元の速度の 2 倍でトラフィックを再生します。
 
 ```shell
 tiproxyctl traffic replay --host 10.0.1.10 --port 3080 --username="u1" --password="123456" --input="/tmp/traffic" --speed=2

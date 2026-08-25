@@ -11,7 +11,7 @@ summary: TiDBの機能概要について学びましょう。
 
 > **Note:**
 >
-> PingCAP は、DMR バージョンのパッチ リリースを提供しません。バグは将来のリリースで修正される予定です。一般的な用途には、[最新のLTSバージョン](https://docs.pingcap.com/tidb/stable)を使用することをお勧めします。
+> PingCAP は、DMR バージョンのパッチリリースを提供しません。バグは将来のリリースで修正される予定です。一般的な用途には、[最新のLTSバージョン](https://docs.pingcap.com/tidb/stable)を使用することをお勧めします。
 >
 > 下記の表の略語は、それぞれ以下の意味を持ちます。
 >
@@ -323,6 +323,6 @@ summary: TiDBの機能概要について学びましょう。
 
 [^4]: [v6.4.0](/releases/release-6.4.0.md)以降、TiDB は[高性能かつグローバルに単調な`AUTO_INCREMENT`列](/auto-increment.md#mysql-compatibility-mode)をサポートします
 
-[^5]: [TiDB v7.0.0](/releases/release-7.0.0.md)以降、新しいパラメータ`FIELDS DEFINED NULL BY`と S3 および GCS からのデータインポートのサポートは実験的機能です。[v7.6.0](/releases/release-7.6.0.md)以降、TiDB は`LOAD DATA`トランザクションで MySQL と同じように処理します。トランザクション内の`LOAD DATA`ステートメントは、現在のトランザクションを自動的にコミットしたり、新しいトランザクションを開始したりしなくなりました。さらに、トランザクション内の`LOAD DATA`ステートメントを明示的にコミットまたはロールバックできます。また、 `LOAD DATA`ステートメントは、TiDB トランザクション モード設定 (楽観的トランザクションまたは悲観的トランザクション) の影響を受けます。
+[^5]: [TiDB v7.0.0](/releases/release-7.0.0.md)以降、新しいパラメータ`FIELDS DEFINED NULL BY`と S3 および GCS からのデータインポートのサポートは実験的機能です。[v7.6.0](/releases/release-7.6.0.md)以降、TiDB は`LOAD DATA`トランザクションで MySQL と同じように処理します。トランザクション内の`LOAD DATA`ステートメントは、現在のトランザクションを自動的にコミットしたり、新しいトランザクションを開始したりしなくなりました。さらに、トランザクション内の`LOAD DATA`ステートメントを明示的にコミットまたはロールバックできます。また、 `LOAD DATA`ステートメントは、TiDB トランザクションモード設定 (楽観的トランザクションまたは悲観的トランザクション) の影響を受けます。
 
 [^6]: バージョン 7.5.0 以降、 [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/)レプリケーションは非推奨となりました。バージョン 8.3.0 以降、TiDB Binlogは完全に非推奨となりました。バージョン 8.4.0 以降、TiDB Binlogは削除されました。増分データレプリケーションには、代わりに[TiCDC](/ticdc/ticdc-overview.md)を使用してください。ポイントインタイムリカバリ(PITR) には、 [PITR](/br/br-pitr-guide.md)を使用してください。TiDB クラスタをバージョン 8.4.0 以降にアップグレードする前に、必ず TiCDC と PITR に切り替えてください。

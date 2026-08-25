@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.17 Release Notes
-summary: "TiDB 2.1.17 リリースノート: 新機能には、SHOW TABLE REGIONS` の `WHERE` 句、TiKV および PD の `config-check` 機能、pd-ctl の `remove-tombstone` コマンド、 Reparoの `worker-count` および `txn-batch` 構成項目が含まれます。PD のスケジュール プロセスと TiKV の起動プロセスが改善されました。TiDB スロー クエリ ログと構成ファイルの動作が変更されました。SQL オプティマイザー、SQL 実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、および TiDB Ansible の修正と最適化が行われました。"
+summary: "TiDB 2.1.17 リリースノート: 新機能には、SHOW TABLE REGIONS` の `WHERE` 句、TiKV および PD の `config-check` 機能、pd-ctl の `remove-tombstone` コマンド、 Reparoの `worker-count` および `txn-batch` 構成項目が含まれます。PD のスケジュール プロセスと TiKV の起動プロセスが改善されました。TiDB スロークエリログと構成ファイルの動作が変更されました。SQL オプティマイザー、SQL 実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、および TiDB Ansible の修正と最適化が行われました。"
 ---
 
 # TiDB 2.1.17 リリースノート {#tidb-2-1-17-release-notes}
@@ -23,7 +23,7 @@ TiDB Ansible バージョン: 2.1.17
 
 -   動作の変更
     -   TiDB スロークエリログの最後の再試行時刻から最初の実行時刻への変更`start ts`
-    -   TiDB スロー クエリ ログの`Index_ids`フィールドを`Index_names`フィールドに置き換えて、スロー クエリ ログの使いやすさを向上させます。
+    -   TiDB スロークエリログの`Index_ids`フィールドを`Index_names`フィールドに置き換えて、スロークエリログの使いやすさを向上させます。
     -   TiDB の構成ファイルに`split-region-max-num`パラメータを追加して、 `SPLIT TABLE`構文で許可されるリージョンの最大数を変更します。デフォルト構成では、1,000 から 10,000 に増加されます。
 
 ## TiDB {#tidb}

@@ -40,7 +40,7 @@ summary: スロークエリを見つけて分析する方法を学びます。
 
 上記の方法は、以下の点で異なります。
 
--   スロー ログには、解析から結果の返却まで、SQL 実行のほぼすべての段階の期間が記録され、比較的包括的です (TiDB Dashboardでスロー ログを直感的にクエリおよび分析できます)。
+-   スローログには、解析から結果の返却まで、SQL 実行のほぼすべての段階の期間が記録され、比較的包括的です (TiDB Dashboardでスローログを直感的にクエリおよび分析できます)。
 -   `EXPLAIN ANALYZE`を実行すると、実際のSQL実行における各演算子の消費時間を知ることができます。結果には、実行時間に関するより詳細な統計情報が含まれます。
 
 まとめると、スローログと`EXPLAIN ANALYZE`ステートメントは、SQLクエリの実行がどのコンポーネント（TiDBまたはTiKV）でどの段階で遅いのかを判断するのに役立ちます。これにより、クエリのパフォーマンスボトルネックを正確に特定できます。
@@ -74,7 +74,7 @@ TiKVによるデータ処理が遅い場合、 `EXPLAIN ANALYZE`の結果から�
 
 さらに、スローログのフィールド`Cop_process`と`Cop_wait`分析に役立ちます。次の例では、クエリの合計実行時間は約`180.85ms`で、最大の`coptask`の実行には`171ms`かかっています。これは、このクエリのボトルネックが TiKV 側にあることを示しています。
 
-スロー ログの各フィールドの説明については、 [フィールドの説明](/identify-slow-queries.md#fields-description)を参照してください。
+スローログの各フィールドの説明については、 [フィールドの説明](/identify-slow-queries.md#fields-description)を参照してください。
 
 ```log
 # Query_time: 0.18085
@@ -90,7 +90,7 @@ TiKV がボトルネックであると特定したら、次のセクションで
 
 SQL文の実行中に、TiDBは複数のTiKVインスタンスからデータを取得する場合があります。1つのTiKVインスタンスの応答が遅いと、SQL文全体の実行速度が低下します。
 
-スロー ログの`Cop_wait`フィールドは、この原因を特定するのに役立ちます。
+スローログの`Cop_wait`フィールドは、この原因を特定するのに役立ちます。
 
 ```log
 # Cop_wait: Avg_time: 1ms P90_time: 2ms Max_time: 110ms Max_Addr: 10.6.131.78
@@ -151,7 +151,7 @@ mysql> explain analyze select count(*) from t where a=(select max(t1.a) from t t
 5 rows in set (7.77 sec)
 ```
 
-ただし、このタイプのサブクエリ実行はスロー ログで識別できます。
+ただし、このタイプのサブクエリ実行はスローログで識別できます。
 
 ```
 # Query_time: 7.770634843
@@ -238,7 +238,7 @@ mysql> explain select * from t t1, t t2 where t1.a>t2.a;
 
 オプティマイザの問題を分析するには、実行計画が妥当かどうかを判断する必要があります。最適化プロセスと各演算子についてある程度の理解が必要です。
 
-次の例では、テーブル スキーマが`create table t (id int, a int, b int, c int, primary key(id), key(a), key(b, c))`であると想定します。
+次の例では、テーブルスキーマが`create table t (id int, a int, b int, c int, primary key(id), key(a), key(b, c))`であると想定します。
 
 1.  `select * from t` : フィルター条件はなく、テーブル全体のスキャンが実行されます。そのため、データの読み取りには`TableFullScan`演算子が使用されます。
 2.  `select a from t where a=2` : フィルター条件があり、インデックス列のみが読み取られるため、 `IndexReader`演算子を使用してデータを読み取ります。
