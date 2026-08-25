@@ -18,7 +18,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         This feature enables you to archive change data to cloud storage for downstream analytics and long-term retention, while reducing costs by eliminating the need for intermediate message queues.
 
-        For more information, see [Sink to Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md).
+        For more information, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium).
 
 ## August 18, 2026
 
