@@ -42,5 +42,5 @@ summary: TiDB 2.0.9は2018年11月19日にリリースされ、システムの�
 ## TiKV {#tikv}
 
 -   `kv_scan`インターフェースに`end-key`制限を追加する [#3749](https://github.com/tikv/tikv/pull/3749)
--   `max-tasks-xxx`構成を削除し、 `max-tasks-per-worker-xxx` を追加する [#3093](https://github.com/tikv/tikv/pull/3093)
+-   `max-tasks-xxx`設定を削除し、 `max-tasks-per-worker-xxx` を追加する [#3093](https://github.com/tikv/tikv/pull/3093)
 -   RocksDB の`CompactFiles`問題を修正 [#3789](https://github.com/tikv/tikv/pull/3789)

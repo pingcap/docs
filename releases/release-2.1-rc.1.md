@@ -61,9 +61,9 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
     -   スロークエリログにさらに詳細な情報を表示する[#7302](https://github.com/pingcap/tidb/pull/7302)
     -   PDにtidbサーバ関連情報を登録し、HTTP API でこの情報を取得することをサポート [#7082](https://github.com/pingcap/tidb/pull/7082)
 -   互換性
-    -   セッション変数`warning_count`と`error_count`サポート[#6945](https://github.com/pingcap/tidb/pull/6945)
-    -   システム変数読み取り時にチェックを`Scope`追加 [#6958](https://github.com/pingcap/tidb/pull/6958)
-    -   `MAX_EXECUTION_TIME`構文サポートする [#7012](https://github.com/pingcap/tidb/pull/7012)
+    -   セッション変数`warning_count`と`error_count`をサポート[#6945](https://github.com/pingcap/tidb/pull/6945)
+    -   システム変数の読み取り時に`Scope`チェックを追加 [#6958](https://github.com/pingcap/tidb/pull/6958)
+    -   `MAX_EXECUTION_TIME`構文をサポートする [#7012](https://github.com/pingcap/tidb/pull/7012)
     -   `SET`構文のより多くのステートメントをサポート [#7020](https://github.com/pingcap/tidb/pull/7020)
     -   システム変数設定する際に有効性チェックを追加する [#7117](https://github.com/pingcap/tidb/pull/7117)
     -   `Prepare`文の`PlaceHolder`の数の検証を追加する [#7162](https://github.com/pingcap/tidb/pull/7162)
