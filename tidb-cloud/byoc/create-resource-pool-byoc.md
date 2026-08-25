@@ -51,7 +51,7 @@ To create a resource pool, take the following steps:
 6. In the **High Availability** area, select a high availability mode for the resource pool.
 
     - **Zonal**: deploys the resource pool in a single availability zone for lower network latency.
-    - **Regional**: deploys the resource pool across multiple availability zones for higher availability and resilience against an availability-zone-level outage.
+    - **Regional**: deploys the resource pool across multiple availability zones for higher availability and resilience to outages at the availability zone level.
 
     You must select a high availability mode before creating the resource pool. You cannot select the specific availability zones. TiDB Cloud determines the availability zones based on the BYOC region configuration and available cloud resources.
 
