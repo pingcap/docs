@@ -82,7 +82,7 @@ When you set a new Pool vCPU Limit, the value must be greater than or equal to `
 
 > **Note:**
 >
-> Even when the current provisioned vCPU is below the Pool vCPU Limit, creating or restoring an instance might cause the total provisioned vCPU to exceed the limit. This might constrain resource scaling and degrade the performance of all instances in the resource pool. Before creating or restoring an instance, make sure that the resource pool has sufficient vCPU capacity.
+> Even when the current provisioned vCPU is below the Pool vCPU Limit, creating or restoring an instance might cause the total provisioned vCPU to exceed the limit. This might restrict resource scaling and degrade the performance of all instances in the resource pool. Before creating or restoring an instance, make sure that the resource pool has sufficient vCPU capacity.
 
 If the current provisioned vCPU of a resource pool is greater than or equal to its Pool vCPU Limit, you cannot create or restore an instance in that resource pool. To create or restore an instance, increase or turn off the Pool vCPU Limit, or select another resource pool.
 
