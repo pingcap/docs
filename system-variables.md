@@ -4852,7 +4852,7 @@ SHOW WARNINGS;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `134217728` (which is 128 MiB)
-- Range: `[128, 9223372036854775807]`, in bytes. The memory format with the units "KiB|MiB|GiB|TiB" is also supported.
+- Range: `[128, 9223372036854775807]`, in bytes. The memory format with units "KB|MB|GB|TB" is supported. For example, you can set this variable to `90GB` (no space between the number and the unit).
 - After you enable the memory limit, TiDB will terminate the SQL statement with the highest memory usage on the current instance. This variable specifies the minimum memory usage of the SQL statement to be terminated. If the memory usage of a TiDB instance that exceeds the limit is caused by too many sessions with low memory usage, you can properly lower the value of this variable to allow more sessions to be canceled.
 
 ### tidb_service_scope <span class="version-mark">New in v7.4.0</span>
