@@ -49,11 +49,10 @@ If you have the required permissions, you can create a {{{ .byoc }}} instance as
 
     Only resource pools that match the selected cloud provider and region and are in the **Active** status are displayed. If no suitable resource pool is available and you are an `Organization Owner`, click **Create Resource Pool** to create one. After the resource pool becomes active, it is automatically selected for the new instance.
 
-    If the selected resource pool has a Pool vCPU Limit and its current provisioned vCPU is greater than or equal to the limit, TiDB Cloud displays a warning and you cannot create the instance in that resource pool. To continue, go to the Resource Pool details page to increase or turn off the Pool vCPU Limit, or select another resource pool.
+    Make sure to select a resource pool with sufficient vCPU capacity. Otherwise, the following issues can occur.
 
-    > **Important:**
-    >
-    > Even if the current provisioned vCPU is below the Pool vCPU Limit, creating a new instance might cause the total provisioned vCPU to exceed the limit. This might constrain resource scaling and degrade the performance of all instances in the resource pool. Before creating the instance, make sure that the resource pool has sufficient vCPU capacity. If necessary, increase or turn off the Pool vCPU Limit, or select another resource pool.
+    - If the selected resource pool has a Pool vCPU Limit and its current provisioned vCPU is greater than or equal to the limit, TiDB Cloud displays a warning, and you cannot create the {{{ .byoc }}} instance in that resource pool. To continue, go to the **Resource Pool** details page of the pool to increase or turn off the Pool vCPU Limit, or select another resource pool.
+   - Even if the current provisioned vCPUs are below the Pool vCPU Limit, creating a new instance might cause the total provisioned vCPUs to exceed the limit. This might restrict resource scaling and affect the performance of all instances in the resource pool. If necessary, increase or turn off the Pool vCPU Limit, or select another resource pool.
 
 7. In the **Capacity** area, set the maximum number of Request Capacity Units (RCUs) for your instance. RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your instance within this range based on demand.
 
