@@ -80,7 +80,7 @@ To update the Pool vCPU Limit, take the following steps:
 
 When you set a new Pool vCPU Limit, the value must be greater than or equal to `100` vCPU and the current provisioned TiDB vCPU. Otherwise, the update is rejected.
 
-> **Important:**
+> **Note:**
 >
 > Even when the current provisioned vCPU is below the Pool vCPU Limit, creating or restoring an instance might cause the total provisioned vCPU to exceed the limit. This might constrain resource scaling and degrade the performance of all instances in the resource pool. Before creating or restoring an instance, make sure that the resource pool has sufficient vCPU capacity.
 
