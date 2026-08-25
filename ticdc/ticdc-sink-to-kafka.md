@@ -157,12 +157,12 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 
     TiCDC が適切に機能するために必要な最小限の権限セットは次のとおりです。
 
-    -   トピック[リソース タイプ](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)の`Create` 、 `Write` 、および`Describe`権限。
+    -   トピック[リソースタイプ](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)の`Create` 、 `Write` 、および`Describe`権限。
     -   クラスタリソース タイプに対する`DescribeConfig`の権限。
 
     各権限の使用シナリオは次のとおりです。
 
-    | リソース タイプ | 操作の種類            | シナリオ                         |
+    | リソースタイプ | 操作の種類            | シナリオ                         |
     | :------ | :--------------- | :--------------------------- |
     | クラスタ    | `DescribeConfig` | 変更フィードの実行中にクラスターのメタデータを取得します |
     | トピック    | `Describe`       | チェンジフィードの開始時にトピックを作成しようとします  |
