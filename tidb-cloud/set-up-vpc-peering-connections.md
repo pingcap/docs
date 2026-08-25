@@ -73,7 +73,7 @@ VPC ピアリング リクエストは、TiDB Cloudコンソールのプロジ�
 
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  左側のナビゲーション ペインで、 **Project Settings**の下にある**Network Access**をクリックします。
+3.  左側のナビゲーションペインで、 **Project Settings**の下にある**Network Access**をクリックします。
 
 4.  **Network Access**ページで、 **VPC Peering**タブをクリックし、 **AWS**サブタブをクリックします。
 
@@ -255,7 +255,7 @@ VPC ピアリング リクエストは、TiDB Cloudコンソールのプロジ�
 
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3.  左側のナビゲーション ペインで、 **Project Settings**の下にある**Network Access**をクリックします。
+3.  左側のナビゲーションペインで、 **Project Settings**の下にある**Network Access**をクリックします。
 
 4.  **Network Access**ページで、 **VPC Peering**タブをクリックし、 **Google Cloud**サブタブをクリックします。
 

@@ -41,7 +41,7 @@ terraform state rm ${your_target_cluster_resource}
 
 `.tf`ファイルで、ターゲットクラスター リソースの構成を見つけて、対応するコードを削除します。
 
-## ステップ4. 新しいクラスターリソースのインポートブロックを追加する {#step-4-add-an-import-block-for-the-new-cluster-resource}
+## ステップ4. 新しいクラスターリソースのインポート ブロックを追加する {#step-4-add-an-import-block-for-the-new-cluster-resource}
 
 -   ターゲットクラスターがTiDB Cloud Starter の場合は、次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` [ステップ1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate)から取得したクラスター ID に置き換えます。
 

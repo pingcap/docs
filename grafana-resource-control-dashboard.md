@@ -11,7 +11,7 @@ Grafana ダッシュボードは、概要、PD、TiDB、TiKV、Node_exporter、�
 
 クラスターで[リソース管理](/tidb-resource-control-ru-groups.md)機能を使用している場合は、リソース制御ダッシュボードからリソース消費状況の概要を取得できます。
 
-TiDBはフロー制御に[トークンバケットアルゴリズム](https://en.wikipedia.org/wiki/Token_bucket)を使用します[RFC: TiDB におけるグローバル リソース制御](https://github.com/pingcap/tidb/blob/release-8.5/docs/design/2022-11-25-global-resource-control.md#distributed-token-buckets)で説明したように、TiDBノードは複数のリソースグループを持つことができ、PD側のGAC（Global Admission Control）によってフロー制御されます。各TiDBノードのローカルトークンバケットは、PD側のGACと定期的に（デフォルトでは5秒）通信し、ローカルトークンを再設定します。TiDBでは、ローカルトークンバケットはリソースコントローラークライアントとして実装されています。
+TiDBはフロー制御に[トークンバケットアルゴリズム](https://en.wikipedia.org/wiki/Token_bucket)を使用します[RFC: TiDB におけるグローバル リソース制御](https://github.com/pingcap/tidb/blob/release-8.5/docs/design/2022-11-25-global-resource-control.md#distributed-token-buckets)で説明したように、TiDBノードは複数のリソースグループを持つことができ、PD側のGAC（Global Admission Control）によってフロー制御されます。各TiDBノードのローカルトークンバケットは、PD側のGACと定期的に（デフォルトでは5秒）通信し、ローカルトークンを再設定します。TiDBでは、ローカルトークンバケットはリソース コントローラー クライアントとして実装されています。
 
 このドキュメントでは、リソース コントロール ダッシュボードに表示されるいくつかの主要な監視メトリックについて説明します。
 

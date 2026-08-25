@@ -493,7 +493,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
         -   リソースビューには、すべてのプランにわたるTiDB Cloudリソースが一覧表示されます。
         -   プロジェクトビューでは、TiDB Cloudのリソースをプロジェクトごとに整理し、組織内のプロジェクトを管理できます。
 
-    -   **統一されたリソース作成ワークフロー**：単一の作成フローが、 TiDB Cloud Starter、 Essential、 Dedicatedを含むすべてのTiDB Cloudリソースタイプに適用されます。
+    -   **統一されたリソース作成ワークフロー**：単一の作成フローが、 TiDB Cloud Starter、 Essential、 Dedicatedを含むすべてのTiDB Cloudリソース タイプに適用されます。
 
     -   **TiDB X プロジェクトのサポート**: TiDB X インスタンス ( [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloudオファリング、 TiDB Cloud StarterやEssentialなど) は、作成後にプロジェクトにオプションで割り当てたり、プロジェクト間で移動したりできるようになりました。
 
