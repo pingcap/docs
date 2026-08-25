@@ -36,7 +36,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `[]`
 - This configuration item takes effect only in Starter deployment mode.
 - Each array element contains a `pattern` field and a `suffix` field. TiDB removes trailing periods from the original error and the suffix, and then returns the extended error in the format `<original error>, <suffix>.`.
-- If multiple patterns match an error, TiDB applies only the first match after sorting patterns by length in descending order. To avoid matching unrelated errors, use anchored and specific patterns.
+- If multiple patterns match an error, TiDB applies only the first match after sorting extensions by pattern length in descending order, then by pattern and suffix in lexicographical order. To avoid matching unrelated errors, use anchored and specific patterns.
 
 For example:
 
@@ -1156,7 +1156,7 @@ Configuration items that take effect only in Starter deployment mode.
 - The manifest must contain exactly one JSON object and cannot contain unknown fields. The top-level `version` must be greater than `0`.
 - The `bootstrap` array defines the complete state for a keyspace that does not have a recorded Starter bootstrap version. It must contain at least one statement when the manifest initializes such a keyspace. The `upgrades` array defines migrations for keyspaces with an earlier recorded version.
 - Each upgrade version must be greater than `0`, no greater than the top-level `version`, and unique within the manifest.
-- Each element in a SQL array must contain exactly one statement. `<keyspace>` is the only supported placeholder and is replaced with the current keyspace name.
+- Each element in the `bootstrap` and `sql` arrays must contain exactly one SQL statement. `<keyspace>` is the only supported placeholder, and TiDB replaces it with the current keyspace name.
 - The statements in `bootstrap` must be `INSERT`, `REPLACE`, `UPDATE`, or `DELETE` statements. Together, they must create the `<keyspace>.root` account with host `%`.
 - For a keyspace without a recorded Starter bootstrap version, TiDB executes `bootstrap` directly and records the top-level version without replaying `upgrades`. For an existing keyspace, TiDB applies upgrade entries in version order.
 - Make every statement retry-safe and idempotent because TiDB might retry initialization or an upgrade after a startup failure.
