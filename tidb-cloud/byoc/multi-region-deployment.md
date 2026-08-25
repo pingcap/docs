@@ -121,7 +121,7 @@ Use `tidbcloud-byoc-update.sh` to update the existing CloudFormation stacks. The
 Before running the update script:
 
 1. Confirm the AWS Regions to be added.
-2. Select the Availability Zones for the new regions. A Regional resource pool requires at least three eligible availability zones. If you plan to create Regional resource pools in a new region, confirm that the region can provide at least three eligible availability zones.
+2. Select the Availability Zones for the new regions. A regional resource pool requires at least three eligible availability zones. If you plan to create regional resource pools in a new region, select at least three eligible availability zones for that region.
 3. Plan the O11Y CIDR for each new region and the resource pool CIDRs for the resource pools you plan to create. Different regions can use the same O11Y CIDR. However, if you use metric integration to connect Grafana to multiple regions, use non-overlapping O11Y CIDRs for those regions.
 4. Confirm whether each new region will:
     * share the existing PCA and TiDB hosted zone, or
