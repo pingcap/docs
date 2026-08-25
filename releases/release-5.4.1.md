@@ -164,7 +164,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
 
     -   TiDB Data Migration (DM)
 
-        -   ログに「チェックポイントに変更はありません。同期フラッシュチェックポイントをスキップしてください」というメッセージが数百件出力され、レプリケーションが非常に遅くなる問題を修正しました[#4619](https://github.com/pingcap/tiflow/issues/4619)
+        -   ログに「チェックポイントに変更がないため、同期フラッシュチェックポイントをスキップします」というメッセージが数百件出力され、レプリケーションが非常に遅くなる問題を修正しました[#4619](https://github.com/pingcap/tiflow/issues/4619)
         -   長いvarcharsがエラーを報告するバグを修正`Column length too big` [#4637](https://github.com/pingcap/tiflow/issues/4637)
         -   セーフモードでの更新ステートメントの実行エラーにより、DMワーカーがpanicになる可能性がある問題を修正しました[#4317](https://github.com/pingcap/tiflow/issues/4317)
         -   下流でフィルタリングされたDDLを手動で実行すると、タスク再開が失敗する場合がある問題を修正しました[#5272](https://github.com/pingcap/tiflow/issues/5272)

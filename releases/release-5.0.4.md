@@ -66,7 +66,7 @@ TiDB バージョン: 5.0.4
     -   ノードが故障して前に再起動した場合、一定期間TiFlashノードへのリクエストの送信を停止します。 [#26757](https://github.com/pingcap/tidb/pull/26757)
     -   `split region`上限を上げて`split table`と`presplit`をより安定させる[#26657](https://github.com/pingcap/tidb/pull/26657)
     -   MPPクエリの再試行をサポート[#26483](https://github.com/pingcap/tidb/pull/26483)
-    -   MPPクエリを起動する前にTiFlashの可用性を確認してください [#1807](https://github.com/pingcap/tics/issues/1807)
+    -   MPPクエリを起動する前にTiFlashの可用性を確認するようにします [#1807](https://github.com/pingcap/tics/issues/1807)
     -   クエリ結果をより安定させるために、安定した結果モードをサポートします[#26084](https://github.com/pingcap/tidb/pull/26084)
     -   MySQLシステム変数`init_connect`とその関連機能サポートする [#18894](https://github.com/pingcap/tidb/issues/18894)
     -   MPPモードで`COUNT(DISTINCT)`集約機能を徹底的にプッシュダウンする [#25861](https://github.com/pingcap/tidb/pull/25861)

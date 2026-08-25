@@ -88,10 +88,10 @@ TiDB バージョン: 4.0.9
 
     -   Backup & Restore (BR)
 
-        -   コマンドラインで曖昧な引数`--checksum false`を使用しないでください。この引数はチェックサムを正しく無効化しません`--checksum=false`のみ使用できます[#588](https://github.com/pingcap/br/pull/588)
+        -   コマンドラインで曖昧な引数`--checksum false`を許可しないようにします。この引数はチェックサムを正しく無効化しません。`--checksum=false`のみ使用できます[#588](https://github.com/pingcap/br/pull/588)
         -   BRが誤って存在した後にPDが元の構成を回復できるように、PD構成を一時的に変更することをサポートします[#596](https://github.com/pingcap/br/pull/596)
         -   復元後のテーブル分析をサポート[#622](https://github.com/pingcap/br/pull/622)
-        -   `read index not ready`と`proposal in merging mode`エラーを再試行してください[#626](https://github.com/pingcap/br/pull/626)
+        -   `read index not ready`と`proposal in merging mode`エラーに対して再試行するようにします[#626](https://github.com/pingcap/br/pull/626)
 
     -   TiCDC
 
@@ -134,7 +134,7 @@ TiDB バージョン: 4.0.9
     -   インデックスハッシュ結合とインデックスマージ結合が照合順序考慮しないバグを修正しました [#21219](https://github.com/pingcap/tidb/pull/21219)
     -   パーティションテーブルが構文`CREATE TABLE`と`SELECT`照合順序を考慮しないバグを修正[#21181](https://github.com/pingcap/tidb/pull/21181)
     -   `slow_query`のクエリ結果で一部の行が欠落する可能性がある問題を修正[#21211](https://github.com/pingcap/tidb/pull/21211)
-    -   データベース名が純粋な下位表現でない場合、データが正しく削除れない可能性がある問題を修正しました`DELETE` [#21206](https://github.com/pingcap/tidb/pull/21206)
+    -   データベース名が純粋な小文字表記でない場合、`DELETE`がデータを正しく削除できない可能性がある問題を修正しました [#21206](https://github.com/pingcap/tidb/pull/21206)
     -   DML操作後にスキーマ変更を引き起こすバグを修正[#21050](https://github.com/pingcap/tidb/pull/21050)
     -   結合を使用するときに結合された列をクエリできないバグを修正しました [#21021](https://github.com/pingcap/tidb/pull/21021)
     -   一部のセミ結合クエリの誤った結果を修正[#21019](https://github.com/pingcap/tidb/pull/21019)

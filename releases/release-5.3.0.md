@@ -393,7 +393,7 @@ TiCDC v5.3.0以降、TiDBクラスター間の循環レプリケーション機�
 -   PD
 
     -   ピア数が設定されたピア数を超えたために、PD がデータがあり保留中の状態のピアを誤って削除する問題を修正しました。 [#4045](https://github.com/tikv/pd/issues/4045)
-    -   PDが時間内にピアを固定しない問題を修正[#4077](https://github.com/tikv/pd/issues/4077)
+    -   PDが時間内にピアを修正しない問題を修正[#4077](https://github.com/tikv/pd/issues/4077)
     -   散布範囲スケジューラが空のリージョンをスケジュールできない問題を修正しました [#4118](https://github.com/tikv/pd/pull/4118)
     -   キーマネージャのCPU使用率が高すぎる問題を修正[#4071](https://github.com/tikv/pd/issues/4071)
     -   ホットリージョンスケジューラの設定時に発生する可能性のあるデータ競合の問題を修正しました。 [#4159](https://github.com/tikv/pd/issues/4159)

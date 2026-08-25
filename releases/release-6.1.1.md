@@ -20,7 +20,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 
 -   診断
 
-    -   継続的プロファイリング機能はデフォルトで無効になっています。これにより、この機能が有効になっている場合に発生する可能性のあるTiFlashのクラッシュ問題を回避できます。詳細については、 をご覧ください。 [#5687](https://github.com/pingcap/tiflash/issues/5687) @[mornyx](https://github.com/mornyx)
+    -   継続的プロファイリング機能はデフォルトで無効になっています。これにより、この機能が有効になっている場合に発生する可能性のあるTiFlashのクラッシュ問題を回避できます。詳細については、 [#5687](https://github.com/pingcap/tiflash/issues/5687) をご覧ください。 @[mornyx](https://github.com/mornyx)
 
 ## Other changes {#other-changes}
 
