@@ -7,7 +7,7 @@ summary: TiDB Cloud Dedicated は、マルチ AZ デプロイメントによる�
 
 TiDBはRaftコンセンサスアルゴリズムを使用し、 Raftグループ内のストレージ全体にデータの高可用性と安全なレプリケーションを実現します。データはストレージノード間で冗長コピーされ、異なるアベイラビリティゾーンに配置されるため、マシンやデータセンターの障害から保護されます。自動フェイルオーバー機能により、TiDBはサービスの常時稼働を保証します。
 
-TiDB Cloud Dedicated クラスタは、TiDB ノード、TiKV ノード、 TiFlashノードという 3 つの主要コンポーネントで構成されています。TiDB Cloud Dedicated の各コンポーネントの高可用性実装は次のとおりです。
+TiDB Cloud Dedicated クラスタは、TiDB ノード、TiKV ノード、 TiFlashノードという 3つの主要コンポーネントで構成されています。TiDB Cloud Dedicated の各コンポーネントの高可用性実装は次のとおりです。
 
 - **TiDBノード**
 
@@ -19,4 +19,4 @@ TiDB Cloud Dedicated クラスタは、TiDB ノード、TiKV ノード、 TiFlas
 
 - **TiFlashノード**
 
-    [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) 、TiKV の列指向ストレージ拡張機能であり、TiDB を本質的にハイブリッドトランザクション/分析処理 (HTAP) データベースにする重要なコンポーネントです。TiFlash、列指向レプリカはRaft Learnerコンセンサスアルゴリズムに従って非同期的に複製されます。TiDB Cloud Dedicated は、 TiFlashノードをリージョン内の異なるアベイラビリティゾーンに均等にデプロイします。本番環境での高可用性を確保するため、各TiDB Cloud Dedicated クラスターに少なくとも 2 つのTiFlashノードを設定し、少なくとも 2 つのデータレプリカを作成本番ことをお勧めします。
+    [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) 、TiKV の列指向ストレージ拡張機能であり、TiDB を本質的にハイブリッドトランザクション/分析処理 (HTAP) データベースにする重要なコンポーネントです。TiFlash、列指向レプリカはRaft Learnerコンセンサスアルゴリズムに従って非同期的に複製されます。TiDB Cloud Dedicated は、 TiFlashノードをリージョン内の異なるアベイラビリティゾーンに均等にデプロイします。本番環境での高可用性を確保するため、各TiDB Cloud Dedicated クラスターに少なくとも 2つのTiFlashノードを設定し、少なくとも 2つのデータレプリカを作成本番ことをお勧めします。

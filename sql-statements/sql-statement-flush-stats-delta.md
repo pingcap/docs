@@ -7,7 +7,7 @@ summary: TiDB データベースにおける FLUSH STATS_DELTA の使用方法�
 
 `FLUSH STATS_DELTA` は、TiDB のメモリにバッファされている保留中の統計デルタを、[`mysql.stats_meta`](/mysql-schema/mysql-schema.md#statistics-system-tables) システムテーブルに即座に永続化します。
 
-`INSERT`、`UPDATE`、`DELETE` などの DML 文を使用してデータを変更すると、TiDB は影響を受けた各テーブルの総行数と変更行数の変化を記録し、これらの変更（統計デルタと呼ばれます）を、その文を実行した TiDB ノードのメモリにバッファします。デフォルトでは、TiDB は 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease) ごと（デフォルトでは 60 秒ごと）に統計デルタを `mysql.stats_meta` システムテーブルへ永続化します。詳細は、[自動更新](/statistics.md#automatic-update) を参照してください。
+`INSERT`、`UPDATE`、`DELETE` などの DML 文を使用してデータを変更すると、TiDB は影響を受けた各テーブルの総行数と変更行数の変化を記録し、これらの変更（統計デルタと呼ばれます）を、その文を実行した TiDB ノードのメモリにバッファします。デフォルトでは、TiDB は 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease) ごと（デフォルトでは 60秒ごと）に統計デルタを `mysql.stats_meta` システムテーブルへ永続化します。詳細は、[自動更新](/statistics.md#automatic-update) を参照してください。
 
 [テーブルの統計ヘルス状態](/sql-statements/sql-statement-show-stats-healthy.md)、[`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md) の出力、および自動統計収集のスケジューリングは、永続化された統計メタデータに依存します。そのため、オプティマイザの動作を検証するテストシナリオなど、永続化された統計メタデータに最近のデータ変更を即座に反映させる必要がある場合に、`FLUSH STATS_DELTA` は有用です。[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) を実行する前に `FLUSH STATS_DELTA` を実行する必要はありません。TiDB は、テーブルの統計を収集する前に、そのテーブルの保留中の統計デルタを自動的にフラッシュするためです。
 
@@ -40,7 +40,7 @@ ClusterOption ::=
 
 ## オプション {#options}
 
-- **Targets (`FlushTargetList`)**: 統計デルタをフラッシュする対象テーブルを指定します。少なくとも 1 つの対象を指定する必要があります。
+- **Targets (`FlushTargetList`)**: 統計デルタをフラッシュする対象テーブルを指定します。少なくとも 1つの対象を指定する必要があります。
     - `table_name`: 現在のデータベース内の特定のテーブルの統計デルタをフラッシュします。データベースを選択していない場合、TiDB は `No database selected` エラーを返します。
     - `db_name.table_name`: 指定したデータベース内の特定のテーブルの統計デルタをフラッシュします。
     - `db_name.*`: 指定したデータベース内のすべてのテーブルの統計デルタをフラッシュします。

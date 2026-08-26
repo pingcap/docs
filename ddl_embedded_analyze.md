@@ -5,7 +5,7 @@ summary: このドキュメントでは、新しく作成または再編成さ�
 
 # DDL ステートメントに埋め込まれた`ANALYZE` <span class="version-mark">(v8.5.4 で導入)</span> {#analyze-embedded-in-ddl-statements-span-class-version-mark-introduced-in-v8-5-4-span}
 
-このドキュメントでは、次の 2 種類の DDL ステートメントに組み込まれている`ANALYZE`機能について説明します。
+このドキュメントでは、次の2種類の DDL ステートメントに組み込まれている`ANALYZE`機能について説明します。
 
 - 新しいインデックスを作成するDDL文: [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
 - 既存のインデックスを再編成する DDL ステートメント: [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)と[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)

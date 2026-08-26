@@ -5,7 +5,7 @@ summary: TiDB Cloud が TiDB X インスタンス向けに個別のプロジェ�
 
 # {{{ .starter }}} と Essential のための Project API 移行ガイド
 
-2026 年 4 月 15 日より、TiDB Cloud はリソースタイプごとに個別のプロジェクトタイプを導入します。{{{ .starter }}} と Essential インスタンスについては、TiDB X プロジェクト内、または組織レベルで管理できるようになります。詳細は、[TiDB X Instances の Project Migration FAQ](/tidb-cloud/tidbx-instance-move-faq.md) を参照してください。
+2026 年 4月 15日より、TiDB Cloud はリソースタイプごとに個別のプロジェクトタイプを導入します。{{{ .starter }}} と Essential インスタンスについては、TiDB X プロジェクト内、または組織レベルで管理できるようになります。詳細は、[TiDB X Instances の Project Migration FAQ](/tidb-cloud/tidbx-instance-move-faq.md) を参照してください。
 
 このガイドは、既存の `v1beta` 呼び出しの大部分を引き続き動作させつつ、{{{ .starter }}} と Essential インスタンスに対するプロジェクト検索およびクラスタ作成にのみ最小限の変更を加えたい API 呼び出し元を対象としています。
 
@@ -26,7 +26,7 @@ summary: TiDB Cloud が TiDB X インスタンス向けに個別のプロジェ�
 |---|---|
 | `dedicated` | TiDB Cloud Dedicated クラスタのみを含むプロジェクトです。 |
 | `tidbx` | {{{ .starter }}} や Essential など、TiDB X インスタンスのみを含むプロジェクトです。 |
-| `tidbx_virtual` | どのプロジェクトにも割り当てられていない TiDB X インスタンス用の、デフォルトの組織レベルプロジェクトです。各組織には 1 つの `tidbx_virtual` プロジェクトのみ存在します。 |
+| `tidbx_virtual` | どのプロジェクトにも割り当てられていない TiDB X インスタンス用の、デフォルトの組織レベルプロジェクトです。各組織には 1つの `tidbx_virtual` プロジェクトのみ存在します。 |
 
 > **Note:**
 >

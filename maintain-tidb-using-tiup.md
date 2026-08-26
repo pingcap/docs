@@ -148,7 +148,7 @@ TiDB ホットフィックス パッケージが`/tmp/tidb-hotfix.tar.gz`にあ�
 tiup cluster patch test-cluster /tmp/tidb-hotfix.tar.gz -R tidb
 ```
 
-クラスター内の 1 つの TiDB パッケージのみを置き換えることもできます。
+クラスター内の 1つの TiDB パッケージのみを置き換えることもできます。
 
 ```bash
 tiup cluster patch test-cluster /tmp/tidb-hotfix.tar.gz -N 172.16.4.5:4000

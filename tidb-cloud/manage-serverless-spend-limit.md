@@ -11,11 +11,11 @@ summary: TiDB Cloud Starterインスタンスの利用限度額を管理する�
 
 支出制限とは、特定のワークロードに対して1か月間に支出できる最大金額のことです。これは、TiDB Cloud Starterインスタンスの予算を設定できるコスト管理メカニズムです。
 
-TiDB Cloudの各組織につき、最大 5 つの [無料のTiDB Cloud Starterインスタンス](/tidb-cloud/select-cluster-tier.md#starter)デフォルトで作成できます。TiDB Cloud Starterインスタンスをさらに作成するには、クレジットカードを追加し、月間利用限度額を設定する必要があります。ただし、新しいインスタンスを作成する前に以前のTiDB Cloud Starterインスタンスを削除した場合、新しいTiDB Cloud Starterインスタンスはクレジットカードなしで作成できます。
+TiDB Cloudの各組織につき、最大 5つの [無料のTiDB Cloud Starterインスタンス](/tidb-cloud/select-cluster-tier.md#starter)デフォルトで作成できます。TiDB Cloud Starterインスタンスをさらに作成するには、クレジットカードを追加し、月間利用限度額を設定する必要があります。ただし、新しいインスタンスを作成する前に以前のTiDB Cloud Starterインスタンスを削除した場合、新しいTiDB Cloud Starterインスタンスはクレジットカードなしで作成できます。
 
 ## 使用クォータ {#usage-quota}
 
-組織内の最初の 5 つのTiDB Cloud Starterインスタンス（無料版かスケーラブル版かを問わず）については、 TiDB Cloud はそれぞれに以下の無料使用クォ​​ータを提供します。
+組織内の最初の 5つのTiDB Cloud Starterインスタンス（無料版かスケーラブル版かを問わず）については、 TiDB Cloud はそれぞれに以下の無料使用クォ​​ータを提供します。
 
 - 行ベースストレージ：5 GiB
 - カラム型ストレージ：5 GiB

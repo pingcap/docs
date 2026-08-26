@@ -106,7 +106,7 @@ aliases: ['/ja/tidb/stable/vector-search-functions-and-operators/','/ja/tidbclou
 VEC_L2_DISTANCE(vector1, vector2)
 ```
 
-次の式を使用して、2 つのベクトル間の[L2距離](https://en.wikipedia.org/wiki/Euclidean_distance) (ユークリッド距離) を計算します。
+次の式を使用して、2つのベクトル間の[L2距離](https://en.wikipedia.org/wiki/Euclidean_distance) (ユークリッド距離) を計算します。
 
 $距離(p,q)=\sqrt {\sum \limits *{i=1}^{n}{(p* {i}-q_{i})^{2}}}$
 
@@ -132,7 +132,7 @@ SELECT VEC_L2_DISTANCE('[0, 3]', '[4, 0]');
 VEC_COSINE_DISTANCE(vector1, vector2)
 ```
 
-次の式を使用して 2 つのベクトル間の[コサイン距離](https://en.wikipedia.org/wiki/Cosine_similarity)を計算します。
+次の式を使用して 2つのベクトル間の[コサイン距離](https://en.wikipedia.org/wiki/Cosine_similarity)を計算します。
 
 $距離(p,q)=1.0 - {\frac {\sum \limits *{i=1}^{n}{p* {i}q_{i}}}{{\sqrt {\sum \limits *{i=1}^{n}{p* {i}^{2}}}}\cdot {\sqrt {\sum \limits *{i=1}^{n}{q* {i}^{2}}}}}}$
 
@@ -160,7 +160,7 @@ SELECT VEC_COSINE_DISTANCE('[1, 1]', '[-1, -1]');
 VEC_NEGATIVE_INNER_PRODUCT(vector1, vector2)
 ```
 
-次の数式を使用して、2 つのベクトル間の[内積](https://en.wikipedia.org/wiki/Dot_product)の負の値を使用して距離を計算します。
+次の数式を使用して、2つのベクトル間の[内積](https://en.wikipedia.org/wiki/Dot_product)の負の値を使用して距離を計算します。
 
 $DISTANCE(p,q)=- INNER_PROD(p,q)=-\sum \limits *{i=1}^{n}{p* {i}q_{i}}$
 
@@ -186,7 +186,7 @@ SELECT VEC_NEGATIVE_INNER_PRODUCT('[1, 2]', '[3, 4]');
 VEC_L1_DISTANCE(vector1, vector2)
 ```
 
-次の式を使用して、2 つのベクトル間の[L1距離](https://en.wikipedia.org/wiki/Taxicab_geometry) (マンハッタン距離) を計算します。
+次の式を使用して、2つのベクトル間の[L1距離](https://en.wikipedia.org/wiki/Taxicab_geometry) (マンハッタン距離) を計算します。
 
 $距離(p,q)=\sum \limits *{i=1}^{n}{|p* {i}-q_{i}|}$
 

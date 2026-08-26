@@ -25,7 +25,7 @@ ALTER TABLE table_name SET TIFLASH REPLICA count;
 
 同じテーブルに対して複数のDDL文を実行した場合、最後に実行された文のみが確実に有効になります。次の例では、テーブル`tpch50`に対して2つのDDL文が実行されていますが、2番目の文（レプリカを削除する文）のみが確実に有効になります。
 
-テーブルのレプリカを 2 つ作成します。
+テーブルのレプリカを 2つ作成します。
 
 ```sql
 ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 2;
@@ -69,7 +69,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>
 上記のステートメントの結果は次のようになります。
 
 - `AVAILABLE`は、このテーブルのTiFlashレプリカが使用可能かどうかを示します。`1`は使用可能、 `0`は使用不可を意味します。レプリカが使用可能になると、このステータスは変更されません。DDL ステートメントを使用してレプリカの数を変更すると、レプリケーションステータスは再計算されます。
-- `PROGRESS`はレプリケーションの進行状況を表します。値は`0.0`から`1.0`までです。`1`は少なくとも 1 つのレプリカがレプリケートされていることを意味します。
+- `PROGRESS`はレプリケーションの進行状況を表します。値は`0.0`から`1.0`までです。`1`は少なくとも 1つのレプリカがレプリケートされていることを意味します。
 
 ## データベースのTiFlashレプリカを作成する {#create-tiflash-replicas-for-databases}
 
@@ -83,7 +83,7 @@ ALTER DATABASE db_name SET TIFLASH REPLICA count;
 
 例:
 
-- データベース`tpch50`内のすべてのテーブルに対して 2 つのレプリカを作成します。
+- データベース`tpch50`内のすべてのテーブルに対して 2つのレプリカを作成します。
 
     ```sql
     ALTER DATABASE `tpch50` SET TIFLASH REPLICA 2;
@@ -100,7 +100,7 @@ ALTER DATABASE db_name SET TIFLASH REPLICA count;
 > - この文は実際には一連のDDL操作を実行しますが、これらの操作はリソースを大量に消費します。文の実行中に中断された場合、実行済みの操作はロールバックされず、未実行の操作は続行されません。
 >
 > - ステートメント実行後、**このデータベース内のすべてのテーブルがレプリケートされる**まで、 TiFlashレプリカの数を設定したり、このデータベースに対してDDL操作を実行したりしないでください。そうしないと、次のような予期しない結果が発生する可能性があります。
->     - TiFlashレプリカの数を 2 に設定し、データベース内のすべてのテーブルがレプリケートされる前にその数を 1 に変更した場合、すべてのテーブルのTiFlashレプリカの最終的な数は必ずしも 1 または 2 になるとは限りません。
+>     - TiFlashレプリカの数を2に設定し、データベース内のすべてのテーブルがレプリケートされる前にその数を1に変更した場合、すべてのテーブルのTiFlashレプリカの最終的な数は必ずしも 1 または 2 になるとは限りません。
 >     - ステートメントを実行した後、ステートメントの実行が完了する前にこのデータベースにテーブルを作成すると、これらの新しいテーブルに対してTiFlashレプリカが作成される**場合と作成されない場合があります**。
 >     - ステートメントを実行した後、ステートメントの実行が完了する前にデータベース内のテーブルのインデックスを追加すると、ステートメントがハングし、インデックスが追加された後にのみ再開される可能性があります。
 >
@@ -281,7 +281,7 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
 
 <CustomContent platform="tidb">
 
-ラベルを使用してレプリカをスケジュールする方法の詳細については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md) 、 [1 つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md) 、および[2 つの地域に配置された 3 つのデータセンター](/three-data-centers-in-two-cities-deployment.md)を参照してください。
+ラベルを使用してレプリカをスケジュールする方法の詳細については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md) 、 [1つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md) 、および[2つの地域に配置された 3つのデータセンター](/three-data-centers-in-two-cities-deployment.md)を参照してください。
 
 TiFlashは、異なるゾーンに対するレプリカ選択戦略の設定をサポートしています。詳細については、 [`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730)を参照してください。
 

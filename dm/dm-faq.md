@@ -61,7 +61,7 @@ TiDBでサポートされていないDDL文に遭遇した場合は、dmctlを�
 
 最後の`rename ghost_table to origin table`ステップでは、DM はメモリ内の DDL 情報を読み取り、元のテーブルの DDL に復元します。
 
-ただし、メモリ内の DDL 情報は、次の 2 つの方法のいずれかで取得されます。
+ただし、メモリ内の DDL 情報は、次の2つの方法のいずれかで取得されます。
 
 - DM [`alter ghost_table`操作中に gh-ost テーブルを処理する](/dm/feature-online-ddl.md#online-schema-change-gh-ost)および`ghost_table`の DDL 情報を記録します。
 - DM ワーカーが再起動されてタスクが開始されると、DM は`dm_meta.{task_name}_onlineddl`から DDL を読み取ります。
@@ -146,7 +146,7 @@ DM v2.0 以降、増分データレプリケーションを続行するために
 構成項目`block-allow-list`と`table-route`を確認します。
 
 - `block-allow-list`の下にある上流のデータベースとテーブルの名前を設定する必要があります。`do-tables`の前に「~」を追加すると、正規表現を使用して名前を一致させることができます。
-- `table-route` 、テーブル名の一致に正規表現ではなくワイルドカード文字を使用します。例えば、 `table_parttern_[0-63]` `table_parttern_0`から`table_pattern_6`までの 7 つのテーブルのみに一致します。
+- `table-route` 、テーブル名の一致に正規表現ではなくワイルドカード文字を使用します。例えば、 `table_parttern_[0-63]` `table_parttern_0`から`table_pattern_6`までの 7つのテーブルのみに一致します。
 
 ## DM がアップストリームからレプリケートしていないのに、 `replicate lag`モニター メトリックにデータが表示されないのはなぜですか? {#why-does-the-replicate-lag-monitor-metric-show-no-data-when-dm-is-not-replicating-from-upstream}
 
@@ -203,7 +203,7 @@ DM-worker のログファイルを確認し、 `change count`を含む行を探�
 
 DM v2.0.1 以前のバージョンでは、完全インポートが完了する前に DM が再起動すると、上流のデータソースと DM ワーカーノード間のバインディングが変更される可能性があります。例えば、ダンプユニットの中間データが DM ワーカーノード A にあるにもかかわらず、ロードユニットが DM ワーカーノード B で実行されている場合、操作が失敗する可能性があります。
 
-この問題に対する解決策は次の 2 つです。
+この問題に対する解決策は次の2つです。
 
 - データ量が少ない (1 TB 未満) 場合、またはタスクがシャーディングされたテーブルをマージする場合は、次の手順を実行します。
 

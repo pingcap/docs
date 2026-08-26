@@ -144,7 +144,7 @@ TiDB Cloud Dedicated では、`CALIBRATE RESOURCE` ステートメントはサ�
 
 [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md)コマンドを使用して、クラスターのリソースグループを作成できます。
 
-既存のリソースグループの場合、 [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)を使用して、リソースグループの`RU_PER_SEC`オプション (1 秒あたりの RU バックフィル率) を変更できます。リソースグループへの変更は即座に有効になります。
+既存のリソースグループの場合、 [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)を使用して、リソースグループの`RU_PER_SEC`オプション (1秒あたりの RU バックフィル率) を変更できます。リソースグループへの変更は即座に有効になります。
 
 [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)を使用してリソースグループを削除できます。
 
@@ -357,7 +357,7 @@ SELECT * FROM request_unit_by_group LIMIT 5;
 
 > **Note:**
 >
-> `mysql.request_unit_by_group`のデータは、TiDB のスケジュールされたタスクによって毎日終了時に自動的にインポートされます。特定の日にリソースグループの RU 消費量が 0 の場合、レコードは生成されません。デフォルトでは、このテーブルには過去 3 か月 (最大 92 日) のデータが格納されます。この期間を超えるデータは自動的にクリアされます。
+> `mysql.request_unit_by_group`のデータは、TiDB のスケジュールされたタスクによって毎日終了時に自動的にインポートされます。特定の日にリソースグループの RU 消費量が 0 の場合、レコードは生成されません。デフォルトでは、このテーブルには過去 3 か月 (最大 92日) のデータが格納されます。この期間を超えるデータは自動的にクリアされます。
 
 ## 指標とグラフのモニタリング {#monitoring-metrics-and-charts}
 

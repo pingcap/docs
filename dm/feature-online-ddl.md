@@ -15,13 +15,13 @@ DMを使用してMySQLからTiDBにデータを移行する場合、online-ddl�
 
 ## オンラインスキーマ変更: gh-ost {#online-schema-change-gh-ost}
 
-gh-ost がオンラインスキーマ変更を実装すると、次の 3 種類のテーブルが作成されます。
+gh-ost がオンラインスキーマ変更を実装すると、次の3種類のテーブルが作成されます。
 
 - gho: DDLの適用に使用されます。データが完全に複製され、ghoテーブルが元のテーブルと整合性が取れている場合、元のテーブルは名前変更によって置き換えられます。
 - ghc: オンラインスキーマ変更に関連する情報を保存するために使用されます。
 - del: 元のテーブルの名前を変更して作成されました。
 
-移行プロセスでは、DM は上記のテーブルを 3 つのカテゴリに分割します。
+移行プロセスでは、DM は上記のテーブルを 3つのカテゴリに分割します。
 
 - ゴーストテーブル: `_*_gho`
 - ゴミ箱テーブル: `_*_ghc` , `_*_del`
@@ -86,9 +86,9 @@ gh-ost で主に使用される SQL ステートメントとそれに対応す�
     Rename /* gh-ost */ table `test`.`test4` to `test`.`_test4_del`, `test`.`_test4_gho` to `test`.`test4`;
     ```
 
-    DM は次の 2 つの操作を実行します。
+    DM は次の2つの操作を実行します。
 
-    - DM は上記の`rename`操作を 2 つの SQL 文に分割します。
+    - DM は上記の`rename`操作を 2つの SQL 文に分割します。
 
         ```sql
         rename test.test4 to test._test4_del;
@@ -113,13 +113,13 @@ gh-ost で主に使用される SQL ステートメントとそれに対応す�
 
 ## オンラインスキーマ変更: pt {#online-schema-change-pt}
 
-pt-osc がオンラインスキーマ変更を実装すると、次の 2 種類のテーブルが作成されます。
+pt-osc がオンラインスキーマ変更を実装すると、次の2種類のテーブルが作成されます。
 
 - `new` : DDLの適用に使用されます。データが完全に複製され、 `new`テーブルが元のテーブルと整合性が取れている場合、元のテーブルは名前変更によって置き換えられます。
 - `old` : 元のテーブルの名前を変更して作成されました。
 - 3種類`pt_osc_*_del`トリガー： `pt_osc_*_ins`のプロセスでは、元のテーブルで生成された新しいデータ`pt_osc_*_upd`トリガーによって`new`に複製されます。
 
-移行プロセスでは、DM は上記のテーブルを 3 つのカテゴリに分割します。
+移行プロセスでは、DM は上記のテーブルを 3つのカテゴリに分割します。
 
 - ゴーストテーブル: `_*_new`
 - ゴミ箱テーブル: `_*_old`
@@ -152,7 +152,7 @@ pt-osc で主に使用される SQL 文とそれに対応する DM の操作は�
     REPLACE INTO dm_meta.{task_name}_onlineddl (id, ghost_schema , ghost_table , ddls) VALUES (......);
     ```
 
-3. データ移行に使用する 3 つのトリガーを作成します。
+3. データ移行に使用する 3つのトリガーを作成します。
 
     ```sql
     CREATE TRIGGER `pt_osc_test_test4_del` AFTER DELETE ON `test`.`test4` ...... ;
@@ -176,9 +176,9 @@ pt-osc で主に使用される SQL 文とそれに対応する DM の操作は�
     RENAME TABLE `test`.`test4` TO `test`.`_test4_old`, `test`.`_test4_new` TO `test`.`test4`
     ```
 
-    DM は次の 2 つの操作を実行します。
+    DM は次の2つの操作を実行します。
 
-    - DM は上記の`rename`操作を 2 つの SQL 文に分割します。
+    - DM は上記の`rename`操作を 2つの SQL 文に分割します。
 
         ```sql
         rename test.test4 to test._test4_old;
@@ -197,7 +197,7 @@ pt-osc で主に使用される SQL 文とそれに対応する DM の操作は�
         ALTER TABLE `test`.`test4` add column c3 int;
         ```
 
-6. オンライン DDL 操作の`_old`テーブルと 3 つのトリガーを削除します。
+6. オンライン DDL 操作の`_old`テーブルと 3つのトリガーを削除します。
 
     ```sql
     DROP TABLE IF EXISTS `test`.`_test4_old`;

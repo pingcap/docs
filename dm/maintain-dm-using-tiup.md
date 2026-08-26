@@ -239,7 +239,7 @@ DM マスター ホットフィックス パッケージが`/tmp/dm-master-hotfi
 tiup dm patch prod-cluster /tmp/dm-master-hotfix.tar.gz -R dm-master
 ```
 
-クラスター内の DM マスター パッケージを 1 つだけ置き換えることもできます。
+クラスター内の DM マスター パッケージを 1つだけ置き換えることもできます。
 
 ```bash
 tiup dm patch prod-cluster /tmp/dm--hotfix.tar.gz -N 172.16.4.5:8261

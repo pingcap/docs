@@ -1,11 +1,11 @@
 ---
 title: TiDB Cloud Release Notes in 2025
-summary: 2025 年のTiDB Cloudのリリースノートについて説明します。
+summary: 2025年のTiDB Cloudのリリースノートについて説明します。
 ---
 
 # 2025年のTiDB Cloudリリースノート {#tidb-cloud-release-notes-in-2025}
 
-このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが記載されています。
+このページには、2025年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが記載されています。
 
 ## 2025年12月30日 {#december-30-2025}
 
@@ -150,7 +150,7 @@ summary: 2025 年のTiDB Cloudのリリースノートについて説明しま�
 
 - **TiDB Cloud Starter とTiDB Cloud Essential**
 
-    接続の安定性を向上させ、TiDBサーバーの再起動またはメンテナンス中に予期しない切断を防ぐには、データベース接続の最大有効期間を 30 分未満に設定することをお勧めします。
+    接続の安定性を向上させ、TiDBサーバーの再起動またはメンテナンス中に予期しない切断を防ぐには、データベース接続の最大有効期間を 30分未満に設定することをお勧めします。
 
     詳細については[接続の有効期間を設定する](/develop/dev-guide-connection-parameters.md#configure-the-lifetime-of-connections)を参照してください。
 
@@ -225,7 +225,7 @@ summary: 2025 年のTiDB Cloudのリリースノートについて説明しま�
 
         現在、この機能はベータ版です。詳細については、 [TiDB Cloud Essential のデータベース監査ログ](/tidb-cloud/essential-database-audit-logging.md)ご覧ください。
 
-    - TiDB Cloud Essential では、クラスターのリクエストキャパシティユニット (RCU) 消費量が 1 時間以内に設定された最大値に複数回達したときに通知する新しいイベント`ResourceLimitation`が追加されました。
+    - TiDB Cloud Essential では、クラスターのリクエストキャパシティユニット (RCU) 消費量が 1時間以内に設定された最大値に複数回達したときに通知する新しいイベント`ResourceLimitation`が追加されました。
 
         使用量の上限を超えると、処理能力が制限される可能性があります。サービスへの影響を避けるため、最大RCUを増やすことをご検討ください。
 
@@ -304,7 +304,7 @@ summary: 2025 年のTiDB Cloudのリリースノートについて説明しま�
 - **TiDB Cloud Starter**
 
     - 新しく作成された[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)クラスターでは、ゾーン高可用性のみが有効になっており、構成することはできません。
-    - **2025 年 9 月 9 日**より前にリージョン高可用性が有効にされた既存のTiDB Cloud Starter クラスターの場合、リージョン高可用性は引き続きサポートされ、影響を受けません。
+    - **2025年 9月 9日**より前にリージョン高可用性が有効にされた既存のTiDB Cloud Starter クラスターの場合、リージョン高可用性は引き続きサポートされ、影響を受けません。
 
 <CustomContent language="en,zh">
 
@@ -324,7 +324,7 @@ summary: 2025 年のTiDB Cloudのリリースノートについて説明しま�
 
 - **TiDB Cloud Essential**
 
-    - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)クラスターに対して`Jakarta (ap-southeast-5)` `Mexico (na-south-1)` 3 つの新しい Alibaba Cloud リージョン`Tokyo (ap-northeast-1)`サポートします。
+    - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)クラスターに対して`Jakarta (ap-southeast-5)` `Mexico (na-south-1)` 3つの新しい Alibaba Cloud リージョン`Tokyo (ap-northeast-1)`サポートします。
 
 - **TiDB Cloud Dedicated**
 
@@ -558,7 +558,7 @@ summary: 2025 年のTiDB Cloudのリリースノートについて説明しま�
 
     - 新しい<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="" style="width: calc(1.25rem * var(--mantine-scale)); height: calc(1.25rem * var(--mantine-scale));"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M9 3v18M7.8 3h8.4c1.68 0 2.52 0 3.162.327a3 3 0 0 1 1.311 1.311C21 5.28 21 6.12 21 7.8v8.4c0 1.68 0 2.52-.327 3.162a3 3 0 0 1-1.311 1.311C18.72 21 17.88 21 16.2 21H7.8c-1.68 0-2.52 0-3.162-.327a3 3 0 0 1-1.311-1.311C3 18.72 3 17.88 3 16.2V7.8c0-1.68 0-2.52.327-3.162a3 3 0 0 1 1.311-1.311C5.28 3 6.12 3 7.8 3" stroke-width="inherit"></path></svg>アイコンが左上隅に表示されるようになりました。これにより、必要に応じて左側のナビゲーションペインを簡単に非表示または表示できます。
 
-    - 左上隅にコンボボックスが追加され、組織、プロジェクト、クラスターを 1 つの中央の場所から簡単に切り替えられるようになりました。
+    - 左上隅にコンボボックスが追加され、組織、プロジェクト、クラスターを 1つの中央の場所から簡単に切り替えられるようになりました。
 
         <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/tidb-cloud-combo-box.png" width="200" />
 
@@ -572,10 +572,10 @@ summary: 2025 年のTiDB Cloudのリリースノートについて説明しま�
 
 - Microsoft Azure の[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)がパブリックプレビューで利用できるようになりました。
 
-    このリリースにより、 TiDB Cloud はAWS、Google Cloud、Azure の 3 つの主要なパブリッククラウド プラットフォームすべてをサポートするようになり、ビジネス ニーズとクラウド戦略に最適な場所にTiDB Cloud Dedicated クラスターを展開できるようになりました。
+    このリリースにより、 TiDB Cloud はAWS、Google Cloud、Azure の 3つの主要なパブリッククラウド プラットフォームすべてをサポートするようになり、ビジネス ニーズとクラウド戦略に最適な場所にTiDB Cloud Dedicated クラスターを展開できるようになりました。
 
     - AWS および Google Cloud で利用可能なすべてのコア機能は、Azure で完全にサポートされています。
-    - Azure サポートは現在、米国東部 2、東日本、東南アジアの 3 つのリージョンで利用可能であり、近日中にさらに多くのリージョンで利用可能になる予定です。
+    - Azure サポートは現在、米国東部 2、東日本、東南アジアの 3つのリージョンで利用可能であり、近日中にさらに多くのリージョンで利用可能になる予定です。
     - Azure 上のTiDB Cloud Dedicated クラスターには、TiDB バージョン v7.5.3 以降が必要です。
 
     Azure でTiDB Cloud Dedicated をすぐに使い始めるには、次のドキュメントを参照してください。
@@ -683,7 +683,7 @@ summary: 2025 年のTiDB Cloudのリリースノートについて説明しま�
 
     - **リソースの分離**:
 
-        - TiDB ノードを論理的に分離されたユニットにグループ化し、1 つのグループのワークロードが他のグループに影響を与えないようにします。
+        - TiDB ノードを論理的に分離されたユニットにグループ化し、1つのグループのワークロードが他のグループに影響を与えないようにします。
         - アプリケーションまたはビジネス ユニット間のリソース競合を防止します。
 
     - **簡素化された管理**：
@@ -804,7 +804,7 @@ summary: 2025 年のTiDB Cloudのリリースノートについて説明しま�
 
     - すべてのテーブルに対して単一のパーティション ディスパッチャーを定義することも、テーブルごとに異なるパーティション ディスパッチャーを定義することもサポートします。
 
-    - Kafka メッセージのパーティション分散用に、タイムスタンプと列値という 2 つの新しいディスパッチャ タイプを導入しました。
+    - Kafka メッセージのパーティション分散用に、タイムスタンプと列値という 2つの新しいディスパッチャ タイプを導入しました。
 
     詳細については[Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)を参照してください。
 

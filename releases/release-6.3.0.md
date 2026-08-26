@@ -42,7 +42,7 @@ TiDBバージョン: 6.3.0-DMR
 
 - [パーティション交換](/partitioned-table.md#partition-management)が GA になりました [#35996](https://github.com/pingcap/tidb/issues/35996) @[ymkzpx](https://github.com/ymkzpx)
 
-- TiFlashへのさらに 2 つの[ウィンドウ関数](/tiflash/tiflash-supported-pushdown-calculations.md)のプッシュダウンをサポート [#5579](https://github.com/pingcap/tiflash/issues/5579) @[SeaRise](https://github.com/SeaRise)
+- TiFlashへのさらに 2つの[ウィンドウ関数](/tiflash/tiflash-supported-pushdown-calculations.md)のプッシュダウンをサポート [#5579](https://github.com/pingcap/tiflash/issues/5579) @[SeaRise](https://github.com/SeaRise)
 
     - `LEAD()`
     - `LAG()`
@@ -189,7 +189,7 @@ TiDBバージョン: 6.3.0-DMR
 
 - DM に新しい設定項目`safe-mode-duration`が追加されました [#6224](https://github.com/pingcap/tiflow/issues/6224) @[okJiang](https://github.com/okJiang)
 
-    この設定項目は、[タスク構成ファイル](/dm/task-configuration-file-full.md)ファイルに追加されます。DM が異常終了した後の自動セーフモードの継続時間を調整できます。デフォルト値は 60 秒です。 `safe-mode-duration` `"0s"`に設定すると、DM が異常再起動後にセーフモードに入ろうとしたときにエラーが報告されます。
+    この設定項目は、[タスク構成ファイル](/dm/task-configuration-file-full.md)ファイルに追加されます。DM が異常終了した後の自動セーフモードの継続時間を調整できます。デフォルト値は 60秒です。 `safe-mode-duration` `"0s"`に設定すると、DM が異常再起動後にセーフモードに入ろうとしたときにエラーが報告されます。
 
 ### TiDBデータ共有サブスクリプション {#tidb-data-share-subscription}
 

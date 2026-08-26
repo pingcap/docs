@@ -18,7 +18,7 @@ TiDB Cloud Starterは、お客様と組織に完全なHTAP機能を備えたTiDB
 
 ### TiDB Cloud Starter とTiDB Cloud Serverless の関係は何ですか? {#what-is-the-relationship-between-tidb-cloud-starter-and-tidb-cloud-serverless}
 
-TiDB Cloud Starter は、2025 年 8 月 12 日よりTiDB Cloud Serverless の新しい名前になります。
+TiDB Cloud Starter は、2025年 8月 12日よりTiDB Cloud Serverless の新しい名前になります。
 
 Starter に名前が変更される前、 TiDB Cloudの Serverless 層は何千人もの開発者のエントリ ポイントとして機能し、自動的にスケーリングされ、数秒で起動し、十分な無料割り当てを超えるまでコストがかからない、本番環境対応のデータベースを提供していました。
 
@@ -29,7 +29,7 @@ Starter に名前が変更される前、 TiDB Cloudの Serverless 層は何千�
 - 行ベースと列ベースの両方のストレージを備えた完全に管理されたデータベースで、ハイブリッド OLTP および OLAP ワークロードに最適です。
 - 自動かつリクエスト主導型のスケーリング。容量計画や手動の調整は必要ありません。
 - ベクトル検索とフルテキスト検索が組み込まれており、GenAI 検索、チャットボット、その他の AI アプリケーションを強化します。
-- 組織ごとに最大 5 つのクラスターまで、月間クォータが常時無料です (5 GiB の行データ + 5 GiB の列データ + クラスターあたり 5,000 万[RU](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) )。
+- 組織ごとに最大 5つのクラスターまで、月間クォータが常時無料です (5 GiB の行データ + 5 GiB の列データ + クラスターあたり 5,000 万[RU](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) )。
 
 ### TiDB Cloud Starter を使い始めるにはどうすればよいですか? {#how-do-i-get-started-with-tidb-cloud-starter}
 
@@ -96,7 +96,7 @@ TiDB Cloud Starterは従量課金モデルを採用しており、ストレー�
 
 ### TiDB Cloud Starter には無料プランはありますか? {#is-there-any-free-plan-available-for-tidb-cloud-starter}
 
-組織内の最初の 5 つのTiDB Cloud Starter クラスターについては、 TiDB Cloud は次のようにクラスターごとに無料使用量割り当てを提供します。
+組織内の最初の 5つのTiDB Cloud Starter クラスターについては、 TiDB Cloud は次のようにクラスターごとに無料使用量割り当てを提供します。
 
 - 行ベースのストレージ: 5 GiB
 - 列指向ストレージ: 5 GiB
@@ -154,7 +154,7 @@ TiDB Cloud Starter の列指向ストレージの料金は、行指向ストレ�
 
 TiDB Cloud Starterの列指向ストレージは、追加のレプリカが必要となり、データレプリケーションに必要なストレージとリソースが増えるため、追加コストが発生します。ただし、分析クエリを実行する際には、列指向ストレージがコスト効率が高くなります。
 
-TPC-H ベンチマークテストによると、列ベースのストレージで分析クエリを実行するコストは、行ベースのストレージを使用する場合のコストの約 3 分の 1 になります。
+TPC-H ベンチマークテストによると、列ベースのストレージで分析クエリを実行するコストは、行ベースのストレージを使用する場合のコストの約3分の 1 になります。
 
 したがって、追加のレプリカによる初期コストは発生する可能性がありますが、分析時の計算コストが削減されるため、特定のユースケースではより費用対効果の高いものになる可能性があります。特に分析ニーズが高いユーザーにとって、列指向ストレージはコストを大幅に削減し、大幅なコスト削減の機会を提供します。
 

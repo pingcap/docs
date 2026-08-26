@@ -18,7 +18,7 @@ TiDB v5.1以降、TiDBはANSI SQL99標準のCTEと再帰をサポートしてい
 
 共通テーブル式（CTE）は、SQL文内で複数回参照できる一時的な結果セットであり、文の可読性と実行効率を向上させます。CTEを使用するには、 [`WITH`](/sql-statements/sql-statement-with.md)文を適用します。
 
-共通テーブル式は、非再帰 CTE と再帰 CTE の 2 種類に分類できます。
+共通テーブル式は、非再帰 CTE と再帰 CTE の 2種類に分類できます。
 
 ### 非再帰CTE {#non-recursive-cte}
 
@@ -31,7 +31,7 @@ WITH <query_name> AS (
 SELECT ... FROM <query_name>;
 ```
 
-たとえば、最年長の 50 人の著者がそれぞれ何冊の本を書いたかを知りたい場合は、次の手順を実行します。
+たとえば、最年長の 50人の著者がそれぞれ何冊の本を書いたかを知りたい場合は、次の手順を実行します。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -159,7 +159,7 @@ FROM
 4 rows in set (0.06 sec)
 ```
 
-この SQL ステートメントでは、 `,`で区切られた 3 つの CTE ブロックが定義されています。
+この SQL ステートメントでは、 `,`で区切られた 3つの CTE ブロックが定義されています。
 
 まず、CTEブロック`books_authored_by_rm`で著者（ID `2299112019` ）が執筆した書籍を調べます。次に、 `books_with_average_ratings`と`books_with_orders`でこれらの書籍の平均評価と順位をそれぞれ求めます。最後に、 `JOIN`ステートメントで結果を集計します。
 

@@ -90,7 +90,7 @@ TiDBバージョン：5.2.4
     - `REPLACE`ステートメントが自動 ID が範囲外の場合に他の行を誤って変更してしまう問題を修正しました [#29483](https://github.com/pingcap/tidb/issues/29483)
     - スロークエリログが正常にログを出力できず、メモリを過剰に消費する可能性がある問題を修正しました [#32656](https://github.com/pingcap/tidb/issues/32656)
     - NATURAL JOINの結果に予期しない列が含まれる可能性がある問題を修正しました [#29481](https://github.com/pingcap/tidb/issues/29481)
-    - `ORDER BY`と`LIMIT`を 1 つのステートメントで一緒に使用すると、プレフィックス列インデックスを使用してデータをクエリする場合に誤った結果が出力される可能性がある問題を修正しました [#29711](https://github.com/pingcap/tidb/issues/29711)
+    - `ORDER BY`と`LIMIT`を 1つのステートメントで一緒に使用すると、プレフィックス列インデックスを使用してデータをクエリする場合に誤った結果が出力される可能性がある問題を修正しました [#29711](https://github.com/pingcap/tidb/issues/29711)
     - 楽観的トランザクションの再試行時に、DOUBLE型のAUTO_INCREMENT列が変更される可能性がある問題を修正しました [#29892](https://github.com/pingcap/tidb/issues/29892)
     - STR_TO_DATE関数がマイクロ秒部分の先頭のゼロを正しく処理できない問題を修正しました [#30078](https://github.com/pingcap/tidb/issues/30078)
     - TiFlashがまだ空の範囲のテーブル読み取りをサポートしていないにもかかわらず、TiDBが空の範囲のテーブルをスキャンする際に誤った結果を取得する問題を修正します。 [#33083](https://github.com/pingcap/tidb/issues/33083)

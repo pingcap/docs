@@ -75,7 +75,7 @@ alter table t1 set tiflash replica 1;
 alter table t1 add column c1 int not null;
 ```
 
-次に、 ステイル読み取りを使用して 1 分前のデータをクエリします。
+次に、 ステイル読み取りを使用して 1分前のデータをクエリします。
 
 ```sql
 set @@session.tidb_enforce_mpp=1;

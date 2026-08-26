@@ -186,7 +186,7 @@ WHERE
 
 TiDB は、MariaDB でよく使用される`latin1_swedish_ci`照合順序をサポートしていません。
 
-TiDB は、MariaDB 11.6 以降のバージョンのデフォルトの照合順序である`utf8mb4_uca1400_ai_ci`をサポートしていません。代わりに`utf8mb4_0900_ai_ci`を使用してください。これら 2 つの照合順序は[Unicode照合アルゴリズム（UCA）](http://www.unicode.org/reports/tr10/) : `utf8mb4_0900_ai_ci`は UCA 9.0.0 を使用し、 `utf8mb4_uca1400_ai_ci`は UCA 14.0.0 を使用します。
+TiDB は、MariaDB 11.6 以降のバージョンのデフォルトの照合順序である`utf8mb4_uca1400_ai_ci`をサポートしていません。代わりに`utf8mb4_0900_ai_ci`を使用してください。これら2つの照合順序は[Unicode照合アルゴリズム（UCA）](http://www.unicode.org/reports/tr10/) : `utf8mb4_0900_ai_ci`は UCA 9.0.0 を使用し、 `utf8mb4_uca1400_ai_ci`は UCA 14.0.0 を使用します。
 
 TiDBがサポートする照合順序を確認するには、TiDBで次のステートメントを実行してください。
 

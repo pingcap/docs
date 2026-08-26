@@ -161,7 +161,7 @@ TiDB バージョン: 6.5.4
 
         - ダウンストリームでエラーが発生し、 で再試行すると、レプリケーションタスクが停止する可能性がある問題を修正しました。 [＃9450](https://github.com/pingcap/tiflow/issues/9450) @[hicqu](https://github.com/hicqu)
         - Kafka に同期するときに再試行間隔が短いためにレプリケーションタスクが失敗する問題を修正しました [＃9504](https://github.com/pingcap/tiflow/issues/9504) @[3AceShowHand](https://github.com/3AceShowHand)
-        - TiCDC がアップストリームの 1 つのトランザクションで複数の一意のキー行を変更するときに同期書き込み競合を引き起こす可能性がある問題を修正しました。 [＃9430](https://github.com/pingcap/tiflow/issues/9430) @[sdojjy](https://github.com/sdojjy)
+        - TiCDC がアップストリームの 1つのトランザクションで複数の一意のキー行を変更するときに同期書き込み競合を引き起こす可能性がある問題を修正しました。 [＃9430](https://github.com/pingcap/tiflow/issues/9430) @[sdojjy](https://github.com/sdojjy)
         - TiCDC が誤って名前変更 DDL 操作を同期する可能性がある問題を修正[＃9488](https://github.com/pingcap/tiflow/issues/9488) [＃9378](https://github.com/pingcap/tiflow/issues/9378) [＃9531](https://github.com/pingcap/tiflow/issues/9531) @[asddongmen](https://github.com/asddongmen)
         - 下流で短期的な障害が発生したときにレプリケーションタスクが停止する可能性がある問題を修正[＃9542](https://github.com/pingcap/tiflow/issues/9542) [＃9272](https://github.com/pingcap/tiflow/issues/9272) [＃9582](https://github.com/pingcap/tiflow/issues/9582) [＃9592](https://github.com/pingcap/tiflow/issues/9592) @[hicqu](https://github.com/hicqu)
         - TiCDC ノードのステータスが変化したときに発生する可能性のあるpanic問題を修正しました。 [＃9354](https://github.com/pingcap/tiflow/issues/9354) @[sdojjy](https://github.com/sdojjy)

@@ -53,7 +53,7 @@ TiDB Ansible バージョン: 2.1.17
     - `tikvSnapshot`にリバーススキャンインターフェースを追加し、DDL履歴ジョブを効率的にクエリできるようにします。このインターフェースを使用することで、 `ADMIN SHOW DDL JOBS`実行時間が大幅に短縮されます[＃11789](https://github.com/pingcap/tidb/pull/11789)
     - `CREATE TABLE ... PRE_SPLIT_REGION`構文の改善: `PRE_SPLIT_REGION = N` の場合、事前分割されるリージョンの数を 2^(N-1) から 2^N に変更します。 [＃11797](https://github.com/pingcap/tidb/pull/11797/files)
     - オンラインワークロードに大きな影響を与えないように、 `Add Index`操作のバックグラウンドワーカースレッドのデフォルトパラメータ値を減らします[＃11875](https://github.com/pingcap/tidb/pull/11875)
-    - `SPLIT TABLE`構文の動作を改善します。`SPLIT TABLE ... REGIONS N`を使用して領域を分割すると、N 個のデータリージョンと 1 つのインデックスリージョンが生成されます。 [＃11929](https://github.com/pingcap/tidb/pull/11929)
+    - `SPLIT TABLE`構文の動作を改善します。`SPLIT TABLE ... REGIONS N`を使用して領域を分割すると、N 個のデータリージョンと 1つのインデックスリージョンが生成されます。 [＃11929](https://github.com/pingcap/tidb/pull/11929)
     - 設定ファイルに`split-region-max-num`パラメータ（デフォルトでは`10000` ）を追加して、 `SPLIT TABLE`構文で許可されるリージョンの最大数を調整可能にします[＃12080](https://github.com/pingcap/tidb/pull/12080)
     - システムがbinlog書き込むときに、この句のコメントが解除された`PRE_SPLIT_REGIONS`原因で、下流のMySQLで`CREATE TABLE`句を解析できない問題を修正しました。 [＃12121](https://github.com/pingcap/tidb/pull/12121)
     - `SHOW TABLE … REGIONS`と`SHOW TABLE .. INDEX … REGIONS`の`WHERE` のサブ条項を追加する [＃12124](https://github.com/pingcap/tidb/pull/12124)

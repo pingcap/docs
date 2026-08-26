@@ -232,7 +232,7 @@ Document.create(content='tree', embedding=[1, 0, 0])
 
 ### 最近傍の文書を検索 {#search-the-nearest-neighbor-documents}
 
-コサイン距離関数に基づいて、クエリベクトル`[1, 2, 3]`に意味的に最も近い上位 3 つのドキュメントを検索します。
+コサイン距離関数に基づいて、クエリベクトル`[1, 2, 3]`に意味的に最も近い上位 3つのドキュメントを検索します。
 
 ```python
 distance = Document.embedding.cosine_distance([1, 2, 3]).alias('distance')

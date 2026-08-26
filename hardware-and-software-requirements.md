@@ -25,10 +25,10 @@ TiDBはv8.5 LTSにおいて、様々なオペレーティングシステムとCP
 
     > **Warning:**
     >
-    > - [CentOS Linux サポート終了](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/)よると、CentOS Linux 7 のアップストリーム サポートは 2024 年 6 月 30 日に終了しました。
+    > - [CentOS Linux サポート終了](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/)よると、CentOS Linux 7 のアップストリーム サポートは 2024年 6月 30日に終了しました。
     >     - TiDBをアップグレードする前に、オペレーティングシステムのバージョンを確認してください。TiDB v8.4.0 DMRおよびv8.5.0では、glibc 2.17のサポートが終了し、CentOS Linux 7のサポートとテストも終了しました。Rocky Linux 9.1以降のバージョンを使用することをお勧めします。CentOS 7上のTiDBクラスタをv8.4.0またはv8.5.0にアップグレードすると、クラスタが利用できなくなるリスクがあります。
     >     - CentOS Linux 7 をまだ使用しているユーザーを支援するために、v8.5.1 以降、TiDB は glibc 2.17 のサポートを再開し、CentOS Linux 7 のテストを再開し、CentOS Linux 7 と互換性を持つようになりました。ただし、CentOS Linux の EOL ステータスのため、CentOS Linux 7 の[公式発表およびセキュリティに関するガイダンス](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol)を確認し、Rocky Linux 9.1 や TiDB が本番用にサポートするオペレーティングシステムに移行することを強くお勧めします。 後で。
-    > - [Red Hat Enterprise Linux ライフサイクル](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates)によると、Red Hat Enterprise Linux 7 のメンテナンスサポートは 2024 年 6 月 30 日に終了しました。TiDB は、8.4 DMR バージョン以降、Red Hat Enterprise Linux 7 のサポートを終了します。Rocky Linux 9.1 以降のバージョンを使用することをお勧めします。Red Hat Enterprise Linux 7 上の TiDB クラスタを v8.4.0 以降にアップグレードすると、クラスタが使用できなくなります。TiDB をアップグレードする前に、オペレーティングシステムのバージョンを確認してください。
+    > - [Red Hat Enterprise Linux ライフサイクル](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates)によると、Red Hat Enterprise Linux 7 のメンテナンスサポートは 2024年 6月 30日に終了しました。TiDB は、8.4 DMR バージョン以降、Red Hat Enterprise Linux 7 のサポートを終了します。Rocky Linux 9.1 以降のバージョンを使用することをお勧めします。Red Hat Enterprise Linux 7 上の TiDB クラスタを v8.4.0 以降にアップグレードすると、クラスタが使用できなくなります。TiDB をアップグレードする前に、オペレーティングシステムのバージョンを確認してください。
 
     > **Note:**
     >
@@ -42,9 +42,9 @@ TiDBはv8.5 LTSにおいて、様々なオペレーティングシステムとCP
     >
     > - Oracle Enterprise Linuxの場合、TiDBはRed Hat互換カーネル（RHCK）をサポートしており、Oracle Enterprise Linuxが提供するUnbreakable Enterprise Kernelはサポートしていません。
     > - TiDBの今後のバージョンでは、Ubuntu 16.04のサポートは終了します。Ubuntu 18.04以降へのアップグレードを強くお勧めします。
-    > - CentOS Stream 8 は、2024 年 5 月 31 日に[ビルド終了](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/)。
+    > - CentOS Stream 8 は、2024年 5月 31日に[ビルド終了](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/)。
 
-- 前述の 2 つの表に記載されているオペレーティングシステムの 32 ビット版を使用している場合、TiDB は 32 ビットオペレーティングシステムおよび対応する CPUアーキテクチャ上でコンパイル、ビルド、またはデプロイできることが**保証されません**。また、TiDB は 32 ビットオペレーティングシステムに積極的に対応しません。
+- 前述の2つの表に記載されているオペレーティングシステムの 32 ビット版を使用している場合、TiDB は 32 ビットオペレーティングシステムおよび対応する CPUアーキテクチャ上でコンパイル、ビルド、またはデプロイできることが**保証されません**。また、TiDB は 32 ビットオペレーティングシステムに積極的に対応しません。
 
 - 上記に記載されていない他のオペレーティングシステムバージョンでも動作する可能性はありますが、公式にはサポートされていません。
 
@@ -188,7 +188,7 @@ TiDBは、データベースメトリクスの可視化に[Grafana](https://graf
 
 ## TiFlashの分離型ストレージおよびコンピューティングアーキテクチャに必要なハードウェアおよびソフトウェア要件 {#hardware-and-software-requirements-for-tiflash-disaggregated-storage-and-compute-architecture}
 
-前述のTiFlashソフトウェアおよびハードウェア要件は、結合されたストレージとコンピューティングアーキテクチャに関するものです。 v7.0.0 以降、 TiFlash は[分散型ストレージおよびコンピューティングアーキテクチャ](/tiflash/tiflash-disaggregated-and-s3.md)をサポートします。このアーキテクチャでは、 TiFlash は書き込みノードと計算ノードの 2 種類のノードに分割されます。これらのノードの要件は次のとおりです。
+前述のTiFlashソフトウェアおよびハードウェア要件は、結合されたストレージとコンピューティングアーキテクチャに関するものです。 v7.0.0 以降、 TiFlash は[分散型ストレージおよびコンピューティングアーキテクチャ](/tiflash/tiflash-disaggregated-and-s3.md)をサポートします。このアーキテクチャでは、 TiFlash は書き込みノードと計算ノードの 2種類のノードに分割されます。これらのノードの要件は次のとおりです。
 
 - ソフトウェア: 結合されたストレージとコンピューティングアーキテクチャと同じままです。 [OSおよびプラットフォームの要件](#os-and-platform-requirements)を参照してください。
 - ネットワーク ポート: 結合されたストレージとコンピューティングアーキテクチャと同じままです。[ネットワーク](#network-requirements)を参照してください。

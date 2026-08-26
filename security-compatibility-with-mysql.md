@@ -148,7 +148,7 @@ The support for TLS authentication is configured differently. For detailed infor
 
 JWT consists of three parts: Header, Payload, and Signature. After being encoded using base64, they are concatenated into a string separated by dots (`.`) for transmission between the client and server.
 
-ヘッダーには、3 つのパラメータを含む JWT のメタデータが記述されます。
+ヘッダーには、3つのパラメータを含む JWT のメタデータが記述されます。
 
 - `alg` : 署名のアルゴリズム。デフォルトは`RS256`です。
 - `typ` : トークンの種類 ( `JWT` )。

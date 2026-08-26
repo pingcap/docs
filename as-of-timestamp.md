@@ -15,7 +15,7 @@ TiDBは、特別なクライアントやドライバーを必要とせず、標�
 
 ## 構文 {#syntax}
 
-`AS OF TIMESTAMP`句は次の 3 つの方法で使用できます。
+`AS OF TIMESTAMP`句は次の3つの方法で使用できます。
 
 - [`SELECT ... FROM ... AS OF TIMESTAMP`](/sql-statements/sql-statement-select.md)
 - [`START TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-start-transaction.md)
@@ -27,10 +27,10 @@ TiDBは、特別なクライアントやドライバーを必要とせず、標�
 
 `AS OF TIMESTAMP`句の例をいくつか示します。
 
-- `AS OF TIMESTAMP '2016-10-08 16:45:26'` : 2016 年 10 月 8 日 16:45:26 に保存された最新のデータを読み取るように TiDB に指示します。
-- `AS OF TIMESTAMP NOW() - INTERVAL 10 SECOND` : TiDB に 10 秒前に保存された最新のデータを読み取るように指示します。
-- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')` : 2016 年 10 月 8 日の 16:45:26 から 16:45:29 までの範囲内でできるだけ新しいデータを読み取るように TiDB に指示します。
-- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() - INTERVAL 20 SECOND, NOW())` : 20 秒前から現在までの時間範囲内で可能な限り新しいデータを読み取るように TiDB に指示します。
+- `AS OF TIMESTAMP '2016-10-08 16:45:26'` : 2016年 10月 8日 16:45:26 に保存された最新のデータを読み取るように TiDB に指示します。
+- `AS OF TIMESTAMP NOW() - INTERVAL 10 SECOND` : TiDB に 10秒前に保存された最新のデータを読み取るように指示します。
+- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')` : 2016年 10月 8日の 16:45:26 から 16:45:29 までの範囲内でできるだけ新しいデータを読み取るように TiDB に指示します。
+- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() - INTERVAL 20 SECOND, NOW())` : 20秒前から現在までの時間範囲内で可能な限り新しいデータを読み取るように TiDB に指示します。
 
 > **Note:**
 >

@@ -56,7 +56,7 @@ TiDBは、SQL処理パスとデータベース時間を継続的に測定・収�
 
 ### データベース時間とSQL実行時間の概要 {#database-time-and-sql-execution-time-overview}
 
-データベース時間メトリックは、TiDB が 1 秒あたりに SQL を処理するレイテンシーの合計であり、これは TiDB が 1 秒あたりにアプリケーションの SQL 要求を同時に処理する合計時間でもあります (アクティブな接続の数に等しい)。
+データベース時間メトリックは、TiDB が 1秒あたりに SQL を処理するレイテンシーの合計であり、これは TiDB が 1秒あたりにアプリケーションの SQL 要求を同時に処理する合計時間でもあります (アクティブな接続の数に等しい)。
 
 パフォーマンス概要ダッシュボードには、以下の3つの積み上げ面グラフが表示されます。これらのグラフは、データベースのワークロードプロファイルを把握し、SQL実行中のステートメント、SQLフェーズ、TiKVまたはPDリクエストタイプの観点からボトルネックの原因を迅速に特定するのに役立ちます。
 
@@ -140,11 +140,11 @@ TiDBは、SQL処理パスとデータベース時間を継続的に測定・収�
 
 #### 1秒あたりのクエリ数、1秒あたりのコマンド数、プリペアドプランキャッシュ {#query-per-second-command-per-second-and-prepared-plan-cache}
 
-パフォーマンス概要の次の 3 つのパネルを確認することで、アプリケーションのワークロード タイプ、アプリケーションが TiDB と対話する方法、アプリケーションが TiDB [プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)を最大限に活用しているかどうかを知ることができます。
+パフォーマンス概要の次の3つのパネルを確認することで、アプリケーションのワークロード タイプ、アプリケーションが TiDB と対話する方法、アプリケーションが TiDB [プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)を最大限に活用しているかどうかを知ることができます。
 
 - QPS: Query Per Second（1秒あたりのクエリ数）の略。アプリケーションによって実行されたSQL文の数を示します。
 - CPSタイプ別：Command Per Secondの略。コマンドはMySQLプロトコル固有のコマンドを示します。クエリ文は、クエリコマンドまたはプリペアドステートメントのいずれかによってTiDBに送信できます。
-- Queries Using Plan Cache OPS: `avg-hit` 、TiDB クラスターで 1 秒あたりに実行計画 キャッシュを使用するクエリの数であり、 `avg-miss` 、TiDB クラスターで 1 秒あたりに実行計画 キャッシュを使用しないクエリの数です。
+- Queries Using Plan Cache OPS: `avg-hit` 、TiDB クラスターで 1秒あたりに実行計画 キャッシュを使用するクエリの数であり、 `avg-miss` 、TiDB クラスターで 1秒あたりに実行計画 キャッシュを使用しないクエリの数です。
 
     `avg-hit + avg-miss`は`StmtExecute`に等しく、これは1秒あたりに実行される全クエリ数です。TiDBでプリペアドプランキャッシュを有効にすると、以下の3つのシナリオが発生します。
 
@@ -157,7 +157,7 @@ TiDBは、SQL処理パスとデータベース時間を継続的に測定・収�
 
 **例1: TPC-Cワークロード**
 
-TPC-C ワークロードは主に`UPDATE` 、 `SELECT` 、 `INSERT`文です。合計 QPS は 1 秒あたり`StmtExecute`コマンドの数に等しく、後者は Queries Using Plan Cache OPS パネルでほぼ`avg-hit`に等しくなります。理想的には、クライアントはプリペアドステートメントのオブジェクトをキャッシュします。これにより、SQL ステートメントの実行時にキャッシュされたステートメントが直接呼び出されます。すべての SQL 実行はプリペアドプランキャッシュにヒットするため、実行計画を生成するために再コンパイルする必要はありません。
+TPC-C ワークロードは主に`UPDATE` 、 `SELECT` 、 `INSERT`文です。合計 QPS は 1秒あたり`StmtExecute`コマンドの数に等しく、後者は Queries Using Plan Cache OPS パネルでほぼ`avg-hit`に等しくなります。理想的には、クライアントはプリペアドステートメントのオブジェクトをキャッシュします。これにより、SQL ステートメントの実行時にキャッシュされたステートメントが直接呼び出されます。すべての SQL 実行はプリペアドプランキャッシュにヒットするため、実行計画を生成するために再コンパイルする必要はありません。
 
 ![TPC-C](/media/performance/tpcc_qps.png)
 
@@ -175,7 +175,7 @@ TPC-C ワークロードは主に`UPDATE` 、 `SELECT` 、 `INSERT`文です。�
 
 `StmtPrepare`回 = `StmtExecute`回 = `StmtClose`回 ~= `StmtFetch`回。アプリケーションは準備 &gt; 実行 &gt; フェッチ &gt; クローズのループを使用します。プリペアドステートメントオブジェクトのリークを防ぐため、多くのアプリケーションフレームワークは`execute`フェーズの後に`close`を呼び出します。これにより、2つの問題が発生します。
 
-- SQL 実行には 4 つのコマンドと 4 回のネットワーク ラウンドトリップが必要です。
+- SQL 実行には 4つのコマンドと 4回のネットワーク ラウンドトリップが必要です。
 - Queries Using Plan Cache OPSは0で、プリペアドプランキャッシュのヒットがゼロであることを示しています。`StmtClose`のコマンドはデフォルトでキャッシュされた実行計画をクリアし、次の`StmtPrepare`コマンドで実行計画を再度生成する必要があります。
 
 > **Note:**
@@ -186,19 +186,19 @@ TPC-C ワークロードは主に`UPDATE` 、 `SELECT` 、 `INSERT`文です。�
 
 **例4: プリペアドステートメントにリソースリークがある**
 
-1 秒あたり`StmtPrepare`コマンドの数は 1 秒あたり`StmtClose`コマンドの数よりはるかに多く、これはアプリケーションにプリペアドステートメントのオブジェクト リークがあることを示しています。
+1 秒あたり`StmtPrepare`コマンドの数は 1秒あたり`StmtClose`コマンドの数よりはるかに多く、これはアプリケーションにプリペアドステートメントのオブジェクト リークがあることを示しています。
 
 ![OLTP-Query](/media/performance/prepared_statement_leaking.png)
 
 - QPSパネルでは、赤い太線が失敗したクエリの数を示し、右側のY軸がその数値の座標値を示しています。この例では、1秒あたりの失敗したクエリの数は74.6です。
-- CPS By Type パネルでは、1 秒あたり`StmtPrepare`コマンドの数が 1 秒あたり`StmtClose`コマンドの数よりはるかに多く、プリペアドステートメントのアプリケーションでオブジェクト リークが発生していることを示しています。
+- CPS By Type パネルでは、1秒あたり`StmtPrepare`コマンドの数が 1秒あたり`StmtClose`コマンドの数よりはるかに多く、プリペアドステートメントのアプリケーションでオブジェクト リークが発生していることを示しています。
 - Queries Using Plan Cache OPS パネルでは、 `avg-miss`がタイプ別 CPS パネルの`StmtExecute`とほぼ等しく、ほとんどすべての SQL 実行で実行計画 キャッシュが失われていることを示しています。
 
 #### KV/TSO 要求 OPS とソース別の KV 要求時間 {#kv-tso-request-ops-and-kv-request-time-by-source}
 
 - KV/TSOリクエストOPSパネルでは、1秒あたりのKVおよびTSOリクエストの統計情報を確認できます。統計情報のうち、 `kv request total` TiDBからTiKVへのすべてのリクエストの合計を表します。TiDBからPDおよびTiKVへのリクエストの種類を観察することで、クラスター内のワークロードプロファイルを把握できます。
 - KV リクエスト時間 (ソース別) パネルでは、各 KV リクエストタイプとすべてのリクエストソースの時間比率を表示できます。
-    - kv 要求合計時間: 1 秒あたりの KV およびTiFlash要求の処理時間の合計。
+    - kv 要求合計時間: 1秒あたりの KV およびTiFlash要求の処理時間の合計。
     - 各 KV リクエストと対応するリクエストソースは積み上げ棒グラフを形成し、 `external`通常のビジネス リクエストを識別し、 `internal`内部アクティビティ リクエスト (DDL やauto analyzeリクエストなど) を識別します。
 
 **例1: 忙しい作業負荷**
@@ -216,7 +216,7 @@ TPC-C ワークロードは主に`UPDATE` 、 `SELECT` 、 `INSERT`文です。�
 
 このワークロードでは、クラスター内で実行されているステートメントは`ANALYZE`だけです。
 
-- 1 秒あたりの KV リクエストの合計数は 35.5 で、1 秒あたりの Cop リクエストの数は 9.3 です。
+- 1 秒あたりの KV リクエストの合計数は 35.5 で、1秒あたりの Cop リクエストの数は 9.3 です。
 - KV 処理時間のほとんどは`Cop-internal_stats`に費やされており、最も時間のかかる KV 要求は内部`ANALYZE`操作のうちの`Cop`であることを示しています。
 
 #### CPUとメモリの使用量 {#cpu-and-memory-usage}
@@ -365,7 +365,7 @@ TiDB、TiKV、PDのCPU/メモリパネルでは、平均CPU、最大CPU、デル
 
 TiDB では、クエリステートメントの送信から結果の返送までに[典型的な処理フロー](/sql-optimization-concepts.md)かかります。
 
-TiDB での SQL 処理は、 `get token` 、 `parse` 、 `compile` 、 `execute` 4 つのフェーズで構成されます。
+TiDB での SQL 処理は、 `get token` 、 `parse` 、 `compile` 、 `execute` 4つのフェーズで構成されます。
 
 - `get token` : 通常は数マイクロ秒程度で無視できます。トークンは、単一のTiDBインスタンスへの接続数が[トークン制限](/tidb-configuration-file.md)上限に達した場合にのみ制限されます。
 - `parse` : クエリステートメントは抽象構文ツリー (AST) に解析されます。
@@ -397,7 +397,7 @@ avg Query Duration = avg Get Token + avg Parse Duration + avg Compile Duration +
 
 #### KVおよびTSOリクエスト期間 {#kv-and-tso-request-duration}
 
-TiDB はフェーズ`execute`で PD および TiKV と連携します。次の図に示すように、SQL 要求を処理する際、TiDB はフェーズ`parse`および`compile`入る前に TSO を要求します。PD クライアントは呼び出し元をブロックせず、 `TSFuture`を返し、バックグラウンドで非同期的に TSO 要求を送受信します。PD クライアントは TSO 要求の処理を完了すると、 `TSFuture`を返します。 `TSFuture`の所有者は、最後の TSO を取得するために Wait メソッドを呼び出す必要があります。TiDB はフェーズ`parse`および`compile`を完了するとフェーズ`execute`に入り、このフェーズでは次の 2 つの状況が発生する可能性があります。
+TiDB はフェーズ`execute`で PD および TiKV と連携します。次の図に示すように、SQL 要求を処理する際、TiDB はフェーズ`parse`および`compile`入る前に TSO を要求します。PD クライアントは呼び出し元をブロックせず、 `TSFuture`を返し、バックグラウンドで非同期的に TSO 要求を送受信します。PD クライアントは TSO 要求の処理を完了すると、 `TSFuture`を返します。 `TSFuture`の所有者は、最後の TSO を取得するために Wait メソッドを呼び出す必要があります。TiDB はフェーズ`parse`および`compile`を完了するとフェーズ`execute`に入り、このフェーズでは次の2つの状況が発生する可能性があります。
 
 - TSO要求が完了した場合、Waitメソッドは利用可能なTSOまたはエラーを直ちに返します。
 - TSO 要求がまだ完了していない場合、TSO が利用可能になるかエラーが表示されるまで (gRPC 要求は送信されたが結果が返されず、ネットワークレイテンシーが高くなる)、Wait メソッドはブロックされます。
@@ -409,7 +409,7 @@ TSO待機時間は`TSO WAIT`と記録され、TSO要求のネットワーク時�
 
 ![Execute](/media/performance/execute_phase.png)
 
-このセクションのインジケーターは、次の 3 つのパネルに対応しています。
+このセクションのインジケーターは、次の3つのパネルに対応しています。
 
 - 平均 TiDB KV リクエスト期間: TiDB によって測定された KV リクエストの平均レイテンシー
 - 平均 TiKV GRPC 期間: TiKV での gPRC メッセージの処理にかかる平均レイテンシー
@@ -460,7 +460,7 @@ TiKV は次の手順で書き込み要求を処理します。
 
 `Storage Async Write Duration`のメトリックは、書き込みリクエストがraftstoreに入った後のレイテンシーを記録します。データはリクエストごとに収集されます。
 
-`Storage Async Write Duration`メトリックは`Store Duration`と`Apply Duration` 2 つの部分で構成されます。次の式を使用して、書き込みリクエストのボトルネックが`Store`または`Apply`どちらのステップにあるかを判断できます。
+`Storage Async Write Duration`メトリックは`Store Duration`と`Apply Duration` 2つの部分で構成されます。次の式を使用して、書き込みリクエストのボトルネックが`Store`または`Apply`どちらのステップにあるかを判断できます。
 
 ```
 avg Storage Async Write Duration = avg Store Duration + avg Apply Duration
@@ -497,7 +497,7 @@ v5.4.0 では、gPRC モジュールが最適化され、 Raftログのレプリ
 
 `Commit Log Duration` `Apply Log Duration` 、raftstore内の主要な操作のレイテンシー指標です。これらのレイテンシはバッチ操作レベルで計測され、各操作は複数の書き込みリクエストを組み合わせます。したがって、これら`Append Log Duration`レイテンシは前述の`Store Duration`と`Apply Duration`に直接対応するものではありません。
 
-- `Commit Log Duration`と`Append Log Duration`は 、 `Store`スレッドで実行された操作時間を記録します。`Commit Log Duration`は、 Raftログを他の TiKV ノードにコピーする時間が含まれます (raft-log の永続性を確保するため)。`Commit Log Duration`は通常、リーダー用とフォロワー用の 2 つの`Append Log Duration`操作が含まれます。`Commit Log Duration`は、通常、 `Append Log Duration`よりも大幅に大きくなります。これは、前者には、ネットワークを介してRaftログを他の TiKV ノードにコピーする時間が含まれるためです。
+- `Commit Log Duration`と`Append Log Duration`は 、 `Store`スレッドで実行された操作時間を記録します。`Commit Log Duration`は、 Raftログを他の TiKV ノードにコピーする時間が含まれます (raft-log の永続性を確保するため)。`Commit Log Duration`は通常、リーダー用とフォロワー用の 2つの`Append Log Duration`操作が含まれます。`Commit Log Duration`は、通常、 `Append Log Duration`よりも大幅に大きくなります。これは、前者には、ネットワークを介してRaftログを他の TiKV ノードにコピーする時間が含まれるためです。
 - `Apply Log Duration` `Apply`スレッドによる`apply` Raftログのレイテンシーを記録します。
 
 `Commit Log Duration`が長い場合の一般的なシナリオ:

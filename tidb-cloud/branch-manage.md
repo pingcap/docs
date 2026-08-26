@@ -18,7 +18,7 @@ summary: TiDB Cloudブランチの管理方法を学びましょう。
 
 > **Note:**
 >
-> 2023 年 7 月 5 日以降に作成されたTiDB Cloud Starterインスタンスのブランチのみを作成できます。その他の制限事項については[制限事項と割り当て](/tidb-cloud/branch-overview.md#limitations-and-quotas)を参照してください。
+> 2023 年 7月 5日以降に作成されたTiDB Cloud Starterインスタンスのブランチのみを作成できます。その他の制限事項については[制限事項と割り当て](/tidb-cloud/branch-overview.md#limitations-and-quotas)を参照してください。
 
 ブランチを作成するには、以下の手順を実行します。
 

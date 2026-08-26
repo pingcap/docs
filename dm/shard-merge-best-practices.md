@@ -23,20 +23,20 @@ summary: シャードマージのシナリオにおけるデータ移行のベ�
 
 代わりに、次のことができます。
 
-- シャーディング DDL ロックの自動解放の失敗が[異常なシナリオを列挙した](/dm/manually-handling-sharding-ddl-locks.md#supported-scenarios)の 1 つである場合は、対応する手動ソリューションに従ってシナリオを処理します。
+- シャーディング DDL ロックの自動解放の失敗が[異常なシナリオを列挙した](/dm/manually-handling-sharding-ddl-locks.md#supported-scenarios)の 1つである場合は、対応する手動ソリューションに従ってシナリオを処理します。
 - サポートされていないシナリオの場合は、データ移行タスク全体をやり直します。まず、ダウンストリームデータベースのデータと移行タスクに関連付けられた`dm_meta`情報を空にし、次に、完全および増分データレプリケーションを再実行します。
 
 ## 複数のシャードテーブル間の主キーまたは一意インデックス間の競合を処理する {#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables}
 
 複数のシャードテーブルのデータにより、主キーまたは一意インデックス間で競合が発生する可能性があります。シャードテーブルのシャーディングロジックに基づいて、それぞれの主キーまたは一意インデックスを確認する必要があります。以下は、主キーまたは一意インデックスに関連する3つのケースです。
 
-- シャード キー: 通常、同じシャード キーは 1 つのシャードテーブルにのみ存在するため、シャード キーでデータの競合は発生しません。
+- シャード キー: 通常、同じシャード キーは 1つのシャードテーブルにのみ存在するため、シャード キーでデータの競合は発生しません。
 - AUTO_INCREMENT主キー：各シャードテーブルのAUTO_INCREMENT主キーは個別にカウントされるため、範囲が重複する可能性があります。この場合、次のセクション[AUTO_INCREMENT主キーの競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)を参照して解決してください。
 - その他の主キーまたは一意インデックスについては、ビジネスロジックに基づいて分析する必要があります。データの競合が発生した場合は、次のセクション[AUTO_INCREMENT主キーの競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)を参照して解決してください。
 
 ## AUTO_INCREMENT主キーの競合を処理する {#handle-conflicts-of-auto-increment-primary-key}
 
-このセクションでは、AUTO_INCREMENT主キーの競合を処理するための 2 つの推奨ソリューションを紹介します。
+このセクションでは、AUTO_INCREMENT主キーの競合を処理するための 2つの推奨ソリューションを紹介します。
 
 ### 列から`PRIMARY KEY`属性を削除します {#remove-the-primary-key-attribute-from-the-column}
 
@@ -135,7 +135,7 @@ CREATE TABLE `tbl_multi_pk` (
 
 3. アップストリームに新しいシャードテーブルを作成します。
 
-4. `task.yaml`ファイル内の構成で、新しく追加されたシャードテーブルを他の既存のシャードテーブルと 1 つのダウンストリームテーブルにマージできることを確認します。
+4. `task.yaml`ファイル内の構成で、新しく追加されたシャードテーブルを他の既存のシャードテーブルと 1つのダウンストリームテーブルにマージできることを確認します。
 
 5. タスクを開始するには`start-task`を実行します。
 

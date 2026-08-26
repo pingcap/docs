@@ -40,7 +40,7 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-
 
 Debeziumの出力形式には、下流のコンシューマーが現在の行のデータ構造をより適切に理解できるように、現在の行のスキーマ情報が含まれています。スキーマ情報が不要なシナリオでは、changefeed設定ファイルで`debezium-disable-schema`パラメータを`true`または`sink-uri`に設定することで、スキーマ出力を無効にすることもできます。
 
-さらに、元の Debezium 形式には、TiDB の `CommitTS` の一意なトランザクション識別子などの重要なフィールドが含まれていません。データの整合性を確保するために、TiCDC は Debezium 形式に `CommitTs` と `ClusterID` の 2 つのフィールドを追加し、TiDB データ変更の関連情報を識別します。
+さらに、元の Debezium 形式には、TiDB の `CommitTS` の一意なトランザクション識別子などの重要なフィールドが含まれていません。データの整合性を確保するために、TiCDC は Debezium 形式に `CommitTs` と `ClusterID` の 2つのフィールドを追加し、TiDB データ変更の関連情報を識別します。
 
 ## メッセージ形式の定義 {#message-format-definition}
 

@@ -139,7 +139,7 @@ TiDBバージョン: 6.4.0-DMR
 
 - バッチ書き込みリクエストが軽量トランザクション書き込みの応答時間に与える影響を軽減する [#13313](https://github.com/tikv/tikv/issues/13313) @[glorv](https://github.com/glorv)
 
-    一部のシステムのビジネスロジックでは、定期的なバッチ DML タスクが必要ですが、これらのバッチ書き込みタスクを処理すると、オンライン トランザクションのレイテンシーが増加します。v6.3.0 では、TiKV はハイブリッドワークロード シナリオでの読み取り要求のスケジューリングを最適化するため、 [`readpool.unified.auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)構成項目を有効にすると、TiKV がすべての読み取り要求に対して UnifyReadPool スレッドプールのサイズを自動的に調整します。v6.4.0 では、TiKV は書き込み要求も動的に識別して優先順位を付け、1 回のポーリングで Apply スレッドが 1 つの FSM (有限状態機械) に対して書き込むことができる最大バイト数を制御できるため、バッチ書き込み要求がトランザクション書き込みの応答時間に与える影響を軽減できます。
+    一部のシステムのビジネスロジックでは、定期的なバッチ DML タスクが必要ですが、これらのバッチ書き込みタスクを処理すると、オンライン トランザクションのレイテンシーが増加します。v6.3.0 では、TiKV はハイブリッドワークロード シナリオでの読み取り要求のスケジューリングを最適化するため、 [`readpool.unified.auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)構成項目を有効にすると、TiKV がすべての読み取り要求に対して UnifyReadPool スレッドプールのサイズを自動的に調整します。v6.4.0 では、TiKV は書き込み要求も動的に識別して優先順位を付け、1回のポーリングで Apply スレッドが 1つの FSM (有限状態機械) に対して書き込むことができる最大バイト数を制御できるため、バッチ書き込み要求がトランザクション書き込みの応答時間に与える影響を軽減できます。
 
 ### 使いやすさ {#ease-of-use}
 
@@ -191,15 +191,15 @@ TiDBバージョン: 6.4.0-DMR
 
     v6.4.0 以降、TiDB で MySQL 互換の[範囲選択構文](https://dev.mysql.com/doc/refman/8.0/en/json.html#json-paths)を使用できるようになりました。
 
-    - キーワード`to`を使用すると、配列要素の開始位置と終了位置を指定したり、配列内の連続した範囲の要素を選択したりできます。 `0`を使用すると、配列の最初の要素の位置を指定できます。たとえば、 `$[0 to 2]`を使用すると、配列の最初の 3 つの要素を選択できます。
+    - キーワード`to`を使用すると、配列要素の開始位置と終了位置を指定したり、配列内の連続した範囲の要素を選択したりできます。 `0`を使用すると、配列の最初の要素の位置を指定できます。たとえば、 `$[0 to 2]`を使用すると、配列の最初の 3つの要素を選択できます。
 
-    - キーワード`last`を使用すると、配列の最後の要素の位置を指定できます。これにより、右から左への位置設定が可能になります。たとえば、 `$[last-2 to last]`を使用すると、配列の最後の 3 つの要素を選択できます。
+    - キーワード`last`を使用すると、配列の最後の要素の位置を指定できます。これにより、右から左への位置設定が可能になります。たとえば、 `$[last-2 to last]`を使用すると、配列の最後の 3つの要素を選択できます。
 
     この機能により、SQL文の記述プロセスが簡素化され、JSON型の互換性がさらに向上し、MySQLアプリケーションをTiDBに移行する際の難易度が軽減されます。
 
 - データベースユーザー向けの追加説明の追加をサポート [#38172](https://github.com/pingcap/tidb/issues/38172) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
-    TiDB v6.4 では、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)または[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)を使用して、データベースユーザーの追加の説明を追加できます。TiDB は 2 つの説明形式を提供します。 `COMMENT`を使用してテキスト コメントを追加したり、 `ATTRIBUTE`を使用して JSON 形式の構造化属性セットを追加したりできます。
+    TiDB v6.4 では、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)または[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)を使用して、データベースユーザーの追加の説明を追加できます。TiDB は 2つの説明形式を提供します。 `COMMENT`を使用してテキスト コメントを追加したり、 `ATTRIBUTE`を使用して JSON 形式の構造化属性セットを追加したりできます。
 
     さらに、TiDB v6.4.0では[`USER_ATTRIBUTES`](/information-schema/information-schema-user-attributes.md)テーブルが追加され、ユーザーコメントやユーザー属性の情報を表示できるようになりました。
 
@@ -326,7 +326,7 @@ TiDBバージョン: 6.4.0-DMR
 
 ### その他 {#others}
 
-- v6.4.0 以降、 `mysql.user`テーブルには、 `User_attributes`と`Token_issuer`という 2 つの新しい列が追加されています。以前の TiDB バージョンのバックアップデータから TiDB v6.4.0 に[`mysql`スキーマ内のシステムテーブルを復元します](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)と、 BR は`column count mismatch`テーブルの`mysql.user`エラーを報告します。 `mysql`スキーマ内のシステムテーブルを復元しない場合、このエラーは報告されません。
+- v6.4.0 以降、 `mysql.user`テーブルには、 `User_attributes`と`Token_issuer`という 2つの新しい列が追加されています。以前の TiDB バージョンのバックアップデータから TiDB v6.4.0 に[`mysql`スキーマ内のシステムテーブルを復元します](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)と、 BR は`column count mismatch`テーブルの`mysql.user`エラーを報告します。 `mysql`スキーマ内のシステムテーブルを復元しない場合、このエラーは報告されません。
 - 名前が「 [Dumplingのエクスポートファイルの形式](/dumpling-overview.md#format-of-exported-files)一致するものの、末尾が非圧縮形式（例`test-schema-create.sql.origin`および`test.table-schema.sql.origin` ）で終わるファイルについては、 TiDB Lightning の処理方法が変更されました。v6.4.0 より前は、インポート対象ファイルにこのようなファイルが含まれている場合、TiDB Lightning はこれらのファイルのインポートをスキップしていました。v6.4.0 以降では、 TiDB Lightning TiDB Lightning はこれらのファイルがサポートされていない圧縮形式を使用しているとみなすため、インポート処理は失敗します。
 - バージョン6.4.0以降、 `SYSTEM_VARIABLES_ADMIN`または`SUPER`の権限を持つチェンジフィードのみがTiCDC Syncpoint機能を使用できます。
 

@@ -98,7 +98,7 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
 
 既存のデータを読み込むには：
 
-1. [`tidb_gc_life_time`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)以下の 2 つの操作の合計時間よりも長く設定することで、その期間中の履歴データが TiDB によってガベージコレクションされないようにします。
+1. [`tidb_gc_life_time`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)以下の2つの操作の合計時間よりも長く設定することで、その期間中の履歴データが TiDB によってガベージコレクションされないようにします。
 
     - 既存データのエクスポートとインポートにかかる時間
     - **Sink to MySQL**を作成する時間

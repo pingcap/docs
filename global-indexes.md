@@ -209,11 +209,11 @@ CREATE TABLE `sbtest` (
 ) partition by hash(id) partitions 5;
 ```
 
-前述のテーブルスキーマを例に挙げましょう。`idx`はローカルインデックス、 `global_idx`はグローバルインデックスです。`idx`のデータは`PartitionID1_i_xxx`や`PartitionID2_i_xxx`など 5 つの異なる範囲に分散されていますが、 `global_idx`のデータは単一の範囲 ( `TableID_i_xxx` ) に集中しています。
+前述のテーブルスキーマを例に挙げましょう。`idx`はローカルインデックス、 `global_idx`はグローバルインデックスです。`idx`のデータは`PartitionID1_i_xxx`や`PartitionID2_i_xxx`など 5つの異なる範囲に分散されていますが、 `global_idx`のデータは単一の範囲 ( `TableID_i_xxx` ) に集中しています。
 
 `k`に関連するクエリ（例えば`SELECT * FROM sbtest WHERE k > 1`を実行すると、ローカルインデックス`idx`は5つの個別の範囲を生成しますが、グローバルインデックス`global_idx`は1つの範囲のみを生成します。TiDBの各範囲は1つ以上のRPCリクエストに対応するため、グローバルインデックスを使用することでRPCリクエストの数を数倍削減でき、インデックスクエリのパフォーマンスが向上します。
 
-次の図は、 `idx`と`global_idx`という 2 つの異なるインデックスを使用して`SELECT * FROM sbtest WHERE k > 1`ステートメントを実行した場合の RPC 要求とデータフローの違いを示しています。
+次の図は、 `idx`と`global_idx`という 2つの異なるインデックスを使用して`SELECT * FROM sbtest WHERE k > 1`ステートメントを実行した場合の RPC 要求とデータフローの違いを示しています。
 
 ![Mechanism of Global Indexes](/media/global-index-mechanism.png)
 

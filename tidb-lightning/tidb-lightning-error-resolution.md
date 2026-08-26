@@ -74,7 +74,7 @@ TiDB Lightning がインポート中にエラーに遭遇した場合、終了�
 task-info-schema-name = 'lightning_task_info'
 ```
 
-TiDB Lightning はこのデータベースに 3 つのテーブルと 1 つのビューを作成します。
+TiDB Lightning はこのデータベースに 3つのテーブルと 1つのビューを作成します。
 
 ```sql
 CREATE TABLE type_error_v1 (
@@ -229,7 +229,7 @@ CREATE VIEW conflict_view AS
     tiup tidb-lightning -c config.toml
     ```
 
-5. インポートされたテーブルに次の 2 つの通常の行のみが含まれていることを確認します。
+5. インポートされたテーブルに次の2つの通常の行のみが含まれていることを確認します。
 
     ```sql
     $ mysql -u root -h 127.0.0.1 -P 4000 -e 'select * from example.t'
@@ -241,7 +241,7 @@ CREATE VIEW conflict_view AS
     +---+-----+
     ```
 
-6. `type_error_v1`テーブルに型変換を含む 3 つの行が含まれているかどうかを確認します。
+6. `type_error_v1`テーブルに型変換を含む 3つの行が含まれているかどうかを確認します。
 
     ```sql
     $ mysql -u root -h 127.0.0.1 -P 4000 -e 'select * from lightning_task_info.type_error_v1;' -E
@@ -274,7 +274,7 @@ CREATE VIEW conflict_view AS
        row_data: (600,'six hundred')
     ```
 
-7. `conflict_error_v3`テーブルに、一意/主キーの競合がある 4 つの行が含まれているかどうかを確認します。
+7. `conflict_error_v3`テーブルに、一意/主キーの競合がある 4つの行が含まれているかどうかを確認します。
 
     ```sql
     $ mysql -u root -h 127.0.0.1 -P 4000 -e 'select * from lightning_task_info.conflict_error_v3;' --binary-as-hex -E

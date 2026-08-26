@@ -9,7 +9,7 @@ TiDBは、UNION、EXCEPT、INTERSECT演算子を使用した3つの集合演算�
 
 ## UNION演算子 {#union-operator}
 
-数学では、2 つの集合 A と B の和集合は、A または B に含まれるすべての要素から構成されます。例:
+数学では、2つの集合 A と B の和集合は、A または B に含まれるすべての要素から構成されます。例:
 
 ```sql
 SELECT 1 UNION SELECT 2;
@@ -58,7 +58,7 @@ SELECT * FROM t1 UNION ALL SELECT * FROM t2;
 
 ## EXCEPT演算子 {#except-operator}
 
-A と B が 2 つのセットである場合、EXCEPT は、A にはあるが B にはない要素で構成される A と B の差セットを返します。
+A と B が 2つのセットである場合、EXCEPT は、A にはあるが B にはない要素で構成される A と B の差セットを返します。
 
 ```sql
 SELECT * FROM t1 EXCEPT SELECT * FROM t2;
@@ -74,7 +74,7 @@ SELECT * FROM t1 EXCEPT SELECT * FROM t2;
 
 ## INTERSECT演算子 {#intersect-operator}
 
-数学では、2 つの集合 A と B の交差は、A と B の両方に含まれるすべての要素で構成され、他の要素は含まれません。
+数学では、2つの集合 A と B の交差は、A と B の両方に含まれるすべての要素で構成され、他の要素は含まれません。
 
 ```sql
 SELECT * FROM t1 INTERSECT SELECT * FROM t2;

@@ -64,7 +64,7 @@ TiDB バージョン: 6.5.7
     - TiDBがパニックを起こしてエラーを報告する問題を修正`invalid memory address or nil pointer dereference` [＃42739](https://github.com/pingcap/tidb/issues/42739) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - CTEクエリが再試行プロセス中にエラー`type assertion for CTEStorageMap failed`を報告する可能性がある問題を修正しました [＃46522](https://github.com/pingcap/tidb/issues/46522) @[tiancaiamao](https://github.com/tiancaiamao)
     - 一部のタイムゾーンで夏時間が正しく表示されない問題を修正 [＃49586](https://github.com/pingcap/tidb/issues/49586) @[overvenus](https://github.com/overvenus)
-    - 依存関係のある 2 つの DDL タスクの完了時間がと誤って順序付けられる問題を修正しました。 [＃49498](https://github.com/pingcap/tidb/issues/49498) @[tangenta](https://github.com/tangenta)
+    - 依存関係のある 2つの DDL タスクの完了時間がと誤って順序付けられる問題を修正しました。 [＃49498](https://github.com/pingcap/tidb/issues/49498) @[tangenta](https://github.com/tangenta)
 
 - TiKV
 

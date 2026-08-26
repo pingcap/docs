@@ -46,7 +46,7 @@ TiProxy v1.3.0以降では、TiProxyを使用してTiDB本番クラスタのア�
     > - TiProxyのCPU使用率が高いほど、トラフィックキャプチャによるQPSへの影響が大きくなります。本番クラスタへの影響を軽減するには、CPU容量の少なくとも30%を予約することをお勧めします。これにより、平均QPSが約3%低下します。詳細なパフォーマンスデータについては、 [トラフィックキャプチャテスト](/tiproxy/tiproxy-performance-test.md#traffic-capture-test)ご覧ください。
     > - TiProxyはトラフィックを再度キャプチャする際に、以前のキャプチャファイルを自動的に削除しません。手動で削除する必要があります。
 
-    たとえば、次のコマンドは、 `10.0.1.10:3080`の TiProxy インスタンスに接続し、1 時間のトラフィックをキャプチャし、それを TiProxy インスタンスの`/tmp/traffic`ディレクトリに保存します。
+    たとえば、次のコマンドは、 `10.0.1.10:3080`の TiProxy インスタンスに接続し、1時間のトラフィックをキャプチャし、それを TiProxy インスタンスの`/tmp/traffic`ディレクトリに保存します。
 
     ```shell
     tiproxyctl traffic capture --host 10.0.1.10 --port 3080 --output="/tmp/traffic" --duration=1h

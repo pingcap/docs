@@ -118,7 +118,7 @@ TiDB バージョン: 6.5.3
         - 上流 TiDB で OOM が発生したときに TiCDC が停止する問題を修正しました [＃8561](https://github.com/pingcap/tiflow/issues/8561) @[overvenus](https://github.com/overvenus)
         - ネットワーク分離やPDオーナーノードの再起動などのPD障害時にTiCDCが停止する問題を修正[＃8808](https://github.com/pingcap/tiflow/issues/8808) [＃8812](https://github.com/pingcap/tiflow/issues/8812) [＃8877](https://github.com/pingcap/tiflow/issues/8877) @[asddongmen](https://github.com/asddongmen)
         - TiCDC タイムゾーン設定の問題を修正 [＃8798](https://github.com/pingcap/tiflow/issues/8798) @[Rustin170506](https://github.com/Rustin170506)
-        - 上流の TiKV ノードの 1 つがクラッシュするとチェックポイントの遅延が増加する問題を修正しました [＃8858](https://github.com/pingcap/tiflow/issues/8858) @[hicqu](https://github.com/hicqu)
+        - 上流の TiKV ノードの 1つがクラッシュするとチェックポイントの遅延が増加する問題を修正しました [＃8858](https://github.com/pingcap/tiflow/issues/8858) @[hicqu](https://github.com/hicqu)
         - 下流のMySQLにデータを複製するときに、上流のTiDB で`FLASHBACK CLUSTER TO TIMESTAMP`ステートメントが実行された後にレプリケーションエラーが発生する問題を修正しました。 [＃8040](https://github.com/pingcap/tiflow/issues/8040) @[asddongmen](https://github.com/asddongmen)
         - オブジェクトストレージにデータを複製する際に、上流の`EXCHANGE PARTITION`操作が下流のに正しく複製されない問題を修正しました。 [＃8914](https://github.com/pingcap/tiflow/issues/8914) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - 一部の特殊なシナリオでソートコンポーネントの過剰なメモリ使用によって引き起こされる OOM 問題を修正[＃8974](https://github.com/pingcap/tiflow/issues/8974) @[hicqu](https://github.com/hicqu)

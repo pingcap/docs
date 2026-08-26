@@ -5,7 +5,7 @@ summary: クラスター リソースをサーバーレスまたは専用のク�
 
 # クラスタリソースをサーバーレスまたは専用クラスタリソースに移行する {#migrate-cluster-resource-to-serverless-or-dedicated-cluster-resource}
 
-TiDB Cloud Terraform Provider v0.4.0 以降では、 `tidbcloud_cluster`リソースが`tidbcloud_serverless_cluster`と`tidbcloud_dedicated_cluster` 2 つの新しいリソースに置き換えられます。TiDB Cloud Terraform Provider v0.4.0 以降のバージョンをご利用の場合は、このドキュメントに従って`tidbcloud_cluster`リソースを`tidbcloud_serverless_cluster`または`tidbcloud_dedicated_cluster`リソースに移行できます。
+TiDB Cloud Terraform Provider v0.4.0 以降では、 `tidbcloud_cluster`リソースが`tidbcloud_serverless_cluster`と`tidbcloud_dedicated_cluster` 2つの新しいリソースに置き換えられます。TiDB Cloud Terraform Provider v0.4.0 以降のバージョンをご利用の場合は、このドキュメントに従って`tidbcloud_cluster`リソースを`tidbcloud_serverless_cluster`または`tidbcloud_dedicated_cluster`リソースに移行できます。
 
 > **Tip:**
 >

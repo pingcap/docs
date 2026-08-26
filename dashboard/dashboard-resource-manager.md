@@ -9,7 +9,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
 ## ページにアクセスする {#access-the-page}
 
-リソースマネージャー ページにアクセスするには、次の 2 つの方法のいずれかを使用できます。
+リソースマネージャー ページにアクセスするには、次の2つの方法のいずれかを使用できます。
 
 - TiDB Dashboardにログインしたら、左側のナビゲーション メニューで**[リソースマネージャー] を**クリックします。
 
@@ -21,7 +21,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
 ![TiDB Dashboard: Resource Manager](/media/dashboard/dashboard-resource-manager-info.png)
 
-リソースマネージャー ページには、次の 3 つのセクションがあります。
+リソースマネージャー ページには、次の3つのセクションがあります。
 
 - コンフィグレーション: このセクションには、TiDBの`RESOURCE_GROUPS`テーブルから取得したデータが表示されます。すべてのリソースグループに関する情報が含まれています。詳細については、 [`RESOURCE_GROUPS`](/information-schema/information-schema-resource-groups.md)を参照してください。
 
@@ -55,7 +55,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
     推定期間を10分から24時間まで選択できます。使用されるタイムゾーンはフロントエンドユーザーのタイムゾーンと同じです。
 
-    - 時間ウィンドウの範囲が 10 分から 24 時間の範囲外の場合、次のエラーが表示されます`ERROR 1105 (HY000): the duration of calibration is too short, which could lead to inaccurate output. Please make the duration between 10m0s and 24h0m0s` 。
+    - 時間ウィンドウの範囲が 10分から 24時間の範囲外の場合、次のエラーが表示されます`ERROR 1105 (HY000): the duration of calibration is too short, which could lead to inaccurate output. Please make the duration between 10m0s and 24h0m0s` 。
 
     - [実際の作業負荷に基づく容量推定](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)機能の監視メトリックには、 `tikv_cpu_quota` 、 `tidb_server_maxprocs` 、 `resource_manager_resource_unit` 、 `process_cpu_usage`含まれます。CPUクォータ監視データが空の場合、対応する監視メトリック名（例： `Error 1105 (HY000): There is no CPU quota metrics, metrics 'tikv_cpu_quota' is empty` ）にエラーが発生します。
 

@@ -33,7 +33,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 - DDL操作のための分散並列実行フレームワークのサポート（実験的） [#37125](https://github.com/pingcap/tidb/issues/37125) @[zimulala](https://github.com/zimulala)
 
-    以前のバージョンでは、TiDB クラスタ全体で 1 つの TiDB インスタンスのみが DDL オーナーとしてスキーマ変更タスクを処理できました。大規模テーブルの DDL 操作の DDL 並行性をさらに向上させるため、TiDB v6.6.0 では、DDL 用の分散並列実行フレームワークが導入されました。これにより、クラスタ内のすべての TiDB インスタンスが同じタスクの`StateWriteReorganization`フェーズを同時に実行して、DDL の実行を高速化できます。この機能はシステム変数[`tidb_ddl_distribute_reorg`](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_ddl_distribute_reorg-new-in-v660)によって制御され、現在は`Add Index`操作のみでサポートされています。
+    以前のバージョンでは、TiDB クラスタ全体で 1つの TiDB インスタンスのみが DDL オーナーとしてスキーマ変更タスクを処理できました。大規模テーブルの DDL 操作の DDL 並行性をさらに向上させるため、TiDB v6.6.0 では、DDL 用の分散並列実行フレームワークが導入されました。これにより、クラスタ内のすべての TiDB インスタンスが同じタスクの`StateWriteReorganization`フェーズを同時に実行して、DDL の実行を高速化できます。この機能はシステム変数[`tidb_ddl_distribute_reorg`](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_ddl_distribute_reorg-new-in-v660)によって制御され、現在は`Add Index`操作のみでサポートされています。
 
 ### パフォーマンス {#performance}
 
@@ -280,7 +280,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 ### テレメトリー {#telemetry}
 
-- 2023 年 2 月 20 日以降、TiDB および TiDB Dashboard (v6.6.0 を含む) の新しいバージョンでは[テレメトリ機能](/telemetry.md)デフォルトで無効になります。デフォルトのテレメトリ構成を使用する以前のバージョンからアップグレードする場合、アップグレード後にテレメトリ機能は無効になります。特定のバージョンについては、 [TiDBのリリーススケジュール](/releases/release-timeline.md)を参照してください。
+- 2023 年 2月 20日以降、TiDB および TiDB Dashboard (v6.6.0 を含む) の新しいバージョンでは[テレメトリ機能](/telemetry.md)デフォルトで無効になります。デフォルトのテレメトリ構成を使用する以前のバージョンからアップグレードする場合、アップグレード後にテレメトリ機能は無効になります。特定のバージョンについては、 [TiDBのリリーススケジュール](/releases/release-timeline.md)を参照してください。
 - バージョン1.11.3以降、新規にデプロイされたTiUPでは、テレメトリ機能はデフォルトで無効になっています。以前のバージョンのTiUPからバージョン1.11.3以降にアップグレードした場合、テレメトリ機能はアップグレード前と同じ状態を維持します。
 
 ## 互換性の変更 {#compatibility-changes}
@@ -315,7 +315,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 | `tidb_general_plan_cache_size`                                                                                                                               | 変更     | この変数は、General Plan Cache によってキャッシュできる実行計画の最大数を制御します。v6.6.0 以降、この変数は[`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)に名前が変更されました。                                                                                |
 | [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)                                                                                     | 変更     | この変数に新しい値オプション`learner`が追加され、TiDB が読み取り専用ノードからデータを読み取る際に使用するラーナーレプリカを指定できます。                                                                                                                                                                                  |
 | [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)                                                                                     | 変更     | TiDBクラスタの読み取り可用性を向上させるため、この変数に新しい値オプション`prefer-leader`が追加されました。このオプションを設定すると、TiDBはリーダーレプリカからの読み取りを優先します。リーダーレプリカのパフォーマンスが著しく低下した場合、TiDBは自動的にフォロワーレプリカからの読み取りに切り替わります。                                                                                        |
-| [`tidb_store_batch_size`](/system-variables.md#tidb_store_batch_size)                                                                                        | 変更     | この変数は`IndexLookUp`オペレータのコプロセッサータスクのバッチサイズを制御します。 `0`バッチを無効にすることを意味します。v6.6.0 以降、デフォルト値は`0`から`4`に変更され、リクエストのバッチごとに 4 つのコプロセッサータスクが 1 つのタスクにまとめられます。                                                                                                          |
+| [`tidb_store_batch_size`](/system-variables.md#tidb_store_batch_size)                                                                                        | 変更     | この変数は`IndexLookUp`オペレータのコプロセッサータスクのバッチサイズを制御します。 `0`バッチを無効にすることを意味します。v6.6.0 以降、デフォルト値は`0`から`4`に変更され、リクエストのバッチごとに 4つのコプロセッサータスクが 1つのタスクにまとめられます。                                                                                                          |
 | [`mpp_exchange_compression_mode`](/system-variables.md#mpp_exchange_compression_mode-new-in-v660)                                                            | 新しく追加された | この変数は、MPP Exchange オペレータのデータ圧縮モードを指定します。この変数は、TiDB がバージョン番号`1`の MPP 実行計画を選択した場合に有効になります。デフォルト値`UNSPECIFIED`は、TiDB が自動的に`FAST`圧縮モードを選択することを意味します。                                                                                                            |
 | [`mpp_version`](/system-variables.md#mpp_version-new-in-v660)                                                                                                | 新しく追加された | この変数は、MPP実行計画のバージョンを指定します。バージョンを指定すると、TiDBは指定されたバージョンのMPP実行計画を選択します。デフォルト値`UNSPECIFIED` 、TiDBが最新バージョン`1`自動的に選択することを意味します。                                                                                                                                  |
 | [`tidb_ddl_distribute_reorg`](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_ddl_distribute_reorg-new-in-v660)                             | 新しく追加された | この変数は、DDL 再編成フェーズの分散実行を有効にしてこのフェーズを高速化するかどうかを制御します。デフォルト値`OFF`は、デフォルトでは DDL 再編成フェーズの分散実行を有効にしないことを意味します。現在、この変数は`ADD INDEX`に対してのみ有効です。                                                                                                                       |

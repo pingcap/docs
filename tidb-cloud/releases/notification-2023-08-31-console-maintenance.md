@@ -1,11 +1,11 @@
 ---
 title: 2023-08-31 TiDB Cloud Console Maintenance Notification
-summary: 2023 年 8 月 31 日のTiDB Cloud Console メンテナンスの詳細 (メンテナンスウィンドウ、理由、影響など) について説明します。
+summary: 2023年 8月 31日のTiDB Cloud Console メンテナンスの詳細 (メンテナンスウィンドウ、理由、影響など) について説明します。
 ---
 
 # [2023-08-31] TiDB Cloudコンソールメンテナンスのお知らせ {#2023-08-31-tidb-cloud-console-maintenance-notification}
 
-この通知では、2023 年 8 月 31 日の[TiDB Cloudコンソール](https://tidbcloud.com/)メンテナンスについて知っておく必要のある詳細について説明します。
+この通知では、2023年 8月 31日の[TiDB Cloudコンソール](https://tidbcloud.com/)メンテナンスについて知っておく必要のある詳細について説明します。
 
 ## メンテナンスウィンドウ {#maintenance-window}
 

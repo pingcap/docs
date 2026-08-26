@@ -319,7 +319,7 @@ SELECT @@character_set_database, @@collation_database;
 1 row in set (0.00 sec)
 ```
 
-`INFORMATION_SCHEMA`には次の 2 つの値も表示されます。
+`INFORMATION_SCHEMA`には次の2つの値も表示されます。
 
 ```sql
 SELECT DEFAULT_CHARACTER_SET_NAME, DEFAULT_COLLATION_NAME
@@ -579,7 +579,7 @@ ERROR 1062 (23000): Duplicate entry 'a ' for key 't.PRIMARY' -- TiDB modifies th
 式に異なる照合順序を持つ複数の節が含まれる場合、計算で使用される照合順序を推測する必要があります。そのルールは以下のとおりです。
 
 - 明示的な`COLLATE`句の強制可能性値は`0`です。
-- 2 つの文字列の照合順序に互換性がない場合は、異なる照合順序を持つ 2 つの文字列の連結の強制可能性値は`1`なります。
+- 2 つの文字列の照合順序に互換性がない場合は、異なる照合順序を持つ 2つの文字列の連結の強制可能性値は`1`なります。
 - 列の照合順序`CAST()` 、 `CONVERT()` 、または`BINARY()`の強制値は`2`です。
 - システム定数 ( `USER ()`または`VERSION ()`によって返される文字列) の強制値は`3`です。
 - 定数の強制値は`4`です。

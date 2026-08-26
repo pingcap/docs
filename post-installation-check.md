@@ -51,7 +51,7 @@ tiup cluster display tidb-test
 mysql -u root -h ${tidb_server_host_IP_address} -P 4000
 ```
 
-`${tidb_server_host_IP_address}` 、 `10.0.1.7`などの[クラスタトポロジファイルを初期化する](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file)の場合に`tidb_servers`に設定される IP アドレスの 1 つです。
+`${tidb_server_host_IP_address}` 、 `10.0.1.7`などの[クラスタトポロジファイルを初期化する](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file)の場合に`tidb_servers`に設定される IP アドレスの 1つです。
 
 次の情報はログインが成功したことを示します。
 

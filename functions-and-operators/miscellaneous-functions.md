@@ -25,7 +25,7 @@ TiDB は、MySQL 8.0 で利用可能な[その他の関数](https://dev.mysql.co
 | [`IS_IPV6()`](#is_ipv6)               | 引数が IPv6 アドレスかどうか                                                                                                                                                                                                                                                          |
 | [`IS_UUID()`](#is_uuid)               | 引数がUUIDかどうか                                                                                                                                                                                                                                                                |
 | [`NAME_CONST()`](#name_const)         | 列名を変更するために使用できます                                                                                                                                                                                                                                                           |
-| [`SLEEP()`](#sleep)                   | 指定された秒数だけスリープします。TiDB [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスの場合、 `SLEEP()`関数には制限があり、最大スリープ時間は 300 秒までしかサポートされないことに注意してください。 |
+| [`SLEEP()`](#sleep)                   | 指定された秒数だけスリープします。TiDB [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスの場合、 `SLEEP()`関数には制限があり、最大スリープ時間は 300秒までしかサポートされないことに注意してください。 |
 | [`UUID()`](#uuid)                     | ユニバーサル一意識別子（UUID）を返します。                                                                                                                                                                                                                                                    |
 | [`UUID_TO_BIN()`](#uuid_to_bin)       | UUIDをテキスト形式からバイナリ形式に変換する                                                                                                                                                                                                                                                   |
 | [`VALUES()`](#values)                 | INSERT時に使用される値を定義します                                                                                                                                                                                                                                                       |
@@ -57,11 +57,11 @@ SELECT ANY_VALUE(id),GROUP_CONCAT(id),name FROM fruits GROUP BY name;
 4 rows in set (0.00 sec)
 ```
 
-前述の例では、 `SELECT`列が非集計列であり、 `id`句に含まれていないため、TiDB は最初の`GROUP BY`ステートメントに対してエラーを返します。この問題を解決するために、2 番目の`SELECT`クエリでは、 `ANY_VALUE()`を使用して各グループから任意の値を取得し、 `GROUP_CONCAT()`を使用して各グループ内の`id`列のすべての値を単一の文字列に連結します。この方法により、非集計列の SQL モードを変更することなく、各グループから 1 つの値とグループ内のすべての値を取得できます。
+前述の例では、 `SELECT`列が非集計列であり、 `id`句に含まれていないため、TiDB は最初の`GROUP BY`ステートメントに対してエラーを返します。この問題を解決するために、2 番目の`SELECT`クエリでは、 `ANY_VALUE()`を使用して各グループから任意の値を取得し、 `GROUP_CONCAT()`を使用して各グループ内の`id`列のすべての値を単一の文字列に連結します。この方法により、非集計列の SQL モードを変更することなく、各グループから 1つの値とグループ内のすべての値を取得できます。
 
 ### BIN_TO_UUID() {#bin_to_uuid}
 
-`BIN_TO_UUID()`と`UUID_TO_BIN()`は、テキスト形式の UUID とバイナリ形式の UUID を相互に変換するために使用できます。どちらの関数も 2 つの引数を受け取ります。
+`BIN_TO_UUID()`と`UUID_TO_BIN()`は、テキスト形式の UUID とバイナリ形式の UUID を相互に変換するために使用できます。どちらの関数も 2つの引数を受け取ります。
 
 - 最初の引数は、変換する値を指定します。
 - 2番目の引数（オプション）は、バイナリ形式におけるフィールドの順序を制御します。

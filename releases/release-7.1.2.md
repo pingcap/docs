@@ -81,7 +81,7 @@ TiDB バージョン: 7.1.2
 
     - `GROUP_CONCAT` `ORDER BY`列を解析できない問題を修正 [＃41986](https://github.com/pingcap/tidb/issues/41986) @[AilinKid](https://github.com/AilinKid)
     - システムテーブル`INFORMATION_SCHEMA.TIKV_REGION_STATUS`をクエリすると、場合によっては誤った結果が返される問題を修正しました[＃45531](https://github.com/pingcap/tidb/issues/45531) @[Defined2014](https://github.com/Defined2014)
-    - メタデータの読み取りに 1 つの DDL リースよりも長い時間がかかる場合に TiDB のアップグレードが停止する問題を修正しました [＃45176](https://github.com/pingcap/tidb/issues/45176) @[zimulala](https://github.com/zimulala)
+    - メタデータの読み取りに 1つの DDL リースよりも長い時間がかかる場合に TiDB のアップグレードが停止する問題を修正しました [＃45176](https://github.com/pingcap/tidb/issues/45176) @[zimulala](https://github.com/zimulala)
     - CTE を含む DML 文を実行するとpanicが発生する問題を修正しました [＃46083](https://github.com/pingcap/tidb/issues/46083) @[winoros](https://github.com/winoros)
     - パーティション交換中にパーティション定義に準拠していないデータを検出できない問題を修正 [＃46492](https://github.com/pingcap/tidb/issues/46492) @[mjonss](https://github.com/mjonss)
     - `MERGE_JOIN`の結果が間違っている問題を修正[＃46580](https://github.com/pingcap/tidb/issues/46580) @[qw4990](https://github.com/qw4990)
@@ -192,7 +192,7 @@ TiDB バージョン: 7.1.2
         - CSV形式を使用するとTiCDCが誤って`UPDATE`演算を`INSERT`に変更する問題を修正 [＃9658](https://github.com/pingcap/tiflow/issues/9658) @[3AceShowHand](https://github.com/3AceShowHand)
         - アップストリームで同じDDL文で複数のテーブルの名前を変更するとレプリケーションエラーが発生する問題を修正 [＃9488](https://github.com/pingcap/tiflow/issues/9488) @[CharlesCheung96](https://github.com/CharlesCheung96) [＃9476](https://github.com/pingcap/tiflow/issues/9476) @[asddongmen](https://github.com/asddongmen)
         - Kafka に同期するときに再試行間隔が短いためにレプリケーションタスクが失敗する問題を修正しました [＃9504](https://github.com/pingcap/tiflow/issues/9504) @[3AceShowHand](https://github.com/3AceShowHand)
-        - アップストリームで 1 つのトランザクションで複数の行の一意のキーが変更されると、レプリケーション書き込み競合が発生する可能性がある問題を修正しました。 [＃9430](https://github.com/pingcap/tiflow/issues/9430) @[sdojjy](https://github.com/sdojjy)
+        - アップストリームで 1つのトランザクションで複数の行の一意のキーが変更されると、レプリケーション書き込み競合が発生する可能性がある問題を修正しました。 [＃9430](https://github.com/pingcap/tiflow/issues/9430) @[sdojjy](https://github.com/sdojjy)
         - ダウンストリームで短期的な障害が発生したときにレプリケーションタスクが停止する可能性がある問題を修正[＃9542](https://github.com/pingcap/tiflow/issues/9542) [＃9272](https://github.com/pingcap/tiflow/issues/9272) [＃9582](https://github.com/pingcap/tiflow/issues/9582) [＃9592](https://github.com/pingcap/tiflow/issues/9592) @[hicqu](https://github.com/hicqu)
         - ダウンストリームでエラーが発生し、 で再試行すると、レプリケーションタスクが停止する可能性がある問題を修正しました。 [＃9450](https://github.com/pingcap/tiflow/issues/9450) @[hicqu](https://github.com/hicqu)
         - Kafka にデータを複製するときに TiCDC が停止する可能性がある問題を修正しました [＃9855](https://github.com/pingcap/tiflow/issues/9855) @[hicqu](https://github.com/hicqu)

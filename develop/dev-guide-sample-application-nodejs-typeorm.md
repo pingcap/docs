@@ -227,7 +227,7 @@ npm run migration:run
 
 <details><summary><b>期待される実行出力</b></summary>
 
-以下の SQL ステートメントは`players`テーブルと`profiles`テーブルを作成し、2 つのテーブルは外部キーによって関連付けられます。
+以下の SQL ステートメントは`players`テーブルと`profiles`テーブルを作成し、2つのテーブルは外部キーによって関連付けられます。
 
 ```sql
 query: SELECT VERSION() AS `version`

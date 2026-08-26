@@ -140,7 +140,7 @@ from:
 
 > **Note:**
 >
-> 自動データ消去戦略は、 [`interval`](#interval)が`0`でなく、 2 つの構成項目[`expires`](#expires)と[`remain-space`](#remain-space)のうち少なくとも 1 つが`0`でない場合にのみ有効になります。
+> 自動データ消去戦略は、 [`interval`](#interval)が`0`でなく、 2つの構成項目[`expires`](#expires)と[`remain-space`](#remain-space)のうち少なくとも 1つが`0`でない場合にのみ有効になります。
 
 ### タスクステータスチェッカーの設定（ `checker` ） {#task-status-checker-configuration-checker}
 
@@ -156,7 +156,7 @@ DMは定期的に現在のタスクステータスとエラーメッセージを
 
 #### `backoff-max` {#backoff-max}
 
-- バックオフ戦略のチェック間隔の最大値は 1 秒より大きくなければなりません。
+- バックオフ戦略のチェック間隔の最大値は 1秒より大きくなければなりません。
 
 ### Binlogイベントフィルター {#binlog-event-filter}
 

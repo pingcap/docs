@@ -1,6 +1,6 @@
 ---
 title: Predicates Push Down
-summary: TiDB のロジック最適化ルールの 1 つである述語プッシュダウン (PPD) を導入します。
+summary: TiDB のロジック最適化ルールの 1つである述語プッシュダウン (PPD) を導入します。
 ---
 
 # Predicate Push Down（PPD） {#predicates-push-down-ppd}

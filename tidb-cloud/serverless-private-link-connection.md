@@ -60,8 +60,8 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
     > **Note:**
     >
-    > - TiDB Cloud Essential インスタンスが 2026 年 7 月 1 日以降に作成されている場合、**Create Private Endpoint for External Services** をクリックすると、エンドポイント専用モードでプライベートリンク接続が作成されます。このモードでは、各 {{{ .essential }}} インスタンスが独自のスタンドアロンプライベートエンドポイントを使用するため、接続時に[アカウントプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を含める必要がありません。
-    > - TiDB Cloud Essential インスタンスが 2026 年 7 月 1 日より前に作成されている場合、**Create Private Endpoint for External Services** をクリックすると、エンドポイント共有モードでプライベートリンク接続が作成されます。このモードでは、同じ AWS Region 内の複数の {{{ .essential }}} インスタンスで 1 つのプライベートエンドポイントを共有できます。
+    > - TiDB Cloud Essential インスタンスが 2026年 7月 1日以降に作成されている場合、**Create Private Endpoint for External Services** をクリックすると、エンドポイント専用モードでプライベートリンク接続が作成されます。このモードでは、各 {{{ .essential }}} インスタンスが独自のスタンドアロンプライベートエンドポイントを使用するため、接続時に[アカウントプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を含める必要がありません。
+    > - TiDB Cloud Essential インスタンスが 2026年 7月 1日より前に作成されている場合、**Create Private Endpoint for External Services** をクリックすると、エンドポイント共有モードでプライベートリンク接続が作成されます。このモードでは、同じ AWS Region 内の複数の {{{ .essential }}} インスタンスで 1つのプライベートエンドポイントを共有できます。
 
 4. **Create Private Endpoint for External Services**ダイアログで、必要な情報を入力します。
 
@@ -108,8 +108,8 @@ Amazon MSK プロビジョニングプライベートリンク接続を作成す
 
     > **Note:**
     >
-    > - TiDB Cloud Essential インスタンスが 2026 年 7 月 1 日以降に作成されている場合、**Create Private Endpoint for External Services** をクリックすると、エンドポイント専用モードでプライベートリンク接続が作成されます。このモードでは、各 {{{ .essential }}} インスタンスが独自のスタンドアロンプライベートエンドポイントを使用するため、接続時に[アカウントプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を含める必要がありません。
-    > - TiDB Cloud Essential インスタンスが 2026 年 7 月 1 日より前に作成されている場合、**Create Private Endpoint for External Services** をクリックすると、エンドポイント共有モードでプライベートリンク接続が作成されます。このモードでは、同じ AWS Region 内の複数の {{{ .essential }}} インスタンスで 1 つのプライベートエンドポイントを共有できます。
+    > - TiDB Cloud Essential インスタンスが 2026年 7月 1日以降に作成されている場合、**Create Private Endpoint for External Services** をクリックすると、エンドポイント専用モードでプライベートリンク接続が作成されます。このモードでは、各 {{{ .essential }}} インスタンスが独自のスタンドアロンプライベートエンドポイントを使用するため、接続時に[アカウントプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を含める必要がありません。
+    > - TiDB Cloud Essential インスタンスが 2026年 7月 1日より前に作成されている場合、**Create Private Endpoint for External Services** をクリックすると、エンドポイント共有モードでプライベートリンク接続が作成されます。このモードでは、同じ AWS Region 内の複数の {{{ .essential }}} インスタンスで 1つのプライベートエンドポイントを共有できます。
 
 4. **Create Private Endpoint for External Services**ダイアログで、必要な情報を入力します。
 
@@ -150,8 +150,8 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
     > **Note:**
     >
-    > - TiDB Cloud Essential インスタンスが 2026 年 7 月 1 日以降に作成されている場合、**Create Private Endpoint for External Services** をクリックすると、エンドポイント専用モードでプライベートリンク接続が作成されます。このモードでは、各 {{{ .essential }}} インスタンスが独自のスタンドアロンプライベートエンドポイントを使用するため、接続時に[アカウントプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を含める必要がありません。
-    > - TiDB Cloud Essential インスタンスが 2026 年 7 月 1 日より前に作成されている場合、**Create Private Endpoint for External Services** をクリックすると、エンドポイント共有モードでプライベートリンク接続が作成されます。このモードでは、同じ Alibaba Cloud Region 内の複数の {{{ .essential }}} インスタンスで 1 つのプライベートエンドポイントを共有できます。
+    > - TiDB Cloud Essential インスタンスが 2026年 7月 1日以降に作成されている場合、**Create Private Endpoint for External Services** をクリックすると、エンドポイント専用モードでプライベートリンク接続が作成されます。このモードでは、各 {{{ .essential }}} インスタンスが独自のスタンドアロンプライベートエンドポイントを使用するため、接続時に[アカウントプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を含める必要がありません。
+    > - TiDB Cloud Essential インスタンスが 2026年 7月 1日より前に作成されている場合、**Create Private Endpoint for External Services** をクリックすると、エンドポイント共有モードでプライベートリンク接続が作成されます。このモードでは、同じ Alibaba Cloud Region 内の複数の {{{ .essential }}} インスタンスで 1つのプライベートエンドポイントを共有できます。
 
 4. **Create Private Endpoint for External Services**ダイアログで、必要な情報を入力します。
 

@@ -65,7 +65,7 @@ TiDBは、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-st
 
 `ERROR 8003 (HY000): table count 3 != index(idx) count 2`
 
-このエラーは、 [`ADMIN CHECK`](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントが実行されたテーブルに行のキーと値のペアが 3 つあるが、インデックスのキーと値のペアが 2 つしかないことを示します。
+このエラーは、 [`ADMIN CHECK`](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントが実行されたテーブルに行のキーと値のペアが 3つあるが、インデックスのキーと値のペアが 2つしかないことを示します。
 
 #### エラー8134 {#error-8134}
 

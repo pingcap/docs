@@ -1,11 +1,11 @@
 ---
 title: TiDB Cloud Release Notes in 2020
-summary: 2020 年のTiDB Cloudのリリースノートについて説明します。
+summary: 2020年のTiDB Cloudのリリースノートについて説明します。
 ---
 
 # 2020年のTiDB Cloudリリースノート {#tidb-cloud-release-notes-in-2020}
 
-このページには、2020 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが記載されています。
+このページには、2020年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが記載されています。
 
 ## 2020年12月30日 {#december-30-2020}
 
@@ -15,7 +15,7 @@ summary: 2020 年のTiDB Cloudのリリースノートについて説明しま�
 
 ## 2020年12月16日 {#december-16-2020}
 
-- すべてのクラスタ層で TiDB ノードの最小数を 1 に調整します。
+- すべてのクラスタ層で TiDB ノードの最小数を1に調整します。
 - SQL Web シェルでシステム コマンドの実行を禁止する
 - TiDB クラスターの redact-log をデフォルトで有効にする
 

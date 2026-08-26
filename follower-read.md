@@ -79,7 +79,7 @@ set [session | global] tidb_replica_read = '<target value>';
 
 - `tidb_replica_read`の値が`closest-adaptive`に設定されている場合:
 
-    - 読み取り要求の推定結果が[`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)以上の値である場合、TiDB は読み取り操作に同じアベイラビリティゾーン内のレプリカを選択することを優先します。 アベイラビリティゾーン間で読み取りトラフィックの不均衡な分散を回避するために、TiDB はすべてのオンライン TiDB および TiKV ノードのアベイラビリティゾーンの分散を動的に検出します。各アベイラビリティゾーンでは、 `closest-adaptive`構成が有効になる TiDB ノードの数は制限されており、これは常に TiDB ノードが最も少ないアベイラビリティゾーン内の TiDB ノードの数と同じであり、その他の TiDB ノードは自動的にリーダーレプリカから読み取ります。たとえば、TiDB ノードが 3 つのアベイラビリティゾーン (A、B、C) に分散されていて、A と B にそれぞれ 3 つの TiDB ノードが含まれ、C には 2 つの TiDB ノードのみが含まれる場合、各アベイラビリティゾーンで`closest-adaptive`構成が有効になる TiDB ノードの数は 2 であり、A および B アベイラビリティゾーンのそれぞれのその他の TiDB ノードは読み取り操作にリーダーレプリカを自動的に選択します。
+    - 読み取り要求の推定結果が[`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)以上の値である場合、TiDB は読み取り操作に同じアベイラビリティゾーン内のレプリカを選択することを優先します。 アベイラビリティゾーン間で読み取りトラフィックの不均衡な分散を回避するために、TiDB はすべてのオンライン TiDB および TiKV ノードのアベイラビリティゾーンの分散を動的に検出します。各アベイラビリティゾーンでは、 `closest-adaptive`構成が有効になる TiDB ノードの数は制限されており、これは常に TiDB ノードが最も少ないアベイラビリティゾーン内の TiDB ノードの数と同じであり、その他の TiDB ノードは自動的にリーダーレプリカから読み取ります。たとえば、TiDB ノードが 3つのアベイラビリティゾーン (A、B、C) に分散されていて、A と B にそれぞれ 3つの TiDB ノードが含まれ、C には 2つの TiDB ノードのみが含まれる場合、各アベイラビリティゾーンで`closest-adaptive`構成が有効になる TiDB ノードの数は 2 であり、A および B アベイラビリティゾーンのそれぞれのその他の TiDB ノードは読み取り操作にリーダーレプリカを自動的に選択します。
     - 読み取り要求の推定結果が[`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)の値未満の場合、TiDB は読み取り操作に対してリーダーレプリカのみを選択できます。
 
 - `tidb_replica_read`を`learner`に設定すると、TiDB はラーナーレプリカからデータを読み取ります。現在のリージョンで利用可能なラーナーレプリカがない場合、TiDB は利用可能なリーダーレプリカまたはフォロワーレプリカからデータを読み取ります。

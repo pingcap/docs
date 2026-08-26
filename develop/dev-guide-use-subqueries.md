@@ -16,7 +16,7 @@ aliases: ['/ja/tidb/stable/dev-guide-use-subqueries/','/ja/tidbcloud/dev-guide-u
 
 ## サブクエリステートメント {#subquery-statement}
 
-ほとんどの場合、サブクエリには次の 5 つの種類があります。
+ほとんどの場合、サブクエリには次の5つの種類があります。
 
 - スカラーサブクエリ (例: `SELECT (SELECT s1 FROM t2) FROM t1` )。
 - 派生テーブル (例: `SELECT t1.s1 FROM (SELECT s1 FROM t2) t1` )。
@@ -32,7 +32,7 @@ aliases: ['/ja/tidb/stable/dev-guide-use-subqueries/','/ja/tidbcloud/dev-guide-u
 
 ### 自己完結型サブクエリ {#self-contained-subquery}
 
-サブクエリを比較演算子 ( `>` 、 `>=` 、 `<` 、 `<=` 、 `=` 、または`! =` ) のオペランドとして使用する自己完結型サブクエリの場合、内部サブクエリは 1 回だけクエリを実行し、実行計画 フェーズで TiDB によって定数として書き換えられます。
+サブクエリを比較演算子 ( `>` 、 `>=` 、 `<` 、 `<=` 、 `=` 、または`! =` ) のオペランドとして使用する自己完結型サブクエリの場合、内部サブクエリは 1回だけクエリを実行し、実行計画 フェーズで TiDB によって定数として書き換えられます。
 
 たとえば、年齢が平均年齢より大きい`authors`のテーブル内の著者を照会するには、サブクエリを比較演算子のオペランドとして使用できます。
 
