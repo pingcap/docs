@@ -25,7 +25,7 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 
 > **Tip:**
 >
-> - TiDB Cloud Dedicatedクラスター上のデータをバックアップおよび復元する方法については、 [TiDB Cloud Dedicatedデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)復元」を参照してください。
+> - TiDB Cloud Dedicatedクラスター上のデータをバックアップおよび復元する方法については、 [TiDB Cloud Dedicatedデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
 > - TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのデータをバックアップおよび復元する方法については、 [TiDB Cloud StarterまたはEssentialデータのバックアップと復元](/tidb-cloud/backup-and-restore-serverless.md)を参照してください。
 
 ## バックアップページを確認する {#view-the-backup-page}
