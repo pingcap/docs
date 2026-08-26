@@ -14,7 +14,7 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 - **TiDB Cloud Premium**
 
-    - TiDB Cloud Premium 现已支持将 changefeed 数据直接流式传输到 Amazon S3 和阿里云对象存储服务（OSS）。
+    - TiDB Cloud Premium 现已支持将 changefeed 数据直接同步到 Amazon S3 和阿里云对象存储服务（OSS）。
 
         此功能使你能够将变更数据归档到云存储中，用于下游分析和长期保留，同时通过消除对中间消息队列的需求来降低成本。
 
