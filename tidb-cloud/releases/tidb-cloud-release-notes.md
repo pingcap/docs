@@ -263,7 +263,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
     - **最小 RCU 課金の更新**: **2026年8月1日**から、最小 RCU 値は設定された最大 RCU 値に基づいて自動的に決定されます（最小 RCU = 設定された最大 RCU の 0.1 ×、下限は 2,000 RCU）。実際の使用量が最小 RCU しきい値を下回る場合、TiDB Cloud は最小 RCU 値に基づいて料金を計算します。**2026年7月1日より前に作成された既存インスタンス**については、この最小 RCU 課金ポリシーの実施は延期され、正確な適用日は後日発表されます。
     - **追加の課金対象機能**: バックアップ使用量およびネットワーク外向きトラフィックの料金は **2026年9月1日** に適用開始となります。詳細については、[TiDB Cloud Essential pricing](https://www.pingcap.com/tidb-cloud-essential-pricing-details/) を参照してください。
 
-## 2026年6月16日
+## 2026年6月16日 {#june-16-2026}
 
 **全般的な変更**
 
@@ -310,7 +310,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)向けに以下のバックアップAPIエンドポイントを導入し、組織内のアクティブなインスタンスと削除されたインスタンスの両方を一元的に管理できるようにします。
 
-        - バックアップの一覧を[バックアップの一覧を表示](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_ListBackups): 組織内のアクティブなTiDB Cloud Premiumインスタンス (ごみ箱内) の両方のバックアップを一覧表示します。
+        - [バックアップの一覧を表示](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_ListBackups): 組織内のアクティブなTiDB Cloud Premiumインスタンスと削除済み（ごみ箱内）インスタンスの両方のバックアップを一覧表示します。
         - [バックアップを削除する](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_DeleteBackup): `backupId`によって組織内の特定のバックアップを削除します。
 
 ## 2026年6月2日 {#june-2-2026}
@@ -331,7 +331,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         この機能は、RUを最も多く消費するSQLステートメントを分単位で表示し、最もリソースを消費するクエリを迅速に特定してコスト削減に役立てます。
 
-        この機能は段階的に展開されます。早期アクセスをご希望の場合は、 [support@pi​​ngcap.com](mailto:support@pingcap.com)お問い合わせください。
+        この機能は段階的に展開されます。早期アクセスをご希望の場合は、 [support@pingcap.com](mailto:support@pingcap.com)までお問い合わせください。
 
 - **TiDB Cloud Premium**
 
@@ -378,7 +378,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         この機能は、RUを最も多く消費しているSQLステートメントを分単位の粒度で表示し、リソースを大量に消費するクエリを迅速に特定してコスト削減に役立てます。
 
-        この機能は段階的に展開されます。早期アクセスをご希望の場合は、 [support@pi​​ngcap.com](mailto:support@pingcap.com)お問い合わせください。
+        この機能は段階的に展開されます。早期アクセスをご希望の場合は、 [support@pingcap.com](mailto:support@pingcap.com)までお問い合わせください。
 
 **APIの変更**
 
@@ -406,7 +406,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         この機能は、RUを最も多く消費しているSQLステートメントを分単位の粒度で表示し、リソースを大量に消費するクエリを迅速に特定してコスト削減に役立てます。
 
-        この機能は段階的に展開されます。早期アクセスをご希望の場合は、 [support@pi​​ngcap.com](mailto:support@pingcap.com)お問い合わせください。
+        この機能は段階的に展開されます。早期アクセスをご希望の場合は、 [support@pingcap.com](mailto:support@pingcap.com)までお問い合わせください。
 
 ## 2026年5月12日 {#may-12-2026}
 
@@ -616,7 +616,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         Azure Blob Storage から[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターにデータをインポートする際、接続方法としてプライベートリンクを選択し、パブリックインターネットではなく Azure プライベートエンドポイント経由で接続できるようになりました。この機能により、パブリックアクセスが制限されているストレージアカウントでも、安全でネットワーク分離されたデータインポートが可能になります。
 
-        詳細については、[クラウドストレージからサンプルデータ（SQLファイル）をインポートする](/tidb-cloud/import-sample-data.md)[クラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)[クラウドストレージからApache Parquetファイルをインポートする](/tidb-cloud/import-parquet-files.md)を参照してください。
+        詳細については、[クラウドストレージからサンプルデータ（SQLファイル）をインポートする](/tidb-cloud/import-sample-data.md)、[クラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)、および[クラウドストレージからApache Parquetファイルをインポートする](/tidb-cloud/import-parquet-files.md)を参照してください。
 
     - セキュリティ追跡を強化するため、 TiDB Cloudのコンソール監査ログに「パブリックエンドポイントの有効化/無効化」イベントを追加します。
 
@@ -670,9 +670,9 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         現在、データ移行機能は論理モードのみをサポートしています。
 
-        詳細については、 [データ移行を使用して既存データと増分データを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)[データ移行を使用して増分データを移行する](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)を参照してください。
+        詳細については、 [データ移行を使用して既存データと増分データを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)および[データ移行を使用して増分データを移行する](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)を参照してください。
 
-    - [スロークエリ](/tidb-cloud/tune-performance.md#slow-query)監査、および[`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)テーブル (ベータ版) に実際のクライアント IP アドレスを表示します[DB監査ログ](/tidb-cloud/essential-database-audit-logging.md)
+    - [スロークエリ](/tidb-cloud/tune-performance.md#slow-query)ビュー、[DB監査ログ](/tidb-cloud/essential-database-audit-logging.md)、および[`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)テーブル (ベータ版) に実際のクライアント IP アドレスを表示
 
         TiDB CloudはクライアントIPパススルーをサポートするようになり、スロークエリビュー、DB監査ログ、および`INFORMATION_SCHEMA.PROCESSLIST`テーブルで、ロードバランサー（LB）のIPアドレスではなく、実際のクライアントIPアドレスを表示できるようになりました。この機能により、データベース要求の真の発生源を正確に特定し、トラブルシューティングと分析を改善できます。
 
