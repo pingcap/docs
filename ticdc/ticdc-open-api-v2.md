@@ -373,6 +373,7 @@ The `sink.csv` parameters are described as follows:
 | Parameter name     | Description                                                                                                                                                                   |
 |:-------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `output_old_value` | `BOOLEAN` type. It controls whether to output the value before the row data changes. The default value is true. When it is disabled, the UPDATE event does not output the "before" field. |
+| `include_start_ts` | `BOOLEAN` type. New in v8.5.9. It controls whether Debezium JSON DML messages include `source.start_ts` (the original PD TSO of the source transaction). The default value is `false`. |
 
 ### Example
 

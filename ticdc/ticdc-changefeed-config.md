@@ -353,6 +353,14 @@ The following configuration parameters control the sending behavior of bootstrap
 - Controls whether to output the value before the row data changes. The default value is true. When it is disabled, the `UPDATE` event does not output the "before" field.
 - Default value: `true`
 
+##### `include-start-ts` <span class="version-mark">New in v8.5.9</span>
+
+- Controls whether Debezium JSON DML messages include `source.start_ts` (the original PD TSO of the source transaction).
+- Default value: `false`
+- This parameter takes effect only when the sink type is MQ and the output protocol is Debezium JSON. Setting it with Debezium Avro is rejected.
+- You can also set the equivalent URI parameter `debezium-include-start-ts`. An explicit URI value takes precedence over this configuration item, including `false` overriding `true`.
+- For the message format and consumer precision requirements, see [TiCDC Debezium Protocol](/ticdc/ticdc-debezium.md#include-the-transaction-start-tso).
+
 ### consistent
 
 Specifies the replication consistency configurations for a changefeed when using the redo log. For more information, see [Eventually consistent replication in disaster scenarios](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios).
