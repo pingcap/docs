@@ -8,6 +8,18 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 8 月 25 日 {#august-25-2026}
+
+**一般变更**
+
+- **TiDB Cloud Premium**
+
+    - TiDB Cloud Premium 现已支持将 changefeed 数据直接流式传输到 Amazon S3 和阿里云对象存储服务（OSS）。
+
+        此功能使你能够将变更数据归档到云存储中，用于下游分析和长期保留，同时通过消除对中间消息队列的需求来降低成本。
+
+        更多信息，请参见 [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium)。
+
 ## 2026 年 8 月 18 日 {#august-18-2026}
 
 **常规变更**

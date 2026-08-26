@@ -242,7 +242,13 @@ TiDB Cloud 支持将数据恢复到新实例。
 
     <CustomContent plan="byoc">
 
-    对于 {{{ .byoc }}}，请选择与备份位于同一云服务提供商和 region 的活跃资源池。如果没有可用的合适资源池，`Organization Owner` 可以在恢复实例前创建一个。其他角色无法创建资源池。更多信息，请参见 [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md)。
+    对于 {{{ .byoc }}}，请选择与备份位于同一云服务提供商和 region 的活跃资源池。恢复后的实例会继承所选资源池的高可用模式。你可以将同一备份恢复到单可用区或多可用区资源池。如果没有可用的合适资源池，`Organization Owner` 可以在恢复实例前创建一个。其他角色无法创建资源池。更多信息，请参见 [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md)。
+
+    如果所选资源池设置了 Pool vCPU Limit，且其当前已配置的 vCPU 大于或等于该限制，TiDB Cloud 会显示警告，并且你无法将实例恢复到该资源池。要继续，请前往 Resource Pool 详情页面，提高或关闭 Pool vCPU Limit，或选择另一个资源池。
+
+    > **Note:**
+    >
+    > 即使当前已配置的 vCPU 低于 Pool vCPU Limit，恢复实例也可能导致总已配置 vCPU 超过该限制。这可能会限制资源扩缩容并降低资源池中所有实例的性能。在恢复实例之前，请确保资源池具有足够的 vCPU 容量。如有必要，请提高或关闭 Pool vCPU Limit，或选择另一个资源池。
 
     </CustomContent>
 
@@ -366,7 +372,13 @@ TiDB Cloud 支持将数据恢复到新实例。
 
     <CustomContent plan="byoc">
 
-    对于 {{{ .byoc }}}，请选择一个与目标云服务提供商和 region 匹配的活跃资源池。如果没有可用的合适资源池，`Organization Owner` 可以在恢复实例之前创建一个。其他角色无法创建资源池。更多信息，请参见 [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md)。
+    对于 {{{ .byoc }}}，请选择一个与目标云服务提供商和 region 匹配的活跃资源池。恢复后的实例会继承所选资源池的高可用模式。你可以将同一备份恢复到单可用区或多可用区资源池。如果没有可用的合适资源池，`Organization Owner` 可以在恢复实例之前创建一个。其他角色无法创建资源池。更多信息，请参见 [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md)。
+
+    如果所选资源池设置了 Pool vCPU Limit，且其当前已配置的 vCPU 大于或等于该限制，TiDB Cloud 会显示警告，并且你无法将实例恢复到该资源池。要继续，请前往 Resource Pool 详情页面，提高或关闭 Pool vCPU Limit，或选择另一个资源池。
+
+    > **Note:**
+    >
+    > 即使当前已配置的 vCPU 低于 Pool vCPU Limit，恢复实例也可能导致总已配置 vCPU 超过该限制。这可能会限制资源扩缩容并影响资源池中所有实例的性能。在恢复实例之前，请确保资源池具有足够的 vCPU 容量。如有必要，请提高或关闭 Pool vCPU Limit，或选择另一个资源池。
 
     </CustomContent>
 

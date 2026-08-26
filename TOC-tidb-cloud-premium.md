@@ -140,6 +140,7 @@
   - [Changefeed 概述](/tidb-cloud/changefeed-overview.md)
   - [到 MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
   - [到 Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+  - [到 Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
   - 参考
     - [在 AWS 中设置自托管 Kafka Private Link 服务](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
     - [为 Changefeed 设置 Private Endpoint](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)
