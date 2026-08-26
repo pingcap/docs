@@ -440,8 +440,8 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
     - **Name**: `kafka-lb-ip`
     - **IP version**: `IPv4`
     - **Virtual network**： `kafka-pls-vnet`
-    - **サブネット**: `brokers-subnet`
-    - **課題**： `Dynamic`
+    - **Subnet**: `brokers-subnet`
+    - **Assignment**： `Dynamic`
     - **Availability zone**: `Zone-redundant`
 
 4. **Backend pools**タブで、次の 3 つのバックエンド プールを追加し、 **Next : Inbound rules**をクリックします。
