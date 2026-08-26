@@ -20,7 +20,7 @@ TiDBバージョン: 4.0.16
     - TiCDC
 
         - TiCDC が Kafka クラスターに大きすぎるメッセージを送信しないように、Kafka シンク`max-message-bytes`のデフォルト値を 1 MB に変更します。 [＃2962](https://github.com/pingcap/tiflow/issues/2962)
-        - TiCDC がメッセージを Kafka パーティション間でより均等に分散するように、Kafka シンク`partition-num`のデフォルト値を 3 に変更します[＃3337](https://github.com/pingcap/tiflow/issues/3337)
+        - TiCDC がメッセージを Kafka パーティション間でより均等に分散するように、Kafka シンク`partition-num`のデフォルト値を3に変更します[＃3337](https://github.com/pingcap/tiflow/issues/3337)
 
 ## 改善点 {#improvements}
 

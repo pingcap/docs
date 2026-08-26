@@ -54,7 +54,7 @@ OLTP (オンライン トランザクション処理) シナリオの場合、�
 
 > **Note:**
 >
-> デフォルトの MySQL Connector/J 実装では、 `addBatch()`を使用してバッチに追加された SQL ステートメントの送信時間は`executeBatch()`が呼び出されるまで遅延されますが、実際のネットワーク転送中はステートメントは 1 つずつ送信されます。そのため、この方法では通常、通信オーバーヘッドは削減されません。
+> デフォルトの MySQL Connector/J 実装では、 `addBatch()`を使用してバッチに追加された SQL ステートメントの送信時間は`executeBatch()`が呼び出されるまで遅延されますが、実際のネットワーク転送中はステートメントは 1つずつ送信されます。そのため、この方法では通常、通信オーバーヘッドは削減されません。
 >
 > ネットワーク転送をバッチ処理する場合は、JDBC 接続パラメータで`rewriteBatchedStatements = true`を構成する必要があります。詳細なパラメータ設定については、[バッチ関連パラメータ](#batch-related-parameters)を参照してください。
 
@@ -132,7 +132,7 @@ JDBC は通常、実装関連の設定を JDBC URL パラメーターの形式�
 
 #### バッチ関連パラメータ {#batch-related-parameters}
 
-バッチ書き込みを処理する際は、 `rewriteBatchedStatements=true`を設定することをお勧めします。 `addBatch()`または`executeBatch()`を使用した後でも、JDBC はデフォルトでは SQL を 1 つずつ送信します。例:
+バッチ書き込みを処理する際は、 `rewriteBatchedStatements=true`を設定することをお勧めします。 `addBatch()`または`executeBatch()`を使用した後でも、JDBC はデフォルトでは SQL を 1つずつ送信します。例:
 
 ```java
 pstmt = prepare("insert into t (a) values(?)");
@@ -158,7 +158,7 @@ insert into t(a) values(12);
 insert into t(a) values(10),(11),(12);
 ```
 
-`INSERT`ステートメントの書き換えは、複数の「values」キーワードの後の値を連結して 1 つの SQL ステートメントにするものであることに注意してください。 `INSERT`ステートメントに他の違いがある場合、書き換えることはできません。たとえば、次のようになります。
+`INSERT`ステートメントの書き換えは、複数の「values」キーワードの後の値を連結して 1つの SQL ステートメントにするものであることに注意してください。 `INSERT`ステートメントに他の違いがある場合、書き換えることはできません。たとえば、次のようになります。
 
 ```sql
 insert into t (a) values (10) on duplicate key update a = 10;
@@ -166,7 +166,7 @@ insert into t (a) values (11) on duplicate key update a = 11;
 insert into t (a) values (12) on duplicate key update a = 12;
 ```
 
-上記の`INSERT`文は 1 つの文に書き換えることはできません。しかし、3 つの文を次のように変更すると次のようになります。
+上記の`INSERT`文は 1つの文に書き換えることはできません。しかし、3つの文を次のように変更すると次のようになります。
 
 ```sql
 insert into t (a) values (10) on duplicate key update a = values(a);
@@ -174,7 +174,7 @@ insert into t (a) values (11) on duplicate key update a = values(a);
 insert into t (a) values (12) on duplicate key update a = values(a);
 ```
 
-すると、書き換え要件を満たします。上記の`INSERT`文は、次の 1 つの文に書き換えられます。
+すると、書き換え要件を満たします。上記の`INSERT`文は、次の1つの文に書き換えられます。
 
 ```sql
 insert into t (a) values (10), (11), (12) on duplicate key update a = values(a);
@@ -204,11 +204,11 @@ update t set a = 10 where id = 1; update t set a = 11 where id = 2; update t set
 
 TiDBは、以下のMySQL互換のタイムアウト制御パラメータを提供します。
 
-- `wait_timeout` : Javaアプリケーションへの接続における非対話型アイドルタイムアウトを制御します。TiDB v5.4 以降では、 `wait_timeout`のデフォルト値は`28800`秒、つまり 8 時間です。TiDB バージョンが v5.4 より前の場合、デフォルト値は`0`で、タイムアウトは無制限です。
+- `wait_timeout` : Javaアプリケーションへの接続における非対話型アイドルタイムアウトを制御します。TiDB v5.4 以降では、 `wait_timeout`のデフォルト値は`28800`秒、つまり 8時間です。TiDB バージョンが v5.4 より前の場合、デフォルト値は`0`で、タイムアウトは無制限です。
 - `interactive_timeout` : Javaアプリケーションへの接続における対話型アイドルタイムアウトを制御します。デフォルト値は8時間です。
 - `max_execution_time` : 接続における SQL 実行のタイムアウトを制御します。これは`SELECT`ステートメント ( `SELECT ... FOR UPDATE`を含む) にのみ有効です。デフォルト値は`0`で、接続が無限にビジー状態になることを許可します。つまり、SQL ステートメントが無限に長い時間実行されます。
 
-しかし、実際の本番環境では、アイドル状態の接続や実行時間が長すぎる SQL ステートメントは、データベースやアプリケーションに悪影響を及ぼします。アイドル状態の接続や実行時間が長すぎる SQL ステートメントを回避するには、アプリケーションの接続文字列で次の 2 つのパラメータを設定できます。たとえば、 `sessionVariables=wait_timeout=3600` (1 時間) と`sessionVariables=max_execution_time=300000` (5 分) を設定します。
+しかし、実際の本番環境では、アイドル状態の接続や実行時間が長すぎる SQL ステートメントは、データベースやアプリケーションに悪影響を及ぼします。アイドル状態の接続や実行時間が長すぎる SQL ステートメントを回避するには、アプリケーションの接続文字列で次の2つのパラメータを設定できます。たとえば、 `sessionVariables=wait_timeout=3600` (1時間) と`sessionVariables=max_execution_time=300000` (5分) を設定します。
 
 #### 一般的なJDBC接続文字列パラメータ {#typical-jdbc-connection-string-parameters}
 
@@ -253,9 +253,9 @@ hikari:
 
 - `maximumPoolSize` : プール内の最大接続数。デフォルト値は`10`です。コンテナ化された環境では、 Javaアプリケーションで使用可能な CPU コア数の 4～10 倍に設定することをお勧めします。この値を高く設定しすぎるとリソースの無駄遣いにつながり、低く設定しすぎると接続の取得が遅くなる可能性があります。 詳細については、[プールのサイズについて](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing)を参照してください。
 - `minimumIdle` : HikariCPでは、このパラメータを設定しないことを推奨します。デフォルト値は`maximumPoolSize`の値と同じで、接続プールのスケーリングを無効にします。これにより、トラフィックの急増時にも接続がすぐに利用可能になり、接続作成による遅延を回避できます。
-- `connectionTimeout` : アプリケーションが接続プールから接続を取得するために待機する最大時間 (ミリ秒)。デフォルト値は`30000`ミリ秒 (30 秒) です。この時間内に利用可能な接続が得られない場合、 `SQLException`例外が発生します。
-- `maxLifetime` : プール内の接続の最大有効期間 (ミリ秒)。デフォルト値は`1800000`ミリ秒 (30 分) です。使用中の接続には影響しません。接続が閉じられた後、この設定に従って削除されます。この値を低く設定しすぎると、再接続が頻繁に発生する可能性があります。[`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50)を使用している場合は、この値が待機時間よりも小さいことを確認してください。
-- `keepaliveTime` : プール内の接続に対するキープアライブ操作の間隔 (ミリ秒)。この設定は、データベースまたはネットワークのアイドルタイムアウトによって発生する切断を防ぐのに役立ちます。デフォルト値は`120000`ミリ秒 (2 分) です。プールは、アイドル状態の接続を維持するために JDBC4 `isValid()`メソッドを使用することを優先します。
+- `connectionTimeout` : アプリケーションが接続プールから接続を取得するために待機する最大時間 (ミリ秒)。デフォルト値は`30000`ミリ秒 (30秒) です。この時間内に利用可能な接続が得られない場合、 `SQLException`例外が発生します。
+- `maxLifetime` : プール内の接続の最大有効期間 (ミリ秒)。デフォルト値は`1800000`ミリ秒 (30分) です。使用中の接続には影響しません。接続が閉じられた後、この設定に従って削除されます。この値を低く設定しすぎると、再接続が頻繁に発生する可能性があります。[`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50)を使用している場合は、この値が待機時間よりも小さいことを確認してください。
+- `keepaliveTime` : プール内の接続に対するキープアライブ操作の間隔 (ミリ秒)。この設定は、データベースまたはネットワークのアイドルタイムアウトによって発生する切断を防ぐのに役立ちます。デフォルト値は`120000`ミリ秒 (2分) です。プールは、アイドル状態の接続を維持するために JDBC4 `isValid()`メソッドを使用することを優先します。
 
 ### プローブ構成 {#probe-configuration}
 
@@ -349,11 +349,11 @@ Cursor<Post> queryAllPost();
 
 ### `ExecutorType` {#executortype}
 
-`ExecutorType`の間に { `openSession` } を選択できます。MyBatis は 3 種類の実行エンジンをサポートしています。
+`ExecutorType`の間に { `openSession` } を選択できます。MyBatis は 3種類の実行エンジンをサポートしています。
 
 - Simple: プリペアドステートメントは、実行ごとにJDBCに呼び出されます（JDBC構成項目`cachePrepStmts`が有効になっている場合、繰り返し実行されるプリペアドステートメントは再利用されます）。
 - Reuse: プリペアドステートメントは`executor`にキャッシュされるため、JDBC `cachePrepStmts`を使用せずにプリペアドステートメントの重複呼び出しを減らすことができます。
-- Batch: 各更新操作 ( `INSERT` / `DELETE` / `UPDATE` ) は、まずバッチに追加され、トランザクションがコミットされるか`SELECT`クエリが実行されるまで実行されます。JDBCレイヤーで`rewriteBatchStatements`が有効になっている場合は、ステートメントの書き換えが試みられます。そうでない場合は、ステートメントは 1 つずつ送信されます。
+- Batch: 各更新操作 ( `INSERT` / `DELETE` / `UPDATE` ) は、まずバッチに追加され、トランザクションがコミットされるか`SELECT`クエリが実行されるまで実行されます。JDBCレイヤーで`rewriteBatchStatements`が有効になっている場合は、ステートメントの書き換えが試みられます。そうでない場合は、ステートメントは 1つずつ送信されます。
 
 通常、 `ExecutorType`のデフォルト値は`Simple`です。 `ExecutorType`を呼び出すときは`openSession` } を変更する必要があります。バッチ実行の場合、トランザクション内で`UPDATE`または`INSERT`ステートメントの実行は非常に高速ですが、データの読み取りやトランザクションのコミットは遅くなる場合があります。これは正常な動作ですので、SQL クエリの遅延をトラブルシューティングする際には、この点に注意してください。
 

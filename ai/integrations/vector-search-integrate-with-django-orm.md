@@ -241,7 +241,7 @@ TiDB Vectorは以下の距離関数をサポートしています。
 - `CosineDistance`
 - `NegativeInnerProduct`
 
-コサイン距離関数に基づいて、クエリベクトル`[1, 2, 3]`に意味的に最も近い上位 3 つのドキュメントを検索します。
+コサイン距離関数に基づいて、クエリベクトル`[1, 2, 3]`に意味的に最も近い上位 3つのドキュメントを検索します。
 
 ```python
 results = Document.objects.annotate(

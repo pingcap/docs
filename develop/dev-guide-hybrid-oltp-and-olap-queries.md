@@ -241,7 +241,7 @@ WITH orders_group_by_month AS (
 SELECT * FROM acc;
 ```
 
-`EXPLAIN`ステートメントを使用して、上記のSQL文の実行計画を確認できます。タスク列に`cop[tiflash]`と`cop[tikv]`が同時に表示される場合、 TiFlashと TiKV の両方がこのクエリを完了するようにスケジュールされていることを意味します。TiFlash と TiKV のストレージエンジンは通常、異なる TiDB ノードを使用するため、2 つのクエリタイプは互いに影響を受けません。
+`EXPLAIN`ステートメントを使用して、上記のSQL文の実行計画を確認できます。タスク列に`cop[tiflash]`と`cop[tikv]`が同時に表示される場合、 TiFlashと TiKV の両方がこのクエリを完了するようにスケジュールされていることを意味します。TiFlash と TiKV のストレージエンジンは通常、異なる TiDB ノードを使用するため、2つのクエリタイプは互いに影響を受けません。
 
 TiDBがTiFlashをどのように使用するかの詳細については、 [TiDBを使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
 

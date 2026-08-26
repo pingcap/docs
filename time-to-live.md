@@ -171,7 +171,7 @@ TiDBはTTLに関する実行時情報を定期的に収集し、Grafanaでこれ
 
 </CustomContent>
 
-さらに、TiDB は TTL ジョブに関する詳細情報を取得するための 3 つのテーブルを提供します。
+さらに、TiDB は TTL ジョブに関する詳細情報を取得するための 3つのテーブルを提供します。
 
 - `mysql.tidb_ttl_table_status`テーブルには、すべての TTL テーブルについて、以前に実行された TTL ジョブと進行中の TTL ジョブに関する情報が含まれています。
 
@@ -201,13 +201,13 @@ TiDBはTTLに関する実行時情報を定期的に収集し、Grafanaでこれ
     1 row in set (0.040 sec)
     ```
 
-    列`table_id`はパーティションテーブルの ID であり、列`parent_table_id`はテーブルの ID で、列[`information_schema.tables`](/information-schema/information-schema-tables.md)の ID に対応します。テーブルがパーティションテーブルでない場合、2 つの ID は同じになります。
+    列`table_id`はパーティションテーブルの ID であり、列`parent_table_id`はテーブルの ID で、列[`information_schema.tables`](/information-schema/information-schema-tables.md)の ID に対応します。テーブルがパーティションテーブルでない場合、2つの ID は同じになります。
 
     列`{last, current}_job_{start_time, finish_time, ttl_expire}`は、それぞれ、前回または現在実行中のTTLジョブで使用された開始時刻、終了時刻、有効期限を示します。列`last_job_summary`は、前回のTTLタスクの実行ステータス（合計行数、成功行数、失敗行数など）を示します。
 
 - `mysql.tidb_ttl_task`テーブルには、実行中の TTL サブタスクに関する情報が含まれています。TTL ジョブは複数のサブタスクに分割され、このテーブルには現在実行中のサブタスクが記録されます。
 
-- `mysql.tidb_ttl_job_history`テーブルには、実行された TTL ジョブに関する情報が含まれています。TTL ジョブの履歴は 90 日間保存されます。
+- `mysql.tidb_ttl_job_history`テーブルには、実行された TTL ジョブに関する情報が含まれています。TTL ジョブの履歴は 90日間保存されます。
 
     ```sql
     TABLE mysql.tidb_ttl_job_history LIMIT 1\G
@@ -275,7 +275,7 @@ TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツー
 
 - 削除がデータサイズを比較的安定させるのに十分な速さであるかどうかをどのように判断すればよいでしょうか?
 
-    [Grafana `TiDB`ダッシュボード](/grafana-tidb-dashboard.md)パネル`TTL Insert Rows Per Hour`は、過去 1 時間に挿入された行の総数を記録します。対応する`TTL Delete Rows Per Hour`は 、過去 1 時間に TTL タスクによって削除された行の総数を記録します。`TTL Insert Rows Per Hour`が長期間にわたって`TTL Delete Rows Per Hour`よりも高い場合、挿入率が削除率を上回り、データの総量が増加することを意味します。例:
+    [Grafana `TiDB`ダッシュボード](/grafana-tidb-dashboard.md)パネル`TTL Insert Rows Per Hour`は、過去 1時間に挿入された行の総数を記録します。対応する`TTL Delete Rows Per Hour`は 、過去 1時間に TTL タスクによって削除された行の総数を記録します。`TTL Insert Rows Per Hour`が長期間にわたって`TTL Delete Rows Per Hour`よりも高い場合、挿入率が削除率を上回り、データの総量が増加することを意味します。例:
 
     ![insert fast example](/media/ttl/insert-fast.png)
 

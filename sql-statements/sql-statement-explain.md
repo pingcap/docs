@@ -183,7 +183,7 @@ EXPLAIN DELETE FROM t1 WHERE c1=3;
 | `tidb_json`  | `EXPLAIN`ステートメントは実行計画を JSON 形式で出力し、演算子情報を JSON 配列に格納します。                                                                 |
 | `verbose`    | `EXPLAIN`文は`row`形式で結果を出力し、さらに`estCost`列にクエリの推定コストが表示されます。この形式の使用方法の詳細については、 [SQLプラン管理](/sql-plan-management.md)を参照してください。 |
 | `plan_cache` | `EXPLAIN`ステートメントは、 [プランキャッシュ](/sql-non-prepared-plan-cache.md#diagnostics)情報を警告として含めて、 `row`形式で結果を出力します。                  |
-| `cost_trace` | `EXPLAIN`ステートメントは、推定コストの`estCost`とコストの計算式の`costFormula`列の 2 つの追加列を含む拡張`row`形式で結果を出力します。                                   |
+| `cost_trace` | `EXPLAIN`ステートメントは、推定コストの`estCost`とコストの計算式の`costFormula`列の 2つの追加列を含む拡張`row`形式で結果を出力します。                                   |
 
 <SimpleTab>
 

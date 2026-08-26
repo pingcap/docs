@@ -5905,7 +5905,7 @@ SHOW WARNINGS;
 - 型: 整数
 - デフォルト値: `9223372036854775807`
 - 範囲: `[1, 9223372036854775807]`
-- この変数は、 [`AUTO_RANDOM`](/auto-random.md)または[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)属性に割り当てる連続 ID の最大数を制御します。通常、 `AUTO_RANDOM` ID または`SHARD_ROW_ID_BITS`注釈付き行 ID は、1 つのトランザクション内で増分され、連続しています。この変数を使用すると、大規模なトランザクションシナリオにおけるホットスポットの問題を解決できます。
+- この変数は、 [`AUTO_RANDOM`](/auto-random.md)または[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)属性に割り当てる連続 ID の最大数を制御します。通常、 `AUTO_RANDOM` ID または`SHARD_ROW_ID_BITS`注釈付き行 ID は、1つのトランザクション内で増分され、連続しています。この変数を使用すると、大規模なトランザクションシナリオにおけるホットスポットの問題を解決できます。
 
 ### tidb_shard_row_id_bits <span class="version-mark">New in v8.4.0</span>
 

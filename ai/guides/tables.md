@@ -88,7 +88,7 @@ CREATE TABLE items (
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-`table.insert()`メソッドを使用して、テーブルに 1 つのレコードを挿入します。
+`table.insert()`メソッドを使用して、テーブルに 1つのレコードを挿入します。
 
 ```python
 table.insert(
@@ -104,7 +104,7 @@ table.insert(
 </div>
 <div label="SQL" value="sql">
 
-`INSERT INTO`ステートメントを使用して、テーブルに 1 つのレコードを挿入します。
+`INSERT INTO`ステートメントを使用して、テーブルに 1つのレコードを挿入します。
 
 ```sql
 INSERT INTO items(id, content, embedding, meta)
@@ -162,7 +162,7 @@ VALUES
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-辞書と共に`table.insert()`メソッドを使用して、テーブルに 1 つのレコードを挿入します。
+辞書と共に`table.insert()`メソッドを使用して、テーブルに 1つのレコードを挿入します。
 
 ```python
 table.insert({
@@ -176,7 +176,7 @@ table.insert({
 </div>
 <div label="SQL" value="sql">
 
-`INSERT INTO`ステートメントを使用して、テーブルに 1 つのレコードを挿入します。
+`INSERT INTO`ステートメントを使用して、テーブルに 1つのレコードを挿入します。
 
 ```sql
 INSERT INTO items(id, content, embedding, meta)

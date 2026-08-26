@@ -277,7 +277,7 @@ CDC000005.csv
 - `TableVersion` : テーブルバージョン。
 - `Query` : DDL ステートメント。
 - `Type` : DDL タイプ。
-- `TableColumns` : 1 つ以上のマップの配列。各マップはソーステーブル内の列を表します。
+- `TableColumns` : 1つ以上のマップの配列。各マップはソーステーブル内の列を表します。
     - `ColumnName` :カラム名。
     - `ColumnType` :カラムの種類。詳細は[データ型](#data-type)を参照してください。
     - `ColumnLength` :カラムの長さ。詳細は[データ型](#data-type)参照。

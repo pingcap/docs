@@ -63,7 +63,7 @@ tiup cluster reload <cluster-name> [flags]
 
 ### --skip-restart {#--skip-restart}
 
-`tiup cluster reload`コマンドは 2 つの操作を実行します。
+`tiup cluster reload`コマンドは 2つの操作を実行します。
 
 - すべてのノード構成を更新します
 - 指定されたノードを再起動します

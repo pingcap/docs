@@ -32,7 +32,7 @@ WorkloadOption ::=
 
 ## 容量を推定する方法 {#methods-for-estimating-capacity}
 
-TiDB は推定に 2 つの方法を提供します。
+TiDB は推定に 2つの方法を提供します。
 
 ### 実際の作業負荷に基づいて容量を見積もる {#estimate-capacity-based-on-actual-workload}
 
@@ -40,7 +40,7 @@ TiDB は推定に 2 つの方法を提供します。
 
 - `START_TIME`パラメータを使用して、推定を開始する時刻を`2006-01-02 15:04:05`形式で指定します。推定のデフォルトの終了時刻は現在の時刻です。
 - `START_TIME`パラメータを指定した後、 `END_TIME`パラメータを使用して推定終了時刻を指定したり、 `DURATION`パラメータを使用して`START_TIME`からの推定時間ウィンドウを指定したりできます。
-- 時間枠は 10 分から 24 時間までです。
+- 時間枠は 10分から 24時間までです。
 - 指定された時間枠内で、TiDB と TiKV の CPU 使用率が低すぎる場合、容量を見積もることはできません。
 
 > **Note:**
@@ -87,7 +87,7 @@ CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' END_TIME '2023-04-18 08:20:0
 1 row in set (0.01 sec)
 ```
 
-時間ウィンドウ範囲`DURATION` 10 分から 24 時間の範囲にない場合は、エラーが発生します。
+時間ウィンドウ範囲`DURATION` 10分から 24時間の範囲にない場合は、エラーが発生します。
 
 ```sql
 CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '25h';

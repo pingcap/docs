@@ -431,7 +431,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` CHARACTER SET LATIN1 COLLATE LATIN1_DAN
 
     </details>
 
-    タスクはエラーなしで正常に実行され、4 つの間違った DDL ステートメントはすべてスキップされていることがわかります。
+    タスクはエラーなしで正常に実行され、4つの間違った DDL ステートメントはすべてスキップされていることがわかります。
 
 ### 移行が中断された場合はDDLを置き換える {#replace-ddl-if-the-migration-gets-interrupted}
 
@@ -571,8 +571,8 @@ ALTER TABLE `db1`.`tbl1` ADD COLUMN new_col INT UNIQUE;
 
 アップストリームにある以下の4つのテーブルを、ダウンストリームにある同じテーブル`` `shard_db`.`shard_table` ``にマージして移行する必要があると仮定します。タスクモードは「悲観的」です。
 
-- MySQL インスタンス 1 にはスキーマ`shard_db_1`があり、そこには`shard_table_1`と`shard_table_2` 2 つのテーブルがあります。
-- MySQL インスタンス 2 にはスキーマ`shard_db_2`があり、そこには`shard_table_1`と`shard_table_2` 2 つのテーブルがあります。
+- MySQL インスタンス 1 にはスキーマ`shard_db_1`があり、そこには`shard_table_1`と`shard_table_2` 2つのテーブルがあります。
+- MySQL インスタンス 2 にはスキーマ`shard_db_2`があり、そこには`shard_table_1`と`shard_table_2` 2つのテーブルがあります。
 
 初期のテーブルスキーマは次のとおりです。
 
@@ -804,7 +804,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` ADD COLUMN new_col INT UNIQUE;
 
     </details>
 
-    タスクはエラーなしで正常に実行され、4 つの誤った DDL ステートメントがすべて置き換えられていることがわかります。
+    タスクはエラーなしで正常に実行され、4つの誤った DDL ステートメントがすべて置き換えられていることがわかります。
 
 ### その他のコマンド {#other-commands}
 

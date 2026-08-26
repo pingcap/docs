@@ -93,7 +93,7 @@ TiDB Cloud では、[汎用webhook](/tidb-cloud/monitor-alert-webhook.md)、[ema
 
 </CustomContent>
 
-アラート条件が変わらない場合、アラートは 3 時間ごとに通知を送信します。
+アラート条件が変わらない場合、アラートは 3時間ごとに通知を送信します。
 
 ## アラート通知の購読を解除する {#unsubscribe-from-alert-notifications}
 

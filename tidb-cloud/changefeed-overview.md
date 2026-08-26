@@ -18,7 +18,7 @@ TiDB Cloud changefeed を使用すると、 TiDB Cloudから他のデータサ�
 
 > **Note:**
 >
-> - 現在、 TiDB Cloudでは、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>ごとに最大 100 件の変更フィードのみが許可されます。
+> - 現在、 TiDB Cloudでは、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>ごとに最大 100件の変更フィードのみが許可されます。
 > - 現在、 TiDB Cloud、変更フィードごとに最大100個のテーブルフィルタルールしか設定できません。
 > - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは、変更フィード機能は利用できません。
 > - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンスの場合、変更フィード機能はリクエストに応じてのみ利用できます。詳細については、 [変更フィード](/tidb-cloud/essential-changefeed-overview.md)を参照してください。
@@ -85,8 +85,8 @@ TiDB Cloud Premiumでは、チェンジフィードのTiCDC 変更フィード�
 
 > **Note:**
 >
-> - TiDB Cloud Dedicatedクラスターの変更フィードをスケーリングするには、このクラスターのすべての変更フィードが 2023 年 3 月 28 日以降に作成されていることを確認してください。
-> - TiDB Cloud Dedicatedクラスターに 2023 年 3 月 28 日より前に作成された変更フィードがある場合、このクラスターの既存の変更フィードも新しく作成された変更フィードもスケールアップまたはスケールダウンをサポートしません。
+> - TiDB Cloud Dedicatedクラスターの変更フィードをスケーリングするには、このクラスターのすべての変更フィードが 2023年 3月 28日以降に作成されていることを確認してください。
+> - TiDB Cloud Dedicatedクラスターに 2023年 3月 28日より前に作成された変更フィードがある場合、このクラスターの既存の変更フィードも新しく作成された変更フィードもスケールアップまたはスケールダウンをサポートしません。
 
 </CustomContent>
 <CustomContent plan="premium">
@@ -169,4 +169,4 @@ TiDB Cloudでの変更フィードの請求については、[Changefeedの請�
 - `DELETING` : レプリケーションタスクが削除されています。
 - `DELETED` : レプリケーションタスクが削除されました。
 - `WARNING` : レプリケーションタスクが警告を返します。回復可能なエラーのため、レプリケーションを続行できません。この状態の変更フィードは、状態が`RUNNING`に遷移するまで再開を試み続けます。この状態の変更フィードは[GCオペレーション](https://docs.pingcap.com/tidb/stable/garbage-collection-overview)ブロックします 。
-- `FAILED` : レプリケーションタスクが失敗しました。エラーが発生したため、レプリケーションタスクを再開できず、自動的に復旧することもできません。増分データのガベージコレクション(GC) の前に問題が解決された場合は、失敗した変更フィードを手動で再開できます。増分データのデフォルトの有効期間 (TTL) は 24 時間です。つまり、変更フィードが中断されてから 24 時間以内に GC メカニズムによってデータが削除されることはありません。
+- `FAILED` : レプリケーションタスクが失敗しました。エラーが発生したため、レプリケーションタスクを再開できず、自動的に復旧することもできません。増分データのガベージコレクション(GC) の前に問題が解決された場合は、失敗した変更フィードを手動で再開できます。増分データのデフォルトの有効期間 (TTL) は 24時間です。つまり、変更フィードが中断されてから 24時間以内に GC メカニズムによってデータが削除されることはありません。

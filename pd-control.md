@@ -204,7 +204,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set split-merge-interval 24h  // Set the interval between `split` and `merge` to one day
     ```
 
-- `enable-one-way-merge`は 、PD がリージョン を次のリージョンとの結合のみを許可するかどうかを制御します。`false`に設定すると、PD はリージョン を隣接する 2 つの Region との結合を許可します。
+- `enable-one-way-merge`は 、PD がリージョン を次のリージョンとの結合のみを許可するかどうかを制御します。`false`に設定すると、PD はリージョン を隣接する 2つの Region との結合を許可します。
 
     ```bash
     config set enable-one-way-merge true  // Enables one-way merging.
@@ -251,7 +251,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 - `max-store-preparing-time`はストアがオンラインになるまでの最大待機時間を制御します。ストアがオンライン状態の間、PD はストアのオンライン進行状況を照会できます。指定された時間を超えると、PD はストアがオンライン状態になったとみなし、再度ストアのオンライン進行状況を照会できなくなります。ただし、これによってリージョンが新しいオンラインストアに移行するのが妨げられることはありません。ほとんどのシナリオでは、このパラメータを調整する必要はありません。
 
-    次のコマンドは、ストアがオンラインになるまでの最大待機時間が 4 時間であることを指定します。
+    次のコマンドは、ストアがオンラインになるまでの最大待機時間が 4時間であることを指定します。
 
     ```bash
     config set max-store-preparing-time 4h
@@ -269,13 +269,13 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set region-schedule-limit 2         // 2 tasks of Region scheduling at the same time at most
     ```
 
-- `replica-schedule-limit`は、レプリカを同時にスケジュールするタスクの数を制御します。この値は、ノードがダウンまたは削除された場合のスケジュール速度に影響します。値が大きいほど速度が速くなり、値を 0 に設定するとスケジュールが停止します。通常、レプリカのスケジュールは大きな負荷がかかるため、あまり大きな値を設定しないでください。この設定項目は通常、デフォルト値のままです。値を変更する場合は、実際の状況に応じて最適な値を見つけるために、いくつかの値を試す必要があります。
+- `replica-schedule-limit`は、レプリカを同時にスケジュールするタスクの数を制御します。この値は、ノードがダウンまたは削除された場合のスケジュール速度に影響します。値が大きいほど速度が速くなり、値を0に設定するとスケジュールが停止します。通常、レプリカのスケジュールは大きな負荷がかかるため、あまり大きな値を設定しないでください。この設定項目は通常、デフォルト値のままです。値を変更する場合は、実際の状況に応じて最適な値を見つけるために、いくつかの値を試す必要があります。
 
     ```bash
     config set replica-schedule-limit 4        // 4 tasks of replica scheduling at the same time at most
     ```
 
-- `merge-schedule-limit`はリージョンマージのスケジュールタスクの数を制御します。値を 0 に設定すると、リージョンマージは終了します。通常、マージスケジュールは負荷が大きいため、あまり大きな値を設定しないでください。この設定項目は通常、デフォルト値のままです。値を変更する場合は、いくつかの値を試してみて、実際の状況に最適な値を見つける必要があります。
+- `merge-schedule-limit`はリージョンマージのスケジュールタスクの数を制御します。値を0に設定すると、リージョンマージは終了します。通常、マージスケジュールは負荷が大きいため、あまり大きな値を設定しないでください。この設定項目は通常、デフォルト値のままです。値を変更する場合は、いくつかの値を試してみて、実際の状況に最適な値を見つける必要があります。
 
     ```bash
     config set merge-schedule-limit 16       // 16 tasks of Merge scheduling at the same time at most
@@ -1463,7 +1463,7 @@ store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"en
 {"id":24,"peer_stores":[1,32,33]}
 ```
 
-`[store30, store31]`がダウンしている場合は、 `remove-peer`オペレータを作成して安全に処理できるすべてのリージョン、つまり DownPeer が 1 つだけあるリージョンを見つけます。
+`[store30, store31]`がダウンしている場合は、 `remove-peer`オペレータを作成して安全に処理できるすべてのリージョン、つまり DownPeer が 1つだけあるリージョンを見つけます。
 
 ```bash
 >> region --jq=".regions[] | {id: .id, remove_peer: [.peers[].store_id] | select(length>1) | map(if .==(30,31) then . else empty end) | select(length==1)}"

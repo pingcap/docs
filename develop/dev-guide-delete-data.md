@@ -37,7 +37,7 @@ DELETE FROM {table} WHERE {filter}
 
 - `WHERE`ステートメントには、必ず`DELETE`句を指定してください。 `WHERE`句が指定されていない場合、TiDB はテーブル内の***すべての行***を削除します。
 
-- TiDB では 1 つのトランザクションのサイズが制限されているため (たとえば、1 万行以上)、大量の行を削除する場合は[一括削除](#bulk-delete)を使用します (段階[トランザクションの合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)。
+- TiDB では 1つのトランザクションのサイズが制限されているため (たとえば、1 万行以上)、大量の行を削除する場合は[一括削除](#bulk-delete)を使用します (段階[トランザクションの合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)。
 
 - テーブル内のすべてのデータを削除する場合は、 `DELETE`ステートメントを使用しないでください。代わりに、 [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)ステートメントを使用してください。
 
@@ -53,7 +53,7 @@ DELETE FROM {table} WHERE {filter}
 SELECT COUNT(*) FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND `rated_at` <= "2022-04-15 00:15:00";
 ```
 
-10,000 件を超えるレコードが返された場合は、[一括削除](#bulk-delete)を使用して削除します。
+10,000件を超えるレコードが返された場合は、[一括削除](#bulk-delete)を使用して削除します。
 
 返されたレコード数が10,000件未満の場合は、以下の例を参考に削除してください。
 
@@ -196,7 +196,7 @@ TiDBは[統計情報](/statistics.md)を使用してインデックスの選択�
 
 ### 一括削除の例 {#bulk-delete-example}
 
-特定の期間内にアプリケーションエラーが見つかったとします。この期間内の[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)に関するすべてのデータ（例えば、 `2022-04-15 00:00:00`から`2022-04-15 00:15:00`まで）を削除する必要があり、15 分で 10,000 件以上のレコードが書き込まれるとします。次のように実行できます。
+特定の期間内にアプリケーションエラーが見つかったとします。この期間内の[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)に関するすべてのデータ（例えば、 `2022-04-15 00:00:00`から`2022-04-15 00:15:00`まで）を削除する必要があり、15分で 10,000件以上のレコードが書き込まれるとします。次のように実行できます。
 
 <SimpleTab groupId="language">
 <div label="Java" value="java">

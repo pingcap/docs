@@ -93,7 +93,7 @@ TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに
 
 | 関数と演算子 | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
-| `SLEEP` | 制限はありません | [`SLEEP()` function](https://docs.pingcap.com/tidbcloud/miscellaneous-functions) 関数は、最大 300 秒のスリープ時間をサポートします。 |
+| `SLEEP` | 制限はありません | [`SLEEP()` function](https://docs.pingcap.com/tidbcloud/miscellaneous-functions) 関数は、最大 300秒のスリープ時間をサポートします。 |
 
 ## システムテーブル {#system-tables}
 
@@ -365,4 +365,4 @@ TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに
 
 [^10]: この変数は {{{ .starter }}} と {{{ .essential }}} では読み取り専用です。
 
-[^11]: {{{ .starter }}} と {{{ .essential }}} では、[example](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information) に示されているように、`${tidb-server-status-port}` を介して `PLAN REPLAYER` がエクスポートしたファイルをダウンロードすることはサポートされていません。代わりに、{{{ .starter }}} と {{{ .essential }}} では、ファイルをダウンロードするための [presigned URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) が生成されます。この URL は生成後 10 時間有効です。
+[^11]: {{{ .starter }}} と {{{ .essential }}} では、[example](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information) に示されているように、`${tidb-server-status-port}` を介して `PLAN REPLAYER` がエクスポートしたファイルをダウンロードすることはサポートされていません。代わりに、{{{ .starter }}} と {{{ .essential }}} では、ファイルをダウンロードするための [presigned URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) が生成されます。この URL は生成後 10時間有効です。

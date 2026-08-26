@@ -246,7 +246,7 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-    通常、 TiDB Cloud Dedicated クラスターの作成には少なくとも 10 分かかります。
+    通常、 TiDB Cloud Dedicated クラスターの作成には少なくとも 10分かかります。
 
 5. リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_dedicated_cluster.${resource-name}`を使用します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
 
@@ -479,7 +479,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
       Enter a value: yes
     ```
 
-    上記の実行計画では、 TiFlashが追加され、1 つのリソースが変更されます。
+    上記の実行計画では、 TiFlashが追加され、1つのリソースが変更されます。
 
 3. 計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
 
@@ -570,7 +570,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
 
 1. [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)際に使用する`cluster.tf`ファイルで、 `tidb_node_setting` 、 `tikv_node_setting` 、 `tiflash_node_setting`の設定を編集します。
 
-    たとえば、TiDB ノードを 1 つ、TiKV ノードを 3 つ (スケーリング ステップが 3 であるため、TiKV ノードの数は 3 の倍数である必要があります)、およびTiFlashノードを 1 つ追加するには、次のように構成を編集します。
+    たとえば、TiDB ノードを 1つ、TiKV ノードを 3つ (スケーリング ステップが 3 であるため、TiKV ノードの数は 3 の倍数である必要があります)、およびTiFlashノードを 1つ追加するには、次のように構成を編集します。
 
     ```
      tidb_node_setting = {
@@ -833,7 +833,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
 
 1. [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)を実行するときに使用する`cluster.tf`ファイルに、 `tidbcloud_dedicated_node_group`構成を追加します。
 
-    たとえば、3 つのノードを持つ TiDB ノードグループを追加するには、次のように構成を編集します。
+    たとえば、3つのノードを持つ TiDB ノードグループを追加するには、次のように構成を編集します。
 
     ```
     resource "tidbcloud_dedicated_node_group" "example_group" {

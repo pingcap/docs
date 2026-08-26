@@ -70,7 +70,7 @@ summary: TiDB の地理的に分散された展開トポロジについて学習
 
 #### PDパラメータ {#pd-parameters}
 
-- PD メタデータ情報には、TiKV クラスターのトポロジが記録されます。PD は、次の 4 つの次元に基づいてRaftグループのレプリカをスケジュールします。
+- PD メタデータ情報には、TiKV クラスターのトポロジが記録されます。PD は、次の4つの次元に基づいてRaftグループのレプリカをスケジュールします。
 
     ```yaml
     replication.location-labels: ["zone","dc","rack","host"]

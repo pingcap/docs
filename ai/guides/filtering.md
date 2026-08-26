@@ -15,7 +15,7 @@ summary: アプリケーションでフィルタリングを使用する方法�
 
 `pytidb`を使用する場合、 `table.query()` 、 `table.delete()` 、 `table.update()` 、および`table.search()`メソッドに**filters**パラメータを渡すことでフィルタリングを適用できます。
 
-**フィルター**パラメータは、 [辞書フィルター](#dictionary-filters)と[SQL文字列フィルター](#sql-string-filters) 2 つの形式をサポートします。
+**フィルター**パラメータは、 [辞書フィルター](#dictionary-filters)と[SQL文字列フィルター](#sql-string-filters) 2つの形式をサポートします。
 
 ## 辞書フィルター {#dictionary-filters}
 

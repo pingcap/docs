@@ -76,7 +76,7 @@ summary: TiUP Playgroundを使ってTiDB Self-Managedを素早く使い始める
     >     tiup playground --tag ${tag_name}
     >     ```
 
-    - 最新バージョンの TiDB クラスタを、TiDB インスタンス 1 つ、TiKV インスタンス 1 つ、PD インスタンス 1 つ、 TiFlashインスタンス 1 つで起動するには、次のコマンドを実行します。
+    - 最新バージョンの TiDB クラスタを、TiDB インスタンス 1つ、TiKV インスタンス 1つ、PD インスタンス 1つ、 TiFlashインスタンス 1つで起動するには、次のコマンドを実行します。
 
         ```shell
         tiup playground
@@ -190,7 +190,7 @@ summary: TiUP Playgroundを使ってTiDB Self-Managedを素早く使い始める
     >     tiup playground --tag ${tag_name}
     >     ```
 
-    - 最新バージョンの TiDB クラスタを、TiDB インスタンス 1 つ、TiKV インスタンス 1 つ、PD インスタンス 1 つ、 TiFlashインスタンス 1 つで起動するには、次のコマンドを実行します。
+    - 最新バージョンの TiDB クラスタを、TiDB インスタンス 1つ、TiKV インスタンス 1つ、PD インスタンス 1つ、 TiFlashインスタンス 1つで起動するには、次のコマンドを実行します。
 
         ```shell
         tiup playground

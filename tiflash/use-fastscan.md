@@ -93,7 +93,7 @@ set global tiflash_fastscan=OFF;
 
 ## FastScanの仕組み {#mechanism-of-fastscan}
 
-TiFlashのストレージレイヤーのデータは、デルタレイヤーと安定レイヤーの 2 つの層に保存されます。
+TiFlashのストレージレイヤーのデータは、デルタレイヤーと安定レイヤーの 2つの層に保存されます。
 
 デフォルトでは、FastScan は有効になっておらず、TableScan オペレーターは次の手順でデータを処理します。
 

@@ -99,7 +99,7 @@ DESC CLUSTER_TIDB_INDEX_USAGE;
 
 ## 制限事項 {#limitations}
 
-- `TIDB_INDEX_USAGE`テーブルのデータは、最大 5 分遅れる場合があります。
+- `TIDB_INDEX_USAGE`テーブルのデータは、最大 5分遅れる場合があります。
 - TiDBが再起動すると、 `TIDB_INDEX_USAGE`テーブルのデータがクリアされます。
 - TiDBは、テーブルに有効な統計情報がある場合にのみ、そのテーブルのインデックス使用状況を記録します。
 

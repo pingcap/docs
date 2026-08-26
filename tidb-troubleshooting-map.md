@@ -11,7 +11,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
 ### 1.1 クライアントから`Region is Unavailable`エラーが報告されました {#11-the-client-reports-region-is-unavailable-error}
 
-- 1.1.1 `Region is Unavailable`エラーは通常、リージョンが一定期間利用できないことが原因です。 `TiKV server is busy`が発生する場合や、 `not leader`または`epoch not match` } が原因で TiKV へのリクエストが失敗するか、TiKV へのリクエストがタイムアウトする場合があります。このような場合、TiDB は`backoff`再試行メカニズムを実行します。 `backoff`がしきい値 (デフォルトでは 20 秒) を超えると、エラーがクライアントに送信されます。 `backoff`のしきい値内であれば、このエラーはクライアントには表示されません。
+- 1.1.1 `Region is Unavailable`エラーは通常、リージョンが一定期間利用できないことが原因です。 `TiKV server is busy`が発生する場合や、 `not leader`または`epoch not match` } が原因で TiKV へのリクエストが失敗するか、TiKV へのリクエストがタイムアウトする場合があります。このような場合、TiDB は`backoff`再試行メカニズムを実行します。 `backoff`がしきい値 (デフォルトでは 20秒) を超えると、エラーがクライアントに送信されます。 `backoff`のしきい値内であれば、このエラーはクライアントには表示されません。
 
 - 1.1.2 複数のTiKVインスタンスが同時にメモリ不足（OOM）になると、OOM期間中にLeaderが存在しない状態になります。中国語版の[ケース991](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case991.md)を参照してください。
 
@@ -83,7 +83,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
     - 詳細な原因と解決策については、 [`Information schema is changed`エラーが報告される理由](/faq/sql-faq.md#what-triggers-the-information-schema-is-changed-error)を参照してください。
 
-    - 背景： `schema version`の増加数は、各 DDL 変更操作の`schema state`の数と一致しています。たとえば、 `create table`操作ではバージョン変更が 1 回、 `add column`操作ではバージョン変更が 4 回発生します。したがって、列変更操作が多すぎると`schema version`が急速に増加する可能性があります。詳細は[オンラインスキーマの変更](https://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/41376.pdf)を参照してください。
+    - 背景： `schema version`の増加数は、各 DDL 変更操作の`schema state`の数と一致しています。たとえば、 `create table`操作ではバージョン変更が 1回、 `add column`操作ではバージョン変更が 4回発生します。したがって、列変更操作が多すぎると`schema version`が急速に増加する可能性があります。詳細は[オンラインスキーマの変更](https://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/41376.pdf)を参照してください。
 
 - 3.1.4 TiDB はログに`information schema is out of date`を報告します
 
@@ -171,7 +171,7 @@ OOM のトラブルシューティングの詳細については、 [TiDBのメ�
 
     - 原因：
 
-        MySQL では、2 つの大きな精度`Decimal`を割り算し、結果が最大小数精度 ( `30`を超える場合、 `30`桁のみが予約され、エラーは報告されません。
+        MySQL では、2つの大きな精度`Decimal`を割り算し、結果が最大小数精度 ( `30`を超える場合、 `30`桁のみが予約され、エラーは報告されません。
 
         TiDB では、計算結果は MySQL と同じですが、 `Decimal`を表すデータ構造内では、小数点精度のフィールドが実際の精度を保持します。
 
@@ -239,7 +239,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 - 4.3.1 TiKV RocksDB は`write stall`を検出します。
 
-    TiKV インスタンスには 2 つの RocksDB インスタンスがあり、1 つは`data/raft`にありRaftログを格納し、もう 1 つは`data/db`にあり実際のデータを格納します。ログで`grep "Stalling" RocksDB`を実行すると、停止の具体的な原因を確認できます。RocksDB ログは`LOG`で始まるファイルで、 `LOG`が現在のログです。 `write stall`は RocksDB にネイティブに組み込まれたパフォーマンス低下メカニズムです。RocksDB で`write stall`が発生すると、システムのパフォーマンスが大幅に低下します。バージョン 5.2.0 より前のバージョンでは、TiDB は`ServerIsBusy`に遭遇すると、 `write stall`エラーをクライアントに直接返すことで、すべての書き込み要求をブロックしようとしますが、これにより QPS パフォーマンスが急激に低下する可能性があります。バージョン 5.2.0 以降、TiKV は、スケジューリングレイヤーで書き込み要求を動的に遅延させることで書き込みを抑制する新しいフロー制御メカニズムを導入し、 `server is busy`が発生したときにクライアントに`write stall`を返す以前のメカニズムに取って代わります。新しいフロー制御メカニズムはデフォルトで有効になっており、TiKV は`write stall`および`KvDB` (memtable を除く) の`RaftDB`メカニズムを自動的に無効にします。ただし、保留中のリクエスト数が一定のしきい値を超えると、フロー制御メカニズムは引き続き有効になり、一部またはすべての書き込みリクエストを拒否し、 `server is busy`エラーをクライアントに返します。詳細な説明としきい値については、 [フロー制御構成](/tikv-configuration-file.md#storageflow-control)を参照してください。
+    TiKV インスタンスには 2つの RocksDB インスタンスがあり、1つは`data/raft`にありRaftログを格納し、もう 1つは`data/db`にあり実際のデータを格納します。ログで`grep "Stalling" RocksDB`を実行すると、停止の具体的な原因を確認できます。RocksDB ログは`LOG`で始まるファイルで、 `LOG`が現在のログです。 `write stall`は RocksDB にネイティブに組み込まれたパフォーマンス低下メカニズムです。RocksDB で`write stall`が発生すると、システムのパフォーマンスが大幅に低下します。バージョン 5.2.0 より前のバージョンでは、TiDB は`ServerIsBusy`に遭遇すると、 `write stall`エラーをクライアントに直接返すことで、すべての書き込み要求をブロックしようとしますが、これにより QPS パフォーマンスが急激に低下する可能性があります。バージョン 5.2.0 以降、TiKV は、スケジューリングレイヤーで書き込み要求を動的に遅延させることで書き込みを抑制する新しいフロー制御メカニズムを導入し、 `server is busy`が発生したときにクライアントに`write stall`を返す以前のメカニズムに取って代わります。新しいフロー制御メカニズムはデフォルトで有効になっており、TiKV は`write stall`および`KvDB` (memtable を除く) の`RaftDB`メカニズムを自動的に無効にします。ただし、保留中のリクエスト数が一定のしきい値を超えると、フロー制御メカニズムは引き続き有効になり、一部またはすべての書き込みリクエストを拒否し、 `server is busy`エラーをクライアントに返します。詳細な説明としきい値については、 [フロー制御構成](/tikv-configuration-file.md#storageflow-control)を参照してください。
 
     - `server is busy`エラーが、保留中の圧縮バイト数が多すぎるために発生する場合は、 [`soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)および[`hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit)パラメータの値を増やすことで、この問題を軽減できます。
 
@@ -434,7 +434,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
     - マスターbinlogがパージされているかどうかを確認してください。
     - `relay.meta`に記録されている位置情報を確認してください。
 
-        - `relay.meta`は空の GTID 情報を記録しました。DM-worker は終了時または 30 秒ごとに、メモリ内の GTID 情報を`relay.meta`に保存します。DM-worker が上流の GTID 情報を取得できない場合は、空の GTID 情報を`relay.meta`に保存します。詳細は、 [ケース772](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case772.md) （中国語）を参照してください。
+        - `relay.meta`は空の GTID 情報を記録しました。DM-worker は終了時または 30秒ごとに、メモリ内の GTID 情報を`relay.meta`に保存します。DM-worker が上流の GTID 情報を取得できない場合は、空の GTID 情報を`relay.meta`に保存します。詳細は、 [ケース772](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case772.md) （中国語）を参照してください。
 
         - `relay.meta`に記録されたbinlogイベントにより、不完全なリカバリプロセスがトリガーされ、誤ったGTID情報が記録されます。この問題はv1.0.2で修正されていますが、それ以前のバージョンでは発生する可能性があります。 <!--See [case-764](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case764.md).-->
 
@@ -448,7 +448,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 - 6.2.2 インポート速度が遅すぎる。
 
-    - `region-concurrency`設定値が高すぎるため、スレッド競合が発生し、パフォーマンスが低下します。トラブルシューティング方法は次の 3 つです。
+    - `region-concurrency`設定値が高すぎるため、スレッド競合が発生し、パフォーマンスが低下します。トラブルシューティング方法は次の3つです。
 
         - 設定は、ログの先頭から`region-concurrency`検索することで見つけることができます。
         - TiDB Lightning が他のサービス (たとえば Importer) とサーバーを共有している場合は、 `region-concurrency`そのサーバーの CPU コアの総数の 75% に手動で設定する必要があります。

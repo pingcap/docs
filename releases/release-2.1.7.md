@@ -38,4 +38,4 @@ TiDB Ansible バージョン: 2.1.7
 
 ## TiDB Ansible {#tidb-ansible}
 
-Prometheus 監視データのデフォルトの保持期間を 30 日に変更します
+Prometheus 監視データのデフォルトの保持期間を 30日に変更します

@@ -39,11 +39,11 @@ TiDB Cloudは、高速かつシームレスなブランチ作成を実現する�
 
 現在、 TiDB Cloud Branchingはパブリックプレビューです。
 
-- TiDB Cloudの各組織では、デフォルトではTiDB Cloud Starterインスタンス全体で最大 5 つのブランチを作成できます。TiDB CloudはTiDB Cloud Starterインスタンスのブランチをインスタンスと同じリージョンに作成します。また、スロットリングが適用されている、または 100 GiB を超えるサイズのTiDB Cloud Starterインスタンスにはブランチを作成できません。
+- TiDB Cloudの各組織では、デフォルトではTiDB Cloud Starterインスタンス全体で最大 5つのブランチを作成できます。TiDB CloudはTiDB Cloud Starterインスタンスのブランチをインスタンスと同じリージョンに作成します。また、スロットリングが適用されている、または 100 GiB を超えるサイズのTiDB Cloud Starterインスタンスにはブランチを作成できません。
 
     > **Note:**
     >
-    > エージェント プラットフォームや多数のブランチを必要とするその他のサービスを構築している有料組織向けに、 TiDB Cloud は5 つを超えるブランチを作成できる**Instance Capacity Plan**を提供します。詳細については、 [インスタンス容量計画](/tidb-cloud/select-cluster-tier.md#instance-capacity-plan)を参照してください。
+    > エージェント プラットフォームや多数のブランチを必要とするその他のサービスを構築している有料組織向けに、 TiDB Cloud は5つを超えるブランチを作成できる**Instance Capacity Plan**を提供します。詳細については、 [インスタンス容量計画](/tidb-cloud/select-cluster-tier.md#instance-capacity-plan)を参照してください。
 
 - 無料のTiDB Cloud Starterインスタンスの各ブランチには、10 GiB のストレージが許可されます。利用制限が 0 より大きいTiDB Cloud Starterインスタンスの各ブランチには、100 GiB のストレージが許可されます。ストレージ容量が上限に達すると、ストレージを減らすまで、このブランチでの読み取りおよび書き込み操作が制限されます。
 

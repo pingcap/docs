@@ -68,7 +68,7 @@ DESC mysql.user;
 45 rows in set (0.00 sec)
 ```
 
-`mysql.user`テーブルには、次の 3 つのグループに分類できる複数のフィールドが含まれています。
+`mysql.user`テーブルには、次の3つのグループに分類できる複数のフィールドが含まれています。
 
 <CustomContent platform="tidb">
 

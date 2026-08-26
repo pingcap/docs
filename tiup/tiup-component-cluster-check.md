@@ -120,7 +120,7 @@ ext4パーティションのマウントオプションを確認してくださ�
 
 ### Fioディスクパフォーマンステスト {#fio-disk-performance-test}
 
-フレキシブル I/O テスター (fio) を使用して、次の 3 つのテスト項目を含む、 `data_dir`が配置されているディスクのパフォーマンスをテストします。
+フレキシブル I/O テスター (fio) を使用して、次の3つのテスト項目を含む、 `data_dir`が配置されているディスクのパフォーマンスをテストします。
 
 - fio_randread_write_latency
 - fio_randread_write

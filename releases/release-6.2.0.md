@@ -261,7 +261,7 @@ TiDBバージョン: 6.2.0-DMR
 | [tidb_enable_noop_variables](/system-variables.md#tidb_enable_noop_variables-new-in-v620)                               | 新しく追加された | この変数は`noop`の結果に`SHOW [GLOBAL] VARIABLES` 変数を表示するかどうかを制御します。                                                                                                                                                |
 | [tidb_min_paging_size](/system-variables.md#tidb_min_paging_size-new-in-v620)                                           | 新しく追加された | この変数は、コプロセッサのページング要求処理中に処理される行の最大数を設定するために使用されます。                                                                                                                                                            |
 | [tidb_txn_commit_batch_size](/system-variables.md#tidb_txn_commit_batch_size-new-in-v620)                               | 新しく追加された | この変数は、TiDBがTiKVに送信するトランザクションコミット要求のバッチサイズを制御するために使用されます。                                                                                                                                                     |
-| tidb_enable_change_multi_schema                                                                                         | 削除済み     | この変数は、v6.2.0 以降では、デフォルトで 1 つの`ALTER TABLE`ステートメントで複数の列またはインデックスを変更できるため、削除されます。                                                                                                                              |
+| tidb_enable_change_multi_schema                                                                                         | 削除済み     | この変数は、v6.2.0 以降では、デフォルトで 1つの`ALTER TABLE`ステートメントで複数の列またはインデックスを変更できるため、削除されます。                                                                                                                              |
 | [tidb_enable_outer_join_reorder](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610)                       | 変更     | この変数は、TiDB の結合したテーブルの再配置アルゴリズムが Outer Join をサポートするかどうかを制御します。v6.1.0 では、デフォルト値は`ON`であり、これは Join Reorder の Outer Join のサポートがデフォルトで有効になっていることを意味します。v6.2.0 以降では、デフォルト値は`OFF`であり、これはサポートがデフォルトで無効になっていることを意味します。 |
 
 ### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
@@ -310,7 +310,7 @@ TiDBバージョン: 6.2.0-DMR
 - TiDBコンポーネントがv6.2.0以降の場合、TiKVコンポーネントはv6.2.0より前のバージョンであってはなりません。
 - TiKV は[動的構成](/dynamic-config.md#modify-tikv-configuration-dynamically)をサポートする構成アイテム`split.region-cpu-overload-threshold-ratio`を追加します。
 - スロークエリログ、 `information_schema.statements_summary` 、および`information_schema.slow_query`は`binary_plan` 、またはバイナリ形式でエンコードされた実行計画をエクスポートできます。
-- `SHOW TABLE ... REGIONS`ステートメントに、 `SCHEDULING_CONSTRAINTS`と`SCHEDULING_STATE` 2 つの列が追加されます。これらはそれぞれ、SQL の配置におけるリージョンスケジューリング制約と現在のスケジューリング状態を示します。
+- `SHOW TABLE ... REGIONS`ステートメントに、 `SCHEDULING_CONSTRAINTS`と`SCHEDULING_STATE` 2つの列が追加されます。これらはそれぞれ、SQL の配置におけるリージョンスケジューリング制約と現在のスケジューリング状態を示します。
 - TiDB v6.2.0以降では、 [TiKV-CDC](https://github.com/tikv/migration/tree/main/cdc)を介してRawKVのデータ変更をキャプチャできます。
 - `ROLLBACK TO SAVEPOINT`を使用してトランザクションを特定のセーブポイントまでロールバックする場合、MySQL は指定されたセーブポイント以降に保持されているロックのみを解放しますが、TiDB の悲観的トランザクションでは、TiDB は指定されたセーブポイント以降に保持されているロックをすぐには解放しません。代わりに、TiDB はトランザクションがコミットまたはロールバックされたときにすべてのロックを解放します。
 - TiDB v6.2.0以降、 `SELECT tidb_version()`ステートメントはストアタイプ（tikvまたはunistore）も返します。

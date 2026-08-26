@@ -56,7 +56,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
         - TiDB Cloud Starterインスタンスの利用限度額を更新できます。利用限度額を0に設定すると、インスタンスは無料のままです。利用限度額を0より大きい値に設定する場合は、 TiDB Cloud Starterインスタンスを作成する前にクレジットカードを追加する必要があります。
 
-        - デフォルトでは、各組織は最大 5 つ [無料のTiDB Cloud Starterインスタンス](/tidb-cloud/select-cluster-tier.md#starter)を作成できます。追加のTiDB Cloud Starterインスタンスを作成するには、クレジット カードを追加し、使用制限を指定する必要があります。
+        - デフォルトでは、各組織は最大 5つ [無料のTiDB Cloud Starterインスタンス](/tidb-cloud/select-cluster-tier.md#starter)を作成できます。追加のTiDB Cloud Starterインスタンスを作成するには、クレジット カードを追加し、使用制限を指定する必要があります。
 
     - **Essential**プラン：
 

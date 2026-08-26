@@ -26,7 +26,7 @@ TiProxyノードのサイズと数は、 TiDB Cloud DedicatedクラスタのQPS�
 | 小さい | 30K   | 93 MiB/秒    |
 | 大きい | 120K   | 312 MiB/秒   |
 
-利用可能な TiProxy のサイズは`Small`と`Large`です。利用可能な TiProxy ノード数は 2、3、6、9、12、15、18、21、24 です。デフォルトの 2 つの小型 TiProxy ノードは、60K QPS と 186 MiB/s のネットワーク帯域幅を提供できます。高レイテンシーを防ぐために、QPS 容量の 20% を予約することをお勧めします。
+利用可能な TiProxy のサイズは`Small`と`Large`です。利用可能な TiProxy ノード数は 2、3、6、9、12、15、18、21、24 です。デフォルトの 2つの小型 TiProxy ノードは、60K QPS と 186 MiB/s のネットワーク帯域幅を提供できます。高レイテンシーを防ぐために、QPS 容量の 20% を予約することをお勧めします。
 
 例えば、クラスターの最大QPSが10万、最大ネットワーク帯域幅が100MiB/sの場合、TiProxyノードのサイズと数は主にQPSによって決まります。この場合、小型のTiProxyノードを6個選択できます。
 
@@ -95,7 +95,7 @@ TiProxyのメトリクスを表示するには、以下の手順を実行して�
 
 - **TiProxy CPU Usage**：各TiProxyノードのCPU使用率統計情報。上限は100%です。CPU使用率が80%を超える場合は、TiProxyのスケールアウトをお勧めします。
 - **TiProxy Connections**：各TiProxyノード上の接続数。
-- **TiProxy Throughput**: 各 TiProxy ノードで 1 秒あたりに転送されるバイト数。最大スループットが最大ネットワーク帯域幅に達した場合は、TiProxy をスケールアウトすることをお勧めします。最大ネットワーク帯域幅の詳細については、 [TiProxyノードのサイズと数を決定する](#decide-the-size-and-number-of-tiproxy-nodes)を参照してください。
+- **TiProxy Throughput**: 各 TiProxy ノードで 1秒あたりに転送されるバイト数。最大スループットが最大ネットワーク帯域幅に達した場合は、TiProxy をスケールアウトすることをお勧めします。最大ネットワーク帯域幅の詳細については、 [TiProxyノードのサイズと数を決定する](#decide-the-size-and-number-of-tiproxy-nodes)を参照してください。
 - **TiProxy Sessions Migration Reasons**：1分ごとに発生するセッション移行の数とその理由。たとえば、TiDBがスケールインし、TiProxyがセッションを他のTiDBノードに移行する場合、理由は`status`です。その他の移行理由については、 [TiProxyのモニタリング指標](https://docs.pingcap.com/tidb/stable/tiproxy-grafana#balance)を参照してください。
 
 ### TiProxyの請求書を確認する {#view-tiproxy-bills}

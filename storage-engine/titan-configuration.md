@@ -71,7 +71,7 @@ TitanはRocksDBと互換性があるため、RocksDBを使用する既存のTiKV
 
 Titan を有効にした後、RocksDB に保存されている既存のデータは、すぐに Titan エンジンに移動されるわけではありません。新しいデータが TiKV に書き込まれ、RocksDB が圧縮を実行すると、**値は徐々にキーから分離され、 Titan に書き込まれます**。同様に、 BRスナップショット/ログを通じて復元されたデータ、スケーリング中に変換されたデータ、またはTiDB Lightning物理インポートモードによってインポートされたデータは、Titan に直接書き込まれません。圧縮が進むにつれて、処理された SST ファイル内のデフォルト値 ( `32KB` ) の[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)を超える大きな値が Titan に分離されます。TiKV**の詳細 &gt; Titan kv &gt; blob ファイルサイズ**パネルを観察してデータサイズを見積もることで、Titan に保存されているファイルのサイズを監視できます。
 
-書き込みプロセスを高速化したい場合は、tikv-ctl を使用して TiKV クラスター全体のデータを手動で圧縮できます。詳細は[手作業による圧縮](/tikv-control.md#compact-data-of-the-whole-tikv-cluster-manually)を参照してください。RocksDB から Titan への変換中はデータアクセスが継続的に行われるため、RocksDB のブロックキャッシュによってデータ変換プロセスが大幅に高速化されます。テストでは、tikv-ctl を使用することで、670 GiB の TiKV データを 1 時間で Titan に変換できました。
+書き込みプロセスを高速化したい場合は、tikv-ctl を使用して TiKV クラスター全体のデータを手動で圧縮できます。詳細は[手作業による圧縮](/tikv-control.md#compact-data-of-the-whole-tikv-cluster-manually)を参照してください。RocksDB から Titan への変換中はデータアクセスが継続的に行われるため、RocksDB のブロックキャッシュによってデータ変換プロセスが大幅に高速化されます。テストでは、tikv-ctl を使用することで、670 GiB の TiKV データを 1時間で Titan に変換できました。
 
 Titan BLOBファイル内の値は連続しておらず、Titanのキャッシュは値レベルであるため、圧縮時にはBLOBキャッシュは役に立ちません。TitanからRocksDBへの変換速度は、RocksDBからTitanへの変換速度よりも桁違いに遅くなります。テストでは、TiKVノード上の800GiBのTitanデータをtikv-ctlでRocksDBに完全圧縮変換するのに12時間かかりました。
 

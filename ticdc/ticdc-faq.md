@@ -173,7 +173,7 @@ TiCDCサーバーの起動時に、GCセーフポイントのTime To Live（TTL�
 
 > **Note:**
 >
-> 一部のシナリオ、例えばDumpling/BRを使用した完全レプリケーション後に TiCDC による増分レプリケーションを実行する場合など、デフォルトの 24 時間（ `gc-ttl`では不十分な場合があります。TiCDCサーバーを起動する際に、適切な値`gc-ttl`を指定する必要があります。
+> 一部のシナリオ、例えばDumpling/BRを使用した完全レプリケーション後に TiCDC による増分レプリケーションを実行する場合など、デフォルトの 24時間（ `gc-ttl`では不十分な場合があります。TiCDCサーバーを起動する際に、適切な値`gc-ttl`を指定する必要があります。
 
 ## TiCDCガベージコレクション(GC) セーフポイントの完全な動作は何ですか? {#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint}
 
@@ -181,7 +181,7 @@ TiCDCサービスの起動後にレプリケーションタスクが開始され
 
 レプリケーションタスクが`gc-ttl`で指定された時間を超えて中断された場合、レプリケーションタスクは`failed`状態になり、再開できなくなります。PDに対応するサービスGCセーフポイントは継続されます。
 
-TiCDC がサービス GC セーフポイントに設定するデフォルトの Time-To-Live (TTL) は 24 時間です。つまり、TiCDC サービスが中断されてから 24 時間以内に回復できる場合、GC メカニズムはレプリケーションを続行するために TiCDC が必要とするデータを削除しません。
+TiCDC がサービス GC セーフポイントに設定するデフォルトの Time-To-Live (TTL) は 24時間です。つまり、TiCDC サービスが中断されてから 24時間以内に回復できる場合、GC メカニズムはレプリケーションを続行するために TiCDC が必要とするデータを削除しません。
 
 ## レプリケーションタスクが失敗した後に回復するにはどうすればよいですか? {#how-to-recover-a-replication-task-after-it-fails}
 
@@ -243,7 +243,7 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127
 
 `protocol` `avro`または`canal-json`に設定すると、行の変更ごとにメッセージが送信されます。1つのKafkaメッセージには1つの行の変更のみが含まれ、通常はKafkaの制限を超えることはありません。したがって、1つのメッセージのサイズを制限する必要はありません。1つのKafkaメッセージのサイズがKafkaの制限を超える場合は、 [TiCDC から Kafka へのレイテンシーがどんどん高くなるのはなぜですか?](/ticdc/ticdc-faq.md#why-does-the-latency-from-ticdc-to-kafka-become-higher-and-higher)を参照してください。
 
-`protocol` `open-protocol`に設定すると、メッセージはバッチで送信されます。そのため、1 つの Kafka メッセージのサイズが過度に大きくなる可能性があります。このような状況を回避するには、 `max-message-bytes`パラメータを設定して、Kafka ブローカーに送信されるデータの最大サイズを制御できます（オプション、デフォルトは`10MB` ）。また、 `max-batch-size`パラメータを設定して（オプション、デフォルトは`16` ）、各 Kafka メッセージに含まれる変更レコードの最大数を指定することもできます。
+`protocol` `open-protocol`に設定すると、メッセージはバッチで送信されます。そのため、1つの Kafka メッセージのサイズが過度に大きくなる可能性があります。このような状況を回避するには、 `max-message-bytes`パラメータを設定して、Kafka ブローカーに送信されるデータの最大サイズを制御できます（オプション、デフォルトは`10MB` ）。また、 `max-batch-size`パラメータを設定して（オプション、デフォルトは`16` ）、各 Kafka メッセージに含まれる変更レコードの最大数を指定することもできます。
 
 ## トランザクションで行を複数回変更した場合、TiCDC は複数の行変更イベントを出力しますか? {#if-i-modify-a-row-multiple-times-in-a-transaction-will-ticdc-output-multiple-row-change-events}
 
@@ -251,7 +251,7 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127
 
 ## TiCDC がデータを Kafka に複製する場合、メッセージには複数の種類のデータ変更が含まれますか? {#when-ticdc-replicates-data-to-kafka-does-a-message-contain-multiple-types-of-data-changes}
 
-はい。1 つのメッセージに複数の`update`または`delete`が含まれる場合があり、 `update`と`delete`共存することもあります。
+はい。1つのメッセージに複数の`update`または`delete`が含まれる場合があり、 `update`と`delete`共存することもあります。
 
 ## TiCDC がデータを Kafka に複製する場合、TiCDC オープンプロトコルの出力でタイムスタンプ、テーブル名、スキーマ名を表示するにはどうすればよいですか? {#when-ticdc-replicates-data-to-kafka-how-do-i-view-the-timestamp-table-name-and-schema-name-in-the-output-of-ticdc-open-protocol}
 
@@ -401,7 +401,7 @@ BR はバージョンに応じて互換性を異なる方法で処理します�
 
 変更フィードが再開されると、TiCDC は TiKV 内のデータの履歴バージョンをスキャンし、一時停止中に生成された増分データログに追いつく必要があります。レプリケーションプロセスはスキャンが完了した後にのみ続行されます。スキャンプロセスには数分から数十分かかる場合があります。
 
-## 異なるリージョンにある 2 つの TiDB クラスター間でデータをレプリケートするには、TiCDC をどのようにデプロイすればよいですか? {#how-should-i-deploy-ticdc-to-replicate-data-between-two-tidb-cluster-located-in-different-regions}
+## 異なるリージョンにある 2つの TiDB クラスター間でデータをレプリケートするには、TiCDC をどのようにデプロイすればよいですか? {#how-should-i-deploy-ticdc-to-replicate-data-between-two-tidb-cluster-located-in-different-regions}
 
 TiCDC v6.5.2より前のバージョンでは、TiCDCをダウンストリームTiDBクラスタにデプロイすることをお勧めします。アップストリームとダウンストリーム間のネットワークレイテンシーが大きい場合（例えば100ミリ秒を超える場合）、MySQL転送プロトコルの問題により、TiCDCがダウンストリームにSQL文を実行する際のレイテンシーが大幅に増加する可能性があります。その結果、システムスループットが低下します。しかし、ダウンストリームにTiCDCをデプロイすることで、この問題を大幅に軽減できます。最適化後、TiCDC v6.5.2以降では、TiCDCをアップストリームTiDBクラスタにデプロイすることをお勧めします。
 
@@ -488,7 +488,7 @@ CREATE TABLE data_table (
 ) CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 ```
 
-アップストリームがテーブル内の 2 つの行の`value`のフィールドを交換しようとした場合:
+アップストリームがテーブル内の 2つの行の`value`のフィールドを交換しようとした場合:
 
 ```sql
 DELETE FROM data_table WHERE id = 1;
@@ -497,7 +497,7 @@ INSERT INTO data_table (id, value) VALUES (1, 'v3');
 INSERT INTO data_table (id, value) VALUES (2, 'v1');
 ```
 
-TiDB は 2 つの`UPDATE`行の変更を生成するため、TiCDC はそれを下流へのレプリケーション用の 2 つの`UPDATE`ステートメントに変換します。
+TiDB は 2つの`UPDATE`行の変更を生成するため、TiCDC はそれを下流へのレプリケーション用の 2つの`UPDATE`ステートメントに変換します。
 
 ```sql
 UPDATE data_table SET value = 'v3' WHERE id = 1;
@@ -518,7 +518,7 @@ mysql://user:password@host:port/?safe-mode=true
 
 TiCDCはSaramaクライアントを使用してKafkaにデータを複製します。データの順序が乱れるのを防ぐため、TiCDCはSaramaの自動再試行メカニズムを無効化します（再試行回数を0に設定）。その結果、TiCDCとKafka間の接続が一定時間アイドル状態になった後にKafkaによって切断された場合、TiCDCからの後続の書き込みは`write: broken pipe`エラーをトリガーし、レプリケーションタスクが失敗します。
 
-このエラーにより変更フィードが失敗する可能性がありますが、TiCDC は影響を受けた変更フィードを自動的に再起動するため、レプリケーションタスクは正常に実行を継続できます。再起動プロセス中、変更フィードのレプリケーションレイテンシー（ラグ）が一時的にわずかに（通常は 30 秒以内）増加する場合がありますが、その後自動的に正常に戻ります。
+このエラーにより変更フィードが失敗する可能性がありますが、TiCDC は影響を受けた変更フィードを自動的に再起動するため、レプリケーションタスクは正常に実行を継続できます。再起動プロセス中、変更フィードのレプリケーションレイテンシー（ラグ）が一時的にわずかに（通常は 30秒以内）増加する場合がありますが、その後自動的に正常に戻ります。
 
 アプリケーションが changefeed のレイテンシーに非常に敏感な場合は、次の操作を実行することをお勧めします。
 

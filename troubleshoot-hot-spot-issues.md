@@ -35,7 +35,7 @@ Key: tablePrefix{TableID}_indexPrefixSep{IndexID}_indexedColumnsValue
 Value: rowID
 ```
 
-インデックスデータには、一意インデックスと非一意インデックスの 2 種類があります。
+インデックスデータには、一意インデックスと非一意インデックスの 2種類があります。
 
 - 一意インデックスの場合は、上記のコーディング規則に従うことができます。
 - 非一意インデックスの場合、このエンコーディングでは一意キーを構築できません。これは、同じインデックスの`tablePrefix{TableID}_indexPrefixSep{IndexID}`は同じですが、複数の行の`ColumnsValue`は同じになる可能性があるためです。非一意インデックスのエンコーディング規則は次のとおりです。

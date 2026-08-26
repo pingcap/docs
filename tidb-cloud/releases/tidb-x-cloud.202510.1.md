@@ -15,7 +15,7 @@ summary: TiDB-X-CLOUD.202510.1 カーネルの機能について説明します�
 
 `TiDB-X-CLOUD.202510.1` では、次のようになります。
 
-- `202510` は、このカーネルバージョンのベースラインコードブランチが 2025 年 10 月に作成されたことを示しており、リリース日とは異なります。
+- `202510` は、このカーネルバージョンのベースラインコードブランチが 2025年 10月に作成されたことを示しており、リリース日とは異なります。
 - `1` は、`TiDB-X-CLOUD.202510` ベースラインブランチからビルドされた最初のパッチリリースであることを示します。
 
 `TiDB-X-CLOUD.202510.1` カーネルは [TiDB v8.5.0](https://docs.pingcap.com/tidb/stable/release-8.5.0/) カーネルをベースとしており、TiDB v8.5.0 で導入された機能と改善の大部分を含んでいます。
@@ -44,7 +44,7 @@ summary: TiDB-X-CLOUD.202510.1 カーネルの機能について説明します�
 
    [`SHOW TABLE DISTRIBUTION`](https://docs.pingcap.com/tidbcloud/sql-statement-show-table-distribution/?plan=premium) ステートメントを使用して、特定のテーブルのデータがすべての TiKV ノードにどのように分散されているかを確認できるようになりました。データ分散が不均衡な場合は、[`DISTRIBUTE TABLE`](https://docs.pingcap.com/tidbcloud/sql-statement-distribute-table/?plan=premium) ステートメントを使用して、テーブルのデータを再分散（実験的）し、負荷分散を改善できます。
 
-    特定のテーブルのデータ再分散は、タイムアウト制限のある 1 回限りのタスクであることに注意してください。分散タスクがタイムアウトまでに完了しない場合、自動的に終了します。
+    特定のテーブルのデータ再分散は、タイムアウト制限のある 1回限りのタスクであることに注意してください。分散タスクがタイムアウトまでに完了しない場合、自動的に終了します。
 
     詳細は、[ドキュメント](https://docs.pingcap.com/tidbcloud/sql-statement-distribute-table/?plan=premium) を参照してください。
 

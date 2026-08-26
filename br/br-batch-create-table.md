@@ -62,4 +62,4 @@ tiup br restore full \
 '[2022/03/12 22:37:49.060 +08:00] [INFO] [collector.go:67] ["Full restore success summary"] [total-ranges=751760] [ranges-succeed=751760] [ranges-failed=0] [split-region=1h33m18.078448449s] [restore-ranges=542693] [total-take=1h41m35.471476438s] [restore-data-size(after-compressed)=8.337TB] [Size=8336694965072] [BackupTS=431773933856882690] [total-kv=148015861383] [total-kv-size=16.16TB] [average-speed=2.661GB/s]'
 ```
 
-テスト結果から、1 つの TiKV インスタンスを復元する平均速度は 181.65 MB/秒 ( `average-speed`に相当) であること`tikv_count`わかります。
+テスト結果から、1つの TiKV インスタンスを復元する平均速度は 181.65 MB/秒 ( `average-speed`に相当) であること`tikv_count`わかります。

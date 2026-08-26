@@ -52,7 +52,7 @@ SET GLOBAL tidb_server_memory_limit = "32GB";
 > - メモリ制御の過程で、TiDB の合計メモリ使用量が`tidb_server_memory_limit`で設定された制限をわずかに超える場合があります。
 > - バージョン6.5.0以降、設定項目`server-memory-quota`は非推奨となりました。互換性を確保するため、クラスターをバージョン6.5.0以降にアップグレードすると、 `tidb_server_memory_limit`は`server-memory-quota`の値を継承します。アップグレード前に`server-memory-quota`を設定していない場合は、`tidb_server_memory_limit`のデフォルト値（`80%`）が使用されます。
 
-tidb-server インスタンスのメモリ使用量が総メモリの一定割合（割合はシステム変数[`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)によって制御されます）に達すると、tidb-server はメモリ負荷を軽減するためにGolang GC をトリガーしようとします。インスタンスメモリがしきい値付近で変動することで頻繁な GC が発生し、パフォーマンスに問題が生じるのを防ぐため、この GC 方式では GC は最大で 1 分に 1 回しかトリガーされません。
+tidb-server インスタンスのメモリ使用量が総メモリの一定割合（割合はシステム変数[`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)によって制御されます）に達すると、tidb-server はメモリ負荷を軽減するためにGolang GC をトリガーしようとします。インスタンスメモリがしきい値付近で変動することで頻繁な GC が発生し、パフォーマンスに問題が生じるのを防ぐため、この GC 方式では GC は最大で 1分に 1回しかトリガーされません。
 
 > **Note:**
 >
@@ -69,7 +69,7 @@ tidb-server インスタンスのメモリ使用量が総メモリの一定割�
 tidb-server インスタンスのメモリ使用量がメモリしきい値 (デフォルトでは合計メモリの 70%) を超え、次のいずれかの条件が満たされると、TiDB は関連するステータスファイルを記録し、アラーム ログを出力。
 
 - メモリ使用量がメモリしきい値を超えるのは初めてです。
-- メモリ使用量がメモリしきい値を超えており、前回のアラームから 60 秒以上経過しています。
+- メモリ使用量がメモリしきい値を超えており、前回のアラームから 60秒以上経過しています。
 - メモリ使用量がメモリしきい値を超え、 `(Current memory usage - Memory usage at the last alarm) / Total memory > 10%` 。
 
 システム変数[`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)を使用してメモリ使用率を変更することで、アラームをトリガーするメモリしきい値を制御できます。

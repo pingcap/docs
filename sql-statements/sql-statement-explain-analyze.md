@@ -135,7 +135,7 @@ prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878
     - `total_time` : ステップ`check_insert`に費やされた合計時間。
     - `mem_insert_time` : TiDB トランザクション キャッシュにデータを書き込むのにかかる時間。
     - `prefetch` : TiKVから競合チェックが必要なデータを取得する時間。このステップでは、データを取得するために`Batch_Get` RPCリクエストをTiKVに送信します。
-    - `rpc` : TiKV への RPC 要求の送信に費やされた合計時間。これには通常、 `BatchGet`と`Get` 2 種類の RPC 時間が含まれます。
+    - `rpc` : TiKV への RPC 要求の送信に費やされた合計時間。これには通常、 `BatchGet`と`Get` 2種類の RPC 時間が含まれます。
         - `prefetch`ステップで`BatchGet` RPC 要求が送信されます。
         - `insert on duplicate`ステートメントが実行されると、 `Get` `duplicate update` RPC 要求が送信されます。
 - `backoff` : さまざまなタイプのバックオフとバックオフの合計待機時間が含まれます。

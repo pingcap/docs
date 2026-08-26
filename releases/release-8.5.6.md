@@ -39,7 +39,7 @@ TiDBバージョン：8.5.6
 
     バージョン 8.5.6 より前では、TiDB でスロークエリを識別する主な方法は、 [`tidb_slow_log_threshold`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_threshold)システム変数を設定することでした。このメカニズムはインスタンスレベルでグローバルに適用されるため、スロークエリログのトリガーを大まかにしか制御できず、セッションレベルや SQL レベルでのきめ細かい制御はサポートされていません。さらに、トリガー条件として実行時間 ( `Query_time` ) しかサポートしていないため、複雑なシナリオでスロークエリログをより正確にキャプチャする必要性を満たすことができません。
 
-    バージョン 8.5.6 以降、TiDB はスロークエリログの制御を強化しました。[`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules-new-in-v856) システム変数を使用して、`Query_time`、`Digest`、`Mem_max`、`KV_total` などの条件に基づいて、インスタンス、セッション、SQL の各レベルで多次元のスロークエリログ出力ルールを定義できます。[`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec-new-in-v856) を使用して、1 秒あたりに書き込まれるログエントリの数を制限したり、[`WRITE_SLOW_LOG`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints) ヒントを使用して、特定の SQL ステートメントに対してスロークエリログを強制的に記録したりできます。これにより、スロークエリログをより柔軟かつきめ細かく制御できます。
+    バージョン 8.5.6 以降、TiDB はスロークエリログの制御を強化しました。[`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules-new-in-v856) システム変数を使用して、`Query_time`、`Digest`、`Mem_max`、`KV_total` などの条件に基づいて、インスタンス、セッション、SQL の各レベルで多次元のスロークエリログ出力ルールを定義できます。[`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec-new-in-v856) を使用して、1秒あたりに書き込まれるログエントリの数を制限したり、[`WRITE_SLOW_LOG`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints) ヒントを使用して、特定の SQL ステートメントに対してスロークエリログを強制的に記録したりできます。これにより、スロークエリログをより柔軟かつきめ細かく制御できます。
 
     詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/identify-slow-queries)を参照してください。
 
@@ -127,7 +127,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 
     - インデックスプレフィックス列に対する`IN`述語を含むクエリのプラン選択を改善します。TiDB は`ORDER BY ... LIMIT`クエリの順序を保持するためにマージソートを使用できるようになり、不要なスキャンを削減してパフォーマンスを向上させます。 [#63449](https://github.com/pingcap/tidb/issues/63449) [#34882](https://github.com/pingcap/tidb/issues/34882) @[time-and-fate](https://github.com/time-and-fate)
     - 表示できないプリペアドステートメント引数を16進数として出力することで、スロークエリログの可読性を向上させる [#65383](https://github.com/pingcap/tidb/issues/65383) @[dveeden](https://github.com/dveeden)
-    - `cluster_id`を`mysql.tidb`に追加し、外部ツールが 2 つの TiDB インスタンスが同じクラスターに属しているかどうかを判断できるようにします [#59476](https://github.com/pingcap/tidb/issues/59476) @[YangKeao](https://github.com/YangKeao)
+    - `cluster_id`を`mysql.tidb`に追加し、外部ツールが 2つの TiDB インスタンスが同じクラスターに属しているかどうかを判断できるようにします [#59476](https://github.com/pingcap/tidb/issues/59476) @[YangKeao](https://github.com/YangKeao)
 
 - TiKV
 
@@ -185,7 +185,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 
         - ログバックアップで`flush_ts`が`0`になる可能性がある問題を修正 [#19406](https://github.com/tikv/tikv/issues/19406) @[YuJuncen](https://github.com/YuJuncen)
         - Amazon S3互換APIを介してS3スタイルの認証情報を使用してGoogle Cloud Storageにアクセスする際、Content-Lengthヘッダーが欠落しているため、マルチパートアップロード中にBRが失敗する可能性がある問題を修正しました。 [#19352](https://github.com/tikv/tikv/issues/19352) @[Leavrth](https://github.com/Leavrth)
-        - BR `restore point` `waiting for schema info finishes reloading`の状態に長時間留まり、15 分後にタイムアウトで失敗する問題を修正しました [#66110](https://github.com/pingcap/tidb/issues/66110) @[kennytm](https://github.com/kennytm)
+        - BR `restore point` `waiting for schema info finishes reloading`の状態に長時間留まり、15分後にタイムアウトで失敗する問題を修正しました [#66110](https://github.com/pingcap/tidb/issues/66110) @[kennytm](https://github.com/kennytm)
         - `SHARD_ROW_ID_BITS` 、 `PRE_SPLIT_REGIONS`BRを持つテーブルを復元する際に、 `merge_option`問題を修正します。 [#65060](https://github.com/pingcap/tidb/issues/65060) @[JoyC-dev](https://github.com/JoyC-dev)
 
     - TiCDC

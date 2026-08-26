@@ -273,8 +273,8 @@ v8.4.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
 
 TiDB をアップグレードする前に、オペレーティングシステムのバージョンが[OSおよびプラットフォームの要件](/hardware-and-software-requirements.md#os-and-platform-requirements)を満たしていることを確認してください。
 
-- [CentOS Linux サポート終了](https://www.centos.org/centos-linux-eol/)によると、CentOS Linux 7 のアップストリームサポートは 2024 年 6 月 30 日に終了しました。そのため、TiDB は v8.4.0 で CentOS 7 のサポートを終了します。Rocky Linux 9.1 以降のバージョンを使用することをお勧めします。CentOS 7 上の TiDB クラスタを v8.4.0 にアップグレードすると、クラスタが利用できなくなります。
-- [Red Hat Enterprise Linux ライフサイクル](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates)によると、Red Hat Enterprise Linux 7 のメンテナンスサポートは 2024 年 6 月 30 日に終了しました。TiDB は、8.4 DMR バージョン以降、Red Hat Enterprise Linux 7 のサポートを終了します。Rocky Linux 9.1 以降のバージョンを使用することをお勧めします。Red Hat Enterprise Linux 7 上の TiDB クラスタを v8.4.0 以降にアップグレードすると、クラスタが使用できなくなります。
+- [CentOS Linux サポート終了](https://www.centos.org/centos-linux-eol/)によると、CentOS Linux 7 のアップストリームサポートは 2024年 6月 30日に終了しました。そのため、TiDB は v8.4.0 で CentOS 7 のサポートを終了します。Rocky Linux 9.1 以降のバージョンを使用することをお勧めします。CentOS 7 上の TiDB クラスタを v8.4.0 にアップグレードすると、クラスタが利用できなくなります。
+- [Red Hat Enterprise Linux ライフサイクル](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates)によると、Red Hat Enterprise Linux 7 のメンテナンスサポートは 2024年 6月 30日に終了しました。TiDB は、8.4 DMR バージョン以降、Red Hat Enterprise Linux 7 のサポートを終了します。Rocky Linux 9.1 以降のバージョンを使用することをお勧めします。Red Hat Enterprise Linux 7 上の TiDB クラスタを v8.4.0 以降にアップグレードすると、クラスタが使用できなくなります。
 
 ## 削除された機能 {#removed-features}
 
@@ -312,7 +312,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
     - 多数の列を持つテーブルをクエリする際のパフォーマンスを向上させるため、内部関数のロジックを最適化します [#52112](https://github.com/pingcap/tidb/issues/52112) @[Rustin170506](https://github.com/Rustin170506)
     - `a = 1 AND (a > 1 OR (a = 1 AND b = 2))`から`a = 1 AND b = 2`のようなフィルター条件を簡素化 [#56005](https://github.com/pingcap/tidb/issues/56005) @[ghazalfamilyusa](https://github.com/ghazalfamilyusa)
     - 最適ではない実行計画のリスクが高いシナリオでは、コストモデルでテーブルスキャンのコストを増やし、オプティマイザがインデックスを優先するようにします [#56012](https://github.com/pingcap/tidb/issues/56012) @[terry1purcell](https://github.com/terry1purcell)
-    - TiDB は 2 つの引数を持つバリアント`MID(str, pos)`をサポートしています [#52420](https://github.com/pingcap/tidb/issues/52420) @[dveeden](https://github.com/dveeden)
+    - TiDB は 2つの引数を持つバリアント`MID(str, pos)`をサポートしています [#52420](https://github.com/pingcap/tidb/issues/52420) @[dveeden](https://github.com/dveeden)
     - バイナリ型以外の主キーを持つテーブルのTTLタスクの分割をサポート [#55660](https://github.com/pingcap/tidb/issues/55660) @[lcwangchao](https://github.com/lcwangchao)
     - システムのメタデータ関連ステートメントのパフォーマンスを最適化する [#50305](https://github.com/pingcap/tidb/issues/50305) @[ywqzzy](https://github.com/ywqzzy) @[tangenta](https://github.com/tangenta)@[joechenrh](https://github.com/joechenrh) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - 自動分析操作に新しい優先度キューを実装して、分析パフォーマンスを向上させ、キューの再構築コストを削減します [#55906](https://github.com/pingcap/tidb/issues/55906) @[Rustin170506](https://github.com/Rustin170506)
@@ -412,7 +412,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
 
     - TiDB Lightning
 
-        - TiDB Lightning が、2 つのインスタンスが同時に並列インポートタスクを開始し、同じタスク ID が割り当てられた場合、 `verify allocator base failed`エラーを報告する問題を修正しました [#55384](https://github.com/pingcap/tidb/issues/55384) @[ei-sugimoto](https://github.com/ei-sugimoto)
+        - TiDB Lightning が、2つのインスタンスが同時に並列インポートタスクを開始し、同じタスク ID が割り当てられた場合、 `verify allocator base failed`エラーを報告する問題を修正しました [#55384](https://github.com/pingcap/tidb/issues/55384) @[ei-sugimoto](https://github.com/ei-sugimoto)
 
 ## 貢献者 {#contributors}
 

@@ -26,9 +26,9 @@ TiDB Cloud で Amazon MSK Provisioned のダウンストリームサービス用
 
 ## ステップ 1. Amazon VPC とサブネットをセットアップする {#step-1-set-up-the-amazon-vpc-and-subnets}
 
-必要な availability zone にまたがる少なくとも 3 つのプライベートサブネットを持つ Amazon VPC がすでにある場合は、このステップをスキップできます。
+必要な availability zone にまたがる少なくとも 3つのプライベートサブネットを持つ Amazon VPC がすでにある場合は、このステップをスキップできます。
 
-1. [Amazon VPC コンソール](https://console.aws.amazon.com/vpc/)で、TiDB Cloud Premium インスタンスが稼働する各 availability zone に 1 つずつ、合計 3 つのプライベートサブネットを持つ [VPC を作成](https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html)します。これらのサブネットは同じ AZ に存在し、AZ 名ではなく AZ ID で一致している必要があります。
+1. [Amazon VPC コンソール](https://console.aws.amazon.com/vpc/)で、TiDB Cloud Premium インスタンスが稼働する各 availability zone に 1つずつ、合計3つのプライベートサブネットを持つ [VPC を作成](https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html)します。これらのサブネットは同じ AZ に存在し、AZ 名ではなく AZ ID で一致している必要があります。
 2. VPC ダッシュボードで、後から起動するクライアント EC2 インスタンスがプライベートネットワーク経由で MSK クラスターと通信できるように、ルートテーブルとセキュリティグループを設定します。
 3. サブネットの AZ ID を記録します。これらのサブネットは、[MSK クラスターを作成する](#step-3-create-an-amazon-msk-provisioned-cluster)際に選択します。
 
@@ -60,9 +60,9 @@ TiDB Cloud で Amazon MSK Provisioned のダウンストリームサービス用
 - **Broker type**: multi-VPC private connectivity でサポートされる broker type を選択します（`t3.small` は不可）。
 - **Authentication**: SASL/SCRAM 認証を有効にします。
 - **Public access**: このオプションを無効にします。
-- **Number of brokers**: availability zone ごとに少なくとも 1 つ（最小 3）。
+- **Number of brokers**: availability zone ごとに少なくとも 1つ（最小 3）。
 - **Encryption in transit**: セキュリティ要件に応じて設定します。
-- **Client subnets**: [ステップ 1](#step-1-set-up-the-amazon-vpc-and-subnets) で作成した 3 つのプライベートサブネットを選択します。
+- **Client subnets**: [ステップ 1](#step-1-set-up-the-amazon-vpc-and-subnets) で作成した 3つのプライベートサブネットを選択します。
 - **Cluster configuration**: 次の設定を含むカスタム設定を作成します（初期 ACL セットアップに必要）。
     - `auto.create.topics.enable=true`
     - `allow.everyone.if.no.acl.found=true`
@@ -74,7 +74,7 @@ TiDB Cloud で Amazon MSK Provisioned のダウンストリームサービス用
 1. [Amazon MSK コンソール](https://console.aws.amazon.com/msk/)で、MSK クラスターの **Properties** タブに移動し、**SASL/SCRAM authentication** セクションを見つけます。
 2. [ステップ 2](#step-2-create-a-scram-secret-in-aws-secrets-manager) で作成したシークレットをクラスターに[関連付け](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html)ます。
 
-関連付けが完了したら、ACL セットアップに進む前に、認証情報が反映されるまで約 30 秒待ってください。
+関連付けが完了したら、ACL セットアップに進む前に、認証情報が反映されるまで約30秒待ってください。
 
 ## ステップ 5. Kafka ACL をセットアップする {#step-5-set-up-kafka-acls}
 
@@ -82,7 +82,7 @@ TiDB Cloud がクラスターにメッセージを生成するには Kafka ACL �
 
 ### 5.1 クライアント EC2 インスタンスを準備する {#51-prepare-a-client-ec2-instance}
 
-1. [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/home#Instances)で、MSK クラスターと同じ VPC かつ同じサブネットのいずれか 1 つに Amazon Linux EC2 インスタンスを起動します。
+1. [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/home#Instances)で、MSK クラスターと同じ VPC かつ同じサブネットのいずれか 1つに Amazon Linux EC2 インスタンスを起動します。
 
     > **Tip:**
     >
@@ -159,7 +159,7 @@ multi-VPC connectivity は、MSK クラスターへの PrivateLink アクセス�
 1. [Amazon MSK コンソール](https://console.aws.amazon.com/msk/)で、MSK クラスターの **Properties** タブに移動します。**Network settings** > **Multi-VPC connectivity** で、[multi-VPC connectivity を有効にします](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-turn-on.html)。
 2. VPC connectivity のクライアント認証は **SASL/SCRAM** 認証のみを使用するように設定します（TiDB Cloud 接続には IAM および mutual TLS (mTLS) 認証は不要です）。
 
-    クラスター更新が完了するまで待ちます。この操作には通常約 40 ～ 60 分かかります。進行状況は MSK コンソールの **Cluster operations** タブで確認できます。クラスターのステータスが **Active** に戻るまで待ってください。
+    クラスター更新が完了するまで待ちます。この操作には通常約 40 ～ 60分かかります。進行状況は MSK コンソールの **Cluster operations** タブで確認できます。クラスターのステータスが **Active** に戻るまで待ってください。
 
 3. 更新完了後、次の項目を確認します。
 

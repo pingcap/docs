@@ -61,7 +61,7 @@ Amazon S3 バケット内に、第 1 階層ディレクトリ`store` (データ�
 - MySQLインスタンス1のデータを`s3://dumpling-s3/store/sales/instance01/`に移行します。
 - MySQLインスタンス2のデータを`s3://dumpling-s3/store/sales/instance02/`に移行します。
 
-複数のインスタンスにシャードがある場合は、データベースごとに第 1 レベルのディレクトリを 1 つ作成し、シャーディングされたテーブルごとに第 2 レベルのディレクトリを 1 つ作成します。次に、管理を容易にするために、MySQL インスタンスごとに第 3 レベルのディレクトリを作成します。たとえば、MySQL インスタンス 1 と MySQL インスタンス 2 のテーブル`stock_N.product_N`をTiDB Cloudのテーブル`stock.products`に移行およびマージする場合は、次のディレクトリを作成できます。
+複数のインスタンスにシャードがある場合は、データベースごとに第 1 レベルのディレクトリを 1つ作成し、シャーディングされたテーブルごとに第 2 レベルのディレクトリを 1つ作成します。次に、管理を容易にするために、MySQL インスタンスごとに第 3 レベルのディレクトリを作成します。たとえば、MySQL インスタンス 1 と MySQL インスタンス 2 のテーブル`stock_N.product_N`をTiDB Cloudのテーブル`stock.products`に移行およびマージする場合は、次のディレクトリを作成できます。
 
 - `s3://dumpling-s3/stock/products/instance01/`
 - `s3://dumpling-s3/stock/products/instance02/`

@@ -87,7 +87,7 @@ SUBCOMMANDS:
 
 ## 一般オプション {#general-options}
 
-`tikv-ctl`には 2 つの動作モードがあります。
+`tikv-ctl`には 2つの動作モードがあります。
 
 - リモートモード: `--host`オプションを使用して、TiKVのサービスアドレスを引数として受け入れます
 
@@ -116,7 +116,7 @@ SUBCOMMANDS:
 
 特に明記されていない限り、すべてのコマンドはリモートモードとローカルモードの両方をサポートします。
 
-さらに、 `tikv-ctl`は`--to-hex`と`--to-escaped` 2 つの簡単なコマンドがあり、これらを使用してキーの形式に簡単な変更を加えます。
+さらに、 `tikv-ctl`は`--to-hex`と`--to-escaped` 2つの簡単なコマンドがあり、これらを使用してキーの形式に簡単な変更を加えます。
 
 通常は、キーの`escaped`形式を使用します。例：
 
@@ -219,7 +219,7 @@ cf lock region size: 27616
 
 ### スキャンして特定の範囲のMVCCを表示する {#scan-to-view-mvcc-of-a-specific-range}
 
-`scan`コマンドの`--from`および`--to`オプションは、2 つのエスケープ形式の生のキーを受け入れ、 `--show-cf`フラグを使用して、表示する必要がある列ファミリを指定します。
+`scan`コマンドの`--from`および`--to`オプションは、2つのエスケープ形式の生のキーを受け入れ、 `--show-cf`フラグを使用して、表示する必要がある列ファミリを指定します。
 
 ```shell
 tikv-ctl --data-dir /path/to/tikv scan --from 'zm' --limit 2 --show-cf lock,default,write

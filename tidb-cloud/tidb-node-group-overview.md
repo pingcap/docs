@@ -49,7 +49,7 @@ TiDBノードグループ機能は、TiDB Cloud Dedicatedクラスタのリソ�
 
 - TiDB ノードグループは、AWS または Google Cloud 上のTiDB Cloud Dedicated クラスターでのみ作成できます。他のクラウドプロバイダーへのサポートは、近い将来に予定されています。
 - 4 つの vCPU と 16 GiB のメモリを備えた TiDB クラスターは、TiDB ノードグループ機能をサポートしません。
-- デフォルトでは、 TiDB Cloud Dedicated クラスターに最大 5 つの TiDB ノードグループを作成できます。さらにグループが必要な場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+- デフォルトでは、 TiDB Cloud Dedicated クラスターに最大 5つの TiDB ノードグループを作成できます。さらにグループが必要な場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 - 各TiDBノードグループには、少なくとも1つのTiDBノードが含まれている必要があります。グループ内のノード数に制限はありませんが、 TiDB Cloud Dedicatedクラスタ内のTiDBノードの総数は150を超えてはなりません。
 - TiDB Cloudは、ノードグループの境界に関係なく、TiDBオーナーノード上で自動統計収集タスクを実行します。これらのタスクは、個々のTiDBノードグループ内で分離することはできません。
 - v8.1.2 より前のバージョンの TiDB クラスターの場合、 `ADD INDEX`タスクを個々の TiDB ノードグループ内で分離することはできません。
@@ -58,4 +58,4 @@ TiDBノードグループ機能は、TiDB Cloud Dedicatedクラスタのリソ�
 
 TiDB Cloud [サービスレベル契約（SLA）](https://www.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/)によると、複数のTiDBノードを展開したTiDB Cloud Dedicatedクラスタの月間稼働率は最大99.99%に達します。しかし、TiDBノードグループを導入した後、各グループに1つのTiDBノードのみを含む複数のTiDBノードグループを作成すると、グループの高可用性が失われ、クラスタの月間稼働率は単一のTiDBノード展開モデル（つまり最大99.9%）に低下します。
 
-高可用性を確保するには、TiDB ノードグループごとに少なくとも 2 つの TiDB ノードを構成することをお勧めします。
+高可用性を確保するには、TiDB ノードグループごとに少なくとも 2つの TiDB ノードを構成することをお勧めします。

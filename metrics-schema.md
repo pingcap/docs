@@ -113,7 +113,7 @@ SELECT * FROM information_schema.metrics_tables WHERE table_name='tidb_query_dur
 
 - `TABLE_NAME` : `metrics_schema`のテーブル名に対応します。この例では、テーブル名は`tidb_query_duration`です。
 - `PROMQL` : 監視テーブルの動作原理は、まずSQL文を`PromQL`にマッピングし、次にPrometheusにデータを要求し、Prometheusの結果をSQLクエリ結果に変換することです。このフィールドは`PromQL`の式テンプレートです。監視テーブルのデータをクエリすると、クエリ条件を使用してこのテンプレート内の変数が書き換えられ、最終的なクエリ式が生成されます。
-- `LABELS` : 監視項目のラベル。`tidb_query_duration`は`instance`と`sql_type`の 2 つのラベルがあります。
+- `LABELS` : 監視項目のラベル。`tidb_query_duration`は`instance`と`sql_type`の 2つのラベルがあります。
 - `QUANTILE` : パーセンタイル。ヒストグラム型の監視データの場合、デフォルトのパーセンタイルが指定されます。このフィールドの値が`0`の場合、監視テーブルに対応する監視項目はヒストグラムではないことを意味します。
 - `COMMENT` : 監視テーブルの説明。`tidb_query_duration`テーブルは、TiDBクエリ実行のパーセンタイル時間（P999/P99/P90のクエリ時間など）を照会するために使用されていることがわかります。単位は秒です。
 
@@ -193,11 +193,11 @@ DESC SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AN
 
 監視項目の値を異なる粒度で表示するには、監視テーブルをクエリする前に、上記の2つのセッション変数を変更します。例：
 
-1. 2 つのセッション変数の値を変更し、時間の粒度を 30 秒に設定します。
+1. 2 つのセッション変数の値を変更し、時間の粒度を 30秒に設定します。
 
     > **Note:**
     >
-    > Prometheus でサポートされる最小粒度は 30 秒です。
+    > Prometheus でサポートされる最小粒度は 30秒です。
 
     ```sql
     set @@tidb_metric_query_step=30;

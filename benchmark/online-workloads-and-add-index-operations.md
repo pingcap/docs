@@ -19,7 +19,7 @@ TiDB バージョン: v3.0.1
 
 ## テスト環境 {#test-environment}
 
-このテストは、3 つの TiDB インスタンス、3 つの TiKV インスタンス、3 つの PD インスタンスがデプロイされた Kubernetes クラスターで実行されます。
+このテストは、3つの TiDB インスタンス、3つの TiKV インスタンス、3つの PD インスタンスがデプロイされた Kubernetes クラスターで実行されます。
 
 ### バージョン情報 {#version-information}
 

@@ -190,7 +190,7 @@ mysql> ADMIN SHOW DDL JOB QUERIES 51;
 1 row in set (0.02 sec)
 ```
 
-DDL 履歴ジョブキュー内の過去 10 件の結果のうち、 `job_id`に対応する実行中の DDL ジョブのみを検索できます。
+DDL 履歴ジョブキュー内の過去 10件の結果のうち、 `job_id`に対応する実行中の DDL ジョブのみを検索できます。
 
 ### `ADMIN SHOW DDL JOB QUERIES LIMIT m OFFSET n` {#admin-show-ddl-job-queries-limit-m-offset-n}
 
