@@ -5,7 +5,6 @@ summary: This document explains how to create a changefeed to stream data from T
 
 # Sink to Cloud Storage
 
-
 This document describes how to create a changefeed to stream data from <CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent><CustomContent plan="premium">TiDB Cloud Premium</CustomContent> to cloud storage.
 
 <CustomContent plan="dedicated">
