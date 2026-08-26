@@ -30,6 +30,10 @@ For more information about roles in TiDB Cloud, see [User roles](/tidb-cloud/man
 
 Private endpoints leverage **Private Link** or **Private Service Connect** technologies from cloud providers, enabling resources in your VPC to connect to services in other VPCs through private IP addresses, as if those services were hosted directly within your VPC.
 
+> **Note:**
+>
+> A private endpoint is a project-level resource and is not tied to a specific cluster. Private endpoints created within the same project can be shared by multiple Dedicated clusters connecting to the same downstream service, so you do not need to create a separate endpoint for each cluster. Deleting a cluster does not delete its private endpoints. You can manually delete a private endpoint when it is no longer needed, or wait for it to be automatically cleaned up after 30 days of inactivity. A private endpoint cannot be deleted if it is still in use by any cluster.
+
 <SimpleTab>
 <div label="AWS">
 
