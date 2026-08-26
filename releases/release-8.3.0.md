@@ -314,7 +314,7 @@ TiDBバージョン：8.3.0
     - トランザクションで使用されるメモリが複数回追跡される可能性がある問題を修正 [#53984](https://github.com/pingcap/tidb/issues/53984) @[ekexium](https://github.com/ekexium)
     - `SHOW WARNINGS;`を使用して警告を取得するとpanicが発生する可能性がある問題を修正しました [#48756](https://github.com/pingcap/tidb/issues/48756) @[xhebox](https://github.com/xhebox)
     - インデックス統計情報の読み込み時にメモリリークが発生する可能性がある問題を修正 [#54022](https://github.com/pingcap/tidb/issues/54022) @[Rustin170506](https://github.com/Rustin170506)
-    - 照合順序が`LENGTH()`または`utf8_bin`の場合に { `utf8mb4_bin`条件が予期せず照合順序します [#53730](https://github.com/pingcap/tidb/issues/53730) @[elsa0520](https://github.com/elsa0520)
+    - 照合順序が`utf8_bin`または`utf8mb4_bin`の場合に`LENGTH()`条件が予期せず削除される問題を修正しました [#53730](https://github.com/pingcap/tidb/issues/53730) @[elsa0520](https://github.com/elsa0520)
     - 重複する主キーに遭遇した場合に統計収集が`stats_history`テーブルを更新しない問題を修正 [#47539](https://github.com/pingcap/tidb/issues/47539) @[Defined2014](https://github.com/Defined2014)
     - 再帰的なCTEクエリによって無効なポインタが生成される可能性がある問題を修正 [#54449](https://github.com/pingcap/tidb/issues/54449) @[hawkingrei](https://github.com/hawkingrei)
     - Grafana の接続数監視メトリックが、ハンドシェイクが完了する前に一部の接続が切断された場合に正しく表示されない問題を修正しました [#54428](https://github.com/pingcap/tidb/issues/54428) @[YangKeao](https://github.com/YangKeao)
