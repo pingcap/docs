@@ -41,7 +41,7 @@ TiDB version: 4.0.16
     + TiCDC
 
         - Add a tick frequency limit to EtcdWorker to prevent frequent etcd writes from affecting PD services [#3112](https://github.com/pingcap/tiflow/issues/3112)
-        - Optimize rate limiting control on TiKV reloads to reduce gRPC congestion during changefeed initialization [#3110](https://github.com/pingcap/tiflow/issues/3110)
+        - Optimize rate-limiting control on TiKV reloads to reduce gRPC congestion during changefeed initialization [#3110](https://github.com/pingcap/tiflow/issues/3110)
 
 ## Bug fixes
 
