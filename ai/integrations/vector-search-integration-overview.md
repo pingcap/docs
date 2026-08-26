@@ -1,12 +1,12 @@
 ---
-title: TiDB の AI Integrations
-summary: Auto Embedding プロバイダー、AI フレームワーク、ORM ライブラリ、クラウドサービス、MCP サーバーサポートを含む、TiDB の AI 連携の概要。
+title: TiDB の AI 統合
+summary: Auto Embedding プロバイダー、AI フレームワーク、ORM ライブラリ、クラウドサービス、MCP サーバーサポートを含む、TiDB の AI 統合の概要。
 aliases: ['/ja/tidb/stable/vector-search-integration-overview/','/ja/tidb/dev/vector-search-integration-overview/','/ja/tidbcloud/vector-search-integration-overview/']
 ---
 
-# TiDB の AI Integrations
+# TiDB の AI 統合
 
-このドキュメントでは、Auto Embedding プロバイダー、AI フレームワーク、Object Relational Mapping (ORM) ライブラリ、クラウドサービス、MCP サーバーサポートを含む、TiDB の AI 連携の概要を説明します。
+このドキュメントでは、Auto Embedding プロバイダー、AI フレームワーク、Object Relational Mapping (ORM) ライブラリ、クラウドサービス、MCP サーバーサポートを含む、TiDB の AI 統合の概要を説明します。
 
 > **Note:**
 >
@@ -15,13 +15,13 @@ aliases: ['/ja/tidb/stable/vector-search-integration-overview/','/ja/tidb/dev/ve
 
 ## Auto Embedding {#auto-embedding}
 
-[Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) 機能を使用すると、プレーンテキストを使って直接ベクトル検索を実行できます。TiDB がバックグラウンドで自動的にテキストをベクトルに変換するため、自分で embedding を生成または管理する必要はありません。
+[Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) 機能を使用すると、プレーンテキストを使って直接ベクトル検索を実行できます。TiDB がバックグラウンドで自動的にテキストをベクトルに変換するため、自分で埋め込みを生成または管理する必要はありません。
 
-TiDB Vector Search は最大 16383 次元のベクトルの保存をサポートしており、ほとんどの embedding モデルに対応できます。
+TiDB Vector Search は最大 16383 次元のベクトルの保存をサポートしており、ほとんどの埋め込みモデルに対応できます。
 
-ベクトルの生成には、自前でデプロイしたオープンソースの embedding モデル、またはサードパーティの embedding API のいずれかを使用できます。
+ベクトルの生成には、自前でデプロイしたオープンソースの埋め込みモデル、またはサードパーティの埋め込みAPIのいずれかを使用できます。
 
-次の表は、サポートされている embedding プロバイダーを示しています。各プロバイダーの設定方法については、対応するガイドを参照してください。
+次の表は、サポートされている埋め込みプロバイダーを示しています。各プロバイダーの設定方法については、対応するガイドを参照してください。
 
 | プロバイダー          | ガイド                                      |
 |-------------------|--------------------------------------------------------------------------------------|
@@ -44,7 +44,7 @@ TiDB は次の AI フレームワークを公式にサポートしており、�
 
 また、TiDB は AI アプリケーション向けのドキュメントストレージやナレッジグラフストレージなど、さまざまな用途にも使用できます。
 
-## ORM libraries {#orm-libraries}
+## ORM ライブラリ {#orm-libraries}
 
 TiDB Vector Search を ORM ライブラリと統合して、TiDB データベースを操作できます。
 
@@ -58,7 +58,7 @@ TiDB Vector Search を ORM ライブラリと統合して、TiDB データベー
 
 ## クラウドサービス {#cloud-services}
 
-サードパーティのクラウド embedding サービスを使用してベクトルを生成し、それらを TiDB に保存できます。
+サードパーティのクラウド埋め込みサービスを使用してベクトルを生成し、それらを TiDB に保存できます。
 
 次の表は、サポートされているクラウドサービスと対応するチュートリアルを示しています。
 
@@ -67,13 +67,13 @@ TiDB Vector Search を ORM ライブラリと統合して、TiDB データベー
 | Jina AI        | [Integrate Vector Search with Jina AI Embeddings API](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)  |
 | Amazon Bedrock | [Integrate TiDB Vector Search with Amazon Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md)       |
 
-## MCP server {#mcp-server}
+## MCP サーバー {#mcp-server}
 
 [TiDB MCP Server](/ai/integrations/tidb-mcp-server.md) はオープンソースのツールであり、Model Context Protocol (MCP) を通じて自然言語の指示を使って TiDB データベースを操作できます。
 
 次の表は、サポートされている MCP クライアントと対応するセットアップガイドを示しています。
 
-| MCP client     | ガイド                                                                  |
+| MCP クライアント | ガイド                                                                  |
 |----------------|------------------------------------------------------------------------|
 | Claude Code    | [Claude Code](/ai/integrations/tidb-mcp-claude-code.md)                |
 | Claude Desktop | [Claude Desktop](/ai/integrations/tidb-mcp-claude-desktop.md)          |

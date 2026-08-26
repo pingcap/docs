@@ -1,6 +1,6 @@
 ---
 title: TiDB CloudとDatadogを統合する (PREVIEW)
-summary: Datadog integration を使用して TiDB Cloud インスタンスを監視する方法を学びます。
+summary: Datadog統合を使用して TiDB Cloud インスタンスを監視する方法を学びます。
 ---
 
 # TiDB CloudとDatadogを統合する (PREVIEW)
@@ -17,14 +17,14 @@ TiDB Cloud は Datadog との統合をサポートしています。TiDB Cloud �
 
 ## 制限事項 {#limitations}
 
-- Datadog integration は [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) インスタンスでは利用できません。
-- 対象の <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> インスタンスのステータスが **CREATING**、**RESTORING**、**PAUSED**、または **RESUMING** の場合、Datadog integration は利用できません。
+- Datadog統合は [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) インスタンスでは利用できません。
+- 対象の <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> インスタンスのステータスが **CREATING**、**RESTORING**、**PAUSED**、または **RESUMING** の場合、Datadog統合は利用できません。
 
 ## 手順 {#steps}
 
 ### 手順 1. 事前構築済み Datadog ダッシュボードをインポートする {#step-1-import-the-pre-built-datadog-dashboard}
 
-現在、<CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 用の TiDB Cloud ダッシュボードは、Datadog integration marketplace ではまだ利用できません。ダッシュボード JSON ファイルを手動でダウンロードし、Datadog にインポートする必要があります。
+現在、<CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 用の TiDB Cloud ダッシュボードは、Datadog統合マーケットプレイスではまだ利用できません。ダッシュボード JSON ファイルを手動でダウンロードし、Datadog にインポートする必要があります。
 
 1. インスタンスタイプに対応する Datadog ダッシュボード JSON ファイルをダウンロードします。
 
