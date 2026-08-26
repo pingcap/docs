@@ -140,6 +140,7 @@
   - [変更フィードの概要](/tidb-cloud/changefeed-overview.md)
   - [MySQLシンクへ](/tidb-cloud/changefeed-sink-to-mysql.md)
   - [Kafkaシンクへ](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+  - [Cloud Storage へ](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
   - 参照
     - [AWSでセルフホスト型のKafkaプライベートリンクサービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
     - [Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)
