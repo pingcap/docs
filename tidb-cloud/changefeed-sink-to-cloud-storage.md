@@ -5,13 +5,13 @@ summary: 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式
 
 # Sink to Cloud Storage
 
-本文档介绍如何创建 changefeed，将数据从 <CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent><CustomContent plan="premium">TiDB Cloud Premium</CustomContent> 流式传输到云存储。
+本文档介绍如何创建 changefeed，将数据从 <CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent><CustomContent plan="premium">TiDB Cloud Premium</CustomContent> 同步到云存储。
 
 <CustomContent plan="dedicated">
 
 > **注意：**
 >
-> - 若要将数据从 {{{ .dedicated }}} 流式同步到云存储，请确保你的 TiDB 集群版本为 v7.1.1 或更高版本。如需将 TiDB Cloud Dedicated 集群升级到 v7.1.1 或更高版本，请[联系 TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。
+> - 若要将数据从 {{{ .dedicated }}} 同步到云存储，请确保你的 TiDB 集群版本为 v7.1.1 或更高版本。如需将 TiDB Cloud Dedicated 集群升级到 v7.1.1 或更高版本，请[联系 TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。
 > - 对于 [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) 实例，changefeed 功能不可用。
 > - 对于 [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) 实例，changefeed 功能仅可按请求提供。更多信息，参见 [Changefeed](/tidb-cloud/essential-changefeed-overview.md)。
 > - 对于 [{{{ .premium }}}](/tidb-cloud/select-cluster-tier.md#premium) 实例，参见 [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium)。
