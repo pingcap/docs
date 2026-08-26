@@ -104,6 +104,8 @@ BYOC provides the following features:
 
 To meet different workload requirements, TiDB Cloud BYOC supports both Single-AZ and Multi-AZ deployments, enabling you to choose between lower-latency zonal deployment and higher-resilience deployment across multiple availability zones.
 
+You can set the high availability mode for each resource pool to **Zonal** or **Regional** when you [create the pool](/tidb-cloud/byoc/create-resource-pool-byoc.md). A zonal resource pool is deployed in a single availability zone, while a regional resource pool is deployed across multiple availability zones. TiDB Cloud determines the availability zone placement based on the BYOC region configuration and available cloud resources. TiDB Cloud BYOC instances created or restored in a resource pool inherit the high availability mode of the pool. After a resource pool is created, you cannot change its high availability mode or availability zone placement.
+
 ![TiDB Cloud BYOC Architecture](/media/tidb-cloud/byoc-architecture.png)
 
 A TiDB Cloud BYOC deployment includes the following major components:

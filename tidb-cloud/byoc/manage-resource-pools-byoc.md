@@ -43,6 +43,7 @@ To view resource pool details, click the name of a resource pool on the **Resour
 
 The resource pool details page includes the following information:
 
+- **High Availability**: shows whether the resource pool uses zonal or regional high availability. This value is read-only. You cannot change the high availability mode or availability zone placement after the resource pool is created.
 - **Pool vCPU Usage**: shows the current provisioned TiDB vCPU and additional vCPU provision.
 - **Instances in This Pool**: lists the BYOC instances that run in this resource pool.
 - **Metrics**: shows vCPU usage and physical storage usage trends.
@@ -78,6 +79,12 @@ To update the Pool vCPU Limit, take the following steps:
 4. Confirm the update.
 
 When you set a new Pool vCPU Limit, the value must be greater than or equal to `100` vCPU and the current provisioned TiDB vCPU. Otherwise, the update is rejected.
+
+> **Note:**
+>
+> Even when the current provisioned vCPU is below the Pool vCPU Limit, creating or restoring an instance might cause the total provisioned vCPU to exceed the limit. This might restrict resource scaling and degrade the performance of all instances in the resource pool. Before creating or restoring an instance, make sure that the resource pool has sufficient vCPU capacity.
+
+If the current provisioned vCPU of a resource pool is greater than or equal to its Pool vCPU Limit, you cannot create or restore an instance in that resource pool. To create or restore an instance, increase or turn off the Pool vCPU Limit, or select another resource pool.
 
 If the resource pool is in the **Modifying** status, **Update vCPU Limit** is disabled.
 

@@ -37,9 +37,9 @@ TiDB is a distributed database that requires specific infrastructure for high av
 
     - **Option B: POC / Cost Optimization (Single-AZ).** Select exactly **1 AZ**. For example, `us-west-2a`.
 
-        > **Note:**
-        >
-        > Multi-AZ deployment functionality is disabled for this configuration.
+The availability zones prepared for the BYOC region determine where TiDB Cloud places resource pools. When creating a resource pool, you select either **Zonal** or **Regional** high availability. A zonal resource pool is placed in one availability zone. A regional resource pool requires at least three eligible availability zones in the region.
+
+If a BYOC region is initially prepared with a single availability zone, TiDB Cloud uses that availability zone for zonal resource pools. You can create a regional resource pool only when two additional eligible availability zones are available. If you plan to use regional resource pools, confirm during environment preparation that the region provides at least three eligible availability zones.
 
 ## Step 4. Create a hosted zone for TiDB
 
