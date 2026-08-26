@@ -44,7 +44,7 @@ TiDB は次の AI フレームワークを公式にサポートしており、�
 
 また、TiDB は AI アプリケーション向けのドキュメントストレージやナレッジグラフストレージなど、さまざまな用途にも使用できます。
 
-## ORM libraries {#orm-libraries}
+## ORM ライブラリ {#orm-libraries}
 
 TiDB Vector Search を ORM ライブラリと統合して、TiDB データベースを操作できます。
 
@@ -67,13 +67,13 @@ TiDB Vector Search を ORM ライブラリと統合して、TiDB データベー
 | Jina AI        | [Integrate Vector Search with Jina AI Embeddings API](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)  |
 | Amazon Bedrock | [Integrate TiDB Vector Search with Amazon Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md)       |
 
-## MCP server {#mcp-server}
+## MCP サーバー {#mcp-server}
 
 [TiDB MCP Server](/ai/integrations/tidb-mcp-server.md) はオープンソースのツールであり、Model Context Protocol (MCP) を通じて自然言語の指示を使って TiDB データベースを操作できます。
 
 次の表は、サポートされている MCP クライアントと対応するセットアップガイドを示しています。
 
-| MCP client     | ガイド                                                                  |
+| MCP クライアント | ガイド                                                                  |
 |----------------|------------------------------------------------------------------------|
 | Claude Code    | [Claude Code](/ai/integrations/tidb-mcp-claude-code.md)                |
 | Claude Desktop | [Claude Desktop](/ai/integrations/tidb-mcp-claude-desktop.md)          |
