@@ -10,7 +10,7 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 ## 2026 年 8 月 25 日 {#august-25-2026}
 
-**一般变更**
+**常规变更**
 
 - **TiDB Cloud Premium**
 
