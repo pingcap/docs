@@ -8,6 +8,18 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes','/ai/v
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## August 25, 2026
+
+**General changes**
+
+- **TiDB Cloud Premium**
+
+    - TiDB Cloud Premium now supports streaming changefeed data directly to Amazon S3 and Alibaba Cloud Object Storage Service (OSS).
+
+        This feature enables you to archive change data to cloud storage for downstream analytics and long-term retention, while reducing costs by eliminating the need for intermediate message queues.
+
+        For more information, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium).
+
 ## August 18, 2026
 
 **General changes**
