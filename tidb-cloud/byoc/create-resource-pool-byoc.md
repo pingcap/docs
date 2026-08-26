@@ -56,7 +56,7 @@ To create a resource pool, take the following steps:
 >**Note:**
 >
 >  - You must select a high availability mode before creating the resource pool.
->  - If you select the **Regional** mode, make sure that the region for this pool contains at least three eligible availability zones. If this requirement is not met, the process of creating the regional resource pool might get stuck.
+>  - If you select the **Regional** mode, make sure that the region for this pool contains at least three eligible availability zones. If this requirement is not met, the process of creating the regional resource pool might fail to complete.
 > - TiDB Cloud determines the availability zones based on the [BYOC region configuration](/tidb-cloud/byoc/byoc-prepare-environment-aws.md#step-3-select-region-and-availability-zones-azs) and available cloud resources.
 
     After the resource pool is created, you cannot change its high availability mode or availability zone placement.
