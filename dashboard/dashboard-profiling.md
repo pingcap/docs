@@ -49,7 +49,7 @@ summary: 手動プロファイリングを使用すると、TiDB、TiKV、PD、 
 
 プロファイリングを開始する前に、プロファイリング期間を変更できます。この期間はプロファイリングに必要な時間によって決まり、デフォルトでは30秒です。30秒の期間は完了まで30秒かかります。
 
-[継続的なプロファイリング](/dashboard/continuous-profiling.md)有効になっているクラスターでは、手動プロファイリングを開始できません。現時点でのパフォーマンスデータを表示するには、 [継続的なプロファイリングページ](/dashboard/continuous-profiling.md#access-the-page)で最新のプロファイリング結果をクリックしてください。
+[継続的なプロファイリング](/dashboard/continuous-profiling.md)が有効になっているクラスターでは、手動プロファイリングを開始できません。現時点でのパフォーマンスデータを表示するには、 [継続的なプロファイリングページ](/dashboard/continuous-profiling.md#access-the-page)で最新のプロファイリング結果をクリックしてください。
 
 ## プロファイリングステータスを表示する {#view-profiling-status}
 

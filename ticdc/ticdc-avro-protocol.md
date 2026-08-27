@@ -131,7 +131,7 @@ dispatchers = [
 }
 ```
 
-`enable-tidb-extension`無効になっている値のデータ形式と比較すると、 `_tidb_op` 、 `_tidb_commit_ts` 、 `_tidb_commit_physical_time` 3つの新しいフィールドが追加されます。
+`enable-tidb-extension`が無効になっている値のデータ形式と比較すると、 `_tidb_op` 、 `_tidb_commit_ts` 、 `_tidb_commit_physical_time` 3つの新しいフィールドが追加されます。
 
 ### カラムデータ形式 {#column-data-format}
 

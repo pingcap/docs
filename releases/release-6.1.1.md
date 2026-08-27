@@ -117,7 +117,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 - PD
 
     - クラスタノードのラベル構成が無効な場合にオンラインの進行状況が不正確になる問題を修正[＃5234](https://github.com/tikv/pd/issues/5234) @[rleungx](https://github.com/rleungx)
-    - `enable-forwarding`有効になっているときに gRPC がエラーを不適切に処理する問題によって発生する PD パニックを修正[＃5373](https://github.com/tikv/pd/issues/5373) @[bufferflies](https://github.com/bufferflies)
+    - `enable-forwarding`が有効になっているときに gRPC がエラーを不適切に処理する問題によって発生する PD パニックを修正[＃5373](https://github.com/tikv/pd/issues/5373) @[bufferflies](https://github.com/bufferflies)
     - `/regions/replicated`間違ったステータスを返す可能性がある問題を修正しました [＃5095](https://github.com/tikv/pd/issues/5095) @[rleungx](https://github.com/rleungx)
 
 - TiFlash

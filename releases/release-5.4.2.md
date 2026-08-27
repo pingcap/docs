@@ -42,7 +42,7 @@ TiDB バージョン: 5.4.2
     - バイナリプロトコル で間違った TableDual プランがキャッシュされる問題を修正 [＃34678](https://github.com/pingcap/tidb/issues/34678) [＃34690](https://github.com/pingcap/tidb/issues/34690)
     - EqualAll ケースでTiFlash `firstrow`集計関数の誤って推論された null フラグの問題を修正しました [＃34584](https://github.com/pingcap/tidb/issues/34584)
     - プランナーがTiFlash に対して間違った 2 フェーズ集計プランを生成する問題を修正しました [＃34682](https://github.com/pingcap/tidb/issues/34682)
-    - `tidb_opt_agg_push_down`と`tidb_enforce_mpp`有効になっているときに発生するプランナーの誤った動作を修正[＃34465](https://github.com/pingcap/tidb/issues/34465)
+    - `tidb_opt_agg_push_down`と`tidb_enforce_mpp`が有効になっているときに発生するプランナーの誤った動作を修正[＃34465](https://github.com/pingcap/tidb/issues/34465)
     - プランキャッシュが削除されたときに使用される間違ったメモリ使用量の値を修正しました[＃34613](https://github.com/pingcap/tidb/issues/34613)
     - `LOAD DATA`文で列リストが機能しない問題を修正 [＃35198](https://github.com/pingcap/tidb/issues/35198)
     - 悲観的トランザクションで`WriteConflict`エラーを報告しないようにする [＃11612](https://github.com/tikv/tikv/issues/11612)
