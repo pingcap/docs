@@ -98,7 +98,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、 [ドキュメント](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan)を参照してください。
 
-- いくつかのオプティマイザーヒントを追加 [#39964](https://github.com/pingcap/tidb/issues/39964) @[Reminiscent](https://github.com/Reminiscent)
+- いくつかのオプティマイザヒントを追加 [#39964](https://github.com/pingcap/tidb/issues/39964) @[Reminiscent](https://github.com/Reminiscent)
 
     TiDB は v6.6.0 で`LIMIT`操作の実行計画の選択を制御するためのオプティマイザヒントをいくつか追加しました。
 
@@ -388,7 +388,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
     - `ADD INDEX`の分散データバックフィルをサポート（実験的） [#37119](https://github.com/pingcap/tidb/issues/37119) @[zimulala](https://github.com/zimulala)
     - `CURDATE()`を列のデフォルト値として使用することをサポートします [#38356](https://github.com/pingcap/tidb/issues/38356) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - `partial order prop push down`が LIST 型のパーティションテーブルをサポートするようになりました [#40273](https://github.com/pingcap/tidb/issues/40273) @[winoros](https://github.com/winoros)
-    - オプティマイザーのヒントと実行計画のバインディング間の競合に関するエラーメッセージを追加 [#40910](https://github.com/pingcap/tidb/issues/40910) @[Reminiscent](https://github.com/Reminiscent)
+    - オプティマイザのヒントと実行計画のバインディング間の競合に関するエラーメッセージを追加 [#40910](https://github.com/pingcap/tidb/issues/40910) @[Reminiscent](https://github.com/Reminiscent)
     - プランキャッシュ戦略を最適化し、一部のシナリオでプランキャッシュを使用する際に最適でないプランを回避する[#40312](https://github.com/pingcap/tidb/pull/40312) [#40218](https://github.com/pingcap/tidb/pull/40218) [#40280](https://github.com/pingcap/tidb/pull/40280) [#41136](https://github.com/pingcap/tidb/pull/41136) [#40686](https://github.com/pingcap/tidb/pull/40686) @[qw4990](https://github.com/qw4990)
     - メモリリークとパフォーマンスの低下を避けるために、期限切れの領域キャッシュを定期的にクリアします [#40461](https://github.com/pingcap/tidb/issues/40461) @[sticnarf](https://github.com/sticnarf)
     - `MODIFY COLUMN`はパーティションテーブルではサポートされていません [#39915](https://github.com/pingcap/tidb/issues/39915) @[wjhuang2016](https://github.com/wjhuang2016)

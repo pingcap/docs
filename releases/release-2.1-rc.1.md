@@ -5,11 +5,11 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
 
 # TiDB 2.1 RC1 リリースノート {#tidb-2-1-rc1-release-notes}
 
-2018 年 8月 24日に、TiDB 2.1 RC1 がリリースされました。TiDB 2.1 ベータ版と比較して、このリリースでは安定性、SQL オプティマイザー、統計情報、実行エンジンが大幅に改善されています。
+2018 年 8月 24日に、TiDB 2.1 RC1 がリリースされました。TiDB 2.1 ベータ版と比較して、このリリースでは安定性、SQL オプティマイザ、統計情報、実行エンジンが大幅に改善されています。
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザー
+- SQLオプティマイザ
     - 相関サブクエリの相関を解除した後に間違った結果が返される場合がある問題を修正[＃6972](https://github.com/pingcap/tidb/pull/6972)
     - `Explain` の出力結果を最適化する [＃7041](https://github.com/pingcap/tidb/pull/7041) [＃7011](https://github.com/pingcap/tidb/pull/7011)
     - `IndexJoin` の外側のテーブルの選択戦略を最適化する [＃7019](https://github.com/pingcap/tidb/pull/7019)

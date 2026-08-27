@@ -106,7 +106,7 @@
         - [オプティマイザのヒント](/optimizer-hints.md)
         - [SQLプラン管理](/sql-plan-management.md)
         - [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)
-        - [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
+        - [オプティマイザ修正コントロール](/optimizer-fix-controls.md)
     - [TiKV Follower Readの調整](/follower-read.md)
     - [コプロセッサーキャッシュ](/coprocessor-cache.md)
     - ガベージコレクション（GC）

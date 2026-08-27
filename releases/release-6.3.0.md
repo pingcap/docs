@@ -113,7 +113,7 @@ TiDBバージョン: 6.3.0-DMR
 
     TiDB v6.3.0 では、新しい結合[ヌル値認識型アンチジョイン（NAAJ）](/explain-subqueries.md#null-aware-anti-semi-join-not-in-and--all-subqueries)が導入されています。 NAAJ は、コレクション操作を処理するときに、コレクションが空であるか、 `NULL`であるかを認識できます。これにより`IN`や`= ANY`などの操作の実行効率が最適化され、SQL パフォーマンスが向上します。
 
-- ハッシュ結合のビルド終了を制御するオプティマイザーヒントを追加 [#35439](https://github.com/pingcap/tidb/issues/35439) @[Reminiscent](https://github.com/Reminiscent)
+- ハッシュ結合のビルド終了を制御するオプティマイザヒントを追加 [#35439](https://github.com/pingcap/tidb/issues/35439) @[Reminiscent](https://github.com/Reminiscent)
 
     バージョン6.3.0では、TiDBオプティマイザに、ハッシュ結合、そのプローブ終了、および構築終了を指定するための2つのヒント、 `HASH_JOIN_BUILD()`と`HASH_JOIN_PROBE()`が導入されました。オプティマイザが最適な実行計画を選択できない場合、これらのヒントを使用してプランに介入できます。
 

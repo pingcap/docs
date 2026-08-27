@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.2 Release Notes
-summary: TiDB 3.0.2は、2019年8月7日にリリースされ、様々な修正と改善が行われました。このリリースには、SQLオプティマイザー、SQL実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、TiDB Ansibleの修正が含まれています。修正には、クエリプラン、クエリ結果、エラーメッセージ、パフォーマンス最適化に関する問題が含まれます。
+summary: TiDB 3.0.2は、2019年8月7日にリリースされ、様々な修正と改善が行われました。このリリースには、SQLオプティマイザ、SQL実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、TiDB Ansibleの修正が含まれています。修正には、クエリプラン、クエリ結果、エラーメッセージ、パフォーマンス最適化に関する問題が含まれます。
 ---
 
 # TiDB 3.0.2 リリースノート {#tidb-3-0-2-release-notes}
@@ -13,7 +13,7 @@ TiDB Ansible バージョン: 3.0.2
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザー
+- SQLオプティマイザ
     - クエリ内で同じテーブルが複数回出現し、論理的にクエリ結果が常に空になる場合に「スキーマ内に列が見つかりません」というメッセージが報告される問題を修正しました[＃11247](https://github.com/pingcap/tidb/pull/11247)
     - `TIDB_INLJ`ヒントが一部のケース（ `explain select /*+ TIDB_INLJ(t1) */ t1.b, t2.a from t t1, t t2 where t1.b = t2.a`など）で正しく機能しないことが原因でクエリプランが期待どおりに動作しない問題を修正しました[＃11362](https://github.com/pingcap/tidb/pull/11362)
     - クエリ結果の列名が場合によっては間違っている問題を修正しました（ `SELECT IF(1,c,c) FROM t`など） [＃11379](https://github.com/pingcap/tidb/pull/11379)
@@ -23,7 +23,7 @@ TiDB Ansible バージョン: 3.0.2
     - ウィンドウ関数で構文制限に違反した場合にエラーが報告されない問題を修正しました（例： `UNBOUNDED PRECEDING`フレーム定義の最後に出現できません） [＃11543](https://github.com/pingcap/tidb/pull/11543)
     - `ERROR 3593 (HY000): You cannot use the window function FUNCTION_NAME in this context`エラーメッセージで`FUNCTION_NAME`大文字になっているため、MySQL との非互換性が発生する問題を修正しました。 [＃11535](https://github.com/pingcap/tidb/pull/11535)
     - ウィンドウ関数で実装されていない`IGNORE NULLS`構文が使用されているにもかかわらずエラーが報告されない問題を修正[＃11593](https://github.com/pingcap/tidb/pull/11593)
-    - オプティマイザーが時間等条件正しく推定しない問題を修正 [＃11512](https://github.com/pingcap/tidb/pull/11512)
+    - オプティマイザが時間等条件正しく推定しない問題を修正 [＃11512](https://github.com/pingcap/tidb/pull/11512)
     - フィードバック情報に基づいてトップN統計を更新することをサポート[＃11507](https://github.com/pingcap/tidb/pull/11507)
 - SQL実行エンジン
     - 関数`INSERT`パラメータに`NULL`含まれている場合、戻り値が`NULL`ならない問題を修正しました。 [＃11248](https://github.com/pingcap/tidb/pull/11248)

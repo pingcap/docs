@@ -1,9 +1,9 @@
 ---
 title: Optimizer Fix Controls
-summary: オプティマイザー修正制御機能について学習し、tidb_opt_fix_control` を使用して TiDB オプティマイザーをより細かく制御する方法について説明します。
+summary: オプティマイザ修正制御機能について学習し、tidb_opt_fix_control` を使用して TiDB オプティマイザをより細かく制御する方法について説明します。
 ---
 
-# オプティマイザー修正コントロール {#optimizer-fix-controls}
+# オプティマイザ修正コントロール {#optimizer-fix-controls}
 
 製品が継続的に進化するにつれて、TiDBオプティマイザの動作が変化し、より合理的な実行計画が生成されます。しかし、特定のシナリオでは、新しい動作が予期しない結果につながる可能性があります。例えば、
 
@@ -14,9 +14,9 @@ summary: オプティマイザー修正制御機能について学習し、tidb_
 
 ## `tidb_opt_fix_control`の紹介 {#introduction-to-tidb-opt-fix-control}
 
-v6.5.3 および v7.1.0 以降、TiDB は、オプティマイザーの動作をより細かく制御するための[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)システム変数を提供します。
+v6.5.3 および v7.1.0 以降、TiDB は、オプティマイザの動作をより細かく制御するための[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)システム変数を提供します。
 
-各修正は、特定の目的のためにTiDBオプティマイザーの動作を調整するために用いられる制御項目です。修正には、動作変更の技術的な詳細が記載されたGitHub Issueに対応する番号が付けられています。例えば、修正`44262`の場合、修正[問題44262](https://github.com/pingcap/tidb/issues/44262)でその制御内容を確認できます。
+各修正は、特定の目的のためにTiDBオプティマイザの動作を調整するために用いられる制御項目です。修正には、動作変更の技術的な詳細が記載されたGitHub Issueに対応する番号が付けられています。例えば、修正`44262`の場合、修正[問題44262](https://github.com/pingcap/tidb/issues/44262)でその制御内容を確認できます。
 
 システム変数[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710) 、複数の修正をカンマ区切りで 1つの値として受け入れます ( `,` )。形式は`"<#issue1>:<value1>,<#issue2>:<value2>,...,<#issueN>:<valueN>"`で、 `<#issueN>`修正番号です。例:
 
@@ -24,7 +24,7 @@ v6.5.3 および v7.1.0 以降、TiDB は、オプティマイザーの動作を
 SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 ```
 
-## オプティマイザー修正コントロールリファレンス {#optimizer-fix-controls-reference}
+## オプティマイザ修正コントロールリファレンス {#optimizer-fix-controls-reference}
 
 ### <a href="https://github.com/pingcap/tidb/issues/33031">`33031`</a><span class="version-mark">バージョン8.0.0の新機能</span> {#33031-new-in-v800}
 
@@ -81,7 +81,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 - デフォルト値: `ON` 。v8.5.0 より前では、デフォルト値は`OFF`です。
 - 可能`OFF`値: `ON`
-- この変数は、強制されていないプランを見つけた後、クエリの最適化中にオプティマイザーが強制されているプランを探索するかどうかを制御します。
+- この変数は、強制されていないプランを見つけた後、クエリの最適化中にオプティマイザが強制されているプランを探索するかどうかを制御します。
 
 ### <a href="https://github.com/pingcap/tidb/issues/47400">`47400`</a><span class="version-mark">バージョン8.4.0の新機能</span> {#47400-new-in-v840}
 
@@ -113,7 +113,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - デフォルト値: `OFF`
 - 可能`OFF`値: `ON`
 - 現在、TiDBオプティマイザは、各接続詞が範囲のリストで構成される複雑な接続詞条件のインデックス範囲の導出に制限があります。これは、一般的な範囲交差を適用することで解決できます。
-- この修正コントロールを有効にすると、この制限が解除され、オプティマイザーは複雑な範囲交差を処理できるようになります。ただし、接続詞の数が多い（10個を超える）条件の場合、最適化時間がわずかに長くなる可能性があります。
+- この修正コントロールを有効にすると、この制限が解除され、オプティマイザは複雑な範囲交差を処理できるようになります。ただし、接続詞の数が多い（10個を超える）条件の場合、最適化時間がわずかに長くなる可能性があります。
 
 ### <a href="https://github.com/pingcap/tidb/issues/56318">`56318`</a> {#56318}
 

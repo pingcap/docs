@@ -85,7 +85,7 @@ TiDB バージョン: 8.0.0
 
     詳細については、[ドキュメント](/sql-prepared-plan-cache.md)を参照してください。
 
-- オプティマイザーが多値インデックスのサポートを強化[#47759](https://github.com/pingcap/tidb/issues/47759) [#46539](https://github.com/pingcap/tidb/issues/46539) @[Arenatlx](https://github.com/Arenatlx)@[time-and-fate](https://github.com/time-and-fate)
+- オプティマイザが多値インデックスのサポートを強化[#47759](https://github.com/pingcap/tidb/issues/47759) [#46539](https://github.com/pingcap/tidb/issues/46539) @[Arenatlx](https://github.com/Arenatlx)@[time-and-fate](https://github.com/time-and-fate)
 
     TiDB v6.6.0 では[多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)が導入され、JSON データ型のクエリパフォーマンスが向上しました。v8.0.0 では、オプティマイザが多値インデックスのサポートを強化し、複雑なシナリオでクエリを最適化するために、それらを正しく識別して利用できるようになりました。
 
@@ -282,7 +282,7 @@ TiDB バージョン: 8.0.0
 | [`tidb_load_binding_timeout`](/system-variables.md#tidb_load_binding_timeout-new-in-v800)                                 | 新しく追加された | バインディングの読み込みタイムアウトを制御します。バインディングの読み込み実行時間がこの値を超えると、読み込みが停止します。                                                                                                                                                             |
 | [`tidb_low_resolution_tso_update_interval`](/system-variables.md#tidb_low_resolution_tso_update_interval-new-in-v800)     | 新しく追加された | TiDB [キャッシュタイムスタンプ](/system-variables.md#tidb_low_resolution_tso)スタンプを更新する間隔を制御します。                                                                                                                                        |
 | [`tidb_opt_ordering_index_selectivity_ratio`](/system-variables.md#tidb_opt_ordering_index_selectivity_ratio-new-in-v800) | 新しく追加された | SQL ステートメントに`ORDER BY`および`ORDER BY` } 句が存在するものの、インデックスでカバーされていないフィルタ条件がある場合に、SQL ステートメント`LIMIT`に一致するインデックスの推定行数を制御します。デフォルト値は`-1`で、このシステム変数を無効にすることを意味します。                                                                 |
-| [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)                       | 新しく追加された | オプティマイザーが現在のセッションでクエリ最適化のために[不可視インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択できるかどうかを制御します。変数が`ON`に設定されている場合、オプティマイザーはセッション内のクエリ最適化のために不可視インデックスを選択できます。                                   |
+| [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)                       | 新しく追加された | オプティマイザが現在のセッションでクエリ最適化のために[不可視インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択できるかどうかを制御します。変数が`ON`に設定されている場合、オプティマイザはセッション内のクエリ最適化のために不可視インデックスを選択できます。                                   |
 | [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)                                       | 新しく追加された | スキーマ情報のキャッシュに使用できるメモリの上限を制御し、メモリの過剰使用を防ぎます。この機能を有効にすると、LRUアルゴリズムを使用して必要なテーブルをキャッシュし、スキーマ情報によって占有されるメモリを効果的に削減します。                                                                                                          |
 
 ### コンフィグレーションファイルパラメータ {#configuration-file-parameters}

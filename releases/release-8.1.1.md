@@ -86,7 +86,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     - TiProxy とリソースグループを使用するときに、各リソースグループの接続数が正しくない問題を修正しました。 [＃54545](https://github.com/pingcap/tidb/issues/54545) @[YangKeao](https://github.com/YangKeao)
     - 再帰CTE でビューの使用が機能しない問題を修正 [＃49721](https://github.com/pingcap/tidb/issues/49721) @[hawkingrei](https://github.com/hawkingrei)
     - 大規模並列処理 (MPP) で`final` AggMode と`non-final` AggMode が共存できない問題を修正しました [＃51362](https://github.com/pingcap/tidb/issues/51362) @[AilinKid](https://github.com/AilinKid)
-    - オプティマイザーヒント使用時に誤った警告情報が表示される問題を修正しました [＃53767](https://github.com/pingcap/tidb/issues/53767) @[hawkingrei](https://github.com/hawkingrei)
+    - オプティマイザヒント使用時に誤った警告情報が表示される問題を修正しました [＃53767](https://github.com/pingcap/tidb/issues/53767) @[hawkingrei](https://github.com/hawkingrei)
     - `HashJoin`または`IndexLookUp`演算子が`Apply`演算子の駆動側サブノードである場合に`memTracker`切り離されないことで発生する異常に高いメモリ使用量の問題を修正しました。 [＃54005](https://github.com/pingcap/tidb/issues/54005) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - 場合によっては無効な列タイプ`DECIMAL(0,0)`が作成される可能性がある問題を修正[＃53779](https://github.com/pingcap/tidb/issues/53779) @[tangenta](https://github.com/tangenta)
     - `(*PointGetPlan).StatsInfo()` の実行中に発生する可能性のあるデータ競合の問題を修正しました [＃43339](https://github.com/pingcap/tidb/issues/43339) @[qw4990](https://github.com/qw4990) [＃49803](https://github.com/pingcap/tidb/issues/49803)

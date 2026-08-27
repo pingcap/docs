@@ -1635,7 +1635,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - 値のオプション：
     - `1` : TiDB v6.4.0 以前のバージョンでデフォルトで使用されているコストモデルバージョン 1 を有効にします。
     - `2` :[コストモデル バージョン2](/cost-model.md#cost-model-version-2)を有効にします。これは TiDB v6.5.0 で一般提供されており、内部テストではバージョン 1 よりも正確です。
-- コストモデルのバージョンは、オプティマイザーの計画決定に影響します。詳細については、[コストモデル](/cost-model.md)を参照してください。
+- コストモデルのバージョンは、オプティマイザの計画決定に影響します。詳細については、[コストモデル](/cost-model.md)を参照してください。
 
 ### tidb_current_ts
 
@@ -2190,7 +2190,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、TiDB がオプティマイザーをガイドする拡張統計を収集できるかどうかを示します。詳細については、[拡張統計入門](/extended-statistics.md)を参照してください。
+- この変数は、TiDB がオプティマイザをガイドする拡張統計を収集できるかどうかを示します。詳細については、[拡張統計入門](/extended-statistics.md)を参照してください。
 
 ### tidb_enable_external_ts_read <span class="version-mark">New in v6.4.0</span>
 
@@ -4526,7 +4526,7 @@ mysql> desc select count(distinct a) from test.t;
 - デフォルト値: `""`
 - この変数は、オプティマイザの内部動作の一部を制御するために使用されます。
 - オプティマイザの動作は、ユーザーシナリオやSQLステートメントによって異なる場合があります。この変数を使用することで、オプティマイザをより細かく制御でき、オプティマイザの動作変更によってアップグレード後に発生するパフォーマンス低下を防ぐことができます。
-- より詳細な概要については、[オプティマイザー修正コントロール](/optimizer-fix-controls.md)を参照してください。
+- より詳細な概要については、[オプティマイザ修正コントロール](/optimizer-fix-controls.md)を参照してください。
 
 </CustomContent>
 
@@ -4539,7 +4539,7 @@ mysql> desc select count(distinct a) from test.t;
 - デフォルト値: `""`
 - この変数は、オプティマイザの内部動作の一部を制御するために使用されます。
 - オプティマイザの動作は、ユーザーシナリオやSQLステートメントによって異なる場合があります。この変数を使用することで、オプティマイザをより細かく制御でき、オプティマイザの動作変更によってアップグレード後に発生するパフォーマンス低下を防ぐことができます。
-- より詳細な概要については、[オプティマイザー修正コントロール](/optimizer-fix-controls.md)を参照してください。
+- より詳細な概要については、[オプティマイザ修正コントロール](/optimizer-fix-controls.md)を参照してください。
 
 </CustomContent>
 
