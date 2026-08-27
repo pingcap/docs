@@ -33,7 +33,7 @@ TiDB Self-Managedは、TiDBの製品オプションの一つであり、ユー�
 
 - **リアルタイムHTAP**
 
-    TiDBは、行ベースストレージエンジンである[TiKV](/tikv-overview.md)と、カラム型ストレージエンジンである[TiFlash](/tiflash/tiflash-overview.md)という2つのストレージエンジンを提供します。TiFlashは、Multi-Raft Learnerプロトコルを使用してTiKVからリアルタイムでデータを複製し、TiKV行ベースストレージエンジンとTiFlashカラム型ストレージエンジン間のデータの一貫性を確保します。HTAPリソースの分離問題を解決するために、必要に応じてTiKVとTiFlashを異なるマシンにデプロイできます。
+    TiDBは、行ベースストレージエンジンである[TiKV](/tikv-overview.md)と、列指向ストレージエンジンである[TiFlash](/tiflash/tiflash-overview.md)という2つのストレージエンジンを提供します。TiFlashは、Multi-Raft Learnerプロトコルを使用してTiKVからリアルタイムでデータを複製し、TiKV行ベースストレージエンジンとTiFlash列指向ストレージエンジン間のデータの一貫性を確保します。HTAPリソースの分離問題を解決するために、必要に応じてTiKVとTiFlashを異なるマシンにデプロイできます。
 
 - **クラウドネイティブ分散データベース**
 

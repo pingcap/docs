@@ -18,7 +18,7 @@ TiDB Cloudの各組織につき、最大 5つの [無料のTiDB Cloud Starterイ
 組織内の最初の 5つのTiDB Cloud Starterインスタンス（無料版かスケーラブル版かを問わず）については、 TiDB Cloud はそれぞれに以下の無料使用クォ​​ータを提供します。
 
 - 行ベースストレージ：5 GiB
-- カラム型ストレージ：5 GiB
+- 列指向ストレージ：5 GiB
 - [要求単位（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) : 5,000万RU/月
 
 TiDB Cloud Starterインスタンスが使用クォータに達すると、ユーザーが または新しい月の開始時に使用がリセットさ[割り当てを増やす](#update-spending-limit)まで、新しい接続試行は即座に拒否されます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。たとえば、無料のTiDB Cloud StarterTiDB Cloud Starterの行ベースのストレージが5 GiB を超えると、 TiDB Cloud Starterインスタンスは自動的に新しい接続試行を制限します。
