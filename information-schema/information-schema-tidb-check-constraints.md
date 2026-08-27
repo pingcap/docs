@@ -1,6 +1,6 @@
 ---
 title: TIDB_CHECK_CONSTRAINTS
-summary: TIDB_CHECK_CONSTRAINTS` INFORMATION_SCHEMA テーブルについて学習します。
+summary: `TIDB_CHECK_CONSTRAINTS` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
 # TIDB_CHECK_CONSTRAINTS {#tidb-check-constraints}

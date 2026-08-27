@@ -1,6 +1,6 @@
 ---
 title: REFERENTIAL_CONSTRAINTS
-summary: REFERENTIAL_CONSTRAINTS` INFORMATION_SCHEMA テーブルについて学習します。
+summary: `REFERENTIAL_CONSTRAINTS` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
 # REFERENTIAL_CONSTRAINTS {#referential-constraints}

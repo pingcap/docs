@@ -1,6 +1,6 @@
 ---
 title: PROCESSLIST
-summary: PROCESSLIST` information_schema テーブルについて学習します。
+summary: `PROCESSLIST` information_schema テーブルについて学習します。
 ---
 
 # PROCESSLIST {#processlist}

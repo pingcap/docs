@@ -1,6 +1,6 @@
 ---
 title: METRICS_TABLES
-summary: METRICS_TABLES` システムテーブルについて学習します。
+summary: `METRICS_TABLES` システムテーブルについて学習します。
 ---
 
 # METRICS_TABLES {#metrics-tables}

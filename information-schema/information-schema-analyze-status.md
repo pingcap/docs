@@ -1,6 +1,6 @@
 ---
 title: ANALYZE_STATUS
-summary: ANALYZE_STATUS`情報スキーマテーブルについて学習してください。
+summary: `ANALYZE_STATUS`情報スキーマテーブルについて学習してください。
 ---
 
 # ANALYZE_STATUS {#analyze-status}

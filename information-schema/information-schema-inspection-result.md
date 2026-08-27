@@ -1,6 +1,6 @@
 ---
 title: INSPECTION_RESULT
-summary: INSPECTION_RESULT` 診断結果テーブルを確認します。
+summary: `INSPECTION_RESULT` 診断結果テーブルを確認します。
 ---
 
 # INSPECTION_RESULT {#inspection-result}

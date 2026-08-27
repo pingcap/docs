@@ -1,6 +1,6 @@
 ---
 title: RESOURCE_GROUPS
-summary: RESOURCE_GROUPS`情報スキーマテーブルについて学習してください。
+summary: `RESOURCE_GROUPS`情報スキーマテーブルについて学習してください。
 ---
 
 # RESOURCE_GROUPS {#resource-groups}

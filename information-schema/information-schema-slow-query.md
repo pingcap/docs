@@ -1,6 +1,6 @@
 ---
 title: SLOW_QUERY
-summary: SLOW_QUERY` INFORMATION_SCHEMA テーブルについて学習してください。
+summary: `SLOW_QUERY` INFORMATION_SCHEMA テーブルについて学習してください。
 ---
 
 # SLOW_QUERY {#slow_query}
