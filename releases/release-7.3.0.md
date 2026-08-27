@@ -198,7 +198,7 @@ TiDB バージョン: 7.3.0
     - [グローバルキル](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が有効な場合、 <kbd>Ctrl+C</kbd>を押すと現在のセッションを終了できます [#8854](https://github.com/pingcap/tidb/issues/8854) @[pingyu](https://github.com/pingyu)
     - `IS_FREE_LOCK()`および`IS_USED_LOCK()`のロック関数をサポートする [#44493](https://github.com/pingcap/tidb/issues/44493) @[dveeden](https://github.com/dveeden)
     - ディスクからダンプされたチャンクを読み取るパフォーマンスを最適化 [#45125](https://github.com/pingcap/tidb/issues/45125) @[YangKeao](https://github.com/YangKeao)
-    - オプティマイザ修正コントロールを使用してインデックス結合の内部テーブルの過大評価問題を最適化する [#44855](https://github.com/pingcap/tidb/issues/44855) @[time-and-fate](https://github.com/time-and-fate)
+    - オプティマイザ修正コントロールを使用して、インデックス結合の内部テーブルの過大評価を改善する [#44855](https://github.com/pingcap/tidb/issues/44855) @[time-and-fate](https://github.com/time-and-fate)
 
 - TiKV
 

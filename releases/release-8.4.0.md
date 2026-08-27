@@ -304,7 +304,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
     - 大量のデータをスキャンする際のBatchCopタスク構築の効率を最適化する[#55915](https://github.com/pingcap/tidb/issues/55915) [#55413](https://github.com/pingcap/tidb/issues/55413) @[wshwsh12](https://github.com/wshwsh12)
     - トランザクションのバッファを最適化して、トランザクション内の書き込みレイテンシーと TiDB の CPU 使用率を削減します [#55287](https://github.com/pingcap/tidb/issues/55287) @[you06](https://github.com/you06)
     - システム変数`tidb_dml_type`が`"bulk"`に設定されている場合の DML ステートメントの実行パフォーマンスを最適化する [#50215](https://github.com/pingcap/tidb/issues/50215) @[ekexium](https://github.com/ekexium)
-    - [Optimizer Fix Control 47400](/optimizer-fix-controls.md#47400-new-in-v840)の使用をサポートし、オプティマイザが`estRows`の推定最小値を`1` 。これは、Oracle や Db2 などのデータベースと一貫性があります [#47400](https://github.com/pingcap/tidb/issues/47400) @[terry1purcell](https://github.com/terry1purcell)
+    - [Optimizer Fix Control 47400](/optimizer-fix-controls.md#47400-new-in-v840)の使用をサポートし、オプティマイザが`estRows`の推定最小値を`1`に制限するかどうかを制御できるようにします。これは、Oracle や Db2 などのデータベースと一貫性があります [#47400](https://github.com/pingcap/tidb/issues/47400) @[terry1purcell](https://github.com/terry1purcell)
     - [`mysql.tidb_runaway_queries`](/mysql-schema/mysql-schema.md#system-tables-related-to-runaway-queries)ログ テーブルに書き込み制御を追加し、多数の同時書き込みによって発生するオーバーヘッドを削減します [#54434](https://github.com/pingcap/tidb/issues/54434) @[HuSharp](https://github.com/HuSharp)
     - 内部テーブルに`Selection` 、 `Projection` 、または`Aggregation`演算子がある場合、デフォルトでインデックス結合をサポートします [#47233](https://github.com/pingcap/tidb/issues/47233) @[winoros](https://github.com/winoros)
     - 特定のシナリオにおける`DELETE`操作のために TiKV から取得する列の詳細の数を減らし、これらの操作のリソースオーバーヘッドを削減します [#38911](https://github.com/pingcap/tidb/issues/38911) @[winoros](https://github.com/winoros)
