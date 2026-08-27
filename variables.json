@@ -1,6 +1,11 @@
 {
   "tidb": "TiDB",
+<<<<<<< HEAD
   "tidb-version": "v8.5.0",
+=======
+  "tidb-version": "8.5.8",
+  "tidb-release-date": "2026-08-27",
+>>>>>>> a5c03bfb2a (add the release notes for v8.5.8 (#23522))
   "tidb-operator-version": "v1.6.4",
   "self-managed": "TiDB Self-Managed",
   "starter": "TiDB Cloud Starter",
