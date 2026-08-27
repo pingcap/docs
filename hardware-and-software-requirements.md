@@ -75,6 +75,7 @@ In v8.5 LTS, TiDB ensures multi-level quality standards for various combinations
     >
     > Support for Red Hat Enterprise Linux 9.x starts from [TiUP](https://github.com/pingcap/tiup/releases) v1.16.5.
 
++ **Compatible platforms.** In the following combinations, TiDB can compile, build, and deploy, and supports OLTP, OLAP, and the data tools. These combinations are not included in the systematic per-release test matrix; compatibility is verified through build and deployment verification and extensive production usage by TiDB users. For production deployments on these platforms, contact PingCAP to confirm support coverage under your subscription.
 
     <table>
     <thead>
