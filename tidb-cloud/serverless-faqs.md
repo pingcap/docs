@@ -108,7 +108,7 @@ TiDB Cloud Starter クラスターに月間使用制限が設定されている�
 
 ### 無料プランの制限は何ですか? {#what-are-the-limitations-of-the-free-plan}
 
-無料プランでは、スケーラブルでないリソースのため、クラスターのパフォーマンスが制限されます。そのため、クエリあたりのメモリ割り当てが256MiBに制限され、1秒あたりのリクエストユニット（RU）に顕著なボトルネックが発生する可能性があります。クラスターのパフォーマンスを最大化し、これらの制限を回避するには、 TiDB Cloud Starterクラスターに[毎月の支出限度額を設定する](/tidb-cloud/manage-serverless-spend-limit.md)追加できます。
+無料プランでは、スケーラブルでないリソースのため、クラスターのパフォーマンスが制限されます。そのため、クエリあたりのメモリ割り当てが256MiBに制限され、1秒あたりのリクエストユニット（RU）に顕著なボトルネックが発生する可能性があります。クラスターのパフォーマンスを最大化し、これらの制限を回避するには、 TiDB Cloud Starterクラスターに[毎月の支出限度額を設定する](/tidb-cloud/manage-serverless-spend-limit.md)ことができます。
 
 ### ワークロードに必要な RU の数を見積もって、月間予算を計画するにはどうすればよいですか? {#how-can-i-estimate-the-number-of-rus-required-by-my-workloads-and-plan-my-monthly-budget}
 

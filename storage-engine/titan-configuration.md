@@ -99,11 +99,11 @@ Titanの値のキャッシュサイズを制御するには、 [`blob-cache-size
 
 BLOBファイル内の古いデータ（対応するキーが更新または削除されたデータ）の割合が、 [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio)で設定されたしきい値を超えると、Titan GCがトリガーされます。このしきい値を下げると、スペースの増幅を軽減できますが、Titan GCの頻度が高くなる可能性があります。この値を上げると、Titan GC、I/O帯域幅、CPU消費量を削減できますが、ディスク容量の使用量は増加します。
 
-**TiKV の詳細**-**スレッド CPU** - **RocksDB CPU**から、Titan GC スレッドが長時間にわたってフルロード状態になっていることが確認された場合は、 [`max-background-gc`](/tikv-configuration-file.md#max-background-gc)調整して Titan GC スレッドプールのサイズを増やすことを検討してください。
+**TiKV の詳細**-**スレッド CPU** - **RocksDB CPU**から、Titan GC スレッドが長時間にわたってフルロード状態になっていることが確認された場合は、 [`max-background-gc`](/tikv-configuration-file.md#max-background-gc)を調整して Titan GC スレッドプールのサイズを増やすことを検討してください。
 
 ### `rate-bytes-per-sec` {#rate-bytes-per-sec}
 
-[`rate-bytes-per-sec`](/tikv-configuration-file.md#rate-bytes-per-sec)調整すると、RocksDB 圧縮の I/O レートを制限し、トラフィック量が多いときのフォアグラウンドの読み取りおよび書き込みパフォーマンスへの影響を軽減できます。
+[`rate-bytes-per-sec`](/tikv-configuration-file.md#rate-bytes-per-sec)を調整すると、RocksDB 圧縮の I/O レートを制限し、トラフィック量が多いときのフォアグラウンドの読み取りおよび書き込みパフォーマンスへの影響を軽減できます。
 
 ### `shared-blob-cache` (v8.0.0 の新機能) {#shared-blob-cache-new-in-v8-0-0}
 
@@ -154,7 +154,7 @@ Titanを無効にするには、オプション`rocksdb.defaultcf.titan.blob-run
 
     > **Note:**
     >
-    > TitanとRocksDBの両方のデータを収容するのに十分なディスク容量がない場合は、デフォルト値の`0.5` （ [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio)を使用することをお勧めします。一般的に、使用可能なディスク容量が50%未満の場合は、デフォルト値を使用することをお勧めします。これは、 `discardable-ratio = 1.0`設定するとRocksDBデータが増加し続けるためです。同時に、Titan内の既存のBLOBファイルをリサイクルするには、そのファイル内のすべてのデータをRocksDBに変換する必要があり、これは時間のかかるプロセスです。ただし、ディスクサイズが十分に大きい場合は、 `discardable-ratio = 1.0`設定すると、圧縮時にBLOBファイル自体のGCを削減できるため、帯域幅を節約できます。
+    > TitanとRocksDBの両方のデータを収容するのに十分なディスク容量がない場合は、デフォルト値の`0.5` （ [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio)を使用することをお勧めします。一般的に、使用可能なディスク容量が50%未満の場合は、デフォルト値を使用することをお勧めします。これは、 `discardable-ratio = 1.0`を設定するとRocksDBデータが増加し続けるためです。同時に、Titan内の既存のBLOBファイルをリサイクルするには、そのファイル内のすべてのデータをRocksDBに変換する必要があり、これは時間のかかるプロセスです。ただし、ディスクサイズが十分に大きい場合は、 `discardable-ratio = 1.0`を設定すると、圧縮時にBLOBファイル自体のGCを削減できるため、帯域幅を節約できます。
 
 2. （オプション）tikv-ctlを使用してフルコンパクションを実行します。このプロセスは大量のI/OとCPUリソースを消費します。
 

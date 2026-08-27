@@ -21,7 +21,7 @@ TiDBでは、クライアントセッションがテーブルロックを取得�
 >
 > テーブルロック機能はデフォルトで無効になっています。
 >
-> - TiDB Self-Managed の場合、テーブルロック機能を有効にするには、すべての TiDB インスタンスの構成ファイルで[`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400) ～ `true`設定する必要があります。
+> - TiDB Self-Managed の場合、テーブルロック機能を有効にするには、すべての TiDB インスタンスの構成ファイルで[`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400)を`true`に設定する必要があります。
 > - TiDB Cloud Dedicated の場合、テーブルロック機能を有効にするには、 [TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)連絡して[`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400)を`true`に設定する必要があります。
 > - [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、 [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400)から`true`設定はサポートされていません。
 

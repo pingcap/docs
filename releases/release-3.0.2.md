@@ -54,7 +54,7 @@ TiDB Ansible バージョン: 3.0.2
     - SQL 文で現在時刻を計算し、その値が複数回取得された場合に結果が MySQL と互換性がない問題を修正しました。同じ SQL 文で現在時刻を取得する場合は同じ値を使用します[＃11394](https://github.com/pingcap/tidb/pull/11394)
     - `baseExecutor`の`Close`エラーを報告しているにもかかわらず、 `ChildExecutor`に対して`Close`が呼び出されない問題を修正しました。この問題は、 `KILL`文が実行されず、 `ChildExecutor`が閉じられていない場合にGoroutineリークを引き起こす可能性があります[＃11576](https://github.com/pingcap/tidb/pull/11576)
 - サーバ
-    - CSVファイル内の欠落しているフィールド`LOAD DATA` `TIMESTAMP`処理する際に、自動的に追加された値が現在のタイムスタンプではなく0になる問題を修正しました。 [＃11250](https://github.com/pingcap/tidb/pull/11250)
+    - CSVファイル内で欠落している`TIMESTAMP`フィールドを`LOAD DATA`が処理する際に、自動的に追加された値が現在のタイムスタンプではなく0になる問題を修正しました。 [＃11250](https://github.com/pingcap/tidb/pull/11250)
     - `SHOW CREATE USER`文が関連する権限を正しくチェックせず、 `SHOW CREATE USER CURRENT_USER()`によって返される`USER`と`HOST`間違っている可能性がある問題を修正しました[＃11229](https://github.com/pingcap/tidb/pull/11229)
     - JDBC で`executeBatch`を使用すると返される結果が間違っている可能性がある問題を修正しました [＃11290](https://github.com/pingcap/tidb/pull/11290)
     - TiKVサーバーのポートを変更するときにストリーミングクライアントのログ情報の出力を削減します [＃11370](https://github.com/pingcap/tidb/pull/11370)

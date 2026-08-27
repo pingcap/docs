@@ -149,7 +149,7 @@ TiDB バージョン: 4.0.11
 
         - `ErrTaskStatusNotExists`と`capture`セッションの終了が同時に発生した場合、TiCDCサービスが予期せず終了する可能性があるバグを修正[＃1240](https://github.com/pingcap/tiflow/pull/1240)
         - `changefeed`が別の`changefeed` の影響を受ける可能性があるという古い値の切り替え問題を修正しました [＃1347](https://github.com/pingcap/tiflow/pull/1347)
-        - 無効な`sort-engine`パラメータを持つ新しい`changefeed`処理するときにTiCDCサービスがハングする可能性があるバグを修正しました [＃1309](https://github.com/pingcap/tiflow/pull/1309)
+        - 無効な`sort-engine`パラメータを持つ新しい`changefeed`を処理するときにTiCDCサービスがハングする可能性があるバグを修正しました [＃1309](https://github.com/pingcap/tiflow/pull/1309)
         - 非オーナーノードでデバッグ情報を取得する際に発生するpanicの問題を修正[＃1349](https://github.com/pingcap/tiflow/pull/1349)
         - テーブルを追加または削除したときに、 `ticdc_processor_num_of_tables`と`ticdc_processor_table_resolved_ts`メトリックが正しく更新されない問題を修正しました。 [＃1351](https://github.com/pingcap/tiflow/pull/1351)
         - テーブルを追加するときにプロセッサがクラッシュした場合に潜在的なデータ損失が発生する問題を修正しました [＃1363](https://github.com/pingcap/tiflow/pull/1363)

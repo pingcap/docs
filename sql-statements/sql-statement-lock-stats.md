@@ -103,7 +103,7 @@ mysql> SHOW WARNINGS;
 6 rows in set (0.01 sec)
 ```
 
-パーティション`p1`の統計情報をロックし、 `ANALYZE`を実行します。警告メッセージには、 `ANALYZE`文がパーティション`p1`スキップしたことが示されています。
+パーティション`p1`の統計情報をロックし、 `ANALYZE`を実行します。警告メッセージには、 `ANALYZE`文がパーティション`p1`をスキップしたことが示されています。
 
 ```sql
 mysql> LOCK STATS t PARTITION p1;

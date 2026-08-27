@@ -39,7 +39,7 @@ TiProxy Control は、次の2つの方法のいずれかを使用してインス
 
 #### TiUPを使用してインストール {#install-using-tiup}
 
-[TiUP](/tiup/tiup-overview.md)インストールした後、 `tiup install tiproxy`コマンドを使用して TiProxy と TiProxy Control のバイナリプログラムをダウンロードしてインストールできます。インストール後、 `tiup --binary tiproxy`コマンドを使用して TiProxy のインストールパスを確認できます。TiProxy Control は TiProxy と同じディレクトリにあります。
+[TiUP](/tiup/tiup-overview.md)をインストールした後、 `tiup install tiproxy`コマンドを使用して TiProxy と TiProxy Control のバイナリプログラムをダウンロードしてインストールできます。インストール後、 `tiup --binary tiproxy`コマンドを使用して TiProxy のインストールパスを確認できます。TiProxy Control は TiProxy と同じディレクトリにあります。
 
 例えば：
 

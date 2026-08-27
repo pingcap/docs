@@ -5,7 +5,7 @@ summary: TiDB データベースの ALTER INDEX の使用法の概要。
 
 # ALTER INDEX {#alter-index}
 
-`ALTER INDEX`文は、インデックスの可視性を`Visible`または`Invisible`に変更するために使用されます。不可視インデックスはDML文によって維持されますが、クエリオプティマイザでは使用されません。これは、インデックスを恒久的に削除する前に二重チェックを行いたい場合に便利です。TiDB v8.0.0以降では、システム変数[`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)変更することで、オプティマイザが不可視インデックスを選択するように設定できます。
+`ALTER INDEX`文は、インデックスの可視性を`Visible`または`Invisible`に変更するために使用されます。不可視インデックスはDML文によって維持されますが、クエリオプティマイザでは使用されません。これは、インデックスを恒久的に削除する前に二重チェックを行いたい場合に便利です。TiDB v8.0.0以降では、システム変数[`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)を変更することで、オプティマイザが不可視インデックスを選択するように設定できます。
 
 ## 概要 {#synopsis}
 

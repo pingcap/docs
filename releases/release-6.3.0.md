@@ -185,7 +185,7 @@ TiDBバージョン: 6.3.0-DMR
 
 ### データ移行 {#data-migration}
 
-- TiDB Lightning は[Apache HiveによってエクスポートされたParquetファイルをTiDBにインポートする](/tidb-lightning/tidb-lightning-data-source.md#parquet)インポートする [#37536](https://github.com/pingcap/tidb/issues/37536) @[buchuitoudegou](https://github.com/buchuitoudegou)
+- TiDB Lightning は[Apache HiveによってエクスポートされたParquetファイルをTiDBにインポートする](/tidb-lightning/tidb-lightning-data-source.md#parquet)ことをサポートしています [#37536](https://github.com/pingcap/tidb/issues/37536) @[buchuitoudegou](https://github.com/buchuitoudegou)
 
 - DM に新しい設定項目`safe-mode-duration`が追加されました [#6224](https://github.com/pingcap/tiflow/issues/6224) @[okJiang](https://github.com/okJiang)
 

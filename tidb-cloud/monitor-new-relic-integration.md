@@ -88,7 +88,7 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 
 1. 新しいダッシュボード用のJSONファイルを準備します。
 
-    1. テンプレートの JSON ファイルを[ここ](https://github.com/pingcap/diag/blob/integration/integration/dashboards/newrelic-dashboard.json)ダウンロードします。
+    1. テンプレートの JSON ファイルを[ここ](https://github.com/pingcap/diag/blob/integration/integration/dashboards/newrelic-dashboard.json)からダウンロードします。
 
     2. JSONファイルで、4行目に`"permissions": "PUBLIC_READ_WRITE"`以下のように追加します。
 

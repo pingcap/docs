@@ -188,7 +188,7 @@ TiDB バージョン: 7.4.0
 
     SQL実行の問題をトラブルシューティングする際には、根本原因を特定するために、TiDBコンポーネントログの内容を相関させる必要があることがよくあります。v7.4.0以降、TiDBはセッション接続ID（ `CONNECTION_ID` ）をセッション関連ログ（TiDBログ、スロークエリログ、TiKVコプロセッサからのスローログなど）に書き込むことができます。セッション接続IDに基づいて複数の種類のログの内容を相関させることで、トラブルシューティングと診断の効率を向上させることができます。
 
-    さらに、セッションレベルのシステム変数[`tidb_session_alias`](/system-variables.md#tidb_session_alias-new-in-v740)設定することで、上記のログにカスタム識別子を追加できます。ログにアプリケーション識別情報を挿入できるこの機能により、ログの内容とアプリケーションを関連付け、アプリケーションからログへのリンクを構築し、診断の難易度を軽減できます。
+    さらに、セッションレベルのシステム変数[`tidb_session_alias`](/system-variables.md#tidb_session_alias-new-in-v740)を設定することで、上記のログにカスタム識別子を追加できます。ログにアプリケーション識別情報を挿入できるこの機能により、ログの内容とアプリケーションを関連付け、アプリケーションからログへのリンクを構築し、診断の難易度を軽減できます。
 
 - TiDB Dashboardは、実行計画をテーブルビューで表示することをサポートしています[＃1589](https://github.com/pingcap/tidb-dashboard/issues/1589) @[baurine](https://github.com/baurine)
 
@@ -295,7 +295,7 @@ TiDB バージョン: 7.4.0
 
     - パーティションテーブル[＃47071](https://github.com/pingcap/tidb/issues/47071) での`ANALYZE`操作のメモリ使用量とパフォーマンスを最適化します [＃46804](https://github.com/pingcap/tidb/issues/46804) @[hawkingrei](https://github.com/hawkingrei) [＃47104](https://github.com/pingcap/tidb/issues/47104)
     - 統計ガベージコレクションメモリ使用量とパフォーマンスを最適化します [＃31778](https://github.com/pingcap/tidb/issues/31778) @[winoros](https://github.com/winoros)
-    - インデックスマージ交差のプッシュダウン`limit`最適化してクエリパフォーマンスを向上させる [＃46863](https://github.com/pingcap/tidb/issues/46863) @[AilinKid](https://github.com/AilinKid)
+    - インデックスマージ交差のプッシュダウン`limit`を最適化してクエリパフォーマンスを向上させる [＃46863](https://github.com/pingcap/tidb/issues/46863) @[AilinKid](https://github.com/AilinKid)
     - `IndexLookup`多くのテーブル取得タスクが含まれる場合に、誤ってフルテーブルスキャンを選択する可能性を最小限に抑えるようにコストモデルを改善します[＃45132](https://github.com/pingcap/tidb/issues/45132) @[qw4990](https://github.com/qw4990)
     - 結合除去ルールを最適化して、 `join on unique keys` のクエリパフォーマンスを向上させます。 [＃46248](https://github.com/pingcap/tidb/issues/46248) @[fixdb](https://github.com/fixdb)
     - 実行エラーを回避するために、多値インデックス列の照合順序を`binary`に変更します[＃46717](https://github.com/pingcap/tidb/issues/46717) @[YangKeao](https://github.com/YangKeao)
@@ -436,7 +436,7 @@ TiDB バージョン: 7.4.0
 
     - TiDB Lightning
 
-        - TiDB Lightningがテーブル`NONCLUSTERED auto_increment`と`AUTO_ID_CACHE=1`インポートした後、データを挿入するとエラーが返される問題を修正しました[＃46100](https://github.com/pingcap/tidb/issues/46100) @[tiancaiamao](https://github.com/tiancaiamao)
+        - TiDB Lightningがテーブル`NONCLUSTERED auto_increment`と`AUTO_ID_CACHE=1`をインポートした後、データを挿入するとエラーが返される問題を修正しました[＃46100](https://github.com/pingcap/tidb/issues/46100) @[tiancaiamao](https://github.com/tiancaiamao)
         - `checksum = "optional"` のときにチェックサムがエラーを報告する問題を修正しました [＃45382](https://github.com/pingcap/tidb/issues/45382) @[lyzx2001](https://github.com/lyzx2001)
         - PDクラスタアドレスが変更されるとデータのインポートが失敗する問題を修正しました [＃43436](https://github.com/pingcap/tidb/issues/43436) @[lichunzhu](https://github.com/lichunzhu)
 
