@@ -531,7 +531,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     - TiDB Data Migration (DM)
 
         - ステータスを照会するときにのみ同期メトリックが更新される問題を修正しました [＃4281](https://github.com/pingcap/tiflow/issues/4281)
-        - セーフモードでの更新ステートメントの実行エラーにより、DMワーカーがpanicになる可能性がある問題を修正しました[＃4317](https://github.com/pingcap/tiflow/issues/4317)
+        - セーフモードでの更新ステートメントの実行エラーにより、DM-workerがpanicになる可能性がある問題を修正しました[＃4317](https://github.com/pingcap/tiflow/issues/4317)
         - 長いvarcharsがエラーを報告するバグを修正`Column length too big` [＃4637](https://github.com/pingcap/tiflow/issues/4637)
         - 複数の DM ワーカーが同じアップストリームからデータを書き込むことで発生する競合の問題を修正しました。 [＃3737](https://github.com/pingcap/tiflow/issues/3737)
         - ログに「チェックポイントに変更はありません。同期フラッシュチェックポイントをスキップしてください」というメッセージが数百件出力され、レプリケーションが非常に遅くなる問題を修正しました[＃4619](https://github.com/pingcap/tiflow/issues/4619)

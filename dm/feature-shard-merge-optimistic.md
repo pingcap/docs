@@ -107,7 +107,7 @@ ALTER TABLE `tbl00` ADD COLUMN `Age` INT DEFAULT -1;
 
 ## 実装原理 {#implementation-principle}
 
-楽観的モードでは、DMワーカーは上流からDDL文を受信すると、更新されたテーブルスキーマをDMマスターに転送します。DMワーカーは各シャードテーブルの現在のスキーマを追跡し、DMマスターはこれらのスキーマを、各シャードテーブルのDML文と互換性のある複合スキーマにマージします。その後、DMマスターは対応するDDL文を下流に移行します。DML文は下流に直接移行されます。
+楽観的モードでは、DM-workerは上流からDDL文を受信すると、更新されたテーブルスキーマをDM-masterに転送します。DM-workerは各シャードテーブルの現在のスキーマを追跡し、DM-masterはこれらのスキーマを、各シャードテーブルのDML文と互換性のある複合スキーマにマージします。その後、DM-masterは対応するDDL文を下流に移行します。DML文は下流に直接移行されます。
 
 ![optimistic-ddl-flow](/media/dm/optimistic-ddl-flow.png)
 

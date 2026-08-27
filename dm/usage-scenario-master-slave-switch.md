@@ -16,7 +16,7 @@ DM-worker が接続するアップストリーム MySQL インスタンスでダ
 
 GTID セットの詳細については、 [MySQLドキュメント](https://dev.mysql.com/doc/refman/8.0/en/replication-gtids-concepts.html#replication-gtids-concepts-gtid-sets)を参照してください。
 
-## 仮想IP経由でDMワーカー接続を切り替える {#switch-dm-worker-connection-via-virtual-ip}
+## 仮想IP経由でDM-worker接続を切り替える {#switch-dm-worker-connection-via-virtual-ip}
 
 DM-worker が仮想 IP (VIP) を介してアップストリーム MySQL インスタンスに接続する場合、VIP 接続を別の MySQL インスタンスに切り替えると、アップストリーム接続アドレスは変更されずに、DM-worker に接続されている MySQL インスタンスが切り替わります。
 

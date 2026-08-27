@@ -3,7 +3,7 @@ title: DM-master Configuration File
 summary: DM-master の設定ファイルについて説明します。
 ---
 
-# DMマスターコンフィグレーションファイル {#dm-master-configuration-file}
+# DM-masterコンフィグレーションファイル {#dm-master-configuration-file}
 
 このドキュメントでは、構成ファイル テンプレートと、このファイル内の各設定パラメータの説明を含む、DM-master の構成について説明します。
 
@@ -60,7 +60,7 @@ secret-key-path = "/path/to/secret/key"
 
 #### `master-addr` {#master-addr}
 
-- サービスを提供するDMマスターのアドレスを指定します。IPアドレスを省略し、ポート番号のみ（例： `":8261"` ）を指定することもできます。
+- サービスを提供するDM-masterのアドレスを指定します。IPアドレスを省略し、ポート番号のみ（例： `":8261"` ）を指定することもできます。
 
 #### `advertise-addr` {#advertise-addr}
 
@@ -72,7 +72,7 @@ secret-key-path = "/path/to/secret/key"
 
 #### `advertise-peer-urls` {#advertise-peer-urls}
 
-- DMマスターが外部にアドバタイズするピアURLを指定します。デフォルト値は`advertise-peer-urls`で、 [`peer-urls`](#peer-urls)と同じです。
+- DM-masterが外部にアドバタイズするピアURLを指定します。デフォルト値は`advertise-peer-urls`で、 [`peer-urls`](#peer-urls)と同じです。
 
 #### `initial-cluster` {#initial-cluster}
 

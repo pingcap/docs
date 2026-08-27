@@ -36,8 +36,8 @@ summary: DM を使用する際のエラー システムと一般的なエラー�
     | `dump-unit`       | ダンプ処理装置                             | `[code=32001:class=dump-unit:scope=internal:level=high] mydumper runs with error: CRITICAL **: 15:12:17.559: Error connecting to database: Access denied for user 'root'@'172.17.0.1' (using password: NO)`                                                                                      |
     | `load-unit`       | 負荷処理装置                              | `[code=34002:class=load-unit:scope=internal:level=high] corresponding ending of sql: ')' not found`                                                                                                                                                                                              |
     | `sync-unit`       | 同期処理ユニット                            | `[code=36027:class=sync-unit:scope=internal:level=high] Column count doesn't match value count: 9 (columns) vs 10 (values)`                                                                                                                                                                      |
-    | `dm-master`       | DMマスターサービス                          | `[code=38008:class=dm-master:scope=internal:level=high] grpc request error: rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection error: desc = "transport: Error while dialing dial tcp 172.17.0.2:8262: connect: connection refused"` |
-    | `dm-worker`       | DMワーカーサービス                          | `[code=40066:class=dm-worker:scope=internal:level=high] ExecuteDDL timeout, try use query-status to query whether the DDL is still blocking`                                                                                                                                                     |
+    | `dm-master`       | DM-masterサービス                          | `[code=38008:class=dm-master:scope=internal:level=high] grpc request error: rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection error: desc = "transport: Error while dialing dial tcp 172.17.0.2:8262: connect: connection refused"` |
+    | `dm-worker`       | DM-workerサービス                          | `[code=40066:class=dm-worker:scope=internal:level=high] ExecuteDDL timeout, try use query-status to query whether the DDL is still blocking`                                                                                                                                                     |
     | `dm-tracer`       | DMトレーサーサービス                         | `[code=42004:class=dm-tracer:scope=internal:level=medium] trace event test.1 not found`                                                                                                                                                                                                          |
     | `schema-tracker`  | スキーマトラッカー（増分データレプリケーション中）           | `[code=44006:class=schema-tracker:scope=internal:level=high],"cannot track DDL: ALTER TABLE test DROP COLUMN col1"`                                                                                                                                                                              |
     | `scheduler`       | 操作のスケジュール設定（データ移行タスク）               | `[code=46001:class=scheduler:scope=internal:level=high],"the scheduler has not started"`                                                                                                                                                                                                         |
@@ -77,7 +77,7 @@ DM の実行中にエラーが発生した場合は、次の手順に従って�
 
 1. `query-status`コマンドを実行して、タスクの実行ステータスとエラー出力を確認します。
 
-2. エラーに関連するログファイルを確認してください。ログファイルはDMマスターノードとDMワーカーノードにあります。エラーに関する重要な情報を取得するには、 [エラーシステム](#error-system)を参照してください。その後、 [よくあるエラーの処理](#handle-common-errors)セクションを参照して解決策を見つけてください。
+2. エラーに関連するログファイルを確認してください。ログファイルはDM-masterノードとDM-workerノードにあります。エラーに関する重要な情報を取得するには、 [エラーシステム](#error-system)を参照してください。その後、 [よくあるエラーの処理](#handle-common-errors)セクションを参照して解決策を見つけてください。
 
 3. このドキュメントにエラーが記載されておらず、ログを確認したりメトリックを監視したりしても問題を解決できない場合は、PingCAP またはコミュニティから[サポートを受けて](/support.md)ください。
 
@@ -146,7 +146,7 @@ DMは移行タスクにおいてデータを下流へ並行して移行する機
 
 3. アップストリーム内の対応するbinlogファイルをリレーログファイルとしてリレーログディレクトリにコピーします。
 
-4. リレーログディレクトリ内の対応する`relay.meta`のファイルを更新し、次のbinlogファイルから取得します。DMワーカーに`enable_gtid`を`true`に指定した場合は、 `relay.meta`ファイルを更新するときに、次のbinlogファイルに対応するGTIDを変更する必要があります。それ以外の場合は、GTIDを変更する必要はありません。
+4. リレーログディレクトリ内の対応する`relay.meta`のファイルを更新し、次のbinlogファイルから取得します。DM-workerに`enable_gtid`を`true`に指定した場合は、 `relay.meta`ファイルを更新するときに、次のbinlogファイルに対応するGTIDを変更する必要があります。それ以外の場合は、GTIDを変更する必要はありません。
 
     例: エラーが発生した場合、 `binlog-name = "mysql-bin.004451"`と`binlog-pos = 2453`をそれぞれ`binlog-name = "mysql-bin.004452"`と`binlog-pos = 4`に更新し、 `binlog-gtid`を`f0e914ef-54cf-11e7-813d-6c92bf2fa791:1-138218058`に更新します。
 

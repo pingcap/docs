@@ -358,7 +358,7 @@ DM v2.0以降のバージョンでは、 `heartbeat`機能はデフォルトで�
 
 ## DM マスターが再起動後にクラスターに参加できず、DM が「埋め込み etcd の開始に失敗しました。RawCause: メンバー xxx はすでにブートストラップされています」というエラーを報告するのはなぜですか? {#why-does-a-dm-master-fail-to-join-the-cluster-after-it-restarts-and-dm-reports-the-error-fail-to-start-embed-etcd-rawcause-member-xxx-has-already-been-bootstrapped}
 
-DMマスターが起動すると、DMはetcd情報をカレントディレクトリに記録します。DMマスターの再起動後にディレクトリが変更されると、DMはetcd情報にアクセスできなくなり、再起動に失敗します。
+DM-masterが起動すると、DMはetcd情報をカレントディレクトリに記録します。DM-masterの再起動後にディレクトリが変更されると、DMはetcd情報にアクセスできなくなり、再起動に失敗します。
 
 この問題を解決するには、 TiUPを使用して DM クラスターをメンテナンスすることをお勧めします。バイナリファイルを使用してデプロイする必要がある場合は、DM マスターの設定ファイルで`data-dir`を絶対パスで設定するか、コマンドを実行する現在のディレクトリに注意してください。
 

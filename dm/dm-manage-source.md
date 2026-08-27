@@ -138,7 +138,7 @@ operate-source show
 }
 ```
 
-## アップストリームのMySQLインスタンスとDMワーカー間のバインディングを変更する {#change-the-bindings-between-upstream-mysql-instances-and-dm-workers}
+## アップストリームのMySQLインスタンスとDM-worker間のバインディングを変更する {#change-the-bindings-between-upstream-mysql-instances-and-dm-workers}
 
 `transfer-source`コマンドを使用して、アップストリーム MySQL インスタンスと DM ワーカー間のバインディングを変更できます。
 

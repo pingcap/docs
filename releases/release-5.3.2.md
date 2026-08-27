@@ -154,7 +154,7 @@ TiDB バージョン: 5.3.2
         - 下流でフィルタリングされたDDLを手動で実行すると、タスク再開が失敗する場合がある問題を修正しました[＃5272](https://github.com/pingcap/tiflow/issues/5272)
         - `SHOW CREATE TABLE`文によって返されるインデックスの先頭に主キーがない場合に発生する DM ワーカーpanicの問題を修正しました。 [＃5159](https://github.com/pingcap/tiflow/issues/5159)
         - GTID が有効になっているときやタスクが自動的に再開されたときに CPU 使用率が上昇し、大量のログが出力される問題を修正しました[＃5063](https://github.com/pingcap/tiflow/issues/5063)
-        - DMマスターの再起動後にリレーログが無効になる可能性がある問題を修正[＃4803](https://github.com/pingcap/tiflow/issues/4803)
+        - DM-masterの再起動後にリレーログが無効になる可能性がある問題を修正[＃4803](https://github.com/pingcap/tiflow/issues/4803)
 
     - TiDB Lightning
 

@@ -25,11 +25,11 @@ DMバイナリはTiDB Toolkitに含まれています。TiDB Toolkitをダウン
 
 | インスタンス      | サーバーアドレス    | ポート  |
 | :------ | :---------- | :--- |
-| DMマスター1 | 192.168.0.4 | 8261 |
-| DMマスター2 | 192.168.0.5 | 8261 |
-| DMマスター3 | 192.168.0.6 | 8261 |
-| DMワーカー1 | 192.168.0.7 | 8262 |
-| DMワーカー2 | 192.168.0.8 | 8262 |
+| DM-master1 | 192.168.0.4 | 8261 |
+| DM-master2 | 192.168.0.5 | 8261 |
+| DM-master3 | 192.168.0.6 | 8261 |
+| DM-worker1 | 192.168.0.7 | 8262 |
+| DM-worker2 | 192.168.0.8 | 8262 |
 
 このシナリオに基づいて、次のセクションでは DM クラスターをデプロイする方法について説明します。
 
@@ -46,11 +46,11 @@ DMバイナリはTiDB Toolkitに含まれています。TiDB Toolkitをダウン
 >     - 各 DM マスターノードは、すべての DM ワーカーノードの`8262`ポートに接続できます。
 >     - 各 DM ワーカーノードは、すべての DM マスターノードの`8261`ポートに接続できます。
 
-### DMマスターをデプロイ {#deploy-dm-master}
+### DM-masterをデプロイ {#deploy-dm-master}
 
 [コマンドラインパラメータ](#dm-master-command-line-parameters)または[設定ファイル](#dm-master-configuration-file)を使用して DM マスターを設定できます。
 
-#### DMマスターのコマンドラインパラメータ {#dm-master-command-line-parameters}
+#### DM-masterのコマンドラインパラメータ {#dm-master-command-line-parameters}
 
 DM マスターのコマンドラインパラメータの説明は次のとおりです。
 
@@ -89,9 +89,9 @@ Usage of dm-master:
 
 > **Note:**
 >
-> 一部の設定がコマンドラインから参照できないため、上記の方法でDMマスターを設定できない場合があります。そのような場合は、代わりに設定ファイルを使用してください。
+> 一部の設定がコマンドラインから参照できないため、上記の方法でDM-masterを設定できない場合があります。そのような場合は、代わりに設定ファイルを使用してください。
 
-#### DMマスター構成ファイル {#dm-master-configuration-file}
+#### DM-master構成ファイル {#dm-master-configuration-file}
 
 以下はDM-masterの設定ファイルです。この方法でDM-masterを設定することをお勧めします。
 
@@ -166,7 +166,7 @@ Usage of worker:
 >
 > 一部の設定がコマンドラインから参照できないため、上記の方法でDM-workerを設定できない場合があります。そのような場合は、代わりに設定ファイルを使用してください。
 
-#### DMワーカー構成ファイル {#dm-worker-configuration-file}
+#### DM-worker構成ファイル {#dm-worker-configuration-file}
 
 以下はDM-workerの設定ファイルです。この方法でDM-workerを設定することをお勧めします。
 

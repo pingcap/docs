@@ -35,10 +35,10 @@ API を使用して、DM クラスターで次のメンテナンス操作を実�
 
 ## クラスターを管理するためのAPI {#apis-for-managing-clusters}
 
-- [DMマスターノードの情報を取得する](#get-the-information-of-a-dm-master-node)
-- [DMマスターノードを停止する](#stop-a-dm-master-node)
-- [DMワーカーノードの情報を取得する](#get-the-information-of-a-dm-worker-node)
-- [DMワーカーノードを停止する](#stop-a-dm-worker-node)
+- [DM-masterノードの情報を取得する](#get-the-information-of-a-dm-master-node)
+- [DM-masterノードを停止する](#stop-a-dm-master-node)
+- [DM-workerノードの情報を取得する](#get-the-information-of-a-dm-worker-node)
+- [DM-workerノードを停止する](#stop-a-dm-worker-node)
 
 ## データソースを管理するためのAPI {#apis-for-managing-data-sources}
 
@@ -53,7 +53,7 @@ API を使用して、DM クラスターで次のメンテナンス操作を実�
 - [データソースのリレーログ機能を開始する](#start-the-relay-log-feature-for-data-sources)
 - [データソースのリレーログ機能を停止する](#stop-the-relay-log-feature-for-data-sources)
 - [不要になったリレーログファイルを消去する](#purge-relay-log-files-that-are-no-longer-required)
-- [データソースとDMワーカー間のバインディングを変更する](#change-the-bindings-between-the-data-source-and-dm-workers)
+- [データソースとDM-worker間のバインディングを変更する](#change-the-bindings-between-the-data-source-and-dm-workers)
 - [データソースのスキーマ名のリストを取得する](#get-the-list-of-schema-names-of-a-data-source)
 - [データソース内の指定されたスキーマのテーブル名のリストを取得します](#get-the-list-of-table-names-of-a-specified-schema-in-a-data-source)
 
@@ -89,7 +89,7 @@ API リクエストの送信後にエラーが発生した場合、返される�
 
 上記の JSON 出力では、 `error_msg`エラーメッセージを示し、 `error_code`対応するエラーコードを示します。
 
-## DMマスターノードの情報を取得する {#get-the-information-of-a-dm-master-node}
+## DM-masterノードの情報を取得する {#get-the-information-of-a-dm-master-node}
 
 このAPIは同期インターフェースです。リクエストが成功すると、対応するノードの情報が返されます。
 
@@ -119,7 +119,7 @@ curl -X 'GET' \
 }
 ```
 
-## DMマスターノードを停止する {#stop-a-dm-master-node}
+## DM-masterノードを停止する {#stop-a-dm-master-node}
 
 このAPIは同期インターフェースです。リクエストが成功した場合、返されるボディのステータスコードは204です。
 
@@ -135,7 +135,7 @@ curl -X 'DELETE' \
   -H 'accept: */*'
 ```
 
-## DMワーカーノードの情報を取得する {#get-the-information-of-a-dm-worker-node}
+## DM-workerノードの情報を取得する {#get-the-information-of-a-dm-worker-node}
 
 このAPIは同期インターフェースです。リクエストが成功すると、対応するノードの情報が返されます。
 
@@ -165,7 +165,7 @@ curl -X 'GET' \
 }
 ```
 
-## DMワーカーノードを停止する {#stop-a-dm-worker-node}
+## DM-workerノードを停止する {#stop-a-dm-worker-node}
 
 このAPIは同期インターフェースです。リクエストが成功した場合、返されるボディのステータスコードは204です。
 
@@ -613,9 +613,9 @@ curl -X 'POST' \
 }'
 ```
 
-## データソースとDMワーカー間のバインディングを変更する {#change-the-bindings-between-the-data-source-and-dm-workers}
+## データソースとDM-worker間のバインディングを変更する {#change-the-bindings-between-the-data-source-and-dm-workers}
 
-このAPIは非同期インターフェースです。リクエストが成功した場合、返されるボディのステータスコードは200です。最新のステータスを確認するには、 [DMワーカーノードの情報を取得する](#get-the-information-of-a-dm-worker-node)を参照してください。
+このAPIは非同期インターフェースです。リクエストが成功した場合、返されるボディのステータスコードは200です。最新のステータスを確認するには、 [DM-workerノードの情報を取得する](#get-the-information-of-a-dm-worker-node)を参照してください。
 
 ### リクエストURI {#request-uri}
 

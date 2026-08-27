@@ -3,7 +3,7 @@ title: DM-worker Configuration File
 summary: DM-worker の設定ファイルについて学習します。
 ---
 
-# DMワーカーコンフィグレーションファイル {#dm-worker-configuration-file}
+# DM-workerコンフィグレーションファイル {#dm-worker-configuration-file}
 
 このドキュメントでは、構成ファイル テンプレートと、このファイル内の各設定パラメータの説明を含む、DM ワーカーの構成について説明します。
 
@@ -54,7 +54,7 @@ cert-allowed-cn = ["dm"]
 
 #### `worker-addr` {#worker-addr}
 
-- サービスを提供するDMワーカーのアドレスを指定します。IPアドレスを省略し、ポート番号のみ（例： `":8262"` ）を指定することもできます。
+- サービスを提供するDM-workerのアドレスを指定します。IPアドレスを省略し、ポート番号のみ（例： `":8262"` ）を指定することもできます。
 
 #### `advertise-addr` {#advertise-addr}
 

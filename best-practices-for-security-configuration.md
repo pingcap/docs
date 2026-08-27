@@ -78,9 +78,9 @@ TiDBのインストールには、デフォルトでコンポーネント間通�
 | TiFlash         | 20170    | プロトコル      |
 | TiFlash         | 20292    | HTTP       |
 | TiFlash         | 8234     | HTTP       |
-| DMマスター          | 8261     | HTTP       |
-| DMマスター          | 8291     | HTTP       |
-| DMワーカー          | 8262     | HTTP       |
+| DM-master          | 8261     | HTTP       |
+| DM-master          | 8291     | HTTP       |
+| DM-worker          | 8262     | HTTP       |
 | TiCDC           | 8300     | HTTP       |
 | TiDB Lightning  | 8289     | HTTP       |
 | TiDB Operator   | 6060     | HTTP       |

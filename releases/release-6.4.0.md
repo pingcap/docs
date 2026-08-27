@@ -446,7 +446,7 @@ TiDBバージョン: 6.4.0-DMR
     - TiDB Data Migration (DM)
 
         - DM WebUI が間違った`allow-list`パラメータを生成する問題を修正 [#7096](https://github.com/pingcap/tiflow/issues/7096) @[zoubingwu](https://github.com/zoubingwu)
-        - DMワーカーが起動または停止時にデータ競合を引き起こす確率がある問題を修正します [#6401](https://github.com/pingcap/tiflow/issues/6401) @[liumengya94](https://github.com/liumengya94)
+        - DM-workerが起動または停止時にデータ競合を引き起こす確率がある問題を修正します [#6401](https://github.com/pingcap/tiflow/issues/6401) @[liumengya94](https://github.com/liumengya94)
         - DM が`UPDATE`または`DELETE`文を複製する際に、対応する行データが存在しない場合、DM がイベントをサイレントに無視する問題を修正します。 [#6383](https://github.com/pingcap/tiflow/issues/6383) @[GMHDBJD](https://github.com/GMHDBJD)
         - `secondsBehindMaster`コマンドを実行した後、 `query-status`フィールドが表示されない問題を修正しました [#7189](https://github.com/pingcap/tiflow/issues/7189) @[GMHDBJD](https://github.com/GMHDBJD)
         - チェックポイントの更新時に大きなトランザクションが発生する可能性がある問題を修正しました [#5010](https://github.com/pingcap/tiflow/issues/5010) @[lance6716](https://github.com/lance6716)
