@@ -219,7 +219,7 @@ pip install -r requirements.txt
     python mysqlclient_example.py
     ```
 
-2. [期待される出力.txt](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart/blob/main/Expected-Output.txt)をチェックして、出力が一致するかどうかを確認してください。
+2. [Expected-Output.txt](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart/blob/main/Expected-Output.txt)をチェックして、出力が一致するかどうかを確認してください。
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
