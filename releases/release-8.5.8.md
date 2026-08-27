@@ -126,3 +126,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
         - Fix the issue that `IMPORT INTO` might fail with the `lock held by current process` error after an import error or retry when local engine files are not cleaned up correctly [#65645](https://github.com/pingcap/tidb/issues/65645) @[D3Hunter](https://github.com/D3Hunter) <!-- component: lightning --> <!-- pr: https://github.com/pingcap/tidb/pull/69478 -->
         - Fix the issue that `IMPORT INTO` silently writes incorrect values for repeated dictionary-encoded Parquet `DECIMAL` values [#70365](https://github.com/pingcap/tidb/issues/70365) @[joechenrh](https://github.com/joechenrh) <!-- component: lightning --> <!-- pr: https://github.com/pingcap/tidb/pull/70461 -->
         - Fix the issue that `IMPORT INTO` or related local backend ingest tasks might hang when job generation is canceled [#69240](https://github.com/pingcap/tidb/issues/69240) @[D3Hunter](https://github.com/D3Hunter) <!-- component: lightning, dxf --> <!-- pr: https://github.com/pingcap/tidb/pull/70234 -->
+
+> **Note:**
+>
+> These release notes focus on user-facing changes in TiDB v8.5.8. For code changes between v8.5.7 and v8.5.8, see [#68750](https://github.com/pingcap/tidb/issues/68750#issuecomment-5436067898) on GitHub.
