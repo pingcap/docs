@@ -28,7 +28,7 @@ TiDB Cloud で Amazon MSK Provisioned のダウンストリームサービス用
 
 必要なアベイラビリティゾーンにまたがる少なくとも 3つのプライベートサブネットを持つ Amazon VPC がすでにある場合は、このステップをスキップできます。
 
-1. [Amazon VPC コンソール](https://console.aws.amazon.com/vpc/)で、TiDB Cloud Premium インスタンスが稼働する各アベイラビリティゾーンに 1つずつ、合計3つのプライベートサブネットを持つ [VPC を作成](https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html)します。これらのサブネットは同じ AZ に存在し、AZ 名ではなく AZ ID で一致している必要があります。
+1. [Amazon VPC コンソール](https://console.aws.amazon.com/vpc/)で、TiDB Cloud Premium インスタンスが稼働する各アベイラビリティゾーンに 1つずつ、合計3つのプライベートサブネットを持つ [VPC を作成](https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html)します。これらのサブネットは、AZ 名ではなく AZ ID に基づいて、TiDB Cloud Premium インスタンスが稼働する各アベイラビリティゾーンと一致している必要があります。
 2. VPC ダッシュボードで、後から起動するクライアント EC2 インスタンスがプライベートネットワーク経由で MSK クラスターと通信できるように、ルートテーブルとセキュリティグループを設定します。
 3. サブネットの AZ ID を記録します。これらのサブネットは、[MSK クラスターを作成する](#step-3-create-an-amazon-msk-provisioned-cluster)際に選択します。
 
