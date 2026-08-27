@@ -180,7 +180,7 @@ TiDB バージョン: 8.2.0
 
     - バージョン8.2.0以降、 [`enable-replica-selector-v2`](/tidb-configuration-file.md#enable-replica-selector-v2-new-in-v800)設定項目は非推奨となりました。TiKVへのRPCリクエスト送信時には、デフォルトで新しいバージョンのリージョンレプリカセレクタが使用されます。
     - バージョン8.2.0以降、 BRスナップショット復元パラメータ`--concurrency`は非推奨となりました。代替手段として、 [`--tikv-max-restore-concurrency`](/br/use-br-command-line-tool.md#common-options)を使用して、スナップショット復元中のTiKVノードごとの同時実行タスクの最大数を設定できます。
-    - v8.2.0 以降、 BRスナップショット復元パラメータ`--granularity`は非推奨となり、 [粗視化リージョン散乱アルゴリズム](/br/br-snapshot-guide.md#restore-cluster-snapshots)デフォルトで有効になります。
+    - v8.2.0 以降、 BRスナップショット復元パラメータ`--granularity`は非推奨となり、 [粗視化リージョン散乱アルゴリズム](/br/br-snapshot-guide.md#restore-cluster-snapshots)はデフォルトで有効になります。
 
 - 以下の機能は、将来のバージョンで廃止される予定です。
 
