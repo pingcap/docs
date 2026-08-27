@@ -13,41 +13,41 @@ TiDBバージョン: 3.0.19
 
 - PD
 
-    - インポートパスを`pingcap/pd`から`tikv/pd` に変更します [＃2779](https://github.com/pingcap/pd/pull/2779)
-    - 著作権情報を`PingCAP, Inc`から`TiKV Project Authors` に変更します [＃2777](https://github.com/pingcap/pd/pull/2777)
+    - インポートパスを`pingcap/pd`から`tikv/pd` に変更します [#2779](https://github.com/pingcap/pd/pull/2779)
+    - 著作権情報を`PingCAP, Inc`から`TiKV Project Authors` に変更します [#2777](https://github.com/pingcap/pd/pull/2777)
 
 ## 改善点 {#improvements}
 
 - TiDB
 
-    - 障害回復によるQPSパフォーマンスへの影響を軽減する[＃19764](https://github.com/pingcap/tidb/pull/19764)
-    - `union`演算子の同時実行の調整をサポート [＃19885](https://github.com/pingcap/tidb/pull/19885)
+    - 障害回復によるQPSパフォーマンスへの影響を軽減する[#19764](https://github.com/pingcap/tidb/pull/19764)
+    - `union`演算子の同時実行の調整をサポート [#19885](https://github.com/pingcap/tidb/pull/19885)
 
 - TiKV
 
-    - `sync-log`を調整不可の値である`true`に設定する [＃8636](https://github.com/tikv/tikv/pull/8636)
+    - `sync-log`を調整不可の値である`true`に設定する [#8636](https://github.com/tikv/tikv/pull/8636)
 
 - PD
 
-    - PD再起動アラートルールを追加する [＃2789](https://github.com/pingcap/pd/pull/2789)
+    - PD再起動アラートルールを追加する [#2789](https://github.com/pingcap/pd/pull/2789)
 
 ## バグ修正 {#bug-fixes}
 
 - TiDB
 
-    - `slow-log`ファイルが存在しない場合に発生するクエリエラーを修正[＃20050](https://github.com/pingcap/tidb/pull/20050)
-    - `SHOW STATS_META`と`SHOW STATS_BUCKET`の権限チェックを追加する[＃19759](https://github.com/pingcap/tidb/pull/19759)
-    - 小数型を整数型に変更することを禁止する[＃19681](https://github.com/pingcap/tidb/pull/19681)
-    - `ENUM` / `SET`型列を変更する際に制約がチェックされない問題を修正 [＃20045](https://github.com/pingcap/tidb/pull/20045)
-    - panic後にtidb-serverがテーブルロックを解放しないバグを修正[＃20021](https://github.com/pingcap/tidb/pull/20021)
-    - `WHERE`句で`OR`演算子が正しく処理されないバグを修正 [＃19901](https://github.com/pingcap/tidb/pull/19901)
+    - `slow-log`ファイルが存在しない場合に発生するクエリエラーを修正[#20050](https://github.com/pingcap/tidb/pull/20050)
+    - `SHOW STATS_META`と`SHOW STATS_BUCKET`の権限チェックを追加する[#19759](https://github.com/pingcap/tidb/pull/19759)
+    - 小数型を整数型に変更することを禁止する[#19681](https://github.com/pingcap/tidb/pull/19681)
+    - `ENUM` / `SET`型列を変更する際に制約がチェックされない問題を修正 [#20045](https://github.com/pingcap/tidb/pull/20045)
+    - panic後にtidb-serverがテーブルロックを解放しないバグを修正[#20021](https://github.com/pingcap/tidb/pull/20021)
+    - `WHERE`句で`OR`演算子が正しく処理されないバグを修正 [#19901](https://github.com/pingcap/tidb/pull/19901)
 
 - TiKV
 
-    - 理由フレーズが欠落している応答を解析するときに TiKV がパニックを起こすバグを修正[＃8540](https://github.com/tikv/tikv/pull/8540)
+    - 理由フレーズが欠落している応答を解析するときに TiKV がパニックを起こすバグを修正[#8540](https://github.com/tikv/tikv/pull/8540)
 
 - ツール
 
     - TiDB Lightning
 
-        - 厳密モードでCSVに無効なUTF文字が検出された場合、 TiDB Lightningプロセスが時間内に終了しない問題を修正しました。 [＃378](https://github.com/pingcap/tidb-lightning/pull/378)
+        - 厳密モードでCSVに無効なUTF文字が検出された場合、 TiDB Lightningプロセスが時間内に終了しない問題を修正しました。 [#378](https://github.com/pingcap/tidb-lightning/pull/378)

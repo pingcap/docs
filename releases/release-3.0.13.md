@@ -13,8 +13,8 @@ TiDB バージョン: 3.0.13
 
 - TiDB
 
-    - ユーザーが重複するデータの複数行を挿入する必要がある場合に、トランザクション内で`INSERT ... ON DUPLICATE KEY UPDATE`文が誤って実行される可能性があるという、チェックされていない`MemBuffer`によって発生する問題を修正しました。 [＃16690](https://github.com/pingcap/tidb/pull/16690)
+    - ユーザーが重複するデータの複数行を挿入する必要がある場合に、トランザクション内で`INSERT ... ON DUPLICATE KEY UPDATE`文が誤って実行される可能性があるという、チェックされていない`MemBuffer`によって発生する問題を修正しました。 [#16690](https://github.com/pingcap/tidb/pull/16690)
 
 - TiKV
 
-    - `Region Merge`繰り返し実行するとシステムが停止し、サービスが利用できなくなる問題を修正[＃7612](https://github.com/tikv/tikv/pull/7612)
+    - `Region Merge`繰り返し実行するとシステムが停止し、サービスが利用できなくなる問題を修正[#7612](https://github.com/tikv/tikv/pull/7612)
