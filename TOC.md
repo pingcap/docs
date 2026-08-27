@@ -299,9 +299,9 @@
       - [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
     - [インデックスアドバイザー](/index-advisor.md)
 - チュートリアル
-  - [1つのリージョンに複数の可用性ゾーンを展開](/multi-data-centers-in-one-city-deployment.md)
-  - [2つのリージョンに3つの可用性ゾーンを展開](/three-data-centers-in-two-cities-deployment.md)
-  - [1つのリージョン展開で2つの可用性ゾーンを実現](/two-data-centers-in-one-city-deployment.md)
+  - [1つのリージョンに複数のアベイラビリティゾーンを展開](/multi-data-centers-in-one-city-deployment.md)
+  - [2つのリージョンに3つのアベイラビリティゾーンを展開](/three-data-centers-in-two-cities-deployment.md)
+  - [1つのリージョン展開で2つのアベイラビリティゾーンを実現](/two-data-centers-in-one-city-deployment.md)
   - 履歴データを読む
     - ステイル読み取りを使用する（推奨）
       - [ステイル読み取りの使用シナリオ](/stale-read.md)

@@ -1050,7 +1050,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - デフォルト値: `4096`
 - 範囲: `[0, 9223372036854775807]`
 - 単位：バイト
-- この変数は、 [`tidb_replica_read`](#tidb_replica_read-new-in-v40)が`closest-adaptive`に設定されている場合、TiDBサーバーが読み取り要求を TiDBサーバーと同じ可用性ゾーン内のレプリカに送信することを優先するしきい値を制御するために使用されます。推定結果がこのしきい値以上の場合、TiDB は読み取り要求を同じ可用性ゾーン内のレプリカに送信することを優先します。それ以外の場合は、TiDB はリーダーレプリカに読み取り要求を送信します。
+- この変数は、 [`tidb_replica_read`](#tidb_replica_read-new-in-v40)が`closest-adaptive`に設定されている場合、TiDBサーバーが読み取り要求を TiDBサーバーと同じアベイラビリティゾーン内のレプリカに送信することを優先するしきい値を制御するために使用されます。推定結果がこのしきい値以上の場合、TiDB は読み取り要求を同じアベイラビリティゾーン内のレプリカに送信することを優先します。それ以外の場合は、TiDB はリーダーレプリカに読み取り要求を送信します。
 
 ### tidb_advancer_check_point_lag_limit <span class="version-mark">New in v8.5.5</span>
 
