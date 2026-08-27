@@ -229,7 +229,7 @@ TPCCを使用してオンラインアプリケーションをシミュレート�
 - TPMの列の数値は、TPMの減少率（パーセント）を示しています。
 - P99、P90、およびAVG列の数値は、レイテンシーの増加率を示しています。
 
-テスト結果によると、同時実行数が少ないほど、データインポートがTPCCの結果に与える影響は大きくなる。同時実行数が64以上の場合、データインポートがTPCCの結果に与える影響はごくわずかである。
+テスト結果によると、同時実行数が少ないほど、データインポートがTPCCの結果に与える影響は大きくなります。同時実行数が64以上の場合、データインポートがTPCCの結果に与える影響はごくわずかです。
 
 したがって、TiDBクラスタにレイテンシに敏感なアプリケーションがあり、かつ同時実行数が少ない場合は、 TiDB Lightningを使用してクラスタにデータをインポートし**ないこと**を強くお勧めします。これは、オンラインアプリケーションに大きな影響を与える可能性があります。
 
@@ -264,7 +264,7 @@ io-concurrency = 5
 
 インポート処理中、各テーブルはインデックスを格納するための「インデックスエンジン」1つと、行データを格納するための複数の「データエンジン」に分割されます。
 
-`index-concurrency`インデックスエンジンの最大同時実行数を制御します。 `index-concurrency`を調整する際は、CPU が最大限に活用されるように`index-concurrency * the number of source files of each table > region-concurrency`も必ず調整してください。比率は通常 1.5 ～ 2 です。 `index-concurrency`を高く設定しすぎたり、2 (デフォルト値) より低く設定したりしないでください。 `index-concurrency`高すぎると、パイプラインが多数構築され、インデックスエンジンのインポート ステージが滞留します。
+`index-concurrency`インデックスエンジンの最大同時実行数を制御します。 `index-concurrency`を調整する際は、CPU が最大限に活用されるように`index-concurrency * the number of source files of each table > region-concurrency`も必ず調整してください。比率は通常 1.5 ～ 2 です。 `index-concurrency`を高く設定しすぎたり、2 (デフォルト値) より低く設定したりしないでください。 `index-concurrency`高すぎると、パイプラインが多数構築され、インデックスエンジンのインポートステージが滞留します。
 
 `table-concurrency`についても同様です。 `table-concurrency * the number of source files of each table > region-concurrency`がCPUをフル活用していることを確認してください。推奨値は`region-concurrency * 4 / the number of source files of each table`前後で、4を下回らないようにしてください。
 

@@ -99,7 +99,7 @@ MySQLのRead Committed分離レベルは、ほとんどの場合、Consistent Re
 
 トランザクション分離レベルは次のように表示および変更できます。
 
-現在のセッションのトランザクション分離レベルを表示する。
+現在のセッションのトランザクション分離レベルを表示します。
 
 ```sql
 SHOW VARIABLES LIKE 'transaction_isolation';

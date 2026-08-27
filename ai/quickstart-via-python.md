@@ -13,7 +13,7 @@ aliases: ['/ja/tidb/stable/vector-search-get-started-using-python/','/ja/tidb/de
 - TiDB Python SDKを使用してTiDBに接続します。
 - 一般的な埋め込みモデルを使用してテキスト埋め込みを生成します。
 - ベクトルをTiDBテーブルに格納します。
-- ベクトル類似度を用いて意味検索を実行する。
+- ベクトル類似度を用いて意味検索を実行します。
 
 > **Note:**
 >

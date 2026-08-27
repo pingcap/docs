@@ -13,7 +13,7 @@ Airbyteは、わずか数ステップでローカル環境にデプロイでき�
 
 1. ワークスペースに[Docker](https://www.docker.com/products/docker-desktop)をインストールします。
 
-2. Airbyteのソースコードをクローンする。
+2. Airbyteのソースコードをクローンします。
 
     ```shell
     git clone https://github.com/airbytehq/airbyte.git && \

@@ -70,7 +70,7 @@ TiDB は次の種類のバックグラウンドタスクをサポートしてい
     ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES="");
     ```
 
-4. `default`リソースグループのバックグラウンドタスクの種類を表示する。
+4. `default`リソースグループのバックグラウンドタスクの種類を表示します。
 
     ```sql
     SELECT * FROM information_schema.resource_groups WHERE NAME="default";

@@ -26,7 +26,7 @@ DESC USER_PRIVILEGES;
 4 rows in set (0.00 sec)
 ```
 
-`USER_PRIVILEGES`表の情報を確認する。
+`USER_PRIVILEGES`表の情報を確認します。
 
 ```sql
 SELECT * FROM USER_PRIVILEGES;

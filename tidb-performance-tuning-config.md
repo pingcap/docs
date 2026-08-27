@@ -219,7 +219,7 @@ snap-io-max-bytes-per-sec = "300MiB"
 
 - 列数の多い大きな表。
 - 複雑なSQLクエリ。
-- 同時接続数が多い。
+- 多数の同時接続。
 - 多様なクエリパターン。
 
 #### メモリ効率 {#memory-efficiency}

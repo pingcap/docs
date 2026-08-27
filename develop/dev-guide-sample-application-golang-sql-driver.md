@@ -150,7 +150,7 @@ cd tidb-golang-sql-driver-quickstart
 
 3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **CA cert**をクリックしてCA証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
+    IP アクセスリストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
 
     TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
@@ -310,10 +310,10 @@ openDB("mysql", func(db *sql.DB) {
 
 ### ドライバーまたはORMフレームワークを使用していますか？ {#using-driver-or-orm-framework}
 
-Golangドライバはデータベースへの低レベルアクセスを提供するが、開発者には以下のことが必要となる。
+Golangドライバはデータベースへの低レベルアクセスを提供しますが、開発者には以下のことが必要となります。
 
 - データベース接続を手動で確立および解放します。
-- データベースのトランザクションを手動で管理する。
+- データベースのトランザクションを手動で管理します。
 - データ行をデータオブジェクトに手動でマッピングします。
 
 複雑なSQL文を書く必要がない限り、 [GORM](/develop/dev-guide-sample-application-golang-gorm.md)などの[ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping)フレームワークを使用して開発することをお勧めします。ORMフレームワークは、次のような点で役立ちます。

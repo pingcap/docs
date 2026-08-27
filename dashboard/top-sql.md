@@ -37,11 +37,11 @@ Top SQLは、パフォーマンスの問題を分析するのに適していま�
 
 以下のいずれかの方法で、Top SQLページにアクセスできます。
 
-- TiDB Dashboardにログイン後、左側のナビゲーションメニューにある**Top SQL**をクリックしてください。
+- TiDB Dashboardにログイン後、左側のナビゲーションメニューにある**Top SQL**をクリックします。
 
     ![Top SQL](/media/dashboard/v8.5-top-sql-access.png)
 
-- ブラウザで[http://127.0.0.1:2379/dashboard/#/topsql](http://127.0.0.1:2379/dashboard/#/topsql)にアクセスしてください。 `127.0.0.1:2379`を実際の PD ノードのアドレスとポートに置き換えてください。
+- ブラウザで[http://127.0.0.1:2379/dashboard/#/topsql](http://127.0.0.1:2379/dashboard/#/topsql)にアクセスします。 `127.0.0.1:2379`を実際の PD ノードのアドレスとポートに置き換えます。
 
 ## Top SQLを有効にする {#enable-top-sql}
 
