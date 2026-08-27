@@ -36,7 +36,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 - デフォルト値: `OFF`
 - 可能`OFF`値: `ON`
-- この変数は、パーティションテーブルの[世界統計](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)が欠落している場合に、 [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)を使用してそのテーブルにアクセスできるようにするかどうかを制御します。
+- この変数は、パーティションテーブルの[グローバル統計情報](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)が欠落している場合に、 [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)を使用してそのテーブルにアクセスできるようにするかどうかを制御します。
 
 ### <a href="https://github.com/pingcap/tidb/issues/44389">`44389`</a> <span class="version-mark">v6.5.3 および v7.2.0 の新機能</span> {#44389-new-in-v653-and-v720}
 
