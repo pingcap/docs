@@ -406,7 +406,7 @@ TiDB クラスターの容量は、オンラインサービスを中断するこ
 
 2. pd-ctl でTiFlashノードを削除します。
 
-    - pd-ctl に`store delete <store_id>`入力します ( `<store_id>`前の手順で見つかったTiFlashノードのストア ID です)。
+    - pd-ctl に`store delete <store_id>`を入力します (`<store_id>`は前の手順で見つかったTiFlashノードのストア ID です)。
 
     - TiUPデプロイメントを使用する場合は、 `pd-ctl` `tiup ctl:v<CLUSTER_VERSION> pd`に置き換えます。
 

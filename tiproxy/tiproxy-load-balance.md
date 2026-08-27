@@ -40,7 +40,7 @@ TiProxy は、SQL ポートとステータスポートを使用して、TiDBサ�
 1. TiProxy で[`balance.label-name`](/tiproxy/tiproxy-configuration.md#label-name)を`"app"`に設定すると、TiDB サーバーはラベル名`"app"`によって照合され、接続は一致するラベル値を持つ TiDB サーバーにルーティングされます。
 2. 少なくとも 2つの TiProxy インスタンスをデプロイ。トランザクション ワークロードに使用する TiProxy インスタンスを[`labels`](/tiproxy/tiproxy-configuration.md#labels)で`{"app": "Order"}`に設定し、BI ワークロードに使用するインスタンスを[`labels`](/tiproxy/tiproxy-configuration.md#labels)で`{"app": "BI"}`に設定します。
 3. オプション：高可用性を実現するには、少なくとも4つのTiProxyインスタンスを導入し、ワークロードごとに異なる仮想IPアドレスを設定します。例えば、トランザクションワークロード用のTiProxyインスタンス2つを仮想IP `10.0.1.10/24`に設定し、BIワークロード用のインスタンス2つを仮想IP `10.0.1.20/24`に設定します。この機能を使用するには、TiProxy v1.3.1以降が必要です。
-4. TiDB インスタンスを 2つのグループに分割し、それぞれ[`labels`](/tidb-configuration-file.md#labels)設定します。一方のグループに`"app": "Order"`ラベルを追加し、もう一方のグループに`"app": "BI"`ラベルを追加します。
+4. TiDB インスタンスを 2つのグループに分割し、それぞれ[`labels`](/tidb-configuration-file.md#labels)を設定します。一方のグループに`"app": "Order"`ラベルを追加し、もう一方のグループに`"app": "BI"`ラベルを追加します。
 5. オプション:ストレージレイヤーの分離の場合は、 [配置ルール](/configure-placement-rules.md)または[リソース管理](/tidb-resource-control-ru-groups.md)構成します。
 6. 仮想IPが設定されている場合、トランザクションクライアントとBIクライアントはそれぞれ2つの仮想IPアドレスに接続します。仮想IPが設定されていない場合、トランザクションクライアントとBIクライアントはそれぞれ2つのTiProxyアドレスに接続します。
 

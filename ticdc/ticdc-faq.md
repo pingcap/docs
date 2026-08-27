@@ -353,7 +353,7 @@ mysql root@127.0.0.1:test> show create table test;
 
 結果から、レプリケーション前後のテーブルスキーマが不整合になっていることがわかります。これは、TiDBの`explicit_defaults_for_timestamp`のデフォルト値がMySQLと異なるためです。詳細は[MySQLとの互換性](/mysql-compatibility.md#default-differences)をご覧ください。
 
-v5.0.1 または v4.0.13 以降、MySQL へのレプリケーションごとに、TiCDC は上流と下流の間で時刻型の一貫性を保つために、自動的に`explicit_defaults_for_timestamp = ON`設定します。v5.0.1 または v4.0.13 より前のバージョンでは、TiCDC を使用して時刻型データをレプリケーションする際に、不一致な`explicit_defaults_for_timestamp`値によって発生する互換性の問題にご注意ください。
+v5.0.1 以降または v4.0.13 以降では、MySQL へのレプリケーションごとに、TiCDC は上流と下流の間で時刻型の一貫性を保つために、自動的に`explicit_defaults_for_timestamp = ON`を設定します。v5.0.1 より前または v4.0.13 より前のバージョンでは、TiCDC を使用して時刻型データをレプリケーションする際に、不一致な`explicit_defaults_for_timestamp`値によって発生する互換性の問題にご注意ください。
 
 ## TiCDC レプリケーションタスクを作成するときに`safe-mode` `true`に設定すると、アップストリームからの`INSERT` / `UPDATE`ステートメントがダウンストリームにレプリケートされた後に`REPLACE INTO`になるのはなぜですか? {#why-do-insertupdate-statements-from-the-upstream-become-replace-into-after-being-replicated-to-the-downstream-if-i-set-safe-mode-to-true-when-i-create-a-ticdc-replication-task}
 
@@ -385,7 +385,7 @@ TiDB Lightning物理インポートモードを使用してインポートされ
     cdc cli changefeed create -c "upstream-to-downstream-some-tables" --start-ts=431434047157698561 --sink-uri="mysql://root@127.0.0.1:4000?time-zone="
     ```
 
-TiDB Lightning物理インポートモードによってインポートされたテーブルが、どの変更フィードによっても監視されるテーブルと重複しない場合は、 TiDB Lightning構成ファイルで[`check-requirements`](/tidb-lightning/tidb-lightning-configuration.md#check-requirements) ～ `false`設定して、データのインポートを強制することができます。
+TiDB Lightning物理インポートモードによってインポートされたテーブルが、どの変更フィードによっても監視されるテーブルと重複しない場合は、TiDB Lightning構成ファイルで[`check-requirements`](/tidb-lightning/tidb-lightning-configuration.md#check-requirements)を`false`に設定して、データのインポートを強制できます。
 
 ## BRと TiCDC 間の互換性の制限は何ですか? {#what-are-the-compatibility-limitations-between-br-and-ticdc}
 

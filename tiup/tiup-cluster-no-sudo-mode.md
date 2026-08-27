@@ -204,7 +204,7 @@ tiup cluster upgrade mycluster v8.2.0
 
 この問題は、 `/etc/pam.d/system-auth.ued`ファイルに`pam_systemd.so`存在しないために発生する可能性があります。
 
-この問題を解決するには、次のコマンドを使用して、 `/etc/pam.d/system-auth.ued`ファイルに`pam_systemd.so`モジュールが含まれているかどうかを確認します。含まれていない場合は、ファイルの末尾に`session optional pam_systemd.so`追加します。
+この問題を解決するには、次のコマンドを使用して、 `/etc/pam.d/system-auth.ued`ファイルに`pam_systemd.so`モジュールが含まれているかどうかを確認します。含まれていない場合は、ファイルの末尾に`session optional pam_systemd.so`を追加します。
 
 ```shell
 grep 'pam_systemd.so' /etc/pam.d/system-auth.ued || echo 'session     optional      pam_systemd.so' >> /etc/pam.d/system-auth.ued

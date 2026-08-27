@@ -135,7 +135,7 @@ SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同
 次のクラスター構成プロパティを更新します。
 
 - セット`auto.create.topics.enable=true` 。
-- `allow.everyone.if.no.acl.found=false`追加します (SASL/SCRAM に必要)。
+- `allow.everyone.if.no.acl.found=false`を追加します (SASL/SCRAM に必要)。
 - その他のプロパティは変更せず、必要に応じて調整します。
 
 変更を適用し、クラスターのステータスが**Updating**から**Active**に変わるまで待ちます。

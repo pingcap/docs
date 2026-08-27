@@ -114,7 +114,7 @@ TiCDCクラスタをアップグレードする際には、以下の点に注意
     tiup cluster edit-config <cluster-name>
     ```
 
-2. viエディタで`cdc` [`server-configs`](/tiup/tiup-cluster-topology-reference.md#server_configs)変更します。
+2. viエディタで`cdc` [`server-configs`](/tiup/tiup-cluster-topology-reference.md#server_configs)を変更します。
 
     ```shell
     server_configs:

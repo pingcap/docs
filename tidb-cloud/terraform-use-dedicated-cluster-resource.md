@@ -389,7 +389,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
 - クラスターにTiFlashコンポーネントを追加します。
 - クラスターをスケーリングします。
 - クラスターを一時停止または再開します。
-- クラスターに[TiDBノードグループ](/tidb-cloud/tidb-node-group-overview.md)追加します。
+- クラスターに[TiDBノードグループ](/tidb-cloud/tidb-node-group-overview.md)を追加します。
 - クラスターの TiDB ノードグループを更新します。
 - クラスターの TiDB ノードグループを削除します。
 
@@ -589,7 +589,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
      }
     ```
 
-2. `terraform apply`コマンドを実行し、確認のために`yes`入力します。
+2. `terraform apply`コマンドを実行し、確認のために`yes`を入力します。
 
     ```
     tidbcloud_dedicated_cluster.example_cluster: Refreshing state...
@@ -671,8 +671,8 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
 
 クラスターの状態が`ACTIVE`のときは一時停止し、状態が`PAUSED`のときは再開できます。
 
-- クラスターを一時停止するには`paused = true`設定します。
-- クラスターを再開するには`paused = false`設定します。
+- クラスターを一時停止するには`paused = true`を設定します。
+- クラスターを再開するには`paused = false`を設定します。
 
 1. [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)を実行するときに使用する`cluster.tf`ファイルで、構成に`pause = true`を追加します。
 
@@ -680,7 +680,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
     paused = true
     ```
 
-2. `terraform apply`コマンドを実行し、プランを確認した後、 `yes`入力します。
+2. `terraform apply`コマンドを実行し、プランを確認した後、 `yes`を入力します。
 
     ```shell
     $ terraform apply
@@ -819,13 +819,13 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
      }
     ```
 
-4. クラスターを再開する必要がある場合は、 `paused = false`設定します。
+4. クラスターを再開する必要がある場合は、 `paused = false`を設定します。
 
     ```
     paused = false
     ```
 
-5. `terraform apply`コマンドを実行し、確認のために`yes`入力します。しばらく待つと、状態が最終的に`ACTIVE`に変更されます。
+5. `terraform apply`コマンドを実行し、確認のために`yes`を入力します。しばらく待つと、状態が最終的に`ACTIVE`に変更されます。
 
 ### クラスターに TiDB ノードグループを追加する {#add-a-tidb-node-group-to-the-cluster}
 
@@ -843,7 +843,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
     }
     ```
 
-2. `terraform apply`コマンドを実行し、確認のために`yes`入力します。
+2. `terraform apply`コマンドを実行し、確認のために`yes`を入力します。
 
     ```shell
     $ terraform apply
@@ -930,7 +930,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
     }
     ```
 
-2. `terraform apply`コマンドを実行し、確認のために`yes`入力します。
+2. `terraform apply`コマンドを実行し、確認のために`yes`を入力します。
 
     ```shell
     $ terraform apply

@@ -381,7 +381,7 @@ TiDBのプライマリクラスタとセカンダリクラスタを再構築す�
 
 変更フィードを作成する際に、変更フィード設定ファイルで同期ポイント機能を有効にします。すると、変更フィードは定期的に（ `sync-point-interval`タイミングで）、セカンダリクラスタ上で`SET GLOBAL tidb_external_ts = @@tidb_current_ts`を実行することにより、セカンダリクラスタに複製された一貫性のあるスナップショットポイントを設定します。
 
-セカンダリクラスタからデータを照会するには、ビジネスアプリケーションで`SET GLOBAL|SESSION tidb_enable_external_ts_read = ON;`設定します。そうすることで、プライマリクラスタとトランザクション的に整合性のあるデータを取得できます。
+セカンダリクラスタからデータを照会するには、ビジネスアプリケーションで`SET GLOBAL|SESSION tidb_enable_external_ts_read = ON;`を設定します。そうすることで、プライマリクラスタとトランザクション的に整合性のあるデータを取得できます。
 
 ```toml
 # Starting from v6.4.0, only the changefeed with the SYSTEM_VARIABLES_ADMIN or SUPER privilege can use the TiCDC Syncpoint feature.

@@ -70,7 +70,7 @@ BEGIN;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-テーブルにデータを挿入し、セーブポイント`sp1`設定します。
+テーブルにデータを挿入し、セーブポイント`sp1`を設定します。
 
 ```sql
 INSERT INTO t1 VALUES (1);
@@ -88,7 +88,7 @@ SAVEPOINT sp1;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-テーブルに再度データを挿入し、セーブポイント`sp2`設定します。
+テーブルに再度データを挿入し、セーブポイント`sp2`を設定します。
 
 ```sql
 INSERT INTO t1 VALUES (2);

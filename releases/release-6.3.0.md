@@ -87,7 +87,7 @@ TiDBバージョン: 6.3.0-DMR
 
 - TiFlash がFastScan の使い方を変更 (実験的) [#5252](https://github.com/pingcap/tiflash/issues/5252) @[hongyunyan](https://github.com/hongyunyan)
 
-    バージョン6.2.0では、 TiFlashにFastScan機能が導入されました。これにより、期待通りのパフォーマンス向上が実現しましたが、使用上の柔軟性に欠けていました。そのため、バージョン6.3.0では、 TiFlashは[FastScanの使い方](/tiflash/use-fastscan.md)変更します。 FastScanを有効または無効にするための`ALTER TABLE ... SET TIFLASH MODE ...`構文は非推奨となりました。代わりに、システム変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)を使用して、FastScanを有効にするかどうかを簡単に制御できます。
+    バージョン6.2.0では、 TiFlashにFastScan機能が導入されました。これにより、期待通りのパフォーマンス向上が実現しましたが、使用上の柔軟性に欠けていました。そのため、バージョン6.3.0では、 TiFlashは[FastScanの使い方](/tiflash/use-fastscan.md)を変更します。 FastScanを有効または無効にするための`ALTER TABLE ... SET TIFLASH MODE ...`構文は非推奨となりました。代わりに、システム変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)を使用して、FastScanを有効にするかどうかを簡単に制御できます。
 
     バージョン 6.2.0 からバージョン 6.3.0 にアップグレードすると、バージョン 6.2.0 のすべての FastScan 設定が無効になりますが、データの通常の読み取りには影響しません。変数`tiflash_fastscan`を設定する必要があります。バージョン 6.2.0 またはそれ以前のバージョンからバージョン 6.3.0 にアップグレードすると、データの一貫性を維持するために、すべてのセッションで FastScan 機能がデフォルトで有効になりません。
 
