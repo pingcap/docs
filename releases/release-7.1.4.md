@@ -126,7 +126,7 @@ TiDBバージョン: 7.1.4
 
     - リソースグループ クライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値より少なくなる問題を修正しました。 [＃7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
     - 一部のTSOログでエラー原因が出力されない問題を修正しました [＃7496](https://github.com/tikv/pd/issues/7496) @[CabinfeverB](https://github.com/CabinfeverB)
-    - `BURSTABLE`有効になっているときにデフォルトのリソースグループに不要なトークンが蓄積される問題を修正[＃7206](https://github.com/tikv/pd/issues/7206) @[CabinfeverB](https://github.com/CabinfeverB)
+    - `BURSTABLE`が有効になっているときにデフォルトのリソースグループに不要なトークンが蓄積される問題を修正[＃7206](https://github.com/tikv/pd/issues/7206) @[CabinfeverB](https://github.com/CabinfeverB)
     - `evict-leader-scheduler`インターフェースが呼び出されたときに出力がない問題を修正しました [＃7672](https://github.com/tikv/pd/issues/7672) @[CabinfeverB](https://github.com/CabinfeverB)
     - `watch etcd`正しくオフになっていない場合に発生するメモリリークの問題を修正[＃7807](https://github.com/tikv/pd/issues/7807) @[rleungx](https://github.com/rleungx)
     - `MergeLabels`関数が呼び出されたときにデータ競合が発生する問題を修正しました [＃7535](https://github.com/tikv/pd/issues/7535) @[lhy1024](https://github.com/lhy1024)

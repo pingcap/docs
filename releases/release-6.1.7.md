@@ -42,7 +42,7 @@ TiDB バージョン: 6.1.7
     - リージョン分割中にパーティションテーブルをクエリするとエラーが発生する可能性がある問題を修正しました。 [＃43144](https://github.com/pingcap/tidb/issues/43144) @[lcwangchao](https://github.com/lcwangchao)
     - 統計情報読み取り中に不要なメモリが使用される問題を修正 [＃42052](https://github.com/pingcap/tidb/issues/42052) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - 多数の空のパーティションテーブルを作成した後に過剰なメモリ使用が発生する問題を修正しました [＃44308](https://github.com/pingcap/tidb/issues/44308) @[hawkingrei](https://github.com/hawkingrei)
-    - `tidb_opt_agg_push_down`有効になっている場合にクエリが誤った結果を返す可能性がある問題を修正[＃44795](https://github.com/pingcap/tidb/issues/44795) @[AilinKid](https://github.com/AilinKid)
+    - `tidb_opt_agg_push_down`が有効になっている場合にクエリが誤った結果を返す可能性がある問題を修正[＃44795](https://github.com/pingcap/tidb/issues/44795) @[AilinKid](https://github.com/AilinKid)
     - 共通テーブル式の結合結果が間違っている可能性がある問題を修正[＃38170](https://github.com/pingcap/tidb/issues/38170) @[wjhuang2016](https://github.com/wjhuang2016)
     - GC がロックを解決するときに、まれに悲観的トランザクションの残余悲観的ロックがデータの正確性に影響を与える可能性がある問題を修正しました。 [＃43243](https://github.com/pingcap/tidb/issues/43243) @[MyonKeminta](https://github.com/MyonKeminta)
     - キャッシュテーブルに新しい列が追加された後、列のデフォルト値ではなく値が`NULL`なる問題を修正しました。 [＃42928](https://github.com/pingcap/tidb/issues/42928) @[lqs](https://github.com/lqs)

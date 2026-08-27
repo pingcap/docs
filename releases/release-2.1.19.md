@@ -41,7 +41,7 @@ TiDB Ansible バージョン: 2.1.19
     - パーティションテーブルで`ADMIN CHECK TABLE`実行をサポート [＃13143](https://github.com/pingcap/tidb/pull/13143)
     - 列属性として`ON UPDATE CURRENT_TIMESTAMP`を使用し、浮動小数点精度を指定した場合、 `SHOW CREATE TABLE`などのステートメントの精度が不完全になる問題を修正しました[＃12462](https://github.com/pingcap/tidb/pull/12462)
     - 列削除、修正、または変更するときに外部キーがチェックされないため、 `SELECT * FROM information_schema.KEY_COLUMN_USAGE`文の実行時にpanicが発生する問題を修正しました。 [＃14162](https://github.com/pingcap/tidb/pull/14162)
-    - TiDB で`Streaming`有効になっている場合に返されるデータが重複する可能性がある問題を修正しました [＃13255](https://github.com/pingcap/tidb/pull/13255)
+    - TiDB で`Streaming`が有効になっている場合に返されるデータが重複する可能性がある問題を修正しました [＃13255](https://github.com/pingcap/tidb/pull/13255)
     - 夏時間による`Invalid time format`エラーを修正 [＃13624](https://github.com/pingcap/tidb/pull/13624)
     - 整数を符号なし浮動小数点型または小数型に変換すると精度が失われ、データが正しくなくなる問題を修正[＃13756](https://github.com/pingcap/tidb/pull/13756)
     - `Quote`関数が`NULL`値処理するときに誤ったタイプの値が返される問題を修正しました [＃13681](https://github.com/pingcap/tidb/pull/13681)

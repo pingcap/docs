@@ -473,7 +473,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `ca_path` {#ca_path}
 
-- 信頼できるSSL CAのリストを含むファイルのパス。設定する場合は、 [`cert_path`](#cert_path)と[`key_path`](#key_path)必要です。
+- 信頼できるSSL CAのリストを含むファイルのパス。設定する場合は、 [`cert_path`](#cert_path)と[`key_path`](#key_path)が必要です。
 
 <!-- Example: `"/path/to/ca.pem"` -->
 

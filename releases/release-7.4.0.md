@@ -353,7 +353,7 @@ TiDB バージョン: 7.4.0
     - `tidb_enforce_mpp`システム変数が正しく復元できない問題を修正[＃46214](https://github.com/pingcap/tidb/issues/46214) @[djshow832](https://github.com/djshow832)
     - `LIKE`述語の`_`が誤って処理される問題を修正[＃46287](https://github.com/pingcap/tidb/issues/46287) [＃46618](https://github.com/pingcap/tidb/issues/46618) @[Defined2014](https://github.com/Defined2014)
     - TiDBがスキーマを取得できなかった場合に`schemaTs`が0に設定される問題を修正しました [＃46325](https://github.com/pingcap/tidb/issues/46325) @[hihihuhu](https://github.com/hihihuhu)
-    - `AUTO_ID_CACHE=1` に設定されている場合に`Duplicate entry`発生する可能性がある問題を修正しました [＃46444](https://github.com/pingcap/tidb/issues/46444) @[tiancaiamao](https://github.com/tiancaiamao)
+    - `AUTO_ID_CACHE=1` に設定されている場合に`Duplicate entry`が発生する可能性がある問題を修正しました [＃46444](https://github.com/pingcap/tidb/issues/46444) @[tiancaiamao](https://github.com/tiancaiamao)
     - `AUTO_ID_CACHE=1` に設定されている場合に、panic後に TiDB がゆっくりと回復する問題を修正しました。 [＃46454](https://github.com/pingcap/tidb/issues/46454) @[tiancaiamao](https://github.com/tiancaiamao)
     - `AUTO_ID_CACHE=1` に設定されている場合に`next_row_id` in `SHOW CREATE TABLE`が間違っている問題を修正しました [＃46545](https://github.com/pingcap/tidb/issues/46545) @[tiancaiamao](https://github.com/tiancaiamao)
     - サブクエリで CTE を使用すると解析中に発生するpanic問題を修正しました [＃45838](https://github.com/pingcap/tidb/issues/45838) @[djshow832](https://github.com/djshow832)
@@ -387,7 +387,7 @@ TiDB バージョン: 7.4.0
     - `sync_recovery`から`sync` に切り替えた後に QPS が 0 に低下する問題を修正しました [＃15366](https://github.com/tikv/tikv/issues/15366) @[nolouch](https://github.com/nolouch)
     - オンラインアンセーフリカバリがタイムアウトで中止されない問題を修正 [＃15346](https://github.com/tikv/tikv/issues/15346) @[Connor1996](https://github.com/Connor1996)
     - CpuRecord によって発生する潜在的なメモリリークの問題を修正しました [＃15304](https://github.com/tikv/tikv/issues/15304) @[overvenus](https://github.com/overvenus)
-    - バックアップクラスタがダウンし、プライマリクラスタがクエリされたときに`"Error 9002: TiKV server timeout"`発生する問題を修正しました [＃12914](https://github.com/tikv/tikv/issues/12914) @[Connor1996](https://github.com/Connor1996)
+    - バックアップクラスタがダウンし、プライマリクラスタがクエリされたときに`"Error 9002: TiKV server timeout"`が発生する問題を修正しました [＃12914](https://github.com/tikv/tikv/issues/12914) @[Connor1996](https://github.com/Connor1996)
     - プライマリクラスタが回復した後に TiKV が再起動するとバックアップ TiKV が停止する問題を修正しました [＃12320](https://github.com/tikv/tikv/issues/12320) @[disksing](https://github.com/disksing)
 
 - PD

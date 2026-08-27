@@ -28,7 +28,7 @@ summary: SHARD_ROW_ID_BITS属性について学びましょう。
 
 > **Warning:**
 >
-> `_tidb_rowid`は TiDB によって暗黙的に割り当てられる内部行 ID です。すべての場合においてグローバルに一意であると想定しないでください。クラスター化インデックスを使用しないパーティションテーブルの場合、 `ALTER TABLE ... EXCHANGE PARTITION`異なるパーティションに同じ`_tidb_rowid`値を残す可能性があります。詳細については、 [`_tidb_rowid`](/tidb-rowid.md)を参照してください。
+> `_tidb_rowid`は TiDB によって暗黙的に割り当てられる内部行 ID です。すべての場合においてグローバルに一意であると想定しないでください。クラスター化インデックスを使用しないパーティションテーブルの場合、 `ALTER TABLE ... EXCHANGE PARTITION`が異なるパーティションに同じ`_tidb_rowid`値を残す可能性があります。詳細については、 [`_tidb_rowid`](/tidb-rowid.md)を参照してください。
 
 > **Note:**
 >

@@ -78,7 +78,7 @@ target-table = "t_2"           # The name of the target table
     - アップストリームにスキーマ`schema`があり、ルールがスキーマに一致する場合、sync-diff-inspector は何も行いません。
     - アップストリームにスキーマ`schema`が存在するものの、それに一致するルールがない場合、sync-diff-inspector はテーブルルーターに新しいルール`schema -> _no__exists__db_`を追加します。その後、sync-diff-inspector はテーブル`schema`をテーブル`_no__exists__db_`として扱います。
 
-- ルールに`target-schema.target-table`存在しない場合は、テーブル ルーターが大文字と小文字を区別しないため、sync-diff-inspector は`target-schema.target-table`から`target-schema.target-table`に一致するルールを追加して大文字と小文字を区別しないようにします。
+- ルールに`target-schema.target-table`が存在しない場合は、テーブル ルーターが大文字と小文字を区別しないため、sync-diff-inspector は`target-schema.target-table`から`target-schema.target-table`に一致するルールを追加して大文字と小文字を区別しないようにします。
 
 ### 例 {#examples}
 

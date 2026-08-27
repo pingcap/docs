@@ -225,7 +225,7 @@ JDBCは通常、JDBC URLパラメータの形式で実装関連の設定を提�
     次のような場合は、この設定が小さすぎるかどうかを確認する必要があります。
 
     - TiDB モニタリング ダッシュボードに移動し、 **[クエリ概要]** &gt; **[インスタンス別 CPS]**からリクエスト コマンド タイプを確認します。
-    - そして、 `cachePrepStmts=true`設定されているが、 `COM_STMT_PREPARE`は依然として`COM_STMT_EXECUTE`とほぼ等しく、 `COM_STMT_CLOSE`存在することがわかった。
+    - そして、 `cachePrepStmts=true`が設定されているが、 `COM_STMT_PREPARE`は依然として`COM_STMT_EXECUTE`とほぼ等しく、 `COM_STMT_CLOSE`が存在することがわかった。
 
 - **prepStmtCacheSize**
 
