@@ -16,7 +16,7 @@ TiDB Ansible バージョン: 3.0.3
 - SQLオプティマイザ
     - `aggregation_eliminate`や`column_prune`などのロジック最適化ルールを無効にするには、 `opt_rule_blacklist`テーブルを追加します[#11658](https://github.com/pingcap/tidb/pull/11658)
     - 結合キーがプレフィックスインデックスまたは負の値に等しい符号なしインデックス列を使用する場合に、 `Index Join`に対して誤った結果が返される可能性がある問題を修正しました[#11759](https://github.com/pingcap/tidb/pull/11759)
-    - `create … binding ...`の`SELECT`つの文のうち`"`または`\`解析エラーになる可能性がある問題を修正しました[#11726](https://github.com/pingcap/tidb/pull/11726)
+    - `create … binding ...`の`SELECT`文で`"`または`\`を使用すると解析エラーになる可能性がある問題を修正しました [#11726](https://github.com/pingcap/tidb/pull/11726)
 - SQL実行エンジン
     - Quote関数がnull値を処理するときに戻り値の型エラーが発生する可能性がある問題を修正しました[#11619](https://github.com/pingcap/tidb/pull/11619)
     - `NotNullFlag`保持した状態で Max/Min を使用して型推論を行うと、 `ifnull`の誤った結果が返される可能性がある問題を修正しました[#11641](https://github.com/pingcap/tidb/pull/11641)

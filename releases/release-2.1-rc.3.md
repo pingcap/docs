@@ -42,11 +42,11 @@ summary: TiDB 2.1 RC3は2018年9月29日にリリースされ、安定性、互�
 ## PD {#pd}
 
 - 新機能
-    - 逆順にリージョンリストを取得するAPIを追加する[#1254](https://github.com/pingcap/pd/pull/1254)
+    - サイズの降順でリージョンリストを取得するAPIを追加します [#1254](https://github.com/pingcap/pd/pull/1254)
 - 改善
     - リージョン API でより詳細な情報を返す [#1252](https://github.com/pingcap/pd/pull/1252)
 - バグ修正
-    - PDがリーダーを切り替えた後に`adjacent-region-scheduler`が発生する可能性がある問題を修正[#1250](https://github.com/pingcap/pd/pull/1250)
+    - PDがリーダーを切り替えた後に`adjacent-region-scheduler`によってクラッシュが発生する可能性がある問題を修正しました [#1250](https://github.com/pingcap/pd/pull/1250)
 
 ## TiKV {#tikv}
 

@@ -96,7 +96,7 @@ TiDB Ansible バージョン: 3.0.2
 
 ## TiKV {#tikv}
 
-- Raftログが時間に書き込まれない場合に TiKV がパニックを起こすバグを修正しました [#5160](https://github.com/tikv/tikv/pull/5160)
+- Raftログが時間内に書き込まれない場合に TiKV がパニックを起こすバグを修正しました [#5160](https://github.com/tikv/tikv/pull/5160)
 - TiKV パニック後にpanic情報がログファイルに書き込まれないバグを修正[#5198](https://github.com/tikv/tikv/pull/5198)
 - 悲観的トランザクションで挿入操作が誤って実行される可能性があるバグを修正しました [#5203](https://github.com/tikv/tikv/pull/5203)
 - 手動介入を必要としない一部のログの出力レベルをINFO に下げます。 [#5193](https://github.com/tikv/tikv/pull/5193)

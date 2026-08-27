@@ -27,7 +27,7 @@ TiDB バージョン: 3.0.17
 
     - TiDB Lightning
 
-        - `[black-white-list]` 、より新しい、より理解しやすいフィルター形式で廃止されました。 [#332](https://github.com/pingcap/tidb-lightning/pull/332)
+        - より新しく、理解しやすいフィルター形式の導入に伴い、`[black-white-list]`は非推奨になりました。 [#332](https://github.com/pingcap/tidb-lightning/pull/332)
 
 ## バグ修正 {#bug-fixes}
 
@@ -37,7 +37,7 @@ TiDB バージョン: 3.0.17
     - `SELECT a FROM t HAVING t.a` のようなSQL文の不明な列エラーを修正 [#18432](https://github.com/pingcap/tidb/pull/18432)
     - テーブルに主キーがない場合、またはテーブルにすでに整数の主キーがある場合は、テーブルに主キーを追加することを禁止します[#18342](https://github.com/pingcap/tidb/pull/18342)
     - `EXPLAIN FORMAT="dot" FOR CONNECTION` を実行すると空のセットを返します [#17157](https://github.com/pingcap/tidb/pull/17157)
-    - フォーマットトークン '%r'、'%h' 処理を修正`STR_TO_DATE` [#18725](https://github.com/pingcap/tidb/pull/18725)
+    - `STR_TO_DATE`のフォーマットトークン`%r`、`%h`の処理を修正しました [#18725](https://github.com/pingcap/tidb/pull/18725)
 
 - TiKV
 

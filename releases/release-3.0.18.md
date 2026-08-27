@@ -15,7 +15,7 @@ TiDB バージョン: 3.0.18
 
     - TiDB Binlog
 
-        - Pump GC 構成の Go の時間期間形式をサポートします。 [#996](https://github.com/pingcap/tidb-binlog/pull/996)
+        - Pump GC 構成で Go の期間形式をサポートします。 [#996](https://github.com/pingcap/tidb-binlog/pull/996)
 
 ## バグ修正 {#bug-fixes}
 
