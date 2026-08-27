@@ -198,7 +198,7 @@ host = "<host>"
 
 #### (オプション) TiDBの`labels`を構成する {#optional-configure-labels-for-tidb}
 
-[Followerが読んだ](/follower-read.md)有効になっている場合、TiDB が同じリージョンからのデータを優先的に読み取るようにするには、TiDB ノードに対して`labels`を設定する必要があります。
+[Followerが読んだ](/follower-read.md)が有効になっている場合、TiDB が同じリージョンからのデータを優先的に読み取るようにするには、TiDB ノードに対して`labels`を設定する必要があります。
 
 構成ファイルを使用して、TiDB に`labels`を設定できます。
 

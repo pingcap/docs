@@ -80,7 +80,7 @@ TiDB Ansible バージョン: 4.0.0-beta.1
 - TiDB
     - 64文字を超える列名で`view`を作成するとエラーが報告される問題を修正しました[＃14850](https://github.com/pingcap/tidb/pull/14850)
     - `create or replace view`文が正しく処理されていないため、 `information_schema.views`に重複データが存在する問題を修正[＃14832](https://github.com/pingcap/tidb/pull/14832)
-    - `plan cache`有効になっている場合の`BatchPointGet`の誤った結果を修正[＃14855](https://github.com/pingcap/tidb/pull/14855)
+    - `plan cache`が有効になっている場合の`BatchPointGet`の誤った結果を修正[＃14855](https://github.com/pingcap/tidb/pull/14855)
     - タイムゾーンを変更した後にデータが間違ったパーティションテーブルに挿入される問題を修正[＃14370](https://github.com/pingcap/tidb/pull/14370)
     - 外部結合の簡素化中に`IsTrue`関数の無効な名前を使用して式を再構築するときに発生するpanicを修正しました [＃14515](https://github.com/pingcap/tidb/pull/14515)
     - `show binding`文不正な権限チェックを修正 [＃14443](https://github.com/pingcap/tidb/pull/14443)
