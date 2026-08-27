@@ -11,7 +11,7 @@ summary: このドキュメントでは、TiDB Cloudからクラウドストレ�
 
 > **Note:**
 >
-> - {{{ .dedicated }}} からクラウドストレージにデータをストリーミングするには、TiDB クラスターのバージョンが v7.1.1 以降であることを確認してください。TiDB Cloud Dedicated クラスターを v7.1.1 以降にアップグレードするには、[contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。
+> - {{{ .dedicated }}} からクラウドストレージにデータをストリーミングするには、TiDB クラスターのバージョンが v7.1.1 以降であることを確認してください。TiDB Cloud Dedicated クラスターを v7.1.1 以降にアップグレードするには、[TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)。
 > - [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) インスタンスでは、changefeed 機能は利用できません。
 > - [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) インスタンスでは、changefeed 機能はリクエスト時のみ利用できます。詳細については、[Changefeed](/tidb-cloud/essential-changefeed-overview.md) を参照してください。
 > - [{{{ .premium }}}](/tidb-cloud/select-cluster-tier.md#premium) インスタンスについては、[Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium) を参照してください。
