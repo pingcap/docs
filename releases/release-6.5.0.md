@@ -169,7 +169,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 - [ビュー](/views.md) で実行計画生成に干渉するグローバルオプティマイザヒントをサポートします [＃37887](https://github.com/pingcap/tidb/issues/37887) @[Reminiscent](https://github.com/Reminiscent)
 
-    ビューアクセスのシナリオによっては、最適なパフォーマンスを実現するために、ビュー内のクエリの実行計画にオプティマイザヒントを使用して介入する必要があります。TiDB v6.5.0以降、ビュー内のクエリブロックへのグローバルヒントの追加がサポートされ、クエリで定義されたヒントがビュー内で有効になります。この機能により、ネストされたビューを含む複雑なSQL文にヒントを挿入できるようになり、実行計画の制御が強化され、複雑な文のパフォーマンスが安定します。グローバルヒントを使用するには、 [クエリブロックに名前を付ける](/optimizer-hints.md#step-1-define-the-query-block-name-of-the-view-using-the-qb_name-hint)と[ヒント参照を指定する](/optimizer-hints.md#step-2-add-the-target-hints)は必要です。
+    ビューアクセスのシナリオによっては、最適なパフォーマンスを実現するために、ビュー内のクエリの実行計画にオプティマイザヒントを使用して介入する必要があります。TiDB v6.5.0以降、ビュー内のクエリブロックへのグローバルヒントの追加がサポートされ、クエリで定義されたヒントがビュー内で有効になります。この機能により、ネストされたビューを含む複雑なSQL文にヒントを挿入できるようになり、実行計画の制御が強化され、複雑な文のパフォーマンスが安定します。グローバルヒントを使用するには、 [クエリブロックに名前を付け](/optimizer-hints.md#step-1-define-the-query-block-name-of-the-view-using-the-qb_name-hint)、 [ヒント参照を指定する](/optimizer-hints.md#step-2-add-the-target-hints)必要があります。
 
     詳細については[ドキュメント](/optimizer-hints.md#hints-that-take-effect-globally)を参照してください。
 
