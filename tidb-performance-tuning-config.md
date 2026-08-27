@@ -27,7 +27,7 @@ TiDBのパフォーマンスを最適化するには、さまざまな設定を�
 TiDBのパフォーマンスを最適化するために、一般的に以下の設定が使用されます。
 
 - [SQLプリペアドプランキャッシュ](/sql-prepared-plan-cache.md)などの実行プランキャッシュ[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)強化します[インスタンスレベルの実行プランキャッシュ](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840)
-- [オプティマイザ修正コントロール](/optimizer-fix-controls.md)を使用して TiDB オプティマイザの動作を最適化します。
+- [Optimizer Fix Controls](/optimizer-fix-controls.md)を使用して TiDB オプティマイザの動作を最適化します。
 - ストレージエンジン[Titan](/storage-engine/titan-overview.md)をより積極的に活用する。
 - 書き込み負荷の高いワークロード下でも最適かつ安定したパフォーマンスを確保するために、TiKVの圧縮およびフロー制御の設定を微調整します。
 
