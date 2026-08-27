@@ -12,7 +12,7 @@ This statement changes the user password for a user account in the TiDB system d
 
 ```ebnf+diagram
 SetPasswordStmt ::=
-    "SET" "PASSWORD" ( "FOR" Username )? "=" ( stringLit | "PASSWORD" "(" stringLit ")" )
+    "SET" "PASSWORD" ( "FOR" Username )? "=" ( stringLit | "PASSWORD" "(" stringLit ")" ) ( "RETAIN" "CURRENT" "PASSWORD" )?
 ```
 
 ## Examples
@@ -55,9 +55,21 @@ mysql> SHOW CREATE USER 'newuser';
 1 row in set (0.00 sec)
 ```
 
+Starting from v8.5.7, `SET PASSWORD ... RETAIN CURRENT PASSWORD` retains the current password as the secondary password while setting the new primary password, so both passwords remain valid during a password rotation. For details, see [Dual password policy](/password-management.md#dual-password-policy).
+
+```sql
+SET PASSWORD FOR 'newuser' = 'newpassword' RETAIN CURRENT PASSWORD;
+```
+
+```
+Query OK, 0 rows affected (0.01 sec)
+```
+
+Setting your own password with `RETAIN CURRENT PASSWORD` requires the `APPLICATION_PASSWORD_ADMIN` dynamic privilege. Setting the password of another account requires the `SUPER` privilege.
+
 ## MySQL compatibility
 
-The `SET PASSWORD` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+The `SET PASSWORD` statement in TiDB is fully compatible with MySQL, except that TiDB does not support the `REPLACE 'current_auth_string'` clause for verifying the current password. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
 ## See also
 
