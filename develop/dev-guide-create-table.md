@@ -238,7 +238,7 @@ CREATE TABLE `bookshop`.`users` (
 
 TiDBでは、オンライン・トランザクション処理（OLTP）には行ベースのストレージエンジンである[TiKV](/tikv-overview.md)、オンライン分析処理（OLAP）には列指向ストレージエンジンである[TiFlash](/tiflash/tiflash-overview.md)を使用できます。設定後、 TiFlashはRaft Learnerコンセンサスアルゴリズムに従ってTiKVからリアルタイムでデータを複製し、TiKVとTiFlash間のデータの一貫性を厳密に確保します。
 
-### 列指向のデータを複製する {#replicate-column-based-data}
+### 列ベースのデータを複製する {#replicate-column-based-data}
 
 TiFlashはデプロイ後にデータを自動的に複製しません。そのため、複製するテーブルを手動で指定する必要があります。
 
@@ -251,7 +251,7 @@ ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 - `{table_name}` : テーブル名。
 - `{count}` : 複製されたレプリカの数。0 の場合、複製されたレプリカは削除されます。
 
-**TiFlash は**テーブルを複製します。クエリが実行されると、TiDB はコストの最適化に基づいてクエリに対して TiKV (行ベース) またはTiFlash (列指向) を自動的に選択します。あるいは、クエリで**TiFlash**レプリカを使用するかどうかを手動で指定できます。指定方法については、 [TiDBを使用してTiFlashレプリカを読み取ります](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
+**TiFlash は**テーブルを複製します。クエリが実行されると、TiDB はコストの最適化に基づいてクエリに対して TiKV (行ベース) またはTiFlash (列ベース) を自動的に選択します。あるいは、クエリで**TiFlash**レプリカを使用するかどうかを手動で指定できます。指定方法については、 [TiDBを使用してTiFlashレプリカを読み取ります](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
 
 ### HTAP機能の使用例 {#an-example-of-using-htap-capabilities}
 
