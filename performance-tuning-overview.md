@@ -83,7 +83,7 @@ To tune performance efficiently, you need to capture the current performance dat
 - Mean and long-tail values of user response time, and throughput of your application
 - Database performance data such as database time, query latency, and QPS
 
-    TiDB measures and stores performance data thoroughly in different dimensions, such as [slow query logs](/identify-slow-queries.md), [Top SQL](/dashboard/top-sql.md), [Continuous Performance Profiling](/dashboard/continuous-profiling.md), and [traffic visualizer](/dashboard/dashboard-key-visualizer.md). In addition, you can perform historical backtracking and comparison of the timing metrics data stored in Prometheus.
+    TiDB measures and stores performance data thoroughly in different dimensions, such as [slow query logs](/identify-slow-queries.md), [Top SQL](/dashboard/top-sql.md), [Continuous Performance Profiling](/dashboard/continuous-profiling.md), and [Key Visualizer](/dashboard/dashboard-key-visualizer.md). In addition, you can perform historical backtracking and comparison of the timing metrics data stored in Prometheus.
 
 - Resource utilization, including resources such as CPU, IO, and network
 - Configuration information, such as application configurations, database configurations, and operating system configurations
