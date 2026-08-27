@@ -30,8 +30,8 @@ TiProxy は、SQL ポートとステータスポートを使用して、TiDBサ�
 ラベルベースの負荷分散を有効にするには、次の操作を行う必要があります。
 
 - 一致するラベル名を[`balance.label-name`](/tiproxy/tiproxy-configuration.md#label-name)で指定します。
-- TiProxy で[`labels`](/tiproxy/tiproxy-configuration.md#labels)構成項目を構成します。
-- TiDB サーバーで[`labels`](/tidb-configuration-file.md#labels)構成項目を構成します。
+- TiProxy で[`labels`](/tiproxy/tiproxy-configuration.md#labels)設定項目を構成します。
+- TiDB サーバーで[`labels`](/tidb-configuration-file.md#labels)設定項目を構成します。
 
 設定後、TiProxy は`balance.label-name`で指定されたラベル名を使用して、一致するラベル値を持つ TiDB サーバーへの接続をルーティングします。
 
@@ -145,7 +145,7 @@ TiProxy は、TiProxy サーバーと TiDB サーバーの場所に基づいて�
 TiProxyは、ラベル`zone`に基づいて自身とTiDBサーバの場所を決定します。以下の設定項目を設定する必要があります。
 
 - TiDBサーバーの設定項目[`labels`](/tidb-configuration-file.md#labels)で、 `zone`現在のアベイラビリティゾーンに設定します。設定の詳細については、 [TiDBのラベルを構成する](/schedule-replicas-by-topology-labels.md#optional-configure-labels-for-tidb)を参照してください。
-- TiProxy の[`labels`](/tiproxy/tiproxy-configuration.md#labels)の構成項目で、 `zone`現在のアベイラビリティゾーンに設定します。
+- TiProxy の[`labels`](/tiproxy/tiproxy-configuration.md#labels)の設定項目で、 `zone`現在のアベイラビリティゾーンに設定します。
 
 TiDB Operatorを使用してデプロイされたクラスターについては、 [データの高可用性](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-availability-of-data)を参照してください。
 
@@ -198,7 +198,7 @@ TiProxyは、接続数の多いTiDBサーバーから接続数の少ないサー
 
 ## 負荷分散ポリシーを構成する {#configure-load-balancing-policies}
 
-TiProxy では、 [`policy`](/tiproxy/tiproxy-configuration.md#policy)構成項目を通じて負荷分散ポリシーの組み合わせと優先順位を設定できます。
+TiProxy では、 [`policy`](/tiproxy/tiproxy-configuration.md#policy)設定項目を通じて負荷分散ポリシーの組み合わせと優先順位を設定できます。
 
 - `resource` : リソース優先度ポリシーは、ステータス、ラベル、ヘルス、メモリ、CPU、場所、接続数の優先順位に基づいて負荷分散を実行します。
 - `location` : 場所の優先順位ポリシーは、ステータス、ラベル、場所、正常性、メモリ、CPU、接続数の優先順位に基づいて負荷分散を実行します。

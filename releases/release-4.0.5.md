@@ -139,7 +139,7 @@ TiDB バージョン: 4.0.5
 
     - Hibernate リージョンが有効な場合のリーダー選出を高速化[＃8292](https://github.com/tikv/tikv/pull/8292)
     - スケジュール中のメモリリークの問題を修正 [＃8357](https://github.com/tikv/tikv/pull/8357)
-    - リーダーがすぐに休止状態にならないようにするための`hibernate-timeout`構成項目を追加します[＃8208](https://github.com/tikv/tikv/pull/8208)
+    - リーダーがすぐに休止状態にならないようにするための`hibernate-timeout`設定項目を追加します[＃8208](https://github.com/tikv/tikv/pull/8208)
 
 - PD
 

@@ -28,7 +28,7 @@ TiDB と MySQL のパスワード有効期限ポリシーには次の違いが�
 TiDB の有効期限メカニズムは、次の点で MySQL と異なります。
 
 - MySQL v5.7 および v8.0 では、クライアントとサーバーの構成を組み合わせて、クライアント接続に「サンドボックス モード」を有効にするかどうかを決定します。
-- TiDB では、 [`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650)構成項目だけで、クライアント接続に対して「サンドボックス モード」を有効にするかどうかが決まります。
+- TiDB では、 [`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650)設定項目だけで、クライアント接続に対して「サンドボックス モード」を有効にするかどうかが決まります。
 
 ### Password complexity policy {#password-complexity-policy}
 

@@ -5,7 +5,7 @@ summary: アップストリームデータベースの設定ファイルを学�
 
 # TiDB データ移行の上流データベースコンフィグレーションファイル {#upstream-database-configuration-file-of-tidb-data-migration}
 
-このドキュメントでは、アップストリーム データベースの構成ファイルについて紹介します。これには、構成ファイル テンプレートと、このファイル内の各構成パラメータの説明が含まれます。
+このドキュメントでは、アップストリーム データベースの構成ファイルについて紹介します。これには、構成ファイル テンプレートと、このファイル内の各設定パラメータの説明が含まれます。
 
 ## コンフィグレーションファイルテンプレート {#configuration-file-template}
 
@@ -61,7 +61,7 @@ from:
 
 ## コンフィグレーションパラメータ {#configuration-parameters}
 
-このセクションでは、構成ファイル内の各構成パラメータについて説明します。
+このセクションでは、構成ファイル内の各設定パラメータについて説明します。
 
 ### グローバル構成 {#global-configuration}
 
@@ -140,7 +140,7 @@ from:
 
 > **Note:**
 >
-> 自動データ消去戦略は、 [`interval`](#interval)が`0`でなく、 2つの構成項目[`expires`](#expires)と[`remain-space`](#remain-space)のうち少なくとも 1つが`0`でない場合にのみ有効になります。
+> 自動データ消去戦略は、 [`interval`](#interval)が`0`でなく、 2つの設定項目[`expires`](#expires)と[`remain-space`](#remain-space)のうち少なくとも 1つが`0`でない場合にのみ有効になります。
 
 ### タスクステータスチェッカーの設定（ `checker` ） {#task-status-checker-configuration-checker}
 

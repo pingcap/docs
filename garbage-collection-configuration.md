@@ -1,6 +1,6 @@
 ---
 title: Garbage Collection Configuration
-summary: GC 構成パラメータについて学習します。
+summary: GC 設定パラメータについて学習します。
 ---
 
 # ガベージコレクションのコンフィグレーション {#garbage-collection-configuration}

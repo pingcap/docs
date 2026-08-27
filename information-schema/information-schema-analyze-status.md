@@ -62,7 +62,7 @@ SELECT * FROM information_schema.analyze_status;
 - `TABLE_SCHEMA` : テーブルが属するデータベースの名前。
 - `TABLE_NAME` : テーブルの名前。
 - `PARTITION_NAME` :パーティションテーブルの名前。
-- `JOB_INFO` : `ANALYZE`タスクの情報。インデックスが分析される場合、この情報にはインデックス名が含まれます。 `tidb_analyze_version = 2`の場合、この情報にはサンプルレートなどの構成項目が含まれます。
+- `JOB_INFO` : `ANALYZE`タスクの情報。インデックスが分析される場合、この情報にはインデックス名が含まれます。 `tidb_analyze_version = 2`の場合、この情報にはサンプルレートなどの設定項目が含まれます。
 - `PROCESSED_ROWS` : 処理された行数。
 - `START_TIME` : `ANALYZE`タスクの開始時刻。
 - `END_TIME` : `ANALYZE`タスクの終了時刻。

@@ -37,7 +37,7 @@ DESC cluster_systeminfo;
 - `SYSTEM_TYPE` : システムタイプ。現在、 `system`システムタイプを照会できます。
 - `SYSTEM_NAME` : システム名。現在、 `sysctl`システム名を照会できます。
 - `NAME` : `sysctl`に対応する構成名。
-- `VALUE` : `sysctl`に対応する構成項目の値。
+- `VALUE` : `sysctl`に対応する設定項目の値。
 
 次の例は、 `CLUSTER_SYSTEMINFO`システム情報テーブルを使用して、クラスター内のすべてのサーバーのカーネルバージョンを照会する方法を示しています。
 

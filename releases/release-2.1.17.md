@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.17 Release Notes
-summary: "TiDB 2.1.17 リリースノート: 新機能には、SHOW TABLE REGIONS` の `WHERE` 句、TiKV および PD の `config-check` 機能、pd-ctl の `remove-tombstone` コマンド、 Reparoの `worker-count` および `txn-batch` 構成項目が含まれます。PD のスケジュール プロセスと TiKV の起動プロセスが改善されました。TiDB スロークエリログと構成ファイルの動作が変更されました。SQL オプティマイザ、SQL 実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、および TiDB Ansible の修正と最適化が行われました。"
+summary: "TiDB 2.1.17 リリースノート: 新機能には、SHOW TABLE REGIONS` の `WHERE` 句、TiKV および PD の `config-check` 機能、pd-ctl の `remove-tombstone` コマンド、 Reparoの `worker-count` および `txn-batch` 設定項目が含まれます。PD のスケジュール プロセスと TiKV の起動プロセスが改善されました。TiDB スロークエリログと構成ファイルの動作が変更されました。SQL オプティマイザ、SQL 実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、および TiDB Ansible の修正と最適化が行われました。"
 ---
 
 # TiDB 2.1.17 リリースノート {#tidb-2-1-17-release-notes}
@@ -13,7 +13,7 @@ TiDB Ansible バージョン: 2.1.17
 
 - 新機能
     - TiDBの`SHOW TABLE REGIONS`構文に`WHERE`句を追加する
-    - TiKVとPDに`config-check`機能を追加して構成項目をチェックする
+    - TiKVとPDに`config-check`機能を追加して設定項目をチェックする
     - pd-ctlに`remove-tombstone`コマンドを追加して、tombstoneストアのレコードをクリアします。
     - Reparoに`worker-count`と`txn-batch`設定項目を追加して回復速度を制御します
 
@@ -63,7 +63,7 @@ TiDB Ansible バージョン: 2.1.17
 ## TiKV {#tikv}
 
 - 一部のケースでリージョン内のキーのカウント結果が誤っていた問題を修正[＃5415](https://github.com/tikv/tikv/pull/5415)
-- TiKVに`config-check`オプションを追加して、TiKV構成項目が有効かどうかを確認する[＃5391](https://github.com/tikv/tikv/pull/5391)
+- TiKVに`config-check`オプションを追加して、TiKV設定項目が有効かどうかを確認する[＃5391](https://github.com/tikv/tikv/pull/5391)
 - ノードの再起動によって発生するジッターを軽減するために起動プロセスを最適化します。 [＃5277](https://github.com/tikv/tikv/pull/5277)
 - 場合によってはロック解決プロセスを最適化して、トランザクションのロック解決を高速化します。 [＃5339](https://github.com/tikv/tikv/pull/5339)
 - `get_txn_commit_info`プロセスを最適化してトランザクションのコミットを高速化する[＃5062](https://github.com/tikv/tikv/pull/5062)
@@ -72,7 +72,7 @@ TiDB Ansible バージョン: 2.1.17
 
 ## PD {#pd}
 
-- PDに`config-check`オプションを追加して、PD構成項目が有効かどうかを確認する[＃1725](https://github.com/pingcap/pd/pull/1725)
+- PDに`config-check`オプションを追加して、PD設定項目が有効かどうかを確認する[＃1725](https://github.com/pingcap/pd/pull/1725)
 - pd-ctlに`remove-tombstone`コマンドを追加して、tombstoneストアレコードのクリアをサポートする[＃1705](https://github.com/pingcap/pd/pull/1705)
 - オペレーターのスケジュール調整を積極的に促進するサポート[＃1686](https://github.com/pingcap/pd/pull/1686)
 

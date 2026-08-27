@@ -7,7 +7,7 @@ summary: TiUPによって管理される監視サーバーの構成をカスタ�
 
 TiUPを使用して TiDB クラスターをデプロイすると、 TiUP はPrometheus、Grafana、Alertmanager などの監視サーバーもデプロイします。また、このクラスターをスケールアウトすると、 TiUP は新しいノードを監視範囲に追加します。
 
-上記の監視サーバーの構成をカスタマイズするには、以下の手順に従って、TiDB クラスターの topology.yaml に関連する構成項目を追加します。
+上記の監視サーバーの構成をカスタマイズするには、以下の手順に従って、TiDB クラスターの topology.yaml に関連する設定項目を追加します。
 
 > **Note:**
 >
@@ -122,7 +122,7 @@ TiUP v1.17.0 以降では、トポロジーファイルで Prometheus グロー�
 
 1. TiDB クラスターの topology.yaml ファイルを開きます。
 
-2. `grafana_servers`構成に他の構成項目を追加します。
+2. `grafana_servers`構成に他の設定項目を追加します。
 
     以下は、topology.yaml ファイルの`[log.file] level`フィールドと`smtp`フィールドの構成例です。
 

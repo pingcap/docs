@@ -31,7 +31,7 @@ skip-ca = true
 
 ## `tiproxy.toml`ファイルを設定する {#configure-the-tiproxy-toml-file}
 
-このセクションでは、TiProxy の構成パラメータについて説明します。
+このセクションでは、TiProxy の設定パラメータについて説明します。
 
 > **Tip:**
 >
@@ -45,7 +45,7 @@ SQL ポートのコンフィグレーション。
 
 - デフォルト値: `0.0.0.0:6000`
 - ホットリロードのサポート: いいえ
-- SQLサービスのリスニングアドレス。形式は`<ip>:<port>`です。この構成項目は、 TiUPまたはTiDB Operatorを使用してTiProxyをデプロイすると自動的に設定されます。
+- SQLサービスのリスニングアドレス。形式は`<ip>:<port>`です。この設定項目は、 TiUPまたはTiDB Operatorを使用してTiProxyをデプロイすると自動的に設定されます。
 
 #### `advertise-addr` {#advertise-addr}
 

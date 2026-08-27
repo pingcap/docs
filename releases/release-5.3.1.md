@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.3.1 Release Notes
-summary: TiDB 5.3.1は2022年3月3日にリリースされました。このリリースには、TiDB、TiKV、PD、TiCDC、 TiFlash、Backup & Restore (BR)、およびTiDB Data Migration (DM)の互換性の変更、改善、バグ修正が含まれています。主な変更点としては、ユーザーログインモードマッピングの最適化、TiCDCのリカバリ時間の短縮、TiDB、TiKV、PD、 TiFlash、およびTiCDCやTiDB Lightningなどのツールにおけるさまざまなバグの修正などがあります。これらの修正は、データのインポート、ユーザーログイン、ガベージコレクション、構成パラメータなどに関連する問題に対処しています。
+summary: TiDB 5.3.1は2022年3月3日にリリースされました。このリリースには、TiDB、TiKV、PD、TiCDC、 TiFlash、Backup & Restore (BR)、およびTiDB Data Migration (DM)の互換性の変更、改善、バグ修正が含まれています。主な変更点としては、ユーザーログインモードマッピングの最適化、TiCDCのリカバリ時間の短縮、TiDB、TiKV、PD、 TiFlash、およびTiCDCやTiDB Lightningなどのツールにおけるさまざまなバグの修正などがあります。これらの修正は、データのインポート、ユーザーログイン、ガベージコレクション、設定パラメータなどに関連する問題に対処しています。
 ---
 
 # TiDB 5.3.1 リリースノート {#tidb-5-3-1-release-notes}

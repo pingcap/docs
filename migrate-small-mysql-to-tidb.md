@@ -83,7 +83,7 @@ block-allow-list:
 
 ```
 
-上記は移行を実行するための最小限のタスク構成です。タスクに関する詳細な構成項目については、 [DMタスクの完全な構成ファイルの紹介](/dm/task-configuration-file-full.md)を参照してください。
+上記は移行を実行するための最小限のタスク構成です。タスクに関する詳細な設定項目については、 [DMタスクの完全な構成ファイルの紹介](/dm/task-configuration-file-full.md)を参照してください。
 
 ## ステップ3. 移行タスクを開始する {#step-3-start-the-migration-task}
 

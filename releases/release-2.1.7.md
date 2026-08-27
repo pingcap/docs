@@ -14,7 +14,7 @@ TiDB Ansible バージョン: 2.1.7
 ## TiDB {#tidb}
 
 - DDL操作のキャンセルによりプログラムのアップグレード時に起動時間が長くなる問題を修正[＃9768](https://github.com/pingcap/tidb/pull/9768)
-- `check-mb4-value-in-utf8`構成項目が`config.example.toml`ファイル内の間違った位置にある問題を修正しました [＃9852](https://github.com/pingcap/tidb/pull/9852)
+- `check-mb4-value-in-utf8`設定項目が`config.example.toml`ファイル内の間違った位置にある問題を修正しました [＃9852](https://github.com/pingcap/tidb/pull/9852)
 - `str_to_date`組み込み関数とMySQL の互換性を改善 [＃9817](https://github.com/pingcap/tidb/pull/9817)
 - `last_day`組み込み関数の互換性の問題を修正 [＃9750](https://github.com/pingcap/tidb/pull/9750)
 - SQL文を使用して`table_id`を取得するために`infoschema.tables`の`tidb_table_id`列を追加し、テーブルとインデックスの関係を管理するために`tidb_indexes`システムテーブルを追加します。 [＃9862](https://github.com/pingcap/tidb/pull/9862)

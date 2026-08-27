@@ -25,7 +25,7 @@ summary: TiDB クラスターの最小限のデプロイメント トポロジ�
 - [最小トポロジーのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-mini.yaml)
 - [最小トポロジーの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-mini.yaml)
 
-上記の TiDB クラスター トポロジファイルの構成項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジファイルの設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 > **Note:**
 >

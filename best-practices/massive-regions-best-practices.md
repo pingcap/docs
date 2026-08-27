@@ -98,7 +98,7 @@ config set max-merge-region-keys 540000
 config set merge-schedule-limit 8
 ```
 
-詳細については、 [リージョン結合](https://tikv.org/docs/4.0/tasks/configure/region-merge/)および[PD設定ファイル](/pd-configuration-file.md#schedule)の次の3つの構成パラメータを参照してください。
+詳細については、 [リージョン結合](https://tikv.org/docs/4.0/tasks/configure/region-merge/)および[PD設定ファイル](/pd-configuration-file.md#schedule)の次の3つの設定パラメータを参照してください。
 
 - [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size)
 - [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys)

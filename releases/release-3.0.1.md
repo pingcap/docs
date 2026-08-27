@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.1 Release Notes
-summary: "TiDB 3.0.1 リリースノート 2019年7月16日。TiDBバージョン3.0.1。MAX_EXECUTION_TIME機能のサポートを追加。AUTO_INCREMENT IDの増分ギャップの自動調整をサポート。ADMIN PLUGINS ENABLE/DISABLE SQL文を追加。Prepare Plan CacheでWindow Functionsがキャッシュされるのを禁止。さまざまなバグと問題を修正。TiKV: BLOBファイルサイズの統計を追加。コアダンプの問題を修正。PD: enable-grpc-gateway構成オプションを追加。ホットリージョンスケジューリング戦略を最適化。ツール: TiDB Binlog - Pump GC戦略を最適化。TiDB Lightning - インポートエラーを修正。TiDB Ansible - 事前チェック機能を追加、監視情報を更新。"
+summary: "TiDB 3.0.1 リリースノート 2019年7月16日。TiDBバージョン3.0.1。MAX_EXECUTION_TIME機能のサポートを追加。AUTO_INCREMENT IDの増分ギャップの自動調整をサポート。ADMIN PLUGINS ENABLE/DISABLE SQL文を追加。Prepare Plan CacheでWindow Functionsがキャッシュされるのを禁止。さまざまなバグと問題を修正。TiKV: BLOBファイルサイズの統計を追加。コアダンプの問題を修正。PD: enable-grpc-gateway設定オプションを追加。ホットリージョンスケジューリング戦略を最適化。ツール: TiDB Binlog - Pump GC戦略を最適化。TiDB Lightning - インポートエラーを修正。TiDB Ansible - 事前チェック機能を追加、監視情報を更新。"
 ---
 
 # TiDB 3.0.1 リリースノート {#tidb-3-0-1-release-notes}
@@ -57,13 +57,13 @@ TiDB Ansible バージョン: 3.0.1
 - ファイルハンドルの統計が不正確であるためにファイルハンドルが利用できないという問題を回避するために、開いているファイルハンドルの数をカウントするときに Titan の開いているファイルハンドルの数を追加します[＃5026](https://github.com/tikv/tikv/pull/5026)
 - 特定のCF でTitanエンジンを有効にするかどうかを決定するには`blob_run_mode`を設定します。 [＃4991](https://github.com/tikv/tikv/pull/4991)
 - 読み取り操作で悲観的トランザクションのコミット情報を取得できない問題を修正[＃5067](https://github.com/tikv/tikv/pull/5067)
-- Titanエンジンの実行モードを制御するための`blob-run-mode`構成パラメータを追加します。その値は`normal`、`fallback`、または`read-only`になります [＃4865](https://github.com/tikv/tikv/pull/4865)
+- Titanエンジンの実行モードを制御するための`blob-run-mode`設定パラメータを追加します。その値は`normal`、`fallback`、または`read-only`になります [＃4865](https://github.com/tikv/tikv/pull/4865)
 - デッドロック検出のパフォーマンスを向上[＃5089](https://github.com/tikv/tikv/pull/5089)
 
 ## PD {#pd}
 
 - PDがホットリージョンをスケジュールするときに、スケジュール制限が自動的に0に調整される問題を修正しました。 [＃1552](https://github.com/pingcap/pd/pull/1552)
-- etcd の gRPC ゲートウェイ機能を有効にするには、 `enable-grpc-gateway`構成オプションを追加します。 [＃1596](https://github.com/pingcap/pd/pull/1596)
+- etcd の gRPC ゲートウェイ機能を有効にするには、 `enable-grpc-gateway`設定オプションを追加します。 [＃1596](https://github.com/pingcap/pd/pull/1596)
 - `store-balance-rate` 、およびスケジューラ構成に関連するその他の統計情報を追加します`hot-region-schedule-limit` [＃1601](https://github.com/pingcap/pd/pull/1601)
 - ホットリージョンのスケジュール戦略を最適化し、スケジュール時にレプリカが不足しているリージョンをスキップして、同じIDC に複数のレプリカがスケジュールされるのを防ぎます。 [＃1609](https://github.com/pingcap/pd/pull/1609)
 - リージョンのマージ処理ロジックを最適化し、サイズの小さいリージョンのマージを優先してリージョンのマージを高速化します[＃1613](https://github.com/pingcap/pd/pull/1613)

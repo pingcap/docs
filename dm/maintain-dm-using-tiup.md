@@ -145,7 +145,7 @@ tiup dm scale-in prod-cluster -N 172.16.5.140:8262
 
     > **Note:**
     >
-    > トポロジファイルを作成する必要があります。このファイルには、既存のノードではなく、新しいノードの説明のみが含まれます。デプロイメントディレクトリなどの詳細な設定項目については、こちら[TiUP構成パラメータの例](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
+    > トポロジファイルを作成する必要があります。このファイルには、既存のノードではなく、新しいノードの説明のみが含まれます。デプロイメントディレクトリなどの詳細な設定項目については、こちら[TiUP設定パラメータの例](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
 
     ```yaml
     ---

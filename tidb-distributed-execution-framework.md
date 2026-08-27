@@ -53,7 +53,7 @@ DXF を使用して[`ADD INDEX`](/sql-statements/sql-statement-add-index.md)タ�
     - [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) : 高速オンラインDDLモードを有効にするために使用されます。TiDB v6.5.0以降ではデフォルトで有効になっています。
     - [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630) : 高速オンライン DDL モードで使用できるローカルディスクの最大クォータを制御するために使用されます。
 
-2. 高速オンライン DDL に関連する次の構成項目を調整します。
+2. 高速オンライン DDL に関連する次の設定項目を調整します。
 
     - [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) : 高速オンライン DDL モードで使用できるローカルディスク パスを指定します。
 

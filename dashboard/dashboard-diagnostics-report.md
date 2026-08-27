@@ -306,7 +306,7 @@ TiKV モジュールの監視情報に関連するテーブルは次のとおり
 
 ![Scheduler Config Change History report](/media/dashboard/dashboard-diagnostics-config-change.png)
 
-上記の表は、レポート時間範囲内で`leader-schedule-limit`構成パラメータが変更されたことを示しています。
+上記の表は、レポート時間範囲内で`leader-schedule-limit`設定パラメータが変更されたことを示しています。
 
 - `2020-05-22T20:00:00+08:00` : レポートの開始時刻では、構成値`leader-schedule-limit`は`4`です。これは、構成が変更されたことを意味するのではなく、レポート時間範囲の開始時刻では、構成値が`4`あることを意味します。
 - `2020-05-22T20:07:00+08:00` : `leader-schedule-limit`構成値は`8`であり、この構成の値が`2020-05-22T20:07:00+08:00`付近で変更されたことを示します。

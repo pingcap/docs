@@ -17,12 +17,12 @@ TiDB v5.4.0以降、 BRはバックアップタスクの自動チューニング
 
 TiKVは[動的構成](/tikv-control.md#modify-the-tikv-configuration-dynamically)チューニング機能をサポートしています。この機能は、クラスターを再起動せずに以下の方法で有効化または無効化できます。
 
-- 自動調整を無効にする: TiKV 構成項目[`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)を`false`に設定します。
+- 自動調整を無効にする: TiKV 設定項目[`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)を`false`に設定します。
 - 自動チューニングを有効にする： `backup.enable-auto-tune`を`true`に設定します。v5.3.x から v5.4.0 以降のバージョンにアップグレードしたクラスターでは、自動チューニング機能はデフォルトで無効になっています。手動で有効にする必要があります。
 
 `tikv-ctl`を使用して自動調整を有効または無効にするには、 [オートチューンを使用する](/br/br-auto-tune.md#use-auto-tune)を参照してください。
 
-さらに、自動チューニングにより、バックアップタスクで使用されるデフォルトのスレッド数が削減されます。詳細については、 `backup.num-threads` ](/tikv-configuration-file.md#num-threads-1) を参照してください。そのため、Grafana ダッシュボードでは、バックアップタスクで使用される速度、CPU 使用率、および I/O リソース使用率が、v5.4.0 より前のバージョンよりも低くなります。v5.4.0 より前では、デフォルト値`backup.num-threads`は`CPU * 0.75`でした。つまり、バックアップタスクで使用されるスレッド数は、論理 CPU コアの 75% を占めていました。その最大値は`32`でした。v5.4.0 以降、この構成項目のデフォルト値は`CPU * 0.5` 、最大値は`8`です。
+さらに、自動チューニングにより、バックアップタスクで使用されるデフォルトのスレッド数が削減されます。詳細については、 `backup.num-threads` ](/tikv-configuration-file.md#num-threads-1) を参照してください。そのため、Grafana ダッシュボードでは、バックアップタスクで使用される速度、CPU 使用率、および I/O リソース使用率が、v5.4.0 より前のバージョンよりも低くなります。v5.4.0 より前では、デフォルト値`backup.num-threads`は`CPU * 0.75`でした。つまり、バックアップタスクで使用されるスレッド数は、論理 CPU コアの 75% を占めていました。その最大値は`32`でした。v5.4.0 以降、この設定項目のデフォルト値は`CPU * 0.5` 、最大値は`8`です。
 
 オフライン クラスターでバックアップタスクを実行する場合、バックアップを高速化するために、 `tikv-ctl`を使用して`backup.num-threads`の値をより大きな数値に変更できます。
 

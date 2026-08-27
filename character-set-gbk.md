@@ -46,8 +46,8 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
 
 MySQLにおけるGBK文字セットのデフォルトの照合照合順序は`gbk_chinese_ci`です。TiDBにおけるGBK文字セットのデフォルトの照合照合順序は、TiDB設定項目[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)の値によって異なります。
 
-- デフォルトでは、 TiDB 構成項目[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)は`true`に設定されています。つまり、 [照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)が有効になっており、 GBK 文字セットのデフォルトの照合照合順序は`gbk_chinese_ci`です。
-- TiDB 構成項目[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) `false`に設定されている場合、 [照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)は無効になり、 GBK 文字セットのデフォルトの照合順序は`gbk_bin`になります。
+- デフォルトでは、 TiDB 設定項目[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)は`true`に設定されています。つまり、 [照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)が有効になっており、 GBK 文字セットのデフォルトの照合照合順序は`gbk_chinese_ci`です。
+- TiDB 設定項目[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) `false`に設定されている場合、 [照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)は無効になり、 GBK 文字セットのデフォルトの照合順序は`gbk_bin`になります。
 
 </CustomContent>
 

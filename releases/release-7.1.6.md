@@ -16,9 +16,9 @@ TiDB バージョン: 7.1.6
 - [TiDB HTTP API](https://github.com/pingcap/tidb/blob/release-7.1/docs/tidb_http_api.md)から取得される DDL 履歴タスクのデフォルトの制限を2048に設定して、過剰な履歴タスクによる OOM の問題を防止します。 [＃55711](https://github.com/pingcap/tidb/issues/55711) @[joccau](https://github.com/joccau)
 - 以前のバージョンでは、 `UPDATE`変更を含むトランザクションを処理する際に、 `UPDATE`目のイベントで主キーまたは非NULLの一意インデックス値が変更されると、TiCDCはこのイベントを`DELETE`目と`INSERT`目のイベントに分割していました。v7.1.6以降では、MySQLシンクを使用する場合、 `UPDATE`の変更のトランザクション`commitTS` TiCDC `thresholdTS` （TiCDCが対応するテーブルをダウンストリームに複製し始める際にPDから取得する現在のタイムスタンプ）より小さい場合、TiCDCは`UPDATE`件目のイベントを`DELETE`目と`INSERT`件目のイベントに分割します。この動作変更は、TiCDCが受信した`UPDATE`目のイベントの順序が誤っている可能性があり、その結果、分割された`DELETE`と`INSERT`目のイベントの順序が誤っている可能性があることで発生するダウンストリームデータの不整合の問題を解決します。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v7.1/ticdc-split-update-behavior#split-update-events-for-mysql-sinks) してください@[lidezhu](https://github.com/lidezhu) [＃10918](https://github.com/pingcap/tiflow/issues/10918)
 - TiDB Lightning `strict-format`を使用して CSV ファイルをインポートする場合は、行末文字を設定する必要があります[＃37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
-- TiKV構成項目[`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)のスコープを変更します。
+- TiKV設定項目[`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)のスコープを変更します。
 
-    - v7.1.6 より前の v7.1.x バージョンでは、この構成項目は TiKV ノード間の gRPC メッセージの圧縮アルゴリズムにのみ影響します。
+    - v7.1.6 より前の v7.1.x バージョンでは、この設定項目は TiKV ノード間の gRPC メッセージの圧縮アルゴリズムにのみ影響します。
     - v7.1.6以降、この設定項目はTiKVからTiDBに送信されるgRPC応答メッセージの圧縮アルゴリズムにも影響します。圧縮を有効にすると、CPUリソースの消費量が増加する可能性があります[＃17176](https://github.com/tikv/tikv/issues/17176) @[ekexium](https://github.com/ekexium)
 
 ## 改善点 {#improvements}
@@ -221,7 +221,7 @@ TiDB バージョン: 7.1.6
     - 暗号化マネージャーが使用前に初期化されない問題を修正[＃8384](https://github.com/tikv/pd/issues/8384) @[rleungx](https://github.com/rleungx)
     - PDの`Filter target`監視メトリックが散布範囲情報を提供しない問題を修正[＃8125](https://github.com/tikv/pd/issues/8125) @[HuSharp](https://github.com/HuSharp)
     - リソースグループのデータ競合問題を修正 [＃8267](https://github.com/tikv/pd/issues/8267) @[HuSharp](https://github.com/HuSharp)
-    - TiKV構成項目[`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size) 1 MiB未満の値に設定するとPD panicが発生する問題を修正しました [＃8323](https://github.com/tikv/pd/issues/8323) @[JmPotato](https://github.com/JmPotato)
+    - TiKV設定項目[`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size)を1 MiB未満の値に設定するとPD panicが発生する問題を修正しました [＃8323](https://github.com/tikv/pd/issues/8323) @[JmPotato](https://github.com/JmPotato)
     - `evict-leader-scheduler`で間違ったパラメータを使用すると、PD がエラーを正しく報告せず、一部のスケジューラが利用できなくなる問題を修正しました[＃8619](https://github.com/tikv/pd/issues/8619) @[rleungx](https://github.com/rleungx)
     - リソースグループ クライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値より少なくなる問題を修正しました。 [＃7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
     - 配置ルールを使用しているときに、ダウンしたピアが回復しない可能性がある問題を修正しました。 [＃7808](https://github.com/tikv/pd/issues/7808) @[rleungx](https://github.com/rleungx)

@@ -116,7 +116,7 @@ ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT;
 
 <CustomContent platform="tidb">
 
-ここで「信頼できない」とは、元のテーブルのメタデータが`CREATE TABLE STATEMENT`操作でカバーできることを手動で確認する必要があることを意味します。この`REPAIR`ステートメントを使用するには、 [`repair-mode`](/tidb-configuration-file.md#repair-mode)構成項目を有効にし、修復対象のテーブルが[`repair-table-list`](/tidb-configuration-file.md#repair-table-list)にリストされていることを確認してください。
+ここで「信頼できない」とは、元のテーブルのメタデータが`CREATE TABLE STATEMENT`操作でカバーできることを手動で確認する必要があることを意味します。この`REPAIR`ステートメントを使用するには、 [`repair-mode`](/tidb-configuration-file.md#repair-mode)設定項目を有効にし、修復対象のテーブルが[`repair-table-list`](/tidb-configuration-file.md#repair-table-list)にリストされていることを確認してください。
 
 </CustomContent>
 

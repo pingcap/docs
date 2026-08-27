@@ -16,9 +16,9 @@ TiDB バージョン: 8.1.1
 - TiDB Lightningを使用してCSVファイルをインポートする際、並列性とインポートパフォーマンスを向上させるために大きなCSVファイルを複数の小さなCSVファイルに分割するために`strict-format = true`を設定する場合は、明示的に`terminator`を指定する必要があります。値は`\r` 、または`\r\n` `\n`かです。行末文字を指定しないと、CSVファイルデータの解析時に例外が発生する可能性があります[＃37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
 - [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用してCSVファイルをインポートする際、 `SPLIT_FILE`パラメータを指定して大きなCSVファイルを複数の小さなCSVファイルに分割し、同時実行性とインポートパフォーマンスを向上させる場合は、行末文字`LINES_TERMINATED_BY`を明示的に指定する必要があります。値は`\r` 、 `\n` 、または`\r\n`です。行末文字を指定しないと、CSVファイルデータの解析時に例外が発生する可能性があります[＃37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
 - 並列計算中のディスクオーバーフローによるクエリ結果の誤りを回避するため、変数[`tidb_enable_parallel_hashagg_spill`](https://docs.pingcap.com/tidb/v8.1/system-variables#tidb_enable_parallel_hashagg_spill-new-in-v800)のデフォルト値を`ON`から`OFF`に変更してください。v8.0.0またはv8.1.0からv8.1.1にアップグレードしたクラスターの場合、この変数はアップグレード後もデフォルト値の`ON`のままとなるため、手動で`OFF`に変更することをお勧めします[＃55290](https://github.com/pingcap/tidb/issues/55290) @[xzhangxian1008](https://github.com/xzhangxian1008)
-- TiKV構成項目[`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)のスコープを変更します。
+- TiKV設定項目[`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)のスコープを変更します。
 
-    - v8.1.0 では、この構成項目は TiKV ノード間の gRPC メッセージの圧縮アルゴリズムにのみ影響します。
+    - v8.1.0 では、この設定項目は TiKV ノード間の gRPC メッセージの圧縮アルゴリズムにのみ影響します。
     - v8.1.1以降、この設定項目はTiKVからTiDBに送信されるgRPC応答メッセージの圧縮アルゴリズムにも影響します。圧縮を有効にすると、CPUリソースの消費量が増加する可能性があります[＃17176](https://github.com/tikv/tikv/issues/17176) @[ekexium](https://github.com/ekexium)
 
 ## オフラインパッケージの変更 {#offline-package-changes}
@@ -129,7 +129,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     - `make docker`と`make docker_test`の失敗を修正[＃17075](https://github.com/tikv/tikv/issues/17075) @[shunki-fujita](https://github.com/shunki-fujita)
     - **gRPC リクエストソースの継続時間**メトリックが監視ダッシュボードに誤って表示される問題を修正しました [＃17133](https://github.com/tikv/tikv/issues/17133) @[King-Dylan](https://github.com/King-Dylan)
     - tikv-ctlの`raft region`コマンドの出力にリージョンステータス情報が含まれていない問題を修正しました [＃17037](https://github.com/tikv/tikv/issues/17037) @[glorv](https://github.com/glorv)
-    - `raftstore.periodic-full-compact-start-times`構成項目をオンラインで変更すると、TiKVがpanicを起こす可能性がある問題を修正しました[＃17066](https://github.com/tikv/tikv/issues/17066) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
+    - `raftstore.periodic-full-compact-start-times`設定項目をオンラインで変更すると、TiKVがpanicを起こす可能性がある問題を修正しました[＃17066](https://github.com/tikv/tikv/issues/17066) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
     - 破損したRaftデータスナップショットを適用すると TiKV が繰り返しpanicする可能性がある問題を修正しました。 [＃15292](https://github.com/tikv/tikv/issues/15292) @[LykxSassinator](https://github.com/LykxSassinator)
     - キャッシュエントリが永続化される前に解放すると TiKV がpanicを起こす問題を修正しました [＃17040](https://github.com/tikv/tikv/issues/17040) @[glorv](https://github.com/glorv)
 
@@ -155,7 +155,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     - リソースグループクエリをキャンセルするときに再試行回数が多すぎる問題を修正 [＃8217](https://github.com/tikv/pd/issues/8217) @[nolouch](https://github.com/nolouch)
     - PD がオペレーター チェック中に遭遇するデータ競合問題を修正しました [＃8263](https://github.com/tikv/pd/issues/8263) @[lhy1024](https://github.com/lhy1024)
     - ロールをリソースグループにバインドするときにエラーが報告されない問題を修正しました [＃54417](https://github.com/pingcap/tidb/issues/54417) @[JmPotato](https://github.com/JmPotato)
-    - TiKV構成項目[`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size) 1 MiB未満の値に設定するとPD panicが発生する問題を修正しました [＃8323](https://github.com/tikv/pd/issues/8323) @[JmPotato](https://github.com/JmPotato)
+    - TiKV設定項目[`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size)を1 MiB未満の値に設定するとPD panicが発生する問題を修正しました [＃8323](https://github.com/tikv/pd/issues/8323) @[JmPotato](https://github.com/JmPotato)
 
 - TiFlash
 

@@ -22,7 +22,7 @@ TiDB Ansible バージョン: 2.1.14
 - クエリの最大実行時間を制御するグローバルシステム変数を`max_execution_time`追加する[＃10940](https://github.com/pingcap/tidb/pull/10940)
 - サポートされていない集計関数の使用によって発生するpanicを修正[＃10911](https://github.com/pingcap/tidb/pull/10911)
 - `load data`文が失敗した場合、最後のトランザクションに自動ロールバック機能を追加します[＃10862](https://github.com/pingcap/tidb/pull/10862)
-- `OOMAction`構成項目が`Cancel` に設定されている場合に TiDB が誤った結果を返す場合がある問題を修正しました。 [＃11016](https://github.com/pingcap/tidb/pull/11016)
+- `OOMAction`設定項目が`Cancel` に設定されている場合に TiDB が誤った結果を返す場合がある問題を修正しました。 [＃11016](https://github.com/pingcap/tidb/pull/11016)
 - TiDBのpanic問題を回避するために`TRACE`文を無効にする [＃11039](https://github.com/pingcap/tidb/pull/11039)
 - 特定の関数をコプロセッサーにプッシュダウンすることを動的に有効/無効にする`mysql.expr_pushdown_blacklist`システムテーブルを追加します。 [＃10998](https://github.com/pingcap/tidb/pull/10998)
 - `ANY_VALUE`機能が`ONLY_FULL_GROUP_BY`モードで動作しない問題を修正 [＃10994](https://github.com/pingcap/tidb/pull/10994)
@@ -34,14 +34,14 @@ TiDB Ansible バージョン: 2.1.14
 
 ## PD {#pd}
 
-- 無効な構成項目読み取るときにログ出力レベルを`Error`から`Warning`に調整します [＃1577](https://github.com/pingcap/pd/pull/1577)
+- 無効な設定項目を読み取るときにログ出力レベルを`Error`から`Warning`に調整します [＃1577](https://github.com/pingcap/pd/pull/1577)
 
 ## ツール {#tools}
 
 TiDB Binlog
 
 - Reparo
-    - `safe-mode`構成項目を追加し、この項目を有効にした後に重複したデータのインポートをサポートします[＃662](https://github.com/pingcap/tidb-binlog/pull/662)
+    - `safe-mode`設定項目を追加し、この項目を有効にした後に重複したデータのインポートをサポートします[＃662](https://github.com/pingcap/tidb-binlog/pull/662)
 - Pump
     - 利用可能なbinlogスペースを制限するための`stop-write-at-available-space`設定項目を追加します[＃659](https://github.com/pingcap/tidb-binlog/pull/659)
     - LevelDB L0ファイルの数が多い場合にガベージコレクターが動作しないことがある問題を修正しました。 [＃648](https://github.com/pingcap/tidb-binlog/pull/648)

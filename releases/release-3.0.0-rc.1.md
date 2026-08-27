@@ -114,8 +114,8 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     - ダウンストリームが`pb`の場合は圧縮オプションを提供しません。ダウンストリーム名を`pb`から`file`に変更します[＃559](https://github.com/pingcap/tidb-binlog/pull/559)
     - Pumpにローカルストレージへの非同期フラッシュを許可する`storage.sync-log`設定項目を追加する [＃509](https://github.com/pingcap/tidb-binlog/pull/509)
     - PumpとDrainer間の通信のトラフィック圧縮をサポート [＃495](https://github.com/pingcap/tidb-binlog/pull/495)
-    - 異なるSQLモードでのDDLクエリの解析をサポートするために、 Drainerに`syncer.sql-mode`構成項目を追加します。 [＃511](https://github.com/pingcap/tidb-binlog/pull/511)
-    - レプリケーションを必要としないテーブルを除外するための構成項目を`syncer.ignore-table`追加します[＃520](https://github.com/pingcap/tidb-binlog/pull/520)
+    - 異なるSQLモードでのDDLクエリの解析をサポートするために、 Drainerに`syncer.sql-mode`設定項目を追加します。 [＃511](https://github.com/pingcap/tidb-binlog/pull/511)
+    - レプリケーションを必要としないテーブルを除外するための設定項目を`syncer.ignore-table`追加します[＃520](https://github.com/pingcap/tidb-binlog/pull/520)
 
 - Lightning
     - 行IDまたはデフォルトの列値を使用して、ダンプファイルで欠落した列データを入力します。 [＃170](https://github.com/pingcap/tidb-lightning/pull/170)
@@ -128,7 +128,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
 
 - sync-diff-inspector
     - チェックポイントをサポートし、検証ステータスを記録し、再起動後に最後に保存したポイントから検証を続行します[＃224](https://github.com/pingcap/tidb-tools/pull/224)
-    - チェックサムを計算してデータの整合性をチェックするための構成項目`only-use-checksum`を追加します [＃215](https://github.com/pingcap/tidb-tools/pull/215)
+    - チェックサムを計算してデータの整合性をチェックするための設定項目`only-use-checksum`を追加します [＃215](https://github.com/pingcap/tidb-tools/pull/215)
 
 ## TiDB Ansible {#tidb-ansible}
 

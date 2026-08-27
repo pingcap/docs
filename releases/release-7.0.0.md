@@ -357,7 +357,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
         - Kafkaがダウンストリームとなるシナリオにおいて、単一の大規模テーブルのデータ変更を複数のTiCDCノードに分散することをサポートし、大規模TiDBクラスタのデータ統合シナリオにおける単一テーブルのスケーラビリティ問題を解決します [#8247](https://github.com/pingcap/tiflow/issues/8247) @[overvenus](https://github.com/overvenus)
 
-            TiCDC 構成項目`enable_table_across_nodes`を`true`に設定することで、この機能を有効にできます。 `region_threshold`を使用すると、テーブルのリージョン数がこのしきい値を超えた場合に、TiCDC が対応するテーブルのデータ変更を複数の TiCDC ノードに分散するように指定できます。
+            TiCDC 設定項目`enable_table_across_nodes`を`true`に設定することで、この機能を有効にできます。 `region_threshold`を使用すると、テーブルのリージョン数がこのしきい値を超えた場合に、TiCDC が対応するテーブルのデータ変更を複数の TiCDC ノードに分散するように指定できます。
 
         - リドゥアプライヤーにおけるトランザクション分割をサポートし、スループットを向上させ、ディザスタリカバリシナリオにおけるRTOを短縮する [#8318](https://github.com/pingcap/tiflow/issues/8318) @[CharlesCheung96](https://github.com/CharlesCheung96)
 

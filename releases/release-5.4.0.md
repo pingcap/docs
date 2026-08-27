@@ -217,7 +217,7 @@ TiDB バージョン: 5.4.0
 
 - **TiDB Lightningは、並列インポート用のメタ情報を格納するスキーマ名を導入しました。**
 
-    TiDB Lightning、 `meta-schema-name`という構成項目が導入されました。並列インポートモードでは、このパラメータは、ターゲットクラスタ内の各TiDB Lightningインスタンスのメタ情報を格納するスキーマ名を指定します。デフォルト値は「lightning_metadata」です。このパラメータに設定する値は、同じ並列インポートに参加する各TiDB Lightningインスタンスで同じである必要があります。そうでない場合、インポートされたデータの正確性が保証されません。
+    TiDB Lightning、 `meta-schema-name`という設定項目が導入されました。並列インポートモードでは、このパラメータは、ターゲットクラスタ内の各TiDB Lightningインスタンスのメタ情報を格納するスキーマ名を指定します。デフォルト値は「lightning_metadata」です。このパラメータに設定する値は、同じ並列インポートに参加する各TiDB Lightningインスタンスで同じである必要があります。そうでない場合、インポートされたデータの正確性が保証されません。
 
     [ユーザー向けドキュメント](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)
 

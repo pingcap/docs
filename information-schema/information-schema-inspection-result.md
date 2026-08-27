@@ -212,7 +212,7 @@ select * from information_schema.inspection_rules where type='inspection';
     storage.block-cache.capacity
     ```
 
-- 以下の構成項目の値が期待どおりであるかどうかを確認します。
+- 以下の設定項目の値が期待どおりであるかどうかを確認します。
 
     | コンポーネント   | コンフィグレーション項目       | 期待値      |
     | ---- | ------------------ | -------- |

@@ -143,7 +143,7 @@ DM v2.0 以降、増分データレプリケーションを続行するために
 
 ## シャーディングされたスキーマとテーブルを複製するときに DM が致命的なエラーを報告しないのに、ダウンストリームデータが失われるのはなぜですか? {#why-does-dm-report-no-fatal-error-when-replicating-sharded-schemas-and-tables-but-downstream-data-is-lost}
 
-構成項目`block-allow-list`と`table-route`を確認します。
+設定項目`block-allow-list`と`table-route`を確認します。
 
 - `block-allow-list`の下にある上流のデータベースとテーブルの名前を設定する必要があります。`do-tables`の前に「~」を追加すると、正規表現を使用して名前を一致させることができます。
 - `table-route` 、テーブル名の一致に正規表現ではなくワイルドカード文字を使用します。例えば、 `table_parttern_[0-63]` `table_parttern_0`から`table_pattern_6`までの 7つのテーブルのみに一致します。

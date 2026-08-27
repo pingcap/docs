@@ -11,7 +11,7 @@ summary: TiCDC でサポートされている DDL ステートメントといく
 
 現在、TiCDC は許可リストを使用して DDL ステートメントをレプリケートするかどうかを決定します。許可リストに含まれる DDL ステートメントのみが下流にレプリケートされます。許可リストに含まれない DDL ステートメントはレプリケートされません。
 
-さらに、TiCDCは、テーブルに[有効なインデックス](/ticdc/ticdc-overview.md#valid-index)があるかどうか、および構成項目[`force-replicate`](/ticdc/ticdc-changefeed-config.md#force-replicate)が`true`に設定されているかどうかに基づいて、DDL文をダウンストリームに複製するかどうかを決定します。`force-replicate=true`の場合、レプリケーションタスクは強制的に[有効なインデックスのないテーブルを複製する](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index)試みます。
+さらに、TiCDCは、テーブルに[有効なインデックス](/ticdc/ticdc-overview.md#valid-index)があるかどうか、および設定項目[`force-replicate`](/ticdc/ticdc-changefeed-config.md#force-replicate)が`true`に設定されているかどうかに基づいて、DDL文をダウンストリームに複製するかどうかを決定します。`force-replicate=true`の場合、レプリケーションタスクは強制的に[有効なインデックスのないテーブルを複製する](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index)試みます。
 
 以下は、TiCDC でサポートされている DDL ステートメントの許可リストです。表内の略語は以下のとおりです。
 

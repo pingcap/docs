@@ -1,6 +1,6 @@
 ---
 title: What's New in TiDB 5.0
-summary: TiDB 5.0では、MPPアーキテクチャ、クラスター化インデックス、非同期コミット、および安定性の向上が導入されています。また、互換性の変更、構成パラメータ、および新機能も強化されています。さらに、パフォーマンス、高可用性、ディザスタリカバリ、データ移行、診断、デプロイ、およびメンテナンスが最適化されています。クラスタの使用状況メトリクス用のテレメトリ機能も追加されています。
+summary: TiDB 5.0では、MPPアーキテクチャ、クラスター化インデックス、非同期コミット、および安定性の向上が導入されています。また、互換性の変更、設定パラメータ、および新機能も強化されています。さらに、パフォーマンス、高可用性、ディザスタリカバリ、データ移行、診断、デプロイ、およびメンテナンスが最適化されています。クラスタの使用状況メトリクス用のテレメトリ機能も追加されています。
 ---
 
 # TiDB 5.0の新機能 {#what-s-new-in-tidb-5-0}
@@ -145,14 +145,14 @@ List COLUMNS パーティショニングを有効にするには、セッショ�
 
 [ユーザー向けドキュメント](/log-redaction.md)、 [#18566](https://github.com/pingcap/tidb/issues/18566)
 
-セキュリティコンプライアンス要件（*一般データ保護規則*、GDPRなど）を満たすため、システムは出力されるエラーメッセージやログから情報（IDやクレジットカード番号など）を匿名化する機能をサポートしており、機密情報の漏洩を防ぐことができます。
+セキュリティコンプライアンス要件（*一般データ保護規則*、GDPRなど）を満たすため、システムは出力されるエラーメッセージやログから情報（IDやクレジットカード番号など）を秘匿化する機能をサポートしており、機密情報の漏洩を防ぐことができます。
 
-TiDBは出力ログ情報の非機密化をサポートしています。この機能を有効にするには、以下のスイッチを使用してください。
+TiDBは出力ログ情報の秘匿化をサポートしています。この機能を有効にするには、以下のスイッチを使用してください。
 
-- グローバル変数[`tidb_redact_log`](/system-variables.md#tidb_redact_log) 。デフォルト値は`0`で、これは非機密化が無効になっていることを意味します。tidb-server ログの非機密化を有効にするには、変数の値を`1`に設定します。
-- 設定項目`security.redact-info-log` 。デフォルト値は`false`で、これは非感度化が無効になっていることを意味します。tikv-server ログの非感度化を有効にするには、変数の値を`true`に設定します。
-- 設定項目`security.redact-info-log` 。デフォルト値は`false`で、これは非機密化が無効になっていることを意味します。pd-server ログの非機密化を有効にするには、変数の値を`true`に設定します。
-- tiflash-server の構成項目`security.redact_info_log`と tiflash-learner の構成項目`security.redact-info-log`です。デフォルト値はどちらも`false`で、これは感度低減が無効になっていることを意味します。tiflash-server と tiflash-learner のログの感度低減を有効にするには、両方の変数の値を`true`に設定します。
+- グローバル変数[`tidb_redact_log`](/system-variables.md#tidb_redact_log) 。デフォルト値は`0`で、これは秘匿化が無効になっていることを意味します。tidb-server ログの秘匿化を有効にするには、変数の値を`1`に設定します。
+- 設定項目`security.redact-info-log` 。デフォルト値は`false`で、これは秘匿化が無効になっていることを意味します。tikv-server ログの秘匿化を有効にするには、変数の値を`true`に設定します。
+- 設定項目`security.redact-info-log` 。デフォルト値は`false`で、これは秘匿化が無効になっていることを意味します。pd-server ログの秘匿化を有効にするには、変数の値を`true`に設定します。
+- tiflash-server の設定項目`security.redact_info_log`と tiflash-learner の設定項目`security.redact-info-log` 。デフォルト値はどちらも`false`で、これは秘匿化が無効になっていることを意味します。tiflash-server と tiflash-learner のログの秘匿化を有効にするには、両方の変数の値を`true`に設定します。
 
 この機能はバージョン5.0で導入されました。この機能を使用するには、上記のシステム変数とすべての設定項目を有効にしてください。
 
@@ -222,7 +222,7 @@ CREATE TABLE `t` (`a` VARCHAR(255) PRIMARY KEY CLUSTERED, `b` INT);
     - `OFF` : すべてのタイプの主キーに対して、クラスター化インデックス機能が無効になっていることを示します。非クラスター化インデックスの追加と削除はサポートされています。
     - `INT_ONLY` : デフォルト値。変数が`INT_ONLY`に設定され、 `alter-primary-key`が`false`に設定されている場合、単一の整数列で構成される主キーは、デフォルトでクラスター化インデックスとして作成されます。この動作は、TiDB v5.0 およびそれ以前のバージョンと同様です。
 
-`CREATE TABLE`ステートメントにキーワード`CLUSTERED | NONCLUSTERED`が含まれている場合、そのステートメントはシステム変数と構成項目の設定を上書きします。
+`CREATE TABLE`ステートメントにキーワード`CLUSTERED | NONCLUSTERED`が含まれている場合、そのステートメントはシステム変数と設定項目の設定を上書きします。
 
 ステートメントでキーワード`CLUSTERED | NONCLUSTERED`を指定して、クラスター化インデックス機能を使用することをお勧めします。この方法により、TiDB は必要に応じてシステム内のクラスター化インデックスと非クラスター化インデックスのすべてのデータ型を同時に使用できるようになり、より柔軟に対応できます。
 
@@ -268,7 +268,7 @@ CREATE TABLE `t` (`a` VARCHAR(255) PRIMARY KEY CLUSTERED, `b` INT);
 
 5.0 GAでは、コプロセッサーキャッシュ機能がデフォルトで有効になっています。この機能が有効になると、データ読み取りのレイテンシーを削減するために、TiDBはtikv-serverにプッシュダウンされた演算子の計算結果をtidb-serverにキャッシュします。
 
-コプロセッサーキャッシュ機能を無効にするには、 `capacity-mb`の構成項目`tikv-client.copr-cache`を`0.0`に変更します。
+コプロセッサーキャッシュ機能を無効にするには、 `capacity-mb`の設定項目`tikv-client.copr-cache`を`0.0`に変更します。
 
 ### `delete from table where id &lt;? Limit ?`ステートメントの実行パフォーマンスを改善します。 {#improve-the-execution-performance-of-delete-from-table-where-id-x3c-limit-statement}
 
@@ -300,7 +300,7 @@ TiDBのスケジューリングプロセスは、I/O、ネットワーク、CPU�
 
 [ユーザー向けドキュメント](/pd-configuration-file.md#enable-cross-table-merge)
 
-バージョン5.0より前は、TiDBはデフォルトでクロステーブルリージョンマージ機能を無効にしていました。バージョン5.0以降では、空のリージョンの数を減らし、ネットワーク、メモリ、CPUのオーバーヘッドを削減するために、この機能がデフォルトで有効になっています。この機能は`schedule.enable-cross-table-merge`構成項目を変更することで無効にできます。
+バージョン5.0より前は、TiDBはデフォルトでクロステーブルリージョンマージ機能を無効にしていました。バージョン5.0以降では、空のリージョンの数を減らし、ネットワーク、メモリ、CPUのオーバーヘッドを削減するために、この機能がデフォルトで有効になっています。この機能は`schedule.enable-cross-table-merge`設定項目を変更することで無効にできます。
 
 #### バックグラウンドタスクとフォアグラウンドの読み書き間のI/Oリソースの競合のバランスを取るために、システムがデフォルトでデータ圧縮速度を自動的に調整できるようにします。 {#enable-the-system-to-automatically-adjust-the-data-compaction-speed-by-default-to-balance-the-contention-for-i-o-resources-between-background-tasks-and-foreground-reads-and-writes}
 
@@ -432,7 +432,7 @@ TiDB v5.0では、パフォーマンスの問題をより効率的にトラブ�
 - TiUP クラスタ は、DBA が編集するためのクラスタトポロジテンプレート ファイルを取得し、グローバルノード パラメータの変更をサポートする`template`コマンドをサポートしています。
 - TiUPは`remote_config`コマンドを使用して`edit-config`パラメータを編集し、リモートPrometheusを設定することをサポートしています。
 - TiUPは`external_alertmanagers`コマンドを使用して異なるAlertManagerを設定するために、 `edit-config`パラメーターの編集をサポートしています。
-- tiup-clusterの`edit-config`サブコマンドを使用してトポロジファイルを編集する場合、構成項目の値のデータ型を変更できます。
+- tiup-clusterの`edit-config`サブコマンドを使用してトポロジファイルを編集する場合、設定項目の値のデータ型を変更できます。
 
 ### アップグレードの安定性を向上させる {#improve-upgrade-stability}
 

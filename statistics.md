@@ -47,7 +47,7 @@ TiDBは、テーブルへの変更回数に基づいて、自動的に[`ANALYZE`
 
 > **Note:**
 >
-> 現在、自動更新では`ANALYZE`で手動で入力された構成項目は記録されません。そのため、 [`WITH`](/sql-statements/sql-statement-analyze-table.md)構文を使用して`ANALYZE`の収集動作を制御する場合は、統計情報を収集するためのスケジュール済みタスクを手動で設定する必要があります。
+> 現在、自動更新では`ANALYZE`で手動で入力された設定項目は記録されません。そのため、 [`WITH`](/sql-statements/sql-statement-analyze-table.md)構文を使用して`ANALYZE`の収集動作を制御する場合は、統計情報を収集するためのスケジュール済みタスクを手動で設定する必要があります。
 
 ### 手動収集 {#manual-collection}
 

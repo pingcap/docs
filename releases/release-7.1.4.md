@@ -14,7 +14,7 @@ TiDBバージョン: 7.1.4
 ## 互換性の変更 {#compatibility-changes}
 
 - ログ印刷のオーバーヘッドを減らすために、 TiFlashはデフォルト値の`logger.level` `"debug"`から`"info"` に変更します。 [＃8641](https://github.com/pingcap/tiflash/issues/8641) @[JaySon-Huang](https://github.com/JaySon-Huang)
-- TiKV構成項目[`gc.num-threads`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#num-threads-new-in-v658)を導入して、 `enable-compaction-filter`が`false` の場合のGCスレッド数を設定します。 [＃16101](https://github.com/tikv/tikv/issues/16101) @[tonyxuqqi](https://github.com/tonyxuqqi)
+- TiKV設定項目[`gc.num-threads`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#num-threads-new-in-v658)を導入して、 `enable-compaction-filter`が`false` の場合のGCスレッド数を設定します。 [＃16101](https://github.com/tikv/tikv/issues/16101) @[tonyxuqqi](https://github.com/tonyxuqqi)
 
 ## 改善点 {#improvements}
 

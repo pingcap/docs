@@ -23,7 +23,7 @@ TiDB v5.4.0より前のバージョンでは、バックアップ＆リストア
 >
 > v5.3.xからv5.4.0以降のバージョンにアップグレードするクラスターでは、自動チューニング機能はデフォルトで無効になっています。手動で有効にする必要があります。
 
-自動調整機能を手動で有効にするには、TiKV 構成項目[`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)を`true`に設定する必要があります。
+自動調整機能を手動で有効にするには、TiKV 設定項目[`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)を`true`に設定する必要があります。
 
 TiKVは自動チューニング機能の動的な設定をサポートしています。この機能は、クラスターを再起動せずに有効化または無効化できます。自動チューニング機能を動的に有効化または無効化するには、次のコマンドを実行します。
 

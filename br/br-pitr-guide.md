@@ -154,7 +154,7 @@ PITRを実行するには、復元ポイントより前のフルバックアッ�
 テストシナリオ 1 ( [TiDB Cloud](https://tidbcloud.com)上) は次のとおりです。
 
 - TiKVノード数（8コア、16GBメモリ）: 21
-- TiKV構成項目`import.num-threads` ：8
+- TiKV設定項目`import.num-threads` ：8
 - BRコマンドオプション`pitr-concurrency` ：128
 - リージョン数: 183,000
 - クラスターに作成された新しいログデータ: 10 GB/時間
@@ -163,7 +163,7 @@ PITRを実行するには、復元ポイントより前のフルバックアッ�
 テスト シナリオ 2 (TiDB Self-Managed 上) は次のとおりです。
 
 - TiKVノード数（8コア、64GBメモリ）: 6
-- TiKV構成項目`import.num-threads` ：8
+- TiKV設定項目`import.num-threads` ：8
 - BRコマンドオプション`pitr-concurrency` ：128
 - リージョン数: 50,000
 - クラスターに作成された新しいログデータ: 10 GB/時間

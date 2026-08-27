@@ -155,7 +155,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 - リージョンごとに、複数のTiCDCノードにテーブルを割り当ててレプリケーションを実行します。
 
-- [TiCDCクラシックアーキテクチャ](/ticdc/ticdc-classic-architecture.md)では、この構成項目は Kafka 変更フィードでのみ有効であり、MySQL 変更フィードではサポートされません。
+- [TiCDCクラシックアーキテクチャ](/ticdc/ticdc-classic-architecture.md)では、この設定項目は Kafka 変更フィードでのみ有効であり、MySQL 変更フィードではサポートされません。
 
 - [TiCDCの新アーキテクチャ](/ticdc/ticdc-architecture.md)では、この設定項目はあらゆる種類のダウンストリーム変更フィードで機能します。詳細については、 [新機能](/ticdc/ticdc-architecture.md#new-features)を参照してください。
 
@@ -250,7 +250,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 #### `terminator` {#terminator}
 
-- この構成項目は、データをストレージシンクにレプリケートする場合にのみ使用され、MQまたはMySQLシンクにデータをレプリケートする場合は無視できます。
+- この設定項目は、データをストレージシンクにレプリケートする場合にのみ使用され、MQまたはMySQLシンクにデータをレプリケートする場合は無視できます。
 - 2つのデータ変更イベントを区切るために使用される行終端文字を指定します。
 - デフォルト値: `""` 、つまり`\r\n`が使用されます。
 
@@ -316,7 +316,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 - 有効にすると、データ変更のある列の前に`"is-update"`列が追加されます。この追加された列は、現在の行のデータ変更が`UPDATE`イベントによるものか、元の`INSERT`イベントまたは`DELETE`イベントによるものかを識別するために使用されます。現在の行のデータ変更が`UPDATE`イベントによるものである場合、 `"is-update"`列の値は`true`になります。それ以外の場合は、 `false`になります。
 - デフォルト値: `false`
 
-v8.0.0 以降、TiCDC はSimple メッセージ エンコーディング プロトコルをサポートします。以下は、Simpleプロトコルの構成パラメータです。プロトコルの詳細については、 [TiCDC Simpleプロトコル](/ticdc/ticdc-simple-protocol.md)を参照してください。
+v8.0.0 以降、TiCDC はSimple メッセージ エンコーディング プロトコルをサポートします。以下は、Simpleプロトコルの設定パラメータです。プロトコルの詳細については、 [TiCDC Simpleプロトコル](/ticdc/ticdc-simple-protocol.md)を参照してください。
 
 以下の設定パラメータは、ブートストラップメッセージの送信動作を制御します。
 

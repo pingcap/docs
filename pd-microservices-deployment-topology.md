@@ -80,12 +80,12 @@ grafana_servers:
 
 </details>
 
-前述の TiDB クラスター トポロジファイルの構成項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジ構成ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+前述の TiDB クラスター トポロジファイルの設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジ構成ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 ### 主なパラメータ {#key-parameters}
 
 - `tso_servers`のインスタンスのレベル`host`構成では、ドメイン名ではなく IP アドレスのみがサポートされます。
-- TSO 構成項目の詳細については、 [TSO 構成ファイル](/tso-configuration-file.md)を参照してください。
+- TSO 設定項目の詳細については、 [TSO 構成ファイル](/tso-configuration-file.md)を参照してください。
 - `scheduling_servers`のインスタンスのレベル`host`構成では、ドメイン名ではなく IP アドレスのみがサポートされます。
 - スケジュール設定項目の詳細については、 [スケジュール設定ファイル](/scheduling-configuration-file.md)を参照してください。
 

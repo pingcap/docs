@@ -159,7 +159,7 @@ set global tidb_stmt_summary_history_size = 24;
 > **Note:**
 >
 > - SQL タイプが毎分出現する場合、 `statements_summary_history`には直近 12時間分のデータが格納されます。SQL タイプが毎日 00:00 から 00:30 の間にのみ出現する場合、 `statements_summary_history`には直近 24 期間分のデータが格納されます。各期間は 1日です。したがって、 `statements_summary_history`にはこの SQL タイプに関する直近 24日分のデータが格納されます。
-> - `tidb_stmt_summary_history_size` 、 `tidb_stmt_summary_max_stmt_count` 、および`tidb_stmt_summary_max_sql_length`構成項目はメモリ使用量に影響します。これらの構成は、ニーズ、SQLサイズ、SQL数、およびマシン構成に基づいて調整することをお勧めします。大きすぎる値を設定することはお勧めしません。メモリ使用量は`tidb_stmt_summary_history_size` *`tidb_stmt_summary_max_stmt_count`* `tidb_stmt_summary_max_sql_length` * `3` 。
+> - `tidb_stmt_summary_history_size` 、 `tidb_stmt_summary_max_stmt_count` 、および`tidb_stmt_summary_max_sql_length`設定項目はメモリ使用量に影響します。これらの構成は、ニーズ、SQLサイズ、SQL数、およびマシン構成に基づいて調整することをお勧めします。大きすぎる値を設定することはお勧めしません。メモリ使用量は`tidb_stmt_summary_history_size` \* `tidb_stmt_summary_max_stmt_count` \* `tidb_stmt_summary_max_sql_length` \* `3` 。
 
 ### ステートメントサマリーに適切なサイズを設定してください。 {#set-a-proper-size-for-statement-summary}
 
@@ -239,7 +239,7 @@ select * from information_schema.statements_summary_evicted;
 
 </CustomContent>
 
-ステートメントのサマリーを永続化するには、TiDB構成ファイルに次の構成項目を追加します。
+ステートメントのサマリーを永続化するには、TiDB構成ファイルに次の設定項目を追加します。
 
 ```toml
 [instance]

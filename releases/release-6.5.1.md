@@ -16,8 +16,8 @@ TiDB バージョン: 6.5.1
 - 2023年2月20日以降、TiDBおよびTiDB Dashboardの新しいバージョン（v6.5.1を含む）では、 [テレメトリ機能](/telemetry.md)がデフォルトで無効化され、使用状況情報は収集されず、PingCAPと共有されません。これらのバージョンにアップグレードする前に、クラスターがデフォルトのテレメトリ設定を使用している場合、アップグレード後にテレメトリ機能が無効化されます。具体的なバージョンについては、 [TiDB リリース タイムライン](/releases/release-timeline.md)を参照してください。
 
     - [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402)システム変数のデフォルト値が`ON`から`OFF`に変更されます。
-    - TiDB [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)構成項目のデフォルト値が`true`から`false`に変更されます。
-    - PD [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry)構成項目のデフォルト値が`true`から`false`に変更されます。
+    - TiDB [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)設定項目のデフォルト値が`true`から`false`に変更されます。
+    - PD [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry)設定項目のデフォルト値が`true`から`false`に変更されます。
 
 - v1.11.3 以降、新規に導入されたTiUPではテレメトリ機能がデフォルトで無効化され、使用状況情報は収集されません。v1.11.3 より前のバージョンのTiUPから v1.11.3 以降のバージョンにアップグレードした場合、テレメトリ機能はアップグレード前と同じ状態を維持します。
 
@@ -25,7 +25,7 @@ TiDB バージョン: 6.5.1
 
 - TiKV [`advance-ts-interval`](/tikv-configuration-file.md#advance-ts-interval)設定項目のデフォルト値が`1s`から`20s`に変更されました。この設定項目を変更することで、レイテンシーを短縮し、 ステイル読み取りデータの適時性を向上させることができます。詳細は[ステイル読み取りのレイテンシーを削減](/stale-read.md#reduce-stale-read-latency)ご覧ください。
 
-- ネットワークトラフィックを削減するために、TiKV [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)構成項目の既定値が`"200ms"`から`"1s"`に変更されました。
+- ネットワークトラフィックを削減するために、TiKV [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)設定項目の既定値が`"200ms"`から`"1s"`に変更されました。
 
 ## 改善点 {#improvements}
 
@@ -78,7 +78,7 @@ TiDB バージョン: 6.5.1
 
 - TiDB
 
-    - [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600)構成項目がPointGetクエリで有効にならない問題を修正しました [＃39928](https://github.com/pingcap/tidb/issues/39928) @[zyguan](https://github.com/zyguan)
+    - [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600)設定項目がPointGetクエリで有効にならない問題を修正しました [＃39928](https://github.com/pingcap/tidb/issues/39928) @[zyguan](https://github.com/zyguan)
     - 長いセッション接続で`INSERT`または`REPLACE`ステートメントがpanicする可能性がある問題を修正しました [＃40351](https://github.com/pingcap/tidb/issues/40351) @[winoros](https://github.com/winoros)
     - `auto analyze`正常なシャットダウンに長い時間がかかる問題を修正[＃40038](https://github.com/pingcap/tidb/issues/40038) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - DDL取り込み中にデータ競合が発生する可能性がある問題を修正 [＃40970](https://github.com/pingcap/tidb/issues/40970) @[tangenta](https://github.com/tangenta)

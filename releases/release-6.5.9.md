@@ -13,7 +13,7 @@ TiDB バージョン: 6.5.9
 
 ## 互換性の変更 {#compatibility-changes}
 
-- RocksDB の TiKV 構成項目[`track-and-verify-wals-in-manifest`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#track-and-verify-wals-in-manifest-new-in-v659)を追加します。これは、Write Ahead Log (WAL) の破損の可能性を調査するのに役立ちます。 [＃16549](https://github.com/tikv/tikv/issues/16549) @[v01dstar](https://github.com/v01dstar)
+- RocksDB の TiKV 設定項目[`track-and-verify-wals-in-manifest`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#track-and-verify-wals-in-manifest-new-in-v659)を追加します。これは、Write Ahead Log (WAL) の破損の可能性を調査するのに役立ちます。 [＃16549](https://github.com/tikv/tikv/issues/16549) @[v01dstar](https://github.com/v01dstar)
 - DR自動同期は[`wait-recover-timeout`](https://docs.pingcap.com/tidb/v6.5/two-data-centers-in-one-city-deployment#enable-the-dr-auto-sync-mode)設定をサポートしており、ネットワークが回復した後、 `sync-recover`状態に戻るまでの待機時間を制御できます[＃6295](https://github.com/tikv/pd/issues/6295) @[disksing](https://github.com/disksing)
 
 ## 改善点 {#improvements}
@@ -96,7 +96,7 @@ TiDB バージョン: 6.5.9
     - スケーリングの進行状況が正しく表示されない問題を修正[＃7726](https://github.com/tikv/pd/issues/7726) @[CabinfeverB](https://github.com/CabinfeverB)
     - `MergeLabels`関数が呼び出されたときにデータ競合が発生する問題を修正しました [＃7535](https://github.com/tikv/pd/issues/7535) @[lhy1024](https://github.com/lhy1024)
     - リーダースイッチ後にPD監視項目`learner-peer-count`古い値を同期しない問題を修正 [＃7728](https://github.com/tikv/pd/issues/7728) @[CabinfeverB](https://github.com/CabinfeverB)
-    - クエリ結果`SHOW CONFIG`に非推奨の構成項目`trace-region-flow` が含まれる問題を修正しました [＃7917](https://github.com/tikv/pd/issues/7917) @[rleungx](https://github.com/rleungx)
+    - クエリ結果`SHOW CONFIG`に非推奨の設定項目`trace-region-flow` が含まれる問題を修正しました [＃7917](https://github.com/tikv/pd/issues/7917) @[rleungx](https://github.com/rleungx)
 
 - TiFlash
 

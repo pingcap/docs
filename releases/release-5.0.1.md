@@ -11,7 +11,7 @@ TiDB バージョン: 5.0.1
 
 ## 互換性の変更 {#compatibility-change}
 
-- `committer-concurrency`構成項目のデフォルト値が`16`から`128`に変更されます。
+- `committer-concurrency`設定項目のデフォルト値が`16`から`128`に変更されます。
 
 ## 改善点 {#improvements}
 

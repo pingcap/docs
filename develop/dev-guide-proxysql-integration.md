@@ -675,7 +675,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
 > **Note:**
 >
-> 次のセクションでは、ProxySQL の必要な構成項目のみをリストします。構成の包括的なリストについては、 [ProxySQLのドキュメント](https://proxysql.com/documentation/proxysql-configuration/)を参照してください。
+> 次のセクションでは、ProxySQL の必要な設定項目のみをリストします。構成の包括的なリストについては、 [ProxySQLのドキュメント](https://proxysql.com/documentation/proxysql-configuration/)を参照してください。
 
 ##### オプション1：管理インターフェースを使用してProxySQLを設定する {#option-1-configure-proxysql-using-the-admin-interface}
 

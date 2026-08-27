@@ -67,7 +67,7 @@ mvcc-amplification-threshold = 10
 インメモリエンジンを有効にすると、TiKVはリージョンの読み取りトラフィックとMVCC増幅に基づいて、ロードするリージョンを自動的に選択します。具体的な手順は次のとおりです。
 
 1. リージョンは、最近の`next` （RocksDB Iterator next API）および`prev` （RocksDB Iterator prev API）の呼び出し回数に基づいてソートされます。
-2. 領域は、 `mvcc-amplification-threshold`構成パラメータを使用してフィルタリングされます。デフォルト値は`10`です。MVCC 増幅は、( `next` + `prev` ) / `processed_keys`として計算されるリード増幅を測定します。
+2. 領域は、 `mvcc-amplification-threshold`設定パラメータを使用してフィルタリングされます。デフォルト値は`10`です。MVCC 増幅は、( `next` + `prev` ) / `processed_keys`として計算されるリード増幅を測定します。
 3. MVCC増幅が著しい上位N個の領域がロードされます。ここでNはメモリ推定に基づいて決定されます。
 
 インメモリエンジンは定期的にリージョンを削除します。そのプロセスは以下のとおりです。

@@ -32,7 +32,7 @@ Info: {"upstream_id":7171388873935111376,"namespace":"default","id":"simple-repl
 - `--sink-uri` : チェンジフィードのダウンストリームアドレス。詳細は[シンクURIを構成する](#configure-sink-uri)参照。
 - `--start-ts` : チェンジフィードの開始TSO。TiCDCはこのTSOからデータのプルを開始します。デフォルト値は現在時刻です。
 - `--target-ts` : チェンジフィードの終了TSO。TiCDCはこのTSOまでデータのプルを停止します。デフォルト値は空で、TiCDCはデータのプルを自動的に停止しません。
-- `--config` : チェンジフィードの設定ファイル。詳細は[TiCDC チェンジフィード構成パラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
+- `--config` : チェンジフィードの設定ファイル。詳細は[TiCDC チェンジフィード設定パラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 ## シンクURIを構成する {#configure-sink-uri}
 
@@ -72,7 +72,7 @@ URI の`[query_parameters]`には、次のパラメータを設定できます�
 データを複製する前に、Amazon S3 のディレクトリに適切なアクセス権限を設定する必要があります。
 
 - TiCDC に必要な最小限`s3:PutObject`権限: `s3:ListBucket` 、および`s3:GetObject` 。
-- changefeed 構成項目`sink.cloud-storage-config.flush-concurrency` 1 より大きい場合、つまり単一ファイルの並列アップロードが有効になっている場合は、 [リストパーツ](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)に関連する権限を追加する必要があります。
+- changefeed 設定項目`sink.cloud-storage-config.flush-concurrency` 1 より大きい場合、つまり単一ファイルの並列アップロードが有効になっている場合は、 [リストパーツ](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)に関連する権限を追加する必要があります。
     - `s3:AbortMultipartUpload`
     - `s3:ListMultipartUploadParts`
     - `s3:ListBucketMultipartUploads`

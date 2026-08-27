@@ -138,7 +138,7 @@ TiDB バージョン: 4.0.0-rc.1
 - PD
 
     - 一部のAPIがTLS検証に失敗する可能性がある問題を修正[＃2363](https://github.com/pingcap/pd/pull/2363)
-    - 構成APIがプレフィックスを持つ構成項目を受け入れることができない問題を修正しました [＃2354](https://github.com/pingcap/pd/pull/2354)
+    - 構成APIがプレフィックスを持つ設定項目を受け入れることができない問題を修正しました [＃2354](https://github.com/pingcap/pd/pull/2354)
     - スケジューラが見つからない場合に`500`エラーが返される問題を修正しました[＃2328](https://github.com/pingcap/pd/pull/2328)
     - `scheduler config balance-hot-region-scheduler list`コマンドで`404`エラーが返される問題を修正 [＃2321](https://github.com/pingcap/pd/pull/2321)
 

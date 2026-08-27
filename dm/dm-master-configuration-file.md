@@ -5,7 +5,7 @@ summary: DM-master の設定ファイルについて説明します。
 
 # DMマスターコンフィグレーションファイル {#dm-master-configuration-file}
 
-このドキュメントでは、構成ファイル テンプレートと、このファイル内の各構成パラメータの説明を含む、DM-master の構成について説明します。
+このドキュメントでは、構成ファイル テンプレートと、このファイル内の各設定パラメータの説明を含む、DM-master の構成について説明します。
 
 ## コンフィグレーションファイルテンプレート {#configuration-file-template}
 
@@ -40,7 +40,7 @@ secret-key-path = "/path/to/secret/key"
 
 ## コンフィグレーションパラメータ {#configuration-parameters}
 
-このセクションでは、DM マスターの構成パラメータについて説明します。
+このセクションでは、DM マスターの設定パラメータについて説明します。
 
 ### グローバル構成 {#global-configuration}
 

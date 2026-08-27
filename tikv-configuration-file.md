@@ -21,7 +21,7 @@ TiKV の設定ファイルは、コマンドラインパラメータよりも多
 
 - TiKVがパニックを起こした際に、 `abort()`を呼び出してプロセスを終了させるかどうかを設定します。このオプションは、TiKVがシステムにコアダンプファイルの生成を許可するかどうかに影響します。
 
-    - この構成項目の値が`false`の場合、TiKV がパニックを起こすと、 `exit()`を呼び出してプロセスを終了します。
+    - この設定項目の値が`false`の場合、TiKV がパニックを起こすと、 `exit()`を呼び出してプロセスを終了します。
     - この設定項目の値が`true`の場合、TiKV がパニックを起こすと、TiKV は`abort()`を呼び出してプロセスを終了します。このとき、TiKV は終了時にコアダンプファイルを生成することをシステムに許可します。コアダンプファイルを生成するには、コアダンプに関連するシステム設定も実行する必要があります (たとえば、 `ulimit -c`コマンドを使用してコアダンプファイルのサイズ制限を設定したり、コアダンプパスを設定したりします。オペレーティングシステムによって関連する設定が異なります)。コアダンプファイルがディスク容量を過剰に占有して TiKV のディスク容量が不足するのを避けるため、コアダンプ生成パスを TiKV データのディスクパーティションとは異なるディスクパーティションに設定することをお勧めします。
 
 - デフォルト値: `false`
@@ -43,7 +43,7 @@ TiKV の設定ファイルは、コマンドラインパラメータよりも多
 
 - TiKVインスタンスのメモリ使用量の上限。TiKVのメモリ使用量がこのしきい値に近づくと、内部キャッシュが削除されてメモリが解放されます。
 - ほとんどの場合、TiKVインスタンスはシステムメモリ全体の75%を使用するように設定されているため、この設定項目を明示的に指定する必要はありません。残りの25%のメモリはOSページキャッシュ用に予約されています。詳細は[`storage.block-cache.capacity`](#capacity)を参照してください。
-- 単一の物理マシン上に複数の TiKV ノードをデプロイする場合でも、この構成項目を設定する必要はありません。この場合、TiKV インスタンスは`5/3 * block-cache.capacity`のメモリを使用します。
+- 単一の物理マシン上に複数の TiKV ノードをデプロイする場合でも、この設定項目を設定する必要はありません。この場合、TiKV インスタンスは`5/3 * block-cache.capacity`のメモリを使用します。
 - システムメモリ容量ごとのデフォルト値は以下のとおりです。
 
     - システム=8G ブロックキャッシュ=3.6G メモリ使用量制限=6G ページキャッシュ=2G
@@ -520,7 +520,7 @@ TiKV の設定ファイルは、コマンドラインパラメータよりも多
 
 - TiKVが起動すると、ディスク保護のためにディスク上に一定量の領域が確保されます。残りのディスク容量が確保された領域よりも少ない場合、TiKVは一部の書き込み操作を制限します。確保された領域は2つの部分に分けられます。80%はディスク容量が不足した場合の操作に必要な追加ディスク容量として使用され、残りの20%は一時ファイルの保存に使用されます。領域解放の過程で、追加ディスク容量を使いすぎてストレージが枯渇した場合、この一時ファイルがサービス復旧のための最後の保護手段として機能します。
 - 一時ファイルの名前は`space_placeholder_file`で、 `storage.data-dir`ディレクトリにあります。ディスク容量不足で TiKV がオフラインになった場合、TiKV を再起動すると、一時ファイルは自動的に削除され、TiKV は空き容量の確保を試みます。
-- 残りの空き容量が不足している場合、TiKV は一時ファイルを作成しません。保護の有効性は、予約領域のサイズに関係します。予約領域のサイズは、ディスク容量の 5% とこの構成値のうち大きい方の値です。この構成項目が`0`またはサポートされている単位のゼロ値 (たとえば、 `0KiB` 、 `0MiB` 、または`0GiB` ) に設定されている場合、TiKV はこのディスク保護機能を無効にします。
+- 残りの空き容量が不足している場合、TiKV は一時ファイルを作成しません。保護の有効性は、予約領域のサイズに関係します。予約領域のサイズは、ディスク容量の 5% とこの構成値のうち大きい方の値です。この設定項目が`0`またはサポートされている単位のゼロ値 (たとえば、 `0KiB` 、 `0MiB` 、または`0GiB` ) に設定されている場合、TiKV はこのディスク保護機能を無効にします。
 - デフォルト値: `"5GiB"`
 - 単位: B|KB|KiB|MB|MiB|GB|GiB|TB|TiB|PB|PiB
 
@@ -528,8 +528,8 @@ TiKV の設定ファイルは、コマンドラインパラメータよりも多
 
 > **Warning:**
 >
-> - `enable-ttl`を`true`または`false`に設定してください。**既存**の TiKV クラスターでは、この構成項目の値を変更**しないでください**。 `enable-ttl`値が異なる TiKV クラスターでは、使用するデータ形式が異なります。そのため、既存の TiKV クラスターでこの項目の値を変更すると、クラスターはデータを異なる形式で保存するため、TiKV クラスターを再起動すると「非 TTL で TTL を有効にできません」というエラーが発生します。
-> - `enable-ttl` TiKV クラスタ**でのみ**使用して**ください**。TiDB ノードを含むクラスタ (つまり、そのようなクラスタでは`enable-ttl`を`true`に設定する) では、 `storage.api-version = 2`が設定されていない限り、この構成項目を使用しないでください。そうしないと、データの破損や TiDB クラスタのアップグレード失敗などの重大な問題が発生します。
+> - `enable-ttl`を`true`または`false`に設定してください。**既存**の TiKV クラスターでは、この設定項目の値を変更**しないでください**。 `enable-ttl`値が異なる TiKV クラスターでは、使用するデータ形式が異なります。そのため、既存の TiKV クラスターでこの項目の値を変更すると、クラスターはデータを異なる形式で保存するため、TiKV クラスターを再起動すると「非 TTL で TTL を有効にできません」というエラーが発生します。
+> - `enable-ttl` TiKV クラスタ**でのみ**使用して**ください**。TiDB ノードを含むクラスタ (つまり、そのようなクラスタでは`enable-ttl`を`true`に設定する) では、 `storage.api-version = 2`が設定されていない限り、この設定項目を使用しないでください。そうしないと、データの破損や TiDB クラスタのアップグレード失敗などの重大な問題が発生します。
 
 - [TTL](/time-to-live.md)は「Time to live」の略です。この項目を有効にすると、TiKVはTTLに達したデータを自動的に削除します。TTLの値を設定するには、クライアント経由でデータを書き込む際のリクエストで指定する必要があります。TTLが指定されていない場合、TiKVは該当するデータを自動的に削除しません。
 - デフォルト値: `false`
@@ -602,7 +602,7 @@ TiKVにおけるフロー制御メカニズムに関連するコンフィグレ�
 
 ### `memtables-threshold` {#memtables-threshold}
 
-- kvDB の memtable の数がこのしきい値に達すると、フロー制御メカニズムが動作を開始します。 `enable`が`true`に設定されている場合、この構成項目は`rocksdb.(defaultcf|writecf|lockcf).max-write-buffer-number`を上書きします。
+- kvDB の memtable の数がこのしきい値に達すると、フロー制御メカニズムが動作を開始します。 `enable`が`true`に設定されている場合、この設定項目は`rocksdb.(defaultcf|writecf|lockcf).max-write-buffer-number`を上書きします。
 - デフォルト値: `5`
 
 ### `l0-files-threshold` {#l0-files-threshold}
@@ -611,7 +611,7 @@ TiKVにおけるフロー制御メカニズムに関連するコンフィグレ�
 
     > **Note:**
     >
-    > 特定の条件下では、この構成項目は`rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`の値を上書きできます。詳細については、 [`rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger)を参照してください。
+    > 特定の条件下では、この設定項目は`rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`の値を上書きできます。詳細については、 [`rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger)を参照してください。
 
 - デフォルト値: `20`
 
@@ -621,13 +621,13 @@ TiKVにおけるフロー制御メカニズムに関連するコンフィグレ�
 
     > **Note:**
     >
-    > 特定の条件下では、この構成項目は`rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`の値を上書きできます。詳細については、 [`rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1)を参照してください。
+    > 特定の条件下では、この設定項目は`rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`の値を上書きできます。詳細については、 [`rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1)を参照してください。
 
 - デフォルト値: `"192GiB"`
 
 ### `hard-pending-compaction-bytes-limit` {#hard-pending-compaction-bytes-limit-1}
 
-- KvDB の保留中の圧縮バイトがこのしきい値に達すると、フロー制御メカニズムはすべての書き込み要求を拒否し、 `ServerIsBusy`エラーを報告します。 `enable`が`true`に設定されている場合、この構成項目は`rocksdb.(defaultcf|writecf|lockcf).hard-pending-compaction-bytes-limit`を上書きします。
+- KvDB の保留中の圧縮バイトがこのしきい値に達すると、フロー制御メカニズムはすべての書き込み要求を拒否し、 `ServerIsBusy`エラーを報告します。 `enable`が`true`に設定されている場合、この設定項目は`rocksdb.(defaultcf|writecf|lockcf).hard-pending-compaction-bytes-limit`を上書きします。
 - デフォルト値: `"1024GiB"`
 
 ## storage.io-rate-limit {#storageio-rate-limit}
@@ -983,7 +983,7 @@ Raftstoreに関連するコンフィグレーション項目。
 ### `snap-generator-pool-size` <span class="version-mark">v5.4.0の新機能</span> {#snap-generator-pool-size-new-in-v540}
 
 - `snap-generator`スレッドプールのサイズを設定します。
-- TiKV のリカバリシナリオでリージョンがスナップショットをより高速に生成できるようにするには、対応するワーカーの`snap-generator`スレッドの数を増やす必要があります。この構成項目を使用して、 `snap-generator`スレッドプールのサイズを増やすことができます。
+- TiKV のリカバリシナリオでリージョンがスナップショットをより高速に生成できるようにするには、対応するワーカーの`snap-generator`スレッドの数を増やす必要があります。この設定項目を使用して、 `snap-generator`スレッドプールのサイズを増やすことができます。
 - デフォルト値: `2`
 - 最小値: `1`
 
@@ -1164,7 +1164,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### `raft-write-size-limit` <span class="version-mark">v5.3.0で追加</span> {#raft-write-size-limit-new-in-v530}
 
-- Raftデータがディスクに書き込まれるしきい値を決定します。データサイズがこの構成項目の値よりも大きい場合、データはディスクに書き込まれます。 `store-io-pool-size`の値が`0`の場合、この構成項目は有効になりません。
+- Raftデータがディスクに書き込まれるしきい値を決定します。データサイズがこの設定項目の値よりも大きい場合、データはディスクに書き込まれます。 `store-io-pool-size`の値が`0`の場合、この設定項目は有効になりません。
 - デフォルト値: `1MiB`
 - 最小値: `0`
 
@@ -1716,8 +1716,8 @@ Titanに関連するコンフィグレーション項目。
 ### `level0-slowdown-writes-trigger` {#level0-slowdown-writes-trigger}
 
 - L0 で書き込み停止を引き起こすファイルの最大数。
-- v8.5.4 以前のバージョンでは、フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`の場合)、この構成項目の値は[`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)によって直接上書きされます。
-- バージョン 8.5.5 以降: フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`の場合)、この構成項目の値は、その値が`storage.flow-control.l0-files-threshold`より大きい場合にのみ、 [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)によって上書きされます。この動作により、フロー制御しきい値を上げた際に RocksDB の圧縮高速化メカニズムが弱まるのを防ぎます。
+- v8.5.4 以前のバージョンでは、フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`の場合)、この設定項目の値は[`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)によって直接上書きされます。
+- バージョン 8.5.5 以降: フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`の場合)、この設定項目の値は、その値が`storage.flow-control.l0-files-threshold`より大きい場合にのみ、 [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)によって上書きされます。この動作により、フロー制御しきい値を上げた際に RocksDB の圧縮高速化メカニズムが弱まるのを防ぎます。
 - デフォルト値: `20`
 - 最小値: `0`
 
@@ -1774,7 +1774,7 @@ Titanに関連するコンフィグレーション項目。
 ### `soft-pending-compaction-bytes-limit` {#soft-pending-compaction-bytes-limit}
 
 - 保留中の圧縮バイト数のソフトリミット。
-- v8.5.4 以前のバージョンでは、フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`の場合)、この構成項目は[`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)によって直接上書きされます。
+- v8.5.4 以前のバージョンでは、フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`の場合)、この設定項目は[`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)によって直接上書きされます。
 - バージョン 8.5.5 以降: フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`の場合)、この設定項目は、 [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)値が`storage.flow-control.soft-pending-compaction-bytes-limit`より大きい場合にのみ上書きされます。この動作により、フロー制御しきい値を上げた際に RocksDB の圧縮高速化メカニズムが弱まるのを防ぎます。
 - デフォルト値: `"192GiB"`
 - 単位：KiB｜MiB｜GiB
@@ -2255,7 +2255,7 @@ Raft Engineに関連するコンフィグレーション項目。
 - この設定項目は、ログのマスキングを有効または無効にします。値のオプション: `true` 、 `false` 、 `"on"` 、 `"off"` 、および`"marker"` 。 `"on"` 、 `"off"` 、および`"marker"`オプションは、v8.3.0 で導入されました。
 - 設定項目が`false`または`"off"`に設定されている場合、ログの秘匿化は無効になります。
 - 設定項目が`true`または`"on"`に設定されている場合、ログ内のすべてのユーザーデータは`?`に置き換えられます。
-- 設定項目が`"marker"`に設定されている場合、ログ内のすべてのユーザーデータは`‹ ›`で囲まれます。ユーザーデータに`‹`または`›`が含まれている場合、 `‹`は`‹‹`にエスケープされ、 `›`は`››`にエスケープされます。マークされたログに基づいて、ログの表示時にマークされた情報を非機密化するかどうかを決定できます。
+- 設定項目が`"marker"`に設定されている場合、ログ内のすべてのユーザーデータは`‹ ›`で囲まれます。ユーザーデータに`‹`または`›`が含まれている場合、 `‹`は`‹‹`にエスケープされ、 `›`は`››`にエスケープされます。マークされたログに基づいて、ログの表示時にマークされた情報を秘匿化するかどうかを決定できます。
 - デフォルト値: `false`
 - 詳しい使い方は[TiKV側でのログの秘匿化](/log-redaction.md#log-redaction-in-tikv-side)をご覧ください。
 
@@ -2278,7 +2278,7 @@ Raft Engineに関連するコンフィグレーション項目。
 ### `enable-file-dictionary-log` {#enable-file-dictionary-log}
 
 - TiKVが暗号化メタデータを管理する際に、I/Oとミューテックスの競合を軽減するための最適化を有効にします。
-- この構成パラメーターが (デフォルトで) 有効になっている場合に発生する可能性のある互換性の問題を回避するには、詳細については[保存時の暗号化- TiKVバージョン間の互換性](/encryption-at-rest.md#compatibility-between-tikv-versions)を参照してください。
+- この設定パラメーターが (デフォルトで) 有効になっている場合に発生する可能性のある互換性の問題を回避するには、詳細については[保存時の暗号化- TiKVバージョン間の互換性](/encryption-at-rest.md#compatibility-between-tikv-versions)を参照してください。
 - デフォルト値: `true`
 
 ### `master-key` {#master-key}
@@ -2393,7 +2393,7 @@ TiKVの自動圧縮の動作を設定します。
 
 ### `mvcc-scan-threshold` <span class="version-mark">v8.5.6で追加</span> {#mvcc-scan-threshold-new-in-v856}
 
-- リージョンを圧縮候補としてマークするために、読み取り要求ごとにスキャンされる MVCC バージョンの最小数。この構成項目は、 [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856)が`true`に設定されている場合にのみ有効になります。
+- リージョンを圧縮候補としてマークするために、読み取り要求ごとにスキャンされる MVCC バージョンの最小数。この設定項目は、 [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856)が`true`に設定されている場合にのみ有効になります。
 - デフォルト値: `1000`
 - 最小値: `0`
 
@@ -2689,8 +2689,8 @@ TiKV API V2 が有効になっている場合にタイムスタンプを取得�
 ### `alloc-ahead-buffer` <span class="version-mark">v6.4.0で追加</span> {#alloc-ahead-buffer-new-in-v640}
 
 - 事前割り当て済みのTSOキャッシュサイズ（期間）。
-- TiKV は、この構成項目で指定された期間に基づいて TSO キャッシュを事前割り当てします。TiKV は、前の期間に基づいて TSO の使用量を推定し、 `alloc-ahead-buffer`を満たす TSO をローカルに要求してキャッシュします。
-- この構成項目は、TiKV API V2 が有効になっている場合の PD 障害の許容度を高めるためによく使用されます ( `storage.api-version = 2` )。
+- TiKV は、この設定項目で指定された期間に基づいて TSO キャッシュを事前割り当てします。TiKV は、前の期間に基づいて TSO の使用量を推定し、 `alloc-ahead-buffer`を満たす TSO をローカルに要求してキャッシュします。
+- この設定項目は、TiKV API V2 が有効になっている場合の PD 障害の許容度を高めるためによく使用されます ( `storage.api-version = 2` )。
 - この設定項目の値を大きくすると、TSOの消費量とTiKVのメモリオーバーヘッドが増加する可能性があります。十分なTSOを確保するには、PDの設定項目[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)の値を下げることをお勧めします。
 - テストによると、 `alloc-ahead-buffer`がデフォルト値の場合、PDリーダーが故障して別のノードに切り替わると、書き込みリクエストのレイテンシーが一時的に増加し、QPSが約15%減少します。
 - ビジネスへの影響を避けるため、PDで`tso-update-physical-interval = "1ms"`を設定し、TiKVで以下の設定項目を設定してください。
@@ -2864,7 +2864,7 @@ TiKVストレージレイヤーのリソース制御に関連するコンフィ�
 
 ## インメモリエンジン<span class="version-mark">v8.5.0の新機能</span> {#in-memory-engine-new-in-v850}
 
-TiKV MVCC インメモリエンジン (IME) のストレージレイヤーに関連する構成項目。
+TiKV MVCC インメモリエンジン (IME) のストレージレイヤーに関連する設定項目。
 
 ### `enable` <span class="version-mark">v8.5.0で追加</span> {#enable-new-in-v850}
 

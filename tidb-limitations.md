@@ -62,7 +62,7 @@ summary: TiDB の使用制限について学習します。
 
 <CustomContent platform="tidb">
 
-[`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)構成項目を介してサイズ制限を調整できます。
+[`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)設定項目を介してサイズ制限を調整できます。
 
 </CustomContent>
 
@@ -72,7 +72,7 @@ summary: TiDB の使用制限について学習します。
 
 <CustomContent platform="tidb">
 
-この制限は、 [`max-index-length`](/tidb-configuration-file.md#max-index-length)構成項目を使用して調整できます。
+この制限は、 [`max-index-length`](/tidb-configuration-file.md#max-index-length)設定項目を使用して調整できます。
 
 </CustomContent>
 
@@ -95,7 +95,7 @@ summary: TiDB の使用制限について学習します。
 
 <CustomContent platform="tidb">
 
-[`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit)構成項目を介して制限を変更できます。
+[`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit)設定項目を介して制限を変更できます。
 
 </CustomContent>
 

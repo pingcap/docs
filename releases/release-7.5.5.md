@@ -14,7 +14,7 @@ TiDB バージョン: 7.5.5
 ## 互換性の変更 {#compatibility-changes}
 
 - インデックスを追加する際の取り込みフェーズの最大速度を制限する新しいシステム変数[`tidb_ddl_reorg_max_write_speed`](https://docs.pingcap.com/tidb/v7.5/system-variables#tidb_ddl_reorg_max_write_speed-new-in-v6512-and-v755)を追加します。 [＃57156](https://github.com/pingcap/tidb/issues/57156) @[CbcWestwolf](https://github.com/CbcWestwolf)
-- TiKV構成項目[`raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size)のデフォルト値を`8192`から`16384` に変更します [＃17101](https://github.com/tikv/tikv/issues/17101) @[Connor1996](https://github.com/Connor1996)
+- TiKV設定項目[`raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size)のデフォルト値を`8192`から`16384` に変更します [＃17101](https://github.com/tikv/tikv/issues/17101) @[Connor1996](https://github.com/Connor1996)
 
 ## 改善点 {#improvements}
 

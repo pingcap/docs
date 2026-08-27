@@ -155,7 +155,7 @@ TiFlashの分散型ストレージおよびコンピューティングアーキ�
         tiup cluster edit-config mycluster
         ```
 
-    2. TiDB 構成ファイルに次の構成項目を追加します。
+    2. TiDB 構成ファイルに次の設定項目を追加します。
 
         ```shell
         server_configs:

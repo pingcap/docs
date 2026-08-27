@@ -48,7 +48,7 @@ TiDB バージョン: 4.0.8
 - TiKV
 
     - パフォーマンス診断を支援するための**Fast-Tune**パネルページを追加[＃8804](https://github.com/tikv/tikv/pull/8804)
-    - ログからユーザーデータを削除する`security.redact-info-log`構成項目を追加します[＃8746](https://github.com/tikv/tikv/pull/8746)
+    - ログからユーザーデータを削除する`security.redact-info-log`設定項目を追加します[＃8746](https://github.com/tikv/tikv/pull/8746)
     - エラーコードのメタファイルを再フォーマットする [＃8877](https://github.com/tikv/tikv/pull/8877)
     - `pessimistic-txn.pipelined`構成動的に変更できるようにする [＃8853](https://github.com/tikv/tikv/pull/8853)
     - メモリプロファイリング機能をデフォルトで有効にする[＃8801](https://github.com/tikv/tikv/pull/8801)

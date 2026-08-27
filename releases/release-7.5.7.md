@@ -16,7 +16,7 @@ TiDB バージョン: 7.5.7
 - デフォルト値の[`tidb_enable_historical_stats`](https://docs.pingcap.com/tidb/v7.5/system-variables/#tidb_enable_historical_stats)を`ON`から`OFF`に変更します。これにより、潜在的な安定性の問題を回避するために履歴統計がオフになります[＃53048](https://github.com/pingcap/tidb/issues/53048) @[hawkingrei](https://github.com/hawkingrei)
 - TiKV は以下の設定項目を廃止し、自動圧縮動作を制御する新しい[`gc.auto-compaction`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file/#gcauto-compaction)設定グループに置き換えます。 [＃18727](https://github.com/tikv/tikv/issues/18727) @[v01dstar](https://github.com/v01dstar)
 
-    - 非推奨の構成項目: [`region-compact-check-interval`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-check-interval) 、 [`region-compact-check-step`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-check-step) 、 [`region-compact-min-tombstones`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-min-tombstones) 、 [`region-compact-tombstones-percent`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-tombstones-percent) 、 [`region-compact-min-redundant-rows`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-min-redundant-rows-new-in-v710) 、および[`region-compact-redundant-rows-percent`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-redundant-rows-percent-new-in-v710) 。
+    - 非推奨の設定項目: [`region-compact-check-interval`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-check-interval) 、 [`region-compact-check-step`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-check-step) 、 [`region-compact-min-tombstones`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-min-tombstones) 、 [`region-compact-tombstones-percent`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-tombstones-percent) 、 [`region-compact-min-redundant-rows`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-min-redundant-rows-new-in-v710) 、および[`region-compact-redundant-rows-percent`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-redundant-rows-percent-new-in-v710) 。
     - 新しい[`gc.auto-compaction.tombstone-percent-threshold`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#tombstone-percent-threshold-new-in-v757) [`gc.auto-compaction.redundant-rows-threshold`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#redundant-rows-threshold-new-in-v757) : [`gc.auto-compaction.check-interval`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#check-interval-new-in-v757) [`gc.auto-compaction.redundant-rows-percent-threshold`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#redundant-rows-percent-threshold-new-in-v757)および[`gc.auto-compaction.bottommost-level-force`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#bottommost-level-force-new-in-v757) [`gc.auto-compaction.tombstone-num-threshold`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#tombstone-num-threshold-new-in-v757)
 
 ## 改善点 {#improvements}
@@ -124,7 +124,7 @@ TiDB バージョン: 7.5.7
 
 - PD
 
-    - `split-merge-interval`構成項目の値を繰り返し変更すると（ `1s`から`1h`に変更して`1s`に戻すなど）、その設定項目が有効にならない可能性がある問題を修正しました[＃8404](https://github.com/tikv/pd/issues/8404) @[lhy1024](https://github.com/lhy1024)
+    - `split-merge-interval`設定項目の値を繰り返し変更すると（ `1s`から`1h`に変更して`1s`に戻すなど）、その設定項目が有効にならない可能性がある問題を修正しました[＃8404](https://github.com/tikv/pd/issues/8404) @[lhy1024](https://github.com/lhy1024)
     - デフォルト値`lease`が正しく設定されていない問題を修正[＃9156](https://github.com/tikv/pd/issues/9156) @[rleungx](https://github.com/rleungx)
     - TiDB Dashboard TCP接続を不適切に閉じるとPDゴルーチンリークが発生する可能性がある問題を修正[＃9402](https://github.com/tikv/pd/issues/9402) @[baurine](https://github.com/baurine)
     - 新しく追加された TiKV ノードがスケジュールされない可能性がある問題を修正しました [＃9145](https://github.com/tikv/pd/issues/9145) @[bufferflies](https://github.com/bufferflies)
@@ -164,4 +164,4 @@ TiDB バージョン: 7.5.7
 
     - NG Monitoring
 
-        - 時系列データのカーディナリティが高い場合に TSDB がメモリを大量に消費する問題を修正し、TSDB のメモリ構成オプションを提供します。 [＃295](https://github.com/pingcap/ng-monitoring/issues/295) @[mornyx](https://github.com/mornyx)
+        - 時系列データのカーディナリティが高い場合に TSDB がメモリを大量に消費する問題を修正し、TSDB のメモリ設定オプションを提供します。 [＃295](https://github.com/pingcap/ng-monitoring/issues/295) @[mornyx](https://github.com/mornyx)
