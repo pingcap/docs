@@ -220,6 +220,7 @@ explain SELECT * FROM t1, t2 WHERE t1.id = t2.id;
 >
 > `PREPARE` / `EXECUTE`およびバイナリプロトコルで実行されるクエリの場合、 `PREPARE` / `EXECUTE`ステートメントではなく、実際のクエリステートメントのバインディングを作成する必要があります。
 >
+
 #### 履歴実行計画に従ってバインディングを作成する {#create-a-binding-according-to-a-historical-execution-plan}
 
 SQL文の実行計画を過去の実行計画に固定するには、Plan Digestを使用して過去の実行計画をSQL文にバインドします。これは、SQL文ごとにバインドするよりも便利です。さらに、複数のSQL文の実行計画を一度にバインドすることも可能です。詳細と例については、 [`CREATE [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)を参照してください。
