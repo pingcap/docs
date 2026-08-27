@@ -370,7 +370,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     - `REORGANIZE PARTITION`他の DDL 操作と同時に実行できない問題を修正 [＃42442](https://github.com/pingcap/tidb/issues/42442) @[bb7133](https://github.com/bb7133)
     - DDL でパーティション再編成タスクをキャンセルすると、後続の DDL 操作が失敗する可能性がある問題を修正しました[＃42448](https://github.com/pingcap/tidb/issues/42448) @[lcwangchao](https://github.com/lcwangchao)
     - 特定の条件下で削除操作のアサーションが正しくない問題を修正[＃42426](https://github.com/pingcap/tidb/issues/42426) @[tiancaiamao](https://github.com/tiancaiamao)
-    - cgroup 情報の読み取りエラーにより、TiDBサーバーが起動できない問題を修正しました。エラーメッセージは「cgroup v1 からファイルメモリ.stat を読み取れません: open /sys/ メモリ.stat no such file or directory」です[＃42659](https://github.com/pingcap/tidb/issues/42659) @[hawkingrei](https://github.com/hawkingrei)
+    - cgroup 情報の読み取りエラーにより、TiDBサーバーが起動できない問題を修正しました。エラーメッセージは「can't read file memory.stat from cgroup v1: open /sys/memory.stat no such file or directory」です[＃42659](https://github.com/pingcap/tidb/issues/42659) @[hawkingrei](https://github.com/hawkingrei)
     - グローバルインデックスを持つパーティションテーブルの行のパーティションキーを更新するときに発生する`Duplicate Key`問題を修正しました [＃42312](https://github.com/pingcap/tidb/issues/42312) @[L-maple](https://github.com/L-maple)
     - TTLモニタリングパネルの`Scan Worker Time By Phase`チャートにデータが表示されない問題を修正しました [＃42515](https://github.com/pingcap/tidb/issues/42515) @[lcwangchao](https://github.com/lcwangchao)
     - グローバルインデックスを持つパーティションテーブルに対する一部のクエリが誤った結果を返す問題を修正[＃41991](https://github.com/pingcap/tidb/issues/41991) [＃42065](https://github.com/pingcap/tidb/issues/42065) @[L-maple](https://github.com/L-maple)
