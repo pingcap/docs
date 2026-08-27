@@ -84,7 +84,7 @@ summary: このドキュメントでは、ユーザー応答時間、スルー�
 
 - データベース時間、クエリのレイテンシー、QPSなどのデータベースパフォーマンスデータ
 
-    TiDBは、 [スロークエリログ](/identify-slow-queries.md) 、 [Top SQL](/dashboard/top-sql.md) 、 [継続的なパフォーマンスプロファイリング](/dashboard/continuous-profiling.md) 、および[Key Visualizer](/dashboard/dashboard-key-visualizer.md)といった様々な次元でパフォーマンスデータを徹底的に測定・保存します。さらに、Prometheusに保存されたタイミングメトリクスデータの履歴を遡って比較することも可能です。
+    TiDBは、 [スロークエリログ](/identify-slow-queries.md) 、 [Top SQL](/dashboard/top-sql.md) 、 [継続的なパフォーマンスプロファイリング](/dashboard/continuous-profiling.md) 、および[Key Visualizer](/dashboard/dashboard-key-visualizer.md)といった様々な次元でパフォーマンスデータを徹底的に測定・保存します。さらに、Prometheusに保存された時系列メトリクスデータの履歴を遡って比較することも可能です。
 
 - CPU、IO、ネットワークなどのリソース使用率
 
