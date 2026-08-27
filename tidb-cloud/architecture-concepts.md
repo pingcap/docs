@@ -103,9 +103,9 @@ BYOC は、次の機能を提供します。
 - **Cloud-account-level controls**: ネットワーキング、セキュリティ、監査可能性、コンプライアンスに対して、お客様独自のクラウドポリシーを適用できます。
 - **Private connectivity**: BYOC の設定に応じて、VPC ピアリング などのプライベートネットワークアクセスパターンをサポートします。
 
-さまざまなワークロード要件に対応するため、TiDB Cloud BYOC は Single-AZ と Multi-AZ の両方のデプロイをサポートしており、低レイテンシーのゾーン単位デプロイと、複数の availability zone にまたがる高い耐障害性を持つデプロイのどちらかを選択できます。
+さまざまなワークロード要件に対応するため、TiDB Cloud BYOC は Single-AZ と Multi-AZ の両方のデプロイをサポートしており、低レイテンシーのゾーン単位デプロイと、複数のアベイラビリティゾーンにまたがる高い耐障害性を持つデプロイのどちらかを選択できます。
 
-各リソースプールの高可用性モードは、[プールを作成する](/tidb-cloud/byoc/create-resource-pool-byoc.md)際に **Zonal** または **Regional** に設定できます。ゾーンリソースプールは単一の availability zone にデプロイされ、リージョンリソースプールは複数の availability zone にまたがってデプロイされます。TiDB Cloud は、BYOC リージョンの設定と利用可能なクラウドリソースに基づいて availability zone の配置を決定します。リソースプール内で作成または復元された TiDB Cloud BYOC インスタンスは、そのプールの高可用性モードを継承します。リソースプールの作成後は、その高可用性モードまたは availability zone の配置を変更できません。
+各リソースプールの高可用性モードは、[プールを作成する](/tidb-cloud/byoc/create-resource-pool-byoc.md)際に **Zonal** または **Regional** に設定できます。ゾーンリソースプールは単一のアベイラビリティゾーンにデプロイされ、リージョンリソースプールは複数のアベイラビリティゾーンにまたがってデプロイされます。TiDB Cloud は、BYOC リージョンの設定と利用可能なクラウドリソースに基づいてアベイラビリティゾーンの配置を決定します。リソースプール内で作成または復元された TiDB Cloud BYOC インスタンスは、そのプールの高可用性モードを継承します。リソースプールの作成後は、その高可用性モードまたはアベイラビリティゾーンの配置を変更できません。
 
 ![TiDB Cloud BYOC Architecture](/media/tidb-cloud/byoc-architecture.png)
 
