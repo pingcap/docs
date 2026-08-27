@@ -87,7 +87,7 @@ TiDBでは、クエリや書き込みリクエストに対してSQL文を入力�
 >
 > - TiFlashの MPP モードを無効にするには、 [`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50)システム変数の値を`OFF`に設定します。
 > - TiFlashの MPP モードをクエリ実行用に強制的に有効にするには、 [`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50)と[`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)の値を`ON`に設定します。
-> - TiDB が特定のクエリを実行する際に MPP モードを選択しているかどうかを確認するには、 [MPPモードの説明文](/explain-mpp.md#explain-statements-in-the-mpp-mode)を参照してください。 `EXPLAIN`ステートメントの出力に`ExchangeSender`および`ExchangeReceiver`演算子が含まれている場合、MPP モードが使用されています。
+> - TiDB が特定のクエリを実行する際に MPP モードを選択しているかどうかを確認するには、 [MPPモードの説明文](/explain-mpp.md#explain-statements-in-the-mpp-mode)を参照してください。 `EXPLAIN`ステートメントの出力に`ExchangeSender`および`ExchangeReceiver`オペレーターが含まれている場合、MPP モードが使用されています。
 
 ## パフォーマンス監視 {#performance-monitoring}
 

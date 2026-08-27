@@ -76,7 +76,7 @@ TiDBバージョン：5.2.4
     - `CASE WHEN`データ型で`ENUM`関数を使用した際に発生panicを修正しました [#29357](https://github.com/pingcap/tidb/issues/29357)
     - ベクトル化された式における`microsecond`関数の誤った結果を修正 [#29244](https://github.com/pingcap/tidb/issues/29244)
     - ウィンドウ関数がエラーを報告する代わりにTiDBをpanicにする問題を修正しました [#30326](https://github.com/pingcap/tidb/issues/30326)
-    - マージ結合演算子が特定の場合に誤った結果を返す問題を修正しました [#33042](https://github.com/pingcap/tidb/issues/33042)
+    - マージ結合オペレーターが特定の場合に誤った結果を返す問題を修正しました [#33042](https://github.com/pingcap/tidb/issues/33042)
     - 相関サブクエリが定数を返す場合に TiDB が誤った結果を取得する問題を修正 [#32089](https://github.com/pingcap/tidb/issues/32089)
     - `ENUM`または`SET`列のエンコーディングが間違っているために TiDB が誤ったデータを書き込む問題を修正しました [#32302](https://github.com/pingcap/tidb/issues/32302)
     - TiDB で新しい照合順序が有効になっている場合`MAX`または`MIN`関数が`ENUM`または`SET`列に対して誤った結果を返す照合順序を修正します。 [#31638](https://github.com/pingcap/tidb/issues/31638)

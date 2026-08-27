@@ -100,7 +100,7 @@ TiDB バージョン: 6.5.3
 
 - TiFlash
 
-    - リージョン転送中のパーティション TableScan 演算子のパフォーマンス低下の問題を修正しました [＃7519](https://github.com/pingcap/tiflash/issues/7519) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - リージョン転送中のパーティション TableScan オペレーターのパフォーマンス低下の問題を修正しました [＃7519](https://github.com/pingcap/tiflash/issues/7519) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - `GENERATED`型フィールドが`TIMESTAMP`型または`TIME`型と一緒に存在する場合、 TiFlashクエリでエラーが報告される可能性がある問題を修正しました。 [＃7468](https://github.com/pingcap/tiflash/issues/7468) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - 大規模な更新トランザクションにより、 TiFlash が繰り返しエラーを報告し、 を再起動する可能性がある問題を修正しました。 [＃7316](https://github.com/pingcap/tiflash/issues/7316) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - `INSERT SELECT`文でTiFlashからデータを読み取るときに「Truncate error cast decimal as decimal」というエラーが発生する問題を修正しました。 [＃7348](https://github.com/pingcap/tiflash/issues/7348) @[windtalker](https://github.com/windtalker)

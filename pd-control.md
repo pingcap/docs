@@ -263,7 +263,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set leader-schedule-limit 4         // 4 tasks of leader scheduling at the same time at most
     ```
 
-- `region-schedule-limit`は、同時にリージョンをスケジュールするタスクの数を制御します。この値を設定すると、リージョンバランスオペレータが過剰に作成されるのを回避できます。デフォルト値は`2048`で、あらゆるサイズのクラスターに十分な値です。値を`0`に設定すると、スケジューリングが制限されます。通常、リージョンのスケジューリング速度は`store-limit`に制限されますが、何をしようとしているのかを正確に理解していない限り、この値をカスタマイズしないことをお勧めします。
+- `region-schedule-limit`は、同時にリージョンをスケジュールするタスクの数を制御します。この値を設定すると、Region balance operator が過剰に作成されるのを回避できます。デフォルト値は`2048`で、あらゆるサイズのクラスターに十分な値です。値を`0`に設定すると、スケジューリングが制限されます。通常、リージョンのスケジューリング速度は`store-limit`に制限されますが、何をしようとしているのかを正確に理解していない限り、この値をカスタマイズしないことをお勧めします。
 
     ```bash
     config set region-schedule-limit 2         // 2 tasks of Region scheduling at the same time at most
@@ -317,7 +317,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 - `leader-schedule-policy`はリーダーのスケジューリング戦略を選択するために使用されます。`size`または`count`に従ってリーダーをスケジュールできます。
 
-- `scheduler-max-waiting-operator`は、各スケジューラ内の待機オペレータの数を制御するために使用されます。
+- `scheduler-max-waiting-operator`は、各スケジューラ内の待機オペレーターの数を制御するために使用されます。
 
 - `enable-remove-down-replica`はダウンタイムレプリカの自動削除機能を有効にするために使用されます。`false`に設定すると、PDはダウンタイムレプリカを自動的にクリーンアップしません。
 
@@ -1083,7 +1083,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
     scheduler config balance-hot-region-scheduler set min-hot-cpu-rate 10
     ```
 
-- `max-zombie-rounds`はオペレータが保留中の影響力を持つと見なされるハートビートの最大数を意味します。より大きな値に設定すると、より多くのオペレータが保留中の影響力に含まれる可能性があります。通常、この値を調整する必要はありません。保留中の影響力とは、スケジューリング中に生成されるものの、依然として効果を持つオペレータの影響力を指します。
+- `max-zombie-rounds`はオペレーターが保留中の影響力を持つと見なされるハートビートの最大数を意味します。より大きな値に設定すると、より多くのオペレーターが保留中の影響力に含まれる可能性があります。通常、この値を調整する必要はありません。保留中の影響力とは、スケジューリング中に生成されるものの、依然として効果を持つオペレーターの影響力を指します。
 
     ```bash
     scheduler config balance-hot-region-scheduler set max-zombie-rounds 3
@@ -1164,7 +1164,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
 
     `evict-leader-scheduler`のすべてのストア構成が削除されると、スケジューラ自体も自動的に削除されます。
 
-- `evict-leader-scheduler`が既に存在する場合は、 `set batch`サブコマンドを使用して`batch`値を変更します。 `batch`は、単一のスケジューリングプロセスで生成されるオペレータの数を制御します。デフォルト値は`3`で、範囲は`[1, 10]`です。 `batch`値が大きいほど、スケジューリング速度が速くなります。
+- `evict-leader-scheduler`が既に存在する場合は、 `set batch`サブコマンドを使用して`batch`値を変更します。 `batch`は、単一のスケジューリングプロセスで生成されるオペレーターの数を制御します。デフォルト値は`3`で、範囲は`[1, 10]`です。 `batch`値が大きいほど、スケジューリング速度が速くなります。
 
     ```bash
     scheduler config evict-leader-scheduler set batch 10 // Set the batch value to 10
@@ -1463,7 +1463,7 @@ store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"en
 {"id":24,"peer_stores":[1,32,33]}
 ```
 
-`[store30, store31]`がダウンしている場合は、 `remove-peer`オペレータを作成して安全に処理できるすべてのリージョン、つまり DownPeer が 1つだけあるリージョンを見つけます。
+`[store30, store31]`がダウンしている場合は、 `remove-peer`オペレーターを作成して安全に処理できるすべてのリージョン、つまり DownPeer が1つだけあるリージョンを見つけます。
 
 ```bash
 >> region --jq=".regions[] | {id: .id, remove_peer: [.peers[].store_id] | select(length>1) | map(if .==(30,31) then . else empty end) | select(length==1)}"

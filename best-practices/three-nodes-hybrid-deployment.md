@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Three-Node Hybrid Deployment
-summary: TiDBクラスタは、3台のマシンでコスト効率よく導入できます。このハイブリッド導入におけるベストプラクティスとしては、安定性とパフォーマンスを向上させるためのパラメータ調整が挙げられます。リソース消費量の制限とスレッドプールサイズの調整は、クラスタを最適化する上で重要です。TiKVバックグラウンドタスクとTiDB実行オペレータのパラメータ調整も重要です。
+summary: TiDBクラスタは、3台のマシンでコスト効率よく導入できます。このハイブリッド導入におけるベストプラクティスとしては、安定性とパフォーマンスを向上させるためのパラメータ調整が挙げられます。リソース消費量の制限とスレッドプールサイズの調整は、クラスタを最適化する上で重要です。TiKVバックグラウンドタスクとTiDB実行オペレーターのパラメータ調整も重要です。
 aliases: ['/ja/tidb/stable/three-nodes-hybrid-deployment/']
 ---
 
@@ -115,9 +115,9 @@ tiup ctl:v<CLUSTER_VERSION> tikv --host=${ip:port} modify-tikv-config -n gc.max_
 
 ### TiDBパラメータ調整 {#tidb-parameter-adjustment}
 
-通常、 `tidb_hash_join_concurrency`や`tidb_index_lookup_join_concurrency`などのシステム変数を使用して、実行演算子の TiDB パラメータを調整できます。
+通常、 `tidb_hash_join_concurrency`や`tidb_index_lookup_join_concurrency`などのシステム変数を使用して、実行オペレーターの TiDB パラメータを調整できます。
 
-このテストでは、これらのパラメータは調整されていません。実際のアプリケーションの負荷テストにおいて、実行オペレータが過剰なCPUリソースを消費する場合は、アプリケーションのシナリオに応じて特定のオペレータのリソース使用量を制限することができます。詳細については、 [TiDB システム変数](/system-variables.md)を参照してください。
+このテストでは、これらのパラメータは調整されていません。実際のアプリケーションの負荷テストにおいて、実行オペレーターが過剰なCPUリソースを消費する場合は、アプリケーションのシナリオに応じて特定のオペレーターのリソース使用量を制限することができます。詳細については、 [TiDB システム変数](/system-variables.md)を参照してください。
 
 #### `performance.max-procs` {#performance-max-procs}
 

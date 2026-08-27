@@ -44,7 +44,7 @@ TiDB バージョン: 5.0.1
     - プランキャッシュの`PointGet`と`TableDual`の誤った再利用を修正 [＃24043](https://github.com/pingcap/tidb/pull/24043)
     - オプティマイザがクラスター化インデックス[＃24042](https://github.com/pingcap/tidb/pull/24042) `IndexMerge`プランを構築するときに発生するエラーを修正します
     - BIT型エラーの型推論を修正[＃24027](https://github.com/pingcap/tidb/pull/24027)
-    - `PointGet`演算子が存在する場合に一部のオプティマイザヒントが有効にならない問題を修正[＃23685](https://github.com/pingcap/tidb/pull/23685)
+    - `PointGet`オペレーターが存在する場合に一部のオプティマイザヒントが有効にならない問題を修正[＃23685](https://github.com/pingcap/tidb/pull/23685)
     - エラーによりロールバック時にDDL操作が失敗する可能性がある問題を修正 [＃24080](https://github.com/pingcap/tidb/pull/24080)
     - バイナリリテラル定数のインデックス範囲が正しく構築されない問題を修正[＃24041](https://github.com/pingcap/tidb/pull/24041)
     - いくつかのケースで`IN`述語の潜在的な誤った結果を修正[＃24023](https://github.com/pingcap/tidb/pull/24023)

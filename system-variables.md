@@ -718,7 +718,7 @@ mysql> SELECT * FROM t1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - デフォルト値: `UNSPECIFIED`
 - 値のオプション: `NONE` 、 `FAST` 、 `HIGH_COMPRESSION` 、 `UNSPECIFIED`
-- この変数は、MPP Exchange オペレータのデータ圧縮モードを指定するために使用されます。この変数は、TiDB がバージョン番号`1`の MPP 実行計画を選択した場合に有効になります。変数の値の意味は次のとおりです。
+- この変数は、MPP Exchange オペレーターのデータ圧縮モードを指定するために使用されます。この変数は、TiDB がバージョン番号`1`の MPP 実行計画を選択した場合に有効になります。変数の値の意味は次のとおりです。
     - `UNSPECIFIED` : 未指定を意味します。TiDB は圧縮モードを自動的に選択します。現在、TiDB は`FAST`モードを自動的に選択します。
     - `NONE` : データ圧縮は使用されていません。
     - `FAST` : 高速モード。全体的なパフォーマンスは良好で、圧縮率は`HIGH_COMPRESSION`より低くなっています。
@@ -2293,7 +2293,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
     - カーソルフェッチが有効で、この変数が`ON`に設定されている場合、TiDB はすべてのデータを一度に TiDB ノードに読み込むのではなく、クライアントがフェッチするにつれてデータを TiDB ノードに増分的に読み込みます。
 - この変数によって制御される機能には、以下の制限があります。
     - 明示的なトランザクション内のステートメントはサポートしていません。
-    - 実行計画は、 `TableReader` 、 `IndexReader` 、`IndexLookUp`、 `Projection` `IndexLookUp` 、および`Selection`演算子のみを含む実行計画のみをサポートします。
+    - 実行計画は、 `TableReader` 、 `IndexReader` 、`IndexLookUp`、 `Projection` `IndexLookUp` 、および`Selection`オペレーターのみを含む実行計画のみをサポートします。
     - Lazy Cursor Fetch を使用するステートメントの場合、実行情報は[ステートメントの概要](/statement-summary-tables.md)と[スロークエリログ](/identify-slow-queries.md)に表示されません。
 - サポートされていないシナリオの場合、この変数を`OFF`に設定した場合と同じ動作になります。
 
@@ -2312,7 +2312,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
     - カーソルフェッチが有効で、この変数が`ON`に設定されている場合、TiDB はすべてのデータを一度に TiDB ノードに読み込むのではなく、クライアントがフェッチするにつれてデータを TiDB ノードに増分的に読み込みます。
 - この変数によって制御される機能には、以下の制限があります。
     - 明示的なトランザクション内のステートメントはサポートしていません。
-    - 実行計画は、 `TableReader` 、 `IndexReader` 、`IndexLookUp`、 `Projection` `IndexLookUp` 、および`Selection`演算子のみを含む実行計画のみをサポートします。
+    - 実行計画は、 `TableReader` 、 `IndexReader` 、`IndexLookUp`、 `Projection` `IndexLookUp` 、および`Selection`オペレーターのみを含む実行計画のみをサポートします。
     - Lazy Cursor Fetch を使用するステートメントの場合、実行情報は[ステートメントの概要](/statement-summary-tables.md)と[スロークエリログ](https://docs.pingcap.com/tidb/stable/identify-slow-queries)に表示されません。
 - サポートされていないシナリオの場合、この変数を`OFF`に設定した場合と同じ動作になります。
 
@@ -2413,7 +2413,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `OFF`
-- `IndexMergeJoin`演算子を有効にするかどうかを指定します。
+- `IndexMergeJoin`オペレーターを有効にするかどうかを指定します。
 - この変数はTiDBの内部動作のみに使用されます。変更することは**推奨されません**。変更すると、データの正確性に影響が出る可能性があります。
 
 ### tidb_enable_legacy_instance_scope <span class="version-mark">New in v6.0.0</span>
@@ -2555,7 +2555,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `ON` 。v8.3.0以前のバージョンでは、デフォルト値は`OFF`です。
-- この変数は、内部テーブルに`Selection` 、 `Aggregation` 、または`Projection`演算子が含まれている場合に、インデックス結合がサポートされるかどうかを制御します。デフォルト値`OFF`は、このシナリオではインデックス結合がサポートされないことを意味します。
+- この変数は、内部テーブルに`Selection` 、 `Aggregation` 、または`Projection`オペレーターが含まれている場合に、インデックス結合がサポートされるかどうかを制御します。デフォルト値`OFF`は、このシナリオではインデックス結合がサポートされないことを意味します。
 - TiDB クラスターを v7.0.0 より前のバージョンから v8.4.0 以降にアップグレードすると、この変数はデフォルトで`OFF`に設定され、このシナリオではインデックス結合がサポートされていないことを示します。
 
 ### tidb_enable_instance_plan_cache <span class="version-mark">New in v8.4.0</span>
@@ -2606,7 +2606,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は`Apply`演算子の同時実行を有効にするかどうかを制御します。同時実行の数は`tidb_executor_concurrency`変数によって制御されます。 `Apply`演算子は相関サブクエリを処理し、デフォルトでは同時実行が有効になっていないため、実行速度が遅くなります。この変数の値を`1`に設定すると、同時実行が増加し、実行速度が向上します。現在、 `Apply`の同時実行はデフォルトで無効になっています。
+- この変数は`Apply`オペレーターの同時実行を有効にするかどうかを制御します。同時実行の数は`tidb_executor_concurrency`変数によって制御されます。 `Apply`オペレーターは相関サブクエリを処理し、デフォルトでは同時実行が有効になっていないため、実行速度が遅くなります。この変数の値を`1`に設定すると、同時実行が増加し、実行速度が向上します。現在、 `Apply`の同時実行はデフォルトで無効になっています。
 
 ### tidb_enable_parallel_hashagg_spill <span class="version-mark">New in v8.0.0</span>
 
@@ -2615,7 +2615,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数は、TiDB が並列 HashAgg アルゴリズムでディスクスピルをサポートするかどうかを制御します。この変数が`ON`の場合、HashAgg オペレータは、あらゆる並列条件下でメモリ使用量に基づいてデータスピルを自動的にトリガーできるため、パフォーマンスとデータ スループットのバランスが取れます。この変数を`OFF`に設定することは推奨されません。v8.2.0 以降では、 `OFF`に設定するとエラーが報告されます。この変数は、将来のリリースで非推奨になります。
+- この変数は、TiDB が並列 HashAgg アルゴリズムでディスクスピルをサポートするかどうかを制御します。この変数が`ON`の場合、HashAgg オペレーターは、あらゆる並列条件下でメモリ使用量に基づいてデータスピルを自動的にトリガーできるため、パフォーマンスとデータ スループットのバランスが取れます。この変数を`OFF`に設定することは推奨されません。v8.2.0 以降では、 `OFF`に設定するとエラーが報告されます。この変数は、将来のリリースで非推奨になります。
 
 ### tidb_enable_pipelined_window_function
 
@@ -2749,7 +2749,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、データを読み取るオペレータに対して動的メモリ制御機能を有効にするかどうかを制御します。デフォルトでは、このオペレータは、 [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)がデータ読み取りに許可する最大スレッド数を有効にします。単一の SQL ステートメントのメモリ使用量が毎回[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超えると、データを読み取るオペレータは 1 つのスレッドを停止します。
+- この変数は、データを読み取るオペレーターに対して動的メモリ制御機能を有効にするかどうかを制御します。デフォルトでは、このオペレーターは、 [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)がデータ読み取りに許可する最大スレッド数を有効にします。単一の SQL ステートメントのメモリ使用量が毎回[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超えると、データを読み取るオペレーターは1つのスレッドを停止します。
 
 <CustomContent platform="tidb">
 
@@ -2760,7 +2760,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 <CustomContent platform="tidb-cloud">
 
-- データを読み取るオペレータに残っているスレッドが1つしかなく、単一のSQLステートメントのメモリ使用量が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超え続ける場合、このSQLステートメントは、データをディスクに書き出すなどの他のメモリ制御動作をトリガーします。
+- データを読み取るオペレーターに残っているスレッドが1つしかなく、単一のSQLステートメントのメモリ使用量が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超え続ける場合、このSQLステートメントは、データをディスクに書き出すなどの他のメモリ制御動作をトリガーします。
 
 </CustomContent>
 
@@ -3620,8 +3620,8 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - 型: Enumeration
 - デフォルト値: `hint-only`
 - 値のオプション: `hint-only` 、 `affinity-force` 、 `force`
-- この変数は、TiDB が`IndexLookUp`演算子を TiKV にプッシュするかどうか、またプッシュするタイミングを制御します。値のオプションは次のとおりです。
-    - `hint-only` (デフォルト): TiDB は、SQL ステートメントで[`INDEX_LOOKUP_PUSHDOWN`](/optimizer-hints.md#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855)ヒントが明示的に指定されている場合にのみ`IndexLookUp`演算子を TiKV にプッシュします。
+- この変数は、TiDB が`IndexLookUp`オペレーターを TiKV にプッシュするかどうか、またプッシュするタイミングを制御します。値のオプションは次のとおりです。
+    - `hint-only` (デフォルト): TiDB は、SQL ステートメントで[`INDEX_LOOKUP_PUSHDOWN`](/optimizer-hints.md#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855)ヒントが明示的に指定されている場合にのみ`IndexLookUp`オペレーターを TiKV にプッシュします。
     - `affinity-force` : TiDB は、 `AFFINITY`オプションで構成されたテーブルに対してのみプッシュダウンを自動的に有効にします。
     - `force` : TiDB はすべてのテーブルに対して`IndexLookUp`プッシュダウンを有効にします。
 
@@ -3868,14 +3868,14 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - 型: 整数
 - デフォルト値: `-1`
 - 範囲: `[-1, 9223372036854775807]`
-- この変数は、 TiFlashの`GROUP BY`を使用したハッシュ集計演算子の最大メモリ使用量をバイト単位で指定するために使用されます。メモリ使用量が指定された値を超えると、 TiFlash はハッシュ集計演算子をトリガーしてディスクに書き出します。この変数の値が`-1`の場合、TiDB はこの変数をTiFlashに渡しません。この変数の値が`0`以上の場合のみ、TiDB はこの変数をTiFlashに渡します。この変数の値が`0`の場合、メモリ使用量は無制限、つまりTiFlashハッシュ集計演算子は書き出しをトリガーしないことを意味します。詳細は、 [TiFlashディスクへのスピル](/tiflash/tiflash-spill-disk.md)を参照してください。
+- この変数は、 TiFlashの`GROUP BY`を使用したハッシュ集計オペレーターの最大メモリ使用量をバイト単位で指定するために使用されます。メモリ使用量が指定された値を超えると、 TiFlash はハッシュ集計オペレーターをトリガーしてディスクに書き出します。この変数の値が`-1`の場合、TiDB はこの変数をTiFlashに渡しません。この変数の値が`0`以上の場合のみ、TiDB はこの変数をTiFlashに渡します。この変数の値が`0`の場合、メモリ使用量は無制限、つまりTiFlashハッシュ集計オペレーターは書き出しをトリガーしないことを意味します。詳細は、 [TiFlashディスクへのスピル](/tiflash/tiflash-spill-disk.md)を参照してください。
 
 <CustomContent platform="tidb">
 
 > **Note:**
 >
-> - TiDBクラスタに複数のTiFlashノードがある場合、集計処理は通常、複数のTiFlashノードに分散して実行されます。この変数は、単一のTiFlashノードにおける集計演算子の最大メモリ使用量を制御します。
-> - この変数が`-1`に設定されている場合、 TiFlash は、自身の構成項目[`max_bytes_before_external_group_by`](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)の値に基づいて、集約演算子の最大メモリ使用量を決定します。
+> - TiDBクラスタに複数のTiFlashノードがある場合、集計処理は通常、複数のTiFlashノードに分散して実行されます。この変数は、単一のTiFlashノードにおける集計オペレーターの最大メモリ使用量を制御します。
+> - この変数が`-1`に設定されている場合、 TiFlash は、自身の構成項目[`max_bytes_before_external_group_by`](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)の値に基づいて、集約オペレーターの最大メモリ使用量を決定します。
 
 </CustomContent>
 
@@ -3883,8 +3883,8 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 > **Note:**
 >
-> - TiDBクラスタに複数のTiFlashノードがある場合、集計処理は通常、複数のTiFlashノードに分散して実行されます。この変数は、単一のTiFlashノードにおける集計演算子の最大メモリ使用量を制御します。
-> - この変数が`-1`に設定されている場合、 TiFlash は自身の構成項目`max_bytes_before_external_group_by`の値に基づいて集約演算子の最大メモリ使用量を決定します。
+> - TiDBクラスタに複数のTiFlashノードがある場合、集計処理は通常、複数のTiFlashノードに分散して実行されます。この変数は、単一のTiFlashノードにおける集計オペレーターの最大メモリ使用量を制御します。
+> - この変数が`-1`に設定されている場合、 TiFlash は自身の構成項目`max_bytes_before_external_group_by`の値に基づいて集約オペレーターの最大メモリ使用量を決定します。
 
 </CustomContent>
 
@@ -3896,14 +3896,14 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - 型: 整数
 - デフォルト値: `-1`
 - 範囲: `[-1, 9223372036854775807]`
-- この変数は、 TiFlashの`JOIN`を使用した Hash Join 演算子の最大メモリ使用量をバイト単位で指定するために使用されます。メモリ使用量が指定された値を超えると、 TiFlash はHash Join 演算子をトリガーしてディスクに書き出します。この変数の値が`-1`の場合、TiDB はこの変数をTiFlashに渡しません。この変数の値が`0`以上の場合のみ、TiDB はこの変数をTiFlashに渡します。この変数の値が`0`の場合、メモリ使用量は無制限、つまりTiFlash Hash Join 演算子は書き出しをトリガーしません。詳細は、 [TiFlashディスクへのスピル](/tiflash/tiflash-spill-disk.md)を参照してください。
+- この変数は、 TiFlashの`JOIN`を使用した Hash Join オペレーターの最大メモリ使用量をバイト単位で指定するために使用されます。メモリ使用量が指定された値を超えると、 TiFlash はHash Join オペレーターをトリガーしてディスクに書き出します。この変数の値が`-1`の場合、TiDB はこの変数をTiFlashに渡しません。この変数の値が`0`以上の場合のみ、TiDB はこの変数をTiFlashに渡します。この変数の値が`0`の場合、メモリ使用量は無制限、つまりTiFlash Hash Join オペレーターは書き出しをトリガーしません。詳細は、 [TiFlashディスクへのスピル](/tiflash/tiflash-spill-disk.md)を参照してください。
 
 <CustomContent platform="tidb">
 
 > **Note:**
 >
-> - TiDBクラスタに複数のTiFlashノードがある場合、結合処理は通常、複数のTiFlashノード上で分散して実行されます。この変数は、単一のTiFlashノード上での結合演算子の最大メモリ使用量を制御します。
-> - この変数が`-1`に設定されている場合、 TiFlash は、自身の構成項目[`max_bytes_before_external_join`](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)の値に基づいて、結合演算子の最大メモリ使用量を決定します。
+> - TiDBクラスタに複数のTiFlashノードがある場合、結合処理は通常、複数のTiFlashノード上で分散して実行されます。この変数は、単一のTiFlashノード上での結合オペレーターの最大メモリ使用量を制御します。
+> - この変数が`-1`に設定されている場合、 TiFlash は、自身の構成項目[`max_bytes_before_external_join`](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)の値に基づいて、結合オペレーターの最大メモリ使用量を決定します。
 
 </CustomContent>
 
@@ -3911,8 +3911,8 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 > **Note:**
 >
-> - TiDBクラスタに複数のTiFlashノードがある場合、結合処理は通常、複数のTiFlashノード上で分散して実行されます。この変数は、単一のTiFlashノード上での結合演算子の最大メモリ使用量を制御します。
-> - この変数が`-1`に設定されている場合、 TiFlash は自身の構成項目`max_bytes_before_external_join`の値に基づいて結合演算子の最大メモリ使用量を決定します。
+> - TiDBクラスタに複数のTiFlashノードがある場合、結合処理は通常、複数のTiFlashノード上で分散して実行されます。この変数は、単一のTiFlashノード上での結合オペレーターの最大メモリ使用量を制御します。
+> - この変数が`-1`に設定されている場合、 TiFlash は自身の構成項目`max_bytes_before_external_join`の値に基づいて結合オペレーターの最大メモリ使用量を決定します。
 
 </CustomContent>
 
@@ -3924,13 +3924,13 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - 型: 整数
 - デフォルト値: `-1`
 - 範囲: `[-1, 9223372036854775807]`
-- この変数は、 TiFlashの TopN および Sort 演算子の最大メモリ使用量をバイト単位で指定するために使用されます。メモリ使用量が指定された値を超えると、 TiFlash はTopN および Sort 演算子をトリガーしてディスクに書き出します。この変数の値が`-1`の場合、TiDB はこの変数をTiFlashに渡しません。この変数の値が`0`以上の場合のみ、TiDB はこの変数をTiFlashに渡します。この変数の値が`0`の場合、メモリ使用量は無制限であり、 TiFlash のTopN および Sort 演算子は書き出しをトリガーしません。詳細については、 [TiFlashディスクへのスピル](/tiflash/tiflash-spill-disk.md)を参照してください。
+- この変数は、 TiFlashの TopN および Sort オペレーターの最大メモリ使用量をバイト単位で指定するために使用されます。メモリ使用量が指定された値を超えると、 TiFlash はTopN および Sort オペレーターをトリガーしてディスクに書き出します。この変数の値が`-1`の場合、TiDB はこの変数をTiFlashに渡しません。この変数の値が`0`以上の場合のみ、TiDB はこの変数をTiFlashに渡します。この変数の値が`0`の場合、メモリ使用量は無制限であり、 TiFlash のTopN および Sort オペレーターは書き出しをトリガーしません。詳細については、 [TiFlashディスクへのスピル](/tiflash/tiflash-spill-disk.md)を参照してください。
 
 <CustomContent platform="tidb">
 
 > **Note:**
 >
-> - TiDBクラスタに複数のTiFlashノードがある場合、TopNとSortは通常、複数のTiFlashノードで分散実行されます。この変数は、単一のTiFlashノードにおけるTopNおよびSort演算子の最大メモリ使用量を制御します。
+> - TiDBクラスタに複数のTiFlashノードがある場合、TopNとSortは通常、複数のTiFlashノードで分散実行されます。この変数は、単一のTiFlashノードにおけるTopNおよびSortオペレーターの最大メモリ使用量を制御します。
 > - この変数が`-1`に設定されている場合、 TiFlash は、独自の構成項目[`max_bytes_before_external_sort`](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)の値に基づいて、TopN および Sort オペレーターの最大メモリ使用量を決定します。
 
 </CustomContent>
@@ -3939,7 +3939,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 > **Note:**
 >
-> - TiDBクラスタに複数のTiFlashノードがある場合、TopNとSortは通常、複数のTiFlashノードで分散実行されます。この変数は、単一のTiFlashノードにおけるTopNおよびSort演算子の最大メモリ使用量を制御します。
+> - TiDBクラスタに複数のTiFlashノードがある場合、TopNとSortは通常、複数のTiFlashノードで分散実行されます。この変数は、単一のTiFlashノードにおけるTopNおよびSortオペレーターの最大メモリ使用量を制御します。
 > - この変数が`-1`に設定されている場合、 TiFlash は、自身の構成項目`max_bytes_before_external_sort`の値に基づいて、TopN および Sort オペレーターの最大メモリ使用量を決定します。
 
 </CustomContent>
@@ -4055,8 +4055,8 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - デフォルト値: `33554432` (32 MiB)
 - 範囲: `[0, 9223372036854775807]`
 - 単位：バイト
-- この変数は`Apply`演算子のローカルキャッシュのメモリ使用量しきい値を設定するために使用されます。
-- `Apply`演算子のローカルキャッシュは`Apply`演算子の計算を高速化するために使用されます。 変数を`0`に設定すると、 `Apply`キャッシュ機能を無効にできます。
+- この変数は`Apply`オペレーターのローカルキャッシュのメモリ使用量しきい値を設定するために使用されます。
+- `Apply`オペレーターのローカルキャッシュは`Apply`オペレーターの計算を高速化するために使用されます。 変数を`0`に設定すると、 `Apply`キャッシュ機能を無効にできます。
 
 ### tidb_mem_quota_binding_cache <span class="version-mark">New in v6.0.0</span>
 
@@ -4173,7 +4173,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - 型: 整数
 - 範囲: `[1, 256]`
 - デフォルト値: `1`
-- この変数は、クエリ実行時の`MergeJoin`演算子の同時実行性を設定します。
+- この変数は、クエリ実行時の`MergeJoin`オペレーターの同時実行性を設定します。
 - この変数を設定することは**推奨されません**。この変数の値を変更すると、データの正確性に問題が生じる可能性があります。
 
 ### tidb_merge_partition_stats_concurrency
@@ -4462,7 +4462,7 @@ mysql> desc select count(distinct a) from test.t;
 - 型: Boolean
 - デフォルト値: `ON`
 - この変数は、 [TiFlashの遅延マテリアライゼーション](/tiflash/tiflash-late-materialization.md)機能を有効にするかどうかを制御するために使用されます。 TiFlash の遅延マテリアライゼーションは[高速スキャンモード](/tiflash/use-fastscan.md)では有効にならないことに注意してください。
-- この変数を`OFF`に設定してTiFlash の遅延マテリアライゼーション機能を無効にした場合、フィルタ条件（`WHERE`句）を含む`SELECT`ステートメントを処理するために、 TiFlash はフィルタリングの前に必要な列のすべてのデータをスキャンします。この変数を`ON`に設定してTiFlash の遅延マテリアライゼーション機能を有効にすると、 TiFlash は、TableScan オペレータにプッシュダウンされたフィルタ条件に関連する列データを最初にスキャンし、条件を満たす行をフィルタリングしてから、これらの行の他の列のデータをスキャンしてさらに計算を行うことができ、これにより、データ処理の IO スキャンと計算を削減できます。
+- この変数を`OFF`に設定してTiFlash の遅延マテリアライゼーション機能を無効にした場合、フィルタ条件（`WHERE`句）を含む`SELECT`ステートメントを処理するために、 TiFlash はフィルタリングの前に必要な列のすべてのデータをスキャンします。この変数を`ON`に設定してTiFlash の遅延マテリアライゼーション機能を有効にすると、 TiFlash は、TableScan オペレーターにプッシュダウンされたフィルタ条件に関連する列データを最初にスキャンし、条件を満たす行をフィルタリングしてから、これらの行の他の列のデータをスキャンしてさらに計算を行うことができ、これにより、データ処理の IO スキャンと計算を削減できます。
 
 ### tidb_opt_enable_mpp_shared_cte_execution <span class="version-mark">New in v7.2.0</span>
 
@@ -4621,8 +4621,8 @@ mysql> desc select count(distinct a) from test.t;
 - 型: 整数
 - デフォルト値: `100`
 - 範囲: `[0, 2147483647]`
-- この変数は、Limit または TopN 演算子を TiKV まで下げるかどうかを決定するしきい値を設定するために使用されます。
-- Limit演算子またはTopN演算子の値がこのしきい値以下の場合、これらの演算子は強制的にTiKVにプッシュダウンされます。この変数により、推定値の誤りなどが原因でLimit演算子またはTopN演算子をTiKVにプッシュダウンできないという問題が解決されます。
+- この変数は、Limit または TopN オペレーターを TiKV まで下げるかどうかを決定するしきい値を設定するために使用されます。
+- LimitオペレーターまたはTopNオペレーターの値がこのしきい値以下の場合、これらのオペレーターは強制的にTiKVにプッシュダウンされます。この変数により、推定値の誤りなどが原因でLimitオペレーターまたはTopNオペレーターをTiKVにプッシュダウンできないという問題が解決されます。
 
 ### tidb_opt_memory_factor
 
@@ -4641,7 +4641,7 @@ mysql> desc select count(distinct a) from test.t;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `OFF`
-- 変数の値が`ON`の場合、左結合演算子は常に内部テーブルを構築側として使用し、右結合演算子は常に外部テーブルを構築側として使用します。値を`OFF`に設定すると、外部結合演算子はテーブルのどちらの側も構築側として使用できます。
+- 変数の値が`ON`の場合、左結合オペレーターは常に内部テーブルを構築側として使用し、右結合オペレーターは常に外部テーブルを構築側として使用します。値を`OFF`に設定すると、外部結合オペレーターはテーブルのどちらの側も構築側として使用できます。
 
 ### tidb_opt_network_factor
 
@@ -4950,7 +4950,7 @@ CREATE TABLE t (a INT, b VARCHAR(10), c INT, INDEX idx_a_b(a, b(5)));
 SET tidb_opt_prefix_index_single_scan = 'OFF';
 ```
 
-次のクエリの場合、実行計画ではプレフィックスインデックス`idx_a_b`を使用しますが、テーブルルックアップが必要です ( `IndexLookUp`演算子が表示されます)。
+次のクエリの場合、実行計画ではプレフィックスインデックス`idx_a_b`を使用しますが、テーブルルックアップが必要です ( `IndexLookUp`オペレーターが表示されます)。
 
 ```sql
 EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
@@ -4997,11 +4997,11 @@ EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `ON` 。v8.3.0 より前のバージョンでは、デフォルト値は`OFF`です。
-- オプティマイザが`Projection`演算子を TiKV コプロセッサにプッシュダウンすることを許可するかどうかを指定します。有効にすると、オプティマイザは次の 3 種類の`Projection`演算子を TiKV にプッシュダウンする可能性があります。
-    - 演算子のトップレベル式はすべて[JSONクエリ関数](/functions-and-operators/json-functions/json-functions-search.md)または[JSON値属性関数](/functions-and-operators/json-functions/json-functions-return.md)です。例: `SELECT JSON_EXTRACT(data, '$.name') FROM users;` 。
-    - 演算子の最上位式には、JSON クエリ関数または JSON 値属性関数と、直接列読み取りが混在しています。例: `SELECT JSON_DEPTH(data), name FROM users;` 。
-    - 演算子の最上位式はすべて直接列読み取りであり、出力列の数は入力列の数よりも少ないです。例: `SELECT name FROM users;` 。
-- `Projection`演算子をプッシュダウンする最終決定は、オプティマイザによるクエリコストの総合的な評価にも依存します。
+- オプティマイザが`Projection`オペレーターを TiKV コプロセッサにプッシュダウンすることを許可するかどうかを指定します。有効にすると、オプティマイザは次の3種類の`Projection`オペレーターを TiKV にプッシュダウンする可能性があります。
+    - オペレーターのトップレベル式はすべて[JSONクエリ関数](/functions-and-operators/json-functions/json-functions-search.md)または[JSON値属性関数](/functions-and-operators/json-functions/json-functions-return.md)です。例: `SELECT JSON_EXTRACT(data, '$.name') FROM users;` 。
+    - オペレーターの最上位式には、JSON クエリ関数または JSON 値属性関数と、直接列読み取りが混在しています。例: `SELECT JSON_DEPTH(data), name FROM users;` 。
+    - オペレーターの最上位式はすべて直接列読み取りであり、出力列の数は入力列の数よりも少ないです。例: `SELECT name FROM users;` 。
+- `Projection`オペレーターをプッシュダウンする最終決定は、オプティマイザによるクエリコストの総合的な評価にも依存します。
 - TiDB クラスターが v8.3.0 より前のバージョンから v8.3.0 以降にアップグレードされた場合、この変数のデフォルト値は`OFF`です。
 
 ### tidb_opt_range_max_size <span class="version-mark">New in v6.4.0</span>
@@ -5558,7 +5558,7 @@ SHOW WARNINGS;
 - デフォルト値: `-1`
 - 範囲: `[-1, 256]`
 - 単位：スレッド
-- この変数は`Projection`演算子の同時実行を設定するために使用されます。
+- この変数は`Projection`オペレーターの同時実行を設定するために使用されます。
 - `-1`という値が指定された場合、代わりに`tidb_executor_concurrency`という値が使用されます。
 
 ### tidb_query_log_max_len
@@ -6367,7 +6367,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: 整数
 - デフォルト値: `1`
-- この変数は、クエリ実行時の`StreamAgg`演算子の同時実行性を設定します。
+- この変数は、クエリ実行時の`StreamAgg`オペレーターの同時実行性を設定します。
 - この変数を設定することは**推奨されません**。変数の値を変更すると、データの正確性に問題が生じる可能性があります。
 
 ### tidb_super_read_only <span class="version-mark">New in v5.3.1</span>

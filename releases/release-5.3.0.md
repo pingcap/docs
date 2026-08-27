@@ -299,7 +299,7 @@ TiCDC v5.3.0以降、TiDBクラスター間の循環レプリケーション機�
 
 - TiFlash
 
-    - TableScanオペレータの実行効率を大幅に向上
+    - TableScanオペレーターの実行効率を大幅に向上
 
     - Exchangeオペレーターの実行効率を向上させる
 
@@ -338,7 +338,7 @@ TiCDC v5.3.0以降、TiDBクラスター間の循環レプリケーション機�
 
 - TiDB
 
-    - 実行中に発生するエラーを修正しました。これは、パーティションテーブル で集計演算子をプッシュダウンする際に、スキーマ列の浅いコピーが行われることが原因で発生します。 [＃26554](https://github.com/pingcap/tidb/issues/26554) [＃27797](https://github.com/pingcap/tidb/issues/27797)
+    - 実行中に発生するエラーを修正しました。これは、パーティションテーブル で集計オペレーターをプッシュダウンする際に、スキーマ列の浅いコピーが行われることが原因で発生します。 [＃26554](https://github.com/pingcap/tidb/issues/26554) [＃27797](https://github.com/pingcap/tidb/issues/27797)
     - `plan cache`符号なしフラグの変更を検出できない問題を修正[＃28254](https://github.com/pingcap/tidb/issues/28254)
     - パーティション関数が範囲外の場合の誤ったパーティションプルーニングを修正[＃28233](https://github.com/pingcap/tidb/issues/28233)
     - プランナーが場合によっては無効なプランをキャッシュする可能性がある問題を修正`join` [＃28087](https://github.com/pingcap/tidb/issues/28087)
@@ -408,7 +408,7 @@ TiCDC v5.3.0以降、TiDBクラスター間の循環レプリケーション機�
     - 古い履歴ログを検索するときに最新のログしか検索できない問題を修正しました
     - 新しい照合順序が有効になっているときに間違った結果になる可能性を修正しました
     - SQL 文に非常に長いネストされた式が含まれている場合に発生する可能性のある解析エラーを修正しました。
-    - Exchangeオペレータの`Block schema mismatch`エラーを修正
+    - Exchangeオペレーターの`Block schema mismatch`エラーを修正
     - Decimal型の比較時に発生する可能性のある`Can't compare`エラーを修正
     - `left/substring`関数の`3rd arguments of function substringUTF8 must be constants`エラーを修正する
 

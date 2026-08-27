@@ -56,8 +56,8 @@ TiDB Ansible バージョン: 3.0.0
     - 次の行のIDを取得するための`admin show next_row_id`コマンドをサポートします
     - `JSON_QUOTE` 、 `JSON_ARRAY_APPEND` 、 `JSON_MERGE_PRESERVE` 、 `BENCHMARK` 、 `COALESCE` 、 `NAME_CONST`の6つの組み込み関数を追加
     - チャンクサイズの制御ロジックを最適化し、クエリコンテキストに基づいて動的に調整することで、SQL実行時間とリソース消費を削減します。
-    - 3つの演算子（ `TableReader` `IndexLookupReader`でメモリ使用量の追跡と制御をサポートします`IndexReader`
-    - 空の`ON`条件をサポートするように Merge Join 演算子を最適化します。
+    - 3つのオペレーター（ `TableReader` 、 `IndexReader` 、および`IndexLookupReader` ）でメモリ使用量の追跡と制御をサポートします。
+    - 空の`ON`条件をサポートするように Merge Join オペレーターを最適化します。
     - 列が多すぎる単一テーブルの書き込みパフォーマンスを最適化します
     - 逆順でデータをスキャンできるようにすることで`admin show ddl jobs`のパフォーマンスを向上します
     - ホットスポットの問題を軽減するために、テーブルリージョンを手動で分割する`split table region`ステートメントを追加します。
@@ -123,14 +123,14 @@ TiDB Ansible バージョン: 3.0.0
 - API
     - tombstoneストアをクリアするための`remove-tombstone` API を追加します
     - リージョン情報を一括クエリするAPI `ScanRegions`を追加
-    - 実行中の演算子を照会するための`GetOperator` API を追加します
+    - 実行中のオペレーターを照会するための`GetOperator` API を追加します
     - `GetStores` APIのパフォーマンスを最適化
 - 構成
     - 構成チェックロジックを最適化して構成項目のエラーを回避する
     - リージョンの結合方向を制御するには`enable-two-way-merge`追加します
     - ホットリージョンのスケジュールレートを制御するには`hot-region-schedule-limit`追加します
     - 複数のしきい値を連続して超える場合は、ホットスポットを識別するために`hot-region-cache-hits-threshold`追加します。
-    - 1 分あたりに許可されるバランスリージョンオペレータの最大数を制御するための`store-balance-rate`構成項目を追加します。
+    - 1分あたりに許可される balance Region operator の最大数を制御するための`store-balance-rate`構成項目を追加します。
 - スケジューラの最適化
     - 各ストアのオペレーターの速度を個別に制御するためのストア制限メカニズムを追加します。
     - 異なるスケジューラ間のリソース競合を最適化するために`waitingOperator`キューをサポートします。

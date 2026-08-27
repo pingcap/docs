@@ -336,7 +336,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     - `DAYOFWEEK()`と`DAYOFYEAR()`関数をTiFlash にプッシュダウンするサポート [＃33130](https://github.com/pingcap/tidb/issues/33130)
     - `IS_TRUE` `IS_FALSE`関数`IS_TRUE_WITH_NULL` TiFlash にプッシュダウンする機能をサポート [＃33047](https://github.com/pingcap/tidb/issues/33047)
     - `GREATEST`と`LEAST`関数をTiFlash にプッシュダウンするサポート [＃32787](https://github.com/pingcap/tidb/issues/32787)
-    - `UnionScan`オペレータの実行の追跡をサポート [＃32631](https://github.com/pingcap/tidb/issues/32631)
+    - `UnionScan`オペレーターの実行の追跡をサポート [＃32631](https://github.com/pingcap/tidb/issues/32631)
     - `_tidb_rowid`列列を読み取るクエリにPointGetプランの使用をサポート [＃31543](https://github.com/pingcap/tidb/issues/31543)
     - `EXPLAIN`ステートメントの出力で、名前を小文字に変換せずに元のパーティション名を表示することをサポート[＃32719](https://github.com/pingcap/tidb/issues/32719)
     - IN条件と文字列型列のRANGE COLUMNSパーティションのパーティションプルーニングを有効にする[＃32626](https://github.com/pingcap/tidb/issues/32626)

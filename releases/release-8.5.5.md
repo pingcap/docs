@@ -43,7 +43,7 @@ TiDBバージョン：8.5.5
 
 - クエリパフォーマンスを向上させるため、インデックス検索をTiKVにプッシュダウンするサポート [#62575](https://github.com/pingcap/tidb/issues/62575) @[lcwangchao](https://github.com/lcwangchao)
 
-    TiDBはv8.5.5以降、 `IndexLookUp`演算子をTiKVノードにプッシュダウンするために、[オプティマイザのヒント](/optimizer-hints.md)の使用をサポートしています。これにより、リモートプロシージャコール（RPC）の数が減り、クエリのパフォーマンスが向上する可能性があります。実際のパフォーマンス向上はワークロードによって異なるため、検証にはテストが必要です。
+    TiDBはv8.5.5以降、 `IndexLookUp`オペレーターをTiKVノードにプッシュダウンするために、[オプティマイザのヒント](/optimizer-hints.md)の使用をサポートしています。これにより、リモートプロシージャコール（RPC）の数が減り、クエリのパフォーマンスが向上する可能性があります。実際のパフォーマンス向上はワークロードによって異なるため、検証にはテストが必要です。
 
     特定のテーブルに対してインデックス検索を TiKV にプッシュダウンするようにオプティマイザに明示的に指示するには、 [`INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...])`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855)ヒントを使用できます。このヒントは、テーブルの AFFINITY 属性と組み合わせて使用​​することをお勧めします。たとえば、通常のテーブルには`AFFINITY="table"`を、パーティション化されたテーブルには`AFFINITY="partition"`を設定します。
 
@@ -174,7 +174,7 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
 | [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)                                                                      | 変更     | OLAPおよびHTAPシナリオにおける統計情報の完全性を向上させるため、デフォルト値を`PREDICATE`から`ALL`に変更します。                                                                                                                                                                                                                                             |
 | [`tidb_advancer_check_point_lag_limit`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_advancer_check_point_lag_limit-new-in-v855)                       | 新しく追加された | ログバックアップタスクのチェックポイント遅延の最大値を制御します。デフォルト値は`48h0m0s`です。タスクのチェックポイント遅延がこの制限を超えると、TiDB Advancer はタスクを一時停止します。                                                                                                                                                                                                         |
 | [`tidb_cb_pd_metadata_error_rate_threshold_ratio`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_cb_pd_metadata_error_rate_threshold_ratio-new-in-v855) | 新しく追加された | TiDB がサーキットブレーカーをトリガーするタイミングを制御します。デフォルト値は`0`で、これはサーキットブレーカーが無効になっていることを意味します。 `0.01`から`1`の間の値を設定すると、サーキットブレーカーが有効になり、PD に送信される特定のリクエストのエラー率がしきい値に達するか超えたときにサーキットブレーカーがトリガーされます。                                                                                                                                 |
-| [`tidb_index_lookup_pushdown_policy`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_index_lookup_pushdown_policy-new-in-v855)                           | 新しく追加された | TiDB が`IndexLookUp`演算子を TiKV にプッシュするかどうか、またプッシュするタイミングを制御します。デフォルト値は`hint-only`です。これは、SQL ステートメントで[`INDEX_LOOKUP_PUSHDOWN`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855)ヒントが明示的に指定されている場合にのみ、TiDB が`IndexLookUp`演算子を TiKV にプッシュすることを意味します。 |
+| [`tidb_index_lookup_pushdown_policy`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_index_lookup_pushdown_policy-new-in-v855)                           | 新しく追加された | TiDB が`IndexLookUp`オペレーターを TiKV にプッシュするかどうか、またプッシュするタイミングを制御します。デフォルト値は`hint-only`です。これは、SQL ステートメントで[`INDEX_LOOKUP_PUSHDOWN`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855)ヒントが明示的に指定されている場合にのみ、TiDB が`IndexLookUp`オペレーターを TiKV にプッシュすることを意味します。 |
 
 ### コンフィグレーションパラメータ {#configuration-parameters}
 
@@ -213,7 +213,7 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
     - `IMPORT INTO`のエンコードエラー発生時のエラーメッセージを改善し、ユーザーが問題をより正確に特定できるようにしました [#63763](https://github.com/pingcap/tidb/issues/63763) @[D3Hunter](https://github.com/D3Hunter)
     - Parquetファイルの解析メカニズムを強化し、Parquet形式のデータのインポートパフォーマンスを向上させる [#62906](https://github.com/pingcap/tidb/issues/62906) @[joechenrh](https://github.com/joechenrh)
     - `tidb_analyze_column_options`のデフォルト値を`ALL`に変更して、デフォルトですべての列の統計情報を収集します [#64992](https://github.com/pingcap/tidb/issues/64992) @[0xPoe](https://github.com/0xPoe)
-    - `IndexHashJoin`演算子の実行ロジックを最適化し、特定のJOINシナリオでインクリメンタル処理を使用することで、一度に大量のデータをロードすることを避け、メモリ使用量を大幅に削減し、パフォーマンスを向上させます。 [#63303](https://github.com/pingcap/tidb/issues/63303) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
+    - `IndexHashJoin`オペレーターの実行ロジックを最適化し、特定のJOINシナリオでインクリメンタル処理を使用することで、一度に大量のデータをロードすることを避け、メモリ使用量を大幅に削減し、パフォーマンスを向上させます。 [#63303](https://github.com/pingcap/tidb/issues/63303) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
     - 分散実行フレームワーク（DXF）における内部SQLステートメントのCPU使用率を最適化する [#59344](https://github.com/pingcap/tidb/issues/59344) @[D3Hunter](https://github.com/D3Hunter)
     - `expression.Contains`関数のパフォーマンスを改善 [#61373](https://github.com/pingcap/tidb/issues/61373) @[hawkingrei](https://github.com/hawkingrei)
 

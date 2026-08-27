@@ -634,7 +634,7 @@ summary: TiDB クラスターのアラートルールについて学習します
 - 解決：
 
     1. [`TiKV_channel_full_total`](#tikv_channel_full_total)を参照してください。
-    2. TiKVの負荷が低い場合は、PDスケジュールの頻度が高すぎないか検討してください。PDページのオペレータ作成パネルで、PDスケジュールの種類と数を確認できます。
+    2. TiKVの負荷が低い場合は、PDスケジュールの頻度が高すぎないか検討してください。PDページのオペレーター作成パネルで、PDスケジュールの種類と数を確認できます。
 
 #### `TiKV_raft_process_ready_duration_secs` {#tikv_raft_process_ready_duration_secs}
 

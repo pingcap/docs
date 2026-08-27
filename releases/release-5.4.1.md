@@ -18,7 +18,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
 - TiDB
 
     - `_tidb_rowid`列列を読み取るクエリにPointGetプランの使用をサポート [＃31543](https://github.com/pingcap/tidb/issues/31543)
-    - `Apply`オペレータのログとメトリクスを追加して、並列であるかどうかを確認します。 [＃33887](https://github.com/pingcap/tidb/issues/33887)
+    - `Apply`オペレーターのログとメトリクスを追加して、並列であるかどうかを確認します。 [＃33887](https://github.com/pingcap/tidb/issues/33887)
     - 統計情報を収集するために使用される分析バージョン 2 の`TopN`プルーニング ロジックを改善します。 [＃34256](https://github.com/pingcap/tidb/issues/34256)
     - Grafanaダッシュボードで複数のKubernetesクラスターの表示をサポート [＃32593](https://github.com/pingcap/tidb/issues/32593)
 
@@ -71,7 +71,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
     - 新しいパーティションが追加されたときにテーブル属性がインデックスされない問題と、パーティションが変更されたときにテーブル範囲情報が更新されない問題を修正しました[＃33929](https://github.com/pingcap/tidb/issues/33929)
     - 初期化中のテーブルの`TopN`情報が正しくソートされないバグを修正しました[＃34216](https://github.com/pingcap/tidb/issues/34216)
     - 識別できないテーブル属性をスキップして、テーブル`INFORMATION_SCHEMA.ATTRIBUTES`からの読み取り時に発生するエラーを修正します [＃33665](https://github.com/pingcap/tidb/issues/33665)
-    - `@@tidb_enable_parallel_apply`が設定されていても、 `order`プロパティが存在する場合に`Apply`演算子が並列化されないバグを修正[＃34237](https://github.com/pingcap/tidb/issues/34237)
+    - `@@tidb_enable_parallel_apply`が設定されていても、 `order`プロパティが存在する場合に`Apply`オペレーターが並列化されないバグを修正[＃34237](https://github.com/pingcap/tidb/issues/34237)
     - `sql_mode` `NO_ZERO_DATE` に設定すると`datetime`列に`'0000-00-00 00:00:00'`が挿入されるバグを修正しました [＃34099](https://github.com/pingcap/tidb/issues/34099)
     - `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルへのクエリ実行時に TiDBサーバーのメモリが発生する問題を修正しました。この問題は、Grafana ダッシュボードでスロークエリをチェックすると発生する可能性があります。 [＃33893](https://github.com/pingcap/tidb/issues/33893)
     - `NOWAIT`文で実行中のトランザクションがロックに遭遇してもすぐには戻らないバグを修正 [＃32754](https://github.com/pingcap/tidb/issues/32754)
@@ -99,7 +99,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
 - PD
 
     - `dr-autosync`の`Duration`フィールドが動的に構成できない問題を修正[＃4651](https://github.com/tikv/pd/issues/4651)
-    - 大容量（例えば2T）のストアが存在する場合、完全に割り当てられた小さなストアを検出できず、バランス演算子が生成されない問題を修正しました[＃4805](https://github.com/tikv/pd/issues/4805)
+    - 大容量（例えば2T）のストアが存在する場合、完全に割り当てられた小さなストアを検出できず、balance operator が生成されない問題を修正しました[＃4805](https://github.com/tikv/pd/issues/4805)
     - ラベル分布にメトリクスの残余ラベルがある問題を修正 [＃4825](https://github.com/tikv/pd/issues/4825)
 
 - TiFlash

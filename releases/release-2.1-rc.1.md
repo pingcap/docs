@@ -23,8 +23,8 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
     - 相関列を使用してインデックス範囲を計算できないケースがある問題を修正[＃7357](https://github.com/pingcap/tidb/pull/7357)
 - SQL実行エンジン
     - 一部のケースで夏時間が正しく計算されない問題を修正[＃6823](https://github.com/pingcap/tidb/pull/6823)
-    - 集計関数フレームワークをリファクタリングして、 `Stream`と`Hash`集計演算子の実行効率を向上させる [＃6852](https://github.com/pingcap/tidb/pull/6852)
-    - `Hash`集計演算子が場合によっては正常に終了できない問題を修正[＃6982](https://github.com/pingcap/tidb/pull/6982)
+    - 集計関数フレームワークをリファクタリングして、 `Stream`と`Hash`集計オペレーターの実行効率を向上させる [＃6852](https://github.com/pingcap/tidb/pull/6852)
+    - `Hash`集計オペレーターが場合によっては正常に終了できない問題を修正[＃6982](https://github.com/pingcap/tidb/pull/6982)
     - `BIT_AND` / `BIT_OR` / `BIT_XOR`非整数データを正しく処理しない問題を修正[＃6994](https://github.com/pingcap/tidb/pull/6994)
     - `REPLACE INTO`文の実行速度を最適化し、パフォーマンスを約10倍向上させます[＃7027](https://github.com/pingcap/tidb/pull/7027)
     - 時間型データのメモリ使用量を最適化し、時間型データのメモリ使用量を50％削減します[＃7043](https://github.com/pingcap/tidb/pull/7043)

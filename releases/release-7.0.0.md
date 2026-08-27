@@ -41,7 +41,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     相関サブクエリで`IN` 、 `NOT IN` 、 `= ANY` 、または`!= ALL`演算子を使用する場合、TiDB はそれらを準演算子に変換することでコンピューティング パフォーマンスを最適化します。ジョインまたはアンチセミジョイン。結合キー列が`NULL`の場合は、 [NULL値対応セミジョイン](/explain-subqueries.md#null-aware-semi-join-in-and--any-subqueries)や[ヌル値対応アンチセミジョイン](/explain-subqueries.md#null-aware-anti-semi-join-not-in-and--all-subqueries)などの、null 対応結合アルゴリズムが必要です。
 
-    バージョン 7.0.0 より前のTiFlashでは、NULL 対応セミ結合演算子と NULL 対応アンチセミ結合演算子がサポートされていなかったため、これらのサブクエリをTiFlashに直接プッシュダウンすることができませんでした。バージョン 7.0.0 以降では、 TiFlash はNULL 対応セミ結合演算子と NULL 対応アンチセミ結合演算子をサポートしています。SQL ステートメントにこれらの相関サブクエリが含まれており、クエリ内のテーブルにTiFlashレプリカがあり、かつ[MPPモード](/tiflash/use-tiflash-mpp-mode.md)が有効になっている場合、オプティマイザは全体的なパフォーマンスを向上させるために、NULL 対応セミ結合演算子と NULL 対応アンチセミ結合演算子をTiFlashにプッシュダウンするかどうかを自動的に判断します。
+    バージョン 7.0.0 より前のTiFlashでは、NULL 対応セミ結合オペレーターと NULL 対応アンチセミ結合オペレーターがサポートされていなかったため、これらのサブクエリをTiFlashに直接プッシュダウンすることができませんでした。バージョン 7.0.0 以降では、 TiFlash はNULL 対応セミ結合オペレーターと NULL 対応アンチセミ結合オペレーターをサポートしています。SQL ステートメントにこれらの相関サブクエリが含まれており、クエリ内のテーブルにTiFlashレプリカがあり、かつ[MPPモード](/tiflash/use-tiflash-mpp-mode.md)が有効になっている場合、オプティマイザは全体的なパフォーマンスを向上させるために、NULL 対応セミ結合オペレーターと NULL 対応アンチセミ結合オペレーターをTiFlashにプッシュダウンするかどうかを自動的に判断します。
 
     詳細については、 [ドキュメント](/tiflash/tiflash-supported-pushdown-calculations.md)を参照してください。
 
@@ -53,7 +53,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 - TiFlashは後期実体化をサポート (実験的) [#5829](https://github.com/pingcap/tiflash/issues/5829) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
 
-    フィルタ条件 ( `SELECT` `WHERE`ステートメントを処理する場合、 TiFlash はデフォルトでクエリに必要な列からすべてのデータを読み取り、クエリ条件に基づいてデータをフィルタリングおよび集計します。遅延マテリアライゼーションは、フィルタ条件の一部を TableScan オペレータにプッシュダウンすることをサポートする最適化手法です。つまり、 TiFlash はまずプッシュダウンされたフィルタ条件に関連する列データをスキャンし、条件を満たす行をフィルタリングしてから、これらの行の他の列データをスキャンしてさらに計算を行うことで、データ処理の IO スキャンと計算を削減します。
+    フィルタ条件 ( `SELECT` `WHERE`ステートメントを処理する場合、 TiFlash はデフォルトでクエリに必要な列からすべてのデータを読み取り、クエリ条件に基づいてデータをフィルタリングおよび集計します。遅延マテリアライゼーションは、フィルタ条件の一部を TableScan オペレーターにプッシュダウンすることをサポートする最適化手法です。つまり、 TiFlash はまずプッシュダウンされたフィルタ条件に関連する列データをスキャンし、条件を満たす行をフィルタリングしてから、これらの行の他の列データをスキャンしてさらに計算を行うことで、データ処理の IO スキャンと計算を削減します。
 
     TiFlashの遅延マテリアライゼーション機能は、デフォルトでは有効になっていません。 `tidb_opt_enable_late_materialization`システム変数を`OFF`に設定することで有効にできます。この機能が有効になると、TiDBオプティマイザは統計情報とフィルタ条件に基づいて、どのフィルタ条件をプッシュダウンするかを決定します。
 
@@ -81,7 +81,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、 [ドキュメント](/tikv-configuration-file.md#prefill-for-recycle-new-in-v700)を参照してください。
 
-- ウィンドウ[ウィンドウ関数](/functions-and-operators/expressions-pushed-down.md)からの TopN または Limit 演算子の導出をサポート [#13936](https://github.com/tikv/tikv/issues/13936) @[windtalker](https://github.com/windtalker)
+- [ウィンドウ関数](/functions-and-operators/expressions-pushed-down.md)からの TopN または Limit オペレーターの導出をサポートし、ウィンドウ関数のパフォーマンスを向上させます [#13936](https://github.com/tikv/tikv/issues/13936) @[windtalker](https://github.com/windtalker)
 
     この機能はデフォルトでは無効になっています。有効にするには、セッション変数[tidb_opt_derive_topn](/system-variables.md#tidb_opt_derive_topn-new-in-v700) `ON`に設定してください。
 
@@ -123,7 +123,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     実行パフォーマンスを向上させるため、 TiFlashは可能な限りデータをメモリ内で処理します。データ量がメモリの総容量を超えると、メモリ不足によるシステムクラッシュを回避するため、 TiFlashはクエリを終了します。したがって、 TiFlashが処理できるデータ量は、利用可能なメモリ容量によって制限されます。
 
-    バージョン7.0.0以降、 TiFlashはディスクへのスピルをサポートしています。オペレータのメモリ使用量のしきい値（ [`tidb_max_bytes_before_tiflash_external_group_by`](/system-variables.md#tidb_max_bytes_before_tiflash_external_group_by-new-in-v700) 、 [`tidb_max_bytes_before_tiflash_external_sort`](/system-variables.md#tidb_max_bytes_before_tiflash_external_sort-new-in-v700) 、 [`tidb_max_bytes_before_tiflash_external_join`](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700) ）を調整することで、オペレータが使用できる最大メモリ量を制御できます。オペレータが使用するメモリがしきい値を超えると、データは自動的にディスクに書き込まれます。これによりパフォーマンスは多少低下しますが、より多くのデータを処理できるようになります。
+    バージョン7.0.0以降、 TiFlashはディスクへのスピルをサポートしています。オペレーターのメモリ使用量のしきい値（ [`tidb_max_bytes_before_tiflash_external_group_by`](/system-variables.md#tidb_max_bytes_before_tiflash_external_group_by-new-in-v700) 、 [`tidb_max_bytes_before_tiflash_external_sort`](/system-variables.md#tidb_max_bytes_before_tiflash_external_sort-new-in-v700) 、 [`tidb_max_bytes_before_tiflash_external_join`](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700) ）を調整することで、オペレーターが使用できる最大メモリ量を制御できます。オペレーターが使用するメモリがしきい値を超えると、データは自動的にディスクに書き込まれます。これによりパフォーマンスは多少低下しますが、より多くのデータを処理できるようになります。
 
     詳細については、[ドキュメント](/tiflash/tiflash-spill-disk.md)を参照してください。
 
@@ -285,7 +285,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 | [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)                                   | 変更     | デフォルト値を`OFF`から`ON`に変更します。これは、クラスターがデフォルトでリソースグループごとにリソースを分離することを意味します。リソース制御は v7.0.0 でデフォルトで有効になっているため、いつでもこの機能を使用できます。                                                                    |
 | [`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)                                     | 変更     | v7.0.0 から有効になり、[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)によってキャッシュできる実行計画の最大数を制御します。                                                                                             |
 | [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)                                                 | 変更     | バージョン7.0.0以降、この変数はプリペアドステートメントプロトコルにおけるカーソルフェッチ読み取りには有効ではなくなりました。                                                                                                                          |
-| [`tidb_enable_inl_join_inner_multi_pattern`](/system-variables.md#tidb_enable_inl_join_inner_multi_pattern-new-in-v700)           | 新しく追加された | この変数は、内部テーブルに`Selection`または`Projection`演算子がある場合に、インデックス結合がサポートされるかどうかを制御します。                                                                                                               |
+| [`tidb_enable_inl_join_inner_multi_pattern`](/system-variables.md#tidb_enable_inl_join_inner_multi_pattern-new-in-v700)           | 新しく追加された | この変数は、内部テーブルに`Selection`または`Projection`オペレーターがある場合に、インデックス結合がサポートされるかどうかを制御します。                                                                                                               |
 | [`tidb_enable_plan_cache_for_subquery`](/system-variables.md#tidb_enable_plan_cache_for_subquery-new-in-v700)                     | 新しく追加された | この変数は、プリペアドプランキャッシュがサブクエリを含むクエリをキャッシュするかどうかを制御します。                                                                                                                                         |
 | [`tidb_enable_plan_replayer_continuous_capture`](/system-variables.md#tidb_enable_plan_replayer_continuous_capture-new-in-v700)   | 新しく追加された | この変数は、 [`PLAN REPLAYER CONTINUOUS CAPTURE`](/sql-plan-replayer.md#use-plan-replayer-continuous-capture)機能を有効にするかどうかを制御します。デフォルト値の`OFF`は、この機能を無効にすることを意味します。                                |
 | [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700)               | 新しく追加された | この変数は、負荷ベースのレプリカ読み取りをトリガーするしきい値を設定します。この変数で制御される機能は、TiDB v7.0.0 では完全には動作しません。デフォルト値は変更しないでください。                                                                                            |
@@ -419,7 +419,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     - 特定の場合に小数の除算で最後の桁が切り上げられない問題を修正 [#7022](https://github.com/pingcap/tiflash/issues/7022) @[LittleFall](https://github.com/LittleFall)
     - 特定のケースで Decimal キャストが誤って切り上げられる問題を修正 [#6994](https://github.com/pingcap/tiflash/issues/6994) @[windtalker](https://github.com/windtalker)
-    - 新しい照合順序を有効にした後、TopN/Sort演算子が誤った結果を生成する問題を修正します [#6807](https://github.com/pingcap/tiflash/issues/6807) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - 新しい照合順序を有効にした後、TopN/Sortオペレーターが誤った結果を生成する問題を修正します [#6807](https://github.com/pingcap/tiflash/issues/6807) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - 単一のTiFlashノード上で 1,200 万行を超える結果セットを集計するときにTiFlash がエラーを報告する問題を修正 [#6993](https://github.com/pingcap/tiflash/issues/6993) @[windtalker](https://github.com/windtalker)
 
 - ツール

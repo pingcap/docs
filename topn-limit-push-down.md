@@ -1,13 +1,13 @@
 ---
 title: TopN and Limit Operator Push Down
-summary: TopN および Limit 演算子プッシュダウンの実装を学習します。
+summary: TopN および Limit オペレータープッシュダウンの実装を学習します。
 ---
 
-# TopN と Limit 演算子のプッシュダウン {#topn-and-limit-operator-push-down}
+# TopN と Limit オペレーターのプッシュダウン {#topn-and-limit-operator-push-down}
 
-このドキュメントでは、TopN および Limit 演算子プッシュダウンの実装について説明します。
+このドキュメントでは、TopN および Limit オペレータープッシュダウンの実装について説明します。
 
-TiDB実行計画ツリーでは、SQLの`LIMIT`句はLimit演算子ノードに対応し、 `ORDER BY`句はSort演算子ノードに対応します。隣接するLimit演算子とSort演算子はTopN演算子ノードとして結合され、特定のソートルールに従って上位N件のレコードが返されます。つまり、Limit演算子は、ソートルールがnullであるTopN演算子ノードと同等です。
+TiDB実行計画ツリーでは、SQLの`LIMIT`句はLimitオペレーターノードに対応し、 `ORDER BY`句はSortオペレーターノードに対応します。隣接するLimitオペレーターとSortオペレーターはTopNオペレーターノードとして結合され、特定のソートルールに従って上位N件のレコードが返されます。つまり、Limitオペレーターは、ソートルールがnullであるTopNオペレーターノードと同等です。
 
 述語プッシュダウンと同様に、TopNとLimitは実行計画ツリー内でデータソースに可能な限り近い位置にプッシュダウンされ、必要なデータが早い段階でフィルタリングされます。これにより、プッシュダウンはデータ転送と計算のオーバーヘッドを大幅に削減します。
 
@@ -36,7 +36,7 @@ explain select * from t order by a limit 10;
 4 rows in set (0.00 sec)
 ```
 
-このクエリでは、TopN演算子ノードがデータフィルタリングのためにTiKVにプッシュダウンされ、各コプロセッサーは10件のレコードのみをTiDBに返します。TiDBがデータを集約した後、最終的なフィルタリングが実行されます。
+このクエリでは、TopNオペレーターノードがデータフィルタリングのためにTiKVにプッシュダウンされ、各コプロセッサーは10件のレコードのみをTiDBに返します。TiDBがデータを集約した後、最終的なフィルタリングが実行されます。
 
 ### 例 2: TopN を Join にプッシュダウンできます (ソートルールは外部テーブルの列のみに依存します) {#example-2-topn-can-be-pushed-down-into-join-the-sorting-rule-only-depends-on-the-columns-in-the-outer-table}
 
@@ -62,7 +62,7 @@ explain select * from t left join s on t.a = s.a order by t.a limit 10;
 8 rows in set (0.01 sec)
 ```
 
-このクエリでは、TopN演算子のソートルールは外部テーブル`t`の列のみに依存するため、TopNをJoinにプッシュダウンする前に計算を実行することで、Join操作の計算コストを削減できます。また、TiDBはTopNをストレージレイヤーにプッシュダウンします。
+このクエリでは、TopNオペレーターのソートルールは外部テーブル`t`の列のみに依存するため、TopNをJoinにプッシュダウンする前に計算を実行することで、Join操作の計算コストを削減できます。また、TiDBはTopNをストレージレイヤーにプッシュダウンします。
 
 ### 例3: TopNはJoin前にプッシュダウンできない {#example-3-topn-cannot-be-pushed-down-before-join}
 

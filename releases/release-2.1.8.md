@@ -37,9 +37,9 @@ TiDB Ansible バージョン: 2.1.8
 
 ## PD {#pd}
 
-- `regionScatterer`無効な`OperatorStep` を生成する可能性がある問題を修正 [＃1482](https://github.com/pingcap/pd/pull/1482)
+- `regionScatterer`が無効な`OperatorStep` を生成する可能性がある問題を修正 [＃1482](https://github.com/pingcap/pd/pull/1482)
 - ホットストアがキーの統計情報を正しく生成しない問題を修正 [＃1487](https://github.com/pingcap/pd/pull/1487)
-- `MergeRegion`オペレータの短すぎるタイムアウト問題を修正 [＃1495](https://github.com/pingcap/pd/pull/1495)
+- `MergeRegion`オペレーターの短すぎるタイムアウト問題を修正 [＃1495](https://github.com/pingcap/pd/pull/1495)
 - TSOリクエストを処理するPDサーバーの経過時間メトリックを追加する[＃1502](https://github.com/pingcap/pd/pull/1502)
 
 ## TiKV {#tikv}

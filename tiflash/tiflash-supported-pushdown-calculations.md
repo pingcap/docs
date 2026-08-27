@@ -7,9 +7,9 @@ summary: TiFlashでサポートされているプッシュダウン計算につ�
 
 このドキュメントでは、 TiFlashでサポートされているプッシュダウン計算について説明します。
 
-## プッシュダウン演算子 {#push-down-operators}
+## プッシュダウンオペレーター {#push-down-operators}
 
-TiFlash は次の演算子のプッシュダウンをサポートしています。
+TiFlash は次のオペレーターのプッシュダウンをサポートしています。
 
 - TableScan: テーブルからデータを読み取ります。
 - 選択: データをフィルタリングします。
@@ -19,15 +19,15 @@ TiFlash は次の演算子のプッシュダウンをサポートしています
 - 制限: 制限計算を実行します。
 - 投影: 投影計算を実行します。
 - HashJoin: [ハッシュ結合](/explain-joins.md#hash-join)アルゴリズムを使用して結合計算を実行しますが、次の条件が適用されます。
-    - 演算子は[MPPモード](/tiflash/use-tiflash-mpp-mode.md)でのみ押すことができます。
+    - オペレーターは[MPPモード](/tiflash/use-tiflash-mpp-mode.md)でのみプッシュダウンできます。
     - サポートされている結合は、Inner Join、Left Join、Semi Join、Anti Semi Join、Left Semi Join、および Anti Left Semi Join です。
     - 上記の結合は、Equi Join と Non-Equi Join（Cartesian Join または Null 対応 Semi Join）の両方をサポートしています。Cartesian Join または Null 対応 Semi Join を計算する際には、Shuffle Hash Join アルゴリズムではなく、Broadcast アルゴリズムが使用されます。
 - [ウィンドウ関数](/functions-and-operators/window-functions.md) : 現在、 TiFlash は`ROW_NUMBER()` 、 `RANK()` 、 `DENSE_RANK()` 、 `LEAD()` 、 `LAG()` 、 `FIRST_VALUE()` 、 `LAST_VALUE()`をサポートしています。
 
-TiDBでは、演算子はツリー構造で編成されます。演算子をTiFlashにプッシュダウンするには、以下のすべての前提条件を満たす必要があります。
+TiDBでは、オペレーターはツリー構造で編成されます。オペレーターをTiFlashにプッシュダウンするには、以下のすべての前提条件を満たす必要があります。
 
-- その子演算子はすべてTiFlashにプッシュダウンできます。
-- 演算子に式が含まれている場合 (ほとんどの演算子には式が含まれています)、演算子のすべての式をTiFlashにプッシュダウンできます。
+- その子オペレーターはすべてTiFlashにプッシュダウンできます。
+- オペレーターに式が含まれている場合 (ほとんどのオペレーターには式が含まれています)、オペレーターのすべての式をTiFlashにプッシュダウンできます。
 
 ## プッシュダウン式 {#push-down-expressions}
 
@@ -61,15 +61,15 @@ TiFlash は次のプッシュダウン式をサポートしています。
     - 分
     - 2番
 
-クエリがサポートされていないプッシュダウン計算に遭遇した場合、TiDBは残りの計算を完了する必要があり、 TiFlashの高速化効果に大きな影響を与える可能性があります。現在サポートされていない演算子と式は、将来のバージョンでサポートされる可能性があります。
+クエリがサポートされていないプッシュダウン計算に遭遇した場合、TiDBは残りの計算を完了する必要があり、 TiFlashの高速化効果に大きな影響を与える可能性があります。現在サポートされていないオペレーターと式は、将来のバージョンでサポートされる可能性があります。
 
 `MAX()`ような関数は、集計関数として使用する場合はプッシュダウンがサポートされますが、ウィンドウ関数として使用する場合はサポートされません。
 
 ## 例 {#examples}
 
-このセクションでは、演算子と式をTiFlashにプッシュダウンするいくつかの例を示します。
+このセクションでは、オペレーターと式をTiFlashにプッシュダウンするいくつかの例を示します。
 
-### 例1:演算子をTiFlashにプッシュダウンする {#example-1-push-operators-down-to-tiflash}
+### 例1:オペレーターをTiFlashにプッシュダウンする {#example-1-push-operators-down-to-tiflash}
 
 ```sql
 CREATE TABLE t(id INT PRIMARY KEY, a INT);
@@ -89,7 +89,7 @@ EXPLAIN SELECT * FROM t LIMIT 3;
 5 rows in set (0.18 sec)
 ```
 
-上の例では、演算子`Limit`データのフィルタリングのためにTiFlashにプッシュダウンされており、これによりネットワーク経由で転送されるデータ量が削減され、ネットワークのオーバーヘッドが削減されます。これは、演算子`Limit_15`の行の列`task`の値が`mpp[tiflash]`であることで示されています。
+上の例では、オペレーター`Limit`がデータのフィルタリングのためにTiFlashにプッシュダウンされており、これによりネットワーク経由で転送されるデータ量が削減され、ネットワークのオーバーヘッドが削減されます。これは、オペレーター`Limit_15`の行の列`task`の値が`mpp[tiflash]`であることで示されています。
 
 ### 例2: 式をTiFlashにプッシュダウンする {#example-2-push-expressions-down-to-tiflash}
 
@@ -140,7 +140,7 @@ EXPLAIN SELECT id FROM t WHERE TIME(now()+ a) < '12:00:00';
 
 上記の例では、 TiFlashに対して`TableFullScan`を実行します。その他の関数は`root`で計算およびフィルタリングされ、 TiFlashにはプッシュダウンされません。
 
-次のコマンドを実行すると、 TiFlashにプッシュダウンできない演算子と式を識別できます。
+次のコマンドを実行すると、 TiFlashにプッシュダウンできないオペレーターと式を識別できます。
 
 ```sql
 SHOW WARNINGS;

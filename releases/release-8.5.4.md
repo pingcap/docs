@@ -154,7 +154,7 @@ TiDBバージョン：8.5.4
     - CPUとメモリの比率が1:2の場合にグローバルソートがブロックされる問題を修正 [#60951](https://github.com/pingcap/tidb/issues/60951) @[wjhuang2016](https://github.com/wjhuang2016)
     - タスク数が16を超えると、保留中の分散実行フレームワーク（DXF）タスクをキャンセルできない問題を修正しました [#63896](https://github.com/pingcap/tidb/issues/63896) @[D3Hunter](https://github.com/D3Hunter)
     - DXFタスクがキャンセルされた後、他のタスクが終了しない問題を修正します [#63927](https://github.com/pingcap/tidb/issues/63927) @[D3Hunter](https://github.com/D3Hunter)
-    - `Apply`演算子の同時実行（ `tidb_enable_parallel_apply = on` ）を有効にすると、クローン実装が欠落しているためにプラン生成が失敗する問題を修正しました [#59863](https://github.com/pingcap/tidb/issues/59863) @[hawkingrei](https://github.com/hawkingrei)
+    - `Apply`オペレーターの同時実行（ `tidb_enable_parallel_apply = on` ）を有効にすると、クローン実装が欠落しているためにプラン生成が失敗する問題を修正しました [#59863](https://github.com/pingcap/tidb/issues/59863) @[hawkingrei](https://github.com/hawkingrei)
     - `ATAN2`関数を使用すると誤った結果が生じる可能性がある問題を修正しました [#60093](https://github.com/pingcap/tidb/issues/60093) @[guo-shaoge](https://github.com/guo-shaoge)
     - `select 1 from dual`がインスタンスレベルのプランキャッシュを使用できない問題を修正 [#63075](https://github.com/pingcap/tidb/issues/63075) @[time-and-fate](https://github.com/time-and-fate)
     - 結合順序を変更するとプランナーが失敗する可能性がある問題を修正 [#61715](https://github.com/pingcap/tidb/issues/61715) @[hawkingrei](https://github.com/hawkingrei)

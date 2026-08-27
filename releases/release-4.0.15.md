@@ -23,7 +23,7 @@ TiDB バージョン: 4.0.15
         - `between`前後の照合順序が異なる場合に発生する誤った実行結果を修正[＃27146](https://github.com/pingcap/tidb/issues/27146)
         - `extract`関数の引数が負の期間場合に発生する結果の誤りを修正 [＃27236](https://github.com/pingcap/tidb/issues/27236)
         - `group_concat`関数の列に非ビン照合順序ある場合に発生する誤った実行結果を修正しました [＃27429](https://github.com/pingcap/tidb/issues/27429)
-        - `Apply`演算子を`Join` に変換するときに列情報が失われる問題を修正しました [＃27233](https://github.com/pingcap/tidb/issues/27233)
+        - `Apply`オペレーターを`Join` に変換するときに列情報が失われる問題を修正しました [＃27233](https://github.com/pingcap/tidb/issues/27233)
         - 無効な文字列を`DATE` にキャストする際の予期しない動作の問題を修正しました [＃26762](https://github.com/pingcap/tidb/issues/26762)
         - 新しい照合順序が有効になっているときに、複数の列の`count distinct`結果が間違っているというバグを修正しました[＃27091](https://github.com/pingcap/tidb/issues/27091)
 

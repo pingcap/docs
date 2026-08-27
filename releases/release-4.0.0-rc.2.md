@@ -110,12 +110,12 @@ TiDB バージョン: 4.0.0-rc.2
 
 - TiDB
 
-    - 複数の演算子での式実行にベクトル化を使用するかどうかを決定するロジックを改善 [＃16383](https://github.com/pingcap/tidb/pull/16383)
+    - 複数のオペレーターでの式実行にベクトル化を使用するかどうかを決定するロジックを改善 [＃16383](https://github.com/pingcap/tidb/pull/16383)
     - `IndexMerge`ヒントがデータベース名を正しくチェックできない問題を修正[＃16932](https://github.com/pingcap/tidb/pull/16932)
     - シーケンスオブジェクト切り捨てを禁止する [＃17037](https://github.com/pingcap/tidb/pull/17037)
     - `INSERT` / `UPDATE` / `ANALYZE` / `DELETE`ステートメントがシーケンスオブジェクトで実行できる問題を修正しました [＃16957](https://github.com/pingcap/tidb/pull/16957)
     - ブートストラップフェーズの内部SQL文がステートメントサマリーテーブルで内部クエリとして正しくマークされない問題を修正しました。 [＃17062](https://github.com/pingcap/tidb/pull/17062)
-    - TiFlashではサポートされているがTiKVではサポートされていないフィルタ条件が`IndexLookupJoin`演算子にプッシュダウンされたときに発生するエラーを修正しました [＃17036](https://github.com/pingcap/tidb/pull/17036)
+    - TiFlashではサポートされているがTiKVではサポートされていないフィルタ条件が`IndexLookupJoin`オペレーターにプッシュダウンされたときに発生するエラーを修正しました [＃17036](https://github.com/pingcap/tidb/pull/17036)
     - 照合順序が有効になった後に発生する可能性のある`LIKE`の同時実行の問題を修正[＃16997](https://github.com/pingcap/tidb/pull/16997)
     - 照合順序が有効になった後、 `LIKE`関数が`Range`クエリインデックスを正しく構築できない問題を修正しました[＃16783](https://github.com/pingcap/tidb/pull/16783)
     - `Plan Cache`文がトリガーされた後に`@@LAST_PLAN_FROM_CACHE`を実行すると間違った値が返される問題を修正[＃16831](https://github.com/pingcap/tidb/pull/16831)

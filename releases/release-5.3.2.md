@@ -86,7 +86,7 @@ TiDB バージョン: 5.3.2
     - PDリーダー移行後すぐにスケジュールを開始できない問題を修正[＃4769](https://github.com/tikv/pd/issues/4769)
     - PDリーダー移転後に削除したtombstoneストアが再び表示される問題を修正[＃4941](https://github.com/tikv/pd/issues/4941)
     - いくつかのコーナーケースにおけるTSOフォールバックのバグを修正[＃4884](https://github.com/tikv/pd/issues/4884)
-    - 大容量（例えば2T）のストアが存在する場合、完全に割り当てられた小さなストアを検出できず、バランス演算子が生成されない問題を修正しました[＃4805](https://github.com/tikv/pd/issues/4805)
+    - 大容量（例えば2T）のストアが存在する場合、完全に割り当てられた小さなストアを検出できず、balance operatorが生成されない問題を修正しました[＃4805](https://github.com/tikv/pd/issues/4805)
     - `SchedulerMaxWaitingOperator` `1` に設定するとスケジューラが動作しない問題を修正しました [＃4946](https://github.com/tikv/pd/issues/4946)
     - ラベル分布にメトリクスの残余ラベルがある問題を修正 [＃4825](https://github.com/tikv/pd/issues/4825)
 

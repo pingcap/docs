@@ -94,7 +94,7 @@ TiDB バージョン: 4.0.11
     - `PREPARE`文が`EXECUTE` 、 `DEALLOCATE` 、または`PREPARE` とネストされている場合はエラーを報告します。 [＃21972](https://github.com/pingcap/tidb/pull/21972)
     - 存在しないパーティションで`INSERT IGNORE`ステートメントが使用された場合にエラーが報告されない問題を修正しました [＃21971](https://github.com/pingcap/tidb/pull/21971)
     - `EXPLAIN`結果のエンコードを統一し、 遅いログ [＃21964](https://github.com/pingcap/tidb/pull/21964)
-    - 集計演算子を使用するときに結合で不明な列が発生する問題を修正しました [＃21957](https://github.com/pingcap/tidb/pull/21957)
+    - 集計オペレーターを使用するときに結合で不明な列が発生する問題を修正しました [＃21957](https://github.com/pingcap/tidb/pull/21957)
     - `ceiling`関数の間違った型推論を修正 [＃21936](https://github.com/pingcap/tidb/pull/21936)
     - `Double`型の列が小数点無視する問題を修正しました [＃21916](https://github.com/pingcap/tidb/pull/21916)
     - 相関集計がサブクエリで計算される問題を修正 [＃21877](https://github.com/pingcap/tidb/pull/21877)

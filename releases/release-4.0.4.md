@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.4 Release Notes
-summary: TiDB 4.0.4 は 2020年 7月 31日にリリースされました。バグ修正には、information_schema.columns` のクエリに関する問題、`PointGet` および `BatchPointGet` 演算子のエラー、`BatchPointGet` の誤った結果、`set` または `enum` 型に遭遇した `HashJoin` 演算子の誤ったクエリ結果が含まれます。
+summary: TiDB 4.0.4 は 2020年7月31日にリリースされました。バグ修正には、information_schema.columns` のクエリに関する問題、`PointGet` および `BatchPointGet`オペレーターのエラー、`BatchPointGet` の誤った結果、`set` または `enum` 型に遭遇した `HashJoin`オペレーターの誤ったクエリ結果が含まれます。
 ---
 
 # TiDB 4.0.4 リリースノート {#tidb-4-0-4-release-notes}
@@ -14,6 +14,6 @@ TiDB バージョン: 4.0.4
 - TiDB
 
     - `information_schema.columns` のクエリ時にスタックする問題を修正 [＃18849](https://github.com/pingcap/tidb/pull/18849)
-    - `PointGet`と`BatchPointGet`演算子が`in null` 遭遇したときに発生するエラーを修正します [＃18848](https://github.com/pingcap/tidb/pull/18848)
+    - `PointGet`と`BatchPointGet`オペレーターが`in null`に遭遇したときに発生するエラーを修正します [＃18848](https://github.com/pingcap/tidb/pull/18848)
     - `BatchPointGet` の間違った結果を修正 [＃18815](https://github.com/pingcap/tidb/pull/18815)
-    - `HashJoin`演算子が`set`または`enum`型に遭遇したときに発生する不正なクエリ結果の問題を修正しました。 [＃18859](https://github.com/pingcap/tidb/pull/18859)
+    - `HashJoin`オペレーターが`set`または`enum`型に遭遇したときに発生する不正なクエリ結果の問題を修正しました。 [＃18859](https://github.com/pingcap/tidb/pull/18859)

@@ -293,7 +293,7 @@ Query OK, 0 rows affected (0.01 sec)
 | `schedule.enable-cross-table-merge`                  | テーブル間の結合を有効にするかどうかを決定します                                   |
 | `schedule.enable-one-way-merge`                      | 一方向のマージを有効にします。これにより、隣接する次のリージョンとのマージのみが可能になります。           |
 | `schedule.region-score-formula-version`              | リージョンスコア計算式のバージョンを制御します                                    |
-| `schedule.scheduler-max-waiting-operator`            | 各スケジューラ内の待機オペレータの数を制御します                                   |
+| `schedule.scheduler-max-waiting-operator`            | 各スケジューラ内の待機オペレーターの数を制御します                                   |
 | `schedule.enable-debug-metrics`                      | デバッグ用のメトリクスを有効にする                                          |
 | `schedule.enable-heartbeat-concurrent-runner`        | リージョンハートビートの非同期並行処理を有効にする                                  |
 | `schedule.enable-heartbeat-breakdown-metrics`        | リージョンハートビートの内訳メトリックを有効にして、リージョンハートビート処理の各段階で消費された時間を測定します。 |
@@ -302,7 +302,7 @@ Query OK, 0 rows affected (0.01 sec)
 | `schedule.hot-regions-reserved-days`                 | ホットリージョン情報が保持される日数を指定します                                   |
 | `schedule.max-movable-hot-peer-size`                 | ホットリージョンスケジュールにスケジュールできる最大リージョンサイズを制御します。                  |
 | `schedule.store-limit-version`                       | [ストア制限](/configure-store-limit.md)のバージョンを制御します              |
-| `schedule.patrol-region-worker-count`                | リージョンのヘルス状態を検査するときにチェッカーによって作成される同時オペレータの数を制御します           |
+| `schedule.patrol-region-worker-count`                | リージョンのヘルス状態を検査するときにチェッカーによって作成される同時オペレーターの数を制御します           |
 | `replication.max-replicas`                           | レプリカの最大数を設定します                                             |
 | `replication.location-labels`                        | TiKVクラスタのトポロジ情報                                            |
 | `replication.enable-placement-rules`                 | 配置ルールを有効にする                                                |
@@ -367,7 +367,7 @@ select @@tidb_slow_log_threshold;
 | `instance.tidb_enable_slow_log`                         | `tidb_enable_slow_log`                       | スローログを有効にするかどうかを制御します                                                                 |
 | `instance.tidb_slow_log_threshold`                      | `tidb_slow_log_threshold`                    | スローログのしきい値を指定します                                                                      |
 | `instance.tidb_expensive_query_time_threshold`          | `tidb_expensive_query_time_threshold`        | 負荷の高いクエリのしきい値を指定します                                                                     |
-| `instance.tidb_enable_collect_execution_info`           | `tidb_enable_collect_execution_info`         | オペレータの実行情報を記録するかどうかを制御します                                                             |
+| `instance.tidb_enable_collect_execution_info`           | `tidb_enable_collect_execution_info`         | オペレーターの実行情報を記録するかどうかを制御します                                                             |
 | `instance.tidb_record_plan_in_slow_log`                 | `tidb_record_plan_in_slow_log`               | 実行計画をスローログに記録するかどうかを制御します                                                            |
 | `instance.tidb_force_priority`                          | `tidb_force_priority`                        | この TiDB インスタンスから送信されるステートメントの優先順位を指定します                                               |
 | `instance.max_connections`                              | `max_connections`                            | この TiDB インスタンスに許可される同時接続の最大数を指定します                                                    |

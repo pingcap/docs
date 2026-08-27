@@ -36,8 +36,8 @@ TiDB バージョン: 4.0.7
 
 - PD
 
-    - スケジュールオペレータを、追加ではなく終了時にカウントします[＃2983](https://github.com/pingcap/pd/pull/2983)
-    - `make-up-replica`オペレータを高優先度に設定する [＃2977](https://github.com/pingcap/pd/pull/2977)
+    - スケジュールオペレーターを、追加ではなく終了時にカウントします[＃2983](https://github.com/pingcap/pd/pull/2983)
+    - `make-up-replica`オペレーターを高優先度に設定する [＃2977](https://github.com/pingcap/pd/pull/2977)
 
 - TiFlash
 

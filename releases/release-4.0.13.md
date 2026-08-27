@@ -63,7 +63,7 @@ TiDB バージョン: 4.0.13
     - `BINARY`タイプと`CHAR`タイプを比較すると`TableDual`プランが誤って作成される問題を修正しました[＃23917](https://github.com/pingcap/tidb/pull/23917)
     - `insert ignore on duplicate`文が予期せずテーブルレコードを削除する可能性がある問題を修正しました [＃23825](https://github.com/pingcap/tidb/pull/23825)
     - 監査プラグインが TiDB panicを引き起こす問題を修正[＃23819](https://github.com/pingcap/tidb/pull/23819)
-    - `HashJoin`演算子が照合順序誤って処理する問題を修正しました [＃23812](https://github.com/pingcap/tidb/pull/23812)
+    - `HashJoin`オペレーターが照合順序を誤って処理する問題を修正しました [＃23812](https://github.com/pingcap/tidb/pull/23812)
     - `batch_point_get`悲観的トランザクションで異常値を誤って処理した場合に発生する切断の問題を修正 [＃23778](https://github.com/pingcap/tidb/pull/23778)
     - `tidb_row_format_version`設定値が`1`に設定され、 `enable_new_collation`値が`true` に設定されている場合に発生する不整合なインデックスの問題を修正しました。 [＃23772](https://github.com/pingcap/tidb/pull/23772)
     - `INTEGER`型の列と`STRING`定数値比較する際に発生するバグを修正 [＃23705](https://github.com/pingcap/tidb/pull/23705)

@@ -256,7 +256,7 @@ SELECT /*+ BROADCAST_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 `NO_DECORRELATE()`ヒントは、指定されたクエリブロック内の相関サブクエリに対して、相関解除を実行しないようにオプティマイザに指示します。このヒントは`EXISTS` 、 `IN` 、 `ANY` 、 `ALL` 、 `SOME`サブクエリ、および相関列を含むスカラーサブクエリ（つまり、相関サブクエリ）に適用されます。
 
-このヒントがクエリブロック内で使用される場合、オプティマイザーはサブクエリとその外側のクエリブロック間の相関列の非相関化を試行せず、常に Apply 演算子を使用してクエリを実行します。
+このヒントがクエリブロック内で使用される場合、オプティマイザーはサブクエリとその外側のクエリブロック間の相関列の非相関化を試行せず、常に Apply オペレーターを使用してクエリを実行します。
 
 デフォルトでは、TiDBは相関サブクエリに対して[相関除去を実行する](/correlated-subquery-optimization.md)ことで実行効率を高めようとします。しかし、 [いくつかのシナリオ](/correlated-subquery-optimization.md#restrictions)では、相関除去によって実行効率が低下する可能性があります。このような場合は、このヒントを使用してオプティマイザに相関除去を行わないよう手動で指示することができます。例えば、次のようになります。
 
@@ -286,7 +286,7 @@ explain select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.
 +----------------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------------------+
 ```
 
-上記の実行計画から、オプティマイザが自動的に非相関化を実行したことがわかります。非相関化された実行計画にはApply演算子がありません。代わりに、サブクエリと外側のクエリブロック間の結合操作がプランに含まれています。相関列を含む元のフィルタ条件 ( `t2.b = t1.b` ) は、通常の結合条件になります。
+上記の実行計画から、オプティマイザが自動的に非相関化を実行したことがわかります。非相関化された実行計画にはApplyオペレーターがありません。代わりに、サブクエリと外側のクエリブロック間の結合操作がプランに含まれています。相関列を含む元のフィルタ条件 ( `t2.b = t1.b` ) は、通常の結合条件になります。
 
 ```sql
 -- Using NO_DECORRELATE().
@@ -310,7 +310,7 @@ explain select * from t1 where t1.a < (select /*+ NO_DECORRELATE() */ sum(t2.a) 
 +------------------------------------------+-----------+-----------+------------------------+--------------------------------------------------------------------------------------+
 ```
 
-上記の実行計画から、オプティマイザが相関除去を実行していないことがわかります。実行計画には依然としてApply演算子が含まれています。相関列を含むフィルタ条件（ `t2.b = t1.b` ）は、テーブル`t2`へのアクセス時にもフィルタ条件として使用されます。
+上記の実行計画から、オプティマイザが相関除去を実行していないことがわかります。実行計画には依然としてApplyオペレーターが含まれています。相関列を含むフィルタ条件（ `t2.b = t1.b` ）は、テーブル`t2`へのアクセス時にもフィルタ条件として使用されます。
 
 ### HASH_AGG() {#hash_agg}
 
@@ -467,7 +467,7 @@ EXPLAIN SELECT /*+ INDEX_LOOKUP_PUSHDOWN(t1, a) */ a, b FROM t1;
 +-----------------------------+----------+-----------+----------------------+--------------------------------+
 ```
 
-`INDEX_LOOKUP_PUSHDOWN`ヒントを使用すると、元の実行計画の TiDB 側の最も外側の Build 演算子が`LocalIndexLookUp`に置き換えられ、TiKV にプッシュダウンされて実行されます。インデックスをスキャンしている間、TiKV は対応する行データを読み取るためにローカルでテーブル検索を実行しようとします。インデックスと行データは異なるリージョンに分散している可能性があるため、TiKV にプッシュダウンされたリクエストではすべての対象行がカバーされない可能性があります。その結果、実行計画では TiDB 側に`TableRowIDScan`演算子が保持され、TiKV 側でヒットしなかった行がフェッチされます。
+`INDEX_LOOKUP_PUSHDOWN`ヒントを使用すると、元の実行計画の TiDB 側の最も外側の Build オペレーターが`LocalIndexLookUp`に置き換えられ、TiKV にプッシュダウンされて実行されます。インデックスをスキャンしている間、TiKV は対応する行データを読み取るためにローカルでテーブル検索を実行しようとします。インデックスと行データは異なるリージョンに分散している可能性があるため、TiKV にプッシュダウンされたリクエストではすべての対象行がカバーされない可能性があります。その結果、実行計画では TiDB 側に`TableRowIDScan`演算子が保持され、TiKV 側でヒットしなかった行がフェッチされます。
 
 `INDEX_LOOKUP_PUSHDOWN`ヒントには現在次の制限があります。
 
@@ -485,7 +485,7 @@ EXPLAIN SELECT /*+ INDEX_LOOKUP_PUSHDOWN(t1, a) */ a, b FROM t1;
 
 `NO_INDEX_LOOKUP_PUSHDOWN(t1_name)`ヒントは、指定されたテーブルの`IndexLookUp`プッシュダウンを明示的に無効にします。このヒントは通常、 [`tidb_index_lookup_pushdown_policy`](/system-variables.md#tidb_index_lookup_pushdown_policy-new-in-v855)システム変数と組み合わせて使用されます。この変数の値が`force`または`affinity-force`の場合、このヒントを使用して特定のテーブルの`IndexLookUp`プッシュダウンを防止できます。
 
-次の例では、変数`tidb_index_lookup_pushdown_policy`を`force`に設定し、現在のセッションの`IndexLookUp`演算子すべてに対してプッシュダウンを自動的に有効にします。クエリで`NO_INDEX_LOOKUP_PUSHDOWN`ヒントを指定した場合、対応するテーブルに対して`IndexLookUp`はプッシュダウンされません。
+次の例では、変数`tidb_index_lookup_pushdown_policy`を`force`に設定し、現在のセッションの`IndexLookUp`オペレーターすべてに対してプッシュダウンを自動的に有効にします。クエリで`NO_INDEX_LOOKUP_PUSHDOWN`ヒントを指定した場合、対応するテーブルに対して`IndexLookUp`はプッシュダウンされません。
 
 ```sql
 SET @@tidb_index_lookup_pushdown_policy = 'force';
@@ -508,7 +508,7 @@ select /*+ AGG_TO_COP() */ sum(t1.a) from t t1;
 
 ### LIMIT_TO_COP() {#limit_to_cop}
 
-`LIMIT_TO_COP()`ヒントは、指定されたクエリブロック内の`Limit`と`TopN`演算子をコプロセッサにプッシュダウンするようオプティマイザに指示します。オプティマイザがそのような操作を実行しない場合は、このヒントを使用することをお勧めします。例:
+`LIMIT_TO_COP()`ヒントは、指定されたクエリブロック内の`Limit`と`TopN`オペレーターをコプロセッサにプッシュダウンするようオプティマイザに指示します。オプティマイザがそのような操作を実行しない場合は、このヒントを使用することをお勧めします。例:
 
 ```sql
 SELECT /*+ LIMIT_TO_COP() */ * FROM t WHERE a = 1 AND b > 10 ORDER BY c LIMIT 1;
@@ -598,7 +598,7 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
 > `MERGE()`は単純な CTE クエリにのみ適用されます。以下の状況には適用されません。
 >
 > - [再帰CTE](https://docs.pingcap.com/tidb/stable/dev-guide-use-common-table-expression#recursive-cte)
-> - 集計演算子、ウィンドウ関数、 `DISTINCT`など、展開できないインラインを含むサブクエリ。
+> - 集計オペレーター、ウィンドウ関数、 `DISTINCT`など、展開できないインラインを含むサブクエリ。
 >
 > CTE 参照の数が多すぎると、クエリのパフォーマンスがデフォルトのマテリアライゼーション動作よりも低下する可能性があります。
 
@@ -980,7 +980,7 @@ SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-前の例からわかるように、 `INL_JOIN`ヒントは効果がありません。これは、 `IndexJoin`のプローブ側として`Projection`または`Selection`演算子を使用できないというオプティマイザの制限によるものです。
+前の例からわかるように、 `INL_JOIN`ヒントは効果がありません。これは、 `IndexJoin`のプローブ側として`Projection`または`Selection`オペレーターを使用できないというオプティマイザの制限によるものです。
 
 TiDB v8.0.0 以降では、 [`tidb_enable_inl_join_inner_multi_pattern`](/system-variables.md#tidb_enable_inl_join_inner_multi_pattern-new-in-v700)を`ON`に設定することでこの問題を回避できます。
 
@@ -1005,7 +1005,7 @@ EXPLAIN SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id=t2.id AND SUBST
 
 #### `INL_JOIN` 、 `INL_HASH_JOIN` 、および`INL_MERGE_JOIN`ヒントは、照合順序の非互換性のため有効になりません。 {#inl_join-inl_hash_join-and-inl_merge_join-hints-do-not-take-effect-due-to-collation-incompatibility}
 
-2つのテーブル間で結合キーの照合順序に互換性がない場合、 `IndexJoin`演算子を使用してクエリを実行することはできません。この場合、 [`INL_JOIN`](#inl_joint1_name--tl_name-) 、 [`INL_HASH_JOIN`](#inl_hash_join) 、 [`INL_MERGE_JOIN`](#inl_merge_join)ヒントは効果がありません。例:
+2つのテーブル間で結合キーの照合順序に互換性がない場合、 `IndexJoin`オペレーターを使用してクエリを実行することはできません。この場合、 [`INL_JOIN`](#inl_joint1_name--tl_name-) 、 [`INL_HASH_JOIN`](#inl_hash_join) 、 [`INL_MERGE_JOIN`](#inl_merge_join)ヒントは効果がありません。例:
 
 ```sql
 CREATE TABLE t1 (k varchar(8), key(k)) COLLATE=utf8mb4_general_ci;
@@ -1042,7 +1042,7 @@ SHOW WARNINGS;
 
 #### `INL_JOIN`ヒントは結合順序により有効になりません {#inl_join-hint-does-not-take-effect-due-to-join-order}
 
-[`INL_JOIN(t1, t2)`](#inl_joint1_name--tl_name-)または`TIDB_INLJ(t1, t2)`ヒントは、 `t1`と`t2`を`IndexJoin`演算子を使用して直接結合するのではなく、 `IndexJoin`演算子内の内部テーブルとして動作させ、他のテーブルと結合するように指示します。例:
+[`INL_JOIN(t1, t2)`](#inl_joint1_name--tl_name-)または`TIDB_INLJ(t1, t2)`ヒントは、 `t1`と`t2`を`IndexJoin`オペレーターを使用して直接結合するのではなく、 `IndexJoin`オペレーター内の内部テーブルとして動作させ、他のテーブルと結合するように指示します。例:
 
 ```sql
 EXPLAIN SELECT /*+ inl_join(t1, t3) */ * FROM t1, t2, t3 WHERE t1.id = t2.id AND t2.id = t3.id AND t1.id = t3.id;

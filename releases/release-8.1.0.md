@@ -208,7 +208,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
     - 大量のデータをインポートするときに`IMPORT INTO`操作が停止する問題を修正[＃52884](https://github.com/pingcap/tidb/issues/52884) @[lance6716](https://github.com/lance6716)
     - gRPC エラーをログに記録するときに TiDB が予期せず再起動する問題を修正しました [＃51301](https://github.com/pingcap/tidb/issues/51301) @[guo-shaoge](https://github.com/guo-shaoge)
     - IndexHashJoin が Anti Left Outer Semi Join を計算するときに冗長なデータを出力する問題を修正しました。 [＃52923](https://github.com/pingcap/tidb/issues/52923) @[yibin87](https://github.com/yibin87)
-    - 相関サブクエリにおける TopN 演算子の誤った結果を修正 [＃52777](https://github.com/pingcap/tidb/issues/52777) @[yibin87](https://github.com/yibin87)
+    - 相関サブクエリにおける TopN オペレーターの誤った結果を修正 [＃52777](https://github.com/pingcap/tidb/issues/52777) @[yibin87](https://github.com/yibin87)
     - HashJoinプローブの不正確な実行時間統計を修正 [＃52222](https://github.com/pingcap/tidb/issues/52222) @[windtalker](https://github.com/windtalker)
     - 静的パーティションプルーニングモードで`TABLESAMPLE`を使用すると誤った結果が返される問題を修正（ `tidb_partition_prune_mode='static'` ） [＃52282](https://github.com/pingcap/tidb/issues/52282) @[tangenta](https://github.com/tangenta)
     - 夏時間でTTLが1時間ずれる問題を修正 [＃51675](https://github.com/pingcap/tidb/issues/51675) @[lcwangchao](https://github.com/lcwangchao)

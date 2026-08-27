@@ -58,7 +58,7 @@ TiDB バージョン: 6.5.9
     - 列のデフォルト値が削除されている場合、列のデフォルト値を取得するとエラーが返される問題を修正[＃50043](https://github.com/pingcap/tidb/issues/50043) [＃51324](https://github.com/pingcap/tidb/issues/51324) @[crazycs520](https://github.com/crazycs520)
     - 列が書き込み専用の場合に`INSERT ignore`文でデフォルト値を入力できない問題を修正[＃40192](https://github.com/pingcap/tidb/issues/40192) @[YangKeao](https://github.com/YangKeao)
     - `shuffleExec`予期せず終了すると TiDB がクラッシュする問題を修正[＃48230](https://github.com/pingcap/tidb/issues/48230) @[wshwsh12](https://github.com/wshwsh12)
-    - `HashJoin`演算子がディスクにスピルできない場合に発生する可能性のある goroutine リークの問題を修正しました。 [＃50841](https://github.com/pingcap/tidb/issues/50841) @[wshwsh12](https://github.com/wshwsh12)
+    - `HashJoin`オペレーターがディスクにスピルできない場合に発生する可能性のある goroutine リークの問題を修正しました。 [＃50841](https://github.com/pingcap/tidb/issues/50841) @[wshwsh12](https://github.com/wshwsh12)
     - トランザクションで複数のステートメントをコミットするときにテーブル名の変更が有効にならない問題を修正しました [＃39664](https://github.com/pingcap/tidb/issues/39664) @[tiancaiamao](https://github.com/tiancaiamao)
     - `IN()`述語に`NULL` が含まれている場合にクエリ結果が正しくない問題を修正しました [＃51560](https://github.com/pingcap/tidb/issues/51560) @[winoros](https://github.com/winoros)
     - `BINARY`タイプの JSON をクエリすると、場合によってはエラーが発生する可能性がある問題を修正しました[＃51547](https://github.com/pingcap/tidb/issues/51547) @[YangKeao](https://github.com/YangKeao)

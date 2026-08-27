@@ -180,7 +180,7 @@ TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー�
 | ------------ | --------- | -------------------------------------------------------------- |
 | type          | string    | イベントの種類                                                        |
 | ends_at       | timestamp | イベント時間                                                         |
-| operator_type | enum      | 演算子の種類: `user`または`api_key`                                     |
+| operator_type | enum      | オペレーターの種類: `user`または`api_key`                                     |
 | operator_id   | uint64    | オペレーターID                                                       |
 | operator_name | string    | オペレーター名                                                        |
 | operator_ip   | string    | オペレーターのIPアドレス                                                  |
@@ -191,6 +191,6 @@ TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー�
 | project_name  | string    | イベントが属するプロジェクト名                                                |
 | cluster_id    | uint64    | イベントが属するクラスタID                                                 |
 | cluster_name  | string    | イベントが属するクラスタ名                                                  |
-| trace_id      | string    | オペレータによって開始されたリクエストのトレースID。このフィールドは現在空ですが、将来のリリースで利用可能になる予定です。 |
+| trace_id      | string    | オペレーターによって開始されたリクエストのトレースID。このフィールドは現在空ですが、将来のリリースで利用可能になる予定です。 |
 | result        | enum      | イベント結果: `success`または`failure`                                  |
 | details       | json      | イベントの詳細な説明                                                     |

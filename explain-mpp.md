@@ -27,9 +27,9 @@ EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
 
 このクエリはMPPモードでは2つのフラグメントに分割されます。1つは第1段階の集計用、もう1つは第2段階の集計（最終集計）用です。このクエリが実行されると、各クエリフラグメントは1つ以上のMPPタスクにインスタンス化されます。
 
-## Exchange 演算子 {#exchange-operators}
+## Exchange オペレーター {#exchange-operators}
 
-`ExchangeReceiver`と`ExchangeSender`は、MPP実行計画に特有の2つの交換演算子です。`ExchangeReceiver`演算子は下流のクエリフラグメントからデータを読み取り、 `ExchangeSender`演算子は下流のクエリフラグメントから上流のクエリフラグメントにデータを送信します。MPPモードでは、各MPPクエリフラグメントのルート演算子は`ExchangeSender`です。つまり、クエリフラグメントは`ExchangeSender`演算子によって区切られます。
+`ExchangeReceiver`と`ExchangeSender`は、MPP実行計画に特有の2つの交換オペレーターです。`ExchangeReceiver`オペレーターは下流のクエリフラグメントからデータを読み取り、 `ExchangeSender`オペレーターは下流のクエリフラグメントから上流のクエリフラグメントにデータを送信します。MPPモードでは、各MPPクエリフラグメントのルートオペレーターは`ExchangeSender`です。つまり、クエリフラグメントは`ExchangeSender`オペレーターによって区切られます。
 
 以下は単純な MPP 実行計画です。
 
@@ -57,13 +57,13 @@ EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
 - 1 つ目は`[TableFullScan_25, HashAgg_9, ExchangeSender_28]`で、主に第 1 段階の集約を担当します。
 - 2 番目は`[ExchangeReceiver_29, HashAgg_27, Projection_26, ExchangeSender_30]`で、主に第 2 段階の集約を担当します。
 
-`ExchangeSender`演算子の`operator info`列には、交換の種類に関する情報が表示されます。現在、交換の種類は 3つあります。以下をご覧ください。
+`ExchangeSender`オペレーターの`operator info`列には、交換の種類に関する情報が表示されます。現在、交換の種類は3つあります。以下をご覧ください。
 
-- ハッシュパーティション： `ExchangeSender`演算子は、まずハッシュ値に基づいてデータを分割し、次に上流のMPPタスクの`ExchangeReceiver`の演算子にデータを分配します。この交換タイプは、ハッシュ集計やシャッフルハッシュ結合アルゴリズムでよく使用されます。
-- ブロードキャスト： `ExchangeSender`演算子は、ブロードキャストを介して上流のMPPタスクにデータを配信します。この交換タイプは、ブロードキャスト結合でよく使用されます。
-- PassThrough: `ExchangeSender`演算子は、上流のMPPタスクのみにデータを送信します。これはブロードキャスト型とは異なります。この交換型は、TiDBにデータを返す際によく使用されます。
+- ハッシュパーティション： `ExchangeSender`オペレーターは、まずハッシュ値に基づいてデータを分割し、次に上流のMPPタスクの`ExchangeReceiver`オペレーターにデータを分配します。この交換タイプは、ハッシュ集計やシャッフルハッシュ結合アルゴリズムでよく使用されます。
+- ブロードキャスト： `ExchangeSender`オペレーターは、ブロードキャストを介して上流のMPPタスクにデータを配信します。この交換タイプは、ブロードキャスト結合でよく使用されます。
+- PassThrough: `ExchangeSender`オペレーターは、上流のMPPタスクのみにデータを送信します。これはブロードキャスト型とは異なります。この交換型は、TiDBにデータを返す際によく使用されます。
 
-実行計画の例では、演算子`ExchangeSender_28`の交換タイプはHashPartitionであり、ハッシュ集計アルゴリズムを実行することを意味します。演算子`ExchangeSender_30`の交換タイプはPassThroughであり、TiDBにデータを返すために使用されることを意味します。
+実行計画の例では、`ExchangeSender_28`オペレーターの交換タイプはHashPartitionであり、ハッシュ集計アルゴリズムを実行することを意味します。`ExchangeSender_30`オペレーターの交換タイプはPassThroughであり、TiDBにデータを返すために使用されることを意味します。
 
 MPPは結合操作にもよく適用されます。TiDBのMPPモードは、以下の2つの結合アルゴリズムをサポートしています。
 
@@ -157,14 +157,14 @@ EXPLAIN ANALYZE SELECT COUNT(*) FROM t1 GROUP BY id;
 +------------------------------------+---------+---------+-------------------+---------------+---------------------------------------------------------------------------------------------------+----------------------------------------------------------------+--------+------+
 ```
 
-`EXPLAIN`の出力と比較すると、演算子`ExchangeSender`の`operator info`列には`tasks`も表示されています。これは、クエリフラグメントがインスタンス化される MPP タスクの ID を記録しています。さらに、各 MPP 演算子の`execution info`列には`threads`フィールドがあり、TiDB がこの演算子を実行する際の操作の同時実行性が記録されます。クラスターが複数のノードで構成されている場合、この同時実行性はすべてのノードの同時実行性を合計した結果です。
+`EXPLAIN`の出力と比較すると、`ExchangeSender`オペレーターの`operator info`列には`tasks`も表示されています。これは、クエリフラグメントがインスタンス化される MPP タスクの ID を記録しています。さらに、各 MPP オペレーターの`execution info`列には`threads`フィールドがあり、TiDB がこのオペレーターを実行する際の操作の同時実行性が記録されます。クラスターが複数のノードで構成されている場合、この同時実行性はすべてのノードの同時実行性を合計した結果です。
 
 ## MPPバージョンと交換データ圧縮 {#mpp-version-and-exchange-data-compression}
 
 v6.6.0 以降、新しいフィールド`MPPVersion`と`Compression`がMPP 実行計画に追加されます。
 
 - `MppVersion` : MPP 実行計画のバージョン番号。システム変数[`mpp_version`](/system-variables.md#mpp_version-new-in-v660)を通じて設定できます。
-- `Compression` : `Exchange`演算子のデータ圧縮モード。システム変数[`mpp_exchange_compression_mode`](/system-variables.md#mpp_exchange_compression_mode-new-in-v660)で設定できます。データ圧縮が有効になっていない場合、このフィールドは実行計画に表示されません。
+- `Compression` : `Exchange`オペレーターのデータ圧縮モード。システム変数[`mpp_exchange_compression_mode`](/system-variables.md#mpp_exchange_compression_mode-new-in-v660)で設定できます。データ圧縮が有効になっていない場合、このフィールドは実行計画に表示されません。
 
 次の例を参照してください。
 
@@ -187,4 +187,4 @@ mysql > EXPLAIN SELECT COUNT(*) AS count_order FROM lineitem GROUP BY l_returnfl
 +----------------------------------------+--------------+--------------+----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-上記の実行計画結果では、TiDBはバージョン`1`のMPP実行計画を使用して`TableReader`を構築しています。タイプ`HashPartition`の`ExchangeSender`演算子はデータ圧縮モード`FAST`を使用しています。タイプ`PassThrough`の`ExchangeSender`演算子ではデータ圧縮は有効になっていません。
+上記の実行計画結果では、TiDBはバージョン`1`のMPP実行計画を使用して`TableReader`を構築しています。タイプ`HashPartition`の`ExchangeSender`オペレーターはデータ圧縮モード`FAST`を使用しています。タイプ`PassThrough`の`ExchangeSender`オペレーターではデータ圧縮は有効になっていません。

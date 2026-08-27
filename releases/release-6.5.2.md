@@ -82,7 +82,7 @@ TiDB バージョン: 6.5.2
     - TiFlashが生成列を認識できない問題を修正 [＃6801](https://github.com/pingcap/tiflash/issues/6801) @[guo-shaoge](https://github.com/guo-shaoge)
     - 特定のケースで小数点以下の桁が切り上げられない問題を修正[＃7022](https://github.com/pingcap/tiflash/issues/7022) @[LittleFall](https://github.com/LittleFall)
     - 特定のケースで 10 進キャストが誤って切り上げられる問題を修正しました [＃6994](https://github.com/pingcap/tiflash/issues/6994) @[windtalker](https://github.com/windtalker)
-    - 新しい照合順序を有効にした後に TopN/Sort 演算子が誤った結果を生成する問題を修正しました [＃6807](https://github.com/pingcap/tiflash/issues/6807) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - 新しい照合順序を有効にした後に TopN/Sort オペレーターが誤った結果を生成する問題を修正しました [＃6807](https://github.com/pingcap/tiflash/issues/6807) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - TiCDC の非互換性によるTiFlashプロセス障害の問題を修正[＃7212](https://github.com/pingcap/tiflash/issues/7212) @[hongyunyan](https://github.com/hongyunyan)
 
 - ツール
