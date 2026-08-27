@@ -17,7 +17,7 @@ aliases: ['/ja/tidb/stable/multi-column-index-best-practices/']
 ## 前提条件 {#prerequisites}
 
 - マルチ列インデックス機能は、TiDB v8.3 以降のバージョンで使用できます。
-- この機能を使用する前に、 [オプティマイザ修正制御**54337**](/optimizer-fix-controls.md#54337-new-in-v830)の値を`ON`に設定する必要があります。
+- この機能を使用する前に、 [optimizer fix control **54337**](/optimizer-fix-controls.md#54337-new-in-v830)の値を`ON`に設定する必要があります。
 
 ## 背景: 複数列インデックス {#background-multi-column-indexes}
 
@@ -238,7 +238,7 @@ CREATE TABLE t1 (
 
 ### 例2: クエリプラン {#example-2-query-plan}
 
-次のクエリプランは、派生した範囲を示しています。
+次のクエリプランは、導出された範囲を示しています。
 
 ```sql
 -- Query 5: Conjunctive conditions on (a1, b1)
@@ -259,7 +259,7 @@ EXPLAIN FORMAT = "brief"
 
 この例では、テーブルには約5億行あります。しかし、この最適化により、TiDBはアクセスを約4,000行、つまり全データのわずか0.0008%に絞り込むことができます。この改良により、クエリのレイテンシーは、最適化を行わない場合の2分以上から数ミリ秒へと大幅に短縮されます。
 
-このような条件で完全なテーブルスキャンを必要とする MySQL とは異なり、TiDB オプティマイザはこれらの派生範囲を活用して複雑な行式を効率的に処理できます。
+このような条件で完全なテーブルスキャンを必要とする MySQL とは異なり、TiDB オプティマイザはこれらの導出された範囲を活用して複雑な行の式を効率的に処理できます。
 
 ## 結論 {#conclusion}
 
