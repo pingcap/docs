@@ -1,27 +1,52 @@
 ---
 title: Sink to Cloud Storage
-summary: 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式同步到 Amazon S3、Google Cloud Storage (GCS) 或 Azure Blob Storage。内容包括限制、目标端配置、同步与规范配置，以及启动同步流程。
+summary: 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式同步到云存储。内容包括限制、目标端配置、同步与规范配置，以及启动同步流程。
 ---
 
 # Sink to Cloud Storage
 
-本文档描述如何创建 changefeed，将数据从 TiDB Cloud 流式同步到云存储。目前支持 Amazon S3、Google Cloud Storage (GCS) 和 Azure Blob Storage。
+本文档介绍如何创建 changefeed，将数据从 <CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent><CustomContent plan="premium">TiDB Cloud Premium</CustomContent> 同步到云存储。
+
+<CustomContent plan="dedicated">
 
 > **注意：**
 >
-> - 若要将数据同步到云存储，请确保你的 TiDB 集群版本为 v7.1.1 或更高。如需将 TiDB Cloud Dedicated 集群升级到 v7.1.1 或更高版本，请[联系 TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。
-> - 对于 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 实例，changefeed 功能不可用。
-> - 对于 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 实例，changefeed 功能仅可按请求提供。更多信息，参见 [Changefeed](/tidb-cloud/essential-changefeed-overview.md)。
+> - 若要将数据从 {{{ .dedicated }}} 同步到云存储，请确保你的 TiDB 集群版本为 v7.1.1 或更高版本。如需将 TiDB Cloud Dedicated 集群升级到 v7.1.1 或更高版本，请[联系 TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。
+> - 对于 [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) 实例，changefeed 功能不可用。
+> - 对于 [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) 实例，changefeed 功能仅可按请求提供。更多信息，参见 [Changefeed](/tidb-cloud/essential-changefeed-overview.md)。
+> - 对于 [{{{ .premium }}}](/tidb-cloud/select-cluster-tier.md#premium) 实例，参见 [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium)。
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+> **注意：**
+>
+> - 对于 [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) 实例，changefeed 功能不可用。
+> - 对于 [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) 实例，changefeed 功能仅可按请求提供。更多信息，参见 [Changefeed](/tidb-cloud/essential-changefeed-overview.md)。
+> - 对于 [{{{ .dedicated }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群，参见 [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/)。
+
+</CustomContent>
 
 ## 限制
 
-- 每个 TiDB Cloud Dedicated 集群最多可创建 100 个 changefeed。
+- 每个 <CustomContent plan="dedicated">TiDB Cloud Dedicated 集群</CustomContent><CustomContent plan="premium">TiDB Cloud Premium 实例</CustomContent> 最多可创建 100 个 changefeed。
 - 由于 TiDB Cloud 使用 TiCDC 建立 changefeed，因此具有与 [TiCDC 相同的限制](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)。
 - 如果待同步的表没有主键或非空唯一索引，则在某些重试场景下，由于同步过程中缺乏唯一约束，可能会导致下游插入重复数据。
 
 ## 步骤 1. 配置目标端
 
+<CustomContent plan="dedicated">
+
 进入目标 TiDB Cloud Dedicated 集群的总览页面。在左侧导航栏点击 **Data** > **Changefeed**，点击 **Create Changefeed** 进入 **Destination** 页面，然后根据 TiDB Cloud Dedicated 集群所在云服务商选择 **Amazon S3**、**GCS** 或 **Azure Blob Storage** 作为目标端。不同目标端的配置流程有所不同。
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+进入目标 TiDB Cloud Premium 实例的总览页面。在左侧导航栏点击 **Data** > **Changefeed**，点击 **Create Changefeed** 进入 **Destination** 页面，然后根据 TiDB Cloud Premium 实例所在云服务商选择 **Amazon S3** 或 **Alibaba Cloud OSS** 作为目标端。不同目标端的配置流程有所不同。
+
+</CustomContent>
 
 <SimpleTab>
 <div label="Amazon S3">
@@ -32,7 +57,7 @@ summary: 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式
 
 如需使用 IAM Role 进行认证，请按以下步骤操作：
 
-1. 在 Amazon S3 的 **Destination** 页面，填写 **S3 URI**。确保 S3 bucket 与 TiDB 集群处于同一 AWS 区域。
+1. 在 Amazon S3 的 **Destination** 页面，填写 **S3 URI**。确保 S3 bucket 与你的 <CustomContent plan="dedicated">TiDB Cloud Dedicated 集群</CustomContent><CustomContent plan="premium">TiDB Cloud Premium 实例</CustomContent> 处于同一 AWS 区域。
 2. 在 **Bucket Access** 下选择 **AWS Role ARN**。
 3. 若需创建新的 Role ARN，点击 **Click here to create new one with AWS CloudFormation**。该模板会自动配置所需权限。
 
@@ -55,14 +80,17 @@ summary: 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式
 
 如需使用 access key 认证，请按以下步骤操作：
 
-1. 在 Amazon S3 的 **Destination** 页面，填写 **S3 URI**。确保 S3 bucket 与 TiDB 集群处于同一 AWS 区域。
+1. 在 Amazon S3 的 **Destination** 页面，填写 **S3 URI**。确保 S3 bucket 与你的 <CustomContent plan="dedicated">TiDB Cloud Dedicated 集群</CustomContent><CustomContent plan="premium">TiDB Cloud Premium 实例</CustomContent> 处于同一 AWS 区域。
 2. 在 **Bucket Access** 下选择 **AWS Access Key**。
-3. 填写以下内容：
+3. 填写以下字段：
 
     - **Access Key ID**
     - **Secret Access Key**
 
 </div>
+
+<CustomContent plan="dedicated">
+
 <div label="GCS">
 
 对于 **GCS**，在填写 **GCS Endpoint** 前，需要先授予 GCS bucket 访问权限。请按以下步骤操作：
@@ -118,6 +146,11 @@ summary: 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式
 7. 在 TiDB Cloud 控制台，进入 Changefeed 的 **Destination** 页面，在 **bucket gsutil URI** 输入框中填写 URI。
 
 </div>
+
+</CustomContent>
+
+<CustomContent plan="dedicated">
+
 <div label="Azure Blob Storage">
 
 对于 **Azure Blob Storage**，你需要先在 Azure 门户配置容器并获取 SAS token。请按以下步骤操作：
@@ -158,9 +191,62 @@ summary: 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式
     - **SAS Token**：输入第 3 步获取的 SAS token。
 
 </div>
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+<div label="Alibaba Cloud OSS">
+
+对于 **Alibaba Cloud OSS**，请按以下步骤配置 changefeed：
+
+1. 在 [Alibaba Cloud 控制台](https://www.alibabacloud.com/)中，完成以下前置步骤：
+
+    1. 创建一个与 TiDB Cloud Premium 实例位于同一 Region 的 OSS bucket。详细操作请参见 [Create a bucket](https://www.alibabacloud.com/help/en/oss/user-guide/create-a-bucket-4)。
+    2. 为 changefeed 创建一个 RAM 用户，并生成一对 AccessKey。详细操作请参见 [Create an AccessKey pair](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)。
+    3. 为该 RAM 用户创建并绑定一个自定义 RAM policy，仅授予 changefeed 所需的最小权限。更多信息请参见 [Control access to OSS resources with RAM policies](https://www.alibabacloud.com/help/en/oss/user-guide/ram-policy)。
+
+        - `oss:ListObjects`
+        - `oss:GetObject`
+        - `oss:PutObject`
+        - `oss:DeleteObject`
+
+    以下 JSON 示例展示了包含所需权限的 policy。请将 `<Your bucket name>` 替换为你的 OSS bucket 名称。
+
+    ```json
+    {
+      "Version": "1",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "oss:ListObjects",
+            "oss:GetObject",
+            "oss:PutObject",
+            "oss:DeleteObject"
+          ],
+          "Resource": [
+            "acs:oss:*:*:<Your bucket name>",
+            "acs:oss:*:*:<Your bucket name>/*"
+          ]
+        }
+      ]
+    }
+    ```
+
+2. 在 Alibaba Cloud OSS 的 **Destination** 页面，填写以下字段：
+
+    - **Bucket URI**：输入格式为 `oss://<Your bucket name>/<prefix>/` 的 OSS URI。
+    - **Access Key ID**：输入 RAM 用户的 AccessKey ID。
+    - **Access Key Secret**：输入 RAM 用户的 AccessKey Secret。
+
+</div>
+
+</CustomContent>
+
 </SimpleTab>
 
-点击 **Next**，建立 TiDB Cloud Dedicated 集群与 Amazon S3、GCS 或 Azure Blob Storage 的连接。TiDB Cloud 会自动测试并验证连接是否成功。
+点击 **Next**，建立从 <CustomContent plan="dedicated">TiDB Cloud Dedicated 集群</CustomContent><CustomContent plan="premium">TiDB Cloud Premium 实例</CustomContent> 到你的云存储的连接。TiDB Cloud 会自动测试并验证连接是否成功。
 
 - 若连接成功，将进入下一步配置。
 - 若连接失败，会显示连接错误，你需要处理该错误。错误解决后，点击 **Next** 重试连接。

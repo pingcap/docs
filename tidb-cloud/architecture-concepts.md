@@ -103,6 +103,8 @@ BYOC 提供以下特性：
 
 为满足不同工作负载的需求，TiDB Cloud BYOC 同时支持 Single-AZ 和 Multi-AZ 部署，使你能够在更低延时的单可用区部署和跨多个可用区的更高韧性部署之间进行选择。
 
+你可以在[创建资源池](/tidb-cloud/byoc/create-resource-pool-byoc.md)时，将每个资源池的高可用模式设置为 **Zonal** 或 **Regional**。Zonal 资源池部署在单个可用区中，而 Regional 资源池部署在多个可用区中。TiDB Cloud 会根据 BYOC Region 配置和可用的云资源来确定可用区放置。 在资源池中创建或恢复的 TiDB Cloud BYOC 实例会继承该资源池的高可用模式。资源池创建后，你无法更改其高可用模式或可用区放置。
+
 ![TiDB Cloud BYOC Architecture](/media/tidb-cloud/byoc-architecture.png)
 
 一个 TiDB Cloud BYOC 部署包含以下主要组件：
