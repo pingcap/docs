@@ -3044,7 +3044,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 - [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 - [制御実行計画](/control-execution-plan.md)
-- [Optimizer Fix Controls](/optimizer-fix-controls.md)
+- [オプティマイザ修正コントロール](/optimizer-fix-controls.md)
 - [SQL 非プリペアド実行プランキャッシュ](/sql-non-prepared-plan-cache.md)
 - [システム変数](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)
 - [TiDB 7.2.0 リリースノート](/releases/release-7.2.0.md)
