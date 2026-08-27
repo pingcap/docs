@@ -880,7 +880,7 @@
         - [概要](/mysql-schema/mysql-schema.md)
         - [`tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md)
         - [`user`](/mysql-schema/mysql-schema-user.md)
-      - 情報スキーマ
+      - INFORMATION_SCHEMA
         - [概要](/information-schema/information-schema.md)
         - [`ANALYZE_STATUS`](/information-schema/information-schema-analyze-status.md)
         - [`CHECK_CONSTRAINTS`](/information-schema/information-schema-check-constraints.md)
