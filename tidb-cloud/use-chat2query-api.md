@@ -21,7 +21,7 @@ Chat2Query エンドポイントを呼び出す前に、Chat2Query データア�
 
 プロジェクトのデータアプリを作成するには、次の手順を実行します。
 
-1. プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページで、<mdsvgicon name="icon-create-data-app">左ペインで**Create DataApp**をクリックします。データアプリ作成ダイアログが表示されます。</mdsvgicon>
+1. プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページで、左ペインの<MDSvgIcon name="icon-create-data-app" /> **Create DataApp**をクリックします。データアプリ作成ダイアログが表示されます。
 
     > **Tip:**
     >
