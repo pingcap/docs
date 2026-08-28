@@ -27,7 +27,7 @@ Private endpoints leverage the **Private Link** technology from cloud providers,
 
 > **Note:**
 >
-> A private endpoint is a tenant-level resource and is not tied to a specific instance. Private endpoints created within the same tenant and in the same region can be shared by multiple instances connecting to the same downstream service, so you do not need to create a separate endpoint for each instance. Deleting an instance does not delete its private endpoints. You can manually delete a private endpoint when it is no longer needed, or wait for it to be automatically cleaned up after 30 days of inactivity. A private endpoint cannot be deleted if it is still in use by any instance.
+> A private endpoint is an organization-level resource and is not tied to a specific {{{ .premium }}} instance. Private endpoints created within the same organization and in the same region can be shared by multiple instances connecting to the same downstream service, so you do not need to create a separate endpoint for each instance. Deleting a {{{ .premium }}} instance does not delete its private endpoints. You can manually delete a private endpoint when it is no longer needed, or wait for it to be automatically cleaned up after 30 days of inactivity. A private endpoint cannot be deleted if it is still in use by any instance.
 
 <SimpleTab>
 <div label="AWS">
