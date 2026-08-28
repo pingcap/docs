@@ -142,7 +142,7 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのプレフィ
 
 TiDB Cloud Dedicatedは、ゾーン間高可用性、水平スケーリング、 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)といったメリットを備えた、本番での利用を想定したサービスです。
 
-TiDB Cloud Dedicatedクラスターでは、ビジネスニーズに応じて TiDB、TiKV、 TiFlashのクラスターサイズを簡単にカスタマイズできます。各 TiKV ノードおよびTiFlashノードでは、ノード上のデータが複製され、 [高可用性](/tidb-cloud/high-availability-with-multi-az.md)実現するために異なる可用性ゾーンに分散されます。
+TiDB Cloud Dedicatedクラスターでは、ビジネスニーズに応じて TiDB、TiKV、 TiFlashのクラスターサイズを簡単にカスタマイズできます。各 TiKV ノードおよびTiFlashノードでは、ノード上のデータが複製され、 [高可用性](/tidb-cloud/high-availability-with-multi-az.md)実現するために異なるアベイラビリティゾーンに分散されます。
 
 TiDB Cloud Dedicatedクラスターを作成するには、 [支払い方法を追加する](/tidb-cloud/tidb-cloud-billing.md#payment-method)か、[概念実証（PoC）トライアルに申し込む](/tidb-cloud/tidb-cloud-poc.md)必要があります。
 

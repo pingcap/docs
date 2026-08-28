@@ -145,7 +145,7 @@ TiProxy は、TiProxy サーバーと TiDB サーバーの場所に基づいて�
 TiProxyは、ラベル`zone`に基づいて自身とTiDBサーバの場所を決定します。以下の設定項目を設定する必要があります。
 
 - TiDBサーバーの設定項目[`labels`](/tidb-configuration-file.md#labels)で、 `zone`現在のアベイラビリティゾーンに設定します。設定の詳細については、 [TiDBのラベルを構成する](/schedule-replicas-by-topology-labels.md#optional-configure-labels-for-tidb)を参照してください。
-- TiProxy の[`labels`](/tiproxy/tiproxy-configuration.md#labels)の構成項目で、 `zone`現在の可用性ゾーンに設定します。
+- TiProxy の[`labels`](/tiproxy/tiproxy-configuration.md#labels)の構成項目で、 `zone`現在のアベイラビリティゾーンに設定します。
 
 TiDB Operatorを使用してデプロイされたクラスターについては、 [データの高可用性](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-availability-of-data)を参照してください。
 
