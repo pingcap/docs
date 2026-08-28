@@ -56,7 +56,7 @@ summary: TiDBの機能概要について学びましょう。
 | インデックスと制約                                                                                   | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ------------------------------------------------------------------------------------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | [式インデックス](/sql-statements/sql-statement-create-index.md#expression-index)[^2]              |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |  E  |
-| [カラム型ストレージ（TiFlash）](/tiflash/tiflash-overview.md)                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [列指向ストレージ（TiFlash）](/tiflash/tiflash-overview.md)                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [FastScanを使用してOLAPシナリオにおけるクエリを高速化する](/tiflash/use-fastscan.md)                              |  Y  |  Y  |  Y  |  Y  |  E  |  N  |  N  |
 | [RocksDBエンジン](/storage-engine/rocksdb-overview.md)                                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [Titanプラグイン](/storage-engine/titan-overview.md)                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
@@ -172,8 +172,8 @@ summary: TiDBの機能概要について学びましょう。
 | [大規模トランザクション（1 TiB）](/transaction-overview.md#transaction-size-limit)                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [悲観的トランザクション](/pessimistic-transaction.md)                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [楽観的トランザクション](/optimistic-transaction.md)                                                                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [反復読み取り分離（スナップショット分離）](/transaction-isolation-levels.md)                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [リードコミット隔離](/transaction-isolation-levels.md)                                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [Repeatable-read isolation（スナップショット分離）](/transaction-isolation-levels.md) |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [Read-committed isolation](/transaction-isolation-levels.md) |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [長時間実行されているアイドル状態のトランザクションを自動的に終了する](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) |  Y  |  Y  |  N  |  N  |  N  |  N  |  N  |
 | [一括DML実行モード（ `tidb_dml_type = "bulk"` ）](/system-variables.md#tidb_dml_type-new-in-v800)   |  E  |  E  |  N  |  N  |  N  |  N  |  N  |
 

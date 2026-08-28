@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.1.1 Release Notes
-summary: TiDB 6.1.1は2022年9月1日にリリースされました。変更点には、大文字と小文字を区別しない「SHOW DATABASES LIKE」ステートメント、「tidb_enable_outer_join_reorder」のデフォルト値の変更、オプティマイザーとメトリクスレスポンスの圧縮の改善が含まれます。バグ修正では、「INL_HASH_JOIN」のハング、UPDATE`ステートメント実行中のパニック、クエリ結果の誤りなどの問題が修正されています。その他の変更点には、異なる品質基準に対するマルチレベルサポートと、「TiDB-community-toolkit」バイナリパッケージへの追加が含まれます。
+summary: TiDB 6.1.1は2022年9月1日にリリースされました。変更点には、大文字と小文字を区別しない「SHOW DATABASES LIKE」ステートメント、「tidb_enable_outer_join_reorder」のデフォルト値の変更、オプティマイザとメトリクスレスポンスの圧縮の改善が含まれます。バグ修正では、「INL_HASH_JOIN」のハング、UPDATE`ステートメント実行中のパニック、クエリ結果の誤りなどの問題が修正されています。その他の変更点には、異なる品質基準に対するマルチレベルサポートと、「TiDB-community-toolkit」バイナリパッケージへの追加が含まれます。
 ---
 
 # TiDB 6.1.1 Release Notes {#tidb-6-1-1-release-notes}

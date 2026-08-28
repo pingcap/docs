@@ -38,13 +38,13 @@ summary: Alibaba Cloud Endpoint Service のプライベートリンク接続を�
 - TiDB Cloud EssentialはAlibaba Cloudでホストされており、アクティブです。後で使用するために、以下の詳細情報を取得して保存してください。
 
     - Alibaba CloudアカウントID
-    - 可用性ゾーン（AZ）
+    - アベイラビリティゾーン（AZ）
 
-Alibaba Cloud アカウント ID とアベイラビリティーゾーンを表示するには、次の手順を実行します。
+Alibaba Cloud アカウント ID とアベイラビリティゾーンを表示するには、次の手順を実行します。
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
 2. **Alibaba Cloud Private Endpoints for External Services**領域で、**Create Private Endpoint for External Services**をクリックします。
-3. 表示されたダイアログで、Alibaba Cloud アカウント ID とアベイラビリティーゾーンを見つけることができます。
+3. 表示されたダイアログで、Alibaba Cloud アカウント ID とアベイラビリティゾーンを見つけることができます。
 
 次の表は、デプロイメント情報の例を示しています。
 

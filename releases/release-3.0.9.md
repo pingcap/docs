@@ -37,7 +37,7 @@ TiDB Ansible バージョン: 3.0.9
 - Raftstore
     - 構成変更を高速化して、リージョン分散高速化します。 [＃6421](https://github.com/tikv/tikv/pull/6421)
 - トランザクション
-    - `tikv_lock_manager_waiter_lifetime_duration` `tikv_lock_manager_detect_duration`監視メトリックを追加して、 `waiter`の寿命、デッドロックの検出にかかる時間コスト、および`Wait`表の状態`tikv_lock_manager_detect_duration`監視します。 [＃6392](https://github.com/tikv/tikv/pull/6392)
+    - `tikv_lock_manager_waiter_lifetime_duration` `tikv_lock_manager_detect_duration`監視メトリックを追加して、 `waiter`の寿命、デッドロックの検出にかかる時間コスト、および`Wait`表の状態`tikv_lock_manager_detect_duration`を監視します。 [＃6392](https://github.com/tikv/tikv/pull/6392)
     - 極端な状況でリージョンリーダーまたはデッドロック検出器のリーダーを変更することによって発生するトランザクション実行のレイテンシーを削減するために、次の構成項目を最適化します[＃6429](https://github.com/tikv/tikv/pull/6429)
         - デフォルト値の`wait-for-lock-time`を`3s`から`1s`に変更します
         - デフォルト値の`wake-up-delay-duration`を`100ms`から`20ms`に変更します

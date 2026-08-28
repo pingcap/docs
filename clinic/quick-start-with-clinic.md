@@ -58,9 +58,9 @@ PingCAP Clinicを使用する前に、Diag をインストールし、データ�
     > - データセキュリティのため、TiDBはトークン作成時にのみトークン情報を表示します。トークン情報を紛失した場合は、古いトークンを削除して新しいトークンを作成できます。
     > - トークンはデータのアップロードにのみ使用されます。
 
-5. Diag にトークンと`region`設定します。
+5. Diag にトークンと`region`を設定します。
 
-    - `clinic.token`設定するには、次のコマンドを実行します。
+    - `clinic.token`を設定するには、次のコマンドを実行します。
 
         ```bash
         tiup diag config clinic.token ${token-value}

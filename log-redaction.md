@@ -11,7 +11,7 @@ TiDBが詳細なログ情報を提供する場合、ログに機密データ（�
 
 TiDB側でログの秘匿化を有効にするには、 [`global.tidb_redact_log`](/system-variables.md#tidb_redact_log)を`ON`または`MARKER`に設定します。この設定値のデフォルトは`OFF`で、ログの秘匿化が無効であることを意味します。
 
-`set`構文を使用してグローバル変数`tidb_redact_log`設定できます。
+`set`構文を使用してグローバル変数`tidb_redact_log`を設定できます。
 
 ```sql
 set @@global.tidb_redact_log = ON;

@@ -285,7 +285,7 @@ mysql -u test -h 0.0.0.0 -P 4000 --ssl-cert /path/to/client-cert.new.pem --ssl-k
 
 ### ユーザー証明書情報を構成する {#configure-user-certificate-information}
 
-ユーザー証明書情報（ `REQUIRE SUBJECT` `REQUIRE CIPHER`を取得したら、ユーザーの作成、権限の付与、またはユーザーの変更時にこれらの情報`REQUIRE SAN`検証されるように設定します。以下の文の`<replaceable>` `REQUIRE ISSUER`する情報に置き換えてください。
+ユーザー証明書情報（ `REQUIRE SUBJECT` 、 `REQUIRE ISSUER` 、 `REQUIRE SAN` 、 `REQUIRE CIPHER` ）を取得したら、ユーザーの作成、権限の付与、またはユーザーの変更時にこれらの情報が検証されるように設定します。以下の文の`<replaceable>`を対応する情報に置き換えてください。
 
 スペースまたは`and`区切り文字として使用して、1つのオプションまたは複数のオプションを設定できます。
 

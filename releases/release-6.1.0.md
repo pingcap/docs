@@ -61,7 +61,7 @@ TiDB バージョン: 6.1.0
 
 - カスタマイズされたリージョンサイズをサポート
 
-    v6.1.0以降では、 [`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size)設定することでリージョンのサイズを大きく設定できます。これにより、リージョンの数を効果的に削減し、リージョンの管理を容易にし、クラスターのパフォーマンスと安定性を向上させることができます。
+    v6.1.0以降では、 [`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size)を設定することでリージョンのサイズを大きく設定できます。これにより、リージョンの数を効果的に削減し、リージョンの管理を容易にし、クラスターのパフォーマンスと安定性を向上させることができます。
 
     [ユーザードキュメント](/tune-region-performance.md#use-region-split-size-to-adjust-region-size) [＃11515](https://github.com/tikv/tikv/issues/11515)
 
@@ -80,7 +80,7 @@ TiDB バージョン: 6.1.0
 - 結合順序ヒント構文をサポートする
 
     - The `LEADING` hint reminds the optimizer to use the specified order as the prefix of join operations. A good prefix of join can quickly reduce the amount of data at the early phase of join and improve the query performance.
-    - `STRAIGHT_JOIN`ヒントは、 `FROM`句内のテーブルの順序と一致する順序でテーブルを結合するようにオプティマイザーに通知します。
+    - `STRAIGHT_JOIN`ヒントは、 `FROM`句内のテーブルの順序と一致する順序でテーブルを結合するようにオプティマイザに通知します。
 
     これにより、テーブル結合の順序を固定することができます。ヒントを適切に使用することで、SQLパフォーマンスとクラスタの安定性を効果的に向上させることができます。
 

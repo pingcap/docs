@@ -1,6 +1,6 @@
 ---
 title: Two Availability Zones in One Region Deployment
-summary: 1つのリージョンに 2つの可用性ゾーンをデプロイするソリューションについて学習します。
+summary: 1つのリージョンに 2つのアベイラビリティゾーンをデプロイするソリューションについて学習します。
 ---
 
 # 1つのリージョンに2つのアベイラビリティゾーンをデプロイ {#two-availability-zones-in-one-region-deployment}
@@ -36,7 +36,7 @@ TiDBは通常、高可用性と災害復旧機能を確保するために、マ�
 
 ### 例 {#example}
 
-次の`tiup topology.yaml`サンプル ファイルは、1つのリージョンデプロイモードにおける 2つの可用性ゾーンの一般的なトポロジ構成です。
+次の`tiup topology.yaml`サンプル ファイルは、1つのリージョンデプロイモードにおける 2つのアベイラビリティゾーンの一般的なトポロジ構成です。
 
 ```yaml
 # # Global variables are applied to all deployments and used as the default value of

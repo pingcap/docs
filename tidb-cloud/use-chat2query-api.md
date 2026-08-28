@@ -21,7 +21,7 @@ Chat2Query エンドポイントを呼び出す前に、Chat2Query データア�
 
 プロジェクトのデータアプリを作成するには、次の手順を実行します。
 
-1. プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページで、<mdsvgicon name="icon-create-data-app">左ペインで**Create DataApp**をクリックします。データアプリ作成ダイアログが表示されます。</mdsvgicon>
+1. プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページで、左ペインの<MDSvgIcon name="icon-create-data-app" /> **Create DataApp**をクリックします。データアプリ作成ダイアログが表示されます。
 
     > **Tip:**
     >
@@ -240,7 +240,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region
 
 #### 3. `/v3/chat2data`を呼び出してSQL文を生成し実行する {#3-generate-and-execute-sql-statements-by-calling-v3chat2data}
 
-データベースのデータ概要が準備できたら、クラスター ID、データベース名、質問を指定して`/v3/chat2data`呼び出して SQL ステートメントを生成および実行できます。
+データベースのデータ概要が準備できたら、クラスター ID、データベース名、質問を指定して`/v3/chat2data`を呼び出して SQL ステートメントを生成および実行できます。
 
 例えば：
 

@@ -149,7 +149,7 @@ TiDB バージョン: 8.1.2
     - TiCDC
 
         - PullerモジュールのResolved TSレイテンシーモニタリングで誤った値が表示される問題を修正しました [＃11561](https://github.com/pingcap/tiflow/issues/11561) @[wlwilliamx](https://github.com/wlwilliamx)
-        - `enable-table-across-nodes`有効にすると、リージョン分割中にテーブルの一部のスパン レプリケーションタスクが失われる可能性がある問題を修正しました。 [＃11675](https://github.com/pingcap/tiflow/issues/11675) @[wk989898](https://github.com/wk989898)
+        - `enable-table-across-nodes`を有効にすると、リージョン分割中にテーブルの一部のスパン レプリケーションタスクが失われる可能性がある問題を修正しました。 [＃11675](https://github.com/pingcap/tiflow/issues/11675) @[wk989898](https://github.com/wk989898)
         - やり直しモジュールがエラーを正しく報告できない問題を修正しました [＃11744](https://github.com/pingcap/tiflow/issues/11744) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - TiDB DDL 所有者の変更中に DDL タスクのスキーマバージョンが非増分になったときに、TiCDC が誤って DDL タスクを破棄する問題を修正[＃11714](https://github.com/pingcap/tiflow/issues/11714) @[wlwilliamx](https://github.com/wlwilliamx)
         - チェンジフィードチェックポイントの**barrier-ts**監視メトリックが不正確になる可能性がある問題を修正しました[＃11553](https://github.com/pingcap/tiflow/issues/11553) @[3AceShowHand](https://github.com/3AceShowHand)

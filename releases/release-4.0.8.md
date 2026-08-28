@@ -35,7 +35,7 @@ TiDB バージョン: 4.0.8
     - SQL オプティマイザが潜在的な新しいプランを検証しているときに、より多くのデバッグ情報を記録するために、プランバインディング ステージ中にタイムアウト実行計画を待機します[＃20530](https://github.com/pingcap/tidb/pull/20530)
     - スローログに実行再試行時間を追加し、スロークエリの結果[＃20495](https://github.com/pingcap/tidb/pull/20495) [＃20494](https://github.com/pingcap/tidb/pull/20494)
     - `table_storage_stats`システムテーブルを追加する [＃20431](https://github.com/pingcap/tidb/pull/20431)
-    - `INSERT` `REPLACE`のRPC実行時統計情報`UPDATE`追加する[＃20430](https://github.com/pingcap/tidb/pull/20430)
+    - `INSERT` / `UPDATE` / `REPLACE`文のRPC実行時統計情報を追加する[＃20430](https://github.com/pingcap/tidb/pull/20430)
     - `EXPLAIN FOR CONNECTION` の結果に演算子情報を追加します [＃20384](https://github.com/pingcap/tidb/pull/20384)
     - クライアントの接続/切断アクティビティのTiDBエラーログを`DEBUG`レベルに調整します。 [＃20321](https://github.com/pingcap/tidb/pull/20321)
     - コプロセッサーキャッシュの監視メトリックを追加します。 [＃20293](https://github.com/pingcap/tidb/pull/20293)

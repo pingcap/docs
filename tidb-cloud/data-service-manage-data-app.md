@@ -13,7 +13,7 @@ Data Service（プレビュー版）のデータアプリは、特定のアプ�
 
 プロジェクトのデータアプリを作成するには、次の手順を実行します。
 
-1. プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページで、<mdsvgicon name="icon-create-data-app">左側のペインで**Create DataApp**。</mdsvgicon>
+1. プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページで、左側のペインの<MDSvgIcon name="icon-create-data-app" /> **Create DataApp**をクリックします。
 
     > **Tip:**
     >

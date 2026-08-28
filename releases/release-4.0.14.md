@@ -38,7 +38,7 @@ TiDB バージョン: 4.0.14
 - TiDB
 
     - `UPDATE`の読み取りで`point get`または`batch point get`を使用して、インデックスキーの`LOCK`レコードを`PUT`レコードに変更します[＃26223](https://github.com/pingcap/tidb/pull/26223)
-    - MySQLシステム変数`init_connect`とその関連機能サポートする [＃26031](https://github.com/pingcap/tidb/pull/26031)
+    - MySQLシステム変数`init_connect`とその関連機能をサポートする [＃26031](https://github.com/pingcap/tidb/pull/26031)
     - クエリ結果をより安定させるために、安定した結果モードをサポートします[＃26003](https://github.com/pingcap/tidb/pull/26003)
     - 組み込み関数`json_unquote()`をTiKV にプッシュダウンする機能をサポート [＃25721](https://github.com/pingcap/tidb/pull/25721)
     - SQLプラン管理（SPM）が文字セットの影響を受けないようにする [＃23295](https://github.com/pingcap/tidb/pull/23295)

@@ -98,7 +98,7 @@ TiDB バージョン: 6.5.1
     - `ANALYZE`文が`KILL` で終了する可能性がある問題を修正しました [＃41825](https://github.com/pingcap/tidb/issues/41825) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - `indexMerge` で goroutine リークが発生する可能性がある問題を修正しました [＃41605](https://github.com/pingcap/tidb/issues/41605) @[guo-shaoge](https://github.com/guo-shaoge) [＃41545](https://github.com/pingcap/tidb/issues/41545)
     - 符号なしの`TINYINT` / `SMALLINT` / `INT`値を`0` より小さい`DECIMAL` / `FLOAT` / `DOUBLE`値と比較するときに誤った結果になる可能性がある問題を修正しました。 [＃41736](https://github.com/pingcap/tidb/issues/41736) @[LittleFall](https://github.com/LittleFall)
-    - `tidb_enable_reuse_chunk`有効にするとメモリリークが発生する可能性がある問題を修正 [＃40987](https://github.com/pingcap/tidb/issues/40987) @[guo-shaoge](https://github.com/guo-shaoge)
+    - `tidb_enable_reuse_chunk`を有効にするとメモリリークが発生する可能性がある問題を修正 [＃40987](https://github.com/pingcap/tidb/issues/40987) @[guo-shaoge](https://github.com/guo-shaoge)
     - タイムゾーンでのデータ競合によりデータインデックスの不整合が発生する可能性がある問題を修正[＃40710](https://github.com/pingcap/tidb/issues/40710) @[wjhuang2016](https://github.com/wjhuang2016)
     - `batch cop`実行中のスキャン詳細情報が不正確になる可能性がある問題を修正[＃41582](https://github.com/pingcap/tidb/issues/41582) @[you06](https://github.com/you06)
     - `cop`の上限同時実行数が制限されない問題を修正 [＃41134](https://github.com/pingcap/tidb/issues/41134) @[you06](https://github.com/you06)

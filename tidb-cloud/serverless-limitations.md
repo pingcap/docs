@@ -64,7 +64,7 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 ## 使用量制限 {#usage-quota}
 
-TiDB Cloudでは、組織ごとに最大5つのクラスター（デフォルトでは[無料のTiDB Cloud Starterクラスター](/tidb-cloud/select-cluster-tier.md#starter)を作成できます。TiDB Cloud Starterクラスターをさらに作成するには、クレジットカード情報と使用量に応じた[毎月の支出限度額を設定する](/tidb-cloud/manage-serverless-spend-limit.md)追加する必要があります。
+TiDB Cloudでは、組織ごとに最大5つのクラスター（デフォルトでは[無料のTiDB Cloud Starterクラスター](/tidb-cloud/select-cluster-tier.md#starter)を作成できます。TiDB Cloud Starterクラスターをさらに作成するには、クレジットカード情報と使用量に応じた[毎月の支出限度額を設定する](/tidb-cloud/manage-serverless-spend-limit.md)を追加する必要があります。
 
 組織内の最初の 5つのTiDB Cloud Starter クラスターについては、 TiDB Cloud は次のようにクラスターごとに無料使用量割り当てを提供します。
 

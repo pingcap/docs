@@ -51,7 +51,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
     DXFはv7.5.0で一般提供（GA）されますが、デフォルトでは無効になっています。つまり、 `ADD INDEX`または`IMPORT INTO`タスクは、デフォルトでは1つのTiDBノードによってのみ実行されます。
 
-    TiDB v8.1.0以降、この機能はデフォルトで有効になっています（ [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)デフォルト`ON`に設定されます）。この機能を有効にすると、DXFは複数のTiDBノードで同じ`ADD INDEX`または`IMPORT INTO`タスクを並列実行するようにスケジュールできます。これにより、TiDBクラスターのリソースを最大限に活用し、これらのタスクのパフォーマンスを大幅に向上させることができます。さらに、TiDBノードを追加し、追加したノードに[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)設定することで、 `ADD INDEX`および`IMPORT INTO`タスクのパフォーマンスを直線的に向上させることができます。
+    TiDB v8.1.0以降、この機能はデフォルトで有効になっています（ [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)デフォルト`ON`に設定されます）。この機能を有効にすると、DXFは複数のTiDBノードで同じ`ADD INDEX`または`IMPORT INTO`タスクを並列実行するようにスケジュールできます。これにより、TiDBクラスターのリソースを最大限に活用し、これらのタスクのパフォーマンスを大幅に向上させることができます。さらに、TiDBノードを追加し、追加したノードに[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)を設定することで、 `ADD INDEX`および`IMPORT INTO`タスクのパフォーマンスを直線的に向上させることができます。
 
     詳細については[ドキュメント](/tidb-distributed-execution-framework.md)を参照してください。
 

@@ -37,7 +37,7 @@ summary: TiDB 2.0.6は、システムの互換性と安定性の向上を伴い�
     - `Index Join`一部のシナリオでタイムスタンプを初期化しないとpanicが発生する問題を修正[＃7246](https://github.com/pingcap/tidb/pull/7246)
     - セッションでタイムゾーンを誤って使用した`ADMIN CHECK TABLE`の誤報問題を修正 [＃7258](https://github.com/pingcap/tidb/pull/7258)
     - `ADMIN CLEANUP INDEX`一部のシナリオでインデックスがクリーンアップされない問題を修正[＃7265](https://github.com/pingcap/tidb/pull/7265)
-    - 読み取りコミット分離レベルを無効にする [＃7282](https://github.com/pingcap/tidb/pull/7282)
+    - Read Committed分離レベルを無効にする [＃7282](https://github.com/pingcap/tidb/pull/7282)
 
 ## TiKV {#tikv}
 

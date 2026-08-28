@@ -51,7 +51,7 @@ TiDB バージョン: 6.1.7
     - `ON UPDATE`文が主キーを正しく更新しない場合にデータとインデックスが不整合になる問題を修正しました [＃44565](https://github.com/pingcap/tidb/issues/44565) @[zyguan](https://github.com/zyguan)
     - テーブル名の変更中に TiCDC が行の変更の一部を失う可能性がある問題を修正[＃43338](https://github.com/pingcap/tidb/issues/43338) @[tangenta](https://github.com/tangenta)
     - パーティション化されたテーブルにおける配置ルールの動作の問題を修正し、削除されたパーティションにおける配置ルールが正しく設定され、再利用されるようになりました[＃44116](https://github.com/pingcap/tidb/issues/44116) @[lcwangchao](https://github.com/lcwangchao)
-    - `tidb_scatter_region`有効にすると、パーティションが切り捨てられた後にリージョンが自動的に分割されない問題を修正しました[＃43174](https://github.com/pingcap/tidb/issues/43174) [＃43028](https://github.com/pingcap/tidb/issues/43028)
+    - `tidb_scatter_region`を有効にすると、パーティションが切り捨てられた後にリージョンが自動的に分割されない問題を修正しました[＃43174](https://github.com/pingcap/tidb/issues/43174) [＃43028](https://github.com/pingcap/tidb/issues/43028)
     - 多数のパーティションとTiFlashレプリカを持つパーティションテーブルに対して`TRUNCATE TABLE`を実行するときに書き込み競合によって発生する DDL 再試行の問題を修正しました。 [＃42940](https://github.com/pingcap/tidb/issues/42940) @[mjonss](https://github.com/mjonss)
     - ウィンドウ関数をTiFlash にプッシュダウンする際の実行計画が正しくない問題を修正しました [＃43922](https://github.com/pingcap/tidb/issues/43922) @[gengliqi](https://github.com/gengliqi)
     - 非相関サブクエリを含むステートメントで共通テーブル式 (CTE) を使用すると誤った結果が返される可能性がある問題を修正しました [＃44051](https://github.com/pingcap/tidb/issues/44051) @[winoros](https://github.com/winoros)

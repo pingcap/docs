@@ -33,9 +33,9 @@ TiDB は、次のようにステートメントレベル、セッションレベ
     - 正確な時点の指定（**推奨**）：TiDB が特定の時点からグローバルに一貫性のあるデータを分離レベルに違反することなく読み取る必要がある場合は、クエリ文でその時点の対応するタイムスタンプを指定できます。詳細な使用方法については、 [`AS OF TIMESTAMP`句](/as-of-timestamp.md#syntax)を参照してください。
     - 時間範囲の指定：TiDB が分離レベルに違反することなく、特定の時間範囲内で可能な限り新しいデータを読み取る必要がある場合、クエリ文で時間範囲を指定できます。指定された時間範囲内で、TiDB は適切なタイムスタンプを選択して対応するデータを読み取ります。「適切」とは、このタイムスタンプより前に開始され、アクセスされたレプリカでコミットされていないトランザクションがないことを意味します。つまり、TiDB はアクセスされたレプリカに対して読み取り操作を実行でき、読み取り操作がブロックされないことを意味します。詳細な使用方法については、 [`AS OF TIMESTAMP`句](/as-of-timestamp.md#syntax)および[`TIDB_BOUNDED_STALENESS`関数](/as-of-timestamp.md#syntax)の概要を参照してください。
 - セッションレベル
-    - 時間範囲の指定：セッションにおいて、後続のクエリでTiDBが分離レベルに違反することなく、指定された時間範囲内で可能な限り新しいデータを読み取る必要がある場合は、システム変数`tidb_read_staleness`設定することで時間範囲を指定できます。詳細な使用方法については、 [`tidb_read_staleness`](/tidb-read-staleness.md)を参照してください。
+    - 時間範囲の指定：セッションにおいて、後続のクエリでTiDBが分離レベルに違反することなく、指定された時間範囲内で可能な限り新しいデータを読み取る必要がある場合は、システム変数`tidb_read_staleness`を設定することで時間範囲を指定できます。詳細な使用方法については、 [`tidb_read_staleness`](/tidb-read-staleness.md)を参照してください。
 
-さらに、TiDBは、システム変数[`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640)と[`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640)設定することで、セッションレベルまたはグローバルレベルで正確な時点を指定する方法を提供しています。詳細な使用方法については、 [`tidb_external_ts`を使用してステイル読み取り](/tidb-external-ts.md)を参照してください。
+さらに、TiDBは、システム変数[`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640)と[`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640)を設定することで、セッションレベルまたはグローバルレベルで正確な時点を指定する方法を提供しています。詳細な使用方法については、 [`tidb_external_ts`を使用してステイル読み取り](/tidb-external-ts.md)を参照してください。
 
 ### ステイル読み取りのレイテンシーを削減 {#reduce-stale-read-latency}
 

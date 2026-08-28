@@ -41,7 +41,7 @@ TiDB Ansible バージョン: 3.0.4
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザー
+- SQLオプティマイザ
     - フィードバックで分割すると無効なクエリ範囲が生成される可能性がある問題を修正しました [＃12170](https://github.com/pingcap/tidb/pull/12170)
     - 結果に無効なキーが含まれている場合はエラーを返すのではなく、 `SHOW STATS_BUCKETS`のステートメントの返されたエラーを16進数で表示します。 [＃12094](https://github.com/pingcap/tidb/pull/12094)
     - クエリに`SLEEP`関数（たとえば`select 1 from (select sleep(1)) t;)` ）が含まれている場合、列プルーニングによってクエリ中に無効な`sleep(1)`発生する問題を修正しました。 [＃11953](https://github.com/pingcap/tidb/pull/11953)

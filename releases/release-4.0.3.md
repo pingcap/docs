@@ -46,7 +46,7 @@ TiDB バージョン: 4.0.3
 - TiDB
 
     - SQLクエリをログに記録するときに感度を下げるかどうかを制御する`tidb_log_desensitization`グローバル変数を追加します[＃18581](https://github.com/pingcap/tidb/pull/18581)
-    - デフォルトで`tidb_allow_batch_cop`有効にする[＃18552](https://github.com/pingcap/tidb/pull/18552)
+    - デフォルトで`tidb_allow_batch_cop`を有効にする[＃18552](https://github.com/pingcap/tidb/pull/18552)
     - クエリのキャンセルを高速化[＃18505](https://github.com/pingcap/tidb/pull/18505)
     - `tidb_decode_plan`の結果にヘッダーを追加 [＃18501](https://github.com/pingcap/tidb/pull/18501)
     - 構成チェッカーを以前のバージョンの構成ファイルと互換性のあるものにする [＃18046](https://github.com/pingcap/tidb/pull/18046)

@@ -35,7 +35,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     v7.0.0 では、クエリパフォーマンスを最適化するための実験的機能として、 TiFlashに遅延マテリアライゼーションが導入されました。この機能はデフォルトでは無効になっています ( [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)システム変数はデフォルトで`OFF`に設定されます)。フィルタ条件 ( `WHERE`句) を含む`SELECT`ステートメントを処理する場合、 TiFlash はクエリに必要な列からすべてのデータを読み取り、クエリ条件に基づいてデータをフィルタリングおよび集計します。遅延マテリアライゼーションを有効にすると、TiDB はフィルタ条件の一部を TableScan 演算子にプッシュダウンすることをサポートします。つまり、 TiFlash は最初に TableScan 演算子にプッシュダウンされるフィルタ条件に関連する列データをスキャンし、条件を満たす行をフィルタリングしてから、これらの行の他の列データをスキャンしてさらに計算を行うため、IO スキャンとデータ処理の計算が削減されます。
 
-    バージョン7.1.0以降、 TiFlashの遅延マテリアライゼーション機能が一般提供され、デフォルトで有効化されています（システム変数[`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)はデフォルトで`ON`に設定されています）。TiDBオプティマイザーは、クエリの統計情報とフィルター条件に基づいて、TableScan演算子にプッシュダウンするフィルターを決定します。
+    バージョン7.1.0以降、 TiFlashの遅延マテリアライゼーション機能が一般提供され、デフォルトで有効化されています（システム変数[`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)はデフォルトで`ON`に設定されています）。TiDBオプティマイザは、クエリの統計情報とフィルター条件に基づいて、TableScan演算子にプッシュダウンするフィルターを決定します。
 
     詳細については[ドキュメント](/tiflash/tiflash-late-materialization.md)を参照してください。
 
@@ -142,7 +142,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     TiDB v6.5.0以降、 `INSERT INTO SELECT`ステートメントの`SELECT`の句（分析クエリ）をTiFlashにプッシュダウンできるようになりました。これにより、 TiFlashクエリの結果を`INSERT INTO`の句で指定されたTiDBテーブルに簡単に保存し、さらに分析することができます。これは、結果のキャッシュ（つまり、結果のマテリアライゼーション）として機能します。
 
-    この機能はバージョン7.1.0で一般公開されています。`INSERT INTO SELECT`の`SELECT`句の実行中、オプティマイザーは、 [SQLモード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュダウンするかどうかをインテリジェントに決定できます。そのため、実験的段階で導入された`tidb_enable_tiflash_read_for_write_stmt`システム変数は非推奨となりました。TiFlashの`INSERT INTO SELECT`文の計算規則は`STRICT SQL Mode`要件を満たしていないため、TiDBは、現在のセッションの[SQLモード](/sql-mode.md)が厳密でない場合にのみ、 `INSERT INTO SELECT`文の`SELECT`句をTiFlashにプッシュダウンすることを許可します。つまり、 `sql_mode`値に`STRICT_TRANS_TABLES`と`STRICT_ALL_TABLES`が含まれません。
+    この機能はバージョン7.1.0で一般公開されています。`INSERT INTO SELECT`の`SELECT`句の実行中、オプティマイザは、 [SQLモード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュダウンするかどうかをインテリジェントに決定できます。そのため、実験的段階で導入された`tidb_enable_tiflash_read_for_write_stmt`システム変数は非推奨となりました。TiFlashの`INSERT INTO SELECT`文の計算規則は`STRICT SQL Mode`要件を満たしていないため、TiDBは、現在のセッションの[SQLモード](/sql-mode.md)が厳密でない場合にのみ、 `INSERT INTO SELECT`文の`SELECT`句をTiFlashにプッシュダウンすることを許可します。つまり、 `sql_mode`値に`STRICT_TRANS_TABLES`と`STRICT_ALL_TABLES`が含まれません。
 
     詳細については[ドキュメント](/tiflash/tiflash-results-materialization.md)を参照してください。
 
@@ -234,7 +234,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     TiFlash をv7.1.0 にアップグレードした場合、TiDB を v7.1.0 にアップグレードする際に、TiDB はTiFlashシステムテーブル ( [`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)と[`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md) ) を読み取ることができません。
 
-- TiDB バージョン v6.2.0 から v7.0.0 のTiDB Lightning は、TiDB クラスターのバージョンに基づいてグローバルスケジューリングを一時停止するかどうかを決定します。TiDB クラスター バージョン &gt;= v6.1.0 の場合、スケジュールはターゲットテーブルデータを格納するリージョンに対してのみ一時停止され、ターゲットテーブルのインポートが完了すると再開されます。その他のバージョンの場合、 TiDB Lightning はグローバルスケジューリングを一時停止します。TiDB v7.1.0 以降では、 [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)設定することで、グローバルスケジューリングを一時停止するかどうかを制御できます。デフォルトでは、 TiDB Lightning はターゲットテーブルデータを格納するリージョンのスケジュールを一時停止します。ターゲットクラスターのバージョンが v6.1.0 より前の場合、エラーが発生します。この場合、パラメータの値を`"global"`に変更して再試行できます。
+- TiDB バージョン v6.2.0 から v7.0.0 のTiDB Lightning は、TiDB クラスターのバージョンに基づいてグローバルスケジューリングを一時停止するかどうかを決定します。TiDB クラスター バージョン &gt;= v6.1.0 の場合、スケジュールはターゲットテーブルデータを格納するリージョンに対してのみ一時停止され、ターゲットテーブルのインポートが完了すると再開されます。その他のバージョンの場合、 TiDB Lightning はグローバルスケジューリングを一時停止します。TiDB v7.1.0 以降では、 [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)を設定することで、グローバルスケジューリングを一時停止するかどうかを制御できます。デフォルトでは、 TiDB Lightning はターゲットテーブルデータを格納するリージョンのスケジュールを一時停止します。ターゲットクラスターのバージョンが v6.1.0 より前の場合、エラーが発生します。この場合、パラメータの値を`"global"`に変更して再試行できます。
 
 - TiDB v7.1.0で[`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)を使用すると、FLASHBACK操作が完了した後も、一部のリージョンがFLASHBACKプロセスに残る可能性があります。v7.1.0ではこの機能の使用を避けることをお勧めします。詳細については、問題を参照してください。この問題が発生した場合は、機能[TiDBスナップショットのバックアップと復元](/br/br-snapshot-guide.md)を使用してデータを復元できます。 [＃44292](https://github.com/pingcap/tidb/issues/44292)
 
@@ -242,7 +242,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 | 変数名                                                                                                                                     | タイプを変更   | 説明                                                                                                                                                                                                                                                                                                                                                                                              |
 | --------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630)                   | 非推奨      | デフォルト値を`OFF`から`ON`に変更します。 [`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50)の場合、オプティマイザーは[SQLモード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュダウンするかどうかをインテリジェントに決定します。                                                                                                                                                                                         |
+| [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630)                   | 非推奨      | デフォルト値を`OFF`から`ON`に変更します。 [`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50)の場合、オプティマイザは[SQLモード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュダウンするかどうかをインテリジェントに決定します。                                                                                                                                                                                         |
 | [`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)                                           | 非推奨      | バージョン7.1.0以降、このシステム変数は非推奨となりました。[`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)を指定することで、キャッシュ可能なプランの最大数を制御できます。                                                                                                                                                                                                                                |
 | [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)                                       | 非推奨      | バージョン7.1.0以降、このシステム変数は非推奨となりました。[`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)を指定することで、キャッシュ可能なプランの最大数を制御できます。                                                                                                                                                                                                                                |
 | `tidb_ddl_distribute_reorg`                                                                                                             | 削除済み     | この変数の名前は[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)に変更されます。                                                                                                                                                                                                                                                                                               |
@@ -370,7 +370,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     - `REORGANIZE PARTITION`他の DDL 操作と同時に実行できない問題を修正 [＃42442](https://github.com/pingcap/tidb/issues/42442) @[bb7133](https://github.com/bb7133)
     - DDL でパーティション再編成タスクをキャンセルすると、後続の DDL 操作が失敗する可能性がある問題を修正しました[＃42448](https://github.com/pingcap/tidb/issues/42448) @[lcwangchao](https://github.com/lcwangchao)
     - 特定の条件下で削除操作のアサーションが正しくない問題を修正[＃42426](https://github.com/pingcap/tidb/issues/42426) @[tiancaiamao](https://github.com/tiancaiamao)
-    - cgroup 情報の読み取りエラーにより、TiDBサーバーが起動できない問題を修正しました。エラーメッセージは「cgroup v1 からファイルメモリ.stat を読み取れません: open /sys/ メモリ.stat no such file or directory」です[＃42659](https://github.com/pingcap/tidb/issues/42659) @[hawkingrei](https://github.com/hawkingrei)
+    - cgroup 情報の読み取りエラーにより、TiDBサーバーが起動できない問題を修正しました。エラーメッセージは「can't read file memory.stat from cgroup v1: open /sys/memory.stat no such file or directory」です[＃42659](https://github.com/pingcap/tidb/issues/42659) @[hawkingrei](https://github.com/hawkingrei)
     - グローバルインデックスを持つパーティションテーブルの行のパーティションキーを更新するときに発生する`Duplicate Key`問題を修正しました [＃42312](https://github.com/pingcap/tidb/issues/42312) @[L-maple](https://github.com/L-maple)
     - TTLモニタリングパネルの`Scan Worker Time By Phase`チャートにデータが表示されない問題を修正しました [＃42515](https://github.com/pingcap/tidb/issues/42515) @[lcwangchao](https://github.com/lcwangchao)
     - グローバルインデックスを持つパーティションテーブルに対する一部のクエリが誤った結果を返す問題を修正[＃41991](https://github.com/pingcap/tidb/issues/41991) [＃42065](https://github.com/pingcap/tidb/issues/42065) @[L-maple](https://github.com/L-maple)
@@ -382,7 +382,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     - `Limit` を使用してパーティションテーブルをクエリしたときに返される誤った値を修正しました [＃24636](https://github.com/pingcap/tidb/issues/24636)
     - IPv6環境で誤ったTiDBアドレスが表示される問題を修正[＃43260](https://github.com/pingcap/tidb/issues/43260) @[nexustar](https://github.com/nexustar)
     - システム変数`tidb_enable_tiflash_read_for_write_stmt`と`tidb_enable_exchange_partition` に誤った値が表示される問題を修正しました [＃43281](https://github.com/pingcap/tidb/issues/43281) @[gengliqi](https://github.com/gengliqi)
-    - `tidb_scatter_region`有効にすると、パーティションが切り捨てられた後にリージョンが自動的に分割されない問題を修正しました[＃43174](https://github.com/pingcap/tidb/issues/43174) [＃43028](https://github.com/pingcap/tidb/issues/43028) @[jiyfhust](https://github.com/jiyfhust)
+    - `tidb_scatter_region`を有効にすると、パーティションが切り捨てられた後にリージョンが自動的に分割されない問題を修正しました[＃43174](https://github.com/pingcap/tidb/issues/43174) [＃43028](https://github.com/pingcap/tidb/issues/43028) @[jiyfhust](https://github.com/jiyfhust)
     - 生成列を持つテーブルにチェックを追加し、これらの列でサポートされていない DDL 操作のエラーを報告します[＃38988](https://github.com/pingcap/tidb/issues/38988) [＃24321](https://github.com/pingcap/tidb/issues/24321) @[tiancaiamao](https://github.com/tiancaiamao)
     - 特定の型変換エラーでエラーメッセージが正しく表示されない問題を修正 [＃41730](https://github.com/pingcap/tidb/issues/41730) @[hawkingrei](https://github.com/hawkingrei)
     - TiDBノードが正常にシャットダウンした後、このノードでトリガーされたDDLタスクがキャンセルされる問題を修正しました[＃43854](https://github.com/pingcap/tidb/issues/43854) @[zimulala](https://github.com/zimulala)
@@ -408,8 +408,8 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 - TiKV
 
-    - `tidb_pessimistic_txn_fair_locking`有効にすると、極端なケースで、失敗した RPC 再試行によって期限切れになったリクエストが、解決ロック操作中にデータの正確性に影響を与える可能性がある問題を修正しました。 [＃14551](https://github.com/tikv/tikv/issues/14551) @[MyonKeminta](https://github.com/MyonKeminta)
-    - `tidb_pessimistic_txn_fair_locking`有効にすると、極端なケースで、失敗した RPC 再試行によって期限切れのリクエストが発生し、トランザクションの競合が無視され、トランザクションの一貫性に影響する可能性がある問題を修正しました。 [＃14311](https://github.com/tikv/tikv/issues/14311) @[MyonKeminta](https://github.com/MyonKeminta)
+    - `tidb_pessimistic_txn_fair_locking`を有効にすると、極端なケースで、失敗した RPC 再試行によって期限切れになったリクエストが、解決ロック操作中にデータの正確性に影響を与える可能性がある問題を修正しました。 [＃14551](https://github.com/tikv/tikv/issues/14551) @[MyonKeminta](https://github.com/MyonKeminta)
+    - `tidb_pessimistic_txn_fair_locking`を有効にすると、極端なケースで、失敗した RPC 再試行によって期限切れのリクエストが発生し、トランザクションの競合が無視され、トランザクションの一貫性に影響する可能性がある問題を修正しました。 [＃14311](https://github.com/tikv/tikv/issues/14311) @[MyonKeminta](https://github.com/MyonKeminta)
     - 暗号化キーIDの競合により古いキーが削除される可能性がある問題を修正しました [＃14585](https://github.com/tikv/tikv/issues/14585) @[tabokie](https://github.com/tabokie)
     - クラスタを以前のバージョンから v6.5 以降のバージョンにアップグレードしたときに、累積したロック レコードによって発生するパフォーマンス低下の問題を修正しました。 [＃14780](https://github.com/tikv/tikv/issues/14780) @[MyonKeminta](https://github.com/MyonKeminta)
     - PITRリカバリプロセス中に`raft entry is too large`エラーが発生する問題を修正 [＃14313](https://github.com/tikv/tikv/issues/14313) @[YuJuncen](https://github.com/YuJuncen)

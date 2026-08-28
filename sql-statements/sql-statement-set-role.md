@@ -41,7 +41,7 @@ SELECT CURRENT_ROLE();
 1 row in set (0.000 sec)
 ```
 
-`'r2'`と`'r3'`有効にするには、次の`SET ROLE`ステートメントを実行します。
+`'r2'`と`'r3'`を有効にするには、次の`SET ROLE`ステートメントを実行します。
 
 ```sql
 SET ROLE 'r2', 'r3';
