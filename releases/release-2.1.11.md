@@ -18,7 +18,7 @@ TiDB Ansible バージョン: 2.1.11
 - バケット数を更新するときに重複していないフィードバックをマージする [＃10569](https://github.com/pingcap/tidb/pull/10569)
 - `unix_timestamp()-unix_timestamp(now())` の計算エラーを修正 [＃10491](https://github.com/pingcap/tidb/pull/10491)
 - MySQL 8.0 との`period_diff`互換性の問題を修正 [＃10501](https://github.com/pingcap/tidb/pull/10501)
-- 例外を回避するために統計を収集するときに`Virtual Column`スキップする[＃10628](https://github.com/pingcap/tidb/pull/10628)
+- 例外を回避するために統計を収集するときに`Virtual Column`をスキップする[＃10628](https://github.com/pingcap/tidb/pull/10628)
 - `SHOW OPEN TABLES`ステートメントサポートする [＃10374](https://github.com/pingcap/tidb/pull/10374)
 - 場合によっては goroutine リークが発生する可能性がある問題を修正[＃10656](https://github.com/pingcap/tidb/pull/10656)
 - `tidb_snapshot`変数を設定すると、場合によっては時間形式の解析が正しく行われない可能性がある問題を修正しました。 [＃10637](https://github.com/pingcap/tidb/pull/10637)

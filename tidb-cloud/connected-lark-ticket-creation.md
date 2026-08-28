@@ -29,7 +29,7 @@ TiDB Cloud **Enterprise** [サポートプラン](/tidb-cloud/connected-care-det
 
 ## チケットの最新情報を購読する {#subscribe-to-ticket-updates}
 
-[サポートチケットを作成する](#create-a-support-ticket)設定すると、Lark **PingCAP Support Group**でチケットの更新情報を直接受け取ることができます。サポートエンジニアがチケットに返信すると、ボットがグループに更新メッセージを投稿します。メッセージには、チケットのタイトル、チケットへのリンク、最新のコメントが含まれます。
+[サポートチケットを作成する](#create-a-support-ticket)と、Lark **PingCAP Support Group**でチケットの更新情報を直接受け取ることができます。サポートエンジニアがチケットに返信すると、ボットがグループに更新メッセージを投稿します。メッセージには、チケットのタイトル、チケットへのリンク、最新のコメントが含まれます。
 
 ![lark-ticket-creation-5](/media/tidb-cloud/connected-lark-ticket-creation-5.png)
 

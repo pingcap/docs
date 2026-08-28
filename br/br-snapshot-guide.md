@@ -119,7 +119,7 @@ tiup br restore db \
 --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
-上記のコマンドでは、 `--db`復元するデータベースの名前を指定します。
+上記のコマンドでは、 `--db`は復元するデータベースの名前を指定します。
 
 **テーブルを復元する**
 
@@ -132,7 +132,7 @@ tiup br restore table --pd "${PD_IP}:2379" \
 --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
-上記のコマンドでは、 `--db`復元するデータベースの名前を指定し、 `--table`復元するテーブルの名前を指定します。
+上記のコマンドでは、 `--db`は復元するデータベースの名前を指定し、 `--table`は復元するテーブルの名前を指定します。
 
 **テーブルフィルターを使用して複数のテーブルを復元します。**
 

@@ -9,11 +9,11 @@ summary: TiDB の高信頼性に関連する FAQ について説明します。
 
 ## TiDB はデータ暗号化をサポートしていますか? {#does-tidb-support-data-encryption}
 
-はい。ネットワークトラフィック内のデータを暗号化するには、 [TiDBクライアントとサーバー間のTLSを有効にする](/enable-tls-between-clients-and-servers.md)有効にします。ストレージエンジン内のデータを暗号化するには、 [透過的なデータ暗号化（TDE）](/encryption-at-rest.md)有効にします。
+はい。ネットワークトラフィック内のデータを暗号化するには、 [TiDBクライアントとサーバー間のTLS](/enable-tls-between-clients-and-servers.md)を有効にします。ストレージエンジン内のデータを暗号化するには、 [透過的なデータ暗号化（TDE）](/encryption-at-rest.md)を有効にします。
 
 ## TiDB は、サーバーの MySQL バージョン文字列を、セキュリティ脆弱性スキャン ツールに必要な特定のバージョンに変更することをサポートしていますか? {#does-tidb-support-modifying-the-mysql-version-string-of-the-server-to-a-specific-one-that-is-required-by-the-security-vulnerability-scanning-tool}
 
-- v3.0.8 以降、TiDB は構成ファイル内の[`server-version`](/tidb-configuration-file.md#server-version)変更することでサーバーのバージョン文字列を変更することをサポートしています。
+- v3.0.8 以降、TiDB は構成ファイル内の[`server-version`](/tidb-configuration-file.md#server-version)を変更することでサーバーのバージョン文字列を変更することをサポートしています。
 
 - v4.0 以降、 TiUPを使用して TiDB をデプロイする場合は、 `tiup cluster edit-config <cluster-name>`を実行して次のセクションを編集することで、適切なバージョン文字列を指定することもできます。
 

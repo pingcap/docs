@@ -38,7 +38,7 @@ SELECT _tidb_rowid, a, b FROM t1;
 SELECT _tidb_rowid, id, a FROM t2;
 ```
 
-`t3`の場合、クラスター化された主キーが既に行識別子になっているため、 `_tidb_rowid`利用できません。
+`t3`の場合、クラスター化された主キーが既に行識別子になっているため、 `_tidb_rowid`は利用できません。
 
 ```sql
 SELECT _tidb_rowid, id, a FROM t3;

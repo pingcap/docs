@@ -32,7 +32,7 @@ TiDB バージョン: 4.0.0
 
 - TiDB
     - 再試行コミットフェーズの`goroutines`数を制御するための`committer-concurrency`構成項目を追加します。 [＃16849](https://github.com/pingcap/tidb/pull/16849)
-    - `show table partition regions`構文サポートする [＃17294](https://github.com/pingcap/tidb/pull/17294)
+    - `show table partition regions`構文をサポートする [＃17294](https://github.com/pingcap/tidb/pull/17294)
     - TiDBサーバーが使用する一時ディスク領域を制限するための`tmp-storage-quota`構成項目を追加します [＃15700](https://github.com/pingcap/tidb/pull/15700)
     - テーブルの作成時および変更時に、パーティションテーブルが一意のプレフィックスインデックスを使用しているかどうかのチェックをサポート[＃17213](https://github.com/pingcap/tidb/pull/17213)
     - `insert/replace into tbl_name partition` （ `partition_name_list` ）のステートメントサポートする [＃17313](https://github.com/pingcap/tidb/pull/17313)
@@ -86,7 +86,7 @@ TiDB バージョン: 4.0.0
 - TiFlash
 
     - 検索ログ機能における正規表現のマッチング動作が他のコンポーネントと一致しない問題を修正しました
-    - デフォルトで遅延処理の最適化`Raft Compact Log Command`無効にすることで、ノードが大量のデータを書き込むときに過剰な再起動時間がかかる問題を修正しました。
+    - デフォルトで遅延処理の最適化`Raft Compact Log Command`を無効にすることで、ノードが大量のデータを書き込むときに過剰な再起動時間がかかる問題を修正しました。
     - 一部のシナリオで TiDB が`DROP DATABASE`ステートメントを誤って処理するため、システムの起動に失敗する問題を修正しました。
     - `Server_info`の CPU 情報を収集する方法が他のコンポーネントと異なる問題を修正しました
     - `batch coprocessor`が有効な場合に`Query`文を実行するとエラー`Too Many Pings`が報告される問題を修正しました

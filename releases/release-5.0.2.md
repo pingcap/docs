@@ -15,7 +15,7 @@ TiDB バージョン: 5.0.2
 
     - TiCDC
 
-        - `cdc cli changefeed`コマンドの`--sort-dir`非推奨です。代わりに、 `cdc server`コマンドの`--sort-dir`設定できます[＃1795](https://github.com/pingcap/tiflow/pull/1795)
+        - `cdc cli changefeed`コマンドの`--sort-dir`非推奨です。代わりに、 `cdc server`コマンドの`--sort-dir`を設定できます[＃1795](https://github.com/pingcap/tiflow/pull/1795)
 
 ## 新機能 {#new-features}
 

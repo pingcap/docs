@@ -36,7 +36,7 @@ tar -xzf node_exporter-v1.3.1-linux-amd64.tar.gz
 tar -xzf grafana-7.5.17.linux-amd64.tar.gz
 ```
 
-### ステップ2: Node1、Node2、Node3、Node4で`node_exporter`起動する {#step-2-start-node-exporter-on-node1-node2-node3-and-node4}
+### ステップ2: Node1、Node2、Node3、Node4で`node_exporter`を起動する {#step-2-start-node-exporter-on-node1-node2-node3-and-node4}
 
 ```bash
 cd node_exporter-v1.3.1-linux-amd64

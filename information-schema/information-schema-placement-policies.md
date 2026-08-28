@@ -1,6 +1,6 @@
 ---
 title: PLACEMENT_POLICIES
-summary: `PLACEMENT_POLICIES`情報スキーマテーブルについて学習してください。
+summary: `PLACEMENT_POLICIES`information_schemaテーブルについて学習してください。
 ---
 
 # PLACEMENT_POLICIES {#placement-policies}

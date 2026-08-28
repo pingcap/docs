@@ -85,7 +85,7 @@ TiDB バージョン: 8.0.0
 
     詳細については、[ドキュメント](/sql-prepared-plan-cache.md)を参照してください。
 
-- オプティマイザーが多値インデックスのサポートを強化[#47759](https://github.com/pingcap/tidb/issues/47759) [#46539](https://github.com/pingcap/tidb/issues/46539) @[Arenatlx](https://github.com/Arenatlx)@[time-and-fate](https://github.com/time-and-fate)
+- オプティマイザが多値インデックスのサポートを強化[#47759](https://github.com/pingcap/tidb/issues/47759) [#46539](https://github.com/pingcap/tidb/issues/46539) @[Arenatlx](https://github.com/Arenatlx)@[time-and-fate](https://github.com/time-and-fate)
 
     TiDB v6.6.0 では[多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)が導入され、JSON データ型のクエリパフォーマンスが向上しました。v8.0.0 では、オプティマイザが多値インデックスのサポートを強化し、複雑なシナリオでクエリを最適化するために、それらを正しく識別して利用できるようになりました。
 
@@ -127,7 +127,7 @@ TiDB バージョン: 8.0.0
 
     バージョン 8.0.0 以降、TiDB は大量のデータを処理するための DML タイプをサポートしています。この DML タイプは、実行中にデータを TiKV にタイムリーに書き込み、すべてのトランザクション データをメモリに継続的に格納することを回避し、メモリ制限を超える大量のデータの処理をサポートします。この DML タイプはトランザクションの整合性を保証し、標準 DML と同じ構文を使用します。 `INSERT` 、 `UPDATE` 、 `REPLACE` 、および`DELETE`ステートメントは、この新しい DML タイプを使用して大規模な DML 操作を実行できます。
 
-    この DML タイプは[パイプラインDML](https://github.com/pingcap/tidb/blob/release-8.0/docs/design/2024-01-09-pipelined-DML.md)機能によって実装され、自動コミットが有効になっているステートメントでのみ有効になります。この DML タイプを有効にするかどうかは、システム変数[`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800)設定することで制御できます。
+    この DML タイプは[パイプラインDML](https://github.com/pingcap/tidb/blob/release-8.0/docs/design/2024-01-09-pipelined-DML.md)機能によって実装され、自動コミットが有効になっているステートメントでのみ有効になります。この DML タイプを有効にするかどうかは、システム変数[`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800)を設定することで制御できます。
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_dml_type-new-in-v800)を参照してください。
 
@@ -161,7 +161,7 @@ TiDB バージョン: 8.0.0
 
 - 一般ログの別ファイルへの書き込みをサポート [#51248](https://github.com/pingcap/tidb/issues/51248) @[Defined2014](https://github.com/Defined2014)
 
-    一般ログは、MySQL互換の機能で、実行されたすべてのSQLステートメントをログに記録し、問題の診断に役立ちます。TiDBもこの機能をサポートしています。変数[`tidb_general_log`](/system-variables.md#tidb_general_log)設定することで有効にできます。ただし、以前のバージョンでは、一般ログの内容は他の情報とともにTiDBインスタンスログにしか書き込まれず、ログを長期間保持する必要があるユーザーにとっては不便でした。
+    一般ログは、MySQL互換の機能で、実行されたすべてのSQLステートメントをログに記録し、問題の診断に役立ちます。TiDBもこの機能をサポートしています。変数[`tidb_general_log`](/system-variables.md#tidb_general_log)を設定することで有効にできます。ただし、以前のバージョンでは、一般ログの内容は他の情報とともにTiDBインスタンスログにしか書き込まれず、ログを長期間保持する必要があるユーザーにとっては不便でした。
 
     バージョン8.0.0以降では、設定項目[`log.general-log-file`](/tidb-configuration-file.md#general-log-file-new-in-v800)に有効なファイル名を設定することで、一般ログを指定したファイルに書き込むことができます。一般ログは、インスタンスログと同じローテーションおよび保持ポリシーに従います。
 
@@ -282,7 +282,7 @@ TiDB バージョン: 8.0.0
 | [`tidb_load_binding_timeout`](/system-variables.md#tidb_load_binding_timeout-new-in-v800)                                 | 新しく追加された | バインディングの読み込みタイムアウトを制御します。バインディングの読み込み実行時間がこの値を超えると、読み込みが停止します。                                                                                                                                                             |
 | [`tidb_low_resolution_tso_update_interval`](/system-variables.md#tidb_low_resolution_tso_update_interval-new-in-v800)     | 新しく追加された | TiDB [キャッシュタイムスタンプ](/system-variables.md#tidb_low_resolution_tso)スタンプを更新する間隔を制御します。                                                                                                                                        |
 | [`tidb_opt_ordering_index_selectivity_ratio`](/system-variables.md#tidb_opt_ordering_index_selectivity_ratio-new-in-v800) | 新しく追加された | SQL ステートメントに`ORDER BY`および`ORDER BY` } 句が存在するものの、インデックスでカバーされていないフィルタ条件がある場合に、SQL ステートメント`LIMIT`に一致するインデックスの推定行数を制御します。デフォルト値は`-1`で、このシステム変数を無効にすることを意味します。                                                                 |
-| [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)                       | 新しく追加された | オプティマイザーが現在のセッションでクエリ最適化のために[不可視インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択できるかどうかを制御します。変数が`ON`に設定されている場合、オプティマイザーはセッション内のクエリ最適化のために不可視インデックスを選択できます。                                   |
+| [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)                       | 新しく追加された | オプティマイザが現在のセッションでクエリ最適化のために[不可視インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択できるかどうかを制御します。変数が`ON`に設定されている場合、オプティマイザはセッション内のクエリ最適化のために不可視インデックスを選択できます。                                   |
 | [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)                                       | 新しく追加された | スキーマ情報のキャッシュに使用できるメモリの上限を制御し、メモリの過剰使用を防ぎます。この機能を有効にすると、LRUアルゴリズムを使用して必要なテーブルをキャッシュし、スキーマ情報によって占有されるメモリを効果的に削減します。                                                                                                          |
 
 ### コンフィグレーションファイルパラメータ {#configuration-file-parameters}

@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.16 Release Notes
-summary: TiDB 2.1.16は2019年8月15日にリリースされました。SQLオプティマイザー、SQL実行エンジン、サーバー、DDL、TiKV、TiDB Binlog、 TiDB Lightning 、TiDB Ansibleに関する様々な修正と改善が含まれています。主な変更点としては、SHOWステートメント内のサブクエリのサポート、DATE_ADD関数の問題の修正、TiDB BinlogのDrainerへの設定項目の追加などが挙げられます。
+summary: TiDB 2.1.16は2019年8月15日にリリースされました。SQLオプティマイザ、SQL実行エンジン、サーバー、DDL、TiKV、TiDB Binlog、 TiDB Lightning 、TiDB Ansibleに関する様々な修正と改善が含まれています。主な変更点としては、SHOWステートメント内のサブクエリのサポート、DATE_ADD関数の問題の修正、TiDB BinlogのDrainerへの設定項目の追加などが挙げられます。
 ---
 
 # TiDB 2.1.16 リリースノート {#tidb-2-1-16-release-notes}
@@ -13,7 +13,7 @@ TiDB Ansible バージョン: 2.1.16
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザー
+- SQLオプティマイザ
     - 時間列等号条件で行数が不正確に推定される問題を修正しました [＃11526](https://github.com/pingcap/tidb/pull/11526)
     - `TIDB_INLJ`ヒントが有効にならない、または指定されたテーブルに有効にならない問題を修正 [＃11361](https://github.com/pingcap/tidb/pull/11361)
     - クエリの`NOT EXISTS`の実装をOUTER JOINからANTI JOINに変更して、より最適化された実行計画見つけます [＃11291](https://github.com/pingcap/tidb/pull/11291)

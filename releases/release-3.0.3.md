@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.3 Release Notes
-summary: TiDB 3.0.3は2019年8月29日にリリースされました。SQLオプティマイザー、SQL実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、TiDB Ansibleに関する様々な修正とアップデートが含まれています。主な修正には、不正な結果、型エラー、panic発生、権限チェックエラーに関する問題が含まれます。また、PD操作の最適化、サポート対象外のGrafana Collectorコンポーネントの削除、TiKVアラートルールの更新も行われています。さらに、TiDB AnsibleはSpark V2.4.3とTiSpark V2.1.4をサポートするようになりました。
+summary: TiDB 3.0.3は2019年8月29日にリリースされました。SQLオプティマイザ、SQL実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、TiDB Ansibleに関する様々な修正とアップデートが含まれています。主な修正には、不正な結果、型エラー、panic発生、権限チェックエラーに関する問題が含まれます。また、PD操作の最適化、サポート対象外のGrafana Collectorコンポーネントの削除、TiKVアラートルールの更新も行われています。さらに、TiDB AnsibleはSpark V2.4.3とTiSpark V2.1.4をサポートするようになりました。
 ---
 
 # TiDB 3.0.3 リリースノート {#tidb-3-0-3-release-notes}
@@ -13,7 +13,7 @@ TiDB Ansible バージョン: 3.0.3
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザー
+- SQLオプティマイザ
     - `aggregation_eliminate`や`column_prune`などのロジック最適化ルールを無効にするには、 `opt_rule_blacklist`テーブルを追加します[＃11658](https://github.com/pingcap/tidb/pull/11658)
     - 結合キーがプレフィックスインデックスまたは負の値に等しい符号なしインデックス列を使用する場合に、 `Index Join`に対して誤った結果が返される可能性がある問題を修正しました[＃11759](https://github.com/pingcap/tidb/pull/11759)
     - `create … binding ...`の`SELECT`つの文のうち`"`または`\`解析エラーになる可能性がある問題を修正しました[＃11726](https://github.com/pingcap/tidb/pull/11726)

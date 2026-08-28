@@ -68,7 +68,7 @@ TiDB バージョン: 5.0.4
     - MPPクエリの再試行をサポート[＃26483](https://github.com/pingcap/tidb/pull/26483)
     - MPPクエリを起動する前にTiFlashの可用性を確認してください [＃1807](https://github.com/pingcap/tics/issues/1807)
     - クエリ結果をより安定させるために、安定した結果モードをサポートします[＃26084](https://github.com/pingcap/tidb/pull/26084)
-    - MySQLシステム変数`init_connect`とその関連機能サポートする [＃18894](https://github.com/pingcap/tidb/issues/18894)
+    - MySQLシステム変数`init_connect`とその関連機能をサポートする [＃18894](https://github.com/pingcap/tidb/issues/18894)
     - MPPモードで`COUNT(DISTINCT)`集約機能を徹底的にプッシュダウンする [＃25861](https://github.com/pingcap/tidb/pull/25861)
     - 集計関数を`EXPLAIN`文でプッシュダウンできない場合にログ警告を出力する [＃25736](https://github.com/pingcap/tidb/pull/25736)
     - Grafanaダッシュボードの`TiFlashQueryTotalCounter`にエラーラベルを追加する [＃25327](https://github.com/pingcap/tidb/pull/25327)
