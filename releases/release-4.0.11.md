@@ -17,8 +17,8 @@ TiDB バージョン: 4.0.11
 
 - TiKV
 
-    - `utf8mb4_unicode_ci`照合順序サポートする [＃9577](https://github.com/tikv/tikv/pull/9577)
-    - `cast_year_as_time`照合順序サポートする [＃9299](https://github.com/tikv/tikv/pull/9299)
+    - `utf8mb4_unicode_ci`照合順序をサポートする [＃9577](https://github.com/tikv/tikv/pull/9577)
+    - `cast_year_as_time`照合順序をサポートする [＃9299](https://github.com/tikv/tikv/pull/9299)
 
 - TiFlash
 
