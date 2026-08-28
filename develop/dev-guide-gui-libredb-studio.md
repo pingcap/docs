@@ -18,7 +18,7 @@ In this tutorial, you can learn how to connect to TiDB using LibreDB Studio.
 
 To complete this tutorial, you need:
 
-- LibreDB Studio, started with `npx @libredb/studio` or the Docker image (see the [Quick Start](https://github.com/libredb/libredb-studio#quick-start) instructions).
+- LibreDB Studio, started with `npx @libredb/studio@0.13.4` or the Docker image (see the [Quick Start](https://github.com/libredb/libredb-studio#quick-start) instructions).
 - A TiDB Self-Managed cluster.
 
 **If you don't have a TiDB cluster, you can deploy one as follows:**
