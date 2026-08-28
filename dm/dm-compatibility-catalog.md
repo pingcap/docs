@@ -53,7 +53,7 @@ DMは、さまざまなソースからTiDBクラスタへのデータ移行を�
 - `foreign_key_checks=1`の場合、外部キーのメタデータは、ソースとダウンストリーム間で一貫している必要があります。DM が不整合を検出した場合は、 `binlog-schema update --from-target`を実行してメタデータを再同期してください。
 - セーフモードで`foreign_key_checks=1`を有効にすると、`UPDATE`が主キーまたは一意キーの値を変更する場合、DM は`ON UPDATE CASCADE`を正しく複製しません。DM は、このようなステートメントを`DELETE` + `REPLACE`に書き換え、 `ON DELETE`アクションではなく`ON UPDATE`アクションをトリガーします。この場合、DM はステートメントを拒否し、タスクを一時停止します。DM はキー値を変更しない`UPDATE`ステートメントを正しく複製します。
 
-バージョン8.5.6より前のバージョンでは、DMはダウンストリームに外部キー制約を作成しますが、セッション変数[`foreign_key_checks=OFF`](/system-variables.md#foreign_key_checks)設定するため、制約を適用しません。その結果、カスケード操作はダウンストリームに複製されません。
+バージョン8.5.6より前のバージョンでは、DMはダウンストリームに外部キー制約を作成しますが、セッション変数[`foreign_key_checks=OFF`](/system-variables.md#foreign_key_checks)を設定するため、制約を適用しません。その結果、カスケード操作はダウンストリームに複製されません。
 
 ### MariaDBに関する注記 {#mariadb-notes}
 

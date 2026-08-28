@@ -285,7 +285,7 @@ TiDB v2.1.1以前のバージョンでは、文字セットがUTF-8の場合、�
 
     UTF-8チェックのみをスキップしたい場合は、`tidb_check_mb4_value_in_utf8`を設定できます。この変数はv2.1.3で`config.toml`ファイルに追加され、設定ファイルの`check-mb4-value-in-utf8`を変更してクラスターを再起動することで有効になります。
 
-    v2.1.5 以降では、HTTP API とセッション変数を通じて`tidb_check_mb4_value_in_utf8`設定できます。
+    v2.1.5 以降では、HTTP API とセッション変数を通じて`tidb_check_mb4_value_in_utf8`を設定できます。
 
     - HTTP API（HTTP APIは単一のサーバーでのみ有効化できます）
 

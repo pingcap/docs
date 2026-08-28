@@ -125,7 +125,7 @@
         - [オプティマイザのヒント](/optimizer-hints.md)
         - [SQLプラン管理](/sql-plan-management.md)
         - [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)
-        - [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
+        - [オプティマイザ修正コントロール](/optimizer-fix-controls.md)
       - [インデックスアドバイザー](/index-advisor.md)
     - [TiKV Follower Readの調整](/follower-read.md)
     - [コプロセッサーキャッシュ](/coprocessor-cache.md)
@@ -510,7 +510,7 @@
       - [概要](/mysql-schema/mysql-schema.md)
       - [`tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md)
       - [`user`](/mysql-schema/mysql-schema-user.md)
-    - 情報スキーマ
+    - INFORMATION_SCHEMA
       - [概要](/information-schema/information-schema.md)
       - [`ANALYZE_STATUS`](/information-schema/information-schema-analyze-status.md)
       - [`CHECK_CONSTRAINTS`](/information-schema/information-schema-check-constraints.md)

@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.19 Release Notes
-summary: TiDB 2.1.19は2019年12月27日にリリースされました。SQLオプティマイザー、SQL実行エンジン、サーバー、DDL、TiKV、PD、TiDB Ansibleに関する様々な修正と最適化が含まれています。主な修正としては、不正なクエリ結果の解決、メモリオーバーヘッドの削減、タイムゾーン、データ重複、panic発生に関連する問題の修正などが挙げられます。また、TiDB BinlogとTiDB Ansibleのアップグレードと最適化も含まれています。
+summary: TiDB 2.1.19は2019年12月27日にリリースされました。SQLオプティマイザ、SQL実行エンジン、サーバー、DDL、TiKV、PD、TiDB Ansibleに関する様々な修正と最適化が含まれています。主な修正としては、不正なクエリ結果の解決、メモリオーバーヘッドの削減、タイムゾーン、データ重複、panic発生に関連する問題の修正などが挙げられます。また、TiDB BinlogとTiDB Ansibleのアップグレードと最適化も含まれています。
 ---
 
 # TiDB 2.1.19 リリースノート {#tidb-2-1-19-release-notes}
@@ -13,7 +13,7 @@ TiDB Ansible バージョン: 2.1.19
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザー
+- SQLオプティマイザ
     - `select max(_tidb_rowid) from t`のシナリオを最適化して、テーブル全体のスキャンを回避する[＃13294](https://github.com/pingcap/tidb/pull/13294)
     - クエリ内のユーザー変数に割り当てられた誤った値と述語のプッシュダウンによって発生する誤った結果を修正しました[＃13230](https://github.com/pingcap/tidb/pull/13230)
     - 統計情報の更新時にデータ競合が発生し、統計情報が正確でない問題を修正しました[＃13690](https://github.com/pingcap/tidb/pull/13690)

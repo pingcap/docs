@@ -46,7 +46,7 @@ strict-format = true
 [2018/08/10 07:29:08.310 +08:00] [INFO] [main.go:41] ["got signal to exit"] [signal=hangup]
 ```
 
-コマンドラインで直接`nohup`を使用して`tidb-lightning`起動することは推奨されません。スクリプトを実行することで[`tidb-lightning`を起動する](/get-started-with-tidb-lightning.md#step-4-start-tidb-lightning)起動できます。
+コマンドラインで直接`nohup`を使用して`tidb-lightning`を起動することは推奨されません。スクリプトを実行することで[`tidb-lightning`を起動する](/get-started-with-tidb-lightning.md#step-4-start-tidb-lightning)ことができます。
 
 また、 TiDB Lightningの最後のログに「Context cancellation」というエラーが表示されている場合は、最初の「ERROR」レベルのログを探す必要があります。この「ERROR」レベルのログには通常、「got signal to exit」が続きます。これは、 TiDB Lightningが割り込み信号を受信して終了したことを示しています。
 

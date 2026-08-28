@@ -160,7 +160,7 @@ df = (
 
 詳細については、 [RRF論文](https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf)を参照してください。
 
-`method`メソッドで`"rrf"`パラメーター`.fusion()`有効にします。
+`.fusion()`メソッドで`method`パラメーターを`"rrf"`に指定することで、相互ランク融合を有効にします。
 
 ```python
 results = (
@@ -185,7 +185,7 @@ results = (
 final_score = vs_weight * vector_score + fts_weight * fulltext_score
 ```
 
-`method`メソッドで`"weighted"`パラメーター`.fusion()`有効にします。
+`.fusion()`メソッドで`method`パラメーターを`"weighted"`に指定することで、加重スコア融合を有効にします。
 
 例えば、ベクトル検索の重みを大きくするには、 `vs_weight`パラメータを 0.7 に、 `fts_weight`パラメータを 0.3 に設定します。
 

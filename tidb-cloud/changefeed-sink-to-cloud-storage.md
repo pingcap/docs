@@ -1,110 +1,133 @@
 ---
 title: Sink to Cloud Storage
-summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cloud Storage (GCS)、または Azure Blob Storage へデータをストリーミングするための変更フィードの作成方法について説明します。制限事項、宛先、レプリケーション、仕様に関する構成手順、およびレプリケーションプロセスの開始方法についても説明します。
+summary: このドキュメントでは、TiDB Cloudからクラウドストレージへデータをストリーミングするための変更フィードの作成方法について説明します。制限事項、宛先、レプリケーション、仕様に関する設定手順、およびレプリケーションプロセスの開始方法についても説明します。
 ---
 
 # クラウドストレージへのシンク {#sink-to-cloud-storage}
 
-このドキュメントでは、TiDB Cloudからクラウドストレージへデータをストリーミングするためのチェンジフィードの作成方法について説明します。現在、Amazon S3、Google Cloud Storage（GCS）、およびAzure Blob Storageがサポートされています。
+このドキュメントでは、<CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent><CustomContent plan="premium">TiDB Cloud Premium</CustomContent> からクラウドストレージにデータをストリーミングするためのチェンジフィードを作成する方法について説明します。
+
+<CustomContent plan="dedicated">
 
 > **Note:**
 >
-> - データをクラウドストレージにストリーミングするには、TiDB クラスターのバージョンが v7.1.1 以降であることを確認してください。 TiDB Cloud Dedicatedクラスターを v7.1.1 以降にアップグレードするには、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)。
-> - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは、変更フィード機能は利用できません。
-> - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンスの場合、変更フィード機能はリクエストに応じてのみ利用できます。詳細については、 [変更フィード](/tidb-cloud/essential-changefeed-overview.md)を参照してください。
+> - {{{ .dedicated }}} からクラウドストレージにデータをストリーミングするには、TiDB クラスターのバージョンが v7.1.1 以降であることを確認してください。TiDB Cloud Dedicated クラスターを v7.1.1 以降にアップグレードするには、[TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)。
+> - [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) インスタンスでは、changefeed 機能は利用できません。
+> - [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) インスタンスでは、changefeed 機能はリクエスト時のみ利用できます。詳細については、[Changefeed](/tidb-cloud/essential-changefeed-overview.md) を参照してください。
+> - [{{{ .premium }}}](/tidb-cloud/select-cluster-tier.md#premium) インスタンスについては、[Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium) を参照してください。
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+> **Note:**
+>
+> - [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) インスタンスでは、changefeed 機能は利用できません。
+> - [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) インスタンスでは、changefeed 機能はリクエストに応じてのみ利用できます。詳細については、[Changefeed](/tidb-cloud/essential-changefeed-overview.md) を参照してください。
+> - [{{{ .dedicated }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) クラスターについては、[Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/) を参照してください。
+
+</CustomContent>
 
 ## 制限 {#restrictions}
 
-- TiDB Cloud Dedicatedクラスターごとに、最大 100 個のチェンジフィードを作成できます。
-- TiDB Cloud はTiCDC を使用して変更フィードを確立するため、同じ[TiCDCの制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)があります。
-- 複製対象のテーブルに主キーまたはNULLを許容しない一意インデックスがない場合、複製中に一意制約が存在しないことで、一部の再試行シナリオにおいて、下流で重複データが挿入される可能性があります。
+- 各<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>では、最大 100 個のチェンジフィードを作成できます。
+- TiDB Cloud は TiCDC を使用してチェンジフィードを確立するため、[TiCDC と同じ制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)があります。
+- 複製対象のテーブルに主キーまたは NULL を許容しない一意インデックスがない場合、複製中に一意制約が存在しないことで、一部の再試行シナリオにおいて、下流で重複データが挿入される可能性があります。
 
 ## ステップ1. 宛先を設定する {#step-1-configure-destination}
 
-対象のTiDB Cloud Dedicatedクラスターの概要ページに移動します。左側のナビゲーションペインで**[データ]** &gt; **[変更フィード]**をクリックし、 **Create Changefeed**をクリックして**[宛先]**ページに移動します。次に、 TiDB Cloud Dedicatedクラスターがホストされているクラウドプロバイダーに応じて、宛先として**Amazon S3** 、 **GCS** 、または**Azure Blob Storage**を選択します。構成プロセスは、選択した宛先によって異なります。
+<CustomContent plan="dedicated">
+
+対象のTiDB Cloud Dedicatedクラスターの概要ページに移動します。左側のナビゲーションペインで**Data** > **Changefeed**をクリックし、**Create Changefeed**をクリックして**Destination**ページに移動します。次に、TiDB Cloud Dedicatedクラスターがホストされているクラウドプロバイダーに応じて、宛先として**Amazon S3**、**GCS**、または**Azure Blob Storage**を選択します。設定プロセスは、選択した宛先によって異なります。
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+対象のTiDB Cloud Premiumインスタンスの概要ページに移動します。左側のナビゲーションペインで**Data** > **Changefeed**をクリックし、**Create Changefeed**をクリックして**Destination**ページに移動します。次に、TiDB Cloud Premiumインスタンスがホストされているクラウドプロバイダーに応じて、宛先として**Amazon S3**または**Alibaba Cloud OSS**を選択します。設定プロセスは、選択した宛先によって異なります。
+
+</CustomContent>
 
 <SimpleTab>
 <div label="Amazon S3">
 
-**Amazon S3**の認証には、 **AWS Role ARN**または**AWS access key**のいずれかを使用できます。セキュリティの強化と管理の容易化のため、 **AWS Role ARN**の使用をお勧めします。
+**Amazon S3**の認証には、**AWS Role ARN**または**AWS access key**のいずれかを使用できます。セキュリティの強化と管理の容易さのため、**AWS Role ARN**の使用をお勧めします。
 
-**オプション1：AWSロールARN（推奨）**
+**オプション1: AWS Role ARN（推奨）**
 
 認証にIAMロールを使用するには、以下の手順に従ってください。
 
-1. Amazon S3 の**宛先**ページで、 **S3 URI**を入力します。S3 バケットが TiDB クラスターと同じ AWS リージョンにあることを確認してください。
+1. Amazon S3 の**Destination**ページで、**S3 URI**を入力します。S3 バケットが <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent> と同じ AWS リージョンにあることを確認してください。
+2. **Bucket Access**で、**AWS Role ARN**を選択します。
+3. 新しい Role ARN を作成するには、**Click here to create new one with AWS CloudFormation**をクリックします。このテンプレートは必要な権限を自動的に設定します。
 
-2. **Bucket Access**で、 **AWS Role ARN**を選択します。
+    手動でロールを作成する場合は、**Create Role ARN manually**をクリックして、TiDB Cloudアカウント情報と必要なポリシーを確認してください。
 
-3. 新しいロールARNを作成するには、**こちらをクリックしてAWS CloudFormationで新しいロールARNを作成してください**。このテンプレートは必要な権限を自動的に構成します。
-
-    ロールを手動で作成する場合は、 **Create Role ARN manually**をクリックして、 TiDB Cloudアカウント情報と必要なポリシーを確認してください。
-
-4. IAMロールに、対象バケットに対する少なくとも以下の権限が付与されていることを確認してください。
+4. IAMロールに、対象バケットに対して少なくとも以下の権限があることを確認してください。
 
     - `s3:ListBucket`
     - `s3:PutObject`
     - `s3:GetObject`
     - `s3:DeleteObject`
 
-5. 生成された**Role ARN**対応するフィールドに貼り付けてください。
+5. 生成された**Role ARN**を対応するフィールドに貼り付けます。
 
-**オプション2：AWSアクセスキー**
+**オプション2: AWS access key**
 
 > **Note:**
 >
-> アクセスキーとシークレットキー（AK/SK）を使用する場合、認証情報の管理とローテーションを手動で行う必要があり、セキュリティリスクが高まります。より強力なセキュリティを確保するには、代わりに**AWS Role ARN**を使用することをお勧めします。
+> access key と secret key（AK/SK）を使用する場合、認証情報の管理とローテーションを手動で行う必要があり、セキュリティリスクが高まります。より強力なセキュリティを確保するには、代わりに**AWS Role ARN**を使用することをお勧めします。
 
-アクセスキーを使用して認証を行うには、以下の手順に従ってください。
+access key を使用して認証するには、以下の手順に従ってください。
 
-1. Amazon S3 の**宛先**ページで、 **S3 URI**を入力します。S3 バケットが TiDB クラスターと同じ AWS リージョンにあることを確認してください。
-2. **Bucket Access**で**AWS Access Key**を選択します。
-3. 以下の項目を入力してください。
+1. Amazon S3 の**Destination**ページで、**S3 URI**を入力します。S3 バケットが <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent> と同じ AWS リージョンにあることを確認してください。
+2. **Bucket Access**で、**AWS Access Key**を選択します。
+3. 以下のフィールドに入力します。
 
     - **Access Key ID**
     - **Secret Access Key**
 
 </div>
+
+<CustomContent plan="dedicated">
+
 <div label="GCS">
 
-**GCS**の場合、 **GCS Endpoint**を入力する前に、まずGCSバケットへのアクセス権を付与する必要があります。以下の手順に従ってください。
+**GCS**の場合、**GCS Endpoint**を入力する前に、まず GCS バケットへのアクセス権を付与する必要があります。以下の手順に従ってください。
 
-1. TiDB Cloudコンソールで、**Service Account ID**を記録してください。このIDは、 TiDB CloudにGCSバケットへのアクセス権を付与するために使用されます。
+1. TiDB Cloudコンソールで、**Service Account ID**を記録します。これは、TiDB Cloudに GCS バケットへのアクセス権を付与するために使用されます。
 
-    ![gcs\_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-endpoint.png)
+    ![gcs_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-endpoint.png)
 
-2. Google Cloud コンソールで、GCS バケット用のIAMロールを作成します。
+2. Google Cloud コンソールで、GCS バケット用の IAM ロールを作成します。
 
-    1. [Google Cloud Console](https://console.cloud.google.com/)にサインインしてください。
-
-    2. [役割](https://console.cloud.google.com/iam-admin/roles)ページに移動して、 **Create role**をクリックします。
+    1. [Google Cloud console](https://console.cloud.google.com/)にサインインします。
+    2. [Roles](https://console.cloud.google.com/iam-admin/roles)ページに移動し、**Create role**をクリックします。
 
         ![Create a role](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-create-role.png)
 
-    3. 役割の名前、説明、ID、および役割の起動ステージを入力してください。役割名は、作成後に変更することはできません。
-
-    4. **Add permissions**をクリックします。役割に以下の権限を追加し、 **Add**をクリックします。
+    3. ロールの名前、説明、ID、およびロールの起動ステージを入力します。ロール名は、ロール作成後に変更できません。
+    4. **Add permissions**をクリックします。ロールに以下の権限を追加し、**Add**をクリックします。
 
         - storage.buckets.get
-        - storage.オブジェクト.作成
-        - storage.オブジェクト.削除
-        - storage.get
-        - storage.オブジェクトリスト
-        - storage.オブジェクト.更新
+        - storage.objects.create
+        - storage.objects.delete
+        - storage.objects.get
+        - storage.objects.list
+        - storage.objects.update
 
     ![Add permissions](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-assign-permission.png)
 
-3. [バケツ](https://console.cloud.google.com/storage/browser)ページに移動し、 TiDB CloudがアクセスするGCSバケットを選択してください。GCSバケットは、TiDBクラスタと同じリージョンにある必要があります。
+3. [Bucket](https://console.cloud.google.com/storage/browser)ページに移動し、TiDB Cloud にアクセスさせる GCS バケットを選択します。GCS バケットは、TiDB クラスターと同じリージョンにある必要があります。
 
-4. **Bucket details**ページで、 **[権限]**タブをクリックし、 **Grant access**をクリックします。
+4. **Bucket details**ページで、**Permissions**タブをクリックし、**Grant access**をクリックします。
 
     ![Grant Access to the bucket ](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-grant-access-1.png)
 
-5. バケットへのアクセスを許可するには、以下の情報を入力し、 **Save**をクリックしてください。
+5. バケットへのアクセス権を付与するため、以下の情報を入力し、**Save**をクリックします。
 
-    - **New Principals**フィールドに、以前に記録した対象のTiDBクラスタの**Service Account ID**を貼り付けます。
-
-    - **Select a role**ドロップダウンリストに、先ほど作成したIAMロールの名前を入力し、フィルター結果からその名前を選択します。
+    - **New Principals**フィールドに、先ほど記録した対象 TiDB クラスターの**Service Account ID**を貼り付けます。
+    - **Select a role**ドロップダウンリストに、先ほど作成した IAM ロールの名前を入力し、フィルター結果からその名前を選択します。
 
     > **Note:**
     >
@@ -112,67 +135,121 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
 6. **Bucket details**ページで、**Objects**タブをクリックします。
 
-    - バケットの gsutil URI を取得するには、[コピー] ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs`の場合、URI は`gs://test-sink-gcs/`になります。
+    - バケットの gsutil URI を取得するには、コピー ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs`の場合、URI は`gs://test-sink-gcs/`になります。
 
         ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri01.png)
 
-    - フォルダの gsutil URI を取得するには、フォルダを開き、[コピー] ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs`で、フォルダ名が`changefeed-xxx`の場合、URI は`gs://test-sink-gcs/changefeed-xxx/`になります。
+    - フォルダの gsutil URI を取得するには、フォルダを開き、コピー ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs`で、フォルダ名が`changefeed-xxx`の場合、URI は`gs://test-sink-gcs/changefeed-xxx/`になります。
 
         ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
 
-7. TiDB Cloudコンソールで、Changefeedの**宛先**ページに移動し、**bucket gsutil URI**フィールドに入力します。
+7. TiDB Cloudコンソールで、Changefeed の**Destination**ページに移動し、**bucket gsutil URI**フィールドに入力します。
 
 </div>
+
+</CustomContent>
+
+<CustomContent plan="dedicated">
+
 <div label="Azure Blob Storage">
 
-**Azure Blob Storage**の場合、まず Azure ポータルでコンテナーを構成し、SAS トークンを取得する必要があります。以下の手順に従ってください。
+**Azure Blob Storage**の場合、まず Azure portal でコンテナーを設定し、SAS トークンを取得する必要があります。以下の手順に従ってください。
 
-1. [Azureポータル](https://portal.azure.com/)で、変更フィード データを保存するコンテナーを作成します。
+1. [Azure portal](https://portal.azure.com/)で、changefeed データを保存するコンテナーを作成します。
 
     1. 左側のナビゲーションペインで**Storage Accounts**をクリックし、ストレージアカウントを選択します。
-    2. ストレージアカウントのナビゲーションメニューで、 **Data storage** &gt; **[コンテナー]**を選択し、 **+ Container**をクリックします。
-    3. 新しいコンテナの名前を入力し、匿名アクセスレベルを設定します（推奨レベルは**プライベート**です）。次に、 **[作成]**をクリックします。
+    2. ストレージアカウントのナビゲーションメニューで、**Data storage** > **Containers**を選択し、**+ Container**をクリックします。
+    3. 新しいコンテナーの名前を入力し、匿名アクセスレベルを設定します（推奨レベルは**Private**です）。その後、**Create**をクリックします。
 
-2. 対象コンテナのURLを取得します。
+2. 対象コンテナーの URL を取得します。
 
-    1. コンテナ一覧から、対象のコンテナを選択してください。
-    2. コンテナの**…**をクリックし、次に**Container properties**を選択します。
-    3. **URL**値を後で使用するために保存します。たとえば`https://<storage_account>.blob.core.windows.net/<container>`のように保存します。
+    1. コンテナー一覧で、対象のコンテナーを選択します。
+    2. コンテナーの**...**をクリックし、**Container properties**を選択します。
+    3. **URL**の値を後で使用するために保存します。たとえば `https://<storage_account>.blob.core.windows.net/<container>` です。
 
-3. SASトークンを生成します。
+3. SAS トークンを生成します。
 
-    1. ストレージアカウントのナビゲーション メニューで、 **Security + networking** &gt; **Shared access signature**を選択します。
-
-    2. **Allowed services**セクションで、 **Blob**を選択します。
-
-    3. **Allowed resource types**セクションで、 **Container**と**Object**を選択します。
-
-    4. **Allowed permissions**セクションで、 **Read** 、 **Write** 、 **Delete** 、 **List** 、 **Create**を選択します。
-
-    5. SASトークンの有効期間を、ニーズを満たすのに十分な長さに指定してください。
+    1. ストレージアカウントのナビゲーションメニューで、**Security + networking** > **Shared access signature**を選択します。
+    2. **Allowed services**セクションで、**Blob**を選択します。
+    3. **Allowed resource types**セクションで、**Container**と**Object**を選択します。
+    4. **Allowed permissions**セクションで、**Read**、**Write**、**Delete**、**List**、**Create**を選択します。
+    5. SAS トークンの有効期間を、要件を満たすのに十分な長さで指定します。
 
         > **Note:**
         >
-        > - 変更フィードは継続的にイベントを書き込むため、SASトークンの有効期間が十分に長いことを確認してください。セキュリティ上の理由から、トークンは6～12ヶ月ごとに交換することをお勧めします。
-        > - 生成されたSASトークンは取り消すことができないため、有効期間を慎重に設定してください。
-        > - 継続的な可用性を確保するため、SASトークンの有効期限が切れる前に再生成および更新してください。
+        > - changefeed は継続的にイベントを書き込むため、SAS トークンの有効期間が十分に長いことを確認してください。セキュリティのため、トークンは6〜12か月ごとに置き換えることをお勧めします。
+        > - 生成された SAS トークンは取り消せないため、有効期間は慎重に設定してください。
+        > - 継続的な可用性を確保するため、SAS トークンの有効期限が切れる前に再生成して更新してください。
 
-    6. **Generate SAS and connection string**をクリックし、 **SAS token**を保存します。
+    6. **Generate SAS and connection string**をクリックし、**SAS token**を保存します。
 
         ![Generate a SAS token](/media/tidb-cloud/changefeed/sink-to-cloud-storage-azure-signature.png)
 
-4. [TiDB Cloudコンソール](https://tidbcloud.com/)で、Changefeed の**宛先**ページに移動し、次のフィールドに入力します。
+4. [TiDB Cloud console](https://tidbcloud.com/)で、Changefeed の**Destination**ページに移動し、以下のフィールドに入力します。
 
-    - **Blob URL** ：手順2で取得したコンテナURLを入力してください。必要に応じてプレフィックスを追加できます。
-    - **SAS Token**：ステップ3で取得した生成済みのSASトークンを入力してください。
+    - **Blob URL**: 手順 2 で取得したコンテナー URL を入力します。必要に応じてプレフィックスを追加できます。
+    - **SAS Token**: 手順 3 で取得した生成済みの SAS トークンを入力します。
 
 </div>
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+<div label="Alibaba Cloud OSS">
+
+**Alibaba Cloud OSS**の場合、以下の手順に従って changefeed を設定します。
+
+1. [Alibaba Cloud console](https://www.alibabacloud.com/)で、以下の事前準備を行います。
+
+    1. TiDB Cloud Premiumインスタンスと同じリージョンに OSS バケットを作成します。詳細な手順については、[Create a bucket](https://www.alibabacloud.com/help/en/oss/user-guide/create-a-bucket-4)を参照してください。
+    2. changefeed 用の RAM ユーザーを作成し、AccessKey ペアを生成します。詳細な手順については、[Create an AccessKey pair](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)を参照してください。
+    3. カスタム RAM ポリシーを作成して RAM ユーザーにアタッチし、changefeed に必要な最小限の権限のみを付与します。詳細については、[Control access to OSS resources with RAM policies](https://www.alibabacloud.com/help/en/oss/user-guide/ram-policy)を参照してください。
+
+        - `oss:ListObjects`
+        - `oss:GetObject`
+        - `oss:PutObject`
+        - `oss:DeleteObject`
+
+    以下の JSON 例は、必要な権限を持つポリシーを示しています。`<Your bucket name>`を OSS バケット名に置き換えてください。
+
+    ```json
+    {
+      "Version": "1",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "oss:ListObjects",
+            "oss:GetObject",
+            "oss:PutObject",
+            "oss:DeleteObject"
+          ],
+          "Resource": [
+            "acs:oss:*:*:<Your bucket name>",
+            "acs:oss:*:*:<Your bucket name>/*"
+          ]
+        }
+      ]
+    }
+    ```
+
+2. Alibaba Cloud OSS の**Destination**ページで、以下のフィールドに入力します。
+
+    - **Bucket URI**: `oss://<Your bucket name>/<prefix>/` 形式で OSS URI を入力します。
+    - **Access Key ID**: RAM ユーザーの AccessKey ID を入力します。
+    - **Access Key Secret**: RAM ユーザーの AccessKey Secret を入力します。
+
+</div>
+
+</CustomContent>
+
 </SimpleTab>
 
-**Next**をクリックして、 TiDB Cloud DedicatedクラスターからAmazon S3、GCS、またはAzure Blob Storageへの接続を確立します。TiDB Cloudは接続が成功したかどうかを自動的にテストおよび検証します。
+**Next**をクリックして、<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent> からクラウドストレージへの接続を確立します。TiDB Cloudは、接続が成功したかどうかを自動的にテストして検証します。
 
-- はいの場合、次の設定手順に進みます。
-- そうでない場合は、接続エラーが表示されますので、エラーを処理してください。エラーが解決したら、 **Next**をクリックして接続を再試行してください。
+- 成功した場合は、次の設定ステップに進みます。
+- 失敗した場合は、接続エラーが表示されるため、エラーに対処する必要があります。エラーを解消したら、**Next**をクリックして接続を再試行してください。
 
 ## ステップ2. レプリケーションの設定 {#step-2-configure-replication}
 

@@ -182,7 +182,7 @@ ALTER TABLE t AUTO_RANDOM_BASE=0;
 
 > **Note:**
 >
-> `FORCE`キーワードを使用して`AUTO_RANDOM_BASE`から`0`設定することはできません。これを試みるとエラーが発生します。
+> `FORCE`キーワードを使用して`AUTO_RANDOM_BASE`を`0`に設定することはできません。これを試みるとエラーが発生します。
 
 ### オプション2: 特定の基本値を手動で設定する {#option-2-manually-set-a-specific-base-value}
 

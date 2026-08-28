@@ -450,7 +450,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     - `region-concurrency`設定値が高すぎるため、スレッド競合が発生し、パフォーマンスが低下します。トラブルシューティング方法は次の3つです。
 
-        - 設定は、ログの先頭から`region-concurrency`検索することで見つけることができます。
+        - 設定は、ログの先頭から`region-concurrency`を検索することで見つけることができます。
         - TiDB Lightning が他のサービス (たとえば Importer) とサーバーを共有している場合は、 `region-concurrency`そのサーバーの CPU コアの総数の 75% に手動で設定する必要があります。
         - CPU にクォータが設定されている場合 (例えば、Kubernetes の設定によって制限されている場合)、 TiDB Lightning はこの値を読み取れない可能性があります。この場合、 `region-concurrency`も手動で減らす必要があります。
 

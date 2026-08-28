@@ -11,7 +11,7 @@ summary: TiCDC を使用する際に遭遇する可能性のある FAQ につい
 >
 > このドキュメントでは、 `cdc cli`コマンドで指定されているサーバーアドレスは`--server=http://127.0.0.1:8300`です。コマンドを使用する際は、このアドレスを実際の PD アドレスに置き換えてください。
 
-## TiCDC でタスクを作成するときに`start-ts`選択するにはどうすればよいですか? {#how-do-i-choose-start-ts-when-creating-a-task-in-ticdc}
+## TiCDC でタスクを作成するときに`start-ts`を選択するにはどうすればよいですか? {#how-do-i-choose-start-ts-when-creating-a-task-in-ticdc}
 
 レプリケーションタスクの`start-ts`は、上流TiDBクラスタ内のタイムスタンプOracle（TSO）に対応します。TiCDCは、レプリケーションタスクでこのTSOにデータを要求します。したがって、レプリケーションタスクの`start-ts` 、以下の要件を満たす必要があります。
 
@@ -164,7 +164,7 @@ v4.0.0-rc.1以降、PDはサービスレベルのGCセーフポイントの設�
 
 この機能により、レプリケーションタスクが利用できないか中断された場合でも、TiCDC によって消費されるデータは GC によって消去されることなく TiKV に保持されます。
 
-TiCDCサーバーの起動時に、GCセーフポイントのTime To Live（TTL）期間を`gc-ttl`設定することで指定できます。また、 [TiUPを使用して変更する](/ticdc/deploy-ticdc.md#modify-ticdc-cluster-configurations-using-tiup) `gc-ttl`を設定することもできます。デフォルト値は24時間です。TiCDCでは、この値は以下の意味を持ちます。
+TiCDCサーバーの起動時に、GCセーフポイントのTime To Live（TTL）期間を`gc-ttl`を設定することで指定できます。また、 [TiUPを使用して変更する](/ticdc/deploy-ticdc.md#modify-ticdc-cluster-configurations-using-tiup) `gc-ttl`を設定することもできます。デフォルト値は24時間です。TiCDCでは、この値は以下の意味を持ちます。
 
 - TiCDC サービスが停止した後、GC セーフポイントが PD に保持される最大時間。
 - TiKVのGCがTiCDCのGCセーフポイントによってブロックされている場合、 `gc-ttl` TiCDCレプリケーションタスクの最大レプリケ​​ーション遅延を示します。レプリケーションタスクの遅延が`gc-ttl`で設定された値を超えると、レプリケーションタスクは`failed`状態になり、 `ErrGCTTLExceeded`エラーを報告します。この状態は回復できず、GCセーフポイントの進行をブロックしなくなります。
@@ -198,7 +198,7 @@ TiCDC がサービス GC セーフポイントに設定するデフォルトの 
 
 > **Note:**
 >
-> `sink-uri`の`time-zone`パラメータは、 `mysql`と`tidb`シンクにのみ適用されます。Kafka、Pulsar、Cloud Storage など、下流のデータベースセッションのタイムゾーンが関係しないシンクの場合、 `time-zone`設定する必要はありません。このようなシナリオでは、上流のデータベースのタイムゾーンと TiCDC サーバーの`--tz`パラメータ設定が一致していることを確認するだけで済みます。
+> `sink-uri`の`time-zone`パラメータは、 `mysql`と`tidb`シンクにのみ適用されます。Kafka、Pulsar、Cloud Storage など、下流のデータベースセッションのタイムゾーンが関係しないシンクの場合、 `time-zone`を設定する必要はありません。このようなシナリオでは、上流のデータベースのタイムゾーンと TiCDC サーバーの`--tz`パラメータ設定が一致していることを確認するだけで済みます。
 
 > **Note:**
 >
@@ -528,6 +528,6 @@ TiCDCはSaramaクライアントを使用してKafkaにデータを複製しま�
     connections.max.idle.ms=86400000  # Set to 1 day
     ```
 
-    実際のレプリケーションワークロードに応じて、 `connections.max.idle.ms`の値を調整することをお勧めします。例えば、TiCDCの変更フィードが常に数分以内にデータをレプリケートする場合は、非常に大きな値ではなく、数分程度の`connections.max.idle.ms`設定できます。
+    実際のレプリケーションワークロードに応じて、 `connections.max.idle.ms`の値を調整することをお勧めします。例えば、TiCDCの変更フィードが常に数分以内にデータをレプリケートする場合は、非常に大きな値ではなく、数分程度の`connections.max.idle.ms`を設定できます。
 
 2. 設定変更を適用するには、Kafka を再起動してください。これにより、接続が途中で閉じられるのを防ぎ、 `broken pipe`を減らすことができます。

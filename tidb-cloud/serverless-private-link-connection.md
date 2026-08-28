@@ -37,9 +37,9 @@ AWS エンドポイントサービスが次の条件を満たしていること�
 
 - TiDB Cloudクラスターと同じリージョンに存在します。
 - TiDB Cloudアカウント ID を**Allow principals**リストに追加します。
-- TiDB Cloudクラスターと重複する可用性ゾーンがあります。
+- TiDB Cloudクラスターと重複するアベイラビリティゾーンがあります。
 
-アカウント ID と可用性ゾーンの情報は、**Create Private Endpoint for External Services**ダイアログの下部で取得するか、次のコマンドを実行して取得できます。
+アカウント ID とアベイラビリティゾーンの情報は、**Create Private Endpoint for External Services**ダイアログの下部で取得するか、次のコマンドを実行して取得できます。
 
 ```shell
 ticloud serverless private-link-connection zones --cluster-id <cluster-id>
@@ -127,9 +127,9 @@ Alibaba Cloud エンドポイントサービスが次の条件を満たしてい
 
 - TiDB Cloudクラスターと同じリージョンに存在します。
 - TiDB Cloudアカウント ID を**Service Whitelist**に追加します。
-- TiDB Cloudクラスターと重複する可用性ゾーンがあります。
+- TiDB Cloudクラスターと重複するアベイラビリティゾーンがあります。
 
-アカウント ID と可用性ゾーンの情報は、**Create Private Endpoint for External Services**ダイアログの下部で取得するか、次のコマンドを実行して取得できます。
+アカウント ID とアベイラビリティゾーンの情報は、**Create Private Endpoint for External Services**ダイアログの下部で取得するか、次のコマンドを実行して取得できます。
 
 ```shell
 ticloud serverless private-link-connection zones --cluster-id <cluster-id>

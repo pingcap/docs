@@ -60,7 +60,7 @@ PingCAP Clinicを使用する前に、Diag をインストールし、データ�
 
 5. Diag にトークンと`region`を設定します。
 
-    - `clinic.token`設定するには、次のコマンドを実行します。
+    - `clinic.token`を設定するには、次のコマンドを実行します。
 
         ```bash
         tiup diag config clinic.token ${token-value}

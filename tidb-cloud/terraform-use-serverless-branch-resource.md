@@ -5,7 +5,7 @@ summary: サーバーレス ブランチ リソースを使用して、 TiDB Clo
 
 # `tidbcloud_serverless_branch`リソースを使用する {#use-the-tidbcloud-serverless-branch-resource}
 
-このドキュメントでは、 `tidbcloud_serverless_branch`リソースを使用して[TiDB Cloud Starter またはTiDB Cloud Essential ブランチ](/tidb-cloud/branch-manage.md)管理する方法について説明します。
+このドキュメントでは、 `tidbcloud_serverless_branch`リソースを使用して[TiDB Cloud Starter またはTiDB Cloud Essential ブランチ](/tidb-cloud/branch-manage.md)を管理する方法について説明します。
 
 `tidbcloud_serverless_branch`リソースの機能は次のとおりです。
 

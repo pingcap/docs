@@ -259,7 +259,7 @@ br restore full -f '*.*' -f '!mysql.*' -f 'mysql.usertable' -s $external_storage
 
 - `-f '*.*'`はデフォルトのルールを上書きするために使用されます
 - `-f '!mysql.*'`特に指定がない限り、 `mysql`テーブルを復元しないようにBRに指示します。
-- `-f 'mysql.usertable'` `mysql.usertable`復元する必要があることを示します。
+- `-f 'mysql.usertable'` `mysql.usertable`を復元する必要があることを示します。
 
 `mysql.usertable`を復元する必要がある場合は、次のコマンドを実行します。
 

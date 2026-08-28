@@ -44,4 +44,4 @@ TiCDCクラスターとそのレプリケーションタスクは、コマンド
 
 HTTPインターフェース（TiCDC OpenAPI機能）を使用して、TiCDCクラスターとそのレプリケーションタスクを管理することもできます。詳細については、 [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)を参照してください。
 
-TiCDC がTiUPを使用してデプロイされている場合は、 `tiup cdc:v<CLUSTER_VERSION> cli`コマンドを実行することで`cdc cli`起動できます。 `v<CLUSTER_VERSION>` TiCDC クラスターのバージョン（例： `v8.5.3` ）に置き換えてください。 `cdc cli`直接実行することもできます。
+TiCDC がTiUPを使用してデプロイされている場合は、 `tiup cdc:v<CLUSTER_VERSION> cli`コマンドを実行することで`cdc cli`を起動できます。 `v<CLUSTER_VERSION>`を TiCDC クラスターのバージョン（例： `v8.5.3` ）に置き換えてください。 `cdc cli`を直接実行することもできます。

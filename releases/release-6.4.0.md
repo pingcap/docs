@@ -99,7 +99,7 @@ TiDBバージョン: 6.4.0-DMR
 
     詳細については、 [ユーザー向けドキュメント](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640)を参照してください。
 
-- 相関サブクエリの非相関化を実行するかどうかを制御する新しいオプティマイザーヒント`NO_DECORRELATE`を導入します [#37789](https://github.com/pingcap/tidb/issues/37789) @[time-and-fate](https://github.com/time-and-fate)
+- 相関サブクエリの非相関化を実行するかどうかを制御する新しいオプティマイザヒント`NO_DECORRELATE`を導入します [#37789](https://github.com/pingcap/tidb/issues/37789) @[time-and-fate](https://github.com/time-and-fate)
 
     TiDB はデフォルトでは、相関のあるサブクエリを書き換えて相関解除を実行しようとします。これにより、通常は実行効率が向上します。しかし、シナリオによっては相関解除によって実行効率が低下する場合があります。v6.4.0 では、オプティマイザヒント`NO_DECORRELATE`が導入され、特定のクエリブロックに対して相関解除を実行しないようにオプティマイザに指示することで、シナリオによってはクエリのパフォーマンスが向上します。
 
