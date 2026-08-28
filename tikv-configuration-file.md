@@ -115,7 +115,7 @@ TiKV の設定ファイルは、コマンドラインパラメータよりも多
 
 ### `advertise-addr` {#advertise-addr}
 
-- クライアント通信のためのリスニングアドレスを宣伝する
+- クライアント通信のためのリスニングアドレスをアドバタイズする
 - この設定項目が設定されていない場合、 `addr`の値が使用されます。
 - デフォルト値: `""`
 
@@ -2342,7 +2342,7 @@ TiDB LightningのインポートおよびBR復元に関連するコンフィグ�
 - `enable-compaction-filter`が`false`の場合の GC スレッドの数。
 - デフォルト値: `1`
 
-## gc.自動圧縮 {#gcauto-compaction}
+## gc.auto-compaction {#gcauto-compaction}
 
 TiKVの自動圧縮の動作を設定します。
 

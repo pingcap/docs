@@ -187,7 +187,7 @@ TiDBは外部キー制約チェックをサポートしており、これはシ�
 
 デフォルトでは、悲観的トランザクションでは、親テーブルの行に対する外部キーチェックのロック動作は、対応する行に対して`SELECT ... FOR UPDATE`を使用してロック読み取りを実行すること（つまり、排他ロックを取得すること）と同等です。子テーブルに対する高同時実行書き込みシナリオで、多数のトランザクションが同じ親テーブルの行を繰り返し参照する場合、深刻なロック競合が発生する可能性があります。
 
-システム変数[`tidb_foreign_key_check_in_shared_lock`](/system-variables.md#tidb_foreign_key_check_in_shared_lock-new-in-v856)有効にすると、外部キーチェックで共有ロックを使用できるようになります。共有ロックを使用すると、複数のトランザクションが同じ親テーブルの行に対して同時に外部キーチェックを実行できるため、ロックの競合が軽減され、子テーブルへの同時書き込みのパフォーマンスが向上します。
+システム変数[`tidb_foreign_key_check_in_shared_lock`](/system-variables.md#tidb_foreign_key_check_in_shared_lock-new-in-v856)を有効にすると、外部キーチェックで共有ロックを使用できるようになります。共有ロックを使用すると、複数のトランザクションが同じ親テーブルの行に対して同時に外部キーチェックを実行できるため、ロックの競合が軽減され、子テーブルへの同時書き込みのパフォーマンスが向上します。
 
 ## 外部キーの定義とメタデータ {#definition-and-metadata-of-foreign-keys}
 
@@ -313,7 +313,7 @@ Create Table | CREATE TABLE `child` (
 
 - [DM](/dm/dm-overview.md) : v8.5.6以降、DMは実験的機能として外部キー制約を使用するテーブルのレプリケーションをサポートしています。サポートされているシナリオと制限事項については、 [DM互換性カタログ](/dm/dm-compatibility-catalog.md#foreign-key-cascade-operations)を参照してください。 v8.5.6より前のバージョンでは、DMはTiDBへのデータレプリケーション時に[`foreign_key_checks`](/system-variables.md#foreign_key_checks)システム変数を無効にするため、カスケード操作はダウンストリームクラスタにレプリケートされません。
 - [TiCDC](/ticdc/ticdc-overview.md) v6.6.0 は外部キーに対応しています。以前のバージョンの TiCDC では、外部キーを持つテーブルをレプリケートする際にエラーが発生する場合があります。TiCDC バージョン 6.6.0 より前のバージョンを使用する場合は、ダウンストリーム TiDB クラスタの`foreign_key_checks`を無効にすることをお勧めします。
-- [BR](/br/backup-and-restore-overview.md) v6.6.0 は外部キーに対応しています。以前のバージョンのBRでは、外部キーを持つテーブルを v6.6.0 以降のクラスタに復元する際にエラーが発生する場合があります。v6.6.0 より前のバージョンのBRを使用する場合は、クラスタを復元する前に、ダウンストリーム TiDB クラスタの`foreign_key_checks`無効にすることをお勧めします。
+- [BR](/br/backup-and-restore-overview.md) v6.6.0 は外部キーに対応しています。以前のバージョンのBRでは、外部キーを持つテーブルを v6.6.0 以降のクラスタに復元する際にエラーが発生する場合があります。v6.6.0 より前のバージョンのBRを使用する場合は、クラスタを復元する前に、ダウンストリーム TiDB クラスタの`foreign_key_checks`を無効にすることをお勧めします。
 - [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用する場合、対象テーブルで外部キーが使用されている場合は、データのインポート前にダウンストリーム TiDB クラスタの`foreign_key_checks`を無効にすることをお勧めします。v6.6.0 より前のバージョンでは、このシステム変数を無効にしても効果がなく、ダウンストリームデータベースユーザーに`REFERENCES`権限を付与するか、ダウンストリームデータベースに対象テーブルを事前に手動で作成して、スムーズなデータインポートを確保する必要があります。
 
 </CustomContent>

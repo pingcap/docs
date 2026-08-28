@@ -261,7 +261,7 @@ TTL パフォーマンスに関する調査結果は次のとおりです。
 - この操作はメタデータ レベルで実行されるため、最小限のリソースしか使用されません。
 - `DROP PARTITION` 、特に大規模な履歴データセットの場合、TTL よりも高速で予測可能です。
 
-#### TiDBでTTLと`DROP PARTITION`使用する {#use-ttl-and-drop-partition-in-tidb}
+#### TiDBでTTLと`DROP PARTITION`を使用する {#use-ttl-and-drop-partition-in-tidb}
 
 以下の例では匿名化されたテーブル構造を使用しています。TTLの詳細については、 [TTL（Time to Live）を使用して定期的にデータを削除する](/time-to-live.md)を参照してください。
 

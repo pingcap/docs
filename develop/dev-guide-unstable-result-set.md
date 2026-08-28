@@ -112,7 +112,7 @@ mysql> select a.class, a.stuname, max(b.courscore) from stu_info a join stu_scor
 ERROR 1055 (42000): Expression #2 of ORDER BY is not in GROUP BY clause and contains nonaggregated column '' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
 ```
 
-**実行結果**: 上記の例は、 `sql_mode`に`ONLY_FULL_GROUP_BY`設定した場合の効果を示しています。
+**実行結果**: 上記の例は、 `sql_mode`に`ONLY_FULL_GROUP_BY`を設定した場合の効果を示しています。
 
 ## 注文方法 {#order-by}
 

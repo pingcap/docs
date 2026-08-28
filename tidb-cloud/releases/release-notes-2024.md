@@ -290,9 +290,9 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     この機能を使用すると、TiDB Cloud Dedicatedクラスター間でデータベースを複製できるため、地域的な災害が発生した場合でも迅速なリカバリが可能になります。 `Project Owner`ロールをお持ちの場合は、新しいリカバリグループを作成し、データベースをそのグループに割り当てることで、この機能を有効にできます。リカバリグループを使用してデータベースを複製することで、災害対策を強化し、より厳格な可用性 SLA を満たし、より積極的な復旧ポイント目標 (RPO) および復旧時間目標 (RTO) を達成できます。
 
-- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)カラム型ストレージ[TiFlash](/tiflash/tiflash-overview.md)向けに、課金および計測機能 (ベータ版) を導入します。
+- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)列指向ストレージ[TiFlash](/tiflash/tiflash-overview.md)向けに、課金および計測機能 (ベータ版) を導入します。
 
-    2024年6月30日まで、 TiDB Cloud Serverlessクラスターのカラム型ストレージは100%割引で無料です。この日以降は、各TiDB Cloud Serverlessクラスターに5 GiBのカラム型ストレージの無料クォータが付与されます。無料クォータを超過した場合は、料金が発生します。
+    2024年6月30日まで、 TiDB Cloud Serverlessクラスターの列指向ストレージは100%割引で無料です。この日以降は、各TiDB Cloud Serverlessクラスターに5 GiBの列指向ストレージの無料クォータが付与されます。無料クォータを超過した場合は、料金が発生します。
 
     詳細については、 [TiDB Cloud Serverlessの料金詳細](https://www.pingcap.com/tidb-serverless-pricing-details/#storage)を参照してください。
 

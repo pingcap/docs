@@ -453,7 +453,7 @@ TiKV は次の手順で書き込み要求を処理します。
 
     Raftstore は`Store`スレッドと`Apply`スレッドで構成されています。
 
-    - `Store`スレッドはRaftメッセージと新しい`proposals`処理します。新しい`proposals`受信すると、リーダーノードの`Store`スレッドはローカルRaft DBに書き込み、メッセージを複数のフォロワーノードにコピーします。ほとんどの場合、この`proposals`正常に永続化されると、 `proposals`が正常にコミットされます。
+    - `Store`スレッドはRaftメッセージと新しい`proposals`を処理します。新しい`proposals`を受信すると、リーダーノードの`Store`スレッドはローカルRaft DBに書き込み、メッセージを複数のフォロワーノードにコピーします。ほとんどの場合、この`proposals`正常に永続化されると、 `proposals`が正常にコミットされます。
     - `Apply`スレッドはコミットされた`proposals`データをKV DBに書き込みます。データがKV DBに正常に書き込まれると、 `Apply`スレッドは書き込み要求が完了したことを外部に通知します。
 
 ![TiKV Write](/media/performance/store_apply.png)
@@ -545,8 +545,8 @@ v5.4.0 では、gPRC モジュールが最適化され、 Raftログのレプリ
 スレッド`Store`の場合、 `Commit Log Duration`は`Apply Log Duration`よりも明らかに高い値です。一方、 `Append Log Duration`は`Apply Log Duration`よりも大幅に高い値であり、スレッド`Store`はCPUとI/Oの両方でボトルネックが発生している可能性があることを示しています。`Commit Log Duration`と`Append Log Duration`を削減する方法としては、以下のものが考えられます。
 
 - TiKV CPU リソースが十分な場合は、 `raftstore.store-pool-size`の値を増やして`Store`スレッドを追加することを検討してください。
-- TiDBがv5.4.0以降の場合は、 `raft-engine.enable: true`設定して[`Raft Engine`](/tikv-configuration-file.md#raft-engine)有効にすることを検討してください。RaftRaft Engineは軽量な実行パスを備えています。これにより、I/O書き込みの削減と、一部のシナリオにおける書き込みのロングテールレイテンシーの削減に役立ちます。
-- TiKV CPU リソースが十分で、TiDB が v5.3.0 以降の場合は、 `raftstore.store-io-pool-size: 1`設定して[`StoreWriter`](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)有効にすることを検討してください。
+- TiDBがv5.4.0以降の場合は、 `raft-engine.enable: true`を設定して[`Raft Engine`](/tikv-configuration-file.md#raft-engine)を有効にすることを検討してください。RaftRaft Engineは軽量な実行パスを備えています。これにより、I/O書き込みの削減と、一部のシナリオにおける書き込みのロングテールレイテンシーの削減に役立ちます。
+- TiKV CPU リソースが十分で、TiDB が v5.3.0 以降の場合は、 `raftstore.store-io-pool-size: 1`を設定して[`StoreWriter`](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を有効にすることを検討してください。
 
 ## TiDB のバージョンが v6.1.0 より前の場合、パフォーマンス概要ダッシュボードを使用するにはどうすればよいですか? {#if-my-tidb-version-is-earlier-than-v6-1-0-what-should-i-do-to-use-the-performance-overview-dashboard}
 

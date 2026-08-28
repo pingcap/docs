@@ -51,13 +51,13 @@ TiDBの全体的なパフォーマンスを向上させるため、以下の技�
 
 ## アーキテクチャ {#architecture}
 
-TiDBでは、オンライン・トランザクション処理（OLTP）用の行ベースのストレージエンジン[TiKV](/tikv-overview.md)と、オンライン分析処理（OLAP）用の列ベースのストレージエンジンである[TiFlash](/tiflash/tiflash-overview.md)が共存し、データを自動的に複製し、強力な一貫性を維持します。
+TiDBでは、オンライン・トランザクション処理（OLTP）用の行ベースのストレージエンジン[TiKV](/tikv-overview.md)と、オンライン分析処理（OLAP）用の列指向のストレージエンジンである[TiFlash](/tiflash/tiflash-overview.md)が共存し、データを自動的に複製し、強力な一貫性を維持します。
 
 アーキテクチャの詳細については、 [TiDB HTAPのアーキテクチャ](/tiflash/tiflash-overview.md#architecture)を参照してください。
 
 ## 環境準備 {#environment-preparation}
 
-TiDB HTAPの機能を検討する前に、TiDBとそのカラム型ストレージエンジンであるTiFlashを導入する必要があります。データ量が大きい場合（例えば100テラバイト）、ソリューションとしてTiFlashの大規模並列処理（MPP）を使用することをお勧めします。
+TiDB HTAPの機能を検討する前に、TiDBとその列指向ストレージエンジンであるTiFlashを導入する必要があります。データ量が大きい場合（例えば100テラバイト）、ソリューションとしてTiFlashの大規模並列処理（MPP）を使用することをお勧めします。
 
 - TiFlashノードのない TiDB クラスターをデプロイした場合は、現在の TiDB クラスターにTiFlashノードを追加します。詳細については、 [TiFlashクラスターをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)を参照してください。
 - TiDB クラスターをデプロイしていない場合は、 [TiUPを使用してTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。最小限の TiDB トポロジーに基づいて、 [TiFlashのトポロジー](/tiflash-deployment-topology.md)もデプロイする必要があります。

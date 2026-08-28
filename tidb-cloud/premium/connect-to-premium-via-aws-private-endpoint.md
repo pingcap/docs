@@ -66,7 +66,7 @@ TiDB Cloud で AWS CLI コマンドを生成するには、**Create AWS Private 
 
 1. **Your VPC ID** を入力します。
 2. **Your Subnet IDs** を入力します。複数の subnet を指定する場合は、subnet ID をスペースで区切ります。
-3. subnet がダイアログでサポートされている availability zone にあることを確認します。他の availability zone の subnet は使用しないでください。
+3. subnet がダイアログでサポートされているアベイラビリティゾーンにあることを確認します。他のアベイラビリティゾーンの subnet は使用しないでください。
 4. **Generate Command** をクリックします。
 
 生成されるコマンドは次のようになります。
@@ -88,7 +88,7 @@ AWS CLI を使用して VPC endpoint を作成するには、次の手順を実�
 >
 > - コマンドを実行する前に、AWS CLI をインストールして設定しておく必要があります。詳細は [AWS CLI configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) を参照してください。
 >
-> - サービスが 3つを超える availability zone (AZ) にまたがっている場合、VPC endpoint service が subnet の AZ をサポートしていないことを示すエラーメッセージが表示されます。この問題は、選択したリージョンに、{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスが配置されている AZ に加えて、余分な AZ が存在する場合に発生します。この場合は、[PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) にお問い合わせください。
+> - サービスが 3つを超えるアベイラビリティゾーン（AZ）にまたがっている場合、VPC endpoint service が subnet の AZ をサポートしていないことを示すエラーメッセージが表示されます。この問題は、選択したリージョンに、{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスが配置されている AZ に加えて、余分な AZ が存在する場合に発生します。この場合は、[PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) にお問い合わせください。
 
 </div>
 <div label="Use AWS Console">
@@ -106,11 +106,11 @@ AWS Management Console を使用して VPC endpoint を作成するには、次�
 4. **Service settings** エリアで、TiDB Cloud からコピーした **Endpoint Service Name** を入力します。
 5. **Verify service** をクリックします。
 6. **Network settings** エリアで、ドロップダウンリストから VPC を選択します。
-7. **Subnets** エリアで、{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスが配置されている availability zone を選択します。
+7. **Subnets** エリアで、{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスが配置されているアベイラビリティゾーンを選択します。
 
     > **Tip:**
     >
-    > サービスが 3つを超える availability zone (AZ) にまたがっている場合、**Subnets** エリアで AZ を選択できないことがあります。この問題は、選択したリージョンに、{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスが配置されている AZ に加えて、余分な AZ が存在する場合に発生します。この場合は、[PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) にお問い合わせください。
+    > サービスが 3つを超えるアベイラビリティゾーン（AZ）にまたがっている場合、**Subnets** エリアで AZ を選択できないことがあります。この問題は、選択したリージョンに、{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスが配置されている AZ に加えて、余分な AZ が存在する場合に発生します。この場合は、[PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) にお問い合わせください。
 
 8. **Security groups** エリアで、適切な security group を選択します。
 

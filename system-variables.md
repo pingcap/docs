@@ -1050,7 +1050,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - デフォルト値: `4096`
 - 範囲: `[0, 9223372036854775807]`
 - 単位：バイト
-- この変数は、 [`tidb_replica_read`](#tidb_replica_read-new-in-v40)が`closest-adaptive`に設定されている場合、TiDBサーバーが読み取り要求を TiDBサーバーと同じ可用性ゾーン内のレプリカに送信することを優先するしきい値を制御するために使用されます。推定結果がこのしきい値以上の場合、TiDB は読み取り要求を同じ可用性ゾーン内のレプリカに送信することを優先します。それ以外の場合は、TiDB はリーダーレプリカに読み取り要求を送信します。
+- この変数は、 [`tidb_replica_read`](#tidb_replica_read-new-in-v40)が`closest-adaptive`に設定されている場合、TiDBサーバーが読み取り要求を TiDBサーバーと同じアベイラビリティゾーン内のレプリカに送信することを優先するしきい値を制御するために使用されます。推定結果がこのしきい値以上の場合、TiDB は読み取り要求を同じアベイラビリティゾーン内のレプリカに送信することを優先します。それ以外の場合は、TiDB はリーダーレプリカに読み取り要求を送信します。
 
 ### tidb_advancer_check_point_lag_limit <span class="version-mark">New in v8.5.5</span>
 
@@ -1635,7 +1635,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - 値のオプション：
     - `1` : TiDB v6.4.0 以前のバージョンでデフォルトで使用されているコストモデルバージョン 1 を有効にします。
     - `2` :[コストモデル バージョン2](/cost-model.md#cost-model-version-2)を有効にします。これは TiDB v6.5.0 で一般提供されており、内部テストではバージョン 1 よりも正確です。
-- コストモデルのバージョンは、オプティマイザーの計画決定に影響します。詳細については、[コストモデル](/cost-model.md)を参照してください。
+- コストモデルのバージョンは、オプティマイザの計画決定に影響します。詳細については、[コストモデル](/cost-model.md)を参照してください。
 
 ### tidb_current_ts
 
@@ -2190,7 +2190,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、TiDB がオプティマイザーをガイドする拡張統計を収集できるかどうかを示します。詳細については、[拡張統計入門](/extended-statistics.md)を参照してください。
+- この変数は、TiDB がオプティマイザをガイドする拡張統計を収集できるかどうかを示します。詳細については、[拡張統計入門](/extended-statistics.md)を参照してください。
 
 ### tidb_enable_external_ts_read <span class="version-mark">New in v6.4.0</span>
 
@@ -3340,7 +3340,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
     - `schemaVersion` : 現在のスキーマバージョン。
     - `txnStartTS` : 現在のトランザクションが開始されたタイムスタンプ。
     - `forUpdateTS` :悲観的トランザクションモードでは、 `forUpdateTS`は SQL ステートメントの現在のタイムスタンプです。悲観的トランザクションで書き込み競合が発生すると、TiDB は現在実行中の SQL ステートメントを再試行し、このタイムスタンプを更新します。再試行回数は[`max-retry-count`](/tidb-configuration-file.md#max-retry-count)で設定できます。楽観的トランザクションモデルでは、 `forUpdateTS`は`txnStartTS`と同等です。
-    - `isReadConsistency` : 現在のトランザクション分離レベルが読み取りコミット済み (RC) かどうかを示します。
+    - `isReadConsistency` : 現在のトランザクション分離レベルがRead Committed (RC) かどうかを示します。
     - `current_db` : 現在のデータベースの名前。
     - `txn_mode` : トランザクションモード。値のオプションは`OPTIMISTIC`と`PESSIMISTIC`です。
     - `sql` : 現在のクエリに対応する SQL ステートメント。
@@ -4526,7 +4526,7 @@ mysql> desc select count(distinct a) from test.t;
 - デフォルト値: `""`
 - この変数は、オプティマイザの内部動作の一部を制御するために使用されます。
 - オプティマイザの動作は、ユーザーシナリオやSQLステートメントによって異なる場合があります。この変数を使用することで、オプティマイザをより細かく制御でき、オプティマイザの動作変更によってアップグレード後に発生するパフォーマンス低下を防ぐことができます。
-- より詳細な概要については、[オプティマイザー修正コントロール](/optimizer-fix-controls.md)を参照してください。
+- より詳細な概要については、[オプティマイザ修正コントロール](/optimizer-fix-controls.md)を参照してください。
 
 </CustomContent>
 
@@ -4539,7 +4539,7 @@ mysql> desc select count(distinct a) from test.t;
 - デフォルト値: `""`
 - この変数は、オプティマイザの内部動作の一部を制御するために使用されます。
 - オプティマイザの動作は、ユーザーシナリオやSQLステートメントによって異なる場合があります。この変数を使用することで、オプティマイザをより細かく制御でき、オプティマイザの動作変更によってアップグレード後に発生するパフォーマンス低下を防ぐことができます。
-- より詳細な概要については、[オプティマイザー修正コントロール](/optimizer-fix-controls.md)を参照してください。
+- より詳細な概要については、[オプティマイザ修正コントロール](/optimizer-fix-controls.md)を参照してください。
 
 </CustomContent>
 
@@ -5586,8 +5586,8 @@ SHOW WARNINGS;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数はタイムスタンプの取得を最適化するために使用され、読み取りコミット分離レベルが採用され、読み書きの競合がまれなシナリオに適しています。この変数を有効にすることで、グローバルタイムスタンプの取得に伴うレイテンシーとコストを回避し、トランザクションレベルの読み取りレイテンシーを最適化できます。
-- 読み取り/書き込み競合が深刻な場合、この機能を有効にすると、グローバル タイムスタンプを取得するコストとレイテンシーが増加し、パフォーマンスの低下を引き起こす可能性があります。詳細については、 [隔離レベルを遵守する](/transaction-isolation-levels.md#read-committed-isolation-level)をご覧ください。
+- この変数はタイムスタンプの取得を最適化するために使用され、read-committed分離レベルが採用され、読み書きの競合がまれなシナリオに適しています。この変数を有効にすることで、グローバルタイムスタンプの取得に伴うレイテンシーとコストを回避し、トランザクションレベルの読み取りレイテンシーを最適化できます。
+- 読み取り/書き込み競合が深刻な場合、この機能を有効にすると、グローバル タイムスタンプを取得するコストとレイテンシーが増加し、パフォーマンスの低下を引き起こす可能性があります。詳細については、 [Read Committed分離レベル](/transaction-isolation-levels.md#read-committed-isolation-level)をご覧ください。
 
 ### tidb_rc_write_check_ts <span class="version-mark">New in v6.3.0</span>
 
@@ -5601,7 +5601,7 @@ SHOW WARNINGS;
 - 型: Boolean
 - デフォルト値: `OFF`
 - この変数は、タイムスタンプの取得を最適化するために使用され、悲観的トランザクションの分離レベル`READ-COMMITTED`でポイント書き込み競合が少ないシナリオに適しています。この変数を有効にすると、ポイント書き込みステートメントの実行中にグローバルタイムスタンプを取得することによって発生するレイテンシーとオーバーヘッドを回避できます。現在、この変数は、 `UPDATE` 、 `DELETE` 、および`SELECT ...... FOR UPDATE`ポイント書き込みステートメントに適用できます。ポイント書き込みステートメントとは、フィルタ条件として主キーまたは一意キーを使用し、最終実行演算子に`POINT-GET`が含まれる書き込みステートメントを指します。
-- ポイントと書き込みの競合が深刻な場合、この変数を有効にすると、余分なオーバーヘッドとレイテンシーが増加し、パフォーマンスの低下につながります。詳細については、 [隔離レベルを遵守する](/transaction-isolation-levels.md#read-committed-isolation-level)をご覧ください。
+- ポイント書き込みの競合が深刻な場合、この変数を有効にすると、余分なオーバーヘッドとレイテンシーが増加し、パフォーマンスの低下につながります。詳細については、 [Read Committed分離レベル](/transaction-isolation-levels.md#read-committed-isolation-level)をご覧ください。
 
 ### tidb_read_consistency <span class="version-mark">New in v5.4.0</span>
 
@@ -6971,7 +6971,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - 型: Enumeration
 - デフォルト値: `REPEATABLE-READ`
 - 指定可能な値: `READ-UNCOMMITTED` 、 `READ-COMMITTED` 、 `REPEATABLE-READ` 、 `SERIALIZABLE`
-- この変数はトランザクションの分離を設定します。 TiDB は MySQL との互換性のために`REPEATABLE-READ`を宣伝していますが、実際の分離レベルはスナップショット分離です。詳細については、[トランザクション分離レベル](/transaction-isolation-levels.md)を参照してください。
+- この変数はトランザクションの分離レベルを設定します。MySQLとの互換性のため、この変数の値は`REPEATABLE-READ`と表示されますが、実際の分離レベルはスナップショット分離です。詳細については、[トランザクション分離レベル](/transaction-isolation-levels.md)を参照してください。
 
 ### tx_isolation
 

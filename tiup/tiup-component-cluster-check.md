@@ -136,7 +136,7 @@ ext4パーティションのマウントオプションを確認してくださ�
 tiup cluster check <topology.yml | cluster-name> [flags]
 ```
 
-- クラスターがまだデプロイされていない場合は、クラスターのデプロイに使用する[トポロジー.yml](/tiup/tiup-cluster-topology-reference.md)ファイルを渡す必要があります。このファイルの内容に従って、 tiup-clusterは対応するマシンに接続し、チェックを実行します。
+- クラスターがまだデプロイされていない場合は、クラスターのデプロイに使用する[topology.yml](/tiup/tiup-cluster-topology-reference.md)ファイルを渡す必要があります。このファイルの内容に従って、 tiup-clusterは対応するマシンに接続し、チェックを実行します。
 - クラスターがすでにデプロイされている場合は、チェック オブジェクトとして`<cluster-name>`を使用できます。
 - 既存のクラスターのスケールアウト YAML ファイルをチェックする場合は、チェック オブジェクトとして`<scale-out.yml>`と`<cluster-name>`両方を使用できます。
 

@@ -19,7 +19,7 @@ TiKVは自動的に[最下層のデータを分割する](/best-practices/tidb-b
 > - v6.5.0 以降、この機能は一般提供 (GA) されます。
 > - v8.4.0以降、リージョンのデフォルトサイズが96MiBから256MiBに変更されました。リージョンサイズを増やすと、リージョンの数を減らすことができます。
 
-多くのリージョンのパフォーマンスオーバーヘッドを削減するには、 [休止状態リージョン](/best-practices/massive-regions-best-practices.md#method-4-increase-the-number-of-tikv-instances)または[`Region Merge`](/best-practices/massive-regions-best-practices.md#method-5-adjust-raft-base-tick-interval)有効にすることもできます。
+多くのリージョンのパフォーマンスオーバーヘッドを削減するには、 [休止状態リージョン](/best-practices/massive-regions-best-practices.md#method-4-increase-the-number-of-tikv-instances)または[`Region Merge`](/best-practices/massive-regions-best-practices.md#method-5-adjust-raft-base-tick-interval)を有効にすることもできます。
 
 ## リージョンサイズを調整するには、 `region-split-size`を使用します。 {#use-region-split-size-to-adjust-region-size}
 

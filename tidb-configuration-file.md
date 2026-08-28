@@ -226,7 +226,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 - グローバルキル（インスタンスをまたいでクエリや接続を終了する）機能を有効にするかどうかを制御します。
 - デフォルト値: `true`
 - 値が`true`の場合、 `KILL`および`KILL TIDB`ステートメントはインスタンス間でクエリまたは接続を終了できるため、クエリまたは接続が誤って終了することを心配する必要はありません。クライアントを使用して任意の TiDB インスタンスに接続し、 `KILL`または`KILL TIDB`ステートメントを実行すると、ステートメントは対象の TiDB インスタンスに転送されます。クライアントと TiDB クラスタの間にプロキシがある場合、 `KILL`および`KILL TIDB`ステートメントも実行のために対象の TiDB インスタンスに転送されます。
-- バージョン7.3.0以降では、 `enable-global-kill`と[`enable-32bits-connection-id`](#enable-32bits-connection-id-new-in-v730)の両方が`true`に設定されている場合、MySQLコマンドラインのControl+Cを使用してクエリまたは接続を終了できます。詳細については、[`KILL`](/sql-statements/sql-statement-kill.md)参照してください。
+- バージョン7.3.0以降では、 `enable-global-kill`と[`enable-32bits-connection-id`](#enable-32bits-connection-id-new-in-v730)の両方が`true`に設定されている場合、MySQLコマンドラインのControl+Cを使用してクエリまたは接続を終了できます。詳細については、[`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
 
 ### `enable-32bits-connection-id` <span class="version-mark">v7.3.0で追加</span> {#enable-32bits-connection-id-new-in-v730}
 

@@ -238,9 +238,9 @@ TiFlashノードをデプロイし、 `ALTER TABLE ... SET TIFLASH REPLICA ...`�
 
     TiDB DDL 所有者のログを検索し、TiDB が PD に配置ルールを追加するように通知したかどうかを確認します。
 
-    - パーティション化されていないテーブルの場合は、 `ConfigureTiFlashPDForTable`検索します。
+    - パーティション化されていないテーブルの場合は、 `ConfigureTiFlashPDForTable`を検索します。
 
-    - パーティション化されたテーブルの場合は、 `ConfigureTiFlashPDForPartitions`検索します。
+    - パーティション化されたテーブルの場合は、 `ConfigureTiFlashPDForPartitions`を検索します。
 
     - キーワードが見つかった場合は、次のステップに進みます。
 

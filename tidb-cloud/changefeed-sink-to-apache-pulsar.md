@@ -27,7 +27,7 @@ Apache Pulsarにデータをストリーミングするためのチェンジフ�
 
 - ネットワーク接続を設定する
 - Pulsar ACL認証のための権限を追加する
-- Apache Pulsarでトピックを手動で作成するか、Apache Pulsarブローカーの設定で[`allowAutoTopicCreation`](https://pulsar.apache.org/reference/#/4.0.x/config/reference-configuration-broker?id=allowautotopiccreation)有効にしてください。
+- Apache Pulsarでトピックを手動で作成するか、Apache Pulsarブローカーの設定で[`allowAutoTopicCreation`](https://pulsar.apache.org/reference/#/4.0.x/config/reference-configuration-broker?id=allowautotopiccreation)を有効にしてください。
 
 ### ネットワーク {#network}
 

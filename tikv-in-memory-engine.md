@@ -10,7 +10,7 @@ TiKV MVCC インメモリエンジン (IME) は、主に多数の MVCC 履歴バ
 TiKV MVCCインメモリエンジンは、以下のシナリオに適しています。
 
 - 頻繁に更新または削除されるレコードを照会する必要があるアプリケーション。
-- TiDBに履歴バージョンをより長い期間（例えば24時間）保持するために、 [`tidb_gc_life_time`](/garbage-collection-configuration.md#garbage-collection-configuration)調整する必要があるアプリケーション。
+- TiDBに履歴バージョンをより長い期間（例えば24時間）保持するために、 [`tidb_gc_life_time`](/garbage-collection-configuration.md#garbage-collection-configuration)を調整する必要があるアプリケーション。
 
 ## 実装原理 {#implementation-principles}
 

@@ -78,7 +78,7 @@ public List<Book> getLatestBooksPage(Long pageNumber, Long pageSize) throws SQLE
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-まず、データを主キーでソートし、ウィンドウ関数`row_number()`呼び出して各行の行番号を生成します。次に、集計関数を呼び出して行番号を指定されたページサイズでグループ化し、各ページの最小値と最大値を計算します。
+まず、データを主キーでソートし、ウィンドウ関数`row_number()`を呼び出して各行の行番号を生成します。次に、集計関数を呼び出して行番号を指定されたページサイズでグループ化し、各ページの最小値と最大値を計算します。
 
 ```sql
 SELECT

@@ -38,7 +38,7 @@ CPU、メモリ、ディスクの使用状況を確認できます。いずれ�
 ![Region panel](/media/region-panel.png)
 
 - `down-peer-region-count` ： Raftリーダーによって報告された、応答しないピアを持つリージョンの数。
-- `empty-region-count` ：サイズが1MiB未満の空のリージョンの数。これらのリージョンは、 `TRUNCATE TABLE` / `DROP TABLE`ステートメントを実行することによって生成されます。この数が多い場合は、 `Region Merge`有効にして複数のテーブル間でリージョンをマージすることを検討してください。
+- `empty-region-count` ：サイズが1MiB未満の空のリージョンの数。これらのリージョンは、 `TRUNCATE TABLE` / `DROP TABLE`ステートメントを実行することによって生成されます。この数が多い場合は、 `Region Merge`を有効にして複数のテーブル間でリージョンをマージすることを検討してください。
 - `extra-peer-region-count` ：追加のレプリカを持つリージョンの数。これらのリージョンはスケジューリング処理中に生成されます。
 - `learner-peer-region-count` ：ラーナーピアが存在するリージョンの数。ラーナーピアのソースは様々で、例えば、 TiFlashのラーナーピアや、設定済みの配置ルールに含まれるラーナーピアなどがあります。
 - `miss-peer-region-count` ：レプリカが不足しているリージョンの数。この値は必ずしも`0`より大きいとは限りません。

@@ -50,7 +50,7 @@ OLTP (オンライントランザクション処理) シナリオの場合、プ
 
 #### バッチAPIを使用する {#use-batch-api}
 
-バッチ挿入の場合は、 [`addBatch` / `executeBatch` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/Statement.html#executeBatch())使用できます。 `addBatch()`メソッドは、複数の SQL ステートメントを最初にクライアントにキャッシュし、 `executeBatch`メソッドを呼び出すときにそれらをまとめてデータベースサーバーに送信するために使用されます。
+バッチ挿入の場合は、 [`addBatch` / `executeBatch` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/Statement.html#executeBatch())を使用できます。 `addBatch()`メソッドは、複数の SQL ステートメントを最初にクライアントにキャッシュし、 `executeBatch`メソッドを呼び出すときにそれらをまとめてデータベースサーバーに送信するために使用されます。
 
 > **Note:**
 >
@@ -220,7 +220,7 @@ jdbc:mysql://<IP_ADDRESS>:<PORT_NUMBER>/<DATABASE_NAME>?characterEncoding=UTF-8&
 
 > **Note:**
 >
-> パブリック ネットワーク経由で接続している場合は、 `useSSL=true`と[TiDBクライアントとサーバー間でTLSを有効にする](/enable-tls-between-clients-and-servers.md)設定する必要があります。
+> パブリック ネットワーク経由で接続している場合は、 `useSSL=true`と[TiDBクライアントとサーバー間でTLSを有効にする](/enable-tls-between-clients-and-servers.md)を設定する必要があります。
 
 ## 接続プール {#connection-pool}
 

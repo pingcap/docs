@@ -9,7 +9,7 @@ summary: VPC ピアリング経由でTiDB Cloud Dedicated に接続する方法�
 >
 > VPC ピアリング接続は、AWS および Google Cloud でホストされているTiDB Cloud Dedicated クラスターでのみ利用できます。
 
-アプリケーションをVPCピアリング経由でTiDB Cloudに接続するには、 TiDB Cloudで[VPCピアリング](/tidb-cloud/tidb-cloud-glossary.md#vpc-peering)設定する必要があります。このドキュメントでは、VPCピアリング接続[AWS上](#set-up-vpc-peering-on-aws)と[Google Cloudで](#set-up-vpc-peering-on-google-cloud)設定と、VPCピアリング経由でTiDB Cloudに接続する手順について説明します。
+アプリケーションをVPCピアリング経由でTiDB Cloudに接続するには、 TiDB Cloudで[VPCピアリング](/tidb-cloud/tidb-cloud-glossary.md#vpc-peering)を設定する必要があります。このドキュメントでは、VPCピアリング接続[AWS上](#set-up-vpc-peering-on-aws)と[Google Cloudで](#set-up-vpc-peering-on-google-cloud)設定と、VPCピアリング経由でTiDB Cloudに接続する手順について説明します。
 
 VPCピアリングは、2つのVPC間のネットワーク接続であり、プライベートIPアドレスを使用してトラフィックをルーティングできます。どちらのVPC内のインスタンスも、同じネットワーク内にあるかのように相互に通信できます。
 
@@ -17,7 +17,7 @@ VPCピアリングは、2つのVPC間のネットワーク接続であり、プ�
 
 > **Tip:**
 >
-> アプリケーションをTiDB Cloudに接続するには、 TiDB Cloudで[プライベートエンドポイント接続](/tidb-cloud/set-up-private-endpoint-connections.md)設定することもできます。TiDB Cloudは安全でプライベートであり、データがパブリックインターネットに公開されることはありません。VPCピアリング接続ではなく、プライベートエンドポイントを使用することをお勧めします。
+> アプリケーションをTiDB Cloudに接続するには、 TiDB Cloudで[プライベートエンドポイント接続](/tidb-cloud/set-up-private-endpoint-connections.md)を設定することもできます。TiDB Cloudは安全でプライベートであり、データがパブリックインターネットに公開されることはありません。VPCピアリング接続ではなく、プライベートエンドポイントを使用することをお勧めします。
 
 ## 前提条件: リージョンの CIDR を設定する {#prerequisite-set-a-cidr-for-a-region}
 

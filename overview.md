@@ -33,11 +33,11 @@ TiDB Self-Managedは、TiDBの製品オプションの一つであり、ユー�
 
 - **リアルタイムHTAP**
 
-    TiDBは、行ベースストレージエンジンである[TiKV](/tikv-overview.md)と、カラム型ストレージエンジンである[TiFlash](/tiflash/tiflash-overview.md)という2つのストレージエンジンを提供します。TiFlashは、Multi-Raft Learnerプロトコルを使用してTiKVからリアルタイムでデータを複製し、TiKV行ベースストレージエンジンとTiFlashカラム型ストレージエンジン間のデータの一貫性を確保します。HTAPリソースの分離問題を解決するために、必要に応じてTiKVとTiFlashを異なるマシンにデプロイできます。
+    TiDBは、行ベースストレージエンジンである[TiKV](/tikv-overview.md)と、列指向ストレージエンジンである[TiFlash](/tiflash/tiflash-overview.md)という2つのストレージエンジンを提供します。TiFlashは、Multi-Raft Learnerプロトコルを使用してTiKVからリアルタイムでデータを複製し、TiKV行ベースストレージエンジンとTiFlash列指向ストレージエンジン間のデータの一貫性を確保します。HTAPリソースの分離問題を解決するために、必要に応じてTiKVとTiFlashを異なるマシンにデプロイできます。
 
 - **クラウドネイティブ分散データベース**
 
-    TiDB はクラウド向けに設計された分散データベースで、クラウド プラットフォーム上で柔軟なスケーラビリティ、信頼性、セキュリティを提供します。ユーザーは、変化するワークロードの要件に合わせて TiDB を柔軟に拡張できます。TiDB では、各データに少なくとも 3つのレプリカがあり、異なるクラウド可用性ゾーンにスケジュールすることで、データセンター全体の停止にも対応できます。TiDB [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/tidb-operator-overview) Kubernetes 上での TiDB の管理を支援し、TiDB クラスターの運用に関連するタスクを自動化することで、マネージド Kubernetes を提供するあらゆるクラウドへの TiDB のデプロイを容易にします。フル マネージド TiDB サービスである[TiDB Cloud](https://pingcap.com/tidb-cloud/) 、[クラウド上のTiDB](https://docs.pingcap.com/tidbcloud/)の真の力を引き出す最も簡単で経済的かつ堅牢な方法であり、数回のクリックだけで TiDB クラスターをデプロイして実行できます。
+    TiDB はクラウド向けに設計された分散データベースで、クラウド プラットフォーム上で柔軟なスケーラビリティ、信頼性、セキュリティを提供します。ユーザーは、変化するワークロードの要件に合わせて TiDB を柔軟に拡張できます。TiDB では、各データに少なくとも 3つのレプリカがあり、異なるクラウドアベイラビリティゾーンにスケジュールすることで、データセンター全体の停止にも対応できます。TiDB [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/tidb-operator-overview) Kubernetes 上での TiDB の管理を支援し、TiDB クラスターの運用に関連するタスクを自動化することで、マネージド Kubernetes を提供するあらゆるクラウドへの TiDB のデプロイを容易にします。フル マネージド TiDB サービスである[TiDB Cloud](https://pingcap.com/tidb-cloud/) 、[クラウド上のTiDB](https://docs.pingcap.com/tidbcloud/)の真の力を引き出す最も簡単で経済的かつ堅牢な方法であり、数回のクリックだけで TiDB クラスターをデプロイして実行できます。
 
 - **MySQLプロトコルおよびMySQLエコシステムと互換性があります。**
 

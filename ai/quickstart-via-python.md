@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/vector-search-get-started-using-python/','/ja/tidb/de
 
 # Python を使って TiDB + AI を始めよう {#get-started-with-tidb-ai-via-python}
 
-このドキュメントでは、Python SDK を使用して TiDB で[ベクトル検索](/ai/concepts/vector-search-overview.md)開始する方法を説明します。手順に従って、TiDB で動作する最初の AI アプリケーションを構築します。
+このドキュメントでは、Python SDK を使用して TiDB で[ベクトル検索](/ai/concepts/vector-search-overview.md)を開始する方法を説明します。手順に従って、TiDB で動作する最初の AI アプリケーションを構築します。
 
 このドキュメントに従うことで、以下のことを学ぶことができます。
 
