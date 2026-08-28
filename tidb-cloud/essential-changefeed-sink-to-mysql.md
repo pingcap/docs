@@ -9,7 +9,7 @@ summary: このドキュメントでは、Sink to MySQL changefeed を使用し�
 
 > **Note:**
 >
-> 現在、 TiDB Cloud Essentialの変更フィード機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、以下の手順に従ってください。
+> 現在、TiDB Cloud Essentialの変更フィード機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、以下の手順に従ってください。
 >
 > 1. [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**?**をクリックします。
 > 2. **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。

@@ -94,7 +94,7 @@ CREATE TABLE `bookshop`.`books` (
 このテーブルには`users`テーブルよりも多くのデータ型が含まれています。
 
 - [整数](/data-type-numeric.md#integer-types): ディスク使用量の過剰使用やパフォーマンスへの影響（型範囲が大きすぎる場合）またはデータオーバーフロー（データ型範囲が小さすぎる場合）を避けるため、適切なサイズの型を使用することをお勧めします。
-- :[日時](/data-type-date-and-time.md)型は、時間値を格納できます。
+- [日時](/data-type-date-and-time.md)型は、時間値を格納できます。
 - [列挙型](/data-type-string.md#enum-type): enum型は、限られた値の選択を格納するために使用できます。
 
 ## 主キーを選択 {#select-primary-key}
