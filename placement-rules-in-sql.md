@@ -55,7 +55,7 @@ tikv-server --labels region=<region>,zone=<zone>,host=<host>
 | 展開方法                      | 例                                                                                                                                 |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | 手動展開                      | [トポロジーラベルに基づいてレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)                                                            |
-| TiUPを使用した展開               | [地理的に分散した展開トポロジー](/geo-distributed-deployment-topology.md)                                                                        |
+| TiUPを使用した展開               | [地理的に分散した展開トポロジ](/geo-distributed-deployment-topology.md)                                                                        |
 | TiDB Operatorを使用したデプロイメント | [KubernetesでTiDBクラスタを構成する](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-availability-of-data) |
 
 > **Note:**

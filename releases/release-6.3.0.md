@@ -193,7 +193,7 @@ TiDBバージョン: 6.3.0-DMR
 
 ### TiDBデータ共有サブスクリプション {#tidb-data-share-subscription}
 
-- TiCDCは、地理的に分散した複数のデータソースからデータを複製できるデプロイメントトポロジーをサポートしています [#5301](https://github.com/pingcap/tiflow/issues/5301) @[sdojjy](https://github.com/sdojjy)
+- TiCDCは、地理的に分散した複数のデータソースからデータを複製できる展開トポロジをサポートしています [#5301](https://github.com/pingcap/tiflow/issues/5301) @[sdojjy](https://github.com/sdojjy)
 
     v6.3.0 以降、単一の TiDB クラスターから複数の地理的に分散されたデータ システムへのデータの複製をサポートするために、 [TiCDCは複数のIDCに展開できます](/ticdc/deploy-ticdc.md) 。この機能は、地理的に分散されたデータレプリケーションおよび展開トポロジの機能を提供するのに役立ちます。
 

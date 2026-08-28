@@ -210,13 +210,13 @@ tiup cluster template > topology.yaml
 
 以下の2つの一般的なシナリオでは、コマンドを実行することで推奨トポロジーテンプレートを生成できます。
 
-- ハイブリッド デプロイメントの場合: 複数のインスタンスが 1台のマシンにデプロイされます。詳細は[ハイブリッド展開トポロジー](/hybrid-deployment-topology.md)を参照。
+- ハイブリッド デプロイメントの場合: 複数のインスタンスが 1台のマシンにデプロイされます。詳細は[ハイブリッド展開トポロジ](/hybrid-deployment-topology.md)を参照。
 
     ```shell
     tiup cluster template --full > topology.yaml
     ```
 
-- 地理的に分散した展開の場合: TiDB クラスターは地理的に分散したデータセンターに展開されます。詳細については、[地理的に分散した展開トポロジー](/geo-distributed-deployment-topology.md)を参照してください。
+- 地理的に分散した展開の場合: TiDB クラスターは地理的に分散したデータセンターに展開されます。詳細については、[地理的に分散した展開トポロジ](/geo-distributed-deployment-topology.md)を参照してください。
 
     ```shell
     tiup cluster template --multi-dc > topology.yaml
@@ -258,8 +258,8 @@ alertmanager_servers:
 | OLTP                                             | [最小限のトポロジーをデプロイ](/minimal-deployment-topology.md)                    | [シンプルな最小限の構成テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-mini.yaml) <br/> [完全な最小構成テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-mini.yaml)                                   | これは、tidb-server、tikv-server、およびpd-serverを含む基本的なクラスタトポロジーです。                                                      |
 | HTAP                                             | [TiFlashトポロジーをデプロイ](/tiflash-deployment-topology.md)                 | [シンプルなTiFlash設定テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiflash.yaml) <br/> [TiFlashの完全な構成テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)                    | これは、最小限のクラスタトポロジーとともにTiFlashをデプロイするためのものです。TiFlashはカラム型ストレージエンジンであり、徐々に標準的なクラスタトポロジーへと進化していきます。                |
 | [TiCDC](/ticdc/ticdc-overview.md)を使用して増分データを複製する | [TiCDCトポロジーをデプロイ](/ticdc-deployment-topology.md)                     | [シンプルなTiCDC構成テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-cdc.yaml) <br/> [TiCDC構成テンプレート全体](https://github.com/pingcap/docs/blob/master/config-templates/complex-cdc.yaml)                                  | これは、最小限のクラスタトポロジーとともにTiCDCをデプロイするためのものです。TiCDCは、TiDB、MySQL、Kafka、MQ、ストレージサービスなど、複数のダウンストリームプラットフォームをサポートしています。 |
-| 1台のマシンに複数のインスタンスをデプロイ                            | [ハイブリッドトポロジーをデプロイ](/hybrid-deployment-topology.md)                   | [ハイブリッド展開用のシンプルな構成テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-multi-instance.yaml) <br/> [ハイブリッド展開用の完全な構成テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-multi-instance.yaml) | ディレクトリ、ポート、リソース比率、ラベルなどの追加設定が必要な場合にも、デプロイメントトポロジーが適用されます。                                                        |
-| TiDBクラスターをデータセンター全体にデプロイ                         | [地理的に分散したデプロイメントトポロジーをデプロイ](/geo-distributed-deployment-topology.md) | [地理的に分散したデプロイメントのためのコンフィグレーションテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/geo-redundancy-deployment.yaml)                                                                                                         | このトポロジーは、2つの都市に3つのデータセンターを配置する典型的なアーキテクチャを例として取り上げています。地理的に分散したデプロイメントアーキテクチャと、注意すべき重要な構成について解説します。              |
+| 1台のマシンに複数のインスタンスをデプロイ                            | [ハイブリッドトポロジーをデプロイ](/hybrid-deployment-topology.md)                   | [ハイブリッド展開用のシンプルな構成テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-multi-instance.yaml) <br/> [ハイブリッド展開用の完全な構成テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-multi-instance.yaml) | ディレクトリ、ポート、リソース比率、ラベルなどの追加設定が必要な場合にも、展開トポロジが適用されます。                                                        |
+| TiDBクラスターをデータセンター全体にデプロイ                         | [地理的に分散した展開トポロジをデプロイ](/geo-distributed-deployment-topology.md) | [地理的に分散したデプロイメントのためのコンフィグレーションテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/geo-redundancy-deployment.yaml)                                                                                                         | このトポロジーは、2つの都市に3つのデータセンターを配置する典型的なアーキテクチャを例として取り上げています。地理的に分散したデプロイメントアーキテクチャと、注意すべき重要な構成について解説します。              |
 
 > **Note:**
 >
