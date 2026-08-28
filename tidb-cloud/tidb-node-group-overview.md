@@ -56,6 +56,6 @@ TiDBノードグループ機能は、TiDB Cloud Dedicatedクラスタのリソ�
 
 ## SLAの影響 {#sla-impact}
 
-TiDB Cloud [サービスレベル契約（SLA）](https://www.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/)によると、複数のTiDBノードを展開したTiDB Cloud Dedicatedクラスタの月間稼働率は最大99.99%に達します。しかし、TiDBノードグループを導入した後、各グループに1つのTiDBノードのみを含む複数のTiDBノードグループを作成すると、グループの高可用性が失われ、クラスタの月間稼働率は単一のTiDBノード展開モデル（つまり最大99.9%）に低下します。
+TiDB Cloud [サービスレベル契約（SLA）](https://www.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/)によると、複数のTiDBノードをデプロイしたTiDB Cloud Dedicatedクラスタの月間稼働率は最大99.99%に達します。しかし、TiDBノードグループを導入した後、各グループに1つのTiDBノードのみを含む複数のTiDBノードグループを作成すると、グループの高可用性が失われ、クラスタの月間稼働率は単一のTiDBノードデプロイモデル（つまり最大99.9%）に低下します。
 
 高可用性を確保するには、TiDB ノードグループごとに少なくとも 2つの TiDB ノードを構成することをお勧めします。

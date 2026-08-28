@@ -16,7 +16,7 @@ PingCAP Clinicは、 [Diagクライアント](https://github.com/pingcap/diag) �
 
 > **Note:**
 >
-> - 以下のデータ収集およびアップロード方法は[TiUPを使用して展開されたクラスター](/production-deployment-using-tiup.md)に**のみ**適用されます。Kubernetes 上のTiDB Operatorを使用してデプロイされたクラスターの場合は、 [TiDB Operator環境向けPingCAP Clinic](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
+> - 以下のデータ収集およびアップロード方法は[TiUPを使用してデプロイされたクラスター](/production-deployment-using-tiup.md)に**のみ**適用されます。Kubernetes 上のTiDB Operatorを使用してデプロイされたクラスターの場合は、 [TiDB Operator環境向けPingCAP Clinic](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
 > - PingCAP Clinicによって収集された診断データは、クラスターの問題のトラブルシューティングに**のみ**使用されます。
 
 ## 前提条件 {#prerequisites}

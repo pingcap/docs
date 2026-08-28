@@ -9,7 +9,7 @@ summary: TiDB 5.1.5は2022年12月28日にリリースされました。この�
 
 TiDBバージョン：5.1.5
 
-クイックアクセス: [クイックスタート](https://docs-archive.pingcap.com/tidb/v5.1/quick-start-with-tidb)| [本番環境への展開](https://docs-archive.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs-archive.pingcap.com/tidb/v5.1/quick-start-with-tidb)| [本番環境へのデプロイ](https://docs-archive.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
 
 ## 互換性の変更 {#compatibility-changes}
 

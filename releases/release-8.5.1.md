@@ -9,7 +9,7 @@ summary: TiDB 8.5.1におけるオペレーティングシステムとプラッ�
 
 TiDBバージョン：8.5.1
 
-クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb)| [本番環境への展開](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb)| [本番環境へのデプロイ](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup)
 
 ## オペレーティングシステムとプラットフォームの要件変更 {#operating-system-and-platform-requirement-changes}
 

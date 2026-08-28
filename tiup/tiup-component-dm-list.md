@@ -32,7 +32,7 @@ tiup dm list [flags]
 - `Name` : クラスター名。
 - `User` : クラスターをデプロイしたユーザー。
 - `Version` : クラスターのバージョン。
-- `Path` : 制御マシン上のクラスター展開データのパス。
+- `Path` : 制御マシン上のクラスターデプロイデータのパス。
 - `PrivateKey` : クラスターへの秘密鍵のパス。
 
 [&lt;&lt; 前のページに戻る - TiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

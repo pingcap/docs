@@ -9,7 +9,7 @@ summary: TiDB 6.5.12 の改善点とバグ修正について説明します。
 
 TiDBバージョン: 6.5.12
 
-クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [本番環境への展開](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [本番環境へのデプロイ](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup)
 
 ## 互換性の変更 {#compatibility-changes}
 

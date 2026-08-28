@@ -486,7 +486,7 @@ TiDB Cloud Data Serviceは、エンドポイントを呼び出すのに役立つ
 1. プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 2. 左側のペインで、対象のデータアプリの名前をクリックすると、そのエンドポイントが表示されます。
 3. アンデプロイするエンドポイントを見つけて、 **[...]** &gt; **Undeploy**をクリックします。
-4. 展開解除を確定するには、 **Undeploy**をクリックしてください。
+4. デプロイ解除を確定するには、 **Undeploy**をクリックしてください。
 
 ## エンドポイントを削除します {#delete-an-endpoint}
 

@@ -1,6 +1,6 @@
 ---
 title: TiCDC Overview
-summary: TiCDCとは何か、TiCDCが提供する機能、そしてTiCDCのインストールと展開方法について学びましょう。
+summary: TiCDCとは何か、TiCDCが提供する機能、そしてTiCDCのインストールとデプロイ方法について学びましょう。
 ---
 
 # TiCDCの概要 {#ticdc-overview}

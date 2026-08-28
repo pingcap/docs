@@ -44,7 +44,7 @@ TiKV v5.0以降、すべての読み取りリクエストはデフォルトで�
 
     v8.5.4以降、gRPCスレッドプールのデフォルトサイズ（ `server.grpc-concurrency`で設定）が固定値の`5`から、CPUコア数に基づいて計算される適応値に変更されました。詳細な計算式については、 [`server.grpc-concurrency`](/tikv-configuration-file.md#grpc-concurrency)を参照してください。このスレッドプールはコンピューティングオーバーヘッドがほとんどなく、主にネットワークI/Oとデシリアライズリクエストを処理するため、通常はデフォルト設定を調整する必要はありません。
 
-    - TiKV で展開されたマシンの CPU コア数が少ない (8 個以下) 場合は、 `server.grpc-concurrency`構成項目を`2`に設定することを検討してください。
+    - TiKV でデプロイされたマシンの CPU コア数が少ない (8 個以下) 場合は、 `server.grpc-concurrency`構成項目を`2`に設定することを検討してください。
     - TiKV を導入したマシンの構成が非常に高く、TiKV が大量の読み取りおよび書き込み要求を処理し、Grafana でスレッド CPU を監視する値`gRPC poll CPU`が`server.grpc-concurrency`の 80% を超える場合は、スレッドプールの使用率を 80% 未満 (つまり、Grafana のメトリックが`80% * server.grpc-concurrency`未満) に保つために値`server.grpc-concurrency`を増やすことを検討してください。
 
 - スケジューラスレッドプール。

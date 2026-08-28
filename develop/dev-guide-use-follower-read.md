@@ -27,9 +27,9 @@ TiDBは、 [リージョン](/tidb-storage.md#region)基本単位として、ク
 
 読み取りホットスポットが避けられない場合、または変更コストが非常に高い場合は、Follower Read機能を使用して、フォロワーリージョンへの読み取り要求のバランスをより適切にロードすることができます。
 
-### 地理的に分散した展開のレイテンシーを削減 {#reduce-latency-for-geo-distributed-deployments}
+### 地理的に分散したデプロイのレイテンシーを削減 {#reduce-latency-for-geo-distributed-deployments}
 
-TiDB クラスターが複数の地区またはデータセンターにまたがって展開されている場合、リージョンの異なるレプリカが異なる地区またはデータセンターに分散されます。この場合、 Follower Read を`closest-adaptive`または`closest-replicas`に設定することで、TiDB が現在のデータセンターからの読み取りを優先するように設定できます。これにより、読み取り操作のレイテンシーとトラフィックのオーバーヘッドが大幅に削減されます。実装の詳細については、 [Follower Read](/follower-read.md)を参照してください。
+TiDB クラスターが複数の地区またはデータセンターにまたがってデプロイされている場合、リージョンの異なるレプリカが異なる地区またはデータセンターに分散されます。この場合、 Follower Read を`closest-adaptive`または`closest-replicas`に設定することで、TiDB が現在のデータセンターからの読み取りを優先するように設定できます。これにより、読み取り操作のレイテンシーとトラフィックのオーバーヘッドが大幅に削減されます。実装の詳細については、 [Follower Read](/follower-read.md)を参照してください。
 
 ## Follower Readを有効にする {#enable-follower-read}
 

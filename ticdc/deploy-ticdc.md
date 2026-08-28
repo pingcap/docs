@@ -35,7 +35,7 @@ cdc_servers:
 
 - 詳しい操作については、 [初期化設定ファイルを編集します](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file)ご覧ください。
 - 設定可能なフィールドの詳細については、 [TiUPを使用して`cdc_servers`を設定する](/tiup/tiup-cluster-topology-reference.md#cdc_servers)を参照してください。
-- TiDB クラスターを展開する詳細な手順については、 [TiUPを使用してTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。
+- TiDB クラスターをデプロイする詳細な手順については、 [TiUPを使用してTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 > **Note:**
 >

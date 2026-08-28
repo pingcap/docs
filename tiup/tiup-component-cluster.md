@@ -65,7 +65,7 @@ tiup cluster [command] [flags]
 - [import](/tiup/tiup-component-cluster-import.md) : Ansibleによってデプロイされたクラスターをインポートします
 - [template](/tiup/tiup-component-cluster-template.md) : トポロジテンプレートを出力する
 - [check](/tiup/tiup-component-cluster-check.md) : デプロイメントの前後にクラスターをチェックします
-- [deploy](/tiup/tiup-component-cluster-deploy.md) : 指定されたトポロジに基づいてクラスターを展開します
+- [deploy](/tiup/tiup-component-cluster-deploy.md) : 指定されたトポロジに基づいてクラスターをデプロイします
 - [list](/tiup/tiup-component-cluster-list.md) : デプロイされたクラスタのリストを照会する
 - [display](/tiup/tiup-component-cluster-display.md) : 指定されたクラスターのステータスを表示します
 - [start](/tiup/tiup-component-cluster-start.md) : 指定されたクラスターを起動します

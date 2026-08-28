@@ -1,11 +1,11 @@
 ---
 title: Deploy and Maintain an Online TiDB Cluster Using TiUP
-summary: TiUPを使用してオンライン TiDB クラスターを展開および保守する方法を学習します。
+summary: TiUPを使用してオンライン TiDB クラスターをデプロイおよび保守する方法を学習します。
 ---
 
 # TiUPを使用してオンライン TiDBクラスタをデプロイおよび管理 {#deploy-and-maintain-an-online-tidb-cluster-using-tiup}
 
-このドキュメントでは、 TiUPクラスタコンポーネントの使用方法に焦点を当てています。オンライン展開の詳細な手順については、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。
+このドキュメントでは、 TiUPクラスタコンポーネントの使用方法に焦点を当てています。オンラインデプロイの詳細な手順については、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 ローカルテストデプロイメントで使用される[TiUP Playgroundコンポーネント](/tiup/tiup-playground.md)と同様に、 TiUPクラスタコンポーネントは本番環境向けにTiDBを迅速にデプロイします。Playgroundと比較して、クラスタコンポーネントはアップグレード、スケーリング、さらには運用と監査を含む、より強力な本番クラスタ管理機能を提供します。
 
@@ -105,7 +105,7 @@ monitoring_servers:
   - host: 172.16.5.134
 ```
 
-デフォルトでは、 TiUPは amd64アーキテクチャ上で実行されるバイナリファイルとして展開されます。ターゲットマシンが arm64アーキテクチャの場合は、トポロジファイルで設定できます。
+デフォルトでは、 TiUPは amd64アーキテクチャ上で実行されるバイナリファイルとしてデプロイされます。ターゲットマシンが arm64アーキテクチャの場合は、トポロジファイルで設定できます。
 
 ```yaml
 global:
@@ -156,7 +156,7 @@ Attention:
 Do you want to continue? [y/N]:
 ```
 
-パスワードを入力すると、 TiUPクラスターは必要なコンポーネントをダウンロードし、対応するマシンに展開します。次のメッセージが表示されれば、展開は成功です。
+パスワードを入力すると、 TiUPクラスターは必要なコンポーネントをダウンロードし、対応するマシンにデプロイします。次のメッセージが表示されれば、デプロイは成功です。
 
 ```bash
 Deployed cluster `prod-cluster` successfully
@@ -680,7 +680,7 @@ export TIUP_NATIVE_SSH=enable
 
 > **Note:**
 >
-> クラスターの展開プロセス中に、接続にパスワードを使用する必要がある場合 ( `-p` ) またはキー ファイルに`passphrase`が設定されている場合は、制御マシンに`sshpass`がインストールされていることを確認する必要があります。そうでない場合、タイムアウトエラーが報告されます。
+> クラスターのデプロイプロセス中に、接続にパスワードを使用する必要がある場合 ( `-p` ) またはキー ファイルに`passphrase`が設定されている場合は、制御マシンに`sshpass`がインストールされていることを確認する必要があります。そうでない場合、タイムアウトエラーが報告されます。
 
 ## 制御マシンを移行し、 TiUPデータをバックアップする {#migrate-control-machine-and-back-up-tiup-data}
 
@@ -697,7 +697,7 @@ TiUPデータは、ユーザーのホームディレクトリ内の`.tiup`ディ
 >
 > 制御マシンのディスク破損などの異常な状況によってTiUPデータが失われないように、 `.tiup`ディレクトリを定期的にバックアップすることをお勧めします。
 
-## クラスタの展開とO&amp;Mのためのメタファイルのバックアップと復元 {#back-up-and-restore-meta-files-for-cluster-deployment-and-o-x26-m}
+## クラスタのデプロイとO&amp;Mのためのメタファイルのバックアップと復元 {#back-up-and-restore-meta-files-for-cluster-deployment-and-o-x26-m}
 
 運用保守（O&amp;M）に使用するメタファイルが失われると、 TiUPを使用したクラスターの管理が失敗します。以下のコマンドを実行して、メタファイルを定期的にバックアップすることをお勧めします。
 

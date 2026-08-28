@@ -34,7 +34,7 @@ TiUP Playgroundコンポーネントは、主にLinuxまたはmacOSオペレー�
 
 テンプレートとニーズに基づいてトポロジファイルを編集できます。
 
-## 同じホストに複数のインスタンスを展開できますか? {#can-multiple-instances-be-deployed-on-the-same-host}
+## 同じホストに複数のインスタンスをデプロイできますか? {#can-multiple-instances-be-deployed-on-the-same-host}
 
 TiUPクラスターコンポーネントを使用すると、同じホストに複数のインスタンスをデプロイできますが、異なるポートとディレクトリを構成しないと、ディレクトリとポートの競合が発生する可能性があります。
 
@@ -46,7 +46,7 @@ TiUPクラスターコンポーネントを使用すると、同じホストに�
 
 複数の異なるクラスタが同じTiUP制御マシンにデプロイされている場合、デプロイおよびスケーリング中にこれらのクラスタ間のポートおよびディレクトリの競合が検出されます。クラスタが異なるTiUP制御マシンにデプロイされている場合、現在、競合検出はサポートされていません。
 
-## クラスタの展開中に、 TiUPは`ssh: handshake failed: read tcp 10.10.10.34:38980 -&gt; 10.10.10.34:3600: read: connection reset by peer`エラーを受信しました {#during-cluster-deployment-tiup-received-an-ssh-handshake-failed-read-tcp-10-10-10-34-38980-10-10-10-34-3600-read-connection-reset-by-peer-error}
+## クラスタのデプロイ中に、 TiUPは`ssh: handshake failed: read tcp 10.10.10.34:38980 -&gt; 10.10.10.34:3600: read: connection reset by peer`エラーを受信しました {#during-cluster-deployment-tiup-received-an-ssh-handshake-failed-read-tcp-10-10-10-34-38980-10-10-10-34-3600-read-connection-reset-by-peer-error}
 
 このエラーは、 TiUPのデフォルトの同時スレッド数が SSH 接続の最大数を超えているために発生する可能性があります。この問題を解決するには、デフォルトの SSH 接続数を増やしてから、sshd サービスを再起動してください。
 

@@ -9,7 +9,7 @@ summary: TiUP Playground を使用してデータ移行環境をすばやくセ�
 
 > **Note:**
 >
-> 本番への展開については、 [TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)を参照してください。
+> 本番へのデプロイについては、 [TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)を参照してください。
 
 ## ステップ1: テスト環境をセットアップする {#step-1-set-up-the-test-environment}
 

@@ -421,7 +421,7 @@ TiDB v5.0では、パフォーマンスの問題をより効率的にトラブ�
 
 ## 導入と保守 {#deployment-and-maintenance}
 
-### クラスタ展開操作のロジックを最適化し、DBAが標準的なTiDB本番クラスタをより迅速に展開できるようにします。 {#optimize-the-logic-of-cluster-deployment-operations-to-help-dbas-deploy-a-set-of-standard-tidb-production-cluster-faster}
+### クラスタデプロイ操作のロジックを最適化し、DBAが標準的なTiDB本番クラスタをより迅速にデプロイできるようにします。 {#optimize-the-logic-of-cluster-deployment-operations-to-help-dbas-deploy-a-set-of-standard-tidb-production-cluster-faster}
 
 [ユーザー向けドキュメント](/production-deployment-using-tiup.md)
 

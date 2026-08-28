@@ -426,7 +426,7 @@ Avg TiDB KV Request Duration = Avg TiKV GRPC Duration + Network latency between 
 - 同じデータセンター内: 差は通常 2 ミリ秒未満です。
 - 同じリージョン内の異なるアベイラビリティゾーンの場合: 差は通常 5 ミリ秒未満です。
 
-**例1: 同じデータセンターに展開されたクラスタのワークロードが低い**
+**例1: 同じデータセンターにデプロイされたクラスタのワークロードが低い**
 
 ![Same Data Center](/media/performance/oltp_kv_tso.png)
 
@@ -442,7 +442,7 @@ Avg TiDB KV Request Duration = Avg TiKV GRPC Duration + Network latency between 
 
 ![Cloud Env, TiDB Overloaded](/media/performance/cloud_kv_tso_overloaded.png)
 
-この例では、TiDBクラスタは同一リージョン内の異なるデータセンターに展開されており、TiDBネットワークとCPUリソースが深刻な過負荷状態にあります。TiDBの平均`BatchGet`レイテンシーは38.6ms、TiKV内部の平均`kv_batch_get`処理レイテンシーは6.15msです。その差は32ms以上で、正常値を大幅に上回っています。平均TSO待機レイテンシーは9.45ms、RPC時間は14.3msです。
+この例では、TiDBクラスタは同一リージョン内の異なるデータセンターにデプロイされており、TiDBネットワークとCPUリソースが深刻な過負荷状態にあります。TiDBの平均`BatchGet`レイテンシーは38.6ms、TiKV内部の平均`kv_batch_get`処理レイテンシーは6.15msです。その差は32ms以上で、正常値を大幅に上回っています。平均TSO待機レイテンシーは9.45ms、RPC時間は14.3msです。
 
 #### ストレージ非同期書き込み期間、保存期間、適用期間 {#storage-async-write-duration-store-duration-and-apply-duration}
 

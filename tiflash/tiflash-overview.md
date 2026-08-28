@@ -25,7 +25,7 @@ TiFlashは、ClickHouseによって効率的に実装されたコプロセッサ
 
 TiFlashは、 TiKVノード内のデータのリアルタイムレプリケーションを低コストで実行します。これにより、TiKVへの書き込みがブロックされることはありません。同時に、TiKVと同様の読み取り一貫性を提供し、最新のデータが読み取られることを保証します。TiFlashのリージョンレプリカはTiKVのレプリカと論理的に同一であり、TiKVのLeaderレプリカと同時に分割・統合されます。
 
-Linux AMD64アーキテクチャでTiFlash を展開するには、CPU が AVX2 命令セットをサポートしている必要があります。`grep avx2 /proc/cpuinfo`の出力が生成されることを確認してください。Linux ARM64アーキテクチャの場合、CPU が ARMv8 命令セットアーキテクチャをサポートしている必要があります。`grep 'crc32' /proc/cpuinfo | grep 'asimd'`の出力が生成されることを確認してください。これらの命令セット拡張を使用することで、TiFlash のベクトル化エンジンはより優れたパフォーマンスを発揮できます。
+Linux AMD64アーキテクチャでTiFlash をデプロイするには、CPU が AVX2 命令セットをサポートしている必要があります。`grep avx2 /proc/cpuinfo`の出力が生成されることを確認してください。Linux ARM64アーキテクチャの場合、CPU が ARMv8 命令セットアーキテクチャをサポートしている必要があります。`grep 'crc32' /proc/cpuinfo | grep 'asimd'`の出力が生成されることを確認してください。これらの命令セット拡張を使用することで、TiFlash のベクトル化エンジンはより優れたパフォーマンスを発揮できます。
 
 <CustomContent platform="tidb">
 
@@ -100,7 +100,7 @@ TPC-H データセットでのデータのインポートからクエリまで�
 
 <CustomContent platform="tidb">
 
-- TiFlashノードを含む新しいクラスターを展開するには、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。
+- TiFlashノードを含む新しいクラスターをデプロイするには、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。
 - デプロイされたクラスターにTiFlashノードを追加するには、 [TiFlashクラスターのスケールアウト](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)を参照してください。
 - [TiFlashクラスターを管理](/tiflash/maintain-tiflash.md) 。
 - [TiFlashのパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md) 。

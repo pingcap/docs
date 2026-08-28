@@ -32,7 +32,7 @@ tiup cluster list [flags]
 - 名前: クラスター名
 - ユーザー: デプロイメントユーザー
 - バージョン: クラスターのバージョン
-- パス: 制御マシン上のクラスタ展開データのパス
+- パス: 制御マシン上のクラスタデプロイデータのパス
 - PrivateKey: クラスターへの接続に使用される秘密鍵のパス
 
 [&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

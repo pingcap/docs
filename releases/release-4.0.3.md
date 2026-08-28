@@ -132,7 +132,7 @@ TiDB バージョン: 4.0.3
     - PDリーダーが切り替えられたときにTSOリクエストに時間がかかりすぎる可能性がある問題を修正[＃2622](https://github.com/pingcap/pd/pull/2622)
     - リーダー変更後の古いスケジューラの問題を修正[＃2608](https://github.com/pingcap/pd/pull/2608)
     - 配置ルールが有効になっているときに、リージョンのレプリカを最適な場所に調整できないことがある問題を修正しました[＃2605](https://github.com/pingcap/pd/pull/2605)
-    - 展開ディレクトリの変更に応じてストアの展開パスが更新されない問題を修正 [＃2600](https://github.com/pingcap/pd/pull/2600)
+    - デプロイディレクトリの変更に応じてストアのデプロイパスが更新されない問題を修正 [＃2600](https://github.com/pingcap/pd/pull/2600)
     - `store limit` 0になるのを防ぐ[＃2588](https://github.com/pingcap/pd/pull/2588)
 
 - TiDB Dashboard

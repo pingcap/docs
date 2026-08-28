@@ -9,7 +9,7 @@ summary: TiDB 6.5.0 の新機能、互換性の変更、改善点、バグ修正
 
 TiDB バージョン: 6.5.0
 
-クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [本番環境への展開](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [本番環境へのデプロイ](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup)
 
 TiDB 6.5.0 は長期サポートリリース (LTS) です。
 
@@ -126,7 +126,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     TiDB v6.5.0以降およびTiDB Operator v1.4.0以降では、Kubernetes上にTiDB Dashboardを独立したPodとしてデプロイできます。TiDB Operatorを使用すると、このPodのIPアドレスにアクセスしてTiDB Dashboardを起動できます。
 
-    TiDB Dashboardを個別に展開すると、次の利点が得られます。
+    TiDB Dashboardを個別にデプロイすると、次の利点が得られます。
 
     - TiDB Dashboardの計算処理はPDノードに負担をかけません。これにより、より安定したクラスター運用が実現します。
     - PD ノードが利用できない場合でも、ユーザーは診断のために TiDB Dashboardにアクセスできます。

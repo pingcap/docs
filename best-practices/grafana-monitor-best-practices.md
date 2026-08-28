@@ -17,7 +17,7 @@ aliases: ['/ja/docs/dev/best-practices/grafana-monitor-best-practices/','/ja/doc
 TiDB 2.1.3以降のバージョンでは、TiDBモニタリングはプル方式をサポートしています。これは以下の利点を持つ優れた調整です。
 
 - Prometheus を移行する必要がある場合、TiDB クラスター全体を再起動する必要はありません。調整前に Prometheus を移行するには、ターゲットアドレスを更新する必要があるため、クラスター全体を再起動する必要があります。
-- 監視ポイントが単一になるのを防ぐために、Grafana + Prometheus 監視プラットフォーム (高可用性ではない) の 2つの個別のセットを展開できます。
+- 監視ポイントが単一になるのを防ぐために、Grafana + Prometheus 監視プラットフォーム (高可用性ではない) の 2つの個別のセットをデプロイできます。
 - 単一障害点となる可能性のある Pushgateway が削除されます。
 
 ## 監視データのソースと表示 {#source-and-display-of-monitoring-data}

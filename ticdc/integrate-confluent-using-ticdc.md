@@ -9,7 +9,7 @@ Confluentは、Apache Kafka互換のストリーミングデータプラット�
 
 TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプリケーションをサポートします。本ドキュメントでは、 [TiCDC](/ticdc/ticdc-overview.md)を使用してTiDBの増分データをConfluentにレプリケーションし、さらにConfluent Cloud経由でSnowflake、ksqlDB、SQL Serverにデータをレプリケーションする方法を紹介します。本ドキュメントの構成は以下のとおりです。
 
-1. TiCDC が組み込まれた TiDB クラスターを迅速に展開します。
+1. TiCDC が組み込まれた TiDB クラスターを迅速にデプロイします。
 2. TiDB から Confluent Cloud にデータを複製する変更フィードを作成します。
 3. Confluent Cloud から Snowflake、ksqlDB、SQL Server にデータを複製するコネクタを作成します。
 4. go-tpc を使用して TiDB にデータを書き込み、Snowflake、ksqlDB、SQL Server のデータの変更を観察します。
@@ -30,7 +30,7 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
     tiup status
     ```
 
-    TiUPがまだインストールされていない場合は、 [TiUPをインストールする](/tiup/tiup-overview.md#install-tiup)を参照してください。実本番環境では、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md)の手順に従って TiCDC を展開できます。
+    TiUPがまだインストールされていない場合は、 [TiUPをインストールする](/tiup/tiup-overview.md#install-tiup)を参照してください。実本番環境では、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md)の手順に従って TiCDC をデプロイできます。
 
 2. Confluent Cloud を登録し、Confluent クラスターを作成します。
 

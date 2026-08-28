@@ -33,7 +33,7 @@ TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェ�
 
 詳細は[ソフトウェアとハ​​ードウェアの推奨事項](/hardware-and-software-requirements.md)参照。
 
-## インストールと展開 {#installation-and-deployment}
+## インストールとデプロイ {#installation-and-deployment}
 
 本番環境では、 [TiUP](/tiup/tiup-overview.md)を使用してTiDBクラスタをデプロイすることをお勧めします。[TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。
 

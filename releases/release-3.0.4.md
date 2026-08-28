@@ -126,4 +126,4 @@ TiDB Ansible バージョン: 3.0.4
 - パスワードの有効期限が切れた場合などに発生する長い待機時間に対処するために、rawモジュールをシェルモジュールに置き換えます[＃949](https://github.com/pingcap/tidb-ansible/pull/949)
 - TiDB構成項目`txn_local_latches`のデフォルト値を`false`に更新します
 - Grafanaダッシュボードの監視メトリックとアラートルールを最適化する[＃962](https://github.com/pingcap/tidb-ansible/pull/962) [＃963](https://github.com/pingcap/tidb-ansible/pull/963) [＃969](https://github.com/pingcap/tidb-ansible/pull/963)
-- 展開およびアップグレードの前に構成ファイルを確認する[＃934](https://github.com/pingcap/tidb-ansible/pull/934) [＃972](https://github.com/pingcap/tidb-ansible/pull/972)
+- デプロイおよびアップグレードの前に構成ファイルを確認する[＃934](https://github.com/pingcap/tidb-ansible/pull/934) [＃972](https://github.com/pingcap/tidb-ansible/pull/972)

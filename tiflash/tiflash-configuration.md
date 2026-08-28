@@ -5,7 +5,7 @@ summary: TiFlash の設定方法を学びます。
 
 # TiFlashの設定 {#configure-tiflash}
 
-このドキュメントでは、 TiFlashの展開と使用に関連する構成パラメータについて説明します。
+このドキュメントでは、 TiFlashのデプロイと使用に関連する構成パラメータについて説明します。
 
 ## TiFlash構成パラメータ {#tiflash-configuration-parameters}
 
@@ -47,7 +47,7 @@ summary: TiFlash の設定方法を学びます。
 #### `path` {#path}
 
 - TiFlashデータのストレージパス。複数のディレクトリがある場合は、各ディレクトリをカンマで区切ってください。
-- TiDB v4.0.9以降、 `path`と[`path_realtime_mode`](#path_realtime_mode)は非推奨となりました。マルチディスク展開シナリオでパフォーマンスを向上させるには、 [`storage`](#storage-new-in-v409)セクションの設定を使用してください。
+- TiDB v4.0.9以降、 `path`と[`path_realtime_mode`](#path_realtime_mode)は非推奨となりました。マルチディスクデプロイシナリオでパフォーマンスを向上させるには、 [`storage`](#storage-new-in-v409)セクションの設定を使用してください。
 - TiDB v5.2.0 以降、 [`storage.io_rate_limit`](#storageio_rate_limit-new-in-v520)構成を使用する必要がある場合は、同時にTiFlashデータのストレージパスを[`storage.main.dir`](#dir)に設定する必要があります。
 - `storage`構成が存在する場合、 `path`と[`path_realtime_mode`](#path_realtime_mode)構成は両方とも無視されます。
 
@@ -56,7 +56,7 @@ summary: TiFlash の設定方法を学びます。
 #### `path_realtime_mode` {#path_realtime_mode}
 
 - `true`に設定し、 `path`に複数のディレクトリを設定した場合、最初のディレクトリに最新のデータが保存され、残りのディレクトリには古いデータが保存されます。
-- TiDB v4.0.9以降、 [`path`](#path)と`path_realtime_mode`は非推奨となりました。マルチディスク展開シナリオでパフォーマンスを向上させるには、 [`storage`](#storage-new-in-v409)セクションの設定を使用してください。
+- TiDB v4.0.9以降、 [`path`](#path)と`path_realtime_mode`は非推奨となりました。マルチディスクデプロイシナリオでパフォーマンスを向上させるには、 [`storage`](#storage-new-in-v409)セクションの設定を使用してください。
 - `storage`構成が存在する場合、 [`path`](#path)と`path_realtime_mode`構成は両方とも無視されます。
 - デフォルト値: `false`
 
@@ -258,7 +258,7 @@ I/O トラフィック制限設定を構成します。
 ##### `advertise-addr` {#advertise-addr}
 
 - 外部アクセスアドレス`addr` 。空のままにした場合、デフォルトで`addr`が使用されます。
-- クラスターを複数のノードに展開する場合は、他のノードが`advertise-addr`を介してアクセスできることを保証する必要があります。
+- クラスターを複数のノードにデプロイする場合は、他のノードが`advertise-addr`を介してアクセスできることを保証する必要があります。
 
 ##### `status-addr` {#status-addr}
 
@@ -268,7 +268,7 @@ I/O トラフィック制限設定を構成します。
 ##### `advertise-status-addr` {#advertise-status-addr}
 
 - status-addrの外部アクセスアドレス。空のままにした場合、デフォルトで`status-addr`が使用されます。
-- クラスターを複数のノードに展開する場合は、他のノードが`advertise-status-addr`を介してアクセスできることを保証する必要があります。
+- クラスターを複数のノードにデプロイする場合は、他のノードが`advertise-status-addr`を介してアクセスできることを保証する必要があります。
 
 ##### `engine-addr` {#engine-addr}
 
@@ -578,7 +578,7 @@ I/O トラフィック制限設定を構成します。
 - `{ zone = "us-west-1", disk = "ssd" }`などのサーバー属性を指定します。ラベルを使用してレプリカをスケジュールする方法の詳細については、 [利用可能なゾーンを設定する](/tiflash/create-tiflash-replicas.md#set-available-zones)を参照してください。
 - デフォルト値: `{}`
 
-### マルチディスク展開 {#multi-disk-deployment}
+### マルチディスクデプロイ {#multi-disk-deployment}
 
 TiFlashはマルチディスク構成をサポートしています。TiFlashノードに複数のディスクがある場合、以下のセクションで説明するパラメータを設定することで、それらのディスクを最大限に活用できます。TiUPで使用するTiUPの設定テンプレートについては、 [TiFlashトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)を参照してください。
 

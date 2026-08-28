@@ -11,7 +11,7 @@ summary: TiDB 8.1.0 の新機能、互換性の変更、改善点、バグ修正
 
 TiDB バージョン: 8.1.0
 
-クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v8.1/quick-start-with-tidb) | [本番環境への展開](https://docs.pingcap.com/tidb/v8.1/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v8.1/quick-start-with-tidb) | [本番環境へのデプロイ](https://docs.pingcap.com/tidb/v8.1/production-deployment-using-tiup)
 
 TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
@@ -231,7 +231,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
     - DR自動同期の`State`監視メトリックにデータが表示されない問題を修正[＃7974](https://github.com/tikv/pd/issues/7974) @[lhy1024](https://github.com/lhy1024)
     - バイナリバージョンのチェックでPD panicが発生する可能性がある問題を修正 [＃7978](https://github.com/tikv/pd/issues/7978) @[JmPotato](https://github.com/JmPotato)
     - TTLパラメータを解析する際に発生する型変換エラーを修正[＃7980](https://github.com/tikv/pd/issues/7980) @[HuSharp](https://github.com/HuSharp)
-    - 展開された2つのデータセンター間でリーダーを切り替えるとLeaderが失敗する問題を修正[＃7992](https://github.com/tikv/pd/issues/7992) @[TonsnakeLin](https://github.com/TonsnakeLin)
+    - デプロイされた2つのデータセンター間でリーダーを切り替えるとLeaderが失敗する問題を修正[＃7992](https://github.com/tikv/pd/issues/7992) @[TonsnakeLin](https://github.com/TonsnakeLin)
     - pd-ctl の`PrintErrln`が`stderr` にエラーメッセージを出力できない問題を修正しました [＃8022](https://github.com/tikv/pd/issues/8022) @[HuSharp](https://github.com/HuSharp)
     - `Merge`スケジュールを生成する際にPDがpanicする可能性がある問題を修正 [＃8049](https://github.com/tikv/pd/issues/8049) @[nolouch](https://github.com/nolouch)
     - `GetAdditionalInfo` によって引き起こされるpanic問題を修正 [＃8079](https://github.com/tikv/pd/issues/8079) @[HuSharp](https://github.com/HuSharp)

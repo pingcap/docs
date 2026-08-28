@@ -71,6 +71,6 @@ TiDB Ansible バージョン: 2.1.18
 
 - TiDB Binlog に「キューサイズ」と「クエリヒストグラム」の 2つの監視項目を追加します。 [＃952](https://github.com/pingcap/tidb-ansible/pull/952)
 - TiDBアラートルールを更新 [＃961](https://github.com/pingcap/tidb-ansible/pull/961)
-- 展開およびアップグレードの前に構成ファイルを確認する[＃973](https://github.com/pingcap/tidb-ansible/pull/973)
+- デプロイおよびアップグレードの前に構成ファイルを確認する[＃973](https://github.com/pingcap/tidb-ansible/pull/973)
 - TiDB のインデックス速度を監視するための新しいメトリックを追加します [＃987](https://github.com/pingcap/tidb-ansible/pull/987)
 - TiDB Binlog監視ダッシュボードを更新して、Grafana v4.6.3 と互換性を持たせました。 [＃993](https://github.com/pingcap/tidb-ansible/pull/993)

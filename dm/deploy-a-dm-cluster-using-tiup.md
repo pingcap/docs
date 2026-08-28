@@ -1,6 +1,6 @@
 ---
 title: Deploy a DM Cluster Using TiUP
-summary: TiUP DMを使用して TiDB データ移行を展開する方法を学習します。
+summary: TiUP DMを使用して TiDB データ移行をデプロイする方法を学習します。
 ---
 
 # TiUPを使用して DMクラスタをデプロイ {#deploy-a-dm-cluster-using-tiup}
@@ -17,7 +17,7 @@ TiUPはDM v2.0以降のバージョンの導入をサポートしています。
 
 - DMが完全なデータレプリケーションタスクを実行する場合、DMワーカーは1つの上流データベースのみにバインドされます。DMワーカーはまずローカルで全データをエクスポートし、その後、下流データベースにインポートします。そのため、ワーカーのホスト領域には、エクスポートするすべての上流テーブルを保存できる十分な大きさが必要です。ストレージパスは、タスク作成時に後で指定します。
 
-- DM クラスターを展開する場合は、 [ハードウェアとソフトウェアの要件](/dm/dm-hardware-and-software-requirements.md)を満たす必要があります。
+- DM クラスターをデプロイする場合は、 [ハードウェアとソフトウェアの要件](/dm/dm-hardware-and-software-requirements.md)を満たす必要があります。
 
 - v8.0.0 以降、 [データベースのパスワードを暗号化する](/dm/dm-manage-source.md#encrypt-the-database-password)必要な場合は、事前に[データベースのパスワードを暗号化および復号化するために使用されるキーファイル](/dm/dm-customized-secret-key.md)を DM マスターに保存し、 `dmctl encrypt`コマンドを使用する前に[`secret-key-path`](/dm/dm-master-configuration-file.md)を DM マスターに設定する必要があります。
 
@@ -47,7 +47,7 @@ TiUPはDM v2.0以降のバージョンの導入をサポートしています。
 
 コマンド`tiup dm template > topology.yaml`を使用すると、構成ファイル テンプレートをすばやく生成できます。
 
-3 つの DM マスター、3つの DM ワーカー、および 1つの監視コンポーネントインスタンスを展開する構成は次のとおりです。
+3 つの DM マスター、3つの DM ワーカー、および 1つの監視コンポーネントインスタンスをデプロイする構成は次のとおりです。
 
 ```yaml
 # The global variables apply to all other components in the configuration. If one specific value is missing in the component instance, the corresponding global variable serves as the default value.
@@ -164,7 +164,7 @@ tiup dm deploy ${name} ${version} ./topology.yaml -u ${ssh_user} [-p] [-i /home/
 | `${name}`                | DM クラスターの名前 (例: dm-test)                                                        |
 | `${version}`             | DM クラスターのバージョン`tiup list dm-master`を実行すると、サポートされている他のバージョンを確認できます。               |
 | `./topology.yaml`        | トポロジ構成ファイルのパス。                                                                  |
-| `-u`または`--user`          | クラスターの展開を完了するには、root ユーザーまたは ssh および sudo権限を持つ他のユーザーアカウントとしてターゲットマシンにログインします。 |
+| `-u`または`--user`          | クラスターのデプロイを完了するには、root ユーザーまたは ssh および sudo権限を持つ他のユーザーアカウントとしてターゲットマシンにログインします。 |
 | `-p`または`--password`      | 対象ホストのパスワード。指定すると、パスワード認証が使用されます。                                               |
 | `-i`または`--identity_file` | SSH IDファイルのパス。指定すると公開鍵認証が使用されます（デフォルトは「/root/.ssh/id_rsa」）。                     |
 
@@ -184,7 +184,7 @@ Name  User  Version  Path                                  PrivateKey
 dm-test  tidb  ${version}  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/storage/dm/clusters/dm-test/ssh/id_rsa
 ```
 
-## ステップ5: 展開されたDMクラスタのステータスを確認する {#step-5-check-the-status-of-the-deployed-dm-cluster}
+## ステップ5: デプロイされたDMクラスタのステータスを確認する {#step-5-check-the-status-of-the-deployed-dm-cluster}
 
 `dm-test`クラスターのステータスを確認するには、次のコマンドを実行します。
 

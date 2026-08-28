@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Resource Manager Page
-summary: TiDB Dashboardのリソースマネージャページは、クラスタ管理者がリソースグループを作成し、クォータを設定することでリソース分離を実装するのに役立ちます。クラスタ容量を推定し、リソース消費量を監視するための方法を提供します。このページには、TiDB Dashboardまたはブラウザからアクセスできます。このページには、構成、容量推定、およびメトリックのセクションがあります。容量推定方法には、ハードウェアの展開と実際のワークロードが含まれます。監視メトリックには、消費されたRUの合計、リソースグループによる消費RU、TiDB CPUクォータと使用量、TiKV CPUクォータと使用量、TiKV IO MBpsが含まれます。
+summary: TiDB Dashboardのリソースマネージャページは、クラスタ管理者がリソースグループを作成し、クォータを設定することでリソース分離を実装するのに役立ちます。クラスタ容量を推定し、リソース消費量を監視するための方法を提供します。このページには、TiDB Dashboardまたはブラウザからアクセスできます。このページには、構成、容量推定、およびメトリックのセクションがあります。容量推定方法には、ハードウェアのデプロイと実際のワークロードが含まれます。監視メトリックには、消費されたRUの合計、リソースグループによる消費RU、TiDB CPUクォータと使用量、TiKV CPUクォータと使用量、TiKV IO MBpsが含まれます。
 ---
 
 # TiDB Dashboardリソースマネージャーページ {#tidb-dashboard-resource-manager-page}
@@ -28,7 +28,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 - 容量の見積もり：リソース計画を立てる前に、クラスター全体の容量を把握する必要があります。以下のいずれかの方法を使用できます。
 
     - [実際の作業負荷に基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
-    - [ハードウェアの展開に基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
+    - [ハードウェアのデプロイに基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
 
 - メトリクス: パネル上のメトリクスを観察することで、クラスターの現在の全体的なリソース消費状態を把握できます。
 
@@ -36,7 +36,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
 リソース計画を立てる前に、クラスター全体の容量を把握しておく必要があります。TiDBは、現在のクラスターの[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru#what-is-request-unit-ru)の容量を見積もる2つの方法を提供しています。
 
-- [ハードウェアの展開に基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
+- [ハードウェアのデプロイに基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
 
     TiDB は次のワークロード タイプを受け入れます。
 

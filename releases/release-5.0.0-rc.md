@@ -181,7 +181,7 @@ SQLパフォーマンスの問題をトラブルシューティングする際�
 
 [ユーザードキュメント](/sql-statements/sql-statement-explain.md)
 
-## 展開と保守 {#deployment-and-maintenance}
+## デプロイと保守 {#deployment-and-maintenance}
 
 - 以前は、TiDB Ansibleの設定情報がTiUPにインポートされると、 TiUPはユーザー設定を`ansible-imported-configs`ディレクトリに保存していました。その後、ユーザーが`tiup cluster edit-config`を使用して設定を編集する必要がある場合、インポートされた設定はエディターインターフェースに表示されず、ユーザーの混乱を招く可能性がありました。TiDB v5.0では、TiDB Ansibleの設定がインポートされると、 TiUPは設定情報を`ansible-imported-configs`とエディターインターフェースの両方に保存します。この改善により、ユーザーはクラスター設定を編集する際に、インポートされた設定を確認できます。
 - 複数のミラーを 1つにマージし、ローカル ミラーにコンポーネントを公開し、ローカル ミラーにコンポーネント所有者を追加する機能をサポートする拡張`mirror`コマンド[＃814](https://github.com/pingcap/tiup/issues/814)

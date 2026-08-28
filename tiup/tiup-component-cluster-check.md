@@ -72,7 +72,7 @@ cat /sys/kernel/mm/transparent_hugepage/enabled
 <deploy-user> soft stack 10240
 ```
 
-`<deploy-user>`は TiDB クラスターを展開して実行するユーザーであり、最後の列はシステムに必要な最小値です。
+`<deploy-user>`は TiDB クラスターをデプロイして実行するユーザーであり、最後の列はシステムに必要な最小値です。
 
 ### SELinux {#selinux}
 

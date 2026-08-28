@@ -16,11 +16,11 @@
 - [複数列インデックスの最適化](/best-practices/multi-column-index-best-practices.md)
 - [インデックスを管理し、未使用のインデックスを特定する](/best-practices/index-management-best-practices.md)
 
-## 展開
+## デプロイ
 
 - [パブリッククラウドにTiDBをデプロイ](/best-practices/best-practices-on-public-cloud.md)
-- [3ノードのハイブリッド展開](/best-practices/three-nodes-hybrid-deployment.md)
-- [3つのデータセンター展開におけるローカル読み取り](/best-practices/three-dc-local-read.md)
+- [3ノードのハイブリッドデプロイ](/best-practices/three-nodes-hybrid-deployment.md)
+- [3つのデータセンターデプロイにおけるローカル読み取り](/best-practices/three-dc-local-read.md)
 
 ## オペレーション
 
