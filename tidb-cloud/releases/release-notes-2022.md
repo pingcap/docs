@@ -463,7 +463,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 ## 2022年7月19日 {#july-19-2022}
 
-- [TiKVノードサイズ](/tidb-cloud/size-your-cluster.md#tikv-vcpu-and-ram) : `8 vCPU, 32 GiB`の新しいオプションを提供します。8 vCPU TiKVノードの場合は、 `8 vCPU, 32 GiB`または`8 vCPU, 64 GiB`選択できます。
+- [TiKVノードサイズ](/tidb-cloud/size-your-cluster.md#tikv-vcpu-and-ram) : `8 vCPU, 32 GiB`の新しいオプションを提供します。8 vCPU TiKVノードの場合は、 `8 vCPU, 32 GiB`または`8 vCPU, 64 GiB`を選択できます。
 - [**TiDBに接続する**](/tidb-cloud/connect-via-standard-connection.md)ダイアログに提供されるサンプルコードで構文のハイライト表示をサポートし、コードの可読性を向上させました。サンプルコード内で置換が必要なパラメータを簡単に特定できます。
 - [**データインポートタスク**](/tidb-cloud/import-sample-data.md)ページでインポートタスクを確認した後、 TiDB Cloud がソースデータにアクセスできるかどうかを自動的に検証することをサポートします。
 - TiDB Cloudコンソールのテーマ カラーを[PingCAPウェブサイト](https://www.pingcap.com/)のテーマ カラーと一致するように変更します。

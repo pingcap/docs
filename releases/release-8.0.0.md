@@ -127,7 +127,7 @@ TiDB バージョン: 8.0.0
 
     バージョン 8.0.0 以降、TiDB は大量のデータを処理するための DML タイプをサポートしています。この DML タイプは、実行中にデータを TiKV にタイムリーに書き込み、すべてのトランザクション データをメモリに継続的に格納することを回避し、メモリ制限を超える大量のデータの処理をサポートします。この DML タイプはトランザクションの整合性を保証し、標準 DML と同じ構文を使用します。 `INSERT` 、 `UPDATE` 、 `REPLACE` 、および`DELETE`ステートメントは、この新しい DML タイプを使用して大規模な DML 操作を実行できます。
 
-    この DML タイプは[パイプラインDML](https://github.com/pingcap/tidb/blob/release-8.0/docs/design/2024-01-09-pipelined-DML.md)機能によって実装され、自動コミットが有効になっているステートメントでのみ有効になります。この DML タイプを有効にするかどうかは、システム変数[`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800)設定することで制御できます。
+    この DML タイプは[パイプラインDML](https://github.com/pingcap/tidb/blob/release-8.0/docs/design/2024-01-09-pipelined-DML.md)機能によって実装され、自動コミットが有効になっているステートメントでのみ有効になります。この DML タイプを有効にするかどうかは、システム変数[`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800)を設定することで制御できます。
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_dml_type-new-in-v800)を参照してください。
 
@@ -161,7 +161,7 @@ TiDB バージョン: 8.0.0
 
 - 一般ログの別ファイルへの書き込みをサポート [#51248](https://github.com/pingcap/tidb/issues/51248) @[Defined2014](https://github.com/Defined2014)
 
-    一般ログは、MySQL互換の機能で、実行されたすべてのSQLステートメントをログに記録し、問題の診断に役立ちます。TiDBもこの機能をサポートしています。変数[`tidb_general_log`](/system-variables.md#tidb_general_log)設定することで有効にできます。ただし、以前のバージョンでは、一般ログの内容は他の情報とともにTiDBインスタンスログにしか書き込まれず、ログを長期間保持する必要があるユーザーにとっては不便でした。
+    一般ログは、MySQL互換の機能で、実行されたすべてのSQLステートメントをログに記録し、問題の診断に役立ちます。TiDBもこの機能をサポートしています。変数[`tidb_general_log`](/system-variables.md#tidb_general_log)を設定することで有効にできます。ただし、以前のバージョンでは、一般ログの内容は他の情報とともにTiDBインスタンスログにしか書き込まれず、ログを長期間保持する必要があるユーザーにとっては不便でした。
 
     バージョン8.0.0以降では、設定項目[`log.general-log-file`](/tidb-configuration-file.md#general-log-file-new-in-v800)に有効なファイル名を設定することで、一般ログを指定したファイルに書き込むことができます。一般ログは、インスタンスログと同じローテーションおよび保持ポリシーに従います。
 

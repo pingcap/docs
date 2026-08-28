@@ -61,7 +61,7 @@ TiDB バージョン: 6.1.0
 
 - カスタマイズされたリージョンサイズをサポート
 
-    v6.1.0以降では、 [`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size)設定することでリージョンのサイズを大きく設定できます。これにより、リージョンの数を効果的に削減し、リージョンの管理を容易にし、クラスターのパフォーマンスと安定性を向上させることができます。
+    v6.1.0以降では、 [`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size)を設定することでリージョンのサイズを大きく設定できます。これにより、リージョンの数を効果的に削減し、リージョンの管理を容易にし、クラスターのパフォーマンスと安定性を向上させることができます。
 
     [ユーザードキュメント](/tune-region-performance.md#use-region-split-size-to-adjust-region-size) [＃11515](https://github.com/tikv/tikv/issues/11515)
 

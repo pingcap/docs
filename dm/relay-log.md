@@ -375,4 +375,4 @@ deb76a2b-09cc-11e9-9129-5242cf3bb246.000003
 
     > **Note:**
     >
-    > 上流のリレーログがパージされている場合はエラーが発生します。この場合、移行の開始位置を指定するために[`relay-binlog-gtid`](/dm/dm-source-configuration-file.md#global-configuration)設定する必要があります。
+    > 上流のリレーログがパージされている場合はエラーが発生します。この場合、移行の開始位置を指定するために[`relay-binlog-gtid`](/dm/dm-source-configuration-file.md#global-configuration)を設定する必要があります。

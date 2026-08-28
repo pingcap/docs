@@ -132,13 +132,13 @@ TiDB の悲観的なトランザクションは、MySQL のトランザクショ
 
 TiDBは、悲観的トランザクションモードにおいて、以下の2つの分離レベルをサポートしています。
 
-- デフォルトでは[繰り返し読み取り可能](/transaction-isolation-levels.md#repeatable-read-isolation-level)、これは MySQL と同じです。
+- デフォルトでは[Repeatable Read](/transaction-isolation-levels.md#repeatable-read-isolation-level)、これは MySQL と同じです。
 
     > **Note:**
     >
-    > この分離レベルでは、最新のコミットされたデータに基づいて DML 操作が実行されます。動作は MySQL と同じですが、TiDB の楽観的トランザクションモードとは異なります。 [TiDBとMySQLのリピータブルリードの違い](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)を参照してください。
+    > この分離レベルでは、最新のコミットされたデータに基づいて DML 操作が実行されます。動作は MySQL と同じですが、TiDB の楽観的トランザクションモードとは異なります。 [TiDBとMySQLのRepeatable Readの違い](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)を参照してください。
 
-- [コミット済みを読む](/transaction-isolation-levels.md#read-committed-isolation-level)。この分離レベルは[`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)ステートメントを使用して設定できます。
+- [Read Committed](/transaction-isolation-levels.md#read-committed-isolation-level)。この分離レベルは[`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)ステートメントを使用して設定できます。
 
 ## 悲観的なトランザクションコミットプロセス {#pessimistic-transaction-commit-process}
 

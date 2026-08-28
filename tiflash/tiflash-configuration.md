@@ -393,7 +393,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `manual_compact_pool_size`<span class="version-mark">バージョン6.1の新機能</span> {#manual_compact_pool_size-new-in-v61}
 
-- TiFlash がTiDB から`ALTER TABLE ... COMPACT`受信したときに同時に処理できる要求の数を指定します。
+- TiFlash がTiDB から`ALTER TABLE ... COMPACT`を受信したときに同時に処理できる要求の数を指定します。
 - 値が`0`に設定されている場合、デフォルト値`1`が優先されます。
 - デフォルト値: `1`
 
@@ -469,7 +469,7 @@ I/O トラフィック制限設定を構成します。
 - 構成項目が`false`または`"off"`に設定されている場合、ログの秘匿化は無効になります。
 - 構成項目が`true`または`"on"`に設定されている場合、ログ内のすべてのユーザーデータは`?`に置き換えられます。
 - 設定項目を`"marker"`に設定すると、ログ内のすべてのユーザーデータは`‹ ›`で囲まれます。ユーザーデータに`‹`または`›`が含まれている場合、 `‹`は`‹‹`に、 `›`は`››`にエスケープされます。マークされたログに基づいて、ログを表示する際にマークされた情報を非感度化するかどうかを決定できます。
-- [`tiflash-learner.toml`](#configure-the-tiflash-learnertoml-file)での tiflash-learner のログインにも`security.redact-info-log`設定する必要があることに注意してください。
+- [`tiflash-learner.toml`](#configure-the-tiflash-learnertoml-file)での tiflash-learner のログインにも`security.redact-info-log`を設定する必要があることに注意してください。
 
 ##### `ca_path` {#ca_path}
 

@@ -116,8 +116,8 @@ COMMIT;
 
 v6.5.10、v7.1.6、v7.5.3、v8.1.1以降、MySQL以外のシンクを使用する場合、TiCDCはGitHub Issue [＃11211](https://github.com/pingcap/tiflow/issues/11211)に記載されているように、 `output-raw-change-event`パラメータを介して主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御できるようになりました。このパラメータの具体的な動作は次のとおりです。
 
-- `output-raw-change-event = false`設定すると、主キーまたは null 以外の一意インデックス値が`UPDATE`イベントで変更された場合、TiCDC はイベントを`DELETE`と`INSERT`イベントに分割し、すべてのイベントが`INSERT`イベントの前の`DELETE`イベントのシーケンスに従うようにします。
-- `output-raw-change-event = true`設定すると、TiCDCは`UPDATE`イベントを分割せず、 [MySQL以外のシンクの主キーまたは一意キーの`UPDATE`イベントを分割する](/ticdc/ticdc-split-update-behavior.md#split-primary-or-unique-key-update-events-for-non-mysql-sinks)で説明した問題への対処はコンシューマー側で行います。そうしないと、データの不整合が発生するリスクがあります。テーブルの主キーがクラスター化インデックスである場合、主キーへの更新はTiDB内で依然として`DELETE`つと`INSERT`イベントに分割されますが、この動作は`output-raw-change-event`パラメータの影響を受けません。
+- `output-raw-change-event = false`を設定すると、主キーまたは null 以外の一意インデックス値が`UPDATE`イベントで変更された場合、TiCDC はイベントを`DELETE`と`INSERT`イベントに分割し、すべてのイベントが`INSERT`イベントの前の`DELETE`イベントのシーケンスに従うようにします。
+- `output-raw-change-event = true`を設定すると、TiCDCは`UPDATE`イベントを分割せず、 [MySQL以外のシンクの主キーまたは一意キーの`UPDATE`イベントを分割する](/ticdc/ticdc-split-update-behavior.md#split-primary-or-unique-key-update-events-for-non-mysql-sinks)で説明した問題への対処はコンシューマー側で行います。そうしないと、データの不整合が発生するリスクがあります。テーブルの主キーがクラスター化インデックスである場合、主キーへの更新はTiDB内で依然として`DELETE`つと`INSERT`イベントに分割されますが、この動作は`output-raw-change-event`パラメータの影響を受けません。
 
 > **Note**
 >

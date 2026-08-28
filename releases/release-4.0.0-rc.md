@@ -46,7 +46,7 @@ TiUPバージョン: 0.0.3
 
 - TiDB
 
-    - 大文字と小文字を区別しない照合順序を追加して、ユーザーが新しいクラスターで`utf8mb4_general_ci`と`utf8_general_ci`有効にできるようにします。 [＃33](https://github.com/pingcap/tidb/projects/33)
+    - 大文字と小文字を区別しない照合順序を追加して、ユーザーが新しいクラスターで`utf8mb4_general_ci`と`utf8_general_ci`を有効にできるようにします。 [＃33](https://github.com/pingcap/tidb/projects/33)
     - 切り捨てられたテーブル回復をサポートするために`RECOVER TABLE`構文を拡張します [＃15398](https://github.com/pingcap/tidb/pull/15398)
     - tidb-server ステータスポートが使用中の場合、アラートログを返す代わりに開始を拒否します[＃15177](https://github.com/pingcap/tidb/pull/15177)
     - デフォルトの列値としてシーケンスを使用する書き込みパフォーマンスを最適化する[＃15216](https://github.com/pingcap/tidb/pull/15216)

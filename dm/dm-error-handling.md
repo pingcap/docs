@@ -172,7 +172,7 @@ binlogレプリケーション処理ユニットの場合は、次のソリュ�
 
 6. `query-status`を使用して移行タスクのステータスを確認する。元のエラーの原因となったリレーログファイルの移行が完了したら、 `safe-mode`元の値に戻して移行タスクを再開できます。
 
-### タスクをクエリするかログを確認すると、 `Access denied for user 'root'@'172.31.43.27' (using password: YES)`表示されます。 {#access-denied-for-user-root172314327-using-password-yes-shows-when-you-query-the-task-or-check-the-log}
+### タスクをクエリするかログを確認すると、 `Access denied for user 'root'@'172.31.43.27' (using password: YES)`が表示されます。 {#access-denied-for-user-root172314327-using-password-yes-shows-when-you-query-the-task-or-check-the-log}
 
 すべてのDM設定ファイルにおけるデータベース関連のパスワードについては、 `dmctl`で暗号化したパスワードを使用することをお勧めします。データベースパスワードが空の場合は、暗号化する必要はありません。プレーンテキストパスワードの暗号化方法については、 [dmctlを使用してデータベースパスワードを暗号化する](/dm/dm-manage-source.md#encrypt-the-database-password)を参照してください。
 

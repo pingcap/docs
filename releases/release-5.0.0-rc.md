@@ -101,7 +101,7 @@ TiDB では、ID 情報やクレジットカード番号などの機密情報の
 
 ただし、非同期コミットが有効になっている場合、トランザクションの外部一貫性は`tidb_guarantee_external_consistency = ON`設定されている場合**のみ**保証されます。非同期コミットを有効にすると、パフォーマンスが低下する可能性があります。
 
-ユーザーは、グローバル変数`tidb_enable_async_commit = ON`設定することでこの機能を有効にできます。
+ユーザーは、グローバル変数`tidb_enable_async_commit = ON`を設定することでこの機能を有効にできます。
 
 - [ユーザードキュメント](/system-variables.md#tidb_enable_async_commit-new-in-v50)
 - 関連号: [＃8316](https://github.com/tikv/tikv/issues/8316)

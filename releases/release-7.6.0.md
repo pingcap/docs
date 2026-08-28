@@ -83,7 +83,7 @@ TiDB バージョン: 7.6.0
 
     TiDBはv7.6.0以降、TiKVの定期的なフルコンパクションをサポートしています。この機能は、ガベージコレクション（GC）を拡張し、冗長なデータバージョンを排除するものです。アプリケーションのアクティビティに明らかなピークと谷が見られるシナリオでは、この機能を使用してアイドル期間中にデータコンパクションを実行することで、ピーク時のパフォーマンスを向上させることができます。
 
-    TiKV の設定項目[`periodic-full-compact-start-times`](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760)設定することで、TiKV が定期的な完全圧縮を開始する特定の時間を設定できます。また、 [`periodic-full-compact-start-max-cpu`](/tikv-configuration-file.md#periodic-full-compact-start-max-cpu-new-in-v760)を設定することで、TiKV の定期的な完全圧縮の最大 CPU 使用率を制限できます。 `periodic-full-compact-start-max-cpu`のデフォルト値は`0.1`です。これは、TiKV の CPU 使用率が 10% 未満の場合にのみ定期的な完全圧縮がトリガーされることを意味し、アプリケーションのトラフィックへの影響を軽減します。
+    TiKV の設定項目[`periodic-full-compact-start-times`](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760)を設定することで、TiKV が定期的な完全圧縮を開始する特定の時間を設定できます。また、 [`periodic-full-compact-start-max-cpu`](/tikv-configuration-file.md#periodic-full-compact-start-max-cpu-new-in-v760)を設定することで、TiKV の定期的な完全圧縮の最大 CPU 使用率を制限できます。 `periodic-full-compact-start-max-cpu`のデフォルト値は`0.1`です。これは、TiKV の CPU 使用率が 10% 未満の場合にのみ定期的な完全圧縮がトリガーされることを意味し、アプリケーションのトラフィックへの影響を軽減します。
 
     詳細については、 [ドキュメント](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760)を参照してください。
 
@@ -105,7 +105,7 @@ TiDB バージョン: 7.6.0
 
     さらに、クロスデータベースバインディングは、ユーザーデータとワークロードの不均一な分布や急激な変化によって引き起こされるSQLパフォーマンスの問題を効果的に軽減できます。SaaSプロバイダーは、クロスデータベースバインディングを使用して、大量のデータを持つユーザーによって検証された実行計画を修正することで、すべてのユーザーの実行計画を固定できます。SaaSプロバイダーにとって、この機能は利便性とユーザーエクスペリエンスを大幅に向上させます。
 
-    クロスデータベースバインディングによって発生するシステムオーバーヘッド（1%未満）のため、TiDBはこの機能をデフォルトで無効にしています。クロスデータベースバインディングを使用するには、まずシステム変数[`tidb_opt_enable_fuzzy_binding`](/system-variables.md#tidb_opt_enable_fuzzy_binding-new-in-v760)有効にする必要があります。
+    クロスデータベースバインディングによって発生するシステムオーバーヘッド（1%未満）のため、TiDBはこの機能をデフォルトで無効にしています。クロスデータベースバインディングを使用するには、まずシステム変数[`tidb_opt_enable_fuzzy_binding`](/system-variables.md#tidb_opt_enable_fuzzy_binding-new-in-v760)を有効にする必要があります。
 
     詳細については、 [ドキュメント](/sql-plan-management.md#cross-database-binding)を参照してください。
 

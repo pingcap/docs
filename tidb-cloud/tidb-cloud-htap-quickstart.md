@@ -87,9 +87,9 @@ ORDER BY
   `release_year` DESC;
 ```
 
-### ステップ3. 行ベースのストレージと列ベースのストレージのクエリパフォーマンスを比較する {#step-3-compare-the-query-performance-between-row-based-storage-and-columnar-storage}
+### ステップ3. 行ベースのストレージと列指向のストレージのクエリパフォーマンスを比較する {#step-3-compare-the-query-performance-between-row-based-storage-and-columnar-storage}
 
-このステップでは、TiKV (行ベースのストレージ) とTiFlash (列ベースのストレージ) 間の実行統計を比較できます。
+このステップでは、TiKV (行ベースのストレージ) とTiFlash (列指向のストレージ) 間の実行統計を比較できます。
 
 - TiKV を使用してこのクエリの実行統計を取得するには、次のステートメントを実行します。
 

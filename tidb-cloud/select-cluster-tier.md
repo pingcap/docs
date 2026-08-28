@@ -43,7 +43,7 @@ TiDB Cloud Starterは、フルマネージド型のマルチテナント対応Ti
 
 - **No cost**：このプランは[無料割り当て](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)の範囲内でご利用の場合は無料です。始めるのにクレジットカードは必要ありません。
 
-- **ストレージ**：初期容量として、行ベースのストレージが5 GiB、列ベースのストレージが5 GiB提供されます。
+- **ストレージ**：初期容量として、行ベースのストレージが5 GiB、列指向のストレージが5 GiB提供されます。
 
 - **Request Units**: データベース操作の 5,000 万[要求単位（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)が含まれます。
 
@@ -54,7 +54,7 @@ TiDB Cloudでは、組織ごとにデフォルトで最大5つのTiDB Cloud Star
 組織内の最初の 5つのTiDB Cloud Starterインスタンス（無料版かスケーラブル版かを問わず）については、 TiDB Cloud はそれぞれに以下の無料使用クォ​​ータを提供します。
 
 - 行ベースストレージ：5 GiB
-- カラム型ストレージ：5 GiB
+- 列指向ストレージ：5 GiB
 - 要求単位（RU）：月間5,000万RU
 
 リクエストユニット（RU）とは、データベースへの単一のリクエストによって消費されるリソース量を表す単位です。リクエストによって消費されるRUの量は、操作の種類や取得または変更されるデータの量など、さまざまな要因によって異なります。
@@ -142,7 +142,7 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのプレフィ
 
 TiDB Cloud Dedicatedは、ゾーン間高可用性、水平スケーリング、 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)といったメリットを備えた、本番での利用を想定したサービスです。
 
-TiDB Cloud Dedicatedクラスターでは、ビジネスニーズに応じて TiDB、TiKV、 TiFlashのクラスターサイズを簡単にカスタマイズできます。各 TiKV ノードおよびTiFlashノードでは、ノード上のデータが複製され、 [高可用性](/tidb-cloud/high-availability-with-multi-az.md)実現するために異なる可用性ゾーンに分散されます。
+TiDB Cloud Dedicatedクラスターでは、ビジネスニーズに応じて TiDB、TiKV、 TiFlashのクラスターサイズを簡単にカスタマイズできます。各 TiKV ノードおよびTiFlashノードでは、ノード上のデータが複製され、 [高可用性](/tidb-cloud/high-availability-with-multi-az.md)実現するために異なるアベイラビリティゾーンに分散されます。
 
 TiDB Cloud Dedicatedクラスターを作成するには、 [支払い方法を追加する](/tidb-cloud/tidb-cloud-billing.md#payment-method)か、[概念実証（PoC）トライアルに申し込む](/tidb-cloud/tidb-cloud-poc.md)必要があります。
 

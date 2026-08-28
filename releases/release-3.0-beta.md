@@ -68,7 +68,7 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
     - CSVファイルのフォールトトレランスを`LoadData`向上[＃9005](https://github.com/pingcap/tidb/pull/9005)
     - MySQL 3.20ハンドシェイクプロトコルサポート [＃8812](https://github.com/pingcap/tidb/pull/8812)
     - 符号なし`bigint`列をAUTO_INCREMENT列として使用することをサポート [＃8181](https://github.com/pingcap/tidb/pull/8181)
-    - `SHOW CREATE DATABASE IF NOT EXISTS`構文サポートする [＃8926](https://github.com/pingcap/tidb/pull/8926)
+    - `SHOW CREATE DATABASE IF NOT EXISTS`構文をサポートする [＃8926](https://github.com/pingcap/tidb/pull/8926)
     - フィルタリング条件にユーザー変数が含まれている場合、述語プッシュダウン操作を放棄して、ユーザー変数を使用してウィンドウ関数の動作をモックするMySQLの動作との互換性を改善しました[＃8412](https://github.com/pingcap/tidb/pull/8412)
 - DDL
     - 誤って削除されたテーブルの高速回復をサポート[＃7937](https://github.com/pingcap/tidb/pull/7937)

@@ -9,7 +9,7 @@ summary: TiDB SQLに関連する FAQ について説明します。
 
 ## TiDB はセカンダリキーをサポートしていますか? {#does-tidb-support-the-secondary-key}
 
-はい。主キーではない列に、一意の[セカンダリインデックス](/develop/dev-guide-create-secondary-indexes.md)を持つ[`NOT NULL`制約](/constraints.md#not-null)設定できます。この場合、その列はセカンダリキーとして機能します。
+はい。主キーではない列に、一意の[セカンダリインデックス](/develop/dev-guide-create-secondary-indexes.md)を持つ[`NOT NULL`制約](/constraints.md#not-null)を設定できます。この場合、その列はセカンダリキーとして機能します。
 
 ## 大きなテーブルで DDL 操作を実行する場合、TiDB はどのように機能しますか? {#how-does-tidb-perform-when-executing-ddl-operations-on-a-large-table}
 
@@ -146,7 +146,7 @@ TiDBのデフォルトの文字セットは`utf8mb4`です。文字列はmemcomp
 
 TiDBのAUTO_INCREMENT ID機能は、自動的に増分され一意であることが保証されているだけで、連続的に割り当てられることは保証されていません。現在、TiDBはIDをバッチで割り当てています。複数のTiDBサーバーに同時にデータが挿入された場合、割り当てられるIDは連続的ではありません。複数のスレッドが`tidb-server`のインスタンスに同時にデータを挿入した場合、後で挿入されたデータのAUTO_INCREMENT IDは小さくなる可能性があります。TiDBでは整数フィールドに`AUTO_INCREMENT`を指定できますが、1つのテーブルに`AUTO_INCREMENT`フィールドは1つしか指定できません。詳細については、 [AUTO_INCREMENT ID](/mysql-compatibility.md#auto-increment-id)と[AUTO_INCREMENT属性](/auto-increment.md)を参照してください。
 
-## TiDB の`sql_mode`変更するにはどうすればよいですか? {#how-do-i-modify-the-sql_mode-in-tidb}
+## TiDB の`sql_mode`を変更するにはどうすればよいですか? {#how-do-i-modify-the-sql_mode-in-tidb}
 
 TiDB は、SESSION または GLOBAL ベースで[`sql_mode`](/system-variables.md#sql_mode)システム変数を変更することをサポートします。
 
@@ -231,7 +231,7 @@ TiDBは、 [グローバル](/system-variables.md#tidb_force_priority)単位ま�
 
 システム変数`tidb_auto_analyze_ratio`のデフォルト値は`0.5`で、この機能がデフォルトで有効になっていることを示します。システム変数`tidb_auto_analyze_ratio`を[`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio)以上（デフォルト値は`0.8` ）に設定することは推奨されません。そうしないと、オプティマイザが疑似統計を使用する可能性があります。TiDB v5.3.0 では[`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530)変数が導入され、これを`OFF`に設定すると、統計が古くても疑似統計は使用されません。
 
-`auto analyze`無効にするには、システム変数[`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)を使用します。
+`auto analyze`を無効にするには、システム変数[`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)を使用します。
 
 ## オプティマイザヒントを使用してオプティマイザの動作をオーバーライドできますか? {#can-i-use-optimizer-hints-to-override-the-optimizer-behavior}
 
@@ -295,7 +295,7 @@ v6.4.0 以降、TiDB は[メタデータロックメカニズム](/metadata-lock
 > - 各 DDL 操作では、 `schema`バージョンの変更の数は、対応する`schema state`バージョンの変更の数と同じです。
 > - DDL操作によって、バージョン`schema`の変更回数は異なります。例えば、 `CREATE TABLE`文ではバージョン`schema`変更が1回発生しますが、 `ADD COLUMN`文ではバージョン5の変更が4回発生します。
 
-### 「情報スキーマが古くなっています」というエラーの原因は何ですか? {#what-are-the-causes-of-the-information-schema-is-out-of-date-error}
+### 「Information schema is out of date」というエラーの原因は何ですか? {#what-are-the-causes-of-the-information-schema-is-out-of-date-error}
 
 DML文の実行時に、TiDBがDDLリース（デフォルトでは45秒）内に最新のスキーマをロードできない場合、エラー`Information schema is out of date`が発生する可能性があります。考えられる原因は以下のとおりです。
 
@@ -451,7 +451,7 @@ RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganiz
 
 はい。TiDBはコストベースオプティマイザを使用しています。コストモデルと統計は常に最適化されています。また、TiDBはハッシュ結合やソートマージ結合などの結合アルゴリズムもサポートしています。
 
-### テーブルで`analyze`実行する必要があるかどうかを判断するにはどうすればよいでしょうか? {#how-to-determine-whether-i-need-to-execute-analyze-on-a-table}
+### テーブルで`analyze`を実行する必要があるかどうかを判断するにはどうすればよいでしょうか? {#how-to-determine-whether-i-need-to-execute-analyze-on-a-table}
 
 `SHOW STATS_HEALTHY`を使用して`Healthy`フィールドを確認します。通常、フィールド値が 60 より小さい場合は、テーブルで`ANALYZE`を実行する必要があります。
 
