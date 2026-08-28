@@ -71,7 +71,7 @@ TiDB v4.0.0-beta 以降、TiDB は Read Committed分離レベルをサポート�
 >
 > Read Committed分離レベルは[悲観的トランザクションモード](/pessimistic-transaction.md)でのみ有効になります。 [楽観的トランザクションモード](/optimistic-transaction.md)では、トランザクション分離レベルを`Read Committed`に設定しても有効にならず、トランザクションは引き続き Repeatable Read分離レベルを使用します。
 
-v6.0.0以降、TiDBは、読み取り/書き込み競合が稀なシナリオにおいて、タイムスタンプ取得を最適化するためにシステム変数[`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)使用をサポートします。この変数を有効にすると、TiDBは`SELECT`実行時に、前回の有効なタイムスタンプを使用してデータを読み取ろうとします。この変数の初期値は、トランザクションの`start_ts`です。
+v6.0.0以降、TiDBは、読み取り/書き込み競合が稀なシナリオにおいて、タイムスタンプ取得を最適化するためにシステム変数[`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)の使用をサポートします。この変数を有効にすると、TiDBは`SELECT`実行時に、前回の有効なタイムスタンプを使用してデータを読み取ろうとします。この変数の初期値は、トランザクションの`start_ts`です。
 
 - TiDB は読み取りプロセス中にデータ更新が発生しなかった場合、結果をクライアントに返し、 `SELECT`ステートメントが正常に実行されます。
 - TiDB が読み取りプロセス中にデータ更新を検出した場合:
@@ -80,7 +80,7 @@ v6.0.0以降、TiDBは、読み取り/書き込み競合が稀なシナリオに
 
 分離レベル`READ-COMMITTED`が使用され、ステートメントが`SELECT`多く、読み取り/書き込みの競合がまれなシナリオでは、この変数を有効にすると、グローバル タイムスタンプを取得する際のレイテンシーとコストを回避できます。
 
-v6.3.0以降、TiDBはポイント書き込みの競合が少ないシナリオにおいて、システム変数[`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630)有効にすることでタイムスタンプ取得の最適化をサポートします。この変数を有効にすると、ポイント書き込みステートメントの実行中に、TiDBは現在のトランザクションの有効なタイムスタンプを使用してデータの読み取りとロックを試みます。[`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)が有効になっている場合も、TiDBは同様にデータを読み取ります。
+v6.3.0以降、TiDBはポイント書き込みの競合が少ないシナリオにおいて、システム変数[`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630)を有効にすることでタイムスタンプ取得の最適化をサポートします。この変数を有効にすると、ポイント書き込みステートメントの実行中に、TiDBは現在のトランザクションの有効なタイムスタンプを使用してデータの読み取りとロックを試みます。[`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)が有効になっている場合も、TiDBは同様にデータを読み取ります。
 
 現在、適用可能なポイント書き込みステートメントの種類は`UPDATE` 、 `DELETE` 、 `SELECT ...... FOR UPDATE`です。ポイント書き込みステートメントとは、主キーまたは一意キーをフィルター条件として使用し、最終実行演算子に`POINT-GET`含まれる書き込みステートメントを指します。現在、3種類のポイント書き込みステートメントに共通するのは、まずキー値に基づいてポイントクエリを実行することです。キーが存在する場合は、キーをロックします。キーが存在しない場合は、空のセットを返します。
 
