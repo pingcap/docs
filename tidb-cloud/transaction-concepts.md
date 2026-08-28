@@ -27,7 +27,7 @@ TiDBでは、悲観的トランザクションモードはMySQLとほぼ同じ�
 
 トランザクション分離は、データベーストランザクション処理の基盤の一つです。分離は、トランザクションの4つの主要な特性（一般的に[ACID](/tidb-cloud/tidb-cloud-glossary.md#acid)と呼ばれます）の一つです。
 
-TiDBはスナップショット分離（SI）一貫性を実装しており、MySQLとの互換性のために`REPEATABLE-READ`として宣伝されています。これは[ANSI Repeatable Read isolation level](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read)や[MySQL Repeatable Read level](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)とは異なります。
+TiDBはスナップショット分離（SI）一貫性を実装しており、MySQLとの互換性のために`REPEATABLE-READ`として表示されます。これは[ANSI Repeatable Read isolation level](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read)や[MySQL Repeatable Read level](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)とは異なります。
 
 詳細については[TiDBトランザクション分離レベル](/transaction-isolation-levels.md)を参照してください。
 
