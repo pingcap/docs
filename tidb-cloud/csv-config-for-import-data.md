@@ -63,7 +63,7 @@ summary: TiDB Cloudのインポートデータサービスで CSV 構成を使�
 
     `"{""key1"":""val1"", ""key2"": ""val2""}"`
 
-    この場合、 `Backslash escape = False`設定すると、フィールドは次のようにデータベースに正しくエスケープされます。
+    この場合、 `Backslash escape = False`を設定すると、フィールドは次のようにデータベースに正しくエスケープされます。
 
     `{"key1": "val1", "key2": "val2"}`
 

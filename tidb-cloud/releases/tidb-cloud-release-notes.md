@@ -8,6 +8,18 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年8月25日 {#august-25-2026}
+
+**一般的な変更**
+
+- **TiDB Cloud Premium**
+
+    - TiDB Cloud Premium が、changefeed データを Amazon S3 および Alibaba Cloud Object Storage Service (OSS) に直接ストリーミングすることをサポートするようになりました。
+
+        この機能により、中間メッセージキューが不要になることでコストを削減しながら、下流の分析や長期保持のために変更データをクラウドストレージにアーカイブできます。
+
+        詳細については、[Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium) を参照してください。
+
 ## 2026年8月18日 {#august-18-2026}
 
 **全般的な変更**

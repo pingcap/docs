@@ -82,7 +82,7 @@ TiDB バージョン: 4.0.13
     - `USE_INDEX_MERGE`ヒントが効かない問題を修正[＃22924](https://github.com/pingcap/tidb/pull/22924)
     - `WHERE`句で`ENUM`列または`SET`列をフィルターとして使用すると、クエリが間違った結果を返すバグを修正しました[＃22814](https://github.com/pingcap/tidb/pull/22814)
     - クラスター化インデックスと新しい照合順序を同時に使用するとクエリが間違った結果を返すバグを修正[＃21408](https://github.com/pingcap/tidb/pull/21408)
-    - `enable_new_collation`有効にした状態で`ANALYZE`を実行した際に発生するpanicを修正[＃21299](https://github.com/pingcap/tidb/pull/21299)
+    - `enable_new_collation`を有効にした状態で`ANALYZE`を実行した際に発生するpanicを修正[＃21299](https://github.com/pingcap/tidb/pull/21299)
     - SQLビューがSQL DEFINER に関連付けられたデフォルトのロールを正しく処理しない問題を修正しました。 [＃24531](https://github.com/pingcap/tidb/pull/24531)
     - DDLジョブのキャンセルがスタックする問題を修正[＃24445](https://github.com/pingcap/tidb/pull/24445)
     - `concat`関数が照合順序誤って処理する問題を修正しました [＃24300](https://github.com/pingcap/tidb/pull/24300)

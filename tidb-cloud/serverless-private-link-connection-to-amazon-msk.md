@@ -12,25 +12,25 @@ summary: Amazon MSK プロビジョニングされたプライベートリンク
 - TiDB Cloud Essentialクラスターは AWS でホストされており、アクティブです。後で使用するために、以下の情報を取得して保存してください。
 
     - AWSアカウントID
-    - 可用性ゾーン（AZ）
+    - アベイラビリティゾーン（AZ）
 
-AWS アカウント ID とアベイラビリティーゾーンを表示するには:
+AWS アカウント ID とアベイラビリティゾーンを表示するには:
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
 2. **[外部サービス向け AWS プライベートエンドポイント]**領域で、**[外部サービス向けプライベートエンドポイントを作成]**をクリックします。
-3. ダイアログで、AWS アカウント ID とアベイラビリティーゾーンをメモします。
+3. ダイアログで、AWS アカウント ID とアベイラビリティゾーンをメモします。
 
 ## Amazon MSK プロビジョニングクラスターの前提条件 {#prerequisites-for-the-amazon-msk-provisioned-cluster}
 
 始める前に、Amazon MSK プロビジョニングされたクラスターについて次の点を確認してください。
 
-- **リージョンと AZ** : Amazon MSK プロビジョニングされたクラスターは、 TiDB Cloud Essentialクラスターと同じ AWS リージョンにあり、MSK クラスターのアベイラビリティーゾーンはTiDB Cloudクラスターと同じです。
+- **リージョンと AZ** : Amazon MSK プロビジョニングされたクラスターは、 TiDB Cloud Essentialクラスターと同じ AWS リージョンにあり、MSK クラスターのアベイラビリティゾーンはTiDB Cloudクラスターと同じです。
 - MSK クラスターには**Authentication**: [SASL/SCRAM認証](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html)が必要です。
 - **Broker type**: ブローカー`t4.small`タイプは使用しないでください。プライベートリンクをサポートしていません。
 
 詳細な要件については、 [単一リージョンでの Amazon MSK マルチ VPC プライベート接続](https://docs.aws.amazon.com/msk/latest/developerguide/aws-access-mult-vpc.html#mvpc-requirements)を参照してください。
 
-Amazon MSK プロビジョニングされたクラスターがない場合は、 TiDB Cloud Essentialクラスターと同じリージョンおよび同じアベイラビリティーゾーンに[1つ作成する](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html) 、作成されたクラスターに[SASL/SCRAM認証を設定する](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html) 。
+Amazon MSK プロビジョニングされたクラスターがない場合は、 TiDB Cloud Essentialクラスターと同じリージョンおよび同じアベイラビリティゾーンに[1つ作成する](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html) 、作成されたクラスターに[SASL/SCRAM認証を設定する](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html) 。
 
 - **Secret name**: シークレット名は`AmazonMSK_`で始まる必要があります。
 - **暗号化**：デフォルトの暗号化キーは使用しないでください。シークレット用に新しいカスタムAWS KMSキーを作成してください。

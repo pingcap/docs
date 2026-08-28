@@ -103,10 +103,9 @@ TiDB Cloud Lake の料金は、ウェアハウス、ストレージ、クラウ�
 
 > **Note:**
 >
-> 精度の違いにより、月々の請求書の合計金額は日々の使用明細の金額と異なる場合があります。
+> **Bills** データと **Cost Explorer** または **Usage Details** の CSV ダウンロード内のデータは、異なる粒度レベルで処理および表示されます。**Bills** データは月次精算用に計算される一方、**Cost Explorer** と **Usage Details** の CSV ダウンロードでは、日、サービス、プロジェクト、クラスター、またはリソースごとのような、より細かい内訳が提供されます。その結果、異なる集計レベルでの丸めにより、合計値がわずかに異なる場合があります。
 >
-> - 月額請求額の合計は、小数点以下第2位で四捨五入されます。
-> - 日ごとの利用明細に記載されている合計金額は、小数点以下第6位まで正確です。
+> **Cost Explorer** と **Usage Details** の CSV ダウンロードは、使用量とコストの分析を目的としています。これらのデータソースに差異がある場合、請求書に表示される金額が最終的に支払うべき金額です。
 
 ストレージに関連する請求の説明は次のとおりです。
 
@@ -118,9 +117,9 @@ TiDB Cloud Lake の料金は、ウェアハウス、ストレージ、クラウ�
     >
     > Infrequent Access は現在 {{{ .essential }}} 向けのプライベートプレビューであり、リクエストがあった場合にのみ利用できます。
 
-- **Columnar storage**: カラム型ストレージは **TiFlash** エンジンによって提供されます。 <!--**Use case:** Online analytical processing (OLAP) workloads that benefit from real-time columnar acceleration without requiring additional ETL.-->
+- **Columnar storage**: 列指向ストレージは **TiFlash** エンジンによって提供されます。 <!--**Use case:** Online analytical processing (OLAP) workloads that benefit from real-time columnar acceleration without requiring additional ETL.-->
 
-- **Dual-layer encryption**: 行ベースのストレージとカラム型ストレージはどちらもデュアルレイヤー暗号化をサポートしています。このメカニズムは、2つの独立した暗号化レイヤーでデータを保護し、1つのレイヤーが侵害された場合でもデータが保護された状態を維持できるようにします。
+- **Dual-layer encryption**: 行ベースのストレージと列指向ストレージはどちらもデュアルレイヤー暗号化をサポートしています。このメカニズムは、2つの独立した暗号化レイヤーでデータを保護し、1つのレイヤーが侵害された場合でもデータが保護された状態を維持できるようにします。
 
     - Storage-layer encryption: 基盤となるクラウドプロバイダーは、ネイティブのストレージ暗号化メカニズムを使用して、保存中のすべてのデータを暗号化します。
     - Database-layer encryption: クラウドプロバイダーの暗号化に加えて、TiDB Cloud は顧客管理暗号化キー (CMEK) またはエスクロー鍵のいずれかを使用して、自動的に第 2 の暗号化レイヤーを適用します。

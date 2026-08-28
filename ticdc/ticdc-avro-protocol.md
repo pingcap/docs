@@ -25,7 +25,7 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-
 
 > **Note:**
 >
-> Avroプロトコルを使用する場合、1つのKafkaトピックには1つのテーブルのデータのみを含めることができます。設定ファイルで[トピックディスパッチャ](/ticdc/ticdc-sink-to-kafka.md#topic-dispatchers)設定する必要があります。
+> Avroプロトコルを使用する場合、1つのKafkaトピックには1つのテーブルのデータのみを含めることができます。設定ファイルで[トピックディスパッチャ](/ticdc/ticdc-sink-to-kafka.md#topic-dispatchers)を設定する必要があります。
 
 ```shell
 [sink]
@@ -105,7 +105,7 @@ dispatchers = [
 ]
 ```
 
-[`enable-tidb-extension`](#tidb-extension-fields)有効にすると、値のデータ形式は次のようになります。
+[`enable-tidb-extension`](#tidb-extension-fields)を有効にすると、値のデータ形式は次のようになります。
 
 ```
 {

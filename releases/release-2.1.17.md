@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.17 Release Notes
-summary: "TiDB 2.1.17 リリースノート: 新機能には、SHOW TABLE REGIONS` の `WHERE` 句、TiKV および PD の `config-check` 機能、pd-ctl の `remove-tombstone` コマンド、 Reparoの `worker-count` および `txn-batch` 構成項目が含まれます。PD のスケジュール プロセスと TiKV の起動プロセスが改善されました。TiDB スロークエリログと構成ファイルの動作が変更されました。SQL オプティマイザー、SQL 実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、および TiDB Ansible の修正と最適化が行われました。"
+summary: "TiDB 2.1.17 リリースノート: 新機能には、SHOW TABLE REGIONS` の `WHERE` 句、TiKV および PD の `config-check` 機能、pd-ctl の `remove-tombstone` コマンド、 Reparoの `worker-count` および `txn-batch` 構成項目が含まれます。PD のスケジュール プロセスと TiKV の起動プロセスが改善されました。TiDB スロークエリログと構成ファイルの動作が変更されました。SQL オプティマイザ、SQL 実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、および TiDB Ansible の修正と最適化が行われました。"
 ---
 
 # TiDB 2.1.17 リリースノート {#tidb-2-1-17-release-notes}
@@ -28,7 +28,7 @@ TiDB Ansible バージョン: 2.1.17
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザー
+- SQLオプティマイザ
     - `EvalSubquery`ビルド`Executor` 中にエラーが発生したときにエラーメッセージが正しく返されない問題を修正 [＃11811](https://github.com/pingcap/tidb/pull/11811)
     - インデックスルックアップ結合において、外部テーブルの行数が単一バッチの行数より多い場合にクエリ結果が正しくない可能性がある問題を修正しました。インデックスルックアップ結合の機能範囲を拡張しました。`UnionScan`は `IndexJoin` のサブノードとして使用できます。 [＃11843](https://github.com/pingcap/tidb/pull/11843)
     - 統計フィードバック処理中に無効なキーが発生する可能性がある状況に備えて、 `SHOW STAT_BUCKETS`構文に無効なキー（ `invalid encoded key flag 252`など）の表示を追加します[＃12098](https://github.com/pingcap/tidb/pull/12098)

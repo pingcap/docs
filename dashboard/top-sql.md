@@ -57,7 +57,7 @@ Top SQLは、有効にするとクラスタのパフォーマンスにわずか�
 
 Top SQLを有効にすると、この時点以降に収集されたデータのみを表示でき、有効化前の履歴データは補完されません。データ表示には通常約1分の遅延があるため、新しいデータを確認するには少し待つ必要があります。Top SQLを無効にした後も、履歴データの有効期限が切れていなければ、Top SQLページにはこの履歴データが引き続き表示されますが、新しいデータは収集も表示もされなくなります。
 
-UIに加えて、TiDBシステム変数[`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540)設定することで、 Top SQL機能を有効にすることもできます。
+UIに加えて、TiDBシステム変数[`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540)を設定することで、 Top SQL機能を有効にすることもできます。
 
 ```sql
 SET GLOBAL tidb_enable_top_sql = 1;
@@ -161,7 +161,7 @@ TiUPトポロジー設定の詳細については、 [TiUPクラスターのト�
 
 Top SQLを無効にすると、Top SQLは新しいデータの収集を停止しますが、有効期限が切れる前の履歴データは引き続き表示できます。
 
-UIに加えて、TiDBシステム変数[`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540)設定することで、 Top SQL機能を無効にすることもできます。
+UIに加えて、TiDBシステム変数[`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540)を設定することで、 Top SQL機能を無効にすることもできます。
 
 ```sql
 SET GLOBAL tidb_enable_top_sql = 0;

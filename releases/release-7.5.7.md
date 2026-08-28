@@ -81,7 +81,7 @@ TiDB バージョン: 7.5.7
     - `latin1_bin`の比較動作が`utf8mb4_bin`および`utf8_bin` と異なる問題を修正しました [＃60701](https://github.com/pingcap/tidb/issues/60701) @[hawkingrei](https://github.com/hawkingrei)
     - メタデータロック (MDL) を無効にした後、スキーマバージョン更新に失敗して DDL 操作が停止する問題を修正しました。 [＃61210](https://github.com/pingcap/tidb/issues/61210) @[wjhuang2016](https://github.com/wjhuang2016)
     - 特定のシナリオでログの秘匿化が有効にならない問題を修正[＃59279](https://github.com/pingcap/tidb/issues/59279) @[tangenta](https://github.com/tangenta)
-    - 修正コントロール#44855が有効になっている場合にTiDBセッションがクラッシュする可能性がある問題を修正[＃59762](https://github.com/pingcap/tidb/issues/59762) @[winoros](https://github.com/winoros)
+    - Fix Control #44855が有効になっている場合にTiDBセッションがクラッシュする可能性がある問題を修正[＃59762](https://github.com/pingcap/tidb/issues/59762) @[winoros](https://github.com/winoros)
     - `IndexLookup`オペレーターが`context canceled`エラーに遭遇したときに冗長なログエントリを削除します [＃61072](https://github.com/pingcap/tidb/issues/61072) @[yibin87](https://github.com/yibin87)
     - 統計の不適切な例外処理により、バックグラウンドタスクがタイムアウトしたときにメモリ内の統計が誤って削除される問題を修正しました[＃57901](https://github.com/pingcap/tidb/issues/57901) @[hawkingrei](https://github.com/hawkingrei)
     - `ADD UNIQUE INDEX`を実行するとデータの不整合が発生する可能性がある問題を修正[＃60339](https://github.com/pingcap/tidb/issues/60339) @[tangenta](https://github.com/tangenta)
@@ -128,7 +128,7 @@ TiDB バージョン: 7.5.7
     - デフォルト値`lease`が正しく設定されていない問題を修正[＃9156](https://github.com/tikv/pd/issues/9156) @[rleungx](https://github.com/rleungx)
     - TiDB Dashboard TCP接続を不適切に閉じるとPDゴルーチンリークが発生する可能性がある問題を修正[＃9402](https://github.com/tikv/pd/issues/9402) @[baurine](https://github.com/baurine)
     - 新しく追加された TiKV ノードがスケジュールされない可能性がある問題を修正しました [＃9145](https://github.com/tikv/pd/issues/9145) @[bufferflies](https://github.com/bufferflies)
-    - `tidb_enable_tso_follower_proxy`有効にすると TSO サービスが利用できなくなる可能性がある問題を修正[＃9188](https://github.com/tikv/pd/issues/9188) @[Tema](https://github.com/Tema)
+    - `tidb_enable_tso_follower_proxy`を有効にすると TSO サービスが利用できなくなる可能性がある問題を修正[＃9188](https://github.com/tikv/pd/issues/9188) @[Tema](https://github.com/Tema)
 
 - TiFlash
 

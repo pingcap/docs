@@ -224,7 +224,7 @@ EXPLAIN ANALYZE SELECT cs_ship_date_sk FROM catalog_sales, date_dim
 
 2 つのクエリの実行情報を比較すると、次の改善点がわかります。
 
-- IO 削減: TableFullScan オペレーターの`total_scanned_rows`比較すると、ランタイムフィルターを有効にすると`TableFullScan`のスキャン量が 2/3 削減されることがわかります。
+- IO 削減: TableFullScan オペレーターの`total_scanned_rows`を比較すると、ランタイムフィルターを有効にすると`TableFullScan`のスキャン量が 2/3 削減されることがわかります。
 - ハッシュ結合のパフォーマンス向上: `HashJoin`オペレーターの実行時間が 376.1 ミリ秒から 157.6 ミリ秒に短縮されました。
 
 ### ベストプラクティス {#best-practices}

@@ -49,7 +49,7 @@ MySQL と同様に、TiDB にはシステムテーブルも含まれており、
 
     TiDB v6.1.0 では、グローバルキル機能が導入されました (デフォルトで有効になっている`enable-global-kill`設定によって制御されます)。グローバルキルが有効になっている場合は、 `kill session_id`を実行するだけです。
 
-    TiDB のバージョンが v6.1.0 より前、またはグローバル キル機能が有効になっていない場合、 `kill session_id`デフォルトでは有効になりません。DML ステートメントを終了するには、クライアントを DML ステートメントを実行している TiDB インスタンスに直接接続してから、 `kill tidb session_id`ステートメントを実行する必要があります。クライアントが別の TiDB インスタンスに接続している場合、またはクライアントと TiDB クラスタの間にプロキシがある場合、 `kill tidb session_id`ステートメントが別の TiDB インスタンスにルーティングされ、別のセッションが誤って終了する可能性があります。詳細については、[`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
+    TiDB のバージョンが v6.1.0 より前、またはグローバル キル機能が有効になっていない場合、 `kill session_id`はデフォルトでは有効になりません。DML ステートメントを終了するには、クライアントを DML ステートメントを実行している TiDB インスタンスに直接接続してから、 `kill tidb session_id`ステートメントを実行する必要があります。クライアントが別の TiDB インスタンスに接続している場合、またはクライアントと TiDB クラスタの間にプロキシがある場合、 `kill tidb session_id`ステートメントが別の TiDB インスタンスにルーティングされ、別のセッションが誤って終了する可能性があります。詳細については、[`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
 
 - DDL ステートメントを強制終了するには、まず`admin show ddl jobs`を使用して終了する必要のある DDL ジョブの ID を見つけ、次に`admin cancel ddl jobs 'job_id' [, 'job_id'] ...`を実行します。詳細については、 [`ADMIN`ステートメント](/sql-statements/sql-statement-admin.md)を参照してください。
 

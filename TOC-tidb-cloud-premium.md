@@ -110,7 +110,7 @@
         - [オプティマイザのヒント](/optimizer-hints.md)
         - [SQLプラン管理](/sql-plan-management.md)
         - [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)
-        - [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
+        - [オプティマイザ修正コントロール](/optimizer-fix-controls.md)
     - [TiKV Follower Readの調整](/follower-read.md)
     - [コプロセッサーキャッシュ](/coprocessor-cache.md)
     - [TiFlashのパフォーマンスをチューニング](/tiflash/tune-tiflash-performance.md)
@@ -140,6 +140,7 @@
   - [変更フィードの概要](/tidb-cloud/changefeed-overview.md)
   - [MySQLシンクへ](/tidb-cloud/changefeed-sink-to-mysql.md)
   - [Kafkaシンクへ](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+  - [Cloud Storage へ](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
   - 参照
     - [AWSでセルフホスト型のKafkaプライベートリンクサービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
     - [Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)
@@ -401,7 +402,7 @@
     - `mysql`スキーマ
       - [概要](/mysql-schema/mysql-schema.md)
       - [`user`](/mysql-schema/mysql-schema-user.md)
-    - 情報スキーマ
+    - INFORMATION_SCHEMA
       - [概要](/information-schema/information-schema.md)
       - [`ANALYZE_STATUS`](/information-schema/information-schema-analyze-status.md)
       - [`CHECK_CONSTRAINTS`](/information-schema/information-schema-check-constraints.md)

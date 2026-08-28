@@ -26,7 +26,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 - TiDB グローバルメモリ制御が GA になり、 [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)を介してメモリ消費しきい値を制御できるようになりました。
 - 高性能かつグローバルに単調な[`AUTO_INCREMENT`](/auto-increment.md#mysql-compatibility-mode)列属性が、MySQLと互換性のあるGAになります。
 - [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)は TiCDC および PITR と互換性があり、GA になります。
-- より正確な[コストモデル バージョン 2](/cost-model.md#cost-model-version-2)一般に公開し、 `AND`で[インデックスマージ](/explain-index-merge.md)に接続された式をサポートすることで、 TiDB オプティマイザーを強化します。
+- より正確な[コストモデル バージョン 2](/cost-model.md#cost-model-version-2)一般に公開し、 `AND`で[インデックスマージ](/explain-index-merge.md)に接続された式をサポートすることで、 TiDB オプティマイザを強化します。
 - `JSON_EXTRACT()`機能をTiFlashにプッシュダウンすることをサポートします。
 - パスワード コンプライアンス監査要件を満たす[パスワード管理](/password-management.md)ポリシーをサポートします。
 - TiDB LightningとDumplingは、圧縮されたSQLおよびCSVファイルの[インポート](/tidb-lightning/tidb-lightning-data-source.md)および[エクスポート](/dumpling-overview.md#improve-export-efficiency-through-concurrency)をサポートします。
@@ -169,7 +169,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 - [ビュー](/views.md) で実行計画生成に干渉するグローバルオプティマイザヒントをサポートします [＃37887](https://github.com/pingcap/tidb/issues/37887) @[Reminiscent](https://github.com/Reminiscent)
 
-    ビューアクセスのシナリオによっては、最適なパフォーマンスを実現するために、ビュー内のクエリの実行計画にオプティマイザヒントを使用して介入する必要があります。TiDB v6.5.0以降、ビュー内のクエリブロックへのグローバルヒントの追加がサポートされ、クエリで定義されたヒントがビュー内で有効になります。この機能により、ネストされたビューを含む複雑なSQL文にヒントを挿入できるようになり、実行計画の制御が強化され、複雑な文のパフォーマンスが安定します。グローバルヒントを使用するには、 [クエリブロックに名前を付ける](/optimizer-hints.md#step-1-define-the-query-block-name-of-the-view-using-the-qb_name-hint)と[ヒント参照を指定する](/optimizer-hints.md#step-2-add-the-target-hints)必要です。
+    ビューアクセスのシナリオによっては、最適なパフォーマンスを実現するために、ビュー内のクエリの実行計画にオプティマイザヒントを使用して介入する必要があります。TiDB v6.5.0以降、ビュー内のクエリブロックへのグローバルヒントの追加がサポートされ、クエリで定義されたヒントがビュー内で有効になります。この機能により、ネストされたビューを含む複雑なSQL文にヒントを挿入できるようになり、実行計画の制御が強化され、複雑な文のパフォーマンスが安定します。グローバルヒントを使用するには、 [クエリブロックに名前を付け](/optimizer-hints.md#step-1-define-the-query-block-name-of-the-view-using-the-qb_name-hint)、 [ヒント参照を指定する](/optimizer-hints.md#step-2-add-the-target-hints)必要があります。
 
     詳細については[ドキュメント](/optimizer-hints.md#hints-that-take-effect-globally)を参照してください。
 
@@ -177,11 +177,11 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     [パーティションテーブル](/partitioned-table.md)機能は v6.1.0 から GA となっていますが、TiDB は継続的にパフォーマンスを改善しています。v6.5.0 では、TiDB は計算とフィルタリングのために`ORDER BY`や`LIMIT`などのソート操作を TiKV にプッシュダウンすることをサポートします。これにより、ネットワーク I/O オーバーヘッドが削減され、パーティションテーブル使用時の SQL パフォーマンスが向上します。
 
-- オプティマイザーはより正確なコストモデルバージョン2（GA） を導入しました [＃35240](https://github.com/pingcap/tidb/issues/35240) @[qw4990](https://github.com/qw4990)
+- オプティマイザはより正確なコストモデルバージョン2（GA） を導入しました [＃35240](https://github.com/pingcap/tidb/issues/35240) @[qw4990](https://github.com/qw4990)
 
-    TiDB v6.2.0 では、 [コストモデル バージョン 2](/cost-model.md#cost-model-version-2)が実験的機能として導入されました。このモデルは、より正確なコスト推定手法を用いて、オプティマイザーが最適な実行計画を選択できるように支援します。特にTiFlashを導入している場合、コストモデル バージョン 2 は適切なストレージエンジンを自動的に選択し、手動による介入を大幅に削減します。一定期間の実環境テストを経て、このモデルは v6.5.0 で一般提供となります。v6.5.0 以降、新規に作成されたクラスターはデフォルトでコストモデル バージョン 2 を使用します。v6.5.0 にアップグレードするクラスターでは、コストモデル バージョン 2 によってクエリプランが変更される可能性があるため、十分なパフォーマンステストを行った後、 [`tidb_cost_model_version = 2`](/system-variables.md#tidb_cost_model_version-new-in-v620)変数を設定して新しいコストモデルを使用するように設定できます。
+    TiDB v6.2.0 では、 [コストモデル バージョン 2](/cost-model.md#cost-model-version-2)が実験的機能として導入されました。このモデルは、より正確なコスト推定手法を用いて、オプティマイザが最適な実行計画を選択できるように支援します。特にTiFlashを導入している場合、コストモデル バージョン 2 は適切なストレージエンジンを自動的に選択し、手動による介入を大幅に削減します。一定期間の実環境テストを経て、このモデルは v6.5.0 で一般提供となります。v6.5.0 以降、新規に作成されたクラスターはデフォルトでコストモデル バージョン 2 を使用します。v6.5.0 にアップグレードするクラスターでは、コストモデル バージョン 2 によってクエリプランが変更される可能性があるため、十分なパフォーマンステストを行った後、 [`tidb_cost_model_version = 2`](/system-variables.md#tidb_cost_model_version-new-in-v620)変数を設定して新しいコストモデルを使用するように設定できます。
 
-    コストモデル バージョン 2 は、TiDB オプティマイザーの全体的な機能を大幅に向上させ、TiDB をより強力な HTAP データベースへと進化させる、一般利用可能な機能になります。
+    コストモデル バージョン 2 は、TiDB オプティマイザの全体的な機能を大幅に向上させ、TiDB をより強力な HTAP データベースへと進化させる、一般利用可能な機能になります。
 
     詳細については[ドキュメント](/cost-model.md#cost-model-version-2)を参照してください。
 
@@ -315,7 +315,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 | [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630)     | 変更     | 6.5.0以降で有効になります。`INSERT` 、 `DELETE` 、 `UPDATE`を含むSQL文の読み取り操作をTiFlashにプッシュダウンできるかどうかを制御します。デフォルト値は`OFF`です。                                                                                                                                                                                                                                              |
 | [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)                               | 変更     | さらにテストを行った後、デフォルト値を`OFF`から`ON`に変更します。つまり、 `ADD INDEX`と`CREATE INDEX`の加速はデフォルトで有効になります。                                                                                                                                                                                                                                                                 |
 | [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)                                                       | 変更     | TiDB v6.5.0より前のバージョンでは、この変数はクエリのメモリクォータのしきい値を設定するために使用されます。TiDB v6.5.0以降のバージョンでは、DMLステートメントのメモリをより正確に制御するために、この変数はセッションのメモリクォータのしきい値を設定するために使用されます。                                                                                                                                                                                                    |
-| [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)                                                  | 変更     | v6.5.0 以降では、 TiDB ノード間の負荷分散を最適化するために、この変数が`closest-adaptive`に設定され、読み取り要求の推定結果が[`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)以上の場合、 `closest-adaptive`構成が有効になる TiDB ノードの数が各アベイラビリティーゾーンで制限されます。これは常に、 TiDB ノードが最も少ないアベイラビリティーゾーンの TiDB ノードの数と同じになり、その他の TiDB ノードは自動的にリーダーレプリカから読み取ります。 |
+| [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)                                                  | 変更     | v6.5.0 以降では、 TiDB ノード間の負荷分散を最適化するために、この変数が`closest-adaptive`に設定され、読み取り要求の推定結果が[`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)以上の場合、 `closest-adaptive`構成が有効になる TiDB ノードの数が各アベイラビリティゾーンで制限されます。これは常に、 TiDB ノードが最も少ないアベイラビリティゾーンの TiDB ノードの数と同じになり、その他の TiDB ノードは自動的にリーダーレプリカから読み取ります。 |
 | [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)                                   | 変更     | デフォルト値を`0`から`80%`に変更します。TiDB グローバルメモリ制御が GA になったため、このデフォルト値の変更により、メモリ制御がデフォルトで有効になり、TiDB インスタンスのメモリ制限がデフォルトで合計メモリの 80% に設定されます。                                                                                                                                                                                                                        |
 | [`default_password_lifetime`](/system-variables.md#default_password_lifetime-new-in-v650)                                 | 新しく追加された | パスワードの自動有効期限に関するグローバルポリシーを設定し、ユーザーに定期的なパスワード変更を義務付けます。デフォルト値`0` 、パスワードの有効期限が切れないことを示します。                                                                                                                                                                                                                                                               |
 | [`disconnect_on_expired_password`](/system-variables.md#disconnect_on_expired_password-new-in-v650)                       | 新しく追加された | パスワードの有効期限が切れたときにTiDBがクライアント接続を切断するかどうかを示します。この変数は読み取り専用です。                                                                                                                                                                                                                                                                                            |

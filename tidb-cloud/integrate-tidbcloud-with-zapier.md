@@ -91,7 +91,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
     **Test action**をクリックすると、Zapierがテーブルを作成します。テストをスキップすることも可能で、その場合はワークフローが初めて実行されるときにテーブルが作成されます。
 
-### ステップ4： `Create Row in TiDB Cloud`設定する {#step-4-set-up-the-create-row-in-tidb-cloud-action}
+### ステップ4： `Create Row in TiDB Cloud`を設定する {#step-4-set-up-the-create-row-in-tidb-cloud-action}
 
 1. アプリとイベントを選択
 

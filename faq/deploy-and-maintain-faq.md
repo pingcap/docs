@@ -69,7 +69,7 @@ TiDB `label`の設定は、クラスタのデプロイメントアーキテク�
 
 ### `fio`コマンドを使用して TiKV インスタンスのディスク パフォーマンスをテストするにはどうすればよいですか? {#how-to-use-the-fio-command-to-test-the-disk-performance-of-the-tikv-instance}
 
-以下の例では`ioengine=psync` （同期I/O）を使用しているため、 `iodepth`通常`1`に固定され、同時実行性は主に`numjobs`によって制御されます。ファイルシステムキャッシュをバイパスするには、 `direct=1`設定することをお勧めします。
+以下の例では`ioengine=psync` （同期I/O）を使用しているため、 `iodepth`は通常`1`に固定され、同時実行性は主に`numjobs`によって制御されます。ファイルシステムキャッシュをバイパスするには、 `direct=1`を設定することをお勧めします。
 
 - ランダム読み取りテスト:
 

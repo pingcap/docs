@@ -5,11 +5,11 @@ summary: TiDB 2.1 RC4は2018年10月23日にリリースされ、安定性、SQL
 
 # TiDB 2.1 RC4 リリースノート {#tidb-2-1-rc4-release-notes}
 
-2018年10月23日にTiDB 2.1 RC4がリリースされました。TiDB 2.1 RC3と比較して、このリリースでは安定性、SQLオプティマイザー、統計情報、実行エンジンが大幅に改善されています。
+2018年10月23日にTiDB 2.1 RC4がリリースされました。TiDB 2.1 RC3と比較して、このリリースでは安定性、SQLオプティマイザ、統計情報、実行エンジンが大幅に改善されています。
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザー
+- SQLオプティマイザ
     - `UnionAll`の列プルーニングが場合によっては正しくない問題を修正[＃7941](https://github.com/pingcap/tidb/pull/7941)
     - `UnionAll`演算子の結果が場合によっては正しくない問題を修正[＃8007](https://github.com/pingcap/tidb/pull/8007)
 - SQL実行エンジン

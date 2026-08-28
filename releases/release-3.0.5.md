@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.5 Release Notes
-summary: TiDB 3.0.5は、2019年10月25日にリリースされ、様々な改善とバグ修正が行われました。このリリースには、SQLオプティマイザー、SQL実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、TiDB Ansibleの機能強化が含まれています。改善点には、ウィンドウ関数の境界チェックのサポート、インデックス結合と外部結合の問題の修正、各種操作の監視メトリクスの追加などがあります。さらに、TiKVではストレージとパフォーマンスの最適化が行われ、PDではストレージ精度とHTTPリクエスト処理が改善されました。TiDB Ansibleでは、監視メトリクスのアップデートと設定ファイルの簡素化も行われました。
+summary: TiDB 3.0.5は、2019年10月25日にリリースされ、様々な改善とバグ修正が行われました。このリリースには、SQLオプティマイザ、SQL実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、TiDB Ansibleの機能強化が含まれています。改善点には、ウィンドウ関数の境界チェックのサポート、インデックス結合と外部結合の問題の修正、各種操作の監視メトリクスの追加などがあります。さらに、TiKVではストレージとパフォーマンスの最適化が行われ、PDではストレージ精度とHTTPリクエスト処理が改善されました。TiDB Ansibleでは、監視メトリクスのアップデートと設定ファイルの簡素化も行われました。
 ---
 
 # TiDB 3.0.5 リリースノート {#tidb-3-0-5-release-notes}
@@ -13,7 +13,7 @@ TiDB Ansible バージョン: 3.0.5
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザー
+- SQLオプティマイザ
     - ウィンドウ関数の境界チェックをサポート [＃12404](https://github.com/pingcap/tidb/pull/12404)
     - パーティションテーブル`IndexJoin`が誤った結果を返す問題を修正[＃12712](https://github.com/pingcap/tidb/pull/12712)
     - 外部結合オペレーター`Apply`の先頭の`ifnull`関数が誤った結果を返す問題を修正[＃12694](https://github.com/pingcap/tidb/pull/12694)

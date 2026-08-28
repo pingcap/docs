@@ -11,13 +11,13 @@ summary: SHARD_ROW_ID_BITS属性について学びましょう。
 
 クラスター化されていない主キーまたは主キーのないテーブルの場合、TiDB は自動的に生成された[`_tidb_rowid`](/tidb-rowid.md)を暗黙のAUTO_INCREMENT行IDとして使用します。多数の`INSERT`操作が実行されると、データは単一のリージョンに書き込まれるため、書き込みホットスポットが発生します。
 
-ホットスポットの問題を軽減するには、 `SHARD_ROW_ID_BITS`設定できます。行 ID は分散しており、データは複数の異なるリージョンに書き込まれます。
+ホットスポットの問題を軽減するには、 `SHARD_ROW_ID_BITS`を設定できます。行 ID は分散しており、データは複数の異なるリージョンに書き込まれます。
 
 - `SHARD_ROW_ID_BITS = 4` 16個のシャードを示します
 - `SHARD_ROW_ID_BITS = 6` 64個のシャードを示します
 - `SHARD_ROW_ID_BITS = 0`デフォルトの1シャードを示します
 
-`SHARD_ROW_ID_BITS = S`設定すると、 `_tidb_rowid`の構造は次のようになります。
+`SHARD_ROW_ID_BITS = S`を設定すると、 `_tidb_rowid`の構造は次のようになります。
 
 | サインビット | シャードビット  | AUTO_INCREMENTビット |
 | ------ | ------ | ------------ |

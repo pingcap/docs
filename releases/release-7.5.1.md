@@ -159,7 +159,7 @@ TiDB バージョン: 7.5.1
 
 - TiKV
 
-    - `tidb_enable_row_level_checksum`有効にすると TiKV がpanicを起こす可能性がある問題を修正[＃16371](https://github.com/tikv/tikv/issues/16371) @[cfzjywxk](https://github.com/cfzjywxk)
+    - `tidb_enable_row_level_checksum`を有効にすると TiKV がpanicを起こす可能性がある問題を修正[＃16371](https://github.com/tikv/tikv/issues/16371) @[cfzjywxk](https://github.com/cfzjywxk)
     - gRPC スレッドが`is_shutdown` をチェックしているときに TiKV がpanicする可能性がある問題を修正しました [＃16236](https://github.com/tikv/tikv/issues/16236) @[pingyu](https://github.com/pingyu)
     - TiKVがブラジルとエジプトのタイムゾーンを誤って変換する問題を修正[＃16220](https://github.com/tikv/tikv/issues/16220) @[overvenus](https://github.com/overvenus)
     - Titanの`blob-run-mode`オンラインに更新できない問題を修正 [＃15978](https://github.com/tikv/tikv/issues/15978) @[tonyxuqqi](https://github.com/tonyxuqqi)

@@ -210,7 +210,7 @@ SET ROLE {
 }
 ```
 
-たとえば、 `rw_user1`ログインした後、次のステートメントを使用して、現在のセッションでのみ有効なロール`app_read`と`app_write`有効にできます。
+たとえば、 `rw_user1`ログインした後、次のステートメントを使用して、現在のセッションでのみ有効なロール`app_read`と`app_write`を有効にできます。
 
 ```sql
 SET ROLE 'app_read', 'app_write';

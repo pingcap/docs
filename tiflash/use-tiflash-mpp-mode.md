@@ -31,7 +31,7 @@ TiFlashは、クエリ実行にMPPモードをサポートしています。こ�
 
 |                             | tidb_allow_mpp=オフ | tidb_allow_mpp=on (デフォルト)                 |
 | --------------------------- | ----------------- | ----------------------------------------- |
-| tidb_enforce_mpp=off（デフォルト） | MPP モードは使用されません。  | オプティマイザーはコスト推定に基づいて MPP モードを選択します。(デフォルト) |
+| tidb_enforce_mpp=off（デフォルト） | MPP モードは使用されません。  | オプティマイザはコスト推定に基づいて MPP モードを選択します。(デフォルト) |
 | tidb_enforce_mpp=オン         | MPP モードは使用されません。  | TiDB はコスト見積りを無視し、MPP モードを選択します。           |
 
 たとえば、MPP モードを使用しない場合は、次のステートメントを実行できます。
@@ -40,7 +40,7 @@ TiFlashは、クエリ実行にMPPモードをサポートしています。こ�
 set @@session.tidb_allow_mpp=0;
 ```
 
-TiDB のコストベース オプティマイザーで MPP モード (デフォルト) を使用するかどうかを自動的に決定する場合は、次のステートメントを実行します。
+TiDB のコストベース オプティマイザで MPP モード (デフォルト) を使用するかどうかを自動的に決定する場合は、次のステートメントを実行します。
 
 ```sql
 set @@session.tidb_allow_mpp=1;
@@ -83,7 +83,7 @@ set @@session.tidb_enforce_mpp=1;
 
 ## MPPモードのアルゴリズムサポート {#algorithm-support-for-the-mpp-mode}
 
-MPPモードは、ブロードキャストハッシュ結合、シャッフルハッシュ結合、シャッフルハッシュ集計、Union All、TopN、およびLimitという物理アルゴリズムをサポートしています。オプティマイザーは、クエリで使用するアルゴリズムを自動的に決定します。具体的なクエリ実行計画を確認するには、 `EXPLAIN`のステートメントを実行してください。`EXPLAIN`のステートメントの結果にExchangeSenderオペレーターとExchangeReceiverオペレーターが表示された場合、MPPモードが有効になっていることを示します。
+MPPモードは、ブロードキャストハッシュ結合、シャッフルハッシュ結合、シャッフルハッシュ集計、Union All、TopN、およびLimitという物理アルゴリズムをサポートしています。オプティマイザは、クエリで使用するアルゴリズムを自動的に決定します。具体的なクエリ実行計画を確認するには、 `EXPLAIN`のステートメントを実行してください。`EXPLAIN`のステートメントの結果にExchangeSenderオペレーターとExchangeReceiverオペレーターが表示された場合、MPPモードが有効になっていることを示します。
 
 次のステートメントは、TPC-H テスト セット内のテーブル構造を例として示しています。
 
@@ -115,7 +115,7 @@ TiFlash は、ブロードキャスト ハッシュ結合を使用するかど�
 
 ## MPP モードでパーティションテーブルにアクセスする {#access-partitioned-tables-in-the-mpp-mode}
 
-MPP モードでパーティションテーブルにアクセスするには、まず[動的剪定モード](https://docs.pingcap.com/tidb/stable/partitioned-table#dynamic-pruning-mode)有効にする必要があります。
+MPP モードでパーティションテーブルにアクセスするには、まず[動的剪定モード](https://docs.pingcap.com/tidb/stable/partitioned-table#dynamic-pruning-mode)を有効にする必要があります。
 
 例：
 
