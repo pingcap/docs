@@ -128,7 +128,7 @@ TiDB バージョン: 7.5.7
     - デフォルト値`lease`が正しく設定されていない問題を修正[＃9156](https://github.com/tikv/pd/issues/9156) @[rleungx](https://github.com/rleungx)
     - TiDB Dashboard TCP接続を不適切に閉じるとPDゴルーチンリークが発生する可能性がある問題を修正[＃9402](https://github.com/tikv/pd/issues/9402) @[baurine](https://github.com/baurine)
     - 新しく追加された TiKV ノードがスケジュールされない可能性がある問題を修正しました [＃9145](https://github.com/tikv/pd/issues/9145) @[bufferflies](https://github.com/bufferflies)
-    - `tidb_enable_tso_follower_proxy`有効にすると TSO サービスが利用できなくなる可能性がある問題を修正[＃9188](https://github.com/tikv/pd/issues/9188) @[Tema](https://github.com/Tema)
+    - `tidb_enable_tso_follower_proxy`を有効にすると TSO サービスが利用できなくなる可能性がある問題を修正[＃9188](https://github.com/tikv/pd/issues/9188) @[Tema](https://github.com/Tema)
 
 - TiFlash
 

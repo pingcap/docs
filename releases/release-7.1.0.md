@@ -234,7 +234,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     TiFlash をv7.1.0 にアップグレードした場合、TiDB を v7.1.0 にアップグレードする際に、TiDB はTiFlashシステムテーブル ( [`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)と[`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md) ) を読み取ることができません。
 
-- TiDB バージョン v6.2.0 から v7.0.0 のTiDB Lightning は、TiDB クラスターのバージョンに基づいてグローバルスケジューリングを一時停止するかどうかを決定します。TiDB クラスター バージョン &gt;= v6.1.0 の場合、スケジュールはターゲットテーブルデータを格納するリージョンに対してのみ一時停止され、ターゲットテーブルのインポートが完了すると再開されます。その他のバージョンの場合、 TiDB Lightning はグローバルスケジューリングを一時停止します。TiDB v7.1.0 以降では、 [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)設定することで、グローバルスケジューリングを一時停止するかどうかを制御できます。デフォルトでは、 TiDB Lightning はターゲットテーブルデータを格納するリージョンのスケジュールを一時停止します。ターゲットクラスターのバージョンが v6.1.0 より前の場合、エラーが発生します。この場合、パラメータの値を`"global"`に変更して再試行できます。
+- TiDB バージョン v6.2.0 から v7.0.0 のTiDB Lightning は、TiDB クラスターのバージョンに基づいてグローバルスケジューリングを一時停止するかどうかを決定します。TiDB クラスター バージョン &gt;= v6.1.0 の場合、スケジュールはターゲットテーブルデータを格納するリージョンに対してのみ一時停止され、ターゲットテーブルのインポートが完了すると再開されます。その他のバージョンの場合、 TiDB Lightning はグローバルスケジューリングを一時停止します。TiDB v7.1.0 以降では、 [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)を設定することで、グローバルスケジューリングを一時停止するかどうかを制御できます。デフォルトでは、 TiDB Lightning はターゲットテーブルデータを格納するリージョンのスケジュールを一時停止します。ターゲットクラスターのバージョンが v6.1.0 より前の場合、エラーが発生します。この場合、パラメータの値を`"global"`に変更して再試行できます。
 
 - TiDB v7.1.0で[`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)を使用すると、FLASHBACK操作が完了した後も、一部のリージョンがFLASHBACKプロセスに残る可能性があります。v7.1.0ではこの機能の使用を避けることをお勧めします。詳細については、問題を参照してください。この問題が発生した場合は、機能[TiDBスナップショットのバックアップと復元](/br/br-snapshot-guide.md)を使用してデータを復元できます。 [＃44292](https://github.com/pingcap/tidb/issues/44292)
 
@@ -382,7 +382,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     - `Limit` を使用してパーティションテーブルをクエリしたときに返される誤った値を修正しました [＃24636](https://github.com/pingcap/tidb/issues/24636)
     - IPv6環境で誤ったTiDBアドレスが表示される問題を修正[＃43260](https://github.com/pingcap/tidb/issues/43260) @[nexustar](https://github.com/nexustar)
     - システム変数`tidb_enable_tiflash_read_for_write_stmt`と`tidb_enable_exchange_partition` に誤った値が表示される問題を修正しました [＃43281](https://github.com/pingcap/tidb/issues/43281) @[gengliqi](https://github.com/gengliqi)
-    - `tidb_scatter_region`有効にすると、パーティションが切り捨てられた後にリージョンが自動的に分割されない問題を修正しました[＃43174](https://github.com/pingcap/tidb/issues/43174) [＃43028](https://github.com/pingcap/tidb/issues/43028) @[jiyfhust](https://github.com/jiyfhust)
+    - `tidb_scatter_region`を有効にすると、パーティションが切り捨てられた後にリージョンが自動的に分割されない問題を修正しました[＃43174](https://github.com/pingcap/tidb/issues/43174) [＃43028](https://github.com/pingcap/tidb/issues/43028) @[jiyfhust](https://github.com/jiyfhust)
     - 生成列を持つテーブルにチェックを追加し、これらの列でサポートされていない DDL 操作のエラーを報告します[＃38988](https://github.com/pingcap/tidb/issues/38988) [＃24321](https://github.com/pingcap/tidb/issues/24321) @[tiancaiamao](https://github.com/tiancaiamao)
     - 特定の型変換エラーでエラーメッセージが正しく表示されない問題を修正 [＃41730](https://github.com/pingcap/tidb/issues/41730) @[hawkingrei](https://github.com/hawkingrei)
     - TiDBノードが正常にシャットダウンした後、このノードでトリガーされたDDLタスクがキャンセルされる問題を修正しました[＃43854](https://github.com/pingcap/tidb/issues/43854) @[zimulala](https://github.com/zimulala)
@@ -408,8 +408,8 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 - TiKV
 
-    - `tidb_pessimistic_txn_fair_locking`有効にすると、極端なケースで、失敗した RPC 再試行によって期限切れになったリクエストが、解決ロック操作中にデータの正確性に影響を与える可能性がある問題を修正しました。 [＃14551](https://github.com/tikv/tikv/issues/14551) @[MyonKeminta](https://github.com/MyonKeminta)
-    - `tidb_pessimistic_txn_fair_locking`有効にすると、極端なケースで、失敗した RPC 再試行によって期限切れのリクエストが発生し、トランザクションの競合が無視され、トランザクションの一貫性に影響する可能性がある問題を修正しました。 [＃14311](https://github.com/tikv/tikv/issues/14311) @[MyonKeminta](https://github.com/MyonKeminta)
+    - `tidb_pessimistic_txn_fair_locking`を有効にすると、極端なケースで、失敗した RPC 再試行によって期限切れになったリクエストが、解決ロック操作中にデータの正確性に影響を与える可能性がある問題を修正しました。 [＃14551](https://github.com/tikv/tikv/issues/14551) @[MyonKeminta](https://github.com/MyonKeminta)
+    - `tidb_pessimistic_txn_fair_locking`を有効にすると、極端なケースで、失敗した RPC 再試行によって期限切れのリクエストが発生し、トランザクションの競合が無視され、トランザクションの一貫性に影響する可能性がある問題を修正しました。 [＃14311](https://github.com/tikv/tikv/issues/14311) @[MyonKeminta](https://github.com/MyonKeminta)
     - 暗号化キーIDの競合により古いキーが削除される可能性がある問題を修正しました [＃14585](https://github.com/tikv/tikv/issues/14585) @[tabokie](https://github.com/tabokie)
     - クラスタを以前のバージョンから v6.5 以降のバージョンにアップグレードしたときに、累積したロック レコードによって発生するパフォーマンス低下の問題を修正しました。 [＃14780](https://github.com/tikv/tikv/issues/14780) @[MyonKeminta](https://github.com/MyonKeminta)
     - PITRリカバリプロセス中に`raft entry is too large`エラーが発生する問題を修正 [＃14313](https://github.com/tikv/tikv/issues/14313) @[YuJuncen](https://github.com/YuJuncen)

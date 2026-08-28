@@ -91,7 +91,7 @@ SQL ポートのコンフィグレーション。
 - デフォルト値: `""`
 - ホットリロードのサポート: はい、ただし新規接続のみ
 - 可能な`"v2"` : `""`
-- ポートの[PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)有効にしてください。PROXYプロトコルを有効にすると、TiProxyは実際のクライアントIPアドレスをTiDBに渡すことができます。`"v2"` PROXYプロトコルバージョン2の使用を示し、 `""` PROXYプロトコルの無効化を示します。TiProxyでPROXYプロトコルが有効になっている場合は、TiDBサーバーでも[PROXYプロトコル](/tidb-configuration-file.md#proxy-protocol)有効にする必要があります。
+- ポートの[PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を有効にしてください。PROXYプロトコルを有効にすると、TiProxyは実際のクライアントIPアドレスをTiDBに渡すことができます。`"v2"` PROXYプロトコルバージョン2の使用を示し、 `""` PROXYプロトコルの無効化を示します。TiProxyでPROXYプロトコルが有効になっている場合は、TiDBサーバーでも[PROXYプロトコル](/tidb-configuration-file.md#proxy-protocol)を有効にする必要があります。
 
 ### API {#api}
 
@@ -108,7 +108,7 @@ HTTP ゲートウェイの構成。
 - デフォルト値: `""`
 - ホットリロードのサポート: いいえ
 - 可能な`"v2"` : `""`
-- ポートの[PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)有効にします。`"v2"` PROXY プロトコル バージョン 2 を使用することを示し、 `""` PROXY プロトコルを無効にすることを示します。
+- ポートの[PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を有効にします。`"v2"` PROXY プロトコル バージョン 2 を使用することを示し、 `""` PROXY プロトコルを無効にすることを示します。
 
 ### バランス {#balance}
 
@@ -246,7 +246,7 @@ TLS オブジェクト フィールド:
 クライアント TLS オブジェクトの場合:
 
 - サーバー証明書の検証をスキップするには、 `ca`または`skip-ca`を設定する必要があります。
-- オプションで、サーバー側のクライアント検証に合格するために`cert`または`key`設定できます。
+- オプションで、サーバー側のクライアント検証に合格するために`cert`または`key`を設定できます。
 - 役に立たないフィールド: 自動証明書。
 
 サーバーTLS オブジェクトの場合:

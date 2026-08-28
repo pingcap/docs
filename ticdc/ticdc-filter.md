@@ -115,7 +115,7 @@ ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DM
 
     > **Note:**
     >
-    > TiDBのDDL文は、 `ALTER TABLE t MODIFY COLUMN a INT, ADD COLUMN b INT, DROP COLUMN c;`のように単一テーブルの複数の属性を同時に変更することをサポートしています。この操作はMultiSchemaChangeとして定義されています。このタイプのDDLを除外したい場合は、 `ignore-event`で`"multi schema change"`設定する必要があります。
+    > TiDBのDDL文は、 `ALTER TABLE t MODIFY COLUMN a INT, ADD COLUMN b INT, DROP COLUMN c;`のように単一テーブルの複数の属性を同時に変更することをサポートしています。この操作はMultiSchemaChangeとして定義されています。このタイプのDDLを除外したい場合は、 `ignore-event`で`"multi schema change"`を設定する必要があります。
 
 - `ignore-sql` : フィルタリングするDDL文の正規表現。このパラメータは文字列の配列を受け付け、複数の正規表現を設定できます。この設定はDDLイベントにのみ適用されます。
 

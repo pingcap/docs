@@ -113,7 +113,7 @@ Azure 上のRaft Engineに専用の 32 GB [Ultra Disk](https://learn.microsoft.c
 
 ### 例 3: TiKV マニフェストのRaft Engine用に Google Cloud に専用の pd-ssd ディスクを接続する {#example-3-attach-a-dedicated-pd-ssd-disk-on-google-cloud-for-raft-engine-on-tikv-manifest}
 
-次の TiKV 構成例は、 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)によってデプロイされた Google Cloud 上のクラスタに 512 GB の追加のディスク[pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/)を接続し、この特定のディスクにRaft Engineログを保存するように`raft-engine.dir`構成する方法を示しています。
+次の TiKV 構成例は、 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)によってデプロイされた Google Cloud 上のクラスタに 512 GB の追加のディスク[pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/)を接続し、この特定のディスクにRaft Engineログを保存するように`raft-engine.dir`を構成する方法を示しています。
 
 ```
 tikv:

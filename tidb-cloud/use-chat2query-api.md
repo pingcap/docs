@@ -240,7 +240,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region
 
 #### 3. `/v3/chat2data`を呼び出してSQL文を生成し実行する {#3-generate-and-execute-sql-statements-by-calling-v3chat2data}
 
-データベースのデータ概要が準備できたら、クラスター ID、データベース名、質問を指定して`/v3/chat2data`呼び出して SQL ステートメントを生成および実行できます。
+データベースのデータ概要が準備できたら、クラスター ID、データベース名、質問を指定して`/v3/chat2data`を呼び出して SQL ステートメントを生成および実行できます。
 
 例えば：
 

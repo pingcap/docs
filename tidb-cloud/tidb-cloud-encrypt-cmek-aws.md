@@ -151,7 +151,7 @@ TiDB Cloudコンソールまたは API を使用して、プロジェクトの C
 
 ## CMEKを回転させる {#rotate-cmek}
 
-AWS KMS で[自動CMEKローテーション](http://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html)設定できます。このローテーションを有効にすると、 TiDB Cloudのプロジェクト設定で CMEK ID を含む**Encryption Access**を更新する必要はありません。
+AWS KMS で[自動CMEKローテーション](http://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html)を設定できます。このローテーションを有効にすると、 TiDB Cloudのプロジェクト設定で CMEK ID を含む**Encryption Access**を更新する必要はありません。
 
 ## CMEK を取り消して復元する {#revoke-and-restore-cmek}
 

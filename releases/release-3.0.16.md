@@ -20,7 +20,7 @@ TiDB バージョン: 3.0.16
     - 将来の Go バージョンとの互換性を保つために、 `json.Unmarshal` in `job.DecodeArgs`の使用法を修正します。 [＃17887](https://github.com/pingcap/tidb/pull/17887)
     - スロークエリログとステートメントサマリーテーブルから機密情報を削除します [＃18128](https://github.com/pingcap/tidb/pull/18128)
     - MySQLの動作を`DateTime`区切り文字に一致させる [＃17499](https://github.com/pingcap/tidb/pull/17499)
-    - MySQL と一致する範囲の日付形式で`%h`処理します [＃17496](https://github.com/pingcap/tidb/pull/17496)
+    - MySQL と一致する範囲の日付形式で`%h`を処理します [＃17496](https://github.com/pingcap/tidb/pull/17496)
 
 - TiKV
 

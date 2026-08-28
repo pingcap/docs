@@ -115,7 +115,7 @@ TiFlash は、ブロードキャスト ハッシュ結合を使用するかど�
 
 ## MPP モードでパーティションテーブルにアクセスする {#access-partitioned-tables-in-the-mpp-mode}
 
-MPP モードでパーティションテーブルにアクセスするには、まず[動的剪定モード](https://docs.pingcap.com/tidb/stable/partitioned-table#dynamic-pruning-mode)有効にする必要があります。
+MPP モードでパーティションテーブルにアクセスするには、まず[動的剪定モード](https://docs.pingcap.com/tidb/stable/partitioned-table#dynamic-pruning-mode)を有効にする必要があります。
 
 例：
 

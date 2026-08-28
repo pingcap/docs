@@ -493,7 +493,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
 - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)の TiKV スケーリング プロセスを改善して、クラスターの安定性を強化します。
 
-    TiKV ノードの[vCPUとRAMのサイズを変更する](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)追加すると、 TiDB Cloud は、クラスターの内部サービスに新しい構成をサポートするために追加の容量が必要かどうかを自動的に確認します。
+    TiKV ノードの[vCPUとRAMのサイズを変更する](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)と、 TiDB Cloud は、クラスターの内部サービスに新しい構成をサポートするために追加の容量が必要かどうかを自動的に確認します。
 
     - 拡張が必要な​​場合は、 TiDB Cloud は続行する前に確認を求めます。
     - スケーリング後の現在の内部サービス容量がすでに必要なサイズよりも大きい場合、 TiDB Cloud は、クラスターの安定性に影響を与える可能性のある不要な変更を回避するために、内部サービスの既存の構成を保持します。
