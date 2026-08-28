@@ -135,7 +135,7 @@ TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェ�
 
 TiFlashを導入する前に、以下の項目に注意してください。
 
-- TiFlash は[複数のディスクにデプロイされています](/tiflash/tiflash-configuration.md#multi-disk-deployment)。
+- TiFlash は[複数のディスクにデプロイできます](/tiflash/tiflash-configuration.md#multi-disk-deployment)。
 - TiFlashデータディレクトリの最初のディスクとして、TiKVデータのリアルタイムレプリケーションをバッファリングするために、高性能SSDを使用することをお勧めします。このディスクの性能は、PCIe SSDなど、TiKVと同等以上である必要があります。ディスク容量は、総容量の10%以上でなければなりません。そうでない場合、このノードのボトルネックになる可能性があります。他のディスクには通常のSSDを使用することもできますが、より高性能なPCIe SSDを使用すると、パフォーマンスが向上することに注意してください。
 - TiFlashはTiKVとは別のノードにデプロイすることをお勧めします。どうしても同じノードにTiFlashとTiKVをデプロイする必要がある場合は、CPUコア数とメモリ容量を増やし、互いに干渉しないようにTiFlashとTiKVを異なるディスクにデプロイするようにしてください。
 - TiFlashディスクの総容量は、次のように計算されます: `the data volume of the entire TiKV cluster to be replicated / the number of TiKV replicas * the number of TiFlash replicas` 。たとえば、TiKV の計画容量が 1 TB、TiKV レプリカ数が 3、 TiFlashレプリカ数が 2 の場合、推奨されるTiFlashの総容量は`1024 GB / 3 * 2`です。一部のテーブルのデータのみを複製することもできます。その場合は、複製するテーブルのデータ量に応じてTiFlash の容量を決定します。

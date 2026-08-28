@@ -9,7 +9,7 @@ summary: DM バイナリを使用してデータ移行クラスターをデプ�
 
 > **Note:**
 >
-> 本番環境では、 [TiUPを使用してDMクラスタをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)を推奨します。
+> 本番環境では、 [TiUPを使用したDMクラスタのデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)を推奨します。
 
 ## DMバイナリをダウンロード {#download-dm-binary}
 
