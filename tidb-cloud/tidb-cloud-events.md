@@ -33,7 +33,9 @@ To view the events on the **Events** page, take the following steps:
 
 ## Logged events
 
-TiDB Cloud logs the following types of cluster events:
+<CustomContent plan="starter,essential,dedicated">
+
+TiDB Cloud logs the following types of events:
 
 | Event Type| Description |
 |:--- |:--- |
@@ -55,7 +57,11 @@ TiDB Cloud logs the following types of cluster events:
 | UpdateSpendingLimit |   Update spending limit of a {{{ .starter }}} instance |  
 | ResourceLimitation |   Update resource limitation of a {{{ .starter }}} or {{{ .essential }}} instance |  
 
-In Premium, TiDB Cloud logs the following types of events:
+</CustomContent>
+
+<CustomContent plan="premium">
+
+TiDB Cloud Premium logs the following types of events:
 
 | Event Type| Description |
 |:--- |:--- |
@@ -84,6 +90,8 @@ In Premium, TiDB Cloud logs the following types of events:
 | UpdatePublicEndpoint |  Update a public endpoint |  
 | UpdateClusterCapacity |  Update an instance capacity |  
 | CreatePrivateLink | Create a PrivateLink Endpoint  |
+
+</CustomContent>
 
 For each event, the following information is logged:
 
