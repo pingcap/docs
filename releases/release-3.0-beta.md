@@ -1,11 +1,11 @@
 ---
 title: TiDB 3.0 Beta Release Notes
-summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安定性、SQLオプティマイザー、統計、実行エンジンに重点を置いています。新機能には、ビュー、ウィンドウ関数、範囲分割、ハッシュ分割のサポートが含まれます。SQLオプティマイザーは、トランザクションにおけるインデックス結合のサポート、定数伝播の最適化、DO文におけるサブクエリのサポートなど、さまざまな最適化によって強化されました。SQLエグゼキューターも最適化され、パフォーマンスが向上しました。権限管理、サーバー、互換性、DDLがすべて改善されました。TiDB Lightningは単一テーブルのバッチインポートをサポートするようになり、PDとTiKVにもさまざまな機能強化と新機能が追加されました。
+summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安定性、SQLオプティマイザ、統計、実行エンジンに重点を置いています。新機能には、ビュー、ウィンドウ関数、範囲分割、ハッシュ分割のサポートが含まれます。SQLオプティマイザは、トランザクションにおけるインデックス結合のサポート、定数伝播の最適化、DO文におけるサブクエリのサポートなど、さまざまな最適化によって強化されました。SQLエグゼキューターも最適化され、パフォーマンスが向上しました。権限管理、サーバー、互換性、DDLがすべて改善されました。TiDB Lightningは単一テーブルのバッチインポートをサポートするようになり、PDとTiKVにもさまざまな機能強化と新機能が追加されました。
 ---
 
 # TiDB 3.0 ベータ版リリースノート {#tidb-3-0-beta-release-notes}
 
-2019年1月19日、TiDB 3.0 Betaがリリースされました。対応するTiDB Ansible 3.0 Betaもリリースされました。TiDB 3.0 BetaはTiDB 2.1をベースに構築されており、安定性、SQLオプティマイザー、統計、実行エンジンに重点が置かれています。
+2019年1月19日、TiDB 3.0 Betaがリリースされました。対応するTiDB Ansible 3.0 Betaもリリースされました。TiDB 3.0 BetaはTiDB 2.1をベースに構築されており、安定性、SQLオプティマイザ、統計、実行エンジンに重点が置かれています。
 
 ## TiDB {#tidb}
 
@@ -14,10 +14,10 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
     - ウィンドウ関数をサポート
     - 範囲分割をサポート
     - ハッシュパーティショニングをサポート
-- SQLオプティマイザー
+- SQLオプティマイザ
     - `AggregationElimination` の最適化ルールを再サポート [＃7676](https://github.com/pingcap/tidb/pull/7676)
     - `NOT EXISTS`サブクエリを最適化し、Anti Semi Join に変換する [＃7842](https://github.com/pingcap/tidb/pull/7842)
-    - 新しいCascadesオプティマイザーをサポートするために、変数`tidb_enable_cascades_planner`追加します。現在、Cascadesオプティマイザーはまだ完全に実装されておらず、デフォルトではオフになっています[＃7879](https://github.com/pingcap/tidb/pull/7879)
+    - 新しいCascadesオプティマイザをサポートするために、変数`tidb_enable_cascades_planner`追加します。現在、Cascadesオプティマイザはまだ完全に実装されておらず、デフォルトではオフになっています[＃7879](https://github.com/pingcap/tidb/pull/7879)
     - トランザクションのインデックス結合の使用をサポート [＃7877](https://github.com/pingcap/tidb/pull/7877)
     - 外部結合の定数伝播を最適化し、結合結果の外部テーブルに関連するフィルタリング条件を外部結合を介して外部テーブルにプッシュダウンできるようにすることで、外部結合の無駄な計算を減らし、実行パフォーマンスを向上させます[＃7794](https://github.com/pingcap/tidb/pull/7794)
     - 投影除去の最適化ルールを集計除去の後の位置に調整し、冗長な`Project`演算子回避する [＃7909](https://github.com/pingcap/tidb/pull/7909)
@@ -68,7 +68,7 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
     - CSVファイルのフォールトトレランスを`LoadData`向上[＃9005](https://github.com/pingcap/tidb/pull/9005)
     - MySQL 3.20ハンドシェイクプロトコルサポート [＃8812](https://github.com/pingcap/tidb/pull/8812)
     - 符号なし`bigint`列をAUTO_INCREMENT列として使用することをサポート [＃8181](https://github.com/pingcap/tidb/pull/8181)
-    - `SHOW CREATE DATABASE IF NOT EXISTS`構文サポートする [＃8926](https://github.com/pingcap/tidb/pull/8926)
+    - `SHOW CREATE DATABASE IF NOT EXISTS`構文をサポートする [＃8926](https://github.com/pingcap/tidb/pull/8926)
     - フィルタリング条件にユーザー変数が含まれている場合、述語プッシュダウン操作を放棄して、ユーザー変数を使用してウィンドウ関数の動作をモックするMySQLの動作との互換性を改善しました[＃8412](https://github.com/pingcap/tidb/pull/8412)
 - DDL
     - 誤って削除されたテーブルの高速回復をサポート[＃7937](https://github.com/pingcap/tidb/pull/7937)

@@ -305,7 +305,7 @@ TiCDCにおけるCanal-JSONデータ形式の実装方法（ `Update`イベン�
 
 ### 公式Canalとの互換性 {#compatibility-with-the-official-canal}
 
-v6.5.6、v7.1.3、v7.6.0以降、 TiCDC Canal-JSONは公式Canalのデータ形式との互換性をサポートしています。チェンジフィードを作成する際に、 `sink-uri`のうち`content-compatible=true`設定することでこの機能を有効にすることができます。このモードでは、TiCDCは公式Canalと互換性のあるCanal-JSON形式のデータを出力します。具体的な変更点は以下の通りです。
+v6.5.6、v7.1.3、v7.6.0以降、 TiCDC Canal-JSONは公式Canalのデータ形式との互換性をサポートしています。チェンジフィードを作成する際に、 `sink-uri`のうち`content-compatible=true`を設定することでこの機能を有効にすることができます。このモードでは、TiCDCは公式Canalと互換性のあるCanal-JSON形式のデータを出力します。具体的な変更点は以下の通りです。
 
 - `mysqlType`フィールドには、各タイプのタイプ パラメータの完全な情報が含まれています。
 - `Update`タイプのイベントは、変更された列データのみを出力します。

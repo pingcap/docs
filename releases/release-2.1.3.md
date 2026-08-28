@@ -1,15 +1,15 @@
 ---
 title: TiDB 2.1.3 Release Notes
-summary: TiDB 2.1.3 および TiDB Ansible 2.1.3 がリリースされ、システムの安定性、SQL オプティマイザー、統計、実行エンジンが改善されました。修正内容には、 プリペアドプランキャッシュ、Range コンピューティング、CAST(str AS TIME(N))`、Generated カラム、統計ヒストグラム、`Sort Merge Join` などの問題が含まれています。その他の改善点としては、`_tidb_rowid` 構築クエリにおける Range のサポート、`ALLOW_INVALID_DATES` SQL モードなどが含まれます。PD および TiKV にも修正と改善が加えられています。TiDB Binlog、 Pumpクライアントログの問題と、NULL 値を含む一意のキーによって発生するデータの不整合が修正されています。
+summary: TiDB 2.1.3 および TiDB Ansible 2.1.3 がリリースされ、システムの安定性、SQL オプティマイザ、統計、実行エンジンが改善されました。修正内容には、 プリペアドプランキャッシュ、Range コンピューティング、CAST(str AS TIME(N))`、Generated カラム、統計ヒストグラム、`Sort Merge Join` などの問題が含まれています。その他の改善点としては、`_tidb_rowid` 構築クエリにおける Range のサポート、`ALLOW_INVALID_DATES` SQL モードなどが含まれます。PD および TiKV にも修正と改善が加えられています。TiDB Binlog、 Pumpクライアントログの問題と、NULL 値を含む一意のキーによって発生するデータの不整合が修正されています。
 ---
 
 # TiDB 2.1.3 リリースノート {#tidb-2-1-3-release-notes}
 
-2019年1月28日にTiDB 2.1.3がリリースされました。対応するTiDB Ansible 2.1.3もリリースされました。TiDB 2.1.2と比較して、このリリースではシステムの安定性、SQLオプティマイザー、統計情報、実行エンジンが大幅に改善されています。
+2019年1月28日にTiDB 2.1.3がリリースされました。対応するTiDB Ansible 2.1.3もリリースされました。TiDB 2.1.2と比較して、このリリースではシステムの安定性、SQLオプティマイザ、統計情報、実行エンジンが大幅に改善されています。
 
 ## TiDB {#tidb}
 
-- SQL オプティマイザー/エグゼキューター
+- SQL オプティマイザ/エグゼキューター
     - 一部のケースでプリペアドプランキャッシュのpanic問題を修正[＃8826](https://github.com/pingcap/tidb/pull/8826)
     - インデックスがプレフィックスインデックスの場合に範囲計算が間違っている問題を修正しました [＃8851](https://github.com/pingcap/tidb/pull/8851)
     - `SQL_MODE`厳密でない場合に文字列が無効な`TIME`形式の場合、 `CAST(str AS TIME(N))` nullを返すようにする[＃8966](https://github.com/pingcap/tidb/pull/8966)

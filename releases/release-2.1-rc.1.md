@@ -5,11 +5,11 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
 
 # TiDB 2.1 RC1 リリースノート {#tidb-2-1-rc1-release-notes}
 
-2018 年 8月 24日に、TiDB 2.1 RC1 がリリースされました。TiDB 2.1 ベータ版と比較して、このリリースでは安定性、SQL オプティマイザー、統計情報、実行エンジンが大幅に改善されています。
+2018 年 8月 24日に、TiDB 2.1 RC1 がリリースされました。TiDB 2.1 ベータ版と比較して、このリリースでは安定性、SQL オプティマイザ、統計情報、実行エンジンが大幅に改善されています。
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザー
+- SQLオプティマイザ
     - 相関サブクエリの相関を解除した後に間違った結果が返される場合がある問題を修正[＃6972](https://github.com/pingcap/tidb/pull/6972)
     - `Explain` の出力結果を最適化する [＃7041](https://github.com/pingcap/tidb/pull/7041) [＃7011](https://github.com/pingcap/tidb/pull/7011)
     - `IndexJoin` の外側のテーブルの選択戦略を最適化する [＃7019](https://github.com/pingcap/tidb/pull/7019)
@@ -63,7 +63,7 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
 - 互換性
     - セッション変数`warning_count`と`error_count`サポート[＃6945](https://github.com/pingcap/tidb/pull/6945)
     - システム変数読み取り時にチェックを`Scope`追加 [＃6958](https://github.com/pingcap/tidb/pull/6958)
-    - `MAX_EXECUTION_TIME`構文サポートする [＃7012](https://github.com/pingcap/tidb/pull/7012)
+    - `MAX_EXECUTION_TIME`構文をサポートする [＃7012](https://github.com/pingcap/tidb/pull/7012)
     - `SET`構文のより多くのステートメントをサポート [＃7020](https://github.com/pingcap/tidb/pull/7020)
     - システム変数設定する際に有効性チェックを追加する [＃7117](https://github.com/pingcap/tidb/pull/7117)
     - `Prepare`文の`PlaceHolder`の数の検証を追加する [＃7162](https://github.com/pingcap/tidb/pull/7162)
@@ -140,7 +140,7 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
 - 改善点
     - 多数の関数関数にプッシュダウンのサポートを追加し、文字セットのサポートを改善しました。
     - GCワークフローを最適化し、GC速度を向上させ、GCがシステムに与える影響を軽減します。
-    - `prevote`有効にすると、ネットワークが異常な場合のサービス回復が高速化されます
+    - `prevote`を有効にすると、ネットワークが異常な場合のサービス回復が高速化されます
     - RocksDBログファイルの関連設定項目を追加します
     - `scheduler_latch`のデフォルト設定を調整する
     - tikv-ctl を使用して手動でデータを圧縮するときに、RocksDB の最下層のデータを圧縮するかどうかの設定をサポートします。

@@ -292,7 +292,7 @@ public static class StaleReadHelper {
 }
 ```
 
-次に、 `BookDAO`クラスのトランザクションを通じてステイル読み取り機能を有効にするメソッドを定義します。クエリ文に`AS OF TIMESTAMP`追加する代わりに、このメソッドを使用してクエリを実行します。
+次に、 `BookDAO`クラスのトランザクションを通じてステイル読み取り機能を有効にするメソッドを定義します。クエリ文に`AS OF TIMESTAMP`を追加する代わりに、このメソッドを使用してクエリを実行します。
 
 ```java
 public class BookDAO {
@@ -398,7 +398,7 @@ public static class TxnHelper {
 }
 ```
 
-次に、 `BookDAO`クラスのトランザクションを通じてステイル読み取り機能を有効にするメソッドを定義します。クエリ文に`AS OF TIMESTAMP`追加する代わりに、このメソッドを使用してクエリを実行します。
+次に、 `BookDAO`クラスのトランザクションを通じてステイル読み取り機能を有効にするメソッドを定義します。クエリ文に`AS OF TIMESTAMP`を追加する代わりに、このメソッドを使用してクエリを実行します。
 
 ```java
 public class BookDAO {

@@ -83,7 +83,7 @@ TiDB バージョン: 7.6.0
 
     TiDBはv7.6.0以降、TiKVの定期的なフルコンパクションをサポートしています。この機能は、ガベージコレクション（GC）を拡張し、冗長なデータバージョンを排除するものです。アプリケーションのアクティビティに明らかなピークと谷が見られるシナリオでは、この機能を使用してアイドル期間中にデータコンパクションを実行することで、ピーク時のパフォーマンスを向上させることができます。
 
-    TiKV の設定項目[`periodic-full-compact-start-times`](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760)設定することで、TiKV が定期的な完全圧縮を開始する特定の時間を設定できます。また、 [`periodic-full-compact-start-max-cpu`](/tikv-configuration-file.md#periodic-full-compact-start-max-cpu-new-in-v760)を設定することで、TiKV の定期的な完全圧縮の最大 CPU 使用率を制限できます。 `periodic-full-compact-start-max-cpu`のデフォルト値は`0.1`です。これは、TiKV の CPU 使用率が 10% 未満の場合にのみ定期的な完全圧縮がトリガーされることを意味し、アプリケーションのトラフィックへの影響を軽減します。
+    TiKV の設定項目[`periodic-full-compact-start-times`](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760)を設定することで、TiKV が定期的な完全圧縮を開始する特定の時間を設定できます。また、 [`periodic-full-compact-start-max-cpu`](/tikv-configuration-file.md#periodic-full-compact-start-max-cpu-new-in-v760)を設定することで、TiKV の定期的な完全圧縮の最大 CPU 使用率を制限できます。 `periodic-full-compact-start-max-cpu`のデフォルト値は`0.1`です。これは、TiKV の CPU 使用率が 10% 未満の場合にのみ定期的な完全圧縮がトリガーされることを意味し、アプリケーションのトラフィックへの影響を軽減します。
 
     詳細については、 [ドキュメント](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760)を参照してください。
 
@@ -105,7 +105,7 @@ TiDB バージョン: 7.6.0
 
     さらに、クロスデータベースバインディングは、ユーザーデータとワークロードの不均一な分布や急激な変化によって引き起こされるSQLパフォーマンスの問題を効果的に軽減できます。SaaSプロバイダーは、クロスデータベースバインディングを使用して、大量のデータを持つユーザーによって検証された実行計画を修正することで、すべてのユーザーの実行計画を固定できます。SaaSプロバイダーにとって、この機能は利便性とユーザーエクスペリエンスを大幅に向上させます。
 
-    クロスデータベースバインディングによって発生するシステムオーバーヘッド（1%未満）のため、TiDBはこの機能をデフォルトで無効にしています。クロスデータベースバインディングを使用するには、まずシステム変数[`tidb_opt_enable_fuzzy_binding`](/system-variables.md#tidb_opt_enable_fuzzy_binding-new-in-v760)有効にする必要があります。
+    クロスデータベースバインディングによって発生するシステムオーバーヘッド（1%未満）のため、TiDBはこの機能をデフォルトで無効にしています。クロスデータベースバインディングを使用するには、まずシステム変数[`tidb_opt_enable_fuzzy_binding`](/system-variables.md#tidb_opt_enable_fuzzy_binding-new-in-v760)を有効にする必要があります。
 
     詳細については、 [ドキュメント](/sql-plan-management.md#cross-database-binding)を参照してください。
 
@@ -357,7 +357,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     - `ENUM`型の列を結合キーとして使用した場合にクエリ結果が正しくない問題を修正 [#48991](https://github.com/pingcap/tidb/issues/48991) @[winoros](https://github.com/winoros)
     - メモリ制限を超えると、CTE を含むクエリが予期せずスタックする問題を修正 [#49096](https://github.com/pingcap/tidb/issues/49096) @[AilinKid](https://github.com/AilinKid)
     - TiDBサーバーが監査ログ用のEnterpriseプラグイン使用時に大量のリソースを消費する可能性がある問題を修正 [#49273](https://github.com/pingcap/tidb/issues/49273) @[lcwangchao](https://github.com/lcwangchao)
-    - 特定のシナリオでオプティマイザーがTiFlash選択パスを DUAL テーブルに誤って変換する問題を修正 [#49285](https://github.com/pingcap/tidb/issues/49285) @[AilinKid](https://github.com/AilinKid)
+    - 特定のシナリオでオプティマイザがTiFlash選択パスを DUAL テーブルに誤って変換する問題を修正 [#49285](https://github.com/pingcap/tidb/issues/49285) @[AilinKid](https://github.com/AilinKid)
     - `UPDATE`または`DELETE`ステートメントに`WITH RECURSIVE` CTE が含まれている場合、誤った結果が生じる可能性がある問題を修正しました [#48969](https://github.com/pingcap/tidb/issues/48969) @[winoros](https://github.com/winoros)
     - IndexHashJoin演算子を含むクエリがメモリ使用量`tidb_mem_quota_query`超えると停止する問題を修正しました [#49033](https://github.com/pingcap/tidb/issues/49033) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - 非厳格モード ( `sql_mode = ''` ) で`INSERT`実行中に切り捨てが発生し、エラーが報告される問題を修正しました [#49369](https://github.com/pingcap/tidb/issues/49369) @[tiancaiamao](https://github.com/tiancaiamao)

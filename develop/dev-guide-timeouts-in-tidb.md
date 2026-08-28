@@ -22,7 +22,7 @@ TiDBのトランザクション実装では、MVCC（Multiple Version Concurrenc
 
 一時的に読み取り時間を長くする必要がある場合は、MVCC バージョンの保持時間を長くすることができます。
 
-- v5.0 より前の TiDB バージョンの場合: TiDB の`mysql.tidb`のテーブルの`tikv_gc_life_time`調整します。
+- v5.0 より前の TiDB バージョンの場合: TiDB の`mysql.tidb`のテーブルの`tikv_gc_life_time`を調整します。
 - TiDB v5.0 以降のバージョンの場合: システム変数[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)を調整します。
 
 システム変数の設定はグローバルかつ即座に反映されます。値を増やすと既存のスナップショットの有効期間が延長され、値を減らすとすべてのスナップショットの有効期間が即座に短縮されます。MVCCのバージョンが多すぎると、TiDBクラスタのパフォーマンスに影響します。そのため、この変数は適切なタイミングで以前の設定に戻す必要があります。

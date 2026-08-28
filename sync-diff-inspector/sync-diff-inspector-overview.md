@@ -326,7 +326,7 @@ REPLACE INTO `sbtest`.`sbtest99`(`id`,`k`,`c`,`pad`) VALUES (3700000,2501808,'he
 - 自動入力される timestamp カラムを含むデータセットを検証する場合は、`DEFAULT CURRENT_TIMESTAMP` に依存するのではなく、検証データに対して決定論的な TIMESTAMP 値を設定することを検討してください。あるいは、その正確な値が検証目的にとって重要でない場合は、`ignore-columns` を使用して自動入力される TIMESTAMP カラムを除外してください。
 - アップストリームテーブルとダウンストリームテーブルで主キーが異なる場合、sync-diff-inspector は元の主キー列を使用してチャンクを分割しません。たとえば、MySQL のシャーディングされたテーブルが、元の主キーとシャードキーを含む複合主キーを使用して TiDB にマージされる場合などです。この場合、 `index-fields`を使用して元の主キー列を構成し、 `check-data-only`を`true`に設定します。
 - sync-diff-inspector は、まず TiDB の統計情報に基づいてデータをチャンクに分割します。統計情報の正確性を保証する必要があります。TiDB サーバーの*ワークロードが軽い*場合は、 `analyze table {table_name}`コマンドを手動で実行できます。
-- `table-rules`に特に注意してください。 `schema-pattern="test1"` 、 `table-pattern = "t_1"` 、 `target-schema="test2"` 、 `target-table = "t_2"`構成すると、ソースデータベースの`test1` 、 `t_1`スキーマと、ターゲットデータベースの`test2` 、 `t_2`スキーマが比較されます。 sync-diff-inspector ではシャーディングがデフォルトで有効になっているため、ソースデータベースに`test2` . `t_2`テーブルがある場合、シャーディングとして機能しているソースデータベースの`test1` . `t_1`テーブルと`test2` . `t_2`テーブルが、ターゲットデータベースの`test2` . `t_2`テーブルと比較されます。
+- `table-rules`に特に注意してください。 `schema-pattern="test1"` 、 `table-pattern = "t_1"` 、 `target-schema="test2"` 、 `target-table = "t_2"`を構成すると、ソースデータベースの`test1` 、 `t_1`スキーマと、ターゲットデータベースの`test2` 、 `t_2`スキーマが比較されます。 sync-diff-inspector ではシャーディングがデフォルトで有効になっているため、ソースデータベースに`test2` . `t_2`テーブルがある場合、シャーディングとして機能しているソースデータベースの`test1` . `t_1`テーブルと`test2` . `t_2`テーブルが、ターゲットデータベースの`test2` . `t_2`テーブルと比較されます。
 - 生成されたSQLファイルは、データ修復の際の参照としてのみ使用されます。データ修復のためにこれらのSQL文を実行する前に、必ず内容を確認してください。
 
 ## 関連リソース {#related-resources}

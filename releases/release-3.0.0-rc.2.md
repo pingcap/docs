@@ -13,11 +13,11 @@ TiDB Ansible バージョン: 3.0.0-rc.2
 
 ## 概要 {#overview}
 
-2019年5月28日にTiDB 3.0.0-rc.2がリリースされました。対応するTiDB Ansibleバージョンは3.0.0-rc.2です。このリリースでは、TiDB 3.0.0-rc.1と比較して、安定性、使いやすさ、機能、SQLオプティマイザー、統計、実行エンジンが大幅に向上しています。
+2019年5月28日にTiDB 3.0.0-rc.2がリリースされました。対応するTiDB Ansibleバージョンは3.0.0-rc.2です。このリリースでは、TiDB 3.0.0-rc.1と比較して、安定性、使いやすさ、機能、SQLオプティマイザ、統計、実行エンジンが大幅に向上しています。
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザー
+- SQLオプティマイザ
     - より多くのシナリオでIndex Joinをサポート[＃10540](https://github.com/pingcap/tidb/pull/10540)
     - 履歴統計のエクスポートをサポート[＃10291](https://github.com/pingcap/tidb/pull/10291)
     - 単調に増加するインデックス列に対する増分`Analyze`操作をサポートする [＃10355](https://github.com/pingcap/tidb/pull/10355)

@@ -110,7 +110,7 @@ Datadog は、<CustomContent plan="essential">{{{ .essential }}}</CustomContent>
 | `tidb_cloud.db_average_query_duration` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | ネットワークリクエストが TiDB に送信されてから、レスポンスがクライアントに返されるまでの時間 |
 | `tidb_cloud.db_transaction_per_second` | gauge | `type: Commit\|Rollback\|...`<br/>`txn_mode: optimistic\|pessimistic`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 1秒あたりに実行されたトランザクション数 |
 | `tidb_cloud.db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | {{{ .essential }}} インスタンスの行ベースストレージサイズ（バイト） |
-| `tidb_cloud.db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | {{{ .essential }}} インスタンスのカラムナー ストレージサイズ（バイト）。TiFlash が有効でない場合は 0 を返します |
+| `tidb_cloud.db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | {{{ .essential }}} インスタンスの列指向ストレージサイズ（バイト）。TiFlash が有効でない場合は 0 を返します |
 | `tidb_cloud.resource_manager_resource_request_unit_total` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | 消費された合計 Request Units/s (RU/s) |
 
 </CustomContent>
@@ -130,7 +130,7 @@ Datadog は、<CustomContent plan="essential">{{{ .essential }}}</CustomContent>
 | `tidb_cloud.db_average_query_duration` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | ネットワークリクエストが TiDB に送信されてから、レスポンスがクライアントに返されるまでの時間 |
 | `tidb_cloud.db_transaction_per_second` | gauge | `type: Commit\|Rollback\|...`<br/>`txn_mode: optimistic\|pessimistic`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 1秒あたりに実行されたトランザクション数 |
 | `tidb_cloud.db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | {{{ .premium }}} インスタンスの行ベースストレージサイズ（バイト） |
-| `tidb_cloud.db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | {{{ .premium }}} インスタンスのカラムナー ストレージサイズ（バイト） |
+| `tidb_cloud.db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | {{{ .premium }}} インスタンスの列指向ストレージサイズ（バイト） |
 | `tidb_cloud.resource_manager_resource_request_unit_total` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | 消費された合計 Request Units/s (RU/s) |
 | `tidb_cloud.changefeed_latency` | gauge | `changefeed: <changefeed-id>`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | changefeed の upstream と downstream 間のデータレプリケーション レイテンシー |
 | `tidb_cloud.changefeed_status` | gauge | `changefeed: <changefeed-id>`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | Changefeed のステータス:<br/>`-1`: Unknown<br/>`0`: Normal<br/>`1`: Warning<br/>`2`: Failed<br/>`3`: Stopped<br/>`4`: Finished<br/>`6`: Warning<br/>`7`: Other |

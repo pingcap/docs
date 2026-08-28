@@ -114,7 +114,7 @@ TiDB は、括弧を使用して集合演算の優先順位を指定すること
 1 rows in set (0.00 sec)
 ```
 
-## `ORDER BY`と`LIMIT`使用する {#use-order-by-and-limit}
+## `ORDER BY`と`LIMIT`を使用する {#use-order-by-and-limit}
 
 TiDBは、集合演算の結果全体に対して`ORDER BY`または`LIMIT`句の使用をサポートしています。これらの2つの句は、ステートメント全体の末尾に配置する必要があります。
 

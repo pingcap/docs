@@ -131,7 +131,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     バージョン7.0.0では、TiDBは統計情報の収集ロジックをさらに最適化し、収集時間を約25%短縮しました。この最適化により、大規模データベースクラスタの運用効率と安定性が向上し、統計情報の収集がクラスタのパフォーマンスに与える影響が軽減されます。
 
-- MPP 最適化のための新しいオプティマイザーヒントを追加 [#39710](https://github.com/pingcap/tidb/issues/39710) @[Reminiscent](https://github.com/Reminiscent)
+- MPP 最適化のための新しいオプティマイザヒントを追加 [#39710](https://github.com/pingcap/tidb/issues/39710) @[Reminiscent](https://github.com/Reminiscent)
 
     バージョン7.0.0では、TiDBはMPP実行計画の生成に影響を与える一連のオプティマイザヒントを追加しました。
 
@@ -144,7 +144,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、[ドキュメント](/optimizer-hints.md)を参照してください。
 
-- オプティマイザーのヒントは、結合メソッドと結合順序の指定をサポートします [#36600](https://github.com/pingcap/tidb/issues/36600) @[Reminiscent](https://github.com/Reminiscent)
+- オプティマイザのヒントは、結合メソッドと結合順序の指定をサポートします [#36600](https://github.com/pingcap/tidb/issues/36600) @[Reminiscent](https://github.com/Reminiscent)
 
     バージョン7.0.0では、オプティマイザヒント[`LEADING()`](/optimizer-hints.md#leadingt1_name--tl_name-)結合方法に影響を与えるヒントと併用できるようになり、両者の動作は互換性があります。複数テーブル結合の場合、最適な結合方法と結合順序を効果的に指定できるため、実行計画に対するオプティマイザヒントの制御が強化されます。
 

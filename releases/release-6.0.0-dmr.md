@@ -98,9 +98,9 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
     [ユーザードキュメント](/pessimistic-transaction.md#in-memory-pessimistic-lock) [＃11452](https://github.com/tikv/tikv/issues/11452)
 
-- リードコミット分離レベルでTSOを実現するための最適化
+- Read Committed分離レベルでTSOを取得するための最適化
 
-    クエリのレイテンシーを削減するため、読み取り/書き込み競合がまれな場合、TiDBは[コミット読み取り分離レベル](/transaction-isolation-levels.md#read-committed-isolation-level)時点で`tidb_rc_read_check_ts`のシステム変数を追加し、不要なTSOを削減します。この変数はデフォルトで無効になっています。この変数を有効にすると、読み取り/書き込み競合が発生しないシナリオでは、この最適化によりTSOの重複が回避され、レイテンシーが削減されます。ただし、読み取り/書き込み競合が頻繁に発生するシナリオでは、この変数を有効にするとパフォーマンスが低下する可能性があります。
+    クエリのレイテンシーを削減するため、読み取り/書き込み競合がまれな場合、TiDBは[Read Committed分離レベル](/transaction-isolation-levels.md#read-committed-isolation-level)において`tidb_rc_read_check_ts`のシステム変数を追加し、不要なTSOの取得を削減します。この変数はデフォルトで無効になっています。この変数を有効にすると、読み取り/書き込み競合が発生しないシナリオでは、この最適化によりTSOの重複取得が回避され、レイテンシーが削減されます。ただし、読み取り/書き込み競合が頻繁に発生するシナリオでは、この変数を有効にするとパフォーマンスが低下する可能性があります。
 
     [ユーザードキュメント](/transaction-isolation-levels.md#read-committed-isolation-level) [＃33159](https://github.com/pingcap/tidb/issues/33159)
 
@@ -399,7 +399,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
         - 配置ルールをサポート[＃4846](https://github.com/pingcap/tiflow/issues/4846)
         - HTTP API処理の同期[＃1710](https://github.com/pingcap/tiflow/issues/1710)
         - チェンジフィードを再開するための指数バックオフ メカニズムを追加します。 [＃3329](https://github.com/pingcap/tiflow/issues/3329)
-        - MySQL でのデッドロックを減らすために、MySQL シンクのデフォルトの分離レベルを読み取りコミットに設定します。 [＃3589](https://github.com/pingcap/tiflow/issues/3589)
+        - MySQL でのデッドロックを減らすために、MySQL シンクのデフォルトの分離レベルをread-committedに設定します。 [＃3589](https://github.com/pingcap/tiflow/issues/3589)
         - 作成時に変更フィードパラメータを検証し、エラーメッセージを改善する[＃1716](https://github.com/pingcap/tiflow/issues/1716) [＃1718](https://github.com/pingcap/tiflow/issues/1718) [＃1719](https://github.com/pingcap/tiflow/issues/1719) [＃4472](https://github.com/pingcap/tiflow/issues/4472)
         - Kafka プロデューサーの設定パラメータを公開して、TiCDC で設定できるようにします。 [＃4385](https://github.com/pingcap/tiflow/issues/4385)
 

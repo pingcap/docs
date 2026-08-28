@@ -583,7 +583,7 @@ func createUser(txn *util.TiDBSqlTx, id int, nickname string, balance decimal.De
 }
 ```
 
-次に、 `helper.go`呼び出して受信したコマンドライン引数を処理する`txn.go`と`main`関数を記述します。
+次に、 `helper.go`を呼び出して受信したコマンドライン引数を処理する`txn.go`と`main`関数を記述します。
 
 ```go
 package main

@@ -133,7 +133,7 @@ curl http://127.0.0.1:10080/plan_replayer/dump/replayer_JOGvpu4t7dssySqJfTtS4A==
 PLAN REPLAYER LOAD 'file_name';
 ```
 
-上記のステートメントでは、 `file_name`インポートする`ZIP`ファイルの名前です。
+上記のステートメントでは、 `file_name`はインポートする`ZIP`ファイルの名前です。
 
 例えば：
 
@@ -190,12 +190,12 @@ mysql> show stats_meta;
 
 ## `PLAN REPLAYER CAPTURE`を使用してターゲットプランをキャプチャします {#use-plan-replayer-capture-to-capture-target-plans}
 
-TiDBの実行計画を特定する場合、対象となるSQL文と実行計画がクエリ内にまれにしか出現しないため、 `PLAN REPLAYER`を使用して文とプランを直接取得できない場合があります。このような場合、 `PLAN REPLAYER CAPTURE`を使用すると、対象となるSQL文と実行計画のオプティマイザー情報を取得できます。
+TiDBの実行計画を特定する場合、対象となるSQL文と実行計画がクエリ内にまれにしか出現しないため、 `PLAN REPLAYER`を使用して文とプランを直接取得できない場合があります。このような場合、 `PLAN REPLAYER CAPTURE`を使用すると、対象となるSQL文と実行計画のオプティマイザ情報を取得できます。
 
 `PLAN REPLAYER CAPTURE`は主に次の機能があります。
 
 - 対象となるSQL文と対象実行計画のダイジェストを事前にTiDBクラスタに登録し、対象クエリとのマッチングを開始します。
-- ターゲット クエリが正常に一致すると、そのオプティマイザー関連の情報を直接キャプチャし、ZIP ファイルとしてエクスポートします。
+- ターゲット クエリが正常に一致すると、そのオプティマイザ関連の情報を直接キャプチャし、ZIP ファイルとしてエクスポートします。
 - 一致した SQL と実行計画ごとに、情報は 1回だけキャプチャされます。
 - システムテーブルを通じて、進行中の一致するタスクと生成されたファイルを表示します。
 - 履歴ファイルを定期的にクリーンアップします。
@@ -204,7 +204,7 @@ TiDBの実行計画を特定する場合、対象となるSQL文と実行計画�
 
 `PLAN REPLAYER CAPTURE`はシステム変数[`tidb_enable_plan_replayer_capture`](/system-variables.md#tidb_enable_plan_replayer_capture)によって制御されます。`PLAN REPLAYER CAPTURE`を有効にするには、システム変数の値を`ON`に設定します。
 
-### `PLAN REPLAYER CAPTURE`使用する {#use-plan-replayer-capture}
+### `PLAN REPLAYER CAPTURE`を使用する {#use-plan-replayer-capture}
 
 次のステートメントを使用して、対象の SQL ステートメントと実行計画のダイジェストを TiDB クラスターに登録できます。
 
@@ -282,11 +282,11 @@ Empty set (0.01 sec)
 
 ## `PLAN REPLAYER CONTINUOUS CAPTURE`を使用する {#use-plan-replayer-continuous-capture}
 
-`PLAN REPLAYER CONTINUOUS CAPTURE`有効にすると、TiDB はアプリケーションの SQL 文を`SQL DIGEST`と`PLAN DIGEST`に基づいて`PLAN REPLAYER`方法で非同期的に記録します。同じ DIGEST を共有する SQL 文と実行計画については、 `PLAN REPLAYER CONTINUOUS CAPTURE`によって重複して記録されません。
+`PLAN REPLAYER CONTINUOUS CAPTURE`を有効にすると、TiDB はアプリケーションの SQL 文を`SQL DIGEST`と`PLAN DIGEST`に基づいて`PLAN REPLAYER`方法で非同期的に記録します。同じ DIGEST を共有する SQL 文と実行計画については、 `PLAN REPLAYER CONTINUOUS CAPTURE`によって重複して記録されません。
 
 ### `PLAN REPLAYER CONTINUOUS CAPTURE`を有効にする {#enable-plan-replayer-continuous-capture}
 
-`PLAN REPLAYER CONTINUOUS CAPTURE`はシステム変数[`tidb_enable_plan_replayer_continuous_capture`](/system-variables.md#tidb_enable_plan_replayer_continuous_capture-new-in-v700)によって制御されます。`PLAN REPLAYER CONTINUOUS CAPTURE`有効にするには、システム変数の値を`ON`に設定します。
+`PLAN REPLAYER CONTINUOUS CAPTURE`はシステム変数[`tidb_enable_plan_replayer_continuous_capture`](/system-variables.md#tidb_enable_plan_replayer_continuous_capture-new-in-v700)によって制御されます。`PLAN REPLAYER CONTINUOUS CAPTURE`を有効にするには、システム変数の値を`ON`に設定します。
 
 ### キャプチャ結果を表示する {#view-the-capture-results}
 
