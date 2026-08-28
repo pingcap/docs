@@ -26,7 +26,7 @@ SQL-92標準では、トランザクション分離レベルとして、Read Unc
 | REPEATABLE READ  | 不可能     | 不可能     | 不可能     | 可能    |
 | SERIALIZABLE     | 不可能     | 不可能     | 不可能     | 不可能   |
 
-TiDBはスナップショット分離（SI）一貫性を実装しており、MySQLとの互換性のために`REPEATABLE-READ`として宣伝されています。これはSI [ANSI繰り返し読み取り分離レベル](#difference-between-tidb-and-ansi-repeatable-read)やSI [MySQL 繰り返し読み取りレベル](#difference-between-tidb-and-mysql-repeatable-read)とは異なります。
+TiDBはスナップショット分離（SI）一貫性を実装しており、MySQLとの互換性のために`REPEATABLE-READ`として宣伝されています。これは[ANSI Repeatable Read isolation level](#difference-between-tidb-and-ansi-repeatable-read)や[MySQL Repeatable Read level](#difference-between-tidb-and-mysql-repeatable-read)とは異なります。
 
 > **Note:**
 >
@@ -34,13 +34,13 @@ TiDBはスナップショット分離（SI）一貫性を実装しており、My
 >
 > TiDB v3.0.8以降、新規に作成されたTiDBクラスタはデフォルトで[悲観的トランザクションモード](/pessimistic-transaction.md)を使用します。現在の読み取り（ `for update`読み取り）**は繰り返し不可能な読み取り**です。詳細は[悲観的トランザクションモード](/pessimistic-transaction.md)を参照してください。
 
-## 繰り返し読み取り分離レベル {#repeatable-read-isolation-level}
+## Repeatable Read isolation level {#repeatable-read-isolation-level}
 
-リピータブルリード分離レベルでは、トランザクション開始前にコミットされたデータのみが参照され、コミットされていないデータや、トランザクション実行中に同時実行トランザクションによってコミットされた変更は参照されません。ただし、トランザクション文は、自身のトランザクション内で実行された以前の更新の影響を参照します。これらの更新は、まだコミットされていない場合でも参照されます。
+Repeatable Read分離レベルでは、トランザクション開始前にコミットされたデータのみが参照され、コミットされていないデータや、トランザクション実行中に同時実行トランザクションによってコミットされた変更は参照されません。ただし、トランザクション文は、自身のトランザクション内で実行された以前の更新の影響を参照します。これらの更新は、まだコミットされていない場合でも参照されます。
 
 異なるノードで実行されているトランザクションの場合、開始順序とコミット順序は、PD からタイムスタンプが取得される順序によって異なります。
 
-反復可能読み取り分離レベルのトランザクションは、同じ行を同時に更新できません。コミット時に、トランザクション開始後に別のトランザクションによってその行が更新されたことがわかった場合、トランザクションはロールバックされます。例：
+Repeatable Read分離レベルのトランザクションは、同じ行を同時に更新できません。コミット時に、トランザクション開始後に別のトランザクションによってその行が更新されたことがわかった場合、トランザクションはロールバックされます。例：
 
 ```sql
 create table t1(id int);
@@ -53,15 +53,15 @@ commit;                         |
                                 |               commit; -- The transaction commit fails and rolls back. Pessimistic transactions can commit successfully.
 ```
 
-### TiDBとANSI繰り返し読み取りの違い {#difference-between-tidb-and-ansi-repeatable-read}
+### TiDBとANSI Repeatable Readの違い {#difference-between-tidb-and-ansi-repeatable-read}
 
 TiDBのRepeatable Read分離レベルは、ANSIのRepeatable Read分離レベルとは同じ名前ですが、異なります。1番目の[ANSI SQL分離レベルの批評](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf)に記載されている標準によると、TiDBはスナップショット分離レベルを実装しています。この分離レベルでは、厳密なファントム（A3）は許可されませんが、広範囲のファントム（P3）とライトスキューは許可されます。一方、ANSIのRepeatable Read分離レベルでは、ファントムリードは許可されますが、ライトスキューは許可されません。
 
-### TiDBとMySQLの繰り返し読み取りの違い {#difference-between-tidb-and-mysql-repeatable-read}
+### TiDBとMySQLのRepeatable Readの違い {#difference-between-tidb-and-mysql-repeatable-read}
 
 TiDBのRepeatable Read分離レベルは、MySQLのそれとは異なります。MySQLのRepeatable Read分離レベルでは、更新時に現在のバージョンが可視かどうかがチェックされないため、トランザクション開始後に行が更新された場合でも更新を続行できます。一方、TiDBの楽観的トランザクションでは、トランザクション開始後に行が更新された場合、ロールバックされて再試行されます。TiDBの楽観的同時実行制御ではトランザクションの再試行が失敗し、最終的にトランザクションが失敗する可能性がありますが、TiDBの悲観的同時実行制御とMySQLでは、更新トランザクションが成功する可能性があります。
 
-## コミット読み取り分離レベル {#read-committed-isolation-level}
+## Read Committed isolation level {#read-committed-isolation-level}
 
 TiDB v4.0.0-beta 以降、TiDB は Read Committed 分離レベルをサポートします。
 
