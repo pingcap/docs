@@ -295,7 +295,7 @@ v6.4.0 以降、TiDB は[メタデータロックメカニズム](/metadata-lock
 > - 各 DDL 操作では、 `schema`バージョンの変更の数は、対応する`schema state`バージョンの変更の数と同じです。
 > - DDL操作によって、バージョン`schema`の変更回数は異なります。例えば、 `CREATE TABLE`文ではバージョン`schema`変更が1回発生しますが、 `ADD COLUMN`文ではバージョン5の変更が4回発生します。
 
-### 「情報スキーマが古くなっています」というエラーの原因は何ですか? {#what-are-the-causes-of-the-information-schema-is-out-of-date-error}
+### 「Information schema is out of date」というエラーの原因は何ですか? {#what-are-the-causes-of-the-information-schema-is-out-of-date-error}
 
 DML文の実行時に、TiDBがDDLリース（デフォルトでは45秒）内に最新のスキーマをロードできない場合、エラー`Information schema is out of date`が発生する可能性があります。考えられる原因は以下のとおりです。
 
