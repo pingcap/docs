@@ -19,7 +19,7 @@ summary: シャードマージのシナリオにおけるデータ移行のベ�
 
 [シャードテーブルからのデータのマージと移行](/dm/feature-shard-merge-pessimistic.md#principles)から、DM のシャーディング DDL ロックは、複数の上流シャードテーブルから下流への DDL 操作の実行を調整するためのメカニズムであることが簡単にわかります。
 
-したがって、 `DM-master`の`shard-ddl-lock`コマンドでシャーディング DDL ロックが見つかった場合、または`query-status`コマンドで一部の DM ワーカーに`unresolvedGroups`または`blockingDDLs`ロックが見つかった場合は、 `shard-ddl-lock unlock`コマンドでシャーディング DDL ロックを手動で解除しようとしないでください。
+したがって、 `DM-master`の`shard-ddl-lock`コマンドでシャーディング DDL ロックが見つかった場合、または`query-status`コマンドで一部の DM-workerに`unresolvedGroups`または`blockingDDLs`ロックが見つかった場合は、 `shard-ddl-lock unlock`コマンドでシャーディング DDL ロックを手動で解除しようとしないでください。
 
 代わりに、次のことができます。
 

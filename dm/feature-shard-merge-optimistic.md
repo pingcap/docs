@@ -146,7 +146,7 @@ ALTER TABLE `tbl01` ADD COLUMN `Level` INT;
 
 ![optimistic-ddl-example-5](/media/dm/optimistic-ddl-example-5.png)
 
-この時点で、ダウンストリームにはすでに同じ`Level`列があるため、DM マスターはテーブルスキーマを比較した後、何も操作を実行しません。
+この時点で、ダウンストリームにはすでに同じ`Level`列があるため、DM-masterはテーブルスキーマを比較した後、何も操作を実行しません。
 
 `tbl01`に`Name`列をドロップします。
 

@@ -147,7 +147,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
         - `query-status`で発生する可能性のあるデータ競合の問題を修正 [#4811](https://github.com/pingcap/tiflow/issues/4811) @[lyzx2001](https://github.com/lyzx2001)
         - `operate-schema`コマンドの異なる出力形式を修正 [＃5688](https://github.com/pingcap/tiflow/issues/5688) @[ForwardStar](https://github.com/ForwardStar)
         - リレーがエラーに遭遇したときの goroutine リークを修正 [＃6193](https://github.com/pingcap/tiflow/issues/6193) @[lance6716](https://github.com/lance6716)
-        - DB Conn を取得する際に DM ワーカーがスタックする可能性がある問題を修正しました [＃3733](https://github.com/pingcap/tiflow/issues/3733) @[lance6716](https://github.com/lance6716)
+        - DB Conn を取得する際に DM-workerがスタックする可能性がある問題を修正しました [＃3733](https://github.com/pingcap/tiflow/issues/3733) @[lance6716](https://github.com/lance6716)
         - TiDBがIPv6ホストを使用するとDMが起動に失敗する問題を修正 [＃6249](https://github.com/pingcap/tiflow/issues/6249) @[D3Hunter](https://github.com/D3Hunter)
 
     - TiCDC

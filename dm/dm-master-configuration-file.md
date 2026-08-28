@@ -40,13 +40,13 @@ secret-key-path = "/path/to/secret/key"
 
 ## コンフィグレーションパラメータ {#configuration-parameters}
 
-このセクションでは、DM マスターの設定パラメータについて説明します。
+このセクションでは、DM-masterの設定パラメータについて説明します。
 
 ### グローバル構成 {#global-configuration}
 
 #### `name` {#name}
 
-- DM マスターの名前。
+- DM-masterの名前。
 
 #### `log-level` {#log-level}
 
@@ -64,11 +64,11 @@ secret-key-path = "/path/to/secret/key"
 
 #### `advertise-addr` {#advertise-addr}
 
-- DM マスターが外部に通知するアドレスを指定します。
+- DM-masterが外部に通知するアドレスを指定します。
 
 #### `peer-urls` {#peer-urls}
 
-- DM マスターノードのピア URL を指定します。
+- DM-masterノードのピア URL を指定します。
 
 #### `advertise-peer-urls` {#advertise-peer-urls}
 
@@ -76,23 +76,23 @@ secret-key-path = "/path/to/secret/key"
 
 #### `initial-cluster` {#initial-cluster}
 
-- 値`initial-cluster`は、初期クラスター内のすべての DM マスターノードの[`advertise-peer-urls`](#advertise-peer-urls)値の組み合わせです。
+- 値`initial-cluster`は、初期クラスター内のすべての DM-masterノードの[`advertise-peer-urls`](#advertise-peer-urls)値の組み合わせです。
 
 #### `join` {#join}
 
-- `join`の値は、クラスター内の既存の DM マスターノードの[`advertise-peer-urls`](#advertise-peer-urls)値を組み合わせたものです。DM マスターノードを新たに追加する場合は、 `initial-cluster` `join`に置き換えてください。
+- `join`の値は、クラスター内の既存の DM-masterノードの[`advertise-peer-urls`](#advertise-peer-urls)値を組み合わせたものです。DM-masterノードを新たに追加する場合は、 `initial-cluster` `join`に置き換えてください。
 
 #### `ssl-ca` {#ssl-ca}
 
-- DM マスターが他のコンポーネントに接続するための信頼できる SSL CA のリストが含まれるファイルのパス。
+- DM-masterが他のコンポーネントに接続するための信頼できる SSL CA のリストが含まれるファイルのパス。
 
 #### `ssl-cert` {#ssl-cert}
 
-- DM マスターが他のコンポーネントに接続するための PEM 形式の X509 証明書を含むファイルのパス。
+- DM-masterが他のコンポーネントに接続するための PEM 形式の X509 証明書を含むファイルのパス。
 
 #### `ssl-key` {#ssl-key}
 
-- DM マスターが他のコンポーネントに接続するための PEM 形式の X509 キーを含むファイルのパス。
+- DM-masterが他のコンポーネントに接続するための PEM 形式の X509 キーを含むファイルのパス。
 
 #### `cert-allowed-cn` {#cert-allowed-cn}
 

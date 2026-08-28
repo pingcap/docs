@@ -5,11 +5,11 @@ summary: DM-worker の設定ファイルについて学習します。
 
 # DM-workerコンフィグレーションファイル {#dm-worker-configuration-file}
 
-このドキュメントでは、構成ファイル テンプレートと、このファイル内の各設定パラメータの説明を含む、DM ワーカーの構成について説明します。
+このドキュメントでは、構成ファイル テンプレートと、このファイル内の各設定パラメータの説明を含む、DM-workerの構成について説明します。
 
 ## コンフィグレーションファイルテンプレート {#configuration-file-template}
 
-以下は、DM ワーカーの構成ファイル テンプレートです。
+以下は、DM-workerの構成ファイル テンプレートです。
 
 ```toml
 # Worker Configuration.
@@ -40,7 +40,7 @@ cert-allowed-cn = ["dm"]
 
 #### `name` {#name}
 
-- DM ワーカーの名前。
+- DM-workerの名前。
 
 #### `log-level` {#log-level}
 
@@ -58,21 +58,21 @@ cert-allowed-cn = ["dm"]
 
 #### `advertise-addr` {#advertise-addr}
 
-- DM ワーカーが外部にアドバタイズするアドレスを指定します。
+- DM-workerが外部にアドバタイズするアドレスを指定します。
 
 #### `join` {#join}
 
-- DM マスター構成ファイル内の 1つ以上の[`master-addr`](/dm/dm-master-configuration-file.md#global-configuration)に対応します。
+- DM-master構成ファイル内の 1つ以上の[`master-addr`](/dm/dm-master-configuration-file.md#global-configuration)に対応します。
 
 #### `keepalive-ttl` {#keepalive-ttl}
 
-- DM ワーカーノードの上流データソースがリレーログを有効にしていない場合の、DM ワーカーノードから DM マスターノードへのキープアライブ時間 (秒単位)。
+- DM-workerノードの上流データソースがリレーログを有効にしていない場合の、DM-workerノードから DM-masterノードへのキープアライブ時間 (秒単位)。
 - デフォルト値: `60`
 - 単位: 秒
 
 #### `relay-keepalive-ttl` <span class="version-mark">DM v2.0.2の新機能</span> {#relay-keepalive-ttl-new-in-dm-v202}
 
-- DM ワーカーノードの上流データソースがリレーログを有効にしている場合の、DM ワーカーノードから DM マスターノードへのキープアライブ時間 (秒単位)。
+- DM-workerノードの上流データソースがリレーログを有効にしている場合の、DM-workerノードから DM-masterノードへのキープアライブ時間 (秒単位)。
 - デフォルト値: `1800`
 - 単位: 秒
 

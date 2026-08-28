@@ -167,7 +167,7 @@ TiDBバージョン: 6.5.12
 
     - TiDB Data Migration (DM)
 
-        - 複数の DM マスターノードが同時にリーダーになり、データの不整合が発生する可能性がある問題を修正しました[＃11602](https://github.com/pingcap/tiflow/issues/11602) @[GMHDBJD](https://github.com/GMHDBJD)
+        - 複数の DM-masterノードが同時にリーダーになり、データの不整合が発生する可能性がある問題を修正しました[＃11602](https://github.com/pingcap/tiflow/issues/11602) @[GMHDBJD](https://github.com/GMHDBJD)
         - パスワードの長さが19文字を超えるとMySQL 8.0への接続に失敗する問題を修正[＃11603](https://github.com/pingcap/tiflow/issues/11603) @[fishiu](https://github.com/fishiu)
         - TLSと`shard-mode`の両方が設定されている場合に`start-task`の事前チェックが失敗する問題を修正 [＃11842](https://github.com/pingcap/tiflow/issues/11842) @[sunxiaoguang](https://github.com/sunxiaoguang)
 

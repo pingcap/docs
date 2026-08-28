@@ -1,17 +1,17 @@
 ---
 title: Switch DM-worker Connection between Upstream MySQL Instances
-summary: アップストリーム MySQL インスタンス間で DM ワーカー接続を切り替える方法を学習します。
+summary: アップストリーム MySQL インスタンス間で DM-worker接続を切り替える方法を学習します。
 ---
 
-# アップストリーム MySQL インスタンス間の DM ワーカー接続を切り替える {#switch-dm-worker-connection-between-upstream-mysql-instances}
+# アップストリーム MySQL インスタンス間の DM-worker接続を切り替える {#switch-dm-worker-connection-between-upstream-mysql-instances}
 
 DM-worker が接続するアップストリーム MySQL インスタンスでダウンタイム メンテナンスが必要になった場合、またはインスタンスが予期せずクラッシュした場合は、DM-worker 接続を同じ移行グループ内の別の MySQL インスタンスに切り替える必要があります。
 
 > **Note:**
 >
-> - DM ワーカー接続は、同じプライマリ - セカンダリ移行クラスター内のインスタンスにのみ切り替えることができます。
+> - DM-worker接続は、同じプライマリ - セカンダリ移行クラスター内のインスタンスにのみ切り替えることができます。
 > - 新しく接続する MySQL インスタンスには、DM-worker に必要なbinlogが必要です。
-> - DM ワーカーは GTID セット モードで動作する必要があります。つまり、対応するソース構成ファイルで`enable-gtid: true`を指定する必要があります。
+> - DM-workerは GTID セット モードで動作する必要があります。つまり、対応するソース構成ファイルで`enable-gtid: true`を指定する必要があります。
 > - 接続切り替えは以下の2つのシナリオのみをサポートします。各シナリオの手順を厳密に守ってください。そうしないと、新しく接続されたMySQLインスタンスに合わせてDMクラスタを再デプロイし、データ移行タスクを最初からやり直す必要がある場合があります。
 
 GTID セットの詳細については、 [MySQLドキュメント](https://dev.mysql.com/doc/refman/8.0/en/replication-gtids-concepts.html#replication-gtids-concepts-gtid-sets)を参照してください。
@@ -24,7 +24,7 @@ DM-worker が仮想 IP (VIP) を介してアップストリーム MySQL イン�
 >
 > このような状況では、DMに必要な変更を加えてください。そうしないと、VIP接続を別のMySQLインスタンスに切り替えた際に、DMが新旧のMySQLインスタンスに同時に異なる接続で接続してしまう可能性があります。このような状況では、DMに複製されたbinlogが、DMが受信する他のアップストリームステータスと一致しなくなり、予期しない異常やデータ損傷が発生する可能性があります。
 
-あるアップストリーム MySQL インスタンス (DM ワーカーが VIP 経由で接続している場合) を別のアップストリーム MySQL インスタンスに切り替えるには、次の手順を実行します。
+あるアップストリーム MySQL インスタンス (DM-workerが VIP 経由で接続している場合) を別のアップストリーム MySQL インスタンスに切り替えるには、次の手順を実行します。
 
 1. `query-status`コマンドを使用して、binlogレプリケーションの現在の処理単位が下流に複製したbinlogに対応するGTIDセット（ `syncerBinlogGtid` ）を取得します。これらのセットを`gtid-S`としてマークします。
 2. 新しいMySQLインスタンスで`SELECT @@GLOBAL.gtid_purged;`コマンドを使用して、削除されたバイナリログに対応するGTIDセットを取得します。これらのセットを`gtid-P`としてマークします。

@@ -62,11 +62,11 @@ summary: openssl` を使用して自己署名証明書を生成します。
 
 - DM-master が他のコンポーネントに対して DM-master を認証するために使用する`master`証明書。
 - DM-worker が他のコンポーネントに対して DM-worker を認証するために使用する`worker`証明書。
-- DM マスターと DM ワーカーのクライアントを認証するために dmctl によって使用される`client`証明書。
+- DM-masterと DM-workerのクライアントを認証するために dmctl によって使用される`client`証明書。
 
 ### DM-masterの証明書を発行する {#issue-certificates-for-dm-master}
 
-DM マスター インスタンスに証明書を発行するには、次の手順を実行します。
+DM-master インスタンスに証明書を発行するには、次の手順を実行します。
 
 1. 証明書に対応する秘密鍵を生成します。
 
@@ -136,7 +136,7 @@ DM マスター インスタンスに証明書を発行するには、次の手�
 
 > **Note:**
 >
-> DM ワーカーインスタンスの証明書を発行するプロセスも同様であるため、このドキュメントでは繰り返しません。
+> DM-workerインスタンスの証明書を発行するプロセスも同様であるため、このドキュメントでは繰り返しません。
 
 ### クライアントの証明書を発行する (dmctl) {#issue-certificates-for-the-client-dmctl}
 

@@ -423,7 +423,7 @@ TiDB バージョン: 6.1.0
         - チェックポイントフラッシュにより失敗した行のデータがスキップされる可能性がある問題を修正[＃5279](https://github.com/pingcap/tiflow/issues/5279)
         - 一部のケースでダウンストリームでフィルタリングされた DDL を手動で実行するとタスクの再開に失敗する可能性がある問題を修正しました [＃5272](https://github.com/pingcap/tiflow/issues/5272)
         - `case-sensitive: true`が設定されていない場合、大文字テーブルを複製できない問題を修正[＃5255](https://github.com/pingcap/tiflow/issues/5255)
-        - `SHOW CREATE TABLE`文によって返されるインデックスの先頭に主キーがない場合に発生する DM ワーカーpanicの問題を修正しました。 [＃5159](https://github.com/pingcap/tiflow/issues/5159)
+        - `SHOW CREATE TABLE`文によって返されるインデックスの先頭に主キーがない場合に発生する DM-workerpanicの問題を修正しました。 [＃5159](https://github.com/pingcap/tiflow/issues/5159)
         - GTID が有効になっているときやタスクが自動的に再開されたときに CPU 使用率が上昇し、大量のログが出力される問題を修正しました[＃5063](https://github.com/pingcap/tiflow/issues/5063)
         - DM WebUI のオフライン オプションとその他の使用上の問題を修正しました [＃4993](https://github.com/pingcap/tiflow/issues/4993)
         - アップストリームでGTIDが空の場合に増分タスクの開始に失敗する問題を修正 [＃3731](https://github.com/pingcap/tiflow/issues/3731)

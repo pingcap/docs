@@ -40,17 +40,17 @@ Use "dmctl shard-ddl-lock [command] --help" for more information about a command
 
 #### 引数の説明 {#arguments-description}
 
-- `shard-ddl-lock [task] [flags]` : 現在の DM マスターの DDL ロック情報を表示します。
+- `shard-ddl-lock [task] [flags]` : 現在の DM-masterの DDL ロック情報を表示します。
 
 <!---->
 
-- `shard-ddl-lock [command]` : 指定された DDL ロックを解放するように DM マスターに要求します。`[command]`は値として`unlock`のみを受け入れます。
+- `shard-ddl-lock [command]` : 指定された DDL ロックを解放するように DM-masterに要求します。`[command]`は値として`unlock`のみを受け入れます。
 
 ## 使用例 {#usage-examples}
 
 ### `shard-ddl-lock [task] [flags]` {#shard-ddl-lock-task-flags}
 
-`shard-ddl-lock [task] [flags]`を使用すると、現在の DM マスターの DDL ロック情報を表示できます。例:
+`shard-ddl-lock [task] [flags]`を使用すると、現在の DM-masterの DDL ロック情報を表示できます。例:
 
 ```bash
 shard-ddl-lock test
@@ -86,7 +86,7 @@ shard-ddl-lock test
 
 ### `shard-ddl-lock unlock` {#shard-ddl-lock-unlock}
 
-このコマンドは、所有者に DDL文を実行するよう要求し、所有者以外の他のすべての DM ワーカーに DDL文をスキップするよう要求し、 `DM-master`のロック情報を削除するなど、指定された DDL ロックを解除するように`DM-master`に積極的に要求します。
+このコマンドは、所有者に DDL文を実行するよう要求し、所有者以外の他のすべての DM-workerに DDL文をスキップするよう要求し、 `DM-master`のロック情報を削除するなど、指定された DDL ロックを解除するように`DM-master`に積極的に要求します。
 
 > **Note:**
 >
@@ -157,7 +157,7 @@ shard-ddl-lock unlock test-`shard_db`.`shard_table`
 
 > **Note:**
 >
-> シャーディング DDL イベントの移行プロセス中でないときに一部の DM ワーカーをオフラインにする必要がある場合、より適切な解決策は、まず`stop-task`を使用して実行中のタスクを停止し、DM ワーカーをオフラインにして、タスク構成ファイルから対応する構成情報を削除し、最後に`start-task`と新しいタスク構成を使用して移行タスクを再開することです。
+> シャーディング DDL イベントの移行プロセス中でないときに一部の DM-workerをオフラインにする必要がある場合、より適切な解決策は、まず`stop-task`を使用して実行中のタスクを停止し、DM-workerをオフラインにして、タスク構成ファイルから対応する構成情報を削除し、最後に`start-task`と新しいタスク構成を使用して移行タスクを再開することです。
 
 #### 手動ソリューション {#manual-solution}
 
@@ -232,7 +232,7 @@ MySQLとDMの操作プロセスは次のとおりです。
 
 6. `shard-ddl-lock unlock`を使用して`DM-master`に要求し、DDL ロックをアクティブにロック解除します。
 
-    - DDL ロックの所有者がオフラインになった場合は、パラメータ`--owner`を使用して、別の DM ワーカーを新しい所有者として指定し、DDL を実行できます。
+    - DDL ロックの所有者がオフラインになった場合は、パラメータ`--owner`を使用して、別の DM-workerを新しい所有者として指定し、DDL を実行できます。
     - いずれかの MySQL ソースがエラーを報告した場合、 `result`が`false`に設定され、この時点で、各 MySQL ソースのエラーが許容範囲内であり、期待どおりであるかどうかを慎重に確認する必要があります。
 
         ```bash
@@ -286,18 +286,18 @@ MySQLとDMの操作プロセスは次のとおりです。
 
 > **Note:**
 >
-> `shard-ddl-lock unlock`を実行した後、オフラインになった MySQL ソースが再ロードされ、DM ワーカーがシャードテーブルのデータを移行しようとすると、データとダウンストリームテーブル構造の間で一致エラーが発生する可能性があります。
+> `shard-ddl-lock unlock`を実行した後、オフラインになった MySQL ソースが再ロードされ、DM-workerがシャードテーブルのデータを移行しようとすると、データとダウンストリームテーブル構造の間で一致エラーが発生する可能性があります。
 
 ### シナリオ2: DDLロック解除プロセス中に一部のDM-workerが異常停止するか、ネットワーク障害が発生する {#scenario-2-some-dm-workers-stop-abnormally-or-the-network-failure-occurs-during-the-ddl-unlocking-process}
 
 #### 異常なロックの理由 {#the-reason-for-the-abnormal-lock}
 
-`DM-master`がすべての DM ワーカーの DDL イベントを受信した後、 `unlock DDL lock`が自動的に実行され、主に次の手順が含まれます。
+`DM-master`がすべての DM-workerの DDL イベントを受信した後、 `unlock DDL lock`が自動的に実行され、主に次の手順が含まれます。
 
 1. ロックの所有者に DDL を実行し、対応するシャードテーブルのチェックポイントを更新するように依頼します。
 2. 所有者が DDL を正常に実行した後、 `DM-master`に保存されている DDL ロック情報を削除します。
 3. 所有者が DDL を正常に実行した後、他のすべての非所有者に DDL をスキップし、対応するシャードテーブルのチェックポイントを更新するように依頼します。
-4. すべての所有者または非所有者の操作が成功した後、DM マスターは対応する DDL ロック情報を削除します。
+4. すべての所有者または非所有者の操作が成功した後、DM-masterは対応する DDL ロック情報を削除します。
 
 現在、上記のロック解除プロセスはアトミックではありません。非オーナーがDDL操作を正常にスキップした場合、非オーナーが配置されているDM-workerが異常停止するか、下流のTiDBでネットワーク異常が発生し、チェックポイントの更新が失敗する可能性があります。
 
@@ -309,7 +309,7 @@ MySQLとDMの操作プロセスは次のとおりです。
 
 `DM-master`自動的にロック解除処理を実行すると、オーナー（ `mysql-replica-01` ）はDDLを正常に実行し、移行処理を継続します。しかし、非オーナー（ `mysql-replica-02` ）にDDL操作のスキップを要求する処理において、対応するDM-workerが再起動されたため、DM-workerがDDL操作をスキップした後にチェックポイントの更新に失敗します。
 
-`mysql-replica-02`に対応するデータ移行サブタスクが復元された後、DM マスターに新しいロックが作成されますが、他の MySQL ソースは DDL 操作を実行またはスキップし、後続の移行を実行しています。
+`mysql-replica-02`に対応するデータ移行サブタスクが復元された後、DM-masterに新しいロックが作成されますが、他の MySQL ソースは DDL 操作を実行またはスキップし、後続の移行を実行しています。
 
 操作プロセスは次のとおりです。
 

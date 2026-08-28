@@ -68,7 +68,7 @@ start-relay -s mysql-replica-01
 >
 > この起動方法はバージョン6.1で非推奨とされており、将来のリリースで削除される可能性があります。関連コマンドの出力には、次のプロンプトが表示されます: `start-relay/stop-relay with worker name will be deprecated soon. You can try stopping relay first and use start-relay without worker name instead` 。
 
-コマンド`start-relay`では、指定されたデータソースのリレーログを移行する 1つ以上の DM ワーカーを設定できます。ただし、パラメータで指定する DM ワーカーは、空いているか、上流のデータソースにバインドされている必要があります。例を以下に示します。
+コマンド`start-relay`では、指定されたデータソースのリレーログを移行する 1つ以上の DM-workerを設定できます。ただし、パラメータで指定する DM-workerは、空いているか、上流のデータソースにバインドされている必要があります。例を以下に示します。
 
 ```bash
 start-relay -s mysql-replica-01 worker1 worker2
@@ -96,7 +96,7 @@ stop-relay -s mysql-replica-01 worker1 worker2
 
 <div label="earlier than v2.0.2">
 
-DM バージョン 2.0.2 より前のバージョン（v2.0.2 は含まない）では、DM ワーカーを上流データソースにバインドする際に、ソース設定ファイルの設定項目`enable-relay`がチェックされます。`enable-relay`が`true`に設定されている場合、DM はデータソースのリレーログ機能を有効にします。
+DM バージョン 2.0.2 より前のバージョン（v2.0.2 は含まない）では、DM-workerを上流データソースにバインドする際に、ソース設定ファイルの設定項目`enable-relay`がチェックされます。`enable-relay`が`true`に設定されている場合、DM はデータソースのリレーログ機能を有効にします。
 
 設定項目`enable-relay`の設定方法については[上流データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
@@ -256,7 +256,7 @@ purge:
 
 - `purge.remain-space`
     - 指定されたDM-workerマシンが、自動バックグラウンドパージで安全にパージできるリレーログをパージしようとするディスク残量（GB単位）です`0`に設定すると、ディスク残量に応じたデータパージは実行されません。
-    - デフォルトでは「15」で、使用可能なディスク容量が 15 GB 未満になると、DM マスターはリレーログを安全に消去しようとします。
+    - デフォルトでは「15」で、使用可能なディスク容量が 15 GB 未満になると、DM-masterはリレーログを安全に消去しようとします。
 
 #### 手動パージ {#manual-purge}
 
@@ -364,14 +364,14 @@ deb76a2b-09cc-11e9-9129-5242cf3bb246.000003
 
 - 有効なローカルリレーログが存在しないが、アップストリームデータソース構成ファイルで`relay-binlog-name`または`relay-binlog-gtid`が指定されている場合:
 
-    - 非 GTID モードでは、 `relay-binlog-name`を指定すると、DM ワーカーは指定されたbinlogファイルから移行を開始します。
-    - GTID モードでは、 `relay-binlog-gtid`を指定すると、DM ワーカーは指定された GTID から移行を開始します。
+    - 非 GTID モードでは、 `relay-binlog-name`を指定すると、DM-workerは指定されたbinlogファイルから移行を開始します。
+    - GTID モードでは、 `relay-binlog-gtid`を指定すると、DM-workerは指定された GTID から移行を開始します。
 
 - 有効なローカルリレーログがなく、DM 構成ファイルに`relay-binlog-name`または`relay-binlog-gtid`が指定されていない場合:
 
-    - 非 GTID モードでは、DM ワーカーは、各サブタスクが移行している最も古いbinlogから移行を開始し、最新のbinlogが移行されるまで続けます。
+    - 非 GTID モードでは、DM-workerは、各サブタスクが移行している最も古いbinlogから移行を開始し、最新のbinlogが移行されるまで続けます。
 
-    - GTID モードでは、DM ワーカーは、各サブタスクが移行している最も古い GTID から移行を開始し、最新の GTID が移行されるまで続けます。
+    - GTID モードでは、DM-workerは、各サブタスクが移行している最も古い GTID から移行を開始し、最新の GTID が移行されるまで続けます。
 
     > **Note:**
     >

@@ -407,7 +407,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
         - 上流のテーブルスキーマが不整合で楽観的モードの場合のタスクの開始をサポート[＃3629](https://github.com/pingcap/tiflow/issues/3629) [＃3708](https://github.com/pingcap/tiflow/issues/3708) [＃3786](https://github.com/pingcap/tiflow/issues/3786)
         - `stopped`状態でのタスク作成をサポート [＃4484](https://github.com/pingcap/tiflow/issues/4484)
-        - `/tmp`ではなく DM ワーカーの作業ディレクトリを使用して内部ファイルを書き込み、タスクが停止した後にディレクトリを消去する Syncer をサポートします[＃4107](https://github.com/pingcap/tiflow/issues/4107)
+        - `/tmp`ではなく DM-workerの作業ディレクトリを使用して内部ファイルを書き込み、タスクが停止した後にディレクトリを消去する Syncer をサポートします[＃4107](https://github.com/pingcap/tiflow/issues/4107)
         - 事前チェックが改善されました。重要なチェックが省略されなくなりました[＃3608](https://github.com/pingcap/tiflow/issues/3608)
 
     - TiDB Lightning
@@ -533,7 +533,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
         - ステータスを照会するときにのみ同期メトリックが更新される問題を修正しました [＃4281](https://github.com/pingcap/tiflow/issues/4281)
         - セーフモードでの更新ステートメントの実行エラーにより、DM-workerがpanicになる可能性がある問題を修正しました[＃4317](https://github.com/pingcap/tiflow/issues/4317)
         - 長いvarcharsがエラーを報告するバグを修正`Column length too big` [＃4637](https://github.com/pingcap/tiflow/issues/4637)
-        - 複数の DM ワーカーが同じアップストリームからデータを書き込むことで発生する競合の問題を修正しました。 [＃3737](https://github.com/pingcap/tiflow/issues/3737)
+        - 複数の DM-workerが同じアップストリームからデータを書き込むことで発生する競合の問題を修正しました。 [＃3737](https://github.com/pingcap/tiflow/issues/3737)
         - ログに「チェックポイントに変更はありません。同期フラッシュチェックポイントをスキップしてください」というメッセージが数百件出力され、レプリケーションが非常に遅くなる問題を修正しました[＃4619](https://github.com/pingcap/tiflow/issues/4619)
         - 悲観的モードでシャードをマージし、上流から増分データを複製する際のDML損失の問題を修正しました。 [＃5002](https://github.com/pingcap/tiflow/issues/5002)
 

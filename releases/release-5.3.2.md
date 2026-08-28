@@ -36,7 +36,7 @@ TiDB バージョン: 5.3.2
 
     - TiDB Data Migration (DM)
 
-        - `/tmp`ではなく DM ワーカーの作業ディレクトリを使用して内部ファイルを書き込み、タスクが停止した後にディレクトリを消去する Syncer のサポート[＃4107](https://github.com/pingcap/tiflow/issues/4107)
+        - `/tmp`ではなく DM-workerの作業ディレクトリを使用して内部ファイルを書き込み、タスクが停止した後にディレクトリを消去する Syncer のサポート[＃4107](https://github.com/pingcap/tiflow/issues/4107)
 
     - TiDB Lightning
 
@@ -152,7 +152,7 @@ TiDB バージョン: 5.3.2
         - タスクが自動的に再開された後にDMがより多くのディスクスペースを占有する問題を修正[＃3734](https://github.com/pingcap/tiflow/issues/3734) [＃5344](https://github.com/pingcap/tiflow/issues/5344)
         - `case-sensitive: true`が設定されていない場合、大文字テーブルを複製できない問題を修正[＃5255](https://github.com/pingcap/tiflow/issues/5255)
         - 下流でフィルタリングされたDDLを手動で実行すると、タスク再開が失敗する場合がある問題を修正しました[＃5272](https://github.com/pingcap/tiflow/issues/5272)
-        - `SHOW CREATE TABLE`文によって返されるインデックスの先頭に主キーがない場合に発生する DM ワーカーpanicの問題を修正しました。 [＃5159](https://github.com/pingcap/tiflow/issues/5159)
+        - `SHOW CREATE TABLE`文によって返されるインデックスの先頭に主キーがない場合に発生する DM-workerpanicの問題を修正しました。 [＃5159](https://github.com/pingcap/tiflow/issues/5159)
         - GTID が有効になっているときやタスクが自動的に再開されたときに CPU 使用率が上昇し、大量のログが出力される問題を修正しました[＃5063](https://github.com/pingcap/tiflow/issues/5063)
         - DM-masterの再起動後にリレーログが無効になる可能性がある問題を修正[＃4803](https://github.com/pingcap/tiflow/issues/4803)
 

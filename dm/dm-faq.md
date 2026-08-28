@@ -64,7 +64,7 @@ TiDBでサポートされていないDDL文に遭遇した場合は、dmctlを�
 ただし、メモリ内の DDL 情報は、次の2つの方法のいずれかで取得されます。
 
 - DM [`alter ghost_table`操作中に gh-ost テーブルを処理する](/dm/feature-online-ddl.md#online-schema-change-gh-ost)および`ghost_table`の DDL 情報を記録します。
-- DM ワーカーが再起動されてタスクが開始されると、DM は`dm_meta.{task_name}_onlineddl`から DDL を読み取ります。
+- DM-workerが再起動されてタスクが開始されると、DM は`dm_meta.{task_name}_onlineddl`から DDL を読み取ります。
 
 そのため、増分レプリケーションのプロセスにおいて、指定されたPosが`alter ghost_table` DDLをスキップしたにもかかわらず、そのPosがgh-ostのオンラインDDLプロセス中である場合、ghost_tableはメモリまたは`dm_meta.{task_name}_onlineddl`に正しく書き込まれません。このような場合、上記のエラーが返されます。
 
@@ -201,7 +201,7 @@ DM-worker のログファイルを確認し、 `change count`を含む行を探�
 
 ## DM v2.0 では、タスク中に DM が再起動すると、完全インポートタスクが失敗するのはなぜですか? {#in-dm-v20-why-does-the-full-import-task-fail-if-dm-restarts-during-the-task}
 
-DM v2.0.1 以前のバージョンでは、完全インポートが完了する前に DM が再起動すると、上流のデータソースと DM ワーカーノード間のバインディングが変更される可能性があります。例えば、ダンプユニットの中間データが DM ワーカーノード A にあるにもかかわらず、ロードユニットが DM ワーカーノード B で実行されている場合、操作が失敗する可能性があります。
+DM v2.0.1 以前のバージョンでは、完全インポートが完了する前に DM が再起動すると、上流のデータソースと DM-workerノード間のバインディングが変更される可能性があります。例えば、ダンプユニットの中間データが DM-workerノード A にあるにもかかわらず、ロードユニットが DM-workerノード B で実行されている場合、操作が失敗する可能性があります。
 
 この問題に対する解決策は次の2つです。
 
@@ -211,12 +211,12 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
     2. エクスポートされたデータのディレクトリ内のすべてのファイルを削除します。
     3. dmctl を使用してタスクを削除し、コマンド`start-task --remove-meta`を実行して新しいタスクを作成します。
 
-    新しいタスクが開始したら、冗長な DM ワーカーノードが存在しないことを確認し、完全インポート中に DM クラスターの再起動やアップグレードを行わないようにすることをお勧めします。
+    新しいタスクが開始したら、冗長な DM-workerノードが存在しないことを確認し、完全インポート中に DM クラスターの再起動やアップグレードを行わないようにすることをお勧めします。
 
 - データ量が大きい場合 (1 TB を超える場合) は、次の手順を実行します。
 
     1. ダウンストリームデータベースにインポートされたデータをクリーンアップします。
-    2. データを処理する DM ワーカーノードに TiDB-Lightningをデプロイします。
+    2. データを処理する DM-workerノードに TiDB-Lightningをデプロイします。
     3. DM ダンプユニットがエクスポートするデータをインポートするには、TiDB-Lightning のローカルバックエンド モードを使用します。
     4. 完全インポートが完了したら、次の方法でタスク構成ファイルを編集し、タスクを再起動します。
         - `task-mode`を`incremental`に変更します。
@@ -352,19 +352,19 @@ query-status test
 
 上記の 1 番目と 2 番目のソリューションで正常にレプリケートできるデータソース (上記の例の`mysql2`など) の場合は、増分タスクを設定するときに、 `subTaskStatus.sync`の`syncerBinlog`と`syncerBinlogGtid`情報を使用して関連する`mysql-instances.meta`を構成します。
 
-## DM v2.0 では、 `heartbeat`機能が有効になっている仮想 IP 環境で DM ワーカーと MySQL インスタンス間の接続を切り替えるときに、「ハートビート構成が以前使用したものと異なります: serverID が等しくありません」というエラーをどのように処理すればよいですか? {#in-dm-v20-how-do-i-handle-the-error-heartbeat-config-is-different-from-previous-used-serverid-not-equal-when-switching-the-connection-between-dm-workers-and-mysql-instances-in-a-virtual-ip-environment-with-the-heartbeat-feature-enabled}
+## DM v2.0 では、 `heartbeat`機能が有効になっている仮想 IP 環境で DM-workerと MySQL インスタンス間の接続を切り替えるときに、「ハートビート構成が以前使用したものと異なります: serverID が等しくありません」というエラーをどのように処理すればよいですか? {#in-dm-v20-how-do-i-handle-the-error-heartbeat-config-is-different-from-previous-used-serverid-not-equal-when-switching-the-connection-between-dm-workers-and-mysql-instances-in-a-virtual-ip-environment-with-the-heartbeat-feature-enabled}
 
 DM v2.0以降のバージョンでは、 `heartbeat`機能はデフォルトで無効になっています。タスク設定ファイルでこの機能を有効にすると、高可用性機能に支障をきたします。この問題を解決するには、タスク設定ファイルで`enable-heartbeat`を`false`に設定して`heartbeat`機能を無効にし、その後タスク設定ファイルをリロードしてください。DMは、以降のリリースで`heartbeat`機能を強制的に無効にします。
 
-## DM マスターが再起動後にクラスターに参加できず、DM が「埋め込み etcd の開始に失敗しました。RawCause: メンバー xxx はすでにブートストラップされています」というエラーを報告するのはなぜですか? {#why-does-a-dm-master-fail-to-join-the-cluster-after-it-restarts-and-dm-reports-the-error-fail-to-start-embed-etcd-rawcause-member-xxx-has-already-been-bootstrapped}
+## DM-masterが再起動後にクラスターに参加できず、DM が「埋め込み etcd の開始に失敗しました。RawCause: メンバー xxx はすでにブートストラップされています」というエラーを報告するのはなぜですか? {#why-does-a-dm-master-fail-to-join-the-cluster-after-it-restarts-and-dm-reports-the-error-fail-to-start-embed-etcd-rawcause-member-xxx-has-already-been-bootstrapped}
 
 DM-masterが起動すると、DMはetcd情報をカレントディレクトリに記録します。DM-masterの再起動後にディレクトリが変更されると、DMはetcd情報にアクセスできなくなり、再起動に失敗します。
 
-この問題を解決するには、 TiUPを使用して DM クラスターをメンテナンスすることをお勧めします。バイナリファイルを使用してデプロイする必要がある場合は、DM マスターの設定ファイルで`data-dir`を絶対パスで設定するか、コマンドを実行する現在のディレクトリに注意してください。
+この問題を解決するには、 TiUPを使用して DM クラスターをメンテナンスすることをお勧めします。バイナリファイルを使用してデプロイする必要がある場合は、DM-masterの設定ファイルで`data-dir`を絶対パスで設定するか、コマンドを実行する現在のディレクトリに注意してください。
 
-## dmctl を使用してコマンドを実行すると、DM マスターに接続できないのはなぜですか? {#why-dm-master-cannot-be-connected-when-i-use-dmctl-to-execute-commands}
+## dmctl を使用してコマンドを実行すると、DM-masterに接続できないのはなぜですか? {#why-dm-master-cannot-be-connected-when-i-use-dmctl-to-execute-commands}
 
-dmctl execute コマンドを使用すると、DM マスターへの接続に失敗し（コマンドでパラメータ値`--master-addr`を指定している場合でも）、エラーメッセージ`RawCause: context deadline exceeded, Workaround: please check your network connection.`が表示される場合があります。ただし、コマンド`telnet <master-addr>`などを使用してネットワーク接続を確認すると、例外は見つかりません。
+dmctl execute コマンドを使用すると、DM-masterへの接続に失敗し（コマンドでパラメータ値`--master-addr`を指定している場合でも）、エラーメッセージ`RawCause: context deadline exceeded, Workaround: please check your network connection.`が表示される場合があります。ただし、コマンド`telnet <master-addr>`などを使用してネットワーク接続を確認すると、例外は見つかりません。
 
 この場合、環境変数`https_proxy` （ **https** ）を確認してください。この変数が設定されている場合、dmctl は`https_proxy`で指定されたホストとポートに自動的に接続します。ホストに対応する`proxy`転送サービスがない場合、接続は失敗します。
 

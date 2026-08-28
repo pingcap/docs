@@ -5,7 +5,7 @@ summary: TiDB データ移行でアップストリーム MySQL インスタン�
 
 # TiDB データ移行におけるデータソース構成の管理 {#manage-data-source-configurations-in-tidb-data-migration}
 
-このドキュメントでは、MySQL パスワードの暗号化、データソースの操作、 [dmctl](/dm/dmctl-introduction.md)を使用したアップストリーム MySQL インスタンスと DM ワーカー間のバインディングの変更など、データソース構成を管理する方法について説明します。
+このドキュメントでは、MySQL パスワードの暗号化、データソースの操作、 [dmctl](/dm/dmctl-introduction.md)を使用したアップストリーム MySQL インスタンスと DM-worker間のバインディングの変更など、データソース構成を管理する方法について説明します。
 
 ## データベースのパスワードを暗号化する {#encrypt-the-database-password}
 
@@ -51,7 +51,7 @@ Global Flags:
 
 - `stop` : 1つ以上の上流データベースソースを停止します。複数のデータソースの停止に失敗した場合、一部のデータソースが停止される可能性があります。
 
-- `show` : 追加されたデータソースと対応する DM ワーカーを表示します。
+- `show` : 追加されたデータソースと対応する DM-workerを表示します。
 
 - `config-file` : `source.yaml`のファイルパスを指定し、複数のファイルパスを渡すことができます。
 
@@ -140,7 +140,7 @@ operate-source show
 
 ## アップストリームのMySQLインスタンスとDM-worker間のバインディングを変更する {#change-the-bindings-between-upstream-mysql-instances-and-dm-workers}
 
-`transfer-source`コマンドを使用して、アップストリーム MySQL インスタンスと DM ワーカー間のバインディングを変更できます。
+`transfer-source`コマンドを使用して、アップストリーム MySQL インスタンスと DM-worker間のバインディングを変更できます。
 
 ```bash
 help transfer-source
@@ -160,7 +160,7 @@ Global Flags:
 
 ### 使用例 {#usage-example}
 
-DM ワーカーのバインディングがわからない場合は、 `dmctl --master-addr <master-addr> list-member --worker`を実行して、すべてのワーカーの現在のバインディングを一覧表示できます。
+DM-workerのバインディングがわからない場合は、 `dmctl --master-addr <master-addr> list-member --worker`を実行して、すべてのワーカーの現在のバインディングを一覧表示できます。
 
 ```bash
 list-member --worker

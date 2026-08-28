@@ -9,7 +9,7 @@ DM は、 [dmctlツール](/dm/dmctl-introduction.md)の機能と同様に、DM 
 
 OpenAPI を有効にするには、次のいずれかの操作を実行します。
 
-- DM クラスターがバイナリを使用して直接デプロイされている場合は、DM マスター構成ファイルに次の構成を追加します。
+- DM クラスターがバイナリを使用して直接デプロイされている場合は、DM-master構成ファイルに次の構成を追加します。
 
     ```toml
     openapi = true
@@ -27,7 +27,7 @@ OpenAPI を有効にするには、次のいずれかの操作を実行します
 >
 > - DMはOpenAPI 3.0.0標準に準拠した[仕様書](https://github.com/pingcap/tiflow/blob/release-8.5/dm/openapi/spec/dm.yaml)提供します。このドキュメントには、すべてのリクエストパラメータと戻り値が含まれています。このドキュメントのyamlをコピーして、 [Swaggerエディター](https://editor.swagger.io/)でプレビューできます。
 >
-> - DM マスターノードをデプロイした後、 `http://{master-addr}/api/v1/docs`アクセスしてドキュメントをオンラインでプレビューできます。
+> - DM-masterノードをデプロイした後、 `http://{master-addr}/api/v1/docs`アクセスしてドキュメントをオンラインでプレビューできます。
 >
 > - 設定ファイルでサポートされている一部の機能は、OpenAPIではサポートされていません。これらの機能は完全には連携されていません。本番環境では、 [設定ファイル](/dm/dm-config-overview.md)を使用することをお勧めします。
 
