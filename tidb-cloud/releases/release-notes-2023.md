@@ -312,7 +312,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - サポート導線を最適化することで、 TiDB CloudユーザーのPingCAPサポートへのアクセスを簡素化します。改善点は以下のとおりです。
 
-    - **サポート**用の入り口を追加<mdsvgicon name="icon-top-organization">左下隅にあります。</mdsvgicon>
+    - 左下隅にある<MDSvgIcon name="icon-top-organization" />に**サポート**用の入り口を追加します。
     - [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**?**アイコンのメニューを改良して、より直感的に操作できるようにします。
 
     詳細については[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)を参照してください。
@@ -851,7 +851,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)機能を使用して、 [TiDB Cloudコンソール](https://tidbcloud.com/)で組織内のメンバーが実行したさまざまなアクティビティを追跡することをサポートします。
 
-    コンソール監査ログ機能は、ロール`Owner`または`Audit Admin`ユーザーのみに表示され、デフォルトでは無効になっています。有効にするには、<mdsvgicon name="icon-top-organization"> [TiDB Cloudコンソール](https://tidbcloud.com/)の右上隅にある**[組織]** &gt; **[コンソール監査ログ] を選択します**。</mdsvgicon>
+    コンソール監査ログ機能は、ロール`Owner`または`Audit Admin`ユーザーのみに表示され、デフォルトでは無効になっています。有効にするには、[TiDB Cloudコンソール](https://tidbcloud.com/)の右上隅にある<MDSvgIcon name="icon-top-organization" />**組織** > **コンソール監査ログ**を選択します。
 
     コンソール監査ログを分析することで、組織内で実行された疑わしい操作を特定し、組織のリソースとデータのセキュリティを向上させることができます。
 
