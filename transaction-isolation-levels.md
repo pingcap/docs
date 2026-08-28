@@ -26,7 +26,7 @@ SQL-92標準では、トランザクション分離レベルとして、Read Unc
 | REPEATABLE READ  | 不可能     | 不可能     | 不可能     | 可能    |
 | SERIALIZABLE     | 不可能     | 不可能     | 不可能     | 不可能   |
 
-TiDBはスナップショット分離（SI）一貫性を実装しており、MySQLとの互換性のために`REPEATABLE-READ`として表示されます。これは[ANSI Repeatable Read isolation level](#difference-between-tidb-and-ansi-repeatable-read)や[MySQL Repeatable Read level](#difference-between-tidb-and-mysql-repeatable-read)とは異なります。
+TiDBはスナップショット分離（SI）一貫性を実装しており、この一貫性レベルはMySQLとの互換性のために`REPEATABLE-READ`として表示されます。これは[ANSI Repeatable Read isolation level](#difference-between-tidb-and-ansi-repeatable-read)や[MySQL Repeatable Read level](#difference-between-tidb-and-mysql-repeatable-read)とは異なります。
 
 > **Note:**
 >
