@@ -13,13 +13,15 @@ In this tutorial, you can learn how to connect to TiDB using LibreDB Studio.
 > **Note:**
 >
 > This tutorial covers TiDB Self-Managed only. It was not tested against TiDB Cloud, so it does not include TiDB Cloud connection steps.
+>
+> It was also tested against a cluster that does not enforce TLS. The connection dialog has an **SSL / TLS** section with `SSL Mode` options (including CA certificate and client certificate/key fields) for clusters that enforce `require_secure_transport`, `REQUIRE SSL`, or `REQUIRE X509`, but that path was not tested here, so this tutorial leaves `SSL Mode` at its default.
 
 ## Prerequisites
 
 To complete this tutorial, you need:
 
-- LibreDB Studio, started with `npx @libredb/studio@0.13.4` or the Docker image (see the [Quick Start](https://github.com/libredb/libredb-studio#quick-start) instructions).
-- A TiDB Self-Managed cluster.
+- LibreDB Studio, started with `npx @libredb/studio@0.13.4` (requires Node.js 24 or later) or the Docker image (see the [Quick Start](https://github.com/libredb/libredb-studio#quick-start) instructions).
+- A TiDB Self-Managed cluster, and a TiDB user with `CREATE`, `INSERT`, and `SELECT` privileges on the database used in this tutorial.
 
 **If you don't have a TiDB cluster, you can deploy one as follows:**
 
