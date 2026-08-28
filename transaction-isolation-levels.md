@@ -63,13 +63,13 @@ TiDBのRepeatable Read分離レベルは、MySQLのそれとは異なります�
 
 ## Read Committed分離レベル {#read-committed-isolation-level}
 
-TiDB v4.0.0-beta 以降、TiDB は Read Committed 分離レベルをサポートします。
+TiDB v4.0.0-beta 以降、TiDB は Read Committed分離レベルをサポートします。
 
 歴史的な理由により、現在主流のデータベースのRead Committed分離レベルは基本的に[Oracleが定義する一貫性読み取り分離レベル](https://docs.oracle.com/cd/B19306_01/server.102/b14220/consist.htm)です。この状況に対応するため、TiDBの悲観的トランザクションにおけるRead Committed分離レベルも、本質的には一貫性のある読み取り動作となっています。
 
 > **Note:**
 >
-> Read Committed 分離レベルは[悲観的トランザクションモード](/pessimistic-transaction.md)でのみ有効になります。 [楽観的トランザクションモード](/optimistic-transaction.md)では、トランザクション分離レベルを`Read Committed`に設定しても有効にならず、トランザクションは引き続き Repeatable Read 分離レベルを使用します。
+> Read Committed分離レベルは[悲観的トランザクションモード](/pessimistic-transaction.md)でのみ有効になります。 [楽観的トランザクションモード](/optimistic-transaction.md)では、トランザクション分離レベルを`Read Committed`に設定しても有効にならず、トランザクションは引き続き Repeatable Read分離レベルを使用します。
 
 v6.0.0以降、TiDBは、読み取り/書き込み競合が稀なシナリオにおいて、タイムスタンプ取得を最適化するためにシステム変数[`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)使用をサポートします。この変数を有効にすると、TiDBは`SELECT`実行時に、前回の有効なタイムスタンプを使用してデータを読み取ろうとします。この変数の初期値は、トランザクションの`start_ts`です。
 
