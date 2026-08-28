@@ -55,7 +55,7 @@ commit;                         |
 
 ### TiDBとANSI Repeatable Readの違い {#difference-between-tidb-and-ansi-repeatable-read}
 
-TiDBのRepeatable Read分離レベルは、ANSIのRepeatable Read分離レベルとは同じ名前ですが、異なります。1番目の[ANSI SQL分離レベルの批評](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf)に記載されている標準によると、TiDBはスナップショット分離レベルを実装しています。この分離レベルでは、厳密なファントム（A3）は許可されませんが、広範囲のファントム（P3）とライトスキューは許可されます。一方、ANSIのRepeatable Read分離レベルでは、ファントムリードは許可されますが、ライトスキューは許可されません。
+TiDBのRepeatable Read分離レベルは、ANSIのRepeatable Read分離レベルとは同じ名前ですが、異なります。[ANSI SQL分離レベルの批評](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf)に記載されている標準によると、TiDBはスナップショット分離レベルを実装しています。この分離レベルでは、厳密なファントム（A3）は許可されませんが、広範囲のファントム（P3）とライトスキューは許可されます。一方、ANSIのRepeatable Read分離レベルでは、ファントムリードは許可されますが、ライトスキューは許可されません。
 
 ### TiDBとMySQLのRepeatable Readの違い {#difference-between-tidb-and-mysql-repeatable-read}
 
