@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.18 Release Notes
-summary: TiDB 2.1.18は2019年11月4日にリリースされました。このリリースには、SQLオプティマイザー、SQLエンジン、サーバー、DDL、モニター、ツールに関する様々な修正と最適化が含まれています。注目すべき改善点としては、ORDER BY、GROUP BY、LIMIT OFFSETにおけるパラメータの使用のサポート、インデックス追加操作の進行状況を監視するための新しいメトリクスの追加などが挙げられます。TiDB Ansibleバージョン2.1.18には、TiDB Binlogの更新と新しい監視項目も含まれています。
+summary: TiDB 2.1.18は2019年11月4日にリリースされました。このリリースには、SQLオプティマイザ、SQLエンジン、サーバー、DDL、モニター、ツールに関する様々な修正と最適化が含まれています。注目すべき改善点としては、ORDER BY、GROUP BY、LIMIT OFFSETにおけるパラメータの使用のサポート、インデックス追加操作の進行状況を監視するための新しいメトリクスの追加などが挙げられます。TiDB Ansibleバージョン2.1.18には、TiDB Binlogの更新と新しい監視項目も含まれています。
 ---
 
 # TiDB 2.1.18 リリースノート {#tidb-2-1-18-release-notes}
@@ -13,7 +13,7 @@ TiDB Ansible バージョン: 2.1.18
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザー
+- SQLオプティマイザ
     - フィードバックで分割すると無効なクエリ範囲が表示される可能性がある問題を修正しました [＃12172](https://github.com/pingcap/tidb/pull/12172)
     - PointGetプランで権限チェックが正しく行われない問題を修正 [＃12341](https://github.com/pingcap/tidb/pull/12341)
     - Limit演算子を`IndexLookUpReader`実行ロジックにプッシュすることで、 `select ... limit ... offset …`文の実行パフォーマンスを最適化します。 [＃12380](https://github.com/pingcap/tidb/pull/12380)

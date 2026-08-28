@@ -109,6 +109,6 @@ TiDBは、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-st
 
 > **Note:**
 >
-> `tidb_enable_mutation_checker`と`tidb_txn_assertion_level`無効にすると、すべての SQL ステートメントの対応するチェックがバイパスされます。
+> `tidb_enable_mutation_checker`と`tidb_txn_assertion_level`を無効にすると、すべての SQL ステートメントの対応するチェックがバイパスされます。
 
 トランザクション実行で報告されたその他のエラー、および[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントの実行中に報告されたすべてのエラーについては、データがすでに不整合であるため、対応するチェックをバイパスすることはできません。

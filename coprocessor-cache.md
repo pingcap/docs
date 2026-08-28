@@ -52,7 +52,7 @@ v4.0 以降、TiDB インスタンスは TiKV (コプロセッサーキャッシ
 
 `EXPLAIN ANALYZE`を実行するか、Grafana 監視パネルを表示することで、コプロセッサーのキャッシュ効果を確認できます。
 
-### `EXPLAIN ANALYZE`使用する {#use-explain-analyze}
+### `EXPLAIN ANALYZE`を使用する {#use-explain-analyze}
 
 [テーブルにアクセスするための演算子](/choose-index.md#operators-for-accessing-tables)のキャッシュヒット率は[`EXPLAIN ANALYZE`ステートメント](/sql-statements/sql-statement-explain-analyze.md)を使って確認できます。次の例をご覧ください。
 

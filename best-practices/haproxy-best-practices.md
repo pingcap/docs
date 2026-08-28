@@ -206,7 +206,7 @@ listen tidb-cluster                        # Database load balancing.
 
 > **Note:**
 >
-> PROXY プロトコルを使用する前に、TiDBサーバーの構成ファイルで[`proxy-protocol.networks`](/tidb-configuration-file.md#networks)構成する必要があります。
+> PROXY プロトコルを使用する前に、TiDBサーバーの構成ファイルで[`proxy-protocol.networks`](/tidb-configuration-file.md#networks)を構成する必要があります。
 
 ### HAProxyを起動する {#start-haproxy}
 

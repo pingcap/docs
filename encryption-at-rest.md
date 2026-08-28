@@ -171,7 +171,7 @@ credential-file-path = "/path/to/credential.json"
 ```
 
 - `key-id` KMS CMK のキー ID を指定します。
-- `vendor = "gcp"` の場合、`credential-file-path`は検証資格情報ファイルのパスを指定します。現在、このファイルではサービスアカウントと認証ユーザーの2種類の資格情報がサポートされています。TiKVの実行環境が既に[アプリケーションのデフォルト資格情報](https://cloud.google.com/docs/authentication/application-default-credentials)で構成されている場合は、 `credential-file-path`設定する必要はありません。
+- `vendor = "gcp"` の場合、`credential-file-path`は検証資格情報ファイルのパスを指定します。現在、このファイルではサービスアカウントと認証ユーザーの2種類の資格情報がサポートされています。TiKVの実行環境が既に[アプリケーションのデフォルト資格情報](https://cloud.google.com/docs/authentication/application-default-credentials)で構成されている場合は、 `credential-file-path`を設定する必要はありません。
 
 Google Cloud KMS シナリオで Workload Identity Federation (WIF) を使用する必要がある場合は、代わりに `gcp_v2` を使用します。
 

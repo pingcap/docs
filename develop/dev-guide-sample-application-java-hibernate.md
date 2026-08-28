@@ -211,7 +211,7 @@ cd tidb-java-hibernate-quickstart
     make
     ```
 
-2. [期待される出力.txt](https://github.com/tidb-samples/tidb-java-hibernate-quickstart/blob/main/Expected-Output.txt)をチェックして、出力が一致するかどうかを確認してください。
+2. [Expected-Output.txt](https://github.com/tidb-samples/tidb-java-hibernate-quickstart/blob/main/Expected-Output.txt)をチェックして、出力が一致するかどうかを確認してください。
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
