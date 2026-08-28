@@ -129,7 +129,7 @@ TiDBバージョン: 6.3.0-DMR
 
 - Read-Committed 分離レベルで TSO を取得する方法を最適化します [#36812](https://github.com/pingcap/tidb/issues/36812) @[TonsnakeLin](https://github.com/TonsnakeLin)
 
-    リードコミット分離レベルでは、システム変数[`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630)導入され、TSOのフェッチ方法を制御します。プランキャッシュヒットの場合、TiDBはTSOのフェッチ頻度を減らすことでバッチDMLステートメントの実行効率を向上させ、バッチで実行されるタスクの実行時間を短縮します。
+    Read-Committed 分離レベルでは、TSOのフェッチ方法を制御するためのシステム変数[`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630)が導入されます。プランキャッシュがヒットした場合、TiDBはTSOのフェッチ頻度を減らすことでバッチDMLステートメントの実行効率を向上させ、バッチで実行されるタスクの実行時間を短縮します。
 
 ### 安定性 {#stability}
 
@@ -233,9 +233,9 @@ TiDBバージョン: 6.3.0-DMR
 | [`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-new-in-v630)                                   | 新しく追加された | セッション全体の共通テーブル式 (CTE) をインライン化するかどうかを制御します。デフォルト値は`OFF`で、これはデフォルトでは CTE のインライン化が強制されないことを意味します。                                                                                                                                       |
 | [`tidb_opt_three_stage_distinct_agg`](/system-variables.md#tidb_opt_three_stage_distinct_agg-new-in-v630)                   | 新しく追加された | `COUNT(DISTINCT)`集計を MPP モードで 3 段階集計に書き換えるかどうかを指定します。デフォルト値は`ON`です。                                                                                                                                                                  |
 | [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51)                                    | 変更     | 動的剪定を有効にするかどうかを指定します。v6.3.0 以降、デフォルト値は`dynamic`に変更されます。                                                                                                                                                                              |
-| [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)                                           | 変更     | タイムスタンプの取得を最適化するために使用され、読み取りコミット分離レベルのシナリオ（読み取りと書き込みの競合がまれなシナリオ）に適しています。この機能は特定のサービスワークロード向けに設計されており、他のシナリオではパフォーマンスが低下する可能性があります。そのため、v6.3.0以降、この変数の適用範囲が`GLOBAL \| SESSION`から`INSTANCE`に変更されました。つまり、特定のTiDBインスタンスに対してこの機能を有効にできます。 |
-| [`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630)                                         | 新しく追加された | タイムスタンプの取得を最適化するために使用され、悲観的トランザクションのRC分離レベルにおいてポイントライト競合が少ないシナリオに適しています。この変数を有効にすると、ポイントライトステートメントの実行中にグローバルタイムスタンプを取得する際に発生するレイテンシーとオーバーヘッドを回避できます。                                                                                 |
-| [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)                                                     | 新しく追加された | FastScanを有効にするかどうかを制御します。FastScan[ファストスキャン](/tiflash/use-fastscan.md)有効になっている場合（ `ON`に設定）、 TiFlashはより効率的なクエリパフォーマンスを提供しますが、クエリ結果の正確性やデータの一貫性は保証されません。                                                                                |
+| [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)                                           | 変更     | タイムスタンプの取得を最適化するために使用され、read-committed分離レベルのシナリオ（読み取りと書き込みの競合がまれなシナリオ）に適しています。この機能は特定のサービスワークロード向けに設計されており、他のシナリオではパフォーマンスが低下する可能性があります。そのため、v6.3.0以降、この変数の適用範囲が`GLOBAL \| SESSION`から`INSTANCE`に変更されました。つまり、特定のTiDBインスタンスに対してこの機能を有効にできます。 |
+| [`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630)                                         | 新しく追加された | タイムスタンプの取得を最適化するために使用され、悲観的トランザクションのRC分離レベルにおいてポイント書き込み競合が少ないシナリオに適しています。この変数を有効にすると、ポイント書き込みステートメントの実行中にグローバルタイムスタンプを取得する際に発生するレイテンシーとオーバーヘッドを回避できます。                                                                                 |
+| [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)                                                     | 新しく追加された | FastScanを有効にするかどうかを制御します。FastScan[ファストスキャン](/tiflash/use-fastscan.md)が有効になっている場合（ `ON`に設定）、 TiFlashはより効率的なクエリパフォーマンスを提供しますが、クエリ結果の正確性やデータの一貫性は保証されません。                                                                                |
 
 ### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
 
