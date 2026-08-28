@@ -26,7 +26,7 @@ TiDB Ansible バージョン: 3.0.2
     - オプティマイザが時間等条件正しく推定しない問題を修正 [＃11512](https://github.com/pingcap/tidb/pull/11512)
     - フィードバック情報に基づいてトップN統計を更新することをサポート[＃11507](https://github.com/pingcap/tidb/pull/11507)
 - SQL実行エンジン
-    - 関数`INSERT`パラメータに`NULL`が含まれている場合、戻り値が`NULL`ならない問題を修正しました。 [＃11248](https://github.com/pingcap/tidb/pull/11248)
+    - 関数`INSERT`のパラメータに`NULL`が含まれている場合、戻り値が`NULL`にならない問題を修正しました。 [＃11248](https://github.com/pingcap/tidb/pull/11248)
     - パーティションテーブルを`ADMIN CHECKSUM`操作でチェックすると計算結果が間違っている可能性がある問題を修正しました [＃11266](https://github.com/pingcap/tidb/pull/11266)
     - INDEX JOIN がプレフィックスインデックスを使用すると結果が間違ってしまう可能性がある問題を修正しました [＃11246](https://github.com/pingcap/tidb/pull/11246)
     - `DATE_ADD`関数がマイクロ秒を含む日付数値の減算を行う際に分数の配置が誤っているために結果が間違っている可能性がある問題を修正しました[＃11288](https://github.com/pingcap/tidb/pull/11288)

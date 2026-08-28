@@ -468,7 +468,7 @@ TiDBにはトランザクションタイムアウト機構があります。ト�
 
 > **Note:**
 >
-> 保存生成列をKafkaまたはストレージサービスにレプリケーションし、その後MySQLに書き戻すと、 `Error 3105 (HY000): The value specified for generated column 'xx' in table 'xxx' is not allowed`が発生する可能性があります。このエラーを回避するには、レプリケーションに[オープンプロトコル](/ticdc/ticdc-open-protocol.md#ticdc-open-protocol)を使用します。このプロトコルの出力には[列のビットフラグ](/ticdc/ticdc-open-protocol.md#bit-flags-of-columns)含まれており、列が生成列かどうかを区別できます。
+> 保存生成列をKafkaまたはストレージサービスにレプリケーションし、その後MySQLに書き戻すと、 `Error 3105 (HY000): The value specified for generated column 'xx' in table 'xxx' is not allowed`が発生する可能性があります。このエラーを回避するには、レプリケーションに[オープンプロトコル](/ticdc/ticdc-open-protocol.md#ticdc-open-protocol)を使用します。このプロトコルの出力には[列のビットフラグ](/ticdc/ticdc-open-protocol.md#bit-flags-of-columns)が含まれており、列が生成列かどうかを区別できます。
 
 ## 頻繁に発生する`CDC:ErrMySQLDuplicateEntryCDC`エラーを解決するにはどうすればよいですか? {#how-do-i-resolve-frequent-cdcerrmysqlduplicateentrycdc-errors}
 

@@ -58,7 +58,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
     - クエリがエラーを報告したときに CTE がブロックされる可能性があるバグを修正[＃31302](https://github.com/pingcap/tidb/issues/31302)
     - 列挙値の Nulleq 関数の誤った範囲計算結果を修正しました [＃32428](https://github.com/pingcap/tidb/issues/32428)
     - ChunkRPC を使用してデータをエクスポートする際の TiDB OOM を修正 [＃30880](https://github.com/pingcap/tidb/issues/30880) [＃31981](https://github.com/pingcap/tidb/issues/31981)
-    - `tidb_restricted_read_only`が有効になっているときに`tidb_super_read_only`自動的に有効にならないバグを修正[＃31745](https://github.com/pingcap/tidb/issues/31745)
+    - `tidb_restricted_read_only`が有効になっているときに`tidb_super_read_only`が自動的に有効にならないバグを修正[＃31745](https://github.com/pingcap/tidb/issues/31745)
     - 照合順序`greatest`または`least`関数が間違った結果を返す問題を修正しました[＃31789](https://github.com/pingcap/tidb/issues/31789)
     - データがエスケープ文字で壊れている場合のロードデータpanicを修正 [＃31589](https://github.com/pingcap/tidb/issues/31589)
     - インデックスルックアップ結合を使用してクエリを実行するときに発生する`invalid transaction`エラーを修正します [＃30468](https://github.com/pingcap/tidb/issues/30468)

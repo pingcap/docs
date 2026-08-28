@@ -58,7 +58,7 @@ TiDB バージョン: 5.3.1
 
     - TiDBの`date_format`が`'\n'` MySQLと互換性のない方法で処理する問題を修正[＃32232](https://github.com/pingcap/tidb/issues/32232)
     - `alter column set default`テーブルスキーマを誤って更新する問題を修正 [＃31074](https://github.com/pingcap/tidb/issues/31074)
-    - `tidb_restricted_read_only`が有効になっているときに`tidb_super_read_only`自動的に有効にならないバグを修正[＃31745](https://github.com/pingcap/tidb/issues/31745)
+    - `tidb_restricted_read_only`が有効になっているときに`tidb_super_read_only`が自動的に有効にならないバグを修正[＃31745](https://github.com/pingcap/tidb/issues/31745)
     - 照合順序`greatest`または`least`関数が間違った結果を返す問題を修正しました[＃31789](https://github.com/pingcap/tidb/issues/31789)
     - クエリ実行時に MPP タスクリストが空になるエラーを修正 [＃31636](https://github.com/pingcap/tidb/issues/31636)
     - innerWorker panicによって発生するインデックス結合の誤った結果を修正しました [＃31494](https://github.com/pingcap/tidb/issues/31494)
