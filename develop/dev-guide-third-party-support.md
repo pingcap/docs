@@ -60,7 +60,7 @@ If you encounter problems when connecting to TiDB using the tools listed in this
 | [DBeaver](https://dbeaver.io/)                            | 23.0.3                | Full          | [Connect to TiDB with DBeaver](/develop/dev-guide-gui-dbeaver.md)                    |
 | [Visual Studio Code](https://code.visualstudio.com/)      | 1.72.0                | Full          | [Connect to TiDB with Visual Studio Code](/develop/dev-guide-gui-vscode-sqltools.md) |
 | [Navicat](https://www.navicat.com)                        | 17.1.6                | Full          | [Connect to TiDB with Navicat](/develop/dev-guide-gui-navicat.md) |
-| [LibreDB Studio](https://libredb.org)                     | 0.13.4                | Full          | N/A |
+| [LibreDB Studio](https://libredb.org)                     | 0.13.4                | Full          | [Connect to TiDB with LibreDB Studio](/develop/dev-guide-gui-libredb-studio.md) |
 
 ## Need help?
 
