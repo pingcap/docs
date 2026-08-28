@@ -12,7 +12,7 @@ In this tutorial, you can learn how to connect to TiDB using LibreDB Studio.
 
 > **Note:**
 >
-> This tutorial covers TiDB Self-Managed. LibreDB Studio connects to TiDB over the same MySQL protocol it uses for MySQL itself, so a TiDB Cloud connection uses the same fields with SSL turned on in the connection dialog; this tutorial does not walk through the TiDB Cloud connection dialog.
+> This tutorial covers TiDB Self-Managed only. It was not tested against TiDB Cloud, so it does not include TiDB Cloud connection steps.
 
 ## Prerequisites
 
@@ -52,6 +52,16 @@ To complete this tutorial, you need:
 5. Click **Test Connection** to validate the connection to your TiDB cluster.
 
 6. Click **Establish Connection** to save the connection and open it.
+
+7. In the query editor, run a statement to confirm the connection works end to end, for example:
+
+    ```sql
+    CREATE TABLE demo_users (id INT PRIMARY KEY, name VARCHAR(50));
+    INSERT INTO demo_users VALUES (1, 'Ada'), (2, 'Grace');
+    SELECT * FROM demo_users;
+    ```
+
+    Click **RUN** (or press **Ctrl+Enter**) to execute it.
 
     ![LibreDB Studio: connected to TiDB and running a query](/media/develop/libredb-studio-connected-query.png)
 
