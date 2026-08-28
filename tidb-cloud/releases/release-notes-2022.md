@@ -173,7 +173,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
     - Serverless Tierクラスターには、Dedicated Tierクラスターと同様に完全に機能する HTAP 機能が引き続き含まれています。
     - Serverless Tierでは、クラスターの作成時間が短縮され、瞬時にコールドスタートできます。Developer Tierと比較して、作成時間は数分から数秒に短縮されます。
-    - デプロイメントトポロジーについて心配する必要はありません。Serverless Tierは、お客様のリクエストに応じて自動的に調整されます。
+    - 展開トポロジについて心配する必要はありません。Serverless Tierは、お客様のリクエストに応じて自動的に調整されます。
     - Serverless Tier[セキュリティのためにクラスタへのTLS接続を強制する](/tidb-cloud/secure-connections-to-serverless-clusters.md) 。
     - 既存のDeveloper Tierクラスターは、今後数か月以内にServerless Tierに自動的に移行されます。クラスターのご利用には影響はなく、ベータ版のServerless Tierクラスターのご利用に対して料金は発生しません。
 
