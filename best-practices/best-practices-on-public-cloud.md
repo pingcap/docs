@@ -137,7 +137,7 @@ TiDBを複数のアベイラビリティゾーン（AZ）にまたがってデ�
 
 AZ間の読み取りトラフィックを削減するには、 [Follower Read機能](/follower-read.md)を有効にします。これにより、TiDBは同じアベイラビリティゾーン内のレプリカを優先的に選択します。この機能を有効にするには、 [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)変数を`closest-replicas`または`closest-adaptive`に設定します。
 
-TiFlash MPPタスクのデータシャッフルによって発生するネットワークトラフィックを削減するため、複数のTiFlashインスタンスを同じアベイラビリティゾーン（AZ）にデプロイすることをお勧めします。v6.6.0以降では、 [圧縮交換](/explain-mpp.md#mpp-version-and-exchange-data-compression)デフォルトで有効になっており、MPPデータシャッフルによって発生するネットワークトラフィックを削減します。
+TiFlash MPPタスクのデータシャッフルによって発生するネットワークトラフィックを削減するため、複数のTiFlashインスタンスを同じアベイラビリティゾーン（AZ）にデプロイすることをお勧めします。v6.6.0以降では、 [圧縮交換](/explain-mpp.md#mpp-version-and-exchange-data-compression)はデフォルトで有効になっており、MPPデータシャッフルによって発生するネットワークトラフィックを削減します。
 
 ## Google Cloud でのライブ マイグレーション メンテナンス イベントを軽減する {#mitigate-live-migration-maintenance-events-on-google-cloud}
 
