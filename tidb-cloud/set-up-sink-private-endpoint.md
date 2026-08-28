@@ -32,7 +32,8 @@ Private endpoints leverage **Private Link** or **Private Service Connect** techn
 
 > **Note:**
 >
-> A private endpoint is a project-level resource and is not tied to a specific cluster. Private endpoints created within the same project and in the same region can be shared by multiple Dedicated clusters connecting to the same downstream service, so you do not need to create a separate endpoint for each cluster. Deleting a cluster does not delete its private endpoints. You can manually delete a private endpoint when it is no longer needed, or wait for it to be automatically cleaned up after 30 days of inactivity. A private endpoint cannot be deleted if it is still in use by any cluster.
+> - A private endpoint is a project-level resource and is not tied to a specific cluster. Private endpoints created within the same project and in the same region can be shared by multiple TiDB Cloud Dedicated clusters connecting to the same downstream service, so you do not need to create a separate endpoint for each cluster.
+> - Deleting a cluster does not delete its private endpoints. A private endpoint is automatically deleted if it is not used by any cluster for 30 days, even if the clusters that previously used it remain available. You can also manually delete a private endpoint when it is no longer needed. However, you cannot delete it while it is in use by any cluster.
 
 <SimpleTab>
 <div label="AWS">
