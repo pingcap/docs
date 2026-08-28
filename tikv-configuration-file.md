@@ -1384,7 +1384,7 @@ Configuration items related to RocksDB
 ### `compaction-readahead-size`
 
 + Enables the readahead feature during RocksDB compaction and specifies the size of readahead data. If you are using mechanical disks, it is recommended to set the value to 2MiB at least.
-+ Default value: `0`
++ Default value: `2MiB` (Before v8.5.7, the default value is `0`)
 + Minimum value: `0`
 + Unit: B|KiB|MiB|GiB
 
@@ -2003,7 +2003,7 @@ Configuration items related to `raftdb`
 
 + Controls whether to enable the readahead feature during RocksDB compaction and specify the size of readahead data.
 + If you use mechanical disks, it is recommended to set the value to `2MiB` at least.
-+ Default value: `0`
++ Default value: `2MiB` (Before v8.5.7, the default value is `0`)
 + Minimum value: `0`
 + Unit: B|KiB|MiB|GiB
 
