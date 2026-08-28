@@ -62,7 +62,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     詳細については、 [非トランザクションDMLステートメント](/non-transactional-dml.md)および[`BATCH`構文](/sql-statements/sql-statement-batch.md)を参照してください。
 
-- サポート時間 (TTL) (実験的) [＃39262](https://github.com/pingcap/tidb/issues/39262) @[lcwangchao](https://github.com/lcwangchao)
+- TTLをサポート (実験的) [＃39262](https://github.com/pingcap/tidb/issues/39262) @[lcwangchao](https://github.com/lcwangchao)
 
     TTLは行レベルのデータ有効期間管理を提供します。TiDBでは、TTL属性を持つテーブルはデータ有効期間を自動的にチェックし、期限切れのデータを行レベルで削除します。TTLは、オンラインの読み取りおよび書き込みワークロードに影響を与えることなく、不要なデータを定期的かつタイムリーにクリーンアップできるように設計されています。
 

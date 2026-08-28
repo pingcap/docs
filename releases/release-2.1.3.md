@@ -36,7 +36,7 @@ summary: TiDB 2.1.3 および TiDB Ansible 2.1.3 がリリースされ、シス�
     - シャードビットオーバーフローの問題を修正[＃8976](https://github.com/pingcap/tidb/pull/8976)
     - `SHOW CREATE TABLE` の列文字セットの出力をサポート [＃9053](https://github.com/pingcap/tidb/pull/9053)
     - `utf8mb4` のvarchar型列の最大長制限の問題を修正 [＃8818](https://github.com/pingcap/tidb/pull/8818)
-    - サポート`ALTER TABLE TRUNCATE TABLE PARTITION` [＃9093](https://github.com/pingcap/tidb/pull/9093)
+    - `ALTER TABLE TRUNCATE TABLE PARTITION`をサポート [＃9093](https://github.com/pingcap/tidb/pull/9093)
     - 文字セットが指定されていない場合は文字セットを解決する[＃9147](https://github.com/pingcap/tidb/pull/9147)
 
 ## PD {#pd}

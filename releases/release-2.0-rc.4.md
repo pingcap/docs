@@ -9,7 +9,7 @@ summary: 2018年3月30日にリリースされたTiDB 2.0 RC4では、MySQLと�
 
 ## TiDB {#tidb}
 
-- サポート`SHOW GRANTS FOR CURRENT_USER();`
+- `SHOW GRANTS FOR CURRENT_USER();`をサポート
 - `Expression` in `UnionScan`がクローンされない問題を修正
 - `SET TRANSACTION`構文をサポートする
 - `copIterator`の潜在的な goroutine リーク問題を修正

@@ -23,7 +23,7 @@ tiup dm [command] [flags]
 
 - データ型: `STRING`
 
-- サポート値:
+- サポートされる値:
 
     - `builtin` : tiup-clusterの組み込み easyssh クライアントを SSH クライアントとして使用します。
     - `system` : 現在のオペレーティングシステムのデフォルトの SSH クライアントを使用します。

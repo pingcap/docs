@@ -26,7 +26,7 @@ TiDB Ansible バージョン: 3.0.0
     - ウィンドウ関数をサポート。`NTILE` 、 `LEAD` 、 `LAG` 、 `PERCENT_RANK` 、 `NTH_VALUE` 、 `CUME_DIST` 、 `FIRST_VALUE` 、 `LAST_VALUE` 、 `RANK` 、 `DENSE_RANK` 、 `ROW_NUMBER`を含む、MySQL 8.0のすべてのウィンドウ関数と互換性があります
     - ビューのサポート（**Experimental**）
     - テーブルパーティションの改善
-        - サポート範囲パーティション
+        - 範囲パーティションをサポート
         - ハッシュパーティションをサポート
     - IP ホワイトリスト (**Enterprise**) や監査ログ (**Enterprise**) などのプラグインをサポートするプラグインフレームワークを追加します。
     - クエリの安定性を確保するために SQL 実行計画 バインディングを作成する SQL プラン管理機能をサポートします (**Experimental**)
@@ -68,9 +68,9 @@ TiDB Ansible バージョン: 3.0.0
     - 文字セット`utf8`から`utf8mb4`への移行をサポート
     - デフォルトの文字セットを`utf8`から`utf8mb4`に変更します
     - `alter schema`文を追加して、データベースの文字セットと照合順序を変更します。
-    - ALTERアルゴリズム`INSTANT`サポート`INPLACE`
-    - サポート`SHOW CREATE VIEW`
-    - サポート`SHOW CREATE USER`
+    - ALTERの`INPLACE`/`INSTANT`アルゴリズムをサポート
+    - `SHOW CREATE VIEW`をサポート
+    - `SHOW CREATE USER`をサポート
     - 誤って削除されたテーブルの高速回復をサポート
     - ADD INDEX の同時実行数を動的に調整する機能をサポート
     - `CREATE TABLE`ステートメントを使用してテーブルを作成するときに、リージョンを事前に割り当てる`pre_split_regions`オプションを追加して、テーブル作成後の大量の書き込みによって発生する書き込みホットリージョンを軽減します。

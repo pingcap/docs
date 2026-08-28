@@ -396,7 +396,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     - TiCDC
 
         - Grafana に`Lag analyze`パネルを追加する [＃4891](https://github.com/pingcap/tiflow/issues/4891)
-        - サポート配置ルール[＃4846](https://github.com/pingcap/tiflow/issues/4846)
+        - 配置ルールをサポート[＃4846](https://github.com/pingcap/tiflow/issues/4846)
         - HTTP API処理の同期[＃1710](https://github.com/pingcap/tiflow/issues/1710)
         - チェンジフィードを再開するための指数バックオフ メカニズムを追加します。 [＃3329](https://github.com/pingcap/tiflow/issues/3329)
         - MySQL でのデッドロックを減らすために、MySQL シンクのデフォルトの分離レベルを読み取りコミットに設定します。 [＃3589](https://github.com/pingcap/tiflow/issues/3589)

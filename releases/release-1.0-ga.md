@@ -32,7 +32,7 @@ summary: TiDB 1.0は、MySQLとの互換性、SQLの最適化、安定性、そ�
 - パフォーマンスと安定性を向上
 - デバッグ用のデバッグAPIを追加する
 - TiSpark ベータ版リリース:
-- サポート構成フレームワーク
+- 構成フレームワークをサポート
 - ThriftSever/JDBCおよびSpark SQLをサポート
 
 ## 了承 {#acknowledgement}

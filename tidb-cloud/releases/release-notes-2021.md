@@ -11,7 +11,7 @@ summary: 2021年のTiDB Cloudのリリースノートについて説明します
 
 新機能:
 
-- サポート[Amazon S3 または GCS からTiDB Cloudに Apache Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files.md)
+- [Amazon S3 または GCS からTiDB Cloudへの Apache Parquet ファイルのインポート](/tidb-cloud/import-parquet-files.md)をサポート
 
 バグ修正:
 
@@ -53,11 +53,11 @@ summary: 2021年のTiDB Cloudのリリースノートについて説明します
 ## 2021年10月21日 {#october-21-2021}
 
 - 個人のメールアカウントへのユーザー登録を開放
-- サポート[Amazon S3 または GCS からTiDB Cloudへのインポートまたは移行](/tidb-cloud/import-csv-files.md)
+- [Amazon S3 または GCS からTiDB Cloudへのインポートまたは移行](/tidb-cloud/import-csv-files.md)をサポート
 
 ## 2021年10月11日 {#october-11-2021}
 
-- サポート[TiDB Cloudの請求詳細の表示とエクスポート](/tidb-cloud/tidb-cloud-billing.md#billing-details) （各サービスおよび各プロジェクトの費用を含む）
+- [TiDB Cloudの請求詳細の表示とエクスポート](/tidb-cloud/tidb-cloud-billing.md#billing-details)をサポート （各サービスおよび各プロジェクトの費用を含む）
 - TiDB Cloud内部機能のいくつかの問題を修正
 
 ## 2021年9月16日 {#september-16-2021}

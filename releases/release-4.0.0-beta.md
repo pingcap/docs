@@ -27,7 +27,7 @@ TiDB Ansible バージョン: 4.0.0-beta
 - `create index`を使用して式インデックスを作成し、 `drop index`を使用して式インデックスを削除すること`alter table`サポートします。 [＃14117](https://github.com/pingcap/tidb/pull/14117)
 - 切り捨てられたSQL出力の数を減らすには、パラメータ`query-log-max-len`のデフォルト値を`4096`に増やしてください。このパラメータは動的に調整できます[＃12491](https://github.com/pingcap/tidb/pull/12491)
 - 列属性に`AutoRandom`キーワードを追加して、システムが主キーにランダムな整数を自動的に割り当てるかどうかを制御できるようになりました。これにより、 `AUTO_INCREMENT`主キーによって引き起こされるホットスポット問題が回避されます。 [＃13127](https://github.com/pingcap/tidb/pull/13127)
-- サポートテーブルロック[＃11038](https://github.com/pingcap/tidb/pull/11038)
+- テーブルロックをサポート[＃11038](https://github.com/pingcap/tidb/pull/11038)
 - 条件付きフィルタリングで`ADMIN SHOW DDL JOBS`の`LIKE`または`WHERE`句の使用をサポート [＃12484](https://github.com/pingcap/tidb/pull/12484)
 - `information_schema.tables`表の`TIDB_ROW_ID_SHARDING_INFO`列を追加して`RowID`散乱情報を出力します（たとえば、表`A`の`SHARD_ROW_ID_BITS`列の値は`"SHARD_BITS={bit_number}"`です） [＃13418](https://github.com/pingcap/tidb/pull/13418)
 - SQL エラーメッセージのエラーコードを最適化して、 `ERROR 1105 (HY000)`コードが複数のエラーメッセージ ( `Unknown Error`種類) に使用される状況を回避します。
