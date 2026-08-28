@@ -105,7 +105,7 @@ INSERT INTO {table} ({columns}) VALUES ({values})
 
 ### `INSERT ON DUPLICATE KEY UPDATE`のベストプラクティス {#insert-on-duplicate-key-update-best-practices}
 
-- `INSERT ON DUPLICATE KEY UPDATE`は、一意キーが 1つだけのテーブルでのみ使用してください。このステートメントは***、一意キー***(主キーを含む) の競合が検出された場合、データを更新します。競合する行が複数ある場合、更新されるのは 1 行のみです。したがって、競合する行が 1つだけであることを保証できない限り、一意キーが複数あるテーブルで`INSERT ON DUPLICATE KEY UPDATE`ステートメントを使用することはお勧めしません。
+- `INSERT ON DUPLICATE KEY UPDATE`は、一意キーが 1つだけのテーブルでのみ使用してください。このステートメントは、一意キー(主キーを含む) の競合が検出された場合、データを更新します。競合する行が複数ある場合、更新されるのは 1 行のみです。したがって、競合する行が 1つだけであることを保証できない限り、一意キーが複数あるテーブルで`INSERT ON DUPLICATE KEY UPDATE`ステートメントを使用することはお勧めしません。
 - データを作成または更新する際に、このステートメントを使用してください。
 
 ### `INSERT ON DUPLICATE KEY UPDATE`例 {#insert-on-duplicate-key-update-example}

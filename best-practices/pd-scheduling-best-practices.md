@@ -299,4 +299,4 @@ v8.5.5以降、TiKVは低速ネットワークノードを検出するメカニ�
 
 > **Note:**
 >
-> **Leaderの排除は**、PDがTiKVの低速ノードにスケジューリング要求を送信し、TiKVが受信したスケジューリング要求を順次実行することで実現されます。**低速I/O**などの要因により、低速ノードでは要求が蓄積され、一部のリーダーは遅延した要求が処理されるまで**Leaderの排除**要求を処理できない場合があります。その結果**、Leaderの排除**にかかる時間が全体的に長くなります。したがって、 `evict-slow-store-scheduler`有効にする場合は、この状況を緩和するために[`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)も有効にすることをお勧めします。
+> **Leaderの排除**は、PDがTiKVの低速ノードにスケジューリング要求を送信し、TiKVが受信したスケジューリング要求を順次実行することで実現されます。**低速I/O**などの要因により、低速ノードでは要求が蓄積され、一部のリーダーは遅延した要求が処理されるまで**Leaderの排除**要求を処理できない場合があります。その結果、**Leaderの排除**にかかる時間が全体的に長くなります。したがって、 `evict-slow-store-scheduler`を有効にする場合は、この状況を緩和するために[`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)も有効にすることをお勧めします。

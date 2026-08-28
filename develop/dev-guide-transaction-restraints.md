@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/dev-guide-transaction-restraints/','/ja/tidb/dev/dev-
 
 ## 隔離レベル {#isolation-levels}
 
-TiDBがサポートする分離レベルは**、RC（Read Committed）**と**SI（Snapshot Isolation）**であり、 **SI**は基本的に**RR（Repeatable Read）**分離レベルと同等です。
+TiDBがサポートする分離レベルは、**RC（Read Committed）**と**SI（Snapshot Isolation）**であり、 **SI**は基本的に**RR（Repeatable Read）**分離レベルと同等です。
 
 ![isolation level](/media/develop/transaction_isolation_level.png)
 
@@ -18,7 +18,7 @@ TiDBがサポートする分離レベルは**、RC（Read Committed）**と**SI�
 
 TiDB の`SI`分離レベルでは**ファントム リード**を回避できますが、ANSI/ISO SQL 標準の`RR`では回避できません。
 
-以下の2つの例は**、ファントムリード**がどのようなものかを示しています。
+以下の2つの例は、**ファントムリード**がどのようなものかを示しています。
 
 - 例 1:**トランザクションA は**、まずクエリに従って`n`行を取得し、次に**トランザクションB は**、これらの`m`行以外の`n`行を変更するか、**トランザクションA**のクエリに一致する`m`行を追加します。**トランザクションA**が再度クエリを実行すると、条件に一致する`n+m`行が存在することがわかります。これはファントムのようなものなので、**ファントム リード**と呼ばれます。
 
