@@ -2342,7 +2342,7 @@ TiDB LightningのインポートおよびBR復元に関連するコンフィグ�
 - `enable-compaction-filter`が`false`の場合の GC スレッドの数。
 - デフォルト値: `1`
 
-## gc.自動圧縮 {#gcauto-compaction}
+## gc.auto-compaction {#gcauto-compaction}
 
 TiKVの自動圧縮の動作を設定します。
 

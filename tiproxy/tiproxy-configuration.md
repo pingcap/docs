@@ -185,7 +185,7 @@ TiProxy v1.3.1以降、複数の仮想IPアドレスの設定がサポートさ�
     - `json` : 構造化された JSON 形式。
     - `console` : 人間が読めるログ形式。
 
-### log.ログファイル {#log-log-file}
+### log.log-file {#log-log-file}
 
 #### `filename` {#filename}
 
