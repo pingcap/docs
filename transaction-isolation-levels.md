@@ -34,7 +34,7 @@ TiDBはスナップショット分離（SI）一貫性を実装しており、My
 >
 > TiDB v3.0.8以降、新規に作成されたTiDBクラスタはデフォルトで[悲観的トランザクションモード](/pessimistic-transaction.md)を使用します。現在の読み取り（ `for update`読み取り）は**繰り返し不可能な読み取り**です。詳細は[悲観的トランザクションモード](/pessimistic-transaction.md)を参照してください。
 
-## Repeatable Read isolation level {#repeatable-read-isolation-level}
+## Repeatable Read分離レベル {#repeatable-read-isolation-level}
 
 Repeatable Read分離レベルでは、トランザクション開始前にコミットされたデータのみが参照され、コミットされていないデータや、トランザクション実行中に同時実行トランザクションによってコミットされた変更は参照されません。ただし、トランザクション文は、自身のトランザクション内で実行された以前の更新の影響を参照します。これらの更新は、まだコミットされていない場合でも参照されます。
 
@@ -61,7 +61,7 @@ TiDBのRepeatable Read分離レベルは、ANSIのRepeatable Read分離レベル
 
 TiDBのRepeatable Read分離レベルは、MySQLのそれとは異なります。MySQLのRepeatable Read分離レベルでは、更新時に現在のバージョンが可視かどうかがチェックされないため、トランザクション開始後に行が更新された場合でも更新を続行できます。一方、TiDBの楽観的トランザクションでは、トランザクション開始後に行が更新された場合、ロールバックされて再試行されます。TiDBの楽観的同時実行制御ではトランザクションの再試行が失敗し、最終的にトランザクションが失敗する可能性がありますが、TiDBの悲観的同時実行制御とMySQLでは、更新トランザクションが成功する可能性があります。
 
-## Read Committed isolation level {#read-committed-isolation-level}
+## Read Committed分離レベル {#read-committed-isolation-level}
 
 TiDB v4.0.0-beta 以降、TiDB は Read Committed 分離レベルをサポートします。
 
