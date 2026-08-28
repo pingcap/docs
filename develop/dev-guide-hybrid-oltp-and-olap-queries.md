@@ -210,7 +210,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'bookshop'
 
 ### クエリエンジンを指定する {#specify-a-query-engine}
 
-TiDBはコストベースオプティマイザー（CBO）を使用して、コスト見積もりに基づいてTiFlashレプリカを使用するかどうかを自動的に選択します。ただし、クエリがトランザクションクエリか分析クエリかが明確な場合は、 [オプティマイザヒント](/optimizer-hints.md)を使用して使用するクエリエンジンを指定できます。
+TiDBはコストベースオプティマイザ（CBO）を使用して、コスト見積もりに基づいてTiFlashレプリカを使用するかどうかを自動的に選択します。ただし、クエリがトランザクションクエリか分析クエリかが明確な場合は、 [オプティマイザヒント](/optimizer-hints.md)を使用して使用するクエリエンジンを指定できます。
 
 クエリで使用するエンジンを指定するには、次のステートメントのように`/*+ read_from_storage(engine_name[table_name]) */`ヒントを使用できます。
 

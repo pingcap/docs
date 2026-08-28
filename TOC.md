@@ -296,7 +296,7 @@
       - [オプティマイザのヒント](/optimizer-hints.md)
       - [SQLプラン管理](/sql-plan-management.md)
       - [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)
-      - [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
+      - [オプティマイザ修正コントロール](/optimizer-fix-controls.md)
     - [インデックスアドバイザー](/index-advisor.md)
 - チュートリアル
   - [1つのリージョンに複数の可用性ゾーンを展開](/multi-data-centers-in-one-city-deployment.md)

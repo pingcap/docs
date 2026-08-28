@@ -229,11 +229,11 @@ TiDBは、 [グローバル](/system-variables.md#tidb_force_priority)単位ま�
 
 テーブル内の行数またはパーティションテーブルの単一パーティションの行数が 1000 に達し、テーブルまたはパーティションの比率 (変更された行数 / 現在の行の合計数) が[`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)超えると、 [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)ステートメントが自動的にトリガーされます。
 
-システム変数`tidb_auto_analyze_ratio`のデフォルト値は`0.5`で、この機能がデフォルトで有効になっていることを示します。システム変数`tidb_auto_analyze_ratio`を[`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio)以上（デフォルト値は`0.8` ）に設定することは推奨されません。そうしないと、オプティマイザーが疑似統計を使用する可能性があります。TiDB v5.3.0 では[`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530)変数が導入され、これを`OFF`に設定すると、統計が古くても疑似統計は使用されません。
+システム変数`tidb_auto_analyze_ratio`のデフォルト値は`0.5`で、この機能がデフォルトで有効になっていることを示します。システム変数`tidb_auto_analyze_ratio`を[`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio)以上（デフォルト値は`0.8` ）に設定することは推奨されません。そうしないと、オプティマイザが疑似統計を使用する可能性があります。TiDB v5.3.0 では[`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530)変数が導入され、これを`OFF`に設定すると、統計が古くても疑似統計は使用されません。
 
 `auto analyze`を無効にするには、システム変数[`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)を使用します。
 
-## オプティマイザーヒントを使用してオプティマイザーの動作をオーバーライドできますか? {#can-i-use-optimizer-hints-to-override-the-optimizer-behavior}
+## オプティマイザヒントを使用してオプティマイザの動作をオーバーライドできますか? {#can-i-use-optimizer-hints-to-override-the-optimizer-behavior}
 
 TiDBは、 [ヒント](/optimizer-hints.md)と[SQLプラン管理](/sql-plan-management.md)を含む、デフォルトのクエリオプティマイザの動作をオーバーライドする複数の方法をサポートしています。基本的な使用方法はMySQLと同様ですが、TiDB固有の拡張機能がいくつかあります。
 

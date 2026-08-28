@@ -47,7 +47,7 @@ SHOW CREATE TABLE t1;
 1 row in set (0.00 sec)
 ```
 
-オプティマイザーは**不可視インデックス**`c1`を使用できません。
+オプティマイザは**不可視インデックス**`c1`を使用できません。
 
 ```sql
 EXPLAIN SELECT c1 FROM t1 ORDER BY c1;
@@ -64,7 +64,7 @@ EXPLAIN SELECT c1 FROM t1 ORDER BY c1;
 3 rows in set (0.00 sec)
 ```
 
-比較すると、 `c2`**可視インデックス**であり、オプティマイザーで使用できます。
+比較すると、 `c2`**可視インデックス**であり、オプティマイザで使用できます。
 
 ```sql
 EXPLAIN SELECT c2 FROM t1 ORDER BY c2;
@@ -80,7 +80,7 @@ EXPLAIN SELECT c2 FROM t1 ORDER BY c2;
 2 rows in set (0.00 sec)
 ```
 
-`USE INDEX` SQL ヒントを使用して強制的にインデックスを使用した場合でも、オプティマイザーは不可視インデックスを使用できません。そうでない場合は、エラーが返されます。
+`USE INDEX` SQL ヒントを使用して強制的にインデックスを使用した場合でも、オプティマイザは不可視インデックスを使用できません。そうでない場合は、エラーが返されます。
 
 ```sql
 SELECT * FROM t1 USE INDEX(c1);

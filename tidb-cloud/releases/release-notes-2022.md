@@ -478,7 +478,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 - 列指向ストレージ[TiFlash](/tiflash/tiflash-overview.md)が一般提供 (GA) になりました。
 
     - TiFlashにより、TiDBは本質的にハイブリッドトランザクション／分析処理（HTAP）データベースとなります。アプリケーションデータはまずTiKVに保存され、その後Raftコンセンサスアルゴリズムを介してTiFlashに複製されます。つまり、行ストレージから列ストレージへのリアルタイムレプリケーションが実現されます。
-    - TiFlashレプリカを持つテーブルの場合、TiDB オプティマイザーはコスト見積もりに基づいて TiKV レプリカとTiFlashレプリカのどちらを使用するかを自動的に決定します。
+    - TiFlashレプリカを持つテーブルの場合、TiDB オプティマイザはコスト見積もりに基づいて TiKV レプリカとTiFlashレプリカのどちらを使用するかを自動的に決定します。
 
     TiFlashがもたらすメリットを体験するには、 [TiDB Cloud HTAP クイックスタートガイド](/tidb-cloud/tidb-cloud-htap-quickstart.md)ご覧ください。
 

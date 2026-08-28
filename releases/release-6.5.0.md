@@ -26,7 +26,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 - TiDB グローバルメモリ制御が GA になり、 [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)を介してメモリ消費しきい値を制御できるようになりました。
 - 高性能かつグローバルに単調な[`AUTO_INCREMENT`](/auto-increment.md#mysql-compatibility-mode)列属性が、MySQLと互換性のあるGAになります。
 - [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)は TiCDC および PITR と互換性があり、GA になります。
-- より正確な[コストモデル バージョン 2](/cost-model.md#cost-model-version-2)一般に公開し、 `AND`で[インデックスマージ](/explain-index-merge.md)に接続された式をサポートすることで、 TiDB オプティマイザーを強化します。
+- より正確な[コストモデル バージョン 2](/cost-model.md#cost-model-version-2)一般に公開し、 `AND`で[インデックスマージ](/explain-index-merge.md)に接続された式をサポートすることで、 TiDB オプティマイザを強化します。
 - `JSON_EXTRACT()`機能をTiFlashにプッシュダウンすることをサポートします。
 - パスワード コンプライアンス監査要件を満たす[パスワード管理](/password-management.md)ポリシーをサポートします。
 - TiDB LightningとDumplingは、圧縮されたSQLおよびCSVファイルの[インポート](/tidb-lightning/tidb-lightning-data-source.md)および[エクスポート](/dumpling-overview.md#improve-export-efficiency-through-concurrency)をサポートします。
@@ -177,11 +177,11 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     [パーティションテーブル](/partitioned-table.md)機能は v6.1.0 から GA となっていますが、TiDB は継続的にパフォーマンスを改善しています。v6.5.0 では、TiDB は計算とフィルタリングのために`ORDER BY`や`LIMIT`などのソート操作を TiKV にプッシュダウンすることをサポートします。これにより、ネットワーク I/O オーバーヘッドが削減され、パーティションテーブル使用時の SQL パフォーマンスが向上します。
 
-- オプティマイザーはより正確なコストモデルバージョン2（GA） を導入しました [＃35240](https://github.com/pingcap/tidb/issues/35240) @[qw4990](https://github.com/qw4990)
+- オプティマイザはより正確なコストモデルバージョン2（GA） を導入しました [＃35240](https://github.com/pingcap/tidb/issues/35240) @[qw4990](https://github.com/qw4990)
 
-    TiDB v6.2.0 では、 [コストモデル バージョン 2](/cost-model.md#cost-model-version-2)が実験的機能として導入されました。このモデルは、より正確なコスト推定手法を用いて、オプティマイザーが最適な実行計画を選択できるように支援します。特にTiFlashを導入している場合、コストモデル バージョン 2 は適切なストレージエンジンを自動的に選択し、手動による介入を大幅に削減します。一定期間の実環境テストを経て、このモデルは v6.5.0 で一般提供となります。v6.5.0 以降、新規に作成されたクラスターはデフォルトでコストモデル バージョン 2 を使用します。v6.5.0 にアップグレードするクラスターでは、コストモデル バージョン 2 によってクエリプランが変更される可能性があるため、十分なパフォーマンステストを行った後、 [`tidb_cost_model_version = 2`](/system-variables.md#tidb_cost_model_version-new-in-v620)変数を設定して新しいコストモデルを使用するように設定できます。
+    TiDB v6.2.0 では、 [コストモデル バージョン 2](/cost-model.md#cost-model-version-2)が実験的機能として導入されました。このモデルは、より正確なコスト推定手法を用いて、オプティマイザが最適な実行計画を選択できるように支援します。特にTiFlashを導入している場合、コストモデル バージョン 2 は適切なストレージエンジンを自動的に選択し、手動による介入を大幅に削減します。一定期間の実環境テストを経て、このモデルは v6.5.0 で一般提供となります。v6.5.0 以降、新規に作成されたクラスターはデフォルトでコストモデル バージョン 2 を使用します。v6.5.0 にアップグレードするクラスターでは、コストモデル バージョン 2 によってクエリプランが変更される可能性があるため、十分なパフォーマンステストを行った後、 [`tidb_cost_model_version = 2`](/system-variables.md#tidb_cost_model_version-new-in-v620)変数を設定して新しいコストモデルを使用するように設定できます。
 
-    コストモデル バージョン 2 は、TiDB オプティマイザーの全体的な機能を大幅に向上させ、TiDB をより強力な HTAP データベースへと進化させる、一般利用可能な機能になります。
+    コストモデル バージョン 2 は、TiDB オプティマイザの全体的な機能を大幅に向上させ、TiDB をより強力な HTAP データベースへと進化させる、一般利用可能な機能になります。
 
     詳細については[ドキュメント](/cost-model.md#cost-model-version-2)を参照してください。
 

@@ -5,11 +5,11 @@ summary: TiDB 2.1 RC3は2018年9月29日にリリースされ、安定性、互�
 
 # TiDB 2.1 RC3 リリースノート {#tidb-2-1-rc3-release-notes}
 
-2018年9月29日にTiDB 2.1 RC3がリリースされました。このリリースでは、TiDB 2.1 RC2と比較して、安定性、互換性、SQLオプティマイザー、実行エンジンが大幅に改善されています。
+2018年9月29日にTiDB 2.1 RC3がリリースされました。このリリースでは、TiDB 2.1 RC2と比較して、安定性、互換性、SQLオプティマイザ、実行エンジンが大幅に改善されています。
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザー
+- SQLオプティマイザ
     - 文に埋め込み`LEFT OUTER JOIN` が含まれている場合の誤った結果の問題を修正しました [＃7689](https://github.com/pingcap/tidb/pull/7689)
     - `JOIN`文の述語プッシュダウンの最適化ルールを強化する [＃7645](https://github.com/pingcap/tidb/pull/7645)
     - `UnionScan`演算子述語プッシュダウンの最適化ルールを修正 [＃7695](https://github.com/pingcap/tidb/pull/7695)
