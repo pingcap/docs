@@ -6971,7 +6971,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - 型: Enumeration
 - デフォルト値: `REPEATABLE-READ`
 - 指定可能な値: `READ-UNCOMMITTED` 、 `READ-COMMITTED` 、 `REPEATABLE-READ` 、 `SERIALIZABLE`
-- この変数はトランザクションの分離を設定します。 TiDB は MySQL との互換性のために`REPEATABLE-READ`を宣伝していますが、実際の分離レベルはスナップショット分離です。詳細については、[トランザクション分離レベル](/transaction-isolation-levels.md)を参照してください。
+- この変数はトランザクションの分離レベルを設定します。MySQLとの互換性のため、この変数の値は`REPEATABLE-READ`と表示されますが、実際の分離レベルはスナップショット分離です。詳細については、[トランザクション分離レベル](/transaction-isolation-levels.md)を参照してください。
 
 ### tx_isolation
 

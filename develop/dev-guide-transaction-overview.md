@@ -130,10 +130,10 @@ SELECT * FROM `users`;
 
 SQL-92 標準では、次の4つの分離レベルが定義されています。
 
-- コミットされていない読み取り ( `READ UNCOMMITTED` )
-- コミットされた読み取り ( `READ COMMITTED` )
-- 繰り返し読み取り ( `REPEATABLE READ` )
-- シリアル化可能（ `SERIALIZABLE` ）。
+- read uncommitted ( `READ UNCOMMITTED` )
+- read committed ( `READ COMMITTED` )
+- repeatable read ( `REPEATABLE READ` )
+- serializable ( `SERIALIZABLE` )。
 
 詳細については、以下の表を参照してください。
 
@@ -159,7 +159,7 @@ mysql> SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 ERROR 8048 (HY000): The isolation level 'SERIALIZABLE' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error
 ```
 
-TiDBは、MySQLとの整合性を確保するために、スナップショット分離（SI）レベルの整合性（「繰り返し読み取り」とも呼ばれます）を実装しています。この分離レベルは[ANSI繰り返し読み取り分離レベル](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read)および[MySQL 繰り返し読み取り分離レベル](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)とは異なります。詳細については、 [TiDBトランザクション分離レベル](/transaction-isolation-levels.md)を参照してください。
+TiDBは、MySQLとの整合性を確保するために、スナップショット分離（SI）レベルの整合性（「repeatable read」とも呼ばれます）を実装しています。この分離レベルは[ANSI Repeatable Read Isolation Level](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read)および[MySQL Repeatable Read Isolation Level](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)とは異なります。詳細については、 [TiDBトランザクション分離レベル](/transaction-isolation-levels.md)を参照してください。
 
 ## ヘルプが必要ですか? {#need-help}
 
