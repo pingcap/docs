@@ -1,11 +1,11 @@
 ---
 title: Distinct Optimization
-summary: TiDB クエリ オプティマイザーに distinct` 最適化を導入します。
+summary: TiDB クエリ オプティマイザに`distinct`最適化を導入します。
 ---
 
 # クエリの最適化 {#distinct-optimization}
 
-このドキュメントでは、集計関数の`SELECT DISTINCT`と`DISTINCT`含む、TiDB クエリ オプティマイザーの`distinct`最適化について説明します。
+このドキュメントでは、`SELECT DISTINCT`および集計関数の`DISTINCT`オプションを含む、TiDB クエリ オプティマイザの`distinct`最適化について説明します。
 
 ## `SELECT`文の`DISTINCT`修飾子 {#distinct-modifier-in-select-statements}
 

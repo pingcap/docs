@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.1 Beta Release Notes
-summary: TiDB 3.1ベータ版は2019年12月20日にリリースされました。SQLオプティマイザーの改良に加え、Follower Read機能もサポートされています。TiKVは、Follower Read機能に加え、分散バックアップとリストアをサポートするようになりました。PDも分散バックアップとリストアをサポートします。
+summary: TiDB 3.1ベータ版は2019年12月20日にリリースされました。SQLオプティマイザの改良に加え、Follower Read機能もサポートされています。TiKVは、Follower Read機能に加え、分散バックアップとリストアをサポートするようになりました。PDも分散バックアップとリストアをサポートします。
 ---
 
 # TiDB 3.1 ベータ版リリースノート {#tidb-3-1-beta-release-notes}
@@ -13,7 +13,7 @@ TiDB Ansible バージョン: 3.1.0-beta
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザー
+- SQLオプティマイザ
     - SQLヒントの強化[＃12192](https://github.com/pingcap/tidb/pull/12192)
 - 新機能
     - Follower Read機能をサポートする [＃12535](https://github.com/pingcap/tidb/pull/12535)

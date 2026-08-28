@@ -113,7 +113,7 @@ Azure 上のRaft Engineに専用の 32 GB [Ultra Disk](https://learn.microsoft.c
 
 ### 例 3: TiKV マニフェストのRaft Engine用に Google Cloud に専用の pd-ssd ディスクを接続する {#example-3-attach-a-dedicated-pd-ssd-disk-on-google-cloud-for-raft-engine-on-tikv-manifest}
 
-次の TiKV 構成例は、 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)によってデプロイされた Google Cloud 上のクラスタに 512 GB の追加のディスク[pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/)を接続し、この特定のディスクにRaft Engineログを保存するように`raft-engine.dir`構成する方法を示しています。
+次の TiKV 構成例は、 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)によってデプロイされた Google Cloud 上のクラスタに 512 GB の追加のディスク[pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/)を接続し、この特定のディスクにRaft Engineログを保存するように`raft-engine.dir`を構成する方法を示しています。
 
 ```
 tikv:
@@ -137,7 +137,7 @@ TiDBを複数のアベイラビリティゾーン（AZ）にまたがってデ�
 
 AZ間の読み取りトラフィックを削減するには、 [Follower Read機能](/follower-read.md)を有効にします。これにより、TiDBは同じアベイラビリティゾーン内のレプリカを優先的に選択します。この機能を有効にするには、 [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)変数を`closest-replicas`または`closest-adaptive`に設定します。
 
-TiFlash MPPタスクのデータシャッフルによって発生するネットワークトラフィックを削減するため、複数のTiFlashインスタンスを同じアベイラビリティゾーン（AZ）にデプロイすることをお勧めします。v6.6.0以降では、 [圧縮交換](/explain-mpp.md#mpp-version-and-exchange-data-compression)デフォルトで有効になっており、MPPデータシャッフルによって発生するネットワークトラフィックを削減します。
+TiFlash MPPタスクのデータシャッフルによって発生するネットワークトラフィックを削減するため、複数のTiFlashインスタンスを同じアベイラビリティゾーン（AZ）にデプロイすることをお勧めします。v6.6.0以降では、 [圧縮交換](/explain-mpp.md#mpp-version-and-exchange-data-compression)はデフォルトで有効になっており、MPPデータシャッフルによって発生するネットワークトラフィックを削減します。
 
 ## Google Cloud でのライブ マイグレーション メンテナンス イベントを軽減する {#mitigate-live-migration-maintenance-events-on-google-cloud}
 

@@ -33,7 +33,7 @@ summary: TiDB の AUTO_INCREMENT` 列属性について学習します。
 
 > **Note:**
 >
-> すべての TiDB サーバーで`AUTO_INCREMENT`数値を単調にしたい場合、TiDB バージョンが v6.5.0 以降であれば、 [MySQL互換モード](#mysql-compatibility-mode)有効にすることをお勧めします。
+> すべての TiDB サーバーで`AUTO_INCREMENT`数値を単調にしたい場合、TiDB バージョンが v6.5.0 以降であれば、 [MySQL互換モード](#mysql-compatibility-mode)を有効にすることをお勧めします。
 
 以下は`AUTO_INCREMENT`の基本的な例です。
 

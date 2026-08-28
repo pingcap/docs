@@ -117,9 +117,9 @@ TiDB Cloud Lake の料金は、ウェアハウス、ストレージ、クラウ�
     >
     > Infrequent Access は現在 {{{ .essential }}} 向けのプライベートプレビューであり、リクエストがあった場合にのみ利用できます。
 
-- **Columnar storage**: カラム型ストレージは **TiFlash** エンジンによって提供されます。 <!--**Use case:** Online analytical processing (OLAP) workloads that benefit from real-time columnar acceleration without requiring additional ETL.-->
+- **Columnar storage**: 列指向ストレージは **TiFlash** エンジンによって提供されます。 <!--**Use case:** Online analytical processing (OLAP) workloads that benefit from real-time columnar acceleration without requiring additional ETL.-->
 
-- **Dual-layer encryption**: 行ベースのストレージとカラム型ストレージはどちらもデュアルレイヤー暗号化をサポートしています。このメカニズムは、2つの独立した暗号化レイヤーでデータを保護し、1つのレイヤーが侵害された場合でもデータが保護された状態を維持できるようにします。
+- **Dual-layer encryption**: 行ベースのストレージと列指向ストレージはどちらもデュアルレイヤー暗号化をサポートしています。このメカニズムは、2つの独立した暗号化レイヤーでデータを保護し、1つのレイヤーが侵害された場合でもデータが保護された状態を維持できるようにします。
 
     - Storage-layer encryption: 基盤となるクラウドプロバイダーは、ネイティブのストレージ暗号化メカニズムを使用して、保存中のすべてのデータを暗号化します。
     - Database-layer encryption: クラウドプロバイダーの暗号化に加えて、TiDB Cloud は顧客管理暗号化キー (CMEK) またはエスクロー鍵のいずれかを使用して、自動的に第 2 の暗号化レイヤーを適用します。

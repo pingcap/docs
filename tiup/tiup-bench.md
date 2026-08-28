@@ -140,7 +140,7 @@ Flags:
 
 2. 統計を収集します。
 
-    OLAPシナリオでは、TiDBオプティマイザーが最適な実行計画を生成できるように、以下のSQL文を実行して事前に統計情報を収集してください。**<a href="/system-variables.md#tidb_analyze_column_options-new-in-v830">`tidb_analyze_column_options`</a> `ALL`に設定してください。そうしないと、統計情報を収集するとクエリのパフォーマンスが大幅に低下する可能性があります。**
+    OLAPシナリオでは、TiDBオプティマイザが最適な実行計画を生成できるように、以下のSQL文を実行して事前に統計情報を収集してください。**<a href="/system-variables.md#tidb_analyze_column_options-new-in-v830">`tidb_analyze_column_options`</a> `ALL`に設定してください。そうしないと、統計情報を収集するとクエリのパフォーマンスが大幅に低下する可能性があります。**
 
     ```sql
     set global tidb_analyze_column_options='ALL';

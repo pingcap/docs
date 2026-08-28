@@ -91,17 +91,17 @@ DXF を使用して[`ADD INDEX`](/sql-statements/sql-statement-add-index.md)タ�
 
 ## タスクのスケジュール {#task-scheduling}
 
-デフォルトでは、DXFはすべてのTiDBノードを分散タスクの実行対象としてスケジュールします。v7.4.0以降、TiDB Self-Managedクラスターでは、 [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)設定することで、DXFが分散タスクの実行対象としてスケジュールするTiDBノードを制御できます。
+デフォルトでは、DXFはすべてのTiDBノードを分散タスクの実行対象としてスケジュールします。v7.4.0以降、TiDB Self-Managedクラスターでは、 [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)を設定することで、DXFが分散タスクの実行対象としてスケジュールするTiDBノードを制御できます。
 
 - バージョンv7.4.0からv8.0.0までの場合、 [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)のオプション値は`''`または`background`です。現在のクラスターに`tidb_service_scope = 'background'`のTiDBノードがある場合、DXFはこれらのノードにタスクの実行をスケジュールします。障害または通常のスケールインにより、現在のクラスターに`tidb_service_scope = 'background'` TiDBノードがない場合、DXFは`tidb_service_scope = ''`のノードにタスクの実行をスケジュールします。
 
 - v8.1.0以降では、 [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)任意の有効な値に設定できます。分散タスクが送信されると、タスクは現在接続されているTiDBノードの[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)値にバインドされ、DXFは同じ[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)値を持つTiDBノードにのみタスクの実行をスケジュールします。ただし、以前のバージョンとの設定互換性を保つため、分散タスクが`tidb_service_scope = ''`ノードに送信され、現在のクラスターに`tidb_service_scope = 'background'`のTiDBノードがある場合、DXFは`tidb_service_scope = 'background'`のTiDBノードにタスクの実行をスケジュールします。
 
-v8.1.0以降、タスク実行中に新しいノードが追加された場合、DXFは前述のルールに基づいて、新しいノードにタスクを実行するかどうかをスケジュールするかどうかを決定します。新しく追加されたノードにタスクを実行させたくない場合は、事前にそれらのノードに異なる[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)設定することをお勧めします。
+v8.1.0以降、タスク実行中に新しいノードが追加された場合、DXFは前述のルールに基づいて、新しいノードにタスクを実行するかどうかをスケジュールするかどうかを決定します。新しく追加されたノードにタスクを実行させたくない場合は、事前にそれらのノードに異なる[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)を設定することをお勧めします。
 
 > **Note:**
 >
-> - バージョンv7.4.0からv8.0.0まで、複数のTiDBノードを持つクラスターでは、2つ以上のTiDBノードで[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)から`background`設定することを強くお勧めします。この変数を1つのTiDBノードにのみ設定した場合、そのノードが再起動または障害を起こした場合、タスクは`tidb_service_scope = ''`が設定されているTiDBノードに再スケジュールされ、これらのTiDBノードで実行されているアプリケーションに影響を及ぼします。
+> - バージョンv7.4.0からv8.0.0まで、複数のTiDBノードを持つクラスターでは、2つ以上のTiDBノードで[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)を`background`に設定することを強くお勧めします。この変数を1つのTiDBノードにのみ設定した場合、そのノードが再起動または障害を起こした場合、タスクは`tidb_service_scope = ''`が設定されているTiDBノードに再スケジュールされ、これらのTiDBノードで実行されているアプリケーションに影響を及ぼします。
 > - 分散タスクの実行中、 [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)構成への変更は現在のタスクには適用されませんが、次のタスクからは適用されます。
 
 ## 実装原理 {#implementation-principles}

@@ -62,7 +62,7 @@ TiDB バージョン: 4.0.9
     - パイプライン化された悲観的ロックの成功率を向上させる[＃9086](https://github.com/tikv/tikv/pull/9086)
     - デフォルト値の`apply-max-batch-size`と`store-max-batch-size`を`1024` に変更します [＃9020](https://github.com/tikv/tikv/pull/9020)
     - `max-background-flushes`構成項目追加する [＃8947](https://github.com/tikv/tikv/pull/8947)
-    - パフォーマンスを向上させるためにデフォルトで`force-consistency-checks`無効にする[＃9029](https://github.com/tikv/tikv/pull/9029)
+    - パフォーマンスを向上させるためにデフォルトで`force-consistency-checks`を無効にする[＃9029](https://github.com/tikv/tikv/pull/9029)
     - リージョンサイズを`pd heartbeat worker`から`split check worker` にオフロードする [＃9185](https://github.com/tikv/tikv/pull/9185)
 
 - PD
@@ -172,7 +172,7 @@ TiDB バージョン: 4.0.9
     - リーダーが転送された後にFollower Readが古いデータを返す可能性があるバグを修正[＃9240](https://github.com/tikv/tikv/pull/9240)
     - 悲観的ロックで古い値が読み取られる可能性がある問題を修正 [＃9282](https://github.com/tikv/tikv/pull/9282)
     - リーダー転送後にレプリカ読み取りで古いデータが取得される可能性があるバグを修正[＃9240](https://github.com/tikv/tikv/pull/9240)
-    - プロファイリング後に`SIGPROF`受信すると発生するTiKVクラッシュの問題を修正 [＃9229](https://github.com/tikv/tikv/pull/9229)
+    - プロファイリング後に`SIGPROF`を受信すると発生するTiKVクラッシュの問題を修正 [＃9229](https://github.com/tikv/tikv/pull/9229)
 
 - PD
 

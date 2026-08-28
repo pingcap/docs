@@ -7,7 +7,7 @@ summary: TiDB データベースでの FLASHBACK DATABASE の使用方法を学�
 
 TiDB v6.4.0 では`FLASHBACK DATABASE`構文が導入されました。`FLASHBACK DATABASE`を使用すると、ガベージコレクション (GC) の有効期間内に`DROP`ステートメントによって削除されたデータベースとそのデータを復元できます。
 
-履歴データの保持期間は、システム変数[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)設定することで設定できます。デフォルト値は`10m0s`です。現在の`safePoint` 、つまりGCが実行された時点までを照会するには、次のSQL文を使用します。
+履歴データの保持期間は、システム変数[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)を設定することで設定できます。デフォルト値は`10m0s`です。現在の`safePoint` 、つまりGCが実行された時点までを照会するには、次のSQL文を使用します。
 
 ```sql
 SELECT * FROM mysql.tidb WHERE variable_name = 'tikv_gc_safe_point';

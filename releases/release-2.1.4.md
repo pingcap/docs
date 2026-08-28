@@ -5,11 +5,11 @@ summary: TiDB 2.1.4およびTiDB Ansible 2.1.4は、2019年2月15日にリリー
 
 # TiDB 2.1.4 リリースノート {#tidb-2-1-4-release-notes}
 
-2019年2月15日にTiDB 2.1.4がリリースされました。対応するTiDB Ansible 2.1.4もリリースされました。このリリースでは、TiDB 2.1.3と比較して、安定性、SQLオプティマイザー、統計、実行エンジンが大幅に改善されています。
+2019年2月15日にTiDB 2.1.4がリリースされました。対応するTiDB Ansible 2.1.4もリリースされました。このリリースでは、TiDB 2.1.3と比較して、安定性、SQLオプティマイザ、統計、実行エンジンが大幅に改善されています。
 
 ## TiDB {#tidb}
 
-- SQL オプティマイザー/エグゼキューター
+- SQL オプティマイザ/エグゼキューター
     - `VALUES`関数が FLOAT 型を正しく処理しない問題を修正[＃9223](https://github.com/pingcap/tidb/pull/9223)
     - 一部のケースで Float を String にキャストすると結果が間違ってしまう問題を修正[＃9227](https://github.com/pingcap/tidb/pull/9227)
     - `FORMAT`関数が一部のケースで誤った結果を出す問題を修正[＃9235](https://github.com/pingcap/tidb/pull/9235)

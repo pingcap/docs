@@ -23,13 +23,13 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
 
     <CustomContent platform="tidb">
 
-    `openssl`選択した場合は[自己署名証明書の生成](/generate-self-signed-certificates.md)を参照できます。
+    `openssl`を選択した場合は[自己署名証明書の生成](/generate-self-signed-certificates.md)を参照できます。
 
     </CustomContent>
 
     <CustomContent platform="tidb-cloud">
 
-    `openssl`選択した場合は[自己署名証明書の生成](https://docs.pingcap.com/tidb/stable/generate-self-signed-certificates)を参照できます。
+    `openssl`を選択した場合は[自己署名証明書の生成](https://docs.pingcap.com/tidb/stable/generate-self-signed-certificates)を参照できます。
 
     </CustomContent>
 
@@ -151,7 +151,7 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
 
 > **Note:**
 >
-> - v8.4.0以降、PD構成項目`cert-allowed-cn`複数の値をサポートします。必要に応じて、TiDB用構成項目`cluster-verify-cn`とその他のコンポーネント用構成項目`cert-allowed-cn`に、複数の`Common Name`設定できます。TiUPはコンポーネントのステータスを照会する際に別の識別子を使用することに注意してください。例えば、クラスター名が`test`の場合、 TiUPは`Common Name`として`test-client`を使用します。
+> - v8.4.0以降、PD構成項目`cert-allowed-cn`複数の値をサポートします。必要に応じて、TiDB用構成項目`cluster-verify-cn`とその他のコンポーネント用構成項目`cert-allowed-cn`に、複数の`Common Name`を設定できます。TiUPはコンポーネントのステータスを照会する際に別の識別子を使用することに注意してください。例えば、クラスター名が`test`の場合、 TiUPは`Common Name`として`test-client`を使用します。
 > - v8.3.0以前のバージョンでは、PD設定項目`cert-allowed-cn`には単一の値しか設定できません。そのため、すべての認証オブジェクトの`Common Name`同じ値に設定する必要があります。関連する設定例については、 [v8.3.0 ドキュメント](https://docs-archive.pingcap.com/tidb/v8.3/enable-tls-between-components/)を参照してください。
 
 - TiDB

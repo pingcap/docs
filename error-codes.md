@@ -21,7 +21,7 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
     リクエストによって使用されたメモリが、TiDBメモリ使用量のしきい値制限を超えています。
 
-    システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)構成して、単一の SQL ステートメントのメモリ制限を増やします。
+    システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を構成して、単一の SQL ステートメントのメモリ制限を増やします。
 
 - エラー番号: 8002
 

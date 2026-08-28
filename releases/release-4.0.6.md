@@ -40,7 +40,7 @@ TiDB バージョン: 4.0.6
     - プロセスリストのSQLダイジェストを追加する [＃19829](https://github.com/pingcap/tidb/pull/19829)
     - 自動コミット文の再試行ために悲観的トランザクションモードに切り替える [＃19796](https://github.com/pingcap/tidb/pull/19796)
     - `Str_to_date()` の`%r`と`%T`データ形式をサポート [＃19693](https://github.com/pingcap/tidb/pull/19693)
-    - `SELECT INTO OUTFILE`有効にするとファイル権限必要になります [＃19577](https://github.com/pingcap/tidb/pull/19577)
+    - `SELECT INTO OUTFILE`を有効にするとファイル権限が必要になります [＃19577](https://github.com/pingcap/tidb/pull/19577)
     - `stddev_pop`機能をサポートする [＃19541](https://github.com/pingcap/tidb/pull/19541)
     - `TiDB-Runtime`ダッシュボードを追加する [＃19396](https://github.com/pingcap/tidb/pull/19396)
     - `ALTER TABLE`アルゴリズム互換性を向上 [＃19364](https://github.com/pingcap/tidb/pull/19364)

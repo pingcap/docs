@@ -19,7 +19,7 @@ summary: 2018年3月30日にリリースされたTiDB 2.0 RC4では、MySQLと�
 - `CREATE VIEW`文の解析の問題を修正
 - 1つの文に`ORDER BY`と`LIMIT 0`両方が含まれている場合にpanic問題を修正しました
 - `DecodeBytes`の実行パフォーマンスを向上させる
-- 無駄な実行計画の作成を避けるために、 `LIMIT 0` ～ `TableDual`最適化します。
+- 無駄な実行計画の作成を避けるために、 `LIMIT 0` ～ `TableDual`を最適化します。
 
 ## PD {#pd}
 
