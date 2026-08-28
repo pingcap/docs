@@ -32,27 +32,19 @@ Grab the PrivateLink service name from the **Connect to {{{ .lake }}}** dialog, 
 
    ![Security Group](/media/tidb-cloud-lake/security-group.png)
 
-4. Go to the [VPC endpoints page](https://us-east-2.console.aws.amazon.com/vpcconsole/home?region=us-east-2#Endpoints) in the AWS Management Console.
+4. Goto AWS Console:
 
-    1. Click **Create endpoint**.
+   <https://us-east-2.console.aws.amazon.com/vpcconsole/home?region=us-east-2#Endpoints>:
 
-        ![Create Endpoint Button](/media/tidb-cloud-lake/create-endpoint-1.png)
+   Click `Create endpoint`:
 
-    2. In **Endpoint settings**, fill in a name tag if needed, and then select **Endpoint services that use NLBs and GWLBs**.
+   ![Create Endpoint Button](/media/tidb-cloud-lake/create-endpoint-1.png)
 
-        ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
+   ![Create Endpoint Sheet](/media/tidb-cloud-lake/create-endpoint-2.png)
 
-    3. In **Service settings**, paste the service name copied in step 2 into **Service name**, and then click **Verify service**.
+   Select the previously created security group `HTTPS`:
 
-    4. In **Network settings**, select your VPC.
-
-    5. In **Subnets**, select the availability zones and subnets where you want to create the VPC endpoint.
-
-    6. In **Security groups**, select the security group you prepared in step 3.
-
-        ![Create Endpoint SG](/media/tidb-cloud-lake/create-endpoint-3.png)
-
-    7. Click **Create endpoint**.
+   ![Create Endpoint SG](/media/tidb-cloud-lake/create-endpoint-3.png)
 
 5. Wait for the PrivateLink creation.
 
