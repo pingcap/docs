@@ -95,6 +95,8 @@ For more information, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.
 
 TiDB Cloud Clinic provides Top SQL information to help you visually analyze the most resource-intensive queries on a specific TiDB or TiKV node over a period of time. By default, Top SQL continuously collects CPU load data. For TiKV nodes, if TiKV network IO collection is enabled, you can also inspect network and logical I/O metrics, and analyze hotspots by `Query`, `Table`, `DB`, or `Region`. This helps you identify and troubleshoot performance issues across multiple resource dimensions, not just CPU.
 
+Detailed TiKV I/O dimensions are available for clusters running TiDB v8.5.9 or later.
+
 After you enable **TiKV Network IO collection (multi-dimensional)**, the **Enable detailed TiKV IO dimensions** switch appears in the Top SQL settings. Enable the switch and save the settings to replace the combined `Logical IO` sort dimension with `Logical Read`, `Logical Write`, and `Read IOPS`. The `CPU` and `Network` dimensions are unaffected. If you disable the switch, the three detailed I/O dimensions are hidden and the combined `Logical IO` dimension is restored.
 
 To view Top SQL, take the following steps:
