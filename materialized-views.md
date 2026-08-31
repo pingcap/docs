@@ -42,6 +42,18 @@ This section will describe how queries resolve to the stored result and any opti
 
 This section will describe cleanup behavior and any related objects. <!-- TODO: fill in from the spec. -->
 
+## System tables
+
+TiDB stores materialized view maintenance metadata in the `mysql` schema. The following tables are created for materialized view and materialized view log maintenance:
+
+- `mysql.tidb_mview_refresh_info`: Stores the current refresh scheduling information for each materialized view. This table is used internally by the automatic refresh scheduler.
+- `mysql.tidb_mlog_purge_info`: Stores the current purge scheduling information for each materialized view log. This table is used internally by the automatic purge scheduler.
+- [`mysql.tidb_mview_refresh_alert`](/mysql-schema/mysql-schema-tidb-mview-refresh-alert.md): Stores the current refresh alert level for each materialized view.
+- [`mysql.tidb_mview_refresh_hist`](/mysql-schema/mysql-schema-tidb-mview-refresh-hist.md): Stores materialized view refresh history for user queries.
+- [`mysql.tidb_mlog_purge_hist`](/mysql-schema/mysql-schema-tidb-mlog-purge-hist.md): Stores materialized view log purge history for user queries.
+
+The `_info` tables are internal maintenance metadata tables. Do not modify TiDB system tables directly.
+
 ## Limitations
 
 - <!-- TODO: list unsupported DDL, DML, replication, or optimizer cases from the spec. -->

@@ -885,6 +885,9 @@
       - `mysql` Schema
         - [Overview](/mysql-schema/mysql-schema.md)
         - [`tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md)
+        - [`tidb_mlog_purge_hist`](/mysql-schema/mysql-schema-tidb-mlog-purge-hist.md)
+        - [`tidb_mview_refresh_alert`](/mysql-schema/mysql-schema-tidb-mview-refresh-alert.md)
+        - [`tidb_mview_refresh_hist`](/mysql-schema/mysql-schema-tidb-mview-refresh-hist.md)
         - [`user`](/mysql-schema/mysql-schema-user.md)
       - INFORMATION_SCHEMA
         - [Overview](/information-schema/information-schema.md)
