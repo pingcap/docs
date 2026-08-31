@@ -5499,9 +5499,14 @@ SHOW WARNINGS;
 - Range: `[0, 2147483647]`
 - This variable controls the iteration of the optimizer's estimation logic. After changing the value of this variable, the estimation logic of the optimizer will change greatly. Currently, `0` is the only valid value. It is not recommended to set it to other values.
 
-### `tidb_paging_size_bytes` <span class="version-mark">New in v9.0.0</span>
+### `tidb_paging_size_bytes` <span class="version-mark">New in v9.0.0 and TiDB-X-CLOUD.202603</span>
 
-- Scope: SESSION | GLOBAL
+>**Note:**
+>
+> This variable is not supported on TiDB Cloud Starter.
+
+
+- Scope: SESSION | GLOBAL for TiDB Self-Managed; SESSION for TiDB Cloud Essential and Premium
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
