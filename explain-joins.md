@@ -1,6 +1,6 @@
 ---
 title: Explain Statements That Use Joins
-summary: TiDB のEXPLAINステートメントによって返される実行計画情報について学習します。
+summary: TiDB のEXPLAIN文によって返される実行計画情報について学習します。
 ---
 
 # テーブル結合を使用する文を説明する {#explain-statements-that-use-joins}

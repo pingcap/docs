@@ -23,12 +23,12 @@ TiDBバージョン：8.5.4
 
     詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/sql-statement-distribute-table)を参照してください。
 
-- DDL ステートメントに埋め込まれた`ANALYZE`をサポート [#57948](https://github.com/pingcap/tidb/issues/57948) @[terry1purcell](https://github.com/terry1purcell) @[AilinKid](https://github.com/AilinKid)
+- DDL文に埋め込まれた`ANALYZE`をサポート [#57948](https://github.com/pingcap/tidb/issues/57948) @[terry1purcell](https://github.com/terry1purcell) @[AilinKid](https://github.com/AilinKid)
 
-    この機能は、以下の種類のDDLステートメントに適用されます。
+    この機能は、以下の種類のDDL文に適用されます。
 
-    - 新しいインデックスを作成するDDLステートメント： [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
-    - 既存のインデックスを再編成するDDLステートメント： [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)および[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
+    - 新しいインデックスを作成するDDL文： [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
+    - 既存のインデックスを再編成するDDL文： [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)および[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
 
     この機能を有効にすると、TiDB は新規または再編成されたインデックスがユーザーに表示される前に`ANALYZE` (統計情報収集) 操作を自動的に実行します。これにより、インデックスの作成または再編成後に一時的に利用できなくなる統計情報によって、オプティマイザの推定値が不正確になったり、実行計画が変更されたりするのを防ぎます。
 
@@ -71,10 +71,10 @@ TiDBバージョン：8.5.4
 | 変数                                                                                                                                                     | 変更の種類  | 説明                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [`tidb_mpp_store_fail_ttl`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_mpp_store_fail_ttl)                                               | 変更     | デフォルト値を`60s`から`0s`に変更します。これにより、クエリの失敗を防ぐための遅延が不要になるため、TiDB は新しく起動したTiFlashノードにクエリを送信する前に待機する必要がなくなります。 [#61826](https://github.com/pingcap/tidb/issues/61826) [@genliqi](https://github.com/gengliqi)                                                                                                                                                                                                                    |
-| [`tidb_replica_read`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_replica_read-new-in-v40)                                                | 変更     | バージョン8.5.4以降、この変数は読み取り専用のSQLステートメントにのみ適用されます。これにより、データ読み取りの安全性が向上し、他の機能との重複が軽減されます。 [#62856](https://github.com/pingcap/tidb/issues/62856) [@you06](https://github.com/you06)                                                                                                                                                                                                                                            |
+| [`tidb_replica_read`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_replica_read-new-in-v40)                                                | 変更     | バージョン8.5.4以降、この変数は読み取り専用のSQL文にのみ適用されます。これにより、データ読み取りの安全性が向上し、他の機能との重複が軽減されます。 [#62856](https://github.com/pingcap/tidb/issues/62856) [@you06](https://github.com/you06)                                                                                                                                                                                                                                            |
 | [`tidb_opt_enable_no_decorrelate_in_select`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_enable_no_decorrelate_in_select-new-in-v854) | 新しく追加された | `SELECT`リスト内のサブクエリの関連付けを解除するかどうかを制御します。デフォルト値は`OFF`です。 [#51116](https://github.com/pingcap/tidb/issues/51116) [@terry1purcell](https://github.com/terry1purcell)                                                                                                                                                                                                                                                         |
 | [`tidb_opt_enable_semi_join_rewrite`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_enable_semi_join_rewrite-new-in-v854)               | 新しく追加された | `EXISTS`サブクエリを書き換えるかどうかを制御します。デフォルト値は`OFF`です。 [#44850](https://github.com/pingcap/tidb/issues/44850) [@terry1purcell](https://github.com/terry1purcell)                                                                                                                                                                                                                                                                  |
-| [`tidb_stats_update_during_ddl`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_stats_update_during_ddl-new-in-v854)                         | 新しく追加された | [DDLステートメントに埋め込まれた`ANALYZE`](https://docs.pingcap.com/tidb/v8.5/ddl_embedded_analyze) 。デフォルト値は`OFF`です。有効にすると、 `ADD INDEX` DDL ステートメントは実行中に新しいインデックスの統計情報を収集し、オプティマイザがインデックスの追加直後にインデックスを使用できるようにします。この変数を有効にすると、大きなテーブルにインデックスを追加する際の DDL 実行時間が長くなる可能性があることに注意してください。 [#57948](https://github.com/pingcap/tidb/issues/57948) [@terry1purcell](https://github.com/terry1purcell) [@AilinKid](https://github.com/AilinKid) |
+| [`tidb_stats_update_during_ddl`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_stats_update_during_ddl-new-in-v854)                         | 新しく追加された | [DDL文に埋め込まれた`ANALYZE`](https://docs.pingcap.com/tidb/v8.5/ddl_embedded_analyze) 。デフォルト値は`OFF`です。有効にすると、 `ADD INDEX` DDL文は実行中に新しいインデックスの統計情報を収集し、オプティマイザがインデックスの追加直後にインデックスを使用できるようにします。この変数を有効にすると、大きなテーブルにインデックスを追加する際の DDL 実行時間が長くなる可能性があることに注意してください。 [#57948](https://github.com/pingcap/tidb/issues/57948) [@terry1purcell](https://github.com/terry1purcell) [@AilinKid](https://github.com/AilinKid) |
 
 ### コンフィグレーションパラメータ {#configuration-parameters}
 
@@ -140,7 +140,7 @@ TiDBバージョン：8.5.4
 - TiDB
 
     - `use index`が`tidb_isolation_read_engines`に設定されている場合、 `tiflash`ヒントが [#60869](https://github.com/pingcap/tidb/issues/60869) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - `max_execution_time`が`SELECT FOR UPDATE`ステートメントに適用されない問題を修正 [#62960](https://github.com/pingcap/tidb/issues/62960) @[ekexium](https://github.com/ekexium)
+    - `max_execution_time`が`SELECT FOR UPDATE`文に適用されない問題を修正 [#62960](https://github.com/pingcap/tidb/issues/62960) @[ekexium](https://github.com/ekexium)
     - 月や年をまたいだ行数の推定値が大幅に過大評価される問題を修正 [#50080](https://github.com/pingcap/tidb/issues/50080) @[terry1purcell](https://github.com/terry1purcell)
     - プリペアドステートメントにおける`Decimal`タイプの処理が MySQL と矛盾する問題を修正 [#62602](https://github.com/pingcap/tidb/issues/62602) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
     - `TRUNCATE()`関数内の短いパスが正しく処理されない問題を修正しました [#57608](https://github.com/pingcap/tidb/issues/57608) @[xzhangxian1008](https://github.com/xzhangxian1008)
@@ -148,7 +148,7 @@ TiDBバージョン：8.5.4
     - `INFORMATION_SCHEMA`テーブルに対して正規表現を使用したクエリが誤った結果を返す可能性がある問題を修正しました [#62347](https://github.com/pingcap/tidb/issues/62347) @[River2000i](https://github.com/River2000i)
     - TiDBがPDからタイムスタンプを取得できなかった場合にエラーを返さない問題を修正します [#58871](https://github.com/pingcap/tidb/issues/58871) @[joechenrh](https://github.com/joechenrh)
     - `MODIFY COLUMN`ステートメントの実行中に、所有者 TiDB インスタンスと非所有者 TiDB インスタンス間でクエリ結果が異なる問題を修正します [#60264](https://github.com/pingcap/tidb/issues/60264) @[tangenta](https://github.com/tangenta)
-    - `ADMIN ALTER DDL JOBS`ステートメントでパラメータを動的に変更した後に誤ったパラメータ値が表示される問題を修正します [#63201](https://github.com/pingcap/tidb/issues/63201) @[fzzf678](https://github.com/fzzf678)
+    - `ADMIN ALTER DDL JOBS`文でパラメータを動的に変更した後に誤ったパラメータ値が表示される問題を修正します [#63201](https://github.com/pingcap/tidb/issues/63201) @[fzzf678](https://github.com/fzzf678)
     - トランザクション内でインデックスを追加する際にGCセーフポイントが進まない問題を修正 [#62424](https://github.com/pingcap/tidb/issues/62424) @[wjhuang2016](https://github.com/wjhuang2016)
     - 過度に大きな SST ファイルを L0 に取り込むとフロー制御がトリガーされる問題を修正 [#63466](https://github.com/pingcap/tidb/issues/63466) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - CPUとメモリの比率が1:2の場合にグローバルソートがブロックされる問題を修正 [#60951](https://github.com/pingcap/tidb/issues/60951) @[wjhuang2016](https://github.com/wjhuang2016)
@@ -167,7 +167,7 @@ TiDBバージョン：8.5.4
     - グローバルインデックスが特定の`ALTER PARTITION`操作中に誤ったデータを読み取る可能性がある問題を修正 [#64084](https://github.com/pingcap/tidb/pull/64084) @[mjonss](https://github.com/mjonss)
     - 場合によってはグローバルインデックスが誤った結果を返す可能性がある問題を修正 [#61083](https://github.com/pingcap/tidb/issues/61083) @[Defined2014](https://github.com/Defined2014)
     - `character_set_results`が誤った文字を置き換えるのではなく切り捨ててしまう問題を修正 [#61085](https://github.com/pingcap/tidb/issues/61085) @[xhebox](https://github.com/xhebox)
-    - `ADD COLUMN`と`UPDATE`ステートメントを同時に実行するとエラーが発生する可能性がある問題を修正しました [#60047](https://github.com/pingcap/tidb/issues/60047) @[L-maple](https://github.com/L-maple)
+    - `ADD COLUMN`と`UPDATE`文を同時に実行するとエラーが発生する可能性がある問題を修正しました [#60047](https://github.com/pingcap/tidb/issues/60047) @[L-maple](https://github.com/L-maple)
     - マージ結合時にコスト計算時にフィルタ条件が省略される可能性がある問題を修正 [#62917](https://github.com/pingcap/tidb/issues/62917) @[qw4990](https://github.com/qw4990)
 
 - PD

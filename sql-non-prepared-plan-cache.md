@@ -107,7 +107,7 @@ After you enable this feature, the optimizer quickly evaluates the query. If it 
 
 非プリペアドプランキャッシュを有効にした後、 `EXPLAIN FORMAT='plan_cache' SELECT ...`ステートメントを実行して、クエリがキャッシュにヒットするかどうかを確認できます。キャッシュにヒットできないクエリの場合、システムは警告でその理由を返します。
 
-`FORMAT='plan_cache'`追加しないと、 `EXPLAIN`ステートメントはキャッシュにヒットしないことに注意してください。
+`FORMAT='plan_cache'`追加しないと、 `EXPLAIN`文はキャッシュにヒットしないことに注意してください。
 
 クエリがキャッシュにヒットするかどうかを確認するには、次の`EXPLAIN FORMAT='plan_cache'`ステートメントを実行します。
 

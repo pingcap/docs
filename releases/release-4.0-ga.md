@@ -74,7 +74,7 @@ TiDB バージョン: 4.0.0
     - TiKV から不明なエラーメッセージを受信したときにシステムパニックが発生する問題を修正 [＃17380](https://github.com/pingcap/tidb/pull/17380)
     - `key`パーティションテーブルを作成するときに誤った処理ロジックによって発生するシステムパニックを修正しました。 [＃17242](https://github.com/pingcap/tidb/pull/17242)
     - オプティマイザ処理ロジック誤りにより間違った`Index Merge Join`プランが選択される問題を修正 [＃17365](https://github.com/pingcap/tidb/pull/17365)
-    - Grafana の`SELECT`ステートメントの`duration`監視メトリックが不正確であるという問題を修正しました [＃16561](https://github.com/pingcap/tidb/pull/16561)
+    - Grafana の`SELECT`文の`duration`監視メトリックが不正確であるという問題を修正しました [＃16561](https://github.com/pingcap/tidb/pull/16561)
     - システムエラーが発生したときにGCワーカーがブロックされる問題を修正[＃16915](https://github.com/pingcap/tidb/pull/16915)
     - ブール列の制約`UNIQUE`が比較で誤った結果をもたらす問題を修正 [＃17306](https://github.com/pingcap/tidb/pull/17306)
     - `tidb_opt_agg_push_down`が有効になっていて、集計関数がパーティションテーブルをプッシュダウンしたときに、誤った処理ロジックによって発生するシステムパニックを修正しました。 [＃17328](https://github.com/pingcap/tidb/pull/17328)
@@ -87,7 +87,7 @@ TiDB バージョン: 4.0.0
 
     - 検索ログ機能における正規表現のマッチング動作が他のコンポーネントと一致しない問題を修正しました
     - デフォルトで遅延処理の最適化`Raft Compact Log Command`を無効にすることで、ノードが大量のデータを書き込むときに過剰な再起動時間がかかる問題を修正しました。
-    - 一部のシナリオで TiDB が`DROP DATABASE`ステートメントを誤って処理するため、システムの起動に失敗する問題を修正しました。
+    - 一部のシナリオで TiDB が`DROP DATABASE`文を誤って処理するため、システムの起動に失敗する問題を修正しました。
     - `Server_info`の CPU 情報を収集する方法が他のコンポーネントと異なる問題を修正しました
     - `batch coprocessor`が有効な場合に`Query`文を実行するとエラー`Too Many Pings`が報告される問題を修正しました
     - TiFlashが関連情報を報告しないため、ダッシュボードに正しい`deploy path`情報が表示されない問題を修正しました。

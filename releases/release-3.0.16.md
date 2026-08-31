@@ -16,7 +16,7 @@ TiDB バージョン: 3.0.16
     - ハッシュパーティションプルーニングの`is null`フィルタ条件をサポート [＃17308](https://github.com/pingcap/tidb/pull/17308)
     - 複数のリージョンリクエストが同時に失敗した場合にSQLタイムアウトの問題を回避するために、各リージョンに異なる`Backoffer`秒を割り当てます[＃17583](https://github.com/pingcap/tidb/pull/17583)
     - 新しく追加されたパーティション個別のリージョンを分割します [＃17668](https://github.com/pingcap/tidb/pull/17668)
-    - `delete`または`update`ステートメントから生成されたフィードバックを破棄します [＃17841](https://github.com/pingcap/tidb/pull/17841)
+    - `delete`または`update`文から生成されたフィードバックを破棄します [＃17841](https://github.com/pingcap/tidb/pull/17841)
     - 将来の Go バージョンとの互換性を保つために、 `json.Unmarshal` in `job.DecodeArgs`の使用法を修正します。 [＃17887](https://github.com/pingcap/tidb/pull/17887)
     - スロークエリログとステートメントサマリーテーブルから機密情報を削除します [＃18128](https://github.com/pingcap/tidb/pull/18128)
     - MySQLの動作を`DateTime`区切り文字に一致させる [＃17499](https://github.com/pingcap/tidb/pull/17499)

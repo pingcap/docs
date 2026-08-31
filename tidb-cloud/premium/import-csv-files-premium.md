@@ -14,7 +14,7 @@ summary: Amazon S3またはAlibaba Cloud Object Storage Service（OSS）からCS
 
 ## 制限事項 {#limitations}
 
-データの一貫性を確保するため、 TiDB Cloud Premium では、CSV ファイルを空のテーブルにのみインポートできます。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントの手順に従って一時的な空のテーブルにデータをインポートし、 `INSERT SELECT`ステートメントを使用してデータを対象の既存のテーブルにコピーします。
+データの一貫性を確保するため、 TiDB Cloud Premium では、CSV ファイルを空のテーブルにのみインポートできます。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントの手順に従って一時的な空のテーブルにデータをインポートし、 `INSERT SELECT`文を使用してデータを対象の既存のテーブルにコピーします。
 
 ## ステップ1. CSVファイルを準備する {#step-1-prepare-the-csv-files}
 
@@ -48,7 +48,7 @@ CSVファイルにはスキーマ情報が含まれていないため、CSVフ�
 
         [ステップ1](#step-1-prepare-the-csv-files)の命名規則に従ってCSVファイルが作成されている場合、データベーススキーマファイルはデータインポートにおいてオプションです。そうでない場合は、データベーススキーマファイルは必須です。
 
-        各データベーススキーマファイルは`${db_name}-schema-create.sql`形式である必要があり、 `CREATE DATABASE` DDLステートメントが含まれている必要があります。このファイルを使用すると、 TiDB Cloud Premiumは、データのインポート時にデータを格納するための`${db_name}`データベースを作成します。
+        各データベーススキーマファイルは`${db_name}-schema-create.sql`形式である必要があり、 `CREATE DATABASE` DDL文が含まれている必要があります。このファイルを使用すると、 TiDB Cloud Premiumは、データのインポート時にデータを格納するための`${db_name}`データベースを作成します。
 
         例えば、次のステートメントを含む`mydb-schema-create.sql`ファイルを作成すると、 TiDB Cloud Premium はデータをインポートする際に`mydb`データベースを作成します。
 
@@ -60,7 +60,7 @@ CSVファイルにはスキーマ情報が含まれていないため、CSVフ�
 
         CSVファイルが保存されているAmazon S3またはAlibaba Cloud Object Storage Serviceディレクトリにテーブルスキーマファイルを含めない場合、 TiDB Cloud Premiumはデータのインポート時に対応するテーブルを作成しません。
 
-        各テーブルスキーマファイルは`${db_name}.${table_name}-schema.sql`形式で、 `CREATE TABLE` DDLステートメントを含んでいる必要があります。このファイルを使用すると、 TiDB Cloud Premiumは、データのインポート時に`${table_name}`データベースに`${db_name}`テーブルを作成します。
+        各テーブルスキーマファイルは`${db_name}.${table_name}-schema.sql`形式で、 `CREATE TABLE` DDL文を含んでいる必要があります。このファイルを使用すると、 TiDB Cloud Premiumは、データのインポート時に`${table_name}`データベースに`${db_name}`テーブルを作成します。
 
         例えば、次のステートメントを含む`mydb.mytable-schema.sql`ファイルを作成すると、 TiDB Cloud Premium はデータをインポートする際に`mytable`データベースに`mydb`テーブルを作成します。
 
@@ -73,7 +73,7 @@ CSVファイルにはスキーマ情報が含まれていないため、CSVフ�
 
         > **Note:**
         >
-        > `${db_name}.${table_name}-schema.sql`ファイルには、単一の DDL ステートメントのみを含める必要があります。ファイルに複数の DDL ステートメントが含まれている場合、最初のステートメントのみが有効になります。
+        > `${db_name}.${table_name}-schema.sql`ファイルには、単一の DDL文のみを含める必要があります。ファイルに複数の DDL文が含まれている場合、最初のステートメントのみが有効になります。
 
 ## ステップ3．アカウント間アクセスの設定 {#step-3-configure-cross-account-access}
 

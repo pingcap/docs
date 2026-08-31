@@ -15,7 +15,7 @@ TiCDCの新しいアーキテクチャは、TiDBクラスタv7.5.0以降をサ�
 
 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)は、[論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)と[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)という2つのデータインポートモードを提供します。このセクションでは、これらのモードと TiCDC の互換性、およびクラスター内でTiDB Lightningと TiCDC を一緒に使用する手順について説明します。
 
-論理インポートモードでは、 TiDB Lightning はSQL ステートメントを実行してデータをインポートします。このモードは TiCDC と互換性があります。TiDB Lightning の論理インポートモードを TiCDC でデータレプリケーションに使用するには、次の手順を実行します。
+論理インポートモードでは、 TiDB Lightning はSQL文を実行してデータをインポートします。このモードは TiCDC と互換性があります。TiDB Lightning の論理インポートモードを TiCDC でデータレプリケーションに使用するには、次の手順を実行します。
 
 1. チェンジフィードを作成します。詳細については、 [レプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)を参照してください。
 2. TiDB Lightningを起動し、論理インポートモードを使用してデータをインポートします。詳細については、 [論理インポートモードを使用する](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md)を参照してください。
@@ -34,7 +34,7 @@ TiCDCの新しいアーキテクチャは、TiDBクラスタv7.5.0以降をサ�
 
 ## TiFlashとの互換性 {#compatibility-with-tiflash}
 
-現在、TiCDC を使用してテーブルを下流の TiDB クラスタにレプリケートする場合、テーブルのTiFlashレプリカを作成することはサポートされていません。つまり、TiCDC は、次のようなTiFlash関連の DDL ステートメントのレプリケートをサポートしていません。
+現在、TiCDC を使用してテーブルを下流の TiDB クラスタにレプリケートする場合、テーブルのTiFlashレプリカを作成することはサポートされていません。つまり、TiCDC は、次のようなTiFlash関連の DDL文のレプリケートをサポートしていません。
 
 - `ALTER TABLE table_name SET TIFLASH REPLICA count;`
 - `ALTER DATABASE db_name SET TIFLASH REPLICA count;`

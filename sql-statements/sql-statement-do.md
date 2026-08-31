@@ -29,7 +29,7 @@ Expression ::=
 
 ## 例 {#examples}
 
-この SELECT ステートメントは一時停止しますが、結果セットも生成します。
+この SELECT文は一時停止しますが、結果セットも生成します。
 
 ```sql
 mysql> SELECT SLEEP(5);

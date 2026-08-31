@@ -40,7 +40,7 @@ CREATE TABLE t (a BIGINT /*T![auto_rand] AUTO_RANDOM(6) */, b VARCHAR(255), PRIM
 CREATE TABLE t (a BIGINT  /*T![auto_rand] AUTO_RANDOM(5, 54) */, b VARCHAR(255), PRIMARY KEY (a));
 ```
 
-`INSERT`ステートメントを実行すると、次のようになります。
+`INSERT`文を実行すると、次のようになります。
 
 - `AUTO_RANDOM`列の値を明示的に指定すると、そのままテーブルに挿入されます。
 - `AUTO_RANDOM`列の値を明示的に指定しない場合は、TiDB によってランダムな値が生成され、テーブルに挿入されます。
@@ -140,7 +140,7 @@ TiDB によって自動的に割り当てられる`AUTO_RANDOM(S, R)`列の値�
 
 `AUTO_RANDOM`列に暗黙的に割り当てられた値は`last_insert_id()`影響します。TiDB が最後に暗黙的に割り当てた ID を取得するには、 `SELECT last_insert_id ()`ステートメントを使用できます。
 
-列番号が`AUTO_RANDOM`であるテーブルのシャードビット数を確認するには、 `SHOW CREATE TABLE`ステートメントを実行します。また、 `information_schema.tables`システムテーブルの列番号`TIDB_ROW_ID_SHARDING_INFO`で、 `PK_AUTO_RANDOM_BITS=x`のモードの値を確認することもできます`x`はシャードビット数です。
+列番号が`AUTO_RANDOM`であるテーブルのシャードビット数を確認するには、 `SHOW CREATE TABLE`文を実行します。また、 `information_schema.tables`システムテーブルの列番号`TIDB_ROW_ID_SHARDING_INFO`で、 `PK_AUTO_RANDOM_BITS=x`のモードの値を確認することもできます`x`はシャードビット数です。
 
 `AUTO_RANDOM`列のテーブルを作成した後、 `SHOW WARNINGS`を使用して最大暗黙的割り当て時間を表示できます。
 

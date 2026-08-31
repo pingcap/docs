@@ -141,7 +141,7 @@ TiDB バージョン: 5.1.1
 
         - 新しい照合順序機能のサポートを修正[＃2301](https://github.com/pingcap/tiflow/issues/2301)
         - 実行時に共有マップへの非同期アクセスによりpanicが発生する可能性がある問題を修正[＃2300](https://github.com/pingcap/tiflow/pull/2300)
-        - DDL ステートメント実行中にオーナーがクラッシュした場合に発生する可能性のある DDL 損失の問題を修正しました。 [＃2290](https://github.com/pingcap/tiflow/pull/2290)
+        - DDL文実行中にオーナーがクラッシュした場合に発生する可能性のある DDL 損失の問題を修正しました。 [＃2290](https://github.com/pingcap/tiflow/pull/2290)
         - TiDB のロックを早期に解決しようとする問題を修正[＃2188](https://github.com/pingcap/tiflow/issues/2188)
         - テーブル移行直後に TiCDC ノードが強制終了した場合にデータ損失が発生する可能性があるバグを修正[＃2033](https://github.com/pingcap/tiflow/pull/2033)
         - `changefeed update` on `--sort-dir`と`--start-ts` の処理ロジックを修正 [＃1921](https://github.com/pingcap/tiflow/pull/1921)

@@ -1,6 +1,6 @@
 ---
 title: Get Started with Chat2Query API
-summary: 指示を提供することで、 TiDB Cloud Chat2Query API を使用して AI で SQL ステートメントを生成および実行する方法を学びます。
+summary: 指示を提供することで、 TiDB Cloud Chat2Query API を使用して AI で SQL文を生成および実行する方法を学びます。
 ---
 
 # Chat2Query APIを使い始める {#get-started-with-chat2query-api}
@@ -45,7 +45,7 @@ API キーを作成するには、次の手順を実行します。
 
 3. **Create API Key**ダイアログで説明を入力し、API キーの次のいずれかのロールを選択します。
 
-    - `Chat2Query Admin` : API キーがデータ サマリーを管理し、提供された指示に基づいて SQL ステートメントを生成し、任意の SQL ステートメントを実行できるようにします。
+    - `Chat2Query Admin` : API キーがデータ サマリーを管理し、提供された指示に基づいて SQL文を生成し、任意の SQL文を実行できるようにします。
 
     - `Chat2Query Data Summary Management Role` : API キーによるデータ サマリーの生成と更新のみを許可します。
 
@@ -53,9 +53,9 @@ API キーを作成するには、次の手順を実行します。
         >
         > Chat2Query APIの場合、データサマリーとは、AIによるデータベースの分析結果であり、データベースの説明、テーブルの説明、列の説明などが含まれます。データベースのデータサマリーを生成することで、SQL文を生成する際に、指示を与えることでより正確なレスポンスを得ることができます。
 
-    - `Chat2Query SQL ReadOnly` : API キーは提供された指示に基づいて SQL ステートメントを生成し、 `SELECT` SQL ステートメントを実行することのみを許可します。
+    - `Chat2Query SQL ReadOnly` : API キーは提供された指示に基づいて SQL文を生成し、 `SELECT` SQL文を実行することのみを許可します。
 
-    - `Chat2Query SQL ReadWrite` : API キーが提供された指示に基づいて SQL ステートメントを生成し、任意の SQL ステートメントを実行することを許可します。
+    - `Chat2Query SQL ReadWrite` : API キーが提供された指示に基づいて SQL文を生成し、任意の SQL文を実行することを許可します。
 
 4. デフォルトでは、APIキーに有効期限はありません。キーの有効期限を設定する場合は、 **Expires in**をクリックし、時間単位（ `Minutes` 、 `Days` 、または`Months` ）を選択して、希望する数値を入力してください。
 
@@ -125,12 +125,12 @@ TiDB Cloud Data Serviceは、次の Chat2Query v3 エンドポイントと v2 �
 | PUT | `/v3/sessions/{session_id}`                                       | このエンドポイントは特定のセッションを更新します。                                                                                                                |
 | PUT | `/v3/sessions/{session_id}/reset`                                 | このエンドポイントは特定のセッションをリセットします。                                                                                                              |
 | POST | `/v3/sessions/{session_id}/chat2data`                             | このエンドポイントは、人工知能を用いて特定のセッション内でSQL文を生成・実行します。詳細については、 [セッションを使用してマルチラウンドの Chat2Query を開始する](/tidb-cloud/use-chat2query-sessions.md)をご覧ください。 |
-| POST | `/v3/chat2data`                                                   | このエンドポイントを使用すると、データ サマリー ID と指示を提供することで、人工知能を使用して SQL ステートメントを生成および実行できます。                                                               |
+| POST | `/v3/chat2data`                                                   | このエンドポイントを使用すると、データ サマリー ID と指示を提供することで、人工知能を使用して SQL文を生成および実行できます。                                                               |
 | POST | `/v3/refineSql`                                                   | このエンドポイントは、人工知能を使用して既存の SQL クエリを改良します。                                                                                                   |
 | POST | `/v3/suggestQuestions`                                            | このエンドポイントは、提供されたデータの概要に基づいて質問を提案します。                                                                                                     |
 | POST | `/v2/dataSummaries`                                               | このエンドポイントは、人工知能を使用して、データベーススキーマ、テーブルスキーマ、および列スキーマのデータ サマリーを生成します。                                                                      |
 | GET | `/v2/dataSummaries`                                               | このエンドポイントはすべてのデータ概要を取得します。                                                                                                               |
-| POST | `/v2/chat2data`                                                   | このエンドポイントを使用すると、データ サマリー ID と指示を提供することで、人工知能を使用して SQL ステートメントを生成および実行できます。                                                               |
+| POST | `/v2/chat2data`                                                   | このエンドポイントを使用すると、データ サマリー ID と指示を提供することで、人工知能を使用して SQL文を生成および実行できます。                                                               |
 | GET | `/v2/jobs/{job_id}`                                               | このエンドポイントを使用すると、特定のデータ サマリー生成ジョブのステータスを照会できます。                                                                                           |
 
 `/v3/chat2data`と`/v2/chat2data`を呼び出す手順は同じです。以下のセクションでは、 `/v3/chat2data`を例に挙げてその呼び出し方法を説明します。
@@ -240,7 +240,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region
 
 #### 3. `/v3/chat2data`を呼び出してSQL文を生成し実行する {#3-generate-and-execute-sql-statements-by-calling-v3chat2data}
 
-データベースのデータ概要が準備できたら、クラスター ID、データベース名、質問を指定して`/v3/chat2data`を呼び出して SQL ステートメントを生成および実行できます。
+データベースのデータ概要が準備できたら、クラスター ID、データベース名、質問を指定して`/v3/chat2data`を呼び出して SQL文を生成および実行できます。
 
 例えば：
 
@@ -351,7 +351,7 @@ TiDB Cloud Data Serviceは、次の Chat2Query v1 エンドポイントを提供
 
 | メソッド | エンドポイント              | 説明                                                                       |
 | -- | --------------- | ------------------------------------------------------------------------ |
-| POST | `/v1/chat2data` | このエンドポイントを使用すると、ターゲットデータベース名と指示を指定して、人工知能を使用して SQL ステートメントを生成および実行できます。 |
+| POST | `/v1/chat2data` | このエンドポイントを使用すると、ターゲットデータベース名と指示を指定して、人工知能を使用して SQL文を生成および実行できます。 |
 
 `/v1/chat2data`エンドポイントを直接呼び出して、SQL文を生成・実行できます。 `/v2/chat2data`と比較すると、 `/v1/chat2data`はレスポンスが速くなりますが、パフォーマンスは低くなります。
 
@@ -361,7 +361,7 @@ TiDB Cloudは、エンドポイントの呼び出しを支援するためのコ�
 
 - プレースホルダー`${PUBLIC_KEY}`と`${PRIVATE_KEY}` API キーに置き換えます。
 - `<your table name, optional>`プレースホルダーをクエリ対象のテーブル名に置き換えます。テーブル名を指定しない場合、AI はデータベース内のすべてのテーブルをクエリします。
-- `<your instruction>`プレースホルダーを、AI に SQL ステートメントを生成して実行してほしい命令に置き換えます。
+- `<your instruction>`プレースホルダーを、AI に SQL文を生成して実行してほしい命令に置き換えます。
 
 > **Note:**
 >

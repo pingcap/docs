@@ -275,7 +275,7 @@ CDC000005.csv
 - `Schema` : スキーマ名。
 - `Version` :ストレージシンクのプロトコル バージョン。
 - `TableVersion` : テーブルバージョン。
-- `Query` : DDL ステートメント。
+- `Query` : DDL文。
 - `Type` : DDL タイプ。
 - `TableColumns` : 1つ以上のマップの配列。各マップはソーステーブル内の列を表します。
     - `ColumnName` :カラム名。

@@ -5,7 +5,7 @@ summary: TiDB Index Advisorを使用してクエリパフォーマンスを最�
 
 # インデックスアドバイザー {#index-advisor}
 
-TiDB v8.5.0では、クエリパフォーマンスを向上させるインデックスを推奨することでワークロードを最適化するインデックスアドバイザー機能が導入されました。新しいSQLステートメント`RECOMMEND INDEX`を使用すると、単一のクエリまたはワークロード全体に対してインデックスの推奨事項を生成できます。評価のために物理的にインデックスを作成するというリソース集約型のプロセスを回避するために、TiDBは[仮説インデックス](#hypothetical-indexes)サポートしており、これは具体化されていない論理インデックスです。
+TiDB v8.5.0では、クエリパフォーマンスを向上させるインデックスを推奨することでワークロードを最適化するインデックスアドバイザー機能が導入されました。新しいSQL文`RECOMMEND INDEX`を使用すると、単一のクエリまたはワークロード全体に対してインデックスの推奨事項を生成できます。評価のために物理的にインデックスを作成するというリソース集約型のプロセスを回避するために、TiDBは[仮説インデックス](#hypothetical-indexes)サポートしており、これは具体化されていない論理インデックスです。
 
 > **Note:**
 >
@@ -15,9 +15,9 @@ TiDB v8.5.0では、クエリパフォーマンスを向上させるインデッ
 
 [新しい指標を推奨する](#recommend-indexes-using-the-recommend-index-statement)ことに加えて、インデックスアドバイザーは効率的なインデックス管理を確保するために[非アクティブなインデックスの削除](#remove-unused-indexes)も提案します。
 
-## `RECOMMEND INDEX`ステートメントを使用してインデックスを推奨します。 {#recommend-indexes-using-the-recommend-index-statement}
+## `RECOMMEND INDEX`文を使用してインデックスを推奨します。 {#recommend-indexes-using-the-recommend-index-statement}
 
-TiDB では、インデックスアドバイザ タスク用の`RECOMMEND INDEX` SQL ステートメントが導入されました。 `RUN`サブコマンドは、過去のワークロードを分析し、推奨事項をシステムテーブルに保存します。 `FOR`オプションを使用すると、以前に実行されていない特定の SQL ステートメントを対象にすることができます。さらに、[オプション](#recommend-index-options)の を使用して高度な制御を行うこともできます。構文は次のとおりです。
+TiDB では、インデックスアドバイザ タスク用の`RECOMMEND INDEX` SQL文が導入されました。 `RUN`サブコマンドは、過去のワークロードを分析し、推奨事項をシステムテーブルに保存します。 `FOR`オプションを使用すると、以前に実行されていない特定の SQL文を対象にすることができます。さらに、[オプション](#recommend-index-options)の を使用して高度な制御を行うこともできます。構文は次のとおりです。
 
 ```sql
 RECOMMEND INDEX RUN [ FOR <SQL> ] [<Options>] 
@@ -25,7 +25,7 @@ RECOMMEND INDEX RUN [ FOR <SQL> ] [<Options>]
 
 ### 単一クエリに対する推奨インデックス {#recommend-indexes-for-a-single-query}
 
-次の例は、5,000 行を含むテーブル`t`に対するクエリのインデックス推奨を生成する方法を示しています。簡潔にするため、 `INSERT`ステートメントは省略されています。
+次の例は、5,000 行を含むテーブル`t`に対するクエリのインデックス推奨を生成する方法を示しています。簡潔にするため、 `INSERT`文は省略されています。
 
 ```sql
 CREATE TABLE t (a INT, b INT, c INT);
@@ -92,7 +92,7 @@ RECOMMEND INDEX RUN;
 
 このテーブルには数万から数十万ものクエリが含まれる可能性があり、インデックスアドバイザーのパフォーマンスに影響を与える可能性があります。この問題を解決するため、インデックスアドバイザーは実行頻度の高いクエリを優先します。これらのクエリはワークロード全体のパフォーマンスに大きな影響を与えるためです。デフォルトでは、インデックスアドバイザーは上位1,000件のクエリを選択します。この値は、 [`max_num_query`](#recommend-index-options)パラメーターを使用して調整できます。
 
-`RECOMMEND INDEX`ステートメントの結果は`mysql.index_advisor_results`テーブルに格納されます。このテーブルをクエリして、推奨インデックスを表示できます。次の例は、前の 2つの`RECOMMEND INDEX`ステートメントの実行後のこのシステムテーブルの内容を示しています。
+`RECOMMEND INDEX`文の結果は`mysql.index_advisor_results`テーブルに格納されます。このテーブルをクエリして、推奨インデックスを表示できます。次の例は、前の 2つの`RECOMMEND INDEX`文の実行後のこのシステムテーブルの内容を示しています。
 
 ```sql
 SELECT * FROM mysql.index_advisor_results;
@@ -107,7 +107,7 @@ SELECT * FROM mysql.index_advisor_results;
 
 ### `RECOMMEND INDEX`オプションの推奨 {#recommend-index-options}
 
-`RECOMMEND INDEX`ステートメントのオプションを設定および表示して、ワークロードに合わせて動作を微調整するには、次のようにします。
+`RECOMMEND INDEX`文のオプションを設定および表示して、ワークロードに合わせて動作を微調整するには、次のようにします。
 
 ```sql
 RECOMMEND INDEX SET <option> = <value>;
@@ -136,7 +136,7 @@ RECOMMEND INDEX SHOW OPTION;
 4 rows in set (0.00 sec)
 ```
 
-オプションを変更するには、 `RECOMMEND INDEX SET`ステートメントを使用します。たとえば、 `timeout`オプションを変更するには、次のように記述します。
+オプションを変更するには、 `RECOMMEND INDEX SET`文を使用します。たとえば、 `timeout`オプションを変更するには、次のように記述します。
 
 ```sql
 RECOMMEND INDEX SET timeout='20s';
@@ -192,13 +192,13 @@ WHERE last_access_time IS NOT NULL AND percentage_access_0 + percentage_access_0
 
 ## 仮説インデックス {#hypothetical-indexes}
 
-`EXPLAIN`ステートメントでは、クエリプランナーが考慮する仮説インデックスを定義するために、`/*+ HYPO_INDEX(...) */` SQLコメント構文を使用できます。この方法により、インデックスを物理的に作成するオーバーヘッドなしに、軽量なインデックス実験が可能になります。
+`EXPLAIN`文では、クエリプランナーが考慮する仮説インデックスを定義するために、`/*+ HYPO_INDEX(...) */` SQLコメント構文を使用できます。この方法により、インデックスを物理的に作成するオーバーヘッドなしに、軽量なインデックス実験が可能になります。
 
 例えば、 `/*+ HYPO_INDEX(t, idx_ab, a, b) */`コメントは、クエリプランナーに対し、 `idx_ab`テーブル上に、 `t`に対して、 `a` `b`名前の仮想インデックスを作成するように指示します。プランナーはインデックスのメタデータを生成しますが、物理的にインデックスを作成することはありません。該当する場合、プランナーはインデックス作成に伴うコストを発生させることなく、クエリ最適化中にこの仮想インデックスを考慮します。
 
 `RECOMMEND INDEX`アドバイザーは、仮説的なインデックスを使用して「もしも」分析を行い、さまざまなインデックスの潜在的なメリットを評価します。また、仮説的なインデックスを直接使用して、インデックスを作成する前にインデックス設計を試すこともできます。
 
-次の例は、仮説インデックスを使用した`EXPLAIN`ステートメントを示しています。
+次の例は、仮説インデックスを使用した`EXPLAIN`文を示しています。
 
 ```sql
 CREATE TABLE t(a INT, b INT, c INT);

@@ -84,7 +84,7 @@ WHERE
 1 row in set (0.005 sec)
 ```
 
-システムのバージョン管理を削除するには、 `ALTER TABLE`ステートメントを実行します。
+システムのバージョン管理を削除するには、 `ALTER TABLE`文を実行します。
 
 ```sql
 MariaDB [test]> ALTER TABLE t DROP SYSTEM VERSIONING;
@@ -150,7 +150,7 @@ GROUP BY
 
 ### 構文 {#syntax}
 
-MariaDB は`DELETE` 、 `INSERT` 、および`REPLACE`ステートメントに対して`RETURNING`キーワードをサポートしています。TiDB はこれらをサポートしていません。移行に影響があるかどうかを確認するために、アプリケーションとクエリのログを確認することをお勧めします。
+MariaDB は`DELETE` 、 `INSERT` 、および`REPLACE`文に対して`RETURNING`キーワードをサポートしています。TiDB はこれらをサポートしていません。移行に影響があるかどうかを確認するために、アプリケーションとクエリのログを確認することをお勧めします。
 
 ### データ型 {#data-types}
 

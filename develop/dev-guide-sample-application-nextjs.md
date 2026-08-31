@@ -316,7 +316,7 @@ console.log(rsh.affectedRows);
 
 - [接続プール](https://github.com/sidorares/node-mysql2#using-connection-pools)を使用してデータベース接続を管理することで、接続の頻繁な確立と切断によって発生するパフォーマンスのオーバーヘッドを削減できます。
 - SQL インジェクションを回避するには、 [プリペアドステートメント](https://github.com/sidorares/node-mysql2#using-prepared-statements)を使用することをお勧めします。
-- 複雑な SQL ステートメントがあまり含まれないシナリオでは、[Sequelize](https://sequelize.org/)、 [TypeORM](https://typeorm.io/) 、または[Prisma](https://www.prisma.io/)などの ORM フレームワークを使用すると、開発効率が大幅に向上します。
+- 複雑な SQL文があまり含まれないシナリオでは、[Sequelize](https://sequelize.org/)、 [TypeORM](https://typeorm.io/) 、または[Prisma](https://www.prisma.io/)などの ORM フレームワークを使用すると、開発効率が大幅に向上します。
 
 ## 次のステップ {#next-steps}
 

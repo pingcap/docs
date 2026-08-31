@@ -13,7 +13,7 @@ summary: FLASHBACK TABLE` ステートメントを使用してテーブルを回
 SELECT * FROM mysql.tidb WHERE variable_name = 'tikv_gc_safe_point';
 ```
 
-`tikv_gc_safe_point`回目以降に`DROP`または`TRUNCATE`ステートメントでテーブルが削除されている限り、 `FLASHBACK TABLE`ステートメントを使用してテーブルを復元できます。
+`tikv_gc_safe_point`回目以降に`DROP`または`TRUNCATE`文でテーブルが削除されている限り、 `FLASHBACK TABLE`ステートメントを使用してテーブルを復元できます。
 
 ## 構文 {#syntax}
 
@@ -78,7 +78,7 @@ FlashbackToNewName ::=
 
 > **Note:**
 >
-> 復元されたテーブルの ID は削除されたテーブルの ID と同じであり、TiDB では既存のすべてのテーブルにグローバルに一意のテーブル ID が必要であるため、 `FLASHBACK`ステートメントを使用して同じ削除されたテーブルを複数回復元することはできません。
+> 復元されたテーブルの ID は削除されたテーブルの ID と同じであり、TiDB では既存のすべてのテーブルにグローバルに一意のテーブル ID が必要であるため、 `FLASHBACK`文を使用して同じ削除されたテーブルを複数回復元することはできません。
 
 `FLASHBACK TABLE`操作は、TiDBがスナップショット読み取りによってテーブルメタデータを取得し、 `CREATE TABLE`と同様のテーブル作成プロセスを実行することで実行されます。したがって、 `FLASHBACK TABLE`本質的には一種のDDL操作です。
 

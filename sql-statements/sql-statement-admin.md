@@ -84,7 +84,7 @@ ADMIN FLUSH BINDINGS;
 ADMIN CAPTURE BINDINGS;
 ```
 
-上記のステートメントは、複数回出現する`SELECT`ステートメントから SQL プランのバインディングを生成できます。
+上記のステートメントは、複数回出現する`SELECT`文から SQL プランのバインディングを生成できます。
 
 ```sql
 ADMIN EVOLVE BINDINGS;
@@ -128,7 +128,7 @@ ADMIN SHOW t NEXT_ROW_ID;
 
 上記のステートメントは、テーブルの特定の列の詳細を表示するために使用されます。出力は[SHOW TABLE NEXT_ROW_ID](/sql-statements/sql-statement-show-table-next-rowid.md)と同じです。
 
-## `ADMIN SHOW SLOW`ステートメント {#admin-show-slow-statement}
+## `ADMIN SHOW SLOW`文 {#admin-show-slow-statement}
 
 > **Note:**
 >

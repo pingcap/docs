@@ -78,7 +78,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 
     - TiCDC
 
-        - 最初にDDLステートメントを実行し、次に変更フィードを一時停止して再開するシナリオで発生したデータ損失を修正しました [＃7682](https://github.com/pingcap/tiflow/issues/7682) @[asddongmen](https://github.com/asddongmen)
+        - 最初にDDL文を実行し、次に変更フィードを一時停止して再開するシナリオで発生したデータ損失を修正しました [＃7682](https://github.com/pingcap/tiflow/issues/7682) @[asddongmen](https://github.com/asddongmen)
         - ダウンストリームネットワークが利用できない場合にsinkコンポーネントがスタックする問題を修正しました [#7706](https://github.com/pingcap/tiflow/issues/7706) @[hicqu](https://github.com/hicqu)
 
     - TiDB Data Migration (DM)

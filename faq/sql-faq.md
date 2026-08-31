@@ -28,9 +28,9 @@ summary: TiDB SQLに関連する FAQ について説明します。
 
 TiDBにはコストベースのオプティマイザが搭載されています。ほとんどの場合、オプティマイザが最適なクエリプランを選択します。オプティマイザがうまく機能しない場合でも、 [オプティマイザヒント](/optimizer-hints.md)を使用してオプティマイザに介入することができます。
 
-さらに、 [SQLバインディング](/sql-plan-management.md#sql-binding)を使用して、特定の SQL ステートメントのクエリプランを修正することもできます。
+さらに、 [SQLバインディング](/sql-plan-management.md#sql-binding)を使用して、特定の SQL文のクエリプランを修正することもできます。
 
-## 特定の SQL ステートメントの実行を防ぐにはどうすればよいでしょうか? {#how-to-prevent-the-execution-of-a-particular-sql-statement}
+## 特定の SQL文の実行を防ぐにはどうすればよいでしょうか? {#how-to-prevent-the-execution-of-a-particular-sql-statement}
 
 TiDB v7.5.0以降のバージョンでは、 [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)ステートメントを使用して特定のSQL文を終了できます。詳細については、 [予想以上にリソースを消費するクエリ（ランナウェイクエリ）を管理する](/tidb-resource-control-runaway-queries.md#query-watch-parameters)を参照してください。
 
@@ -213,7 +213,7 @@ TiDBは、 [グローバル](/system-variables.md#tidb_force_priority)単位ま�
 
 上記の2つのパラメータをTiDBのDMLと組み合わせて使用​​することができます。例えば：
 
-1. データベースに SQL ステートメントを記述して優先順位を調整します。
+1. データベースに SQL文を記述して優先順位を調整します。
 
     ```sql
     SELECT HIGH_PRIORITY | LOW_PRIORITY | DELAYED COUNT(*) FROM table_name;
@@ -243,7 +243,7 @@ SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_conditio
 
 ## DDL実行 {#ddl-execution}
 
-このセクションでは、DDL文の実行に関連する問題を列挙します。DDL実行の原則に関する詳細な説明については、 [DDL ステートメントの実行原則とベストプラクティス](/best-practices/ddl-introduction.md)を参照してください。
+このセクションでは、DDL文の実行に関連する問題を列挙します。DDL実行の原則に関する詳細な説明については、 [DDL文の実行原則とベストプラクティス](/best-practices/ddl-introduction.md)を参照してください。
 
 ### さまざまな DDL 操作を実行するにはどのくらいの時間がかかりますか? {#how-long-does-it-take-to-perform-various-ddl-operations}
 
@@ -265,7 +265,7 @@ DDL操作がブロックされておらず、各TiDBサーバーがスキーマ�
 - 複数のDDL文を同時に実行する場合、後続のDDL文はキュー内で待機する必要があるため、実行速度が低下する可能性があります。キューイングのシナリオには以下が含まれます。
 
     - 同じ種類のDDL文はキューに入れる必要があります。例えば、 `CREATE TABLE`と`CREATE DATABASE`はどちらも一般的なDDL文であるため、両方の操作が同時に実行される場合はキューに入れる必要があります。TiDB v6.2.0以降では並列DDL文がサポートされていますが、DDL実行にTiDBの計算リソースが過度に使用されるのを避けるため、同時実行数制限も設けられています。DDL文が同時実行数制限を超えると、キューに入れられます。
-    - 同じテーブルに対して実行されるDDL操作は依存関係にあります。後続のDDLステートメントは、前のDDL操作が完了するまで待機する必要があります。
+    - 同じテーブルに対して実行されるDDL操作は依存関係にあります。後続のDDL文は、前のDDL操作が完了するまで待機する必要があります。
 
 - クラスターが正常に起動された後、DDL モジュールが DDL 所有者を選出するため、最初の DDL 操作の実行時間が比較的長くなる可能性があります。
 
@@ -277,11 +277,11 @@ DDL操作がブロックされておらず、各TiDBサーバーがスキーマ�
 
 SQL文を実行する際、TiDBは分離レベルに基づいてオブジェクトの`schema`バージョンを決定し、それに応じてSQL文を処理します。TiDBはオンライン非同期DDL変更もサポートしています。DML文を実行する際、他のDDL文が同時に実行される可能性があり、TiDBは各SQL文が同じ`schema`バージョンに対して実行されるようにする必要があります。そのため、DML実行時にDDL操作が進行中の場合、TiDBはエラー`Information schema is changed`を報告する可能性があります。さらに、一部の同時実行DDLシナリオでは、DDL文が失敗した後、TiDBは元のエラーを返す前に`schema`が変更されたかどうかを確認します。そのDDL文で使用された`schema`バージョンがすでに最新の`schema`バージョンより古い場合、TiDBはこのエラーを返すこともあります。
 
-v6.4.0 以降、TiDB は[メタデータロックメカニズム](/metadata-lock.md)実装しており、これにより DML ステートメントと DDL スキーマの変更の調整された実行が可能になり、ほとんどの`Information schema is changed`エラーを回避できます。
+v6.4.0 以降、TiDB は[メタデータロックメカニズム](/metadata-lock.md)実装しており、これにより DML文と DDL スキーマの変更の調整された実行が可能になり、ほとんどの`Information schema is changed`エラーを回避できます。
 
 このエラー報告には、まだいくつかの原因があります。
 
-- 原因1: DML操作に関係するテーブルの一部は、進行中のDDL操作に関係するテーブルと同じです。進行中のDDL操作を確認するには、 `ADMIN SHOW DDL`ステートメントを使用してください。
+- 原因1: DML操作に関係するテーブルの一部は、進行中のDDL操作に関係するテーブルと同じです。進行中のDDL操作を確認するには、 `ADMIN SHOW DDL`文を使用してください。
 - 原因2: DML操作が長時間実行されています。この間に多数のDDL文が実行され、1024を超える`schema`バージョンの変更が発生しています。このデフォルト値は、変数`tidb_max_delta_schema_count`を変更することで変更できます。
 - 原因3：DMLリクエストを受け付けるTiDBサーバーが`schema information`ロードできない状態です（TiDBとPDまたはTiKV間の接続障害が原因と考えられます）。この期間中に多数のDDL文が実行され、100件を超える`schema`バージョンの変更が発生しました。
 - 原因 4: TiDB が再起動し、最初の DDL 操作が実行される前に、DML 操作が実行され、最初の DDL 操作に遭遇します (つまり、最初の DDL 操作が実行される前に、DML に対応するトランザクションが開始されます。そして、最初の`schema`バージョンの DDL が変更された後、DML に対応するトランザクションがコミットされます)。この DML 操作によってこのエラーが報告されます。
@@ -300,19 +300,19 @@ v6.4.0 以降、TiDB は[メタデータロックメカニズム](/metadata-lock
 DML文の実行時に、TiDBがDDLリース（デフォルトでは45秒）内に最新のスキーマをロードできない場合、エラー`Information schema is out of date`が発生する可能性があります。考えられる原因は以下のとおりです。
 
 - このDMLを実行したTiDBインスタンスが強制終了され、このDML文に対応するトランザクションの実行にDDLリースよりも長い時間がかかりました。トランザクションがコミットされた際にエラーが発生しました。
-- このDMLステートメントの実行中に、TiDBはPDまたはTiKVへの接続に失敗しました。その結果、TiDBはDDLリース内でスキーマをロードできなかったか、キープアライブ設定によりPDから切断されました。
+- このDML文の実行中に、TiDBはPDまたはTiKVへの接続に失敗しました。その結果、TiDBはDDLリース内でスキーマをロードできなかったか、キープアライブ設定によりPDから切断されました。
 
-### 高い同時実行性で DDL ステートメントを実行するとエラーが報告されますか? {#error-is-reported-when-executing-ddl-statements-under-high-concurrency}
+### 高い同時実行性で DDL文を実行するとエラーが報告されますか? {#error-is-reported-when-executing-ddl-statements-under-high-concurrency}
 
-高い同時実行性で DDL ステートメント (バッチでのテーブル作成など) を実行すると、同時実行中のキーの競合により、これらのステートメントのごく一部が失敗する可能性があります。
+高い同時実行性で DDL文 (バッチでのテーブル作成など) を実行すると、同時実行中のキーの競合により、これらのステートメントのごく一部が失敗する可能性があります。
 
-同時実行 DDL ステートメントの数を 20 未満に抑えることをお勧めします。それ以外の場合は、失敗したステートメントをクライアントから再試行する必要があります。
+同時実行 DDL文の数を 20 未満に抑えることをお勧めします。それ以外の場合は、失敗したステートメントをクライアントから再試行する必要があります。
 
 ### DDL 実行がブロックされるのはなぜですか? {#why-is-ddl-execution-blocked}
 
 TiDB v6.2.0より前のバージョンでは、DDL文の種類に基づいて、2つの先入先出キューにDDL文を割り当てていました。具体的には、Reorg DDLはReorgキューに、General DDLはGeneralキューに割り当てられます。先入先出の制限と、同一テーブルに対するDDL文の連続実行の必要性により、複数のDDL文が実行中にブロックされる可能性があります。
 
-たとえば、次の DDL ステートメントを考えてみましょう。
+たとえば、次の DDL文を考えてみましょう。
 
 - DDL 1: `CREATE INDEX idx on t(a int);`
 - DDL 2: `ALTER TABLE t ADD COLUMN b int;`
@@ -326,7 +326,7 @@ TiDB v6.2.0以降、TiDB DDLモジュールは並列フレームワークを採�
 
 ### DDL実行のスタックの原因を特定する {#identify-the-cause-of-stuck-ddl-execution}
 
-1. DDL ステートメントの実行を遅くするその他の理由を排除します。
+1. DDL文の実行を遅くするその他の理由を排除します。
 2. DDL 所有者ノードを識別するには、次のいずれかの方法を使用します。
     - 現在のクラスターの所有者を取得するには、 `curl http://{TiDBIP}:10080/info/all`を使用します。
     - 監視ダッシュボードの**DDL** &gt; **DDL META OPM**から、特定の期間の所有者を確認する。
@@ -445,7 +445,7 @@ RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganiz
 
 - `ADMIN SHOW DDL` : 実行中のDDLジョブを表示する
 - `ADMIN SHOW DDL JOBS` : 現在の DDL ジョブキュー内のすべての結果 (実行中および実行待ちのタスクを含む) と、完了した DDL ジョブキューの最後の 10件の結果を表示します。
-- `ADMIN SHOW DDL JOBS QUERIES 'job_id' [, 'job_id'] ...` : `job_id`に対応する DDL タスクの元の SQL ステートメントを表示します。`job_id`は実行中の DDL ジョブと DDL 履歴ジョブキュー内の最後の 10件の結果のみを検索します。
+- `ADMIN SHOW DDL JOBS QUERIES 'job_id' [, 'job_id'] ...` : `job_id`に対応する DDL タスクの元の SQL文を表示します。`job_id`は実行中の DDL ジョブと DDL 履歴ジョブキュー内の最後の 10件の結果のみを検索します。
 
 ### TiDB は CBO (コストベース最適化) をサポートしていますか? サポートしている場合、どの程度サポートしていますか? {#does-tidb-support-cbo-cost-based-optimization-if-yes-to-what-extent}
 

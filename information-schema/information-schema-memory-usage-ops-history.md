@@ -57,5 +57,5 @@ SELECT * FROM information_schema.memory_usage_ops_history;
 - `CLIENT` : 終了したセッションのクライアント接続アドレス。
 - `DB` : 終了したセッションに接続されていたデータベースの名前。
 - `USER` : 終了したセッションのユーザー名。
-- `SQL_DIGEST` : 終了したセッションで実行されている SQL ステートメントのダイジェスト。
-- `SQL_TEXT` : 終了したセッションで実行されている SQL ステートメント。
+- `SQL_DIGEST` : 終了したセッションで実行されている SQL文のダイジェスト。
+- `SQL_TEXT` : 終了したセッションで実行されている SQL文。

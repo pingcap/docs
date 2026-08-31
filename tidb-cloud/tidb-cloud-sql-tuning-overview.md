@@ -23,9 +23,9 @@ TiDB Cloudには、スロークエリを分析するのに役立つツールが�
 
 ### 診断ページで Statement を使用する {#use-statement-on-the-diagnosis-page}
 
-TiDB Cloudコンソールには、 [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページ上に[**SQL Statement**](/tidb-cloud/tune-performance.md#statement-analysis)タブが用意されています。このタブでは、TiDB Cloudリソース上のすべてのデータベースの SQL ステートメントの実行統計情報を収集します。これを使用して、合計または単一の実行に長い時間を要する SQL ステートメントを特定し、分析することができます。
+TiDB Cloudコンソールには、 [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページ上に[**SQL Statement**](/tidb-cloud/tune-performance.md#statement-analysis)タブが用意されています。このタブでは、TiDB Cloudリソース上のすべてのデータベースの SQL文の実行統計情報を収集します。これを使用して、合計または単一の実行に長い時間を要する SQL文を特定し、分析することができます。
 
-このページでは、構造が同じ SQL クエリ (クエリパラメータが一致しない場合でも) は、同じ SQL ステートメントにグループ化されることに注意してください。たとえば、 `SELECT * FROM employee WHERE id IN (1, 2, 3)`と`select * from EMPLOYEE where ID in (4, 5)`は、どちらも同じ SQL ステートメント`select * from employee where id in (...)`の一部です。
+このページでは、構造が同じ SQL クエリ (クエリパラメータが一致しない場合でも) は、同じ SQL文にグループ化されることに注意してください。たとえば、 `SELECT * FROM employee WHERE id IN (1, 2, 3)`と`select * from EMPLOYEE where ID in (4, 5)`は、どちらも同じ SQL文`select * from employee where id in (...)`の一部です。
 
 **SQL Statement**でいくつかの重要な情報を確認できます。
 
@@ -57,11 +57,11 @@ TiDBによって選択された実行計画が最適でない場合は、 EXPLAI
 
 これらの等価性の変更により、クエリは論理実行計画で扱いやすくなります。等価性の変更後、TiDB は元のクエリと等価なクエリプラン構造を取得し、データ分布と演算子の特定の実行オーバーヘッドに基づいて最終的な実行計画を取得します。詳細については、 [SQLの物理的最適化](/sql-physical-optimization.md)を参照してください。
 
-また、プリペアドプランキャッシュで紹介したように、TiDB は、 `PREPARE`ステートメントの実行時に実行計画の作成オーバーヘッドを削減するために、[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)を提供しています。
+また、プリペアドプランキャッシュで紹介したように、TiDB は、 `PREPARE`文の実行時に実行計画の作成オーバーヘッドを削減するために、[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)を提供しています。
 
 ### フルテーブルスキャンを最適化 {#optimize-full-table-scan}
 
-SQLクエリが遅くなる最も一般的な原因は、 `SELECT`ステートメントがフルテーブルスキャンを実行するか、不適切なインデックスを使用していることです。EXPLAINまたはEXPLAIN ANALYZEを使用してクエリの実行計画を表示し、実行が遅くなる原因を特定できます。最適化に使用できる[3つの方法](/develop/dev-guide-optimize-sql.md)があります。
+SQLクエリが遅くなる最も一般的な原因は、 `SELECT`文がフルテーブルスキャンを実行するか、不適切なインデックスを使用していることです。EXPLAINまたはEXPLAIN ANALYZEを使用してクエリの実行計画を表示し、実行が遅くなる原因を特定できます。最適化に使用できる[3つの方法](/develop/dev-guide-optimize-sql.md)があります。
 
 - セカンダリインデックスを使用する
 - カバリングインデックスを使用する

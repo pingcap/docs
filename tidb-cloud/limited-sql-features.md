@@ -229,4 +229,4 @@ TiDB Cloud Dedicated はTiDB がサポートするほぼすべてのワークロ
 
 [^3]: サポートされていません。TiDB Cloud Dedicated クラスターで`require_secure_transport`を有効にすると、SQL クライアント接続が失敗します。
 
-[^4]: `CALIBRATE RESOURCE`ステートメントはTiDB Cloud Dedicatedではサポートされていません。クラスターのRU容量を見積もるには、代わりにTiDB Cloudコンソールの[Calibrate Resource](/tidb-cloud/calibrate-resource.md)機能を使用してください。
+[^4]: `CALIBRATE RESOURCE`文はTiDB Cloud Dedicatedではサポートされていません。クラスターのRU容量を見積もるには、代わりにTiDB Cloudコンソールの[Calibrate Resource](/tidb-cloud/calibrate-resource.md)機能を使用してください。

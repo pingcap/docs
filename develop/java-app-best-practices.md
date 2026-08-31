@@ -42,7 +42,7 @@ JDBC APIの使用方法については、 [JDBC公式チュートリアル](http
 
 #### Prepare APIを使用する {#use-prepare-api}
 
-OLTP (オンライントランザクション処理) シナリオの場合、プログラムによってデータベースに送信される SQL ステートメントは、パラメーターの変更を削除した後に枯渇する可能性があるいくつかのタイプです。したがって、通常の[テキストファイルからの実行](https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html#executing_queries)の代わりに[プリペアドステートメント](https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)を使用し、プリペアドステートメントを再利用して直接実行することをお勧めします。これにより、TiDB で SQL 実行計画を繰り返し解析して生成するオーバーヘッドが回避されます。
+OLTP (オンライントランザクション処理) シナリオの場合、プログラムによってデータベースに送信される SQL 文は、パラメーターの変更を削除した後に枯渇する可能性があるいくつかのタイプです。したがって、通常の[テキストファイルからの実行](https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html#executing_queries)の代わりに[プリペアド文](https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)を使用し、プリペアド文を再利用して直接実行することをお勧めします。これにより、TiDB で SQL 実行計画を繰り返し解析して生成するオーバーヘッドが回避されます。
 
 現在、ほとんどの上位フレームワークはSQL実行のためにPrepare APIを呼び出しています。開発でJDBC APIを直接使用する場合は、Prepare APIを選択するように注意してください。
 
@@ -50,11 +50,11 @@ OLTP (オンライントランザクション処理) シナリオの場合、プ
 
 #### バッチAPIを使用する {#use-batch-api}
 
-バッチ挿入の場合は、 [`addBatch` / `executeBatch` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/Statement.html#executeBatch())を使用できます。 `addBatch()`メソッドは、複数の SQL ステートメントを最初にクライアントにキャッシュし、 `executeBatch`メソッドを呼び出すときにそれらをまとめてデータベースサーバーに送信するために使用されます。
+バッチ挿入の場合は、 [`addBatch` / `executeBatch` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/Statement.html#executeBatch())を使用できます。 `addBatch()`メソッドは、複数の SQL文を最初にクライアントにキャッシュし、 `executeBatch`メソッドを呼び出すときにそれらをまとめてデータベースサーバーに送信するために使用されます。
 
 > **Note:**
 >
-> デフォルトの MySQL Connector/J 実装では、 `addBatch()`を使用してバッチに追加された SQL ステートメントの送信時間は`executeBatch()`が呼び出されるまで遅延されますが、実際のネットワーク転送中はステートメントは 1つずつ送信されます。そのため、この方法では通常、通信オーバーヘッドは削減されません。
+> デフォルトの MySQL Connector/J 実装では、 `addBatch()`を使用してバッチに追加された SQL文の送信時間は`executeBatch()`が呼び出されるまで遅延されますが、実際のネットワーク転送中はステートメントは 1つずつ送信されます。そのため、この方法では通常、通信オーバーヘッドは削減されません。
 >
 > ネットワーク転送をバッチ処理する場合は、JDBC 接続パラメータで`rewriteBatchedStatements = true`を構成する必要があります。詳細なパラメータ設定については、[バッチ関連パラメータ](#batch-related-parameters)を参照してください。
 
@@ -88,7 +88,7 @@ JDBC は通常、実装関連の設定を JDBC URL パラメーターの形式�
 
 ##### `useServerPrepStmts` {#useserverprepstmts}
 
-`useServerPrepStmts`はデフォルトで`false`に設定されています。つまり、Prepare API を使用する場合でも、「prepare」操作はクライアント側でのみ実行されます。サーバーの解析オーバーヘッドを回避するため、同じ SQL ステートメントで Prepare API を複数回使用する場合は、この設定を`true`に設定することをお勧めします。
+`useServerPrepStmts`はデフォルトで`false`に設定されています。つまり、Prepare API を使用する場合でも、「prepare」操作はクライアント側でのみ実行されます。サーバーの解析オーバーヘッドを回避するため、同じ SQL文で Prepare API を複数回使用する場合は、この設定を`true`に設定することをお勧めします。
 
 この設定が既に有効になっていることを確認するには、次の操作を実行してください。
 
@@ -119,7 +119,7 @@ JDBC は通常、実装関連の設定を JDBC URL パラメーターの形式�
 
 ##### `prepStmtCacheSize` {#prepstmtcachesize}
 
-`prepStmtCacheSize`キャッシュされるプリペアドステートメントの数を制御します (デフォルト値は`25`です)。アプリケーションで多くの種類の SQL ステートメントを「準備」する必要があり、プリペアドステートメントを再利用したい場合は、この値を増やすことができます。
+`prepStmtCacheSize`キャッシュされるプリペアドステートメントの数を制御します (デフォルト値は`25`です)。アプリケーションで多くの種類の SQL文を「準備」する必要があり、プリペアドステートメントを再利用したい場合は、この値を増やすことができます。
 
 この設定が既に有効になっていることを確認するには、次の操作を実行してください。
 
@@ -144,7 +144,7 @@ pstmt.setInt(1, 12);
 pstmt.executeBatch();
 ```
 
-`Batch`メソッドが使用されていますが、TiDB に送信される SQL ステートメントは依然として個別の`INSERT`ステートメントです。
+`Batch`メソッドが使用されていますが、TiDB に送信される SQL文は依然として個別の`INSERT`文です。
 
 ```sql
 insert into t(a) values(10);
@@ -152,13 +152,13 @@ insert into t(a) values(11);
 insert into t(a) values(12);
 ```
 
-しかし、 `rewriteBatchedStatements=true`を設定すると、TiDB に送信される SQL ステートメントは単一の`INSERT`ステートメントになります。
+しかし、 `rewriteBatchedStatements=true`を設定すると、TiDB に送信される SQL文は単一の`INSERT`文になります。
 
 ```sql
 insert into t(a) values(10),(11),(12);
 ```
 
-`INSERT`ステートメントの書き換えは、複数の「values」キーワードの後の値を連結して 1つの SQL ステートメントにするものであることに注意してください。 `INSERT`ステートメントに他の違いがある場合、書き換えることはできません。たとえば、次のようになります。
+`INSERT`文の書き換えは、複数の「values」キーワードの後の値を連結して 1つの SQL文にするものであることに注意してください。 `INSERT`文に他の違いがある場合、書き換えることはできません。たとえば、次のようになります。
 
 ```sql
 insert into t (a) values (10) on duplicate key update a = 10;
@@ -180,7 +180,7 @@ insert into t (a) values (12) on duplicate key update a = values(a);
 insert into t (a) values (10), (11), (12) on duplicate key update a = values(a);
 ```
 
-バッチ更新中に3つ以上の更新がある場合、SQLステートメントは書き換えられ、複数のクエリとして送信されます。これにより、クライアントからサーバーへのリクエストのオーバーヘッドは効果的に削減されますが、副作用として、より大きなSQLステートメントが生成されます。例：
+バッチ更新中に3つ以上の更新がある場合、SQL文は書き換えられ、複数のクエリとして送信されます。これにより、クライアントからサーバーへのリクエストのオーバーヘッドは効果的に削減されますが、副作用として、より大きなSQL文が生成されます。例：
 
 ```sql
 update t set a = 10 where id = 1; update t set a = 11 where id = 2; update t set a = 12 where id = 3;
@@ -190,11 +190,11 @@ update t set a = 10 where id = 1; update t set a = 11 where id = 2; update t set
 
 #### パラメータを統合する {#integrate-parameters}
 
-監視を通じて、アプリケーションがTiDBに対して`INSERT`操作のみを実行しているにもかかわらず、 `SELECT`冗長なステートメントが多数存在することに気づくかもしれません。通常、これはJDBCが`select @@session.transaction_read_only`設定を照会するためにSQLステートメントを送信することが原因です。これらのSQLステートメントはTiDBでは不要なので、余分なオーバーヘッドを避けるために`useConfigs=maxPerformance`を設定することをお勧めします。
+監視を通じて、アプリケーションがTiDBに対して`INSERT`操作のみを実行しているにもかかわらず、 `SELECT`冗長なステートメントが多数存在することに気づくかもしれません。通常、これはJDBCが`select @@session.transaction_read_only`設定を照会するためにSQL文を送信することが原因です。これらのSQL文はTiDBでは不要なので、余分なオーバーヘッドを避けるために`useConfigs=maxPerformance`を設定することをお勧めします。
 
 `useConfigs=maxPerformance`には、設定のグループが含まれています。MySQL Connector/J 8.0 および MySQL Connector/J 5.1 の詳細な設定については、それぞれ[mysql-connector-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties)および[mysql-connector-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties)を参照してください。
 
-設定後、監視を確認すると、 `SELECT`ステートメントの数が減少していることが確認できます。
+設定後、監視を確認すると、 `SELECT`文の数が減少していることが確認できます。
 
 > **Note:**
 >
@@ -206,9 +206,9 @@ TiDBは、以下のMySQL互換のタイムアウト制御パラメータを提�
 
 - `wait_timeout` : Javaアプリケーションへの接続における非対話型アイドルタイムアウトを制御します。TiDB v5.4 以降では、 `wait_timeout`のデフォルト値は`28800`秒、つまり 8時間です。TiDB バージョンが v5.4 より前の場合、デフォルト値は`0`で、タイムアウトは無制限です。
 - `interactive_timeout` : Javaアプリケーションへの接続における対話型アイドルタイムアウトを制御します。デフォルト値は8時間です。
-- `max_execution_time` : 接続における SQL 実行のタイムアウトを制御します。これは`SELECT`ステートメント ( `SELECT ... FOR UPDATE`を含む) にのみ有効です。デフォルト値は`0`で、接続が無限にビジー状態になることを許可します。つまり、SQL ステートメントが無限に長い時間実行されます。
+- `max_execution_time` : 接続における SQL 実行のタイムアウトを制御します。これは`SELECT`文 ( `SELECT ... FOR UPDATE`を含む) にのみ有効です。デフォルト値は`0`で、接続が無限にビジー状態になることを許可します。つまり、SQL文が無限に長い時間実行されます。
 
-しかし、実際の本番環境では、アイドル状態の接続や実行時間が長すぎる SQL ステートメントは、データベースやアプリケーションに悪影響を及ぼします。アイドル状態の接続や実行時間が長すぎる SQL ステートメントを回避するには、アプリケーションの接続文字列で次の2つのパラメータを設定できます。たとえば、 `sessionVariables=wait_timeout=3600` (1時間) と`sessionVariables=max_execution_time=300000` (5分) を設定します。
+しかし、実際の本番環境では、アイドル状態の接続や実行時間が長すぎる SQL文は、データベースやアプリケーションに悪影響を及ぼします。アイドル状態の接続や実行時間が長すぎる SQL文を回避するには、アプリケーションの接続文字列で次の2つのパラメータを設定できます。たとえば、 `sessionVariables=wait_timeout=3600` (1時間) と`sessionVariables=max_execution_time=300000` (5分) を設定します。
 
 #### 一般的なJDBC接続文字列パラメータ {#typical-jdbc-connection-string-parameters}
 
@@ -303,7 +303,7 @@ MyBatis Mapperは2つのパラメータをサポートしています。
 
 [動的SQL - foreach](http://www.mybatis.org/mybatis-3/dynamic-sql.html#foreach)
 
-複数の`INSERT`ステートメントを`insert ... values(...), (...), ...`の形式に自動的に書き換えることをサポートするために、前述のように JDBC で`rewriteBatchedStatements=true`を設定することに加えて、MyBatis は動的 SQL を使用してバッチ挿入を半自動的に生成することもできます。次のマッパーを例にとります。
+複数の`INSERT`文を`insert ... values(...), (...), ...`の形式に自動的に書き換えることをサポートするために、前述のように JDBC で`rewriteBatchedStatements=true`を設定することに加えて、MyBatis は動的 SQL を使用してバッチ挿入を半自動的に生成することもできます。次のマッパーを例にとります。
 
 ```xml
 <insert id="insertTestBatch" parameterType="java.util.List" fetchSize="1">
@@ -319,7 +319,7 @@ MyBatis Mapperは2つのパラメータをサポートしています。
 </insert>
 ```
 
-このマッパーは`insert on duplicate key update`ステートメントを生成します。 `(?,?,?)`に続く「値」の数は、渡されたリストの数によって決まります。最終的な効果は`rewriteBatchStatements=true`を使用した場合と同様で、クライアントと TiDB 間の通信オーバーヘッドを効果的に削減します。
+このマッパーは`insert on duplicate key update`文を生成します。 `(?,?,?)`に続く「値」の数は、渡されたリストの数によって決まります。最終的な効果は`rewriteBatchStatements=true`を使用した場合と同様で、クライアントと TiDB 間の通信オーバーヘッドを効果的に削減します。
 
 前述のとおり、プリペアドステートメントの最大長が`prepStmtCacheSqlLimit`の値を超えると、キャッシュされないことにも注意する必要があります。
 
@@ -327,7 +327,7 @@ MyBatis Mapperは2つのパラメータをサポートしています。
 
 [前のセクション](#use-streamingresult-to-get-the-execution-result)JDBC で読み取り実行結果をストリーミングする方法を紹介します。 MyBatis で超大規模な結果セットを読み込む場合は、JDBC の対応する設定に加えて、次の点にも注意する必要があります。
 
-- マッパー構成で単一の SQL ステートメントに対して`fetchSize`を設定できます (前のコードブロックを参照)。その効果は、JDBC で`setFetchSize`を呼び出すのと同等です。
+- マッパー構成で単一の SQL文に対して`fetchSize`を設定できます (前のコードブロックを参照)。その効果は、JDBC で`setFetchSize`を呼び出すのと同等です。
 - `ResultHandler`を使用したクエリ インターフェースを使用すると、結果セット全体を一度に取得することを避けることができます。
 - ストリーム読み取りには`Cursor`クラスを使用できます。
 
@@ -355,7 +355,7 @@ Cursor<Post> queryAllPost();
 - Reuse: プリペアドステートメントは`executor`にキャッシュされるため、JDBC `cachePrepStmts`を使用せずにプリペアドステートメントの重複呼び出しを減らすことができます。
 - Batch: 各更新操作 ( `INSERT` / `DELETE` / `UPDATE` ) は、まずバッチに追加され、トランザクションがコミットされるか`SELECT`クエリが実行されるまで実行されます。JDBCレイヤーで`rewriteBatchStatements`が有効になっている場合は、ステートメントの書き換えが試みられます。そうでない場合は、ステートメントは 1つずつ送信されます。
 
-通常、 `ExecutorType`のデフォルト値は`Simple`です。 `ExecutorType`を呼び出すときは`openSession` } を変更する必要があります。バッチ実行の場合、トランザクション内で`UPDATE`または`INSERT`ステートメントの実行は非常に高速ですが、データの読み取りやトランザクションのコミットは遅くなる場合があります。これは正常な動作ですので、SQL クエリの遅延をトラブルシューティングする際には、この点に注意してください。
+通常、 `ExecutorType`のデフォルト値は`Simple`です。 `ExecutorType`を呼び出すときは`openSession` } を変更する必要があります。バッチ実行の場合、トランザクション内で`UPDATE`または`INSERT`文の実行は非常に高速ですが、データの読み取りやトランザクションのコミットは遅くなる場合があります。これは正常な動作ですので、SQL クエリの遅延をトラブルシューティングする際には、この点に注意してください。
 
 ## 春のトランザクション {#spring-transaction}
 
@@ -379,7 +379,7 @@ Javaアプリケーションで問題が発生し、そのアプリケーショ�
 
 `jstack pid`を実行すると、対象プロセス内のすべてのスレッドの ID とスタック情報を出力できます。デフォルトでは、 Javaスタックのみが出力されます。JVM 内の C++ スタックも同時に出力する場合は、 `-m`オプションを追加してください。
 
-jstackを複数回使用することで、スタックしている問題（例えば、MybatisのBatch ExecutorTypeを使用しているためにアプリケーションビューからのクエリが遅い場合）やアプリケーションのデッドロック問題（例えば、アプリケーションがSQLステートメントを送信する前にロックをプリエンプトしているため、SQLステートメントを送信しない場合）を簡単に特定できます。
+jstackを複数回使用することで、スタックしている問題（例えば、MybatisのBatch ExecutorTypeを使用しているためにアプリケーションビューからのクエリが遅い場合）やアプリケーションのデッドロック問題（例えば、アプリケーションがSQL文を送信する前にロックをプリエンプトしているため、SQL文を送信しない場合）を簡単に特定できます。
 
 さらに、 `top -p $ PID -H`やJavaスイスナイフは、スレッドIDを表示する一般的な方法です。また、「スレッドが大量のCPUリソースを消費しているが、何を実行しているのか分からない」という問題を特定するには、以下の手順を実行してください。
 

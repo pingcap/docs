@@ -51,7 +51,7 @@ summary: TiDB 2.1 GA は 2018年 11月 30日にリリースされ、安定性、
 
     - ハッシュ結合の実行を最適化します。結合タイプが内部結合またはセミ結合で、内部テーブルが空の場合、外部テーブルからデータを読み取らずに結果を返します。
 
-    - [`EXPLAIN ANALYZE`ステートメント](/sql-statements/sql-statement-explain-analyze.md)を使用して、各オペレーターの実行時間と返された行数を含む実行時統計をチェックすることをサポートします。
+    - [`EXPLAIN ANALYZE`文](/sql-statements/sql-statement-explain-analyze.md)を使用して、各オペレーターの実行時間と返された行数を含む実行時統計をチェックすることをサポートします。
 
 - 統計
 
@@ -99,7 +99,7 @@ summary: TiDB 2.1 GA は 2018年 11月 30日にリリースされ、安定性、
 
     - [トランザクションが自動的に再試行されるかどうかを制御するには、 `tidb_disable_txn_auto_retry`システム変数を追加します](/system-variables.md#tidb_disable_txn_auto_retry)
 
-    - [`admin show slow`ステートメントを使用してスロークエリを取得できるようにサポートします](/identify-slow-queries.md#admin-show-slow-command)
+    - [`admin show slow`文を使用してスロークエリを取得できるようにサポートします](/identify-slow-queries.md#admin-show-slow-command)
 
     - [`tidb_slow_log_threshold`環境変数を追加して、スローログのしきい値を自動的に設定します](/system-variables.md#tidb_slow_log_threshold)
 
@@ -127,13 +127,13 @@ summary: TiDB 2.1 GA は 2018年 11月 30日にリリースされ、安定性、
 
     - `BIT`の集計関数が`ALL`パラメータをサポートするようにする
 
-    - `SHOW PRIVILEGES`ステートメントをサポートする
+    - `SHOW PRIVILEGES`文をサポートする
 
     - `LOAD DATA`文の`CHARACTER SET`構文をサポートする
 
     - `CREATE USER`文の`IDENTIFIED WITH`構文をサポートする
 
-    - `LOAD DATA IGNORE LINES`ステートメントをサポートする
+    - `LOAD DATA IGNORE LINES`文をサポートする
 
     - `Show ProcessList`文はより正確な情報を返す
 

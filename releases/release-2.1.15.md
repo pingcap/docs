@@ -18,7 +18,7 @@ TiDB Ansible バージョン: 2.1.15
 - パラメータが`NULL` ときに`INSERT`関数が`NULL`値を正しく返さない問題を修正しました [＃11249](https://github.com/pingcap/tidb/pull/11249)
 - 非文字列型で長さ`0` をインデックスするときにエラーが発生する問題を修正 [＃11215](https://github.com/pingcap/tidb/pull/11215)
 - SQL文を使用してテーブルのリージョン分布を照会するための`SHOW TABLE REGIONS`文を追加します。 [＃11238](https://github.com/pingcap/tidb/pull/11238)
-- `SELECT`サブクエリルールを最適化するために射影除去が使用されるため、 `UPDATE … SELECT`ステートメントを使用するとエラーが報告される問題を修正しました。 [＃11254](https://github.com/pingcap/tidb/pull/11254)
+- `SELECT`サブクエリルールを最適化するために射影除去が使用されるため、 `UPDATE … SELECT`文を使用するとエラーが報告される問題を修正しました。 [＃11254](https://github.com/pingcap/tidb/pull/11254)
 - プラグイン`ADMIN PLUGINS DISABLE` `ADMIN PLUGINS ENABLE`ステートメントを追加する[＃11189](https://github.com/pingcap/tidb/pull/11189)
 - 監査プラグインにセッション接続情報を追加する [＃11189](https://github.com/pingcap/tidb/pull/11189)
 - ポイントクエリで列を複数回クエリし、返された結果が`NULL`ある場合に発生するpanic問題を修正しました。 [＃11227](https://github.com/pingcap/tidb/pull/11227)
@@ -26,7 +26,7 @@ TiDB Ansible バージョン: 2.1.15
 - `RAND`関数を使用する際に非スレッドセーフ`rand.Rand`によって発生するデータ競合問題を修正 [＃11170](https://github.com/pingcap/tidb/pull/11170)
 - 整数と非整数の比較結果が場合によっては正しくない問題を修正[＃11191](https://github.com/pingcap/tidb/pull/11191)
 - データベースまたはテーブルの照合順序の変更をサポートしますが、データベース/テーブルの文字セットは UTF-8 または utf8mb4 である必要があります。 [＃11085](https://github.com/pingcap/tidb/pull/11085)
-- 列のデフォルト値として`CURRENT_TIMESTAMP`が使用され、float精度が指定されている場合、 `SHOW CREATE TABLE`ステートメントで表示される精度が不完全になる問題を修正しました。 [＃11087](https://github.com/pingcap/tidb/pull/11087)
+- 列のデフォルト値として`CURRENT_TIMESTAMP`が使用され、float精度が指定されている場合、 `SHOW CREATE TABLE`文で表示される精度が不完全になる問題を修正しました。 [＃11087](https://github.com/pingcap/tidb/pull/11087)
 
 ## TiKV {#tikv}
 

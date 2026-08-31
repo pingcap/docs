@@ -5,7 +5,7 @@ summary: TiDB データベースの PREPARE の使用法の概要。
 
 # PREPARE {#prepare}
 
-`PREPARE`ステートメントは、サーバー側のプリペアドステートメントへの SQL インターフェイスを提供します。
+`PREPARE`文は、サーバー側のプリペアドステートメントへの SQL インターフェイスを提供します。
 
 ## 概要 {#synopsis}
 
@@ -20,9 +20,9 @@ PrepareSQL ::=
 
 > **Note:**
 >
-> `PREPARE`ステートメントごとに、プレースホルダーの最大数は 65535 です。
+> `PREPARE`文ごとに、プレースホルダーの最大数は 65535 です。
 
-現在の TiDB インスタンス内の`PREPARE`ステートメントの数を制限するには、 [`max_prepared_stmt_count`](/system-variables.md#max_prepared_stmt_count)システム変数を使用できます。
+現在の TiDB インスタンス内の`PREPARE`文の数を制限するには、 [`max_prepared_stmt_count`](/system-variables.md#max_prepared_stmt_count)システム変数を使用できます。
 
 ## 例 {#examples}
 

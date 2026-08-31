@@ -122,7 +122,7 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 3. ログインするにはパスワードを入力してください。
 
-## ステップ3．SQLステートメントを実行する {#step-3-execute-a-sql-statement}
+## ステップ3．SQL文を実行する {#step-3-execute-a-sql-statement}
 
 TiDB Cloudで最初のSQL文を実行してみましょう。
 
@@ -140,7 +140,7 @@ SELECT 'Hello TiDB Cloud!';
 +-------------------+
 ```
 
-実際の出力が期待される出力と類似していれば、おめでとうございます。TiDB Cloud上で SQL ステートメントを正常に実行できました。
+実際の出力が期待される出力と類似していれば、おめでとうございます。TiDB Cloud上で SQL文を正常に実行できました。
 
 ## お困りですか？ {#need-help}
 

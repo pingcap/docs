@@ -161,7 +161,7 @@ CREATE TABLE `t1` (
 >    ERROR 1406 (22001): Data Too Long, field len 4, data len 5
 >    ```
 >
-> - 非同期コミット機能との互換性のため、 [メタデータロック](/metadata-lock.md)無効になっている場合、DDL ステートメントは、Reorg-Data への処理を開始する前に一定期間 (約 2.5秒) 待機します。
+> - 非同期コミット機能との互換性のため、 [メタデータロック](/metadata-lock.md)無効になっている場合、DDL文は、Reorg-Data への処理を開始する前に一定期間 (約 2.5秒) 待機します。
 >
 >    ```
 >    Query OK, 0 rows affected (2.52 sec)

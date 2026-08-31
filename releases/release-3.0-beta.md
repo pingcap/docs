@@ -43,8 +43,8 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
     - `admin show next_row_id`をサポート [＃8242](https://github.com/pingcap/tidb/pull/8242)
     - 実行エンジンで使用される初期Chunkのサイズを制御するための`tidb_init_chunk_size`変数を追加します。 [＃8480](https://github.com/pingcap/tidb/pull/8480)
     - `shard_row_id_bits`を改善し、AUTO_INCREMENT ID をクロスチェックする [＃8936](https://github.com/pingcap/tidb/pull/8936)
-- `Prepare`ステートメント
-    - 異なるユーザー変数が入力されたときにクエリプランが正しいことを保証するために、サブクエリを含む`Prepare`ステートメントをクエリプランキャッシュに追加することを禁止します[＃8064](https://github.com/pingcap/tidb/pull/8064)
+- `Prepare`文
+    - 異なるユーザー変数が入力されたときにクエリプランが正しいことを保証するために、サブクエリを含む`Prepare`文をクエリプランキャッシュに追加することを禁止します[＃8064](https://github.com/pingcap/tidb/pull/8064)
     - クエリプランキャッシュを最適化して、ステートメントに非決定的な関数が含まれている場合にプランがキャッシュされることを保証します[＃8105](https://github.com/pingcap/tidb/pull/8105)
     - クエリプランキャッシュを最適化して、 `DELETE` / `UPDATE` / `INSERT`のクエリプランがキャッシュされることを保証する[＃8107](https://github.com/pingcap/tidb/pull/8107)
     - クエリプランキャッシュを最適化して、 `DEALLOCATE`文を実行するときに対応するプランを削除します。 [＃8332](https://github.com/pingcap/tidb/pull/8332)
@@ -62,7 +62,7 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
     - `interactive_timeout`システム変数サポート [＃8573](https://github.com/pingcap/tidb/pull/8573)
     - `wait_timeout`システム変数サポート [＃8346](https://github.com/pingcap/tidb/pull/8346)
     - `tidb_batch_commit`変数を使用して、ステートメントの数に基づいてトランザクションを複数のトランザクションに分割することをサポートします。 [＃8293](https://github.com/pingcap/tidb/pull/8293)
-    - `ADMIN SHOW SLOW`ステートメントを使用してスローログをチェックするサポート [＃7785](https://github.com/pingcap/tidb/pull/7785)
+    - `ADMIN SHOW SLOW`文を使用してスローログをチェックするサポート [＃7785](https://github.com/pingcap/tidb/pull/7785)
 - 互換性
     - `ALLOW_INVALID_DATES` SQLモードサポート [＃9027](https://github.com/pingcap/tidb/pull/9027)
     - CSVファイルのフォールトトレランスを`LoadData`向上[＃9005](https://github.com/pingcap/tidb/pull/9005)

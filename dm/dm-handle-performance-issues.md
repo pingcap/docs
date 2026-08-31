@@ -78,7 +78,7 @@ Binlogレプリケーションユニットは、DMLを構築し、DDLを解析�
 
 ### 下流にSQL文を書き込む {#write-sql-statements-to-downstream}
 
-Binlogレプリケーション ユニットが変換された SQL ステートメントをダウンストリームに書き込む場合、関連するパフォーマンスメトリックは`DML queue remain length`と`transaction execution latency`なります。
+Binlogレプリケーション ユニットが変換された SQL文をダウンストリームに書き込む場合、関連するパフォーマンスメトリックは`DML queue remain length`と`transaction execution latency`なります。
 
 DMはbinlogイベントからSQL文を構築した後、 `worker-count`キューを使用してこれらの文を下流に同時に書き込みます。ただし、監視エントリが過度に多くなりすぎないようにするため、DMは同時キューのIDに対して`8`を法とする演算を実行します。つまり、すべての同時キューは`q_0`から`q_7`までの1つのアイテムに対応します。
 

@@ -79,7 +79,7 @@ TiDB バージョン: 6.5.1
 - TiDB
 
     - [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600)構成項目がPointGetクエリで有効にならない問題を修正しました [＃39928](https://github.com/pingcap/tidb/issues/39928) @[zyguan](https://github.com/zyguan)
-    - 長いセッション接続で`INSERT`または`REPLACE`ステートメントがpanicする可能性がある問題を修正しました [＃40351](https://github.com/pingcap/tidb/issues/40351) @[winoros](https://github.com/winoros)
+    - 長いセッション接続で`INSERT`または`REPLACE`文がpanicする可能性がある問題を修正しました [＃40351](https://github.com/pingcap/tidb/issues/40351) @[winoros](https://github.com/winoros)
     - `auto analyze`正常なシャットダウンに長い時間がかかる問題を修正[＃40038](https://github.com/pingcap/tidb/issues/40038) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - DDL取り込み中にデータ競合が発生する可能性がある問題を修正 [＃40970](https://github.com/pingcap/tidb/issues/40970) @[tangenta](https://github.com/tangenta)
     - インデックスを追加するとデータ競合が発生する可能性がある問題を修正しました [＃40879](https://github.com/pingcap/tidb/issues/40879) @[tangenta](https://github.com/tangenta)
@@ -110,7 +110,7 @@ TiDB バージョン: 6.5.1
     - IndexMerge プランが SET 型の列 に誤った範囲を生成する可能性がある問題を修正しました [＃41293](https://github.com/pingcap/tidb/issues/41293) @[time-and-fate](https://github.com/time-and-fate) [＃41273](https://github.com/pingcap/tidb/issues/41273)
     - プランキャッシュが`int_col <cmp> decimal`条件 を処理するときにフルスキャン プランをキャッシュする可能性がある問題を修正しました [＃41032](https://github.com/pingcap/tidb/issues/41032) @[qw4990](https://github.com/qw4990) [＃40679](https://github.com/pingcap/tidb/issues/40679)
     - プランキャッシュが`int_col in (decimal...)`条件を処理するときにフルスキャン プランをキャッシュする可能性がある問題を修正しました [＃40224](https://github.com/pingcap/tidb/issues/40224) @[qw4990](https://github.com/qw4990)
-    - `ignore_plan_cache`ヒントが`INSERT`ステートメント では機能しない可能性がある問題を修正しました [＃39717](https://github.com/pingcap/tidb/issues/39717) @[qw4990](https://github.com/qw4990) [＃40079](https://github.com/pingcap/tidb/issues/40079)
+    - `ignore_plan_cache`ヒントが`INSERT`文 では機能しない可能性がある問題を修正しました [＃39717](https://github.com/pingcap/tidb/issues/39717) @[qw4990](https://github.com/qw4990) [＃40079](https://github.com/pingcap/tidb/issues/40079)
     - 自動分析により TiDB が終了できなくなる問題を修正しました [＃40038](https://github.com/pingcap/tidb/issues/40038) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - パーティションテーブルの符号なし主キーに不正なアクセス間隔が構築される可能性がある問題を修正しました。 [＃40309](https://github.com/pingcap/tidb/issues/40309) @[winoros](https://github.com/winoros)
     - プランキャッシュがシャッフル演算子をキャッシュし、誤った結果を返す可能性がある問題を修正[＃38335](https://github.com/pingcap/tidb/issues/38335) @[qw4990](https://github.com/qw4990)

@@ -13,7 +13,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 バージョン7.0.0-DMRの主な新機能と改善点は以下のとおりです。
 
-<table><thead><tr><th>カテゴリ</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="2">拡張性とパフォーマンス<br/></td><td>セッションレベルの<a href="https://docs-archive.pingcap.com/tidb/v7.0/sql-non-prepared-plan-cache" target="_blank">非プリペアドSQLプランキャッシュ</a>（実験的）</td><td>セッションレベルでプランキャッシュを自動的に再利用することで、コンパイルを削減し、同じSQLパターンに対して事前に手動でプリペアドステートメントを設定することなくクエリ時間を短縮します。</td></tr><tr><td> TiFlashは <a href="https://docs-archive.pingcap.com/tidb/v7.0/tiflash-disaggregated-and-s3" target="_blank">、分散型ストレージおよびコンピューティングアーキテクチャとS3共有ストレージ</a>（実験的）をサポートしています。</td><td> TiFlashは、オプションとしてクラウドネイティブアーキテクチャを導入します。<ul><li> TiFlashのコンピューティング機能とストレージを分離することで、柔軟なHTAPリソース利用における画期的な進歩を実現しました。</li><li> S3ベースのストレージエンジンを導入し、より低コストで共有ストレージを提供可能にしました。</li></ul></td></tr><tr><td rowspan="2">信頼性と可用性<br/></td><td><a href="https://docs-archive.pingcap.com/tidb/v7.0/tidb-resource-control" target="_blank">リソース制御機能強化</a>（実験的）</td><td>リソースグループを使用して、1つのクラスタ内のさまざまなアプリケーションやワークロードにリソースを割り当て、分離することをサポートします。今回のリリースでは、TiDB はさまざまなリソースバインディングモード (ユーザー、セッション、ステートメントレベル) とユーザー定義の優先度をサポートします。さらに、コマンドを使用してリソースのキャリブレーション (リソース全体の量の見積もり) を実行することもできます。</td></tr><tr><td> TiFlashは<a href="https://docs-archive.pingcap.com/tidb/v7.0/tiflash-spill-disk" target="_blank">ディスクへのスピル</a>をサポートしています</td><td>TiFlashは、集計、ソート、ハッシュ結合などのデータ集約型操作におけるメモリ不足（OOM）を軽減するために、中間結果をディスクに書き出す機能をサポートしています。</td></tr><tr><td rowspan="2"> SQL</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.0/time-to-live" target="_blank">行レベルTTL</a> （GA）</td><td>一定期間経過したデータを自動的に削除することで、データベースサイズの管理をサポートし、パフォーマンスを向上させます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v7.0/partitioned-table#reorganize-partitions" target="_blank"><code>LIST</code> / <code>RANGE</code>パーティションを再編成する</a></td><td><code>REORGANIZE PARTITION</code>ステートメントは、隣接するパーティションをマージしたり、1つのパーティションを複数のパーティションに分割したりするために使用でき、パーティション化されたテーブルの使いやすさを向上させます。</td></tr><tr><td rowspan="2">データベースの運用と可観測性<br/></td><td>TiDBは<a href="https://docs-archive.pingcap.com/tidb/v7.0/sql-statement-load-data" target="_blank"><code>LOAD DATA</code>ステートメント</a>の機能を拡張します（実験的）。</td><td> TiDBは、S3/GCSからのデータインポートをサポートするなど、 <code>LOAD DATA</code> SQLステートメントの機能を拡張します。<br/></td></tr><tr><td> TiCDCは<a href="https://docs-archive.pingcap.com/tidb/v7.0/ticdc-sink-to-cloud-storage" target="_blank">オブジェクトストレージシンク</a>（GA）をサポートしています</td><td>TiCDCは、Amazon S3、GCS、Azure Blob Storage、NFSなどのオブジェクトストレージサービスへの行変更イベントの複製をサポートしています。<br/></td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="2">拡張性とパフォーマンス<br/></td><td>セッションレベルの<a href="https://docs-archive.pingcap.com/tidb/v7.0/sql-non-prepared-plan-cache" target="_blank">非プリペアドSQLプランキャッシュ</a>（実験的）</td><td>セッションレベルでプランキャッシュを自動的に再利用することで、コンパイルを削減し、同じSQLパターンに対して事前に手動でプリペアドステートメントを設定することなくクエリ時間を短縮します。</td></tr><tr><td> TiFlashは <a href="https://docs-archive.pingcap.com/tidb/v7.0/tiflash-disaggregated-and-s3" target="_blank">、分散型ストレージおよびコンピューティングアーキテクチャとS3共有ストレージ</a>（実験的）をサポートしています。</td><td> TiFlashは、オプションとしてクラウドネイティブアーキテクチャを導入します。<ul><li> TiFlashのコンピューティング機能とストレージを分離することで、柔軟なHTAPリソース利用における画期的な進歩を実現しました。</li><li> S3ベースのストレージエンジンを導入し、より低コストで共有ストレージを提供可能にしました。</li></ul></td></tr><tr><td rowspan="2">信頼性と可用性<br/></td><td><a href="https://docs-archive.pingcap.com/tidb/v7.0/tidb-resource-control" target="_blank">リソース制御機能強化</a>（実験的）</td><td>リソースグループを使用して、1つのクラスタ内のさまざまなアプリケーションやワークロードにリソースを割り当て、分離することをサポートします。今回のリリースでは、TiDB はさまざまなリソースバインディングモード (ユーザー、セッション、ステートメントレベル) とユーザー定義の優先度をサポートします。さらに、コマンドを使用してリソースのキャリブレーション (リソース全体の量の見積もり) を実行することもできます。</td></tr><tr><td> TiFlashは<a href="https://docs-archive.pingcap.com/tidb/v7.0/tiflash-spill-disk" target="_blank">ディスクへのスピル</a>をサポートしています</td><td>TiFlashは、集計、ソート、ハッシュ結合などのデータ集約型操作におけるメモリ不足（OOM）を軽減するために、中間結果をディスクに書き出す機能をサポートしています。</td></tr><tr><td rowspan="2"> SQL</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.0/time-to-live" target="_blank">行レベルTTL</a> （GA）</td><td>一定期間経過したデータを自動的に削除することで、データベースサイズの管理をサポートし、パフォーマンスを向上させます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v7.0/partitioned-table#reorganize-partitions" target="_blank"><code>LIST</code> / <code>RANGE</code>パーティションを再編成する</a></td><td><code>REORGANIZE PARTITION</code>ステートメントは、隣接するパーティションをマージしたり、1つのパーティションを複数のパーティションに分割したりするために使用でき、パーティション化されたテーブルの使いやすさを向上させます。</td></tr><tr><td rowspan="2">データベースの運用と可観測性<br/></td><td>TiDBは<a href="https://docs-archive.pingcap.com/tidb/v7.0/sql-statement-load-data" target="_blank"><code>LOAD DATA</code>ステートメント</a>の機能を拡張します（実験的）。</td><td> TiDBは、S3/GCSからのデータインポートをサポートするなど、 <code>LOAD DATA</code> SQL文の機能を拡張します。<br/></td></tr><tr><td> TiCDCは<a href="https://docs-archive.pingcap.com/tidb/v7.0/ticdc-sink-to-cloud-storage" target="_blank">オブジェクトストレージシンク</a>（GA）をサポートしています</td><td>TiCDCは、Amazon S3、GCS、Azure Blob Storage、NFSなどのオブジェクトストレージサービスへの行変更イベントの複製をサポートしています。<br/></td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -41,7 +41,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     相関サブクエリで`IN` 、 `NOT IN` 、 `= ANY` 、または`!= ALL`演算子を使用する場合、TiDB はそれらを準演算子に変換することでコンピューティング パフォーマンスを最適化します。ジョインまたはアンチセミジョイン。結合キー列が`NULL`の場合は、 [NULL値対応セミジョイン](/explain-subqueries.md#null-aware-semi-join-in-and--any-subqueries)や[ヌル値対応アンチセミジョイン](/explain-subqueries.md#null-aware-anti-semi-join-not-in-and--all-subqueries)などの、null 対応結合アルゴリズムが必要です。
 
-    バージョン 7.0.0 より前のTiFlashでは、NULL 対応セミ結合オペレーターと NULL 対応アンチセミ結合オペレーターがサポートされていなかったため、これらのサブクエリをTiFlashに直接プッシュダウンすることができませんでした。バージョン 7.0.0 以降では、 TiFlash はNULL 対応セミ結合オペレーターと NULL 対応アンチセミ結合オペレーターをサポートしています。SQL ステートメントにこれらの相関サブクエリが含まれており、クエリ内のテーブルにTiFlashレプリカがあり、かつ[MPPモード](/tiflash/use-tiflash-mpp-mode.md)が有効になっている場合、オプティマイザは全体的なパフォーマンスを向上させるために、NULL 対応セミ結合オペレーターと NULL 対応アンチセミ結合オペレーターをTiFlashにプッシュダウンするかどうかを自動的に判断します。
+    バージョン 7.0.0 より前のTiFlashでは、NULL 対応セミ結合オペレーターと NULL 対応アンチセミ結合オペレーターがサポートされていなかったため、これらのサブクエリをTiFlashに直接プッシュダウンすることができませんでした。バージョン 7.0.0 以降では、 TiFlash はNULL 対応セミ結合オペレーターと NULL 対応アンチセミ結合オペレーターをサポートしています。SQL 文にこれらの相関サブクエリが含まれており、クエリ内のテーブルにTiFlashレプリカがあり、かつ[MPPモード](/tiflash/use-tiflash-mpp-mode.md)が有効になっている場合、オプティマイザは全体的なパフォーマンスを向上させるために、NULL 対応セミ結合オペレーターと NULL 対応アンチセミ結合オペレーターをTiFlashにプッシュダウンするかどうかを自動的に判断します。
 
     詳細については、 [ドキュメント](/tiflash/tiflash-supported-pushdown-calculations.md)を参照してください。
 
@@ -61,15 +61,15 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 - 非プリペアドステートメントの実行計画のキャッシュをサポートする（実験的） [#36598](https://github.com/pingcap/tidb/issues/36598) @[qw4990](https://github.com/qw4990)
 
-    実行プランキャッシュは同時実行 OLTP の処理能力を向上させるために重要であり、TiDB はすでに[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)をサポートしています。 v7.0.0 では、TiDB は非 Prepare ステートメントの実行計画をキャッシュすることもできるため、実行計画 キャッシュの範囲が拡張され、TiDB の同時処理能力が向上します。
+    実行プランキャッシュは同時実行 OLTP の処理能力を向上させるために重要であり、TiDB はすでに[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)をサポートしています。 v7.0.0 では、TiDB は非 Prepare文の実行計画をキャッシュすることもできるため、実行計画 キャッシュの範囲が拡張され、TiDB の同時処理能力が向上します。
 
-    この機能はデフォルトでは無効になっています。システム変数[`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)を`ON`に設定することで有効にできます。安定性のため、TiDB v7.0.0 では非プリペアド実行計画をキャッシュするための新しい領域が割り当てられ、システム変数[`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)を使用してキャッシュサイズを設定できます。さらに、この機能には SQL ステートメントに関する特定の制限があります。詳細については、 [制限](/sql-non-prepared-plan-cache.md#restrictions)を参照してください。
+    この機能はデフォルトでは無効になっています。システム変数[`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)を`ON`に設定することで有効にできます。安定性のため、TiDB v7.0.0 では非プリペアド実行計画をキャッシュするための新しい領域が割り当てられ、システム変数[`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)を使用してキャッシュサイズを設定できます。さらに、この機能には SQL文に関する特定の制限があります。詳細については、 [制限](/sql-non-prepared-plan-cache.md#restrictions)を参照してください。
 
     詳細については、[ドキュメント](/sql-non-prepared-plan-cache.md)を参照してください。
 
 - TiDB がサブクエリの実行計画 キャッシュ制約を削除 [#40219](https://github.com/pingcap/tidb/issues/40219) @[fzzf678](https://github.com/fzzf678)
 
-    TiDB v7.0.0 では、サブクエリに対する実行プランキャッシュの制約が解除されました。これにより、 `SELECT * FROM t WHERE a > (SELECT ...)`のようにサブクエリを含む SQL ステートメントの実行計画をキャッシュできるようになりました。この機能により、実行プランキャッシュの適用範囲がさらに拡大し、SQL クエリの実行効率が向上します。
+    TiDB v7.0.0 では、サブクエリに対する実行プランキャッシュの制約が解除されました。これにより、 `SELECT * FROM t WHERE a > (SELECT ...)`のようにサブクエリを含む SQL文の実行計画をキャッシュできるようになりました。この機能により、実行プランキャッシュの適用範囲がさらに拡大し、SQL クエリの実行効率が向上します。
 
     詳細については、[ドキュメント](/sql-prepared-plan-cache.md)を参照してください。
 
@@ -207,9 +207,9 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 ### データ移行 {#data-migration}
 
-- `LOAD DATA`ステートメントの機能を強化し、クラウドストレージからのデータインポートをサポートする (実験的) [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716)
+- `LOAD DATA`文の機能を強化し、クラウドストレージからのデータインポートをサポートする (実験的) [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716)
 
-    TiDB v7.0.0 より前は、 `LOAD DATA`ステートメントではクライアント側からのデータファイルのインポートしかできませんでした。クラウドストレージからデータをインポートするには、 TiDB Lightningを使用する必要がありました。しかし、 TiDB Lightning を別途デプロイすると、追加のデプロイおよび管理コストが発生します。v7.0.0 では、 `LOAD DATA`ステートメントを使用してクラウドストレージから直接データをインポートできます。この機能の例を以下に示します。
+    TiDB v7.0.0 より前は、 `LOAD DATA`文ではクライアント側からのデータファイルのインポートしかできませんでした。クラウドストレージからデータをインポートするには、 TiDB Lightningを使用する必要がありました。しかし、 TiDB Lightning を別途デプロイすると、追加のデプロイおよび管理コストが発生します。v7.0.0 では、 `LOAD DATA`文を使用してクラウドストレージから直接データをインポートできます。この機能の例を以下に示します。
 
     - Amazon S3およびGoogle Cloud StorageからTiDBへのデータインポートをサポートします。ワイルドカードを使用して、複数のソースファイルを一度にTiDBにインポートすることをサポートします。
     - `DEFINED NULL BY`を使用して null を定義することをサポートします。
@@ -273,7 +273,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     TiCDC クラスターを v7.0.0 にアップグレードする際、Avro を使用してレプリケートされたテーブルに`FLOAT`データ型が含まれている場合は、アップグレード前に Confluent Schema Registry の互換性ポリシーを`None`に手動で調整する必要があります。そうしないと、changefeed がスキーマを正常に更新できなくなります。そうしないと、アップグレード後に changefeed がスキーマを更新できず、エラー状態になります。
 
-- v7.0.0 以降、 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)システム変数は[`LOAD DATA`ステートメント](/sql-statements/sql-statement-load-data.md)に影響しなくなりました。
+- v7.0.0 以降、 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)システム変数は[`LOAD DATA`文](/sql-statements/sql-statement-load-data.md)に影響しなくなりました。
 
 ### システム変数 {#system-variables}
 
@@ -292,7 +292,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 | [`tidb_opt_advanced_join_hint`](/system-variables.md#tidb_opt_advanced_join_hint-new-in-v700)                                     | 新しく追加された | この変数は、結合メソッドヒントが結合順序の最適化に影響するかどうかを制御します。デフォルト値は`ON`で、これは新しい互換制御モードが使用されることを意味します。値`OFF`は、v7.0.0 より前の動作が使用されることを意味します。前方互換性のために、クラスターが以前のバージョンから v7.0.0 以降にアップグレードされると、この変数の値は`OFF`に設定されます。 |
 | [`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)                                                   | 新しく追加された | この変数は[ウィンドウ関数からTopNまたはLimitを導出する](/derive-topn-from-window.md)最適化ルールを有効にするかどうかを制御します。デフォルト値は`OFF`で、最適化ルールが有効になっていないことを意味します。                                                               |
 | [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)                   | 新しく追加された | この変数は[TiFlashの遅延発生](/tiflash/tiflash-late-materialization.md)機能を有効にするかどうかを制御します。デフォルト値は`OFF`で、これは機能が有効になっていないことを意味します。                                                                     |
-| [`tidb_opt_ordering_index_selectivity_threshold`](/system-variables.md#tidb_opt_ordering_index_selectivity_threshold-new-in-v700) | 新しく追加された | この変数は、SQL ステートメントに`ORDER BY`および`LIMIT`句が含まれ、フィルタリング条件がある場合に、オプティマイザがインデックスを選択する方法を制御します。                                                                                                   |
+| [`tidb_opt_ordering_index_selectivity_threshold`](/system-variables.md#tidb_opt_ordering_index_selectivity_threshold-new-in-v700) | 新しく追加された | この変数は、SQL文に`ORDER BY`および`LIMIT`句が含まれ、フィルタリング条件がある場合に、オプティマイザがインデックスを選択する方法を制御します。                                                                                                   |
 | [`tidb_pessimistic_txn_fair_locking`](/system-variables.md#tidb_pessimistic_txn_fair_locking-new-in-v700)                         | 新しく追加された | 単一行競合シナリオにおけるトランザクションのテールレイテンシーを削減するために、拡張悲観的ロックウェイクモデルを有効にするかどうかを制御します。デフォルト値は`ON`です。クラスタが以前のバージョンから v7.0.0 以降にアップグレードされると、この変数の値は`OFF`に設定されます。                                           |
 | [`tidb_slow_txn_log_threshold`](/system-variables.md#tidb_slow_txn_log_threshold-new-in-v700)                                     | 新しく追加された | トランザクションのログ記録のしきい値を設定します。トランザクションの実行時間がこのしきい値を超えると、TiDB はトランザクションに関する詳細情報をログに記録します。デフォルト値`0`は、この機能が無効になっていることを意味します。                                                                       |
 | [`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700)                                               | 新しく追加された | この変数は、クラスタ全体におけるTTLタスクの同時実行数を制限するために使用されます。デフォルト値`-1`は、TTLタスクの数がTiKVノードの数と同じであることを意味します。                                                                                                   |
@@ -377,7 +377,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
         - TiDB Lightning物理インポートモードは、データインポートとインデックス インポートの分離をサポートし、インポート速度と安定性を向上させます [#42132](https://github.com/pingcap/tidb/issues/42132) @[sleepymole](https://github.com/sleepymole)
 
-            `add-index-by-sql`パラメータを追加します。デフォルト値は`false`で、これはTiDB Lightning が行データとインデックスデータの両方を KV ペアにエンコードし、それらをまとめて TiKV にインポートすることを意味します。これを`true`に設定すると、 TiDB Lightningデータのインポート後に`ADD INDEX` SQL ステートメントを使用してインデックスを追加し、インポートの速度と安定性を向上させます。
+            `add-index-by-sql`パラメータを追加します。デフォルト値は`false`で、これはTiDB Lightning が行データとインデックスデータの両方を KV ペアにエンコードし、それらをまとめて TiKV にインポートすることを意味します。これを`true`に設定すると、 TiDB Lightningデータのインポート後に`ADD INDEX` SQL文を使用してインデックスを追加し、インポートの速度と安定性を向上させます。
 
         - `tikv-importer.keyspace-name`パラメータを追加します。デフォルト値は空の文字列で、 TiDB Lightning は対応するテナントのキースペース名を自動的に取得してデータをインポートします。値を指定すると、指定されたキースペース名を使用してデータがインポートされます。このパラメータにより、マルチテナント TiDB クラスタにデータをインポートする際のTiDB Lightningの設定に柔軟性が生まれます。 [#41915](https://github.com/pingcap/tidb/issues/41915) @[lichunzhu](https://github.com/lichunzhu)
 
@@ -396,17 +396,17 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
     - プリペアドプランキャッシュが有効になっている場合に、フルインデックススキャンでエラーが発生する可能性がある問題を修正しました [#42150](https://github.com/pingcap/tidb/issues/42150) @[fzzf678](https://github.com/fzzf678)
     - `IFNULL(NOT NULL COLUMN, ...)`が間違った結果を返す可能性がある問題を修正 [#41734](https://github.com/pingcap/tidb/issues/41734) @[LittleFall](https://github.com/LittleFall)
     - パーティションテーブル内のすべてのデータが単一のリージョンにある場合に、TiDBが誤った結果を生成する可能性がある問題を修正します [#41801](https://github.com/pingcap/tidb/issues/41801) @[Defined2014](https://github.com/Defined2014)
-    - TiDB で、異なるパーティションテーブルが単一の SQL ステートメントに現れる場合に誤った結果が生成される可能性がある問題を修正しました [#42135](https://github.com/pingcap/tidb/issues/42135) @[mjonss](https://github.com/mjonss)
+    - TiDB で、異なるパーティションテーブルが単一の SQL文に現れる場合に誤った結果が生成される可能性がある問題を修正しました [#42135](https://github.com/pingcap/tidb/issues/42135) @[mjonss](https://github.com/mjonss)
     - パーティションテーブルに新しいインデックスを追加した後、パーティションパーティションテーブルで統計情報の自動収集が正しくトリガーされない可能性がある問題を修正しました [#41638](https://github.com/pingcap/tidb/issues/41638) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - TiDBが統計情報を2回連続で収集した後に誤った列統計情報を読み取る可能性がある問題を修正 [#42073](https://github.com/pingcap/tidb/issues/42073) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - プリペアドプランキャッシュが有効になっている場合に IndexMerge が誤った結果を生成する可能性がある問題を修正しました [#41828](https://github.com/pingcap/tidb/issues/41828) @[qw4990](https://github.com/qw4990)
     - IndexMerge に goroutine リークがある可能性がある問題を修正 [#41605](https://github.com/pingcap/tidb/issues/41605) @[guo-shaoge](https://github.com/guo-shaoge)
     - 非 BIGINT 符号なし整数が文字列/10 進数と比較したときに誤った結果を生成する可能性がある問題を修正 [#41736](https://github.com/pingcap/tidb/issues/41736) @[LittleFall](https://github.com/LittleFall)
-    - メモリ制限超過により以前の`ANALYZE`ステートメントが強制終了されると、同じセッション内の現在の`ANALYZE`ステートメントも強制終了される可能性がある問題を修正しました [#41825](https://github.com/pingcap/tidb/issues/41825) @[XuHuaiyu](https://github.com/XuHuaiyu)
+    - メモリ制限超過により以前の`ANALYZE`文が強制終了されると、同じセッション内の現在の`ANALYZE`文も強制終了される可能性がある問題を修正しました [#41825](https://github.com/pingcap/tidb/issues/41825) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - バッチコプロセッサの情報収集プロセス中にデータ競合が発生する可能性がある問題を修正しました [#41412](https://github.com/pingcap/tidb/issues/41412) @[you06](https://github.com/you06)
     - アサーション エラーによりパーティションテーブルの MVCC 情報が印刷できない問題を修正 [#40629](https://github.com/pingcap/tidb/issues/40629) @[ekexium](https://github.com/ekexium)
     - フェアロックモードで存在しないキーにロックが追加される問題を修正 [#41527](https://github.com/pingcap/tidb/issues/41527) @[ekexium](https://github.com/ekexium)
-    - `INSERT IGNORE`および`REPLACE`ステートメントが値を変更しないキーをロックしない問題を修正 [#42121](https://github.com/pingcap/tidb/issues/42121) @[zyguan](https://github.com/zyguan)
+    - `INSERT IGNORE`および`REPLACE`文が値を変更しないキーをロックしない問題を修正 [#42121](https://github.com/pingcap/tidb/issues/42121) @[zyguan](https://github.com/zyguan)
 
 - PD
 

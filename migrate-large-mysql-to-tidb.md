@@ -29,7 +29,7 @@ summary: MySQLからTiDBへ大規模データセットを移行する方法を�
 - インポート処理中、 TiDB Lightningはソート済みのキーと値のペアを保存するための一時的な領域を必要とします。ディスク容量は、データソースの最大の単一テーブルを格納できるのに十分な量が必要です。
 - データ総量が大きい場合は、上流側のbinlogの保存期間を延長することができます。これは、増分レプリケーション中にバイナリログが失われないようにするためです。
 
-**注**： DumplingによってMySQLからエクスポートされる正確なデータ量を計算することは困難ですが、次のSQLステートメントを使用して`information_schema.tables`テーブルの`DATA_LENGTH`フィールドを要約することで、データ量を推定できます。
+**注**： DumplingによってMySQLからエクスポートされる正確なデータ量を計算することは困難ですが、次のSQL文を使用して`information_schema.tables`テーブルの`DATA_LENGTH`フィールドを要約することで、データ量を推定できます。
 
 ```sql
 -- Calculate the size of all schemas
@@ -284,4 +284,4 @@ DMが実行されている間、DM-worker、DM-master、およびdmctlは関連�
 - [データ移行タスクを再開する](/dm/dm-resume-task.md)
 - [データ移行タスクを停止する](/dm/dm-stop-task.md)
 - [クラスターのデータソースのエクスポートとインポート、およびタスクコンフィグレーション](/dm/dm-export-import-config.md)
-- [失敗したDDLステートメントを処理する](/dm/handle-failed-ddl-statements.md)
+- [失敗したDDL文を処理する](/dm/handle-failed-ddl-statements.md)

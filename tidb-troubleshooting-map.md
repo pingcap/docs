@@ -87,9 +87,9 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
 - 3.1.4 TiDB はログに`information schema is out of date`を報告します
 
-    - 原因1：DMLステートメントを実行しているTiDBサーバーが`graceful kill`によって停止され、終了準備状態になります。DMLステートメントを含むトランザクションの実行時間が1つのDDLリースを超えています。トランザクションのコミット時にエラーが報告されます。
+    - 原因1：DML文を実行しているTiDBサーバーが`graceful kill`によって停止され、終了準備状態になります。DML文を含むトランザクションの実行時間が1つのDDLリースを超えています。トランザクションのコミット時にエラーが報告されます。
 
-    - 原因2：TiDBサーバーがDMLステートメントの実行中にPDまたはTiKVに接続できません。その結果、TiDBサーバーは1つのDDLリース（デフォルトでは`45s`内に新しいスキーマをロードできなかったか、TiDBサーバーが`keep alive`設定でPDから切断されました。
+    - 原因2：TiDBサーバーがDML文の実行中にPDまたはTiKVに接続できません。その結果、TiDBサーバーは1つのDDLリース（デフォルトでは`45s`内に新しいスキーマをロードできなかったか、TiDBサーバーが`keep alive`設定でPDから切断されました。
 
     - 原因3：TiKVの負荷が高いか、ネットワークがタイムアウトしました。Grafana -&gt; **TiDB**と**TiKV**でノードの負荷を確認してください。
 
@@ -133,7 +133,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
 - 3.2.4 メモリ不足が発生する典型的な理由
 
-    - SQL クエリには`join`が含まれています。 `explain`を使用して SQL ステートメントを表示すると、 `join`操作で`HashJoin`アルゴリズムが選択され、 `inner`テーブルが大きいことがわかります。
+    - SQL クエリには`join`が含まれています。 `explain`を使用して SQL文を表示すると、 `join`操作で`HashJoin`アルゴリズムが選択され、 `inner`テーブルが大きいことがわかります。
 
     - 単一の`UPDATE/DELETE`クエリのデータ量が大きすぎます。中国語の[ケース882](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case882.md)を参照してください。
 
@@ -364,7 +364,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     - 選挙が遅い：リージョンの読み込み時間が長い。この問題は、PD ログで`grep "regions cost"`を実行することで確認できます。結果が`load 460927 regions cost 11.77099s`のように秒単位の場合、リージョンの読み込みが遅いことを意味します。v3.0 では、 `use-region-storage`を`true`に設定することで`region storage`機能を有効にでき、リージョンの読み込み時間を大幅に短縮できます。詳細は、 [ケース429](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case429.md) （中国語）を参照してください。
 
-- 5.2.3 TiDBがSQLステートメントを実行する際にPDがタイムアウトしました。
+- 5.2.3 TiDBがSQL文を実行する際にPDがタイムアウトしました。
 
     - PDにはLeaderが存在しない、またはLeaderが切り替わります[5.2.1](#52-pd-election)および[5.2.2](#52-pd-election)を参照してください。
 
@@ -497,7 +497,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     トランザクションの実行時間がGCの有効期間（デフォルトでは10分）を超えています。
 
-    [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)システム変数を変更することで、GC の有効期間を延長できます。ただし、このパラメータを変更することは一般的に推奨されません。このトランザクションに`UPDATE`および`DELETE`ステートメントが多数含まれている場合、このパラメータを変更すると、多くの古いバージョンが蓄積される可能性があるためです。
+    [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)システム変数を変更することで、GC の有効期間を延長できます。ただし、このパラメータを変更することは一般的に推奨されません。このトランザクションに`UPDATE`および`DELETE`文が多数含まれている場合、このパラメータを変更すると、多くの古いバージョンが蓄積される可能性があるためです。
 
 - 7.1.2 `coprocessor.go`は`request outdated`を報告します。
 

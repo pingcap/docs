@@ -5,7 +5,7 @@ summary: TiDB Cloud Premiumでインスタンスを監査する方法を学び�
 
 # TiDB Cloud Premiumデータベース監査ログ {#tidb-cloud-premium-database-audit-logging}
 
-TiDB Cloudは、実行されたSQLステートメントなど、データベースへのユーザーアクセスアクティビティを記録する監査ログ機能を提供します。
+TiDB Cloudは、実行されたSQL文など、データベースへのユーザーアクセスアクティビティを記録する監査ログ機能を提供します。
 
 組織のユーザーアクセスポリシーやその他の情報セキュリティ対策の有効性を評価するには、データベース監査ログを定期的に分析することがセキュリティ上のベストプラクティスです。
 
@@ -321,17 +321,17 @@ TiDB Cloudの監査ログは、インスタンスID、内部ID、およびログ
 | `CONNECT`       | すべての接続ハンドシェイク操作を記録します                                          | `CONNECTION`    |
 | `DISCONNECT`    | すべての切断操作を記録します                                                      | `CONNECTION`    |
 | `CHANGE_USER`   | すべてのユーザー変更操作を記録します                                                          | `CONNECTION`    |
-| `QUERY`         | データのクエリまたは変更時に発生するエラーを含む、すべての SQL ステートメント操作を記録します  | -               |
+| `QUERY`         | データのクエリまたは変更時に発生するエラーを含む、すべての SQL文操作を記録します  | -               |
 | `TRANSACTION`   | `BEGIN`、`COMMIT`、`ROLLBACK` など、トランザクションに関連するすべての操作を記録します         | `QUERY`         |
-| `EXECUTE`       | `EXECUTE` ステートメントのすべての操作を記録します                                                | `QUERY`         |
-| `QUERY_DML`     | `INSERT`、`REPLACE`、`UPDATE`、`DELETE`、`LOAD DATA` を含む、DML ステートメントのすべての操作を記録します    | `QUERY`     |
-| `INSERT`        | `INSERT` ステートメントのすべての操作を記録します                                                   | `QUERY_DML`   |
-| `REPLACE`       | `REPLACE` ステートメントのすべての操作を記録します                                                  | `QUERY_DML`   |
-| `UPDATE`        | `UPDATE` ステートメントのすべての操作を記録します                                                   | `QUERY_DML`   |
-| `DELETE`        | `DELETE` ステートメントのすべての操作を記録します                                                   | `QUERY_DML`   |
-| `LOAD DATA`     | `LOAD DATA` ステートメントのすべての操作を記録します                                                | `QUERY_DML`   |
-| `SELECT`        | `SELECT` ステートメントのすべての操作を記録します                                                   | `QUERY`       |
-| `QUERY_DDL`     | DDL ステートメントのすべての操作を記録します                                                        | `QUERY`       |
+| `EXECUTE`       | `EXECUTE`文のすべての操作を記録します                                                | `QUERY`         |
+| `QUERY_DML`     | `INSERT`、`REPLACE`、`UPDATE`、`DELETE`、`LOAD DATA` を含む、DML文のすべての操作を記録します    | `QUERY`     |
+| `INSERT`        | `INSERT`文のすべての操作を記録します                                                   | `QUERY_DML`   |
+| `REPLACE`       | `REPLACE`文のすべての操作を記録します                                                  | `QUERY_DML`   |
+| `UPDATE`        | `UPDATE`文のすべての操作を記録します                                                   | `QUERY_DML`   |
+| `DELETE`        | `DELETE`文のすべての操作を記録します                                                   | `QUERY_DML`   |
+| `LOAD DATA`     | `LOAD DATA`文のすべての操作を記録します                                                | `QUERY_DML`   |
+| `SELECT`        | `SELECT`文のすべての操作を記録します                                                   | `QUERY`       |
+| `QUERY_DDL`     | DDL文のすべての操作を記録します                                                        | `QUERY`       |
 | `AUDIT`         | システム変数の設定やシステム関数の呼び出しを含む、TiDB Cloud データベース監査の設定に関連するすべての操作を記録します | -                   |
 | `AUDIT_FUNC_CALL` | TiDB Cloud データベース監査に関連するシステム関数の呼び出しに関するすべての操作を記録します        | `AUDIT`       |
 | `AUDIT_SET_SYS_VAR` | システム変数の設定に関するすべての操作を記録します        | `AUDIT`       |
@@ -355,7 +355,7 @@ TiDB Cloudは、監査ログ内の各データベースイベントレコード�
 | `STATUS_CODE`   | 操作のステータスコード。 `1`は成功、 `0`は失敗を示します。          |
 | `REASON`        | 操作のエラーメッセージ。エラーが発生した場合にのみ記録されます。           |
 
-### SQLステートメント情報 {#sql-statement-information}
+### SQL文情報 {#sql-statement-information}
 
 イベントクラスが`QUERY`または`QUERY`のサブクラスである場合、監査ログには次のフィールドが含まれます。
 
@@ -363,8 +363,8 @@ TiDB Cloudは、監査ログ内の各データベースイベントレコード�
 | ---------------- | -------------------------------------------------------------------------- |
 | `CURRENT_DB`     | 現在使用しているデータベースの名前。                                                         |
 | `SQL_TEXT`       | 実行されたSQL文。監査ログのマスキングが有効になっている場合は、マスキングされた文が記録されます。                         |
-| `EXECUTE_PARAMS` | `EXECUTE`ステートメントに渡されるパラメータ。イベントクラスに`EXECUTE`が含まれ、かつ編集が無効になっている場合にのみ記録されます。 |
-| `AFFECTED_ROWS`  | SQL ステートメントによって影響を受けた行数。イベントクラスに`QUERY_DML`が含まれている場合にのみ記録されます。            |
+| `EXECUTE_PARAMS` | `EXECUTE`文に渡されるパラメータ。イベントクラスに`EXECUTE`が含まれ、かつ編集が無効になっている場合にのみ記録されます。 |
+| `AFFECTED_ROWS`  | SQL文によって影響を受けた行数。イベントクラスに`QUERY_DML`が含まれている場合にのみ記録されます。            |
 
 ### 接続情報 {#connection-information}
 

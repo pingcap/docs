@@ -42,7 +42,7 @@ tiup playground
 
 > **Note:**
 >
-> 既存のデータを分析クエリに使用する場合は、 [データをTiDBに移行する](/migration-overview.md)を実行できます。独自のテストデータを設計および作成する場合は、SQL ステートメントを実行するか、関連ツールを使用して作成できます。
+> 既存のデータを分析クエリに使用する場合は、 [データをTiDBに移行する](/migration-overview.md)を実行できます。独自のテストデータを設計および作成する場合は、SQL文を実行するか、関連ツールを使用して作成できます。
 
 1. 次のコマンドを実行して、テストデータ生成ツールをインストールします。
 
@@ -58,7 +58,7 @@ tiup playground
 
     このコマンドの出力に`Finished`が表示される場合は、データが作成されたことを示します。
 
-3. 生成されたデータを表示するには、次の SQL ステートメントを実行します。
+3. 生成されたデータを表示するには、次の SQL文を実行します。
 
     ```sql
     SELECT
@@ -95,7 +95,7 @@ tiup playground
 
 ### ステップ3. 行ベースのストレージエンジンでデータをクエリする {#step-3-query-data-with-the-row-based-storage-engine}
 
-行ベースのストレージエンジンのみを使用した TiDB のパフォーマンスを確認するには、次の SQL ステートメントを実行します。
+行ベースのストレージエンジンのみを使用した TiDB のパフォーマンスを確認するには、次の SQL文を実行します。
 
 ```sql
 USE test;
@@ -155,7 +155,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'test' and
 
 もう一度[ステップ3](#step-3-query-data-with-the-row-based-storage-engine)の SQL 文を実行すると、 TiDB HTAPのパフォーマンスを確認できます。
 
-TiFlashレプリカを持つテーブルの場合、TiDBオプティマイザはコスト見積もりに基づいてTiFlashレプリカを使用するかどうかを自動的に決定します。TiFlashが選択されているかどうかを確認するには、 `desc`または`explain analyze`ステートメントを使用します。例：
+TiFlashレプリカを持つテーブルの場合、TiDBオプティマイザはコスト見積もりに基づいてTiFlashレプリカを使用するかどうかを自動的に決定します。TiFlashが選択されているかどうかを確認するには、 `desc`または`explain analyze`文を使用します。例：
 
 ```sql
 USE test;
@@ -186,7 +186,7 @@ ORDER BY
 limit 10;
 ```
 
-`EXPLAIN`ステートメントの結果に`ExchangeSender`と`ExchangeReceiver`オペレーターが表示されている場合は、MPP モードが有効になっていることを示します。
+`EXPLAIN`文の結果に`ExchangeSender`と`ExchangeReceiver`オペレーターが表示されている場合は、MPP モードが有効になっていることを示します。
 
 さらに、クエリ全体の各部分をTiFlashエンジンのみを使用して計算するように指定することもできます。詳細については、 [TiDBを使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
 

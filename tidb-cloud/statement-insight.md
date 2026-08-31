@@ -32,29 +32,29 @@ Statement Insight は、インスタンスで有効化された後にのみデ�
 ページ上部のフィルターを使用して、データを絞り込みます。
 
 - **Time range**: プリセットの期間またはカスタム範囲を選択します。
-- **DB User**: SQL ステートメントを実行したデータベースユーザーで絞り込みます。 
-- **SQL Type**: `SELECT`、`INSERT`、`UPDATE` などの SQL ステートメント種別で絞り込みます。
-- **Database**: SQL ステートメントの実行対象となったデータベースで絞り込みます。
-- **Table**: SQL ステートメントの実行対象となったテーブルで絞り込みます。
+- **DB User**: SQL文を実行したデータベースユーザーで絞り込みます。 
+- **SQL Type**: `SELECT`、`INSERT`、`UPDATE` などの SQL文種別で絞り込みます。
+- **Database**: SQL文の実行対象となったデータベースで絞り込みます。
+- **Table**: SQL文の実行対象となったテーブルで絞り込みます。
 - **Keyword**: SQL digest テキストに一致するキーワードで絞り込みます。
 
-すべてのフィルターは組み合わせて使用でき、分析対象を必要な SQL ステートメントに絞り込めます。
+すべてのフィルターは組み合わせて使用でき、分析対象を必要な SQL文に絞り込めます。
 
 ## RU 消費量、レイテンシー、実行回数を分析する {#analyze-ru-consumption-latency-and-execution-counts}
 
-**Top Contributors** パネルには、フィルター条件に一致する SQL ステートメントの概要が、複数の次元ごとに表示されます。各次元では、**Measured by** コントロールを切り替えることで、リーダーボードとトレンドチャートの両方で使用する指標を変更できます。
+**Top Contributors** パネルには、フィルター条件に一致する SQL文の概要が、複数の次元ごとに表示されます。各次元では、**Measured by** コントロールを切り替えることで、リーダーボードとトレンドチャートの両方で使用する指標を変更できます。
 
 - **Total RU**: 消費された RU の合計。
 - **Mean RU**: 総 RU を実行回数で割った値。
 - **Total latency**: 実行レイテンシーの合計。
 - **Mean latency**: 総レイテンシーを実行回数で割った値。
-- **Execution count**: SQL ステートメントが実行された回数。
+- **Execution count**: SQL文が実行された回数。
 
 ### DB user、SQL type、SQL digest、DB、table ごとの主要な要因 {#top-contributors-by-db-user-sql-type-sql-digest-db-and-table}
 
 各次元（DB User、SQL Type、SQL Digest、DB、または Table）について、パネルには次の情報が表示されます。
 
-- **Total count**: 選択した SQL ステートメントの中で、その次元における異なる値の総数。たとえば、選択した SQL ステートメントを実行した異なる DB user の総数です。
+- **Total count**: 選択した SQL文の中で、その次元における異なる値の総数。たとえば、選択した SQL文を実行した異なる DB user の総数です。
 - **Top values**: **Measured by** で選択した指標に基づく上位の値。たとえば、**Measured by** が **Total RU** に設定されている場合、最も多くの RU を消費した DB user、SQL type、SQL digest、DB、または Table が表示されます。
 
 ### トレンドチャート {#trend-charts}
@@ -74,9 +74,9 @@ Statement Insight は過去データを補完しません。データは、こ�
 
 ### Statement Insight と Top RU の違いは何ですか？ {#what-is-the-difference-between-statement-insight-and-top-ru}
 
-[Top RU](/tidb-cloud/top-ru.md) は、進行中の RU スパイクを診断するためのほぼリアルタイムのツールです。短い直近の時間枠において、累積 RU 消費量で SQL ステートメントを順位付けし、現在も実行中のステートメントを含め、RU を最も多く消費している SQL ステートメントと主要フィールドに焦点を当てます。
+[Top RU](/tidb-cloud/top-ru.md) は、進行中の RU スパイクを診断するためのほぼリアルタイムのツールです。短い直近の時間枠において、累積 RU 消費量で SQL文を順位付けし、現在も実行中のステートメントを含め、RU を最も多く消費している SQL文と主要フィールドに焦点を当てます。
 
-Statement Insight は履歴分析ツールです。より多くの SQL ステートメント（収集間隔ごとに最大 3,000 SQL digests）を、より詳細なフィールドとともに収集・表示し、DB User、SQL Type、SQL Digest、DB、または Table ごとに分類された、より長い期間にわたる RU 消費量、レイテンシー、実行回数の傾向を把握するのに役立ちます。これにより、RU とパフォーマンスのベースラインを確立し、継続的な最適化の機会を特定できます。
+Statement Insight は履歴分析ツールです。より多くの SQL文（収集間隔ごとに最大 3,000 SQL digests）を、より詳細なフィールドとともに収集・表示し、DB User、SQL Type、SQL Digest、DB、または Table ごとに分類された、より長い期間にわたる RU 消費量、レイテンシー、実行回数の傾向を把握するのに役立ちます。これにより、RU とパフォーマンスのベースラインを確立し、継続的な最適化の機会を特定できます。
 
 ### Statement Insight に表示される RU は、請求対象の RU と同じですか？ {#is-the-ru-shown-in-statement-insight-the-same-as-the-billed-ru}
 

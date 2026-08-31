@@ -58,12 +58,12 @@ filters:
     - `Do` : 許可リスト。以下の2つの条件のいずれかを満たす場合、 binlogイベントは複製されます。
 
         - イベントはルール設定と一致します。
-        - sql-pattern が指定されており、イベントの SQL ステートメントが sql-pattern オプションのいずれかと一致します。
+        - sql-pattern が指定されており、イベントの SQL文が sql-pattern オプションのいずれかと一致します。
 
     - `Ignore` ：ブロックリスト。以下の2つの条件のいずれかを満たす場合、 binlogイベントはフィルタリングされます。
 
         - イベントはルール設定と一致します。
-        - sql-pattern が指定されており、イベントの SQL ステートメントが sql-pattern オプションのいずれかと一致します。
+        - sql-pattern が指定されており、イベントの SQL文が sql-pattern オプションのいずれかと一致します。
 
     `Do`と`Ignore`両方が設定されている場合、 `Ignore`の方が`Do`よりも優先されます。つまり、 `Ignore`と`Do`両方の条件を満たすイベントは除外されます。
 
@@ -90,7 +90,7 @@ filters:
 
 ### シャーディングされたスキーマとテーブルのDML操作のみを移行する {#migrate-only-dml-operations-of-sharded-schemas-and-tables}
 
-DML ステートメントのみをレプリケートするには、次に示すように`Binlog event filter rule`を 2つ設定します。
+DML文のみをレプリケートするには、次に示すように`Binlog event filter rule`を 2つ設定します。
 
 ```
 filters:
@@ -105,9 +105,9 @@ filters:
     action: Do
 ```
 
-### TiDB でサポートされていない SQL ステートメントを除外する {#filter-out-sql-statements-not-supported-by-tidb}
+### TiDB でサポートされていない SQL文を除外する {#filter-out-sql-statements-not-supported-by-tidb}
 
-TiDB でサポートされていない SQL ステートメントを除外するには、以下に示すように`filter-procedure-rule`を設定します。
+TiDB でサポートされていない SQL文を除外するには、以下に示すように`filter-procedure-rule`を設定します。
 
 ```
 filters:

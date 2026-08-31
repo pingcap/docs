@@ -17,15 +17,15 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 SQLは、その関数に応じて以下の4種類に分類されます。
 
-- DDL (データ定義言語): データベース、テーブル、ビュー、インデックスなどのデータベースオブジェクトを定義するために使用されます。 TiDB の DDL ステートメントについては、 [スキーマ管理／データ定義文（DDL）](/sql-statements/sql-statement-overview.md#schema-management--data-definition-statements-ddl)を参照してください。
+- DDL (データ定義言語): データベース、テーブル、ビュー、インデックスなどのデータベースオブジェクトを定義するために使用されます。 TiDB の DDL文については、 [スキーマ管理／データ定義文（DDL）](/sql-statements/sql-statement-overview.md#schema-management--data-definition-statements-ddl)を参照してください。
 
-- DML（データ操作言語）：アプリケーション関連のレコードを操作するために使用されます。TiDB の DML ステートメントについては、 [データ操作文（DML）](/sql-statements/sql-statement-overview.md#data-manipulation-statements-dml)を参照してください。
+- DML（データ操作言語）：アプリケーション関連のレコードを操作するために使用されます。TiDB の DML文については、 [データ操作文（DML）](/sql-statements/sql-statement-overview.md#data-manipulation-statements-dml)を参照してください。
 
 - DQL（データクエリ言語）：条件付きフィルタリング後のレコードをクエリするために使用されます。
 
 - DCL（データ制御言語）：アクセス権限とセキュリティレベルを定義するために使用されます。
 
-TiDB の SQL ステートメントの概要については、 [SQL Statement Overview](/sql-statements/sql-statement-overview.md)を参照してください。
+TiDB の SQL文の概要については、 [SQL Statement Overview](/sql-statements/sql-statement-overview.md)を参照してください。
 
 ## SQLモード {#sql-mode}
 
@@ -45,9 +45,9 @@ TiDBは、行IDの生成とデータ配信を最適化するための3つのSQL�
 
 ### AUTO_INCREMENT {#auto-increment}
 
-`AUTO_INCREMENT`は、列のデフォルト値を自動的に入力するために使用される列属性です。 `INSERT`ステートメントで`AUTO_INCREMENT`列の値が指定されていない場合、システムはこの列に値を自動的に割り当てます。
+`AUTO_INCREMENT`は、列のデフォルト値を自動的に入力するために使用される列属性です。 `INSERT`文で`AUTO_INCREMENT`列の値が指定されていない場合、システムはこの列に値を自動的に割り当てます。
 
-パフォーマンス上の理由から、 `AUTO_INCREMENT`番号は、各 TiDBサーバーに値のバッチ (デフォルトでは 3 万) で割り当てられます。つまり、 `AUTO_INCREMENT`番号は一意であることが保証されますが、 `INSERT`ステートメントに割り当てられる値は、TiDBサーバーごとに単調増加になります。
+パフォーマンス上の理由から、 `AUTO_INCREMENT`番号は、各 TiDBサーバーに値のバッチ (デフォルトでは 3 万) で割り当てられます。つまり、 `AUTO_INCREMENT`番号は一意であることが保証されますが、 `INSERT`文に割り当てられる値は、TiDBサーバーごとに単調増加になります。
 
 すべての TiDB サーバーで`AUTO_INCREMENT`の数値を単調増加にしたい場合、また TiDB のバージョンが v6.5.0 以降の場合は、[MySQL互換モード](/auto-increment.md#mysql-compatibility-mode)を有効にすることをお勧めします。
 
@@ -69,7 +69,7 @@ TiDBは、行IDの生成とデータ配信を最適化するための3つのSQL�
 
 ## キーワード {#keywords}
 
-キーワードとは、 `SELECT` 、 `UPDATE` 、 `DELETE`のように、SQL ステートメントで特別な意味を持つ単語です。
+キーワードとは、 `SELECT` 、 `UPDATE` 、 `DELETE`のように、SQL文で特別な意味を持つ単語です。
 
 - それらのいくつかは、識別子として直接使用することができ、それらは非予約キーワードと呼ばれます。
 

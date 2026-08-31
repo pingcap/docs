@@ -103,7 +103,7 @@ SHOW PLACEMENT LABELS;
 
     構成可能な配置オプションとその意味の詳細については、「[配置オプション](#placement-option-reference)を参照してください。
 
-2. テーブルまたはパーティションテーブルに配置ポリシーを適用するには、 `CREATE TABLE`または`ALTER TABLE`ステートメントを使用して、そのテーブルまたはパーティションテーブルの配置ポリシーを指定します。
+2. テーブルまたはパーティションテーブルに配置ポリシーを適用するには、 `CREATE TABLE`または`ALTER TABLE`文を使用して、そのテーブルまたはパーティションテーブルの配置ポリシーを指定します。
 
     ```sql
     CREATE TABLE t1 (a INT) PLACEMENT POLICY=myplacementpolicy;

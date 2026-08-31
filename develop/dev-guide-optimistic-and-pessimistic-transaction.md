@@ -1229,7 +1229,7 @@ OPTIMISTIC=True ALICE=4 BOB=6 python3 txn_example.py
 
 </SimpleTab>
 
-SQL ステートメントの実行プロセス:
+SQL文の実行プロセス:
 
 ```sql
     /* txn 2 */ BEGIN OPTIMISTIC

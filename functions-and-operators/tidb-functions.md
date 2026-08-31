@@ -17,11 +17,11 @@ summary: TiDB 固有の関数の使用法について学習します。
 | [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | バイナリ プランをデコードします。                                                                                                                                                                                                                                |
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key)                 | TiDBエンコードされたキーエントリを、 `_tidb_rowid`と`table_id`含むJSON構造にデコードします。これらのエンコードされたキーは、一部のシステムテーブルやログ出力で確認できます。                                                                                                                                           |
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan)               | TiDB 実行計画をデコードします。                                                                                                                                                                                                                              |
-| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | クラスター内の一連の SQL ダイジェストに対応する正規化された SQL ステートメント (形式と引数のない形式) を照会します。                                                                                                                                                                                |
+| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | クラスター内の一連の SQL ダイジェストに対応する正規化された SQL文 (形式と引数のない形式) を照会します。                                                                                                                                                                                |
 | [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key)     | インデックスキーをエンコードします。                                                                                                                                                                                                                              |
 | [`TIDB_ENCODE_RECORD_KEY()`](#tidb_encode_record_key)   | レコード キーをエンコードします。                                                                                                                                                                                                                                |
 | [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest)   | クエリ文字列のダイジェストを取得します。                                                                                                                                                                                                                             |
-| [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner)             | 接続しているTiDBインスタンスがDDLオーナーであるかどうかを確認します。DDLオーナーとは、クラスター内の他のすべてのノードに代わってDDLステートメントを実行する役割を担うTiDBインスタンスです。                                                                                                                                           |
+| [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner)             | 接続しているTiDBインスタンスがDDLオーナーであるかどうかを確認します。DDLオーナーとは、クラスター内の他のすべてのノードに代わってDDL文を実行する役割を担うTiDBインスタンスです。                                                                                                                                           |
 | [`TIDB_MVCC_INFO()`](#tidb_mvcc_info)                   | キーに関する[MVCC (マルチバージョン同時実行制御)](https://docs.pingcap.com/tidb/stable/glossary#multi-version-concurrency-control-mvcc)情報を返します。                                                                                                                      |
 | [`TIDB_PARSE_TSO()`](#tidb_parse_tso)                   | TiDB TSOタイムスタンプから物理タイムスタンプを抽出します。参照: [`tidb_current_ts`](/system-variables.md#tidb_current_ts) 。                                                                                                                                                 |
 | [`TIDB_PARSE_TSO_LOGICAL()`](#tidb_parse_tso_logical)   | TiDB TSO タイムスタンプから論理タイムスタンプを抽出します。                                                                                                                                                                                                               |
@@ -42,11 +42,11 @@ summary: TiDB 固有の関数の使用法について学習します。
 | [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | バイナリ プランをデコードします。                                                                                                                                                                                                                                                           |
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key)                 | TiDBエンコードされたキーエントリを、 `_tidb_rowid`と`table_id`含むJSON構造にデコードします。これらのエンコードされたキーは、一部のシステムテーブルやログ出力で確認できます。                                                                                                                                                                      |
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan)               | TiDB 実行計画をデコードします。                                                                                                                                                                                                                                                         |
-| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | クラスター内の一連の SQL ダイジェストに対応する正規化された SQL ステートメント (形式と引数のない形式) を照会します。                                                                                                                                                                                                           |
+| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | クラスター内の一連の SQL ダイジェストに対応する正規化された SQL文 (形式と引数のない形式) を照会します。                                                                                                                                                                                                           |
 | [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key)     | インデックスキーをエンコードします。                                                                                                                                                                                                                                                         |
 | [`TIDB_ENCODE_RECORD_KEY()`](#tidb_encode_record_key)   | レコード キーをエンコードします。                                                                                                                                                                                                                                                           |
 | [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest)   | クエリ文字列のダイジェストを取得します。                                                                                                                                                                                                                                                        |
-| [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner)             | 接続しているTiDBインスタンスがDDLオーナーであるかどうかを確認します。DDLオーナーとは、クラスター内の他のすべてのノードに代わってDDLステートメントを実行する役割を担うTiDBインスタンスです。                                                                                                                                                                      |
+| [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner)             | 接続しているTiDBインスタンスがDDLオーナーであるかどうかを確認します。DDLオーナーとは、クラスター内の他のすべてのノードに代わってDDL文を実行する役割を担うTiDBインスタンスです。                                                                                                                                                                      |
 | [`TIDB_PARSE_TSO()`](#tidb_parse_tso)                   | TiDB TSOタイムスタンプから物理タイムスタンプを抽出します。参照: [`tidb_current_ts`](/system-variables.md#tidb_current_ts) 。                                                                                                                                                                            |
 | [`TIDB_MVCC_INFO()`](#tidb_mvcc_info)                   | キーに関する[MVCC (マルチバージョン同時実行制御)](https://docs.pingcap.com/tidb/stable/glossary#multi-version-concurrency-control-mvcc)情報を返します。                                                                                                                                                 |
 | [`TIDB_PARSE_TSO_LOGICAL()`](#tidb_parse_tso_logical)   | TiDB TSO タイムスタンプから論理タイムスタンプを抽出します。                                                                                                                                                                                                                                          |
@@ -59,7 +59,7 @@ summary: TiDB 固有の関数の使用法について学習します。
 
 ## 現在のリソースグループ {#current_resource_group}
 
-`CURRENT_RESOURCE_GROUP()`機能は、現在のセッションがバインドされているリソースグループ名を表示するために使用されます。[リソース管理](/tidb-resource-control-ru-groups.md)機能を有効にすると、SQL ステートメントで使用できるリソースは、バインドされているリソースグループのリソースクォータによって制限されます。
+`CURRENT_RESOURCE_GROUP()`機能は、現在のセッションがバインドされているリソースグループ名を表示するために使用されます。[リソース管理](/tidb-resource-control-ru-groups.md)機能を有効にすると、SQL文で使用できるリソースは、バインドされているリソースグループのリソースクォータによって制限されます。
 
 セッションが確立されると、TiDB はログインユーザーがデフォルトでバインドされているリソースグループにセッションをバインドします。ユーザーがどのリソースグループにもバインドされていない場合、セッションは`default`リソースグループにバインドされます。セッションが確立されると、ユーザーのバインドされているリソースグループが[ユーザーにバインドされたリソースグループを変更する](/sql-statements/sql-statement-alter-user.md#modify-basic-user-information)で変更されても、バインドされているリソースグループはデフォルトで変更されません。現在のセッションのバインドされているリソースグループを変更するには、 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)を使用します。
 
@@ -278,7 +278,7 @@ ORDER BY
 
 TiDB実行計画は、スロークエリログにエンコードされた形式で保存されています。`TIDB_DECODE_PLAN()`関数は、エンコードされたプランを人間が読める形式にデコードするために使用されます。
 
-この関数は、ステートメント実行時にプランが取得されるため便利です。`EXPLAIN`ステートメントを再実行すると、データの分布と統計が時間の経過とともに変化するため、異なる結果が生成される可能性があります。
+この関数は、ステートメント実行時にプランが取得されるため便利です。`EXPLAIN`文を再実行すると、データの分布と統計が時間の経過とともに変化するため、異なる結果が生成される可能性があります。
 
 ```sql
 SELECT tidb_decode_plan('8QIYMAkzMV83CQEH8E85LjA0CWRhdGE6U2VsZWN0aW9uXzYJOTYwCXRpbWU6NzEzLjHCtXMsIGxvb3BzOjIsIGNvcF90YXNrOiB7bnVtOiAxLCBtYXg6IDU2OC41wgErRHByb2Nfa2V5czogMCwgcnBjXxEpAQwFWBAgNTQ5LglZyGNvcHJfY2FjaGVfaGl0X3JhdGlvOiAwLjAwfQkzLjk5IEtCCU4vQQoxCTFfNgkxXzAJMwm2SGx0KHRlc3QudC5hLCAxMDAwMCkNuQRrdgmiAHsFbBQzMTMuOMIBmQnEDDk2MH0BUgEEGAoyCTQzXzUFVwX1oGFibGU6dCwga2VlcCBvcmRlcjpmYWxzZSwgc3RhdHM6cHNldWRvCTk2ISE2aAAIMTUzXmYA')\G
@@ -304,7 +304,7 @@ SELECT tidb_decode_plan('8QIYMAkzMV83CQEH8E85LjA0CWRhdGE6U2VsZWN0aW9uXzYJOTYwCXR
 > **Note:**
 >
 > - この機能を使用できるのは、 [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみです。
-> - `TIDB_DECODE_SQL_DIGESTS`を実行すると、TiDB は各 SQL ダイジェストに対応するステートメントをステートメントサマリーテーブルから照会します。そのため、どの SQL ダイジェストに対しても、必ず対応するステートメントが見つかるとは限りません。見つかるのはクラスタ内で実行されたステートメントのみであり、これらの SQL ステートメントを照会できるかどうかは、ステートメントサマリーテーブルの関連設定にも影響されます。ステートメントサマリーテーブルの詳細については、 [ステートメントサマリーテーブル](/statement-summary-tables.md)を参照してください。
+> - `TIDB_DECODE_SQL_DIGESTS`を実行すると、TiDB は各 SQL ダイジェストに対応するステートメントをステートメントサマリーテーブルから照会します。そのため、どの SQL ダイジェストに対しても、必ず対応するステートメントが見つかるとは限りません。見つかるのはクラスタ内で実行されたステートメントのみであり、これらの SQL文を照会できるかどうかは、ステートメントサマリーテーブルの関連設定にも影響されます。ステートメントサマリーテーブルの詳細については、 [ステートメントサマリーテーブル](/statement-summary-tables.md)を参照してください。
 > - この関数はオーバーヘッドが大きいため、行数の多いクエリ（例えば、大規模で高負荷なクラスターでテーブル`information_schema.cluster_tidb_trx`全体を検索するなど）では、この関数を使用するとクエリの実行時間が長くなりすぎる可能性があります。注意して使用してください。
 >     - この関数は、呼び出されるたびに内部的に`STATEMENTS_SUMMARY` 、 `STATEMENTS_SUMMARY_HISTORY` 、 `CLUSTER_STATEMENTS_SUMMARY` 、 `CLUSTER_STATEMENTS_SUMMARY_HISTORY`テーブルを照会し、そのクエリに`UNION`演算が含まれるため、オーバーヘッドが大きくなります。この関数は現在ベクトル化をサポートしていません。つまり、複数行のデータに対してこの関数を呼び出す場合、上記のクエリは各行ごとに個別に実行されます。
 
@@ -452,7 +452,7 @@ SELECT TIDB_PARSE_TSO_LOGICAL(450456244814610434);
 
 ## TIDB_ROW_CHECKSUM {#tidb_row_checksum}
 
-`TIDB_ROW_CHECKSUM()`関数は、行のチェックサム値を照会するために使用されます。この関数は、FastPlanプロセス内の`SELECT`ステートメントでのみ使用できます。つまり、 `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?`や`SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`のようなステートメントで照会できます。
+`TIDB_ROW_CHECKSUM()`関数は、行のチェックサム値を照会するために使用されます。この関数は、FastPlanプロセス内の`SELECT`文でのみ使用できます。つまり、 `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?`や`SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`のようなステートメントで照会できます。
 
 TiDB 内の単一行データのチェックサム機能を有効にするには (システム変数[`tidb_enable_row_level_checksum`](/system-variables.md#tidb_enable_row_level_checksum-new-in-v710)によって制御されます)、次のステートメントを実行します。
 

@@ -43,4 +43,4 @@ TiDB Cloud で {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }
 
 ## 次は？ {#what-s-next}
 
-{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスに正常に接続したら、[TiDBを使用してSQLステートメントを探索する](/basic-sql-operations.md)ことができます。
+{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスに正常に接続したら、[TiDBを使用してSQL文を探索する](/basic-sql-operations.md)ことができます。

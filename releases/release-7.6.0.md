@@ -93,7 +93,7 @@ TiDB バージョン: 7.6.0
 
     TiDB上でSaaSサービスを実行する場合、データの保守管理を容易にするため、テナントごとにデータを個別のデータベースに保存するのが一般的です。その結果、同じテーブルとインデックス定義、そして類似したSQL文を持つデータベースが数百個も存在することになります。このような状況では、SQL文に対して実行プランバインディングを作成すると、通常、そのバインディングは他のデータベースのSQL文にも適用されてしまいます。
 
-    このシナリオでは、TiDB v7.6.0 でクロスデータベースバインディング機能が導入されました。この機能は、異なるデータベースにある場合でも、同じスキーマを持つ SQL ステートメントに同じ実行計画をバインドすることをサポートします。クロスデータベースバインディングを作成する際には、次の例に示すように、データベース名を表すためにワイルドカード`*`を使用する必要があります。バインディングが作成されると、テーブル`t1`と`t2`がどのデータベースにあるかに関係なく、TiDB はこのバインディングを使用して同じスキーマを持つすべての SQL ステートメントの実行計画を生成しようとします。これにより、各データベースごとにバインディングを作成する手間が省けます。
+    このシナリオでは、TiDB v7.6.0 でクロスデータベースバインディング機能が導入されました。この機能は、異なるデータベースにある場合でも、同じスキーマを持つ SQL文に同じ実行計画をバインドすることをサポートします。クロスデータベースバインディングを作成する際には、次の例に示すように、データベース名を表すためにワイルドカード`*`を使用する必要があります。バインディングが作成されると、テーブル`t1`と`t2`がどのデータベースにあるかに関係なく、TiDB はこのバインディングを使用して同じスキーマを持つすべての SQL文の実行計画を生成しようとします。これにより、各データベースごとにバインディングを作成する手間が省けます。
 
     ```sql
     CREATE GLOBAL BINDING FOR
@@ -126,9 +126,9 @@ TiDB バージョン: 7.6.0
 
 - `LOAD DATA`は明示的なトランザクションとロールバックをサポートします [#49079](https://github.com/pingcap/tidb/pull/49079) @[ekexium](https://github.com/ekexium)
 
-    MySQLと比較すると、v7.6.0より前のTiDBバージョンでは`LOAD DATA`ステートメントのトランザクション動作が異なるため、このステートメントを使用する際には追加の調整が必要になる場合があります。具体的には、v4.0.0より前では、 `LOAD DATA`は20000行ごとにコミットされます。v4.0.0からv6.6.0までは、TiDBはデフォルトで1つのトランザクションですべての行をコミットし、 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)システム変数を設定することで固定行数ごとにコミットすることもサポートしています。v7.0.0以降では、 `tidb_dml_batch_size` `LOAD DATA`には適用されなくなり、TiDBは1つのトランザクションですべての行をコミットします。
+    MySQLと比較すると、v7.6.0より前のTiDBバージョンでは`LOAD DATA`文のトランザクション動作が異なるため、このステートメントを使用する際には追加の調整が必要になる場合があります。具体的には、v4.0.0より前では、 `LOAD DATA`は20000行ごとにコミットされます。v4.0.0からv6.6.0までは、TiDBはデフォルトで1つのトランザクションですべての行をコミットし、 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)システム変数を設定することで固定行数ごとにコミットすることもサポートしています。v7.0.0以降では、 `tidb_dml_batch_size` `LOAD DATA`には適用されなくなり、TiDBは1つのトランザクションですべての行をコミットします。
 
-    バージョン7.6.0以降、TiDBはトランザクション内で`LOAD DATA`他のDMLステートメントと同様に、特にMySQLと同様に処理します。トランザクション内の`LOAD DATA`ステートメントは、現在のトランザクションを自動的にコミットしたり、新しいトランザクションを開始したりしなくなりました。さらに、トランザクション内の`LOAD DATA`ステートメントを明示的にコミットまたはロールバックできます。また、 `LOAD DATA`ステートメントは、TiDBトランザクションモード設定（楽観的トランザクションまたは悲観的トランザクション）の影響を受けます。これらの改善により、MySQLからTiDBへの移行プロセスが簡素化され、データインポートにおいてより統一的で制御しやすいエクスペリエンスが提供されます。
+    バージョン7.6.0以降、TiDBはトランザクション内で`LOAD DATA`他のDML文と同様に、特にMySQLと同様に処理します。トランザクション内の`LOAD DATA`文は、現在のトランザクションを自動的にコミットしたり、新しいトランザクションを開始したりしなくなりました。さらに、トランザクション内の`LOAD DATA`文を明示的にコミットまたはロールバックできます。また、 `LOAD DATA`文は、TiDBトランザクションモード設定（楽観的トランザクションまたは悲観的トランザクション）の影響を受けます。これらの改善により、MySQLからTiDBへの移行プロセスが簡素化され、データインポートにおいてより統一的で制御しやすいエクスペリエンスが提供されます。
 
     詳細については、 [ドキュメント](/sql-statements/sql-statement-load-data.md)を参照してください。
 
@@ -146,13 +146,13 @@ TiDB バージョン: 7.6.0
 
 - 長時間実行されているアイドル状態のトランザクションを自動的に終了させる機能のサポート [#48714](https://github.com/pingcap/tidb/pull/48714) @[crazycs520](https://github.com/crazycs520)
 
-    ネットワーク切断やアプリケーション障害が発生するシナリオでは、 `COMMIT` / `ROLLBACK`ステートメントがデータベースに送信されない可能性があります。これにより、データベース ロックの解放が遅延し、トランザクション ロック待機が発生し、データベース接続が急増する可能性があります。このような問題はテスト環境ではよく発生しますが、本番環境でも時折発生する可能性があり、迅速な診断が難しい場合があります。これらの問題を回避するために、TiDB v7.6.0 では、長時間実行されているアイドル状態のトランザクションを自動的に終了する[`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760)システム変数が導入されました。トランザクション状態のユーザーセッションがこの変数の値を超える期間アイドル状態になると、TiDB はトランザクションのデータベース接続を終了し、トランザクションをロールバックします。
+    ネットワーク切断やアプリケーション障害が発生するシナリオでは、 `COMMIT` / `ROLLBACK`文がデータベースに送信されない可能性があります。これにより、データベース ロックの解放が遅延し、トランザクション ロック待機が発生し、データベース接続が急増する可能性があります。このような問題はテスト環境ではよく発生しますが、本番環境でも時折発生する可能性があり、迅速な診断が難しい場合があります。これらの問題を回避するために、TiDB v7.6.0 では、長時間実行されているアイドル状態のトランザクションを自動的に終了する[`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760)システム変数が導入されました。トランザクション状態のユーザーセッションがこの変数の値を超える期間アイドル状態になると、TiDB はトランザクションのデータベース接続を終了し、トランザクションをロールバックします。
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760)を参照してください。
 
 - 実行プランバインディングを作成するための構文を簡素化する [#48876](https://github.com/pingcap/tidb/issues/48876) @[qw4990](https://github.com/qw4990)
 
-    TiDB v7.6.0 では、実行プランバインディングを作成するための構文が簡素化されました。実行プランバインディングを作成する際に、元の SQL ステートメントを指定する必要がなくなりました。TiDB は、ヒント付きのステートメントに基づいて元の SQL ステートメントを識別します。この改善により、実行プランバインディングの作成がより便利になります。例:
+    TiDB v7.6.0 では、実行プランバインディングを作成するための構文が簡素化されました。実行プランバインディングを作成する際に、元の SQL文を指定する必要がなくなりました。TiDB は、ヒント付きのステートメントに基づいて元の SQL文を識別します。この改善により、実行プランバインディングの作成がより便利になります。例:
 
     ```sql
     CREATE GLOBAL BINDING
@@ -184,7 +184,7 @@ TiDB バージョン: 7.6.0
 
     - [スロークエリ](/identify-slow-queries.md): リソースグループ名、リソース ユニット (RU) の消費量、およびリソースの待機時間を追加します。
     - [ステートメントサマリーテーブル](/statement-summary-tables.md): リソースグループ名、RU 消費量、リソースの待機時間を追加します。
-    - システム変数[`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014)に、SQL ステートメントによって消費された[RU](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)を示す新しいエントリ`ru_consumption`を追加します。この変数を使用して、セッション内の最後のステートメントのリソース消費量を取得できます。
+    - システム変数[`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014)に、SQL文によって消費された[RU](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)を示す新しいエントリ`ru_consumption`を追加します。この変数を使用して、セッション内の最後のステートメントのリソース消費量を取得できます。
     - リソースグループに基づいてデータベースのメトリックを追加します。具体的には、QPS/TPS、実行時間（P999/P99/P95）、障害発生回数、接続数などです。
     - すべてのリソースグループの1日あたりのRU消費量の履歴レコードを記録するために、システムテーブル[`request_unit_by_group`](/mysql-schema/mysql-schema.md#system-tables-related-to-resource-control)を追加します。
 
@@ -198,9 +198,9 @@ TiDB バージョン: 7.6.0
 
     詳細については、[ドキュメント](/dm/dm-compatibility-catalog.md)を参照してください。
 
-- TiCDCは双方向レプリケーション（BDR）モードでのDDLステートメントのレプリケーションをサポートします（実験的） [#10301](https://github.com/pingcap/tiflow/issues/10301) [#48519](https://github.com/pingcap/tidb/issues/48519) @[okJiang](https://github.com/okJiang) @[asddongmen](https://github.com/asddongmen)
+- TiCDCは双方向レプリケーション（BDR）モードでのDDL文のレプリケーションをサポートします（実験的） [#10301](https://github.com/pingcap/tiflow/issues/10301) [#48519](https://github.com/pingcap/tidb/issues/48519) @[okJiang](https://github.com/okJiang) @[asddongmen](https://github.com/asddongmen)
 
-    バージョン7.6.0以降、TiCDCは双方向レプリケーションが構成されたDDLステートメントのレプリケーションをサポートします。以前は、TiCDCはDDLステートメントのレプリケーションをサポートしていなかったため、TiCDCの双方向レプリケーションを使用するユーザーは、DDLステートメントを両方のTiDBクラスタに個別に適用する必要がありました。この機能により、TiCDCはクラスタに`PRIMARY` BDRロールを割り当てることができ、そのクラスタからダウンストリームクラスタへのDDLステートメントのレプリケーションが可能になります。
+    バージョン7.6.0以降、TiCDCは双方向レプリケーションが構成されたDDL文のレプリケーションをサポートします。以前は、TiCDCはDDL文のレプリケーションをサポートしていなかったため、TiCDCの双方向レプリケーションを使用するユーザーは、DDL文を両方のTiDBクラスタに個別に適用する必要がありました。この機能により、TiCDCはクラスタに`PRIMARY` BDRロールを割り当てることができ、そのクラスタからダウンストリームクラスタへのDDL文のレプリケーションが可能になります。
 
     詳細については、 [ドキュメント](/ticdc/ticdc-bidirectional-replication.md)を参照してください。
 
@@ -224,7 +224,7 @@ TiDB バージョン: 7.6.0
 
 ### MySQLとの互換性 {#mysql-compatibility}
 
-- TiDB v7.6.0 より前は、 `LOAD DATA`操作は、単一のトランザクションですべての行をコミットするか、トランザクションをバッチでコミットしていました。これは MySQL の動作とは若干異なります。v7.6.0 以降、TiDB は`LOAD DATA` MySQL と同様にトランザクションで処理します。トランザクション内の`LOAD DATA`ステートメントは、現在のトランザクションを自動的にコミットしたり、新しいトランザクションを開始したりしなくなりました。さらに、トランザクション内の`LOAD DATA`ステートメントを明示的にコミットまたはロールバックできます。また、 `LOAD DATA`ステートメントは、TiDB のトランザクションモード設定 (楽観的トランザクションまたは悲観的トランザクション) の影響を受けます。 [#49079](https://github.com/pingcap/tidb/pull/49079) @[ekexium](https://github.com/ekexium)
+- TiDB v7.6.0 より前は、 `LOAD DATA`操作は、単一のトランザクションですべての行をコミットするか、トランザクションをバッチでコミットしていました。これは MySQL の動作とは若干異なります。v7.6.0 以降、TiDB は`LOAD DATA` MySQL と同様にトランザクションで処理します。トランザクション内の`LOAD DATA`文は、現在のトランザクションを自動的にコミットしたり、新しいトランザクションを開始したりしなくなりました。さらに、トランザクション内の`LOAD DATA`文を明示的にコミットまたはロールバックできます。また、 `LOAD DATA`文は、TiDB のトランザクションモード設定 (楽観的トランザクションまたは悲観的トランザクション) の影響を受けます。 [#49079](https://github.com/pingcap/tidb/pull/49079) @[ekexium](https://github.com/ekexium)
 
 ### システム変数 {#system-variables}
 
@@ -233,7 +233,7 @@ TiDB バージョン: 7.6.0
 | [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640) | 変更     | さらなるテストの結果、デフォルト値を`1`から`128`に変更します。                                                                                                                                                                                                                                                                                     |
 | [`tidb_sysproc_scan_concurrency`](/system-variables.md#tidb_sysproc_scan_concurrency-new-in-v650)                   | 変更     | 大規模クラスタでは、 `scan`操作の同時実行数を`ANALYZE`のニーズに合わせて高く調整できます。したがって、最大値を`256`から`4294967295`に変更します。                                                                                                                                                                                                                               |
 | [`tidb_analyze_distsql_scan_concurrency`](/system-variables.md#tidb_analyze_distsql_scan_concurrency-new-in-v760)   | 新しく追加された | `scan`操作を実行する際の`ANALYZE`操作の同時実行数を設定します。デフォルト値は`4`です。                                                                                                                                                                                                                                                                    |
-| [`tidb_ddl_version`](https://docs-archive.pingcap.com/tidb/v7.6/system-variables/#tidb_ddl_version-new-in-v760)     | 新しく追加された | [TiDB DDL V2](https://docs-archive.pingcap.com/tidb/v7.6/ddl-v2/)を有効にするかどうかを制御します。有効にするには`2`に、無効にするには`1`に値を設定します。デフォルト値は`1`です。TiDB DDL V2 が有効になっている場合、DDL ステートメントは TiDB DDL V2 を使用して実行されます。テーブルを作成する DDL ステートメントの実行速度は、TiDB DDL V1 と比較して 10 倍向上します。                                                                     |
+| [`tidb_ddl_version`](https://docs-archive.pingcap.com/tidb/v7.6/system-variables/#tidb_ddl_version-new-in-v760)     | 新しく追加された | [TiDB DDL V2](https://docs-archive.pingcap.com/tidb/v7.6/ddl-v2/)を有効にするかどうかを制御します。有効にするには`2`に、無効にするには`1`に値を設定します。デフォルト値は`1`です。TiDB DDL V2 が有効になっている場合、DDL文は TiDB DDL V2 を使用して実行されます。テーブルを作成する DDL文の実行速度は、TiDB DDL V1 と比較して 10 倍向上します。                                                                     |
 | [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760)                             | 新しく追加された | パーティションテーブルに対して`Global indexes`を作成するかどうかを制御します。デフォルト値は`OFF`です。 `Global index`は現在開発段階です。**このシステム変数の値を変更することは推奨されません**。                                                                                                                                                                                                   |
 | [`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760)                   | 新しく追加された | ユーザーセッションにおけるトランザクションのアイドルタイムアウトを制御します。ユーザーセッションがトランザクション状態にあり、この変数の値を超える時間アイドル状態が続くと、TiDB はセッションを終了します。デフォルト値`0`は無制限を意味します。                                                                                                                                                                                            |
 | [`tidb_ignore_inlist_plan_digest`](/system-variables.md#tidb_ignore_inlist_plan_digest-new-in-v760)                 | 新しく追加された | プランダイジェストを生成する際に、TiDB が異なるクエリ間で`IN`リスト内の要素の差異を無視するかどうかを制御します。デフォルト値`OFF`は、差異を無視しないことを意味します。                                                                                                                                                                                                                             |
@@ -323,7 +323,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
 
         - フルバックアップリカバリフェーズ中に Amazon S3 `session-token`および`assume-role`を使用した認証をサポート [#39832](https://github.com/pingcap/tidb/issues/39832) @[3pointer](https://github.com/3pointer)
         - `delete range`シナリオにおけるポイントインタイムリカバリ (PITR) の新しい統合テストを導入し、PITR の安定性を向上させます [#47738](https://github.com/pingcap/tidb/issues/47738) @[Leavrth](https://github.com/Leavrth)
-        - 大規模データセットのシナリオにおける`RESTORE`ステートメントのテーブル作成パフォーマンスを改善 [#48301](https://github.com/pingcap/tidb/issues/48301) @[Leavrth](https://github.com/Leavrth)
+        - 大規模データセットのシナリオにおける`RESTORE`文のテーブル作成パフォーマンスを改善 [#48301](https://github.com/pingcap/tidb/issues/48301) @[Leavrth](https://github.com/Leavrth)
         - BR例外処理メカニズムをリファクタリングして、不明なエラーに対する耐性を高めます [#47656](https://github.com/pingcap/tidb/issues/47656) @[3pointer](https://github.com/3pointer)
 
     - TiCDC
@@ -358,12 +358,12 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     - メモリ制限を超えると、CTE を含むクエリが予期せずスタックする問題を修正 [#49096](https://github.com/pingcap/tidb/issues/49096) @[AilinKid](https://github.com/AilinKid)
     - TiDBサーバーが監査ログ用のEnterpriseプラグイン使用時に大量のリソースを消費する可能性がある問題を修正 [#49273](https://github.com/pingcap/tidb/issues/49273) @[lcwangchao](https://github.com/lcwangchao)
     - 特定のシナリオでオプティマイザがTiFlash選択パスを DUAL テーブルに誤って変換する問題を修正 [#49285](https://github.com/pingcap/tidb/issues/49285) @[AilinKid](https://github.com/AilinKid)
-    - `UPDATE`または`DELETE`ステートメントに`WITH RECURSIVE` CTE が含まれている場合、誤った結果が生じる可能性がある問題を修正しました [#48969](https://github.com/pingcap/tidb/issues/48969) @[winoros](https://github.com/winoros)
+    - `UPDATE`または`DELETE`文に`WITH RECURSIVE` CTE が含まれている場合、誤った結果が生じる可能性がある問題を修正しました [#48969](https://github.com/pingcap/tidb/issues/48969) @[winoros](https://github.com/winoros)
     - IndexHashJoinオペレーターを含むクエリがメモリ使用量`tidb_mem_quota_query`超えると停止する問題を修正しました [#49033](https://github.com/pingcap/tidb/issues/49033) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - 非厳格モード ( `sql_mode = ''` ) で`INSERT`実行中に切り捨てが発生し、エラーが報告される問題を修正しました [#49369](https://github.com/pingcap/tidb/issues/49369) @[tiancaiamao](https://github.com/tiancaiamao)
     - CTEクエリが再試行処理中にエラー`type assertion for CTEStorageMap failed`を報告する可能性がある問題を修正 [#46522](https://github.com/pingcap/tidb/issues/46522) @[tiancaiamao](https://github.com/tiancaiamao)
     - `LIMIT`と`ORDER BY`がネストされた`UNION`クエリで無効になる可能性がある問題を修正 [#49377](https://github.com/pingcap/tidb/issues/49377) @[AilinKid](https://github.com/AilinKid)
-    - `ENUM`または`SET`型の無効な値を解析すると、SQL ステートメント エラーが直接発​​生する問題を修正しました [#49487](https://github.com/pingcap/tidb/issues/49487) @[winoros](https://github.com/winoros)
+    - `ENUM`または`SET`型の無効な値を解析すると、SQL文 エラーが直接発​​生する問題を修正しました [#49487](https://github.com/pingcap/tidb/issues/49487) @[winoros](https://github.com/winoros)
     - Golangの暗黙的な型変換アルゴリズムが原因で統計構築時に発生する過剰な統計誤差の問題を修正 [#49801](https://github.com/pingcap/tidb/issues/49801) @[qw4990](https://github.com/qw4990)
     - 一部のタイムゾーンでサマータイムが正しく表示されない問題を修正 [#49586](https://github.com/pingcap/tidb/issues/49586) @[overvenus](https://github.com/overvenus)
     - `AUTO_ID_CACHE=1`を含むテーブルが多数存在する場合に gRPC クライアントのリークを引き起こす可能性がある問題を修正しました [#48869](https://github.com/pingcap/tidb/issues/48869) @[tiancaiamao](https://github.com/tiancaiamao)
@@ -383,8 +383,8 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     - `STREAM_AGG()` が CI を正しく処理しないためにクエリ結果が正しくない問題を修正します [#49902](https://github.com/pingcap/tidb/issues/49902) @[wshwsh12](https://github.com/wshwsh12)
     - `TIME`への変換時にエンコードが失敗する問題を修正 [#47346](https://github.com/pingcap/tidb/issues/47346) @[wshwsh12](https://github.com/wshwsh12)
     - `ENFORCED`制約内の`CHECK`オプションの動作がMySQL 8.0と矛盾する問題を修正しました。 [#47567](https://github.com/pingcap/tidb/issues/47567) [#47631](https://github.com/pingcap/tidb/issues/47631) @[jiyfhust](https://github.com/jiyfhust)
-    - `CHECK`制約を持つDDLステートメントが停止する問題を修正 [#47632](https://github.com/pingcap/tidb/issues/47632) @[jiyfhust](https://github.com/jiyfhust)
-    - メモリ不足が原因でDDLステートメントのインデックス追加が失敗する問題を修正 [#47862](https://github.com/pingcap/tidb/issues/47862) @[GMHDBJD](https://github.com/GMHDBJD)
+    - `CHECK`制約を持つDDL文が停止する問題を修正 [#47632](https://github.com/pingcap/tidb/issues/47632) @[jiyfhust](https://github.com/jiyfhust)
+    - メモリ不足が原因でDDL文のインデックス追加が失敗する問題を修正 [#47862](https://github.com/pingcap/tidb/issues/47862) @[GMHDBJD](https://github.com/GMHDBJD)
     - `ADD INDEX`の実行中にクラスターをアップグレードすると、データがインデックスと不整合になる可能性がある問題を修正しました [#46306](https://github.com/pingcap/tidb/issues/46306) @[zimulala](https://github.com/zimulala)
     - `ADMIN CHECK`システム変数を更新した後に`tidb_mem_quota_query`を実行すると`ERROR 8175`が返される問題を修正 [#49258](https://github.com/pingcap/tidb/issues/49258) @[tangenta](https://github.com/tangenta)
     - `ALTER TABLE`外部キーで参照される列の型を変更した際に、 `DECIMAL`の精度変更がエラーとして報告されない問題を修正しました。 [#49836](https://github.com/pingcap/tidb/issues/49836) @[yoshikipom](https://github.com/yoshikipom)
@@ -409,11 +409,11 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     - クエリが強制ソートを行うオプティマイザヒント（ `STREAM_AGG()`など）を使用し、かつ実行計画に`IndexMerge`が含まれている場合に、強制ソートが無効になる可能性がある問題を修正します。 [#49605](https://github.com/pingcap/tidb/issues/49605) @[AilinKid](https://github.com/AilinKid)
     - ヒストグラムの境界に`NULL`が含まれる場合、ヒストグラム統計が読み取り可能な文字列に解析されない可能性がある問題を修正 [#49823](https://github.com/pingcap/tidb/issues/49823) @[AilinKid](https://github.com/AilinKid)
     - `GROUP_CONCAT(ORDER BY)`構文を含むクエリを実行するとエラーが返される可能性がある問題を修正 [#49986](https://github.com/pingcap/tidb/issues/49986) @[AilinKid](https://github.com/AilinKid)
-    - `UPDATE` 、 `DELETE` 、および`INSERT`ステートメントが、 `SQL_MODE`が厳密でない場合に警告ではなくオーバーフローエラーを返す問題を修正します [#49137](https://github.com/pingcap/tidb/issues/49137) @[YangKeao](https://github.com/YangKeao)
+    - `UPDATE` 、 `DELETE` 、および`INSERT`文が、 `SQL_MODE`が厳密でない場合に警告ではなくオーバーフローエラーを返す問題を修正します [#49137](https://github.com/pingcap/tidb/issues/49137) @[YangKeao](https://github.com/YangKeao)
     - テーブルに多値インデックスと非バイナリ型文字列で構成される複合インデックスがある場合にデータを挿入できない問題を修正 [#49680](https://github.com/pingcap/tidb/issues/49680) @[YangKeao](https://github.com/YangKeao)
     - 多階層にネストされた`LIMIT`クエリ内の`UNION`無効になる可能性がある問題を修正 [#49874](https://github.com/pingcap/tidb/issues/49874) @[Defined2014](https://github.com/Defined2014)
     - `BETWEEN ... AND ...`条件を使用してパーティションテーブルをクエリすると誤った結果が返される問題を修正 [#49842](https://github.com/pingcap/tidb/issues/49842) @[Defined2014](https://github.com/Defined2014)
-    - `REPLACE INTO`ステートメントでヒントが使用できない問題を修正 [#34325](https://github.com/pingcap/tidb/issues/34325) @[YangKeao](https://github.com/YangKeao)
+    - `REPLACE INTO`文でヒントが使用できない問題を修正 [#34325](https://github.com/pingcap/tidb/issues/34325) @[YangKeao](https://github.com/YangKeao)
     - ハッシュパーティションテーブルのクエリ時に TiDB が間違ったパーティションを選択する可能性がある問題を修正 [#50044](https://github.com/pingcap/tidb/issues/50044) @[Defined2014](https://github.com/Defined2014)
     - 圧縮を有効にして MariaDB Connector/J を使用するときに発生する接続エラーを修正 [#49845](https://github.com/pingcap/tidb/issues/49845) @[onlyacat](https://github.com/onlyacat)
 
@@ -471,11 +471,11 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
 
     - TiCDC
 
-        - `WHERE`句が、特定のシナリオで`DELETE`ステートメントを複製する際に主キーを条件として使用しない問題を修正しました [#9812](https://github.com/pingcap/tiflow/issues/9812) @[asddongmen](https://github.com/asddongmen)
+        - `WHERE`句が、特定のシナリオで`DELETE`文を複製する際に主キーを条件として使用しない問題を修正しました [#9812](https://github.com/pingcap/tiflow/issues/9812) @[asddongmen](https://github.com/asddongmen)
         - TiCDCサーバーがオブジェクトストレージサービスへのデータ複製時にpanicする可能性がある問題を修正しました [#10137](https://github.com/pingcap/tiflow/issues/10137) @[sdojjy](https://github.com/sdojjy)
         - `kv-client`の初期化中の潜在的なデータ競合の問題を修正 [#10095](https://github.com/pingcap/tiflow/issues/10095) @[3AceShowHand](https://github.com/3AceShowHand)
         - TiCDCが特定の特殊なシナリオで誤ってTiKVとの接続を閉じる問題を修正 [#10239](https://github.com/pingcap/tiflow/issues/10239) @[hicqu](https://github.com/hicqu)
-        - TiCDCサーバーが損失のあるDDLステートメントを実行する際にpanicする可能性がある問題を修正しました（アップストリーム [#9739](https://github.com/pingcap/tiflow/issues/9739) @[hicqu](https://github.com/hicqu)
+        - TiCDCサーバーが損失のあるDDL文を実行する際にpanicする可能性がある問題を修正しました（アップストリーム [#9739](https://github.com/pingcap/tiflow/issues/9739) @[hicqu](https://github.com/hicqu)
         - TiCDCがデータを下流のMySQLに複製する際に`checkpoint-ts`が停止する可能性がある問題を修正しました [#10334](https://github.com/pingcap/tiflow/issues/10334) @[zhangjinpeng87](https://github.com/zhangjinpeng87)
 
     - TiDB Data Migration (DM)

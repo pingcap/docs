@@ -56,7 +56,7 @@ TiDB バージョン: 7.5.6
     - 不一致な値タイプとタイプ変換エラーを含む`IN`条件を使用してパーティションテーブルをクエリすると、誤ったクエリ結果が発生する問題を修正しました。 [＃54746](https://github.com/pingcap/tidb/issues/54746) @[mjonss](https://github.com/mjonss)
     - `BIT`列のデフォルト値が正しくない問題を修正[＃57301](https://github.com/pingcap/tidb/issues/57301) @[YangKeao](https://github.com/YangKeao)
     - Prepareプロトコルで、クライアントがUTF8以外の文字セットを使用するとエラーが発生する問題を修正しました。 [＃58870](https://github.com/pingcap/tidb/issues/58870) @[xhebox](https://github.com/xhebox)
-    - `CREATE VIEW`ステートメントで変数またはパラメータを使用してもエラーが報告されない問題を修正[＃53176](https://github.com/pingcap/tidb/issues/53176) @[mjonss](https://github.com/mjonss)
+    - `CREATE VIEW`文で変数またはパラメータを使用してもエラーが報告されない問題を修正[＃53176](https://github.com/pingcap/tidb/issues/53176) @[mjonss](https://github.com/mjonss)
     - 統計ファイルに NULL 値が含まれている場合、統計を手動でロードすると失敗する可能性がある問題を修正しました。 [＃53966](https://github.com/pingcap/tidb/issues/53966) @[King-Dylan](https://github.com/King-Dylan)
     - `information_schema.cluster_slow_query`テーブルをクエリするときに、時間フィルターが追加されていない場合、最新のスローログファイルのみがクエリされる問題を修正しました[＃56100](https://github.com/pingcap/tidb/issues/56100) @[crazycs520](https://github.com/crazycs520)
     - 一時テーブルをクエリすると、場合によっては予期しない TiKV リクエストがトリガーされる可能性がある問題を修正しました[＃58875](https://github.com/pingcap/tidb/issues/58875) @[tiancaiamao](https://github.com/tiancaiamao)

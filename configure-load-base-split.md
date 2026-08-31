@@ -44,7 +44,7 @@ Load Base Splitによって分割されたリージョンは、すぐにはマ�
 
 パラメータを変更するには、次の2つの方法のいずれかを実行します。
 
-- SQL ステートメントを使用します。
+- SQL文を使用します。
 
     ```sql
     # Set the QPS threshold to 1500
@@ -65,7 +65,7 @@ Load Base Splitによって分割されたリージョンは、すぐにはマ�
 
 したがって、次の2つの方法のいずれかで構成を表示できます。
 
-- SQL ステートメントを使用します。
+- SQL文を使用します。
 
     ```sql
     show config where type='tikv' and name like '%split.qps-threshold%';
@@ -79,4 +79,4 @@ Load Base Splitによって分割されたリージョンは、すぐにはマ�
 
 > **Note:**
 >
-> v4.0.0-rc.2 以降では、SQL ステートメントを使用して構成を変更および表示できます。
+> v4.0.0-rc.2 以降では、SQL文を使用して構成を変更および表示できます。

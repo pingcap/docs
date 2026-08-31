@@ -60,4 +60,4 @@ TiDB Cloud StarterとTiDB Cloud Essentialには、2種類のネットワーク�
 
 ## 次は？ {#what-s-next}
 
-TiDB Cloud StarterまたはEssentialインスタンスに正常に接続したら、 [TiDBを使用してSQLステートメントを探索する](/basic-sql-operations.md)ことができます。
+TiDB Cloud StarterまたはEssentialインスタンスに正常に接続したら、 [TiDBを使用してSQL文を探索する](/basic-sql-operations.md)ことができます。

@@ -5,7 +5,7 @@ summary: TiDBにおけるALTER RESOURCE GROUPの使い方を学びましょう�
 
 # ALTER RESOURCE GROUP {#alter-resource-group}
 
-`ALTER RESOURCE GROUP`ステートメントは、データベース内のリソースグループを変更するために使用されます。
+`ALTER RESOURCE GROUP`文は、データベース内のリソースグループを変更するために使用されます。
 
 > **Note:**
 >
@@ -85,13 +85,13 @@ TiDB は、次の`DirectResourceGroupOption`をサポートします。ここで
 | `RU_PER_SEC`  | RUのバックフィル速度（1秒あたり）                                                                               | `RU_PER_SEC = 500`は、このリソースグループが毎秒500 RUでバックフィルされていることを示します。                                                                                                                                                                                                                                                      |
 | `PRIORITY`    | TiKVで処理されるタスクの絶対的な優先順位                                                                           | `PRIORITY = HIGH`は優先度が高いことを示します。指定しない場合、デフォルト値は`MEDIUM`です。                                                                                                                                                                                                                                                       |
 | `BURSTABLE`   | `BURSTABLE`属性が設定されている場合、TiDBは、割り当て量を超過したときに、対応するリソースグループが利用可能なシステムリソースを使用することを許可します。             |                                                                                                                                                                                                                                                                                                                  |
-| `QUERY_LIMIT` | クエリの実行がこの条件を満たした場合、そのクエリは暴走クエリとして識別され、対応するアクションが実行されます。                                          | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')`は、実行時間が 60秒を超えた場合にクエリが暴走クエリとして識別されたことを示します。クエリは終了されます。同じ SQL テキストを持つすべての SQL ステートメントは、今後 10分以内に直ちに終了します。 `QUERY_LIMIT=()`または`QUERY_LIMIT=NULL`は、暴走制御が有効になっていないことを意味します。 [暴走クエリ](/tidb-resource-control-runaway-queries.md)を参照してください。 |
+| `QUERY_LIMIT` | クエリの実行がこの条件を満たした場合、そのクエリは暴走クエリとして識別され、対応するアクションが実行されます。                                          | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')`は、実行時間が 60秒を超えた場合にクエリが暴走クエリとして識別されたことを示します。クエリは終了されます。同じ SQL テキストを持つすべての SQL文は、今後 10分以内に直ちに終了します。 `QUERY_LIMIT=()`または`QUERY_LIMIT=NULL`は、暴走制御が有効になっていないことを意味します。 [暴走クエリ](/tidb-resource-control-runaway-queries.md)を参照してください。 |
 | `BACKGROUND`  | バックグラウンドタスクを設定します。詳細については、 [バックグラウンドタスクの管理](/tidb-resource-control-background-tasks.md)を参照してください。 | `BACKGROUND=(TASK_TYPES="br,stats", UTILIZATION_LIMIT=30)`は、バックアップと復元、統計情報の収集に関連するタスクがバックグラウンドタスクとしてスケジュールされ、バックグラウンドタスクはTiKVリソースの最大30%を消費できることを示しています。                                                                                                                                                          |
 
 > **Note:**
 >
-> - `ALTER RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)が`ON`に設定されている場合にのみ実行できます。
-> - `ALTER RESOURCE GROUP`ステートメントは、指定されていないパラメーターを変更せずに、増分的な変更をサポートします。ただし、 `QUERY_LIMIT`と`BACKGROUND`は全体として使用されるため、部分的に変更することはできません。
+> - `ALTER RESOURCE GROUP`文は、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)が`ON`に設定されている場合にのみ実行できます。
+> - `ALTER RESOURCE GROUP`文は、指定されていないパラメーターを変更せずに、増分的な変更をサポートします。ただし、 `QUERY_LIMIT`と`BACKGROUND`は全体として使用されるため、部分的に変更することはできません。
 > - 現在、 `default`リソースグループのみが`BACKGROUND`構成の変更をサポートしています。
 
 ## 例 {#examples}

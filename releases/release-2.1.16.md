@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.16 Release Notes
-summary: TiDB 2.1.16は2019年8月15日にリリースされました。SQLオプティマイザ、SQL実行エンジン、サーバー、DDL、TiKV、TiDB Binlog、 TiDB Lightning 、TiDB Ansibleに関する様々な修正と改善が含まれています。主な変更点としては、SHOWステートメント内のサブクエリのサポート、DATE_ADD関数の問題の修正、TiDB BinlogのDrainerへの設定項目の追加などが挙げられます。
+summary: TiDB 2.1.16は2019年8月15日にリリースされました。SQLオプティマイザ、SQL実行エンジン、サーバー、DDL、TiKV、TiDB Binlog、 TiDB Lightning 、TiDB Ansibleに関する様々な修正と改善が含まれています。主な変更点としては、SHOW文内のサブクエリのサポート、DATE_ADD関数の問題の修正、TiDB BinlogのDrainerへの設定項目の追加などが挙げられます。
 ---
 
 # TiDB 2.1.16 リリースノート {#tidb-2-1-16-release-notes}
@@ -24,7 +24,7 @@ TiDB Ansible バージョン: 2.1.16
     - `DATE_ADD`関数が`FLOAT` 、 `DOUBLE` 、または`DECIMAL`型の引数を受け入れるときに型変換を誤って実行するため、誤った結果が返される可能性がある問題を修正しました[＃11628](https://github.com/pingcap/tidb/pull/11628)
     - CAST(JSON AS SIGNED)がオーバーフローしたときにエラーメッセージが不正確になる問題を修正しました [＃11562](https://github.com/pingcap/tidb/pull/11562)
     - 1 つの子ノードが閉じられず、Executor を閉じる処理中にエラーが返された場合に、他の子ノードが閉じられない問題を修正しました。 [＃11598](https://github.com/pingcap/tidb/pull/11598)
-    - タイムアウトまでにリージョン分散のスケジュールが完了していない場合に、エラーではなく、正常に分割されたリージョンの数と完了したパーセンテージを返す`SPLIT TABLE`ステートメントをサポートします。 [＃11487](https://github.com/pingcap/tidb/pull/11487)
+    - タイムアウトまでにリージョン分散のスケジュールが完了していない場合に、エラーではなく、正常に分割されたリージョンの数と完了したパーセンテージを返す`SPLIT TABLE`文をサポートします。 [＃11487](https://github.com/pingcap/tidb/pull/11487)
     - MySQL との互換性を保つために、 `REGEXP BINARY`関数で大文字と小文字を区別する [＃11505](https://github.com/pingcap/tidb/pull/11505)
     - `DATE_ADD` / `DATE_SUB`の結果の`YEAR`の値が 0 より小さいかより大きい場合にオーバーフローするため、 `NULL`が正しく返されない問題を修正しました。 [＃11477](https://github.com/pingcap/tidb/pull/11477)
     - スロークエリテーブルに、実行が成功したかどうかを示すフィールドを`Succ`追加します[＃11412](https://github.com/pingcap/tidb/pull/11421)

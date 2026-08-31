@@ -195,7 +195,7 @@ TiDB バージョン: 5.0.4
         - 大きなテーブルをcdclogに複製できないバグを修正[＃1259](https://github.com/pingcap/tiflow/issues/1259) [＃2424](https://github.com/pingcap/tiflow/issues/2424)
         - CLI の下位互換性の問題を修正[＃2373](https://github.com/pingcap/tiflow/issues/2373)
         - `SinkManager` のマップへの安全でない同時アクセスの問題を修正 [＃2299](https://github.com/pingcap/tiflow/pull/2299)
-        - DDL ステートメント実行時にオーナーがクラッシュした場合に、潜在的な DDL 損失が発生する問題を修正しました。 [＃1260](https://github.com/pingcap/tiflow/issues/1260)
+        - DDL文実行時にオーナーがクラッシュした場合に、潜在的な DDL 損失が発生する問題を修正しました。 [＃1260](https://github.com/pingcap/tiflow/issues/1260)
         - リージョン初期化直後にロックが解決される問題を修正 [＃2188](https://github.com/pingcap/tiflow/issues/2188)
         - 新しいパーティションテーブルを追加するときに発生する余分なパーティションディスパッチの問題を修正しました。 [＃2263](https://github.com/pingcap/tiflow/pull/2263)
         - 削除された変更フィードについて TiCDC が警告し続ける問題を修正しました [＃2156](https://github.com/pingcap/tiflow/issues/2156)

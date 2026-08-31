@@ -33,7 +33,7 @@ TiDB バージョン: 4.0.5
         - Kafka SSL 接続サポート [＃764](https://github.com/pingcap/tiflow/pull/764)
         - 古い値出力をサポート [＃708](https://github.com/pingcap/tiflow/pull/708)
         - 列フラグを追加する [＃796](https://github.com/pingcap/tiflow/pull/796)
-        - 以前のバージョンの DDL ステートメントとテーブルスキーマの出力をサポート [＃799](https://github.com/pingcap/tiflow/pull/799)
+        - 以前のバージョンの DDL文とテーブルスキーマの出力をサポート [＃799](https://github.com/pingcap/tiflow/pull/799)
 
 ## 改善点 {#improvements}
 

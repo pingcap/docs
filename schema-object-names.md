@@ -1,13 +1,13 @@
 ---
 title: Schema Object Names
-summary: TiDB SQLステートメントのスキーマオブジェクト名について学習します。
+summary: TiDB SQL文のスキーマオブジェクト名について学習します。
 ---
 
 # Schema Object Names {#schema-object-names}
 
 <!-- markdownlint-disable MD038 -->
 
-このドキュメントでは、TiDB SQLステートメントのスキーマオブジェクト名について説明します。
+このドキュメントでは、TiDB SQL文のスキーマオブジェクト名について説明します。
 
 スキーマオブジェクト名は、データベース、テーブル、インデックス、列、エイリアスなど、TiDB内のすべてのスキーマオブジェクトの名前として使用されます。SQL文では、識別子を使用してこれらのオブジェクトを引用符で囲むことができます。
 
@@ -74,7 +74,7 @@ SELECT 1 AS `identifier`, 2 AS 'string';
 CREATE TABLE t (i int);
 ```
 
-データベースの設定に`USE`ステートメントまたは接続パラメータを使用していない場合、 `ERROR 1046 (3D000): No database selected`エラーが表示されます。この場合、データベース修飾名を指定できます。
+データベースの設定に`USE`文または接続パラメータを使用していない場合、 `ERROR 1046 (3D000): No database selected`エラーが表示されます。この場合、データベース修飾名を指定できます。
 
 ```sql
 CREATE TABLE test.t (i int);

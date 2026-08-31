@@ -26,7 +26,7 @@ VitessとTiDBはどちらもMySQLプロトコルとSQL方言をサポートし�
 
 次の2つの例は、 DumplingとTiDB Lightningが連携して Vitess から TiDB にデータを移行する方法を示しています。
 
-- この例では、 TiDB Lightning は[論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)を使用します。これは、最初にデータを SQL ステートメントにエンコードし、次に SQL ステートメントを実行してデータをインポートします。
+- この例では、 TiDB Lightning は[論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)を使用します。これは、最初にデータを SQL文にエンコードし、次に SQL文を実行してデータをインポートします。
 
     ![Vitess to TiDB Migration with TiDB backend](/media/vitess_to_tidb.png)
 

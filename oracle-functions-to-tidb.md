@@ -60,7 +60,7 @@ Oracle では、 `NULL`と空の文字列`''`を区別しません。つまり�
 
 TiDB は`NULL`と空の文字列`''`を区別します。
 
-### `INSERT`ステートメントで同じテーブルを読み書きする {#read-and-write-to-the-same-table-in-an-insert-statement}
+### `INSERT`文で同じテーブルを読み書きする {#read-and-write-to-the-same-table-in-an-insert-statement}
 
 Oracleは、 `INSERT`文で同じテーブルへの読み取りと書き込みをサポートしています。例:
 
@@ -68,7 +68,7 @@ Oracleは、 `INSERT`文で同じテーブルへの読み取りと書き込み�
 INSERT INTO table1 VALUES (field1,(SELECT field2 FROM table1 WHERE...))
 ```
 
-TiDBは、 `INSERT`ステートメント内で同じテーブルへの読み取りと書き込みをサポートしていません。例:
+TiDBは、 `INSERT`文内で同じテーブルへの読み取りと書き込みをサポートしていません。例:
 
 ```sql
 INSERT INTO table1 VALUES (field1,(SELECT T.fields2 FROM table1 T WHERE...))
@@ -80,7 +80,7 @@ Oracleでは、クエリから最初のn行を取得するには、 `ROWNUM <= n
 
 TiDBでは、クエリから最初のn行を取得するには、 `LIMIT n`句を使用します。例えば、 `LIMIT 10` 。Hibernateクエリ言語（HQL）で`LIMIT`を含むSQL文を実行するとエラーが発生します。Hibernateの文をSQL文に変更する必要があります。
 
-### `UPDATE`ステートメントで複数のテーブルを更新する {#update-multiple-tables-in-an-update-statement}
+### `UPDATE`文で複数のテーブルを更新する {#update-multiple-tables-in-an-update-statement}
 
 Oracleでは、複数のテーブルを更新する際に、特定のフィールドの更新関係をリストする必要はありません。例:
 

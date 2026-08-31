@@ -45,7 +45,7 @@ DESC cluster_log;
 >
 > - `message`フィールドは`like`と`regexp`正規表現をサポートしており、対応するパターンは`regexp`としてエンコードされます。複数の`message`条件を指定すると、 `grep`コマンドの`pipeline`形式と同じになります。例えば、 `select * from cluster_log where message like 'coprocessor%' and message regexp '.*slow.*' and time > '2020-05-18 20:40:00' and time<'2020-05-18 21:40:00'`ステートメントを実行すると、すべてのクラスターインスタンスで`grep 'coprocessor' xxx.log | grep -E '.*slow.*'`を実行するのと同じになります。
 
-次の例は、 `CLUSTER_LOG`テーブルを使用して DDL ステートメントの実行プロセスをクエリする方法を示しています。
+次の例は、 `CLUSTER_LOG`テーブルを使用して DDL文の実行プロセスをクエリする方法を示しています。
 
 ```sql
 SELECT time,instance,left(message,150) FROM cluster_log WHERE message LIKE '%ddl%job%ID.80%' AND type='tidb' AND time > '2020-05-18 20:40:00' AND time < '2020-05-18 21:40:00'
@@ -64,7 +64,7 @@ SELECT time,instance,left(message,150) FROM cluster_log WHERE message LIKE '%ddl
 +-------------------------+----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-上記のクエリ結果は、DDL ステートメントを実行するプロセスを示しています。
+上記のクエリ結果は、DDL文を実行するプロセスを示しています。
 
 1. DDL JOB ID が`80`のリクエストが`127.0.0.1:4002` TiDB インスタンスに送信されます。
 2. `127.0.0.1:4000` TiDB インスタンスがこの DDL 要求を処理します。これは、 `127.0.0.1:4000`のインスタンスがその時点で DDL 所有者であることを示します。

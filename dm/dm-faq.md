@@ -26,17 +26,17 @@ Alibaba Cloud RDS の主キーのないアップストリームテーブルの�
 
 DMは、複数のDDL変更操作を含む単一のステートメントを、1つのDDL操作のみを含む複数のステートメントに分割しようとしますが、すべてのケースをカバーできるとは限りません。上流で実行されるステートメントには1つのDDL操作のみを含めるか、テスト環境で検証することをお勧めします。サポートされていない場合は、`pingcap/tiflow`リポジトリに[問題](https://github.com/pingcap/tiflow/issues)を報告できます。
 
-## 互換性のない DDL ステートメントをどのように処理しますか? {#how-to-handle-incompatible-ddl-statements}
+## 互換性のない DDL文をどのように処理しますか? {#how-to-handle-incompatible-ddl-statements}
 
-TiDBでサポートされていないDDL文に遭遇した場合は、dmctlを使用して手動で処理する必要があります（DDL文をスキップするか、指定されたDDL文に置き換えます）。詳細は[失敗したDDLステートメントを処理する](/dm/handle-failed-ddl-statements.md)を参照してください。
+TiDBでサポートされていないDDL文に遭遇した場合は、dmctlを使用して手動で処理する必要があります（DDL文をスキップするか、指定されたDDL文に置き換えます）。詳細は[失敗したDDL文を処理する](/dm/handle-failed-ddl-statements.md)を参照してください。
 
 > **Note:**
 >
 > 現在、TiDBはMySQLがサポートするすべてのDDL文と互換性があるわけではありません。[MySQLとの互換性](/mysql-compatibility.md#ddl-operations)を参照してください。
 
-## DM はビュー関連の DDL ステートメントと DML ステートメントを TiDB に複製しますか? {#does-dm-replicate-view-related-ddl-statements-and-dml-statements-to-tidb}
+## DM はビュー関連の DDL文と DML文を TiDB に複製しますか? {#does-dm-replicate-view-related-ddl-statements-and-dml-statements-to-tidb}
 
-現在、DM はビュー関連の DDL ステートメントをダウンストリーム TiDB クラスターに複製しません。また、ビュー関連の DML ステートメントをダウンストリーム TiDB クラスターに複製しません。
+現在、DM はビュー関連の DDL文をダウンストリーム TiDB クラスターに複製しません。また、ビュー関連の DML文をダウンストリーム TiDB クラスターに複製しません。
 
 ## データ移行タスクをリセットするにはどうすればいいですか? {#how-to-reset-the-data-migration-task}
 
@@ -193,7 +193,7 @@ if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to
 
 DM v6.0以降、 `sql-skip`と`handle-error`が`binlog`に置き換えられました。この問題を回避するには、代わりに`binlog`コマンドを使用してください。
 
-## DM がレプリケートされているときに、ダウンストリームに`REPLACE`ステートメントが表示され続けるのはなぜですか? {#why-do-replace-statements-keep-appearing-in-the-downstream-when-dm-is-replicating}
+## DM がレプリケートされているときに、ダウンストリームに`REPLACE`文が表示され続けるのはなぜですか? {#why-do-replace-statements-keep-appearing-in-the-downstream-when-dm-is-replicating}
 
 タスクに対して[セーフモード](/dm/dm-glossary.md#safe-mode)が自動的に有効になっているかどうかを確認する必要があります。エラー発生後にタスクが自動的に再開される場合、または高可用性スケジュールが設定されている場合は、タスクの開始または再開から1分以内であるため、セーフモードが有効になっています。
 

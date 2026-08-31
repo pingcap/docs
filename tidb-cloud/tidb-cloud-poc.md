@@ -115,7 +115,7 @@ TiDB CloudはMySQL 8.0との互換性が非常に高くなっています。MySQ
 - タイムスタンプ上のインデックスなど、右側のインデックスの増加によって発生する[ホットスポットの問題](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#identify-hotspot-issues)を回避します。
 - [SHARD_ROW_ID_BITS](https://docs.pingcap.com/tidb/stable/shard-row-id-bits)と[AUTO_RANDOM](https://docs.pingcap.com/tidb/stable/auto-random)を使って[ホットスポットの問題](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#identify-hotspot-issues)を回避します。
 
-SQL ステートメントの場合、データソースと TiDB の互換性のレベルに応じて調整する必要がある場合があります。
+SQL文の場合、データソースと TiDB の互換性のレベルに応じて調整する必要がある場合があります。
 
 ご不明な点がございましたら[PingCAP](/tidb-cloud/tidb-cloud-support.md)までご相談ください。
 

@@ -9,7 +9,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 ## スキーマ管理／データ定義文（DDL） {#schema-management--data-definition-statements-ddl}
 
-| SQLステートメント                                                                         | 説明                                                   |
+| SQL文                                                                         | 説明                                                   |
 | ---------------------------------------------------------------------------------- | ---------------------------------------------------- |
 | [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)                | データベースを変更します。                                        |
 | [`ALTER SEQUENCE`](/sql-statements/sql-statement-alter-sequence.md)                | シーケンスを変更します。                                         |
@@ -50,9 +50,9 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 ## データ操作文（DML） {#data-manipulation-statements-dml}
 
-| SQLステートメント                                            | 説明                                     |
+| SQL文                                            | 説明                                     |
 | ----------------------------------------------------- | -------------------------------------- |
-| [`BATCH`](/sql-statements/sql-statement-batch.md)     | TiDB内でDMLステートメントを複数のステートメントに分割して実行します。 |
+| [`BATCH`](/sql-statements/sql-statement-batch.md)     | TiDB内でDML文を複数のステートメントに分割して実行します。 |
 | [`DELETE`](/sql-statements/sql-statement-delete.md)   | テーブルから行を削除します。                         |
 | [`INSERT`](/sql-statements/sql-statement-insert.md)   | テーブルに新しい行を挿入します。                       |
 | [`REPLACE`](/sql-statements/sql-statement-replace.md) | 既存の行を置き換えるか、新しい行を挿入します。                |
@@ -63,7 +63,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 ## トランザクション書 {#transaction-statements}
 
-| SQLステートメント                                                                | 説明                                        |
+| SQL文                                                                | 説明                                        |
 | ------------------------------------------------------------------------- | ----------------------------------------- |
 | [`BEGIN`](/sql-statements/sql-statement-begin.md)                         | 新しいトランザクションを開始します。                              |
 | [`COMMIT`](/sql-statements/sql-statement-commit.md)                       | 現在のトランザクションをコミットします。                      |
@@ -74,7 +74,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 ## プリペアドステートメント {#prepared-statements}
 
-| SQLステートメント                                                  | 説明                                 |
+| SQL文                                                  | 説明                                 |
 | ----------------------------------------------------------- | ---------------------------------- |
 | [`DEALLOCATE`](/sql-statements/sql-statement-deallocate.md) | プリペアドステートメントを解除し、関連するリソースを解放します。   |
 | [`EXECUTE`](/sql-statements/sql-statement-execute.md)       | 特定のパラメータ値を指定して、プリペアドステートメントを実行します。 |
@@ -84,7 +84,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 <CustomContent platform="tidb">
 
-| SQLステートメント                                                                              | 説明                                                                      |
+| SQL文                                                                              | 説明                                                                      |
 | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
 | [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)              | 実行中の単一のDDLジョブのパラメータを変更します。                                              |
 | [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)                 | DDLジョブをキャンセルします。                                                        |
@@ -104,7 +104,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 <CustomContent platform="tidb-cloud">
 
-| SQLステートメント                                                                              | 説明                                                                      |
+| SQL文                                                                              | 説明                                                                      |
 | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
 | [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)              | 実行中の単一のDDLジョブのパラメータを変更します。                                              |
 | [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)                 | DDLジョブをキャンセルします。                                                        |
@@ -125,7 +125,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 ## データのインポートとエクスポート {#data-import-and-export}
 
-| SQLステートメント                                                                | 説明                                                                                                                       |
+| SQL文                                                                | 説明                                                                                                                       |
 | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md) | 進行中のインポートジョブをキャンセルします。                                                                                                   |
 | [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)             | TiDB Lightningの[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を介してデータをテーブルにインポートします。 |
@@ -134,11 +134,11 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 ## バックアップと復元 {#backup--restore}
 
-| SQLステートメント                                                                  | 説明                                            |
+| SQL文                                                                  | 説明                                            |
 | --------------------------------------------------------------------------- | --------------------------------------------- |
 | [`BACKUP`](/sql-statements/sql-statement-backup.md)                         | TiDBクラスタの分散バックアップを実行します。                      |
 | [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)   | クラスターを特定の時点のスナップショットに復元します。                   |
-| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) | `DROP`ステートメントによって削除されたデータベースとそのデータを復元します。     |
+| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) | `DROP`文によって削除されたデータベースとそのデータを復元します。     |
 | [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)       | `DROP`または`TRUNCATE`操作によって削除されたテーブルとデータを復元します。 |
 | [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md)           | 削除されたテーブルとその中のデータを復元します。                      |
 | [`RESTORE`](/sql-statements/sql-statement-restore.md)                       | バックアップからデータベースを復元します。                         |
@@ -147,13 +147,13 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 ## 配置方針 {#placement-policy}
 
-| SQLステートメント                                                                                      | 説明                            |
+| SQL文                                                                                      | 説明                            |
 | ----------------------------------------------------------------------------------------------- | ----------------------------- |
 | [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)             | 配置方針を変更します。                   |
 | [`ALTER RANGE`](/sql-statements/sql-statement-alter-range.md)                                   | 配置ポリシーの範囲を変更します。              |
 | [`CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-create-placement-policy.md)           | 新しい配置ポリシーを作成します。              |
 | [`DROP PLACEMENT POLICY`](/sql-statements/sql-statement-drop-placement-policy.md)               | 既存の配置ポリシーを廃止します。              |
-| [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md) | 配置ポリシーの`CREATE`ステートメントを表示します。 |
+| [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md) | 配置ポリシーの`CREATE`文を表示します。 |
 | [`SHOW PLACEMENT FOR`](/sql-statements/sql-statement-show-placement-for.md)                     | 特定のテーブルの配置ルールを表示します。          |
 | [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)               | 使用可能な配置ラベルを表示します。             |
 | [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md)                             | 配置ルールを表示します。                  |
@@ -162,7 +162,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 <CustomContent platform="tidb">
 
-| SQLステートメント                                                                                  | 説明                                                                                                 |
+| SQL文                                                                                  | 説明                                                                                                 |
 | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)             | リソースグループを変更します。                                                                                    |
 | [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)                 | 現在のクラスターの[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)容量を推定して出力します。 |
@@ -170,26 +170,26 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)               | リソースグループを削除します。                                                                                    |
 | [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)                               | 暴走クエリの監視リストを管理します。                                                                                 |
 | [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)                 | リソースグループを設定します。                                                                                    |
-| [`SHOW CREATE RESOURCE GROUP`](/sql-statements/sql-statement-show-create-resource-group.md) | リソースグループの`CREATE`ステートメントを表示します。                                                                   |
+| [`SHOW CREATE RESOURCE GROUP`](/sql-statements/sql-statement-show-create-resource-group.md) | リソースグループの`CREATE`文を表示します。                                                                   |
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-| SQLステートメント                                                                                  | 説明                               |
+| SQL文                                                                                  | 説明                               |
 | ------------------------------------------------------------------------------------------- | -------------------------------- |
 | [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)             | リソースグループを変更します。                  |
 | [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md)           | 新しいリソースグループを作成します。               |
 | [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)               | リソースグループを削除します。                  |
 | [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)                               | 暴走クエリの監視リストを管理します。               |
 | [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)                 | リソースグループを設定します。                  |
-| [`SHOW CREATE RESOURCE GROUP`](/sql-statements/sql-statement-show-create-resource-group.md) | リソースグループの`CREATE`ステートメントを表示します。 |
+| [`SHOW CREATE RESOURCE GROUP`](/sql-statements/sql-statement-show-create-resource-group.md) | リソースグループの`CREATE`文を表示します。 |
 
 </CustomContent>
 
 ## ユーティリティステートメント {#utility-statements}
 
-| SQLステートメント                                              | 説明                          |
+| SQL文                                              | 説明                          |
 | ------------------------------------------------------- | --------------------------- |
 | [`DESC`](/sql-statements/sql-statement-desc.md)         | テーブルの構造を示す`DESCRIBE`のエイリアス。 |
 | [`DESCRIBE`](/sql-statements/sql-statement-describe.md) | テーブルの構造を示します。               |
@@ -198,11 +198,11 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | [`TRACE`](/sql-statements/sql-statement-trace.md)       | クエリ実行に関する詳細情報を提供します。        |
 | [`USE`](/sql-statements/sql-statement-use.md)           | 現在のデータベースを設定します。            |
 
-## SHOW ステートメント {#show-statements}
+## SHOW文 {#show-statements}
 
 <CustomContent platform="tidb">
 
-| SQLステートメント                                                                  | 説明                                                                                                                                                                      |
+| SQL文                                                                  | 説明                                                                                                                                                                      |
 | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md)           | 組み込み関数の一覧を表示します。                                                                                                                                                        |
 | [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md) | 文字セットの一覧を表示します。                                                                                                                                                         |
@@ -216,7 +216,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 <CustomContent platform="tidb-cloud">
 
-| SQLステートメント                                                                  | 説明                                                                                                                                                               |
+| SQL文                                                                  | 説明                                                                                                                                                               |
 | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md)           | 組み込み関数の一覧を表示します。                                                                                                                                                 |
 | [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md) | 文字セットの一覧を表示します。                                                                                                                                                  |
@@ -232,7 +232,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 <CustomContent platform="tidb">
 
-| SQLステートメント                                                              | 説明                                                                                                                                                                      |
+| SQL文                                                              | 説明                                                                                                                                                                      |
 | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)     | インスタンスを変更します。                                                                                                                                                           |
 | [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md)         | [MySQLとの互換性](/mysql-compatibility.md)のために含まれています。 TiDB は、ほとんどのメトリックに対して`SHOW STATUS`の代わりにPrometheus[PrometheusとGrafana](/tidb-monitoring-framework.md)Grafanaを使用して一元的なメトリック収集を行います。 |
@@ -248,7 +248,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 <CustomContent platform="tidb-cloud">
 
-| SQLステートメント                                                              | 説明                                                                                                                                                               |
+| SQL文                                                              | 説明                                                                                                                                                               |
 | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)     | インスタンスを変更します。                                                                                                                                                    |
 | [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md)         | [MySQLとの互換性](/mysql-compatibility.md)のために含まれています。 TiDB Cloudは、ほとんどのメトリクスに対して`SHOW STATUS`の代わりに、一元化されたメトリクス収集のための[監視](/tidb-cloud/monitor-tidb-cluster.md)を提供します。 |
@@ -262,7 +262,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 ## ロックステートメント {#locking-statements}
 
-| SQLステートメント                                                                        | 説明                                 |
+| SQL文                                                                        | 説明                                 |
 | --------------------------------------------------------------------------------- | ---------------------------------- |
 | [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md)                       | テーブルまたはパーティションの統計情報をロックします。        |
 | [`LOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)   | 現在のセッションのテーブルをロックします。              |
@@ -271,7 +271,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 ## アカウント管理／データ制御言語 {#account-management--data-control-language}
 
-| SQLステートメント                                                                       | 説明                             |
+| SQL文                                                                       | 説明                             |
 | -------------------------------------------------------------------------------- | ------------------------------ |
 | [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)                      | ユーザーを変更します。                    |
 | [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)                    | 役割を作成します。                      |
@@ -287,7 +287,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)          | デフォルトの役割を設定します。                |
 | [`SET PASSWORD`](/sql-statements/sql-statement-set-password.md)                  | パスワードを変更します。                   |
 | [`SET ROLE`](/sql-statements/sql-statement-set-role.md)                          | 現在のセッションでロールを有効にします。           |
-| [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)          | ユーザーに対する`CREATE`ステートメントを表示します。 |
+| [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)          | ユーザーに対する`CREATE`文を表示します。 |
 | [`SHOW GRANTS`](/sql-statements/sql-statement-show-grants.md)                    | ユーザーに関連付けられている権限を表示します。        |
 | [`SHOW PRIVILEGES`](/sql-statements/sql-statement-show-privileges.md)            | 利用可能な権限を表示します。                 |
 
@@ -295,7 +295,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 <CustomContent platform="tidb">
 
-| SQLステートメント                                                                           | 説明                       |
+| SQL文                                                                           | 説明                       |
 | ------------------------------------------------------------------------------------ | ------------------------ |
 | [`ADMIN [SET|SHOW|UNSET] BDR ROLE`](/sql-statements/sql-statement-admin-bdr-role.md) | BDR（ビジネス開発担当者）の役割を管理します。 |
 | [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md)          | クラスター内の最新のTSOを表示します。     |
@@ -306,9 +306,9 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 > **Note:**
 >
-> [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)は、TiDB Self-ManagedのTiDBデータをアップストリームに複製するためのツールです。TiCDCのほとんどのSQLステートメントはTiDB Cloudには適用できません。TiDB Cloudの場合は、代わりに[TiDB Cloudコンソール](https://tidbcloud.com)の[変更フィード](/tidb-cloud/changefeed-overview.md)機能を使用してデータをストリーミングできます。
+> [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)は、TiDB Self-ManagedのTiDBデータをアップストリームに複製するためのツールです。TiCDCのほとんどのSQL文はTiDB Cloudには適用できません。TiDB Cloudの場合は、代わりに[TiDB Cloudコンソール](https://tidbcloud.com)の[変更フィード](/tidb-cloud/changefeed-overview.md)機能を使用してデータをストリーミングできます。
 
-| SQLステートメント                                                                  | 説明                   |
+| SQL文                                                                  | 説明                   |
 | --------------------------------------------------------------------------- | -------------------- |
 | [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md) | クラスター内の最新のTSOを表示します。 |
 
@@ -316,7 +316,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 ## 統計と計画管理 {#statistics-and-plan-management}
 
-| SQLステートメント                                                                            | 説明                                           |
+| SQL文                                                                            | 説明                                           |
 | ------------------------------------------------------------------------------------- | -------------------------------------------- |
 | [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)                     | テーブルに関する統計情報を収集します。                          |
 | [`CREATE BINDING`](/sql-statements/sql-statement-create-binding.md)                   | SQL文の実行プランバインディングを作成します。                     |

@@ -48,12 +48,12 @@ summary: TiDB-X-CLOUD.202510.1 カーネルの機能について説明します�
 
     詳細は、[ドキュメント](https://docs.pingcap.com/tidbcloud/sql-statement-distribute-table/?plan=premium) を参照してください。
 
-* DDL ステートメントに埋め込まれた `ANALYZE` をサポートしました [#57948](https://github.com/pingcap/tidb/issues/57948) @[terry1purcell](https://github.com/terry1purcell) @[AilinKid](https://github.com/AilinKid)
+* DDL文に埋め込まれた `ANALYZE` をサポートしました [#57948](https://github.com/pingcap/tidb/issues/57948) @[terry1purcell](https://github.com/terry1purcell) @[AilinKid](https://github.com/AilinKid)
 
-    この機能は、次の種類の DDL ステートメントに適用されます。
+    この機能は、次の種類の DDL文に適用されます。
 
-    - 新しいインデックスを作成する DDL ステートメント: [`ADD INDEX`](https://docs.pingcap.com/tidbcloud/sql-statement-add-index/?plan=premium)
-    - 既存のインデックスを再編成する DDL ステートメント: [`MODIFY COLUMN`](https://docs.pingcap.com/tidbcloud/sql-statement-modify-column/?plan=premium) および [`CHANGE COLUMN`](https://docs.pingcap.com/tidbcloud/sql-statement-change-column/?plan=premium)
+    - 新しいインデックスを作成する DDL文: [`ADD INDEX`](https://docs.pingcap.com/tidbcloud/sql-statement-add-index/?plan=premium)
+    - 既存のインデックスを再編成する DDL文: [`MODIFY COLUMN`](https://docs.pingcap.com/tidbcloud/sql-statement-modify-column/?plan=premium) および [`CHANGE COLUMN`](https://docs.pingcap.com/tidbcloud/sql-statement-change-column/?plan=premium)
 
     この機能を有効にすると、新規または再編成されたインデックスがユーザーから見えるようになる前に、TiDB が自動的に `ANALYZE`（統計情報収集）操作を実行します。これにより、インデックス作成または再編成の直後に統計情報が一時的に利用できないことで発生する、オプティマイザの不正確な見積もりや、潜在的な実行計画の変更を防ぎます。
 

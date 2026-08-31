@@ -12,7 +12,7 @@ summary: TiDB 2.1ベータリリースには、安定性、SQLオプティマイ
 - SQLオプティマイザ
     - 実行パフォーマンスを向上させるために、選択範囲`Index Join`を最適化します。
     - 相関サブクエリを最適化し、 `Filter`プッシュダウンし、インデックス範囲を拡張して、一部のクエリの効率を桁違いに向上させます。
-    - `UPDATE`と`DELETE`ステートメントの`Index Hint`と`Join Hint`をサポートする
+    - `UPDATE`と`DELETE`文の`Index Hint`と`Join Hint`をサポートする
     - 利用可能なインデックスが存在しない場合にヒント`TIDM_SMJ`を検証する
     - `ABS` `CEIL` `IS TRUE` `FLOOR`ダウン`IS FALSE`関数
     - 特に定数の折り畳み処理で`IF`と`IFNULL`関数を処理する
@@ -32,7 +32,7 @@ summary: TiDB 2.1ベータリリースには、安定性、SQLオプティマイ
 - 互換性
     - より多くのMySQL構文をサポート
     - `bit`集計関数が`ALL`パラメータをサポートするようにする
-    - `SHOW PRIVILEGES`ステートメントをサポートする
+    - `SHOW PRIVILEGES`文をサポートする
 - DML
     - `INSERT INTO SELECT`文目のメモリ使用量を減らす
     - `PlanCache`のパフォーマンス問題を修正
@@ -40,7 +40,7 @@ summary: TiDB 2.1ベータリリースには、安定性、SQLオプティマイ
     - トランザクションが自動的に試行されるかどうかを制御する`tidb_disable_txn_auto_retry`システム変数を追加します。
     - `time`タイプの書き込まれたデータの精度の問題を修正
     - 競合トランザクションのパフォーマンスを最適化するために、ローカルで競合したトランザクションのキューをサポートします。
-    - `UPDATE`ステートメントのうち`Affected Rows`を修正
+    - `UPDATE`文のうち`Affected Rows`を修正
     - `insert ignore on duplicate key update`のステートメントパフォーマンスを最適化する
 - DDL
     - `CreateTable`文の実行速度を最適化する

@@ -7,7 +7,7 @@ summary: "`CLIENT_ERRORS_SUMMARY_GLOBAL` INFORMATION_SCHEMA テーブルにつ�
 
 表`CLIENT_ERRORS_SUMMARY_GLOBAL`は、TiDBサーバーに接続したクライアントに返されたすべてのSQLエラーと警告のグローバルサマリーを示しています。これには以下が含まれます。
 
-- 不正な SQL ステートメント。
+- 不正な SQL文。
 - ゼロ除算エラー。
 - 範囲外の重複キー値を挿入しようとしました。
 - 権限エラー。

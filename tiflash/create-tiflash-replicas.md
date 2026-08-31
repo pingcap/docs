@@ -39,7 +39,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 
 **注:**
 
-- 上記の DDL ステートメントを使用してテーブル`t`がTiFlashに複製されると、次のステートメントを使用して作成されたテーブルも自動的にTiFlashに複製されます。
+- 上記の DDL文を使用してテーブル`t`がTiFlashに複製されると、次のステートメントを使用して作成されたテーブルも自動的にTiFlashに複製されます。
 
     ```sql
     CREATE TABLE table_name like t;
@@ -53,7 +53,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 
 - v5.1以降のバージョンでは、システムテーブルのレプリカ設定はサポートされなくなりました。クラスターをアップグレードする前に、関連するシステムテーブルのレプリカをクリアする必要があります。そうしないと、クラスターを新しいバージョンにアップグレードした後に、システムテーブルのレプリカ設定を変更できなくなります。
 
-- 現在、TiCDC を使用してテーブルをダウンストリーム TiDB クラスターにレプリケートする場合、テーブルのTiFlashレプリカの作成はサポートされていません。つまり、TiCDC は次のようなTiFlash関連の DDL ステートメントのレプリケートをサポートしていません。
+- 現在、TiCDC を使用してテーブルをダウンストリーム TiDB クラスターにレプリケートする場合、テーブルのTiFlashレプリカの作成はサポートされていません。つまり、TiCDC は次のようなTiFlash関連の DDL文のレプリケートをサポートしていません。
 
     - `ALTER TABLE table_name SET TIFLASH REPLICA count;`
     - `ALTER DATABASE db_name SET TIFLASH REPLICA count;`
@@ -68,12 +68,12 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>
 
 上記のステートメントの結果は次のようになります。
 
-- `AVAILABLE`は、このテーブルのTiFlashレプリカが使用可能かどうかを示します。`1`は使用可能、 `0`は使用不可を意味します。レプリカが使用可能になると、このステータスは変更されません。DDL ステートメントを使用してレプリカの数を変更すると、レプリケーションステータスは再計算されます。
+- `AVAILABLE`は、このテーブルのTiFlashレプリカが使用可能かどうかを示します。`1`は使用可能、 `0`は使用不可を意味します。レプリカが使用可能になると、このステータスは変更されません。DDL文を使用してレプリカの数を変更すると、レプリケーションステータスは再計算されます。
 - `PROGRESS`はレプリケーションの進行状況を表します。値は`0.0`から`1.0`までです。`1`は少なくとも 1つのレプリカがレプリケートされていることを意味します。
 
 ## データベースのTiFlashレプリカを作成する {#create-tiflash-replicas-for-databases}
 
-テーブルのTiFlashレプリカを作成するのと同様に、MySQL クライアントを介して DDL ステートメントを TiDB に送信し、特定のデータベース内のすべてのテーブルのTiFlashレプリカを作成できます。
+テーブルのTiFlashレプリカを作成するのと同様に、MySQL クライアントを介して DDL文を TiDB に送信し、特定のデータベース内のすべてのテーブルのTiFlashレプリカを作成できます。
 
 ```sql
 ALTER DATABASE db_name SET TIFLASH REPLICA count;
@@ -118,7 +118,7 @@ ALTER DATABASE db_name SET TIFLASH REPLICA count;
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>';
 ```
 
-データベース内にTiFlashレプリカのないテーブルをチェックするには、次の SQL ステートメントを実行します。
+データベース内にTiFlashレプリカのないテーブルをチェックするには、次の SQL文を実行します。
 
 ```sql
 SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>" and TABLE_NAME not in (SELECT TABLE_NAME FROM information_schema.tiflash_replica where TABLE_SCHEMA = "<db_name>");
@@ -189,7 +189,7 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 30 remove-peer
     ```
 
-    デフォルトのスナップショット書き込み速度制限を復元するには、次の SQL ステートメントを実行します。
+    デフォルトのスナップショット書き込み速度制限を復元するには、次の SQL文を実行します。
 
     ```sql
     SET CONFIG tikv `server.snap-io-max-bytes-per-sec` = '100MiB';

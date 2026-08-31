@@ -180,8 +180,8 @@ TiDBはMySQLの組み込み関数のほとんどをサポートしています�
 
 TiDBでは、サポートされているすべてのDDL変更をオンラインで実行できます。ただし、TiDBのDDL操作には、MySQLと比較していくつかの大きな制限があります。
 
-- 単一の`ALTER TABLE`ステートメントを使用してテーブルの複数のスキーマオブジェクト (列やインデックスなど) を変更する場合、同じオブジェクトを複数の変更で指定することはサポートされていません。たとえば、 `ALTER TABLE t1 MODIFY COLUMN c1 INT, DROP COLUMN c1`コマンドを実行すると、 `Unsupported operate same column/index`エラーが出力されます。
-- 同じ`ALTER TABLE`ステートメント内で、`SHARD_ROW_ID_BITS`と`AUTO_ID_CACHE`を同時に変更することはサポートされていません。
+- 単一の`ALTER TABLE`文を使用してテーブルの複数のスキーマオブジェクト (列やインデックスなど) を変更する場合、同じオブジェクトを複数の変更で指定することはサポートされていません。たとえば、 `ALTER TABLE t1 MODIFY COLUMN c1 INT, DROP COLUMN c1`コマンドを実行すると、 `Unsupported operate same column/index`エラーが出力されます。
+- 同じ`ALTER TABLE`文内で、`SHARD_ROW_ID_BITS`と`AUTO_ID_CACHE`を同時に変更することはサポートされていません。
 - TiDB は`ALTER TABLE`を使用した一部のデータ型の変更をサポートしていません。たとえば、TiDB は`DECIMAL`型から`DATE`型への変更をサポートしていません。データ型の変更がサポートされていない場合、TiDB は`Unsupported modify column: type %d not match origin %d`エラーを報告します。詳細については、 [`ALTER TABLE`](/sql-statements/sql-statement-modify-column.md)を参照してください。
 - `ALGORITHM={INSTANT,INPLACE,COPY}`構文はTiDBではアサーションとしてのみ機能し、 `ALTER`アルゴリズムを変更しません。詳細については、 [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)を参照してください。
 - `CLUSTERED`タイプの主キーの追加/削除はサポートされていません。 `CLUSTERED`タイプの主キーの詳細については、[クラスター化インデックス](/clustered-indexes.md)を参照してください。
@@ -271,7 +271,7 @@ TiDBは、MySQL 5.7およびMySQL 8.0と比較して、デフォルト設定に�
     - MySQLのデフォルト値は以下のとおりです。
         - Linux の場合: `0` 。これは、テーブル名とデータベース名が`CREATE TABLE`または`CREATE DATABASE` 。名前の比較では大文字小文字が区別されます。
         - Windows の場合: `1` 。これは、テーブル名がディスク上に小文字で保存され、名前の比較では大文字と小文字が区別されないことを意味します。MySQL は、保存時および検索時にすべてのテーブル名を小文字に変換します。この動作は、データベース名とテーブルエイリアスにも適用されます。
-        - macOS の場合: `2` 。これは、テーブル名とデータベース名が`CREATE TABLE`または`CREATE DATABASE`ステートメントで指定された文字の大文字小文字に従ってディスクに保存されますが、MySQL は検索時にそれらを小文字に変換します。名前の比較では大文字小文字は区別されません。
+        - macOS の場合: `2` 。これは、テーブル名とデータベース名が`CREATE TABLE`または`CREATE DATABASE`文で指定された文字の大文字小文字に従ってディスクに保存されますが、MySQL は検索時にそれらを小文字に変換します。名前の比較では大文字小文字は区別されません。
 - `explicit_defaults_for_timestamp`のデフォルト値:
     - TiDB のデフォルト値は`ON`であり、現在サポートされているのは`ON`のみです。
     - MySQLのデフォルト値は以下のとおりです。
@@ -302,7 +302,7 @@ TiDBは、MySQLで非推奨となった特定の機能を実装していませ�
 - 浮動小数点型の精度指定。MySQL 8.0 ではこの機能[非推奨](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html)、代わりに`DECIMAL`型を使用することをお勧めします。
 - `ZEROFILL`属性。MySQL 8.0ではこの機能[非推奨](https://dev.mysql.com/doc/refman/8.0/en/numeric-type-attributes.html)、代わりにアプリケーションで数値をパディングすることをお勧めします。
 
-### `CREATE RESOURCE GROUP` 、 `DROP RESOURCE GROUP` 、および`ALTER RESOURCE GROUP`ステートメント {#create-resource-group-drop-resource-group-and-alter-resource-group-statements}
+### `CREATE RESOURCE GROUP` 、 `DROP RESOURCE GROUP` 、および`ALTER RESOURCE GROUP`文 {#create-resource-group-drop-resource-group-and-alter-resource-group-statements}
 
 リソースグループの作成、変更、削除に関する以下のステートメントは、MySQLとは異なるパラメータをサポートしています。詳細については、以下のドキュメントを参照してください。
 

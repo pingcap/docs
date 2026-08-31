@@ -27,7 +27,7 @@ TiDBバージョン: 6.4.0-DMR
 - [新しいオプティマイザヒント`NO_DECORRELATE`](/optimizer-hints.md#no_decorrelate)を導入して、相関サブクエリの非相関化を実行するかどうかを制御します。
 - [クラスター診断](/dashboard/dashboard-diagnostics-access.md)機能が GA になります。
 - TiFlash は[保存時の暗号化](/encryption-at-rest.md#tiflash)のための SM4 アルゴリズムをサポートしています。
-- SQL ステートメントを使用して[テーブル内の指定されたパーティションのコンパクトなTiFlashレプリカを即座に](/sql-statements/sql-statement-alter-table-compact.md#compact-tiflash-replicas-of-specified-partitions-in-a-table)サポートします。
+- SQL文を使用して[テーブル内の指定されたパーティションのコンパクトなTiFlashレプリカを即座に](/sql-statements/sql-statement-alter-table-compact.md#compact-tiflash-replicas-of-specified-partitions-in-a-table)サポートします。
 - [EBSボリュームスナップショットを使用したTiDBクラスタのバックアップ](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/backup-to-aws-s3-by-snapshot)サポートします。
 - DM は[上流のデータソース情報を下流のマージ済みテーブルの拡張列に書き込む](/dm/dm-table-routing.md#extract-table-schema-and-source-information-and-write-into-the-merged-table)サポートしています。
 
@@ -35,11 +35,11 @@ TiDBバージョン: 6.4.0-DMR
 
 ### SQL {#sql}
 
-- SQL ステートメントを使用して、テーブル内の指定されたパーティションのTiFlashレプリカをすぐに圧縮するサポート [#5315](https://github.com/pingcap/tiflash/issues/5315) @[hehechen](https://github.com/hehechen)
+- SQL文を使用して、テーブル内の指定されたパーティションのTiFlashレプリカをすぐに圧縮するサポート [#5315](https://github.com/pingcap/tiflash/issues/5315) @[hehechen](https://github.com/hehechen)
 
-    バージョン6.2.0以降、TiDBはTiFlashのフルテーブルレプリカに対して[物理データを即座に圧縮する](/sql-statements/sql-statement-alter-table-compact.md#alter-table--compact)機能をサポートしています。適切なタイミングでSQLステートメントを手動で実行してTiFlash内の物理データを即座に圧縮することで、ストレージ容量を削減し、クエリパフォーマンスを向上させることができます。バージョン6.4.0では、圧縮するTiFlashレプリカデータの粒度をさらに細かくし、テーブル内の指定されたパーティションのTiFlashレプリカを即座に圧縮できるようにしました。
+    バージョン6.2.0以降、TiDBはTiFlashのフルテーブルレプリカに対して[物理データを即座に圧縮する](/sql-statements/sql-statement-alter-table-compact.md#alter-table--compact)機能をサポートしています。適切なタイミングでSQL文を手動で実行してTiFlash内の物理データを即座に圧縮することで、ストレージ容量を削減し、クエリパフォーマンスを向上させることができます。バージョン6.4.0では、圧縮するTiFlashレプリカデータの粒度をさらに細かくし、テーブル内の指定されたパーティションのTiFlashレプリカを即座に圧縮できるようにしました。
 
-    SQL ステートメント`ALTER TABLE table_name COMPACT [PARTITION PartitionNameList] [engine_type REPLICA]`を実行すると、テーブル内の指定されたパーティションのTiFlashレプリカを即座に圧縮できます。
+    SQL文`ALTER TABLE table_name COMPACT [PARTITION PartitionNameList] [engine_type REPLICA]`を実行すると、テーブル内の指定されたパーティションのTiFlashレプリカを即座に圧縮できます。
 
     詳細については、 [ユーザー向けドキュメント](/sql-statements/sql-statement-alter-table-compact.md#compact-tiflash-replicas-of-specified-partitions-in-a-table)を参照してください。
 
@@ -53,7 +53,7 @@ TiDBバージョン: 6.4.0-DMR
 
 - `FLASHBACK DATABASE` を使用して削除されたデータベースの復元をサポートします [#20463](https://github.com/pingcap/tidb/issues/20463) @[erwadba](https://github.com/erwadba)
 
-    `FLASHBACK DATABASE`を使用すると、 `DROP`によってガベージコレクション(GC) の有効期間内に削除されたデータベースとそのデータを復元できます。この機能は外部ツールに依存しません。SQL ステートメントを使用して、データとメタデータを迅速に復元できます。
+    `FLASHBACK DATABASE`を使用すると、 `DROP`によってガベージコレクション(GC) の有効期間内に削除されたデータベースとそのデータを復元できます。この機能は外部ツールに依存しません。SQL文を使用して、データとメタデータを迅速に復元できます。
 
     詳細については、 [ユーザー向けドキュメント](/sql-statements/sql-statement-flashback-database.md)を参照してください。
 
@@ -171,7 +171,7 @@ TiDBバージョン: 6.4.0-DMR
 
     以前のバージョンでは、TiDB はハッシュ、レンジ、List パーティショニングをサポートしていました。 v6.4.0 以降、TiDB は[MySQL 線形ハッシュパーティショニング](https://dev.mysql.com/doc/refman/5.7/en/partitioning-linear-hash.html)の構文とも互換性があります。
 
-    TiDBでは、MySQLのリニアハッシュパーティションの既存のDDLステートメントを直接実行でき、TiDBは対応するハッシュパーティションテーブルを作成します（TiDB内部にはリニアハッシュパーティションは存在しません）。また、MySQLのリニアハッシュパーティションの既存のDMLステートメントを直接実行することもでき、TiDBは対応するTiDBハッシュパーティションのクエリ結果を正常に返します。この機能により、TiDBの構文とMySQLのリニアハッシュパーティションとの互換性が確保され、MySQLベースのアプリケーションからTiDBへのスムーズな移行が可能になります。
+    TiDBでは、MySQLのリニアハッシュパーティションの既存のDDL文を直接実行でき、TiDBは対応するハッシュパーティションテーブルを作成します（TiDB内部にはリニアハッシュパーティションは存在しません）。また、MySQLのリニアハッシュパーティションの既存のDML文を直接実行することもでき、TiDBは対応するTiDBハッシュパーティションのクエリ結果を正常に返します。この機能により、TiDBの構文とMySQLのリニアハッシュパーティションとの互換性が確保され、MySQLベースのアプリケーションからTiDBへのスムーズな移行が可能になります。
 
     パーティション数が2のべき乗である場合、TiDBハッシュパーティションテーブルの行は、MySQLリニアハッシュパーティションテーブルの行と同じように分散されます。そうでない場合、TiDBにおけるこれらの行の分散はMySQLとは異なります。
 
@@ -302,7 +302,7 @@ TiDBバージョン: 6.4.0-DMR
 | [`tidb_opt_range_max_size`](/system-variables.md#tidb_opt_range_max_size-new-in-v640)                                               | 新しく追加された | オプティマイザがスキャン範囲を構築するためのメモリ使用量の上限を指定します。デフォルト値は`67108864` (64 MiB) です。                                                                                                                                                                |
 | [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)                                             | 新しく追加された | オプティマイザがスキャン範囲を構築するためのメモリ使用量の上限を制御します（実験的）。デフォルト値は`0`で、メモリ制限がないことを意味します。                                                                                                                                                            |
 | [`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)                       | 新しく追加された | TiDB が GC をトリガーしようとするしきい値を制御します (実験的)。デフォルト値は`70%`です。                                                                                                                                                                               |
-| [`tidb_server_memory_limit_sess_min_size`](/system-variables.md#tidb_server_memory_limit_sess_min_size-new-in-v640)                 | 新しく追加された | メモリ制限を有効にすると、TiDB は現在のインスタンスで最もメモリ使用量の多い SQL ステートメントを終了します。この変数は、終了する SQL ステートメントの最小メモリ使用量を指定します。デフォルト値は`134217728` (128 MiB) です。                                                                                                   |
+| [`tidb_server_memory_limit_sess_min_size`](/system-variables.md#tidb_server_memory_limit_sess_min_size-new-in-v640)                 | 新しく追加された | メモリ制限を有効にすると、TiDB は現在のインスタンスで最もメモリ使用量の多い SQL文を終了します。この変数は、終了する SQL文の最小メモリ使用量を指定します。デフォルト値は`134217728` (128 MiB) です。                                                                                                   |
 
 ### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
 
@@ -363,7 +363,7 @@ TiDBバージョン: 6.4.0-DMR
     - TiDB Dashboard
 
         - TiFlashのメトリクスをモニタリングページに表示できるようにし、そのページでのメトリクスの表示を最適化する [#1440](https://github.com/pingcap/tidb-dashboard/issues/1440) @[YiniXu9506](https://github.com/YiniXu9506)
-        - スロークエリリストとSQLステートメントリストの結果の行数を表示する [#1443](https://github.com/pingcap/tidb-dashboard/issues/1443) @[baurine](https://github.com/baurine)
+        - スロークエリリストとSQL文リストの結果の行数を表示する [#1443](https://github.com/pingcap/tidb-dashboard/issues/1443) @[baurine](https://github.com/baurine)
         - Alertmanagerが存在しない場合にAlertmanagerエラーを報告しないようにダッシュボードを最適化する [#1444](https://github.com/pingcap/tidb-dashboard/issues/1444) @[baurine](https://github.com/baurine)
 
     - Backup & Restore (BR)
@@ -372,7 +372,7 @@ TiDBバージョン: 6.4.0-DMR
 
     - TiCDC
 
-        - ExchangeパーティションDDLステートメントの複製をサポートする [#639](https://github.com/pingcap/tiflow/issues/639) @[asddongmen](https://github.com/asddongmen)
+        - ExchangeパーティションDDL文の複製をサポートする [#639](https://github.com/pingcap/tiflow/issues/639) @[asddongmen](https://github.com/asddongmen)
         - MQ シンクモジュールの非バッチ送信パフォーマンスを向上 [#7353](https://github.com/pingcap/tiflow/issues/7353) @[Rustin170506](https://github.com/Rustin170506)
         - テーブルに多数のリージョンがある場合の TiCDC プーラーのパフォーマンスを改善[#7078](https://github.com/pingcap/tiflow/issues/7078) [#7281](https://github.com/pingcap/tiflow/issues/7281) @[sdojjy](https://github.com/sdojjy)
         - Syncpointが有効になっている場合に`tidb_enable_external_ts_read`変数を使用して下流のTiDBの履歴データを読み取ることをサポートする [#7419](https://github.com/pingcap/tiflow/issues/7419) @[asddongmen](https://github.com/asddongmen)
@@ -381,7 +381,7 @@ TiDBバージョン: 6.4.0-DMR
     - TiDB Data Migration (DM)
 
         - 役に立たない`operate-source update`コマンドを dmctl から削除します [#7246](https://github.com/pingcap/tiflow/issues/7246) @[buchuitoudegou](https://github.com/buchuitoudegou)
-        - 上流データベースが TiDB と互換性のない DDL ステートメントを使用している場合に DM の完全インポートが失敗する問題を修正しました。TiDB でサポートされている DDL ステートメントを使用して、事前に TiDB でターゲットテーブルのスキーマを手動で作成することで、インポートの成功を確実にすることができます [#37984](https://github.com/pingcap/tidb/issues/37984) @[lance6716](https://github.com/lance6716)
+        - 上流データベースが TiDB と互換性のない DDL文を使用している場合に DM の完全インポートが失敗する問題を修正しました。TiDB でサポートされている DDL文を使用して、事前に TiDB でターゲットテーブルのスキーマを手動で作成することで、インポートの成功を確実にすることができます [#37984](https://github.com/pingcap/tidb/issues/37984) @[lance6716](https://github.com/lance6716)
 
     - TiDB Lightning
 
@@ -447,7 +447,7 @@ TiDBバージョン: 6.4.0-DMR
 
         - DM WebUI が間違った`allow-list`パラメータを生成する問題を修正 [#7096](https://github.com/pingcap/tiflow/issues/7096) @[zoubingwu](https://github.com/zoubingwu)
         - DMワーカーが起動または停止時にデータ競合を引き起こす確率がある問題を修正します [#6401](https://github.com/pingcap/tiflow/issues/6401) @[liumengya94](https://github.com/liumengya94)
-        - DM が`UPDATE`または`DELETE`ステートメントを複製する際に、対応する行データが存在しない場合、DM がイベントをサイレントに無視する問題を修正します。 [#6383](https://github.com/pingcap/tiflow/issues/6383) @[GMHDBJD](https://github.com/GMHDBJD)
+        - DM が`UPDATE`または`DELETE`文を複製する際に、対応する行データが存在しない場合、DM がイベントをサイレントに無視する問題を修正します。 [#6383](https://github.com/pingcap/tiflow/issues/6383) @[GMHDBJD](https://github.com/GMHDBJD)
         - `secondsBehindMaster`コマンドを実行した後、 `query-status`フィールドが表示されない問題を修正しました [#7189](https://github.com/pingcap/tiflow/issues/7189) @[GMHDBJD](https://github.com/GMHDBJD)
         - チェックポイントの更新時に大きなトランザクションが発生する可能性がある問題を修正しました [#5010](https://github.com/pingcap/tiflow/issues/5010) @[lance6716](https://github.com/lance6716)
         - フルタスクモードで、タスクが同期段階に入ってすぐに失敗した場合、DMがアップストリームのテーブルスキーマ情報を失う可能性がある問題を修正します [#7159](https://github.com/pingcap/tiflow/issues/7159) @[lance6716](https://github.com/lance6716)

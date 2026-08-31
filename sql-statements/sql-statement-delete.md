@@ -5,7 +5,7 @@ summary: TiDB データベースにおける DELETE の使用法の概要。
 
 # DELETE {#delete}
 
-`DELETE`ステートメントは、指定されたテーブルから行を削除します。
+`DELETE`文は、指定されたテーブルから行を削除します。
 
 ## 概要 {#synopsis}
 

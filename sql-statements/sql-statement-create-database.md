@@ -36,7 +36,7 @@ PlacementPolicyOption ::=
 
 ## 構文 {#syntax}
 
-`CREATE DATABASE`ステートメントは、データベースを作成し、デフォルトの文字セットや照合順序などのデータベースのデフォルトのプロパティを指定するために使用されます。 `CREATE SCHEMA` `CREATE DATABASE`の同義語です。
+`CREATE DATABASE`文は、データベースを作成し、デフォルトの文字セットや照合順序などのデータベースのデフォルトのプロパティを指定するために使用されます。 `CREATE SCHEMA` `CREATE DATABASE`の同義語です。
 
 ```sql
 CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name

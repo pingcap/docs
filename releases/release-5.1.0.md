@@ -89,13 +89,13 @@ TiDB バージョン: 5.1.0
     - `CONNECTION_ADMIN`
     - `SYSTEM_VARIABLES_ADMIN`
 
-    プラグインを使用して新しい権限を追加することもできます。サポートされているすべての権限を確認するには、 `SHOW PRIVILEGES`ステートメントを実行します。[ユーザー向けドキュメント](/privilege-management.md)
+    プラグインを使用して新しい権限を追加することもできます。サポートされているすべての権限を確認するには、 `SHOW PRIVILEGES`文を実行します。[ユーザー向けドキュメント](/privilege-management.md)
 
 - セキュリティ強化モード（SEM）用の新しい設定項目を追加します。これにより、TiDB管理者の権限をより細かく分割できます。
 
     セキュリティ強化モードはデフォルトでは無効になっています。これを有効にするには、 [ユーザー向けドキュメント](/system-variables.md#tidb_enable_enhanced_security)を参照してください。
 
-- 列タイプのオンライン変更機能を強化します。 `ALTER TABLE`ステートメントを使用した列タイプのオンライン変更をサポートします。これには以下が含まれますが、これらに限定されません。
+- 列タイプのオンライン変更機能を強化します。 `ALTER TABLE`文を使用した列タイプのオンライン変更をサポートします。これには以下が含まれますが、これらに限定されません。
 
     - `VARCHAR`を`BIGINT`に変更します。
     - `DECIMAL`の精度を変更する
@@ -187,7 +187,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
     - `WHERE`句で列挙型を使用する際のパフォーマンス向上のため、列挙型のデータを TiKV にプッシュダウンする機能をサポートする [#23619](https://github.com/pingcap/tidb/issues/23619)
     - `RENAME USER`構文をサポート [#23648](https://github.com/pingcap/tidb/issues/23648)
     - ROW_NUMBER() でデータをページングする際の TiDB の OOM 問題を解決するために、ウィンドウ関数の計算を最適化します [#23807](https://github.com/pingcap/tidb/issues/23807)
-    - `UNION ALL`の計算を最適化し、 `UNION ALL`を使用して多数の`SELECT`ステートメントを結合する際に発生する TiDB OOM 問題を解決します [#21441](https://github.com/pingcap/tidb/issues/21441)
+    - `UNION ALL`の計算を最適化し、 `UNION ALL`を使用して多数の`SELECT`文を結合する際に発生する TiDB OOM 問題を解決します [#21441](https://github.com/pingcap/tidb/issues/21441)
     - パーティションテーブルの動的プルーニングモードを最適化して、パフォーマンスと安定性を向上させる [#24150](https://github.com/pingcap/tidb/issues/24150)
     - 複数のシナリオで発生する`Region is Unavailable`の問題を修正[プロジェクト#62](https://github.com/pingcap/tidb/projects/62)
     - 頻繁にスケジュール設定を行う状況で発生する可能性のある複数の`Region is Unavailable`問題を修正します。
@@ -211,7 +211,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
 
     - `Union All` 、 `TopN` 、および`Limit`関数をサポートします。
     - MPPモードでの左外部結合およびセミアンチ結合を含むデカルト積をサポートします。
-    - ロック操作を最適化して、実行中の DDL ステートメントと読み取り操作が互いにブロックされないようにします。
+    - ロック操作を最適化して、実行中の DDL 文と読み取り操作が互いにブロックされないようにします。
     - TiFlashによる期限切れデータのクリーンアップを最適化
     - TiFlashストレージレベルで`timestamp`列に対するクエリフィルタのさらなるフィルタリングをサポートします。
     - クラスタ内に多数のテーブルが存在する場合のTiFlashの起動速度と拡張性を向上させる

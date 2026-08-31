@@ -35,7 +35,7 @@ summary: TiDB RC1は2016年12月23日にリリースされました。アップ�
 - `add index`文目の速度が向上します。
 - 次のステートメントがサポートされています。
     - 列の名前を変更するには、 `CHANGE COLUMN`ステートメントを使用します。
-    - 一部の列タイプ転送には、 `ALTER TABLE`ステートメントのうち`MODIFY COLUMN`と`CHANGE COLUMN`を使用します。
+    - 一部の列タイプ転送には、 `ALTER TABLE`文のうち`MODIFY COLUMN`と`CHANGE COLUMN`を使用します。
 
 ## 新しいツール {#new-tools}
 

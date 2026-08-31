@@ -289,7 +289,7 @@ br restore full -f 'mysql.usertable' -s $external_storage_url --with-sys-table
 
 この不整合は、バックアップで使用されるデータ圧縮率が、復元で使用されるデフォルトの圧縮率と異なるために発生します。チェックサムが成功した場合は、この問題は無視できます。
 
-### BR がバックアップデータを復元した後、テーブルとインデックスの TiDB の統計を更新するために、テーブルに対して`ANALYZE`ステートメントを実行する必要がありますか? {#after-br-restores-the-backup-data-do-i-need-to-execute-the-analyze-statement-on-the-table-to-update-the-statistics-of-tidb-on-the-tables-and-indexes}
+### BR がバックアップデータを復元した後、テーブルとインデックスの TiDB の統計を更新するために、テーブルに対して`ANALYZE`文を実行する必要がありますか? {#after-br-restores-the-backup-data-do-i-need-to-execute-the-analyze-statement-on-the-table-to-update-the-statistics-of-tidb-on-the-tables-and-indexes}
 
 BRは統計情報をバックアップしません（v4.0.9を除く）。そのため、バックアップデータを復元した後は、 `ANALYZE TABLE`手動で実行するか、TiDBが`ANALYZE`自動的に実行するのを待つ必要があります。
 
@@ -315,7 +315,7 @@ v4.0.9では、 BRはデフォルトで統計情報をバックアップしま�
 
 ## リカバリが完了したら、特定のテーブルを削除して再度リカバリできますか? {#after-the-recovery-is-complete-can-i-delete-a-specific-table-and-then-recover-it-again}
 
-はい、特定のテーブルを削除した後でも、そのテーブルを再度リカバリできます。ただし、リカバリできるのは`DROP TABLE`または`TRUNCATE TABLE`ステートメントで削除されたテーブルのみであり、 `DELETE FROM`ステートメントではリカバリできないことに注意してください。これは、 `DELETE FROM`ではMVCCバージョンを更新して削除対象データをマークするだけで、実際のデータ削除はGC後に行われるためです。
+はい、特定のテーブルを削除した後でも、そのテーブルを再度リカバリできます。ただし、リカバリできるのは`DROP TABLE`または`TRUNCATE TABLE`文で削除されたテーブルのみであり、 `DELETE FROM`ステートメントではリカバリできないことに注意してください。これは、 `DELETE FROM`ではMVCCバージョンを更新して削除対象データをマークするだけで、実際のデータ削除はGC後に行われるためです。
 
 ### 統計情報を復元するときにBR が大量のメモリを消費するのはなぜですか? {#why-does-br-take-a-lot-of-memory-when-restoring-statistics-information}
 

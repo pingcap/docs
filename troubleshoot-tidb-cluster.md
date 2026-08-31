@@ -110,7 +110,7 @@ panicログをご提供いただければ、 [バグを報告する](/support.md
 
 ## データベースアクセスがタイムアウトし、システム負荷が高すぎる {#database-access-times-out-and-the-system-load-is-too-high}
 
-まず、 [スロークエリログ](/identify-slow-queries.md)をチェックして、不適切な SQL ステートメントが原因かどうかを確認します。
+まず、 [スロークエリログ](/identify-slow-queries.md)をチェックして、不適切な SQL文が原因かどうかを確認します。
 
 問題を解決できなかった場合は、次の情報を提供してください。
 

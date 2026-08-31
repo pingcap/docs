@@ -55,7 +55,7 @@ TiDB バージョン: 4.0.13
 
 - TiDB
 
-    - サブクエリを含む`UPDATE`ステートメントが生成列を更新する際に発生するpanic問題を修正しました。 [＃24658](https://github.com/pingcap/tidb/pull/24658)
+    - サブクエリを含む`UPDATE`文が生成列を更新する際に発生するpanic問題を修正しました。 [＃24658](https://github.com/pingcap/tidb/pull/24658)
     - データの読み取りにマルチカラムインデックスを使用する際に重複したクエリ結果が発生する問題を修正[＃24634](https://github.com/pingcap/tidb/pull/24634)
     - DIV式で`BIT`型定数を除数として使用した場合に間違ったクエリ結果が発生する問題を修正しました [＃24266](https://github.com/pingcap/tidb/pull/24266)
     - `NO_ZERO_IN_DATE` SQLモードがDDL文で設定されたデフォルトの列値に反映されない問題を修正 [＃24185](https://github.com/pingcap/tidb/pull/24185)

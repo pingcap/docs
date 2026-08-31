@@ -24,7 +24,7 @@ Dumplingを使用してデータをエクスポートする場合、テーブル
 
 - **方法 1** : TiDB Lightningを使用してターゲットテーブルスキーマを作成します。
 
-    必要なDDLステートメントを含むSQLファイルを作成します。
+    必要なDDL文を含むSQLファイルを作成します。
 
     - `CREATE DATABASE`ファイルに`${db_name}-schema-create.sql` } ステートメントを追加します。
     - `CREATE TABLE`ファイルに`${db_name}.${table_name}-schema.sql` } ステートメントを追加します。

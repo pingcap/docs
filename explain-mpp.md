@@ -1,6 +1,6 @@
 ---
 title: Explain Statements in the MPP Mode
-summary: TiDB のEXPLAINステートメントによって返される実行計画情報について学習します。
+summary: TiDB のEXPLAIN文によって返される実行計画情報について学習します。
 ---
 
 # MPPモードでステートメントを説明する {#explain-statements-in-the-mpp-mode}
@@ -134,7 +134,7 @@ EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
 
 ## MPPモードでの`EXPLAIN ANALYZE`文 {#explain-analyze-statements-in-the-mpp-mode}
 
-`EXPLAIN ANALYZE`ステートメントは`EXPLAIN`と似ていますが、実行時情報も出力します。
+`EXPLAIN ANALYZE`文は`EXPLAIN`と似ていますが、実行時情報も出力します。
 
 以下は簡単な例`EXPLAIN ANALYZE`の出力です。
 

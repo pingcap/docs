@@ -98,11 +98,11 @@ summary: プライマリクラスタからセカンダリクラスタへデー�
 
 ## ステップ2. 全データを移行する {#step-2-migrate-full-data}
 
-環境設定後、 [BR](https://github.com/pingcap/tidb/tree/release-8.5/br)のバックアップおよび復元関数を使用して、データ全体を移行できます。BRは[3つの方法](/br/br-use-overview.md#deploy-and-use-br)で起動できます。このドキュメントでは、SQL ステートメント`BACKUP`および`RESTORE`を使用します。
+環境設定後、 [BR](https://github.com/pingcap/tidb/tree/release-8.5/br)のバックアップおよび復元関数を使用して、データ全体を移行できます。BRは[3つの方法](/br/br-use-overview.md#deploy-and-use-br)で起動できます。このドキュメントでは、SQL文`BACKUP`および`RESTORE`を使用します。
 
 > **Note:**
 >
-> - `BACKUP`および`RESTORE` SQL ステートメントは実験的です。本番環境での使用は推奨されません。予告なく変更または削除される場合があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> - `BACKUP`および`RESTORE` SQL文は実験的です。本番環境での使用は推奨されません。予告なく変更または削除される場合があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 > - 本番のクラスタでは、GCを無効にした状態でバックアップを実行すると、クラスタのパフォーマンスに影響を与える可能性があります。パフォーマンスの低下を避けるため、データのバックアップはピーク時以外の時間帯に行い、RATE_LIMITを適切な値に設定することをお勧めします。
 > - アップストリームとダウンストリームのクラスタのバージョンが異なる場合は、 [BR互換性](/br/backup-and-restore-overview.md#some-tips)を確認してください。このドキュメントでは、アップストリームとダウンストリームのクラスタのバージョンが同じであることを前提としています。
 
@@ -137,7 +137,7 @@ summary: プライマリクラスタからセカンダリクラスタへデー�
 
 2. データをバックアップしてください。
 
-    上流クラスターで`BACKUP`ステートメントを実行してデータをバックアップします。
+    上流クラスターで`BACKUP`文を実行してデータをバックアップします。
 
     ```sql
     MySQL [(none)]> BACKUP DATABASE * TO 's3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://${HOST_IP}:6060&force-path-style=true' RATE_LIMIT = 120 MB/SECOND;

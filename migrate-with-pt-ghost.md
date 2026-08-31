@@ -32,7 +32,7 @@ online-ddl: true                # Enable online-ddl support on DM to support aut
 
 ## online-ddl を有効にした後のワークフロー {#workflow-after-enabling-online-ddl}
 
-DM で online-ddl を有効にすると、gh-ost または pt-osc を複製する DM によって生成される DDL ステートメントが変更されます。
+DM で online-ddl を有効にすると、gh-ost または pt-osc を複製する DM によって生成される DDL文が変更されます。
 
 gh-ost または pt-osc のワークフロー:
 

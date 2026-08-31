@@ -247,7 +247,7 @@ LIMIT 10;
 - `vector_index.load.from_disk` : ディスクからロードされたインデックスの数。インデックスは以前にS3からダウンロード済みです。
 - `vector_index.load.from_cache` : キャッシュからロードされたインデックスの数。インデックスは以前にS3からダウンロード済みです。
 - `vector_index.search.total` : インデックス内の検索にかかる合計時間。レイテンシーが大きい場合、通常、インデックスがコールド状態（一度もアクセスされていない、またはかなり前にアクセスされている状態）であるため、インデックス検索時に大量のI/O操作が発生します。複数のベクトルインデックスが並列で検索される可能性があるため、このフィールドは実際のクエリ時間よりも長くなる可能性があります。
-- `vector_index.search.discarded_nodes` : 検索中に訪問されたが破棄されたベクトル行の数。これらの破棄されたベクトルは検索結果には考慮されません。この値が大きい場合、通常、 `UPDATE`または`DELETE`ステートメントによって多くの古い行が発生していることを示します。
+- `vector_index.search.discarded_nodes` : 検索中に訪問されたが破棄されたベクトル行の数。これらの破棄されたベクトルは検索結果には考慮されません。この値が大きい場合、通常、 `UPDATE`または`DELETE`文によって多くの古い行が発生していることを示します。
 
 出力の解釈については、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md) 、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) 、および[EXPLAIN コマンド](/explain-walkthrough.md)を参照してください。
 

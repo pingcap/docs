@@ -84,7 +84,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         この機能は、TiDB Cloud Premium インスタンスにおける SQL のリソース消費を実用的に把握できるビューを提供します。
 
-        これにより、DB User、SQL type、DB、table、SQL digest などの複数の次元で、SQL ステートメントの RU 消費量、レイテンシー、実行回数を分析できるようになりました。さらに、主な要因をひと目で確認できるため、高いリソース消費や処理遅延の原因を特定しやすくなります。
+        これにより、DB User、SQL type、DB、table、SQL digest などの複数の次元で、SQL文の RU 消費量、レイテンシー、実行回数を分析できるようになりました。さらに、主な要因をひと目で確認できるため、高いリソース消費や処理遅延の原因を特定しやすくなります。
 
         現在、この機能はパブリックプレビュー段階であり、8月 19日以降に作成された一部の TiDB Cloud Premium インスタンスでのみ利用できます。
 
@@ -207,7 +207,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - TiDB v7.5.6 以降または v8.5.2 以降の [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) クラスターで、データベース監査ログがパブリックプレビューで利用可能になりました。
 
-        この機能は、実行された SQL ステートメントを含むユーザーアクセスアクティビティを記録し、監査ログを Amazon S3、Google Cloud Storage (GCS)、または Azure Blob Storage に書き込むことをサポートし、特定の SQL ユーザーに対してどのイベントを取得するかを制御するフィルタールールを設定できます。
+        この機能は、実行された SQL文を含むユーザーアクセスアクティビティを記録し、監査ログを Amazon S3、Google Cloud Storage (GCS)、または Azure Blob Storage に書き込むことをサポートし、特定の SQL ユーザーに対してどのイベントを取得するかを制御するフィルタールールを設定できます。
 
         詳細については、[TiDB Cloud Dedicatedデータベース監査ログ (Preview)](/tidb-cloud/tidb-cloud-auditing.md) を参照してください。
 
@@ -297,7 +297,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         - Alibaba Cloud: `Singapore (ap-southeast-1)` および `Tokyo (ap-northeast-1)`
 
-      この機能は、1分単位で RU 消費量が上位の SQL ステートメントを表示し、最もリソースを消費するクエリをすばやく特定してコスト削減に役立てることができます。
+      この機能は、1分単位で RU 消費量が上位の SQL文を表示し、最もリソースを消費するクエリをすばやく特定してコスト削減に役立てることができます。
 
       この機能は段階的に展開されています。早期アクセスについては [support@pingcap.com](mailto:support@pingcap.com) までお問い合わせください。
 
@@ -395,7 +395,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         - AWS: `N. Virginia (us-east-1)` 、 `Tokyo (ap-northeast-1)`
 
-        この機能は、RUを最も多く消費するSQLステートメントを分単位で表示し、最もリソースを消費するクエリを迅速に特定してコスト削減に役立てます。
+        この機能は、RUを最も多く消費するSQL文を分単位で表示し、最もリソースを消費するクエリを迅速に特定してコスト削減に役立てます。
 
         この機能は段階的に展開されます。早期アクセスをご希望の場合は、 [support@pingcap.com](mailto:support@pingcap.com)までお問い合わせください。
 
@@ -442,7 +442,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         - AWS: `Oregon (us-west-2)` 、 `Frankfurt (eu-central-1)` 、 `Singapore (ap-southeast-1)`
 
-        この機能は、RUを最も多く消費しているSQLステートメントを分単位の粒度で表示し、リソースを大量に消費するクエリを迅速に特定してコスト削減に役立てます。
+        この機能は、RUを最も多く消費しているSQL文を分単位の粒度で表示し、リソースを大量に消費するクエリを迅速に特定してコスト削減に役立てます。
 
         この機能は段階的に展開されます。早期アクセスをご希望の場合は、 [support@pingcap.com](mailto:support@pingcap.com)までお問い合わせください。
 
@@ -470,7 +470,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         - アリババクラウド: `Mexico (na-south-1)`
 
-        この機能は、RUを最も多く消費しているSQLステートメントを分単位の粒度で表示し、リソースを大量に消費するクエリを迅速に特定してコスト削減に役立てます。
+        この機能は、RUを最も多く消費しているSQL文を分単位の粒度で表示し、リソースを大量に消費するクエリを迅速に特定してコスト削減に役立てます。
 
         この機能は段階的に展開されます。早期アクセスをご希望の場合は、 [support@pingcap.com](mailto:support@pingcap.com)までお問い合わせください。
 

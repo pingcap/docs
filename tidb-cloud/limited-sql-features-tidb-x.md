@@ -76,7 +76,7 @@ TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに
 | `CHANGE DRAINER` | サポートされていません [^7] | サポートされていません [^7] |
 | `CHANGE PUMP` | サポートされていません [^7] | サポートされていません [^7] |
 | `FLASHBACK CLUSTER` | サポートされていません [^3] | サポートされていません [^3] |
-| `IMPORT INTO` | サポートされていますが、ローカルファイルパスまたは S3 EXTERNAL_ID を使用する IMPORT INTO ステートメントはブロックされます。 | サポートされていません |
+| `IMPORT INTO` | サポートされていますが、ローカルファイルパスまたは S3 EXTERNAL_ID を使用する IMPORT INTO文はブロックされます。 | サポートされていません |
 | `LOAD DATA INFILE` | ローカルファイルパスからの `LOAD DATA LOCAL INFILE` はブロックされます。 | `LOAD DATA LOCAL INFILE` のみサポートされます |
 | `LOAD STATS` | サポートされていません | サポートされていません |
 | `SELECT ... INTO OUTFILE` | サポートされていません [^4] | サポートされていません [^4] |

@@ -203,7 +203,7 @@
     - [ユーザー定義変数](/user-defined-variables.md)
     - [式の構文](/expression-syntax.md)
     - [コメント構文](/comment-syntax.md)
-  - SQLステートメント
+  - SQL文
     - [概要](/sql-statements/sql-statement-overview.md)
     - [`ADMIN`](/sql-statements/sql-statement-admin.md)
     - [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
@@ -384,7 +384,7 @@
     - [隔離レベル](/transaction-isolation-levels.md)
     - [楽観的トランザクション](/optimistic-transaction.md)
     - [悲観的トランザクション](/pessimistic-transaction.md)
-    - [非トランザクションDMLステートメント](/non-transactional-dml.md)
+    - [非トランザクションDML文](/non-transactional-dml.md)
   - [ビュー](/views.md)
   - [パーティショニング](/partitioned-table.md)
   - [一時テーブル](/temporary-tables.md)
@@ -477,7 +477,7 @@
   - [サーバーステータス変数](/status-variables.md)
   - [テーブルフィルター](/table-filter.md)
   - [外部ストレージサービスのURI形式](/external-storage-uri.md)
-  - [DDL ステートメントに埋め込まれた `ANALYZE`](/ddl_embedded_analyze.md)
+  - [DDL文に埋め込まれた `ANALYZE`](/ddl_embedded_analyze.md)
   - [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)
   - [通知](/tidb-cloud/notifications.md)
 - サポートプラン

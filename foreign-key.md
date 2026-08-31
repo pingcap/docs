@@ -129,7 +129,7 @@ CREATE TABLE product_order (
 
 ## 外部キー制約を作成する {#create-a-foreign-key-constraint}
 
-外部キー制約を作成するには、次の`ALTER TABLE`ステートメントを使用できます。
+外部キー制約を作成するには、次の`ALTER TABLE`文を使用できます。
 
 ```sql
 ALTER TABLE table_name
@@ -144,7 +144,7 @@ ALTER TABLE table_name
 
 ## 外部キー制約を削除する {#delete-a-foreign-key-constraint}
 
-外部キー制約を削除するには、次の`ALTER TABLE`ステートメントを使用できます。
+外部キー制約を削除するには、次の`ALTER TABLE`文を使用できます。
 
 ```sql
 ALTER TABLE table_name DROP FOREIGN KEY fk_identifier;
@@ -260,7 +260,7 @@ REFERENCED_TABLE_NAME     | parent
 
 ## 外部キーを使用した実行計画を確認する {#view-execution-plans-with-foreign-keys}
 
-`EXPLAIN`ステートメントを使用すると、実行計画を表示できます。 `Foreign_Key_Check`演算子は、実行される DML ステートメントに対して外部キー制約チェックを実行します。
+`EXPLAIN`文を使用すると、実行計画を表示できます。 `Foreign_Key_Check`演算子は、実行される DML文に対して外部キー制約チェックを実行します。
 
 ```sql
 mysql> explain insert into child values (1,1);
@@ -272,7 +272,7 @@ mysql> explain insert into child values (1,1);
 +-----------------------+---------+------+---------------+-------------------------------+
 ```
 
-`EXPLAIN ANALYZE`ステートメントを使用すると、外部キー参照の動作を確認できます。 `Foreign_Key_Cascade`演算子は、実行される DML ステートメントに対して外部キー参照を実行します。
+`EXPLAIN ANALYZE`文を使用すると、外部キー参照の動作を確認できます。 `Foreign_Key_Cascade`演算子は、実行される DML文に対して外部キー参照を実行します。
 
 ```sql
 mysql> explain analyze delete from parent where id = 1;
@@ -293,7 +293,7 @@ mysql> explain analyze delete from parent where id = 1;
 
 ### TiDBバージョンの互換性 {#compatibility-between-tidb-versions}
 
-バージョン 6.6.0 より前の TiDB では、外部キーを作成する構文がサポートされていましたが、作成された外部キーは無効でした。バージョン 6.6.0 より前に作成された TiDB クラスタをバージョン 6.6.0 以降にアップグレードしても、アップグレード前に作成された外部キーは無効のままです。バージョン 6.6.0 以降で作成された外部キーのみが有効です。無効な外部キーを削除して新しい外部キーを作成することで、外部キー制約を有効にできます。 `SHOW CREATE TABLE`ステートメントを使用して、外部キーが有効かどうかを確認できます。無効な外部キーには`/* FOREIGN KEY INVALID */`コメントが付きます。
+バージョン 6.6.0 より前の TiDB では、外部キーを作成する構文がサポートされていましたが、作成された外部キーは無効でした。バージョン 6.6.0 より前に作成された TiDB クラスタをバージョン 6.6.0 以降にアップグレードしても、アップグレード前に作成された外部キーは無効のままです。バージョン 6.6.0 以降で作成された外部キーのみが有効です。無効な外部キーを削除して新しい外部キーを作成することで、外部キー制約を有効にできます。 `SHOW CREATE TABLE`文を使用して、外部キーが有効かどうかを確認できます。無効な外部キーには`/* FOREIGN KEY INVALID */`コメントが付きます。
 
 ```sql
 mysql> SHOW CREATE TABLE child\G

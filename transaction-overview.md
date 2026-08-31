@@ -43,7 +43,7 @@ START TRANSACTION WITH CAUSAL CONSISTENCY ONLY;
 
 > **Note:**
 >
-> MySQLとは異なり、TiDBは上記のステートメントを実行した後に現在のデータベースのスナップショットを取得します。MySQLの`BEGIN`と`START TRANSACTION`は、トランザクション開始後、InnoDBからデータを読み取る最初の`SELECT`ステートメント（`SELECT FOR UPDATE`ではありません）を実行した後にスナップショットを取得します。MySQLの`START TRANSACTION WITH CONSISTENT SNAPSHOT`は、`START TRANSACTION`ステートメントの実行中にスナップショットを取得します。その結果、TiDBの`BEGIN`/`START TRANSACTION`は、MySQLの`START TRANSACTION WITH CONSISTENT SNAPSHOT`に相当します。
+> MySQLとは異なり、TiDBは上記のステートメントを実行した後に現在のデータベースのスナップショットを取得します。MySQLの`BEGIN`と`START TRANSACTION`は、トランザクション開始後、InnoDBからデータを読み取る最初の`SELECT`文（`SELECT FOR UPDATE`ではありません）を実行した後にスナップショットを取得します。MySQLの`START TRANSACTION WITH CONSISTENT SNAPSHOT`は、`START TRANSACTION`文の実行中にスナップショットを取得します。その結果、TiDBの`BEGIN`/`START TRANSACTION`は、MySQLの`START TRANSACTION WITH CONSISTENT SNAPSHOT`に相当します。
 
 ### トランザクションのコミット {#committing-a-transaction}
 
@@ -57,7 +57,7 @@ COMMIT;
 
 > **Tip:**
 >
-> [楽観的トランザクション](/optimistic-transaction.md)を有効にする前に、アプリケーションが`COMMIT`ステートメントでエラーが返される可能性があることを正しく処理できることを確認してください。アプリケーションがこれをどのように処理するか不明な場合は、代わりにデフォルトの[悲観的トランザクション](/pessimistic-transaction.md)を使用することをお勧めします。
+> [楽観的トランザクション](/optimistic-transaction.md)を有効にする前に、アプリケーションが`COMMIT`文でエラーが返される可能性があることを正しく処理できることを確認してください。アプリケーションがこれをどのように処理するか不明な場合は、代わりにデフォルトの[悲観的トランザクション](/pessimistic-transaction.md)を使用することをお勧めします。
 
 ### トランザクションのロールバック {#rolling-back-a-transaction}
 
@@ -217,11 +217,11 @@ mysql> SELECT * FROM t1; -- MySQL returns 1 2; TiDB returns 1.
 > **Note:**
 >
 > - この最適化は楽観的トランザクションにのみ適用されます。
-> - この最適化は`INSERT IGNORE`と`INSERT ON DUPLICATE KEY UPDATE`には適用されず、通常の`INSERT`ステートメントにのみ適用されます。
+> - この最適化は`INSERT IGNORE`と`INSERT ON DUPLICATE KEY UPDATE`には適用されず、通常の`INSERT`文にのみ適用されます。
 
 ## ステートメントのロールバック {#statement-rollback}
 
-TiDBは、ステートメント実行失敗後のアトミックロールバックをサポートしています。ステートメントがエラーになった場合、そのステートメントで行われた変更は有効になりません。トランザクションはオープンのままとなり、 `COMMIT`または`ROLLBACK`ステートメントを発行する前に追加の変更を加えることができます。
+TiDBは、ステートメント実行失敗後のアトミックロールバックをサポートしています。ステートメントがエラーになった場合、そのステートメントで行われた変更は有効になりません。トランザクションはオープンのままとなり、 `COMMIT`または`ROLLBACK`文を発行する前に追加の変更を加えることができます。
 
 ```sql
 CREATE TABLE test (id INT NOT NULL PRIMARY KEY);
@@ -264,7 +264,7 @@ mysql> SELECT * FROM test;
 2 rows in set (0.00 sec)
 ```
 
-上記の例では、 `INSERT`ステートメントが失敗した後もトランザクションは開いたままです。その後、最後の挿入ステートメントが成功し、変更がコミットされます。
+上記の例では、 `INSERT`文が失敗した後もトランザクションは開いたままです。その後、最後の挿入ステートメントが成功し、変更がコミットされます。
 
 ## トランザクションサイズの制限 {#transaction-size-limit}
 

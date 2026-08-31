@@ -61,7 +61,7 @@ CentOS Linux 7はサポート終了（EOL）を迎えたため、今後のTiDB�
     - Grafana の**Stats Healthy Distribution**パネルのデータが正しくない可能性がある問題を修正 [#57176](https://github.com/pingcap/tidb/issues/57176) @[hawkingrei](https://github.com/hawkingrei)
     - 収集された統計情報のないテーブルの最後の`ANALYZE`時刻が NULL にならない可能性がある問題を修正 [#57735](https://github.com/pingcap/tidb/issues/57735) @[winoros](https://github.com/winoros)
     - バックグラウンドタスクがタイムアウトした際に、統計情報の例外処理が不適切であるためにメモリ内の統計情報が誤って削除される問題を修正 [#57901](https://github.com/pingcap/tidb/issues/57901) @[hawkingrei](https://github.com/hawkingrei)
-    - `DROP DATABASE`ステートメントの実行後に統計情報がクリアされない問題を修正しました [#57230](https://github.com/pingcap/tidb/issues/57230) @[Rustin170506](https://github.com/Rustin170506)
+    - `DROP DATABASE`文の実行後に統計情報がクリアされない問題を修正しました [#57230](https://github.com/pingcap/tidb/issues/57230) @[Rustin170506](https://github.com/Rustin170506)
     - `IndexMerge`を構築する際に一部の述語が失われる可能性がある問題を修正しました [#58476](https://github.com/pingcap/tidb/issues/58476) @[hawkingrei](https://github.com/hawkingrei)
     - 3000次元を超える列にベクトル検索インデックスを作成すると`KeyTooLong`エラーが発生する問題を修正 [#58836](https://github.com/pingcap/tidb/issues/58836) @[breezewish](https://github.com/breezewish)
     - `REORGANIZE PARTITION`操作が置換されたグローバルインデックスを正しくクリーンアップせず、非クラスター化テーブルの一意インデックスを処理する問題を修正しました [#56822](https://github.com/pingcap/tidb/issues/56822) @[mjonss](https://github.com/mjonss)
@@ -106,7 +106,7 @@ CentOS Linux 7はサポート終了（EOL）を迎えたため、今後のTiDB�
     - TiCDC
 
         - 新しい TiKV ノードがクラスターに追加された後に変更フィードが停止する可能性がある問題を修正します [#11766](https://github.com/pingcap/tiflow/issues/11766) @[lidezhu](https://github.com/lidezhu)
-        - イベントフィルターが`RENAME TABLE` DDL ステートメントを処理する際に、フィルタリングに古いテーブル名ではなく新しいテーブル名を誤って使用する問題を修正しました [#11946](https://github.com/pingcap/tiflow/issues/11946) @[kennytm](https://github.com/kennytm)
+        - イベントフィルターが`RENAME TABLE` DDL文を処理する際に、フィルタリングに古いテーブル名ではなく新しいテーブル名を誤って使用する問題を修正しました [#11946](https://github.com/pingcap/tiflow/issues/11946) @[kennytm](https://github.com/kennytm)
         - 変更フィードが削除された後にゴルーチンがリークする問題を修正 [#11954](https://github.com/pingcap/tiflow/issues/11954) @[hicqu](https://github.com/hicqu)
         - Sarama クライアントによって再送信される順序が崩れたメッセージによって Kafka メッセージの順序が正しくなくなる問題を修正 [#11935](https://github.com/pingcap/tiflow/issues/11935) @[3AceShowHand](https://github.com/3AceShowHand)
         - DebeziumプロトコルのNOT NULLタイムスタンプフィールドのデフォルト値が間違っている問題を修正 [#11966](https://github.com/pingcap/tiflow/issues/11966) @[wk989898](https://github.com/wk989898)

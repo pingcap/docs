@@ -5,7 +5,7 @@ summary: TiDB データベースの EXECUTE の使用法の概要。
 
 # EXECUTE {#execute}
 
-`EXECUTE`ステートメントは、サーバー側のプリペアドステートメントへの SQL インターフェイスを提供します。
+`EXECUTE`文は、サーバー側のプリペアドステートメントへの SQL インターフェイスを提供します。
 
 ## 概要 {#synopsis}
 

@@ -63,8 +63,8 @@ routes:
 
 アップストリームインスタンスをダウンストリーム`test`.`t`に移行するには、次のルーティングルールを作成する必要があります。
 
-- `rule-1` 、 `schema-pattern: "test_*"`および`table-pattern: "t_*"`に一致するテーブルの DML または DDL ステートメントをダウンストリーム`test`.`t`に移行するために使用されます。
-- `rule-2` 、 `CREATE/DROP SCHEMA xx`など、 `schema-pattern: "test_*"`に一致するスキーマの DDL ステートメントを移行するために使用されます。
+- `rule-1` 、 `schema-pattern: "test_*"`および`table-pattern: "t_*"`に一致するテーブルの DML または DDL文をダウンストリーム`test`.`t`に移行するために使用されます。
+- `rule-2` 、 `CREATE/DROP SCHEMA xx`など、 `schema-pattern: "test_*"`に一致するスキーマの DDL文を移行するために使用されます。
 
 > **Note:**
 >

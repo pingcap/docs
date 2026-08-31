@@ -27,7 +27,7 @@ mysql -P 4000 -u xxx -p
 
 You can create TiDB accounts in two ways:
 
-- アカウントを作成して権限を確立するための標準のアカウント管理 SQL ステートメント ( [`CREATE USER`](/sql-statements/sql-statement-create-user.md)や[`GRANT`](/sql-statements/sql-statement-grant-privileges.md)など) を使用します。
+- アカウントを作成して権限を確立するための標準のアカウント管理 SQL文 ( [`CREATE USER`](/sql-statements/sql-statement-create-user.md)や[`GRANT`](/sql-statements/sql-statement-grant-privileges.md)など) を使用します。
 - [`INSERT`](/sql-statements/sql-statement-insert.md)などのステートメントを使用して権限テーブルを直接操作し、 [`DELETE`](/sql-statements/sql-statement-delete.md) [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)を実行します。この方法で[`UPDATE`](/sql-statements/sql-statement-update.md)更新が不完全になる可能性があるため、アカウントの作成または変更にはこの方法を使用しないことをお勧めします。
 
 [サードパーティのGUIツール](/develop/dev-guide-third-party-support.md#gui)を使用してアカウントを作成することもできます。
@@ -68,7 +68,7 @@ CREATE USER 'test';
 CREATE USER 'test'@'%' IDENTIFIED BY '';
 ```
 
-指定されたユーザーが存在しない場合、ユーザーの自動作成の動作は[`sql_mode`](/system-variables.md#sql_mode)に依存します。 `sql_mode`に`NO_AUTO_CREATE_USER`が含まれる場合、 `GRANT`ステートメントはユーザーを作成せず、エラーが返されます。
+指定されたユーザーが存在しない場合、ユーザーの自動作成の動作は[`sql_mode`](/system-variables.md#sql_mode)に依存します。 `sql_mode`に`NO_AUTO_CREATE_USER`が含まれる場合、 `GRANT`文はユーザーを作成せず、エラーが返されます。
 
 For example, assume that the `sql_mode` does not include `NO_AUTO_CREATE_USER`, and you use the following `CREATE USER` and `GRANT` statements to create four accounts:
 

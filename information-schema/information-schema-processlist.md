@@ -11,7 +11,7 @@ summary: "`PROCESSLIST` information_schema テーブルについて学習しま�
 
 <CustomContent platform="tidb">
 
-- SQL ステートメントのダイジェストを表示する`DIGEST`列。
+- SQL文のダイジェストを表示する`DIGEST`列。
 - 処理中のリクエストによって使用されているメモリをバイト単位で表示する`MEM`列。
 - ディスク使用量をバイト単位で表示する`DISK`列。
 - トランザクションの開始時刻を表示する`TxnStart`列。
@@ -25,7 +25,7 @@ summary: "`PROCESSLIST` information_schema テーブルについて学習しま�
 
 <CustomContent platform="tidb-cloud">
 
-- SQL ステートメントのダイジェストを表示する`DIGEST`列。
+- SQL文のダイジェストを表示する`DIGEST`列。
 - 処理中のリクエストによって使用されているメモリをバイト単位で表示する`MEM`列。
 - ディスク使用量をバイト単位で表示する`DISK`列。
 - トランザクションの開始時刻を表示する`TxnStart`列。
@@ -103,7 +103,7 @@ RESOURCE_GROUP: default
 - `TIME` : 現在の実行時間`PROCESS` (秒)。
 - `STATE` : 現在の接続状態。
 - `INFO` : 処理中の要求されたステートメント。
-- `DIGEST` : SQL ステートメントのダイジェスト。
+- `DIGEST` : SQL文のダイジェスト。
 - `MEM` : 処理中のリクエストによって使用されるメモリ(バイト単位)。
 - `DISK` : ディスク使用量（バイト単位）。
 - `TxnStart` : トランザクションの開始時刻。
@@ -125,7 +125,7 @@ RESOURCE_GROUP: default
 - `TIME` : 現在の実行時間`PROCESS` (秒)。
 - `STATE` : 現在の接続状態。
 - `INFO` : 処理中の要求されたステートメント。
-- `DIGEST` : SQL ステートメントのダイジェスト。
+- `DIGEST` : SQL文のダイジェスト。
 - `MEM` : 処理中のリクエストによって使用されるメモリ(バイト単位)。
 - `DISK` : ディスク使用量（バイト単位）。
 - `TxnStart` : トランザクションの開始時刻。

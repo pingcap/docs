@@ -55,7 +55,7 @@ ticloud serverless export create -c <cluster-id> --oss.uri <uri> --oss.access-ke
 ticloud serverless export create -c <cluster-id> --file-type parquet --parquet.compression SNAPPY --filter <database.table>
 ```
 
-非対話型モードで SQL ステートメントを使用してデータをエクスポートします。
+非対話型モードで SQL文を使用してデータをエクスポートします。
 
 ```shell
 ticloud serverless export create -c <cluster-id> --sql 'select * from database.table'
@@ -87,7 +87,7 @@ ticloud serverless export create -c <cluster-id> --sql 'select * from database.t
 | --csv.skip-header              | ヘッダーなしでテーブルの CSV ファイルをエクスポートします。                                                                                          | いいえ | 非対話型モードでのみ動作します。         |
 | --parquet.compression string   | Parquet圧縮アルゴリズムを指定します。[ `"GZIP"` `"SNAPPY"` `"ZSTD"` `"NONE"` ]のいずれかです。デフォルト値は`"ZSTD"`です。                                 | いいえ | 非対話型モードでのみ動作します。         |
 | --filter strings                 | エクスポートするテーブルをテーブルフィルタパターンで指定します。--sql と同時に使用しないでください。詳細については、 [テーブルフィルター](/table-filter.md)を参照してください。                      | いいえ | 非対話型モードでのみ動作します。         |
-| --sql string                   | `SQL SELECT`ステートメントを使用してエクスポートされたデータをフィルターします。                                                                            | いいえ | 非対話型モードでのみ動作します。         |
+| --sql string                   | `SQL SELECT`文を使用してエクスポートされたデータをフィルターします。                                                                            | いいえ | 非対話型モードでのみ動作します。         |
 | --where string                       | エクスポートされたテーブルを`WHERE`条件でフィルタリングします。--sqlと同時に使用しないでください。                                                                   | いいえ | 非対話型モードでのみ動作します。         |
 | --compression string                     | エクスポートファイルの圧縮アルゴリズムを指定します。サポートされているアルゴリズムは`GZIP` 、 `SNAPPY` 、 `ZSTD` 、 `NONE`です。デフォルト値は`GZIP`です。                          | いいえ | 非対話型モードでのみ動作します。         |
 |  --force                    | 確認なしでエクスポートタスクを作成します。非対話型モードでクラスター全体をエクスポートする場合は、確認が必要です。                                                                 | いいえ | 非対話型モードでのみ動作します。         |

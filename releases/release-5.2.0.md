@@ -85,7 +85,7 @@ TiDB バージョン: 5.2.0
 
 - **HashAggのスピルをサポート**
 
-    HashAgg をディスクに書き出す機能をサポートします。HashAgg オペレーターを含む SQL ステートメントでメモリ不足 (OOM) が発生した場合、このオペレーターの同時実行数を`1`に設定してディスクへの書き出しをトリガーし、メモリ負荷を軽減することができます。
+    HashAgg をディスクに書き出す機能をサポートします。HashAgg オペレーターを含む SQL 文でメモリ不足 (OOM) が発生した場合、このオペレーターの同時実行数を`1`に設定してディスクへの書き出しをトリガーし、メモリ負荷を軽減することができます。
 
     [ユーザー向けドキュメント](/configure-memory-usage.md#other-memory-control-behaviors-of-tidb-server)、 [#25882](https://github.com/pingcap/tidb/issues/25882)
 
@@ -112,7 +112,7 @@ TiDB バージョン: 5.2.0
     バージョン5.2では、ロックビューに以下の機能強化が加えられました。
 
     - ロックビュー関連テーブルのSQLダイジェスト列に加えて、対応する正規化されたSQLテキストを表示する列をこれらのテーブルに追加してください。SQLダイジェストに対応するステートメントを手動でクエリする必要はありません。
-    - `TIDB_DECODE_SQL_DIGESTS`関数を追加して、クラスタ内の一連の SQL ダイジェストに対応する正規化された SQL ステートメント (フォーマットや引数のない形式) を照会します。これにより、トランザクションによって過去に実行されたステートメントの照会操作が簡素化されます。
+    - `TIDB_DECODE_SQL_DIGESTS`関数を追加して、クラスタ内の一連の SQL ダイジェストに対応する正規化された SQL文 (フォーマットや引数のない形式) を照会します。これにより、トランザクションによって過去に実行されたステートメントの照会操作が簡素化されます。
     - `DATA_LOCK_WAITS`および`DEADLOCKS`システムテーブルに、テーブル名、行 ID、インデックス値、およびキーから解釈されるその他のキー情報を表示する列を追加します。これにより、キーが属するテーブルの検索やキー情報の解釈などの操作が簡素化されます。
     - `DEADLOCKS`テーブルで再試行可能なデッドロックエラーの情報を収集する機能をサポートします。これにより、そのようなエラーによって発生する問題のトラブルシューティングが容易になります。エラー収集はデフォルトでは無効になっており、 `pessimistic-txn.deadlock-history-collect-retryable`設定を使用して有効にできます。
     - `TIDB_TRX`システムテーブルで、クエリ実行中のトランザクションとアイドル状態のトランザクションを区別できるようにしました。 `Normal`状態は`Running`と`Idle`の状態に分割されました。
@@ -258,7 +258,7 @@ Apple M1チップを搭載したMacコンピュータで`tiup playground`コマ�
     - `IFNULL`が`ENUM`または`SET`タイプの列に正しく適用されない問題を修正します。 [#24944](https://github.com/pingcap/tidb/issues/24944)
     - 結合サブクエリ内の`count`を`first_row`に変更したことで発生した誤った結果を修正します [#24865](https://github.com/pingcap/tidb/issues/24865)
     - `ParallelApply`演算子の下で`TopN`を使用した場合に発生するクエリのハング問題を修正します [#24930](https://github.com/pingcap/tidb/issues/24930)
-    - 複数列プレフィックスインデックスを使用したSQLステートメントの実行時に、予想よりも多くの結果が返される問題を修正しました [#24356](https://github.com/pingcap/tidb/issues/24356)
+    - 複数列プレフィックスインデックスを使用したSQL文の実行時に、予想よりも多くの結果が返される問題を修正しました [#24356](https://github.com/pingcap/tidb/issues/24356)
     - `<=>`演算子が正しく機能しない問題を修正しました [#24477](https://github.com/pingcap/tidb/issues/24477)
     - 並列演算子`Apply`のデータ競合問題を修正 [#23280](https://github.com/pingcap/tidb/issues/23280)
     - PartitionUnion オペレーターの IndexMerge 結果をソートする際に`index out of range`エラーが報告される問題を修正しました [#23919](https://github.com/pingcap/tidb/issues/23919)

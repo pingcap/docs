@@ -11,7 +11,7 @@ TiDBは、 TiFlashレプリカを読み取る3つの方法を提供します。�
 
 ## スマートな選択 {#smart-selection}
 
-TiFlashレプリカを持つテーブルの場合、TiDBオプティマイザはコスト見積もりに基づいてTiFlashレプリカを使用するかどうかを自動的に決定します。`desc`または`explain analyze`ステートメントを使用して、 TiFlashレプリカが選択されているかどうかを確認できます。例：
+TiFlashレプリカを持つテーブルの場合、TiDBオプティマイザはコスト見積もりに基づいてTiFlashレプリカを使用するかどうかを自動的に決定します。`desc`または`explain analyze`文を使用して、 TiFlashレプリカが選択されているかどうかを確認できます。例：
 
 ```sql
 desc select count(*) from test.t;
@@ -42,7 +42,7 @@ explain analyze select count(*) from test.t;
 +--------------------------+---------+---------+--------------+---------------+----------------------------------------------------------------------+--------------------------------+-----------+------+
 ```
 
-`cop[tiflash]`は、タスクが処理のためにTiFlashに送信されることを意味します。TiFlash レプリカを選択していない場合は、 `analyze table`ステートメントを使用して統計情報を更新し、 `explain analyze`ステートメントを使用して結果を確認できます。
+`cop[tiflash]`は、タスクが処理のためにTiFlashに送信されることを意味します。TiFlash レプリカを選択していない場合は、 `analyze table`文を使用して統計情報を更新し、 `explain analyze`文を使用して結果を確認できます。
 
 テーブルにTiFlashレプリカが1つしか存在せず、関連ノードがサービスを提供できない場合、CBOモードのクエリは繰り返し再試行されることに注意してください。このような状況では、エンジンを指定するか、手動ヒントを使用してTiKVレプリカからデータを読み取る必要があります。
 
@@ -131,7 +131,7 @@ select /*+ read_from_storage(tiflash[alias_a,alias_b]) */ ... from table_name_1 
 
 > **Note:**
 >
-> - v4.0.3 より前では、読み取り専用でない SQL ステートメント (たとえば、 `INSERT INTO ... SELECT` 、 `SELECT ... FOR UPDATE` 、 `UPDATE ...` 、 `DELETE ...` ) でTiFlashレプリカから読み取る動作は未定義です。
+> - v4.0.3 より前では、読み取り専用でない SQL文 (たとえば、 `INSERT INTO ... SELECT` 、 `SELECT ... FOR UPDATE` 、 `UPDATE ...` 、 `DELETE ...` ) でTiFlashレプリカから読み取る動作は未定義です。
 > - v4.0.3 から v6.2.0 までのバージョンでは、TiDB はデータの正確性を保証するために、非読み取り専用 SQL 文のTiFlashレプリカを内部的に無視します。つまり、 [スマートな選択](#smart-selection)の場合、TiDB はTiFlash以外のレプリカを自動的に選択します。 [エンジン分離](#engine-isolation) （ TiFlashレプリカ**のみを**指定）の場合、TiDB はエラーを報告します。 [手動ヒント](#manual-hint)の場合、TiDB はヒントを無視します。
-> - バージョン v6.3.0 から v7.0.0 では、 TiFlashレプリカが有効になっている場合、 [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630)変数を使用して、TiDB が非読み取り専用 SQL ステートメントにTiFlashレプリカを使用するかどうかを制御できます。
-> - v7.1.0 以降、 TiFlashレプリカが有効になっていて、現在のセッションの[SQLモード](/sql-mode.md)が厳密でない場合 (つまり、 `sql_mode`値に`STRICT_TRANS_TABLES`または`STRICT_ALL_TABLES`が含まれていない場合)、TiDB はコスト見積もりに基づいて、非読み取り専用 SQL ステートメントにTiFlashレプリカを使用するかどうかを自動的に決定します。
+> - バージョン v6.3.0 から v7.0.0 では、 TiFlashレプリカが有効になっている場合、 [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630)変数を使用して、TiDB が非読み取り専用 SQL文にTiFlashレプリカを使用するかどうかを制御できます。
+> - v7.1.0 以降、 TiFlashレプリカが有効になっていて、現在のセッションの[SQLモード](/sql-mode.md)が厳密でない場合 (つまり、 `sql_mode`値に`STRICT_TRANS_TABLES`または`STRICT_ALL_TABLES`が含まれていない場合)、TiDB はコスト見積もりに基づいて、非読み取り専用 SQL文にTiFlashレプリカを使用するかどうかを自動的に決定します。

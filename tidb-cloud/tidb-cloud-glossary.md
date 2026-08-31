@@ -27,7 +27,7 @@ ACIDとは、トランザクションの4つの主要な特性、すなわち原
 
 Chat2Query は、SQL エディターに統合された AI を活用した機能で、ユーザーが自然言語命令を使用して SQL クエリを生成、デバッグ、または書き換えるのを支援します。詳細については、[AI支援型SQLエディタでデータを探索しよう](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
 
-さらに、 TiDB Cloud は、AWS でホストされているTiDB Cloud Starterインスタンス向けに Chat2Query API を提供しています。有効化すると、 TiDB Cloud は自動的に**Chat2Query**というシステムデータアプリと、Data Serviceに Chat2Data エンドポイントを作成します。このエンドポイントを呼び出すことで、指示を与えることにより AI に SQL ステートメントを生成および実行させることができます。詳細については、 [Chat2Query API を使い始めましょう](/tidb-cloud/use-chat2query-api.md)を参照してください。
+さらに、 TiDB Cloud は、AWS でホストされているTiDB Cloud Starterインスタンス向けに Chat2Query API を提供しています。有効化すると、 TiDB Cloud は自動的に**Chat2Query**というシステムデータアプリと、Data Serviceに Chat2Data エンドポイントを作成します。このエンドポイントを呼び出すことで、指示を与えることにより AI に SQL文を生成および実行させることができます。詳細については、 [Chat2Query API を使い始めましょう](/tidb-cloud/use-chat2query-api.md)を参照してください。
 
 ### クラスタ {#cluster}
 
@@ -61,7 +61,7 @@ Data Service（PREVIEW）を使用すると、カスタムAPI[エンドポイン
 
 ### エンドポイント {#endpoint}
 
-Data Service のエンドポイントは、SQL ステートメントを実行するようにカスタマイズできる Web API です。SQL ステートメントには、 `WHERE`句で使用される値などのパラメーターを指定できます。クライアントがエンドポイントを呼び出し、リクエスト URL のパラメーターに値を指定すると、エンドポイントは指定されたパラメーターを使用して対応する SQL ステートメントを実行し、結果を HTTP レスポンスの一部として返します。
+Data Service のエンドポイントは、SQL文を実行するようにカスタマイズできる Web API です。SQL文には、 `WHERE`句で使用される値などのパラメーターを指定できます。クライアントがエンドポイントを呼び出し、リクエスト URL のパラメーターに値を指定すると、エンドポイントは指定されたパラメーターを使用して対応する SQL文を実行し、結果を HTTP レスポンスの一部として返します。
 
 詳細については、[エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)を参照してください。
 

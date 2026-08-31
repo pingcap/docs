@@ -206,13 +206,13 @@ TiDBの実行計画を特定する場合、対象となるSQL文と実行計画�
 
 ### `PLAN REPLAYER CAPTURE`を使用する {#use-plan-replayer-capture}
 
-次のステートメントを使用して、対象の SQL ステートメントと実行計画のダイジェストを TiDB クラスターに登録できます。
+次のステートメントを使用して、対象の SQL文と実行計画のダイジェストを TiDB クラスターに登録できます。
 
 ```sql
 PLAN REPLAYER CAPTURE 'sql_digest' 'plan_digest';
 ```
 
-対象の SQL ステートメントに複数の実行計画があり、すべての実行計画を取得する場合は、次のステートメントを使用してすべての実行計画を一度に登録できます。
+対象の SQL文に複数の実行計画があり、すべての実行計画を取得する場合は、次のステートメントを使用してすべての実行計画を一度に登録できます。
 
 ```sql
 PLAN REPLAYER CAPTURE 'sql_digest' '*';
@@ -237,7 +237,7 @@ mysql> SELECT * FROM mysql.plan_replayer_task;
 
 ### キャプチャ結果を表示する {#view-the-capture-results-1}
 
-`PLAN REPLAYER CAPTURE`結果を正常に取得したら、次の SQL ステートメントを使用して、ファイルのダウンロードに使用されたトークンを表示できます。
+`PLAN REPLAYER CAPTURE`結果を正常に取得したら、次の SQL文を使用して、ファイルのダウンロードに使用されたトークンを表示できます。
 
 ```sql
 mysql> SELECT * FROM mysql.plan_replayer_status;

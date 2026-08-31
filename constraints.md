@@ -46,7 +46,7 @@ Query OK, 1 row affected (0.03 sec)
 ```
 
 - 最初の`INSERT`文は、 `AUTO_INCREMENT`列に`NULL`を割り当てることができるため成功します。TiDBはシーケンス番号を自動的に生成します。
-- 2 番目の`INSERT`ステートメントは、 `age`列が`NOT NULL`として定義されているため失敗します。
+- 2 番目の`INSERT`文は、 `age`列が`NOT NULL`として定義されているため失敗します。
 - 3番目の`INSERT`文は、 `last_login`列が明示的に`NOT NULL`として定義されていないため成功します。NULL値はデフォルトで許可されています。
 
 ## チェック {#check}
@@ -74,13 +74,13 @@ TiDB の`CHECK`制約の構文は MySQL と同じです。
 
 TiDB では、 [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)または[`ALTER TABLE`](/sql-statements/sql-statement-modify-column.md)ステートメントのいずれかを使用して、テーブルに`CHECK`制約を追加できます。
 
-- `CREATE TABLE`ステートメントを使用して`CHECK`制約を追加する例:
+- `CREATE TABLE`文を使用して`CHECK`制約を追加する例:
 
     ```sql
     CREATE TABLE t(a INT CHECK(a > 10) NOT ENFORCED, b INT, c INT, CONSTRAINT c1 CHECK (b > c));
     ```
 
-- `ALTER TABLE`ステートメントを使用して`CHECK`制約を追加する例:
+- `ALTER TABLE`文を使用して`CHECK`制約を追加する例:
 
     ```sql
     ALTER TABLE t ADD CONSTRAINT CHECK (1 < c);
@@ -126,7 +126,7 @@ ALTER TABLE t DROP CONSTRAINT t_chk_1;
 - `NOT ENFORCED`を指定すると、TiDB はデータの挿入または更新時に制約条件をチェックしません。
 - `NOT ENFORCED`が指定されていないか`ENFORCED`が指定されている場合、TiDB はデータの挿入または更新中に制約条件をチェックします。
 
-制約を追加するときに`[NOT] ENFORCED`を指定するだけでなく、 `ALTER TABLE`ステートメントを使用して`CHECK`制約を有効または無効にすることもできます。例：
+制約を追加するときに`[NOT] ENFORCED`を指定するだけでなく、 `ALTER TABLE`文を使用して`CHECK`制約を有効または無効にすることもできます。例：
 
 ```sql
 ALTER TABLE t ALTER CONSTRAINT c1 NOT ENFORCED;
@@ -226,11 +226,11 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
 ```
 
-最初の`INSERT`ステートメントで重複キーエラーが発生しました。これによりネットワーク通信のオーバーヘッドが増加し、挿入操作のスループットが低下する可能性があります。
+最初の`INSERT`文で重複キーエラーが発生しました。これによりネットワーク通信のオーバーヘッドが増加し、挿入操作のスループットが低下する可能性があります。
 
 ### 悲観的トランザクション {#pessimistic-transactions}
 
-悲観的トランザクションでは、一意インデックスの挿入または更新を必要とする SQL ステートメントが実行されると、TiDB はデフォルトで`UNIQUE`制約をチェックします。
+悲観的トランザクションでは、一意インデックスの挿入または更新を必要とする SQL文が実行されると、TiDB はデフォルトで`UNIQUE`制約をチェックします。
 
 ```sql
 DROP TABLE IF EXISTS users;
@@ -322,13 +322,13 @@ ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
 
 - この変数が無効になっている場合、複数の悲観的トランザクション間で書き込み競合が発生すると、他の悲観的トランザクションがコミットされた際に悲観的ロックが強制的にロールバックされ、エラー`Pessimistic lock not found`が発生する可能性があります。このエラーが発生した場合、悲観的トランザクションの一意制約チェックを延期することが、アプリケーションのシナリオに適していないことを意味します。この場合、競合を回避するようにアプリケーションロジックを調整するか、エラー発生後にトランザクションを再試行することを検討してください。
 
-- この変数が無効になっている場合、悲観的トランザクションで DML ステートメントを実行するとエラー`8147: LazyUniquenessCheckFailure`が返される可能性があります。
+- この変数が無効になっている場合、悲観的トランザクションで DML文を実行するとエラー`8147: LazyUniquenessCheckFailure`が返される可能性があります。
 
     > **Note:**
     >
     > `8147`エラーが発生すると、TiDB は現在のトランザクションをロールバックします。
 
-    次の例のように、 `INSERT`のステートメントの実行時にTiDBはロックをスキップします。その後、 `DELETE`ステートメントの実行時にTiDBは一意インデックスをロックし、ユニーク制約をチェックします。そのため、 `DELETE`ステートメントでエラーが報告されます。
+    次の例のように、 `INSERT`のステートメントの実行時にTiDBはロックをスキップします。その後、 `DELETE`文の実行時にTiDBは一意インデックスをロックし、ユニーク制約をチェックします。そのため、 `DELETE`文でエラーが報告されます。
 
     ```sql
     SET tidb_constraint_check_in_place_pessimistic = OFF;

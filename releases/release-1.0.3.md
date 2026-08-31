@@ -12,7 +12,7 @@ summary: TiDB 1.0.3は2017年11月28日にリリースされました。アッ�
 - [トランザクション競合シナリオでのパフォーマンスの最適化](https://github.com/pingcap/tidb/pull/5051)
 - [設定ファイルに`TokenLimit`オプションを追加する](https://github.com/pingcap/tidb/pull/5107)
 - [スロークエリログにデフォルトのデータベースを出力する](https://github.com/pingcap/tidb/pull/5107)
-- [クエリ実行時間メトリックから DDL ステートメントを削除します](https://github.com/pingcap/tidb/pull/5107)
+- [クエリ実行時間メトリックから DDL文を削除します](https://github.com/pingcap/tidb/pull/5107)
 - [クエリコストの見積もりを最適化する](https://github.com/pingcap/tidb/pull/5140)
 - [テーブル作成時のインデックスプレフィックスの問題を修正](https://github.com/pingcap/tidb/pull/5149)
 - [Float 型の式を TiKV にプッシュダウンする機能をサポート](https://github.com/pingcap/tidb/pull/5153)

@@ -63,12 +63,12 @@ TiDB バージョン: 7.1.2
 
         - 複数の TiCDC 監視メトリックとアラームルールを最適化します [＃9047](https://github.com/pingcap/tiflow/issues/9047) @[asddongmen](https://github.com/asddongmen)
         - Kafka Sink は、メッセージが大きすぎる場合に[ハンドルキーデータのみを送信する](/ticdc/ticdc-sink-to-kafka.md#handle-messages-that-exceed-the-kafka-topic-limit)サポートし、過剰なメッセージ サイズによって引き起こされる変更フィードの失敗を回避します。 [＃9680](https://github.com/pingcap/tiflow/issues/9680) @[3AceShowHand](https://github.com/3AceShowHand)
-        - `ADD INDEX` DDL操作を複製する実行ロジックを最適化して、後続のDMLステートメントをブロックしないようにします。 [＃9644](https://github.com/pingcap/tiflow/issues/9644) @[sdojjy](https://github.com/sdojjy)
+        - `ADD INDEX` DDL操作を複製する実行ロジックを最適化して、後続のDML文をブロックしないようにします。 [＃9644](https://github.com/pingcap/tiflow/issues/9644) @[sdojjy](https://github.com/sdojjy)
         - TiCDC が失敗後に再試行するときのステータス メッセージを改善する[＃9483](https://github.com/pingcap/tiflow/issues/9483) @[asddongmen](https://github.com/asddongmen)
 
     - TiDB Data Migration (DM)
 
-        - 互換性のない DDL ステートメントに対して厳密な楽観的モードをサポートする [＃9112](https://github.com/pingcap/tiflow/issues/9112) @[GMHDBJD](https://github.com/GMHDBJD)
+        - 互換性のない DDL文に対して厳密な楽観的モードをサポートする [＃9112](https://github.com/pingcap/tiflow/issues/9112) @[GMHDBJD](https://github.com/GMHDBJD)
 
     - TiDB Lightning
 

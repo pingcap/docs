@@ -69,7 +69,7 @@ KEY `{index_name}` (`{column_names}`)
 | price      | DECIMAL(15,2)  | 価格                     |
 | published_at | DATETIME     | 発行日                    |
 
-`books`テーブルは、次の SQL ステートメントを使用して作成されます。
+`books`テーブルは、次の SQL文を使用して作成されます。
 
 ```sql
 CREATE TABLE `bookshop`.`books` (
@@ -116,7 +116,7 @@ EXPLAIN SELECT * FROM `bookshop`.`books` WHERE `published_at` >= '2022-01-01 00:
 CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`published_at`);
 ```
 
-インデックスを追加した後、 `EXPLAIN`ステートメントを再度実行して、実行計画を確認します。
+インデックスを追加した後、 `EXPLAIN`文を再度実行して、実行計画を確認します。
 
 以下は出力例です。
 

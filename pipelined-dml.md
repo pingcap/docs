@@ -44,7 +44,7 @@ summary: パイプラインDMLのユースケース、メソッド、制限事�
     - `INSERT` 、 `UPDATE` 、 `REPLACE` 、 `DELETE`のみがサポートされます。
     - ターゲットテーブルには[一時テーブル](/temporary-tables.md)または[キャッシュされたテーブル](/cached-tables.md)含めることはできません。
     - [外部キー制約](/foreign-key.md)有効になっている場合（ `foreign_key_checks = ON` ）、ターゲットテーブルに外部キー関係を含めることはできません。
-- `INSERT IGNORE ... ON DUPLICATE KEY UPDATE`ステートメントを実行すると、競合する更新によって`Duplicate entry`エラーが発生する可能性があります。
+- `INSERT IGNORE ... ON DUPLICATE KEY UPDATE`文を実行すると、競合する更新によって`Duplicate entry`エラーが発生する可能性があります。
 
 ## 使用法 {#usage}
 
@@ -84,7 +84,7 @@ summary: パイプラインDMLのユースケース、メソッド、制限事�
 
 ### パイプラインDMLの検証 {#verify-pipelined-dml}
 
-DML ステートメントを実行した後、 [`tidb_last_txn_info`](/system-variables.md#tidb_last_txn_info-new-in-v409)変数をチェックすることで、ステートメントの実行にパイプライン DML が使用されているかどうかを確認できます。
+DML文を実行した後、 [`tidb_last_txn_info`](/system-variables.md#tidb_last_txn_info-new-in-v409)変数をチェックすることで、ステートメントの実行にパイプライン DML が使用されているかどうかを確認できます。
 
 ```sql
 SELECT @@tidb_last_txn_info;
@@ -136,7 +136,7 @@ TiDBがパイプラインDMLを使用したステートメントの実行を拒�
 
 一般的な理由:
 
-- DML ステートメントは自動コミットされません。
+- DML文は自動コミットされません。
 - ステートメントには、 [一時テーブル](/temporary-tables.md)や[キャッシュされたテーブル](/cached-tables.md)などのサポートされていないテーブル タイプが含まれています。
 - 操作には外部キーが関係し、外部キーのチェックが有効になっています。
 

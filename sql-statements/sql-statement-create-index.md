@@ -115,7 +115,7 @@ Query OK, 0 rows affected (0.31 sec)
 
 クエリのフィルタリング条件が特定の式に基づいている場合、通常のインデックスが効果を発揮せず、テーブル全体をスキャンしてクエリを実行するしかないため、クエリのパフォーマンスは比較的低くなります。式インデックスは、式に基づいて作成できる特殊なインデックスです。式インデックスが作成されると、TiDB はそのインデックスを式ベースのクエリに使用できるようになり、クエリのパフォーマンスが大幅に向上します。
 
-例えば、 `LOWER(col1)`に基づいてインデックスを作成する場合は、次の SQL ステートメントを実行します。
+例えば、 `LOWER(col1)`に基づいてインデックスを作成する場合は、次の SQL文を実行します。
 
 ```sql
 CREATE INDEX idx1 ON t1 ((LOWER(col1)));
@@ -511,7 +511,7 @@ TiDB v8.0.0以降では、システム変数[`tidb_opt_use_invisible_indexes`](/
 
 ## 関連するシステム変数 {#associated-system-variables}
 
-`CREATE INDEX`ステートメントに関連付けられているシステム変数は、 `tidb_ddl_enable_fast_reorg` 、 `tidb_ddl_reorg_worker_cnt` 、 `tidb_ddl_reorg_batch_size` 、 `tidb_enable_auto_increment_in_generated` 、および`tidb_ddl_reorg_priority` 。 詳細[システム変数](/system-variables.md#tidb_ddl_reorg_worker_cnt)を参照してください。
+`CREATE INDEX`文に関連付けられているシステム変数は、 `tidb_ddl_enable_fast_reorg` 、 `tidb_ddl_reorg_worker_cnt` 、 `tidb_ddl_reorg_batch_size` 、 `tidb_enable_auto_increment_in_generated` 、および`tidb_ddl_reorg_priority` 。 詳細[システム変数](/system-variables.md#tidb_ddl_reorg_worker_cnt)を参照してください。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 

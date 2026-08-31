@@ -582,7 +582,7 @@ systemctl start docker
 
      </SimpleTab>
 
-6. TiDB Self-Managedクラスタに接続した後、次のSQLステートメントを使用して接続を検証できます。
+6. TiDB Self-Managedクラスタに接続した後、次のSQL文を使用して接続を検証できます。
 
     ```sql
     SELECT VERSION();
@@ -671,7 +671,7 @@ ProxySQL のサポートされているプラ​​ットフォームとその�
 
 #### ステップ3. ProxySQLの設定 {#step-3-configure-proxysql}
 
-ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構成する必要があります。これを行うには、 [ProxySQL管理インターフェース内でSQLステートメントを実行する](#option-1-configure-proxysql-using-the-admin-interface)(推奨) か、 [設定ファイル](#option-2-configure-proxysql-using-a-configuration-file)を使用します。
+ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構成する必要があります。これを行うには、 [ProxySQL管理インターフェース内でSQL文を実行する](#option-1-configure-proxysql-using-the-admin-interface)(推奨) か、 [設定ファイル](#option-2-configure-proxysql-using-a-configuration-file)を使用します。
 
 > **Note:**
 >
@@ -995,15 +995,15 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
     >
     > - `hostgroup_id`を持つ TiDB クラスタを`0`および`1`として ProxySQL に追加します。
     > - 空のパスワードを持つユーザー`root`を追加し、 `default_hostgroup`を`0`に設定します。
-    > - `^SELECT.*FOR UPDATE$`ルールを追加し、 `rule_id`を`1`として、 `destination_hostgroup`を`0`として追加します。SQL ステートメントがこのルールに一致する場合、リクエストは`hostgroup`を`0`として TiDB クラスタに転送されます。
-    > - `^SELECT`ルールを追加し、 `rule_id`を`2`として、 `destination_hostgroup`を`1`として追加します。SQL ステートメントがこのルールに一致する場合、リクエストは`hostgroup`を`1`として TiDB クラスタに転送されます。
+    > - `^SELECT.*FOR UPDATE$`ルールを追加し、 `rule_id`を`1`として、 `destination_hostgroup`を`0`として追加します。SQL文がこのルールに一致する場合、リクエストは`hostgroup`を`0`として TiDB クラスタに転送されます。
+    > - `^SELECT`ルールを追加し、 `rule_id`を`2`として、 `destination_hostgroup`を`1`として追加します。SQL文がこのルールに一致する場合、リクエストは`hostgroup`を`1`として TiDB クラスタに転送されます。
     >
     > より深く理解するには、 `proxysql-prepare.sql`ファイルを確認することを強くお勧めします。 ProxySQL 構成の詳細については、 [ProxySQLのドキュメント](https://proxysql.com/documentation/proxysql-configuration/)を参照してください。
 
     ProxySQLパターンがクエリルールとどのように一致するかについての追加情報は以下のとおりです。
 
     - ProxySQL は`rule_id`の昇順でルールを 1つずつ照合しようとします。
-    - `^`記号は SQL ステートメントの開始と一致し、 `$`終了と一致します。
+    - `^`記号は SQL文の開始と一致し、 `$`終了と一致します。
 
     ProxySQLの正規表現とパターンマッチングの詳細については、ProxySQLドキュメントの[mysql-query_processor_regex](https://proxysql.com/documentation/global-variables/mysql-variables/#mysql-query_processor_regex)を参照してください。
 
@@ -1043,7 +1043,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
     2. 以下のSQL文を実行してください。
 
-        - `SELECT`ステートメントを実行します。
+        - `SELECT`文を実行します。
 
             ```sql
             SELECT * FROM test.tidb_server;
@@ -1051,7 +1051,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
             このステートメントは、ルールID `2`に一致し、ステートメントを`hostgroup 1`上の TiDB クラスタに転送します。
 
-        - `SELECT ... FOR UPDATE`ステートメントを実行します。
+        - `SELECT ... FOR UPDATE`文を実行します。
 
             ```sql
             SELECT * FROM test.tidb_server FOR UPDATE;
@@ -1068,7 +1068,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
             ROLLBACK;
             ```
 
-            このトランザクションでは、 `BEGIN`ステートメントはどのルールにも一致しません。デフォルトのホストグループ (この例では`hostgroup 0`が使用されます。ProxySQL はデフォルトでユーザー transaction_persistent を有効にしており、同じホストグループ内で同じトランザクション内のすべてのステートメントを実行するため、 `INSERT`および`SELECT * FROM test.tidb_server;`ステートメントも TiDB クラスタ`hostgroup 0`に転送されます。
+            このトランザクションでは、 `BEGIN`文はどのルールにも一致しません。デフォルトのホストグループ (この例では`hostgroup 0`が使用されます。ProxySQL はデフォルトでユーザー transaction_persistent を有効にしており、同じホストグループ内で同じトランザクション内のすべてのステートメントを実行するため、 `INSERT`および`SELECT * FROM test.tidb_server;`ステートメントも TiDB クラスタ`hostgroup 0`に転送されます。
 
         以下は出力例です。同様の出力が得られれば、ProxySQLによるクエリルールの設定は正常に完了しています。
 

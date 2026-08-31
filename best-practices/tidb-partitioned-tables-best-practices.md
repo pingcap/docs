@@ -190,7 +190,7 @@ ADD UNIQUE INDEX <index_name> (col1, col2) GLOBAL;
 
 ##### オプション2: テーブル作成時にインデックスを定義する {#option-2-define-the-index-at-table-creation}
 
-テーブルを作成するときにグローバルインデックスを作成するには、 `CREATE TABLE`ステートメントでグローバルインデックスをインラインで定義します。
+テーブルを作成するときにグローバルインデックスを作成するには、 `CREATE TABLE`文でグローバルインデックスをインラインで定義します。
 
 ```sql
 CREATE TABLE t (
@@ -341,7 +341,7 @@ ALTER TABLE ad_cache LAST PARTITION LESS THAN ("${nextTimestamp}");
 
 グローバルインデックスを持つテーブルでパーティションを削除すると**76.02秒**かかりますが、ローカルインデックスを持つテーブルで同じ操作を行うとわずか**0.52秒**しかかかりません。この差は、グローバルインデックスはすべてのパーティションにまたがるため、追加のインデックス更新が必要になるのに対し、ローカルインデックスはパーティションデータと共に削除されるためです。
 
-パーティションを削除するには、次の SQL ステートメントを使用できます。
+パーティションを削除するには、次の SQL文を使用できます。
 
 ```sql
 ALTER TABLE A DROP PARTITION A_2024363;
@@ -391,7 +391,7 @@ TiDBはテーブルデータとインデックスをリージョンに保存し�
 
 主キーが[`AUTO_INCREMENT`](/auto-increment.md)テーブルに大量の一括挿入が行われ、書き込みホットスポットが発生する場合は、主キーにハッシュまたはキーのパーティション分割を適用して、書き込みワークロードをより均等に分散します。
 
-次の SQL ステートメントは、主キーに基づいて 16 個のパーティションを持つテーブルを作成します。
+次の SQL文は、主キーに基づいて 16 個のパーティションを持つテーブルを作成します。
 
 ```sql
 CREATE TABLE server_info (
@@ -553,7 +553,7 @@ SELECT MIN(id), MAX(id) FROM employees;
 
 ##### ステップ5. 必要に応じてプライマリインデックスとセカンダリインデックスのリージョンを分割する {#step-5-split-regions-for-primary-and-secondary-indexes-if-needed}
 
-パーティションテーブル内のすべてのパーティションの主キーのリージョンを分割するには、次の SQL ステートメントを使用します。
+パーティションテーブル内のすべてのパーティションの主キーのリージョンを分割するには、次の SQL文を使用します。
 
 ```sql
 SPLIT PARTITION TABLE employees INDEX `PRIMARY` BETWEEN (1, "1970-01-01") AND (100000, "9999-12-31") REGIONS <number_of_regions>;
@@ -561,7 +561,7 @@ SPLIT PARTITION TABLE employees INDEX `PRIMARY` BETWEEN (1, "1970-01-01") AND (1
 
 この例では、各パーティションの主キー範囲を指定された境界内の`<number_of_regions>`リージョンに分割します。
 
-パーティションテーブル内のすべてのパーティションのセカンダリインデックスのリージョンを分割するには、次の SQL ステートメントを使用します。
+パーティションテーブル内のすべてのパーティションのセカンダリインデックスのリージョンを分割するには、次の SQL文を使用します。
 
 ```sql
 SPLIT PARTITION TABLE employees INDEX `idx_employees_on_store_id` BETWEEN (1) AND (1000) REGIONS <number_of_regions>;
@@ -689,7 +689,7 @@ Records: 120000000, ID: c1d04eec-fb49-49bb-af92-bf3d6e2d3d87
 
 ### 方法3: オンラインDDL {#method-3-online-ddl}
 
-次の SQL ステートメントは、パーティションテーブルを非パーティションテーブルに変換します。
+次の SQL文は、パーティションテーブルを非パーティションテーブルに変換します。
 
 ```sql
 SET @@global.tidb_ddl_REORGANIZE_worker_cnt = 16;
@@ -698,7 +698,7 @@ ALTER TABLE fa REMOVE PARTITIONING;
 -- Actual time: 170m 12.024s (approximately 2h 50m)
 ```
 
-次の SQL ステートメントは、パーティションテーブルをパーティションテーブルに変換します。
+次の SQL文は、パーティションテーブルをパーティションテーブルに変換します。
 
 ```sql
 SET @@global.tidb_ddl_REORGANIZE_worker_cnt = 16;

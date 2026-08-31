@@ -125,7 +125,7 @@ HTAP シナリオの詳細については、 [データプラットフォーム�
 
 ### TiFlashにデータを直接インポートできますか？ {#can-i-import-my-data-directly-to-tiflash}
 
-いいえ。TiDB Cloudにデータをインポートすると、データはTiKVにインポートされます。インポートが完了したら、SQLステートメントを使用して、 TiFlashにレプリケートするテーブルを指定できます。その後、TiDBは指定されたテーブルのレプリカをTiFlashに作成します。詳細については、 [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)を参照してください。
+いいえ。TiDB Cloudにデータをインポートすると、データはTiKVにインポートされます。インポートが完了したら、SQL文を使用して、 TiFlashにレプリケートするテーブルを指定できます。その後、TiDBは指定されたテーブルのレプリカをTiFlashに作成します。詳細については、 [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)を参照してください。
 
 ### TiFlashのデータをCSV形式でエクスポートできますか？ {#can-i-export-tiflash-data-in-the-csv-format}
 

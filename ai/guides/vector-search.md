@@ -55,7 +55,7 @@ table = client.create_table(schema=Document, if_exists="overwrite")
 </div>
 <div label="SQL" value="sql">
 
-`CREATE TABLE`ステートメントを使用してテーブルを作成し、 `VECTOR`型を使用してベクトル列を定義します。
+`CREATE TABLE`文を使用してテーブルを作成し、 `VECTOR`型を使用してベクトル列を定義します。
 
 ```sql hl_lines="4 5"
 CREATE TABLE documents (
@@ -150,7 +150,7 @@ table.search([1, 2, 3]).limit(3).to_list()
 </div>
 <div label="SQL" value="sql">
 
-クエリ ベクトルの`n`最も近い近傍を取得するには、 `SELECT`ステートメントの`ORDER BY <distance_function>(<column_name>, <query_vector>) LIMIT <n>`句を使用します。
+クエリ ベクトルの`n`最も近い近傍を取得するには、 `SELECT`文の`ORDER BY <distance_function>(<column_name>, <query_vector>) LIMIT <n>`句を使用します。
 
 次の例では、 `vec_cosine_distance`関数を使用して、 `text_vec`列に格納されているベクトルと指定されたクエリ ベクトル`[1, 2, 3]`間のコサイン距離を計算します。
 

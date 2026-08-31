@@ -32,7 +32,7 @@ assignment:
     assignment [, assignment] ...
 ```
 
-たとえば、次の`INSERT INTO SELECT`ステートメントを使用して、 `SELECT`の句のテーブル`t1`からのクエリ結果をテーブル`t2`に保存できます。
+たとえば、次の`INSERT INTO SELECT`文を使用して、 `SELECT`の句のテーブル`t1`からのクエリ結果をテーブル`t2`に保存できます。
 
 ```sql
 INSERT INTO t2 (name, country)
@@ -101,14 +101,14 @@ SELECT MONTH(rec_date), customer_id, sum(daily_fee) FROM daily_data GROUP BY MON
 
 ## 実行プロセス {#execution-process}
 
-* `INSERT INTO SELECT`ステートメントの実行中、TiFlash はまず`SELECT`句のクエリ結果をクラスター内の TiDB サーバーに返し、次にその結果をターゲットテーブル (TiFlash レプリカを持つことができる) に書き込みます。
-* `INSERT INTO SELECT`ステートメントの実行により、ACID プロパティが保証されます。
+* `INSERT INTO SELECT`文の実行中、TiFlash はまず`SELECT`句のクエリ結果をクラスター内の TiDB サーバーに返し、次にその結果をターゲットテーブル (TiFlash レプリカを持つことができる) に書き込みます。
+* `INSERT INTO SELECT`文の実行により、ACID プロパティが保証されます。
 
 ## 制限 {#restrictions}
 
 <CustomContent platform="tidb">
 
-* システム変数 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) を使用して、`INSERT INTO SELECT`ステートメントの TiDB メモリ制限を調整できます。v6.5.0 以降、トランザクションのメモリサイズを制御するために [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) を使用することは推奨されません。
+* システム変数 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) を使用して、`INSERT INTO SELECT`文の TiDB メモリ制限を調整できます。v6.5.0 以降、トランザクションのメモリサイズを制御するために [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) を使用することは推奨されません。
 
     詳細については、[TiDB memory control](/configure-memory-usage.md) を参照してください。
 
@@ -116,13 +116,13 @@ SELECT MONTH(rec_date), customer_id, sum(daily_fee) FROM daily_data GROUP BY MON
 
 <CustomContent platform="tidb-cloud">
 
-* システム変数 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) を使用して、`INSERT INTO SELECT`ステートメントの TiDB メモリ制限を調整できます。v6.5.0 以降、トランザクションのメモリサイズを制御するために [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) を使用することは推奨されません。
+* システム変数 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) を使用して、`INSERT INTO SELECT`文の TiDB メモリ制限を調整できます。v6.5.0 以降、トランザクションのメモリサイズを制御するために [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) を使用することは推奨されません。
 
     詳細については、[TiDB memory control](https://docs.pingcap.com/tidb/stable/configure-memory-usage) を参照してください。
 
 </CustomContent>
 
-* TiDB には `INSERT INTO SELECT`ステートメントの同時実行性に対する厳密な制限はありませんが、次のプラクティスを考慮することを推奨します。
+* TiDB には `INSERT INTO SELECT`文の同時実行性に対する厳密な制限はありませんが、次のプラクティスを考慮することを推奨します。
 
     * 「書き込みトランザクション」が 1 GiB に近いなど大きい場合、同時実行数は 10 以下に制御することを推奨します。
     * 「書き込みトランザクション」が 100 MiB 未満など小さい場合、同時実行数は 30 以下に制御することを推奨します。

@@ -27,9 +27,9 @@ summary: TiDB の AUTO_INCREMENT` 列属性について学習します。
 
 ## 概念 {#concept}
 
-`AUTO_INCREMENT`は、デフォルトの列値を自動的に入力するために使用される列属性です。`INSERT`ステートメントで`AUTO_INCREMENT`列の値が指定されていない場合、システムは自動的にこの列に値を割り当てます。
+`AUTO_INCREMENT`は、デフォルトの列値を自動的に入力するために使用される列属性です。`INSERT`文で`AUTO_INCREMENT`列の値が指定されていない場合、システムは自動的にこの列に値を割り当てます。
 
-パフォーマンス上の理由から、各TiDBサーバーには、 `AUTO_INCREMENT`個の数値が一括で割り当てられます（デフォルトでは3万個）。つまり、 `AUTO_INCREMENT`数値は一意であることが保証されますが、 `INSERT`ステートメントに割り当てられる値は、TiDBサーバーごとに単調なものになります。
+パフォーマンス上の理由から、各TiDBサーバーには、 `AUTO_INCREMENT`個の数値が一括で割り当てられます（デフォルトでは3万個）。つまり、 `AUTO_INCREMENT`数値は一意であることが保証されますが、 `INSERT`文に割り当てられる値は、TiDBサーバーごとに単調なものになります。
 
 > **Note:**
 >
@@ -61,7 +61,7 @@ mysql> SELECT * FROM t;
 5 rows in set (0.01 sec)
 ```
 
-さらに、 `AUTO_INCREMENT`列の値を明示的に指定する`INSERT`ステートメントもサポートしています。これらの場合、TiDB は明示的に指定された値を保存します。
+さらに、 `AUTO_INCREMENT`列の値を明示的に指定する`INSERT`文もサポートしています。これらの場合、TiDB は明示的に指定された値を保存します。
 
 ```sql
 INSERT INTO t(id, c) VALUES (6, 6);
@@ -94,13 +94,13 @@ TiDB は`AUTO_INCREMENT`暗黙的な割り当てを次のように実装しま�
 CREATE TABLE t(id int UNIQUE KEY AUTO_INCREMENT, c int);
 ```
 
-クラスター内に2つのTiDBインスタンス（ `A`と`B` ）があるとします。`A`と`B`でそれぞれ`t`テーブルに対して`INSERT`ステートメントを実行すると、次のようになります。
+クラスター内に2つのTiDBインスタンス（ `A`と`B` ）があるとします。`A`と`B`でそれぞれ`t`テーブルに対して`INSERT`文を実行すると、次のようになります。
 
 ```sql
 INSERT INTO t (c) VALUES (1)
 ```
 
-インスタンス`A` `[1,30000]`のAUTO_INCREMENT ID をキャッシュし、インスタンス`B` `[30001,60000]`のAUTO_INCREMENT ID をキャッシュしている可能性があります。実行される`INSERT`ステートメントでは、各インスタンスのキャッシュされた ID が`AUTO_INCREMENT`列にデフォルト値として割り当てられます。
+インスタンス`A` `[1,30000]`のAUTO_INCREMENT ID をキャッシュし、インスタンス`B` `[30001,60000]`のAUTO_INCREMENT ID をキャッシュしている可能性があります。実行される`INSERT`文では、各インスタンスのキャッシュされた ID が`AUTO_INCREMENT`列にデフォルト値として割り当てられます。
 
 ## 基本機能 {#basic-features}
 
@@ -335,7 +335,7 @@ SELECT * FROM t;
 
 新しく割り当てられた値は`101` 。これは、AUTO_INCREMENT IDを割り当てるためのキャッシュのサイズが`100`であることを示しています。
 
-さらに、バッチ`INSERT`ステートメント内の連続 ID の長さが`AUTO_ID_CACHE`を超えると、TiDB はそれに応じてキャッシュサイズを増やし、ステートメントがデータを適切に挿入できるようにします。
+さらに、バッチ`INSERT`文内の連続 ID の長さが`AUTO_ID_CACHE`を超えると、TiDB はそれに応じてキャッシュサイズを増やし、ステートメントがデータを適切に挿入できるようにします。
 
 ### AUTO_INCREMENT IDキャッシュをクリアする {#clear-the-auto-increment-id-cache}
 
@@ -356,7 +356,7 @@ SELECT * FROM t;
 
 - アプリケーションで明示的なIDの挿入と暗黙的なIDの割り当ての両方を行う場合、将来暗黙的に割り当てられたIDと以前に明示的に挿入されたIDとの競合を回避するために、AUTO_INCREMENT IDキャッシュをクリアする必要があります。競合が発生すると、主キーの競合エラーが発生する可能性があります。詳細については、 [ユニークさ](/auto-increment.md#uniqueness)を参照してください。
 
-クラスター内のすべてのTiDBノードのAUTO_INCREMENT IDキャッシュをクリアするには、 `ALTER TABLE`ステートメントを`AUTO_INCREMENT = 0`とともに実行します。例:
+クラスター内のすべてのTiDBノードのAUTO_INCREMENT IDキャッシュをクリアするには、 `ALTER TABLE`文を`AUTO_INCREMENT = 0`とともに実行します。例:
 
 ```sql
 CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 100;

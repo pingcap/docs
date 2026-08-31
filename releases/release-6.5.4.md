@@ -24,7 +24,7 @@ TiDB バージョン: 6.5.4
 
 - TiDB
 
-    - 代入式を含む`LOAD DATA`ステートメントのパフォーマンスを最適化します [＃46081](https://github.com/pingcap/tidb/issues/46081) @[gengliqi](https://github.com/gengliqi)
+    - 代入式を含む`LOAD DATA`文のパフォーマンスを最適化します [＃46081](https://github.com/pingcap/tidb/issues/46081) @[gengliqi](https://github.com/gengliqi)
     - ディスクからダンプされたチャンクを読み込む際のパフォーマンスを最適化します@[YangKeao](https://github.com/YangKeao) [＃45125](https://github.com/pingcap/tidb/issues/45125)
     - PDスケジュールを一時停止するための構成項目を`halt-scheduling`追加します。 [＃6493](https://github.com/tikv/pd/issues/6493) @[JmPotato](https://github.com/JmPotato)
 
@@ -65,7 +65,7 @@ TiDB バージョン: 6.5.4
 
     - TiDB Data Migration (DM)
 
-        - 互換性のない DDL ステートメントに対して厳密な楽観的モードをサポートする [＃9112](https://github.com/pingcap/tiflow/issues/9112) @[GMHDBJD](https://github.com/GMHDBJD)
+        - 互換性のない DDL文に対して厳密な楽観的モードをサポートする [＃9112](https://github.com/pingcap/tiflow/issues/9112) @[GMHDBJD](https://github.com/GMHDBJD)
 
     - Dumpling
 
@@ -84,7 +84,7 @@ TiDB バージョン: 6.5.4
     - CTEと相関サブクエリを同時に使用すると、クエリ結果が不正確になったり、panicが発生する可能性がある問題を修正[＃44649](https://github.com/pingcap/tidb/issues/44649) [＃38170](https://github.com/pingcap/tidb/issues/38170) [＃44774](https://github.com/pingcap/tidb/issues/44774) @[winoros](https://github.com/winoros) @[guo-shaoge](https://github.com/guo-shaoge)
     - TTLタスクが時間で統計更新をトリガーできない問題を修正 [＃40109](https://github.com/pingcap/tidb/issues/40109) @[YangKeao](https://github.com/YangKeao)
     - GC ロック解決ステップで一部の悲観的ロックが見逃される可能性がある問題を修正しました [＃45134](https://github.com/pingcap/tidb/issues/45134) @[MyonKeminta](https://github.com/MyonKeminta)
-    - バイナリプロトコルを使用してTiDBに接続し、多数の`PREPARE`と`EXECUTE`ステートメントを実行すると、メモリリークと実行時間が増加し続ける問題を修正しました。 [＃44612](https://github.com/pingcap/tidb/issues/44612) @[wshwsh12](https://github.com/wshwsh12)
+    - バイナリプロトコルを使用してTiDBに接続し、多数の`PREPARE`と`EXECUTE`文を実行すると、メモリリークと実行時間が増加し続ける問題を修正しました。 [＃44612](https://github.com/pingcap/tidb/issues/44612) @[wshwsh12](https://github.com/wshwsh12)
     - `INFORMATION_SCHEMA.DDL_JOBS`テーブルの`QUERY`列のデータ長が列定義を超える可能性がある問題を修正しました [＃42440](https://github.com/pingcap/tidb/issues/42440) @[tiancaiamao](https://github.com/tiancaiamao)
     - 多数のリージョンがあるが、 `Prepare`または`Execute` を使用して一部の仮想テーブルをクエリするときにテーブル ID をプッシュダウンできないという PD OOM 問題を修正しました。 [＃39605](https://github.com/pingcap/tidb/issues/39605) @[djshow832](https://github.com/djshow832)
     - パーティションテーブルに新しいインデックスを追加した後、パーティションパーティションテーブルで統計の自動収集が正しくトリガーされない可能性がある問題を修正しました。 [＃41638](https://github.com/pingcap/tidb/issues/41638) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
@@ -99,7 +99,7 @@ TiDB バージョン: 6.5.4
     - 文中の`n`負の数の場合に文`SELECT CAST(n AS CHAR)`のクエリ結果が正しくない問題を修正しました [＃44786](https://github.com/pingcap/tidb/issues/44786) @[xhebox](https://github.com/xhebox)
     - MySQLカーソルフェッチプロトコル使用時に、結果セットのメモリ消費量が`tidb_mem_quota_query`上限を超え、TiDBのメモリオーバーフローが発生する問題を修正しました。修正後、TiDBは結果セットを自動的にディスクに書き込み、メモリを解放します[＃43233](https://github.com/pingcap/tidb/issues/43233) @[YangKeao](https://github.com/YangKeao)
     - BR を使用して`AUTO_ID_CACHE=1`テーブルを復元するときに発生する`duplicate entry`エラーを修正します [＃44716](https://github.com/pingcap/tidb/issues/44716) @[tiancaiamao](https://github.com/tiancaiamao)
-    - テーブルパーティション定義で`FLOOR()`関数を使用してパーティション列を丸めた場合、 `SELECT`ステートメントがパーティションテーブルに対してエラーを返す問題を修正しました。 [＃42323](https://github.com/pingcap/tidb/issues/42323) @[jiyfhust](https://github.com/jiyfhust)
+    - テーブルパーティション定義で`FLOOR()`関数を使用してパーティション列を丸めた場合、 `SELECT`文がパーティションテーブルに対してエラーを返す問題を修正しました。 [＃42323](https://github.com/pingcap/tidb/issues/42323) @[jiyfhust](https://github.com/jiyfhust)
     - 同時ビューによって DDL 操作がブロックされる可能性がある問題を修正[＃40352](https://github.com/pingcap/tidb/issues/40352) @[zeminzhou](https://github.com/zeminzhou)
     - `datetime`値がと正しくないために統計収集タスクが失敗する問題を修正しました [＃39336](https://github.com/pingcap/tidb/issues/39336) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - クラスターのPDノードが交換された後、一部のDDL文が一定期間スタックする可能性がある問題を修正しました[＃33908](https://github.com/pingcap/tidb/issues/33908)

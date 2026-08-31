@@ -33,7 +33,7 @@ DESC TIKV_REGION_PEERS;
 7 rows in set (0.01 sec)
 ```
 
-例えば、次の SQL ステートメントを使用すると、 `WRITTEN_BYTES`の最大値を持つ上位 3つのリージョンの特定の TiKV アドレスを照会できます。
+例えば、次の SQL文を使用すると、 `WRITTEN_BYTES`の最大値を持つ上位 3つのリージョンの特定の TiKV アドレスを照会できます。
 
 ```sql
 SELECT

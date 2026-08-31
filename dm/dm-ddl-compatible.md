@@ -1,11 +1,11 @@
 ---
 title: Special Handling of DM DDLs
-summary: DM がステートメントの種類に応じて DDL ステートメントを解析および処理する方法を学習します。
+summary: DM がステートメントの種類に応じて DDL文を解析および処理する方法を学習します。
 ---
 
 # DM DDL の特別な処理 {#special-handling-of-dm-ddls}
 
-TiDB Data Migration (DM) はデータを移行する際に、DDL ステートメントを解析し、ステートメントの種類と現在の移行段階に応じて処理します。
+TiDB Data Migration (DM) はデータを移行する際に、DDL文を解析し、ステートメントの種類と現在の移行段階に応じて処理します。
 
 ## DDL文をスキップする {#skip-ddl-statements}
 

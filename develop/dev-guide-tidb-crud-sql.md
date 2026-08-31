@@ -20,9 +20,9 @@ TiDB に接続していることを確認してください。そうでない場
 
 TiDB は MySQL と互換性があり、ほとんどの場合、MySQL ステートメントを直接使用できます。サポートされていない機能については、 [MySQLとの互換性](/mysql-compatibility.md#unsupported-features)を参照してください。
 
-SQL を試して、MySQL クエリと TiDB の互換性をテストするには、 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=basic-sql-operations)試すことができます。最初に[TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-starter-instance)、その中で SQL ステートメントを実行することもできます。
+SQL を試して、MySQL クエリと TiDB の互換性をテストするには、 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=basic-sql-operations)試すことができます。最初に[TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-starter-instance)、その中で SQL文を実行することもできます。
 
-このページでは、DDL、DML、CRUD 操作などの基本的なTiDB SQLステートメントについて説明します。 TiDB ステートメントの完全なリストについては、 [SQL Statement Overview](/sql-statements/sql-statement-overview.md)を参照してください。
+このページでは、DDL、DML、CRUD 操作などの基本的なTiDB SQL文について説明します。 TiDB ステートメントの完全なリストについては、 [SQL Statement Overview](/sql-statements/sql-statement-overview.md)を参照してください。
 
 ## カテゴリ {#category}
 
@@ -42,25 +42,25 @@ SQLは、その関数に応じて以下の4種類に分類されます。
 
 一般的な DML 機能には、テーブル レコードの追加、変更、削除があります。対応するコマンドは`INSERT` 、 `UPDATE` 、 `DELETE` 。
 
-テーブルにデータを挿入するには、 `INSERT`ステートメントを使用します。
+テーブルにデータを挿入するには、 `INSERT`文を使用します。
 
 ```sql
 INSERT INTO person VALUES(1,'tom','20170912');
 ```
 
-いくつかのフィールドのデータを含むレコードをテーブルに挿入するには、 `INSERT`ステートメントを使用します。
+いくつかのフィールドのデータを含むレコードをテーブルに挿入するには、 `INSERT`文を使用します。
 
 ```sql
 INSERT INTO person(id,name) VALUES('2','bob');
 ```
 
-テーブル内のレコードの一部のフィールドを更新するには、 `UPDATE`ステートメントを使用します。
+テーブル内のレコードの一部のフィールドを更新するには、 `UPDATE`文を使用します。
 
 ```sql
 UPDATE person SET birthday='20180808' WHERE id=2;
 ```
 
-テーブル内のデータを削除するには、 `DELETE`ステートメントを使用します。
+テーブル内のデータを削除するには、 `DELETE`文を使用します。
 
 ```sql
 DELETE FROM person WHERE id=2;
@@ -68,13 +68,13 @@ DELETE FROM person WHERE id=2;
 
 > **Note:**
 >
-> `UPDATE`および`DELETE`ステートメントは、フィルターとして`WHERE`句を指定しない場合、テーブル全体に対して動作します。
+> `UPDATE`および`DELETE`文は、フィルターとして`WHERE`句を指定しない場合、テーブル全体に対して動作します。
 
 ## データクエリ言語 {#data-query-language}
 
 DQLは、テーブルまたは複数のテーブルから目的のデータ行を取得するために使用されます。
 
-データを表形式で表示するには、 `SELECT`ステートメントを使用します。
+データを表形式で表示するには、 `SELECT`文を使用します。
 
 ```sql
 SELECT * FROM person;

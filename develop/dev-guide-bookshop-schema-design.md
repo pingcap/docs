@@ -211,7 +211,7 @@ WHERE table_schema LIKE 'bookshop';
 
 ## データベース初期化スクリプト`dbinit.sql` {#database-initialization-script-dbinitsql}
 
-Bookshopアプリケーションでデータベーステーブル構造を手動で作成する場合は、次のSQLステートメントを実行してください。
+Bookshopアプリケーションでデータベーステーブル構造を手動で作成する場合は、次のSQL文を実行してください。
 
 ```sql
 CREATE DATABASE IF NOT EXISTS `bookshop`;

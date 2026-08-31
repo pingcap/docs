@@ -58,5 +58,5 @@ ALTER RESOURCE GROUP <resource group name> RU_PER_SEC=<#ru> [BURSTABLE];
 
 ## 制限事項 {#limitations}
 
-- `CALIBRATE RESOURCE` ステートメントは TiDB Cloud Dedicated ではサポートされていません。クラスターの RU 容量を見積もるには、TiDB Cloud コンソールの **Calibrate Resource** 機能を使用してください。
+- `CALIBRATE RESOURCE`文は TiDB Cloud Dedicated ではサポートされていません。クラスターの RU 容量を見積もるには、TiDB Cloud コンソールの **Calibrate Resource** 機能を使用してください。
 - **Calibrate Resource** 機能は TiDB Cloud Dedicated クラスターでのみ利用可能であり、{{{ .starter }}}, {{{ .essential }}}, または {{{ .premium }}} インスタンスでは利用できません。

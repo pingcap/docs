@@ -92,7 +92,7 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
 
 アラームのステータスファイルが過度に蓄積されるのを防ぐため、TiDBはデフォルトで、直近5回のアラーム中に生成されたステータスファイルのみを保持します。この数は、システム変数[`tidb_memory_usage_alarm_keep_record_num`](/system-variables.md#tidb_memory_usage_alarm_keep_record_num-new-in-v640)を設定することで調整できます。
 
-次の例では、アラームをトリガーするメモリを大量に消費する SQL ステートメントを構築します。
+次の例では、アラームをトリガーするメモリを大量に消費する SQL文を構築します。
 
 1. `tidb_memory_usage_alarm_ratio`を`0.85`に設定します :
 
@@ -123,7 +123,7 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
 
 ## tidb-server の書き込みトランザクションのメモリ使用量を削減します {#reduce-the-memory-usage-for-write-transactions-in-tidb-server}
 
-TiDBが使用するトランザクションモデルでは、トランザクションのすべての書き込み操作はコミットされる前にメモリにキャッシュされる必要があります。TiDBが大規模なトランザクションを書き込む場合、メモリ使用量が増加し、ボトルネックになる可能性があります。様々な制約下で大規模トランザクションによるメモリ使用量の増加を軽減または回避するには、システム変数[`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) `"bulk"`に調整するか、 [非トランザクションDMLステートメント](/non-transactional-dml.md)を使用します。
+TiDBが使用するトランザクションモデルでは、トランザクションのすべての書き込み操作はコミットされる前にメモリにキャッシュされる必要があります。TiDBが大規模なトランザクションを書き込む場合、メモリ使用量が増加し、ボトルネックになる可能性があります。様々な制約下で大規模トランザクションによるメモリ使用量の増加を軽減または回避するには、システム変数[`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) `"bulk"`に調整するか、 [非トランザクションDML文](/non-transactional-dml.md)を使用します。
 
 ## tidb-serverのその他のメモリ制御動作 {#other-memory-control-behaviors-of-tidb-server}
 
@@ -149,9 +149,9 @@ TiDBは、実行演算子のディスクへの書き込みをサポートして�
 >
 > HashAgg のディスクスピルは、 `DISTINCT`集計関数を含む SQL 実行をサポートしていません。`DISTINCT`集計関数を含む SQL 実行でメモリ使用量が多すぎる場合、ディスクスピルは適用されません。
 
-次の例では、メモリを消費する SQL ステートメントを使用して、HashAgg のディスクスピル機能を示します。
+次の例では、メモリを消費する SQL文を使用して、HashAgg のディスクスピル機能を示します。
 
-1. SQL ステートメントのメモリクォータを 1 GB (デフォルトは 1 GB) に設定します。
+1. SQL文のメモリクォータを 1 GB (デフォルトは 1 GB) に設定します。
 
     ```sql
     SET tidb_mem_quota_query = 1 << 30;
@@ -159,13 +159,13 @@ TiDBは、実行演算子のディスクへの書き込みをサポートして�
 
 2. 単一のテーブル`CREATE TABLE t(a int);`を作成し、256 行の異なるデータを挿入します。
 
-3. 次の SQL ステートメントを実行します。
+3. 次の SQL文を実行します。
 
     ```sql
     [tidb]> explain analyze select /*+ HASH_AGG() */ count(*) from t t1 join t t2 join t t3 group by t1.a, t2.a, t3.a;
     ```
 
-    この SQL ステートメントを実行するとメモリが大量に消費されるため、次の「メモリクォータ不足」エラーメッセージが返されます。
+    この SQL文を実行するとメモリが大量に消費されるため、次の「メモリクォータ不足」エラーメッセージが返されます。
 
     ```sql
     ERROR 1105 (HY000): Out Of Memory Quota![conn_id=3]

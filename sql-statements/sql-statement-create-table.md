@@ -5,7 +5,7 @@ summary: TiDBデータベースにおけるCREATE TABLEの使用方法の概要�
 
 # CREATE TABLE {#create-table}
 
-このステートメントは、現在選択されているデータベースに新しいテーブルを作成します。MySQL の`CREATE TABLE`ステートメントと同様の動作をします。
+このステートメントは、現在選択されているデータベースに新しいテーブルを作成します。MySQL の`CREATE TABLE`文と同様の動作をします。
 
 ## 概要 {#synopsis}
 

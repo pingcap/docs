@@ -106,7 +106,7 @@ CHARACTER_MAXIMUM_LENGTH: NULL
 - `COLUMN_COMMENT` : 列定義に含まれるコメント。
 - `GENERATION_EXPRESSION` : 生成列の場合、この値は列の値を計算するために使用された式を表示します。非生成列の場合、この値は空です。
 
-対応する`SHOW`ステートメントは次のとおりです。
+対応する`SHOW`文は次のとおりです。
 
 ```sql
 SHOW COLUMNS FROM t1 FROM test;

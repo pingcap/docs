@@ -83,7 +83,7 @@ CREATE TABLE person (
 
 ## 生成列の検証 {#validation-of-generated-columns}
 
-`INSERT`と`UPDATE`ステートメントはどちらも仮想列の定義をチェックします。検証に合格しない行はエラーを返します。
+`INSERT`と`UPDATE`文はどちらも仮想列の定義をチェックします。検証に合格しない行はエラーを返します。
 
 ```sql
 mysql> INSERT INTO person (name, address_info) VALUES ('Morgan', JSON_OBJECT('Country', 'Canada'));
@@ -139,7 +139,7 @@ JSON と生成列の現在の制限は次のとおりです。
 
 - 保存生成列を`ALTER TABLE`経由で追加することはできません。
 - `ALTER TABLE`文を使用して、保存生成列を通常の列に変換したり、通常の列を保存生成列に変換したりすることはできません。
-- 保存生成列の式を`ALTER TABLE`ステートメントを通じて変更することはできません。
+- 保存生成列の式を`ALTER TABLE`文を通じて変更することはできません。
 - [JSON関数](/functions-and-operators/json-functions.md)すべてがサポートされているわけではありません。
 - [`NULLIF()`関数](/functions-and-operators/control-flow-functions.md#nullif)はサポートされていません。代わりに[`CASE`関数](/functions-and-operators/control-flow-functions.md#case)を使用してください。
 - 現在、生成列インデックスの置換ルールは、生成列が仮想生成列である場合にのみ有効です。保存生成列には適用されませんが、生成列自体を直接使用することでインデックスを使用することは可能です。

@@ -42,7 +42,7 @@ TiDB Ansible バージョン: 2.1.18
     - 最後のステートメントが`COMMIT` ときに前のステートメントを出力するために、スロークエリログに`Prev_stmt`フィールドを追加します。 [＃12724](https://github.com/pingcap/tidb/pull/12724)
     - 明示的にコミットされたトランザクションで`COMMIT`失敗した場合、 `COMMIT`の前の最後のステートメントをログに記録します。 [＃12747](https://github.com/pingcap/tidb/pull/12747)
     - TiDBサーバーがSQL文を実行する際に、前の文の保存方法を最適化してパフォーマンスを向上します[＃12751](https://github.com/pingcap/tidb/pull/12751)
-    - `skip-grant-table=true`構成の`FLUSH PRIVILEGES`ステートメントによって引き起こされるpanic問題を修正 [＃12816](https://github.com/pingcap/tidb/pull/12816)
+    - `skip-grant-table=true`構成の`FLUSH PRIVILEGES`文によって引き起こされるpanic問題を修正 [＃12816](https://github.com/pingcap/tidb/pull/12816)
     - 短時間に多数の書き込み要求があった場合にパフォーマンスのボトルネックを回避するために、AutoID を適用するデフォルトの最小ステップを`1000`から`30000`に増やします[＃12891](https://github.com/pingcap/tidb/pull/12891)
     - TiDBがパニックになったときに失敗した`Prepared`文がエラーログに出力されない問題を修正しました[＃12954](https://github.com/pingcap/tidb/pull/12954)
     - スロークエリログの`COM_STMT_FETCH`時間レコードがMySQLのものと矛盾する問題を修正しました。 [＃12953](https://github.com/pingcap/tidb/pull/12953)
@@ -50,7 +50,7 @@ TiDB Ansible バージョン: 2.1.18
 - DDL
     - デフォルトでは、列の`AUTO INCREMENT`の属性の削除は許可されません。この属性を削除する必要がある場合は、 `tidb_allow_remove_auto_inc`の変数の値を変更してください。詳細は[システム変数](/system-variables.md#tidb_allow_remove_auto_inc-new-in-v2118-and-v304)を参照してください[＃12146](https://github.com/pingcap/tidb/pull/12146)
     - `Create Table`文で一意インデックスを作成するときに複数の`unique`をサポートする [＃12469](https://github.com/pingcap/tidb/pull/12469)
-    - `CREATE TABLE`ステートメントの外部キー制約にスキーマがない場合、 `No Database selected`エラーを返す代わりに、作成されたテーブルのスキーマを使用するという互換性の問題を修正しました。 [＃12678](https://github.com/pingcap/tidb/pull/12678)
+    - `CREATE TABLE`文の外部キー制約にスキーマがない場合、 `No Database selected`エラーを返す代わりに、作成されたテーブルのスキーマを使用するという互換性の問題を修正しました。 [＃12678](https://github.com/pingcap/tidb/pull/12678)
     - `ADMIN CANCEL DDL JOBS` 実行時に`invalid list index`エラーが報告される問題を修正 [＃12681](https://github.com/pingcap/tidb/pull/12681)
 - モニター
     - バックオフ監視のタイプを追加し、コミットのバックオフ時間など、これまで記録されていなかったバックオフ時間を補足します。 [＃12326](https://github.com/pingcap/tidb/pull/12326)

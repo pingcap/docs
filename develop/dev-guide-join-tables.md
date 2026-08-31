@@ -98,7 +98,7 @@ public List<Author> getTop10AuthorsOrderByBooks() throws SQLException {
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-次の SQL ステートメントでは、キーワード`LEFT JOIN`を使用して、左側のテーブル`books`右側のテーブル`ratings`に左外部結合で結合されることを宣言し、 `books`テーブルのすべての行が返されるようにします。
+次の SQL文では、キーワード`LEFT JOIN`を使用して、左側のテーブル`books`右側のテーブル`ratings`に左外部結合で結合されることを宣言し、 `books`テーブルのすべての行が返されるようにします。
 
 ```sql
 SELECT b.id AS book_id, ANY_VALUE(b.title) AS book_title, AVG(r.score) AS average_score
@@ -214,7 +214,7 @@ TiDB は、次の一般的なテーブル結合アルゴリズムをサポート
 - [ハッシュ結合](/explain-joins.md#hash-join)
 - [マージ結合](/explain-joins.md#merge-join)
 
-オプティマイザは、結合対象テーブルのデータ量などの要因に基づいて、適切な結合アルゴリズムを選択します。クエリが結合にどのアルゴリズムを使用しているかは、 `EXPLAIN`ステートメントで確認できます。
+オプティマイザは、結合対象テーブルのデータ量などの要因に基づいて、適切な結合アルゴリズムを選択します。クエリが結合にどのアルゴリズムを使用しているかは、 `EXPLAIN`文で確認できます。
 
 TiDB のオプティマイザが最適な結合アルゴリズムに従って実行されない場合は、 [オプティマイザヒント](/optimizer-hints.md)を使用して、TiDB がより適切な結合アルゴリズムを使用するように強制できます。
 

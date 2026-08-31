@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/serverless-audit-logging']
 
 # TiDB Cloud Essentialのデータベース監査ログ機能 (PREVIEW) {#database-audit-logging-beta-for-tidb-cloud-essential}
 
-TiDB Cloud Essentialは、実行されたSQLステートメントなど、データベースへのユーザーアクセスアクティビティを記録する監査ログ機能を提供します。
+TiDB Cloud Essentialは、実行されたSQL文など、データベースへのユーザーアクセスアクティビティを記録する監査ログ機能を提供します。
 
 > **Note:**
 >
@@ -107,17 +107,17 @@ Alibaba Cloud OSSに監査ログを保存するには、以下の情報を提供
 | `CONNECT`           | 接続におけるハンドシェイクのすべての操作を記録します                                   | `CONNECTION` |
 | `DISCONNECT`        | 切断操作の全記録                                                     | `CONNECTION` |
 | `CHANGE_USER`       | 変更されたユーザーのすべての操作を記録します                                       | `CONNECTION` |
-| `QUERY`             | SQLステートメントのすべての操作を記録します。これには、データのクエリと変更に関するすべてのエラーが含まれます。    | -            |
+| `QUERY`             | SQL文のすべての操作を記録します。これには、データのクエリと変更に関するすべてのエラーが含まれます。    | -            |
 | `TRANSACTION`       | `BEGIN` 、 `COMMIT` 、 `ROLLBACK`などのトランザクションに関連するすべての操作を記録します。 | `QUERY`      |
-| `EXECUTE`           | `EXECUTE`ステートメントのすべての操作を記録します。                               | `QUERY`      |
+| `EXECUTE`           | `EXECUTE`文のすべての操作を記録します。                               | `QUERY`      |
 | `QUERY_DML`         | `INSERT` 、 `REPLACE` 、 `UPDATE` 、および`DELETE` `LOAD DATA`     | `QUERY`      |
-| `INSERT`            | `INSERT`ステートメントのすべての操作を記録します。                                | `QUERY_DML`  |
-| `REPLACE`           | `REPLACE`ステートメントのすべての操作を記録します。                               | `QUERY_DML`  |
-| `UPDATE`            | `UPDATE`ステートメントのすべての操作を記録します。                                | `QUERY_DML`  |
-| `DELETE`            | `DELETE`ステートメントのすべての操作を記録します。                                | `QUERY_DML`  |
-| `LOAD DATA`         | `LOAD DATA`ステートメントのすべての操作を記録します。                             | `QUERY_DML`  |
-| `SELECT`            | `SELECT`ステートメントのすべての操作を記録します。                                | `QUERY`      |
-| `QUERY_DDL`         | DDLステートメントのすべての操作を記録します                                      | `QUERY`      |
+| `INSERT`            | `INSERT`文のすべての操作を記録します。                                | `QUERY_DML`  |
+| `REPLACE`           | `REPLACE`文のすべての操作を記録します。                               | `QUERY_DML`  |
+| `UPDATE`            | `UPDATE`文のすべての操作を記録します。                                | `QUERY_DML`  |
+| `DELETE`            | `DELETE`文のすべての操作を記録します。                                | `QUERY_DML`  |
+| `LOAD DATA`         | `LOAD DATA`文のすべての操作を記録します。                             | `QUERY_DML`  |
+| `SELECT`            | `SELECT`文のすべての操作を記録します。                                | `QUERY`      |
+| `QUERY_DDL`         | DDL文のすべての操作を記録します                                      | `QUERY`      |
 | `AUDIT`             | TiDBデータベース監査の設定に関連するすべての操作（システム変数の設定やシステム関数の呼び出しなど）を記録します。   | -            |
 | `AUDIT_FUNC_CALL`   | TiDB Cloudデータベース監査に関連する呼び出しシステム関数のすべての操作を記録します。              | `AUDIT`      |
 | `AUDIT_SET_SYS_VAR` | システム変数の設定操作をすべて記録します                                         | `AUDIT`      |
@@ -380,16 +380,16 @@ TiDB Cloudは、監査ログ内の各データベースイベントレコード�
 | `SERVERLESS_CLUSTER_ID` | 監査レコードが属するサーバーレスTiDB Cloud EssentialインスタンスのID。 |
 | `REASON`                | 監査記録のエラーメッセージ。操作中にエラーが発生した場合にのみ記録されます。         |
 
-### SQLステートメント情報 {#sql-statement-information}
+### SQL文情報 {#sql-statement-information}
 
 イベントクラスが`QUERY`または`QUERY`のサブクラスである場合、監査ログには次の情報が含まれます。
 
 | フィールド               | 説明                                                                     |
 | ---------------- | ---------------------------------------------------------------------- |
 | `CURRENT_DB`     | 現在使用しているデータベースの名前。                                                     |
-| `SQL_TEXT`       | 実行されたSQLステートメント。監査ログの秘匿化が有効になっている場合は、秘匿化されたSQLステートメントが記録されます。      |
-| `EXECUTE_PARAMS` | `EXECUTE`ステートメントのパラメータ。イベントクラスに`EXECUTE`が含まれ、かつ秘匿化が無効になっている場合にのみ記録されます。 |
-| `AFFECTED_ROWS`  | SQL ステートメントの影響を受ける行数。イベントクラスに`QUERY_DML`が含まれている場合にのみ記録されます。           |
+| `SQL_TEXT`       | 実行されたSQL文。監査ログの秘匿化が有効になっている場合は、秘匿化されたSQL文が記録されます。      |
+| `EXECUTE_PARAMS` | `EXECUTE`文のパラメータ。イベントクラスに`EXECUTE`が含まれ、かつ秘匿化が無効になっている場合にのみ記録されます。 |
+| `AFFECTED_ROWS`  | SQL文の影響を受ける行数。イベントクラスに`QUERY_DML`が含まれている場合にのみ記録されます。           |
 
 ### 接続情報 {#connection-information}
 

@@ -19,7 +19,7 @@ TiDB バージョン: 7.5.4
 
 - TiDB
 
-    - `EXPLAIN`ステートメントの出力に`tidb_redact_log`設定を適用し、ログの処理ロジックをさらに最適化することをサポート [＃54565](https://github.com/pingcap/tidb/issues/54565) @[hawkingrei](https://github.com/hawkingrei)
+    - `EXPLAIN`文の出力に`tidb_redact_log`設定を適用し、ログの処理ロジックをさらに最適化することをサポート [＃54565](https://github.com/pingcap/tidb/issues/54565) @[hawkingrei](https://github.com/hawkingrei)
     - TiDB のスロークエリのクエリ速度を最適化します [＃54630](https://github.com/pingcap/tidb/pull/54630) @[yibin87](https://github.com/yibin87)
 
 - TiKV

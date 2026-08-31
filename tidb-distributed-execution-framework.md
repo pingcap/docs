@@ -121,11 +121,11 @@ DXF のアーキテクチャは次のとおりです。
 
 <CustomContent platform="tidb">
 
-- [DDL ステートメントの実行原則とベストプラクティス](/best-practices/ddl-introduction.md)
+- [DDL文の実行原則とベストプラクティス](/best-practices/ddl-introduction.md)
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-- [DDL ステートメントの実行原則とベストプラクティス](https://docs.pingcap.com/tidb/stable/ddl-introduction)
+- [DDL文の実行原則とベストプラクティス](https://docs.pingcap.com/tidb/stable/ddl-introduction)
 
 </CustomContent>

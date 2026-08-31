@@ -41,7 +41,7 @@ Red Hat Linux または Red Hat Linux ベースのディストリビューショ
 rename srcdb. tgtdb. *.sql
 ```
 
-データベース名を変更した後は、 `data-source-dir`ディレクトリから`CREATE DATABASE` DDL ステートメントを含む`${db_name}-schema-create.sql`ファイルを削除することをお勧めします。テーブル名も変更する場合は、 `CREATE TABLE` DDL ステートメントを含む`${db_name}.${table_name}-schema.sql`ファイル内のテーブル名も変更する必要があります。
+データベース名を変更した後は、 `data-source-dir`ディレクトリから`CREATE DATABASE` DDL文を含む`${db_name}-schema-create.sql`ファイルを削除することをお勧めします。テーブル名も変更する場合は、 `CREATE TABLE` DDL文を含む`${db_name}.${table_name}-schema.sql`ファイル内のテーブル名も変更する必要があります。
 
 ### 正規表現を使用してオンラインで名前を置換する {#use-regular-expressions-to-replace-names-online}
 
@@ -103,7 +103,7 @@ compression = '$4'
 
 CSVファイルはスキーマレスです。CSVファイルをTiDBにインポートするには、テーブルスキーマを提供する必要があります。スキーマは、以下のいずれかの方法で提供できます。
 
-- DDL ステートメントを含む`${db_name}.${table_name}-schema.sql`および`${db_name}-schema-create.sql`名前のファイルを作成します。
+- DDL文を含む`${db_name}.${table_name}-schema.sql`および`${db_name}-schema-create.sql`名前のファイルを作成します。
 - TiDB にテーブルスキーマを手動で作成します。
 
 ### コンフィグレーション {#configuration}
@@ -155,7 +155,7 @@ trim-last-separator = false
     - TSV (タブ区切り値)の場合は`"\t"` 。
     - `"\u0001"`を指定すると ASCII 文字`0x01`が使用されます。
 
-- LOAD DATA ステートメントの`FIELDS TERMINATED BY`オプションに対応します。
+- LOAD DATA文の`FIELDS TERMINATED BY`オプションに対応します。
 
 #### `delimiter` {#delimiter}
 
@@ -168,13 +168,13 @@ trim-last-separator = false
     - `'"'`フィールドを二重引用符で囲みます。 [RFC 4180](https://tools.ietf.org/html/rfc4180)と同じです。
     - `''`引用を無効にします。
 
-- `LOAD DATA`ステートメントの`FIELDS ENCLOSED BY`オプションに対応します。
+- `LOAD DATA`文の`FIELDS ENCLOSED BY`オプションに対応します。
 
 #### `terminator` {#terminator}
 
 - 行末記号を定義します。
 - `terminator`が空の場合、行末文字として`"\n"` (改行) と`"\r\n"` (復帰 + 改行) の両方が使用されます。
-- `LOAD DATA`ステートメントの`LINES TERMINATED BY`オプションに対応します。
+- `LOAD DATA`文の`LINES TERMINATED BY`オプションに対応します。
 
 #### `header` {#header}
 
@@ -215,7 +215,7 @@ trim-last-separator = false
 
 - 引用符で囲んでも、バックスラッシュがエスケープ文字として解析されるかどうかには影響しません。
 
-- `LOAD DATA`ステートメントの`FIELDS ESCAPED BY '\'`オプションに対応します。
+- `LOAD DATA`文の`FIELDS ESCAPED BY '\'`オプションに対応します。
 
 #### `trim-last-separator` {#trim-last-separator}
 

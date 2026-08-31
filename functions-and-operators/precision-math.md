@@ -87,7 +87,7 @@ SET sql_mode = 'TRADITIONAL`;
 - 厳密モードでは、挿入と更新は禁止され、エラーが発生します。
 - 厳密モードでない場合は警告が発生します。
 
-次の SQL ステートメントでは、
+次の SQL文では、
 
 ```sql
 INSERT INTO t SET i = 1/0;

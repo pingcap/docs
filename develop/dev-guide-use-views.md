@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/dev-guide-use-views/','/ja/tidbcloud/dev-guide-use-vi
 
 ## 概要 {#overview}
 
-TiDBはビューをサポートしています。ビューは仮想テーブルとして機能し、そのスキーマはビューを作成する`SELECT`ステートメントによって定義されます。
+TiDBはビューをサポートしています。ビューは仮想テーブルとして機能し、そのスキーマはビューを作成する`SELECT`文によって定義されます。
 
 - 安全なフィールドとデータのみをユーザーに公開するビューを作成することで、基になるテーブル内の機密フィールドとデータのセキュリティを確保できます。
 - 頻繁に使用される複雑なクエリのビューを作成して、複雑なクエリをより簡単に、より便利に実行できます。
@@ -39,13 +39,13 @@ GROUP BY b.id;
 
 ## クエリビュー {#query-views}
 
-ビューが作成されると、通常のテーブルと同じように`SELECT`ステートメントを使用してビューをクエリできます。
+ビューが作成されると、通常のテーブルと同じように`SELECT`文を使用してビューをクエリできます。
 
 ```sql
 SELECT * FROM book_with_ratings LIMIT 10;
 ```
 
-TiDB がビューをクエリする場合、ビューに関連付けられた`SELECT`ステートメントをクエリします。
+TiDB がビューをクエリする場合、ビューに関連付けられた`SELECT`文をクエリします。
 
 ## ビューの更新 {#update-views}
 
@@ -121,7 +121,7 @@ TiDB のビューの制限については、 [ビューの制限](/views.md#limi
 - [ビュー](/views.md)
 - [CREATE VIEW](/sql-statements/sql-statement-create-view.md)
 - [DROP VIEW](/sql-statements/sql-statement-drop-view.md)
-- [ビューを使用したEXPLAINステートメント](/explain-views.md)
+- [ビューを使用したEXPLAIN文](/explain-views.md)
 - [TiFlink: TiKV と Flink を使用した強整合性マテリアライズド ビュー](https://github.com/tiflink/tiflink)
 
 ## ヘルプが必要ですか? {#need-help}

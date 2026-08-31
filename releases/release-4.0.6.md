@@ -21,7 +21,7 @@ TiDB バージョン: 4.0.6
     - ストアロケーショントポロジ可視化サポート [＃719](https://github.com/pingcap-incubator/tidb-dashboard/pull/719)
     - クラスタ構成UIの追加（実験的） [＃733](https://github.com/pingcap-incubator/tidb-dashboard/pull/733)
     - 現在のセッション共有をサポート [＃741](https://github.com/pingcap-incubator/tidb-dashboard/pull/741)
-    - SQLステートメントリストで実行計画の数を表示する機能をサポート [＃746](https://github.com/pingcap-incubator/tidb-dashboard/pull/746)
+    - SQL文リストで実行計画の数を表示する機能をサポート [＃746](https://github.com/pingcap-incubator/tidb-dashboard/pull/746)
 
 - ツール
 

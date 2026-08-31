@@ -31,7 +31,7 @@ TiDBはスナップショット分離（SI）一貫性を実装しており、�
 
 詳細については[TiDBトランザクション分離レベル](/transaction-isolation-levels.md)を参照してください。
 
-## 非トランザクションDMLステートメント {#non-transactional-dml-statements}
+## 非トランザクションDML文 {#non-transactional-dml-statements}
 
 非トランザクションDML文とは、複数のSQL文（つまり複数のバッチ）に分割され、順番に実行されるDML文です。トランザクションの原子性と独立性を犠牲にして、バッチデータ処理のパフォーマンスと使いやすさを向上させます。
 

@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-delete-data/','/ja/tidb/dev/dev-guide-delet
 
 # データ削除 {#delete-data}
 
-このドキュメントでは、[DELETE](/sql-statements/sql-statement-delete.md)SQL ステートメントを使用して TiDB 内のデータを削除する方法について説明します。期限切れのデータを定期的に削除する必要がある場合は、[存続時間](/develop/dev-guide-time-to-live.md)機能を使用してください。
+このドキュメントでは、[DELETE](/sql-statements/sql-statement-delete.md)SQL文を使用して TiDB 内のデータを削除する方法について説明します。期限切れのデータを定期的に削除する必要がある場合は、[存続時間](/develop/dev-guide-time-to-live.md)機能を使用してください。
 
 ## 始める前に {#before-you-start}
 
@@ -18,7 +18,7 @@ aliases: ['/ja/tidb/stable/dev-guide-delete-data/','/ja/tidb/dev/dev-guide-delet
 
 ## SQL構文 {#sql-syntax}
 
-`DELETE`ステートメントは、一般的に次の形式になります。
+`DELETE`文は、一般的に次の形式になります。
 
 ```sql
 DELETE FROM {table} WHERE {filter}
@@ -39,7 +39,7 @@ DELETE FROM {table} WHERE {filter}
 
 - 大量の行 (たとえば、1 万行以上) を削除する場合は[一括削除](#bulk-delete)を使用します。これは、TiDB では 1つのトランザクションのサイズが制限されているためです ([トランザクションの合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)。
 
-- テーブル内のすべてのデータを削除する場合は、 `DELETE`ステートメントを使用しないでください。代わりに、 [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)ステートメントを使用してください。
+- テーブル内のすべてのデータを削除する場合は、 `DELETE`文を使用しないでください。代わりに、 [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)ステートメントを使用してください。
 
 - パフォーマンスに関する考慮事項については、[パフォーマンスに関する考慮事項](#performance-considerations)を参照してください。
 
@@ -47,7 +47,7 @@ DELETE FROM {table} WHERE {filter}
 
 ## 例 {#example}
 
-特定の期間内にアプリケーションエラーが見つかり、その期間内の[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)に関するすべてのデータ（例えば、 `2022-04-15 00:00:00`から`2022-04-15 00:15:00`まで）を削除する必要がある場合を考えてみましょう。この場合、 `SELECT`ステートメントを使用して、削除するレコードの数を確認できます。
+特定の期間内にアプリケーションエラーが見つかり、その期間内の[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)に関するすべてのデータ（例えば、 `2022-04-15 00:00:00`から`2022-04-15 00:15:00`まで）を削除する必要がある場合を考えてみましょう。この場合、 `SELECT`文を使用して、削除するレコードの数を確認できます。
 
 ```sql
 SELECT COUNT(*) FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND `rated_at` <= "2022-04-15 00:15:00";
@@ -172,7 +172,7 @@ with connection:
 
 ### TiDB GCメカニズム {#tidb-gc-mechanism}
 
-TiDB は`DELETE`ステートメントを実行した直後にデータを削除するわけではありません。代わりに、削除準備完了としてデータをマークします。その後、TiDB GC (ガベージコレクション) が古いデータをクリーンアップするまで待機します。したがって、 `DELETE`ステートメントを実行しても、ディスク使用量はすぐには削減さ***れません***。
+TiDB は`DELETE`文を実行した直後にデータを削除するわけではありません。代わりに、削除準備完了としてデータをマークします。その後、TiDB GC (ガベージコレクション) が古いデータをクリーンアップするまで待機します。したがって、 `DELETE`文を実行しても、ディスク使用量はすぐには削減さ***れません***。
 
 デフォルトでは、GC（ガベージコレクション）は10分ごとに実行されます。各GCでは、 **safe_point**と呼ばれる時点が計算されます。この時点より前のデータは再利用されないため、TiDBは安全にクリーンアップできます。
 
@@ -192,7 +192,7 @@ TiDBは[統計情報](/statistics.md)を使用してインデックスの選択�
 
 ### 一括削除ループを作成する {#write-a-bulk-delete-loop}
 
-アプリケーションまたはスクリプトのループ内に`DELETE`ステートメントを記述し、 `WHERE`句を使用してデータをフィルタリングし、 `LIMIT`を使用して単一のステートメントで削除する行数を制限できます。
+アプリケーションまたはスクリプトのループ内に`DELETE`文を記述し、 `WHERE`句を使用してデータをフィルタリングし、 `LIMIT`を使用して単一のステートメントで削除する行数を制限できます。
 
 ### 一括削除の例 {#bulk-delete-example}
 
@@ -352,11 +352,11 @@ with connection:
 
 > **Note:**
 >
-> v6.1.0 以降、TiDB は[非トランザクションDMLステートメント](/non-transactional-dml.md)ステートメントをサポートします。この機能は、TiDB v6.1.0 より前のバージョンでは使用できません。
+> v6.1.0 以降、TiDB は[非トランザクションDML文](/non-transactional-dml.md)ステートメントをサポートします。この機能は、TiDB v6.1.0 より前のバージョンでは使用できません。
 
 ### 非トランザクション一括削除の前提条件 {#prerequisites-of-non-transactional-bulk-delete}
 
-非トランザクション一括削除を使用する前に、[非トランザクションDMLステートメントのドキュメント](/non-transactional-dml.md)ドキュメントを必ず読んでください。非トランザクション一括削除により、バッチデータ処理シナリオのパフォーマンスと使いやすさが向上しますが、トランザクションの原子性と分離性が損なわれます。
+非トランザクション一括削除を使用する前に、[非トランザクションDML文のドキュメント](/non-transactional-dml.md)ドキュメントを必ず読んでください。非トランザクション一括削除により、バッチデータ処理シナリオのパフォーマンスと使いやすさが向上しますが、トランザクションの原子性と分離性が損なわれます。
 
 したがって、誤った取り扱いによる重大な結果（データ損失など）を避けるため、慎重に使用する必要があります。
 
@@ -372,13 +372,13 @@ BATCH ON {shard_column} LIMIT {batch_size} {delete_statement};
 | :------------------: | :----------------: |
 |   `{shard_column}`   | バッチを分割するために使用される列。 |
 |    `{batch_size}`    |   各バッチのサイズを制御する。   |
-| `{delete_statement}` |  `DELETE`ステートメント。  |
+| `{delete_statement}` |  `DELETE`文。  |
 
-前述の例は、非トランザクション一括削除ステートメントの単純な使用例のみを示しています。詳細については、[非トランザクションDMLステートメント](/non-transactional-dml.md)を参照してください。
+前述の例は、非トランザクション一括削除ステートメントの単純な使用例のみを示しています。詳細については、[非トランザクションDML文](/non-transactional-dml.md)を参照してください。
 
 ### トランザクション処理を伴わない一括削除の例 {#example-of-non-transactional-bulk-delete}
 
-[一括削除の例](#bulk-delete-example)と同じシナリオで、次の SQL ステートメントは非トランザクション一括削除を実行する方法を示しています。
+[一括削除の例](#bulk-delete-example)と同じシナリオで、次の SQL文は非トランザクション一括削除を実行する方法を示しています。
 
 ```sql
 BATCH ON `rated_at` LIMIT 1000 DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` <= "2022-04-15 00:15:00";

@@ -5,7 +5,7 @@ summary: "`DDL_JOBS` information_schema テーブルについて学習します�
 
 # DDL_JOBS {#ddl-jobs}
 
-`DDL_JOBS`テーブルは、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドへの`INFORMATION_SCHEMA`インターフェースを提供します。このテーブルは、TiDB クラスター内の DDL 操作に関する情報（現在のステータス、DDL ステートメント、開始時刻、終了時刻、データベース名、テーブル名など）を提供します。
+`DDL_JOBS`テーブルは、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドへの`INFORMATION_SCHEMA`インターフェースを提供します。このテーブルは、TiDB クラスター内の DDL 操作に関する情報（現在のステータス、DDL文、開始時刻、終了時刻、データベース名、テーブル名など）を提供します。
 
 ```sql
 USE information_schema;

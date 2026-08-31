@@ -37,10 +37,10 @@ TiDBでは、パスワードの複雑さのチェックはデフォルトで無�
 
 > **Note:**
 >
-> - `CREATE USER`ステートメントについてですが、アカウント作成時にロックできる場合でも、適切なパスワードを設定する必要があります。そうしないと、アカウントのロックが解除された際に、このアカウントはパスワード複雑性ポリシーに準拠していないパスワードを使用して TiDB にログインできてしまいます。
+> - `CREATE USER`文についてですが、アカウント作成時にロックできる場合でも、適切なパスワードを設定する必要があります。そうしないと、アカウントのロックが解除された際に、このアカウントはパスワード複雑性ポリシーに準拠していないパスワードを使用して TiDB にログインできてしまいます。
 > - パスワードの複雑さのポリシーを変更しても、既存のパスワードには影響せず、新しく設定されたパスワードにのみ影響します。
 
-次の SQL ステートメントを実行すると、パスワードの複雑さのポリシーに関連するすべてのシステム変数を表示できます。
+次の SQL文を実行すると、パスワードの複雑さのポリシーに関連するすべてのシステム変数を表示できます。
 
 ```sql
 mysql> SHOW VARIABLES LIKE 'validate_password.%';
@@ -184,7 +184,7 @@ TiDBは、パスワードのセキュリティ強化のため、ユーザーが�
 
 ### 手動での有効期限 {#manual-expiration}
 
-アカウント パスワードを手動で期限切れにするには、 `CREATE USER`または`ALTER USER`ステートメントを使用します。
+アカウント パスワードを手動で期限切れにするには、 `CREATE USER`または`ALTER USER`文を使用します。
 
 ```sql
 ALTER USER 'test'@'localhost' PASSWORD EXPIRE;
@@ -232,7 +232,7 @@ TiDB は、グローバルレベルとアカウント レベルでの自動パ�
 
 - アカウントレベル
 
-    個々のアカウントに対して自動パスワード有効期限ポリシーを確立するには、 `CREATE USER`または`ALTER USER`ステートメントの`PASSWORD EXPIRE`オプションを使用します。
+    個々のアカウントに対して自動パスワード有効期限ポリシーを確立するには、 `CREATE USER`または`ALTER USER`文の`PASSWORD EXPIRE`オプションを使用します。
 
     次の例では、ユーザーパスワードを 90日ごとに変更する必要があります。
 
@@ -278,8 +278,8 @@ disconnect-on-expired-password = true
 
 `disconnect-on-expired-password`有効になっている場合、アカウントのパスワードが期限切れになると、TiDB はそのアカウントからの接続を拒否します。このような場合、以下の方法でパスワードを変更できます。
 
-- 通常のアカウントのパスワードの有効期限が切れた場合、管理者は SQL ステートメントを使用してアカウントのパスワードを変更できます。
-- 管理者アカウントのパスワードの有効期限が切れた場合、別の管理者が SQL ステートメントを使用してアカウントのパスワードを変更できます。
+- 通常のアカウントのパスワードの有効期限が切れた場合、管理者は SQL文を使用してアカウントのパスワードを変更できます。
+- 管理者アカウントのパスワードの有効期限が切れた場合、別の管理者が SQL文を使用してアカウントのパスワードを変更できます。
 - 管理者アカウントのパスワードが期限切れで、パスワードの変更を手伝ってくれる他の管理者がいない場合は、 `skip-grant-table`メカニズムを使用してアカウントのパスワードを変更できます。詳細については、 [パスワードを忘れた場合の手続き](/user-account-management.md#forget-the-root-password)を参照してください。
 
 ## パスワード再利用ポリシー {#password-reuse-policy}
@@ -312,7 +312,7 @@ SET GLOBAL password_reuse_interval = 365;
 
 ### アカウントレベルのパスワード再利用ポリシー {#account-level-password-reuse-policy}
 
-アカウント レベルのパスワード再利用ポリシーを確立するには、 `CREATE USER`または`ALTER USER`ステートメントの`PASSWORD HISTORY`および`PASSWORD REUSE INTERVAL`オプションを使用します。
+アカウント レベルのパスワード再利用ポリシーを確立するには、 `CREATE USER`または`ALTER USER`文の`PASSWORD HISTORY`および`PASSWORD REUSE INTERVAL`オプションを使用します。
 
 例えば：
 
@@ -370,7 +370,7 @@ TiDBは、アカウントのログイン失敗回数を追跡できます。ブ�
 
 ### ログイン失敗追跡ポリシーを構成する {#configure-the-login-failure-tracking-policy}
 
-`CREATE USER`または`ALTER USER`ステートメントの`FAILED_LOGIN_ATTEMPTS`および`PASSWORD_LOCK_TIME`オプションを使用して、各アカウントのログイン失敗回数とロック時間を設定できます。使用可能な値オプションは次のとおりです。
+`CREATE USER`または`ALTER USER`文の`FAILED_LOGIN_ATTEMPTS`および`PASSWORD_LOCK_TIME`オプションを使用して、各アカウントのログイン失敗回数とロック時間を設定できます。使用可能な値オプションは次のとおりです。
 
 - `FAILED_LOGIN_ATTEMPTS` : N。`N`連続してログインに失敗すると、アカウントは一時的にロックされます。Nの値の範囲は0～32767です。
 - `PASSWORD_LOCK_TIME` : N | 無制限。
@@ -406,13 +406,13 @@ ALTER USER 'test3'@'localhost' FAILED_LOGIN_ATTEMPTS 0 PASSWORD_LOCK_TIME 0;
 
 次のシナリオでは、連続したパスワードエラーの回数をリセットできます。
 
-- `ALTER USER ... ACCOUNT UNLOCK`ステートメントを実行するとき。
+- `ALTER USER ... ACCOUNT UNLOCK`文を実行するとき。
 - ログインに成功したとき。
 
 次のシナリオでは、ロックされたアカウントのロックを解除できます。
 
 - ロック時間が終了すると、次回のログイン試行時にアカウントの自動ロックフラグがリセットされます。
-- `ALTER USER ... ACCOUNT UNLOCK`ステートメントを実行するとき。
+- `ALTER USER ... ACCOUNT UNLOCK`文を実行するとき。
 
 > **Note:**
 >

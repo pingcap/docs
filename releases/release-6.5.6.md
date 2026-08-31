@@ -17,7 +17,7 @@ TiDB バージョン: 6.5.6
 - オプティマイザがテーブルに対してハッシュ結合を選択するかどうかを制御する[`tidb_opt_enable_hash_join`](https://docs.pingcap.com/tidb/v6.5/system-variables#tidb_opt_enable_hash_join-new-in-v656)システム変数を導入します。 [＃46695](https://github.com/pingcap/tidb/issues/46695) @[coderplay](https://github.com/coderplay)
 - さらなるテストの結果、 TiCDC Changefeed構成項目[`case-sensitive`](/ticdc/ticdc-changefeed-config.md)のデフォルト値が`true`から`false`に変更されました。これは、デフォルトでは TiCDC 構成ファイル内のテーブル名とデータベース名が大文字と小文字を区別しないことを意味します[＃10047](https://github.com/pingcap/tiflow/issues/10047) @[sdojjy](https://github.com/sdojjy)
 - TiCDC Changefeed、次の新しい構成項目が導入されています。
-    - [`sql-mode`](/ticdc/ticdc-changefeed-config.md) : TiCDC がデータを複製するときに DDL ステートメントを解析するために使用する[SQLモード](https://docs.pingcap.com/tidb/v6.5/ticdc-ddl#sql-mode)を設定できます[＃9876](https://github.com/pingcap/tiflow/issues/9876) @[asddongmen](https://github.com/asddongmen)
+    - [`sql-mode`](/ticdc/ticdc-changefeed-config.md) : TiCDC がデータを複製するときに DDL文を解析するために使用する[SQLモード](https://docs.pingcap.com/tidb/v6.5/ticdc-ddl#sql-mode)を設定できます[＃9876](https://github.com/pingcap/tiflow/issues/9876) @[asddongmen](https://github.com/asddongmen)
     - [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md)と[`flush-worker-num`](/ticdc/ticdc-changefeed-config.md) : 異なるマシンの仕様に基づいて、再実行モジュールに異なる同時実行パラメータを設定できます[＃10048](https://github.com/pingcap/tiflow/issues/10048) @[CharlesCheung96](https://github.com/CharlesCheung96)
     - [`compression`](/ticdc/ticdc-changefeed-config.md) : REDOログファイルの圧縮動作を設定できます[＃10176](https://github.com/pingcap/tiflow/issues/10176) @[sdojjy](https://github.com/sdojjy)
     - [`changefeed-error-stuck-duration`](/ticdc/ticdc-changefeed-config.md) : 内部エラーまたは例外が発生したときに、変更フィードが自動的に再試行される期間を設定できます[＃9875](https://github.com/pingcap/tiflow/issues/9875) @[asddongmen](https://github.com/asddongmen)
@@ -51,7 +51,7 @@ TiDB バージョン: 6.5.6
     - TiCDC
 
         - `sink-uri`構成で`content-compatible=true`を設定することにより、 TiCDC Canal-JSON コンテンツ フォーマット[公式Canal出力のコンテンツ形式と互換性がある](https://docs.pingcap.com/tidb/v6.5/ticdc-canal-json#compatibility-with-the-official-canal)作成をサポートします。 [＃10106](https://github.com/pingcap/tiflow/issues/10106) @[3AceShowHand](https://github.com/3AceShowHand)
-        - `ADD INDEX` DDL操作を複製する実行ロジックを最適化して、後続のDMLステートメントをブロックしないようにします。 [＃9644](https://github.com/pingcap/tiflow/issues/9644) @[sdojjy](https://github.com/sdojjy)
+        - `ADD INDEX` DDL操作を複製する実行ロジックを最適化して、後続のDML文をブロックしないようにします。 [＃9644](https://github.com/pingcap/tiflow/issues/9644) @[sdojjy](https://github.com/sdojjy)
         - TiCDC 増分スキャンによる上流 TiKV への影響を軽減 [＃11390](https://github.com/tikv/tikv/issues/11390) @[hicqu](https://github.com/hicqu)
 
 ## バグ修正 {#bug-fixes}

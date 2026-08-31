@@ -15,7 +15,7 @@ TiDB Ansible バージョン: 2.1.10
 
 - `tidb_snapshot`を使用して履歴データ読み取るときに、一部の異常によりテーブルスキーマが正しくなくなる問題を修正しました。 [＃10359](https://github.com/pingcap/tidb/pull/10359)
 - `NOT`関数が場合によっては誤った読み取り結果を引き起こす問題を修正[＃10363](https://github.com/pingcap/tidb/pull/10363)
-- `Replace`または`Insert on duplicate update`ステートメントの`Generated Column`の誤った動作を修正します [＃10385](https://github.com/pingcap/tidb/pull/10385)
+- `Replace`または`Insert on duplicate update`文の`Generated Column`の誤った動作を修正します [＃10385](https://github.com/pingcap/tidb/pull/10385)
 - `DATE` `DATETIME` の`BETWEEN`機能のバグを修正 [＃10407](https://github.com/pingcap/tidb/pull/10407)
 - `SLOW_QUERY`テーブルを使用してスローログをクエリするときに、スローログの 1 行が長すぎるとエラーレポートが発生する問題を修正しました。 [＃10412](https://github.com/pingcap/tidb/pull/10412)
 - `DATETIME` + `INTERVAL`の結果が MySQL の結果と一致しないケースがある問題を修正[＃10416](https://github.com/pingcap/tidb/pull/10416) , [＃10418](https://github.com/pingcap/tidb/pull/10418)

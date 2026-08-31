@@ -77,7 +77,7 @@ BEGIN PESSIMISTIC;
 
 ### トランザクションをコミットする {#commit-a-transaction}
 
-`COMMIT`ステートメントを使用すると、現在のトランザクションで TiDB によって行われたすべての変更をコミットできます。
+`COMMIT`文を使用すると、現在のトランザクションで TiDB によって行われたすべての変更をコミットできます。
 
 ```sql
 COMMIT;
@@ -87,7 +87,7 @@ COMMIT;
 
 ### トランザクションをロールバックする {#roll-back-a-transaction}
 
-`ROLLBACK`ステートメントを使用して、現在のトランザクションの変更をロールバックできます。
+`ROLLBACK`文を使用して、現在のトランザクションの変更をロールバックできます。
 
 ```sql
 ROLLBACK;

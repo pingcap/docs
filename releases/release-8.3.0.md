@@ -79,7 +79,7 @@ TiDBバージョン：8.3.0
 
 - `CREATE TABLE`のパフォーマンスを 1.4 倍、 `CREATE DATABASE`のパフォーマンスを 2.1 倍、 `ADD COLUMN`を 2 倍向上させます [#54436](https://github.com/pingcap/tidb/issues/54436) @[D3Hunter](https://github.com/D3Hunter)
 
-    TiDB v8.0.0では、バッチテーブル作成シナリオにおけるテーブル作成パフォーマンスを向上させるため、システム変数[`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)が導入されました。v8.3.0では、単一データベース内で10セッションにわたってテーブル作成用のDDLステートメントを同時に送信した場合、v8.2.0と比較してパフォーマンスが1.4倍向上しています。
+    TiDB v8.0.0では、バッチテーブル作成シナリオにおけるテーブル作成パフォーマンスを向上させるため、システム変数[`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)が導入されました。v8.3.0では、単一データベース内で10セッションにわたってテーブル作成用のDDL文を同時に送信した場合、v8.2.0と比較してパフォーマンスが1.4倍向上しています。
 
     v8.3.0 では、v8.2.0 と比較して、バッチ実行における一般的な DDL のパフォーマンスが向上しました。10 セッションを同時に実行した場合の`CREATE DATABASE`のパフォーマンスは、v8.1.0 と比較して 19 倍、v8.2.0 と比較して 2.1 倍向上しました。同じデータベース内の複数のテーブルに列 ( `ADD COLUMN` ) をバッチで追加するために 10 セッションを使用した場合のパフォーマンスは、v8.1.0 と比較して 10 倍、v8.2.0 と比較して 2.1 倍向上しました。同じデータベース内の複数のテーブルで 10 セッションを使用した`ADD COLUMN`のパフォーマンスは、v8.1.0 と比較して 10 倍、v8.2.0 と比較して 2 倍向上しました。
 
@@ -105,7 +105,7 @@ TiDBバージョン：8.3.0
 
 - SQL 実行計画のバインディングを強化[#55280](https://github.com/pingcap/tidb/issues/55280) [#55343](https://github.com/pingcap/tidb/issues/55343) @[time-and-fate](https://github.com/time-and-fate)
 
-    OLTPシナリオでは、ほとんどのSQLステートメントの最適な実行計画は固定されています。アプリケーション内の重要なSQLステートメントに対してSQL実行プランバインディングを実装することで、実行計画が悪化する可能性を低減し、システムの安定性を向上させることができます。多数のSQL実行プランバインディングを作成するという要件を満たすために、TiDBはSQLバインディングの機能とエクスペリエンスを強化しており、具体的には以下の機能が含まれています。
+    OLTPシナリオでは、ほとんどのSQL文の最適な実行計画は固定されています。アプリケーション内の重要なSQL文に対してSQL実行プランバインディングを実装することで、実行計画が悪化する可能性を低減し、システムの安定性を向上させることができます。多数のSQL実行プランバインディングを作成するという要件を満たすために、TiDBはSQLバインディングの機能とエクスペリエンスを強化しており、具体的には以下の機能が含まれています。
 
     - 単一のSQL文を使用して、複数の過去の実行計画からSQL実行プランバインディングを作成することで、バインディング作成の効率を向上させます。
     - SQL実行プランバインディングは、より多くのオプティマイザヒントをサポートし、複雑な実行計画の変換方法を最適化することで、実行計画の復元におけるバインディングの安定性を向上させます。
@@ -160,9 +160,9 @@ TiDBバージョン：8.3.0
 
 ### データ移行 {#data-migration}
 
-- TiCDCは双方向レプリケーション（BDR）モードでのDDLステートメントのレプリケーションをサポートします（GA） [#10301](https://github.com/pingcap/tiflow/issues/10301) [#48519](https://github.com/pingcap/tidb/issues/48519) @[okJiang](https://github.com/okJiang) @[asddongmen](https://github.com/asddongmen)
+- TiCDCは双方向レプリケーション（BDR）モードでのDDL文のレプリケーションをサポートします（GA） [#10301](https://github.com/pingcap/tiflow/issues/10301) [#48519](https://github.com/pingcap/tidb/issues/48519) @[okJiang](https://github.com/okJiang) @[asddongmen](https://github.com/asddongmen)
 
-    TiCDC v7.6.0 では、双方向レプリケーションが構成された DDL ステートメントのレプリケーションが導入されました。以前は、TiCDC は DDL ステートメントの双方向レプリケーションをサポートしていなかったため、TiCDC の双方向レプリケーションを使用するユーザーは、両方の TiDB クラスタで DDL ステートメントを個別に実行する必要がありました。この機能により、クラスタに`PRIMARY` BDR ロールを割り当てると、TiCDC はそのクラスタから`SECONDARY`クラスタに DDL ステートメントをレプリケートできます。
+    TiCDC v7.6.0 では、双方向レプリケーションが構成された DDL文のレプリケーションが導入されました。以前は、TiCDC は DDL文の双方向レプリケーションをサポートしていなかったため、TiCDC の双方向レプリケーションを使用するユーザーは、両方の TiDB クラスタで DDL文を個別に実行する必要がありました。この機能により、クラスタに`PRIMARY` BDR ロールを割り当てると、TiCDC はそのクラスタから`SECONDARY`クラスタに DDL文をレプリケートできます。
 
     バージョン8.3.0では、この機能が一般提供（GA）されます。
 
@@ -189,7 +189,7 @@ TiDBバージョン：8.3.0
 | [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso)                                     | 変更     | グローバルスコープを追加します。                                                                                                                                                                                                                                                                                         |
 | [`tidb_opt_projection_push_down`](/system-variables.md#tidb_opt_projection_push_down-new-in-v610)             | 変更     | GLOBAL スコープを追加し、変数の値をクラスタに永続化します。さらにテストを行った結果、デフォルト値を`OFF`から`ON`に変更します。これは、オプティマイザが`Projection` TiKV コプロセッサにプッシュできることを意味します。                                                                                                                                                                             |
 | [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)                           | 変更     | 値の範囲は`0`または`[536870912, 9223372036854775807]`に変更されました。キャッシュサイズが小さすぎてパフォーマンスが低下するのを避けるため、最小値は`536870912`バイト (つまり 512 MiB) です。                                                                                                                                                                             |
-| [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)                 | 新しく追加された | `ANALYZE TABLE`ステートメントの動作を制御します。デフォルト値の`PREDICATE`に設定すると、 [述語列](/statistics.md#collect-statistics-on-some-columns)の統計情報のみが収集されます。 `ALL`に設定すると、すべての列の統計情報が収集されます。                                                                                                                                         |
+| [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)                 | 新しく追加された | `ANALYZE TABLE`文の動作を制御します。デフォルト値の`PREDICATE`に設定すると、 [述語列](/statistics.md#collect-statistics-on-some-columns)の統計情報のみが収集されます。 `ALL`に設定すると、すべての列の統計情報が収集されます。                                                                                                                                         |
 | [`tidb_enable_lazy_cursor_fetch`](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)             | 新しく追加された | [カーソルフェッチ](/develop/dev-guide-connection-parameters.md#use-streamingresult-to-get-the-execution-result)機能の動作を制御します。                                                                                                                                                                                      |
 | [`tidb_enable_shared_lock_promotion`](/system-variables.md#tidb_enable_shared_lock_promotion-new-in-v830)     | 新しく追加された | 共有ロックを排他ロックにアップグレードする機能を有効にするかどうかを制御します。この変数のデフォルト値は`OFF`であり、これは共有ロックを排他ロックにアップグレードする機能が無効になっていることを意味します。                                                                                                                                                                                                |
 | [`tiflash_hashagg_preaggregation_mode`](/system-variables.md#tiflash_hashagg_preaggregation_mode-new-in-v830) | 新しく追加された | TiFlashにプッシュダウンされる2段階または3段階のHashAgg操作の最初の段階で使用される事前集計戦略を制御します。                                                                                                                                                                                                                                           |
@@ -206,7 +206,7 @@ TiDBバージョン：8.3.0
 
 ### システムテーブル {#system-tables}
 
-- [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)および[`INFORMATION_SCHEMA.CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md#cluster_processlist)システムテーブルに`SESSION_ALIAS`フィールドが追加され、DML ステートメントによって現在影響を受けている行数が表示されます。[#46889](https://github.com/pingcap/tidb/issues/46889) @[lcwangchao](https://github.com/lcwangchao)
+- [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)および[`INFORMATION_SCHEMA.CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md#cluster_processlist)システムテーブルに`SESSION_ALIAS`フィールドが追加され、DML文によって現在影響を受けている行数が表示されます。[#46889](https://github.com/pingcap/tidb/issues/46889) @[lcwangchao](https://github.com/lcwangchao)
 
 ## 非推奨機能 {#deprecated-features}
 
@@ -307,7 +307,7 @@ TiDBバージョン：8.3.0
     - `runtime error: invalid memory address or nil pointer dereference` `tidb_enable_inl_join_inner_multi_pattern`が発生する可能性がある問題を修正しました [#55169](https://github.com/pingcap/tidb/issues/55169) @[hawkingrei](https://github.com/hawkingrei)
     - `UNION`を含むクエリステートメントが誤った結果を返す可能性がある問題を修正しました [#52985](https://github.com/pingcap/tidb/issues/52985) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - `tot_col_size`テーブルの`mysql.stats_histograms`列が負の数になる可能性がある問題を修正しました [#55126](https://github.com/pingcap/tidb/issues/55126) @[qw4990](https://github.com/qw4990)
-    - `columnEvaluator`入力チャンク内の列参照を識別できず、SQL ステートメントの実行時に`runtime error: index out of range`が発生する問題を修正しました。 [#53713](https://github.com/pingcap/tidb/issues/53713) @[AilinKid](https://github.com/AilinKid)
+    - `columnEvaluator`入力チャンク内の列参照を識別できず、SQL文の実行時に`runtime error: index out of range`が発生する問題を修正しました。 [#53713](https://github.com/pingcap/tidb/issues/53713) @[AilinKid](https://github.com/AilinKid)
     - `STATS_EXTENDED`が予約語になる問題を修正 [#39573](https://github.com/pingcap/tidb/issues/39573) @[wddevries](https://github.com/wddevries)
     - `tidb_low_resolution`が有効になっている場合に`select for update`が実行できてしまう問題を修正しました [#54684](https://github.com/pingcap/tidb/issues/54684) @[cfzjywxk](https://github.com/cfzjywxk)
     - `tidb_redact_log`が有効になっている場合に、内部SQLクエリがスロークエリログに表示されない問題を修正しました [#54190](https://github.com/pingcap/tidb/issues/54190) @[lcwangchao](https://github.com/lcwangchao)
@@ -322,7 +322,7 @@ TiDBバージョン：8.3.0
     - クエリに相関のないサブクエリと`LIMIT`句が含まれている場合、列のプルーニングが不完全になり、最適ではない実行計画が生成される可能性がある問題を修正しました。 [#54213](https://github.com/pingcap/tidb/issues/54213) @[qw4990](https://github.com/qw4990)
     - `SELECT ... FOR UPDATE`の誤ったPointGetプランを再利用してしまう問題を修正します [#54652](https://github.com/pingcap/tidb/issues/54652) @[qw4990](https://github.com/qw4990)
     - `TIMESTAMPADD()`関数の最初の引数が`month`で、2 番目の引数が負の値の場合に無限ループに陥る問題を修正しました。 [#54908](https://github.com/pingcap/tidb/issues/54908) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - スローログ内の内部SQLステートメントがデフォルトでnullに秘匿化される問題を修正[#54190](https://github.com/pingcap/tidb/issues/54190) [#52743](https://github.com/pingcap/tidb/issues/52743) [#53264](https://github.com/pingcap/tidb/issues/53264) @[lcwangchao](https://github.com/lcwangchao)
+    - スローログ内の内部SQL文がデフォルトでnullに秘匿化される問題を修正[#54190](https://github.com/pingcap/tidb/issues/54190) [#52743](https://github.com/pingcap/tidb/issues/52743) [#53264](https://github.com/pingcap/tidb/issues/53264) @[lcwangchao](https://github.com/lcwangchao)
     - `PointGet`の実行計画が`_tidb_rowid`に対して生成されてしまう問題を修正します [#54583](https://github.com/pingcap/tidb/issues/54583) @[Defined2014](https://github.com/Defined2014)
     - `SHOW IMPORT JOBS`が v7.1 からアップグレード後にエラー`Unknown column 'summary'`を報告する問題を修正 [#54241](https://github.com/pingcap/tidb/issues/54241) @[tangenta](https://github.com/tangenta)
     - ビュー定義で列定義としてサブクエリが使用されている場合、 `information_schema.columns`を使用して列情報を取得すると警告 1356 が返される問題を修正しました [#54343](https://github.com/pingcap/tidb/issues/54343) @[lance6716](https://github.com/lance6716)

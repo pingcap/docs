@@ -7,7 +7,7 @@ summary: TiDBは、システムメタデータを表示するためのANSI標準
 
 情報スキーマは、ANSI 標準に準拠したシステムメタデータの表示方法を提供します。TiDB は、MySQL との互換性のために含まれているテーブルに加えて、多数のカスタム`INFORMATION_SCHEMA`テーブルも提供します。
 
-`INFORMATION_SCHEMA`テーブルの多くは、対応する`SHOW`ステートメントを持っています。 `INFORMATION_SCHEMA`をクエリする利点は、テーブル間で結合が可能であることです。
+`INFORMATION_SCHEMA`テーブルの多くは、対応する`SHOW`文を持っています。 `INFORMATION_SCHEMA`をクエリする利点は、テーブル間で結合が可能であることです。
 
 ## MySQL互換性のためのテーブル {#tables-for-mysql-compatibility}
 

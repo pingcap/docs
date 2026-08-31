@@ -221,7 +221,7 @@ EXPLAIN SELECT * FROM t2 WHERE a = (SELECT a FROM t1);
 3 rows in set (0.00 sec)
 ```
 
-上記の例では、 `a = (SELECT a FROM t1)`サブクエリは最適化中に計算され、 `t2.a=1`に書き換えられます。これにより、最適化中に定数伝播やフォールディングなどの最適化が可能になります。ただし、 `EXPLAIN`のステートメントの実行時間に影響します。サブクエリ自体の実行に時間がかかる場合、 `EXPLAIN`ステートメントが完了しない可能性があり、オンライントラブルシューティングに影響する可能性があります。
+上記の例では、 `a = (SELECT a FROM t1)`サブクエリは最適化中に計算され、 `t2.a=1`に書き換えられます。これにより、最適化中に定数伝播やフォールディングなどの最適化が可能になります。ただし、 `EXPLAIN`のステートメントの実行時間に影響します。サブクエリ自体の実行に時間がかかる場合、 `EXPLAIN`文が完了しない可能性があり、オンライントラブルシューティングに影響する可能性があります。
 
 TiDB v7.3.0以降、システム変数[`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730)が導入されました。この変数は、 `EXPLAIN`におけるこのようなサブクエリの事前実行を無効にするかどうかを制御します。この変数のデフォルト値は`OFF`で、これはサブクエリが事前計算されることを意味します。この変数を`ON`に設定すると、サブクエリの事前実行が無効になります。
 
@@ -249,4 +249,4 @@ EXPLAIN SELECT * FROM t2 WHERE a = (SELECT a FROM t1);
 
 > **Note:**
 >
-> [`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730) `EXPLAIN`ステートメントの動作にのみ影響し、 `EXPLAIN ANALYZE`ステートメントは引き続きサブクエリを事前に実行します。
+> [`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730) `EXPLAIN`文の動作にのみ影響し、 `EXPLAIN ANALYZE`文は引き続きサブクエリを事前に実行します。

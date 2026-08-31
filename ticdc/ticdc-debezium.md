@@ -18,7 +18,7 @@ Kafkaをダウンストリームシンクとして使用する場合は、 `sink
 
 新しい TiCDC アーキテクチャでは、Debezium プロトコルは次の種類のイベントをサポートします。
 
-- DDL event: DDL 変更レコードを表します。アップストリームの DDL ステートメントが正常に実行された後、DDL イベントはすべての Message Queue (MQ) パーティションに送信されます。
+- DDL event: DDL 変更レコードを表します。アップストリームの DDL文が正常に実行された後、DDL イベントはすべての Message Queue (MQ) パーティションに送信されます。
 
 - DML event: 行データ変更レコードを表します。DML イベントは行変更が発生したときに送信されます。変更後の行に関する情報が含まれます。
 
@@ -415,7 +415,7 @@ TiCDC は、キーと値の両方を Debezium 形式でエンコードして、D
 | フィールド名      | 型   | 説明                                            |
 |:----------|:-------|:-------------------------------------------------------|
 | `payload.ts_ms`     | Number | TiCDC がこのメッセージを生成した時点のタイムスタンプ（ミリ秒）。 |
-| `payload.ddl`    | String   | DDL イベントの SQL ステートメント。     |
+| `payload.ddl`    | String   | DDL イベントの SQL文。     |
 | `payload.databaseName`     | String   | イベントが発生したデータベースの名前。     |
 | `payload.source.commit_ts`     | Number  | イベントの `CommitTs` 値。       |
 | `payload.source.db`     | String   | イベントが発生したデータベースの名前。    |

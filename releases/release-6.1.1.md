@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.1.1 Release Notes
-summary: TiDB 6.1.1は2022年9月1日にリリースされました。変更点には、大文字と小文字を区別しない「SHOW DATABASES LIKE」ステートメント、「tidb_enable_outer_join_reorder」のデフォルト値の変更、オプティマイザとメトリクスレスポンスの圧縮の改善が含まれます。バグ修正では、「INL_HASH_JOIN」のハング、UPDATE`ステートメント実行中のパニック、クエリ結果の誤りなどの問題が修正されています。その他の変更点には、異なる品質基準に対するマルチレベルサポートと、「TiDB-community-toolkit」バイナリパッケージへの追加が含まれます。
+summary: TiDB 6.1.1は2022年9月1日にリリースされました。変更点には、大文字と小文字を区別しない「SHOW DATABASES LIKE」ステートメント、「tidb_enable_outer_join_reorder」のデフォルト値の変更、オプティマイザとメトリクスレスポンスの圧縮の改善が含まれます。バグ修正では、「INL_HASH_JOIN」のハング、UPDATE`文実行中のパニック、クエリ結果の誤りなどの問題が修正されています。その他の変更点には、異なる品質基準に対するマルチレベルサポートと、「TiDB-community-toolkit」バイナリパッケージへの追加が含まれます。
 ---
 
 # TiDB 6.1.1 Release Notes {#tidb-6-1-1-release-notes}
@@ -74,7 +74,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
     - `LIMIT` と併用すると`INL_HASH_JOIN`ハングする可能性がある問題を修正しました [＃35638](https://github.com/pingcap/tidb/issues/35638) @[guo-shaoge](https://github.com/guo-shaoge)
     - `UPDATE`文の実行時に TiDB がpanicする可能性がある問題を修正しました [＃32311](https://github.com/pingcap/tidb/issues/32311) @[Yisaer](https://github.com/Yisaer)
     - `SHOW COLUMNS`文を実行するときに TiDB がコプロセッサ要求を送信する可能性があるバグを修正しました。 [＃36496](https://github.com/pingcap/tidb/issues/36496) @[tangenta](https://github.com/tangenta)
-    - TiDBが`SHOW WARNINGS`ステートメントを実行するときに`invalid memory address or nil pointer dereference`エラーを返す可能性があるバグを修正しました [＃31569](https://github.com/pingcap/tidb/issues/31569) @[zyguan](https://github.com/zyguan)
+    - TiDBが`SHOW WARNINGS`文を実行するときに`invalid memory address or nil pointer dereference`エラーを返す可能性があるバグを修正しました [＃31569](https://github.com/pingcap/tidb/issues/31569) @[zyguan](https://github.com/zyguan)
     - 静的パーティションプルーニングモードで、テーブルが空の場合に集計条件を含むSQL文が間違った結果を返す可能性があるバグを修正[＃35295](https://github.com/pingcap/tidb/issues/35295) @[tiancaiamao](https://github.com/tiancaiamao)
     - Join Reorder 操作がその Outer Join 条件を誤ってプッシュダウンする問題を修正しました [＃37238](https://github.com/pingcap/tidb/issues/37238) @[winoros](https://github.com/winoros)
     - CTE スキーマハッシュコードが誤って複製され、CTE が複数回参照されると`Can't find column ... in schema ...`エラーが発生する問題を修正しました[＃35404](https://github.com/pingcap/tidb/issues/35404) @[AilinKid](https://github.com/AilinKid)
@@ -89,7 +89,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
     - TiDB Binlogが有効な場合、 `ALTER SEQUENCE`文を実行するとメタデータバージョンが間違って発生し、 Drainer が終了する可能性がある問題を修正しました。 [#36276](https://github.com/pingcap/tidb/issues/36276) @[AilinKid](https://github.com/AilinKid)
     - 極端なケースで起動時に誤った TiDB ステータスが表示される問題を修正[＃36791](https://github.com/pingcap/tidb/issues/36791) @[xhebox](https://github.com/xhebox)
     - TiDB Dashboardでパーティションテーブルの実行計画をクエリするときに発生する可能性のある`UnknownPlanID`問題を修正しました。 [＃35153](https://github.com/pingcap/tidb/issues/35153) @[time-and-fate](https://github.com/time-and-fate)
-    - LOAD DATA ステートメントでカラムリストが機能しない問題を修正しました [＃35198](https://github.com/pingcap/tidb/issues/35198) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
+    - LOAD DATA文でカラムリストが機能しない問題を修正しました [＃35198](https://github.com/pingcap/tidb/issues/35198) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
     - TiDB Binlogを有効にして重複した値を挿入すると発生する`data and columnID count not match`エラーの問題を修正[＃33608](https://github.com/pingcap/tidb/issues/33608) @[zyguan](https://github.com/zyguan)
     - `tidb_gc_life_time` の制限を解除 [＃35392](https://github.com/pingcap/tidb/issues/35392) @[TonsnakeLin](https://github.com/TonsnakeLin)
     - 空のフィールド終端文字が使用されている場合の`LOAD DATA`文のデッドループを修正[#33298](https://github.com/pingcap/tidb/issues/33298) @[zyguan](https://github.com/zyguan)

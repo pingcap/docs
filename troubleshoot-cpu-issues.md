@@ -32,7 +32,7 @@ summary: 読み取りおよび書き込みのレイテンシーが長くなる�
         - `set global tidb_auto_analyze_start_time='00:00 +0800';`
         - `set global tidb_auto_analyze_end_time='06:00 +0800';`
 - 実行計画をバインドする
-    - アプリケーションの SQL ステートメントを変更し、 `use index`を実行して、列のインデックスを一貫して使用します。
+    - アプリケーションの SQL文を変更し、 `use index`を実行して、列のインデックスを一貫して使用します。
     - 3.0バージョンでは、アプリケーションのSQL文を変更する必要はありません。`create global binding`を使用して、 `force index`のバインディングSQL文を作成します。
     - 4.0 バージョンでは[SQLプラン管理](/sql-plan-management.md)サポートされており、不安定な実行計画によるパフォーマンスの低下を回避します。
 

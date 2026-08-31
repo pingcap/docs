@@ -147,7 +147,7 @@ TiDB MCPサーバーは、MCPクライアントに以下の操作（ツール）
 
     - `sql_stmt` : SQLクエリステートメント（文字列、必須）
 
-- `db_execute` - SQLステートメント（DMLまたはDDL）を実行します
+- `db_execute` - SQL文（DMLまたはDDL）を実行します
 
     - `sql_stmts` : 単一のSQL文、またはSQL文の配列（文字列または配列、必須）
 

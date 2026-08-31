@@ -358,7 +358,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
     - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では Index Insight (ベータ) 機能はサポートされなくなりました。
 
-        代わりに、TiDB v8.5.0 以降のバージョンで利用可能な[インデックスアドバイザー](/index-advisor.md)を使用することをお勧めします。Index Advisor では`RECOMMEND INDEX` SQL ステートメントが導入されており、クエリのパフォーマンスを向上させるインデックスを推奨することで、ワークロードの最適化に役立ちます。
+        代わりに、TiDB v8.5.0 以降のバージョンで利用可能な[インデックスアドバイザー](/index-advisor.md)を使用することをお勧めします。Index Advisor では`RECOMMEND INDEX` SQL文が導入されており、クエリのパフォーマンスを向上させるインデックスを推奨することで、ワークロードの最適化に役立ちます。
 
     - 週次バックアップが有効になっている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで、ポイントインタイム リストア機能を手動で無効にできるようになりました。
 

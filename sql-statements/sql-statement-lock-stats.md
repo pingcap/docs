@@ -76,7 +76,7 @@ mysql> SHOW WARNINGS;
 
 さらに、 `LOCK STATS`を使用してパーティションの統計情報をロックすることもできます。例:
 
-パーティションテーブル`t`を作成し、そこにデータを挿入します。パーティション`p1`の統計情報がロックされていない場合、 `ANALYZE`ステートメントは正常に実行できます。
+パーティションテーブル`t`を作成し、そこにデータを挿入します。パーティション`p1`の統計情報がロックされていない場合、 `ANALYZE`文は正常に実行できます。
 
 ```sql
 mysql> CREATE TABLE t(a INT, b INT) PARTITION BY RANGE (a) (PARTITION p0 VALUES LESS THAN (10), PARTITION p1 VALUES LESS THAN (20), PARTITION p2 VALUES LESS THAN (30));

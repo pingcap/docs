@@ -48,7 +48,7 @@ TiDBのリソース制御機能は、TiDBレイヤーのフロー制御機能と
 - 異なるシステムに存在する複数の中小規模アプリケーションを単一のTiDBクラスタに統合します。アプリケーションのワークロードが増加しても、他のアプリケーションの正常な動作には影響しません。システムワークロードが低い場合、負荷の高いアプリケーションは設定されたクォータを超えても必要なシステムリソースを割り当てられるため、リソースを最大限に活用できます。
 - すべてのテスト環境を単一のTiDBクラスタに統合するか、より多くのリソースを消費するバッチタスクを単一のリソースグループにまとめるかを選択できます。これにより、ハードウェア利用率を向上させ、運用コストを削減しながら、重要なアプリケーションが常に必要なリソースを確保できるようになります。
 - システム内に複数のワークロードが存在する場合、異なるワークロードを別々のリソースグループに割り当てることができます。リソース制御機能を使用することで、トランザクションアプリケーションの応答時間がデータ分析やバッチ処理アプリケーションの影響を受けないようにすることができます。
-- クラスターで予期しないSQLパフォーマンスの問題が発生した場合、SQLバインディングとリソースグループを併用することで、SQLステートメントのリソース消費を一時的に制限できます。
+- クラスターで予期しないSQLパフォーマンスの問題が発生した場合、SQLバインディングとリソースグループを併用することで、SQL文のリソース消費を一時的に制限できます。
 
 さらに、リソース制御機能を合理的に活用することで、クラスタ数を削減し、運用・保守の難易度を下げ、管理コストを削減することができます。
 
@@ -134,7 +134,7 @@ TiDB Dashboardで[リソースマネージャーページ](/dashboard/dashboard-
 
 TiDB Self-Managedの場合、 [`CALIBRATE RESOURCE`](https://docs.pingcap.com/tidb/stable/sql-statement-calibrate-resource)ステートメントを使用してクラスタ容量を推定できます。
 
-TiDB Cloud Dedicated では、`CALIBRATE RESOURCE` ステートメントはサポートされていません。クラスターの RU 容量を見積もるには、代わりに TiDB Cloud コンソールの **Calibrate Resource** 機能を使用してください。詳細については、[Calibrate Resource](/tidb-cloud/calibrate-resource.md) を参照してください。
+TiDB Cloud Dedicated では、`CALIBRATE RESOURCE`文はサポートされていません。クラスターの RU 容量を見積もるには、代わりに TiDB Cloud コンソールの **Calibrate Resource** 機能を使用してください。詳細については、[Calibrate Resource](/tidb-cloud/calibrate-resource.md) を参照してください。
 
 </CustomContent>
 
@@ -223,7 +223,7 @@ SET RESOURCE GROUP rg1;
 
 #### 現在のステートメントをリソースグループにバインドします。 {#bind-the-current-statement-to-a-resource-group}
 
-SQL ステートメントに[`RESOURCE_GROUP(resource_group_name)`](/optimizer-hints.md#resource_groupresource_group_name)ヒントを追加することで、ステートメントがバインドされるリソースグループを指定できます。このヒントは`SELECT` 、 `INSERT` 、 `UPDATE` 、および`DELETE`ステートメントをサポートします。
+SQL文に[`RESOURCE_GROUP(resource_group_name)`](/optimizer-hints.md#resource_groupresource_group_name)ヒントを追加することで、ステートメントがバインドされるリソースグループを指定できます。このヒントは`SELECT` 、 `INSERT` 、 `UPDATE` 、および`DELETE`文をサポートします。
 
 システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820)が`ON`に設定されている場合、このヒントを使用するには`SUPER`または`RESOURCE_GROUP_ADMIN`または`RESOURCE_GROUP_USER`の権限が必要です。
 
@@ -278,11 +278,11 @@ SQL文のRU消費量は、以下の方法で確認できます。
 
 #### システム変数`tidb_last_query_info`を照会することで、前回のSQL実行で消費されたRUを表示する。 {#view-the-rus-consumed-by-the-last-sql-execution-by-querying-the-system-variable-tidb-last-query-info}
 
-TiDBはシステム変数[`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014)を提供します。このシステム変数には、最後に実行されたDMLステートメントの情報（SQL実行によって消費されたRUを含む）が記録されます。
+TiDBはシステム変数[`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014)を提供します。このシステム変数には、最後に実行されたDML文の情報（SQL実行によって消費されたRUを含む）が記録されます。
 
 例：
 
-1. `UPDATE`ステートメントを実行します。
+1. `UPDATE`文を実行します。
 
     ```sql
     UPDATE sbtest.sbtest1 SET k = k + 1 WHERE id = 1;
@@ -308,7 +308,7 @@ TiDBはシステム変数[`tidb_last_query_info`](/system-variables.md#tidb_last
     1 row in set (0.01 sec)
     ```
 
-    結果として、 `ru_consumption`はこの SQL ステートメントの実行によって消費された RU です。
+    結果として、 `ru_consumption`はこの SQL文の実行によって消費された RU です。
 
 #### SQL実行中に消費されたRUを`EXPLAIN ANALYZE`で表示する {#view-rus-consumed-during-sql-execution-by-explain-analyze}
 
@@ -330,7 +330,7 @@ TiDBはシステム変数[`tidb_last_query_info`](/system-variables.md#tidb_last
 
 #### RUの統計情報を`statements_summary`別に表示する {#view-ru-statistics-by-statements-summary}
 
-TiDB のシステムテーブル[`INFORMATION_SCHEMA.statements_summary`](/statement-summary-tables.md#statements_summary)には、SQL ステートメントの正規化および集計された統計情報が格納されます。このシステムテーブルを使用すると、SQL ステートメントの実行パフォーマンスを表示および分析できます。また、リソースグループ名、RU 消費量、利用可能な RU の待機時間など、リソース制御に関する統計情報も含まれています。詳細については、 [`statements_summary`フィールドの説明](/statement-summary-tables.md#statements_summary-fields-description)を参照してください。
+TiDB のシステムテーブル[`INFORMATION_SCHEMA.statements_summary`](/statement-summary-tables.md#statements_summary)には、SQL文の正規化および集計された統計情報が格納されます。このシステムテーブルを使用すると、SQL文の実行パフォーマンスを表示および分析できます。また、リソースグループ名、RU 消費量、利用可能な RU の待機時間など、リソース制御に関する統計情報も含まれています。詳細については、 [`statements_summary`フィールドの説明](/statement-summary-tables.md#statements_summary-fields-description)を参照してください。
 
 ### リソースグループのRU消費量を表示する {#view-the-ru-consumption-of-resource-groups}
 

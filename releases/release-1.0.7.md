@@ -19,7 +19,7 @@ summary: TiDB 1.0.7がリリースされました。コマンドの最適化、�
 - [`IndexJoin`に関する問題を修正](https://github.com/pingcap/tidb/pull/5623)
 - [DDLで`RunWorker`がfalseの場合の動作を更新します](https://github.com/pingcap/tidb/pull/5604)
 - [統計におけるテスト結果の安定性を向上](https://github.com/pingcap/tidb/pull/5609)
-- [`CREATE TABLE`ステートメントの`PACK_KEYS`構文をサポートします](https://github.com/pingcap/tidb/pull/5602)
+- [`CREATE TABLE`文の`PACK_KEYS`構文をサポートします](https://github.com/pingcap/tidb/pull/5602)
 - [パフォーマンスを最適化するために、null プッシュダウン スキーマに`row_id`列を追加します](https://github.com/pingcap/tidb/pull/5447)
 
 ## PD {#pd}

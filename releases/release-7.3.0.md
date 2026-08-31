@@ -69,9 +69,9 @@ TiDB バージョン: 7.3.0
 
 - リストとリスト列のパーティションテーブルはデフォルトのパーティションをサポートします [#20679](https://github.com/pingcap/tidb/issues/20679) @[mjonss](https://github.com/mjonss)@[bb7133](https://github.com/bb7133)
 
-    バージョン 7.3.0 より前では、 `INSERT`ステートメントを使用してリストまたはリスト COLUMNSパーティションテーブルにデータを挿入する場合、データはテーブルの指定されたパーティション条件を満たす必要があります。挿入するデータがこれらの条件のいずれにも満たない場合、ステートメントの実行が失敗するか、条件を満たさないデータは無視されます。
+    バージョン 7.3.0 より前では、 `INSERT`文を使用してリストまたはリスト COLUMNSパーティションテーブルにデータを挿入する場合、データはテーブルの指定されたパーティション条件を満たす必要があります。挿入するデータがこれらの条件のいずれにも満たない場合、ステートメントの実行が失敗するか、条件を満たさないデータは無視されます。
 
-    バージョン7.3.0以降、ListおよびList COLUMNSパーティションテーブルはデフォルトパーティションをサポートします。デフォルトパーティションが作成された後、挿入するデータがパーティション条件を満たさない場合、そのデータはデフォルトパーティションに書き込まれます。この機能により、ListおよびList COLUMNS パーティショニングの使いやすさが向上し、 `INSERT`ステートメントの実行失敗や、パーティション条件を満たさないデータによるデータの無視を防ぐことができます。
+    バージョン7.3.0以降、ListおよびList COLUMNSパーティションテーブルはデフォルトパーティションをサポートします。デフォルトパーティションが作成された後、挿入するデータがパーティション条件を満たさない場合、そのデータはデフォルトパーティションに書き込まれます。この機能により、ListおよびList COLUMNS パーティショニングの使いやすさが向上し、 `INSERT`文の実行失敗や、パーティション条件を満たさないデータによるデータの無視を防ぐことができます。
 
     この機能は、MySQL構文に対するTiDBの拡張機能であることに注意してください。デフォルトのパーティションを持つパーティションテーブルの場合、テーブル内のデータをMySQLに直接レプリケートすることはできません。
 
@@ -145,7 +145,7 @@ TiDB バージョン: 7.3.0
 | [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720) | 変更     | このシステム変数はバージョン7.3.0以降で有効になります。TiFlash MPPで非再帰的な共通テーブル式（CTE）を実行できるかどうかを制御します。 |
 | [`tidb_allow_tiflash_cop`](/system-variables.md#tidb_allow_tiflash_cop-new-in-v730)                                     | 新しく追加された | このシステム変数は、TiDBが計算タスクをTiFlashにプッシュダウンする際に、実行計画を生成するためのプロトコルを選択するために使用されます。   |
 | [`tidb_lock_unchanged_keys`](/system-variables.md#tidb_lock_unchanged_keys-new-in-v711-and-v730)                        | 新しく追加された | この変数は、特定のシナリオにおいて、トランザクションに関与しているものの、変更されていないキーをロックするかどうかを制御するために使用されます。     |
-| [`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730) | 新しく追加された | `EXPLAIN`ステートメントが、最適化段階で展開可能な定数サブクエリの実行を無効にするかどうかを制御します。                     |
+| [`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730) | 新しく追加された | `EXPLAIN`文が、最適化段階で展開可能な定数サブクエリの実行を無効にするかどうかを制御します。                     |
 | [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730)               | 新しく追加された | この変数は、パーティション統計情報が欠落している場合にグローバル統計情報を生成するかどうかを制御します。                         |
 | [`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730)                                         | 新しく追加された | クエリがTiFlashエンジンを必要とする場合に、 TiFlashレプリカを選択する戦略を制御します。                          |
 
@@ -194,7 +194,7 @@ TiDB バージョン: 7.3.0
 
 - TiDB
 
-    - `EXPLAIN`ステートメントが最適化フェーズ中にサブクエリを事前に実行するかどうかを制御するための新しいシステム変数[`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730)を導入します [#22076](https://github.com/pingcap/tidb/issues/22076) @[winoros](https://github.com/winoros)
+    - `EXPLAIN`文が最適化フェーズ中にサブクエリを事前に実行するかどうかを制御するための新しいシステム変数[`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730)を導入します [#22076](https://github.com/pingcap/tidb/issues/22076) @[winoros](https://github.com/winoros)
     - [グローバルキル](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が有効な場合、 <kbd>Ctrl+C</kbd>を押すと現在のセッションを終了できます [#8854](https://github.com/pingcap/tidb/issues/8854) @[pingyu](https://github.com/pingyu)
     - `IS_FREE_LOCK()`および`IS_USED_LOCK()`のロック関数をサポートする [#44493](https://github.com/pingcap/tidb/issues/44493) @[dveeden](https://github.com/dveeden)
     - ディスクからダンプされたチャンクを読み取るパフォーマンスを最適化 [#45125](https://github.com/pingcap/tidb/issues/45125) @[YangKeao](https://github.com/YangKeao)

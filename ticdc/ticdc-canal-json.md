@@ -317,7 +317,7 @@ v6.5.6、v7.1.3、v7.6.0以降、 TiCDC Canal-JSONは公式Canalのデータ形�
 - TiCDCでは、 `old`フィールドにすべての列データが含まれます。
 - 公式Canalでは、 `old`フィールドには変更された列データのみが含まれます。
 
-次の SQL ステートメントがアップストリーム TiDB で順番に実行されると仮定します。
+次の SQL文がアップストリーム TiDB で順番に実行されると仮定します。
 
 ```sql
 create table tp_int
@@ -338,7 +338,7 @@ values (127, 32767, 8388607, 2147483647, 9223372036854775807);
 update tp_int set c_int = 0, c_tinyint = 0 where c_smallint = 32767;
 ```
 
-`update`ステートメントでは、TiCDCは以下に示すように、 `type`を`UPDATE`としてイベントメッセージを出力します。`update`ステートメントは、列番号`c_int`と`c_tinyint`のみを変更します。出力イベントメッセージの`old`フィールドには、すべての列データが含まれます。
+`update`文では、TiCDCは以下に示すように、 `type`を`UPDATE`としてイベントメッセージを出力します。`update`文は、列番号`c_int`と`c_tinyint`のみを変更します。出力イベントメッセージの`old`フィールドには、すべての列データが含まれます。
 
 ```json
 {
@@ -414,7 +414,7 @@ update tp_int set c_int = 0, c_tinyint = 0 where c_smallint = 32767;
 
 以下の例では、テーブル定義SQL文に、 `decimal` 、 `char` 、 `varchar` 、 `enum`といった各列のパラメータが含まれています。TiCDCによって生成されたCanal-JSON形式と公式Canalを比較すると、TiCDCでは`mysqlType`フィールドにMySQLの基本情報のみが含まれていることがわかります。typeパラメータの完全な情報が必要な場合は、別の方法で実装する必要があります。
 
-次の SQL ステートメントがアップストリーム TiDB で順番に実行されると仮定します。
+次の SQL文がアップストリーム TiDB で順番に実行されると仮定します。
 
 ```sql
 create table t (

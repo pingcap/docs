@@ -32,7 +32,7 @@ TiDB バージョン: 6.1.6
 
 - TiDB
 
-    - `ignore_plan_cache`ヒントが`INSERT`ステートメントでは機能しない可能性がある問題を修正しました [＃40079](https://github.com/pingcap/tidb/issues/40079) [＃39717](https://github.com/pingcap/tidb/issues/39717) @[qw4990](https://github.com/qw4990)
+    - `ignore_plan_cache`ヒントが`INSERT`文では機能しない可能性がある問題を修正しました [＃40079](https://github.com/pingcap/tidb/issues/40079) [＃39717](https://github.com/pingcap/tidb/issues/39717) @[qw4990](https://github.com/qw4990)
     - `indexMerge`エラーに遭遇した後に TiDB がpanicする可能性がある問題を修正[＃41047](https://github.com/pingcap/tidb/issues/41047) [＃40877](https://github.com/pingcap/tidb/issues/40877) @[guo-shaoge](https://github.com/guo-shaoge) @[windtalker](https://github.com/windtalker)
     - 仮想列を持つ TopN オペレーターが誤って TiKV またはTiFlashにプッシュダウンすると、誤った結果が返される可能性がある問題を修正しました。 [＃41355](https://github.com/pingcap/tidb/issues/41355) @[Dousir9](https://github.com/Dousir9)
     - 多数のリージョンがあるが、 `Prepare`または`Execute`を使用して一部の仮想テーブルをクエリするときにテーブル ID をプッシュダウンできないという PD OOM 問題を修正しました。 [＃39605](https://github.com/pingcap/tidb/issues/39605) @[djshow832](https://github.com/djshow832)
@@ -56,7 +56,7 @@ TiDB バージョン: 6.1.6
     - DDL文の実行中に`PointGet`を使用してテーブルを読み込むSQL文がpanicをスローする可能性がある問題を修正しました。 [＃41622](https://github.com/pingcap/tidb/issues/41622) @[tiancaiamao](https://github.com/tiancaiamao)
     - トランザクション内で`PointUpdate`を実行した後、TiDB が`SELECT`文に対して誤った結果を返す問題を修正しました。 [＃28011](https://github.com/pingcap/tidb/issues/28011) @[zyguan](https://github.com/zyguan)
     - メモリリークとパフォーマンスの低下を防ぐため、期限切れのリージョンキャッシュを定期的にクリアします[＃40461](https://github.com/pingcap/tidb/issues/40461) @[sticnarf](https://github.com/sticnarf) @[zyguan](https://github.com/zyguan)
-    - `INSERT IGNORE` および `REPLACE` ステートメントが値を変更しないキーをロックしない問題を修正しました [＃42121](https://github.com/pingcap/tidb/issues/42121) @[zyguan](https://github.com/zyguan)
+    - `INSERT IGNORE` および `REPLACE`文が値を変更しないキーをロックしない問題を修正しました [＃42121](https://github.com/pingcap/tidb/issues/42121) @[zyguan](https://github.com/zyguan)
 
 - TiKV
 
@@ -82,7 +82,7 @@ TiDB バージョン: 6.1.6
 
     - TiCDC
 
-        - データレプリケーション中の`UPDATE`と`INSERT`ステートメントの順序が乱れると、 `Duplicate entry`エラーが発生する可能性がある問題を修正しました。 [＃8597](https://github.com/pingcap/tiflow/issues/8597) @[sdojjy](https://github.com/sdojjy)
+        - データレプリケーション中の`UPDATE`と`INSERT`文の順序が乱れると、 `Duplicate entry`エラーが発生する可能性がある問題を修正しました。 [＃8597](https://github.com/pingcap/tiflow/issues/8597) @[sdojjy](https://github.com/sdojjy)
         - PDとTiCDC間のネットワーク分離によって発生するTiCDCサービスの異常終了問題を修正 [＃8562](https://github.com/pingcap/tiflow/issues/8562) @[overvenus](https://github.com/overvenus)
         - TiDB または MySQL シンクにデータを複製するときに、主キーのない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`を指定した場合に発生するデータの不整合を修正しました。 [＃8420](https://github.com/pingcap/tiflow/issues/8420) @[zhaoxinyu](https://github.com/zhaoxinyu)
         - `db sorter`のメモリ使用量が`cgroup memory limit`で制御されない問題を修正 [＃8588](https://github.com/pingcap/tiflow/issues/8588) @[amyangfei](https://github.com/amyangfei)

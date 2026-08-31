@@ -313,7 +313,7 @@ TiDB Cloud の監査ログは可読なテキストファイルであり、完全
 | 12 | USER | VARCHAR | 17 | ログインユーザー名    |
 | 13 | DATABASE | VARCHAR | 64 | イベントに関連するデータベース      |
 | 14 | TABLES | VARCHAR | 64 | イベントに関連するテーブル名          |
-| 15 | SQL_TEXT | VARCHAR | 64 KB | マスクされた SQL ステートメント   |
+| 15 | SQL_TEXT | VARCHAR | 64 KB | マスクされた SQL文   |
 | 16 | ROWS | INTEGER |  | 影響を受けた行数（`0` は影響を受けた行がないことを示します）      |
 
 TiDB によって設定される EVENT_CLASS フィールドの値に応じて、監査ログ内のデータベースイベントレコードには次の追加フィールドも含まれます。
@@ -338,5 +338,5 @@ TiDB によって設定される EVENT_CLASS フィールドの値に応じて�
     |---|---|---|---|---|
     | 17 | CONNECTION_ID | INTEGER |  | 接続 ID   |
     | 18 | COMMAND | VARCHAR | 14 | MySQL プロトコルのコマンドタイプ |
-    | 19 | SQL_STATEMENT  | VARCHAR | 17 | SQL ステートメントタイプ |
+    | 19 | SQL_STATEMENT  | VARCHAR | 17 | SQL文タイプ |
     | 20 | PID | INTEGER |  | TiDB プロセスの PID  |

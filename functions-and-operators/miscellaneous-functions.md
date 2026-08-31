@@ -32,7 +32,7 @@ TiDB は、MySQL 8.0 で利用可能な[その他の関数](https://dev.mysql.co
 
 ### ANY_VALUE() {#any_value}
 
-`ANY_VALUE()`関数は、値のグループから任意の値を返します。通常、 `SELECT`ステートメントに集計されていない列を`GROUP BY`句とともに含める必要があるシナリオで使用されます。
+`ANY_VALUE()`関数は、値のグループから任意の値を返します。通常、 `SELECT`文に集計されていない列を`GROUP BY`句とともに含める必要があるシナリオで使用されます。
 
 ```sql
 CREATE TABLE fruits (id INT PRIMARY KEY, name VARCHAR(255));
@@ -137,7 +137,7 @@ TABLE t1;
 1 row in set (0.00 sec)
 ```
 
-前述の例では、 `UPDATE`ステートメントは`c1`列の値を、列のデフォルト値 ( `5` ) に`3`を加えた値に設定し、結果として`8`という新しい値になります。
+前述の例では、 `UPDATE`文は`c1`列の値を、列のデフォルト値 ( `5` ) に`3`を加えた値に設定し、結果として`8`という新しい値になります。
 
 ### GROUPING() {#grouping}
 

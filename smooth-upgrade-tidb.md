@@ -98,7 +98,7 @@ You can take the following steps to upgrade TiDB manually or by using a script:
 
     - BR: BRは一時停止中のDDLジョブをTiDBに複製する可能性があります。一時停止中のDDLジョブは自動的に再開できないため、後でDDLジョブが停止する可能性があります。
 
-    - DM および TiCDC: アップグレードプロセス中に DM または TiCDC を使用して SQL ステートメントを TiDB にインポートする場合、SQL ステートメントの 1つに DDL 操作が含まれていると、インポート操作がブロックされ、未定義のエラーが発生する可能性があります。
+    - DM および TiCDC: アップグレードプロセス中に DM または TiCDC を使用して SQL文を TiDB にインポートする場合、SQL文の 1つに DDL 操作が含まれていると、インポート操作がブロックされ、未定義のエラーが発生する可能性があります。
 
 ### プラグインの制限 {#limitation-on-plugins}
 

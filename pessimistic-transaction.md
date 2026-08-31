@@ -37,8 +37,8 @@ TiDB の悲観的なトランザクションは、MySQL のトランザクショ
 
 - 悲観的トランザクションの場合、TiDBはスナップショット読み取りと現在の読み取りを導入します。
 
-    - スナップショット読み取り：これは、トランザクション開始前にコミットされたバージョンを読み取る、ロックされていない読み取りです。 `SELECT`ステートメントの読み取りは、スナップショット読み取りです。
-    - 現在の読み取り: これは、最新のコミット済みバージョンを読み取るロックされた読み取りです。 `UPDATE` 、 `DELETE` 、 `INSERT` 、または`SELECT FOR UPDATE`ステートメントの読み取りは、現在の読み取りです。
+    - スナップショット読み取り：これは、トランザクション開始前にコミットされたバージョンを読み取る、ロックされていない読み取りです。 `SELECT`文の読み取りは、スナップショット読み取りです。
+    - 現在の読み取り: これは、最新のコミット済みバージョンを読み取るロックされた読み取りです。 `UPDATE` 、 `DELETE` 、 `INSERT` 、または`SELECT FOR UPDATE`文の読み取りは、現在の読み取りです。
 
     以下の例は、スナップショット読み取りと現在の読み取りについて詳細に説明しています。
 
@@ -55,9 +55,9 @@ TiDB の悲観的なトランザクションは、MySQL のトランザクショ
     | COMMIT; -- ロックを解放します。セッション 3 の SELECT FOR UPDATE 操作がロックを取得し、TiDB は現在の読み取りを使用して最新のコミット済みバージョンを読み取ります。結果として a=2 が返されます。 |                                                                                             |                                                              |
     |                                                                                                                       | SELECT * FROM t; -- スナップショット読み取りを使用して、現在のトランザクションが開始される前にコミットされたバージョンを読み取ります。結果は a=1 を返します。 |                                                              |
 
-- `UPDATE` 、 `DELETE`または`INSERT`ステートメントを実行すると、**最後に**コミットされたデータが読み込まれ、データが変更され、変更された行に悲観的ロックが適用されます。
+- `UPDATE` 、 `DELETE`または`INSERT`文を実行すると、**最後に**コミットされたデータが読み込まれ、データが変更され、変更された行に悲観的ロックが適用されます。
 
-- `SELECT FOR UPDATE`ステートメントの場合、変更された行ではなく、コミットされたデータの最新バージョンに対して悲観的ロックが適用されます。
+- `SELECT FOR UPDATE`文の場合、変更された行ではなく、コミットされたデータの最新バージョンに対して悲観的ロックが適用されます。
 
 - トランザクションがコミットまたはロールバックされると、ロックが解除されます。データの変更を試みる他のトランザクションはブロックされ、ロックが解除されるまで待機する必要があります。TiDBはマルチバージョン同時実行制御（MVCC）を使用しているため、データの*読み取り*を試みるトランザクションはブロックされません。
 
@@ -81,7 +81,7 @@ TiDB の悲観的なトランザクションは、MySQL のトランザクショ
 
 ## MySQL InnoDBとの違い {#differences-from-mysql-innodb}
 
-1. TiDB が WHERE 句で範囲を使用する DML または`SELECT FOR UPDATE`ステートメントを実行する場合、範囲内の同時実行 DML ステートメントはブロックされません。
+1. TiDB が WHERE 句で範囲を使用する DML または`SELECT FOR UPDATE`文を実行する場合、範囲内の同時実行 DML文はブロックされません。
 
     例えば：
 
@@ -110,11 +110,11 @@ TiDB の悲観的なトランザクションは、MySQL のトランザクショ
 
     TiDB はデフォルトでは`SELECT LOCK IN SHARE MODE`構文をサポートしていません。[`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)を有効にすることで、TiDB を`SELECT LOCK IN SHARE MODE`構文と互換性を持たせることができます。 `SELECT LOCK IN SHARE MODE`を実行しても、ロックなしの場合と同じ効果が得られるため、他のトランザクションの読み取りまたは書き込み操作をブロックすることはありません。
 
-    TiDB は v8.3.0 以降、 [`tidb_enable_shared_lock_promotion`](/system-variables.md#tidb_enable_shared_lock_promotion-new-in-v830)システム変数を使用して`SELECT LOCK IN SHARE MODE`ステートメントを有効にしてロックを追加することをサポートしています。ただし、この時点で追加されるロックは真の共有ロックではなく、 `SELECT FOR UPDATE`と互換性のある排他ロックであることに注意してください。読み取り中に並列書き込みトランザクションによってデータが変更されないように書き込みをブロックしつつ、TiDB を`SELECT LOCK IN SHARE MODE`構文と互換性を維持したい場合は、この変数を有効にできます。この変数を有効にすると、 [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)が有効になっているかどうかに関係なく、 `SELECT LOCK IN SHARE MODE`ステートメントに影響します。
+    TiDB は v8.3.0 以降、 [`tidb_enable_shared_lock_promotion`](/system-variables.md#tidb_enable_shared_lock_promotion-new-in-v830)システム変数を使用して`SELECT LOCK IN SHARE MODE`文を有効にしてロックを追加することをサポートしています。ただし、この時点で追加されるロックは真の共有ロックではなく、 `SELECT FOR UPDATE`と互換性のある排他ロックであることに注意してください。読み取り中に並列書き込みトランザクションによってデータが変更されないように書き込みをブロックしつつ、TiDB を`SELECT LOCK IN SHARE MODE`構文と互換性を維持したい場合は、この変数を有効にできます。この変数を有効にすると、 [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)が有効になっているかどうかに関係なく、 `SELECT LOCK IN SHARE MODE`文に影響します。
 
 3. DDLは、悲観的トランザクションコミットの失敗につながる可能性があります。
 
-    MySQL で DDL を実行すると、実行中のトランザクションによってブロックされる可能性があります。しかし、このシナリオでは、TiDB で DDL 操作がブロックされないため、悲観的トランザクションコミット`ERROR 1105 (HY000): Information schema is changed. [try again later]`が失敗します。TiDB はトランザクションの実行中に`TRUNCATE TABLE`ステートメントを実行するため、 `table doesn't exist`エラーが発生する可能性があります。
+    MySQL で DDL を実行すると、実行中のトランザクションによってブロックされる可能性があります。しかし、このシナリオでは、TiDB で DDL 操作がブロックされないため、悲観的トランザクションコミット`ERROR 1105 (HY000): Information schema is changed. [try again later]`が失敗します。TiDB はトランザクションの実行中に`TRUNCATE TABLE`文を実行するため、 `table doesn't exist`エラーが発生する可能性があります。
 
 4. `START TRANSACTION WITH CONSISTENT SNAPSHOT`を実行した後でも、MySQL は他のトランザクションで後から作成されたテーブルを読み取ることができますが、TiDB はできません。
 
@@ -122,7 +122,7 @@ TiDB の悲観的なトランザクションは、MySQL のトランザクショ
 
     悲観的モデルを使用する場合、自動コミットトランザクションはまずオーバーヘッドの少ない楽観的モデルを使用してステートメントのコミットを試みます。書き込み競合が発生した場合は、トランザクションの再試行に悲観的モデルが使用されます。したがって、 `tidb_retry_limit`が`0`に設定されていても、書き込み競合が発生すると自動コミットトランザクションは`Write Conflict`エラーを報告します。
 
-    autocommit `SELECT FOR UPDATE`ステートメントはロックを待ちません。
+    autocommit `SELECT FOR UPDATE`文はロックを待ちません。
 
 6. ステートメント内の`EMBEDDED SELECT`によって読み取られたデータはロックされていません。
 

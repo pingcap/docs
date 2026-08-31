@@ -70,8 +70,8 @@ API を使用して、DM クラスターで次のメンテナンス操作を実�
 - [レプリケーションタスクの移行ルールを取得する](#get-the-migration-rules-of-a-replication-task)
 - [レプリケーションタスクに関連付けられているデータソースのスキーマ名のリストを取得します](#get-the-list-of-schema-names-of-the-data-source-that-is-associated-with-a-replication-task)
 - [レプリケーションタスクに関連付けられたデータソース内の指定されたスキーマのテーブル名のリストを取得します](#get-the-list-of-table-names-of-a-specified-schema-in-the-data-source-that-is-associated-with-a-replication-task)
-- [レプリケーションタスクに関連付けられているデータソースのスキーマの CREATE ステートメントを取得します](#get-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task)
-- [レプリケーションタスクに関連付けられているデータソースのスキーマのCREATEステートメントを更新します](#update-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task)
+- [レプリケーションタスクに関連付けられているデータソースのスキーマの CREATE文を取得します](#get-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task)
+- [レプリケーションタスクに関連付けられているデータソースのスキーマのCREATE文を更新します](#update-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task)
 - [レプリケーションタスクに関連付けられているデータソースのスキーマを削除します](#delete-a-schema-of-the-data-source-that-is-associated-with-a-replication-task)
 
 次のセクションでは、API の具体的な使用方法について説明します。
@@ -1535,9 +1535,9 @@ curl -X 'GET' \
 ]
 ```
 
-## レプリケーションタスクに関連付けられているデータソースのスキーマの CREATE ステートメントを取得します。 {#get-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task}
+## レプリケーションタスクに関連付けられているデータソースのスキーマの CREATE文を取得します。 {#get-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task}
 
-このAPIは同期インターフェースです。リクエストが成功すると、対応するCREATEステートメントが返されます。
+このAPIは同期インターフェースです。リクエストが成功すると、対応するCREATE文が返されます。
 
 ### リクエストURI {#request-uri}
 
@@ -1559,7 +1559,7 @@ curl -X 'GET' \
 }
 ```
 
-## レプリケーションタスクに関連付けられているデータソースのスキーマのCREATEステートメントを更新します {#update-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task}
+## レプリケーションタスクに関連付けられているデータソースのスキーマのCREATE文を更新します {#update-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task}
 
 このAPIは同期インターフェースです。リクエストが成功した場合、返されるボディのステータスコードは200です。
 

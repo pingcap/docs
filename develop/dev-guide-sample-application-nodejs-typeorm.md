@@ -219,7 +219,7 @@ npm install @types/node ts-node typescript --save-dev
 
 ### ステップ4：データベーススキーマを初期化する {#step-4-initialize-the-database-schema}
 
-次のコマンドを実行して TypeORM CLI を起動し、 `src/migrations`フォルダー内の移行ファイルに記述された SQL ステートメントを使用してデータベースを初期化します。
+次のコマンドを実行して TypeORM CLI を起動し、 `src/migrations`フォルダー内の移行ファイルに記述された SQL文を使用してデータベースを初期化します。
 
 ```shell
 npm run migration:run
@@ -227,7 +227,7 @@ npm run migration:run
 
 <details><summary><b>期待される実行出力</b></summary>
 
-以下の SQL ステートメントは`players`テーブルと`profiles`テーブルを作成し、2つのテーブルは外部キーによって関連付けられます。
+以下の SQL文は`players`テーブルと`profiles`テーブルを作成し、2つのテーブルは外部キーによって関連付けられます。
 
 ```sql
 query: SELECT VERSION() AS `version`
@@ -361,7 +361,7 @@ await this.dataSource.manager.delete(Player, {
 
 ### 生のSQLクエリを実行する {#execute-raw-sql-queries}
 
-次のクエリは、生のSQLステートメント（ `SELECT VERSION() AS tidb_version;` ）を実行し、TiDBのバージョンを返します。
+次のクエリは、生のSQL文（ `SELECT VERSION() AS tidb_version;` ）を実行し、TiDBのバージョンを返します。
 
 ```typescript
 const rows = await dataSource.query('SELECT VERSION() AS tidb_version;');

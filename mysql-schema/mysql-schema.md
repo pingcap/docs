@@ -92,14 +92,14 @@ summary: TiDBのシステムテーブルについて学びましょう。
 
 ## メタデータロックに関連するシステムテーブル {#system-tables-related-to-metadata-locks}
 
-- [`tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md) : メタデータロックのビュー。これを使用して、現在ブロックされている DDL ステートメントに関する情報を表示できます。[メタデータロック](/metadata-lock.md)も参照してください。
+- [`tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md) : メタデータロックのビュー。これを使用して、現在ブロックされている DDL文に関する情報を表示できます。[メタデータロック](/metadata-lock.md)も参照してください。
 - `tidb_mdl_info` : TiDB が内部的に使用して、ノード間でメタデータロックを同期します。
 
-## DDLステートメントに関連するシステムテーブル {#system-tables-related-to-ddl-statements}
+## DDL文に関連するシステムテーブル {#system-tables-related-to-ddl-statements}
 
-- `tidb_ddl_history` : DDLステートメントの履歴レコード
-- `tidb_ddl_job` : TiDBによって現在実行されているDDLステートメントのメタデータ
-- `tidb_ddl_reorg` : TiDBによって現在実行されている物理DDLステートメント（インデックスの追加など）のメタデータ
+- `tidb_ddl_history` : DDL文の履歴レコード
+- `tidb_ddl_job` : TiDBによって現在実行されているDDL文のメタデータ
+- `tidb_ddl_reorg` : TiDBによって現在実行されている物理DDL文（インデックスの追加など）のメタデータ
 
 ## TiDB分散実行フレームワーク（DXF）に関連するシステムテーブル {#system-tables-related-to-tidb-distributed-execution-framework-dxf}
 

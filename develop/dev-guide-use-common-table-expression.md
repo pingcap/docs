@@ -1,6 +1,6 @@
 ---
 title: Common Table Expression
-summary: SQL ステートメントをより効率的に記述するのに役立つ TiDB の CTE 機能を学習します。
+summary: SQL文をより効率的に記述するのに役立つ TiDB の CTE 機能を学習します。
 aliases: ['/ja/tidb/stable/dev-guide-use-common-table-expression/','/ja/tidbcloud/dev-guide-use-common-table-expression/']
 ---
 
@@ -159,7 +159,7 @@ FROM
 4 rows in set (0.06 sec)
 ```
 
-この SQL ステートメントでは、 `,`で区切られた 3つの CTE ブロックが定義されています。
+この SQL文では、 `,`で区切られた 3つの CTE ブロックが定義されています。
 
 まず、CTEブロック`books_authored_by_rm`で著者（ID `2299112019` ）が執筆した書籍を調べます。次に、 `books_with_average_ratings`と`books_with_orders`でこれらの書籍の平均評価と順位をそれぞれ求めます。最後に、 `JOIN`ステートメントで結果を集計します。
 

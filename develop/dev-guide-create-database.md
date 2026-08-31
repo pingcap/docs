@@ -21,7 +21,7 @@ TiDB のオブジェクトには[データベース](/develop/dev-guide-schema-d
 
 ## データベースを作成する {#create-databases}
 
-データベースを作成するには、 `CREATE DATABASE`ステートメントを使用できます。
+データベースを作成するには、 `CREATE DATABASE`文を使用できます。
 
 例えば、 `bookshop`という名前のデータベースが存在しない場合、それを作成するには、次のステートメントを使用します。
 
@@ -29,7 +29,7 @@ TiDB のオブジェクトには[データベース](/develop/dev-guide-schema-d
 CREATE DATABASE IF NOT EXISTS `bookshop`;
 ```
 
-`CREATE DATABASE`ステートメントの詳細と例については、 [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)ドキュメントを参照してください。
+`CREATE DATABASE`文の詳細と例については、 [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)ドキュメントを参照してください。
 
 `root`ユーザーとしてライブラリビルドステートメントを実行するには、次のコマンドを実行します。
 
@@ -74,7 +74,7 @@ mysql
 ## データベース作成におけるルール {#rules-in-database-creation}
 
 - データベース[データベース命名規則](/develop/dev-guide-object-naming-guidelines.md)に従って、データベースに意味のある名前を付けます。
-- TiDBには`test`という名前のデフォルトデータベースが付属しています。ただし、必要がない限り、本番環境での使用は推奨されません。 `CREATE DATABASE`ステートメントを使用して独自のデータベースを作成し、SQLセッションで[`USE {databasename};`](/sql-statements/sql-statement-use.md)ステートメントを使用して現在のデータベースを変更できます。
+- TiDBには`test`という名前のデフォルトデータベースが付属しています。ただし、必要がない限り、本番環境での使用は推奨されません。 `CREATE DATABASE`文を使用して独自のデータベースを作成し、SQLセッションで[`USE {databasename};`](/sql-statements/sql-statement-use.md)ステートメントを使用して現在のデータベースを変更できます。
 - `root`ユーザーを使用して、データベース、ロール、ユーザーなどのオブジェクトを作成します。ロールとユーザーには、必要な権限のみを付与してください。
 - ベストプラクティスとして、データベーススキーマの変更を実行する際には、ドライバやORMではなく、 **MySQLコマンドラインクライアント**または**MySQL GUIクライアント**を使用することをお勧めします。
 
