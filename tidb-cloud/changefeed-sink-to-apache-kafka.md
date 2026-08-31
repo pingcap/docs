@@ -260,10 +260,10 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
     - **Event Filter**：以下のイベントフィルターを使用して、変更フィードから特定のイベントを除外できます。
         - **Ignore event**：指定されたイベントタイプを除外します。
         - **Ignore SQL**: 指定された式に一致する DDL イベントを除外します。たとえば、 `^drop` `DROP`で始まるステートメントを除外し、 `add column`は`ADD COLUMN`を含むステートメントを除外します。
-        - **Ignore insert value expression**: 特定の条件を満たす`INSERT`ステートメントを除外します。たとえば、 `id >= 100`は、 `INSERT`が 100 以上である`id`ステートメントを除外します。
+        - **Ignore insert value expression**: 特定の条件を満たす`INSERT`ステートメントを除外します。たとえば、`id >= 100`は、`id`が 100 以上である`INSERT`ステートメントを除外します。
         - **Ignore update new value expression**: 新しい値が指定された条件に一致する`UPDATE`ステートメントを除外します。たとえば、 `gender = 'male'`は`gender`が`male`になるような更新を除外します。
         - **Ignore update old value expression**: 古い値が指定された条件に一致する`UPDATE`ステートメントを除外します。たとえば、 `age < 18` `age`の古い値が 18 未満である場合の更新を除外します。
-        - **Ignore delete value expression**: 指定された条件を満たす`DELETE`ステートメントを除外します。たとえば、 `name = 'john'`は`DELETE`が`name`である`'john'`ステートメントを除外します。
+        - **Ignore delete value expression**: 指定された条件を満たす`DELETE`ステートメントを除外します。たとえば、`name = 'john'`は`name`が`'john'`である`DELETE`ステートメントを除外します。
 
 3. **Column Selector**カスタマイズして、イベントから列を選択し、選択した列に関連するデータ変更のみを下流に送信します。
 
