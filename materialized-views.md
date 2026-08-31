@@ -22,25 +22,37 @@ Materialized views are intended for workloads that repeatedly read the same quer
 
 ## How it works
 
-TiDB materialized views are backed by stored data derived from a query. The final design will define how TiDB creates, refreshes, and invalidates that data.
+TiDB materialized views are backed by stored data derived from a query. This page covers how to create, refresh, query, and manage materialized views.
 
 ## Create and manage materialized views
 
 ### Create a materialized view
 
-This section will describe the supported creation flow, required clauses, and examples. <!-- TODO: fill in from the spec. -->
+For the syntax of this statement, see [`CREATE MATERIALIZED VIEW`](/sql-statements/sql-statement-create-materialized-view.md).
+
+### Create a materialized view log
+
+For the syntax of this statement, see [`CREATE MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-create-materialized-view-log.md).
 
 ### Refresh a materialized view
 
-This section will describe refresh behavior, supported refresh modes, and operational guidance. <!-- TODO: fill in from the spec. -->
+This section will describe refresh behavior, supported refresh modes, and operational guidance. The `REFRESH` clause syntax is documented in [`CREATE MATERIALIZED VIEW`](/sql-statements/sql-statement-create-materialized-view.md) and [`ALTER MATERIALIZED VIEW`](/sql-statements/sql-statement-alter-materialized-view.md). <!-- TODO: fill in from the spec. -->
 
 ### Query a materialized view
 
 This section will describe how queries resolve to the stored result and any optimizer behavior. <!-- TODO: fill in from the spec. -->
 
+### Alter a materialized view
+
+For the syntax of this statement, see [`ALTER MATERIALIZED VIEW`](/sql-statements/sql-statement-alter-materialized-view.md).
+
+### Alter a materialized view log
+
+For the syntax of this statement, see [`ALTER MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-alter-materialized-view-log.md).
+
 ### Drop a materialized view
 
-This section will describe cleanup behavior and any related objects. <!-- TODO: fill in from the spec. -->
+For the syntax of these statements, see [`DROP MATERIALIZED VIEW`](/sql-statements/sql-statement-drop-materialized-view.md) and [`DROP MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-drop-materialized-view-log.md).
 
 ## System tables
 
