@@ -130,7 +130,7 @@ To check or upgrade your support plan, perform the following steps:
 
     4. Click **Save Card** in the lower-right corner of the page.
 
-    After the payment is finished, you have upgraded your plan to **Standard** or **Enterprise**.
+    After the payment is finished, you have upgraded your plan to **Developer** or **Enterprise**.
 
     </div>
     <div label="Upgrade to Premium">
