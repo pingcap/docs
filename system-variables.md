@@ -6330,7 +6330,12 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 </CustomContent>
 
-### tidb_stmt_summary_group_by_user <span class="version-mark">TiDB-X-CLOUD.202603.1</span>
+### tidb_stmt_summary_group_by_user <span class="version-mark">New in v9.0.0 and TiDB-X-CLOUD.202603</span>
+
+> **Note:**
+>
+> - For TiDB Cloud Starter, this variable is not supported.
+> - For TiDB Cloud Essential and Premium, this variable is read-only.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -6416,7 +6421,12 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 </CustomContent>
 
-### tidb_stmt_summary_persist_evicted <span class="version-mark">New in TiDB-X-CLOUD.202603.1</span>
+### tidb_stmt_summary_persist_evicted <span class="version-mark">New in v9.0.0 and TiDB-X-CLOUD.202603</span>
+
+> **Note:**
+>
+> - For TiDB Cloud Starter, this variable is not supported.
+> - For TiDB Cloud Essential and Premium, this variable is read-only.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
