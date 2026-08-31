@@ -3,7 +3,7 @@ title: TiDB Cloud 支持
 summary: 了解如何联系 TiDB Cloud 支持团队。
 ---
 
-# TiDB Cloud 支持
+# TiDB Cloud 支持 <!--Corresponding EN commit: ae3312ed1419f363b8e875f4c3ac3a30a68446c1-->
 
 TiDB Cloud 提供分层支持计划，旨在满足客户的不同需求。关于我们的支持服务详情，请参见 [Connected Care 详情](/tidb-cloud/connected-care-detail.md)。
 
@@ -130,7 +130,7 @@ TiDB Cloud 默认提供免费基础支持计划。如需扩展服务，你可以
 
     4. 在页面右下角点击 **Save Card**。
 
-    支付完成后，你的计划将升级为 **Standard** 或 **Enterprise**。
+    支付完成后，你的计划将升级为 **Developer** 或 **Enterprise**。
 
     </div>
     <div label="Upgrade to Premium">
