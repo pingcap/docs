@@ -19,7 +19,7 @@ This document describes the software and hardware requirements for deploying and
 
 In v8.5 LTS, TiDB ensures multi-level quality standards for various combinations of operating systems and CPU architectures.
 
-+ **Tested and validated platforms.** In the following operating system and CPU architecture combinations, each TiDB release is fully validated through PingCAP's systematic test matrix. These combinations are recommended for production deployment.
++ **Tested and validated platforms.** For the following combinations of operating systems and CPU architectures, each TiDB release is validated against PingCAP's systematic test matrix. These combinations are recommended for production deployment.
 
     <table>
     <thead>
@@ -75,7 +75,7 @@ In v8.5 LTS, TiDB ensures multi-level quality standards for various combinations
     >
     > Support for Red Hat Enterprise Linux 9.x starts from [TiUP](https://github.com/pingcap/tiup/releases) v1.16.5.
 
-+ **Compatible platforms.** In the following combinations, TiDB can compile, build, and deploy, and supports OLTP, OLAP, and the data tools. These combinations are not included in the systematic per-release test matrix; compatibility is verified through build and deployment verification and extensive production usage by TiDB users. For production deployments on these platforms, contact PingCAP to confirm support coverage under your subscription.
++ **Compatible platforms.** In the following combinations, TiDB can be compiled, built, and deployed, and supports OLTP, OLAP, and data tools. These combinations are not included in the systematic per-release test matrix; compatibility is verified through build and deployment verification and extensive production usage by TiDB users. For production deployments on these platforms, contact PingCAP to confirm support coverage under your subscription.
 
     <table>
     <thead>
