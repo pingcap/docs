@@ -5935,7 +5935,11 @@ SHOW WARNINGS;
 - Default value: `80%`
 - Range:
     - You can set the value in the percentage format, which means the percentage of the memory usage relative to the total memory. The value range is `[1%, 99%]`.
+<<<<<<< HEAD
     - You can also set the value in memory size. The value range is `0` and `[536870912, 9223372036854775807]` in bytes. Memory formats with the units "KiB|MiB|GiB|TiB" or "KB|MB|GB|TB" are also supported. For example, you can set this variable to `90GiB` (no space between the number and the unit). `0` means no memory limit.
+=======
+    - You can also set the value in memory size. The value range is `0` and `[536870912, 9223372036854775807]` in bytes. Memory formats with the units "KiB|MiB|GiB|TiB" or "KB|MB|GB|TB" are also supported, for example, `90GiB` (no space between the number and the unit). `0` means no memory limit.
+>>>>>>> cb46edc6d5 (docs: add memory unit example for tidb_server_memory_limit (#23587) (#23657))
     - If this variable is set to a memory size that is less than 512 MiB but not `0`, TiDB uses 512 MiB as the actual size.
 - This variable specifies the memory limit for a TiDB instance. When the memory usage of TiDB reaches the limit, TiDB cancels the currently running SQL statement with the highest memory usage. After the SQL statement is successfully canceled, TiDB tries to call Golang GC to immediately reclaim memory to relieve memory stress as soon as possible.
 - Only the SQL statements with more memory usage than the [`tidb_server_memory_limit_sess_min_size`](/system-variables.md#tidb_server_memory_limit_sess_min_size-new-in-v640) limit are selected as the SQL statements to be canceled first.
@@ -5964,7 +5968,11 @@ SHOW WARNINGS;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `134217728` (which is 128 MiB)
+<<<<<<< HEAD
 - Range: `[128, 9223372036854775807]`, in bytes. Memory formats with the units "KiB|MiB|GiB|TiB" or "KB|MB|GB|TB" are also supported. For example, you can set this variable to `90GiB` (no space between the number and the unit).
+=======
+- Range: `[128, 9223372036854775807]`, in bytes. Memory formats with the units "KiB|MiB|GiB|TiB" or "KB|MB|GB|TB" are also supported, for example, `130MiB` (no space between the number and the unit).
+>>>>>>> cb46edc6d5 (docs: add memory unit example for tidb_server_memory_limit (#23587) (#23657))
 - After you enable the memory limit, TiDB will terminate the SQL statement with the highest memory usage on the current instance. This variable specifies the minimum memory usage of the SQL statement to be terminated. If the memory usage of a TiDB instance that exceeds the limit is caused by too many sessions with low memory usage, you can properly lower the value of this variable to allow more sessions to be canceled.
 
 ### tidb_service_scope <span class="version-mark">New in v7.4.0</span>
