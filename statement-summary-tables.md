@@ -265,9 +265,12 @@ After statements summary persistence is enabled, the memory keeps only the curre
 >
 > - When statements summary persistence is enabled, the `tidb_stmt_summary_history_size` configuration described in the [Parameter configuration](#parameter-configuration) section will no longer take effect because the memory does not keep the history data. Instead, the following three configurations will be used to control the retention period and size of history data for persistence: [`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660), [`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660), and [`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660).
 > - The smaller the value of `tidb_stmt_summary_refresh_interval`, the more immediate data is written to the disk. However, this also means more redundant data is written to the disk.
-> - For TiDB Self-Managed, starting from v9.0.0, you can enable [`tidb_stmt_summary_persist_evicted`](/system-variables.md#tidb_stmt_summary_persist_evicted-new-in-v857) to write records evicted by LRU to the statement summary log. TiDB marks these JSON records with `"evicted": true` for downstream log consumers to identify. TiDB does not return these records as query results of `statements_summary_history` or `cluster_statements_summary_history`. <CustomContent platform="tidb-cloud" plan="essential,premium">For TiDB Cloud Essential and Premium, `tidb_stmt_summary_group_by_user` is read-only. If you need to modify it, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support/).</CustomContent>
 
 </CustomContent>
+
+> **Note:**
+>
+> For TiDB Self-Managed, starting from v9.0.0, you can enable [`tidb_stmt_summary_persist_evicted`](/system-variables.md#tidb_stmt_summary_persist_evicted-new-in-v857) to write records evicted by LRU to the statement summary log. TiDB marks these JSON records with `"evicted": true` for downstream log consumers to identify. TiDB does not return these records as query results of `statements_summary_history` or `cluster_statements_summary_history`. <CustomContent platform="tidb-cloud" plan="essential,premium">For TiDB Cloud Essential and Premium, `tidb_stmt_summary_group_by_user` is read-only. If you need to modify it, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support/).</CustomContent>
 
 ## Troubleshooting examples
 
