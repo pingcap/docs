@@ -65,11 +65,11 @@ SHOW STATS_META WHERE db_name='test' and table_name='t';
 ```
 
 ```
-+---------+------------+----------------+---------------------+--------------+-----------+
-| Db_name | Table_name | Partition_name | Update_time         | Modify_count | Row_count |
-+---------+------------+----------------+---------------------+--------------+-----------+
-| test    | t          |                | 2020-05-25 20:34:33 |            0 |         0 |
-+---------+------------+----------------+---------------------+--------------+-----------+
++---------+------------+----------------+---------------------+--------------+-----------+-------------------+
+| Db_name | Table_name | Partition_name | Update_time         | Modify_count | Row_count | Last_analyze_time |
++---------+------------+----------------+---------------------+--------------+-----------+-------------------+
+| test    | t          |                | 2020-05-25 20:34:33 |            0 |         0 | NULL              |
++---------+------------+----------------+---------------------+--------------+-----------+-------------------+
 1 row in set (0.00 sec)
 ```
 
@@ -81,12 +81,19 @@ DROP STATS t;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
+`DROP STATS` deletes statistics such as TopN and histogram buckets of the table, but does not delete the record of the table from `STATS_META`. Therefore, after you execute `DROP STATS`, `SHOW STATS_META` still returns the `Modify_count` and `Row_count` information of the table.
+
 ```sql
 SHOW STATS_META WHERE db_name='test' and table_name='t';
 ```
 
 ```
-Empty set (0.00 sec)
++---------+------------+----------------+---------------------+--------------+-----------+-------------------+
+| Db_name | Table_name | Partition_name | Update_time         | Modify_count | Row_count | Last_analyze_time |
++---------+------------+----------------+---------------------+--------------+-----------+-------------------+
+| test    | t          |                | 2020-05-25 20:34:33 |            0 |         0 | NULL              |
++---------+------------+----------------+---------------------+--------------+-----------+-------------------+
+1 row in set (0.00 sec)
 ```
 
 ## MySQL compatibility
