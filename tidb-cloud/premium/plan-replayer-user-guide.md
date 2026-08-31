@@ -51,43 +51,6 @@ EXPLAIN SELECT * FROM orders WHERE customer_id = 1001;
 
 You can also provide a Unix timestamp when required by your investigation. If no historical statistics are available before the specified time, TiDB uses the latest available statistics and records the relevant error information in the package.
 
-## Capture an Intermittent Plan
-
-Use `PLAN REPLAYER CAPTURE` when the target SQL statement or problematic execution plan appears only occasionally and cannot be reproduced directly. Capture matches a SQL digest and a plan digest, then creates a Plan Replayer file when a matching execution is observed.
-
-### Enable capture
-
-```sql
-SET GLOBAL tidb_enable_plan_replayer_capture = ON;
-```
-
-### Register a capture task
-
-Register the SQL digest and plan digest that you want to capture.
-
-```sql
-PLAN REPLAYER CAPTURE
-'sql_digest'
-'plan_digest';
-```
-
-To capture any plan used by the target SQL digest, use `*` as the plan digest.
-
-```sql
-PLAN REPLAYER CAPTURE
-'sql_digest'
-'*';
-```
-
-### Check capture results
-
-Query `mysql.plan_replayer_status` to view active capture tasks, generated file tokens, update times, and failure reasons.
-
-```sql
-SELECT * FROM mysql.plan_replayer_status;
-```
-
-When the target execution is captured successfully, use the returned token or file identifier as the reference for your Support request.
 
 ## Authorize TiDB Cloud Support
 
