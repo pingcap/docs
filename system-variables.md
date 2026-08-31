@@ -5505,7 +5505,6 @@ SHOW WARNINGS;
 >
 > This variable is not supported on TiDB Cloud Starter.
 
-
 - Scope
     - TiDB Self-Managed: SESSION | GLOBAL
     - TiDB Cloud Essential and Premium: SESSION
