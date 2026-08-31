@@ -36,7 +36,7 @@ tiup playground
 
 > **Note:**
 >
-> `tiup playground` command is ONLY for quick start, NOT for production.
+> `tiup playground` command is ONLY for quick start, NOT for production. It is not recommended to use it for complete functional testing, stability testing, or performance testing.
 
 ### Step 2. Prepare test data
 
