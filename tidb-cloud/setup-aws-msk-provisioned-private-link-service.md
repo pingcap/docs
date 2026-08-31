@@ -14,21 +14,21 @@ TiDB Cloud で Amazon MSK Provisioned のダウンストリームサービス用
 ## 前提条件 {#prerequisites}
 
 - AWS 上でホストされ、**Active** 状態の [TiDB Cloud Premium インスタンス](/tidb-cloud/premium/create-tidb-instance-premium.md)。
-- TiDB Cloud Premium インスタンスの **AWS Account ID** と **availability zone IDs (AZ IDs)**。
+- TiDB Cloud Premium インスタンスの **AWS Account ID** と **アベイラビリティゾーンID（AZ ID）**。
 
   これらの値を取得するには、次の手順を実行します。
 
     1. [TiDB Cloud コンソール](https://tidbcloud.com)でインスタンスの概要ページに移動し、**Settings** > **Networking** をクリックします。
     2. **Private Link Endpoint For External Services** エリアで、**Create Private Endpoint for External Services** をクリックします。
-    3. ダイアログで **Connection Type** を **AWS MSK Provisioned** に切り替え、**AWS Account ID** と **availability zone IDs**（例: `use1-az1`）を確認します。
+    3. ダイアログで **Connection Type** を **AWS MSK Provisioned** に切り替え、**AWS Account ID** と **アベイラビリティゾーンID**（例: `use1-az1`）を確認します。
 
-    **AZ の整合性に関する重要事項**: AWS アカウント間で availability zone の整合性を確認する際は、AZ 名（例: `us-east-1a`）ではなく AZ ID（例: `use1-az1`）を使用してください。同じ AZ 名でも、アカウントによって異なる物理ゾーンに対応している場合があります。MSK クラスターは、TiDB Cloud Premium インスタンスと同じ AZ ID を使用する必要があります。
+    **AZ の整合性に関する重要事項**: AWS アカウント間でアベイラビリティゾーンの整合性を確認する際は、AZ 名（例: `us-east-1a`）ではなく AZ ID（例: `use1-az1`）を使用してください。同じ AZ 名でも、アカウントによって異なる物理ゾーンに対応している場合があります。MSK クラスターは、TiDB Cloud Premium インスタンスと同じ AZ ID を使用する必要があります。
 
 ## ステップ 1. Amazon VPC とサブネットをセットアップする {#step-1-set-up-the-amazon-vpc-and-subnets}
 
-必要な availability zone にまたがる少なくとも 3つのプライベートサブネットを持つ Amazon VPC がすでにある場合は、このステップをスキップできます。
+必要なアベイラビリティゾーンにまたがる少なくとも 3つのプライベートサブネットを持つ Amazon VPC がすでにある場合は、このステップをスキップできます。
 
-1. [Amazon VPC コンソール](https://console.aws.amazon.com/vpc/)で、TiDB Cloud Premium インスタンスが稼働する各 availability zone に 1つずつ、合計3つのプライベートサブネットを持つ [VPC を作成](https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html)します。これらのサブネットは同じ AZ に存在し、AZ 名ではなく AZ ID で一致している必要があります。
+1. [Amazon VPC コンソール](https://console.aws.amazon.com/vpc/)で、TiDB Cloud Premium インスタンスが稼働する各アベイラビリティゾーンに 1つずつ、合計3つのプライベートサブネットを持つ [VPC を作成](https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html)します。これらのサブネットは、AZ 名ではなく AZ ID に基づいて、TiDB Cloud Premium インスタンスが稼働する各アベイラビリティゾーンと一致している必要があります。
 2. VPC ダッシュボードで、後から起動するクライアント EC2 インスタンスがプライベートネットワーク経由で MSK クラスターと通信できるように、ルートテーブルとセキュリティグループを設定します。
 3. サブネットの AZ ID を記録します。これらのサブネットは、[MSK クラスターを作成する](#step-3-create-an-amazon-msk-provisioned-cluster)際に選択します。
 
@@ -60,7 +60,7 @@ TiDB Cloud で Amazon MSK Provisioned のダウンストリームサービス用
 - **Broker type**: multi-VPC private connectivity でサポートされる broker type を選択します（`t3.small` は不可）。
 - **Authentication**: SASL/SCRAM 認証を有効にします。
 - **Public access**: このオプションを無効にします。
-- **Number of brokers**: availability zone ごとに少なくとも 1つ（最小 3）。
+- **Number of brokers**: アベイラビリティゾーンごとに少なくとも 1つ（最小 3）。
 - **Encryption in transit**: セキュリティ要件に応じて設定します。
 - **Client subnets**: [ステップ 1](#step-1-set-up-the-amazon-vpc-and-subnets) で作成した 3つのプライベートサブネットを選択します。
 - **Cluster configuration**: 次の設定を含むカスタム設定を作成します（初期 ACL セットアップに必要）。

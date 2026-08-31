@@ -54,7 +54,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 
 > **Tip:**
 >
-> 下流のKafkaに複数のホストまたはポートがある場合は、シンクURIに複数の`[host]:[port]`設定できます。例：
+> 下流のKafkaに複数のホストまたはポートがある場合は、シンクURIに複数の`[host]:[port]`を設定できます。例：
 >
 > ```shell
 > [scheme]://[host]:[port],[host]:[port],[host]:[port][/path]?[query_parameters]
@@ -194,7 +194,7 @@ dispatchers = [
 
 ### TiCDC を AWS Glue スキーマレジストリと統合する {#integrate-ticdc-with-aws-glue-schema-registry}
 
-v7.4.0以降、TiCDCは、ユーザーがデータレプリケーションに[Avroプロトコル](/ticdc/ticdc-avro-protocol.md)選択した場合、スキーマレジストリとして[AWS Glue スキーマレジストリ](https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html)使用をサポートします。設定例は次のとおりです。
+v7.4.0以降、TiCDCは、ユーザーがデータレプリケーションに[Avroプロトコル](/ticdc/ticdc-avro-protocol.md)を選択した場合、スキーマレジストリとして[AWS Glue スキーマレジストリ](https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html)使用をサポートします。設定例は次のとおりです。
 
 ```shell
 ./cdc cli changefeed create --server=127.0.0.1:8300 --changefeed-id="kafka-glue-test" --sink-uri="kafka://127.0.0.1:9092/topic-name?&protocol=avro&replication-factor=3" --config changefeed_glue.toml

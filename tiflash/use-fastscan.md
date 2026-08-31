@@ -9,7 +9,7 @@ summary: FastScan を使用して OLAP シナリオでのクエリを高速化�
 
 TiFlash はデフォルトでクエリ結果の精度とデータの一貫性を保証します。FastScan 機能を使用すると、 TiFlash はより効率的なクエリパフォーマンスを提供しますが、クエリ結果の精度とデータの一貫性は保証されません。
 
-一部のOLAPシナリオでは、クエリ結果の精度に多少の許容範囲が認められます。このような場合、より高いクエリパフォーマンスが必要な場合は、セッションレベルまたはグローバルレベルでFastScan機能を有効にできます。FastScan機能を有効にするかどうかは、変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)設定することで選択できます。
+一部のOLAPシナリオでは、クエリ結果の精度に多少の許容範囲が認められます。このような場合、より高いクエリパフォーマンスが必要な場合は、セッションレベルまたはグローバルレベルでFastScan機能を有効にできます。FastScan機能を有効にするかどうかは、変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)を設定することで選択できます。
 
 ## 制限 {#restrictions}
 
@@ -78,7 +78,7 @@ show global variables like 'tiflash_fastscan';
 set session tiflash_fastscan=ON;
 ```
 
-グローバルレベルで`tiflash_fastscan`設定することもできます。新しい設定は新しいセッションで有効になりますが、現在のセッションと以前のセッションには適用されません。また、新しいセッションでは、セッションレベルとグローバルレベルの両方の`tiflash_fastscan`に新しい値が設定されます。
+グローバルレベルで`tiflash_fastscan`を設定することもできます。新しい設定は新しいセッションで有効になりますが、現在のセッションと以前のセッションには適用されません。また、新しいセッションでは、セッションレベルとグローバルレベルの両方の`tiflash_fastscan`に新しい値が設定されます。
 
 ```
 set global tiflash_fastscan=ON;

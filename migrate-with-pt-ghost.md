@@ -7,7 +7,7 @@ summary: オンライン DDL ツール gh-ost または pt-osc を使用する�
 
 本番環境では、DDL実行中のテーブルロックによって、データベースからの読み取りまたは書き込みがある程度ブロックされる可能性があります。そのため、読み取りと書き込みへの影響を最小限に抑えるため、オンラインDDLツールを使用してDDLを実行することがよくあります。一般的なDDLツールは[gh-ost](https://github.com/github/gh-ost)と[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)です。
 
-DM を使用して MySQL から TiDB にデータを移行する場合、 `online-ddl`有効にして DM と gh-ost または pt-osc の連携を許可できます。
+DM を使用して MySQL から TiDB にデータを移行する場合、 `online-ddl`を有効にして DM と gh-ost または pt-osc の連携を許可できます。
 
 詳細なレプリケーション手順については、シナリオごとに次のドキュメントを参照してください。
 

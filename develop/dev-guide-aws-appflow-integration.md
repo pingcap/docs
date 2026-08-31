@@ -71,7 +71,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     > **Note:**
     >
     > - `--guided`オプションでは、プロンプトが表示され、デプロイの手順を案内します。入力内容は構成ファイルに保存され、デフォルトでは`samconfig.toml`というファイルになります。
-    > - `stack_name`デプロイする AWS Lambda の名前を指定します。
+    > - `stack_name`は、デプロイする AWS Lambda の名前を指定します。
     > - このガイドでは、TiDB Cloud Starterのクラウドプロバイダーとして AWS を使用しています。ソースまたは宛先として Amazon S3 を使用するには、AWS Lambda の`region`を Amazon S3 と同じに設定する必要があります。
     > - 既に`sam deploy --guided`を実行したことがある場合は、代わりに`sam deploy`を実行するだけで、SAM CLI は設定ファイル`samconfig.toml`を使用して操作を簡素化します。
 

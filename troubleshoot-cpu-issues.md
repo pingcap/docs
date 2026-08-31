@@ -94,7 +94,7 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 
 TiKV にはボトルネックになる可能性のある単一スレッドがいくつかあります。
 
-- TiKVインスタンス内のリージョンが多すぎると、単一のgRPCスレッドがボトルネックになります（ **Grafana** -&gt; **TiKV詳細**-&gt;**スレッドCPU/gRPC CPU Per Thread**メトリックを確認してください）。v3.x以降のバージョンでは、 `Hibernate Region`有効にするとこの問題を解決できます。
+- TiKVインスタンス内のリージョンが多すぎると、単一のgRPCスレッドがボトルネックになります（ **Grafana** -&gt; **TiKV詳細**-&gt;**スレッドCPU/gRPC CPU Per Thread**メトリックを確認してください）。v3.x以降のバージョンでは、 `Hibernate Region`を有効にするとこの問題を解決できます。
 - v3.0 より前のバージョンでは、raftstore スレッドまたは apply スレッドがボトルネックになる場合 ( **Grafana** -&gt; **TiKV-details** -&gt; **Thread CPU/raft store CPU**および**Async apply CPU**メトリックが`80%`超える)、TiKV (v2.x) インスタンスをスケールアウトするか、マルチスレッド対応の v3.x にアップグレードできます。
 
 ### CPU負荷が増加する {#cpu-load-increases}

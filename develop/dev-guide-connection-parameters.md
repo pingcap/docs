@@ -20,7 +20,7 @@ aliases: ['/ja/tidb/stable/dev-guide-connection-parameters/','/ja/tidb/dev/dev-g
 
 TiDB（MySQL）接続の構築は、（少なくともOLTPシナリオにおいては）比較的コストがかかります。これは、TCP接続の確立に加えて、接続認証も必要となるためです。そのため、クライアントは通常、TiDB（MySQL）接続を接続プールに保存して再利用します。
 
-Javaには[Tomcat JDBC](https://tomcat.apache.org/tomcat-10.1-doc/jdbc-pool.html) [HikariCP](https://github.com/brettwooldridge/HikariCP) [dbcp](https://commons.apache.org/proper/commons-dbcp/)多くの接続プール実装があります。TiDBは使用できる接続プール[druid](https://github.com/alibaba/druid)制限しないため、アプリケーションに合わせて好きなもの[c3p0](https://www.mchange.com/projects/c3p0/)選択できます。
+Javaには[Tomcat JDBC](https://tomcat.apache.org/tomcat-10.1-doc/jdbc-pool.html) [HikariCP](https://github.com/brettwooldridge/HikariCP) [dbcp](https://commons.apache.org/proper/commons-dbcp/)多くの接続プール実装があります。TiDBは使用できる接続プール[druid](https://github.com/alibaba/druid)制限しないため、アプリケーションに合わせて好きなもの[c3p0](https://www.mchange.com/projects/c3p0/)を選択できます。
 
 ### 接続数を設定する {#configure-the-number-of-connections}
 
@@ -118,7 +118,7 @@ connections = ((core_count * 2) + effective_spindle_count)
 
 このメモは以下を示しています。
 
-- **core_countは**、 [ハイパースレッディング](https://en.wikipedia.org/wiki/Hyper-threading)有効にするかどうかに関わらず、物理コアの数です。
+- **core_countは**、 [ハイパースレッディング](https://en.wikipedia.org/wiki/Hyper-threading)を有効にするかどうかに関わらず、物理コアの数です。
 - データが完全にキャッシュされると、 **effective_spindle_count を**`0`に設定する必要があります。キャッシュのヒット率が低下すると、カウントは実際の数値である`HDD`に近づきます。
 - **この計算式が*SSD*にも有効かどうかは検証されておらず、不明である。**
 
@@ -164,7 +164,7 @@ OLTP（オンライン・トランザクション処理）シナリオでは、�
 
 > **Note:**
 >
-> デフォルトのMySQL Connector/Jの実装では、 `addBatch()`でバッチに追加されたSQL文の送信時間は`executeBatch()`呼び出されるまで遅延されますが、実際のネットワーク転送中は文は1つずつ送信されます。そのため、この方法は通常、通信オーバーヘッドを削減しません。
+> デフォルトのMySQL Connector/Jの実装では、 `addBatch()`でバッチに追加されたSQL文の送信時間は`executeBatch()`が呼び出されるまで遅延されますが、実際のネットワーク転送中は文は1つずつ送信されます。そのため、この方法は通常、通信オーバーヘッドを削減しません。
 >
 > バッチネットワーク転送を行う場合は、JDBC接続パラメータで`rewriteBatchedStatements = true`を設定する必要があります。詳細なパラメータ設定については、 [バッチ関連パラメータ](#batch-related-parameters)を参照してください。
 
@@ -180,7 +180,7 @@ JDBCでは通常、以下の2つの処理方法が使用されます。
 
     クライアントが読み取りを完了するか、 `resultset`閉じる前にクエリでこのようなエラーが発生するのを回避するには、URLに`clobberStreamingResults=true`パラメータを追加できます。そうすると、 `resultset`自動的に閉じられますが、前のストリーミングクエリで読み取られる結果セットは失われます。
 
-- 2つ目の方法：まず正の整数として[`FetchSize`設定](http://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html)設定し、次にJDBC URLで`useCursorFetch = true`設定することで、カーソルフェッチを使用します。
+- 2つ目の方法：まず正の整数として[`FetchSize`設定](http://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html)設定し、次にJDBC URLで`useCursorFetch = true`を設定することで、カーソルフェッチを使用します。
 
 TiDBは両方の方法をサポートしていますが、実装がよりシンプルで実行効率も優れているため、 `FetchSize`から`Integer.MIN_VALUE`に設定する最初の方法を使用することをお勧めします。
 
@@ -207,14 +207,14 @@ JDBCは通常、JDBC URLパラメータの形式で実装関連の設定を提�
 
 - **`cachePrepStmts`**
 
-    `useServerPrepStmts=true`ではサーバーがプリペアドステートメントを実行できますが、デフォルトではクライアントは実行後にプリペアドステートメントを閉じ、再利用しません。つまり、「準備」操作はテキストファイルの実行ほど効率的ではありません。この問題を解決するには、 `useServerPrepStmts=true`設定した後、 `cachePrepStmts=true`設定することをお勧めします。これにより、クライアントはプリペアドステートメントをキャッシュできるようになります。
+    `useServerPrepStmts=true`ではサーバーがプリペアドステートメントを実行できますが、デフォルトではクライアントは実行後にプリペアドステートメントを閉じ、再利用しません。つまり、「準備」操作はテキストファイルの実行ほど効率的ではありません。この問題を解決するには、 `useServerPrepStmts=true`を設定した後、 `cachePrepStmts=true`を設定することをお勧めします。これにより、クライアントはプリペアドステートメントをキャッシュできるようになります。
 
     この設定が既に有効になっていることを確認するには、次の操作を実行してください。
 
     - TiDB モニタリング ダッシュボードに移動し、 **[クエリ概要]** &gt; **[インスタンス別 CPS]**からリクエスト コマンド タイプを確認します。
     - リクエスト内の`COM_STMT_EXECUTE`の数が`COM_STMT_PREPARE`の数よりはるかに多い場合、この設定は既に有効になっていることを意味します。
 
-    さらに、 `useConfigs=maxPerformance`設定すると、 `cachePrepStmts=true`含む複数のパラメータが同時に設定されます。
+    さらに、 `useConfigs=maxPerformance`を設定すると、 `cachePrepStmts=true`含む複数のパラメータが同時に設定されます。
 
 - **prepStmtCacheSqlLimit**
 
@@ -238,7 +238,7 @@ JDBCは通常、JDBC URLパラメータの形式で実装関連の設定を提�
 
 #### バッチ関連パラメータ {#batch-related-parameters}
 
-バッチ書き込みを処理する際は、 `rewriteBatchedStatements=true`設定することをお勧めします。`addBatch()`または`executeBatch()`を使用した後でも、JDBC はデフォルトでは SQL を 1つずつ送信します。例:
+バッチ書き込みを処理する際は、 `rewriteBatchedStatements=true`を設定することをお勧めします。`addBatch()`または`executeBatch()`を使用した後でも、JDBC はデフォルトでは SQL を 1つずつ送信します。例:
 
 ```java
 pstmt = prepare("INSERT INTO `t` (a) values(?)");
@@ -258,7 +258,7 @@ INSERT INTO `t` (`a`) VALUES(11);
 INSERT INTO `t` (`a`) VALUES(12);
 ```
 
-しかし、 `rewriteBatchedStatements=true`設定すると、TiDB に送信される SQL ステートメントは単一の`INSERT`ステートメントになります。
+しかし、 `rewriteBatchedStatements=true`を設定すると、TiDB に送信される SQL ステートメントは単一の`INSERT`ステートメントになります。
 
 ```sql
 INSERT INTO `t` (`a`) values(10),(11),(12);

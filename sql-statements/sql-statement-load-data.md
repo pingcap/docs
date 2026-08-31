@@ -129,7 +129,7 @@ FIELDS TERMINATED BY '\t' ENCLOSED BY '' ESCAPED BY '\\'
 LINES TERMINATED BY '\n' STARTING BY ''
 ```
 
-`IGNORE <number> LINES`パラメータを設定することで、ファイルの最初の`number`行を無視できます。例えば、 `IGNORE 1 LINES`設定すると、ファイルの最初の行が無視されます。
+`IGNORE <number> LINES`パラメータを設定することで、ファイルの最初の`number`行を無視できます。例えば、 `IGNORE 1 LINES`を設定すると、ファイルの最初の行が無視されます。
 
 ## 例 {#examples}
 

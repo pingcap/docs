@@ -72,7 +72,7 @@ TiFlash は、データをディスクに書き出すための 2つのトリガ�
     HAVING SUM(l_quantity) > 314;
     ```
 
-5. TiFlashのログを見ると、 `tidb_max_bytes_before_tiflash_external_group_by`設定するとTiFlash が中間結果のスピルをトリガーし、クエリで使用されるメモリが大幅に削減されることがわかります。
+5. TiFlashのログを見ると、 `tidb_max_bytes_before_tiflash_external_group_by`を設定するとTiFlash が中間結果のスピルをトリガーし、クエリで使用されるメモリが大幅に削減されることがわかります。
 
     ```
     [DEBUG] [MemoryTracker.cpp:69] ["Peak memory usage (total): 12.80 GiB."] [source=MemoryTracker] [thread_id=110]

@@ -193,7 +193,7 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 #### `precheck-conflict-before-import` {#precheck-conflict-before-import}
 
 - インポート前の競合検出を有効にするかどうかを制御します。これは、TiDBにインポートする前にデータの競合をチェックします。このパラメータは、物理インポートモードでのみ使用できます。
-- 競合レコードの数が 1,000,000 を超えるシナリオでは、競合検出のパフォーマンスを向上させるために`precheck-conflict-before-import = true`設定することをお勧めします。
+- 競合レコードの数が 1,000,000 を超えるシナリオでは、競合検出のパフォーマンスを向上させるために`precheck-conflict-before-import = true`を設定することをお勧めします。
 - その他のシナリオでは、無効にすることをお勧めします。
 - デフォルト値: `false`
 - 値のオプション:
@@ -596,7 +596,7 @@ CSV ファイルの解析方法を構成します。
     - `"skip-verify"` : TLSを強制しますが、サーバーの証明書を検証しません。この設定は安全ではないことに注意してください。
     - `"preferred"` : `"skip-verify"`と同じですが、サーバーがTLS をサポートしていない場合は、暗号化されていない接続にフォールバックします。
 
-### tidb.セキュリティ {#tidbsecurity}
+### tidb.security {#tidbsecurity}
 
 - TLS 対応の MySQL 接続の証明書とキーを指定します。
 - デフォルト値: [`security`](#security)セクションのコピー。
@@ -621,7 +621,7 @@ CSV ファイルの解析方法を構成します。
 
 <!-- Example: `"/path/to/lightning.key"` -->
 
-### tidb.セッション変数 {#tidbsession-vars}
+### tidb.session-vars {#tidbsession-vars}
 
 その他の TiDB セッション変数を指定します。
 

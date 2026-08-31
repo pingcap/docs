@@ -92,7 +92,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
     - `PLAN DIGEST`は`PLAN`と同じです。次のパラメータはダイジェスト文字列です。
     - `SQL TEXT`入力SQLを生の文字列（ `EXACT` ）として一致させるか、次のパラメータに応じて`SQL DIGEST` （ `SIMILAR` ）または`PLAN DIGEST` （ `PLAN` ）に解析してコンパイルします。
 
-- デフォルトのリソースグループのランナウェイクエリ監視リストに一致する機能を追加します (事前にデフォルトのリソースグループに`QUERY LIMIT`設定する必要があります)。
+- デフォルトのリソースグループのランナウェイクエリ監視リストに一致する機能を追加します (事前にデフォルトのリソースグループに`QUERY LIMIT`を設定する必要があります)。
 
     ```sql
     QUERY WATCH ADD ACTION KILL SQL TEXT EXACT TO 'select * from test.t2';
