@@ -5506,7 +5506,9 @@ SHOW WARNINGS;
 > This variable is not supported on TiDB Cloud Starter.
 
 
-- Scope: SESSION | GLOBAL for TiDB Self-Managed; SESSION for TiDB Cloud Essential and Premium
+- Scope
+    - TiDB Self-Managed: SESSION | GLOBAL
+    - TiDB Cloud Essential and Premium: SESSION
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
