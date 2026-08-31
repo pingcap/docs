@@ -143,7 +143,7 @@ Alibaba Cloud RDSをデータソースとして使用する場合、すべての
 
 ## 前提条件 {#prerequisites}
 
-移行する前に、データソースがサポートされているかどうかを確認し、MySQL 互換データベースでバイナリ ロギングを有効にし、ネットワーク接続を確認して、ソースデータベースとターゲット<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>インスタンス データベースの両方に必要な権限を付与します。
+移行する前に、データソースがサポートされているかどうかを確認し、MySQL 互換データベースでバイナリロギングを有効にし、ネットワーク接続を確認して、ソースデータベースとターゲット<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>インスタンスデータベースの両方に必要な権限を付与します。
 
 ### データソースとバージョンがサポートされていることを確認してください。 {#make-sure-your-data-source-and-version-are-supported}
 
@@ -178,7 +178,7 @@ TiDB Cloud Essentialのデータ移行機能は、以下のデータソースと
 
 <CustomContent plan="premium">
 
-TiDB Cloud Premium の場合、データ移行機能は次の MySQL 互換ソースデータベースをサポートしており、 **MySQL は**移行ジョブ ウィザードで使用できる唯一のデータソース タイプです。サポートされている接続方法については、[ネットワーク接続を確保する](#ensure-network-connectivity)を参照してください。
+TiDB Cloud Premium の場合、データ移行機能は次の MySQL 互換ソースデータベースをサポートしており、 **MySQL は**移行ジョブウィザードで使用できる唯一のデータソース タイプです。サポートされている接続方法については、[ネットワーク接続を確保する](#ensure-network-connectivity)を参照してください。
 
 | データソース                             | サポートされているバージョン |
 | :--------------------------------- | :------------- |
@@ -193,7 +193,7 @@ TiDB Cloud Premium の場合、データ移行機能は次の MySQL 互換ソー
 
 ### レプリケーションのために、ソースのMySQL互換データベースでバイナリログを有効にする {#enable-binary-logs-in-the-source-mysql-compatible-database-for-replication}
 
-DM を使用して、ソースの MySQL 互換データベースからターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>に増分変更を継続的にレプリケートするには、ソースデータベースでバイナリ ログを有効にするために次の構成が必要です。
+DM を使用して、ソースの MySQL 互換データベースからターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>に増分変更を継続的にレプリケートするには、ソースデータベースでバイナリログを有効にするために次の構成が必要です。
 
 | コンフィグレーション                       | 必要値                              | なぜ                                        |
 | :------------------------------- | :------------------------------- | :---------------------------------------- |
@@ -242,7 +242,7 @@ SHOW VARIABLES WHERE Variable_name IN
 
 <details><summary>AWS RDSまたはAurora MySQLの設定</summary>
 
-1. AWS マネジメントコンソールで、 [Amazon RDS コンソール](https://console.aws.amazon.com/rds/)を開き、左側のナビゲーションペインで**Parameter groups**をクリックし、カスタム パラメータ グループを作成または編集します。
+1. AWS マネジメントコンソールで、 [Amazon RDS コンソール](https://console.aws.amazon.com/rds/)を開き、左側のナビゲーションペインで**Parameter groups**をクリックし、カスタムパラメータ グループを作成または編集します。
 2. 上記の4つのパラメータを必要な値に設定してください。
 3. パラメータグループをインスタンスまたはクラスターにアタッチし、再起動して変更を適用してください。
 4. 再起動後、インスタンスに接続し、 `SHOW VARIABLES`ステートメントを実行して構成を確認します。
@@ -572,7 +572,7 @@ MySQLサービスがAWS VPC内にある場合は、以下の手順を実行し�
 3. MySQLのURLにDNSホスト名が含まれている場合、 TiDB CloudがMySQLサービスのホスト名を解決できるようにする必要があります。
 
     1. [VPCピアリング接続のDNS解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
-    2. **Accepter DNS resolution**オプションを有効にする。
+    2. **Accepter DNS resolution**オプションを有効にします。
 
 </details>
 

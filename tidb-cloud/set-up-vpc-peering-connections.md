@@ -33,7 +33,7 @@ VPCピアリングリクエストをリージョンに追加するには、そ�
 
 3. 左側のナビゲーションペインで、 **Project Settings**の下にある**Network Access**をクリックします。
 
-4. **Network Access**ページで、 **Project CIDR**タブをクリックし、クラウド プロバイダーに応じて**AWS**または**Google Cloud**を選択します。
+4. **Network Access**ページで、 **Project CIDR**タブをクリックし、クラウドプロバイダーに応じて**AWS**または**Google Cloud**を選択します。
 
 5. 右上隅の**Create CIDR**をクリックします。 **Create AWS CIDR**または**Create Google Cloud CIDR**ダイアログでリージョンと CIDR 値を指定し、 **Confirm**をクリックします。
 
@@ -52,7 +52,7 @@ VPCピアリングリクエストをリージョンに追加するには、そ�
     >     - 172.30.0.0 - 172.31.255.255
     > - TiDB Cloud は、リージョンの CIDR ブロック サイズに基づいて、プロジェクトのリージョン内のTiDB Cloudノードの数を制限します。
 
-6. クラウドプロバイダーと特定のリージョンの CIDR を確認する。
+6. クラウドプロバイダーと特定のリージョンの CIDR を確認します。
 
     CIDRはデフォルトで無効になっています。CIDRを有効にするには、対象リージョンにクラスターを作成する必要があります。リージョンのCIDRが有効な場合は、そのリージョンにVPCピアリングを作成できます。
 
@@ -64,7 +64,7 @@ VPCピアリングリクエストをリージョンに追加するには、そ�
 
 ### ステップ1. VPCピアリングリクエストを追加する {#step-1-add-vpc-peering-requests}
 
-VPC ピアリング リクエストは、TiDB Cloudコンソールのプロジェクトレベルの **Network Access**ページまたはクラスタ レベルの**Networking**ページのいずれかで追加できます。
+VPC ピアリングリクエストは、TiDB Cloudコンソールのプロジェクトレベルの **Network Access**ページまたはクラスタレベルの**Networking**ページのいずれかで追加できます。
 
 <SimpleTab>
 <div label="VPC peering setting on the project-level Network Access page">
@@ -246,7 +246,7 @@ AWS ダッシュボードを使用して VPC ピアリング接続を構成す�
 
 ### ステップ1. VPCピアリングリクエストを追加する {#step-1-add-vpc-peering-requests}
 
-VPC ピアリング リクエストは、TiDB Cloudコンソールのプロジェクトレベルの **Network Access**ページまたはクラスタ レベルの**Networking**ページのいずれかで追加できます。
+VPC ピアリングリクエストは、TiDB Cloudコンソールのプロジェクトレベルの **Network Access**ページまたはクラスタレベルの**Networking**ページのいずれかで追加できます。
 
 <SimpleTab>
 <div label="VPC peering setting on the project-level Network Access page">

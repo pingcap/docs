@@ -162,7 +162,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     1 row in set (0.00 sec)
     ```
 
-- TiKV のストア状態、 `store_id` 、容量、および稼働時間を表示する。
+- TiKV のストア状態、 `store_id` 、容量、および稼働時間を表示します。
 
     ```sql
     select STORE_ID,ADDRESS,STORE_STATE,STORE_STATE_NAME,CAPACITY,AVAILABLE,UPTIME from INFORMATION_SCHEMA.TIKV_STORE_STATUS;

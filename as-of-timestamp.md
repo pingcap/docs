@@ -64,7 +64,7 @@ insert into t values (1), (2), (3);
 Query OK, 3 rows affected (0.00 sec)
 ```
 
-表内のデータを表示する。
+表内のデータを表示します。
 
 ```sql
 select * from t;

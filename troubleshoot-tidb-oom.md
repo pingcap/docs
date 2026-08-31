@@ -172,7 +172,7 @@ OOM 問題の根本原因を特定するには、次の情報を収集する必�
 
 - より多くのメモリを消費する SQL ステートメントを確認します。
 
-    - TiDB Dashboardで、SQL ステートメントの分析、スロークエリ、メモリ使用量を確認する。
+    - TiDB Dashboardで、SQL ステートメントの分析、スロークエリ、メモリ使用量を確認します。
     - `INFORMATION_SCHEMA`の`SLOW_QUERY`と`CLUSTER_SLOW_QUERY`を確認してください。
     - 各 TiDB ノードで`tidb_slow_query.log`をチェックします。
     - `grep "expensive_query" tidb.log`を実行して、対応するログ エントリを確認します。

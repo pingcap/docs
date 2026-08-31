@@ -8,7 +8,7 @@ summary: トランザクション メカニズムやアプリケーションが 
 TiDB を使い始める前に、TiDB がどのように動作するかに関するいくつかの重要なメカニズムを理解する必要があります。
 
 - TiDB でのトランザクションの仕組みを理解するには[TiDBトランザクションの概要](/transaction-overview.md) 、アプリケーション開発に必要なトランザクションの知識については[アプリケーション開発者向けトランザクションノート](/develop/dev-guide-transaction-overview.md)をお読みください。
-- [アプリケーションがTiDBと対話する方法](#the-way-applications-interact-with-tidb)理解する。
+- [アプリケーションがTiDBと対話する方法](#the-way-applications-interact-with-tidb)を理解してください。
 - 分散データベース TiDB およびTiDB Cloud を構築するためのコア コンポーネントと概念を学習するには、無料のオンライン コース[TiDBの紹介](https://eng.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide)を参照してください。
 
 ## TiDBトランザクションメカニズム {#tidb-transaction-mechanisms}

@@ -80,7 +80,7 @@ Apache KafkaサービスがインターネットにアクセスできないAWS V
 3. Apache KafkaのURLにホスト名が含まれている場合、 TiDB CloudがApache KafkaブローカーのDNSホスト名を解決できるようにする必要があります。
 
     1. [VPCピアリング接続のDNS解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-dns.html)の手順に従います。
-    2. **Accepter DNS resolution**オプションを有効にする。
+    2. **Accepter DNS resolution**オプションを有効にします。
 
 Apache Kafka サービスがインターネットにアクセスできない Google Cloud VPC 内にある場合は、以下の手順を実行してください。
 

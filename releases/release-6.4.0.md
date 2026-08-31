@@ -139,7 +139,7 @@ TiDBバージョン: 6.4.0-DMR
 
 - バッチ書き込みリクエストが軽量トランザクション書き込みの応答時間に与える影響を軽減する [#13313](https://github.com/tikv/tikv/issues/13313) @[glorv](https://github.com/glorv)
 
-    一部のシステムのビジネスロジックでは、定期的なバッチ DML タスクが必要ですが、これらのバッチ書き込みタスクを処理すると、オンライン トランザクションのレイテンシーが増加します。v6.3.0 では、TiKV はハイブリッドワークロード シナリオでの読み取り要求のスケジューリングを最適化するため、 [`readpool.unified.auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)構成項目を有効にすると、TiKV がすべての読み取り要求に対して UnifyReadPool スレッドプールのサイズを自動的に調整します。v6.4.0 では、TiKV は書き込み要求も動的に識別して優先順位を付け、1回のポーリングで Apply スレッドが 1つの FSM (有限状態機械) に対して書き込むことができる最大バイト数を制御できるため、バッチ書き込み要求がトランザクション書き込みの応答時間に与える影響を軽減できます。
+    一部のシステムのビジネスロジックでは、定期的なバッチ DML タスクが必要ですが、これらのバッチ書き込みタスクを処理すると、オンライントランザクションのレイテンシーが増加します。v6.3.0 では、TiKV はハイブリッドワークロード シナリオでの読み取り要求のスケジューリングを最適化するため、 [`readpool.unified.auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)構成項目を有効にすると、TiKV がすべての読み取り要求に対して UnifyReadPool スレッドプールのサイズを自動的に調整します。v6.4.0 では、TiKV は書き込み要求も動的に識別して優先順位を付け、1回のポーリングで Apply スレッドが 1つの FSM (有限状態機械) に対して書き込むことができる最大バイト数を制御できるため、バッチ書き込み要求がトランザクション書き込みの応答時間に与える影響を軽減できます。
 
 ### 使いやすさ {#ease-of-use}
 
@@ -199,7 +199,7 @@ TiDBバージョン: 6.4.0-DMR
 
 - データベースユーザー向けの追加説明の追加をサポート [#38172](https://github.com/pingcap/tidb/issues/38172) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
-    TiDB v6.4 では、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)または[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)を使用して、データベースユーザーの追加の説明を追加できます。TiDB は 2つの説明形式を提供します。 `COMMENT`を使用してテキスト コメントを追加したり、 `ATTRIBUTE`を使用して JSON 形式の構造化属性セットを追加したりできます。
+    TiDB v6.4 では、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)または[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)を使用して、データベースユーザーの追加の説明を追加できます。TiDB は 2つの説明形式を提供します。 `COMMENT`を使用してテキストコメントを追加したり、 `ATTRIBUTE`を使用して JSON 形式の構造化属性セットを追加したりできます。
 
     さらに、TiDB v6.4.0では[`USER_ATTRIBUTES`](/information-schema/information-schema-user-attributes.md)テーブルが追加され、ユーザーコメントやユーザー属性の情報を表示できるようになりました。
 
@@ -223,11 +223,11 @@ TiDBバージョン: 6.4.0-DMR
 
 ### バックアップと復元 {#backup-and-restore}
 
-- EBS ボリューム スナップショットを使用した TiDB クラスターのバックアップをサポート [#33849](https://github.com/pingcap/tidb/issues/33849) @[fengou1](https://github.com/fengou1)
+- EBS ボリュームスナップショットを使用した TiDB クラスターのバックアップをサポート [#33849](https://github.com/pingcap/tidb/issues/33849) @[fengou1](https://github.com/fengou1)
 
-    TiDB クラスターが EKS 上にデプロイされ、AWS EBS ボリュームを使用している場合、TiDB クラスター データのバックアップ時に以下の要件を満たす必要がある場合は、 TiDB Operatorを使用してボリューム スナップショットとメタデータによるデータを AWS S3 にバックアップできます。
+    TiDB クラスターが EKS 上にデプロイされ、AWS EBS ボリュームを使用している場合、TiDB クラスター データのバックアップ時に以下の要件を満たす必要がある場合は、 TiDB Operatorを使用してボリュームスナップショットとメタデータによるデータを AWS S3 にバックアップできます。
 
-    - バックアップの影響を最小限に抑える。例えば、QPSとトランザクションレイテンシーへの影響を5%未満に抑え、クラスタのCPUとメモリを消費しないようにする。
+    - バックアップの影響を最小限に抑えます。例えば、QPSとトランザクションレイテンシーへの影響を5%未満に抑え、クラスタのCPUとメモリを消費しないようにします。
     - 短時間でデータのバックアップと復元が可能です。例えば、1時間以内にバックアップを完了し、2時間以内にデータを復元できます。
 
     詳細については、 [ユーザー向けドキュメント](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/backup-to-aws-s3-by-snapshot)を参照してください。
@@ -373,7 +373,7 @@ TiDBバージョン: 6.4.0-DMR
     - TiCDC
 
         - ExchangeパーティションDDLステートメントの複製をサポートする [#639](https://github.com/pingcap/tiflow/issues/639) @[asddongmen](https://github.com/asddongmen)
-        - MQ シンク モジュールの非バッチ送信パフォーマンスを向上 [#7353](https://github.com/pingcap/tiflow/issues/7353) @[Rustin170506](https://github.com/Rustin170506)
+        - MQ シンクモジュールの非バッチ送信パフォーマンスを向上 [#7353](https://github.com/pingcap/tiflow/issues/7353) @[Rustin170506](https://github.com/Rustin170506)
         - テーブルに多数のリージョンがある場合の TiCDC プーラーのパフォーマンスを改善[#7078](https://github.com/pingcap/tiflow/issues/7078) [#7281](https://github.com/pingcap/tiflow/issues/7281) @[sdojjy](https://github.com/sdojjy)
         - Syncpointが有効になっている場合に`tidb_enable_external_ts_read`変数を使用して下流のTiDBの履歴データを読み取ることをサポートする [#7419](https://github.com/pingcap/tiflow/issues/7419) @[asddongmen](https://github.com/asddongmen)
         - トランザクション分割を有効にし、デフォルトでセーフモードを無効にすることで、レプリケーションの安定性を向上させます [#7505](https://github.com/pingcap/tiflow/issues/7505) @[asddongmen](https://github.com/asddongmen)
