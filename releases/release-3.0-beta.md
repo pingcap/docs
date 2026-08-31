@@ -17,7 +17,7 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
 - SQLオプティマイザ
     - `AggregationElimination` の最適化ルールを再サポート [＃7676](https://github.com/pingcap/tidb/pull/7676)
     - `NOT EXISTS`サブクエリを最適化し、Anti Semi Join に変換する [＃7842](https://github.com/pingcap/tidb/pull/7842)
-    - 新しいCascadesオプティマイザをサポートするために、変数`tidb_enable_cascades_planner`追加します。現在、Cascadesオプティマイザはまだ完全に実装されておらず、デフォルトではオフになっています[＃7879](https://github.com/pingcap/tidb/pull/7879)
+    - 新しいCascadesオプティマイザをサポートするために、変数`tidb_enable_cascades_planner`を追加します。現在、Cascadesオプティマイザはまだ完全に実装されておらず、デフォルトではオフになっています[＃7879](https://github.com/pingcap/tidb/pull/7879)
     - トランザクションのインデックス結合の使用をサポート [＃7877](https://github.com/pingcap/tidb/pull/7877)
     - 外部結合の定数伝播を最適化し、結合結果の外部テーブルに関連するフィルタリング条件を外部結合を介して外部テーブルにプッシュダウンできるようにすることで、外部結合の無駄な計算を減らし、実行パフォーマンスを向上させます[＃7794](https://github.com/pingcap/tidb/pull/7794)
     - 投影除去の最適化ルールを集計除去の後の位置に調整し、冗長な`Project`演算子回避する [＃7909](https://github.com/pingcap/tidb/pull/7909)
