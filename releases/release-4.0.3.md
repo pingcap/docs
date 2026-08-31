@@ -31,7 +31,7 @@ TiDB バージョン: 4.0.3
 
         - MQ sink-uri で`kafka-client-id`構成をサポート [＃706](https://github.com/pingcap/tiflow/pull/706)
         - `changefeed`構成のオフライン更新をサポート[＃699](https://github.com/pingcap/tiflow/pull/699)
-        - サポート設定カスタマイズ`changefeed`名前[＃727](https://github.com/pingcap/tiflow/pull/727)
+        - カスタマイズされた`changefeed`名の設定をサポート[＃727](https://github.com/pingcap/tiflow/pull/727)
         - TLSおよびMySQL SSL接続サポート [＃347](https://github.com/pingcap/tiflow/pull/347)
         - Avro 形式での変更の出力をサポート [＃753](https://github.com/pingcap/tiflow/pull/753)
         - Apache Pulsar シンクサポートする [＃751](https://github.com/pingcap/tiflow/pull/751)

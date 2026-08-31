@@ -18,7 +18,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
 ## TiDB {#tidb}
 
 - SQLオプティマイザ
-    - サポートインデックス より多くのシナリオに参加[＃10540](https://github.com/pingcap/tidb/pull/10540)
+    - より多くのシナリオでIndex Joinをサポート[＃10540](https://github.com/pingcap/tidb/pull/10540)
     - 履歴統計のエクスポートをサポート[＃10291](https://github.com/pingcap/tidb/pull/10291)
     - 単調に増加するインデックス列に対する増分`Analyze`操作をサポートする [＃10355](https://github.com/pingcap/tidb/pull/10355)
     - `Order By`節のNULL値は無視する [＃10488](https://github.com/pingcap/tidb/pull/10488)

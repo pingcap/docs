@@ -51,9 +51,9 @@ TiDB Ansible バージョン: 3.0.0-beta.1
 
     - クエリコンテキストに基づいてChunkサイズを最適化し、SQL文の実行時間とクラスタのリソース消費を削減します[＃6489](https://github.com/pingcap/tidb/issues/6489)
 - 権限管理
-    - サポート`SET ROLE`と`CURRENT_ROLE` [＃9581](https://github.com/pingcap/tidb/pull/9581)
-    - サポート`DROP ROLE` [＃9616](https://github.com/pingcap/tidb/pull/9616)
-    - サポート`CREATE ROLE` [＃9461](https://github.com/pingcap/tidb/pull/9461)
+    - `SET ROLE`と`CURRENT_ROLE`をサポート [＃9581](https://github.com/pingcap/tidb/pull/9581)
+    - `DROP ROLE`をサポート [＃9616](https://github.com/pingcap/tidb/pull/9616)
+    - `CREATE ROLE`をサポート [＃9461](https://github.com/pingcap/tidb/pull/9461)
 - サーバ
     - 現在のTiDBインスタンスの情報を取得するためのHTTPインターフェース`/debug/zip`を追加する [＃9651](https://github.com/pingcap/tidb/pull/9651)
     - PumpまたはDrainerのステータスを確認するためのSQL文`show pump status`と`show drainer status`サポートします[＃9456](https://github.com/pingcap/tidb/pull/9456)

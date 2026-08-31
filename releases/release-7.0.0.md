@@ -168,7 +168,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、[ドキュメント](/time-to-live.md)を参照してください。
 
-- サポート`ALTER TABLE…REORGANIZE PARTITION` [#15000](https://github.com/pingcap/tidb/issues/15000) @[mjonss](https://github.com/mjonss)
+- `ALTER TABLE…REORGANIZE PARTITION`をサポート [#15000](https://github.com/pingcap/tidb/issues/15000) @[mjonss](https://github.com/mjonss)
 
     TiDBは`ALTER TABLE...REORGANIZE PARTITION`構文をサポートしています。この構文を使用すると、データの損失なしに、テーブルのパーティションの一部または全部を再編成（マージ、分割、その他の変更を含む）できます。
 

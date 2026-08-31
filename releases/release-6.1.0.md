@@ -347,7 +347,7 @@ TiDB バージョン: 6.1.0
 
 - PD
     - リージョンラベルの Time-to-Live (TTL) をサポート [＃4694](https://github.com/tikv/pd/issues/4694)
-    - サポートリージョンバケット[＃4668](https://github.com/tikv/pd/issues/4668)
+    - リージョンバケットをサポート[＃4668](https://github.com/tikv/pd/issues/4668)
     - デフォルトでSwaggerサーバーのコンパイルを無効にする[#4932](https://github.com/tikv/pd/issues/4932)
 
 - TiFlash

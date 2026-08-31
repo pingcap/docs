@@ -74,7 +74,7 @@ TiDB Ansible バージョン: 3.0.4
     - TiDBにグローバルスコープのシステム変数`tidb_txn_mode`追加し、悲観的ロック使用を許可します。 [＃12049](https://github.com/pingcap/tidb/pull/12049)
     - スロークエリログに`Backoff`フィールドを追加して、2PC のコミットフェーズのバックオフ情報を記録します。 [＃12335](https://github.com/pingcap/tidb/pull/12335)
     - カーソルを使用して`PREPARE` + `EXECUTE`の結果を取得するときにスロークエリログが正しくない問題を修正しました（たとえば、 `PREPARE stmt1FROM SELECT * FROM t WHERE a > ?; EXECUTE stmt1 USING @variable` ） [＃12392](https://github.com/pingcap/tidb/pull/12392)
-    - サポート`tidb_enable_stmt_summary`この機能を有効にすると、TiDBはSQL文をカウントし、その結果はシステムテーブル`performance_schema.events_statements_summary_by_digest` を使用して照会できます。 [＃12308](https://github.com/pingcap/tidb/pull/12308)
+    - `tidb_enable_stmt_summary`をサポートします。この機能を有効にすると、TiDBはSQL文をカウントし、その結果はシステムテーブル`performance_schema.events_statements_summary_by_digest` を使用して照会できます。 [＃12308](https://github.com/pingcap/tidb/pull/12308)
     - tikv-client のログレベルを調整します（たとえば、ログレベル`batchRecvLoop fails`を`ERROR`から`INFO`に変更します） [＃12383](https://github.com/pingcap/tidb/pull/12383)
 - DDL
     - `tidb_allow_remove_auto_inc`変数を追加します。列の`AUTO INCREMENT`属性の削除はデフォルトで無効になっています[＃12145](https://github.com/pingcap/tidb/pull/12145)
