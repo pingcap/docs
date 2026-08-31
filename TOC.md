@@ -869,6 +869,7 @@
       - [Non-Transactional DML Statements](/non-transactional-dml.md)
       - [Pipelined DML](/pipelined-dml.md)
     - [Views](/views.md)
+    - [Materialized Views](/materialized-views.md)
     - [Partitioning](/partitioned-table.md)
     - [Temporary Tables](/temporary-tables.md)
     - [Cached Tables](/cached-tables.md)
