@@ -1,6 +1,6 @@
 ---
 title: MEMORY_USAGE
-summary: `MEMORY_USAGE` information_schema システムテーブルについて学習します。
+summary: "`MEMORY_USAGE` information_schema システムテーブルについて学習します。"
 ---
 
 # MEMORY_USAGE {#memory-usage}

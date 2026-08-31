@@ -1,6 +1,6 @@
 ---
 title: ANALYZE_STATUS
-summary: `ANALYZE_STATUS` information_schema テーブルについて学習してください。
+summary: "`ANALYZE_STATUS` information_schema テーブルについて学習してください。"
 ---
 
 # ANALYZE_STATUS {#analyze-status}

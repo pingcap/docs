@@ -1,6 +1,6 @@
 ---
 title: RESOURCE_GROUPS
-summary: `RESOURCE_GROUPS` information_schema テーブルについて学習してください。
+summary: "`RESOURCE_GROUPS` information_schema テーブルについて学習してください。"
 ---
 
 # RESOURCE_GROUPS {#resource-groups}

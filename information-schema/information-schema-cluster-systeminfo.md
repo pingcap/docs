@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_SYSTEMINFO
-summary: `CLUSTER_SYSTEMINFO` カーネルパラメータ テーブルについて学習します。
+summary: "`CLUSTER_SYSTEMINFO` カーネルパラメータ テーブルについて学習します。"
 ---
 
 # CLUSTER_SYSTEMINFO {#cluster-systeminfo}

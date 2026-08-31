@@ -1,6 +1,6 @@
 ---
 title: PLACEMENT_POLICIES
-summary: `PLACEMENT_POLICIES` information_schema テーブルについて学習してください。
+summary: "`PLACEMENT_POLICIES` information_schema テーブルについて学習してください。"
 ---
 
 # PLACEMENT_POLICIES {#placement-policies}

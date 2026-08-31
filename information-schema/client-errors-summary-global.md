@@ -1,6 +1,6 @@
 ---
 title: CLIENT_ERRORS_SUMMARY_GLOBAL
-summary: `CLIENT_ERRORS_SUMMARY_GLOBAL` INFORMATION_SCHEMA テーブルについて学習します。
+summary: "`CLIENT_ERRORS_SUMMARY_GLOBAL` INFORMATION_SCHEMA テーブルについて学習します。"
 ---
 
 # CLIENT_ERRORS_SUMMARY_GLOBAL {#client-errors-summary-global}

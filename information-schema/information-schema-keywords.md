@@ -1,6 +1,6 @@
 ---
 title: KEYWORDS
-summary: `KEYWORDS` INFORMATION_SCHEMA テーブルについて学習します。
+summary: "`KEYWORDS` INFORMATION_SCHEMA テーブルについて学習します。"
 ---
 
 # KEYWORDS {#keywords}
