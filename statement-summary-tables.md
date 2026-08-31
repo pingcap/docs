@@ -88,7 +88,7 @@ The following is a sample output of querying `statements_summary`:
 >
 > - In TiDB, the time unit of fields in statement summary tables is nanosecond (ns), whereas in MySQL the time unit is picosecond (ps).
 > - Starting from v7.5.1 and v7.6.0, for clusters with [resource control](/tidb-resource-control-ru-groups.md) enabled, `statements_summary` will be aggregated by resource group, for example, the same statements executed in different resource groups will be collected as different records.
-> - For TiDB Self-Managed, starting from v9.0.0, you can use [`tidb_stmt_summary_group_by_user`](/system-variables.md#tidb_stmt_summary_group_by_user-new-in-v857) to control whether to aggregate statement summaries by execution user. When this variable is set to `ON`, TiDB aggregates the same SQL digest executed by different users into separate records, and the `SAMPLE_USER` field of each record indicates the user who executed the statement. <CustomContent platform="tidb-cloud" plan="essential,premium">For TiDB Cloud Essential and Premium, `tidb_stmt_summary_group_by_user` is read-only. If you need to modify it, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support/).</CustomContent>
+> - For TiDB Self-Managed, starting from v9.0.0, you can use [`tidb_stmt_summary_group_by_user`](/system-variables.md#tidb_stmt_summary_group_by_user-new-in-v857) to control whether to aggregate statement summaries by execution user. When this variable is set to `ON`, TiDB aggregates the same SQL digest executed by different users into separate records, and the `SAMPLE_USER` field of each record indicates the user who executed the statement. <CustomContent platform="tidb-cloud" plan="essential,premium">For TiDB Cloud Essential and Premium, `tidb_stmt_summary_group_by_user` is read-only.</CustomContent>
 
 ## `statements_summary_history`
 
@@ -270,7 +270,7 @@ After statements summary persistence is enabled, the memory keeps only the curre
 
 > **Note:**
 >
-> For TiDB Self-Managed, starting from v9.0.0, you can enable [`tidb_stmt_summary_persist_evicted`](/system-variables.md#tidb_stmt_summary_persist_evicted-new-in-v857) to write records evicted by LRU to the statement summary log. TiDB marks these JSON records with `"evicted": true` for downstream log consumers to identify. TiDB does not return these records as query results of `statements_summary_history` or `cluster_statements_summary_history`. <CustomContent platform="tidb-cloud" plan="essential,premium">For TiDB Cloud Essential and Premium, `tidb_stmt_summary_group_by_user` is read-only. If you need to modify it, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support/).</CustomContent>
+> For TiDB Self-Managed, starting from v9.0.0, you can enable [`tidb_stmt_summary_persist_evicted`](/system-variables.md#tidb_stmt_summary_persist_evicted-new-in-v857) to write records evicted by LRU to the statement summary log. TiDB marks these JSON records with `"evicted": true` for downstream log consumers to identify. TiDB does not return these records as query results of `statements_summary_history` or `cluster_statements_summary_history`. <CustomContent platform="tidb-cloud" plan="essential,premium">For TiDB Cloud Essential and Premium, `tidb_stmt_summary_group_by_user` is read-only.</CustomContent>
 
 ## Troubleshooting examples
 

@@ -6335,7 +6335,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 > **Note:**
 >
 > - For TiDB Cloud Starter, this variable is not supported.
-> - For TiDB Cloud Essential and Premium, this variable is read-only. If you need to modify it, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support/).
+> - For TiDB Cloud Essential and Premium, this variable is read-only.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -6426,7 +6426,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 > **Note:**
 >
 > - For TiDB Cloud Starter, this variable is not supported.
-> - For TiDB Cloud Essential and Premium, this variable is read-only. If you need to modify it, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support/).
+> - For TiDB Cloud Essential and Premium, this variable is read-only.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
