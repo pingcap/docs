@@ -5,7 +5,7 @@ summary: このドキュメントでは、Sink to MySQL changefeed を使用し�
 
 # MySQLにシンクする {#sink-to-mysql}
 
-このドキュメントでは**、Sink to MySQL** changefeedを使用してTiDB CloudからMySQLにデータをストリーミングする方法について説明します。
+このドキュメントでは、**Sink to MySQL** changefeedを使用してTiDB CloudからMySQLにデータをストリーミングする方法について説明します。
 
 <CustomContent plan="dedicated">
 

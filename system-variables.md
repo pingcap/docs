@@ -2271,7 +2271,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数は、パーティションテーブルに対して[グローバルインデックス](/global-indexes.md)の作成をサポートするかどうかを制御します。この変数を有効にすると、TiDB では、インデックス定義で`GLOBAL`を指定することで**、パーティション式で使用されているすべての列を含まない**一意インデックスを作成できます。
+- この変数は、パーティションテーブルに対して[グローバルインデックス](/global-indexes.md)の作成をサポートするかどうかを制御します。この変数を有効にすると、TiDB では、インデックス定義で`GLOBAL`を指定することで、**パーティション式で使用されているすべての列を含まない**一意インデックスを作成できます。
 - この変数は v8.4.0 以降非推奨になりました。その値はデフォルト値`ON`に固定されています。つまり、[グローバルインデックス](/global-indexes.md)はデフォルトで有効になっています。
 
 ### tidb_enable_lazy_cursor_fetch <span class="version-mark">New in v8.3.0</span>
@@ -5158,7 +5158,7 @@ SHOW WARNINGS;
 
 > **Note:**
 >
-> この変数を有効にすることでクエリのパフォーマンスを最適化する効果は**、 TiFlashに対してのみ**有効です。
+> この変数を有効にすることでクエリのパフォーマンスを最適化する効果は、**TiFlashに対してのみ**有効です。
 
 - 範囲: セッション | グローバル
 - クラスターに保持される: はい
