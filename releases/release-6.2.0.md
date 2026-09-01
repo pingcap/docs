@@ -23,12 +23,12 @@ TiDBバージョン: 6.2.0-DMR
 - 新しい並行DDLフレームワーク：DDL文のブロックが減り、実行効率が向上します。
 - TiKV は[CPU使用率を自動的に調整する](/tikv-configuration-file.md#background-quota-limiter)をサポートしており、安定した効率的なデータベース運用を保証します。
 - [特定時点リカバリ（PITR）](/br/backup-and-restore-overview.md)は、過去の任意の時点から TiDB クラスターのスナップショットを新しいクラスターに復元するために導入されました。
-- TiDB Lightning は、クラスターレベルではなく、物理インポートモードでテーブル[テーブルレベルでのスケジューリングを一時停止する](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import)をサポートしています。
-- BR は[ユーザーおよび権限データの復元](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)サポートしており、バックアップと復元がよりスムーズになります。
-- TiCDC[特定の種類のDDLイベントをフィルタリングする](/ticdc/ticdc-filter.md)フィルタリングすることをサポートすることで、より多くのデータレプリケーションシナリオを可能にします。
+- TiDB Lightning は、クラスターレベルではなく、物理インポートモードで[テーブルレベルでのスケジューリングを一時停止する](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import)ことをサポートしています。
+- BR は[ユーザーおよび権限データの復元](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)をサポートしており、バックアップと復元がよりスムーズになります。
+- TiCDC は、[特定の種類のDDLイベントをフィルタリングする](/ticdc/ticdc-filter.md)ことをサポートすることで、より多くのデータレプリケーションシナリオを可能にします。
 - [`SAVEPOINT`機構](/sql-statements/sql-statement-savepoint.md)がサポートされており、トランザクション内のロールバックポイントを柔軟に制御できます。
 - TiDB は[1つの`ALTER TABLE`文だけで、複数の列またはインデックスの追加、削除、変更を行う](/sql-statements/sql-statement-alter-table.md)ことをサポートしています。
-- [クラスター間RawKV複製](/tikv-configuration-file.md#api-version-new-in-v610)サポートされるようになりました。
+- [クラスター間RawKV複製](/tikv-configuration-file.md#api-version-new-in-v610)がサポートされるようになりました。
 
 ## 新機能 {#new-features}
 
@@ -347,7 +347,7 @@ TiDB v6.2.0以降、 BRを使用したRawKVのバックアップと復元は非�
 
     - 一部の演算子 (HashJoin、HashAgg、Update、Delete) のメモリ追跡の精度を最適化しました ( [#35634](https://github.com/pingcap/tidb/issues/35634) 、 [#35631](https://github.com/pingcap/tidb/issues/35631) 、 [#35635](https://github.com/pingcap/tidb/issues/35635) @[wshwsh12](https://github.com/wshwsh12) ) ( [#34096](https://github.com/pingcap/tidb/issues/34096) @[ekexium](https://github.com/ekexium))
 
-    - システムテーブル`INFORMATION_SCHEMA.DATA_LOCK_WAIT`楽観的トランザクションのロック情報の記録をサポートしています [#34609](https://github.com/pingcap/tidb/issues/34609) @[longfangsong](https://github.com/longfangsong)
+    - システムテーブル`INFORMATION_SCHEMA.DATA_LOCK_WAIT`は楽観的トランザクションのロック情報の記録をサポートしています [#34609](https://github.com/pingcap/tidb/issues/34609) @[longfangsong](https://github.com/longfangsong)
 
     - トランザクションの監視メトリクスを追加 [#34456](https://github.com/pingcap/tidb/issues/34456) @[longfangsong](https://github.com/longfangsong)
 
