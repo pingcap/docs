@@ -20,7 +20,7 @@ TiDB に接続していることを確認してください。そうでない場
 
 TiDB は MySQL と互換性があり、ほとんどの場合、MySQL ステートメントを直接使用できます。サポートされていない機能については、 [MySQLとの互換性](/mysql-compatibility.md#unsupported-features)を参照してください。
 
-SQL を試して、MySQL クエリと TiDB の互換性をテストするには、 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=basic-sql-operations)試すことができます。最初に[TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-starter-instance)、その中で SQL文を実行することもできます。
+SQL を試して、MySQL クエリと TiDB の互換性をテストするには、 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=basic-sql-operations)を試すことができます。また、まず[TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-starter-instance)ことで、その中で SQL文を実行することもできます。
 
 このページでは、DDL、DML、CRUD 操作などの基本的なTiDB SQL文について説明します。 TiDB ステートメントの完全なリストについては、 [SQL Statement Overview](/sql-statements/sql-statement-overview.md)を参照してください。
 
