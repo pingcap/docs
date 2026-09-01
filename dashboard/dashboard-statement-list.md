@@ -66,7 +66,7 @@ SQL Statementsページの上部で、表示するSQL実行の時間範囲を変
 
 ### その他 {#others}
 
-[`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40) 、テーブル[ステートメント要約](/statement-summary-tables.md#statements_summary)と[ステートメント概要履歴](/statement-summary-tables.md#statements_summary_history)メモリに格納できるSQLダイジェストの合計数を制限します。この制限を超えると、TiDBは最近使用されていないSQL文をクリアします。クリアされたSQL文は、 `DIGEST`が`NULL`に設定された行として表されます。TiDB DashboardのSQL Statementsページでは、これらの行の情報は`Others`として表示されます。
+[`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40)は、 [`statements_summary`](/statement-summary-tables.md#statements_summary)テーブルと[`statements_summary_history`](/statement-summary-tables.md#statements_summary_history)テーブルがメモリに格納できるSQLダイジェストの合計数を制限します。この制限を超えると、TiDBは最近使用されていないSQL文をクリアします。クリアされたSQL文は、 `DIGEST`が`NULL`に設定された行として表されます。TiDB DashboardのSQL Statementsページでは、これらの行の情報は`Others`として表示されます。
 
 ![Others](/media/dashboard/dashboard-statement-other-row.png)
 
