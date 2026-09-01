@@ -87,7 +87,7 @@ TiDBバージョン：5.2.4
     - TiDBのバックグラウンドHTTPサービスが正常に終了せず、クラスタが異常な状態になる問題を修正しました [#30571](https://github.com/pingcap/tidb/issues/30571)
     - TiDBが認証失敗のログを予期せず多数出力する可能性がある問題を修正しました [#29709](https://github.com/pingcap/tidb/issues/29709)
     - システム変数`max_allowed_packet`が有効にならない問題を修正します [#31422](https://github.com/pingcap/tidb/issues/31422)
-    - `REPLACE`文が自動 ID が範囲外の場合に他の行を誤って変更してしまう問題を修正しました [#29483](https://github.com/pingcap/tidb/issues/29483)
+    - 自動 ID が範囲外の場合に`REPLACE`文が他の行を誤って変更してしまう問題を修正しました [#29483](https://github.com/pingcap/tidb/issues/29483)
     - スロークエリログが正常にログを出力できず、メモリを過剰に消費する可能性がある問題を修正しました [#32656](https://github.com/pingcap/tidb/issues/32656)
     - NATURAL JOINの結果に予期しない列が含まれる可能性がある問題を修正しました [#29481](https://github.com/pingcap/tidb/issues/29481)
     - `ORDER BY`と`LIMIT`を 1つのステートメントで一緒に使用すると、プレフィックス列インデックスを使用してデータをクエリする場合に誤った結果が出力される可能性がある問題を修正しました [#29711](https://github.com/pingcap/tidb/issues/29711)
