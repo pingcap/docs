@@ -40,17 +40,17 @@ TiDB Dashboardにログインすると、デフォルトで概要ページが表
 >
 > この機能は、Prometheus 監視コンポーネントがデプロイされているクラスターでのみ利用できます。Prometheus がデプロイされていない場合はエラーが表示されます。
 
-## Top SQL文 {#top-sql-statements}
+## Top SQL Statements {#top-sql-statements}
 
 この領域には、最近の期間にクラスター全体で最も実行時間が長かった10種類のSQL文が表示されます。クエリパラメータは異なるが構造が同じSQL文は、同じSQLタイプに分類され、同じ行に表示されます。
 
 ![Top SQL](/media/dashboard/dashboard-overview-top-statements.png)
 
-この領域に表示される情報は、より詳細な[SQL文ページ](/dashboard/dashboard-statement-list.md)と一致しています。 **Top SQL Statements**の見出しをクリックすると、完全なリストが表示されます。この表の列の詳細については、 [SQL文ページ](/dashboard/dashboard-statement-list.md)を参照してください。
+この領域に表示される情報は、より詳細な[SQL Statementsページ](/dashboard/dashboard-statement-list.md)と一致しています。 **Top SQL Statements**の見出しをクリックすると、完全なリストが表示されます。この表の列の詳細については、 [SQL Statementsページ](/dashboard/dashboard-statement-list.md)を参照してください。
 
 > **Note:**
 >
-> この機能は、SQL文機能が有効になっているクラスターでのみ使用できます。
+> この機能は、SQL Statements機能が有効になっているクラスターでのみ使用できます。
 
 ## 最近のスロークエリ {#recent-slow-queries}
 

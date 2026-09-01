@@ -148,7 +148,7 @@ TiUPトポロジー設定の詳細については、 [TiUPクラスターのト�
 
     ![Aggregated results at DB level](/media/dashboard/v8.5-top-sql-usage-agg-by-db-detail.png)
 
-8. これらの最初の手がかりに基づいて、 [SQL文](/dashboard/dashboard-statement-list.md)または[スロークエリ](/dashboard/dashboard-slow-query.md)ページを使用して根本原因をさらに分析できます。
+8. これらの最初の手がかりに基づいて、 [SQL Statements](/dashboard/dashboard-statement-list.md)または[スロークエリ](/dashboard/dashboard-slow-query.md)ページを使用して根本原因をさらに分析できます。
 
 ## Top SQLを無効にする {#disable-top-sql}
 

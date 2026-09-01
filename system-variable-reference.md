@@ -3991,7 +3991,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 - [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [TiDB DashboardのSQL文ページ](/dashboard/dashboard-statement-list.md)
+- [TiDB DashboardのSQL Statementsページ](/dashboard/dashboard-statement-list.md)
 - [ステートメントサマリーテーブル](/statement-summary-tables.md)
 - [システム変数](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40)
 - [TiDB 5.2 リリースノート](/releases/release-5.2.0.md)

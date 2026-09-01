@@ -83,9 +83,9 @@ TiDBのような分散アーキテクチャでは、TiKVノード間でワーク
 
 ### TiDB Dashboardを使用してSQL文を監視する {#monitor-sql-statements-using-tidb-dashboard}
 
-#### SQL文ページ {#sql-statements-page}
+#### SQL Statementsページ {#sql-statements-page}
 
-[TiDB Dashboard](/dashboard/dashboard-overview.md)で[**SQL文**ページ](/dashboard/dashboard-statement-list.md)に移動して、次の点を確認します。
+[TiDB Dashboard](/dashboard/dashboard-overview.md)で[**SQL Statements**ページ](/dashboard/dashboard-statement-list.md)に移動して、次の点を確認します。
 
 - 合計レイテンシーが最も長い SQL文。これは、複数回の実行にわたって実行に最も長い時間がかかるステートメントです。
 - 各 SQL文が実行された回数。実行頻度が最も高いステートメントを識別するのに役立ちます。

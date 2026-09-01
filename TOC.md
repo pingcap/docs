@@ -183,7 +183,7 @@
     - [Key Visualizerページ](/dashboard/dashboard-key-visualizer.md)
     - [指標関係グラフ](/dashboard/dashboard-metrics-relation.md)
     - SQL文の分析
-      - [SQL文ページ](/dashboard/dashboard-statement-list.md)
+      - [SQL Statementsページ](/dashboard/dashboard-statement-list.md)
       - [SQL詳細ページ](/dashboard/dashboard-statement-details.md)
     - [スロークエリページ](/dashboard/dashboard-slow-query.md)
     - クラスタ診断
