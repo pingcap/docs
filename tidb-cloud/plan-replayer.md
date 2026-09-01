@@ -7,9 +7,9 @@ summary: Learn how to generate a Plan Replayer file from your instance for troub
 
 Plan Replayer helps you package the information required to investigate a SQL execution plan into a file. The file can include the TiDB version and configuration, session variables, SQL bindings, table schemas, table statistics, the output of `EXPLAIN` or `EXPLAIN ANALYZE`, and internal optimizer information.
 
-When troubleshooting SQL performance of a TiDB Cloud Essential or Premium instance, you can use `PLAN REPLAYER DUMP` to generate a Plan Replayer file for a specific SQL statement and download the file from the returned pre-signed S3 URL. The Plan Replayer file is useful for investigating issues such as unexpected execution plans, plan regressions, inaccurate statistics, or problematic plans that occur only occasionally.
+When troubleshooting SQL performance issues on a TiDB Cloud Essential or Premium instance, you can use `PLAN REPLAYER DUMP` to generate a Plan Replayer file for a specific SQL statement and download the file from the returned URL. The Plan Replayer file is useful for investigating issues such as unexpected execution plans, plan regressions, inaccurate statistics, or problematic plans that occur only occasionally.
 
-If you need assistance from TiDB Cloud Support to investigate the SQL performance issue, you can temporarily authorize TiDB Cloud Support to access the Plan Replayer file for a limited period.
+If you need assistance from TiDB Cloud Support to troubleshoot the SQL performance issue, you can temporarily authorize TiDB Cloud Support to access Plan Replayer files for a limited period.
 
 > **Note:**
 >
@@ -22,9 +22,9 @@ If you need assistance from TiDB Cloud Support to investigate the SQL performanc
 - Identify the SQL statement, SQL digest, or plan digest that you want to investigate.
 - Remove or mask sensitive literals in SQL text where possible. Plan Replayer does not include table rows, but SQL text and schema names might still contain sensitive information.
 
-## Generate a plan replayer file
+## Generate a Plan Replayer file
 
-This section describes how to generate a plan replayer file for a specific SQL statement.
+This section describes how to generate a Plan Replayer file for a specific SQL statement.
 
 ### Generate a file for a statement
 
@@ -35,7 +35,7 @@ PLAN REPLAYER DUMP EXPLAIN
 SELECT * FROM orders WHERE customer_id = 1001;
 ```
 
-The SQL result returns a pre-signed S3 download URL in the `File_token` column. The URL is temporary. Save it securely and download the Plan Replayer ZIP file before it expires.
+The statement returns a pre-signed S3 download URL in the `File_token` column. The URL is temporary. Save it securely and download the Plan Replayer ZIP file before it expires.
 
 ### Include runtime information
 
@@ -64,25 +64,28 @@ Support access is controlled at the instance level. The authorization allows TiD
 
 ### Authorize TiDB Cloud Support
 
-To authorize TiDB Cloud Support to access the plan replayer file, take the following steps:
+To authorize TiDB Cloud Support to temporarily access Plan Replayer files generated for SQL performance troubleshooting, take the following steps:
 
 1. In the TiDB Cloud console, navigate to the Overview page of the target TiDB Cloud Essential or Premium instance.
 2. In the left navigation pane, click **Settings** > **Security**.
-3. On the **Security** page, find **SQL Plan Replayer Files Access Authorization**.
-4. Click **Authorize**.
-5. Select an access duration that covers the expected troubleshooting window from the dropdown list.
-6. Review the authorization statement and select the confirmation checkbox.
-7. Click **Authorize** to grant temporary access.
+3. On the **Security** page, click **Authorize** in the **SQL Plan Replayer Files Access Authorization** section.
+4. Select an access duration that covers the expected troubleshooting window from the drop-down list.
+5. Review the authorization statement and select the confirmation checkbox.
+6. Click **Authorize** to grant temporary access.
 
 Access starts immediately and is automatically revoked when the selected expiration time is reached.
 
 ### Extend the authorization period
 
-If the authorization period is about to expire and the issue is still being investigated, update the expiration time in the authorization section under **Settings** > **Security**. The new expiration time takes effect after you confirm the update.
+If the authorization period is about to expire and the issue is still being investigated, go to the **Security** page of the target TiDB Cloud Essential or Premium instance, and then click **Extend Access** to update the expiration time.
+
+The new expiration time takes effect after you confirm the update.
 
 ### Revoke access
 
-When troubleshooting is complete, or whenever you no longer want TiDB Cloud Support to access the files, click **Revoke Access** on the **Security** page and confirm the action. Revocation takes effect immediately. Files associated with the diagnostic access flow might also be deleted according to the product's retention policy.
+When troubleshooting is complete, or whenever you no longer want TiDB Cloud Support to access the Plan Replayer files, go to the **Security** page of the target TiDB Cloud Essential or Premium instance, and then click **Revoke Access** and confirm the action.
+
+Revocation takes effect immediately. Files associated with the diagnostic access flow might also be deleted according to the product's retention policy.
 
 ## Best practices
 
@@ -95,7 +98,7 @@ To help protect sensitive information, minimize unnecessary access, and improve 
 
 ## Security and retention
 
-Plan Replayer is designed to share optimizer and execution-plan context without exporting actual table rows. However, SQL text, object names, table definitions, configuration, bindings, and statistics can contain business-sensitive information. Use the minimum necessary access duration and revoke access after the investigation.
+Plan Replayer is designed to share optimizer and execution-plan context without exporting actual table rows. However, SQL text, object names, table definitions, configuration, bindings, and statistics can contain business-sensitive information. If you need to share the Plan Replayer file with TiDB Cloud Support, use the minimum necessary access duration and revoke access after the investigation.
 
 Plan Replayer files are temporary diagnostic artifacts. TiDB might automatically remove generated files after their retention period. Generate a new file if the previous file has expired or is no longer available.
 
