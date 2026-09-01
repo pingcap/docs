@@ -118,7 +118,7 @@ connections = ((core_count * 2) + effective_spindle_count)
 
 このメモは以下を示しています。
 
-- **core_countは**、 [ハイパースレッディング](https://en.wikipedia.org/wiki/Hyper-threading)を有効にするかどうかに関わらず、物理コアの数です。
+- **core_count**は、 [ハイパースレッディング](https://en.wikipedia.org/wiki/Hyper-threading)を有効にするかどうかに関わらず、物理コアの数です。
 - データが完全にキャッシュされると、 **effective_spindle_count**を`0`に設定する必要があります。キャッシュのヒット率が低下すると、カウントは実際の数値である`HDD`に近づきます。
 - **この計算式が*SSD*にも有効かどうかは検証されておらず、不明です。**
 
@@ -174,7 +174,7 @@ OLTP（オンライントランザクション処理）シナリオでは、プ�
 
 JDBCでは通常、以下の2つの処理方法が使用されます。
 
-- 最初の方法: [**FetchSizeを**`Integer.MIN_VALUE`に設定します](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-implementation-notes.html#ResultSet)クライアントがキャッシュしないようにします。クライアントは`StreamingResult`を介してネットワーク接続から実行結果を読み取ります。
+- 最初の方法: [**FetchSize**を`Integer.MIN_VALUE`に設定します](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-implementation-notes.html#ResultSet)クライアントがキャッシュしないようにします。クライアントは`StreamingResult`を介してネットワーク接続から実行結果を読み取ります。
 
     クライアントがストリーミング読み取り方式を使用する場合、クエリを実行するためにステートメントを引き続き使用する前に、読み取りを完了するか、 `resultset`閉じる必要があります。そうしないと、エラー`No statements may be issued when any streaming result sets are open and in use on a given connection. Ensure that you have called .close() on any active streaming result sets before attempting more queries.`が返されます。
 

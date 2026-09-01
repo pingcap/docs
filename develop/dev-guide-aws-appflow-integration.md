@@ -113,7 +113,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 **ソースの詳細**と**宛先の詳細**を選択してください。TiDBコネクタはどちらにも使用できます。
 
-1. ソース名を選択してください。このドキュメントでは、例として**Salesforceを**ソースとして使用します。
+1. ソース名を選択してください。このドキュメントでは、例として**Salesforce**をソースとして使用します。
 
     ![salesforce source](/media/develop/aws-appflow-step-salesforce-source.png)
 
