@@ -100,7 +100,7 @@ RESOURCE_GROUP: default
 - `HOST` : ユーザーが接続しているアドレス。
 - `DB` : 現在接続されているデフォルトデータベースの名前。
 - `COMMAND` : `PROCESS`が実行しているコマンドの種類。
-- `TIME` : 現在の実行時間`PROCESS` (秒)。
+- `TIME` : `PROCESS`の現在の実行時間 (秒)。
 - `STATE` : 現在の接続状態。
 - `INFO` : 処理中の要求されたステートメント。
 - `DIGEST` : SQL文のダイジェスト。
@@ -122,7 +122,7 @@ RESOURCE_GROUP: default
 - `HOST` : ユーザーが接続しているアドレス。
 - `DB` : 現在接続されているデフォルトデータベースの名前。
 - `COMMAND` : `PROCESS`が実行しているコマンドの種類。
-- `TIME` : 現在の実行時間`PROCESS` (秒)。
+- `TIME` : `PROCESS`の現在の実行時間 (秒)。
 - `STATE` : 現在の接続状態。
 - `INFO` : 処理中の要求されたステートメント。
 - `DIGEST` : SQL文のダイジェスト。
