@@ -222,9 +222,9 @@ TiDB バージョン: 8.0.0
 
     詳細については、[ドキュメント](/dm/dm-customized-secret-key.md)を参照してください。
 
-- `IMPORT INTO ... FROM SELECT`の機能を拡張するために`IMPORT INTO`構文をサポートします (実験的) [#49883](https://github.com/pingcap/tidb/issues/49883) @[D3Hunter](https://github.com/D3Hunter)
+- `IMPORT INTO`の機能を拡張するために`IMPORT INTO ... FROM SELECT`構文をサポートします (実験的) [#49883](https://github.com/pingcap/tidb/issues/49883) @[D3Hunter](https://github.com/D3Hunter)
 
-    以前の TiDB バージョンでは、クエリ結果をターゲットテーブルにインポートするには`INSERT INTO ... SELECT`文を使用するしかなく、大規模なデータセットのシナリオでは効率が悪かった。v8.0.0 以降では、TiDB で`IMPORT INTO ... FROM SELECT`を使用して`SELECT`クエリの結果を空の TiDB ターゲットテーブルにインポートできるようになり、 `INSERT INTO ... SELECT`の最大 8 倍のパフォーマンスを実現し、インポート時間を大幅に短縮できる。
+    以前の TiDB バージョンでは、クエリ結果をターゲットテーブルにインポートするには`INSERT INTO ... SELECT`文を使用するしかなく、大規模なデータセットのシナリオでは効率が悪かったです。v8.0.0 以降では、TiDB で`IMPORT INTO ... FROM SELECT`を使用して`SELECT`クエリの結果を空の TiDB ターゲットテーブルにインポートできるようになり、 `INSERT INTO ... SELECT`の最大 8 倍のパフォーマンスを実現し、インポート時間を大幅に短縮できます。
 
     さらに、 `IMPORT INTO ... FROM SELECT`を使用して、 [`AS OF TIMESTAMP`](/as-of-timestamp.md)でクエリされた履歴データをインポートできます。
 
