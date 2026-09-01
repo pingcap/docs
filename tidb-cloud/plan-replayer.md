@@ -6,7 +6,7 @@ Plan Replayer helps you package the information required to investigate an SQL e
 
 ## Overview
 
-Use Plan Replayer when you need to share enough optimizer context for a performance investigation without exporting the underlying table data. A Plan Replayer package can include the TiDB version and configuration, session variables, SQL bindings, table schemas, table statistics, the result of `EXPLAIN` or `EXPLAIN ANALYZE`, and internal optimizer information.
+Use Plan Replayer when you need to share the optimizer context required for a performance investigation without exporting the underlying table data. A Plan Replayer package can include the TiDB version and configuration, session variables, SQL bindings, table schemas, table statistics, the result of `EXPLAIN` or `EXPLAIN ANALYZE`, and internal optimizer information.
 
 The package is useful for investigating issues such as an unexpected execution plan, a plan regression, inaccurate statistics, or an SQL statement whose problematic plan appears only occasionally.
 
