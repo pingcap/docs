@@ -31,7 +31,7 @@ TiDB バージョン: 4.0.3
 
         - MQ sink-uri で`kafka-client-id`構成をサポート [＃706](https://github.com/pingcap/tiflow/pull/706)
         - `changefeed`構成のオフライン更新をサポート[＃699](https://github.com/pingcap/tiflow/pull/699)
-        - サポート設定カスタマイズ`changefeed`名前[＃727](https://github.com/pingcap/tiflow/pull/727)
+        - カスタマイズされた`changefeed`名の設定をサポート[＃727](https://github.com/pingcap/tiflow/pull/727)
         - TLSおよびMySQL SSL接続サポート [＃347](https://github.com/pingcap/tiflow/pull/347)
         - Avro 形式での変更の出力をサポート [＃753](https://github.com/pingcap/tiflow/pull/753)
         - Apache Pulsar シンクサポートする [＃751](https://github.com/pingcap/tiflow/pull/751)
@@ -54,7 +54,7 @@ TiDB バージョン: 4.0.3
     - システムテーブル`tiflash_tables`と`tiflash_segments`を追加する[＃18536](https://github.com/pingcap/tidb/pull/18536)
     - `AUTO RANDOM`実験的機能から一般公開となり、リリースされました。改善点と互換性の変更点は以下の通りです。
         - 設定ファイル内の`experimental.allow-auto-random`非推奨です。この項目の設定に関わらず、列の`AUTO RANDOM`機能はいつでも定義できます[＃18613](https://github.com/pingcap/tidb/pull/18613) [＃18623](https://github.com/pingcap/tidb/pull/18623)
-        - `AUTO RANDOM`列への明示的な書き込みを制御するために、セッション変数`tidb_allow_auto_random_explicit_insert`追加します。デフォルト値は`false`です。これは、列への明示的な書き込みによって発生する予期し`AUTO_RANDOM_BASE`更新を回避するためです[＃18508](https://github.com/pingcap/tidb/pull/18508)
+        - `AUTO RANDOM`列への明示的な書き込みを制御するために、セッション変数`tidb_allow_auto_random_explicit_insert`を追加します。デフォルト値は`false`です。これは、列への明示的な書き込みによって発生する予期しない`AUTO_RANDOM_BASE`の更新を回避するためです[＃18508](https://github.com/pingcap/tidb/pull/18508)
         - `BIGINT`列と`UNSIGNED BIGINT`列にのみ`AUTO_RANDOM`を定義できるようにし、シャードビットの最大数を`15`に制限することで、割り当て可能なスペースが急速に消費されるのを回避します[＃18538](https://github.com/pingcap/tidb/pull/18538)
         - `BIGINT`列に`AUTO_RANDOM`属性を定義し、主キーに負の値を挿入するときに`AUTO_RANDOM_BASE`更新をトリガーしないでください。 [＃17987](https://github.com/pingcap/tidb/pull/17987)
         - `UNSIGNED BIGINT`列に`AUTO_RANDOM`属性を定義するときに、IDの割り当てに整数の最上位ビットを使用します。これにより、割り当て可能なスペースが増えます。 [＃18404](https://github.com/pingcap/tidb/pull/18404)

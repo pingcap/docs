@@ -132,7 +132,7 @@ level-merge = false
 
 ## Titanを無効にする {#disable-titan}
 
-Titanを無効にするには、オプション`rocksdb.defaultcf.titan.blob-run-mode`設定します。オプション`blob-run-mode`のオプション値は次のとおりです。
+Titanを無効にするには、オプション`rocksdb.defaultcf.titan.blob-run-mode`を設定します。オプション`blob-run-mode`のオプション値は次のとおりです。
 
 - オプションを`normal`に設定すると、Titan は読み取りおよび書き込み操作を通常どおり実行します。
 - オプションを`read-only`に設定すると、値のサイズに関係なく、新しく書き込まれたすべての値が RocksDB に書き込まれます。

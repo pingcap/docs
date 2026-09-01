@@ -65,7 +65,7 @@ TiDB Cloudでは、アラートを無効化または有効化したり、アラ�
 
     > **Tip:**
     >
-    > 現在、 TiDB Cloudでは、アラートルール編集の機能が限定的に提供されています。一部のアラートルールは編集をサポートしていません。異なるトリガー条件や頻度を構成したい場合、または[PagerDuty](https://www.pagerduty.com/docs/guides/datadog-integration-guide/)などのダウンストリーム サービスでアラートが自動的にアクションをトリガーする[サードパーティの監視およびアラートとの統合](/tidb-cloud/third-party-monitoring-integrations.md)使用を検討してください。
+    > 現在、 TiDB Cloudでは、アラートルール編集の機能が限定的に提供されています。一部のアラートルールは編集をサポートしていません。異なるトリガー条件や頻度を構成したい場合、または[PagerDuty](https://www.pagerduty.com/docs/guides/datadog-integration-guide/)などのダウンストリームサービスでアラートが自動的にアクションをトリガーする[サードパーティの監視およびアラートとの統合](/tidb-cloud/third-party-monitoring-integrations.md)使用を検討してください。
 
 ## アラート通知を購読する {#subscribe-to-alert-notifications}
 
@@ -117,8 +117,8 @@ TiDB Cloudは、そのプランで利用可能[特徴](/tidb-cloud/features.md)�
 | データ移行ジョブでデータエクスポート中にエラーが発生しました        | エラーを確認し、ヘルプについては[データ移行のトラブルシューティング](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。                                                                                                                  |
 | データ移行ジョブのデータインポート中にエラーが発生しました         | エラーを確認し、ヘルプについては[データ移行のトラブルシューティング](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。                                                                                                                  |
 | データ移行ジョブで増分移行中にエラーが発生しました             | エラーを確認し、ヘルプについては[データ移行のトラブルシューティング](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。                                                                                                                  |
-| データ移行ジョブが増分移行中に6時間以上一時停止しています         | データの増分移行中に、データ移行ジョブが 6時間以上一時停止されました。アップストリーム データベースのbinlogがパージされる可能性があり (データベースのbinlogパージ戦略によって異なります)、増分移行が失敗する可能性があります。ヘルプについては[データ移行のトラブルシューティング](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。 |
-| レプリケーション遅延は10分を超え、20分以上経過しても増加し続けている。 | ヘルプについては[データ移行のトラブルシューティング](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。                                                                                                                          |
+| データ移行ジョブが増分移行中に6時間以上一時停止しています         | データの増分移行中に、データ移行ジョブが 6時間以上一時停止されました。アップストリームデータベースのbinlogがパージされる可能性があり (データベースのbinlogパージ戦略によって異なります)、増分移行が失敗する可能性があります。ヘルプについては[データ移行のトラブルシューティング](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。 |
+| レプリケーション遅延は10分を超え、20分以上経過しても増加し続けています。 | ヘルプについては[データ移行のトラブルシューティング](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。                                                                                                                          |
 
 ### TiDB Cloud Dedicatedの変更フィードアラート {#changefeed-alerts-for-tidb-cloud-dedicated}
 

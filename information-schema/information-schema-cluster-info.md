@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_INFO
-summary: CLUSTER_INFO`クラスタトポロジ情報テーブルについて学びましょう。
+summary: "`CLUSTER_INFO`クラスタトポロジ情報テーブルについて学びましょう。"
 ---
 
 # CLUSTER_INFO {#cluster-info}

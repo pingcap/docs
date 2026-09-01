@@ -372,7 +372,7 @@ LIMIT 10;
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-事前フィルタリングを有効にするには、 `.filter()`方法で`prefilter=True`設定します。
+事前フィルタリングを有効にするには、 `.filter()`方法で`prefilter=True`を設定します。
 
 **例: 事前フィルタリングによるベクトル検索**
 

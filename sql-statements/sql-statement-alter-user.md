@@ -179,7 +179,7 @@ ALTER USER 'newuser' RESOURCE GROUP rg1;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-現在のユーザーにバインドされているリソースグループを表示する。
+現在のユーザーにバインドされているリソースグループを表示します。
 
 ```sql
 SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user WHERE user = "newuser";

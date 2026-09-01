@@ -26,7 +26,7 @@ TiDB Ansible バージョン: 3.0.0
     - ウィンドウ関数をサポート。`NTILE` 、 `LEAD` 、 `LAG` 、 `PERCENT_RANK` 、 `NTH_VALUE` 、 `CUME_DIST` 、 `FIRST_VALUE` 、 `LAST_VALUE` 、 `RANK` 、 `DENSE_RANK` 、 `ROW_NUMBER`を含む、MySQL 8.0のすべてのウィンドウ関数と互換性があります
     - ビューのサポート（**Experimental**）
     - テーブルパーティションの改善
-        - サポート範囲パーティション
+        - 範囲パーティションをサポート
         - ハッシュパーティションをサポート
     - IP ホワイトリスト (**Enterprise**) や監査ログ (**Enterprise**) などのプラグインをサポートするプラグインフレームワークを追加します。
     - クエリの安定性を確保するために SQL 実行計画 バインディングを作成する SQL プラン管理機能をサポートします (**Experimental**)
@@ -68,9 +68,9 @@ TiDB Ansible バージョン: 3.0.0
     - 文字セット`utf8`から`utf8mb4`への移行をサポート
     - デフォルトの文字セットを`utf8`から`utf8mb4`に変更します
     - `alter schema`文を追加して、データベースの文字セットと照合順序を変更します。
-    - ALTERアルゴリズム`INSTANT`サポート`INPLACE`
-    - サポート`SHOW CREATE VIEW`
-    - サポート`SHOW CREATE USER`
+    - ALTERの`INPLACE`/`INSTANT`アルゴリズムをサポート
+    - `SHOW CREATE VIEW`をサポート
+    - `SHOW CREATE USER`をサポート
     - 誤って削除されたテーブルの高速回復をサポート
     - ADD INDEX の同時実行数を動的に調整する機能をサポート
     - `CREATE TABLE`ステートメントを使用してテーブルを作成するときに、リージョンを事前に割り当てる`pre_split_regions`オプションを追加して、テーブル作成後の大量の書き込みによって発生する書き込みホットリージョンを軽減します。
@@ -105,7 +105,7 @@ TiDB Ansible バージョン: 3.0.0
     - システム初期化プロセスを最適化し、DDL所有者のみが初期化を実行できるようにします。これにより、初期化やアップグレードの起動時間が短縮されます。
     - `kill query`の実行ロジックを最適化してパフォーマンスを向上させ、リソースが適切に解放されるようにします。
     - 設定ファイルの有効性をチェックするための起動オプション`config-check`を追加します
-    - 内部エラー再試行のバックオフ時間を制御するシステム変数`tidb_back_off_weight`追加します
+    - 内部エラー再試行のバックオフ時間を制御するシステム変数`tidb_back_off_weight`を追加します
     - `wait_timeout`と`interactive_timeout`システム変数を追加して、許可されるアイドル接続の最大数を制御しましょう。
     - 接続確立時間を短縮するために、TiKV の接続プールを追加します。
 - 互換性
@@ -127,9 +127,9 @@ TiDB Ansible バージョン: 3.0.0
     - `GetStores` APIのパフォーマンスを最適化
 - 構成
     - 構成チェックロジックを最適化して構成項目のエラーを回避する
-    - リージョンの結合方向を制御するには`enable-two-way-merge`追加します
-    - ホットリージョンのスケジュールレートを制御するには`hot-region-schedule-limit`追加します
-    - 複数のしきい値を連続して超える場合は、ホットスポットを識別するために`hot-region-cache-hits-threshold`追加します。
+    - リージョンの結合方向を制御するには`enable-two-way-merge`を追加します
+    - ホットリージョンのスケジュールレートを制御するには`hot-region-schedule-limit`を追加します
+    - 複数のしきい値を連続して超える場合は、ホットスポットを識別するために`hot-region-cache-hits-threshold`を追加します。
     - 1分あたりに許可される balance Region operator の最大数を制御するための`store-balance-rate`構成項目を追加します。
 - スケジューラの最適化
     - 各ストアのオペレーターの速度を個別に制御するためのストア制限メカニズムを追加します。

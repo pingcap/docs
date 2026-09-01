@@ -1,6 +1,6 @@
 ---
 title: INSPECTION_RESULT
-summary: INSPECTION_RESULT` 診断結果テーブルを確認します。
+summary: "`INSPECTION_RESULT` 診断結果テーブルを確認します。"
 ---
 
 # INSPECTION_RESULT {#inspection-result}
@@ -13,7 +13,7 @@ TiDB には、システム内の障害や隠れた問題を検出するための
 >
 > このテーブルは TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
-`information_schema.inspection_result`診断結果表`information_schema.inspection_result`の構造は以下のとおりである。
+`information_schema.inspection_result`診断結果表`information_schema.inspection_result`の構造は以下のとおりです。
 
 ```sql
 USE information_schema;
@@ -48,7 +48,7 @@ DESC inspection_result;
 - `ITEM` : 各ルールは異なる項目を診断します。このフィールドは、各ルールに対応する具体的な診断項目を示します。
 - `TYPE` : 診断のインスタンスタイプ。オプションの値は`tidb` 、 `pd` 、 `tikv`です。
 - `INSTANCE` : 診断されたインスタンスの特定のアドレス。
-- `STATUS_ADDRESS` : インスタンスの HTTP API サービス アドレス。
+- `STATUS_ADDRESS` : インスタンスの HTTP API サービスアドレス。
 - `VALUE` : 特定の診断項目の値。
 - `REFERENCE` ：この診断項目の基準値（閾値）。`VALUE`が閾値を超えると、対応する診断情報が生成されます。
 - `SEVERITY` : 重大度レベル。オプションの値は`warning`と`critical`です。
@@ -242,7 +242,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
 `critical-error`診断ルールでは、次の2つの診断ルールが実行されます。
 
-- メトリック スキーマ内の関連する監視システムテーブルをクエリして、クラスターに次のエラーがあるかどうかを検出します。
+- メトリックスキーマ内の関連する監視システムテーブルをクエリして、クラスターに次のエラーがあるかどうかを検出します。
 
     | コンポーネント   | エラー名                    | 監視テーブル                             | エラーの説明                                       |
     | ---- | ----------------------- | ---------------------------------- | -------------------------------------------- |
@@ -257,7 +257,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
 ### `threshold-check`診断ルール {#threshold-check-diagnostic-rule}
 
-`threshold-check`診断ルールは、メトリック スキーマ内の関連する監視システムテーブルを照会して、クラスター内の次のメトリックがしきい値を超えているかどうかを確認します。
+`threshold-check`診断ルールは、メトリックスキーマ内の関連する監視システムテーブルを照会して、クラスター内の次のメトリックがしきい値を超えているかどうかを確認します。
 
 | コンポーネント   | 監視メトリック              | 監視テーブル                              | 期待値       | 説明                                                                                                               |
 | :--- | :------------------- | :---------------------------------- | :-------- | :--------------------------------------------------------------------------------------------------------------- |

@@ -85,19 +85,19 @@ PingCAP Clinicを使用する前に、Diag（ PingCAP Clinicが提供するデ�
         tiup diag config clinic.token ${token-value}
         ```
 
-3. Diag に`region`設定します。
+3. Diag に`region`を設定します。
 
-    `region` 、データの圧縮に使用する暗号化証明書と、データのアップロード時に使用する対象サービスを決定します。例:
+    `region`は、データの圧縮に使用する暗号化証明書と、データのアップロード時に使用する対象サービスを決定します。例:
 
     > **Note:**
     >
-    > - Diag v0.9.0 以降のバージョンでは設定`region`サポートされます。
-    > - Diag v0.9.0より前のバージョンでは、データはデフォルトで中国リージョンのClinic Serverにアップロードされます。これらのバージョンで`region`設定するには、 `tiup update diag`コマンドを実行してDiagを最新バージョンにアップグレードし、その後Diagで`region`設定してください。
+    > - Diag v0.9.0 以降のバージョンでは`region`の設定がサポートされます。
+    > - Diag v0.9.0より前のバージョンでは、データはデフォルトで中国リージョンのClinic Serverにアップロードされます。これらのバージョンで`region`を設定するには、 `tiup update diag`コマンドを実行してDiagを最新バージョンにアップグレードし、その後Diagで`region`を設定してください。
 
     <SimpleTab groupId="clinicServer">
      <div label="Clinic Server for international users" value="clinic-us">
 
-    国際ユーザー向けに Clinic Server を使用する場合は、次のコマンドを使用して`region`を`US`設定します。
+    国際ユーザー向けに Clinic Server を使用する場合は、次のコマンドを使用して`region`を`US`に設定します。
 
     ```bash
     tiup diag config clinic.region US
@@ -106,7 +106,7 @@ PingCAP Clinicを使用する前に、Diag（ PingCAP Clinicが提供するデ�
     </div>
      <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-    中国本土のユーザー向けに Clinic Server を使用する場合は、次のコマンドを使用して`region`を`CN`設定します。
+    中国本土のユーザー向けに Clinic Server を使用する場合は、次のコマンドを使用して`region`を`CN`に設定します。
 
     ```bash
     tiup diag config clinic.region CN
@@ -199,7 +199,7 @@ Diag を使用すると、 TiUPを使用して展開された TiDB クラスタ�
     Do you want to continue? [y/N]: (default=N)
     ```
 
-2. データの収集を開始することを確認するには、 `Y`入力します。
+2. データの収集を開始することを確認するには、 `Y`を入力します。
 
     データの収集には一定の時間がかかります。収集するデータの量によって時間は異なります。例えば、テスト環境では1GBのデータの収集に約10分かかります。
 

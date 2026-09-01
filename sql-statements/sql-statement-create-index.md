@@ -300,7 +300,7 @@ mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": [2,3]}');
 ERROR 1062 (23000): Duplicate entry '2' for key 'customers.zips'
 ```
 
-同じレコード内に重複する値が存在することは許容されるが、異なるレコード内に重複する値が存在する場合はエラーが報告される。
+同じレコード内に重複する値が存在することは許容されますが、異なるレコード内に重複する値が存在する場合はエラーが報告されます。
 
 ```sql
 -- Insert succeeded
@@ -521,7 +521,7 @@ TiDB v8.0.0以降では、システム変数[`tidb_opt_use_invisible_indexes`](/
     >
     > 現在、特定の AWS リージョンのTiDB Cloud Starterインスタンスのみが[`FULLTEXT`構文と索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)をサポートしています。
 
-- TiDB は、MySQL との互換性のために、 `HASH` 、 `BTREE` 、 `RTREE`などのインデックス タイプを構文で受け入れますが、それらを無視します。
+- TiDB は、MySQL との互換性のために、 `HASH` 、 `BTREE` 、 `RTREE`などのインデックスタイプを構文で受け入れますが、それらを無視します。
 
 - 降順インデックスはサポートされていません（ MySQL 5.7と同様）。
 

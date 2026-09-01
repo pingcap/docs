@@ -13,10 +13,10 @@ summary: sync-diff-inspectorを使用してデータを比較し、不整合な�
 
 - テーブルスキーマとデータを比較する
 - データ不整合が存在する場合に、データ修復に使用するSQLステートメントを生成します。
-- サポート[スキーマ名またはテーブル名が異なるテーブルのデータチェック](/sync-diff-inspector/route-diff.md)
-- Support[シャーディングシナリオにおけるデータチェック](/sync-diff-inspector/shard-diff.md)
-- [TiDBアップストリーム/ダウンストリームクラスタのデータチェック](/ticdc/ticdc-upstream-downstream-check.md)サポート
-- Support [DMレプリケーションシナリオにおけるデータチェック](/sync-diff-inspector/dm-diff.md)
+- [スキーマ名またはテーブル名が異なるテーブルのデータチェック](/sync-diff-inspector/route-diff.md)をサポート
+- [シャーディングシナリオにおけるデータチェック](/sync-diff-inspector/shard-diff.md)をサポート
+- [TiDBアップストリーム/ダウンストリームクラスタのデータチェック](/ticdc/ticdc-upstream-downstream-check.md)をサポート
+- [DMレプリケーションシナリオにおけるデータチェック](/sync-diff-inspector/dm-diff.md)をサポート
 
 ## sync-diff-inspectorをインストールしてください。 {#install-sync-diff-inspector}
 

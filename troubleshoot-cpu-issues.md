@@ -52,7 +52,7 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 
 - PD がLeaderを選出できません: PD ログには`lease is not expired`が表示されます。[この号](https://github.com/etcd-io/etcd/issues/10355)は v3.0.x および v2.1.19 で修正されました。
 
-- リーダー選出が遅い。リージョンの読み込み時間が長い。この問題は、PDログで`grep "regions cost"`を実行することで確認できます。結果が`load 460927 regions cost 11.77099s`秒など秒単位の場合、リージョンの読み込みが遅いことを意味します。v3.0では、 `use-region-storage`を`true`に設定することで`region storage`機能を有効にでき、リージョンの読み込み時間を大幅に短縮できます。
+- リーダー選出が遅いです。リージョンの読み込み時間が長いです。この問題は、PDログで`grep "regions cost"`を実行することで確認できます。結果が`load 460927 regions cost 11.77099s`秒など秒単位の場合、リージョンの読み込みが遅いことを意味します。v3.0では、 `use-region-storage`を`true`に設定することで`region storage`機能を有効にでき、リージョンの読み込み時間を大幅に短縮できます。
 
 - TiDBとPD間のネットワークに問題があります。Grafana -&gt; **blackbox_exporter** -&gt; **ping レイテンシー**モニターにアクセスして、TiDBからPD Leaderへのネットワークが正常に動作しているかどうかを確認してください。
 
@@ -62,9 +62,9 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 
 - ローリングアップグレード中にPD OOMが発生しました。gRPCメッセージのサイズに制限がなく、モニターでは`TCP InSegs`が比較的大きいと表示されます。この問題はv3.0.6（ [＃1952](https://github.com/pingcap/pd/pull/1952) ）で修正されました。
 
-- PDがパニックになります。[バグを報告する](https://github.com/tikv/pd/issues/new?labels=kind/bug&template=bug-report.md) 。
+- PDがパニックになります。[バグを報告してください](https://github.com/tikv/pd/issues/new?labels=kind/bug&template=bug-report.md)。
 
-- その他の原因。`curl http://127.0.0.1:2379/debug/pprof/goroutine?debug=2`を実行してgoroutineを取得し、 [バグを報告する](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&template=bug-report.md)。
+- その他の原因。`curl http://127.0.0.1:2379/debug/pprof/goroutine?debug=2`を実行してgoroutineを取得し、 [バグを報告してください](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&template=bug-report.md)。
 
 ### TiKVの異常 {#tikv-anomalies}
 
@@ -77,7 +77,7 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 - `gRPC duration`のメトリックを確認してください。このメトリックは、TiKVにおけるgRPCリクエストの合計実行時間を表します。TiKVの`gRPC duration`とTiDBの`KV duration`を比較することで、潜在的なネットワークの問題を特定できます。例えば、gRPCの実行時間は短いのにTiDBのKV実行時間が長い場合、TiDBとTiKV間のネットワークレイテンシーが高いか、TiDBとTiKV間のNIC帯域幅が完全に占有されている可能性があります。
 
 - TiKVが再開されたため再選。
-    - TiKVがパニック状態になった後、 `systemd`引き上げられ、正常に動作します。panicが発生したかどうかは、TiKVのログを確認することで確認できます。この問題は予期せぬものであるため、発生した場合は[バグを報告する](https://github.com/tikv/tikv/issues/new?template=bug-report.md) 。
+    - TiKVがパニック状態になった後、 `systemd`引き上げられ、正常に動作します。panicが発生したかどうかは、TiKVのログを確認することで確認できます。この問題は予期せぬものであるため、発生した場合は[バグを報告してください](https://github.com/tikv/tikv/issues/new?template=bug-report.md)。
     - TiKVは第三者によって停止または強制終了され、その後`systemd`によってプルアップされます。`dmesg`とTiKVログを確認して原因を確認してください。
     - TiKV は OOM であり、再起動を引き起こします。
     - `THP` (Transparent Hugepage) を動的に調整しているため、TiKV がハングします。
@@ -106,7 +106,7 @@ CPU リソースの使用量がボトルネックになります。
 #### 考えられる理由 {#possible-reasons}
 
 - ホットスポットの問題
-- 全体的な負荷が高い。TiDBのスロークエリと負荷の高いクエリを確認してください。インデックスを追加するか、クエリをバッチ処理で実行することで、実行中のクエリを最適化してください。別の解決策としては、クラスターをスケールアウトすることです。
+- 全体的な負荷が高いです。TiDBのスロークエリと負荷の高いクエリを確認してください。インデックスを追加するか、クエリをバッチ処理で実行することで、実行中のクエリを最適化してください。別の解決策としては、クラスターをスケールアウトすることです。
 
 ## その他の原因 {#other-causes}
 

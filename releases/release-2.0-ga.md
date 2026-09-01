@@ -58,8 +58,8 @@ summary: 2018年4月27日にリリースされたTiDB 2.0 GAでは、MySQLとの
 
 ## PD {#pd}
 
-- サポート`Region Merge` 、データを削除した後に空のリージョンを結合する [実験的]
-- サポート`Raft Learner` [実験的]
+- データを削除した後に空のリージョンを結合する`Region Merge`をサポート [実験的]
+- `Raft Learner`をサポート [実験的]
 - スケジューラを最適化する
     - スケジューラをさまざまなリージョンサイズに適応させる
     - TiKV 障害時のデータ復元の優先度と速度を向上
@@ -91,7 +91,7 @@ summary: 2018年4月27日にリリースされたTiDB 2.0 GAでは、MySQLとの
 
 - 特徴
     - 重要な構成を誤った変更から保護する
-    - サポート`Region Merge` [実験的]
+    - `Region Merge`をサポート [実験的]
     - `Raw DeleteRange` APIを追加する
     - `GetMetric` APIを追加する
     - `Raw Batch Put` `Raw Batch Get` `Raw Batch Scan` `Raw Batch Delete`
@@ -143,9 +143,9 @@ TiSpark は個別のバージョン番号を使用します。現在の TiSpark 
     - 述語をリージョンキー範囲またはセカンダリインデックスに変換する
     - `Index Only`クエリを最適化 -リージョンごとにインデックススキャンをテーブルスキャンに適応的にダウングレード
 - コストベースの最適化を提供する
-    - サポート統計
+    - 統計をサポート
     - インデックスを選択
-    - 放送テーブル費用の見積もり
+    - ブロードキャストテーブル費用の見積もり
 - 複数のSparkインターフェースのサポートを提供する
     - Spark Shell をサポート
     - ThriftServer/JDBC をサポート

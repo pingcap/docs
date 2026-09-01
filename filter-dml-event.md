@@ -66,7 +66,7 @@ MySQL [test]> select * from tbl;
 > **Note:**
 >
 > - `update-old-value-expr`と`update-new-value-expr`を一緒に設定できます。
-> - `update-old-value-expr`と`update-new-value-expr`一緒に設定されている場合、「更新 + 古い値」が`update-old-value-expr`一致し**、** 「更新 + 新しい値」が`update-new-value-expr`一致する行がフィルタリングされます。
+> - `update-old-value-expr`と`update-new-value-expr`が一緒に設定されている場合、「更新 + 古い値」が`update-old-value-expr`に一致し、「更新 + 新しい値」が`update-new-value-expr`に一致する行がフィルタリングされます。
 > - `update-old-value-expr`と`update-new-value-expr`のいずれかが設定されている場合、設定された式によって**行の変更全体**をフィルタリングするかどうかが決定されます。つまり、古い値の削除と新しい値の挿入が全体としてフィルタリングされます。
 
 SQL式は1つの列でも複数の列でも使用できます。また、TiDBでサポートされているSQL関数（ `c % 2 = 0` 、 `a*a + b*b = c*c` 、 `ts > NOW()`など）も使用できます。

@@ -36,12 +36,12 @@ TiDB Ansible バージョン: 3.0.0-rc.1
 
 - サーバ
     - TiDB の起動時にのみ DDL 所有者にブートストラップの実行を許可する[＃10029](https://github.com/pingcap/tidb/pull/10029)
-    - トランザクション分離レベルをSERIALIZABLE に設定するときにTiDBがエラーを報告しないようにするために、変数`tidb_skip_isolation_level_check`追加します。 [＃10065](https://github.com/pingcap/tidb/pull/10065)
+    - トランザクション分離レベルをSERIALIZABLE に設定するときにTiDBがエラーを報告しないようにするために、変数`tidb_skip_isolation_level_check`を追加します。 [＃10065](https://github.com/pingcap/tidb/pull/10065)
     - 暗黙的なコミット時間とSQL実行時間をスローログにマージする [＃10294](https://github.com/pingcap/tidb/pull/10294)
         - SQL ロールのサポート (RBAC権限管理)
-        - サポート`SHOW GRANT` [＃10016](https://github.com/pingcap/tidb/pull/10016)
-        - サポート`SET DEFAULT ROLE` [＃9949](https://github.com/pingcap/tidb/pull/9949)
-    - サポート`GRANT ROLE` [＃9721](https://github.com/pingcap/tidb/pull/9721)
+        - `SHOW GRANT`をサポート [＃10016](https://github.com/pingcap/tidb/pull/10016)
+        - `SET DEFAULT ROLE`をサポート [＃9949](https://github.com/pingcap/tidb/pull/9949)
+    - `GRANT ROLE`をサポート [＃9721](https://github.com/pingcap/tidb/pull/9721)
     - TiDB を終了させる`whitelist`プラグインの`ConnectionEvent`エラーを修正します[＃9889](https://github.com/pingcap/tidb/pull/9889)
     - トランザクション履歴に読み取り専用ステートメントを誤って追加する問題を修正[＃9723](https://github.com/pingcap/tidb/pull/9723)
     - `kill`文を改善して SQL 実行を停止し、リソースをより早く解放する[＃9844](https://github.com/pingcap/tidb/pull/9844)
@@ -128,7 +128,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
 
 - sync-diff-inspector
     - チェックポイントをサポートし、検証ステータスを記録し、再起動後に最後に保存したポイントから検証を続行します[＃224](https://github.com/pingcap/tidb-tools/pull/224)
-    - チェックサム計算してデータの整合性をチェックするための構成項目`only-use-checksum`追加します [＃215](https://github.com/pingcap/tidb-tools/pull/215)
+    - チェックサムを計算してデータの整合性をチェックするための構成項目`only-use-checksum`を追加します [＃215](https://github.com/pingcap/tidb-tools/pull/215)
 
 ## TiDB Ansible {#tidb-ansible}
 
@@ -144,4 +144,4 @@ TiDB Ansible バージョン: 3.0.0-rc.1
 - `table-regions.py`スクリプトを最適化して、表のリーダー分布を表示する [＃739](https://github.com/pingcap/tidb-ansible/pull/739)
 - Drainer の設定ファイルを更新します [＃745](https://github.com/pingcap/tidb-ansible/pull/745)
 - SQL カテゴリ別にレイテンシを表示する新しいパネルで TiDB モニタリングを最適化[＃747](https://github.com/pingcap/tidb-ansible/pull/747)
-- Lightning設定ファイルを更新し、 `tidb_lightning_ctl`スクリプト[#1e946f8](https://github.com/pingcap/tidb-ansible/commit/1e946f89908e8fd6ef84128c6da3064ddfccf6a8)追加します。
+- Lightning設定ファイルを更新し、 `tidb_lightning_ctl`スクリプト[#1e946f8](https://github.com/pingcap/tidb-ansible/commit/1e946f89908e8fd6ef84128c6da3064ddfccf6a8)を追加します。

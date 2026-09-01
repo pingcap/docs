@@ -60,7 +60,7 @@ http://192.168.0.123:2379/dashboard/
 
     > **Warning:**
     >
-    > **このパス内のサービスのみが**リバースプロキシの背後にあることを保証するには、 `use_backend`ディレクティブの`if`部分を保持する必要があります。そうしないと、セキュリティリスクが発生する可能性があります。[TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
+    > **このパス内のサービスのみ**がリバースプロキシの背後にあることを保証するには、 `use_backend`ディレクティブの`if`部分を保持する必要があります。そうしないと、セキュリティリスクが発生する可能性があります。[TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
 
 2. 設定を有効にするには、HAProxy を再起動します。
 
@@ -212,7 +212,7 @@ backend tidb_dashboard_back
 
 > **Warning:**
 >
-> **このパス内のサービスのみが**リバースプロキシの背後にあることを保証するには、 `use_backend`ディレクティブの`if`部分を保持する必要があります。そうしないと、セキュリティリスクが発生する可能性があります。[TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
+> **このパス内のサービスのみ**がリバースプロキシの背後にあることを保証するには、 `use_backend`ディレクティブの`if`部分を保持する必要があります。そうしないと、セキュリティリスクが発生する可能性があります。[TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
 
 TiDB Dashboard サービスをルートパス ( `http://example.com:8033/`など) で実行する場合は、次の構成を使用します。
 
@@ -247,7 +247,7 @@ server {
 
 > **Warning:**
 >
-> `proxy_pass`ディレクティブの`/dashboard/`パスは必ず保持し**、このパス内のサービスのみが**リバースプロキシの背後にあるようにする必要があります。そうしないと、セキュリティリスクが発生する可能性があります。[TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
+> `proxy_pass`ディレクティブの`/dashboard/`パスは必ず保持し、**このパス内のサービスのみ**がリバースプロキシの背後にあるようにする必要があります。そうしないと、セキュリティリスクが発生する可能性があります。[TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
 
 TiDB Dashboard サービスをルートパス ( `http://example.com:8033/`など) で実行する場合は、次の構成を使用します。
 

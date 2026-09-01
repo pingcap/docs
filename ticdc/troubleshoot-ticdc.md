@@ -52,7 +52,7 @@ cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id 28c43ffc
 
 ### タスク中断後に TiCDC を再起動した後で発生する OOM を処理するにはどうすればよいですか? {#what-should-i-do-to-handle-the-oom-that-occurs-after-ticdc-is-restarted-after-a-task-interruption}
 
-- TiDBクラスタとTiCDCクラスタを最新バージョンに更新してください。OOM問題は**、v4.0.14以降のv4.0バージョン、v5.0.2以降のv5.0バージョン、および最新バージョン**で既に解決されています。
+- TiDBクラスタとTiCDCクラスタを最新バージョンに更新してください。OOM問題は、**v4.0.14以降のv4.0バージョン、v5.0.2以降のv5.0バージョン、および最新バージョン**で既に解決されています。
 
 ## レプリケーションタスクを作成するとき、または MySQL にデータをレプリケートするときに、「 `Error 1298: Unknown or incorrect time zone: 'UTC'`エラーを処理するにはどうすればよいですか? {#how-do-i-handle-the-error-1298-unknown-or-incorrect-time-zone-utc-error-when-creating-the-replication-task-or-replicating-data-to-mysql}
 
@@ -127,7 +127,7 @@ cdc cli changefeed resume -c test-cf --server=http://127.0.0.1:8300
 この問題のあるDDL文をスキップするには、 `ignore-txn-start-ts`パラメータを設定して、指定された`start-ts`に対応するトランザクションをスキップします。例:
 
 1. TiCDC ログで`apply job`フィールドを検索し、時間がかかっている`start-ts`の DDL を特定します。
-2. changefeed の設定を変更します。設定項目`ignore-txn-start-ts`に上記の`start-ts`追加します。
+2. changefeed の設定を変更します。設定項目`ignore-txn-start-ts`に上記の`start-ts`を追加します。
 3. 中断された変更フィードを再開します。
 
 > **Note:**

@@ -1,6 +1,6 @@
 ---
 title: TABLE_STORAGE_STATS
-summary: TABLE_STORAGE_STATS` INFORMATION_SCHEMA テーブルについて学習します。
+summary: "`TABLE_STORAGE_STATS` INFORMATION_SCHEMA テーブルについて学習します。"
 ---
 
 # TABLE_STORAGE_STATS {#table-storage-stats}

@@ -49,7 +49,7 @@ summary: TiDB クラスターのアラートルールについて学習します
 
 - 解決：
 
-    リーダーのバランスが取れているかどうかを確認するには、[**TiKV詳細**&gt;**クラスタ**ダッシュボード](/grafana-tikv-dashboard.md#cluster)を確認する。
+    リーダーのバランスは、[**TiKV詳細**&gt;**クラスタ**ダッシュボード](/grafana-tikv-dashboard.md#cluster)で確認します。
 
 #### `TiDB_domain_load_schema_total` {#tidb_domain_load_schema_total}
 
@@ -140,7 +140,7 @@ summary: TiDB クラスターのアラートルールについて学習します
 
 - 解決：
 
-    TiKV の監視ステータスを確認する。
+    TiKV の監視ステータスを確認します。
 
 #### `TiDB_monitor_time_jump_back_error` {#tidb_monitor_time_jump_back_error}
 
@@ -659,7 +659,7 @@ summary: TiDB クラスターのアラートルールについて学習します
 - 解決：
 
     1. `warn`や`error`などの上位レベルのログの使用を検討してください。
-    2. `[raftstore]`構成の下に`raft-base-tick-interval = "2s"`追加します。
+    2. `[raftstore]`構成の下に`raft-base-tick-interval = "2s"`を追加します。
 
 #### `TiKV_scheduler_context_total` {#tikv_scheduler_context_total}
 

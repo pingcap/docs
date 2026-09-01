@@ -380,7 +380,7 @@ ALTER TABLE t ADD PARTITION (PARTITION pDef DEFAULT);
 ALTER TABLE t ADD PARTITION (PARTITION pDef VALUES IN (DEFAULT));
 ```
 
-このようにすることで、どのパーティションの値セットにも一致しない新規挿入値は、自動的にデフォルトパーティションに格納される。
+このようにすることで、どのパーティションの値セットにも一致しない新規挿入値は、自動的にデフォルトパーティションに格納されます。
 
 ```sql
 INSERT INTO t VALUES (7, 7);
@@ -1024,7 +1024,7 @@ ALTER TABLE member_level REORGANIZE PARTITION l1_2,l3,l4,l5,l6 INTO
 
 ### ハッシュとキーのパーティションを管理する {#manage-hash-and-key-partitions}
 
-このセクションでは、次の SQL ステートメントで作成されたパーティションテーブルを例として、ハッシュパーティションの管理方法を示します。キー パーティションについても、同じ管理ステートメントを使用できます。
+このセクションでは、次の SQL ステートメントで作成されたパーティションテーブルを例として、ハッシュパーティションの管理方法を示します。キーパーティションについても、同じ管理ステートメントを使用できます。
 
 ```sql
 CREATE TABLE example (
