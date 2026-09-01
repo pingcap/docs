@@ -29,6 +29,8 @@ MViewStartWithOrNext ::=
 |   'NEXT' Expression
 ```
 
+The `START WITH` and `NEXT` expressions must return `DATETIME` or `TIMESTAMP` values.
+
 ## Examples
 
 Change the comment of a materialized view:
@@ -40,7 +42,8 @@ ALTER MATERIALIZED VIEW mv COMMENT = 'updated comment';
 Change the refresh schedule:
 
 ```sql
-ALTER MATERIALIZED VIEW mv REFRESH START WITH NOW() NEXT 300;
+ALTER MATERIALIZED VIEW mv
+    REFRESH START WITH NOW() NEXT DATE_ADD(NOW(), INTERVAL 1 HOUR);
 ```
 
 Change multiple properties in one statement:
@@ -48,7 +51,7 @@ Change multiple properties in one statement:
 ```sql
 ALTER MATERIALIZED VIEW mv
     COMMENT = 'updated comment',
-    REFRESH NEXT 300,
+    REFRESH NEXT DATE_ADD(NOW(), INTERVAL 1 HOUR),
     ATTRIBUTES = 'updated attributes';
 ```
 

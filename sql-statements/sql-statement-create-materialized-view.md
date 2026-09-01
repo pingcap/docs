@@ -41,6 +41,8 @@ MViewAttributesOpt ::=
     ( 'ATTRIBUTES' EqOpt stringLit )?
 ```
 
+The `START WITH` and `NEXT` expressions must return `DATETIME` or `TIMESTAMP` values.
+
 The clauses in `CREATE MATERIALIZED VIEW` must appear in the following order:
 
 1. The materialized view name and column list.
@@ -64,7 +66,7 @@ CREATE MATERIALIZED VIEW mv (a)
     COMMENT = 'example'
     SHARD_ROW_ID_BITS = 2
     PRE_SPLIT_REGIONS = 3
-    REFRESH FAST NEXT 300
+    REFRESH FAST NEXT DATE_ADD(NOW(), INTERVAL 1 HOUR)
     ATTRIBUTES = 'example'
     AS SELECT 1;
 ```

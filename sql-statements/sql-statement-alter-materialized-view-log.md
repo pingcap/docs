@@ -32,12 +32,14 @@ MLogStartWithOpt ::=
     ( 'START' 'WITH' Expression )?
 ```
 
+The `START WITH` and `NEXT` expressions must return `DATETIME` or `TIMESTAMP` values.
+
 ## Examples
 
 Change the purge schedule:
 
 ```sql
-ALTER MATERIALIZED VIEW LOG ON t PURGE NEXT 300;
+ALTER MATERIALIZED VIEW LOG ON t PURGE NEXT DATE_ADD(NOW(), INTERVAL 1 HOUR);
 ```
 
 Add columns to a materialized view log:
