@@ -150,9 +150,9 @@ table.search([1, 2, 3]).limit(3).to_list()
 </div>
 <div label="SQL" value="sql">
 
-クエリ ベクトルの`n`最も近い近傍を取得するには、 `SELECT`文の`ORDER BY <distance_function>(<column_name>, <query_vector>) LIMIT <n>`句を使用します。
+クエリベクトルの`n`個の最も近い近傍を取得するには、 `SELECT`文の`ORDER BY <distance_function>(<column_name>, <query_vector>) LIMIT <n>`句を使用します。
 
-次の例では、 `vec_cosine_distance`関数を使用して、 `text_vec`列に格納されているベクトルと指定されたクエリ ベクトル`[1, 2, 3]`間のコサイン距離を計算します。
+次の例では、 `vec_cosine_distance`関数を使用して、 `text_vec`列に格納されているベクトルと指定されたクエリベクトル`[1, 2, 3]`間のコサイン距離を計算します。
 
 ```sql
 SELECT id, text, vec_cosine_distance(text_vec, '[1,2,3]') AS distance
