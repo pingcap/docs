@@ -504,7 +504,7 @@ UPDATE data_table SET value = 'v3' WHERE id = 1;
 UPDATE data_table SET value = 'v1' WHERE id = 2;
 ```
 
-2 番目の`UPDATE`文を実行するときにダウンストリームテーブルにまだ`v1`含まれている場合、 `value`列の一意キー制約に違反し、 `CDC:ErrMySQLDuplicateEntryCDC`エラーが発生します。
+2 番目の`UPDATE`文を実行するときにダウンストリームテーブルにまだ`v1`が含まれている場合、 `value`列の一意キー制約に違反し、 `CDC:ErrMySQLDuplicateEntryCDC`エラーが発生します。
 
 `CDC:ErrMySQLDuplicateEntryCDC`エラーが頻繁に発生する場合は、 [`sink-uri`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)構成で`safe-mode=true`パラメータを設定することで TiCDC セーフモードを有効にすることができます。
 
