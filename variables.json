@@ -9,6 +9,7 @@
   "dedicated": "TiDB Cloud Dedicated",
   "premium": "TiDB Cloud Premium",
   "console-url": "tidbcloud.com",
+  "company": "PingCAP",
   "lake": "TiDB Cloud Lake",
   "byoc": "TiDB Cloud BYOC"
 }
