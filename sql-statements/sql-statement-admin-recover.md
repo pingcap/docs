@@ -5,7 +5,7 @@ summary: TiDB データベースの ADMIN RECOVER INDEX の使用法の概要。
 
 # ADMIN RECOVER INDEX {#admin-recover-index}
 
-行データとインデックスデータに不整合がある場合、 `ADMIN RECOVER INDEX`文を使用して、冗長インデックスに基づいて整合性を回復できます。ただし、この構文は[外部キー制約](/foreign-key.md)まだサポートしていないことに注意してください。
+行データとインデックスデータに不整合がある場合、 `ADMIN RECOVER INDEX`文を使用して、冗長インデックスに基づいて整合性を回復できます。ただし、この構文は[外部キー制約](/foreign-key.md)をまだサポートしていないことに注意してください。
 
 ## 概要 {#synopsis}
 
