@@ -28,7 +28,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         You can view historical events that record changes to your Premium instance on this page, along with information such as the event type, status, message, trigger time, and trigger user. Event data is retained for 7 days.
 
-        For more information, see [Events](/tidb-cloud/tidb-cloud-events.md).
+        For more information, see [Events](https://docs.pingcap.com/tidbcloud/tidb-cloud-events/?plan=premium)
 
     - TiDB Cloud Premium now lets you configure filter rules for database audit logging.
 
