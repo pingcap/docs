@@ -37,6 +37,8 @@ MLogAccumulationAlertClauseOpt ::=
     ( 'ALERT' 'ROWS' SignedNum )?
 ```
 
+The `START WITH` and `NEXT` expressions must return `DATETIME` or `TIMESTAMP` values.
+
 The clauses in `CREATE MATERIALIZED VIEW LOG` must appear in the following order:
 
 1. The base table name and column list.
@@ -58,7 +60,7 @@ Create a materialized view log with scheduled purging:
 
 ```sql
 CREATE MATERIALIZED VIEW LOG ON t (a)
-    PURGE NEXT 300;
+    PURGE NEXT DATE_ADD(NOW(), INTERVAL 1 HOUR);
 ```
 
 ## See also
