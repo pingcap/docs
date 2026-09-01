@@ -50,7 +50,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - Starting September 1, 2026, billing for backup usage and network egress on [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances gradually takes effect.
 
-        Network egress is billed as a separate line item instead of being included in RCU charges.
+        Network egress is billed as a separate line item rather than being included in RCU charges.
 
         For more information, see [TiDB Cloud Essential Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
 
