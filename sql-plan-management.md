@@ -387,7 +387,7 @@ SHOW [GLOBAL | SESSION] BINDINGS [ShowLikeOrWhere]
 | update_time | 更新時刻                                                                                                                                                  |
 | charset | 文字セット                                                                                                                                                 |
 | collation | 順序付けルール                                                                                                                                               |
-| source | バインディングが作成される方法`manual` (SQL文に従って作成される)、 `history` (履歴実行計画に従って作成される)、 `capture` (TiDB によって自動的に取得される)、および`evolve` (TiDB によって自動的に展開される) が含まれます。 |
+| source | バインディングが作成される方法には、 `manual` (SQL文に従って作成される)、 `history` (履歴実行計画に従って作成される)、 `capture` (TiDB によって自動的に取得される)、および`evolve` (TiDB によって自動的に展開される) が含まれます。 |
 | sql_digest | 正規化されたSQL文のダイジェスト                                                                                                                                     |
 | plan_digest | 実行計画のダイジェスト                                                                                                                                           |
 
