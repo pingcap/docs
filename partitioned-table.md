@@ -681,9 +681,9 @@ PARTITIONS 2;
 
 #### TiDBが線形ハッシュパーティションを処理する方法 {#how-tidb-handles-linear-hash-partitions}
 
-バージョン6.4.0より前では、 [MySQL 線形ハッシュ](https://dev.mysql.com/doc/refman/8.0/en/partitioning-linear-hash.html)のDDL文を実行すると TiDBでパーティション分割されたテーブルを作成すると、TiDBはパーティション分割されていないテーブルしか作成できません。この場合、TiDBでパーティション分割されたテーブルを使用したい場合は、DDL文を変更する必要があります。
+バージョン6.4.0より前では、TiDBで[MySQL 線形ハッシュ](https://dev.mysql.com/doc/refman/8.0/en/partitioning-linear-hash.html)パーティションのDDL文を実行すると、TiDBはパーティション分割されていないテーブルしか作成できません。この場合、TiDBでパーティション分割されたテーブルを使用したい場合は、DDL文を変更する必要があります。
 
-バージョン6.4.0以降、TiDBはMySQLの`PARTITION BY LINEAR HASH`構文の解析をサポートしていますが、その中の`LINEAR`キーワードは無視します。MySQLリニアハッシュパーティションの既存のDDLおよびDML文がある場合は、TiDBで変更せずに実行できます。
+バージョン6.4.0以降、TiDBはMySQLの`PARTITION BY LINEAR HASH`構文の解析をサポートしていますが、その中の`LINEAR`キーワードは無視します。MySQL線形ハッシュパーティションの既存のDDLおよびDML文がある場合は、TiDBで変更せずに実行できます。
 
 - MySQL の線形ハッシュパーティションの`CREATE`文の場合、TiDB は非線形ハッシュパーティションテーブルを作成します (TiDB には線形ハッシュパーティションテーブルはありません)。パーティション数が 2 のべき乗の場合、TiDB ハッシュパーティションテーブルの行は MySQL の線形ハッシュパーティションテーブルと同じように分散されます。それ以外の場合、TiDB でのこれらの行の分散は MySQL とは異なります。これは、非線形パーティションテーブルは単純な「パーティション数の剰余」を使用するのに対し、線形パーティションテーブルは「次の 2 のべき乗の剰余」を使用し、パーティション数と次の 2 のべき乗の間の値を折り返す」ためです。詳細については、 [#38450](https://github.com/pingcap/tidb/issues/38450)を参照してください。
 
