@@ -363,7 +363,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     - 非厳格モード ( `sql_mode = ''` ) で`INSERT`実行中に切り捨てが発生し、エラーが報告される問題を修正しました [#49369](https://github.com/pingcap/tidb/issues/49369) @[tiancaiamao](https://github.com/tiancaiamao)
     - CTEクエリが再試行処理中にエラー`type assertion for CTEStorageMap failed`を報告する可能性がある問題を修正 [#46522](https://github.com/pingcap/tidb/issues/46522) @[tiancaiamao](https://github.com/tiancaiamao)
     - `LIMIT`と`ORDER BY`がネストされた`UNION`クエリで無効になる可能性がある問題を修正 [#49377](https://github.com/pingcap/tidb/issues/49377) @[AilinKid](https://github.com/AilinKid)
-    - `ENUM`または`SET`型の無効な値を解析すると、SQL文 エラーが直接発​​生する問題を修正しました [#49487](https://github.com/pingcap/tidb/issues/49487) @[winoros](https://github.com/winoros)
+    - `ENUM`または`SET`型の無効な値を解析すると、SQL文エラーが直接発​​生する問題を修正しました [#49487](https://github.com/pingcap/tidb/issues/49487) @[winoros](https://github.com/winoros)
     - Golangの暗黙的な型変換アルゴリズムが原因で統計構築時に発生する過剰な統計誤差の問題を修正 [#49801](https://github.com/pingcap/tidb/issues/49801) @[qw4990](https://github.com/qw4990)
     - 一部のタイムゾーンでサマータイムが正しく表示されない問題を修正 [#49586](https://github.com/pingcap/tidb/issues/49586) @[overvenus](https://github.com/overvenus)
     - `AUTO_ID_CACHE=1`を含むテーブルが多数存在する場合に gRPC クライアントのリークを引き起こす可能性がある問題を修正しました [#48869](https://github.com/pingcap/tidb/issues/48869) @[tiancaiamao](https://github.com/tiancaiamao)
