@@ -71,8 +71,8 @@ TiDBは、SQL処理パスとデータベース時間を継続的に測定・収�
 - SQL タイプ別のデータベース時間:
 
     - 青： `Select`文
-    - 緑: `Update`および`Commit` `Insert` DML文
-    - 赤: `StmtPrepare` `StmtReset`含む一般的`StmtClose` SQL `StmtFetch`
+    - 緑: `Update`、 `Insert`、 `Commit`などのDML文
+    - 赤: `StmtPrepare`、 `StmtReset`、 `StmtFetch`、 `StmtClose`などの一般的なSQLタイプ
 
 - SQLフェーズ別データベース時間：SQL実行フェーズは緑色で、その他のフェーズは赤色で表示されます。緑色以外の領域が大きい場合は、実行フェーズ以外のフェーズでデータベース時間が大量に消費されていることを意味し、さらなる原因分析が必要です。よくあるシナリオとしては、プリペアドプランキャッシュが利用できないために、オレンジ色で表示されるコンパイルフェーズで大きな領域が消費されているケースが挙げられます。
 
