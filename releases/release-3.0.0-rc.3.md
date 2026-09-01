@@ -35,7 +35,7 @@ TiDB Ansible バージョン: 3.0.0-rc.3
     - `show view`権限が`explain` で考慮されない問題を修正 [＃10635](https://github.com/pingcap/tidb/pull/10635)
     - ホットスポットの問題を軽減するために、テーブルリージョンを手動で分割する`split table region`ステートメントを追加します[＃10765](https://github.com/pingcap/tidb/pull/10765)
     - ホットスポットの問題を軽減するために、インデックスリージョンを手動で分割する`split index region`ステートメントを追加します[＃10764](https://github.com/pingcap/tidb/pull/10764)
-    - `create user`などの複数`revoke`文`grant`連続して実行した場合の不正な実行問題を修正しました[＃10737](https://github.com/pingcap/tidb/pull/10737)
+    - `create user`、 `grant`、 `revoke`などの複数の文を連続して実行した場合の不正な実行問題を修正しました[＃10737](https://github.com/pingcap/tidb/pull/10737)
     - コプロセッサーへの式のプッシュダウンを禁止するブロックリストを追加します。 [＃10791](https://github.com/pingcap/tidb/pull/10791)
     - クエリがメモリ構成制限を超えたときに`expensive query`ログを出力する機能を追加 [＃10849](https://github.com/pingcap/tidb/pull/10849)
     - 変更されたバインディング実行計画の更新時間を制御する`bind-info-lease`構成項目を追加します。 [＃10727](https://github.com/pingcap/tidb/pull/10727)
