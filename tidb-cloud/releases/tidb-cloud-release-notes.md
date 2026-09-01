@@ -8,6 +8,52 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes','/ai/v
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## September 1, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - TiDB Cloud Essential now lets you temporarily authorize TiDB Cloud Support to access Plan Replayer files for SQL performance troubleshooting.
+
+        You can choose the access duration, extend it if needed, or revoke access at any time. Access is automatically revoked when the authorization expires.
+
+        Plan Replayer files contain SQL text, table schemas, and optimizer statistics, but no actual table row data.
+
+        For more information, see [Use Plan Replayer to Troubleshoot SQL Performance](https://docs.pingcap.com/tidbcloud/plan-replayer/?plan=essential).
+
+- **TiDB Cloud Premium**
+
+    - The **Events** page is now available for TiDB Cloud Premium instances.
+
+        You can view historical events that record changes to your Premium instance on this page, along with information such as the event type, status, message, trigger time, and trigger user. Event data is retained for 7 days.
+
+        For more information, see [Events](/tidb-cloud/tidb-cloud-events.md).
+
+    - TiDB Cloud Premium now lets you configure filter rules for database audit logging.
+
+        You can filter audit events by SQL user, event class, table, and execution status to control which database activities are logged, helping you focus on relevant events for security auditing and compliance.
+
+        For more information, see [Specify audit filter rules](https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing-premium/?plan=premium#specify-audit-filter-rules).
+
+    - TiDB Cloud Premium now lets you temporarily authorize TiDB Cloud Support to access Plan Replayer files for SQL performance troubleshooting.
+
+        You can choose the access duration, extend it if needed, or revoke access at any time. Access is automatically revoked when the authorization expires.
+
+        Plan Replayer files contain SQL text, table schemas, and optimizer statistics, but no actual table row data.
+
+        For more information, see [Use Plan Replayer to Troubleshoot SQL Performance](https://docs.pingcap.com/tidbcloud/plan-replayer/?plan=premium).
+
+**Billing adjustments**
+
+- **TiDB Cloud Essential**
+
+    - Starting September 1, 2026, billing for backup usage and network egress on [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances gradually takes effect.
+
+        Network egress is billed as a separate line item instead of being included in RCU charges.
+
+        For more information, see [TiDB Cloud Essential Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
+
 ## August 28, 2026
 
 **General changes**
