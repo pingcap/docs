@@ -27,7 +27,7 @@ TiDBバージョン: 6.2.0-DMR
 - BR は[ユーザーおよび権限データの復元](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)サポートしており、バックアップと復元がよりスムーズになります。
 - TiCDC[特定の種類のDDLイベントをフィルタリングする](/ticdc/ticdc-filter.md)フィルタリングすることをサポートすることで、より多くのデータレプリケーションシナリオを可能にします。
 - [`SAVEPOINT`機構](/sql-statements/sql-statement-savepoint.md)がサポートされており、トランザクション内のロールバックポイントを柔軟に制御できます。
-- TiDB は[1つの`ALTER TABLE`文だけで、複数の列またはインデックスの追加、削除、変更を行う](/sql-statements/sql-statement-alter-table.md)サポートしています。
+- TiDB は[1つの`ALTER TABLE`文だけで、複数の列またはインデックスの追加、削除、変更を行う](/sql-statements/sql-statement-alter-table.md)ことをサポートしています。
 - [クラスター間RawKV複製](/tikv-configuration-file.md#api-version-new-in-v610)サポートされるようになりました。
 
 ## 新機能 {#new-features}
