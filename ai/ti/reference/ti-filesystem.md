@@ -409,7 +409,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates curl fuse3 \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -fsSL https://github.com/tidbcloud/ti/releases/latest/download/install.sh \
+RUN curl -fsSL https://github.com/tidbcloud/ti-cli/releases/latest/download/install.sh \
     | sh -s -- --yes --version "${TI_VERSION}"
 
 ENV PATH="/root/.ti/bin:${PATH}"

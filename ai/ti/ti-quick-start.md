@@ -24,7 +24,7 @@ Before you begin, obtain a TiDB Cloud API public key and private key from the [T
 On macOS or Linux, run the installer:
 
 ```bash
-curl -fsSL https://github.com/tidbcloud/ti/releases/latest/download/install.sh | sh -s -- --yes
+curl -fsSL https://github.com/tidbcloud/ti-cli/releases/latest/download/install.sh | sh -s -- --yes
 ```
 
 After installation, add `ti` to the current shell and verify it:
@@ -40,7 +40,7 @@ On Windows PowerShell, run the installer:
 
 ```powershell
 $script = "$env:TEMP\install-ti.ps1"
-iwr https://github.com/tidbcloud/ti/releases/latest/download/install.ps1 -OutFile $script
+iwr https://github.com/tidbcloud/ti-cli/releases/latest/download/install.ps1 -OutFile $script
 powershell -ExecutionPolicy Bypass -File $script -Yes
 ```
 

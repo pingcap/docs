@@ -113,7 +113,7 @@ The configured TiDB Cloud region might not be one of the Filesystem endpoints bu
 The release installer places `ti-drive9` next to `ti`. Re-run the current installer when the TiDB Cloud CLI reports a missing companion:
 
 ```bash
-curl -fsSL https://github.com/tidbcloud/ti/releases/latest/download/install.sh | sh -s -- --yes
+curl -fsSL https://github.com/tidbcloud/ti-cli/releases/latest/download/install.sh | sh -s -- --yes
 ```
 
 Verify that `PATH` resolves the expected `ti`:
