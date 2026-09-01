@@ -74,7 +74,7 @@ Statement Insight は過去データを補完しません。データは、こ�
 
 ### Statement Insight と Top RU の違いは何ですか？ {#what-is-the-difference-between-statement-insight-and-top-ru}
 
-[Top RU](/tidb-cloud/top-ru.md) は、進行中の RU スパイクを診断するためのほぼリアルタイムのツールです。短い直近の時間枠において、累積 RU 消費量で SQL文を順位付けし、現在も実行中のステートメントを含め、RU を最も多く消費している SQL文と主要フィールドに焦点を当てます。
+[Top RU](/tidb-cloud/top-ru.md) は、進行中の RU スパイクを診断するためのほぼリアルタイムのツールです。短い直近の時間枠において、累積 RU 消費量で SQL文を順位付けし、現在も実行中のSQL文を含め、RU を最も多く消費している SQL文と主要フィールドに焦点を当てます。
 
 Statement Insight は履歴分析ツールです。より多くの SQL文（収集間隔ごとに最大 3,000 SQL digests）を、より詳細なフィールドとともに収集・表示し、DB User、SQL Type、SQL Digest、DB、または Table ごとに分類された、より長い期間にわたる RU 消費量、レイテンシー、実行回数の傾向を把握するのに役立ちます。これにより、RU とパフォーマンスのベースラインを確立し、継続的な最適化の機会を特定できます。
 

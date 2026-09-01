@@ -328,7 +328,7 @@ ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
     >
     > `8147`エラーが発生すると、TiDB は現在のトランザクションをロールバックします。
 
-    次の例のように、 `INSERT`のステートメントの実行時にTiDBはロックをスキップします。その後、 `DELETE`文の実行時にTiDBは一意インデックスをロックし、ユニーク制約をチェックします。そのため、 `DELETE`文でエラーが報告されます。
+    次の例のように、 `INSERT`の文の実行時にTiDBはロックをスキップします。その後、 `DELETE`文の実行時にTiDBは一意インデックスをロックし、ユニーク制約をチェックします。そのため、 `DELETE`文でエラーが報告されます。
 
     ```sql
     SET tidb_constraint_check_in_place_pessimistic = OFF;

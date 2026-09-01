@@ -102,7 +102,7 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ?
 2 rows in set (0.01 sec)
 ```
 
-この例のクエリ結果から、現在のノードには2つの実行中のトランザクションがあることがわかります。1つのトランザクションはアイドル状態（ `STATE`は`Idle` 、 `CURRENT_SQL_DIGEST`は`NULL` ）で、このトランザクションは3つのステートメントを実行しました（ `ALL_SQL_DIGESTS`リストには3つのレコードがあり、これは実行された3つのSQL文のダイジェストです）。もう1つのトランザクションはステートメントを実行し、ロックを待機しています（ `STATE`は`LockWaiting` 、 `WAITING_START_TIME`待機中のロックの開始時刻を示しています）。トランザクションは2つのステートメントを実行し、現在実行中のステートメントは``"update `t` set `v` = `v` + ? where `id` = ?"``の形式になっています。
+この例のクエリ結果から、現在のノードには2つの実行中のトランザクションがあることがわかります。1つのトランザクションはアイドル状態（ `STATE`は`Idle` 、 `CURRENT_SQL_DIGEST`は`NULL` ）で、このトランザクションは3つの文を実行しました（ `ALL_SQL_DIGESTS`リストには3つのレコードがあり、これは実行された3つのSQL文のダイジェストです）。もう1つのトランザクションは文を実行し、ロックを待機しています（ `STATE`は`LockWaiting` 、 `WAITING_START_TIME`待機中のロックの開始時刻を示しています）。トランザクションは2つの文を実行し、現在実行中の文は``"update `t` set `v` = `v` + ? where `id` = ?"``の形式になっています。
 
 ```sql
 SELECT id, all_sql_digests, tidb_decode_sql_digests(all_sql_digests) AS all_sqls FROM INFORMATION_SCHEMA.TIDB_TRX\G

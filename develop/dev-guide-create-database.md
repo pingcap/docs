@@ -74,7 +74,7 @@ mysql
 ## データベース作成におけるルール {#rules-in-database-creation}
 
 - データベース[データベース命名規則](/develop/dev-guide-object-naming-guidelines.md)に従って、データベースに意味のある名前を付けます。
-- TiDBには`test`という名前のデフォルトデータベースが付属しています。ただし、必要がない限り、本番環境での使用は推奨されません。 `CREATE DATABASE`文を使用して独自のデータベースを作成し、SQLセッションで[`USE {databasename};`](/sql-statements/sql-statement-use.md)ステートメントを使用して現在のデータベースを変更できます。
+- TiDBには`test`という名前のデフォルトデータベースが付属しています。ただし、必要がない限り、本番環境での使用は推奨されません。 `CREATE DATABASE`文を使用して独自のデータベースを作成し、SQLセッションで[`USE {databasename};`](/sql-statements/sql-statement-use.md)文を使用して現在のデータベースを変更できます。
 - `root`ユーザーを使用して、データベース、ロール、ユーザーなどのオブジェクトを作成します。ロールとユーザーには、必要な権限のみを付与してください。
 - ベストプラクティスとして、データベーススキーマの変更を実行する際には、ドライバやORMではなく、 **MySQLコマンドラインクライアント**または**MySQL GUIクライアント**を使用することをお勧めします。
 

@@ -12,7 +12,7 @@ summary: TiDBデータベースにおけるBACKUPの使用方法の概要。
 > - この機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 > - この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
-`BACKUP`文は、 [BRツール](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)と同じエンジンを使用しますが、バックアップ処理は別のBRツールではなくBR自体によって実行されます。BR のすべての利点と警告は、このステートメントにも適用されます。
+`BACKUP`文は、 [BRツール](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)と同じエンジンを使用しますが、バックアップ処理は別のBRツールではなくBR自体によって実行されます。BR のすべての利点と警告は、この文にも適用されます。
 
 `BACKUP`を実行するには`BACKUP_ADMIN`または`SUPER`権限が必要です。さらに、バックアップを実行する TiDB ノードとクラスタ内のすべての TiKV ノードの両方が、宛先への読み取りまたは書き込み権限を持っている必要があります。 [セキュリティ強化モード](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合、ローカルストレージ( `local://`で始まるストレージパス) は許可されません。
 

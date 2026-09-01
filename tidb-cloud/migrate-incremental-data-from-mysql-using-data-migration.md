@@ -48,7 +48,7 @@ summary: データ移行を使用して、Amazon Aurora MySQL、Amazon Relationa
 
 - ソースデータベースでGTIDモードが有効になっていることを確認してください。
 - ソースデータベースがMySQLの場合、MySQLのバージョンは5.6以降である必要があり、ストレージエンジンはInnoDBである必要があります。
-- 移行ジョブがアップストリームのセカンダリデータベースに接続する場合、 `REPLICATE CREATE TABLE ... SELECT`イベントは移行できません。これは、ステートメントが同じ GTID が割り当てられた 2つのトランザクション ( `CREATE TABLE`と`INSERT` ) に分割されるためです。その結果、 `INSERT`文はセカンダリデータベースによって無視されます。
+- 移行ジョブがアップストリームのセカンダリデータベースに接続する場合、 `REPLICATE CREATE TABLE ... SELECT`イベントは移行できません。これは、文が同じ GTID が割り当てられた 2つのトランザクション ( `CREATE TABLE`と`INSERT` ) に分割されるためです。その結果、 `INSERT`文はセカンダリデータベースによって無視されます。
 
 ## 前提条件 {#prerequisites}
 

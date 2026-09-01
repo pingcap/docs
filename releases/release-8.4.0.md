@@ -361,7 +361,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
     - 統計関連の不要な設定を非推奨にして、冗長なコードを削減する [#55043](https://github.com/pingcap/tidb/issues/55043) @[Rustin170506](https://github.com/Rustin170506)
     - 相関サブクエリとCTEを含むクエリを実行するとTiDBがハングアップしたり、誤った結果を返す可能性がある問題を修正しました [#55551](https://github.com/pingcap/tidb/issues/55551) @[guo-shaoge](https://github.com/guo-shaoge)
     - `lite-init-stats`を無効にすると統計情報が同期的に読み込まれない可能性がある問題を修正しました [#54532](https://github.com/pingcap/tidb/issues/54532) @[hawkingrei](https://github.com/hawkingrei)
-    - `UPDATE`または`DELETE`文に再帰 CTE が含まれている場合、ステートメントがエラーを報告するか、効果を発揮しない可能性がある問題を修正します [#55666](https://github.com/pingcap/tidb/issues/55666) @[time-and-fate](https://github.com/time-and-fate)
+    - `UPDATE`または`DELETE`文に再帰 CTE が含まれている場合、文がエラーを報告するか、効果を発揮しない可能性がある問題を修正します [#55666](https://github.com/pingcap/tidb/issues/55666) @[time-and-fate](https://github.com/time-and-fate)
     - ウィンドウ関数を含む SQL バインディングが場合によっては有効にならない問題を修正しました [#55981](https://github.com/pingcap/tidb/issues/55981) @[winoros](https://github.com/winoros)
     - 非バイナリ照合順序を持つ文字列列の統計情報が、統計情報の初期化時にロードに失敗する可能性がある問題を修正 [#55684](https://github.com/pingcap/tidb/issues/55684) @[winoros](https://github.com/winoros)
     - クエリ条件`column IS NULL`を使用して一意インデックスにアクセスする際に、オプティマイザが行数を誤って 1 と推定する問題を修正しました。 [#56116](https://github.com/pingcap/tidb/issues/56116) @[hawkingrei](https://github.com/hawkingrei)

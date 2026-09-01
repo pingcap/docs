@@ -118,7 +118,7 @@ TiDB Cloud Starter クラスターに月間使用制限が設定されている�
 
 ### 消費される RU の数を最小限に抑えるためにワークロードを最適化するにはどうすればよいでしょうか? {#how-can-i-optimize-my-workload-to-minimize-the-number-of-rus-consumed}
 
-[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)のガイドラインに従って、クエリが最適なパフォーマンスを得るために注意深く最適化されていることを確認してください。 RU を最も多く消費する SQL文を特定するには、クラスターの[**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **SQL Statements**タブを確認します。ここで、SQL 実行を観察し、**Total RU**または**Mean RU**でソートされた上位のステートメントを表示できます。 詳細については、 [ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)を参照してください。 また、出力トラフィックの量を最小限に抑えることも、RU の消費量を削減するために重要です。 これを実現するには、クエリで必要な列と行のみを返すことをお勧めします。これにより、ネットワークの出力トラフィックが削減されます。 これは、返される列と行を慎重に選択してフィルター処理することで実現でき、それによってネットワーク使用率が最適化されます。
+[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)のガイドラインに従って、クエリが最適なパフォーマンスを得るために注意深く最適化されていることを確認してください。 RU を最も多く消費する SQL文を特定するには、クラスターの[**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **SQL Statements**タブを確認します。ここで、SQL 実行を観察し、**Total RU**または**Mean RU**でソートされた上位のSQL文を表示できます。 詳細については、 [ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)を参照してください。 また、出力トラフィックの量を最小限に抑えることも、RU の消費量を削減するために重要です。 これを実現するには、クエリで必要な列と行のみを返すことをお勧めします。これにより、ネットワークの出力トラフィックが削減されます。 これは、返される列と行を慎重に選択してフィルター処理することで実現でき、それによってネットワーク使用率が最適化されます。
 
 ### TiDB Cloud Starter のストレージはどのように計測されますか? {#how-storage-is-metered-for-tidb-cloud-starter}
 

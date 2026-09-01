@@ -107,7 +107,7 @@ TiDB バージョン: 7.1.6
     - 述語の`Longlong`型のオーバーフローの問題を修正 [＃45783](https://github.com/pingcap/tidb/issues/45783) @[hawkingrei](https://github.com/hawkingrei)
     - キャッシュされた実行計画に日付型と`unix_timestamp` の比較が含まれている場合に誤った結果が返される問題を修正しました。 [＃48165](https://github.com/pingcap/tidb/issues/48165) @[qw4990](https://github.com/qw4990)
     - 照合順序が`utf8_bin`または`utf8mb4_bin` の場合に`LENGTH()`条件が予期せず削除される問題を修正しました [＃53730](https://github.com/pingcap/tidb/issues/53730) @[elsa0520](https://github.com/elsa0520)
-    - `UPDATE`または`DELETE`文に再帰 CTE が含まれている場合、ステートメントがエラーを報告したり、 が有効にならない可能性がある問題を修正しました。 [＃55666](https://github.com/pingcap/tidb/issues/55666) @[time-and-fate](https://github.com/time-and-fate)
+    - `UPDATE`または`DELETE`文に再帰 CTE が含まれている場合、文がエラーを報告したり、有効にならない可能性がある問題を修正しました。 [＃55666](https://github.com/pingcap/tidb/issues/55666) @[time-and-fate](https://github.com/time-and-fate)
     - 相関サブクエリと CTE を含むクエリを実行すると、TiDB がハングしたり、誤った結果が返されたりする問題を修正しました。 [＃55551](https://github.com/pingcap/tidb/issues/55551) @[guo-shaoge](https://github.com/guo-shaoge)
     - 統計を初期化するときに、非バイナリ照合順序の文字列列の統計の読み込みに失敗する可能性がある問題を修正しました。 [＃55684](https://github.com/pingcap/tidb/issues/55684) @[winoros](https://github.com/winoros)
     - IndexJoin が Left Outer Anti Semi type のハッシュ値を計算するときに重複行を生成する問題を修正しました。 [＃52902](https://github.com/pingcap/tidb/issues/52902) @[yibin87](https://github.com/yibin87)

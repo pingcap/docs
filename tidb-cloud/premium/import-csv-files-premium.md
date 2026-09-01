@@ -73,7 +73,7 @@ CSVファイルにはスキーマ情報が含まれていないため、CSVフ�
 
         > **Note:**
         >
-        > `${db_name}.${table_name}-schema.sql`ファイルには、単一の DDL文のみを含める必要があります。ファイルに複数の DDL文が含まれている場合、最初のステートメントのみが有効になります。
+        > `${db_name}.${table_name}-schema.sql`ファイルには、単一の DDL文のみを含める必要があります。ファイルに複数の DDL文が含まれている場合、最初の文のみが有効になります。
 
 ## ステップ3．アカウント間アクセスの設定 {#step-3-configure-cross-account-access}
 

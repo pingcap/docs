@@ -335,7 +335,7 @@ SELECT * FROM t;
 
 新しく割り当てられた値は`101` 。これは、AUTO_INCREMENT IDを割り当てるためのキャッシュのサイズが`100`であることを示しています。
 
-さらに、バッチ`INSERT`文内の連続 ID の長さが`AUTO_ID_CACHE`を超えると、TiDB はそれに応じてキャッシュサイズを増やし、ステートメントがデータを適切に挿入できるようにします。
+さらに、バッチ`INSERT`文内の連続 ID の長さが`AUTO_ID_CACHE`を超えると、TiDB はそれに応じてキャッシュサイズを増やし、文がデータを適切に挿入できるようにします。
 
 ### AUTO_INCREMENT IDキャッシュをクリアする {#clear-the-auto-increment-id-cache}
 

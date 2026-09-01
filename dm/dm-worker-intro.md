@@ -34,7 +34,7 @@ DM-worker は、TiDB Data Migration (DM) のコンポーネントであり、DM-
 
 ### Binlog複製/同期処理ユニット {#binlog-replication-sync-processing-unit}
 
-Binlogログレプリケーション/同期処理ユニットは、上流の MySQL/MariaDB のbinlogイベントまたはリレーログのbinlogイベントを読み取り、これらのイベントを SQL文に変換し、下流の TiDB にこれらのステートメントを適用します。
+Binlogログレプリケーション/同期処理ユニットは、上流の MySQL/MariaDB のbinlogイベントまたはリレーログのbinlogイベントを読み取り、これらのイベントを SQL文に変換し、下流の TiDB にこれらの文を適用します。
 
 ## DMワーカーに必要な権限 {#privileges-required-by-dm-worker}
 

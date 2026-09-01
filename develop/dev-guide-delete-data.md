@@ -39,7 +39,7 @@ DELETE FROM {table} WHERE {filter}
 
 - 大量の行 (たとえば、1 万行以上) を削除する場合は[一括削除](#bulk-delete)を使用します。これは、TiDB では 1つのトランザクションのサイズが制限されているためです ([トランザクションの合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)。
 
-- テーブル内のすべてのデータを削除する場合は、 `DELETE`文を使用しないでください。代わりに、 [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)ステートメントを使用してください。
+- テーブル内のすべてのデータを削除する場合は、 `DELETE`文を使用しないでください。代わりに、 [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)文を使用してください。
 
 - パフォーマンスに関する考慮事項については、[パフォーマンスに関する考慮事項](#performance-considerations)を参照してください。
 

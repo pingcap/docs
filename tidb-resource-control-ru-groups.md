@@ -223,7 +223,7 @@ SET RESOURCE GROUP rg1;
 
 #### 現在のステートメントをリソースグループにバインドします。 {#bind-the-current-statement-to-a-resource-group}
 
-SQL文に[`RESOURCE_GROUP(resource_group_name)`](/optimizer-hints.md#resource_groupresource_group_name)ヒントを追加することで、ステートメントがバインドされるリソースグループを指定できます。このヒントは`SELECT` 、 `INSERT` 、 `UPDATE` 、および`DELETE`文をサポートします。
+SQL文に[`RESOURCE_GROUP(resource_group_name)`](/optimizer-hints.md#resource_groupresource_group_name)ヒントを追加することで、文がバインドされるリソースグループを指定できます。このヒントは`SELECT` 、 `INSERT` 、 `UPDATE` 、および`DELETE`文をサポートします。
 
 システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820)が`ON`に設定されている場合、このヒントを使用するには`SUPER`または`RESOURCE_GROUP_ADMIN`または`RESOURCE_GROUP_USER`の権限が必要です。
 

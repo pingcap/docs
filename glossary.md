@@ -77,7 +77,7 @@ RocksDBとTiKVでは、カラムファミリー（CF）は、データベース�
 
 ### 共通テーブル式（CTE） {#common-table-expression-cte}
 
-共通テーブル式 (CTE) を使用すると、 [`WITH`](/sql-statements/sql-statement-with.md)句を使用して SQL文内で複数回参照できる一時的な結果セットを定義できます。これにより、ステートメントの可読性と実行効率が向上します。詳細については、 [共通テーブル式](/develop/dev-guide-use-common-table-expression.md)を参照してください。
+共通テーブル式 (CTE) を使用すると、 [`WITH`](/sql-statements/sql-statement-with.md)句を使用して SQL文内で複数回参照できる一時的な結果セットを定義できます。これにより、文の可読性と実行効率が向上します。詳細については、 [共通テーブル式](/develop/dev-guide-use-common-table-expression.md)を参照してください。
 
 ### 継続的なプロファイリング（Continuous Profiling） {#continuous-profiling}
 

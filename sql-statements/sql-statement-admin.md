@@ -84,7 +84,7 @@ ADMIN FLUSH BINDINGS;
 ADMIN CAPTURE BINDINGS;
 ```
 
-上記のステートメントは、複数回出現する`SELECT`文から SQL プランのバインディングを生成できます。
+上記の文は、複数回出現する`SELECT`文から SQL プランのバインディングを生成できます。
 
 ```sql
 ADMIN EVOLVE BINDINGS;

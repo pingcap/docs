@@ -13,7 +13,7 @@ summary: FLASHBACK TABLE` ステートメントを使用してテーブルを回
 SELECT * FROM mysql.tidb WHERE variable_name = 'tikv_gc_safe_point';
 ```
 
-`tikv_gc_safe_point`回目以降に`DROP`または`TRUNCATE`文でテーブルが削除されている限り、 `FLASHBACK TABLE`ステートメントを使用してテーブルを復元できます。
+`tikv_gc_safe_point`回目以降に`DROP`または`TRUNCATE`文でテーブルが削除されている限り、 `FLASHBACK TABLE`文を使用してテーブルを復元できます。
 
 ## 構文 {#syntax}
 

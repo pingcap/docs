@@ -452,7 +452,7 @@ SELECT TIDB_PARSE_TSO_LOGICAL(450456244814610434);
 
 ## TIDB_ROW_CHECKSUM {#tidb_row_checksum}
 
-`TIDB_ROW_CHECKSUM()`関数は、行のチェックサム値を照会するために使用されます。この関数は、FastPlanプロセス内の`SELECT`文でのみ使用できます。つまり、 `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?`や`SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`のようなステートメントで照会できます。
+`TIDB_ROW_CHECKSUM()`関数は、行のチェックサム値を照会するために使用されます。この関数は、FastPlanプロセス内の`SELECT`文でのみ使用できます。つまり、 `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?`や`SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`のような文で照会できます。
 
 TiDB 内の単一行データのチェックサム機能を有効にするには (システム変数[`tidb_enable_row_level_checksum`](/system-variables.md#tidb_enable_row_level_checksum-new-in-v710)によって制御されます)、次のステートメントを実行します。
 

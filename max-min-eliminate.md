@@ -9,14 +9,14 @@ SQL文に`max`/`min`関数が含まれている場合、クエリオプティマ
 
 この最適化ルールは、 `select`文内の`max` / `min`関数の数に応じて次の2つのタイプに分けられます。
 
-- [`max` / `min`関数が1つだけあるステートメント](#one-maxmin-function)
-- [複数の`max` / `min`関数を含むステートメント](#multiple-maxmin-functions)
+- [`max` / `min`関数が1つだけある文](#one-maxmin-function)
+- [複数の`max` / `min`関数を含む文](#multiple-maxmin-functions)
 
 ## 1つの`max` / `min`関数 {#one-maxmin-function}
 
 SQL文が次の条件を満たす場合、このルールが適用されます。
 
-- ステートメントには、 `max`または`min`集計関数が 1つだけ含まれています。
+- 文には、 `max`または`min`集計関数が 1つだけ含まれています。
 - 集計関数には関連する`group by`節がありません。
 
 例えば：
@@ -25,7 +25,7 @@ SQL文が次の条件を満たす場合、このルールが適用されます�
 select max(a) from t
 ```
 
-最適化ルールにより、ステートメントは次のように書き換えられます。
+最適化ルールにより、文は次のように書き換えられます。
 
 ```sql
 select max(a) from (select a from t where a is not null order by a desc limit 1) t
@@ -33,7 +33,7 @@ select max(a) from (select a from t where a is not null order by a desc limit 1)
 
 列`a`インデックスが設定されている場合、または列`a`複合インデックスのプレフィックスになっている場合、インデックスの助けを借りて、新しいSQL文は1行のデータのみをスキャンすることで最大値または最小値を見つけられます。この最適化により、フルテーブルスキャンが回避されます。
 
-この例のステートメントには次の実行計画があります。
+この例の文には次の実行計画があります。
 
 ```sql
 mysql> explain select max(a) from t;
@@ -53,7 +53,7 @@ mysql> explain select max(a) from t;
 
 SQL文が次の条件を満たす場合、このルールが適用されます。
 
-- ステートメントには複数の集計関数が含まれており、それらはすべて`max`または`min`関数です。
+- 文には複数の集計関数が含まれており、それらはすべて`max`または`min`関数です。
 - 集計関数には関連する`group by`句がありません。
 - 各`max`関数の列には順序を維持するためのインデックス`min`あります。
 

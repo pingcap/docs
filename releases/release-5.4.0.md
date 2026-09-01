@@ -189,7 +189,7 @@ TiDB バージョン: 5.4.0
 
     バージョン5.4.0以降、TiDBは一部の`ANALYZE`設定の永続化をサポートしています。この機能により、既存の設定を今後の統計情報収集に簡単に再利用できます。
 
-    `ANALYZE`構成永続化機能はデフォルトで有効になっています (システム変数`tidb_analyze_version`は`2`で、 [`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540)はデフォルトで`ON`です)。この機能を使用すると、 `ANALYZE`文を手動で実行する際に、ステートメントで指定された永続化構成を記録できます。記録されると、次回 TiDB が統計情報を自動的に更新する場合、またはこれらの構成を指定せずに手動で統計情報を収集する場合、TiDB は記録された構成に従って統計情報を収集します。
+    `ANALYZE`構成永続化機能はデフォルトで有効になっています (システム変数`tidb_analyze_version`は`2`で、 [`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540)はデフォルトで`ON`です)。この機能を使用すると、 `ANALYZE`文を手動で実行する際に、文で指定された永続化構成を記録できます。記録されると、次回 TiDB が統計情報を自動的に更新する場合、またはこれらの構成を指定せずに手動で統計情報を収集する場合、TiDB は記録された構成に従って統計情報を収集します。
 
     [ユーザー向けドキュメント](/statistics.md#persist-analyze-configurations)
 

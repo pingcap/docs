@@ -315,7 +315,7 @@ v4.0.9では、 BRはデフォルトで統計情報をバックアップしま�
 
 ## リカバリが完了したら、特定のテーブルを削除して再度リカバリできますか? {#after-the-recovery-is-complete-can-i-delete-a-specific-table-and-then-recover-it-again}
 
-はい、特定のテーブルを削除した後でも、そのテーブルを再度リカバリできます。ただし、リカバリできるのは`DROP TABLE`または`TRUNCATE TABLE`文で削除されたテーブルのみであり、 `DELETE FROM`ステートメントではリカバリできないことに注意してください。これは、 `DELETE FROM`ではMVCCバージョンを更新して削除対象データをマークするだけで、実際のデータ削除はGC後に行われるためです。
+はい、特定のテーブルを削除した後でも、そのテーブルを再度リカバリできます。ただし、リカバリできるのは`DROP TABLE`または`TRUNCATE TABLE`文で削除されたテーブルのみであり、 `DELETE FROM`文ではリカバリできないことに注意してください。これは、 `DELETE FROM`ではMVCCバージョンを更新して削除対象データをマークするだけで、実際のデータ削除はGC後に行われるためです。
 
 ### 統計情報を復元するときにBR が大量のメモリを消費するのはなぜですか? {#why-does-br-take-a-lot-of-memory-when-restoring-statistics-information}
 

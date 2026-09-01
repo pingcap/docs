@@ -62,7 +62,7 @@ AWS でホストされているTiDB Cloud Starter クラスターでは、 TiDB 
 
     たとえば、2つの列 (列`id`と列`name` ) を持つ新しいテーブル`test.t`を作成するには、 `use test;`と入力してデータベースを指定し、 <kbd>⌘</kbd> + <kbd>I</kbd>を押して、指示として`create a new table t with id and name`を入力し、 **Enter**を押すと、AI によってそれに応じた SQL文が生成されます。
 
-    生成されたステートメントについては、 **Accept**をクリックして承認し、必要に応じてさらに編集するか、 **Discard**をクリックして拒否することができます。
+    生成されたSQL文については、 **Accept**をクリックして承認し、必要に応じてさらに編集するか、 **Discard**をクリックして拒否することができます。
 
     > **Note:**
     >

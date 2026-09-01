@@ -218,7 +218,7 @@ explain SELECT * FROM t1, t2 WHERE t1.id = t2.id;
 
 > **Note:**
 >
-> `PREPARE` / `EXECUTE`およびバイナリプロトコルで実行されるクエリの場合、 `PREPARE` / `EXECUTE`文ではなく、実際のクエリステートメントのバインディングを作成する必要があります。
+> `PREPARE` / `EXECUTE`およびバイナリプロトコルで実行されるクエリの場合、 `PREPARE` / `EXECUTE`文ではなく、実際のクエリ文のバインディングを作成する必要があります。
 >
 
 #### 履歴実行計画に従ってバインディングを作成する {#create-a-binding-according-to-a-historical-execution-plan}
@@ -417,7 +417,7 @@ SHOW [GLOBAL | SESSION] BINDINGS [ShowLikeOrWhere]
     1 row in set (0.00 sec)
     ```
 
-- `explain format = 'verbose'`ステートメントを使用して、SQL文のクエリプランを表示します。SQL文でバインディングが使用されている場合は、 `show warnings`を実行して、SQL文で使用されているバインディングを確認できます。
+- `explain format = 'verbose'`文を使用して、SQL文のクエリプランを表示します。SQL文でバインディングが使用されている場合は、 `show warnings`を実行して、SQL文で使用されているバインディングを確認できます。
 
     ```sql
     -- Create a global binding

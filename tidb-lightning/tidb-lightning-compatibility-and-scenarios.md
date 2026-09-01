@@ -69,10 +69,10 @@ TiCDC を物理インポートモードで使用することは、短期的に�
 
 - シナリオ 1: テーブルを TiCDC によってダウンストリームに複製する必要はありません。
 
-    このシナリオでは、TiCDC の changefeed が有効になっている場合、 `IMPORT INTO`文を送信した後に互換性チェックでエラーが報告されます。これらのテーブルを TiCDC で複製する必要がないことが確実な場合は、そのステートメントの[`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions)に`DISABLE_PRECHECK` (v8.0.0 で導入) を含めて再送信できます。これにより、データインポートタスクは互換性チェックを無視し、データを直接インポートします。
+    このシナリオでは、TiCDC の changefeed が有効になっている場合、 `IMPORT INTO`文を送信した後に互換性チェックでエラーが報告されます。これらのテーブルを TiCDC で複製する必要がないことが確実な場合は、その文の[`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions)に`DISABLE_PRECHECK` (v8.0.0 で導入) を含めて再送信できます。これにより、データインポートタスクは互換性チェックを無視し、データを直接インポートします。
 
 - シナリオ 2: テーブルを TiCDC によってダウンストリームに複製する必要があります。
 
-    このシナリオでは、TiCDC の changefeed が有効になっている場合、 `IMPORT INTO`文を送信した後に互換性チェックでエラーが報告されます。そのステートメントの[`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions)に`DISABLE_PRECHECK` (v8.0.0 で導入) を含めて再送信することができます。これにより、データインポートタスクは互換性チェックを無視し、データを直接インポートします。
+    このシナリオでは、TiCDC の changefeed が有効になっている場合、 `IMPORT INTO`文を送信した後に互換性チェックでエラーが報告されます。その文の[`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions)に`DISABLE_PRECHECK` (v8.0.0 で導入) を含めて再送信することができます。これにより、データインポートタスクは互換性チェックを無視し、データを直接インポートします。
 
     上流 TiDB クラスターのインポートタスクが完了したら、 `IMPORT INTO`を使用して下流 TiDB クラスターに同じデータをインポートします。下流に Redshift や Snowflake などのデータベースがある場合は、クラウドストレージサービスから CSV、SQL、または Parquet ファイルを読み取り、データベースに書き込むように設定できます。

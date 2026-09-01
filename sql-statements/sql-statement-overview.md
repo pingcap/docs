@@ -52,7 +52,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 | SQL文                                            | 説明                                     |
 | ----------------------------------------------------- | -------------------------------------- |
-| [`BATCH`](/sql-statements/sql-statement-batch.md)     | TiDB内でDML文を複数のステートメントに分割して実行します。 |
+| [`BATCH`](/sql-statements/sql-statement-batch.md)     | TiDB内でDML文を複数の文に分割して実行します。 |
 | [`DELETE`](/sql-statements/sql-statement-delete.md)   | テーブルから行を削除します。                         |
 | [`INSERT`](/sql-statements/sql-statement-insert.md)   | テーブルに新しい行を挿入します。                       |
 | [`REPLACE`](/sql-statements/sql-statement-replace.md) | 既存の行を置き換えるか、新しい行を挿入します。                |
@@ -198,7 +198,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | [`TRACE`](/sql-statements/sql-statement-trace.md)       | クエリ実行に関する詳細情報を提供します。        |
 | [`USE`](/sql-statements/sql-statement-use.md)           | 現在のデータベースを設定します。            |
 
-## SHOW文 {#show-statements}
+## SHOWステートメント {#show-statements}
 
 <CustomContent platform="tidb">
 

@@ -86,7 +86,7 @@ SHOW TABLE t NEXT_ROW_ID;
 
 ## `_tidb_rowid`を書き込む {#write-tidb-rowid}
 
-デフォルトでは、TiDB は`INSERT` 、または`REPLACE`文`UPDATE` `_tidb_rowid`直接書き込むことを許可しません。
+デフォルトでは、TiDB は`INSERT`、`REPLACE`、または`UPDATE`文が`_tidb_rowid`に直接書き込むことを許可しません。
 
 ```sql
 INSERT INTO t(_tidb_rowid, a, b) VALUES (101, 4, 'w');
