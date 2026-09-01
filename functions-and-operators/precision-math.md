@@ -98,9 +98,9 @@ INSERT INTO t SET i = 1/0;
 | `sql_mode`値                      | 結果                           |
 | :------------------------------- | :--------------------------- |
 | ''                       | 警告なし、エラーなし。i は NULL に設定されます。 |
-| 厳しい                              | 警告なし、エラーなし。i は NULL に設定されます。 |
+| strict                            | 警告なし、エラーなし。i は NULL に設定されます。 |
 | `ERROR_FOR_DIVISION_BY_ZERO`     | 警告、エラーなし。i は NULL に設定されています。 |
-| 厳格、 `ERROR_FOR_DIVISION_BY_ZERO` | エラー。行は挿入されません。               |
+| strict、 `ERROR_FOR_DIVISION_BY_ZERO` | エラー。行は挿入されません。               |
 
 ## 丸め動作 {#rounding-behavior}
 
