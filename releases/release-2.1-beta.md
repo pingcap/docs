@@ -40,7 +40,7 @@ summary: TiDB 2.1ベータリリースには、安定性、SQLオプティマイ
     - トランザクションが自動的に試行されるかどうかを制御する`tidb_disable_txn_auto_retry`システム変数を追加します。
     - `time`タイプの書き込まれたデータの精度の問題を修正
     - 競合トランザクションのパフォーマンスを最適化するために、ローカルで競合したトランザクションのキューをサポートします。
-    - `UPDATE`文のうち`Affected Rows`を修正
+    - `UPDATE`文の`Affected Rows`を修正
     - `insert ignore on duplicate key update`のステートメントパフォーマンスを最適化する
 - DDL
     - `CreateTable`文の実行速度を最適化する
