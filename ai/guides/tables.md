@@ -351,7 +351,7 @@ WHERE
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-[フィルター](/ai/guides/filtering.md)のレコードを削除するには、 `table.delete()`メソッドを使用します。
+レコードを[フィルター](/ai/guides/filtering.md)で削除するには、 `table.delete()`メソッドを使用します。
 
 **例: `id`が2のレコードを削除する**
 
@@ -366,7 +366,7 @@ table.delete(
 </div>
 <div label="SQL" value="sql">
 
-`DELETE`文を使用して、 [フィルター](/ai/guides/filtering.md)のレコードを削除します。
+`DELETE`文を使用して、レコードを[フィルター](/ai/guides/filtering.md)で削除します。
 
 **例: `id`が2のレコードを削除する**
 
