@@ -322,7 +322,7 @@ TiCDC v6.2以降、単一テーブルトランザクションを複数のトラ�
 
 ## TiCDC は、損失のある DDL 操作によって発生したデータの変更をダウンストリームに複製しますか? {#does-ticdc-replicate-data-changes-caused-by-lossy-ddl-operations-to-the-downstream}
 
-非可逆DDLとは、TiDBで実行された際にデータ変更を引き起こす可能性のあるDDLを指します。一般的な非可逆DDL操作には、以下のものがあります。
+損失のあるDDLとは、TiDBで実行された際にデータ変更を引き起こす可能性のあるDDLを指します。一般的な損失のあるDDL操作には、以下のものがあります。
 
 - 列の型を変更する（例：INT -&gt; VARCHAR）
 - 列の長さを変更する（例：VARCHAR(20) -&gt; VARCHAR(10)）
