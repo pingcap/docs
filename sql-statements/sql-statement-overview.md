@@ -61,7 +61,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | [`UPDATE`](/sql-statements/sql-statement-update.md)   | テーブル内の既存の行を更新します。                      |
 | [`WITH`](/sql-statements/sql-statement-with.md)       | 共通テーブル式を定義します。                         |
 
-## トランザクション書 {#transaction-statements}
+## トランザクションステートメント {#transaction-statements}
 
 | SQL文                                                                | 説明                                        |
 | ------------------------------------------------------------------------- | ----------------------------------------- |
