@@ -76,7 +76,7 @@ TiDB バージョン: 8.1.2
     - インデックス追加中の再試行によって発生するデータインデックスの不整合の問題を修正しました [＃55808](https://github.com/pingcap/tidb/issues/55808) @[lance6716](https://github.com/lance6716)
     - 整数型の列に小さい表示幅を指定すると`out of range`エラーが発生する可能性がある問題を修正しました。 [＃55837](https://github.com/pingcap/tidb/issues/55837) @[windtalker](https://github.com/windtalker)
     - `LOAD DATA ... REPLACE INTO`操作でデータの不整合が発生する問題を修正[＃56408](https://github.com/pingcap/tidb/issues/56408) @[fzzf678](https://github.com/fzzf678)
-    - `columnEvaluator`入力チャンク内の列参照を識別できず、SQL 文を実行すると`runtime error: index out of range`が発生する問題を修正しました。 [＃53713](https://github.com/pingcap/tidb/issues/53713) @[AilinKid](https://github.com/AilinKid)
+    - `columnEvaluator`は入力チャンク内の列参照を識別できず、SQL 文を実行すると`runtime error: index out of range`が発生する問題を修正しました。 [＃53713](https://github.com/pingcap/tidb/issues/53713) @[AilinKid](https://github.com/AilinKid)
     - 共通テーブル式 (CTE) に複数のデータ コンシューマーがあり、1つのコンシューマーがデータを読み取らずに終了した場合に発生する可能性のある無効なメモリアクセスの問題を修正しました[＃55881](https://github.com/pingcap/tidb/issues/55881) @[windtalker](https://github.com/windtalker)
     - TTLタスクをキャンセルした際に、対応するSQLが強制終了されない問題を修正[＃56511](https://github.com/pingcap/tidb/issues/56511) @[lcwangchao](https://github.com/lcwangchao)
     - `IMPORT INTO`文を使用して一時テーブルをインポートするときに TiDB がパニックになる問題を修正しました [＃55970](https://github.com/pingcap/tidb/issues/55970) @[D3Hunter](https://github.com/D3Hunter)
