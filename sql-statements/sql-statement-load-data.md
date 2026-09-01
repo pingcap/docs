@@ -5,7 +5,7 @@ summary: TiDB データベースの LOAD DATA の使用法の概要。
 
 # LOAD DATA {#load-data}
 
-`LOAD DATA`文 バッチは、データを TiDB テーブルにロードします。
+`LOAD DATA`文は、データを TiDB テーブルに一括ロードします。
 
 TiDB v7.0.0 以降、 `LOAD DATA` SQL文は次の機能をサポートします。
 
