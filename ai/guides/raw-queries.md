@@ -17,7 +17,7 @@ client.execute("INSERT INTO chunks(text, user_id) VALUES ('sample text', 5)")
 
 ### SQLインジェクション防止 {#sql-injection-prevention}
 
-`execute()`と`query()`両方の方法は、**パラメータ化された SQL**機能をサポートしており、動的 SQL文の構築時に[SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)回避するのに役立ちます。
+`execute()`と`query()`両方の方法は、**パラメータ化された SQL**機能をサポートしており、動的 SQL文の構築時に[SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)を回避するのに役立ちます。
 
 ```python
 client.execute(
