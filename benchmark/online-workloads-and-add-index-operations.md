@@ -340,5 +340,5 @@ sysbench $testname \
 
 ## まとめ {#summary}
 
-- `ADD INDEX`文の対象列に対して、書き込み操作（ `INSERT` `DELETE`操作を含む）を頻繁に実行すると、デフォルトの`ADD INDEX` `UPDATE`では比較的頻繁に書き込み競合が発生し、オンラインワークロードに大きな影響を与えます。同時に、 `ADD INDEX`操作は継続的な再試行により完了までに長い時間がかかります。このテストでは、 `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`の積をデフォルト値の1/32に変更できます。例えば、 `tidb_ddl_reorg_worker_cnt`を`4`に、 `tidb_ddl_reorg_batch_size`を`256`に設定すると、パフォーマンスが向上します。
+- `ADD INDEX`文の対象列に対して、書き込み操作（ `INSERT` 、 `DELETE` 、および`UPDATE`操作を含む）を頻繁に実行すると、デフォルトの`ADD INDEX`設定では比較的頻繁に書き込み競合が発生し、オンラインワークロードに大きな影響を与えます。同時に、 `ADD INDEX`操作は継続的な再試行により完了までに長い時間がかかります。このテストでは、 `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`の積をデフォルト値の1/32に変更できます。例えば、 `tidb_ddl_reorg_worker_cnt`を`4`に、 `tidb_ddl_reorg_batch_size`を`256`に設定すると、パフォーマンスが向上します。
 - `ADD INDEX`文のターゲット列に対してのみクエリ操作を実行する場合、またはターゲット列がオンラインワークロードに直接関連していない場合は、デフォルトの`ADD INDEX`構成を使用できます。
