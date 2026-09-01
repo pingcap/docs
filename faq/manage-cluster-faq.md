@@ -43,7 +43,7 @@ MySQL と同様に、TiDB にはシステムテーブルも含まれており、
 
 ### TiDBで`kill`は実行できますか？ {#can-kill-be-executed-in-tidb}
 
-- DML文を無効化する：
+- DML文を強制終了する：
 
     まず`information_schema.cluster_processlist`を使用して TiDB インスタンスのアドレスとセッション ID を見つけ、次に kill コマンドを実行します。
 
