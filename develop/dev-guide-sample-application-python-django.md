@@ -167,7 +167,7 @@ mysqlclient でインストールの問題が発生した場合は、 [mysqlclie
 
 3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **CA cert**をクリックしてCA証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
+    IP アクセスリストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
 
     TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
@@ -243,11 +243,11 @@ python manage.py migrate
 2. アプリケーションにアクセスするには、ブラウザを開いて`http://localhost:8000/`にアクセスしてください。サンプルアプリケーションでは、以下の操作が可能です。
 
     - 新しいプレイヤーを作成します。
-    - プレイヤーを一括作成する。
-    - 全プレイヤーを表示する。
-    - プレイヤーを更新する。
-    - プレイヤーを削除する。
-    - 2人のプレイヤー間で商品を取引する。
+    - プレイヤーを一括作成します。
+    - 全プレイヤーを表示します。
+    - プレイヤーを更新します。
+    - プレイヤーを削除します。
+    - 2人のプレイヤー間で商品を取引します。
 
 ## サンプルコードスニペット {#sample-code-snippets}
 

@@ -114,7 +114,7 @@ Key Visualizer を開くと、デフォルトで過去 6時間のデータベー
 
 ![Select metrics](/media/dashboard/dashboard-keyviz-select-type.png)
 
-関心のあるメトリックを表示するには**、メトリック選択ボックス**(上記のインターフェイスの`Write (bytes)`の位置) でこのメトリックを選択します。
+関心のあるメトリックを表示するには、**メトリック選択ボックス**(上記のインターフェイスの`Write (bytes)`の位置) でこのメトリックを選択します。
 
 - `Read (bytes)` : トラフィックを読み取ります。
 - `Write (bytes)` : トラフィックを書き込みます。

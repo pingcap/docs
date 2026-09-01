@@ -163,9 +163,9 @@ BDRロールが設定されていない場合、任意のDDLを実行できま�
 
 - 通常、レプリケートされたテーブルでのデータ競合を避けるため、 [`AUTO_INCREMENT`](/auto-increment.md)または[`AUTO_RANDOM`](/auto-random.md)を使用しないでください。`AUTO_INCREMENT`または`AUTO_RANDOM`を使用する必要がある場合は、異なるクラスタに異なる主キーを割り当てることができるように、異なるクラスタに異なる`auto_increment_increment`と`auto_increment_offset`を設定できます。例えば、双方向レプリケーションに3つのTiDBクラスタ（A、B、C）がある場合、次のように設定します。
 
-    - クラスタAでは、 `auto_increment_increment=3`と`auto_increment_offset=2000`設定します
-    - クラスタBでは、 `auto_increment_increment=3`と`auto_increment_offset=2001`設定します
-    - クラスタCでは、 `auto_increment_increment=3`と`auto_increment_offset=2002`設定します
+    - クラスタAでは、 `auto_increment_increment=3`と`auto_increment_offset=2000`を設定します
+    - クラスタBでは、 `auto_increment_increment=3`と`auto_increment_offset=2001`を設定します
+    - クラスタCでは、 `auto_increment_increment=3`と`auto_increment_offset=2002`を設定します
 
     これにより、A、B、Cは暗黙的に割り当てられた`AUTO_INCREMENT`と`AUTO_RANDOM`で互いに競合することがなくなります。BDRモードでクラスターを追加する必要がある場合は、関連アプリケーションのデータ書き込みを一時的に停止し、すべてのクラスターの`auto_increment_increment`と`auto_increment_offset`に適切な値を設定してから、関連アプリケーションのデータ書き込みを再開する必要があります。
 

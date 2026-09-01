@@ -71,11 +71,11 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 - Dedicated Tierのデータのストリーミングに[チェンジフィード](/tidb-cloud/changefeed-overview.md)使用をサポートします。
 
-    - サポート[データ変更ログをMySQLにストリーミングする](/tidb-cloud/changefeed-sink-to-mysql.md) 。
+    - [データ変更ログのMySQLへのストリーミング](/tidb-cloud/changefeed-sink-to-mysql.md)をサポート。
 
         MySQL/ AuroraからTiDBにデータを移行する場合、予期せぬデータ移行の問題を防ぐため、MySQLをスタンバイデータベースとして使用することがしばしば必要になります。この場合、MySQLシンクを使用してTiDBからMySQLにデータをストリーミングできます。
 
-    - サポート[データ変更ログをApache Kafkaにストリーミングする](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (ベータ)。
+    - [データ変更ログのApache Kafkaへのストリーミング](/tidb-cloud/changefeed-sink-to-apache-kafka.md)をサポート (ベータ)。
 
         TiDBデータをメッセージキューにストリーミングすることは、データ統合シナリオにおいて非常に一般的な要件です。Kafkaシンクを使用することで、他のデータ処理システム（Snowflakeなど）との統合を実現したり、ビジネス利用をサポートしたりできます。
 
@@ -562,7 +562,7 @@ TiDB Cloudが一般提供を開始しました。以下の[サインアップ](h
 
 新機能:
 
-- サポート[TiDB Cloud組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md) 。
+- [TiDB Cloud組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md)をサポート。
 
     TiDB Cloudの組み込みアラート機能を使用すると、プロジェクト内のTiDB CloudクラスターがTiDB Cloud の組み込みアラート条件のいずれかをトリガーするたびに、電子メールで通知を受け取ることができます。
 
@@ -580,7 +580,7 @@ TiDB Cloudが一般提供を開始しました。以下の[サインアップ](h
 
 新機能:
 
-- サポート[PrometheusとGrafanaの統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md) 。
+- [PrometheusとGrafanaの統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)をサポート。
 
     Prometheus と Grafana の統合により、 [Prometheus](https://prometheus.io/)サービスを設定してTiDB Cloudエンドポイントから主要なメトリックを読み取り、 [Grafana](https://grafana.com/)を使用してメトリックを表示できます。
 
@@ -592,7 +592,7 @@ TiDB Cloudが一般提供を開始しました。以下の[サインアップ](h
 
 新機能:
 
-- サポート[Datadog統合](/tidb-cloud/monitor-datadog-integration.md) 。
+- [Datadog統合](/tidb-cloud/monitor-datadog-integration.md)をサポート。
 
     Datadogとの統合により、 TiDB Cloudを設定してTiDBクラスターのメトリクスデータを[Datadog](https://www.datadoghq.com/)に送信できます。その後、これらのメトリクスをDatadogダッシュボードで直接確認できるようになります。
 

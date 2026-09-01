@@ -31,7 +31,7 @@ embed_func = EmbeddingFunction(
 
 テーブルスキーマにベクトルフィールドを作成するには、 `embed_func.VectorField()`を使用します。
 
-自動埋め込みを有効にするには、埋め込みたいフィールドに`source_field`設定します。
+自動埋め込みを有効にするには、埋め込みたいフィールドに`source_field`を設定します。
 
 ```python hl_lines="7"
 from pytidb.schema import TableModel, Field

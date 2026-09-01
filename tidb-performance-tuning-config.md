@@ -78,7 +78,7 @@ SET GLOBAL tidb_opt_fix_control = '44262:ON,44389:ON,44823:10000,44830:ON,44855:
 - [`44389:ON`](/optimizer-fix-controls.md#44389-new-in-v653-and-v720) : `c = 10 and (a = 'xx' or (a = 'kk' and b = 1))`のようなフィルターの場合、 `IndexRangeScan`のより包括的なスキャン範囲を作成します。
 - [`44823:10000`](/optimizer-fix-controls.md#44823-new-in-v730) ：メモリを節約するため、プランキャッシュは、この変数で指定された数を超えるパラメータを持つクエリをキャッシュしません。長いインリストを持つクエリでもプランキャッシュを使用できるようにするには、プランキャッシュのパラメータ制限を`200`から`10000`に増やしてください。
 - [`44830:ON`](/optimizer-fix-controls.md#44830-new-in-v657-and-v730) : プランキャッシュは、物理最適化中に生成された`PointGet`演算子を含む実行計画をキャッシュすることを許可します。
-- [`44855:ON`](/optimizer-fix-controls.md#44855-new-in-v654-and-v730) : `IndexJoin`演算子の`Probe`側に`Selection`演算子が含まれている場合、オプティマイザは`IndexJoin`選択します。
+- [`44855:ON`](/optimizer-fix-controls.md#44855-new-in-v654-and-v730) : `IndexJoin`演算子の`Probe`側に`Selection`演算子が含まれている場合、オプティマイザは`IndexJoin`を選択します。
 - [`52869:ON`](/optimizer-fix-controls.md#52869-new-in-v810) : オプティマイザがクエリプランに対して (フルテーブルスキャン以外の) 単一のインデックススキャン メソッドを選択できる場合、オプティマイザは自動的にインデックスマージを選択します。
 
 ### TiKV構成 {#tikv-configurations}
@@ -219,7 +219,7 @@ snap-io-max-bytes-per-sec = "300MiB"
 
 - 列数の多い大きな表。
 - 複雑なSQLクエリ。
-- 同時接続数が多い。
+- 多数の同時接続。
 - 多様なクエリパターン。
 
 #### メモリ効率 {#memory-efficiency}

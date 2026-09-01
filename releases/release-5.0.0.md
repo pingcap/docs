@@ -288,7 +288,7 @@ CREATE TABLE `t` (`a` VARCHAR(255) PRIMARY KEY CLUSTERED, `b` INT);
 
 TiDBのスケジューリングプロセスは、I/O、ネットワーク、CPU、メモリなどのリソースを消費します。TiDBがスケジュールされたタスクを制御しない場合、リソースの優先実行により、QPS（1秒あたりの処理数）や遅延が発生し、パフォーマンスの変動が生じる可能性があります。
 
-以下の最適化後、8時間の性能試験において、TPC-C tpmCの標準偏差は2%を超えない。
+以下の最適化後、8時間の性能試験において、TPC-C tpmCの標準偏差は2%を超えません。
 
 #### 不要なスケジューリングとパフォーマンスのジッターを軽減するために、新しいスケジューリング計算式を導入する。 {#introduce-new-scheduling-calculation-formulas-to-reduce-unnecessary-scheduling-and-performance-jitter}
 
@@ -429,7 +429,7 @@ TiDB v5.0では、パフォーマンスの問題をより効率的にトラブ�
 
 - TiUP クラスタは、より包括的なワンクリック環境チェックを実行し、修復に関する推奨事項を提供する`check topo.yaml`コマンドをサポートしています。
 - TiUP クラスタは、環境チェック中に検出された環境問題を自動的に修復する`check topo.yaml --apply`コマンドをサポートしています。
-- TiUP クラスタ は、DBA が編集するためのクラスタトポロジテンプレート ファイルを取得し、グローバル ノード パラメータの変更をサポートする`template`コマンドをサポートしています。
+- TiUP クラスタ は、DBA が編集するためのクラスタトポロジテンプレート ファイルを取得し、グローバルノード パラメータの変更をサポートする`template`コマンドをサポートしています。
 - TiUPは`remote_config`コマンドを使用して`edit-config`パラメータを編集し、リモートPrometheusを設定することをサポートしています。
 - TiUPは`external_alertmanagers`コマンドを使用して異なるAlertManagerを設定するために、 `edit-config`パラメーターの編集をサポートしています。
 - tiup-clusterの`edit-config`サブコマンドを使用してトポロジファイルを編集する場合、構成項目の値のデータ型を変更できます。

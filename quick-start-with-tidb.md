@@ -451,7 +451,7 @@ TiDBクラスタの最小トポロジーは、以下のインスタンスで構�
 
     - TiDB [http://{pd-ip}:2379/dashboard](http://%7Bpd-ip%7D:2379/dashboard) [TiDB Dashboard](/dashboard/dashboard-intro.md)。デフォルトのユーザー名は`root`で、パスワードは空です。
 
-10. （オプション）クラスタ一覧とトポロジーを表示する。
+10. （オプション）クラスタ一覧とトポロジーを表示します。
 
     - クラスター一覧を表示するには：
 

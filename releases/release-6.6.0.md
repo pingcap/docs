@@ -23,7 +23,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 ### 拡張性 {#scalability}
 
-- サポートパーティションRaft KVストレージエンジン (実験的) [#11515](https://github.com/tikv/tikv/issues/11515) [#12842](https://github.com/tikv/tikv/issues/12842) @[busyjay](https://github.com/busyjay)@[tonyxuqqi](https://github.com/tonyxuqqi)@[tabokie](https://github.com/tabokie)@[bufferflies](https://github.com/bufferflies)[5kb](https://github.com/5kbpers) @[SpadeA-Tang](https://github.com/SpadeA-Tang)@[nolouch](https://github.com/nolouch)
+- パーティションRaft KVストレージエンジンをサポート (実験的) [#11515](https://github.com/tikv/tikv/issues/11515) [#12842](https://github.com/tikv/tikv/issues/12842) @[busyjay](https://github.com/busyjay)@[tonyxuqqi](https://github.com/tonyxuqqi)@[tabokie](https://github.com/tabokie)@[bufferflies](https://github.com/bufferflies)[5kb](https://github.com/5kbpers) @[SpadeA-Tang](https://github.com/SpadeA-Tang)@[nolouch](https://github.com/nolouch)
 
     TiDB v6.6.0 より前は、TiKV の Raft ベースのストレージエンジンは、単一の RocksDB インスタンスを使用して、TiKV インスタンスのすべての「リージョン」のデータを保存していました。より大規模なクラスタをより安定してサポートするために、TiDB v6.6.0 以降では、複数の RocksDB インスタンスを使用して TiKVリージョンデータを保存する新しい TiKVストレージエンジンが導入され、各リージョンのデータは個別の RocksDB インスタンスに独立して保存されます。この新しいエンジンは、RocksDB インスタンス内のファイルの数とレベルをより適切に制御し、リージョン間のデータ操作の物理的な分離を実現し、より多くのデータを安定して管理できます。これは、TiKV がパーティショニングによって複数の RocksDB インスタンスを管理していると考えることができます。そのため、この機能は Partitioned-Raft-KV と呼ばれています。この機能の主な利点は、書き込みパフォーマンスの向上、スケーリングの高速化、および同じハードウェアでサポートできるデータ量の拡大です。また、より大規模なクラスタにも対応できます。
 

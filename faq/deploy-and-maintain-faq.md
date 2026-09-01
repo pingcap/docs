@@ -59,7 +59,7 @@ TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェ�
 
 ### TiDB クラスターを初めてデプロイしたときに TiKV の`label`が構成されていなかった場合、 `label`構成を追加するにはどうすればよいですか? {#how-to-add-the-label-configuration-if-label-of-tikv-was-not-configured-when-i-deployed-the-tidb-cluster-for-the-first-time}
 
-TiDB `label`の設定は、クラスタのデプロイメントアーキテクチャに関連しています。これは重要であり、PDがグローバル管理とスケジューリングを実行するための基盤となります。以前のクラスタのデプロイメント時に`label`設定していない場合は、PD管理ツール`pd-ctl`を使用して`location-labels`情報を手動で追加し、デプロイメント構造を調整する必要があります（例： `config set location-labels "zone,rack,host"` ）。（実際の`label`レベル名に基づいて設定する必要があります）。
+TiDB `label`の設定は、クラスタのデプロイメントアーキテクチャに関連しています。これは重要であり、PDがグローバル管理とスケジューリングを実行するための基盤となります。以前のクラスタのデプロイメント時に`label`を設定していない場合は、PD管理ツール`pd-ctl`を使用して`location-labels`情報を手動で追加し、デプロイメント構造を調整する必要があります（例： `config set location-labels "zone,rack,host"` ）。（実際の`label`レベル名に基づいて設定する必要があります）。
 
 `pd-ctl`の使い方については[PD Controlユーザーガイド](/pd-control.md)を参照してください。
 

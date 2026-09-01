@@ -389,7 +389,7 @@ TiDB 4.0 では、 `SLOW_QUERY`は、ローテーションされたスローロ�
 >
 > 指定された期間のスローログファイルが削除された場合、またはスロークエリが存在しない場合、クエリはNULLを返します。
 
-TiDB 4.0 では、すべての TiDB ノードのスロークエリ情報を照会するための[`CLUSTER_SLOW_QUERY`](/information-schema/information-schema-slow-query.md#cluster_slow_query-table)システムテーブルが追加されました。 `CLUSTER_SLOW_QUERY`テーブルのテーブルスキーマは`CLUSTER_SLOW_QUERY`に`INSTANCE`列が追加されている点で`SLOW_QUERY`テーブルのスキーマとは異なります。 `INSTANCE`列は、スロークエリの行情報の TiDB ノード アドレスを表します。 `CLUSTER_SLOW_QUERY` 、 [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)と同様に使用できます。
+TiDB 4.0 では、すべての TiDB ノードのスロークエリ情報を照会するための[`CLUSTER_SLOW_QUERY`](/information-schema/information-schema-slow-query.md#cluster_slow_query-table)システムテーブルが追加されました。 `CLUSTER_SLOW_QUERY`テーブルのテーブルスキーマは`CLUSTER_SLOW_QUERY`に`INSTANCE`列が追加されている点で`SLOW_QUERY`テーブルのスキーマとは異なります。 `INSTANCE`列は、スロークエリの行情報の TiDB ノードアドレスを表します。 `CLUSTER_SLOW_QUERY` 、 [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)と同様に使用できます。
 
 `CLUSTER_SLOW_QUERY`テーブルに対してクエリを実行すると、TiDB は他のノードからすべてのスロークエリ情報を取得して 1つの TiDB ノードで操作を実行するのではなく、計算と判断を他のノードにプッシュします。
 
@@ -465,7 +465,7 @@ limit 2;
     +-------------+-----------------------------+------------------------------------------------------------------+
     ```
 
-2. 同様のスロークエリをフィンガープリントを使って照会する。
+2. 同様のスロークエリをフィンガープリントを使って照会します。
 
     ```sql
     select query, query_time

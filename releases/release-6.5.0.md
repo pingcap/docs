@@ -58,11 +58,11 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 - `INSERT` 、 `REPLACE` 、 `UPDATE` 、 `DELETE` を含む非トランザクションDMLステートメントを完全にサポート [#33485](https://github.com/pingcap/tidb/issues/33485) @[ekexium](https://github.com/ekexium)
 
-    大規模データ処理のシナリオでは、大規模なトランザクションを含む単一のSQL文が、クラスタの安定性とパフォーマンスに悪影響を及ぼす可能性があります。非トランザクションDML文とは、内部実行のために複数のSQL文に分割されたDML文です。分割された文はトランザクションの原子性と独立性を損なう一方で、クラスタの安定性を大幅に向上させます。TiDBはバージョン6.1.0以降、非トランザクション`DELETE`文をサポートしており、バージョン6.5.0以降、非トランザクション`INSERT`文`REPLACE`サポートしてい`UPDATE` 。
+    大規模データ処理のシナリオでは、大規模なトランザクションを含む単一のSQL文が、クラスタの安定性とパフォーマンスに悪影響を及ぼす可能性があります。非トランザクションDML文とは、内部実行のために複数のSQL文に分割されたDML文です。分割された文はトランザクションの原子性と独立性を損なう一方で、クラスタの安定性を大幅に向上させます。TiDBはバージョン6.1.0以降、非トランザクション`DELETE`文をサポートしており、バージョン6.5.0以降、非トランザクション`INSERT`文、`REPLACE`文、および`UPDATE`文をサポートしています。
 
     詳細については、 [非トランザクションDMLステートメント](/non-transactional-dml.md)および[`BATCH`構文](/sql-statements/sql-statement-batch.md)を参照してください。
 
-- サポート時間 (TTL) (実験的) [＃39262](https://github.com/pingcap/tidb/issues/39262) @[lcwangchao](https://github.com/lcwangchao)
+- TTLをサポート (実験的) [＃39262](https://github.com/pingcap/tidb/issues/39262) @[lcwangchao](https://github.com/lcwangchao)
 
     TTLは行レベルのデータ有効期間管理を提供します。TiDBでは、TTL属性を持つテーブルはデータ有効期間を自動的にチェックし、期限切れのデータを行レベルで削除します。TTLは、オンラインの読み取りおよび書き込みワークロードに影響を与えることなく、不要なデータを定期的かつタイムリーにクリーンアップできるように設計されています。
 

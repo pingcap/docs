@@ -5,7 +5,7 @@ summary: このドキュメントでは、Sink to MySQL changefeed を使用し�
 
 # MySQLにシンクする {#sink-to-mysql}
 
-このドキュメントでは**、Sink to MySQL** changefeedを使用してTiDB CloudからMySQLにデータをストリーミングする方法について説明します。
+このドキュメントでは、**Sink to MySQL** changefeedを使用してTiDB CloudからMySQLにデータをストリーミングする方法について説明します。
 
 <CustomContent plan="dedicated">
 
@@ -49,7 +49,7 @@ MySQLサービスがパブリックインターネットアクセスを持たな
 3. MySQLのURLにホスト名が含まれている場合、 TiDB CloudがMySQLサービスのDNSホスト名を解決できるようにする必要があります。
 
     1. [VPCピアリング接続のDNS解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
-    2. **Accepter DNS resolution**オプションを有効にする。
+    2. **Accepter DNS resolution**オプションを有効にします。
 
 MySQL サービスがパブリックインターネット アクセスのない Google Cloud VPC 内にある場合は、以下の手順を実行してください。
 
@@ -160,10 +160,10 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
     - **Event Filter**：以下のイベントフィルターを使用して、変更フィードから特定のイベントを除外できます。
         - **Ignore event**：指定されたイベントタイプを除外します。
         - **Ignore SQL**: 指定された式に一致する DDL イベントを除外します。たとえば、 `^drop` `DROP`で始まるステートメントを除外し、 `add column`は`ADD COLUMN`を含むステートメントを除外します。
-        - **Ignore insert value expression**: 特定の条件を満たす`INSERT`ステートメントを除外します。たとえば、 `id >= 100`は、 `INSERT`が 100 以上である`id`ステートメントを除外します。
+        - **Ignore insert value expression**: 特定の条件を満たす`INSERT`ステートメントを除外します。たとえば、`id >= 100`は、`id`が 100 以上である`INSERT`ステートメントを除外します。
         - **新しい値の更新式を無視する**: 新しい値が指定された条件に一致する`UPDATE`ステートメントを除外します。たとえば、 `gender = 'male'`は`gender`が`male`になるような更新を除外します。
         - **古い値の更新を無視する式**: 古い値が指定された条件に一致する`UPDATE`ステートメントを除外します。たとえば、 `age < 18` `age`の古い値が 18 未満である場合の更新を除外します。
-        - **Ignore delete value expression**: 指定された条件を満たす`DELETE`ステートメントを除外します。たとえば、 `name = 'john'`は`DELETE`が`name`である`'john'`ステートメントを除外します。
+        - **Ignore delete value expression**: 指定された条件を満たす`DELETE`ステートメントを除外します。たとえば、`name = 'john'`は`name`が`'john'`である`DELETE`ステートメントを除外します。
 
 8. **Start Replication Position**で、MySQLシンクの開始位置を設定します。
 

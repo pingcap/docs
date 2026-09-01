@@ -109,7 +109,7 @@ AWS マネジメントコンソールを使用して VPC インターフェイ�
 
 3. **Endpoint settings**領域で、必要に応じて名前タグを入力し、 **Endpoint services that use NLBs and GWLBs**オプションを選択します。
 
-4. **Service settings**領域に、生成されたコマンド（ `--service-name ${your_endpoint_service_name}` ）のサービス名`${your_endpoint_service_name}`入力します。
+4. **Service settings**領域に、生成されたコマンド（ `--service-name ${your_endpoint_service_name}` ）のサービス名`${your_endpoint_service_name}`を入力します。
 
 5. **Verify service**をクリックします。
 

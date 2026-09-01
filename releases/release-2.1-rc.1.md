@@ -67,7 +67,7 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
     - `SET`構文のより多くのステートメントをサポート [＃7020](https://github.com/pingcap/tidb/pull/7020)
     - システム変数設定する際に有効性チェックを追加する [＃7117](https://github.com/pingcap/tidb/pull/7117)
     - `Prepare`文の`PlaceHolder`の数の検証を追加する [＃7162](https://github.com/pingcap/tidb/pull/7162)
-    - サポート`set character_set_results = null` [＃7353](https://github.com/pingcap/tidb/pull/7353)
+    - `set character_set_results = null`をサポート [＃7353](https://github.com/pingcap/tidb/pull/7353)
     - `flush status`構文をサポートする [＃7369](https://github.com/pingcap/tidb/pull/7369)
     - `information_schema` の`SET`と`ENUM`型の列サイズを修正 [＃7347](https://github.com/pingcap/tidb/pull/7347)
     - テーブルを作成するためのステートメントの`NATIONAL CHARACTER`構文をサポートします [＃7378](https://github.com/pingcap/tidb/pull/7378)
@@ -97,7 +97,7 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
     - 並列DDLジョブ実行をサポート[＃6955](https://github.com/pingcap/tidb/pull/6955)
 - [テーブルパーティション](https://github.com/pingcap/tidb/projects/6) (Experimental)
     - トップレベルのパーティションをサポート
-    - サポート`Range Partition`
+    - `Range Partition`をサポート
 
 ## PD {#pd}
 

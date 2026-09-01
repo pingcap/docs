@@ -66,7 +66,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     TiDB Cloud Dedicatedでは、最大一時停止期間が7日間に制限されました。7日以内に手動でクラスターを再開しない場合、 TiDB Cloudが自動的に再開します。
 
-    この変更は**、2024年11月12日以降に作成された組織**にのみ適用されます。この日付以前に作成された組織は、事前通知の上、段階的に新しい一時停止動作に移行します。
+    この変更は、**2024年11月12日以降に作成された組織**にのみ適用されます。この日付以前に作成された組織は、事前通知の上、段階的に新しい一時停止動作に移行します。
 
     詳細については、[TiDB Cloud Dedicatedクラスタの一時停止または再開](/tidb-cloud/pause-or-resume-tidb-cluster.md)を参照してください。
 
@@ -158,7 +158,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 - [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデータインポートエクスペリエンスを向上させます。
 
-    - **Import**ページのレイアウトをより分かりやすいものに改善する。
+    - **Import**ページのレイアウトをより分かりやすいものに改善します。
     - TiDB Cloud Serverless クラスターとTiDB Cloud Dedicatedクラスターのインポート手順を統一します。
     - AWSロールARNの作成プロセスを簡素化し、接続設定を容易にします。
 
@@ -230,7 +230,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     詳細については、 [定義済みのシステムエンドポイントを追加します](/tidb-cloud/data-service-manage-endpoint.md#add-a-predefined-system-endpoint)を参照してください。
 
-- スロークエリのデータストレージを強化する。
+- スロークエリのデータストレージを強化します。
 
     [TiDB Cloudコンソール](https://tidbcloud.com)におけるクエリアクセスの遅延は、より安定し、データベースのパフォーマンスに影響を与えなくなりました。
 
@@ -336,7 +336,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 - VPC がTiDB Cloudの VPC とは異なるリージョンにある場合、 [VPCピアリングの作成](/tidb-cloud/set-up-vpc-peering-connections.md)サポートします。
 
-- [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)クエリパラメーターとともにパス パラメーターをサポートしています。
+- [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)クエリパラメーターとともにパスパラメーターをサポートしています。
 
     この機能は、構造化URLによるリソース識別を強化し、ユーザーエクスペリエンス、検索エンジン最適化（SEO）、クライアント統合を改善することで、開発者により柔軟性を提供し、業界標準との整合性を高めます。
 
@@ -428,7 +428,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **全般的な変更**
 
-- プロジェクトにおけるCIDR構成を強化する。
+- プロジェクトにおけるCIDR構成を強化します。
 
     - 各プロジェクトごとに、地域レベルのCIDRを直接設定できます。
     - より幅広いCIDR値の中から、CIDR構成を選択できます。

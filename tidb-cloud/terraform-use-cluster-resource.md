@@ -631,7 +631,7 @@ TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次の�
    }
    ```
 
-2. `terraform apply`コマンドを実行し、確認のために`yes`入力します。
+2. `terraform apply`コマンドを実行し、確認のために`yes`を入力します。
 
    ```
    $ terraform apply
@@ -688,8 +688,8 @@ TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次の�
 
 ステータスが`AVAILABLE`のときにクラスターを一時停止し、ステータスが`PAUSED`のときにクラスターを再開できます。
 
-- クラスターを一時停止するには`paused = true`設定します。
-- クラスターを再開するには`paused = false`設定します。
+- クラスターを一時停止するには`paused = true`を設定します。
+- クラスターを再開するには`paused = false`を設定します。
 
 1. [クラスターを作成する](#create-a-cluster-using-the-cluster-resource)を実行するときに使用する`cluster.tf`ファイルで、 `config`構成に`pause = true`を追加します。
 
@@ -702,7 +702,7 @@ TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次の�
      }
    ```
 
-2. `terraform apply`コマンドを実行し、チェック後に`yes`入力します。
+2. `terraform apply`コマンドを実行し、チェック後に`yes`を入力します。
 
    ```
    $ terraform apply
@@ -781,7 +781,7 @@ TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次の�
    }
    ```
 
-4. クラスターを再開する必要がある場合は、 `paused = false`設定します。
+4. クラスターを再開する必要がある場合は、 `paused = false`を設定します。
 
    ```
    config = {

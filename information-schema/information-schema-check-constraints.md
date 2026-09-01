@@ -1,6 +1,6 @@
 ---
 title: CHECK_CONSTRAINTS
-summary: CHECK_CONSTRAINTS` INFORMATION_SCHEMA テーブルについて学習します。
+summary: "`CHECK_CONSTRAINTS` INFORMATION_SCHEMA テーブルについて学習します。"
 ---
 
 # CHECK_CONSTRAINTS {#check-constraints}

@@ -1,6 +1,6 @@
 ---
 title: DEADLOCKS
-summary: DEADLOCKS` INFORMATION_SCHEMA テーブルについて学習します。
+summary: "`DEADLOCKS` INFORMATION_SCHEMA テーブルについて学習します。"
 ---
 
 # DEADLOCKS {#deadlocks}

@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_HARDWARE
-summary: CLUSTER_HARDWARE` information_schema テーブルについて学習します。
+summary: "`CLUSTER_HARDWARE` information_schema テーブルについて学習します。"
 ---
 
 # CLUSTER_HARDWARE {#cluster-hardware}

@@ -87,7 +87,7 @@ TiDB Cloud Essentialは、さまざまな運用要件に対応するため、2�
 - **従量課金制**：実際の[リクエストキャパシティユニット（RCU）](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu)消費量とストレージ使用量に基づいて課金されます。この柔軟なモデルにより、バックエンドでの手動による過剰プロビジョニングが不要になります。
 - **高度なセキュリティ**：大規模企業や規制対象業界が必要とする、より高度なセキュリティ設定とコンプライアンス機能を提供します。
 
-ミッション クリティカルなワークロードの稼働時間と回復力を最大化するために、 TiDB Cloud Premium は[地域的な高可用性](/tidb-cloud/serverless-high-availability.md#regional-high-availability-architecture)を提供し、複数のアベイラビリティゾーンにノードを分散して、ゾーンデプロイよりも高い冗長性を実現します。
+ミッションクリティカルなワークロードの稼働時間と回復力を最大化するために、 TiDB Cloud Premium は[地域的な高可用性](/tidb-cloud/serverless-high-availability.md#regional-high-availability-architecture)を提供し、複数のアベイラビリティゾーンにノードを分散して、ゾーンデプロイよりも高い冗長性を実現します。
 
 <CustomContent plan="byoc">
 
@@ -103,9 +103,9 @@ BYOC は、次の機能を提供します。
 - **Cloud-account-level controls**: ネットワーキング、セキュリティ、監査可能性、コンプライアンスに対して、お客様独自のクラウドポリシーを適用できます。
 - **Private connectivity**: BYOC の設定に応じて、VPC ピアリング などのプライベートネットワークアクセスパターンをサポートします。
 
-さまざまなワークロード要件に対応するため、TiDB Cloud BYOC は Single-AZ と Multi-AZ の両方のデプロイをサポートしており、低レイテンシーのゾーン単位デプロイと、複数の availability zone にまたがる高い耐障害性を持つデプロイのどちらかを選択できます。
+さまざまなワークロード要件に対応するため、TiDB Cloud BYOC は Single-AZ と Multi-AZ の両方のデプロイをサポートしており、低レイテンシーのゾーン単位デプロイと、複数のアベイラビリティゾーンにまたがる高い耐障害性を持つデプロイのどちらかを選択できます。
 
-各リソースプールの高可用性モードは、[プールを作成する](/tidb-cloud/byoc/create-resource-pool-byoc.md)際に **Zonal** または **Regional** に設定できます。ゾーンリソースプールは単一の availability zone にデプロイされ、リージョンリソースプールは複数の availability zone にまたがってデプロイされます。TiDB Cloud は、BYOC リージョンの設定と利用可能なクラウドリソースに基づいて availability zone の配置を決定します。リソースプール内で作成または復元された TiDB Cloud BYOC インスタンスは、そのプールの高可用性モードを継承します。リソースプールの作成後は、その高可用性モードまたは availability zone の配置を変更できません。
+各リソースプールの高可用性モードは、[プールを作成する](/tidb-cloud/byoc/create-resource-pool-byoc.md)際に **Zonal** または **Regional** に設定できます。ゾーンリソースプールは単一のアベイラビリティゾーンにデプロイされ、リージョンリソースプールは複数のアベイラビリティゾーンにまたがってデプロイされます。TiDB Cloud は、BYOC リージョンの設定と利用可能なクラウドリソースに基づいてアベイラビリティゾーンの配置を決定します。リソースプール内で作成または復元された TiDB Cloud BYOC インスタンスは、そのプールの高可用性モードを継承します。リソースプールの作成後は、その高可用性モードまたはアベイラビリティゾーンの配置を変更できません。
 
 ![TiDB Cloud BYOC Architecture](/media/tidb-cloud/byoc-architecture.png)
 
@@ -182,7 +182,7 @@ TiDBノードを複数デプロイすることで、水平方向に拡張し、�
 - **リージョンベースのデータストレージ**
 
     - データは[リージョン](https://docs.pingcap.com/tidb/dev/glossary#regionpeerraft-group)ごとに分割され、それぞれが特定のキー範囲（左端が閉じ、右端が開いた区間： `StartKey`から`EndKey` ）をカバーします。
-    - 効率的なデータ配信を確保するため、各TiKVノード内には複数のリージョンが共存している。
+    - 効率的なデータ配信を確保するため、各TiKVノード内には複数のリージョンが共存しています。
 
 - **トランザクションサポート**
 

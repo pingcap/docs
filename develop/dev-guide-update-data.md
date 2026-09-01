@@ -49,7 +49,7 @@ UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {fil
 
 データ更新に関するベストプラクティスを以下に示します。
 
-- `WHERE`ステートメントには、必ず`UPDATE`句を指定してください。 `UPDATE`ステートメントに`WHERE`句がない場合、TiDB はテーブル内の***すべての行***を更新します。
+- `UPDATE`ステートメントには、必ず`WHERE`句を指定してください。 `UPDATE`ステートメントに`WHERE`句がない場合、TiDB はテーブル内の***すべての行***を更新します。
 - 大量の行 (たとえば、1 万行以上) を更新する必要がある場合は[一括更新](#bulk-update)を使用します。 TiDB は 1つのトランザクションのサイズを制限しているため ( [トランザクションの合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)、一度にあまりにも多くのデータ更新が行われると、長時間ロックが保持されすぎたり ([悲観的トランザクション](/pessimistic-transaction.md))、競合が発生したり ([楽観的トランザクション](/optimistic-transaction.md)) されます。
 
 ### `UPDATE`例 {#update-example}
@@ -105,7 +105,7 @@ INSERT INTO {table} ({columns}) VALUES ({values})
 
 ### `INSERT ON DUPLICATE KEY UPDATE`のベストプラクティス {#insert-on-duplicate-key-update-best-practices}
 
-- `INSERT ON DUPLICATE KEY UPDATE`は、一意キーが 1つだけのテーブルでのみ使用してください。このステートメントは***、一意キー***(主キーを含む) の競合が検出された場合、データを更新します。競合する行が複数ある場合、更新されるのは 1 行のみです。したがって、競合する行が 1つだけであることを保証できない限り、一意キーが複数あるテーブルで`INSERT ON DUPLICATE KEY UPDATE`ステートメントを使用することはお勧めしません。
+- `INSERT ON DUPLICATE KEY UPDATE`は、一意キーが 1つだけのテーブルでのみ使用してください。このステートメントは、一意キー(主キーを含む) の競合が検出された場合、データを更新します。競合する行が複数ある場合、更新されるのは 1 行のみです。したがって、競合する行が 1つだけであることを保証できない限り、一意キーが複数あるテーブルで`INSERT ON DUPLICATE KEY UPDATE`ステートメントを使用することはお勧めしません。
 - データを作成または更新する際に、このステートメントを使用してください。
 
 ### `INSERT ON DUPLICATE KEY UPDATE`例 {#insert-on-duplicate-key-update-example}

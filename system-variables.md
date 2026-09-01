@@ -40,7 +40,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 > - バイト単位の場合、安全な値は通常、システムメモリの量よりも小さくなります。
 > - 時間を表す単位は秒またはミリ秒の場合があることに注意してください。
 >
-> 同じ単位を使用する変数は、同じリソースを巡って競合する可能性がある。
+> 同じ単位を使用する変数は、同じリソースを巡って競合する可能性があります。
 
 バージョン 7.4.0 以降では、 [`SET_VAR`](/optimizer-hints.md#set_varvar_namevar_value)を使用してステートメントの実行中に一部の`SESSION`変数の値を一時的に変更できます。ステートメントの実行後、現在のセッションのシステム変数の値は自動的に元の値に戻ります。このヒントは、オプティマイザとエグゼキュータに関連する一部のシステム変数を変更するために使用できます。このドキュメントの変数には`Applies to hint SET_VAR`設定があり、 `Yes`または`No`に設定できます。
 
@@ -432,7 +432,7 @@ mysql> SELECT * FROM t1;
 - デフォルト値: `300`
 - 範囲: `[0, 2147483647]`
 - 単位：ミリ秒
-- 実行時間がしきい値を超えたDDL操作をログに記録する。
+- 実行時間がしきい値を超えたDDL操作をログに記録します。
 
 ### default_authentication_plugin
 
@@ -2271,7 +2271,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数は、パーティションテーブルに対して[グローバルインデックス](/global-indexes.md)の作成をサポートするかどうかを制御します。この変数を有効にすると、TiDB では、インデックス定義で`GLOBAL`を指定することで**、パーティション式で使用されているすべての列を含まない**一意インデックスを作成できます。
+- この変数は、パーティションテーブルに対して[グローバルインデックス](/global-indexes.md)の作成をサポートするかどうかを制御します。この変数を有効にすると、TiDB では、インデックス定義で`GLOBAL`を指定することで、**パーティション式で使用されているすべての列を含まない**一意インデックスを作成できます。
 - この変数は v8.4.0 以降非推奨になりました。その値はデフォルト値`ON`に固定されています。つまり、[グローバルインデックス](/global-indexes.md)はデフォルトで有効になっています。
 
 ### tidb_enable_lazy_cursor_fetch <span class="version-mark">New in v8.3.0</span>
@@ -2615,7 +2615,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数は、TiDB が並列 HashAgg アルゴリズムでディスクスピルをサポートするかどうかを制御します。この変数が`ON`の場合、HashAgg オペレータは、あらゆる並列条件下でメモリ使用量に基づいてデータスピルを自動的にトリガーできるため、パフォーマンスとデータ スループットのバランスが取れます。この変数を`OFF`に設定することは推奨されません。v8.2.0 以降では、 `OFF`に設定するとエラーが報告されます。この変数は、将来のリリースで非推奨になります。
+- この変数は、TiDB が並列 HashAgg アルゴリズムでディスクスピルをサポートするかどうかを制御します。この変数が`ON`の場合、HashAgg オペレータは、あらゆる並列条件下でメモリ使用量に基づいてデータスピルを自動的にトリガーできるため、パフォーマンスとデータスループットのバランスが取れます。この変数を`OFF`に設定することは推奨されません。v8.2.0 以降では、 `OFF`に設定するとエラーが報告されます。この変数は、将来のリリースで非推奨になります。
 
 ### tidb_enable_pipelined_window_function
 
@@ -2974,7 +2974,7 @@ Query OK, 0 rows affected (0.09 sec)
 - デフォルト値: `OFF`
 - この変数は、TSOFollowerプロキシ機能を有効にするかどうかを制御します。値が`OFF`の場合、TiDBはPDリーダーからのみTSOを取得します。値が`ON`の場合、TiDBはTSO要求をすべてのPDサーバーに均等に分散し、PDフォロワーもTSO要求を処理できるため、PDリーダーのCPU負荷が軽減されます。
 - TSOFollowerプロキシを有効にするシナリオ：
-    - TSOリクエストの負荷が高いため、PDリーダーのCPUがボトルネックとなり、TSO RPCリクエストのレイテンシーが増大する。
+    - TSOリクエストの負荷が高いため、PDリーダーのCPUがボトルネックとなり、TSO RPCリクエストのレイテンシーが増大します。
     - TiDBクラスタには多数のTiDBインスタンスが存在するため、 [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530)の値を増やしても、TSO RPCリクエストの高レイテンシーの問題は解消されません。
 
 > **Note:**
@@ -3541,7 +3541,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - 型: Boolean
 - デフォルト値: `OFF`
 - この変数は、プリペアドステートメントキャッシュを閉じるコマンドを無視するかどうかを設定するために使用されます。
-- この変数が`ON`に設定されている場合、バイナリプロトコルの`COM_STMT_CLOSE`コマンドとテキスト プロトコルの[`DEALLOCATE PREPARE`](/sql-statements/sql-statement-deallocate.md)ステートメントは無視されます。詳細については、 [`COM_STMT_CLOSE`コマンドと`DEALLOCATE PREPARE`ステートメントは無視してください](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement)を参照してください。
+- この変数が`ON`に設定されている場合、バイナリプロトコルの`COM_STMT_CLOSE`コマンドとテキストプロトコルの[`DEALLOCATE PREPARE`](/sql-statements/sql-statement-deallocate.md)ステートメントは無視されます。詳細については、 [`COM_STMT_CLOSE`コマンドと`DEALLOCATE PREPARE`ステートメントは無視してください](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement)を参照してください。
 
 ### tidb_ignore_inlist_plan_digest <span class="version-mark">New in v7.6.0</span>
 
@@ -5018,7 +5018,7 @@ EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
 
 <details><summary><code>tidb_opt_range_max_size</code>使用例</summary>
 
-この変数のデフォルト値を表示する。結果から、オプティマイザがスキャン範囲の構築に最大64MiBのメモリを使用していることがわかります。
+この変数のデフォルト値を表示します。結果から、オプティマイザがスキャン範囲の構築に最大64MiBのメモリを使用していることがわかります。
 
 ```sql
 SELECT @@tidb_opt_range_max_size;
@@ -5158,7 +5158,7 @@ SHOW WARNINGS;
 
 > **Note:**
 >
-> この変数を有効にすることでクエリのパフォーマンスを最適化する効果は**、 TiFlashに対してのみ**有効です。
+> この変数を有効にすることでクエリのパフォーマンスを最適化する効果は、**TiFlashに対してのみ**有効です。
 
 - 範囲: セッション | グローバル
 - クラスターに保持される: はい
@@ -6519,7 +6519,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - TiDBで使用されるPDクライアントは、PDからTSOリクエストを取得する際、同時に受信したTSOリクエストを可能な限り多く収集します。そして、収集したリクエストをバッチ処理で1つのRPCリクエストに統合し、PDに送信します。これにより、PDへの負荷を軽減できます。
 - この変数を`0`より大きい値に設定した後、TiDBは各バッチマージの終了前に、この値の最大期間待機します。これは、より多くのTSOリクエストを収集し、バッチ操作の効果を向上させるためです。
 - この変数の値を増加させるシナリオ：
-    - TSOリクエストの負荷が高いため、PDリーダーのCPUがボトルネックとなり、TSO RPCリクエストのレイテンシーが増大する。
+    - TSOリクエストの負荷が高いため、PDリーダーのCPUがボトルネックとなり、TSO RPCリクエストのレイテンシーが増大します。
     - クラスター内にはTiDBインスタンスは多くありませんが、すべてのTiDBインスタンスは高い同時実行性で動作しています。
 - この変数はできるだけ小さい値に設定することをお勧めします。
 
@@ -6550,7 +6550,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 - 以下の条件が満たされた場合、パフォーマンスの向上を目的として、この変数を`PARALLEL`または`PARALLEL-FAST`に切り替えることを検討してください。
 
-    - TSOの待機時間は、SQLクエリの総実行時間の大部分を占める。
+    - TSOの待機時間は、SQLクエリの総実行時間の大部分を占めています。
     - PDにおけるTSOの割り当ては、まだボトルネックに達していません。
     - PDノードとTiDBノードは十分なCPUリソースを備えている。
     - TiDBとPD間のネットワークレイテンシーは、PDがTSOを割り当てるのにかかる時間よりもかなり長い（つまり、TSO RPCの実行時間の大部分はネットワークレイテンシーによるものである）。
@@ -6730,7 +6730,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 <CustomContent platform="tidb-cloud">
 
-- この変数は、TiDB が TiKV に送信するトランザクションコミット リクエストのバッチサイズを制御するために使用されます。アプリケーション ワークロード内のトランザクションの大部分で書き込み操作が多数発生する場合、この変数の値を大きくすることでバッチ処理のパフォーマンスを向上させることができます。ただし、この変数を大きすぎる値に設定して TiKV の単一ログの最大サイズ (デフォルトでは 8 MiB) の制限を超えると、コミットが失敗する可能性があります。
+- この変数は、TiDB が TiKV に送信するトランザクションコミット リクエストのバッチサイズを制御するために使用されます。アプリケーションワークロード内のトランザクションの大部分で書き込み操作が多数発生する場合、この変数の値を大きくすることでバッチ処理のパフォーマンスを向上させることができます。ただし、この変数を大きすぎる値に設定して TiKV の単一ログの最大サイズ (デフォルトでは 8 MiB) の制限を超えると、コミットが失敗する可能性があります。
 
 </CustomContent>
 

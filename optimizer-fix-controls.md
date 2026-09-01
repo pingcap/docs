@@ -36,7 +36,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 - デフォルト値: `OFF`
 - 可能な値: `ON`、`OFF`
-- この変数は、パーティションテーブルの[世界統計](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)が欠落している場合に、 [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)を使用してそのテーブルにアクセスできるようにするかどうかを制御します。
+- この変数は、パーティションテーブルの[グローバル統計情報](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)が欠落している場合に、 [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)を使用してそのテーブルにアクセスできるようにするかどうかを制御します。
 
 ### <a href="https://github.com/pingcap/tidb/issues/44389">`44389`</a> <span class="version-mark">v6.5.3 および v7.2.0 の新機能</span> {#44389-new-in-v653-and-v720}
 
@@ -68,7 +68,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 - デフォルト値: `1000`
 - 可能な値: `[0, 2147483647]`
-- この変数は、オプティマイザがアクセスパスを選択する際のヒューリスティック戦略の閾値を設定します。あるアクセスパスの推定行数（例えば`Index_A` ）が他のアクセスパスの推定行数（デフォルトでは`1000`倍）よりも大幅に少ない場合、オプティマイザはコスト比較をスキップし、直接`Index_A`選択します。
+- この変数は、オプティマイザがアクセスパスを選択する際のヒューリスティック戦略の閾値を設定します。あるアクセスパスの推定行数（例えば`Index_A` ）が他のアクセスパスの推定行数（デフォルトでは`1000`倍）よりも大幅に少ない場合、オプティマイザはコスト比較をスキップし、直接`Index_A`を選択します。
 - `0` 、このヒューリスティック戦略を無効にすることを意味します。
 
 ### <a href="https://github.com/pingcap/tidb/issues/45798">`45798`</a><span class="version-mark">バージョン7.5.0の新機能</span> {#45798-new-in-v750}

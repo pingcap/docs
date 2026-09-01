@@ -25,7 +25,7 @@ TiUPを使用して TiDB クラスターをデプロイすると、 TiUP はProm
 
 1. ルール構成ファイルをカスタマイズし、 TiUP が配置されているマシンのディレクトリの下に配置します。
 
-2. topology.yaml ファイルで、カスタマイズされたルール構成ファイルのディレクトリに`rule_dir`設定します。
+2. topology.yaml ファイルで、カスタマイズされたルール構成ファイルのディレクトリに`rule_dir`を設定します。
 
     以下は、topology.yaml ファイル内の monitored_servers の構成例です。
 
@@ -104,7 +104,7 @@ TiUP v1.17.0 以降では、トポロジーファイルで Prometheus グロー�
 
 1. Grafana ダッシュボードの構成ファイルをカスタマイズし、 TiUPが配置されているマシンのディレクトリの下に配置します。
 
-2. topology.yaml ファイルで、カスタマイズされたダッシュボード構成ファイルのディレクトリに`dashboard_dir`設定します。
+2. topology.yaml ファイルで、カスタマイズされたダッシュボード構成ファイルのディレクトリに`dashboard_dir`を設定します。
 
     以下は、topology.yaml ファイル内の grafana_servers の構成例です。
 
@@ -146,7 +146,7 @@ TiUP v1.17.0 以降では、トポロジーファイルで Prometheus グロー�
 
 現在、 TiUP はAlertmanager のリスニング アドレスのカスタマイズをサポートしています。
 
-TiUPによってデプロイされた Alertmanager は、デフォルトで`alertmanager_servers.host`をリッスンします。プロキシを使用している場合は Alertmanager にアクセスできません。この問題に対処するには、クラスター設定ファイル topology.yaml に`listen_host`追加してリッスンアドレスを指定します。推奨値は 0.0.0.0 です。
+TiUPによってデプロイされた Alertmanager は、デフォルトで`alertmanager_servers.host`をリッスンします。プロキシを使用している場合は Alertmanager にアクセスできません。この問題に対処するには、クラスター設定ファイル topology.yaml に`listen_host`を追加してリッスンアドレスを指定します。推奨値は 0.0.0.0 です。
 
 次の例では、 `listen_host`フィールドを 0.0.0.0 に設定します。
 

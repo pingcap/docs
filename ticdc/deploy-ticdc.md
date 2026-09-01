@@ -98,11 +98,11 @@ TiCDCクラスタをアップグレードする際には、以下の点に注意
 
 - TiCDC v4.0.2 は`changefeed`を再構成しました。詳細については、 [コンフィグレーションファイルの互換性に関する注意事項](/ticdc/ticdc-compatibility.md#cli-and-configuration-file-compatibility)を参照してください。
 - アップグレード中に問題が発生した場合は、解決策について[アップグレードに関するよくある質問](/upgrade-tidb-using-tiup.md#faq)を参照してください。
-- v6.3.0 以降、TiCDC はローリングアップグレードをサポートしています。マイナー バージョン間のローリングアップグレードを直接実行できます (たとえば、v8.5.0 -&gt; v8.5.3 はマイナー バージョン アップグレードであり、v8.1.x -&gt; v8.5.x はメジャーバージョン アップグレードです)。 TiCDC クラシックアーキテクチャの場合、メジャーバージョン間のアップグレード中に変更フィードを実行しないでください。クラシックアーキテクチャをアップグレードする前に、変更フィードを一時停止してください。新しい TiCDCアーキテクチャは、ローリングアップグレードプロセス中の変更フィードの実行をサポートします。詳細については、 [以前のTiCDCバージョンからのローリングアップグレードに関する互換性に関する注意事項](/ticdc/ticdc-compatibility.md#compatibility-notes-for-upgrading-from-earlier-versions)を参照してください。次の条件が満たされる場合、ローリングアップグレードは自動的に有効になります。
+- v6.3.0 以降、TiCDC はローリングアップグレードをサポートしています。マイナーバージョン間のローリングアップグレードを直接実行できます (たとえば、v8.5.0 -&gt; v8.5.3 はマイナーバージョン アップグレードであり、v8.1.x -&gt; v8.5.x はメジャーバージョン アップグレードです)。 TiCDC クラシックアーキテクチャの場合、メジャーバージョン間のアップグレード中に変更フィードを実行しないでください。クラシックアーキテクチャをアップグレードする前に、変更フィードを一時停止してください。新しい TiCDCアーキテクチャは、ローリングアップグレードプロセス中の変更フィードの実行をサポートします。詳細については、 [以前のTiCDCバージョンからのローリングアップグレードに関する互換性に関する注意事項](/ticdc/ticdc-compatibility.md#compatibility-notes-for-upgrading-from-earlier-versions)を参照してください。次の条件が満たされる場合、ローリングアップグレードは自動的に有効になります。
 
     - TiCDCはバージョン6.3.0以降です。
     - TiUPはバージョン1.11.3以降です。
-    - クラスター内では、少なくとも2つのTiCDCインスタンスが稼働している。
+    - クラスター内では、少なくとも2つのTiCDCインスタンスが稼働しています。
 
 ## TiUPを使用してTiCDCクラスタ構成を変更します。 {#modify-ticdc-cluster-configurations-using-tiup}
 
@@ -114,7 +114,7 @@ TiCDCクラスタをアップグレードする際には、以下の点に注意
     tiup cluster edit-config <cluster-name>
     ```
 
-2. viエディタで`cdc` [`server-configs`](/tiup/tiup-cluster-topology-reference.md#server_configs)変更します。
+2. viエディタで`cdc` [`server-configs`](/tiup/tiup-cluster-topology-reference.md#server_configs)を変更します。
 
     ```shell
     server_configs:

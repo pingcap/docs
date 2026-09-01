@@ -10,14 +10,14 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
 ## TiDB {#tidb}
 
 - 新機能
-    - サポートビュー
-    - ウィンドウ関数のサポート
-    - 範囲分割のサポート
+    - ビューをサポート
+    - ウィンドウ関数をサポート
+    - 範囲分割をサポート
     - ハッシュパーティショニングをサポート
 - SQLオプティマイザ
     - `AggregationElimination` の最適化ルールを再サポート [＃7676](https://github.com/pingcap/tidb/pull/7676)
     - `NOT EXISTS`サブクエリを最適化し、Anti Semi Join に変換する [＃7842](https://github.com/pingcap/tidb/pull/7842)
-    - 新しいCascadesオプティマイザをサポートするために、変数`tidb_enable_cascades_planner`追加します。現在、Cascadesオプティマイザはまだ完全に実装されておらず、デフォルトではオフになっています[＃7879](https://github.com/pingcap/tidb/pull/7879)
+    - 新しいCascadesオプティマイザをサポートするために、変数`tidb_enable_cascades_planner`を追加します。現在、Cascadesオプティマイザはまだ完全に実装されておらず、デフォルトではオフになっています[＃7879](https://github.com/pingcap/tidb/pull/7879)
     - トランザクションのインデックス結合の使用をサポート [＃7877](https://github.com/pingcap/tidb/pull/7877)
     - 外部結合の定数伝播を最適化し、結合結果の外部テーブルに関連するフィルタリング条件を外部結合を介して外部テーブルにプッシュダウンできるようにすることで、外部結合の無駄な計算を減らし、実行パフォーマンスを向上させます[＃7794](https://github.com/pingcap/tidb/pull/7794)
     - 投影除去の最適化ルールを集計除去の後の位置に調整し、冗長な`Project`演算子回避する [＃7909](https://github.com/pingcap/tidb/pull/7909)
@@ -29,8 +29,8 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
     - `TIDB_INLJ`オプティマイザのヒントの動作を変更すると、オプティマイザはヒントで指定されたテーブルをインデックス結合内部テーブルとして使用します。 [＃8243](https://github.com/pingcap/tidb/pull/8243)
     - `Prepare`文の実行プランキャッシュが有効になったときに使用できるように、 `PointGet`広い範囲で使用します[＃8108](https://github.com/pingcap/tidb/pull/8108)
     - 複数のテーブルを結合する際の結合順序の選択を最適化するために貪欲アルゴリズム`Join Reorder`を導入する[＃8394](https://github.com/pingcap/tidb/pull/8394)
-    - サポートビュー[＃8757](https://github.com/pingcap/tidb/pull/8757)
-    - サポートウィンドウ機能[＃8630](https://github.com/pingcap/tidb/pull/8630)
+    - ビューをサポート[＃8757](https://github.com/pingcap/tidb/pull/8757)
+    - ウィンドウ機能をサポート[＃8630](https://github.com/pingcap/tidb/pull/8630)
     - `TIDB_INLJ`有効になっていない場合にクライアントに警告を返し、ユーザビリティを向上させる[＃9037](https://github.com/pingcap/tidb/pull/9037)
     - フィルタリング条件とテーブル統計に基づいてフィルタリングされたデータの統計を推測する機能をサポート[＃7921](https://github.com/pingcap/tidb/pull/7921)
     - レンジパーティションのパーティションプルーニング最適化ルールの改善 [＃8885](https://github.com/pingcap/tidb/pull/8885)
@@ -40,7 +40,7 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
     - `COMMIT`文スロークエリ情報を出力するためにログを最適化します [＃7951](https://github.com/pingcap/tidb/pull/7951)
     - SQLチューニングプロセスを容易にする`EXPLAIN ANALYZE`機能をサポートする[＃7827](https://github.com/pingcap/tidb/pull/7827)
     - 多数の列を持つ幅の広いテーブルの書き込みパフォーマンスを最適化します[＃7935](https://github.com/pingcap/tidb/pull/7935)
-    - サポート`admin show next_row_id` [＃8242](https://github.com/pingcap/tidb/pull/8242)
+    - `admin show next_row_id`をサポート [＃8242](https://github.com/pingcap/tidb/pull/8242)
     - 実行エンジンで使用される初期Chunkのサイズを制御するための`tidb_init_chunk_size`変数を追加します。 [＃8480](https://github.com/pingcap/tidb/pull/8480)
     - `shard_row_id_bits`を改善し、AUTO_INCREMENT ID をクロスチェックする [＃8936](https://github.com/pingcap/tidb/pull/8936)
 - `Prepare`ステートメント
@@ -72,10 +72,10 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
     - フィルタリング条件にユーザー変数が含まれている場合、述語プッシュダウン操作を放棄して、ユーザー変数を使用してウィンドウ関数の動作をモックするMySQLの動作との互換性を改善しました[＃8412](https://github.com/pingcap/tidb/pull/8412)
 - DDL
     - 誤って削除されたテーブルの高速回復をサポート[＃7937](https://github.com/pingcap/tidb/pull/7937)
-    - 同時実行数を動的に調整するサポート`ADD INDEX` [＃8295](https://github.com/pingcap/tidb/pull/8295)
-    - テーブルまたは列の文字セットを`utf8` `utf8mb4` 変更するサポート [＃8037](https://github.com/pingcap/tidb/pull/8037)
-    - デフォルトの文字セットを`utf8`から`utf8mb4` 変更します [＃7965](https://github.com/pingcap/tidb/pull/7965)
-    - サポート範囲パーティション[＃8011](https://github.com/pingcap/tidb/pull/8011)
+    - `ADD INDEX`の同時実行数の動的な調整をサポート[＃8295](https://github.com/pingcap/tidb/pull/8295)
+    - テーブルまたは列の文字セットの`utf8`/`utf8mb4`への変更をサポート [＃8037](https://github.com/pingcap/tidb/pull/8037)
+    - デフォルトの文字セットを`utf8`から`utf8mb4`に変更します [＃7965](https://github.com/pingcap/tidb/pull/7965)
+    - 範囲パーティションをサポート[＃8011](https://github.com/pingcap/tidb/pull/8011)
 
 ## ツール {#tools}
 

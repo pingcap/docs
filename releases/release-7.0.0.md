@@ -53,7 +53,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 - TiFlashは後期実体化をサポート (実験的) [#5829](https://github.com/pingcap/tiflash/issues/5829) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
 
-    フィルタ条件 ( `SELECT` `WHERE`ステートメントを処理する場合、 TiFlash はデフォルトでクエリに必要な列からすべてのデータを読み取り、クエリ条件に基づいてデータをフィルタリングおよび集計します。遅延マテリアライゼーションは、フィルタ条件の一部を TableScan オペレータにプッシュダウンすることをサポートする最適化手法です。つまり、 TiFlash はまずプッシュダウンされたフィルタ条件に関連する列データをスキャンし、条件を満たす行をフィルタリングしてから、これらの行の他の列データをスキャンしてさらに計算を行うことで、データ処理の IO スキャンと計算を削減します。
+    フィルタ条件 ( `WHERE`句) を伴う`SELECT`ステートメントを処理する場合、 TiFlash はデフォルトでクエリに必要な列からすべてのデータを読み取り、クエリ条件に基づいてデータをフィルタリングおよび集計します。遅延マテリアライゼーションは、フィルタ条件の一部を TableScan オペレータにプッシュダウンすることをサポートする最適化手法です。つまり、 TiFlash はまずプッシュダウンされたフィルタ条件に関連する列データをスキャンし、条件を満たす行をフィルタリングしてから、これらの行の他の列データをスキャンしてさらに計算を行うことで、データ処理の IO スキャンと計算を削減します。
 
     TiFlashの遅延マテリアライゼーション機能は、デフォルトでは有効になっていません。 `tidb_opt_enable_late_materialization`システム変数を`OFF`に設定することで有効にできます。この機能が有効になると、TiDBオプティマイザは統計情報とフィルタ条件に基づいて、どのフィルタ条件をプッシュダウンするかを決定します。
 
@@ -168,7 +168,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、[ドキュメント](/time-to-live.md)を参照してください。
 
-- サポート`ALTER TABLE…REORGANIZE PARTITION` [#15000](https://github.com/pingcap/tidb/issues/15000) @[mjonss](https://github.com/mjonss)
+- `ALTER TABLE…REORGANIZE PARTITION`をサポート [#15000](https://github.com/pingcap/tidb/issues/15000) @[mjonss](https://github.com/mjonss)
 
     TiDBは`ALTER TABLE...REORGANIZE PARTITION`構文をサポートしています。この構文を使用すると、データの損失なしに、テーブルのパーティションの一部または全部を再編成（マージ、分割、その他の変更を含む）できます。
 

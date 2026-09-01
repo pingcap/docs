@@ -1,6 +1,6 @@
 ---
 title: USER_ATTRIBUTES
-summary: USER_ATTRIBUTES` INFORMATION_SCHEMA テーブルについて学習します。
+summary: "`USER_ATTRIBUTES` INFORMATION_SCHEMA テーブルについて学習します。"
 ---
 
 # USER_ATTRIBUTES {#user-attributes}

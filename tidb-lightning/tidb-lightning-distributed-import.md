@@ -137,7 +137,7 @@ nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
 インポートを開始した後、次のいずれかの方法で進行状況を確認できます。
 
 - `grep` log キーワード`progress`で進捗状況を確認します。デフォルトでは5分ごとに更新されます。
-- 監視コンソールで進行状況を確認してください。詳細は[TiDB Lightning監視](/tidb-lightning/monitor-tidb-lightning.md)を参照してください。
+- 監視コンソールで進行状況を確認します。詳細は[TiDB Lightning監視](/tidb-lightning/monitor-tidb-lightning.md)を参照してください。
 
 すべてのTiDB Lightningインスタンスが終了するまで待機すると、インポート全体が完了します。
 
