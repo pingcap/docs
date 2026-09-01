@@ -30,7 +30,7 @@ TiDB Ansible バージョン: 3.0.0-rc.3
     - `StreamAggExec` の`Close`関数を呼び出すときにリソースが正しく解放されない問題を修正しました [＃10636](https://github.com/pingcap/tidb/pull/10636)
     - パーティションテーブルの`show create table`のステートメントを実行した結果、 `table_option`と`partition_options`の順序が正しくない問題を修正しました。 [＃10689](https://github.com/pingcap/tidb/pull/10689)
     - 逆順スキャンデータサポートすることで`admin show ddl jobs`のパフォーマンスを向上 [＃10687](https://github.com/pingcap/tidb/pull/10687)
-    - この文に`current_user`フィールドがある場合、RBACの`show grants`文の結果がMySQLの結果と互換性がない問題を修正しました。 [＃10684](https://github.com/pingcap/tidb/pull/10684)
+    - RBACの`show grants`文に`current_user`フィールドがある場合、その結果がMySQLの結果と互換性がない問題を修正しました。 [＃10684](https://github.com/pingcap/tidb/pull/10684)
     - UUIDが複数のノードで重複した値を生成する可能性がある問題を修正[＃10712](https://github.com/pingcap/tidb/pull/10712)
     - `show view`権限が`explain` で考慮されない問題を修正 [＃10635](https://github.com/pingcap/tidb/pull/10635)
     - ホットスポットの問題を軽減するために、テーブルリージョンを手動で分割する`split table region`ステートメントを追加します[＃10765](https://github.com/pingcap/tidb/pull/10765)
