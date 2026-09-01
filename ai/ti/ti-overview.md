@@ -54,11 +54,11 @@ ti <service> <operation>
 
 Examples include `ti db list-db-clusters --db-cluster-type starter`, `ti fs copy-file`, and `ti fs-journal verify-journal`. The top-level `ti configure` and `ti update` commands configure and maintain the CLI.
 
-## TiDB Cloud CLI and Drive9
+## TiDB Cloud Filesystem runtime
 
-The TiDB Cloud CLI installs a bundled [Drive9](https://github.com/mem9-ai/drive9) companion named `ti-drive9`. The TiDB Cloud CLI owns profile selection, TiDB Cloud credentials, region and Filesystem selection, output formatting, and `ti` error behavior. The companion owns Filesystem data-plane semantics, FUSE and WebDAV mounts, layers, pack and unpack, Git workspace acceleration, journals, and vault operations.
+Drive9 is the data-plane runtime used by TiDB Cloud Filesystem. The TiDB Cloud CLI installs and manages this runtime as a bundled companion executable named `ti-drive9`. It is an implementation component of the TiDB Cloud Filesystem experience, not a separate product that you need to select or install.
 
-You do not need to install, configure, or invoke Drive9 separately for normal TiDB Cloud CLI workflows.
+The `ti` executable owns profile selection, TiDB Cloud credentials, region and Filesystem selection, output formatting, and CLI error behavior. The bundled runtime implements Filesystem data-plane semantics, FUSE and WebDAV mounts, layers, pack and unpack, Git workspace acceleration, journals, and vault operations. You do not need to configure or invoke `ti-drive9` separately for normal TiDB Cloud CLI workflows.
 
 ## Find the right documentation
 
