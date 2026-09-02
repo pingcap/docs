@@ -12,8 +12,8 @@ summary: TiDB 2.1 RC3は2018年9月29日にリリースされ、安定性、互�
 - SQLオプティマイザ
     - 文に埋め込み`LEFT OUTER JOIN` が含まれている場合の誤った結果の問題を修正しました [＃7689](https://github.com/pingcap/tidb/pull/7689)
     - `JOIN`文の述語プッシュダウンの最適化ルールを強化する [＃7645](https://github.com/pingcap/tidb/pull/7645)
-    - `UnionScan`演算子述語プッシュダウンの最適化ルールを修正 [＃7695](https://github.com/pingcap/tidb/pull/7695)
-    - `Union`演算子の一意のキープロパティが正しく設定されていない問題を修正[＃7680](https://github.com/pingcap/tidb/pull/7680)
+    - `UnionScan`オペレーターの述語プッシュダウンの最適化ルールを修正 [＃7695](https://github.com/pingcap/tidb/pull/7695)
+    - `Union`オペレーターの一意のキープロパティが正しく設定されていない問題を修正[＃7680](https://github.com/pingcap/tidb/pull/7680)
     - 定数畳み込みの最適化ルールの強化[＃7696](https://github.com/pingcap/tidb/pull/7696)
     - テーブルデュアルへの伝播後にフィルターがnullになるデータソースを最適化します [＃7756](https://github.com/pingcap/tidb/pull/7756)
 - SQL実行エンジン

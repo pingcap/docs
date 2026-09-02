@@ -34,7 +34,7 @@ TiDB バージョン: 6.1.6
 
     - `ignore_plan_cache`ヒントが`INSERT`ステートメントでは機能しない可能性がある問題を修正しました [＃40079](https://github.com/pingcap/tidb/issues/40079) [＃39717](https://github.com/pingcap/tidb/issues/39717) @[qw4990](https://github.com/qw4990)
     - `indexMerge`エラーに遭遇した後に TiDB がpanicする可能性がある問題を修正[＃41047](https://github.com/pingcap/tidb/issues/41047) [＃40877](https://github.com/pingcap/tidb/issues/40877) @[guo-shaoge](https://github.com/guo-shaoge) @[windtalker](https://github.com/windtalker)
-    - 仮想列を持つ TopN 演算子が誤って TiKV またはTiFlashにプッシュダウンすると、誤った結果が返される可能性がある問題を修正しました。 [＃41355](https://github.com/pingcap/tidb/issues/41355) @[Dousir9](https://github.com/Dousir9)
+    - 仮想列を持つ TopN オペレーターが誤って TiKV またはTiFlashにプッシュダウンすると、誤った結果が返される可能性がある問題を修正しました。 [＃41355](https://github.com/pingcap/tidb/issues/41355) @[Dousir9](https://github.com/Dousir9)
     - 多数のリージョンがあるが、 `Prepare`または`Execute`を使用して一部の仮想テーブルをクエリするときにテーブル ID をプッシュダウンできないという PD OOM 問題を修正しました。 [＃39605](https://github.com/pingcap/tidb/issues/39605) @[djshow832](https://github.com/djshow832)
     - プランキャッシュが`int_col in (decimal...)`条件を処理するときにフルスキャン プランをキャッシュする可能性がある問題を修正しました [＃40224](https://github.com/pingcap/tidb/issues/40224) @[qw4990](https://github.com/qw4990)
     - IndexMerge プランが SET 型の列に誤った範囲を生成する可能性がある問題を修正しました [＃41273](https://github.com/pingcap/tidb/issues/41273) [＃41293](https://github.com/pingcap/tidb/issues/41293) @[time-and-fate](https://github.com/time-and-fate)
@@ -73,7 +73,7 @@ TiDB バージョン: 6.1.6
 
     - 直交積を計算するときにセミ結合が過剰なメモリを使用する問題を修正しました [＃6730](https://github.com/pingcap/tiflash/issues/6730) @[gengliqi](https://github.com/gengliqi)
     - TiFlashログ検索が遅すぎる問題を修正[＃6829](https://github.com/pingcap/tiflash/issues/6829) @[hehechen](https://github.com/hehechen)
-    - 新しい照合順序を有効にした後に TopN/Sort 演算子が誤った結果を生成する問題を修正しました [＃6807](https://github.com/pingcap/tiflash/issues/6807) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - 新しい照合順序を有効にした後に TopN/Sort オペレーターが誤った結果を生成する問題を修正しました [＃6807](https://github.com/pingcap/tiflash/issues/6807) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - 特定のケースで 10 進キャストが誤って切り上げられる問題を修正しました [＃6994](https://github.com/pingcap/tiflash/issues/6994) @[windtalker](https://github.com/windtalker)
     - TiFlashが生成列を認識できない問題を修正 [＃6801](https://github.com/pingcap/tiflash/issues/6801) @[guo-shaoge](https://github.com/guo-shaoge)
     - 特定のケースで小数点以下の桁が切り上げられない問題を修正[＃7022](https://github.com/pingcap/tiflash/issues/7022) @[LittleFall](https://github.com/LittleFall)

@@ -21,7 +21,7 @@ TiDB の現在のバージョンでは、 `Prepare`ステートメントが次�
 - クエリには、 `SELECT` 、 `UPDATE` 、 `INSERT` 、 `DELETE` 、 `Union` 、 `Intersect` 、 `Except`以外の SQL ステートメントが含まれています。
 - クエリは一時テーブル、または生成列を含むテーブルにアクセスするか、静的モード (つまり、 [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51)が`static`に設定される) を使用してパーティションテーブルにアクセスします。
 - クエリには、 `SELECT * FROM t1 WHERE t1.a > (SELECT 1 FROM t2 WHERE t2.b < 1)`などの非相関サブクエリが含まれています。
-- クエリには、実行計画に`SELECT * FROM t1 WHERE t1.a > (SELECT a FROM t2 WHERE t1.b > t2.b)`などの`PhysicalApply`演算子を持つ相関サブクエリが含まれています。
+- クエリには、実行計画に`SELECT * FROM t1 WHERE t1.a > (SELECT a FROM t2 WHERE t1.b > t2.b)`などの`PhysicalApply`オペレーターを持つ相関サブクエリが含まれています。
 - クエリには、 `SELECT /*+ ignore_plan_cache() */ * FROM t`や`SELECT /*+ set_var(max_execution_time=1) */ * FROM t`などの`ignore_plan_cache`または`set_var`ヒントが含まれています。
 - クエリには、 `select * from t where a>? and b>@x`などの`?`以外の変数 (システム変数やユーザー定義変数を含む) が含まれています。
 - クエリには、キャッシュできない関数`database()` 、 `current_user` 、 `current_role` 、 `user` 、 `connection_id` 、 `last_insert_id` 、 `row_count` 、 `version` 、および`like`が含まれています。
@@ -47,7 +47,7 @@ LRUリンクリストは、 `Prepare` / `Execute`セッションをまたいで�
 
 前述の情報に変更がある場合 (たとえば、データベースの切り替え、 `Prepare`文の名前変更、DDL 文の実行、SQL mode/ `time_zone`の値の変更)、または LRU キャッシュ削除メカニズムにより、実行時に実行計画のキャッシュ ミスが発生します。
 
-実行計画キャッシュがキャッシュから取得された後、TiDBはまず実行計画がまだ有効かどうかを確認します。現在の`Execute`文が明示的なトランザクションで実行され、参照先のテーブルがトランザクションの事前順序付け文で変更された場合、このテーブルにアクセスするキャッシュされた実行計画に`UnionScan`演算子が含まれていないため、実行できません。
+実行計画キャッシュがキャッシュから取得された後、TiDBはまず実行計画がまだ有効かどうかを確認します。現在の`Execute`文が明示的なトランザクションで実行され、参照先のテーブルがトランザクションの事前順序付け文で変更された場合、このテーブルにアクセスするキャッシュされた実行計画に`UnionScan`オペレーターが含まれていないため、実行できません。
 
 検証テストに合格すると、実行計画のスキャン範囲が現在のパラメータ値に応じて調整され、データクエリの実行に使用されます。
 

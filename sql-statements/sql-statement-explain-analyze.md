@@ -37,10 +37,10 @@ ExplainableStmt ::=
 
 | 属性名    | 説明                                                                                                                                                                 |
 | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| アクトロウズ | 演算子によって出力される行数。                                                                                                                                                    |
-| 実行情報   | 演算子の実行情報。`time`は演算子に入ってから演算子を出るまでの合計`wall time`を表します。これには、すべてのサブ演算子の合計実行時間が含まれます。演算子が親演算子（ループ内）によって何度も呼び出される場合は、その累積時間を参照します。`loops`は、現在の演算子が親演算子によって呼び出された回数です。 |
-| メモリ    | 演算子によって占有されるメモリ領域。                                                                                                                                                 |
-| ディスク   | オペレータが占有するディスク領域。                                                                                                                                                  |
+| アクトロウズ | オペレーターによって出力される行数。                                                                                                                                                    |
+| 実行情報   | オペレーターの実行情報。`time`はオペレーターに入ってからオペレーターを出るまでの合計`wall time`を表します。これには、すべてのサブオペレーターの合計実行時間が含まれます。オペレーターが親オペレーター（ループ内）によって何度も呼び出される場合は、その累積時間を参照します。`loops`は、現在のオペレーターが親オペレーターによって呼び出された回数です。 |
+| メモリ    | オペレーターによって占有されるメモリ領域。                                                                                                                                                 |
+| ディスク   | オペレーターが占有するディスク領域。                                                                                                                                                  |
 
 ## 例 {#examples}
 
@@ -88,13 +88,13 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 2 rows in set (0.00 sec)
 ```
 
-## オペレータの実行情報 {#execution-information-of-operators}
+## オペレーターの実行情報 {#execution-information-of-operators}
 
-基本的な`time`と`loop`実行情報に加えて、 `execution info`はオペレータ固有の実行情報も含まれます。これには主に、オペレータが RPC 要求を送信するのにかかった時間やその他のステップの実行時間が含まれます。
+基本的な`time`と`loop`実行情報に加えて、 `execution info`はオペレーター固有の実行情報も含まれます。これには主に、オペレーターが RPC 要求を送信するのにかかった時間やその他のステップの実行時間が含まれます。
 
 ### PointGet {#point-get}
 
-`Point_Get`演算子からの実行情報には通常、次の情報が含まれます。
+`Point_Get`オペレーターからの実行情報には通常、次の情報が含まれます。
 
 - `Get:{num_rpc:1, total_time:697.051µs}` ：TiKVに送信された`Get` RPC要求の数（ `num_rpc` ）とすべてのRPC要求の合計期間（ `total_time` ）。
 - `ResolveLock:{num_rpc:1, total_time:12.117495ms}` ：TiDBはデータの読み取り時にロックに遭遇した場合、まずロックを解決する必要があります。これは通常、読み取り/書き込み競合のシナリオで発生します。この情報は、ロック解決にかかる時間を示します。
@@ -102,13 +102,13 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 
 ### Batch PointGet {#batch-point-get}
 
-`Batch_Point_Get`オペレータの実行情報は`Point_Get`オペレータと似ていますが、 `Batch_Point_Get`通常、データを読み取りするために`BatchGet` RPC 要求を TiKV に送信します。
+`Batch_Point_Get`オペレーターの実行情報は`Point_Get`オペレーターと似ていますが、 `Batch_Point_Get`通常、データを読み取りするために`BatchGet` RPC 要求を TiKV に送信します。
 
 `BatchGet:{num_rpc:2, total_time:83.13µs}` : TiKVに送信された`BatchGet`タイプのRPC要求の数( `num_rpc` )とすべてのRPC要求に費やされた合計時間( `total_time` )。
 
 ### TableReader {#tablereader}
 
-`TableReader`演算子の実行情報は、通常、次のようになります。
+`TableReader`オペレーターの実行情報は、通常、次のようになります。
 
 ```
 cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.07587ms, max_proc_keys: 16, p95_proc_keys: 16, tot_proc: 1ms, tot_wait: 1ms, copr_cache_hit_ratio: 0.00}, rpc_info:{Cop:{num_rpc:6, total_time:5.313996ms}}
@@ -124,7 +124,7 @@ cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.0758
 
 ### Insert {#insert}
 
-`Insert`演算子の実行情報は、通常、次のようになります。
+`Insert`オペレーターの実行情報は、通常、次のようになります。
 
 ```
 prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878µs, prefetch:763.8µs, rpc:{BatchGet:{num_rpc:1, total_time:699.166µs},Get:{num_rpc:1, total_time:378.276µs }}}
@@ -142,14 +142,14 @@ prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878
 
 ### IndexJoin {#indexjoin}
 
-`IndexJoin`演算子は、1つの外部ワーカーとN個の内部ワーカーを並列実行のために使用します。結合結果は外部テーブルの順序を保持します。詳細な実行プロセスは以下のとおりです。
+`IndexJoin`オペレーターは、1つの外部ワーカーとN個の内部ワーカーを並列実行のために使用します。結合結果は外部テーブルの順序を保持します。詳細な実行プロセスは以下のとおりです。
 
 1. 外側のワーカーは N 個の外側の行を読み取り、それをタスクにラップして、結果チャネルと内側のワーカー チャネルに送信します。
 2. 内部ワーカーはタスクを受け取り、タスクからキー範囲を構築し、キー範囲に従って内部行を取得します。そして、内部行ハッシュテーブルを構築します。
 3. メイン`IndexJoin`スレッドは結果チャネルからタスクを受け取り、内部ワーカーがタスクの処理を完了するまで待機します。
 4. メイン`IndexJoin`スレッドは、内側の行のハッシュテーブルを参照して、各外側の行を結合します。
 
-`IndexJoin`演算子には次の実行情報が含まれています。
+`IndexJoin`オペレーターには次の実行情報が含まれています。
 
 ```
 inner:{total:4.297515932s, concurrency:5, task:17, construct:97.96291ms, fetch:4.164310088s, build:35.219574ms}, probe:53.574945ms
@@ -166,13 +166,13 @@ inner:{total:4.297515932s, concurrency:5, task:17, construct:97.96291ms, fetch:4
 
 ### IndexHashJoin {#indexhashjoin}
 
-`IndexHashJoin`演算子の実行プロセスは`IndexJoin`演算子と同様です。`IndexHashJoin`演算子も1つの外部ワーカーとN個の内部ワーカーで並列実行されますが、出力順序は外部テーブルと一致するとは限りません。詳細な実行プロセスは以下のとおりです。
+`IndexHashJoin`オペレーターの実行プロセスは`IndexJoin`オペレーターと同様です。`IndexHashJoin`オペレーターも1つの外部ワーカーとN個の内部ワーカーで並列実行されますが、出力順序は外部テーブルと一致するとは限りません。詳細な実行プロセスは以下のとおりです。
 
 1. 外側のワーカーは N 個の外側の行を読み取り、タスクを構築して、それを内側のワーカー チャネルに送信します。
 2. 内部ワーカーは内部ワーカーチャネルからタスクを受け取り、各タスクに対して以下の3つの操作を順番に実行します。a. 外部行からハッシュテーブルを構築します。b. 外部行からキー範囲を構築し、内部行を取得します。c. ハッシュテーブルをプローブし、結合結果を結果チャネルに送信します。注：ステップaとステップbは同時に実行されます。
 3. `IndexHashJoin`のメイン スレッドは、結果チャネルから結合結果を受信します。
 
-`IndexHashJoin`演算子には次の実行情報が含まれています。
+`IndexHashJoin`オペレーターには次の実行情報が含まれています。
 
 ```sql
 inner:{total:4.429220003s, concurrency:5, task:17, construct:96.207725ms, fetch:4.239324006s, build:24.567801ms, join:93.607362ms}
@@ -189,7 +189,7 @@ inner:{total:4.429220003s, concurrency:5, task:17, construct:96.207725ms, fetch:
 
 ### HashJoin {#hashjoin}
 
-`HashJoin`演算子は、内部ワーカー、外部ワーカー、および N 個の結合ワーカーで構成されます。詳細な実行プロセスは次のとおりです。
+`HashJoin`オペレーターは、内部ワーカー、外部ワーカー、および N 個の結合ワーカーで構成されます。詳細な実行プロセスは次のとおりです。
 
 1. 内部ワーカーは内部テーブルの行を読み取り、ハッシュテーブルを構築します。
 2. 外部ワーカーは外部テーブルの行を読み取り、それをタスクにラップして結合ワーカーに送信します。
@@ -197,7 +197,7 @@ inner:{total:4.429220003s, concurrency:5, task:17, construct:96.207725ms, fetch:
 4. 結合ワーカーは、タスク内の外部テーブルの行とハッシュテーブルを使用して結合操作を実行し、結合結果を結果チャネルに送信します。
 5. `HashJoin`のメイン スレッドは結果チャネルから結合結果を受信します。
 
-`HashJoin`演算子には次の実行情報が含まれています。
+`HashJoin`オペレーターには次の実行情報が含まれています。
 
 ```
 build_hash_table:{total:146.071334ms, fetch:110.338509ms, build:35.732825ms}, probe:{concurrency:5, total:857.162518ms, max:171.48271ms, probe:125.341665ms, fetch:731.820853ms}
@@ -216,7 +216,7 @@ build_hash_table:{total:146.071334ms, fetch:110.338509ms, build:35.732825ms}, pr
 
 ### TableFullScan (TiFlash) {#tablefullscan-tiflash}
 
-TiFlashノードで実行される`TableFullScan`演算子には、次の実行情報が含まれます。
+TiFlashノードで実行される`TableFullScan`オペレーターには、次の実行情報が含まれます。
 
 ```sql
 tiflash_scan: {
@@ -243,7 +243,7 @@ tiflash_scan: {
 
 ### lock_keys実行情報 {#lock-keys-execution-information}
 
-悲観的トランザクションでDML文が実行されると、演算子の実行情報に`lock_keys`の実行情報も含まれる場合があります。例:
+悲観的トランザクションでDML文が実行されると、オペレーターの実行情報に`lock_keys`の実行情報も含まれる場合があります。例:
 
 ```
 lock_keys: {time:94.096168ms, region:6, keys:8, lock_rpc:274.503214ms, rpc_count:6}
@@ -257,7 +257,7 @@ lock_keys: {time:94.096168ms, region:6, keys:8, lock_rpc:274.503214ms, rpc_count
 
 ### commit_txn実行情報 {#commit-txn-execution-information}
 
-`autocommit=1`のトランザクションで書き込み型DML文が実行されると、書き込み演算子の実行情報にはトランザクションコミットの実行時間情報も含まれます。例:
+`autocommit=1`のトランザクションで書き込み型DML文が実行されると、書き込みオペレーターの実行情報にはトランザクションコミットの実行時間情報も含まれます。例:
 
 ```
 commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts:4.277455ms, commit:50.431774ms, region_num:7, write_keys:16, write_byte:536}
@@ -272,7 +272,7 @@ commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts
 
 ### RU（リクエストユニット）消費量 {#ru-request-unit-consumption}
 
-[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) 、TiDB リソース制御で定義されているシステムリソースの統一された抽象単位です。最上位演算子の`execution info`この特定の SQL 文の全体的な RU 消費量を示します。
+[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) 、TiDB リソース制御で定義されているシステムリソースの統一された抽象単位です。最上位オペレーターの`execution info`この特定の SQL 文の全体的な RU 消費量を示します。
 
 ```
 RU:273.842670
@@ -329,7 +329,7 @@ after key/value request is processed:
 
 ### その他の一般的な実行情報 {#other-common-execution-information}
 
-コプロセッサーオペレータには通常、実行時間情報の2つの部分、 `cop_task`と`tikv_task`が含まれます。`cop_task`はTiDBによって記録された時間で、リクエストがサーバーに送信されてからレスポンスが受信されるまでの時間です。`tikv_task`はTiKVコプロセッサー自体によって記録された時間です。この2つの値に大きな差がある場合は、レスポンスの待機時間が長すぎるか、gRPCまたはネットワークで費やされた時間が長すぎることを示している可能性があります。
+コプロセッサーオペレーターには通常、実行時間情報の2つの部分、 `cop_task`と`tikv_task`が含まれます。`cop_task`はTiDBによって記録された時間で、リクエストがサーバーに送信されてからレスポンスが受信されるまでの時間です。`tikv_task`はTiKVコプロセッサー自体によって記録された時間です。この2つの値に大きな差がある場合は、レスポンスの待機時間が長すぎるか、gRPCまたはネットワークで費やされた時間が長すぎることを示している可能性があります。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 

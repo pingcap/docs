@@ -33,9 +33,9 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 - TiFlashは遅延マテリアライゼーション（GA） をサポートします [＃5829](https://github.com/pingcap/tiflash/issues/5829) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
 
-    v7.0.0 では、クエリパフォーマンスを最適化するための実験的機能として、 TiFlashに遅延マテリアライゼーションが導入されました。この機能はデフォルトでは無効になっています ( [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)システム変数はデフォルトで`OFF`に設定されます)。フィルタ条件 ( `WHERE`句) を含む`SELECT`ステートメントを処理する場合、 TiFlash はクエリに必要な列からすべてのデータを読み取り、クエリ条件に基づいてデータをフィルタリングおよび集計します。遅延マテリアライゼーションを有効にすると、TiDB はフィルタ条件の一部を TableScan 演算子にプッシュダウンすることをサポートします。つまり、 TiFlash は最初に TableScan 演算子にプッシュダウンされるフィルタ条件に関連する列データをスキャンし、条件を満たす行をフィルタリングしてから、これらの行の他の列データをスキャンしてさらに計算を行うため、IO スキャンとデータ処理の計算が削減されます。
+    v7.0.0 では、クエリパフォーマンスを最適化するための実験的機能として、 TiFlashに遅延マテリアライゼーションが導入されました。この機能はデフォルトでは無効になっています ( [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)システム変数はデフォルトで`OFF`に設定されます)。フィルタ条件 ( `WHERE`句) を含む`SELECT`ステートメントを処理する場合、 TiFlash はクエリに必要な列からすべてのデータを読み取り、クエリ条件に基づいてデータをフィルタリングおよび集計します。遅延マテリアライゼーションを有効にすると、TiDB はフィルタ条件の一部を TableScan オペレーターにプッシュダウンすることをサポートします。つまり、 TiFlash は最初に TableScan オペレーターにプッシュダウンされるフィルタ条件に関連する列データをスキャンし、条件を満たす行をフィルタリングしてから、これらの行の他の列データをスキャンしてさらに計算を行うため、IO スキャンとデータ処理の計算が削減されます。
 
-    バージョン7.1.0以降、 TiFlashの遅延マテリアライゼーション機能が一般提供され、デフォルトで有効化されています（システム変数[`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)はデフォルトで`ON`に設定されています）。TiDBオプティマイザは、クエリの統計情報とフィルター条件に基づいて、TableScan演算子にプッシュダウンするフィルターを決定します。
+    バージョン7.1.0以降、 TiFlashの遅延マテリアライゼーション機能が一般提供され、デフォルトで有効化されています（システム変数[`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)はデフォルトで`ON`に設定されています）。TiDBオプティマイザは、クエリの統計情報とフィルター条件に基づいて、TableScanオペレーターにプッシュダウンするフィルターを決定します。
 
     詳細については[ドキュメント](/tiflash/tiflash-late-materialization.md)を参照してください。
 
@@ -311,7 +311,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     - 対応する列の個別値の数を、 `SHOW INDEX`結果の Cardinality 列に表示します。 [＃42227](https://github.com/pingcap/tidb/issues/42227) @[winoros](https://github.com/winoros)
     - TTLスキャンクエリがTiKVブロックキャッシュに影響を与えないようにするには`SQL_NO_CACHE`を使用します。 [＃43206](https://github.com/pingcap/tidb/issues/43206) @[lcwangchao](https://github.com/lcwangchao)
     - `MAX_EXECUTION_TIME`に関連するエラーメッセージを改善し、MySQL と互換性を持たせます [＃43031](https://github.com/pingcap/tidb/issues/43031) @[dveeden](https://github.com/dveeden)
-    - IndexLookUp のパーティションテーブルでの MergeSort 演算子の使用をサポート [＃26166](https://github.com/pingcap/tidb/issues/26166) @[Defined2014](https://github.com/Defined2014)
+    - IndexLookUp のパーティションテーブルでの MergeSort オペレーターの使用をサポート [＃26166](https://github.com/pingcap/tidb/issues/26166) @[Defined2014](https://github.com/Defined2014)
     - MySQL と互換性を持たせるために`caching_sha2_password`拡張します [＃43576](https://github.com/pingcap/tidb/issues/43576) @[asjdf](https://github.com/asjdf)
 
 - TiKV

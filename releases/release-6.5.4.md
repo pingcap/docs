@@ -141,7 +141,7 @@ TiDB バージョン: 6.5.4
 
     - `fsp` `DATETIME` 、 `TIMESTAMP` 、または`TIME`データ型に変更した後にクエリが失敗する問題を修正しました [＃7809](https://github.com/pingcap/tiflash/issues/7809) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - 領域の無効な範囲キーによりTiFlashデータが不整合になる問題を修正しました [＃7762](https://github.com/pingcap/tiflash/issues/7762) @[lidezhu](https://github.com/lidezhu)
-    - 同じ MPP タスク内に複数の HashAgg 演算子がある場合、MPP タスクのコンパイルに非常に長い時間がかかり、クエリのパフォーマンスに重大な影響を与える可能性がある問題を修正しました[＃7810](https://github.com/pingcap/tiflash/issues/7810) @[SeaRise](https://github.com/SeaRise)
+    - 同じ MPP タスク内に複数の HashAgg オペレーターがある場合、MPP タスクのコンパイルに非常に長い時間がかかり、クエリのパフォーマンスに重大な影響を与える可能性がある問題を修正しました[＃7810](https://github.com/pingcap/tiflash/issues/7810) @[SeaRise](https://github.com/SeaRise)
     - オンラインアンセーフリカバリを使用した後、 TiFlashの再起動に時間がかかりすぎる問題を修正しました [＃7671](https://github.com/pingcap/tiflash/issues/7671) @[hongyunyan](https://github.com/hongyunyan)
     - TiFlash が割り算を行うときに`DECIMAL`結果を誤って丸める問題を修正しました [＃6462](https://github.com/pingcap/tiflash/issues/6462) @[LittleFall](https://github.com/LittleFall)
 

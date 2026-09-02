@@ -13,7 +13,7 @@ TiDB バージョン: 8.2.0
 
 バージョン8.2.0では、以下の主要な機能と改善点が導入されています。
 
-<table><thead><tr><th>カテゴリ</th><th>機能／改善点</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.2/tiproxy-load-balance">TiProxyは複数のロードバランシングポリシーをサポートしています。</a></td><td> TiDB v8.2.0では、TiProxyはステータス、接続数、健全性、メモリ、CPU、ロケーションなど、さまざまな要素に基づいてTiDBノードを評価し、ランク付けします。 <code>policy</code>構成項目で指定された負荷分散ポリシーに従って、TiProxyはデータベース操作を実行する最適なTiDBノードを動的に選択します。これにより、リソース使用率全体が最適化され、クラスタのパフォーマンスが向上し、スループットが増加します。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.2/system-variables#tidb_enable_parallel_hashagg_spill-new-in-v800">TiDB の並列 HashAgg アルゴリズムはディスクスピル (GA) をサポートします</a></td><td>HashAgg は、同じフィールド値を持つ行を効率的に集計するために TiDB で広く使用されている集計演算子です。TiDB v8.0.0 では、処理速度をさらに向上させる実験的機能として parallel HashAgg が導入されました。メモリリソースが不足している場合、parallel HashAgg は一時的にソートされたデータをディスクに書き出すことで、過剰なメモリ使用による潜在的な OOM リスクを回避します。これにより、ノードの安定性を維持しながらクエリパフォーマンスが向上します。v8.2.0 では、この機能が一般提供 (GA) となり、デフォルトで有効になっているため、 <code>tidb_executor_concurrency</code>を使用して parallel HashAgg の同時実行性を安全に構成できます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.2/tidb-configuration-file#stats-load-concurrency-new-in-v540">統計情報の読み込み効率を最大10倍向上</a></td><td>SaaSやPaaSサービスなど、テーブルとパーティションの数が多いクラスタでは、統計情報のロード効率を改善することで、TiDBインスタンスの起動速度低下の問題を解決し、統計情報の動的ロードの成功率を高めることができます。この改善により、統計情報のロード失敗によるパフォーマンス低下が軽減され、クラスタの安定性が向上します。</td></tr><tr><td rowspan="1">データベースの運用と可観測性</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.2/tidb-resource-control#bind-resource-groups">リソースグループの切り替えに対する特権制御を導入する</a></td><td>リソース制御は広く利用されているため、リソースグループの切り替えに関する権限制御は、データベースユーザーによるリソースの不正使用を防ぎ、管理者によるリソース使用全体の保護を強化し、クラスタの安定性を向上させることができる。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>機能／改善点</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.2/tiproxy-load-balance">TiProxyは複数のロードバランシングポリシーをサポートしています。</a></td><td> TiDB v8.2.0では、TiProxyはステータス、接続数、健全性、メモリ、CPU、ロケーションなど、さまざまな要素に基づいてTiDBノードを評価し、ランク付けします。 <code>policy</code>構成項目で指定された負荷分散ポリシーに従って、TiProxyはデータベース操作を実行する最適なTiDBノードを動的に選択します。これにより、リソース使用率全体が最適化され、クラスタのパフォーマンスが向上し、スループットが増加します。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.2/system-variables#tidb_enable_parallel_hashagg_spill-new-in-v800">TiDB の並列 HashAgg アルゴリズムはディスクスピル (GA) をサポートします</a></td><td>HashAgg は、同じフィールド値を持つ行を効率的に集計するために TiDB で広く使用されている集計オペレーターです。TiDB v8.0.0 では、処理速度をさらに向上させる実験的機能として parallel HashAgg が導入されました。メモリリソースが不足している場合、parallel HashAgg は一時的にソートされたデータをディスクに書き出すことで、過剰なメモリ使用による潜在的な OOM リスクを回避します。これにより、ノードの安定性を維持しながらクエリパフォーマンスが向上します。v8.2.0 では、この機能が一般提供 (GA) となり、デフォルトで有効になっているため、 <code>tidb_executor_concurrency</code>を使用して parallel HashAgg の同時実行性を安全に構成できます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.2/tidb-configuration-file#stats-load-concurrency-new-in-v540">統計情報の読み込み効率を最大10倍向上</a></td><td>SaaSやPaaSサービスなど、テーブルとパーティションの数が多いクラスタでは、統計情報のロード効率を改善することで、TiDBインスタンスの起動速度低下の問題を解決し、統計情報の動的ロードの成功率を高めることができます。この改善により、統計情報のロード失敗によるパフォーマンス低下が軽減され、クラスタの安定性が向上します。</td></tr><tr><td rowspan="1">データベースの運用と可観測性</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.2/tidb-resource-control#bind-resource-groups">リソースグループの切り替えに対する特権制御を導入する</a></td><td>リソース制御は広く利用されているため、リソースグループの切り替えに関する権限制御は、データベースユーザーによるリソースの不正使用を防ぎ、管理者によるリソース使用全体の保護を強化し、クラスタの安定性を向上させることができる。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -206,7 +206,7 @@ TiDB バージョン: 8.2.0
     - Azure Identity LibrariesとMicrosoft Authentication Libraryのバージョンをアップグレードしてセキュリティを強化する [#53990](https://github.com/pingcap/tidb/issues/53990) @[hawkingrei](https://github.com/hawkingrei)
     - TiDB Server のメモリ不足エラー（OOM）が発生しないように、 `token-limit`の最大値に`1048576`を設定してください。 [#53312](https://github.com/pingcap/tidb/issues/53312) @[djshow832](https://github.com/djshow832)
     - TiFlash MPP実行パフォーマンスを向上させるため、MPP実行計画の列剪定を改善しました [#52133](https://github.com/pingcap/tidb/issues/52133) @[yibin87](https://github.com/yibin87)
-    - 大量のデータ（&gt;1024行）を含むテーブルを検索する際の`IndexLookUp`演算子のパフォーマンスオーバーヘッドを最適化する [#53871](https://github.com/pingcap/tidb/issues/53871) @[crazycs520](https://github.com/crazycs520)
+    - 大量のデータ（&gt;1024行）を含むテーブルを検索する際の`IndexLookUp`オペレーターのパフォーマンスオーバーヘッドを最適化する [#53871](https://github.com/pingcap/tidb/issues/53871) @[crazycs520](https://github.com/crazycs520)
     - MPPロードバランシング中にリージョンを持たないストアを削除する [#52313](https://github.com/pingcap/tidb/issues/52313) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
 - TiKV
@@ -227,8 +227,8 @@ TiDB バージョン: 8.2.0
 
     - 高並行データ読み取り操作時のロック競合を減らし、短いクエリのパフォーマンスを最適化 [#9125](https://github.com/pingcap/tiflash/issues/9125) @[JinheLin](https://github.com/JinheLin)
     - `Join`演算子内の Join Key の重複コピーを削除します [#9057](https://github.com/pingcap/tiflash/issues/9057) @[gengliqi](https://github.com/gengliqi)。
-    - `HashAgg` 演算子で 2 レベルハッシュテーブルの変換処理を同時に実行します [#8956](https://github.com/pingcap/tiflash/issues/8956) @[gengliqi](https://github.com/gengliqi)
-    - `HashAgg`演算子の冗長な集計関数を削除して計算オーバーヘッドを削減 [#8891](https://github.com/pingcap/tiflash/issues/8891) @[guo-shaoge](https://github.com/guo-shaoge)
+    - `HashAgg`オペレーターで 2 レベルハッシュテーブルの変換処理を同時に実行します [#8956](https://github.com/pingcap/tiflash/issues/8956) @[gengliqi](https://github.com/gengliqi)
+    - `HashAgg`オペレーターの冗長な集計関数を削除して計算オーバーヘッドを削減 [#8891](https://github.com/pingcap/tiflash/issues/8891) @[guo-shaoge](https://github.com/guo-shaoge)
 
 - ツール
 
@@ -261,7 +261,7 @@ TiDB バージョン: 8.2.0
     - クライアント側でデータ読み取りタイムアウト後にクエリを終了できない問題を修正 [#44009](https://github.com/pingcap/tidb/issues/44009) @[wshwsh12](https://github.com/wshwsh12)
     - 述語における`Longlong`型のオーバーフロー問題を修正 [#45783](https://github.com/pingcap/tidb/issues/45783) @[hawkingrei](https://github.com/hawkingrei)
     - Window関数内に関連サブクエリがある場合にpanicする可能性がある問題を修正しました [#42734](https://github.com/pingcap/tidb/issues/42734) @[Rustin170506](https://github.com/Rustin170506)
-    - TopN演算子が正しくプッシュダウンされない可能性がある問題を修正しました [#37986](https://github.com/pingcap/tidb/issues/37986) @[qw4990](https://github.com/qw4990)
+    - TopNオペレーターが正しくプッシュダウンされない可能性がある問題を修正しました [#37986](https://github.com/pingcap/tidb/issues/37986) @[qw4990](https://github.com/qw4990)
     - クラスター化インデックスを述語として使用する場合に`SELECT INTO OUTFILE`が機能しない問題を修正 [#42093](https://github.com/pingcap/tidb/issues/42093) @[qw4990](https://github.com/qw4990)
     - 情報スキーマキャッシュのミスによって古い読み取りのクエリレイテンシーが増加する問題を修正します [#53428](https://github.com/pingcap/tidb/issues/53428) @[crazycs520](https://github.com/crazycs520)
     - `YEAR`型の列を範囲外の符号なし整数と比較すると誤った結果が生じる問題を修正しました [#50235](https://github.com/pingcap/tidb/issues/50235) @[qw4990](https://github.com/qw4990)

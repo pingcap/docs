@@ -59,7 +59,7 @@ TiDB Ansible バージョン: 4.0.0-beta
     - [＃12623](https://github.com/pingcap/tidb/pull/12623) [＃11989](https://github.com/pingcap/tidb/pull/11989)
 - トラブルシューティングを容易にするために、TiKV RPCの詳細な`backoff`情報をスローログに出力します[＃13770](https://github.com/pingcap/tidb/pull/13770)
 - 高価なログのメモリ統計のフォーマットを最適化および統一する [＃12809](https://github.com/pingcap/tidb/pull/12809)
-- `EXPLAIN`の明示的なフォーマットを最適化し、オペレータのメモリとディスクの使用状況に関する情報の出力をサポートします[＃13914](https://github.com/pingcap/tidb/pull/13914) [＃13692](https://github.com/pingcap/tidb/pull/13692) [＃13686](https://github.com/pingcap/tidb/pull/13686) [＃11415](https://github.com/pingcap/tidb/pull/11415) [＃13927](https://github.com/pingcap/tidb/pull/13927) [＃13764](https://github.com/pingcap/tidb/pull/13764) [＃13720](https://github.com/pingcap/tidb/pull/13720)
+- `EXPLAIN`の明示的なフォーマットを最適化し、オペレーターのメモリとディスクの使用状況に関する情報の出力をサポートします[＃13914](https://github.com/pingcap/tidb/pull/13914) [＃13692](https://github.com/pingcap/tidb/pull/13692) [＃13686](https://github.com/pingcap/tidb/pull/13686) [＃11415](https://github.com/pingcap/tidb/pull/11415) [＃13927](https://github.com/pingcap/tidb/pull/13927) [＃13764](https://github.com/pingcap/tidb/pull/13764) [＃13720](https://github.com/pingcap/tidb/pull/13720)
 - トランザクションサイズに基づいて`LOAD DATA`の重複値のチェックを最適化し、 `tidb_dml_batch_size`パラメータを構成することでトランザクションサイズの設定をサポートします。 [＃11132](https://github.com/pingcap/tidb/pull/11132)
 - データ準備ルーチンとコミットルーチンを分離し、ワークロードを異なるワーカー に割り当てることで、 `LOAD DATA`のパフォーマンスを最適化します。 [＃11284](https://github.com/pingcap/tidb/pull/11284) [＃11533](https://github.com/pingcap/tidb/pull/11533)
 

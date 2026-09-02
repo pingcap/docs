@@ -63,7 +63,7 @@ TiDBバージョン: 6.5.12
     - クエリ`INFORMATION_SCHEMA.columns`のパフォーマンスが低下する問題を修正 [＃58184](https://github.com/pingcap/tidb/issues/58184) @[lance6716](https://github.com/lance6716)
     - `INSERT ... ON DUPLICATE KEY`文が`mysql_insert_id` と互換性がない問題を修正 [＃55965](https://github.com/pingcap/tidb/issues/55965) @[tiancaiamao](https://github.com/tiancaiamao)
     - クエリ条件`column IS NULL` で一意インデックスにアクセスするときに、オプティマイザが行数を誤って 1 と推定する問題を修正しました。 [＃56116](https://github.com/pingcap/tidb/issues/56116) @[hawkingrei](https://github.com/hawkingrei)
-    - `IndexLookUp`演算子のメモリの一部が追跡されない問題を修正 [＃56440](https://github.com/pingcap/tidb/issues/56440) @[wshwsh12](https://github.com/wshwsh12)
+    - `IndexLookUp`オペレーターのメモリの一部が追跡されない問題を修正 [＃56440](https://github.com/pingcap/tidb/issues/56440) @[wshwsh12](https://github.com/wshwsh12)
     - TiDBの内部コルーチンで発生する可能性のあるデータ競合問題を修正しました [＃56053](https://github.com/pingcap/tidb/issues/56053) @[fishiu](https://github.com/fishiu) [＃57798](https://github.com/pingcap/tidb/issues/57798) @[tiancaiamao](https://github.com/tiancaiamao)
     - クエリに利用可能なインデックスマージ実行計画がある場合に`read_from_storage`ヒントが有効にならない可能性がある問題を修正しました [＃56217](https://github.com/pingcap/tidb/issues/56217) @[AilinKid](https://github.com/AilinKid)
     - エイリアスを持つマルチテーブル`DELETE`ステートメントに対して実行計画 バインディングを作成できない問題を修正しました。 [＃56726](https://github.com/pingcap/tidb/issues/56726) @[hawkingrei](https://github.com/hawkingrei)

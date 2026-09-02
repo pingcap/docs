@@ -44,9 +44,9 @@ TiDBバージョン: 6.5.11
 - TiDB
 
     - 再帰CTE演算子がメモリ使用量を誤って追跡する問題を修正しました [＃54181](https://github.com/pingcap/tidb/issues/54181) @[guo-shaoge](https://github.com/guo-shaoge)
-    - `PipelinedWindow`の`Open`メソッドのパラメータをリセットして、 `PipelinedWindow`が`Apply`の子ノードとして使用されたときに発生する予期しないエラーを修正します。これはの繰り返し操作による以前のパラメータ値の再利用が原因です。 [＃53600](https://github.com/pingcap/tidb/issues/53600) @[XuHuaiyu](https://github.com/XuHuaiyu)
+    - `PipelinedWindow`の`Open`メソッドのパラメータをリセットして、 `PipelinedWindow`が`Apply`の子ノードとして使用されたときに、繰り返しの開閉操作によって発生した以前のパラメータ値の再利用により発生する予期しないエラーを修正します。 [＃53600](https://github.com/pingcap/tidb/issues/53600) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - トランザクションで使用されるメモリが複数回追跡される可能性がある問題を修正[＃53984](https://github.com/pingcap/tidb/issues/53984) @[ekexium](https://github.com/ekexium)
-    - `HashJoin`または`IndexLookUp`演算子が`Apply`演算子の駆動側サブノードである場合に`memTracker`切り離されないことで発生する異常に高いメモリ使用量の問題を修正しました。 [＃54005](https://github.com/pingcap/tidb/issues/54005) @[XuHuaiyu](https://github.com/XuHuaiyu)
+    - `HashJoin`または`IndexLookUp`オペレーターが`Apply`オペレーターの駆動側サブノードである場合に`memTracker`が切り離されないことで発生する異常に高いメモリ使用量の問題を修正しました。 [＃54005](https://github.com/pingcap/tidb/issues/54005) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - SQLが異常に中断されたときに`INDEX_HASH_JOIN`正常に終了できない問題を修正[＃54688](https://github.com/pingcap/tidb/issues/54688) @[wshwsh12](https://github.com/wshwsh12)
     - DMから複製されたテーブルのインデックスの長さが`max-index-length` で指定された最大長を超えるとテーブル複製が失敗する問題を修正しました [＃55138](https://github.com/pingcap/tidb/issues/55138) @[lance6716](https://github.com/lance6716)
     - `GROUP BY`ステートメント内の間接プレースホルダ`?`参照が列を見つけられない問題を修正しました [＃53872](https://github.com/pingcap/tidb/issues/53872) @[qw4990](https://github.com/qw4990)
@@ -69,7 +69,7 @@ TiDBバージョン: 6.5.11
     - クエリが強制終了された後にエラーではなく誤った結果を返す可能性がある問題を修正[＃50089](https://github.com/pingcap/tidb/issues/50089) @[D3Hunter](https://github.com/D3Hunter)
     - `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルをクエリすると TiDB がpanicを起こす可能性がある問題を修正[＃54324](https://github.com/pingcap/tidb/issues/54324) @[tiancaiamao](https://github.com/tiancaiamao)
     - `StreamAggExec`分の`groupOffset`空の場合に TiDB がpanicを起こす可能性がある問題を修正しました [＃53867](https://github.com/pingcap/tidb/issues/53867) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - `Sort`演算子がスピルした後にディスクファイルが削除されず、クエリエラーが発生する可能性がある問題を修正[＃55061](https://github.com/pingcap/tidb/issues/55061) @[wshwsh12](https://github.com/wshwsh12)
+    - `Sort`オペレーターがスピルした後にディスクファイルが削除されず、クエリエラーが発生する可能性がある問題を修正[＃55061](https://github.com/pingcap/tidb/issues/55061) @[wshwsh12](https://github.com/wshwsh12)
     - `IndexNestedLoopHashJoin` のデータ競合問題を修正 [＃49692](https://github.com/pingcap/tidb/issues/49692) @[solotzg](https://github.com/solotzg)
     - `SHOW COLUMNS`を使用してビューの列を表示するとエラーが発生する問題を修正しました [＃54964](https://github.com/pingcap/tidb/issues/54964) @[lance6716](https://github.com/lance6716)
     - DML文にネストされた生成列が含まれている場合にエラーが発生する問題を修正しました [＃53967](https://github.com/pingcap/tidb/issues/53967) @[wjhuang2016](https://github.com/wjhuang2016)
@@ -89,7 +89,7 @@ TiDBバージョン: 6.5.11
     - 一部のログが秘匿化されない問題を修正[＃8419](https://github.com/tikv/pd/issues/8419) @[rleungx](https://github.com/rleungx)
     - TiKV構成項目[`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size) 1 MiB未満の値に設定するとPD panicが発生する問題を修正しました [＃8323](https://github.com/tikv/pd/issues/8323) @[JmPotato](https://github.com/JmPotato)
     - `replication.strictly-match-label`から`true`に設定するとTiFlash が起動しなくなる問題を修正 [＃8480](https://github.com/tikv/pd/issues/8480) @[rleungx](https://github.com/rleungx)
-    - PD がオペレータ チェック中に遭遇するデータ競合問題を修正しました [＃8263](https://github.com/tikv/pd/issues/8263) @[lhy1024](https://github.com/lhy1024)
+    - PD がオペレーター チェック中に遭遇するデータ競合問題を修正しました [＃8263](https://github.com/tikv/pd/issues/8263) @[lhy1024](https://github.com/lhy1024)
 
 - TiFlash
 

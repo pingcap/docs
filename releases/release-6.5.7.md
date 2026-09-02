@@ -21,7 +21,7 @@ TiDB バージョン: 6.5.7
 - TiDB
 
     - パーティションテーブル[＃47071](https://github.com/pingcap/tidb/issues/47071) での`ANALYZE`操作のメモリ使用量とパフォーマンスを最適化します [＃46804](https://github.com/pingcap/tidb/issues/46804) @[hawkingrei](https://github.com/hawkingrei) [＃47104](https://github.com/pingcap/tidb/issues/47104)
-    - プランキャッシュをサポートして、オプティマイザ修正コントロールを使用して物理的な最適化中に生成された`PointGet`演算子を含む実行計画をキャッシュします。 [＃44830](https://github.com/pingcap/tidb/issues/44830) @[qw4990](https://github.com/qw4990)
+    - プランキャッシュをサポートして、オプティマイザ修正コントロールを使用して物理的な最適化中に生成された`PointGet`オペレーターを含む実行計画をキャッシュします。 [＃44830](https://github.com/pingcap/tidb/issues/44830) @[qw4990](https://github.com/qw4990)
     - 特定のシナリオで`OUTER JOIN`を`INNER JOIN`に変換する能力を強化する[＃49616](https://github.com/pingcap/tidb/issues/49616) @[qw4990](https://github.com/qw4990)
 
 - TiFlash
@@ -58,9 +58,9 @@ TiDB バージョン: 6.5.7
     - `ENUM`または`SET`種類の無効な値を解析すると、SQL ステートメント エラーが直接発生する問題を修正しました。 [＃49487](https://github.com/pingcap/tidb/issues/49487) @[winoros](https://github.com/winoros)
     - `WITH RECURSIVE` CTE を含む`UPDATE`または`DELETE`ステートメントで誤った結果が生成される可能性がある問題を修正しました[＃48969](https://github.com/pingcap/tidb/issues/48969) @[winoros](https://github.com/winoros)
     - データの末尾にスペースが含まれている場合に`LIKE`で`_`ワイルドカードを使用すると、クエリ結果が不正確になる可能性がある問題を修正しました[＃48983](https://github.com/pingcap/tidb/issues/48983) @[time-and-fate](https://github.com/time-and-fate)
-    - IndexHashJoin 演算子を含むクエリがメモリが`tidb_mem_quota_query` を超えると停止する問題を修正しました [＃49033](https://github.com/pingcap/tidb/issues/49033) @[XuHuaiyu](https://github.com/XuHuaiyu)
+    - IndexHashJoin オペレーターを含むクエリがメモリが`tidb_mem_quota_query` を超えると停止する問題を修正しました [＃49033](https://github.com/pingcap/tidb/issues/49033) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - ネストされた`UNION`クエリで`LIMIT`と`OPRDERBY`無効になる可能性がある問題を修正しました [＃49377](https://github.com/pingcap/tidb/issues/49377) @[AilinKid](https://github.com/AilinKid)
-    - 非厳密モード（ `sql_mode = ''` ）で、 `INSERT`実行中に切り捨てが行われても、 [天菜まお](https://github.com/tiancaiamao)でエラーが報告される問題を修正しました。 [＃49369](https://github.com/pingcap/tidb/issues/49369)
+    - 非厳密モード（ `sql_mode = ''` ）で、 `INSERT`実行中に切り捨てが行われてもエラーが報告される問題を修正しました。 [＃49369](https://github.com/pingcap/tidb/issues/49369) @[tiancaiamao](https://github.com/tiancaiamao)
     - TiDBがパニックを起こしてエラーを報告する問題を修正`invalid memory address or nil pointer dereference` [＃42739](https://github.com/pingcap/tidb/issues/42739) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - CTEクエリが再試行プロセス中にエラー`type assertion for CTEStorageMap failed`を報告する可能性がある問題を修正しました [＃46522](https://github.com/pingcap/tidb/issues/46522) @[tiancaiamao](https://github.com/tiancaiamao)
     - 一部のタイムゾーンで夏時間が正しく表示されない問題を修正 [＃49586](https://github.com/pingcap/tidb/issues/49586) @[overvenus](https://github.com/overvenus)

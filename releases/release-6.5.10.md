@@ -74,7 +74,7 @@ TiDB バージョン: 6.5.10
     - スライスの浅いコピーを使用せずに列プルーニングを行うと、TiDB がpanicする可能性がある問題を修正しました[＃52768](https://github.com/pingcap/tidb/issues/52768) @[winoros](https://github.com/winoros)
     - 再帰CTE でビューの使用が機能しない問題を修正 [＃49721](https://github.com/pingcap/tidb/issues/49721) @[hawkingrei](https://github.com/hawkingrei)
     - `LEADING`ヒントがブロックエイリアスのクエリをサポートしない問題を修正しました [＃44645](https://github.com/pingcap/tidb/issues/44645) @[qw4990](https://github.com/qw4990)
-    - 相関サブクエリにおける TopN 演算子の誤った結果を修正 [＃52777](https://github.com/pingcap/tidb/issues/52777) @[yibin87](https://github.com/yibin87)
+    - 相関サブクエリにおける TopN オペレーターの誤った結果を修正 [＃52777](https://github.com/pingcap/tidb/issues/52777) @[yibin87](https://github.com/yibin87)
     - 列の不安定な一意のIDにより、 `UPDATE`文がエラーを返す可能性がある問題を修正しました。 [＃53236](https://github.com/pingcap/tidb/issues/53236) @[winoros](https://github.com/winoros)
     - TiDBがオフラインになっているTiFlashノードにプローブ要求を送信し続ける問題を修正[＃46602](https://github.com/pingcap/tidb/issues/46602) @[zyguan](https://github.com/zyguan)
     - `YEAR`型の列を範囲外の符号なし整数と比較すると誤った結果が発生する問題を修正[＃50235](https://github.com/pingcap/tidb/issues/50235) @[qw4990](https://github.com/qw4990)
@@ -85,7 +85,7 @@ TiDB バージョン: 6.5.10
     - 間違った TableDual プランにより空のクエリ結果が発生する問題を修正しました [＃50051](https://github.com/pingcap/tidb/issues/50051) @[onlyacat](https://github.com/onlyacat)
     - TiDBの同期的な統計読み込みメカニズムが空の統計の読み込みを無期限に再試行し、 `fail to get stats version for this histogram` log を出力問題を修正しました。 [＃52657](https://github.com/pingcap/tidb/issues/52657) @[hawkingrei](https://github.com/hawkingrei)
     - 空の投影により TiDB がpanicを引き起こす問題を修正しました [＃49109](https://github.com/pingcap/tidb/issues/49109) @[winoros](https://github.com/winoros)
-    - TopN演算子が誤ってプッシュダウンされる可能性がある問題を修正しました [＃37986](https://github.com/pingcap/tidb/issues/37986) @[qw4990](https://github.com/qw4990)
+    - TopNオペレーターが誤ってプッシュダウンされる可能性がある問題を修正しました [＃37986](https://github.com/pingcap/tidb/issues/37986) @[qw4990](https://github.com/qw4990)
     - 常に`true` となる述語を持つ`SHOW ERRORS`文を実行すると TiDB がパニックを起こす問題を修正しました。 [＃46962](https://github.com/pingcap/tidb/issues/46962) @[elsa0520](https://github.com/elsa0520)
     - プランキャッシュシナリオでメタデータロックがDDL操作の実行を阻止できない問題を修正 [＃51407](https://github.com/pingcap/tidb/issues/51407) @[wjhuang2016](https://github.com/wjhuang2016)
 

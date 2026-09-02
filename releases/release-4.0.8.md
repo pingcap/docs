@@ -56,7 +56,7 @@ TiDB バージョン: 4.0.8
 - PD
 
     - エラーのメタファイルを生成する[＃3090](https://github.com/pingcap/pd/pull/3090)
-    - オペレータ追加情報を追加します [＃3009](https://github.com/pingcap/pd/pull/3009)
+    - オペレーター追加情報を追加します [＃3009](https://github.com/pingcap/pd/pull/3009)
 
 - TiFlash
 

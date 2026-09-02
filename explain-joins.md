@@ -178,7 +178,7 @@ EXPLAIN ANALYZE SELECT * FROM t1 INNER JOIN t2 ON t1.id = t2.t1_id WHERE t1.int_
 
 ## ハッシュ結合 {#hash-join}
 
-ハッシュ結合操作では、TiDBは結合の`Build`側のデータを読み取ってハッシュテーブルにキャッシュし、次に結合の`Probe`側のデータを読み取り、ハッシュテーブルを参照して必要な行にアクセスします。ハッシュ結合はインデックス結合よりも多くのメモリを必要としますが、結合する行数が多い場合ははるかに高速に実行されます。ハッシュ結合演算子はTiDBでマルチスレッド化されており、並列実行されます。
+ハッシュ結合操作では、TiDBは結合の`Build`側のデータを読み取ってハッシュテーブルにキャッシュし、次に結合の`Probe`側のデータを読み取り、ハッシュテーブルを参照して必要な行にアクセスします。ハッシュ結合はインデックス結合よりも多くのメモリを必要としますが、結合する行数が多い場合ははるかに高速に実行されます。ハッシュ結合オペレーターはTiDBでマルチスレッド化されており、並列実行されます。
 
 ハッシュ結合の例は次のとおりです。
 
@@ -207,11 +207,11 @@ EXPLAIN SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 4. `Probe`側のデータを使用してハッシュテーブルをプローブします。
 5. 適格なデータをユーザーに返します。
 
-結果テーブル`EXPLAIN`の`operator info`列には、クエリが内部結合か外部結合か、結合条件など、 `HashJoin_27`に関するその他の情報も記録されます。上記の例では、クエリは内部結合であり、結合条件`equal:[eq(test.t1.id, test.t2.id)]`はクエリ条件`WHERE t1.id = t2.id`と部分的に一致しています。以降の例における他の結合演算子の演算子情報も、これと同様です。
+結果テーブル`EXPLAIN`の`operator info`列には、クエリが内部結合か外部結合か、結合条件など、 `HashJoin_27`に関するその他の情報も記録されます。上記の例では、クエリは内部結合であり、結合条件`equal:[eq(test.t1.id, test.t2.id)]`はクエリ条件`WHERE t1.id = t2.id`と部分的に一致しています。以降の例における他の結合オペレーターのオペレーター情報も、これと同様です。
 
 ### 実行時統計 {#runtime-statistics}
 
-[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (デフォルト値: 1 GB) を超え、 [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom)の値が`ON` (デフォルト) の場合、TiDB は一時ストレージの使用を試み、ハッシュ結合の一部として使用される`Build`演算子をディスク上に作成する可能性があります。メモリ使用量などの実行時統計は、結果テーブル`EXPLAIN ANALYZE`の`execution info`に記録されます。次の例は、1 GB (デフォルト) と`tidb_mem_quota_query`の 500 MB のクォータで`EXPLAIN ANALYZE`を実行した場合の出力を示しています。500 MB の場合、ディスクは一時ストレージとして使用されます。
+[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (デフォルト値: 1 GB) を超え、 [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom)の値が`ON` (デフォルト) の場合、TiDB は一時ストレージの使用を試み、ハッシュ結合の一部として使用される`Build`オペレーターをディスク上に作成する可能性があります。メモリ使用量などの実行時統計は、結果テーブル`EXPLAIN ANALYZE`の`execution info`に記録されます。次の例は、1 GB (デフォルト) と`tidb_mem_quota_query`の 500 MB のクォータで`EXPLAIN ANALYZE`を実行した場合の出力を示しています。500 MB の場合、ディスクは一時ストレージとして使用されます。
 
 ```sql
 EXPLAIN ANALYZE SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
@@ -279,7 +279,7 @@ EXPLAIN SELECT /*+ MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 5 rows in set (0.00 sec)
 ```
 
-マージ結合演算子の実行プロセスでは、TiDB は次の操作を実行します。
+マージ結合オペレーターの実行プロセスでは、TiDB は次の操作を実行します。
 
 1. Join Group のすべてのデータを`Build`側からメモリに読み込みます。
 2. `Probe`面のデータを読み取ります。

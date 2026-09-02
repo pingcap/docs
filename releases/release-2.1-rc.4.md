@@ -14,8 +14,8 @@ summary: TiDB 2.1 RC4は2018年10月23日にリリースされ、安定性、SQL
     - `UnionAll`演算子の結果が場合によっては正しくない問題を修正[＃8007](https://github.com/pingcap/tidb/pull/8007)
 - SQL実行エンジン
     - `AVG`関数の精度の問題を修正 [＃7874](https://github.com/pingcap/tidb/pull/7874)
-    - `EXPLAIN ANALYZE`ステートメントを使用して、クエリ実行プロセス中の各演算子の実行時間と返された行数を含む実行時統計をチェックする機能をサポートします[＃7925](https://github.com/pingcap/tidb/pull/7925)
-    - テーブルの列が結果セットに複数回出現する場合の`PointGet`演算子のpanic問題を修正しました [＃7943](https://github.com/pingcap/tidb/pull/7943)
+    - `EXPLAIN ANALYZE`ステートメントを使用して、クエリ実行プロセス中の各オペレーターの実行時間と返された行数を含む実行時統計をチェックする機能をサポートします[＃7925](https://github.com/pingcap/tidb/pull/7925)
+    - テーブルの列が結果セットに複数回出現する場合の`PointGet`オペレーターのpanic問題を修正しました [＃7943](https://github.com/pingcap/tidb/pull/7943)
     - `Limit`節値が大きすぎるために発生するpanic問題を修正しました [＃8002](https://github.com/pingcap/tidb/pull/8002)
     - いくつかのケースで`AddDate`文`SubDate`実行中にpanic問題を修正しました[＃8009](https://github.com/pingcap/tidb/pull/8009)
 - 統計

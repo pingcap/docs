@@ -41,7 +41,7 @@ TiDB バージョン: 4.0.2
     - `INFORMATION_SCHEMA.INSPECTION_RESULT`テーブルに`STATUS_ADDRESS`列を追加して、サーバのステータス アドレスを示します。 [＃17695](https://github.com/pingcap/tidb/pull/17695)
     - `MYSQL.BIND_INFO`表に`SOURCE`列を追加して、バインディングの作成方法を示します[＃17587](https://github.com/pingcap/tidb/pull/17587)
     - SQL文のプランキャッシュの使用状況を示すために、 `PERFORMANCE_SCHEMA.EVENTS_STATEMENTS_SUMMARY_BY_DIGEST`表に`PLAN_IN_CACHE`と`PLAN_CACHE_HITS`列を追加します。 [＃17493](https://github.com/pingcap/tidb/pull/17493)
-    - `enable-collect-execution-info`構成項目と`tidb_enable_collect_execution_info`セッション変数を追加して、各演算子の実行情報を収集し、その情報をスロークエリログ に記録するかどうかを制御します。 [＃18072](https://github.com/pingcap/tidb/pull/18072) [＃18073](https://github.com/pingcap/tidb/pull/18073)
+    - `enable-collect-execution-info`構成項目と`tidb_enable_collect_execution_info`セッション変数を追加して、各オペレーターの実行情報を収集し、その情報をスロークエリログ に記録するかどうかを制御します。 [＃18072](https://github.com/pingcap/tidb/pull/18072) [＃18073](https://github.com/pingcap/tidb/pull/18073)
     - スロークエリログでクエリの感度を下げるかどうかを制御するグローバル変数`tidb_slow_log_masking`を追加します。 [＃17694](https://github.com/pingcap/tidb/pull/17694)
     - `storage.block-cache.capacity` TiKV構成項目[＃17671](https://github.com/pingcap/tidb/pull/17671) `INFORMATION_SCHEMA.INSPECTION_RESULT`テーブルに診断ルールを追加します。
     - データのバックアップと復元を行うSQL文`BACKUP`と`RESTORE`を追加する[＃15274](https://github.com/pingcap/tidb/pull/15274)
@@ -53,7 +53,7 @@ TiDB バージョン: 4.0.2
 
 - PD
 
-    - リーダーピアを削除しようとしたときにオペレータが直ちに失敗するようにサポートします。 [＃2551](https://github.com/pingcap/pd/pull/2551)
+    - リーダーピアの削除を試行する際に、オペレーターを直ちに失敗させることをサポートします。 [＃2551](https://github.com/pingcap/pd/pull/2551)
     - TiFlashストアに適切なデフォルトのストア制限を設定する [＃2559](https://github.com/pingcap/pd/pull/2559)
 
 - TiFlash

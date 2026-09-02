@@ -44,7 +44,7 @@ TiDB バージョン: 5.4.3
     - TiDB Binlogを有効にして重複した値を挿入すると発生する`data and columnID count not match`エラーの問題を修正しました[＃33608](https://github.com/pingcap/tidb/issues/33608)
     - 静的パーティションプルーニングモードで、テーブルが空の場合に集計条件を含むSQL文が間違った結果を返す可能性がある問題を修正しました[＃35295](https://github.com/pingcap/tidb/issues/35295)
     - `UPDATE`文を実行するときに TiDB がpanicする可能性がある問題を修正しました[＃32311](https://github.com/pingcap/tidb/issues/32311)
-    - `UnionScan`演算子が順序を維持できないために間違ったクエリ結果が発生する問題を修正[＃33175](https://github.com/pingcap/tidb/issues/33175)
+    - `UnionScan`オペレーターが順序を維持できないために間違ったクエリ結果が発生する問題を修正[＃33175](https://github.com/pingcap/tidb/issues/33175)
     - UPDATE文が場合によっては投影を誤って削除し、 `Can't find column`エラーが発生する問題を修正しました[＃37568](https://github.com/pingcap/tidb/issues/37568)
     - パーティションテーブルがインデックスを完全に使用してデータをスキャンできない場合がある問題を修正[＃33966](https://github.com/pingcap/tidb/issues/33966)
     - 特定のシナリオで`EXECUTE`が予期しないエラーが発生する可能性がある問題を修正しました[＃37187](https://github.com/pingcap/tidb/issues/37187)

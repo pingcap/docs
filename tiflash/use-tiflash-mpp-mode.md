@@ -83,7 +83,7 @@ set @@session.tidb_enforce_mpp=1;
 
 ## MPPモードのアルゴリズムサポート {#algorithm-support-for-the-mpp-mode}
 
-MPPモードは、ブロードキャストハッシュ結合、シャッフルハッシュ結合、シャッフルハッシュ集計、Union All、TopN、およびLimitという物理アルゴリズムをサポートしています。オプティマイザは、クエリで使用するアルゴリズムを自動的に決定します。具体的なクエリ実行計画を確認するには、 `EXPLAIN`のステートメントを実行してください。`EXPLAIN`のステートメントの結果にExchangeSender演算子とExchangeReceiver演算子が表示された場合、MPPモードが有効になっていることを示します。
+MPPモードは、ブロードキャストハッシュ結合、シャッフルハッシュ結合、シャッフルハッシュ集計、Union All、TopN、およびLimitという物理アルゴリズムをサポートしています。オプティマイザは、クエリで使用するアルゴリズムを自動的に決定します。具体的なクエリ実行計画を確認するには、 `EXPLAIN`のステートメントを実行してください。`EXPLAIN`のステートメントの結果にExchangeSenderオペレーターとExchangeReceiverオペレーターが表示された場合、MPPモードが有効になっていることを示します。
 
 次のステートメントは、TPC-H テスト セット内のテーブル構造を例として示しています。
 
@@ -105,7 +105,7 @@ explain select count(*) from customer c join nation n on c.c_nationkey=n.n_natio
 9 rows in set (0.00 sec)
 ```
 
-この実行計画の例には、演算子`ExchangeReceiver`と演算子`ExchangeSender`含まれています。この実行計画は、演算子`ExchangeSender`テーブル`nation`読み取った後、各ノードにテーブルをブロードキャストし、演算子`HashJoin`と演算子`HashAgg`テーブル`nation`とテーブル`customer`に対して実行され、結果がTiDBに返されることを示しています。
+この実行計画の例には、 `ExchangeReceiver`オペレーターと`ExchangeSender`オペレーターが含まれています。この実行計画は、テーブル`nation`が読み取られた後、 `ExchangeSender`オペレーターが各ノードにテーブルをブロードキャストし、 `HashJoin`オペレーターと`HashAgg`オペレーターがテーブル`nation`とテーブル`customer`に対して実行され、結果がTiDBに返されることを示しています。
 
 TiFlash は、ブロードキャスト ハッシュ結合を使用するかどうかを制御する次の3つのグローバル/セッション変数を提供します。
 

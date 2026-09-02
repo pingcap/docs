@@ -60,9 +60,9 @@ TiDB バージョン: 8.0.0
 
 - TiDB の並列 HashAgg アルゴリズムはディスクスピルをサポートします (実験的) [#35637](https://github.com/pingcap/tidb/issues/35637) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
-    TiDBの以前のバージョンでは、HashAgg演算子の並行処理アルゴリズムはディスクスピルをサポートしていませんでした。SQL文の実行計画に並列HashAgg演算子が含まれている場合、そのSQL文のすべてのデータはメモリ内でしか処理できません。そのため、TiDBは大量のデータをメモリ内で処理する必要があります。データサイズがメモリ制限を超えると、TiDBは並列処理を行わないアルゴリズムしか選択できず、パフォーマンス向上のための並行処理を活用できません。
+    TiDBの以前のバージョンでは、HashAggオペレーターの並行処理アルゴリズムはディスクスピルをサポートしていませんでした。SQL文の実行計画に並列HashAggオペレーターが含まれている場合、そのSQL文のすべてのデータはメモリ内でしか処理できません。そのため、TiDBは大量のデータをメモリ内で処理する必要があります。データサイズがメモリ制限を超えると、TiDBは並列処理を行わないアルゴリズムしか選択できず、パフォーマンス向上のための並行処理を活用できません。
 
-    バージョン 8.0.0 では、TiDB の並列 HashAgg アルゴリズムがディスクスピルをサポートしています。並列処理のあらゆる状況において、HashAgg オペレータはメモリ使用量に基づいてデータスピルを自動的にトリガーし、パフォーマンスとデータ スループットのバランスを取ることができます。現在、実験的機能として、TiDB はディスクスピルをサポートする並列 HashAgg アルゴリズムを有効にするかどうかを制御する`tidb_enable_parallel_hashagg_spill`変数を導入しています。この変数が`ON`の場合、有効になっていることを意味します。この機能が将来のリリースで一般提供されるようになった後、この変数は非推奨となります。
+    バージョン 8.0.0 では、TiDB の並列 HashAgg アルゴリズムがディスクスピルをサポートしています。並列処理のあらゆる状況において、HashAgg オペレーターはメモリ使用量に基づいてデータスピルを自動的にトリガーし、パフォーマンスとデータ スループットのバランスを取ることができます。現在、実験的機能として、TiDB はディスクスピルをサポートする並列 HashAgg アルゴリズムを有効にするかどうかを制御する`tidb_enable_parallel_hashagg_spill`変数を導入しています。この変数が`ON`の場合、有効になっていることを意味します。この機能が将来のリリースで一般提供されるようになった後、この変数は非推奨となります。
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800)を参照してください。
 
@@ -335,14 +335,14 @@ TiDB バージョン: 8.0.0
     - ディスクへのデータ流出中にクエリをキャンセルする機能をサポートし、データ流出機能の終了メカニズムを最適化します [#50511](https://github.com/pingcap/tidb/issues/50511) @[wshwsh12](https://github.com/wshwsh12)
     - 複数の等しい条件を持つテーブル結合クエリを処理する際に、部分条件に一致するインデックスを使用してインデックス結合を構築することをサポートする [#47233](https://github.com/pingcap/tidb/issues/47233) @[winoros](https://github.com/winoros)
     - クエリ内のソート要件を識別し、ソート要件を満たすインデックスを選択するインデックスマージ機能を強化します [#48359](https://github.com/pingcap/tidb/issues/48359) @[AilinKid](https://github.com/AilinKid)
-    - `Apply`演算子が同時に実行されない場合、TiDB では`SHOW WARNINGS`を実行することで、同時実行をブロックしている演算子の名前を表示できます。 [#50256](https://github.com/pingcap/tidb/issues/50256) @[hawkingrei](https://github.com/hawkingrei)
+    - `Apply`オペレーターが同時に実行されない場合、TiDB では`SHOW WARNINGS`を実行することで、同時実行をブロックしている演算子の名前を表示できます。 [#50256](https://github.com/pingcap/tidb/issues/50256) @[hawkingrei](https://github.com/hawkingrei)
     - `point get`クエリがすべてのインデックスでサポートされている場合に、クエリに最適なインデックスを選択することで`point get`クエリのインデックス選択を最適化します。 [#50184](https://github.com/pingcap/tidb/issues/50184) @[elsa0520](https://github.com/elsa0520)
     - TiKVの負荷が高い時に広範囲にわたるタイムアウトが発生するのを避けるため、統計情報を同期的にロードするタスクの優先度を一時的に「高」に調整します。タイムアウトが発生すると、統計情報がロードされない可能性があります。 [#50332](https://github.com/pingcap/tidb/issues/50332) @[winoros](https://github.com/winoros)
     - `PREPARE`ステートメントが実行プランキャッシュにヒットしなかった場合、TiDB では`SHOW WARNINGS`を実行することで理由を確認できます。 [#50407](https://github.com/pingcap/tidb/issues/50407) @[hawkingrei](https://github.com/hawkingrei)
     - 同じデータ行が複数回更新された場合のクエリ推定情報の精度を向上させる [#47523](https://github.com/pingcap/tidb/issues/47523) @[terry1purcell](https://github.com/terry1purcell)
     - インデックスマージは、 `OR`述語への多値インデックスと`AND`演算子の埋め込みをサポートします [#51778](https://github.com/pingcap/tidb/issues/51778) @[time-and-fate](https://github.com/time-and-fate)
     - `force-init-stats` `true`に設定すると、TiDB は TiDB 起動中にサービスを提供する前に統計情報の初期化が完了するまで待機します。この設定により HTTP サーバーの起動がブロックされなくなり、ユーザーは引き続き監視できるようになります [#50854](https://github.com/pingcap/tidb/issues/50854) @[hawkingrei](https://github.com/hawkingrei)
-    - MemoryTracker は `IndexLookup` 演算子のメモリ使用量を追跡できます [#45901](https://github.com/pingcap/tidb/issues/45901) @[solotzg](https://github.com/solotzg)
+    - MemoryTracker は `IndexLookup` オペレーターのメモリ使用量を追跡できます [#45901](https://github.com/pingcap/tidb/issues/45901) @[solotzg](https://github.com/solotzg)
     - MemoryTracker は `MemTableReaderExec` オペレーターのメモリ使用量を追跡できます [#51456](https://github.com/pingcap/tidb/issues/51456) @[wshwsh12](https://github.com/wshwsh12)
     - 大規模テーブルをクエリする際に、PD からリージョンをバッチでロードして KV 範囲からリージョンへの変換プロセスを高速化するサポート [#51326](https://github.com/pingcap/tidb/issues/51326) @[SeaRise](https://github.com/SeaRise)
     - システムテーブル`INFORMATION_SCHEMA.TABLES` 、 `INFORMATION_SCHEMA.STATISTICS` 、 `INFORMATION_SCHEMA.KEY_COLUMN_USAGE` 、および`INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS`パフォーマンスを最適化しました。以前のバージョンと比較して、パフォーマンスが最大 100 倍向上しています。 [#50305](https://github.com/pingcap/tidb/issues/50305) @[ywqzzy](https://github.com/ywqzzy)
@@ -422,7 +422,7 @@ TiDB バージョン: 8.0.0
     - PDとの相互作用の問題により、 `tiup cluster upgrade/start`を使用してローリングアップグレードを実行するとTiDBがpanicする可能性がある問題を修正しました [#50152](https://github.com/pingcap/tidb/issues/50152) @[zimulala](https://github.com/zimulala)
     - `UNIQUE`句を使用して`ORDER BY`インデックスルックアップを実行するとエラーが発生する可能性がある問題を修正 [#49920](https://github.com/pingcap/tidb/issues/49920) @[jackysp](https://github.com/jackysp)
     - TiDBが`ENUM`または`SET`型を定数伝播で処理する際に誤ったクエリ結果を返す問題を修正 [#49440](https://github.com/pingcap/tidb/issues/49440) @[winoros](https://github.com/winoros)
-    - クエリに Apply 演算子が含まれている場合に TiDB がpanicを起こし、 `fatal error: concurrent map writes`エラーが発生する問題を修正しました [#50347](https://github.com/pingcap/tidb/issues/50347) @[SeaRise](https://github.com/SeaRise)
+    - クエリに Apply オペレーターが含まれている場合に TiDB がpanicを起こし、 `fatal error: concurrent map writes`エラーが発生する問題を修正しました [#50347](https://github.com/pingcap/tidb/issues/50347) @[SeaRise](https://github.com/SeaRise)
     - 文字列型の変数に対する`SET_VAR`の制御が無効になる可能性がある問題を修正しました [#50507](https://github.com/pingcap/tidb/issues/50507) @[qw4990](https://github.com/qw4990)
     - `SYSDATE()`が`tidb_sysdate_is_now`に設定されている場合、 `1`関数がプランキャッシュ内の時間を誤って使用する問題を修正しました。 [#49299](https://github.com/pingcap/tidb/issues/49299) @[hawkingrei](https://github.com/hawkingrei)
     - `CREATE GLOBAL BINDING`ステートメントを実行する際に、スキーマ名が大文字の場合、バインディングが有効にならない問題を修正しました [#50646](https://github.com/pingcap/tidb/issues/50646) @[qw4990](https://github.com/qw4990)
@@ -441,7 +441,7 @@ TiDB バージョン: 8.0.0
     - `IN()`述語に`NULL`が含まれている場合にクエリ結果が正しくない問題を修正 [#51560](https://github.com/pingcap/tidb/issues/51560) @[winoros](https://github.com/winoros)
     - DDLタスクが複数のテーブルに関係する場合、ブロックされたDDLステートメントがMDLビューに表示されない問題を修正します [#47743](https://github.com/pingcap/tidb/issues/47743) @[wjhuang2016](https://github.com/wjhuang2016)
     - テーブル上の`processed_rows`タスクの`ANALYZE`が、そのテーブルの総行数を超える可能性がある問題を修正しました [#50632](https://github.com/pingcap/tidb/issues/50632) @[hawkingrei](https://github.com/hawkingrei)
-    - `HashJoin`演算子がディスクにスピルしない場合に発生する可能性のあるゴルーチンリークの問題を修正 [#50841](https://github.com/pingcap/tidb/issues/50841) @[wshwsh12](https://github.com/wshwsh12)
+    - `HashJoin`オペレーターがディスクにスピルしない場合に発生する可能性のあるゴルーチンリークの問題を修正 [#50841](https://github.com/pingcap/tidb/issues/50841) @[wshwsh12](https://github.com/wshwsh12)
     - CTEクエリのメモリ使用量が制限を超えた場合に発生するゴルーチンリークの問題を修正 [#50337](https://github.com/pingcap/tidb/issues/50337) @[guo-shaoge](https://github.com/guo-shaoge)
     - 集計関数をグループ計算に使用した際に発生する可能性のある`Can't find column ...`エラーを修正 [#50926](https://github.com/pingcap/tidb/issues/50926) @[qw4990](https://github.com/qw4990)
     - `CREATE TABLE`ステートメントに特定のパーティションまたは制約が含まれている場合に、テーブル名の変更などの DDL 操作が停止する問題を修正しました [#50972](https://github.com/pingcap/tidb/issues/50972) @[lcwangchao](https://github.com/lcwangchao)

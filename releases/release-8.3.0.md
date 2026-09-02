@@ -13,15 +13,15 @@ TiDBバージョン：8.3.0
 
 バージョン8.3.0では、以下の主要な機能と改善点が導入されています。
 
-<table><thead><tr><th>カテゴリ</th><th>機能／改善点</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">拡張性とパフォーマンス</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.3/partitioned-table/#global-indexes">パーティションテーブルのグローバルインデックス（実験的）</a></td><td>グローバルインデックスを使用すると、パーティション化されていない列の取得効率を効果的に向上させることができ、一意キーにパーティションキーを含める必要があるという制約を取り除くことができます。この機能により、TiDBパーティションテーブルの使用シナリオが拡張され、データ移行時に必要となる可能性のあるアプリケーションの変更作業の一部を回避できます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.3/system-variables/#tidb_opt_projection_push_down-new-in-v610"><code>Projection</code>演算子をストレージエンジンにデフォルトでプッシュダウンする</a></td><td><code>Projection</code>演算子をストレージエンジンにプッシュダウンすることで、ストレージノード全体に負荷を分散させ、ノード間のデータ転送量を削減できます。この最適化により、特定のSQLクエリの実行時間が短縮され、データベース全体のパフォーマンスが向上します。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v8.3/statistics/#collect-statistics-on-some-columns">統計情報を収集する際に不要な列を無視する</a></td><td>オプティマイザが必要な情報を確実に取得できるという前提のもと、TiDBは統計情報の収集を高速化し、統計情報の適時性を向上させることで、最適な実行計画の選択を保証し、クラスタのパフォーマンスを向上させます。同時に、TiDBはシステムオーバーヘッドを削減し、リソース利用率も向上させます。</td></tr><tr><td rowspan="1">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.3/tiproxy-overview/">TiProxyに組み込まれた仮想IP管理機能</a></td><td>TiProxyは、仮想IP管理機能を内蔵しています。設定することで、外部プラットフォームやツールに依存することなく、仮想IPの自動切り替えをサポートします。この機能により、TiProxyの導入が簡素化され、データベースアクセスレイヤーの複雑さが軽減されます。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>機能／改善点</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">拡張性とパフォーマンス</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.3/partitioned-table/#global-indexes">パーティションテーブルのグローバルインデックス（実験的）</a></td><td>グローバルインデックスを使用すると、パーティション化されていない列の取得効率を効果的に向上させることができ、一意キーにパーティションキーを含める必要があるという制約を取り除くことができます。この機能により、TiDBパーティションテーブルの使用シナリオが拡張され、データ移行時に必要となる可能性のあるアプリケーションの変更作業の一部を回避できます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.3/system-variables/#tidb_opt_projection_push_down-new-in-v610"><code>Projection</code>オペレーターをストレージエンジンにデフォルトでプッシュダウンする</a></td><td><code>Projection</code>オペレーターをストレージエンジンにプッシュダウンすることで、ストレージノード全体に負荷を分散させ、ノード間のデータ転送量を削減できます。この最適化により、特定のSQLクエリの実行時間が短縮され、データベース全体のパフォーマンスが向上します。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v8.3/statistics/#collect-statistics-on-some-columns">統計情報を収集する際に不要な列を無視する</a></td><td>オプティマイザが必要な情報を確実に取得できるという前提のもと、TiDBは統計情報の収集を高速化し、統計情報の適時性を向上させることで、最適な実行計画の選択を保証し、クラスタのパフォーマンスを向上させます。同時に、TiDBはシステムオーバーヘッドを削減し、リソース利用率も向上させます。</td></tr><tr><td rowspan="1">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.3/tiproxy-overview/">TiProxyに組み込まれた仮想IP管理機能</a></td><td>TiProxyは、仮想IP管理機能を内蔵しています。設定することで、外部プラットフォームやツールに依存することなく、仮想IPの自動切り替えをサポートします。この機能により、TiProxyの導入が簡素化され、データベースアクセスレイヤーの複雑さが軽減されます。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
 ### パフォーマンス {#performance}
 
-- オプティマイザは`Projection`演算子をデフォルトでストレージエンジンにプッシュダウンすることを可能にします [#51876](https://github.com/pingcap/tidb/issues/51876) @[yibin87](https://github.com/yibin87)
+- オプティマイザは`Projection`オペレーターをデフォルトでストレージエンジンにプッシュダウンすることを可能にします [#51876](https://github.com/pingcap/tidb/issues/51876) @[yibin87](https://github.com/yibin87)
 
-    `Projection`演算子をストレージエンジンにプッシュダウンすると、計算エンジンとストレージエンジン間のデータ転送が削減され、SQL 実行パフォーマンスが向上します。これは[JSONクエリ関数](/functions-and-operators/json-functions/json-functions-search.md)含むクエリに特に効果的です。 または[JSON値属性関数](/functions-and-operators/json-functions/json-functions-return.md)。v8.3.0 以降、TiDB は、この機能を制御するシステム変数[`tidb_opt_projection_push_down`](/system-variables.md#tidb_opt_projection_push_down-new-in-v610)のデフォルト値を`Projection`から`OFF` `ON`ダウン機能をデフォルトで有効にします。この機能が有効になると、オプティマイザは、対象となる JSON クエリ関数と JSON 値属性関数を自動的にストレージエンジンにプッシュダウンします。
+    `Projection`オペレーターをストレージエンジンにプッシュダウンすると、計算エンジンとストレージエンジン間のデータ転送が削減され、SQL 実行パフォーマンスが向上します。これは[JSONクエリ関数](/functions-and-operators/json-functions/json-functions-search.md)または[JSON値属性関数](/functions-and-operators/json-functions/json-functions-return.md)を含むクエリに特に効果的です。v8.3.0 以降、TiDB は、この機能を制御するシステム変数[`tidb_opt_projection_push_down`](/system-variables.md#tidb_opt_projection_push_down-new-in-v610)のデフォルト値を`OFF`から`ON`に変更し、プッシュダウン機能をデフォルトで有効にします。この機能が有効になると、オプティマイザは、対象となる JSON クエリ関数と JSON 値属性関数を自動的にストレージエンジンにプッシュダウンします。
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_opt_projection_push_down-new-in-v610)を参照してください。
 
@@ -237,7 +237,7 @@ TiDBバージョン：8.3.0
     - インデックス順序を使用して、 `WHERE idx_col_1 IS NULL ORDER BY idx_col_2`のような SQL クエリの余分なソート操作を回避します [#54188](https://github.com/pingcap/tidb/issues/54188) @[ari-e](https://github.com/ari-e)
     - `mysql.analyze_jobs`システムテーブルに分析済みインデックスを表示します [#53567](https://github.com/pingcap/tidb/issues/53567) @[Rustin170506](https://github.com/Rustin170506)。
     - `tidb_redact_log`ステートメントの出力に`EXPLAIN`設定を適用することをサポートし、ログ処理ロジックをさらに最適化します [#54565](https://github.com/pingcap/tidb/issues/54565) @[hawkingrei](https://github.com/hawkingrei)
-    - クエリ効率を向上させるため、多値インデックスに対して`Selection` `IndexRangeScan`演算子を生成するサポート [#54876](https://github.com/pingcap/tidb/issues/54876) @[time-and-fate](https://github.com/time-and-fate)
+    - クエリ効率を向上させるため、多値インデックスに対して`Selection` `IndexRangeScan`オペレーターを生成するサポート [#54876](https://github.com/pingcap/tidb/issues/54876) @[time-and-fate](https://github.com/time-and-fate)
     - 設定された時間枠外で実行されている自動タスク`ANALYZE`の強制終了をサポート [#55283](https://github.com/pingcap/tidb/issues/55283) @[hawkingrei](https://github.com/hawkingrei)
     - 統計情報が完全に TopN で構成され、対応するテーブル統計情報の変更された行数がゼロでない場合、TopN に到達しない等価条件の推定結果を 0 から 1 に調整します。 [#47400](https://github.com/pingcap/tidb/issues/47400) @[terry1purcell](https://github.com/terry1purcell)
     - TopNオペレーターはディスクスピルをサポートします [#47733](https://github.com/pingcap/tidb/issues/47733) @[xzhangxian1008](https://github.com/xzhangxian1008)
@@ -291,7 +291,7 @@ TiDBバージョン：8.3.0
 
     - `Open`の`PipelinedWindow`メソッドのパラメータをリセットし、 `PipelinedWindow`を`Apply`の子ノードとして使用した際に、繰り返し開閉操作によって以前のパラメータ値が再利用されることで発生する予期しないエラーを修正します。 [#53600](https://github.com/pingcap/tidb/issues/53600) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - `tidb_mem_quota_query`で設定された制限を超えるメモリ使用量のため、クエリ終了時に処理が停止する可能性がある問題を修正しました。 [#55042](https://github.com/pingcap/tidb/issues/55042) @[yibin87](https://github.com/yibin87)
-    - HashAgg演算子のディスクスピルによって並列計算中にクエリ結果が不正になる問題を修正しました [#55290](https://github.com/pingcap/tidb/issues/55290) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - HashAggオペレーターのディスクスピルによって並列計算中にクエリ結果が不正になる問題を修正しました [#55290](https://github.com/pingcap/tidb/issues/55290) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - `JSON_TYPE` JSON 形式にキャストした際に`YEAR`が間違って表示される問題を修正 [#54494](https://github.com/pingcap/tidb/issues/54494) @[YangKeao](https://github.com/YangKeao)
     - `tidb_schema_cache_size`システム変数の値の範囲が間違っている問題を修正 [#54034](https://github.com/pingcap/tidb/issues/54034) @[lilinghai](https://github.com/lilinghai)
     - パーティション式が`EXTRACT(YEAR FROM col)`の場合にパーティションプルーニングが機能しない問題を修正 [#54210](https://github.com/pingcap/tidb/issues/54210) @[mjonss](https://github.com/mjonss)

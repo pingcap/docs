@@ -49,7 +49,7 @@ TiDB Ansible バージョン: 3.0.4
     - MySQL との互換性を保つために、 `use index()`でインデックスが指定されていない場合はインデックスを使用しない [＃12100](https://github.com/pingcap/tidb/pull/12100)
     - `CMSketch`統計の`TopN`レコードの数を厳密に制限して、ステートメント数が TiDB のトランザクションのサイズ制限を超えたために`ANALYZE`ステートメントが失敗する問題を修正します。 [＃11914](https://github.com/pingcap/tidb/pull/11914)
     - `Update`文に含まれるサブクエリを変換するときに発生したエラーを修正します [＃12483](https://github.com/pingcap/tidb/pull/12483)
-    - Limit演算子を`IndexLookUpReader`実行ロジックにプッシュすることで、 `select ... limit ... offset ...`文の実行パフォーマンスを最適化します。 [＃12378](https://github.com/pingcap/tidb/pull/12378)
+    - Limitオペレーターを`IndexLookUpReader`実行ロジックにプッシュすることで、 `select ... limit ... offset ...`文の実行パフォーマンスを最適化します。 [＃12378](https://github.com/pingcap/tidb/pull/12378)
 - SQL実行エンジン
     - `PREPARED`文が正しく実行されなかった場合に、SQL文をログに出力します[＃12191](https://github.com/pingcap/tidb/pull/12191)
     - `UNIX_TIMESTAMP`関数を使用してパーティショニング実装する場合にパーティションプルーニングをサポートする [＃12169](https://github.com/pingcap/tidb/pull/12169)

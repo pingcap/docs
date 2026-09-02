@@ -14,13 +14,13 @@ summary: TiDB 2.1 RC2は2018年9月14日にリリースされ、安定性、SQL�
     - 定数伝播の最適化ルールを改善する[＃7276](https://github.com/pingcap/tidb/pull/7276)
     - `Range`の計算ロジックを強化して、複数の`IN`または`EQUAL`条件を同時に処理できるようにします[＃7577](https://github.com/pingcap/tidb/pull/7577)
     - `Range`が空の場合に`TableScan`の推定結果が正しくない問題を修正[＃7583](https://github.com/pingcap/tidb/pull/7583)
-    - `UPDATE`文の`PointGet`演算子をサポートする [＃7586](https://github.com/pingcap/tidb/pull/7586)
+    - `UPDATE`文の`PointGet`オペレーターをサポートする [＃7586](https://github.com/pingcap/tidb/pull/7586)
     - いくつかの条件で`FirstRow`集計関数を実行するプロセス中にpanic問題を修正しました[＃7624](https://github.com/pingcap/tidb/pull/7624)
 - SQL実行エンジン
-    - `HashJoin`オペレータがエラーに遭遇した場合の潜在的な`DataRace`問題を修正します [＃7554](https://github.com/pingcap/tidb/pull/7554)
-    - `HashJoin`演算子で内部テーブルを読み取り、同時にハッシュテーブルを構築する[＃7544](https://github.com/pingcap/tidb/pull/7544)
-    - ハッシュ集計演算子のパフォーマンスを最適化する[＃7541](https://github.com/pingcap/tidb/pull/7541)
-    - Join演算子 パフォーマンスを最適化します [＃7433](https://github.com/pingcap/tidb/pull/7433) [＃7493](https://github.com/pingcap/tidb/pull/7493)
+    - `HashJoin`オペレーターがエラーに遭遇した場合の潜在的な`DataRace`問題を修正します [＃7554](https://github.com/pingcap/tidb/pull/7554)
+    - `HashJoin`オペレーターで内部テーブルを読み取り、同時にハッシュテーブルを構築する[＃7544](https://github.com/pingcap/tidb/pull/7544)
+    - ハッシュ集計オペレーターのパフォーマンスを最適化する[＃7541](https://github.com/pingcap/tidb/pull/7541)
+    - Joinオペレーターのパフォーマンスを最適化します [＃7433](https://github.com/pingcap/tidb/pull/7433) [＃7493](https://github.com/pingcap/tidb/pull/7493)
     - 結合順序が変更されると`UPDATE JOIN`の結果が正しくなくなる問題を修正[＃7571](https://github.com/pingcap/tidb/pull/7571)
     - チャンクのイテレータのパフォーマンスを向上させる [＃7585](https://github.com/pingcap/tidb/pull/7585)
 - 統計

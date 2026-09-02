@@ -16,7 +16,7 @@ TiDB Ansible バージョン: 3.0.5
 - SQLオプティマイザ
     - ウィンドウ関数の境界チェックをサポート [＃12404](https://github.com/pingcap/tidb/pull/12404)
     - パーティションテーブル`IndexJoin`が誤った結果を返す問題を修正[＃12712](https://github.com/pingcap/tidb/pull/12712)
-    - 外部結合演算子`Apply`の先頭の`ifnull`関数が誤った結果を返す問題を修正[＃12694](https://github.com/pingcap/tidb/pull/12694)
+    - 外部結合オペレーター`Apply`の先頭の`ifnull`関数が誤った結果を返す問題を修正[＃12694](https://github.com/pingcap/tidb/pull/12694)
     - `UPDATE` の`where`条件にサブクエリが含まれていた場合の更新失敗の問題を修正しました [＃12597](https://github.com/pingcap/tidb/pull/12597)
     - クエリ条件に`cast`関数が含まれている場合に外部結合が誤って内部結合に変換される問題を修正しました[＃12790](https://github.com/pingcap/tidb/pull/12790)
     - `AntiSemiJoin` の結合条件で渡される誤った式を修正 [＃12799](https://github.com/pingcap/tidb/pull/12799)

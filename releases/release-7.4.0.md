@@ -77,7 +77,7 @@ TiDB バージョン: 7.4.0
 
 - TiFlashはクエリレベルのデータスピルをサポート[＃7738](https://github.com/pingcap/tiflash/issues/7738) @[windtalker](https://github.com/windtalker)
 
-    TiFlash v7.0.0以降、 `GROUP BY` `ORDER BY` 3つの演算子のデータスピル制御がサポートされます。この機能により、データサイズが利用可能なメモリを超えた場合にクエリの終了やシステムクラッシュなどの問題を防ぐことができます。ただし、各演算子のスピルを個別に管理するのは煩雑で、全体`JOIN`なリソース制御には効果的ではありません。
+    TiFlash v7.0.0以降、 `GROUP BY` 、 `ORDER BY` 、 `JOIN`の3つのオペレーターのデータスピル制御がサポートされます。この機能により、データサイズが利用可能なメモリを超えた場合にクエリの終了やシステムクラッシュなどの問題を防ぐことができます。ただし、各オペレーターのスピルを個別に管理するのは煩雑で、全体的なリソース制御には効果的ではありません。
 
     v7.4.0では、 TiFlashにクエリレベルのデータスピルが導入されました。TiFlashへのクエリのメモリ制限を[`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740)に設定し、データスピルをトリガーするメモリ比率を[`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740)に設定することで、クエリのメモリ使用量を効率的に管理し、 TiFlashのメモリリソースをより適切に制御できます。
 
@@ -346,8 +346,8 @@ TiDB バージョン: 7.4.0
 
 - TiDB
 
-    - ハッシュパーティション化されていないテーブルに対して`BatchPointGet`演算子が誤った結果を返す問題を修正しました[＃45889](https://github.com/pingcap/tidb/issues/45889) @[Defined2014](https://github.com/Defined2014)
-    - ハッシュパーティションテーブルに対して`BatchPointGet`演算子が誤った結果を返す問題を修正しました [＃46779](https://github.com/pingcap/tidb/issues/46779) @[jiyfhust](https://github.com/jiyfhust)
+    - ハッシュパーティション化されていないテーブルに対して`BatchPointGet`オペレーターが誤った結果を返す問題を修正しました[＃45889](https://github.com/pingcap/tidb/issues/45889) @[Defined2014](https://github.com/Defined2014)
+    - ハッシュパーティションテーブルに対して`BatchPointGet`オペレーターが誤った結果を返す問題を修正しました [＃46779](https://github.com/pingcap/tidb/issues/46779) @[jiyfhust](https://github.com/jiyfhust)
     - TiDBパーサーが状態のままになり、解析エラーが発生する問題を修正[＃45898](https://github.com/pingcap/tidb/issues/45898) @[qw4990](https://github.com/qw4990)
     - `EXCHANGE PARTITION`制約をチェックしない問題を修正 [＃45922](https://github.com/pingcap/tidb/issues/45922) @[mjonss](https://github.com/mjonss)
     - `tidb_enforce_mpp`システム変数が正しく復元できない問題を修正[＃46214](https://github.com/pingcap/tidb/issues/46214) @[djshow832](https://github.com/djshow832)

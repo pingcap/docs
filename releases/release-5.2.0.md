@@ -36,7 +36,7 @@ TiDB バージョン: 5.2.0
 | [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin)                     | 新しく追加された | サーバーが公開する認証方法を設定します。デフォルト値は`mysql_native_password`です。                  |
 | [`tidb_enable_auto_increment_in_generated`](/system-variables.md#tidb_enable_auto_increment_in_generated) | 新しく追加された | 生成列または式インデックスを作成する際に`AUTO_INCREMENT`列を含めるかどうかを決定します。デフォルト値は`OFF`です。    |
 | [`tidb_opt_enable_correlation_adjustment`](/system-variables.md#tidb_opt_enable_correlation_adjustment)   | 新しく追加された | オプティマイザが列の順序相関に基づいて行数を推定するかどうかを制御します。デフォルト値は`ON`です。                    |
-| [`tidb_opt_limit_push_down_threshold`](/system-variables.md#tidb_opt_limit_push_down_threshold)           | 新しく追加された | Limit または TopN 演算子を TiKV にプッシュするかどうかを決定するしきい値を設定します。デフォルト値は`100`です。    |
+| [`tidb_opt_limit_push_down_threshold`](/system-variables.md#tidb_opt_limit_push_down_threshold)           | 新しく追加された | Limit または TopN オペレーターを TiKV にプッシュするかどうかを決定するしきい値を設定します。デフォルト値は`100`です。    |
 | [`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40)    | 変更     | ステートメントサマリーテーブルがメモリに格納するステートメントの最大数を設定します。デフォルト値は`200`から`3000`に変更されます。 |
 | `tidb_enable_streaming`                                                                                   | 非推奨      | システム変数`enable-streaming`は非推奨であり、今後は使用しないことをお勧めします。                     |
 
@@ -85,7 +85,7 @@ TiDB バージョン: 5.2.0
 
 - **HashAggのスピルをサポート**
 
-    HashAgg をディスクに書き出す機能をサポートします。HashAgg 演算子を含む SQL ステートメントでメモリ不足 (OOM) が発生した場合、この演算子の同時実行数を`1`に設定してディスクへの書き出しをトリガーし、メモリ負荷を軽減することができます。
+    HashAgg をディスクに書き出す機能をサポートします。HashAgg オペレーターを含む SQL ステートメントでメモリ不足 (OOM) が発生した場合、このオペレーターの同時実行数を`1`に設定してディスクへの書き出しをトリガーし、メモリ負荷を軽減することができます。
 
     [ユーザー向けドキュメント](/configure-memory-usage.md#other-memory-control-behaviors-of-tidb-server)、 [#25882](https://github.com/pingcap/tidb/issues/25882)
 
@@ -261,7 +261,7 @@ Apple M1チップを搭載したMacコンピュータで`tiup playground`コマ�
     - 複数列プレフィックスインデックスを使用したSQLステートメントの実行時に、予想よりも多くの結果が返される問題を修正しました [#24356](https://github.com/pingcap/tidb/issues/24356)
     - `<=>`演算子が正しく機能しない問題を修正しました [#24477](https://github.com/pingcap/tidb/issues/24477)
     - 並列演算子`Apply`のデータ競合問題を修正 [#23280](https://github.com/pingcap/tidb/issues/23280)
-    - PartitionUnion 演算子の IndexMerge 結果をソートする際に`index out of range`エラーが報告される問題を修正しました [#23919](https://github.com/pingcap/tidb/issues/23919)
+    - PartitionUnion オペレーターの IndexMerge 結果をソートする際に`index out of range`エラーが報告される問題を修正しました [#23919](https://github.com/pingcap/tidb/issues/23919)
     - `tidb_snapshot`変数に予想外に大きな値を設定するとトランザクション分離が損なわれる可能性がある問題を修正しました [#25680](https://github.com/pingcap/tidb/issues/25680)
     - ODBC スタイルの定数 (例: `{d '2020-01-01'}` ) を式として使用できない問題を修正しました [#25531](https://github.com/pingcap/tidb/issues/25531)
     - `SELECT DISTINCT` `Batch Get`に変換されることで誤った結果が生じる問題を修正します [#25320](https://github.com/pingcap/tidb/issues/25320)

@@ -97,7 +97,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 | [`OutPacketBytes`](https://docs.pingcap.com/tidb/v8.5/system-variables#outpacketbytes-new-in-v856)                                                   | 新しく追加された | この変数は内部統計のみに使用され、ユーザーには表示されません。                                                                                                                                                                                                   |
 | [`tidb_foreign_key_check_in_shared_lock`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_foreign_key_check_in_shared_lock-new-in-v856)     | 新しく追加された | 悲観的トランザクションにおける外部キーチェックで、親テーブルの行に対して排他ロックではなく共有ロックを使用するかどうかを制御します。デフォルト値は`OFF`で、これは TiDB がデフォルトで排他ロックを使用することを意味します。                                                                                                               |
 | [`tidb_max_dist_task_nodes`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_max_dist_task_nodes-new-in-v856)                               | 新しく追加された | 分散実行フレームワーク (DXF) タスクが使用できる TiDB ノードの最大数を定義します。デフォルト値は`-1`で、これは自動モードが有効になっていることを示します。自動モードでは、TiDB は`min(3, tikv_nodes / 3)`という値を動的に計算します。ここで、 `tikv_nodes`クラスタ内の TiKV ノードの数を表します。                                                 |
-| [`tidb_opt_join_reorder_through_sel`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_join_reorder_through_sel-new-in-v856)             | 新しく追加された | 特定の複数テーブル結合クエリの結合順序最適化を改善します。これを`ON`に設定し、安全条件が満たされている場合、オプティマイザは、連続する結合演算子間の`Selection`条件と結合順序候補を評価します。結合ツリーの再構築中、オプティマイザは可能な限りこれらの条件をより適切な位置にプッシュダウン、より多くのテーブルが結合順序最適化に参加できるようにします。                                                 |
+| [`tidb_opt_join_reorder_through_sel`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_join_reorder_through_sel-new-in-v856)             | 新しく追加された | 特定の複数テーブル結合クエリの結合順序最適化を改善します。これを`ON`に設定し、安全条件が満たされている場合、オプティマイザは、連続する結合オペレーター間の`Selection`条件と結合順序候補を評価します。結合ツリーの再構築中、オプティマイザは可能な限りこれらの条件をより適切な位置にプッシュダウンし、より多くのテーブルが結合順序最適化に参加できるようにします。                                                 |
 | [`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec-new-in-v856)                             | 新しく追加された | TiDBノードごとに1秒あたりに書き込める、スロークエリログエントリの最大数を制御します。<ul><li> `0` （デフォルト値）という値は、1秒あたりに書き込まれるスロークエリログエントリの数に制限がないことを意味します。</li><li> `0`より大きい値を指定すると、TiDBは1秒あたりに指定された数のスロークエリログエントリを書き込みます。超過分のログエントリは破棄され、スロークエリログファイルには書き込まれません。</li></ul> |
 | [`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules-new-in-v856)                                         | 新しく追加された | スロークエリログのトリガールールを定義します。多次元メトリクスを組み合わせることで、より柔軟で詳細なログ記録を実現します。                                                                                                                                                                     |
 
@@ -170,7 +170,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 
 - PD
 
-    - マージリージョン演算子が多数存在するシナリオで`DISTRIBUTE TABLE`を実行する際に発生する可能性のあるpanic問題を修正 [#10293](https://github.com/tikv/pd/issues/10293) @[bufferflies](https://github.com/bufferflies)
+    - Merge Region operatorが多数存在するシナリオで`DISTRIBUTE TABLE`を実行する際に発生する可能性のあるpanic問題を修正 [#10293](https://github.com/tikv/pd/issues/10293) @[bufferflies](https://github.com/bufferflies)
     - ストア制限の設定がすぐに反映されない場合がある問題を修正しました [#10108](https://github.com/tikv/pd/issues/10108) @[okJiang](https://github.com/okJiang)
 
 - TiFlash

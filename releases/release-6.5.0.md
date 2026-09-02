@@ -203,9 +203,9 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 ### 使いやすさ {#ease-of-use}
 
-- `EXPLAIN ANALYZE`出力のTiFlash `TableFullScan`演算子の実行情報を精緻化する [＃5926](https://github.com/pingcap/tiflash/issues/5926) @[hongyunyan](https://github.com/hongyunyan)
+- `EXPLAIN ANALYZE`出力のTiFlash `TableFullScan`オペレーターの実行情報を精緻化する [＃5926](https://github.com/pingcap/tiflash/issues/5926) @[hongyunyan](https://github.com/hongyunyan)
 
-    `EXPLAIN ANALYZE`ステートメントは、実行計画と実行時統計を出力するために使用されます。v6.5.0 では、 TiFlash は`TableFullScan`演算子の実行情報を改良し、DMFile 関連の実行情報を追加しました。これにより、 TiFlash のデータスキャンステータス情報がより直感的に表示されるようになり、 TiFlash のパフォーマンス分析が容易になります。
+    `EXPLAIN ANALYZE`ステートメントは、実行計画と実行時統計を出力するために使用されます。v6.5.0 では、 TiFlash は`TableFullScan`オペレーターの実行情報を改良し、DMFile 関連の実行情報を追加しました。これにより、 TiFlash のデータスキャンステータス情報がより直感的に表示されるようになり、 TiFlash のパフォーマンス分析が容易になります。
 
     詳細については[ドキュメント](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
 

@@ -43,7 +43,7 @@ TiDB バージョン: 6.5.8
     - `AUTO_ID_CACHE=1` のAUTO_INCREMENT列を使用すると同時競合によりAUTO_INCREMENT ID 割り当てでエラーが報告される問題を修正しました。 [＃50519](https://github.com/pingcap/tidb/issues/50519) @[tiancaiamao](https://github.com/tiancaiamao)
     - 多数のテーブルまたはパーティションを処理するときに TiDB ノードが OOM エラーに遭遇する可能性がある問題を軽減します。 [＃50077](https://github.com/pingcap/tidb/issues/50077) @[zimulala](https://github.com/zimulala)
     - DDL所有者がネットワークから分離されている後に`ADD INDEX`を実行すると、TiDB分散実行フレームワーク（DXF）でデータが不整合になる問題を修正しました [＃49773](https://github.com/pingcap/tidb/issues/49773) @[tangenta](https://github.com/tangenta)
-    - クエリに Apply 演算子が含まれており、 `fatal error: concurrent map writes`エラーが発生すると TiDB がpanicする可能性がある問題を修正しました。 [＃50347](https://github.com/pingcap/tidb/issues/50347) @[SeaRise](https://github.com/SeaRise)
+    - クエリに Apply オペレーターが含まれており、 `fatal error: concurrent map writes`エラーが発生すると TiDB がpanicする可能性がある問題を修正しました。 [＃50347](https://github.com/pingcap/tidb/issues/50347) @[SeaRise](https://github.com/SeaRise)
     - `COM_STMT_EXECUTE`まで実行された`COMMIT`または`ROLLBACK`操作が、タイムアウトしたトランザクションを終了できない問題を修正しました。 [＃49151](https://github.com/pingcap/tidb/issues/49151) @[zyguan](https://github.com/zyguan)
     - `PREPARE`メソッドを使用して`SELECT INTO OUTFILE`を実行すると、エラーではなく、誤って成功メッセージが返される問題を修正しました。 [＃49166](https://github.com/pingcap/tidb/issues/49166) @[qw4990](https://github.com/qw4990)
     - `ORDER BY`句で`UNIQUE`インデックス検索を実行するとエラーが発生する可能性がある問題を修正しました。 [＃49920](https://github.com/pingcap/tidb/issues/49920) @[jackysp](https://github.com/jackysp)

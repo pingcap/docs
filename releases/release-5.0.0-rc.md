@@ -174,10 +174,10 @@ TiDBのスケジューリングプロセスは、I/O、ネットワーク、CPU�
 
 SQLパフォーマンスの問題をトラブルシューティングする際には、原因を特定するための詳細な診断情報が必要です。以前のTiDBバージョンでは、 `EXPLAIN`ステートメントで収集される情報は十分に詳細ではありませんでした。DBAはログ情報、監視情報、あるいは推測のみに基づいてトラブルシューティングを行っていましたが、これは非効率的でした。TiDB v5.0では、ユーザーがパフォーマンスの問題をより効率的にトラブルシューティングできるよう、以下の改善が行われました。
 
-- `EXPLAIN ANALYZE`すべてのDML文の分析をサポートし、実際のパフォーマンスプランと各演算子の実行情報を表示します[＃18056](https://github.com/pingcap/tidb/issues/18056)
-- ユーザーは`EXPLAIN FOR CONNECTION`を使用して、実行中のSQL文のステータス情報を分析できます。この情報には、各演算子の実行時間と処理された行数が含まれます[＃18233](https://github.com/pingcap/tidb/issues/18233)
-- `EXPLAIN ANALYZE`の出力には、オペレータによって送信された RPC 要求の数、ロック競合の解決にかかる時間、ネットワークレイテンシー、RocksDB でスキャンされた削除済みデータの量、RocksDB キャッシュのヒット率など、さらに詳しい情報が含まれています[＃18663](https://github.com/pingcap/tidb/issues/18663)
-- SQL文の詳細な実行情報はスローログに記録されます。これは`EXPLAIN ANALYZE`の出力情報と一致しています。この情報には、各演算子の実行時間、処理された行数、送信されたRPC要求の数などが含まれます[＃15009](https://github.com/pingcap/tidb/issues/15009)
+- `EXPLAIN ANALYZE`は、すべてのDML文の分析をサポートし、実際のパフォーマンスプランと各オペレーターの実行情報を表示します[＃18056](https://github.com/pingcap/tidb/issues/18056)
+- ユーザーは`EXPLAIN FOR CONNECTION`を使用して、実行中のSQL文のステータス情報を分析できます。この情報には、各オペレーターの実行時間と処理された行数が含まれます[＃18233](https://github.com/pingcap/tidb/issues/18233)
+- `EXPLAIN ANALYZE`の出力には、オペレーターによって送信された RPC 要求の数、ロック競合の解決にかかる時間、ネットワークレイテンシー、RocksDB でスキャンされた削除済みデータの量、RocksDB キャッシュのヒット率など、さらに詳しい情報が含まれています[＃18663](https://github.com/pingcap/tidb/issues/18663)
+- SQL文の詳細な実行情報はスローログに記録されます。これは`EXPLAIN ANALYZE`の出力情報と一致しています。この情報には、各オペレーターの実行時間、処理された行数、送信されたRPC要求の数などが含まれます[＃15009](https://github.com/pingcap/tidb/issues/15009)
 
 [ユーザードキュメント](/sql-statements/sql-statement-explain.md)
 

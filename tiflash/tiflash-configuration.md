@@ -423,17 +423,17 @@ I/O トラフィック制限設定を構成します。
 
 ##### `max_bytes_before_external_group_by` <span class="version-mark">v7.0.0 の新機能</span> {#max_bytes_before_external_group_by-new-in-v700}
 
-- ハッシュ集計演算子（キー`GROUP BY`で使用可能な最大メモリを指定します。この値を超えるとディスクへの書き込みがトリガーされます。メモリ使用量がしきい値を超えると、ハッシュ集計はメモリ使用量を[ディスクへのスピル](/tiflash/tiflash-spill-disk.md)削減します。
+- `GROUP BY`キーを持つハッシュ集計オペレーターで使用可能な最大メモリを指定します。この値を超えるとディスクへの書き込みがトリガーされます。メモリ使用量がしきい値を超えると、ハッシュ集計はメモリ使用量を[ディスクへのスピル](/tiflash/tiflash-spill-disk.md)により削減します。
 - デフォルト値: `0` 。これは、メモリ使用量が無制限であり、ハッシュ集計にディスクへのスピルが使用されないことを意味します。
 
 ##### `max_bytes_before_external_sort`<span class="version-mark">バージョン7.0.0の新機能</span> {#max_bytes_before_external_sort-new-in-v700}
 
-- ソート演算子またはtopN演算子で使用可能な最大メモリを指定します。この値を超えるとディスクへの書き込みがトリガーされます。メモリ使用量がこのしきい値を超えると、ソート演算子またはtopN演算子はメモリ使用量を[ディスクへのスピル](/tiflash/tiflash-spill-disk.md)ずつ減らします。
+- ソートオペレーターまたはtopNオペレーターで使用可能な最大メモリを指定します。この値を超えるとディスクへの書き込みがトリガーされます。メモリ使用量がこのしきい値を超えると、ソートオペレーターまたはtopNオペレーターはメモリ使用量を[ディスクへのスピル](/tiflash/tiflash-spill-disk.md)ずつ減らします。
 - デフォルト値: `0` 。これは、メモリ使用量が無制限であり、ソートや topN にディスクへのスピルが使用されないことを意味します。
 
 ##### `max_bytes_before_external_join`<span class="version-mark">バージョン7.0.0の新機能</span> {#max_bytes_before_external_join-new-in-v700}
 
-- 等価結合条件を持つハッシュ結合演算子で使用可能な最大メモリを指定します。この値を超えるとディスクへの書き込みがトリガーされます。メモリ使用量がしきい値を超えると、HashJoin はメモリ使用量を[ディスクへのスピル](/tiflash/tiflash-spill-disk.md)減らします。
+- 等価結合条件を持つハッシュ結合オペレーターで使用可能な最大メモリを指定します。この値を超えるとディスクへの書き込みがトリガーされます。メモリ使用量がしきい値を超えると、HashJoin はメモリ使用量を[ディスクへのスピル](/tiflash/tiflash-spill-disk.md)減らします。
 - デフォルト値: `0` 。これは、メモリ使用量が無制限であり、等価結合条件によるハッシュ結合ではディスクへのスピルが使用されないことを意味します。
 
 ##### `enable_resource_control`<span class="version-mark">バージョン7.4.0の新機能</span> {#enable_resource_control-new-in-v740}

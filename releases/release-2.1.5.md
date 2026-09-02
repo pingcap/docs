@@ -11,8 +11,8 @@ summary: TiDB 2.1.5とTiDB Ansible 2.1.5は、2019年2月28日にリリースさ
 
 - SQL オプティマイザ/エグゼキューター
     - 列の文字セット情報がテーブルの文字セット情報と同じ場合、列の文字セット情報を出力しないように`SHOW CREATE TABLE` 、 `SHOW CREATE TABLE`とMySQL の互換性を向上させます。 [＃9306](https://github.com/pingcap/tidb/pull/9306)
-    - `Sort` の計算ロジックを簡素化するために、計算のために`Sort`から`ScalarFunc`を`Projection`演算子に抽出することにより、場合によっては`Sort`演算子のpanicまたは誤った結果を修正しました。 [＃9319](https://github.com/pingcap/tidb/pull/9319)
-    - `Sort`演算子の定数値を持つソートフィールドを削除します[＃9440](https://github.com/pingcap/tidb/pull/9440) [＃9335](https://github.com/pingcap/tidb/pull/9335)
+    - `Sort` の計算ロジックを簡素化するために、計算のために`Sort`から`ScalarFunc`を`Projection`オペレーターに抽出することにより、場合によっては`Sort`オペレーターのpanicまたは誤った結果を修正しました。 [＃9319](https://github.com/pingcap/tidb/pull/9319)
+    - `Sort`オペレーターの定数値を持つソートフィールドを削除します[＃9440](https://github.com/pingcap/tidb/pull/9440) [＃9335](https://github.com/pingcap/tidb/pull/9335)
     - 符号なし整数列にデータを挿入する際のデータ オーバーフローの問題を修正しました [＃9339](https://github.com/pingcap/tidb/pull/9339)
     - 対象バイナリの長さが`max_allowed_packet` を超える場合は`cast_as_binary`を`NULL`に設定する [＃9349](https://github.com/pingcap/tidb/pull/9349)
     - `IF`と`IFNULL`の定数折り畳みプロセスを最適化する[＃9351](https://github.com/pingcap/tidb/pull/9351)

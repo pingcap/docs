@@ -327,7 +327,7 @@ TiDB バージョン: 6.1.0
 
 - TiDB
 
-    - `UnionScanRead` オペレータのパフォーマンスを向上させる [#32433](https://github.com/pingcap/tidb/issues/32433)
+    - `UnionScanRead` オペレーターのパフォーマンスを向上させる [#32433](https://github.com/pingcap/tidb/issues/32433)
     - `EXPLAIN`の出力におけるタスクタイプの表示を改善（MPPタスクタイプを追加） [＃33332](https://github.com/pingcap/tidb/issues/33332)
     - 列のデフォルト値として`rand()`を使用することをサポートします [＃10377](https://github.com/pingcap/tidb/issues/10377)
     - 列のデフォルト値として`uuid()`を使用することをサポートします [＃33870](https://github.com/pingcap/tidb/issues/33870)
@@ -352,7 +352,7 @@ TiDB バージョン: 6.1.0
 
 - TiFlash
 
-    - 集約演算子のメモリ計算を最適化して、マージフェーズでより効率的なアルゴリズムが使用されるようにします。 [＃4451](https://github.com/pingcap/tiflash/issues/4451)
+    - 集約オペレーターのメモリ計算を最適化して、マージフェーズでより効率的なアルゴリズムが使用されるようにします。 [＃4451](https://github.com/pingcap/tiflash/issues/4451)
 
 - Tools
 
@@ -373,7 +373,7 @@ TiDB バージョン: 6.1.0
 - TiDB
 
     - `in`関数が`bit`タイプのデータを処理する際に発生する可能性のあるpanicの問題を修正しました[＃33070](https://github.com/pingcap/tidb/issues/33070)
-    - `UnionScan`演算子が順序を維持できないために間違ったクエリ結果が発生する問題を修正[＃33175](https://github.com/pingcap/tidb/issues/33175)
+    - `UnionScan`オペレーターが順序を維持できないために間違ったクエリ結果が発生する問題を修正[＃33175](https://github.com/pingcap/tidb/issues/33175)
     - 特定のケースで Merge Join 演算子が間違った結果を返す問題を修正[＃33042](https://github.com/pingcap/tidb/issues/33042)
     - 動的プルーニングモードで`index join`結果が間違っている可能性がある問題を修正しました [＃33231](https://github.com/pingcap/tidb/issues/33231)
     - パーティションテーブルの一部のパーティションが削除されたときにデータがガベージコレクションされない可能性がある問題を修正[＃33620](https://github.com/pingcap/tidb/issues/33620)

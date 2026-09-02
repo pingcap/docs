@@ -129,7 +129,7 @@ TiDBが使用するトランザクションモデルでは、トランザクシ�
 
 ### フロー制御 {#flow-control}
 
-- TiDBは、データ読み取り演算子の動的メモリ制御をサポートしています。デフォルトでは、この演算子は[`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)で許可される最大スレッド数を使用してデータを読み取ります。単一のSQL実行でメモリ使用量が毎回[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超えると、データ読み取り演算子は1つのスレッドを停止します。
+- TiDBは、データ読み取りオペレーターの動的メモリ制御をサポートしています。デフォルトでは、このオペレーターは[`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)で許可される最大スレッド数を使用してデータを読み取ります。単一のSQL実行でメモリ使用量が毎回[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超えると、データ読み取りオペレーターは1つのスレッドを停止します。
 
 - このフロー制御動作は、システム変数[`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action)によって制御されます。
 
@@ -141,7 +141,7 @@ TiDBは、実行演算子のディスクへの書き込みをサポートして�
 
 - ディスクスピル動作は、 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 、 [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) 、 [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path) 、および[`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota)パラメータによって共同で制御されます。
 - ディスクスピルがトリガーされると、TiDB はキーワード`memory exceeds quota, spill to disk now`または`memory exceeds quota, set aggregate mode to spill-mode`を含むログを出力します。
-- Sort、MergeJoin、およびHashJoin演算子のディスクスピルはv4.0.0で導入されました。HashAgg演算子の非並列アルゴリズムのディスクスピルはv5.2.0で導入されました。HashAgg演算子の並列アルゴリズムのディスクスピルはv8.0.0で実験的機能として導入され、v8.2.0で一般提供（GA）されました。TopN演算子のディスクスピルはv8.3.0で導入されました。
+- Sort、MergeJoin、およびHashJoinオペレーターのディスクスピルはv4.0.0で導入されました。HashAggオペレーターの非並列アルゴリズムのディスクスピルはv5.2.0で導入されました。HashAggオペレーターの並列アルゴリズムのディスクスピルはv8.0.0で実験的機能として導入され、v8.2.0で一般提供（GA）されました。TopNオペレーターのディスクスピルはv8.3.0で導入されました。
 - [`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800)システム変数を使用して、ディスクスピルをサポートする並列HashAggアルゴリズムを有効にするかどうかを制御できます。この変数は将来のリリースで廃止される予定です。
 - Sort、MergeJoin、HashJoin、HashAgg、または TopN を含む SQL 実行によって OOM が発生すると、TiDB はデフォルトでディスクスピルをトリガーします。
 

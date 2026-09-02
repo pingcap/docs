@@ -271,7 +271,7 @@ TiDB バージョン: 7.3.0
 
     - TiFlashがデッドロックのためにパーティション化されたテーブルを正常に複製できない問題を修正 [#7758](https://github.com/pingcap/tiflash/issues/7758) @[hongyunyan](https://github.com/hongyunyan)
     - `INFORMATION_SCHEMA.TIFLASH_REPLICA`システムテーブルにユーザーがアクセスする権限を持たないテーブルが含まれる問題を修正 [#7795](https://github.com/pingcap/tiflash/issues/7795) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - 同じ MPP タスク内に複数の HashAgg 演算子が存在する場合、MPP タスクのコンパイルに非常に長い時間がかかり、クエリのパフォーマンスに深刻な影響を与える問題を修正しました [#7810](https://github.com/pingcap/tiflash/issues/7810) @[SeaRise](https://github.com/SeaRise)
+    - 同じ MPP タスク内に複数の HashAgg オペレーターが存在する場合、MPP タスクのコンパイルに非常に長い時間がかかり、クエリのパフォーマンスに深刻な影響を与える問題を修正しました [#7810](https://github.com/pingcap/tiflash/issues/7810) @[SeaRise](https://github.com/SeaRise)
 
 - ツール
 
