@@ -66,7 +66,7 @@ TiDB Ansible バージョン: 3.0.2
         - 悲観的ロックのデフォルトTTLを30秒から40秒に増やす
         - 最大TTLを60秒から120秒に増やす
         - 最初の`LockKeys`リクエストから悲観的ロック期間を計算する
-    - TiKVクライアントの`SendRequest`機能ロジックを変更：接続が確立できない場合は待機するのではなく、すぐに別のピアに接続しようとします[＃11531](https://github.com/pingcap/tidb/pull/11531)
+    - TiKVクライアントの`SendRequest`関数ロジックを変更：接続が確立できない場合は待機するのではなく、すぐに別のピアに接続しようとします[＃11531](https://github.com/pingcap/tidb/pull/11531)
     - リージョンキャッシュを最適化します。ストアが移動され、別のストアが同じアドレスでオンラインになったときに、削除されたストアを無効としてラベル付けし、キャッシュ内のストア情報をできるだけ早く更新します[＃11567](https://github.com/pingcap/tidb/pull/11567)
     - `http://{TiDB_ADDRESS:TIDB_IP}/mvcc/key/{db}/{table}/{handle}` API によって返される結果にリージョンID を追加します。 [＃11557](https://github.com/pingcap/tidb/pull/11557)
     - Scatter Table API が Range キーをエスケープしないために Scatter Table が動作しない問題を修正しました [＃11298](https://github.com/pingcap/tidb/pull/11298)

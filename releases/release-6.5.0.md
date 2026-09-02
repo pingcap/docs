@@ -27,7 +27,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 - 高性能かつグローバルに単調な[`AUTO_INCREMENT`](/auto-increment.md#mysql-compatibility-mode)列属性が、MySQLと互換性のあるGAになります。
 - [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)は TiCDC および PITR と互換性があり、GA になります。
 - より正確な[コストモデル バージョン 2](/cost-model.md#cost-model-version-2)一般に公開し、 `AND`で[インデックスマージ](/explain-index-merge.md)に接続された式をサポートすることで、 TiDB オプティマイザを強化します。
-- `JSON_EXTRACT()`機能をTiFlashにプッシュダウンすることをサポートします。
+- `JSON_EXTRACT()`関数をTiFlashにプッシュダウンすることをサポートします。
 - パスワード コンプライアンス監査要件を満たす[パスワード管理](/password-management.md)ポリシーをサポートします。
 - TiDB LightningとDumplingは、圧縮されたSQLおよびCSVファイルの[インポート](/tidb-lightning/tidb-lightning-data-source.md)および[エクスポート](/dumpling-overview.md#improve-export-efficiency-through-concurrency)をサポートします。
 - TiDB Data Migration (DM) [継続的なデータ検証](/dm/dm-continuous-data-validation.md) GA になります。

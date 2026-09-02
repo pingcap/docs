@@ -13,7 +13,7 @@ TiDB バージョン: 4.0.7
 
 - PD
 
-    - PDクライアントにPDメンバー情報を取得する`GetAllMembers`機能を追加する[＃2980](https://github.com/pingcap/pd/pull/2980)
+    - PDクライアントにPDメンバー情報を取得する`GetAllMembers`関数を追加する[＃2980](https://github.com/pingcap/pd/pull/2980)
 
 - TiDB Dashboard
 
@@ -25,7 +25,7 @@ TiDB バージョン: 4.0.7
 
     - `join`演算子実行時情報を追加します [＃20093](https://github.com/pingcap/tidb/pull/20093)
     - `EXPLAIN ANALYZE` にコプロセッサキャッシュのヒット率情報を追加 [＃19972](https://github.com/pingcap/tidb/pull/19972)
-    - `ROUND`機能をTiFlash にプッシュダウンするサポート [＃19967](https://github.com/pingcap/tidb/pull/19967)
+    - `ROUND`関数をTiFlash にプッシュダウンするサポート [＃19967](https://github.com/pingcap/tidb/pull/19967)
     - `ANALYZE` にデフォルト値`CMSketch`を追加します [＃19927](https://github.com/pingcap/tidb/pull/19927)
     - エラーメッセージの感度調整[＃20004](https://github.com/pingcap/tidb/pull/20004)
     - MySQL 8.0 のコネクタを使用してクライアントからの接続を受け入れる [＃19959](https://github.com/pingcap/tidb/pull/19959)

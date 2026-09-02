@@ -331,7 +331,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     - ベースラインキャプチャブロックリストでのワイルドカードの使用をサポート [＃32714](https://github.com/pingcap/tidb/issues/32714)
     - `ADMIN SHOW DDL JOBS`と`SHOW TABLE STATUS`ステートメントの結果を、現在の`time_zone` に応じて時間を表示することで最適化します。 [＃26642](https://github.com/pingcap/tidb/issues/26642)
     - `DAYNAME()`と`MONTHNAME()`関数をTiFlash にプッシュダウンするサポート [＃32594](https://github.com/pingcap/tidb/issues/32594)
-    - `REGEXP`機能をTiFlash にプッシュダウンするサポート [＃32637](https://github.com/pingcap/tidb/issues/32637)
+    - `REGEXP`関数をTiFlash にプッシュダウンするサポート [＃32637](https://github.com/pingcap/tidb/issues/32637)
     - `DAYOFMONTH()`と`LAST_DAY()`関数をTiFlash にプッシュダウンするサポート [＃33012](https://github.com/pingcap/tidb/issues/33012)
     - `DAYOFWEEK()`と`DAYOFYEAR()`関数をTiFlash にプッシュダウンするサポート [＃33130](https://github.com/pingcap/tidb/issues/33130)
     - `IS_TRUE` `IS_FALSE`関数`IS_TRUE_WITH_NULL` TiFlash にプッシュダウンする機能をサポート [＃33047](https://github.com/pingcap/tidb/issues/33047)
