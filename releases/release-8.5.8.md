@@ -93,7 +93,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     + TiCDC
 
-        - Fix the issue that the TiCDC Grafana dashboard does not display build information correctly [#5649](https://github.com/pingcap/ticdc/issues/5649) @[lidezhu](https://github.com/lidezhu) <!-- component: cdc --> <!-- pr: https://github.com/pingcap/ticdc/pull/5756 -->
         - Fix the issue that TiCDC might create duplicate dispatchers during maintainer failover, causing downstream write conflicts [#5083](https://github.com/pingcap/ticdc/issues/5083) @[hongyunyan](https://github.com/hongyunyan) <!-- component: cdc --> <!-- pr: https://github.com/pingcap/ticdc/pull/5788 --> <!-- pr: https://github.com/pingcap/ticdc/pull/5792 --> <!-- pr: https://github.com/pingcap/ticdc/pull/5791 -->
         - Fix the issue that TiCDC might produce inconsistent data between upstream and downstream after a Kafka controller failure [#5437](https://github.com/pingcap/ticdc/issues/5437) @[3AceShowHand](https://github.com/3AceShowHand) <!-- component: cdc --> <!-- pr: https://github.com/pingcap/ticdc/pull/5773 -->
         - Fix the issue that changefeeds might disappear after upgrading TiCDC when existing changefeed ID metadata uses the legacy `namespace` field instead of `keyspace` in JSON [#4079](https://github.com/pingcap/ticdc/issues/4079) @[wlwilliamx](https://github.com/wlwilliamx) <!-- component: cdc --> <!-- pr: https://github.com/pingcap/ticdc/pull/5332 -->
