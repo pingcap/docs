@@ -13,7 +13,7 @@ TiDB Dashboardの現在のセッションを他のユーザーと共有して、
 
 2. 左側のサイドバーにあるユーザー名をクリックして、設定ページにアクセスします。
 
-3. **[現在のセッションを共有]**をクリックします。
+3. **Share Current Session**をクリックします。
 
     ![Sample Step](/media/dashboard/dashboard-session-share-settings-1-v650.png)
 

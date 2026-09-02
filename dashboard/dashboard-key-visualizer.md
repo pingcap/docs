@@ -93,7 +93,7 @@ Key Visualizer を開くと、デフォルトで過去 6時間のデータベー
 
     ![Selection box](/media/dashboard/dashboard-keyviz-select-zoom.gif)
 
-    - リージョン範囲をデータベース全体にリセットするには、 **[リセット]**ボタンをクリックします。
+    - リージョン範囲をデータベース全体にリセットするには、 **Reset**ボタンをクリックします。
     - **時間選択ボックス**(前のインターフェイスの`6 hour`の位置) をクリックし、観測期間を再度選択します。
 
     ![Select time](/media/dashboard/dashboard-keyviz-select-time.png)
