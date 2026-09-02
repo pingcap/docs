@@ -30,7 +30,7 @@ summary: TiDB 2.1.3 および TiDB Ansible 2.1.3 がリリースされ、シス�
 - DDL
     - MySQL の動作と一貫性を保つために`RENAME TABLE`互換性問題を修正しました。 [＃8808](https://github.com/pingcap/tidb/pull/8808)
     - `ADD INDEX`の同時変更を直ちに有効にするサポート [＃8786](https://github.com/pingcap/tidb/pull/8786)
-    - `ADD COLUMN`のプロセス中に発生する`UPDATE`panic問題を修正する（場合によっては[＃8906](https://github.com/pingcap/tidb/pull/8906)
+    - 場合によっては`ADD COLUMN`のプロセス中に発生する`UPDATE`panic問題を修正する [＃8906](https://github.com/pingcap/tidb/pull/8906)
     - 一部のケースでテーブルパーティションが同時に作成される問題を修正[＃8902](https://github.com/pingcap/tidb/pull/8902)
     - `utf8`文字セットを`utf8mb4`に変換することをサポート [＃8951](https://github.com/pingcap/tidb/pull/8951) [＃9152](https://github.com/pingcap/tidb/pull/9152)
     - シャードビットオーバーフローの問題を修正[＃8976](https://github.com/pingcap/tidb/pull/8976)
