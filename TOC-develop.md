@@ -67,7 +67,7 @@
   - [データを挿入する](/develop/dev-guide-insert-data.md)
   - [データの更新](/develop/dev-guide-update-data.md)
   - [データ削除](/develop/dev-guide-delete-data.md)
-  - [TTL（有効期限）を使用して、期限切れのデータを定期的に削除する](/develop/dev-guide-time-to-live.md)
+  - [TTL (Time to Live)を使用して、期限切れのデータを定期的に削除する](/develop/dev-guide-time-to-live.md)
   - [プリペアドステートメント](/develop/dev-guide-prepared-statement.md)
 - データ読み取り
   - [単一テーブルからデータをクエリする](/develop/dev-guide-get-data-from-single-table.md)

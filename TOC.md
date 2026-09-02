@@ -873,7 +873,7 @@
     - 文字セットと照合順序
       - [概要](/character-set-and-collation.md)
       - [GBK](/character-set-gbk.md)
-    - [TTL（Time to Live：存続時間）](/time-to-live.md)
+    - [TTL (Time to Live)](/time-to-live.md)
     - [SQLにおける配置ルール](/placement-rules-in-sql.md)
     - システムテーブル
       - `mysql`スキーマ

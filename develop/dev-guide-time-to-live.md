@@ -3,7 +3,7 @@ title: Periodically Delete Data Using TTL (Time to Live)
 summary: TiDB の TTL 機能を使用して、期限切れのデータを自動的かつ定期的に削除する方法を学習します。
 ---
 
-# TTL（Time to Live）を使用して定期的にデータを削除する {#periodically-delete-data-using-ttl-time-to-live}
+# TTL (Time to Live)を使用して定期的にデータを削除する {#periodically-delete-data-using-ttl-time-to-live}
 
 アプリケーション開発において、一部のデータは限られた期間のみ価値を持ちます。例えば、認証コードは通常数分間しか保持する必要がなく、短縮リンクは特定のキャンペーン期間中のみ有効となる場合があり、アクセスログや中間計算結果も数か月しか保持されないことがよくあります。
 
