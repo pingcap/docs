@@ -338,7 +338,7 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 31 rows in set (0.00 sec)
 ```
 
-### ALTER {#alter}
+### 変更する {#alter}
 
 - `ALTER`ステートメントすべてにおいて、ユーザーは対応するテーブルに対する`ALTER`権限を持っている必要があります。
 - `ALTER...DROP`および`ALTER...RENAME TO`以外のステートメントについては、ユーザーは対応するテーブルに対して`INSERT`および`CREATE`の権限を持っている必要があります。
@@ -349,29 +349,29 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 >
 > MySQL 5.7のドキュメントでは、テーブルに対して`INSERT`操作を実行するには、 `CREATE`および`ALTER`の権限であるとされています。しかし、実際にはMySQL 5.7では、この場合`ALTER`権限のみが必要です。現在、TiDB の`ALTER`権限は、MySQL の実際の動作と一致しています。
 
-### BACKUP {#backup}
+### バックアップ {#backup}
 
 `SUPER`または`BACKUP_ADMIN`の権限が必要です。
 
-### CANCEL IMPORT JOB {#cancel-import-job}
+### インポートジョブをキャンセルする {#cancel-import-job}
 
 他のユーザーが作成したジョブをキャンセルするには`SUPER`権限が必要です。それ以外の場合は、現在のユーザーが作成したジョブのみキャンセルできます。
 
-### CREATE DATABASE {#create-database}
+### データベースの作成 {#create-database}
 
 データベースに対する`CREATE`権限が必要です。
 
-### CREATE INDEX {#create-index}
+### インデックスを作成する {#create-index}
 
 テーブルに対する`INDEX`権限が必要です。
 
-### CREATE TABLE {#create-table}
+### テーブルを作成する {#create-table}
 
 テーブルに対する`CREATE`権限が必要です。
 
 `CREATE TABLE...LIKE...`ステートメントを実行するには、テーブルに対する`SELECT`権限が必要です。
 
-### CREATE VIEW {#create-view}
+### ビューの作成 {#create-view}
 
 `CREATE VIEW`権限が必要です。
 
@@ -379,47 +379,47 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 >
 > 現在のユーザーがビューを作成したユーザーでない場合、 `CREATE VIEW`と`SUPER`の両方の権限が必要です。
 
-### DROP DATABASE {#drop-database}
+### データベースの削除 {#drop-database}
 
 データベースに対する`DROP`権限が必要です。
 
-### DROP INDEX {#drop-index}
+### インデックスを削除 {#drop-index}
 
 テーブルに対する`INDEX`権限が必要です。
 
-### DROP TABLES {#drop-tables}
+### テーブルを削除する {#drop-tables}
 
 テーブルに対する`DROP`権限が必要です。
 
-### IMPORT INTO {#import-into}
+### インポート先 {#import-into}
 
 対象テーブルに対して`SELECT` 、 `UPDATE` 、 `INSERT` 、 `DELETE` 、および`ALTER`の権限が必要です。TiDBにローカルに保存されているファイルをインポートするには、 `FILE`権限も必要です。
 
-### LOAD DATA {#load-data}
+### データの読み込み {#load-data}
 
 テーブルに対して`INSERT`権限が必要です。 `REPLACE INTO`を使用する場合は、 `DELETE`権限も必要です。
 
-### TRUNCATE TABLE {#truncate-table}
+### テーブルを切り捨てる {#truncate-table}
 
 テーブルに対する`DROP`権限が必要です。
 
-### RENAME TABLE {#rename-table}
+### テーブル名の変更 {#rename-table}
 
 テーブル名を変更する前に、 `ALTER`および`DROP`の権限が必要であり、テーブル名を変更する後には`CREATE`および`INSERT`の権限。
 
-### ANALYZE TABLE {#analyze-table}
+### 表の分析 {#analyze-table}
 
 テーブルに対する`INSERT`および`SELECT`の権限が必要です。
 
-### LOCK STATS {#lock-stats}
+### ロック統計 {#lock-stats}
 
 テーブルに対する`INSERT`および`SELECT`の権限が必要です。
 
-### UNLOCK STATS {#unlock-stats}
+### 統計情報をアンロックする {#unlock-stats}
 
 テーブルに対する`INSERT`および`SELECT`の権限が必要です。
 
-### SHOW {#show}
+### 見せる {#show}
 
 `SHOW CREATE TABLE`テーブルに対する単一の権限を必要とします。
 
@@ -433,23 +433,23 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 
 `SHOW STATS_LOCKED`は`mysql.stats_table_locked`テーブルに対する`SELECT`権限を必要とします。
 
-### CREATE ROLE/USER {#create-role-user}
+### ロール/ユーザーの作成 {#create-role-user}
 
 `CREATE ROLE`には`CREATE ROLE`の権限が必要です。
 
 `CREATE USER`には`CREATE USER`の権限が必要です。
 
-### DROP ROLE/USER {#drop-role-user}
+### ロール/ユーザーを削除する {#drop-role-user}
 
 `DROP ROLE`には`DROP ROLE`の権限が必要です。
 
 `DROP USER`には`CREATE USER`の権限が必要です。
 
-### ALTER USER {#alter-user}
+### ユーザーの変更 {#alter-user}
 
 `CREATE USER`権限が必要です。
 
-### GRANT {#grant}
+### 付与 {#grant}
 
 `GRANT`によって付与された権限を持つ`GRANT`権限が必要です。
 
@@ -457,21 +457,21 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 
 `GRANT ROLE`には`SUPER`または`ROLE_ADMIN`権限が必要です。
 
-### REVOKE {#revoke}
+### 取り消す {#revoke}
 
 `GRANT`権限と、 `REVOKE`ステートメントで指定されている権限が必要です。
 
 `REVOKE ROLE`には`SUPER`または`ROLE_ADMIN`権限が必要です。
 
-### SET GLOBAL {#set-global}
+### グローバル設定 {#set-global}
 
 グローバル変数を設定するには、 `SUPER`または`SYSTEM_VARIABLES_ADMIN`の権限が必要です。
 
-### ADMIN {#admin}
+### 管理者 {#admin}
 
 `SUPER`の権限が必要です。
 
-### SET DEFAULT ROLE {#set-default-role}
+### デフォルトロールを設定する {#set-default-role}
 
 `SUPER`の権限が必要です。
 
@@ -479,23 +479,23 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 
 他のユーザーセッションを終了するには、 `SUPER`または`CONNECTION_ADMIN`の権限が必要です。
 
-### CREATE RESOURCE GROUP {#create-resource-group}
+### リソースグループを作成する {#create-resource-group}
 
 `SUPER`または`RESOURCE_GROUP_ADMIN`の権限が必要です。
 
-### ALTER RESOURCE GROUP {#alter-resource-group}
+### アルターリソースグループ {#alter-resource-group}
 
 `SUPER`または`RESOURCE_GROUP_ADMIN`の権限が必要です。
 
-### DROP RESOURCE GROUP {#drop-resource-group}
+### リソースグループを削除する {#drop-resource-group}
 
 `SUPER`または`RESOURCE_GROUP_ADMIN`の権限が必要です。
 
-### CALIBRATE RESOURCE {#calibrate-resource}
+### リソースの校正 {#calibrate-resource}
 
 `SUPER`または`RESOURCE_GROUP_ADMIN`の権限が必要です。
 
-### SET RESOURCE GROUP {#set-resource-group}
+### リソースグループを設定する {#set-resource-group}
 
 システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) `ON`に設定されている場合、このステートメントを実行するには`SUPER`または`RESOURCE_GROUP_ADMIN`または`RESOURCE_GROUP_USER`の権限が必要です。
 
