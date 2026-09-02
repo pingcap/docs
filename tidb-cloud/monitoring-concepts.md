@@ -40,7 +40,7 @@ For more information, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-bui
 
 In TiDB Cloud, an event indicates a change in your TiDB Cloud resource.
 
-- For {{{ .starter }}} and Essential instances, TiDB Cloud logs the historical events at the instance level.
+- For {{{ .starter }}}, Essential and Premium instances, TiDB Cloud logs the historical events at the instance level.
 - For TiDB Cloud Dedicated clusters, TiDB Cloud logs the historical events at the cluster level.
 
 You can view the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.
