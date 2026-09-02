@@ -30,7 +30,7 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
     - 時間型データのメモリ使用量を最適化し、時間型データのメモリ使用量を50％削減します[＃7043](https://github.com/pingcap/tidb/pull/7043)
     - `UNION`文で返される結果に符号付き整数と符号なし整数が混在する問題を修正しました。これは MySQL と互換性がありません。 [＃7112](https://github.com/pingcap/tidb/pull/7112)
     - `LPAD` / `RPAD` / `TO_BASE64` / `FROM_BASE64` / `REPEAT` でメモリ使用量が多すぎるために発生するpanic問題を修正しました [＃7171](https://github.com/pingcap/tidb/pull/7171) [＃7266](https://github.com/pingcap/tidb/pull/7266) [＃7409](https://github.com/pingcap/tidb/pull/7409) [＃7431](https://github.com/pingcap/tidb/pull/7431)
-    - `MergeJoin` `IndexJoin` `NULL`値を処理するときの誤った結果を修正 [＃7255](https://github.com/pingcap/tidb/pull/7255)
+    - `MergeJoin`/`IndexJoin`が`NULL`値を処理するときの誤った結果を修正 [＃7255](https://github.com/pingcap/tidb/pull/7255)
     - `Outer Join`の誤った結果がいくつかのケースで発生する問題を修正[＃7288](https://github.com/pingcap/tidb/pull/7288)
     - `Data Truncated`のエラーメッセージを改善して、間違ったデータとテーブル内の対応するフィールドを見つけやすくします。 [＃7401](https://github.com/pingcap/tidb/pull/7401)
     - いくつかのケースで`decimal`の誤った結果を修正[＃7001](https://github.com/pingcap/tidb/pull/7001) [＃7113](https://github.com/pingcap/tidb/pull/7113) [＃7202](https://github.com/pingcap/tidb/pull/7202) [＃7208](https://github.com/pingcap/tidb/pull/7208)
