@@ -89,7 +89,7 @@ MySQL コマンドライン クライアントがインストールされてい�
 
 > **Note:**
 >
-> TiUPを使用する場合は、 `tiup cloud`の代わりに`ticloud` } を使用できます。
+> TiUPを使用する場合は、`ticloud`の代わりに`tiup cloud`を使用できます。
 
 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 、 TiDB Cloudを始めるための最適な方法です。このセクションでは、 TiDB Cloud CLIを使用してTiDB Cloud Starterインスタンスを作成する方法を学びます。
 
