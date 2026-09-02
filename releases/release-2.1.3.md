@@ -32,7 +32,7 @@ summary: TiDB 2.1.3 および TiDB Ansible 2.1.3 がリリースされ、シス�
     - `ADD INDEX`の同時変更を直ちに有効にするサポート [＃8786](https://github.com/pingcap/tidb/pull/8786)
     - `ADD COLUMN`のプロセス中に発生する`UPDATE`panic問題を修正する（場合によっては[＃8906](https://github.com/pingcap/tidb/pull/8906)
     - 一部のケースでテーブルパーティションが同時に作成される問題を修正[＃8902](https://github.com/pingcap/tidb/pull/8902)
-    - `utf8`文字セット[＃8951](https://github.com/pingcap/tidb/pull/8951) `utf8mb4`変換することサポート [＃9152](https://github.com/pingcap/tidb/pull/9152)
+    - `utf8`文字セットを`utf8mb4`に変換することをサポート [＃8951](https://github.com/pingcap/tidb/pull/8951) [＃9152](https://github.com/pingcap/tidb/pull/9152)
     - シャードビットオーバーフローの問題を修正[＃8976](https://github.com/pingcap/tidb/pull/8976)
     - `SHOW CREATE TABLE` の列文字セットの出力をサポート [＃9053](https://github.com/pingcap/tidb/pull/9053)
     - `utf8mb4` のvarchar型列の最大長制限の問題を修正 [＃8818](https://github.com/pingcap/tidb/pull/8818)

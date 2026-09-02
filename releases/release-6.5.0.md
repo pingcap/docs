@@ -425,7 +425,7 @@ v6.5.0 以降では、v4.0.7 で導入された`AMEND TRANSACTION`メカニズ�
 
     - TiCDC
 
-        - Kafka プロトコルエンコーダー[＃7540](https://github.com/pingcap/tiflow/issues/7540) のパフォーマンスを向上 [＃7543](https://github.com/pingcap/tiflow/issues/7543) @[3AceShowHand](https://github.com/3AceShowHand) [＃7532](https://github.com/pingcap/tiflow/issues/7532) @[sdojjy](https://github.com/sdojjy)
+        - Kafka プロトコルエンコーダーのパフォーマンスを向上 [＃7540](https://github.com/pingcap/tiflow/issues/7540) [＃7532](https://github.com/pingcap/tiflow/issues/7532) [＃7543](https://github.com/pingcap/tiflow/issues/7543) @[3AceShowHand](https://github.com/3AceShowHand) @[sdojjy](https://github.com/sdojjy)
 
     - TiDB Data Migration (DM)
 

@@ -23,7 +23,7 @@ TiDB Ansible バージョン: 4.0.0-beta
 - インデックスマージ機能をサポートすることでテーブルクエリのパフォーマンスが向上します[＃10121](https://github.com/pingcap/tidb/pull/10121) [＃10512](https://github.com/pingcap/tidb/pull/10512) [＃11245](https://github.com/pingcap/tidb/pull/11245) [＃12225](https://github.com/pingcap/tidb/pull/12225) [＃12248](https://github.com/pingcap/tidb/pull/12248) [＃12305](https://github.com/pingcap/tidb/pull/12305) [＃12843](https://github.com/pingcap/tidb/pull/12843)
 - インデックス結果をキャッシュし、重複する結果を排除することで、範囲計算のパフォーマンスを向上させ、CPUオーバーヘッドを削減します[＃12856](https://github.com/pingcap/tidb/pull/12856)
 - スローログのレベルを通常のログのレベルから切り離す[＃12359](https://github.com/pingcap/tidb/pull/12359)
-- `oom-use-tmp-storage`パラメータ（デフォルトは`true` ）を追加して、単一の SQL 文の実行でメモリ使用量が`mem-quota-query`超え、SQL に`Hash Join` [＃11832](https://github.com/pingcap/tidb/pull/11832) [＃11937](https://github.com/pingcap/tidb/pull/11937) が含まれている場合に、一時ファイルを使用して中間結果をキャッシュするかどうかを制御します。 [＃12067](https://github.com/pingcap/tidb/pull/12067) [＃12116](https://github.com/pingcap/tidb/pull/12116)
+- `oom-use-tmp-storage`パラメータ（デフォルトは`true` ）を追加して、単一の SQL 文の実行でメモリ使用量が`mem-quota-query`超え、SQL に`Hash Join`が含まれている場合に、一時ファイルを使用して中間結果をキャッシュするかどうかを制御します。 [＃11832](https://github.com/pingcap/tidb/pull/11832) [＃11937](https://github.com/pingcap/tidb/pull/11937) [＃12116](https://github.com/pingcap/tidb/pull/12116) [＃12067](https://github.com/pingcap/tidb/pull/12067)
 - `create index`を使用して式インデックスを作成し、 `drop index`を使用して式インデックスを削除すること`alter table`サポートします。 [＃14117](https://github.com/pingcap/tidb/pull/14117)
 - 切り捨てられたSQL出力の数を減らすには、パラメータ`query-log-max-len`のデフォルト値を`4096`に増やしてください。このパラメータは動的に調整できます[＃12491](https://github.com/pingcap/tidb/pull/12491)
 - 列属性に`AutoRandom`キーワードを追加して、システムが主キーにランダムな整数を自動的に割り当てるかどうかを制御できるようになりました。これにより、 `AUTO_INCREMENT`主キーによって引き起こされるホットスポット問題が回避されます。 [＃13127](https://github.com/pingcap/tidb/pull/13127)
@@ -50,7 +50,7 @@ TiDB Ansible バージョン: 4.0.0-beta
 - `Kill` の安定性を向上 [＃10841](https://github.com/pingcap/tidb/pull/10841)
 - `LOAD DATA` で16進数と2進数の表現を区切り文字としてサポート [＃11029](https://github.com/pingcap/tidb/pull/11029)
 - `IndexLookupJoin` `IndexHashJoin`と`IndexMergeJoin`に分割することで、 `IndexLookupJoin`のパフォーマンスを向上させ、実行時のメモリ消費量を削減します[＃8861](https://github.com/pingcap/tidb/pull/8861) [＃12139](https://github.com/pingcap/tidb/pull/12139) [＃12349](https://github.com/pingcap/tidb/pull/12349) [＃13238](https://github.com/pingcap/tidb/pull/13238) [＃13451](https://github.com/pingcap/tidb/pull/13451) [＃13714](https://github.com/pingcap/tidb/pull/13714)
-- RBAC [＃13896](https://github.com/pingcap/tidb/pull/13896) [＃13820](https://github.com/pingcap/tidb/pull/13820) [＃13940](https://github.com/pingcap/tidb/pull/13940) [＃14090](https://github.com/pingcap/tidb/pull/14090) に関連するいくつかの問題を修正 [＃13014](https://github.com/pingcap/tidb/pull/13014) [＃13940](https://github.com/pingcap/tidb/pull/13940)
+- RBACに関連するいくつかの問題を修正 [＃13896](https://github.com/pingcap/tidb/pull/13896) [＃13820](https://github.com/pingcap/tidb/pull/13820) [＃13940](https://github.com/pingcap/tidb/pull/13940) [＃14090](https://github.com/pingcap/tidb/pull/14090) [＃13940](https://github.com/pingcap/tidb/pull/13940) [＃13014](https://github.com/pingcap/tidb/pull/13014)
 - `SELECT`文に`union` が含まれているため`VIEW`を作成できない問題を修正しました [＃12595](https://github.com/pingcap/tidb/pull/12595)
 - `CAST`関数に関連するいくつかの問題を修正
     - [＃12858](https://github.com/pingcap/tidb/pull/12858) [＃11968](https://github.com/pingcap/tidb/pull/11968) [＃11640](https://github.com/pingcap/tidb/pull/11640) [＃11483](https://github.com/pingcap/tidb/pull/11483) [＃11493](https://github.com/pingcap/tidb/pull/11493)

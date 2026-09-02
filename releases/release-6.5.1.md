@@ -117,7 +117,7 @@ TiDB バージョン: 6.5.1
     - パーティションテーブルにグローバルバインディングを作成すると、TiDB が起動に失敗する可能性がある問題を修正しました。 [＃40368](https://github.com/pingcap/tidb/issues/40368) @[Yisaer](https://github.com/Yisaer)
     - スローログでクエリプラン演算子が欠落する可能性がある問題を修正しました [＃41458](https://github.com/pingcap/tidb/issues/41458) @[time-and-fate](https://github.com/time-and-fate)
     - 仮想列を持つ TopN オペレーターが誤って TiKV またはTiFlash にプッシュダウンすると、誤った結果が返される可能性がある問題を修正しました。 [＃41355](https://github.com/pingcap/tidb/issues/41355) @[Dousir9](https://github.com/Dousir9)
-    - インデックス[＃40698](https://github.com/pingcap/tidb/issues/40698) [＃40730](https://github.com/pingcap/tidb/issues/40730) [＃41459](https://github.com/pingcap/tidb/issues/41459) を追加するときにデータの不整合が発生する問題を修正しました [＃40217](https://github.com/pingcap/tidb/issues/40217) @[tangenta](https://github.com/tangenta) [＃40464](https://github.com/pingcap/tidb/issues/40464)
+    - インデックスを追加するときにデータの不整合が発生する問題を修正しました [＃40698](https://github.com/pingcap/tidb/issues/40698) [＃40730](https://github.com/pingcap/tidb/issues/40730) [＃41459](https://github.com/pingcap/tidb/issues/41459) [＃40464](https://github.com/pingcap/tidb/issues/40464) [＃40217](https://github.com/pingcap/tidb/issues/40217) @[tangenta](https://github.com/tangenta)
     - インデックスを追加するときに`Pessimistic lock not found`エラーが発生する問題を修正しました [＃41515](https://github.com/pingcap/tidb/issues/41515) @[tangenta](https://github.com/tangenta)
     - 一意インデックスを追加するときに誤って報告される重複キーエラーの問題を修正しました [＃41630](https://github.com/pingcap/tidb/issues/41630) @[tangenta](https://github.com/tangenta)
     - TiDB で`paging`を使用するとパフォーマンスが低下する問題を修正 [＃40741](https://github.com/pingcap/tidb/issues/40741) @[solotzg](https://github.com/solotzg)

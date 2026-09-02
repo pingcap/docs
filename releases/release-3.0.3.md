@@ -76,4 +76,4 @@ TiDB Ansible バージョン: 3.0.3
 - 現在のGrafanaバージョンでサポートされていないGrafana Collectorコンポーネントを削除します。 [＃892](https://github.com/pingcap/tidb-ansible/pull/892)
 - TiKVアラートルールを更新 [＃898](https://github.com/pingcap/tidb-ansible/pull/898)
 - 生成されたTiKV構成で`pessimistic-txn`パラメータ欠落している問題を修正 [＃911](https://github.com/pingcap/tidb-ansible/pull/911)
-- SparkをV2.4.3にアップデートし、TiSparkをSpark V2.4.3 [＃913](https://github.com/pingcap/tidb-ansible/pull/913) 、 互換性のあるV2.1.4にアップデートします。 [＃918](https://github.com/pingcap/tidb-ansible/pull/918)
+- SparkをV2.4.3にアップデートし、TiSparkをSpark V2.4.3と互換性のあるV2.1.4にアップデートします。 [＃913](https://github.com/pingcap/tidb-ansible/pull/913) 、 [＃918](https://github.com/pingcap/tidb-ansible/pull/918)

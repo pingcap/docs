@@ -104,7 +104,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     - クエリに非相関サブクエリと`LIMIT`句が含まれている場合、列のプルーニングが不完全になり、最適でないプランになる可能性がある問題を修正しました。 [＃54213](https://github.com/pingcap/tidb/issues/54213) @[qw4990](https://github.com/qw4990)
     - BIGINT 以外の符号なし整数が文字列/小数点と比較されたときに誤った結果を生成する可能性がある問題を修正しました [＃41736](https://github.com/pingcap/tidb/issues/41736) @[LittleFall](https://github.com/LittleFall)
     - 分散実行フレームワーク (DXF) を使用してインデックスを追加するときに設定`max-index-length`で TiDB がpanicになる問題を修正しました [＃53281](https://github.com/pingcap/tidb/issues/53281) @[zimulala](https://github.com/zimulala)
-    - クエリ内の特定のフィルタ条件により、プランナーモジュールが`invalid memory address or nil pointer dereference`エラー[＃53582](https://github.com/pingcap/tidb/issues/53582) [＃53580](https://github.com/pingcap/tidb/issues/53580) を報告する可能性がある問題を修正しました [＃53603](https://github.com/pingcap/tidb/issues/53603) @[YangKeao](https://github.com/YangKeao) [＃53594](https://github.com/pingcap/tidb/issues/53594)
+    - クエリ内の特定のフィルタ条件により、プランナーモジュールが`invalid memory address or nil pointer dereference`エラーを報告する可能性がある問題を修正しました [＃53582](https://github.com/pingcap/tidb/issues/53582) [＃53580](https://github.com/pingcap/tidb/issues/53580) [＃53594](https://github.com/pingcap/tidb/issues/53594) [＃53603](https://github.com/pingcap/tidb/issues/53603) @[YangKeao](https://github.com/YangKeao)
     - 再帰CTEクエリが無効なポインタを生成する可能性がある問題を修正しました [＃54449](https://github.com/pingcap/tidb/issues/54449) @[hawkingrei](https://github.com/hawkingrei)
     - 述語の`Longlong`型のオーバーフローの問題を修正 [＃45783](https://github.com/pingcap/tidb/issues/45783) @[hawkingrei](https://github.com/hawkingrei)
     - `GROUP BY`ステートメント内の間接プレースホルダ`?`参照が列を見つけられない問題を修正しました [＃53872](https://github.com/pingcap/tidb/issues/53872) @[qw4990](https://github.com/qw4990)
