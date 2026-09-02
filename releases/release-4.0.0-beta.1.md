@@ -17,10 +17,10 @@ TiDB Ansible バージョン: 4.0.0-beta.1
     - `log.enable-slow-log`設定項目の型を整数からブール型に変更します[＃14864](https://github.com/pingcap/tidb/pull/14864)
     - MySQL 5.7と一致するように、 `mysql.user`システムテーブルの`password`フィールド名を`authentication_string`に変更します (**この互換性の変更により、以前のバージョンにロールバックできなくなります**) [＃14598](https://github.com/pingcap/tidb/pull/14598)
     - `txn-total-size-limit`設定項目のデフォルト値を`1GB`から`100MB`に調整します[＃14522](https://github.com/pingcap/tidb/pull/14522)
-    - PD [＃14750](https://github.com/pingcap/tidb/pull/14750) から読み取った設定項目の動的な変更または更新をサポート [＃14830](https://github.com/pingcap/tidb/pull/14830) [＃14303](https://github.com/pingcap/tidb/pull/14303)
+    - PDから読み取った設定項目の動的な変更または更新をサポート [＃14750](https://github.com/pingcap/tidb/pull/14750) [＃14303](https://github.com/pingcap/tidb/pull/14303) [＃14830](https://github.com/pingcap/tidb/pull/14830)
 
 - TiKV
-    - ポイントクエリがコプロセッサー[＃6375](https://github.com/tikv/tikv/pull/6375) [＃6401](https://github.com/tikv/tikv/pull/6401) [＃6534](https://github.com/tikv/tikv/pull/6534) [＃6582](https://github.com/tikv/tikv/pull/6582) [＃6585](https://github.com/tikv/tikv/pull/6585) [＃6593](https://github.com/tikv/tikv/pull/6593) と同じスレッドを使用するかどうかを制御するために、 `readpool.unify-read-pool`設定項目（デフォルトでは`True` ）を追加します。 [＃6677](https://github.com/tikv/tikv/pull/6677) [＃6597](https://github.com/tikv/tikv/pull/6597)
+    - ポイントクエリがコプロセッサーと同じスレッドを使用するかどうかを制御するために、 `readpool.unify-read-pool`設定項目（デフォルトでは`True` ）を追加します。 [＃6375](https://github.com/tikv/tikv/pull/6375) [＃6401](https://github.com/tikv/tikv/pull/6401) [＃6534](https://github.com/tikv/tikv/pull/6534) [＃6582](https://github.com/tikv/tikv/pull/6582) [＃6585](https://github.com/tikv/tikv/pull/6585) [＃6593](https://github.com/tikv/tikv/pull/6593) [＃6597](https://github.com/tikv/tikv/pull/6597) [＃6677](https://github.com/tikv/tikv/pull/6677)
 
 - PD
     - HTTP APIを最適化して構成マネージャーと互換性を持たせる [＃2080](https://github.com/pingcap/pd/pull/2080)
@@ -35,13 +35,13 @@ TiDB Ansible バージョン: 4.0.0-beta.1
 ## 新機能 {#new-features}
 
 - TiDB
-    - `SLOW_QUERY / CLUSTER_SLOW_QUERY`システムテーブル の任意の時点のスローログのクエリをサポート [＃14878](https://github.com/pingcap/tidb/pull/14878) [＃14840](https://github.com/pingcap/tidb/pull/14840)
+    - `SLOW_QUERY / CLUSTER_SLOW_QUERY`システムテーブル の任意の時点のスローログのクエリをサポート [＃14840](https://github.com/pingcap/tidb/pull/14840) [＃14878](https://github.com/pingcap/tidb/pull/14878)
     - SQLパフォーマンス診断をサポート
         - [＃14843](https://github.com/pingcap/tidb/pull/14843) [＃14810](https://github.com/pingcap/tidb/pull/14810) [＃14835](https://github.com/pingcap/tidb/pull/14835) [＃14801](https://github.com/pingcap/tidb/pull/14801) [＃14743](https://github.com/pingcap/tidb/pull/14743)
         - [＃14718](https://github.com/pingcap/tidb/pull/14718) [＃14721](https://github.com/pingcap/tidb/pull/14721) [＃14670](https://github.com/pingcap/tidb/pull/14670) [＃14663](https://github.com/pingcap/tidb/pull/14663) [＃14668](https://github.com/pingcap/tidb/pull/14668)
         - [＃14896](https://github.com/pingcap/tidb/pull/14896)
-    - `Sequence`関数[＃14731](https://github.com/pingcap/tidb/pull/14731) [＃14589](https://github.com/pingcap/tidb/pull/14589) [＃14674](https://github.com/pingcap/tidb/pull/14674) [＃14442](https://github.com/pingcap/tidb/pull/14442) をサポート [＃14830](https://github.com/pingcap/tidb/pull/14830) [＃14303](https://github.com/pingcap/tidb/pull/14303)
-    - PD [＃14750](https://github.com/pingcap/tidb/pull/14750) から読み取った設定項目の動的な変更または更新をサポート [＃14830](https://github.com/pingcap/tidb/pull/14830) [＃14303](https://github.com/pingcap/tidb/pull/14303)
+    - `Sequence`関数をサポート [＃14731](https://github.com/pingcap/tidb/pull/14731) [＃14589](https://github.com/pingcap/tidb/pull/14589) [＃14674](https://github.com/pingcap/tidb/pull/14674) [＃14442](https://github.com/pingcap/tidb/pull/14442) [＃14303](https://github.com/pingcap/tidb/pull/14303) [＃14830](https://github.com/pingcap/tidb/pull/14830)
+    - PDから読み取った設定項目の動的な変更または更新をサポート [＃14750](https://github.com/pingcap/tidb/pull/14750) [＃14303](https://github.com/pingcap/tidb/pull/14303) [＃14830](https://github.com/pingcap/tidb/pull/14830)
     - 負荷分散ポリシーに従って異なるロールからデータを自動的に読み取る機能を追加し、この機能を有効にするために`leader-and-follower`システム変数を追加します[＃14761](https://github.com/pingcap/tidb/pull/14761)
     - `Coercibility`関数追加する [＃14739](https://github.com/pingcap/tidb/pull/14739)
     - パーティションテーブル[＃14735](https://github.com/pingcap/tidb/pull/14735) でのTiFlashレプリカの設定をサポート [＃14644](https://github.com/pingcap/tidb/pull/14644) [＃14713](https://github.com/pingcap/tidb/pull/14713)
