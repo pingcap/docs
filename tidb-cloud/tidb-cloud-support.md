@@ -138,7 +138,7 @@ TiDB Cloudは、デフォルトで無料の基本サポートプランを提供�
 
     4. ページ右下の**Save Card**をクリックします。
 
-    支払いが完了すると、プランは**Standard**または**Enterprise**にアップグレードされます。
+    支払いが完了すると、プランは**Developer**または**Enterprise**にアップグレードされます。
 
     </div>
     <div label="Upgrade to Premium">

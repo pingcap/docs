@@ -74,6 +74,7 @@ TiDBのリリースノートに記載されている互換性の変更点を確�
 - TiDB v8.5.5 [互換性の変更](https://docs.pingcap.com/tidb/stable/release-8.5.5/#compatibility-changes)
 - TiDB v8.5.6 [互換性の変更](https://docs.pingcap.com/tidb/stable/release-8.5.6/#compatibility-changes)
 - TiDB v8.5.7 [互換性の変更](https://docs.pingcap.com/tidb/stable/release-8.5.7/#compatibility-changes)
+- TiDB v8.5.8 [リリースノート](/releases/release-8.5.8.md)
 
 ### ステップ2： TiUPまたはTiUPオフラインミラーをアップグレードする {#step-2-upgrade-tiup-or-tiup-offline-mirror}
 

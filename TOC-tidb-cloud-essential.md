@@ -70,6 +70,7 @@
   - チューニングパフォーマンス
     - [概要](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [パフォーマンスを分析する](/tidb-cloud/tune-performance.md)
+    - [Plan Replayer を使用して SQL パフォーマンスをトラブルシューティングする](/tidb-cloud/plan-replayer.md)
     - SQLチューニング
       - [概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
       - クエリ実行計画の理解

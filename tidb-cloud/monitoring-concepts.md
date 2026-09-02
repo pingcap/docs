@@ -40,7 +40,7 @@ TiDB Cloudコンソールの「アラート」ページでは、 TiDB Cloud Esse
 
 TiDB Cloudでは、イベントはTiDB Cloudリソースの変更を示します。
 
-- TiDB Cloud StarterおよびEssentialインスタンスの場合、 TiDB Cloudはインスタンスレベルで履歴イベントをログに記録します。
+- TiDB Cloud Starter、EssentialおよびPremiumインスタンスの場合、 TiDB Cloudはインスタンスレベルで履歴イベントをログに記録します。
 - TiDB Cloud Dedicatedクラスタの場合、 TiDB Cloudはクラスタレベルで履歴イベントをログに記録します。
 
 **Events**ページでは、イベントの種類、ステータス、メッセージ、トリガー時刻、トリガーユーザーなど、記録されたイベントを確認できます。

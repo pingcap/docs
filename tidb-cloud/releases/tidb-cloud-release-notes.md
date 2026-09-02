@@ -8,6 +8,60 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年9月1日 {#september-1-2026}
+
+**一般的な変更**
+
+- **TiDB Cloud Essential**
+
+    - TiDB Cloud Essential で、SQL パフォーマンスのトラブルシューティングのために、TiDB Cloud Support に Plan Replayer ファイルへのアクセスを一時的に許可できるようになりました。
+
+        アクセス期間を選択し、必要に応じて延長したり、いつでもアクセスを取り消したりできます。認可の有効期限が切れると、アクセスは自動的に取り消されます。
+
+        Plan Replayer ファイルには SQL テキスト、テーブルスキーマ、オプティマイザ統計情報が含まれますが、実際のテーブル行データは含まれません。
+
+        詳細は、[Use Plan Replayer to Troubleshoot SQL Performance](https://docs.pingcap.com/tidbcloud/plan-replayer/?plan=essential) を参照してください。
+
+- **TiDB Cloud Premium**
+
+    - **Events** ページが TiDB Cloud Premium インスタンスで利用可能になりました。
+
+        このページでは、Premium インスタンスへの変更を記録する過去のイベントを、イベントタイプ、ステータス、メッセージ、トリガー時刻、トリガーユーザーなどの情報とともに確認できます。イベントデータは 7 日間保持されます。
+
+        詳細は、[Events](https://docs.pingcap.com/tidbcloud/tidb-cloud-events/?plan=premium) を参照してください。
+
+    - TiDB Cloud Premium で、データベース監査ログのフィルタールールを設定できるようになりました。
+
+        SQL ユーザー、イベントクラス、テーブル、実行ステータスで監査イベントをフィルタリングして、どのデータベースアクティビティをログに記録するかを制御できるため、セキュリティ監査とコンプライアンスに関連するイベントに集中できます。
+
+        詳細は、[Specify audit filter rules](https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing-premium/?plan=premium#specify-audit-filter-rules) を参照してください。
+
+    - TiDB Cloud Premium で、SQL パフォーマンスのトラブルシューティングのために、TiDB Cloud Support に Plan Replayer ファイルへのアクセスを一時的に許可できるようになりました。
+
+        アクセス期間を選択し、必要に応じて延長したり、いつでもアクセスを取り消したりできます。認可の有効期限が切れると、アクセスは自動的に取り消されます。
+
+        Plan Replayer ファイルには SQL テキスト、テーブルスキーマ、オプティマイザ統計情報が含まれますが、実際のテーブル行データは含まれません。
+
+        詳細は、[Use Plan Replayer to Troubleshoot SQL Performance](https://docs.pingcap.com/tidbcloud/plan-replayer/?plan=premium) を参照してください。
+
+**課金の調整**
+
+- **TiDB Cloud Essential**
+
+    - 2026 年 9 月 1 日より、[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) インスタンスのバックアップ使用量とネットワーク送信トラフィックの課金が段階的に適用されます。
+
+        ネットワーク送信トラフィックは、RCU 料金に含まれるのではなく、個別の請求項目として課金されます。
+
+        詳細は、[TiDB Cloud Essential Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/) を参照してください。
+
+## 2026年8月28日 {#august-28-2026}
+
+**一般的な変更**
+
+- **TiDB Cloud Dedicated**
+
+    - 新しい [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) クラスターのデフォルト TiDB バージョンを [v8.5.7](https://docs.pingcap.com/tidb/stable/release-8.5.7/) から [v8.5.8](https://docs.pingcap.com/tidb/stable/release-8.5.8/) にアップグレードしました。
+
 ## 2026年8月25日 {#august-25-2026}
 
 **一般的な変更**

@@ -113,6 +113,8 @@ v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以�
 | コンフィグレーションファイルまたはコンポーネント | コンフィグレーションパラメータ | 変更の種類 | 説明 |
 | -------- | -------- | -------- | -------- |
 | TiDB | [`enable-telemetry`](https://docs.pingcap.com/tidb/v8.5/tidb-configuration-file#enable-telemetry-new-in-v402) | 非推奨 | v8.5.7 以降、TiDB はこの設定項目とテレメトリ機能を非推奨とします。この項目は互換性のためにのみ保持されており、今後の使用は推奨されません。|
+| TiKV | [`raftdb.compaction-readahead-size`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#compaction-readahead-size-1) | 変更 | デフォルト値を `0`（無効）から `2MiB` に変更し、compaction 中の読み取りパフォーマンスを向上させます。 |
+| TiKV | [`rocksdb.compaction-readahead-size`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#compaction-readahead-size) | 変更 | デフォルト値を `0`（無効）から `2MiB` に変更し、compaction 中の読み取りパフォーマンスを向上させます。 |
 | TiKV | [`backup.gcp-v2-enable`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#backupgcp-v2-enable-new-in-v857) | 新しく追加された | TiKV が GCS のフルバックアップおよびリストアに `gcp_v2` 外部ストレージバックエンドを使用するかどうかを制御します。デフォルト値は `true` です。有効時は TiKV は `gcp_v2` を使用し、無効時は従来の GCS 実装を使用します。|
 | TiKV | [`log-backup.gcp-v2-enable`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#log-backupgcp-v2-enable-new-in-v857) | 新しく追加された | TiKV が GCS のログバックアップに `gcp_v2` 外部ストレージバックエンドを使用するかどうかを制御します。デフォルト値は `true` です。有効時は TiKV は `gcp_v2` を使用し、無効時は従来の GCS 実装を使用します。|
 | TiKV | [`resource-control.admission-max-delayed-count`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#admission-max-delayed-count-new-in-v857) | 新しく追加された | TiKV が admission control の遅延キュー内に保持できる同時リクエスト数（読み取りと書き込みの合計）の最大値を指定します。デフォルト値は `10000` です。無制限の同時遅延を許可するには、この値を `0` に設定します。|
