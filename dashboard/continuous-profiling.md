@@ -38,7 +38,7 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 継続的プロファイリング ページには、次のいずれかの方法でアクセスできます。
 
-- TiDB Dashboardにログインした後、左側のナビゲーション メニューで**[高度なデバッグ]** &gt; **[インスタンスのプロファイリング]** &gt; **[継続的なプロファイリング]**をクリックします。
+- TiDB Dashboardにログインした後、左側のナビゲーション メニューで**Advanced Debugging** > **Profiling Instances** > **Continuous Profiling**をクリックします。
 
     ![Access page](/media/dashboard/dashboard-conprof-access.png)
 
@@ -54,7 +54,7 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 この機能を有効にするには:
 
-1. [継続的なプロファイリングページ](#access-the-page)ご覧ください。
+1. [継続的なプロファイリングページ](#access-the-page)をご覧ください。
 2. **Open Settings**をクリックします。右側の**Settings**領域で、 **Enable Feature**をオンにし、必要に応じて**Retention Duration**のデフォルト値を変更します。
 3. **Save**をクリックします。
 
@@ -72,7 +72,7 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 ## パフォーマンスデータをダウンロード {#download-performance-data}
 
-プロファイリング結果ページで、右上隅の**[プロファイリング結果のダウンロード]**をクリックすると、すべてのプロファイリング結果をダウンロードできます。
+プロファイリング結果ページで、右上隅の**Download Profiling Result**をクリックすると、すべてのプロファイリング結果をダウンロードできます。
 
 ![Download profiling result](/media/dashboard/dashboard-conprof-download.png)
 
@@ -82,10 +82,10 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 ## 継続的なプロファイリングを無効にする {#disable-continuous-profiling}
 
-1. [継続的なプロファイリングページ](#access-the-page)ご覧ください。
+1. [継続的なプロファイリングページ](#access-the-page)をご覧ください。
 2. 右上隅の歯車アイコンをクリックして設定ページを開きます。 **Enable Feature**をオフにします。
 3. **Save**をクリックします。
-4. ポップアップされたダイアログボックスで、 **[無効にする]**をクリックします。
+4. ポップアップされたダイアログボックスで、 **Disable**をクリックします。
 
 ![Disable feature](/media/dashboard/dashboard-conprof-stop.png)
 

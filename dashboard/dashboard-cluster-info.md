@@ -11,7 +11,7 @@ summary: TiDB Dashboardのクラスタ情報ページでは、クラスタ全体
 
 クラスター情報ページにアクセスするには、次の2つの方法のいずれかを使用できます。
 
-- TiDB Dashboardにログインしたら、左側のナビゲーション メニューで**[クラスタ情報]**をクリックします。
+- TiDB Dashboardにログインしたら、左側のナビゲーション メニューで**Cluster Info**をクリックします。
 
 - ブラウザで[http://127.0.0.1:2379/dashboard/#/cluster_info/instance](http://127.0.0.1:2379/dashboard/#/cluster_info/instance)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
 
@@ -51,7 +51,7 @@ summary: TiDB Dashboardのクラスタ情報ページでは、クラスタ全体
 
 ## ホストリスト {#host-list}
 
-ホストのリストを表示するには、 **[ホスト]**をクリックします。
+ホストのリストを表示するには、 **Hosts**をクリックします。
 
 ![Host list](/media/dashboard/dashboard-cluster-info-hosts-v650.png)
 
@@ -71,7 +71,7 @@ summary: TiDB Dashboardのクラスタ情報ページでは、クラスタ全体
 
 ## ディスクリスト {#disk-list}
 
-ディスクのリストを表示するには、 **[ディスク]**をクリックします。
+ディスクのリストを表示するには、 **Disks**をクリックします。
 
 ![Disk list](/media/dashboard/dashboard-cluster-info-disks-v650.png)
 

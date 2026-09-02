@@ -13,7 +13,7 @@ SQL文ページには、クラスター内のすべてのSQL文の実行状況�
 
 SQL ステートメントの概要ページにアクセスするには、次の2つの方法のいずれかを使用できます。
 
-- TiDB Dashboardにログインしたら、左側のナビゲーション メニューで**[SQL ステートメント]**をクリックします。
+- TiDB Dashboardにログインしたら、左側のナビゲーション メニューで**SQL Statements**をクリックします。
 
 - ブラウザで[http://127.0.0.1:2379/dashboard/#/statement](http://127.0.0.1:2379/dashboard/#/statement)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
 
@@ -43,11 +43,11 @@ SQL文の概要ページの上部で、表示するSQL実行の時間範囲を�
 
 ### 設定を変更する {#change-settings}
 
-リスト ページで、右上にある**[設定]**ボタンをクリックして、SQL ステートメント機能の設定を変更します。
+リスト ページで、右上にある**Settings**ボタンをクリックして、SQL ステートメント機能の設定を変更します。
 
 ![Settings entry](/media/dashboard/dashboard-statement-setting-entry.png)
 
-**[設定]**ボタンをクリックすると、次の設定ダイアログボックスが表示されます。
+**Settings**ボタンをクリックすると、次の設定ダイアログボックスが表示されます。
 
 ![Settings](/media/dashboard/dashboard-statement-settings.png)
 
