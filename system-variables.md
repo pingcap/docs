@@ -2785,8 +2785,22 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether to enable the feature of upgrading shared locks to exclusive locks. TiDB does not support `SELECT LOCK IN SHARE MODE` by default. When the variable value is `ON`, TiDB tries to upgrade the `SELECT LOCK IN SHARE MODE` statement to `SELECT FOR UPDATE` and add a pessimistic lock. The default value of this variable is `OFF`, which means that the feature of upgrading shared locks to exclusive locks is disabled.
+- This variable controls whether `SELECT ... LOCK IN SHARE MODE` acquires an exclusive pessimistic lock. When the value is `ON`, TiDB executes `SELECT ... LOCK IN SHARE MODE` as `SELECT ... FOR UPDATE`. This behavior acquires an exclusive lock directly rather than upgrading an existing shared lock to an exclusive lock.
 - Enabling this variable takes effect on the `SELECT LOCK IN SHARE MODE` statement, regardless of whether [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) is enabled or not.
+
+### tidb_enable_shared_lock_upgrade
+
+> **Warning:**
+>
+> Shared lock upgrade is an experimental feature that can only be enabled on TiDB X. It is not recommended that you enable this feature in production environments.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether a pessimistic transaction can upgrade a shared lock that it already holds to an exclusive lock.
+- Shared lock upgrade is not supported in aggressive locking mode or fair locking mode.
 
 ### tidb_enable_slow_log
 
@@ -3180,7 +3194,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Warning:**
 >
-> On TiDB X, using shared locks for foreign key checks is an experimental feature. It is not recommended that you use this feature in production environments. This feature might be changed or removed without prior notice. Before setting this variable to `ON`, you must set [`experimental.allow-enable-foreign-key-check-in-shared-lock`](/tidb-configuration-file.md#allow-enable-foreign-key-check-in-shared-lock) to `true`. When this configuration item is `false`, TiDB rejects attempts to set this variable to `ON`, but an `ON` value that has already been persisted or restored continues to take effect.
+> On TiDB X, using shared locks for foreign key checks is an experimental feature. It is not recommended that you use this feature in production environments. Before setting this variable to `ON`, you must set [`experimental.allow-enable-foreign-key-check-in-shared-lock`](/tidb-configuration-file.md#allow-enable-foreign-key-check-in-shared-lock) to `true`. When this configuration item is `false`, TiDB rejects attempts to set this variable to `ON`, but an `ON` value that has already been persisted or restored continues to take effect.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
