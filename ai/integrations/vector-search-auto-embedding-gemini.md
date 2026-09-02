@@ -247,7 +247,7 @@ embedding: list[float] = EmbeddingFunction(
 
 ## オプション {#options}
 
-すべての[Geminiオプション](https://ai.google.dev/gemini-api/docs/embeddings)`EMBED_TEXT()`関数の`additional_json_options`パラメータを介してサポートされます。
+すべての[Geminiオプション](https://ai.google.dev/gemini-api/docs/embeddings)は`EMBED_TEXT()`関数の`additional_json_options`パラメータを介してサポートされます。
 
 **例：タスクの種類を指定して品質を向上させる**
 
