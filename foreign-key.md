@@ -185,7 +185,7 @@ You can enable the system variable [`tidb_foreign_key_check_in_shared_lock`](/sy
 
 If a pessimistic transaction needs to update or delete a parent table row after a foreign key check has acquired a shared lock on that row, enable [`tidb_enable_shared_lock_upgrade`](/system-variables.md#tidb_enable_shared_lock_upgrade) to let TiDB upgrade the shared lock to an exclusive lock.
 
-Transactions that hold shared locks do not support one-phase commit (1PC) or Async Commit.
+Shared locks are not supported in aggressive locking mode or fair locking mode. Transactions that hold shared locks do not support one-phase commit (1PC) or Async Commit.
 
 > **Warning:**
 >

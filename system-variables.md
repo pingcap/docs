@@ -2800,7 +2800,6 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether a pessimistic transaction can upgrade a shared lock that it already holds to an exclusive lock.
-- Shared lock upgrade is not supported in aggressive locking mode or fair locking mode.
 
 ### tidb_enable_slow_log
 
