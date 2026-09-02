@@ -46,7 +46,7 @@ Starterプランは、 TiDB Cloudを初めて利用する方に最適です。�
 
 - **ストレージ**：初期容量として、行ベースのストレージが5 GiB、列指向のストレージが5 GiB提供されます。
 
-- **Request Units**: データベース操作の 5,000 万[要求単位（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)が含まれます。
+- **Request Units**: データベース操作の 5,000 万[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)が含まれます。
 
 ## TiDB Cloud Essential {#tidb-cloud-essential}
 
