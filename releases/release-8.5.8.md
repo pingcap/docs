@@ -89,7 +89,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     + DM
 
-        - Fix known security vulnerabilities in DM by upgrading the OpenTelemetry and `kin-openapi` dependencies [#12637](https://github.com/pingcap/tiflow/issues/12637) @[GMHDBJD](https://github.com/GMHDBJD) <!-- component: dm --> <!-- pr: https://github.com/pingcap/tiflow/pull/12784 -->
+        - Fix potential vulnerabilities in DM by upgrading the OpenTelemetry and `kin-openapi` dependencies [#12637](https://github.com/pingcap/tiflow/issues/12637) @[GMHDBJD](https://github.com/GMHDBJD) <!-- component: dm --> <!-- pr: https://github.com/pingcap/tiflow/pull/12784 -->
 
     + TiCDC
 
