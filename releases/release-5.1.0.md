@@ -59,7 +59,7 @@ TiDB バージョン: 5.1.0
 
 ### その他 {#others}
 
-- アップグレード前に、TiDB構成の[`feedback-probability`](https://docs-archive.pingcap.com/tidb/v5.1/tidb-configuration-file#feedback-probability)の値を確認してください。値が0でない場合、アップグレード後に「panic in the recoverable goroutine」というエラーが発生しますが、このエラーはアップグレード自体には影響しません。
+- アップグレード前に、TiDB 設定の[`feedback-probability`](https://docs-archive.pingcap.com/tidb/v5.1/tidb-configuration-file#feedback-probability)の値を確認してください。値が0でない場合、アップグレード後に「panic in the recoverable goroutine」というエラーが発生しますが、このエラーはアップグレード自体には影響しません。
 - TiDBのパフォーマンスを向上させるため、TiDBのGoコンパイラバージョンをgo1.13.7からgo1.16.4にアップグレードしてください。TiDB開発者の方は、スムーズなコンパイルを保証するために、Goコンパイラバージョンをアップグレードすることをお勧めします。
 - TiDBローリングアップグレード中は、TiDB Binlogを使用するクラスタでクラスター化インデックスを持つテーブルを作成しないようにしてください。
 - TiDB のローリングアップグレード中は`alter table ... modify column`や`alter table ... change column`のようなステートメントを実行しないでください。
