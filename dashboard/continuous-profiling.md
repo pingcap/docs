@@ -54,7 +54,7 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 この機能を有効にするには:
 
-1. [継続的なプロファイリングページ](#access-the-page)ご覧ください。
+1. [継続的なプロファイリングページ](#access-the-page)をご覧ください。
 2. **Open Settings**をクリックします。右側の**Settings**領域で、 **Enable Feature**をオンにし、必要に応じて**Retention Duration**のデフォルト値を変更します。
 3. **Save**をクリックします。
 
@@ -82,7 +82,7 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 ## 継続的なプロファイリングを無効にする {#disable-continuous-profiling}
 
-1. [継続的なプロファイリングページ](#access-the-page)ご覧ください。
+1. [継続的なプロファイリングページ](#access-the-page)をご覧ください。
 2. 右上隅の歯車アイコンをクリックして設定ページを開きます。 **Enable Feature**をオフにします。
 3. **Save**をクリックします。
 4. ポップアップされたダイアログボックスで、 **Disable**をクリックします。
