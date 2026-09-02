@@ -781,7 +781,7 @@ The key fields of the preceding JSON data are explained as follows:
 
 ### Data type mapping
 
-The data format mapping in the TiCDC Debezium message follows the [Debezium data type mapping rules](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-data-types), which is consistent with the native message of the Debezium Connector for MySQL. However, for some data types, the following differences exist between TiCDC Debezium and Debezium Connector messages:
+The TiCDC Debezium message uses the [Debezium data type mapping rules](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-data-types) as its baseline and is generally consistent with the native message of the Debezium Connector for MySQL. However, differences exist for some data types, as described below:
 
 - Currently, TiDB does not support spatial data types, including GEOMETRY, LINESTRING, POLYGON, MULTIPOINT, MULTILINESTRING, MULTIPOLYGON, and GEOMETRYCOLLECTION.
 
