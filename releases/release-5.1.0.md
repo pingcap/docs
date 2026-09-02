@@ -284,7 +284,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
     - 悲観的ロックが `ErrKeyExists` エラーを受け取った場合、不要な悲観的ロールバックを回避する [#23799](https://github.com/pingcap/tidb/issues/23799)
     - sql_modeに`ANSI_QUOTES`が含まれている場合に数値リテラルが認識されない問題を修正しました [#24429](https://github.com/pingcap/tidb/issues/24429)
     - `INSERT INTO table PARTITION (<partitions>) ... ON DUPLICATE KEY UPDATE`のようなステートメントがリストにないパーティションからデータを読み取ることを禁止する [#24746](https://github.com/pingcap/tidb/issues/24746)
-    - SQL文に`UNION`と`GROUP BY`両方が含まれている場合に発生する可能性のある`index out of range`エラーを修正し [#24281](https://github.com/pingcap/tidb/issues/24281)
+    - SQL文に`UNION`と`GROUP BY`両方が含まれている場合に発生する可能性のある`index out of range`エラーを修正しました [#24281](https://github.com/pingcap/tidb/issues/24281)
     - `CONCAT`関数が照合順序を正しく処理しない問題を修正しました [#24296](https://github.com/pingcap/tidb/issues/24296)
     - `collation_server`グローバル変数が新しいセッションで有効にならない問題を修正しました [#24156](https://github.com/pingcap/tidb/pull/24156)
 
