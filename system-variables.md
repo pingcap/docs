@@ -6130,13 +6130,13 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **Warning:**
 >
-> 明細書の要約を永続化する機能は実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> ステートメントサマリーを永続化する機能は実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
 - 対象範囲：グローバル
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は読み取り専用です。 [ステートメントの要約持続性](/statement-summary-tables.md#persist-statements-summary)を有効にするかどうかを制御します。
+- この変数は読み取り専用です。 [ステートメントサマリーの永続化](/statement-summary-tables.md#persist-statements-summary)を有効にするかどうかを制御します。
 
 <CustomContent platform="tidb">
 
@@ -6156,13 +6156,13 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **Warning:**
 >
-> 明細書の要約を永続化する機能は実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> ステートメントサマリーを永続化する機能は実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
 - 対象範囲：グローバル
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: String
 - デフォルト値: `"tidb-statements.log"`
-- この変数は読み取り専用です。 [ステートメントの要約持続性](/statement-summary-tables.md#persist-statements-summary)が有効な場合に永続データが書き込まれるファイルを指定します。
+- この変数は読み取り専用です。 [ステートメントサマリーの永続化](/statement-summary-tables.md#persist-statements-summary)が有効な場合に永続データが書き込まれるファイルを指定します。
 
 <CustomContent platform="tidb">
 
@@ -6182,13 +6182,13 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **Warning:**
 >
-> 明細書の要約を永続化する機能は実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> ステートメントサマリーを永続化する機能は実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
 - 対象範囲：グローバル
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: 整数
 - デフォルト値: `0`
-- この変数は読み取り専用です。 [ステートメントの要約持続性](/statement-summary-tables.md#persist-statements-summary)が有効な場合に保存できるデータファイルの最大数を指定します。
+- この変数は読み取り専用です。 [ステートメントサマリーの永続化](/statement-summary-tables.md#persist-statements-summary)が有効な場合に保存できるデータファイルの最大数を指定します。
 
 <CustomContent platform="tidb">
 
@@ -6208,14 +6208,14 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **Warning:**
 >
-> 明細書の要約を永続化する機能は実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> ステートメントサマリーを永続化する機能は実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
 - 対象範囲：グローバル
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: 整数
 - デフォルト値: `3`
 - 単位：日
-- この変数は読み取り専用です。 [ステートメントの要約持続性](/statement-summary-tables.md#persist-statements-summary)が有効な場合に、永続的なデータファイルを保持する最大日数を指定します。
+- この変数は読み取り専用です。 [ステートメントサマリーの永続化](/statement-summary-tables.md#persist-statements-summary)が有効な場合に、永続的なデータファイルを保持する最大日数を指定します。
 
 <CustomContent platform="tidb">
 
@@ -6235,14 +6235,14 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **Warning:**
 >
-> 明細書の要約を永続化する機能は実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> ステートメントサマリーを永続化する機能は実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
 - 対象範囲：グローバル
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: 整数
 - デフォルト値: `64`
 - 単位: MiB
-- この変数は読み取り専用です。 [ステートメントの要約持続性](/statement-summary-tables.md#persist-statements-summary)が有効な場合の永続データファイルの最大サイズを指定します。
+- この変数は読み取り専用です。 [ステートメントサマリーの永続化](/statement-summary-tables.md#persist-statements-summary)が有効な場合の永続データファイルの最大サイズを指定します。
 
 <CustomContent platform="tidb">
 

@@ -124,9 +124,9 @@ select * from employee where id in (...) and salary between ? and ?;
 
 ## パラメータ設定 {#parameter-configuration}
 
-明細書の要約を制御するために、以下のシステム変数が使用されます。
+ステートメントサマリーを制御するために、以下のシステム変数が使用されます。
 
-- `tidb_enable_stmt_summary` : 明細サマリー機能を有効にするかどうかを決定します。 `1`は`enable`を表し、 `0`は`disable`を意味します。この機能はデフォルトで有効になっています。この機能が無効になっている場合、システムテーブルの統計情報はクリアされます。統計情報は、次回この機能が有効になったときに再計算されます。テストの結果、この機能を有効にしてもパフォーマンスへの影響はほとんどないことがわかっています。
+- `tidb_enable_stmt_summary` : ステートメントサマリー機能を有効にするかどうかを決定します。 `1`は`enable`を表し、 `0`は`disable`を意味します。この機能はデフォルトで有効になっています。この機能が無効になっている場合、システムテーブルの統計情報はクリアされます。統計情報は、次回この機能が有効になったときに再計算されます。テストの結果、この機能を有効にしてもパフォーマンスへの影響はほとんどないことがわかっています。
 
 - `tidb_stmt_summary_refresh_interval` : `statements_summary`テーブルが更新される間隔。時間の単位は秒 (s) です。デフォルト値は`1800`です。
 
@@ -161,7 +161,7 @@ set global tidb_stmt_summary_history_size = 24;
 > - SQL タイプが毎分出現する場合、 `statements_summary_history`には直近 12時間分のデータが格納されます。SQL タイプが毎日 00:00 から 00:30 の間にのみ出現する場合、 `statements_summary_history`には直近 24 期間分のデータが格納されます。各期間は 1日です。したがって、 `statements_summary_history`にはこの SQL タイプに関する直近 24日分のデータが格納されます。
 > - `tidb_stmt_summary_history_size` 、 `tidb_stmt_summary_max_stmt_count` 、および`tidb_stmt_summary_max_sql_length`構成項目はメモリ使用量に影響します。これらの構成は、ニーズ、SQLサイズ、SQL数、およびマシン構成に基づいて調整することをお勧めします。大きすぎる値を設定することはお勧めしません。メモリ使用量は`tidb_stmt_summary_history_size` *`tidb_stmt_summary_max_stmt_count`* `tidb_stmt_summary_max_sql_length` * `3` 。
 
-### 明細書の要約に適切なサイズを設定してください。 {#set-a-proper-size-for-statement-summary}
+### ステートメントサマリーに適切なサイズを設定してください。 {#set-a-proper-size-for-statement-summary}
 
 システムが一定時間稼働した後（システム負荷に応じて）、 `statement_summary`テーブルを確認して、SQL の削除が発生したかどうかを確認できます。例:
 
@@ -211,11 +211,11 @@ select * from information_schema.statements_summary_evicted;
 
 <CustomContent platform="tidb">
 
-この問題を解決するため、TiDB v6.6.0では、デフォルトでは無効になっている[ステートメント要約の持続性](#persist-statements-summary)機能を試験的に導入しました。この機能を有効にすると、履歴データはメモリに保存されず、直接ディスクに書き込まれます。これにより、TiDBサーバーが再起動しても履歴データは保持されます。
+この問題を解決するため、TiDB v6.6.0では、デフォルトでは無効になっている[ステートメントサマリーの永続化](#persist-statements-summary)機能を試験的に導入しました。この機能を有効にすると、履歴データはメモリに保存されず、直接ディスクに書き込まれます。これにより、TiDBサーバーが再起動しても履歴データは保持されます。
 
 </CustomContent>
 
-## 持続ステートメントの概要 {#persist-statements-summary}
+## ステートメントサマリーの永続化 {#persist-statements-summary}
 
 <CustomContent platform="tidb-cloud">
 
@@ -225,7 +225,7 @@ select * from information_schema.statements_summary_evicted;
 
 > **Warning:**
 >
-> 明細書の要約を永続化する機能は実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> ステートメントサマリーを永続化する機能は実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
 <CustomContent platform="tidb">
 
