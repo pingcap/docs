@@ -15,7 +15,7 @@ TiDB がサポートするオペレーティングシステムについては、
 
 ### 開発、テスト、または本番環境における TiDB クラスターの推奨ハードウェア構成は何ですか? {#what-is-the-recommended-hardware-configuration-for-a-tidb-cluster-in-the-development-test-or-production-environment}
 
-TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェア・サーバー・プラットフォーム、またはARMアーキテクチャのハードウェア・サーバー・プラットフォームに導入および実行できます。開発環境、テスト環境、および本番環境におけるサーバー・ハードウェア構成の要件と推奨事項については、 [ソフトウェアとハ​​ードウェアの推奨事項 - サーバー要件](/hardware-and-software-requirements.md#server-requirements)を参照してください。
+TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェアサーバープラットフォーム、またはARMアーキテクチャのハードウェアサーバープラットフォームに導入および実行できます。開発環境、テスト環境、および本番環境におけるサーバーハードウェア構成の要件と推奨事項については、 [ソフトウェアとハ​​ードウェアの推奨事項 - サーバー要件](/hardware-and-software-requirements.md#server-requirements)を参照してください。
 
 ### 10 ギガビットのネットワークカード 2枚の目的は何ですか? {#whats-the-purposes-of-2-network-cards-of-10-gigabit}
 

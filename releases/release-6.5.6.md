@@ -21,7 +21,7 @@ TiDB バージョン: 6.5.6
     - [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md)と[`flush-worker-num`](/ticdc/ticdc-changefeed-config.md) : 異なるマシンの仕様に基づいて、再実行モジュールに異なる同時実行パラメータを設定できます[＃10048](https://github.com/pingcap/tiflow/issues/10048) @[CharlesCheung96](https://github.com/CharlesCheung96)
     - [`compression`](/ticdc/ticdc-changefeed-config.md) : REDOログファイルの圧縮動作を設定できます[＃10176](https://github.com/pingcap/tiflow/issues/10176) @[sdojjy](https://github.com/sdojjy)
     - [`changefeed-error-stuck-duration`](/ticdc/ticdc-changefeed-config.md) : 内部エラーまたは例外が発生したときに、変更フィードが自動的に再試行される期間を設定できます[＃9875](https://github.com/pingcap/tiflow/issues/9875) @[asddongmen](https://github.com/asddongmen)
-    - [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md) : オブジェクトストレージにデータを複製するときに履歴データの自動クリーンアップを設定できます[チャールズ・チュン96](https://github.com/CharlesCheung96) [＃10109](https://github.com/pingcap/tiflow/issues/10109)
+    - [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md) : オブジェクトストレージにデータを複製するときに履歴データの自動クリーンアップを設定できます[CharlesCheung96](https://github.com/CharlesCheung96) [＃10109](https://github.com/pingcap/tiflow/issues/10109)
 
 ## 改善点 {#improvements}
 
@@ -33,7 +33,7 @@ TiDB バージョン: 6.5.6
 
     - OOM を防ぐためにリゾルバのメモリ使用量を最適化します [＃15458](https://github.com/tikv/tikv/issues/15458) @[overvenus](https://github.com/overvenus)
     - ルータオブジェクトのLRUCacheを排除してメモリ使用量を削減し、OOM を防止します。 [＃15430](https://github.com/tikv/tikv/issues/15430) @[Connor1996](https://github.com/Connor1996)
-    - `apply_router`と`raft_router`指標に`alive`と`leak`監視ディメンションを追加します[トニー・シュッキ](https://github.com/tonyxuqqi) [＃15357](https://github.com/tikv/tikv/issues/15357)
+    - `apply_router`と`raft_router`指標に`alive`と`leak`監視ディメンションを追加します[tonyxuqqi](https://github.com/tonyxuqqi) [＃15357](https://github.com/tikv/tikv/issues/15357)
 
 - PD
 

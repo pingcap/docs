@@ -483,7 +483,7 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 
 `SUPER`または`RESOURCE_GROUP_ADMIN`の権限が必要です。
 
-### アルター・リソース・グループ {#alter-resource-group}
+### アルターリソースグループ {#alter-resource-group}
 
 `SUPER`または`RESOURCE_GROUP_ADMIN`の権限が必要です。
 

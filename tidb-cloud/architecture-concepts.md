@@ -7,13 +7,13 @@ summary: TiDB Cloudのアーキテクチャ概念について学びましょう�
 
 <CustomContent language="en,zh">
 
-TiDB Cloudは、フルマネージド型のデータベース・アズ・ア・サービス（DBaaS）であり、オープンソースのHTAP（ハイブリッド・トランザクション・アンド・アナリティカル・プロセッシング）データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)の柔軟性とパワーを、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure、およびAlibaba Cloudに提供します。
+TiDB Cloudは、フルマネージド型のデータベースアズアサービス（DBaaS）であり、オープンソースのHTAP（Hybrid Transactional and Analytical Processing）データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)の柔軟性とパワーを、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure、およびAlibaba Cloudに提供します。
 
 </CustomContent>
 
 <CustomContent language="ja">
 
-TiDB Cloudは、フルマネージド型のデータベース・アズ・ア・サービス（DBaaS）であり、オープンソースのHTAP（ハイブリッド・トランザクション・アンド・アナリティカル・プロセッシング）データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)の柔軟性とパワーを、Amazon Web Services（AWS）、Google Cloud、およびMicrosoft Azureに提供します。
+TiDB Cloudは、フルマネージド型のデータベースアズアサービス（DBaaS）であり、オープンソースのHTAP（Hybrid Transactional and Analytical Processing）データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)の柔軟性とパワーを、Amazon Web Services（AWS）、Google Cloud、およびMicrosoft Azureに提供します。
 
 </CustomContent>
 

@@ -152,7 +152,7 @@ JDBC API の使用方法については、 [JDBC公式チュートリアル](htt
 
 #### Prepare APIを使用する {#use-prepare-api}
 
-OLTP（オンライン・トランザクション処理）シナリオでは、プログラムからデータベースに送信されるSQL文は、パラメータ変更を除けば、複数のタイプが存在します。そのため、通常の[テキストファイルからの実行](https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html#executing_queries)ではなく[プリペアドステートメント](https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)を使用し、プリペアドステートメントを再利用して直接実行することをお勧めします。これにより、TiDBでSQL実行計画を繰り返し解析および生成するオーバーヘッドを回避できます。
+OLTP（オンライントランザクション処理）シナリオでは、プログラムからデータベースに送信されるSQL文は、パラメータ変更を除けば、複数のタイプが存在します。そのため、通常の[テキストファイルからの実行](https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html#executing_queries)ではなく[プリペアドステートメント](https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)を使用し、プリペアドステートメントを再利用して直接実行することをお勧めします。これにより、TiDBでSQL実行計画を繰り返し解析および生成するオーバーヘッドを回避できます。
 
 現在、ほとんどの上位フレームワークはSQL実行のためにPrepare APIを呼び出しています。開発でJDBC APIを直接使用する場合は、Prepare APIを選択するように注意してください。
 

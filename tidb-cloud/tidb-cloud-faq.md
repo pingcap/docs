@@ -152,7 +152,7 @@ TiDB CloudはTLS 1.2またはTLS 1.3をサポートしています。
 
 ### TiDB Cloudを自分のVPC内で実行できますか？ {#can-i-run-tidb-cloud-in-my-vpc}
 
-いいえ。TiDB Cloudはデータベース・アズ・ア・サービス（DBaaS）であり、 TiDB Cloud VPC内でのみ動作します。クラウドコンピューティングのマネージドサービスとして、 TiDB Cloudは物理ハードウェアのセットアップやソフトウェアのインストールを必要とせずにデータベースへのアクセスを提供します。
+いいえ。TiDB Cloudはデータベースアズアサービス（DBaaS）であり、 TiDB Cloud VPC内でのみ動作します。クラウドコンピューティングのマネージドサービスとして、 TiDB Cloudは物理ハードウェアのセットアップやソフトウェアのインストールを必要とせずにデータベースへのアクセスを提供します。
 
 ### 私のTiDB Cloudのリソースは安全ですか？ {#is-my-tidb-cloud-resource-secure}
 

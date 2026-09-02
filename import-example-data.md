@@ -5,7 +5,7 @@ summary: Bikeshare サンプルデータベースをインストールします�
 
 # サンプルデータベースのインポート {#import-example-database}
 
-TiDB マニュアルで使用されている例では、 [キャピタル・バイクシェア・データライセンス契約](https://www.capitalbikeshare.com/data-license-agreement)でリリースされた Capital Bikeshare の[システムデータ](https://www.capitalbikeshare.com/system-data)が使用されています。
+TiDB マニュアルで使用されている例では、 [Capital Bikeshare Data License Agreement](https://www.capitalbikeshare.com/data-license-agreement)でリリースされた Capital Bikeshare の[システムデータ](https://www.capitalbikeshare.com/system-data)が使用されています。
 
 ## すべてのデータファイルをダウンロードする {#download-all-data-files}
 
