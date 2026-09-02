@@ -1,7 +1,7 @@
 {
   "tidb": "TiDB",
-  "tidb-version": "8.5.7",
-  "tidb-release-date": "2026-07-09",
+  "tidb-version": "8.5.8",
+  "tidb-release-date": "2026-08-27",
   "tidb-operator-version": "v1.6.4",
   "self-managed": "TiDB Self-Managed",
   "starter": "TiDB Cloud Starter",
@@ -9,6 +9,7 @@
   "dedicated": "TiDB Cloud Dedicated",
   "premium": "TiDB Cloud Premium",
   "console-url": "tidbcloud.com",
+  "company": "PingCAP",
   "lake": "TiDB Cloud Lake",
   "byoc": "TiDB Cloud BYOC"
 }
