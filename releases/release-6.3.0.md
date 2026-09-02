@@ -363,7 +363,7 @@ TiDBバージョン: 6.3.0-DMR
     - UPDATE 文が場合によっては誤って投影を削除し、 `Can't find column` エラーが発生する問題を修正しました。 [#37568](https://github.com/pingcap/tidb/issues/37568) @[AilinKid](https://github.com/AilinKid)
     - 結合したテーブルの再配置操作が誤って外部結合条件をプッシュダウンする問題を修正 [#37238](https://github.com/pingcap/tidb/issues/37238) @[AilinKid](https://github.com/AilinKid)
     - 一部のパターンで `IN` と `NOT IN` サブクエリが `Can't find column` エラーを報告する問題を修正しました。 [#37032](https://github.com/pingcap/tidb/issues/37032) @[AilinKid](https://github.com/AilinKid)
-    - `Can't find column`ステートメントに共通テーブル式 (CTE) が含まれている場合に`UPDATE`が報告される問題を修正 [#35758](https://github.com/pingcap/tidb/issues/35758) @[AilinKid](https://github.com/AilinKid)
+    - `UPDATE`ステートメントに共通テーブル式 (CTE) が含まれている場合に`Can't find column`が報告される問題を修正 [#35758](https://github.com/pingcap/tidb/issues/35758) @[AilinKid](https://github.com/AilinKid)
     - 間違った`PromQL`を修正 [#35856](https://github.com/pingcap/tidb/issues/35856) @[Defined2014](https://github.com/Defined2014)
 
 - TiKV

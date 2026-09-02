@@ -203,7 +203,7 @@ Apple M1チップを搭載したMacコンピュータで`tiup playground`コマ�
     - MPP外部結合で、テーブルの行数に基づいて構築テーブルを選択できるようにする [#25142](https://github.com/pingcap/tidb/pull/25142)
     - リージョンに基づいて、異なるTiFlashノード間でMPPクエリワークロードのバランスを取ることをサポートする [#24724](https://github.com/pingcap/tidb/pull/24724)
     - MPPクエリ実行後にキャッシュ内の古いリージョンを無効化する機能をサポートする [#24432](https://github.com/pingcap/tidb/pull/24432)
-    - フォーマット指定子`str_to_date`に対する組み込み関数`%b/%M/%r/%T` の MySQL 互換性を向上させる [#25767](https://github.com/pingcap/tidb/pull/25767)
+    - フォーマット指定子`%b/%M/%r/%T`に対する組み込み関数`str_to_date` の MySQL 互換性を向上させる [#25767](https://github.com/pingcap/tidb/pull/25767)
     - 同じクエリに対して異なるバインディングを再作成した後に、複数の TiDB で一貫性のないバインディング キャッシュが作成される可能性がある問題を修正します [#26015](https://github.com/pingcap/tidb/pull/26015)
     - アップグレード後に既存のバインディングをキャッシュにロードできない問題を修正しました [#23295](https://github.com/pingcap/tidb/pull/23295)
     - `SHOW BINDINGS`の結果を ( `original_sql` 、 `update_time` ) で並べ替えることをサポートする [#26139](https://github.com/pingcap/tidb/pull/26139)
@@ -266,7 +266,7 @@ Apple M1チップを搭載したMacコンピュータで`tiup playground`コマ�
     - ODBC スタイルの定数 (例: `{d '2020-01-01'}` ) を式として使用できない問題を修正しました [#25531](https://github.com/pingcap/tidb/issues/25531)
     - `SELECT DISTINCT` `Batch Get`に変換されることで誤った結果が生じる問題を修正します [#25320](https://github.com/pingcap/tidb/issues/25320)
     - TiFlashからTiKVへのバックオフクエリがトリガーできない問題を修正[#23665](https://github.com/pingcap/tidb/issues/23665) [#24421](https://github.com/pingcap/tidb/issues/24421)
-    - `index-out-of-range`をチェックした際に発生する`only_full_group_by`エラーを修正します[#23839](https://github.com/pingcap/tidb/issues/23839) )
+    - `only_full_group_by`をチェックした際に発生する`index-out-of-range`エラーを修正します[#23839](https://github.com/pingcap/tidb/issues/23839) )
     - 相関サブクエリにおけるインデックス結合の結果が間違っている問題を修正しました [#25799](https://github.com/pingcap/tidb/issues/25799)
 
 - TiKV

@@ -101,7 +101,7 @@ TiDBバージョン：8.5.2
 - TiFlash
 
     - ソート中にデータが流出してTiFlashがクラッシュする可能性がある問題を修正 [#9999](https://github.com/pingcap/tiflash/issues/9999) @[windtalker](https://github.com/windtalker)
-    - TiFlashが`Exception: Block schema mismatch`を含むSQL文を実行する際に`GROUP BY ... WITH ROLLUP`エラーを返す可能性がある問題を修正しました。 [#10110](https://github.com/pingcap/tiflash/issues/10110) @[gengliqi](https://github.com/gengliqi)
+    - TiFlashが`GROUP BY ... WITH ROLLUP`を含むSQL文を実行する際に`Exception: Block schema mismatch`エラーを返す可能性がある問題を修正しました。 [#10110](https://github.com/pingcap/tiflash/issues/10110) @[gengliqi](https://github.com/gengliqi)
     - 分散ストレージとコンピューティングアーキテクチャで、 TiFlashコンピューティングノードがリージョンピアを追加するターゲットノードとして誤って選択される可能性がある問題を修正 [#9750](https://github.com/pingcap/tiflash/issues/9750) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - 特定の状況でTiFlash が予期せず終了した場合に、エラースタック トレースの出力に失敗することがある問題を修正 [#9902](https://github.com/pingcap/tiflash/issues/9902) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - 大量のデータをインポートした後にTiFlash が高いメモリ使用量を維持する可能性がある問題を修正 [#9812](https://github.com/pingcap/tiflash/issues/9812) @[CalvinNeo](https://github.com/CalvinNeo)
@@ -122,7 +122,7 @@ TiDBバージョン：8.5.2
     - Backup & Restore (BR)
 
         - データ復元中に SST ファイルのダウンロードを繰り返すと、極端な場合に TiKV がpanicを引き起こす可能性がある問題を修正 [#18335](https://github.com/tikv/tikv/issues/18335) @[3pointer](https://github.com/3pointer)
-        - `status`を使用してログバックアップタスクをクエリした際に、結果に`br log status --json`フィールドが欠落する問題を修正 [#57959](https://github.com/pingcap/tidb/issues/57959) @[Leavrth](https://github.com/Leavrth)
+        - `br log status --json`を使用してログバックアップタスクをクエリした際に、結果に`status`フィールドが欠落する問題を修正 [#57959](https://github.com/pingcap/tidb/issues/57959) @[Leavrth](https://github.com/Leavrth)
         - TiKVへのリクエスト送信時に`rpcClient is idle`エラーが発生し、 BRの復元に失敗する問題を修正します。 [#58845](https://github.com/pingcap/tidb/issues/58845) @[Tristan1900](https://github.com/Tristan1900)
         - PDにアクセスできないために致命的なエラーが発生した場合にログバックアップが正常に終了しない問題を修正 [#18087](https://github.com/tikv/tikv/issues/18087) @[YuJuncen](https://github.com/YuJuncen)
         - PITR が 3072 バイトを超えるインデックスの復元に失敗する問題を修正 [#58430](https://github.com/pingcap/tidb/issues/58430) @[YuJuncen](https://github.com/YuJuncen)
@@ -139,7 +139,7 @@ TiDBバージョン：8.5.2
 
     - TiDB Data Migration (DM)
 
-        - TLSと`start-task`の両方が設定されている場合、 `shard-mode`の事前チェックが失敗する問題を修正 [#11842](https://github.com/pingcap/tiflow/issues/11842) @[sunxiaoguang](https://github.com/sunxiaoguang)
+        - TLSと`shard-mode`の両方が設定されている場合、 `start-task`の事前チェックが失敗する問題を修正 [#11842](https://github.com/pingcap/tiflow/issues/11842) @[sunxiaoguang](https://github.com/sunxiaoguang)
 
     - TiDB Lightning
 

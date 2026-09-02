@@ -36,7 +36,7 @@ TiDBバージョン：5.2.4
     - 解決ロック手順を必要とするリージョンの数を減らすことで、TiCDC のリカバリ時間を短縮します。 [#11993](https://github.com/tikv/tikv/issues/11993)
     - procファイルシステム（procfs）をv0.12.0にアップデートする [#11702](https://github.com/tikv/tikv/issues/11702)
     - RaftログへのGC実行時に書き込みバッチサイズを増やすことで、ガベージコレクション（GC）プロセスを高速化する [#11404](https://github.com/tikv/tikv/issues/11404)
-    - 検証プロセスを`Import`スレッドプールから`Apply`スレッドプールに移動することで、SSTファイルの挿入速度を向上させます [#11239](https://github.com/tikv/tikv/issues/11239)
+    - 検証プロセスを`Apply`スレッドプールから`Import`スレッドプールに移動することで、SSTファイルの挿入速度を向上させます [#11239](https://github.com/tikv/tikv/issues/11239)
 
 - ツール
 
@@ -73,7 +73,7 @@ TiDBバージョン：5.2.4
     - `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE`文を実行するとpanicが発生する問題を修正しました [#28078](https://github.com/pingcap/tidb/issues/28078)
     - `Order By`の最適化による誤ったクエリ結果を修正 [#30271](https://github.com/pingcap/tidb/issues/30271)
     - `ENUM`型の列で`JOIN`を実行した際に発生する可能性のある誤った結果を修正します [#27831](https://github.com/pingcap/tidb/issues/27831)
-    - `CASE WHEN`データ型で`ENUM`関数を使用した際に発生panicを修正しました [#29357](https://github.com/pingcap/tidb/issues/29357)
+    - `ENUM`データ型で`CASE WHEN`関数を使用した際に発生panicを修正しました [#29357](https://github.com/pingcap/tidb/issues/29357)
     - ベクトル化された式における`microsecond`関数の誤った結果を修正 [#29244](https://github.com/pingcap/tidb/issues/29244)
     - ウィンドウ関数がエラーを報告する代わりにTiDBをpanicにする問題を修正しました [#30326](https://github.com/pingcap/tidb/issues/30326)
     - マージ結合オペレーターが特定の場合に誤った結果を返す問題を修正しました [#33042](https://github.com/pingcap/tidb/issues/33042)
