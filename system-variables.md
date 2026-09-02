@@ -3870,6 +3870,15 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable is used to set the update interval of the cached timestamp used in the low-precision TSO feature, in milliseconds.
 - This variable is only available when [`tidb_low_resolution_tso`](#tidb_low_resolution_tso) is enabled.
 
+### tidb_materialized_view_enable
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to allow [`CREATE MATERIALIZED VIEW`](/sql-statements/sql-statement-create-materialized-view.md) and [`CREATE MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-create-materialized-view-log.md) statements.
+
 ### tidb_max_auto_analyze_time <span class="version-mark">New in v6.1.0</span>
 
 - Scope: GLOBAL
@@ -4361,6 +4370,47 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 > * [go-sql-driver](https://github.com/go-sql-driver/mysql#multistatements) (`multiStatements`)
 > * [Connector/J](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html) (`allowMultiQueries`)
 > * PHP [mysqli](https://www.php.net/manual/en/mysqli.quickstart.multiple-statement.php) (`mysqli_multi_query`)
+
+### tidb_mv_maintain_isolation_read_engines
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: String
+- Default value: The value of [`isolation-read.engines`](/tidb-configuration-file.md#isolation-read) in the TiDB configuration.
+- Possible values: Any combination of `tikv`, `tiflash`, and `tidb`.
+- This variable specifies the storage engines that internal materialized view maintenance sessions can use to read data.
+
+### tidb_mv_maintain_mem_quota
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `2147483648` (2 GiB)
+- Range: `[-1, 9223372036854775807]`
+- Unit: Bytes
+- This variable sets the memory quota for internal materialized view maintenance sessions. When the value is greater than `0` but less than `128`, TiDB changes the value to `128` and returns a warning.
+
+### tidb_mview_maintain_import_disk_quota
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: String
+- Default value: `""`
+- This variable sets the disk quota passed to the `IMPORT INTO` operation used by the initial materialized view build. Set this variable to a positive size with a unit, such as `100GiB`. When the value is empty, TiDB does not pass an explicit disk quota to `IMPORT INTO`.
+
+### tidb_mview_maintain_import_threads
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 256]`
+- Unit: Threads
+- This variable sets the thread count passed to the `IMPORT INTO` operation used by the initial materialized view build. A value of `0` means that TiDB does not pass an explicit thread count to `IMPORT INTO`.
 
 ### tidb_nontransactional_ignore_error <span class="version-mark">New in v6.1.0</span>
 
