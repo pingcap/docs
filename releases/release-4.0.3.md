@@ -15,7 +15,7 @@ TiDB バージョン: 4.0.3
 
     - TiDB Dashboardの詳細なバージョン情報を表示する[＃679](https://github.com/pingcap-incubator/tidb-dashboard/pull/679)
     - サポートされていないブラウザまたは古いブラウザのブラウザ互換性に関する通知を表示する[＃654](https://github.com/pingcap-incubator/tidb-dashboard/pull/654)
-    - **SQL文の**ページでの検索をサポート [＃658](https://github.com/pingcap-incubator/tidb-dashboard/pull/658)
+    - **SQL Statements**ページでの検索をサポート [＃658](https://github.com/pingcap-incubator/tidb-dashboard/pull/658)
 
 - TiFlash
 
