@@ -89,7 +89,7 @@ TiDB バージョン: 7.5.2
     - JOIN条件に暗黙的な型変換が含まれている場合にTiDBがpanicする可能性がある問題を修正しました [＃46556](https://github.com/pingcap/tidb/issues/46556) @[qw4990](https://github.com/qw4990)
     - `YEAR`型の列を範囲外の符号なし整数と比較すると誤った結果が発生する問題を修正[＃50235](https://github.com/pingcap/tidb/issues/50235) @[qw4990](https://github.com/qw4990)
     - `UPDATE`リスト内のサブクエリによって TiDB がpanicする可能性がある問題を修正[＃52687](https://github.com/pingcap/tidb/issues/52687) @[winoros](https://github.com/winoros)
-    - 述語の`Longlong`型のオーバーフローの問題を修正 [＃45783](https://github.com/pingcap/tidb/issues/45783) @[hawkingrei](https://github.com/hawkingrei)
+    - 述語における`Longlong`型のオーバーフローの問題を修正 [＃45783](https://github.com/pingcap/tidb/issues/45783) @[hawkingrei](https://github.com/hawkingrei)
     - クラスター化インデックスを述語として使用すると`SELECT INTO OUTFILE`が機能しない問題を修正[＃42093](https://github.com/pingcap/tidb/issues/42093) @[qw4990](https://github.com/qw4990)
     - TopNオペレーターが誤ってプッシュダウンされる可能性がある問題を修正しました [＃37986](https://github.com/pingcap/tidb/issues/37986) @[qw4990](https://github.com/qw4990)
     - 空の投影により TiDB がpanicを引き起こす問題を修正しました [＃49109](https://github.com/pingcap/tidb/issues/49109) @[winoros](https://github.com/winoros)

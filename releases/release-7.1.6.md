@@ -104,7 +104,7 @@ TiDB バージョン: 7.1.6
     - `CREATE OR REPLACE VIEW`同時に実行すると`table doesn't exist`エラーが発生する可能性がある問題を修正 [＃53673](https://github.com/pingcap/tidb/issues/53673) @[tangenta](https://github.com/tangenta)
     - `RESTORE`文を使用して`AUTO_ID_CACHE=1`のテーブルを復元すると`Duplicate entry`エラーが発生する可能性がある問題を修正しました [＃52680](https://github.com/pingcap/tidb/issues/52680) @[tiancaiamao](https://github.com/tiancaiamao)
     - `INFORMATION_SCHEMA.STATISTICS`テーブルの`SUB_PART`値が`NULL` になる問題を修正しました [＃55812](https://github.com/pingcap/tidb/issues/55812) @[Defined2014](https://github.com/Defined2014)
-    - 述語の`Longlong`型のオーバーフローの問題を修正 [＃45783](https://github.com/pingcap/tidb/issues/45783) @[hawkingrei](https://github.com/hawkingrei)
+    - 述語における`Longlong`型のオーバーフローの問題を修正 [＃45783](https://github.com/pingcap/tidb/issues/45783) @[hawkingrei](https://github.com/hawkingrei)
     - キャッシュされた実行計画に日付型と`unix_timestamp` の比較が含まれている場合に誤った結果が返される問題を修正しました。 [＃48165](https://github.com/pingcap/tidb/issues/48165) @[qw4990](https://github.com/qw4990)
     - 照合順序が`utf8_bin`または`utf8mb4_bin` の場合に`LENGTH()`条件が予期せず削除される問題を修正しました [＃53730](https://github.com/pingcap/tidb/issues/53730) @[elsa0520](https://github.com/elsa0520)
     - `UPDATE`または`DELETE`文に再帰 CTE が含まれている場合、文がエラーを報告したり、有効にならない可能性がある問題を修正しました。 [＃55666](https://github.com/pingcap/tidb/issues/55666) @[time-and-fate](https://github.com/time-and-fate)
