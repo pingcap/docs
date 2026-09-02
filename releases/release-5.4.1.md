@@ -76,7 +76,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
     - `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルへのクエリ実行時に TiDBサーバーのメモリが発生する問題を修正しました。この問題は、Grafana ダッシュボードでスロークエリをチェックすると発生する可能性があります。 [＃33893](https://github.com/pingcap/tidb/issues/33893)
     - `NOWAIT`文で実行中のトランザクションがロックに遭遇してもすぐには戻らないバグを修正 [＃32754](https://github.com/pingcap/tidb/issues/32754)
     - `GBK`文字セットと`gbk_bin`照合順序でテーブルを作成するときに失敗するバグを修正しました [＃31308](https://github.com/pingcap/tidb/issues/31308)
-    - `enable-new-charset`が`on`の場合、照合順序付きの`GBK`文字セットテーブルの作成が「不明な文字セット」エラーで失敗するバグを修正しました[＃31297](https://github.com/pingcap/tidb/issues/31297)
+    - `enable-new-charset`が`on`の場合、照合順序付きの`GBK`文字セットテーブルの作成が「Unknown character set」エラーで失敗するバグを修正しました[＃31297](https://github.com/pingcap/tidb/issues/31297)
 
 - TiKV
 
@@ -157,7 +157,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
 
     - TiDB Lightning
 
-        - チェックサムエラー「GCの有効期間がトランザクション期間より短い」を修正[＃32733](https://github.com/pingcap/tidb/issues/32733)
+        - チェックサムエラー「GC life time is shorter than transaction duration」を修正[＃32733](https://github.com/pingcap/tidb/issues/32733)
         - 空のテーブルチェックに失敗した場合、 TiDB Lightning が停止する問題を修正しました。 [＃31797](https://github.com/pingcap/tidb/issues/31797)
         - 一部のインポートタスクにソースファイルが含まれていない場合にTiDB Lightningがメタデータスキーマを削除しない可能性があるバグを修正しました[＃28144](https://github.com/pingcap/tidb/issues/28144)
         - 事前チェックでローカルディスクリソースとクラスターの可用性がチェックされない問題を修正[＃34213](https://github.com/pingcap/tidb/issues/34213)

@@ -91,7 +91,7 @@ TiDB バージョン: 4.0.15
 
     - 範囲構築するときにバイナリリテラルの照合順序順序が誤って設定されるバグを修正しました [＃23672](https://github.com/pingcap/tidb/issues/23672)
 
-    - に`GROUP BY`と`UNION`両方が含まれている場合に発生する「インデックスが範囲外です」というエラーを修正しました。 [＃26553](https://github.com/pingcap/tidb/pull/26553)
+    - に`GROUP BY`と`UNION`両方が含まれている場合に発生する「index out of range」というエラーを修正しました。 [＃26553](https://github.com/pingcap/tidb/pull/26553)
 
     - TiKVにtombstoneストアがある場合、TiDBがリクエストの送信に失敗する可能性がある問題を修正[＃23676](https://github.com/pingcap/tidb/issues/23676) [＃24648](https://github.com/pingcap/tidb/issues/24648)
 
@@ -101,7 +101,7 @@ TiDB バージョン: 4.0.15
 
 - TiKV
 
-    - データ復元中にTDEが有効になっているとBRが「ファイルが既に存在します」というエラーを報告する問題を修正[＃1179](https://github.com/pingcap/br/issues/1179)
+    - データ復元中にTDEが有効になっているとBRが「file already exists」というエラーを報告する問題を修正[＃1179](https://github.com/pingcap/br/issues/1179)
     - 破損したスナップショットファイルによって引き起こされる潜在的なディスクフル問題を修正[＃10813](https://github.com/tikv/tikv/issues/10813)
     - TiKVが古いリージョンを頻繁に削除する問題を修正[＃10680](https://github.com/tikv/tikv/issues/10680)
     - TiKVがPDクライアントに頻繁に再接続する問題を修正 [＃9690](https://github.com/tikv/tikv/issues/9690)

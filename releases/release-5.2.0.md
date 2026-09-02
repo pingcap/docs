@@ -62,7 +62,7 @@ TiDB バージョン: 5.2.0
 
 - アップグレードの前に、 [`tidb_evolve_plan_baselines`](/system-variables.md#tidb_evolve_plan_baselines-new-in-v40)システム変数の値が`ON`であるかどうかを確認してください。値が`ON`の場合は、 `OFF`に設定してください。そうでない場合、アップグレードは失敗します。
 - TiDB クラスターを v4.0 から v5.2 にアップグレードすると、 [`tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011)のデフォルト値が`WARN`から`OFF`に変更されます。
-- アップグレード前に、TiDB 設定の[`feedback-probability`](https://docs-archive.pingcap.com/tidb/v5.2/tidb-configuration-file#feedback-probability)の値を確認してください。値が`0`でない場合、アップグレード後に「回復可能なゴルーチンでpanicが発生しました」というエラーが発生しますが、このエラーはアップグレードには影響しません。
+- アップグレード前に、TiDB 設定の[`feedback-probability`](https://docs-archive.pingcap.com/tidb/v5.2/tidb-configuration-file#feedback-probability)の値を確認してください。値が`0`でない場合、アップグレード後に「panic in the recoverable goroutine」というエラーが発生しますが、このエラーはアップグレードには影響しません。
 - TiDBはMySQL 5.7のnoop変数`innodb_default_row_format`と互換性を持つようになりました。この変数を設定しても効果はありません。 [#23541](https://github.com/pingcap/tidb/issues/23541)
 - TiDB 5.2以降では、システムセキュリティを向上させるため、クライアントからの接続のトランスレイヤーを暗号化することが推奨されています（必須ではありません）。TiDBは、TiDB内で暗号化を自動的に構成および有効化するAuto TLS機能を提供します。Auto TLS機能を使用するには、TiDBのアップグレード前に、TiDB構成ファイルの[`security.auto-tls`](/tidb-configuration-file.md#auto-tls)を`true`に設定してください。
 - MySQL 8.0 からの移行を容易にし、セキュリティを向上させるために、 `caching_sha2_password`認証方式をサポートします。
@@ -315,7 +315,7 @@ Apple M1チップを搭載したMacコンピュータで`tiup playground`コマ�
     - TiDB Lightning
 
         - TiDB LightningがParquetファイル内の`DECIMAL`データ型を解析できないバグを修正しました [#1272](https://github.com/pingcap/br/pull/1272)
-        - TiDB Lightningがテーブルスキーマの復元時に「エラー9007：書き込み競合」エラーを報告するバグを修正しました [#1290](https://github.com/pingcap/br/issues/1290)
+        - TiDB Lightningがテーブルスキーマの復元時に「Error 9007: Write conflict」エラーを報告するバグを修正しました [#1290](https://github.com/pingcap/br/issues/1290)
         - intハンドルのオーバーフローが原因でTiDB Lightningがデータをインポートできないバグを修正しました [#1291](https://github.com/pingcap/br/issues/1291)
         - TiDB Lightningでローカルバックエンドモードでのデータ損失によりチェックサム不一致エラーが発生する可能性があるバグを修正しました [#1403](https://github.com/pingcap/br/issues/1403)
         - TiDB Lightningがテーブルスキーマを復元する際に、クラスター化インデックスとのLightning互換性の問題を修正する [#1362](https://github.com/pingcap/br/issues/1362)

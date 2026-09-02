@@ -19,7 +19,7 @@ TiDB Lightning （ [物理インポートモード](/tidb-lightning/tidb-lightni
 - [ソースファイルの準備](#prepare-source-files)
 - [ストレージスペースの見積もり](#estimate-storage-space)
 - [設定パラメータを変更する](#change-configuration-parameters)
-- [「チェックサム不一致」エラーを解決する](#resolve-the-checksum-mismatch-error)
+- [「checksum mismatch」エラーを解決する](#resolve-the-checksum-mismatch-error)
 - [チェックポイントを有効にする](#enable-checkpoint)
 - [トラブルシューティング](#troubleshooting)
 
@@ -70,7 +70,7 @@ TiDB Lightning （ [物理インポートモード](/tidb-lightning/tidb-lightni
     - [問題-14745](https://github.com/tikv/tikv/issues/14745) : インポートが完了すると、TiKV インポート ディレクトリに大量の一時ファイルが残ります。
     - [問題-6426](https://github.com/tikv/pd/issues/6426) : PD [レンジスケジュール](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import)インターフェースがリージョンの分散に失敗し、タイムアウトの問題が発生する可能性があります。v6.2.0より前では、グローバルスケジューリングはデフォルトで無効になっているため、この問題の発生を回避できます。
     - [問題-43079](https://github.com/pingcap/tidb/pull/43079) : TiDB Lightning は、NotLeader エラーの再試行中にリージョンピア情報を更新できません。
-    - [問題-43291](https://github.com/pingcap/tidb/issues/43291) : 一時ファイルが見つからない場合 (「そのようなファイルまたはディレクトリはありません」というエラー)、 TiDB Lightning は再試行しません。
+    - [問題-43291](https://github.com/pingcap/tidb/issues/43291) : 一時ファイルが見つからない場合 (「No such file or directory」というエラー)、 TiDB Lightning は再試行しません。
 
 ## ソースファイルの準備 {#prepare-source-files}
 
@@ -97,9 +97,9 @@ TiDB Lightning （ [物理インポートモード](/tidb-lightning/tidb-lightni
 
 TiDB Lightningパラメータの詳細については、 [TiDB Lightning設定パラメータ](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
-## 「チェックサム不一致」エラーを解決する {#resolve-the-checksum-mismatch-error}
+## 「checksum mismatch」エラーを解決する {#resolve-the-checksum-mismatch-error}
 
-データ検証中に競合が発生する可能性があります。エラーメッセージは「チェックサムが一致しません」です。この問題を解決するには、必要に応じて以下の手順を実行してください。
+データ検証中に競合が発生する可能性があります。エラーメッセージは「checksum mismatch」です。この問題を解決するには、必要に応じて以下の手順を実行してください。
 
 1. ソースデータで主キーまたは一意キーの競合がないか確認し、再インポート前に競合を解決してください。ほとんどの場合、これが最も一般的な原因です。
 2. テーブルの主キーまたは一意キーの定義が適切かどうかを確認してください。適切でない場合は、テーブル定義を修正してデータを再インポートしてください。

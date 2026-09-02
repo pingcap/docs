@@ -38,7 +38,7 @@ TiDB Ansible バージョン: 3.0.1
 - `SHOW PROCESSLIST`コマンドで表示される`DB`列と`INFO`列がMySQL と互換性がない問題を修正 [＃11003](https://github.com/pingcap/tidb/pull/11003)
 - `skip-grant-table=true`が設定されている場合に`FLUSH PRIVILEGES`文によって発生するシステムpanicの問題を修正[＃11027](https://github.com/pingcap/tidb/pull/11027)
 - テーブルの主キーが`UNSIGNED`整数の場合、 `FAST ANALYZE`で収集された主キー統計が正しくない問題を修正しました。 [＃11099](https://github.com/pingcap/tidb/pull/11099)
-- `FAST ANALYZE`文で「無効なキー」エラーが報告される場合がある問題を修正[＃11098](https://github.com/pingcap/tidb/pull/11098)
+- `FAST ANALYZE`文で「invalid key」エラーが報告される場合がある問題を修正[＃11098](https://github.com/pingcap/tidb/pull/11098)
 - 列のデフォルト値として`CURRENT_TIMESTAMP`が使用され、float精度が指定されている場合、 `SHOW CREATE TABLE`文で表示される精度が不完全になる問題を修正しました。 [＃11088](https://github.com/pingcap/tidb/pull/11088)
 - MySQL との互換性を保つために、ウィンドウ関数がエラーを報告するときに関数名が小文字にならない問題を修正しました。 [＃11118](https://github.com/pingcap/tidb/pull/11118)
 - TiKV クライアント バッチ gRPC のバックグラウンドスレッドがパニックを起こした後、TiDB が TiKV に接続できず、サービスを提供できなくなる問題を修正しました[＃11101](https://github.com/pingcap/tidb/pull/11101)
