@@ -404,7 +404,7 @@ TiKVは、Grafanaの**TiKV**ダッシュボードに、さまざまなリソー�
 ## 参照 {#see-also}
 
 - [リソースグループを作成する](/sql-statements/sql-statement-create-resource-group.md)
-- [アルター・リソース・グループ](/sql-statements/sql-statement-alter-resource-group.md)
+- [アルターリソースグループ](/sql-statements/sql-statement-alter-resource-group.md)
 - [リソースグループを削除する](/sql-statements/sql-statement-drop-resource-group.md)
 - [リソースグループRFC](https://github.com/pingcap/tidb/blob/release-8.5/docs/design/2022-11-25-global-resource-control.md)
 

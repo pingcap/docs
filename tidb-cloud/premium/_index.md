@@ -2,7 +2,7 @@
 title: TiDB Cloud Documentation
 hide_sidebar: true
 hide_commit: true
-summary: TiDB Cloudは、TiDBの優れた機能をすべてクラウド上で提供する、フルマネージド型のデータベース・アズ・ア・サービス（DBaaS）です。学習、試用、開発、保守、移行、監視、チューニング、セキュリティ、課金、統合、参照のためのガイド、サンプル、リファレンスを提供します。
+summary: TiDB Cloudは、TiDBの優れた機能をすべてクラウド上で提供する、フルマネージド型のデータベースアズアサービス（DBaaS）です。学習、試用、開発、保守、移行、監視、チューニング、セキュリティ、課金、統合、参照のためのガイド、サンプル、リファレンスを提供します。
 ---
 
 <LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Premium" subTitle="TiDB Cloud Premium は、無制限のリアルタイムスケーラビリティを求めるミッションクリティカルなビジネス向けに設計されています。ワークロードを考慮したオートスケーリングと包括的なエンタープライズ機能を提供します。">

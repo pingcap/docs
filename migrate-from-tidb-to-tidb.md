@@ -99,7 +99,7 @@ summary: ある TiDB クラスターから別の TiDB クラスターにデー�
 
 ## ステップ2. 全データの移行 {#step-2-migrate-full-data}
 
-環境構築後、 [BR](https://github.com/pingcap/tidb/tree/release-8.5/br)のバックアップ・リストア関数を使用して全データを移行できます。BRは[3つの方法](/br/br-use-overview.md#deploy-and-use-br)で起動できます。本稿では、SQL文`BACKUP`と`RESTORE`を使用します。
+環境構築後、 [BR](https://github.com/pingcap/tidb/tree/release-8.5/br)のバックアップおよびリストア関数を使用して全データを移行できます。BRは[3つの方法](/br/br-use-overview.md#deploy-and-use-br)で起動できます。本稿では、SQL文`BACKUP`と`RESTORE`を使用します。
 
 > **Note:**
 >

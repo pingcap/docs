@@ -3,7 +3,7 @@ title: TiDB Cloud Documentation
 aliases: ['/ja/tidbcloud/privacy-policy','/ja/tidbcloud/terms-of-service','/ja/tidbcloud/service-level-agreement']
 hide_sidebar: true
 hide_commit: true
-summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供する、フルマネージドのデータベース・アズ・ア・サービス（DBaaS）です。学習、試用、開発、保守、移行、監視、チューニング、セキュリティ保護、課金、統合、参照のためのガイド、サンプル、リファレンスを提供しています。
+summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供する、フルマネージドのデータベースアズアサービス（DBaaS）です。学習、試用、開発、保守、移行、監視、チューニング、セキュリティ保護、課金、統合、参照のためのガイド、サンプル、リファレンスを提供しています。
 ---
 
 <LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Dedicated" subTitle="TiDB Cloud Dedicated は、ミッションクリティカルなビジネス向けに設計されており、複数のアベイラビリティゾーンにまたがる高可用性、水平スケーリング、そして完全な HTAP 機能を提供します。">
