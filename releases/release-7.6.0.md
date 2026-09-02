@@ -370,7 +370,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     - TiDBサーバーが正常なシャットダウン中にpanicする可能性がある問題を修正しました [#36793](https://github.com/pingcap/tidb/issues/36793) @[bb7133](https://github.com/bb7133)
     - `ADMIN RECOVER INDEX`が`ERROR 1105`を報告する問題を、 `CommonHandle`を含むテーブルを処理する際に修正します。 [#47687](https://github.com/pingcap/tidb/issues/47687) @[Defined2014](https://github.com/Defined2014)
     - `ALTER TABLE t PARTITION BY`を実行する際に配置ルールを指定すると`ERROR 8239`というエラーが報告される問題を修正しました。 [#48630](https://github.com/pingcap/tidb/issues/48630) @[mjonss](https://github.com/mjonss)
-    - `START_TIME`の`INFORMATION_SCHEMA.CLUSTER_INFO`列タイプが無効であるという問題を修正します [#45221](https://github.com/pingcap/tidb/issues/45221) @[dveeden](https://github.com/dveeden)
+    - `INFORMATION_SCHEMA.CLUSTER_INFO`の`START_TIME`列タイプが無効であるという問題を修正します [#45221](https://github.com/pingcap/tidb/issues/45221) @[dveeden](https://github.com/dveeden)
     - `EXTRA`の列タイプが無効であるために`INFORMATION_SCHEMA.COLUMNS`エラー`Data Too Long, field len 30, data len 45`が発生する問題を修正しました。 [#42030](https://github.com/pingcap/tidb/issues/42030) @[tangenta](https://github.com/tangenta)
     - `IN (...)`で`INFORMATION_SCHEMA.STATEMENTS_SUMMARY`で異なるプランダイジェストが発生する問題を修正 [#33559](https://github.com/pingcap/tidb/issues/33559) @[King-Dylan](https://github.com/King-Dylan)
     - `TIME`型を`YEAR`型に変換する際に、返される結果に`TIME`と年が混在する問題を修正しました。 [#48557](https://github.com/pingcap/tidb/issues/48557) @[YangKeao](https://github.com/YangKeao)

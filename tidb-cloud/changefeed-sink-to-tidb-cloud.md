@@ -51,7 +51,7 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
 3. [Dumplingのエクスポートファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)のメタデータファイルからTiDB Cloudシンクの開始位置を取得します。
 
-    以下はメタデータファイルの例の一部です。 `Pos`の`SHOW MASTER STATUS`は、既存データの TSO であり、 TiDB Cloudシンクの開始位置でもあります。
+    以下はメタデータファイルの例の一部です。 `SHOW MASTER STATUS`の`Pos`は、既存データの TSO であり、 TiDB Cloudシンクの開始位置でもあります。
 
     ```
     Started dump at: 2023-03-28 10:40:19

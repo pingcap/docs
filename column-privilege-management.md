@@ -42,7 +42,7 @@ GRANT SELECT(col1, col2), UPDATE(col3) ON test.tbl TO 'user'@'host';
 
 ## 例：列レベルの権限を付与する {#example-grant-column-level-privileges}
 
-次の例では、ユーザー`newuser`にテーブル`SELECT`内の`col1`および`col2`に対する`test.tbl`権限を付与し、同じユーザーに`UPDATE`に対する`col3`権限を付与します。
+次の例では、ユーザー`newuser`にテーブル`test.tbl`内の`col1`および`col2`に対する`SELECT`権限を付与し、同じユーザーに`UPDATE`に対する`col3`権限を付与します。
 
 ```sql
 CREATE DATABASE IF NOT EXISTS test;
@@ -71,7 +71,7 @@ SHOW GRANTS FOR 'newuser'@'%';
 
 ## 例：列レベルの権限を取り消す {#example-revoke-column-level-privileges}
 
-次の例は、ユーザー`SELECT`から列`col2`に対する`newuser`権限を取り消します。
+次の例は、ユーザー`newuser`から列`col2`に対する`SELECT`権限を取り消します。
 
 ```sql
 REVOKE SELECT(col2) ON test.tbl FROM 'newuser'@'%';
@@ -117,7 +117,7 @@ TiDBの列レベルの権限は、一般的にMySQLと互換性があります�
 | シナリオ                      | TiDB                                                                                                              | MySQL                                                                                                                       |
 | :------------------------ | :---------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
 | ユーザーに付与されていない列レベルの権限を取り消す | `REVOKE`が正常に実行されました。                                                                                              | `IF EXISTS`が使用されていない場合、 `REVOKE`はエラーを返します。                                                                                  |
-| 列の削除と`SELECT`権限チェックの実行順序  | `SELECT`列の権限は、列の削除前にチェックされます。たとえば、 `SELECT a FROM (SELECT a, b FROM t) s`を実行するには、 `SELECT`と`t.a`の両方に対して`t.b`列の権限。 | `SELECT`列の権限がチェックされる前に、カラムのプルーニングが実行されます。たとえば、 `SELECT a FROM (SELECT a, b FROM t) s`を実行するには、 `SELECT`に対する`t.a`列の権限のみが必要です。 |
+| 列の削除と`SELECT`権限チェックの実行順序  | `SELECT`列の権限は、列の削除前にチェックされます。たとえば、 `SELECT a FROM (SELECT a, b FROM t) s`を実行するには、 `t.a`と`t.b`の両方に対して`SELECT`列の権限が必要です。 | `SELECT`列の権限がチェックされる前に、カラムのプルーニングが実行されます。たとえば、 `SELECT a FROM (SELECT a, b FROM t) s`を実行するには、 `SELECT`に対する`t.a`列の権限のみが必要です。 |
 
 ### ビューシナリオにおけるカラムの削除と権限チェック {#column-pruning-and-privilege-checks-in-view-scenarios}
 
