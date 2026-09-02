@@ -66,7 +66,7 @@ Support access is controlled at the instance level. The authorization allows TiD
 
 To authorize TiDB Cloud Support to temporarily access Plan Replayer files generated for SQL performance troubleshooting, take the following steps:
 
-1. In the TiDB Cloud console, navigate to the Overview page of the target TiDB Cloud Essential or Premium instance.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the overview page of the target TiDB Cloud Essential or Premium instance.
 2. In the left navigation pane, click **Settings** > **Security**.
 3. On the **Security** page, click **Authorize** in the **SQL Plan Replayer Files Access Authorization** section.
 4. Select an access duration that covers the expected troubleshooting window from the drop-down list.
