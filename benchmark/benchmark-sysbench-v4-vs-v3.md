@@ -7,7 +7,7 @@ summary: TiDB 4.0 と TiDB 3.0 の Sysbench パフォーマンスを比較しま
 
 ## テスト目的 {#test-purpose}
 
-このテストの目的は、オンライン トランザクション処理 (OLTP) シナリオにおける TiDB 4.0 と TiDB 3.0 の Sysbench パフォーマンスを比較することです。
+このテストの目的は、オンライントランザクション処理 (OLTP) シナリオにおける TiDB 4.0 と TiDB 3.0 の Sysbench パフォーマンスを比較することです。
 
 ## テスト環境（AWS EC2） {#test-environment-aws-ec2}
 
