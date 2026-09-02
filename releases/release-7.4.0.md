@@ -192,7 +192,7 @@ TiDB バージョン: 7.4.0
 
 - TiDB Dashboardは、実行計画をテーブルビューで表示することをサポートしています[＃1589](https://github.com/pingcap/tidb-dashboard/issues/1589) @[baurine](https://github.com/baurine)
 
-    v7.4.0 では、TiDB Dashboardは、診断エクスペリエンスを向上させるために、**スロークエリ ページ**と**SQL ステートメント**ページで実行計画をテーブル ビューで表示することをサポートしています。
+    v7.4.0 では、TiDB Dashboardは、診断エクスペリエンスを向上させるために、**Slow Query**ページと**SQL Statement**ページで実行計画をテーブルビューで表示することをサポートしています。
 
     詳細については[ドキュメント](/dashboard/dashboard-statement-details.md)を参照してください。
 

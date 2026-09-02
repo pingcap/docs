@@ -124,8 +124,8 @@ TiDB バージョン: 4.0.14
 - TiDB Dashboard
 
     - **プロファイリング**UIがすべてのTiDBインスタンスをプロファイリングできない問題を修正[＃944](https://github.com/pingcap/tidb-dashboard/pull/944)
-    - **明細書**UIに「プラン数」が表示されない問題を修正しました[＃939](https://github.com/pingcap/tidb-dashboard/pull/939)
-    - クラスタアップグレード後に**スロークエリ**UIに「不明なフィールド」エラーが表示される問題を修正しました [＃902](https://github.com/pingcap/tidb-dashboard/issues/902)
+    - **Statements**UIに「プラン数」が表示されない問題を修正しました[＃939](https://github.com/pingcap/tidb-dashboard/pull/939)
+    - クラスタアップグレード後に**Slow Query**UIに「不明なフィールド」エラーが表示される問題を修正しました [＃902](https://github.com/pingcap/tidb-dashboard/issues/902)
 
 - TiFlash
 

@@ -27,13 +27,13 @@ TiDB バージョン: 4.0.9
 
 - TiDB Dashboard
 
-    - **SQLステートメント**ページのすべてのフィールドによる表示と並べ替えをサポート [＃749](https://github.com/pingcap/tidb-dashboard/pull/749)
+    - **SQL Statements**ページのすべてのフィールドによる表示と並べ替えをサポート [＃749](https://github.com/pingcap/tidb-dashboard/pull/749)
     - トポロジグラフのズームとパンをサポート[＃772](https://github.com/pingcap/tidb-dashboard/pull/772)
-    - **SQL ステートメント**と**スロークエリの**ページでディスク使用量情報を表示する機能をサポート[＃777](https://github.com/pingcap/tidb-dashboard/pull/777)
-    - **SQL ステートメント**と**スロークエリ**ページでリストデータのエクスポートをサポート[＃778](https://github.com/pingcap/tidb-dashboard/pull/778)
+    - **SQL Statements**と**Slow Queries**ページでディスク使用量情報を表示する機能をサポート[＃777](https://github.com/pingcap/tidb-dashboard/pull/777)
+    - **SQL Statements**と**Slow Queries**ページでリストデータのエクスポートをサポート[＃778](https://github.com/pingcap/tidb-dashboard/pull/778)
     - Prometheusアドレスカスタマイズをサポート [＃808](https://github.com/pingcap/tidb-dashboard/pull/808)
     - クラスター統計ページを追加 [＃815](https://github.com/pingcap/tidb-dashboard/pull/815)
-    - **スロークエリの**詳細に時間関連のフィールドを追加する[＃810](https://github.com/pingcap/tidb-dashboard/pull/810)
+    - **Slow Queries**の詳細に時間関連のフィールドを追加する[＃810](https://github.com/pingcap/tidb-dashboard/pull/810)
 
 ## 改善点 {#improvements}
 
@@ -73,8 +73,8 @@ TiDB バージョン: 4.0.9
 - TiDB Dashboard
 
     - SQL文の「展開」をクリックすると展開を続ける [＃775](https://github.com/pingcap/tidb-dashboard/pull/775)
-    - **SQL ステートメント**と**スロークエリ**の詳細ページを新しいウィンドウで開く [＃816](https://github.com/pingcap/tidb-dashboard/pull/816)
-    - **スロークエリの**詳細における時間関連フィールドの説明の改善 [＃817](https://github.com/pingcap/tidb-dashboard/pull/817)
+    - **SQL Statements**と**Slow Queries**の詳細ページを新しいウィンドウで開く [＃816](https://github.com/pingcap/tidb-dashboard/pull/816)
+    - **Slow Queries**の詳細における時間関連フィールドの説明の改善 [＃817](https://github.com/pingcap/tidb-dashboard/pull/817)
     - 詳細なエラーメッセージを表示する[＃794](https://github.com/pingcap/tidb-dashboard/pull/794)
 
 - TiFlash
