@@ -3,11 +3,11 @@ title: Periodically Delete Data Using TTL (Time to Live)
 summary: TiDB の TTL 機能を使用して、期限切れのデータを自動的かつ定期的に削除する方法を学習します。
 ---
 
-# TTL（Time to Live）を使用して定期的にデータを削除する {#periodically-delete-data-using-ttl-time-to-live}
+# TTL (Time to Live)を使用して定期的にデータを削除する {#periodically-delete-data-using-ttl-time-to-live}
 
 アプリケーション開発において、一部のデータは限られた期間のみ価値を持ちます。例えば、認証コードは通常数分間しか保持する必要がなく、短縮リンクは特定のキャンペーン期間中のみ有効となる場合があり、アクセスログや中間計算結果も数か月しか保持されないことがよくあります。
 
-TiDBは、TiDBデータの有効期間を行レベルで管理できる[TTL (存続時間)](/time-to-live.md)機能を提供します。TTLを使用すると、複雑なスケジュールされたクリーンアップスクリプトを作成することなく、期限切れのデータを**自動的かつ定期的に**削除できます。
+TiDBは、TiDBデータの有効期間を行レベルで管理できる[TTL (Time to Live)](/time-to-live.md)機能を提供します。TTLを使用すると、複雑なスケジュールされたクリーンアップスクリプトを作成することなく、期限切れのデータを**自動的かつ定期的に**削除できます。
 
 ## ユースケース {#use-cases}
 
@@ -23,7 +23,7 @@ TTLは、一定期間が経過するとデータがビジネス価値を失う�
 
 ## クイックスタート {#quick-start}
 
-TTL属性は、テーブルの作成時に設定することも、既存のテーブルに追加することもできます。以下のセクションでは、TTLを使用して期限切れのデータを定期的に削除する基本的な例を示します。詳細な例、使用上の制限、および他のツールや機能との互換性の詳細については、 [TTL (存続時間)](/time-to-live.md)を参照してください。
+TTL属性は、テーブルの作成時に設定することも、既存のテーブルに追加することもできます。以下のセクションでは、TTLを使用して期限切れのデータを定期的に削除する基本的な例を示します。詳細な例、使用上の制限、および他のツールや機能との互換性の詳細については、 [TTL (Time to Live)](/time-to-live.md)を参照してください。
 
 ### TTLでテーブルを作成する {#create-a-table-with-ttl}
 
@@ -66,4 +66,4 @@ ALTER TABLE app_logs TTL_ENABLE = 'OFF';
 
 ## 参照 {#see-also}
 
-- [TTL (存続時間)](/time-to-live.md)
+- [TTL (Time to Live)](/time-to-live.md)

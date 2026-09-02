@@ -3,7 +3,7 @@ title: TTL (Time to Live)
 summary: Time to Live（TTL）は、TiDBデータの有効期間を行レベルで管理できる機能です。このドキュメントでは、TTLを使用して古いデータを自動的に期限切れにして削除する方法を説明します。
 ---
 
-# TTL (存続時間) {#ttl-time-to-live}
+# TTL (Time to Live) {#ttl-time-to-live}
 
 Time to Live（TTL）は、TiDBデータの有効期間を行レベルで管理できる機能です。TTL属性を持つテーブルの場合、TiDBは自動的にデータ有効期間をチェックし、期限切れのデータを行レベルで削除します。この機能は、一部のシナリオにおいてストレージ容量を効果的に節約し、パフォーマンスを向上させることができます。
 

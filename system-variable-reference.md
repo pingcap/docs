@@ -4137,7 +4137,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 - [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [TTL（Time to Live）を使用して期限切れのデータを定期的に削除する](/time-to-live.md)
+- [TTL (Time to Live)を使用して期限切れのデータを定期的に削除する](/time-to-live.md)
 - [システム変数](/system-variables.md#tidb_ttl_delete_worker_count-new-in-v650)
 - [TiDB 8.4.0 リリースノート](/releases/release-8.4.0.md)
 - [TiDB 8.1.2 リリースノート](/releases/release-8.1.2.md)
@@ -4148,7 +4148,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [TTL（Time to Live）を使用して期限切れのデータを定期的に削除する](/time-to-live.md)
+- [TTL (Time to Live)を使用して期限切れのデータを定期的に削除する](/time-to-live.md)
 - [システム変数](/system-variables.md#tidb_ttl_job_enable-new-in-v650)
 - [TiDB 8.5.0 リリースノート](/releases/release-8.5.0.md)
 - [TiDB 8.1.2 リリースノート](/releases/release-8.1.2.md)
@@ -4160,7 +4160,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 - [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [TTL（Time to Live）を使用して期限切れのデータを定期的に削除する](/time-to-live.md)
+- [TTL (Time to Live)を使用して期限切れのデータを定期的に削除する](/time-to-live.md)
 - [システム変数](/system-variables.md#tidb_ttl_job_schedule_window_end_time-new-in-v650)
 - [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
 
@@ -4169,7 +4169,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 - [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [TTL（Time to Live）を使用して期限切れのデータを定期的に削除する](/time-to-live.md)
+- [TTL (Time to Live)を使用して期限切れのデータを定期的に削除する](/time-to-live.md)
 - [システム変数](/system-variables.md#tidb_ttl_job_schedule_window_start_time-new-in-v650)
 - [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
 
@@ -4178,7 +4178,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 - [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [TTL（Time to Live）を使用して期限切れのデータを定期的に削除する](/time-to-live.md)
+- [TTL (Time to Live)を使用して期限切れのデータを定期的に削除する](/time-to-live.md)
 - [システム変数](/system-variables.md#tidb_ttl_running_tasks-new-in-v700)
 - [TiDB 7.0.0 リリースノート](/releases/release-7.0.0.md)
 
@@ -4195,7 +4195,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 - [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [TTL（Time to Live）を使用して期限切れのデータを定期的に削除する](/time-to-live.md)
+- [TTL (Time to Live)を使用して期限切れのデータを定期的に削除する](/time-to-live.md)
 - [システム変数](/system-variables.md#tidb_ttl_scan_worker_count-new-in-v650)
 - [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
 

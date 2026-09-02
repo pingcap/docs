@@ -33,7 +33,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 - TiDB Data Migration (DM) [継続的なデータ検証](/dm/dm-continuous-data-validation.md) GA になります。
 - TiDB バックアップ &amp; リストアは、スナップショット チェックポイント バックアップをサポートし、 [PITR](/br/br-pitr-guide.md#run-pitr)のリカバリ パフォーマンスを 50% 向上させ、一般的なシナリオでの RPO を最短 5分に短縮します。
 - [Kafkaへのデータの複製](/replicate-data-to-kafka.md)の TiCDC スループットを 4000 行/秒から 35000 行/秒に向上し、レプリケーションのレイテンシーを2秒に短縮します。
-- データのライフサイクルを管理するために行レベル[存続時間（TTL）](/time-to-live.md)を提供します (実験的)。
+- データのライフサイクルを管理するために行レベル[TTL (Time to Live)](/time-to-live.md)を提供します (実験的)。
 - TiCDC は、Amazon S3、Azure Blob Storage、NFS (実験的) など[変更ログをオブジェクトストレージに複製する](/ticdc/ticdc-sink-to-cloud-storage.md)サポートしています。
 
 ## 新機能 {#new-features}

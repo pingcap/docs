@@ -263,7 +263,7 @@ TTL パフォーマンスに関する調査結果は次のとおりです。
 
 #### TiDBでTTLと`DROP PARTITION`を使用する {#use-ttl-and-drop-partition-in-tidb}
 
-以下の例では匿名化されたテーブル構造を使用しています。TTLの詳細については、 [TTL（Time to Live）を使用して定期的にデータを削除する](/time-to-live.md)を参照してください。
+以下の例では匿名化されたテーブル構造を使用しています。TTLの詳細については、 [TTL (Time to Live)を使用して定期的にデータを削除する](/time-to-live.md)を参照してください。
 
 次の例は、TTL 対応のテーブルスキーマを示しています。
 
