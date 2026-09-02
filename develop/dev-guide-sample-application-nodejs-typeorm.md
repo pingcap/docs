@@ -306,7 +306,7 @@ export const AppDataSource = new DataSource({
 
 > **Note**
 >
-> TiDB Cloud StarterおよびTiDB Cloud Essentialでは、パブリックエンドポイントを使用する際に TLS 接続を有効にする必要があります。このサンプルコードでは、 `TIDB_ENABLE_SSL` `.env` } を`true`に設定してください。
+> TiDB Cloud StarterおよびTiDB Cloud Essentialでは、パブリックエンドポイントを使用する際に TLS 接続を有効にする必要があります。このサンプルコードでは、 `TIDB_ENABLE_SSL` `.env` を`true`に設定してください。
 >
 > ただし、Node.js はデフォルトで組み込みの[Mozilla CA証明書](https://wiki.mozilla.org/CA/Included_Certificates)を使用するため、 `TIDB_CA_PATH`を介して SSL CA 証明書を指定する必要は**ありません**。この証明書はTiDB Cloud StarterおよびTiDB Cloud Essentialによって信頼されています。
 
@@ -349,7 +349,7 @@ await this.dataSource.manager.save(player);
 
 ### データを削除する {#delete-data}
 
-以下のクエリは、IDが`Player`である`101` }を削除します。
+以下のクエリは、IDが`101`である`Player`を削除します。
 
 ```typescript
 await this.dataSource.manager.delete(Player, {

@@ -156,7 +156,7 @@ from:
 
             > **Note:**
             >
-            > ソース構成で`enable-gtid`が有効になっている場合、現在、binlogまたはリレーログファイルを解析して、binlogの位置に対応する GTID セットを取得し、それを`binlog-gtid`の`meta` } に設定する必要があります。
+            > ソース構成で`enable-gtid`が有効になっている場合、現在、binlogまたはリレーログファイルを解析して、binlogの位置に対応する GTID セットを取得し、それを`meta`の`binlog-gtid`に設定する必要があります。
 
 4. [`start-task`](/dm/dm-create-task.md)コマンドを使用して、v2.0以降のデータ移行タスク構成ファイルからアップグレードされたデータ移行タスクを開始します。
 

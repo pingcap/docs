@@ -331,7 +331,7 @@ MyBatis Mapperは2つのパラメータをサポートしています。
 - `ResultHandler`を使用したクエリ インターフェースを使用すると、結果セット全体を一度に取得することを避けることができます。
 - ストリーム読み取りには`Cursor`クラスを使用できます。
 
-XML を使用してマッピングを設定する場合、マッピングの`fetchSize="-2147483648"`セクションで`Integer.MIN_VALUE` } ( `<select>` ) を設定することで、読み取り結果をストリーミングできます。
+XML を使用してマッピングを設定する場合、マッピングの`<select>`セクションで`fetchSize="-2147483648"`（`Integer.MIN_VALUE`）を設定することで、読み取り結果をストリーミングできます。
 
 ```xml
 <select id="getAll" resultMap="postResultMap" fetchSize="-2147483648">
@@ -349,13 +349,13 @@ Cursor<Post> queryAllPost();
 
 ### `ExecutorType` {#executortype}
 
-`ExecutorType`の間に { `openSession` } を選択できます。MyBatis は 3種類の実行エンジンをサポートしています。
+`openSession`の間に`ExecutorType`を選択できます。MyBatis は 3種類の実行エンジンをサポートしています。
 
 - Simple: プリペアドステートメントは、実行ごとにJDBCに呼び出されます（JDBC構成項目`cachePrepStmts`が有効になっている場合、繰り返し実行されるプリペアドステートメントは再利用されます）。
 - Reuse: プリペアドステートメントは`executor`にキャッシュされるため、JDBC `cachePrepStmts`を使用せずにプリペアドステートメントの重複呼び出しを減らすことができます。
 - Batch: 各更新操作 ( `INSERT` / `DELETE` / `UPDATE` ) は、まずバッチに追加され、トランザクションがコミットされるか`SELECT`クエリが実行されるまで実行されます。JDBCレイヤーで`rewriteBatchStatements`が有効になっている場合は、ステートメントの書き換えが試みられます。そうでない場合は、ステートメントは 1つずつ送信されます。
 
-通常、 `ExecutorType`のデフォルト値は`Simple`です。 `ExecutorType`を呼び出すときは`openSession` } を変更する必要があります。バッチ実行の場合、トランザクション内で`UPDATE`または`INSERT`ステートメントの実行は非常に高速ですが、データの読み取りやトランザクションのコミットは遅くなる場合があります。これは正常な動作ですので、SQL クエリの遅延をトラブルシューティングする際には、この点に注意してください。
+通常、 `ExecutorType`のデフォルト値は`Simple`です。 `openSession`を呼び出すときは`ExecutorType`を変更する必要があります。バッチ実行の場合、トランザクション内で`UPDATE`または`INSERT`ステートメントの実行は非常に高速ですが、データの読み取りやトランザクションのコミットは遅くなる場合があります。これは正常な動作ですので、SQL クエリの遅延をトラブルシューティングする際には、この点に注意してください。
 
 ## 春のトランザクション {#spring-transaction}
 

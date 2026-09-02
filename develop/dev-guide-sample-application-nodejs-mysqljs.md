@@ -293,7 +293,7 @@ conn.query('INSERT INTO players (coins, goods) VALUES (?, ?);', [100, 100], (err
 
 ### クエリデータ {#query-data}
 
-次のクエリは、ID `Player` `1` } レコードを返します。
+次のクエリは、ID `1`の`Player`レコードを返します。
 
 ```javascript
 conn.query('SELECT id, coins, goods FROM players WHERE id = ?;', [1], (err, rows) => {

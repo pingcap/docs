@@ -74,7 +74,7 @@ mysql --comments --host 127.0.0.1 --port 4000 -u root
 
 テーブルを作成する際、 `VECTOR`データ型を指定することで、列を[ベクトル](/ai/concepts/vector-search-overview.md#vector-embedding)として定義できます。
 
-例えば、3次元の列`embedded_documents`を持つテーブル`VECTOR` } を作成するには、MySQL CLI を使用して次の SQL ステートメントを実行します。
+例えば、3次元の`VECTOR`列を持つテーブル`embedded_documents`を作成するには、MySQL CLI を使用して次の SQL ステートメントを実行します。
 
 ```sql
 USE test;
