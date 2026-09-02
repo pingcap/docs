@@ -53,7 +53,7 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 - 現在、 TiDB Cloud Starter では[チェンジフィード](/tidb-cloud/changefeed-overview.md)はサポートされていません。
 - 現在、 TiDB Cloud Starter では[データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)はサポートされていません。
 
-### TTL (Time to Live) {#time-to-live-ttl}
+### Time to live (TTL) {#time-to-live-ttl}
 
 - TiDB Cloud StarterとTiDB Cloud Essentialでは、テーブルの属性[`TTL_JOB_INTERVAL`](/time-to-live.md#ttl-job)は`15m`に固定されており、変更できません。つまり、 TiDB Cloud StarterとTiDB Cloud Essentialは、期限切れのデータをクリーンアップするために15分ごとにバックグラウンドジョブをスケジュールします。
 
