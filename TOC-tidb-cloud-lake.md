@@ -258,11 +258,12 @@
         - [SHOW TABLES](/tidb-cloud-lake/sql/show-tables.md)
       - View
         - [Overview](/tidb-cloud-lake/sql/ddl-view-overview.md)
-        - [ALTER VIEW](/tidb-cloud-lake/sql/alter-view.md)
         - [CREATE VIEW](/tidb-cloud-lake/sql/create-view.md)
-        - [DROP VIEW](/tidb-cloud-lake/sql/drop-view.md)
+        - [ALTER VIEW](/tidb-cloud-lake/sql/alter-view.md)
         - [DESC VIEW](/tidb-cloud-lake/sql/desc-view.md)
         - [SHOW VIEWS](/tidb-cloud-lake/sql/show-views.md)
+        - [DROP VIEW](/tidb-cloud-lake/sql/drop-view.md)
+        - [Materialized View](/tidb-cloud-lake/sql/materialized-view.md)
       - User & Role
         - [Overview](/tidb-cloud-lake/sql/user-role.md)
         - [CREATE USER](/tidb-cloud-lake/sql/create-user.md)
