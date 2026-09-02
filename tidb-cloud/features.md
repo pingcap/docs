@@ -233,7 +233,7 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
     <td>事件</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
-    <td style="text-align:center;">🚧</td>
+    <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>

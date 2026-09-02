@@ -64,10 +64,12 @@
       - [通过 PagerDuty 订阅](/tidb-cloud/monitor-alert-pagerduty.md)
       - [通过 Webhook 订阅](/tidb-cloud/monitor-alert-webhook.md)
       - [通过 Lark 订阅](/tidb-cloud/monitor-alert-lark.md)
+    - [事件](/tidb-cloud/tidb-cloud-events.md)
     - [集成 TiDB Cloud 与 Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
   - 性能调优
     - [概览](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [分析性能](/tidb-cloud/tune-performance.md)
+    - [使用 Plan Replayer 排查 SQL 性能问题](/tidb-cloud/plan-replayer.md)
     - SQL 调优
       - [概览](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
       - 理解 TiDB 执行计划

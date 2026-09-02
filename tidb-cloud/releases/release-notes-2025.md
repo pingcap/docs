@@ -395,7 +395,7 @@ summary: 了解 2025 年 TiDB Cloud 的发布说明。
 
   下一步，我们计划扩展阿里云 Region 覆盖范围，并增加对 AWS 的支持。
 
-    如果你在公测期间体验了阿里云上的 Essential，可通过 Web 控制台反馈，或加入我们的 [Slack 社区](https://tidbcommunity.slack.com/archives/CH7TTLL7P) 或 [Discord 社区](https://discord.gg/ukhXbn69Nx) 交流。
+    如果你在公测期间体验了阿里云上的 Essential，可通过 Web 控制台反馈，或加入我们的 [Slack 社区](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=docs) 或 [Discord 社区](https://discord.gg/ukhXbn69Nx) 交流。
 
 - **TiDB Cloud Dedicated**
 

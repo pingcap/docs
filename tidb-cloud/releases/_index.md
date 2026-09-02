@@ -24,7 +24,7 @@ TiDB Cloud 提供两类发布：[云平台发布](#cloud-platform-release-notes)
 | TiDB Cloud **Starter** | 运行在基于经典 [TiDB v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3/) 内核定制的 [TiDB X](/tidb-cloud/tidb-x-architecture.md) 引擎上。 |
 | TiDB Cloud **Essential** | 默认运行在基于经典 [TiDB v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3/) 内核定制的 [TiDB X](/tidb-cloud/tidb-x-architecture.md) 引擎上。 |
 | TiDB Cloud **Premium** | 运行在 [TiDB X](/tidb-cloud/tidb-x-architecture.md) 内核的 [`TiDB-X-CLOUD.202510.1`](/tidb-cloud/releases/tidb-x-cloud.202510.1.md) 版本上。 |
-| TiDB Cloud **Dedicated** | 运行在经典 TiDB 内核上，其内核版本与 TiDB Self-Managed 版本直接对应。目前，新创建的 TiDB Cloud Dedicated 集群默认 TiDB 版本为 [v8.5.7](https://docs.pingcap.com/tidb/stable/release-8.5.7/)。 |
+| TiDB Cloud **Dedicated** | 运行在经典 TiDB 内核上，其内核版本与 TiDB Self-Managed 版本直接对应。目前，新创建的 TiDB Cloud Dedicated 集群默认 TiDB 版本为 [v8.5.8](https://docs.pingcap.com/tidb/stable/release-8.5.8/)。 |
 
 > **注意：**
 >
