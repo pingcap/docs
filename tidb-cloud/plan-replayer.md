@@ -17,7 +17,7 @@ If you need assistance from TiDB Cloud Support to troubleshoot the SQL performan
 
 ## Before you start
 
-- Connect to the target TiDB Cloud Essential or Premium instance using a SQL client that supports Plan Replayer statements.
+- Connect to the target TiDB Cloud Essential or Premium instance using a SQL client.
 - Use an account with permission to execute the required SQL statements.
 - Identify the SQL statement, SQL digest, or plan digest that you want to investigate.
 - Remove or mask sensitive literals in SQL text where possible. Plan Replayer does not include table rows, but SQL text and schema names might still contain sensitive information.
@@ -35,7 +35,7 @@ PLAN REPLAYER DUMP EXPLAIN
 SELECT * FROM orders WHERE customer_id = 1001;
 ```
 
-The statement returns a pre-signed S3 download URL in the `File_token` column. The URL is temporary. Save it securely and download the Plan Replayer ZIP file before it expires.
+The statement returns a download URL in the `File_token` column. The URL is temporary. Save it securely and download the Plan Replayer ZIP file before it expires.
 
 ### Include runtime information
 
