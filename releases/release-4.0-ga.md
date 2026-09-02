@@ -22,7 +22,7 @@ TiDB バージョン: 4.0.0
 
 - TiKV
     - Backup & Restore (BR) を使用してバックアップするときに発生する`DefaultNotFound`エラーを修正します [＃7937](https://github.com/tikv/tikv/pull/7937)
-    - 順序がずれた`ReadIndex`パケットによるシステムパニックを修正[＃7930](https://github.com/tikv/tikv/pull/7930)
+    - 順序が乱れた`ReadIndex`パケットによるシステムパニックを修正 [＃7930](https://github.com/tikv/tikv/pull/7930)
     - TiKV の再起動後にスナップショットファイルを誤って削除することで発生するシステムパニックを修正[＃7927](https://github.com/tikv/tikv/pull/7927)
 
 - TiFlash
