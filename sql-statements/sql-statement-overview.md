@@ -278,7 +278,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`CREATE USER`](/sql-statements/sql-statement-create-user.md) | Creates a new user. |
 | [`DROP ROLE`](/sql-statements/sql-statement-drop-role.md) | Drops an existing role. |
 | [`DROP USER`](/sql-statements/sql-statement-drop-user.md) | Drops an existing user. |
-| [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md) | Reloads the in-memory copy of privileges from the privilege tables. |
+| [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md) | Reloads the grant tables into memory. |
 | [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md) | Grants privileges. |
 | [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md) | Grants a role. |
 | [`RENAME USER`](/sql-statements/sql-statement-rename-user.md) | Renames an existing user. |
