@@ -50,7 +50,7 @@ TiDB Ansible バージョン: 3.0.6
     - 悲観的トランザクションクエリが強制終了されたときに、他のトランザクションが不必要に待機するのを防ぐために、悲観的トランザクション TTL の更新を停止します[＃13046](https://github.com/pingcap/tidb/pull/13046)
 - DDL
     - TiDB の`SHOW CREATE VIEW`の実行結果が MySQL 結果と一致しない問題を修正しました [＃12912](https://github.com/pingcap/tidb/pull/12912)
-    - `union`に基づいて`View`を作成するサポート（例： `create view v as select * from t1 union select * from t2` [＃12955](https://github.com/pingcap/tidb/pull/12955)
+    - `union`に基づいて`View`を作成するサポート（例：`create view v as select * from t1 union select * from t2`） [＃12955](https://github.com/pingcap/tidb/pull/12955)
     - `slow_query`テーブルにトランザクション関連のフィールドを追加します: [＃13072](https://github.com/pingcap/tidb/pull/13072)
         - `Prewrite_time`
         - `Commit_time`
@@ -83,7 +83,7 @@ TiDB Ansible バージョン: 3.0.6
 
 ## PD {#pd}
 
-- 各フィルターに`ActOn`ディメンションを追加して、各スケジューラとチェッカーがフィルターの影響を受けることを示します。また、使用されていない2つのフィルター（ `disconnectFilter`と`rejectLeaderFilter` を削除します。 [＃1911](https://github.com/pingcap/pd/pull/1911)
+- 各フィルターに`ActOn`ディメンションを追加して、各スケジューラとチェッカーがフィルターの影響を受けることを示します。また、使用されていない2つのフィルター（`disconnectFilter`と`rejectLeaderFilter`）を削除します。 [＃1911](https://github.com/pingcap/pd/pull/1911)
 - PD でタイムスタンプを生成するのに 5 ミリ秒以上かかる場合は警告ログを出力します。 [＃1867](https://github.com/pingcap/pd/pull/1867)
 - 利用できないエンドポイントをクライアントに渡すときにクライアントのログレベルを下げる [＃1856](https://github.com/pingcap/pd/pull/1856)
 - gRPCメッセージパッケージが`region_syncer`レプリケーションプロセスで最大サイズを超える可能性がある問題を修正 [＃1952](https://github.com/pingcap/pd/pull/1952)
