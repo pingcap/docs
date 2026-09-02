@@ -169,7 +169,7 @@ TiDB Cloud Vercel 統合経由で接続するには、 [Vercelの統合マーケ
 
 ### TiDB Cloudのブランチ機能に接続します {#connect-with-branching} {#connect-with-branching}
 
-Vercel の[プレビュー展開](https://vercel.com/docs/deployments/preview-deployments)機能を使用すると、変更を Git プロジェクトの本番ブランチにマージすることなく、ライブデプロイメントでアプリの変更をプレビューできます。TiDB [TiDB Cloud Branching](/tidb-cloud/branch-overview.md)を使用すると、Vercel プロジェクトのブランチごとに新しいインスタンスを作成できます。これにより、本番データに影響を与えることなく、ライブデプロイメントでアプリの変更をプレビューできます。
+Vercel の[プレビューデプロイメント](https://vercel.com/docs/deployments/preview-deployments)機能を使用すると、変更を Git プロジェクトの本番ブランチにマージすることなく、ライブデプロイメントでアプリの変更をプレビューできます。TiDB [TiDB Cloud Branching](/tidb-cloud/branch-overview.md)を使用すると、Vercel プロジェクトのブランチごとに新しいインスタンスを作成できます。これにより、本番データに影響を与えることなく、ライブデプロイメントでアプリの変更をプレビューできます。
 
 > **Note:**
 >
@@ -191,7 +191,7 @@ Gitリポジトリに変更をプッシュすると、Vercelがプレビュー�
 
 2. 変更を加えて、その変更をリモートリポジトリにプッシュします。
 
-3. Vercelは、新しいブランチのプレビュー展開を開始します。
+3. Vercelは、新しいブランチのプレビューデプロイメントを開始します。
 
     ![Vercel Preview\_Deployment](/media/tidb-cloud/vercel/vercel-preview-deployment.png)
 

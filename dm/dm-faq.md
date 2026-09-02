@@ -133,7 +133,7 @@ DM v2.0 以降、増分データレプリケーションを続行するために
 
 このエラーは[DM 1.0 クラスターの DM 移行タスクを DM 2.0 クラスターに手動でインポートする](/dm/manually-upgrade-dm-1.0-to-2.0.md)で処理できます。
 
-## TiUP がDM の一部のバージョン (たとえば、v2.0.0-hotfix) の展開に失敗するのはなぜですか? {#why-does-tiup-fail-to-deploy-some-versions-of-dm-for-example-v200-hotfix}
+## TiUP がDM の一部のバージョン (たとえば、v2.0.0-hotfix) のデプロイに失敗するのはなぜですか? {#why-does-tiup-fail-to-deploy-some-versions-of-dm-for-example-v200-hotfix}
 
 `tiup list dm-master`コマンドを使用すると、 TiUP がデプロイをサポートしている DM バージョンを表示できます。このコマンドで表示されない DM バージョンはTiUPによって管理されません。
 

@@ -242,7 +242,7 @@ v5.3 の主な新機能または改善点は次のとおりです。
 
     TiDB v5.3.0以降、TiCDC OpenAPIが一般提供（GA）されました。本番環境では、OpenAPIを使用してTiCDCクラスターのクエリと操作を行うことができます。
 
-### 展開と保守 {#deployment-and-maintenance}
+### デプロイと保守 {#deployment-and-maintenance}
 
 - **継続的なプロファイリング（実験的機能）**
 

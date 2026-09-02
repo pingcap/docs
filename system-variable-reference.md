@@ -2368,7 +2368,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 - [スロークエリを分析する](/analyze-slow-queries.md)
-- [3ノードハイブリッド展開のベストプラクティス](/best-practices/three-nodes-hybrid-deployment.md)
+- [3ノードハイブリッドデプロイのベストプラクティス](/best-practices/three-nodes-hybrid-deployment.md)
 - [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [システム変数](/system-variables.md#tidb_hash_join_concurrency)
@@ -2457,7 +2457,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [3ノードハイブリッド展開のベストプラクティス](/best-practices/three-nodes-hybrid-deployment.md)
+- [3ノードハイブリッドデプロイのベストプラクティス](/best-practices/three-nodes-hybrid-deployment.md)
 - [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [システム変数](/system-variables.md#tidb_index_lookup_join_concurrency)
@@ -3542,7 +3542,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [3つのデータセンター展開におけるローカル読み取りのベストプラクティス](/best-practices/three-dc-local-read.md)
+- [3つのデータセンターデプロイにおけるローカル読み取りのベストプラクティス](/best-practices/three-dc-local-read.md)
 - [読み取り専用ストレージノードのベストプラクティス](/best-practices/readonly-nodes.md)
 - [Follower Read](/follower-read.md)
 - [Follower Read](/develop/dev-guide-use-follower-read.md)

@@ -15,7 +15,7 @@ cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://ro
 
 ## 新しいアーキテクチャにおける TiCDC のメトリクス {#metrics-for-ticdc-in-the-new-architecture}
 
-[新しいアーキテクチャにおけるTiCDC](/ticdc/ticdc-architecture.md)の監視ダッシュボードは**TiCDC-New-Arch**です。v8.5.4 以降のバージョンの TiDB クラスターでは、この監視ダッシュボードはクラスターの展開またはアップグレード時に Grafana に統合されるため、手動操作は不要です。
+[新しいアーキテクチャにおけるTiCDC](/ticdc/ticdc-architecture.md)の監視ダッシュボードは**TiCDC-New-Arch**です。v8.5.4 以降のバージョンの TiDB クラスターでは、この監視ダッシュボードはクラスターのデプロイまたはアップグレード時に Grafana に統合されるため、手動操作は不要です。
 
 クラスターのバージョンが v8.5.4 より前の場合は、TiCDC 監視メトリック ファイルを手動でインポートする必要があります。
 

@@ -39,7 +39,7 @@ TiDB DashboardはPDクライアントポート（デフォルトは[http://IP:23
 
 - リバースプロキシを構成して、別のポートで TiDB Dashboard サービスを外部ネットワークに安全に提供する方法の詳細については、 [リバースプロキシの背後で TiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
 
-### 複数のPDインスタンスを展開するときにTiDB Dashboardポートへのアクセスを開く方法 {#how-to-open-access-to-tidb-dashboard-port-when-deploying-multiple-pd-instances}
+### 複数のPDインスタンスをデプロイするときにTiDB Dashboardポートへのアクセスを開く方法 {#how-to-open-access-to-tidb-dashboard-port-when-deploying-multiple-pd-instances}
 
 > **Warning:**
 >

@@ -9,7 +9,7 @@ summary: TiDB 6.1.1は2022年9月1日にリリースされました。変更点�
 
 TiDB バージョン: 6.1.1
 
-Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [本番環境への展開](https://docs-archive.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
+Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [本番環境へのデプロイ](https://docs-archive.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
 
 ## 互換性の変更 {#compatibility-changes}
 

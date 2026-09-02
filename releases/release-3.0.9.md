@@ -56,4 +56,4 @@ TiDB Ansible バージョン: 3.0.9
 
 ## TiDB Ansible {#tidb-ansible}
 
-- TiDB Lightning の展開を最適化するためにディレクトリを自動的に作成する機能をサポート [＃1105](https://github.com/pingcap/tidb-ansible/pull/1105)
+- TiDB Lightning のデプロイを最適化するためにディレクトリを自動的に作成する機能をサポート [＃1105](https://github.com/pingcap/tidb-ansible/pull/1105)

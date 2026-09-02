@@ -10,7 +10,7 @@ summary: TiDB Lightningをデプロイ、大量の新しいデータを迅速に
 - [物理インポートモードの要件と制限](/tidb-lightning/tidb-lightning-physical-import-mode.md#requirements-and-restrictions)
 - [論理インポートモードの要件と制限](/tidb-lightning/tidb-lightning-logical-import-mode.md)
 
-## TiUPを使用したオンライン展開 (推奨) {#online-deployment-using-tiup-recommended}
+## TiUPを使用したオンラインデプロイ (推奨) {#online-deployment-using-tiup-recommended}
 
 1. 次のコマンドを使用してTiUPをインストールします。
 
@@ -26,7 +26,7 @@ summary: TiDB Lightningをデプロイ、大量の新しいデータを迅速に
     tiup install tidb-lightning
     ```
 
-## 手動展開 {#manual-deployment}
+## 手動デプロイ {#manual-deployment}
 
 ### TiDB Lightningバイナリをダウンロード {#download-tidb-lightning-binaries}
 

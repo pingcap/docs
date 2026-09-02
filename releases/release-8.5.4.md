@@ -9,7 +9,7 @@ summary: TiDB 8.5.4 の機能、互換性の変更点、改善点、およびバ
 
 TiDBバージョン：8.5.4
 
-クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb)| [本番環境への展開](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb)| [本番環境へのデプロイ](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup)
 
 ## 機能 {#features}
 

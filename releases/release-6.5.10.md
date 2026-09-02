@@ -9,7 +9,7 @@ summary: TiDB 6.5.10 における互換性の変更、改善、およびバグ�
 
 TiDB バージョン: 6.5.10
 
-クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [本番環境への展開](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [本番環境へのデプロイ](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup)
 
 ## 互換性の変更 {#compatibility-changes}
 
@@ -99,7 +99,7 @@ TiDB バージョン: 6.5.10
 
 - PD
 
-    - 展開された2つのデータセンター間でリーダーを切り替えるとLeaderが失敗する問題を修正[＃7992](https://github.com/tikv/pd/issues/7992) @[TonsnakeLin](https://github.com/TonsnakeLin)
+    - デプロイされた2つのデータセンター間でリーダーを切り替えるとLeaderが失敗する問題を修正[＃7992](https://github.com/tikv/pd/issues/7992) @[TonsnakeLin](https://github.com/TonsnakeLin)
     - 配置ルールを使用しているときに、ダウンしたピアが回復しない可能性がある問題を修正しました。 [＃7808](https://github.com/tikv/pd/issues/7808) @[rleungx](https://github.com/rleungx)
     - PDの`Filter target`監視メトリックが散布範囲情報を提供しない問題を修正[＃8125](https://github.com/tikv/pd/issues/8125) @[HuSharp](https://github.com/HuSharp)
 

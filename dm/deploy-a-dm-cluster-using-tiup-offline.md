@@ -1,11 +1,11 @@
 ---
 title: Deploy a DM Cluster Offline Using TiUP
-summary: TiUPを使用して DM クラスターをオフラインで展開する方法を紹介します。
+summary: TiUPを使用して DM クラスターをオフラインでデプロイする方法を紹介します。
 ---
 
 # TiUPを使用して DMクラスタをオフラインでデプロイ {#deploy-a-dm-cluster-offline-using-tiup}
 
-このドキュメントでは、 TiUPを使用して DM クラスターをオフラインで展開する方法について説明します。
+このドキュメントでは、 TiUPを使用して DM クラスターをオフラインでデプロイする方法について説明します。
 
 ## ステップ1: TiUPオフラインコンポーネントパッケージを準備する {#step-1-prepare-the-tiup-offline-component-package}
 
@@ -72,7 +72,7 @@ source /home/tidb/.bash_profile
 
 完全な構成テンプレートについては、「 [TiUP構成パラメータ テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml) . 構成ファイルを作成する」 `topology.yaml`を参照してください。その他の複合シナリオでは、テンプレートに従って必要に応じて構成ファイルを編集します。
 
-3 つの DM マスター、3つの DM ワーカー、および 1つの監視コンポーネントインスタンスを展開する構成は次のとおりです。
+3 つの DM マスター、3つの DM ワーカー、および 1つの監視コンポーネントインスタンスをデプロイする構成は次のとおりです。
 
 ```yaml
 ---
@@ -107,7 +107,7 @@ alertmanager_servers:
 >
 > - DM クラスターの高可用性を確保する必要がない場合は、DM マスターノードを 1つだけデプロイし、デプロイされた DM ワーカーノードの数は、移行するアップストリーム MySQL/MariaDB インスタンスの数以上である必要があります。
 >
-> - DM クラスターの高可用性を確保するには、3つの DM マスターノードを展開することをお勧めします。また、展開する DM ワーカーノードの数は、移行するアップストリーム MySQL/MariaDB インスタンスの数より多くする必要があります (たとえば、DM ワーカーノードの数は、アップストリーム インスタンスの数より 2つ多くなります)。
+> - DM クラスターの高可用性を確保するには、3つの DM マスターノードをデプロイすることをお勧めします。また、デプロイする DM ワーカーノードの数は、移行するアップストリーム MySQL/MariaDB インスタンスの数より多くする必要があります (たとえば、DM ワーカーノードの数は、アップストリーム インスタンスの数より 2つ多くなります)。
 >
 > - グローバルに有効にする必要があるパラメータについては、構成ファイルの`server_configs`セクションで対応するコンポーネントのこれらのパラメータを構成します。
 >
@@ -128,7 +128,7 @@ alertmanager_servers:
 
 > **Note:**
 >
-> TiUPを使用して DM を展開する場合、セキュリティ認証に秘密キーまたは対話型パスワードを使用できます。
+> TiUPを使用して DM をデプロイする場合、セキュリティ認証に秘密キーまたは対話型パスワードを使用できます。
 >
 > - 秘密鍵を使用する場合は、 `-i`または`--identity_file`を通じて鍵のパスを指定できます。
 > - パスワードを使用する場合は、パスワード対話ウィンドウに入るために`-p`フラグを追加します。
@@ -143,7 +143,7 @@ tiup dm deploy dm-test ${version} ./topology.yaml --user root [-p] [-i /home/roo
 - デプロイされた DM クラスターの名前は`dm-test`です。
 - DMクラスタのバージョンは`${version}`です。TiUPでサポートされている最新バージョンを確認するには、 `tiup list dm-master`を実行します。
 - 初期化構成ファイルは`topology.yaml`です。
-- `--user root` : `root`キーを使用してターゲットマシンにログインし、クラスターの展開を完了するか、 `ssh`および`sudo`権限を持つ他のユーザーを使用して展開を完了することができます。
+- `--user root` : `root`キーを使用してターゲットマシンにログインし、クラスターのデプロイを完了するか、 `ssh`および`sudo`権限を持つ他のユーザーを使用してデプロイを完了することができます。
 - `[-i]`と`[-p]` : オプション。ターゲットマシンへのログインをパスワードなしで設定している場合、これらのパラメータは不要です。そうでない場合は、2つのパラメータのいずれかを選択してください。`[-i]`は、ターゲットマシンにアクセスできる`root`ユーザー（または`--user`で指定された他のユーザー）の秘密鍵です。`[-p]`は、ユーザーパスワードを対話的に入力するために使用されます。
 - TiUP DMは組み込みのSSHクライアントを使用します。制御マシンシステムにネイティブのSSHクライアントを使用する場合は、 [システムのネイティブSSHクライアントを使用してクラスターに接続する](/dm/maintain-dm-using-tiup.md#use-the-systems-native-ssh-client-to-connect-to-cluster)に従って設定を編集してください。
 
@@ -163,7 +163,7 @@ Name  User  Version  Path                                  PrivateKey
 dm-test  tidb  ${version}  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/storage/dm/clusters/dm-test/ssh/id_rsa
 ```
 
-## ステップ6: 展開されたDMクラスタのステータスを確認する {#step-6-check-the-status-of-the-deployed-dm-cluster}
+## ステップ6: デプロイされたDMクラスタのステータスを確認する {#step-6-check-the-status-of-the-deployed-dm-cluster}
 
 `dm-test`クラスターのステータスを確認するには、次のコマンドを実行します。
 

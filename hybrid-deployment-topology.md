@@ -5,9 +5,9 @@ summary: TiDB クラスターのハイブリッド展開トポロジについて
 
 # ハイブリッド展開トポロジ {#hybrid-deployment-topology}
 
-このドキュメントでは、TiKV と TiDB のハイブリッド展開のトポロジと主要なパラメータについて説明します。
+このドキュメントでは、TiKV と TiDB のハイブリッドデプロイのトポロジと主要なパラメータについて説明します。
 
-ハイブリッド展開は通常、次のシナリオで使用されます。
+ハイブリッドデプロイは通常、次のシナリオで使用されます。
 
 デプロイメントマシンには、十分なメモリを備えた複数のCPUプロセッサが搭載されています。物理マシンリソースの利用率を向上させるため、TiDBとTiKVのCPUリソースはNUMAノードバインディングによって分離され、単一のマシンに複数のインスタンスをデプロイできます。PDとPrometheusは一緒にデプロイされますが、それぞれのデータディレクトリは別々のファイルシステムを使用する必要があります。
 
@@ -26,8 +26,8 @@ summary: TiDB クラスターのハイブリッド展開トポロジについて
 
 ### トポロジテンプレート {#topology-templates}
 
-- [ハイブリッド展開のためのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-multi-instance.yaml)
-- [ハイブリッド展開のための複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-multi-instance.yaml)
+- [ハイブリッドデプロイのためのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-multi-instance.yaml)
+- [ハイブリッドデプロイのための複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-multi-instance.yaml)
 
 上記の TiDB クラスター トポロジファイルの構成項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 

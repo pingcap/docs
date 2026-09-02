@@ -170,7 +170,7 @@ TiCDCは、HTTPプロトコル（OpenAPI）を使用してTiCDCタスクを管�
 
 [#2411](https://github.com/pingcap/tiflow/issues/2411)
 
-### 展開と運用 {#deployment-and-operations}
+### デプロイと運用 {#deployment-and-operations}
 
 Apple M1チップを搭載したMacコンピュータで`tiup playground`コマンドを実行することをサポートします。
 

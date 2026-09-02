@@ -115,9 +115,9 @@ server_configs:
     dashboard.public-path-prefix: /foo
 ```
 
-<details><summary><strong>TiUPを使用して新しいクラスターを展開するときに構成を変更する</strong></summary>
+<details><summary><strong>TiUPを使用して新しいクラスターをデプロイするときに構成を変更する</strong></summary>
 
-新しいクラスタをデプロイする場合は、上記の設定を`topology.yaml` TiUPトポロジファイルに追加してクラスタをデプロイできます。具体的な手順については、 [TiUP展開ドキュメント](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file)を参照してください。
+新しいクラスタをデプロイする場合は、上記の設定を`topology.yaml` TiUPトポロジファイルに追加してクラスタをデプロイできます。具体的な手順については、 [TiUPデプロイドキュメント](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file)を参照してください。
 
 </details>
 

@@ -5,7 +5,7 @@ summary: TiDB インストールパッケージと、含まれる特定のコン
 
 # TiDB インストールパッケージ {#tidb-installation-packages}
 
-[TiUPをオフラインで展開する](/production-deployment-using-tiup.md#deploy-tiup-offline)前に、 [TiUPオフラインコンポーネントパッケージを準備する](/production-deployment-using-tiup.md#prepare-the-tiup-offline-component-package)で説明されているように TiDB のバイナリパッケージをダウンロードする必要があります。
+[TiUPをオフラインでデプロイする](/production-deployment-using-tiup.md#deploy-tiup-offline)前に、 [TiUPオフラインコンポーネントパッケージを準備する](/production-deployment-using-tiup.md#prepare-the-tiup-offline-component-package)で説明されているように TiDB のバイナリパッケージをダウンロードする必要があります。
 
 TiDBバイナリパッケージは、amd64およびarm64アーキテクチャで利用可能です。どちらのアーキテクチャでも、TiDBは`TiDB-community-server`と`TiDB-community-toolkit` 2つのバイナリパッケージを提供します。
 

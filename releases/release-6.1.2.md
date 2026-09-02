@@ -9,7 +9,7 @@ summary: TiDB 6.1.2は2022年10月24日にリリースされました。この�
 
 TiDB バージョン: 6.1.2
 
-Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [本番環境への展開](https://docs-archive.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
+Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [本番環境へのデプロイ](https://docs-archive.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
 
 ## 改善点 {#improvements}
 

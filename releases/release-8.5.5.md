@@ -9,7 +9,7 @@ summary: TiDB 8.5.5 の機能、互換性の変更点、改善点、およびバ
 
 TiDBバージョン：8.5.5
 
-クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb)| [本番環境への展開](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb)| [本番環境へのデプロイ](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup)
 
 ## 機能 {#features}
 
@@ -71,7 +71,7 @@ TiDBバージョン：8.5.5
 
 - バックアップからのシステムテーブルのリカバリを高速化 [#58757](https://github.com/pingcap/tidb/issues/58757) @[Leavrth](https://github.com/Leavrth)
 
-    バージョン8.5.5以降、 BRはバックアップからシステムテーブルを復元する際に、論理復元ではなく物理復元を使用するための新しい`--fast-load-sys-tables`パラメータを導入しました。このパラメータを有効にすると、 BRは既存のシステムテーブルにデータを復元するのではなく、既存のテーブルを完全に置き換えるか上書きするため、大規模な展開における復元パフォーマンスが大幅に向上します。
+    バージョン8.5.5以降、 BRはバックアップからシステムテーブルを復元する際に、論理復元ではなく物理復元を使用するための新しい`--fast-load-sys-tables`パラメータを導入しました。このパラメータを有効にすると、 BRは既存のシステムテーブルにデータを復元するのではなく、既存のテーブルを完全に置き換えるか上書きするため、大規模なデプロイにおける復元パフォーマンスが大幅に向上します。
 
     詳細については、 [ドキュメント](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)を参照してください。
 

@@ -265,7 +265,7 @@ AWS Lambda関数は、 [SAM CLI](#sam-cli-deployment-recommended)または[AWS L
     #        Successfully created!
     ```
 
-### Webコンソールの展開 {#web-console-deployment}
+### Webコンソールのデプロイ {#web-console-deployment}
 
 1. バンドルを作成する:
 

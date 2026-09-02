@@ -9,7 +9,7 @@ summary: TiDB 7.1.0 の新機能、互換性の変更、改善点、バグ修正
 
 TiDB バージョン: 7.1.0
 
-クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v7.1/quick-start-with-tidb) | [本番環境への展開](https://docs.pingcap.com/tidb/v7.1/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v7.1/quick-start-with-tidb) | [本番環境へのデプロイ](https://docs.pingcap.com/tidb/v7.1/production-deployment-using-tiup)
 
 TiDB 7.1.0 は長期サポートリリース (LTS) です。
 

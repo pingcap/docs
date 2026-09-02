@@ -7,9 +7,9 @@ summary: ツールと適用可能なシナリオを学習します。
 
 TiDBは、TiDBの導入と保守、データ管理（データ移行、バックアップと復元、データ比較など）、TiKV上でのSpark SQLの実行を支援する豊富なツールセットを提供しています。ニーズに応じて適切なツールを選択できます。
 
-## 展開および運用ツール {#deployment-and-operation-tools}
+## デプロイおよび運用ツール {#deployment-and-operation-tools}
 
-TiDB は、さまざまなシステム環境での展開および運用のニーズを満たすために、 TiUPとTiDB Operator を提供します。
+TiDB は、さまざまなシステム環境でのデプロイおよび運用のニーズを満たすために、 TiUPとTiDB Operator を提供します。
 
 ### 物理マシンまたは仮想マシンに TiDBをデプロイて運用する - TiUP {#deploy-and-operate-tidb-on-physical-or-virtual-machines-tiup}
 

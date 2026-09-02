@@ -9,7 +9,7 @@ summary: TiDB 6.5.1 における互換性の変更、改善、およびバグ修
 
 TiDB バージョン: 6.5.1
 
-クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [本番環境への展開](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [本番環境へのデプロイ](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup)
 
 ## 互換性の変更 {#compatibility-changes}
 
@@ -34,7 +34,7 @@ TiDB バージョン: 6.5.1
     - v6.5.1以降、 TiDB Operator v1.4.3以降でデプロイされたTiDBクラスタはIPv6アドレスをサポートします。これにより、TiDBはより広いアドレス空間をサポートし、セキュリティとネットワークパフォーマンスを向上させることができます。
 
         - IPv6 アドレスの完全サポート: TiDB は、クライアント接続、ノード間の内部通信、外部システムとの通信など、すべてのネットワーク接続で IPv6 アドレスの使用をサポートします。
-        - デュアルスタックのサポート：まだIPv6への完全移行の準備が整っていない場合でも、TiDBはデュアルスタックネットワークをサポートしています。つまり、同じTiDBクラスタ内でIPv4とIPv6の両方のアドレスを使用し、設定によってIPv6を優先するネットワーク展開モードを選択できます。
+        - デュアルスタックのサポート：まだIPv6への完全移行の準備が整っていない場合でも、TiDBはデュアルスタックネットワークをサポートしています。つまり、同じTiDBクラスタ内でIPv4とIPv6の両方のアドレスを使用し、設定によってIPv6を優先するネットワークデプロイモードを選択できます。
 
         IPv6 の導入の詳細については、 [Kubernetes 上の TiDB ドキュメント](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#ipv6-support)を参照してください。
 

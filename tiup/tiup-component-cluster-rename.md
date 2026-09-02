@@ -5,7 +5,7 @@ summary: tiup cluster renameコマンドは、デプロイ後にクラスター�
 
 # tiup cluster rename {#tiup-cluster-rename}
 
-[クラスターが展開される](/tiup/tiup-component-cluster-deploy.md)ではクラスター名を指定します。クラスターをデプロイした後にクラスター名を変更する場合は、コマンド`tiup cluster rename`を使用します。
+[クラスターがデプロイされる](/tiup/tiup-component-cluster-deploy.md)ではクラスター名を指定します。クラスターをデプロイした後にクラスター名を変更する場合は、コマンド`tiup cluster rename`を使用します。
 
 > **Note:**
 >

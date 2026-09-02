@@ -7,11 +7,11 @@ summary: 最小限の TiDB トポロジに基づく TiProxy の展開トポロ�
 
 このドキュメントでは、最小限の TiDB トポロジに基づく[TiProxy](/tiproxy/tiproxy-overview.md)のデプロイメント トポロジについて説明します。
 
-その他の展開方法については、次のドキュメントを参照してください。
+その他のデプロイ方法については、次のドキュメントを参照してください。
 
 - TiDB Operatorを使用して TiProxy をデプロイするには、 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tiproxy)ドキュメントを参照してください。
-- TiUPを使用して TiProxy をローカルに素早く展開するには、 [TiProxyをデプロイ](/tiup/tiup-playground.md#deploy-tiproxy)を参照してください。
-- TiUPを使用して TiProxy を展開するには、 [インストールと使用方法](/tiproxy/tiproxy-overview.md#installation-and-usage)を参照してください。
+- TiUPを使用して TiProxy をローカルに素早くデプロイするには、 [TiProxyをデプロイ](/tiup/tiup-playground.md#deploy-tiproxy)を参照してください。
+- TiUPを使用して TiProxy をデプロイするには、 [インストールと使用方法](/tiproxy/tiproxy-overview.md#installation-and-usage)を参照してください。
 
 TiProxy は TiDB の L7 プロキシサーバーであり、接続のバランスを取り、可能な場合はセッションを移行できます。
 

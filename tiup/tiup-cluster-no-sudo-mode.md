@@ -1,6 +1,6 @@
 ---
 title: Deploy and Maintain an Online TiDB Cluster Using TiUP No-sudo Mode
-summary: TiUP no-sudo モードを使用してオンライン TiDB クラスターを展開および管理する方法を学習します。
+summary: TiUP no-sudo モードを使用してオンライン TiDB クラスターをデプロイおよび管理する方法を学習します。
 ---
 
 # TiUP No-sudo モードを使用してオンライン TiDBクラスタをデプロイおよび管理 {#deploy-and-maintain-an-online-tidb-cluster-using-tiup-no-sudo-mode}

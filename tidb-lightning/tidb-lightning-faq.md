@@ -75,7 +75,7 @@ sql-mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"
 
 ## `tidb-lightning`プロセスを停止するにはどうすればいいですか? {#how-to-stop-the-tidb-lightning-process}
 
-`tidb-lightning`プロセスを停止するには、展開方法に応じて対応する操作を選択できます。
+`tidb-lightning`プロセスを停止するには、デプロイ方法に応じて対応する操作を選択できます。
 
 - 手動デプロイの場合： `tidb-lightning`フォアグラウンドで実行されている場合は、 <kbd>Ctrl</kbd> + <kbd>C</kbd>を押して終了します。それ以外の場合は、 `ps aux | grep tidb-lightning`コマンドを使用してプロセス ID を取得し、 `kill -2 ${PID}`コマンドを使用してプロセスを終了します。
 

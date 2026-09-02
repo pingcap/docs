@@ -117,7 +117,7 @@ Use "tiup [command] --help" for more information about a command.
 - 利用可能なコンポーネント
     - Playground: TiDB クラスターをローカルで起動するために使用されます
     - client: TiUP Playground への接続に使用するクライアント
-    - cluster:本番環境用の TiDB クラスターを展開するために使用されます
+    - cluster:本番環境用の TiDB クラスターをデプロイするために使用されます
     - bench: データベースのストレステストに使用
 
 > **Note:**

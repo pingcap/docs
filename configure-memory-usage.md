@@ -56,7 +56,7 @@ tidb-server インスタンスのメモリ使用量が総メモリの一定割�
 
 > **Note:**
 >
-> ハイブリッド展開シナリオでは、物理マシン全体の合計メモリしきい値ではなく、単一の tidb-server インスタンスのメモリ使用量しきい値は`tidb_server_memory_limit`になります。
+> ハイブリッドデプロイシナリオでは、物理マシン全体の合計メモリしきい値ではなく、単一の tidb-server インスタンスのメモリ使用量しきい値は`tidb_server_memory_limit`になります。
 
 ## INFORMATION_SCHEMA システムテーブルを使用して、現在の tidb-server インスタンスのメモリ使用量を表示する {#view-the-memory-usage-of-the-current-tidb-server-instance-using-the-information_schema-system-table}
 

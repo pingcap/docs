@@ -5,7 +5,7 @@ summary: このドキュメントでは、ログバックアップの監視、�
 
 # バックアップと復元の監視とアラート {#monitoring-and-alert-for-backup-and-restore}
 
-このドキュメントでは、監視コンポーネント、監視メトリック、一般的なアラートを展開する方法など、バックアップと復元機能の監視とアラートについて説明します。
+このドキュメントでは、監視コンポーネント、監視メトリック、一般的なアラートをデプロイする方法など、バックアップと復元機能の監視とアラートについて説明します。
 
 ## スナップショットのバックアップと復元の監視 {#snapshot-backup-and-restore-monitoring}
 
@@ -18,7 +18,7 @@ summary: このドキュメントでは、ログバックアップの監視、�
 ### 監視構成 {#monitoring-configuration}
 
 - TiUPを使用してデプロイされたクラスターの場合、Prometheus は監視メトリックを自動的に収集します。
-- 手動でデプロイされたクラスターの場合は、 [TiDBクラスタ監視の展開](/deploy-monitoring-services.md)の手順に従って、Prometheus 構成ファイルの`scrape_configs`セクションに TiKV 関連のジョブを追加します。
+- 手動でデプロイされたクラスターの場合は、 [TiDBクラスタ監視のデプロイ](/deploy-monitoring-services.md)の手順に従って、Prometheus 構成ファイルの`scrape_configs`セクションに TiKV 関連のジョブを追加します。
 
 ### Grafanaの設定 {#grafana-configuration}
 

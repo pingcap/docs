@@ -16,7 +16,7 @@ TiDB Cloud、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-clo
 | コンポーネント                                                          | 制限 |
 | :---------------------------------------------------------- | :- |
 | [データ領域](/tidb-cloud/tidb-cloud-glossary.md#region)あたりのコピー数 | 3  |
-| クロスゾーン展開のアベイラビリティゾーンの数                                      | 3  |
+| クロスゾーンデプロイのアベイラビリティゾーンの数                                      | 3  |
 
 > **Note:**
 >

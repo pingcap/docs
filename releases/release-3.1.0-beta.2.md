@@ -44,7 +44,7 @@ TiDB Ansible バージョン: 3.1.0-beta.2
     - 初回リリース
 - TiDB Ansible
     - 1つのクラスターに複数のGrafana/Prometheus/Alertmanagerをデプロイすることをサポート[＃1143](https://github.com/pingcap/tidb-ansible/pull/1143)
-    - TiFlashコンポーネント展開をサポート [＃1148](https://github.com/pingcap/tidb-ansible/pull/1148)
+    - TiFlashコンポーネントのデプロイをサポート [＃1148](https://github.com/pingcap/tidb-ansible/pull/1148)
     - TiFlashコンポーネントに関連する監視メトリックを追加します [＃1152](https://github.com/pingcap/tidb-ansible/pull/1152)
 
 ## バグ修正 {#bug-fixes}

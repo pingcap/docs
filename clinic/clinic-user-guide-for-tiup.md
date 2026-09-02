@@ -44,7 +44,7 @@ PingCAP Clinicを使用する前に、Diag（ PingCAP Clinicが提供するデ�
 
     > **Note:**
     >
-    > - インターネット接続のないクラスタでは、Diagをオフラインで展開する必要があります。詳細については、 [TiUPをオフラインでデプロイ: 方法2](/production-deployment-using-tiup.md#deploy-tiup-offline)を参照してください。
+    > - インターネット接続のないクラスタでは、Diagをオフラインでデプロイする必要があります。詳細については、 [TiUPをオフラインでデプロイ: 方法2](/production-deployment-using-tiup.md#deploy-tiup-offline)を参照してください。
     > - Diag は、TiDB Server オフライン ミラー パッケージ v5.4.0 以降で**のみ**提供されます。
 
 2. データをアップロードするためのアクセストークン (トークン) を取得して設定します。
@@ -132,7 +132,7 @@ Diag によって収集できるデータの完全なリストについては、
 
 ### ステップ2. データを収集する {#step-2-collect-data}
 
-Diag を使用すると、 TiUPを使用して展開された TiDB クラスターと DM クラスターからデータを収集できます。
+Diag を使用すると、 TiUPを使用してデプロイされた TiDB クラスターと DM クラスターからデータを収集できます。
 
 1. Diag のデータ収集コマンドを実行します。
 

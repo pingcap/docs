@@ -5,7 +5,7 @@ summary: IMPORT INTO` とTiDB Lightningの違いについて説明します。
 
 # IMPORT INTO とTiDB Lightning の比較 {#import-into-vs-tidb-lightning}
 
-多くのユーザーから、 [TiDB Lightning](/tidb-lightning/tidb-lightning-configuration.md)の展開、構成、メンテナンスは、特に[並列インポート](/tidb-lightning/tidb-lightning-distributed-import.md)の大規模なデータセットが関係するシナリオでは複雑であるというフィードバックが寄せられています。
+多くのユーザーから、 [TiDB Lightning](/tidb-lightning/tidb-lightning-configuration.md)のデプロイ、構成、メンテナンスは、特に[並列インポート](/tidb-lightning/tidb-lightning-distributed-import.md)の大規模なデータセットが関係するシナリオでは複雑であるというフィードバックが寄せられています。
 
 皆様からのフィードバックに基づき、TiDBはTiDB Lightningの一部の機能を[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) SQL文に段階的に統合してきました。`IMPORT INTO`を実行することでデータを直接インポートできるため、データインポートの効率が向上します。さらに、 `IMPORT INTO`は自動分散タスクスケジューリングや[TiDB グローバルソート](/tidb-global-sort.md)といった、 TiDB Lightningにはない機能もサポートされています。
 
@@ -23,7 +23,7 @@ summary: IMPORT INTO` とTiDB Lightningの違いについて説明します。
 
 #### TiDB Lightning {#tidb-lightning}
 
-対照的に、 TiDB Lightning[個別のサーバー展開](/tidb-lightning/deploy-tidb-lightning.md)が必要です。
+対照的に、 TiDB Lightning[個別のサーバーデプロイ](/tidb-lightning/deploy-tidb-lightning.md)が必要です。
 
 ### リソースの活用 {#resource-utilization}
 
