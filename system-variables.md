@@ -6635,7 +6635,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `500`
 - 範囲: `[1, 10240]`
-- この変数は、TTL ジョブの期限切れデータのスキャンに使用される各`LIMIT` `SELECT`値を設定するために使用されます。詳細については、[TTL (Time to Live)](/time-to-live.md)を参照してください。
+- この変数は、TTL ジョブの期限切れデータのスキャンに使用される各`SELECT`文の`LIMIT`値を設定するために使用されます。詳細については、[TTL (Time to Live)](/time-to-live.md)を参照してください。
 
 ### tidb_ttl_scan_worker_count <span class="version-mark">New in v6.5.0</span>
 
