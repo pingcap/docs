@@ -110,7 +110,7 @@ LIMIT 2;
 
 ## オプション（TiDB Cloudホスティング） {#options-tidb-cloud-hosted}
 
-**Embed v3**モデルと**Multilingual Embed v3**モデルの両方で、以下のオプションがサポートされています。これらのオプションは、 `additional_json_options`関数の`EMBED_TEXT()`パラメータを介して指定できます。
+**Embed v3**モデルと**Multilingual Embed v3**モデルの両方で、以下のオプションがサポートされています。これらのオプションは、 `EMBED_TEXT()`関数の`additional_json_options`パラメータを介して指定できます。
 
 - `input_type` (必須): 埋め込みの目的を示す特別なトークンを先頭に追加します。同じタスクの埋め込みを生成する場合は、常に同じ入力タイプを使用する必要があります。そうしないと、埋め込みが異なる意味空間にマッピングされ、互換性がなくなります。唯一の例外はセマンティック検索で、ドキュメントは`search_document`で埋め込まれ、クエリは`search_query`で埋め込まれます。
 
@@ -299,7 +299,7 @@ LIMIT 2;
 
 ## オプション（BYOK） {#options-byok}
 
-[Cohereの埋め込みオプション](https://docs.cohere.com/v2/reference/embed)は`additional_json_options`関数の`EMBED_TEXT()`パラメータを介してサポートされます。
+[Cohereの埋め込みオプション](https://docs.cohere.com/v2/reference/embed)は`EMBED_TEXT()`関数の`additional_json_options`パラメータを介してサポートされます。
 
 **例：検索操作と挿入操作で異なる`input_type`を指定する**
 
