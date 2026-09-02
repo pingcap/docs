@@ -343,7 +343,7 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 - `ALTER`ステートメントすべてにおいて、ユーザーは対応するテーブルに対する`ALTER`権限を持っている必要があります。
 - `ALTER...DROP`および`ALTER...RENAME TO`以外のステートメントについては、ユーザーは対応するテーブルに対して`INSERT`および`CREATE`の権限を持っている必要があります。
 - `ALTER...DROP`ステートメントを使用するには、ユーザーは対応するテーブルに対して`DROP`権限を持っている必要があります。
-- `ALTER...RENAME TO`ステートメントを実行するには、ユーザーは名前変更前にテーブルに対する`DROP`権限を持ち、名前変更後にテーブルに対する`CREATE`および`INSERT`権限ている必要があります。
+- `ALTER...RENAME TO`ステートメントを実行するには、ユーザーは名前変更前にテーブルに対する`DROP`権限を持ち、名前変更後にテーブルに対する`CREATE`および`INSERT`権限を持っている必要があります。
 
 > **Note:**
 >
@@ -405,7 +405,7 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 
 ### RENAME TABLE {#rename-table}
 
-テーブル名を変更する前に、 `ALTER`および`DROP`の権限が必要であり、テーブル名を変更する後には`CREATE`および`INSERT`の権限。
+テーブル名を変更する前に、 `ALTER`および`DROP`の権限が必要であり、テーブル名を変更した後には`CREATE`および`INSERT`の権限が必要です。
 
 ### ANALYZE TABLE {#analyze-table}
 
@@ -421,11 +421,11 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 
 ### SHOW {#show}
 
-`SHOW CREATE TABLE`テーブルに対する単一の権限を必要とします。
+`SHOW CREATE TABLE`は、テーブルに対する単一の権限を必要とします。
 
 `SHOW CREATE VIEW`には`SHOW VIEW`の権限が必要です。
 
-`SHOW GRANTS`は`SELECT`データベースへの`mysql`権限を必要とします。対象ユーザーが現在のユーザーである場合、 `SHOW GRANTS`権限を必要としません。
+`SHOW GRANTS`は`mysql`データベースへの`SELECT`権限を必要とします。対象ユーザーが現在のユーザーである場合、 `SHOW GRANTS`は権限を必要としません。
 
 `SHOW PROCESSLIST`は、他のユーザーに属する接続を表示するために`PROCESS`の権限を必要とします。
 
@@ -447,11 +447,11 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 
 ### ALTER USER {#alter-user}
 
-`CREATE USER`権限が必要です。
+`CREATE USER`の権限が必要です。
 
 ### GRANT {#grant}
 
-`GRANT`によって付与された権限を持つ`GRANT`権限が必要です。
+`GRANT`権限と、 `GRANT`によって付与される権限が必要です。
 
 ユーザーを暗黙的に作成するには、追加の`CREATE USER`権限が必要です。
 
@@ -497,7 +497,7 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 
 ### SET RESOURCE GROUP {#set-resource-group}
 
-システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) `ON`に設定されている場合、このステートメントを実行するには`SUPER`または`RESOURCE_GROUP_ADMIN`または`RESOURCE_GROUP_USER`の権限が必要です。
+システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820)が`ON`に設定されている場合、このステートメントを実行するには`SUPER`または`RESOURCE_GROUP_ADMIN`または`RESOURCE_GROUP_USER`の権限が必要です。
 
 ## 特権システムの導入 {#implementation-of-the-privilege-system}
 
@@ -539,7 +539,7 @@ SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 
 ユーザーの識別は、接続を開始するホスト`Host`とユーザー名`User`の2つの情報に基づいています。ユーザー名が空でない場合、指定されたユーザー名と完全に一致する必要があります。
 
-`User` + `Host` `user`テーブルの複数の行に一致する可能性があります。このシナリオに対処するため、 `user`テーブルの行はソートされます。クライアントが接続すると、テーブルの行が 1つずつチェックされ、最初に一致した行が検証に使用されます。ソート時には、ホストがユーザーよりも優先されます。
+`User`+`Host`は、 `user`テーブルの複数の行に一致する可能性があります。このシナリオに対処するため、 `user`テーブルの行はソートされます。クライアントが接続すると、テーブルの行が 1つずつチェックされ、最初に一致した行が検証に使用されます。ソート時には、ホストがユーザーよりも優先されます。
 
 ### リクエストの確認 {#request-verification}
 
@@ -547,16 +547,16 @@ SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 
 データベース関連のリクエスト（ `INSERT` 、 `UPDATE` ）の場合、リクエスト検証プロセスではまず`mysql.user`テーブルでユーザーのグローバル権限を確認します。権限が付与されている場合は、直接アクセスできます。付与されていない場合は、 `mysql.db`テーブルを確認します。
 
-`user`テーブルは、デフォルトのデータベースに関係なく、グローバルな権限を持ちます。たとえば、 `DELETE`の`user`権限は、任意の行、テーブル、またはデータベースに適用できます。
+`user`テーブルは、デフォルトのデータベースに関係なく、グローバルな権限を持ちます。たとえば、 `user`の`DELETE`権限は、任意の行、テーブル、またはデータベースに適用できます。
 
 `db`テーブルでは、空のユーザーは匿名ユーザー名に一致します。 `User`列ではワイルドカードは使用できません。 `Host`列と`Db`列の値には、パターンマッチングを使用できる`%`と`_`を使用できます。
 
 `user`および`db`テーブルのデータも、メモリにロードされるときにソートされます。
 
-`%`と`tables_priv`における`columns_priv`の使用方法は似ていますが、 `Db` 、 `Table_name` 、 `Column_name`の列値には`%`を含めることはできません。読み込み時のソートも同様です。
+`tables_priv`と`columns_priv`における`%`の使用方法は似ていますが、 `Db` 、 `Table_name` 、 `Column_name`の列値には`%`を含めることはできません。読み込み時のソートも同様です。
 
 ### 有効期間 {#time-of-effect}
 
-TiDB が起動すると、いくつかの権限チェックテーブルがメモリにロードされ、キャッシュされたデータを使用して権限が検証されます。 `GRANT` 、 `REVOKE` 、 `CREATE USER` 、 `DROP USER`権限管理ステートメントを実行すると、すぐに反映されます。
+TiDB が起動すると、いくつかの権限チェックテーブルがメモリにロードされ、キャッシュされたデータを使用して権限が検証されます。 `GRANT` 、 `REVOKE` 、 `CREATE USER` 、 `DROP USER`などの権限管理ステートメントを実行すると、すぐに反映されます。
 
-`mysql.user`などのテーブルを`INSERT` 、 `DELETE` 、 `UPDATE`手動で編集しても、すぐに反映されません。この動作は MySQL と互換性があり、権限キャッシュは[`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)ステートメントで更新できます。
+`mysql.user`などのテーブルを`INSERT` 、 `DELETE` 、 `UPDATE`などのステートメントで手動編集しても、すぐに反映されません。この動作は MySQL と互換性があり、権限キャッシュは[`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)ステートメントで更新できます。
