@@ -17,7 +17,8 @@ Materialized views are intended for workloads that repeatedly read the same quer
 
 ## Prerequisites
 
-- <!-- TODO: confirm the minimum TiDB version and any feature gates. -->
+- To create a materialized view or materialized view log, set [`tidb_materialized_view_enable`](/system-variables.md#tidb_materialized_view_enable) to `ON`. This variable is `OFF` by default.
+- <!-- TODO: confirm the minimum TiDB version. -->
 - <!-- TODO: confirm whether the feature depends on specific storage engines or cluster settings. -->
 
 ## How it works
@@ -33,6 +34,17 @@ For the syntax of this statement, see [`CREATE MATERIALIZED VIEW`](/sql-statemen
 ### Create a materialized view log
 
 For the syntax of this statement, see [`CREATE MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-create-materialized-view-log.md).
+
+### Control materialized view maintenance
+
+TiDB uses an internal maintenance session to build a materialized view. You can control the resources and storage engines used by this session with the following system variables:
+
+- [`tidb_mv_maintain_mem_quota`](/system-variables.md#tidb_mv_maintain_mem_quota): Sets the memory quota for the materialized view maintenance session.
+- [`tidb_mv_maintain_isolation_read_engines`](/system-variables.md#tidb_mv_maintain_isolation_read_engines): Specifies the storage engines that the maintenance session can use to read data.
+- [`tidb_mview_maintain_import_threads`](/system-variables.md#tidb_mview_maintain_import_threads): Sets the thread count for the `IMPORT INTO` operation used by the initial materialized view build. A value of `0` means that TiDB does not set an explicit thread count.
+- [`tidb_mview_maintain_import_disk_quota`](/system-variables.md#tidb_mview_maintain_import_disk_quota): Sets the disk quota for the `IMPORT INTO` operation used by the initial materialized view build. An empty value means that TiDB does not set an explicit disk quota.
+
+When you submit `CREATE MATERIALIZED VIEW`, TiDB records the current values of these variables in the DDL job and uses them for the initial build.
 
 ### Refresh a materialized view
 
