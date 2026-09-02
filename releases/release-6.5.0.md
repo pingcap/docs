@@ -383,7 +383,7 @@ v6.5.0 以降では、v4.0.7 で導入された`AMEND TRANSACTION`メカニズ�
 - TiKV
 
     - ディスク容量の枯渇を避けるため、十分なスペースがない場合はRaft Engineへの書き込みを停止します[＃13642](https://github.com/tikv/tikv/issues/13642) @[jiayang-zheng](https://github.com/jiayang-zheng)
-    - `json_valid`関数を TiKV にプッシュダウンするサポート [＃13571](https://github.com/tikv/tikv/issues/13571) @[lizhenhuan](https://github.com/lizhenhuan)
+    - `json_valid`関数のTiKVへのプッシュダウンをサポート [＃13571](https://github.com/tikv/tikv/issues/13571) @[lizhenhuan](https://github.com/lizhenhuan)
     - 1回のバックアップ要求で複数の範囲のデータのバックアップをサポート[＃13701](https://github.com/tikv/tikv/issues/13701) @[Leavrth](https://github.com/Leavrth)
     - rusotoライブラリを更新してAWSのアジア太平洋地域（ap-southeast-3）へのデータバックアップをサポート [＃13751](https://github.com/tikv/tikv/issues/13751) @[3pointer](https://github.com/3pointer)
     - 悲観的トランザクション競合を減らす[＃13298](https://github.com/tikv/tikv/issues/13298) @[MyonKeminta](https://github.com/MyonKeminta)

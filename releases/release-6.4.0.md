@@ -342,7 +342,7 @@ TiDBバージョン: 6.4.0-DMR
 
     - Applyスレッドが1回のポーリングで1つの有限状態マシンに対して書き込める最大バイト数を制御し、Applyスレッドが大量のデータを書き込む際のRaftstoreの混雑を緩和するために、新しい設定項目`apply-yield-write-size`を追加します。 [#13313](https://github.com/tikv/tikv/issues/13313) @[glorv](https://github.com/glorv)
     - リージョンのリーダーを移行する前にエントリキャッシュをウォームアップして、リーダー転送プロセス中のQPSジッターを回避する [#13060](https://github.com/tikv/tikv/issues/13060) @[cosven](https://github.com/cosven)
-    - `json_constrains`演算子をコプロセッサーにプッシュダウンするサポート [#13592](https://github.com/tikv/tikv/issues/13592) @[lizhenhuan](https://github.com/lizhenhuan)
+    - `json_constrains`演算子のコプロセッサーへのプッシュダウンをサポート [#13592](https://github.com/tikv/tikv/issues/13592) @[lizhenhuan](https://github.com/lizhenhuan)
     - `CausalTsProvider`に非同期関数を追加して、一部のシナリオでのフラッシュパフォーマンスを改善します [#13428](https://github.com/tikv/tikv/issues/13428) @[zeminzhou](https://github.com/zeminzhou)
 
 - PD

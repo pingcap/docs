@@ -130,7 +130,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 - MPPエンジンの計算パフォーマンスを向上させる
 
-    - より多くの関数と演算子をMPPエンジンにプッシュダウンするサポート
+    - より多くの関数と演算子のMPPエンジンへのプッシュダウンをサポート
 
         - 論理関数`IS NOT` `IS`
         - 文字列関数: `REGEXP()` , `NOT REGEXP()`
@@ -330,12 +330,12 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     - ベースラインキャプチャブロックリストをユーザー名でフィルタリングする機能をサポート[＃32558](https://github.com/pingcap/tidb/issues/32558)
     - ベースラインキャプチャブロックリストでのワイルドカードの使用をサポート [＃32714](https://github.com/pingcap/tidb/issues/32714)
     - `ADMIN SHOW DDL JOBS`と`SHOW TABLE STATUS`ステートメントの結果を、現在の`time_zone` に応じて時間を表示することで最適化します。 [＃26642](https://github.com/pingcap/tidb/issues/26642)
-    - `DAYNAME()`と`MONTHNAME()`関数をTiFlash にプッシュダウンするサポート [＃32594](https://github.com/pingcap/tidb/issues/32594)
-    - `REGEXP`関数をTiFlash にプッシュダウンするサポート [＃32637](https://github.com/pingcap/tidb/issues/32637)
-    - `DAYOFMONTH()`と`LAST_DAY()`関数をTiFlash にプッシュダウンするサポート [＃33012](https://github.com/pingcap/tidb/issues/33012)
-    - `DAYOFWEEK()`と`DAYOFYEAR()`関数をTiFlash にプッシュダウンするサポート [＃33130](https://github.com/pingcap/tidb/issues/33130)
+    - `DAYNAME()`と`MONTHNAME()`関数のTiFlashへのプッシュダウンをサポート [＃32594](https://github.com/pingcap/tidb/issues/32594)
+    - `REGEXP`関数のTiFlashへのプッシュダウンをサポート [＃32637](https://github.com/pingcap/tidb/issues/32637)
+    - `DAYOFMONTH()`と`LAST_DAY()`関数のTiFlashへのプッシュダウンをサポート [＃33012](https://github.com/pingcap/tidb/issues/33012)
+    - `DAYOFWEEK()`と`DAYOFYEAR()`関数のTiFlashへのプッシュダウンをサポート [＃33130](https://github.com/pingcap/tidb/issues/33130)
     - `IS_TRUE` `IS_FALSE`関数`IS_TRUE_WITH_NULL` TiFlash にプッシュダウンする機能をサポート [＃33047](https://github.com/pingcap/tidb/issues/33047)
-    - `GREATEST`と`LEAST`関数をTiFlash にプッシュダウンするサポート [＃32787](https://github.com/pingcap/tidb/issues/32787)
+    - `GREATEST`と`LEAST`関数のTiFlashへのプッシュダウンをサポート [＃32787](https://github.com/pingcap/tidb/issues/32787)
     - `UnionScan`オペレーターの実行の追跡をサポート [＃32631](https://github.com/pingcap/tidb/issues/32631)
     - `_tidb_rowid`列列を読み取るクエリにPointGetプランの使用をサポート [＃31543](https://github.com/pingcap/tidb/issues/31543)
     - `EXPLAIN`文の出力で、名前を小文字に変換せずに元のパーティション名を表示することをサポート[＃32719](https://github.com/pingcap/tidb/issues/32719)
@@ -356,7 +356,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     - Raftログを非同期に取得することで、 Raftstore をブロックすることで発生するパフォーマンスジッターを軽減します。 [＃11320](https://github.com/tikv/tikv/issues/11320)
     - ベクトル計算の`QUARTER`関数をサポート [＃5751](https://github.com/tikv/tikv/issues/5751)
     - `BIT`データ型を TiKV にプッシュダウンする機能をサポート [＃30738](https://github.com/pingcap/tidb/issues/30738)
-    - `MOD`関数と`SYSDATE`関数をTiKV にプッシュダウンするサポート [＃11916](https://github.com/tikv/tikv/issues/11916)
+    - `MOD`関数と`SYSDATE`関数のTiKVへのプッシュダウンをサポート [＃11916](https://github.com/tikv/tikv/issues/11916)
     - 解決ロックのステップを必要とする領域の数を減らすことで、TiCDCの回復時間を短縮します。 [＃11993](https://github.com/tikv/tikv/issues/11993)
     - `raftstore.raft-max-inflight-msgs` の動的変更をサポート [＃11865](https://github.com/tikv/tikv/issues/11865)
     - 動的プルーニングモードを有効にするには`EXTRA_PHYSICAL_TABLE_ID_COL_ID`サポート [＃11888](https://github.com/tikv/tikv/issues/11888)
