@@ -11,7 +11,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
 ### 1.1 クライアントから`Region is Unavailable`エラーが報告されました {#11-the-client-reports-region-is-unavailable-error}
 
-- 1.1.1 `Region is Unavailable`エラーは通常、リージョンが一定期間利用できないことが原因です。 `TiKV server is busy`が発生する場合や、 `not leader`または`epoch not match` } が原因で TiKV へのリクエストが失敗するか、TiKV へのリクエストがタイムアウトする場合があります。このような場合、TiDB は`backoff`再試行メカニズムを実行します。 `backoff`がしきい値 (デフォルトでは 20秒) を超えると、エラーがクライアントに送信されます。 `backoff`のしきい値内であれば、このエラーはクライアントには表示されません。
+- 1.1.1 `Region is Unavailable`エラーは通常、リージョンが一定期間利用できないことが原因です。 `TiKV server is busy`が発生する場合や、 `not leader`または`epoch not match`が原因で TiKV へのリクエストが失敗するか、TiKV へのリクエストがタイムアウトする場合があります。このような場合、TiDB は`backoff`再試行メカニズムを実行します。 `backoff`がしきい値 (デフォルトでは 20秒) を超えると、エラーがクライアントに送信されます。 `backoff`のしきい値内であれば、このエラーはクライアントには表示されません。
 
 - 1.1.2 複数のTiKVインスタンスが同時にメモリ不足（OOM）になると、OOM期間中にLeaderが存在しない状態になります。中国語版の[ケース991](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case991.md)を参照してください。
 
@@ -113,7 +113,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
         - `fatal error: runtime: out of memory`または`cannot allocate memory` `tidb_stderr.log`内で検索します。
 
-        - v2.1.8以前のバージョンでは、 `fatal error: stack overflow`内で`tidb_stderr.log` } を grep できます。
+        - v2.1.8以前のバージョンでは、 `tidb_stderr.log`内で`fatal error: stack overflow`を grep できます。
 
     - 監視：tidb-serverインスタンスのメモリ使用量が短時間で急激に増加します。
 
@@ -181,7 +181,7 @@ OOM のトラブルシューティングの詳細については、 [TiDBのメ�
 
         `Decimal`の乗算では、範囲外が回避され、精度が最大精度制限に設定されるため、この問題は発生しません。
 
-    - 解決策： `Cast(xx as decimal(a, b))`と`a`目標精度として、 `b` } を手動で追加することで、この問題を回避できます。
+    - 解決策： `a`と`b`が目標精度である`Cast(xx as decimal(a, b))`を手動で追加することで、この問題を回避できます。
 
 ### 3.5 クエリの遅延に関する問題 {#35-slow-query-issues}
 

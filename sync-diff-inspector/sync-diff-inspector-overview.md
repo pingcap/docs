@@ -270,7 +270,7 @@ sync-diff-inspector のログは`${output}/sync_diff.log`に保存され、そ�
 
 ### 結果 {#result}
 
-チェックが完了すると、sync-diff-inspector はレポートを出力します。レポートは`${output}/summary.txt`にあり、 `${output}`は`output-dir`ファイル内の`config.toml` } の値です。
+チェックが完了すると、sync-diff-inspector はレポートを出力します。レポートは`${output}/summary.txt`にあり、 `${output}`は`output-dir`ファイル内の`config.toml`の値です。
 
 ```
 +---------------------+--------------------+----------------+---------+-----------+

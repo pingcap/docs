@@ -7,7 +7,7 @@ summary: TiDBのステートメントサマリーテーブルについて学び�
 
 SQL のパフォーマンス問題をより適切に処理するために、MySQL は、統計情報を使用して SQL を監視するための`performance_schema`の[ステートメントサマリーテーブル](https://dev.mysql.com/doc/refman/8.0/en/performance-schema-statement-summary-tables.html)を提供しています。これらのテーブルの中でも、 `events_statements_summary_by_digest`は、レイテンシー、実行時間、スキャンされた行数、フルテーブルスキャンなどの豊富なフィールドを備えているため、SQL の問題を特定する際に非常に役立ちます。
 
-したがって、v4.0.0-rc.1 以降、TiDB は`information_schema`と機能面で類似したシステムテーブルを`performance_schema` } `events_statements_summary_by_digest`*ではなく*) で提供します。
+したがって、v4.0.0-rc.1 以降、TiDB は`events_statements_summary_by_digest`と機能面で類似したシステムテーブルを`information_schema`(`performance_schema`*ではなく*) で提供します。
 
 - [`statements_summary`](#statements_summary)
 - [`statements_summary_history`](#statements_summary_history)
