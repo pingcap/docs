@@ -2817,7 +2817,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - デフォルト値: `ON`
 - 値のオプション: `OFF` 、 `ON`
 - 単一の SQL文がシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)で指定されたメモリクォータを超えた場合に、一部のオペレーターに対して一時ストレージを有効にするかどうかを制御します。
-- バージョン 6.3.0 より前では、TiDB 構成項目`oom-use-tmp-storage`を使用してこの機能を有効または無効にできます。クラスターをバージョン 6.3.0 以降にアップグレードすると、TiDB クラスターは`oom-use-tmp-storage`の値を使用してこの変数を自動的に初期化します。その後、 `oom-use-tmp-storage`の値を変更しても効果は**ありません**。
+- バージョン 6.3.0 より前では、TiDB 設定項目`oom-use-tmp-storage`を使用してこの機能を有効または無効にできます。クラスターをバージョン 6.3.0 以降にアップグレードすると、TiDB クラスターは`oom-use-tmp-storage`の値を使用してこの変数を自動的に初期化します。その後、 `oom-use-tmp-storage`の値を変更しても効果は**ありません**。
 
 ### tidb_enable_stats_owner <span class="version-mark">New in v8.4.0</span>
 
@@ -5650,7 +5650,7 @@ SHOW WARNINGS;
 - この変数は、TiDBログおよびスローログに記録されるSQL文内のユーザー情報を非表示にするかどうかを制御します。
 - デフォルト値は`OFF`で、これはユーザー情報が一切処理されないことを意味します。
 - 変数を`ON`に設定すると、ユーザー情報は非表示になります。たとえば、実行された SQL文が`INSERT INTO t VALUES (1,2)`の場合、ログには`INSERT INTO t VALUES (?,?)`として記録されます。
-- 変数を`MARKER`に設定すると、ユーザー情報は`‹ ›`で囲まれます。たとえば、実行される SQL文が`INSERT INTO t VALUES (1,2)`の場合、ステートメントはログに`INSERT INTO t VALUES (‹1›,‹2›)`として記録されます。ユーザーデータに`‹`または`›`が含まれている場合、 `‹`は`‹‹`にエスケープされ、 `›`は`››`にエスケープされます。マークされたログに基づいて、ログを表示する際にマークされた情報を非機密化するかどうかを決定できます。
+- 変数を`MARKER`に設定すると、ユーザー情報は`‹ ›`で囲まれます。たとえば、実行される SQL文が`INSERT INTO t VALUES (1,2)`の場合、ステートメントはログに`INSERT INTO t VALUES (‹1›,‹2›)`として記録されます。ユーザーデータに`‹`または`›`が含まれている場合、 `‹`は`‹‹`にエスケープされ、 `›`は`››`にエスケープされます。マークされたログに基づいて、ログを表示する際にマークされた情報を秘匿化するかどうかを決定できます。
 
 ### tidb_regard_null_as_point <span class="version-mark">New in v5.4.0</span>
 

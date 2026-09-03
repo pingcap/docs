@@ -235,7 +235,7 @@ TiClientリージョンエラーインジケータは、TiDBサーバーがク�
 
 ### TiDBログにおける`EXPENSIVE_QUERY`の意味は何ですか？ {#what-is-the-meaning-of-expensive-query-in-the-tidb-log}
 
-TiDB が SQL 文を実行する際、各オペレーターが 10,000 行を超える行を処理すると推定される場合、クエリは`EXPENSIVE_QUERY`になります。 `tidb-server`構成パラメータを変更してしきい値を調整し、 `tidb-server`を再起動できます。
+TiDB が SQL 文を実行する際、各オペレーターが 10,000 行を超える行を処理すると推定される場合、クエリは`EXPENSIVE_QUERY`になります。 `tidb-server`設定パラメータを変更してしきい値を調整し、 `tidb-server`を再起動できます。
 
 ### TiDBでテーブルのサイズを推定するにはどうすればよいですか？ {#how-do-i-estimate-the-size-of-a-table-in-tidb}
 

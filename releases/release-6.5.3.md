@@ -44,7 +44,7 @@ TiDB バージョン: 6.5.3
         - Kafka-on-Pulsar ダウンストリームへのデータ複製をサポート[＃8892](https://github.com/pingcap/tiflow/issues/8892) @[Rustin170506](https://github.com/Rustin170506)
         - Kafka にデータを複製する際の検証に OAuth プロトコルの使用をサポート [＃8865](https://github.com/pingcap/tiflow/issues/8865) @[Rustin170506](https://github.com/Rustin170506)
         - AvroまたはCSVプロトコルを使用してデータレプリケーション中にTiCDCが`UPDATE`文を処理する方法を最適化し、 `UPDATE`を`DELETE`と`INSERT`文に分割して、 `DELETE`文から古い値を取得できるようにします。 [＃9086](https://github.com/pingcap/tiflow/issues/9086) @[3AceShowHand](https://github.com/3AceShowHand)
-        - TLS を有効にするシナリオで認証アルゴリズムを設定するかどうかを制御する構成項目`insecure-skip-verify`を追加します。 [＃8867](https://github.com/pingcap/tiflow/issues/8867) @[Rustin170506](https://github.com/Rustin170506)
+        - TLS を有効にするシナリオで認証アルゴリズムを設定するかどうかを制御する設定項目`insecure-skip-verify`を追加します。 [＃8867](https://github.com/pingcap/tiflow/issues/8867) @[Rustin170506](https://github.com/Rustin170506)
         - DDL レプリケーション操作を最適化して、DDL 操作による下流レイテンシーへの影響を軽減します。 [＃8686](https://github.com/pingcap/tiflow/issues/8686) @[Rustin170506](https://github.com/Rustin170506)
         - TiCDC レプリケーションタスクが失敗したときにアップストリームの GC TLS を設定する方法を最適化します[＃8403](https://github.com/pingcap/tiflow/issues/8403) @[charleszheng44](https://github.com/charleszheng44)
 

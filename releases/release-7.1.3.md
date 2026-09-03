@@ -13,8 +13,8 @@ TiDB バージョン: 7.1.3
 
 ## 互換性の変更 {#compatibility-changes}
 
-- さらなるテストの結果、 TiCDC Changefeed構成項目[`case-sensitive`](/ticdc/ticdc-changefeed-config.md)のデフォルト値が`true`から`false`に変更されました。これは、デフォルトでは TiCDC 構成ファイル内のテーブル名とデータベース名が大文字と小文字を区別しないことを意味します[＃10047](https://github.com/pingcap/tiflow/issues/10047) @[sdojjy](https://github.com/sdojjy)
-- TiCDC Changefeed、次の新しい構成項目が導入されています。
+- さらなるテストの結果、 TiCDC Changefeed設定項目[`case-sensitive`](/ticdc/ticdc-changefeed-config.md)のデフォルト値が`true`から`false`に変更されました。これは、デフォルトでは TiCDC 構成ファイル内のテーブル名とデータベース名が大文字と小文字を区別しないことを意味します[＃10047](https://github.com/pingcap/tiflow/issues/10047) @[sdojjy](https://github.com/sdojjy)
+- TiCDC Changefeed、次の新しい設定項目が導入されています。
     - [`sql-mode`](/ticdc/ticdc-changefeed-config.md) : TiCDC がデータを複製するときに DDL文を解析するために使用する[SQLモード](https://docs.pingcap.com/tidb/v7.1/ticdc-ddl#sql-mode)を設定できます[＃9876](https://github.com/pingcap/tiflow/issues/9876) @[asddongmen](https://github.com/asddongmen)
     - [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md)と[`flush-worker-num`](/ticdc/ticdc-changefeed-config.md) : 異なるマシンの仕様に基づいて、再実行モジュールに異なる同時実行パラメータを設定できます[＃10048](https://github.com/pingcap/tiflow/issues/10048) @[CharlesCheung96](https://github.com/CharlesCheung96)
     - [`compression`](/ticdc/ticdc-changefeed-config.md) : REDOログファイルの圧縮動作を設定できます[＃10176](https://github.com/pingcap/tiflow/issues/10176) @[sdojjy](https://github.com/sdojjy)
