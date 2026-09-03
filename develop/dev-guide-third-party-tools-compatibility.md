@@ -96,7 +96,7 @@ TiDBでは、 `\`文字をエスケープせずに`NO_BACKSLASH_ESCAPES`パラ�
 
 **回避方法**
 
-TiDB では`NO_BACKSLASH_ESCAPES`と`\`を使用しないでください。SQL ステートメントでは`\\`を使用してください。
+TiDB では`NO_BACKSLASH_ESCAPES`と`\`を使用しないでください。SQL文では`\\`を使用してください。
 
 ### `INDEX_USED`関連のパラメータはサポートされていません {#the-index-used-related-parameters-are-not-supported}
 
@@ -129,7 +129,7 @@ TiDB は`UpdatableResultSet`をサポートしていません。`ResultSet.CONCU
 
 **回避方法**
 
-トランザクションによるデータの一貫性を確保するには、 `UPDATE`ステートメントを使用してデータを更新できます。
+トランザクションによるデータの一貫性を確保するには、 `UPDATE`文を使用してデータを更新できます。
 
 ## MySQL JDBC のバグ {#mysql-jdbc-bugs}
 

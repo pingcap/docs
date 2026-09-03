@@ -31,7 +31,7 @@ DESC data_lock_waits;
 - `KEY_INFO` : `KEY`の詳細情報。[キー情報](#key_info)セクションを参照してください。
 - `TRX_ID` : ロックを待機しているトランザクションのID。このIDはトランザクションの`start_ts`でもあります。
 - `CURRENT_HOLDING_TRX_ID` : 現在ロックを保持しているトランザクションのID。このIDはトランザクションの`start_ts`でもあります。
-- `SQL_DIGEST` : ロック待機中のトランザクションで現在ブロックされている SQL ステートメントのダイジェスト。
+- `SQL_DIGEST` : ロック待機中のトランザクションで現在ブロックされている SQL文のダイジェスト。
 - `SQL_DIGEST_TEXT` : ロック待機中のトランザクションで現在ブロックされている正規化されたSQL文（引数とフォーマットのないSQL文）。これは`SQL_DIGEST`に相当します。
 
 > **Warning:**

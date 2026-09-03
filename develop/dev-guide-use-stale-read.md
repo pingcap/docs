@@ -14,7 +14,7 @@ TiDB は、ステートメントレベル、トランザクションレベル、
 
 ## 導入 {#introduction}
 
-[書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションでは、次の SQL ステートメントを使用して、最近出版された書籍とその価格を照会できます。
+[書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションでは、次の SQL文を使用して、最近出版された書籍とその価格を照会できます。
 
 ```sql
 SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;
@@ -35,9 +35,9 @@ SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;
 5 rows in set (0.02 sec)
 ```
 
-現時点（2022-04-20 15:20:00）のリストでは、 *The Story of Droolius Caesar の*価格は 100.0 です。
+現時点（2022-04-20 15:20:00）のリストでは、 *The Story of Droolius Caesar*の価格は 100.0 です。
 
-同時に、販売者はその本が非常に人気があることに気づき、次の SQL ステートメントを使用して本の価格を 150.0 に引き上げました。
+同時に、販売者はその本が非常に人気があることに気づき、次の SQL文を使用して本の価格を 150.0 に引き上げました。
 
 ```sql
 UPDATE books SET price = 150 WHERE id = 3181093216;

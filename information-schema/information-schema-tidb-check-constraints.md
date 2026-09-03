@@ -28,7 +28,7 @@ DESC TIDB_CHECK_CONSTRAINTS;
 6 rows in set (0.00 sec)
 ```
 
-次の例では、 `CREATE TABLE`ステートメントを使用して`CHECK`制約を追加します。
+次の例では、 `CREATE TABLE`文を使用して`CHECK`制約を追加します。
 
 ```sql
 SET GLOBAL tidb_enable_check_constraint = ON;

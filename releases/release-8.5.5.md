@@ -97,7 +97,7 @@ TiDBバージョン：8.5.5
 
     TiDB バージョン v8.5.5 より前のバージョンでは、分散実行フレームワーク (DXF) [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)有効になっている場合、実行中の`THREAD`ジョブの`BATCH_SIZE` 、 `MAX_WRITE_SPEED` 、または`ADD INDEX`パラメータの変更はサポートされていません。これらのパラメータを変更するには、実行中の`ADD INDEX`ジョブをキャンセルし、パラメータを再構成してからジョブを再送信する必要がありますが、これは非効率的です。
 
-    バージョン8.5.5以降では、 `ADMIN ALTER DDL JOBS`ステートメントを使用して、実行中の分散`ADD INDEX`ジョブのこれらのパラメータを、ジョブを中断することなく、現在のワークロードとパフォーマンス要件に基づいて動的に調整できます。
+    バージョン8.5.5以降では、 `ADMIN ALTER DDL JOBS`文を使用して、実行中の分散`ADD INDEX`ジョブのこれらのパラメータを、ジョブを中断することなく、現在のワークロードとパフォーマンス要件に基づいて動的に調整できます。
 
     詳細については、 [ドキュメント](/sql-statements/sql-statement-admin-alter-ddl.md)を参照してください。
 
@@ -125,17 +125,17 @@ TiDBバージョン：8.5.5
 
 - ステートメントサマリーテーブルとスロークエリログにストレージエンジン識別子を追加する [#61736](https://github.com/pingcap/tidb/issues/61736) @[henrybw](https://github.com/henrybw)
 
-    TiKVとTiFlashの両方がクラスタにデプロイされている場合、データベースの診断やパフォーマンス最適化の際に、ストレージエンジンごとにSQLステートメントをフィルタリングする必要が生じることがよくあります。たとえば、 TiFlashに高負荷がかかっている場合、潜在的な原因を特定するために、 TiFlash上​​で実行されているSQLステートメントを識別する必要があるかもしれません。このニーズに応えるため、TiDBはv8.5.5以降、ステートメントサマリーテーブルとスロークエリログにストレージエンジン識別子フィールドを追加しました。
+    TiKVとTiFlashの両方がクラスタにデプロイされている場合、データベースの診断やパフォーマンス最適化の際に、ストレージエンジンごとにSQL文をフィルタリングする必要が生じることがよくあります。たとえば、 TiFlashに高負荷がかかっている場合、潜在的な原因を特定するために、 TiFlash上​​で実行されているSQL文を識別する必要があるかもしれません。このニーズに応えるため、TiDBはv8.5.5以降、ステートメントサマリーテーブルとスロークエリログにストレージエンジン識別子フィールドを追加しました。
 
     [ステートメントサマリーテーブル](/statement-summary-tables.md)表の新しいフィールド:
 
-    - `STORAGE_KV` : `1`は、SQL ステートメントが TiKV にアクセスすることを示します。
-    - `STORAGE_MPP` : `1`は、SQL ステートメントがTiFlashにアクセスすることを示します。
+    - `STORAGE_KV` : `1`は、SQL文が TiKV にアクセスすることを示します。
+    - `STORAGE_MPP` : `1`は、SQL文がTiFlashにアクセスすることを示します。
 
     [スロークエリログ](/identify-slow-queries.md)の新しいフィールド:
 
-    - `Storage_from_kv` : `true`は、SQL ステートメントが TiKV にアクセスすることを示します。
-    - `Storage_from_mpp` : `true`は、SQL ステートメントがTiFlashにアクセスすることを示します。
+    - `Storage_from_kv` : `true`は、SQL文が TiKV にアクセスすることを示します。
+    - `Storage_from_mpp` : `true`は、SQL文がTiFlashにアクセスすることを示します。
 
     この機能は、特定の診断およびパフォーマンス最適化シナリオにおけるワークフローを簡素化し、問題特定効率を向上させます。
 
@@ -164,7 +164,7 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
 
 ### MySQLとの互換性 {#mysql-compatibility}
 
-- TiDB は v8.5.5 以降、テーブルまたはパーティションのデータアフィニティを制御するための新しい`AFFINITY`プロパティをテーブルに導入しました。このプロパティは`CREATE TABLE`または`ALTER TABLE`ステートメントを使用して構成できます。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/table-affinity)を参照してください。
+- TiDB は v8.5.5 以降、テーブルまたはパーティションのデータアフィニティを制御するための新しい`AFFINITY`プロパティをテーブルに導入しました。このプロパティは`CREATE TABLE`または`ALTER TABLE`文を使用して構成できます。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/table-affinity)を参照してください。
 - バージョン8.5.5以降、TiDBではテーブルのアフィニティ情報を表示するための新しい`SHOW AFFINITY`ステートメントが導入されました。このステートメントはMySQL構文のTiDB拡張です。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/sql-statement-show-affinity)を参照してください。
 
 ### システム変数 {#system-variables}
@@ -174,7 +174,7 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
 | [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)                                                                      | 変更     | OLAPおよびHTAPシナリオにおける統計情報の完全性を向上させるため、デフォルト値を`PREDICATE`から`ALL`に変更します。                                                                                                                                                                                                                                             |
 | [`tidb_advancer_check_point_lag_limit`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_advancer_check_point_lag_limit-new-in-v855)                       | 新しく追加された | ログバックアップタスクのチェックポイント遅延の最大値を制御します。デフォルト値は`48h0m0s`です。タスクのチェックポイント遅延がこの制限を超えると、TiDB Advancer はタスクを一時停止します。                                                                                                                                                                                                         |
 | [`tidb_cb_pd_metadata_error_rate_threshold_ratio`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_cb_pd_metadata_error_rate_threshold_ratio-new-in-v855) | 新しく追加された | TiDB がサーキットブレーカーをトリガーするタイミングを制御します。デフォルト値は`0`で、これはサーキットブレーカーが無効になっていることを意味します。 `0.01`から`1`の間の値を設定すると、サーキットブレーカーが有効になり、PD に送信される特定のリクエストのエラー率がしきい値に達するか超えたときにサーキットブレーカーがトリガーされます。                                                                                                                                 |
-| [`tidb_index_lookup_pushdown_policy`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_index_lookup_pushdown_policy-new-in-v855)                           | 新しく追加された | TiDB が`IndexLookUp`オペレーターを TiKV にプッシュするかどうか、またプッシュするタイミングを制御します。デフォルト値は`hint-only`です。これは、SQL ステートメントで[`INDEX_LOOKUP_PUSHDOWN`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855)ヒントが明示的に指定されている場合にのみ、TiDB が`IndexLookUp`オペレーターを TiKV にプッシュすることを意味します。 |
+| [`tidb_index_lookup_pushdown_policy`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_index_lookup_pushdown_policy-new-in-v855)                           | 新しく追加された | TiDB が`IndexLookUp`オペレーターを TiKV にプッシュするかどうか、またプッシュするタイミングを制御します。デフォルト値は`hint-only`です。これは、SQL 文で[`INDEX_LOOKUP_PUSHDOWN`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855)ヒントが明示的に指定されている場合にのみ、TiDB が`IndexLookUp`オペレーターを TiKV にプッシュすることを意味します。 |
 
 ### コンフィグレーションパラメータ {#configuration-parameters}
 
@@ -214,7 +214,7 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
     - Parquetファイルの解析メカニズムを強化し、Parquet形式のデータのインポートパフォーマンスを向上させる [#62906](https://github.com/pingcap/tidb/issues/62906) @[joechenrh](https://github.com/joechenrh)
     - `tidb_analyze_column_options`のデフォルト値を`ALL`に変更して、デフォルトですべての列の統計情報を収集します [#64992](https://github.com/pingcap/tidb/issues/64992) @[0xPoe](https://github.com/0xPoe)
     - `IndexHashJoin`オペレーターの実行ロジックを最適化し、特定のJOINシナリオでインクリメンタル処理を使用することで、一度に大量のデータをロードすることを避け、メモリ使用量を大幅に削減し、パフォーマンスを向上させます。 [#63303](https://github.com/pingcap/tidb/issues/63303) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
-    - 分散実行フレームワーク（DXF）における内部SQLステートメントのCPU使用率を最適化する [#59344](https://github.com/pingcap/tidb/issues/59344) @[D3Hunter](https://github.com/D3Hunter)
+    - 分散実行フレームワーク（DXF）における内部SQL文のCPU使用率を最適化する [#59344](https://github.com/pingcap/tidb/issues/59344) @[D3Hunter](https://github.com/D3Hunter)
     - `expression.Contains`関数のパフォーマンスを改善 [#61373](https://github.com/pingcap/tidb/issues/61373) @[hawkingrei](https://github.com/hawkingrei)
 
 - TiKV
@@ -271,7 +271,7 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
     - スキーマファイルに末尾のセミコロンがない場合にTiDB Lightning がエラーを報告しない問題を修正 [#63414](https://github.com/pingcap/tidb/issues/63414) @[GMHDBJD](https://github.com/GMHDBJD)
     - グローバルソートを有効にして`IMPORT INTO`を実行すると、ファイルの読み込み中に無限ループが発生する問題を修正しました [#61177](https://github.com/pingcap/tidb/issues/61177) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - `IMPORT INTO`の処理中に生成列を処理する際にpanicが発生する問題を修正しました [#64657](https://github.com/pingcap/tidb/issues/64657) @[D3Hunter](https://github.com/D3Hunter)
-    - 単一の SQL ステートメントに複数の`AS OF TIMESTAMP`が含まれている場合にエラーが誤って報告される可能性がある問題を修正しました [#65090](https://github.com/pingcap/tidb/issues/65090) @[you06](https://github.com/you06)
+    - 単一の SQL文に複数の`AS OF TIMESTAMP`が含まれている場合にエラーが誤って報告される可能性がある問題を修正しました [#65090](https://github.com/pingcap/tidb/issues/65090) @[you06](https://github.com/you06)
     - `information_schema.tables`をクエリする際に発生する可能性のある OOM 問題を修正するため、システムテーブルをクエリする際のメモリ使用量の監視を改善しました [#58985](https://github.com/pingcap/tidb/issues/58985) @[tangenta](https://github.com/tangenta)
     - `client-go`の潜在的なメモリリークを修正 [#65522](https://github.com/pingcap/tidb/issues/65522) @[bufferflies](https://github.com/bufferflies)
 
@@ -315,7 +315,7 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
 
         - ライターのクローズエラーが正しくキャプチャされないため、オブジェクトストレージへのレプリケーション中にデータが失われる可能性がある問題を修正します [#12436](https://github.com/pingcap/tiflow/issues/12436) @[wk989898](https://github.com/wk989898)
         - パーティションテーブルで`TRUNCATE`操作を複製すると、変更フィードが失敗する可能性がある問題を修正します [#12430](https://github.com/pingcap/tiflow/issues/12430) @[wk989898](https://github.com/wk989898)
-        - 複数テーブルの`RENAME` DDL ステートメントを複製する際に、下流の実行順序が正しくない可能性がある問題を修正します [#12449](https://github.com/pingcap/tiflow/issues/12449) @[wlwilliamx](https://github.com/wlwilliamx)
+        - 複数テーブルの`RENAME` DDL文を複製する際に、下流の実行順序が正しくない可能性がある問題を修正します [#12449](https://github.com/pingcap/tiflow/issues/12449) @[wlwilliamx](https://github.com/wlwilliamx)
         - `aws-sdk-go-v2`依存関係のバージョンをアップグレードすることで、Glue Schema Registryの使用時に発生する可能性のある接続エラーを修正します [#12424](https://github.com/pingcap/tiflow/issues/12424) @[wk989898](https://github.com/wk989898)
         - TiKV CDCコンポーネントが再起動後にメモリ割り当てを正しく解放しないためにchangefeedタスクが停止する可能性がある問題を修正しました [#18169](https://github.com/tikv/tikv/issues/18169) @[asddongmen](https://github.com/asddongmen)
         - TiKV CDCでインクリメンタルスキャンタスクが蓄積された際に、gRPC接続がアイドル状態と誤判断されて予期せず閉じられる可能性がある問題を修正しました。 [#18915](https://github.com/tikv/tikv/issues/18915) @[asddongmen](https://github.com/asddongmen)

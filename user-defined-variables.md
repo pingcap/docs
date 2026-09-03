@@ -17,7 +17,7 @@ summary: ユーザー定義変数の使用方法を学習します。
 
 ## ユーザー定義変数を設定する {#set-the-user-defined-variables}
 
-[`SET`ステートメント](/sql-statements/sql-statement-set-variable.md)を使ってユーザー定義変数を設定できます。構文は`SET @var_name = expr [, @var_name = expr] ...;`です。例えば：
+[`SET`文](/sql-statements/sql-statement-set-variable.md)を使ってユーザー定義変数を設定できます。構文は`SET @var_name = expr [, @var_name = expr] ...;`です。例えば：
 
 ```sql
 SET @favorite_db = 'TiDB';
@@ -45,7 +45,7 @@ SET @c = b'1000001' + b'1000001';
 
 ## ユーザー定義変数を読み取る {#read-the-user-defined-variables}
 
-ユーザー定義変数を読み取るには、 `SELECT`ステートメントを使用してクエリを実行します。
+ユーザー定義変数を読み取るには、 `SELECT`文を使用してクエリを実行します。
 
 ```sql
 SELECT @a1, @a2, @a3
@@ -59,7 +59,7 @@ SELECT @a1, @a2, @a3
 +------+------+------+
 ```
 
-`SELECT`ステートメントで値を割り当てることもできます。
+`SELECT`文で値を割り当てることもできます。
 
 ```sql
 SELECT @a1, @a2, @a3, @a4 := @a1+@a2+@a3;

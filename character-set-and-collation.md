@@ -404,7 +404,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 - `SET NAMES 'charset_name' [COLLATE 'collation_name']`
 
-    `SET NAMES`は、クライアントがサーバーに SQL ステートメントを送信するために使用する文字セットを示します。`SET NAMES utf8mb4`は、クライアントからのすべてのリクエストとサーバーからの結果に utf8mb4 が使用されることを示します。
+    `SET NAMES`は、クライアントがサーバーに SQL文を送信するために使用する文字セットを示します。`SET NAMES utf8mb4`は、クライアントからのすべてのリクエストとサーバーからの結果に utf8mb4 が使用されることを示します。
 
     `SET NAMES 'charset_name'`文は次の文の組み合わせと同等です。
 

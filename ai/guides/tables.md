@@ -63,7 +63,7 @@ table = client.create_table(schema=Item, if_exists="overwrite")
 </div>
 <div label="SQL" value="sql">
 
-`CREATE TABLE`ステートメントを使用してテーブルを作成します。
+`CREATE TABLE`文を使用してテーブルを作成します。
 
 ```sql
 CREATE TABLE items (
@@ -104,7 +104,7 @@ table.insert(
 </div>
 <div label="SQL" value="sql">
 
-`INSERT INTO`ステートメントを使用して、テーブルに 1つのレコードを挿入します。
+`INSERT INTO`文を使用して、テーブルに 1つのレコードを挿入します。
 
 ```sql
 INSERT INTO items(id, content, embedding, meta)
@@ -141,7 +141,7 @@ table.bulk_insert([
 </div>
 <div label="SQL" value="sql">
 
-`INSERT INTO`ステートメントを使用して、複数のレコードをテーブルに挿入します。
+`INSERT INTO`文を使用して、複数のレコードをテーブルに挿入します。
 
 ```sql
 INSERT INTO items(id, content, embedding, meta)
@@ -176,7 +176,7 @@ table.insert({
 </div>
 <div label="SQL" value="sql">
 
-`INSERT INTO`ステートメントを使用して、テーブルに 1つのレコードを挿入します。
+`INSERT INTO`文を使用して、テーブルに 1つのレコードを挿入します。
 
 ```sql
 INSERT INTO items(id, content, embedding, meta)
@@ -229,7 +229,7 @@ updated_record = table.save(
 </div>
 <div label="SQL" value="sql">
 
-レコードを保存するには、 `INSERT ... ON DUPLICATE KEY UPDATE`ステートメントを使用します。
+レコードを保存するには、 `INSERT ... ON DUPLICATE KEY UPDATE`文を使用します。
 
 **例: 新しいレコードを保存するか、存在する場合は更新する**
 
@@ -263,7 +263,7 @@ result = table.query(limit=10).to_list()
 </div>
 <div label="SQL" value="sql">
 
-`SELECT`ステートメントを使用して、テーブルからレコードを取得します。
+`SELECT`文を使用して、テーブルからレコードを取得します。
 
 **例: 最初の10件のレコードを取得する**
 
@@ -329,7 +329,7 @@ table.update(
 </div>
 <div label="SQL" value="sql">
 
-`UPDATE`ステートメントを使用して、レコードを[フィルター](/ai/guides/filtering.md)で更新します。
+`UPDATE`文を使用して、レコードを[フィルター](/ai/guides/filtering.md)で更新します。
 
 **例: `id`が1のレコードを更新する**
 
@@ -351,7 +351,7 @@ WHERE
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-[フィルター](/ai/guides/filtering.md)のレコードを削除するには、 `table.delete()`メソッドを使用します。
+レコードを[フィルター](/ai/guides/filtering.md)で削除するには、 `table.delete()`メソッドを使用します。
 
 **例: `id`が2のレコードを削除する**
 
@@ -366,7 +366,7 @@ table.delete(
 </div>
 <div label="SQL" value="sql">
 
-`DELETE`ステートメントを使用して、 [フィルター](/ai/guides/filtering.md)のレコードを削除します。
+`DELETE`文を使用して、レコードを[フィルター](/ai/guides/filtering.md)で削除します。
 
 **例: `id`が2のレコードを削除する**
 
@@ -397,7 +397,7 @@ table.rows()
 </div>
 <div label="SQL" value="sql">
 
-テーブルからすべてのデータを削除しながらテーブル構造を維持するには、 `TRUNCATE TABLE`ステートメントを使用します。
+テーブルからすべてのデータを削除しながらテーブル構造を維持するには、 `TRUNCATE TABLE`文を使用します。
 
 ```sql
 TRUNCATE TABLE items;
@@ -432,7 +432,7 @@ client.table_names()
 </div>
 <div label="SQL" value="sql">
 
-データベースからテーブルを完全に削除するには、 `DROP TABLE`ステートメントを使用します。
+データベースからテーブルを完全に削除するには、 `DROP TABLE`文を使用します。
 
 ```sql
 DROP TABLE items;

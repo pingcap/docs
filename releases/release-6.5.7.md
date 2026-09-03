@@ -32,7 +32,7 @@ TiDB バージョン: 6.5.7
 
     - Backup & Restore (BR)
 
-        - 大規模なデータセットシナリオで`RESTORE`ステートメントのテーブル作成パフォーマンスを向上 [＃48301](https://github.com/pingcap/tidb/issues/48301) @[Leavrth](https://github.com/Leavrth)
+        - 大規模なデータセットシナリオで`RESTORE`文のテーブル作成パフォーマンスを向上 [＃48301](https://github.com/pingcap/tidb/issues/48301) @[Leavrth](https://github.com/Leavrth)
         - EBS ベースのスナップショットバックアップとTiDB Lightningインポート間の互換性の問題を解決[＃46850](https://github.com/pingcap/tidb/issues/46850) @[YuJuncen](https://github.com/YuJuncen)
         - リージョンリーダーシップの移行が発生すると、PITR ログバックアップの進行のレイテンシーが長くなるという問題を軽減します[＃13638](https://github.com/tikv/tikv/issues/13638) @[YuJuncen](https://github.com/YuJuncen)
 
@@ -55,8 +55,8 @@ TiDB バージョン: 6.5.7
     - TiDB の初期バージョンからエクスポートされた統計をインポートするときに統計データエラーが発生する可能性がある問題を修正しました。 [＃42931](https://github.com/pingcap/tidb/issues/42931) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - Golang の暗黙的な変換アルゴリズムによって発生する統計情報の構築における過剰な統計エラーの問題を修正しました [＃49801](https://github.com/pingcap/tidb/issues/49801) @[qw4990](https://github.com/qw4990)
     - 特定のシナリオでオプティマイザがTiFlash選択パスを DUAL テーブルに誤って変換する問題を修正[＃49285](https://github.com/pingcap/tidb/issues/49285) @[AilinKid](https://github.com/AilinKid)
-    - `ENUM`または`SET`種類の無効な値を解析すると、SQL ステートメント エラーが直接発生する問題を修正しました。 [＃49487](https://github.com/pingcap/tidb/issues/49487) @[winoros](https://github.com/winoros)
-    - `WITH RECURSIVE` CTE を含む`UPDATE`または`DELETE`ステートメントで誤った結果が生成される可能性がある問題を修正しました[＃48969](https://github.com/pingcap/tidb/issues/48969) @[winoros](https://github.com/winoros)
+    - `ENUM`または`SET`型の無効な値を解析すると、SQL文エラーが直接発生する問題を修正しました。 [＃49487](https://github.com/pingcap/tidb/issues/49487) @[winoros](https://github.com/winoros)
+    - `WITH RECURSIVE` CTE を含む`UPDATE`または`DELETE`文で誤った結果が生成される可能性がある問題を修正しました[＃48969](https://github.com/pingcap/tidb/issues/48969) @[winoros](https://github.com/winoros)
     - データの末尾にスペースが含まれている場合に`LIKE`で`_`ワイルドカードを使用すると、クエリ結果が不正確になる可能性がある問題を修正しました[＃48983](https://github.com/pingcap/tidb/issues/48983) @[time-and-fate](https://github.com/time-and-fate)
     - IndexHashJoin オペレーターを含むクエリがメモリが`tidb_mem_quota_query` を超えると停止する問題を修正しました [＃49033](https://github.com/pingcap/tidb/issues/49033) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - ネストされた`UNION`クエリで`LIMIT`と`OPRDERBY`無効になる可能性がある問題を修正しました [＃49377](https://github.com/pingcap/tidb/issues/49377) @[AilinKid](https://github.com/AilinKid)

@@ -303,6 +303,6 @@ TiDB Cloudノードは[通常のノード](https://docs.n8n.io/workflows/nodes/#
 
 ### 制限事項 {#limitations}
 
-- 通常、 **Execute SQL**操作では1つのSQLステートメントしか実行できません。1つの操作で複数のステートメントを実行する場合は、 [`tidb_multi_statement_mode`](https://docs.pingcap.com/tidbcloud/system-variables#tidb_multi_statement_mode-new-in-v4011)手動で有効にする必要があります。
+- 通常、 **Execute SQL**操作では1つのSQL文しか実行できません。1つの操作で複数のステートメントを実行する場合は、 [`tidb_multi_statement_mode`](https://docs.pingcap.com/tidbcloud/system-variables#tidb_multi_statement_mode-new-in-v4011)手動で有効にする必要があります。
 - **Delete**および**Update**操作では、キーとして1つのフィールドを指定する必要があります。たとえば、 `Delete Key`を`id`に設定すると、 `DELETE FROM table WHERE id = ${item.id}`を実行するのと同等になります。現在、**Delete**および**Update**操作では、キーを1つだけ指定できます。
 - **Insert**および**Update**操作の場合、**Columns**フィールドにカンマ区切りのリストを指定する必要があり、フィールド名は入力項目のプロパティ名と同じでなければなりません。

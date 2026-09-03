@@ -377,5 +377,5 @@ tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 - [データ移行タスクを再開する](/dm/dm-resume-task.md)
 - [データ移行タスクを停止する](/dm/dm-stop-task.md)
 - [クラスターのデータソースのエクスポートとインポート、およびタスクコンフィグレーション](/dm/dm-export-import-config.md)
-- [失敗したDDLステートメントを処理する](/dm/handle-failed-ddl-statements.md)
+- [失敗したDDL文を処理する](/dm/handle-failed-ddl-statements.md)
 - [エラーを処理する](/dm/dm-error-handling.md)

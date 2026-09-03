@@ -118,8 +118,8 @@ connections = ((core_count * 2) + effective_spindle_count)
 
 このメモは以下を示しています。
 
-- **core_countは**、 [ハイパースレッディング](https://en.wikipedia.org/wiki/Hyper-threading)を有効にするかどうかに関わらず、物理コアの数です。
-- データが完全にキャッシュされると、 **effective_spindle_count を**`0`に設定する必要があります。キャッシュのヒット率が低下すると、カウントは実際の数値である`HDD`に近づきます。
+- **core_count**は、 [ハイパースレッディング](https://en.wikipedia.org/wiki/Hyper-threading)を有効にするかどうかに関わらず、物理コアの数です。
+- データが完全にキャッシュされると、 **effective_spindle_count**を`0`に設定する必要があります。キャッシュのヒット率が低下すると、カウントは実際の数値である`HDD`に近づきます。
 - **この計算式が*SSD*にも有効かどうかは検証されておらず、不明です。**
 
 SSDを使用する場合は、経験に基づき、以下の式を使用することをお勧めします。
@@ -160,7 +160,7 @@ OLTP（オンライントランザクション処理）シナリオでは、プ�
 
 #### バッチAPIを使用する {#use-batch-api}
 
-バッチ挿入の場合は、 [`addBatch` / `executeBatch` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/Statement.html#executeBatch())を使用できます。`addBatch()`は、複数の SQL ステートメントを最初にクライアントにキャッシュし、 `executeBatch`メソッドを呼び出すときにそれらをまとめてデータベースサーバーに送信するために使用されます。
+バッチ挿入の場合は、 [`addBatch` / `executeBatch` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/Statement.html#executeBatch())を使用できます。`addBatch()`は、複数の SQL文を最初にクライアントにキャッシュし、 `executeBatch`メソッドを呼び出すときにそれらをまとめてデータベースサーバーに送信するために使用されます。
 
 > **Note:**
 >
@@ -174,7 +174,7 @@ OLTP（オンライントランザクション処理）シナリオでは、プ�
 
 JDBCでは通常、以下の2つの処理方法が使用されます。
 
-- 最初の方法: [**FetchSizeを**`Integer.MIN_VALUE`に設定します](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-implementation-notes.html#ResultSet)クライアントがキャッシュしないようにします。クライアントは`StreamingResult`を介してネットワーク接続から実行結果を読み取ります。
+- 最初の方法: [**FetchSize**を`Integer.MIN_VALUE`に設定します](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-implementation-notes.html#ResultSet)クライアントがキャッシュしないようにします。クライアントは`StreamingResult`を介してネットワーク接続から実行結果を読み取ります。
 
     クライアントがストリーミング読み取り方式を使用する場合、クエリを実行するためにステートメントを引き続き使用する前に、読み取りを完了するか、 `resultset`閉じる必要があります。そうしないと、エラー`No statements may be issued when any streaming result sets are open and in use on a given connection. Ensure that you have called .close() on any active streaming result sets before attempting more queries.`が返されます。
 
@@ -198,7 +198,7 @@ JDBCは通常、JDBC URLパラメータの形式で実装関連の設定を提�
 
 - **useServerPrepStmts**
 
-    **useServerPrepStmts は**デフォルトで`false`に設定されています。つまり、Prepare API を使用する場合でも、「prepare」操作はクライアント側でのみ実行されます。サーバーの解析オーバーヘッドを回避するため、同じ SQL ステートメントで Prepare API を複数回使用する場合は、この設定を`true`に設定することをお勧めします。
+    **useServerPrepStmts**はデフォルトで`false`に設定されています。つまり、Prepare API を使用する場合でも、「prepare」操作はクライアント側でのみ実行されます。サーバーの解析オーバーヘッドを回避するため、同じ SQL文で Prepare API を複数回使用する場合は、この設定を`true`に設定することをお勧めします。
 
     この設定が既に有効になっていることを確認するには、次の操作を実行してください。
 
@@ -229,7 +229,7 @@ JDBCは通常、JDBC URLパラメータの形式で実装関連の設定を提�
 
 - **prepStmtCacheSize**
 
-    **prepStmtCacheSize は**、キャッシュされるプリペアドステートメントの数を制御します（デフォルト値は`25`です）。アプリケーションで多くの種類の SQL ステートメントを「準備」する必要があり、プリペアドステートメントを再利用したい場合は、この値を増やすことができます。
+    **prepStmtCacheSize**は、キャッシュされるプリペアドステートメントの数を制御します（デフォルト値は`25`です）。アプリケーションで多くの種類の SQL文を「準備」する必要があり、プリペアドステートメントを再利用したい場合は、この値を増やすことができます。
 
     この設定が既に有効になっていることを確認するには、次の操作を実行してください。
 
@@ -250,7 +250,7 @@ pstmt.setInt(1, 12);
 pstmt.executeBatch();
 ```
 
-`Batch`メソッドが使用されているにもかかわらず、TiDBに送信されるSQLステートメントは依然として個別の`INSERT`ステートメントです。
+`Batch`メソッドが使用されているにもかかわらず、TiDBに送信されるSQL文は依然として個別の`INSERT`文です。
 
 ```sql
 INSERT INTO `t` (`a`) VALUES(10);
@@ -258,13 +258,13 @@ INSERT INTO `t` (`a`) VALUES(11);
 INSERT INTO `t` (`a`) VALUES(12);
 ```
 
-しかし、 `rewriteBatchedStatements=true`を設定すると、TiDB に送信される SQL ステートメントは単一の`INSERT`ステートメントになります。
+しかし、 `rewriteBatchedStatements=true`を設定すると、TiDB に送信される SQL文は単一の`INSERT`文になります。
 
 ```sql
 INSERT INTO `t` (`a`) values(10),(11),(12);
 ```
 
-`INSERT`のステートメントの書き換えは、複数の「values」キーワードの後の値を連結して、1つのSQLステートメントにすることです。`INSERT`のステートメントに他の違いがある場合は、書き換えることはできません。たとえば、次のようになります。
+`INSERT`のステートメントの書き換えは、複数の「values」キーワードの後の値を連結して、1つのSQL文にすることです。`INSERT`のステートメントに他の違いがある場合は、書き換えることはできません。たとえば、次のようになります。
 
 ```sql
 INSERT INTO `t` (`a`) VALUES (10) ON DUPLICATE KEY UPDATE `a` = 10;
@@ -286,7 +286,7 @@ INSERT INTO `t` (`a`) VALUES (12) ON DUPLICATE KEY UPDATE `a` = VALUES(`a`);
 INSERT INTO `t` (`a`) VALUES (10), (11), (12) ON DUPLICATE KEY UPDATE a = VALUES(`a`);
 ```
 
-バッチ更新中に3つ以上の更新がある場合、SQLステートメントは書き換えられ、複数のクエリとして送信されます。これにより、クライアントからサーバーへのリクエストのオーバーヘッドは効果的に削減されますが、副作用として、より大きなSQLステートメントが生成されます。例：
+バッチ更新中に3つ以上の更新がある場合、SQL文は書き換えられ、複数のクエリとして送信されます。これにより、クライアントからサーバーへのリクエストのオーバーヘッドは効果的に削減されますが、副作用として、より大きなSQL文が生成されます。例：
 
 ```sql
 UPDATE `t` SET `a` = 10 WHERE `id` = 1; UPDATE `t` SET `a` = 11 WHERE `id` = 2; UPDATE `t` SET `a` = 12 WHERE `id` = 3;
@@ -296,15 +296,15 @@ UPDATE `t` SET `a` = 10 WHERE `id` = 1; UPDATE `t` SET `a` = 11 WHERE `id` = 2; 
 
 #### パラメータを統合する {#integrate-parameters}
 
-監視を通じて、アプリケーションが TiDB クラスタに対して実行する操作は`INSERT`だけであるにもかかわらず、冗長な`SELECT`ステートメントが多数あることに気づくかもしれません。通常、これは JDBC が設定を照会するためにいくつかの SQL ステートメントを送信することによって発生します (例: `select @@session.transaction_read_only` )。これらの SQL ステートメントは TiDB にとって不要なので、余分なオーバーヘッドを避けるために`useConfigs=maxPerformance`を設定することをお勧めします。
+監視を通じて、アプリケーションが TiDB クラスタに対して実行する操作は`INSERT`だけであるにもかかわらず、冗長な`SELECT`文が多数あることに気づくかもしれません。通常、これは JDBC が設定を照会するためにいくつかの SQL文を送信することによって発生します (例: `select @@session.transaction_read_only` )。これらの SQL文は TiDB にとって不要なので、余分なオーバーヘッドを避けるために`useConfigs=maxPerformance`を設定することをお勧めします。
 
 `useConfigs=maxPerformance`には設定のグループが含まれています。MySQL Connector/J 8.0およびMySQL Connector/J 5.1の詳細な設定については、それぞれ[mysql-connector-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties)および[mysql-connector-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties)を参照してください。
 
-設定が完了したら、監視画面で`SELECT`ステートメントの数が減少していることを確認できます。
+設定が完了したら、監視画面で`SELECT`文の数が減少していることを確認できます。
 
 #### タイムアウト関連のパラメータ {#timeout-related-parameters}
 
-TiDB はタイムアウトを制御するために 2つの MySQL 互換パラメータ ( [`wait_timeout`](/system-variables.md#wait_timeout)と[`max_execution_time`](/system-variables.md#max_execution_time) ) を提供します。これらの 2つのパラメータはそれぞれ、 Javaアプリケーションとの接続アイドルタイムアウトと接続内の SQL 実行のタイムアウトを制御します。つまり、これらのパラメータは、TiDB とJavaアプリケーション間の接続の最長アイドル時間と最長ビジー時間を制御します。TiDB v5.4 以降、 `wait_timeout`のデフォルト値は`28800`秒で、8時間です。v5.4 より前の TiDB バージョンでは、デフォルト値は`0`で、タイムアウトは無制限です。`max_execution_time`のデフォルト値は`0`で、SQL ステートメントの最大実行時間は無制限であり、 `SELECT`ステートメントすべて ( `SELECT ... FOR UPDATE`を含む) に適用されます。
+TiDB はタイムアウトを制御するために 2つの MySQL 互換パラメータ ( [`wait_timeout`](/system-variables.md#wait_timeout)と[`max_execution_time`](/system-variables.md#max_execution_time) ) を提供します。これらの 2つのパラメータはそれぞれ、 Javaアプリケーションとの接続アイドルタイムアウトと接続内の SQL 実行のタイムアウトを制御します。つまり、これらのパラメータは、TiDB とJavaアプリケーション間の接続の最長アイドル時間と最長ビジー時間を制御します。TiDB v5.4 以降、 `wait_timeout`のデフォルト値は`28800`秒で、8時間です。v5.4 より前の TiDB バージョンでは、デフォルト値は`0`で、タイムアウトは無制限です。`max_execution_time`のデフォルト値は`0`で、SQL文の最大実行時間は無制限であり、 `SELECT`文すべて ( `SELECT ... FOR UPDATE`を含む) に適用されます。
 
 デフォルト値の[`wait_timeout`](/system-variables.md#wait_timeout)は比較的大きな値です。トランザクションが開始されてもコミットもロールバックもされないような状況では、ロックの保持時間が長引くのを防ぐために、よりきめ細かな制御と短いタイムアウトが必要になる場合があります。このような場合は、 [`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) （TiDB v7.6.0で導入）を使用して、ユーザーセッション内のトランザクションのアイドルタイムアウトを制御できます。
 

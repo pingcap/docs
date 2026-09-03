@@ -125,7 +125,7 @@ TiDB バージョン: 8.0.0
 
     バージョン8.0.0より前のTiDBでは、トランザクションデータをコミットする前にすべてメモリに格納していました。大量のデータを処理する場合、トランザクションに必要なメモリがボトルネックとなり、TiDBが処理できるトランザクションサイズが制限されていました。TiDBは、SQL文を分割することでトランザクションサイズの制限を解消しようと、非トランザクションDMLを導入しましたが、この機能には様々な制限があり、実際のシナリオでは理想的なエクスペリエンスを提供できませんでした。
 
-    バージョン 8.0.0 以降、TiDB は大量のデータを処理するための DML タイプをサポートしています。この DML タイプは、実行中にデータを TiKV にタイムリーに書き込み、すべてのトランザクション データをメモリに継続的に格納することを回避し、メモリ制限を超える大量のデータの処理をサポートします。この DML タイプはトランザクションの整合性を保証し、標準 DML と同じ構文を使用します。 `INSERT` 、 `UPDATE` 、 `REPLACE` 、および`DELETE`ステートメントは、この新しい DML タイプを使用して大規模な DML 操作を実行できます。
+    バージョン 8.0.0 以降、TiDB は大量のデータを処理するための DML タイプをサポートしています。この DML タイプは、実行中にデータを TiKV にタイムリーに書き込み、すべてのトランザクション データをメモリに継続的に格納することを回避し、メモリ制限を超える大量のデータの処理をサポートします。この DML タイプはトランザクションの整合性を保証し、標準 DML と同じ構文を使用します。 `INSERT` 、 `UPDATE` 、 `REPLACE` 、および`DELETE`文は、この新しい DML タイプを使用して大規模な DML 操作を実行できます。
 
     この DML タイプは[パイプラインDML](https://github.com/pingcap/tidb/blob/release-8.0/docs/design/2024-01-09-pipelined-DML.md)機能によって実装され、自動コミットが有効になっているステートメントでのみ有効になります。この DML タイプを有効にするかどうかは、システム変数[`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800)を設定することで制御できます。
 
@@ -161,7 +161,7 @@ TiDB バージョン: 8.0.0
 
 - 一般ログの別ファイルへの書き込みをサポート [#51248](https://github.com/pingcap/tidb/issues/51248) @[Defined2014](https://github.com/Defined2014)
 
-    一般ログは、MySQL互換の機能で、実行されたすべてのSQLステートメントをログに記録し、問題の診断に役立ちます。TiDBもこの機能をサポートしています。変数[`tidb_general_log`](/system-variables.md#tidb_general_log)を設定することで有効にできます。ただし、以前のバージョンでは、一般ログの内容は他の情報とともにTiDBインスタンスログにしか書き込まれず、ログを長期間保持する必要があるユーザーにとっては不便でした。
+    一般ログは、MySQL互換の機能で、実行されたすべてのSQL文をログに記録し、問題の診断に役立ちます。TiDBもこの機能をサポートしています。変数[`tidb_general_log`](/system-variables.md#tidb_general_log)を設定することで有効にできます。ただし、以前のバージョンでは、一般ログの内容は他の情報とともにTiDBインスタンスログにしか書き込まれず、ログを長期間保持する必要があるユーザーにとっては不便でした。
 
     バージョン8.0.0以降では、設定項目[`log.general-log-file`](/tidb-configuration-file.md#general-log-file-new-in-v800)に有効なファイル名を設定することで、一般ログを指定したファイルに書き込むことができます。一般ログは、インスタンスログと同じローテーションおよび保持ポリシーに従います。
 
@@ -222,9 +222,9 @@ TiDB バージョン: 8.0.0
 
     詳細については、[ドキュメント](/dm/dm-customized-secret-key.md)を参照してください。
 
-- `IMPORT INTO ... FROM SELECT`の機能を拡張するために`IMPORT INTO`構文をサポートします (実験的) [#49883](https://github.com/pingcap/tidb/issues/49883) @[D3Hunter](https://github.com/D3Hunter)
+- `IMPORT INTO`の機能を拡張するために`IMPORT INTO ... FROM SELECT`構文をサポートします (実験的) [#49883](https://github.com/pingcap/tidb/issues/49883) @[D3Hunter](https://github.com/D3Hunter)
 
-    以前の TiDB バージョンでは、クエリ結果をターゲットテーブルにインポートするには`INSERT INTO ... SELECT`ステートメントを使用するしかなく、大規模なデータセットのシナリオでは効率が悪かった。v8.0.0 以降では、TiDB で`IMPORT INTO ... FROM SELECT`を使用して`SELECT`クエリの結果を空の TiDB ターゲットテーブルにインポートできるようになり、 `INSERT INTO ... SELECT`の最大 8 倍のパフォーマンスを実現し、インポート時間を大幅に短縮できる。
+    以前の TiDB バージョンでは、クエリ結果をターゲットテーブルにインポートするには`INSERT INTO ... SELECT`文を使用するしかなく、大規模なデータセットのシナリオでは効率が悪かったです。v8.0.0 以降では、TiDB で`IMPORT INTO ... FROM SELECT`を使用して`SELECT`クエリの結果を空の TiDB ターゲットテーブルにインポートできるようになり、 `INSERT INTO ... SELECT`の最大 8 倍のパフォーマンスを実現し、インポート時間を大幅に短縮できます。
 
     さらに、 `IMPORT INTO ... FROM SELECT`を使用して、 [`AS OF TIMESTAMP`](/as-of-timestamp.md)でクエリされた履歴データをインポートできます。
 
@@ -275,13 +275,13 @@ TiDB バージョン: 8.0.0
 | [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info)                           | 変更     | [インデックスの使用統計](/information-schema/information-schema-tidb-index-usage.md)を記録するかどうかのコントロールを追加します。デフォルト値は`ON`です。                                                                                                             |
 | [`tidb_redact_log`](/system-variables.md#tidb_redact_log)                                                                 | 変更     | TiDB ログおよびスローログを記録する際に、SAL テキスト内のユーザー情報をどのように処理するかを制御します。値のオプションは`OFF` (ログ内のユーザー情報を処理しないことを示す) と`ON` (ログ内のユーザー情報を非表示にすることを示す) です。ログ内のユーザー情報をより詳細に処理できるように、v8.0.0 ではログ情報をマークするための`MARKER`オプションが追加されました。                    |
 | [`div_precision_increment`](/system-variables.md#div_precision_increment-new-in-v800)                                     | 新しく追加された | `/` 演算子を使用した除算の結果桁数を増やすかどうかを制御します。この変数はMySQLと同じです。                                                                                                                                                                  |
-| [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800)                                                         | 新しく追加された | DML ステートメントの実行モードを制御します。値のオプションは`"standard"`と`"bulk"`です。                                                                                                                                                                   |
+| [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800)                                                         | 新しく追加された | DML文の実行モードを制御します。値のオプションは`"standard"`と`"bulk"`です。                                                                                                                                                                   |
 | [`tidb_enable_auto_analyze_priority_queue`](/system-variables.md#tidb_enable_auto_analyze_priority_queue-new-in-v800)     | 新しく追加された | 統計情報の自動収集タスクをスケジュールするための優先度キューを有効にするかどうかを制御します。この変数を有効にすると、TiDB は統計情報を最も必要とするテーブルの統計情報の収集を優先します。                                                                                                                           |
 | [`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800)               | 新しく追加された | TiDBが並列HashAggアルゴリズムでディスクスピルをサポートするかどうかを制御します。 `ON`の場合、並列HashAggアルゴリズムでディスクスピルがトリガーされます。この機能が将来のリリースで一般提供されるようになったら、この変数は非推奨になります。                                                                                         |
 | [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)                         | 新しく追加された | [TiDBがテーブル作成を高速化](/accelerated-table-creation.md)機能を有効にするかどうかを制御します。有効にするには`ON`に、無効にするには`OFF`に設定します。デフォルト値は`ON`です。この変数が有効になっている場合、TiDB は[`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)を使用してテーブル作成を高速化します。 |
 | [`tidb_load_binding_timeout`](/system-variables.md#tidb_load_binding_timeout-new-in-v800)                                 | 新しく追加された | バインディングの読み込みタイムアウトを制御します。バインディングの読み込み実行時間がこの値を超えると、読み込みが停止します。                                                                                                                                                             |
 | [`tidb_low_resolution_tso_update_interval`](/system-variables.md#tidb_low_resolution_tso_update_interval-new-in-v800)     | 新しく追加された | TiDB [キャッシュタイムスタンプ](/system-variables.md#tidb_low_resolution_tso)スタンプを更新する間隔を制御します。                                                                                                                                        |
-| [`tidb_opt_ordering_index_selectivity_ratio`](/system-variables.md#tidb_opt_ordering_index_selectivity_ratio-new-in-v800) | 新しく追加された | SQL ステートメントに`ORDER BY`および`ORDER BY` } 句が存在するものの、インデックスでカバーされていないフィルタ条件がある場合に、SQL ステートメント`LIMIT`に一致するインデックスの推定行数を制御します。デフォルト値は`-1`で、このシステム変数を無効にすることを意味します。                                                                 |
+| [`tidb_opt_ordering_index_selectivity_ratio`](/system-variables.md#tidb_opt_ordering_index_selectivity_ratio-new-in-v800) | 新しく追加された | SQL文に`ORDER BY`および`LIMIT`句が存在するものの、インデックスでカバーされていないフィルタ条件がある場合に、SQL文の`ORDER BY`に一致するインデックスの推定行数を制御します。デフォルト値は`-1`で、このシステム変数を無効にすることを意味します。                                                                 |
 | [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)                       | 新しく追加された | オプティマイザが現在のセッションでクエリ最適化のために[不可視インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択できるかどうかを制御します。変数が`ON`に設定されている場合、オプティマイザはセッション内のクエリ最適化のために不可視インデックスを選択できます。                                   |
 | [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)                                       | 新しく追加された | スキーマ情報のキャッシュに使用できるメモリの上限を制御し、メモリの過剰使用を防ぎます。この機能を有効にすると、LRUアルゴリズムを使用して必要なテーブルをキャッシュし、スキーマ情報によって占有されるメモリを効果的に削減します。                                                                                                          |
 
@@ -329,7 +329,7 @@ TiDB バージョン: 8.0.0
 
 - TiDB
 
-    - `CREATE TABLE` DDL ステートメントの実行パフォーマンスを 10 倍向上させ、線形スケーラビリティをサポート [#50052](https://github.com/pingcap/tidb/issues/50052) @[GMHDBJD](https://github.com/GMHDBJD)
+    - `CREATE TABLE` DDL文の実行パフォーマンスを 10 倍向上させ、線形スケーラビリティをサポート [#50052](https://github.com/pingcap/tidb/issues/50052) @[GMHDBJD](https://github.com/GMHDBJD)
     - 16個の`IMPORT INTO ... FROM FILE`タスクを同時に送信することをサポートし、ターゲットテーブルへの大量データインポートを容易にし、データファイルのインポートの効率とパフォーマンスを大幅に向上させます [#49008](https://github.com/pingcap/tidb/issues/49008) @[D3Hunter](https://github.com/D3Hunter)
     - `Sort`オペレーターのディスクへのデータスピル処理のパフォーマンスを改善 [#47733](https://github.com/pingcap/tidb/issues/47733) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - ディスクへのデータ流出中にクエリをキャンセルする機能をサポートし、データ流出機能の終了メカニズムを最適化します [#50511](https://github.com/pingcap/tidb/issues/50511) @[wshwsh12](https://github.com/wshwsh12)
@@ -338,7 +338,7 @@ TiDB バージョン: 8.0.0
     - `Apply`オペレーターが同時に実行されない場合、TiDB では`SHOW WARNINGS`を実行することで、同時実行をブロックしている演算子の名前を表示できます。 [#50256](https://github.com/pingcap/tidb/issues/50256) @[hawkingrei](https://github.com/hawkingrei)
     - `point get`クエリがすべてのインデックスでサポートされている場合に、クエリに最適なインデックスを選択することで`point get`クエリのインデックス選択を最適化します。 [#50184](https://github.com/pingcap/tidb/issues/50184) @[elsa0520](https://github.com/elsa0520)
     - TiKVの負荷が高い時に広範囲にわたるタイムアウトが発生するのを避けるため、統計情報を同期的にロードするタスクの優先度を一時的に「高」に調整します。タイムアウトが発生すると、統計情報がロードされない可能性があります。 [#50332](https://github.com/pingcap/tidb/issues/50332) @[winoros](https://github.com/winoros)
-    - `PREPARE`ステートメントが実行プランキャッシュにヒットしなかった場合、TiDB では`SHOW WARNINGS`を実行することで理由を確認できます。 [#50407](https://github.com/pingcap/tidb/issues/50407) @[hawkingrei](https://github.com/hawkingrei)
+    - `PREPARE`文が実行プランキャッシュにヒットしなかった場合、TiDB では`SHOW WARNINGS`を実行することで理由を確認できます。 [#50407](https://github.com/pingcap/tidb/issues/50407) @[hawkingrei](https://github.com/hawkingrei)
     - 同じデータ行が複数回更新された場合のクエリ推定情報の精度を向上させる [#47523](https://github.com/pingcap/tidb/issues/47523) @[terry1purcell](https://github.com/terry1purcell)
     - インデックスマージは、 `OR`述語への多値インデックスと`AND`演算子の埋め込みをサポートします [#51778](https://github.com/pingcap/tidb/issues/51778) @[time-and-fate](https://github.com/time-and-fate)
     - `force-init-stats` `true`に設定すると、TiDB は TiDB 起動中にサービスを提供する前に統計情報の初期化が完了するまで待機します。この設定により HTTP サーバーの起動がブロックされなくなり、ユーザーは引き続き監視できるようになります [#50854](https://github.com/pingcap/tidb/issues/50854) @[hawkingrei](https://github.com/hawkingrei)
@@ -392,7 +392,7 @@ TiDB バージョン: 8.0.0
         - データ復元時のSSTファイルのマージ速度を、より効率的なアルゴリズムを使用して改善する [#50613](https://github.com/pingcap/tidb/issues/50613) @[Leavrth](https://github.com/Leavrth)
         - データ復元時にデータベースをバッチ処理で作成する機能をサポート [#50767](https://github.com/pingcap/tidb/issues/50767) @[Leavrth](https://github.com/Leavrth)
         - ログバックアップ中に、グローバルチェックポイントの進行に影響を与える最も遅いリージョンの情報をログとメトリクスに出力する [#51046](https://github.com/pingcap/tidb/issues/51046) @[YuJuncen](https://github.com/YuJuncen)
-        - 大規模データセットのシナリオにおける`RESTORE`ステートメントのテーブル作成パフォーマンスを改善 [#48301](https://github.com/pingcap/tidb/issues/48301) @[Leavrth](https://github.com/Leavrth)
+        - 大規模データセットのシナリオにおける`RESTORE`文のテーブル作成パフォーマンスを改善 [#48301](https://github.com/pingcap/tidb/issues/48301) @[Leavrth](https://github.com/Leavrth)
 
     - TiCDC
 
@@ -439,12 +439,12 @@ TiDB バージョン: 8.0.0
     - `determinate`モード ( `tidb_opt_objective='determinate'` ) において、クエリに述語が含まれていない場合、統計情報がロードされない可能性がある問題を修正します [#48257](https://github.com/pingcap/tidb/issues/48257) @[time-and-fate](https://github.com/time-and-fate)
     - `init-stats`プロセスが TiDB をpanic、 `load stats`プロセスを終了する可能性がある問題を修正しました [#51581](https://github.com/pingcap/tidb/issues/51581) @[hawkingrei](https://github.com/hawkingrei)
     - `IN()`述語に`NULL`が含まれている場合にクエリ結果が正しくない問題を修正 [#51560](https://github.com/pingcap/tidb/issues/51560) @[winoros](https://github.com/winoros)
-    - DDLタスクが複数のテーブルに関係する場合、ブロックされたDDLステートメントがMDLビューに表示されない問題を修正します [#47743](https://github.com/pingcap/tidb/issues/47743) @[wjhuang2016](https://github.com/wjhuang2016)
+    - DDLタスクが複数のテーブルに関係する場合、ブロックされたDDL文がMDLビューに表示されない問題を修正します [#47743](https://github.com/pingcap/tidb/issues/47743) @[wjhuang2016](https://github.com/wjhuang2016)
     - テーブル上の`processed_rows`タスクの`ANALYZE`が、そのテーブルの総行数を超える可能性がある問題を修正しました [#50632](https://github.com/pingcap/tidb/issues/50632) @[hawkingrei](https://github.com/hawkingrei)
     - `HashJoin`オペレーターがディスクにスピルしない場合に発生する可能性のあるゴルーチンリークの問題を修正 [#50841](https://github.com/pingcap/tidb/issues/50841) @[wshwsh12](https://github.com/wshwsh12)
     - CTEクエリのメモリ使用量が制限を超えた場合に発生するゴルーチンリークの問題を修正 [#50337](https://github.com/pingcap/tidb/issues/50337) @[guo-shaoge](https://github.com/guo-shaoge)
     - 集計関数をグループ計算に使用した際に発生する可能性のある`Can't find column ...`エラーを修正 [#50926](https://github.com/pingcap/tidb/issues/50926) @[qw4990](https://github.com/qw4990)
-    - `CREATE TABLE`ステートメントに特定のパーティションまたは制約が含まれている場合に、テーブル名の変更などの DDL 操作が停止する問題を修正しました [#50972](https://github.com/pingcap/tidb/issues/50972) @[lcwangchao](https://github.com/lcwangchao)
+    - `CREATE TABLE`文に特定のパーティションまたは制約が含まれている場合に、テーブル名の変更などの DDL 操作が停止する問題を修正しました [#50972](https://github.com/pingcap/tidb/issues/50972) @[lcwangchao](https://github.com/lcwangchao)
     - Grafana の監視メトリック`tidb_statistics_auto_analyze_total`が整数として表示されない問題を修正 [#51051](https://github.com/pingcap/tidb/issues/51051) @[hawkingrei](https://github.com/hawkingrei)
     - `tidb_gogc_tuner_threshold`変数が変更された後、 `tidb_server_memory_limit`システム変数が適切に調整されない問題を修正 [#48180](https://github.com/pingcap/tidb/issues/48180) @[hawkingrei](https://github.com/hawkingrei)
     - クエリに JOIN 操作が含まれる場合に`index out of range`エラーが発生する可能性がある問題を修正 [#42588](https://github.com/pingcap/tidb/issues/42588) @[AilinKid](https://github.com/AilinKid)
@@ -468,7 +468,7 @@ TiDB バージョン: 8.0.0
     - TiDBログにおける一部のエラーのスタック情報が不完全な問題を修正 [#50849](https://github.com/pingcap/tidb/issues/50849) @[tiancaiamao](https://github.com/tiancaiamao)
     - `LIMIT`句の数値が大きすぎる場合に、一部のクエリでメモリ使用量が過剰になる問題を修正しました [#51188](https://github.com/pingcap/tidb/issues/51188) @[Defined2014](https://github.com/Defined2014)
     - TTL機能によって、場合によってはデータ範囲の分割が正しく行われずデータホットスポットが発生する問題を修正しました [#51527](https://github.com/pingcap/tidb/issues/51527) @[lcwangchao](https://github.com/lcwangchao)
-    - `SET`ステートメントが明示的トランザクションの最初の行にある場合に有効にならない問題を修正 [#51387](https://github.com/pingcap/tidb/issues/51387) @[YangKeao](https://github.com/YangKeao)
+    - `SET`文が明示的トランザクションの最初の行にある場合に有効にならない問題を修正 [#51387](https://github.com/pingcap/tidb/issues/51387) @[YangKeao](https://github.com/YangKeao)
     - `BINARY`タイプの JSON をクエリすると、場合によってはエラーが発生する問題を修正しました [#51547](https://github.com/pingcap/tidb/issues/51547) @[YangKeao](https://github.com/YangKeao)
     - TTLが有効期限を計算する際に、夏時間調整の移行を正しく処理しない問題を修正 [#51675](https://github.com/pingcap/tidb/issues/51675) @[lcwangchao](https://github.com/lcwangchao)
     - `SURVIVAL_PREFERENCES`ステートメントの出力に`SHOW CREATE PLACEMENT POLICY`属性が特定の条件下で表示されない問題を修正しました [#51699](https://github.com/pingcap/tidb/issues/51699) @[lcwangchao](https://github.com/lcwangchao)
@@ -533,7 +533,7 @@ TiDB バージョン: 8.0.0
         - Syncpoint テーブルが正しく複製されない可能性がある問題を修正しました [#10576](https://github.com/pingcap/tiflow/issues/10576) @[asddongmen](https://github.com/asddongmen)
         - Apache Pulsarをダウンストリームとして使用する際に、OAuth2.0、TLS、mTLSが正しく有効化できない問題を修正 [#10602](https://github.com/pingcap/tiflow/issues/10602) @[asddongmen](https://github.com/asddongmen)
         - TiKVがアップグレード、再起動、またはリーダーを追放した際に、変更フィードが停止する可能性がある問題を修正しました [#10584](https://github.com/pingcap/tiflow/issues/10584) @[asddongmen](https://github.com/asddongmen)
-        - DDLステートメントが頻繁に実行されるシナリオで、BarrierTSが間違っているためにデータが間違ったCSVファイルに書き込まれる問題を修正 [#10668](https://github.com/pingcap/tiflow/issues/10668) @[lidezhu](https://github.com/lidezhu)
+        - DDL文が頻繁に実行されるシナリオで、BarrierTSが間違っているためにデータが間違ったCSVファイルに書き込まれる問題を修正 [#10668](https://github.com/pingcap/tiflow/issues/10668) @[lidezhu](https://github.com/lidezhu)
         - KVクライアントでのデータ競合によりTiCDCがpanicを起こす問題を修正 [#10718](https://github.com/pingcap/tiflow/issues/10718) @[asddongmen](https://github.com/asddongmen)
         - TiCDCがテーブルレプリケーションタスクのスケジュール時にパニックを起こす問題を修正 [#10613](https://github.com/pingcap/tiflow/issues/10613) @[CharlesCheung96](https://github.com/CharlesCheung96)
 

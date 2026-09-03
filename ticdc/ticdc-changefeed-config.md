@@ -79,7 +79,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 ### `sql-mode` <span class="version-mark">v6.5.6、v7.1.3、および v7.5.0 で追加</span> {#sql-mode-new-in-v656-v713-and-v750}
 
-- DDLステートメントを解析する際に使用する[SQLモード](/sql-mode.md)を指定します。複数のモードを指定する場合は、カンマで区切ります。
+- DDL文を解析する際に使用する[SQLモード](/sql-mode.md)を指定します。複数のモードを指定する場合は、カンマで区切ります。
 - デフォルト値： `"ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"` 。これはTiDBのデフォルトのSQLモードと同じです。
 
 ### `bdr-mode` {#bdr-mode}

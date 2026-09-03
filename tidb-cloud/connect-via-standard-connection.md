@@ -41,4 +41,4 @@ summary: パブリック接続を使用してTiDB Cloudクラスターに接続�
 
 ## 次は？ {#what-s-next}
 
-TiDB クラスターに正常に接続したら、 [TiDBを使用してSQLステートメントを探索する](/basic-sql-operations.md)ことができます。
+TiDB クラスターに正常に接続したら、 [TiDBを使用してSQL文を探索する](/basic-sql-operations.md)ことができます。

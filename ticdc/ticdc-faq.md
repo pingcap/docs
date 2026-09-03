@@ -322,7 +322,7 @@ TiCDC v6.2以降、単一テーブルトランザクションを複数のトラ�
 
 ## TiCDC は、損失のある DDL 操作によって発生したデータの変更をダウンストリームに複製しますか? {#does-ticdc-replicate-data-changes-caused-by-lossy-ddl-operations-to-the-downstream}
 
-非可逆DDLとは、TiDBで実行された際にデータ変更を引き起こす可能性のあるDDLを指します。一般的な非可逆DDL操作には、以下のものがあります。
+損失のあるDDLとは、TiDBで実行された際にデータ変更を引き起こす可能性のあるDDLを指します。一般的な損失のあるDDL操作には、以下のものがあります。
 
 - 列の型を変更する（例：INT -&gt; VARCHAR）
 - 列の長さを変更する（例：VARCHAR(20) -&gt; VARCHAR(10)）
@@ -355,13 +355,13 @@ mysql root@127.0.0.1:test> show create table test;
 
 v5.0.1 以降または v4.0.13 以降では、MySQL へのレプリケーションごとに、TiCDC は上流と下流の間で時刻型の一貫性を保つために、自動的に`explicit_defaults_for_timestamp = ON`を設定します。v5.0.1 より前または v4.0.13 より前のバージョンでは、TiCDC を使用して時刻型データをレプリケーションする際に、不一致な`explicit_defaults_for_timestamp`値によって発生する互換性の問題にご注意ください。
 
-## TiCDC レプリケーションタスクを作成するときに`safe-mode` `true`に設定すると、アップストリームからの`INSERT` / `UPDATE`ステートメントがダウンストリームにレプリケートされた後に`REPLACE INTO`になるのはなぜですか? {#why-do-insertupdate-statements-from-the-upstream-become-replace-into-after-being-replicated-to-the-downstream-if-i-set-safe-mode-to-true-when-i-create-a-ticdc-replication-task}
+## TiCDC レプリケーションタスクを作成するときに`safe-mode` `true`に設定すると、アップストリームからの`INSERT` / `UPDATE`文がダウンストリームにレプリケートされた後に`REPLACE INTO`になるのはなぜですか? {#why-do-insertupdate-statements-from-the-upstream-become-replace-into-after-being-replicated-to-the-downstream-if-i-set-safe-mode-to-true-when-i-create-a-ticdc-replication-task}
 
-TiCDCは、すべてのデータが少なくとも1回は複製されることを保証します。下流に重複データが存在する場合、書き込み競合が発生します。この問題を回避するために、TiCDCは`INSERT`と`UPDATE`ステートメントを`REPLACE INTO`ステートメントに変換します。この動作は`safe-mode`パラメータによって制御されます。
+TiCDCは、すべてのデータが少なくとも1回は複製されることを保証します。下流に重複データが存在する場合、書き込み競合が発生します。この問題を回避するために、TiCDCは`INSERT`と`UPDATE`文を`REPLACE INTO`文に変換します。この動作は`safe-mode`パラメータによって制御されます。
 
-v6.1.3 より前のバージョンでは、 `safe-mode`のデフォルト値は`true`です。つまり、 `INSERT`と`UPDATE`ステートメントはすべて`REPLACE INTO`ステートメントに変換されます。
+v6.1.3 より前のバージョンでは、 `safe-mode`のデフォルト値は`true`です。つまり、 `INSERT`と`UPDATE`文はすべて`REPLACE INTO`文に変換されます。
 
-v6.1.3以降のバージョンでは、デフォルト値の`safe-mode`が`false`に変更され、TiCDCは下流に重複データがあるかどうかを自動的に判断できるようになりました。重複データが検出されない場合、TiCDCは`INSERT`と`UPDATE`ステートメントを変換せずに直接複製します。重複データが検出された場合、TiCDCは`INSERT`と`UPDATE`ステートメントを`REPLACE INTO`ステートメントに変換してから複製します。
+v6.1.3以降のバージョンでは、デフォルト値の`safe-mode`が`false`に変更され、TiCDCは下流に重複データがあるかどうかを自動的に判断できるようになりました。重複データが検出されない場合、TiCDCは`INSERT`と`UPDATE`文を変換せずに直接複製します。重複データが検出された場合、TiCDCは`INSERT`と`UPDATE`文を`REPLACE INTO`文に変換してから複製します。
 
 ## TiCDC はなぜディスクを使用するのですか？ TiCDC はいつディスクに書き込みますか？ TiCDC はレプリケーションのパフォーマンスを向上させるためにメモリバッファを使用しますか？ {#why-does-ticdc-use-disks-when-does-ticdc-write-to-disks-does-ticdc-use-memory-buffer-to-improve-replication-performance}
 
@@ -405,13 +405,13 @@ BR はバージョンに応じて互換性を異なる方法で処理します�
 
 TiCDC v6.5.2より前のバージョンでは、TiCDCをダウンストリームTiDBクラスタにデプロイすることをお勧めします。アップストリームとダウンストリーム間のネットワークレイテンシーが大きい場合（例えば100ミリ秒を超える場合）、MySQL転送プロトコルの問題により、TiCDCがダウンストリームにSQL文を実行する際のレイテンシーが大幅に増加する可能性があります。その結果、システムスループットが低下します。しかし、ダウンストリームにTiCDCをデプロイすることで、この問題を大幅に軽減できます。最適化後、TiCDC v6.5.2以降では、TiCDCをアップストリームTiDBクラスタにデプロイすることをお勧めします。
 
-## DML および DDL ステートメントの実行順序は何ですか? {#what-is-the-order-of-executing-dml-and-ddl-statements}
+## DML および DDL文の実行順序は何ですか? {#what-is-the-order-of-executing-dml-and-ddl-statements}
 
-ほとんどの DDL ステートメントでは、TiCDC は次の順序を採用しています。
+ほとんどの DDL文では、TiCDC は次の順序を採用しています。
 
 1. TiCDCは、DDL `commitTS`まで、DDL文の影響を受けるテーブルのレプリケーションの進行をブロックします。これにより、DDL `commitTS`より前に実行されたDML文が、まず下流に正常にレプリケーションされることが保証されます。
-2. TiCDCはDDLステートメントのレプリケーションを継続します。複数のDDLステートメントがある場合、TiCDCは通常それらを順番にレプリケーションします。
-3. DDL ステートメントがダウンストリームで実行された後、TiCDC は DDL `commitTS`の後に実行された DML ステートメントのレプリケーションを続行します。
+2. TiCDCはDDL文のレプリケーションを継続します。複数のDDL文がある場合、TiCDCは通常それらを順番にレプリケーションします。
+3. DDL文がダウンストリームで実行された後、TiCDC は DDL `commitTS`の後に実行された DML文のレプリケーションを続行します。
 
 `ADD INDEX` および `CREATE INDEX` については、ダウンストリームが TiDB の場合、TiCDC は changefeed レプリケーションのレイテンシーへの影響を最小限に抑えるために、これらの DDL を非同期に実行し、ダウンストリームでの実行完了を待たずに戻ります。詳細については、 [`ADD INDEX`および`CREATE INDEX` DDLの非同期実行](/ticdc/ticdc-ddl.md#asynchronous-execution-of-add-index-and-create-index-ddls)を参照してください。
 
@@ -472,7 +472,7 @@ TiDBにはトランザクションタイムアウト機構があります。ト�
 
 ## 頻繁に発生する`CDC:ErrMySQLDuplicateEntryCDC`エラーを解決するにはどうすればよいですか? {#how-do-i-resolve-frequent-cdcerrmysqlduplicateentrycdc-errors}
 
-TiCDC を使用してデータを TiDB または MySQL に複製する場合、アップストリームの SQL ステートメントが特定のパターンで実行されると、次のエラーが発生する可能性があります。
+TiCDC を使用してデータを TiDB または MySQL に複製する場合、アップストリームの SQL文が特定のパターンで実行されると、次のエラーが発生する可能性があります。
 
 `CDC:ErrMySQLDuplicateEntryCDC`
 
@@ -497,14 +497,14 @@ INSERT INTO data_table (id, value) VALUES (1, 'v3');
 INSERT INTO data_table (id, value) VALUES (2, 'v1');
 ```
 
-TiDB は 2つの`UPDATE`行の変更を生成するため、TiCDC はそれを下流へのレプリケーション用の 2つの`UPDATE`ステートメントに変換します。
+TiDB は 2つの`UPDATE`行の変更を生成するため、TiCDC はそれを下流へのレプリケーション用の 2つの`UPDATE`文に変換します。
 
 ```sql
 UPDATE data_table SET value = 'v3' WHERE id = 1;
 UPDATE data_table SET value = 'v1' WHERE id = 2;
 ```
 
-2 番目の`UPDATE`ステートメントを実行するときにダウンストリームテーブルにまだ`v1`含まれている場合、 `value`列の一意キー制約に違反し、 `CDC:ErrMySQLDuplicateEntryCDC`エラーが発生します。
+2 番目の`UPDATE`文を実行するときにダウンストリームテーブルにまだ`v1`が含まれている場合、 `value`列の一意キー制約に違反し、 `CDC:ErrMySQLDuplicateEntryCDC`エラーが発生します。
 
 `CDC:ErrMySQLDuplicateEntryCDC`エラーが頻繁に発生する場合は、 [`sink-uri`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)構成で`safe-mode=true`パラメータを設定することで TiCDC セーフモードを有効にすることができます。
 

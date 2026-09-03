@@ -10,7 +10,7 @@ TiDB Cloud StarterまたはTiDB Cloud Essential[Apache Parquet](https://parquet.
 > **Note:**
 >
 > - TiDB Cloud Dedicatedについては、[クラウドストレージからParquetファイルをTiDB Cloud Dedicatedにインポートする](/tidb-cloud/import-parquet-files.md)。
-> - TiDB Cloud は、空のテーブルへの Parquet ファイルのインポートのみをサポートしています。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントの手順に従って一時的な空のテーブルにデータをインポートし、 `INSERT SELECT`ステートメントを使用してデータを対象の既存のテーブルにコピーします。
+> - TiDB Cloud は、空のテーブルへの Parquet ファイルのインポートのみをサポートしています。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントの手順に従って一時的な空のテーブルにデータをインポートし、 `INSERT SELECT`文を使用してデータを対象の既存のテーブルにコピーします。
 > - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
 
 ## ステップ1. Parquetファイルを準備する {#step-1-prepare-the-parquet-files}
@@ -51,7 +51,7 @@ Parquetファイルにはスキーマ情報が含まれていないため、Parq
 
         [ステップ1](#step-1-prepare-the-parquet-files)の命名規則に従ってParquetファイルが作成されている場合、データベーススキーマファイルはデータインポートにおいてオプションです。そうでない場合は、データベーススキーマファイルは必須です。
 
-        各データベーススキーマファイルは`${db_name}-schema-create.sql`形式である必要があり、 `CREATE DATABASE` DDLステートメントが含まれている必要があります。このファイルを使用すると、 TiDB Cloudは`${db_name}`データベースを作成し、データのインポート時にそのデータベースにデータを格納します。
+        各データベーススキーマファイルは`${db_name}-schema-create.sql`形式である必要があり、 `CREATE DATABASE` DDL文が含まれている必要があります。このファイルを使用すると、 TiDB Cloudは`${db_name}`データベースを作成し、データのインポート時にそのデータベースにデータを格納します。
 
         例えば、次のステートメントを含む`mydb-schema-create.sql`ファイルを作成すると、 TiDB Cloud はデータをインポートする際に`mydb`データベースを作成します。
 
@@ -63,7 +63,7 @@ Parquetファイルにはスキーマ情報が含まれていないため、Parq
 
         Parquet ファイルが格納されている Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service ディレクトリにテーブルスキーマファイルを含めない場合、 TiDB Cloud はデータのインポート時に対応するテーブルを作成しません。
 
-        各テーブルスキーマファイルは`${db_name}.${table_name}-schema.sql`形式で、 `CREATE TABLE` DDLステートメントを含んでいる必要があります。このファイルを使用すると、 TiDB Cloudはデータのインポート時に`${db_table}`データベースに`${db_name}`テーブルを作成します。
+        各テーブルスキーマファイルは`${db_name}.${table_name}-schema.sql`形式で、 `CREATE TABLE` DDL文を含んでいる必要があります。このファイルを使用すると、 TiDB Cloudはデータのインポート時に`${db_table}`データベースに`${db_name}`テーブルを作成します。
 
         例えば、次のステートメントを含む`mydb.mytable-schema.sql`ファイルを作成すると、 TiDB Cloud はデータをインポートする際に`mytable`データベースに`mydb`テーブルを作成します。
 
@@ -76,7 +76,7 @@ Parquetファイルにはスキーマ情報が含まれていないため、Parq
 
         > **Note:**
         >
-        > `${db_name}.${table_name}-schema.sql`ファイルには、単一の DDL ステートメントのみを含める必要があります。ファイルに複数の DDL ステートメントが含まれている場合、最初のステートメントのみが有効になります。
+        > `${db_name}.${table_name}-schema.sql`ファイルには、単一の DDL文のみを含める必要があります。ファイルに複数の DDL文が含まれている場合、最初の文のみが有効になります。
 
 ## ステップ3．アカウント間アクセスの設定 {#step-3-configure-cross-account-access}
 

@@ -72,7 +72,7 @@ summary: TiDB 2.1 RC2は2018年9月14日にリリースされ、安定性、SQL�
     - `auto_increment_id`カウンタ更新するケースを減らす [＃7515](https://github.com/pingcap/tidb/pull/7515)
     - `Duplicate Key` のエラーメッセージを最適化 [＃7495](https://github.com/pingcap/tidb/pull/7495)
     - `insert...select...on duplicate key update`問題を修正[＃7406](https://github.com/pingcap/tidb/pull/7406)
-    - `LOAD DATA IGNORE LINES`ステートメントサポートする [＃7576](https://github.com/pingcap/tidb/pull/7576)
+    - `LOAD DATA IGNORE LINES`文サポートする [＃7576](https://github.com/pingcap/tidb/pull/7576)
 - DDL
     - モニターにDDLジョブタイプと現在のスキーマバージョン情報を追加します。 [＃7472](https://github.com/pingcap/tidb/pull/7472)
     - `Admin Restore Table`機能の設計を完了する [＃7383](https://github.com/pingcap/tidb/pull/7383)

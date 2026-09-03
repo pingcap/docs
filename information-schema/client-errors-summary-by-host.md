@@ -7,7 +7,7 @@ summary: "`CLIENT_ERRORS_SUMMARY_BY_HOST` INFORMATION_SCHEMA テーブルにつ�
 
 表`CLIENT_ERRORS_SUMMARY_BY_HOST`は、TiDBサーバーに接続したクライアントに返されたSQLエラーと警告の概要を示しています。これには以下が含まれます。
 
-- 不正な SQL ステートメント。
+- 不正な SQL文。
 - ゼロ除算エラー。
 - 範囲外または重複したキー値を挿入しようとしました。
 - 権限エラー。

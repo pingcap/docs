@@ -57,7 +57,7 @@ TiDB は、次のツールを導入することでインデックスの最適化
 
 ### `TIDB_INDEX_USAGE`の主要な指標 {#key-metrics-in-tidb-index-usage}
 
-`TIDB_INDEX_USAGE`システムテーブルのフィールドを確認する場合は、次の SQL ステートメントを実行します。
+`TIDB_INDEX_USAGE`システムテーブルのフィールドを確認する場合は、次の SQL文を実行します。
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -118,7 +118,7 @@ DESC TIDB_INDEX_USAGE;
 
 #### 履歴データを追跡する {#track-historical-data}
 
-次の SQL ステートメントを使用して、インデックス使用状況のスナップショットを定期的にエクスポートできます。
+次の SQL文を使用して、インデックス使用状況のスナップショットを定期的にエクスポートできます。
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEX_USAGE INTO OUTFILE '/backup/index_usage_snapshot.csv';
@@ -181,7 +181,7 @@ ORDER BY total_queries DESC;
 
 `schema_unused_indexes`ビューは`TIDB_INDEX_USAGE`から派生しており、最後の TiDB 再起動以降にクエリ アクティビティが 0 個記録されたインデックスを自動的に除外することを意味します。
 
-未使用のインデックスのリストを取得するには、次の SQL ステートメントを実行します。
+未使用のインデックスのリストを取得するには、次の SQL文を実行します。
 
 ```sql
 SELECT * FROM sys.schema_unused_indexes;
@@ -243,7 +243,7 @@ SELECT * FROM sys.schema_unused_indexes;
 
 ### インデックスを不可視にする {#make-an-index-invisible}
 
-インデックスを削除せずに不可視にするには、次のような SQL ステートメントを実行します。
+インデックスを削除せずに不可視にするには、次のような SQL文を実行します。
 
 ```sql
 ALTER TABLE bookshop.users ALTER INDEX nickname INVISIBLE;
@@ -288,7 +288,7 @@ ALTER TABLE bookshop.users ALTER INDEX nickname INVISIBLE;
 
     - 冗長なインデックスを統合することで、ストレージのオーバーヘッドを削減し、書き込みパフォーマンスを向上させることができます。複数のインデックスが類似したクエリを処理している場合は、それらを単一の、より効率的なインデックスに統合することを検討してください。
 
-        - 重複するプレフィックスを持つインデックス (冗長性を示している可能性があります) を検索するには、次の SQL ステートメントを実行します。
+        - 重複するプレフィックスを持つインデックス (冗長性を示している可能性があります) を検索するには、次の SQL文を実行します。
 
             ```sql
             SELECT TABLE_SCHEMA, TABLE_NAME, INDEX_NAME, COLUMN_NAME, SEQ_IN_INDEX

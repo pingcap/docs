@@ -140,7 +140,7 @@ TiDB バージョン: 7.1.3
 
     - TiCDC
 
-        - 特定のシナリオで`DELETE`ステートメントを複製するときに、 `WHERE`句が主キーを条件として使用しない問題を修正しました[＃9812](https://github.com/pingcap/tiflow/issues/9812) @[asddongmen](https://github.com/asddongmen)
+        - 特定のシナリオで`DELETE`文を複製するときに、 `WHERE`句が主キーを条件として使用しない問題を修正しました[＃9812](https://github.com/pingcap/tiflow/issues/9812) @[asddongmen](https://github.com/asddongmen)
         - オブジェクトストレージにデータを複製する際に、特定の特殊なシナリオでレプリケーションタスクが停止する問題を修正[＃10041](https://github.com/pingcap/tiflow/issues/10041) [＃10044](https://github.com/pingcap/tiflow/issues/10044) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - 同期ポイントとREDOログを有効にした後、特定のシナリオでレプリケーションタスクが停止する問題を修正しました。 [＃10091](https://github.com/pingcap/tiflow/issues/10091) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - 特定の特殊なシナリオで TiCDC が TiKV との接続を誤って閉じる問題を修正[＃10239](https://github.com/pingcap/tiflow/issues/10239) @[hicqu](https://github.com/hicqu)

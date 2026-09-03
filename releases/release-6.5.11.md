@@ -123,7 +123,7 @@ TiDBバージョン: 6.5.11
         - インデックスの長さがデフォルト値の`max-index-length` を超えるとデータレプリケーションが中断される問題を修正しました [＃11459](https://github.com/pingcap/tiflow/issues/11459) @[michaelmdeng](https://github.com/michaelmdeng)
         - スキーマ トラッカーが LIST パーティションテーブルを誤って処理し、DM エラーが発生する問題を修正しました。 [＃11408](https://github.com/pingcap/tiflow/issues/11408) @[lance6716](https://github.com/lance6716)
         - LISTパーティションテーブルの`ALTER TABLE ... DROP PARTITION`文を複製するときにDMがエラーを返す問題を修正しました。 [＃54760](https://github.com/pingcap/tidb/issues/54760) @[lance6716](https://github.com/lance6716)
-        - DMが`ALTER DATABASE`ステートメントを処理するときにデフォルトのデータベースを設定せず、レプリケーションエラーが発生する問題を修正しました。 [＃11503](https://github.com/pingcap/tiflow/issues/11503) @[lance6716](https://github.com/lance6716)
+        - DMが`ALTER DATABASE`文を処理するときにデフォルトのデータベースを設定せず、レプリケーションエラーが発生する問題を修正しました。 [＃11503](https://github.com/pingcap/tiflow/issues/11503) @[lance6716](https://github.com/lance6716)
 
     - TiDB Lightning
 

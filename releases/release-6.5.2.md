@@ -39,7 +39,7 @@ TiDB バージョン: 6.5.2
 
         - TiCDC OpenAPI v2.0 をリリース [＃8743](https://github.com/pingcap/tiflow/issues/8743) @[sdojjy](https://github.com/sdojjy)
         - TiCDC の OOM 問題を防ぐために`gomemlimit`を導入する[＃8675](https://github.com/pingcap/tiflow/issues/8675) @[amyangfei](https://github.com/amyangfei)
-        - `UPDATE`ステートメントをバッチ実行するシナリオでは、マルチステートメントアプローチを使用してレプリケーションのパフォーマンスを最適化します。 [＃8057](https://github.com/pingcap/tiflow/issues/8057) @[amyangfei](https://github.com/amyangfei)
+        - `UPDATE`文をバッチ実行するシナリオでは、マルチステートメントアプローチを使用してレプリケーションのパフォーマンスを最適化します。 [＃8057](https://github.com/pingcap/tiflow/issues/8057) @[amyangfei](https://github.com/amyangfei)
         - 災害復旧シナリオにおけるスループットの向上とRTOの短縮のために、REDOアプライヤでのトランザクション分割をサポートする[＃8318](https://github.com/pingcap/tiflow/issues/8318) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - REDOログへのDDLイベントの適用をサポート [＃8361](https://github.com/pingcap/tiflow/issues/8361) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
@@ -59,7 +59,7 @@ TiDB バージョン: 6.5.2
     - DDLを使用して浮動小数点型を変更し、長さを変更せずに小数点以下の桁数を減らしても、古いデータが同じままになる問題を修正しました[＃41281](https://github.com/pingcap/tidb/issues/41281) @[zimulala](https://github.com/zimulala)
     - トランザクション内で`PointUpdate`を実行した後、TiDB が`SELECT`文に対して誤った結果を返す問題を修正しました。 [＃28011](https://github.com/pingcap/tidb/issues/28011) @[zyguan](https://github.com/zyguan)
     - カーソルフェッチを使用し、実行、フェッチ、およびクローズの間に他のステートメントを実行すると、フェッチおよびクローズコマンドが誤った結果を返したり、TiDB がpanicたりする可能性がある問題を修正しました[＃40094](https://github.com/pingcap/tidb/issues/40094) @[YangKeao](https://github.com/YangKeao)
-    - `INSERT IGNORE`と`REPLACE`ステートメントが値を変更しないキーをロックしない問題を修正しました [＃42121](https://github.com/pingcap/tidb/issues/42121) @[zyguan](https://github.com/zyguan)
+    - `INSERT IGNORE`と`REPLACE`文が値を変更しないキーをロックしない問題を修正しました [＃42121](https://github.com/pingcap/tidb/issues/42121) @[zyguan](https://github.com/zyguan)
     - 実行中にTiFlash が生成列に対してエラーを報告する問題を修正[＃40663](https://github.com/pingcap/tidb/issues/40663) @[guo-shaoge](https://github.com/guo-shaoge)
     - 単一のSQL文に異なるパーティションテーブルが出現した場合にTiDBが誤った結果を生成する可能性がある問題を修正[＃42135](https://github.com/pingcap/tidb/issues/42135) @[mjonss](https://github.com/mjonss)
     - プリペアドプランキャッシュが有効な場合にフルインデックススキャンでエラーが発生する可能性がある問題を修正[＃42150](https://github.com/pingcap/tidb/issues/42150) @[fzzf678](https://github.com/fzzf678)
@@ -101,7 +101,7 @@ TiDB バージョン: 6.5.2
         - `db sorter`のメモリ使用量が`cgroup memory limit` で制御されない問題を修正 [＃8588](https://github.com/pingcap/tiflow/issues/8588) @[amyangfei](https://github.com/amyangfei)
         - Redo ログの適用中に特別なケースでデータ損失が発生する可能性がある問題を修正しました [＃8591](https://github.com/pingcap/tiflow/issues/8591) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - `db sorter`のメモリ使用量が`cgroup memory limit` で制御されない問題を修正 [＃8588](https://github.com/pingcap/tiflow/issues/8588) @[amyangfei](https://github.com/amyangfei)
-        - データレプリケーション中の`UPDATE`と`INSERT`ステートメントの順序が乱れると、 `Duplicate entry`エラーが発生する可能性がある問題を修正しました。 [＃8597](https://github.com/pingcap/tiflow/issues/8597) @[sdojjy](https://github.com/sdojjy)
+        - データレプリケーション中の`UPDATE`と`INSERT`文の順序が乱れると、 `Duplicate entry`エラーが発生する可能性がある問題を修正しました。 [＃8597](https://github.com/pingcap/tiflow/issues/8597) @[sdojjy](https://github.com/sdojjy)
         - PDとTiCDC 間のネットワーク分離によって発生するTiCDCサービスの異常終了問題を修正 [＃8562](https://github.com/pingcap/tiflow/issues/8562) @[overvenus](https://github.com/overvenus)
         - Kubernetes で TiCDC クラスターの正常なアップグレードが失敗する問題を修正しました [＃8484](https://github.com/pingcap/tiflow/issues/8484) @[overvenus](https://github.com/overvenus)
         - すべての下流 Kafka サーバーが利用できない場合に TiCDCサーバーがパニックになる問題を修正[＃8523](https://github.com/pingcap/tiflow/issues/8523) @[3AceShowHand](https://github.com/3AceShowHand)

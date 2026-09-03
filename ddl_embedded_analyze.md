@@ -1,14 +1,14 @@
 ---
 title: "`ANALYZE` Embedded in DDL Statements"
-summary: このドキュメントでは、新しく作成または再編成されたインデックスの DDL ステートメントに埋め込まれた ANALYZE` 機能について説明します。この機能により、新しいインデックスの統計がすぐに更新されるようになります。
+summary: このドキュメントでは、新しく作成または再編成されたインデックスの DDL文に埋め込まれた ANALYZE` 機能について説明します。この機能により、新しいインデックスの統計がすぐに更新されるようになります。
 ---
 
-# DDL ステートメントに埋め込まれた`ANALYZE` <span class="version-mark">(v8.5.4 で導入)</span> {#analyze-embedded-in-ddl-statements-span-class-version-mark-introduced-in-v8-5-4-span}
+# DDL文に埋め込まれた`ANALYZE` <span class="version-mark">(v8.5.4 で導入)</span> {#analyze-embedded-in-ddl-statements-span-class-version-mark-introduced-in-v8-5-4-span}
 
-このドキュメントでは、次の2種類の DDL ステートメントに組み込まれている`ANALYZE`機能について説明します。
+このドキュメントでは、次の2種類の DDL文に組み込まれている`ANALYZE`機能について説明します。
 
 - 新しいインデックスを作成するDDL文: [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
-- 既存のインデックスを再編成する DDL ステートメント: [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)と[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
+- 既存のインデックスを再編成する DDL文: [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)と[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
 
 この機能を有効にすると、TiDBは新規または再編成されたインデックスがユーザーに表示される前に、自動的に`ANALYZE` （統計収集）操作を実行します。これにより、インデックスの作成または再編成後に一時的に統計が利用できなくなることによる、オプティマイザの推定値の不正確さや潜在的なプラン変更を防止できます。
 

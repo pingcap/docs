@@ -165,7 +165,7 @@ table.bulk_insert(documents)
 </div>
 <div label="SQL" value="sql">
 
-`INSERT INTO`ステートメントを使用してデータを挿入します。
+`INSERT INTO`文を使用してデータを挿入します。
 
 ```sql
 INSERT INTO sample_documents (id, content)

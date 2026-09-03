@@ -14,7 +14,7 @@ aliases: ['/ja/tidb/stable/dev-guide-schema-design-overview/','/ja/tidb/dev/dev-
 
 一般的な用語を区別するために、TiDBで使用される用語に関する簡単な合意事項を以下に示します。
 
-- 一般的な用語との混同を避けるため 本ドキュメントでは、**データベース**とは論理オブジェクトを指し、 **TiDBと**[データベース](https://en.wikipedia.org/wiki/Database)TiDB自体を指し、**クラスターとは**実行中のTiDBデプロイメントを指します。
+- 一般的な用語[データベース](https://en.wikipedia.org/wiki/Database)との混同を避けるため、本ドキュメントでは、**データベース**とは論理オブジェクトを指し、**TiDB**とはTiDB自体を指し、**クラスター**とは実行中のTiDBデプロイメントを指します。
 
 - TiDB は MySQL 互換の構文を使用します。この**構文**では、スキーマはデータベース内の論理オブジェクトの代わりに一般用語[スキーマ](https://en.wiktionary.org/wiki/schema)を意味します。詳細については、 [MySQLドキュメント](https://dev.mysql.com/doc/refman/8.0/en/create-database.html)を参照してください。スキーマを論理オブジェクトとして持つデータベース (たとえば、 [PostgreSQL](https://www.postgresql.org/docs/current/ddl-schemas.html) 、 [オラクル](https://docs.oracle.com/en/database/oracle/oracle-database/21/tdddg/creating-managing-schema-objects.html)、 [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-schema?view=sql-server-ver15) ) から移行する場合は、この違いに必ず注意してください。
 
@@ -54,7 +54,7 @@ TiDBには`test`という名前のデフォルトデータベースが付属し�
 
 TiDBは、**テーブル**と同じレベルで以下の論理オブジェクトをサポートしています。
 
-- [ビュー](/views.md): ビューは仮想テーブルとして機能し、そのスキーマはビューを作成する`SELECT`ステートメントによって定義されます。
+- [ビュー](/views.md): ビューは仮想テーブルとして機能し、そのスキーマはビューを作成する`SELECT`文によって定義されます。
 - [シーケンス](/sql-statements/sql-statement-create-sequence.md): シーケンスはシーケンシャルデータを生成し、保存します。
 - [一時テーブル](/temporary-tables.md): データが永続的ではないテーブル。
 

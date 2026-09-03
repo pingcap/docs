@@ -53,7 +53,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 - `LIMIT`条項の制限を解除 [#40219](https://github.com/pingcap/tidb/issues/40219) @[fzzf678](https://github.com/fzzf678)
 
-    バージョン 6.6.0 以降、TiDB プランキャッシュは`LIMIT`や`LIMIT ?`などの変数を`LIMIT 10, ?`パラメータとして指定した実行計画のキャッシュをサポートします。この機能により、より多くの SQL ステートメントがプランキャッシュの恩恵を受けられるようになり、実行効率が向上します。現在、セキュリティ上の理由から、TiDB は`?`が 10000 を超えない実行計画のみをキャッシュできます。
+    バージョン 6.6.0 以降、TiDB プランキャッシュは`LIMIT`や`LIMIT ?`などの変数を`LIMIT 10, ?`パラメータとして指定した実行計画のキャッシュをサポートします。この機能により、より多くの SQL文がプランキャッシュの恩恵を受けられるようになり、実行効率が向上します。現在、セキュリティ上の理由から、TiDB は`?`が 10000 を超えない実行計画のみをキャッシュできます。
 
     詳細については、[ドキュメント](/sql-prepared-plan-cache.md)を参照してください。
 
@@ -210,7 +210,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 - TiDB DashboardでSQLバインディングを素早く作成するサポート [#781](https://github.com/pingcap/tidb-dashboard/issues/781) @[YiniXu9506](https://github.com/YiniXu9506)
 
-    TiDB v6.6.0では、ステートメント履歴からSQLバインディングを作成する機能がサポートされており、TiDB Dashboard上でSQLステートメントを特定の実行計画にすばやくバインドできます。
+    TiDB v6.6.0では、ステートメント履歴からSQLバインディングを作成する機能がサポートされており、TiDB Dashboard上でSQL文を特定の実行計画にすばやくバインドできます。
 
     この機能は、ユーザーフレンドリーなインターフェースを提供することで、TiDBにおけるプランのバインディングプロセスを簡素化し、操作の複雑さを軽減し、プランバインディングプロセスの効率とユーザーエクスペリエンスを向上させます。
 
@@ -252,7 +252,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     実行計画の問題をトラブルシューティングする過程で、 `PLAN REPLAYER`現場を保存し、診断の効率を向上させるのに役立ちます。しかし、シナリオによっては、一部の実行計画の生成を自由に再現できないため、診断作業がより困難になります。
 
-    このような問題に対処するため、TiDB v6.6.0 では`PLAN REPLAYER`により自動キャプチャ機能が拡張されました。 `PLAN REPLAYER CAPTURE`コマンドを使用すると、対象の SQL ステートメントを事前に登録し、同時に対象の実行計画を指定できます。TiDB は、登録された対象に一致する SQL ステートメントまたは実行計画を検出すると、 `PLAN REPLAYER`情報を自動的に生成してパッケージ化します。実行計画が不安定な場合、この機能により診断効率が向上します。
+    このような問題に対処するため、TiDB v6.6.0 では`PLAN REPLAYER`により自動キャプチャ機能が拡張されました。 `PLAN REPLAYER CAPTURE`コマンドを使用すると、対象の SQL文を事前に登録し、同時に対象の実行計画を指定できます。TiDB は、登録された対象に一致する SQL文または実行計画を検出すると、 `PLAN REPLAYER`情報を自動的に生成してパッケージ化します。実行計画が不安定な場合、この機能により診断効率が向上します。
 
     この機能を使用するには、 [`tidb_enable_plan_replayer_capture`](/system-variables.md#tidb_enable_plan_replayer_capture)の値を`ON`に設定してください。
 
@@ -304,7 +304,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 | 変数名                                                                                                                                                          | 変更の種類  | 説明                                                                                                                                                                                                                                                           |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `tidb_enable_amend_pessimistic_txn`                                                                                                                          | 削除済み     | バージョン6.5.0以降、この変数は非推奨です。バージョン6.6.0以降、この変数と`AMEND TRANSACTION`機能は削除されます。TiDBは[メタロック](/metadata-lock.md)を使用して`Information schema is changed`エラーを回避します。                                                                                                         |
-| `tidb_enable_concurrent_ddl`                                                                                                                                 | 削除済み     | この変数は、TiDB が同時 DDL ステートメントを使用することを許可するかどうかを制御します。この変数が無効になっている場合、TiDB は古い DDL 実行フレームワークを使用します。このフレームワークは、同時 DDL 実行を限定的にサポートします。バージョン 6.6.0 以降、この変数は削除され、TiDB は古い DDL 実行フレームワークをサポートしなくなりました。                                                                 |
+| `tidb_enable_concurrent_ddl`                                                                                                                                 | 削除済み     | この変数は、TiDB が同時 DDL文を使用することを許可するかどうかを制御します。この変数が無効になっている場合、TiDB は古い DDL 実行フレームワークを使用します。このフレームワークは、同時 DDL 実行を限定的にサポートします。バージョン 6.6.0 以降、この変数は削除され、TiDB は古い DDL 実行フレームワークをサポートしなくなりました。                                                                 |
 | `tidb_ttl_job_run_interval`                                                                                                                                  | 削除済み     | この変数は、バックグラウンドでの TTL ジョブのスケジュール間隔を制御するために使用されます。v6.6.0 以降、この変数は削除されました。TiDB は、 `TTL_JOB_INTERVAL`よりも柔軟な、TTL ランタイムを制御するための`tidb_ttl_job_run_interval`属性をすべてのテーブルに提供しているためです。                                                                                  |
 | [`foreign_key_checks`](/system-variables.md#foreign_key_checks)                                                                                              | 変更     | この変数は、外部キー制約チェックを有効にするかどうかを制御します。デフォルト値は`OFF`から`ON`に変更され、これはデフォルトで外部キーチェックが有効になることを意味します。                                                                                                                                                                    |
 | [`tidb_enable_foreign_key`](/system-variables.md#tidb_enable_foreign_key-new-in-v630)                                                                        | 変更     | この変数は、外部キー機能を有効にするかどうかを制御します。デフォルト値は`OFF`から`ON`に変更され、これはデフォルトで外部キーが有効になることを意味します。                                                                                                                                                                            |
@@ -424,7 +424,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     - TiCDC
 
-        - TiCDCレプリケーションのパフォーマンスを向上させるためのバッチ`UPDATE` DMLステートメントのサポート [#8084](https://github.com/pingcap/tiflow/issues/8084) @[amyangfei](https://github.com/amyangfei)
+        - TiCDCレプリケーションのパフォーマンスを向上させるためのバッチ`UPDATE` DML文のサポート [#8084](https://github.com/pingcap/tiflow/issues/8084) @[amyangfei](https://github.com/amyangfei)
         - MQ シンクと MySQL シンクを非同期モードで実装して、シンクのスループットを向上させます [#5928](https://github.com/pingcap/tiflow/issues/5928) @[hicqu](https://github.com/hicqu)@[Rustin170506](https://github.com/Rustin170506)
 
     - TiDB Data Migration (DM)
@@ -462,7 +462,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
     - テーブル作成後に`stats_meta`が作成されない問題を修正 [#38189](https://github.com/pingcap/tidb/issues/38189) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - DDLデータバックフィル実行時のトランザクションにおける頻繁な書き込み競合を修正 [#24427](https://github.com/pingcap/tidb/issues/24427) @[mjonss](https://github.com/mjonss)
     - インジェストモードを使用して空のテーブルにインデックスを作成できない場合がある問題を修正 [#39641](https://github.com/pingcap/tidb/issues/39641) @[tangenta](https://github.com/tangenta)
-    - スロークエリログの`wait_ts`が同じトランザクション内の異なる SQL ステートメントでも同じである問題を修正 [#39713](https://github.com/pingcap/tidb/issues/39713) @[TonsnakeLin](https://github.com/TonsnakeLin)
+    - スロークエリログの`wait_ts`が同じトランザクション内の異なる SQL文でも同じである問題を修正 [#39713](https://github.com/pingcap/tidb/issues/39713) @[TonsnakeLin](https://github.com/TonsnakeLin)
     - 行レコードの削除処理中に列を追加した際に`Assertion Failed`エラーが報告される問題を修正しました [#39570](https://github.com/pingcap/tidb/issues/39570) @[wjhuang2016](https://github.com/wjhuang2016)
     - 列タイプを変更する際に`not a DDL owner`エラーが報告される問題を修正しました [#39643](https://github.com/pingcap/tidb/issues/39643) @[zimulala](https://github.com/zimulala)
     - `AUTO_INCREMENT`列のAUTO_INCREMENT値が使い果たされた後に行を挿入してもエラーが報告されない問題を修正しました [#38950](https://github.com/pingcap/tidb/issues/38950) @[Dousir9](https://github.com/Dousir9)
@@ -477,7 +477,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
     - AUTO_INCREMENT IDの割り当て時に発生したデータ競合を修正 [#40584](https://github.com/pingcap/tidb/issues/40584) @[Dousir9](https://github.com/Dousir9)
     - JSON の not 演算子の実装が MySQL の実装と互換性がない問題を修正しました [#40683](https://github.com/pingcap/tidb/issues/40683) @[YangKeao](https://github.com/YangKeao)
     - 同時ビューがDDL操作をブロックする可能性がある問題を修正 [#40352](https://github.com/pingcap/tidb/issues/40352) @[zeminzhou](https://github.com/zeminzhou)
-    - パーティションテーブルの列を変更するDDLステートメントを同時に実行することによって発生するデータの不整合を修正 [#40620](https://github.com/pingcap/tidb/issues/40620) @[mjonss](https://github.com/mjonss)@[mjonss](https://github.com/mjonss)
+    - パーティションテーブルの列を変更するDDL文を同時に実行することによって発生するデータの不整合を修正 [#40620](https://github.com/pingcap/tidb/issues/40620) @[mjonss](https://github.com/mjonss)@[mjonss](https://github.com/mjonss)
     - `caching_sha2_password`を認証に使用し、パスワードを指定しない場合に「不正なパケット」が報告される問題を修正 [#40831](https://github.com/pingcap/tidb/issues/40831) @[dveeden](https://github.com/dveeden)
     - テーブルの主キーに`ENUM`列が含まれている場合に TTL タスクが失敗する問題を修正しました [#40456](https://github.com/pingcap/tidb/issues/40456) @[lcwangchao](https://github.com/lcwangchao)
     - `mysql.tidb_mdl_view`で、MDLによってブロックされた一部のDDL操作をクエリできない問題を修正します。 [#40838](https://github.com/pingcap/tidb/issues/40838) @[YangKeao](https://github.com/YangKeao)
@@ -488,7 +488,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
     - メモリ再利用によりシステム変数の値が場合によっては誤って変更される可能性がある問題を修正 [#40979](https://github.com/pingcap/tidb/issues/40979) @[lcwangchao](https://github.com/lcwangchao)
     - 取り込みモードで一意インデックスを作成すると、データがインデックスと矛盾する可能性がある問題を修正します [#40464](https://github.com/pingcap/tidb/issues/40464) @[tangenta](https://github.com/tangenta)
     - 同じテーブルを同時に切り捨てる際に、一部の切り捨て操作がMDLによってブロックされない問題を修正しました [#40484](https://github.com/pingcap/tidb/issues/40484) @[wjhuang2016](https://github.com/wjhuang2016)
-    - `SHOW PRIVILEGES`ステートメントが不完全な特権リストを返す問題を修正 [#40591](https://github.com/pingcap/tidb/issues/40591) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - `SHOW PRIVILEGES`文が不完全な特権リストを返す問題を修正 [#40591](https://github.com/pingcap/tidb/issues/40591) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - 一意インデックスを追加するときに TiDB がパニックになる問題を修正 [#40592](https://github.com/pingcap/tidb/issues/40592) @[tangenta](https://github.com/tangenta)
     - `ADMIN RECOVER`ステートメントを実行するとインデックスデータが破損する可能性がある問題を修正しました [#40430](https://github.com/pingcap/tidb/issues/40430) @[xiongjiwei](https://github.com/xiongjiwei)
     - クエリ対象のテーブルに式インデックスに`CAST`式が含まれている場合にクエリが失敗する可能性がある問題を修正しました [#40130](https://github.com/pingcap/tidb/issues/40130) @[xiongjiwei](https://github.com/xiongjiwei)
@@ -548,7 +548,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
         - `binlog-schema delete`コマンドの実行に失敗する問題を修正しました [#7373](https://github.com/pingcap/tiflow/issues/7373) @[liumengya94](https://github.com/liumengya94)
         - 最後のbinlogがスキップされたDDLである場合にチェックポイントが進まない問題を修正 [#8175](https://github.com/pingcap/tiflow/issues/8175) @[D3Hunter](https://github.com/D3Hunter)
-        - 1 つのテーブルで「更新」タイプと「非更新」タイプの両方の式フィルターが指定されている場合、すべての`UPDATE`ステートメントがスキップされるバグを修正しました [#7831](https://github.com/pingcap/tiflow/issues/7831) @[lance6716](https://github.com/lance6716)
+        - 1 つのテーブルで「更新」タイプと「非更新」タイプの両方の式フィルターが指定されている場合、すべての`UPDATE`文がスキップされるバグを修正しました [#7831](https://github.com/pingcap/tiflow/issues/7831) @[lance6716](https://github.com/lance6716)
         - テーブルに`update-old-value-expr`または`update-new-value-expr`のいずれか一方のみが設定されている場合、フィルタルールが有効にならないか、DM がパニックを起こすバグを修正しました。 [#7774](https://github.com/pingcap/tiflow/issues/7774) @[lance6716](https://github.com/lance6716)
 
     - TiDB Lightning

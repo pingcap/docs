@@ -39,7 +39,7 @@ TiDBバージョン：8.5.6
 
     バージョン 8.5.6 より前では、TiDB でスロークエリを識別する主な方法は、 [`tidb_slow_log_threshold`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_threshold)システム変数を設定することでした。このメカニズムはインスタンスレベルでグローバルに適用されるため、スロークエリログのトリガーを大まかにしか制御できず、セッションレベルや SQL レベルでのきめ細かい制御はサポートされていません。さらに、トリガー条件として実行時間 ( `Query_time` ) しかサポートしていないため、複雑なシナリオでスロークエリログをより正確にキャプチャする必要性を満たすことができません。
 
-    バージョン 8.5.6 以降、TiDB はスロークエリログの制御を強化しました。[`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules-new-in-v856) システム変数を使用して、`Query_time`、`Digest`、`Mem_max`、`KV_total` などの条件に基づいて、インスタンス、セッション、SQL の各レベルで多次元のスロークエリログ出力ルールを定義できます。[`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec-new-in-v856) を使用して、1秒あたりに書き込まれるログエントリの数を制限したり、[`WRITE_SLOW_LOG`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints) ヒントを使用して、特定の SQL ステートメントに対してスロークエリログを強制的に記録したりできます。これにより、スロークエリログをより柔軟かつきめ細かく制御できます。
+    バージョン 8.5.6 以降、TiDB はスロークエリログの制御を強化しました。[`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules-new-in-v856) システム変数を使用して、`Query_time`、`Digest`、`Mem_max`、`KV_total` などの条件に基づいて、インスタンス、セッション、SQL の各レベルで多次元のスロークエリログ出力ルールを定義できます。[`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec-new-in-v856) を使用して、1秒あたりに書き込まれるログエントリの数を制限したり、[`WRITE_SLOW_LOG`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints) ヒントを使用して、特定の SQL文に対してスロークエリログを強制的に記録したりできます。これにより、スロークエリログをより柔軟かつきめ細かく制御できます。
 
     詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/identify-slow-queries)を参照してください。
 
@@ -49,7 +49,7 @@ TiDBバージョン：8.5.6
 
     バージョン8.5.6より前のTiDBでは、権限制御はデータベースレベルとテーブルレベルの両方を対象としており、MySQLとは異なり、特定の列に対する権限の付与や取り消しはサポートされていませんでした。そのため、ユーザーがテーブル内の機密性の高い列の一部のみにアクセスできるように制限することはできませんでした。
 
-    バージョン8.5.6以降、TiDBは列レベルの権限管理をサポートしています。 `GRANT`および`REVOKE`ステートメントを使用して、特定の列の権限を管理できます。TiDBは、クエリ処理および実行計画構築時に列レベルの権限に基づいて権限チェックを実行するため、よりきめ細かなアクセス制御が可能になり、機密データの分離と最小権限の原則をより適切にサポートします。
+    バージョン8.5.6以降、TiDBは列レベルの権限管理をサポートしています。 `GRANT`および`REVOKE`文を使用して、特定の列の権限を管理できます。TiDBは、クエリ処理および実行計画構築時に列レベルの権限に基づいて権限チェックを実行するため、よりきめ細かなアクセス制御が可能になり、機密データの分離と最小権限の原則をより適切にサポートします。
 
     詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/column-privilege-management)を参照してください。
 
@@ -175,7 +175,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 
 - TiFlash
 
-    - DDL ステートメントを実行して列の`NOT NULL`制約を削除した後、 TiFlashと TiKV の間で潜在的なデータの不整合の問題を修正しました [#10680](https://github.com/pingcap/tiflash/issues/10680) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - DDL文を実行して列の`NOT NULL`制約を削除した後、 TiFlashと TiKV の間で潜在的なデータの不整合の問題を修正しました [#10680](https://github.com/pingcap/tiflash/issues/10680) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Grafana ダッシュボードのRaftスループット メトリックに異常に大きな値が表示されることがある問題を修正 [#10701](https://github.com/pingcap/tiflash/issues/10701) @[CalvinNeo](https://github.com/CalvinNeo)
     - ランタイムフィルターが有効で結合キーのデータ型が一致しない場合、結合結果が正しくなくなることがある問題を修正 [#10699](https://github.com/pingcap/tiflash/issues/10699) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
 

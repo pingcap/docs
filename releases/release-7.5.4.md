@@ -19,7 +19,7 @@ TiDB バージョン: 7.5.4
 
 - TiDB
 
-    - `EXPLAIN`ステートメントの出力に`tidb_redact_log`設定を適用し、ログの処理ロジックをさらに最適化することをサポート [＃54565](https://github.com/pingcap/tidb/issues/54565) @[hawkingrei](https://github.com/hawkingrei)
+    - `EXPLAIN`文の出力に`tidb_redact_log`設定を適用し、ログの処理ロジックをさらに最適化することをサポート [＃54565](https://github.com/pingcap/tidb/issues/54565) @[hawkingrei](https://github.com/hawkingrei)
     - TiDB のスロークエリのクエリ速度を最適化します [＃54630](https://github.com/pingcap/tidb/pull/54630) @[yibin87](https://github.com/yibin87)
 
 - TiKV
@@ -63,7 +63,7 @@ TiDB バージョン: 7.5.4
     - `mysql.stats_histograms`表の`tot_col_size`列が負の数になる可能性がある問題を修正しました [＃55126](https://github.com/pingcap/tidb/issues/55126) @[qw4990](https://github.com/qw4990)
     - `IndexNestedLoopHashJoin` のデータ競合問題を修正 [＃49692](https://github.com/pingcap/tidb/issues/49692) @[solotzg](https://github.com/solotzg)
     - メモリ使用量が`tidb_mem_quota_query` で設定された制限を超えたためにクエリが終了したときに停止する可能性がある問題を修正しました [＃55042](https://github.com/pingcap/tidb/issues/55042) @[yibin87](https://github.com/yibin87)
-    - `columnEvaluator`入力チャンク内の列参照を識別できず、SQL 文を実行すると`runtime error: index out of range`が発生する問題を修正しました。 [＃53713](https://github.com/pingcap/tidb/issues/53713) @[AilinKid](https://github.com/AilinKid)
+    - `columnEvaluator`は入力チャンク内の列参照を識別できず、SQL 文を実行すると`runtime error: index out of range`が発生する問題を修正しました。 [＃53713](https://github.com/pingcap/tidb/issues/53713) @[AilinKid](https://github.com/AilinKid)
     - `SELECT ... WHERE ... ORDER BY ...`文の実行パフォーマンスが場合によっては低下する問題を修正[＃54969](https://github.com/pingcap/tidb/issues/54969) @[tiancaiamao](https://github.com/tiancaiamao)
     - `StreamAggExec`分の`groupOffset`空の場合に TiDB がpanicを起こす可能性がある問題を修正しました [＃53867](https://github.com/pingcap/tidb/issues/53867) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - copタスク構築中にTiDBクエリをキャンセルできない問題を修正[＃55957](https://github.com/pingcap/tidb/issues/55957) @[yibin87](https://github.com/yibin87)

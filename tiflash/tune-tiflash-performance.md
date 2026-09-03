@@ -18,7 +18,7 @@ summary: マシン リソースを計画し、TiDB パラメータを調整す�
 - [MPPモードを強制的に有効にする](#forcibly-enable-the-mpp-mode)
 - [集計関数を`Join`または`Union`前の位置へプッシュダウンします](#push-down-aggregate-functions-to-a-position-before-join-or-union)
 - [`Distinct`最適化を有効にする](#enable-distinct-optimization)
-- [`ALTER TABLE ... COMPACT`ステートメントを使用してデータを圧縮する](#compact-data-using-the-alter-table--compact-statement)
+- [`ALTER TABLE ... COMPACT`文を使用してデータを圧縮する](#compact-data-using-the-alter-table--compact-statement)
 - [シャッフルハッシュ結合をブロードキャストハッシュ結合に置き換える](#replace-shuffled-hash-join-with-broadcast-hash-join)
 - [実行同時実行性を高める](#set-a-greater-execution-concurrency)
 - [`tiflash_fine_grained_shuffle_stream_count`を設定する](#configure-tiflash_fine_grained_shuffle_stream_count)
@@ -215,7 +215,7 @@ mysql> explain analyze select count(distinct a) from test.t;
 5 rows in set, 2 warnings (0.24 sec)
 ```
 
-### `ALTER TABLE ... COMPACT`ステートメントを使用してデータを圧縮する {#compact-data-using-the-alter-table--compact-statement}
+### `ALTER TABLE ... COMPACT`文を使用してデータを圧縮する {#compact-data-using-the-alter-table--compact-statement}
 
 [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)文を実行すると、 TiFlashノード上の特定のテーブルまたはパーティションのコンパクションが開始されます。コンパクション中は、ノード上の物理データが書き換えられ、削除された行のクリーンアップや、更新によって発生した複数のデータバージョンのマージなどが含まれます。これにより、アクセスパフォーマンスが向上し、ディスク使用量が削減されます。以下に例を示します。
 

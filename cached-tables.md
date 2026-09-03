@@ -41,7 +41,7 @@ CREATE TABLE users (
 );
 ```
 
-このテーブルをキャッシュテーブルに設定するには、 `ALTER TABLE`ステートメントを使用します。
+このテーブルをキャッシュテーブルに設定するには、 `ALTER TABLE`文を使用します。
 
 ```sql
 ALTER TABLE users CACHE;
@@ -53,7 +53,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 ### キャッシュされたテーブルを検証する {#verify-a-cached-table}
 
-キャッシュされたテーブルを検証するには、 `SHOW CREATE TABLE`ステートメントを使用します。テーブルがキャッシュされている場合、返される結果には`CACHED ON`属性が含まれます。
+キャッシュされたテーブルを検証するには、 `SHOW CREATE TABLE`文を使用します。テーブルがキャッシュされている場合、返される結果には`CACHED ON`属性が含まれます。
 
 ```sql
 SHOW CREATE TABLE users;

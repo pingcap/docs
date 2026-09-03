@@ -98,7 +98,7 @@ TiDBは、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-st
 
 ### SQLの書き換え {#rewrite-sql}
 
-特定の SQL ステートメントでのみデータ不整合エラーが発生する場合は、異なる実行演算子を使用して SQL ステートメントを別の同等の形式に書き換えることで、このエラーを回避できます。
+特定の SQL文でのみデータ不整合エラーが発生する場合は、異なる実行演算子を使用して SQL文を別の同等の形式に書き換えることで、このエラーを回避できます。
 
 ### エラーチェックを無効にする {#disable-error-checks}
 
@@ -109,6 +109,6 @@ TiDBは、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-st
 
 > **Note:**
 >
-> `tidb_enable_mutation_checker`と`tidb_txn_assertion_level`を無効にすると、すべての SQL ステートメントの対応するチェックがバイパスされます。
+> `tidb_enable_mutation_checker`と`tidb_txn_assertion_level`を無効にすると、すべての SQL文の対応するチェックがバイパスされます。
 
 トランザクション実行で報告されたその他のエラー、および[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントの実行中に報告されたすべてのエラーについては、データがすでに不整合であるため、対応するチェックをバイパスすることはできません。

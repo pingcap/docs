@@ -47,7 +47,7 @@ SQL ユーザーが前述の権限要件を満たしていない場合、以下�
 
 ## 例: TiDB Dashboardにアクセスするための最小権限の SQL ユーザーを作成する {#example-create-a-least-privileged-sql-user-to-access-tidb-dashboard}
 
-- 接続された TiDBサーバーで[セキュリティ強化モード（SEM）](/system-variables.md#tidb_enable_enhanced_security)が有効になっていない場合、TiDB Dashboardにサインインできる SQL ユーザー`dashboardAdmin`を作成するには、次の SQL ステートメントを実行します。
+- 接続された TiDBサーバーで[セキュリティ強化モード（SEM）](/system-variables.md#tidb_enable_enhanced_security)が有効になっていない場合、TiDB Dashboardにサインインできる SQL ユーザー`dashboardAdmin`を作成するには、次の SQL文を実行します。
 
     ```sql
     CREATE USER 'dashboardAdmin'@'%' IDENTIFIED BY '<YOUR_PASSWORD>';

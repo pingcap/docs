@@ -146,7 +146,7 @@ mysql> SELECT TIDB_PK_TYPE FROM information_schema.tables WHERE table_schema = '
     - クラスター化インデックスと属性[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を併用することはサポートされていません。また、属性[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)は、 [`AUTO_RANDOM`](/auto-random.md)ではないクラスター化インデックスを持つテーブルには適用されません。
     - クラスター化インデックスを持つテーブルのダウングレードはサポートされていません。そのようなテーブルをダウングレードする必要がある場合は、代わりに論理バックアップツールを使用してデータを移行してください。
 - まだサポートされていないが、サポート計画に含まれている状況：
-    - `ALTER TABLE`ステートメントを使用したクラスター化インデックスの追加、削除、および変更はサポートされていません。
+    - `ALTER TABLE`文を使用したクラスター化インデックスの追加、削除、および変更はサポートされていません。
 
 クラスター化インデックスを属性`SHARD_ROW_ID_BITS`と一緒に使用すると、TiDB は次のエラーを報告します。
 
@@ -184,7 +184,7 @@ TiDB固有のコメント構文では、キーワード`CLUSTERED`と`NONCLUSTER
 
 ### 他のTiDB機能との互換性 {#compatibility-with-other-tidb-features}
 
-結合主キーまたは単一の非整数主キーを持つテーブルの場合、主キーを非クラスター化インデックスからクラスター化インデックスに変更すると、行データのキーも変更されます。そのため、TiDB バージョン 5.0 より前のバージョンで実行可能だった`SPLIT TABLE BY/BETWEEN`ステートメントは、TiDB バージョン 5.0 以降では動作しなくなります。 `SPLIT TABLE BY/BETWEEN`を使用してクラスター化インデックスを持つテーブルを分割する場合は、整数値を指定する代わりに、主キー列の値を指定する必要があります。次の例を参照してください。
+結合主キーまたは単一の非整数主キーを持つテーブルの場合、主キーを非クラスター化インデックスからクラスター化インデックスに変更すると、行データのキーも変更されます。そのため、TiDB バージョン 5.0 より前のバージョンで実行可能だった`SPLIT TABLE BY/BETWEEN`文は、TiDB バージョン 5.0 以降では動作しなくなります。 `SPLIT TABLE BY/BETWEEN`を使用してクラスター化インデックスを持つテーブルを分割する場合は、整数値を指定する代わりに、主キー列の値を指定する必要があります。次の例を参照してください。
 
 ```sql
 mysql> create table t (a int, b varchar(255), primary key(a, b) clustered);

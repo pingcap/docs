@@ -48,7 +48,7 @@ TiDB バージョン: 6.5.10
 
     - 統計の初期化中にメタデータをクエリすると、OOM が発生する可能性がある問題を修正しました。 [＃52219](https://github.com/pingcap/tidb/issues/52219) @[hawkingrei](https://github.com/hawkingrei)
     - `AUTO_ID_CACHE=1`AUTO_INCREMENT列を含むテーブルで、 `auto_increment_increment`と`auto_increment_offset`システム変数をデフォルト以外の値に設定すると、不正なAUTO_INCREMENT ID 割り当てが発生する可能性がある問題を修正しました。 [＃52622](https://github.com/pingcap/tidb/issues/52622) @[tiancaiamao](https://github.com/tiancaiamao)
-    - `RESTORE`ステートメントを使用して`AUTO_ID_CACHE=1`のテーブルを復元すると`Duplicate entry`エラーが発生する可能性がある問題を修正しました [＃52680](https://github.com/pingcap/tidb/issues/52680) @[tiancaiamao](https://github.com/tiancaiamao)
+    - `RESTORE`文を使用して`AUTO_ID_CACHE=1`のテーブルを復元すると`Duplicate entry`エラーが発生する可能性がある問題を修正しました [＃52680](https://github.com/pingcap/tidb/issues/52680) @[tiancaiamao](https://github.com/tiancaiamao)
     - `STATE`のフィールドのうち`size`が定義されていないため、 `INFORMATION_SCHEMA.TIDB_TRX`のテーブルの`STATE`フィールドが空になる問題を修正しました[＃53026](https://github.com/pingcap/tidb/issues/53026) @[cfzjywxk](https://github.com/cfzjywxk)
     - 外部キーを持つテーブルを作成するときに、TiDBが対応する統計メタデータ（ `stats_meta` ）を作成しない問題を修正しました。 [＃53652](https://github.com/pingcap/tidb/issues/53652) @[hawkingrei](https://github.com/hawkingrei)
     - クエリの同時実行数が多い場合に統計同期読み込みメカニズムが予期せず失敗する可能性がある問題を修正しました[＃52294](https://github.com/pingcap/tidb/issues/52294) @[hawkingrei](https://github.com/hawkingrei)
@@ -58,7 +58,7 @@ TiDB バージョン: 6.5.10
     - `?`引数を含む`CONV` `EXECUTE` `PREPARE`を複数回実行すると、誤ったクエリ結果が返される可能性がある問題を修正しました[＃53505](https://github.com/pingcap/tidb/issues/53505) @[qw4990](https://github.com/qw4990)
     - オプティマイザヒント使用時に誤った警告情報が表示される問題を修正しました [＃53767](https://github.com/pingcap/tidb/issues/53767) @[hawkingrei](https://github.com/hawkingrei)
     - 情報スキーマキャッシュミスにより、古い読み取りのクエリレイテンシーが増加する問題を修正しました。 [＃53428](https://github.com/pingcap/tidb/issues/53428) @[crazycs520](https://github.com/crazycs520)
-    - DDL ステートメントが etcd を誤って使用し、タスクがキューに入れられる問題を修正しました。 [＃52335](https://github.com/pingcap/tidb/issues/52335) @[wjhuang2016](https://github.com/wjhuang2016)
+    - DDL文が etcd を誤って使用し、タスクがキューに入れられる問題を修正しました。 [＃52335](https://github.com/pingcap/tidb/issues/52335) @[wjhuang2016](https://github.com/wjhuang2016)
     - 式インデックスの名前を変更する`RENAME INDEX`を実行したときに内部列の名前が変更されない問題を修正しました [＃51431](https://github.com/pingcap/tidb/issues/51431) @[ywqzzy](https://github.com/ywqzzy)
     - `CREATE OR REPLACE VIEW`同時に実行すると`table doesn't exist`エラーが発生する可能性がある問題を修正 [＃53673](https://github.com/pingcap/tidb/issues/53673) @[tangenta](https://github.com/tangenta)
     - JOIN条件に暗黙的な型変換が含まれている場合にTiDBがpanicする可能性がある問題を修正しました [＃46556](https://github.com/pingcap/tidb/issues/46556) @[qw4990](https://github.com/qw4990)
@@ -129,7 +129,7 @@ TiDB バージョン: 6.5.10
     - TiCDC
 
         - 下流データベースのパスワードがBase64でエンコードされている場合、TiCDCが同期ポイントを有効にして変更フィードを作成できない問題を修正しました[＃10516](https://github.com/pingcap/tiflow/issues/10516) @[asddongmen](https://github.com/asddongmen)
-        - `DROP PRIMARY KEY`と`DROP UNIQUE KEY`ステートメントが正しく複製されない問題を修正[＃10890](https://github.com/pingcap/tiflow/issues/10890) @[asddongmen](https://github.com/asddongmen)
+        - `DROP PRIMARY KEY`と`DROP UNIQUE KEY`文が正しく複製されない問題を修正[＃10890](https://github.com/pingcap/tiflow/issues/10890) @[asddongmen](https://github.com/asddongmen)
         - `TIMEZONE`種類のデフォルト値が正しいタイムゾーンに従って設定されない問題を修正 [＃10931](https://github.com/pingcap/tiflow/issues/10931) @[3AceShowHand](https://github.com/3AceShowHand)
 
     - TiDB Lightning

@@ -199,7 +199,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 - [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
-- [非トランザクションDMLステートメント](/non-transactional-dml.md)
+- [非トランザクションDML文](/non-transactional-dml.md)
 - [システム変数](/system-variables.md#autocommit)
 - [トランザクション](/transaction-overview.md)
 
@@ -2690,7 +2690,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [非トランザクションDMLステートメント](/non-transactional-dml.md)
+- [非トランザクションDML文](/non-transactional-dml.md)
 - [システム変数](/system-variables.md#tidb_mem_oom_action-new-in-v610)
 - [2022年のTiDB Cloudリリースノート](https://docs.pingcap.com/tidbcloud/release-notes-2022)
 - [TiDB メモリ制御](/configure-memory-usage.md)
@@ -2732,7 +2732,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 - [エラーコードとトラブルシューティング](/error-codes.md)
 - [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
 - [コストの高いクエリを特定する](/identify-expensive-queries.md)
-- [非トランザクションDMLステートメント](/non-transactional-dml.md)
+- [非トランザクションDML文](/non-transactional-dml.md)
 - [オプティマイザヒント](/optimizer-hints.md)
 - [パイプラインDML](/pipelined-dml.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
@@ -2867,7 +2867,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [非トランザクションDMLステートメント](/non-transactional-dml.md)
+- [非トランザクションDML文](/non-transactional-dml.md)
 - [システム変数](/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610)
 - [TiDB 6.1.0 リリースノート](/releases/release-6.1.0.md)
 
@@ -3514,7 +3514,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 - [スロークエリを特定する](/identify-slow-queries.md)
 - [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [ログの秘匿化](/log-redaction.md)
-- [非トランザクションDMLステートメント](/non-transactional-dml.md)
+- [非トランザクションDML文](/non-transactional-dml.md)
 - [システム変数](/system-variables.md#tidb_redact_log)
 - [TiDB 8.3.0 リリースノート](/releases/release-8.3.0.md)
 - [TiDB 8.1.1 リリースノート](/releases/release-8.1.1.md)
@@ -3841,7 +3841,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 - [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)
 - [FLUSH TABLES](/sql-statements/sql-statement-flush-tables.md)
 - [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
-- [非トランザクションDMLステートメント](/non-transactional-dml.md)
+- [非トランザクションDML文](/non-transactional-dml.md)
 - [システム変数`tidb_snapshot`を使用して履歴データを読み取る](/read-historical-data.md)
 - [Kafka にデータを複製する](/ticdc/ticdc-sink-to-kafka.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
@@ -3991,7 +3991,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 - [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [TiDB DashboardのSQLステートメントページ](/dashboard/dashboard-statement-list.md)
+- [TiDB DashboardのSQL Statementsページ](/dashboard/dashboard-statement-list.md)
 - [ステートメントサマリーテーブル](/statement-summary-tables.md)
 - [システム変数](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40)
 - [TiDB 5.2 リリースノート](/releases/release-5.2.0.md)

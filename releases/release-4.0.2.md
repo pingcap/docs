@@ -30,7 +30,7 @@ TiDB バージョン: 4.0.2
 
 - TiDB
 
-    - `INSERT`ステートメントの`MEMORY_QUOTA()`ヒントをサポートする[＃18101](https://github.com/pingcap/tidb/pull/18101)
+    - `INSERT`文の`MEMORY_QUOTA()`ヒントをサポートする[＃18101](https://github.com/pingcap/tidb/pull/18101)
     - TLS証明書の`SAN`フィールドに基づく認証をサポート [＃17698](https://github.com/pingcap/tidb/pull/17698)
     - `REGEXP()`関数照合順序をサポート [＃17581](https://github.com/pingcap/tidb/pull/17581)
     - `sql_select_limit`セッションとグローバル変数サポート [＃17604](https://github.com/pingcap/tidb/pull/17604)
@@ -122,7 +122,7 @@ TiDB バージョン: 4.0.2
     - `COUNT()`関数結果の小数点以下のプロパティが正しくない問題を修正しました [＃17704](https://github.com/pingcap/tidb/pull/17704)
     - 入力の型がバイナリ文字列の場合の`HEX()`関数の誤った結果を修正 [＃17620](https://github.com/pingcap/tidb/pull/17620)
     - フィルタ条件なしで`INFORMATION_SCHEMA.INSPECTION_SUMMARY`テーブルをクエリすると空の結果が返される問題を修正 [＃17697](https://github.com/pingcap/tidb/pull/17697)
-    - `ALTER USER`ステートメントでユーザー情報を更新する際に使用されるハッシュ化されたパスワードが予期しないものである問題を修正[＃17646](https://github.com/pingcap/tidb/pull/17646)
+    - `ALTER USER`文でユーザー情報を更新する際に使用されるハッシュ化されたパスワードが予期しないものである問題を修正[＃17646](https://github.com/pingcap/tidb/pull/17646)
     - `ENUM`と`SET`値の照合順序をサポート[＃17701](https://github.com/pingcap/tidb/pull/17701)
     - テーブル作成時にリージョンの事前分割のタイムアウトメカニズムが機能しない問題を修正しました [＃17619](https://github.com/pingcap/tidb/pull/17619)
     - DDLジョブの再試行時にスキーマが予期せず更新され、DDLジョブのアトミック性が損なわれる可能性がある問題を修正しました[＃17608](https://github.com/pingcap/tidb/pull/17608)
@@ -133,7 +133,7 @@ TiDB バージョン: 4.0.2
     - `tidb_replica_read` `follower`に設定され、リーダーとフォロワー/ラーナー間にネットワークパーティションがある場合にフォロワー/ラーナーが再試行を続ける問題を修正しました。 [＃17443](https://github.com/pingcap/tidb/pull/17443)
     - TiDBがPDフォロワーにpingを送信しすぎる場合がある問題を修正[＃17947](https://github.com/pingcap/tidb/pull/17947)
     - TiDB v4.0 で古いバージョンの範囲パーティションテーブルをロードできない問題を修正しました [＃17983](https://github.com/pingcap/tidb/pull/17983)
-    - 各リージョンに異なる`Backoffer`割り当てることで、複数のリージョン要求が同時に失敗した場合の SQL ステートメントのタイムアウト問題を修正しました[＃17585](https://github.com/pingcap/tidb/pull/17585)
+    - 各リージョンに異なる`Backoffer`を割り当てることで、複数のリージョン要求が同時に失敗した場合の SQL文のタイムアウト問題を修正しました[＃17585](https://github.com/pingcap/tidb/pull/17585)
     - `DateTime`区切り文字を解析する際の MySQL 非互換の動作を修正 [＃17501](https://github.com/pingcap/tidb/pull/17501)
     - TiKVリクエストがTiFlashサーバーに時々送信される問題を修正 [＃18105](https://github.com/pingcap/tidb/pull/18105)
     - あるトランザクションで書き込まれ、削除された主キーのロックが別のトランザクションによって解決されたために発生したデータの不整合の問題を修正しました[＃18250](https://github.com/pingcap/tidb/pull/18250)

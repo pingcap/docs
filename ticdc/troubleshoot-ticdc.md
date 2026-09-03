@@ -40,7 +40,7 @@ cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id 28c43ffc
 
     - 対処方法：ダウンストリームが正常に戻った後、 `cdc cli changefeed resume`を実行することでレプリケーションタスクを再開できます。
 
-- ダウンストリームに互換性のない SQL ステートメントがあるため、レプリケーションを続行できません。
+- ダウンストリームに互換性のない SQL文があるため、レプリケーションを続行できません。
 
     - このシナリオでは、TiCDCはタスク情報を保存します。TiCDCはPDにサービスGCセーフポイントを設定しているため、タスクチェックポイント以降のデータは有効期間`gc-ttl`内にTiKV GCによってクリーンアップされません。
     - 取り扱い手順:
@@ -87,7 +87,7 @@ v4.0.9 以降では、レプリケーションタスクで統合ソーター機�
 ## 変更フィードの下流にMySQLなどのデータベースがあり、TiCDCが時間のかかるDDL文を実行すると、他のすべての変更フィードがブロックされます。どうすればよいでしょうか？ {#when-the-downstream-of-a-changefeed-is-a-database-similar-to-mysql-and-ticdc-executes-a-time-consuming-ddl-statement-all-other-changefeeds-are-blocked-what-should-i-do}
 
 1. 時間のかかるDDL文を含む変更フィードの実行を一時停止します。すると、他の変更フィードがブロックされなくなったことがわかります。
-2. TiCDC ログで`apply job`フィールドを検索し、時間のかかる DDL ステートメントの`start-ts`を確認します。
+2. TiCDC ログで`apply job`フィールドを検索し、時間のかかる DDL文の`start-ts`を確認します。
 3. 下流のDDL文を手動で実行します。実行が完了したら、以下の操作を続行します。
 4. changefeed 設定を変更し、上記の`start-ts` `ignore-txn-start-ts`設定項目に追加します。
 5. 一時停止された変更フィードを再開します。
@@ -114,7 +114,7 @@ replica.fetch.max.bytes=2147483648
 fetch.message.max.bytes=2147483648
 ```
 
-## TiCDC レプリケーション中に、ダウンストリームで DDL ステートメントの実行が失敗したかどうかを確認するにはどうすればよいでしょうか? レプリケーションを再開するにはどうすればよいでしょうか? {#how-can-i-find-out-whether-a-ddl-statement-fails-to-execute-in-downstream-during-ticdc-replication-how-to-resume-the-replication}
+## TiCDC レプリケーション中に、ダウンストリームで DDL文の実行が失敗したかどうかを確認するにはどうすればよいでしょうか? レプリケーションを再開するにはどうすればよいでしょうか? {#how-can-i-find-out-whether-a-ddl-statement-fails-to-execute-in-downstream-during-ticdc-replication-how-to-resume-the-replication}
 
 DDL文の実行に失敗した場合、レプリケーションタスク（changefeed）は自動的に停止します。checkpoint-tsはDDL文のfinish-tsです。TiCDCにこの文の実行を下流で再試行させたい場合は、 `cdc cli changefeed resume`を指定してレプリケーションタスクを再開してください。例：
 

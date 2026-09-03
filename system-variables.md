@@ -9,7 +9,7 @@ TiDBのシステム変数はMySQLと同様に動作し、設定は`SESSION`ま�
 
 - `SESSION`スコープでの変更は、現在のセッションのみに影響します。
 - `GLOBAL`スコープでの変更は即座に適用されます。この変数が`SESSION`スコープでも使用されている場合、すべてのセッション (あなたのセッションを含む) は引き続き現在のセッション値を使用します。
-- 変更は[`SET`ステートメント](/sql-statements/sql-statement-set-variable.md)を使用して行われます。
+- 変更は[`SET`文](/sql-statements/sql-statement-set-variable.md)を使用して行われます。
 
 ```sql
 # These two identical statements change a session variable
@@ -58,7 +58,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
-- `INSERT`ステートメントで、 `AUTO_RANDOM`属性を持つ列の値を明示的に指定することを許可するかどうかを決定します。
+- `INSERT`文で、 `AUTO_RANDOM`属性を持つ列の値を明示的に指定することを許可するかどうかを決定します。
 
 ### authentication_ldap_sasl_auth_method_name <span class="version-mark">New in v7.1.0</span>
 
@@ -575,7 +575,7 @@ mysql> SELECT * FROM t1;
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
-- `init_connect`機能を使用すると、TiDBサーバーに初めて接続したときに SQL ステートメントを自動的に実行できます。 `CONNECTION_ADMIN`または`SUPER`の権限を持っている場合、この`init_connect`ステートメントは実行されません。 `init_connect`ステートメントでエラーが発生した場合、ユーザー接続は終了します。
+- `init_connect`機能を使用すると、TiDBサーバーに初めて接続したときに SQL文を自動的に実行できます。 `CONNECTION_ADMIN`または`SUPER`の権限を持っている場合、この`init_connect`ステートメントは実行されません。 `init_connect`ステートメントでエラーが発生した場合、ユーザー接続は終了します。
 
 ### innodb_lock_wait_timeout
 
@@ -629,7 +629,7 @@ mysql> SELECT * FROM t1;
 - 範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
-- この変数は、前の`execute`ステートメントで使用された実行計画がプランキャッシュから直接取得されたかどうかを示すために使用されます。
+- この変数は、前の`execute`文で使用された実行計画がプランキャッシュから直接取得されたかどうかを示すために使用されます。
 
 ### last_sql_use_alloc <span class="version-mark">New in v6.4.0</span>
 
@@ -685,7 +685,7 @@ mysql> SELECT * FROM t1;
 
 > **Note:**
 >
-> バージョン6.4.0より前は、 `max_execution_time`システム変数はすべての種類のステートメントに適用されていました。バージョン6.4.0以降では、この変数は`SELECT`ステートメントの最大実行時間のみを制御します。タイムアウト値の精度は約100ミリ秒です。つまり、指定したミリ秒数でステートメントが正確に終了しない可能性があります。
+> バージョン6.4.0より前は、 `max_execution_time`システム変数はすべての種類のステートメントに適用されていました。バージョン6.4.0以降では、この変数は`SELECT`文の最大実行時間のみを制御します。タイムアウト値の精度は約100ミリ秒です。つまり、指定したミリ秒数でステートメントが正確に終了しない可能性があります。
 
 <CustomContent platform="tidb">
 
@@ -770,7 +770,7 @@ mysql> SELECT * FROM t1;
 - デフォルト値: `-1`
 - 範囲: `[-1, 1048576]`
 - 現在のTiDBインスタンスにおける[`PREPARE`](/sql-statements/sql-statement-prepare.md)ステートメントの最大数を指定します。
-- `-1`の値は、現在の TiDB インスタンスにおける`PREPARE`ステートメントの最大数に制限がないことを意味します。
+- `-1`の値は、現在の TiDB インスタンスにおける`PREPARE`文の最大数に制限がないことを意味します。
 - 変数に上限値`1048576`を超える値を設定した場合、代わりに`1048576`が使用されます。
 
 ```sql
@@ -972,7 +972,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - デフォルト値: `18446744073709551615`
 - 範囲: `[0, 18446744073709551615]`
 - 単位：行
-- `SELECT`ステートメントによって返される行の最大数。
+- `SELECT`文によって返される行の最大数。
 
 ### ssl_ca
 
@@ -1093,7 +1093,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - デフォルト値: ""
-- この変数は、TiKV にフォールバックする可能性のあるストレージエンジンのリストを指定するために使用されます。リストで指定されたストレージエンジンの障害により SQL ステートメントの実行が失敗した場合、TiDB は TiKV を使用してこの SQL ステートメントの実行を再試行します。この変数は "" または "tiflash" に設定できます。この変数が "tiflash" に設定されている場合、 TiFlash がタイムアウトエラー (エラーコード: ErrTiFlashServerTimeout) を返すと、TiDB は TiKV を使用してこの SQL ステートメントの実行を再試行します。
+- この変数は、TiKV にフォールバックする可能性のあるストレージエンジンのリストを指定するために使用されます。リストで指定されたストレージエンジンの障害により SQL文の実行が失敗した場合、TiDB は TiKV を使用してこの SQL文の実行を再試行します。この変数は "" または "tiflash" に設定できます。この変数が "tiflash" に設定されている場合、 TiFlash がタイムアウトエラー (エラーコード: ErrTiFlashServerTimeout) を返すと、TiDB は TiKV を使用してこの SQL文の実行を再試行します。
 
 ### tidb_allow_function_for_expression_index <span class="version-mark">New in v5.2.0</span>
 
@@ -1146,7 +1146,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - 型: Enumeration
 - デフォルト値: `ALL`
 - 値のオプション: `ALL` 、 `PREDICATE`
-- この変数は`ANALYZE TABLE`ステートメントの動作を制御します。 `PREDICATE`に設定すると、[述語列](/statistics.md#collect-statistics-on-some-columns)の統計情報のみが収集されます。 `ALL`に設定すると、すべての列の統計情報が収集されます。OLAP クエリを使用するシナリオでは、 `ALL`に設定することをお勧めします。そうしないと、統計情報の収集によってクエリのパフォーマンスが著しく低下する可能性があります。
+- この変数は`ANALYZE TABLE`文の動作を制御します。 `PREDICATE`に設定すると、[述語列](/statistics.md#collect-statistics-on-some-columns)の統計情報のみが収集されます。 `ALL`に設定すると、すべての列の統計情報が収集されます。OLAP クエリを使用するシナリオでは、 `ALL`に設定することをお勧めします。そうしないと、統計情報の収集によってクエリのパフォーマンスが著しく低下する可能性があります。
 
 ### tidb_analyze_distsql_scan_concurrency <span class="version-mark">New in v7.6.0</span>
 
@@ -1386,7 +1386,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、非推奨のバッチ DML 機能の一部であるバッチ削除機能を有効にするかどうかを制御するために使用されます。この変数が有効になっている場合、 `DELETE`ステートメントは複数のトランザクションに分割され、非アトミックにコミットされる可能性があります。これを機能させるには、 `tidb_enable_batch_dml`も有効にし、 `tidb_dml_batch_size`に正の値を設定する必要がありますが、これは推奨されません。
+- この変数は、非推奨のバッチ DML 機能の一部であるバッチ削除機能を有効にするかどうかを制御するために使用されます。この変数が有効になっている場合、 `DELETE`文は複数のトランザクションに分割され、非アトミックにコミットされる可能性があります。これを機能させるには、 `tidb_enable_batch_dml`も有効にし、 `tidb_dml_batch_size`に正の値を設定する必要がありますが、これは推奨されません。
 
 ### tidb_batch_insert
 
@@ -1398,7 +1398,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、非推奨のバッチ DML 機能の一部であるバッチ挿入機能を有効にするかどうかを制御するために使用されます。この変数が有効になっている場合、 `INSERT`ステートメントは複数のトランザクションに分割され、非アトミックにコミットされる可能性があります。これを機能させるには、 `tidb_enable_batch_dml`も有効にし、 `tidb_dml_batch_size`に正の値を設定する必要がありますが、これは推奨されません。
+- この変数は、非推奨のバッチ DML 機能の一部であるバッチ挿入機能を有効にするかどうかを制御するために使用されます。この変数が有効になっている場合、 `INSERT`文は複数のトランザクションに分割され、非アトミックにコミットされる可能性があります。これを機能させるには、 `tidb_enable_batch_dml`も有効にし、 `tidb_dml_batch_size`に正の値を設定する必要がありますが、これは推奨されません。
 
 ### tidb_batch_pending_tiflash_count <span class="version-mark">New in v6.0</span>
 
@@ -1466,7 +1466,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - 型: Boolean
 - デフォルト値: `OFF`
 - この変数は、 [ベースラインの取得](/sql-plan-management.md#baseline-capturing)機能を有効にするかどうかを制御するために使用されます。この機能はステートメントサマリーに依存するため、ベースラインキャプチャを使用する前にステートメントサマリーを有効にする必要があります。
-- この機能を有効にすると、ステートメントサマリー内の過去のSQLステートメントが定期的に走査され、少なくとも2回出現するSQLステートメントに対してバインディングが自動的に作成されます。
+- この機能を有効にすると、ステートメントサマリー内の過去のSQL文が定期的に走査され、少なくとも2回出現するSQL文に対してバインディングが自動的に作成されます。
 
 ### tidb_cdc_write_source <span class="version-mark">New in v6.5.0</span>
 
@@ -1692,7 +1692,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Warning:**
 >
-> 現在、この機能は[単一の`ALTER TABLE`ステートメントで複数の列またはインデックスを変更する](/sql-statements/sql-statement-alter-table.md)完全な互換性はありません。インデックス アクセラレーションを使用して一意インデックスを追加する場合は、同じステートメント内の他の列やインデックスを変更しないようにする必要があります。
+> 現在、この機能は[単一の`ALTER TABLE`文で複数の列またはインデックスを変更する](/sql-statements/sql-statement-alter-table.md)完全な互換性はありません。インデックス アクセラレーションを使用して一意インデックスを追加する場合は、同じステートメント内の他の列やインデックスを変更しないようにする必要があります。
 
 </CustomContent>
 
@@ -1702,7 +1702,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `OFF`
-- この変数は、DDL 埋め込み`ANALYZE`を有効にするかどうかを制御します。有効にすると、新しいインデックスの作成 ( [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) ) または既存のインデックスの再編成 ( [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)および[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) ) を行う DDL ステートメントは、インデックスが表示される前に統計を自動的に収集します。詳細については、 [DDLステートメントに埋め込まれた`ANALYZE`](/ddl_embedded_analyze.md)を参照してください。
+- この変数は、DDL 埋め込み`ANALYZE`を有効にするかどうかを制御します。有効にすると、新しいインデックスの作成 ( [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) ) または既存のインデックスの再編成 ( [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)および[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) ) を行う DDL文は、インデックスが表示される前に統計を自動的に収集します。詳細については、 [DDL文に埋め込まれた`ANALYZE`](/ddl_embedded_analyze.md)を参照してください。
 
 ### tidb_enable_dist_task <span class="version-mark">New in v7.1.0</span>
 
@@ -1779,7 +1779,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - この変数は、DDL 操作の`re-organize`フェーズ中にバッチサイズを設定するために使用されます。たとえば、TiDB が`ADD INDEX`操作を実行すると、インデックスデータは`tidb_ddl_reorg_worker_cnt` (数) 個の同時実行ワーカーによってバックフィルされる必要があります。各ワーカーは、インデックスデータをバッチ単位でバックフィルします。
     - `tidb_ddl_enable_fast_reorg`が`OFF`に設定されている場合、 `ADD INDEX`はトランザクションとして実行されます。 `ADD INDEX`の実行中に、対象列で`UPDATE`や`REPLACE`などの更新操作が多数発生する場合、バッチサイズが大きいほどトランザクション競合が発生する可能性が高くなります。この場合、バッチサイズを小さい値に設定することをお勧めします。最小値は 32 です。
     - トランザクションの競合が存在しない場合、または`tidb_ddl_enable_fast_reorg`が`ON`に設定されている場合は、バッチサイズを大きな値に設定できます。これにより、データのバックフィルが高速になりますが、TiKV への書き込み圧力も増加します。適切なバッチサイズについては、 `tidb_ddl_reorg_worker_cnt`の値も参照する必要があります。参考として[オンラインワークロードと`ADD INDEX`操作に関する相互作用テスト](https://docs.pingcap.com/tidb/dev/online-workloads-and-add-index-operations)を参照してください。
-    - バージョン8.3.0以降、このパラメータはセッションレベルでサポートされています。グローバルレベルでパラメータを変更しても、現在実行中のDDLステートメントには影響しません。変更は、新規セッションで送信されるDDLにのみ適用されます。
+    - バージョン8.3.0以降、このパラメータはセッションレベルでサポートされています。グローバルレベルでパラメータを変更しても、現在実行中のDDL文には影響しません。変更は、新規セッションで送信されるDDLにのみ適用されます。
     - バージョン 8.5.0 以降では、 `ADMIN ALTER DDL JOBS <job_id> BATCH_SIZE = <new_batch_size>;`を実行することで、実行中の DDL ジョブのこのパラメータを変更できます。TiDB バージョン 8.5.5 より前のバージョンでは、 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が有効になっている場合、 `ADD INDEX` DDL に対してこの操作はサポートされていないことに注意してください。詳細については、 [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)を参照してください。
 
 ### tidb_ddl_reorg_priority
@@ -1836,7 +1836,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - 範囲: `[1, 256]`
 - 単位：スレッド
 - この変数は`re-organize`フェーズでの DDL 操作の同時実行性を設定するために使用されます。
-- バージョン8.3.0以降、このパラメータはセッションレベルでサポートされています。グローバルレベルでパラメータを変更しても、現在実行中のDDLステートメントには影響しません。変更は、新規セッションで送信されるDDLにのみ適用されます。
+- バージョン8.3.0以降、このパラメータはセッションレベルでサポートされています。グローバルレベルでパラメータを変更しても、現在実行中のDDL文には影響しません。変更は、新規セッションで送信されるDDLにのみ適用されます。
 - バージョン 8.5.0 以降では、 `ADMIN ALTER DDL JOBS <job_id> THREAD = <new_thread_count>;`を実行することで、実行中の DDL ジョブのこのパラメータを変更できます。TiDB バージョン 8.5.5 より前のバージョンでは、 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が有効になっている場合、 `ADD INDEX` DDL に対してこの操作はサポートされていないことに注意してください。詳細については、 [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)を参照してください。
 
 ### `tidb_enable_fast_create_table` <span class="version-mark">New in v8.0.0</span>
@@ -1876,9 +1876,9 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数は、明示的な楽観的トランザクションの自動再試行を無効にするかどうかを設定するために使用されます。デフォルト値の`ON`は、TiDB でトランザクションが自動的に再試行されないことを意味し、 `COMMIT`ステートメントは、アプリケーションレイヤーで処理する必要のあるエラーを返す可能性があります。
+- この変数は、明示的な楽観的トランザクションの自動再試行を無効にするかどうかを設定するために使用されます。デフォルト値の`ON`は、TiDB でトランザクションが自動的に再試行されないことを意味し、 `COMMIT`文は、アプリケーションレイヤーで処理する必要のあるエラーを返す可能性があります。
 
-    値を`OFF`に設定すると、TiDB はトランザクションを自動的に再試行するため、 `COMMIT`ステートメントからのエラーが減少します。この変更を行う際は、更新が失われる可能性があるため注意してください。
+    値を`OFF`に設定すると、TiDB はトランザクションを自動的に再試行するため、 `COMMIT`文からのエラーが減少します。この変更を行う際は、更新が失われる可能性があるため注意してください。
 
     この変数は、TiDB で自動的にコミットされた暗黙のトランザクションと内部で実行されるトランザクションには影響しません。これらのトランザクションの最大再試行回数は、 `tidb_retry_limit`の値によって決定されます。
 
@@ -1932,7 +1932,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> v7.0.0 以降、 `tidb_dml_batch_size`は[`LOAD DATA`ステートメント](/sql-statements/sql-statement-load-data.md)に影響しなくなりました。
+> v7.0.0 以降、 `tidb_dml_batch_size`は[`LOAD DATA`文](/sql-statements/sql-statement-load-data.md)に影響しなくなりました。
 
 ### tidb_dml_type <span class="version-mark">New in v8.0.0</span>
 
@@ -1949,7 +1949,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - 型: String
 - デフォルト値: `"standard"`
 - 値のオプション: `"standard"` 、 `"bulk"`
-- この変数は、DMLステートメントの実行モードを制御します。
+- この変数は、DML文の実行モードを制御します。
     - `"standard"` TiDBトランザクションがコミットされる前にメモリにキャッシュされる標準DML実行モードを示します。このモードは、潜在的な競合が発生する可能性のある高並行トランザクションシナリオに適しており、推奨されるデフォルトの実行モードです。
     - `"bulk"`はパイプライン DML 実行モードを示し、大量のデータが書き込まれ、TiDB で過剰なメモリ使用量が発生するシナリオに適しています。詳細については、[パイプラインDML](/pipelined-dml.md)を参照してください。
 
@@ -2222,7 +2222,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - 型: Boolean
 - デフォルト値: `OFF`
 - この変数は、統計`Fast Analyze`機能を有効にするかどうかを設定するために使用されます。
-- 統計情報`Fast Analyze`機能が有効になっている場合、TiDB は約 10,000 行のデータをランダムにサンプリングして統計情報とします。データが不均一に分布している場合やデータサイズが小さい場合、統計情報の精度は低くなります。これにより、たとえば誤ったインデックスを選択するなど、最適な実行計画が作成されない可能性があります。通常の`Analyze`ステートメントの実行時間が許容範囲内であれば、 `Fast Analyze`機能を無効にすることをお勧めします。
+- 統計情報`Fast Analyze`機能が有効になっている場合、TiDB は約 10,000 行のデータをランダムにサンプリングして統計情報とします。データが不均一に分布している場合やデータサイズが小さい場合、統計情報の精度は低くなります。これにより、たとえば誤ったインデックスを選択するなど、最適な実行計画が作成されない可能性があります。通常の`Analyze`文の実行時間が許容範囲内であれば、 `Fast Analyze`機能を無効にすることをお勧めします。
 
 ### tidb_enable_fast_table_check <span class="version-mark">New in v7.2.0</span>
 
@@ -2332,14 +2332,14 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Warning:**
 >
-> DML ステートメント用の非プリペアド実行計画 キャッシュは実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> DML文用の非プリペアド実行計画 キャッシュは実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
 - 範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF` 。
-- この変数は、DML ステートメントの[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)機能を有効にするかどうかを制御します。
+- この変数は、DML文の[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)機能を有効にするかどうかを制御します。
 
 ### tidb_enable_cache_prepare_stmt <span class="version-mark">New in v8.5.7</span>
 >
@@ -2352,7 +2352,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用: Yes
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、`Prepare` ステートメントの結果をキャッシュするかどうかを制御します。通常、アプリケーションは `Prepare` を 1 回だけ実行し、その後 `Execute` を複数回実行するだけで済みます。以降のすべての `Execute` 操作では、最初の `Prepare` の結果を再利用できます。アプリケーションが同じ `Prepare` ステートメントを繰り返し送信する場合は、この変数を有効にすることで、TiDB が同一の `Prepare` ステートメントの結果をキャッシュして再利用できるようになり、リソース消費を削減できます。
+- この変数は、`Prepare`文の結果をキャッシュするかどうかを制御します。通常、アプリケーションは `Prepare` を 1 回だけ実行し、その後 `Execute` を複数回実行するだけで済みます。以降のすべての `Execute` 操作では、最初の `Prepare` の結果を再利用できます。アプリケーションが同じ `Prepare`文を繰り返し送信する場合は、この変数を有効にすることで、TiDB が同一の `Prepare`文の結果をキャッシュして再利用できるようになり、リソース消費を削減できます。
 
 ### tidb_enable_gogc_tuner <span class="version-mark">New in v6.4.0</span>
 
@@ -2460,7 +2460,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数は、[メタデータロック](/metadata-lock.md)機能を有効にするかどうかを設定するために使用されます。この変数を設定する際は、クラスター内で実行中の DDL ステートメントがないことを確認してください。そうでない場合、データが正しくない、または矛盾が生じる可能性があります。
+- この変数は、[メタデータロック](/metadata-lock.md)機能を有効にするかどうかを設定するために使用されます。この変数を設定する際は、クラスター内で実行中の DDL文がないことを確認してください。そうでない場合、データが正しくない、または矛盾が生じる可能性があります。
 
 ### tidb_enable_mutation_checker <span class="version-mark">New in v6.0.0</span>
 
@@ -2469,7 +2469,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数は、DML ステートメントの実行中にデータとインデックス間の一貫性をチェックするために使用されるツールである TiDB ミューテーション チェッカーを有効にするかどうかを制御するために使用されます。チェッカーがステートメントに対してエラーを返した場合、TiDB はステートメントの実行をロールバックします。この変数を有効にすると、CPU 使用率がわずかに増加します。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)を参照してください。
+- この変数は、DML文の実行中にデータとインデックス間の一貫性をチェックするために使用されるツールである TiDB ミューテーション チェッカーを有効にするかどうかを制御するために使用されます。チェッカーがステートメントに対してエラーを返した場合、TiDB はステートメントの実行をロールバックします。この変数を有効にすると、CPU 使用率がわずかに増加します。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)を参照してください。
 - v6.0.0以降のバージョンの新規クラスターの場合、デフォルト値は`ON`です。v6.0.0より前のバージョンからアップグレードする既存のクラスターの場合、デフォルト値は`OFF`です。
 
 ### tidb_enable_new_cost_interface <span class="version-mark">New in v6.2.0</span>
@@ -2749,18 +2749,18 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、データを読み取るオペレーターに対して動的メモリ制御機能を有効にするかどうかを制御します。デフォルトでは、このオペレーターは、 [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)がデータ読み取りに許可する最大スレッド数を有効にします。単一の SQL ステートメントのメモリ使用量が毎回[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超えると、データを読み取るオペレーターは1つのスレッドを停止します。
+- この変数は、データを読み取るオペレーターに対して動的メモリ制御機能を有効にするかどうかを制御します。デフォルトでは、このオペレーターは、 [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)がデータ読み取りに許可する最大スレッド数を有効にします。単一の SQL 文のメモリ使用量が毎回[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超えると、データを読み取るオペレーターは1つのスレッドを停止します。
 
 <CustomContent platform="tidb">
 
-- データを読み取るオペレーターにスレッドが 1 つだけ残っており、単一の SQL ステートメントのメモリ使用量が常に[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超える場合、この SQL ステートメントは[データをディスクに書き出す](/system-variables.md#tidb_enable_tmp_storage_on_oom)などの他のメモリ制御動作をトリガーします。
-- この変数は、SQL ステートメントがデータの読み取りのみを行う場合にメモリ使用量を効果的に制御します。結合や集計などの計算操作が必要な場合、メモリ使用量は`tidb_mem_quota_query`の制御下にない可能性があり、メモリ不足エラーのリスクが高まります。
+- データを読み取るオペレーターにスレッドが 1 つだけ残っており、単一の SQL文のメモリ使用量が常に[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超える場合、この SQL文は[データをディスクに書き出す](/system-variables.md#tidb_enable_tmp_storage_on_oom)などの他のメモリ制御動作をトリガーします。
+- この変数は、SQL文がデータの読み取りのみを行う場合にメモリ使用量を効果的に制御します。結合や集計などの計算操作が必要な場合、メモリ使用量は`tidb_mem_quota_query`の制御下にない可能性があり、メモリ不足エラーのリスクが高まります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- データを読み取るオペレーターに残っているスレッドが1つしかなく、単一のSQLステートメントのメモリ使用量が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超え続ける場合、このSQLステートメントは、データをディスクに書き出すなどの他のメモリ制御動作をトリガーします。
+- データを読み取るオペレーターに残っているスレッドが1つしかなく、単一のSQL文のメモリ使用量が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超え続ける場合、このSQL文は、データをディスクに書き出すなどの他のメモリ制御動作をトリガーします。
 
 </CustomContent>
 
@@ -2793,8 +2793,8 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、共有ロックを排他ロックにアップグレードする機能を有効にするかどうかを制御します。TiDB はデフォルトでは`SELECT LOCK IN SHARE MODE`をサポートしていません。変数の値が`ON`の場合、TiDB は`SELECT LOCK IN SHARE MODE`ステートメントを`SELECT FOR UPDATE`にアップグレードし、悲観的ロックを追加しようとします。この変数のデフォルト値は`OFF`であり、これは共有ロックを排他ロックにアップグレードする機能が無効になっていることを意味します。
-- この変数を有効にすると、 [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)が有効になっているかどうかに関係なく`SELECT LOCK IN SHARE MODE`ステートメントに影響します。
+- この変数は、共有ロックを排他ロックにアップグレードする機能を有効にするかどうかを制御します。TiDB はデフォルトでは`SELECT LOCK IN SHARE MODE`をサポートしていません。変数の値が`ON`の場合、TiDB は`SELECT LOCK IN SHARE MODE`文を`SELECT FOR UPDATE`にアップグレードし、悲観的ロックを追加しようとします。この変数のデフォルト値は`OFF`であり、これは共有ロックを排他ロックにアップグレードする機能が無効になっていることを意味します。
+- この変数を有効にすると、 [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)が有効になっているかどうかに関係なく`SELECT LOCK IN SHARE MODE`文に影響します。
 
 ### tidb_enable_slow_log
 
@@ -2931,11 +2931,11 @@ Query OK, 0 rows affected (0.09 sec)
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数は、 `INSERT` 、 `DELETE` 、および`UPDATE`を含むSQLステートメントの読み取り操作をTiFlashにプッシュダウンできるかどうかを制御します。例：
+- この変数は、 `INSERT` 、 `DELETE` 、および`UPDATE`を含むSQL文の読み取り操作をTiFlashにプッシュダウンできるかどうかを制御します。例：
 
-    - `SELECT`ステートメント内の`INSERT INTO SELECT`クエリ (一般的な使用シナリオ:[TiFlashクエリ結果の具体化](/tiflash/tiflash-results-materialization.md))
-    - `WHERE`および`UPDATE`ステートメントにおける`DELETE`条件フィルタリング
-- バージョン7.1.0以降、この変数は非推奨となりました。[`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50)の場合、オプティマイザは[SQLモード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュダウンするかどうかをインテリジェントに判断します。 TiDB では`INSERT` 、 `DELETE` 、および`UPDATE` (例えば`INSERT INTO SELECT` ) を含む SQL ステートメントの読み取り操作をTiFlashにプッシュダウンできるのは、現在のセッションの[SQLモード](/sql-mode.md)が厳密でない場合のみであることに注意してください。つまり、 `sql_mode`の値には`STRICT_TRANS_TABLES`および`STRICT_ALL_TABLES`は含まれません。
+    - `SELECT`文内の`INSERT INTO SELECT`クエリ (一般的な使用シナリオ:[TiFlashクエリ結果の具体化](/tiflash/tiflash-results-materialization.md))
+    - `WHERE`および`UPDATE`文における`DELETE`条件フィルタリング
+- バージョン7.1.0以降、この変数は非推奨となりました。[`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50)の場合、オプティマイザは[SQLモード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュダウンするかどうかをインテリジェントに判断します。 TiDB では`INSERT` 、 `DELETE` 、および`UPDATE` (例えば`INSERT INTO SELECT` ) を含む SQL文の読み取り操作をTiFlashにプッシュダウンできるのは、現在のセッションの[SQLモード](/sql-mode.md)が厳密でない場合のみであることに注意してください。つまり、 `sql_mode`の値には`STRICT_TRANS_TABLES`および`STRICT_ALL_TABLES`は含まれません。
 
 ### tidb_enable_top_sql <span class="version-mark">New in v5.4.0</span>
 
@@ -3007,7 +3007,7 @@ Query OK, 0 rows affected (0.09 sec)
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数は、 [ウィンドウ関数](/functions-and-operators/window-functions.md)のサポートを有効にするかどうかを制御するために使用されます。 ウィンドウ関数は予約語を使用する可能性があることに注意してください。これにより、TiDB のアップグレード後に、通常実行できる SQL ステートメントの解析が失敗する可能性があります。この場合、 `tidb_enable_window_function`を`OFF`に設定できます。
+- この変数は、 [ウィンドウ関数](/functions-and-operators/window-functions.md)のサポートを有効にするかどうかを制御するために使用されます。 ウィンドウ関数は予約語を使用する可能性があることに注意してください。これにより、TiDB のアップグレード後に、通常実行できる SQL文の解析が失敗する可能性があります。この場合、 `tidb_enable_window_function`を`OFF`に設定できます。
 
 ### `tidb_enable_row_level_checksum` <span class="version-mark">New in v7.1.0</span>
 
@@ -3182,7 +3182,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 > **Note:**
 >
-> バージョン6.6.0以降、TiDBは[リソース制御](/tidb-resource-control-ru-groups.md)をサポートしています。この機能を使用すると、異なるリソースグループで異なる優先度のSQLステートメントを実行できます。これらのリソースグループに適切なクォータと優先度を設定することで、異なる優先度のSQLステートメントのスケジューリングをより適切に制御できます。リソース制御が有効になっている場合、ステートメントの優先度は適用されなくなります。[リソース制御](/tidb-resource-control-ru-groups.md)を使用して異なるSQLステートメントのリソース使用量を管理することをお勧めします。
+> バージョン6.6.0以降、TiDBは[リソース制御](/tidb-resource-control-ru-groups.md)をサポートしています。この機能を使用すると、異なるリソースグループで異なる優先度のSQL文を実行できます。これらのリソースグループに適切なクォータと優先度を設定することで、異なる優先度のSQL文のスケジューリングをより適切に制御できます。リソース制御が有効になっている場合、ステートメントの優先度は適用されなくなります。[リソース制御](/tidb-resource-control-ru-groups.md)を使用して異なるSQL文のリソース使用量を管理することをお勧めします。
 
 ### tidb_foreign_key_check_in_shared_lock <span class="version-mark">New in v8.5.6</span>
 
@@ -3317,19 +3317,19 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 <CustomContent platform="tidb-cloud">
 
-- この変数は、すべてのSQLステートメントをログに記録するかどうかを設定するために使用されます。この機能はデフォルトでは無効になっています。問題箇所を特定する際にすべてのSQLステートメントをトレースする必要がある場合は、この機能を有効にしてください。
+- この変数は、すべてのSQL文をログに記録するかどうかを設定するために使用されます。この機能はデフォルトでは無効になっています。問題箇所を特定する際にすべてのSQL文をトレースする必要がある場合は、この機能を有効にしてください。
 
 </CustomContent>
 
 <CustomContent platform="tidb">
 
-- この変数は、すべてのSQLステートメントを[ログ](/tidb-configuration-file.md#logfile)に記録するかどうかを設定するために使用されます。この機能はデフォルトでは無効になっています。保守担当者が問題箇所を特定する際にすべてのSQLステートメントを追跡する必要がある場合は、この機能を有効にできます。
+- この変数は、すべてのSQL文を[ログ](/tidb-configuration-file.md#logfile)に記録するかどうかを設定するために使用されます。この機能はデフォルトでは無効になっています。保守担当者が問題箇所を特定する際にすべてのSQL文を追跡する必要がある場合は、この機能を有効にできます。
 
 - [`log.general-log-file`](/tidb-configuration-file.md#general-log-file-new-in-v800)設定項目が指定されている場合、一般ログは指定されたファイルに個別に書き込まれます。
 
 - [`log.format`](/tidb-configuration-file.md#format)設定項目を使用すると、ログメッセージのフォーマット、一般的なログを別のファイルに保存するか、他のログと結合するかを設定できます。
 
-- [`tidb_redact_log`](#tidb_redact_log)変数を使用すると、一般ログに記録されたSQLステートメントを秘匿化できます。
+- [`tidb_redact_log`](#tidb_redact_log)変数を使用すると、一般ログに記録されたSQL文を秘匿化できます。
 
 - 一般ログには、正常に実行されたステートメントのみが記録されます。失敗したステートメントは一般ログには記録されず、代わりにTiDBログに`command dispatched failed`メッセージとともに記録されます。
 
@@ -3339,11 +3339,11 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
     - `user` : 現在のセッションユーザー。
     - `schemaVersion` : 現在のスキーマバージョン。
     - `txnStartTS` : 現在のトランザクションが開始されたタイムスタンプ。
-    - `forUpdateTS` :悲観的トランザクションモードでは、 `forUpdateTS`は SQL ステートメントの現在のタイムスタンプです。悲観的トランザクションで書き込み競合が発生すると、TiDB は現在実行中の SQL ステートメントを再試行し、このタイムスタンプを更新します。再試行回数は[`max-retry-count`](/tidb-configuration-file.md#max-retry-count)で設定できます。楽観的トランザクションモデルでは、 `forUpdateTS`は`txnStartTS`と同等です。
+    - `forUpdateTS` :悲観的トランザクションモードでは、 `forUpdateTS`は SQL文の現在のタイムスタンプです。悲観的トランザクションで書き込み競合が発生すると、TiDB は現在実行中の SQL文を再試行し、このタイムスタンプを更新します。再試行回数は[`max-retry-count`](/tidb-configuration-file.md#max-retry-count)で設定できます。楽観的トランザクションモデルでは、 `forUpdateTS`は`txnStartTS`と同等です。
     - `isReadConsistency` : 現在のトランザクション分離レベルがRead Committed (RC) かどうかを示します。
     - `current_db` : 現在のデータベースの名前。
     - `txn_mode` : トランザクションモード。値のオプションは`OPTIMISTIC`と`PESSIMISTIC`です。
-    - `sql` : 現在のクエリに対応する SQL ステートメント。
+    - `sql` : 現在のクエリに対応する SQL文。
 
 </CustomContent>
 
@@ -3369,7 +3369,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - 型: 整数
 - デフォルト値: `0`
 - 範囲: `[0, 15]`
-- この変数は、新しく作成されたテーブルのデフォルトの行分割シャード数を設定するために使用されます。この変数がゼロ以外の値に設定されている場合、TiDB は`PRE_SPLIT_REGIONS`の使用を許可するテーブル (たとえば、 `NONCLUSTERED`テーブル) に、 `CREATE TABLE`ステートメントの実行時にこの属性を自動的に適用します。詳細については、 [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)を参照してください。この変数は通常、 [`tidb_shard_row_id_bits`](/system-variables.md#tidb_shard_row_id_bits-new-in-v840)と組み合わせて、新しいテーブルをシャーディングし、新しいテーブルのリージョンを事前に分割するために使用されます。
+- この変数は、新しく作成されたテーブルのデフォルトの行分割シャード数を設定するために使用されます。この変数がゼロ以外の値に設定されている場合、TiDB は`PRE_SPLIT_REGIONS`の使用を許可するテーブル (たとえば、 `NONCLUSTERED`テーブル) に、 `CREATE TABLE`文の実行時にこの属性を自動的に適用します。詳細については、 [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)を参照してください。この変数は通常、 [`tidb_shard_row_id_bits`](/system-variables.md#tidb_shard_row_id_bits-new-in-v840)と組み合わせて、新しいテーブルをシャーディングし、新しいテーブルのリージョンを事前に分割するために使用されます。
 
 ### tidb_generate_binary_plan <span class="version-mark">New in v6.2.0</span>
 
@@ -3541,7 +3541,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - 型: Boolean
 - デフォルト値: `OFF`
 - この変数は、プリペアドステートメントキャッシュを閉じるコマンドを無視するかどうかを設定するために使用されます。
-- この変数が`ON`に設定されている場合、バイナリプロトコルの`COM_STMT_CLOSE`コマンドとテキストプロトコルの[`DEALLOCATE PREPARE`](/sql-statements/sql-statement-deallocate.md)ステートメントは無視されます。詳細については、 [`COM_STMT_CLOSE`コマンドと`DEALLOCATE PREPARE`ステートメントは無視してください](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement)を参照してください。
+- この変数が`ON`に設定されている場合、バイナリプロトコルの`COM_STMT_CLOSE`コマンドとテキストプロトコルの[`DEALLOCATE PREPARE`](/sql-statements/sql-statement-deallocate.md)文は無視されます。詳細については、 [`COM_STMT_CLOSE`コマンドと`DEALLOCATE PREPARE`文は無視してください](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement)を参照してください。
 
 ### tidb_ignore_inlist_plan_digest <span class="version-mark">New in v7.6.0</span>
 
@@ -3621,7 +3621,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - デフォルト値: `hint-only`
 - 値のオプション: `hint-only` 、 `affinity-force` 、 `force`
 - この変数は、TiDB が`IndexLookUp`オペレーターを TiKV にプッシュするかどうか、またプッシュするタイミングを制御します。値のオプションは次のとおりです。
-    - `hint-only` (デフォルト): TiDB は、SQL ステートメントで[`INDEX_LOOKUP_PUSHDOWN`](/optimizer-hints.md#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855)ヒントが明示的に指定されている場合にのみ`IndexLookUp`オペレーターを TiKV にプッシュします。
+    - `hint-only` (デフォルト): TiDB は、SQL 文で[`INDEX_LOOKUP_PUSHDOWN`](/optimizer-hints.md#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855)ヒントが明示的に指定されている場合にのみ`IndexLookUp`オペレーターを TiKV にプッシュします。
     - `affinity-force` : TiDB は、 `AFFINITY`オプションで構成されたテーブルに対してのみプッシュダウンを自動的に有効にします。
     - `force` : TiDB はすべてのテーブルに対して`IndexLookUp`プッシュダウンを有効にします。
 
@@ -3727,10 +3727,10 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - 範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
-- これは読み取り専用変数です。TiDB内部で、最後のDMLステートメントのトランザクション情報を照会するために使用されます。情報には以下が含まれます。
+- これは読み取り専用変数です。TiDB内部で、最後のDML文のトランザクション情報を照会するために使用されます。情報には以下が含まれます。
     - `txn_scope` : トランザクションの範囲。 `global`または`local`のいずれかになります。
     - `start_ts` : トランザクションの開始タイムスタンプ。
-    - `for_update_ts` : 直前に実行された DML ステートメントの`for_update_ts`です。これは TiDB の内部用語で、テストに使用されます。通常、この情報は無視して構いません。
+    - `for_update_ts` : 直前に実行された DML文の`for_update_ts`です。これは TiDB の内部用語で、テストに使用されます。通常、この情報は無視して構いません。
     - `error` : エラーメッセージ（存在する場合）。
     - `ru_consumption` : ステートメントの実行に消費された[RU](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) 。
 
@@ -3798,8 +3798,8 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - 型: Boolean
 - デフォルト値: `ON`
 - この変数は、以下のシナリオで特定のキーをロックするかどうかを制御するために使用されます。値が`ON`に設定されている場合、これらのキーはロックされます。値が`OFF`に設定されている場合、これらのキーはロックされません。
-    - `INSERT IGNORE`および`REPLACE`ステートメントに重複するキーがあります。v6.1.6 より前は、これらのキーはロックされていませんでした。この問題は[#42121](https://github.com/pingcap/tidb/issues/42121)で修正されました。
-    - `UPDATE`ステートメント内の一意キーは、キーの値が変更されない場合にロックされます。v6.5.2 より前は、これらのキーはロックされていませんでした。この問題は[#36438](https://github.com/pingcap/tidb/issues/36438)で修正されました。
+    - `INSERT IGNORE`および`REPLACE`文に重複するキーがあります。v6.1.6 より前は、これらのキーはロックされていませんでした。この問題は[#42121](https://github.com/pingcap/tidb/issues/42121)で修正されました。
+    - `UPDATE`文内の一意キーは、キーの値が変更されない場合にロックされます。v6.5.2 より前は、これらのキーはロックされていませんでした。この問題は[#36438](https://github.com/pingcap/tidb/issues/36438)で修正されました。
 - トランザクションの一貫性と合理性を維持するため、この値を変更することは推奨されません。TiDB のアップグレードによってこれら 2 つの修正が原因で深刻なパフォーマンスの問題が発生し、ロックなしの動作が許容できる場合 (前述の問題を参照)、この変数を`OFF`に設定できます。
 
 ### tidb_log_file_max_days <span class="version-mark">New in v5.3.0</span>
@@ -4014,13 +4014,13 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 <CustomContent platform="tidb">
 
-- 単一の SQL ステートメントが`tidb_mem_quota_query`で指定されたメモリクォータを超え、ディスクに書き出すことができない場合に TiDB が実行する操作を指定します。詳細は[TiDBメモリ制御](/configure-memory-usage.md)を参照してください。
+- 単一の SQL文が`tidb_mem_quota_query`で指定されたメモリクォータを超え、ディスクに書き出すことができない場合に TiDB が実行する操作を指定します。詳細は[TiDBメモリ制御](/configure-memory-usage.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- 単一の SQL ステートメントが[`tidb_mem_quota_query`](#tidb_mem_quota_query)で指定されたメモリクォータを超え、ディスクに書き出すことができない場合に、TiDB が実行する操作を指定します。
+- 単一の SQL文が[`tidb_mem_quota_query`](#tidb_mem_quota_query)で指定されたメモリクォータを超え、ディスクに書き出すことができない場合に、TiDB が実行する操作を指定します。
 
 </CustomContent>
 
@@ -4114,7 +4114,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - 型: 整数
 - デフォルト値: `0`
 - この変数はTiDBの内部テストに使用されます。この変数を設定することは**推奨されません**。この変数を有効にすると、TiDBのパフォーマンスに影響が出ます。
-- このパラメータを設定すると、TiDB はメモリデバッグモードに入り、メモリ追跡の精度を分析します。TiDB は、後続の SQL ステートメントの実行中に頻繁に GC をトリガーし、実際のメモリ使用量とメモリ統計を比較します。現在のメモリ使用量が`tidb_memory_debug_mode_min_heap_inuse`より大きく、メモリ統計の誤差が`tidb_memory_debug_mode_alarm_ratio`を超える場合、TiDB は関連するメモリ情報をログとファイルに出力します。
+- このパラメータを設定すると、TiDB はメモリデバッグモードに入り、メモリ追跡の精度を分析します。TiDB は、後続の SQL文の実行中に頻繁に GC をトリガーし、実際のメモリ使用量とメモリ統計を比較します。現在のメモリ使用量が`tidb_memory_debug_mode_min_heap_inuse`より大きく、メモリ統計の誤差が`tidb_memory_debug_mode_alarm_ratio`を超える場合、TiDB は関連するメモリ情報をログとファイルに出力します。
 
 ### tidb_memory_usage_alarm_ratio
 
@@ -4280,8 +4280,8 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、非トランザクションDMLステートメントでエラーが発生した場合に、直ちにエラーを返すかどうかを指定します。
-- 値が`OFF`に設定されている場合、非トランザクション DML ステートメントは最初のエラーで直ちに停止し、エラーを返します。以降のすべてのバッチはキャンセルされます。
+- この変数は、非トランザクションDML文でエラーが発生した場合に、直ちにエラーを返すかどうかを指定します。
+- 値が`OFF`に設定されている場合、非トランザクション DML文は最初のエラーで直ちに停止し、エラーを返します。以降のすべてのバッチはキャンセルされます。
 - 値が`ON`に設定されている場合、バッチ処理中にエラーが発生すると、すべてのバッチ処理が完了するまで、後続のバッチ処理が継続して実行されます。実行中に発生したすべてのエラーは、結果としてまとめて返されます。
 
 ### tidb_opt_agg_push_down
@@ -4452,7 +4452,7 @@ mysql> desc select count(distinct a) from test.t;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は`EXPLAIN`ステートメントが最適化段階で展開可能な定数サブクエリの実行を無効にするかどうかを制御するために使用されます。この変数が`OFF`に設定されている場合、 `EXPLAIN`ステートメントは最適化段階でサブクエリを事前に展開します。この変数が`ON`に設定されている場合、 `EXPLAIN`ステートメントは最適化段階でサブクエリを展開しません。詳細については、[サブクエリ展開を無効にする](/explain-walkthrough.md#disable-the-early-execution-of-subqueries)を参照してください。
+- この変数は`EXPLAIN`文が最適化段階で展開可能な定数サブクエリの実行を無効にするかどうかを制御するために使用されます。この変数が`OFF`に設定されている場合、 `EXPLAIN`文は最適化段階でサブクエリを事前に展開します。この変数が`ON`に設定されている場合、 `EXPLAIN`文は最適化段階でサブクエリを展開しません。詳細については、[サブクエリ展開を無効にする](/explain-walkthrough.md#disable-the-early-execution-of-subqueries)を参照してください。
 
 ### tidb_opt_enable_late_materialization <span class="version-mark">New in v7.0.0</span>
 
@@ -4462,7 +4462,7 @@ mysql> desc select count(distinct a) from test.t;
 - 型: Boolean
 - デフォルト値: `ON`
 - この変数は、 [TiFlashの遅延マテリアライゼーション](/tiflash/tiflash-late-materialization.md)機能を有効にするかどうかを制御するために使用されます。 TiFlash の遅延マテリアライゼーションは[高速スキャンモード](/tiflash/use-fastscan.md)では有効にならないことに注意してください。
-- この変数を`OFF`に設定してTiFlash の遅延マテリアライゼーション機能を無効にした場合、フィルタ条件（`WHERE`句）を含む`SELECT`ステートメントを処理するために、 TiFlash はフィルタリングの前に必要な列のすべてのデータをスキャンします。この変数を`ON`に設定してTiFlash の遅延マテリアライゼーション機能を有効にすると、 TiFlash は、TableScan オペレーターにプッシュダウンされたフィルタ条件に関連する列データを最初にスキャンし、条件を満たす行をフィルタリングしてから、これらの行の他の列のデータをスキャンしてさらに計算を行うことができ、これにより、データ処理の IO スキャンと計算を削減できます。
+- この変数を`OFF`に設定してTiFlash の遅延マテリアライゼーション機能を無効にした場合、フィルタ条件（`WHERE`句）を含む`SELECT`文を処理するために、 TiFlash はフィルタリングの前に必要な列のすべてのデータをスキャンします。この変数を`ON`に設定してTiFlash の遅延マテリアライゼーション機能を有効にすると、 TiFlash は、TableScan オペレーターにプッシュダウンされたフィルタ条件に関連する列データを最初にスキャンし、条件を満たす行をフィルタリングしてから、これらの行の他の列のデータをスキャンしてさらに計算を行うことができ、これにより、データ処理の IO スキャンと計算を削減できます。
 
 ### tidb_opt_enable_mpp_shared_cte_execution <span class="version-mark">New in v7.2.0</span>
 
@@ -4525,7 +4525,7 @@ mysql> desc select count(distinct a) from test.t;
 - 型: String
 - デフォルト値: `""`
 - この変数は、オプティマイザの内部動作の一部を制御するために使用されます。
-- オプティマイザの動作は、ユーザーシナリオやSQLステートメントによって異なる場合があります。この変数を使用することで、オプティマイザをより細かく制御でき、オプティマイザの動作変更によってアップグレード後に発生するパフォーマンス低下を防ぐことができます。
+- オプティマイザの動作は、ユーザーシナリオやSQL文によって異なる場合があります。この変数を使用することで、オプティマイザをより細かく制御でき、オプティマイザの動作変更によってアップグレード後に発生するパフォーマンス低下を防ぐことができます。
 - より詳細な概要については、[オプティマイザ修正コントロール](/optimizer-fix-controls.md)を参照してください。
 
 </CustomContent>
@@ -4538,7 +4538,7 @@ mysql> desc select count(distinct a) from test.t;
 - 型: String
 - デフォルト値: `""`
 - この変数は、オプティマイザの内部動作の一部を制御するために使用されます。
-- オプティマイザの動作は、ユーザーシナリオやSQLステートメントによって異なる場合があります。この変数を使用することで、オプティマイザをより細かく制御でき、オプティマイザの動作変更によってアップグレード後に発生するパフォーマンス低下を防ぐことができます。
+- オプティマイザの動作は、ユーザーシナリオやSQL文によって異なる場合があります。この変数を使用することで、オプティマイザをより細かく制御でき、オプティマイザの動作変更によってアップグレード後に発生するパフォーマンス低下を防ぐことができます。
 - より詳細な概要については、[オプティマイザ修正コントロール](/optimizer-fix-controls.md)を参照してください。
 
 </CustomContent>
@@ -4662,7 +4662,7 @@ mysql> desc select count(distinct a) from test.t;
 - デフォルト値: `moderate`
 - 指定可能な値: `moderate` 、 `determinate`
 - この変数はオプティマイザの目的を制御します。 `moderate`は、TiDB v7.4.0 より前のバージョンにおけるデフォルトの動作を維持し、オプティマイザはより多くの情報を使用してより良い実行計画を生成しようとします。 `determinate`モードはより保守的になり、実行計画をより安定させます。
-- リアルタイム統計とは、DML ステートメントに基づいて自動的に更新される行の総数と変更された行の数です。この変数が`moderate` (デフォルト) に設定されている場合、TiDB はリアルタイム統計に基づいて実行計画を生成します。この変数が`determinate`に設定されている場合、TiDB は実行計画の生成にリアルタイム統計を使用しないため、実行計画がより安定します。
+- リアルタイム統計とは、DML文に基づいて自動的に更新される行の総数と変更された行の数です。この変数が`moderate` (デフォルト) に設定されている場合、TiDB はリアルタイム統計に基づいて実行計画を生成します。この変数が`determinate`に設定されている場合、TiDB は実行計画の生成にリアルタイム統計を使用しないため、実行計画がより安定します。
 - 長期的に安定したOLTPワークロードを維持する場合、またはユーザーが既存の実行計画に満足している場合は、予期しない実行計画の変更の可能性を減らすために`determinate`モードを使用することをお勧めします。さらに、[`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md)を使用することで、統計情報の変更を防ぎ、実行計画をより安定させることができます。
 
 ### tidb_opt_ordering_index_selectivity_ratio <span class="version-mark">New in v8.0.0</span>
@@ -4679,7 +4679,7 @@ mysql> desc select count(distinct a) from test.t;
 
 - 範囲: `[-1, 1]`
 
-- この変数は、SQL ステートメントに`ORDER BY`および`LIMIT`句がある場合に、SQL ステートメント`ORDER BY`に一致するインデックスの推定行数を制御しますが、一部のフィルタ条件はカバーしません。
+- この変数は、SQL文に`ORDER BY`および`LIMIT`句がある場合に、SQL文`ORDER BY`に一致するインデックスの推定行数を制御しますが、一部のフィルタ条件はカバーしません。
 
 - これは、システム変数[tidb_opt_ordering_index_selectivity_threshold](#tidb_opt_ordering_index_selectivity_threshold-new-in-v700)と同じクエリパターンに対応します。
 
@@ -4789,7 +4789,7 @@ mysql> desc select count(distinct a) from test.t;
 - 型: Float
 - デフォルト値: `0`
 - 範囲: `[0, 1]`
-- この変数は、SQL ステートメントにフィルタ条件を含む`ORDER BY`および`LIMIT`句がある場合に、オプティマイザがインデックスを選択する方法を制御するために使用されます。
+- この変数は、SQL文にフィルタ条件を含む`ORDER BY`および`LIMIT`句がある場合に、オプティマイザがインデックスを選択する方法を制御するために使用されます。
 - このようなクエリの場合、オプティマイザは`ORDER BY`句と`LIMIT`句を満たす対応するインデックスを選択することを検討します（このインデックスがフィルタ条件を満たさない場合でも）。ただし、データ分布の複雑さから、このシナリオではオプティマイザが最適ではないインデックスを選択する可能性があります。
 - この変数はしきい値を表します。フィルタリング条件を満たすインデックスが存在し、その選択性推定値がこのしきい値よりも低い場合、オプティマイザは`ORDER BY`と`LIMIT`を満たすために使用されるインデックスの選択を回避します。代わりに、フィルタリング条件を満たすインデックスを優先します。
 - 例えば、変数が`0`に設定されている場合、オプティマイザはデフォルトの動作を維持します。一方、 `1`に設定されている場合、オプティマイザは常にフィルタ条件を満たすインデックスの選択を優先し、 `ORDER BY`と`LIMIT`両方の句を満たすインデックスの選択を回避します。
@@ -5193,7 +5193,7 @@ SHOW WARNINGS;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、オプティマイザが[不可視インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択できるかどうかを制御します。不可視インデックスは DML ステートメントによって維持されますが、クエリ最適化では使用されません。これは、インデックスを完全に削除する前に二重チェックしたいシナリオで役立ちます。変数が`ON`に設定されている場合、オプティマイザはセッションでクエリ最適化のために不可視インデックスを選択できます。
+- この変数は、オプティマイザが[不可視インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択できるかどうかを制御します。不可視インデックスは DML文によって維持されますが、クエリ最適化では使用されません。これは、インデックスを完全に削除する前に二重チェックしたいシナリオで役立ちます。変数が`ON`に設定されている場合、オプティマイザはセッションでクエリ最適化のために不可視インデックスを選択できます。
 
 ### tidb_opt_write_row_id
 
@@ -5205,7 +5205,7 @@ SHOW WARNINGS;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は`INSERT` 、 `REPLACE` 、および`UPDATE`ステートメントが`_tidb_rowid`列に対して実行されるかどうかを制御するために使用されます。この変数は、TiDBツールを使用してデータをインポートする場合にのみ使用できます。
+- この変数は`INSERT` 、 `REPLACE` 、および`UPDATE`文が`_tidb_rowid`列に対して実行されるかどうかを制御するために使用されます。この変数は、TiDBツールを使用してデータをインポートする場合にのみ使用できます。
 
 ### tidb_opt_hash_agg_cost_factor <span class="version-mark">New in v8.5.3</span>
 
@@ -5471,7 +5471,7 @@ SHOW WARNINGS;
 - 型: Enumeration
 - デフォルト値: `STRICT`
 - 指定可能な値: `STRICT` 、 `IGNORE`
-- この変数は、DDL ステートメントが[SQLで指定された配置ルール](/placement-rules-in-sql.md)を無視するかどうかを制御します。変数値が`IGNORE`の場合、すべての配置ルール オプションは無視されます。
+- この変数は、DDL文が[SQLで指定された配置ルール](/placement-rules-in-sql.md)を無視するかどうかを制御します。変数値が`IGNORE`の場合、すべての配置ルール オプションは無視されます。
 - これは、論理ダンプ/リストアツールが、無効な配置ルールが割り当てられた場合でもテーブルが常に作成できるようにするために使用することを目的としています。これは、mysqldumpがすべてのダンプファイルの先頭に`SET FOREIGN_KEY_CHECKS=0;`を書き込む方法と同様です。
 
 ### `tidb_plan_cache_invalidation_on_fresh_stats` <span class="version-mark">New in v7.1.0</span>
@@ -5570,7 +5570,7 @@ SHOW WARNINGS;
 - デフォルト値: `4096` (4 KiB)
 - 範囲: `[0, 1073741824]`
 - 単位：バイト
-- SQL ステートメントの出力の最大長。ステートメントの出力長が`tidb_query_log_max_len`値よりも大きい場合、ステートメントは切り詰められて出力されます。
+- SQL文の出力の最大長。ステートメントの出力長が`tidb_query_log_max_len`値よりも大きい場合、ステートメントは切り詰められて出力されます。
 - この設定は以前は`tidb.toml`オプション ( `log.query-log-max-len` ) としても利用可能でしたが、TiDB v6.1.0 以降はシステム変数としてのみ使用できます。
 
 ### tidb_rc_read_check_ts <span class="version-mark">New in v6.0.0</span>
@@ -5606,7 +5606,7 @@ SHOW WARNINGS;
 ### tidb_read_consistency <span class="version-mark">New in v5.4.0</span>
 
 - 範囲: セッション
-- ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用: はい ([非トランザクションDMLステートメント](/non-transactional-dml.md)が存在する場合、ヒントを使用してこの変数の値を変更しても有効にならない可能性があることに注意してください。)
+- ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用: はい ([非トランザクションDML文](/non-transactional-dml.md)が存在する場合、ヒントを使用してこの変数の値を変更しても有効にならない可能性があることに注意してください。)
 - 型: String
 - デフォルト値: `strict`
 - この変数は、自動コミット読み取りステートメントの読み取り一貫性を制御するために使用されます。
@@ -5647,7 +5647,7 @@ SHOW WARNINGS;
 - 型: Enumeration
 - デフォルト値: `OFF`
 - 指定可能な値: `OFF` 、 `ON` 、 `MARKER`
-- この変数は、TiDBログおよびスローログに記録されるSQLステートメント内のユーザー情報を非表示にするかどうかを制御します。
+- この変数は、TiDBログおよびスローログに記録されるSQL文内のユーザー情報を非表示にするかどうかを制御します。
 - デフォルト値は`OFF`で、これはユーザー情報が一切処理されないことを意味します。
 - 変数を`ON`に設定すると、ユーザー情報は非表示になります。たとえば、実行された SQL文が`INSERT INTO t VALUES (1,2)`の場合、ログには`INSERT INTO t VALUES (?,?)`として記録されます。
 - 変数を`MARKER`に設定すると、ユーザー情報は`‹ ›`で囲まれます。たとえば、実行される SQL文が`INSERT INTO t VALUES (1,2)`の場合、ステートメントはログに`INSERT INTO t VALUES (‹1›,‹2›)`として記録されます。ユーザーデータに`‹`または`›`が含まれている場合、 `‹`は`‹‹`にエスケープされ、 `›`は`››`にエスケープされます。マークされたログに基づいて、ログを表示する際にマークされた情報を秘匿化するかどうかを決定できます。
@@ -5707,12 +5707,12 @@ SHOW WARNINGS;
     - `tidb_restricted_read_only`が`ON`の場合、 [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)を`OFF`に設定することはできません。
 - TiDB の DBaaS プロバイダーの場合、TiDB クラスタが別のデータベースのダウンストリームデータベースである場合、TiDB クラスタを読み取り専用にするには、 [セキュリティ強化モード](#tidb_enable_enhanced_security)を有効にした上で`tidb_restricted_read_only`を使用する必要がある場合があります。これにより、顧客が[`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)を使用してクラスタを書き込み可能にすることができなくなります。これを実現するには、 [セキュリティ強化モード](#tidb_enable_enhanced_security)を有効にし、 `SYSTEM_VARIABLES_ADMIN`および`RESTRICTED_VARIABLES_ADMIN`権限を持つ管理者ユーザーを使用して`tidb_restricted_read_only`を制御し、データベースユーザーには、 `SUPER`権限を持つルートユーザーを使用して[`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)のみを制御させる必要があります。-   この変数は、クラスタ全体の読み取り専用状態を制御します。変数が`ON`の場合、クラスタ全体のすべての TiDB サーバーが読み取り専用モードになります。この場合、TiDB は`SELECT` 、 `USE` 、 `SHOW` など、データを変更しないステートメントのみを実行します。 `INSERT`や`UPDATE`などの他のステートメントについては、TiDB は読み取り専用モードでの実行を拒否します。
 - この変数を使用して読み取り専用モードを有効にしても、最終的にクラスタ全体が読み取り専用状態になることが保証されるだけです。TiDBクラスタでこの変数の値を変更しても、その変更が他のTiDBサーバーにまだ反映されていない場合、更新されていないTiDBサーバーは読み取り専用モードになり**ません**。
-- TiDB は、SQL ステートメントの実行前に読み取り専用フラグを確認します。v6.2.0 以降では、SQL ステートメントのコミット前にもフラグがチェックされます。これにより、サーバーが読み取り専用モードになった後に、長時間実行される[自動コミット](/transaction-overview.md#autocommit)ステートメントがデータを変更するケースを防ぐことができます。
+- TiDB は、SQL文の実行前に読み取り専用フラグを確認します。v6.2.0 以降では、SQL文のコミット前にもフラグがチェックされます。これにより、サーバーが読み取り専用モードになった後に、長時間実行される[自動コミット](/transaction-overview.md#autocommit)ステートメントがデータを変更するケースを防ぐことができます。
 - この変数が有効になっている場合、TiDB はコミットされていないトランザクションを次のように処理します。
     - コミットされていない読み取り専用トランザクションについては、通常どおりトランザクションをコミットできます。
     - 読み取り専用ではない未コミットのトランザクションの場合、これらのトランザクション内で書き込み操作を実行するSQL文は拒否されます。
     - データが変更された未コミットの読み取り専用トランザクションについては、これらのトランザクションのコミットは拒否されます。
-- 読み取り専用モードが有効になると、 `SUPER`権限を持つユーザーを含め、すべてのユーザーは`RESTRICTED_REPLICA_WRITER_ADMIN`権限が明示的に付与されない限り、データを書き込む可能性のある SQL ステートメントを実行できません。
+- 読み取り専用モードが有効になると、 `SUPER`権限を持つユーザーを含め、すべてのユーザーは`RESTRICTED_REPLICA_WRITER_ADMIN`権限が明示的に付与されない限り、データを書き込む可能性のある SQL文を実行できません。
 
 ### tidb_request_source_type <span class="version-mark">New in v7.4.0</span>
 
@@ -5791,7 +5791,7 @@ SHOW WARNINGS;
 - 型: Enumeration
 - デフォルト値: `""`
 - 指定可能な値: `""` 、 `table` 、 `global`
-- テーブル作成時に`SHARD_ROW_ID_BITS`および`PRE_SPLIT_REGIONS`パラメータが設定されている場合、システムはテーブルの作成が成功すると、自動的に指定された数のリージョンに分割します。この変数は、分割されたリージョンの分散戦略を制御します。TiDB は、選択された分散戦略に基づいてリージョンを処理します。テーブル作成操作は、成功ステータスを返す前に分散処理が完了するまで待機するため、この変数を有効にすると`CREATE TABLE`ステートメントの実行時間が大幅に増加する可能性があることに注意してください。この変数が無効になっている場合と比較すると、実行時間は数倍長くなる可能性があります。可能な値の説明は次のとおりです。
+- テーブル作成時に`SHARD_ROW_ID_BITS`および`PRE_SPLIT_REGIONS`パラメータが設定されている場合、システムはテーブルの作成が成功すると、自動的に指定された数のリージョンに分割します。この変数は、分割されたリージョンの分散戦略を制御します。TiDB は、選択された分散戦略に基づいてリージョンを処理します。テーブル作成操作は、成功ステータスを返す前に分散処理が完了するまで待機するため、この変数を有効にすると`CREATE TABLE`文の実行時間が大幅に増加する可能性があることに注意してください。この変数が無効になっている場合と比較すると、実行時間は数倍長くなる可能性があります。可能な値の説明は次のとおりです。
     - `""` : デフォルト値。テーブル作成後にテーブルのリージョンが分散されないことを示します。
     - `table` : テーブルを作成する際に`PRE_SPLIT_REGIONS`または`SHARD_ROW_ID_BITS`属性を設定した場合、複数のリージョンを事前に分割するシナリオでは、これらのテーブルのリージョンはテーブルの粒度に応じて分散されます。ただし、テーブルを作成する際に上記の属性を設定しない場合、多数のテーブルを迅速に作成するシナリオでは、これらのテーブルのリージョンが少数の TiKV ノードに集中し、リージョンの分布が不均一になります。
     - `global` : TiDB は、新しく作成されたテーブルのリージョンをクラスタ全体のデータ分布に従って分散します。特に、多数のテーブルを迅速に作成する場合、 `global`オプションを使用すると、リージョンが少数の TiKV ノードに過度に集中するのを防ぎ、クラスタ全体にリージョンがよりバランスよく分散されるようにすることができます。
@@ -5835,7 +5835,7 @@ SHOW WARNINGS;
     - メモリサイズの値も設定できます。値の範囲はバイト単位で`0`から`[536870912, 9223372036854775807]`です。単位が「KiB|MiB|GiB|TiB」または「KB|MB|GB|TB」のメモリ形式もサポートされており、たとえば `90GiB` のように指定できます（数値と単位の間にスペースは入れません）。 `0`はメモリ制限なしを意味します。
     - この変数に 512 MiB 未満だが`0`ではないメモリサイズが設定されている場合、TiDB は 512 MiB を実際のサイズとして使用します。
 - この変数は、TiDBインスタンスのメモリ制限を指定します。TiDBのメモリ使用量がこの制限に達すると、TiDBは現在実行中のSQL文のうち、最もメモリ使用量の多い文をキャンセルします。SQL文が正常にキャンセルされた後、TiDBはGolangのガベージコレクション（GC）を呼び出してメモリを解放し、メモリ負荷をできるだけ早く軽減しようとします。
-- [`tidb_server_memory_limit_sess_min_size`](/system-variables.md#tidb_server_memory_limit_sess_min_size-new-in-v640)の制限を超えるメモリ使用量を持つ SQL ステートメントのみが、最初にキャンセルされる SQL ステートメントとして選択されます。
+- [`tidb_server_memory_limit_sess_min_size`](/system-variables.md#tidb_server_memory_limit_sess_min_size-new-in-v640)の制限を超えるメモリ使用量を持つ SQL文のみが、最初にキャンセルされる SQL文として選択されます。
 - 現在、TiDBは一度に1つのSQL文のみをキャンセルします。TiDBがSQL文を完全にキャンセルしてリソースを解放した後も、メモリ使用量がこの変数で設定された制限を超えている場合、TiDBは次のキャンセル操作を開始します。
 
 ### tidb_server_memory_limit_gc_trigger <span class="version-mark">New in v6.4.0</span>
@@ -5862,7 +5862,7 @@ SHOW WARNINGS;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値： `134217728` （128 MiB）
 - 範囲： `[128, 9223372036854775807]` （バイト単位）。単位が「KiB|MiB|GiB|TiB」または「KB|MB|GB|TB」のメモリ形式もサポートされており、たとえば `130MiB` のように指定できます（数値と単位の間にスペースは入れません）。
-- メモリ制限を有効にすると、TiDB は現在のインスタンス上でメモリ使用量が最も高い SQL ステートメントを終了します。この変数は、終了する SQL ステートメントの最小メモリ使用量を指定します。メモリ使用量が低いセッションが多すぎるために TiDB インスタンスのメモリ使用量が制限を超えている場合は、この変数の値を適切に下げることで、より多くのセッションをキャンセルできるようになります。
+- メモリ制限を有効にすると、TiDB は現在のインスタンス上でメモリ使用量が最も高い SQL文を終了します。この変数は、終了する SQL文の最小メモリ使用量を指定します。メモリ使用量が低いセッションが多すぎるために TiDB インスタンスのメモリ使用量が制限を超えている場合は、この変数の値を適切に下げることで、より多くのセッションをキャンセルできるようになります。
 
 ### tidb_service_scope <span class="version-mark">New in v7.4.0</span>
 
@@ -5915,7 +5915,7 @@ SHOW WARNINGS;
 - 型: 整数
 - デフォルト値: `0`
 - 範囲: `[0, 15]`
-- この変数は、新しく作成されたテーブルのデフォルトの行 ID シャード数を設定するために使用されます。この変数にゼロ以外の値を設定すると、TiDB は`SHARD_ROW_ID_BITS`の使用を許可するテーブル (たとえば、 `NONCLUSTERED`テーブル) に対して、 `CREATE TABLE`ステートメントの実行時にこの属性を自動的に適用します。詳細については、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を参照してください。
+- この変数は、新しく作成されたテーブルのデフォルトの行 ID シャード数を設定するために使用されます。この変数にゼロ以外の値を設定すると、TiDB は`SHARD_ROW_ID_BITS`の使用を許可するテーブル (たとえば、 `NONCLUSTERED`テーブル) に対して、 `CREATE TABLE`文の実行時にこの属性を自動的に適用します。詳細については、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を参照してください。
 
 ### tidb_simplified_metrics
 
@@ -6381,12 +6381,12 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - `SUPER`または`SYSTEM_VARIABLES_ADMIN`の権限を持つユーザーは、この変数を変更できます。
 - この変数は、クラスタ全体の読み取り専用状態を制御します。変数が`ON`の場合、クラスタ全体のすべての TiDB サーバーが読み取り専用モードになります。この場合、TiDB は`SELECT` 、 `USE` 、 `SHOW` など、データを変更しないステートメントのみを実行します。 `INSERT`や`UPDATE`などの他のステートメントについては、TiDB は読み取り専用モードでの実行を拒否します。
 - この変数を使用して読み取り専用モードを有効にしても、最終的にクラスタ全体が読み取り専用状態になることが保証されるだけです。TiDBクラスタでこの変数の値を変更しても、その変更が他のTiDBサーバーにまだ反映されていない場合、更新されていないTiDBサーバーは読み取り専用モードになり**ません**。
-- TiDB は、SQL ステートメントの実行前に読み取り専用フラグを確認します。v6.2.0 以降では、SQL ステートメントのコミット前にもフラグがチェックされます。これにより、サーバーが読み取り専用モードになった後に、長時間実行される[自動コミット](/transaction-overview.md#autocommit)ステートメントがデータを変更するケースを防ぐことができます。
+- TiDB は、SQL文の実行前に読み取り専用フラグを確認します。v6.2.0 以降では、SQL文のコミット前にもフラグがチェックされます。これにより、サーバーが読み取り専用モードになった後に、長時間実行される[自動コミット](/transaction-overview.md#autocommit)ステートメントがデータを変更するケースを防ぐことができます。
 - この変数が有効になっている場合、TiDB はコミットされていないトランザクションを次のように処理します。
     - コミットされていない読み取り専用トランザクションについては、通常どおりトランザクションをコミットできます。
     - 読み取り専用ではない未コミットのトランザクションの場合、これらのトランザクション内で書き込み操作を実行するSQL文は拒否されます。
     - データが変更された未コミットの読み取り専用トランザクションについては、これらのトランザクションのコミットは拒否されます。
-- 読み取り専用モードが有効になると、 `SUPER`権限を持つユーザーを含め、すべてのユーザーは`RESTRICTED_REPLICA_WRITER_ADMIN`権限が明示的に付与されない限り、データを書き込む可能性のある SQL ステートメントを実行できません。
+- 読み取り専用モードが有効になると、 `SUPER`権限を持つユーザーを含め、すべてのユーザーは`RESTRICTED_REPLICA_WRITER_ADMIN`権限が明示的に付与されない限り、データを書き込む可能性のある SQL文を実行できません。
 - [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520)システム変数が`ON`に設定されている場合、場合によっては`tidb_super_read_only`は[`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520)の影響を受けます。詳細な影響については、 [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520)の説明を参照してください。
 
 ### tidb_sysdate_is_now <span class="version-mark">New in v6.0.0</span>
@@ -6411,7 +6411,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - デフォルト値: `4`
 - 範囲: `[0, 4294967295]` 。v7.5.0 以前のバージョンの最大値は`256`です。v8.2.0 より前のバージョンでは、最小値は`1`です。 `0`に設定すると、クラスターサイズに基づいて同時実行数が適応的に調整されます。
 - v8.5.7 以降、デフォルト値は`1`から`4`に変更されました。以前のバージョンからクラスターをアップグレードした場合、この変数の値はアップグレード後も変更されません。
-- この変数は、TiDBが内部SQLステートメント（統計情報の自動更新など）を実行する際に実行されるスキャン操作の同時実行数を設定するために使用されます。
+- この変数は、TiDBが内部SQL文（統計情報の自動更新など）を実行する際に実行されるスキャン操作の同時実行数を設定するために使用されます。
 
 ### tidb_table_cache_lease <span class="version-mark">New in v6.0.0</span>
 
@@ -6450,13 +6450,13 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 <CustomContent platform="tidb">
 
-- この変数は、 [Top SQL](/dashboard/top-sql.md)が1分あたりに収集するSQLステートメントタイプの最大数を制御するために使用されます。
+- この変数は、 [Top SQL](/dashboard/top-sql.md)が1分あたりに収集するSQL文タイプの最大数を制御するために使用されます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- この変数は、 [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql)が1分あたりに収集するSQLステートメントタイプの最大数を制御するために使用されます。
+- この変数は、 [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql)が1分あたりに収集するSQL文タイプの最大数を制御するために使用されます。
 
 </CustomContent>
 
@@ -6479,13 +6479,13 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 <CustomContent platform="tidb">
 
-- この変数は、負荷に最も大きく寄与するSQLステートメント（つまり、上位N個）を、1分あたり[Top SQL](/dashboard/top-sql.md)で記録する数を制御するために使用されます。
+- この変数は、負荷に最も大きく寄与するSQL文（つまり、上位N個）を、1分あたり[Top SQL](/dashboard/top-sql.md)で記録する数を制御するために使用されます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- この変数は、負荷に最も大きく寄与するSQLステートメント（つまり、上位N個）を、1分あたり[Top SQL](https://docs.pingcap.com/tidb/stable/top-sql)で記録する数を制御するために使用されます。
+- この変数は、負荷に最も大きく寄与するSQL文（つまり、上位N個）を、1分あたり[Top SQL](https://docs.pingcap.com/tidb/stable/top-sql)で記録する数を制御するために使用されます。
 
 </CustomContent>
 
@@ -6500,7 +6500,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **Warning:**
 >
-> この変数を無効にすると、TiDB はメモリ使用量を正確に追跡できず、対応する SQL ステートメントのメモリ使用量を制御できなくなる可能性があります。
+> この変数を無効にすると、TiDB はメモリ使用量を正確に追跡できず、対応する SQL文のメモリ使用量を制御できなくなる可能性があります。
 
 ### tidb_tso_client_batch_max_wait_time <span class="version-mark">New in v5.3.0</span>
 
@@ -6583,7 +6583,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `0`
 - 範囲: `[0, 9223372036854775807]`
-- この変数は、各 TiDB ノード上の TTL ジョブにおける`DELETE`ステートメントのレートを制限するために使用されます。この値は、TTL ジョブ内の単一ノードで 1 秒あたりに許可される`DELETE`ステートメントの最大数を表します。この変数が`0`に設定されている場合、制限は適用されません。詳細については、[TTL (Time to Live)](/time-to-live.md)を参照してください。
+- この変数は、各 TiDB ノード上の TTL ジョブにおける`DELETE`文のレートを制限するために使用されます。この値は、TTL ジョブ内の単一ノードで 1 秒あたりに許可される`DELETE`文の最大数を表します。この変数が`0`に設定されている場合、制限は適用されません。詳細については、[TTL (Time to Live)](/time-to-live.md)を参照してください。
 
 ### tidb_ttl_delete_batch_size <span class="version-mark">New in v6.5.0</span>
 
@@ -6795,9 +6795,9 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
-- リージョンの分散には通常長い時間がかかりますが、これはPDスケジューリングとTiKVの負荷によって決まります。この変数は`SPLIT REGION`ステートメントの実行時に、すべてのリージョンの分散が完了した後に結果をクライアントに返すかどうかを設定するために使用されます。
-    - `ON`は、 `SPLIT REGIONS`ステートメントがすべてのリージョンが分散されるまで待機することを要求します。
-    - `OFF`は`SPLIT REGIONS`ステートメントがすべてのリージョンの散布を完了する前に戻ることを許可します。
+- リージョンの分散には通常長い時間がかかりますが、これはPDスケジューリングとTiKVの負荷によって決まります。この変数は`SPLIT REGION`文の実行時に、すべてのリージョンの分散が完了した後に結果をクライアントに返すかどうかを設定するために使用されます。
+    - `ON`は、 `SPLIT REGIONS`文がすべてのリージョンが分散されるまで待機することを要求します。
+    - `OFF`は`SPLIT REGIONS`文がすべてのリージョンの分散を完了する前に戻ることを許可します。
 - リージョンを分散させる場合、分散対象のリージョンの書き込みおよび読み取りパフォーマンスに影響が出る可能性があることに注意してください。バッチ書き込みやデータインポートのシナリオでは、リージョンの分散処理が完了してからデータをインポートすることをお勧めします。
 
 ### tidb_wait_split_region_timeout
@@ -6812,7 +6812,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - デフォルト値: `300`
 - 範囲: `[1, 2147483647]`
 - 単位：秒
-- この変数は`SPLIT REGION`ステートメントの実行タイムアウトを設定するために使用されます。ステートメントが指定された時間内に完全に実行されない場合、タイムアウトエラーが返されます。
+- この変数は`SPLIT REGION`文の実行タイムアウトを設定するために使用されます。ステートメントが指定された時間内に完全に実行されない場合、タイムアウトエラーが返されます。
 
 ### tidb_window_concurrency <span class="version-mark">New in v4.0</span>
 

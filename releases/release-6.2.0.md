@@ -20,15 +20,15 @@ TiDBバージョン: 6.2.0-DMR
 - TiDB の[ロックビュー](/information-schema/information-schema-data-lock-waits.md)機能は、楽観的トランザクションの待機情報の表示をサポートし、ロック競合の迅速な特定を容易にします。
 - TiFlash は[ストレージフォーマットの新しいバージョン](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)をサポートし、安定性とパフォーマンスを強化します。
 - [きめ細かいシャッフル機能](/system-variables.md#tiflash_fine_grained_shuffle_batch_size-new-in-v620)ウィンドウ関数を複数のスレッドで並列実行できます。
-- 新しい並行DDLフレームワーク：DDLステートメントのブロックが減り、実行効率が向上します。
+- 新しい並行DDLフレームワーク：DDL文のブロックが減り、実行効率が向上します。
 - TiKV は[CPU使用率を自動的に調整する](/tikv-configuration-file.md#background-quota-limiter)をサポートしており、安定した効率的なデータベース運用を保証します。
 - [特定時点リカバリ（PITR）](/br/backup-and-restore-overview.md)は、過去の任意の時点から TiDB クラスターのスナップショットを新しいクラスターに復元するために導入されました。
-- TiDB Lightning は、クラスターレベルではなく、物理インポートモードでテーブル[テーブルレベルでのスケジューリングを一時停止する](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import)をサポートしています。
-- BR は[ユーザーおよび権限データの復元](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)サポートしており、バックアップと復元がよりスムーズになります。
-- TiCDC[特定の種類のDDLイベントをフィルタリングする](/ticdc/ticdc-filter.md)フィルタリングすることをサポートすることで、より多くのデータレプリケーションシナリオを可能にします。
+- TiDB Lightning は、クラスターレベルではなく、物理インポートモードで[テーブルレベルでのスケジューリングを一時停止する](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import)ことをサポートしています。
+- BR は[ユーザーおよび権限データの復元](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)をサポートしており、バックアップと復元がよりスムーズになります。
+- TiCDC は、[特定の種類のDDLイベントをフィルタリングする](/ticdc/ticdc-filter.md)ことをサポートすることで、より多くのデータレプリケーションシナリオを可能にします。
 - [`SAVEPOINT`機構](/sql-statements/sql-statement-savepoint.md)がサポートされており、トランザクション内のロールバックポイントを柔軟に制御できます。
-- TiDB は[1つの`ALTER TABLE`ステートメントだけで、複数の列またはインデックスの追加、削除、変更を行う](/sql-statements/sql-statement-alter-table.md)サポートしています。
-- [クラスター間RawKV複製](/tikv-configuration-file.md#api-version-new-in-v610)サポートされるようになりました。
+- TiDB は[1つの`ALTER TABLE`文だけで、複数の列またはインデックスの追加、削除、変更を行う](/sql-statements/sql-statement-alter-table.md)ことをサポートしています。
+- [クラスター間RawKV複製](/tikv-configuration-file.md#api-version-new-in-v610)がサポートされるようになりました。
 
 ## 新機能 {#new-features}
 
@@ -38,7 +38,7 @@ TiDBバージョン: 6.2.0-DMR
 
     TiFlashのバックエンドは、特定の条件に基づいて物理データを自動的に圧縮し、不要なデータの蓄積を減らし、データストレージ構造を最適化します。
 
-    TiFlashテーブルには、データ圧縮が自動的にトリガーされる前に、一定量の不要なデータが含まれていることがよくあります。この機能を使用すると、適切なタイミングを選択してSQLステートメントを手動で実行し、 TiFlash内の物理データを即座に圧縮できるため、ストレージ容量の使用量を削減し、クエリのパフォーマンスを向上させることができます。この機能はTiDB v6.1では実験的でしたが、TiDB v6.2.0で一般提供（GA）となりました。
+    TiFlashテーブルには、データ圧縮が自動的にトリガーされる前に、一定量の不要なデータが含まれていることがよくあります。この機能を使用すると、適切なタイミングを選択してSQL文を手動で実行し、 TiFlash内の物理データを即座に圧縮できるため、ストレージ容量の使用量を削減し、クエリのパフォーマンスを向上させることができます。この機能はTiDB v6.1では実験的でしたが、TiDB v6.2.0で一般提供（GA）となりました。
 
     [ユーザー向けドキュメント](/sql-statements/sql-statement-alter-table-compact.md#alter-table--compact) [#4145](https://github.com/pingcap/tiflash/issues/4145) @[breezewish](https://github.com/breezewish)
 
@@ -60,7 +60,7 @@ TiDBバージョン: 6.2.0-DMR
 
 - TiDB Dashboardはビジュアル実行計画をサポートしています
 
-    TiDB Dashboardは、SQLステートメントページとモニタリングページを通じて、視覚的な実行計画と基本的な診断サービスを提供します。この機能により、クエリプランの各ステップを特定するための新しい視点が得られます。そのため、クエリ実行計画のすべての痕跡をより直感的に把握できます。
+    TiDB Dashboardは、SQL Statementsページとモニタリングページを通じて、視覚的な実行計画と基本的な診断サービスを提供します。この機能により、クエリプランの各ステップを特定するための新しい視点が得られます。そのため、クエリ実行計画のすべての痕跡をより直感的に把握できます。
 
     この機能は、複雑で大規模なクエリの実行方法を学習する際に特に役立ちます。また、TiDB Dashboardは各クエリ実行計画について、実行の詳細を自動的に分析し、潜在的な問題点を特定し、特定のクエリプランの実行時間を短縮するための最適化提案を提供します。
 
@@ -100,7 +100,7 @@ TiDBバージョン: 6.2.0-DMR
 
 - TiDBは同時DDL操作をサポートしています
 
-    TiDB v6.2.0では、新しい同時実行DDLフレームワークが導入されました。これにより、異なるテーブルオブジェクトに対してDDLステートメントを同時実行できるようになり、他のテーブルに対するDDL操作によってDDL操作がブロックされる問題が修正されました。さらに、TiDBは、複数のテーブルにインデックスを追加したり、列の型を変更したりする際に、同時DDL実行をサポートします。これにより、DDL実行の効率が向上します。
+    TiDB v6.2.0では、新しい同時実行DDLフレームワークが導入されました。これにより、異なるテーブルオブジェクトに対してDDL文を同時実行できるようになり、他のテーブルに対するDDL操作によってDDL操作がブロックされる問題が修正されました。さらに、TiDBは、複数のテーブルにインデックスを追加したり、列の型を変更したりする際に、同時DDL実行をサポートします。これにより、DDL実行の効率が向上します。
 
     [#32031](https://github.com/pingcap/tidb/issues/32031) @[wjhuang2016](https://github.com/wjhuang2016)
 
@@ -162,9 +162,9 @@ TiDBバージョン: 6.2.0-DMR
 
 ### MySQLとの互換性 {#mysql-compatibility}
 
-- TiDBは、単一の`ALTER TABLE`ステートメントで複数の列またはインデックスを変更することをサポートしています。
+- TiDBは、単一の`ALTER TABLE`文で複数の列またはインデックスを変更することをサポートしています。
 
-    バージョン6.2.0より前は、TiDBは単一のDDL変更のみをサポートしていたため、異種データベースを移行する際にDDL操作の互換性が損なわれ、複雑なDDLステートメントをTiDBがサポートする複数の単純なDDLステートメントに変換するには余分な労力が必要でした。さらに、一部のユーザーはORMフレームワークを使用してSQLでアセンブリを作成していたため、SQLの互換性の問題も発生していました。バージョン6.2.0以降、TiDBは単一のSQLステートメントで複数のスキーマオブジェクトを変更できるようになり、ユーザーにとってSQLの実装が容易になり、使いやすさが向上しました。
+    バージョン6.2.0より前は、TiDBは単一のDDL変更のみをサポートしていたため、異種データベースを移行する際にDDL操作の互換性が損なわれ、複雑なDDL文をTiDBがサポートする複数の単純なDDL文に変換するには余分な労力が必要でした。さらに、一部のユーザーはORMフレームワークを使用してSQLでアセンブリを作成していたため、SQLの互換性の問題も発生していました。バージョン6.2.0以降、TiDBは単一のSQL文で複数のスキーマオブジェクトを変更できるようになり、ユーザーにとってSQLの実装が容易になり、使いやすさが向上しました。
 
     [ユーザー向けドキュメント](/sql-statements/sql-statement-alter-table.md) [#14766](https://github.com/pingcap/tidb/issues/14766) @[tangenta](https://github.com/tangenta)
 
@@ -251,7 +251,7 @@ TiDBバージョン: 6.2.0-DMR
 | ----------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [tidb_enable_new_cost_interface](/system-variables.md#tidb_enable_new_cost_interface-new-in-v620)                       | 新しく追加された | この変数は[コストモデルの実装をリファクタリングしました](/cost-model.md#cost-model-version-2)を有効にするかどうかを制御します。                                                                                                                          |
 | [tidb_cost_model_version](/system-variables.md#tidb_cost_model_version-new-in-v620)                                     | 新しく追加された | TiDBは、物理最適化の際にインデックスと演算子を選択するためにコストモデルを使用します。この変数は、コストモデルのバージョンを選択するために使用されます。TiDB v6.2.0では、内部テストで以前のバージョンよりも精度が向上したコストモデルバージョン2が導入されました。                                                                    |
-| tidb_enable_concurrent_ddl                                                                                              | 新しく追加された | この変数は、TiDBが同時DDLステートメントを使用することを許可するかどうかを制御します。この変数は変更しないでください。この変数を無効にすると、リスクは不明であり、クラスタのメタデータが破損する可能性があります。                                                                                                 |
+| tidb_enable_concurrent_ddl                                                                                              | 新しく追加された | この変数は、TiDBが同時DDL文を使用することを許可するかどうかを制御します。この変数は変更しないでください。この変数を無効にすると、リスクは不明であり、クラスタのメタデータが破損する可能性があります。                                                                                                 |
 | [tiflash_fine_grained_shuffle_stream_count](/system-variables.md#tiflash_fine_grained_shuffle_stream_count-new-in-v620) | 新しく追加された | この変数は、ウィンドウ関数が実行のためにTiFlashにプッシュダウンされる際の、ウィンドウ関数実行の並行レベルを制御します。                                                                                                                                              |
 | [tiflash_fine_grained_shuffle_batch_size](/system-variables.md#tiflash_fine_grained_shuffle_batch_size-new-in-v620)     | 新しく追加された | 細粒度シャッフルが有効になっている場合、 TiFlashにプッシュダウンされるウィンドウ関数を並列実行できます。この変数は、送信側から送信されるデータのバッチサイズを制御します。送信側は、累積行数がこの値を超えた時点でデータを送信します。                                                                                      |
 | [tidb_default_string_match_selectivity](/system-variables.md#tidb_default_string_match_selectivity-new-in-v620)         | 新しく追加された | この変数は、行数を推定する際のフィルタ条件における`like` 、 `rlike` 、および`regexp`関数のデフォルトの選択性を設定するために関数。また、この変数は、これらの関数の推定を支援するために TopN を有効にするかどうかも制御します。                                                                               |
@@ -261,7 +261,7 @@ TiDBバージョン: 6.2.0-DMR
 | [tidb_enable_noop_variables](/system-variables.md#tidb_enable_noop_variables-new-in-v620)                               | 新しく追加された | この変数は`noop`の結果に`SHOW [GLOBAL] VARIABLES` 変数を表示するかどうかを制御します。                                                                                                                                                |
 | [tidb_min_paging_size](/system-variables.md#tidb_min_paging_size-new-in-v620)                                           | 新しく追加された | この変数は、コプロセッサのページング要求処理中に処理される行の最大数を設定するために使用されます。                                                                                                                                                            |
 | [tidb_txn_commit_batch_size](/system-variables.md#tidb_txn_commit_batch_size-new-in-v620)                               | 新しく追加された | この変数は、TiDBがTiKVに送信するトランザクションコミット要求のバッチサイズを制御するために使用されます。                                                                                                                                                     |
-| tidb_enable_change_multi_schema                                                                                         | 削除済み     | この変数は、v6.2.0 以降では、デフォルトで 1つの`ALTER TABLE`ステートメントで複数の列またはインデックスを変更できるため、削除されます。                                                                                                                              |
+| tidb_enable_change_multi_schema                                                                                         | 削除済み     | この変数は、v6.2.0 以降では、デフォルトで 1つの`ALTER TABLE`文で複数の列またはインデックスを変更できるため、削除されます。                                                                                                                              |
 | [tidb_enable_outer_join_reorder](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610)                       | 変更     | この変数は、TiDB の結合したテーブルの再配置アルゴリズムが Outer Join をサポートするかどうかを制御します。v6.1.0 では、デフォルト値は`ON`であり、これは Join Reorder の Outer Join のサポートがデフォルトで有効になっていることを意味します。v6.2.0 以降では、デフォルト値は`OFF`であり、これはサポートがデフォルトで無効になっていることを意味します。 |
 
 ### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
@@ -304,9 +304,9 @@ TiDBバージョン: 6.2.0-DMR
 
 - TiFlash `format_version` `4`から`3`にダウングレードすることはできません。詳細については、 [TiFlashアップグレードガイド](/tiflash-upgrade-guide.md)を参照してください。
 - バージョン6.2.0以降では、デフォルト値の`false`を`dt_enable_logical_split`のままにして、 `true`に変更しないことを強くお勧めします。詳細は、既知の問題[#5576](https://github.com/pingcap/tiflash/issues/5576)を参照してください。
-- バックアップクラスタにTiFlashレプリカがある場合、PITR を実行すると、リストアクラスタにはTiFlashレプリカ内のデータが含まれません。TiFlash レプリカからデータをリストアするには、 TiFlashレプリカを手動で構成する必要があります。 `exchange partition` DDL ステートメントを実行すると、PITR が失敗する可能性があります。アップストリームデータベースが TiDB Lightning の物理インポートモードを使用してデータをインポートする場合、ログバックアップでデータをバックアップできません。データインポート後にフルバックアップを実行することをお勧めします。PITR のその他の互換性の問題については、 [PITRの制限](/br/backup-and-restore-overview.md#before-you-use)を参照してください。
+- バックアップクラスタにTiFlashレプリカがある場合、PITR を実行すると、リストアクラスタにはTiFlashレプリカ内のデータが含まれません。TiFlash レプリカからデータをリストアするには、 TiFlashレプリカを手動で構成する必要があります。 `exchange partition` DDL 文を実行すると、PITR が失敗する可能性があります。アップストリームデータベースが TiDB Lightning の物理インポートモードを使用してデータをインポートする場合、ログバックアップでデータをバックアップできません。データインポート後にフルバックアップを実行することをお勧めします。PITR のその他の互換性の問題については、 [PITRの制限](/br/backup-and-restore-overview.md#before-you-use)を参照してください。
 - TiDB v6.2.0以降では、データ復元時に`mysql`パラメータを指定することで`--with-sys-table=true`スキーマのテーブルを復元できます。
-- `ALTER TABLE`ステートメントを実行して複数の列またはインデックスを追加、削除、または変更する場合、TiDB は同じ DDL ステートメントの変更内容に関わらず、ステートメント実行前後のテーブルを比較してテーブルの一貫性をチェックします。DDL の実行順序は、シナリオによっては MySQL と完全には互換性がない場合があります。
+- `ALTER TABLE`文を実行して複数の列またはインデックスを追加、削除、または変更する場合、TiDB は同じ DDL文の変更内容に関わらず、ステートメント実行前後のテーブルを比較してテーブルの一貫性をチェックします。DDL の実行順序は、シナリオによっては MySQL と完全には互換性がない場合があります。
 - TiDBコンポーネントがv6.2.0以降の場合、TiKVコンポーネントはv6.2.0より前のバージョンであってはなりません。
 - TiKV は[動的構成](/dynamic-config.md#modify-tikv-configuration-dynamically)をサポートする構成アイテム`split.region-cpu-overload-threshold-ratio`を追加します。
 - スロークエリログ、 `information_schema.statements_summary` 、および`information_schema.slow_query`は`binary_plan` 、またはバイナリ形式でエンコードされた実行計画をエクスポートできます。
@@ -347,7 +347,7 @@ TiDB v6.2.0以降、 BRを使用したRawKVのバックアップと復元は非�
 
     - 一部の演算子 (HashJoin、HashAgg、Update、Delete) のメモリ追跡の精度を最適化しました ( [#35634](https://github.com/pingcap/tidb/issues/35634) 、 [#35631](https://github.com/pingcap/tidb/issues/35631) 、 [#35635](https://github.com/pingcap/tidb/issues/35635) @[wshwsh12](https://github.com/wshwsh12) ) ( [#34096](https://github.com/pingcap/tidb/issues/34096) @[ekexium](https://github.com/ekexium))
 
-    - システムテーブル`INFORMATION_SCHEMA.DATA_LOCK_WAIT`楽観的トランザクションのロック情報の記録をサポートしています [#34609](https://github.com/pingcap/tidb/issues/34609) @[longfangsong](https://github.com/longfangsong)
+    - システムテーブル`INFORMATION_SCHEMA.DATA_LOCK_WAIT`は楽観的トランザクションのロック情報の記録をサポートしています [#34609](https://github.com/pingcap/tidb/issues/34609) @[longfangsong](https://github.com/longfangsong)
 
     - トランザクションの監視メトリクスを追加 [#34456](https://github.com/pingcap/tidb/issues/34456) @[longfangsong](https://github.com/longfangsong)
 
@@ -415,7 +415,7 @@ TiDB v6.2.0以降、 BRを使用したRawKVのバックアップと復元は非�
     - `auto_increment = x`が一時テーブルに適用されない問題を修正 [#36224](https://github.com/pingcap/tidb/issues/36224) @[djshow832](https://github.com/djshow832)
     - 列を同時に変更する際の誤ったデフォルト値を修正 [#35846](https://github.com/pingcap/tidb/issues/35846) @[wjhuang2016](https://github.com/wjhuang2016)
     - 可用性を向上させるために、異常な TiKV ノードにリクエストを送信しないようにします [#34906](https://github.com/pingcap/tidb/issues/34906) @[sticnarf](https://github.com/sticnarf)
-    - LOAD DATA ステートメントで列リストが機能しない問題を修正 [#35198](https://github.com/pingcap/tidb/issues/35198) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
+    - LOAD DATA文で列リストが機能しない問題を修正 [#35198](https://github.com/pingcap/tidb/issues/35198) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
     - 一部のシナリオで悲観的ロックが非一意のセカンダリインデックスに誤って追加される問題を修正 [#36235](https://github.com/pingcap/tidb/issues/36235) @[ekexium](https://github.com/ekexium)
 
 - TiKV

@@ -84,7 +84,7 @@ TiDB は、br コマンドラインツールを使用したバックアップと
 
 ### SQL文を使用する {#use-sql-statements}
 
-TiDB は、SQL ステートメントを使用した完全バックアップと復元をサポートします。
+TiDB は、SQL文を使用した完全バックアップと復元をサポートします。
 
 - [`BACKUP`](/sql-statements/sql-statement-backup.md) : 完全なスナップショットデータをバックアップします。
 - [`RESTORE`](/sql-statements/sql-statement-restore.md) : スナップショットバックアップデータを復元します。

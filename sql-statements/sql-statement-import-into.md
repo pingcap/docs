@@ -5,10 +5,10 @@ summary: TiDBにおけるIMPORT INTOの使用方法の概要。
 
 # IMPORT INTO {#import-into}
 
-`IMPORT INTO`ステートメントを使用すると、 TiDB Lightningの[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を介して TiDB にデータをインポートできます。 `IMPORT INTO` 、次の2つの方法で使用できます。
+`IMPORT INTO`文を使用すると、 TiDB Lightningの[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を介して TiDB にデータをインポートできます。 `IMPORT INTO` 、次の2つの方法で使用できます。
 
 - `IMPORT INTO ... FROM FILE` : `CSV` 、 `SQL` 、 `PARQUET`などの形式のデータファイルを TiDB の空のテーブルにインポートします。
-- `IMPORT INTO ... FROM SELECT` : `SELECT`ステートメントのクエリ結果を TiDB の空のテーブルにインポートします。また、 [`AS OF TIMESTAMP`](/as-of-timestamp.md)でクエリされた履歴データをインポートするためにも使用できます。
+- `IMPORT INTO ... FROM SELECT` : `SELECT`文のクエリ結果を TiDB の空のテーブルにインポートします。また、 [`AS OF TIMESTAMP`](/as-of-timestamp.md)でクエリされた履歴データをインポートするためにも使用できます。
 
 <CustomContent platform="tidb">
 
@@ -48,9 +48,9 @@ summary: TiDBにおけるIMPORT INTOの使用方法の概要。
 - `IMPORT INTO ... FROM SELECT` 、現在のユーザーが接続している TiDB ノードでのみ実行でき、インポートが完了するまで現在の接続をブロックします。
 - `IMPORT INTO ... FROM SELECT` 、 `THREAD`と`DISABLE_PRECHECK` 2つのインポート[インポートオプション](#withoptions)のみをサポートします。
 - `IMPORT INTO ... FROM SELECT` `SHOW IMPORT JOB(s)`や`CANCEL IMPORT JOB <job-id>`などのタスク管理ステートメントをサポートしていません。
-- TiDB では、 `SELECT`ステートメントのクエリ結果全体を格納するのに十分なスペースが必要です ( `DISK_QUOTA`オプション[一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)設定は現在サポートされていません)。
+- TiDB では、 `SELECT`文のクエリ結果全体を格納するのに十分なスペースが必要です ( `DISK_QUOTA`オプション[一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)設定は現在サポートされていません)。
 - [`tidb_snapshot`](/read-historical-data.md)を使用した履歴データのインポートはサポートされていません。
-- `SELECT`句の構文は複雑なため、 `WITH`内の`IMPORT INTO`パラメーターがこれと競合し、 `GROUP BY ... [WITH ROLLUP]`のような解析エラーが発生する可能性があります。複雑な`SELECT`ステートメント用にビューを作成し、インポートには`IMPORT INTO ... FROM SELECT * FROM view_name`を使用することをお勧めします。または、 `SELECT` `IMPORT INTO ... FROM (SELECT ...) WITH ...`句のスコープを明確にすることもできます。
+- `SELECT`句の構文は複雑なため、 `WITH`内の`IMPORT INTO`パラメーターがこれと競合し、 `GROUP BY ... [WITH ROLLUP]`のような解析エラーが発生する可能性があります。複雑な`SELECT`文用にビューを作成し、インポートには`IMPORT INTO ... FROM SELECT * FROM view_name`を使用することをお勧めします。または、 `SELECT` `IMPORT INTO ... FROM (SELECT ...) WITH ...`句のスコープを明確にすることもできます。
 
 ## インポートの前提条件 {#prerequisites-for-import}
 
@@ -132,7 +132,7 @@ OptionItem ::=
 
 ### 形式 {#format}
 
-`IMPORT INTO`ステートメントは、 `CSV` 、 `SQL` 、および`PARQUET`データファイル形式をサポートしています。指定しない場合、デフォルトの形式は`CSV`です。
+`IMPORT INTO`文は、 `CSV` 、 `SQL` 、および`PARQUET`データファイル形式をサポートしています。指定しない場合、デフォルトの形式は`CSV`です。
 
 ### オプション付き {#withoptions}
 
@@ -277,7 +277,7 @@ id,name,age
 2,Jack,44
 ```
 
-インポート対象のテーブルスキーマが`CREATE TABLE t(id int primary key, name varchar(100))`であると仮定します。データファイル内の`age`フィールドをテーブル`t`にインポートしないようにするには、次の SQL ステートメントを実行します。
+インポート対象のテーブルスキーマが`CREATE TABLE t(id int primary key, name varchar(100))`であると仮定します。データファイル内の`age`フィールドをテーブル`t`にインポートしないようにするには、次の SQL文を実行します。
 
 ```sql
 IMPORT INTO t(id, name, @1) FROM '/path/to/file.csv' WITH skip_rows=1;
@@ -285,13 +285,13 @@ IMPORT INTO t(id, name, @1) FROM '/path/to/file.csv' WITH skip_rows=1;
 
 #### ワイルドカードを使用して複数のデータファイルをインポートする {#import-multiple-data-files-using-wildcards}
 
-`/path/to/`ディレクトリに`file-01.csv` 、 `file-02.csv` 、 `file-03.csv`という名前のファイルが 3つあるとします。これらの 3つのファイルを`IMPORT INTO`を使用してターゲットテーブル`t`にインポートするには、次の SQL ステートメントを実行します。
+`/path/to/`ディレクトリに`file-01.csv` 、 `file-02.csv` 、 `file-03.csv`という名前のファイルが 3つあるとします。これらの 3つのファイルを`IMPORT INTO`を使用してターゲットテーブル`t`にインポートするには、次の SQL文を実行します。
 
 ```sql
 IMPORT INTO t FROM '/path/to/file-*.csv';
 ```
 
-`file-01.csv`と`file-03.csv`のみを対象テーブルにインポートする必要がある場合は、次の SQL ステートメントを実行してください。
+`file-01.csv`と`file-03.csv`のみを対象テーブルにインポートする必要がある場合は、次の SQL文を実行してください。
 
 ```sql
 IMPORT INTO t FROM '/path/to/file-0[13].csv';
@@ -323,7 +323,7 @@ id,name,val
 2,book,440
 ```
 
-インポート対象のテーブルスキーマが`CREATE TABLE t(id int primary key, name varchar(100), val int)`であると仮定します。インポート中に`val`列の値を 100 倍にしたい場合は、次の SQL ステートメントを実行できます。
+インポート対象のテーブルスキーマが`CREATE TABLE t(id int primary key, name varchar(100), val int)`であると仮定します。インポート中に`val`列の値を 100 倍にしたい場合は、次の SQL文を実行できます。
 
 ```sql
 IMPORT INTO t(id, name, @1) SET val=@1*100 FROM '/path/to/file.csv' WITH skip_rows=1;
@@ -345,11 +345,11 @@ IMPORT INTO t FROM 's3://bucket/path/to/file.parquet?access-key=XXX&secret-acces
 
 ## `IMPORT INTO ... FROM SELECT`使用法 {#import-into-from-select-usage}
 
-`IMPORT INTO ... FROM SELECT`を使用すると`SELECT`ステートメントのクエリ結果を TiDB の空のテーブルにインポートできます。また、 [`AS OF TIMESTAMP`](/as-of-timestamp.md)でクエリされた履歴データをインポートするためにも使用できます。
+`IMPORT INTO ... FROM SELECT`を使用すると`SELECT`文のクエリ結果を TiDB の空のテーブルにインポートできます。また、 [`AS OF TIMESTAMP`](/as-of-timestamp.md)でクエリされた履歴データをインポートするためにも使用できます。
 
 ### `SELECT`クエリの結果をインポートします {#import-the-query-result-of-select}
 
-`UNION`の結果をターゲットテーブル`t`にインポートするには、インポート同時実行数を`8`に指定し、重要でない項目の事前チェックを無効に設定して、次のSQLステートメントを実行します。
+`UNION`の結果をターゲットテーブル`t`にインポートするには、インポート同時実行数を`8`に指定し、重要でない項目の事前チェックを無効に設定して、次のSQL文を実行します。
 
 ```sql
 IMPORT INTO t FROM SELECT * FROM src UNION SELECT * FROM src2 WITH THREAD = 8, DISABLE_PRECHECK;
@@ -357,7 +357,7 @@ IMPORT INTO t FROM SELECT * FROM src UNION SELECT * FROM src2 WITH THREAD = 8, D
 
 ### 指定した時点の履歴データをインポートする {#import-historical-data-at-a-specified-time-point}
 
-指定した時点の履歴データをターゲットテーブル`t`にインポートするには、次の SQL ステートメントを実行します。
+指定した時点の履歴データをターゲットテーブル`t`にインポートするには、次の SQL文を実行します。
 
 ```sql
 IMPORT INTO t FROM SELECT * FROM src AS OF TIMESTAMP '2024-02-27 11:38:00';

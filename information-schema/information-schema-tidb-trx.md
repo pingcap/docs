@@ -38,7 +38,7 @@ DESC TIDB_TRX;
 
 - `ID` : トランザクション ID。トランザクションの`start_ts` (開始タイムスタンプ) です。
 - `START_TIME` : トランザクションの開始時刻。これは、トランザクションの`start_ts`に対応する物理的な時間です。
-- `CURRENT_SQL_DIGEST` : トランザクションで現在実行されている SQL ステートメントのダイジェスト。
+- `CURRENT_SQL_DIGEST` : トランザクションで現在実行されている SQL文のダイジェスト。
 - `CURRENT_SQL_DIGEST_TEXT` : トランザクションによって現在実行されているSQL文の正規化された形式、つまり引数とフォーマットのないSQL文。これは`CURRENT_SQL_DIGEST`に相当します。
 - `STATE` : トランザクションの現在の状態。以下の値のいずれかになります。
     - `Idle` : トランザクションはアイドル状態です。つまり、ユーザーがクエリを入力するのを待機しています。
@@ -102,7 +102,7 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ?
 2 rows in set (0.01 sec)
 ```
 
-この例のクエリ結果から、現在のノードには2つの実行中のトランザクションがあることがわかります。1つのトランザクションはアイドル状態（ `STATE`は`Idle` 、 `CURRENT_SQL_DIGEST`は`NULL` ）で、このトランザクションは3つのステートメントを実行しました（ `ALL_SQL_DIGESTS`リストには3つのレコードがあり、これは実行された3つのSQLステートメントのダイジェストです）。もう1つのトランザクションはステートメントを実行し、ロックを待機しています（ `STATE`は`LockWaiting` 、 `WAITING_START_TIME`待機中のロックの開始時刻を示しています）。トランザクションは2つのステートメントを実行し、現在実行中のステートメントは``"update `t` set `v` = `v` + ? where `id` = ?"``の形式になっています。
+この例のクエリ結果から、現在のノードには2つの実行中のトランザクションがあることがわかります。1つのトランザクションはアイドル状態（ `STATE`は`Idle` 、 `CURRENT_SQL_DIGEST`は`NULL` ）で、このトランザクションは3つの文を実行しました（ `ALL_SQL_DIGESTS`リストには3つのレコードがあり、これは実行された3つのSQL文のダイジェストです）。もう1つのトランザクションは文を実行し、ロックを待機しています（ `STATE`は`LockWaiting` 、 `WAITING_START_TIME`待機中のロックの開始時刻を示しています）。トランザクションは2つの文を実行し、現在実行中の文は``"update `t` set `v` = `v` + ? where `id` = ?"``の形式になっています。
 
 ```sql
 SELECT id, all_sql_digests, tidb_decode_sql_digests(all_sql_digests) AS all_sqls FROM INFORMATION_SCHEMA.TIDB_TRX\G

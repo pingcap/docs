@@ -31,7 +31,7 @@ DM v2.0.2以降では、ソース設定ファイルでbinlogイベントフィ�
 
 ## パラメータの説明 {#parameter-descriptions}
 
-- [`schema-pattern` / `table-pattern`](/dm/table-selector.md) : `schema-pattern` / `table-pattern`に一致するアップストリーム MySQL または MariaDB インスタンス テーブルのbinlogイベントまたは DDL SQL ステートメントは、以下のルールによってフィルター処理されます。
+- [`schema-pattern` / `table-pattern`](/dm/table-selector.md) : `schema-pattern` / `table-pattern`に一致するアップストリーム MySQL または MariaDB インスタンス テーブルのbinlogイベントまたは DDL SQL文は、以下のルールによってフィルター処理されます。
 
 - `events` : binlogイベント配列。次の表から1つ以上の`Event`のみを選択できます。
 
@@ -84,7 +84,7 @@ DM v2.0.2以降では、ソース設定ファイルでbinlogイベントフィ�
 
     - `Do` : 許可リスト。binlogは次の2つの条件のいずれかでフィルタリングされます。
         - イベントのタイプがルールの`event`のリストにありません。
-        - イベントの SQL ステートメントはルールの`sql-pattern`に一致しません。
+        - イベントの SQL文はルールの`sql-pattern`に一致しません。
     - `Ignore` : ブロックリスト。binlogは次の2つの条件のいずれかでフィルタリングされます。
         - イベントのタイプはルールの`event`のリストにあります。
         - イベントの SQL 文は、ルールの`sql-pattern`に一致できます。
@@ -119,16 +119,16 @@ filters:
     action: Ignore
 ```
 
-### シャーディングDMLステートメントのみを移行する {#only-migrate-sharding-dml-statements}
+### シャーディングDML文のみを移行する {#only-migrate-sharding-dml-statements}
 
-シャーディング DML ステートメントのみを移行するには、次の2つのフィルタリング ルールを構成します。
+シャーディング DML文のみを移行するには、次の2つのフィルタリング ルールを構成します。
 
-- `do-table-rule`は、 `test_*`.`t_*`パターンに一致するすべてのテーブルの`CREATE TABLE` 、 `INSERT` 、 `UPDATE` 、および`DELETE`ステートメントのみを移行します。
+- `do-table-rule`は、 `test_*`.`t_*`パターンに一致するすべてのテーブルの`CREATE TABLE` 、 `INSERT` 、 `UPDATE` 、および`DELETE`文のみを移行します。
 - `do-schema-rule`は、 `test_*`パターンに一致するすべてのスキーマの`CREATE DATABASE`のステートメントのみを移行します。
 
 > **Note:**
 >
-> `CREATE DATABASE/TABLE`ステートメントが移行される理由は、スキーマとテーブルが作成された後にのみ DML ステートメントを移行できるためです。
+> `CREATE DATABASE/TABLE`文が移行される理由は、スキーマとテーブルが作成された後にのみ DML文を移行できるためです。
 
 ```yaml
 filters:
@@ -178,7 +178,7 @@ filters:
 
 ### 一部のDDL文のエラーを報告する {#report-errors-on-some-ddl-statements}
 
-DM が TiDB に複製する前に、一部のアップストリーム操作によって生成された DDL ステートメントのエラーをブロックして報告する必要がある場合は、次の設定を使用できます。
+DM が TiDB に複製する前に、一部のアップストリーム操作によって生成された DDL文のエラーをブロックして報告する必要がある場合は、次の設定を使用できます。
 
 ```yaml
 filters:

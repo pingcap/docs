@@ -54,7 +54,7 @@ TiDB バージョン: 5.4.0
 | TiFlash        | [`status.metrics_port`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                       | 変更     | デフォルト値は`8234`に変更されます。                                                                                                                                                                                                                                                                                                 |
 | TiFlash        | [`raftstore.apply-pool-size`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)         | 新しく追加された | Raftデータをストレージにフラッシュするプール内のスレッドの許容数。デフォルト値は`4`です。                                                                                                                                                                                                                                                                    |
 | TiFlash        | [`raftstore.store-pool-size`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)         | 新しく追加された | Raftを処理するスレッドの許容数。これはRaftstoreスレッドプールのサイズです。デフォルト値は`4`です。                                                                                                                                                                                                                                                             |
-| TiDBデータ移行（DM）  | [`collation_compatible`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)         | 新しく追加された | `CREATE` SQL ステートメントのデフォルトの照合照合順序を同期するモード。値のオプションは「loose」（デフォルト）と「strict」です。                                                                                                                                                                                                                                          |
+| TiDBデータ移行（DM）  | [`collation_compatible`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)         | 新しく追加された | `CREATE` SQL文のデフォルトの照合照合順序を同期するモード。値のオプションは「loose」（デフォルト）と「strict」です。                                                                                                                                                                                                                                          |
 | TiCDC          | `max-message-bytes`                                                                                             | 変更     | Kafkaシンクの`max-message-bytes`のデフォルト値を`104857601`に変更します（10MB）。                                                                                                                                                                                                                                                          |
 | TiCDC          | `partition-num`                                                                                                 | 変更     | Kafka Sink の`partition-num`のデフォルト値を`4`から`3`に変更します。これにより、TiCDC が Kafaka パーティションにメッセージをより均等に送信できるようになります。                                                                                                                                                                                                               |
 | TiDB Lightning | `meta-schema-name`                                                                                              | 変更     | ターゲット TiDB 内のメタデータのスキーマ名を指定します。v5.4.0 以降、このスキーマは有効になっている場合にのみ作成されます[並列インポート](/tidb-lightning/tidb-lightning-distributed-import.md)(対応するパラメータは`tikv-importer.incremental-import = true`です)。                                                                                                                            |
@@ -73,7 +73,7 @@ TiDB バージョン: 5.4.0
 - `tidb_store_limit`のスコープを INSTANCE または GLOBAL から GLOBAL に変更する [#30756](https://github.com/pingcap/tidb/pull/30756)
 - 列にゼロが含まれている場合、整数型の列を時間型の列に変換することを禁止する [#25728](https://github.com/pingcap/tidb/pull/25728)
 - 浮動小数点値を挿入する際に`Inf`または`NAN`の値に対してエラーが報告されない問題を修正します [#30148](https://github.com/pingcap/tidb/pull/30148)
-- `REPLACE`ステートメントが自動 ID が範囲外の場合に他の行を誤って変更してしまう問題を修正しました [#30301](https://github.com/pingcap/tidb/pull/30301)
+- `REPLACE`文が自動 ID が範囲外の場合に他の行を誤って変更してしまう問題を修正しました [#30301](https://github.com/pingcap/tidb/pull/30301)
 
 ## 新機能 {#new-features}
 
@@ -126,7 +126,7 @@ TiDB バージョン: 5.4.0
 
     TiDBは、さまざまなアプリケーションシナリオに対応するため、フォロワー読み取りに「強一貫性読み取り」と「弱一貫性履歴読み取り」の2つのモードを提供しています。「強一貫性読み取り」モードは、リアルタイムデータを必要とするアプリケーションシナリオに適しています。ただし、このモードでは、リーダーとフォロワー間のデータ複製レイテンシーとスループットの低下により、特に地理的に分散したデプロイメントの場合、読み取りリクエストのレイテンシーが大きくなる可能性があります。
 
-    リアルタイムデータに対する要件がそれほど厳しくないアプリケーションシナリオでは、履歴読み取りモードが推奨されます。このモードでは、レイテンシーを削減し、スループットを向上させることができます。TiDBは現在、以下の方法で履歴データの読み取りをサポートしています。SQLステートメントを使用して過去の時点からデータを読み取るか、過去の時点に基づいて読み取り専用トランザクションを開始します。どちらの方法も、特定の時点または指定された時間範囲内の履歴データの読み取りをサポートしています。詳細については、 [`AS OF TIMESTAMP`句を使用して履歴データを読み取る](/as-of-timestamp.md).
+    リアルタイムデータに対する要件がそれほど厳しくないアプリケーションシナリオでは、履歴読み取りモードが推奨されます。このモードでは、レイテンシーを削減し、スループットを向上させることができます。TiDBは現在、以下の方法で履歴データの読み取りをサポートしています。SQL文を使用して過去の時点からデータを読み取るか、過去の時点に基づいて読み取り専用トランザクションを開始します。どちらの方法も、特定の時点または指定された時間範囲内の履歴データの読み取りをサポートしています。詳細については、 [`AS OF TIMESTAMP`句を使用して履歴データを読み取る](/as-of-timestamp.md).
 
     バージョン5.4.0以降、TiDBはセッション変数を使用して指定した時間範囲内の履歴データを読み取る機能をサポートすることで、履歴読み取りモードの使いやすさを向上させました。このモードは、準リアルタイムシナリオにおいて、低遅延かつ高スループットの読み取りリクエストに対応します。変数は次のように設定できます。
 
@@ -167,7 +167,7 @@ TiDB バージョン: 5.4.0
 
 - **`PREDICATE COLUMNS`に関する統計情報の収集をサポートする（実験的）**
 
-    ほとんどの場合、SQL ステートメントを実行する際に、オプティマイザは一部の列 ( `WHERE` 、`JOIN`、 `ORDER BY` `JOIN` 、および`GROUP BY`ステートメントの列など) の統計情報のみを使用します。これらの使用される列は`PREDICATE COLUMNS`と呼ばれます。
+    ほとんどの場合、SQL文を実行する際に、オプティマイザは一部の列 ( `WHERE` 、`JOIN`、 `ORDER BY` `JOIN` 、および`GROUP BY`ステートメントの列など) の統計情報のみを使用します。これらの使用される列は`PREDICATE COLUMNS`と呼ばれます。
 
     バージョン5.4.0以降では、 [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)システム変数の値を`ON`に設定することで、TiDBが`PREDICATE COLUMNS`を収集できるようになります。
 
@@ -189,7 +189,7 @@ TiDB バージョン: 5.4.0
 
     バージョン5.4.0以降、TiDBは一部の`ANALYZE`設定の永続化をサポートしています。この機能により、既存の設定を今後の統計情報収集に簡単に再利用できます。
 
-    `ANALYZE`構成永続化機能はデフォルトで有効になっています (システム変数`tidb_analyze_version`は`2`で、 [`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540)はデフォルトで`ON`です)。この機能を使用すると、 `ANALYZE`ステートメントを手動で実行する際に、ステートメントで指定された永続化構成を記録できます。記録されると、次回 TiDB が統計情報を自動的に更新する場合、またはこれらの構成を指定せずに手動で統計情報を収集する場合、TiDB は記録された構成に従って統計情報を収集します。
+    `ANALYZE`構成永続化機能はデフォルトで有効になっています (システム変数`tidb_analyze_version`は`2`で、 [`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540)はデフォルトで`ON`です)。この機能を使用すると、 `ANALYZE`文を手動で実行する際に、文で指定された永続化構成を記録できます。記録されると、次回 TiDB が統計情報を自動的に更新する場合、またはこれらの構成を指定せずに手動で統計情報を収集する場合、TiDB は記録された構成に従って統計情報を収集します。
 
     [ユーザー向けドキュメント](/statistics.md#persist-analyze-configurations)
 
@@ -360,7 +360,7 @@ TiDB バージョン: 5.4.0
     - `CASE-WHEN`式と照合順序を併用した場合にpanicが発生する可能性がある問題を修正しました [#30245](https://github.com/pingcap/tidb/issues/30245)
     - `IN`の値にバイナリ定数が含まれている場合に発生する、誤ったクエリ結果の問題を修正しました [#31261](https://github.com/pingcap/tidb/issues/31261)
     - CTEにサブクエリがある場合に発生する、誤ったクエリ結果の問題を修正しました [#31255](https://github.com/pingcap/tidb/issues/31255)
-    - `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE`ステートメントを実行するとpanicが発生する問題を修正しました [#28078](https://github.com/pingcap/tidb/issues/28078)
+    - `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE`文を実行するとpanicが発生する問題を修正しました [#28078](https://github.com/pingcap/tidb/issues/28078)
     - INDEX HASH JOIN が`send on closed channel`エラーを返す問題を修正します [#31129](https://github.com/pingcap/tidb/issues/31129)
 
 - TiKV
@@ -408,7 +408,7 @@ TiDB バージョン: 5.4.0
         - デフォルト値が複製できない問題を修正 [#3793](https://github.com/pingcap/tiflow/issues/3793)
         - デッドロックによってレプリケーションタスクが停止する可能性のある問題を修正します [#4055](https://github.com/pingcap/tiflow/issues/4055)
         - ディスクへの書き込みが完了した際にログが出力されない問題を修正 [#3362](https://github.com/pingcap/tiflow/issues/3362)
-        - DDLステートメント内の特殊コメントがレプリケーションタスクの停止を引き起こす問題を修正 [#3755](https://github.com/pingcap/tiflow/issues/3755)
+        - DDL文内の特殊コメントがレプリケーションタスクの停止を引き起こす問題を修正 [#3755](https://github.com/pingcap/tiflow/issues/3755)
         - RHEL リリースにおいて、タイムゾーンの問題によりサービスを開始できない問題を修正しました。 [#3584](https://github.com/pingcap/tiflow/issues/3584)
         - 不正確なチェックポイントによって引き起こされる可能性のあるデータ損失の問題を修正しました [#3545](https://github.com/pingcap/tiflow/issues/3545)
         - コンテナ環境におけるOOM問題を修正 [#1798](https://github.com/pingcap/tiflow/issues/1798)
@@ -416,9 +416,9 @@ TiDB バージョン: 5.4.0
 
     - TiDB Data Migration (DM)
 
-        - `CREATE VIEW`ステートメントがデータ複製を中断する問題を修正 [#4173](https://github.com/pingcap/tiflow/issues/4173)
-        - DDLステートメントがスキップされた後にスキーマをリセットする必要がある問題を修正します [#4177](https://github.com/pingcap/tiflow/issues/4177)
-        - DDLステートメントがスキップされた後、テーブルチェックポイントが時間内に更新されない問題を修正しました [#4184](https://github.com/pingcap/tiflow/issues/4184)
+        - `CREATE VIEW`文がデータ複製を中断する問題を修正 [#4173](https://github.com/pingcap/tiflow/issues/4173)
+        - DDL文がスキップされた後にスキーマをリセットする必要がある問題を修正します [#4177](https://github.com/pingcap/tiflow/issues/4177)
+        - DDL文がスキップされた後、テーブルチェックポイントが時間内に更新されない問題を修正しました [#4184](https://github.com/pingcap/tiflow/issues/4184)
         - TiDBのバージョンとパーサーのバージョン間の互換性の問題を修正しました [#4298](https://github.com/pingcap/tiflow/issues/4298)
         - 同期メトリクスがステータスを照会した時のみ更新される問題を修正 [#4281](https://github.com/pingcap/tiflow/issues/4281)
 

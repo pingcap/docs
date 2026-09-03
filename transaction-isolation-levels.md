@@ -73,7 +73,7 @@ TiDB v4.0.0-beta 以降、TiDB は Read Committed分離レベルをサポート�
 
 v6.0.0以降、TiDBは、読み取り/書き込み競合が稀なシナリオにおいて、タイムスタンプ取得を最適化するためにシステム変数[`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)の使用をサポートします。この変数を有効にすると、TiDBは`SELECT`実行時に、前回の有効なタイムスタンプを使用してデータを読み取ろうとします。この変数の初期値は、トランザクションの`start_ts`です。
 
-- TiDB は読み取りプロセス中にデータ更新が発生しなかった場合、結果をクライアントに返し、 `SELECT`ステートメントが正常に実行されます。
+- TiDB は読み取りプロセス中にデータ更新が発生しなかった場合、結果をクライアントに返し、 `SELECT`文が正常に実行されます。
 - TiDB が読み取りプロセス中にデータ更新を検出した場合:
     - TiDB がまだ結果をクライアントに送信していない場合、TiDB は新しいタイムスタンプを取得してこのステートメントを再試行します。
     - TiDBが既に部分的なデータをクライアントに送信している場合、TiDBはクライアントにエラーを報告します。クライアントに送信されるデータの量は、 [`tidb_init_chunk_size`](/system-variables.md#tidb_init_chunk_size)と[`tidb_max_chunk_size`](/system-variables.md#tidb_max_chunk_size)によって制御されます。

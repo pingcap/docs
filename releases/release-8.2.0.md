@@ -97,7 +97,7 @@ TiDB バージョン: 8.2.0
 
 - 実行計画がキャッシュされない理由を記録する [#50618](https://github.com/pingcap/tidb/issues/50618) @[qw4990](https://github.com/qw4990)
 
-    場合によっては、実行オーバーヘッドを削減し、レイテンシーを低減するために、ほとんどの実行計画をキャッシュしたい場合があります。現在、SQL の実行計画 キャッシュにはいくつかの制限があります。一部の SQL ステートメントの実行計画はキャッシュできません。キャッシュできない SQL ステートメントと、それに対応する理由を特定するのは困難です。
+    場合によっては、実行オーバーヘッドを削減し、レイテンシーを低減するために、ほとんどの実行計画をキャッシュしたい場合があります。現在、SQL の実行計画 キャッシュにはいくつかの制限があります。一部の SQL文の実行計画はキャッシュできません。キャッシュできない SQL文と、それに対応する理由を特定するのは困難です。
 
     そのため、v8.2.0以降、実行計画をキャッシュできない理由を説明する新しい列`PLAN_CACHE_UNQUALIFIED`と`PLAN_CACHE_UNQUALIFIED_LAST_REASON`がシステムテーブル[`STATEMENTS_SUMMARY`](/statement-summary-tables.md)に追加され、パフォーマンスの調整に役立ちます。
 
@@ -152,7 +152,7 @@ TiDB バージョン: 8.2.0
 | [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640) | 変更     | TiDB クラスタのパフォーマンスに対する自動統計収集の影響を軽減するため、デフォルト値を`128`から`8192`に変更します。値の範囲を`[1, 1024]`から`[1, 8192]`に変更します。                                                                                           |
 | [`tidb_enable_historical_stats`](/system-variables.md#tidb_enable_historical_stats)                                 | 変更     | デフォルト値を`ON`から`OFF`に変更します。これにより、履歴統計が無効になり、潜在的な安定性の問題を回避できます。                                                                                                                                    |
 | [`tidb_executor_concurrency`](/system-variables.md#tidb_executor_concurrency-new-in-v50)                            | 変更     | `sort`演算子の同時実行設定のサポートを追加します。                                                                                                                                                                    |
-| [`tidb_sysproc_scan_concurrency`](/system-variables.md#tidb_sysproc_scan_concurrency-new-in-v650)                   | 変更     | 最小値を`1`から`0`に変更します。これを`0`に設定すると、TiDB はクラスタサイズに基づいて、内部 SQL ステートメントの実行時に実行される`scan`操作の同時実行性を適応的に調整します。                                                                                            |
+| [`tidb_sysproc_scan_concurrency`](/system-variables.md#tidb_sysproc_scan_concurrency-new-in-v650)                   | 変更     | 最小値を`1`から`0`に変更します。これを`0`に設定すると、TiDB はクラスタサイズに基づいて、内部 SQL文の実行時に実行される`scan`操作の同時実行性を適応的に調整します。                                                                                            |
 | [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820)           | 新しく追加された | [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)ステートメントおよび[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)オプティマイザヒントに特権制御を適用するかどうかを制御します。 |
 
 ### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
@@ -198,7 +198,7 @@ TiDB バージョン: 8.2.0
 
 - TiDB
 
-    - [論理DDLステートメント（一般DDL）](/best-practices/ddl-introduction.md#types-of-ddl-statements)の並列実行をサポートします。 v8.1.0 と比較して、10 セッションを使用して異なる DDL ステートメントを同時に送信すると、パフォーマンスが 3 ～ 6 倍向上します [#53246](https://github.com/pingcap/tidb/issues/53246) @[D3Hunter](https://github.com/D3Hunter)
+    - [論理DDL文（一般DDL）](/best-practices/ddl-introduction.md#types-of-ddl-statements)の並列実行をサポートします。 v8.1.0 と比較して、10 セッションを使用して異なる DDL文を同時に送信すると、パフォーマンスが 3 ～ 6 倍向上します [#53246](https://github.com/pingcap/tidb/issues/53246) @[D3Hunter](https://github.com/D3Hunter)
     - `((a = 1 and b = 2 and c > 3) or (a = 4 and b = 5 and c > 6)) and d > 3`のような式を使用して複数列インデックスを照合するロジックを改善し、より正確な`Range`を生成します。 [#41598](https://github.com/pingcap/tidb/issues/41598) @[ghazalfamilyusa](https://github.com/ghazalfamilyusa)
     - データ量の多いテーブルに対して単純なクエリを実行する際の、データ分布情報の取得パフォーマンスを最適化する [#53850](https://github.com/pingcap/tidb/issues/53850) @[you06](https://github.com/you06)
     - 集約された結果セットは IndexJoin の内部テーブルとして使用でき、より複雑なクエリを IndexJoin にマッチさせることが可能になり、インデックス作成によってクエリ効率が向上します。 [#37068](https://github.com/pingcap/tidb/issues/37068) @[elsa0520](https://github.com/elsa0520)
@@ -270,7 +270,7 @@ TiDB バージョン: 8.2.0
     - 述語が常に`SHOW ERRORS`である`true`ステートメントを実行すると TiDB がパニックを起こす問題を修正します [#46962](https://github.com/pingcap/tidb/issues/46962) @[elsa0520](https://github.com/elsa0520)
     - ビューの使用が再帰的CTEで機能しない問題を修正 [#49721](https://github.com/pingcap/tidb/issues/49721) @[hawkingrei](https://github.com/hawkingrei)
     - TiDB が起動時に統計をロードするときに GC が原因でエラーを報告する可能性がある問題を修正 [#53592](https://github.com/pingcap/tidb/issues/53592) @[you06](https://github.com/you06)
-    - `PREPARE` / `EXECUTE`ステートメントで`CONV`式に`?`引数が含まれている場合、複数回実行するとクエリ結果が正しくない可能性がある問題を修正します。 [#53505](https://github.com/pingcap/tidb/issues/53505) @[qw4990](https://github.com/qw4990)
+    - `PREPARE` / `EXECUTE`文で`CONV`式に`?`引数が含まれている場合、複数回実行するとクエリ結果が正しくない可能性がある問題を修正します。 [#53505](https://github.com/pingcap/tidb/issues/53505) @[qw4990](https://github.com/qw4990)
     - 非 BIGINT 符号なし整数が文字列/10 進数と比較したときに誤った結果を生成する可能性がある問題を修正 [#41736](https://github.com/pingcap/tidb/issues/41736) @[LittleFall](https://github.com/LittleFall)
     - TiDBが外部キーを持つテーブルを作成する際に、対応する統計メタデータ（ `stats_meta` ）を作成しない問題を修正 [#53652](https://github.com/pingcap/tidb/issues/53652) @[hawkingrei](https://github.com/hawkingrei)
     - クエリ内の特定のフィルタ条件によってプランナーモジュールが`invalid memory address or nil pointer dereference`エラーを報告する可能性がある問題を修正しました[#53582](https://github.com/pingcap/tidb/issues/53582) [#53580](https://github.com/pingcap/tidb/issues/53580) [#53594](https://github.com/pingcap/tidb/issues/53594) [#53603](https://github.com/pingcap/tidb/issues/53603) @[YangKeao](https://github.com/YangKeao)
@@ -349,7 +349,7 @@ TiDB バージョン: 8.2.0
     - TiDB Data Migration (DM)
 
         - `go-mysql` をアップグレードして、接続ブロックの問題を修正します。 [#11041](https://github.com/pingcap/tiflow/issues/11041) @[D3Hunter](https://github.com/D3Hunter)
-        - MariaDBデータの移行中に`SET`ステートメントが原因でDMがpanicを起こす問題を修正 [#10206](https://github.com/pingcap/tiflow/issues/10206) @[dveeden](https://github.com/dveeden)
+        - MariaDBデータの移行中に`SET`文が原因でDMがpanicを起こす問題を修正 [#10206](https://github.com/pingcap/tiflow/issues/10206) @[dveeden](https://github.com/dveeden)
 
     - TiDB Lightning
 

@@ -99,13 +99,13 @@ Alibaba Cloud RDSをデータソースとして使用する場合、すべての
 </CustomContent>
 <CustomContent plan="essential">
 
-- TiDB Cloud Essentialでは、現在、データ移行には論理モードのみがサポートされています。このモードでは、MySQLソースデータベースからSQLステートメントとしてデータをエクスポートし、TiDB上で実行します。このモードでは、移行前のターゲットテーブルは空でも空でなくても構いません。
+- TiDB Cloud Essentialでは、現在、データ移行には論理モードのみがサポートされています。このモードでは、MySQLソースデータベースからSQL文としてデータをエクスポートし、TiDB上で実行します。このモードでは、移行前のターゲットテーブルは空でも空でなくても構いません。
 
 </CustomContent>
 
 <CustomContent plan="premium">
 
-- TiDB Cloud Premium では、論理モード (デフォルト) と物理モードの両方がサポートされています。論理モードでは、MySQL ソースデータベースから SQL ステートメントとしてデータをエクスポートし、ターゲットのTiDB Cloud Premium インスタンスで実行します。このとき、ロード中にリクエストキャパシティユニット (RCU) が消費されます。物理モードでは、ターゲットのTiDB Cloud Premium インスタンスで`IMPORT INTO`を使用し、ロードのスループットとコスト効率を優先する場合の大規模データセットに推奨されます。
+- TiDB Cloud Premium では、論理モード (デフォルト) と物理モードの両方がサポートされています。論理モードでは、MySQL ソースデータベースから SQL文としてデータをエクスポートし、ターゲットのTiDB Cloud Premium インスタンスで実行します。このとき、ロード中にリクエストキャパシティユニット (RCU) が消費されます。物理モードでは、ターゲットのTiDB Cloud Premium インスタンスで`IMPORT INTO`を使用し、ロードのスループットとコスト効率を優先する場合の大規模データセットに推奨されます。
 - 物理モードを使用し、移行ジョブが開始されたら、 TiDB Cloud PremiumインスタンスでPITR（ポイントインタイムリカバリ）を有効にしたり、変更フィードを設定したり**しないで**ください。そうしないと、移行ジョブが停止します。PITRを有効にしたり、変更フィードを設定したりする必要がある場合は、代わりに論理モードを使用してデータを移行してください。
 - 物理モードを使用する場合、既存のデータ移行が完了する前に、 TiDB Cloud Premiumインスタンスに対して2つ目の移行ジョブまたはインポートタスクを作成することはできません。
 
@@ -121,12 +121,12 @@ Alibaba Cloud RDSをデータソースとして使用する場合、すべての
 <CustomContent plan="essential">
 
 - 増分データ移行中に、移行対象のテーブルが既にターゲットデータベースに重複キーで存在する場合、エラーが報告され、移行は中断されます。この場合、MySQLソースデータが正確であることを確認する必要があります。データが正確であれば、移行ジョブの**Restart**ボタンをクリックすると、移行ジョブはターゲットのTiDB Cloud Essentialインスタンス内の競合レコードをMySQLソースレコードに置き換えます。
-- 増分データ移行 (進行中の変更をTiDB Cloud Essentialインスタンスに移行する) 中に、移行ジョブが突然のエラーから回復した場合、60秒間セーフモードに入ることがあります。セーフモード中、 TiDB Cloudは`INSERT`ステートメントを`REPLACE`に、 `UPDATE`ステートメントを`DELETE`および`REPLACE`に移行し、これらのトランザクションをターゲットのTiDB Cloud Essentialインスタンスに適用して、突然のエラー中に発生したすべてのデータが安全にターゲットに到達するようにします。ソーステーブルに主キーまたは null 以外の一意インデックスがない場合、ターゲットのTiDB Cloud Essentialインスタンスで重複した行が発生する可能性があります。
+- 増分データ移行 (進行中の変更をTiDB Cloud Essentialインスタンスに移行する) 中に、移行ジョブが突然のエラーから回復した場合、60秒間セーフモードに入ることがあります。セーフモード中、 TiDB Cloudは`INSERT`文を`REPLACE`に、 `UPDATE`文を`DELETE`および`REPLACE`に移行し、これらのトランザクションをターゲットのTiDB Cloud Essentialインスタンスに適用して、突然のエラー中に発生したすべてのデータが安全にターゲットに到達するようにします。ソーステーブルに主キーまたは null 以外の一意インデックスがない場合、ターゲットのTiDB Cloud Essentialインスタンスで重複した行が発生する可能性があります。
 
 </CustomContent>
 <CustomContent plan="dedicated">
 
-- 増分データ移行 (進行中の変更をTiDB Cloud Dedicatedクラスターに移行する) 中に、移行ジョブが突然のエラーから回復した場合、60秒間セーフモードに入ることがあります。セーフモード中、 TiDB Cloudは`INSERT`ステートメントを`REPLACE`に、 `UPDATE`ステートメントを`DELETE`および`REPLACE`に移行し、これらのトランザクションをターゲットのTiDB Cloud Dedicatedクラスターに適用して、突然のエラー中に発生したすべてのデータが安全にターゲットに到達するようにします。ソーステーブルに主キーまたは null 以外の一意インデックスがない場合、ターゲットのTiDB Cloud Dedicated Dedicated クラスターで重複した行が発生する可能性があります。
+- 増分データ移行 (進行中の変更をTiDB Cloud Dedicatedクラスターに移行する) 中に、移行ジョブが突然のエラーから回復した場合、60秒間セーフモードに入ることがあります。セーフモード中、 TiDB Cloudは`INSERT`文を`REPLACE`に、 `UPDATE`文を`DELETE`および`REPLACE`に移行し、これらのトランザクションをターゲットのTiDB Cloud Dedicatedクラスターに適用して、突然のエラー中に発生したすべてのデータが安全にターゲットに到達するようにします。ソーステーブルに主キーまたは null 以外の一意インデックスがない場合、ターゲットのTiDB Cloud Dedicated Dedicated クラスターで重複した行が発生する可能性があります。
 
 - 以下のシナリオでは、移行ジョブに24時間以上かかる場合、ソースデータベースのバイナリログを削除しないでください。これにより、データ移行ツールは増分データ移行のために連続したバイナリログを取得できます。
 
@@ -137,7 +137,7 @@ Alibaba Cloud RDSをデータソースとして使用する場合、すべての
 
 <CustomContent plan="premium">
 
-- 増分データ移行 (進行中の変更をTiDB Cloud Premium インスタンスに移行する) 中に、移行ジョブが突然のエラーから回復した場合、60秒間セーフモードに入ることがあります。セーフモード中、 TiDB Cloudは`INSERT`ステートメントを`REPLACE`に、 `UPDATE`ステートメントを`DELETE`および`REPLACE`に移行し、これらのトランザクションをターゲットのTiDB Cloud Premium インスタンスに適用して、突然のエラー中に発生したすべてのデータが安全にターゲットに到達するようにします。ソーステーブルに主キーまたは null 以外の一意インデックスがない場合、ターゲットのTiDB Cloud Premium インスタンスで重複した行が発生する可能性があります。
+- 増分データ移行 (進行中の変更をTiDB Cloud Premium インスタンスに移行する) 中に、移行ジョブが突然のエラーから回復した場合、60秒間セーフモードに入ることがあります。セーフモード中、 TiDB Cloudは`INSERT`文を`REPLACE`に、 `UPDATE`文を`DELETE`および`REPLACE`に移行し、これらのトランザクションをターゲットのTiDB Cloud Premium インスタンスに適用して、突然のエラー中に発生したすべてのデータが安全にターゲットに到達するようにします。ソーステーブルに主キーまたは null 以外の一意インデックスがない場合、ターゲットのTiDB Cloud Premium インスタンスで重複した行が発生する可能性があります。
 
 </CustomContent>
 
@@ -234,7 +234,7 @@ SHOW VARIABLES WHERE Variable_name IN
     sudo systemctl restart mysqld
     ```
 
-3. 設定が有効になっていることを確認するには、 `SHOW VARIABLES`ステートメントを再度実行してください。
+3. 設定が有効になっていることを確認するには、 `SHOW VARIABLES`文を再度実行してください。
 
 詳細な手順については、MySQL ドキュメントの[MySQLサーバーのシステム変数](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html)および[バイナリログ](https://dev.mysql.com/doc/refman/8.0/en/binary-log.html)を参照してください。
 
@@ -245,7 +245,7 @@ SHOW VARIABLES WHERE Variable_name IN
 1. AWS マネジメントコンソールで、 [Amazon RDS コンソール](https://console.aws.amazon.com/rds/)を開き、左側のナビゲーションペインで**Parameter groups**をクリックし、カスタムパラメータ グループを作成または編集します。
 2. 上記の4つのパラメータを必要な値に設定してください。
 3. パラメータグループをインスタンスまたはクラスターにアタッチし、再起動して変更を適用してください。
-4. 再起動後、インスタンスに接続し、 `SHOW VARIABLES`ステートメントを実行して構成を確認します。
+4. 再起動後、インスタンスに接続し、 `SHOW VARIABLES`文を実行して構成を確認します。
 
 詳細な手順については、AWS ドキュメントの[DBパラメータグループの操作](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html)と[MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
 
@@ -259,7 +259,7 @@ SHOW VARIABLES WHERE Variable_name IN
 
     ほとんどの変更は再起動なしで反映されます。再起動が必要な場合は、ポータルから通知が表示されます。
 
-3. `SHOW VARIABLES`ステートメントを実行して、設定を確認します。
+3. `SHOW VARIABLES`文を実行して、設定を確認します。
 
 詳細な手順については、Microsoft Azure ドキュメントの[Azure ポータルを使用して、Azure Database for MySQL - Flexible Server でサーバーパラメーターを構成する](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-configure-server-parameters-portal)を参照してください。
 
@@ -270,7 +270,7 @@ SHOW VARIABLES WHERE Variable_name IN
 1. [Google Cloud Console](https://console.cloud.google.com/project/_/sql/instances)で、インスタンスを含むプロジェクトを選択し、インスタンス名をクリックして、 **Edit**をクリックします。
 2. 必要なフラグ ( `log_bin` 、 `binlog_format` 、 `binlog_row_image` 、 `binlog_expire_logs_seconds` ) を追加または変更します。
 3. **Save**をクリックしてください。再起動が必要な場合は、コンソールからメッセージが表示されます。
-4. 再起動後、 `SHOW VARIABLES`ステートメントを実行して変更を確認します。
+4. 再起動後、 `SHOW VARIABLES`文を実行して変更を確認します。
 
 詳細な手順については、Google Cloud ドキュメントの[データベースフラグを設定する](https://cloud.google.com/sql/docs/mysql/flags)と[特定時点へのリカバリを使用する](https://cloud.google.com/sql/docs/mysql/backup-recovery/pitr)ご覧ください。
 
@@ -292,7 +292,7 @@ SHOW VARIABLES WHERE Variable_name IN
 
     - ストレージ保護：ストレージの使用状況を綿密に監視してください。ディスク容量の使用量がシステムしきい値に達すると、保持期間の設定に関わらず、RDS は最も古いバイナリログを自動的に削除しますのでご注意ください。
 
-4. 変更を適用した後（必要に応じて再起動した後）、インスタンスに接続し、このセクションの`SHOW VARIABLES`ステートメントを実行して構成を確認します。
+4. 変更を適用した後（必要に応じて再起動した後）、インスタンスに接続し、このセクションの`SHOW VARIABLES`文を実行して構成を確認します。
 
 詳細については、 [インスタンスパラメータを設定します](https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/modify-the-parameters-of-an-apsaradb-rds-for-mysql-instance)を参照してください。
 
@@ -620,7 +620,7 @@ MySQLサービスがGoogle Cloud VPC内にある場合は、以下の手順を�
 | `REPLICATION CLIENT` | グローバル | binlogの位置とサーバーの状態へのアクセスを提供します                                                                                                                                                                                                                                              |
 | `LOCK TABLES`        | 表     | ソースがマネージド MySQL サービス (Amazon RDS、 Aurora、ApsaraDB RDS for MySQL、Azure Database for MySQL、Google Cloud SQL など) であり、 `FLUSH TABLES WITH READ LOCK` (FTWRL) が許可されていない場合に必要です。この場合、DM は`LOCK TABLES`にフォールバックし、完全なデータエクスポート中の一貫性を確保します。FTWRL が利用可能なSelf-Managed MySQL インスタンスには不要です。 |
 
-例えば、ソースのMySQLインスタンスで次の`GRANT`ステートメントを使用すると、対応する権限を付与できます。
+例えば、ソースのMySQLインスタンスで次の`GRANT`文を使用すると、対応する権限を付与できます。
 
 ```sql
 -- For self-managed MySQL:
@@ -648,7 +648,7 @@ GRANT SELECT, RELOAD, LOCK TABLES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* 
 | `INDEX`       | 表           | インデックスを作成および変更します       |
 | `CREATE VIEW` | ビュー         | マイグレーションで使用されるビューを作成します |
 
-たとえば、ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>TiDB Cloud Essential インスタンス<CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent>インスタンスで次の`GRANT`ステートメントを実行して、対応する<CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>を付与できます。
+たとえば、ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>TiDB Cloud Essential インスタンス<CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent>インスタンスで次の`GRANT`文を実行して、対応する<CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>を付与できます。
 
 ```sql
 GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON *.* TO 'dm_target_user'@'%';
@@ -813,7 +813,7 @@ TiDB Cloudへのデータ移行を一度で完了させるには、 **Existing d
 
 **既存データ**と**増分データ**の移行には、**physical mode**または**logical mode**を使用できます。
 
-- デフォルトモードは**logical mode**です。このモードでは、MySQLソースデータベースからSQLステートメントとしてデータをエクスポートし、TiDB上で実行します。このモードでは、移行前のターゲットテーブルは空でも空でなくても構いません。ただし、物理モードよりもパフォーマンスは低下します。
+- デフォルトモードは**logical mode**です。このモードでは、MySQLソースデータベースからSQL文としてデータをエクスポートし、TiDB上で実行します。このモードでは、移行前のターゲットテーブルは空でも空でなくても構いません。ただし、物理モードよりもパフォーマンスは低下します。
 
 - 大規模なデータセットの場合は、**physical mode**の使用をお勧めします。このモードでは、MySQLソースデータベースからデータをエクスポートし、KVペアとしてエンコードしてTiKVに直接書き込むことで、パフォーマンスを向上させます。このモードでは、移行前にターゲットテーブルが空である必要があります。16 RCU（レプリケーション容量ユニット）の仕様の場合、パフォーマンスは論理モードの約2.5倍高速です。その他の仕様では、論理モードと比較してパフォーマンスが20%～50%向上する可能性があります。なお、パフォーマンスデータは参考値であり、シナリオによって異なる場合がありますのでご注意ください。
 
@@ -836,7 +836,7 @@ TiDB Cloudへのデータ移行を一度で完了させるには、 **Existing d
 
 TiDB Cloudへのデータ移行を一度で完了させるには、ソースデータベースとターゲットデータベース間のデータの一貫性を確保するため、 **Full + Incremental**と**Incremental data migration**を選択してください。
 
-現在、**既存データ**の移行には**logical mode**のみを使用できます。このモードでは、MySQLソースデータベースからSQLステートメントとしてデータをエクスポートし、TiDB上で実行します。このモードでは、移行前のターゲットテーブルは空でも空でなくても構いません。
+現在、**既存データ**の移行には**logical mode**のみを使用できます。このモードでは、MySQLソースデータベースからSQL文としてデータをエクスポートし、TiDB上で実行します。このモードでは、移行前のターゲットテーブルは空でも空でなくても構いません。
 
 </CustomContent>
 
@@ -846,7 +846,7 @@ TiDB Cloud Premiumへのデータ移行を一度で完了させるには、 **Fu
 
 **既存データの移行**には、**physical mode**または**logical mode**のいずれかを使用できます。
 
-- デフォルトモードは**logical mode**です。このモードでは、MySQLソースデータベースからSQLステートメントとしてデータをエクスポートし、ターゲットのTiDB Cloud Premiumインスタンス上で実行します。このモードでは、移行前にターゲットテーブルが空でも空でなくても構いませんが、物理モードよりもパフォーマンスが低下します。
+- デフォルトモードは**logical mode**です。このモードでは、MySQLソースデータベースからSQL文としてデータをエクスポートし、ターゲットのTiDB Cloud Premiumインスタンス上で実行します。このモードでは、移行前にターゲットテーブルが空でも空でなくても構いませんが、物理モードよりもパフォーマンスが低下します。
 
 - 大規模なデータセットの場合は、**physical mode**を選択できます。このモードでは、ターゲットのTiDB Cloud Premium インスタンスで`IMPORT INTO`を使用してロードを高速化します。物理モードでは、移行前にターゲットテーブルが空である必要があります。事前チェックで選択したターゲットテーブルが空でないことが検出された場合、移行ジョブは自動的に論理モードに切り替わります。
 

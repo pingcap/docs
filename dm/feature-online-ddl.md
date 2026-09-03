@@ -27,7 +27,7 @@ gh-ost がオンラインスキーマ変更を実装すると、次の3種類の
 - ゴミ箱テーブル: `_*_ghc` , `_*_del`
 - realTable: online-ddl を実行する元のテーブル。
 
-gh-ost で主に使用される SQL ステートメントとそれに対応する DM の操作は次のとおりです。
+gh-ost で主に使用される SQL文とそれに対応する DM の操作は次のとおりです。
 
 1. `_ghc`テーブルを作成します。
 
@@ -78,7 +78,7 @@ gh-ost で主に使用される SQL ステートメントとそれに対応す�
       )   ;
     ```
 
-    DM は、 **realtable**用ではない DML ステートメントを実行しません。
+    DM は、 **realtable**用ではない DML文を実行しません。
 
 5. 移行が完了すると、元のテーブルと`_gho`テーブルの両方の名前が変更され、オンライン DDL 操作が完了します。
 
@@ -168,7 +168,7 @@ pt-osc で主に使用される SQL 文とそれに対応する DM の操作は�
     INSERT LOW_PRIORITY IGNORE INTO `test`.`_test4_new` (`id`, `date`, `account_id`, `conversion_price`, `ocpc_matched_conversions`, `ad_cost`, `cl2`, `cl1`) SELECT `id`, `date`, `account_id`, `conversion_price`, `ocpc_matched_conversions`, `ad_cost`, `cl2`, `cl1` FROM `test`.`test4` LOCK IN SHARE MODE /*pt-online-schema-change 3227 copy table*/
     ```
 
-    DM は、 **realtable**用ではない DML ステートメントを実行しません。
+    DM は、 **realtable**用ではない DML文を実行しません。
 
 5. データ移行が完了すると、元のテーブルと`_new`テーブルの名前が変更され、オンライン DDL 操作が完了します。
 

@@ -163,7 +163,7 @@ Few-Shot の例を使用すると、次のようなさまざまなシナリオ�
 
 ### 数ショットの例の知識を追加する {#add-a-few-shot-example-type-of-knowledge}
 
-たとえば、Chat2Query で特定の構造のテーブル内の行数の SQL ステートメントを生成する場合は、次のように`/v3/knowledgeBases/{knowledge_base_id}/data`を呼び出して、数回のサンプル タイプの知識を追加できます。
+たとえば、Chat2Query で特定の構造のテーブル内の行数の SQL文を生成する場合は、次のように`/v3/knowledgeBases/{knowledge_base_id}/data`を呼び出して、数回のサンプル タイプの知識を追加できます。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/knowledgeBases/<knowledge_base_id>/data'\

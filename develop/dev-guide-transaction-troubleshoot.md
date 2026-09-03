@@ -54,7 +54,7 @@ TiDB悲観的トランザクションモードでは、2つのクライアント
 |                                       | UPDATE books SET stock=stock-1 WHERE id=2;                  |
 |                                       | COMMIT;                                                    |
 
-あるいは、1つの SQL ステートメントで 2 冊の本を更新することもできます。これにより、デッドロックを回避し、より効率的に実行できます。
+あるいは、1つの SQL文で 2 冊の本を更新することもできます。これにより、デッドロックを回避し、より効率的に実行できます。
 
 ```sql
 UPDATE books SET stock=stock-1 WHERE id IN (1, 2);

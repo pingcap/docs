@@ -38,7 +38,7 @@ TiDB バージョン: 5.4.3
     - `UNION`演算子が予期しない空の結果を返す可能性がある問題を修正しました[＃36903](https://github.com/pingcap/tidb/issues/36903)
     - TiFlashのパーティションテーブルでダイナミックモードを有効にしたときに発生する誤った結果を修正しました[＃37254](https://github.com/pingcap/tidb/issues/37254)
     - `LIMIT`と併用すると`INL_HASH_JOIN`がハングアップする可能性がある問題を修正[＃35638](https://github.com/pingcap/tidb/issues/35638)
-    - TiDBが`SHOW WARNINGS`ステートメントを実行するときに`invalid memory address or nil pointer dereference`エラーを返す可能性がある問題を修正しました[＃31569](https://github.com/pingcap/tidb/issues/31569)
+    - TiDBが`SHOW WARNINGS`文を実行するときに`invalid memory address or nil pointer dereference`エラーを返す可能性がある問題を修正しました[＃31569](https://github.com/pingcap/tidb/issues/31569)
     - RC分離レベルでステイル読み取りを実行するときに発生する`invalid transaction`エラーを修正[＃30872](https://github.com/pingcap/tidb/issues/30872)
     - DMLエグゼキュータを使用した`EXPLAIN ANALYZE`文がトランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました[＃37373](https://github.com/pingcap/tidb/issues/37373)
     - TiDB Binlogを有効にして重複した値を挿入すると発生する`data and columnID count not match`エラーの問題を修正しました[＃33608](https://github.com/pingcap/tidb/issues/33608)

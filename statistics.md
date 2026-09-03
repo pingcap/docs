@@ -5,7 +5,7 @@ summary: 統計情報がテーブルレベルと列レベルの情報をどの�
 
 # 統計入門 {#introduction-to-statistics}
 
-TiDB は、統計情報をオプティマイザへの入力として使用し、SQL ステートメントの各プラン ステップで処理される行数を推定します。オプティマイザは、利用可能な各プランのコストを推定し、[インデックスアクセス](/choose-index.md)やテーブル結合の順序などを含め、利用可能な各プランのコストを算出します。その後、オプティマイザは、全体のコストが最も低い実行計画を選択します。
+TiDB は、統計情報をオプティマイザへの入力として使用し、SQL文の各プラン ステップで処理される行数を推定します。オプティマイザは、利用可能な各プランのコストを推定し、[インデックスアクセス](/choose-index.md)やテーブル結合の順序などを含め、利用可能な各プランのコストを算出します。その後、オプティマイザは、全体のコストが最も低い実行計画を選択します。
 
 ## 統計情報を収集する {#collect-statistics}
 
@@ -43,7 +43,7 @@ TiDBは、テーブルへの変更回数に基づいて、自動的に[`ANALYZE`
 
 テーブル内の`tbl`の変更された行数と総行数の比率が`tidb_auto_analyze_ratio`より大きく、かつ現在時刻が`tidb_auto_analyze_start_time`と`tidb_auto_analyze_end_time`の間である場合、TiDB はバックグラウンドで`ANALYZE TABLE tbl`ステートメントを実行して、このテーブルの統計情報を自動的に更新します。
 
-小さなテーブルのデータを変更すると、自動更新が頻繁にトリガーされる状況を避けるため、TiDB では、テーブルの行数が 1000 行未満の場合、変更によって自動更新がトリガーされません。テーブルの行数を確認するには、 `SHOW STATS_META`ステートメントを使用できます。
+小さなテーブルのデータを変更すると、自動更新が頻繁にトリガーされる状況を避けるため、TiDB では、テーブルの行数が 1000 行未満の場合、変更によって自動更新がトリガーされません。テーブルの行数を確認するには、 `SHOW STATS_META`文を使用できます。
 
 > **Note:**
 >
@@ -51,7 +51,7 @@ TiDBは、テーブルへの変更回数に基づいて、自動的に[`ANALYZE`
 
 ### 手動収集 {#manual-collection}
 
-現在、TiDB は統計情報を完全なコレクションとして収集します。統計情報を収集するには、 `ANALYZE TABLE`ステートメントを実行してください。
+現在、TiDB は統計情報を完全なコレクションとして収集します。統計情報を収集するには、 `ANALYZE TABLE`文を実行してください。
 
 以下の構文を使用すると、完全なデータ収集を実行できます。
 
@@ -134,7 +134,7 @@ ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DE
 
 ### いくつかの列の統計情報を収集する {#collect-statistics-on-some-columns}
 
-TiDB が SQL ステートメントを実行する際、オプティマイザはほとんどの場合、一部の列のみの統計情報を使用します。たとえば、 `WHERE` 、 `JOIN` 、 `ORDER BY` 、および`GROUP BY`句に現れる列などです。これらの列は述語列と呼ばれます。
+TiDB が SQL文を実行する際、オプティマイザはほとんどの場合、一部の列のみの統計情報を使用します。たとえば、 `WHERE` 、 `JOIN` 、 `ORDER BY` 、および`GROUP BY`句に現れる列などです。これらの列は述語列と呼ばれます。
 
 テーブルに多数の列がある場合、すべての列の統計情報を収集すると、大きなオーバーヘッドが発生する可能性があります。オーバーヘッドを削減するには、オプティマイザで使用する特定の列（選択した列）または`PREDICATE COLUMNS`のみの統計情報を収集できます。列のサブセットの列リストを将来再利用するために保持するには、[列構成を保持する](#persist-column-configurations)を参照してください。
 
@@ -233,7 +233,7 @@ TiDBは、統計情報の収集パフォーマンスを向上させるための2
 
 ### 統計サンプリング {#statistics-sampling}
 
-サンプリングは`ANALYZE`ステートメントの 2つのオプションで利用可能であり、それぞれ異なる収集アルゴリズムに対応しています。
+サンプリングは`ANALYZE`文の 2つのオプションで利用可能であり、それぞれ異なる収集アルゴリズムに対応しています。
 
 - `WITH NUM SAMPLES`は、TiDB のリザーバーサンプリング方式で実装されているサンプリングセットのサイズを指定します。テーブルが大きい場合、この方式を使用して統計情報を収集することは推奨されません。リザーバーサンプリングの中間結果セットには冗長な結果が含まれるため、メモリなどのリソースに余分な負荷がかかります。
 - `WITH FLOAT_NUM SAMPLERATE`は、v5.3.0 で導入されたサンプリング方法です。値の範囲`(0, 1]`を指定することで、サンプリングレートを設定できます。TiDB ではベルヌーイサンプリング方式で実装されており、大規模なテーブルのサンプリングに適しており、収集効率とリソース使用量の面で優れたパフォーマンスを発揮します。
@@ -292,15 +292,15 @@ TiDB v6.1.0以降では、システム変数[`tidb_mem_quota_analyze`](/system-v
 
 </CustomContent>
 
-この機能を使用すると、 `ANALYZE`ステートメントを手動で実行する際に、そのステートメントで指定された永続化構成を記録できます。一度記録すると、次回 TiDB が統計情報を自動的に更新する場合、またはこれらの構成を指定せずに手動で統計情報を収集する場合、TiDB は記録された構成に従って統計情報を収集します。
+この機能を使用すると、 `ANALYZE`文を手動で実行する際に、そのステートメントで指定された永続化構成を記録できます。一度記録すると、次回 TiDB が統計情報を自動的に更新する場合、またはこれらの構成を指定せずに手動で統計情報を収集する場合、TiDB は記録された構成に従って統計情報を収集します。
 
-auto analyze操作に使用される特定のテーブルに保持されている構成を照会するには、次の SQL ステートメントを使用できます。
+auto analyze操作に使用される特定のテーブルに保持されている構成を照会するには、次の SQL文を使用できます。
 
 ```sql
 SELECT sample_num, sample_rate, buckets, topn, column_choice, column_ids FROM mysql.analyze_options opt JOIN information_schema.tables tbl ON opt.table_id = tbl.tidb_table_id WHERE tbl.table_schema = '{db_name}' AND tbl.table_name = '{table_name}';
 ```
 
-TiDB は、最新の`ANALYZE`ステートメントで指定された新しい構成を使用して、以前に記録された永続構成を上書きします。たとえば、 `ANALYZE TABLE t WITH 200 TOPN;`を実行すると、 `ANALYZE`ステートメントの上位 200 個の値が設定されます。その後、 `ANALYZE TABLE t WITH 0.1 SAMPLERATE;`を実行すると、 自動`ANALYZE`ステートメントに上位200個の値とサンプリングレート0.1の両方を設定します。これは`ANALYZE TABLE t WITH 200 TOPN, 0.1 SAMPLERATE;`と同様です。
+TiDB は、最新の`ANALYZE`文で指定された新しい構成を使用して、以前に記録された永続構成を上書きします。たとえば、 `ANALYZE TABLE t WITH 200 TOPN;`を実行すると、 `ANALYZE`文の上位 200 個の値が設定されます。その後、 `ANALYZE TABLE t WITH 0.1 SAMPLERATE;`を実行すると、 自動`ANALYZE`文に上位200個の値とサンプリングレート0.1の両方を設定します。これは`ANALYZE TABLE t WITH 200 TOPN, 0.1 SAMPLERATE;`と同様です。
 
 ### ANALYZE構成の永続化を無効にする {#disable-analyze-configuration-persistence}
 
@@ -310,14 +310,14 @@ TiDB は、最新の`ANALYZE`ステートメントで指定された新しい構
 
 > **Note:**
 >
-> `ANALYZE`構成永続化機能を再度有効にする場合、以前に記録された永続化構成が最新のデータに適用できなくなった場合は、 `ANALYZE`ステートメントを手動で実行し、新しい永続化構成を指定する必要があります。
+> `ANALYZE`構成永続化機能を再度有効にする場合、以前に記録された永続化構成が最新のデータに適用できなくなった場合は、 `ANALYZE`文を手動で実行し、新しい永続化構成を指定する必要があります。
 
 ### 列構成を保持する {#persist-column-configurations}
 
-`ANALYZE`ステートメント ( `COLUMNS ColumnNameList` 、 `PREDICATE COLUMNS` 、 `ALL COLUMNS`を含む) の列構成を永続化する場合は、 `tidb_persist_analyze_options`システム変数の値を`ON`に設定して[構成の永続性を分析する](#persist-analyze-configurations)機能を有効にします。 ANALYZE 構成永続化機能を有効にした後:
+`ANALYZE`文 ( `COLUMNS ColumnNameList` 、 `PREDICATE COLUMNS` 、 `ALL COLUMNS`を含む) の列構成を永続化する場合は、 `tidb_persist_analyze_options`システム変数の値を`ON`に設定して[構成の永続性を分析する](#persist-analyze-configurations)機能を有効にします。 ANALYZE 構成永続化機能を有効にした後:
 
-- TiDB が統計情報を自動的に収集する場合、または列構成を指定せずに`ANALYZE`ステートメントを実行して手動で統計情報を収集する場合、TiDB は統計情報の収集に以前に保持された構成を引き続き使用します。
-- 列構成を指定して`ANALYZE`ステートメントを手動で複数回実行すると、TiDB は最新の`ANALYZE`ステートメントで指定された新しい構成を使用して、以前に記録された永続構成を上書きします。
+- TiDB が統計情報を自動的に収集する場合、または列構成を指定せずに`ANALYZE`文を実行して手動で統計情報を収集する場合、TiDB は統計情報の収集に以前に保持された構成を引き続き使用します。
+- 列構成を指定して`ANALYZE`文を手動で複数回実行すると、TiDB は最新の`ANALYZE`文で指定された新しい構成を使用して、以前に記録された永続構成を上書きします。
 
 `PREDICATE COLUMNS`および統計情報が収集された列を特定するには、 [`SHOW COLUMN_STATS_USAGE`](/sql-statements/sql-statement-show-column-stats-usage.md)ステートメントを使用します。
 
@@ -391,7 +391,7 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 
 統計バージョン1から統計バージョン2への移行準備として、 `ANALYZE`を準備します。
 
-- `ANALYZE`ステートメントを手動で実行する場合は、分析対象のすべてのテーブルを手動で分析します。
+- `ANALYZE`文を手動で実行する場合は、分析対象のすべてのテーブルを手動で分析します。
 
     ```sql
     SELECT DISTINCT(CONCAT('ANALYZE TABLE ', table_schema, '.', table_name, ';'))
@@ -400,7 +400,7 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
     WHERE stats_ver = 1;
     ```
 
-- 自動分析が有効になっているため、TiDB が`ANALYZE`ステートメントを自動的に実行する場合、 `tidb_analyze_version = 2`を設定すると、TiDB は後続の自動分析を通じて統計情報をバージョン 2 に徐々に更新します。オブジェクトに対してバージョン 2 の統計情報が収集されるまでは、TiDB は既存のバージョン 1 の統計情報を引き続き使用できます。重要なオブジェクトの移行を高速化するには、それらのオブジェクトに対して`ANALYZE`を手動で実行してください。
+- 自動分析が有効になっているため、TiDB が`ANALYZE`文を自動的に実行する場合、 `tidb_analyze_version = 2`を設定すると、TiDB は後続の自動分析を通じて統計情報をバージョン 2 に徐々に更新します。オブジェクトに対してバージョン 2 の統計情報が収集されるまでは、TiDB は既存のバージョン 1 の統計情報を引き続き使用できます。重要なオブジェクトの移行を高速化するには、それらのオブジェクトに対して`ANALYZE`を手動で実行してください。
 
 - 前述のステートメントの結果が長すぎてコピー＆ペーストできない場合は、結果を一時的なテキストファイルにエクスポートし、そのファイルから次のように実行できます。
 
@@ -415,13 +415,13 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 
 ### `ANALYZE`状態 {#analyze-state}
 
-`ANALYZE`ステートメントを実行すると、 [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)を使用して`ANALYZE`の現在の状態を表示できます。
+`ANALYZE`文を実行すると、 [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)を使用して`ANALYZE`の現在の状態を表示できます。
 
-TiDB v6.1.0 以降では、 `SHOW ANALYZE STATUS`ステートメントでクラスタレベルのタスクを表示できるようになりました。TiDB を再起動した後でも、このステートメントを使用すれば再起動前のタスクレコードを表示できます。TiDB v6.1.0 より前では、 `SHOW ANALYZE STATUS`ステートメントではインスタンスレベルのタスクしか表示できず、TiDB の再起動後にタスクレコードはクリアされていました。
+TiDB v6.1.0 以降では、 `SHOW ANALYZE STATUS`文でクラスタレベルのタスクを表示できるようになりました。TiDB を再起動した後でも、このステートメントを使用すれば再起動前のタスクレコードを表示できます。TiDB v6.1.0 より前では、 `SHOW ANALYZE STATUS`文ではインスタンスレベルのタスクしか表示できず、TiDB の再起動後にタスクレコードはクリアされていました。
 
 `SHOW ANALYZE STATUS`には、最新のタスク記録のみが表示されます。TiDB v6.1.0 以降では、システムテーブル`mysql.analyze_jobs`を通じて、過去 7日間の履歴タスクを表示できます。
 
-[`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)が設定されていて、TiDB のバックグラウンドで実行されている自動`ANALYZE`タスクがこのしきい値を超えるメモリを使用している場合、タスクは再試行されます。失敗したタスクと再試行されたタスクは`SHOW ANALYZE STATUS`ステートメントの出力で確認できます。
+[`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)が設定されていて、TiDB のバックグラウンドで実行されている自動`ANALYZE`タスクがこのしきい値を超えるメモリを使用している場合、タスクは再試行されます。失敗したタスクと再試行されたタスクは`SHOW ANALYZE STATUS`文の出力で確認できます。
 
 [`tidb_max_auto_analyze_time`](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610)が 0 より大きく、TiDB のバックグラウンドで実行されている自動`ANALYZE`タスクがこのしきい値を超える時間がかかった場合、タスクは終了します。
 
@@ -552,9 +552,9 @@ LOAD STATS 'file_name';
 
 ## ロック統計 {#lock-statistics}
 
-TiDBはv6.5.0以降、統計情報のロックをサポートしています。テーブルまたはパーティションの統計情報がロックされると、テーブルの統計情報を変更したり、 `ANALYZE`ステートメントをテーブル上で実行したりすることはできません。例：
+TiDBはv6.5.0以降、統計情報のロックをサポートしています。テーブルまたはパーティションの統計情報がロックされると、テーブルの統計情報を変更したり、 `ANALYZE`文をテーブル上で実行したりすることはできません。例：
 
-テーブル`t`を作成し、データを挿入します。テーブル`t`の統計情報がロックされていない場合、 `ANALYZE`ステートメントを正常に実行できます。
+テーブル`t`を作成し、データを挿入します。テーブル`t`の統計情報がロックされていない場合、 `ANALYZE`文を正常に実行できます。
 
 ```sql
 mysql> CREATE TABLE t(a INT, b INT);
@@ -576,7 +576,7 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-テーブル`t`の統計情報をロックし、 `ANALYZE`を実行します。警告メッセージには、 `ANALYZE`ステートメントがテーブル`t`をスキップしたことが示されています。
+テーブル`t`の統計情報をロックし、 `ANALYZE`を実行します。警告メッセージには、 `ANALYZE`文がテーブル`t`をスキップしたことが示されています。
 
 ```sql
 mysql> LOCK STATS t;
@@ -623,7 +623,7 @@ mysql> SHOW WARNINGS;
 
 さらに、[`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md)を使用してパーティションの統計情報をロックすることもできます。例:
 
-パーティションテーブル`t`を作成し、そこにデータを挿入します。パーティション`p1`の統計情報がロックされていない場合、 `ANALYZE`ステートメントを正常に実行できます。
+パーティションテーブル`t`を作成し、そこにデータを挿入します。パーティション`p1`の統計情報がロックされていない場合、 `ANALYZE`文を正常に実行できます。
 
 ```sql
 mysql> CREATE TABLE t(a INT, b INT) PARTITION BY RANGE (a) (PARTITION p0 VALUES LESS THAN (10), PARTITION p1 VALUES LESS THAN (20), PARTITION p2 VALUES LESS THAN (30));
@@ -650,7 +650,7 @@ mysql> SHOW WARNINGS;
 6 rows in set (0.01 sec)
 ```
 
-パーティション`p1`の統計情報をロックし、 `ANALYZE`を実行します。警告メッセージには、 `ANALYZE`ステートメントがパーティション`p1`をスキップしたことが示されています。
+パーティション`p1`の統計情報をロックし、 `ANALYZE`を実行します。警告メッセージには、 `ANALYZE`文がパーティション`p1`をスキップしたことが示されています。
 
 ```sql
 mysql> LOCK STATS t PARTITION p1;
@@ -714,7 +714,7 @@ mysql> SHOW WARNINGS;
 
 ### バックグラウンドの`ANALYZE`タスクを終了します {#terminate-background-analyze-tasks}
 
-TiDB v6.0以降、TiDBは`KILL`ステートメントを使用して、バックグラウンドで実行中の`ANALYZE`タスクを終了することをサポートしています。バックグラウンドで実行中の`ANALYZE`タスクが多くのリソースを消費し、アプリケーションに影響を与えている場合は、次の手順で`ANALYZE`タスクを終了できます。
+TiDB v6.0以降、TiDBは`KILL`文を使用して、バックグラウンドで実行中の`ANALYZE`タスクを終了することをサポートしています。バックグラウンドで実行中の`ANALYZE`タスクが多くのリソースを消費し、アプリケーションに影響を与えている場合は、次の手順で`ANALYZE`タスクを終了できます。
 
 1. 以下のSQL文を実行してください。
 
@@ -729,7 +729,7 @@ TiDB v6.0以降、TiDBは`KILL`ステートメントを使用して、バック�
     <CustomContent platform="tidb">
 
     - [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が`true` (デフォルトでは`true` ) の場合、 `KILL TIDB ${id};`ステートメントを直接実行できます。ここで、 `${id}`は、前の手順で取得したバックグラウンド`ANALYZE`タスクの`ID`です。
-    - `enable-global-kill`が`false`の場合、クライアントを使用してバックエンドの`ANALYZE`タスクを実行している TiDB インスタンスに接続し、 `KILL TIDB ${id};`ステートメントを実行する必要があります。クライアントを使用して別の TiDB インスタンスに接続する場合、またはクライアントと TiDB クラスタの間にプロキシがある場合、 `KILL`ステートメントではバックグラウンド`ANALYZE`タスクを終了できません。
+    - `enable-global-kill`が`false`の場合、クライアントを使用してバックエンドの`ANALYZE`タスクを実行している TiDB インスタンスに接続し、 `KILL TIDB ${id};`ステートメントを実行する必要があります。クライアントを使用して別の TiDB インスタンスに接続する場合、またはクライアントと TiDB クラスタの間にプロキシがある場合、 `KILL`文ではバックグラウンド`ANALYZE`タスクを終了できません。
 
     </CustomContent>
 
@@ -739,11 +739,11 @@ TiDB v6.0以降、TiDBは`KILL`ステートメントを使用して、バック�
 
     </CustomContent>
 
-`KILL`ステートメントの詳細については、[`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
+`KILL`文の詳細については、[`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
 
 ### 制御`ANALYZE`並行性 {#control-analyze-concurrency}
 
-`ANALYZE`ステートメントを実行すると、システム変数を使用して同時実行性を調整し、システムへの影響を制御できます。
+`ANALYZE`文を実行すると、システム変数を使用して同時実行性を調整し、システムへの影響を制御できます。
 
 関連するシステム変数間の関係を以下に示します。
 

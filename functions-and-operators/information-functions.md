@@ -147,7 +147,7 @@ SELECT DATABASE();
 
 ### FOUND_ROWS() {#found_rows}
 
-`FOUND_ROWS()`関数は、最後に実行された`SELECT`ステートメントの結果セット内の行数を返します。
+`FOUND_ROWS()`関数は、最後に実行された`SELECT`文の結果セット内の行数を返します。
 
 ```sql
 SELECT 1 UNION ALL SELECT 2;

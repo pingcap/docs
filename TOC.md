@@ -182,8 +182,8 @@
     - [Top SQLページ](/dashboard/top-sql.md)
     - [Key Visualizerページ](/dashboard/dashboard-key-visualizer.md)
     - [指標関係グラフ](/dashboard/dashboard-metrics-relation.md)
-    - SQLステートメントの分析
-      - [SQLステートメントページ](/dashboard/dashboard-statement-list.md)
+    - SQL文の分析
+      - [SQL Statementsページ](/dashboard/dashboard-statement-list.md)
       - [SQL詳細ページ](/dashboard/dashboard-statement-details.md)
     - [スロークエリページ](/dashboard/dashboard-slow-query.md)
     - クラスタ診断
@@ -472,7 +472,7 @@
       - データソースの管理
         - [移行対象のMySQLインスタンスを切り替える](/dm/usage-scenario-master-slave-switch.md)
       - タスクの管理
-        - [失敗したDDLステートメントを処理する](/dm/handle-failed-ddl-statements.md)
+        - [失敗したDDL文を処理する](/dm/handle-failed-ddl-statements.md)
         - [移行対象テーブルのスキーマを管理する](/dm/dm-manage-schema.md)
       - [クラスターのデータソースとタスク構成のエクスポートとインポート](/dm/dm-export-import-config.md)
       - [アラートの処理](/dm/dm-handle-alerts.md)
@@ -647,7 +647,7 @@
       - [ユーザー定義変数](/user-defined-variables.md)
       - [式の構文](/expression-syntax.md)
       - [コメント構文](/comment-syntax.md)
-    - SQLステートメント
+    - SQL文
       - [概要](/sql-statements/sql-statement-overview.md)
       - [`ADMIN`](/sql-statements/sql-statement-admin.md)
       - [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)
@@ -862,7 +862,7 @@
       - [隔離レベル](/transaction-isolation-levels.md)
       - [楽観的トランザクション](/optimistic-transaction.md)
       - [悲観的トランザクション](/pessimistic-transaction.md)
-      - [非トランザクションDMLステートメント](/non-transactional-dml.md)
+      - [非トランザクションDML文](/non-transactional-dml.md)
       - [パイプラインDML](/pipelined-dml.md)
     - [ビュー](/views.md)
     - [パーティショニング](/partitioned-table.md)
@@ -959,7 +959,7 @@
   - [トポロジーラベルによるレプリカのスケジュール設定](/schedule-replicas-by-topology-labels.md)
   - [外部ストレージサービスのURI形式](/external-storage-uri.md)
   - [オンラインワークロードと`ADD INDEX`操作に関する相互作用テスト](/benchmark/online-workloads-and-add-index-operations.md)
-  - [DDLステートメントに埋め込まれた`ANALYZE`](/ddl_embedded_analyze.md)
+  - [DDL文に埋め込まれた`ANALYZE`](/ddl_embedded_analyze.md)
 - よくある質問
   - [FAQの概要](/faq/faq-overview.md)
   - [TiDBに関するよくある質問](/faq/tidb-faq.md)

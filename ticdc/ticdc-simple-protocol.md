@@ -58,7 +58,7 @@ DDL:
 - `DINDEX` : インデックス削除イベント。
 - `ERASE` : テーブル削除イベント。
 - `TRUNCATE` : テーブル切り捨てイベント。
-- `ALTER` : 列の追加、列の削除、列の種類の変更、および TiCDC でサポートされているその他の`ALTER TABLE`ステートメントを含む、テーブルの変更イベント。
+- `ALTER` : 列の追加、列の削除、列の種類の変更、および TiCDC でサポートされているその他の`ALTER TABLE`文を含む、テーブルの変更イベント。
 - `QUERY` : その他の DDL イベント。
 
 DML:
@@ -233,8 +233,8 @@ TiCDC は、DDL イベントを次の JSON 形式でエンコードします。
 | ---------------- | --- | ----------------------------------------------------------------------------------------------------- |
 | `version`        | number  | プロトコルのバージョン番号。現在は`1`です。                                                                               |
 | `type`           | string   | DDL イベントタイプ ( `CREATE` 、 `RENAME` 、 `CINDEX` 、 `DINDEX` 、 `ERASE` 、 `TRUNCATE` 、 `ALTER` 、 `QUERY` 。 |
-| `sql`            | string   | DDL ステートメント。                                                                                          |
-| `commitTs`       | number  | DDL ステートメントの実行がアップストリームで完了したときのコミット タイムスタンプ。                                                          |
+| `sql`            | string   | DDL文。                                                                                          |
+| `commitTs`       | number  | DDL文の実行がアップストリームで完了したときのコミット タイムスタンプ。                                                          |
 | `buildTs`        | number  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。                                                            |
 | `tableSchema`    | object  | テーブルの現在のスキーマ情報。詳細については、 [TableSchemaの定義](#tableschema-definition)を参照してください。                            |
 | `preTableSchema` | object  | DDL文が実行される前のテーブルのスキーマ情報。`CREATE`のDDLイベントを除くすべてのDDLイベントにこのフィールドがあります。                                |
@@ -273,7 +273,7 @@ TiCDC は`INSERT`イベントを次の JSON 形式でエンコードします。
 | `table`         | string   | テーブルの名前。                                        |
 | `tableID`       | number  | テーブルの ID。                                       |
 | `type`          | string   | DML イベントタイプ`INSERT` 、 `UPDATE` 、 `DELETE`を含む)。 |
-| `commitTs`      | number  | DML ステートメントの実行がアップストリームで完了したときのコミット タイムスタンプ。    |
+| `commitTs`      | number  | DML文の実行がアップストリームで完了したときのコミット タイムスタンプ。    |
 | `buildTs`       | number  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。      |
 | `schemaVersion` | number  | DML メッセージがエンコードされるときのテーブルのスキーマバージョン番号。         |
 | `data`          | object  | 挿入されたデータ。フィールド名は列名、フィールド値は列値です。                 |
@@ -318,7 +318,7 @@ TiCDC は`UPDATE`イベントを次の JSON 形式でエンコードします。
 | `table`         | string    | テーブルの名前。                                        |
 | `tableID`       | number   | テーブルの ID。                                       |
 | `type`          | string    | DML イベントタイプ`INSERT` 、 `UPDATE` 、 `DELETE`を含む)。 |
-| `commitTs`      | number   | DML ステートメントの実行がアップストリームで完了したときのコミット タイムスタンプ。    |
+| `commitTs`      | number   | DML文の実行がアップストリームで完了したときのコミット タイムスタンプ。    |
 | `buildTs`       | number   | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。      |
 | `schemaVersion` | number   | DML メッセージがエンコードされるときのテーブルのスキーマバージョン番号。         |
 | `data`          | object   | 更新後のデータ。フィールド名は列名、フィールド値は列値です。                  |
@@ -358,7 +358,7 @@ TiCDC は`DELETE`イベントを次の JSON 形式でエンコードします。
 | `table`         | string   | テーブルの名前。                                        |
 | `tableID`       | number  | テーブルの ID。                                       |
 | `type`          | string   | DML イベントタイプ`INSERT` 、 `UPDATE` 、 `DELETE`を含む)。 |
-| `commitTs`      | number  | DML ステートメントの実行がアップストリームで完了したときのコミット タイムスタンプ。    |
+| `commitTs`      | number  | DML文の実行がアップストリームで完了したときのコミット タイムスタンプ。    |
 | `buildTs`       | number  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。      |
 | `schemaVersion` | number  | DML メッセージがエンコードされるときのテーブルのスキーマバージョン番号。         |
 | `old`           | object  | 削除されたデータ。フィールド名は列名、フィールド値は列値です。                 |

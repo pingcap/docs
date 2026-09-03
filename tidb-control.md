@@ -169,7 +169,7 @@ tidb-ctl base64decode [db_name.table_name] [base64_data]
 tidb-ctl base64decode [table_id] [base64_data]
 ```
 
-1. 環境を準備するには、次の SQL ステートメントを実行します。
+1. 環境を準備するには、次の SQL文を実行します。
 
     ```sql
     use test;

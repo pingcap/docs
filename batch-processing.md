@@ -1,6 +1,6 @@
 ---
 title: Batch Processing
-summary: パイプライン DML、非トランザクション DML、IMPORT INTO` ステートメント、非推奨の batch-dml 機能など、TiDB のバッチ処理機能を紹介します。
+summary: パイプライン DML、非トランザクション DML、IMPORT INTO`文、非推奨の batch-dml 機能など、TiDB のバッチ処理機能を紹介します。
 ---
 
 # バッチ処理 {#batch-processing}
@@ -10,7 +10,7 @@ summary: パイプライン DML、非トランザクション DML、IMPORT INTO`
 バッチ操作のパフォーマンスを最適化するために、TiDB はバージョンの進化とともにさまざまな機能を導入しています。
 
 - データのインポート
-    - `IMPORT INTO`ステートメント (TiDB v7.2.0 で導入され、v7.5.0 で GA になりました)
+    - `IMPORT INTO`文 (TiDB v7.2.0 で導入され、v7.5.0 で GA になりました)
 - データの挿入、更新、削除
     - パイプライン DML (実験的、TiDB v8.0.0 で導入)
     - 非トランザクションDML（TiDB v6.1.0で導入）
@@ -20,7 +20,7 @@ summary: パイプライン DML、非トランザクション DML、IMPORT INTO`
 
 ## データのインポート {#data-import}
 
-`IMPORT INTO`ステートメントはデータインポートタスク用に設計されています。これにより、CSV、SQL、PARQUET などの形式のデータを空の TiDB テーブルに迅速にインポートでき、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)を別途デプロイする必要はありません。
+`IMPORT INTO`文はデータインポートタスク用に設計されています。これにより、CSV、SQL、PARQUET などの形式のデータを空の TiDB テーブルに迅速にインポートでき、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)を別途デプロイする必要はありません。
 
 ### 主なメリット {#key-benefits}
 
@@ -63,7 +63,7 @@ summary: パイプライン DML、非トランザクション DML、IMPORT INTO`
 
 #### 制限事項 {#limitations}
 
-- [自動コミット](/transaction-overview.md#autocommit) `INSERT`、`REPLACE`、`UPDATE`、`DELETE`ステートメントのみをサポートします
+- [自動コミット](/transaction-overview.md#autocommit) `INSERT`、`REPLACE`、`UPDATE`、`DELETE`文のみをサポートします
 
 #### ユースケース {#use-cases}
 
@@ -71,13 +71,13 @@ summary: パイプライン DML、非トランザクション DML、IMPORT INTO`
 
 詳細については[パイプラインDML](/pipelined-dml.md)を参照してください。
 
-### 非トランザクションDMLステートメント {#non-transactional-dml-statements}
+### 非トランザクションDML文 {#non-transactional-dml-statements}
 
-非トランザクションDMLはTiDB v6.1.0で導入されました。当初は`DELETE`ステートメントのみがこの機能をサポートしています。v6.5.0以降では、 `INSERT` 、 `REPLACE` 、 `UPDATE`ステートメントもこの機能をサポートします。
+非トランザクションDMLはTiDB v6.1.0で導入されました。当初は`DELETE`文のみがこの機能をサポートしています。v6.5.0以降では、 `INSERT` 、 `REPLACE` 、 `UPDATE`文もこの機能をサポートします。
 
 #### 主なメリット {#key-benefits}
 
-- メモリ制限を回避して、単一の SQL ステートメントを複数の小さなステートメントに分割します。
+- メモリ制限を回避して、単一の SQL文を複数の小さな文に分割します。
 - 標準の DML よりもわずかに高速、または同等のパフォーマンスを実現します。
 
 #### 制限事項 {#limitations}

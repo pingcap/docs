@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.0-rc.1 Release Notes
-summary: TiDB 3.0.0-rc.1は2019年5月10日にリリースされ、安定性、使いやすさ、機能、SQLオプティマイザ、統計、実行エンジンが改善されました。このリリースには、SQLオプティマイザ、実行エンジン、サーバー、DDL、PD、TiKV、TiDB Binlog、Lightning、sync-diff-inspector、TiDB Ansibleの機能強化が含まれています。主な改善点としては、SQLプラン管理、メモリ使用量の追跡、実行エンジンの制御のサポート、DDLのCREATE TABLE`ステートメントへの`pre_split_regions`オプションの追加などが挙げられます。また、このリリースには、さまざまなバグ修正とパフォーマンスの最適化も含まれています。
+summary: TiDB 3.0.0-rc.1は2019年5月10日にリリースされ、安定性、使いやすさ、機能、SQLオプティマイザ、統計、実行エンジンが改善されました。このリリースには、SQLオプティマイザ、実行エンジン、サーバー、DDL、PD、TiKV、TiDB Binlog、Lightning、sync-diff-inspector、TiDB Ansibleの機能強化が含まれています。主な改善点としては、SQLプラン管理、メモリ使用量の追跡、実行エンジンの制御のサポート、DDLのCREATE TABLE`文への`pre_split_regions`オプションの追加などが挙げられます。また、このリリースには、さまざまなバグ修正とパフォーマンスの最適化も含まれています。
 ---
 
 # TiDB 3.0.0-rc.1 リリースノート {#tidb-3-0-0-rc-1-release-notes}
@@ -49,7 +49,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     - 厳密なSQLモードが無効になっている場合にNULLフィールドを挿入する際の妥当性チェックを修正[＃10161](https://github.com/pingcap/tidb/pull/10161)
 
 - DDL
-    - `CREATE TABLE`ステートメントに`pre_split_regions`オプションを追加します。このオプションは、テーブルの作成時にテーブルリージョンを事前に分割して、テーブルの作成後に大量の書き込みによって発生する書き込みホットスポットを回避することをサポートします[＃10138](https://github.com/pingcap/tidb/pull/10138)
+    - `CREATE TABLE`文に`pre_split_regions`オプションを追加します。このオプションは、テーブルの作成時にテーブルリージョンを事前に分割して、テーブルの作成後に大量の書き込みによって発生する書き込みホットスポットを回避することをサポートします[＃10138](https://github.com/pingcap/tidb/pull/10138)
     - 一部のDDL文の実行パフォーマンスを最適化する[＃10170](https://github.com/pingcap/tidb/pull/10170)
     - `FULLTEXT KEY` ではフルテキストインデックスがサポートされていないという警告を追加します [＃9821](https://github.com/pingcap/tidb/pull/9821)
     - TiDB の古いバージョンにおける UTF8 および UTF8MB4 文字セットの互換性の問題を修正しました [＃9820](https://github.com/pingcap/tidb/pull/9820)

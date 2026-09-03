@@ -14,7 +14,7 @@ summary: TiDB 2.0 RC5は2018年4月17日にリリースされ、MySQLとの互�
 - バイナリ型のゼロ値を修正する
 - トランザクション内の`BatchGet`問題を修正する
 - 消費スペースを削減するために、 `Add Index`操作をロールバックしながら書き込まれたデータをクリーンアップします。
-- `insert on duplicate key update`ステートメントを最適化すると、パフォーマンスが10倍向上します
+- `insert on duplicate key update`文を最適化し、パフォーマンスを10倍向上させました
 - `UNIX_TIMESTAMP`関数によって返される結果の型に関する問題を修正しました
 - NOT NULL列を追加するときにNULL値が挿入される問題を修正しました
 - `Show Process List`文目の実行文のメモリ使用量の表示をサポート

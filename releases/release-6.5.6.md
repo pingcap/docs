@@ -51,7 +51,7 @@ TiDB バージョン: 6.5.6
     - TiCDC
 
         - `sink-uri`構成で`content-compatible=true`を設定することにより、 TiCDC Canal-JSON コンテンツ フォーマット[公式Canal出力のコンテンツ形式と互換性がある](https://docs.pingcap.com/tidb/v6.5/ticdc-canal-json#compatibility-with-the-official-canal)作成をサポートします。 [＃10106](https://github.com/pingcap/tiflow/issues/10106) @[3AceShowHand](https://github.com/3AceShowHand)
-        - `ADD INDEX` DDL操作を複製する実行ロジックを最適化して、後続のDMLステートメントをブロックしないようにします。 [＃9644](https://github.com/pingcap/tiflow/issues/9644) @[sdojjy](https://github.com/sdojjy)
+        - `ADD INDEX` DDL操作を複製する実行ロジックを最適化して、後続のDML文をブロックしないようにします。 [＃9644](https://github.com/pingcap/tiflow/issues/9644) @[sdojjy](https://github.com/sdojjy)
         - TiCDC 増分スキャンによる上流 TiKV への影響を軽減 [＃11390](https://github.com/tikv/tikv/issues/11390) @[hicqu](https://github.com/hicqu)
 
 ## バグ修正 {#bug-fixes}

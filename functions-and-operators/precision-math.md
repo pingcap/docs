@@ -87,7 +87,7 @@ SET sql_mode = 'TRADITIONAL`;
 - 厳密モードでは、挿入と更新は禁止され、エラーが発生します。
 - 厳密モードでない場合は警告が発生します。
 
-次の SQL ステートメントでは、
+次の SQL文では、
 
 ```sql
 INSERT INTO t SET i = 1/0;
@@ -98,9 +98,9 @@ INSERT INTO t SET i = 1/0;
 | `sql_mode`値                      | 結果                           |
 | :------------------------------- | :--------------------------- |
 | ''                       | 警告なし、エラーなし。i は NULL に設定されます。 |
-| 厳しい                              | 警告なし、エラーなし。i は NULL に設定されます。 |
+| strict                            | 警告なし、エラーなし。i は NULL に設定されます。 |
 | `ERROR_FOR_DIVISION_BY_ZERO`     | 警告、エラーなし。i は NULL に設定されています。 |
-| 厳格、 `ERROR_FOR_DIVISION_BY_ZERO` | エラー。行は挿入されません。               |
+| strict、 `ERROR_FOR_DIVISION_BY_ZERO` | エラー。行は挿入されません。               |
 
 ## 丸め動作 {#rounding-behavior}
 

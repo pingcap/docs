@@ -49,7 +49,7 @@ TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェ�
 
 モニターのマシン時間とクラスター内の時間の差を確認してください。差が大きい場合は、時間を修正することでモニターにすべてのメトリックが表示されるようになります。
 
-### TiDB でスロークエリログを個別に記録するにはどうすればよいですか? スロークエリの SQL ステートメントを見つけるにはどうすればよいでしょうか? {#how-to-separately-record-the-slow-query-log-in-tidb-how-to-locate-the-slow-query-sql-statement}
+### TiDB でスロークエリログを個別に記録するにはどうすればよいですか? スロークエリの SQL文を見つけるにはどうすればよいでしょうか? {#how-to-separately-record-the-slow-query-log-in-tidb-how-to-locate-the-slow-query-sql-statement}
 
 1. TiDBのスロークエリの定義は、TiDB設定ファイルにあります。`tidb_slow_log_threshold: 300`は、スロークエリのしきい値（単位：ミリ秒）を設定するために使用されます。
 

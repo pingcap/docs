@@ -36,7 +36,7 @@ DELETE FROM t WHERE id = 3;
 
 ### `PREPARE`を使用する {#use-prepare}
 
-SQL ステートメントを複数回実行する必要がある場合は、SQL 構文を繰り返し解析することによるオーバーヘッドを回避するために、 `PREPARE`ステートメントを使用することをお勧めします。
+SQL文を複数回実行する必要がある場合は、SQL 構文を繰り返し解析することによるオーバーヘッドを回避するために、 `PREPARE`文を使用することをお勧めします。
 
 <SimpleTab>
 <div label="Golang">
@@ -105,7 +105,7 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 
 ### テーブルデータ全体を削除するには、`DELETE`ではなく`TRUNCATE`を使用する {#use-truncate-instead-of-delete-for-full-table-data}
 
-テーブルからすべてのデータを削除する必要がある場合は、 `TRUNCATE`ステートメントを使用することをお勧めします。
+テーブルからすべてのデータを削除する必要がある場合は、 `TRUNCATE`文を使用することをお勧めします。
 
 ```sql
 TRUNCATE TABLE t;

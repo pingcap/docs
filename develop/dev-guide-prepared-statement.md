@@ -9,7 +9,7 @@ aliases: ['/ja/tidb/stable/dev-guide-prepared-statement/','/ja/tidbcloud/dev-gui
 A [プリペアドステートメント](/sql-statements/sql-statement-prepare.md) 、パラメータのみが異なる複数のSQL文をテンプレート化します。SQL文とパラメータを分離します。これにより、SQL文の以下の側面を改善できます。
 
 - **セキュリティ**: パラメータとステートメントが分離されているため、 [SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)攻撃のリスクを回避します。
-- **パフォーマンス**: ステートメントは TiDBサーバー上で事前に解析されるため、後続の実行ではパラメータのみが渡され、SQL ステートメント全体の解析、SQL ステートメント文字列の結合、およびネットワーク転送のコストが節約されます。
+- **パフォーマンス**: ステートメントは TiDBサーバー上で事前に解析されるため、後続の実行ではパラメータのみが渡され、SQL文全体の解析、SQL ステートメント文字列の結合、およびネットワーク転送のコストが節約されます。
 
 ほとんどのアプリケーションでは、SQL文を列挙できます。限られた数のSQL文で、アプリケーション全体のデータクエリを完了できます。そのため、プリペアドステートメントを使用するのがベストプラクティスです。
 
@@ -32,7 +32,7 @@ PREPARE {prepared_statement_name} FROM '{prepared_statement_sql}';
 
 ### プリペアドステートメントを使用する {#use-the-prepared-statement}
 
-プリペアドステートメントは、パラメータとして**ユーザー変数**のみを使用できるため、 [`EXECUTE`ステートメント](/sql-statements/sql-statement-execute.md)がプリペアドステートメントを呼び出す前に、 [`SET`ステートメント](/sql-statements/sql-statement-set-variable.md)を使用して変数を設定します。
+プリペアドステートメントは、パラメータとして**ユーザー変数**のみを使用できるため、 [`EXECUTE`文](/sql-statements/sql-statement-execute.md)がプリペアドステートメントを呼び出す前に、 [`SET`文](/sql-statements/sql-statement-set-variable.md)を使用して変数を設定します。
 
 ```sql
 SET @{parameter_name} = {parameter_value};
@@ -45,7 +45,7 @@ EXECUTE {prepared_statement_name} USING @{parameter_name};
 |     `{parameter_value}`     |                                     ユーザー変数値                                    |
 | `{prepared_statement_name}` | 前処理文の名前[プリペアドステートメントを作成する](#create-a-prepared-statement)で定義された名前と同じである必要があります。 |
 
-詳細については[`EXECUTE`ステートメント](/sql-statements/sql-statement-execute.md)を参照してください。
+詳細については[`EXECUTE`文](/sql-statements/sql-statement-execute.md)を参照してください。
 
 ### プリペアドステートメントを削除する {#delete-the-prepared-statement}
 
@@ -57,7 +57,7 @@ DEALLOCATE PREPARE {prepared_statement_name};
 | :-------------------------: | :----------------------------------------------------------------------------: |
 | `{prepared_statement_name}` | 前処理文の名前[プリペアドステートメントを作成する](#create-a-prepared-statement)で定義された名前と同じである必要があります。 |
 
-詳細については[`DEALLOCATE`ステートメント](/sql-statements/sql-statement-deallocate.md)を参照してください。
+詳細については[`DEALLOCATE`文](/sql-statements/sql-statement-deallocate.md)を参照してください。
 
 ## 例 {#examples}
 

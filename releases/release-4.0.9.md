@@ -129,7 +129,7 @@ TiDB バージョン: 4.0.9
     - パーティション式の値の型がパーティション列の型と一致しないバグを修正しました[＃21136](https://github.com/pingcap/tidb/pull/21136)
     - ハッシュ型パーティションがパーティション名が一意かどうかをチェックしないバグを修正[＃21257](https://github.com/pingcap/tidb/pull/21257)
     - ハッシュパーティションテーブルに`INT`以外の型の値を挿入した後に返される誤った結果を修正しました。 [＃21238](https://github.com/pingcap/tidb/pull/21238)
-    - `INSERT`ステートメントでインデックス結合を使用すると、場合によっては予期しないエラーが発生する問題を修正しました[＃21249](https://github.com/pingcap/tidb/pull/21249)
+    - `INSERT`文でインデックス結合を使用すると、場合によっては予期しないエラーが発生する問題を修正しました[＃21249](https://github.com/pingcap/tidb/pull/21249)
     - `CASE WHEN`演算子の`BigInt`符号なし列値が`BigInt`符号付き値に誤って変換される問題を修正しました [＃21236](https://github.com/pingcap/tidb/pull/21236)
     - インデックスハッシュ結合とインデックスマージ結合が照合順序考慮しないバグを修正しました [＃21219](https://github.com/pingcap/tidb/pull/21219)
     - パーティションテーブルが構文`CREATE TABLE`と`SELECT`照合順序を考慮しないバグを修正[＃21181](https://github.com/pingcap/tidb/pull/21181)

@@ -1,6 +1,6 @@
 ---
 title: TiDB Query Execution Plan Overview
-summary: TiDB の EXPLAIN` ステートメントによって返される実行計画情報について学習します。
+summary: TiDB の EXPLAIN`文によって返される実行計画情報について学習します。
 ---
 
 # TiDB クエリ実行計画の概要 {#tidb-query-execution-plan-overview}

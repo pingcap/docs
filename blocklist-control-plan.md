@@ -132,7 +132,7 @@ DESC mysql.expr_pushdown_blacklist;
 
 ブロックリストが有効になっているかどうかを判断するには、 `EXPLAIN`の結果を観察します（ [TiDB クエリ実行計画の概要](/explain-overview.md)を参照）。
 
-1. 次の SQL ステートメントの`WHERE`句の述語`a < 2`と`a > 2` 、TiKV にプッシュダウンできます。
+1. 次の SQL文の`WHERE`句の述語`a < 2`と`a > 2` 、TiKV にプッシュダウンできます。
 
     ```sql
     EXPLAIN SELECT * FROM t WHERE a < 2 AND a > 2;

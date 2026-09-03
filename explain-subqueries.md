@@ -1,6 +1,6 @@
 ---
 title: Explain Statements That Use Subqueries
-summary: TiDB のEXPLAINステートメントによって返される実行計画情報について学習します。
+summary: TiDB のEXPLAIN文によって返される実行計画情報について学習します。
 ---
 
 # サブクエリを使用するステートメントの説明 {#explain-statements-that-use-subqueries}

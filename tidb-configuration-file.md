@@ -60,19 +60,19 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 >
 > バージョン 6.3.0 以降、この設定項目は非推奨となり、システム変数[`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom)に置き換えられました。TiDB クラスタをバージョン 6.3.0 以降にアップグレードすると、この変数は`oom-use-tmp-storage`の値で自動的に初期化されます。その後、 `oom-use-tmp-storage`の値を変更しても効果は**ありません**。
 
-- 単一の SQL ステートメントがシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)で指定されたメモリクォータを超えた場合に、一部のオペレーターに対して一時ストレージを有効にするかどうかを制御します。
+- 単一の SQL文がシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)で指定されたメモリクォータを超えた場合に、一部のオペレーターに対して一時ストレージを有効にするかどうかを制御します。
 - デフォルト値: `true`
 
 ### `tmp-storage-path` {#tmp-storage-path}
 
-- 単一の SQL ステートメントがシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)で指定されたメモリクォータを超えた場合に、一部のオペレーターの一時的なストレージパスを指定します。
+- 単一の SQL文がシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)で指定されたメモリクォータを超えた場合に、一部のオペレーターの一時的なストレージパスを指定します。
 - デフォルト値: `<temporary directory of OS>/<OS user ID>_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage` 。 `MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=`は`Base64`の`<host>:<port>/<statusHost>:<statusPort>`エンコード結果です。
 - この設定は、システム変数[`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom)が`ON`の場合にのみ有効になります。
 
 ### `tmp-storage-quota` {#tmp-storage-quota}
 
 - `tmp-storage-path`のストレージのクォータを指定します。単位はバイトです。
-- 単一の SQL ステートメントが一時ディスクを使用し、TiDBサーバーの一時ディスクの合計ボリュームがこの構成値を超えると、現在の SQL 操作はキャンセルされ、 `Out of Global Storage Quota!`エラーが返されます。
+- 単一の SQL文が一時ディスクを使用し、TiDBサーバーの一時ディスクの合計ボリュームがこの構成値を超えると、現在の SQL 操作はキャンセルされ、 `Out of Global Storage Quota!`エラーが返されます。
 - この設定の値が`0`より小さい場合、上記のチェックと制限は適用されません。
 - デフォルト値: `-1`
 - `tmp-storage-path`の残りの使用可能なストレージが`tmp-storage-quota`で定義された値よりも少ない場合、TiDBサーバーは起動時にエラーを報告して終了します。
@@ -85,14 +85,14 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 
 ### `compatible-kill-query` {#compatible-kill-query}
 
-- `KILL`ステートメントを MySQL 互換に設定するかどうかを決定します。
+- `KILL`文を MySQL 互換に設定するかどうかを決定します。
 - デフォルト値: `false`
 - `compatible-kill-query`は、[`enable-global-kill`](#enable-global-kill-new-in-v610)が`false`に設定されている場合にのみ有効になります。
 - [`enable-global-kill`](#enable-global-kill-new-in-v610)が`false`の場合、 `compatible-kill-query`は、クエリを強制終了する際に`TIDB`キーワードを追加する必要があるかどうかを制御します。
     - `compatible-kill-query`が`false`の場合、TiDB での`KILL xxx`の動作は MySQL とは異なります。TiDB でクエリを強制終了するには、 `TIDB`のように`KILL TIDB xxx`キーワードを追加する必要があります。
     - `compatible-kill-query`が`true`の場合、TiDB でクエリを強制終了するには、 `TIDB`キーワードを追加する必要はありません。クライアントが**常に同じ TiDB インスタンスに接続されることが確実でない限り**、構成ファイルで`compatible-kill-query`を`true`に設定することは強くお勧めしません。これは、デフォルトの MySQL クライアントで<kbd>Control</kbd> + <kbd>C</kbd>を押すと`KILL`が実行される新しい接続が開かれるためです。クライアントと TiDB クラスタの間にプロキシがある場合、新しい接続は別の TiDB インスタンスにルーティングされる可能性があり、誤って別のセッションが強制終了される可能性があります。
 - [`enable-global-kill`](#enable-global-kill-new-in-v610)が`true`の場合、 `KILL xxx`と`KILL TIDB xxx`は同じ効果を持ちます。
-- `KILL`ステートメントの詳細については、[KILL [TIDB]](/sql-statements/sql-statement-kill.md)を参照してください。
+- `KILL`文の詳細については、[KILL [TIDB]](/sql-statements/sql-statement-kill.md)を参照してください。
 
 ### `check-mb4-value-in-utf8` {#check-mb4-value-in-utf8}
 
@@ -225,7 +225,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 
 - グローバルキル（インスタンスをまたいでクエリや接続を終了する）機能を有効にするかどうかを制御します。
 - デフォルト値: `true`
-- 値が`true`の場合、 `KILL`および`KILL TIDB`ステートメントはインスタンス間でクエリまたは接続を終了できるため、クエリまたは接続が誤って終了することを心配する必要はありません。クライアントを使用して任意の TiDB インスタンスに接続し、 `KILL`または`KILL TIDB`ステートメントを実行すると、ステートメントは対象の TiDB インスタンスに転送されます。クライアントと TiDB クラスタの間にプロキシがある場合、 `KILL`および`KILL TIDB`ステートメントも実行のために対象の TiDB インスタンスに転送されます。
+- 値が`true`の場合、 `KILL`および`KILL TIDB`文はインスタンス間でクエリまたは接続を終了できるため、クエリまたは接続が誤って終了することを心配する必要はありません。クライアントを使用して任意の TiDB インスタンスに接続し、 `KILL`または`KILL TIDB`文を実行すると、文は対象の TiDB インスタンスに転送されます。クライアントと TiDB クラスタの間にプロキシがある場合、 `KILL`および`KILL TIDB`文も実行のために対象の TiDB インスタンスに転送されます。
 - バージョン7.3.0以降では、 `enable-global-kill`と[`enable-32bits-connection-id`](#enable-32bits-connection-id-new-in-v730)の両方が`true`に設定されている場合、MySQLコマンドラインのControl+Cを使用してクエリまたは接続を終了できます。詳細については、[`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
 
 ### `enable-32bits-connection-id` <span class="version-mark">v7.3.0で追加</span> {#enable-32bits-connection-id-new-in-v730}
@@ -589,7 +589,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 
 > **Note:**
 >
-> バージョン6.6.0以降、TiDBは[リソース制御](/tidb-resource-control-ru-groups.md)サポートしています。この機能を使用すると、異なるリソースグループで異なる優先度のSQLステートメントを実行できます。これらのリソースグループに適切なクォータと優先度を設定することで、異なる優先度のSQLステートメントのスケジューリングをより適切に制御できます。リソース制御が有効になっている場合、ステートメントの優先度は適用されなくなります。 [リソース制御](/tidb-resource-control-ru-groups.md)を使用して、異なるSQLステートメントのリソース使用量を管理することをお勧めします。
+> バージョン6.6.0以降、TiDBは[リソース制御](/tidb-resource-control-ru-groups.md)サポートしています。この機能を使用すると、異なるリソースグループで異なる優先度のSQL文を実行できます。これらのリソースグループに適切なクォータと優先度を設定することで、異なる優先度のSQL文のスケジューリングをより適切に制御できます。リソース制御が有効になっている場合、ステートメントの優先度は適用されなくなります。 [リソース制御](/tidb-resource-control-ru-groups.md)を使用して、異なるSQL文のリソース使用量を管理することをお勧めします。
 
 ### `distinct-agg-push-down` {#distinct-agg-push-down}
 
@@ -882,7 +882,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 
 - 悲観的トランザクションモードがグローバルに有効になっている場合 ( `tidb_txn_mode='pessimistic'` ) に、自動コミットトランザクションが使用するトランザクションモードを決定します。デフォルトでは、悲観的トランザクションモードがグローバルに有効になっていても、自動コミットトランザクションは楽観的トランザクションモードを使用します。 `pessimistic-auto-commit`を有効にすると ( `true` に設定)、自動コミットトランザクションも悲観的モードを使用するようになり、明示的にコミットされた他の悲観的トランザクションと一貫性が保たれます。
 - 競合が発生するシナリオでは、この設定を有効にすると、TiDB は自動コミットトランザクションをグローバルロック待機管理に組み込み、デッドロックを回避し、デッドロックを引き起こす競合によって発生するレイテンシーの急増を軽減します。
-- 競合のないシナリオで、自動コミットトランザクションが多数ある場合 (具体的な数は実際のシナリオによって決まります。たとえば、自動コミットトランザクションの数がアプリケーションの総数の半分以上を占める場合)、単一のトランザクションが大量のデータを操作すると、この構成を有効にするとパフォーマンスが低下します。たとえば、自動コミット`INSERT INTO SELECT`ステートメントです。
+- 競合のないシナリオで、自動コミットトランザクションが多数ある場合 (具体的な数は実際のシナリオによって決まります。たとえば、自動コミットトランザクションの数がアプリケーションの総数の半分以上を占める場合)、単一のトランザクションが大量のデータを操作すると、この構成を有効にするとパフォーマンスが低下します。たとえば、自動コミット`INSERT INTO SELECT`文です。
 - セッションレベルのシステム変数[`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800)が`"bulk"`に設定されている場合、セッションにおけるこの設定の効果は、それを`false`に設定することと同じです。
 - デフォルト値: `false`
 
@@ -962,7 +962,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 
 > **Note:**
 >
-> バージョン6.6.0以降、TiDBは[リソース制御](/tidb-resource-control-ru-groups.md)サポートしています。この機能を使用すると、異なるリソースグループで異なる優先度のSQLステートメントを実行できます。これらのリソースグループに適切なクォータと優先度を設定することで、異なる優先度のSQLステートメントのスケジューリングをより適切に制御できます。リソース制御が有効になっている場合、ステートメントの優先度は適用されなくなります。 [リソース制御](/tidb-resource-control-ru-groups.md)を使用して、異なるSQLステートメントのリソース使用量を管理することをお勧めします。
+> バージョン6.6.0以降、TiDBは[リソース制御](/tidb-resource-control-ru-groups.md)サポートしています。この機能を使用すると、異なるリソースグループで異なる優先度のSQL文を実行できます。これらのリソースグループに適切なクォータと優先度を設定することで、異なる優先度のSQL文のスケジューリングをより適切に制御できます。リソース制御が有効になっている場合、ステートメントの優先度は適用されなくなります。 [リソース制御](/tidb-resource-control-ru-groups.md)を使用して、異なるSQL文のリソース使用量を管理することをお勧めします。
 
 ### `max_connections` {#max_connections}
 

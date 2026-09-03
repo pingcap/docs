@@ -125,7 +125,7 @@ TiDB バージョン: 6.5.3
         - ダウンストリームが Kafka の場合、TiCDC がダウンストリームのメタデータを頻繁にクエリし、ダウンストリームに過度のワークロードを引き起こす問題を修正しました[＃8957](https://github.com/pingcap/tiflow/issues/8957) [＃8959](https://github.com/pingcap/tiflow/issues/8959) @[Rustin170506](https://github.com/Rustin170506)
         - Kafka メッセージのサイズが大きすぎるためにレプリケーションエラーが発生した場合に、メッセージ本文がログに記録される問題を修正しました。 [＃9031](https://github.com/pingcap/tiflow/issues/9031) @[darraes](https://github.com/darraes)
         - 下流の Kafka シンクがローリング再起動されたときに発生する TiCDC ノードpanicを修正しました[＃9023](https://github.com/pingcap/tiflow/issues/9023) @[asddongmen](https://github.com/asddongmen)
-        - ストレージサービスにデータを複製するときに、下流のDDLステートメントに対応するJSONファイルにテーブルフィールドのデフォルト値が記録されない問題を修正しました。 [＃9066](https://github.com/pingcap/tiflow/issues/9066) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - ストレージサービスにデータを複製するときに、下流のDDL文に対応するJSONファイルにテーブルフィールドのデフォルト値が記録されない問題を修正しました。 [＃9066](https://github.com/pingcap/tiflow/issues/9066) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
     - TiDB Lightning
 

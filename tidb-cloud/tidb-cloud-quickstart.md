@@ -60,9 +60,9 @@ AWS でホストされているTiDB Cloud Starter クラスターでは、 TiDB 
 
 3. SQL エディターで、macOS の場合は<kbd>⌘</kbd> + <kbd>I</kbd> (Windows または Linux の場合は<kbd>Control</kbd> + <kbd>I</kbd> ) を押して、 [Chat2Query（PREVIEW）](/tidb-cloud/tidb-cloud-glossary.md#chat2query)に SQL クエリを自動的に生成するように指示します。
 
-    たとえば、2つの列 (列`id`と列`name` ) を持つ新しいテーブル`test.t`を作成するには、 `use test;`と入力してデータベースを指定し、 <kbd>⌘</kbd> + <kbd>I</kbd>を押して、指示として`create a new table t with id and name`を入力し、 **Enter**を押すと、AI によってそれに応じた SQL ステートメントが生成されます。
+    たとえば、2つの列 (列`id`と列`name` ) を持つ新しいテーブル`test.t`を作成するには、 `use test;`と入力してデータベースを指定し、 <kbd>⌘</kbd> + <kbd>I</kbd>を押して、指示として`create a new table t with id and name`を入力し、 **Enter**を押すと、AI によってそれに応じた SQL文が生成されます。
 
-    生成されたステートメントについては、 **Accept**をクリックして承認し、必要に応じてさらに編集するか、 **Discard**をクリックして拒否することができます。
+    生成されたSQL文については、 **Accept**をクリックして承認し、必要に応じてさらに編集するか、 **Discard**をクリックして拒否することができます。
 
     > **Note:**
     >
@@ -98,7 +98,7 @@ AWS でホストされているTiDB Cloud Starter クラスターでは、 TiDB 
 
 クエリを実行すると、ページの下部にクエリのログと結果がすぐに表示されます。
 
-AI にさらに多くの SQL ステートメントを生成させるには、次の例に示すように、さらに命令を入力します。
+AI にさらに多くの SQL文を生成させるには、次の例に示すように、さらに命令を入力します。
 
 ```sql
 use test;

@@ -32,7 +32,7 @@ REVOKE priv_type(col_name [, col_name] ...) [, priv_type(col_name [, col_name] .
 
 - `priv_type`は`SELECT` 、 `INSERT` 、 `UPDATE` 、および`REFERENCES` 。
 - `ON`句では、例えば`test.tbl`のようにテーブルを指定する必要があります。
-- 単一の`GRANT`または`REVOKE`ステートメントには、複数の特権項目を含めることができ、各特権項目は独自の列名のリストを指定できます。
+- 単一の`GRANT`または`REVOKE`文には、複数の特権項目を含めることができ、各特権項目は独自の列名のリストを指定できます。
 
 例えば、次のステートメントは`SELECT`の`col1`に対する権限と、 `col2`の`UPDATE`の`col3`に対する権限をユーザーに付与します。
 
@@ -89,11 +89,11 @@ SHOW GRANTS FOR 'newuser'@'%';
 
 ## 例：列レベルの権限アクセス制御 {#example-column-level-privilege-access-control}
 
-列レベルの権限を付与または取り消した後、TiDB は SQL ステートメントで参照されている列に対して権限チェックを実行します。例:
+列レベルの権限を付与または取り消した後、TiDB は SQL文で参照されている列に対して権限チェックを実行します。例:
 
-- `SELECT`ステートメント: `SELECT`列の権限は、 `SELECT`リストで参照される列、および`WHERE` 、 `ORDER BY` 、その他の句に影響します。
-- `UPDATE`ステートメント: `SET`句で更新される列には`UPDATE`列権限が必要です。式または条件で読み込まれる列には、通常、 `SELECT`列権限も必要です。
-- `INSERT`ステートメント: `INSERT`列の権限を必要とする列が書き込まれます。 `INSERT INTO t VALUES (...)`テーブル定義の順序ですべての列に値を書き込むことと同じです。
+- `SELECT`文: `SELECT`列の権限は、 `SELECT`リストで参照される列、および`WHERE` 、 `ORDER BY` 、その他の句に影響します。
+- `UPDATE`文: `SET`句で更新される列には`UPDATE`列権限が必要です。式または条件で読み込まれる列には、通常、 `SELECT`列権限も必要です。
+- `INSERT`文: `INSERT`列の権限を必要とする列が書き込まれます。 `INSERT INTO t VALUES (...)`テーブル定義の順序ですべての列に値を書き込むことと同じです。
 
 次の例では、ユーザー`newuser`は`col1`を照会し、 `col3`を更新することしかできません。
 

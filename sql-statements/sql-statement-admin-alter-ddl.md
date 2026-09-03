@@ -9,7 +9,7 @@ summary: TiDBデータベースにおけるADMIN ALTER DDL JOBS`の使用方法�
 >
 > 現在、この機能は[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
-`ADMIN ALTER DDL JOBS`ステートメントを使用すると、実行中の単一の DDL ジョブのパラメーターを変更できます。例:
+`ADMIN ALTER DDL JOBS`文を使用すると、実行中の単一の DDL ジョブのパラメーターを変更できます。例:
 
 ```sql
 ADMIN ALTER DDL JOBS 101 THREAD = 8;
@@ -18,7 +18,7 @@ ADMIN ALTER DDL JOBS 101 THREAD = 8;
 - `101` : DDL ジョブの ID を示します。この ID は、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)を実行することで取得できます。
 - `THREAD` : DDL ジョブの同時実行数を示します。システム変数[`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)を使用して初期値を構成できます。
 
-`ADMIN ALTER DDL JOBS`ステートメントでサポートされている DDL ジョブ タイプには、 `ADD INDEX` 、 `MODIFY COLUMN` 、および`REORGANIZE PARTITION`が含まれます。その他の DDL ジョブ タイプの場合、 `ADMIN ALTER DDL JOBS`を実行すると`unsupported DDL operation`エラーが返されます。
+`ADMIN ALTER DDL JOBS`文でサポートされている DDL ジョブ タイプには、 `ADD INDEX` 、 `MODIFY COLUMN` 、および`REORGANIZE PARTITION`が含まれます。その他の DDL ジョブ タイプの場合、 `ADMIN ALTER DDL JOBS`を実行すると`unsupported DDL operation`エラーが返されます。
 
 現在、 `ADMIN ALTER DDL JOBS`を実行することで、単一の DDL ジョブのパラメータのみを変更できます。複数の DDL ジョブ ID のパラメータを同時に変更することはサポートされていません。
 

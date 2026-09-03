@@ -32,6 +32,6 @@ TiDB 2.0では、リージョンの健全性はPDメトリック監視ページ�
 
 ## モニターの`QPS`と`Statement OPS`の違いは何ですか? {#what-is-the-difference-between-qps-and-statement-ops-in-the-monitor}
 
-`QPS`統計は、 `use database` 、 `load data` 、 `begin` 、 `commit` 、 `set` 、 `show` 、 `insert` 、 `select`を含むすべての SQL ステートメントに関するものです。
+`QPS`統計は、 `use database` 、 `load data` 、 `begin` 、 `commit` 、 `set` 、 `show` 、 `insert` 、 `select`を含むすべての SQL文に関するものです。
 
-`Statement OPS`統計は、 `select` 、 `update` 、 `insert`を含むアプリケーション関連の SQL ステートメントのみに関するものであるため、 `Statement OPS`統計の方がアプリケーションにより適合します。
+`Statement OPS`統計は、 `select` 、 `update` 、 `insert`を含むアプリケーション関連の SQL文のみに関するものであるため、 `Statement OPS`統計の方がアプリケーションにより適合します。

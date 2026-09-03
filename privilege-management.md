@@ -160,7 +160,7 @@ SELECT user,host,db FROM mysql.db WHERE user='genius';
 
 [`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md)ステートメントを使用すると、システム管理者はユーザーアカウントから権限を取り消すことができます。
 
-`REVOKE`ステートメントは`GRANT`ステートメントに対応します。
+`REVOKE`文は`GRANT`文に対応します。
 
 ```sql
 REVOKE ALL PRIVILEGES ON `test`.* FROM 'genius'@'localhost';
@@ -222,7 +222,7 @@ Query OK, 0 rows affected (0.27 sec)
 
 ### ユーザーに付与された権限を確認する {#check-privileges-granted-to-users}
 
-`SHOW GRANTS`ステートメントを使用すると、ユーザーに付与されている権限を確認できます。例:
+`SHOW GRANTS`文を使用すると、ユーザーに付与されている権限を確認できます。例:
 
 ```sql
 SHOW GRANTS; -- show grants for the current user
@@ -281,10 +281,10 @@ SHOW GRANTS FOR `rw_user`@`192.168.%`;
 - `RESTRICTED_STATUS_ADMIN`を使用すると、SEM が有効になっているときに、権限所有者は[`SHOW [GLOBAL|SESSION] STATUS`](/sql-statements/sql-statement-show-status.md)ですべてのステータス変数を表示できます。
 - `RESTRICTED_VARIABLES_ADMIN`は、SEM が有効になっている場合に、権限所有者がすべてのシステム変数を表示できるようにします。
 - `RESTRICTED_USER_ADMIN` SEM が有効になっている場合、特権所有者が SUPER ユーザーによってアクセス権を取り消されることを禁止します。
-- `RESTRICTED_CONNECTION_ADMIN`権限所有者が`RESTRICTED_USER_ADMIN`ユーザーの接続を強制終了することを許可します。この権限は`KILL`および`KILL TIDB`ステートメントに影響します。
+- `RESTRICTED_CONNECTION_ADMIN`権限所有者が`RESTRICTED_USER_ADMIN`ユーザーの接続を強制終了することを許可します。この権限は`KILL`および`KILL TIDB`文に影響します。
 - `RESTRICTED_REPLICA_WRITER_ADMIN`を使用すると、TiDB クラスタで読み取り専用モードが有効になっている場合でも、権限所有者は影響を受けることなく書き込みまたは更新操作を実行できます。詳細については、 [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520)を参照してください。
 
-動的権限の全セットを確認するには、 `SHOW PRIVILEGES`ステートメントを実行してください。プラグインは新しい権限を追加できるため、割り当て可能な権限のリストは、TiDB のインストール環境によって異なる場合があります。
+動的権限の全セットを確認するには、 `SHOW PRIVILEGES`文を実行してください。プラグインは新しい権限を追加できるため、割り当て可能な権限のリストは、TiDB のインストール環境によって異なる場合があります。
 
 ## `SUPER`特権 {#super-privilege}
 
@@ -340,9 +340,9 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 
 ### 変更する {#alter}
 
-- `ALTER`ステートメントすべてにおいて、ユーザーは対応するテーブルに対する`ALTER`権限を持っている必要があります。
+- `ALTER`文すべてにおいて、ユーザーは対応するテーブルに対する`ALTER`権限を持っている必要があります。
 - `ALTER...DROP`および`ALTER...RENAME TO`以外のステートメントについては、ユーザーは対応するテーブルに対して`INSERT`および`CREATE`の権限を持っている必要があります。
-- `ALTER...DROP`ステートメントを使用するには、ユーザーは対応するテーブルに対して`DROP`権限を持っている必要があります。
+- `ALTER...DROP`文を使用するには、ユーザーは対応するテーブルに対して`DROP`権限を持っている必要があります。
 - `ALTER...RENAME TO`ステートメントを実行するには、ユーザーは名前変更前にテーブルに対する`DROP`権限を持ち、名前変更後にテーブルに対する`CREATE`および`INSERT`権限ている必要があります。
 
 > **Note:**
@@ -459,7 +459,7 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 
 ### 取り消す {#revoke}
 
-`GRANT`権限と、 `REVOKE`ステートメントで指定されている権限が必要です。
+`GRANT`権限と、 `REVOKE`文で指定されている権限が必要です。
 
 `REVOKE ROLE`には`SUPER`または`ROLE_ADMIN`権限が必要です。
 

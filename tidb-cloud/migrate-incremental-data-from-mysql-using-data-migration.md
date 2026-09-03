@@ -48,7 +48,7 @@ summary: データ移行を使用して、Amazon Aurora MySQL、Amazon Relationa
 
 - ソースデータベースでGTIDモードが有効になっていることを確認してください。
 - ソースデータベースがMySQLの場合、MySQLのバージョンは5.6以降である必要があり、ストレージエンジンはInnoDBである必要があります。
-- 移行ジョブがアップストリームのセカンダリデータベースに接続する場合、 `REPLICATE CREATE TABLE ... SELECT`イベントは移行できません。これは、ステートメントが同じ GTID が割り当てられた 2つのトランザクション ( `CREATE TABLE`と`INSERT` ) に分割されるためです。その結果、 `INSERT`ステートメントはセカンダリデータベースによって無視されます。
+- 移行ジョブがアップストリームのセカンダリデータベースに接続する場合、 `REPLICATE CREATE TABLE ... SELECT`イベントは移行できません。これは、文が同じ GTID が割り当てられた 2つのトランザクション ( `CREATE TABLE`と`INSERT` ) に分割されるためです。その結果、 `INSERT`文はセカンダリデータベースによって無視されます。
 
 ## 前提条件 {#prerequisites}
 
@@ -77,7 +77,7 @@ SHOW VARIABLES LIKE 'gtid_mode';
 
 ### Google Cloud SQL for MySQL の場合 {#for-google-cloud-sql-for-mysql}
 
-Google Cloud SQL for MySQL では、GTID モードがデフォルトで有効になっています。GTID モードが正常に有効になっているかどうかは、次の SQL ステートメントを実行することで確認できます。
+Google Cloud SQL for MySQL では、GTID モードがデフォルトで有効になっています。GTID モードが正常に有効になっているかどうかは、次の SQL文を実行することで確認できます。
 
 ```sql
 SHOW VARIABLES LIKE 'gtid_mode';
@@ -89,7 +89,7 @@ SHOW VARIABLES LIKE 'gtid_mode';
 
 Azure Database for MySQL（バージョン5.7以降）では、GTIDモードはデフォルトで有効になっており、GTIDモードを無効にすることはできません。
 
-さらに、 `binlog_row_image`サーバーパラメーターが`FULL`に設定されていることを確認してください。これは、次の SQL ステートメントを実行することで確認できます。
+さらに、 `binlog_row_image`サーバーパラメーターが`FULL`に設定されていることを確認してください。これは、次の SQL文を実行することで確認できます。
 
 ```sql
 SHOW VARIABLES LIKE 'binlog_row_image';
@@ -107,7 +107,7 @@ SHOW VARIABLES LIKE 'gtid_mode';
 
 結果が`ON`または`ON_PERMISSIVE`の場合、GTID モードは正常に有効化されています。
 
-さらに、 `binlog_row_image`サーバーパラメーターが`FULL`に設定されていることを確認してください。これは、次の SQL ステートメントを実行することで確認できます。
+さらに、 `binlog_row_image`サーバーパラメーターが`FULL`に設定されていることを確認してください。これは、次の SQL文を実行することで確認できます。
 
 ```sql
 SHOW VARIABLES LIKE 'binlog_row_image';

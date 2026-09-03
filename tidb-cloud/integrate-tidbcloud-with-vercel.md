@@ -61,7 +61,7 @@ TiDB Cloudにアカウントとクラスターが既に作成されている必�
 1. [TiDB Cloudコンソール](https://tidbcloud.com)で、プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 2. あなたのプロジェクトに合わせて[データアプリを作成する](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app)。
 3. [データアプリをリンクする](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)ターゲットのTiDB Cloudクラスターにリンクします。
-4. [エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)ことで、SQL ステートメントを実行するようにカスタマイズできます。
+4. [エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)ことで、SQL文を実行するようにカスタマイズできます。
 
 Vercelプロジェクトは、1つのTiDB Cloudデータアプリにしか接続できません。Vercelプロジェクトのデータアプリを変更するには、まず現在のアプリとの接続を解除してから、新しいアプリに接続する必要があります。
 

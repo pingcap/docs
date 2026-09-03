@@ -35,11 +35,11 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 **コンソールの変更**
 
-- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) SQL ステートメントの RU コストの監視をサポートします。
+- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) SQL文の RU コストの監視をサポートします。
 
-    TiDB Cloud Serverless は、各 SQL ステートメントの詳細な分析情報を提供するようになり[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)た。SQL ステートメントごとの**合計 RU**コストと**平均 RU**コストの両方を表示できます。この機能は RU コストの特定と分析に役立ち、運用における潜在的なコスト削減の機会を提供します。
+    TiDB Cloud Serverless は、各 SQL文の詳細な分析情報を提供するようになり[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)た。SQL文ごとの**合計 RU**コストと**平均 RU**コストの両方を表示できます。この機能は RU コストの特定と分析に役立ち、運用における潜在的なコスト削減の機会を提供します。
 
-    SQL ステートメントの RU の詳細を確認するには、 [TiDB Cloud Serverlessクラスター](https://tidbcloud.com/project/clusters)の**Diagnosis**ページに移動し、 **SQL Statement**タブをクリックします。
+    SQL文の RU の詳細を確認するには、 [TiDB Cloud Serverlessクラスター](https://tidbcloud.com/project/clusters)の**Diagnosis**ページに移動し、 **SQL Statement**タブをクリックします。
 
 ## 2023年11月21日 {#november-21-2023}
 
@@ -224,7 +224,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
       --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>?page=2&page_size=10'
     ```
 
-    この機能は、最後のクエリが`SELECT`ステートメントである`GET`リクエストに対してのみ使用できることに注意してください。
+    この機能は、最後のクエリが`SELECT`文である`GET`リクエストに対してのみ使用できることに注意してください。
 
     詳細については[エンドポイントを呼び出す](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint)を参照してください。
 
@@ -291,8 +291,8 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - TiDB Cloud [Data Service](https://tidbcloud.com/project/data-service)のエンドポイントの`PUT`および`DELETE`リクエストメソッドをサポートします。
 
-    - `UPDATE`ステートメントと同様に、 `PUT`メソッドを使用してデータを更新または変更します。
-    - `DELETE`ステートメントと同様に、 `DELETE`メソッドを使用してデータを削除します。
+    - `UPDATE`文と同様に、 `PUT`メソッドを使用してデータを更新または変更します。
+    - `DELETE`文と同様に、 `DELETE`メソッドを使用してデータを削除します。
 
     詳細については[プロパティを構成する](/tidb-cloud/data-service-manage-endpoint.md#configure-properties)を参照してください。
 
@@ -553,8 +553,8 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     **SQL Statement**タブには次の内容が表示されます。
 
-    - TiDB データベースによって実行されるすべての SQL ステートメントの包括的な概要により、スロークエリを簡単に識別して診断できます。
-    - クエリ時間、実行計画、データベースサーバーの応答など、各 SQL ステートメントの詳細な情報が提供され、データベースのパフォーマンスの最適化に役立ちます。
+    - TiDB データベースによって実行されるすべての SQL文の包括的な概要により、スロークエリを簡単に識別して診断できます。
+    - クエリ時間、実行計画、データベースサーバーの応答など、各 SQL文の詳細な情報が提供され、データベースのパフォーマンスの最適化に役立ちます。
     - 大量のデータを簡単に並べ替え、フィルタリング、検索できるユーザーフレンドリーなインターフェースにより、最も重要なクエリに集中できます。
 
     詳細については[ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)を参照してください。
@@ -758,7 +758,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
     - Data Serviceをデータソースとして使用して、 TiDB Cloud をデータ視覚化プロジェクトと統合します。
     - MySQL インターフェースがサポートしていない環境からデータベースに接続します。
 
-    さらに、 TiDB Cloud は、AI を使用して SQL ステートメントを生成および実行できる RESTful インターフェースである[チャット2クエリAPI](/tidb-cloud/use-chat2query-api.md)提供します。
+    さらに、 TiDB Cloud は、AI を使用して SQL文を生成および実行できる RESTful インターフェースである[チャット2クエリAPI](/tidb-cloud/use-chat2query-api.md)提供します。
 
     Data Serviceにアクセスするには、左側のナビゲーションペインの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。詳細については、以下のドキュメントをご覧ください。
 
@@ -890,7 +890,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - [TiDB Cloud CLI](/tidb-cloud/cli-reference.md)に新しいコマンド[`ticloud connect`](/tidb-cloud/ticloud-serverless-shell.md)を追加します。
 
-    `ticloud connect`は、SQL クライアントをインストールすることなく、ローカルマシンからTiDB Cloudクラスターに接続できるコマンドです。TiDB Cloudクラスターに接続した後、 TiDB Cloud CLI で SQL ステートメントを実行できます。
+    `ticloud connect`は、SQL クライアントをインストールすることなく、ローカルマシンからTiDB Cloudクラスターに接続できるコマンドです。TiDB Cloudクラスターに接続した後、 TiDB Cloud CLI で SQL文を実行できます。
 
 ## 2023年2月14日 {#february-14-2023}
 
@@ -904,7 +904,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - [Serverless Tier](/tidb-cloud/select-cluster-tier.md#starter)クラスターの**Monitoring**ページを紹介します。
 
-    **モニタリング**ページには、1秒あたりに実行される SQL ステートメントの数、クエリの平均実行時間、失敗したクエリの数など、さまざまなメトリックとデータが提供され、 Serverless Tierクラスター内の SQL ステートメントの全体的なパフォーマンスをよりよく理解するのに役立ちます。
+    **モニタリング**ページには、1秒あたりに実行される SQL文の数、クエリの平均実行時間、失敗したクエリの数など、さまざまなメトリックとデータが提供され、 Serverless Tierクラスター内の SQL文の全体的なパフォーマンスをよりよく理解するのに役立ちます。
 
     詳細については[TiDB Cloud組み込み監視](/tidb-cloud/built-in-monitoring.md)を参照してください。
 

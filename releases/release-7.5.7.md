@@ -90,7 +90,7 @@ TiDB バージョン: 7.5.7
     - `PhysicalExchangeSender.HashCol`の浅いコピーによりTiFlash がクラッシュしたり、誤った結果が生成される問題を修正[＃60517](https://github.com/pingcap/tidb/issues/60517) @[windtalker](https://github.com/windtalker)
     - `BIT`タイプのテーブルの統計情報をロードできない問題を修正しました [＃62289](https://github.com/pingcap/tidb/issues/62289) @[YangKeao](https://github.com/YangKeao)
     - `BIT`型列の統計がメモリにロードされない問題を修正しました [＃59759](https://github.com/pingcap/tidb/issues/59759) @[YangKeao](https://github.com/YangKeao)
-    - 極端なケースで`ANALYZE`ステートメントのディスクスピル操作に時間がかかりすぎると、他の TiDB ノードが最新の統計を更新できない可能性がある問題を修正しました。 [＃54552](https://github.com/pingcap/tidb/issues/54552) @[0xPoe](https://github.com/0xPoe)
+    - 極端なケースで`ANALYZE`文のディスクスピル操作に時間がかかりすぎると、他の TiDB ノードが最新の統計を更新できない可能性がある問題を修正しました。 [＃54552](https://github.com/pingcap/tidb/issues/54552) @[0xPoe](https://github.com/0xPoe)
     - 収集された列統計がすべて TopN にある場合、後続の書き込みの後でも行数の推定が 0 のままになる可能性がある問題を修正しました。 [＃47400](https://github.com/pingcap/tidb/issues/47400) @[terry1purcell](https://github.com/terry1purcell)
     - `explain format="cost_trace"`に表示される推定コストが正しくない可能性がある問題を修正[＃61155](https://github.com/pingcap/tidb/issues/61155) @[hawkingrei](https://github.com/hawkingrei)
     - `explain format="cost_trace"`に表示されるコストの計算式に空の括弧が含まれる可能性がある問題を修正しました [＃61127](https://github.com/pingcap/tidb/issues/61127) @[hawkingrei](https://github.com/hawkingrei)

@@ -50,7 +50,7 @@ ERROR 1054 (42S22): Unknown column '_tidb_rowid' in 'field list'
 
 ## `_tidb_rowid`を読み込む {#read-tidb-rowid}
 
-`_tidb_rowid`を使用するテーブルの場合、 `SELECT`ステートメントで`_tidb_rowid`をクエリできます。これは、ページネーション、トラブルシューティング、バッチ処理などのタスクに役立ちます。
+`_tidb_rowid`を使用するテーブルの場合、 `SELECT`文で`_tidb_rowid`をクエリできます。これは、ページネーション、トラブルシューティング、バッチ処理などのタスクに役立ちます。
 
 例：
 
@@ -86,7 +86,7 @@ SHOW TABLE t NEXT_ROW_ID;
 
 ## `_tidb_rowid`を書き込む {#write-tidb-rowid}
 
-デフォルトでは、TiDB は`INSERT` 、または`REPLACE`ステートメント`UPDATE` `_tidb_rowid`直接書き込むことを許可しません。
+デフォルトでは、TiDB は`INSERT`、`REPLACE`、または`UPDATE`文が`_tidb_rowid`に直接書き込むことを許可しません。
 
 ```sql
 INSERT INTO t(_tidb_rowid, a, b) VALUES (101, 4, 'w');

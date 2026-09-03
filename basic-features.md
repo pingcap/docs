@@ -151,13 +151,13 @@ summary: TiDBの機能概要について学びましょう。
 | マルチスキーマの変更：列の追加                                                                                                          |  Y  |  Y  |  Y  |  Y  |   Y   |  E  |  E  |
 | [列の型を変更する](/sql-statements/sql-statement-modify-column.md)                                                               |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | [一時テーブル](/temporary-tables.md)                                                                                           |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
-| 同時実行DDLステートメント                                                                                                           |  Y  |  Y  |  Y  |  Y  |   Y   |  N  |  N  |
+| 同時実行DDL文                                                                                                           |  Y  |  Y  |  Y  |  Y  |   Y   |  N  |  N  |
 | [`ADD INDEX`および`CREATE INDEX`の処理速度向上](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)                       |  Y  |  Y  |  Y  |  Y  |   Y   |  N  |  N  |
 | [メタデータロック](/metadata-lock.md)                                                                                            |  Y  |  Y  |  Y  |  Y  |   Y   |  N  |  N  |
 | [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)                                                |  Y  |  Y  |  Y  |  Y  |   Y   |  N  |  N  |
 | [一時停止](/sql-statements/sql-statement-admin-pause-ddl.md)/ [再開する](/sql-statements/sql-statement-admin-resume-ddl.md)DDL   |  Y  |  Y  |  Y  |  N  |   N   |  N  |  N  |
 | [TiDB高速テーブル作成](/accelerated-table-creation.md)                                                                           |  Y  |  E  |  N  |  N  |   N   |  N  |  N  |
-| [BDRロールを構成して、BDRモードでDDLステートメントを複製するようにします](/sql-statements/sql-statement-admin-bdr-role.md#admin-setshowunset-bdr-role) |  Y  |  E  |  N  |  N  |   N   |  N  |  N  |
+| [BDRロールを構成して、BDRモードでDDL文を複製するようにします](/sql-statements/sql-statement-admin-bdr-role.md#admin-setshowunset-bdr-role) |  Y  |  E  |  N  |  N  |   N   |  N  |  N  |
 
 </StickyHeaderTable>
 
@@ -254,7 +254,7 @@ summary: TiDBの機能概要について学びましょう。
 | データのインポートとエクスポート                                                                                     | 8.5  | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ---------------------------------------------------------------------------------------------------- | ---- | --- | --- | --- | --- | --- | --- |
 | [TiDB Lightningを使用した高速インポート](/tidb-lightning/tidb-lightning-overview.md)                             | Y    | Y   | Y   | Y   | Y   | Y   | Y   |
-| [`IMPORT INTO`ステートメントを使用した高速インポート](/sql-statements/sql-statement-import-into.md)                     | Y    | Y   | Y   | N   | N   | N   | N   |
+| [`IMPORT INTO`文を使用した高速インポート](/sql-statements/sql-statement-import-into.md)                     | Y    | Y   | Y   | N   | N   | N   | N   |
 | mydumper 論理ダンプツール                                                                                    | 非推奨  | 非推奨 | 非推奨 | 非推奨 | 非推奨 | 非推奨 | 非推奨 |
 | [Dumpling論理ダンプ](/dumpling-overview.md)                                                               | Y    | Y   | Y   | Y   | Y   | Y   | Y   |
 | [トランザクション`LOAD DATA`](/sql-statements/sql-statement-load-data.md) [^5]                               | Y    | Y   | Y   | Y   | Y   | Y   | Y   |
@@ -319,10 +319,10 @@ summary: TiDBの機能概要について学びましょう。
 
 [^2]: バージョン6.5.0以降、 [`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520)システム変数にリストされている関数に対して作成された式インデックスはテスト済みであり、本番環境で使用できます。今後のリリースでは、さらに多くの関数がサポートされる予定です。この変数にリストされていない関数については、対応する式インデックスは本番環境での使用は推奨されません。詳細については、 [式インデックス](/sql-statements/sql-statement-create-index.md#expression-index)を参照してください。
 
-[^3]: サポートされている SQL ステートメントの完全なリストについては[ステートメント参照](/sql-statements/sql-statement-select.md)を参照してください。
+[^3]: サポートされている SQL文の完全なリストについては[ステートメント参照](/sql-statements/sql-statement-select.md)を参照してください。
 
 [^4]: [v6.4.0](/releases/release-6.4.0.md)以降、TiDB は[高性能かつグローバルに単調な`AUTO_INCREMENT`列](/auto-increment.md#mysql-compatibility-mode)をサポートします
 
-[^5]: [TiDB v7.0.0](/releases/release-7.0.0.md)以降、新しいパラメータ`FIELDS DEFINED NULL BY`と S3 および GCS からのデータインポートのサポートは実験的機能です。[v7.6.0](/releases/release-7.6.0.md)以降、TiDB は`LOAD DATA`トランザクションで MySQL と同じように処理します。トランザクション内の`LOAD DATA`ステートメントは、現在のトランザクションを自動的にコミットしたり、新しいトランザクションを開始したりしなくなりました。さらに、トランザクション内の`LOAD DATA`ステートメントを明示的にコミットまたはロールバックできます。また、 `LOAD DATA`ステートメントは、TiDB トランザクションモード設定 (楽観的トランザクションまたは悲観的トランザクション) の影響を受けます。
+[^5]: [TiDB v7.0.0](/releases/release-7.0.0.md)以降、新しいパラメータ`FIELDS DEFINED NULL BY`と S3 および GCS からのデータインポートのサポートは実験的機能です。[v7.6.0](/releases/release-7.6.0.md)以降、TiDB は`LOAD DATA`トランザクションで MySQL と同じように処理します。トランザクション内の`LOAD DATA`文は、現在のトランザクションを自動的にコミットしたり、新しいトランザクションを開始したりしなくなりました。さらに、トランザクション内の`LOAD DATA`文を明示的にコミットまたはロールバックできます。また、 `LOAD DATA`文は、TiDB トランザクションモード設定 (楽観的トランザクションまたは悲観的トランザクション) の影響を受けます。
 
 [^6]: バージョン 7.5.0 以降、 [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/)レプリケーションは非推奨となりました。バージョン 8.3.0 以降、TiDB Binlogは完全に非推奨となりました。バージョン 8.4.0 以降、TiDB Binlogは削除されました。増分データレプリケーションには、代わりに[TiCDC](/ticdc/ticdc-overview.md)を使用してください。ポイントインタイムリカバリ(PITR) には、 [PITR](/br/br-pitr-guide.md)を使用してください。TiDB クラスタをバージョン 8.4.0 以降にアップグレードする前に、必ず TiCDC と PITR に切り替えてください。

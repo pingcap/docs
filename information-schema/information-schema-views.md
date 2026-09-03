@@ -61,7 +61,7 @@ COLLATION_CONNECTION: utf8mb4_0900_ai_ci
 - `TABLE_CATALOG` : ビューが属するカタログの名前。この値は常に`def` 。
 - `TABLE_SCHEMA` : ビューが属するスキーマの名前。
 - `TABLE_NAME` : ビュー名。
-- `VIEW_DEFINITION` : ビューの定義。ビューが作成されるときに`SELECT`ステートメントによって作成されます。
+- `VIEW_DEFINITION` : ビューの定義。ビューが作成されるときに`SELECT`文によって作成されます。
 - `CHECK_OPTION` : `CHECK_OPTION`値。値の選択肢は`NONE` 、 `CASCADE` 、 `LOCAL`です。
 - `IS_UPDATABLE` : ビューに`UPDATE` / `INSERT` / `DELETE`が適用されるかどうか。TiDBでは、値は常に`NO`です。
 - `DEFINER` : ビューを作成したユーザーの名前。形式は`'user_name'@'host_name'`です。

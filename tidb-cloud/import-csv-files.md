@@ -14,7 +14,7 @@ aliases: ['/ja/tidbcloud/migrate-from-amazon-s3-or-gcs','/ja/tidbcloud/migrate-f
 
 ## 制限事項 {#limitations}
 
-- データの一貫性を確保するため、 TiDB Cloud では CSV ファイルを空のテーブルにのみインポートできます。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントの手順に従ってTiDB Cloud を使用して一時的な空のテーブルにデータをインポートし、その後`INSERT SELECT`ステートメントを使用してデータを対象の既存のテーブルにコピーします。
+- データの一貫性を確保するため、 TiDB Cloud では CSV ファイルを空のテーブルにのみインポートできます。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントの手順に従ってTiDB Cloud を使用して一時的な空のテーブルにデータをインポートし、その後`INSERT SELECT`文を使用してデータを対象の既存のテーブルにコピーします。
 
 - TiDB Cloud Dedicatedクラスターに[変更フィード](/tidb-cloud/changefeed-overview.md)があるか、 [特定時点への復元](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)が有効になっている場合、現在のデータインポート機能は[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を使用しているため、クラスターにデータをインポートできません ([**Import Data**ボタンが無効になります)。このモードでは、インポートされたデータは変更ログを生成しないため、変更フィードとポイントインタイム リストアはインポートされたデータを検出できません。
 
@@ -51,7 +51,7 @@ CSVファイルにはスキーマ情報が含まれていないため、CSVフ�
 
         [ステップ1](#step-1-prepare-the-csv-files)の命名規則に従ってCSVファイルが作成されている場合、データベーススキーマファイルはデータインポートにおいてオプションです。そうでない場合は、データベーススキーマファイルは必須です。
 
-        各データベーススキーマファイルは`${db_name}-schema-create.sql`形式である必要があり、 `CREATE DATABASE` DDLステートメントが含まれている必要があります。このファイルを使用すると、 TiDB Cloudは`${db_name}`データベースを作成し、データのインポート時にそのデータベースにデータを格納します。
+        各データベーススキーマファイルは`${db_name}-schema-create.sql`形式である必要があり、 `CREATE DATABASE` DDL文が含まれている必要があります。このファイルを使用すると、 TiDB Cloudは`${db_name}`データベースを作成し、データのインポート時にそのデータベースにデータを格納します。
 
         例えば、次のステートメントを含む`mydb-schema-create.sql`ファイルを作成すると、 TiDB Cloud はデータをインポートする際に`mydb`データベースを作成します。
 
@@ -63,7 +63,7 @@ CSVファイルにはスキーマ情報が含まれていないため、CSVフ�
 
         CSVファイルが保存されているAmazon S3、GCS、またはAzure Blob Storageディレクトリにテーブルスキーマファイルを含めない場合、 TiDB Cloudはデータのインポート時に対応するテーブルを作成しません。
 
-        各テーブルスキーマファイルは`${db_name}.${table_name}-schema.sql`形式で、 `CREATE TABLE` DDLステートメントを含んでいる必要があります。このファイルを使用すると、 TiDB Cloudはデータのインポート時に`${db_table}`データベースに`${db_name}`テーブルを作成します。
+        各テーブルスキーマファイルは`${db_name}.${table_name}-schema.sql`形式で、 `CREATE TABLE` DDL文を含んでいる必要があります。このファイルを使用すると、 TiDB Cloudはデータのインポート時に`${db_table}`データベースに`${db_name}`テーブルを作成します。
 
         例えば、次のステートメントを含む`mydb.mytable-schema.sql`ファイルを作成すると、 TiDB Cloud はデータをインポートする際に`mytable`データベースに`mydb`テーブルを作成します。
 
@@ -76,7 +76,7 @@ CSVファイルにはスキーマ情報が含まれていないため、CSVフ�
 
         > **Note:**
         >
-        > `${db_name}.${table_name}-schema.sql`ファイルには、単一の DDL ステートメントのみを含める必要があります。ファイルに複数の DDL ステートメントが含まれている場合、最初のステートメントのみが有効になります。
+        > `${db_name}.${table_name}-schema.sql`ファイルには、単一の DDL文のみを含める必要があります。ファイルに複数の DDL文が含まれている場合、最初の文のみが有効になります。
 
 ## ステップ3．アカウント間アクセスの設定 {#step-3-configure-cross-account-access}
 

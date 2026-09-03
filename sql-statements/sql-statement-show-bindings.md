@@ -32,7 +32,7 @@ ShowLikeOrWhere ::=
 | update_time | 更新時刻                                                                                                                                                  |
 | charset | 文字セット                                                                                                                                                 |
 | collation | ソートルール                                                                                                                                                |
-| source | バインディングが作成される方法`manual` ( `create [global] binding` SQL ステートメントによって作成される)、 `capture` (TiDB によって自動的にキャプチャされる)、および`evolve` (TiDB によって自動的に展開される) が含まれます。 |
+| source | バインディングが作成される方法には、 `manual` ( `create [global] binding` SQL文によって作成される)、 `capture` (TiDB によって自動的にキャプチャされる)、および`evolve` (TiDB によって自動的に展開される) が含まれます。 |
 
 ## 例 {#examples}
 

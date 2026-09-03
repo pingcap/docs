@@ -15,13 +15,13 @@ summary: TiDBにおけるALTER INSTANCE`の使用方法の概要を学びまし�
 
 <CustomContent platform="tidb">
 
-`ALTER INSTANCE RELOAD TLS`ステートメントを実行すると、元の構成パスから証明書 ( [`ssl-cert`](/tidb-configuration-file.md#ssl-cert) )、キー ( [`ssl-key`](/tidb-configuration-file.md#ssl-key) )、および CA ( [`ssl-ca`](/tidb-configuration-file.md#ssl-ca) ) を再読み込みできます。
+`ALTER INSTANCE RELOAD TLS`文を実行すると、元の構成パスから証明書 ( [`ssl-cert`](/tidb-configuration-file.md#ssl-cert) )、キー ( [`ssl-key`](/tidb-configuration-file.md#ssl-key) )、および CA ( [`ssl-ca`](/tidb-configuration-file.md#ssl-ca) ) を再読み込みできます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-`ALTER INSTANCE RELOAD TLS`ステートメントを実行すると、元の構成パスから証明書 ( [`ssl-cert`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-cert) )、キー ( [`ssl-key`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-key) )、および CA ( [`ssl-ca`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-ca) ) を再読み込みできます。
+`ALTER INSTANCE RELOAD TLS`文を実行すると、元の構成パスから証明書 ( [`ssl-cert`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-cert) )、キー ( [`ssl-key`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-key) )、および CA ( [`ssl-ca`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-ca) ) を再読み込みできます。
 
 </CustomContent>
 
@@ -49,7 +49,7 @@ ALTER INSTANCE RELOAD TLS;
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
-`ALTER INSTANCE RELOAD TLS`ステートメントは、元の構成パスからの再読み込みのみをサポートします。TiDB の起動時に読み込みパスを動的に変更したり、TLS 暗号化接続機能を動的に有効化したりすることはサポートしていません。この機能は、TiDB を再起動するとデフォルトで無効になります。
+`ALTER INSTANCE RELOAD TLS`文は、元の構成パスからの再読み込みのみをサポートします。TiDB の起動時に読み込みパスを動的に変更したり、TLS 暗号化接続機能を動的に有効化したりすることはサポートしていません。この機能は、TiDB を再起動するとデフォルトで無効になります。
 
 ## 参照 {#see-also}
 

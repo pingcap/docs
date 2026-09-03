@@ -25,7 +25,7 @@ GRANT 'r1', 'r2', 'r3' TO 'u1'@'%';
 SET DEFAULT ROLE 'r1' TO 'u1'@'%';
 ```
 
-`'u1'@'%'`としてログインし、次の`SET ROLE`ステートメントを実行してすべてのロールを有効にします。
+`'u1'@'%'`としてログインし、次の`SET ROLE`文を実行してすべてのロールを有効にします。
 
 ```sql
 SET ROLE ALL;
@@ -41,7 +41,7 @@ SELECT CURRENT_ROLE();
 1 row in set (0.000 sec)
 ```
 
-`'r2'`と`'r3'`を有効にするには、次の`SET ROLE`ステートメントを実行します。
+`'r2'`と`'r3'`を有効にするには、次の`SET ROLE`文を実行します。
 
 ```sql
 SET ROLE 'r2', 'r3';
@@ -57,7 +57,7 @@ SELECT CURRENT_ROLE();
 1 row in set (0.000 sec)
 ```
 
-デフォルトのロールを有効にするには、次の`SET ROLE`ステートメントを実行します。
+デフォルトのロールを有効にするには、次の`SET ROLE`文を実行します。
 
 ```sql
 SET ROLE DEFAULT;
@@ -73,7 +73,7 @@ SELECT CURRENT_ROLE();
 1 row in set (0.000 sec)
 ```
 
-有効なロールをすべてキャンセルするには、次の`SET ROLE`ステートメントを実行します。
+有効なロールをすべてキャンセルするには、次の`SET ROLE`文を実行します。
 
 ```sql
 SET ROLE NONE;

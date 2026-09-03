@@ -19,7 +19,7 @@ TiDBバージョン: 6.3.0-DMR
 
 - TiKVは、SM4アルゴリズムを用いた保存データの暗号化をサポートしています。
 - TiDBはSM3アルゴリズムを用いた認証をサポートしています。
-- `CREATE USER`および`ALTER USER`ステートメントは`ACCOUNT LOCK/UNLOCK`オプションをサポートします。
+- `CREATE USER`および`ALTER USER`文は`ACCOUNT LOCK/UNLOCK`オプションをサポートします。
 - JSONデータ型と関数が一般提供（GA）されます。
 - TiDBは、NULL値を考慮したアンチジョインをサポートしています。
 - TiDBは、より詳細な粒度で実行時間メトリクスを提供します。
@@ -34,7 +34,7 @@ TiDBバージョン: 6.3.0-DMR
 
 - 範囲パーティション定義を簡素化するための新しい構文糖衣（範囲INTERVALパーティショニング）を追加（実験的） [#35683](https://github.com/pingcap/tidb/issues/35683) @[mjonss](https://github.com/mjonss)
 
-    TiDBは、範囲パーティションを定義する新しい方法として、 [区間分割](/partitioned-table.md#range-interval-partitioning)を提供します。すべてのパーティションを列挙する必要がないため、範囲パーティショニングのDDLステートメントの長さが大幅に短縮されます。構文は、従来の範囲パーティショニングと同じです。
+    TiDBは、範囲パーティションを定義する新しい方法として、 [区間分割](/partitioned-table.md#range-interval-partitioning)を提供します。すべてのパーティションを列挙する必要がないため、範囲パーティショニングのDDL文の長さが大幅に短縮されます。構文は、従来の範囲パーティショニングと同じです。
 
 - 範囲COLUMNSパーティショニングは、複数の列の定義をサポートします [#36636](https://github.com/pingcap/tidb/issues/36636) @[mjonss](https://github.com/mjonss)
 
@@ -81,7 +81,7 @@ TiDBバージョン: 6.3.0-DMR
 
 - TiDB Dashboardはデッドロック履歴情報を提供します [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk)
 
-    バージョン6.3.0以降、TiDB Dashboardではデッドロック履歴が提供されます。TiDB Dashboardのスローログを確認し、一部のSQLステートメントのロック待機時間が極端に長い場合は、デッドロック履歴を確認することで根本原因を特定でき、診断が容易になります。
+    バージョン6.3.0以降、TiDB Dashboardではデッドロック履歴が提供されます。TiDB Dashboardのスローログを確認し、一部のSQL文のロック待機時間が極端に長い場合は、デッドロック履歴を確認することで根本原因を特定でき、診断が容易になります。
 
 ### パフォーマンス {#performance}
 
@@ -129,7 +129,7 @@ TiDBバージョン: 6.3.0-DMR
 
 - Read-Committed 分離レベルで TSO を取得する方法を最適化します [#36812](https://github.com/pingcap/tidb/issues/36812) @[TonsnakeLin](https://github.com/TonsnakeLin)
 
-    Read-Committed 分離レベルでは、TSOのフェッチ方法を制御するためのシステム変数[`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630)が導入されます。プランキャッシュがヒットした場合、TiDBはTSOのフェッチ頻度を減らすことでバッチDMLステートメントの実行効率を向上させ、バッチで実行されるタスクの実行時間を短縮します。
+    Read-Committed 分離レベルでは、TSOのフェッチ方法を制御するためのシステム変数[`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630)が導入されます。プランキャッシュがヒットした場合、TiDBはTSOのフェッチ頻度を減らすことでバッチDML文の実行効率を向上させ、バッチで実行されるタスクの実行時間を短縮します。
 
 ### 安定性 {#stability}
 
@@ -139,7 +139,7 @@ TiDBバージョン: 6.3.0-DMR
 
 - 統計情報が古くなった場合に統計情報を読み込むデフォルトポリシーを変更する [#27601](https://github.com/pingcap/tidb/issues/27601) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
 
-    v5.3.0 では、統計情報が古くなったときのオプティマイザの動作を制御するために、システム変数[`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530)が導入されました。デフォルト値は`ON`で、これは旧バージョンの動作を維持することを意味します。つまり、SQL ステートメントに関係するオブジェクトの統計情報が古くなった場合、オプティマイザは (テーブルの総行数以外の) 統計情報はもはや信頼できないと判断し、代わりに擬似統計情報を使用します。実際のユーザーシナリオのテストと分析の結果、v6.3.0 以降、デフォルト値`tidb_enable_pseudo_for_outdated_stats`は`OFF`に変更されました。統計情報が古くなっても、オプティマイザはテーブル上の統計情報を使用するため、実行計画がより安定します。
+    v5.3.0 では、統計情報が古くなったときのオプティマイザの動作を制御するために、システム変数[`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530)が導入されました。デフォルト値は`ON`で、これは旧バージョンの動作を維持することを意味します。つまり、SQL文に関係するオブジェクトの統計情報が古くなった場合、オプティマイザは (テーブルの総行数以外の) 統計情報はもはや信頼できないと判断し、代わりに擬似統計情報を使用します。実際のユーザーシナリオのテストと分析の結果、v6.3.0 以降、デフォルト値`tidb_enable_pseudo_for_outdated_stats`は`OFF`に変更されました。統計情報が古くなっても、オプティマイザはテーブル上の統計情報を使用するため、実行計画がより安定します。
 
 - Titan の無効化が GA に@[tabokie](https://github.com/tabokie)
 
@@ -161,7 +161,7 @@ TiDBバージョン: 6.3.0-DMR
 
     MySQL との互換性の詳細については、 [MySQLとの正規表現互換性](/functions-and-operators/string-functions.md#regular-expression-compatibility-with-mysql)を参照してください。
 
-- `CREATE USER` および `ALTER USER` ステートメントは `ACCOUNT LOCK/UNLOCK` オプションをサポートします [#37051](https://github.com/pingcap/tidb/issues/37051) @[CbcWestwolf](https://github.com/CbcWestwolf)
+- `CREATE USER` および `ALTER USER`文は `ACCOUNT LOCK/UNLOCK` オプションをサポートします [#37051](https://github.com/pingcap/tidb/issues/37051) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
     [`CREATE USER`](/sql-statements/sql-statement-create-user.md)文を使用してユーザーを作成する際、 `ACCOUNT LOCK/UNLOCK`オプションを使用して、作成したユーザーがロックされているかどうかを指定できます。ロックされたユーザーはデータベースにログインできません。
 
@@ -260,7 +260,7 @@ TiDBバージョン: 6.3.0-DMR
 
 - ログバックアップは、バックアップストレージとしてGCSとAzure Blob Storageをサポートしています。
 - ログバックアップは`exchange partition` DDLと互換性を持つようになりました。
-- 以前[ファストスキャン](/tiflash/use-fastscan.md)を有効にするために使用されていた SQL ステートメント`ALTER TABLE ...SET TiFLASH MODE ...`非推奨となり、システム変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)に置き換えられました。v6.2.0 から v6.3.0 にアップグレードすると、v6.2.0 のすべての FastScan 設定が無効になりますが、データの通常の読み取りには影響しません。この場合、FastScan を有効または無効にするには、変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)を設定する必要があります。以前のバージョンから v6.3.0 にアップグレードすると、データの一貫性を保つために、すべてのセッションで FastScan 機能はデフォルトで有効になりません。
+- 以前[ファストスキャン](/tiflash/use-fastscan.md)を有効にするために使用されていた SQL文`ALTER TABLE ...SET TiFLASH MODE ...`非推奨となり、システム変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)に置き換えられました。v6.2.0 から v6.3.0 にアップグレードすると、v6.2.0 のすべての FastScan 設定が無効になりますが、データの通常の読み取りには影響しません。この場合、FastScan を有効または無効にするには、変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)を設定する必要があります。以前のバージョンから v6.3.0 にアップグレードすると、データの一貫性を保つために、すべてのセッションで FastScan 機能はデフォルトで有効になりません。
 - TiFlashをLinux AMD64アーキテクチャにデプロイするには、CPUがAVX2命令セットをサポートしている必要があります。 `grep avx2 /proc/cpuinfo`に出力があることを確認してください。TiFlashをLinux ARM64アーキテクチャにデプロイするには、CPUがARMv8命令セットアーキテクチャをサポートしている必要があります。 `grep 'crc32' /proc/cpuinfo | grep 'asimd'`に出力があることを確認してください。命令セット拡張機能を使用することで、TiFlashのベクトル化エンジンはより優れたパフォーマンスを発揮できます。
 - TiDBと連携するHAProxyの最小バージョンはv1.5です。v1.5からv2.1までのHAProxyバージョンでは、 `post-41`に`mysql-check`設定オプションを設定する必要があります。HAProxy v2.2以降の使用をお勧めします。
 
@@ -278,7 +278,7 @@ TiDBバージョン: 6.3.0-DMR
     - DDL履歴ジョブのクエリ用HTTP APIを最適化し、 `start_job_id`パラメータのサポートを追加 [#35838](https://github.com/pingcap/tidb/issues/35838) @[tiancaiamao](https://github.com/tiancaiamao)
     - JSON パスの構文が間違っている場合にエラーを報告する[#22525](https://github.com/pingcap/tidb/issues/22525) [#34959](https://github.com/pingcap/tidb/issues/34959) @[xiongjiwei](https://github.com/xiongjiwei)
     - 誤った共有の問題を修正することで、結合操作のパフォーマンスを向上させます [#37641](https://github.com/pingcap/tidb/issues/37641) @[gengliqi](https://github.com/gengliqi)
-    - [`PLAN REPLAYER`](/sql-plan-replayer.md)を使用して複数のSQLステートメントの実行計画情報を一度にエクスポートできるようにすることで、トラブルシューティングの効率化を図ります。 [#37798](https://github.com/pingcap/tidb/issues/37798) @[Yisaer](https://github.com/Yisaer)
+    - [`PLAN REPLAYER`](/sql-plan-replayer.md)を使用して複数のSQL文の実行計画情報を一度にエクスポートできるようにすることで、トラブルシューティングの効率化を図ります。 [#37798](https://github.com/pingcap/tidb/issues/37798) @[Yisaer](https://github.com/Yisaer)
 
 - TiKV
 
@@ -315,11 +315,11 @@ TiDBバージョン: 6.3.0-DMR
     - TiCDC
 
         - TiCDCと、上流のTiDBで導入された並行DDLフレームワークとの互換性を向上させる [#6506](https://github.com/pingcap/tiflow/issues/6506) @[lance6716](https://github.com/lance6716)
-        - MySQL シンクでエラーが発生した場合の DML ステートメントのロギング`start ts`のサポート [#6460](https://github.com/pingcap/tiflow/issues/6460) @[overvenus](https://github.com/overvenus)
+        - MySQL シンクでエラーが発生した場合の DML文のロギング`start ts`のサポート [#6460](https://github.com/pingcap/tiflow/issues/6460) @[overvenus](https://github.com/overvenus)
         - `api/v1/health` API を強化して、TiCDC クラスターのより正確な正常性状態を返します [#4757](https://github.com/pingcap/tiflow/issues/4757) @[overvenus](https://github.com/overvenus)
         - MQ シンクと MySQL シンクを非同期モードで実装して、シンクのスループットを向上させます [#5928](https://github.com/pingcap/tiflow/issues/5928) @[hicqu](https://github.com/hicqu)@[Rustin170506](https://github.com/Rustin170506)
         - 非推奨の Pulsar シンクを削除します [#7087](https://github.com/pingcap/tiflow/issues/7087) @[Rustin170506](https://github.com/Rustin170506)
-        - 変更フィードに関係のない DDL ステートメントを破棄することで、レプリケーションのパフォーマンスを向上させます [#6447](https://github.com/pingcap/tiflow/issues/6447) @[asddongmen](https://github.com/asddongmen)
+        - 変更フィードに関係のない DDL文を破棄することで、レプリケーションのパフォーマンスを向上させます [#6447](https://github.com/pingcap/tiflow/issues/6447) @[asddongmen](https://github.com/asddongmen)
 
     - TiDB Data Migration (DM)
 
@@ -334,7 +334,7 @@ TiDBバージョン: 6.3.0-DMR
 
 - TiDB
 
-    - `PREPARE`ステートメントの権限チェックがスキップされる問題を修正 [#35784](https://github.com/pingcap/tidb/issues/35784) @[lcwangchao](https://github.com/lcwangchao)
+    - `PREPARE`文の権限チェックがスキップされる問題を修正 [#35784](https://github.com/pingcap/tidb/issues/35784) @[lcwangchao](https://github.com/lcwangchao)
     - システム変数`tidb_enable_noop_variable`が`WARN`に設定できてしまう問題を修正しました [#36647](https://github.com/pingcap/tidb/issues/36647) @[lcwangchao](https://github.com/lcwangchao)
     - 式インデックスが定義されている場合、 `ORDINAL_POSITION`テーブルの`INFORMATION_SCHEMA.COLUMNS`列が正しくない可能性がある問題を修正します。 [#31200](https://github.com/pingcap/tidb/issues/31200) @[bb7133](https://github.com/bb7133)
     - TiDB がタイムスタンプが`MAXINT32`より大きい場合にエラーを報告しない問題を修正 [#31585](https://github.com/pingcap/tidb/issues/31585) @[bb7133](https://github.com/bb7133)
@@ -359,7 +359,7 @@ TiDBバージョン: 6.3.0-DMR
     - `castRealAsTime`式の結果が MySQL と一致しない問題を修正します [#37462](https://github.com/pingcap/tidb/issues/37462) @[mengxin9014](https://github.com/mengxin9014)
     - 悲観的DML 操作が非一意インデックスキーをロックする問題を修正 [#36235](https://github.com/pingcap/tidb/issues/36235) @[ekexium](https://github.com/ekexium)
     - `auto-commit`の変更がトランザクションコミットの動作に影響を与える問題を修正 [#36581](https://github.com/pingcap/tidb/issues/36581) @[cfzjywxk](https://github.com/cfzjywxk)
-    - DML実行エンジンを使用した`EXPLAIN ANALYZE`ステートメントがトランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました [#37373](https://github.com/pingcap/tidb/issues/37373) @[cfzjywxk](https://github.com/cfzjywxk)
+    - DML実行エンジンを使用した`EXPLAIN ANALYZE`文がトランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました [#37373](https://github.com/pingcap/tidb/issues/37373) @[cfzjywxk](https://github.com/cfzjywxk)
     - UPDATE 文が場合によっては誤って投影を削除し、 `Can't find column` エラーが発生する問題を修正しました。 [#37568](https://github.com/pingcap/tidb/issues/37568) @[AilinKid](https://github.com/AilinKid)
     - 結合したテーブルの再配置操作が誤って外部結合条件をプッシュダウンする問題を修正 [#37238](https://github.com/pingcap/tidb/issues/37238) @[AilinKid](https://github.com/AilinKid)
     - 一部のパターンで `IN` と `NOT IN` サブクエリが `Can't find column` エラーを報告する問題を修正しました。 [#37032](https://github.com/pingcap/tidb/issues/37032) @[AilinKid](https://github.com/AilinKid)

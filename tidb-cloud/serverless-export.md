@@ -92,7 +92,7 @@ Alibaba Cloud OSS にデータをエクスポートするには、次の情報�
 ### データフィルタリング {#data-filtering}
 
 - TiDB Cloudコンソールは、選択したデータベースとテーブルを含むデータのエクスポートをサポートしています。
-- TiDB Cloud CLI は、SQL ステートメントと[テーブルフィルター](/table-filter.md)を使用したデータのエクスポートをサポートしています。
+- TiDB Cloud CLI は、SQL文と[テーブルフィルター](/table-filter.md)を使用したデータのエクスポートをサポートしています。
 
 ### データ形式 {#data-formats}
 

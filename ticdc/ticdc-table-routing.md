@@ -155,13 +155,13 @@ target-table = "orders"
 
 | Sink | 動作 |
 | :--- | :--- |
-| MySQL sink | TiCDC は、ルーティング後のターゲットデータベースとテーブルに DDL および DML ステートメントを書き込みます。Redo 機能が有効な場合、`redo apply` を実行すると、ルーティング後のターゲットテーブルにイベントが再生されます。 |
+| MySQL sink | TiCDC は、ルーティング後のターゲットデータベースとテーブルに DDL および DML文を書き込みます。Redo 機能が有効な場合、`redo apply` を実行すると、ルーティング後のターゲットテーブルにイベントが再生されます。 |
 | Kafka sink and Pulsar sink | プロトコル内の `payload` フィールドの値と、DDL イベント内の `query` フィールドの値には、ルーティング後のターゲットデータベース名とテーブル名が使用されます。エンコーディングプロトコル内の `schema` フィールドと `table` フィールドの値にも、ルーティング後のターゲットデータベース名とテーブル名が使用されます。 |
 | Cloud storage sink | TiCDC は、ルーティング後のターゲットデータベース名とテーブル名に基づいて、対応するストレージパス、スキーマファイル、テーブル定義ファイル、およびデータファイルを生成します。 |
 
 ## DDL の動作 {#ddl-behavior}
 
-テーブルルーティングを有効にすると、TiCDC は DDL ステートメントを書き換え、構造化 DDL メタデータ内のデータベース名とテーブル名が SQL テキスト内のものと一貫するようにします。
+テーブルルーティングを有効にすると、TiCDC は DDL文を書き換え、構造化 DDL メタデータ内のデータベース名とテーブル名が SQL テキスト内のものと一貫するようにします。
 
 たとえば、次のルールが設定されている場合:
 
@@ -172,23 +172,23 @@ target-schema = "archive"
 target-table = "{table}_routed"
 ```
 
-次の上流 DDL ステートメントに対して:
+次の上流 DDL文に対して:
 
 ```sql
 RENAME TABLE `sales`.`temp_table` TO `sales`.`renamed_table`;
 ```
 
-TiCDC はこれを次の下流 DDL ステートメントに書き換えます。
+TiCDC はこれを次の下流 DDL文に書き換えます。
 
 ```sql
 RENAME TABLE `archive`.`temp_table_routed` TO `archive`.`renamed_table_routed`;
 ```
 
-DDL ステートメントにテーブル参照が含まれており、その参照先テーブルがテーブルルーティングルールに一致する場合、TiCDC は参照先テーブル名も書き換えます。たとえば、TiCDC は `CREATE VIEW` ステートメント内のテーブル参照や、`ALTER TABLE` ステートメント内の外部キー参照を書き換えることができます。
+DDL文にテーブル参照が含まれており、その参照先テーブルがテーブルルーティングルールに一致する場合、TiCDC は参照先テーブル名も書き換えます。たとえば、TiCDC は `CREATE VIEW`文内のテーブル参照や、`ALTER TABLE`文内の外部キー参照を書き換えることができます。
 
 `CREATE DATABASE`、`DROP DATABASE`、`ALTER DATABASE ... CHARACTER SET/COLLATE` などのデータベースレベル DDL については、データベース名がテーブルルーティングルールに一致する場合、TiCDC はそのデータベース名を書き換えます。**同じ上流データベースが複数のテーブルルーティングルールに一致し、それらのルールが異なるターゲットデータベース名にマッピングされる場合、TiCDC はそのデータベースレベル DDL に対して一意のターゲットデータベースを判定できず、changefeed はテーブルルーティングエラーを返します。**
 
-changefeed の作成時または更新時に、TiCDC は現在レプリケーション対象範囲にあるテーブルに基づいてターゲットテーブルの競合をチェックします。実行時には、TiCDC は `CREATE TABLE`、`RENAME TABLE`、`DROP TABLE`、`DROP DATABASE` などの DDL をレプリケートする際に、競合検出状態を更新します。データベースレベル DDL ステートメントについては、TiCDC はそれをレプリケートする際に一意のターゲットデータベースを判定できるかどうかを評価します。
+changefeed の作成時または更新時に、TiCDC は現在レプリケーション対象範囲にあるテーブルに基づいてターゲットテーブルの競合をチェックします。実行時には、TiCDC は `CREATE TABLE`、`RENAME TABLE`、`DROP TABLE`、`DROP DATABASE` などの DDL をレプリケートする際に、競合検出状態を更新します。データベースレベル DDL文については、TiCDC はそれをレプリケートする際に一意のターゲットデータベースを判定できるかどうかを評価します。
 
 ## ルート競合の検出 {#route-conflict-detection}
 

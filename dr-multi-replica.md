@@ -142,7 +142,7 @@ summary: 単一クラスターのマルチレプリカ災害復旧ソリュー�
     SELECT STORE_ID, address, leader_count, label FROM TIKV_STORE_STATUS ORDER BY store_id;
     ```
 
-    次の SQL ステートメントは、すべての非システム スキーマ テーブルのリーダーを特定のリージョンに構成する SQL スクリプトを生成できます。
+    次の SQL文は、すべての非システム スキーマ テーブルのリーダーを特定のリージョンに構成する SQL スクリプトを生成できます。
 
     ```sql
     SET @region_name=primary_rule_for_region1;

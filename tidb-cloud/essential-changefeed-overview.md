@@ -20,7 +20,7 @@ TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサー
 
 ## 制限 {#restrictions}
 
-- Changefeeds は、 `RENAME TABLE`のように、単一の`RENAME TABLE t1 TO t3, t2 TO t4` } ステートメントで複数のテーブルの名前を変更する DDL ステートメントをサポートしていません。このステートメントを実行すると、Changefeed のデータレプリケーションが永続的に中断されます。
+- Changefeeds は、 `RENAME TABLE t1 TO t3, t2 TO t4`のように、単一の`RENAME TABLE`文で複数のテーブルの名前を変更する DDL文をサポートしていません。この文を実行すると、Changefeed のデータレプリケーションが永続的に中断されます。
 - 変更フィードのスループットは約20 MiB/秒です。増分データ量がこの制限を超える場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 ## 対応地域 {#supported-regions}

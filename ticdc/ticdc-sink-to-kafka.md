@@ -381,7 +381,7 @@ region-threshold = 10000
 write-key-threshold = 30000
 ```
 
-次の SQL ステートメントを使用して、テーブルに含まれるリージョンの数を照会できます。
+次の SQL文を使用して、テーブルに含まれるリージョンの数を照会できます。
 
 ```sql
 SELECT COUNT(*) FROM INFORMATION_SCHEMA.TIKV_REGION_STATUS WHERE DB_NAME="database1" AND TABLE_NAME="table1" AND IS_INDEX=0;

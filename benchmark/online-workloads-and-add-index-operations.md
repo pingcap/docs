@@ -214,7 +214,7 @@ sysbench $testname \
 - パラメータ`tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値が増加すると、 `TiKV_prewrite_latch_wait_duration`の値が大幅に増加し、書き込み速度が低下します。
 - `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値が非常に大きい場合、 `admin show ddl`コマンドを実行すると、DDL ジョブの再試行回数（例えば`Write conflict, txnStartTS 410327455965380624 is stale [try again later], ErrCount:38, SnapshotVersion: 410327228136030220`を確認できます。この場合、 `ADD INDEX`操作の完了に非常に長い時間がかかります。
 
-## テストプラン 2: `ADD INDEX`ステートメントのターゲット列への書き込み操作を実行しない (クエリのみ) {#test-plan-2-do-not-perform-write-operations-to-the-target-column-of-the-add-index-statement-query-only}
+## テストプラン 2: `ADD INDEX`文のターゲット列への書き込み操作を実行しない (クエリのみ) {#test-plan-2-do-not-perform-write-operations-to-the-target-column-of-the-add-index-statement-query-only}
 
 1. `oltp_read_only`テストを開始します。
 2. 手順 1 と同時に実行します。`alter table sbtest1 add index c_idx(c)`を使用してインデックスを追加します。
@@ -340,5 +340,5 @@ sysbench $testname \
 
 ## まとめ {#summary}
 
-- `ADD INDEX`ステートメントの対象列に対して、書き込み操作（ `INSERT` `DELETE`操作を含む）を頻繁に実行すると、デフォルトの`ADD INDEX` `UPDATE`では比較的頻繁に書き込み競合が発生し、オンラインワークロードに大きな影響を与えます。同時に、 `ADD INDEX`操作は継続的な再試行により完了までに長い時間がかかります。このテストでは、 `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`の積をデフォルト値の1/32に変更できます。例えば、 `tidb_ddl_reorg_worker_cnt`を`4`に、 `tidb_ddl_reorg_batch_size`を`256`に設定すると、パフォーマンスが向上します。
-- `ADD INDEX`ステートメントのターゲット列に対してのみクエリ操作を実行する場合、またはターゲット列がオンラインワークロードに直接関連していない場合は、デフォルトの`ADD INDEX`構成を使用できます。
+- `ADD INDEX`文の対象列に対して、書き込み操作（ `INSERT` 、 `DELETE` 、および`UPDATE`操作を含む）を頻繁に実行すると、デフォルトの`ADD INDEX`設定では比較的頻繁に書き込み競合が発生し、オンラインワークロードに大きな影響を与えます。同時に、 `ADD INDEX`操作は継続的な再試行により完了までに長い時間がかかります。このテストでは、 `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`の積をデフォルト値の1/32に変更できます。例えば、 `tidb_ddl_reorg_worker_cnt`を`4`に、 `tidb_ddl_reorg_batch_size`を`256`に設定すると、パフォーマンスが向上します。
+- `ADD INDEX`文のターゲット列に対してのみクエリ操作を実行する場合、またはターゲット列がオンラインワークロードに直接関連していない場合は、デフォルトの`ADD INDEX`構成を使用できます。

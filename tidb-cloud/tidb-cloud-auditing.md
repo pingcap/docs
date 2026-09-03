@@ -5,7 +5,7 @@ summary: TiDB Cloudでクラスターを監査する方法について説明し�
 
 # TiDB Cloud Dedicatedデータベース監査ログ (Preview) {#tidb-cloud-dedicated-database-audit-logging}
 
-TiDB Cloud は、実行された SQL ステートメントなど、データベースへのユーザーアクセス アクティビティを記録する監査ログ機能を提供します。
+TiDB Cloud は、実行された SQL文など、データベースへのユーザーアクセス アクティビティを記録する監査ログ機能を提供します。
 
 > **Note:**
 >
@@ -332,17 +332,17 @@ TiDB Cloud監査ログは、クラスター ID、ノード ID、およびログ�
 | `CONNECT`       | すべての接続ハンドシェイク操作を記録します                                          | `CONNECTION`    |
 | `DISCONNECT`    | すべての切断操作を記録します                                                      | `CONNECTION`    |
 | `CHANGE_USER`   | すべてのユーザー変更操作を記録します                                                          | `CONNECTION`    |
-| `QUERY`         | データのクエリまたは変更時に発生するエラーを含む、すべての SQL ステートメント操作を記録します  | -               |
+| `QUERY`         | データのクエリまたは変更時に発生するエラーを含む、すべての SQL文操作を記録します  | -               |
 | `TRANSACTION`   | `BEGIN`、`COMMIT`、`ROLLBACK` など、トランザクションに関連するすべての操作を記録します         | `QUERY`         |
-| `EXECUTE`       | `EXECUTE` ステートメントのすべての操作を記録します                                                | `QUERY`         |
-| `QUERY_DML`     | `INSERT`、`REPLACE`、`UPDATE`、`DELETE`、`LOAD DATA` を含む、DML ステートメントのすべての操作を記録します    | `QUERY`     |
-| `INSERT`        | `INSERT` ステートメントのすべての操作を記録します                                                   | `QUERY_DML`   |
-| `REPLACE`       | `REPLACE` ステートメントのすべての操作を記録します                                                  | `QUERY_DML`   |
-| `UPDATE`        | `UPDATE` ステートメントのすべての操作を記録します                                                   | `QUERY_DML`   |
-| `DELETE`        | `DELETE` ステートメントのすべての操作を記録します                                                   | `QUERY_DML`   |
-| `LOAD DATA`     | `LOAD DATA` ステートメントのすべての操作を記録します                                                | `QUERY_DML`   |
-| `SELECT`        | `SELECT` ステートメントのすべての操作を記録します                                                   | `QUERY`       |
-| `QUERY_DDL`     | DDL ステートメントのすべての操作を記録します                                                        | `QUERY`       |
+| `EXECUTE`       | `EXECUTE`文のすべての操作を記録します                                                | `QUERY`         |
+| `QUERY_DML`     | `INSERT`、`REPLACE`、`UPDATE`、`DELETE`、`LOAD DATA` を含む、DML文のすべての操作を記録します    | `QUERY`     |
+| `INSERT`        | `INSERT`文のすべての操作を記録します                                                   | `QUERY_DML`   |
+| `REPLACE`       | `REPLACE`文のすべての操作を記録します                                                  | `QUERY_DML`   |
+| `UPDATE`        | `UPDATE`文のすべての操作を記録します                                                   | `QUERY_DML`   |
+| `DELETE`        | `DELETE`文のすべての操作を記録します                                                   | `QUERY_DML`   |
+| `LOAD DATA`     | `LOAD DATA`文のすべての操作を記録します                                                | `QUERY_DML`   |
+| `SELECT`        | `SELECT`文のすべての操作を記録します                                                   | `QUERY`       |
+| `QUERY_DDL`     | DDL文のすべての操作を記録します                                                        | `QUERY`       |
 | `AUDIT`         | システム変数の設定やシステム関数の呼び出しを含む、TiDB Cloud データベース監査の設定に関連するすべての操作を記録します | -                   |
 | `AUDIT_FUNC_CALL` | TiDB Cloud データベース監査に関連するシステム関数の呼び出しのすべての操作を記録します        | `AUDIT`       |
 | `AUDIT_SET_SYS_VAR` | システム変数の設定のすべての操作を記録します        | `AUDIT`       |

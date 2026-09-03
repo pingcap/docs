@@ -29,7 +29,7 @@ SQLバインディングはSPMの基盤です。[オプティマイザヒント]
 
 ### バインディングを作成する {#create-a-binding}
 
-SQL ステートメントまたは履歴実行計画に従って、SQL ステートメントのバインディングを作成できます。
+SQL文または履歴実行計画に従って、SQL文のバインディングを作成できます。
 
 #### SQL文に従ってバインディングを作成する {#create-a-binding-according-to-a-sql-statement}
 
@@ -172,7 +172,7 @@ SELECT * FROM bookshop . users WHERE balance > ?
 > +-------------------------------------------------+------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
 > ```
 
-SQL ステートメントに GLOBAL スコープと SESSION スコープの両方のバインドされた実行計画がある場合、オプティマイザは SESSION バインドを検出すると GLOBAL スコープのバインドされた実行計画を無視するため、SESSION スコープ内のこのステートメントのバインドされた実行計画は GLOBAL スコープの実行計画を保護します。
+SQL文に GLOBAL スコープと SESSION スコープの両方のバインドされた実行計画がある場合、オプティマイザは SESSION バインドを検出すると GLOBAL スコープのバインドされた実行計画を無視するため、SESSION スコープ内のこのステートメントのバインドされた実行計画は GLOBAL スコープの実行計画を保護します。
 
 例えば：
 
@@ -210,7 +210,7 @@ explain SELECT * FROM t1, t2 WHERE t1.id = t2.id;
     CREATE BINDING FOR SELECT * FROM t WHERE a > 1 USING SELECT * FROM t use index  (idx) WHERE a > 2
     ```
 
-- このバインディングは、元の SQL ステートメントが`SELECT * FROM test . t WHERE a > ?`として処理されるのに対し、バインドされた SQL ステートメントは`SELECT * FROM test . t WHERE b > ?`として異なる方法で処理されるため、失敗します。
+- このバインディングは、元の SQL文が`SELECT * FROM test . t WHERE a > ?`として処理されるのに対し、バインドされた SQL文は`SELECT * FROM test . t WHERE b > ?`として異なる方法で処理されるため、失敗します。
 
     ```sql
     CREATE BINDING FOR SELECT * FROM t WHERE a > 1 USING SELECT * FROM t use index(idx) WHERE b > 2
@@ -218,7 +218,7 @@ explain SELECT * FROM t1, t2 WHERE t1.id = t2.id;
 
 > **Note:**
 >
-> `PREPARE` / `EXECUTE`およびバイナリプロトコルで実行されるクエリの場合、 `PREPARE` / `EXECUTE`ステートメントではなく、実際のクエリステートメントのバインディングを作成する必要があります。
+> `PREPARE` / `EXECUTE`およびバイナリプロトコルで実行されるクエリの場合、 `PREPARE` / `EXECUTE`文ではなく、実際のクエリ文のバインディングを作成する必要があります。
 >
 
 #### 履歴実行計画に従ってバインディングを作成する {#create-a-binding-according-to-a-historical-execution-plan}
@@ -231,7 +231,7 @@ SQL文の実行計画を過去の実行計画に固定するには、Plan Digest
 - TiFlashクエリ、3つ以上のテーブルを含む結合クエリ、およびサブクエリを含むクエリの場合、自動生成されるヒントが適切ではないため、プランが完全にバインドされない可能性があります。このような場合、バインディングの作成時に警告が表示されます。
 - 履歴実行計画がヒント付きのSQL文用である場合、ヒントはバインディングに追加されます。例えば、 `SELECT /*+ max_execution_time(1000) */ * FROM t`を実行した後、そのプランダイジェストで作成されたバインディングには`max_execution_time(1000)`が含まれます。
 
-このバインディング メソッドの SQL ステートメントは次のとおりです。
+このバインディング メソッドの SQL文は次のとおりです。
 
 ```sql
 CREATE [GLOBAL | SESSION] BINDING FROM HISTORY USING PLAN DIGEST StringLiteralOrUserVariableList;
@@ -309,7 +309,7 @@ SELECT @@LAST_PLAN_FROM_BINDING;
 
 ### バインディングを削除する {#remove-a-binding}
 
-SQL ステートメントまたは SQL ダイジェストに従ってバインディングを削除できます。
+SQL文または SQL ダイジェストに従ってバインディングを削除できます。
 
 #### SQL文に従ってバインディングを削除する {#remove-a-binding-according-to-a-sql-statement}
 
@@ -361,7 +361,7 @@ SET BINDING [ENABLED | DISABLED] FOR BindableStmt;
 
 #### `sql_digest`に応じてバインディングステータスを変更する {#change-binding-status-according-to-sql-digest}
 
-SQL ステートメントに従ってバインディング ステータスを変更するだけでなく、 `sql_digest`に従ってバインディング ステータスを変更することもできます。
+SQL文に従ってバインディング ステータスを変更するだけでなく、 `sql_digest`に従ってバインディング ステータスを変更することもできます。
 
 ```sql
 SET BINDING [ENABLED | DISABLED] FOR SQL DIGEST 'sql_digest';
@@ -387,7 +387,7 @@ SHOW [GLOBAL | SESSION] BINDINGS [ShowLikeOrWhere]
 | update_time | 更新時刻                                                                                                                                                  |
 | charset | 文字セット                                                                                                                                                 |
 | collation | 順序付けルール                                                                                                                                               |
-| source | バインディングが作成される方法`manual` (SQL ステートメントに従って作成される)、 `history` (履歴実行計画に従って作成される)、 `capture` (TiDB によって自動的に取得される)、および`evolve` (TiDB によって自動的に展開される) が含まれます。 |
+| source | バインディングが作成される方法には、 `manual` (SQL文に従って作成される)、 `history` (履歴実行計画に従って作成される)、 `capture` (TiDB によって自動的に取得される)、および`evolve` (TiDB によって自動的に展開される) が含まれます。 |
 | sql_digest | 正規化されたSQL文のダイジェスト                                                                                                                                     |
 | plan_digest | 実行計画のダイジェスト                                                                                                                                           |
 
@@ -417,7 +417,7 @@ SHOW [GLOBAL | SESSION] BINDINGS [ShowLikeOrWhere]
     1 row in set (0.00 sec)
     ```
 
-- `explain format = 'verbose'`ステートメントを使用して、SQL ステートメントのクエリプランを表示します。SQL ステートメントでバインディングが使用されている場合は、 `show warnings`を実行して、SQL ステートメントで使用されているバインディングを確認できます。
+- `explain format = 'verbose'`文を使用して、SQL文のクエリプランを表示します。SQL文でバインディングが使用されている場合は、 `show warnings`を実行して、SQL文で使用されているバインディングを確認できます。
 
     ```sql
     -- Create a global binding
@@ -470,7 +470,7 @@ SHOW binding_cache status;
 
 [ステートメントの要約](/statement-summary-tables.md)は、レイテンシー、実行時間、対応するクエリプランなど、最近のSQL実行情報を記録します。ステートメントサマリーテーブルにクエリを実行して条件を満たす`plan_digest`を取得し、[これらの履歴実行計画に従ってバインディングを作成する](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan)ことができます。
 
-以下の例では、過去2週間に10回以上実行され、SQLバインディングのない複数の実行計画を持つ`SELECT`ステートメントをクエリします。クエリを実行時間でソートし、上位100件のクエリを最も高速なプランにバインドします。
+以下の例では、過去2週間に10回以上実行され、SQLバインディングのない複数の実行計画を持つ`SELECT`文をクエリします。クエリを実行時間でソートし、上位100件のクエリを最も高速なプランにバインドします。
 
 ```sql
 WITH stmts AS (                                                -- Gets all information
@@ -642,10 +642,10 @@ SHOW GLOBAL BINDINGS;
 
 自動バインディング作成を有効にすると、ステートメントサマリー内の過去のSQL文が`bind-info-lease`回（デフォルト値は`3s` ）ごとに走査され、2回以上出現するSQL文に対してバインディングが自動的に作成されます。これらのSQL文に対して、TiDBはステートメントサマリーに記録された実行計画を自動的にバインドします。
 
-ただし、TiDB は次の種類の SQL ステートメントのバインディングを自動的にキャプチャしません。
+ただし、TiDB は次の種類の SQL文のバインディングを自動的にキャプチャしません。
 
-- `EXPLAIN`と`EXPLAIN ANALYZE`ステートメント。
-- 統計情報を自動的にロードするために使用される`SELECT`クエリなど、TiDB 内で内部的に実行される SQL ステートメント。
+- `EXPLAIN`と`EXPLAIN ANALYZE`文。
+- 統計情報を自動的にロードするために使用される`SELECT`クエリなど、TiDB 内で内部的に実行される SQL文。
 - `Enabled`または`Disabled`バインディングを含むステートメント。
 - キャプチャ条件によってフィルター処理されるステートメント。
 
@@ -653,10 +653,10 @@ SHOW GLOBAL BINDINGS;
 >
 > 現在、バインディングは、クエリ文によって生成された実行計画を固定するためのヒント群を生成します。これにより、同じクエリでは実行計画が変わらなくなります。同じインデックスや結合アルゴリズム（HashJoinやIndexJoinなど）を使用するクエリを含むほとんどのOLTPクエリでは、TiDBはバインディング前後のプランの一貫性を保証します。ただし、ヒントの制限により、2つ以上のテーブルの結合、MPPクエリ、複雑なOLAPクエリなど、一部の複雑なクエリではプランの一貫性を保証できません。
 
-`PREPARE` / `EXECUTE`およびバイナリプロトコルで実行されたクエリの場合、TiDB は`PREPARE`ステートメントではなく、実際の`EXECUTE`ステートメントのバインディングを自動的にキャプチャします。
+`PREPARE` / `EXECUTE`およびバイナリプロトコルで実行されたクエリの場合、TiDB は`PREPARE`文ではなく、実際の`EXECUTE`文のバインディングを自動的にキャプチャします。
 > **Note:**
 >
-> TiDB には一部の機能の正確性を確保するための SQL ステートメントが埋め込まれているため、ベースライン キャプチャではデフォルトでこれらの SQL ステートメントが自動的に保護されます。
+> TiDB には一部の機能の正確性を確保するための SQL文が埋め込まれているため、ベースライン キャプチャではデフォルトでこれらの SQL文が自動的に保護されます。
 
 ### バインディングを除外する {#filter-out-bindings}
 
@@ -798,9 +798,9 @@ CREATE GLOBAL BINDING for SELECT * FROM t WHERE a < 100 AND b < 100 USING SELECT
 
 ベースライン進化により新しいバインディングが自動的に作成されるため、クエリ環境が変更されると、自動的に作成されたバインディングの動作が複数選択される場合があります。以下の点にご注意ください。
 
-- ベースライン進化では、少なくとも 1つのグローバル バインディングを持つ正規化された SQL ステートメントのみが進化します。
+- ベースライン進化では、少なくとも 1つのグローバル バインディングを持つ正規化された SQL文のみが進化します。
 
-- 新しいバインディングを作成すると、以前のバインディングがすべて削除されるため (正規化された SQL ステートメントの場合)、新しいバインディングを手動で作成すると、自動的に進化したバインディングは削除されます。
+- 新しいバインディングを作成すると、以前のバインディングがすべて削除されるため (正規化された SQL文の場合)、新しいバインディングを手動で作成すると、自動的に進化したバインディングは削除されます。
 
 - 計算プロセスに関連するすべてのヒントは、進化の間も保持されます。これらのヒントは以下の通りです。
 

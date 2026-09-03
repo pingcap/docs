@@ -355,7 +355,7 @@ conn.query('DELETE FROM players WHERE id = ?;', [1], (err, ok) => {
     >
     > SQLインジェクション攻撃を回避したり、バッチ挿入/更新の効率を向上させたりするためにこの機能を使用したい場合は、代わりに[mysql2](https://github.com/sidorares/node-mysql2)パッケージを使用することをお勧めします。
 
-- ORM フレームワークを使用して、[Sequelize](https://sequelize.org/)、 [TypeORM](https://typeorm.io/) 、 [Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md)など、多数の複雑な SQL ステートメントを使用しないシナリオでの開発効率を向上させます。
+- ORM フレームワークを使用して、[Sequelize](https://sequelize.org/)、 [TypeORM](https://typeorm.io/) 、 [Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md)など、多数の複雑な SQL文を使用しないシナリオでの開発効率を向上させます。
 
 - データベースで大きな数値（ `supportBigNumbers: true`列と`BIGINT`列）を扱う場合は、 `DECIMAL`オプションを有効にすることをお勧めします。
 

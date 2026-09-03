@@ -205,7 +205,7 @@ TiCDCオープンプロトコルは、データ変更イベントを下流に複
 
 このセクションでは、イベント ストリームの出力ログを表示します。
 
-アップストリームで次の SQL ステートメントを実行し、MQ パーティション番号が 2 であるとします。
+アップストリームで次の SQL文を実行し、MQ パーティション番号が 2 であるとします。
 
 ```sql
 CREATE TABLE test.t1(id int primary key, val varchar(16));
@@ -220,7 +220,7 @@ CREATE TABLE test.t1(id int primary key, val varchar(16));
 4. [partition=1] [key="{\"ts\":415508856908021766,\"t\":3}"] [value=]
 ```
 
-アップストリームで次の SQL ステートメントを実行します。
+アップストリームで次の SQL文を実行します。
 
 ```sql
 BEGIN;
@@ -244,7 +244,7 @@ COMMIT;
 8. [partition=0] [key="{\"ts\":415508878783938562,\"scm\":\"test\",\"tbl\":\"t1\",\"t\":1}"] [value="{\"u\":{\"id\":{\"t\":3,\"h\":true,\"v\":3},\"val\":{\"t\":15,\"v\":\"cc\"}}}"]
 ```
 
-アップストリームで次の SQL ステートメントを実行します。
+アップストリームで次の SQL文を実行します。
 
 ```sql
 BEGIN;
@@ -310,7 +310,7 @@ COMMIT;
 
 ## DDLタイプコード {#ddl-type-code}
 
-`DDL Type Code` 、DDL イベントの DDL ステートメント タイプを表します。
+`DDL Type Code` 、DDL イベントの DDL文 タイプを表します。
 
 | Type                              | Code |
 | :-------------------------------- | :-- |

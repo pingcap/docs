@@ -45,7 +45,7 @@ CREATE TABLE `player` (`id` INT, `coins` INT, `goods` INT);
 INSERT INTO `player` (`id`, `coins`, `goods`) VALUES (1, 1000, 1), (2, 230, 2);
 ```
 
-この SQL の使用方法の詳細については、 [TiDB Cloud Starterインスタンスに接続します](/develop/dev-guide-build-cluster-in-cloud.md#step-2-connect-to-a-starter-instance)を参照し、クライアントを使用してTiDB Cloud Starterインスタンスに接続した後、SQL ステートメントを入力する手順に従ってください。
+この SQL の使用方法の詳細については、 [TiDB Cloud Starterインスタンスに接続します](/develop/dev-guide-build-cluster-in-cloud.md#step-2-connect-to-a-starter-instance)を参照し、クライアントを使用してTiDB Cloud Starterインスタンスに接続した後、SQL文を入力する手順に従ってください。
 
 </div>
 
@@ -227,7 +227,7 @@ Pythonでの完全な例については、以下を参照してください。
 
 ## バルク挿入 {#bulk-insert}
 
-TiDBに大量のデータを迅速にインポートする必要がある場合は、 **PingCAP**が提供するデータ移行ツール群を使用することをお勧めします。 `INSERT`ステートメントを使用する方法は、効率が悪く、例外処理やその他の問題を自分で処理する必要があるため、最適な方法ではありません。
+TiDBに大量のデータを迅速にインポートする必要がある場合は、 **PingCAP**が提供するデータ移行ツール群を使用することをお勧めします。 `INSERT`文を使用する方法は、効率が悪く、例外処理やその他の問題を自分で処理する必要があるため、最適な方法ではありません。
 
 大量挿入に推奨されるツールは以下のとおりです。
 
@@ -282,7 +282,7 @@ ERROR 8216 (HY000): Invalid auto random: Explicit insertion on auto_random colum
     INSERT INTO `bookshop`.`users` (`balance`, `nickname`) VALUES (0.00, 'nicky');
     ```
 
-- この列を指定する***必要が***あることが確実な場合は、 [`SET`ステートメント](https://docs.pingcap.com/tidb/stable/sql-statement-set-variable)を使用できます。 ユーザー変数を変更することで、挿入時に`AUTO_RANDOM`の列を指定できるようにします。
+- この列を指定する***必要***があることが確実な場合は、 [`SET`文](https://docs.pingcap.com/tidb/stable/sql-statement-set-variable)を使用できます。 ユーザー変数を変更することで、挿入時に`AUTO_RANDOM`の列を指定できるようにします。
 
     ```sql
     SET @@allow_auto_random_explicit_insert = true;

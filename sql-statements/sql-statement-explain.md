@@ -177,13 +177,13 @@ EXPLAIN DELETE FROM t1 WHERE c1=3;
 | 形式           | 説明                                                                                                                        |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------- |
 | 指定されていない     | 形式が指定されていない場合、 `EXPLAIN`はデフォルトの形式`row`を使用します。                                                                               |
-| `brief`      | `EXPLAIN`ステートメントの出力のオペレーター ID は、 `FORMAT`が指定されていない場合に比べて簡素化されます。                                                              |
-| `dot`        | `EXPLAIN`ステートメントは DOT 実行計画を出力します。これを使用して、 `dot`プログラム ( `graphviz`パッケージ内) を通じて PNG ファイルを生成することができます。                      |
+| `brief`      | `EXPLAIN`文の出力のオペレーター ID は、 `FORMAT`が指定されていない場合に比べて簡素化されます。                                                              |
+| `dot`        | `EXPLAIN`文は DOT 実行計画を出力します。これを使用して、 `dot`プログラム ( `graphviz`パッケージ内) を通じて PNG ファイルを生成することができます。                      |
 | `row`        | `EXPLAIN`文は結果を表形式で出力します。詳細については[クエリ実行計画を理解する](/explain-overview.md)を参照してください。                                             |
-| `tidb_json`  | `EXPLAIN`ステートメントは実行計画を JSON 形式で出力し、オペレーター情報を JSON 配列に格納します。                                                                 |
+| `tidb_json`  | `EXPLAIN`文は実行計画を JSON 形式で出力し、オペレーター情報を JSON 配列に格納します。                                                                 |
 | `verbose`    | `EXPLAIN`文は`row`形式で結果を出力し、さらに`estCost`列にクエリの推定コストが表示されます。この形式の使用方法の詳細については、 [SQLプラン管理](/sql-plan-management.md)を参照してください。 |
-| `plan_cache` | `EXPLAIN`ステートメントは、 [プランキャッシュ](/sql-non-prepared-plan-cache.md#diagnostics)情報を警告として含めて、 `row`形式で結果を出力します。                  |
-| `cost_trace` | `EXPLAIN`ステートメントは、推定コストの`estCost`とコストの計算式の`costFormula`列の 2つの追加列を含む拡張`row`形式で結果を出力します。                                   |
+| `plan_cache` | `EXPLAIN`文は、 [プランキャッシュ](/sql-non-prepared-plan-cache.md#diagnostics)情報を警告として含めて、 `row`形式で結果を出力します。                  |
+| `cost_trace` | `EXPLAIN`文は、推定コストの`estCost`とコストの計算式の`costFormula`列の 2つの追加列を含む拡張`row`形式で結果を出力します。                                   |
 
 <SimpleTab>
 
@@ -269,7 +269,7 @@ The xx.dot is the result returned by the above statement.
 
 <div label="JSON">
 
-JSON形式で出力を取得するには、 `EXPLAIN`ステートメントに`FORMAT = "tidb_json"`を指定します。以下は例です。
+JSON形式で出力を取得するには、 `EXPLAIN`文に`FORMAT = "tidb_json"`を指定します。以下は例です。
 
 ```sql
 CREATE TABLE t(id int primary key, a int, b int, key(a));

@@ -8,7 +8,7 @@ summary: TiDB の SQL プリペアドプランキャッシュについて学習�
 TiDBは、 `Prepare`と`Execute`クエリの実行計画のキャッシュをサポートしています。これには、以下の2つの形式のプリペアドステートメントが含まれます。
 
 - プロトコル機能`COM_STMT_PREPARE`および`COM_STMT_EXECUTE`使用。
-- SQL ステートメント`PREPARE`と`EXECUTE`を使用します。
+- SQL文`PREPARE`と`EXECUTE`を使用します。
 
 TiDB オプティマイザは、これら2種類のクエリを同じ方法で処理します。準備時に、パラメータ化されたクエリは AST (抽象構文ツリー) に解析され、キャッシュされます。その後の実行時に、保存された AST と特定のパラメータ値に基づいて実行計画が生成されます。
 
@@ -16,9 +16,9 @@ TiDB オプティマイザは、これら2種類のクエリを同じ方法で�
 
 TiDBは、 `Prepare` / `Execute`文と同様に、 `PREPARE`以外の文についても実行計画のキャッシュをサポートしています。詳細については、 [非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)を参照してください。
 
-TiDB の現在のバージョンでは、 `Prepare`ステートメントが次のいずれかの条件を満たす場合、クエリまたはプランはキャッシュされません。
+TiDB の現在のバージョンでは、 `Prepare`文が次のいずれかの条件を満たす場合、クエリまたはプランはキャッシュされません。
 
-- クエリには、 `SELECT` 、 `UPDATE` 、 `INSERT` 、 `DELETE` 、 `Union` 、 `Intersect` 、 `Except`以外の SQL ステートメントが含まれています。
+- クエリには、 `SELECT` 、 `UPDATE` 、 `INSERT` 、 `DELETE` 、 `Union` 、 `Intersect` 、 `Except`以外の SQL文が含まれています。
 - クエリは一時テーブル、または生成列を含むテーブルにアクセスするか、静的モード (つまり、 [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51)が`static`に設定される) を使用してパーティションテーブルにアクセスします。
 - クエリには、 `SELECT * FROM t1 WHERE t1.a > (SELECT 1 FROM t2 WHERE t2.b < 1)`などの非相関サブクエリが含まれています。
 - クエリには、実行計画に`SELECT * FROM t1 WHERE t1.a > (SELECT a FROM t2 WHERE t1.b > t2.b)`などの`PhysicalApply`オペレーターを持つ相関サブクエリが含まれています。
@@ -31,8 +31,8 @@ TiDB の現在のバージョンでは、 `Prepare`ステートメントが次�
 - クエリには、ウィンドウ関数`Window Frame`の定義に`?` （ `(partition by year order by sale rows ? preceding)`など）が含まれています。ウィンドウ関数の他の場所に`?`出現する場合、クエリはキャッシュされます。
 - このクエリには、 `int`と`string`を比較するためのパラメータ`c_int >= ?`や`c_int in (?, ?)`など）が含まれています。ここで、 `?`文字列型（ `set @x='123'`など）を示します。クエリ結果がMySQLと互換性を持つようにするには、各クエリでパラメータを調整する必要があるため、このようなクエリはキャッシュされません。
 - このプランは`TiFlash`アクセスしようとします。
-- ほとんどの場合、現在の`Prepare`ステートメントにパラメータがない限り、 `TableDual`を含むプランはキャッシュされません。
-- このクエリは、 `information_schema.columns`などのTiDBシステムビューにアクセスします。システムビューにアクセスするために`Prepare`および`Execute`ステートメントを使用することは推奨されません。
+- ほとんどの場合、現在の`Prepare`文にパラメータがない限り、 `TableDual`を含むプランはキャッシュされません。
+- このクエリは、 `information_schema.columns`などのTiDBシステムビューにアクセスします。システムビューにアクセスするために`Prepare`および`Execute`文を使用することは推奨されません。
 
 TiDBでは、クエリ内の`?`の数に制限があります。クエリに`?` 65535 個以上含まれる場合、エラー`Prepared statement contains too many placeholders`が報告されます。
 
@@ -55,7 +55,7 @@ LRUリンクリストは、 `Prepare` / `Execute`セッションをまたいで�
 
 - 実行計画は、キャッシュされているかどうかに関わらず、SQLバインディングの影響を受けます。キャッシュされていない実行計画（最初の`Execute` ）は、既存のSQLバインディングの影響を受けます。キャッシュされている実行計画は、新しいSQLバインディングが作成されると無効になります。
 - キャッシュされたプランは、統計、最適化ルール、式によるブロックリストのプッシュダウンの変更の影響を受けません。
-- `Execute`のパラメータが異なることを考慮し、実行プランキャッシュは、適応性を確保するために、特定のパラメータ値に密接に関連する一部の積極的なクエリ最適化手法を禁止します。これにより、クエリプランが特定のパラメータ値に対して最適にならない可能性があります。例えば、クエリのフィルタ条件が`where a > ? And a < ?`で、最初の`Execute`ステートメントのパラメータがそれぞれ`2`と`1`あるとします。これらの 2つのパラメータが次回の実行時に`1`と`2`なる可能性があることを考慮すると、オプティマイザは現在のパラメータ値に固有の最適な`TableDual`実行計画を生成しません。
+- `Execute`のパラメータが異なることを考慮し、実行プランキャッシュは、適応性を確保するために、特定のパラメータ値に密接に関連する一部の積極的なクエリ最適化手法を禁止します。これにより、クエリプランが特定のパラメータ値に対して最適にならない可能性があります。例えば、クエリのフィルタ条件が`where a > ? And a < ?`で、最初の`Execute`文のパラメータがそれぞれ`2`と`1`あるとします。これらの 2つのパラメータが次回の実行時に`1`と`2`なる可能性があることを考慮すると、オプティマイザは現在のパラメータ値に固有の最適な`TableDual`実行計画を生成しません。
 - キャッシュの無効化と削除を考慮しない場合、実行プランキャッシュはさまざまなパラメーター値に適用され、理論上は特定の値に対して最適ではない実行計画が生成されます。たとえば、フィルター条件が`where a < ?`で、最初の実行に使用されたパラメーター値が`1`の場合、オプティマイザは最適な`IndexScan`実行計画を生成し、それをキャッシュに格納します。後続の実行で値が`10000`になった場合、 `TableScan`プランの方が適している可能性があります。ただし、実行プランキャッシュがあるため、以前に生成された`IndexScan`を使用して実行されます。そのため、実行プランキャッシュは、クエリが単純 (コンパイル率が高い) で実行計画が比較的固定されているアプリケーションシナリオに適しています。
 
 バージョン6.1.0以降、実行プランキャッシュはデフォルトで有効になっています。プリペアドプランキャッシュはシステム変数[`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)を介して制御できます。
@@ -64,7 +64,7 @@ LRUリンクリストは、 `Prepare` / `Execute`セッションをまたいで�
 >
 > [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)システム変数は、 `Prepare` / `Execute`クエリの実行プランキャッシュのみを制御し、通常のクエリは制御しません。通常のクエリの実行プランキャッシュについては、 [SQL 非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)を参照してください。
 
-実行プランキャッシュ機能を有効にすると、セッションレベルのシステム変数[`last_plan_from_cache`](/system-variables.md#last_plan_from_cache-new-in-v40)を使用して、前の`Execute`ステートメントがキャッシュされた実行計画を使用したかどうかを確認できます。次に例を示します。
+実行プランキャッシュ機能を有効にすると、セッションレベルのシステム変数[`last_plan_from_cache`](/system-variables.md#last_plan_from_cache-new-in-v40)を使用して、前の`Execute`文がキャッシュされた実行計画を使用したかどうかを確認できます。次に例を示します。
 
 ```sql
 MySQL [test]> create table t(a int);
@@ -128,7 +128,7 @@ MySQL [test]> select @@last_plan_from_cache;
 
 ### `SHOW WARNINGS`を使用して診断する {#use-show-warnings-to-diagnose}
 
-一部のクエリまたはプランはキャッシュできません。`SHOW WARNINGS`ステートメントを使用して、クエリまたはプランがキャッシュされているかどうかを確認できます。キャッシュされていない場合は、結果で失敗の理由を確認できます。例:
+一部のクエリまたはプランはキャッシュできません。`SHOW WARNINGS`文を使用して、クエリまたはプランがキャッシュされているかどうかを確認できます。キャッシュされていない場合は、結果で失敗の理由を確認できます。例:
 
 ```sql
 mysql> PREPARE st FROM 'SELECT * FROM t WHERE a > (SELECT MAX(a) FROM t)';  -- The query contains a subquery and cannot be cached.
@@ -287,9 +287,9 @@ MySQL [test]> admin flush global plan_cache;
 ERROR 1105 (HY000): Do not support the 'admin flush global scope.'
 ```
 
-## `COM_STMT_CLOSE`コマンドと`DEALLOCATE PREPARE`ステートメントを無視します。 {#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement}
+## `COM_STMT_CLOSE`コマンドと`DEALLOCATE PREPARE`文を無視します。 {#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement}
 
-SQL ステートメントの構文解析コストを削減するには、 `prepare stmt` 1回実行し、次に`execute stmt`複数回実行してから`deallocate prepare`を実行することをお勧めします。
+SQL文の構文解析コストを削減するには、 `prepare stmt` 1回実行し、次に`execute stmt`複数回実行してから`deallocate prepare`を実行することをお勧めします。
 
 ```sql
 MySQL [test]> prepare stmt from '...'; -- Prepare once

@@ -141,7 +141,7 @@ SELECT * FROM authors WHERE birth_year = 1998;
 
 Javaでは、同じSQLを使用して、動的なパラメータを持つデータクエリ要求を処理できます。
 
-これは、パラメータを SQL ステートメントに連結することで実行できます。ただし、この方法では、アプリケーションのセキュリティに[SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)インジェクションの潜在的なリスクが生じます。
+これは、パラメータを SQL文に連結することで実行できます。ただし、この方法では、アプリケーションのセキュリティに[SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)インジェクションの潜在的なリスクが生じます。
 
 このようなクエリに対処するには、通常のステートメントの代わりに[プリペアドステートメント](/develop/dev-guide-prepared-statement.md)を使用します。
 
@@ -172,7 +172,7 @@ public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
 
 クエリ結果を並べ替えるには、 `ORDER BY`ステートメントを使用できます。
 
-例えば、次の SQL ステートメントは、 `authors`テーブルを降順 ( `DESC` ) にソートすることにより、 `birth_year`リストを取得します。
+例えば、次の SQL文は、 `authors`テーブルを降順 ( `DESC` ) にソートすることにより、 `birth_year`リストを取得します。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">

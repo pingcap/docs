@@ -26,7 +26,7 @@ summary: DBスナップショットを使用して、Amazon AuroraからTiDBへ�
 
 #### 1.1 Amazon Auroraからスキーマファイルをエクスポートする {#1-1-export-the-schema-file-from-amazon-aurora}
 
-Amazon Auroraのスナップショットファイルには DDL ステートメントが含まれていないため、 Dumplingを使用してスキーマをエクスポートし、 TiDB Lightningを使用してターゲットデータベースにスキーマを作成する必要があります。
+Amazon Auroraのスナップショットファイルには DDL文が含まれていないため、 Dumplingを使用してスキーマをエクスポートし、 TiDB Lightningを使用してターゲットデータベースにスキーマを作成する必要があります。
 
 次のコマンドを実行して、 Dumplingを使用してスキーマをエクスポートします。このコマンドには`--filter`パラメータが含まれており、目的のテーブルスキーマのみをエクスポートできます。パラメータの詳細については、 [Dumplingのオプション一覧](/dumpling-overview.md#option-list-of-dumpling)を参照してください。
 
@@ -307,4 +307,4 @@ DMが実行されている間、DM-worker、DM-master、およびdmctlは関連�
 - [移行タスクを再開する](/dm/dm-resume-task.md)。
 - [移行タスクを停止します](/dm/dm-stop-task.md)。
 - [クラスタデータソースとタスク構成のエクスポートとインポート](/dm/dm-export-import-config.md)。
-- [失敗したDDLステートメントを処理する](/dm/handle-failed-ddl-statements.md)。
+- [失敗したDDL文を処理する](/dm/handle-failed-ddl-statements.md)。

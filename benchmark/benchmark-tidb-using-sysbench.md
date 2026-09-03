@@ -105,7 +105,7 @@ set global tidb_disable_txn_auto_retry = off;
 
 次にクライアントを終了します。
 
-MySQL クライアントを再起動し、次の SQL ステートメントを実行してデータベース`sbtest`を作成します。
+MySQL クライアントを再起動し、次の SQL文を実行してデータベース`sbtest`を作成します。
 
 ```sql
 create database sbtest;

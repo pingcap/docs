@@ -142,7 +142,7 @@ summary: ある TiDB クラスターから別の TiDB クラスターにデー�
 
 2. データをバックアップします。
 
-    データをバックアップするには、アップストリームクラスターで`BACKUP`ステートメントを実行します。
+    データをバックアップするには、アップストリームクラスターで`BACKUP`文を実行します。
 
     ```sql
     MySQL [(none)]> BACKUP DATABASE * TO 's3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://${HOST_IP}:6060&force-path-style=true' RATE_LIMIT = 120 MB/SECOND;

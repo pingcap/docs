@@ -5,7 +5,7 @@ summary: TiDB データベースの ALTER SEQUENCE の使用法の概要。
 
 # ALTER SEQUENCE {#alter-sequence}
 
-`ALTER SEQUENCE`ステートメントは、TiDB内のシーケンスオブジェクトを変更します。シーケンスは、 `Table`および`View`のオブジェクトと同等のデータベースオブジェクトです。シーケンスは、カスタマイズされた方法でシリアル化されたIDを生成するために使用されます。
+`ALTER SEQUENCE`文は、TiDB内のシーケンスオブジェクトを変更します。シーケンスは、 `Table`および`View`のオブジェクトと同等のデータベースオブジェクトです。シーケンスは、カスタマイズされた方法でシリアル化されたIDを生成するために使用されます。
 
 ## 概要 {#synopsis}
 
@@ -94,7 +94,7 @@ CREATE SEQUENCE s1;
 Query OK, 0 rows affected (0.15 sec)
 ```
 
-次の SQL ステートメントを 2回実行して、シーケンスから次の2つの値を取得します。
+次の SQL文を 2回実行して、シーケンスから次の2つの値を取得します。
 
 ```sql
 SELECT NEXTVAL(s1);
@@ -160,7 +160,7 @@ SELECT NEXTVAL(s1);
 1 row in set (0.00 sec)
 ```
 
-出力からわかるように、 `ALTER SEQUENCE`ステートメントの後に値が 2 増加します。
+出力からわかるように、 `ALTER SEQUENCE`文の後に値が 2 増加します。
 
 シーケンスの他のパラメータを変更することもできます。例えば、シーケンスの`MAXVALUE`次のように変更できます。
 

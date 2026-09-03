@@ -12,7 +12,7 @@ summary: TiDBデータベースにおけるRESTOREの使用方法の概要。
 > - この機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 > - この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
-`RESTORE`ステートメントは、 [BRツール](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)と同じエンジンを使用しますが、リストア プロセスは別のBRツールではなく TiDB 自体によって実行されます。BR のすべての利点と注意点もここに適用されます。特に、 **`RESTORE`は現在ACID準拠ではありません**。 `RESTORE`を実行する前に、次の要件が満たされていることを確認してください。
+`RESTORE`文は、 [BRツール](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)と同じエンジンを使用しますが、リストア プロセスは別のBRツールではなく TiDB 自体によって実行されます。BR のすべての利点と注意点もここに適用されます。特に、 **`RESTORE`は現在ACID準拠ではありません**。 `RESTORE`を実行する前に、次の要件が満たされていることを確認してください。
 
 - クラスターは「オフライン」状態であり、現在有効なTiDBセッションは、復元中のすべてのテーブルにアクセスできる唯一のアクティブなSQL接続です。
 - 完全復元を実行する場合、復元対象のテーブルは既に存在してはなりません。既存のデータが上書きされ、データとインデックス間の不整合が発生する可能性があるためです。
@@ -20,7 +20,7 @@ summary: TiDBデータベースにおけるRESTOREの使用方法の概要。
 
 `RESTORE`を実行するには`RESTORE_ADMIN`または`SUPER`権限が必要です。さらに、リストアを実行する TiDB ノードとクラスタ内のすべての TiKV ノードは、宛先からの読み取り権限を持っている必要があります。
 
-`RESTORE`ステートメントはブロッキング処理であり、リストアタスク全体が完了、失敗、またはキャンセルされるまで終了しません。 `RESTORE`を実行するには、長時間接続を準備する必要があります。タスクは[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
+`RESTORE`文はブロッキング処理であり、リストアタスク全体が完了、失敗、またはキャンセルされるまで終了しません。 `RESTORE`を実行するには、長時間接続を準備する必要があります。タスクは[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)文を使用してキャンセルできます。
 
 `BACKUP`と`RESTORE`のタスクは、一度に 1つしか実行できません。 `BACKUP`または`RESTORE`タスクが同じ TiDBサーバーで既に実行されている場合、新しい`RESTORE`実行は、以前のすべてのタスクが完了するまで待機します。
 

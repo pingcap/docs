@@ -18,13 +18,13 @@ aliases: ['/ja/tidb/stable/dev-guide-create-table/','/ja/tidb/dev/dev-guide-crea
 
 ## テーブルとは何ですか {#what-is-a-table}
 
-[テーブル](/develop/dev-guide-schema-design-overview.md#table)、TiDB の論理オブジェクトであり、 の[データベース](/develop/dev-guide-schema-design-overview.md#database)オブジェクトです。SQL ステートメントから送信されたデータを格納するために使用されます。テーブルは、行と列の形式でデータレコードを保存します。テーブルには少なくとも 1つの列があります。 `n`列を定義した場合、各データ行には`n`列とまったく同じフィールドが含まれます。
+[テーブル](/develop/dev-guide-schema-design-overview.md#table)、TiDB の論理オブジェクトであり、 の[データベース](/develop/dev-guide-schema-design-overview.md#database)オブジェクトです。SQL文から送信されたデータを格納するために使用されます。テーブルは、行と列の形式でデータレコードを保存します。テーブルには少なくとも 1つの列があります。 `n`列を定義した場合、各データ行には`n`列とまったく同じフィールドが含まれます。
 
 ## テーブルの名前を挙げてください {#name-a-table}
 
 テーブルを作成する最初のステップは、テーブルに名前を付けることです。将来、自分や同僚に大きな負担をかけるような、意味のない名前は使用しないでください。会社や組織のテーブル命名規則に従うことをお勧めします。
 
-`CREATE TABLE`ステートメントは通常、次の形式をとります。
+`CREATE TABLE`文は通常、次の形式をとります。
 
 ```sql
 CREATE TABLE {table_name} ( {elements} );
@@ -109,7 +109,7 @@ CREATE TABLE `bookshop`.`books` (
 >
 > - TiDBでは、**主キー**は一意であり、NULLであってはなりません。ただし、主キーが**クラスター化インデックス**であることは保証されていません。代わりに、別のキーワードセット`CLUSTERED` / `NONCLUSTERED`によって、**主キー**が**クラスター化インデックス**であるかどうかが制御されます。キーワードが指定されていない場合は、システム変数`@@global.tidb_enable_clustered_index`によって制御されます（[クラスター化インデックス](https://docs.pingcap.com/tidb/stable/clustered-indexes)に記載のとおり）。
 
-**主キー**は`CREATE TABLE`ステートメントで定義されます。[主キー制約](/constraints.md#primary-key)は、制約付き列すべてに NULL 以外の値のみが含まれることを要求します。
+**主キー**は`CREATE TABLE`文で定義されます。[主キー制約](/constraints.md#primary-key)は、制約付き列すべてに NULL 以外の値のみが含まれることを要求します。
 
 テーブルは、**主キー**なし、または非整数の**主キー**を使用して作成できます。この場合、TiDB は**暗黙の主キー**として`_tidb_rowid`を作成します。暗黙の主キー`_tidb_rowid`は単調増加する性質を持つため、書き込み負荷の高いシナリオでは書き込みホットスポットが発生する可能性があります。したがって、アプリケーションが書き込み負荷の高い場合は、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)および[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)パラメータを使用してデータをシャーディングすることを検討してください。ただし、これにより読み取り増幅が発生する可能性があるため、トレードオフを独自に判断する必要があります。
 
@@ -198,7 +198,7 @@ CREATE TABLE `bookshop`.`ratings` (
 
 列内の重複値を防止する必要がある場合は、 `UNIQUE`制約を使用できます。
 
-例えば、ユーザーのニックネームが一意であることを確認するには、 `users`テーブルのテーブル作成 SQL ステートメントを次のように書き換えることができます。
+例えば、ユーザーのニックネームが一意であることを確認するには、 `users`テーブルのテーブル作成 SQL文を次のように書き換えることができます。
 
 ```sql
 CREATE TABLE `bookshop`.`users` (
@@ -215,7 +215,7 @@ CREATE TABLE `bookshop`.`users` (
 
 列にヌル値が含まれるのを防ぐ必要がある場合は、 `NOT NULL`制約を使用できます。
 
-ユーザーのニックネームを例にとってみましょう。ニックネームが一意であるだけでなく、null でないことを確認するには、 `users`テーブルを作成するための SQL ステートメントを次のように書き換えることができます。
+ユーザーのニックネームを例にとってみましょう。ニックネームが一意であるだけでなく、null でないことを確認するには、 `users`テーブルを作成するための SQL文を次のように書き換えることができます。
 
 ```sql
 CREATE TABLE `bookshop`.`users` (
@@ -263,7 +263,7 @@ ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 
 > **Note:**
 >
-> クラスターに**TiFlash**ノードが含まれていない場合、この SQL ステートメントはエラー`1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`を報告します。 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-starter-instance)を使用して、 **TiFlash**を含むTiDB Cloud Starterインスタンスを作成できます。
+> クラスターに**TiFlash**ノードが含まれていない場合、この SQL文はエラー`1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`を報告します。 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-starter-instance)を使用して、 **TiFlash**を含むTiDB Cloud Starterインスタンスを作成できます。
 
 次に、以下のクエリを実行できます。
 

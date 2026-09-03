@@ -18,7 +18,7 @@ TiDBはバージョン5.1以降、ロックビュー機能をサポートして�
 これらのテーブルの詳細な紹介については、次のドキュメントを参照してください。
 
 - [`TIDB_TRX`および`CLUSTER_TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) : 現在の TiDB ノードまたはクラスター全体で実行中のすべてのトランザクションの情報 (トランザクションがロック待機状態にあるかどうか、ロック待機時間、トランザクションで実行されたステートメントのダイジェストなど) を提供します。
-- [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md) : ブロックしているトランザクションとブロックされたトランザクションの`start_ts` 、ブロックされた SQL ステートメントのダイジェスト、待機が発生したキーなど、悲観的ロック待機情報を TiKV で提供します。
+- [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md) : ブロックしているトランザクションとブロックされたトランザクションの`start_ts` 、ブロックされた SQL文のダイジェスト、待機が発生したキーなど、悲観的ロック待機情報を TiKV で提供します。
 - [`DEADLOCKS`と`CLUSTER_DEADLOCKS`](/information-schema/information-schema-deadlocks.md) : デッドロック ループ内のトランザクション間の待機関係、トランザクションで現在実行されているステートメントのダイジェスト、待機が発生しているキーなど、現在の TiDB ノードまたはクラスター全体で最近発生したいくつかのデッドロックイベントの情報を提供します。
 
 > **Note:**
@@ -31,7 +31,7 @@ TiDBはバージョン5.1以降、ロックビュー機能をサポートして�
 
 最近のデッドロックエラーの情報を取得するには、テーブル`DEADLOCKS`または`CLUSTER_DEADLOCKS`をクエリできます。
 
-たとえば、テーブル`DEADLOCKS`をクエリするには、次の SQL ステートメントを実行できます。
+たとえば、テーブル`DEADLOCKS`をクエリするには、次の SQL文を実行できます。
 
 ```sql
 select * from information_schema.deadlocks;
@@ -77,7 +77,7 @@ select `key`, count(*) as `count` from information_schema.data_lock_waits group 
 
 `TIDB_TRX`と`CLUSTER_TIDB_TRX`テーブルに表示される情報は、クエリ実行時に実行中のトランザクションの情報でもあることに注意してください。これらのテーブルには、完了したトランザクションの情報は表示されません。同時実行トランザクションの数が多い場合、クエリの結果セットも大きくなる可能性があります。`limit`句または`where`句を使用すると、ロック待機時間が長いトランザクションをフィルタリングできます。Lock ビューで複数のテーブルを結合する場合、異なるテーブルのデータが同時に取得されない可能性があり、異なるテーブルの情報が一致しない可能性があることに注意してください。
 
-たとえば、 `where`句を使用してロック待機時間が長いトランザクションをフィルタリングするには、次の SQL ステートメントを実行します。
+たとえば、 `where`句を使用してロック待機時間が長いトランザクションをフィルタリングするには、次の SQL文を実行します。
 
 ```sql
 select trx.* from information_schema.data_lock_waits as l left join information_schema.cluster_tidb_trx as trx on l.trx_id = trx.id where l.key = "7480000000000000415F728000000000000001"\G

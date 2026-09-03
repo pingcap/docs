@@ -5,7 +5,7 @@ summary: TiDB データベースの DEALLOCATE の使用法の概要。
 
 # DEALLOCATE {#deallocate}
 
-`DEALLOCATE`ステートメントは、サーバー側のプリペアドステートメントへの SQL インターフェイスを提供します。
+`DEALLOCATE`文は、サーバー側のプリペアドステートメントへの SQL インターフェイスを提供します。
 
 ## 概要 {#synopsis}
 

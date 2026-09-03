@@ -408,4 +408,4 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
     backup_user_priv
     ```
 
-    ユーザー情報と権限情報を取得したら、生成されたSQLステートメントを下流のTiDB Cloud Premiumインスタンスで実行して、ユーザー情報と権限情報を復元します。
+    ユーザー情報と権限情報を取得したら、生成されたSQL文を下流のTiDB Cloud Premiumインスタンスで実行して、ユーザー情報と権限情報を復元します。

@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/dev-guide-implicit-type-conversion/','/ja/tidbcloud/d
 
 ## 変換ルール {#conversion-rules}
 
-SQL ステートメントの述語の両側のデータ型が一致しない場合、TiDB は、述語操作のために、一方または両側のデータ型を互換性のあるデータ型に暗黙的に変換します。
+SQL文の述語の両側のデータ型が一致しない場合、TiDB は、述語操作のために、一方または両側のデータ型を互換性のあるデータ型に暗黙的に変換します。
 
 TiDB における暗黙的な型変換のルールは次のとおりです。
 

@@ -36,4 +36,4 @@ DESC mysql.tidb_mdl_view;
 - `query` : クエリ。
 - `session_id` : セッションの識別子。
 - `start_time` : 開始時刻。この列は以前のバージョンでは`TxnStart`呼ばれていました。
-- `SQL_DIGESTS` : SQL ステートメントのダイジェスト。
+- `SQL_DIGESTS` : SQL文のダイジェスト。

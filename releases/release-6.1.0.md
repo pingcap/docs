@@ -109,7 +109,7 @@ TiDB バージョン: 6.1.0
 
     [ユーザードキュメント](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610) [＃10578](https://github.com/tikv/tikv/issues/10578)
 
-- 非トランザクションDMLステートメントをサポートする
+- 非トランザクションDML文をサポートする
 
     大規模データ処理のシナリオでは、大規模なトランザクションを伴う単一のSQL文が、クラスタの安定性とパフォーマンスに悪影響を及ぼす可能性があります。TiDB v6.1.0以降、 `DELETE` SQL文を複数のSQL文に分割してバッチ処理する構文がサポートされています。分割文はトランザクションの原子性と独立性を損なう可能性がありますが、クラスタの安定性を大幅に向上させます。詳細な構文については、 [`BATCH`](/sql-statements/sql-statement-batch.md)を参照してください。
 
@@ -247,7 +247,7 @@ TiDB バージョン: 6.1.0
 | [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)                                       | 新しく追加された    | この変数は、 TiFlash がリクエストを実行するための最大同時実行性を設定するために使用されます。                                                                                          |
 | [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)                                                 | 新しく追加された    | この設定は以前は`tidb.toml`オプション ( `oom-action` ) でしたが、TiDB v6.1.0 以降ではシステム変数に変更されました。                                                               |
 | [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)                                           | 新しく追加された    | この変数は、ユーザーによる手動実行[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)や TiDB のバックグラウンドでの自動分析タスクなど、TiDB が統計を更新する際の最大メモリ使用量を制御します。 |
-| [`tidb_nontransactional_ignore_error`](/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610)                   | 新しく追加された    | この変数は、非トランザクション DML ステートメントでエラーが発生した場合に、すぐにエラーを返すかどうかを指定します。                                                                                 |
+| [`tidb_nontransactional_ignore_error`](/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610)                   | 新しく追加された    | この変数は、非トランザクション DML文でエラーが発生した場合に、すぐにエラーを返すかどうかを指定します。                                                                                 |
 | [`tidb_prepared_plan_cache_memory_guard_ratio`](/system-variables.md#tidb_prepared_plan_cache_memory_guard_ratio-new-in-v610) | 新しく追加された    | この設定は以前は`tidb.toml`オプション ( `prepared-plan-cache.memory-guard-ratio` ) でしたが、TiDB v6.1.0 以降ではシステム変数に変更されました。                                   |
 | [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)                             | 新しく追加された    | この設定は以前は`tidb.toml`オプション ( `prepared-plan-cache.capacity` ) でしたが、TiDB v6.1.0 以降ではシステム変数に変更されました。                                             |
 | [`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610)                                   | 新しく追加された    | この変数は、TiDB 統計キャッシュのメモリクォータを設定します。                                                                                                            |
@@ -423,7 +423,7 @@ TiDB バージョン: 6.1.0
         - チェックポイントフラッシュにより失敗した行のデータがスキップされる可能性がある問題を修正[＃5279](https://github.com/pingcap/tiflow/issues/5279)
         - 一部のケースでダウンストリームでフィルタリングされた DDL を手動で実行するとタスクの再開に失敗する可能性がある問題を修正しました [＃5272](https://github.com/pingcap/tiflow/issues/5272)
         - `case-sensitive: true`が設定されていない場合、大文字テーブルを複製できない問題を修正[＃5255](https://github.com/pingcap/tiflow/issues/5255)
-        - `SHOW CREATE TABLE`ステートメントによって返されるインデックスの先頭に主キーがない場合に発生する DM ワーカーpanicの問題を修正しました。 [＃5159](https://github.com/pingcap/tiflow/issues/5159)
+        - `SHOW CREATE TABLE`文によって返されるインデックスの先頭に主キーがない場合に発生する DM ワーカーpanicの問題を修正しました。 [＃5159](https://github.com/pingcap/tiflow/issues/5159)
         - GTID が有効になっているときやタスクが自動的に再開されたときに CPU 使用率が上昇し、大量のログが出力される問題を修正しました[＃5063](https://github.com/pingcap/tiflow/issues/5063)
         - DM WebUI のオフライン オプションとその他の使用上の問題を修正しました [＃4993](https://github.com/pingcap/tiflow/issues/4993)
         - アップストリームでGTIDが空の場合に増分タスクの開始に失敗する問題を修正 [＃3731](https://github.com/pingcap/tiflow/issues/3731)

@@ -55,7 +55,7 @@ OWNER_ADDRESS: 0.0.0.0:4000
 
 ### `ADMIN SHOW DDL JOBS` {#admin-show-ddl-jobs}
 
-`ADMIN SHOW DDL JOBS`ステートメントは、現在のDDLジョブキューにある10個のジョブ（実行中および保留中のジョブ（存在する場合）を含む）と、実行済みのDDLジョブキューにある最後の10個のジョブ（存在する場合）を表示します。返される結果フィールドは、以下のとおりです。
+`ADMIN SHOW DDL JOBS`文は、現在のDDLジョブキューにある10個のジョブ（実行中および保留中のジョブ（存在する場合）を含む）と、実行済みのDDLジョブキューにある最後の10個のジョブ（存在する場合）を表示します。返される結果フィールドは、以下のとおりです。
 
 <CustomContent platform="tidb">
 
@@ -173,7 +173,7 @@ ADMIN SHOW DDL JOBS [NUM] [WHERE where_condition];
 
 ### `ADMIN SHOW DDL JOB QUERIES` {#admin-show-ddl-job-queries}
 
-`job_id`に対応する DDL ジョブの元の SQL ステートメントを表示するには、 `ADMIN SHOW DDL JOB QUERIES`を使用します。
+`job_id`に対応する DDL ジョブの元の SQL文を表示するには、 `ADMIN SHOW DDL JOB QUERIES`を使用します。
 
 ```sql
 ADMIN SHOW DDL JOBS;
@@ -194,7 +194,7 @@ DDL 履歴ジョブキュー内の過去 10件の結果のうち、 `job_id`に�
 
 ### `ADMIN SHOW DDL JOB QUERIES LIMIT m OFFSET n` {#admin-show-ddl-job-queries-limit-m-offset-n}
 
-`job_id`に対応する指定された範囲`[n+1, n+m]`内の DDL ジョブの元の SQL ステートメントを表示するには、 `ADMIN SHOW DDL JOB QUERIES LIMIT m OFFSET n`を使用します。
+`job_id`に対応する指定された範囲`[n+1, n+m]`内の DDL ジョブの元の SQL文を表示するには、 `ADMIN SHOW DDL JOB QUERIES LIMIT m OFFSET n`を使用します。
 
 ```sql
  ADMIN SHOW DDL JOB QUERIES LIMIT m;  # Retrieve first m rows

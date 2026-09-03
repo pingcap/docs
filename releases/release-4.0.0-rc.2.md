@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0 RC.2 Release Notes
-summary: TiDB 4.0 RC.2は2020年5月15日にリリースされました。このリリースには、TiDB、TiKV、PD、 TiFlash、およびさまざまなツールの互換性の変更、重要なバグ修正、新機能、バグ修正が含まれています。注目すべき変更点としては、TiDB Binlogが有効になっている場合の単一トランザクションのサイズ制限の削除、BACKUPおよびRESTOREコマンドのサポート、Grafanaダッシュボードへの暗号化関連の監視メトリックの追加などがあります。さらに、パーティションの選択ミス、インデックス範囲の構築ミス、パフォーマンスの低下などの問題に対する多数のバグ修正も行われています。このリリースでは、CREATE TABLEステートメントでのauto_randomオプションのサポートや、cdc cliを使用したレプリケーションタスクの管理機能などの新機能も導入されています。
+summary: TiDB 4.0 RC.2は2020年5月15日にリリースされました。このリリースには、TiDB、TiKV、PD、 TiFlash、およびさまざまなツールの互換性の変更、重要なバグ修正、新機能、バグ修正が含まれています。注目すべき変更点としては、TiDB Binlogが有効になっている場合の単一トランザクションのサイズ制限の削除、BACKUPおよびRESTOREコマンドのサポート、Grafanaダッシュボードへの暗号化関連の監視メトリックの追加などがあります。さらに、パーティションの選択ミス、インデックス範囲の構築ミス、パフォーマンスの低下などの問題に対する多数のバグ修正も行われています。このリリースでは、CREATE TABLE文でのauto_randomオプションのサポートや、cdc cliを使用したレプリケーションタスクの管理機能などの新機能も導入されています。
 ---
 
 # TiDB 4.0 RC.2 リリースノート {#tidb-4-0-rc-2-release-notes}
@@ -15,7 +15,7 @@ TiDB バージョン: 4.0.0-rc.2
 
     - TiDB Binlogが有効な場合、単一トランザクションのサイズ制限（100 MB）が削除されました。現在、トランザクションのサイズ制限は 10 GB です。ただし、TiDB Binlogが有効で、ダウンストリームが Kafka の場合は、Kafka のメッセージサイズ制限である 1 GB に合わせて`txn-total-size-limit`パラメータを設定してください。 [＃16941](https://github.com/pingcap/tidb/pull/16941)
     - `CLUSTER_LOG`テーブル照会するときに時間範囲が指定されていない場合は、デフォルトの時間範囲を照会するのではなく、エラーを返して指定された時間範囲を要求するように動作を変更します。 [＃17003](https://github.com/pingcap/tidb/pull/17003)
-    - `CREATE TABLE`ステートメントを使用してパーティションテーブルを作成するときに、サポートされていない`sub-partition`または`linear hash`オプションが指定された場合、オプションが無視されたパーティションテーブルではなく、通常のテーブルが作成されます[＃17197](https://github.com/pingcap/tidb/pull/17197)
+    - `CREATE TABLE`文を使用してパーティションテーブルを作成するときに、サポートされていない`sub-partition`または`linear hash`オプションが指定された場合、オプションが無視されたパーティションテーブルではなく、通常のテーブルが作成されます[＃17197](https://github.com/pingcap/tidb/pull/17197)
 
 - TiKV
 
@@ -113,7 +113,7 @@ TiDB バージョン: 4.0.0-rc.2
     - 複数のオペレーターでの式実行にベクトル化を使用するかどうかを決定するロジックを改善 [＃16383](https://github.com/pingcap/tidb/pull/16383)
     - `IndexMerge`ヒントがデータベース名を正しくチェックできない問題を修正[＃16932](https://github.com/pingcap/tidb/pull/16932)
     - シーケンスオブジェクト切り捨てを禁止する [＃17037](https://github.com/pingcap/tidb/pull/17037)
-    - `INSERT` / `UPDATE` / `ANALYZE` / `DELETE`ステートメントがシーケンスオブジェクトで実行できる問題を修正しました [＃16957](https://github.com/pingcap/tidb/pull/16957)
+    - `INSERT` / `UPDATE` / `ANALYZE` / `DELETE`文がシーケンスオブジェクトで実行できる問題を修正しました [＃16957](https://github.com/pingcap/tidb/pull/16957)
     - ブートストラップフェーズの内部SQL文がステートメントサマリーテーブルで内部クエリとして正しくマークされない問題を修正しました。 [＃17062](https://github.com/pingcap/tidb/pull/17062)
     - TiFlashではサポートされているがTiKVではサポートされていないフィルタ条件が`IndexLookupJoin`オペレーターにプッシュダウンされたときに発生するエラーを修正しました [＃17036](https://github.com/pingcap/tidb/pull/17036)
     - 照合順序が有効になった後に発生する可能性のある`LIKE`の同時実行の問題を修正[＃16997](https://github.com/pingcap/tidb/pull/16997)

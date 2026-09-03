@@ -7,7 +7,7 @@ summary: mysql` スキーマの `user` テーブルについて学習します�
 
 `mysql.user`表は、ユーザーアカウントとその権限に関する情報を提供します。
 
-`mysql.user`の構造を表示するには、次の SQL ステートメントを使用します。
+`mysql.user`の構造を表示するには、次の SQL文を使用します。
 
 ```sql
 DESC mysql.user;

@@ -55,7 +55,7 @@ TiDB バージョン: 8.4.0
 
 - TiDB Lightningの論理インポートモードは、プリペアドステートメントとクライアントステートメントキャッシュをサポートします [#54850](https://github.com/pingcap/tidb/issues/54850) @[dbsid](https://github.com/dbsid)
 
-    `logical-import-prep-stmt`設定項目を有効にすると、TiDB Lightning の論理インポートモードで実行される SQL ステートメントは、プリペアドステートメントとクライアント ステートメントキャッシュを使用します。これにより、 TiDB SQLの解析とコンパイルのコストが削減され、SQL の実行効率が向上し、実行計画 キャッシュへのアクセス確率が高まるため、論理インポートが高速化されます。
+    `logical-import-prep-stmt`設定項目を有効にすると、TiDB Lightning の論理インポートモードで実行される SQL文は、プリペアドステートメントとクライアント ステートメントキャッシュを使用します。これにより、 TiDB SQLの解析とコンパイルのコストが削減され、SQL の実行効率が向上し、実行計画 キャッシュへのアクセス確率が高まるため、論理インポートが高速化されます。
 
     詳細については、 [ドキュメント](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
@@ -116,7 +116,7 @@ TiDB バージョン: 8.4.0
 
 - TiProxyがトラフィック再生をサポート（実験的） [#642](https://github.com/pingcap/tiproxy/issues/642) @[djshow832](https://github.com/djshow832)
 
-    TiProxy v1.3.0以降では、 `tiproxyctl`を使用してTiProxyインスタンスに接続し、TiDB本番クラスタのアクセストラフィックをキャプチャして、指定したレートでテストクラスタに再生できます。この機能により、本番クラスタの実際のワークロードをテスト環境で再現し、SQLステートメントの実行結果とパフォーマンスを検証できます。
+    TiProxy v1.3.0以降では、 `tiproxyctl`を使用してTiProxyインスタンスに接続し、TiDB本番クラスタのアクセストラフィックをキャプチャして、指定したレートでテストクラスタに再生できます。この機能により、本番クラスタの実際のワークロードをテスト環境で再現し、SQL文の実行結果とパフォーマンスを検証できます。
 
     交通状況のリプレイは、次のような状況で役立ちます。
 
@@ -163,11 +163,11 @@ TiDB バージョン: 8.4.0
 
 - TiDBとTiKVが消費したCPU時間をシステムテーブルに表示する [#55542](https://github.com/pingcap/tidb/issues/55542) @[yibin87](https://github.com/yibin87)
 
-    [TiDB Dashboard](/dashboard/dashboard-intro.md)の[Top SQLページ](/dashboard/top-sql.md)CPU 使用率の高い SQL ステートメントを表示します。バージョン 8.4.0 以降、TiDB はシステムテーブルに CPU 使用時間情報を追加し、セッションや SQL の他のメトリックと並べて表示することで、CPU 使用率の高い操作をさまざまな視点から簡単に把握できるようにしました。この情報は、インスタンスの CPU スパイクやクラスタ内の読み書きホットスポットなどのシナリオで、問題の原因を迅速に特定するのに役立ちます。
+    [TiDB Dashboard](/dashboard/dashboard-intro.md)の[Top SQLページ](/dashboard/top-sql.md)CPU 使用率の高い SQL文を表示します。バージョン 8.4.0 以降、TiDB はシステムテーブルに CPU 使用時間情報を追加し、セッションや SQL の他のメトリックと並べて表示することで、CPU 使用率の高い操作をさまざまな視点から簡単に把握できるようにしました。この情報は、インスタンスの CPU スパイクやクラスタ内の読み書きホットスポットなどのシナリオで、問題の原因を迅速に特定するのに役立ちます。
 
-    - [ステートメントサマリーテーブル](/statement-summary-tables.md)には`AVG_TIDB_CPU_TIME`と`AVG_TIKV_CPU_TIME`が追加され、過去の個々の SQL ステートメントによって消費された平均 CPU 時間が表示されます。
-    - [INFORMATION_SCHEMA.PROCESSLIST](/information-schema/information-schema-processlist.md)テーブルには、 `TIDB_CPU`と`TIKV_CPU`が追加され、現在セッションで実行されている SQL ステートメントの累積 CPU 消費量が表示されます。
-    - [スロークエリログ](/analyze-slow-queries.md)には`Tidb_cpu_time`フィールドと`Tikv_cpu_time`フィールドが追加され、キャプチャされた SQL ステートメントによって消費された CPU 時間が表示されます。
+    - [ステートメントサマリーテーブル](/statement-summary-tables.md)には`AVG_TIDB_CPU_TIME`と`AVG_TIKV_CPU_TIME`が追加され、過去の個々の SQL文によって消費された平均 CPU 時間が表示されます。
+    - [INFORMATION_SCHEMA.PROCESSLIST](/information-schema/information-schema-processlist.md)テーブルには、 `TIDB_CPU`と`TIKV_CPU`が追加され、現在セッションで実行されている SQL文の累積 CPU 消費量が表示されます。
+    - [スロークエリログ](/analyze-slow-queries.md)には`Tidb_cpu_time`フィールドと`Tikv_cpu_time`フィールドが追加され、キャプチャされた SQL文によって消費された CPU 時間が表示されます。
 
     デフォルトでは、TiKV が消費する CPU 時間が表示されます。TiDB が消費する CPU 時間を収集すると追加のオーバーヘッド (約 8%) が発生するため、TiDB が消費する CPU 時間は、 [Top SQL](/dashboard/top-sql.md)が有効になっている場合にのみ実際の値が表示されます。それ以外の場合は、常に`0`と表示されます。
 
@@ -229,8 +229,8 @@ TiDB バージョン: 8.4.0
 | [`tidb_hash_join_version`](/system-variables.md#tidb_hash_join_version-new-in-v840)                                             | 新しく追加された | TiDB がハッシュ結合オペレーターの最適化バージョンを使用するかどうかを制御します。デフォルト値の`legacy`は、最適化バージョンが使用されないことを意味します。これを`optimized`に設定すると、TiDB はハッシュ結合オペレーターの実行時に最適化バージョンを使用して、ハッシュ結合のパフォーマンスを向上させます。                                                                                                                               |
 | [`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840)                       | 新しく追加された | インスタンスプランキャッシュの最大メモリ使用量を設定します。                                                                                                                                                                                                                                                               |
 | [`tidb_instance_plan_cache_reserved_percentage`](/system-variables.md#tidb_instance_plan_cache_reserved_percentage-new-in-v840) | 新しく追加された | メモリ解放後にインスタンスプランキャッシュ用に予約されるアイドルメモリの割合を制御します。                                                                                                                                                                                                                                                |
-| [`tidb_pre_split_regions`](/system-variables.md#tidb_pre_split_regions-new-in-v840)                                             | 新しく追加された | バージョン 8.4.0 より前では、新しく作成されたテーブルのデフォルトの行分割スライス数を設定するには、各`CREATE TABLE` SQL ステートメントで`PRE_SPLIT_REGIONS`を宣言する必要がありましたが、多数のテーブルを同様に構成する必要がある場合は複雑でした。この変数は、このような問題を解決するために導入されました。使いやすさを向上させるために、このシステム変数を`GLOBAL`または`SESSION`レベルで設定できます。                                                          |
-| [`tidb_shard_row_id_bits`](/system-variables.md#tidb_shard_row_id_bits-new-in-v840)                                             | 新しく追加された | バージョン 8.4.0 より前では、新しく作成されたテーブルの行 ID のスライス数のデフォルト設定を行うには、 `CREATE TABLE`または`ALTER TABLE` SQL ステートメントごとに`SHARD_ROW_ID_BITS`を宣言する必要がありましたが、多数のテーブルを同様に構成する必要がある場合は複雑でした。この変数は、このような問題を解決するために導入されました。使いやすさを向上させるために、このシステム変数を`GLOBAL`または`SESSION`レベルで設定できます。                                     |
+| [`tidb_pre_split_regions`](/system-variables.md#tidb_pre_split_regions-new-in-v840)                                             | 新しく追加された | バージョン 8.4.0 より前では、新しく作成されたテーブルのデフォルトの行分割スライス数を設定するには、各`CREATE TABLE` SQL文で`PRE_SPLIT_REGIONS`を宣言する必要がありましたが、多数のテーブルを同様に構成する必要がある場合は複雑でした。この変数は、このような問題を解決するために導入されました。使いやすさを向上させるために、このシステム変数を`GLOBAL`または`SESSION`レベルで設定できます。                                                          |
+| [`tidb_shard_row_id_bits`](/system-variables.md#tidb_shard_row_id_bits-new-in-v840)                                             | 新しく追加された | バージョン 8.4.0 より前では、新しく作成されたテーブルの行 ID のスライス数のデフォルト設定を行うには、 `CREATE TABLE`または`ALTER TABLE` SQL文ごとに`SHARD_ROW_ID_BITS`を宣言する必要がありましたが、多数のテーブルを同様に構成する必要がある場合は複雑でした。この変数は、このような問題を解決するために導入されました。使いやすさを向上させるために、このシステム変数を`GLOBAL`または`SESSION`レベルで設定できます。                                     |
 | [`tidb_tso_client_rpc_mode`](/system-variables.md#tidb_tso_client_rpc_mode-new-in-v840)                                         | 新しく追加された | TiDBがPDにTSO RPCリクエストを送信するモードを切り替えます。このモードによって、TSO RPCリクエストを並列処理できるかどうかが決まり、各TS取得操作のバッチ待機時間に影響するため、特定のシナリオにおけるクエリ実行中のTS取得の待機時間を短縮できます。                                                                                                                                                        |
 
 ### コンフィグレーションパラメータ {#configuration-parameters}
@@ -303,7 +303,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
 
     - 大量のデータをスキャンする際のBatchCopタスク構築の効率を最適化する[#55915](https://github.com/pingcap/tidb/issues/55915) [#55413](https://github.com/pingcap/tidb/issues/55413) @[wshwsh12](https://github.com/wshwsh12)
     - トランザクションのバッファを最適化して、トランザクション内の書き込みレイテンシーと TiDB の CPU 使用率を削減します [#55287](https://github.com/pingcap/tidb/issues/55287) @[you06](https://github.com/you06)
-    - システム変数`tidb_dml_type`が`"bulk"`に設定されている場合の DML ステートメントの実行パフォーマンスを最適化する [#50215](https://github.com/pingcap/tidb/issues/50215) @[ekexium](https://github.com/ekexium)
+    - システム変数`tidb_dml_type`が`"bulk"`に設定されている場合の DML文の実行パフォーマンスを最適化する [#50215](https://github.com/pingcap/tidb/issues/50215) @[ekexium](https://github.com/ekexium)
     - [Optimizer Fix Control 47400](/optimizer-fix-controls.md#47400-new-in-v840)の使用をサポートし、オプティマイザが`estRows`の推定最小値を`1`に制限するかどうかを制御できるようにします。これは、Oracle や Db2 などのデータベースと一貫性があります [#47400](https://github.com/pingcap/tidb/issues/47400) @[terry1purcell](https://github.com/terry1purcell)
     - [`mysql.tidb_runaway_queries`](/mysql-schema/mysql-schema.md#system-tables-related-to-runaway-queries)ログ テーブルに書き込み制御を追加し、多数の同時書き込みによって発生するオーバーヘッドを削減します [#54434](https://github.com/pingcap/tidb/issues/54434) @[HuSharp](https://github.com/HuSharp)
     - 内部テーブルに`Selection` 、 `Projection` 、または`Aggregation`オペレーターがある場合、デフォルトでインデックス結合をサポートします [#47233](https://github.com/pingcap/tidb/issues/47233) @[winoros](https://github.com/winoros)
@@ -361,7 +361,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
     - 統計関連の不要な設定を非推奨にして、冗長なコードを削減する [#55043](https://github.com/pingcap/tidb/issues/55043) @[Rustin170506](https://github.com/Rustin170506)
     - 相関サブクエリとCTEを含むクエリを実行するとTiDBがハングアップしたり、誤った結果を返す可能性がある問題を修正しました [#55551](https://github.com/pingcap/tidb/issues/55551) @[guo-shaoge](https://github.com/guo-shaoge)
     - `lite-init-stats`を無効にすると統計情報が同期的に読み込まれない可能性がある問題を修正しました [#54532](https://github.com/pingcap/tidb/issues/54532) @[hawkingrei](https://github.com/hawkingrei)
-    - `UPDATE`または`DELETE`ステートメントに再帰 CTE が含まれている場合、ステートメントがエラーを報告するか、効果を発揮しない可能性がある問題を修正します [#55666](https://github.com/pingcap/tidb/issues/55666) @[time-and-fate](https://github.com/time-and-fate)
+    - `UPDATE`または`DELETE`文に再帰 CTE が含まれている場合、文がエラーを報告するか、効果を発揮しない可能性がある問題を修正します [#55666](https://github.com/pingcap/tidb/issues/55666) @[time-and-fate](https://github.com/time-and-fate)
     - ウィンドウ関数を含む SQL バインディングが場合によっては有効にならない問題を修正しました [#55981](https://github.com/pingcap/tidb/issues/55981) @[winoros](https://github.com/winoros)
     - 非バイナリ照合順序を持つ文字列列の統計情報が、統計情報の初期化時にロードに失敗する可能性がある問題を修正 [#55684](https://github.com/pingcap/tidb/issues/55684) @[winoros](https://github.com/winoros)
     - クエリ条件`column IS NULL`を使用して一意インデックスにアクセスする際に、オプティマイザが行数を誤って 1 と推定する問題を修正しました。 [#56116](https://github.com/pingcap/tidb/issues/56116) @[hawkingrei](https://github.com/hawkingrei)
@@ -369,7 +369,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
     - クエリに利用可能なインデックスマージ実行計画がある場合、 `read_from_storage`ヒントが有効にならない可能性がある問題を修正 [#56217](https://github.com/pingcap/tidb/issues/56217) @[AilinKid](https://github.com/AilinKid)
     - `IndexNestedLoopHashJoin` のデータ競合問題を修正 [#49692](https://github.com/pingcap/tidb/issues/49692) @[solotzg](https://github.com/solotzg)
     - `SUB_PART`テーブル内の`INFORMATION_SCHEMA.STATISTICS`の値が`NULL`になっている問題を修正します [#55812](https://github.com/pingcap/tidb/issues/55812) @[Defined2014](https://github.com/Defined2014)
-    - DMLステートメントにネストされた生成列が含まれている場合にエラーが発生する問題を修正しました [#53967](https://github.com/pingcap/tidb/issues/53967) @[wjhuang2016](https://github.com/wjhuang2016)
+    - DML文にネストされた生成列が含まれている場合にエラーが発生する問題を修正しました [#53967](https://github.com/pingcap/tidb/issues/53967) @[wjhuang2016](https://github.com/wjhuang2016)
     - 除算演算において最小表示長の整数型データを使用すると除算結果がオーバーフローする場合がある問題を修正 [#55837](https://github.com/pingcap/tidb/issues/55837) @[windtalker](https://github.com/windtalker)
     - TopN オペレーターに続くオペレーターがメモリ制限を超えた場合にフォールバックアクションをトリガーできない問題を修正しました [#56185](https://github.com/pingcap/tidb/issues/56185) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - ソートオペレーターの`ORDER BY`列に定数が含まれている場合に、列が固定されてしまう問題を修正しました。 [#55344](https://github.com/pingcap/tidb/issues/55344) @[xzhangxian1008](https://github.com/xzhangxian1008)
@@ -379,7 +379,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
     - 一時テーブルで`IMPORT INTO`を実行すると TiDB がクラッシュする問題を修正しました [#55970](https://github.com/pingcap/tidb/issues/55970) @[D3Hunter](https://github.com/D3Hunter)
     - 一意インデックスを追加すると`duplicate entry`エラーが発生する問題を修正 [#56161](https://github.com/pingcap/tidb/issues/56161) @[tangenta](https://github.com/tangenta)
     - TiKVが810秒以上ダウンしている場合、 TiDB LightningがすべてのKVペアを取り込まないため、テーブル内のデータが不整合になる問題を修正しました [#55808](https://github.com/pingcap/tidb/issues/55808) @[lance6716](https://github.com/lance6716)
-    - `CREATE TABLE LIKE`ステートメントがキャッシュされたテーブルに使用できない問題を修正 [#56134](https://github.com/pingcap/tidb/issues/56134) @[tiancaiamao](https://github.com/tiancaiamao)
+    - `CREATE TABLE LIKE`文がキャッシュされたテーブルに使用できない問題を修正 [#56134](https://github.com/pingcap/tidb/issues/56134) @[tiancaiamao](https://github.com/tiancaiamao)
     - CTE 内の`FORMAT()`式の紛らわしい警告メッセージを修正 [#56198](https://github.com/pingcap/tidb/pull/56198) @[dveeden](https://github.com/dveeden)
     - パーティションテーブルを作成する際に、 `CREATE TABLE`と`ALTER TABLE`の間で列タイプの制限が矛盾する問題を修正 [#56094](https://github.com/pingcap/tidb/issues/56094) @[mjonss](https://github.com/mjonss)
     - `INFORMATION_SCHEMA.RUNAWAY_WATCHES`テーブル内の誤った時間タイプを修正 [#54770](https://github.com/pingcap/tidb/issues/54770) @[HuSharp](https://github.com/HuSharp)
@@ -408,7 +408,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
     - TiDB Data Migration (DM)
 
         - 複数のDMマスターノードが同時にリーダーになる可能性があり、データ不整合を引き起こす問題を修正しました [#11602](https://github.com/pingcap/tiflow/issues/11602) @[GMHDBJD](https://github.com/GMHDBJD)
-        - `ALTER DATABASE`ステートメントを処理する際に DM がデフォルトデータベースを設定しないことでレプリケーション エラーが発生する問題を修正します [#11503](https://github.com/pingcap/tiflow/issues/11503) @[lance6716](https://github.com/lance6716)
+        - `ALTER DATABASE`文を処理する際に DM がデフォルトデータベースを設定しないことでレプリケーション エラーが発生する問題を修正します [#11503](https://github.com/pingcap/tiflow/issues/11503) @[lance6716](https://github.com/lance6716)
 
     - TiDB Lightning
 

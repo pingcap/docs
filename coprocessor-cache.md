@@ -23,7 +23,7 @@ v4.0 以降、TiDB インスタンスは TiKV (コプロセッサーキャッシ
 
 ## 機能の説明 {#feature-description}
 
-- 単一の TiDB インスタンスで SQL ステートメントが初めて実行されると、実行結果はキャッシュされません。
+- 単一の TiDB インスタンスで SQL文が初めて実行されると、実行結果はキャッシュされません。
 
 - 計算結果はTiDBのメモリにキャッシュされます。TiDBインスタンスを再起動すると、キャッシュは無効になります。
 
@@ -54,7 +54,7 @@ v4.0 以降、TiDB インスタンスは TiKV (コプロセッサーキャッシ
 
 ### `EXPLAIN ANALYZE`を使用する {#use-explain-analyze}
 
-[テーブルにアクセスするための演算子](/choose-index.md#operators-for-accessing-tables)のキャッシュヒット率は[`EXPLAIN ANALYZE`ステートメント](/sql-statements/sql-statement-explain-analyze.md)を使って確認できます。次の例をご覧ください。
+[テーブルにアクセスするための演算子](/choose-index.md#operators-for-accessing-tables)のキャッシュヒット率は[`EXPLAIN ANALYZE`文](/sql-statements/sql-statement-explain-analyze.md)を使って確認できます。次の例をご覧ください。
 
 ```sql
 EXPLAIN ANALYZE SELECT * FROM t USE INDEX(a);

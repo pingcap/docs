@@ -65,7 +65,7 @@ e2e duration =
 ```
 
 - `tidb_server_get_token_duration_seconds`はトークンの待機時間を記録します。これは通常1ミリ秒未満であり、無視できるほど小さい値です。
-- `tidb_session_parse_duration_seconds`はSQL クエリを抽象構文ツリー (AST) に解析する時間を記録します。これは[`PREPARE/EXECUTE`ステートメント](/develop/dev-guide-optimize-sql-best-practices.md#use-prepare)でスキップできます。
+- `tidb_session_parse_duration_seconds`はSQL クエリを抽象構文ツリー (AST) に解析する時間を記録します。これは[`PREPARE/EXECUTE`文](/develop/dev-guide-optimize-sql-best-practices.md#use-prepare)でスキップできます。
 - `tidb_session_compile_duration_seconds`はAST を実行計画にコンパイルする時間を記録し、これは[SQL プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)でスキップできます。
 - `tidb_session_execute_duration_seconds{type="general"}`は実行時間を記録しますが、これにはあらゆる種類のユーザークエリが混在します。パフォーマンスの問題やボトルネックを分析するには、これを細分化した期間に分割する必要があります。
 
@@ -863,7 +863,7 @@ tikv_raftstore_apply_log_duration_seconds =
 
 ### 遅い読み取りクエリ {#slow-read-queries}
 
-`SELECT`ステートメントがデータベース時間の大部分を占める場合、TiDB の読み取りクエリが遅いと想定できます。
+`SELECT`文がデータベース時間の大部分を占める場合、TiDB の読み取りクエリが遅いと想定できます。
 
 スロークエリの実行計画は、TiDB Dashboardの[Top SQL文](/dashboard/dashboard-overview.md#top-sql-statements)パネルに表示されます。遅い読み取りクエリの時間コストを調査するには、前述の説明に従って、[PointGet](#point-get)、[Batch PointGet](#batch-point-get)、およびいくつかの[シンプルなコプロセッサクエリ](#table-scan--index-scan)を分析できます。
 

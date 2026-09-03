@@ -265,9 +265,9 @@ conn.execute(`select ...`, [], {
 
 ## 特徴 {#features}
 
-### サポートされているSQLステートメント {#supported-sql-statements}
+### サポートされているSQL文 {#supported-sql-statements}
 
-DDL がサポートされており、次の SQL ステートメントがサポートされています: `SELECT` 、 `SHOW` 、 `EXPLAIN` 、 `USE` 、 `INSERT` 、 `UPDATE` 、 `DELETE` 、 `BEGIN` 、 `COMMIT` 、 `ROLLBACK` 、および`SET` 。
+DDL がサポートされており、次の SQL文がサポートされています: `SELECT` 、 `SHOW` 、 `EXPLAIN` 、 `USE` 、 `INSERT` 、 `UPDATE` 、 `DELETE` 、 `BEGIN` 、 `COMMIT` 、 `ROLLBACK` 、および`SET` 。
 
 ### データ型マッピング {#data-type-mapping}
 

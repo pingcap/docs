@@ -22,7 +22,7 @@ Next.jsでOpenAPI Specificationを使用する前に、以下のものが用意�
 
 まず、 TiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターにテーブル`test.repository`を作成し、サンプルデータを挿入します。以下の例では、デモンストレーション用のデータとして、PingCAP が開発したオープンソースプロジェクトをいくつか挿入します。
 
-SQL ステートメントを実行するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の[SQLエディタ](/tidb-cloud/explore-data-with-chat2query.md)を使用できます。
+SQL文を実行するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の[SQLエディタ](/tidb-cloud/explore-data-with-chat2query.md)を使用できます。
 
 ```sql
 -- Select the database
@@ -45,7 +45,7 @@ VALUES ('tidb', 'https://github.com/pingcap/tidb'),
 
 ## ステップ2. データアプリを作成する {#step-2-create-a-data-app}
 
-データ挿入後、 [TiDB Cloudコンソール](https://tidbcloud.com)の[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。 TiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターにリンクするデータアプリを作成し、データアプリの API キーを作成してから、データアプリに`GET /repositories`エンドポイントを作成します。このエンドポイントに対応する SQL ステートメントは次のとおりです。これは`test.repository`テーブルからすべての行を取得します。
+データ挿入後、 [TiDB Cloudコンソール](https://tidbcloud.com)の[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。 TiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターにリンクするデータアプリを作成し、データアプリの API キーを作成してから、データアプリに`GET /repositories`エンドポイントを作成します。このエンドポイントに対応する SQL文は次のとおりです。これは`test.repository`テーブルからすべての行を取得します。
 
 ```sql
 SELECT * FROM test.repository;

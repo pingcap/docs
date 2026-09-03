@@ -132,10 +132,10 @@ TiDBバージョン：8.5.2
         - レプリケーション トラフィックがダウンストリーム Kafka のトラフィックしきい値を超えた後に変更フィードが停止する可能性がある問題を修正 [#12110](https://github.com/pingcap/tiflow/issues/12110) @[3AceShowHand](https://github.com/3AceShowHand)
         - `pulsar+http`または`pulsar+https`プロトコルが使用されている場合に Kafka シンクのディスパッチ ルールが有効にならない問題を修正 [#12068](https://github.com/pingcap/tiflow/issues/12068) @[SandeepPadhi](https://github.com/SandeepPadhi)
         - TiCDCがPDリーダーの移行を時間内に監視できず、レプリケーションレイテンシーが増加する問題を修正 [#11997](https://github.com/pingcap/tiflow/issues/11997) @[lidezhu](https://github.com/lidezhu)
-        - TiCDCがAvroプロトコル経由で`default NULL` SQLステートメントを複製する際にエラーを報告する問題を修正しました [#11994](https://github.com/pingcap/tiflow/issues/11994) @[wk989898](https://github.com/wk989898)
+        - TiCDCがAvroプロトコル経由で`default NULL` SQL文を複製する際にエラーを報告する問題を修正しました [#11994](https://github.com/pingcap/tiflow/issues/11994) @[wk989898](https://github.com/wk989898)
         - アップストリームで新しく追加された列のデフォルト値が`NOT NULL`から`NULL`に変更された後、ダウンストリームのその列のデフォルト値が正しくない問題を修正します [#12037](https://github.com/pingcap/tiflow/issues/12037) @[wk989898](https://github.com/wk989898)
         - PDスケールイン後にTiCDCがPDに正しく接続できない問題を修正 [#12004](https://github.com/pingcap/tiflow/issues/12004) @[lidezhu](https://github.com/lidezhu)
-        - TiCDCが`CREATE TABLE IF NOT EXISTS`または`CREATE DATABASE IF NOT EXISTS`ステートメントを複製する際にpanicする可能性がある問題を修正しました [#11839](https://github.com/pingcap/tiflow/issues/11839) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - TiCDCが`CREATE TABLE IF NOT EXISTS`または`CREATE DATABASE IF NOT EXISTS`文を複製する際にpanicする可能性がある問題を修正しました [#11839](https://github.com/pingcap/tiflow/issues/11839) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
     - TiDB Data Migration (DM)
 

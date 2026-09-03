@@ -110,7 +110,7 @@ TiFlashのワークロードが大きすぎてTiFlashデータのレプリケー
 
 ## TiFlash分析は遅い {#tiflash-analysis-is-slow}
 
-ステートメントにMPPモードでサポートされていない演算子または関数が含まれている場合、TiDBはMPPモードを選択しません。そのため、ステートメントの解析速度が低下します。この場合、 `EXPLAIN`ステートメントを実行して、MPPモードでサポートされていない演算子または関数の有無を確認できます。
+ステートメントにMPPモードでサポートされていない演算子または関数が含まれている場合、TiDBはMPPモードを選択しません。そのため、ステートメントの解析速度が低下します。この場合、 `EXPLAIN`文を実行して、MPPモードでサポートされていない演算子または関数の有無を確認できます。
 
 ```sql
 create table t(a datetime);
@@ -224,7 +224,7 @@ TiFlashノードをデプロイし、 `ALTER TABLE ... SET TIFLASH REPLICA ...`�
 
     - クエリがブロックされている場合は、 `SELECT * FROM information_schema.tiflash_replica`ステートメントを実行して、 TiFlashレプリカが作成されたかどうかを確認します。
         - [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)を通じて、DDL 文が期待どおりに実行されているかどうかを確認します。TiFlash レプリカ文のTiFlashをブロックする可能性のある他の DDL 文 ( `ADD INDEX`など) が実行中かどうかを確認します。
-        - 実行中のTiFlashレプリカ ステートメントの変更をブロックする[`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md)を通じて、同じテーブルで DML ステートメントが実行されているかどうかを確認します。
+        - 実行中のTiFlashレプリカ ステートメントの変更をブロックする[`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md)を通じて、同じテーブルで DML文が実行されているかどうかを確認します。
     - ブロッキングステートメントが完了するかキャンセルされるまで待ってから、 TiFlashレプリカの設定を再度試してください。問題が発生しない場合は、次の手順に進みます。
 
 2. TiFlashリージョンレプリケーションが正しく実行されているかどうかを確認します。

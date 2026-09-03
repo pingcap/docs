@@ -12,13 +12,13 @@ summary: TiDBデータベースにおけるBACKUPの使用方法の概要。
 > - この機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 > - この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
-`BACKUP`ステートメントは、 [BRツール](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)と同じエンジンを使用しますが、バックアップ処理は別のBRツールではなくBR自体によって実行されます。BR のすべての利点と警告は、このステートメントにも適用されます。
+`BACKUP`文は、 [BRツール](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)と同じエンジンを使用しますが、バックアップ処理は別のBRツールではなくBR自体によって実行されます。BR のすべての利点と警告は、この文にも適用されます。
 
 `BACKUP`を実行するには`BACKUP_ADMIN`または`SUPER`権限が必要です。さらに、バックアップを実行する TiDB ノードとクラスタ内のすべての TiKV ノードの両方が、宛先への読み取りまたは書き込み権限を持っている必要があります。 [セキュリティ強化モード](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合、ローカルストレージ( `local://`で始まるストレージパス) は許可されません。
 
-`BACKUP`ステートメントは、バックアップタスク全体が完了、失敗、またはキャンセルされるまでブロックされます。 `BACKUP`を実行するには、長時間接続を準備する必要があります。タスクは、[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
+`BACKUP`文は、バックアップタスク全体が完了、失敗、またはキャンセルされるまでブロックされます。 `BACKUP`を実行するには、長時間接続を準備する必要があります。タスクは、[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
 
-`BACKUP`および[`RESTORE`](/sql-statements/sql-statement-restore.md)タスクは、一度に 1つしか実行できません。 `BACKUP`または`RESTORE`ステートメントが同じ TiDBサーバーで既に実行されている場合、新しい`BACKUP`の実行は、以前のすべてのタスクが完了するまで待機します。
+`BACKUP`および[`RESTORE`](/sql-statements/sql-statement-restore.md)タスクは、一度に 1つしか実行できません。 `BACKUP`または`RESTORE`文が同じ TiDBサーバーで既に実行されている場合、新しい`BACKUP`の実行は、以前のすべてのタスクが完了するまで待機します。
 
 `BACKUP` 「tikv」ストレージエンジンでのみ使用できます。「unistore」エンジンで`BACKUP`を使用すると失敗します。
 

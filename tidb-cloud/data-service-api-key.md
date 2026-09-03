@@ -103,8 +103,8 @@ TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access
 
         このロールは、APIキーがデータアプリにリンクされたデータソースに対してデータの読み取りまたは書き込みを行えるかどうかを制御するために使用されます。 `ReadOnly`または`ReadAndWrite`ロールを選択できます。
 
-        - `ReadOnly` : API キーで`SELECT` 、 `SHOW` 、 `USE` 、 `DESC` 、 `EXPLAIN`ステートメントなどのデータを読み取ることのみを許可します。
-        - `ReadAndWrite` : このAPIキーは、データの読み書きを可能にします。このAPIキーを使用して、DMLステートメントやDDLステートメントなど、すべてのSQLステートメントを実行できます。
+        - `ReadOnly` : API キーで`SELECT` 、 `SHOW` 、 `USE` 、 `DESC` 、 `EXPLAIN`文などのデータを読み取ることのみを許可します。
+        - `ReadAndWrite` : このAPIキーは、データの読み書きを可能にします。このAPIキーを使用して、DML文やDDL文など、すべてのSQL文を実行できます。
 
     3. （オプション）APIキーの希望するレート制限を設定します。
 

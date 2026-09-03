@@ -73,11 +73,11 @@ TiDB 8.5.0は長期サポートリリース（LTS）です。
 
     詳細については、[ドキュメント](/foreign-key.md)を参照してください。
 
-- オンラインで DDL ジョブを変更することをサポートする`ADMIN ALTER DDL JOBS`ステートメントを導入 [#57229](https://github.com/pingcap/tidb/issues/57229) @[fzzf678](https://github.com/fzzf678) @[tangenta](https://github.com/tangenta)
+- オンラインで DDL ジョブを変更することをサポートする`ADMIN ALTER DDL JOBS`文を導入 [#57229](https://github.com/pingcap/tidb/issues/57229) @[fzzf678](https://github.com/fzzf678) @[tangenta](https://github.com/tangenta)
 
     バージョン8.3.0以降では、 [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)と[`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)変数をセッションレベルで設定できるようになりました。そのため、これらの2つの変数をグローバルに設定しても、実行中のすべてのDDLジョブには影響しなくなりました。これらの変数の値を変更するには、まずDDLジョブをキャンセルし、変数を調整してから、ジョブを再実行する必要があります。
 
-    TiDB v8.5.0 では`ADMIN ALTER DDL JOBS`ステートメントが導入され、特定の DDL ジョブの変数値をオンラインで調整できるようになりました。これにより、リソース消費とパフォーマンスのバランスを柔軟に調整できます。変更は個々のジョブに限定されるため、影響をより制御しやすくなります。例:
+    TiDB v8.5.0 では`ADMIN ALTER DDL JOBS`文が導入され、特定の DDL ジョブの変数値をオンラインで調整できるようになりました。これにより、リソース消費とパフォーマンスのバランスを柔軟に調整できます。変更は個々のジョブに限定されるため、影響をより制御しやすくなります。例:
 
     - `ADMIN ALTER DDL JOBS job_id THREAD = 8;` : 指定された DDL ジョブの`tidb_ddl_reorg_worker_cnt`をオンラインで調整します。
     - `ADMIN ALTER DDL JOBS job_id BATCH_SIZE = 256;` : 指定されたジョブの`tidb_ddl_reorg_batch_size`をオンラインで調整します。
@@ -239,17 +239,17 @@ TiDB をアップグレードする前に、オペレーティングシステム
     - `INFORMATION_SCHEMA.TABLES`のクエリで大文字小文字の区別により誤った結果が返される問題を修正しました [#56987](https://github.com/pingcap/tidb/issues/56987) @[joechenrh](https://github.com/joechenrh)
     - 共通テーブル式（CTE）に複数のデータコンシューマーがあり、そのうちの1つのコンシューマーがデータを読み取らずに終了した場合に発生する可能性のある無効なメモリアクセスの問題を修正します [#55881](https://github.com/pingcap/tidb/issues/55881) @[windtalker](https://github.com/windtalker)
     - `INDEX_HASH_JOIN`異常終了時にハングアップする可能性がある問題を修正しました [#54055](https://github.com/pingcap/tidb/issues/54055) @[wshwsh12](https://github.com/wshwsh12)
-    - `TRUNCATE`ステートメントが`NULL`値を処理する場合に誤った結果を返す問題を修正 [#53546](https://github.com/pingcap/tidb/issues/53546) @[tuziemon](https://github.com/tuziemon)
+    - `TRUNCATE`文が`NULL`値を処理する場合に誤った結果を返す問題を修正 [#53546](https://github.com/pingcap/tidb/issues/53546) @[tuziemon](https://github.com/tuziemon)
     - `CAST AS CHAR`関数が型推論エラーにより誤った結果を返す問題を修正 [#56640](https://github.com/pingcap/tidb/issues/56640) @[zimulala](https://github.com/zimulala)
     - 型推論エラーにより一部の関数の出力で文字列が切り詰められる問題を修正 [#56587](https://github.com/pingcap/tidb/issues/56587) @[joechenrh](https://github.com/joechenrh)
     - `ADDTIME()`および`SUBTIME()`関数が、最初の引数が日付型の場合に誤った結果を返す問題を修正します [#57569](https://github.com/pingcap/tidb/issues/57569) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - 非厳格モード（ `NULL` `sql_mode = ''`値が挿入される問題を修正 [#56381](https://github.com/pingcap/tidb/issues/56381) @[joechenrh](https://github.com/joechenrh)
-    - `UPDATE`ステートメントが`ENUM`型の値を誤って更新する問題を修正しました [#56832](https://github.com/pingcap/tidb/issues/56832) @[xhebox](https://github.com/xhebox)
-    - `tidb_low_resolution_tso`変数を有効にすると`SELECT FOR UPDATE`ステートメントの実行中にリソースリークが発生する問題を修正しました [#55468](https://github.com/pingcap/tidb/issues/55468) @[tiancaiamao](https://github.com/tiancaiamao)
+    - `UPDATE`文が`ENUM`型の値を誤って更新する問題を修正しました [#56832](https://github.com/pingcap/tidb/issues/56832) @[xhebox](https://github.com/xhebox)
+    - `tidb_low_resolution_tso`変数を有効にすると`SELECT FOR UPDATE`文の実行中にリソースリークが発生する問題を修正しました [#55468](https://github.com/pingcap/tidb/issues/55468) @[tiancaiamao](https://github.com/tiancaiamao)
     - `JSON_TYPE()`関数がパラメータの型を検証せず、JSON 以外のデータ型が渡された場合にエラーが返されない問題を修正しました [#54029](https://github.com/pingcap/tidb/issues/54029) @[YangKeao](https://github.com/YangKeao)
-    - `PREPARE`ステートメントで JSON関数を使用すると実行エラーが発生する可能性がある問題を修正しました [#54044](https://github.com/pingcap/tidb/issues/54044) @[YangKeao](https://github.com/YangKeao)
+    - `PREPARE`文で JSON関数を使用すると実行エラーが発生する可能性がある問題を修正しました [#54044](https://github.com/pingcap/tidb/issues/54044) @[YangKeao](https://github.com/YangKeao)
     - `BIT`型から`CHAR`型へのデータ変換時にTiKVパニックが発生する可能性がある問題を修正しました [#56494](https://github.com/pingcap/tidb/issues/56494) @[lcwangchao](https://github.com/lcwangchao)
-    - `CREATE VIEW`ステートメントで変数またはパラメーターを使用してもエラーが報告されない問題を修正 [#53176](https://github.com/pingcap/tidb/issues/53176) @[mjonss](https://github.com/mjonss)
+    - `CREATE VIEW`文で変数またはパラメーターを使用してもエラーが報告されない問題を修正 [#53176](https://github.com/pingcap/tidb/issues/53176) @[mjonss](https://github.com/mjonss)
     - `JSON_VALID()`関数が誤った結果を返す問題を修正 [#56293](https://github.com/pingcap/tidb/issues/56293) @[YangKeao](https://github.com/YangKeao)
     - `tidb_ttl_job_enable`変数が無効になった後もTTLタスクがキャンセルされない問題を修正 [#57404](https://github.com/pingcap/tidb/issues/57404) @[YangKeao](https://github.com/YangKeao)
     - `RANGE COLUMNS`パーティション関数と`utf8mb4_0900_ai_ci`照合順序を同時に使用すると、クエリ結果が正しくない可能性がある問題を修正しました [#57261](https://github.com/pingcap/tidb/issues/57261) @[Defined2014](https://github.com/Defined2014)
@@ -265,11 +265,11 @@ TiDB をアップグレードする前に、オペレーティングシステム
     - Plan Replayerが外部キーを含むテーブル構造をインポートする際にエラーを報告する可能性がある問題を修正 [#56456](https://github.com/pingcap/tidb/issues/56456) @[hawkingrei](https://github.com/hawkingrei)
     - プランリプレイヤーが配置ルールを含むテーブル構造をインポートする際にエラーを報告する可能性がある問題を修正 [#54961](https://github.com/pingcap/tidb/issues/54961) @[hawkingrei](https://github.com/hawkingrei)
     - `ANALYZE`を使用してテーブルの統計情報を収集する際に、テーブルに仮想生成列の式インデックスが含まれている場合、実行時にエラーが報告される問題を修正しました。 [#57079](https://github.com/pingcap/tidb/issues/57079) @[hawkingrei](https://github.com/hawkingrei)
-    - `DROP DATABASE`ステートメントが統計情報における対応する更新を正しくトリガーしない問題を修正しました [#57227](https://github.com/pingcap/tidb/issues/57227) @[Rustin170506](https://github.com/Rustin170506)
+    - `DROP DATABASE`文が統計情報における対応する更新を正しくトリガーしない問題を修正しました [#57227](https://github.com/pingcap/tidb/issues/57227) @[Rustin170506](https://github.com/Rustin170506)
     - CTEでデータベース名を解析する際に、誤ったデータベース名が返される問題を修正しました [#54582](https://github.com/pingcap/tidb/issues/54582) @[hawkingrei](https://github.com/hawkingrei)
     - `DUMP STATS`が統計情報を JSON に変換する際に、ヒストグラムの上限と下限が破損する問題を修正しました [#56083](https://github.com/pingcap/tidb/issues/56083) @[hawkingrei](https://github.com/hawkingrei)
     - `EXISTS`サブクエリの結果が代数演算にさらに関与すると、MySQL の結果と異なる可能性がある問題を修正 [#56641](https://github.com/pingcap/tidb/issues/56641) @[windtalker](https://github.com/windtalker)
-    - 複数テーブルの`DELETE`ステートメントに対して、エイリアスを使用した実行プランバインディングを作成できない問題を修正 [#56726](https://github.com/pingcap/tidb/issues/56726) @[hawkingrei](https://github.com/hawkingrei)
+    - 複数テーブルの`DELETE`文に対して、エイリアスを使用した実行プランバインディングを作成できない問題を修正 [#56726](https://github.com/pingcap/tidb/issues/56726) @[hawkingrei](https://github.com/hawkingrei)
     - オプティマイザが複雑な述語を簡略化する際に文字セットと照合順序を考慮しないため、実行エラーが発生する可能性がある問題を修正しました [#56479](https://github.com/pingcap/tidb/issues/56479) @[dash12653](https://github.com/dash12653)
     - Grafana の**Stats Healthy Distribution**パネルのデータが正しくない可能性がある問題を修正 [#57176](https://github.com/pingcap/tidb/issues/57176) @[hawkingrei](https://github.com/hawkingrei)
     - クラスター化インデックスを持つテーブルをクエリする際に、ベクトル検索が誤った結果を返す可能性がある問題を修正 [#57627](https://github.com/pingcap/tidb/issues/57627) @[winoros](https://github.com/winoros)

@@ -35,7 +35,7 @@ DMは、さまざまなソースからTiDBクラスタへのデータ移行を�
 
 バージョン8.5.6以降、DMは外部キー制約を使用するテーブルのレプリケーションに関する**実験的**サポートを提供します。このサポートには、以下の改善点が含まれます。
 
-- **セーフモード**: セーフモード実行中、DM は各バッチに対して`foreign_key_checks=0`を設定し、主キーまたは一意キーの値を変更しない`DELETE`ステートメントの冗長な`UPDATE` } ステップをスキップします。これにより、 `REPLACE INTO` (内部で`DELETE` + `INSERT`を実行) が子行に意図しない`ON DELETE CASCADE`効果を引き起こすのを防ぎます。詳細については、 [DMセーフモード](/dm/dm-safe-mode.md#foreign-key-handling-new-in-v856)を参照してください。
+- **セーフモード**: セーフモード実行中、DM は各バッチに対して`foreign_key_checks=0`を設定し、主キーまたは一意キーの値を変更しない`UPDATE`文の冗長な`DELETE`ステップをスキップします。これにより、 `REPLACE INTO` (内部で`DELETE` + `INSERT`を実行) が子行に意図しない`ON DELETE CASCADE`効果を引き起こすのを防ぎます。詳細については、 [DMセーフモード](/dm/dm-safe-mode.md#foreign-key-handling-new-in-v856)を参照してください。
 - **マルチワーカー因果関係**: `foreign_key_checks=1`かつ`worker-count > 1`の場合、DM はタスク開始時にダウンストリーム スキーマから外部キー関係を読み取り、因果関係キーを挿入します。これにより、親行に対する DML 操作が依存する子行に対する操作よりも先に完了し、ワーカー間でBinlogの順序が維持されます。v8.5.7 以降、このモードでは、スキーマ名またはテーブル名の変更など、静的な 1 対 1 のテーブルルーティングをサポートします。
 
 > **Note:**
@@ -44,14 +44,14 @@ DMは、さまざまなソースからTiDBクラスタへのデータ移行を�
 
 外部キーのレプリケーションには、以下の制限事項が適用されます。
 
-- セーフモードで`foreign_key_checks=1`を有効にすると、DM は主キーまたは一意キーの値を変更する`UPDATE`ステートメントをサポートしていません。DM はエラー`safe-mode update with foreign_key_checks=1 and PK/UK changes is not supported`でタスクを一時停止します。このようなステートメントを再現するには、 `safe-mode`を`false`に設定してください。
-- `foreign_key_checks=1`の場合、DM はレプリケーション中に外部キー制約を作成、変更、または削除する DDL ステートメントをサポートしません。
+- セーフモードで`foreign_key_checks=1`を有効にすると、DM は主キーまたは一意キーの値を変更する`UPDATE`文をサポートしていません。DM はエラー`safe-mode update with foreign_key_checks=1 and PK/UK changes is not supported`でタスクを一時停止します。このようなステートメントを再現するには、 `safe-mode`を`false`に設定してください。
+- `foreign_key_checks=1`の場合、DM はレプリケーション中に外部キー制約を作成、変更、または削除する DDL文をサポートしません。
 - v8.5.7 以降、`foreign_key_checks=1`かつ`worker-count > 1`の場合、DM は外部キーを持つテーブルに対して静的な 1 対 1 のルーティングルールのみをサポートします。このモードでは、DM はタスク内の複数のソーステーブルを同じターゲットテーブルにマッピングするルーティングルールを引き続き拒否します。1 対 1 でないルーティングの場合は、`worker-count`を`1`に設定するか、ルーティングルールを変更してください。
-- `foreign_key_checks=1`の場合、これらのオプションは DML ステートメントの境界と外部キー実行のセマンティクスを変更する可能性があるため、DM は`syncer.compact`または`syncer.multiple-rows`をサポートしません。
+- `foreign_key_checks=1`の場合、これらのオプションは DML文の境界と外部キー実行のセマンティクスを変更する可能性があるため、DM は`syncer.compact`または`syncer.multiple-rows`をサポートしません。
 - `foreign_key_checks=1`かつ`worker-count > 1`の場合、DM は、`worker-count`、`case-sensitive`、ルーティングルール、`block-allow-list`または`black-white-list`ルール、Binlog イベントフィルタリングルール、および`foreign_key_checks`の更新を含む、外部キー因果関係のセマンティクスを変更する可能性があるホット設定更新を拒否します。これらの設定を変更するには、タスクを停止し、変更した設定で再起動してください。
 - `foreign_key_checks=1`の場合、`block-allow-list`には、外部キー依存関係チェーン内のすべての祖先テーブルを含める必要があります。祖先テーブルを除外すると、増分レプリケーション中にエラーが発生し、DM はタスクを一時停止します。
 - `foreign_key_checks=1`の場合、外部キーのメタデータは、ソースとダウンストリーム間で一貫している必要があります。DM が不整合を検出した場合は、 `binlog-schema update --from-target`を実行してメタデータを再同期してください。
-- セーフモードで`foreign_key_checks=1`を有効にすると、`UPDATE`が主キーまたは一意キーの値を変更する場合、DM は`ON UPDATE CASCADE`を正しく複製しません。DM は、このようなステートメントを`DELETE` + `REPLACE`に書き換え、 `ON DELETE`アクションではなく`ON UPDATE`アクションをトリガーします。この場合、DM はステートメントを拒否し、タスクを一時停止します。DM はキー値を変更しない`UPDATE`ステートメントを正しく複製します。
+- セーフモードで`foreign_key_checks=1`を有効にすると、`UPDATE`が主キーまたは一意キーの値を変更する場合、DM は`ON UPDATE CASCADE`を正しく複製しません。DM は、このようなステートメントを`DELETE` + `REPLACE`に書き換え、 `ON DELETE`アクションではなく`ON UPDATE`アクションをトリガーします。この場合、DM はステートメントを拒否し、タスクを一時停止します。DM はキー値を変更しない`UPDATE`文を正しく複製します。
 
 バージョン8.5.6より前のバージョンでは、DMはダウンストリームに外部キー制約を作成しますが、セッション変数[`foreign_key_checks=OFF`](/system-variables.md#foreign_key_checks)を設定するため、制約を適用しません。その結果、カスケード操作はダウンストリームに複製されません。
 

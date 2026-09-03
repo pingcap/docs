@@ -69,7 +69,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
     v8.0.0より前では、クエリ結果をターゲットテーブルにインポートするには`INSERT INTO ... SELECT`文しか使用できませんでしたが、これは大規模データセットを扱うシナリオによっては比較的非効率的でした。v8.0.0では、TiDBは実験的機能として`IMPORT INTO ... FROM SELECT`導入し、 `SELECT`のクエリ結果を空のTiDBターゲットテーブルにインポートできるようになりました。これにより、 `INSERT INTO ... SELECT`の最大8倍のパフォーマンスを実現し、インポート時間を大幅に短縮できます。さらに、 `IMPORT INTO ... FROM SELECT`を使用して、 [`AS OF TIMESTAMP`](/as-of-timestamp.md)でクエリされた履歴データをインポートすることもできます。
 
-    v8.1.0 では、 `IMPORT INTO ... FROM SELECT`構文が一般公開 (GA) され、 `IMPORT INTO`ステートメントの機能シナリオが充実します。
+    v8.1.0 では、 `IMPORT INTO ... FROM SELECT`構文が一般公開 (GA) され、 `IMPORT INTO`文の機能シナリオが充実します。
 
     詳細については[ドキュメント](/sql-statements/sql-statement-import-into.md)を参照してください。
 
@@ -216,7 +216,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
     - パーティションDDLタスクをロールバックするときにステータスが停止する問題を修正しました [＃51090](https://github.com/pingcap/tidb/issues/51090) @[jiyfhust](https://github.com/jiyfhust)
     - `EXPLAIN ANALYZE` を実行したときに`max_remote_stream`の値が正しくない問題を修正しました [＃52646](https://github.com/pingcap/tidb/issues/52646) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - `TIDB_HOT_REGIONS`テーブルをクエリすると、誤って`INFORMATION_SCHEMA`テーブルが返される可能性がある問題を修正しました。 [＃50810](https://github.com/pingcap/tidb/issues/50810) @[Defined2014](https://github.com/Defined2014)
-    - 特定の列の統計情報が完全にロードされていない場合に、 `EXPLAIN`ステートメントの結果に誤った列 ID が表示される可能性がある問題を修正しました[＃52207](https://github.com/pingcap/tidb/issues/52207) @[time-and-fate](https://github.com/time-and-fate)
+    - 特定の列の統計情報が完全にロードされていない場合に、 `EXPLAIN`文の結果に誤った列 ID が表示される可能性がある問題を修正しました[＃52207](https://github.com/pingcap/tidb/issues/52207) @[time-and-fate](https://github.com/time-and-fate)
     - `IFNULL`関数によって返される型が MySQL と一致しない問題を修正しました [＃51765](https://github.com/pingcap/tidb/issues/51765) @[YangKeao](https://github.com/YangKeao)
     - 一意インデックスを追加するとTiDBがpanicする可能性がある問題を修正[＃52312](https://github.com/pingcap/tidb/issues/52312) @[wjhuang2016](https://github.com/wjhuang2016)
 
@@ -273,12 +273,12 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
         - PDを再起動するとTiCDCノードがエラーで再起動する可能性がある問題を修正しました [＃10799](https://github.com/pingcap/tiflow/issues/10799) @[3AceShowHand](https://github.com/3AceShowHand)
         - PDディスクI/Oの高レイテンシーによりデータレプリケーションで深刻なレイテンシーが発生する問題を修正 [＃9054](https://github.com/pingcap/tiflow/issues/9054) @[asddongmen](https://github.com/asddongmen)
         - `TIMEZONE`種類のデフォルト値が正しいタイムゾーンに従って設定されない問題を修正 [＃10931](https://github.com/pingcap/tiflow/issues/10931) @[3AceShowHand](https://github.com/3AceShowHand)
-        - `DROP PRIMARY KEY`と`DROP UNIQUE KEY`ステートメントが正しく複製されない問題を修正[＃10890](https://github.com/pingcap/tiflow/issues/10890) @[asddongmen](https://github.com/asddongmen)
+        - `DROP PRIMARY KEY`と`DROP UNIQUE KEY`文が正しく複製されない問題を修正[＃10890](https://github.com/pingcap/tiflow/issues/10890) @[asddongmen](https://github.com/asddongmen)
         - TiCDC が上流に書き込まれた後に下流の`Exchange Partition ... With Validation` DDL の実行に失敗し、変更フィードが停止する問題を修正しました。 [＃10859](https://github.com/pingcap/tiflow/issues/10859) @[hongyunyan](https://github.com/hongyunyan)
 
     - TiDB Lightning
 
-        - ソースファイル内の互換性のない SQL ステートメントが原因で、 TiDB Lightning がデータインポート中に`no database selected`報告する問題を修正しました。 [＃51800](https://github.com/pingcap/tidb/issues/51800) @[lance6716](https://github.com/lance6716)
+        - ソースファイル内の互換性のない SQL文が原因で、TiDB Lightning がデータインポート中に`no database selected`を報告する問題を修正しました。 [＃51800](https://github.com/pingcap/tidb/issues/51800) @[lance6716](https://github.com/lance6716)
         - TiDB Lightningがサーバーモードでログに機密情報を出力する可能性がある問題を修正しました [＃36374](https://github.com/pingcap/tidb/issues/36374) @[kennytm](https://github.com/kennytm)
         - PDLeaderを強制終了すると、 TiDB Lightningがデータインポート中に`invalid store ID 0`エラーを報告する問題を修正しました。 [＃50501](https://github.com/pingcap/tidb/issues/50501) @[Leavrth](https://github.com/Leavrth)
         - TiDB Lightningが`replace`戦略を使用して競合するデータを処理するときに`Unknown column in where clause`エラーを報告する問題を修正しました [＃52886](https://github.com/pingcap/tidb/issues/52886) @[lyzx2001](https://github.com/lyzx2001)
