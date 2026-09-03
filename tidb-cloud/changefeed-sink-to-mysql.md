@@ -113,7 +113,7 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
 
 3. [Dumplingのエクスポートファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)のメタデータファイルから MySQL シンクの開始位置を取得します。
 
-    以下はメタデータファイルの例の一部です。 `Pos`の`SHOW MASTER STATUS`は、既存データの TSO であり、MySQL シンクの開始位置でもあります。
+    以下はメタデータファイルの例の一部です。 `SHOW MASTER STATUS`の`Pos`は、既存データの TSO であり、MySQL シンクの開始位置でもあります。
 
     ```
     Started dump at: 2020-11-10 10:40:19
