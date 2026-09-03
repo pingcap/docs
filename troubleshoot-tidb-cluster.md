@@ -24,7 +24,7 @@ For other information, see [Frequently Asked Questions (FAQ)](/faq/tidb-faq.md).
     - If a certain process is not running, see the following corresponding sections to diagnose and solve the issue.
 
     + If all the processes are running, check the `tidb-server` log to see if the following messages are displayed:
-        - InformationSchema is out of date: This message is displayed if the `tikv-server` cannot be connected. Check the state and log of `pd-server` and `tikv-server`.
+        - Information schema is out of date: This message is displayed if the `tikv-server` cannot be connected. Check the state and log of `pd-server` and `tikv-server`.
         - panic: This message is displayed if there is an issue with the program. Please provide the detailed panic log and you can [report a bug](/support.md).
 
 3. If the data is cleared and the services are re-deployed, make sure that:
