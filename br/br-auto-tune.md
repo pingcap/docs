@@ -13,7 +13,7 @@ TiDB v5.4.0より前のバージョンでは、バックアップ＆リストア
 
 バックアップタスクがクラスタに与える影響を軽減したい場合は、自動チューニング機能を有効にできます。この機能を有効にすると、TiDBはクラスタに過度の影響を与えることなく、可能な限り高速にバックアップタスクを実行します。
 
-あるいは、TiKV設定項目[`backup.num-threads`](/tikv-configuration-file.md#num-threads-1)またはパラメータ`--ratelimit`を使用してバックアップ速度を制限することもできます。 `--ratelimit`設定されている場合、タスクが多すぎて速度制限を超えてしまうのを防ぐため、br のパラメータ`concurrency`自動的に`1`に調整されます。
+あるいは、TiKV設定項目[`backup.num-threads`](/tikv-configuration-file.md#num-threads-1)またはパラメータ`--ratelimit`を使用してバックアップ速度を制限することもできます。 `--ratelimit`が設定されている場合、タスクが多すぎて速度制限を超えてしまうのを防ぐため、br のパラメータ`concurrency`は自動的に`1`に調整されます。
 
 ## オートチューンを使用する {#use-auto-tune}
 

@@ -53,7 +53,7 @@ TiDB バージョン: 4.0.0-rc.1
 - Backup & Restore (BR)
 
     - チェックサムが無効になっている場合でもチェックサムが実行される問題を修正[＃223](https://github.com/pingcap/br/pull/223)
-    - TiDB で`auto-random`または`alter-pk`有効になっている場合に増分レプリケーションが失敗する問題を修正 [＃231](https://github.com/pingcap/br/pull/231) [＃230](https://github.com/pingcap/br/pull/230)
+    - TiDB で`auto-random`または`alter-pk`が有効になっている場合に増分レプリケーションが失敗する問題を修正 [＃231](https://github.com/pingcap/br/pull/231) [＃230](https://github.com/pingcap/br/pull/230)
 
 ## 新機能 {#new-features}
 

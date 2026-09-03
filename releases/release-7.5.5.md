@@ -80,7 +80,7 @@ TiDB バージョン: 7.5.5
     - 分散実行フレームワーク (DXF) に関連するシステムテーブルをクエリすると、アップグレードが失敗する可能性がある問題を修正しました[＃49263](https://github.com/pingcap/tidb/issues/49263) @[D3Hunter](https://github.com/D3Hunter)
     - DDL内部トランザクションエラー`GC life time is shorter than transaction duration`によりインデックス追加が失敗する問題を修正[＃57043](https://github.com/pingcap/tidb/issues/57043) @[tangenta](https://github.com/tangenta)
     - `EXCHANGE PARTITION`を実行して無効な行に遭遇すると、InfoSchema が完全にロードされ、エラー`failed to load schema diff`が報告される問題を修正しました。 [＃56685](https://github.com/pingcap/tidb/issues/56685) @[D3Hunter](https://github.com/D3Hunter)
-    - `tidb_ddl_enable_fast_reorg`と`new_collations_enabled_on_first_bootstrap`有効になっているときに照合順序が正しく処理されず、データインデックスが不一致になる問題を修正しました。 [＃58036](https://github.com/pingcap/tidb/issues/58036) @[djshow832](https://github.com/djshow832)
+    - `tidb_ddl_enable_fast_reorg`と`new_collations_enabled_on_first_bootstrap`が有効になっているときに照合順序が正しく処理されず、データインデックスが不一致になる問題を修正しました。 [＃58036](https://github.com/pingcap/tidb/issues/58036) @[djshow832](https://github.com/djshow832)
     - プランキャッシュがインデックスを追加するときに間違ったスキーマを使用するため、データインデックスが不整合になる問題を修正しました。 [＃56733](https://github.com/pingcap/tidb/issues/56733) @[wjhuang2016](https://github.com/wjhuang2016)
     - アップグレード中に`ALTER TABLE TIFLASH REPLICA`を実行するとTiDBノードがクラッシュする問題を修正[＃57863](https://github.com/pingcap/tidb/issues/57863) @[tangenta](https://github.com/tangenta)
     - クエリ`INFORMATION_SCHEMA.columns`のパフォーマンスが低下する問題を修正 [＃58184](https://github.com/pingcap/tidb/issues/58184) @[lance6716](https://github.com/lance6716)

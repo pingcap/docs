@@ -42,7 +42,7 @@ TiDB バージョン: 7.5.1
 
     - いくつかの型変換を処理する際の TiDB 実装を最適化し、関連する問題を修正しました[＃47945](https://github.com/pingcap/tidb/issues/47945) [＃47864](https://github.com/pingcap/tidb/issues/47864) [＃47829](https://github.com/pingcap/tidb/issues/47829) [＃47816](https://github.com/pingcap/tidb/issues/47816) @[YangKeao](https://github.com/YangKeao) @[lcwangchao](https://github.com/lcwangchao)
 
-    - 非バイナリ照合順序が設定され、クエリに`LIKE`含まれている場合、オプティマイザは実行効率を向上させるために`IndexRangeScan`を生成します[＃48181](https://github.com/pingcap/tidb/issues/48181) [＃49138](https://github.com/pingcap/tidb/issues/49138) @[time-and-fate](https://github.com/time-and-fate)
+    - 非バイナリ照合順序が設定され、クエリに`LIKE`が含まれている場合、オプティマイザは実行効率を向上させるために`IndexRangeScan`を生成します[＃48181](https://github.com/pingcap/tidb/issues/48181) [＃49138](https://github.com/pingcap/tidb/issues/49138) @[time-and-fate](https://github.com/time-and-fate)
 
     - 特定のシナリオで`OUTER JOIN`を`INNER JOIN`に変換する能力を強化する[＃49616](https://github.com/pingcap/tidb/issues/49616) @[qw4990](https://github.com/qw4990)
 

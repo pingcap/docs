@@ -153,7 +153,7 @@ TiDBの一部の操作では、サーバーへの一時ファイルの書き込�
 
     > **Note:**
     >
-    > ディレクトリが存在しない場合は、TiDB は起動時に自動的に作成します。ディレクトリの作成に失敗した場合、または TiDB がそのディレクトリに対する読み取りおよび書き込み権限を持っていない場合、実行時に[`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)無効になります。
+    > ディレクトリが存在しない場合は、TiDB は起動時に自動的に作成します。ディレクトリの作成に失敗した場合、または TiDB がそのディレクトリに対する読み取りおよび書き込み権限を持っていない場合、実行時に[`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)が無効になります。
 
 ## 対象マシンのファイアウォールサービスを確認する {#check-the-firewall-service-of-target-machines}
 

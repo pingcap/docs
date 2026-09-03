@@ -138,7 +138,7 @@ TiDB バージョン: 7.1.6
     - TiDBの同期的な統計読み込みメカニズムが空の統計の読み込みを無期限に再試行し、 `fail to get stats version for this histogram` log を出力問題を修正しました。 [＃52657](https://github.com/pingcap/tidb/issues/52657) @[hawkingrei](https://github.com/hawkingrei)
     - 最初の引数が`month`で、2番目の引数が負の場合に`TIMESTAMPADD()`関数が無限ループに入る問題を修正しました。 [＃54908](https://github.com/pingcap/tidb/issues/54908) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - `tidb_mem_quota_analyze`が有効になっていて、統計の更新に使用されるメモリがの制限を超えると、TiDB がクラッシュする可能性がある問題を修正しました。 [＃52601](https://github.com/pingcap/tidb/issues/52601) @[hawkingrei](https://github.com/hawkingrei)
-    - 一意インデックスを追加するときに`duplicate entry`発生する可能性がある問題を修正 [＃56161](https://github.com/pingcap/tidb/issues/56161) @[tangenta](https://github.com/tangenta)
+    - 一意インデックスを追加するときに`duplicate entry`が発生する可能性がある問題を修正 [＃56161](https://github.com/pingcap/tidb/issues/56161) @[tangenta](https://github.com/tangenta)
     - 情報スキーマキャッシュミスにより、古い読み取りのクエリレイテンシーが増加する問題を修正しました。 [＃53428](https://github.com/pingcap/tidb/issues/53428) @[crazycs520](https://github.com/crazycs520)
     - GlobalStatsの`Distinct_count`情報が正しくない可能性がある問題を修正しました[＃53752](https://github.com/pingcap/tidb/issues/53752) @[hawkingrei](https://github.com/hawkingrei)
     - `SELECT DISTINCT CAST(col AS DECIMAL), CAST(col AS SIGNED) FROM ...`クエリを実行すると誤った結果が返される可能性がある問題を修正[＃53726](https://github.com/pingcap/tidb/issues/53726) @[hawkingrei](https://github.com/hawkingrei)

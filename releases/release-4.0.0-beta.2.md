@@ -15,7 +15,7 @@ TiDB Ansible バージョン: 4.0.0-beta.2
 
 - ツール
     - TiDB Binlog
-        - Drainer で`disable-dispatch`と`disable-causality`設定されている場合、システムがエラーを返して終了する問題を修正しました [＃915](https://github.com/pingcap/tidb-binlog/pull/915)
+        - Drainer で`disable-dispatch`と`disable-causality`が設定されている場合、システムがエラーを返して終了する問題を修正しました [＃915](https://github.com/pingcap/tidb-binlog/pull/915)
 
 ## 新機能 {#new-features}
 

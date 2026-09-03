@@ -70,7 +70,7 @@ TiDBバージョン: 6.5.12
     - 異常終了時に`INDEX_HASH_JOIN`アップする可能性がある問題を修正[＃54055](https://github.com/pingcap/tidb/issues/54055) @[wshwsh12](https://github.com/wshwsh12)
     - 2人のDDL所有者が同時に存在する可能性がある問題を修正[＃54689](https://github.com/pingcap/tidb/issues/54689) @[joccau](https://github.com/joccau)
     - `information_schema.cluster_slow_query`テーブルをクエリするときに、時間フィルターが追加されていない場合、最新のスローログファイルのみがクエリされる問題を修正しました[＃56100](https://github.com/pingcap/tidb/issues/56100) @[crazycs520](https://github.com/crazycs520)
-    - 一意インデックスを追加するときに`duplicate entry`発生する可能性がある問題を修正 [＃56161](https://github.com/pingcap/tidb/issues/56161) @[tangenta](https://github.com/tangenta)
+    - 一意インデックスを追加するときに`duplicate entry`が発生する可能性がある問題を修正 [＃56161](https://github.com/pingcap/tidb/issues/56161) @[tangenta](https://github.com/tangenta)
     - 特定の型変換エラーでエラーメッセージが正しく表示されない問題を修正 [＃41730](https://github.com/pingcap/tidb/issues/41730) @[hawkingrei](https://github.com/hawkingrei)
     - `VIEW`で定義されたCTEが誤ってインライン化される問題を修正[＃56582](https://github.com/pingcap/tidb/issues/56582) @[elsa0520](https://github.com/elsa0520)
     - `UPDATE`文が`ENUM`型の値を誤って更新する問題を修正しました [＃56832](https://github.com/pingcap/tidb/issues/56832) @[xhebox](https://github.com/xhebox)

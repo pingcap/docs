@@ -138,7 +138,7 @@ TiDB バージョン: 5.1.4
 
     - TiCDC
 
-        - `batch-replace-enable`無効になっている場合、MySQLシンクが重複した`replace` SQL文を生成するバグを修正[＃4501](https://github.com/pingcap/tiflow/issues/4501)
+        - `batch-replace-enable`が無効になっている場合、MySQLシンクが重複した`replace` SQL文を生成するバグを修正[＃4501](https://github.com/pingcap/tiflow/issues/4501)
         - `cached region`監視メトリックがマイナスになる問題を修正 [＃4300](https://github.com/pingcap/tiflow/issues/4300)
         - `min.insync.replicas` `replication-factor`より小さい場合にレプリケーションを実行できない問題を修正しました[＃3994](https://github.com/pingcap/tiflow/issues/3994)
         - レプリケーションタスクが削除されたときに発生する可能性のあるpanic問題を修正しました[＃3128](https://github.com/pingcap/tiflow/issues/3128)

@@ -40,7 +40,7 @@ TiDB Ansible バージョン: 2.1.18
     - プラン実行中にリセットされないようにSQLクエリの開始時刻を`SessionVars`に記録する[＃12676](https://github.com/pingcap/tidb/pull/12676)
     - `ORDER BY` 、 `GROUP BY` 、および`LIMIT OFFSET`で`?`プレースホルダーをサポート [＃12514](https://github.com/pingcap/tidb/pull/12514)
     - 最後のステートメントが`COMMIT` ときに前のステートメントを出力するために、スロークエリログに`Prev_stmt`フィールドを追加します。 [＃12724](https://github.com/pingcap/tidb/pull/12724)
-    - 明示的にコミットされたトランザクションで`COMMIT`失敗した場合、 `COMMIT`の前の最後のステートメントをログに記録します。 [＃12747](https://github.com/pingcap/tidb/pull/12747)
+    - 明示的にコミットされたトランザクションで`COMMIT`が失敗した場合、 `COMMIT`の前の最後のステートメントをログに記録します。 [＃12747](https://github.com/pingcap/tidb/pull/12747)
     - TiDBサーバーがSQL文を実行する際に、前の文の保存方法を最適化してパフォーマンスを向上します[＃12751](https://github.com/pingcap/tidb/pull/12751)
     - `skip-grant-table=true`構成の`FLUSH PRIVILEGES`文によって引き起こされるpanic問題を修正 [＃12816](https://github.com/pingcap/tidb/pull/12816)
     - 短時間に多数の書き込み要求があった場合にパフォーマンスのボトルネックを回避するために、AutoID を適用するデフォルトの最小ステップを`1000`から`30000`に増やします[＃12891](https://github.com/pingcap/tidb/pull/12891)

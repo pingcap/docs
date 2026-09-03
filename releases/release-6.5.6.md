@@ -59,7 +59,7 @@ TiDB バージョン: 6.5.6
 - TiDB
 
     - HashJoinオペレーターがプローブを実行するときにチャンクを再利用できない問題を修正しました [＃48082](https://github.com/pingcap/tidb/issues/48082) @[wshwsh12](https://github.com/wshwsh12)
-    - `AUTO_ID_CACHE=1` に設定されている場合に`Duplicate entry`発生する可能性がある問題を修正しました [＃46444](https://github.com/pingcap/tidb/issues/46444) @[tiancaiamao](https://github.com/tiancaiamao)
+    - `AUTO_ID_CACHE=1` に設定されている場合に`Duplicate entry`が発生する可能性がある問題を修正しました [＃46444](https://github.com/pingcap/tidb/issues/46444) @[tiancaiamao](https://github.com/tiancaiamao)
     - 2つのサブクエリを結合するときに`TIDB_INLJ`ヒントが有効にならない問題を修正しました [＃46160](https://github.com/pingcap/tidb/issues/46160) @[qw4990](https://github.com/qw4990)
     - TiDB の再起動後に DDL 操作が停止する可能性がある問題を修正[＃46751](https://github.com/pingcap/tidb/issues/46751) @[wjhuang2016](https://github.com/wjhuang2016)
     - 不正なMDL処理によりDDL操作が永続的にブロックされる可能性がある問題を修正 [＃46920](https://github.com/pingcap/tidb/issues/46920) @[wjhuang2016](https://github.com/wjhuang2016)
@@ -79,7 +79,7 @@ TiDB バージョン: 6.5.6
     - `N` in `LIMIT N` という大きすぎる数値による誤ったコスト見積りを修正 [＃43285](https://github.com/pingcap/tidb/issues/43285) @[qw4990](https://github.com/qw4990)
     - 統計 TopN 構造を構築するときに発生する可能性のあるpanic問題を修正しました。 [＃35948](https://github.com/pingcap/tidb/issues/35948) @[Rustin170506](https://github.com/Rustin170506)
     - MPPで計算された`COUNT(INT)`の結果が正しくない可能性がある問題を修正[＃48643](https://github.com/pingcap/tidb/issues/48643) @[AilinKid](https://github.com/AilinKid)
-    - `tidb_enable_ordered_result_mode`有効になっているときにpanicが発生する可能性がある問題を修正[＃45044](https://github.com/pingcap/tidb/issues/45044) @[qw4990](https://github.com/qw4990)
+    - `tidb_enable_ordered_result_mode`が有効になっているときにpanicが発生する可能性がある問題を修正[＃45044](https://github.com/pingcap/tidb/issues/45044) @[qw4990](https://github.com/qw4990)
     - ウィンドウ関数によって導入されたソートを削減するために、オプティマイザが誤って IndexFullScan を選択する問題を修正しました。 [＃46177](https://github.com/pingcap/tidb/issues/46177) @[qw4990](https://github.com/qw4990)
     - 述語が共通テーブル式にプッシュダウンされたときに結果が不正確になる可能性がある問題を修正しました [＃47881](https://github.com/pingcap/tidb/issues/47881) @[winoros](https://github.com/winoros)
     - DUALテーブルを最初のサブノードとして`UNION ALL`を実行するとエラーが発生する可能性がある問題を修正しました。 [＃48755](https://github.com/pingcap/tidb/issues/48755) @[winoros](https://github.com/winoros)

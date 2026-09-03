@@ -2354,7 +2354,7 @@ TiDB と MySQL 間の`match_type`の値オプションは次のとおりです�
 
 - TiDB の値オプションは`"c"` 、 `"i"` 、 `"m"` 、 `"s"`であり、MySQL の値オプションは`"c"` 、 `"i"` 、 `"m"` 、 `"n"` 、 `"u"`です。
 
-- TiDBの`"s"`はMySQLの`"n"`に相当します。TiDBで`"s"`設定されている場合、 `.`は行末文字（ `\n` ）にも一致します。
+- TiDBの`"s"`はMySQLの`"n"`に相当します。TiDBで`"s"`が設定されている場合、 `.`は行末文字（ `\n` ）にも一致します。
 
     たとえば、MySQL の`SELECT REGEXP_LIKE(a, b, "n") FROM t1` TiDB の`SELECT REGEXP_LIKE(a, b, "s") FROM t1`と同じです。
 

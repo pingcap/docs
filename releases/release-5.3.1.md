@@ -58,7 +58,7 @@ TiDB バージョン: 5.3.1
 
     - TiDBの`date_format`が`'\n'` MySQLと互換性のない方法で処理する問題を修正[＃32232](https://github.com/pingcap/tidb/issues/32232)
     - `alter column set default`テーブルスキーマを誤って更新する問題を修正 [＃31074](https://github.com/pingcap/tidb/issues/31074)
-    - `tidb_restricted_read_only`有効になっているときに`tidb_super_read_only`自動的に有効にならないバグを修正[＃31745](https://github.com/pingcap/tidb/issues/31745)
+    - `tidb_restricted_read_only`が有効になっているときに`tidb_super_read_only`が自動的に有効にならないバグを修正[＃31745](https://github.com/pingcap/tidb/issues/31745)
     - 照合順序`greatest`または`least`関数が間違った結果を返す問題を修正しました[＃31789](https://github.com/pingcap/tidb/issues/31789)
     - クエリ実行時に MPP タスクリストが空になるエラーを修正 [＃31636](https://github.com/pingcap/tidb/issues/31636)
     - innerWorker panicによって発生するインデックス結合の誤った結果を修正しました [＃31494](https://github.com/pingcap/tidb/issues/31494)
@@ -99,7 +99,7 @@ TiDB バージョン: 5.3.1
 - TiFlash
 
     - 入力引数`arg` `decimal(x,y)`範囲を超えた場合に`cast(arg as decimal(x,y))`間違った結果を返す問題を修正しました
-    - `max_memory_usage`と`max_memory_usage_for_all_queries`有効になっているときに発生するTiFlashクラッシュの問題を修正
+    - `max_memory_usage`と`max_memory_usage_for_all_queries`が有効になっているときに発生するTiFlashクラッシュの問題を修正
     - `cast(string as real)`間違った結果を返す問題を修正
     - `cast(string as decimal)`間違った結果を返す問題を修正
     - 主キー列をより大きな int データ型に変更した後に発生する可能性のあるデータの不整合を修正します。
@@ -129,7 +129,7 @@ TiDB バージョン: 5.3.1
         - クラスター内に異なるバージョンの TiCDC ノードがある場合に HTTP API が動作しない問題を修正[＃3483](https://github.com/pingcap/tiflow/issues/3483)
         - S3ストレージがTiCDC Redo Log で構成されている場合に TiCDC が異常終了する問題を修正しました [＃3523](https://github.com/pingcap/tiflow/issues/3523)
         - デフォルト値を複製できない問題を修正[＃3793](https://github.com/pingcap/tiflow/issues/3793)
-        - `batch-replace-enable`無効になっている場合、MySQLシンクが重複した`replace` SQL文を生成するバグを修正[＃4501](https://github.com/pingcap/tiflow/issues/4501)
+        - `batch-replace-enable`が無効になっている場合、MySQLシンクが重複した`replace` SQL文を生成するバグを修正[＃4501](https://github.com/pingcap/tiflow/issues/4501)
         - ステータス照会するときにのみ同期メトリックが更新される問題を修正しました [＃4281](https://github.com/pingcap/tiflow/issues/4281)
         - `mq sink write row`監視データがない問題を修正[＃3431](https://github.com/pingcap/tiflow/issues/3431)
         - `min.insync.replicas` `replication-factor`より小さい場合にレプリケーションを実行できない問題を修正しました[＃3994](https://github.com/pingcap/tiflow/issues/3994)

@@ -30,7 +30,7 @@ TiDB Ansible バージョン: 3.0.6
     - 空のテーブルで`FAST ANALYZE`を実行したときに発生するpanic問題を修正 [＃13343](https://github.com/pingcap/tidb/pull/13343)
     - 複数列のインデックスを含む空のテーブルで`FAST ANALYZE`を実行するとpanic問題を修正[＃13394](https://github.com/pingcap/tidb/pull/13394)
     - `WHERE`句に一意キー等号条件が含まれている場合に推定行数が 1 より大きくなる問題を修正しました [＃13382](https://github.com/pingcap/tidb/pull/13382)
-    - TiDB で`Streaming`有効になっている場合に返されるデータが重複する可能性がある問題を修正しました [＃13254](https://github.com/pingcap/tidb/pull/13254)
+    - TiDB で`Streaming`が有効になっている場合に返されるデータが重複する可能性がある問題を修正しました [＃13254](https://github.com/pingcap/tidb/pull/13254)
     - 推定精度を向上させるために、count-minスケッチから上位N個の値を抽出します[＃13429](https://github.com/pingcap/tidb/pull/13429)
 - サーバ
     - gRPC ダイヤルがタイムアウトすると、TiKV に送信されたリクエストがすぐに失敗するようにします[＃12926](https://github.com/pingcap/tidb/pull/12926)

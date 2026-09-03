@@ -138,7 +138,7 @@ summary: ある TiDB クラスターから別の TiDB クラスターにデー�
 
     > **Note:**
     >
-    > TiCDC `gc-ttl`デフォルトで24時間です。バックアップと復元に時間がかかる場合、デフォルトの`gc-ttl`不十分で、その後の[増分レプリケーションタスク](#step-3-migrate-incremental-data)失敗する可能性があります。このような状況を回避するには、TiCDCサーバーを起動する際に、特定のニーズに合わせて`gc-ttl`値を調整してください。詳細については、 [TiCDCにおける`gc-ttl`とは](/ticdc/ticdc-faq.md#what-is-gc-ttl-in-ticdc)を参照してください。
+    > TiCDCの`gc-ttl`はデフォルトで24時間です。バックアップと復元に時間がかかる場合、デフォルトの`gc-ttl`では不十分で、その後の[増分レプリケーションタスク](#step-3-migrate-incremental-data)が失敗する可能性があります。このような状況を回避するには、TiCDCサーバーを起動する際に、特定のニーズに合わせて`gc-ttl`の値を調整してください。詳細については、 [TiCDCにおける`gc-ttl`とは](/ticdc/ticdc-faq.md#what-is-gc-ttl-in-ticdc)を参照してください。
 
 2. データをバックアップします。
 

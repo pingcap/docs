@@ -518,7 +518,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
     - TiCDC
 
-        - `batch-replace-enable`無効になっているときに MySQL シンクが重複した`replace` SQL 文を生成するバグを修正[＃4501](https://github.com/pingcap/tiflow/issues/4501)
+        - `batch-replace-enable`が無効になっているときに MySQL シンクが重複した`replace` SQL 文を生成するバグを修正[＃4501](https://github.com/pingcap/tiflow/issues/4501)
         - PDリーダーが強制終了した際にTiCDCノードが異常終了するバグを修正[＃4248](https://github.com/pingcap/tiflow/issues/4248)
         - 一部のMySQLバージョンのエラー`Unknown system variable 'transaction_isolation'`を修正 [＃4504](https://github.com/pingcap/tiflow/issues/4504)
         - `Canal-JSON` `string` を誤って処理した場合に発生する可能性のある TiCDC panic問題を修正しました [＃4635](https://github.com/pingcap/tiflow/issues/4635)

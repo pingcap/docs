@@ -86,7 +86,7 @@ TiDB バージョン: 7.1.2
     - パーティション交換中にパーティション定義に準拠していないデータを検出できない問題を修正 [＃46492](https://github.com/pingcap/tidb/issues/46492) @[mjonss](https://github.com/mjonss)
     - `MERGE_JOIN`の結果が間違っている問題を修正[＃46580](https://github.com/pingcap/tidb/issues/46580) @[qw4990](https://github.com/qw4990)
     - 符号なし型と`Duration`型定数を比較したときに発生する誤った結果を修正しました [＃45410](https://github.com/pingcap/tidb/issues/45410) @[wshwsh12](https://github.com/wshwsh12)
-    - `AUTO_ID_CACHE=1` に設定されている場合に`Duplicate entry`発生する可能性がある問題を修正しました [＃46444](https://github.com/pingcap/tidb/issues/46444) @[tiancaiamao](https://github.com/tiancaiamao)
+    - `AUTO_ID_CACHE=1` に設定されている場合に`Duplicate entry`が発生する可能性がある問題を修正しました [＃46444](https://github.com/pingcap/tidb/issues/46444) @[tiancaiamao](https://github.com/tiancaiamao)
     - TTLが実行されているときのメモリリークの問題を修正しました [＃45510](https://github.com/pingcap/tidb/issues/45510) @[lcwangchao](https://github.com/lcwangchao)
     - 接続を切断すると go コルーチン リークが発生する可能性がある問題を修正[＃46034](https://github.com/pingcap/tidb/issues/46034) @[pingyu](https://github.com/pingyu)
     - インデックス結合のエラーによりクエリが停止する可能性がある問題を修正[＃45716](https://github.com/pingcap/tidb/issues/45716) @[wshwsh12](https://github.com/wshwsh12)

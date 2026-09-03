@@ -109,7 +109,7 @@ TiDB バージョン: 5.2.2
         - 下流の TiDB/MySQL の可用性を検証する際の不要な CPU 消費を修正[＃3073](https://github.com/pingcap/tiflow/issues/3073)
         - TiCDCによって生成されるKafkaメッセージの量が`max-message-size` に制限されない問題を修正 [＃2962](https://github.com/pingcap/tiflow/issues/2962)
         - Kafka メッセージの書き込み中にエラーが発生すると TiCDC 同期タスクが一時停止する可能性がある問題を修正[＃2978](https://github.com/pingcap/tiflow/issues/2978)
-        - `force-replicate`有効になっているときに、有効なインデックスのない一部のパーティションテーブルが無視される可能性がある問題を修正[＃2834](https://github.com/pingcap/tiflow/issues/2834)
+        - `force-replicate`が有効になっているときに、有効なインデックスのない一部のパーティションテーブルが無視される可能性がある問題を修正[＃2834](https://github.com/pingcap/tiflow/issues/2834)
         - 株価データのスキャンに時間がかかりすぎると、TiKV が GC を実行するため株価データのスキャンが失敗する可能性がある問題を修正しました[＃2470](https://github.com/pingcap/tiflow/issues/2470)
         - 一部のタイプの列を Open Protocol 形式にエンコードするときに発生する可能性のあるpanic問題を修正しました。 [＃2758](https://github.com/pingcap/tiflow/issues/2758)
         - 一部のタイプの列をAvro形式にエンコードする際に発生する可能性のあるpanic問題を修正しました [＃2648](https://github.com/pingcap/tiflow/issues/2648)

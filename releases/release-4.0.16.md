@@ -106,7 +106,7 @@ TiDBバージョン: 4.0.16
         - TiCDCによって生成されるKafkaメッセージの量が`max-message-size` に制限されない問題を修正 [＃2962](https://github.com/pingcap/tiflow/issues/2962)
         - `tikv_cdc_min_resolved_ts_no_change_for_1m`チェンジフィードがないときに警告が続く問題を修正[＃11017](https://github.com/tikv/tikv/issues/11017)
         - Kafka メッセージの書き込み中にエラーが発生すると、TiCDC 同期タスクが一時停止する可能性がある問題を修正しました[＃2978](https://github.com/pingcap/tiflow/issues/2978)
-        - `force-replicate`有効になっているときに、有効なインデックスのない一部のパーティションテーブルが無視される可能性がある問題を修正[＃2834](https://github.com/pingcap/tiflow/issues/2834)
+        - `force-replicate`が有効になっているときに、有効なインデックスのない一部のパーティションテーブルが無視される可能性がある問題を修正[＃2834](https://github.com/pingcap/tiflow/issues/2834)
         - 新しい変更フィードを作成するときに発生するメモリリークの問題を修正しました [＃2389](https://github.com/pingcap/tiflow/issues/2389)
         - シンクコンポーネントの前進によりデータの不整合が発生する可能性がある問題を修正しました[＃3503](https://github.com/pingcap/tiflow/issues/3503)
         - 株価データのスキャンに時間がかかりすぎると、TiKV が GC を実行するため株価データのスキャンが失敗する可能性がある問題を修正しました[＃2470](https://github.com/pingcap/tiflow/issues/2470)
