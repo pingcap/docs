@@ -296,7 +296,7 @@ TiDB バージョン: 7.4.0
     - パーティションテーブルでの`ANALYZE`操作のメモリ使用量とパフォーマンスを最適化します [＃47071](https://github.com/pingcap/tidb/issues/47071) [＃47104](https://github.com/pingcap/tidb/issues/47104) [＃46804](https://github.com/pingcap/tidb/issues/46804) @[hawkingrei](https://github.com/hawkingrei)
     - 統計ガベージコレクションメモリ使用量とパフォーマンスを最適化します [＃31778](https://github.com/pingcap/tidb/issues/31778) @[winoros](https://github.com/winoros)
     - インデックスマージ交差のプッシュダウン`limit`を最適化してクエリパフォーマンスを向上させる [＃46863](https://github.com/pingcap/tidb/issues/46863) @[AilinKid](https://github.com/AilinKid)
-    - `IndexLookup`多くのテーブル取得タスクが含まれる場合に、誤ってフルテーブルスキャンを選択する可能性を最小限に抑えるようにコストモデルを改善します[＃45132](https://github.com/pingcap/tidb/issues/45132) @[qw4990](https://github.com/qw4990)
+    - `IndexLookup`に多くのテーブル取得タスクが含まれる場合に、誤ってフルテーブルスキャンを選択する可能性を最小限に抑えるようにコストモデルを改善します[＃45132](https://github.com/pingcap/tidb/issues/45132) @[qw4990](https://github.com/qw4990)
     - 結合除去ルールを最適化して、 `join on unique keys` のクエリパフォーマンスを向上させます。 [＃46248](https://github.com/pingcap/tidb/issues/46248) @[fixdb](https://github.com/fixdb)
     - 実行エラーを回避するために、多値インデックス列の照合順序を`binary`に変更します[＃46717](https://github.com/pingcap/tidb/issues/46717) @[YangKeao](https://github.com/YangKeao)
 
