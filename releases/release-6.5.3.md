@@ -120,7 +120,7 @@ TiDB バージョン: 6.5.3
         - TiCDC タイムゾーン設定の問題を修正 [#8798](https://github.com/pingcap/tiflow/issues/8798) @[Rustin170506](https://github.com/Rustin170506)
         - 上流の TiKV ノードの 1つがクラッシュするとチェックポイントの遅延が増加する問題を修正しました [#8858](https://github.com/pingcap/tiflow/issues/8858) @[hicqu](https://github.com/hicqu)
         - 下流のMySQLにデータを複製するときに、上流のTiDB で`FLASHBACK CLUSTER TO TIMESTAMP`ステートメントが実行された後にレプリケーションエラーが発生する問題を修正しました。 [#8040](https://github.com/pingcap/tiflow/issues/8040) @[asddongmen](https://github.com/asddongmen)
-        - オブジェクトストレージにデータを複製する際に、上流の`EXCHANGE PARTITION`操作が下流のに正しく複製されない問題を修正しました。 [#8914](https://github.com/pingcap/tiflow/issues/8914) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - オブジェクトストレージにデータを複製する際に、上流の`EXCHANGE PARTITION`操作が下流に正しく複製されない問題を修正しました。 [#8914](https://github.com/pingcap/tiflow/issues/8914) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - 一部の特殊なシナリオでソートコンポーネントの過剰なメモリ使用によって引き起こされる OOM 問題を修正[#8974](https://github.com/pingcap/tiflow/issues/8974) @[hicqu](https://github.com/hicqu)
         - ダウンストリームが Kafka の場合、TiCDC がダウンストリームのメタデータを頻繁にクエリし、ダウンストリームに過度のワークロードを引き起こす問題を修正しました[#8957](https://github.com/pingcap/tiflow/issues/8957) [#8959](https://github.com/pingcap/tiflow/issues/8959) @[Rustin170506](https://github.com/Rustin170506)
         - Kafka メッセージのサイズが大きすぎるためにレプリケーションエラーが発生した場合に、メッセージ本文がログに記録される問題を修正しました。 [#9031](https://github.com/pingcap/tiflow/issues/9031) @[darraes](https://github.com/darraes)
@@ -132,7 +132,7 @@ TiDB バージョン: 6.5.3
         - 幅の広いテーブルをインポートするときに OOM が発生する可能性がある問題を修正しました [#43728](https://github.com/pingcap/tidb/issues/43728) @[D3Hunter](https://github.com/D3Hunter)
         - 大量のデータをインポートする際の`write to tikv with no leader returned`の問題を修正[#43055](https://github.com/pingcap/tidb/issues/43055) @[lance6716](https://github.com/lance6716)
         - データファイルに閉じられていない区切り文字がある場合に発生する可能性のある OOM 問題を修正しました。 [#40400](https://github.com/pingcap/tidb/issues/40400) @[buchuitoudegou](https://github.com/buchuitoudegou)
-        - データのインポート中にエラーが発生した場合に再試行メカニズム[#43291](https://github.com/pingcap/tidb/issues/43291) `unknown RPC` [D3ハンター](https://github.com/D3Hunter)
+        - データのインポート中に`unknown RPC`エラーが発生した場合に再試行メカニズムを追加しました [#43291](https://github.com/pingcap/tidb/issues/43291) @[D3Hunter](https://github.com/D3Hunter)
 
     - TiDB Binlog
 

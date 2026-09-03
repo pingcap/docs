@@ -61,7 +61,7 @@ TiDB バージョン: 4.0.7
 
 - TiDB
 
-    - ショートカット`COALESCE` [#20092](https://github.com/pingcap/tidb/pull/20092) `and`化バグ`or`修正
+    - `COALESCE`のショートカットおよび`AND`/`OR`化のバグを修正しました [#20092](https://github.com/pingcap/tidb/pull/20092)
     - copタスクストアが異なるタイプであってもプランダイジェストが同じになる問題を修正[#20076](https://github.com/pingcap/tidb/pull/20076)
     - `!= any()`関数の誤った動作を修正 [#20062](https://github.com/pingcap/tidb/pull/20062)
     - `slow-log`ファイルが存在しない場合に発生するクエリエラーを修正[#20051](https://github.com/pingcap/tidb/pull/20051)
@@ -84,10 +84,10 @@ TiDB バージョン: 4.0.7
 
 - PD
 
-    - `balance-region`有効になっているときに、一部のリージョンにLeaderがいない場合、PD がpanicする可能性があるバグを修正しました[#2994](https://github.com/pingcap/pd/pull/2994)
+    - `balance-region`が有効になっているときに、一部のリージョンにLeaderがいない場合、PD がpanicする可能性があるバグを修正しました[#2994](https://github.com/pingcap/pd/pull/2994)
     - リージョンマージ後のリージョンサイズとリージョンキーの統計的偏差を修正 [#2985](https://github.com/pingcap/pd/pull/2985)
     - ホットスポット統計の誤りを修正[#2991](https://github.com/pingcap/pd/pull/2991)
-    - `redirectSchedulerDelete` に`nil`チェックインがない問題を修正 [#2974](https://github.com/pingcap/pd/pull/2974)
+    - `redirectSchedulerDelete` に`nil`チェックがない問題を修正 [#2974](https://github.com/pingcap/pd/pull/2974)
 
 - TiFlash
 
@@ -101,4 +101,4 @@ TiDB バージョン: 4.0.7
 
     - Dumpling
 
-        - 一部の変数が`NULL` 場合にDumplingがメタデータを解析できない問題を修正しました [#150](https://github.com/pingcap/dumpling/pull/150)
+        - 一部の変数が`NULL`の場合にDumplingがメタデータを解析できない問題を修正しました [#150](https://github.com/pingcap/dumpling/pull/150)

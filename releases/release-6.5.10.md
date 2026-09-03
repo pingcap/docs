@@ -94,7 +94,7 @@ TiDB バージョン: 6.5.10
     - 1 つの TiKV ノードで遅い`check-leader`操作により、他の TiKV ノードの`resolved-ts`が正常に進まなくなる問題を修正しました。 [`#15999`](https://github.com/tikv/tikv/issues/15999) @[crazycs520](https://github.com/crazycs520)
     - クエリ内の`CONV()`関数が数値システム変換中にオーバーフローし、TiKV panicが発生する問題を修正しました。 [#16969](https://github.com/tikv/tikv/issues/16969) @[gengliqi](https://github.com/gengliqi)
     - 不安定なテストケースの問題を修正し、各テストが独立した一時ディレクトリを使用するようにして、オンライン構成の変更が他のテストケースに影響しないようにします。 [#16871](https://github.com/tikv/tikv/issues/16871) @[glorv](https://github.com/glorv)
-    - `DECIMAL`型の小数点部分が場合に正しくない問題を修正しました [#16913](https://github.com/tikv/tikv/issues/16913) @[gengliqi](https://github.com/gengliqi)
+    - `DECIMAL`型の小数点以下の桁が、場合によっては正しくない問題を修正しました [#16913](https://github.com/tikv/tikv/issues/16913) @[gengliqi](https://github.com/gengliqi)
     - 古いリージョンピアがGCメッセージを無視するとresolve-tsがブロックされる問題を修正しました [#16504](https://github.com/tikv/tikv/issues/16504) @[crazycs520](https://github.com/crazycs520)
 
 - PD

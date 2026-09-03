@@ -38,13 +38,13 @@ TiDB バージョン: 4.0.6
     - ユニオンエグゼキュータの同時実行の調整をサポート [#19886](https://github.com/pingcap/tidb/pull/19886)
     - 外部結合とブロードキャスト結合をサポート[#19664](https://github.com/pingcap/tidb/pull/19664)
     - プロセスリストのSQLダイジェストを追加する [#19829](https://github.com/pingcap/tidb/pull/19829)
-    - 自動コミット文の再試行ために悲観的トランザクションモードに切り替える [#19796](https://github.com/pingcap/tidb/pull/19796)
+    - 自動コミット文を再試行するために悲観的トランザクションモードに切り替える [#19796](https://github.com/pingcap/tidb/pull/19796)
     - `Str_to_date()` の`%r`と`%T`データ形式をサポート [#19693](https://github.com/pingcap/tidb/pull/19693)
     - `SELECT INTO OUTFILE`を有効にするとファイル権限が必要になります [#19577](https://github.com/pingcap/tidb/pull/19577)
     - `stddev_pop`機能をサポートする [#19541](https://github.com/pingcap/tidb/pull/19541)
     - `TiDB-Runtime`ダッシュボードを追加する [#19396](https://github.com/pingcap/tidb/pull/19396)
     - `ALTER TABLE`アルゴリズム互換性を向上 [#19364](https://github.com/pingcap/tidb/pull/19364)
-    - スローログ`plan`フィールドに`insert`プラン`delete`エンコード`update` [#19269](https://github.com/pingcap/tidb/pull/19269)
+    - スローログの`plan`フィールドに`insert`、`delete`、`update`プランをエンコードします [#19269](https://github.com/pingcap/tidb/pull/19269)
 
 - TiKV
 
@@ -98,7 +98,7 @@ TiDB バージョン: 4.0.6
 
 - TiDB
 
-    - メトリックプロファイルで`tikv_cop_wait`回収集する問題を修正 [#19881](https://github.com/pingcap/tidb/pull/19881)
+    - メトリックプロファイルで`tikv_cop_wait`が2回収集される問題を修正しました [#19881](https://github.com/pingcap/tidb/pull/19881)
     - `SHOW GRANTS` の間違った結果を修正 [#19834](https://github.com/pingcap/tidb/pull/19834)
     - `!= ALL (subq)` の誤ったクエリ結果を修正 [#19831](https://github.com/pingcap/tidb/pull/19831)
     - `enum`と`set`型の変換のバグを修正 [#19778](https://github.com/pingcap/tidb/pull/19778)
@@ -111,7 +111,7 @@ TiDB バージョン: 4.0.6
     - 列タイプを`Decimal`から`Int` に変更することを禁止する [#19682](https://github.com/pingcap/tidb/pull/19682)
     - `SELECT ... INTO OUTFILE`ランタイムエラーを返す問題を修正 [#19672](https://github.com/pingcap/tidb/pull/19672)
     - `builtinRealIsFalseSig` の誤った実装を修正 [#19670](https://github.com/pingcap/tidb/pull/19670)
-    - パーティション式チェックで括弧式欠落する問題を修正 [#19614](https://github.com/pingcap/tidb/pull/19614)
+    - パーティション式のチェックで括弧式が欠落する問題を修正しました [#19614](https://github.com/pingcap/tidb/pull/19614)
     - `HashJoin` に`Apply`オペレーターがある場合のクエリエラーを修正しました [#19611](https://github.com/pingcap/tidb/pull/19611)
     - `Real` `Time` に変換するベクトル化の誤った結果を修正 [#19594](https://github.com/pingcap/tidb/pull/19594)
     - `SHOW GRANTS`文で存在しないユーザー権限が表示されるバグを修正 [#19588](https://github.com/pingcap/tidb/pull/19588)
@@ -132,15 +132,15 @@ TiDB バージョン: 4.0.6
     - テーブルのendKeyとリージョンのendKeyが同じ場合にTiDBが`no regions`エラーを返す問題を修正しました[#19895](https://github.com/pingcap/tidb/pull/19895)
     - パーティション変更が予期せず成功する問題を修正 [#19891](https://github.com/pingcap/tidb/pull/19891)
     - プッシュダウンされた式に許可されるデフォルトの最大パケット長の誤った値を修正しました [#19876](https://github.com/pingcap/tidb/pull/19876)
-    - `ENUM` `SET`の`Max`関数の誤った動作`Min`修正しました[#19869](https://github.com/pingcap/tidb/pull/19869)
+    - `ENUM`と`SET`の`Max`関数と`Min`関数の誤った動作を修正しました [#19869](https://github.com/pingcap/tidb/pull/19869)
     - 一部のTiFlashノードがオフラインの場合の`tiflash_segments`および`tiflash_tables`システムテーブルからの読み取りエラーを修正[#19748](https://github.com/pingcap/tidb/pull/19748)
     - 集計関数`Count(col)`の誤った結果を修正[#19628](https://github.com/pingcap/tidb/pull/19628)
     - `TRUNCATE`操作のランタイムエラーを修正 [#19445](https://github.com/pingcap/tidb/pull/19445)
     - `PREPARE statement FROM @Var` `Var`大文字が含まれていると失敗する問題を修正[#19378](https://github.com/pingcap/tidb/pull/19378)
     - 大文字スキーマでスキーマ文字セットを変更するとpanicが発生するバグを修正[#19302](https://github.com/pingcap/tidb/pull/19302)
-    - 情報に`tikv/tiflash` 含まれている場合の`information_schema.statements_summary`と`explain`間の計画の不一致を修正します [#19159](https://github.com/pingcap/tidb/pull/19159)
+    - 情報に`tikv/tiflash`が含まれている場合の`information_schema.statements_summary`と`explain`間の計画の不一致を修正します [#19159](https://github.com/pingcap/tidb/pull/19159)
     - `select into outfile` ファイルが存在しないというテストのエラーを修正 [#19725](https://github.com/pingcap/tidb/pull/19725)
-    - `INFORMATION_SCHEMA.CLUSTER_HARDWARE` RAIDデバイス情報がない問題を修正[#19457](https://github.com/pingcap/tidb/pull/19457)
+    - `INFORMATION_SCHEMA.CLUSTER_HARDWARE`にRAIDデバイス情報がない問題を修正[#19457](https://github.com/pingcap/tidb/pull/19457)
     - `case-when`で生成列を持つ`add index`操作が解析エラーに遭遇したときに正常に終了できるようにします。 [#19395](https://github.com/pingcap/tidb/pull/19395)
     - DDL操作の再試行に時間がかかりすぎるバグを修正[#19488](https://github.com/pingcap/tidb/pull/19488)
     - `alter table db.t1 add constraint fk foreign key (c2) references t2(c1)`ような文を`use db` を実行せずに実行する [#19471](https://github.com/pingcap/tidb/pull/19471)

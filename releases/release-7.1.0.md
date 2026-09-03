@@ -351,7 +351,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     - TiDB Lightning
 
         - 不均一なリージョン分布に関連する事前チェック項目の重大度レベルを`Critical`から`Warn`に変更して、ユーザーがデータをインポートできないようにします[#42836](https://github.com/pingcap/tidb/issues/42836) @[okJiang](https://github.com/okJiang)
-        - データのインポート中に`unknown RPC`が発生した場合に再試行メカニズムを追加する[#43291](https://github.com/pingcap/tidb/issues/43291) @[D3Hunter](https://github.com/D3Hunter)
+        - データのインポート中に`unknown RPC`エラーが発生した場合に再試行メカニズムを追加しました [#43291](https://github.com/pingcap/tidb/issues/43291) @[D3Hunter](https://github.com/D3Hunter)
         - リージョンジョブの再試行メカニズムを強化 [#43682](https://github.com/pingcap/tidb/issues/43682) @[lance6716](https://github.com/lance6716)
 
 ## バグ修正 {#bug-fixes}
@@ -440,7 +440,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
         - TiCDC タイムゾーン設定の問題を修正 [#8798](https://github.com/pingcap/tiflow/issues/8798) @[Rustin170506](https://github.com/Rustin170506)
         - PDアドレスまたはリーダーに障害が発生したときにTiCDCが自動的に回復できない問題を修正[#8812](https://github.com/pingcap/tiflow/issues/8812) [#8877](https://github.com/pingcap/tiflow/issues/8877) @[asddongmen](https://github.com/asddongmen)
         - 上流の TiKV ノードの 1 つがクラッシュするとチェックポイントの遅延が増加する問題を修正しました [#8858](https://github.com/pingcap/tiflow/issues/8858) @[hicqu](https://github.com/hicqu)
-        - オブジェクトストレージにデータを複製する際に、上流の`EXCHANGE PARTITION`操作が下流のに正しく複製されない問題を修正しました。 [#8914](https://github.com/pingcap/tiflow/issues/8914) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - オブジェクトストレージにデータを複製する際に、上流の`EXCHANGE PARTITION`操作が下流に正しく複製されない問題を修正しました。 [#8914](https://github.com/pingcap/tiflow/issues/8914) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - いくつかの特殊なシナリオでソートコンポーネントの過剰なメモリ使用によって引き起こされる OOM 問題を修正しました[#8974](https://github.com/pingcap/tiflow/issues/8974) @[hicqu](https://github.com/hicqu)
         - 下流の Kafka シンクがローリング再起動されたときに発生する TiCDC ノードpanicを修正しました[#9023](https://github.com/pingcap/tiflow/issues/9023) @[asddongmen](https://github.com/asddongmen)
 

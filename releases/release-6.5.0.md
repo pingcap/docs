@@ -42,7 +42,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 - TiDBのインデックス追加のパフォーマンスは約10倍向上します（GA） [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037) @[tangenta](https://github.com/tangenta)
 
-    TiDB v6.3.0では、インデックス作成時のバックフィル速度を向上させる実験的機能として[インデックス加速を追加](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)導入されました。v6.5.0ではこの機能がGAとなり、デフォルトで有効化されます。大規模テーブルにおけるパフォーマンスはv6.1.0と比較して約10倍向上すると予想されます。この高速化機能は、単一のSQL文がインデックスを逐次追加するシナリオに適しています。複数のSQL文が並列でインデックスを追加する場合は、そのうちの1つのSQL文のみが高速化されます。
+    TiDB v6.3.0では、インデックス作成時のバックフィル速度を向上させる実験的機能として[インデックス加速を追加](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)が導入されました。v6.5.0ではこの機能がGAとなり、デフォルトで有効化されます。大規模テーブルにおけるパフォーマンスはv6.1.0と比較して約10倍向上すると予想されます。この高速化機能は、単一のSQL文がインデックスを逐次追加するシナリオに適しています。複数のSQL文が並列でインデックスを追加する場合は、そのうちの1つのSQL文のみが高速化されます。
 
 - DDL 変更時の DML 成功率を向上させる軽量メタデータロックを提供する (GA) [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016)
 

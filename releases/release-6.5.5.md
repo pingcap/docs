@@ -30,7 +30,7 @@ TiDB バージョン: 6.5.5
 
     - Backup & Restore (BR)
 
-        - ログバックアップのCPUオーバーヘッドを削減`resolve lock` [#40759](https://github.com/pingcap/tidb/issues/40759) @[3pointer](https://github.com/3pointer)
+        - ログバックアップの`resolve lock`によるCPUオーバーヘッドを削減します [#40759](https://github.com/pingcap/tidb/issues/40759) @[3pointer](https://github.com/3pointer)
 
 ## バグ修正 {#bug-fixes}
 

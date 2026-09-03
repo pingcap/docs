@@ -50,7 +50,7 @@ TiDB バージョン: 4.0.8
     - パフォーマンス診断を支援するための**Fast-Tune**パネルページを追加[#8804](https://github.com/tikv/tikv/pull/8804)
     - ログからユーザーデータを削除する`security.redact-info-log`設定項目を追加します[#8746](https://github.com/tikv/tikv/pull/8746)
     - エラーコードのメタファイルを再フォーマットする [#8877](https://github.com/tikv/tikv/pull/8877)
-    - `pessimistic-txn.pipelined`構成動的に変更できるようにする [#8853](https://github.com/tikv/tikv/pull/8853)
+    - `pessimistic-txn.pipelined`構成を動的に変更できるようにする [#8853](https://github.com/tikv/tikv/pull/8853)
     - メモリプロファイリング機能をデフォルトで有効にする[#8801](https://github.com/tikv/tikv/pull/8801)
 
 - PD
@@ -70,8 +70,8 @@ TiDB バージョン: 4.0.8
 
     - Backup & Restore (BR)
 
-        - `split`と`ingest`パイプライン化して復元プロセスを高速化します[#427](https://github.com/pingcap/br/pull/427)
-        - PDスケジューラ手動復元をサポート [#530](https://github.com/pingcap/br/pull/530)
+        - `split`と`ingest`をパイプライン化して復元プロセスを高速化します[#427](https://github.com/pingcap/br/pull/427)
+        - PDスケジューラの手動復元をサポート [#530](https://github.com/pingcap/br/pull/530)
         - `remove`スケジューラの代わりに`pause`スケジューラを使用する[#551](https://github.com/pingcap/br/pull/551)
 
     - TiCDC

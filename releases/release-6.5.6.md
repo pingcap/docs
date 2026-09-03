@@ -21,7 +21,7 @@ TiDB バージョン: 6.5.6
     - [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md)と[`flush-worker-num`](/ticdc/ticdc-changefeed-config.md) : 異なるマシンの仕様に基づいて、再実行モジュールに異なる同時実行パラメータを設定できます[#10048](https://github.com/pingcap/tiflow/issues/10048) @[CharlesCheung96](https://github.com/CharlesCheung96)
     - [`compression`](/ticdc/ticdc-changefeed-config.md) : REDOログファイルの圧縮動作を設定できます[#10176](https://github.com/pingcap/tiflow/issues/10176) @[sdojjy](https://github.com/sdojjy)
     - [`changefeed-error-stuck-duration`](/ticdc/ticdc-changefeed-config.md) : 内部エラーまたは例外が発生したときに、変更フィードが自動的に再試行される期間を設定できます[#9875](https://github.com/pingcap/tiflow/issues/9875) @[asddongmen](https://github.com/asddongmen)
-    - [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md) : オブジェクトストレージにデータを複製するときに履歴データの自動クリーンアップを設定できます[CharlesCheung96](https://github.com/CharlesCheung96) [#10109](https://github.com/pingcap/tiflow/issues/10109)
+    - [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md) : オブジェクトストレージにデータを複製するときに履歴データの自動クリーンアップを設定できます @[CharlesCheung96](https://github.com/CharlesCheung96) [#10109](https://github.com/pingcap/tiflow/issues/10109)
 
 ## 改善点 {#improvements}
 
@@ -33,7 +33,7 @@ TiDB バージョン: 6.5.6
 
     - OOM を防ぐためにリゾルバのメモリ使用量を最適化します [#15458](https://github.com/tikv/tikv/issues/15458) @[overvenus](https://github.com/overvenus)
     - ルータオブジェクトのLRUCacheを排除してメモリ使用量を削減し、OOM を防止します。 [#15430](https://github.com/tikv/tikv/issues/15430) @[Connor1996](https://github.com/Connor1996)
-    - `apply_router`と`raft_router`指標に`alive`と`leak`監視ディメンションを追加します[tonyxuqqi](https://github.com/tonyxuqqi) [#15357](https://github.com/tikv/tikv/issues/15357)
+    - `apply_router`と`raft_router`指標に`alive`と`leak`監視ディメンションを追加します @[tonyxuqqi](https://github.com/tonyxuqqi) [#15357](https://github.com/tikv/tikv/issues/15357)
 
 - PD
 
@@ -90,7 +90,7 @@ TiDB バージョン: 6.5.6
     - シャットダウンするときに TiDB がpanicを起こす可能性がある問題を修正しました [#32110](https://github.com/pingcap/tidb/issues/32110) @[july2993](https://github.com/july2993)
     - TiDBスキーマキャッシュからスキーマ差分コミットバージョンを読み取るときにMVCCインターフェースでロックを処理しない問題を修正しました [#48281](https://github.com/pingcap/tidb/issues/48281) @[cfzjywxk](https://github.com/cfzjywxk)
     - テーブルの名前変更によって発生する`information_schema.columns`の重複行の問題を修正 [#47064](https://github.com/pingcap/tidb/issues/47064) @[jiyfhust](https://github.com/jiyfhust)
-    - `LOAD DATA REPLACE INTO`文のバグを修正[#47995](https://github.com/pingcap/tidb/issues/47995) ) @[lance6716](https://github.com/lance6716)
+    - `LOAD DATA REPLACE INTO`文のバグを修正 [#47995](https://github.com/pingcap/tidb/issues/47995) @[lance6716](https://github.com/lance6716)
     - PDリーダーの故障により1分間に`IMPORT INTO`タスクが失敗する問題を修正[#48307](https://github.com/pingcap/tidb/issues/48307) @[D3Hunter](https://github.com/D3Hunter)
     - 日付型フィールドにインデックスを作成することによって発生する`ADMIN CHECK`の失敗の問題を修正しました [#47426](https://github.com/pingcap/tidb/issues/47426) @[tangenta](https://github.com/tangenta)
     - `TABLESAMPLE` によって返されるソートされていない行データの問題を修正しました [#48253](https://github.com/pingcap/tidb/issues/48253) @[tangenta](https://github.com/tangenta)

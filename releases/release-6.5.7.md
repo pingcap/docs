@@ -58,7 +58,7 @@ TiDB バージョン: 6.5.7
     - `ENUM`または`SET`型の無効な値を解析すると、SQL文エラーが直接発生する問題を修正しました。 [#49487](https://github.com/pingcap/tidb/issues/49487) @[winoros](https://github.com/winoros)
     - `WITH RECURSIVE` CTE を含む`UPDATE`または`DELETE`文で誤った結果が生成される可能性がある問題を修正しました[#48969](https://github.com/pingcap/tidb/issues/48969) @[winoros](https://github.com/winoros)
     - データの末尾にスペースが含まれている場合に`LIKE`で`_`ワイルドカードを使用すると、クエリ結果が不正確になる可能性がある問題を修正しました[#48983](https://github.com/pingcap/tidb/issues/48983) @[time-and-fate](https://github.com/time-and-fate)
-    - IndexHashJoin オペレーターを含むクエリがメモリが`tidb_mem_quota_query` を超えると停止する問題を修正しました [#49033](https://github.com/pingcap/tidb/issues/49033) @[XuHuaiyu](https://github.com/XuHuaiyu)
+    - メモリが`tidb_mem_quota_query` を超えると IndexHashJoin オペレーターを含むクエリが停止する問題を修正しました [#49033](https://github.com/pingcap/tidb/issues/49033) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - ネストされた`UNION`クエリで`LIMIT`と`OPRDERBY`無効になる可能性がある問題を修正しました [#49377](https://github.com/pingcap/tidb/issues/49377) @[AilinKid](https://github.com/AilinKid)
     - 非厳密モード（ `sql_mode = ''` ）で、 `INSERT`実行中に切り捨てが行われてもエラーが報告される問題を修正しました。 [#49369](https://github.com/pingcap/tidb/issues/49369) @[tiancaiamao](https://github.com/tiancaiamao)
     - TiDBがパニックを起こしてエラーを報告する問題を修正`invalid memory address or nil pointer dereference` [#42739](https://github.com/pingcap/tidb/issues/42739) @[CbcWestwolf](https://github.com/CbcWestwolf)
