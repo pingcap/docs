@@ -74,7 +74,7 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
 
 スキーマとデータは、以下の命名規則に従ってエクスポートされます。
 
-| アイテム             | 圧縮されていない              | 圧縮されている                                   |
+| 項目                 | 圧縮されていない              | 圧縮されている                                   |
 | -------------------- | ----------------------------- | ------------------------------------------------ |
 | データベーススキーマ | {database}-schema-create.sql  | {database}-schema-create.sql.{compression-type}  |
 | テーブルスキーマ     | {database}.{table}-schema.sql | {database}.{table}-schema.sql.{compression-type} |
