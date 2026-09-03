@@ -13,28 +13,28 @@ TiDB SQLユーザーを制御および管理する方法の詳細については
 
 - 接続された TiDBサーバーで[セキュリティ強化モード（SEM）](/system-variables.md#tidb_enable_enhanced_security)が有効になっていない場合に TiDB Dashboardにアクセスするには、SQL ユーザーに次の**すべての**権限が必要です。
 
-    - プロセス
-    - データベースを表示
-    - 設定
-    - ダッシュボードクライアント
+    - PROCESS
+    - SHOW DATABASES
+    - CONFIG
+    - DASHBOARD_CLIENT
 
 - 接続された TiDBサーバーで[セキュリティ強化モード（SEM）](/system-variables.md#tidb_enable_enhanced_security)が有効になっているときに TiDB Dashboardにアクセスするには、SQL ユーザーに次の**すべての**権限が必要です。
 
-    - プロセス
-    - データベースを表示
-    - 設定
-    - ダッシュボードクライアント
-    - 制限付きテーブル管理者
-    - 制限付きステータス管理者
-    - 制限付き変数管理者
+    - PROCESS
+    - SHOW DATABASES
+    - CONFIG
+    - DASHBOARD_CLIENT
+    - RESTRICTED_TABLES_ADMIN
+    - RESTRICTED_STATUS_ADMIN
+    - RESTRICTED_VARIABLES_ADMIN
 
 - TiDB Dashboardにサインインした後、インターフェイス上の構成を変更するには、SQL ユーザーに次の権限も必要です。
 
-    - システム変数管理者
+    - SYSTEM_VARIABLES_ADMIN
 
 - TiDB Dashboardにサインインした後、インターフェース上の[高速バインド実行計画](/dashboard/dashboard-statement-details.md#fast-plan-binding)機能を使用するには、SQL ユーザーに次の権限も必要です。
 
-    - システム変数管理者
+    - SYSTEM_VARIABLES_ADMIN
     - SUPER
 
 > **Note:**
