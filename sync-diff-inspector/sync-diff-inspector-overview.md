@@ -292,7 +292,7 @@ Average Speed: 113.277149MB/s
 
 ### 不整合なデータを修正するためのSQLステートメント {#sql-statements-to-fix-inconsistent-data}
 
-データチェック処理中に異なる行が存在する場合、それらを修正するための SQL ステートメントが生成されます。データの不整合がチャンク内に存在する場合、 `chunk.Index`という名前の SQL ファイルが生成されます。この SQL ファイルは`${output}/fix-on-${instance}`にあり、 `${instance}`は`config.toml`ファイル内の`task.target-instance`の値です。
+データチェック処理中に異なる行が存在する場合、それらを修正するための SQL文が生成されます。データの不整合がチャンク内に存在する場合、 `chunk.Index`という名前の SQL ファイルが生成されます。この SQL ファイルは`${output}/fix-on-${instance}`にあり、 `${instance}`は`config.toml`ファイル内の`task.target-instance`の値です。
 
 SQLファイルには、チャンクが属するテーブルと範囲情報が含まれています。SQLファイルについては、次の3つの状況を考慮する必要があります。
 
