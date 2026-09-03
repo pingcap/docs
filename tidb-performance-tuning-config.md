@@ -259,7 +259,7 @@ sysbench oltp_read_only run --mysql-host={host} --mysql-port={port} --mysql-user
 - TiDBサーバー3台（16コア、64GiB）
 - TiKVサーバー3台（16コア、64GiB）
 - TiDBバージョン：v8.4.0
-- 作業負荷: [go-ycsbワークロード](https://github.com/pingcap/go-ycsb/blob/master/workloads/workloada)
+- 作業負荷: [go-ycsb workloada](https://github.com/pingcap/go-ycsb/blob/master/workloads/workloada)
 
 #### 性能比較 {#performance-comparison}
 
