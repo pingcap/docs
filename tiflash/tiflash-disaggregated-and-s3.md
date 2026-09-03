@@ -48,13 +48,13 @@ TiFlashの分散型ストレージおよびコンピューティングアーキ�
 
     TiFlash はデータにアクセスするために以下の S3 API を使用する必要があります。TiDB クラスター内のTiFlashノードにこれらの API に対する必要な権限が付与されていることを確認してください。
 
-    - オブジェクトを配置する
+    - PutObject
     - GetObject
-    - オブジェクトのコピー
-    - オブジェクトの削除
-    - リストオブジェクトV2
-    - オブジェクトタグ付けの取得
-    - PutBucketライフサイクル
+    - CopyObject
+    - DeleteObject
+    - ListObjectsV2
+    - GetObjectTagging
+    - PutBucketLifecycle
 
 2. TiDBクラスターに、ストレージとコンピューティングを組み合わせたアーキテクチャを使用してデプロイされたTiFlashノードがないことを確認してください。もしある場合は、すべてのテーブルのTiFlashレプリカ数を`0`に設定し、すべてのTiFlashノードを削除してください。例：
 
