@@ -9,7 +9,7 @@ https://github.com/pingcap/docs/tree/master/resources/doc-templates
 
 - [ ] I've signed the [**Contributor License Agreement**](https://cla.pingcap.net/pingcap/docs), which is required for the repository owners to accept my contribution.
 
-### What is changed, added or deleted? (Required)
+### What is changed, added, or deleted? (Required)
 
 <!--Tell us what you did and why.-->
 
@@ -33,8 +33,9 @@ For details, see [tips for choosing the affected versions](https://github.com/pi
 
 ### What is the related PR or file link(s)?
 
-<!--Reference link(s) will help reviewers review your PR quickly.-->
+<!--Reference links help reviewers review your PR quickly. If this documentation update is related to a code change, link the corresponding code PR below.-->
 
+- Related code change PR(s) (if applicable):
 - This PR is translated from:
 - Other reference link(s):
 
