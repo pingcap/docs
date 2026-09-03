@@ -67,7 +67,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + PD
 
-    - Fix the issue that PD `/metric/query` and `/metric/query_range` might be abused for SSRF or expose upstream response details @[rleungx](https://github.com/rleungx) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11107 -->
+    - Fix the issue that PD `/metric/query` and `/metric/query_range` might be abused for SSRF or expose upstream response details [#11081](https://github.com/tikv/pd/issues/11081) @[rleungx](https://github.com/rleungx) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11107 -->
     - Fix the issue that RU tokens might be allocated unevenly among TiDB instances in the same resource group when request rates are uneven, causing high RU wait duration and increased latency on high-demand instances [#9605](https://github.com/tikv/pd/issues/9605) @[JmPotato](https://github.com/JmPotato) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/10024 -->
     - Fix the issue that PD GlobalConfig gRPC APIs might access etcd keys outside the intended namespace when a client specifies an arbitrary `ConfigPath` or a path-like configuration name [#11079](https://github.com/tikv/pd/issues/11079) @[rleungx](https://github.com/rleungx) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11075 -->
     - Fix the issue that PD might establish outbound gRPC connections to caller-selected addresses supplied through `pd-forwarded-host` instead of restricting forwarding targets to the current PD leader's advertised client URLs [#11070](https://github.com/tikv/pd/issues/11070) @[rleungx](https://github.com/rleungx) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11091 -->
