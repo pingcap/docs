@@ -47,7 +47,7 @@ TiDB バージョン: 8.5.8
     - メモリ使用量がアラーム比率を頻繁に超える場合に、OOM 診断用 goroutine プロファイルの記録によって stop-the-world の停止時間が長引き、クエリレイテンシーが増加する可能性がある問題を修正しました [#62080](https://github.com/pingcap/tidb/issues/62080) @[YangKeao](https://github.com/YangKeao) <!-- component: sql-infra --> <!-- pr: https://github.com/pingcap/tidb/pull/70228 -->
     - 悲観的トランザクション内の `LOAD DATA LOCAL INFILE` が、リトライ可能なロック競合の後に内部リトライを行い、クライアント接続との同期がずれ、元のデッドロックエラーではなく無効なシーケンスエラーを返す問題を修正しました [#69793](https://github.com/pingcap/tidb/issues/69793) @[lance6716](https://github.com/lance6716) <!-- component: transaction, sql-infra, execution --> <!-- pr: https://github.com/pingcap/tidb/pull/70194 -->
     - `ALTER TABLE ... REORGANIZE PARTITION` により、パーティション順序で再編成対象パーティションの後ろにある非再編成パーティション内の行に対するエントリを持たないままグローバルインデックスが再構築される可能性があり、その結果、それらのインデックスを使用するクエリで行が欠落し、重複したインデックス値の挿入が許される可能性がある問題を修正しました [#70023](https://github.com/pingcap/tidb/issues/70023) @[mjonss](https://github.com/mjonss) <!-- component: ddl --> <!-- pr: https://github.com/pingcap/tidb/pull/70479 -->
-    - テーブル結合操作、`UPDATE` 文、および `DELETE` 文で、特に高並行時や幅広い行を処理する場合に、初期 Chunk に過剰なメモリが割り当てられる可能性がある問題を修正しました [#68545](https://github.com/pingcap/tidb/issues/68545) @[solotzg](https://github.com/solotzg) <!-- component: execution --> <!-- pr: https://github.com/pingcap/tidb/pull/69965 -->
+    - テーブル結合操作、`UPDATE` 文、および `DELETE` 文で、特に高並行時や幅広い行を処理する場合に、初期Chunkに過剰なメモリが割り当てられる可能性がある問題を修正しました [#68545](https://github.com/pingcap/tidb/issues/68545) @[solotzg](https://github.com/solotzg) <!-- component: execution --> <!-- pr: https://github.com/pingcap/tidb/pull/69965 -->
 
 + TiKV
 
@@ -66,7 +66,7 @@ TiDB バージョン: 8.5.8
 + PD
 
     - PD `/metric/query` および `/metric/query_range` が SSRF に悪用されたり、上流レスポンスの詳細を露出したりする可能性がある問題を修正しました @[rleungx](https://github.com/rleungx) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11107 -->
-    - 同じリソースグループ内でリクエストレートが不均一な場合に、RU トークンが TiDB インスタンス間で不均等に割り当てられ、高需要インスタンスで RU 待機時間の増加とレイテンシー上昇を引き起こす問題を修正しました [#9605](https://github.com/tikv/pd/issues/9605) @[JmPotato](https://github.com/JmPotato) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/10024 -->
+    - 同じリソースグループ内でリクエストレートが不均一な場合に、RU トークンが TiDB インスタンス間で不均等に割り当てられ、高負荷インスタンスで RU 待機時間の増加とレイテンシー上昇を引き起こす問題を修正しました [#9605](https://github.com/tikv/pd/issues/9605) @[JmPotato](https://github.com/JmPotato) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/10024 -->
     - クライアントが任意の `ConfigPath` またはパス形式の設定名を指定した場合に、PD GlobalConfig gRPC API が意図した名前空間外の etcd キーへアクセスする可能性がある問題を修正しました [#11079](https://github.com/tikv/pd/issues/11079) @[rleungx](https://github.com/rleungx) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11075 -->
     - `pd-forwarded-host` で渡された呼び出し元指定のアドレスに対して、現在の PD leader の advertised client URLs に転送先を制限せず、PD が外向き gRPC 接続を確立してしまう可能性がある問題を修正しました [#11070](https://github.com/tikv/pd/issues/11070) @[rleungx](https://github.com/rleungx) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11091 -->
     - 新しく作成されたリソースグループコントローラが定期的な状態更新と競合した場合に、resource group client が `NaN` トークンリクエストを恒久的に送信し続ける可能性がある問題を修正しました [#11022](https://github.com/tikv/pd/issues/11022) @[JmPotato](https://github.com/JmPotato) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11028 -->
