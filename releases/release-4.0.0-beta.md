@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0 Beta Release Notes
-summary: TiDBバージョン4.0.0-betaとTiDB Ansibleバージョン4.0.0-betaが2020年1月17日にリリースされました。このリリースには、インデックス結合のコスト計算精度の向上、テーブルロックのサポート、SQLエラーメッセージのエラーコードの最適化など、さまざまな改善が含まれています。TiKVもRocksDBバージョン6.4.6にアップグレードされ、迅速なバックアップと復元をサポートするようになりました。PDでは、ホットスポットのスケジュール設定の最適化と配置ルール機能の追加がサポートされるようになりました。TiDB Lightning、ダウンストリームデータベースのパスワードを設定するパラメータが追加され、TiDB Ansibleでは、 TiFlashのデプロイとメンテナンスがサポートされるようになりました。
+summary: TiDBバージョン4.0.0-betaとTiDB Ansibleバージョン4.0.0-betaが2020年1月17日にリリースされました。このリリースには、インデックス結合のコスト計算精度の向上、テーブルロックのサポート、SQLエラーメッセージのエラーコードの最適化など、さまざまな改善が含まれています。TiKVもRocksDBバージョン6.4.6にアップグレードされ、迅速なバックアップと復元をサポートするようになりました。PDでは、ホットスポットのスケジュール設定の最適化と配置ルール機能の追加がサポートされるようになりました。TiDB Lightningには、ダウンストリームデータベースのパスワードを設定するパラメータが追加され、TiDB Ansibleでは、 TiFlashのデプロイとメンテナンスがサポートされるようになりました。
 ---
 
 # TiDB 4.0 ベータ版リリースノート {#tidb-4-0-beta-release-notes}
@@ -35,7 +35,7 @@ TiDB Ansible バージョン: 4.0.0-beta
     - [＃13540](https://github.com/pingcap/tidb/pull/13540) [＃13366](https://github.com/pingcap/tidb/pull/13366) [＃13329](https://github.com/pingcap/tidb/pull/13329) [＃13300](https://github.com/pingcap/tidb/pull/13300) [＃13233](https://github.com/pingcap/tidb/pull/13233)
     - [＃13033](https://github.com/pingcap/tidb/pull/13033) [＃12866](https://github.com/pingcap/tidb/pull/12866) [＃14054](https://github.com/pingcap/tidb/pull/14054)
 - 離散型の狭いデータ範囲を`point set`に変換し、CM-Sketchを使用して行数を推定する際の推定精度を向上させる[＃11524](https://github.com/pingcap/tidb/pull/11524)
-- CM-Sketchから法線`Analyze` `TopN`情報を抽出し、頻繁に発生する値を別途保持する [＃11409](https://github.com/pingcap/tidb/pull/11409)
+- 通常の`Analyze`についてCM-Sketchから`TopN`情報を抽出し、頻繁に発生する値を別途保持する [＃11409](https://github.com/pingcap/tidb/pull/11409)
 - CM-Sketchの深さと幅、および`TopN`情報数を動的に調整する機能をサポート [＃11278](https://github.com/pingcap/tidb/pull/11278)
 - SQLバインディング の自動キャプチャと進化をサポート [＃12434](https://github.com/pingcap/tidb/pull/12434) [＃13199](https://github.com/pingcap/tidb/pull/13199)
 - `Chunk`を使用してTiKVによる通信のエンコード形式を最適化し、通信パフォーマンスを向上させる[＃12023](https://github.com/pingcap/tidb/pull/12023) [＃12536](https://github.com/pingcap/tidb/pull/12536) [＃12613](https://github.com/pingcap/tidb/pull/12613) [＃12621](https://github.com/pingcap/tidb/pull/12621) [＃12899](https://github.com/pingcap/tidb/pull/12899) [＃13060](https://github.com/pingcap/tidb/pull/13060) [＃13349](https://github.com/pingcap/tidb/pull/13349)
@@ -50,7 +50,7 @@ TiDB Ansible バージョン: 4.0.0-beta
 - `Kill` の安定性を向上 [＃10841](https://github.com/pingcap/tidb/pull/10841)
 - `LOAD DATA` で16進数と2進数の表現を区切り文字としてサポート [＃11029](https://github.com/pingcap/tidb/pull/11029)
 - `IndexLookupJoin`を`IndexHashJoin`と`IndexMergeJoin`に分割することで、 `IndexLookupJoin`のパフォーマンスを向上させ、実行時のメモリ消費量を削減します[＃8861](https://github.com/pingcap/tidb/pull/8861) [＃12139](https://github.com/pingcap/tidb/pull/12139) [＃12349](https://github.com/pingcap/tidb/pull/12349) [＃13238](https://github.com/pingcap/tidb/pull/13238) [＃13451](https://github.com/pingcap/tidb/pull/13451) [＃13714](https://github.com/pingcap/tidb/pull/13714)
-- RBACに関連するいくつかの問題を修正 [＃13896](https://github.com/pingcap/tidb/pull/13896) [＃13820](https://github.com/pingcap/tidb/pull/13820) [＃13940](https://github.com/pingcap/tidb/pull/13940) [＃14090](https://github.com/pingcap/tidb/pull/14090) [＃13940](https://github.com/pingcap/tidb/pull/13940) [＃13014](https://github.com/pingcap/tidb/pull/13014)
+- RBAC [＃13896](https://github.com/pingcap/tidb/pull/13896) [＃13820](https://github.com/pingcap/tidb/pull/13820) [＃13940](https://github.com/pingcap/tidb/pull/13940) [＃14090](https://github.com/pingcap/tidb/pull/14090) に関連するいくつかの問題を修正 [＃13014](https://github.com/pingcap/tidb/pull/13014) [＃13940](https://github.com/pingcap/tidb/pull/13940)
 - `SELECT`文に`union` が含まれているため`VIEW`を作成できない問題を修正しました [＃12595](https://github.com/pingcap/tidb/pull/12595)
 - `CAST`関数に関連するいくつかの問題を修正
     - [＃12858](https://github.com/pingcap/tidb/pull/12858) [＃11968](https://github.com/pingcap/tidb/pull/11968) [＃11640](https://github.com/pingcap/tidb/pull/11640) [＃11483](https://github.com/pingcap/tidb/pull/11483) [＃11493](https://github.com/pingcap/tidb/pull/11493)
@@ -66,7 +66,7 @@ TiDB Ansible バージョン: 4.0.0-beta
 ## TiKV {#tikv}
 
 - RocksDBのバージョンを6.4.6にアップグレードします
-- TiKVの時に2GBの空ファイルを自動的に作成することで、ディスク容量が不足するとシステムが正常に圧縮タスクを実行できない問題を修正しました。 [＃6321](https://github.com/tikv/tikv/pull/6321)
+- TiKV起動時に2GBの空ファイルを自動的に作成することで、ディスク容量が不足するとシステムが正常に圧縮タスクを実行できない問題を修正しました。 [＃6321](https://github.com/tikv/tikv/pull/6321)
 - 迅速なバックアップと復元をサポート
     - [＃6462](https://github.com/tikv/tikv/pull/6462) [＃6395](https://github.com/tikv/tikv/pull/6395) [＃6378](https://github.com/tikv/tikv/pull/6378) [＃6374](https://github.com/tikv/tikv/pull/6374) [＃6349](https://github.com/tikv/tikv/pull/6349)
     - [＃6339](https://github.com/tikv/tikv/pull/6339) [＃6308](https://github.com/tikv/tikv/pull/6308) [＃6295](https://github.com/tikv/tikv/pull/6295) [＃6286](https://github.com/tikv/tikv/pull/6286) [＃6283](https://github.com/tikv/tikv/pull/6283)

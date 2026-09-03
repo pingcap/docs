@@ -403,7 +403,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
         - TiDBノードが停止した際に、監視中のPITRチェックポイント間隔が異常に増加し、実際の状況を反映しない問題を修正しました [#42419](https://github.com/pingcap/tidb/issues/42419) @[YuJuncen](https://github.com/YuJuncen)
         - バックアップ処理中にTiKVが応答しなくなった場合にバックアップタスクが停止する可能性がある問題を修正 [#53480](https://github.com/pingcap/tidb/issues/53480) @[Leavrth](https://github.com/Leavrth)
         - ログバックアップが有効になっている場合に、 BRログに機密の認証情報が出力される可能性がある問題を修正 [#55273](https://github.com/pingcap/tidb/issues/55273) @[RidRisR](https://github.com/RidRisR)
-        - ログバックアップPITRタスクが失敗して停止した後、そのタスクに関連するセーフポイントが正しくクリアされない問題を修正しました（PD [#17316](https://github.com/tikv/tikv/issues/17316) @[Leavrth](https://github.com/Leavrth)
+        - ログバックアップPITRタスクが失敗して停止した後、そのタスクに関連するセーフポイントが正しくクリアされない問題を修正しました（PD） [#17316](https://github.com/tikv/tikv/issues/17316) @[Leavrth](https://github.com/Leavrth)
 
     - TiDB Data Migration (DM)
 

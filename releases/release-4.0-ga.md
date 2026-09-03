@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0 GA Release Notes
-summary: TiDB 4.0.0 GA は 2020年 5月 28日にリリースされました。このバージョンでは、大規模トランザクションのエラーメッセージが最適化され、Changefeed` 構成ファイルの使いやすさが向上し、新しい設定項目とさまざまな構文および関数のサポートが追加され、TiKV、 TiFlash、PD、およびツールの複数のバグと問題が修正され、PD の新しい監視項目とさまざまな機能のサポートが追加され、Backup & Restore (BR) と TiCDC のさまざまな問題が修正されました。
+summary: TiDB 4.0.0 GA は 2020年 5月 28日にリリースされました。このバージョンでは、大規模トランザクションのエラーメッセージが最適化され、`Changefeed`構成ファイルの使いやすさが向上し、新しい設定項目とさまざまな構文および関数のサポートが追加され、TiKV、 TiFlash、PD、およびツールの複数のバグと問題が修正され、PD の新しい監視項目とさまざまな機能のサポートが追加され、Backup & Restore (BR) と TiCDC のさまざまな問題が修正されました。
 ---
 
 # TiDB 4.0 GA リリースノート {#tidb-4-0-ga-release-notes}
@@ -22,7 +22,7 @@ TiDB バージョン: 4.0.0
 
 - TiKV
     - Backup & Restore (BR) を使用してバックアップするときに発生する`DefaultNotFound`エラーを修正します [＃7937](https://github.com/tikv/tikv/pull/7937)
-    - 順序がずれたパッケージ`ReadIndex`によるシステムパニックを修正[＃7930](https://github.com/tikv/tikv/pull/7930)
+    - 順序が乱れた`ReadIndex`パケットによるシステムパニックを修正 [＃7930](https://github.com/tikv/tikv/pull/7930)
     - TiKV の再起動後にスナップショットファイルを誤って削除することで発生するシステムパニックを修正[＃7927](https://github.com/tikv/tikv/pull/7927)
 
 - TiFlash
@@ -35,7 +35,7 @@ TiDB バージョン: 4.0.0
     - `show table partition regions`構文をサポートする [＃17294](https://github.com/pingcap/tidb/pull/17294)
     - TiDBサーバーが使用する一時ディスク領域を制限するための`tmp-storage-quota`設定項目を追加します [＃15700](https://github.com/pingcap/tidb/pull/15700)
     - テーブルの作成時および変更時に、パーティションテーブルが一意のプレフィックスインデックスを使用しているかどうかのチェックをサポート[＃17213](https://github.com/pingcap/tidb/pull/17213)
-    - `insert/replace into tbl_name partition` （ `partition_name_list` ）のステートメントサポートする [＃17313](https://github.com/pingcap/tidb/pull/17313)
+    - `insert/replace into tbl_name partition` （ `partition_name_list` ）のステートメントをサポートする [＃17313](https://github.com/pingcap/tidb/pull/17313)
     - `Distinct`関数を使用するときに`collations`の値をチェックする機能をサポート [＃17240](https://github.com/pingcap/tidb/pull/17240)
     - ハッシュパーティションプルーニング中の`is null`フィルタ条件をサポート [＃17310](https://github.com/pingcap/tidb/pull/17310)
     - パーティションテーブルで`admin check index` 、 `admin cleanup index` 、 `admin recover index`をサポート [＃17392](https://github.com/pingcap/tidb/pull/17392) [＃17405](https://github.com/pingcap/tidb/pull/17405) [＃17317](https://github.com/pingcap/tidb/pull/17317)
@@ -50,9 +50,9 @@ TiDB バージョン: 4.0.0
     - `ascii_bin`と`latin1_bin`エンコードの照合順序規則をサポート [＃7919](https://github.com/tikv/tikv/pull/7919)
 
 - PD
-    - 組み込み TiDB Dashboardリバースプロキシ リソース プレフィックスの指定をサポート [＃2457](https://github.com/pingcap/pd/pull/2457)
+    - 組み込み TiDB Dashboardのリバースプロキシリソースプレフィックスの指定をサポート [＃2457](https://github.com/pingcap/pd/pull/2457)
     - PDクライアントリージョンのインターフェースで`pending peer`と`down peer`情報を返すことをサポート [＃2443](https://github.com/pingcap/pd/pull/2443)
-    - `Direction of hotspot move leader` `Direction of hotspot move peer` `Hot cache read entry number`監視項目追加する [＃2448](https://github.com/pingcap/pd/pull/2448)
+    - `Direction of hotspot move leader`、 `Direction of hotspot move peer`、 `Hot cache read entry number`などの監視項目を追加する [＃2448](https://github.com/pingcap/pd/pull/2448)
 
 - ツール
     - Backup & Restore (BR)
@@ -81,12 +81,12 @@ TiDB バージョン: 4.0.0
     - 一部のケースで障害が発生した TiKV ノードにアクセスできない問題を修正[＃17342](https://github.com/pingcap/tidb/pull/17342)
     - `tidb.toml`の`isolation-read`設定項目が有効にならない問題を修正[＃17322](https://github.com/pingcap/tidb/pull/17322)
     - `hint`を使用してストリーム集約を強制する場合に、処理ロジックが間違っているために出力結果の順序が間違っている問題を修正しました。 [＃17347](https://github.com/pingcap/tidb/pull/17347)
-    - `insert`異なる`SQL_MODE` の下で DIV を処理する動作を修正 [＃17314](https://github.com/pingcap/tidb/pull/17314)
+    - `insert`が異なる`SQL_MODE` の下で DIV を処理する動作を修正 [＃17314](https://github.com/pingcap/tidb/pull/17314)
 
 - TiFlash
 
     - 検索ログ機能における正規表現のマッチング動作が他のコンポーネントと一致しない問題を修正しました
-    - デフォルトで遅延処理の最適化`Raft Compact Log Command`を無効にすることで、ノードが大量のデータを書き込むときに過剰な再起動時間がかかる問題を修正しました。
+    - `Raft Compact Log Command`の遅延処理の最適化をデフォルトで無効にすることで、ノードが大量のデータを書き込むときに過剰な再起動時間がかかる問題を修正しました。
     - 一部のシナリオで TiDB が`DROP DATABASE`文を誤って処理するため、システムの起動に失敗する問題を修正しました。
     - `Server_info`の CPU 情報を収集する方法が他のコンポーネントと異なる問題を修正しました
     - `batch coprocessor`が有効な場合に`Query`文を実行するとエラー`Too Many Pings`が報告される問題を修正しました
@@ -98,7 +98,7 @@ TiDB バージョン: 4.0.0
     - 順序が乱れた`ReadIndex`パケットによるシステムパニックを修正 [＃7930](https://github.com/tikv/tikv/pull/7930)
     - 読み取り要求コールバック関数が呼び出されないために予期しないエラーが返される問題を修正[＃7921](https://github.com/tikv/tikv/pull/7921)
     - TiKV の再起動時にスナップショットファイルを誤って削除することで発生するシステムパニックを修正[＃7927](https://github.com/tikv/tikv/pull/7927)
-    - ストレージ暗号化処理ロジックが正しくないため、 `master key`回転できない問題を修正しました [＃7898](https://github.com/tikv/tikv/pull/7898)
+    - ストレージ暗号化処理ロジックが正しくないため、 `master key`が回転できない問題を修正しました [＃7898](https://github.com/tikv/tikv/pull/7898)
     - ストレージ暗号化が有効になっているときに、スナップショットの受信ファイル`lock cf`が暗号化されない問題を修正しました[＃7922](https://github.com/tikv/tikv/pull/7922)
 
 - PD

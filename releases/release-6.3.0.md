@@ -157,7 +157,7 @@ TiDBバージョン: 6.3.0-DMR
 
 ### MySQLとの互換性 {#mysql-compatibility}
 
-- MySQL 8.0との互換性を向上させるため、4つの正規表現関数（ `REGEXP_INSTR()` 、 `REGEXP_LIKE()` 、 `REGEXP_REPLACE()` 、 `REGEXP_SUBSTR()` [#23881](https://github.com/pingcap/tidb/issues/23881) @[windtalker](https://github.com/windtalker)
+- MySQL 8.0との互換性を向上させるため、4つの正規表現関数（`REGEXP_INSTR()`、`REGEXP_LIKE()`、`REGEXP_REPLACE()`、`REGEXP_SUBSTR()`）をサポート [#23881](https://github.com/pingcap/tidb/issues/23881) @[windtalker](https://github.com/windtalker)
 
     MySQL との互換性の詳細については、 [MySQLとの正規表現互換性](/functions-and-operators/string-functions.md#regular-expression-compatibility-with-mysql)を参照してください。
 

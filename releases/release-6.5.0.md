@@ -88,7 +88,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     SQL文の場合、実行中の様々な要因により、オプティマイザが以前の最適な実行計画ではなく新しい実行計画を選択することがあり、SQLパフォーマンスに影響が出ることがあります。この場合、最適な実行計画がまだクリアされていない場合、SQL実行履歴に残ります。
 
-    TiDB v6.5.0では、 [`CREATE [GLOBAL | SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)ステートメントのバインディングオブジェクトを拡張することで、履歴実行計画のバインディングをサポートします。SQL文の実行計画が変更された場合、元の実行計画がSQL実行履歴メモリテーブル（例えば`statements_summary`に残っている限り、 `CREATE [GLOBAL | SESSION] BINDING`ステートメントで`plan_digest`を指定することで元の実行計画をバインドし、SQLパフォーマンスを迅速に回復できます。この機能により、実行計画変更の問題への対応プロセスが簡素化され、メンテナンス効率が向上します。
+    TiDB v6.5.0では、 [`CREATE [GLOBAL | SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)ステートメントのバインディングオブジェクトを拡張することで、履歴実行計画のバインディングをサポートします。SQL文の実行計画が変更された場合、元の実行計画がSQL実行履歴メモリテーブル（例えば`statements_summary`）に残っている限り、 `CREATE [GLOBAL | SESSION] BINDING`ステートメントで`plan_digest`を指定することで元の実行計画をバインドし、SQLパフォーマンスを迅速に回復できます。この機能により、実行計画変更の問題への対応プロセスが簡素化され、メンテナンス効率が向上します。
 
     詳細については[ドキュメント](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan)を参照してください。
 

@@ -243,7 +243,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
     - `CAST AS CHAR`関数が型推論エラーにより誤った結果を返す問題を修正 [#56640](https://github.com/pingcap/tidb/issues/56640) @[zimulala](https://github.com/zimulala)
     - 型推論エラーにより一部の関数の出力で文字列が切り詰められる問題を修正 [#56587](https://github.com/pingcap/tidb/issues/56587) @[joechenrh](https://github.com/joechenrh)
     - `ADDTIME()`および`SUBTIME()`関数が、最初の引数が日付型の場合に誤った結果を返す問題を修正します [#57569](https://github.com/pingcap/tidb/issues/57569) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - 非厳格モード（ `NULL` `sql_mode = ''`値が挿入される問題を修正 [#56381](https://github.com/pingcap/tidb/issues/56381) @[joechenrh](https://github.com/joechenrh)
+    - 非厳格モード（`sql_mode = ''`）で無効な`NULL`値が挿入される問題を修正 [#56381](https://github.com/pingcap/tidb/issues/56381) @[joechenrh](https://github.com/joechenrh)
     - `UPDATE`文が`ENUM`型の値を誤って更新する問題を修正しました [#56832](https://github.com/pingcap/tidb/issues/56832) @[xhebox](https://github.com/xhebox)
     - `tidb_low_resolution_tso`変数を有効にすると`SELECT FOR UPDATE`文の実行中にリソースリークが発生する問題を修正しました [#55468](https://github.com/pingcap/tidb/issues/55468) @[tiancaiamao](https://github.com/tiancaiamao)
     - `JSON_TYPE()`関数がパラメータの型を検証せず、JSON 以外のデータ型が渡された場合にエラーが返されない問題を修正しました [#54029](https://github.com/pingcap/tidb/issues/54029) @[YangKeao](https://github.com/YangKeao)

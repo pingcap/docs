@@ -323,7 +323,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 - PD
 
-    - スナップショットの実行内容に基づいてストア制限のサイズを自動調整するコントローラを追加します。このコントローラを有効にするには、 `store-limit-version`を`v2` （実験的）に設定してください。有効にすると、スケールインまたはスケールアウトの速度を制御するために`store limit`設定を手動で調整する必要がなくなります（ [＃6147](https://github.com/tikv/pd/issues/6147) @[bufferflies](https://github.com/bufferflies) 。
+    - スナップショットの実行内容に基づいてストア制限のサイズを自動調整するコントローラを追加します。このコントローラを有効にするには、 `store-limit-version`を`v2` （実験的）に設定してください。有効にすると、スケールインまたはスケールアウトの速度を制御するために`store limit`設定を手動で調整する必要がなくなります。 [＃6147](https://github.com/tikv/pd/issues/6147) @[bufferflies](https://github.com/bufferflies)
     - ストレージエンジンが raft-kv2 の場合、ホットスポット スケジューラによって不安定な負荷のリージョンが頻繁にスケジュールされるのを避けるために、履歴負荷情報を追加します。 [＃6297](https://github.com/tikv/pd/issues/6297) @[bufferflies](https://github.com/bufferflies)
     - リーダーのヘルスチェックメカニズムを追加します。etcdリーダーが配置されているPDサーバーがリーダーとして選出できない場合、PDはetcdリーダーをアクティブに切り替え、PDリーダーが利用可能であることを確認します。 [＃6403](https://github.com/tikv/pd/issues/6403) @[nolouch](https://github.com/nolouch)
 
