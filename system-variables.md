@@ -3870,7 +3870,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable is used to set the update interval of the cached timestamp used in the low-precision TSO feature, in milliseconds.
 - This variable is only available when [`tidb_low_resolution_tso`](#tidb_low_resolution_tso) is enabled.
 
-### tidb_materialized_view_enable
+### tidb_mview_enable
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -4371,7 +4371,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 > * [Connector/J](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html) (`allowMultiQueries`)
 > * PHP [mysqli](https://www.php.net/manual/en/mysqli.quickstart.multiple-statement.php) (`mysqli_multi_query`)
 
-### tidb_mv_maintain_isolation_read_engines
+### tidb_mview_maintain_isolation_read_engines
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -4381,7 +4381,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 - Possible values: Any combination of `tikv`, `tiflash`, and `tidb`.
 - This variable specifies the storage engines that internal materialized view maintenance sessions can use to read data.
 
-### tidb_mv_maintain_mem_quota
+### tidb_mview_maintain_mem_quota
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
