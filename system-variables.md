@@ -5404,7 +5404,7 @@ SHOW WARNINGS;
 
 ### `tidb_paging_size_bytes` <span class="version-mark">New in v9.0.0 and TiDB-X-CLOUD.202603</span>
 
->**Note:**
+> **Note:**
 >
 > This variable is not supported on TiDB Cloud Starter.
 
