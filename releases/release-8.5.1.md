@@ -77,7 +77,7 @@ CentOS Linux 7はサポート終了（EOL）を迎えたため、今後のTiDB�
     - TTLが特定の場合に大量の警告ログを生成する可能性がある問題を修正 [#58305](https://github.com/pingcap/tidb/issues/58305) @[lcwangchao](https://github.com/lcwangchao)
     - `tidb_ttl_delete_rate_limit`を変更する際に一部の TTL ジョブがハングアップする問題を修正しました [#58484](https://github.com/pingcap/tidb/issues/58484) @[lcwangchao](https://github.com/lcwangchao)
     - `REORGANIZE PARTITION`のデータバックフィル中に同時更新がロールバックされる可能性がある問題を修正 [#58226](https://github.com/pingcap/tidb/issues/58226) @[mjonss](https://github.com/mjonss)
-    - `cluster_slow_query table`をクエリする際に`ORDER BY`を使用すると、結果が順不同になる可能性がある問題を修正しました [#51723](https://github.com/pingcap/tidb/issues/51723) @[Defined2014](https://github.com/Defined2014)
+    - `cluster_slow_query`テーブルをクエリする際に`ORDER BY`を使用すると、結果が順不同になる可能性がある問題を修正しました [#51723](https://github.com/pingcap/tidb/issues/51723) @[Defined2014](https://github.com/Defined2014)
 
 - TiKV
 

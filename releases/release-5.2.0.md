@@ -266,7 +266,7 @@ Apple M1チップを搭載したMacコンピュータで`tiup playground`コマ�
     - ODBC スタイルの定数 (例: `{d '2020-01-01'}` ) を式として使用できない問題を修正しました [#25531](https://github.com/pingcap/tidb/issues/25531)
     - `SELECT DISTINCT` `Batch Get`に変換されることで誤った結果が生じる問題を修正します [#25320](https://github.com/pingcap/tidb/issues/25320)
     - TiFlashからTiKVへのバックオフクエリがトリガーできない問題を修正[#23665](https://github.com/pingcap/tidb/issues/23665) [#24421](https://github.com/pingcap/tidb/issues/24421)
-    - `only_full_group_by`をチェックした際に発生する`index-out-of-range`エラーを修正します[#23839](https://github.com/pingcap/tidb/issues/23839) )
+    - `only_full_group_by`をチェックした際に発生する`index-out-of-range`エラーを修正します[#23839](https://github.com/pingcap/tidb/issues/23839)
     - 相関サブクエリにおけるインデックス結合の結果が間違っている問題を修正しました [#25799](https://github.com/pingcap/tidb/issues/25799)
 
 - TiKV
