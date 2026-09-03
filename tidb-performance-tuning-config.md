@@ -268,7 +268,7 @@ sysbench oltp_read_only run --mysql-host={host} --mysql-port={port} --mysql-user
 | 項目       | ベースライン（OPS） | 最適化済み（OPS） | 改善       |
 | --------- | ----------- | ---------- | -------- |
 | データをロードする | 2858.5      | 5074.3     | +77.59%  |
-| 作業負荷      | 2243.0      | 12804.3    | +470.86% |
+| Workloada  | 2243.0      | 12804.3    | +470.86% |
 
 #### パフォーマンス分析 {#performance-analysis}
 
