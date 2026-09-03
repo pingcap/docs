@@ -19,7 +19,7 @@ summary: TiDBの導入と実行に関するソフトウェアおよびハード�
 
 TiDBはv8.5 LTSにおいて、様々なオペレーティングシステムとCPUアーキテクチャの組み合わせに対して、多段階の品質基準を保証します。
 
-- TiDBは、以下のオペレーティングシステムとCPUアーキテクチャの組み合わせにおいて、**エンタープライズレベルの本番品質を提供し**、製品機能は包括的かつ体系的に検証されています。
+- **テスト済みおよび検証済みのプラットフォーム**: 以下のオペレーティングシステムとCPUアーキテクチャの組み合わせについては、TiDBの各リリースがPingCAPの体系的なテストマトリクスに対して検証されています。これらの組み合わせは本番デプロイに推奨されます。
 
     <table><thead><tr><th>オペレーティングシステム</th><th>サポートされているCPUアーキテクチャ</th></tr></thead><tbody><tr><td>Red Hat Enterprise Linux 9.4 以降の 9.x バージョン</td><td><ul><li>x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> Red Hat Enterprise Linux 8.6 以降の 8.x バージョン</td><td><ul><li>x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> Amazon Linux 2</td><td><ul><li> x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> Amazon Linux 2023</td><td><ul><li> x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> Rocky Linux 9.1以降</td><td><ul><li>x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> Kylin V10 SP1/SP2/SP3（SP3はv7.5.5以降でサポートされています）</td><td><ul><li> x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> UnionTech OS (UOS) V20</td><td><ul><li> x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> openEuler 22.03 LTS SP1/SP3</td><td><ul><li> x86_64</li><li> ARM 64</li></ul></td></tr></tbody></table>
 
@@ -34,7 +34,7 @@ TiDBはv8.5 LTSにおいて、様々なオペレーティングシステムとCP
     >
     > Red Hat Enterprise Linux 9.x のサポートは[TiUP](https://github.com/pingcap/tiup/releases) v1.16.5 から開始されます。
 
-- 以下のオペレーティングシステムとCPUアーキテクチャの組み合わせであれば、TiDBのコンパイル、ビルド、デプロイが可能です。さらに、OLTP、OLAP、およびデータツールの基本機能も利用できます。ただし、これらの組み合わせは包括的かつ体系的なテストを受けていないため、TiDBは**エンタープライズレベルの本番品質を保証するものではありません**。
+- **互換性のあるプラットフォーム**: 以下の組み合わせでは、TiDBをコンパイル、ビルド、およびデプロイでき、OLTP、OLAP、およびデータツールをサポートします。これらの組み合わせは、リリースごとの体系的なテストマトリクスには含まれていません。互換性は、ビルド、デプロイ検証、およびTiDBユーザーによる使用を通じて確認されています。これらのプラットフォームで本番デプロイを行う場合は、サブスクリプションでのサポート範囲を確認するために {{{ .company }}} にお問い合わせください。
 
     <table><thead><tr><th>オペレーティングシステム</th><th>サポートされているCPUアーキテクチャ</th></tr></thead><tbody><tr><td>macOS 12 (Monterey) 以降</td><td><ul><li>x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> Oracle Enterprise Linux 8以降</td><td>x86_64</td></tr><tr><td> Ubuntu LTS 20.04以降</td><td>x86_64</td></tr><tr><td> CentOS Stream 8</td><td><ul><li> x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> Debian 10 (Buster) 以降</td><td>x86_64</td></tr><tr><td> Fedora 38以降</td><td>x86_64</td></tr><tr><td> openSUSE Leap v15.5以降（Tumbleweedを除く）</td><td> x86_64</td></tr><tr><td> SUSE Linux Enterprise Server 15</td><td> x86_64</td></tr></tbody></table>
 

@@ -164,7 +164,7 @@ DM 1.0では、監視データを生成するには`enable-heartbeat`を有効�
 - データは手動でも他のレプリケーション プログラムによっても挿入されません。
 - このテーブルに関連付けられた DML フィルターは構成されていません。
 
-トラブルシューティングを容易にするために、まず下流のTiDBインスタンスの一般的なログファイルを収集し、その後[TiDBコミュニティSlackチャンネル](https://tidbcommunity.slack.com/archives/CH7TTLL7P)でテクニカルサポートに問い合わせることができます。次の例は、一般的なログファイルを収集する方法を示しています。
+トラブルシューティングを容易にするために、まず下流のTiDBインスタンスの一般的なログファイルを収集し、その後[TiDB Community Slack channel](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=docs)でサポートを求めることができます。次の例は、一般的なログファイルを収集する方法を示しています。
 
 ```bash
 # Enable general log collection

@@ -14,6 +14,7 @@ TiDB の長期サポート (LTS) バージョンのサポート タイムライ�
 
 ## 8.5 {#8-5}
 
+- [8.5.8](/releases/release-8.5.8.md) : 2026-08-27
 - [8.5.7](/releases/release-8.5.7.md) : 2026-07-09
 - [8.5.6](/releases/release-8.5.6.md) : 2026-04-14
 - [8.5.5](/releases/release-8.5.5.md) : 2026-01-15

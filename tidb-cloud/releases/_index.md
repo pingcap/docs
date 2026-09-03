@@ -24,7 +24,7 @@ TiDB Cloud には、[クラウドプラットフォーム リリース](#cloud-p
 | TiDB Cloud **Starter** | クラシック [TiDB v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3/) カーネルをベースにしたカスタマイズ版 [TiDB X](/tidb-cloud/tidb-x-architecture.md) エンジンで実行されます。 |
 | TiDB Cloud **Essential** | デフォルトでは、クラシック [TiDB v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3/) カーネルをベースにしたカスタマイズ版 [TiDB X](/tidb-cloud/tidb-x-architecture.md) エンジンで実行されます。 |
 | TiDB Cloud **Premium** | [TiDB X](/tidb-cloud/tidb-x-architecture.md) カーネルの [`TiDB-X-CLOUD.202510.1`](/tidb-cloud/releases/tidb-x-cloud.202510.1.md) バージョンで実行されます。 |
-| TiDB Cloud **Dedicated** | クラシック TiDB カーネルで実行され、カーネルバージョンは TiDB Self-Managed のバージョンに直接対応します。現在、新しく作成された TiDB Cloud Dedicated クラスターのデフォルト TiDB バージョンは [v8.5.7](https://docs.pingcap.com/tidb/stable/release-8.5.7/) です。 |
+| TiDB Cloud **Dedicated** | クラシック TiDB カーネルで実行され、カーネルバージョンは TiDB Self-Managed のバージョンに直接対応します。現在、新しく作成された TiDB Cloud Dedicated クラスターのデフォルト TiDB バージョンは [v8.5.8](https://docs.pingcap.com/tidb/stable/release-8.5.8/) です。 |
 
 > **Note:**
 >

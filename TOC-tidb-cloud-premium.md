@@ -64,10 +64,12 @@
       - [PagerDuty経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)
       - [Webhook経由で購読する](/tidb-cloud/monitor-alert-webhook.md)
       - [Lark経由で購読する](/tidb-cloud/monitor-alert-lark.md)
+    - [イベント](/tidb-cloud/tidb-cloud-events.md)
     - [TiDB CloudをDatadogと統合する](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
   - チューニングパフォーマンス
     - [概要](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [パフォーマンスを分析する](/tidb-cloud/tune-performance.md)
+    - [Plan Replayer を使用して SQL パフォーマンスをトラブルシューティングする](/tidb-cloud/plan-replayer.md)
     - SQLチューニング
       - [概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
       - クエリ実行計画の理解

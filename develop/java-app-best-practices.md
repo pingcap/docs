@@ -70,7 +70,7 @@ JDBCでは通常、以下の2つの処理方法が使用されます。
 
     クライアントが`resultset`読み取りを完了または閉じる前にクエリでこのようなエラーが発生するのを回避するには、URL に`clobberStreamingResults=true`パラメータを追加します。そうすると、 `resultset`は自動的に閉じられますが、前のストリーミング クエリで読み取られる結果セットは失われます。
 
-- 2番目の方法：まず[`FetchSize`設定](http://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html)、次にJDBC URLで`useCursorFetch = true`を設定することで、カーソルフェッチを使用します。
+- 2番目の方法：まず[`FetchSize`設定](https://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html)、次にJDBC URLで`useCursorFetch = true`を設定することで、カーソルフェッチを使用します。
 
 TiDBは両方の方法をサポートしていますが、実装がよりシンプルで実行効率も優れているため、 `FetchSize`を`Integer.MIN_VALUE`に設定する最初の方法を使用することをお勧めします。
 

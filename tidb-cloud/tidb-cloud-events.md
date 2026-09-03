@@ -5,9 +5,9 @@ summary: Events ページを使用して TiDB Cloud リソースのイベント�
 
 # Events
 
-<CustomContent plan="starter,essential">
+<CustomContent plan="starter,essential,premium">
 
-{{{ .starter }}} および Essential インスタンスでは、TiDB Cloud はインスタンスレベルで履歴イベントを記録します。*event* は、{{{ .starter }}} または Essential インスタンスに発生した変更を示します。記録されたイベントは **Events** ページで確認でき、イベントタイプ、ステータス、メッセージ、トリガー時刻、トリガーしたユーザーが表示されます。
+{{{ .starter }}}、Essential、および Premium インスタンスでは、TiDB Cloud はインスタンスレベルで履歴イベントを記録します。*event* は、{{{ .starter }}}、Essential、または Premium インスタンスに発生した変更を示します。記録されたイベントは **Events** ページで確認でき、イベントタイプ、ステータス、メッセージ、トリガー時刻、トリガーしたユーザーが表示されます。
 
 </CustomContent>
 
@@ -23,7 +23,7 @@ TiDB Cloud Dedicated クラスターでは、TiDB Cloud はクラスターレベ
 
 **Events** ページでイベントを表示するには、次の手順を実行します。
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs) ページで、対象の <CustomContent plan="starter,essential">{{{ .starter }}} または Essential インスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicated クラスター</CustomContent> の名前をクリックして、その概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs) ページで、対象の <CustomContent plan="starter,essential,premium">{{{ .starter }}}、Essential または Premium インスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicated クラスター</CustomContent> の名前をクリックして、その概要ページに移動します。
 
     > **Tip:**
     >
@@ -33,7 +33,9 @@ TiDB Cloud Dedicated クラスターでは、TiDB Cloud はクラスターレベ
 
 ## 記録されるイベント {#logged-events}
 
-TiDB Cloud は、次の種類のクラスターイベントを記録します。
+<CustomContent plan="starter,essential,dedicated">
+
+TiDB Cloud は、次の種類のイベントを記録します。
 
 | Event Type| Description |
 |:--- |:--- |
@@ -54,6 +56,42 @@ TiDB Cloud は、次の種類のクラスターイベントを記録します。
 | ImportData |   クラスターにデータをインポートする |  
 | UpdateSpendingLimit |   {{{ .starter }}} インスタンスの支出上限を更新する |  
 | ResourceLimitation |   {{{ .starter }}} または {{{ .essential }}} インスタンスのリソース制限を更新する |  
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+TiDB Cloud Premium は、次の種類のイベントを記録します。
+
+| Event Type| Description |
+|:--- |:--- |
+| CreateInstance |  インスタンスを作成する |  
+| CreateDataMigration  |  Data Migration タスクを作成する |
+| DeleteDataMigration |  Data Migration タスクを削除する |
+| PauseDataMigration |  Data Migration タスクを一時停止する  |  
+| ResumeDataMigration |  Data Migration タスクを再開する |  
+| ImportData |  データをインポートする |  
+| CreatePrivateEndpoint |  External Services 用の AWS Private Endpoint を作成する |  
+| DeletePrivateEndpoint |  External Services 用の AWS Private Endpoint を削除する |  
+| CreateChangefeed |  changefeed を作成する |  
+| ScaleChangefeed |  changefeed をスケールする |  
+| PauseChangefeed |  changefeed を一時停止する |  
+| ResumeChangefeed |  changefeed を再開する |  
+| EditChangefeed |  changefeed を編集する |  
+| DeleteChangefeed |  changefeed を削除する |  
+| BackupCluster |  クラスターをバックアップする |  
+| DeleteBackup |  バックアップを削除する|  
+| UpdateBackupSetting |  バックアップ設定を更新する |  
+| RestoreFromBackup |  バックアップから復元する |  
+| CreateExport |  エクスポートを作成する |  
+| CancelExport |  エクスポートをキャンセルする |  
+| DeleteExport |  エクスポートを削除する |  
+| RestoreInstance |  インスタンスに復元する |  
+| UpdatePublicEndpoint |  パブリックエンドポイントを更新する |  
+| UpdateClusterCapacity |  インスタンス容量を更新する |  
+| CreatePrivateLink | PrivateLink Endpoint を作成する  |
+
+</CustomContent>
 
 各イベントについて、次の情報が記録されます。
 

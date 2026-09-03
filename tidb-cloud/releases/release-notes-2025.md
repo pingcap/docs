@@ -395,7 +395,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
     今後は、Alibaba Cloud のリージョン カバレッジを拡大し、AWS サポートを追加する予定です。
 
-    このプレビュー期間中に Essential on Alibaba Cloud をお試しいただくと、Web コンソールからフィードバックを共有したり、 [Slack](https://tidbcommunity.slack.com/archives/CH7TTLL7P)または[Discord](https://discord.gg/ukhXbn69Nx)コミュニティに参加したりできます。
+    このプレビュー期間中に Essential on Alibaba Cloud をお試しいただくと、Web コンソールからフィードバックを共有したり、 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=docs)または[Discord](https://discord.gg/ukhXbn69Nx)コミュニティに参加したりできます。
 
 - **TiDB Cloud Dedicated**
 
