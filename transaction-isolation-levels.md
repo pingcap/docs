@@ -36,7 +36,7 @@ TiDB implements Snapshot Isolation (SI) consistency, which it advertises as `REP
 
 ## Repeatable Read isolation level
 
-The Repeatable Read isolation level only sees data committed before the transaction begins, and it never sees either uncommitted data or changes committed during transaction execution by concurrent transactions. However, within its own transaction, a statement does see the effects of updates made by previous statements in that transaction, even though those updates are not yet committed.
+The Repeatable Read isolation level only sees data committed before the transaction begins, and it never sees either uncommitted data or changes committed during transaction execution by concurrent transactions. However, a statement within the transaction can see changes made by previous statements in the same transaction, even if those changes are not yet committed.
 
 For transactions running on different nodes, the start and commit order depends on the order that the timestamp is obtained from PD.
 
