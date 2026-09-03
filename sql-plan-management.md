@@ -201,7 +201,7 @@ explain SELECT * FROM t1, t2 WHERE t1.id = t2.id;
 
 When the first `SELECT` statement is being executed, the optimizer adds the `sm_join(t1, t2)` hint to the statement through the binding in the GLOBAL scope. The top node of the execution plan in the `explain` result is MergeJoin. When the second `SELECT` statement is being executed, the optimizer uses the binding in the SESSION scope instead of the binding in the GLOBAL scope and adds the `hash_join(t1, t2)` hint to the statement. The top node of the execution plan in the `explain` result is HashJoin.
 
-Each standardized SQL statement can have only one binding created using `CREATE BINDING` at a time. When multiple bindings are created for the same standardized SQL statement, the last created binding is retained, and all previous bindings (created and evolved) are marked as deleted. But session bindings and global bindings can coexist and are not affected by this logic.
+Each normalized SQL statement can have only one binding created using `CREATE BINDING` at a time. When multiple bindings are created for the same normalized SQL statement, the last created binding is retained, and all previous bindings (created and evolved) are marked as deleted. But session bindings and global bindings can coexist and are not affected by this logic.
 
 In addition, when you create a binding, TiDB requires that the session is in a database context, which means that a database is specified when the client is connected or `use ${database}` is executed.
 
@@ -838,9 +838,9 @@ To reduce the impact that the automatic evolution has on clusters, use the follo
 
 Because the baseline evolution automatically creates a new binding, when the query environment changes, the automatically created binding might have multiple behavior choices. Pay attention to the following notes:
 
-+ Baseline evolution only evolves standardized SQL statements that have at least one global binding.
++ Baseline evolution only evolves normalized SQL statements that have at least one global binding.
 
-+ Because creating a new binding deletes all previous bindings (for a standardized SQL statement), the automatically evolved binding will be deleted after manually creating a new binding.
++ Because creating a new binding deletes all previous bindings (for a normalized SQL statement), the automatically evolved binding will be deleted after manually creating a new binding.
 
 + All hints related to the calculation process are retained during the evolution. These hints are as follows:
 
