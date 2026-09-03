@@ -104,4 +104,4 @@ Plan Replayer ファイルは一時的な診断用アーティファクトです
 
 ## 関連ドキュメント {#related-documentation}
 
-[TiDB: Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluster](https://docs.pingcap.com/tidb/stable/sql-plan-replayer/)
+[PLAN REPLAYERを使用してクラスタのオンサイト情報を保存および復元する](https://docs.pingcap.com/tidb/stable/sql-plan-replayer/)
