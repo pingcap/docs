@@ -294,7 +294,7 @@ SELECT tidb_decode_plan('8QIYMAkzMV83CQEH8E85LjA0CWRhdGE6U2VsZWN0aW9uXzYJOTYwCXR
 
 ## TIDB_DECODE_SQL_DIGESTS
 
-The `TIDB_DECODE_SQL_DIGESTS()` function is used to query the normalized SQL statements (without value formats or arguments) corresponding to the set of SQL digests in the cluster. This function accepts 1 or 2 arguments:
+The `TIDB_DECODE_SQL_DIGESTS()` function is used to query the normalized SQL statements (in which literal values are replaced with placeholders such as `?` or `...`) corresponding to the set of SQL digests in the cluster. This function accepts 1 or 2 arguments:
 
 * `digests`: A string. This parameter is in the format of a JSON string array, and each string in the array is a SQL digest.
 * `stmtTruncateLength`: An integer (optional). It is used to limit the length of each SQL statement in the returned result. If a SQL statement exceeds the specified length, the statement is truncated. `0` means that the length is unlimited.
