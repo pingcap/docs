@@ -104,4 +104,4 @@ Plan Replayer 文件是临时的诊断产物。TiDB 可能会在其保留时间�
 
 ## 相关文档 {#related-documentation}
 
-[TiDB: Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluster](https://docs.pingcap.com/tidb/stable/sql-plan-replayer/)
+[使用 PLAN REPLAYER 保存和恢复集群现场信息](https://docs.pingcap.com/zh/tidb/stable/sql-plan-replayer/)
