@@ -210,7 +210,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
     - s3:GetObject
     - s3:GetObjectVersion
-    - s3:リストバケット
+    - s3:ListBucket
     - s3:GetBucketLocation
 
     S3バケットがサーバー側暗号化（SSE-KMS）を使用している場合は、KMS権限も追加する必要があります。
