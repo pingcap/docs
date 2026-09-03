@@ -42,7 +42,7 @@ GRANT SELECT(col1, col2), UPDATE(col3) ON test.tbl TO 'user'@'host';
 
 ## 例：列レベルの権限を付与する {#example-grant-column-level-privileges}
 
-次の例では、ユーザー`newuser`にテーブル`test.tbl`内の`col1`および`col2`に対する`SELECT`権限を付与し、同じユーザーに`UPDATE`に対する`col3`権限を付与します。
+次の例では、ユーザー`newuser`にテーブル`test.tbl`内の`col1`および`col2`に対する`SELECT`権限を付与し、同じユーザーに`col3`に対する`UPDATE`権限を付与します。
 
 ```sql
 CREATE DATABASE IF NOT EXISTS test;
