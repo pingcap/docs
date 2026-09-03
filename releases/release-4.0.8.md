@@ -33,7 +33,7 @@ TiDB バージョン: 4.0.8
     - コプロセッサー実行時統計にRPC実行時情報をさらに記録します。 [#19264](https://github.com/pingcap/tidb/pull/19264)
     - スローログの解析を高速化してクエリパフォーマンスを向上させる[#20556](https://github.com/pingcap/tidb/pull/20556)
     - SQL オプティマイザが潜在的な新しいプランを検証しているときに、より多くのデバッグ情報を記録するために、プランバインディング ステージ中にタイムアウト実行計画を待機します[#20530](https://github.com/pingcap/tidb/pull/20530)
-    - スローログに実行再試行時間を追加し、スロークエリの結果[#20495](https://github.com/pingcap/tidb/pull/20495) [#20494](https://github.com/pingcap/tidb/pull/20494)
+    - スローログとスロークエリの結果に実行再試行時間を追加する [#20495](https://github.com/pingcap/tidb/pull/20495) [#20494](https://github.com/pingcap/tidb/pull/20494)
     - `table_storage_stats`システムテーブルを追加する [#20431](https://github.com/pingcap/tidb/pull/20431)
     - `INSERT` / `UPDATE` / `REPLACE`文のRPC実行時統計情報を追加する[#20430](https://github.com/pingcap/tidb/pull/20430)
     - `EXPLAIN FOR CONNECTION` の結果に演算子情報を追加します [#20384](https://github.com/pingcap/tidb/pull/20384)
