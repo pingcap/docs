@@ -186,7 +186,7 @@ tiproxyctl traffic cancel --host 10.0.1.10 --port 3080
 
 - TiProxyは、TiProxyによってキャプチャされたトラフィックファイルの再生のみをサポートしており、他のファイル形式はサポートしていません。そのため、まずはTiProxyを使用して本番クラスタからトラフィックをキャプチャしてください。
 - TiProxyトラフィックの再生はSQLタイプのフィルタリングをサポートしておらず、DMLおよびDDL文が再生されます。そのため、再度再生する前に、クラスターデータを再生前の状態に復元する必要があります。
-- TiProxy トラフィック再生では、トラフィックの再生に同じユーザー名が使用されるため、テスト[リソース管理](/tidb-resource-control-ru-groups.md)と[権限管理](/privilege-management.md)がサポートされません。
+- TiProxy トラフィック再生では、トラフィックの再生に同じユーザー名が使用されるため、[リソース管理](/tidb-resource-control-ru-groups.md)と[権限管理](/privilege-management.md)のテストはサポートされません。
 - TiProxy は[`LOAD DATA`](/sql-statements/sql-statement-load-data.md)ステートメントの再生をサポートしていません。
 
 ## その他のリソース {#more-resources}
