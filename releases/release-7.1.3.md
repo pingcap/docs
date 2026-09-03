@@ -126,7 +126,7 @@ TiDB バージョン: 7.1.3
     - クエリ中にTiFlash がメモリ制限に遭遇するとメモリリークが発生する問題を修正しました。 [＃8447](https://github.com/pingcap/tiflash/issues/8447) @[JinheLin](https://github.com/JinheLin)
     - `FLASHBACK DATABASE` を実行した後もTiFlashレプリカのデータがガベージコレクションされる問題を修正しました [＃8450](https://github.com/pingcap/tiflash/issues/8450) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Grafana の一部のパネルの最大パーセンタイル時間の表示が誤っていた問題を修正 [＃8076](https://github.com/pingcap/tiflash/issues/8076) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - クエリが予期しないエラーメッセージ「FineGrainedShuffleWriter-V1 でブロックスキーマが一致しません」を返す問題を修正[＃8111](https://github.com/pingcap/tiflash/issues/8111) @[SeaRise](https://github.com/SeaRise)
+    - クエリが予期しないエラーメッセージ「Block schema mismatch in FineGrainedShuffleWriter-V1」を返す問題を修正[＃8111](https://github.com/pingcap/tiflash/issues/8111) @[SeaRise](https://github.com/SeaRise)
 
 - ツール
 

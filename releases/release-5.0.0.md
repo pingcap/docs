@@ -77,7 +77,7 @@ TiDB バージョン: 5.0.0
 
 ### その他 {#others}
 
-- アップグレード前に、TiDB構成の[`feedback-probability`](https://docs-archive.pingcap.com/tidb/v5.0/tidb-configuration-file#feedback-probability)の値を確認してください。値が0でない場合、アップグレード後に「回復可能なゴルーチンでpanicが発生しました」というエラーが発生しますが、このエラーはアップグレード自体には影響しません。
+- アップグレード前に、TiDB 設定の[`feedback-probability`](https://docs-archive.pingcap.com/tidb/v5.0/tidb-configuration-file#feedback-probability)の値を確認してください。値が0でない場合、アップグレード後に「panic in the recoverable goroutine」というエラーが発生しますが、このエラーはアップグレード自体には影響しません。
 - 列の型変更時に、 `VARCHAR`型と`CHAR`型の間の変換を禁止し、データの正確性に関する問題を回避する。
 
 ## 新機能 {#new-features}

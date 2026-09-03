@@ -59,13 +59,13 @@ TiDB バージョン: 5.1.0
 
 ### その他 {#others}
 
-- アップグレード前に、TiDB構成の[`feedback-probability`](https://docs-archive.pingcap.com/tidb/v5.1/tidb-configuration-file#feedback-probability)の値を確認してください。値が0でない場合、アップグレード後に「回復可能なゴルーチンでpanicが発生しました」というエラーが発生しますが、このエラーはアップグレード自体には影響しません。
+- アップグレード前に、TiDB 設定の[`feedback-probability`](https://docs-archive.pingcap.com/tidb/v5.1/tidb-configuration-file#feedback-probability)の値を確認してください。値が0でない場合、アップグレード後に「panic in the recoverable goroutine」というエラーが発生しますが、このエラーはアップグレード自体には影響しません。
 - TiDBのパフォーマンスを向上させるため、TiDBのGoコンパイラバージョンをgo1.13.7からgo1.16.4にアップグレードしてください。TiDB開発者の方は、スムーズなコンパイルを保証するために、Goコンパイラバージョンをアップグレードすることをお勧めします。
 - TiDBローリングアップグレード中は、TiDB Binlogを使用するクラスタでクラスター化インデックスを持つテーブルを作成しないようにしてください。
 - TiDB のローリングアップグレード中は`alter table ... modify column`や`alter table ... change column`のようなステートメントを実行しないでください。
 - バージョン5.1以降、各テーブルのTiFlashレプリカを作成する際に、システムテーブルのレプリカを設定する機能はサポートされなくなりました。クラスタをアップグレードする前に、関連するシステムテーブルのレプリカをクリアする必要があります。クリアしないと、アップグレードは失敗します。
 - TiCDC の`--sort-dir`コマンドの`cdc cli changefeed`パラメータは非推奨です。代わりに、 `--sort-dir`コマンドで`cdc server` を設定できます。 [#1795](https://github.com/pingcap/tiflow/pull/1795)
-- TiDB 5.1 にアップグレードした後、TiDB が「関数 READ ONLY には noop 実装しかありません」というエラーを返す場合、 [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)の値を`ON`に設定することで、TiDB がこのエラーを無視するようにできます。これは、MySQL の`read_only`変数が TiDB ではまだ有効になっていないためです (TiDB では「noop」動作です)。したがって、この変数が TiDB で設定されていても、TiDB クラスタにデータを書き込むことができます。
+- TiDB 5.1 にアップグレードした後、TiDB が「function READ ONLY has only noop implementation」というエラーを返す場合、 [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)の値を`ON`に設定することで、TiDB がこのエラーを無視するようにできます。これは、MySQL の`read_only`変数が TiDB ではまだ有効になっていないためです (TiDB では「noop」動作です)。したがって、この変数が TiDB で設定されていても、TiDB クラスタにデータを書き込むことができます。
 
 ## 新機能 {#new-features}
 

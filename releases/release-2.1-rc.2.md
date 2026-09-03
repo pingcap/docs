@@ -45,7 +45,7 @@ summary: TiDB 2.1 RC2は2018年9月14日にリリースされ、安定性、SQL�
     - 監視メトリクスで内部SQLとユーザーSQLをフィルタリングするために異なるラベルを使用する [＃7631](https://github.com/pingcap/tidb/pull/7631)
     - 過去1週間のスロークエリ上位30件をTiDBサーバーに保存する [＃7646](https://github.com/pingcap/tidb/pull/7646)
     - TiDBクラスタのグローバルシステムタイムゾーンを設定する提案を提出する [＃7656](https://github.com/pingcap/tidb/pull/7656)
-    - 「GCの有効期間がトランザクション期間より短い」というエラーメッセージを充実させる[＃7658](https://github.com/pingcap/tidb/pull/7658)
+    - 「GC life time is shorter than transaction duration」というエラーメッセージを充実させる[＃7658](https://github.com/pingcap/tidb/pull/7658)
     - TiDBクラスタを起動するときにグローバルシステムのタイムゾーンを設定する [＃7638](https://github.com/pingcap/tidb/pull/7638)
 - 互換性
     - `Year`型に符号なしフラグを追加 [＃7542](https://github.com/pingcap/tidb/pull/7542)
