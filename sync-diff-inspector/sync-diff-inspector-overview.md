@@ -262,15 +262,15 @@ output/
 
 ### ログ {#log}
 
-sync-diff-inspector のログは`${output}/sync_diff.log`に保存され、その中で`${output}`は`output-dir`ファイル内の`config.toml`の値です。
+sync-diff-inspector のログは`${output}/sync_diff.log`に保存され、その中で`${output}`は`config.toml`ファイル内の`output-dir`の値です。
 
 ### 進捗 {#progress}
 
-実行中の sync-diff-inspector は定期的に (10秒ごと) チェックポイントの進行状況を出力。チェックポイントは`${output}/checkpoint/sync_diff_checkpoints.pb`にあり、その中で`${output}`は`output-dir`ファイル内の`config.toml`の値です。
+実行中の sync-diff-inspector は定期的に (10秒ごと) チェックポイントの進行状況を出力します。チェックポイントは`${output}/checkpoint/sync_diff_checkpoints.pb`にあり、その中で`${output}`は`config.toml`ファイル内の`output-dir`の値です。
 
 ### 結果 {#result}
 
-チェックが完了すると、sync-diff-inspector はレポートを出力します。レポートは`${output}/summary.txt`にあり、 `${output}`は`output-dir`ファイル内の`config.toml` } の値です。
+チェックが完了すると、sync-diff-inspector はレポートを出力します。レポートは`${output}/summary.txt`にあり、 `${output}`は`config.toml`ファイル内の`output-dir`の値です。
 
 ```
 +---------------------+--------------------+----------------+---------+-----------+

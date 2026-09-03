@@ -355,7 +355,7 @@ SHOW TABLES IN `bookshop`;
 - パフォーマンス上の理由から、幅の広いテーブルを保存することは避けてください。テーブルフィールドの数が`60`を超え、1行のデータの合計サイズが`64K`超えることは推奨されません。データ長が長すぎるフィールドは、別のテーブルに分割することをお勧めします。
 - 複雑なデータ型を使用することは推奨されません。
 - 結合するフィールドについては、データ型が一致していることを確認し、暗黙的な型変換を避けてください。
-- 単一の単調データ列に**主キー**を定義することは避けてください。単一の単調データ列（たとえば、 `AUTO_INCREMENT`属性を持つ列）を使用して**主キー**を定義すると、書き込みパフォーマンスに影響が出る可能性があります。可能であれば、 `AUTO_RANDOM`ではなく`AUTO_INCREMENT` }を使用してください。これにより、主キーの連続性および増分属性が破棄されます。
+- 単一の単調データ列に**主キー**を定義することは避けてください。単一の単調データ列（たとえば、 `AUTO_INCREMENT`属性を持つ列）を使用して**主キー**を定義すると、書き込みパフォーマンスに影響が出る可能性があります。可能であれば、 `AUTO_INCREMENT`ではなく`AUTO_RANDOM`を使用してください。これにより、主キーの連続性および増分属性が破棄されます。
 - 書き込み集中シナリオで単一の単調データ列にインデックスを作成する必要がある場合は、この単調データ列を**主キー**として定義する代わりに、 `AUTO_RANDOM`を使用してそのテーブルの**主キー**を作成するか、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)と[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)を使用して`_tidb_rowid`をシャーディングすることができます。
 
 ### クラスター化インデックスを選択する際に従うべきガイドライン {#guidelines-to-follow-when-selecting-clustered-index}
@@ -372,7 +372,7 @@ SHOW TABLES IN `bookshop`;
     - 近い値を持つ主キーを多数挿入すると、書き込みホットスポットの問題が発生する可能性があります。 [主キーを選択する際に従うべきガイドライン](#guidelines-to-follow-when-selecting-primary-key)てください。
     - 主キーのデータ型が64ビットより大きい場合、特にセカンダリインデックスが複数存在する場合は、テーブルデータがより多くのストレージ容量を消費します。
 
-- [クラスター化インデックスを使用するかどうかのデフォルトの動作](/clustered-indexes.md#create-a-table-with-clustered-indexes)を制御するには、システム変数`@@global.tidb_enable_clustered_index`と構成`alter-primary-key` } を使用する代わりに、クラスター化インデックスを使用するかどうかを明示的に指定できます。
+- [クラスター化インデックスを使用するかどうかのデフォルトの動作](/clustered-indexes.md#create-a-table-with-clustered-indexes)を制御するには、システム変数`@@global.tidb_enable_clustered_index`と構成`alter-primary-key`を使用する代わりに、クラスター化インデックスを使用するかどうかを明示的に指定できます。
 
 ### `CREATE TABLE`文を実行する際に従うべきガイドライン {#guidelines-to-follow-when-executing-the-create-table-statement}
 

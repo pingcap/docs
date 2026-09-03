@@ -7081,7 +7081,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Enumeration
 - デフォルト値: `1`
-- 値オプション: TiDB Self-Managed および TiDB Cloud Dedicated の場合は`0` 、 `1` `2` }、 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合は`1`および`2`
+- 値オプション: TiDB Self-Managed および[TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)の場合は`0`、`1`、`2`、[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合は`1`および`2`
 - この変数は、パスワードの複雑性チェックのポリシーを制御します。この変数は、 [`validate_password.enable`](#password_reuse_interval-new-in-v650)が有効になっている場合にのみ有効になります。この変数の値によって、 `validate_password.check_user_name`を除く他の`validate-password`変数がパスワードの複雑性チェックで有効になるかどうかが決まります。
 - この変数の値は`0` 、 `1` 、または`2` （それぞれLOW、MEDIUM、STRONGに対応）のいずれかになります。ポリシーレベルによってチェック項目が異なります。
     - 0またはLOW：パスワードの長さ。

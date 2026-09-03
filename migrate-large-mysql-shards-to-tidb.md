@@ -345,7 +345,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 
 ### 移行状況を確認する {#check-the-migration-status}
 
-`query-status` `tiup dmctl` } コマンドを実行すると、DM クラスターで実行中の移行タスクとそのステータスを確認できます。
+`tiup dmctl`で`query-status`コマンドを実行すると、DM クラスターで実行中の移行タスクとそのステータスを確認できます。
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}

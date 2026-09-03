@@ -348,7 +348,7 @@ console.log(rsh.insertId);
 
 ### クエリデータ {#query-data}
 
-次のクエリは、ID `Player` `1` } レコードを返します。
+次のクエリは、ID `1`の`Player`レコードを返します。
 
 ```typescript
 const [rows] = await pool.query('SELECT id, coins, goods FROM players WHERE id = ?;', [1]);

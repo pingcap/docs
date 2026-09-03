@@ -78,7 +78,7 @@ Alibaba Cloud上にインターフェースエンドポイントを作成した�
 
     - **Firewall Rule Name**：この接続を識別するための名前を入力してください。
 
-    - **Your Endpoint ID** : Alibaba Cloud 管理コンソールから取得した 23 文字のエンドポイント ID ( `ep-` } で始まる) を貼り付けてください。
+    - **Your Endpoint ID** : Alibaba Cloud 管理コンソールから取得した 23 文字のエンドポイント ID ( `ep-`で始まる) を貼り付けてください。
 
     > **Tip:**
     >

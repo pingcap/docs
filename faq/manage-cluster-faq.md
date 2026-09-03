@@ -227,7 +227,7 @@ TiClientリージョンエラーインジケータは、TiDBサーバーがク�
 
 ### TiDBがサポートする同時接続の最大数はいくつですか？ {#what-s-the-maximum-number-of-concurrent-connections-that-tidb-supports}
 
-デフォルトでは、TiDBサーバーあたりの最大接続数に制限はありません。必要に応じて、 `instance.max_connections`ファイルで`config.toml` }を設定するか、システム変数[`max_connections`](/system-variables.md#max_connections)の値を変更することで、最大接続数を制限できます。同時接続数が多すぎると応答時間が長くなる場合は、TiDBノードを追加して容量を増やすことをお勧めします。
+デフォルトでは、TiDBサーバーあたりの最大接続数に制限はありません。必要に応じて、 `config.toml`ファイルで`instance.max_connections`を設定するか、システム変数[`max_connections`](/system-variables.md#max_connections)の値を変更することで、最大接続数を制限できます。同時接続数が多すぎると応答時間が長くなる場合は、TiDBノードを追加して容量を増やすことをお勧めします。
 
 ### テーブルの作成時刻を確認するにはどうすればよいですか？ {#how-to-view-the-creation-time-of-a-table}
 

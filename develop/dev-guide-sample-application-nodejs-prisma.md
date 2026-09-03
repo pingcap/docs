@@ -375,7 +375,7 @@ await prisma.player.update({
 
 ### データを削除する {#delete-data}
 
-以下のクエリは、IDが`Player`である`101` }を削除します。
+以下のクエリは、IDが`101`である`Player`を削除します。
 
 ```javascript
 await prisma.player.delete({

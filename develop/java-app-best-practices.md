@@ -331,7 +331,7 @@ MyBatis Mapperは2つのパラメータをサポートしています。
 - `ResultHandler`を使用したクエリ インターフェースを使用すると、結果セット全体を一度に取得することを避けることができます。
 - ストリーム読み取りには`Cursor`クラスを使用できます。
 
-XML を使用してマッピングを設定する場合、マッピングの`fetchSize="-2147483648"`セクションで`Integer.MIN_VALUE` } ( `<select>` ) を設定することで、読み取り結果をストリーミングできます。
+XML を使用してマッピングを設定する場合、マッピングの`<select>`セクションで`fetchSize="-2147483648"`（`Integer.MIN_VALUE`）を設定することで、読み取り結果をストリーミングできます。
 
 ```xml
 <select id="getAll" resultMap="postResultMap" fetchSize="-2147483648">
@@ -349,7 +349,7 @@ Cursor<Post> queryAllPost();
 
 ### `ExecutorType` {#executortype}
 
-`ExecutorType`の間に { `openSession` } を選択できます。MyBatis は 3種類の実行エンジンをサポートしています。
+`openSession`の間に`ExecutorType`を選択できます。MyBatis は 3種類の実行エンジンをサポートしています。
 
 - Simple: プリペアドステートメントは、実行ごとにJDBCに呼び出されます（JDBC設定項目`cachePrepStmts`が有効になっている場合、繰り返し実行されるプリペアドステートメントは再利用されます）。
 - Reuse: プリペアドステートメントは`executor`にキャッシュされるため、JDBC `cachePrepStmts`を使用せずにプリペアドステートメントの重複呼び出しを減らすことができます。
