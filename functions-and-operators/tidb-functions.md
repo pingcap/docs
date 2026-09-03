@@ -17,7 +17,7 @@ The following functions are TiDB extensions, and are not present in MySQL:
 | [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Decodes binary plans. |
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key) | Decodes a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and logging outputs. |
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | Decodes a TiDB execution plan. |
-| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | Queries the normalized SQL statements (without value formats or arguments) corresponding to a set of SQL digests in the cluster. |
+| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | Queries the normalized SQL statements (in which literal values are replaced with placeholders such as `?` or `...`) corresponding to a set of SQL digests in the cluster. |
 | [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key) | Encodes an index key. |
 | [`TIDB_ENCODE_RECORD_KEY()`](#tidb_encode_record_key) | Encodes a record key. |
 | [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest) | Gets a digest for a query string. |
