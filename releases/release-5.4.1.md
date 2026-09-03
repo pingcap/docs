@@ -67,7 +67,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
     - v4.0 からアップグレードされたクラスターで`all`権限の付与が失敗する可能性がある問題を修正しました [＃33588](https://github.com/pingcap/tidb/issues/33588)
     - MySQLバイナリプロトコルでテーブルスキーマを変更した後にプリペアドステートメントを実行するときに発生するセッションpanicを修正しました [＃33509](https://github.com/pingcap/tidb/issues/33509)
     - `tidb_enable_vectorized_expression`有効になっている`compress()`式を持つ SQL 文を実行すると失敗する問題を修正しました[＃33397](https://github.com/pingcap/tidb/issues/33397)
-    - `reArrangeFallback`機能によるCPU使用率の高騰の問題を修正 [＃30353](https://github.com/pingcap/tidb/issues/30353)
+    - `reArrangeFallback`関数によるCPU使用率の高騰の問題を修正 [＃30353](https://github.com/pingcap/tidb/issues/30353)
     - 新しいパーティションが追加されたときにテーブル属性がインデックスされない問題と、パーティションが変更されたときにテーブル範囲情報が更新されない問題を修正しました[＃33929](https://github.com/pingcap/tidb/issues/33929)
     - 初期化中のテーブルの`TopN`情報が正しくソートされないバグを修正しました[＃34216](https://github.com/pingcap/tidb/issues/34216)
     - 識別できないテーブル属性をスキップして、テーブル`INFORMATION_SCHEMA.ATTRIBUTES`からの読み取り時に発生するエラーを修正します [＃33665](https://github.com/pingcap/tidb/issues/33665)

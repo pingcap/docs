@@ -22,7 +22,7 @@ TiDB Ansible バージョン: 2.1.8
 - `DATE_ADD`と`DATE_SUB`関数間の互換性の問題を修正
     - [＃9963](https://github.com/pingcap/tidb/pull/9963)
     - [＃9966](https://github.com/pingcap/tidb/pull/9966)
-- 互換性を向上させるために、 `STR_TO_DATE`機能の`%H`フォーマットをサポートする[＃9964](https://github.com/pingcap/tidb/pull/9964)
+- 互換性を向上させるために、 `STR_TO_DATE`関数の`%H`フォーマットをサポートする[＃9964](https://github.com/pingcap/tidb/pull/9964)
 - `GROUP_CONCAT`関数が一意インデックスでグループ化されたときに結果が間違っている問題を修正しました [＃9969](https://github.com/pingcap/tidb/pull/9969)
 - オプティマイザヒントに一致しないテーブル名が含まれている場合に警告を返す[＃9970](https://github.com/pingcap/tidb/pull/9970)
 - ログ形式を統一し、分析ツールを使用してログを収集しやすくする統合ログ形式

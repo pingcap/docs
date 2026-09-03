@@ -43,7 +43,7 @@ TiDB バージョン: 3.0.20
     - 等価条件の1つが`Enum`または`Set`タイプである場合に、潜在的に誤った結果を修正します。 [＃20296](https://github.com/pingcap/tidb/pull/20296)
     - `!= any()` の誤った動作を修正する [＃20061](https://github.com/pingcap/tidb/pull/20061)
     - `BETWEEN...AND...`型変換で無効な結果が返される問題を修正[＃21503](https://github.com/pingcap/tidb/pull/21503)
-    - `ADDDATE`機能の互換性の問題を修正 [＃21008](https://github.com/pingcap/tidb/pull/21008)
+    - `ADDDATE`関数の互換性の問題を修正 [＃21008](https://github.com/pingcap/tidb/pull/21008)
     - 新しく追加された`Enum`列の正しいデフォルト値を設定する [＃20999](https://github.com/pingcap/tidb/pull/20999)
     - `SELECT DATE_ADD('2007-03-28 22:08:28',INTERVAL "-2.-2" SECOND)`ようなSQL文の結果をMySQL と互換性があるように修正します [＃20627](https://github.com/pingcap/tidb/pull/20627)
     - 列タイプを変更するときに誤ったデフォルト値を修正 [＃20532](https://github.com/pingcap/tidb/pull/20532)

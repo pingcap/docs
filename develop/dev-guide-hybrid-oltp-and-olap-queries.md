@@ -139,7 +139,7 @@ SELECT * FROM acc;
 
 TiDB は、より多くの分析ステートメントのために、集約されていない[ウィンドウ関数](/functions-and-operators/window-functions.md)もいくつか提供します。
 
-たとえば、 [ページネーションクエリ](/develop/dev-guide-paginate-results.md)ドキュメントでは、 `row_number()`機能を使用して効率的なページ区切りのバッチ処理を実現する方法を紹介しています。
+たとえば、 [ページネーションクエリ](/develop/dev-guide-paginate-results.md)ドキュメントでは、 `row_number()`関数を使用して効率的なページ区切りのバッチ処理を実現する方法を紹介しています。
 
 ## ハイブリッドワークロード {#hybrid-workload}
 

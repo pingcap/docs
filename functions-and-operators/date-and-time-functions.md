@@ -100,4 +100,4 @@ TiDB は、MySQL 8.0 で利用可能な[日付と時刻関数](https://dev.mysql
 
 ## 関連するシステム変数 {#related-system-variables}
 
-[`default_week_format`](/system-variables.md#default_week_format)変数は`WEEK()`機能に影響します。
+[`default_week_format`](/system-variables.md#default_week_format)変数は`WEEK()`関数に影響します。

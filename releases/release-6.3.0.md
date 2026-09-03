@@ -297,9 +297,9 @@ TiDBバージョン: 6.3.0-DMR
 - TiFlash
 
     - `elt` 関数の TiFlash へのプッシュダウンをサポート [#5104](https://github.com/pingcap/tiflash/issues/5104) @[Willendless](https://github.com/Willendless)
-    - TiFlashへの`leftShift`機能のプッシュダウンをサポートします [#5099](https://github.com/pingcap/tiflash/issues/5099) @[AnnieoftheStars](https://github.com/AnnieoftheStars)
+    - TiFlashへの`leftShift`関数のプッシュダウンをサポートします [#5099](https://github.com/pingcap/tiflash/issues/5099) @[AnnieoftheStars](https://github.com/AnnieoftheStars)
     - `castTimeAsDuration` 関数の TiFlash へのプッシュダウンのサポート [#5306](https://github.com/pingcap/tiflash/issues/5306) @[AntiTopQuark](https://github.com/AntiTopQuark)
-    - TiFlashへの`HexIntArg/HexStrArg`機能のプッシュダウンをサポートします [#5107](https://github.com/pingcap/tiflash/issues/5107) @[YangKeao](https://github.com/YangKeao)
+    - TiFlashへの`HexIntArg/HexStrArg`関数のプッシュダウンをサポートします [#5107](https://github.com/pingcap/tiflash/issues/5107) @[YangKeao](https://github.com/YangKeao)
     - TiFlashのインタープリタをリファクタリングし、新しいインタープリタプランナーをサポートする [#4739](https://github.com/pingcap/tiflash/issues/4739) @[SeaRise](https://github.com/SeaRise)
     - TiFlashのメモリトラッカーの精度を向上 [#5609](https://github.com/pingcap/tiflash/issues/5609) @[bestwoody](https://github.com/bestwoody)
     - `UTF8_BIN/ASCII_BIN/LATIN1_BIN/UTF8MB4_BIN`照合順序を使用した文字列列のパフォーマンスを改善 [#5294](https://github.com/pingcap/tiflash/issues/5294) @[solotzg](https://github.com/solotzg)

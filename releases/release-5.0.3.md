@@ -30,18 +30,18 @@ TiDB バージョン: 5.0.3
 
 - TiDB
 
-    - `TopN`オペレーターをTiFlash にプッシュダウンするサポート [＃25162](https://github.com/pingcap/tidb/pull/25162)
+    - `TopN`オペレーターのTiFlashへのプッシュダウンをサポート [＃25162](https://github.com/pingcap/tidb/pull/25162)
     - 組み込み関数`json_unquote()`をTiKV にプッシュダウンする機能をサポート [＃24415](https://github.com/pingcap/tidb/issues/24415)
     - デュアルテーブルからユニオンブランチを削除することをサポート [＃25614](https://github.com/pingcap/tidb/pull/25614)
     - 内蔵機能`replace()` TiFlash にプッシュダウンする機能をサポート [＃25565](https://github.com/pingcap/tidb/pull/25565)
     - 組み込み関数`unix_timestamp()`、 `concat()`、 `year()`、 `day()`、 `datediff()`、 `datesub()`、 `concat_ws()`をTiFlashにプッシュダウンする機能をサポート [＃25564](https://github.com/pingcap/tidb/pull/25564)
     - 集計オペレーターのコスト係数を最適化する [＃25241](https://github.com/pingcap/tidb/pull/25241)
-    - `Limit`オペレーターをTiFlash にプッシュダウンするサポート [＃25159](https://github.com/pingcap/tidb/pull/25159)
+    - `Limit`オペレーターのTiFlashへのプッシュダウンをサポート [＃25159](https://github.com/pingcap/tidb/pull/25159)
     - 内蔵機能`str_to_date` TiFlash にプッシュダウンする機能をサポート [＃25148](https://github.com/pingcap/tidb/pull/25148)
     - MPP外部結合がテーブル行数に基づいてビルドテーブルを選択できるようにします。 [＃25142](https://github.com/pingcap/tidb/pull/25142)
     - `abs()`関数`left()` `right()` TiFlash にプッシュダウンする機能をサポート [＃25133](https://github.com/pingcap/tidb/pull/25133)
     - ブロードキャストカルテシアン結合をTiFlash にプッシュダウンする機能をサポート [＃25106](https://github.com/pingcap/tidb/pull/25106)
-    - `Union All`オペレーターをTiFlash にプッシュダウンするサポート [＃25051](https://github.com/pingcap/tidb/pull/25051)
+    - `Union All`オペレーターのTiFlashへのプッシュダウンをサポート [＃25051](https://github.com/pingcap/tidb/pull/25051)
     - リージョンに基づいて、異なるTiFlashノード間でMPPクエリワークロードのバランスをとることをサポート [＃24724](https://github.com/pingcap/tidb/pull/24724)
     - MPPクエリ実行後にキャッシュ内の古い領域を無効にする機能をサポート[＃24432](https://github.com/pingcap/tidb/pull/24432)
     - フォーマット指定子`%b/%M/%r/%T` の組み込み関数`str_to_date`の MySQL 互換性を改善しました [＃25767](https://github.com/pingcap/tidb/pull/25767)
@@ -58,12 +58,12 @@ TiDB バージョン: 5.0.3
 - TiFlash
 
     - `STRING`型から`DOUBLE`型へのキャストをサポート
-    - `STR_TO_DATE()`機能をサポートする
+    - `STR_TO_DATE()`関数をサポートする
     - 複数のスレッドを使用して右外部結合の非結合データを最適化する
     - デカルト結合をサポートする
     - `LEFT()`と`RIGHT()`関数をサポート
     - MPPクエリで古いリージョンを自動的に無効化する機能をサポート
-    - `ABS()`機能をサポートする
+    - `ABS()`関数をサポートする
 
 - ツール
 
