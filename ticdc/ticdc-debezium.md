@@ -19,6 +19,17 @@ The Debezium protocol supports the following types of events:
 
 - WATERMARK event: represents a special point in time. It indicates that the events received before this point are complete. The WATERMARK event applies only to the TiDB extension field and takes effect when you set [`enable-tidb-extension`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka) to `true` in `sink-uri`.
 
+<<<<<<< HEAD
+=======
+</div>
+<div label="Classic TiCDC architecture">
+
+For the classic TiCDC architecture, the Debezium protocol only supports Row Changed events and ignores DDL events and WATERMARK events. A Row changed event represents a data change in a row. When a row changes, the Row Changed event is sent, including relevant information about the row both before and after the change. A WATERMARK event marks the replication progress of a table, indicating that all events earlier than the watermark have been sent to the downstream.
+
+</div>
+</SimpleTab>
+
+>>>>>>> f5faab8139 (ticdc: remove awkward directly from Debezium doc (#23574))
 The configuration example for using the Debezium message format is as follows:
 
 ```shell
