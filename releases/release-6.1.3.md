@@ -86,4 +86,4 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
         - `collation_compatible` `"strict"`に設定すると、DM が重複した照合順序を持つ SQL を生成する可能性がある問題を修正しました。 [#6832](https://github.com/pingcap/tiflow/issues/6832) @[lance6716](https://github.com/lance6716)
         - DMタスクが`Unknown placement policy`エラーで停止する可能性がある問題を修正 [＃7493](https://github.com/pingcap/tiflow/issues/7493) @[lance6716](https://github.com/lance6716)
         - 場合によってはリレーログがアップストリームから再度取得される可能性がある問題を修正[＃7525](https://github.com/pingcap/tiflow/issues/7525) @[liumengya94](https://github.com/liumengya94)
-        - 既存のワーカーが終了する前に新しい DM ワーカーがスケジュールされると、データが複数回複製される問題を修正しました[#7658](https://github.com/pingcap/tiflow/issues/7658) @[GMHDBJD](https://github.com/GMHDBJD)
+        - 既存のワーカーが終了する前に新しい DM-workerがスケジュールされると、データが複数回複製される問題を修正しました[#7658](https://github.com/pingcap/tiflow/issues/7658) @[GMHDBJD](https://github.com/GMHDBJD)

@@ -83,7 +83,7 @@ TiDB バージョン: 5.4.3
 
     - TiDB Data Migration (DM)
 
-        - DB Connを取得する際に DM ワーカーがスタックする可能性がある問題を修正しました[＃3733](https://github.com/pingcap/tiflow/issues/3733)
+        - DB Connを取得する際に DM-workerがスタックする可能性がある問題を修正しました[＃3733](https://github.com/pingcap/tiflow/issues/3733)
         - DMが`Specified key was too long`エラーを報告する問題を修正しました[＃5315](https://github.com/pingcap/tiflow/issues/5315)
         - レプリケーション中にlatin1データが破損する可能性がある問題を修正[＃7028](https://github.com/pingcap/tiflow/issues/7028)
         - TiDBがIPv6ホストを使用しているときにDMが起動に失敗する問題を修正[＃6249](https://github.com/pingcap/tiflow/issues/6249)

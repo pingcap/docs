@@ -43,7 +43,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
 
     - TiDB Data Migration (DM)
 
-        - `/tmp`ではなく DM ワーカーの作業ディレクトリを使用して内部ファイルを書き込み、タスクが停止した後にディレクトリを消去する Syncer のサポート[＃4107](https://github.com/pingcap/tiflow/issues/4107)
+        - `/tmp`ではなく DM-workerの作業ディレクトリを使用して内部ファイルを書き込み、タスクが停止した後にディレクトリを消去する Syncer のサポート[＃4107](https://github.com/pingcap/tiflow/issues/4107)
 
 ## バグ修正 {#bug-fixes}
 
@@ -166,8 +166,8 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
 
         - ログに「チェックポイントに変更はありません。同期フラッシュチェックポイントをスキップしてください」というメッセージが数百件出力され、レプリケーションが非常に遅くなる問題を修正しました[＃4619](https://github.com/pingcap/tiflow/issues/4619)
         - 長いvarcharsがエラーを報告するバグを修正`Column length too big` [＃4637](https://github.com/pingcap/tiflow/issues/4637)
-        - セーフモードでの更新ステートメントの実行エラーにより、DMワーカーがpanicになる可能性がある問題を修正しました[＃4317](https://github.com/pingcap/tiflow/issues/4317)
+        - セーフモードでの更新ステートメントの実行エラーにより、DM-workerがpanicになる可能性がある問題を修正しました[＃4317](https://github.com/pingcap/tiflow/issues/4317)
         - 下流でフィルタリングされたDDLを手動で実行すると、タスク再開が失敗する場合がある問題を修正しました[＃5272](https://github.com/pingcap/tiflow/issues/5272)
         - アップストリームでbinlogが有効になっていない場合に`query-status`コマンドでデータが返されないバグを修正 [＃5121](https://github.com/pingcap/tiflow/issues/5121)
-        - `SHOW CREATE TABLE`文によって返されるインデックスの先頭に主キーがない場合に発生する DM ワーカーpanicの問題を修正しました。 [＃5159](https://github.com/pingcap/tiflow/issues/5159)
+        - `SHOW CREATE TABLE`文によって返されるインデックスの先頭に主キーがない場合に発生する DM-workerpanicの問題を修正しました。 [＃5159](https://github.com/pingcap/tiflow/issues/5159)
         - GTID が有効になっているときやタスクが自動的に再開されたときに CPU 使用率が上昇し、大量のログが出力される問題を修正しました[＃5063](https://github.com/pingcap/tiflow/issues/5063)

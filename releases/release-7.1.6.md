@@ -280,7 +280,7 @@ TiDB バージョン: 7.1.6
     - TiDB Data Migration (DM)
 
         - DMが`ALTER DATABASE`文を処理するときにデフォルトのデータベースを設定せず、レプリケーションエラーが発生する問題を修正しました。 [＃11503](https://github.com/pingcap/tiflow/issues/11503) @[lance6716](https://github.com/lance6716)
-        - 複数の DM マスターノードが同時にリーダーになり、データの不整合が発生する可能性がある問題を修正しました[＃11602](https://github.com/pingcap/tiflow/issues/11602) @[GMHDBJD](https://github.com/GMHDBJD)
+        - 複数の DM-masterノードが同時にリーダーになり、データの不整合が発生する可能性がある問題を修正しました[＃11602](https://github.com/pingcap/tiflow/issues/11602) @[GMHDBJD](https://github.com/GMHDBJD)
         - `go-mysql` にアップグレードして接続ブロックの問題を修正しました [＃11041](https://github.com/pingcap/tiflow/issues/11041) @[D3Hunter](https://github.com/D3Hunter)
         - インデックスの長さがデフォルト値の`max-index-length` を超えるとデータレプリケーションが中断される問題を修正しました [＃11459](https://github.com/pingcap/tiflow/issues/11459) @[michaelmdeng](https://github.com/michaelmdeng)
         - LISTパーティションテーブルの`ALTER TABLE ... DROP PARTITION`文を複製するときにDMがエラーを返す問題を修正しました。 [＃54760](https://github.com/pingcap/tidb/issues/54760) @[lance6716](https://github.com/lance6716)

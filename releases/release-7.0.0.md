@@ -443,7 +443,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     - TiDB Data Migration (DM)
 
-        - DMワーカーノードがGoogle Cloud Storageを使用する際に、ブレークポイントが多すぎるためにGoogle Cloud Storageのリクエスト頻度制限に達し、DMワーカーがGoogle Cloud Storageにデータを書き込めなくなり、結果としてデータ全体の読み込みに失敗する問題を修正しました。 [#8482](https://github.com/pingcap/tiflow/issues/8482) @[maxshuang](https://github.com/maxshuang)
+        - DM-workerノードがGoogle Cloud Storageを使用する際に、ブレークポイントが多すぎるためにGoogle Cloud Storageのリクエスト頻度制限に達し、DM-workerがGoogle Cloud Storageにデータを書き込めなくなり、結果としてデータ全体の読み込みに失敗する問題を修正しました。 [#8482](https://github.com/pingcap/tiflow/issues/8482) @[maxshuang](https://github.com/maxshuang)
         - 複数のDMタスクが同時に同じダウンストリームデータを複製し、すべてがダウンストリームメタデータテーブルを使用してブレークポイント情報を記録する場合、すべてのタスクのブレークポイント情報が同じメタデータテーブルに書き込まれ、同じタスクIDが使用される問題を修正しました。 [#8500](https://github.com/pingcap/tiflow/issues/8500) @[maxshuang](https://github.com/maxshuang)
 
     - TiDB Lightning

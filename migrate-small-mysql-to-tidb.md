@@ -44,7 +44,7 @@ tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 
 | パラメータ                   | 説明                                                                    |
 | :---------------------- | :-------------------------------------------------------------------- |
-| `--master-addr`         | `dmctl`が接続するクラスタ内の任意のDMマスターノードの`{advertise-addr}`例：172.16.10.71:8261。 |
+| `--master-addr`         | `dmctl`が接続するクラスタ内の任意のDM-masterノードの`{advertise-addr}`例：172.16.10.71:8261。 |
 | `operate-source create` | データソースを DM クラスターにロードします。                                             |
 
 ## ステップ2. 移行タスクを作成する {#step-2-create-the-migration-task}
@@ -103,7 +103,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 
 | パラメータ           | 説明                                                                     |
 | --------------- | ---------------------------------------------------------------------- |
-| `--master-addr` | `dmctl`が接続するクラスター内の任意のDMマスターノードの`{advertise-addr}`例：172.16.10.71:8261。 |
+| `--master-addr` | `dmctl`が接続するクラスター内の任意のDM-masterノードの`{advertise-addr}`例：172.16.10.71:8261。 |
 | `start-task`    | 移行タスクを開始する                                                             |
 
 タスクの起動に失敗した場合は、返された結果に従って設定を変更した後、コマンド`start-task task.yaml`を実行してタスクを再起動できます。問題が発生した場合は、コマンド[エラーの処理](/dm/dm-error-handling.md)と[FAQ](/dm/dm-faq.md)を参照してください。
@@ -124,7 +124,7 @@ tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 
 TiUPを使用して DM をデプロイする際に Prometheus、Alertmanager、Grafana をデプロイしている場合は、デプロイ時に指定した IP アドレスとポートを使用して Grafana にアクセスできます。その後、DM ダッシュボードを選択して、DM 関連の監視メトリクスを表示できます。
 
-- DMマスターのログディレクトリ：DMマスタープロセスパラメータ`--log-file`で指定されます。TiUPを使用してDMをデプロイした場合、ログディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`なります。
+- DM-masterのログディレクトリ：DM-masterプロセスパラメータ`--log-file`で指定されます。TiUPを使用してDMをデプロイした場合、ログディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`なります。
 - DM-workerのログディレクトリ：DM-workerプロセスパラメータ`--log-file`で指定されます。TiUPを使用してDMをデプロイした場合、デフォルトのログディレクトリは`/dm-deploy/dm-worker-8262/log/`です。
 
 ## 次は何？ {#what-s-next}

@@ -119,7 +119,7 @@ TiDB バージョン: 5.3.1
 
         - 長いvarcharsがエラーを報告するバグを修正`Column length too big` [＃4637](https://github.com/pingcap/tiflow/issues/4637)
         - PDリーダーが強制終了した際にTiCDCノードが異常終了するバグを修正[＃4248](https://github.com/pingcap/tiflow/issues/4248)
-        - セーフモードでの更新ステートメントの実行エラーにより、DMワーカーがpanicになる可能性がある問題を修正しました[＃4317](https://github.com/pingcap/tiflow/issues/4317)
+        - セーフモードでの更新ステートメントの実行エラーにより、DM-workerがpanicになる可能性がある問題を修正しました[＃4317](https://github.com/pingcap/tiflow/issues/4317)
         - TiKVクライアントのキャッシュされたリージョンメトリックが負になる可能性がある問題を修正しました[＃4300](https://github.com/pingcap/tiflow/issues/4300)
         - 必要なプロセッサ情報が存在しない場合にHTTP APIがパニックを起こすバグを修正[＃3840](https://github.com/pingcap/tiflow/issues/3840)
         - 一時停止中の変更フィードを削除したときに、REDO ログがクリーンアップされないバグを修正しました。 [＃4740](https://github.com/pingcap/tiflow/issues/4740)
@@ -149,7 +149,7 @@ TiDB バージョン: 5.3.1
 
     - TiDB Data Migration (DM)
 
-        - DMマスターとDMワーカーを特定の順序で再起動した後にDMマスターのリレーステータスが間違っているというバグを修正[＃3478](https://github.com/pingcap/tiflow/issues/3478)
+        - DM-masterとDM-workerを特定の順序で再起動した後にDM-masterのリレーステータスが間違っているというバグを修正[＃3478](https://github.com/pingcap/tiflow/issues/3478)
         - DM-workerが再起動後に起動に失敗するバグを修正[＃3344](https://github.com/pingcap/tiflow/issues/3344)
         - PARTITION DDLの実行に時間がかかりすぎるとDMタスクが失敗するバグを修正[＃3854](https://github.com/pingcap/tiflow/issues/3854)
         - アップストリームがMySQL 8.0 場合にDMが`invalid sequence`報告する可能性があるバグを修正しました [＃3847](https://github.com/pingcap/tiflow/issues/3847)

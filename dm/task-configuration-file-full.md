@@ -9,7 +9,7 @@ summary: このドキュメントでは、データ移行（DM）の高度なタ
 
 ## 重要な概念 {#important-concepts}
 
-`source-id`や DM ワーカー ID などの重要な概念の説明については、 [重要な概念](/dm/dm-config-overview.md#important-concepts)を参照してください。
+`source-id`や DM-worker ID などの重要な概念の説明については、 [重要な概念](/dm/dm-config-overview.md#important-concepts)を参照してください。
 
 ## タスク設定ファイルテンプレート（上級者向け） {#task-configuration-file-template-advanced}
 

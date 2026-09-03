@@ -217,7 +217,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
 
     - TiDB Data Migration (DM)
 
-        - DMクラスタ起動時にDMワーカーがDMマスターに接続するための再試行を追加 [#4287](https://github.com/pingcap/tiflow/issues/4287) @[GMHDBJD](https://github.com/GMHDBJD)
+        - DMクラスタ起動時にDM-workerがDM-masterに接続するための再試行を追加 [#4287](https://github.com/pingcap/tiflow/issues/4287) @[GMHDBJD](https://github.com/GMHDBJD)
 
 ## バグ修正 {#bug-fixes}
 

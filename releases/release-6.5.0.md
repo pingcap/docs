@@ -488,7 +488,7 @@ v6.5.0 以降では、v4.0.7 で導入された`AMEND TRANSACTION`メカニズ�
     - TiDB Data Migration (DM)
 
         - 上流データベースがGTIDモードを有効にしているが、データがない場合に`task-mode:all`タスクを開始できない問題を修正しました。 [＃7037](https://github.com/pingcap/tiflow/issues/7037) @[liumengya94](https://github.com/liumengya94)
-        - 既存のワーカーが終了する前に新しい DM ワーカーがスケジュールされると、データが複数回複製される問題を修正しました[＃7658](https://github.com/pingcap/tiflow/issues/7658) @[GMHDBJD](https://github.com/GMHDBJD)
+        - 既存のワーカーが終了する前に新しい DM-workerがスケジュールされると、データが複数回複製される問題を修正しました[＃7658](https://github.com/pingcap/tiflow/issues/7658) @[GMHDBJD](https://github.com/GMHDBJD)
         - アップストリームデータベースが正規表現を使用して権限を付与するときに DM 事前チェックに合格しない問題を修正しました [＃7645](https://github.com/pingcap/tiflow/issues/7645) @[lance6716](https://github.com/lance6716)
 
     - TiDB Lightning

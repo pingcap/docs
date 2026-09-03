@@ -3,7 +3,7 @@ title: DM-worker Introduction
 summary: DM-worker の機能について学びます。
 ---
 
-# DMワーカー紹介 {#dm-worker-introduction}
+# DM-worker紹介 {#dm-worker-introduction}
 
 DM-worker は、TiDB Data Migration (DM) のコンポーネントであり、DM-master によって割り当てられたタスクとサブタスクを実行します。フルおよび増分移行では、1つの MySQL 互換ソースインスタンスからデータをダンプし、ダンプしたデータをターゲット TiDB クラスターにロードします。その後、レプリケーションクライアントとしてソース Binlog を読み取り、イベントを変換およびフィルタリングして、ターゲットに適用します。DM-master は、ソースとサブタスクのステータスについて DM-worker に問い合わせます。
 
@@ -36,7 +36,7 @@ DM-worker は、TiDB Data Migration (DM) のコンポーネントであり、DM-
 
 Binlogログレプリケーション/同期処理ユニットは、上流の MySQL/MariaDB のbinlogイベントまたはリレーログのbinlogイベントを読み取り、これらのイベントを SQL文に変換し、下流の TiDB にこれらの文を適用します。
 
-## DMワーカーに必要な権限 {#privileges-required-by-dm-worker}
+## DM-workerに必要な権限 {#privileges-required-by-dm-worker}
 
 このセクションでは、DM-worker に必要な上流および下流のデータベースユーザーの権限と、それぞれの処理ユニットに必要なユーザー権限について説明します。
 

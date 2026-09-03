@@ -3,7 +3,7 @@ title: DM-master Configuration File
 summary: DM-master の設定ファイルについて説明します。
 ---
 
-# DMマスターコンフィグレーションファイル {#dm-master-configuration-file}
+# DM-masterコンフィグレーションファイル {#dm-master-configuration-file}
 
 このドキュメントでは、構成ファイル テンプレートと、このファイル内の各設定パラメータの説明を含む、DM-master の構成について説明します。
 
@@ -40,13 +40,13 @@ secret-key-path = "/path/to/secret/key"
 
 ## コンフィグレーションパラメータ {#configuration-parameters}
 
-このセクションでは、DM マスターの設定パラメータについて説明します。
+このセクションでは、DM-masterの設定パラメータについて説明します。
 
 ### グローバル構成 {#global-configuration}
 
 #### `name` {#name}
 
-- DM マスターの名前。
+- DM-masterの名前。
 
 #### `log-level` {#log-level}
 
@@ -60,39 +60,39 @@ secret-key-path = "/path/to/secret/key"
 
 #### `master-addr` {#master-addr}
 
-- サービスを提供するDMマスターのアドレスを指定します。IPアドレスを省略し、ポート番号のみ（例： `":8261"` ）を指定することもできます。
+- サービスを提供するDM-masterのアドレスを指定します。IPアドレスを省略し、ポート番号のみ（例： `":8261"` ）を指定することもできます。
 
 #### `advertise-addr` {#advertise-addr}
 
-- DM マスターが外部に通知するアドレスを指定します。
+- DM-masterが外部に通知するアドレスを指定します。
 
 #### `peer-urls` {#peer-urls}
 
-- DM マスターノードのピア URL を指定します。
+- DM-masterノードのピア URL を指定します。
 
 #### `advertise-peer-urls` {#advertise-peer-urls}
 
-- DMマスターが外部にアドバタイズするピアURLを指定します。デフォルト値は`advertise-peer-urls`で、 [`peer-urls`](#peer-urls)と同じです。
+- DM-masterが外部にアドバタイズするピアURLを指定します。デフォルト値は`advertise-peer-urls`で、 [`peer-urls`](#peer-urls)と同じです。
 
 #### `initial-cluster` {#initial-cluster}
 
-- 値`initial-cluster`は、初期クラスター内のすべての DM マスターノードの[`advertise-peer-urls`](#advertise-peer-urls)値の組み合わせです。
+- 値`initial-cluster`は、初期クラスター内のすべての DM-masterノードの[`advertise-peer-urls`](#advertise-peer-urls)値の組み合わせです。
 
 #### `join` {#join}
 
-- `join`の値は、クラスター内の既存の DM マスターノードの[`advertise-peer-urls`](#advertise-peer-urls)値を組み合わせたものです。DM マスターノードを新たに追加する場合は、 `initial-cluster` `join`に置き換えてください。
+- `join`の値は、クラスター内の既存の DM-masterノードの[`advertise-peer-urls`](#advertise-peer-urls)値を組み合わせたものです。DM-masterノードを新たに追加する場合は、 `initial-cluster` `join`に置き換えてください。
 
 #### `ssl-ca` {#ssl-ca}
 
-- DM マスターが他のコンポーネントに接続するための信頼できる SSL CA のリストが含まれるファイルのパス。
+- DM-masterが他のコンポーネントに接続するための信頼できる SSL CA のリストが含まれるファイルのパス。
 
 #### `ssl-cert` {#ssl-cert}
 
-- DM マスターが他のコンポーネントに接続するための PEM 形式の X509 証明書を含むファイルのパス。
+- DM-masterが他のコンポーネントに接続するための PEM 形式の X509 証明書を含むファイルのパス。
 
 #### `ssl-key` {#ssl-key}
 
-- DM マスターが他のコンポーネントに接続するための PEM 形式の X509 キーを含むファイルのパス。
+- DM-masterが他のコンポーネントに接続するための PEM 形式の X509 キーを含むファイルのパス。
 
 #### `cert-allowed-cn` {#cert-allowed-cn}
 

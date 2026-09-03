@@ -25,7 +25,7 @@ TiDB DM ツールを v1.0.x から v2.0+ に自動的にアップグレードす
 
 ### アップストリームデータベース構成ファイル {#upstream-database-configuration-file}
 
-v2.0以降では、[アップストリームデータベース構成ファイル](/dm/dm-source-configuration-file.md)ファイルがDMワーカーのプロセス構成から分離されているため、 [v1.0.x DMワーカー設定](/dm/dm-worker-configuration-file.md)をベースにしたソース構成を取得する必要があります。
+v2.0以降では、[アップストリームデータベース構成ファイル](/dm/dm-source-configuration-file.md)ファイルがDM-workerのプロセス構成から分離されているため、 [v1.0.x DM-worker設定](/dm/dm-worker-configuration-file.md)をベースにしたソース構成を取得する必要があります。
 
 > **Note:**
 >
