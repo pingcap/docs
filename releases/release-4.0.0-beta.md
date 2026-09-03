@@ -49,7 +49,7 @@ TiDB Ansible バージョン: 4.0.0-beta
     - [＃13432](https://github.com/pingcap/tidb/pull/13432) [＃13599](https://github.com/pingcap/tidb/pull/13599)
 - `Kill` の安定性を向上 [＃10841](https://github.com/pingcap/tidb/pull/10841)
 - `LOAD DATA` で16進数と2進数の表現を区切り文字としてサポート [＃11029](https://github.com/pingcap/tidb/pull/11029)
-- `IndexLookupJoin` `IndexHashJoin`と`IndexMergeJoin`に分割することで、 `IndexLookupJoin`のパフォーマンスを向上させ、実行時のメモリ消費量を削減します[＃8861](https://github.com/pingcap/tidb/pull/8861) [＃12139](https://github.com/pingcap/tidb/pull/12139) [＃12349](https://github.com/pingcap/tidb/pull/12349) [＃13238](https://github.com/pingcap/tidb/pull/13238) [＃13451](https://github.com/pingcap/tidb/pull/13451) [＃13714](https://github.com/pingcap/tidb/pull/13714)
+- `IndexLookupJoin`を`IndexHashJoin`と`IndexMergeJoin`に分割することで、 `IndexLookupJoin`のパフォーマンスを向上させ、実行時のメモリ消費量を削減します[＃8861](https://github.com/pingcap/tidb/pull/8861) [＃12139](https://github.com/pingcap/tidb/pull/12139) [＃12349](https://github.com/pingcap/tidb/pull/12349) [＃13238](https://github.com/pingcap/tidb/pull/13238) [＃13451](https://github.com/pingcap/tidb/pull/13451) [＃13714](https://github.com/pingcap/tidb/pull/13714)
 - RBACに関連するいくつかの問題を修正 [＃13896](https://github.com/pingcap/tidb/pull/13896) [＃13820](https://github.com/pingcap/tidb/pull/13820) [＃13940](https://github.com/pingcap/tidb/pull/13940) [＃14090](https://github.com/pingcap/tidb/pull/14090) [＃13940](https://github.com/pingcap/tidb/pull/13940) [＃13014](https://github.com/pingcap/tidb/pull/13014)
 - `SELECT`文に`union` が含まれているため`VIEW`を作成できない問題を修正しました [＃12595](https://github.com/pingcap/tidb/pull/12595)
 - `CAST`関数に関連するいくつかの問題を修正
