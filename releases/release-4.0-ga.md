@@ -38,8 +38,8 @@ TiDB バージョン: 4.0.0
     - `insert/replace into tbl_name partition` （ `partition_name_list` ）のステートメントサポートする [＃17313](https://github.com/pingcap/tidb/pull/17313)
     - `Distinct`関数を使用するときに`collations`の値をチェックする機能をサポート [＃17240](https://github.com/pingcap/tidb/pull/17240)
     - ハッシュパーティションプルーニング中の`is null`フィルタ条件をサポート [＃17310](https://github.com/pingcap/tidb/pull/17310)
-    - パーティションテーブル[＃17392](https://github.com/pingcap/tidb/pull/17392) で`admin check index` 、 `admin cleanup index` 、 `admin recover index`サポート [＃17317](https://github.com/pingcap/tidb/pull/17317) [＃17405](https://github.com/pingcap/tidb/pull/17405)
-    - `in`式範囲パーティションプルーニングをサポート [＃17320](https://github.com/pingcap/tidb/pull/17320)
+    - パーティションテーブルで`admin check index` 、 `admin cleanup index` 、 `admin recover index`をサポート [＃17392](https://github.com/pingcap/tidb/pull/17392) [＃17405](https://github.com/pingcap/tidb/pull/17405) [＃17317](https://github.com/pingcap/tidb/pull/17317)
+    - `in`式に対する範囲パーティションプルーニングをサポート [＃17320](https://github.com/pingcap/tidb/pull/17320)
 
 - TiFlash
     - Learnerがデータを読み取る際に、 `Lock CF`の`min commit ts`から`TSO`の条件を満たすデータをフィルタリングすることをサポートします。

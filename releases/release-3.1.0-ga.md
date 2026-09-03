@@ -43,7 +43,7 @@ TiDB Ansible バージョン: 3.1.0 GA
 - TiDB Ansible
 
     - TiFlashモニター を追加 [＃1257](https://github.com/pingcap/tidb-ansible/pull/1257) [＃1253](https://github.com/pingcap/tidb-ansible/pull/1253)
-    - TiFlash [＃1262](https://github.com/pingcap/tidb-ansible/pull/1262) の設定パラメータを最適化する [＃1271](https://github.com/pingcap/tidb-ansible/pull/1271) [＃1265](https://github.com/pingcap/tidb-ansible/pull/1265)
+    - TiFlashの設定パラメータを最適化する [＃1262](https://github.com/pingcap/tidb-ansible/pull/1262) [＃1265](https://github.com/pingcap/tidb-ansible/pull/1265) [＃1271](https://github.com/pingcap/tidb-ansible/pull/1271)
     - TiDB 起動スクリプトを最適化する [＃1268](https://github.com/pingcap/tidb-ansible/pull/1268)
 
 ## バグ修正 {#bug-fixes}

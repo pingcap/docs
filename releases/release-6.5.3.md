@@ -61,7 +61,7 @@ TiDB バージョン: 6.5.3
     - CTE を含むクエリによって TiDB がハングする問題を修正[＃43749](https://github.com/pingcap/tidb/issues/43749) [＃36896](https://github.com/pingcap/tidb/issues/36896) @[guo-shaoge](https://github.com/guo-shaoge)
     - `AES_DECRYPT`式を使用すると SQL 文が`runtime error: index out of range`エラーを報告する問題を修正しました [＃43063](https://github.com/pingcap/tidb/issues/43063) @[lcwangchao](https://github.com/lcwangchao)
     - `SHOW PROCESSLIST`文でサブクエリ時間が長い文のトランザクションの TxnStart を表示できない問題を修正[＃40851](https://github.com/pingcap/tidb/issues/40851) @[crazycs520](https://github.com/crazycs520)
-    - PD分離により実行中のDDL [＃44014](https://github.com/pingcap/tidb/issues/44014) がブロックされる可能性がある問題を修正 [＃44267](https://github.com/pingcap/tidb/issues/44267) @[wjhuang2016](https://github.com/wjhuang2016) [＃43755](https://github.com/pingcap/tidb/issues/43755)
+    - PD分離により実行中のDDLがブロックされる可能性がある問題を修正 [＃44014](https://github.com/pingcap/tidb/issues/44014) [＃43755](https://github.com/pingcap/tidb/issues/43755) [＃44267](https://github.com/pingcap/tidb/issues/44267) @[wjhuang2016](https://github.com/wjhuang2016)
     - `UNION` でユニオンビューと一時テーブルをクエリするときに発生する TiDBのpanic問題を修正しました。 [＃42563](https://github.com/pingcap/tidb/issues/42563) @[lcwangchao](https://github.com/lcwangchao)
     - パーティション化されたテーブルにおける配置ルールの動作の問題を修正し、削除されたパーティションにおける配置ルールが正しく設定され、再利用されるようになりました[＃44116](https://github.com/pingcap/tidb/issues/44116) @[lcwangchao](https://github.com/lcwangchao)
     - パーティションテーブルのパーティションを切り捨てるとパーティションの配置ルールが無効になる可能性がある問題を修正[＃44031](https://github.com/pingcap/tidb/issues/44031) @[lcwangchao](https://github.com/lcwangchao)
