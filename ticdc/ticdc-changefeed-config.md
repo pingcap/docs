@@ -116,7 +116,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 <!-- Example: `['*.*', '!test.*']` -->
 
-#### フィルター.イベントフィルター {#filter-event-filters}
+#### filter.event-filters {#filter-event-filters}
 
 詳細については、 [イベントフィルタルール](/ticdc/ticdc-filter.md#event-filter-rules)を参照してください。
 
@@ -346,14 +346,14 @@ v8.0.0 以降、TiCDC はSimple メッセージ エンコーディング プロ�
 - デフォルト値: `json`
 - 値のオプション: `json` 、 `avro`
 
-#### シンクを開く {#sink-open}
+#### sink.open {#sink-open}
 
 ##### `output-old-value` {#output-old-value}
 
 - 行データが変更される前に値を出力するかどうかを制御します。デフォルト値は true です。無効にすると、 `UPDATE`イベントは「p」フィールドを出力しません。
 - デフォルト値: `true`
 
-#### シンク.Debezium {#sink-debezium}
+#### sink.debezium {#sink-debezium}
 
 ##### `output-old-value` {#output-old-value}
 
