@@ -376,7 +376,7 @@ TiDB バージョン: 8.0.0
 
 - TiFlash
 
-    - `json_path`関数の`JSON_EXTRACT()`引数に非定数値を使用することをサポートする [#8510](https://github.com/pingcap/tiflash/issues/8510) @[SeaRise](https://github.com/SeaRise)
+    - `JSON_EXTRACT()`関数の`json_path`引数に非定数値を使用することをサポートする [#8510](https://github.com/pingcap/tiflash/issues/8510) @[SeaRise](https://github.com/SeaRise)
     - `JSON_LENGTH(json, path)` 機能をサポートします [#8711](https://github.com/pingcap/tiflash/issues/8711) @[SeaRise](https://github.com/SeaRise)
 
 - ツール
