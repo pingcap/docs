@@ -79,7 +79,7 @@ TiDB バージョン: 6.5.1
 - TiDB
 
     - [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600)設定項目がPointGetクエリで有効にならない問題を修正しました [＃39928](https://github.com/pingcap/tidb/issues/39928) @[zyguan](https://github.com/zyguan)
-    - 長いセッション接続で`INSERT`または`REPLACE`ステートメントがpanicする可能性がある問題を修正しました [＃40351](https://github.com/pingcap/tidb/issues/40351) @[winoros](https://github.com/winoros)
+    - 長いセッション接続で`INSERT`または`REPLACE`文がpanicする可能性がある問題を修正しました [＃40351](https://github.com/pingcap/tidb/issues/40351) @[winoros](https://github.com/winoros)
     - `auto analyze`正常なシャットダウンに長い時間がかかる問題を修正[＃40038](https://github.com/pingcap/tidb/issues/40038) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - DDL取り込み中にデータ競合が発生する可能性がある問題を修正 [＃40970](https://github.com/pingcap/tidb/issues/40970) @[tangenta](https://github.com/tangenta)
     - インデックスを追加するとデータ競合が発生する可能性がある問題を修正しました [＃40879](https://github.com/pingcap/tidb/issues/40879) @[tangenta](https://github.com/tangenta)
