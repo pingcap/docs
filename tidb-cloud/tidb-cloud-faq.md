@@ -41,7 +41,7 @@ TiDB Cloud 是 TiDB 的完全托管云数据库服务（Database as a Service）
 
 ### TiDB Cloud 支持哪些 TiDB 版本？
 
-- 对于新建的 TiDB Cloud Dedicated 集群，默认 TiDB 版本自 2026 年 7 月 9 日起为 [v8.5.7](https://docs.pingcap.com/tidb/v8.5/release-8.5.7)。
+- 对于新建的 TiDB Cloud Dedicated 集群，默认 TiDB 版本自 2026 年 8 月 28 日起为 [v8.5.8](https://docs.pingcap.com/tidb/v8.5/release-8.5.8)。
 - 对于 TiDB Cloud Starter 实例，TiDB 版本自 2026 年 2 月 10 日起为 [v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3)。
 - 对于 TiDB Cloud Essential 实例，TiDB 版本自 2025 年 4 月 22 日起为 [v7.5.2](https://docs.pingcap.com/tidb/stable/release-7.5.2)。
 

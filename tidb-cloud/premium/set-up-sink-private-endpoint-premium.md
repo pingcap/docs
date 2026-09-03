@@ -25,6 +25,11 @@ summary: 了解如何为 changefeed 设置 private endpoint。
 
 Private endpoint 利用云服务提供商的 **Private Link** 技术，使你的 VPC 中的资源能够通过私有 IP 地址连接到其他 VPC 中的服务，就像这些服务直接托管在你的 VPC 中一样。
 
+> **注意：**
+>
+> - Private endpoint 是组织级别的资源，不绑定到特定的 {{{ .premium }}} 实例。在同一组织和同一区域内创建的 private endpoint 可以由多个连接到同一下游服务的实例共享，因此你无需为每个实例单独创建 endpoint。
+> - 删除 {{{ .premium }}} 实例不会删除其 private endpoint。即使之前使用该 private endpoint 的实例仍然可用，如果 30 天内没有任何实例使用该 private endpoint，它也会被自动删除。你也可以在不再需要时手动删除 private endpoint。但是，当它仍被任何实例使用时，你无法删除它。
+
 <SimpleTab>
 <div label="AWS">
 

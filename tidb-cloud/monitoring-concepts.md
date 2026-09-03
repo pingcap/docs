@@ -40,7 +40,7 @@ TiDB Cloud 的监控为你提供了工具和集成，能够监督 TiDB 性能、
 
 在 TiDB Cloud 中，事件表示 TiDB Cloud 资源的变更。
 
-- 对于 {{{ .starter }}} 和 Essential 实例，TiDB Cloud 在实例级别记录历史事件。
+- 对于 {{{ .starter }}}、Essential 和 Premium 实例，TiDB Cloud 在实例级别记录历史事件。
 - 对于 TiDB Cloud Dedicated 集群，TiDB Cloud 在集群级别记录历史事件。
 
 你可以在 **Events** 页面查看已记录的事件，包括事件类型、状态、消息、触发时间和触发用户。

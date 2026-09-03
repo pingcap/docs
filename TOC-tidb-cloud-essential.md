@@ -70,6 +70,7 @@
   - 性能调优
     - [概览](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [分析性能](/tidb-cloud/tune-performance.md)
+    - [使用 Plan Replayer 排查 SQL 性能问题](/tidb-cloud/plan-replayer.md)
     - SQL 调优
       - [概览](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
       - 理解 TiDB 执行计划

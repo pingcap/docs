@@ -8,6 +8,60 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 9 月 1 日 {#september-1-2026}
+
+**常规变更**
+
+- **TiDB Cloud Essential**
+
+    - TiDB Cloud Essential 现已支持你临时授予 TiDB Cloud Support 访问 Plan Replayer 文件的权限，以便进行 SQL 性能故障排查。
+
+        你可以选择访问时长、在需要时延长访问时间，或随时回收访问权限。授权过期后，访问权限会自动被回收。
+
+        Plan Replayer 文件包含 SQL 文本、表结构和优化器统计信息，但不包含实际的表行数据。
+
+        更多信息，参见 [Use Plan Replayer to Troubleshoot SQL Performance](https://docs.pingcap.com/tidbcloud/plan-replayer/?plan=essential)。
+
+- **TiDB Cloud Premium**
+
+    - **Events** 页面现已对 TiDB Cloud Premium 实例开放。
+
+        你可以在此页面查看记录 Premium 实例变更的历史事件，以及事件类型、状态、消息、触发时间和触发用户等信息。事件数据会保留 7 天。
+
+        更多信息，参见 [Events](https://docs.pingcap.com/tidbcloud/tidb-cloud-events/?plan=premium)。
+
+    - TiDB Cloud Premium 现已支持你为数据库审计日志配置过滤规则。
+
+        你可以按 SQL 用户、事件类、表和执行状态过滤审计事件，以控制记录哪些数据库活动，从而帮助你聚焦与安全审计和合规相关的事件。
+
+        更多信息，参见 [Specify audit filter rules](https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing-premium/?plan=premium#specify-audit-filter-rules)。
+
+    - TiDB Cloud Premium 现已支持你临时授予 TiDB Cloud Support 访问 Plan Replayer 文件的权限，以便进行 SQL 性能故障排查。
+
+        你可以选择访问时长、在需要时延长访问时间，或随时回收访问权限。授权过期后，访问权限会自动被回收。
+
+        Plan Replayer 文件包含 SQL 文本、表结构和优化器统计信息，但不包含实际的表行数据。
+
+        更多信息，参见 [Use Plan Replayer to Troubleshoot SQL Performance](https://docs.pingcap.com/tidbcloud/plan-replayer/?plan=premium)。
+
+**计费调整**
+
+- **TiDB Cloud Essential**
+
+    - 自 2026 年 9 月 1 日起，[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 实例的备份使用量和网络出口流量计费将逐步生效。
+
+        网络出口流量将作为单独的计费项收取，而不是包含在 RCU 费用中。
+
+        更多信息，参见 [TiDB Cloud Essential Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)。
+
+## 2026 年 8 月 28 日 {#august-28-2026}
+
+**常规变更**
+
+- **TiDB Cloud Dedicated**
+
+    - 将新的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的默认 TiDB 版本从 [v8.5.7](https://docs.pingcap.com/tidb/stable/release-8.5.7/) 升级到 [v8.5.8](https://docs.pingcap.com/tidb/stable/release-8.5.8/)。
+
 ## 2026 年 8 月 25 日 {#august-25-2026}
 
 **常规变更**
