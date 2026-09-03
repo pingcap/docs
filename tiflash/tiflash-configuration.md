@@ -493,7 +493,7 @@ I/O トラフィック制限設定を構成します。
 
 `tiflash-learner.toml`のパラメータは基本的にTiKVと同じです。TiFlashの設定については[TiKV構成](/tikv-configuration-file.md)を参照してください。以下はよく使用されるパラメータのみを示しています。ご注意ください。
 
-- TiKV と比較して、 TiFlash Proxy には[`raftstore.snap-handle-pool-size`](#snap-handle-pool-size-new-in-v400)追加パラメーターがあります。
+- TiKV と比較して、 TiFlash Proxy には[`raftstore.snap-handle-pool-size`](#snap-handle-pool-size-new-in-v400)という追加パラメーターがあります。
 - キーが`engine`の`label`は予約されており、手動で設定することはできません。
 
 #### log {#log-1}
