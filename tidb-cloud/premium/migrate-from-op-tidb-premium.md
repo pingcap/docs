@@ -69,11 +69,11 @@ tiup update --self && tiup update dumpling
 
 上流データベースからデータをエクスポートするには、以下の権限が必要です。
 
-- 選択
-- リロード
-- ロックテーブル
-- レプリケーションクライアント
-- プロセス
+- SELECT
+- RELOAD
+- LOCK TABLES
+- REPLICATION CLIENT
+- PROCESS
 
 ### TiCDCをデプロイ {#deploy-ticdc}
 
