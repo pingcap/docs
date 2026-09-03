@@ -1,6 +1,12 @@
 {
   "tidb": "TiDB",
+<<<<<<< HEAD
   "tidb-version": "v8.5.0",
+=======
+  "tidb-version": "8.5.8",
+  "ticdc-version": "8.5.8",
+  "tidb-release-date": "2026-08-27",
+>>>>>>> aa389a3d74 (docs: use ticdc-version variable in TiCDC examples (#23696))
   "tidb-operator-version": "v1.6.4",
   "self-managed": "TiDB Self-Managed",
   "starter": "TiDB Cloud Starter",
