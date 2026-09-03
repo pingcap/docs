@@ -89,7 +89,7 @@ v4.0.9 以降では、レプリケーションタスクで統合ソーター機�
 1. 時間のかかるDDL文を含む変更フィードの実行を一時停止します。すると、他の変更フィードがブロックされなくなったことがわかります。
 2. TiCDC ログで`apply job`フィールドを検索し、時間のかかる DDL ステートメントの`start-ts`を確認します。
 3. 下流のDDL文を手動で実行します。実行が完了したら、以下の操作を続行します。
-4. changefeed 設定を変更し、上記の`start-ts` `ignore-txn-start-ts`構成項目に追加します。
+4. changefeed 設定を変更し、上記の`start-ts` `ignore-txn-start-ts`設定項目に追加します。
 5. 一時停止された変更フィードを再開します。
 
 ## TiCDCを使用してチェンジフィードを作成すると、「 `[tikv:9006]GC life time is shorter than transaction duration, transaction starts at xx, GC safe point is yy`エラーが報告されます。どうすればよいでしょうか？ {#the-tikv-9006-gc-life-time-is-shorter-than-transaction-duration-transaction-starts-at-xx-gc-safe-point-is-yy-error-is-reported-when-i-use-ticdc-to-create-a-changefeed-what-should-i-do}

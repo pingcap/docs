@@ -13,11 +13,11 @@ TiDB バージョン: 4.0.10
 
 - PD
 
-    - ログからユーザーデータを秘匿化するための`enable-redact-log`構成項目を追加します。 [＃3266](https://github.com/pingcap/pd/pull/3266)
+    - ログからユーザーデータを秘匿化するための`enable-redact-log`設定項目を追加します。 [＃3266](https://github.com/pingcap/pd/pull/3266)
 
 - TiFlash
 
-    - ログからユーザーデータを秘匿化するための`security.redact_info_log`構成項目を追加します
+    - ログからユーザーデータを秘匿化するための`security.redact_info_log`設定項目を追加します
 
 ## 改善点 {#improvements}
 

@@ -111,7 +111,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 
 #### リクエスト本体のパラメータ {#parameters-for-the-request-body}
 
-| パラメータ名 | 説明 | | :------------------------ | :---------------------- ------------------------------- | | `changefeed_id` | `STRING` type。レプリケーションタスクの ID。(オプション) | | `start_ts` | `UINT64` type。changefeed の開始 TSO を指定します。(オプション) | | `target_ts` | `UINT64` type。changefeed のターゲット TSO を指定します。(オプション) | | **`sink_uri`** | `STRING` type。レプリケーションタスクのダウンストリーム アドレス。(**必須**) | | `force_replicate` | `BOOLEAN` type。一意インデックスのないテーブルを強制的にレプリケートするかどうかを決定します。(オプション) | | `ignore_ineligible_table` | `BOOLEAN` type。レプリケートできないテーブルを無視するかどうかを決定します。(オプション) | | `filter_rules` | `STRING` type 配列。テーブルスキーマのフィルタリングのルール。(オプション) | | `ignore_txn_start_ts` | `UINT64` type 配列。指定された start_ts のトランザクションを無視します。(オプション) | | `mounter_worker_num` | `INT` type。マウンタのスレッド番号。(オプション) | | `sink_config` | シンクの構成パラメータ。(オプション) |
+| パラメータ名 | 説明 | | :------------------------ | :---------------------- ------------------------------- | | `changefeed_id` | `STRING` type。レプリケーションタスクの ID。(オプション) | | `start_ts` | `UINT64` type。changefeed の開始 TSO を指定します。(オプション) | | `target_ts` | `UINT64` type。changefeed のターゲット TSO を指定します。(オプション) | | **`sink_uri`** | `STRING` type。レプリケーションタスクのダウンストリーム アドレス。(**必須**) | | `force_replicate` | `BOOLEAN` type。一意インデックスのないテーブルを強制的にレプリケートするかどうかを決定します。(オプション) | | `ignore_ineligible_table` | `BOOLEAN` type。レプリケートできないテーブルを無視するかどうかを決定します。(オプション) | | `filter_rules` | `STRING` type 配列。テーブルスキーマのフィルタリングのルール。(オプション) | | `ignore_txn_start_ts` | `UINT64` type 配列。指定された start_ts のトランザクションを無視します。(オプション) | | `mounter_worker_num` | `INT` type。マウンタのスレッド番号。(オプション) | | `sink_config` | シンクの設定パラメータ。(オプション) |
 
 `changefeed_id` `target_ts`意味と形式は、 [`cdc cli`を使用してレプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)ドキュメントに記載されているものと同じです。 `sink_uri` `start_ts`パラメータの詳細については、こちらのドキュメントを参照してください`sink_uri`で証明書パスを指定する際は、対応する証明書が対応する TiCDCサーバーにアップロードされていることを確認してください。
 
@@ -208,7 +208,7 @@ changefeed 設定を変更するには、 `pause the replication task -> modify 
 
 現在、API 経由で変更できるのは次の構成のみです。
 
-| パラメータ名 | 説明 | | :--------------------- | :-------------------------- --------------------------- | | `target_ts` | `UINT64` type。changefeed のターゲット TSO を指定します。(オプション) | | `sink_uri` | `STRING` type。レプリケーションタスクのダウンストリーム アドレス。(オプション) | | `filter_rules` | `STRING` type 配列。テーブルスキーマフィルタリングのルール。(オプション) | | `ignore_txn_start_ts` | `UINT64` type 配列。指定された start_ts のトランザクションを無視します。(オプション) | | `mounter_worker_num` | `INT` type。マウント元スレッド番号。(オプション) | | `sink_config` | シンクの構成パラメータ。(オプション) |
+| パラメータ名 | 説明 | | :--------------------- | :-------------------------- --------------------------- | | `target_ts` | `UINT64` type。changefeed のターゲット TSO を指定します。(オプション) | | `sink_uri` | `STRING` type。レプリケーションタスクのダウンストリーム アドレス。(オプション) | | `filter_rules` | `STRING` type 配列。テーブルスキーマフィルタリングのルール。(オプション) | | `ignore_txn_start_ts` | `UINT64` type 配列。指定された start_ts のトランザクションを無視します。(オプション) | | `mounter_worker_num` | `INT` type。マウント元スレッド番号。(オプション) | | `sink_config` | シンクの設定パラメータ。(オプション) |
 
 上記のパラメータの意味はセクション[レプリケーションタスクを作成する](#create-a-replication-task)と同じです。詳細については、セクション1を参照してください。
 

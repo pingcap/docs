@@ -33,7 +33,7 @@ Info: {"upstream_id":7277814241002263370,"namespace":"default","id":"simple-repl
 - `--sink-uri` ：レプリケーションタスクのダウンストリームアドレス。[シンクURIを使用してPulsarを構成する](#sink-uri)を参照してください。
 - `--start-ts` : チェンジフィードの開始TSO。TiCDCクラスターはこのTSOからデータのプルを開始します。デフォルト値は現在時刻です。
 - `--target-ts` : チェンジフィードのターゲットTSO。TiCDCクラスターはこのTSOでデータのプルを停止します。デフォルトでは空であり、TiCDCはデータのプルを自動的に停止しません。
-- `--config` : changefeed設定ファイル[TiCDC チェンジフィード構成パラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
+- `--config` : changefeed設定ファイル[TiCDC チェンジフィード設定パラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 ## Sink URIとchangefeed configを使用してPulsarを構成する {#use-sink-uri-and-changefeed-config-to-configure-pulsar}
 
@@ -71,7 +71,7 @@ URI で設定可能なパラメータは次のとおりです。
 
 ### Changefeed 設定パラメータ {#changefeed-config-parameters}
 
-以下は changefeed 構成パラメータの例です。
+以下は changefeed 設定パラメータの例です。
 
 ```toml
 [sink]
@@ -252,7 +252,7 @@ tls-key-file-path="/data/pulsar/tls-key-file"
 
 ### Matcherのマッチングルール {#matching-rules-for-matcher}
 
-次のサンプル構成ファイルの`dispatchers`構成項目を例に挙げます。
+次のサンプル構成ファイルの`dispatchers`設定項目を例に挙げます。
 
 ```toml
 [sink]

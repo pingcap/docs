@@ -981,7 +981,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - 適用範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
-- 認証局ファイルの場所（存在する場合）。この変数の値は、TiDB 構成項目[`ssl-ca`](/tidb-configuration-file.md#ssl-ca)によって定義されます。
+- 認証局ファイルの場所（存在する場合）。この変数の値は、TiDB 設定項目[`ssl-ca`](/tidb-configuration-file.md#ssl-ca)によって定義されます。
 
 </CustomContent>
 
@@ -990,7 +990,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - 適用範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
-- 認証局ファイルの場所（存在する場合）。この変数の値は、TiDB 構成項目[`ssl-ca`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-ca)によって定義されます。
+- 認証局ファイルの場所（存在する場合）。この変数の値は、TiDB 設定項目[`ssl-ca`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-ca)によって定義されます。
 
 </CustomContent>
 
@@ -1001,7 +1001,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - 適用範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
-- SSL/TLS接続に使用される証明書ファイルの場所（ファイルが存在する場合）。この変数の値は、TiDB構成項目[`ssl-cert`](/tidb-configuration-file.md#ssl-cert)によって定義されます。
+- SSL/TLS接続に使用される証明書ファイルの場所（ファイルが存在する場合）。この変数の値は、TiDB設定項目[`ssl-cert`](/tidb-configuration-file.md#ssl-cert)によって定義されます。
 
 </CustomContent>
 
@@ -1010,7 +1010,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - 適用範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
-- SSL/TLS接続に使用される証明書ファイルの場所（ファイルが存在する場合）。この変数の値は、TiDB構成項目[`ssl-cert`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-cert)によって定義されます。
+- SSL/TLS接続に使用される証明書ファイルの場所（ファイルが存在する場合）。この変数の値は、TiDB設定項目[`ssl-cert`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-cert)によって定義されます。
 
 </CustomContent>
 
@@ -1021,7 +1021,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - 適用範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
-- SSL/TLS接続に使用される秘密鍵ファイル（存在する場合）の場所。この変数の値は、TiDB構成項目[`ssl-key`](/tidb-configuration-file.md#ssl-cert)によって定義されます。
+- SSL/TLS接続に使用される秘密鍵ファイル（存在する場合）の場所。この変数の値は、TiDB設定項目[`ssl-key`](/tidb-configuration-file.md#ssl-cert)によって定義されます。
 
 </CustomContent>
 
@@ -1030,7 +1030,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - 適用範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
-- SSL/TLS接続に使用される秘密鍵ファイル（存在する場合）の場所。この変数の値は、TiDB構成項目[`ssl-key`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-key)によって定義されます。
+- SSL/TLS接続に使用される秘密鍵ファイル（存在する場合）の場所。この変数の値は、TiDB設定項目[`ssl-key`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-key)によって定義されます。
 
 </CustomContent>
 
@@ -2106,7 +2106,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - この変数は、主キー[クラスター化インデックス](/clustered-indexes.md)として作成するかどうかを制御するために使用されます。ここで「デフォルト」とは、ステートメントがキーワード`CLUSTERED` / `NONCLUSTERED`を明示的に指定しないことを意味します。サポートされている値は`OFF` 、 `ON` 、および`INT_ONLY`です。
     - `OFF`は、主キーがデフォルトで非クラスター化インデックスとして作成されることを示します。
     - `ON`は、主キーがデフォルトでクラスター化インデックスとして作成されることを示します。
-    - `INT_ONLY`は、動作が構成項目`alter-primary-key`によって制御されることを示します。 `alter-primary-key`が`true`に設定されている場合、すべての主キーはデフォルトで非クラスター化インデックスとして作成されます。 `false`に設定されている場合、整数列で構成される主キーのみがクラスター化インデックスとして作成されます。
+    - `INT_ONLY`は、動作が設定項目`alter-primary-key`によって制御されることを示します。 `alter-primary-key`が`true`に設定されている場合、すべての主キーはデフォルトで非クラスター化インデックスとして作成されます。 `false`に設定されている場合、整数列で構成される主キーのみがクラスター化インデックスとして作成されます。
 
 ### tidb_enable_ddl <span class="version-mark">New in v6.3.0</span>
 
@@ -2816,8 +2816,8 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `ON`
 - 値のオプション: `OFF` 、 `ON`
-- 単一の SQL ステートメントがシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)で指定されたメモリクォータを超えた場合に、一部のオペレーターに対して一時ストレージを有効にするかどうかを制御します。
-- バージョン 6.3.0 より前では、TiDB 構成項目`oom-use-tmp-storage`を使用してこの機能を有効または無効にできます。クラスターをバージョン 6.3.0 以降にアップグレードすると、TiDB クラスターは`oom-use-tmp-storage`の値を使用してこの変数を自動的に初期化します。その後、 `oom-use-tmp-storage`の値を変更しても効果は**ありません**。
+- 単一の SQL文がシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)で指定されたメモリクォータを超えた場合に、一部のオペレーターに対して一時ストレージを有効にするかどうかを制御します。
+- バージョン 6.3.0 より前では、TiDB 設定項目`oom-use-tmp-storage`を使用してこの機能を有効または無効にできます。クラスターをバージョン 6.3.0 以降にアップグレードすると、TiDB クラスターは`oom-use-tmp-storage`の値を使用してこの変数を自動的に初期化します。その後、 `oom-use-tmp-storage`の値を変更しても効果は**ありません**。
 
 ### tidb_enable_stats_owner <span class="version-mark">New in v8.4.0</span>
 
@@ -2914,7 +2914,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 <CustomContent platform="tidb">
 
-- この変数は、TiDB でテレメトリ機能が有効になっているかどうかを制御します。v8.5.3 以降、この変数は、TiDB インスタンスの[`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)構成項目が`true`に設定されている場合にのみ有効になります。
+- この変数は、TiDB でテレメトリ機能が有効になっているかどうかを制御します。v8.5.3 以降、この変数は、TiDB インスタンスの[`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)設定項目が`true`に設定されている場合にのみ有効になります。
 
 </CustomContent>
 
@@ -3333,7 +3333,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 - 一般ログには、正常に実行されたステートメントのみが記録されます。失敗したステートメントは一般ログには記録されず、代わりにTiDBログに`command dispatched failed`メッセージとともに記録されます。
 
-- この機能に関するすべての記録をログに表示するには、TiDB構成項目の[`log.level`](/tidb-configuration-file.md#level)を`"info"`または`"debug"`に設定し、 `"GENERAL_LOG"`という文字列をクエリする必要があります。以下の情報が記録されます。
+- この機能に関するすべての記録をログに表示するには、TiDB設定項目の[`log.level`](/tidb-configuration-file.md#level)を`"info"`または`"debug"`に設定し、 `"GENERAL_LOG"`という文字列をクエリする必要があります。以下の情報が記録されます。
     - `time` : イベントの時刻。
     - `conn` : 現在のセッションのID。
     - `user` : 現在のセッションユーザー。
@@ -3875,7 +3875,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 > **Note:**
 >
 > - TiDBクラスタに複数のTiFlashノードがある場合、集計処理は通常、複数のTiFlashノードに分散して実行されます。この変数は、単一のTiFlashノードにおける集計オペレーターの最大メモリ使用量を制御します。
-> - この変数が`-1`に設定されている場合、 TiFlash は、自身の構成項目[`max_bytes_before_external_group_by`](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)の値に基づいて、集約オペレーターの最大メモリ使用量を決定します。
+> - この変数が`-1`に設定されている場合、 TiFlash は、自身の設定項目[`max_bytes_before_external_group_by`](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)の値に基づいて、集約オペレーターの最大メモリ使用量を決定します。
 
 </CustomContent>
 
@@ -3884,7 +3884,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 > **Note:**
 >
 > - TiDBクラスタに複数のTiFlashノードがある場合、集計処理は通常、複数のTiFlashノードに分散して実行されます。この変数は、単一のTiFlashノードにおける集計オペレーターの最大メモリ使用量を制御します。
-> - この変数が`-1`に設定されている場合、 TiFlash は自身の構成項目`max_bytes_before_external_group_by`の値に基づいて集約オペレーターの最大メモリ使用量を決定します。
+> - この変数が`-1`に設定されている場合、 TiFlash は自身の設定項目`max_bytes_before_external_group_by`の値に基づいて集約オペレーターの最大メモリ使用量を決定します。
 
 </CustomContent>
 
@@ -3903,7 +3903,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 > **Note:**
 >
 > - TiDBクラスタに複数のTiFlashノードがある場合、結合処理は通常、複数のTiFlashノード上で分散して実行されます。この変数は、単一のTiFlashノード上での結合オペレーターの最大メモリ使用量を制御します。
-> - この変数が`-1`に設定されている場合、 TiFlash は、自身の構成項目[`max_bytes_before_external_join`](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)の値に基づいて、結合オペレーターの最大メモリ使用量を決定します。
+> - この変数が`-1`に設定されている場合、 TiFlash は、自身の設定項目[`max_bytes_before_external_join`](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)の値に基づいて、結合オペレーターの最大メモリ使用量を決定します。
 
 </CustomContent>
 
@@ -3912,7 +3912,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 > **Note:**
 >
 > - TiDBクラスタに複数のTiFlashノードがある場合、結合処理は通常、複数のTiFlashノード上で分散して実行されます。この変数は、単一のTiFlashノード上での結合オペレーターの最大メモリ使用量を制御します。
-> - この変数が`-1`に設定されている場合、 TiFlash は自身の構成項目`max_bytes_before_external_join`の値に基づいて結合オペレーターの最大メモリ使用量を決定します。
+> - この変数が`-1`に設定されている場合、 TiFlash は自身の設定項目`max_bytes_before_external_join`の値に基づいて結合オペレーターの最大メモリ使用量を決定します。
 
 </CustomContent>
 
@@ -3931,7 +3931,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 > **Note:**
 >
 > - TiDBクラスタに複数のTiFlashノードがある場合、TopNとSortは通常、複数のTiFlashノードで分散実行されます。この変数は、単一のTiFlashノードにおけるTopNおよびSortオペレーターの最大メモリ使用量を制御します。
-> - この変数が`-1`に設定されている場合、 TiFlash は、独自の構成項目[`max_bytes_before_external_sort`](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)の値に基づいて、TopN および Sort オペレーターの最大メモリ使用量を決定します。
+> - この変数が`-1`に設定されている場合、 TiFlash は、独自の設定項目[`max_bytes_before_external_sort`](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)の値に基づいて、TopN および Sort オペレーターの最大メモリ使用量を決定します。
 
 </CustomContent>
 
@@ -3940,7 +3940,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 > **Note:**
 >
 > - TiDBクラスタに複数のTiFlashノードがある場合、TopNとSortは通常、複数のTiFlashノードで分散実行されます。この変数は、単一のTiFlashノードにおけるTopNおよびSortオペレーターの最大メモリ使用量を制御します。
-> - この変数が`-1`に設定されている場合、 TiFlash は、自身の構成項目`max_bytes_before_external_sort`の値に基づいて、TopN および Sort オペレーターの最大メモリ使用量を決定します。
+> - この変数が`-1`に設定されている場合、 TiFlash は、自身の設定項目`max_bytes_before_external_sort`の値に基づいて、TopN および Sort オペレーターの最大メモリ使用量を決定します。
 
 </CustomContent>
 
@@ -5649,8 +5649,8 @@ SHOW WARNINGS;
 - 指定可能な値: `OFF` 、 `ON` 、 `MARKER`
 - この変数は、TiDBログおよびスローログに記録されるSQLステートメント内のユーザー情報を非表示にするかどうかを制御します。
 - デフォルト値は`OFF`で、これはユーザー情報が一切処理されないことを意味します。
-- 変数を`ON`に設定すると、ユーザー情報は非表示になります。たとえば、実行された SQL ステートメントが`INSERT INTO t VALUES (1,2)`の場合、ログには`INSERT INTO t VALUES (?,?)`として記録されます。
-- 変数を`MARKER`に設定すると、ユーザー情報は`‹ ›`で囲まれます。たとえば、実行される SQL ステートメントが`INSERT INTO t VALUES (1,2)`の場合、ステートメントはログに`INSERT INTO t VALUES (‹1›,‹2›)`として記録されます。ユーザーデータに`‹`または`›`が含まれている場合、 `‹`は`‹‹`にエスケープされ、 `›`は`››`にエスケープされます。マークされたログに基づいて、ログを表示する際にマークされた情報を非機密化するかどうかを決定できます。
+- 変数を`ON`に設定すると、ユーザー情報は非表示になります。たとえば、実行された SQL文が`INSERT INTO t VALUES (1,2)`の場合、ログには`INSERT INTO t VALUES (?,?)`として記録されます。
+- 変数を`MARKER`に設定すると、ユーザー情報は`‹ ›`で囲まれます。たとえば、実行される SQL文が`INSERT INTO t VALUES (1,2)`の場合、ステートメントはログに`INSERT INTO t VALUES (‹1›,‹2›)`として記録されます。ユーザーデータに`‹`または`›`が含まれている場合、 `‹`は`‹‹`にエスケープされ、 `›`は`››`にエスケープされます。マークされたログに基づいて、ログを表示する際にマークされた情報を秘匿化するかどうかを決定できます。
 
 ### tidb_regard_null_as_point <span class="version-mark">New in v5.4.0</span>
 
@@ -6140,7 +6140,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 <CustomContent platform="tidb">
 
-- この変数の値は、構成項目[`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660)の値と同じです。
+- この変数の値は、設定項目[`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660)の値と同じです。
 
 </CustomContent>
 
@@ -6166,7 +6166,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 <CustomContent platform="tidb">
 
-- この変数の値は、構成項目[`tidb_stmt_summary_filename`](/tidb-configuration-file.md#tidb_stmt_summary_filename-new-in-v660)の値と同じです。
+- この変数の値は、設定項目[`tidb_stmt_summary_filename`](/tidb-configuration-file.md#tidb_stmt_summary_filename-new-in-v660)の値と同じです。
 
 </CustomContent>
 
@@ -6192,7 +6192,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 <CustomContent platform="tidb">
 
-- この変数の値は、構成項目[`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660)の値と同じです。
+- この変数の値は、設定項目[`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660)の値と同じです。
 
 </CustomContent>
 
@@ -6219,7 +6219,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 <CustomContent platform="tidb">
 
-- この変数の値は、構成項目[`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660)の値と同じです。
+- この変数の値は、設定項目[`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660)の値と同じです。
 
 </CustomContent>
 
@@ -6246,7 +6246,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 <CustomContent platform="tidb">
 
-- この変数の値は、構成項目[`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660)の値と同じです。
+- この変数の値は、設定項目[`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660)の値と同じです。
 
 </CustomContent>
 
@@ -6746,19 +6746,19 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 <CustomContent platform="tidb">
 
-- この変数は、TiDB 構成項目[`performance.txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)を動的に変更するために使用されます。これは、構成項目に相当する TiDB の単一行のデータのサイズを制限します。この変数のデフォルト値は`0`であり、これは TiDB がデフォルトで構成項目`txn-entry-size-limit`の値を使用することを意味します。この変数がゼロ以外の値に設定されている場合、 `txn-entry-size-limit`も同じ値に設定されます。
+- この変数は、TiDB 設定項目[`performance.txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)を動的に変更するために使用されます。これは、設定項目に相当する TiDB の単一行のデータのサイズを制限します。この変数のデフォルト値は`0`であり、これは TiDB がデフォルトで設定項目`txn-entry-size-limit`の値を使用することを意味します。この変数がゼロ以外の値に設定されている場合、 `txn-entry-size-limit`も同じ値に設定されます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- この変数は、TiDB 構成項目[`performance.txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500)を動的に変更するために使用されます。これは、構成項目に相当する TiDB の単一行のデータのサイズを制限します。この変数のデフォルト値は`0`であり、これは TiDB がデフォルトで構成項目`txn-entry-size-limit`の値を使用することを意味します。この変数がゼロ以外の値に設定されている場合、 `txn-entry-size-limit`も同じ値に設定されます。
+- この変数は、TiDB 設定項目[`performance.txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500)を動的に変更するために使用されます。これは、設定項目に相当する TiDB の単一行のデータのサイズを制限します。この変数のデフォルト値は`0`であり、これは TiDB がデフォルトで設定項目`txn-entry-size-limit`の値を使用することを意味します。この変数がゼロ以外の値に設定されている場合、 `txn-entry-size-limit`も同じ値に設定されます。
 
 </CustomContent>
 
 > **Note:**
 >
-> この変数をSESSIONスコープで変更すると、現在のユーザーセッションのみに影響し、内部TiDBセッションには影響しません。内部TiDBトランザクションのエントリサイズが構成項目の制限を超えると、トランザクションが失敗する可能性があります。したがって、制限を動的に増やすには、変数をGLOBALスコープで変更することをお勧めします。
+> この変数をSESSIONスコープで変更すると、現在のユーザーセッションのみに影響し、内部TiDBセッションには影響しません。内部TiDBトランザクションのエントリサイズが設定項目の制限を超えると、トランザクションが失敗する可能性があります。したがって、制限を動的に増やすには、変数をGLOBALスコープで変更することをお勧めします。
 
 ### tidb_txn_mode
 

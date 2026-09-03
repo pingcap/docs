@@ -1,6 +1,6 @@
 ---
 title: Configuration Options
-summary: TiDB の構成オプションについて学習します。
+summary: TiDB の設定オプションについて学習します。
 ---
 
 # コンフィグレーションオプション {#configuration-options}
@@ -53,7 +53,7 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 ## `--initialize-sql-file` {#--initialize-sql-file}
 
-- TiDBクラスタの初回起動時に実行されるSQLスクリプト。詳細は[構成項目`initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)を参照。
+- TiDBクラスタの初回起動時に実行されるSQLスクリプト。詳細は[設定項目`initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)を参照。
 - デフォルト: `""`
 
 ## `-L` {#-l}
@@ -220,9 +220,9 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 ## `--redact` {#--redact}
 
-- サブコマンド`collect-log`を使用するときに、 TiDBサーバーがログファイルを非感度化するかどうかを決定します。
+- サブコマンド`collect-log`を使用するときに、 TiDBサーバーがログファイルを秘匿化するかどうかを決定します。
 - デフォルト: false
-- 値が`true`の場合、マスキング操作となり、 `‹ ›`マーク記号で囲まれたすべてのフィールドが`?`に置き換えられます。値が`false`の場合、リストア操作となり、すべてのマーク記号が削除されます。この機能を使用するには、 `./tidb-server --redact=xxx collect-log <input> <output>`を実行して、 `<input>`で指定された TiDBサーバーログファイルを非感応化またはリストアし、 `<output>`に出力します。詳細については、システム変数[`tidb_redact_log`](/system-variables.md#tidb_redact_log)を参照してください。
+- 値が`true`の場合、マスキング操作となり、 `‹ ›`マーク記号で囲まれたすべてのフィールドが`?`に置き換えられます。値が`false`の場合、リストア操作となり、すべてのマーク記号が削除されます。この機能を使用するには、 `./tidb-server --redact=xxx collect-log <input> <output>`を実行して、 `<input>`で指定された TiDBサーバーログファイルを秘匿化またはリストアし、 `<output>`に出力します。詳細については、システム変数[`tidb_redact_log`](/system-variables.md#tidb_redact_log)を参照してください。
 
 ## `--repair-mode` {#--repair-mode}
 

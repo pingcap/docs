@@ -13,7 +13,7 @@ TiDB バージョン: 7.5.2
 
 ## 互換性の変更 {#compatibility-changes}
 
-- RocksDB の TiKV 構成項目[`track-and-verify-wals-in-manifest`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#track-and-verify-wals-in-manifest-new-in-v659-v715-and-v752)を追加します。これは、Write Ahead Log (WAL) の破損の可能性を調査するのに役立ちます。 [＃16549](https://github.com/tikv/tikv/issues/16549) @[v01dstar](https://github.com/v01dstar)
+- RocksDB の TiKV 設定項目[`track-and-verify-wals-in-manifest`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#track-and-verify-wals-in-manifest-new-in-v659-v715-and-v752)を追加します。これは、Write Ahead Log (WAL) の破損の可能性を調査するのに役立ちます。 [＃16549](https://github.com/tikv/tikv/issues/16549) @[v01dstar](https://github.com/v01dstar)
 - TiDB Lightning `strict-format`または`SPLIT_FILE`を使用して CSV ファイルをインポートする場合は、行末文字を設定する必要があります[＃37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
 - TiCDCオープンプロトコルの`sink.open.output-old-value`設定項目を追加して、更新前の値を下流に出力するかどうかを制御します。 [＃10916](https://github.com/pingcap/tiflow/issues/10916) @[sdojjy](https://github.com/sdojjy)
 - 以前のバージョンでは、 `UPDATE`変更を含むトランザクションを処理する際に、 `UPDATE`目のイベントで主キーまたは非NULLの一意インデックス値が変更されると、TiCDCはこのイベントを`DELETE`目と`INSERT`目のイベントに分割していました。v7.5.2以降では、MySQLシンクを使用する場合、 `UPDATE`の変更のトランザクション`commitTS` TiCDC `thresholdTS` （TiCDCが対応するテーブルをダウンストリームに複製し始める際にPDから取得する現在のタイムスタンプ）より小さい場合、TiCDCは`UPDATE`目のイベントを`DELETE` `INSERT`と13件目のイベントに分割します。この動作変更は、TiCDCが受信した`UPDATE`目のイベントの順序が誤っている可能性があり、分割された`DELETE`と`INSERT`目のイベントの順序が誤っている可能性があるため、ダウンストリームデータの不整合が発生する問題に対処しています。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v7.5/ticdc-split-update-behavior#split-update-events-for-mysql-sinks) してください@[lidezhu](https://github.com/lidezhu) [＃10918](https://github.com/pingcap/tiflow/issues/10918)
@@ -188,7 +188,7 @@ TiDB バージョン: 7.5.2
     - スケーリングの進行状況が正しく表示されない問題を修正[＃7726](https://github.com/tikv/pd/issues/7726) @[CabinfeverB](https://github.com/CabinfeverB)
     - デプロイされた2つのデータセンター間でリーダーを切り替えるとLeaderが失敗する問題を修正[＃7992](https://github.com/tikv/pd/issues/7992) @[TonsnakeLin](https://github.com/TonsnakeLin)
     - PDの`Filter target`監視メトリックが散布範囲情報を提供しない問題を修正[＃8125](https://github.com/tikv/pd/issues/8125) @[HuSharp](https://github.com/HuSharp)
-    - クエリ結果`SHOW CONFIG`に非推奨の構成項目`trace-region-flow` が含まれる問題を修正しました [＃7917](https://github.com/tikv/pd/issues/7917) @[rleungx](https://github.com/rleungx)
+    - クエリ結果`SHOW CONFIG`に非推奨の設定項目`trace-region-flow` が含まれる問題を修正しました [＃7917](https://github.com/tikv/pd/issues/7917) @[rleungx](https://github.com/rleungx)
 
 - TiFlash
 
@@ -201,7 +201,7 @@ TiDB バージョン: 7.5.2
     - ログの誤った`local_region_num`値を修正 [＃8895](https://github.com/pingcap/tiflash/issues/8895) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - 分散ストレージとコンピューティングアーキテクチャで、シャットダウン中にTiFlash がpanicになる可能性がある問題を修正しました。 [＃8837](https://github.com/pingcap/tiflash/issues/8837) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - TiFlash が高同時実行読み取りシナリオで一時的に誤った結果を返す可能性がある問題を修正[＃8845](https://github.com/pingcap/tiflash/issues/8845) @[JinheLin](https://github.com/JinheLin)
-    - 分散ストレージおよびコンピューティングアーキテクチャで、 TiFlashコンピューティングノードの`storage.remote.cache.capacity`構成項目の値を変更した後、Grafanaに表示されるディスク`used_size`メトリックが正しくないという問題を修正しました。 [＃8920](https://github.com/pingcap/tiflash/issues/8920) @[JinheLin](https://github.com/JinheLin)
+    - 分散ストレージおよびコンピューティングアーキテクチャで、 TiFlashコンピューティングノードの`storage.remote.cache.capacity`設定項目の値を変更した後、Grafanaに表示されるディスク`used_size`メトリックが正しくないという問題を修正しました。 [＃8920](https://github.com/pingcap/tiflash/issues/8920) @[JinheLin](https://github.com/JinheLin)
     - 分散ストレージおよびコンピューティングアーキテクチャで、ネットワーク分離後にクエリが永続的にブロックされる可能性がある問題を修正しました [＃8806](https://github.com/pingcap/tiflash/issues/8806) @[JinheLin](https://github.com/JinheLin)
     - 非厳密モードの`sql_mode` で無効なデフォルト値を持つ列にデータを挿入するとTiFlash がpanicする可能性がある問題を修正しました [＃8803](https://github.com/pingcap/tiflash/issues/8803) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
 

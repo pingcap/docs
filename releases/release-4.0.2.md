@@ -41,9 +41,9 @@ TiDB バージョン: 4.0.2
     - `INFORMATION_SCHEMA.INSPECTION_RESULT`テーブルに`STATUS_ADDRESS`列を追加して、サーバのステータス アドレスを示します。 [＃17695](https://github.com/pingcap/tidb/pull/17695)
     - `MYSQL.BIND_INFO`表に`SOURCE`列を追加して、バインディングの作成方法を示します[＃17587](https://github.com/pingcap/tidb/pull/17587)
     - SQL文のプランキャッシュの使用状況を示すために、 `PERFORMANCE_SCHEMA.EVENTS_STATEMENTS_SUMMARY_BY_DIGEST`表に`PLAN_IN_CACHE`と`PLAN_CACHE_HITS`列を追加します。 [＃17493](https://github.com/pingcap/tidb/pull/17493)
-    - `enable-collect-execution-info`構成項目と`tidb_enable_collect_execution_info`セッション変数を追加して、各オペレーターの実行情報を収集し、その情報をスロークエリログ に記録するかどうかを制御します。 [＃18072](https://github.com/pingcap/tidb/pull/18072) [＃18073](https://github.com/pingcap/tidb/pull/18073)
+    - `enable-collect-execution-info`設定項目と`tidb_enable_collect_execution_info`セッション変数を追加して、各オペレーターの実行情報を収集し、その情報をスロークエリログ に記録するかどうかを制御します。 [＃18072](https://github.com/pingcap/tidb/pull/18072) [＃18073](https://github.com/pingcap/tidb/pull/18073)
     - スロークエリログでクエリの感度を下げるかどうかを制御するグローバル変数`tidb_slow_log_masking`を追加します。 [＃17694](https://github.com/pingcap/tidb/pull/17694)
-    - `storage.block-cache.capacity` TiKV構成項目[＃17671](https://github.com/pingcap/tidb/pull/17671) `INFORMATION_SCHEMA.INSPECTION_RESULT`テーブルに診断ルールを追加します。
+    - `storage.block-cache.capacity` TiKV設定項目[＃17671](https://github.com/pingcap/tidb/pull/17671) `INFORMATION_SCHEMA.INSPECTION_RESULT`テーブルに診断ルールを追加します。
     - データのバックアップと復元を行うSQL文`BACKUP`と`RESTORE`を追加する[＃15274](https://github.com/pingcap/tidb/pull/15274)
 
 - TiKV
@@ -150,7 +150,7 @@ TiDB バージョン: 4.0.2
 
 - PD
 
-    - `pd-server.dashboard-address`構成項目の正確性を確認する [＃2517](https://github.com/pingcap/pd/pull/2517)
+    - `pd-server.dashboard-address`設定項目の正確性を確認する [＃2517](https://github.com/pingcap/pd/pull/2517)
     - `store-limit-mode`から`auto` に設定するとPDのpanic問題を修正 [＃2544](https://github.com/pingcap/pd/pull/2544)
     - ホットスポットを識別できないことがある問題を修正[＃2463](https://github.com/pingcap/pd/pull/2463)
     - 配置ルールにより、ストアが`tombstone`に変更できない場合がある問題を修正しました場合) [＃2546](https://github.com/pingcap/pd/pull/2546)

@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0 GA Release Notes
-summary: TiDB 4.0.0 GA は 2020年 5月 28日にリリースされました。このバージョンでは、大規模トランザクションのエラーメッセージが最適化され、Changefeed` 構成ファイルの使いやすさが向上し、新しい構成項目とさまざまな構文および関数のサポートが追加され、TiKV、 TiFlash、PD、およびツールの複数のバグと問題が修正され、PD の新しい監視項目とさまざまな機能のサポートが追加され、Backup & Restore (BR) と TiCDC のさまざまな問題が修正されました。
+summary: TiDB 4.0.0 GA は 2020年 5月 28日にリリースされました。このバージョンでは、大規模トランザクションのエラーメッセージが最適化され、Changefeed` 構成ファイルの使いやすさが向上し、新しい設定項目とさまざまな構文および関数のサポートが追加され、TiKV、 TiFlash、PD、およびツールの複数のバグと問題が修正され、PD の新しい監視項目とさまざまな機能のサポートが追加され、Backup & Restore (BR) と TiCDC のさまざまな問題が修正されました。
 ---
 
 # TiDB 4.0 GA リリースノート {#tidb-4-0-ga-release-notes}
@@ -16,7 +16,7 @@ TiDB バージョン: 4.0.0
 
 - TiCDC
     - `Changefeed`設定ファイルの構造を最適化して使いやすさを向上[＃588](https://github.com/pingcap/tiflow/pull/588)
-    - `ignore-txn-start-ts`構成項目を追加し、トランザクションフィルタリングの条件を`commit_ts`から`start_ts`に変更します。 [＃589](https://github.com/pingcap/tiflow/pull/589)
+    - `ignore-txn-start-ts`設定項目を追加し、トランザクションフィルタリングの条件を`commit_ts`から`start_ts`に変更します。 [＃589](https://github.com/pingcap/tiflow/pull/589)
 
 ## 重要なバグ修正 {#important-bug-fixes}
 
@@ -31,9 +31,9 @@ TiDB バージョン: 4.0.0
 ## 新機能 {#new-features}
 
 - TiDB
-    - 再試行コミットフェーズの`goroutines`数を制御するための`committer-concurrency`構成項目を追加します。 [＃16849](https://github.com/pingcap/tidb/pull/16849)
+    - 再試行コミットフェーズの`goroutines`数を制御するための`committer-concurrency`設定項目を追加します。 [＃16849](https://github.com/pingcap/tidb/pull/16849)
     - `show table partition regions`構文をサポートする [＃17294](https://github.com/pingcap/tidb/pull/17294)
-    - TiDBサーバーが使用する一時ディスク領域を制限するための`tmp-storage-quota`構成項目を追加します [＃15700](https://github.com/pingcap/tidb/pull/15700)
+    - TiDBサーバーが使用する一時ディスク領域を制限するための`tmp-storage-quota`設定項目を追加します [＃15700](https://github.com/pingcap/tidb/pull/15700)
     - テーブルの作成時および変更時に、パーティションテーブルが一意のプレフィックスインデックスを使用しているかどうかのチェックをサポート[＃17213](https://github.com/pingcap/tidb/pull/17213)
     - `insert/replace into tbl_name partition` （ `partition_name_list` ）のステートメントサポートする [＃17313](https://github.com/pingcap/tidb/pull/17313)
     - `Distinct`関数を使用するときに`collations`の値をチェックする機能をサポート [＃17240](https://github.com/pingcap/tidb/pull/17240)

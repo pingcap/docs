@@ -19,11 +19,11 @@ summary: TiUPを使用してTiDBをアップグレードする方法を学びま
 > **Note:**
 >
 > - アップグレードするクラスターが v6.2 より前の場合、シナリオによってはクラスターを v6.2 以降のバージョンにアップグレードすると、アップグレードが停止する可能性があります。 [問題を解決する方法](#how-to-fix-the-issue-that-the-upgrade-gets-stuck-when-upgrading-to-v620-or-later-versions)を参照してください。
-> - TiDBノードは[`server-version`](/tidb-configuration-file.md#server-version)構成項目の値を使用して現在のTiDBバージョンを確認します。そのため、予期しない動作を避けるため、TiDBクラスタをアップグレードする前に、 `server-version`の値を空にするか、現在のTiDBクラスタの実際のバージョンに設定する必要があります。
+> - TiDBノードは[`server-version`](/tidb-configuration-file.md#server-version)設定項目の値を使用して現在のTiDBバージョンを確認します。そのため、予期しない動作を避けるため、TiDBクラスタをアップグレードする前に、 `server-version`の値を空にするか、現在のTiDBクラスタの実際のバージョンに設定する必要があります。
 > - [`performance.force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)設定項目を`ON`に設定すると、TiDB の起動時間が長くなり、起動タイムアウトやアップグレードの失敗が発生する可能性があります。この問題を回避するには、 TiUPの待機タイムアウトを長く設定することをお勧めします。
 >     - 影響を受ける可能性のあるシナリオ：
 >         - 元のクラスタバージョンはv6.5.7およびv7.1.0（ `performance.force-init-stats`をまだサポートしていない）より前のバージョンであり、ターゲットバージョンはv7.2.0以降です。
->         - 元のクラスタバージョンはv6.5.7およびv7.1.0以降であり、 `performance.force-init-stats`構成項目は`ON`に設定されています。
+>         - 元のクラスタバージョンはv6.5.7およびv7.1.0以降であり、 `performance.force-init-stats`設定項目は`ON`に設定されています。
 >
 >     - `performance.force-init-stats`設定項目の値を確認してください。
 >
@@ -138,7 +138,7 @@ tiup update cluster
 >
 > 以下のいずれかの状況に該当する場合は、この手順をスキップしてください。
 >
-> - 元のクラスターの構成パラメータを変更していません。または、 `tiup cluster`を使用して構成パラメータを変更しましたが、それ以上の変更は必要ありません。
+> - 元のクラスターの設定パラメータを変更していません。または、 `tiup cluster`を使用して設定パラメータを変更しましたが、それ以上の変更は必要ありません。
 > - アップグレード後、変更されていない設定項目については、v8.5.4のデフォルトのパラメータ値を使用します。
 
 1. トポロジーファイルを編集するには、 `vi`編集モードに入ります。

@@ -24,7 +24,7 @@ summary: 継続的なデータ検証の使用方法と継続的なデータ検�
 
 ### 方法1: タスク設定ファイルで有効にする {#method-1-enable-in-the-task-configuration-file}
 
-継続的なデータ検証を有効にするには、タスク構成ファイルに次の構成項目を追加します。
+継続的なデータ検証を有効にするには、タスク構成ファイルに次の設定項目を追加します。
 
 ```yaml
 # Add the following configuration items to the upstream database that needs to be validated:
@@ -39,7 +39,7 @@ validators:
     row-error-delay: 30m # If a row cannot pass the validation within the specified time, it will be marked as an error row. The default value is 30m, which means 30 minutes.
 ```
 
-構成項目は次のとおりです。
+設定項目は次のとおりです。
 
 - `mode` : 検証モード。可能な値は`none` 、 `full` 、 `fast`です。
     - `none` : デフォルト値。検証は実行されないことを意味します。

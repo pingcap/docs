@@ -81,14 +81,14 @@ TiDBのリソース制御機能は、TiDBレイヤーのフロー制御機能と
 <CustomContent platform="tidb">
 
 - TiKV: [`resource-control.enabled`](/tikv-configuration-file.md#resource-control)パラメータを使用すると、リソースグループに基づいてリクエストスケジューリングを使用するかどうかを制御できます。
-- TiFlash: TiFlashリソース制御を有効にするかどうかは、 [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)システム変数と[`enable_resource_control`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)構成項目（v7.4.0で導入）を使用して制御できます。
+- TiFlash: TiFlashリソース制御を有効にするかどうかは、 [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)システム変数と[`enable_resource_control`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)設定項目（v7.4.0で導入）を使用して制御できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
 - TiKV: TiDB Self-Managed では、 `resource-control.enabled`パラメータを使用して、リソースグループのクォータに基づいてリクエストスケジューリングを使用するかどうかを制御できます。TiDB Cloudでは、 `resource-control.enabled`パラメータのデフォルト値は`true`であり、動的な変更はサポートされていません。
-- TiFlash: TiDB Self-Managedの場合、 `tidb_enable_resource_control`システム変数と`enable_resource_control`構成項目 (v7.4.0 で導入) を使用して、 TiFlashリソース制御を有効にするかどうかを制御できます。
+- TiFlash: TiDB Self-Managedの場合、 `tidb_enable_resource_control`システム変数と`enable_resource_control`設定項目 (v7.4.0 で導入) を使用して、 TiFlashリソース制御を有効にするかどうかを制御できます。
 
 </CustomContent>
 
@@ -101,13 +101,13 @@ TiDB v7.0.0以降、 `tidb_enable_resource_control`と`resource-control.enabled`
 
 <CustomContent platform="tidb">
 
-バージョン7.4.0以降、 TiFlash構成項目`enable_resource_control`はデフォルトで有効になっています。これは`tidb_enable_resource_control`と連携してTiFlash制御機能を制御します。TiFlashリソース制御は、 `enable_resource_control`と`tidb_enable_resource_control`の両方が有効になっている場合にのみ、フロー制御と優先度スケジューリングを実行します。さらに、 `enable_resource_control`が有効になっている場合、 TiFlashは[パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)を使用します。
+バージョン7.4.0以降、 TiFlash設定項目`enable_resource_control`はデフォルトで有効になっています。これは`tidb_enable_resource_control`と連携してTiFlash制御機能を制御します。TiFlashリソース制御は、 `enable_resource_control`と`tidb_enable_resource_control`の両方が有効になっている場合にのみ、フロー制御と優先度スケジューリングを実行します。さらに、 `enable_resource_control`が有効になっている場合、 TiFlashは[パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)を使用します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-バージョン7.4.0以降、 TiFlash構成項目`enable_resource_control`はデフォルトで有効になっています。これは`tidb_enable_resource_control`と連携してTiFlash制御機能を制御します。TiFlashリソース制御は、 `enable_resource_control`と`tidb_enable_resource_control`の両方が有効になっている場合にのみ、フロー制御と優先度スケジューリングを実行します。さらに、 `enable_resource_control`有効になっている場合、 TiFlashは[パイプライン実行モデル](http://docs.pingcap.com/tidb/dev/tiflash-pipeline-model)を使用します。
+バージョン7.4.0以降、 TiFlash設定項目`enable_resource_control`はデフォルトで有効になっています。これは`tidb_enable_resource_control`と連携してTiFlash制御機能を制御します。TiFlashリソース制御は、 `enable_resource_control`と`tidb_enable_resource_control`の両方が有効になっている場合にのみ、フロー制御と優先度スケジューリングを実行します。さらに、 `enable_resource_control`有効になっている場合、 TiFlashは[パイプライン実行モデル](http://docs.pingcap.com/tidb/dev/tiflash-pipeline-model)を使用します。
 
 </CustomContent>
 
@@ -245,7 +245,7 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 
 2. リソースグループの RU に基づくスケジューリングを無効にするには、TiKV パラメータ[`resource-control.enabled`](/tikv-configuration-file.md#resource-control)を`false`に設定します。
 
-3. TiFlashのリソース制御を無効にするには、 TiFlash構成項目[`enable_resource_control`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) `false`に設定します。
+3. TiFlashのリソース制御を無効にするには、 TiFlash設定項目[`enable_resource_control`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) `false`に設定します。
 
 </CustomContent>
 

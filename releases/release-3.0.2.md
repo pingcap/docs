@@ -117,20 +117,20 @@ TiDB Ansible バージョン: 3.0.2
 
 TiDB Binlog
 
-- 起動時に構成項目のチェック機能を追加し、無効な項目が見つかった場合にBinlogサービスを停止してエラーを報告します[＃687](https://github.com/pingcap/tidb-binlog/pull/687)
+- 起動時に設定項目のチェック機能を追加し、無効な項目が見つかった場合にBinlogサービスを停止してエラーを報告します[＃687](https://github.com/pingcap/tidb-binlog/pull/687)
 - Drainer で使用される特定のロジックを指定するには、 Drainerに`node-id`構成を追加します。 [＃684](https://github.com/pingcap/tidb-binlog/pull/684)
 
 TiDB Lightning
 
 - 2つのチェックサムが同時に実行されているときに`tikv_gc_life_time`元の値に戻せない問題を修正しました[＃218](https://github.com/pingcap/tidb-lightning/pull/218)
-- 起動時に構成項目のチェック機能を追加し、無効な項目が見つかった場合にBinlogサービスを停止してエラーを報告します[＃217](https://github.com/pingcap/tidb-lightning/pull/217)
+- 起動時に設定項目のチェック機能を追加し、無効な項目が見つかった場合にBinlogサービスを停止してエラーを報告します[＃217](https://github.com/pingcap/tidb-lightning/pull/217)
 
 ## TiDB Ansible {#tidb-ansible}
 
 - ディスクパフォーマンスモニターが秒をミリ秒として扱う単位エラーを修正[＃840](https://github.com/pingcap/tidb-ansible/pull/840)
 - Spark に`log4j`設定ファイルを追加する [＃841](https://github.com/pingcap/tidb-ansible/pull/841)
 - Binlogが有効で Kafka または ZooKeeper が構成されている場合に Prometheus 構成ファイルが間違った形式で生成される問題を修正[＃844](https://github.com/pingcap/tidb-ansible/pull/844)
-- 生成されたTiDB構成ファイルで`pessimistic-txn`構成パラメータが省略される問題を修正 [＃850](https://github.com/pingcap/tidb-ansible/pull/850)
+- 生成されたTiDB構成ファイルで`pessimistic-txn`設定パラメータが省略される問題を修正 [＃850](https://github.com/pingcap/tidb-ansible/pull/850)
 - TiDB Dashboardのメトリックを追加して最適化する [＃853](https://github.com/pingcap/tidb-ansible/pull/853)
 - TiDB Dashboardの各監視項目の説明を追加します [＃854](https://github.com/pingcap/tidb-ansible/pull/854)
 - TiDB サマリーダッシュボードを追加して、クラスターのステータスをより適切に表示し、問題をトラブルシューティングします[＃855](https://github.com/pingcap/tidb-ansible/pull/855)

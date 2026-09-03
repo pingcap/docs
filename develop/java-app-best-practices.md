@@ -80,7 +80,7 @@ TiDBは両方の方法をサポートしていますが、実装がよりシン�
 
 ### MySQL JDBC パラメータ {#mysql-jdbc-parameters}
 
-JDBC は通常、実装関連の設定を JDBC URL パラメーターの形式で提供します。このセクションでは[MySQL Connector/Jのパラメータ設定](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html)を紹介します (MariaDB を使用する場合は、 [MariaDBのパラメータ設定](https://mariadb.com/docs/connectors/mariadb-connector-j/about-mariadb-connector-j#optional-url-parameters)を参照してください)。このドキュメントではすべての構成項目をカバーすることはできないため、パフォーマンスに影響を与える可能性のあるいくつかのパラメーターに主に焦点を当てています。
+JDBC は通常、実装関連の設定を JDBC URL パラメーターの形式で提供します。このセクションでは[MySQL Connector/Jのパラメータ設定](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html)を紹介します (MariaDB を使用する場合は、 [MariaDBのパラメータ設定](https://mariadb.com/docs/connectors/mariadb-connector-j/about-mariadb-connector-j#optional-url-parameters)を参照してください)。このドキュメントではすべての設定項目をカバーすることはできないため、パフォーマンスに影響を与える可能性のあるいくつかのパラメーターに主に焦点を当てています。
 
 #### 準備関連パラメータ {#prepare-related-parameters}
 
@@ -351,7 +351,7 @@ Cursor<Post> queryAllPost();
 
 `ExecutorType`の間に { `openSession` } を選択できます。MyBatis は 3種類の実行エンジンをサポートしています。
 
-- Simple: プリペアドステートメントは、実行ごとにJDBCに呼び出されます（JDBC構成項目`cachePrepStmts`が有効になっている場合、繰り返し実行されるプリペアドステートメントは再利用されます）。
+- Simple: プリペアドステートメントは、実行ごとにJDBCに呼び出されます（JDBC設定項目`cachePrepStmts`が有効になっている場合、繰り返し実行されるプリペアドステートメントは再利用されます）。
 - Reuse: プリペアドステートメントは`executor`にキャッシュされるため、JDBC `cachePrepStmts`を使用せずにプリペアドステートメントの重複呼び出しを減らすことができます。
 - Batch: 各更新操作 ( `INSERT` / `DELETE` / `UPDATE` ) は、まずバッチに追加され、トランザクションがコミットされるか`SELECT`クエリが実行されるまで実行されます。JDBCレイヤーで`rewriteBatchStatements`が有効になっている場合は、ステートメントの書き換えが試みられます。そうでない場合は、ステートメントは 1つずつ送信されます。
 

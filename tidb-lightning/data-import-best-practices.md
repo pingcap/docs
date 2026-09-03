@@ -95,7 +95,7 @@ TiDB Lightning （ [物理インポートモード](/tidb-lightning/tidb-lightni
 - `disk-quota` : TiDB Lightningのソートディレクトリの容量がデータソースのサイズよりも大きいことを確認することをお勧めします。確保できない場合は、 `disk-quota` TiDB Lightningのソートディレクトリの容量の 80% に設定できます。これにより、 TiDB Lightning は指定された`disk-quota`に従ってデータを一括でソートして書き込みますが、この方法では完全なソート処理と比較してインポートパフォーマンスが低下する可能性があることに注意してください。
 - `GOMEMLIMIT` : TiDB LightningはGo言語で実装されています。インスタンスメモリの80%を`GOMEMLIMIT`に設定することで、GoのGCメカニズムによるOOMの発生確率を低減します。
 
-TiDB Lightningパラメータの詳細については、 [TiDB Lightning構成パラメータ](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+TiDB Lightningパラメータの詳細については、 [TiDB Lightning設定パラメータ](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 ## 「チェックサム不一致」エラーを解決する {#resolve-the-checksum-mismatch-error}
 

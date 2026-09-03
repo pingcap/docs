@@ -13,7 +13,7 @@ TiDB バージョン: 6.5.7
 
 ## 互換性の変更 {#compatibility-changes}
 
-- TiDB 構成項目[`performance.force-init-stats`](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#force-init-stats-new-in-v657)導入して、TiDB の起動時にサービスを提供する前に統計の初期化が完了するまで TiDB が待機する必要があるかどうかを制御します[＃43385](https://github.com/pingcap/tidb/issues/43385) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
+- TiDB 設定項目[`performance.force-init-stats`](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#force-init-stats-new-in-v657)導入して、TiDB の起動時にサービスを提供する前に統計の初期化が完了するまで TiDB が待機する必要があるかどうかを制御します[＃43385](https://github.com/pingcap/tidb/issues/43385) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
 - ログ印刷のオーバーヘッドを減らすために、 TiFlashはデフォルト値の`logger.level`を`"debug"`から`"info"` に変更します。 [＃8568](https://github.com/pingcap/tiflash/issues/8568) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
 ## 改善点 {#improvements}

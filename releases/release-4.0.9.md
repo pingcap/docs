@@ -13,7 +13,7 @@ TiDB バージョン: 4.0.9
 
 - TiDB
 
-    - `enable-streaming`構成項目廃止する [＃21055](https://github.com/pingcap/tidb/pull/21055)
+    - `enable-streaming`設定項目を廃止する [＃21055](https://github.com/pingcap/tidb/pull/21055)
 
 - TiKV
 
@@ -61,7 +61,7 @@ TiDB バージョン: 4.0.9
     - 一部のピアがログを複製する必要がある場合にリーダーが休止状態にならないようにします[＃9093](https://github.com/tikv/tikv/pull/9093)
     - パイプライン化された悲観的ロックの成功率を向上させる[＃9086](https://github.com/tikv/tikv/pull/9086)
     - デフォルト値の`apply-max-batch-size`と`store-max-batch-size`を`1024` に変更します [＃9020](https://github.com/tikv/tikv/pull/9020)
-    - `max-background-flushes`構成項目追加する [＃8947](https://github.com/tikv/tikv/pull/8947)
+    - `max-background-flushes`設定項目追加する [＃8947](https://github.com/tikv/tikv/pull/8947)
     - パフォーマンスを向上させるためにデフォルトで`force-consistency-checks`を無効にする[＃9029](https://github.com/tikv/tikv/pull/9029)
     - リージョンサイズを`pd heartbeat worker`から`split check worker` にオフロードする [＃9185](https://github.com/tikv/tikv/pull/9185)
 

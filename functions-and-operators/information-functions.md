@@ -303,7 +303,7 @@ Store: tikv
 
 <CustomContent platform="tidb">
 
-返されるバージョンを変更する場合は、 [`server-version`](/tidb-configuration-file.md#server-version)構成項目を変更できます。
+返されるバージョンを変更する場合は、 [`server-version`](/tidb-configuration-file.md#server-version)設定項目を変更できます。
 
 </CustomContent>
 

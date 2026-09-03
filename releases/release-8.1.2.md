@@ -29,7 +29,7 @@ TiDB バージョン: 8.1.2
     - 空のテーブルと小さなリージョンのシナリオでのリージョン結合の速度を向上 [＃17376](https://github.com/tikv/tikv/issues/17376) @[LykxSassinator](https://github.com/LykxSassinator)
     - TiKVの`DiskFull`検出を最適化してRaftEngineの`spill-dir`構成と互換性を持たせ、この機能が一貫して動作することを保証します。 [＃17356](https://github.com/tikv/tikv/issues/17356) @[LykxSassinator](https://github.com/LykxSassinator)
     - RocksDB 圧縮のトリガー メカニズムを最適化し、多数の DELETE バージョンを処理するときにディスク領域の再利用を高速化します。 [＃17269](https://github.com/tikv/tikv/issues/17269) @[AndreMouche](https://github.com/AndreMouche)
-    - `import.num-threads`構成項目を動的に変更するサポート[＃17807](https://github.com/tikv/tikv/issues/17807) @[RidRisR](https://github.com/RidRisR)
+    - `import.num-threads`設定項目を動的に変更するサポート[＃17807](https://github.com/tikv/tikv/issues/17807) @[RidRisR](https://github.com/RidRisR)
     - Rusoto ライブラリを AWS Rust SDK に置き換えて、バックアップと復元のために外部ストレージ(Amazon S3 など) にアクセスします。これにより、IMDSv2 や EKS Pod Identity などの AWS 機能との互換性が向上します。 [＃12371](https://github.com/tikv/tikv/issues/12371) @[akoshchiy](https://github.com/akoshchiy)
 
 - TiFlash

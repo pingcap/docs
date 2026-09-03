@@ -85,7 +85,7 @@ sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=330
 > **Note:**
 >
 > - 複数のスレッドを使用して単一のテーブルから同時にデータをエクスポートするには、設定項目`mydumpers`のオプション`rows`を使用します。これにより、データのエクスポートが高速化されます。
-> - 異なる構成でのパフォーマンスをテストするには、 `mysql-instances`構成の`loader-thread`と、 `mydumpers`構成項目の`rows`と`threads`を調整できます。
+> - 異なる構成でのパフォーマンスをテストするには、 `mysql-instances`構成の`loader-thread`と、 `mydumpers`設定項目の`rows`と`threads`を調整できます。
 
 #### テスト結果を取得する {#get-test-results}
 
@@ -142,7 +142,7 @@ DM-worker のログを確認してください。`all data files have been finis
 
 > **Note:**
 >
-> さまざまな構成でのパフォーマンスをテストするには、構成項目`syncers`の`worker-count`と`batch`を調整できます。
+> さまざまな構成でのパフォーマンスをテストするには、設定項目`syncers`の`worker-count`と`batch`を調整できます。
 
 #### 増分データを生成する {#generate-incremental-data}
 

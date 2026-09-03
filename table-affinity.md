@@ -27,7 +27,7 @@ PDアフィニティスケジューリングを有効にし、テーブルの`AF
 
 PDアフィニティスケジューリングはデフォルトで無効になっています。テーブルまたはパーティションのアフィニティを設定する前に、この機能を有効にして設定する必要があります。
 
-1. アフィニティスケジューリングを有効にするには、PD 構成項目[`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855) `0`より大きい値に設定します。
+1. アフィニティスケジューリングを有効にするには、PD 設定項目[`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855) `0`より大きい値に設定します。
 
     たとえば、次のコマンドは値を`4`に設定し、PD が最大 4つのアフィニティスケジューリング タスクを同時に実行できるようにします。
 
@@ -107,4 +107,4 @@ ALTER TABLE t1 AFFINITY = '';
 
 - [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)と[`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)の`AFFINITY`オプション
 - [`SHOW AFFINITY`](/sql-statements/sql-statement-show-affinity.md)
-- PD構成項目: [`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855)と[`schedule.max-affinity-merge-region-size`](/pd-configuration-file.md#max-affinity-merge-region-size-new-in-v855)
+- PD設定項目: [`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855)と[`schedule.max-affinity-merge-region-size`](/pd-configuration-file.md#max-affinity-merge-region-size-new-in-v855)

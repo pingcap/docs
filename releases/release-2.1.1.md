@@ -28,7 +28,7 @@ summary: TiDB 2.1.1は2018年12月12日にリリースされ、安定性、SQL�
 
 ## PD {#pd}
 
-- 構成ファイルで一部の構成項目を`0`に設定できない問題を修正 [＃1334](https://github.com/pingcap/pd/pull/1334)
+- 構成ファイルで一部の設定項目を`0`に設定できない問題を修正 [＃1334](https://github.com/pingcap/pd/pull/1334)
 - PD 起動するときに未定義の構成を確認します [＃1362](https://github.com/pingcap/pd/pull/1362)
 - 遅延を最適化するために、リーダーを新しく作成されたピアに転送しないでください[＃1339](https://github.com/pingcap/pd/pull/1339)
 - デッド`RaftCluster` により停止できない問題を修正 [＃1370](https://github.com/pingcap/pd/pull/1370)

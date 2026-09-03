@@ -21,7 +21,7 @@ MySQLエコシステムでは、gh-ostやpt-oscなどのツールが広く使用
 <SimpleTab>
 <div label="v2.0.5 and later">
 
-v2.0.5 以降のバージョンでは、 `task`構成ファイル内の`online-ddl`構成項目を使用する必要があります。
+v2.0.5 以降のバージョンでは、 `task`構成ファイル内の`online-ddl`設定項目を使用する必要があります。
 
 - アップストリーム MySQL/MariaDB (同時に) が gh-ost または pt-osc ツールを使用する場合は、タスク構成ファイルで`online-ddl`に`true`を設定します。
 

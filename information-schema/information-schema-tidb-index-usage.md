@@ -7,13 +7,13 @@ summary: "`TIDB_INDEX_USAGE` INFORMATION_SCHEMA テーブルについて学習�
 
 <CustomContent platform="tidb">
 
-バージョン8.0.0以降、TiDBは`TIDB_INDEX_USAGE`テーブルを提供します。 `TIDB_INDEX_USAGE`を使用すると、現在のTiDBノード上のすべてのインデックスの使用統計情報を取得できます。デフォルトでは、TiDBはSQLステートメントの実行中にこれらのインデックス使用統計情報を収集します。この機能は、 [`instance.tidb_enable_collect_execution_info`](/tidb-configuration-file.md#tidb_enable_collect_execution_info)構成項目または[`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info)システム変数をオフにすることで無効にできます。
+バージョン8.0.0以降、TiDBは`TIDB_INDEX_USAGE`テーブルを提供します。 `TIDB_INDEX_USAGE`を使用すると、現在のTiDBノード上のすべてのインデックスの使用統計情報を取得できます。デフォルトでは、TiDBはSQL文の実行中にこれらのインデックス使用統計情報を収集します。この機能は、 [`instance.tidb_enable_collect_execution_info`](/tidb-configuration-file.md#tidb_enable_collect_execution_info)設定項目または[`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info)システム変数をオフにすることで無効にできます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-バージョン8.0.0以降、TiDBは`TIDB_INDEX_USAGE`テーブルを提供します。 `TIDB_INDEX_USAGE`を使用すると、現在のTiDBノード上のすべてのインデックスの使用統計情報を取得できます。デフォルトでは、TiDBはSQLステートメントの実行中にこれらのインデックス使用統計情報を収集します。この機能は、 [`instance.tidb_enable_collect_execution_info`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#tidb_enable_collect_execution_info)構成項目または[`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info)システム変数をオフにすることで無効にできます。
+バージョン8.0.0以降、TiDBは`TIDB_INDEX_USAGE`テーブルを提供します。 `TIDB_INDEX_USAGE`を使用すると、現在のTiDBノード上のすべてのインデックスの使用統計情報を取得できます。デフォルトでは、TiDBはSQL文の実行中にこれらのインデックス使用統計情報を収集します。この機能は、 [`instance.tidb_enable_collect_execution_info`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#tidb_enable_collect_execution_info)設定項目または[`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info)システム変数をオフにすることで無効にできます。
 
 </CustomContent>
 

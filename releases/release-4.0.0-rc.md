@@ -24,13 +24,13 @@ TiUPバージョン: 0.0.3
 - TiKV
 
     - 悲観的トランザクションにおける`pipelined`機能をサポートすることで、TPC-Cのパフォーマンスが20%向上します。ただし、実行中のロック失敗によりトランザクションのコミットが失敗するリスクがあります[＃6984](https://github.com/tikv/tikv/pull/6984)
-    - 新しいクラスターではデフォルトで`unify-read-pool`構成項目を有効にし、古いクラスターではこの項目の以前の設定を使用します[＃7059](https://github.com/tikv/tikv/pull/7059)
+    - 新しいクラスターではデフォルトで`unify-read-pool`設定項目を有効にし、古いクラスターではこの項目の以前の設定を使用します[＃7059](https://github.com/tikv/tikv/pull/7059)
 
 - ツール
 
     - TiDB Binlog
 
-        - 共通名検証するための構成項目を追加します [＃934](https://github.com/pingcap/tidb-binlog/pull/934)
+        - 共通名を検証するための設定項目を追加します [＃934](https://github.com/pingcap/tidb-binlog/pull/934)
 
 ## 重要なバグ修正 {#important-bug-fixes}
 
@@ -58,7 +58,7 @@ TiUPバージョン: 0.0.3
 
     - 悲観的トランザクションにおける`pipelined`機能をサポートすることで、TPC-Cのパフォーマンスが20%向上します。ただし、実行中のロック失敗によりトランザクションのコミットが失敗するリスクがあります[＃6984](https://github.com/tikv/tikv/pull/6984)
     - HTTPポートでTLSをサポート [＃5393](https://github.com/tikv/tikv/pull/5393)
-    - 新しいクラスターではデフォルトで`unify-read-pool`構成項目を有効にし、古いクラスターではこの項目の以前の設定を使用します[＃7059](https://github.com/tikv/tikv/pull/7059)
+    - 新しいクラスターではデフォルトで`unify-read-pool`設定項目を有効にし、古いクラスターではこの項目の以前の設定を使用します[＃7059](https://github.com/tikv/tikv/pull/7059)
 
 - PD
 
@@ -68,7 +68,7 @@ TiUPバージョン: 0.0.3
 
     - TiDB Binlog
 
-        - 共通名検証するための構成項目を追加します [＃934](https://github.com/pingcap/tidb-binlog/pull/934)
+        - 共通名を検証するための設定項目を追加します [＃934](https://github.com/pingcap/tidb-binlog/pull/934)
 
     - TiDB Lightning
 

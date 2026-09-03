@@ -231,7 +231,7 @@ cat default.json
     config set replication-mode dr-auto-sync dr-replicas 2
     ```
 
-構成項目の説明:
+設定項目の説明:
 
 - `replication-mode`は有効にするレプリケーションモードです。上記の例では`dr-auto-sync`に設定されています。デフォルトでは、多数決プロトコルが使用されます。
 - `label-key`は異なる AZ を区別するために使用され、配置ルールに一致する必要があります。この例では、プライマリ AZ は「east」、災害復旧 AZ は「west」です。

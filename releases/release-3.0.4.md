@@ -120,10 +120,10 @@ TiDB Ansible バージョン: 3.0.4
 ## TiDB Ansible {#tidb-ansible}
 
 - TiSparkをv2.2.0 にアップグレード [＃926](https://github.com/pingcap/tidb-ansible/pull/926)
-- TiDB構成項目`pessimistic_txn`のデフォルト値を`true` に更新します。 [＃933](https://github.com/pingcap/tidb-ansible/pull/933)
+- TiDB設定項目`pessimistic_txn`のデフォルト値を`true` に更新します。 [＃933](https://github.com/pingcap/tidb-ansible/pull/933)
 - `node_exporter` にシステムレベルの監視メトリックを追加します [＃938](https://github.com/pingcap/tidb-ansible/pull/938)
 - クラスタの状態をより適切に診断するために、TiDB Ansibleに2つのperfツール`iosnoop`と`funcslower`を追加します[＃946](https://github.com/pingcap/tidb-ansible/pull/946)
 - パスワードの有効期限が切れた場合などに発生する長い待機時間に対処するために、rawモジュールをシェルモジュールに置き換えます[＃949](https://github.com/pingcap/tidb-ansible/pull/949)
-- TiDB構成項目`txn_local_latches`のデフォルト値を`false`に更新します
+- TiDB設定項目`txn_local_latches`のデフォルト値を`false`に更新します
 - Grafanaダッシュボードの監視メトリックとアラートルールを最適化する[＃962](https://github.com/pingcap/tidb-ansible/pull/962) [＃963](https://github.com/pingcap/tidb-ansible/pull/963) [＃969](https://github.com/pingcap/tidb-ansible/pull/963)
 - デプロイおよびアップグレードの前に構成ファイルを確認する[＃934](https://github.com/pingcap/tidb-ansible/pull/934) [＃972](https://github.com/pingcap/tidb-ansible/pull/972)

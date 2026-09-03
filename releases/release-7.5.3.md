@@ -14,9 +14,9 @@ TiDB バージョン: 7.5.3
 ## 互換性の変更 {#compatibility-changes}
 
 - TiDB でサポートされているすべてのキーワードの情報を表示するための新しいシステムテーブル[`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md)を追加します。 [＃48801](https://github.com/pingcap/tidb/issues/48801) @[dveeden](https://github.com/dveeden)
-- TiKV構成項目[`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)のスコープを変更します。
+- TiKV設定項目[`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)のスコープを変更します。
 
-    - v7.5.3 より前の v7.5.x バージョンでは、この構成項目は TiKV ノード間の gRPC メッセージの圧縮アルゴリズムにのみ影響します。
+    - v7.5.3 より前の v7.5.x バージョンでは、この設定項目は TiKV ノード間の gRPC メッセージの圧縮アルゴリズムにのみ影響します。
     - v7.5.3以降、この設定項目はTiKVからTiDBに送信されるgRPC応答メッセージの圧縮アルゴリズムにも影響します。圧縮を有効にすると、CPUリソースの消費量が増加する可能性があります[＃17176](https://github.com/tikv/tikv/issues/17176) @[ekexium](https://github.com/ekexium)
 
 ## 改善点 {#improvements}
@@ -98,9 +98,9 @@ TiDB バージョン: 7.5.3
     - リソースグループのデータ競合問題を修正 [＃8267](https://github.com/tikv/pd/issues/8267) @[HuSharp](https://github.com/HuSharp)
     - PD がオペレーター チェック中に遭遇するデータ競合問題を修正しました [＃8263](https://github.com/tikv/pd/issues/8263) @[lhy1024](https://github.com/lhy1024)
     - 削除されたノードがetcdクライアントの候補接続リストにまだ表示される問題を修正 [＃8286](https://github.com/tikv/pd/issues/8286) @[JmPotato](https://github.com/JmPotato)
-    - TiKV構成項目[`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size) 1 MiB未満の値に設定するとPD panicが発生する問題を修正しました [＃8323](https://github.com/tikv/pd/issues/8323) @[JmPotato](https://github.com/JmPotato)
+    - TiKV設定項目[`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size)を1 MiB未満の値に設定するとPD panicが発生する問題を修正しました [＃8323](https://github.com/tikv/pd/issues/8323) @[JmPotato](https://github.com/JmPotato)
     - 暗号化マネージャーが使用前に初期化されない問題を修正[＃8384](https://github.com/tikv/pd/issues/8384) @[releungx](https://github.com/releungx)
-    - PD構成項目[`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50)が有効になっているときにPDログが完全に秘匿化されない問題を修正[＃8419](https://github.com/tikv/pd/issues/8419) @[releungx](https://github.com/releungx)
+    - PD設定項目[`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50)が有効になっているときにPDログが完全に秘匿化されない問題を修正[＃8419](https://github.com/tikv/pd/issues/8419) @[releungx](https://github.com/releungx)
     - ロールをリソースグループにバインドするときにエラーが報告されない問題を修正しました [＃54417](https://github.com/pingcap/tidb/issues/54417) @[JmPotato](https://github.com/JmPotato)
 
 - TiFlash

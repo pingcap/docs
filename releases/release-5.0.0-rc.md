@@ -76,11 +76,11 @@ v5.0 の主な新機能または改善点は次のとおりです。
 
 ## セキュリティ {#security}
 
-### エラーメッセージとログファイルのわかりやすさをサポート {#support-desensitizing-error-messages-and-log-files}
+### エラーメッセージとログファイルの秘匿化をサポート {#support-desensitizing-error-messages-and-log-files}
 
-TiDB では、ID 情報やクレジットカード番号などの機密情報の漏洩を防ぐために、エラーメッセージとログファイルの非機密化をサポートするようになりました。
+TiDB では、ID 情報やクレジットカード番号などの機密情報の漏洩を防ぐために、エラーメッセージとログファイルの秘匿化をサポートするようになりました。
 
-ユーザーは、さまざまなコンポーネントに対して感度低下機能を有効にすることができます。
+ユーザーは、さまざまなコンポーネントに対して秘匿化機能を有効にすることができます。
 
 - TiDB 側では、tidb-server で SQL ステートメントを使用して`tidb_redact_log=1`変数を設定します。
 - TiKV 側では、tikv-server で`security.redact-info-log = true`構成を設定します。

@@ -93,7 +93,7 @@ TiDB バージョン: 7.5.6
 - PD
 
     - 単一のログファイルのデフォルト値`max-size`が正しく設定されていない問題を修正しました[＃9037](https://github.com/tikv/pd/issues/9037) @[rleungx](https://github.com/rleungx)
-    - `flow-round-by-digit`構成項目の値が再起動後に上書きされる可能性がある問題を修正[＃8980](https://github.com/tikv/pd/issues/8980) @[nolouch](https://github.com/nolouch)
+    - `flow-round-by-digit`設定項目の値が再起動後に上書きされる可能性がある問題を修正[＃8980](https://github.com/tikv/pd/issues/8980) @[nolouch](https://github.com/nolouch)
     - PDネットワークの不安定さにより、データのインポートやインデックスシナリオの追加操作が失敗する可能性がある問題を修正しました。 [＃8962](https://github.com/tikv/pd/issues/8962) @[okJiang](https://github.com/okJiang)
     - `tidb_enable_tso_follower_proxy`システム変数が有効になっているときに PD がpanicする可能性がある問題を修正[＃8950](https://github.com/tikv/pd/issues/8950) @[okJiang](https://github.com/okJiang)
     - `tidb_enable_tso_follower_proxy`システム変数が有効にならない可能性がある問題を修正しました [＃8947](https://github.com/tikv/pd/issues/8947) @[JmPotato](https://github.com/JmPotato)

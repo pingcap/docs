@@ -43,7 +43,7 @@ TiDB Ansible バージョン: 3.0.6
     - 悲観的ロックの取得に失敗し、トランザクションが単一のキー変更のみを伴う場合は、非同期ロールバックを実行しないでください。 [＃12707](https://github.com/pingcap/tidb/pull/12707)
     - 領域分割のリクエストに対する応答が空の場合にpanicする問題を修正[＃13092](https://github.com/pingcap/tidb/pull/13092)
     - `PessimisticLock`ロックエラーを返したときに不要なバックオフを回避する[＃13116](https://github.com/pingcap/tidb/pull/13116)
-    - 認識されない構成オプション警告ログを出力して構成をチェックする TiDB の動作を変更します。 [＃13272](https://github.com/pingcap/tidb/pull/13272)
+    - 認識されない設定オプション警告ログを出力して構成をチェックする TiDB の動作を変更します。 [＃13272](https://github.com/pingcap/tidb/pull/13272)
     - `/info/all`インターフェースを介してすべての TiDB ノードのbinlogステータスの取得をサポート [＃13187](https://github.com/pingcap/tidb/pull/13187)
     - TiDB が接続を切断したときに goroutine がリークする可能性がある問題を修正[＃13251](https://github.com/pingcap/tidb/pull/13251)
     - 悲観的トランザクションで`innodb_lock_wait_timeout`パラメータを動作させて、悲観的ロックのロック待機タイムアウトを制御する [＃13165](https://github.com/pingcap/tidb/pull/13165)

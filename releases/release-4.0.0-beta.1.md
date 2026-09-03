@@ -14,13 +14,13 @@ TiDB Ansible バージョン: 4.0.0-beta.1
 ## 互換性の変更 {#compatibility-changes}
 
 - TiDB
-    - `log.enable-slow-log`構成項目の型を整数からブール型に変更します[＃14864](https://github.com/pingcap/tidb/pull/14864)
+    - `log.enable-slow-log`設定項目の型を整数からブール型に変更します[＃14864](https://github.com/pingcap/tidb/pull/14864)
     - MySQL 5.7と一致するように、 `mysql.user`システムテーブルの`password`フィールド名を`authentication_string`に変更します (**この互換性の変更により、以前のバージョンにロールバックできなくなります**) [＃14598](https://github.com/pingcap/tidb/pull/14598)
-    - `txn-total-size-limit`構成項目のデフォルト値を`1GB`から`100MB`に調整します[＃14522](https://github.com/pingcap/tidb/pull/14522)
-    - PD [＃14750](https://github.com/pingcap/tidb/pull/14750) から読み取った構成項目の動的な変更または更新をサポート [＃14830](https://github.com/pingcap/tidb/pull/14830) [＃14303](https://github.com/pingcap/tidb/pull/14303)
+    - `txn-total-size-limit`設定項目のデフォルト値を`1GB`から`100MB`に調整します[＃14522](https://github.com/pingcap/tidb/pull/14522)
+    - PD [＃14750](https://github.com/pingcap/tidb/pull/14750) から読み取った設定項目の動的な変更または更新をサポート [＃14830](https://github.com/pingcap/tidb/pull/14830) [＃14303](https://github.com/pingcap/tidb/pull/14303)
 
 - TiKV
-    - ポイントクエリがコプロセッサー[＃6375](https://github.com/tikv/tikv/pull/6375) [＃6401](https://github.com/tikv/tikv/pull/6401) [＃6534](https://github.com/tikv/tikv/pull/6534) [＃6582](https://github.com/tikv/tikv/pull/6582) [＃6585](https://github.com/tikv/tikv/pull/6585) [＃6593](https://github.com/tikv/tikv/pull/6593) と同じスレッドを使用するかどうかを制御するために、 `readpool.unify-read-pool`構成項目（デフォルトでは`True` ）を追加します。 [＃6677](https://github.com/tikv/tikv/pull/6677) [＃6597](https://github.com/tikv/tikv/pull/6597)
+    - ポイントクエリがコプロセッサー[＃6375](https://github.com/tikv/tikv/pull/6375) [＃6401](https://github.com/tikv/tikv/pull/6401) [＃6534](https://github.com/tikv/tikv/pull/6534) [＃6582](https://github.com/tikv/tikv/pull/6582) [＃6585](https://github.com/tikv/tikv/pull/6585) [＃6593](https://github.com/tikv/tikv/pull/6593) と同じスレッドを使用するかどうかを制御するために、 `readpool.unify-read-pool`設定項目（デフォルトでは`True` ）を追加します。 [＃6677](https://github.com/tikv/tikv/pull/6677) [＃6597](https://github.com/tikv/tikv/pull/6597)
 
 - PD
     - HTTP APIを最適化して構成マネージャーと互換性を持たせる [＃2080](https://github.com/pingcap/pd/pull/2080)
@@ -41,7 +41,7 @@ TiDB Ansible バージョン: 4.0.0-beta.1
         - [＃14718](https://github.com/pingcap/tidb/pull/14718) [＃14721](https://github.com/pingcap/tidb/pull/14721) [＃14670](https://github.com/pingcap/tidb/pull/14670) [＃14663](https://github.com/pingcap/tidb/pull/14663) [＃14668](https://github.com/pingcap/tidb/pull/14668)
         - [＃14896](https://github.com/pingcap/tidb/pull/14896)
     - `Sequence`機能[＃14731](https://github.com/pingcap/tidb/pull/14731) [＃14589](https://github.com/pingcap/tidb/pull/14589) [＃14674](https://github.com/pingcap/tidb/pull/14674) [＃14442](https://github.com/pingcap/tidb/pull/14442) をサポート [＃14830](https://github.com/pingcap/tidb/pull/14830) [＃14303](https://github.com/pingcap/tidb/pull/14303)
-    - PD [＃14750](https://github.com/pingcap/tidb/pull/14750) から読み取った構成項目の動的な変更または更新をサポート [＃14830](https://github.com/pingcap/tidb/pull/14830) [＃14303](https://github.com/pingcap/tidb/pull/14303)
+    - PD [＃14750](https://github.com/pingcap/tidb/pull/14750) から読み取った設定項目の動的な変更または更新をサポート [＃14830](https://github.com/pingcap/tidb/pull/14830) [＃14303](https://github.com/pingcap/tidb/pull/14303)
     - 負荷分散ポリシーに従って異なるロールからデータを自動的に読み取る機能を追加し、この機能を有効にするために`leader-and-follower`システム変数を追加します[＃14761](https://github.com/pingcap/tidb/pull/14761)
     - `Coercibility`関数追加する [＃14739](https://github.com/pingcap/tidb/pull/14739)
     - パーティションテーブル[＃14735](https://github.com/pingcap/tidb/pull/14735) でのTiFlashレプリカの設定をサポート [＃14644](https://github.com/pingcap/tidb/pull/14644) [＃14713](https://github.com/pingcap/tidb/pull/14713)
@@ -50,12 +50,12 @@ TiDB Ansible バージョン: 4.0.0-beta.1
     - `information_schema.PARTITIONS`システムテーブルをクエリしてテーブルパーティションのチェックをサポート [＃14347](https://github.com/pingcap/tidb/pull/14347)
     - `json_objectagg`集計関数追加する [＃11154](https://github.com/pingcap/tidb/pull/11154)
     - 監査ログに拒否された接続試行を記録することをサポート[＃14594](https://github.com/pingcap/tidb/pull/14594)
-    - 1つのサーバーへの接続数を制御するために、 `max-server-connections`構成項目（デフォルトでは`4096` ）を追加します[＃14409](https://github.com/pingcap/tidb/pull/14409)
+    - 1つのサーバーへの接続数を制御するために、 `max-server-connections`設定項目（デフォルトでは`4096` ）を追加します[＃14409](https://github.com/pingcap/tidb/pull/14409)
     - サーバーレベルで複数のストレージエンジンを指定して分離読み取りをサポート [＃14440](https://github.com/pingcap/tidb/pull/14440)
     - `Apply`オペレーターと`Sort`オペレーターのコストモデルを最適化して安定性を向上させる[＃13550](https://github.com/pingcap/tidb/pull/13550) [＃14708](https://github.com/pingcap/tidb/pull/14708)
 
 - TiKV
-    - HTTP API 経由でステータスポートから構成項目を取得する機能をサポート [＃6480](https://github.com/tikv/tikv/pull/6480)
+    - HTTP API 経由でステータスポートから設定項目を取得する機能をサポート [＃6480](https://github.com/tikv/tikv/pull/6480)
     - コプロセッサーの`Chunk Encoder`のパフォーマンスを最適化 [＃6341](https://github.com/tikv/tikv/pull/6341)
 
 - PD

@@ -55,7 +55,7 @@ TiDB Ansible バージョン: 2.1.19
     - `KILL CONNECTION`ゴルーチンリークを引き起こす可能性がある問題を修正[＃13252](https://github.com/pingcap/tidb/pull/13252)
     - HTTP API の`info/all`インターフェースを介してすべてのTiDBノードのbinlogステータスの取得をサポート [＃13188](https://github.com/pingcap/tidb/pull/13188)
     - Windows で TiDB プロジェクトのビルドに失敗する問題を修正 [＃13650](https://github.com/pingcap/tidb/pull/13650)
-    - TiDBサーバーのバージョンを制御および変更するための`server-version`構成項目を追加します。 [＃13904](https://github.com/pingcap/tidb/pull/13904)
+    - TiDBサーバーのバージョンを制御および変更するための`server-version`設定項目を追加します。 [＃13904](https://github.com/pingcap/tidb/pull/13904)
     - Go1.13でコンパイルされたバイナリ`plugin`正常に動作しない問題を修正[＃13527](https://github.com/pingcap/tidb/pull/13527)
 - DDL
     - テーブルが作成され、テーブルに`COLLATE` が含まれている場合、列のシステムのデフォルトの文字セットの代わりにテーブルの`COLLATE`を使用します。 [＃13190](https://github.com/pingcap/tidb/pull/13190)

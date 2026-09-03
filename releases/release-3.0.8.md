@@ -40,7 +40,7 @@ TiDB Ansible バージョン: 3.0.8
         - `stmt-summary.refresh-interval`パラメータを追加して、古いデータを`events_statements_summary_by_digest`テーブルから`events_statements_summary_by_digest_history`テーブルに移動するかどうかを制御します (デフォルトの間隔: 30分) [＃14161](https://github.com/pingcap/tidb/pull/14161)
         - `events_statements_summary_by_digest` の古いデータを保存するには、 `events_statements_summary_by_digest_history`テーブルを追加します。 [＃14166](https://github.com/pingcap/tidb/pull/14166)
     - RBAC関連の内部SQL文実行時にbinlogが誤って出力される問題を修正[＃13890](https://github.com/pingcap/tidb/pull/13890)
-    - TiDBサーバーバージョン変更する機能を制御するための`server-version`構成項目を追加します [＃13906](https://github.com/pingcap/tidb/pull/13906)
+    - TiDBサーバーバージョン変更する機能を制御するための`server-version`設定項目を追加します [＃13906](https://github.com/pingcap/tidb/pull/13906)
     - HTTPインターフェースを使用してTiDBbinlog書き込みを回復する機能を追加 [＃13892](https://github.com/pingcap/tidb/pull/13892)
     - MySQLの動作との一貫性を保つために、 `GRANT roles TO user`に必要な権限を`GrantPriv`から`ROLE_ADMIN`または`SUPER`に更新します。 [＃13932](https://github.com/pingcap/tidb/pull/13932)
     - MySQLの動作の互換性を保つために、TiDBの動作を、現在のデータベースを使用する動作から、 `GRANT`文でデータベース名が指定されていない場合に`No database selected`エラーを報告する動作に変更しました。 [＃13784](https://github.com/pingcap/tidb/pull/13784)
@@ -105,7 +105,7 @@ TiDB Ansible バージョン: 3.0.8
 
 ## TiDB Ansible {#tidb-ansible}
 
-- 簡略化された構成項目元に戻す [＃1053](https://github.com/pingcap/tidb-ansible/pull/1053)
+- 簡略化された設定項目を元に戻す [＃1053](https://github.com/pingcap/tidb-ansible/pull/1053)
 - ローリングアップデートを実行する際にTiDBのバージョンをチェックするロジックを最適化します[＃1056](https://github.com/pingcap/tidb-ansible/pull/1056)
 - TiSparkをv2.1.8にアップグレード[＃1061](https://github.com/pingcap/tidb-ansible/pull/1061)
 - Grafana で PD ロール監視項目が誤って表示される問題を修正 [＃1065](https://github.com/pingcap/tidb-ansible/pull/1065)

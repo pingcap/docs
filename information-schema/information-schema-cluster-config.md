@@ -31,8 +31,8 @@ DESC cluster_config;
 
 - `TYPE` : インスタンスタイプ。オプションの値は`tidb` 、 `pd` 、 `tikv`です。
 - `INSTANCE` : インスタンスのサービス アドレス。
-- `KEY` : 構成項目名。
-- `VALUE` : 構成項目の値。
+- `KEY` : 設定項目名。
+- `VALUE` : 設定項目の値。
 
 次の例は、 `CLUSTER_CONFIG`テーブルを使用して TiKV インスタンスの`coprocessor`構成をクエリする方法を示しています。
 

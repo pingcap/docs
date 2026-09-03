@@ -56,7 +56,7 @@ level='warning'
 
 ### 例 {#example}
 
-次の例では、他の構成項目は変更せずに、 `log.level` `'warning'`に設定します。
+次の例では、他の設定項目は変更せずに、 `log.level` `'warning'`に設定します。
 
 1. 現在の TiProxy 構成を取得します。
 

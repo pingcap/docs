@@ -131,7 +131,7 @@ tiproxyctl --host 127.0.0.1 --port 3080 config get
 
 `tiproxyctl config set`コマンドは標準入力からTOML形式の設定ファイルを読み取り、これらの設定項目をTiProxyに設定します。指定されていない設定項目は変更されないため、変更したい項目のみを指定してください。
 
-次の例では、他の構成項目は変更せずに、 `log.level` `'warning'`に設定します。
+次の例では、他の設定項目は変更せずに、 `log.level` `'warning'`に設定します。
 
 ```bash
 $ cat test.toml

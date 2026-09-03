@@ -57,9 +57,9 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 ### セキュリティ {#security}
 
-- TiDB ログ感度低下 (GA) を強化 [＃52364](https://github.com/pingcap/tidb/issues/52364) @[xhebox](https://github.com/xhebox)
+- TiDB ログの秘匿化 (GA) を強化 [＃52364](https://github.com/pingcap/tidb/issues/52364) @[xhebox](https://github.com/xhebox)
 
-    強化された TiDB ログの非感度化は、ログファイル内の SQL テキスト情報をマークすることで実装され、ユーザーがログを表示するときに機密データを削除することをサポートします。ログ情報をマークするかどうかを制御することで、さまざまなシナリオで TiDB ログを安全に使用でき、ログ非感度化を使用する際のセキュリティと柔軟性が向上します。この機能を使用するには、システム変数`tidb_redact_log`を`MARKER`に設定すると、TiDB のランタイムログ内の SQL テキストがマークされます。さらに、TiDBサーバーで`collect-log`サブコマンドを使用して、マークされた機密データをログから削除し、ログを安全な方法で表示できます。すべてのマーカーを削除して通常のログを取得することもできます。この機能は、v8.1.0 で一般提供されました。
+    強化された TiDB ログの秘匿化は、ログファイル内の SQL テキスト情報をマークすることで実装され、ユーザーがログを表示するときに機密データを削除することをサポートします。ログ情報をマークするかどうかを制御することで、さまざまなシナリオで TiDB ログを安全に使用でき、ログ秘匿化を使用する際のセキュリティと柔軟性が向上します。この機能を使用するには、システム変数`tidb_redact_log`を`MARKER`に設定すると、TiDB のランタイムログ内の SQL テキストがマークされます。さらに、TiDBサーバーで`collect-log`サブコマンドを使用して、マークされた機密データをログから削除し、ログを安全な方法で表示できます。すべてのマーカーを削除して通常のログを取得することもできます。この機能は、v8.1.0 で一般提供されました。
 
     詳細については[ドキュメント](/system-variables.md#tidb_redact_log)を参照してください。
 
@@ -129,7 +129,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 - v8.1.0 以降、TiDB および TiDB Dashboardのテレメトリ機能は削除されます。
 
-    - システム変数[`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) 、 TiDB 構成項目[`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) 、および PD 構成項目[`enable-telemetry`](/pd-configuration-file.md#enable-telemetry)非推奨となり、機能しなくなりました。
+    - システム変数[`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) 、 TiDB 設定項目[`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) 、および PD 設定項目[`enable-telemetry`](/pd-configuration-file.md#enable-telemetry)非推奨となり、機能しなくなりました。
     - `ADMIN SHOW TELEMETRY`構文は削除されます。
     - キーワード`TELEMETRY`と`TELEMETRY_ID`は削除されます。
 
@@ -236,14 +236,14 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
     - `Merge`スケジュールを生成する際にPDがpanicする可能性がある問題を修正 [＃8049](https://github.com/tikv/pd/issues/8049) @[nolouch](https://github.com/nolouch)
     - `GetAdditionalInfo` によって引き起こされるpanic問題を修正 [＃8079](https://github.com/tikv/pd/issues/8079) @[HuSharp](https://github.com/HuSharp)
     - PDの`Filter target`監視メトリックが散布範囲情報を提供しない問題を修正[＃8125](https://github.com/tikv/pd/issues/8125) @[HuSharp](https://github.com/HuSharp)
-    - クエリ結果`SHOW CONFIG`に非推奨の構成項目`trace-region-flow` が含まれる問題を修正しました [＃7917](https://github.com/tikv/pd/issues/7917) @[rleungx](https://github.com/rleungx)
+    - クエリ結果`SHOW CONFIG`に非推奨の設定項目`trace-region-flow` が含まれる問題を修正しました [＃7917](https://github.com/tikv/pd/issues/7917) @[rleungx](https://github.com/rleungx)
     - スケーリングの進行状況が正しく表示されない問題を修正[＃7726](https://github.com/tikv/pd/issues/7726) @[CabinfeverB](https://github.com/CabinfeverB)
 
 - TiFlash
 
     - 非厳密モードの`sql_mode` で無効なデフォルト値を持つ列にデータを挿入するとTiFlash がpanicする可能性がある問題を修正しました [＃8803](https://github.com/pingcap/tiflash/issues/8803) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - TiFlash が高同時実行読み取りシナリオで一時的に誤った結果を返す可能性がある問題を修正[＃8845](https://github.com/pingcap/tiflash/issues/8845) @[JinheLin](https://github.com/JinheLin)
-    - 分散ストレージおよびコンピューティングアーキテクチャで、 TiFlashコンピューティングノードの`storage.remote.cache.capacity`構成項目の値を変更した後、Grafanaに表示されるディスク`used_size`メトリックが正しくないという問題を修正しました。 [＃8920](https://github.com/pingcap/tiflash/issues/8920) @[JinheLin](https://github.com/JinheLin)
+    - 分散ストレージおよびコンピューティングアーキテクチャで、 TiFlashコンピューティングノードの`storage.remote.cache.capacity`設定項目の値を変更した後、Grafanaに表示されるディスク`used_size`メトリックが正しくないという問題を修正しました。 [＃8920](https://github.com/pingcap/tiflash/issues/8920) @[JinheLin](https://github.com/JinheLin)
     - クラスタをv6.5.0より前のバージョンからv6.5.0以降にアップグレードするときに、 TiFlashメタデータが破損してプロセスがpanicになる可能性がある問題を修正しました[＃9039](https://github.com/pingcap/tiflash/issues/9039) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - 分散ストレージとコンピューティングアーキテクチャで、コンピューティングノードのプロセスが停止するとTiFlash がpanicする可能性がある問題を修正しました[＃8860](https://github.com/pingcap/tiflash/issues/8860) @[guo-shaoge](https://github.com/guo-shaoge)
     - 仮想生成列を含むクエリを実行するとTiFlash がエラーを返す可能性がある問題を修正しました [＃8787](https://github.com/pingcap/tiflash/issues/8787) @[guo-shaoge](https://github.com/guo-shaoge)

@@ -225,7 +225,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
     設定項目`lightning.max-error`を追加しました。デフォルト値は 0 です。値が 0 より大きい場合、最大エラー機能が有効になります。エンコード中に行にエラーが発生した場合、その行を含むレコードがターゲット TiDB の`lightning_task_info.type_error_v1`に追加され、その行は無視されます。エラーのある行がしきい値を超えると、 TiDB Lightning は直ちに終了します。
 
-    `lightning.max-error`構成と一致して、 `lightning.task-info-schema-name`構成項目は、データ保存エラーを報告するデータベースの名前を記録します。
+    `lightning.max-error`構成と一致して、 `lightning.task-info-schema-name`設定項目は、データ保存エラーを報告するデータベースの名前を記録します。
 
     この機能はすべてのタイプのエラーをカバーするわけではありません。たとえば、構文エラーは適用されません。
 

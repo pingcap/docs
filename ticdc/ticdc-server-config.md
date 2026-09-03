@@ -1,6 +1,6 @@
 ---
 title: TiCDC Server Configurations
-summary: TiCDC で使用される CLI と構成パラメータについて学習します。
+summary: TiCDC で使用される CLI と設定パラメータについて学習します。
 ---
 
 # TiCDC サーバー構成 {#ticdc-server-configurations}

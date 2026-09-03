@@ -127,7 +127,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 - TiB レベルのデータをインポートする際のTiDB Lightningの安定性を向上[＃43510](https://github.com/pingcap/tidb/issues/43510) [＃43657](https://github.com/pingcap/tidb/issues/43657) @[D3Hunter](https://github.com/D3Hunter) @[lance6716](https://github.com/lance6716)
 
-    v7.1.0 以降、 TiDB Lightning には、TiB レベルのデータをインポートする際の安定性を向上させるために 4つの構成項目が追加されました。
+    v7.1.0 以降、 TiDB Lightning には、TiB レベルのデータをインポートする際の安定性を向上させるために 4つの設定項目が追加されました。
 
     - `tikv-importer.region-split-batch-size`バッチでリージョンを分割する際のリージョンの数を制御します。デフォルト値は`4096`です。
     - `tikv-importer.region-split-concurrency`リージョン分割時の同時実行を制御します。デフォルト値は CPU コアの数です。
@@ -337,7 +337,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     - Backup & Restore (BR)
 
-        - ログバックアップ中に TiKV 構成項目`log-backup.max-flush-interval`を変更することをサポート [＃14433](https://github.com/tikv/tikv/issues/14433) @[joccau](https://github.com/joccau)
+        - ログバックアップ中に TiKV 設定項目`log-backup.max-flush-interval`を変更することをサポート [＃14433](https://github.com/tikv/tikv/issues/14433) @[joccau](https://github.com/joccau)
 
     - TiCDC
 
@@ -346,7 +346,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
         - Kafka-on-Pulsar ダウンストリームへのデータ複製をサポート[＃8892](https://github.com/pingcap/tiflow/issues/8892) @[Rustin170506](https://github.com/Rustin170506)
         - Kafka にデータを複製する際に更新が発生した後に変更された列のみを複製するためのオープンプロトコルプロトコルの使用をサポートします。 [＃8706](https://github.com/pingcap/tiflow/issues/8706) @[sdojjy](https://github.com/sdojjy)
         - 下流の障害やその他のシナリオにおける TiCDC のエラー処理を最適化する[＃8657](https://github.com/pingcap/tiflow/issues/8657) @[hicqu](https://github.com/hicqu)
-        - TLS を有効にするシナリオで認証アルゴリズムを設定するかどうかを制御する構成項目`insecure-skip-verify`を追加します。 [＃8867](https://github.com/pingcap/tiflow/issues/8867) @[Rustin170506](https://github.com/Rustin170506)
+        - TLS を有効にするシナリオで認証アルゴリズムを設定するかどうかを制御する設定項目`insecure-skip-verify`を追加します。 [＃8867](https://github.com/pingcap/tiflow/issues/8867) @[Rustin170506](https://github.com/Rustin170506)
 
     - TiDB Lightning
 

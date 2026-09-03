@@ -135,7 +135,7 @@ TiProxyが適しているシナリオではTiProxyを使用し、アプリケー
 
     TiProxy のテンプレートの詳細については、 [TiProxyトポロジーのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiproxy.yaml)を参照してください。
 
-    TiDBクラスタトポロジファイル内の構成項目の詳細については、 [TiUPを使用したTiDBデプロイメントのトポロジーコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+    TiDBクラスタトポロジファイル内の設定項目の詳細については、 [TiUPを使用したTiDBデプロイメントのトポロジーコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
     設定例は以下のとおりです。
 

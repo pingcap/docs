@@ -15,8 +15,8 @@ TiDB バージョン: 7.5.1
 
 - セキュリティ強化モード（SEM）で[`require_secure_transport`](https://docs.pingcap.com/tidb/v7.5/system-variables#require_secure_transport-new-in-v610)を`ON`に設定することを禁止し、ユーザーの潜在的な接続問題を防ぎます。 [＃47665](https://github.com/pingcap/tidb/issues/47665) @[tiancaiamao](https://github.com/tiancaiamao)
 - ログ印刷のオーバーヘッドを減らすために、 TiFlashはデフォルト値の`logger.level` `"debug"`から`"info"` に変更します。 [＃8641](https://github.com/pingcap/tiflash/issues/8641) @[JaySon-Huang](https://github.com/JaySon-Huang)
-- TiKV構成項目[`gc.num-threads`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#num-threads-new-in-v658-and-v751)を導入して、 `enable-compaction-filter`が`false` の場合のGCスレッド数を設定します。 [＃16101](https://github.com/tikv/tikv/issues/16101) @[tonyxuqqi](https://github.com/tonyxuqqi)
-- TiCDC Changefeed、次の新しい構成項目が導入されています。
+- TiKV設定項目[`gc.num-threads`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#num-threads-new-in-v658-and-v751)を導入して、 `enable-compaction-filter`が`false` の場合のGCスレッド数を設定します。 [＃16101](https://github.com/tikv/tikv/issues/16101) @[tonyxuqqi](https://github.com/tonyxuqqi)
+- TiCDC Changefeed、次の新しい設定項目が導入されています。
     - [`compression`](/ticdc/ticdc-changefeed-config.md) : REDOログファイルの圧縮動作を設定できます[＃10176](https://github.com/pingcap/tiflow/issues/10176) @[sdojjy](https://github.com/sdojjy)
     - [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md) : オブジェクトストレージにデータを複製するときに履歴データの自動クリーンアップを設定できます。 [＃10109](https://github.com/pingcap/tiflow/issues/10109) @[CharlesCheung96](https://github.com/CharlesCheung96)
     - [`consistent.flush-concurrency`](/ticdc/ticdc-changefeed-config.md) : 単一のREDOファイルのアップロードの同時実行を設定できます [＃10226](https://github.com/pingcap/tiflow/issues/10226) @[sdojjy](https://github.com/sdojjy)

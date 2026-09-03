@@ -13,9 +13,9 @@ TiDBバージョン: 6.5.11
 
 ## 互換性の変更 {#compatibility-changes}
 
-- TiKV構成項目[`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)のスコープを変更します。
+- TiKV設定項目[`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)のスコープを変更します。
 
-    - v6.5.11 より前の v6.5.x バージョンでは、この構成項目は TiKV ノード間の gRPC メッセージの圧縮アルゴリズムにのみ影響します。
+    - v6.5.11 より前の v6.5.x バージョンでは、この設定項目は TiKV ノード間の gRPC メッセージの圧縮アルゴリズムにのみ影響します。
     - v6.5.11以降、この設定項目はTiKVからTiDBに送信されるgRPC応答メッセージの圧縮アルゴリズムにも影響します。圧縮を有効にすると、CPUリソースの消費量が増加する可能性があります[＃17176](https://github.com/tikv/tikv/issues/17176) @[ekexium](https://github.com/ekexium)
 
 ## 改善点 {#improvements}
@@ -87,7 +87,7 @@ TiDBバージョン: 6.5.11
 - PD
 
     - 一部のログが秘匿化されない問題を修正[＃8419](https://github.com/tikv/pd/issues/8419) @[rleungx](https://github.com/rleungx)
-    - TiKV構成項目[`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size) 1 MiB未満の値に設定するとPD panicが発生する問題を修正しました [＃8323](https://github.com/tikv/pd/issues/8323) @[JmPotato](https://github.com/JmPotato)
+    - TiKV設定項目[`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size)を1 MiB未満の値に設定するとPD panicが発生する問題を修正しました [＃8323](https://github.com/tikv/pd/issues/8323) @[JmPotato](https://github.com/JmPotato)
     - `replication.strictly-match-label`から`true`に設定するとTiFlash が起動しなくなる問題を修正 [＃8480](https://github.com/tikv/pd/issues/8480) @[rleungx](https://github.com/rleungx)
     - PD がオペレーター チェック中に遭遇するデータ競合問題を修正しました [＃8263](https://github.com/tikv/pd/issues/8263) @[lhy1024](https://github.com/lhy1024)
 

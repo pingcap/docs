@@ -26,7 +26,7 @@ TiDB バージョン: 6.5.4
 
     - 代入式を含む`LOAD DATA`ステートメントのパフォーマンスを最適化します [＃46081](https://github.com/pingcap/tidb/issues/46081) @[gengliqi](https://github.com/gengliqi)
     - ディスクからダンプされたチャンクを読み込む際のパフォーマンスを最適化します@[YangKeao](https://github.com/YangKeao) [＃45125](https://github.com/pingcap/tidb/issues/45125)
-    - PDスケジュールを一時停止するための構成項目を`halt-scheduling`追加します。 [＃6493](https://github.com/tikv/pd/issues/6493) @[JmPotato](https://github.com/JmPotato)
+    - PDスケジュールを一時停止するための設定項目`halt-scheduling`を追加します。 [＃6493](https://github.com/tikv/pd/issues/6493) @[JmPotato](https://github.com/JmPotato)
 
 - TiKV
 

@@ -44,7 +44,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 - TiKV
 
     - HTTPボディサイズを削減するために、gzipを使用してメトリック応答を圧縮することをサポートします。 [#12355](https://github.com/tikv/tikv/issues/12355) @[winoros](https://github.com/winoros)
-    - [`server.simplify-metrics`](https://docs-archive.pingcap.com/tidb/v6.1/tikv-configuration-file#simplify-metrics-new-in-v611)構成項目を使用して一部のメトリックをフィルタリングすることにより、各リクエストに対して返されるデータの量を削減することをサポートします。 [＃12355](https://github.com/tikv/tikv/issues/12355) @[glorv](https://github.com/glorv)
+    - [`server.simplify-metrics`](https://docs-archive.pingcap.com/tidb/v6.1/tikv-configuration-file#simplify-metrics-new-in-v611)設定項目を使用して一部のメトリックをフィルタリングすることにより、各リクエストに対して返されるデータの量を削減することをサポートします。 [＃12355](https://github.com/tikv/tikv/issues/12355) @[glorv](https://github.com/glorv)
     - RocksDBで同時に実行されるサブコンパクション操作の数を動的に変更する機能をサポート ( `rocksdb.max-sub-compactions` ) [#13145](https://github.com/tikv/tikv/issues/13145) @[ethercflow](https://github.com/ethercflow)
 
 - PD

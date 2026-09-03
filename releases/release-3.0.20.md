@@ -13,7 +13,7 @@ TiDB バージョン: 3.0.20
 
 - TiDB
 
-    - `enable-streaming`構成項目廃止する [＃21054](https://github.com/pingcap/tidb/pull/21054)
+    - `enable-streaming`設定項目を廃止する [＃21054](https://github.com/pingcap/tidb/pull/21054)
 
 ## 改善点 {#improvements}
 
@@ -23,7 +23,7 @@ TiDB バージョン: 3.0.20
 
 - TiKV
 
-    - `end_point_slow_log_threshold`構成項目追加する [＃9145](https://github.com/tikv/tikv/pull/9145)
+    - `end_point_slow_log_threshold`設定項目追加する [＃9145](https://github.com/tikv/tikv/pull/9145)
 
 ## バグ修正 {#bug-fixes}
 

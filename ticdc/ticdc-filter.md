@@ -52,7 +52,7 @@ ignore-update-old-value-expr = "age < 18 or name = 'lili'" # Ignore update DMLs 
 ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DMLs whose new value contains "gender = 'male'" and "age > 18".
 ```
 
-構成パラメータの説明:
+設定パラメータの説明:
 
 - `matcher` : このイベントフィルタルールが適用されるデータベースとテーブル。構文は[テーブルフィルター](/table-filter.md)と同じです。
 

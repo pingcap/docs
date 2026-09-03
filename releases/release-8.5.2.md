@@ -145,7 +145,7 @@ TiDBバージョン：8.5.2
 
         - 高同時実行シナリオでクラウドストレージからデータをインポートする際にパフォーマンスが低下する問題を修正 [#57413](https://github.com/pingcap/tidb/issues/57413) @[xuanyu66](https://github.com/xuanyu66)
         - TiDB Lightningを使用してデータをインポートする際に、エラーレポートの出力が切り詰められる問題を修正しました [#58085](https://github.com/pingcap/tidb/issues/58085) @[lance6716](https://github.com/lance6716)
-        - ログが適切に匿名化されていない問題を修正 [#59086](https://github.com/pingcap/tidb/issues/59086) @[GMHDBJD](https://github.com/GMHDBJD)
+        - ログが適切に秘匿化されていない問題を修正 [#59086](https://github.com/pingcap/tidb/issues/59086) @[GMHDBJD](https://github.com/GMHDBJD)
         - 外部アカウントを使用してGCSストレージ操作を実行する際に、認証が`context canceled`エラーで失敗する問題を修正しました [#60155](https://github.com/pingcap/tidb/issues/60155) @[lance6716](https://github.com/lance6716)
         - TiDB LightningがクラウドストレージからParquetファイルをTiDBにインポートする際に数時間停止する問題を修正します [#60224](https://github.com/pingcap/tidb/issues/60224) @[joechenrh](https://github.com/joechenrh)
         - TiDB Lightningが大量のデータをインポートする際に、SSTファイルをTiKVクラスターに書き込んだり取り込んだりする際にメモリ不足（OOM）になる可能性がある問題を修正しました。 [#59947](https://github.com/pingcap/tidb/issues/59947) @[OliverS929](https://github.com/OliverS929)

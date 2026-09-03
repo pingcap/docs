@@ -51,8 +51,8 @@ TiDB Ansible バージョン: 2.1.16
 ## ツール {#tools}
 
 - TiDB Binlog
-    - トランザクション内の一部のステートメントの実行をスキップするために、 Drainerに`ignore-txn-commit-ts`構成項目を追加します。 [＃697](https://github.com/pingcap/tidb-binlog/pull/697)
-    - 起動時に構成項目のチェックを追加し、PumpとDrainerの実行を停止し、無効な構成項目に該当する場合にエラーメッセージを返します。 [＃708](https://github.com/pingcap/tidb-binlog/pull/708)
+    - トランザクション内の一部のステートメントの実行をスキップするために、 Drainerに`ignore-txn-commit-ts`設定項目を追加します。 [＃697](https://github.com/pingcap/tidb-binlog/pull/697)
+    - 起動時に設定項目のチェックを追加し、PumpとDrainerの実行を停止し、無効な設定項目に該当する場合にエラーメッセージを返します。 [＃708](https://github.com/pingcap/tidb-binlog/pull/708)
     - DrainerのノードID を指定するためにDrainerに`node-id`設定を追加します。 [＃706](https://github.com/pingcap/tidb-binlog/pull/706)
 - TiDB Lightning
     - 2つのチェックサムが同時に実行されているときに`tikv_gc_life_time`元の値に戻せない問題を修正しました[＃224](https://github.com/pingcap/tidb-lightning/pull/224)

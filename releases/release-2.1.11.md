@@ -27,7 +27,7 @@ TiDB Ansible バージョン: 2.1.11
 
 - `balance-region` によりホットリージョンのスケジュールが失敗する可能性がある問題を修正しました [＃1551](https://github.com/pingcap/pd/pull/1551)
 - ホットスポット関連のスケジュール優先度を高く設定[＃1551](https://github.com/pingcap/pd/pull/1551)
-- 2つの構成項目追加する [＃1551](https://github.com/pingcap/pd/pull/1551)
+- 2つの設定項目を追加する [＃1551](https://github.com/pingcap/pd/pull/1551)
     - `hot-region-schedule-limit`同時ホットスポット スケジューリング タスクの最大数を制御します
     - ホットリージョンを識別するには`hot-region-cache-hits-threshold`
 

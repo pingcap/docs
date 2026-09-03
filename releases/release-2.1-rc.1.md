@@ -51,7 +51,7 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
     - いくつかのバイナリ数値型を削除する問題を修正[＃6922](https://github.com/pingcap/tidb/pull/6922)
     - 出力ログを短くする [＃7029](https://github.com/pingcap/tidb/pull/7029)
     - `mismatchClusterID`の問題を処理する [＃7053](https://github.com/pingcap/tidb/pull/7053)
-    - `advertise-address`構成項目を追加する [＃7078](https://github.com/pingcap/tidb/pull/7078)
+    - `advertise-address`設定項目を追加する [＃7078](https://github.com/pingcap/tidb/pull/7078)
     - `GrpcKeepAlive`オプションを追加 [＃7100](https://github.com/pingcap/tidb/pull/7100)
     - 接続を追加するか、 `Token`回のモニター[＃7110](https://github.com/pingcap/tidb/pull/7110)
     - データデコードパフォーマンスを最適化する[＃7149](https://github.com/pingcap/tidb/pull/7149)

@@ -13,7 +13,7 @@ TiDB バージョン: 7.1.5
 
 ## 互換性の変更 {#compatibility-changes}
 
-- RocksDB の TiKV 構成項目[`track-and-verify-wals-in-manifest`](https://docs.pingcap.com/tidb/v7.1/tikv-configuration-file#track-and-verify-wals-in-manifest-new-in-v659-and-v715)を追加します。これは、Write Ahead Log (WAL) の破損の可能性を調査するのに役立ちます。 [＃16549](https://github.com/tikv/tikv/issues/16549) @[v01dstar](https://github.com/v01dstar)
+- RocksDB の TiKV 設定項目[`track-and-verify-wals-in-manifest`](https://docs.pingcap.com/tidb/v7.1/tikv-configuration-file#track-and-verify-wals-in-manifest-new-in-v659-and-v715)を追加します。これは、Write Ahead Log (WAL) の破損の可能性を調査するのに役立ちます。 [＃16549](https://github.com/tikv/tikv/issues/16549) @[v01dstar](https://github.com/v01dstar)
 
 ## 改善点 {#improvements}
 
@@ -80,7 +80,7 @@ TiDB バージョン: 7.1.5
 - PD
 
     - 書き込みホットスポットのスケジュール設定により配置ポリシーの制約が破られる可能性がある問題を修正[＃7848](https://github.com/tikv/pd/issues/7848) @[lhy1024](https://github.com/lhy1024)
-    - クエリ結果`SHOW CONFIG`に非推奨の構成項目`trace-region-flow` が含まれる問題を修正しました [＃7917](https://github.com/tikv/pd/issues/7917) @[rleungx](https://github.com/rleungx)
+    - クエリ結果`SHOW CONFIG`に非推奨の設定項目`trace-region-flow` が含まれる問題を修正しました [＃7917](https://github.com/tikv/pd/issues/7917) @[rleungx](https://github.com/rleungx)
     - スケーリングの進行状況が正しく表示されない問題を修正[＃7726](https://github.com/tikv/pd/issues/7726) @[CabinfeverB](https://github.com/CabinfeverB)
 
 - TiFlash

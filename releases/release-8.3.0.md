@@ -146,7 +146,7 @@ TiDBバージョン：8.3.0
 
     TiDB v8.0.0 では、ログのマスキング機能が強化され、TiDB ログ内のユーザーデータを`‹ ›`でマークできるようになりました。マークされたログに基づいて、ログを表示する際にマークされた情報をマスキングするかどうかを決定できるため、ログのマスキングの柔軟性が向上します。v8.2.0 では、 TiFlash同様のログマスキング機能強化を実装しています。
 
-    バージョン8.3.0では、PDは同様のログの秘匿化機能強化を実装しています。この機能を使用するには、PD構成項目`security.redact-info-log`の値を`"marker"`に設定します。
+    バージョン8.3.0では、PDは同様のログの秘匿化機能強化を実装しています。この機能を使用するには、PD設定項目`security.redact-info-log`の値を`"marker"`に設定します。
 
     詳細については、 [ドキュメント](/log-redaction.md#log-redaction-in-pd-side)を参照してください。
 
@@ -154,7 +154,7 @@ TiDBバージョン：8.3.0
 
     TiDB v8.0.0 では、ログのマスキング機能が強化され、TiDB ログ内のユーザーデータを`‹ ›`でマークできるようになりました。マークされたログに基づいて、ログを表示する際にマークされた情報をマスキングするかどうかを決定できるため、ログのマスキングの柔軟性が向上します。v8.2.0 では、 TiFlash同様のログマスキング機能強化を実装しています。
 
-    バージョン8.3.0では、TiKVは同様のログの秘匿化機能強化を実装しています。この機能を使用するには、TiKV構成項目`security.redact-info-log`の値を`"marker"`に設定します。
+    バージョン8.3.0では、TiKVは同様のログの秘匿化機能強化を実装しています。この機能を使用するには、TiKV設定項目`security.redact-info-log`の値を`"marker"`に設定します。
 
     詳細については、 [ドキュメント](/log-redaction.md#log-redaction-in-tikv-side)を参照してください。
 
@@ -199,7 +199,7 @@ TiDBバージョン：8.3.0
 | コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                        | 変更の種類  | 説明                                                                                                                                                      |
 | -------------- | ------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`tikv-client.batch-policy`](/tidb-configuration-file.md#batch-policy-new-in-v830)                     | 新しく追加された | TiDBからTiKVへのリクエストのバッチ処理戦略を制御します。                                                                                                                        |
-| PD             | [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50)                     | 変更     | PD構成項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークできます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。                    |
+| PD             | [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50)                     | 変更     | PD設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークできます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。                    |
 | TiKV           | [`security.redact-info-log`](/tikv-configuration-file.md#redact-info-log-new-in-v408)                  | 変更     | TiKV 設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークできます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。                 |
 | TiFlash        | [`security.redact-info-log`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | 変更     | TiFlash Learnerの設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークすることができます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。 |
 | BR             | [`--allow-pitr-from-incremental`](/br/br-incremental-guide.md#limitations)                             | 新しく追加された | 増分バックアップが後続のログバックアップと互換性があるかどうかを制御します。デフォルト値は`true`で、これは増分バックアップが後続のログバックアップと互換性があることを意味します。デフォルト値`true`ままにすると、増分リストアが開始される前に、再生が必要な DDL が厳密にチェックされます。  |

@@ -115,7 +115,7 @@ tiup cluster upgrade <new_cluster_name> <v_target_version> --offline  # Perform 
 tiup cluster start <new_cluster_name>     # Start the cluster
 ```
 
-ビジネスの継続性を維持するには、構成項目やシステム変数などの重要な構成を古いクラスターから新しいクラスターに複製する必要があります。
+ビジネスの継続性を維持するには、設定項目やシステム変数などの重要な構成を古いクラスターから新しいクラスターに複製する必要があります。
 
 ## ステップ3: 増分データを複製する {#step-3-replicate-incremental-data}
 
@@ -159,7 +159,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 - スループットの健全性: `Sink flush rows/s`が一貫してビジネス書き込みレートを超えていることを確認します。
 - エラーとアラート: TiCDC ログとアラート情報を定期的に確認してください。
 - (オプション) テストデータレプリケーション: テストデータを更新し、Changefeed がそれを新しいクラスターに正しく複製することを確認します。
-- (オプション) TiCDC 構成項目[`gc-ttl`](/ticdc/ticdc-server-config.md#gc-ttl)を調整します (デフォルトは 24時間)。
+- (オプション) TiCDC 設定項目[`gc-ttl`](/ticdc/ticdc-server-config.md#gc-ttl)を調整します (デフォルトは 24時間)。
 
     レプリケーションタスクが利用できない、または中断され、時間内に解決できない場合、 `gc-ttl` TiCDC に必要なデータがガベージコレクション(GC) によって消去されることなく TiKV に保持されることを保証します。この期間を超えると、レプリケーションタスクは`failed`状態になり、回復できなくなります。この場合、PD の GC セーフポイントは引き続き前進し、プロセスを再開するには新しいバックアップが必要になります。
 
@@ -184,7 +184,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 この移行手順では、 BR `--with-sys-table`オプションを使用して一部のシステムテーブルデータを復元します。対象範囲に含まれないテーブルについては、手動で復元する必要があります。確認および補足すべき一般的な項目は次のとおりです。
 
 - ユーザー権限： `mysql.user`テーブルを比較します。
-- コンフィグレーション設定: 構成項目とシステム変数が一貫していることを確認します。
+- コンフィグレーション設定: 設定項目とシステム変数が一貫していることを確認します。
 - AUTO_INCREMENT列: 新しいクラスター内のAUTO_INCREMENT ID キャッシュをクリアします。
 - 統計: 統計を手動で収集するか、新しいクラスターで自動収集を有効にします。
 

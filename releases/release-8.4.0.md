@@ -347,8 +347,8 @@ TiDB をアップグレードする前に、オペレーティングシステム
 
     - Backup & Restore (BR)
 
-        - `split-table`および`split-region-on-table`構成項目が`false` (デフォルト値) であるクラスターにデータを復元する際、テーブルによるリージョンの分割を無効にすることで復元速度を向上させます。 [#53532](https://github.com/pingcap/tidb/issues/53532) @[Leavrth](https://github.com/Leavrth)
-        - デフォルトでは、 `RESTORE` SQL ステートメントを使用して、空ではないクラスターへの完全なデータの復元を無効にします [#55087](https://github.com/pingcap/tidb/issues/55087) @[BornChanger](https://github.com/BornChanger)
+        - `split-table`および`split-region-on-table`設定項目が`false` (デフォルト値) であるクラスターにデータを復元する際、テーブルによるリージョンの分割を無効にすることで復元速度を向上させます。 [#53532](https://github.com/pingcap/tidb/issues/53532) @[Leavrth](https://github.com/Leavrth)
+        - デフォルトでは、 `RESTORE` SQL文を使用して、空ではないクラスターへの完全なデータの復元を無効にします [#55087](https://github.com/pingcap/tidb/issues/55087) @[BornChanger](https://github.com/BornChanger)
 
 ## バグ修正 {#bug-fixes}
 

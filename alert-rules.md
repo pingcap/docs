@@ -412,7 +412,7 @@ summary: TiDB クラスターのアラートルールについて学習します
 
     - [**TiKV詳細**&gt; **PD**ダッシュボード](/grafana-tikv-dashboard.md#pd)を監視し、ストア低速スコアのメトリックを確認します。メトリック値が80を超えるノードを特定し、低速ノードとして検出します。
     - [**TiKV-詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)を監視し、レイテンシーが増加していないか確認してください。レイテンシーが高い場合は、ディスクにボトルネックが発生している可能性があります。
-    - レイテンシーのタイムアウト制限を増やすには、 [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)構成項目を大きな値に設定します。
+    - レイテンシーのタイムアウト制限を増やすには、 [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)設定項目を大きな値に設定します。
     - アラート対象の TiKV ノードのパフォーマンスの問題とチューニング方法の詳細な分析については、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration)を参照してください。
 
 ## TiKVアラートルール {#tikv-alert-rules}

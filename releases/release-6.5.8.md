@@ -13,7 +13,7 @@ TiDB バージョン: 6.5.8
 
 ## 互換性の変更 {#compatibility-changes}
 
-- TiKV構成項目[`gc.num-threads`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#num-threads-new-in-v658)を導入して、 `enable-compaction-filter`が`false` の場合のGCスレッド数を設定します。 [＃16101](https://github.com/tikv/tikv/issues/16101) @[tonyxuqqi](https://github.com/tonyxuqqi)
+- TiKV設定項目[`gc.num-threads`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#num-threads-new-in-v658)を導入して、 `enable-compaction-filter`が`false` の場合のGCスレッド数を設定します。 [＃16101](https://github.com/tikv/tikv/issues/16101) @[tonyxuqqi](https://github.com/tonyxuqqi)
 
 ## 改善点 {#improvements}
 

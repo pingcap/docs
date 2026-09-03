@@ -98,7 +98,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 
 - `utf8mb4`文字チェックを有効にするかどうかを決定します。この機能が有効になっている場合、文字セットが`utf8`で、 `mb4`に`utf8`文字が挿入されると、エラーが返されます。
 - デフォルト値: `false`
-- バージョン6.1.0以降、 `utf8mb4`文字チェックを有効にするかどうかは、TiDB構成項目`instance.tidb_check_mb4_value_in_utf8`またはシステム変数`tidb_check_mb4_value_in_utf8`によって決定されます。 `check-mb4-value-in-utf8`は引き続き有効です。ただし、 `check-mb4-value-in-utf8`と`instance.tidb_check_mb4_value_in_utf8`の両方が設定されている場合は、後者が有効になります。
+- バージョン6.1.0以降、 `utf8mb4`文字チェックを有効にするかどうかは、TiDB設定項目`instance.tidb_check_mb4_value_in_utf8`またはシステム変数`tidb_check_mb4_value_in_utf8`によって決定されます。 `check-mb4-value-in-utf8`は引き続き有効です。ただし、 `check-mb4-value-in-utf8`と`instance.tidb_check_mb4_value_in_utf8`の両方が設定されている場合は、後者が有効になります。
 
 ### `treat-old-version-utf8-as-utf8mb4` {#treat-old-version-utf8-as-utf8mb4}
 
@@ -109,7 +109,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 
 - 列に主キー制約を追加するか削除するかを決定します。
 - デフォルト値: `false`
-- このデフォルト設定では、主キー制約の追加または削除はサポートされていません。 `alter-primary-key`を`true`に設定することで、この機能を有効にできます。ただし、スイッチをオンにする前にテーブルが既に存在し、その主キー列のデータ型が整数である場合、この構成項目を`true`に設定しても、列から主キーを削除することはできません。
+- このデフォルト設定では、主キー制約の追加または削除はサポートされていません。 `alter-primary-key`を`true`に設定することで、この機能を有効にできます。ただし、スイッチをオンにする前にテーブルが既に存在し、その主キー列のデータ型が整数である場合、この設定項目を`true`に設定しても、列から主キーを削除することはできません。
 
 > **Note:**
 >
@@ -150,7 +150,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 - TiDBで許可される同時クライアント接続の最大数。リソース制御に使用されます。
 - デフォルト値: `0`
 - デフォルトでは、TiDB は同時クライアント接続数の制限を設定しません。この設定項目の値が`0`より大きく、実際のクライアント接続数がこの値に達すると、TiDBサーバーは新しいクライアント接続を拒否します。
-- バージョン 6.2.0 以降、TiDB で許可される同時クライアント接続の最大数を設定するには、TiDB 構成項目[`instance.max_connections`](/tidb-configuration-file.md#max_connections)またはシステム変数[`max_connections`](/system-variables.md#max_connections)が使用されます。 `max-server-connections`は引き続き有効です。ただし、 `max-server-connections`と`instance.max_connections`が同時に設定されている場合、後者が有効になります。
+- バージョン 6.2.0 以降、TiDB で許可される同時クライアント接続の最大数を設定するには、TiDB 設定項目[`instance.max_connections`](/tidb-configuration-file.md#max_connections)またはシステム変数[`max_connections`](/system-variables.md#max_connections)が使用されます。 `max-server-connections`は引き続き有効です。ただし、 `max-server-connections`と`instance.max_connections`が同時に設定されている場合、後者が有効になります。
 
 ### `max-index-length` {#max-index-length}
 
@@ -163,7 +163,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
     - TiDBの以前のバージョン：
         - バージョン3.0.7以前：インデックスの最大長は3072×4バイトに固定されています。
         - v3.0.8 ～ v3.0.10: インデックスの最大長は3072バイトに固定されています。
-    - v3.0.11以降のバージョンでは、TiDBはさまざまなTiDBバージョンおよびMySQLとの互換性を確保するために、 `max-index-length`構成項目を導入しました。
+    - v3.0.11以降のバージョンでは、TiDBはさまざまなTiDBバージョンおよびMySQLとの互換性を確保するために、 `max-index-length`設定項目を導入しました。
 
 ### `table-column-count-limit` <span class="version-mark">v5.0の新機能</span> {#table-column-count-limit-new-in-v50}
 
@@ -190,7 +190,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 
 ### `deprecate-integer-display-length` {#deprecate-integer-display-length}
 
-- この構成項目が`true`に設定されている場合、整数型の表示幅は非推奨になります。
+- この設定項目が`true`に設定されている場合、整数型の表示幅は非推奨になります。
 - デフォルト値: `true` 。v8.5.0 より前のバージョンでは、デフォルト値は`false`です。
 
 ### `enable-tcp4-only` <span class="version-mark">v5.0の新機能</span> {#enable-tcp4-only-new-in-v50}
@@ -243,7 +243,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 - TiDBクラスタが初めて起動されたときに実行されるSQLスクリプトを指定します。
 - デフォルト値: `""`
 - このスクリプト内のすべてのSQL文は、権限チェックなしで最高権限で実行されます。指定されたSQLスクリプトの実行に失敗すると、TiDBクラスタの起動に失敗する可能性があります。
-- この構成項目は、システム変数の値の変更、ユーザーの作成、権限の付与などの操作を実行するために使用されます。
+- この設定項目は、システム変数の値の変更、ユーザーの作成、権限の付与などの操作を実行するために使用されます。
 
 ### `enable-forwarding` <span class="version-mark">v5.0.0の新機能</span> {#enable-forwarding-new-in-v500}
 
@@ -260,7 +260,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 
 - テーブルロック機能を有効にするかどうかを制御します。
 - デフォルト値: `false`
-- テーブルロックは、複数のセッション間で同じテーブルへの同時アクセスを調整するために使用されます。現在、 `READ` 、 `WRITE` 、および`WRITE LOCAL`ロックタイプがサポートされています。構成項目が`false`に設定されている場合、 `LOCK TABLES`または`UNLOCK TABLES`ステートメントを実行しても効果がなく、「LOCK/UNLOCK TABLES はサポートされていません」という警告が表示されます。詳細については、[`LOCK TABLES`と`UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)を参照してください。
+- テーブルロックは、複数のセッション間で同じテーブルへの同時アクセスを調整するために使用されます。現在、 `READ` 、 `WRITE` 、および`WRITE LOCAL`ロックタイプがサポートされています。設定項目が`false`に設定されている場合、 `LOCK TABLES`または`UNLOCK TABLES`ステートメントを実行しても効果がなく、「LOCK/UNLOCK TABLES はサポートされていません」という警告が表示されます。詳細については、[`LOCK TABLES`と`UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)を参照してください。
 
 ### `labels` {#labels}
 
@@ -332,7 +332,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 
 > **Warning:**
 >
-> バージョン5.4.0以降、 `expensive-threshold`構成項目は非推奨となり、システム変数[`tidb_expensive_query_time_threshold`](/system-variables.md#tidb_expensive_query_time_threshold)に置き換えられました。
+> バージョン5.4.0以降、 `expensive-threshold`設定項目は非推奨となり、システム変数[`tidb_expensive_query_time_threshold`](/system-variables.md#tidb_expensive_query_time_threshold)に置き換えられました。
 
 - `expensive`操作の行数のしきい値を出力します。
 - デフォルト値: `10000`
@@ -501,7 +501,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 
 > **Warning:**
 >
-> バージョン6.5.0以降、 `server-memory-quota`構成項目は非推奨となり、システム変数[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)に置き換えられました。
+> バージョン6.5.0以降、 `server-memory-quota`設定項目は非推奨となり、システム変数[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)に置き換えられました。
 
 - tidb-serverインスタンスのメモリ使用量制限。
 - デフォルト値: `0` (バイト単位)。これはメモリ制限がないことを意味します。
@@ -524,7 +524,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 
 - TiDBにおける単一行データのサイズ制限。
 - デフォルト値: `6291456` (バイト単位)
-- トランザクション内の単一のキー値レコードのサイズ制限。サイズ制限を超えると、TiDB は`entry too large`エラーを返します。この構成項目の最大値は`125829120` (120 MB) を超えません。
+- トランザクション内の単一のキー値レコードのサイズ制限。サイズ制限を超えると、TiDB は`entry too large`エラーを返します。この設定項目の最大値は`125829120` (120 MB) を超えません。
 - バージョン7.6.0以降では、システム変数[`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760)を使用して、この設定項目の値を動的に変更できます。
 - TiKVにも同様の制限があることに注意してください。単一の書き込みリクエストのデータサイズが、デフォルトで8MBに設定されている[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)を超えると、TiKVはこのリクエストの処理を拒否します。テーブルに大きな行がある場合は、両方の設定を同時に変更する必要があります。
 - [`max_allowed_packet`](/system-variables.md#max_allowed_packet-new-in-v610) （MySQLプロトコルのパケットの最大サイズ）のデフォルト値は67108864（64 MiB）です。行が`max_allowed_packet`より大きい場合、行は切り捨てられます。
@@ -538,7 +538,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 - TiDB v6.5.0 以降のバージョンでは、この設定は推奨されなくなりました。トランザクションのメモリサイズはセッションのメモリ使用量に累積され、セッションのメモリしきい値を超えると[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)変数が有効になります。以前のバージョンとの互換性を保つため、以前のバージョンから TiDB v6.5.0 以降にアップグレードする場合、この設定は次のように動作します。
     - この設定が設定されていないか、デフォルト値 ( `104857600` ) に設定されている場合、アップグレード後にトランザクションのメモリサイズがセッションのメモリ使用量に累積され、 `tidb_mem_quota_query`変数が有効になります。
     - この設定がデフォルト設定（ `104857600` ）になっていない場合でも、設定は有効であり、単一トランザクションのサイズを制御する動作はアップグレード前後で変わりません。つまり、トランザクションのメモリサイズは`tidb_mem_quota_query`変数によって制御されません。
-- TiDB が[`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) `"bulk"`モードでトランザクションを実行する場合、トランザクションのサイズは TiDB 構成項目[`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)によって制限されません。
+- TiDB が[`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) `"bulk"`モードでトランザクションを実行する場合、トランザクションのサイズは TiDB 設定項目[`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)によって制限されません。
 
 ### `tcp-keep-alive` {#tcp-keep-alive}
 
@@ -753,7 +753,7 @@ opentracing.reporter に関連するコンフィグレーション項目。
 
 > **Note:**
 >
-> TiKVノードからTiDBノードに返される応答メッセージの圧縮アルゴリズムは、TiKV構成項目[`grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)によって制御されます。
+> TiKVノードからTiDBノードに返される応答メッセージの圧縮アルゴリズムは、TiKV設定項目[`grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)によって制御されます。
 
 ### `commit-timeout` {#commit-timeout}
 

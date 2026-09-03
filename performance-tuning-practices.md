@@ -200,7 +200,7 @@ TiDB の平均 CPU 使用率は 874% から 936% に増加します。
 アプリケーション構成はシナリオ 3 と同じままです。アプリケーションが`StmtClose`をトリガーしてもキャッシュにヒットしない問題を解決するために、次のパラメータが構成されています。
 
 - TiDB グローバル変数`set global tidb_ignore_prepared_cache_close_stmt=on;`を設定します (TiDB v6.0.0 以降に導入、デフォルトは`off` )。
-- プランキャッシュ機能を有効にするには、TiDB 構成項目`prepared-plan-cache: {enabled: true}`を設定します。
+- プランキャッシュ機能を有効にするには、TiDB 設定項目`prepared-plan-cache: {enabled: true}`を設定します。
 
 ### パフォーマンス分析 {#performance-analysis}
 
