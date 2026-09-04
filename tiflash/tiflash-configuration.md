@@ -258,7 +258,7 @@ I/O トラフィック制限設定を構成します。
 ##### `advertise-addr` {#advertise-addr}
 
 - 外部アクセスアドレス`addr` 。空のままにした場合、デフォルトで`addr`が使用されます。
-- クラスターを複数のノードにデプロイする場合は、他のノードが`advertise-addr`を介してアクセスできることを保証する必要があります。
+- クラスターを複数のノードにデプロイする場合は、他のノードが`advertise-addr`を介してアクセスできることを保証することを推奨します。
 
 ##### `status-addr` {#status-addr}
 
@@ -268,7 +268,7 @@ I/O トラフィック制限設定を構成します。
 ##### `advertise-status-addr` {#advertise-status-addr}
 
 - status-addrの外部アクセスアドレス。空のままにした場合、デフォルトで`status-addr`が使用されます。
-- クラスターを複数のノードにデプロイする場合は、他のノードが`advertise-status-addr`を介してアクセスできることを保証する必要があります。
+- クラスターを複数のノードにデプロイする場合は、他のノードが`advertise-status-addr`を介してアクセスできることを保証することを推奨します。
 
 ##### `engine-addr` {#engine-addr}
 

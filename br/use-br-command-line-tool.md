@@ -57,7 +57,7 @@ tiup br backup full --pd "${PD_IP}:2379" \
 - `--cert` : PEM 形式の SSL 証明書へのパスを指定します。
 - `--key` : PEM 形式の SSL 証明書キーへのパスを指定します。
 - `--status-addr` : `br` Prometheus に統計を提供するリスニング アドレスを指定します。
-- `--concurrency` : バックアップタスクを複数のリクエストに分割し、同じ TiKV ノードに同時に送信する方法を制御します。このパラメータは主にBRから TiKV へのリクエスト分割の粒度に影響し、全体的なバックアップスループットを直接決定するものではありません。ほとんどの場合、この値を変更する必要はありません。バックアップパフォーマンスを向上させるには、代わりに[`tikv.backup.num-threads`](/tikv-configuration-file.md#num-threads-1)を調整する必要があります。
+- `--concurrency` : バックアップタスクを複数のリクエストに分割し、同じ TiKV ノードに同時に送信する方法を制御します。このパラメータは主にBRから TiKV へのリクエスト分割の粒度に影響し、全体的なバックアップスループットを直接決定するものではありません。ほとんどの場合、この値を変更する必要はありません。バックアップパフォーマンスを向上させるには、代わりに[`tikv.backup.num-threads`](/tikv-configuration-file.md#num-threads-1)を調整することを推奨します。
 - `--pitr-concurrency` : ログ復元中の同時タスクの数。
 - `--tikv-max-restore-concurrency` : スナップショット復元中の TiKV ノードあたりの同時タスクの最大数。
 - `--compression` : バックアップファイルの生成に使用する圧縮アルゴリズムを決定します。`lz4` 、 `snappy` 、 `zstd`をサポートし、デフォルトは`zstd`です（通常は変更する必要はありません）。異なる圧縮アルゴリズムの選択に関するガイダンスについては、 [この文書](https://github.com/EighteenZi/rocksdb_wiki/blob/master/Compression.md)を参照してください。
