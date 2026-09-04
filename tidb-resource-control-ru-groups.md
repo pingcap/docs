@@ -22,14 +22,14 @@ TiDBのリソース制御機能は、TiDBレイヤーのフロー制御機能と
 
 <CustomContent platform="tidb">
 
-- TiFlashフロー制御: [TiFlashパイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)を使用すると、 TiFlash はさまざまなクエリの CPU 消費量をより正確に取得し、それを[要求単位数（RU）](#what-is-request-unit-ru)に変換して差し引くことができます。トラフィック制御はトークン バケット アルゴリズムを使用して実装されます。
+- TiFlashフロー制御: [TiFlashパイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)を使用すると、 TiFlash はさまざまなクエリの CPU 消費量をより正確に取得し、それを[リクエストユニット数（RU）](#what-is-request-unit-ru)に変換して差し引くことができます。トラフィック制御はトークン バケット アルゴリズムを使用して実装されます。
 - TiFlashスケジューリング: システムリソースが不足している場合、 TiFlash は優先順位に基づいて複数のリソースグループ間でパイプライン タスクをスケジュールします。具体的なロジックは次のとおりです。まず、 TiFlash はリソースグループの`PRIORITY`を評価し、次に CPU 使用率と`RU_PER_SEC`を考慮します。その結果、 `rg1`と`rg2`が同じ`PRIORITY`を持ち、 `rg2`の`RU_PER_SEC`が`rg1`の 2 倍である場合、 `rg2`の CPU 使用率は`rg1`の 2 倍になります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- TiFlashフロー制御: [TiFlashパイプライン実行モデル](http://docs.pingcap.com/tidb/dev/tiflash-pipeline-model)を使用すると、 TiFlash はさまざまなクエリの CPU 消費量をより正確に取得し、それを[要求単位数（RU）](#what-is-request-unit-ru)に変換して差し引くことができます。トラフィック制御はトークン バケット アルゴリズムを使用して実装されます。
+- TiFlashフロー制御: [TiFlashパイプライン実行モデル](http://docs.pingcap.com/tidb/dev/tiflash-pipeline-model)を使用すると、 TiFlash はさまざまなクエリの CPU 消費量をより正確に取得し、それを[リクエストユニット数（RU）](#what-is-request-unit-ru)に変換して差し引くことができます。トラフィック制御はトークン バケット アルゴリズムを使用して実装されます。
 - TiFlashスケジューリング: システムリソースが不足している場合、 TiFlash は優先順位に基づいて複数のリソースグループ間でパイプライン タスクをスケジュールします。具体的なロジックは次のとおりです。まず、 TiFlash はリソースグループの`PRIORITY`を評価し、次に CPU 使用率と`RU_PER_SEC`を考慮します。その結果、 `rg1`と`rg2`が同じ`PRIORITY`を持ち、 `rg2`の`RU_PER_SEC`が`rg1`の 2 倍である場合、 `rg2`の CPU 使用率は`rg1`の 2 倍になります。
 
 </CustomContent>
