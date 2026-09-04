@@ -39,7 +39,7 @@ In the cloud storage engine architecture, SST/blob data files have only one copy
 
 Run `SHOW STORAGE_CLASS TRANSITIONS` while the conversion is in progress. Compare `COMPLETED_REPLICAS` with `TOTAL_REPLICAS` to get the progress, and read `DURATION` for the elapsed time in seconds.
 
-Conversion duration depends mainly on the data volume and the conversion direction. Setting a table to IA updates metadata and is fast, while switching back to Standard downloads all data from object storage and takes much longer. To estimate the duration for your own cluster, query the `DURATION` of similar past conversions in `mysql.tidb_storage_class_transition_history`.
+Conversion duration depends mainly on the data volume and the conversion direction. Setting a table to IA updates metadata and is fast, while switching back to Standard downloads all data from object storage and takes much longer. To estimate the duration for your own cluster, query the `DURATION` of similar past conversions in `mysql.tidb_storage_class_transition_history`, filtered on `STATE = 'COMPLETED'`.
 
 For the full column reference and query examples, see [Tiered Storage Observability](/tidb-cloud/tiered-storage-observability.md).
 
@@ -48,6 +48,14 @@ For the full column reference and query examples, see [Tiered Storage Observabil
 The conversion might be stuck because of a system exception, such as a TiKV rolling restart, temporarily insufficient resources, or short-term object storage unavailability. You can tell the two cases apart by watching `DURATION` and `COMPLETED_REPLICAS` together: if both keep moving, the conversion is progressing normally and the data volume is simply large.
 
 You cannot resolve a stuck conversion yourself. Contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). After the issue is resolved, the conversion continues without any additional action from you.
+
+## What happens if I run the reverse `ALTER TABLE` before the previous conversion finishes?
+
+The previous conversion is voided. In `SHOW STORAGE_CLASS TRANSITIONS`, the row for that table or partition is replaced by the new conversion: the direction changes, and the progress counts from the beginning again.
+
+The voided conversion is recorded in `mysql.tidb_storage_class_transition_history` with `STATE = 'SUPERSEDED'`. Its `FINISH_TIME` is the start time of the new conversion, and its `COMPLETED_REPLICAS` and `TOTAL_REPLICAS` are the last values observed before it was voided. Because the work already done is discarded, reversing mid-way takes longer overall than waiting for the first conversion to finish.
+
+When you calculate conversion duration statistics, filter on `STATE = 'COMPLETED'`: the `DURATION` of a `SUPERSEDED` record covers only the time until it was voided, not a full conversion.
 
 ## Can I increase the local cache for IA data, and does it cost more?
 

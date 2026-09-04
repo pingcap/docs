@@ -319,7 +319,7 @@ Benchmark with your own workload before you change this parameter, and perform t
 - IA → Standard conversion downloads all data from object storage, generating significant cold storage bandwidth usage
 - Monitor bandwidth usage to ensure smooth operation; if necessary, **contact the TiDB Cloud team in advance** for joint monitoring
 - Business SQL reads/writes are not affected during conversion, but performance (e.g., QPS/TPS) may have minor impact — test environment shows less than 5%
-- Before you start, query `mysql.tidb_storage_class_transition_history` for the duration of similar past conversions on your cluster to estimate the change window
+- Before you start, query `mysql.tidb_storage_class_transition_history` for the duration of similar past conversions on your cluster, filtered on `STATE = 'COMPLETED'`, to estimate the change window
 - During the conversion, run `SHOW STORAGE_CLASS TRANSITIONS` to track progress and detect a stuck conversion
 
 ### Configuration stability
@@ -331,5 +331,7 @@ Keep the storage class setting stable and avoid frequent switching between IA an
 - IA cache data flushing
 
 The cumulative cost of these operations is not negligible.
+
+If you issue a reverse conversion while the previous conversion is still running, the previous conversion is voided and the progress it had made is discarded. The new conversion starts over from the beginning, so reversing mid-way takes longer overall than waiting for the first conversion to finish. For how to identify a voided conversion, see [Tiered Storage Observability](/tidb-cloud/tiered-storage-observability.md).
 
 This applies to the storage class of a table or partition. Adjusting the IA cache level is a different operation: it is a hot update, does not move data between storage classes, and can be changed as often as your cost and performance targets require.
