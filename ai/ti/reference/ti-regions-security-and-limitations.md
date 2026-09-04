@@ -46,6 +46,7 @@ The TiDB Cloud CLI does not download a Drive9 region manifest at runtime. A prof
 | `ti configure`, all `ti db` control-plane operations | TiDB Cloud API public/private key |
 | `ti fs create-file-system` | TiDB Cloud API key |
 | `ti fs delete-file-system` | TiDB Cloud API key and file system ID |
+| Describe or update Filesystem extraction and embedding configuration | TiDB Cloud API key and explicit file system ID |
 | Generate, list, enable, disable, or delete Filesystem tokens | TiDB Cloud API key and explicit file system ID |
 | Refresh a Filesystem token | The current FS bearer token only |
 | Remote file, layer, pack, mount, Git, journal, and owner vault operations | FS owner token or registered resource credential |
@@ -63,6 +64,8 @@ TiDB Cloud API calls use Digest authentication. SQL HTTPS execution uses generat
 - Use a separate Filesystem token for each machine, CI workflow, or sandbox class so that one environment can be disabled or revoked without interrupting others. Token names are operational labels, not unique identifiers; mutate tokens only by `token_id`.
 - Capture generated and refreshed token plaintext immediately because it is returned only once. A token refreshed from `TI_FS_TOKEN` is not written back to an external secret manager. Refresh is non-idempotent, so do not retry after an ambiguous network failure.
 - For shared-token rotation, generate and distribute a replacement, validate access, then disable and delete the old token. Allow approximately 10 seconds for authentication caches to converge after a state change.
+- Pass an AI provider key only through `TI_FS_AI_PROVIDER_API_KEY`. The TiDB Cloud CLI does not persist this value locally, and the Filesystem service returns it only in masked form. Do not retry an AI configuration update after an ambiguous failure until you describe the effective configuration.
+- Enabling extraction shares Filesystem media with the configured extraction provider. Enabling app-managed embedding shares text or extracted descriptions with the configured embedding provider. Review that provider's data retention and security terms before enabling either feature.
 - Use `--read-only` for SQL inspection by untrusted or exploratory agents. Use `--admin` only for DDL or privilege management, and use `--read-write` only when data changes are intended.
 - Use `--dry-run` before destructive control-plane operations. Keep `~/.ti/credentials`, resource credentials, and DB SQL credentials owner-readable only.
 - Grant Docker access to `/dev/fuse`, `SYS_ADMIN`, and an unconfined AppArmor profile only to dedicated, trusted containers. These settings reduce container isolation.
@@ -99,6 +102,9 @@ Ubuntu 26.04 additionally confines `fusermount3` with AppArmor. Use a mount path
 - Journals are append-only and the current public command surface has no journal delete command.
 - Filesystem list and describe commands query the region-scoped remote inventory with TiDB Cloud credentials. They do not aggregate across regions.
 - The local credential store keeps one selected token per profile and Filesystem. It does not mirror all remote tokens. Older create/import credentials without a known token ID remain usable, but cannot be correlated with remote token metadata.
+- Filesystem extraction and embedding provider configuration is optional. Leaving it unconfigured does not block resource administration, file access, search, layers, Git, journal, vault, or mount workflows.
+- OpenAI provider interfaces are supported for embedding and image, audio, and video extraction. Alibaba Cloud Model Studio Qwen ASR is supported only for audio extraction. Other vendors are conditionally compatible only through the exact OpenAI-compatible contract; native Anthropic, Gemini, Vertex AI, Bedrock, and Azure OpenAI interfaces are not supported.
+- App-managed embedding requires a provider model that returns exactly 1024 dimensions. Filesystems that report `source=database_auto` use database-managed embedding and reject app-managed configuration.
 - Telemetry management commands are intentionally not implemented. Control telemetry through `~/.ti/.preferences` or `TI_TELEMETRY`; serverless-function deployment, Homebrew, and Scoop distribution are not implemented.
 - The TiDB Cloud CLI depends on its installed `ti-drive9` companion for all public Filesystem runtime behavior.
 

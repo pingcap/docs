@@ -5,7 +5,7 @@ summary: List remote TiDB Cloud Filesystems in a region.
 
 # ti fs list-file-systems
 
-Lists every Filesystem that the selected TiDB Cloud credentials can access in the effective region. Results include authoritative display metadata, quota and usage, and `has_local_token`, which indicates whether this machine has a matching data-plane token. Tokens are never returned.
+Lists every Filesystem that the selected TiDB Cloud credentials can access in the effective region. Results include authoritative display metadata, quota and usage, and `has_local_token`, which indicates whether this machine has a matching data-plane token. Quota data includes media and video extraction limits and counters when returned by the service. Tokens are never returned.
 
 > **Note:**
 >

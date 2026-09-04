@@ -26,6 +26,10 @@ ti fs
 ├── refresh-file-system-token
 ├── list-file-systems
 ├── describe-file-system
+├── describe-file-system-extract-configuration
+├── update-file-system-extract-configuration
+├── describe-file-system-embedding-configuration
+├── update-file-system-embedding-configuration
 ├── check-file-system
 ├── delete-file-system
 ├── copy-file
@@ -74,6 +78,10 @@ ti fs
 | `refresh-file-system-token` | Rotates the supplied token and returns its replacement plaintext once. | `ti fs refresh-file-system-token --file-system-id <file-system-id>` |
 | `list-file-systems` | Lists authoritative remote metadata and quota information, optionally filtered by display-name substring and one exact label. | `ti fs list-file-systems --output text` |
 | `describe-file-system` | Reads authoritative remote metadata and quota information by ID without requiring its FS token. | `ti fs describe-file-system --file-system-id <file-system-id>` |
+| `describe-file-system-extract-configuration` | Reads effective image, audio, or video extraction configuration by Filesystem ID. | `ti fs describe-file-system-extract-configuration --file-system-id <file-system-id> --media-type image` |
+| `update-file-system-extract-configuration` | Enables, updates, or disables optional media extraction configuration. | `ti fs update-file-system-extract-configuration --file-system-id <file-system-id> --media-type image --enabled false` |
+| `describe-file-system-embedding-configuration` | Reads effective app-managed or database-managed embedding configuration. | `ti fs describe-file-system-embedding-configuration --file-system-id <file-system-id>` |
+| `update-file-system-embedding-configuration` | Enables or disables optional app-managed embedding configuration. | `ti fs update-file-system-embedding-configuration --file-system-id <file-system-id> --enabled false` |
 | `check-file-system` | Verifies resource selection, endpoint resolution, credentials, and companion access. | `ti fs check-file-system --file-system-id <file-system-id>` |
 | `delete-file-system` | Uses TiDB Cloud API credentials to request asynchronous deletion by explicit ID and removes a matching local credential after acceptance. | `ti fs delete-file-system --file-system-id <file-system-id>` |
 
@@ -161,7 +169,7 @@ ti fs list-file-systems \
   --label environment=development
 ```
 
-List and describe results include authoritative display metadata, status, region, quota and usage. `has_local_token` reports only whether the selected local profile has a matching token; token values are never included.
+List and describe results include authoritative display metadata, status, region, quota, and usage. The quota object includes storage, file-count, media-extraction, and video-extraction limits and counters when returned by the service. `has_local_token` reports only whether the selected local profile has a matching token; token values are never included.
 
 Select a resource for subsequent commands in the current shell:
 
@@ -183,6 +191,58 @@ ti fs delete-file-system \
 ```
 
 Create and delete support `--dry-run`. Deletion requires TiDB Cloud API keys and an ID, but not a local FS token. Drive9 deletion is asynchronous, so a successfully accepted request reports `status: "deleting"` while `ti` removes only a matching ID-keyed local credential.
+
+## Configure optional AI providers
+
+Filesystem AI provider configuration is optional and independent of ordinary resource, file, search, layer, and mount operations. If you do not configure it, those workflows continue to work normally with the Filesystem service's effective defaults.
+
+The configuration commands require TiDB Cloud API public/private keys and an explicit Filesystem ID. They do not accept an FS owner or scoped token. The provider API key is read only from `TI_FS_AI_PROVIDER_API_KEY`, sent to the Filesystem service for validation and encrypted storage, and never persisted locally by `ti`. Describe responses return only a masked key.
+
+Configure image extraction through an OpenAI provider:
+
+```bash
+# Provider validation sends a small built-in image and can incur a provider charge.
+TI_FS_AI_PROVIDER_API_KEY="<provider-api-key>" \
+ti fs update-file-system-extract-configuration \
+  --file-system-id "<file-system-id>" \
+  --media-type image \
+  --enabled true \
+  --provider-api-base https://api.openai.com/v1 \
+  --provider-model "<vision-model>" \
+  --provider-protocol openai
+```
+
+Configure Alibaba Cloud Model Studio Qwen ASR for audio:
+
+```bash
+# qwen-asr is supported only for audio extraction.
+TI_FS_AI_PROVIDER_API_KEY="<dashscope-api-key>" \
+ti fs update-file-system-extract-configuration \
+  --file-system-id "<file-system-id>" \
+  --media-type audio \
+  --enabled true \
+  --provider-api-base https://dashscope.aliyuncs.com/compatible-mode/v1 \
+  --provider-model qwen3-asr-flash \
+  --provider-protocol qwen-asr
+```
+
+Configure an OpenAI-compatible embedding provider whose model returns exactly 1024 dimensions:
+
+```bash
+# The Filesystem service validates the provider before saving the configuration.
+TI_FS_AI_PROVIDER_API_KEY="<provider-api-key>" \
+ti fs update-file-system-embedding-configuration \
+  --file-system-id "<file-system-id>" \
+  --enabled true \
+  --provider-api-base https://api.openai.com/v1 \
+  --provider-model text-embedding-3-small
+```
+
+OpenAI is supported for embedding and image, audio, and video extraction. An API from another vendor is conditionally compatible only when it implements the exact OpenAI request and response contract required by the selected operation. Qwen ASR through Alibaba Cloud Model Studio is additionally supported for audio extraction. Native Anthropic, Gemini, Vertex AI, Bedrock, and Azure OpenAI interfaces are not supported.
+
+After extraction is enabled, Filesystem image, audio, or video content is sent to the configured extraction provider. Text or extracted descriptions are sent to the configured embedding provider. Choose provider accounts and retention policies appropriate for your data. A provider validation request can incur a small charge. If an update times out or loses its response, describe the configuration before retrying because the service might already have validated and saved it.
+
+For complete options and safe update behavior, see the individual [extract configuration](/ai/ti/reference/commands/fs/ti-fs-update-file-system-extract-configuration.md) and [embedding configuration](/ai/ti/reference/commands/fs/ti-fs-update-file-system-embedding-configuration.md) command references.
 
 ## Manage Filesystem tokens
 
