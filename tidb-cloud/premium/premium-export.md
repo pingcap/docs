@@ -74,12 +74,12 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
 
 スキーマとデータは、以下の命名規則に従ってエクスポートされます。
 
-| アイテム       | 圧縮されていない                      | 圧縮                                 |
-| ---------- | ----------------------------- | ---------------------------------- |
-| データベーススキーマ | {database}-schema-create.sql  | {データベース}-スキーマ作成.sql.{圧縮タイプ}        |
-| テーブルスキーマ   | {データベース}.{テーブル}スキーマ.sql       | {データベース}.{テーブル}-スキーマ.sql.{圧縮タイプ}   |
-| データ        | {database}.{table}.{0001}.csv | {データベース}.{テーブル}.{0001}.csv.{圧縮タイプ} |
-| データ        | {データベース}.{テーブル}.{0001}.sql    | {データベース}.{テーブル}.{0001}.sql.{圧縮タイプ} |
+| 項目                 | 圧縮されていない              | 圧縮されている                                   |
+| -------------------- | ----------------------------- | ------------------------------------------------ |
+| データベーススキーマ | {database}-schema-create.sql  | {database}-schema-create.sql.{compression-type}  |
+| テーブルスキーマ     | {database}.{table}-schema.sql | {database}.{table}-schema.sql.{compression-type} |
+| データ               | {database}.{table}.{0001}.csv | {database}.{table}.{0001}.csv.{compression-type} |
+| データ               | {database}.{table}.{0001}.sql | {database}.{table}.{0001}.sql.{compression-type} |
 
 ### データ圧縮 {#data-compression}
 

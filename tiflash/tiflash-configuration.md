@@ -209,7 +209,7 @@ I/O トラフィック制限設定を構成します。
 
 - 例: `858993459200` (800 GiB)
 
-#### フラッシュ {#flash}
+#### flash {#flash}
 
 ##### `service_addr` {#service_addr}
 
@@ -248,7 +248,7 @@ I/O トラフィック制限設定を構成します。
 - 単位: 秒
 - TiFlashサーバーがシャットダウンを待機している間 (猶予期間中)、TiDB は新しい MPP タスクをサーバーに送信しません。
 
-#### フラッシュプロキシ {#flashproxy}
+#### flash.proxy {#flashproxy}
 
 ##### `addr` {#addr}
 
@@ -294,7 +294,7 @@ I/O トラフィック制限設定を構成します。
 
 <!-- Example: `"/tidb-deploy/tiflash-9000/log/tiflash_tikv.log"` -->
 
-#### ロガー {#logger}
+#### logger {#logger}
 
 以下のパラメータはTiFlashログとTiFlashエラーログにのみ有効です。TiFlashのログパラメータを設定する必要がある場合は、 [`tiflash-learner.toml`](#configure-the-tiflash-learnertoml-file)で指定してください。
 
@@ -326,21 +326,21 @@ I/O トラフィック制限設定を構成します。
 - 保存できるログファイルの最大数。TiFlashとTiFlashエラーログの場合、保存できるログファイルの最大数はそれぞれ`count`です。
 - デフォルト値: `10`
 
-#### ラフト {#raft}
+#### raft {#raft}
 
 ##### `pd_addr` {#pd_addr}
 
 - PD サービス アドレス。
 - 複数のアドレスはカンマで区切られます。例： `"10.0.1.11:2379,10.0.1.12:2379,10.0.1.13:2379"` 。
 
-#### 状態 {#status}
+#### status {#status}
 
 ##### `metrics_port` {#metrics_port}
 
 - Prometheus がメトリック情報を取得するポート。
 - デフォルト値: `8234`
 
-#### プロファイル.デフォルト {#profilesdefault}
+#### profiles.default {#profilesdefault}
 
 ##### `dt_enable_logical_split` {#dt_enable_logical_split}
 
@@ -457,7 +457,7 @@ I/O トラフィック制限設定を構成します。
 - この項目はMinTSOスケジューラに使用されます。TiFlashで同時に実行できるクエリの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラ](/tiflash/tiflash-mintso-scheduler.md)を参照してください。
 - デフォルト値: バージョン7.4.0より前のバージョンでは、デフォルト値は`vcpu * 0.25`で、これはvCPU数の4分の1を意味します。バージョン7.4.0以降では、デフォルト値は`vcpu * 2`で、これはvCPU数の2倍を意味します。
 
-#### セキュリティ<span class="version-mark">v4.0.5 の新機能</span> {#security-new-in-v405}
+#### security<span class="version-mark">v4.0.5 の新機能</span> {#security-new-in-v405}
 
 セキュリティ関連の設定を構成します。
 
@@ -493,10 +493,10 @@ I/O トラフィック制限設定を構成します。
 
 `tiflash-learner.toml`のパラメータは基本的にTiKVと同じです。TiFlashの設定については[TiKV構成](/tikv-configuration-file.md)を参照してください。以下はよく使用されるパラメータのみを示しています。ご注意ください。
 
-- TiKV と比較して、 TiFlash Proxy には[`raftstore.snap-handle-pool-size`](#snap-handle-pool-size-new-in-v400)追加パラメーターがあります。
+- TiKV と比較して、 TiFlash Proxy には[`raftstore.snap-handle-pool-size`](#snap-handle-pool-size-new-in-v400)という追加パラメーターがあります。
 - キーが`engine`の`label`は予約されており、手動で設定することはできません。
 
-#### ログ {#log-1}
+#### log {#log-1}
 
 ##### `level` <span class="version-mark">v5.4.0 の新機能</span> {#level-new-in-v540}
 
@@ -504,7 +504,7 @@ I/O トラフィック制限設定を構成します。
 - デフォルト値: `"info"`
 - `"info"` `"debug"` `"error"` `"warn"` `"trace"`
 
-#### ログファイル {#logfile}
+#### log.file {#logfile}
 
 ##### `max-backups` <span class="version-mark">5.4.0の新機能</span> {#max-backups-new-in-v540}
 
@@ -520,7 +520,7 @@ I/O トラフィック制限設定を構成します。
 - このパラメータがゼロ以外の値に設定されている場合、 TiFlash Proxy は`max-days`で指定された日数後に古いログファイルをクリーンアップします。
 - デフォルト値: `0`
 
-#### ラフトストア {#raftstore}
+#### raftstore {#raftstore}
 
 ##### `apply-pool-size` {#apply-pool-size}
 
@@ -539,7 +539,7 @@ I/O トラフィック制限設定を構成します。
 - スナップショットを処理するスレッドの数。`0`に設定すると、マルチスレッド最適化は無効になります。
 - デフォルト値: `2`
 
-#### 安全 {#security}
+#### security {#security}
 
 ##### `redact-info-log`<span class="version-mark">バージョン5.0の新機能</span> {#redact-info-log-new-in-v50}
 
@@ -550,7 +550,7 @@ I/O トラフィック制限設定を構成します。
 - 設定項目が`true`または`"on"`に設定されている場合、ログ内のすべてのユーザーデータは`?`に置き換えられます。
 - 設定項目を`"marker"`に設定すると、ログ内のすべてのユーザーデータは`‹ ›`で囲まれます。ユーザーデータに`‹`または`›`が含まれている場合、 `‹`は`‹‹`に、 `›`は`››`にエスケープされます。マークされたログに基づいて、ログを表示する際にマークされた情報を秘匿化するかどうかを決定できます。
 
-#### セキュリティ.暗号化 {#securityencryption}
+#### security.encryption {#securityencryption}
 
 ##### `data-encryption-method` {#data-encryption-method}
 
@@ -563,15 +563,15 @@ I/O トラフィック制限設定を構成します。
 - データ暗号化キーをローテーションする頻度を指定します。
 - デフォルト値: `7d`
 
-#### セキュリティ.暗号化.マスターキー {#securityencryptionmaster-key}
+#### security.encryption.master-key {#securityencryptionmaster-key}
 
 - 暗号化が有効になっている場合、マスターキーを指定します。マスターキーの設定方法については、 [暗号化を設定する](/encryption-at-rest.md#configure-encryption)を参照してください。
 
-#### セキュリティ.暗号化.以前のマスターキー {#securityencryptionprevious-master-key}
+#### security.encryption.previous-master-key {#securityencryptionprevious-master-key}
 
 - 新しいマスターキーをローテーションする際に使用する古いマスターキーを指定します。設定形式は`master-key`と同じです。マスターキーの設定方法については、 [暗号化を設定する](/encryption-at-rest.md#configure-encryption)を参照してください。
 
-#### サーバー {#server}
+#### server {#server}
 
 ##### `labels` {#labels}
 
