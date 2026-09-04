@@ -2,7 +2,6 @@
   "tidb": "TiDB",
   "tidb-version": "v8.5.0",
   "ticdc-version": "8.5.8",
->>>>>>> aa389a3d74 (docs: use ticdc-version variable in TiCDC examples (#23696))
   "tidb-operator-version": "v1.6.4",
   "self-managed": "TiDB Self-Managed",
   "starter": "TiDB Cloud Starter",
