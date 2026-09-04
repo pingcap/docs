@@ -345,7 +345,7 @@ I/O トラフィック制限設定を構成します。
 ##### `dt_enable_logical_split` {#dt_enable_logical_split}
 
 - DeltaTreeストレージエンジンのセグメントで論理分割を使用するかどうかを指定します。論理分割を使用すると書き込み増幅を削減できますが、ディスク領域の無駄が発生します。
-- v6.2.0以降のバージョンでは、デフォルト値の`false`を維持し、 `true`に変更しないことを強くお勧めします。詳細については、既知の問題[＃5576](https://github.com/pingcap/tiflash/issues/5576)を参照してください。
+- v6.2.0以降のバージョンでは、デフォルト値の`false`を維持し、 `true`に変更しないことを強くお勧めします。詳細については、既知の問題[#5576](https://github.com/pingcap/tiflash/issues/5576)を参照してください。
 - デフォルト値: `false`
 
 ##### `max_threads` {#max_threads}

@@ -35,7 +35,7 @@ TiDB バージョン: 6.1.0
 
     TiFlash v6.1.0 introduces the `ALTER TABLE ... COMPACT` statement, which provides a manual way to compact physical data based on the existing background compaction mechanism. With this statement, you can update data in earlier formats and improve read/write performance any time as appropriate. It is recommended that you execute this statement to compact data after upgrading your cluster to v6.1.0. This statement is an extension of the standard SQL syntax and therefore is compatible with MySQL clients. For scenarios other than TiFlash upgrade, usually there is no need to use this statement.
 
-    [ユーザードキュメント](/sql-statements/sql-statement-alter-table-compact.md) [＃4145](https://github.com/pingcap/tiflash/issues/4145)
+    [ユーザードキュメント](/sql-statements/sql-statement-alter-table-compact.md) [#4145](https://github.com/pingcap/tiflash/issues/4145)
 
 - TiFlash はウィンドウ関数フレームワークを実装し、次のウィンドウ関数をサポートします。
 
@@ -43,7 +43,7 @@ TiDB バージョン: 6.1.0
     - `DENSE_RANK()`
     - `ROW_NUMBER()`
 
-    [ユーザードキュメント](/tiflash/tiflash-supported-pushdown-calculations.md) [＃33072](https://github.com/pingcap/tidb/issues/33072)
+    [ユーザードキュメント](/tiflash/tiflash-supported-pushdown-calculations.md) [#33072](https://github.com/pingcap/tidb/issues/33072)
 
 ### 可観測性 {#observability}
 
@@ -63,19 +63,19 @@ TiDB バージョン: 6.1.0
 
     v6.1.0以降では、 [`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size)を設定することでリージョンのサイズを大きく設定できます。これにより、リージョンの数を効果的に削減し、リージョンの管理を容易にし、クラスターのパフォーマンスと安定性を向上させることができます。
 
-    [ユーザードキュメント](/tune-region-performance.md#use-region-split-size-to-adjust-region-size) [＃11515](https://github.com/tikv/tikv/issues/11515)
+    [ユーザードキュメント](/tune-region-performance.md#use-region-split-size-to-adjust-region-size) [#11515](https://github.com/tikv/tikv/issues/11515)
 
 - 同時実行性を高めるためにバケットの使用をサポート（実験的）
 
     リージョンのサイズを大きくした後でもクエリの同時実行性をさらに向上させるために、TiDB ではバケットという概念が導入されています。バケットとは、リージョン内のより小さな範囲を指します。バケットをクエリ単位として使用すると、リージョンのサイズを大きくした場合に同時実行クエリのパフォーマンスを最適化できます。また、バケットをクエリ単位として使用すると、ホットスポットリージョンのサイズを動的に調整して、スケジューリングの効率と負荷分散を確保することもできます。この機能は現在実験的です。本番環境での使用は推奨されません。
 
-    [ユーザードキュメント](/tune-region-performance.md#use-bucket-to-increase-concurrency) [＃11515](https://github.com/tikv/tikv/issues/11515)
+    [ユーザードキュメント](/tune-region-performance.md#use-bucket-to-increase-concurrency) [#11515](https://github.com/tikv/tikv/issues/11515)
 
 - Use Raft Engine as the default log storage engine
 
     v6.1.0以降、TiDBはログのデフォルトストレージエンジンとしてRaft Engineを使用しています。RocksDBと比較して、 Raft EngineはTiKV I/O書き込みトラフィックを最大40%、CPU使用率を10%削減し、フォアグラウンドスループットを約5%向上させ、特定の負荷下ではテールレイテンシーを20%削減します。
 
-    [ユーザードキュメント](/tikv-configuration-file.md#raft-engine) [＃95](https://github.com/tikv/raft-engine/issues/95)
+    [ユーザードキュメント](/tikv-configuration-file.md#raft-engine) [#95](https://github.com/tikv/raft-engine/issues/95)
 
 - 結合順序ヒント構文をサポートする
 
@@ -84,7 +84,7 @@ TiDB バージョン: 6.1.0
 
     これにより、テーブル結合の順序を固定することができます。ヒントを適切に使用することで、SQLパフォーマンスとクラスタの安定性を効果的に向上させることができます。
 
-    [＃29932](https://github.com/pingcap/tidb/issues/29932) [`STRAIGHT_JOIN`](/optimizer-hints.md#straight_join) : [`LEADING`](/optimizer-hints.md#leadingt1_name--tl_name-)
+    [#29932](https://github.com/pingcap/tidb/issues/29932) [`STRAIGHT_JOIN`](/optimizer-hints.md#straight_join) : [`LEADING`](/optimizer-hints.md#leadingt1_name--tl_name-)
 
 - TiFlash はさらに 4つの関数をサポートしています。
 
@@ -93,13 +93,13 @@ TiDB バージョン: 6.1.0
     - `TO_SECONDS`
     - `WEEKOFYEAR`
 
-    [ユーザードキュメント](/tiflash/tiflash-supported-pushdown-calculations.md) [＃4679](https://github.com/pingcap/tiflash/issues/4679) [＃4678](https://github.com/pingcap/tiflash/issues/4678) [＃4677](https://github.com/pingcap/tiflash/issues/4677)
+    [ユーザードキュメント](/tiflash/tiflash-supported-pushdown-calculations.md) [#4679](https://github.com/pingcap/tiflash/issues/4679) [#4678](https://github.com/pingcap/tiflash/issues/4678) [#4677](https://github.com/pingcap/tiflash/issues/4677)
 
 - TiFlash は、動的プルーニングモードでパーティション化されたテーブルをサポートします。
 
     OLAPシナリオにおけるパフォーマンス向上のため、パーティションテーブルでは動的プルーニングモードがサポートされています。TiDBをv6.0.0より前のバージョンからアップグレードする場合は、パフォーマンスを最大限に高めるために、既存のパーティションテーブルの統計情報を手動で更新することをお勧めします（新規インストールの場合、またはv6.1.0へのアップグレード後に新しく作成されたパーティションの場合は必要ありません）。
 
-    [＃3873](https://github.com/pingcap/tiflash/issues/3873) [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode) : [MPP モードでパーティションテーブルにアクセスする](/tiflash/use-tiflash-mpp-mode.md#access-partitioned-tables-in-the-mpp-mode)
+    [#3873](https://github.com/pingcap/tiflash/issues/3873) [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode) : [MPP モードでパーティションテーブルにアクセスする](/tiflash/use-tiflash-mpp-mode.md#access-partitioned-tables-in-the-mpp-mode)
 
 ### 安定性 {#stability}
 
@@ -107,7 +107,7 @@ TiDB バージョン: 6.1.0
 
     RocksDBがバックグラウンドで破損したSSTファイルを検出すると、TiKVは影響を受けたピアのスケジュールを設定し、他のレプリカを使用してそのデータの復旧を試みます。パラメータ`background-error-recovery-window`を使用して、復旧の最大許容時間を設定できます。復旧操作が指定時間内に完了しない場合、TiKVはpanicになります。この機能は、復旧可能な破損ストレージを自動的に検出して復旧するため、クラスターの安定性が向上します。
 
-    [ユーザードキュメント](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610) [＃10578](https://github.com/tikv/tikv/issues/10578)
+    [ユーザードキュメント](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610) [#10578](https://github.com/tikv/tikv/issues/10578)
 
 - 非トランザクションDML文をサポートする
 
@@ -135,7 +135,7 @@ TiDB バージョン: 6.1.0
 
     TiDB v6.1.0より前のバージョンでは、マシン障害により複数のリージョンレプリカが失われた場合、ユーザーはすべてのTiKVサーバーを停止し、 TiKV Controlを使用してTiKVを1つずつリカバリする必要がありました。TiDB v6.1.0以降では、リカバリプロセスは完全に自動化されており、TiKVを停止する必要がなく、他のオンラインアプリケーションに影響を与えることもありません。リカバリプロセスはPD Controlを使用して開始でき、よりユーザーフレンドリーな概要情報を提供します。
 
-    [ユーザードキュメント](/online-unsafe-recovery.md) [＃10483](https://github.com/tikv/tikv/issues/10483)
+    [ユーザードキュメント](/online-unsafe-recovery.md) [#10483](https://github.com/tikv/tikv/issues/10483)
 
 - 履歴統計収集タスクの表示をサポート
 
@@ -166,7 +166,7 @@ TiDB バージョン: 6.1.0
 
     TiDB v6.1.0より前のバージョンでは、操作が大量のリソースを消費し、クラスタの安定性に問題が発生する場合、対象のTiDBインスタンスに接続してから`KILL TIDB ${id};`のコマンドを実行して対象の接続と操作を終了する必要がありました。多くのTiDBインスタンスの場合、この方法は使いにくく、誤操作が発生しやすいという問題がありました。v6.1.0以降では、 `enable-global-kill`構成が導入され、デフォルトで有効になっています。クライアントとTiDBの間にプロキシがある場合、他のクエリやセッションを誤って終了してしまう心配なく、任意のTiDBインスタンスでkillコマンドを実行して、指定した接続と操作を終了できます。現在、TiDBはCtrl+Cを使用してクエリまたはセッションを終了することをサポートしていません。
 
-    [ユーザードキュメント](/tidb-configuration-file.md#enable-global-kill-new-in-v610) [＃8854](https://github.com/pingcap/tidb/issues/8854)
+    [ユーザードキュメント](/tidb-configuration-file.md#enable-global-kill-new-in-v610) [#8854](https://github.com/pingcap/tidb/issues/8854)
 
 - TiKV API V2 (実験的)
 
@@ -183,7 +183,7 @@ TiDB バージョン: 6.1.0
 
     </Warning>
 
-    [ユーザードキュメント](/tikv-configuration-file.md#api-version-new-in-v610) [＃11745](https://github.com/tikv/tikv/issues/11745)
+    [ユーザードキュメント](/tikv-configuration-file.md#api-version-new-in-v610) [#11745](https://github.com/tikv/tikv/issues/11745)
 
 ### MySQLとの互換性 {#mysql-compatibility}
 
@@ -191,7 +191,7 @@ TiDB バージョン: 6.1.0
 
     User-level locks are a user-named lock management system provided by MySQL through built-in functions. The locking functions can provide lock blocking, waiting, and other lock management capabilities. User-level locks are also widely used in ORM frameworks, such as Rails, Elixir, and Ecto. Since v6.1.0, TiDB has supported MySQL-compatible user-level lock management, and supports `GET_LOCK`, `RELEASE_LOCK`, and `RELEASE_ALL_LOCKS` functions.
 
-    [ユーザードキュメント](/functions-and-operators/locking-functions.md) [＃14994](https://github.com/pingcap/tidb/issues/14994)
+    [ユーザードキュメント](/functions-and-operators/locking-functions.md) [#14994](https://github.com/pingcap/tidb/issues/14994)
 
 ### データ移行 {#data-migration}
 
@@ -205,7 +205,7 @@ TiDB バージョン: 6.1.0
 
     移行タスクを開始する際、開始時刻とセーフモードの継続時間を指定できます。これは、多数のソースを持つ増分移行タスクを作成する場合に特に便利です。これにより、ソースごとにbinlogの開始位置を個別に指定する必要がなくなります。
 
-    [ユーザードキュメント](/dm/dm-webui-guide.md) [＃5442](https://github.com/pingcap/tiflow/issues/5442)
+    [ユーザードキュメント](/dm/dm-webui-guide.md) [#5442](https://github.com/pingcap/tiflow/issues/5442)
 
 ### TiDBデータ共有サブスクリプション {#tidb-data-share-subscription}
 
@@ -213,11 +213,11 @@ TiDB バージョン: 6.1.0
 
     - TiCDC は、TiDB 増分データを Avro 形式で Kafka に送信することをサポートしており、Confluent を介して KSQL や Snowflake などのサードパーティとデータを共有できます。
 
-        [ユーザードキュメント](/ticdc/ticdc-avro-protocol.md) [＃5338](https://github.com/pingcap/tiflow/issues/5338)
+        [ユーザードキュメント](/ticdc/ticdc-avro-protocol.md) [#5338](https://github.com/pingcap/tiflow/issues/5338)
 
     - TiCDC は、テーブルごとに TiDB からさまざまな Kafka トピックに増分データをディスパッチすることをサポートしており、これを Canal-json 形式と組み合わせることで、Flink と直接データを共有できます。
 
-        [ユーザードキュメント](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink), [＃4423](https://github.com/pingcap/tiflow/issues/4423)
+        [ユーザードキュメント](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink), [#4423](https://github.com/pingcap/tiflow/issues/4423)
 
     - TiCDC は SASL GSSAPI 認証タイプをサポートし、Kafka を使用した SASL 認証の例を追加します。
 
@@ -225,7 +225,7 @@ TiDB バージョン: 6.1.0
 
 - TiCDC は`charset=GBK`テーブルの複製をサポートします。
 
-    [ユーザードキュメント](/character-set-gbk.md#component-compatibility) [＃4806](https://github.com/pingcap/tiflow/issues/4806)
+    [ユーザードキュメント](/character-set-gbk.md#component-compatibility) [#4806](https://github.com/pingcap/tiflow/issues/4806)
 
 ## Compatibility changes {#compatibility-changes}
 
@@ -328,37 +328,37 @@ TiDB バージョン: 6.1.0
 - TiDB
 
     - `UnionScanRead` オペレーターのパフォーマンスを向上させる [#32433](https://github.com/pingcap/tidb/issues/32433)
-    - `EXPLAIN`の出力におけるタスクタイプの表示を改善（MPPタスクタイプを追加） [＃33332](https://github.com/pingcap/tidb/issues/33332)
-    - 列のデフォルト値として`rand()`を使用することをサポートします [＃10377](https://github.com/pingcap/tidb/issues/10377)
-    - 列のデフォルト値として`uuid()`を使用することをサポートします [＃33870](https://github.com/pingcap/tidb/issues/33870)
-    - 列の文字セットを`latin1`から`utf8`/`utf8mb4`に変更することをサポートします [＃34008](https://github.com/pingcap/tidb/issues/34008)
+    - `EXPLAIN`の出力におけるタスクタイプの表示を改善（MPPタスクタイプを追加） [#33332](https://github.com/pingcap/tidb/issues/33332)
+    - 列のデフォルト値として`rand()`を使用することをサポートします [#10377](https://github.com/pingcap/tidb/issues/10377)
+    - 列のデフォルト値として`uuid()`を使用することをサポートします [#33870](https://github.com/pingcap/tidb/issues/33870)
+    - 列の文字セットを`latin1`から`utf8`/`utf8mb4`に変更することをサポートします [#34008](https://github.com/pingcap/tidb/issues/34008)
 
 - TiKV
 
-    - インメモリ悲観的ロック使用時の CDC の古い値のヒット率を改善 [＃12279](https://github.com/tikv/tikv/issues/12279)
-    - ヘルスチェックを改善して、利用できないRaftstoreを検出し、TiKV クライアントがリージョンキャッシュを時間内に更新できるようにします[＃12398](https://github.com/tikv/tikv/issues/12398)
-    - Raft Engine のメモリ制限設定をサポート [＃12255](https://github.com/tikv/tikv/issues/12255)
-    - TiKVは、破損したSSTファイルを自動的に検出して削除し、製品の可用性を向上させます[＃10578](https://github.com/tikv/tikv/issues/10578)
-    - CDCはRawKV をサポートしています [＃11965](https://github.com/tikv/tikv/issues/11965)
-    - 大きなスナップショットファイルを複数のファイルに分割することをサポートします [＃11595](https://github.com/tikv/tikv/issues/11595)
-    - スナップショットGCがRaftstoreのメッセージループをブロックするのを防ぐために、スナップショットガベージコレクションをRaftstoreからバックグラウンドスレッドに移動します[＃11966](https://github.com/tikv/tikv/issues/11966)
-    - gPRCメッセージの最大メッセージ長（ `max-grpc-send-msg-len` ）と最大バッチサイズ（ `raft-msg-max-batch-size` ） の動的設定をサポート [＃12334](https://github.com/tikv/tikv/issues/12334)
-    - Raft によるオンラインの安全でない復元計画の実行をサポート [＃10483](https://github.com/tikv/tikv/issues/10483)
+    - インメモリ悲観的ロック使用時の CDC の古い値のヒット率を改善 [#12279](https://github.com/tikv/tikv/issues/12279)
+    - ヘルスチェックを改善して、利用できないRaftstoreを検出し、TiKV クライアントがリージョンキャッシュを時間内に更新できるようにします[#12398](https://github.com/tikv/tikv/issues/12398)
+    - Raft Engine のメモリ制限設定をサポート [#12255](https://github.com/tikv/tikv/issues/12255)
+    - TiKVは、破損したSSTファイルを自動的に検出して削除し、製品の可用性を向上させます[#10578](https://github.com/tikv/tikv/issues/10578)
+    - CDCはRawKV をサポートしています [#11965](https://github.com/tikv/tikv/issues/11965)
+    - 大きなスナップショットファイルを複数のファイルに分割することをサポートします [#11595](https://github.com/tikv/tikv/issues/11595)
+    - スナップショットGCがRaftstoreのメッセージループをブロックするのを防ぐために、スナップショットガベージコレクションをRaftstoreからバックグラウンドスレッドに移動します[#11966](https://github.com/tikv/tikv/issues/11966)
+    - gPRCメッセージの最大メッセージ長（ `max-grpc-send-msg-len` ）と最大バッチサイズ（ `raft-msg-max-batch-size` ） の動的設定をサポート [#12334](https://github.com/tikv/tikv/issues/12334)
+    - Raft によるオンラインの安全でない復元計画の実行をサポート [#10483](https://github.com/tikv/tikv/issues/10483)
 
 - PD
-    - リージョンラベルの Time-to-Live (TTL) をサポート [＃4694](https://github.com/tikv/pd/issues/4694)
-    - リージョンバケットをサポート[＃4668](https://github.com/tikv/pd/issues/4668)
+    - リージョンラベルの Time-to-Live (TTL) をサポート [#4694](https://github.com/tikv/pd/issues/4694)
+    - リージョンバケットをサポート[#4668](https://github.com/tikv/pd/issues/4668)
     - デフォルトでSwaggerサーバーのコンパイルを無効にする[#4932](https://github.com/tikv/pd/issues/4932)
 
 - TiFlash
 
-    - 集約オペレーターのメモリ計算を最適化して、マージフェーズでより効率的なアルゴリズムが使用されるようにします。 [＃4451](https://github.com/pingcap/tiflash/issues/4451)
+    - 集約オペレーターのメモリ計算を最適化して、マージフェーズでより効率的なアルゴリズムが使用されるようにします。 [#4451](https://github.com/pingcap/tiflash/issues/4451)
 
 - Tools
 
     - Backup & Restore (BR)
 
-        - 空のデータベースのバックアップと復元をサポート[＃33866](https://github.com/pingcap/tidb/issues/33866)
+        - 空のデータベースのバックアップと復元をサポート[#33866](https://github.com/pingcap/tidb/issues/33866)
 
     - TiDB Lightning
 
@@ -366,73 +366,73 @@ TiDB バージョン: 6.1.0
 
     - TiCDC
 
-        - TiCDCは、レプリケーション中に大規模なトランザクションを分割することをサポートしており、これにより、大規模なトランザクションによって発生するレプリケーションのレイテンシーが大幅に短縮されます[＃5280](https://github.com/pingcap/tiflow/issues/5280)
+        - TiCDCは、レプリケーション中に大規模なトランザクションを分割することをサポートしており、これにより、大規模なトランザクションによって発生するレプリケーションのレイテンシーが大幅に短縮されます[#5280](https://github.com/pingcap/tiflow/issues/5280)
 
 ## バグ修正 {#bug-fixes}
 
 - TiDB
 
-    - `in`関数が`bit`タイプのデータを処理する際に発生する可能性のあるpanicの問題を修正しました[＃33070](https://github.com/pingcap/tidb/issues/33070)
-    - `UnionScan`オペレーターが順序を維持できないために間違ったクエリ結果が発生する問題を修正[＃33175](https://github.com/pingcap/tidb/issues/33175)
-    - 特定のケースで Merge Join 演算子が間違った結果を返す問題を修正[＃33042](https://github.com/pingcap/tidb/issues/33042)
-    - 動的プルーニングモードで`index join`結果が間違っている可能性がある問題を修正しました [＃33231](https://github.com/pingcap/tidb/issues/33231)
-    - パーティションテーブルの一部のパーティションが削除されたときにデータがガベージコレクションされない可能性がある問題を修正[＃33620](https://github.com/pingcap/tidb/issues/33620)
-    - クラスターのPDノードが交換された後、一部のDDL文が一定期間スタックする可能性がある問題を修正しました[＃33908](https://github.com/pingcap/tidb/issues/33908)
-    - `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルへのクエリ実行時に TiDBサーバーのメモリが発生する問題を修正しました。この問題は、Grafana ダッシュボードでスロークエリをチェックすると発生する可能性があります。 [＃33893](https://github.com/pingcap/tidb/issues/33893)
-    - システム変数`max_allowed_packet`が有効にならない問題を修正[＃31422](https://github.com/pingcap/tidb/issues/31422)
-    - TopSQLモジュール のメモリリークの問題を修正 [＃34502](https://github.com/pingcap/tidb/issues/34502) [＃34525](https://github.com/pingcap/tidb/issues/34525)
-    - PointGetプランでプランキャッシュが間違っている可能性がある問題を修正しました [＃32371](https://github.com/pingcap/tidb/issues/32371)
-    - RC分離レベルでプランキャッシュが開始されるとクエリ結果が間違っている可能性がある問題を修正しました [＃34447](https://github.com/pingcap/tidb/issues/34447)
+    - `in`関数が`bit`タイプのデータを処理する際に発生する可能性のあるpanicの問題を修正しました[#33070](https://github.com/pingcap/tidb/issues/33070)
+    - `UnionScan`オペレーターが順序を維持できないために間違ったクエリ結果が発生する問題を修正[#33175](https://github.com/pingcap/tidb/issues/33175)
+    - 特定のケースで Merge Join 演算子が間違った結果を返す問題を修正[#33042](https://github.com/pingcap/tidb/issues/33042)
+    - 動的プルーニングモードで`index join`結果が間違っている可能性がある問題を修正しました [#33231](https://github.com/pingcap/tidb/issues/33231)
+    - パーティションテーブルの一部のパーティションが削除されたときにデータがガベージコレクションされない可能性がある問題を修正[#33620](https://github.com/pingcap/tidb/issues/33620)
+    - クラスターのPDノードが交換された後、一部のDDL文が一定期間スタックする可能性がある問題を修正しました[#33908](https://github.com/pingcap/tidb/issues/33908)
+    - `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルへのクエリ実行時に TiDBサーバーのメモリが発生する問題を修正しました。この問題は、Grafana ダッシュボードでスロークエリをチェックすると発生する可能性があります。 [#33893](https://github.com/pingcap/tidb/issues/33893)
+    - システム変数`max_allowed_packet`が有効にならない問題を修正[#31422](https://github.com/pingcap/tidb/issues/31422)
+    - TopSQLモジュール のメモリリークの問題を修正 [#34502](https://github.com/pingcap/tidb/issues/34502) [#34525](https://github.com/pingcap/tidb/issues/34525)
+    - PointGetプランでプランキャッシュが間違っている可能性がある問題を修正しました [#32371](https://github.com/pingcap/tidb/issues/32371)
+    - RC分離レベルでプランキャッシュが開始されるとクエリ結果が間違っている可能性がある問題を修正しました [#34447](https://github.com/pingcap/tidb/issues/34447)
 
 - TiKV
 
-    - TiKVインスタンスがオフラインになったときにRaftログの遅延が増加する問題を修正[＃12161](https://github.com/tikv/tikv/issues/12161)
-    - マージ対象のリージョンが無効なために TiKV がpanicを起こし、予期せずpeerを破棄する問題を修正しました [＃12232](https://github.com/tikv/tikv/issues/12232)
-    - v5.3.1 または v5.4.0 から v6.0.0 以降のバージョンにアップグレードするときに TiKV が`failed to load_latest_options`エラーを報告する問題を修正しました[＃12269](https://github.com/tikv/tikv/issues/12269)
+    - TiKVインスタンスがオフラインになったときにRaftログの遅延が増加する問題を修正[#12161](https://github.com/tikv/tikv/issues/12161)
+    - マージ対象のリージョンが無効なために TiKV がpanicを起こし、予期せずpeerを破棄する問題を修正しました [#12232](https://github.com/tikv/tikv/issues/12232)
+    - v5.3.1 または v5.4.0 から v6.0.0 以降のバージョンにアップグレードするときに TiKV が`failed to load_latest_options`エラーを報告する問題を修正しました[#12269](https://github.com/tikv/tikv/issues/12269)
     - メモリリソースが不足しているときにRaftログを追加することによって発生する OOM の問題を修正しました[#11379](https://github.com/tikv/tikv/issues/11379)
-    - peerの破棄とリージョンのバッチ分割の競合により TiKV がpanicを起こす問題を修正しました [＃12368](https://github.com/tikv/tikv/issues/12368)
-    - `stats_monitor`デッドループに陥った後、短時間で TiKVメモリ使用量が急増する問題を修正[＃12416](https://github.com/tikv/tikv/issues/12416)
-    - Follower Read 使用時に TiKV が`invalid store ID 0`エラーを報告する問題を修正しました [＃12478](https://github.com/tikv/tikv/issues/12478)
+    - peerの破棄とリージョンのバッチ分割の競合により TiKV がpanicを起こす問題を修正しました [#12368](https://github.com/tikv/tikv/issues/12368)
+    - `stats_monitor`デッドループに陥った後、短時間で TiKVメモリ使用量が急増する問題を修正[#12416](https://github.com/tikv/tikv/issues/12416)
+    - Follower Read 使用時に TiKV が`invalid store ID 0`エラーを報告する問題を修正しました [#12478](https://github.com/tikv/tikv/issues/12478)
 
 - PD
 
-    - `not leader` の間違ったステータスコードを修正 [＃4797](https://github.com/tikv/pd/issues/4797)
-    - 一部のコーナーケースで TSO がフォールバックするバグを修正しました [＃4884](https://github.com/tikv/pd/issues/4884)
-    - PDリーダー移転後に削除したtombstoneストアが再び表示される問題を修正[＃4941](https://github.com/tikv/pd/issues/4941)
-    - PDリーダー移行後すぐにスケジュールを開始できない問題を修正[＃4769](https://github.com/tikv/pd/issues/4769)
+    - `not leader` の間違ったステータスコードを修正 [#4797](https://github.com/tikv/pd/issues/4797)
+    - 一部のコーナーケースで TSO がフォールバックするバグを修正しました [#4884](https://github.com/tikv/pd/issues/4884)
+    - PDリーダー移転後に削除したtombstoneストアが再び表示される問題を修正[#4941](https://github.com/tikv/pd/issues/4941)
+    - PDリーダー移行後すぐにスケジュールを開始できない問題を修正[#4769](https://github.com/tikv/pd/issues/4769)
 
 - TiDB Dashboard
 
-    - Top SQL機能が有効になる前に実行されていた SQL 文の CPU オーバーヘッドをTop SQLが収集できないバグを修正[＃33859](https://github.com/pingcap/tidb/issues/33859)
+    - Top SQL機能が有効になる前に実行されていた SQL 文の CPU オーバーヘッドをTop SQLが収集できないバグを修正[#33859](https://github.com/pingcap/tidb/issues/33859)
 
 - TiFlash
 
-    - 多数のINSERTおよびDELETE操作後に発生する可能性のあるデータの不整合を修正[＃4956](https://github.com/pingcap/tiflash/issues/4956)
+    - 多数のINSERTおよびDELETE操作後に発生する可能性のあるデータの不整合を修正[#4956](https://github.com/pingcap/tiflash/issues/4956)
 
 - ツール
 
     - TiCDC
 
-        - DDLスキーマのバッファリング方法を最適化することで過剰なメモリ使用量を修正[＃1386](https://github.com/pingcap/tiflow/issues/1386)
-        - 特別な増分スキャンシナリオで発生するデータ損失を修正[＃5468](https://github.com/pingcap/tiflow/issues/5468)
+        - DDLスキーマのバッファリング方法を最適化することで過剰なメモリ使用量を修正[#1386](https://github.com/pingcap/tiflow/issues/1386)
+        - 特別な増分スキャンシナリオで発生するデータ損失を修正[#5468](https://github.com/pingcap/tiflow/issues/5468)
 
     - TiDB Data Migration (DM)
 
-        - `start-time`タイムゾーンの問題を修正し、DM の動作をダウンストリーム タイムゾーンの使用からアップストリーム タイムゾーンの使用に変更します[＃5471](https://github.com/pingcap/tiflow/issues/5471)
-        - タスクが自動的に再開された後にDMがより多くのディスクスペースを占有する問題を修正[＃3734](https://github.com/pingcap/tiflow/issues/3734) [＃5344](https://github.com/pingcap/tiflow/issues/5344)
-        - チェックポイントフラッシュにより失敗した行のデータがスキップされる可能性がある問題を修正[＃5279](https://github.com/pingcap/tiflow/issues/5279)
-        - 一部のケースでダウンストリームでフィルタリングされた DDL を手動で実行するとタスクの再開に失敗する可能性がある問題を修正しました [＃5272](https://github.com/pingcap/tiflow/issues/5272)
-        - `case-sensitive: true`が設定されていない場合、大文字テーブルを複製できない問題を修正[＃5255](https://github.com/pingcap/tiflow/issues/5255)
-        - `SHOW CREATE TABLE`文によって返されるインデックスの先頭に主キーがない場合に発生する DM ワーカーpanicの問題を修正しました。 [＃5159](https://github.com/pingcap/tiflow/issues/5159)
-        - GTID が有効になっているときやタスクが自動的に再開されたときに CPU 使用率が上昇し、大量のログが出力される問題を修正しました[＃5063](https://github.com/pingcap/tiflow/issues/5063)
-        - DM WebUI のオフライン オプションとその他の使用上の問題を修正しました [＃4993](https://github.com/pingcap/tiflow/issues/4993)
-        - アップストリームでGTIDが空の場合に増分タスクの開始に失敗する問題を修正 [＃3731](https://github.com/pingcap/tiflow/issues/3731)
-        - 空の設定により dm-master がpanicを起こす可能性がある問題を修正[＃3732](https://github.com/pingcap/tiflow/issues/3732)
+        - `start-time`タイムゾーンの問題を修正し、DM の動作をダウンストリーム タイムゾーンの使用からアップストリーム タイムゾーンの使用に変更します[#5471](https://github.com/pingcap/tiflow/issues/5471)
+        - タスクが自動的に再開された後にDMがより多くのディスクスペースを占有する問題を修正[#3734](https://github.com/pingcap/tiflow/issues/3734) [#5344](https://github.com/pingcap/tiflow/issues/5344)
+        - チェックポイントフラッシュにより失敗した行のデータがスキップされる可能性がある問題を修正[#5279](https://github.com/pingcap/tiflow/issues/5279)
+        - 一部のケースでダウンストリームでフィルタリングされた DDL を手動で実行するとタスクの再開に失敗する可能性がある問題を修正しました [#5272](https://github.com/pingcap/tiflow/issues/5272)
+        - `case-sensitive: true`が設定されていない場合、大文字テーブルを複製できない問題を修正[#5255](https://github.com/pingcap/tiflow/issues/5255)
+        - `SHOW CREATE TABLE`文によって返されるインデックスの先頭に主キーがない場合に発生する DM ワーカーpanicの問題を修正しました。 [#5159](https://github.com/pingcap/tiflow/issues/5159)
+        - GTID が有効になっているときやタスクが自動的に再開されたときに CPU 使用率が上昇し、大量のログが出力される問題を修正しました[#5063](https://github.com/pingcap/tiflow/issues/5063)
+        - DM WebUI のオフライン オプションとその他の使用上の問題を修正しました [#4993](https://github.com/pingcap/tiflow/issues/4993)
+        - アップストリームでGTIDが空の場合に増分タスクの開始に失敗する問題を修正 [#3731](https://github.com/pingcap/tiflow/issues/3731)
+        - 空の設定により dm-master がpanicを起こす可能性がある問題を修正[#3732](https://github.com/pingcap/tiflow/issues/3732)
 
     - TiDB Lightning
 
-        - 事前チェックでローカルディスクリソースとクラスターの可用性がチェックされない問題を修正[＃34213](https://github.com/pingcap/tidb/issues/34213)
-        - スキーマルーティングが正しくない問題を修正しました [＃33381](https://github.com/pingcap/tidb/issues/33381)
-        - TiDB LightningがパニックになったときにPD構成が正しく復元されない問題を修正[＃31733](https://github.com/pingcap/tidb/issues/31733)
-        - `auto_increment`列の範囲外のデータによって Local-backend のインポートが失敗する問題を修正しました [＃27937](https://github.com/pingcap/tidb/issues/27937)
-        - `auto_random`または`auto_increment`列が null の場合に local backend のインポートが失敗する問題を修正しました [＃34208](https://github.com/pingcap/tidb/issues/34208)
+        - 事前チェックでローカルディスクリソースとクラスターの可用性がチェックされない問題を修正[#34213](https://github.com/pingcap/tidb/issues/34213)
+        - スキーマルーティングが正しくない問題を修正しました [#33381](https://github.com/pingcap/tidb/issues/33381)
+        - TiDB LightningがパニックになったときにPD構成が正しく復元されない問題を修正[#31733](https://github.com/pingcap/tidb/issues/31733)
+        - `auto_increment`列の範囲外のデータによって Local-backend のインポートが失敗する問題を修正しました [#27937](https://github.com/pingcap/tidb/issues/27937)
+        - `auto_random`または`auto_increment`列が null の場合に local backend のインポートが失敗する問題を修正しました [#34208](https://github.com/pingcap/tidb/issues/34208)
