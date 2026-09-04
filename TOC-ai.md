@@ -85,5 +85,4 @@
 - Full-Text Search
   - [Full-Text Search Index](/ai/reference/full-text-search-index.md)
   - [Full-Text Search Functions](/ai/reference/full-text-search-functions.md)
-  - [Full-Text Search Observability](/ai/reference/full-text-search-observability.md)
   - [Full-Text Search Limitations](/ai/reference/full-text-search-limitations.md)

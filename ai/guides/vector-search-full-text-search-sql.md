@@ -96,7 +96,6 @@ ALTER TABLE stock_items ADD FULLTEXT INDEX (title) WITH PARSER MULTILINGUAL;
 ALTER TABLE stock_items ADD FULLTEXT INDEX ft_title (title) WITH PARSER MULTILINGUAL;
 ```
 
-
 ```sql
 -- The Key_name column shows the index name
 SHOW INDEX FROM stock_items;
@@ -381,7 +380,6 @@ WHERE t.author_id IN
 - [Hybrid Search](/ai/guides/vector-search-hybrid-search.md)
 - [Full-Text Search Index](/ai/reference/full-text-search-index.md)
 - [Full-Text Search Functions](/ai/reference/full-text-search-functions.md)
-- [Full-Text Search Observability](/ai/reference/full-text-search-observability.md)
 - [Full-Text Search Limitations](/ai/reference/full-text-search-limitations.md)
 
 ## Feedback & help

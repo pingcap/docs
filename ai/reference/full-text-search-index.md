@@ -259,5 +259,4 @@ For the full list of functional limitations, see [Full-Text Search Limitations](
 
 - [Full-Text Search with SQL](/ai/guides/vector-search-full-text-search-sql.md)
 - [Full-Text Search Functions](/ai/reference/full-text-search-functions.md)
-- [Full-Text Search Observability](/ai/reference/full-text-search-observability.md)
 - [Full-Text Search Limitations](/ai/reference/full-text-search-limitations.md)

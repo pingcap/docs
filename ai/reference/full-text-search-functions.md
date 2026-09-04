@@ -182,7 +182,7 @@ Without hints, the optimizer selects a full-text index by the following prioriti
 | 2 | Filter column coverage: prefer the index that matches more filter conditions in the `WHERE` clause. |
 | 3 | Index size: prefer the smaller index to reduce scan cost. |
 
-The optimizer also compares the full-text index scan against a full table scan or a regular index scan, and chooses the path with the lowest estimated cost. See [Full-Text Search Observability](/ai/reference/full-text-search-observability.md) for how to check the selected plan.
+The optimizer also compares the full-text index scan against a full table scan or a regular index scan, and chooses the path with the lowest estimated cost.
 
 ## Supported query patterns
 
