@@ -112,13 +112,17 @@ ALTER TABLE t1 STORAGE_CLASS='IA';
 
 > **Warning:**
 >
-> Infrequent Access is currently an **experimental feature** and is available only in selected regions. It is currently supported only for {{{ .essential }}}.
+> Infrequent Access is in **Private Preview** and is available only in selected regions for {{{ .premium }}} and {{{ .byoc }}}.
 
 <!--**Use case:** Historical or archival data that is accessed infrequently but still needs to remain queryable while reducing storage costs.-->
 
 > **Note:**
 >
 > Infrequent Access is designed for data that is rarely accessed but still needs to be available for online queries.
+
+> **Note:**
+>
+> IA data is cached on local disks to accelerate cold reads. You can select an IA cache level in **Overview** > **Capacity** > **Update Capacity** > **Storage Acceleration**. A higher cache level improves cold-read performance and increases cost: on {{{ .premium }}}, it increases the billed IA storage amount, and on {{{ .byoc }}}, the additional local cache resources are provisioned in your own cloud account and are billed by your cloud provider. For details, see [Configure and Manage Tiered Storage](/tidb-cloud/tiered-storage-guide.md).
 
 ### Columnar storage
 

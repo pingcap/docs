@@ -1,6 +1,6 @@
 ---
 title: Configure and Manage Tiered Storage
-summary: Learn how to configure and manage tiered storage on TiDB Cloud BYOC, Premium, or Essential, including DDL, partition selectors, and best practices.
+summary: Learn how to configure and manage tiered storage on TiDB Cloud Premium or BYOC, including DDL, partition selectors, and best practices.
 ---
 
 # Configure and Manage Tiered Storage
@@ -9,7 +9,7 @@ This document explains how to configure and manage Infrequent Access (IA) storag
 
 > **Note:**
 >
-> Tiered storage is in **Private Preview** for {{{ .essential }}}, {{{ .premium }}}, and {{{ .byoc }}}. The behavior described on this page reflects the current preview implementation and might change before general availability (GA).
+> Tiered storage is in **Private Preview** for {{{ .premium }}} and {{{ .byoc }}}. The behavior described on this page reflects the current preview implementation and might change before general availability (GA).
 
 ## How to use
 
@@ -220,54 +220,44 @@ WHERE TABLE_SCHEMA = 'your_database'
 ORDER BY (DATA_LENGTH + INDEX_LENGTH) DESC;
 ```
 
+### Configure the IA cache level
+
+The IA cache level controls how much IA data is cached on local disks. A higher level caches more data, which improves cold-read performance and increases cost.
+
+| Cache level | Use case |
+|-|-|
+| **Economy** | Cold reads are rare and you want to minimize local disk cost |
+| **Default** | The system default, suitable for general workloads |
+| **Balanced** | A balance between cost and cold-read latency |
+| **Deep** | Cold-read latency is critical for your workload |
+
+To change the cache level:
+
+1. In the Cloud Console, go to **Overview** > **Capacity** and click **Update Capacity**.
+2. In the **Storage Acceleration** block, select a cache level.
+3. Review the cost impact in the **Summary** pane, and then click **Update Capacity**.
+
+The change takes effect without a restart, usually within one minute. TiDB Cloud automatically provisions the underlying resources, so you do not need to check available space or choose a scaling method. Provisioning might take some time.
+
+On {{{ .premium }}}, a higher cache level increases the billed IA storage amount. On {{{ .byoc }}}, the additional local cache resources are provisioned in your own cloud account and are billed by your cloud provider. For details, see [TiDB Cloud Billing](/tidb-cloud/tidb-cloud-billing.md).
+
+### Adjust the IA segment size (BYOC only)
+
+A segment is the smallest unit that TiKV reads from object storage and writes to the local cache. The default size is 1 MiB.
+
+On {{{ .byoc }}}, you can set the TiKV configuration parameter `kvengine.ia.segment-size` to `128 KiB`, `256 KiB`, `512 KiB`, `1 MiB`, or `2 MiB`. This parameter is not available on {{{ .premium }}}.
+
+`kvengine.ia.segment-size` takes effect only at startup. After you change it, perform a rolling restart of the TiKV nodes, preferably during off-peak hours.
+
+Changing the segment size does not rewrite any file in object storage. SST files are stored as whole objects and are not organized by segment, so only the read and cache granularity on local disks changes. After the restart, the local cache is gradually rebuilt at the new granularity as queries arrive.
+
 ## Observability
 
-This section describes how to observe IA storage behavior, including `EXPLAIN ANALYZE`, statement summary, and slow query metrics.
-
-### EXPLAIN ANALYZE
-
-When a query involves remote data loading, the `scan_detail` includes new fields:
-
-```SQL
-EXPLAIN ANALYZE SELECT * FROM t_ia WHERE id BETWEEN 1 AND 50000;
--- The output includes:
--- ia_remote_read_segment_size: 2320453     -- Total bytes loaded remotely
--- ia_remote_read_segment_count: 3           -- Number of remote loading events
--- ia_remote_read_segment_wait_time: 0.008   -- Remote wait time (seconds)
-```
-
-> **Note:**
->
-> The IA signal is per-request read path evidence, not a table-level stable flag — the same query may show IA information on the first run but not after a cache hit.
->
-> Additionally, `ia_remote_read_segment_wait_time` is the aggregate time of all remote requests. Due to TiKV's underlying parallel reading mechanism, this value may exceed the SQL's actual execution time.
-
-### Statement summary
-
-`STATEMENTS_SUMMARY_HISTORY` and `CLUSTER_STATEMENTS_SUMMARY_HISTORY` have 6 new columns:
-
-| Column Name                            | Description                            |
-|----------------------------------------|----------------------------------------|
-| `AVG_IA_REMOTE_READ_SEGMENT_COUNT`     | Average number of remote segments read |
-| `MAX_IA_REMOTE_READ_SEGMENT_COUNT`     | Maximum number of remote segments read |
-| `AVG_IA_REMOTE_READ_SEGMENT_SIZE`      | Average remote read data volume        |
-| `MAX_IA_REMOTE_READ_SEGMENT_SIZE`      | Maximum remote read data volume        |
-| `AVG_IA_REMOTE_READ_SEGMENT_WAIT_TIME` | Average remote wait time               |
-| `MAX_IA_REMOTE_READ_SEGMENT_WAIT_TIME` | Maximum remote wait time               |
-
-### Slow queries
-
-`INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` has 3 new columns:
-
-- `IA_remote_read_segment_count`
-- `IA_remote_read_segment_size`
-- `IA_remote_read_segment_wait_time`
-
-Corresponding panels are also visible in the TiDB Cloud console slow query details.
+For IA observability, including storage class transition progress, `EXPLAIN ANALYZE` fields, statement summary and slow query metrics, and the cluster-level IA cache performance panels, see [Tiered Storage Observability](/tidb-cloud/tiered-storage-observability.md).
 
 ## Best practices
 
-This section describes recommended operational practices for IA storage, including tiering strategy, rollout strategy, write optimization, query optimization, switch-back considerations, and configuration stability.
+This section describes recommended operational practices for IA storage, including tiering strategy, rollout strategy, write optimization, query optimization, cache level tuning, segment size selection, switch-back considerations, and configuration stability.
 
 ### Tiering strategy: prefer partition-level IA
 
@@ -302,11 +292,35 @@ These figures are from test environments and do not represent real-world product
 - Avoid running concurrent `SELECT *` full-table scans on IA tables simultaneously
 - Monitor IA remote read volume via `EXPLAIN ANALYZE` and slow queries, and adjust accordingly
 
+### Tune the IA cache level
+
+Use the **IA Cache Hit Rate** panel to decide whether to change the cache level:
+
+- If the hit rate stays below 85%, raise the cache level. **Balanced** is a reasonable starting point.
+- After each change, observe the hit rate for at least one full business day before you change it again.
+- If the hit rate is consistently high and you want to reduce cost, lower the cache level to **Economy**.
+
+For the panels and the statement-level metrics used in this tuning loop, see [Tiered Storage Observability](/tidb-cloud/tiered-storage-observability.md).
+
+### Choose the segment size (BYOC only)
+
+The segment size trades read amplification against the number of object storage requests:
+
+| Segment size | Read amplification per cache miss | Object storage requests | Suitable for |
+|-|-|-|-|
+| Smaller than 1 MiB | Lower | Higher | Point queries against low-latency object storage, when request costs are not a concern |
+| 1 MiB (default) | Medium | Medium | General workloads |
+| Larger than 1 MiB | Higher | Lower | Large-range scans with sufficient network bandwidth |
+
+Benchmark with your own workload before you change this parameter, and perform the rolling restart during off-peak hours.
+
 ### Switch-back considerations
 
 - IA → Standard conversion downloads all data from object storage, generating significant cold storage bandwidth usage
 - Monitor bandwidth usage to ensure smooth operation; if necessary, **contact the TiDB Cloud team in advance** for joint monitoring
 - Business SQL reads/writes are not affected during conversion, but performance (e.g., QPS/TPS) may have minor impact — test environment shows less than 5%
+- Before you start, query `mysql.tidb_storage_class_transition_history` for the duration of similar past conversions on your cluster to estimate the change window
+- During the conversion, run `SHOW STORAGE_CLASS TRANSITIONS` to track progress and detect a stuck conversion
 
 ### Configuration stability
 
@@ -317,3 +331,5 @@ Keep the storage class setting stable and avoid frequent switching between IA an
 - IA cache data flushing
 
 The cumulative cost of these operations is not negligible.
+
+This applies to the storage class of a table or partition. Adjusting the IA cache level is a different operation: it is a hot update, does not move data between storage classes, and can be changed as often as your cost and performance targets require.

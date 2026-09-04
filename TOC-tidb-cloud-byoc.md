@@ -62,6 +62,7 @@
   - Use Tiered Storage ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [Overview](/tidb-cloud/tiered-storage-overview.md)
     - [Configure and Manage](/tidb-cloud/tiered-storage-guide.md)
+    - [Observability](/tidb-cloud/tiered-storage-observability.md)
     - [Limitations](/tidb-cloud/tiered-storage-limitations.md)
     - [FAQ](/tidb-cloud/tiered-storage-faq.md)
   - Monitor and Alert

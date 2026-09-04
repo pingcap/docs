@@ -1,6 +1,6 @@
 ---
 title: Tiered Storage Overview
-summary: Learn about tiered storage on TiDB Cloud Essential, Premium, BYOC, including its concept, architecture, use cases, and implementation principles.
+summary: Learn about tiered storage on TiDB Cloud Premium and BYOC, including its concept, architecture, use cases, and implementation principles.
 ---
 
 # Tiered Storage Overview
@@ -9,11 +9,11 @@ Tiered storage helps you move infrequently accessed table or partition data to a
 
 > **Note:**
 >
-> Tiered storage is in **Private Preview** for {{{ .essential }}}, {{{ .premium }}}, and {{{ .byoc }}}. The behavior described on this page reflects the current preview implementation and might change before general availability (GA).
+> Tiered storage is in **Private Preview** for {{{ .premium }}} and {{{ .byoc }}}. The behavior described on this page reflects the current preview implementation and might change before general availability (GA).
 
 ## Introduction
 
-Tiered storage is a **storage tiering capability at the table and partition levels** available in {{{ .essential }}}, {{{ .premium }}}, and {{{ .byoc }}}. It is designed for infrequently accessed data. You can assign a table or partition to the Infrequent Access (IA) storage class. The system stores the complete dataset in remote object storage (such as Amazon S3 or Alibaba Cloud OSS), while keeping only metadata and on-demand cached hot data segments on local storage.
+Tiered storage is a **storage tiering capability at the table and partition levels** available in {{{ .premium }}} and {{{ .byoc }}}. It is designed for infrequently accessed data. You can assign a table or partition to the Infrequent Access (IA) storage class. The system stores the complete dataset in remote object storage (such as Amazon S3 or Alibaba Cloud OSS), while keeping only metadata and on-demand cached hot data segments on local storage.
 
 From the application’s perspective, an IA table behaves like a standard table. All query, transaction, backup, and recovery semantics remain unchanged. The primary difference is in the cost-performance tradeoff: local storage usage is significantly reduced, but cold reads (when the required data is not available in the local cache) incur higher latency because data must first be fetched from remote object storage.
 
@@ -24,6 +24,7 @@ Key features:
 - **Fine-grained control**: Supports both table-level and partition-level storage tiering. Partition-level settings take precedence over table-level settings.
 - **Flexible conversion**: Supports bidirectional conversion between IA and standard storage classes without data loss.
 - **Seamless integration**: Fully integrated with Raft Regions, MVCC, BR backup and restore, TiCDC, and other TiDB components.
+- **Observable and tunable**: Conversion progress, IA read metrics, and the cluster-level cache hit rate are visible in SQL outputs and the Cloud Console, and the IA cache level is configurable.
 
 ## Usage scenarios
 
@@ -97,11 +98,17 @@ Tiered storage implementation spans the TiDB → TiKV → Object Store three-lay
                               ↓
 ┌──────────────────────────────────────────────────────────────────┐
 │ Remote Object Storage (S3/OSS)                                   │
-│ · Full SST data organized and stored by segment                  │
+│ · Full SST data stored as whole objects, not by segment          │
 └──────────────────────────────────────────────────────────────────┘
 ```
 
 **Raft ChangeSet ensures consistency**: Storage class changes are replicated to all replicas via Raft ChangeSet. This ensures that every related shard maintains a consistent storage class state across restarts, recovery, splits, and merges, preventing data loss or corruption due to region topology changes.
+
+### Local cache and cache level
+
+The IaManager layer keeps a local cache of IA data on each TiKV node. How much data can be cached is determined by the IA cache level, capped by the local disk capacity reserved for the cache.
+
+The cache level is a cluster-wide setting with four options: **Economy**, **Default**, **Balanced**, and **Deep**. A higher level caches a larger proportion of IA data, which raises the cache hit rate and the cost. Eviction is managed by the system: you cannot specify which data stays in the cache, and you cannot set a different level for an individual table or partition. For how to change the cache level, see [Configure and Manage Tiered Storage](/tidb-cloud/tiered-storage-guide.md).
 
 ### Data storage hierarchy
 
@@ -114,10 +121,12 @@ SSTable ──→ Segment ──→ Block ──→ KV Pair
 
 | Layer | Default Size | Role |
 |-|-|-|
-| **Segment** | 1 MiB | The **minimum unit** TiKV reads from object storage; avoids excessive small requests that could incur API call costs and QPS throttling |
+| **Segment** | 1 MiB | The **minimum unit** TiKV reads from object storage and writes to the local cache; avoids excessive small requests that could incur API call costs and QPS throttling |
 | **Block** | 32 KiB | The basic unit for local file reading, compression, and **memory/disk caching** |
 
 This means a cache miss does not fetch just a single KV record — it loads an entire Segment to local storage. If subsequent queries hit data within the same segment, they benefit from hot-read performance. However, for one-time queries with no subsequent access, the read amplification penalty is relatively high.
+
+Segments organize only the local cache. In object storage, an SST file is stored as a single whole object and is not split into segments, so changing the segment size does not rewrite any data in object storage. On {{{ .byoc }}}, the segment size is configurable. For details, see [Configure and Manage Tiered Storage](/tidb-cloud/tiered-storage-guide.md).
 
 ### Read amplification analysis
 
@@ -130,6 +139,8 @@ User queries 1 record (100 Bytes)
 → Approximately 3 MiB data fetched from object storage to local
 → Read amplification: ~30,000×
 ```
+
+The volume fetched per cache miss scales with the segment size. The figures above assume the default segment size of 1 MiB.
 
 This amplification manifests differently in two scenarios:
 
@@ -156,6 +167,8 @@ INSERT/UPDATE/DELETE
 
 ## Conversion efficiency
 
+The `ALTER TABLE ... STORAGE_CLASS` statement itself completes within seconds because it only updates the schema metadata. The region-level data migration then runs asynchronously in TiKV, so the total duration depends on the data volume and the conversion direction.
+
 ### Standard → IA
 
 Test reference: Approximately 1 TB of logical data (including indexes) completed conversion within 5 minutes, with negligible impact on QPS and latency during the process. Single TiKV CPU increased by about 0.5c and recovered within approximately 5 minutes.
@@ -174,3 +187,5 @@ Same chain as above + full object storage data download to local
 ```
 
 > These figures are from test environments and do not represent real-world production scenarios. You should obtain accurate data based on your own business testing.
+
+To track a conversion in progress with `SHOW STORAGE_CLASS TRANSITIONS`, or to query the duration of past conversions in `mysql.tidb_storage_class_transition_history`, see [Tiered Storage Observability](/tidb-cloud/tiered-storage-observability.md).
