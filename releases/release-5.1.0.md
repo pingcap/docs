@@ -64,7 +64,7 @@ TiDB バージョン: 5.1.0
 - TiDBローリングアップグレード中は、TiDB Binlogを使用するクラスタでクラスター化インデックスを持つテーブルを作成しないようにしてください。
 - TiDB のローリングアップグレード中は`alter table ... modify column`や`alter table ... change column`のようなステートメントを実行しないでください。
 - バージョン5.1以降、各テーブルのTiFlashレプリカを作成する際に、システムテーブルのレプリカを設定する機能はサポートされなくなりました。クラスタをアップグレードする前に、関連するシステムテーブルのレプリカをクリアする必要があります。クリアしないと、アップグレードは失敗します。
-- TiCDC の`--sort-dir`コマンドの`cdc cli changefeed`パラメータは非推奨です。代わりに、 `--sort-dir`コマンドで`cdc server` を設定できます。 [#1795](https://github.com/pingcap/tiflow/pull/1795)
+- TiCDC の`cdc cli changefeed`コマンドの`--sort-dir`は非推奨です。代わりに、 `cdc server`コマンドで`--sort-dir` を設定できます。 [#1795](https://github.com/pingcap/tiflow/pull/1795)
 - TiDB 5.1 にアップグレードした後、TiDB が「関数 READ ONLY には noop 実装しかありません」というエラーを返す場合、 [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)の値を`ON`に設定することで、TiDB がこのエラーを無視するようにできます。これは、MySQL の`read_only`変数が TiDB ではまだ有効になっていないためです (TiDB では「noop」動作です)。したがって、この変数が TiDB で設定されていても、TiDB クラスタにデータを書き込むことができます。
 
 ## 新機能 {#new-features}
@@ -284,7 +284,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
     - 悲観的ロックが `ErrKeyExists` エラーを受け取った場合、不要な悲観的ロールバックを回避する [#23799](https://github.com/pingcap/tidb/issues/23799)
     - sql_modeに`ANSI_QUOTES`が含まれている場合に数値リテラルが認識されない問題を修正しました [#24429](https://github.com/pingcap/tidb/issues/24429)
     - `INSERT INTO table PARTITION (<partitions>) ... ON DUPLICATE KEY UPDATE`のようなステートメントがリストにないパーティションからデータを読み取ることを禁止する [#24746](https://github.com/pingcap/tidb/issues/24746)
-    - SQL文に`index out of range`と`GROUP BY`両方が含まれている場合に発生する可能性のある`UNION`エラーを修正し [#24281](https://github.com/pingcap/tidb/issues/24281)
+    - SQL文に`UNION`と`GROUP BY`両方が含まれている場合に発生する可能性のある`index out of range`エラーを修正しました [#24281](https://github.com/pingcap/tidb/issues/24281)
     - `CONCAT`関数が照合順序を正しく処理しない問題を修正しました [#24296](https://github.com/pingcap/tidb/issues/24296)
     - `collation_server`グローバル変数が新しいセッションで有効にならない問題を修正しました [#24156](https://github.com/pingcap/tidb/pull/24156)
 

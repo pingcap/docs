@@ -236,7 +236,7 @@ TiDBバージョン：8.3.0
     - `((idx_col_1 > 1) or (idx_col_1 = 1 and idx_col_2 > 10)) and ((idx_col_1 < 10) or (idx_col_1 = 10 and idx_col_2 < 20))`のようなフィルター条件のより正確なインデックス アクセス範囲を構築します [#54337](https://github.com/pingcap/tidb/issues/54337) @[ghazalfamilyusa](https://github.com/ghazalfamilyusa)
     - インデックス順序を使用して、 `WHERE idx_col_1 IS NULL ORDER BY idx_col_2`のような SQL クエリの余分なソート操作を回避します [#54188](https://github.com/pingcap/tidb/issues/54188) @[ari-e](https://github.com/ari-e)
     - `mysql.analyze_jobs`システムテーブルに分析済みインデックスを表示します [#53567](https://github.com/pingcap/tidb/issues/53567) @[Rustin170506](https://github.com/Rustin170506)。
-    - `tidb_redact_log`ステートメントの出力に`EXPLAIN`設定を適用することをサポートし、ログ処理ロジックをさらに最適化します [#54565](https://github.com/pingcap/tidb/issues/54565) @[hawkingrei](https://github.com/hawkingrei)
+    - `EXPLAIN`ステートメントの出力に`tidb_redact_log`設定を適用することをサポートし、ログ処理ロジックをさらに最適化します [#54565](https://github.com/pingcap/tidb/issues/54565) @[hawkingrei](https://github.com/hawkingrei)
     - クエリ効率を向上させるため、多値インデックスに対して`Selection` `IndexRangeScan`オペレーターを生成するサポート [#54876](https://github.com/pingcap/tidb/issues/54876) @[time-and-fate](https://github.com/time-and-fate)
     - 設定された時間枠外で実行されている自動タスク`ANALYZE`の強制終了をサポート [#55283](https://github.com/pingcap/tidb/issues/55283) @[hawkingrei](https://github.com/hawkingrei)
     - 統計情報が完全に TopN で構成され、対応するテーブル統計情報の変更された行数がゼロでない場合、TopN に到達しない等価条件の推定結果を 0 から 1 に調整します。 [#47400](https://github.com/pingcap/tidb/issues/47400) @[terry1purcell](https://github.com/terry1purcell)
@@ -251,10 +251,10 @@ TiDBバージョン：8.3.0
 
 - PD
 
-    - `batch`を介して`evict-leader-scheduler`の`pd-ctl`構成を変更してリーダー退去プロセスを加速するサポート [#8265](https://github.com/tikv/pd/issues/8265) @[rleungx](https://github.com/rleungx)
+    - `pd-ctl`を介して`evict-leader-scheduler`の`batch`構成を変更してリーダー退去プロセスを加速するサポート [#8265](https://github.com/tikv/pd/issues/8265) @[rleungx](https://github.com/rleungx)
     - Grafana の**クラスタ &gt; Label 配信**パネルに`store_id`モニタリングメトリックを追加して、異なるラベルに対応するストア ID を表示します [#8337](https://github.com/tikv/pd/issues/8337) @[HuSharp](https://github.com/HuSharp)
     - 指定されたリソースグループが存在しない場合、デフォルトのリソースグループへのフォールバックをサポートする [#8388](https://github.com/tikv/pd/issues/8388) @[JmPotato](https://github.com/JmPotato)
-    - `approximate_kv_size`の`region`コマンドが出力するリージョン情報に`pd-ctl`フィールドを追加します。 [#8412](https://github.com/tikv/pd/issues/8412) @[zeminzhou](https://github.com/zeminzhou)
+    - `pd-ctl`の`region`コマンドが出力するリージョン情報に`approximate_kv_size`フィールドを追加します。 [#8412](https://github.com/tikv/pd/issues/8412) @[zeminzhou](https://github.com/zeminzhou)
     - PD APIを呼び出してTTL設定を削除したときに返されるメッセージを最適化します [#8450](https://github.com/tikv/pd/issues/8450) @[lhy1024](https://github.com/lhy1024)
     - 大規模クエリ読み取りリクエストのRU消費動作を最適化し、他のリクエストへの影響を軽減する [#8457](https://github.com/tikv/pd/issues/8457) @[nolouch](https://github.com/nolouch)
     - PDマイクロサービスの設定ミス時に返されるエラーメッセージを最適化する [#52912](https://github.com/pingcap/tidb/issues/52912) @[rleungx](https://github.com/rleungx)
@@ -289,7 +289,7 @@ TiDBバージョン：8.3.0
 
 - TiDB
 
-    - `Open`の`PipelinedWindow`メソッドのパラメータをリセットし、 `PipelinedWindow`を`Apply`の子ノードとして使用した際に、繰り返し開閉操作によって以前のパラメータ値が再利用されることで発生する予期しないエラーを修正します。 [#53600](https://github.com/pingcap/tidb/issues/53600) @[XuHuaiyu](https://github.com/XuHuaiyu)
+    - `PipelinedWindow`の`Open`メソッドのパラメータをリセットし、 `PipelinedWindow`を`Apply`の子ノードとして使用した際に、繰り返し開閉操作によって以前のパラメータ値が再利用されることで発生する予期しないエラーを修正します。 [#53600](https://github.com/pingcap/tidb/issues/53600) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - `tidb_mem_quota_query`で設定された制限を超えるメモリ使用量のため、クエリ終了時に処理が停止する可能性がある問題を修正しました。 [#55042](https://github.com/pingcap/tidb/issues/55042) @[yibin87](https://github.com/yibin87)
     - HashAggオペレーターのディスクスピルによって並列計算中にクエリ結果が不正になる問題を修正しました [#55290](https://github.com/pingcap/tidb/issues/55290) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - `JSON_TYPE` JSON 形式にキャストした際に`YEAR`が間違って表示される問題を修正 [#54494](https://github.com/pingcap/tidb/issues/54494) @[YangKeao](https://github.com/YangKeao)
