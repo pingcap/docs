@@ -12,8 +12,9 @@ This page provides a comprehensive overview of view operations in {{{ .lake }}},
 | Command | Description |
 |---------|-------------|
 | [CREATE VIEW](/tidb-cloud-lake/sql/create-view.md) | Creates a new view based on a query |
-| [ALTER VIEW](/tidb-cloud-lake/sql/alter-view.md) | Modifies an existing view |
+| [ALTER VIEW](/tidb-cloud-lake/sql/alter-view.md) | Assigns or removes tags on an existing view |
 | [DROP VIEW](/tidb-cloud-lake/sql/drop-view.md) | Removes a view |
+| [Materialized View](/tidb-cloud-lake/sql/materialized-view.md) | Creates and maintains a materialized view backed by physical storage |
 
 ## View Information
 
