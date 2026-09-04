@@ -126,7 +126,7 @@ But when a DM-worker coordinates the migration of the sharding group within itse
 - When the DM-worker receives the DDL statement of `table_1`, it cannot pause the migration and needs to continue parsing the binlog to get the subsequent DDL statements of `table_2`. This means it needs to continue parsing between `t2` and `t3`.
 - During the binlog parsing process between `t2` and `t3`, the DML statements of `schema V2` from `table_1` cannot be migrated to the downstream until the sharding DDL statement is migrated and successfully executed.
 
-In DM, the simplified migration process of sharding DDL statements within the DM worker is as follows:
+In DM, the simplified migration process of sharding DDL statements within the DM-worker is as follows:
 
 1. When receiving the DDL statement of `table_1` at `t1`, the DM-worker records the DDL information and the current position of the binlog.
 2. DM-worker continues parsing the binlog between `t2` and `t3`.

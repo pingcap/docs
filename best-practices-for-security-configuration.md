@@ -78,9 +78,9 @@ By default, TiDB installation includes several privileged interfaces for inter-c
 | TiFlash           | 20170       | Protocol   |
 | TiFlash           | 20292       | HTTP       |
 | TiFlash           | 8234        | HTTP       |
-| DM master         | 8261        | HTTP       |
-| DM master         | 8291        | HTTP       |
-| DM worker         | 8262        | HTTP       |
+| DM-master         | 8261        | HTTP       |
+| DM-master         | 8291        | HTTP       |
+| DM-worker         | 8262        | HTTP       |
 | TiCDC             | 8300        | HTTP       |
 | TiDB Lightning    | 8289        | HTTP       |
 | TiDB Operator     | 6060        | HTTP       |

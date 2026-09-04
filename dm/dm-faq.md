@@ -211,12 +211,12 @@ The following are two solutions to this issue:
     2. Remove all files in the directory of exported data.
     3. Delete the task using dmctl and run the command `start-task --remove-meta` to create a new task.
 
-    After the new task starts, it is recommended to ensure that there is no redundant DM worker node and avoid restarting or upgrading the DM cluster during the full import.
+    After the new task starts, it is recommended to ensure that there is no redundant DM-worker node and avoid restarting or upgrading the DM cluster during the full import.
 
 - If the data volume is large (more than 1 TB), take these steps:
 
     1. Clean up the imported data in the downstream database.
-    2. Deploy TiDB-Lightning to the DM worker nodes that process the data.
+    2. Deploy TiDB-Lightning to the DM-worker nodes that process the data.
     3. Use the Local-backend mode of TiDB-Lightning to import data that DM dump units export.
     4. After the full import completes, edit the task configuration file in the following ways and restart the task:
         - Change `task-mode` to `incremental`.
@@ -364,7 +364,7 @@ To solve this issue, you are recommended to maintain DM clusters using TiUP. In 
 
 ## Why DM-master cannot be connected when I use dmctl to execute commands?
 
-When using dmctl execute commands, you might find the connection to DM master fails (even if you have specified the parameter value of `--master-addr` in the command), and the error message is like `RawCause: context deadline exceeded, Workaround: please check your network connection.`. But after checking the network connection using commands like `telnet <master-addr>`, no exception is found.
+When using dmctl execute commands, you might find the connection to DM-master fails (even if you have specified the parameter value of `--master-addr` in the command), and the error message is like `RawCause: context deadline exceeded, Workaround: please check your network connection.`. But after checking the network connection using commands like `telnet <master-addr>`, no exception is found.
 
 In this case, you can check the environment variable `https_proxy` (note that it is **https**). If this variable is configured, dmctl automatically connects the host and port specified by `https_proxy`. If the host does not have a corresponding `proxy` forwarding service, the connection fails.
 

@@ -5,7 +5,7 @@ summary: Learn the configuration file of DM-worker.
 
 # DM-worker Configuration File
 
-This document introduces the configuration of DM worker, including a configuration file template and a description of each configuration parameter in this file.
+This document introduces the configuration of DM-worker, including a configuration file template and a description of each configuration parameter in this file.
 
 ## Configuration file template
 

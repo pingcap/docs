@@ -489,7 +489,7 @@ Starting from v6.5.0, the `AMEND TRANSACTION` mechanism introduced in v4.0.7 is 
     + TiDB Data Migration (DM)
 
         - Fix the issue that a `task-mode:all` task cannot be started when the upstream database enables the GTID mode but does not have any data [#7037](https://github.com/pingcap/tiflow/issues/7037) @[liumengya94](https://github.com/liumengya94)
-        - Fix the issue that data is replicated for multiple times when a new DM worker is scheduled before the existing worker exits [#7658](https://github.com/pingcap/tiflow/issues/7658) @[GMHDBJD](https://github.com/GMHDBJD)
+        - Fix the issue that data is replicated for multiple times when a new DM-worker is scheduled before the existing worker exits [#7658](https://github.com/pingcap/tiflow/issues/7658) @[GMHDBJD](https://github.com/GMHDBJD)
         - Fix the issue that DM precheck is not passed when the upstream database uses regular expressions to grant privileges [#7645](https://github.com/pingcap/tiflow/issues/7645) @[lance6716](https://github.com/lance6716)
 
     + TiDB Lightning
