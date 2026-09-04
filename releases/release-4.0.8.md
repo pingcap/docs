@@ -40,7 +40,7 @@ TiDB バージョン: 4.0.8
     - クライアントの接続/切断アクティビティのTiDBエラーログを`DEBUG`レベルに調整します。 [#20321](https://github.com/pingcap/tidb/pull/20321)
     - コプロセッサーキャッシュの監視メトリックを追加します。 [#20293](https://github.com/pingcap/tidb/pull/20293)
     - 悲観的ロックキーのランタイム情報を追加 [#20199](https://github.com/pingcap/tidb/pull/20199)
-    - 実行時間情報に時間消費情報のセクションを2つ追加し、 `trace`スパン[#20187](https://github.com/pingcap/tidb/pull/20187)
+    - 実行時間情報と`trace`スパンに時間消費情報のセクションを2つ追加します [#20187](https://github.com/pingcap/tidb/pull/20187)
     - スローログにトランザクションコミットの実行時情報を追加する [#20185](https://github.com/pingcap/tidb/pull/20185)
     - インデックスマージ結合を無効にする [#20599](https://github.com/pingcap/tidb/pull/20599)
     - 時間文字列リテラルに ISO 8601 とタイムゾーンのサポートを追加[#20670](https://github.com/pingcap/tidb/pull/20670)

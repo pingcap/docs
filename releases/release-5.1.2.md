@@ -15,10 +15,10 @@ TiDB バージョン: 5.1.2
 
     - 次のバグ修正により実行結果が変わり、アップグレードの非互換性が発生する可能性があります。
 
-        - `greatest(datetime) union null`空の文字列を返す問題を修正[#26532](https://github.com/pingcap/tidb/issues/26532)
+        - `greatest(datetime) union null`が空の文字列を返す問題を修正[#26532](https://github.com/pingcap/tidb/issues/26532)
         - `having`節が正しく動作しない可能性がある問題を修正[#26496](https://github.com/pingcap/tidb/issues/26496)
         - `between`前後の照合順序が異なる場合に発生する誤った実行結果を修正[#27146](https://github.com/pingcap/tidb/issues/27146)
-        - `group_concat`関数の列に非ビン照合順序ある場合に発生する誤った実行結果を修正しました [#27429](https://github.com/pingcap/tidb/issues/27429)
+        - `group_concat`関数の列に非ビン照合順序がある場合に発生する誤った実行結果を修正しました [#27429](https://github.com/pingcap/tidb/issues/27429)
         - 新しい照合順序が有効になっているときに、複数の列で`count(distinct)`式を使用すると間違った結果が返される問題を修正しました[#27091](https://github.com/pingcap/tidb/issues/27091)
         - `extract`関数の引数が負の期間の場合に発生する結果の誤りを修正 [#27236](https://github.com/pingcap/tidb/issues/27236)
         - `SQL_MODE` 「STRICT_TRANS_TABLES」の場合、無効な日付を挿入してもエラーが報告されない問題を修正しました[#26762](https://github.com/pingcap/tidb/issues/26762)
@@ -67,7 +67,7 @@ TiDB バージョン: 5.1.2
 
     - Dumpling
 
-        - `START TRANSACTION ... WITH CONSISTENT SNAPSHOT`と`SHOW CREATE TABLE`サポートしていないMySQL互換データベースのバックアップをサポート[#309](https://github.com/pingcap/dumpling/issues/309)
+        - `START TRANSACTION ... WITH CONSISTENT SNAPSHOT`と`SHOW CREATE TABLE`をサポートしていないMySQL互換データベースのバックアップをサポート[#309](https://github.com/pingcap/dumpling/issues/309)
 
 ## バグ修正 {#bug-fixes}
 
@@ -142,10 +142,10 @@ TiDB バージョン: 5.1.2
 
     - TiCDC
 
-        - JSONエンコードが`string`または`[]byte` 列型値を処理する際にpanicを引き起こす可能性があるバグを修正しました。 [#2758](https://github.com/pingcap/tiflow/issues/2758)
-        - OOM 回避するために gRPC ウィンドウ サイズを縮小する [#2673](https://github.com/pingcap/tiflow/issues/2673)
+        - JSONエンコードが`string`または`[]byte`型の列値を処理する際にpanicを引き起こす可能性があるバグを修正しました。 [#2758](https://github.com/pingcap/tiflow/issues/2758)
+        - OOMを回避するために gRPC ウィンドウ サイズを縮小する [#2673](https://github.com/pingcap/tiflow/issues/2673)
         - メモリ負荷が高い場合の gRPC `keepalive`エラーを修正[#2202](https://github.com/pingcap/tiflow/issues/2202)
-        - 符号なし`tinyint`がTiCDCをpanicせるバグを修正[#2648](https://github.com/pingcap/tiflow/issues/2648)
+        - 符号なし`tinyint`がTiCDCをpanicさせるバグを修正[#2648](https://github.com/pingcap/tiflow/issues/2648)
         - TiCDCオープンプロトコルにおける空の値の問題を修正しました。1つのトランザクションに変更がない場合、空の値を出力することはなくなりました[#2612](https://github.com/pingcap/tiflow/issues/2612)
         - 手動再起動時の DDL 処理のバグを修正[#2603](https://github.com/pingcap/tiflow/issues/2603)
         - メタデータ管理する際に、 `EtcdWorker`のスナップショット分離が誤って違反される可能性がある問題を修正しました [#2559](https://github.com/pingcap/tiflow/pull/2559)

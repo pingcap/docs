@@ -80,7 +80,7 @@ TiDB バージョン: 6.5.1
 
     - [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600)設定項目がPointGetクエリで有効にならない問題を修正しました [#39928](https://github.com/pingcap/tidb/issues/39928) @[zyguan](https://github.com/zyguan)
     - 長いセッション接続で`INSERT`または`REPLACE`文がpanicする可能性がある問題を修正しました [#40351](https://github.com/pingcap/tidb/issues/40351) @[winoros](https://github.com/winoros)
-    - `auto analyze`正常なシャットダウンに長い時間がかかる問題を修正[#40038](https://github.com/pingcap/tidb/issues/40038) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
+    - `auto analyze`が正常なシャットダウンに長い時間がかかる問題を修正[#40038](https://github.com/pingcap/tidb/issues/40038) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - DDL取り込み中にデータ競合が発生する可能性がある問題を修正 [#40970](https://github.com/pingcap/tidb/issues/40970) @[tangenta](https://github.com/tangenta)
     - インデックスを追加するとデータ競合が発生する可能性がある問題を修正しました [#40879](https://github.com/pingcap/tidb/issues/40879) @[tangenta](https://github.com/tangenta)
     - テーブルに多数のリージョンがある場合に無効なリージョンキャッシュが原因でインデックスの追加操作が非効率になる問題を修正しました。 [#38436](https://github.com/pingcap/tidb/issues/38436) @[tangenta](https://github.com/tangenta)
@@ -133,7 +133,7 @@ TiDB バージョン: 6.5.1
 
 - PD
 
-    - 特定の条件下で実行`replace-down-peer`が遅くなる問題を修正[#5788](https://github.com/tikv/pd/issues/5788) @[HunDunDM](https://github.com/HunDunDM)
+    - 特定の条件下で`replace-down-peer`の実行が遅くなる問題を修正[#5788](https://github.com/tikv/pd/issues/5788) @[HunDunDM](https://github.com/HunDunDM)
     - PD が予期せず複数のラーナーをリージョンに追加する可能性がある問題を修正しました。 [#5786](https://github.com/tikv/pd/issues/5786) @[HunDunDM](https://github.com/HunDunDM)
     - リージョンスキャッタタスクが予期せず冗長レプリカを生成する問題を修正[#5909](https://github.com/tikv/pd/issues/5909) @[HunDunDM](https://github.com/HunDunDM)
     - `ReportMinResolvedTS`の呼び出しが頻繁に発生する PD OOM 問題を修正しました [#5965](https://github.com/tikv/pd/issues/5965) @[HunDunDM](https://github.com/HunDunDM)

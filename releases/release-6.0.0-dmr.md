@@ -94,7 +94,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 - インメモリ悲観的ロック
 
-    TiDB v6.0.0以降、メモリ内悲観的ロックがデフォルトで有効化されています。この機能を有効にすると、悲観的トランザクションロックはメモリ内で管理されます。これにより、悲観的ロックの永続化とロック情報のRaftレプリケーションが回避され、悲観的トランザクションロック管理のオーバーヘッドが大幅に削減されます。悲観的的ロックがパフォーマンスのボトルネックとなっている状況では、悲観的ロックのメモリ最適化により、レイテンシーを10%削減し、QPSを10%向上させることができます。
+    TiDB v6.0.0以降、メモリ内悲観的ロックがデフォルトで有効化されています。この機能を有効にすると、悲観的トランザクションロックはメモリ内で管理されます。これにより、悲観的ロックの永続化とロック情報のRaftレプリケーションが回避され、悲観的トランザクションロック管理のオーバーヘッドが大幅に削減されます。悲観的ロックがパフォーマンスのボトルネックとなっている状況では、悲観的ロックのメモリ最適化により、レイテンシーを10%削減し、QPSを10%向上させることができます。
 
     [ユーザードキュメント](/pessimistic-transaction.md#in-memory-pessimistic-lock) [#11452](https://github.com/tikv/tikv/issues/11452)
 
@@ -334,7 +334,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     - `REGEXP`機能をTiFlash にプッシュダウンするサポート [#32637](https://github.com/pingcap/tidb/issues/32637)
     - `DAYOFMONTH()`と`LAST_DAY()`関数をTiFlash にプッシュダウンするサポート [#33012](https://github.com/pingcap/tidb/issues/33012)
     - `DAYOFWEEK()`と`DAYOFYEAR()`関数をTiFlash にプッシュダウンするサポート [#33130](https://github.com/pingcap/tidb/issues/33130)
-    - `IS_TRUE` `IS_FALSE`関数`IS_TRUE_WITH_NULL` TiFlash にプッシュダウンする機能をサポート [#33047](https://github.com/pingcap/tidb/issues/33047)
+    - `IS_TRUE`、`IS_FALSE`、`IS_TRUE_WITH_NULL`関数をTiFlash にプッシュダウンする機能をサポート [#33047](https://github.com/pingcap/tidb/issues/33047)
     - `GREATEST`と`LEAST`関数をTiFlash にプッシュダウンするサポート [#32787](https://github.com/pingcap/tidb/issues/32787)
     - `UnionScan`オペレーターの実行の追跡をサポート [#32631](https://github.com/pingcap/tidb/issues/32631)
     - `_tidb_rowid`列列を読み取るクエリにPointGetプランの使用をサポート [#31543](https://github.com/pingcap/tidb/issues/31543)
@@ -359,7 +359,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     - `MOD`関数と`SYSDATE`関数をTiKV にプッシュダウンするサポート [#11916](https://github.com/tikv/tikv/issues/11916)
     - 解決ロックのステップを必要とする領域の数を減らすことで、TiCDCの回復時間を短縮します。 [#11993](https://github.com/tikv/tikv/issues/11993)
     - `raftstore.raft-max-inflight-msgs` の動的変更をサポート [#11865](https://github.com/tikv/tikv/issues/11865)
-    - 動的プルーニングモードを有効にするには`EXTRA_PHYSICAL_TABLE_ID_COL_ID`サポート [#11888](https://github.com/tikv/tikv/issues/11888)
+    - 動的プルーニングモードを有効にするには`EXTRA_PHYSICAL_TABLE_ID_COL_ID`をサポート [#11888](https://github.com/tikv/tikv/issues/11888)
     - バケットでの計算をサポート [#11759](https://github.com/tikv/tikv/issues/11759)
     - RawKV API V2のキーを`user-key` + `memcomparable-padding` + `timestamp` としてエンコードする [#11965](https://github.com/tikv/tikv/issues/11965)
     - RawKV API V2の値を`user-value` + `ttl` + `ValueMeta`としてエンコードし、 `delete`を`ValueMeta` としてエンコードする [#11965](https://github.com/tikv/tikv/issues/11965)
@@ -372,7 +372,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     - `storage.scheduler-worker-pool-size` (スケジューラプールのスレッド数) の動的変更をサポート [#12067](https://github.com/tikv/tikv/issues/12067)
     - グローバルフォアグラウンドフローコントローラを使用してCPUと帯域幅の使用を制御し、TiKV のパフォーマンス安定性を向上させます。 [#11855](https://github.com/tikv/tikv/issues/11855)
     - `readpool.unified.max-thread-count` (UnifyReadPool のスレッド数) の動的変更をサポート [#11781](https://github.com/tikv/tikv/issues/11781)
-    - TiKV内部パイプラインを使用してRocksDBパイプラインを置き換え、 `rocksdb.enable-multibatch-write`パラメータ廃止します。 [#12059](https://github.com/tikv/tikv/issues/12059)
+    - TiKV内部パイプラインを使用してRocksDBパイプラインを置き換え、 `rocksdb.enable-multibatch-write`パラメータを廃止します。 [#12059](https://github.com/tikv/tikv/issues/12059)
 
 - PD
 
@@ -422,7 +422,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
     - `SCHEDULE = majority_in_primary` `PrimaryRegion`同じ値の場合にTiDBが配置ルールを`Regions`してテーブルを作成できないバグを修正しました[#31271](https://github.com/pingcap/tidb/issues/31271)
     - インデックスルックアップ結合を使用してクエリを実行するときに発生する`invalid transaction`エラーを修正 [#30468](https://github.com/pingcap/tidb/issues/30468)
-    - `show grants`つ以上の権限が付与されたときに誤った結果を返すバグを修正しました[#30855](https://github.com/pingcap/tidb/issues/30855)
+    - `show grants`で2つ以上の権限が付与されたときに誤った結果を返すバグを修正しました[#30855](https://github.com/pingcap/tidb/issues/30855)
     - `INSERT INTO t1 SET timestamp_col = DEFAULT` 、デフォルトで`CURRENT_TIMESTAMP` に設定されているフィールドのタイムスタンプをゼロに設定するバグを修正しました。 [#29926](https://github.com/pingcap/tidb/issues/29926)
     - 文字列型の最大値と最小値の非NULL値のエンコードを避けることで、結果の読み取り時に報告されるエラーを修正しました。 [#31721](https://github.com/pingcap/tidb/issues/31721)
     - データがエスケープ文字で壊れている場合のロードデータpanicを修正 [#31589](https://github.com/pingcap/tidb/issues/31589)
@@ -430,7 +430,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     - date_add および date_sub関数が誤ったデータ型を返す可能性があるバグを修正[#31809](https://github.com/pingcap/tidb/issues/31809)
     - 挿入ステートメントを使用して仮想生成列にデータを挿入するときに発生する可能性のあるpanicを修正しました。 [#31735](https://github.com/pingcap/tidb/issues/31735)
     - 作成されたリストパーティションに重複した列が存在する場合にエラーが報告されないバグを修正しました [#31784](https://github.com/pingcap/tidb/issues/31784)
-    - `select for update union select`誤ったスナップショットを使用した場合に返される誤った結果を修正[#31530](https://github.com/pingcap/tidb/issues/31530)
+    - `select for update union select`で誤ったスナップショットを使用した場合に返される誤った結果を修正[#31530](https://github.com/pingcap/tidb/issues/31530)
     - 復元操作が完了した後にリージョンが不均等に分散される可能性がある問題を修正しました[#31034](https://github.com/pingcap/tidb/issues/31034)
     - `json`型のCOERCIBILITYが間違っているバグを修正 [#31541](https://github.com/pingcap/tidb/issues/31541)
     - 組み込み関数を使用してこの型を処理するときに、 `json`型の誤った照合順序を修正しました。 [#31320](https://github.com/pingcap/tidb/issues/31320)
@@ -457,7 +457,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     - 生成列を持つテーブルをクエリするときに誤った結果が発生する可能性を修正[#33038](https://github.com/pingcap/tidb/issues/33038)
     - `left join` を使用して複数のテーブルのデータを削除した場合の誤った結果を修正 [#31321](https://github.com/pingcap/tidb/issues/31321)
     - オーバーフローの場合に`SUBTIME`関数が間違った結果を返すバグを修正 [#31868](https://github.com/pingcap/tidb/issues/31868)
-    - 集計クエリに条件`having`条件が含まれている場合に演算子`selection`をプッシュダウンできないバグを修正しました。 [#33166](https://github.com/pingcap/tidb/issues/33166)
+    - 集計クエリに`having`条件が含まれている場合に演算子`selection`をプッシュダウンできないバグを修正しました。 [#33166](https://github.com/pingcap/tidb/issues/33166)
     - クエリがエラーを報告したときに CTE がブロックされる可能性があるバグを修正[#31302](https://github.com/pingcap/tidb/issues/31302)
     - 非厳密モードでテーブルを作成するときに、varbinary または varchar 列の長さが長すぎるとエラーが発生する可能性があるバグを修正しました[#30328](https://github.com/pingcap/tidb/issues/30328)
     - `information_schema.placement_policies`でフォロワーが指定されていない場合のフォロワー数が間違っている問題を修正[#31702](https://github.com/pingcap/tidb/issues/31702)
@@ -497,10 +497,10 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     - 期限切れのデータがゆっくりとリサイクルされる問題を修正[#4146](https://github.com/pingcap/tiflash/issues/4146)
     - `Snapshot`複数の DDL 操作と同時に適用された場合にTiFlash panicが発生する可能性がある問題を修正しました [#4072](https://github.com/pingcap/tiflash/issues/4072)
     - 読み取りワークロードが重い状態で列を追加した後に発生する可能性のあるクエリエラーを修正[#3967](https://github.com/pingcap/tiflash/issues/3967)
-    - 負の引数を持つ`SQRT`関数が`Null`ではなく`NaN`返す問題を修正しました[#3598](https://github.com/pingcap/tiflash/issues/3598)
+    - 負の引数を持つ`SQRT`関数が`Null`ではなく`NaN`を返す問題を修正しました[#3598](https://github.com/pingcap/tiflash/issues/3598)
     - `INT`を`DECIMAL`にキャストするとオーバーフローが発生する可能性がある問題を修正[#3920](https://github.com/pingcap/tiflash/issues/3920)
     - 複数値式で`IN`の結果が正しくない問題を修正 [#4016](https://github.com/pingcap/tiflash/issues/4016)
-    - 日付形式が`'\n'`無効な区切り文字として認識する問題を修正[#4036](https://github.com/pingcap/tiflash/issues/4036)
+    - 日付形式が`'\n'`を無効な区切り文字として認識する問題を修正[#4036](https://github.com/pingcap/tiflash/issues/4036)
     - 同時実行性の高いシナリオでラーナーの読み取りプロセスに時間がかかりすぎる問題を修正[#3555](https://github.com/pingcap/tiflash/issues/3555)
     - `DATETIME`を`DECIMAL` にキャストするときに発生する誤った結果を修正 [#4151](https://github.com/pingcap/tiflash/issues/4151)
     - クエリがキャンセルされたときに発生するメモリリークの問題を修正しました[#4098](https://github.com/pingcap/tiflash/issues/4098)
@@ -532,7 +532,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
         - ステータスを照会するときにのみ同期メトリックが更新される問題を修正しました [#4281](https://github.com/pingcap/tiflow/issues/4281)
         - セーフモードでの更新ステートメントの実行エラーにより、DMワーカーがpanicになる可能性がある問題を修正しました[#4317](https://github.com/pingcap/tiflow/issues/4317)
-        - 長いvarcharsがエラーを報告するバグを修正`Column length too big` [#4637](https://github.com/pingcap/tiflow/issues/4637)
+        - 長いvarcharsが`Column length too big`エラーを報告するバグを修正 [#4637](https://github.com/pingcap/tiflow/issues/4637)
         - 複数の DM ワーカーが同じアップストリームからデータを書き込むことで発生する競合の問題を修正しました。 [#3737](https://github.com/pingcap/tiflow/issues/3737)
         - ログに「チェックポイントに変更がないため、同期フラッシュチェックポイントをスキップします」というメッセージが数百件出力され、レプリケーションが非常に遅くなる問題を修正しました[#4619](https://github.com/pingcap/tiflow/issues/4619)
         - 悲観的モードでシャードをマージし、上流から増分データを複製する際のDML損失の問題を修正しました。 [#5002](https://github.com/pingcap/tiflow/issues/5002)

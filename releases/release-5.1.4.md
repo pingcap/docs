@@ -62,7 +62,7 @@ TiDB バージョン: 5.1.4
 
 - TiDB
 
-    - システム変数`tidb_analyze_version` `2` に設定されている場合に発生するメモリリークのバグを修正しました [#32499](https://github.com/pingcap/tidb/issues/32499)
+    - システム変数`tidb_analyze_version`が`2`に設定されている場合に発生するメモリリークのバグを修正しました [#32499](https://github.com/pingcap/tidb/issues/32499)
     - `MaxDays`と`MaxBackups`設定がスローログに反映されない問題を修正 [#25716](https://github.com/pingcap/tidb/issues/25716)
     - `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE`文を実行するとpanicが発生する問題を修正しました [#28078](https://github.com/pingcap/tidb/issues/28078)
     - `ENUM`種類の列に対して`JOIN`を実行するときに発生する可能性のある誤った結果を修正 [#27831](https://github.com/pingcap/tidb/issues/27831)

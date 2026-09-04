@@ -55,7 +55,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 
     - TiDB Lightning
 
-        - `stale command`ようなエラーが発生した場合に再試行メカニズムを追加して、インポート成功率向上させます [#36877](https://github.com/pingcap/tidb/issues/36877) @[D3Hunter](https://github.com/D3Hunter)
+        - `stale command`のようなエラーが発生した場合に再試行メカニズムを追加して、インポート成功率を向上させます [#36877](https://github.com/pingcap/tidb/issues/36877) @[D3Hunter](https://github.com/D3Hunter)
 
     - TiDB Data Migration (DM)
 
@@ -71,7 +71,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 
 - TiDB
 
-    - `LIMIT` と併用すると`INL_HASH_JOIN`ハングする可能性がある問題を修正しました [#35638](https://github.com/pingcap/tidb/issues/35638) @[guo-shaoge](https://github.com/guo-shaoge)
+    - `LIMIT` と併用すると`INL_HASH_JOIN`がハングする可能性がある問題を修正しました [#35638](https://github.com/pingcap/tidb/issues/35638) @[guo-shaoge](https://github.com/guo-shaoge)
     - `UPDATE`文の実行時に TiDB がpanicする可能性がある問題を修正しました [#32311](https://github.com/pingcap/tidb/issues/32311) @[Yisaer](https://github.com/Yisaer)
     - `SHOW COLUMNS`文を実行するときに TiDB がコプロセッサ要求を送信する可能性があるバグを修正しました。 [#36496](https://github.com/pingcap/tidb/issues/36496) @[tangenta](https://github.com/tangenta)
     - TiDBが`SHOW WARNINGS`文を実行するときに`invalid memory address or nil pointer dereference`エラーを返す可能性があるバグを修正しました [#31569](https://github.com/pingcap/tidb/issues/31569) @[zyguan](https://github.com/zyguan)
@@ -84,7 +84,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
     - ハッシュパーティションウィンドウと単一パーティションウィンドウの間に`EXCHANGE`演算子が欠落している問題を修正しました。 [#35990](https://github.com/pingcap/tidb/issues/35990) @[LittleFall](https://github.com/LittleFall)
     - パーティションテーブルがインデックスを完全に使用してデータをスキャンできない場合がある問題を修正[#33966](https://github.com/pingcap/tidb/issues/33966) @[mjonss](https://github.com/mjonss)
     - 集計がプッシュダウンされた後に部分集計に間違ったデフォルト値が設定された場合の間違ったクエリ結果の問題を修正しました [#35295](https://github.com/pingcap/tidb/issues/35295) @[tiancaiamao](https://github.com/tiancaiamao)
-    - パーティションテーブルをクエリすると、場合によってはで`index-out-of-range`エラーが発生する可能性がある問題を修正しました。 [#35181](https://github.com/pingcap/tidb/issues/35181) @[mjonss](https://github.com/mjonss)
+    - パーティションテーブルをクエリすると、場合によっては`index-out-of-range`エラーが発生する可能性がある問題を修正しました。 [#35181](https://github.com/pingcap/tidb/issues/35181) @[mjonss](https://github.com/mjonss)
     - クエリ条件でパーティションキーが使用され、照合順序がクエリパーティションテーブルの照合順序と異なる場合にパーティションが誤ってプルーニングされる問題を修正しました。 [#32749](https://github.com/pingcap/tidb/issues/32749) @[mjonss](https://github.com/mjonss)
     - TiDB Binlogが有効な場合、 `ALTER SEQUENCE`文を実行するとメタデータバージョンが間違って発生し、 Drainer が終了する可能性がある問題を修正しました。 [#36276](https://github.com/pingcap/tidb/issues/36276) @[AilinKid](https://github.com/AilinKid)
     - 極端なケースで起動時に誤った TiDB ステータスが表示される問題を修正[#36791](https://github.com/pingcap/tidb/issues/36791) @[xhebox](https://github.com/xhebox)

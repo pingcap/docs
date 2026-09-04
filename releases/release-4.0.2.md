@@ -153,7 +153,7 @@ TiDB バージョン: 4.0.2
     - `pd-server.dashboard-address`設定項目の正確性を確認する [#2517](https://github.com/pingcap/pd/pull/2517)
     - `store-limit-mode`から`auto` に設定するとPDのpanic問題を修正 [#2544](https://github.com/pingcap/pd/pull/2544)
     - ホットスポットを識別できないことがある問題を修正[#2463](https://github.com/pingcap/pd/pull/2463)
-    - 配置ルールにより、ストアが`tombstone`に変更できない場合がある問題を修正しました場合) [#2546](https://github.com/pingcap/pd/pull/2546)
+    - 配置ルールにより、ストアが`tombstone`に変更できない場合がある問題を修正しました [#2546](https://github.com/pingcap/pd/pull/2546)
     - 以前のバージョンからアップグレードする際に発生するPDのpanic問題を修正[#2564](https://github.com/pingcap/pd/pull/2564)
 
 - TiFlash

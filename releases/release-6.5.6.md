@@ -37,7 +37,7 @@ TiDB バージョン: 6.5.6
 
 - PD
 
-    - Grafanaダッシュボードに`Status`と`Sync Progress` `DR Auto-Sync`ような監視メトリックを追加します[#6975](https://github.com/tikv/pd/issues/6975) @[disksing](https://github.com/disksing)
+    - Grafanaダッシュボードの`DR Auto-Sync`に`Status`や`Sync Progress`のような監視メトリックを追加します[#6975](https://github.com/tikv/pd/issues/6975) @[disksing](https://github.com/disksing)
 
 - ツール
 
@@ -122,8 +122,8 @@ TiDB バージョン: 6.5.6
     - 変更された分離レベルがデフォルトの配置ルールに同期されない問題を修正しました [#7121](https://github.com/tikv/pd/issues/7121) @[rleungx](https://github.com/rleungx)
     - `evict-leader-scheduler`が構成を失う可能性がある問題を修正 [#6897](https://github.com/tikv/pd/issues/6897) @[HuSharp](https://github.com/HuSharp)
     - BR の回復プロセス中に、空のリージョンをカウントする方法によってリージョンのバランスが崩れる可能性がある問題を修正しました。 [#7148](https://github.com/tikv/pd/issues/7148) @[CabinfeverB](https://github.com/CabinfeverB)
-    - 配置ルールの設定が複雑な場合、データレプリケーション自動同期（DR自動同期）モードを採用しているクラスタで`canSync`と`hasMajority`誤って計算される可能性がある問題を修正しました[#7201](https://github.com/tikv/pd/issues/7201) @[disksing](https://github.com/disksing)
-    - データレプリケーション自動同期（DR自動同期）モードを採用しているクラスタで`available_stores`誤って計算される問題を修正[#7221](https://github.com/tikv/pd/issues/7221) @[disksing](https://github.com/disksing)
+    - 配置ルールの設定が複雑な場合、データレプリケーション自動同期（DR自動同期）モードを採用しているクラスタで`canSync`と`hasMajority`が誤って計算される可能性がある問題を修正しました[#7201](https://github.com/tikv/pd/issues/7201) @[disksing](https://github.com/disksing)
+    - データレプリケーション自動同期（DR自動同期）モードを採用しているクラスタで`available_stores`が誤って計算される問題を修正[#7221](https://github.com/tikv/pd/issues/7221) @[disksing](https://github.com/disksing)
     - データレプリケーション自動同期（DR自動同期）モードを採用しているクラスターで、セカンダリAZがダウンしているときにプライマリAZがTiKVノードを追加できない問題を修正しました。 [#7218](https://github.com/tikv/pd/issues/7218) @[disksing](https://github.com/disksing)
     - 大規模クラスタに複数の TiKV ノードを追加すると、TiKVハートビートレポートが遅くなったり停止したりする可能性がある問題を修正しました[#7248](https://github.com/tikv/pd/issues/7248) @[rleungx](https://github.com/rleungx)
     - TiKVノードが利用できない場合にPDが通常のピアを削除する可能性がある問題を修正[#7249](https://github.com/tikv/pd/issues/7249) @[lhy1024](https://github.com/lhy1024)

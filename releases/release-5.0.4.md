@@ -26,7 +26,7 @@ TiDB バージョン: 5.0.4
         - `between`前後の照合順序が異なる場合に発生する誤った実行結果を修正[#27146](https://github.com/pingcap/tidb/issues/27146)
         - `group_concat`関数の列に非ビン照合順序ある場合に発生する誤った実行結果を修正しました [#27429](https://github.com/pingcap/tidb/issues/27429)
         - 新しい照合順序が有効になっているときに、複数の列で`count(distinct)`式を使用すると間違った結果が返される問題を修正しました[#27091](https://github.com/pingcap/tidb/issues/27091)
-        - `extract`関数の引数が負の期間場合に発生する結果の誤りを修正 [#27236](https://github.com/pingcap/tidb/issues/27236)
+        - `extract`関数の引数が負の期間の場合に発生する結果の誤りを修正 [#27236](https://github.com/pingcap/tidb/issues/27236)
         - `SQL_MODE` 「STRICT_TRANS_TABLES」の場合、無効な日付を挿入してもエラーが報告されない問題を修正しました[#26762](https://github.com/pingcap/tidb/issues/26762)
         - `SQL_MODE` 「NO_ZERO_IN_DATE」の場合に無効なデフォルト日付を使用してもエラーが報告されない問題を修正しました[#26766](https://github.com/pingcap/tidb/issues/26766)
         - プレフィックスインデックスのクエリ範囲に関するバグを修正 [#26029](https://github.com/pingcap/tidb/issues/26029)

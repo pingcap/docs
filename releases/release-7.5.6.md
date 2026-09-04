@@ -64,7 +64,7 @@ TiDB バージョン: 7.5.6
     - `tidb_ttl_delete_rate_limit` を変更するときに一部の TTL ジョブがハングする可能性がある問題を修正しました [#58484](https://github.com/pingcap/tidb/issues/58484) @[lcwangchao](https://github.com/lcwangchao)
     - 統計の不適切な例外処理により、バックグラウンドタスクがタイムアウトしたときにメモリ内の統計が誤って削除される問題を修正しました[#57901](https://github.com/pingcap/tidb/issues/57901) @[hawkingrei](https://github.com/hawkingrei)
     - `cluster_slow_query table`をクエリするときに`ORDER BY`を使用すると、順序付けられていない結果が生成される可能性がある問題を修正しました。 [#51723](https://github.com/pingcap/tidb/issues/51723) @[Defined2014](https://github.com/Defined2014)
-    - 仮想生成列の依存関係に属性`ON UPDATE`持つ列が含まれている場合、更新された行のデータとそのインデックスデータが不整合になる可能性がある問題を修正しました[#56829](https://github.com/pingcap/tidb/issues/56829) @[joechenrh](https://github.com/joechenrh)
+    - 仮想生成列の依存関係に属性`ON UPDATE`を持つ列が含まれている場合、更新された行のデータとそのインデックスデータが不整合になる可能性がある問題を修正しました[#56829](https://github.com/pingcap/tidb/issues/56829) @[joechenrh](https://github.com/joechenrh)
     - TiDBハートビートが失われた場合に TTL ジョブをキャンセルできない問題を修正[#57784](https://github.com/pingcap/tidb/issues/57784) @[YangKeao](https://github.com/YangKeao)
     - パラメータが`Enum` 、または`Set`型の場合、 `Conv()`関数はTiKV にプッシュダウンされなくなりました`Bit` [#51877](https://github.com/pingcap/tidb/issues/51877) @[yibin87](https://github.com/yibin87)
     - 分散ストレージおよびコンピューティングアーキテクチャのTiFlashノードを含むクラスターで`ALTER TABLE ... PLACEMENT POLICY ...`を実行した後、リージョンピアが誤ってTiFlashコンピューティングノードに追加される可能性がある問題を修正しました。 [#58633](https://github.com/pingcap/tidb/issues/58633) @[JaySon-Huang](https://github.com/JaySon-Huang)

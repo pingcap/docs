@@ -136,14 +136,14 @@ TiDB バージョン: 4.0.6
     - 一部のTiFlashノードがオフラインの場合の`tiflash_segments`および`tiflash_tables`システムテーブルからの読み取りエラーを修正[#19748](https://github.com/pingcap/tidb/pull/19748)
     - 集計関数`Count(col)`の誤った結果を修正[#19628](https://github.com/pingcap/tidb/pull/19628)
     - `TRUNCATE`操作のランタイムエラーを修正 [#19445](https://github.com/pingcap/tidb/pull/19445)
-    - `PREPARE statement FROM @Var` `Var`大文字が含まれていると失敗する問題を修正[#19378](https://github.com/pingcap/tidb/pull/19378)
+    - `PREPARE statement FROM @Var`が`Var`に大文字が含まれていると失敗する問題を修正[#19378](https://github.com/pingcap/tidb/pull/19378)
     - 大文字スキーマでスキーマ文字セットを変更するとpanicが発生するバグを修正[#19302](https://github.com/pingcap/tidb/pull/19302)
     - 情報に`tikv/tiflash`が含まれている場合の`information_schema.statements_summary`と`explain`間の計画の不一致を修正します [#19159](https://github.com/pingcap/tidb/pull/19159)
     - `select into outfile` ファイルが存在しないというテストのエラーを修正 [#19725](https://github.com/pingcap/tidb/pull/19725)
     - `INFORMATION_SCHEMA.CLUSTER_HARDWARE`にRAIDデバイス情報がない問題を修正[#19457](https://github.com/pingcap/tidb/pull/19457)
     - `case-when`で生成列を持つ`add index`操作が解析エラーに遭遇したときに正常に終了できるようにします。 [#19395](https://github.com/pingcap/tidb/pull/19395)
     - DDL操作の再試行に時間がかかりすぎるバグを修正[#19488](https://github.com/pingcap/tidb/pull/19488)
-    - `alter table db.t1 add constraint fk foreign key (c2) references t2(c1)`ような文を`use db` を実行せずに実行する [#19471](https://github.com/pingcap/tidb/pull/19471)
+    - `alter table db.t1 add constraint fk foreign key (c2) references t2(c1)`のような文を、`use db`を実行せずに実行できるようにする [#19471](https://github.com/pingcap/tidb/pull/19471)
     - サーバーログファイルのディスパッチエラーを`Error`から`Info`メッセージに変更します。 [#19454](https://github.com/pingcap/tidb/pull/19454)
 
 - TiKV
@@ -158,9 +158,9 @@ TiDB バージョン: 4.0.6
 - PD
 
     - ブートストラップ中に異なるクラスタが相互に通信するのを防ぐために、 `initial-cluster-token`構成を追加します。 [#2922](https://github.com/pingcap/pd/pull/2922)
-    - モードが`auto` ときのストア制限レートの単位を修正 [#2826](https://github.com/pingcap/pd/pull/2826)
+    - モードが`auto`のときのストア制限レートの単位を修正 [#2826](https://github.com/pingcap/pd/pull/2826)
     - 一部のスケジューラがエラーを解決せずに構成を保持する問題を修正[#2818](https://github.com/tikv/pd/pull/2818)
-    - スケジューラ 空のHTTPレスポンスを修正 [#2874](https://github.com/tikv/pd/pull/2874) [#2871](https://github.com/tikv/pd/pull/2871)
+    - スケジューラの空のHTTPレスポンスを修正 [#2874](https://github.com/tikv/pd/pull/2874) [#2871](https://github.com/tikv/pd/pull/2871)
 
 - TiFlash
 
@@ -176,7 +176,7 @@ TiDB バージョン: 4.0.6
 
     - TiCDC
 
-        - TiCDC がメモリを起こす場合がある問題を修正[#942](https://github.com/pingcap/tiflow/pull/942)
+        - TiCDC がメモリリークを起こす場合がある問題を修正しました [#942](https://github.com/pingcap/tiflow/pull/942)
         - Kafka シンクで TiCDC がpanicする可能性がある問題を修正しました [#912](https://github.com/pingcap/tiflow/pull/912)
         - プルラーでCommitTsまたはResolvedTs（CRTs）が`resolvedTs`未満になる可能性がある問題を修正しました [#927](https://github.com/pingcap/tiflow/pull/927)
         - `changefeed` MySQL ドライバによってブロックされる可能性がある問題を修正しました [#936](https://github.com/pingcap/tiflow/pull/936)

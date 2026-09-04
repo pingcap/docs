@@ -49,7 +49,7 @@ TiDB バージョン: 6.5.7
     - `ErrLoadDataInvalidURI`の誤ったエラーメッセージを修正 (無効な S3 URI エラー) [#48164](https://github.com/pingcap/tidb/issues/48164) @[lance6716](https://github.com/lance6716)
     - `tidb_server_memory_limit` による長期メモリ圧迫により TiDB の CPU 使用率が上昇する問題を修正 [#48741](https://github.com/pingcap/tidb/issues/48741) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - 共通テーブル式 (CTE) を含むクエリがメモリ制限を超えたときに予期せず停止する問題を修正[#49096](https://github.com/pingcap/tidb/issues/49096) @[AilinKid](https://github.com/AilinKid)
-    - 同じクエリプランで、場合によってはの異なる`PLAN_DIGEST`値が発生する問題を修正しました [#47634](https://github.com/pingcap/tidb/issues/47634) @[King-Dylan](https://github.com/King-Dylan)
+    - 同じクエリプランで、場合によっては異なる`PLAN_DIGEST`値が発生する問題を修正しました [#47634](https://github.com/pingcap/tidb/issues/47634) @[King-Dylan](https://github.com/King-Dylan)
     - CTE を含むクエリが、 `tidb_max_chunk_size`小さい値に設定されている場合に`runtime error: index out of range [32] with length 32`報告する問題を修正しました。 [#48808](https://github.com/pingcap/tidb/issues/48808) @[guo-shaoge](https://github.com/guo-shaoge)
     - 正常なシャットダウン中に TiDBサーバーがpanicする可能性がある問題を修正[#36793](https://github.com/pingcap/tidb/issues/36793) @[bb7133](https://github.com/bb7133)
     - TiDB の初期バージョンからエクスポートされた統計をインポートするときに統計データエラーが発生する可能性がある問題を修正しました。 [#42931](https://github.com/pingcap/tidb/issues/42931) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
@@ -74,7 +74,7 @@ TiDB バージョン: 6.5.7
 
 - PD
 
-    - SQLの配置ルールで設定された`location-labels`特定の条件下で期待どおりにスケジュールされない問題を修正[#6637](https://github.com/tikv/pd/issues/6637) @[rleungx](https://github.com/rleungx)
+    - SQLの配置ルールで設定された`location-labels`が特定の条件下で期待どおりにスケジュールされない問題を修正[#6637](https://github.com/tikv/pd/issues/6637) @[rleungx](https://github.com/rleungx)
     - レプリカ数が要件を満たしていない場合に孤立ピアが削除される問題を修正しました [#7584](https://github.com/tikv/pd/issues/7584) @[bufferflies](https://github.com/bufferflies)
 
 - TiFlash

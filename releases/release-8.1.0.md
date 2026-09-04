@@ -67,7 +67,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 - `IMPORT INTO ... FROM SELECT`構文（GA） をサポート [#49883](https://github.com/pingcap/tidb/issues/49883) @[D3Hunter](https://github.com/D3Hunter)
 
-    v8.0.0より前では、クエリ結果をターゲットテーブルにインポートするには`INSERT INTO ... SELECT`文しか使用できませんでしたが、これは大規模データセットを扱うシナリオによっては比較的非効率的でした。v8.0.0では、TiDBは実験的機能として`IMPORT INTO ... FROM SELECT`導入し、 `SELECT`のクエリ結果を空のTiDBターゲットテーブルにインポートできるようになりました。これにより、 `INSERT INTO ... SELECT`の最大8倍のパフォーマンスを実現し、インポート時間を大幅に短縮できます。さらに、 `IMPORT INTO ... FROM SELECT`を使用して、 [`AS OF TIMESTAMP`](/as-of-timestamp.md)でクエリされた履歴データをインポートすることもできます。
+    v8.0.0より前では、クエリ結果をターゲットテーブルにインポートするには`INSERT INTO ... SELECT`文しか使用できませんでしたが、これは大規模データセットを扱うシナリオによっては比較的非効率的でした。v8.0.0では、TiDBは実験的機能として`IMPORT INTO ... FROM SELECT`を導入し、 `SELECT`のクエリ結果を空のTiDBターゲットテーブルにインポートできるようになりました。これにより、 `INSERT INTO ... SELECT`の最大8倍のパフォーマンスを実現し、インポート時間を大幅に短縮できます。さらに、 `IMPORT INTO ... FROM SELECT`を使用して、 [`AS OF TIMESTAMP`](/as-of-timestamp.md)でクエリされた履歴データをインポートすることもできます。
 
     v8.1.0 では、 `IMPORT INTO ... FROM SELECT`構文が一般公開 (GA) され、 `IMPORT INTO`文の機能シナリオが充実します。
 
@@ -83,7 +83,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 - TiCDCはクライアント認証をサポートします [#10636](https://github.com/pingcap/tiflow/issues/10636) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
-    v8.1.0では、TiCDC CLIまたはOpenAPIを使用する際に、TiCDCはクライアント認証をサポートします。この機能により、クライアント証明書を用いたクライアント認証を要求するようにTiCDCを設定でき、相互トランスポート層Security（mTLS）を確立できます。さらに、TiDBのユーザー名とパスワードに基づく認証も設定できます。
+    v8.1.0では、TiCDC CLIまたはOpenAPIを使用する際に、TiCDCはクライアント認証をサポートします。この機能により、クライアント証明書を用いたクライアント認証を要求するようにTiCDCを設定でき、相互トランスポート層セキュリティ（mTLS）を確立できます。さらに、TiDBのユーザー名とパスワードに基づく認証も設定できます。
 
     詳細については[ドキュメント](/ticdc/ticdc-client-authentication.md)を参照してください。
 
@@ -146,12 +146,12 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
     - `SHOW CREATE TABLE` の出力に表示される外部キーのMySQL互換性を改善 [#51837](https://github.com/pingcap/tidb/issues/51837) @[negachov](https://github.com/negachov)
     - `SHOW CREATE TABLE` の出力に表示される式のデフォルト値のMySQL互換性を改善しました [#52939](https://github.com/pingcap/tidb/issues/52939) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - 取り込みモードで複数のインデックスを同時に追加できるようになりました [#52596](https://github.com/pingcap/tidb/issues/52596) @[lance6716](https://github.com/lance6716)
-    - システム変数`tidb_service_scope`さまざまな値で構成することをサポートし、分散実行フレームワーク（DXF） の利用率を高めます。 [#52441](https://github.com/pingcap/tidb/issues/52441) @[ywqzzy](https://github.com/ywqzzy)
+    - システム変数`tidb_service_scope`をさまざまな値で構成することをサポートし、分散実行フレームワーク（DXF） の利用率を高めます。 [#52441](https://github.com/pingcap/tidb/issues/52441) @[ywqzzy](https://github.com/ywqzzy)
     - 常に`false`である DNF 項目の処理を強化し、そのようなフィルタ条件を直接無視することで、不要なテーブル全体のスキャンを回避します[#40997](https://github.com/pingcap/tidb/issues/40997) @[Rustin170506](https://github.com/Rustin170506)
     - オプティマイザがクエリに対して単一インデックススキャン方式 (フルテーブルスキャン以外) を選択できる場合、オプティマイザがクエリに対してインデックスマージを自動的に選択しないという制限を削除するために、オプティマイザ修正コントロールの使用をサポートします。 [#52869](https://github.com/pingcap/tidb/issues/52869) @[time-and-fate](https://github.com/time-and-fate)
     - コプロセッサー演算子の列`execution info`に`total_kv_read_wall_time`メトリックを追加します。 [#28937](https://github.com/pingcap/tidb/issues/28937) @[cfzjywxk](https://github.com/cfzjywxk)
     - リソースコントロールダッシュボードに`RU (max)`メトリックを追加する[#49318](https://github.com/pingcap/tidb/issues/49318) @[nolouch](https://github.com/nolouch)
-    - リソースロック（RLock）が内に解放されない問題を回避するために、LDAP認証にタイムアウトメカニズムを追加します@[YangKeao](https://github.com/YangKeao) [#51883](https://github.com/pingcap/tidb/issues/51883)
+    - リソースロック（RLock）が時間内に解放されない問題を回避するために、LDAP認証にタイムアウトメカニズムを追加します@[YangKeao](https://github.com/YangKeao) [#51883](https://github.com/pingcap/tidb/issues/51883)
 
 - TiKV
 
@@ -191,7 +191,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
     - アップグレード中に TiDB がシステムテーブルの統計を作成する問題を修正しました [#52040](https://github.com/pingcap/tidb/issues/52040) @[Rustin170506](https://github.com/Rustin170506)
     - 統計の初期化が完了する前に自動統計収集がトリガーされる問題を修正[#52346](https://github.com/pingcap/tidb/issues/52346) @[Rustin170506](https://github.com/Rustin170506)
     - `tidb_mem_quota_analyze`が有効になっていて、統計の更新に使用されるメモリが制限を超えると TiDB がクラッシュする可能性がある問題を修正しました。 [#52601](https://github.com/pingcap/tidb/issues/52601) @[hawkingrei](https://github.com/hawkingrei)
-    - TiDBの同期的な統計読み込みメカニズムが空の統計の読み込みを無期限に再試行し、 `fail to get stats version for this histogram` log を出力問題を修正しました。 [#52657](https://github.com/pingcap/tidb/issues/52657) @[hawkingrei](https://github.com/hawkingrei)
+    - TiDBの同期的な統計読み込みメカニズムが空の統計の読み込みを無期限に再試行し、 `fail to get stats version for this histogram` log を出力する問題を修正しました。 [#52657](https://github.com/pingcap/tidb/issues/52657) @[hawkingrei](https://github.com/hawkingrei)
     - 照合順序の新しいフレームワークが無効になっているときに、異なる照合順序を含む式によってクエリがpanicになる可能性がある問題を修正しました[#52772](https://github.com/pingcap/tidb/issues/52772) @[wjhuang2016](https://github.com/wjhuang2016)
     - `CPS by type`メトリックに誤った値が表示される問題を修正しました [#52605](https://github.com/pingcap/tidb/issues/52605) @[nolouch](https://github.com/nolouch)
     - `INFORMATION_SCHEMA.TIKV_REGION_STATUS` をクエリすると nil ポインタエラーが発生する問題を修正しました [#52013](https://github.com/pingcap/tidb/issues/52013) @[JmPotato](https://github.com/JmPotato)

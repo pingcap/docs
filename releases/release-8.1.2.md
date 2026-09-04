@@ -29,7 +29,7 @@ TiDB バージョン: 8.1.2
     - 空のテーブルと小さなリージョンのシナリオでのリージョン結合の速度を向上 [#17376](https://github.com/tikv/tikv/issues/17376) @[LykxSassinator](https://github.com/LykxSassinator)
     - TiKVの`DiskFull`検出を最適化してRaftEngineの`spill-dir`構成と互換性を持たせ、この機能が一貫して動作することを保証します。 [#17356](https://github.com/tikv/tikv/issues/17356) @[LykxSassinator](https://github.com/LykxSassinator)
     - RocksDB 圧縮のトリガー メカニズムを最適化し、多数の DELETE バージョンを処理するときにディスク領域の再利用を高速化します。 [#17269](https://github.com/tikv/tikv/issues/17269) @[AndreMouche](https://github.com/AndreMouche)
-    - `import.num-threads`設定項目を動的に変更するサポート[#17807](https://github.com/tikv/tikv/issues/17807) @[RidRisR](https://github.com/RidRisR)
+    - `import.num-threads`設定項目を動的に変更することをサポート[#17807](https://github.com/tikv/tikv/issues/17807) @[RidRisR](https://github.com/RidRisR)
     - Rusoto ライブラリを AWS Rust SDK に置き換えて、バックアップと復元のために外部ストレージ(Amazon S3 など) にアクセスします。これにより、IMDSv2 や EKS Pod Identity などの AWS 機能との互換性が向上します。 [#12371](https://github.com/tikv/tikv/issues/12371) @[akoshchiy](https://github.com/akoshchiy)
 
 - TiFlash
@@ -67,7 +67,7 @@ TiDB バージョン: 8.1.2
     - 配置ルールを含むテーブル構造をインポートするときに Plan Replayer がエラーを報告する可能性がある問題を修正しました。 [#54961](https://github.com/pingcap/tidb/issues/54961) @[hawkingrei](https://github.com/hawkingrei)
     - メモリ使用量が`tidb_mem_quota_query` で設定された制限を超えたためにクエリが終了したときに停止する可能性がある問題を修正しました [#55042](https://github.com/pingcap/tidb/issues/55042) @[yibin87](https://github.com/yibin87)
     - copタスク構築中にTiDBクエリをキャンセルできない問題を修正 [#55957](https://github.com/pingcap/tidb/issues/55957) @[yibin87](https://github.com/yibin87)
-    - TTLジョブ実行中に値を`tidb_ttl_delete_worker_count`減らすとジョブが完了しなくなる問題を修正しました [#55561](https://github.com/pingcap/tidb/issues/55561) @[lcwangchao](https://github.com/lcwangchao)
+    - TTLジョブ実行中に`tidb_ttl_delete_worker_count`の値を減らすとジョブが完了しなくなる問題を修正しました [#55561](https://github.com/pingcap/tidb/issues/55561) @[lcwangchao](https://github.com/lcwangchao)
     - `CAST`関数が文字セットの明示的な設定をサポートしていない問題を修正しました [#55677](https://github.com/pingcap/tidb/issues/55677) @[Defined2014](https://github.com/Defined2014)
     - 書き込み競合が発生したときにTTLタスクをキャンセルできない問題を修正[#56422](https://github.com/pingcap/tidb/issues/56422) @[YangKeao](https://github.com/YangKeao)
     - `IndexNestedLoopHashJoin` のデータ競合問題を修正 [#49692](https://github.com/pingcap/tidb/issues/49692) @[solotzg](https://github.com/solotzg)
@@ -85,7 +85,7 @@ TiDB バージョン: 8.1.2
     - `UPDATE`文が`ENUM`型の値を誤って更新する問題を修正しました [#56832](https://github.com/pingcap/tidb/issues/56832) @[xhebox](https://github.com/xhebox)
     - 外部キーを含むテーブル構造をインポートするときに Plan Replayer がエラーを報告する可能性がある問題を修正しました。 [#56456](https://github.com/pingcap/tidb/issues/56456) @[hawkingrei](https://github.com/hawkingrei)
     - `tidb_ttl_job_enable`変数が無効になった後、TTL タスクがキャンセルされない問題を修正[#57404](https://github.com/pingcap/tidb/issues/57404) @[YangKeao](https://github.com/YangKeao)
-    - `UPDATE`または`DELETE`文に再帰 CTE が含まれている場合、文がエラーを報告したり、 が有効にならない可能性がある問題を修正しました。 [#55666](https://github.com/pingcap/tidb/issues/55666) @[time-and-fate](https://github.com/time-and-fate)
+    - `UPDATE`または`DELETE`文に再帰 CTE が含まれている場合、文がエラーを報告したり、文が有効にならない可能性がある問題を修正しました。 [#55666](https://github.com/pingcap/tidb/issues/55666) @[time-and-fate](https://github.com/time-and-fate)
     - `INFORMATION_SCHEMA.STATISTICS`テーブルの`SUB_PART`値が`NULL` になる問題を修正しました [#55812](https://github.com/pingcap/tidb/issues/55812) @[Defined2014](https://github.com/Defined2014)
     - TiFlashシステムテーブルを照会するためのデフォルトのタイムアウトが短すぎる問題を修正[#57816](https://github.com/pingcap/tidb/issues/57816) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - `default_collation_for_utf8mb4`変数の値が`SET NAMES`文で機能しない問題を修正しました [#56439](https://github.com/pingcap/tidb/issues/56439) @[Defined2014](https://github.com/Defined2014)
@@ -95,7 +95,7 @@ TiDB バージョン: 8.1.2
 
 - TiKV
 
-    - 構成`resolved-ts.advance-ts-interval`有効にならないため、TiKV が再起動すると、TiCDC のレプリケーションレイテンシーと Point-in-time Recovery (PITR) が大幅に増加する問題を修正しました。 [#17107](https://github.com/tikv/tikv/issues/17107) @[MyonKeminta](https://github.com/MyonKeminta)
+    - 構成`resolved-ts.advance-ts-interval`が有効にならないため、TiKV が再起動すると、TiCDC のレプリケーションレイテンシーと Point-in-time Recovery (PITR) が大幅に増加する問題を修正しました。 [#17107](https://github.com/tikv/tikv/issues/17107) @[MyonKeminta](https://github.com/MyonKeminta)
     - リソース制御をトリガーするときに一部のタスクで高いテールレイテンシーが発生する問題を修正しました [#17589](https://github.com/tikv/tikv/issues/17589) @[glorv](https://github.com/glorv)
     - リージョンをマージすると稀に TiKV がpanicを起こす可能性がある問題を修正[#17840](https://github.com/tikv/tikv/issues/17840) @[glorv](https://github.com/glorv)
     - ディスクがスタックしているときに TiKV が PD にハートビートを報告できない問題を修正しました [#17939](https://github.com/tikv/tikv/issues/17939) @[LykxSassinator](https://github.com/LykxSassinator)
@@ -112,8 +112,8 @@ TiDB バージョン: 8.1.2
     - PD HTTPクライアントの再試行ロジックが効果がない可能性がある問題を修正[#8499](https://github.com/tikv/pd/issues/8499) @[JmPotato](https://github.com/JmPotato)
     - 潜在的なセキュリティ脆弱性を修正するために、Gin Web Framework のバージョンを v1.9.1 から v1.10.0 にアップグレードしました[#8643](https://github.com/tikv/pd/issues/8643) @[JmPotato](https://github.com/JmPotato)
     - etcdリーダー遷移中にPDがリーダーを素早く再選出できない問題を修正 [#8823](https://github.com/tikv/pd/issues/8823) @[rleungx](https://github.com/rleungx)
-    - `replication.strictly-match-label`から`true`に設定するとTiFlash が起動しなくなる問題を修正 [#8480](https://github.com/tikv/pd/issues/8480) @[rleungx](https://github.com/rleungx)
-    - 同じストアID で繰り返し作成された場合に`evict-leader-scheduler`正常に動作しない問題を修正 [#8756](https://github.com/tikv/pd/issues/8756) @[okJiang](https://github.com/okJiang)
+    - `replication.strictly-match-label`を`true`に設定するとTiFlash が起動しなくなる問題を修正 [#8480](https://github.com/tikv/pd/issues/8480) @[rleungx](https://github.com/rleungx)
+    - 同じストアID で繰り返し作成された場合に`evict-leader-scheduler`が正常に動作しない問題を修正 [#8756](https://github.com/tikv/pd/issues/8756) @[okJiang](https://github.com/okJiang)
     - 乱数ジェネレータの頻繁な作成によって発生するパフォーマンスジッターの問題を修正しました [#8674](https://github.com/tikv/pd/issues/8674) @[rleungx](https://github.com/rleungx)
     - ホットスポット キャッシュのメモリリーク問題を修正 [#8698](https://github.com/tikv/pd/issues/8698) @[lhy1024](https://github.com/lhy1024)
     - ラベル統計のメモリリーク問題を修正 [#8700](https://github.com/tikv/pd/issues/8700) @[lhy1024](https://github.com/lhy1024)

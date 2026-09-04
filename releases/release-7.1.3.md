@@ -18,7 +18,7 @@ TiDB バージョン: 7.1.3
     - [`sql-mode`](/ticdc/ticdc-changefeed-config.md) : TiCDC がデータを複製するときに DDL文を解析するために使用する[SQLモード](https://docs.pingcap.com/tidb/v7.1/ticdc-ddl#sql-mode)を設定できます[#9876](https://github.com/pingcap/tiflow/issues/9876) @[asddongmen](https://github.com/asddongmen)
     - [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md)と[`flush-worker-num`](/ticdc/ticdc-changefeed-config.md) : 異なるマシンの仕様に基づいて、再実行モジュールに異なる同時実行パラメータを設定できます[#10048](https://github.com/pingcap/tiflow/issues/10048) @[CharlesCheung96](https://github.com/CharlesCheung96)
     - [`compression`](/ticdc/ticdc-changefeed-config.md) : REDOログファイルの圧縮動作を設定できます[#10176](https://github.com/pingcap/tiflow/issues/10176) @[sdojjy](https://github.com/sdojjy)
-    - [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md) : オブジェクトストレージにデータを複製するときに履歴データの自動クリーンアップを設定できます[CharlesCheung96](https://github.com/CharlesCheung96) [#10109](https://github.com/pingcap/tiflow/issues/10109)
+    - [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md) : オブジェクトストレージにデータを複製するときに履歴データの自動クリーンアップを設定できます [#10109](https://github.com/pingcap/tiflow/issues/10109) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
 ## 改善点 {#improvements}
 
@@ -57,12 +57,12 @@ TiDB バージョン: 7.1.3
 
     - 共通テーブル式 (CTE) を含むクエリがメモリ制限を超えたときに予期せず停止する問題を修正[#49096](https://github.com/pingcap/tidb/issues/49096) @[AilinKid](https://github.com/AilinKid)
     - `tidb_server_memory_limit` による長期メモリ圧迫により TiDB の CPU 使用率が上昇する問題を修正 [#48741](https://github.com/pingcap/tidb/issues/48741) @[XuHuaiyu](https://github.com/XuHuaiyu)
-    - CTE を含むクエリが、 `tidb_max_chunk_size`小さい値に設定されている場合に`runtime error: index out of range [32] with length 32`報告する問題を修正しました。 [#48808](https://github.com/pingcap/tidb/issues/48808) @[guo-shaoge](https://github.com/guo-shaoge)
+    - CTE を含むクエリが、 `tidb_max_chunk_size`が小さい値に設定されている場合に`runtime error: index out of range [32] with length 32`を報告する問題を修正しました。 [#48808](https://github.com/pingcap/tidb/issues/48808) @[guo-shaoge](https://github.com/guo-shaoge)
     - `ENUM`型の列を結合キーとして使用した場合にクエリ結果が正しくない問題を修正しました [#48991](https://github.com/pingcap/tidb/issues/48991) @[winoros](https://github.com/winoros)
     - 再帰CTE 内の集計関数またはウィンドウ関数によって発生する解析エラーを修正 [#47711](https://github.com/pingcap/tidb/issues/47711) @[elsa0520](https://github.com/elsa0520)
     - `UPDATE`文が PointGet に誤って変換される可能性がある問題を修正しました [#47445](https://github.com/pingcap/tidb/issues/47445) @[Rustin170506](https://github.com/Rustin170506)
     - TiDBが`stats_history`テーブルでガベージコレクションを実行するときに発生する可能性のあるOOM問題を修正しました。 [#48431](https://github.com/pingcap/tidb/issues/48431) @[hawkingrei](https://github.com/hawkingrei)
-    - 同じクエリプランで、場合によってはの異なる`PLAN_DIGEST`値が発生する問題を修正しました [#47634](https://github.com/pingcap/tidb/issues/47634) @[King-Dylan](https://github.com/King-Dylan)
+    - 同じクエリプランで、場合によっては異なる`PLAN_DIGEST`値が発生する問題を修正しました [#47634](https://github.com/pingcap/tidb/issues/47634) @[King-Dylan](https://github.com/King-Dylan)
     - `GenJSONTableFromStats`大量のメモリを消費すると強制終了できない問題を修正[#47779](https://github.com/pingcap/tidb/issues/47779) @[hawkingrei](https://github.com/hawkingrei)
     - 述語が共通テーブル式にプッシュダウンされたときに結果が不正確になる可能性がある問題を修正しました [#47881](https://github.com/pingcap/tidb/issues/47881) @[winoros](https://github.com/winoros)
     - `AUTO_ID_CACHE=1` に設定されている場合に`Duplicate entry`発生する可能性がある問題を修正しました [#46444](https://github.com/pingcap/tidb/issues/46444) @[tiancaiamao](https://github.com/tiancaiamao)

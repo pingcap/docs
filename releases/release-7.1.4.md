@@ -21,7 +21,7 @@ TiDBバージョン: 7.1.4
 - TiDB
 
     - 特定のシナリオで`OUTER JOIN`を`INNER JOIN`に変換する能力を強化する[#49616](https://github.com/pingcap/tidb/issues/49616) @[qw4990](https://github.com/qw4990)
-    - `force-init-stats` `true`に設定すると、TiDB は起動時にサービスを提供する前に統計情報の初期化が完了するのを待ちます。この設定により HTTP サーバーの起動がブロックされなくなり、ユーザーはで監視を継続できます。 [#50854](https://github.com/pingcap/tidb/issues/50854) @[hawkingrei](https://github.com/hawkingrei)
+    - `force-init-stats`を`true`に設定すると、TiDB は起動時にサービスを提供する前に統計情報の初期化が完了するのを待ちます。この設定により HTTP サーバーの起動がブロックされなくなり、ユーザーは監視を継続できます。 [#50854](https://github.com/pingcap/tidb/issues/50854) @[hawkingrei](https://github.com/hawkingrei)
 
 - TiKV
 
@@ -68,7 +68,7 @@ TiDBバージョン: 7.1.4
     - パーティションテーブルのグローバル統計の同時マージ中にエラーが返される可能性がある問題を修正しました。 [#48713](https://github.com/pingcap/tidb/issues/48713) @[hawkingrei](https://github.com/hawkingrei)
     - TiDB が`group by` の定数値を誤って削除することによる間違ったクエリ結果の問題を修正しました [#38756](https://github.com/pingcap/tidb/issues/38756) @[Rustin170506](https://github.com/Rustin170506)
     - `BIT`型の列が一部の関数の計算に関係する場合にデコード失敗によりクエリエラーが発生する可能性がある問題を修正しました[#49566](https://github.com/pingcap/tidb/issues/49566) [#50850](https://github.com/pingcap/tidb/issues/50850) [#50855](https://github.com/pingcap/tidb/issues/50855) @[jiyfhust](https://github.com/jiyfhust)
-    - 複数レベルのネストされた`UNION`クエリの`LIMIT`無効になる可能性がある問題を修正しました[#49874](https://github.com/pingcap/tidb/issues/49874) @[Defined2014](https://github.com/Defined2014)
+    - 複数レベルのネストされた`UNION`クエリの`LIMIT`が無効になる可能性がある問題を修正しました[#49874](https://github.com/pingcap/tidb/issues/49874) @[Defined2014](https://github.com/Defined2014)
     - `AUTO_ID_CACHE=1` のAUTO_INCREMENT列を使用すると同時競合によりAUTO_INCREMENT ID 割り当てでエラーが報告される問題を修正しました。 [#50519](https://github.com/pingcap/tidb/issues/50519) @[tiancaiamao](https://github.com/tiancaiamao)
     - クエリで`NATURAL JOIN` が使用される場合に発生する可能性のある`Column ... in from clause is ambiguous`エラーを修正します [#32044](https://github.com/pingcap/tidb/issues/32044) @[AilinKid](https://github.com/AilinKid)
     - クエリがソートを強制するオプティマイザヒント（ `STREAM_AGG()`など）を使用し、その実行計画に`IndexMerge` が含まれている場合、強制ソートが無効になる可能性がある問題を修正しました。 [#49605](https://github.com/pingcap/tidb/issues/49605) @[AilinKid](https://github.com/AilinKid)
@@ -128,7 +128,7 @@ TiDBバージョン: 7.1.4
     - 一部のTSOログでエラー原因が出力されない問題を修正しました [#7496](https://github.com/tikv/pd/issues/7496) @[CabinfeverB](https://github.com/CabinfeverB)
     - `BURSTABLE`有効になっているときにデフォルトのリソースグループに不要なトークンが蓄積される問題を修正[#7206](https://github.com/tikv/pd/issues/7206) @[CabinfeverB](https://github.com/CabinfeverB)
     - `evict-leader-scheduler`インターフェースが呼び出されたときに出力がない問題を修正しました [#7672](https://github.com/tikv/pd/issues/7672) @[CabinfeverB](https://github.com/CabinfeverB)
-    - `watch etcd`正しくオフになっていない場合に発生するメモリリークの問題を修正[#7807](https://github.com/tikv/pd/issues/7807) @[rleungx](https://github.com/rleungx)
+    - `watch etcd`が正しくオフになっていない場合に発生するメモリリークの問題を修正[#7807](https://github.com/tikv/pd/issues/7807) @[rleungx](https://github.com/rleungx)
     - `MergeLabels`関数が呼び出されたときにデータ競合が発生する問題を修正しました [#7535](https://github.com/tikv/pd/issues/7535) @[lhy1024](https://github.com/lhy1024)
     - TLS が有効な場合に TiDB Dashboardが TiKV プロファイルを取得できない問題を修正[#7561](https://github.com/tikv/pd/issues/7561) @[Connor1996](https://github.com/Connor1996)
     - レプリカ数が要件を満たしていない場合に孤立ピアが削除される問題を修正しました [#7584](https://github.com/tikv/pd/issues/7584) @[bufferflies](https://github.com/bufferflies)
@@ -171,7 +171,7 @@ TiDBバージョン: 7.1.4
         - `ignore-event`で`add table partition`イベントをフィルタリングするように設定した後、TiCDC が関連パーティションの他のタイプの DML 変更をダウンストリームに複製しない問題を修正しました。 [#10524](https://github.com/pingcap/tiflow/issues/10524) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - ストレージシンクの使用時に、ストレージサービスによって生成されたファイルシーケンス番号が正しく増加しない可能性がある問題を修正しました。 [#10352](https://github.com/pingcap/tiflow/issues/10352) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - 複数のチェンジフィードを同時に作成すると TiCDC が`ErrChangeFeedAlreadyExists`エラーを返す問題を修正しました [#10430](https://github.com/pingcap/tiflow/issues/10430) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - 変更フィードを再開するときに`snapshot lost caused by GC`時間内に報告されず、変更フィードの`checkpoint-ts`が TiDB の GC セーフポイントよりも小さい問題を修正しました。 [#10463](https://github.com/pingcap/tiflow/issues/10463) @[sdojjy](https://github.com/sdojjy)
+        - 変更フィードを再開するときに`snapshot lost caused by GC`が時間内に報告されず、変更フィードの`checkpoint-ts`が TiDB の GC セーフポイントよりも小さい問題を修正しました。 [#10463](https://github.com/pingcap/tiflow/issues/10463) @[sdojjy](https://github.com/sdojjy)
         - 単一行データのデータ整合性検証が有効になった後、タイムゾーンの不一致により TiCDC が`TIMESTAMP`種類のチェックサムの検証に失敗する問題を修正[#10573](https://github.com/pingcap/tiflow/issues/10573) @[3AceShowHand](https://github.com/3AceShowHand)
 
     - TiDB Data Migration (DM)

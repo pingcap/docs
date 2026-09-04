@@ -28,7 +28,7 @@ TiDB バージョン: 7.5.7
     - インデックス追加中の TiKV への書き込み速度を観察するための監視メトリックを追加します。 [#60925](https://github.com/pingcap/tidb/issues/60925) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - DDL実行中のDMLのロックロジックを最適化し、DMLとDDL間のロック競合を軽減することで、一部のシナリオでDDLのパフォーマンスが向上します。ただし、セカンダリインデックスのロック操作が追加されるため、DMLのパフォーマンスがわずかに低下する可能性があります[#62337](https://github.com/pingcap/tidb/issues/62337) @[lcwangchao](https://github.com/lcwangchao)
     - システム変数[`tidb_opt_ordering_index_selectivity_threshold`](/system-variables.md#tidb_opt_ordering_index_selectivity_threshold-new-in-v700) `1`に設定されている場合の動作を改善し、この変数の制御機能を強化します。 [#60242](https://github.com/pingcap/tidb/issues/60242) @[time-and-fate](https://github.com/time-and-fate)
-    - `ANALYZE`文実行後にクラスタ全体の統計を更新することを回避し、実行時間を`ANALYZE` に短縮します。 [#57631](https://github.com/pingcap/tidb/issues/57631) @[0xPoe](https://github.com/0xPoe)
+    - `ANALYZE`文実行後にクラスタ全体の統計を更新することを回避し、`ANALYZE`の実行時間を短縮します。 [#57631](https://github.com/pingcap/tidb/issues/57631) @[0xPoe](https://github.com/0xPoe)
     - `NOT NULL`制約を持つ列の定数畳み込みをサポートし、 `IS NULL`評価を`FALSE` に畳み込みます。 [#62050](https://github.com/pingcap/tidb/issues/62050) @[hawkingrei](https://github.com/hawkingrei)
     - オプティマイザは、より多くの種類の`JOIN`操作で定数伝播をサポートします。 [#51700](https://github.com/pingcap/tidb/issues/51700) @[hawkingrei](https://github.com/hawkingrei)
     - DML 操作と DDL 操作の間に大規模なロック競合が存在する場合の一時インデックスのマージのパフォーマンスを向上[#61433](https://github.com/pingcap/tidb/issues/61433) @[tangenta](https://github.com/tangenta)
@@ -115,7 +115,7 @@ TiDB バージョン: 7.5.7
     - 特定のTiFlashレプリカによってオンライン アンセーフ リカバリがブロックされ、コミット インデックスが進まなくなる問題を修正しました。 [#18197](https://github.com/tikv/tikv/issues/18197) @[v01dstar](https://github.com/v01dstar)
     - TiKVがクライアントがデコードできない圧縮アルゴリズムを使用する可能性がある問題を修正しました [#18079](https://github.com/tikv/tikv/issues/18079) @[ekexium](https://github.com/ekexium)
     - TiKV が高同時実行で過剰な SST 取り込み要求を許可する問題を修正 [#18452](https://github.com/tikv/tikv/issues/18452) @[hbisheng](https://github.com/hbisheng)
-    - Grafana の TiKV ダッシュボードで`Ingestion picked level`と`Compaction Job Size(files)`誤って表示される問題を修正しました [#15990](https://github.com/tikv/tikv/issues/15990) @[Connor1996](https://github.com/Connor1996)
+    - Grafana の TiKV ダッシュボードで`Ingestion picked level`と`Compaction Job Size(files)`が誤って表示される問題を修正しました [#15990](https://github.com/tikv/tikv/issues/15990) @[Connor1996](https://github.com/Connor1996)
     - TiKV が再起動した後に予期しない`Server is busy`エラーが発生する問題を修正しました [#18233](https://github.com/tikv/tikv/issues/18233) @[LykxSassinator](https://github.com/LykxSassinator)
     - TiKVがブラジルとエジプトのタイムゾーンを誤って変換する問題を修正[#16220](https://github.com/tikv/tikv/issues/16220) @[overvenus](https://github.com/overvenus)
     - スローログの`StoreMsg`ログエントリの誤解を招く説明を修正 [#18561](https://github.com/tikv/tikv/issues/18561) @[LykxSassinator](https://github.com/LykxSassinator)
@@ -125,8 +125,8 @@ TiDB バージョン: 7.5.7
 - PD
 
     - `split-merge-interval`設定項目の値を繰り返し変更すると（ `1s`から`1h`に変更して`1s`に戻すなど）、その設定項目が有効にならない可能性がある問題を修正しました[#8404](https://github.com/tikv/pd/issues/8404) @[lhy1024](https://github.com/lhy1024)
-    - デフォルト値`lease`が正しく設定されていない問題を修正[#9156](https://github.com/tikv/pd/issues/9156) @[rleungx](https://github.com/rleungx)
-    - TiDB Dashboard TCP接続を不適切に閉じるとPDゴルーチンリークが発生する可能性がある問題を修正[#9402](https://github.com/tikv/pd/issues/9402) @[baurine](https://github.com/baurine)
+    - `lease`のデフォルト値が正しく設定されていない問題を修正[#9156](https://github.com/tikv/pd/issues/9156) @[rleungx](https://github.com/rleungx)
+    - TiDB DashboardのTCP接続を不適切に閉じるとPDゴルーチンリークが発生する可能性がある問題を修正[#9402](https://github.com/tikv/pd/issues/9402) @[baurine](https://github.com/baurine)
     - 新しく追加された TiKV ノードがスケジュールされない可能性がある問題を修正しました [#9145](https://github.com/tikv/pd/issues/9145) @[bufferflies](https://github.com/bufferflies)
     - `tidb_enable_tso_follower_proxy`を有効にすると TSO サービスが利用できなくなる可能性がある問題を修正[#9188](https://github.com/tikv/pd/issues/9188) @[Tema](https://github.com/Tema)
 

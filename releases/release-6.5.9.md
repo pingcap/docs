@@ -20,7 +20,7 @@ TiDB バージョン: 6.5.9
 
 - TiDB
 
-    - `force-init-stats` `true`に設定すると、TiDB は起動時にサービスを提供する前に統計情報の初期化が完了するのを待ちます。この設定により HTTP サーバーの起動がブロックされなくなり、ユーザーは監視を継続できます。 [#50854](https://github.com/pingcap/tidb/issues/50854) @[hawkingrei](https://github.com/hawkingrei)
+    - `force-init-stats`を`true`に設定すると、TiDB は起動時にサービスを提供する前に統計情報の初期化が完了するのを待ちます。この設定により HTTP サーバーの起動がブロックされなくなり、ユーザーは監視を継続できます。 [#50854](https://github.com/pingcap/tidb/issues/50854) @[hawkingrei](https://github.com/hawkingrei)
     - `ANALYZE`文がメタデータロックをブロックする問題を最適化します [#47475](https://github.com/pingcap/tidb/issues/47475) @[wjhuang2016](https://github.com/wjhuang2016)
 
 - TiKV
@@ -53,7 +53,7 @@ TiDB バージョン: 6.5.9
     - 共通テーブル式 (CTE) を使用して、統計情報が欠落しているパーティションテーブルにアクセスすると、クエリ結果が正しくなくなる可能性がある問題を修正しました[#51873](https://github.com/pingcap/tidb/issues/51873) @[qw4990](https://github.com/qw4990)
     - SQL 文に`JOIN`が含まれ、文内の`SELECT`リストに定数のみが含まれる場合に、MPP を使用してクエリを実行すると、誤ったクエリ結果が返される可能性がある問題を修正しました。 [#50358](https://github.com/pingcap/tidb/issues/50358) @[yibin87](https://github.com/yibin87)
     - AUTO_INCREMENT ID を割り当てるときに、 `AUTO_INCREMENT`属性によって不要なトランザクション競合が発生し、ID が連続しなくなる問題を修正しました。 [#50819](https://github.com/pingcap/tidb/issues/50819) @[tiancaiamao](https://github.com/tiancaiamao)
-    - Grafana の監視メトリック`tidb_statistics_auto_analyze_total`整数として表示されない問題を修正しました [#51051](https://github.com/pingcap/tidb/issues/51051) @[hawkingrei](https://github.com/hawkingrei)
+    - Grafana の監視メトリック`tidb_statistics_auto_analyze_total`が整数として表示されない問題を修正しました [#51051](https://github.com/pingcap/tidb/issues/51051) @[hawkingrei](https://github.com/hawkingrei)
     - パーティションテーブルのグローバル統計の同時マージ中にエラーが返される可能性がある問題を修正しました。 [#48713](https://github.com/pingcap/tidb/issues/48713) @[hawkingrei](https://github.com/hawkingrei)
     - 列のデフォルト値が削除されている場合、列のデフォルト値を取得するとエラーが返される問題を修正[#50043](https://github.com/pingcap/tidb/issues/50043) [#51324](https://github.com/pingcap/tidb/issues/51324) @[crazycs520](https://github.com/crazycs520)
     - 列が書き込み専用の場合に`INSERT ignore`文でデフォルト値を入力できない問題を修正[#40192](https://github.com/pingcap/tidb/issues/40192) @[YangKeao](https://github.com/YangKeao)
@@ -79,7 +79,7 @@ TiDB バージョン: 6.5.9
     - `IFNULL`関数によって返される型が MySQL と一致しない問題を修正しました [#51765](https://github.com/pingcap/tidb/issues/51765) @[YangKeao](https://github.com/YangKeao)
     - 初期化が完了する前に TiDBサーバーが正常とマークされる問題を修正[#51596](https://github.com/pingcap/tidb/issues/51596) @[shenqidebaozi](https://github.com/shenqidebaozi)
     - `TIDB_HOT_REGIONS`テーブルをクエリすると、誤って`INFORMATION_SCHEMA`テーブルが返される可能性がある問題を修正しました。 [#50810](https://github.com/pingcap/tidb/issues/50810) @[Defined2014](https://github.com/Defined2014)
-    - `EXCHANGE PARTITION`外部キーを誤って処理する問題を修正 [#51807](https://github.com/pingcap/tidb/issues/51807) @[YangKeao](https://github.com/YangKeao)
+    - `EXCHANGE PARTITION`が外部キーを誤って処理する問題を修正 [#51807](https://github.com/pingcap/tidb/issues/51807) @[YangKeao](https://github.com/YangKeao)
     - CTE を含むクエリを実行すると TiDB がpanicになる問題を修正[#41688](https://github.com/pingcap/tidb/issues/41688) @[srstack](https://github.com/srstack)
 
 - TiKV

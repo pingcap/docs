@@ -204,7 +204,7 @@ TiDB バージョン: 4.0.9
         - 所有者キャンペーンキーが削除されたときに複数の所有者が存在する可能性がある問題を修正[#1104](https://github.com/pingcap/tiflow/pull/1104)
         - TiKVノードがクラッシュまたはクラッシュから回復した際に、TiCDCがデータレプリケーションを続行できなくなる可能性があるバグを修正しました。このバグはv4.0.8にのみ存在します[#1198](https://github.com/pingcap/tiflow/pull/1198)
         - テーブルが初期化される前にメタデータがetcdに繰り返しフラッシュされる問題を修正[#1191](https://github.com/pingcap/tiflow/pull/1191)
-        - スキーマストレージがTiDB テーブルをキャッシュするときに、早期 GC または更新のレイテンシー`TableInfo`によって発生するレプリケーション中断の問題を修正しました。 [#1114](https://github.com/pingcap/tiflow/pull/1114)
+        - スキーマストレージがTiDB テーブルをキャッシュするときに、早期GCまたは`TableInfo`の更新遅延によって発生するレプリケーション中断の問題を修正しました。 [#1114](https://github.com/pingcap/tiflow/pull/1114)
         - DDL操作が頻繁に行われる場合にスキーマストレージのメモリ消費量が多すぎる問題を修正しました[#1127](https://github.com/pingcap/tiflow/pull/1127)
         - チェンジフィードが一時停止または停止したときのゴルーチンリークを修正[#1075](https://github.com/pingcap/tiflow/pull/1075)
         - 下流の Kafka サービスまたはネットワークジッターによるレプリケーションの中断を防ぐために、Kafka プロデューサーの最大再試行タイムアウトを 600 秒に増やします。 [#1118](https://github.com/pingcap/tiflow/pull/1118)

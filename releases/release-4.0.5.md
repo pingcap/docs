@@ -167,7 +167,7 @@ TiDB バージョン: 4.0.5
     - TiCDC
 
         - 失敗した`changefeed`を削除できない問題を修正[#782](https://github.com/pingcap/tiflow/pull/782)
-        - ハンドルインデックスとして1つの一意インデックスを選択して無効なイベント`delete`修正します [#787](https://github.com/pingcap/tiflow/pull/787)
+        - ハンドルインデックスとして1つの一意インデックスを選択した場合に、無効な`delete`イベントが生成される問題を修正します [#787](https://github.com/pingcap/tiflow/pull/787)
         - GCセーフポイントが停止した`changefeed` のチェックポイントを超えて転送されるバグを修正 [#797](https://github.com/pingcap/tiflow/pull/797)
         - ネットワークI/O待機によりタスクの終了がブロックされるバグを修正[#825](https://github.com/pingcap/tiflow/pull/825)
         - 不要なデータが誤って下流に複製される可能性があるバグを修正[#743](https://github.com/pingcap/tiflow/issues/743)
