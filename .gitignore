@@ -15,4 +15,3 @@ gen
 /node_modules/
 
 tmp/
-.qoder/settings.local.json
