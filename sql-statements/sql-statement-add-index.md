@@ -93,6 +93,25 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 2 rows in set (0.00 sec)
 ```
 
+## TiKV disk space precheck
+
+Before executing `ADD INDEX`, TiDB collects a TiKV capacity snapshot, predicts the TiKV index size based on block sampling, table statistics, and the replica count, and then checks whether TiKV has enough remaining disk space. This precheck applies to `ADD INDEX` jobs whether or not the job is executed by the DXF.
+
+TiDB considers TiKV disk space insufficient in either of the following cases:
+
+- After subtracting the predicted index size, the remaining TiKV cluster capacity is less than 20% of the total TiKV cluster capacity.
+- After subtracting the per-store predicted index size, the remaining capacity of any TiKV store is less than 15% of that store's total capacity.
+
+By default, [`enforce_disk_space_precheck_before_add_index`](/system-variables.md#enforce_disk_space_precheck_before_add_index) is `OFF`. In this mode, TiDB logs a warning if the precheck predicts insufficient TiKV capacity, but it still executes the DDL job. To reject such DDL jobs before execution, set this variable to `ON`:
+
+```sql
+SET GLOBAL enforce_disk_space_precheck_before_add_index = ON;
+```
+
+When this variable is `ON`, TiDB rejects the DDL job only if the prediction uses non-pseudo statistics. If the prediction uses pseudo statistics, TiDB logs a warning and does not reject the DDL job. If TiDB cannot collect the TiKV capacity snapshot or complete the prediction within 5 seconds, TiDB logs a warning, skips the precheck, and executes the DDL job.
+
+To observe the predicted and actual TiKV storage usage of an `ADD INDEX` job, check the TiDB logs. TiDB logs prediction fields such as `block_sample_predicted_tikv_index_all_replica_bytes`, `block_sample_predicted_tikv_index_single_replica_bytes`, and `block_sample_mvcc_overhead_total_bytes` before execution. After the job succeeds, TiDB also logs fields such as `logical_index_kv_bytes`, `ingested_sst_bytes`, `ingested_sst_bytes_source`, and `ingested_sst_bytes_reliable`.
+
 ## MySQL compatibility
 
 * TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax for compatibility with MySQL, but ignores them.
