@@ -82,3 +82,7 @@
 - [Vector Search Index](/ai/reference/vector-search-index.md)
 - [Vector Search Performance Tuning](/ai/reference/vector-search-improve-performance.md)
 - [Vector Search Limitations](/ai/reference/vector-search-limitations.md)
+- Full-Text Search
+  - [Full-Text Search Index](/ai/reference/full-text-search-index.md)
+  - [Full-Text Search Functions](/ai/reference/full-text-search-functions.md)
+  - [Full-Text Search Limitations](/ai/reference/full-text-search-limitations.md)
