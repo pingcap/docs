@@ -2617,6 +2617,13 @@ Referenced in:
 - [System Variables](/system-variables.md#tidb_low_resolution_tso_update_interval-new-in-v800)
 - [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
 
+### tidb_mview_enable
+
+Referenced in:
+
+- [Materialized Views](/materialized-views.md)
+- [System Variables](/system-variables.md#tidb_mview_enable)
+
 ### tidb_max_auto_analyze_time
 
 Referenced in:
@@ -2863,6 +2870,34 @@ Referenced in:
 - [TiDB 5.1.1 Release Notes](/releases/release-5.1.1.md)
 - [TiDB 5.0.3 Release Notes](/releases/release-5.0.3.md)
 - [TiDB 4.0.14 Release Notes](/releases/release-4.0.14.md)
+
+### tidb_mview_maintain_isolation_read_engines
+
+Referenced in:
+
+- [Materialized Views](/materialized-views.md)
+- [System Variables](/system-variables.md#tidb_mview_maintain_isolation_read_engines)
+
+### tidb_mview_maintain_mem_quota
+
+Referenced in:
+
+- [Materialized Views](/materialized-views.md)
+- [System Variables](/system-variables.md#tidb_mview_maintain_mem_quota)
+
+### tidb_mview_maintain_import_disk_quota
+
+Referenced in:
+
+- [Materialized Views](/materialized-views.md)
+- [System Variables](/system-variables.md#tidb_mview_maintain_import_disk_quota)
+
+### tidb_mview_maintain_import_threads
+
+Referenced in:
+
+- [Materialized Views](/materialized-views.md)
+- [System Variables](/system-variables.md#tidb_mview_maintain_import_threads)
 
 ### tidb_non_prepared_plan_cache_size
 

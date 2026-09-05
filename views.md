@@ -238,7 +238,6 @@ Query OK, 0 rows affected (0.02 sec)
 
 Currently, views in TiDB are subject to the following limitations:
 
-* Materialized views are not supported yet.
 * Views in TiDB are read-only and do not support write operations such as `UPDATE`, `INSERT`, `DELETE`, and `TRUNCATE`.
 * For created views, the only supported DDL operation is `DROP [VIEW | TABLE]`
 
@@ -246,3 +245,4 @@ Currently, views in TiDB are subject to the following limitations:
 
 - [CREATE VIEW](/sql-statements/sql-statement-create-view.md)
 - [DROP VIEW](/sql-statements/sql-statement-drop-view.md)
+- [Materialized Views](/materialized-views.md)
