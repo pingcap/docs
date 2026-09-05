@@ -19,6 +19,7 @@ Write a release note when the change is visible to TiDB users or operators, incl
 - Meaningful performance improvements observable in common operations.
 - Behavior changes that affect upgrade paths, tooling integration, or operational workflows.
 - Default value changes for system variables or configuration parameters.
+- Security fixes that address known or reported vulnerabilities affecting dependencies used by TiDB components shipped to users, even when only dependency manifests or lockfiles change and functional behavior remains unchanged.
 
 Return a no-release-note verdict for internal-only changes, including:
 
@@ -29,6 +30,8 @@ Return a no-release-note verdict for internal-only changes, including:
 - Code comments or source-code-only documentation changes.
 
 If a PR is mostly internal but the outcome is user-visible, describe the outcome and omit implementation details. If the only user-facing effect is indirect or speculative, lean toward `not_needed`.
+
+Do not classify a security dependency update as internal-only solely because it changes only dependency manifests or lockfiles. Return `not_needed` if the dependency is used only by tests, development or build tooling, or other unshipped code, or if the vulnerability does not affect the shipped component.
 
 First, use all available context to decide whether the change needs a release note. If it does, classify it as follows:
 
