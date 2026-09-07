@@ -24,15 +24,15 @@ The full-text search feature in TiDB provides the following capabilities:
 
 - **Fully compatible with SQL**: all SQL features, such as pre-filtering, post-filtering, grouping, and joining, can be used with full-text search.
 
-> **Tip:**
+> **Note:**
 >
-> For Python usage, see [Full-Text Search with Python](/ai/guides/vector-search-full-text-search-python.md).
->
-> To use full-text search and vector search together in your AI apps, see [Hybrid Search](/ai/guides/vector-search-hybrid-search.md).
+> - Currently, full-text search is available only on {{{ .starter }}} in select regions. See [Get started](#get-started) for the region list.
+> - For Python usage, see [Full-Text Search with Python](/ai/guides/vector-search-full-text-search-python.md).
+> - To use full-text search and vector search together in your AI apps, see [Hybrid Search](/ai/guides/vector-search-hybrid-search.md).
 
 ## Get started
 
-Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, full-text search is only available on {{{ .starter }}} in the following regions:
+Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, full-text search is available only on {{{ .starter }}} in the following regions:
 
 - AWS: `Oregon (us-west-2)`, `N. Virginia (us-east-1)`, `Tokyo (ap-northeast-1)`, `Frankfurt (eu-central-1)`, and `Singapore (ap-southeast-1)`
 
