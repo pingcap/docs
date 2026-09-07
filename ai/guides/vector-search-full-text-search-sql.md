@@ -146,7 +146,7 @@ SELECT * FROM articles
     ORDER BY fts_match_word('database', title, body) DESC LIMIT 10;
 ```
 
-Columns in one call are combined with OR semantics: a document matches if any of the columns matches the query. For AND semantics and more details, see [Multi-column search](/ai/reference/full-text-search-functions.md#multi-column-search).
+Columns in one call are combined with OR semantics: a document matches if any of the columns matches the query. For AND semantics and more details, see [Multi-column search](/ai/reference/full-text-search-functions-tidb.md#multi-column-search).
 
 ### Filter pushdown
 
@@ -186,7 +186,7 @@ FROM code_files
     ORDER BY fts_match_word('handle', content_text) DESC LIMIT 10;
 ```
 
-A table can have multiple full-text indexes, and the same column can participate in several of them with different parsers. Use the `USE_INDEX` hint to select an index at query time, or let the optimizer choose automatically. For parameters and query semantics, see [The NGRAM parser](/ai/reference/full-text-search-index.md#the-ngram-parser) and [Choose a full-text index at query time](/ai/reference/full-text-search-functions.md#choose-a-full-text-index-at-query-time).
+A table can have multiple full-text indexes, and the same column can participate in several of them with different parsers. Use the `USE_INDEX` hint to select an index at query time, or let the optimizer choose automatically. For parameters and query semantics, see [The NGRAM parser](/ai/reference/full-text-search-index.md#the-ngram-parser) and [Choose a full-text index at query time](/ai/reference/full-text-search-functions-tidb.md#choose-a-full-text-index-at-query-time).
 
 ### Insert text data
 
@@ -381,7 +381,7 @@ WHERE t.author_id IN
 
 - [Hybrid Search](/ai/guides/vector-search-hybrid-search.md)
 - [Full-Text Search Index](/ai/reference/full-text-search-index.md)
-- [Full-Text Search Functions](/ai/reference/full-text-search-functions.md)
+- [Full-Text Search Functions](/ai/reference/full-text-search-functions-tidb.md)
 - [Full-Text Search Limitations](/ai/reference/full-text-search-limitations.md)
 
 ## Feedback & help

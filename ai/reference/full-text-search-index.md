@@ -8,7 +8,7 @@ aliases: ['/tidb/stable/full-text-search-index/','/tidbcloud/full-text-search-in
 
 This document describes how to create and manage full-text indexes in TiDB, including the two index definition syntaxes, column attributes, parsers, multiple indexes on one table, and DDL restrictions on indexed columns and tables.
 
-To run full-text queries against a full-text index, see [Full-Text Search Functions](/ai/reference/full-text-search-functions.md).
+To run full-text queries against a full-text index, see [Full-Text Search Functions](/ai/reference/full-text-search-functions-tidb.md).
 
 ## Restrictions
 
@@ -165,7 +165,7 @@ ALTER TABLE t ADD FULLTEXT INDEX idx_fts_multi (
 );
 ```
 
-To search across multiple scored columns, list them in the `FTS_MATCH_WORD()` call. For details, see [Full-Text Search Functions](/ai/reference/full-text-search-functions.md).
+To search across multiple scored columns, list them in the `FTS_MATCH_WORD()` call. For details, see [Full-Text Search Functions](/ai/reference/full-text-search-functions-tidb.md).
 
 ## Multiple indexes on one table
 
@@ -179,7 +179,7 @@ ALTER TABLE t ADD FULLTEXT INDEX idx_fts_ng
     (content_text) WITH PARSER NGRAM(min_gram=3, max_gram=3);
 ```
 
-At query time, you can select the index with the `USE_INDEX` or `IGNORE_INDEX` optimizer hint, or let the optimizer choose automatically. See [Choose a full-text index at query time](/ai/reference/full-text-search-functions.md#choose-a-full-text-index-at-query-time).
+At query time, you can select the index with the `USE_INDEX` or `IGNORE_INDEX` optimizer hint, or let the optimizer choose automatically. See [Choose a full-text index at query time](/ai/reference/full-text-search-functions-tidb.md#choose-a-full-text-index-at-query-time).
 
 ### Index naming
 
@@ -258,5 +258,5 @@ For the full list of functional limitations, see [Full-Text Search Limitations](
 ## See also
 
 - [Full-Text Search with SQL](/ai/guides/vector-search-full-text-search-sql.md)
-- [Full-Text Search Functions](/ai/reference/full-text-search-functions.md)
+- [Full-Text Search Functions](/ai/reference/full-text-search-functions-tidb.md)
 - [Full-Text Search Limitations](/ai/reference/full-text-search-limitations.md)
