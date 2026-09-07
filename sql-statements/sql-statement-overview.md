@@ -271,6 +271,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 
 ## Account management / Data Control Language
 
+<<<<<<< HEAD
 | SQL Statement                                                               | Description                                                         |
 | --------------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)                 | Modifies a user.                                                    |
@@ -290,6 +291,27 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)     | Shows the `CREATE` statement for a user.                            |
 | [`SHOW GRANTS`](/sql-statements/sql-statement-show-grants.md)               | Shows privileges associated with a user.                            |
 | [`SHOW PRIVILEGES`](/sql-statements/sql-statement-show-privileges.md)       | Shows available privileges.                                         |
+=======
+| SQL Statement | Description |
+|---------------|-------------|
+| [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) | Modifies a user. |
+| [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md) | Creates a role. |
+| [`CREATE USER`](/sql-statements/sql-statement-create-user.md) | Creates a new user. |
+| [`DROP ROLE`](/sql-statements/sql-statement-drop-role.md) | Drops an existing role. |
+| [`DROP USER`](/sql-statements/sql-statement-drop-user.md) | Drops an existing user. |
+| [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md) | Refreshes the in-memory privilege cache from the privilege tables. |
+| [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md) | Grants privileges. |
+| [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md) | Grants a role. |
+| [`RENAME USER`](/sql-statements/sql-statement-rename-user.md) | Renames an existing user. |
+| [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md) | Revokes privileges. |
+| [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md) | Revokes a role. |
+| [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md) | Sets a default role. |
+| [`SET PASSWORD`](/sql-statements/sql-statement-set-password.md) | Changes a password. |
+| [`SET ROLE`](/sql-statements/sql-statement-set-role.md) | Enables roles in the current session. |
+| [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md) | Shows the `CREATE` statement for a user. |
+| [`SHOW GRANTS`](/sql-statements/sql-statement-show-grants.md) | Shows privileges associated with a user. |
+| [`SHOW PRIVILEGES`](/sql-statements/sql-statement-show-privileges.md) | Shows available privileges. |
+>>>>>>> 1a0b8b7656 (sql: remove unnecessary 'copy' from FLUSH PRIVILEGES description (#23196))
 
 ## TiCDC
 
