@@ -11,6 +11,7 @@ from .constants import (
     PR_URL_RE,
     TOOL_COMPONENTS,
     TOP_LEVEL_COMPONENTS,
+    UNIVERSAL_ISSUES,
 )
 
 
@@ -29,6 +30,10 @@ def extract_issue_urls(text: str) -> list[str]:
 
 def extract_pr_urls(text: str) -> list[str]:
     return unique_ordered(match.group() for match in PR_URL_RE.finditer(text or ""))
+
+
+def is_universal_issue(issue_url: str) -> bool:
+    return issue_url in UNIVERSAL_ISSUES
 
 
 def replace_author_markdown(text: str, old_author: str, new_author: str) -> str:

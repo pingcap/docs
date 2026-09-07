@@ -37,6 +37,7 @@ from .utils import (
     copy_cell,
     extract_issue_urls,
     extract_pr_urls,
+    is_universal_issue,
     normalize_component,
     normalize_raw_component,
     normalized_release_component,
@@ -218,11 +219,6 @@ def issue_urls_for_row(sheet: Any, header: dict[str, int], row_number: int) -> l
     return unique_ordered(url for text in candidates for url in extract_issue_urls(text))
 
 
-def first_issue_url_for_row(sheet: Any, header: dict[str, int], row_number: int) -> str | None:
-    issue_urls = issue_urls_for_row(sheet, header, row_number)
-    return issue_urls[0] if issue_urls else None
-
-
 def store_existing_release_notes(releases_dir: Path, version: str) -> list[ExistingNote]:
     existing_notes: list[ExistingNote] = []
     seen: set[tuple[str, tuple[str, ...], str]] = set()
@@ -348,6 +344,8 @@ def update_pr_authors_and_dup_notes(
         current_authors = split_multi_value(current_author)
         dup_notes = []
         for issue_url in issue_urls:
+            if is_universal_issue(issue_url):
+                continue
             for existing in existing_notes_by_url.get(issue_url, []):
                 if existing.authors and not set(current_authors).intersection(existing.authors):
                     continue
@@ -512,6 +510,8 @@ def same_series_issue_reason(
 ) -> str | None:
     reasons = []
     for issue_url in issue_urls:
+        if is_universal_issue(issue_url):
+            continue
         files = files_by_issue_url.get(issue_url)
         if files:
             reasons.append(f"{issue_url} appears in {', '.join(files)}")
@@ -736,7 +736,14 @@ def merge_rows_by_issue_and_component(sheet: Any, header: dict[str, int]) -> Non
     groups: OrderedDict[tuple[str, str], list[int]] = OrderedDict()
     component_col = get_component_col(header)
     for row_number in range(2, sheet.max_row + 1):
-        issue_url = first_issue_url_for_row(sheet, header, row_number)
+        issue_url = next(
+            (
+                url
+                for url in issue_urls_for_row(sheet, header, row_number)
+                if not is_universal_issue(url)
+            ),
+            None,
+        )
         if not issue_url:
             continue
         component = normalize_raw_component(sheet.cell(row=row_number, column=component_col).value)

@@ -299,11 +299,13 @@ issue_already_in_earlier_v8.5
 A row is moved to this sheet when all of the following are true:
 
 - The row has an issue URL in `issue_url` or `formated_release_note`.
-- The same issue URL appears in an existing release-note file.
+- The same non-universal issue URL appears in an existing release-note file.
 - The existing release-note file is from the same major.minor series.
 - The existing release-note file version is earlier than the target version.
 
 Rows in this sheet are not rendered to Markdown.
+
+Universal issues are catch-all issues that can be associated with unrelated changes. The generator still uses these issue URLs as source context, but excludes them from same-series quarantine, historical duplicate reuse, and issue-based row merging.
 
 After same-series rows are moved out, the generator marks remaining rows as duplicates when their issue URLs match reusable historical entries.
 
