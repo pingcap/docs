@@ -55,7 +55,7 @@ TiDBは、金融サービス、ゲーム、eコマースなど、さまざまな
 
 TiDB Cloudは99.99% の SLA を提供します。詳細については、 [TiDB Cloudサービスのサービスレベル契約](https://www.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/)を参照してください。
 
-### TiDB Cloudにおける「PREVIEW」とはどういう意味ですか？ {#what-does-preview-mean-in-tidb-cloud}
+### TiDB Cloudにおける"PREVIEW"とはどういう意味ですか？ {#what-does-preview-mean-in-tidb-cloud}
 
 PREVIEWとは、 TiDB Cloudの機能またはサービスが一般提供（GA）される前に、一般公開されるプレビュー段階のことです。
 
@@ -87,7 +87,7 @@ Placement Driver（PD）は、クラスターのメタデータを格納する�
 
 ### TiDBはTiKVノード間でどのようにデータを複製するのですか？ {#how-does-tidb-replicate-data-between-the-tikv-nodes}
 
-TiKVはキーと値のペアの空間をキー範囲に分割し、各キー範囲を「リージョン」として扱います。TiKVでは、データはクラスタ内のすべてのノードに分散され、リージョンを基本単位として使用します。PDは、リージョンをクラスタ内のすべてのノードにできるだけ均等に分散（スケジューリング）する役割を担います。
+TiKVはキーと値のペアの空間をキー範囲に分割し、各キー範囲を"Region"として扱います。TiKVでは、データはクラスタ内のすべてのノードに分散され、リージョンを基本単位として使用します。PDは、リージョンをクラスタ内のすべてのノードにできるだけ均等に分散（スケジューリング）する役割を担います。
 
 TiDBは、 Raftコンセンサスアルゴリズムを使用して、リージョンごとにデータを複製します。異なるノードに保存されたリージョンの複数のレプリカがRaftグループを形成します。
 

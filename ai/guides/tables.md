@@ -293,7 +293,7 @@ result = table.query(
 
 レコードをフィルタリングするには、 `WHERE`句を使用します。
 
-**例: カテゴリ「データベース」のレコードを10件取得する**
+**例: カテゴリ"database"のレコードを10件取得する**
 
 ```sql
 SELECT * FROM items WHERE meta->>'$.category' = 'database' LIMIT 10;

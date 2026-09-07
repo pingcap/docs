@@ -112,7 +112,7 @@ TiDB バージョン: 4.0.11
     - デフォルト値`LEAD`と`LAG`フィールドタイプに適応できない問題を修正 [#21665](https://github.com/pingcap/tidb/pull/21665)
     - `LOAD DATA`文がベーステーブルにのみデータをロードできることを確認するためのチェックを実行します。 [#21638](https://github.com/pingcap/tidb/pull/21638)
     - `addtime`と`subtime`関数が無効な引数処理するときに発生する問題を修正しました [#21635](https://github.com/pingcap/tidb/pull/21635)
-    - 近似値の丸めルールを「最も近い偶数に丸める」に変更します[#21628](https://github.com/pingcap/tidb/pull/21628)
+    - 近似値の丸めルールを"round to the nearest even number"に変更します[#21628](https://github.com/pingcap/tidb/pull/21628)
     - `WEEK()`明示的に読み込まれるまで`@@GLOBAL.default_week_format`認識しない問題を修正[#21623](https://github.com/pingcap/tidb/pull/21623)
 
 - TiKV

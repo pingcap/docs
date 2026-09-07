@@ -330,7 +330,7 @@ Create Table | CREATE TABLE `child` (
 
 外部キーを作成する際に名前を指定しない場合、TiDB によって生成される名前は MySQL によって生成される名前とは異なります。たとえば、TiDB によって生成される外部キー名は`fk_1` 、 `fk_2` 、 `fk_3`ですが、MySQL によって生成される外部キー名は`table_name_ibfk_1` 、 `table_name_ibfk_2` 、 `table_name_ibfk_3`です。
 
-MySQLとTiDBはどちらも「インライン`REFERENCES`仕様」を解析しますが、無視します。 `REFERENCES`定義の一部である`FOREIGN KEY`仕様のみがチェックされ、適用されます。次の例では`REFERENCES`句を使用して外部キー制約を作成します。
+MySQLとTiDBはどちらも"inline `REFERENCES` specifications"を解析しますが、無視します。 `REFERENCES`定義の一部である`FOREIGN KEY`仕様のみがチェックされ、適用されます。次の例では`REFERENCES`句を使用して外部キー制約を作成します。
 
 ```sql
 CREATE TABLE parent (

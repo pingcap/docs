@@ -13,7 +13,7 @@ summary: TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスへの
 
 ## 公開エンドポイント {#public-endpoints}
 
-TiDB Cloud StarterまたはEssentialインスタンスでパブリックアクセスを設定すると、パブリックエンドポイント経由でインスタンスにアクセスできるようになります。つまり、 TiDB Cloud StarterまたはEssentialインスタンスはインターネット経由でアクセス可能になります。パブリックエンドポイントは、公開されている DNS アドレスです。「承認済みネットワーク」とは、TiDB Cloud StarterまたはEssentialインスタンスへのアクセスを許可する IP アドレスの範囲を指します。これらのアクセス許可は、**ファイアウォールルール**によって適用されます。
+TiDB Cloud StarterまたはEssentialインスタンスでパブリックアクセスを設定すると、パブリックエンドポイント経由でインスタンスにアクセスできるようになります。つまり、 TiDB Cloud StarterまたはEssentialインスタンスはインターネット経由でアクセス可能になります。パブリックエンドポイントは、公開されている DNS アドレスです。"authorized network"とは、TiDB Cloud StarterまたはEssentialインスタンスへのアクセスを許可する IP アドレスの範囲を指します。これらのアクセス許可は、**ファイアウォールルール**によって適用されます。
 
 ### 公共アクセスの特徴 {#characteristics-of-public-access}
 

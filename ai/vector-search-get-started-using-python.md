@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/vector-search-get-started-using-python/','/ja/tidb/de
 
 # Python を使って TiDB + AI を始めよう {#get-started-with-tidb-ai-via-python}
 
-このチュートリアルでは、**セマンティック検索**機能を提供するシンプルなAIアプリケーションの開発方法を説明します。従来のキーワード検索とは異なり、セマンティック検索はクエリの背後にある意味をインテリジェントに理解し、最も関連性の高い結果を返します。たとえば、「犬」「魚」「木」というタイトルの文書があり、「泳ぐ動物」を検索すると、アプリケーションは「魚」を最も関連性の高い結果として識別します。
+このチュートリアルでは、**セマンティック検索**機能を提供するシンプルなAIアプリケーションの開発方法を説明します。従来のキーワード検索とは異なり、セマンティック検索はクエリの背後にある意味をインテリジェントに理解し、最も関連性の高い結果を返します。たとえば、"dog"、"fish"、"tree"というタイトルの文書があり、"a swimming animal"を検索すると、アプリケーションは"fish"を最も関連性の高い結果として識別します。
 
 このチュートリアルでは、 [TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)、Python、 [TiDB Vector SDK for Python](https://github.com/pingcap/tidb-vector-python) 、および AI モデルを使用して、この AI アプリケーションを開発します。
 
@@ -167,7 +167,7 @@ vector_store = TiDBVectorClient(
 
 ### ステップ6．テキス​​トデータを埋め込み、ベクトルを保存する {#step-6-embed-text-data-and-store-the-vectors}
 
-このステップでは、「dog」、「fish」、「tree」などの単語を含むサンプル文書を準備します。以下のコードは`text_to_embedding()`関数を使用してこれらのテキスト文書をベクトル埋め込みに変換し、ベクトルストアに挿入します。
+このステップでは、"dog"、"fish"、"tree"などの単語を含むサンプル文書を準備します。以下のコードは`text_to_embedding()`関数を使用してこれらのテキスト文書をベクトル埋め込みに変換し、ベクトルストアに挿入します。
 
 ```python
 documents = [
@@ -201,7 +201,7 @@ vector_store.insert(
 
 ### ステップ7．意味検索を実行する {#step-7-perform-semantic-search}
 
-このステップでは、「泳ぐ動物」という単語を検索しますが、既存の文書にはこの単語と直接一致するものはありません。
+このステップでは、"a swimming animal"という単語を検索しますが、既存の文書にはこの単語と直接一致するものはありません。
 
 以下のコードは`text_to_embedding()`関数を再度使用してクエリテキストをベクトル埋め込みに変換し、その埋め込みを使用してクエリを実行して、最も近い上位 3つの一致を見つけます。
 

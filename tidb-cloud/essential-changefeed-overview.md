@@ -13,7 +13,7 @@ TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサー
 >
 >     1. [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**?**をクリックします。
 >     2. **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。
->     3. チケットを作成します。「説明」欄に「changefeedへの申請」と入力します。
+>     3. チケットを作成します。"Description"欄に"Apply for changefeed"と入力します。
 >     4. **Submit**をクリックしてください。
 > - TiDB Cloud Essentialインスタンスごとに最大10個の変更フィードが許可されています。
 > - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは、変更フィード機能は利用できません。

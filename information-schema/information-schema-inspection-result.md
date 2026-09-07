@@ -107,7 +107,7 @@ DETAILS   | max duration of 172.16.5.40:20151 tikv rocksdb-write-duration was to
 - 2 行目は、クラスター内に 2つの異なる TiDB バージョンが存在することを示します。
 - 3行目と4行目は、TiKVの書き込み遅延が長すぎることを示しています。予想される遅延は0.1秒以内ですが、実際の遅延は予想よりもはるかに長くなっています。
 
-「2020-03-26 00:03:00」から「2020-03-26 00:08:00」までなど、指定した範囲内にある問題を診断することもできます。時間範囲を指定するには、SQLヒントに`/*+ time_range() */`を指定します。次のクエリ例をご覧ください。
+"2020-03-26 00:03:00"から"2020-03-26 00:08:00"までなど、指定した範囲内にある問題を診断することもできます。時間範囲を指定するには、SQLヒントに`/*+ time_range() */`を指定します。次のクエリ例をご覧ください。
 
 ```sql
 select /*+ time_range("2020-03-26 00:03:00", "2020-03-26 00:08:00") */ * from information_schema.inspection_result\G
@@ -250,8 +250,8 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
     | TiKV | 重大なエラー                  | tikv_critical_error_total_count    | TiKV の重大なエラー。                                |
     | TiKV | スケジューラがビジー状態            | tikv_scheduler_is_busy_total_count | TiKV スケジューラがビジー状態のため、TiKV が一時的に使用できなくなっています。 |
     | TiKV | コプロセッサがビジー状態            | tikv_コプロセッサがビジー状態の合計数              | TiKVコプロセッサーがビジー状態です。                         |
-    | TiKV | チャネルがいっぱいです             | tikv_チャンネルの合計数                     | TiKV で「チャネルがいっぱいです」というエラーが発生します。             |
-    | TiKV | tikv_engine_write_stall | tikv_engine_write_stall            | TiKV で「ストール」エラーが発生します。                       |
+    | TiKV | チャネルがいっぱいです             | tikv_チャンネルの合計数                     | TiKV で"channel full"というエラーが発生します。             |
+    | TiKV | tikv_engine_write_stall | tikv_engine_write_stall            | TiKV で"stall"エラーが発生します。                       |
 
 - `metrics_schema.up`監視テーブルと`CLUSTER_LOG`システムテーブルを照会して、コンポーネントが再起動されているかどうかを確認します。
 

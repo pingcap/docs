@@ -197,7 +197,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 
 - TCP4のみでのリスニングを有効または無効にします。
 - デフォルト値: `false`
-- [TCPヘッダーからの実際のクライアントIP](https://github.com/alibaba/LVS/tree/master/kernel/net/toa)が「tcp4」プロトコルで正しく解析できるため、ロードバランシングのために TiDB を LVS とともに使用する場合、このオプションを有効にすると便利です。
+- [TCPヘッダーからの実際のクライアントIP](https://github.com/alibaba/LVS/tree/master/kernel/net/toa)が"tcp4"プロトコルで正しく解析できるため、ロードバランシングのために TiDB を LVS とともに使用する場合、このオプションを有効にすると便利です。
 
 ### `enable-enum-length-limit` <span class="version-mark">v5.0で追加</span> {#enable-enum-length-limit-new-in-v50}
 
@@ -473,7 +473,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 - パスワードの有効期限が切れたときに、TiDBがクライアント接続を切断するかどうかを決定します。
 - デフォルト値: `true`
 - オプション値: `true` 、 `false`
-- `true`に設定すると、パスワードの有効期限が切れたときにクライアント接続が切断されます。 `false`に設定すると、クライアント接続は「サンドボックスモード」に制限され、ユーザーはパスワードリセット操作のみを実行できます。
+- `true`に設定すると、パスワードの有効期限が切れたときにクライアント接続が切断されます。 `false`に設定すると、クライアント接続は"sandbox mode"に制限され、ユーザーはパスワードリセット操作のみを実行できます。
 
 ### `session-token-signing-cert` <span class="version-mark">v6.4.0 の新機能</span> {#session-token-signing-cert-new-in-v640}
 
@@ -899,7 +899,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 
 - TiDBがデータを読み取ることを許可するエンジンを制御します。
 - デフォルト値: ["tikv", "tiflash", "tidb"]。これは、エンジンがオプティマイザによって自動的に選択されることを示します。
-- 値のオプション: 「tikv」、「tiflash」、「tidb」の任意の組み合わせ。例: ["tikv", "tidb"] または ["tiflash", "tidb"]
+- 値のオプション: "tikv"、"tiflash"、"tidb"の任意の組み合わせ。例: ["tikv", "tidb"] または ["tiflash", "tidb"]
 
 ## instance {#instance}
 

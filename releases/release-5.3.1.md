@@ -43,7 +43,7 @@ TiDB バージョン: 5.3.1
         - チェックポイントのタイムスタンプが予期せず進むのを避けるために、テーブルごとにシンクのチェックポイントを管理する[#3545](https://github.com/pingcap/tiflow/issues/3545)
         - チェンジフィードを再開するための指数バックオフメカニズムを追加します[#3329](https://github.com/pingcap/tiflow/issues/3329)
         - TiCDC がメッセージを Kafka パーティション間でより均等に分散するように、Kafka シンク`partition-num`のデフォルト値を 3 に変更します[#3337](https://github.com/pingcap/tiflow/issues/3337)
-        - 「EventFeed 再試行レート制限」ログの数を減らす[#4006](https://github.com/pingcap/tiflow/issues/4006)
+        - "EventFeed retry rate limited"ログの数を減らす[#4006](https://github.com/pingcap/tiflow/issues/4006)
         - デフォルト値の`max-message-bytes`を10M に設定する [#4041](https://github.com/pingcap/tiflow/issues/4041)
         - `no owner alert` `table sink total row`含む`buffer sink total row` PrometheusとGrafana 監視メトリックとアラート追加します`mounter row` [#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
         - TiKVストアがダウンしたときにKVクライアントが回復するまでの時間を短縮します[#3191](https://github.com/pingcap/tiflow/issues/3191)
@@ -160,6 +160,6 @@ TiDB バージョン: 5.3.1
     - TiDB Lightning
 
         - 一部のインポートタスクにソースファイルが含まれていない場合にTiDB Lightningがメタデータスキーマを削除しない可能性があるバグを修正しました[#28144](https://github.com/pingcap/tidb/issues/28144)
-        - storageURL プレフィックスが「gcs://xxx」ではなく「gs://xxx」の場合にTiDB Lightning がエラーを返すバグを修正しました[#32742](https://github.com/pingcap/tidb/issues/32742)
+        - storageURL プレフィックスが"gcs://xxx"ではなく"gs://xxx"の場合にTiDB Lightning がエラーを返すバグを修正しました[#32742](https://github.com/pingcap/tidb/issues/32742)
         - --log-file="-" を設定しても stdout にログが出力されない問題を修正しました [#29876](https://github.com/pingcap/tidb/issues/29876)
         - S3ストレージパスが存在しない場合にTiDB Lightningがエラーを報告しない問題を修正[#30709](https://github.com/pingcap/tidb/issues/30709)

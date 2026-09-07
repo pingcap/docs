@@ -31,7 +31,7 @@ TiDB LightningはTiDBを経由せずにデータをインポートするため�
 
 ### バックエンド {#back-end}
 
-バックエンドとは、TiDB Lightningが解析結果を送信する宛先です。「backend」とも表記されます。
+バックエンドとは、TiDB Lightningが解析結果を送信する宛先です。"backend"とも表記されます。
 
 詳細は[TiDB Lightningアーキテクチャ](/tidb-lightning/tidb-lightning-overview.md)を参照。
 
@@ -93,7 +93,7 @@ TiKV インポーターでは、エンジンは KV ペアをソートするた�
 
 TiDB Lightningは、エンジンを介してTiKV Importerにデータを転送します。まずエンジンを開き、KVペアを（順序は問わず）エンジンに送信し、最後にエンジンを閉じます。エンジンは閉じた後、受信したKVペアをソートします。閉じられたエンジンは、TiKVストアにアップロードして取り込みを行うことができます。
 
-エンジンは TiKV インポーターの`import-dir`を一時ストレージとして使用します。これは「エンジンファイル」と呼ばれることもあります。
+エンジンは TiKV インポーターの`import-dir`を一時ストレージとして使用します。これは"engine files"と呼ばれることもあります。
 
 [データエンジン](/tidb-lightning/tidb-lightning-glossary.md#data-engine)と[インデックスエンジン](/tidb-lightning/tidb-lightning-glossary.md#index-engine)も参照してください。
 
@@ -139,7 +139,7 @@ TiDB Lightningは複数のインデックスエンジンを同時に処理しま
 
 ### KVペア {#kv-pair}
 
-「キーと値のペア」の略語。
+"key-value pair"の略語。
 
 ### KVエンコーダ {#kv-encoder}
 

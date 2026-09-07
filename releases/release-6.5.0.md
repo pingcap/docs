@@ -415,7 +415,7 @@ v6.5.0 以降では、v4.0.7 で導入された`AMEND TRANSACTION`メカニズ�
 
     - TiDB Dashboard
 
-        - スロークエリページに 3 つの新しいフィールドを追加します:「Is Prepared?」、「Is Plan from Cache?」、「Is Plan from Binding?」 [#1451](https://github.com/pingcap/tidb-dashboard/issues/1451) @[shhdgit](https://github.com/shhdgit)
+        - スロークエリページに 3 つの新しいフィールドを追加します:"Is Prepared?"、"Is Plan from Cache?"、"Is Plan from Binding?" [#1451](https://github.com/pingcap/tidb-dashboard/issues/1451) @[shhdgit](https://github.com/shhdgit)
 
     - Backup & Restore (BR)
 

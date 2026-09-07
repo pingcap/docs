@@ -1,6 +1,6 @@
 ---
 title: Configure SSO for TiDB Dashboard
-summary: TiDB Dashboardは、サインイン認証にOIDCベースのSSOをサポートしています。SSOを有効にするには、OIDCクライアントIDと検出URLを入力し、偽装を承認して設定を保存します。SSOを無効にするには、オプションの選択を解除して設定を更新します。SQLユーザーのパスワードが変更された場合は、パスワードを再入力してSSOを再度有効にしてください。設定後、「会社アカウントでサインイン」をクリックしてサインインプロセスを完了することで、SSO経由でサインインできます。Okta、Auth0、Casdoorを使用したSSO設定の例も提供されています。
+summary: TiDB Dashboardは、サインイン認証にOIDCベースのSSOをサポートしています。SSOを有効にするには、OIDCクライアントIDと検出URLを入力し、偽装を承認して設定を保存します。SSOを無効にするには、オプションの選択を解除して設定を更新します。SQLユーザーのパスワードが変更された場合は、パスワードを再入力してSSOを再度有効にしてください。設定後、"Sign in via Company Account"をクリックしてサインインプロセスを完了することで、SSO経由でサインインできます。Okta、Auth0、Casdoorを使用したSSO設定の例も提供されています。
 ---
 
 # TiDB DashboardのSSOを構成する {#configure-sso-for-tidb-dashboard}
@@ -168,7 +168,7 @@ Oktaと同様に、 [オーソ0](https://auth0.com/)もOIDC SSOアイデンテ�
 
     ![Create Application](/media/dashboard/dashboard-session-sso-auth0-create-app.png)
 
-    ポップアップダイアログで、**Name**を入力します（例：「TiDB Dashboard」）。**Choose an application type**で**Single Page Web Applications**を選択します。 **Create**をクリックします。
+    ポップアップダイアログで、**Name**を入力します（例："TiDB Dashboard"）。**Choose an application type**で**Single Page Web Applications**を選択します。 **Create**をクリックします。
 
 4. **Settings**をクリックします。
 

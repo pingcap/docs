@@ -26,7 +26,7 @@ TiDB Ansible バージョン: 3.0.5
     - `from_unixtime`関数が null を処理するときに発生panic問題を修正 [#12551](https://github.com/pingcap/tidb/pull/12551)
     - DDLジョブをキャンセルする際に報告される`invalid list index`エラーを修正 [#12671](https://github.com/pingcap/tidb/pull/12671)
     - ウィンドウ関数の使用時に配列が範囲外になる問題を修正[#12660](https://github.com/pingcap/tidb/pull/12660)
-    - `AutoIncrement`列が暗黙的に割り当てられた場合の動作を改善し、MySQLのAUTO_INCREMENTロックのデフォルトモード（ [「連続」ロックモード](https://dev.mysql.com/doc/refman/5.7/en/innodb-auto-increment-handling.html) ）との一貫性を保ちます。1行の`Insert`文で複数の`AutoIncrement` IDを暗黙的に割り当てる場合、TiDBは割り当てられた値の連続性を保証します。この改善により、JDBC `getGeneratedKeys()`メソッドはどのようなシナリオでも正しい結果を得ることができます[#12602](https://github.com/pingcap/tidb/pull/12602)
+    - `AutoIncrement`列が暗黙的に割り当てられた場合の動作を改善し、MySQLのAUTO_INCREMENTロックのデフォルトモード（ ["consecutive"ロックモード](https://dev.mysql.com/doc/refman/5.7/en/innodb-auto-increment-handling.html) ）との一貫性を保ちます。1行の`Insert`文で複数の`AutoIncrement` IDを暗黙的に割り当てる場合、TiDBは割り当てられた値の連続性を保証します。この改善により、JDBC `getGeneratedKeys()`メソッドはどのようなシナリオでも正しい結果を得ることができます[#12602](https://github.com/pingcap/tidb/pull/12602)
     - `HashAgg` `Apply` の子ノードとして機能するときにクエリがハングする問題を修正しました [#12766](https://github.com/pingcap/tidb/pull/12766)
     - 型変換に関して、 `AND`と`OR`論理式が誤った結果を返す問題を修正しました。 [#12811](https://github.com/pingcap/tidb/pull/12811)
 - サーバ

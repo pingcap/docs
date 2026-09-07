@@ -1,6 +1,6 @@
 ---
 title: tiup cluster import
-summary: TiUP クラスタは、TiDB AnsibleからTiUPにTiDBクラスターを転送して管理するための「import」コマンドを提供しています。特定の構成のクラスターでは「import」を使用しないでください。インポートプロセスをカスタマイズするには、「--dir」や「--rename」などのオプションを使用してください。
+summary: TiUP クラスタは、TiDB AnsibleからTiUPにTiDBクラスターを転送して管理するための`import`コマンドを提供しています。特定の構成のクラスターでは`import`を使用しないでください。インポートプロセスをカスタマイズするには、`--dir`や`--rename`などのオプションを使用してください。
 ---
 
 # tiup cluster import {#tiup-cluster-import}

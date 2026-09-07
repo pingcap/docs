@@ -170,7 +170,7 @@ TiDBバージョン: 6.2.0-DMR
 
 - トランザクションにおけるセーブポイントの設定をサポートする
 
-    トランザクションとは、データベースがACID特性を保証する一連の連続した操作の論理的な集合です。複雑なアプリケーションシナリオでは、トランザクション内で多数の操作を管理する必要があり、場合によってはトランザクション内の操作をロールバックする必要が生じることもあります。「セーブポイント」は、トランザクションの内部実装のための名前付きメカニズムです。このメカニズムを使用することで、トランザクション内のロールバックポイントを柔軟に制御でき、より複雑なトランザクションを管理し、多様なアプリケーション設計においてより自由度を高めることができます。
+    トランザクションとは、データベースがACID特性を保証する一連の連続した操作の論理的な集合です。複雑なアプリケーションシナリオでは、トランザクション内で多数の操作を管理する必要があり、場合によってはトランザクション内の操作をロールバックする必要が生じることもあります。"Savepoint"は、トランザクションの内部実装のための名前付きメカニズムです。このメカニズムを使用することで、トランザクション内のロールバックポイントを柔軟に制御でき、より複雑なトランザクションを管理し、多様なアプリケーション設計においてより自由度を高めることができます。
 
     [ユーザー向けドキュメント](/sql-statements/sql-statement-savepoint.md) [#6840](https://github.com/pingcap/tidb/issues/6840) @[crazycs520](https://github.com/crazycs520)
 
@@ -224,10 +224,10 @@ TiDBバージョン: 6.2.0-DMR
 
     [ユーザー向けドキュメント](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import) [#35148](https://github.com/pingcap/tidb/issues/35148) @[sleepymole](https://github.com/sleepymole)
 
-- [TiDB Lightningのユーザー向けドキュメント](/tidb-lightning/tidb-lightning-overview.md)ドキュメントをリファクタリングして、その構造をより合理的かつ明確にします。 「バックエンド」の用語も、新規ユーザーの理解の障壁を下げるために変更されています。
+- [TiDB Lightningのユーザー向けドキュメント](/tidb-lightning/tidb-lightning-overview.md)ドキュメントをリファクタリングして、その構造をより合理的かつ明確にします。 "backend"の用語も、新規ユーザーの理解の障壁を下げるために変更されています。
 
-    - 「ローカルバックエンド」を「物理インポートモード」に置き換えてください。
-    - 「tidb backend」を「logical import mode」に置き換えてください。
+    - "local backend"を"physical import mode"に置き換えてください。
+    - "tidb backend"を"logical import mode"に置き換えてください。
 
 ### TiDBデータ共有サブスクリプション {#tidb-data-share-subscription}
 
@@ -403,7 +403,7 @@ TiDB v6.2.0以降、 BRを使用したRawKVのバックアップと復元は非�
     - テーブル作成時に、デフォルト値と列の型が一致せず、自動的に修正されない問題を修正しました [#34881](https://github.com/pingcap/tidb/issues/34881) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - `mysql.columns_priv`を実行した後、 `DROP USER`テーブルのデータが同期的に削除されない問題を修正しました [#35059](https://github.com/pingcap/tidb/issues/35059) @[lcwangchao](https://github.com/lcwangchao)
     - 一部のシステムのスキーマ内でテーブルを作成することを禁止することで、DDL ジャムの問題を修正します [#35205](https://github.com/pingcap/tidb/issues/35205) @[tangenta](https://github.com/tangenta)
-    - パーティション化されたテーブルをクエリした際に、場合によっては「index-out-of-range」および「non used index」エラーが報告される問題を修正しました [#35181](https://github.com/pingcap/tidb/issues/35181) @[mjonss](https://github.com/mjonss)
+    - パーティション化されたテーブルをクエリした際に、場合によっては"index-out-of-range"および"non used index"エラーが報告される問題を修正しました [#35181](https://github.com/pingcap/tidb/issues/35181) @[mjonss](https://github.com/mjonss)
     - `INTERVAL expr unit + expr`がエラーを報告する可能性がある問題を修正 [#30253](https://github.com/pingcap/tidb/issues/30253) @[mjonss](https://github.com/mjonss)
     - トランザクション内で作成された一時テーブルが見つからないバグを修正 [#35644](https://github.com/pingcap/tidb/issues/35644) @[djshow832](https://github.com/djshow832)
     - `ENUM`列に照合順序を設定する際に発生するpanic問題を修正しました [#31637](https://github.com/pingcap/tidb/issues/31637) @[wjhuang2016](https://github.com/wjhuang2016)

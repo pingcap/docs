@@ -88,7 +88,7 @@ JDBC は通常、実装関連の設定を JDBC URL パラメーターの形式�
 
 ##### `useServerPrepStmts` {#useserverprepstmts}
 
-`useServerPrepStmts`はデフォルトで`false`に設定されています。つまり、Prepare API を使用する場合でも、「prepare」操作はクライアント側でのみ実行されます。サーバーの解析オーバーヘッドを回避するため、同じ SQL文で Prepare API を複数回使用する場合は、この設定を`true`に設定することをお勧めします。
+`useServerPrepStmts`はデフォルトで`false`に設定されています。つまり、Prepare API を使用する場合でも、"prepare"操作はクライアント側でのみ実行されます。サーバーの解析オーバーヘッドを回避するため、同じ SQL文で Prepare API を複数回使用する場合は、この設定を`true`に設定することをお勧めします。
 
 この設定が既に有効になっていることを確認するには、次の操作を実行してください。
 
@@ -97,7 +97,7 @@ JDBC は通常、実装関連の設定を JDBC URL パラメーターの形式�
 
 ##### `cachePrepStmts` {#cacheprepstmts}
 
-`useServerPrepStmts=true`はサーバーがプリペアドステートメントを実行できるようにしますが、デフォルトではクライアントは実行後にプリペアドステートメントを閉じ、再利用しません。つまり、「準備」操作はテキストファイルの実行ほど効率的ではありません。この問題を解決するには、 `useServerPrepStmts=true`を設定した後、 `cachePrepStmts=true`も設定することをお勧めします。これにより、クライアントはプリペアドステートメントをキャッシュできるようになります。
+`useServerPrepStmts=true`はサーバーがプリペアドステートメントを実行できるようにしますが、デフォルトではクライアントは実行後にプリペアドステートメントを閉じ、再利用しません。つまり、"prepare"操作はテキストファイルの実行ほど効率的ではありません。この問題を解決するには、 `useServerPrepStmts=true`を設定した後、 `cachePrepStmts=true`も設定することをお勧めします。これにより、クライアントはプリペアドステートメントをキャッシュできるようになります。
 
 この設定が既に有効になっていることを確認するには、次の操作を実行してください。
 
@@ -119,7 +119,7 @@ JDBC は通常、実装関連の設定を JDBC URL パラメーターの形式�
 
 ##### `prepStmtCacheSize` {#prepstmtcachesize}
 
-`prepStmtCacheSize`キャッシュされるプリペアドステートメントの数を制御します (デフォルト値は`25`です)。アプリケーションで多くの種類の SQL文を「準備」する必要があり、プリペアドステートメントを再利用したい場合は、この値を増やすことができます。
+`prepStmtCacheSize`キャッシュされるプリペアドステートメントの数を制御します (デフォルト値は`25`です)。アプリケーションで多くの種類の SQL文を"prepare"する必要があり、プリペアドステートメントを再利用したい場合は、この値を増やすことができます。
 
 この設定が既に有効になっていることを確認するには、次の操作を実行してください。
 
@@ -158,7 +158,7 @@ insert into t(a) values(12);
 insert into t(a) values(10),(11),(12);
 ```
 
-`INSERT`文の書き換えは、複数の「values」キーワードの後の値を連結して 1つの SQL文にするものであることに注意してください。 `INSERT`文に他の違いがある場合、書き換えることはできません。たとえば、次のようになります。
+`INSERT`文の書き換えは、複数の"values"キーワードの後の値を連結して 1つの SQL文にするものであることに注意してください。 `INSERT`文に他の違いがある場合、書き換えることはできません。たとえば、次のようになります。
 
 ```sql
 insert into t (a) values (10) on duplicate key update a = 10;
@@ -296,8 +296,8 @@ The last packet sent successfully to the server was 3600000 milliseconds ago. Th
 
 MyBatis Mapperは2つのパラメータをサポートしています。
 
-- `select 1 from t where id = #{param1}` 、プリペアドステートメントとして`select 1 from t where id =?`に変換され、「準備済み」の状態になります。実際のパラメータは再利用されます。このパラメータを前述の接続準備パラメータと併用すると、最高のパフォーマンスが得られます。
-- `select 1 from t where id = ${param2}`はテキストファイル`select 1 from t where id = 1`に置き換えられ、実行されます。このステートメントが異なるパラメータに置き換えられて実行されると、MyBatis はステートメントの「準備」のために TiDB に異なるリクエストを送信します。これにより、TiDB が多数のプリペアドステートメントをキャッシュする可能性があり、この方法で SQL 操作を実行すると、インジェクションのセキュリティリスクが発生します。
+- `select 1 from t where id = #{param1}` 、プリペアドステートメントとして`select 1 from t where id =?`に変換され、"prepared"の状態になります。実際のパラメータは再利用されます。このパラメータを前述の接続準備パラメータと併用すると、最高のパフォーマンスが得られます。
+- `select 1 from t where id = ${param2}`はテキストファイル`select 1 from t where id = 1`に置き換えられ、実行されます。このステートメントが異なるパラメータに置き換えられて実行されると、MyBatis はステートメントの"preparing"のために TiDB に異なるリクエストを送信します。これにより、TiDB が多数のプリペアドステートメントをキャッシュする可能性があり、この方法で SQL 操作を実行すると、インジェクションのセキュリティリスクが発生します。
 
 #### 動的SQLバッチ {#dynamic-sql-batch}
 
@@ -319,7 +319,7 @@ MyBatis Mapperは2つのパラメータをサポートしています。
 </insert>
 ```
 
-このマッパーは`insert on duplicate key update`文を生成します。 `(?,?,?)`に続く「値」の数は、渡されたリストの数によって決まります。最終的な効果は`rewriteBatchStatements=true`を使用した場合と同様で、クライアントと TiDB 間の通信オーバーヘッドを効果的に削減します。
+このマッパーは`insert on duplicate key update`文を生成します。 `(?,?,?)`に続く"values"の数は、渡されたリストの数によって決まります。最終的な効果は`rewriteBatchStatements=true`を使用した場合と同様で、クライアントと TiDB 間の通信オーバーヘッドを効果的に削減します。
 
 前述のとおり、プリペアドステートメントの最大長が`prepStmtCacheSqlLimit`の値を超えると、キャッシュされないことにも注意する必要があります。
 

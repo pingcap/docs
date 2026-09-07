@@ -166,7 +166,7 @@ tiup dm deploy ${name} ${version} ./topology.yaml -u ${ssh_user} [-p] [-i /home/
 | `./topology.yaml`        | トポロジ構成ファイルのパス。                                                                  |
 | `-u`または`--user`          | クラスターのデプロイを完了するには、root ユーザーまたは ssh および sudo権限を持つ他のユーザーアカウントとしてターゲットマシンにログインします。 |
 | `-p`または`--password`      | 対象ホストのパスワード。指定すると、パスワード認証が使用されます。                                               |
-| `-i`または`--identity_file` | SSH IDファイルのパス。指定すると公開鍵認証が使用されます（デフォルトは「/root/.ssh/id_rsa」）。                     |
+| `-i`または`--identity_file` | SSH IDファイルのパス。指定すると公開鍵認証が使用されます（デフォルトは"/root/.ssh/id_rsa"）。                     |
 
 出力ログの最後に``Deployed cluster `dm-test` successfully``が表示されます。これは、デプロイメントが成功したことを示します。
 

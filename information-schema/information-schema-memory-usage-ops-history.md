@@ -48,7 +48,7 @@ SELECT * FROM information_schema.memory_usage_ops_history;
 `MEMORY_USAGE_OPS_HISTORY`テーブル内の列は次のように説明されます。
 
 - `TIME` : セッションが終了したときのタイムスタンプ。
-- `OPS` ：「セッションキル」
+- `OPS` ："SessionKill"
 - `MEMORY_LIMIT` : TiDB終了時のメモリ使用量制限（バイト単位）。この値はシステム変数`tidb_server_memory_limit`の値と同じです。[/system-variables.md#tidb_server_memory_limit-new-in-v640]。
 - `MEMORY_CURRENT` : TiDB の現在のメモリ使用量 (バイト単位)。
 - `PROCESSID` : 終了したセッションの接続 ID。

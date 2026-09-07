@@ -5,11 +5,11 @@ summary: シャードマージのシナリオにおけるデータ移行のベ�
 
 # シャード統合シナリオにおけるデータ移行のベストプラクティス {#best-practices-of-data-migration-in-the-shard-merge-scenario}
 
-このドキュメントでは、シャードマージ シナリオにおける[TiDB Data Migration (DM)](/dm/dm-overview.md)の機能と制限について説明し、アプリケーションのデータ移行のベストプラクティス ガイドを提供します (デフォルトの「悲観的」モードが使用されます)。
+このドキュメントでは、シャードマージ シナリオにおける[TiDB Data Migration (DM)](/dm/dm-overview.md)の機能と制限について説明し、アプリケーションのデータ移行のベストプラクティス ガイドを提供します (デフォルトの"pessimistic"モードが使用されます)。
 
 ## 別のデータ移行タスクを使用する {#use-a-separate-data-migration-task}
 
-[シャードテーブルからのデータのマージと移行](/dm/feature-shard-merge-pessimistic.md#principles)ドキュメントでは、「シャーディンググループ」の定義が次のように示されています。シャーディンググループは、同じダウンストリームテーブルにマージおよび移行する必要があるすべてのアップストリームテーブルで構成されます。
+[シャードテーブルからのデータのマージと移行](/dm/feature-shard-merge-pessimistic.md#principles)ドキュメントでは、"sharding group"の定義が次のように示されています。シャーディンググループは、同じダウンストリームテーブルにマージおよび移行する必要があるすべてのアップストリームテーブルで構成されます。
 
 現在のシャーディングDDLメカニズムには、異なるシャーディングされたテーブルにおけるDDL操作によってもたらされるスキーマ変更を調整するための[使用制限](/dm/feature-shard-merge-pessimistic.md#restrictions)の制約があります。予期しない理由によりこれらの制約に違反した場合は、 [DMでシャーディングDDLロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を実行するか、データ移行タスク全体をやり直す必要があります。
 

@@ -127,7 +127,7 @@ nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
 並列インポート中、 TiDB Lightning はタスクの開始後に次のチェックを自動的に実行します。
 
 - ローカルディスク（構成`sort-kv-dir`で制御）とTiKVクラスターに、データのインポートに必要な空き容量があるかどうかを確認してください。必要なディスク容量については、 [ターゲットデータベースのストレージ要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)と[リソース要件](/tidb-lightning/tidb-lightning-physical-import-mode.md#environment-requirements)を参照してください。TiDB Lightningはデータソースをサンプリングし、サンプル結果からインデックスサイズの割合を推定します。推定にはインデックスも含まれるため、ソースデータのサイズがローカルディスクの空き容量よりも小さい場合でも、チェックが失敗する場合があります。
-- TiKVクラスタ内のリージョンが均等に分散されているか、また空きリージョンが多すぎないかを確認してください。空きリージョンの数がmax(1000, テーブル数 * 3)を超える場合、つまり「1000」または「テーブル数の3倍」のいずれか大きい方を超える場合、インポートは実行できません。
+- TiKVクラスタ内のリージョンが均等に分散されているか、また空きリージョンが多すぎないかを確認してください。空きリージョンの数がmax(1000, テーブル数 * 3)を超える場合、つまり"1000"または"3 times the number of tables"のいずれか大きい方を超える場合、インポートは実行できません。
 - データソースからデータが順番にインポートされているか確認します。確認結果に基づいて`mydumper.batch-size`のサイズが自動的に調整されます。そのため、 `mydumper.batch-size`構成は利用できなくなります。
 
 チェックをオフにして、 `lightning.check-requirements`設定で強制インポートを実行することもできます。詳細なチェックについては、 [TiDB Lightning事前チェック](/tidb-lightning/tidb-lightning-prechecks.md)を参照してください。
@@ -198,7 +198,7 @@ parallel-import = true
 
 - ソースファイル内の無効なデータを示すチェックサムの不一致など、データの不正確さにつながるエラーがログに記録されている場合は、次の手順を実行してこの問題を解決できます。
 
-    1. 成功したノードを含むすべてのLightningノードで[`checkpoint-error-destroy`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-destroy)コマンドを実行します。このコマンドは、失敗したテーブルからインポートされたデータを削除し、これらのテーブルのチェックポイントステータスを「未開始」にリセットします。
+    1. 成功したノードを含むすべてのLightningノードで[`checkpoint-error-destroy`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-destroy)コマンドを実行します。このコマンドは、失敗したテーブルからインポートされたデータを削除し、これらのテーブルのチェックポイントステータスを"not yet started"にリセットします。
 
     2. 正常に終了するノードを含むすべてのTiDB Lightningノードで[`filter`](/table-filter.md)パラメータを使用して、失敗したテーブルのデータを再構成してインポートします。
 

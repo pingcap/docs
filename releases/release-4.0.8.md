@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.8 Release Notes
-summary: TiDB 4.0.8は2020年10月30日にリリースされました。新機能には、新しい集計関数「APPROX_PERCENTILE」のサポートと、 TiFlashにおける「CAST」関数のプッシュダウンが含まれます。TiDB、TiKV、PD、 TiFlashの機能強化に加え、TiDB、TiKV、PD、 TiFlash、バックアップとリストア（BR）、TiCDC、 TiDB Lightningのバグ修正も実装されました。
+summary: TiDB 4.0.8は2020年10月30日にリリースされました。新機能には、新しい集計関数`APPROX_PERCENTILE`のサポートと、 TiFlashにおける`CAST`関数のプッシュダウンが含まれます。TiDB、TiKV、PD、 TiFlashの機能強化に加え、TiDB、TiKV、PD、 TiFlash、バックアップとリストア（BR）、TiCDC、 TiDB Lightningのバグ修正も実装されました。
 ---
 
 # TiDB 4.0.8 リリースノート {#tidb-4-0-8-release-notes}

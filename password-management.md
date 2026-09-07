@@ -264,9 +264,9 @@ TiDB は、グローバルレベルとアカウント レベルでの自動パ�
 
 ### 期限切れのパスワードの処理 {#handle-an-expired-password}
 
-パスワードの有効期限切れに関するTiDBサーバーの動作を制御できます。パスワードの有効期限が切れると、サーバーはクライアントを切断するか、クライアントを「サンドボックスモード」に制限します。「サンドボックスモード」では、TiDBサーバーは期限切れのアカウントからの接続を許可します。ただし、この接続では、ユーザーはパスワードのリセットのみを実行できます。
+パスワードの有効期限切れに関するTiDBサーバーの動作を制御できます。パスワードの有効期限が切れると、サーバーはクライアントを切断するか、クライアントを"sandbox mode"に制限します。"sandbox mode"では、TiDBサーバーは期限切れのアカウントからの接続を許可します。ただし、この接続では、ユーザーはパスワードのリセットのみを実行できます。
 
-TiDBサーバーは、「サンドボックスモード」において、パスワードの有効期限が切れたユーザーを制限するかどうかを制御できます。パスワードの有効期限が切れた場合のTiDBサーバーの動作を制御するには、TiDB設定ファイルの[`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650)のパラメータを設定します。
+TiDBサーバーは、"sandbox mode"において、パスワードの有効期限が切れたユーザーを制限するかどうかを制御できます。パスワードの有効期限が切れた場合のTiDBサーバーの動作を制御するには、TiDB設定ファイルの[`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650)のパラメータを設定します。
 
 ```toml
 [security]
@@ -274,7 +274,7 @@ disconnect-on-expired-password = true
 ```
 
 - `disconnect-on-expired-password` `true` (デフォルト) に設定すると、パスワードの有効期限が切れるとサーバーはクライアントとの接続を切断します。
-- `disconnect-on-expired-password` `false`に設定すると、サーバーは「サンドボックスモード」を有効にし、ユーザーがサーバーに接続できるようにします。ただし、ユーザーはパスワードのリセットのみ可能です。パスワードをリセットすると、ユーザーはSQL文を通常どおり実行できるようになります。
+- `disconnect-on-expired-password` `false`に設定すると、サーバーは"sandbox mode"を有効にし、ユーザーがサーバーに接続できるようにします。ただし、ユーザーはパスワードのリセットのみ可能です。パスワードをリセットすると、ユーザーはSQL文を通常どおり実行できるようになります。
 
 `disconnect-on-expired-password`が有効になっている場合、アカウントのパスワードが期限切れになると、TiDB はそのアカウントからの接続を拒否します。このような場合、以下の方法でパスワードを変更できます。
 

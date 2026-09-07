@@ -96,7 +96,7 @@ t22_r11
 
 #### 均等に {#even-split}
 
-`row_id`は整数であるため、分割するキーの値は、指定された`lower_value` 、 `upper_value` 、および`region_num`に従って計算できます。TiDB は最初にステップ値 ( `step = (upper_value - lower_value)/region_num` ) を計算します。次に、 `lower_value`と`upper_value`の間で各「ステップ」ごとに均等に分割して`region_num`で指定された数のリージョンを生成します。
+`row_id`は整数であるため、分割するキーの値は、指定された`lower_value` 、 `upper_value` 、および`region_num`に従って計算できます。TiDB は最初にステップ値 ( `step = (upper_value - lower_value)/region_num` ) を計算します。次に、 `lower_value`と`upper_value`の間で各"step"ごとに均等に分割して`region_num`で指定された数のリージョンを生成します。
 
 例えば、テーブル t のキー範囲`minInt64` ~ `maxInt64`から均等に分割された 16 個のリージョンを作成したい場合は、次のステートメントを使用できます。
 

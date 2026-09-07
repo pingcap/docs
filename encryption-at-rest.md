@@ -323,9 +323,9 @@ server_configs:
     security.encryption.data-key-rotation-period: "168h" # 7 days
 ```
 
-`data-encryption-method`に指定できる値は、「aes128-ctr」、「aes192-ctr」、「aes256-ctr」、「sm4-ctr」（v6.4.0 以降のみ）、「plaintext」です。デフォルト値は「plaintext」で、暗号化は無効です。`data-key-rotation-period`は、TiFlash がデータキーをローテーションする頻度を定義します。暗号化は、新規TiFlashクラスターまたは既存のTiFlashクラスターで有効にできますが、暗号化が有効になった後に書き込まれたデータのみが暗号化されることが保証されます。暗号化を無効にするには、設定ファイルの`data-encryption-method`を削除するか、「plaintext」にリセットし、 TiFlashを再起動します。暗号化方式を変更するには、設定ファイルの`data-encryption-method`を更新し、 TiFlash を再起動します。暗号化アルゴリズムを変更するには、 `data-encryption-method`をサポートされている暗号化アルゴリズムに置き換え、 TiFlash を再起動します。置き換え後、新しいデータが書き込まれると、以前の暗号化アルゴリズムで生成された暗号化ファイルは、新しい暗号化アルゴリズムで生成されたファイルに徐々に書き換えられます。
+`data-encryption-method`に指定できる値は、"aes128-ctr"、"aes192-ctr"、"aes256-ctr"、"sm4-ctr"（v6.4.0 以降のみ）、"plaintext"です。デフォルト値は"plaintext"で、暗号化は無効です。`data-key-rotation-period`は、TiFlash がデータキーをローテーションする頻度を定義します。暗号化は、新規TiFlashクラスターまたは既存のTiFlashクラスターで有効にできますが、暗号化が有効になった後に書き込まれたデータのみが暗号化されることが保証されます。暗号化を無効にするには、設定ファイルの`data-encryption-method`を削除するか、"plaintext"にリセットし、 TiFlashを再起動します。暗号化方式を変更するには、設定ファイルの`data-encryption-method`を更新し、 TiFlash を再起動します。暗号化アルゴリズムを変更するには、 `data-encryption-method`をサポートされている暗号化アルゴリズムに置き換え、 TiFlash を再起動します。置き換え後、新しいデータが書き込まれると、以前の暗号化アルゴリズムで生成された暗号化ファイルは、新しい暗号化アルゴリズムで生成されたファイルに徐々に書き換えられます。
 
-暗号化が有効になっている場合（つまり、 `data-encryption-method`が「プレーンテキスト」ではない場合）、マスターキーを指定する必要があります。AWS KMS CMK をマスターキーとして指定するには、 `tiflash-learner.toml`設定ファイルの`encryption`セクションの後に`encryption.master-key`セクションを追加します。
+暗号化が有効になっている場合（つまり、 `data-encryption-method`が"plaintext"ではない場合）、マスターキーを指定する必要があります。AWS KMS CMK をマスターキーとして指定するには、 `tiflash-learner.toml`設定ファイルの`encryption`セクションの後に`encryption.master-key`セクションを追加します。
 
 ```
 [security.encryption.master-key]

@@ -13,7 +13,7 @@ summary: このドキュメントでは、TiDB Cloud Essentialから Apache Kafk
 >
 > 1. [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**?**をクリックします。
 > 2. **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。
-> 3. チケットを作成します。「説明」欄に「changefeedへの申請」と入力します。
+> 3. チケットを作成します。"Description"欄に"Apply for changefeed"と入力します。
 > 4. **Submit**をクリックしてください。
 
 ## 制限 {#restrictions}
@@ -153,7 +153,7 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
     - Avroは、コンパクトで高速なバイナリデータフォーマットであり、豊富なデータ構造を備え、様々なフローシステムで広く利用されています。詳細については、 [Avroデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol)を参照してください。
     - Canal-JSONは、解析が容易なプレーンなJSONテキスト形式です。詳細については、 [Canal-JSONデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-canal-json)を参照してください。
     - オープンプロトコルは、監視、キャッシュ、全文インデックス作成、分析エンジン、および異なるデータベース間のプライマリとセカンダリのレプリケーションのためのデータソースを提供する行レベルのデータ変更通知プロトコルです。詳細については、 [オープンプロトコルデータフォーマット](https://docs.pingcap.com/tidb/stable/ticdc-open-protocol)を参照してください。
-    - Debeziumは、データベースの変更をキャプチャするためのツールです。キャプチャされた各データベース変更を「イベント」と呼ばれるメッセージに変換し、これらのイベントをKafkaに送信します。詳細については、 [Debeziumデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-debezium)を参照してください。
+    - Debeziumは、データベースの変更をキャプチャするためのツールです。キャプチャされた各データベース変更を"event"と呼ばれるメッセージに変換し、これらのイベントをKafkaに送信します。詳細については、 [Debeziumデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-debezium)を参照してください。
 
 5. TiDB拡張フィールドをKafkaメッセージ本文に追加する場合は、 **TiDB Extension**オプションを有効にしてください。
 
