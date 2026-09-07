@@ -73,7 +73,7 @@ ALTER TABLE t ADD FULLTEXT INDEX idx_fts (
 Attributes fall into two categories:
 
 - **Parser attributes**: `multilingual` and `ngram`. Columns with parser attributes are scored columns that participate in BM25 scoring.
-- **Filter attributes**: `exact` and `path_hierarchy`. Columns with filter attributes are filter columns. Filter conditions on these columns are evaluated during the full-text index scan, without accessing the table rows. See [Filter attributes](#filter-attributes).
+- **Filter attributes**: `exact` and `path_hierarchy`. Columns with filter attributes are filter columns. Filter conditions on these columns are evaluated during the full-text index scan, without accessing the table rows.
 
 Rules for column attributes:
 
@@ -90,7 +90,7 @@ Rules for column attributes:
 | `multilingual` | None | - | Language-aware tokenizer that matches complete tokens. Case-insensitive. |
 | `ngram` | `min_gram`, `max_gram`, `granularity`, `lower_case` | `min_gram=3`, `max_gram=3`, `granularity='word'`, `lower_case=true` | Character-level n-gram tokenizer that supports prefix, infix, and suffix substring matching. See [The NGRAM parser](#the-ngram-parser). |
 | `exact` | None | - | Exact-value matching using inverted posting lists. Supports `=` and `IN`. Used for tenant IDs, status, tags, and other low-cardinality filters. |
-| `path_hierarchy` | `delimiter` | `delimiter='/'` | Hierarchical prefix matching for path-like values. Supports `col LIKE '/src/%'` and `col UNDER '/src/'`. The prefix must align with a delimiter boundary. See [path_hierarchy prefix alignment](#path_hierarchy-prefix-alignment). |
+| `path_hierarchy` | `delimiter` | `delimiter='/'` | Hierarchical prefix matching for path-like values. Supports `col LIKE '/src/%'` and `col UNDER '/src/'`. The prefix must align with a delimiter boundary.
 
 To customize the delimiter of `path_hierarchy`:
 
