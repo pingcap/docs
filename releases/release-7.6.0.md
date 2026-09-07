@@ -329,7 +329,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     - TiCDC
 
         - TiCDCによるオブジェクトストレージへのデータ複製パフォーマンスを並列処理の増加によって改善する [#10098](https://github.com/pingcap/tiflow/issues/10098) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - `content-compatible=true` [公式Canal出力のコンテンツ形式と互換性がある](/ticdc/ticdc-canal-json.md#compatibility-with-the-official-canal)`sink-uri`の@[3AceShowHand](https://github.com/3AceShowHand) [#10106](https://github.com/pingcap/tiflow/issues/10106)
+        - `sink-uri`設定で`content-compatible=true`を設定することで、TiCDC の Canal-JSON コンテンツ形式を[公式Canal出力のコンテンツ形式と互換性がある](/ticdc/ticdc-canal-json.md#compatibility-with-the-official-canal)ようにすることをサポートします。 [#10106](https://github.com/pingcap/tiflow/issues/10106) @[3AceShowHand](https://github.com/3AceShowHand)
 
     - TiDB Data Migration (DM)
 
@@ -348,11 +348,11 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     - DDL `jobID`が 0 に復元されたときに発生する TiDB ノードpanicの問題を修正 [#46296](https://github.com/pingcap/tidb/issues/46296) @[jiyfhust](https://github.com/jiyfhust)
     - 同じクエリプランでも異なる`PLAN_DIGEST`値が存在する場合がある問題を修正 [#47634](https://github.com/pingcap/tidb/issues/47634) @[King-Dylan](https://github.com/King-Dylan)
     - DUALテーブルを最初のサブノードとして`UNION ALL`を実行するとエラーが発生する可能性がある問題を修正しました [#48755](https://github.com/pingcap/tidb/issues/48755) @[winoros](https://github.com/winoros)
-    - 共通テーブル式（CTE）を含むクエリで、 `runtime error: index out of range [32] with length 32`小さな値に設定されている場合に`tidb_max_chunk_size`が報告される問題を修正 [#48808](https://github.com/pingcap/tidb/issues/48808) @[guo-shaoge](https://github.com/guo-shaoge)
+    - 共通テーブル式（CTE）を含むクエリで、 `tidb_max_chunk_size`が小さな値に設定されている場合に`runtime error: index out of range [32] with length 32`が報告される問題を修正 [#48808](https://github.com/pingcap/tidb/issues/48808) @[guo-shaoge](https://github.com/guo-shaoge)
     - `AUTO_ID_CACHE=1`使用時のゴルーチンリークの問題を修正 [#46324](https://github.com/pingcap/tidb/issues/46324) @[tiancaiamao](https://github.com/tiancaiamao)
     - MPP によって計算された`COUNT(INT)`の結果が正しくない可能性がある問題を修正 [#48643](https://github.com/pingcap/tidb/issues/48643) @[AilinKid](https://github.com/AilinKid)
-    - パーティション列のタイプが`ALTER TABLE ... LAST PARTITION`の場合に`DATETIME`の実行が失敗する問題を修正します [#48814](https://github.com/pingcap/tidb/issues/48814) @[crazycs520](https://github.com/crazycs520)
-    - `_`で`LIKE`ワイルドカードを使用すると、データに末尾の空白が含まれている場合にクエリ結果が正しくない可能性がある問題を修正します [#48983](https://github.com/pingcap/tidb/issues/48983) @[time-and-fate](https://github.com/time-and-fate)
+    - パーティション列のタイプが`DATETIME`の場合に`ALTER TABLE ... LAST PARTITION`の実行が失敗する問題を修正します [#48814](https://github.com/pingcap/tidb/issues/48814) @[crazycs520](https://github.com/crazycs520)
+    - `LIKE`で`_`ワイルドカードを使用すると、データに末尾の空白が含まれている場合にクエリ結果が正しくない可能性がある問題を修正します [#48983](https://github.com/pingcap/tidb/issues/48983) @[time-and-fate](https://github.com/time-and-fate)
     - `tidb_server_memory_limit` による長期メモリ負荷が原因で TiDB の CPU 使用率が高くなる問題を修正しました。 [#48741](https://github.com/pingcap/tidb/issues/48741) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - `ENUM`型の列を結合キーとして使用した場合にクエリ結果が正しくない問題を修正 [#48991](https://github.com/pingcap/tidb/issues/48991) @[winoros](https://github.com/winoros)
     - メモリ制限を超えると、CTE を含むクエリが予期せずスタックする問題を修正 [#49096](https://github.com/pingcap/tidb/issues/49096) @[AilinKid](https://github.com/AilinKid)
@@ -386,7 +386,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     - `CHECK`制約を持つDDL文が停止する問題を修正 [#47632](https://github.com/pingcap/tidb/issues/47632) @[jiyfhust](https://github.com/jiyfhust)
     - メモリ不足が原因でDDL文のインデックス追加が失敗する問題を修正 [#47862](https://github.com/pingcap/tidb/issues/47862) @[GMHDBJD](https://github.com/GMHDBJD)
     - `ADD INDEX`の実行中にクラスターをアップグレードすると、データがインデックスと不整合になる可能性がある問題を修正しました [#46306](https://github.com/pingcap/tidb/issues/46306) @[zimulala](https://github.com/zimulala)
-    - `ADMIN CHECK`システム変数を更新した後に`tidb_mem_quota_query`を実行すると`ERROR 8175`が返される問題を修正 [#49258](https://github.com/pingcap/tidb/issues/49258) @[tangenta](https://github.com/tangenta)
+    - `tidb_mem_quota_query`システム変数を更新した後に`ADMIN CHECK`を実行すると`ERROR 8175`が返される問題を修正 [#49258](https://github.com/pingcap/tidb/issues/49258) @[tangenta](https://github.com/tangenta)
     - `ALTER TABLE`外部キーで参照される列の型を変更した際に、 `DECIMAL`の精度変更がエラーとして報告されない問題を修正しました。 [#49836](https://github.com/pingcap/tidb/issues/49836) @[yoshikipom](https://github.com/yoshikipom)
     - `ALTER TABLE`外部キーで参照される列の型を変更する際に、 `INTEGER`の長さの変更が誤ってエラーとして報告される問題を修正しました。 [#47702](https://github.com/pingcap/tidb/issues/47702) @[yoshikipom](https://github.com/yoshikipom)
     - 一部のシナリオで式のインデックスが除数が0であることを検出しない問題を修正しました [#50053](https://github.com/pingcap/tidb/issues/50053) @[lcwangchao](https://github.com/lcwangchao)
@@ -411,7 +411,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     - `GROUP_CONCAT(ORDER BY)`構文を含むクエリを実行するとエラーが返される可能性がある問題を修正 [#49986](https://github.com/pingcap/tidb/issues/49986) @[AilinKid](https://github.com/AilinKid)
     - `UPDATE` 、 `DELETE` 、および`INSERT`文が、 `SQL_MODE`が厳密でない場合に警告ではなくオーバーフローエラーを返す問題を修正します [#49137](https://github.com/pingcap/tidb/issues/49137) @[YangKeao](https://github.com/YangKeao)
     - テーブルに多値インデックスと非バイナリ型文字列で構成される複合インデックスがある場合にデータを挿入できない問題を修正 [#49680](https://github.com/pingcap/tidb/issues/49680) @[YangKeao](https://github.com/YangKeao)
-    - 多階層にネストされた`LIMIT`クエリ内の`UNION`無効になる可能性がある問題を修正 [#49874](https://github.com/pingcap/tidb/issues/49874) @[Defined2014](https://github.com/Defined2014)
+    - 多階層にネストされた`UNION`クエリ内の`LIMIT`が無効になる可能性がある問題を修正 [#49874](https://github.com/pingcap/tidb/issues/49874) @[Defined2014](https://github.com/Defined2014)
     - `BETWEEN ... AND ...`条件を使用してパーティションテーブルをクエリすると誤った結果が返される問題を修正 [#49842](https://github.com/pingcap/tidb/issues/49842) @[Defined2014](https://github.com/Defined2014)
     - `REPLACE INTO`文でヒントが使用できない問題を修正 [#34325](https://github.com/pingcap/tidb/issues/34325) @[YangKeao](https://github.com/YangKeao)
     - ハッシュパーティションテーブルのクエリ時に TiDB が間違ったパーティションを選択する可能性がある問題を修正 [#50044](https://github.com/pingcap/tidb/issues/50044) @[Defined2014](https://github.com/Defined2014)

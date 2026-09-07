@@ -289,7 +289,7 @@ tiup br restore full \
 SHOW GLOBAL BINDINGS;
 ```
 
-復元後の実行プランバインディングの動的ロードは、まだ最適化中です（関連する問題は[＃46527](https://github.com/pingcap/tidb/issues/46527)と[＃46528](https://github.com/pingcap/tidb/issues/46528)です）。復元後、実行プランバインディングを手動で再ロードする必要があります。
+復元後の実行プランバインディングの動的ロードは、まだ最適化中です（関連する問題は[#46527](https://github.com/pingcap/tidb/issues/46527)と[#46528](https://github.com/pingcap/tidb/issues/46528)です）。復元後、実行プランバインディングを手動で再ロードする必要があります。
 
 ```sql
 -- Ensure that the mysql.bind_info table has only one record for builtin_pseudo_sql_for_bind_lock. If there are more records, you need to manually delete them.

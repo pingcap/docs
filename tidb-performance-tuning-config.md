@@ -259,16 +259,16 @@ sysbench oltp_read_only run --mysql-host={host} --mysql-port={port} --mysql-user
 - TiDBサーバー3台（16コア、64GiB）
 - TiKVサーバー3台（16コア、64GiB）
 - TiDBバージョン：v8.4.0
-- 作業負荷: [go-ycsbワークロード](https://github.com/pingcap/go-ycsb/blob/master/workloads/workloada)
+- 作業負荷: [go-ycsb workloada](https://github.com/pingcap/go-ycsb/blob/master/workloads/workloada)
 
 #### 性能比較 {#performance-comparison}
 
 以下の表は、基準設定と最適化設定におけるスループット（1秒あたりの処理回数）を比較したものです。
 
-| アイテム      | ベースライン（OPS） | 最適化済み（OPS） | 改善       |
+| 項目       | ベースライン（OPS） | 最適化済み（OPS） | 改善       |
 | --------- | ----------- | ---------- | -------- |
 | データをロードする | 2858.5      | 5074.3     | +77.59%  |
-| 作業負荷      | 2243.0      | 12804.3    | +470.86% |
+| Workloada  | 2243.0      | 12804.3    | +470.86% |
 
 #### パフォーマンス分析 {#performance-analysis}
 

@@ -247,7 +247,7 @@ TiDB バージョン: 7.3.0
     - `INFORMATION_SCHEMA.TIFLASH_REPLICA`テーブルの読み取り権限の問題を修正 [#7795](https://github.com/pingcap/tiflash/issues/7795) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - パーティションテーブル名が間違っている場合にエラーが発生する問題を修正 [#44967](https://github.com/pingcap/tidb/issues/44967) @[River2000i](https://github.com/River2000i)
     - `tidb_enable_dist_task`が有効になっている場合にインデックス作成が停止する問題を修正 [#44440](https://github.com/pingcap/tidb/issues/44440) @[tangenta](https://github.com/tangenta)
-    - BR を使用して `duplicate entry` を含むテーブルを復元する際に発生する `AUTO_ID_CACHE=1` エラーを修正します。 [#44716](https://github.com/pingcap/tidb/issues/44716) @[tiancaiamao](https://github.com/tiancaiamao)
+    - BR を使用して `AUTO_ID_CACHE=1` を含むテーブルを復元する際に発生する `duplicate entry` エラーを修正します。 [#44716](https://github.com/pingcap/tidb/issues/44716) @[tiancaiamao](https://github.com/tiancaiamao)
     - `TRUNCATE TABLE`の実行に要した時間が`ADMIN SHOW DDL JOBS`に表示されるタスク実行時間と一致しない問題を修正しました。 [#44785](https://github.com/pingcap/tidb/issues/44785) @[tangenta](https://github.com/tangenta)
     - TiDBのアップグレード時にメタデータの読み取りに1つのDDLリースよりも時間がかかると、アップグレードが停止する問題を修正しました [#45176](https://github.com/pingcap/tidb/issues/45176) @[zimulala](https://github.com/zimulala)
     - `SELECT CAST(n AS CHAR)`ステートメント内の`n`が負の数の場合、クエリ結果が正しくない問題を修正しました [#44786](https://github.com/pingcap/tidb/issues/44786) @[xhebox](https://github.com/xhebox)
