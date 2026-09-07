@@ -15,7 +15,7 @@ tiup dm template [flags]
 
 このオプションを指定しない場合、出力のデフォルト テンプレートには次のインスタンスが含まれます。
 
-- 3 つの DM-master インスタンス
+- 3 つの DM-masterインスタンス
 - 3 つの DM-workerインスタンス
 - 1つのPrometheusインスタンス
 - 1 つの Grafana インスタンス

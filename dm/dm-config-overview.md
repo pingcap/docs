@@ -31,4 +31,4 @@ summary: このドキュメントでは、データ移行構成ファイルの�
 | :---------- | :-------------------------------------------------------------------------- | :--------------------------------------------------------- |
 | `source-id` | MySQLまたはMariaDBインスタンス、あるいはプライマリ/セカンダリ構造の移行グループを一意に表します。`source-id`の最大長は32です。 | `source_id` / `source.yaml` ;<br/> `task.yaml`中`source-id` |
 | DM-masterID    | DM-masterを一意に表す（ `dm-master.toml`の`master-addr`パラメータによって）                      | `master-addr` / `dm-master.toml`                           |
-| DM-workerID    | DM-workerを一意に表す（ `dm-worker.toml`の`worker-addr`のパラメータによって）                     | `worker-addr` / `dm-worker.toml`                           |
+| DM-worker ID    | DM-workerを一意に表す（ `dm-worker.toml`の`worker-addr`のパラメータによって）                     | `worker-addr` / `dm-worker.toml`                           |

@@ -25,7 +25,7 @@ DM はバージョン 8.0.0 以降では固定秘密キーを使用しなくな�
 
 暗号化と復号化に使用される秘密キーを更新するには、次の手順を実行します。
 
-1. [DM-master構成ファイル](/dm/dm-master-configuration-file.md)のアップデート`secret-key-path` 。
+1. [DM-master構成ファイル](/dm/dm-master-configuration-file.md)の`secret-key-path`を更新します。
 
     > **Note:**
     >
