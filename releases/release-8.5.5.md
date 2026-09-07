@@ -95,7 +95,7 @@ TiDBバージョン：8.5.5
 
 - 分散ジョブ`ADD INDEX`の同時実行性とスループットを動的に変更するサポート [#64947](https://github.com/pingcap/tidb/issues/64947) @[joechenrh](https://github.com/joechenrh)
 
-    TiDB バージョン v8.5.5 より前のバージョンでは、分散実行フレームワーク (DXF) [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)有効になっている場合、実行中の`THREAD`ジョブの`BATCH_SIZE` 、 `MAX_WRITE_SPEED` 、または`ADD INDEX`パラメータの変更はサポートされていません。これらのパラメータを変更するには、実行中の`ADD INDEX`ジョブをキャンセルし、パラメータを再構成してからジョブを再送信する必要がありますが、これは非効率的です。
+    TiDB バージョン v8.5.5 より前のバージョンでは、分散実行フレームワーク (DXF) [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が有効になっている場合、実行中の`THREAD`ジョブの`BATCH_SIZE` 、 `MAX_WRITE_SPEED` 、または`ADD INDEX`パラメータの変更はサポートされていません。これらのパラメータを変更するには、実行中の`ADD INDEX`ジョブをキャンセルし、パラメータを再構成してからジョブを再送信する必要がありますが、これは非効率的です。
 
     バージョン8.5.5以降では、 `ADMIN ALTER DDL JOBS`文を使用して、実行中の分散`ADD INDEX`ジョブのこれらのパラメータを、ジョブを中断することなく、現在のワークロードとパフォーマンス要件に基づいて動的に調整できます。
 

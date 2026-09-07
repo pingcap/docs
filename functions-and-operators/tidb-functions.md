@@ -272,7 +272,7 @@ ORDER BY
 4 rows in set (0.031 sec)
 ```
 
-`TIDB_DECODE_KEY`成功した場合は有効な JSON を返し、デコードに失敗した場合は引数の値を返します。
+`TIDB_DECODE_KEY`が成功した場合は有効な JSON を返し、デコードに失敗した場合は引数の値を返します。
 
 ## TIDB_DECODE_PLAN {#tidb_decode_plan}
 
