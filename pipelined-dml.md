@@ -43,7 +43,7 @@ summary: パイプラインDMLのユースケース、メソッド、制限事�
     - サポートされるステートメントは[自動コミット](/transaction-overview.md#autocommit)だけです。
     - `INSERT` 、 `UPDATE` 、 `REPLACE` 、 `DELETE`のみがサポートされます。
     - ターゲットテーブルには[一時テーブル](/temporary-tables.md)または[キャッシュされたテーブル](/cached-tables.md)含めることはできません。
-    - [外部キー制約](/foreign-key.md)有効になっている場合（ `foreign_key_checks = ON` ）、ターゲットテーブルに外部キー関係を含めることはできません。
+    - [外部キー制約](/foreign-key.md)が有効になっている場合（ `foreign_key_checks = ON` ）、ターゲットテーブルに外部キー関係を含めることはできません。
 - `INSERT IGNORE ... ON DUPLICATE KEY UPDATE`文を実行すると、競合する更新によって`Duplicate entry`エラーが発生する可能性があります。
 
 ## 使用法 {#usage}

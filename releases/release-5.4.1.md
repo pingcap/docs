@@ -58,7 +58,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
     - クエリがエラーを報告したときに CTE がブロックされる可能性があるバグを修正[#31302](https://github.com/pingcap/tidb/issues/31302)
     - 列挙値の Nulleq 関数の誤った範囲計算結果を修正しました [#32428](https://github.com/pingcap/tidb/issues/32428)
     - ChunkRPC を使用してデータをエクスポートする際の TiDB OOM を修正 [#30880](https://github.com/pingcap/tidb/issues/30880) [#31981](https://github.com/pingcap/tidb/issues/31981)
-    - `tidb_restricted_read_only`有効になっているときに`tidb_super_read_only`自動的に有効にならないバグを修正[#31745](https://github.com/pingcap/tidb/issues/31745)
+    - `tidb_restricted_read_only`が有効になっているときに`tidb_super_read_only`が自動的に有効にならないバグを修正[#31745](https://github.com/pingcap/tidb/issues/31745)
     - 照合順序`greatest`または`least`関数が間違った結果を返す問題を修正しました[#31789](https://github.com/pingcap/tidb/issues/31789)
     - データがエスケープ文字で壊れている場合のロードデータpanicを修正 [#31589](https://github.com/pingcap/tidb/issues/31589)
     - インデックスルックアップ結合を使用してクエリを実行するときに発生する`invalid transaction`エラーを修正します [#30468](https://github.com/pingcap/tidb/issues/30468)
@@ -66,7 +66,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
     - TiDBが重複したタスクをTiFlash にディスパッチする可能性があるバグを修正しました [#32814](https://github.com/pingcap/tidb/issues/32814)
     - v4.0 からアップグレードされたクラスターで`all`権限の付与が失敗する可能性がある問題を修正しました [#33588](https://github.com/pingcap/tidb/issues/33588)
     - MySQLバイナリプロトコルでテーブルスキーマを変更した後にプリペアドステートメントを実行するときに発生するセッションpanicを修正しました [#33509](https://github.com/pingcap/tidb/issues/33509)
-    - `tidb_enable_vectorized_expression`有効になっている`compress()`式を持つ SQL 文を実行すると失敗する問題を修正しました[#33397](https://github.com/pingcap/tidb/issues/33397)
+    - `tidb_enable_vectorized_expression`が有効になっている`compress()`式を持つ SQL 文を実行すると失敗する問題を修正しました[#33397](https://github.com/pingcap/tidb/issues/33397)
     - `reArrangeFallback`関数によるCPU使用率の高騰の問題を修正 [#30353](https://github.com/pingcap/tidb/issues/30353)
     - 新しいパーティションが追加されたときにテーブル属性がインデックスされない問題と、パーティションが変更されたときにテーブル範囲情報が更新されない問題を修正しました[#33929](https://github.com/pingcap/tidb/issues/33929)
     - 初期化中のテーブルの`TopN`情報が正しくソートされないバグを修正しました[#34216](https://github.com/pingcap/tidb/issues/34216)
@@ -76,7 +76,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
     - `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルへのクエリ実行時に TiDBサーバーのメモリが発生する問題を修正しました。この問題は、Grafana ダッシュボードでスロークエリをチェックすると発生する可能性があります。 [#33893](https://github.com/pingcap/tidb/issues/33893)
     - `NOWAIT`文で実行中のトランザクションがロックに遭遇してもすぐには戻らないバグを修正 [#32754](https://github.com/pingcap/tidb/issues/32754)
     - `GBK`文字セットと`gbk_bin`照合順序でテーブルを作成するときに失敗するバグを修正しました [#31308](https://github.com/pingcap/tidb/issues/31308)
-    - `enable-new-charset`が`on`の場合、照合順序付きの`GBK`文字セットテーブルの作成が「不明な文字セット」エラーで失敗するバグを修正しました[#31297](https://github.com/pingcap/tidb/issues/31297)
+    - `enable-new-charset`が`on`の場合、照合順序付きの`GBK`文字セットテーブルの作成が「Unknown character set」エラーで失敗するバグを修正しました[#31297](https://github.com/pingcap/tidb/issues/31297)
 
 - TiKV
 
@@ -148,7 +148,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
         - 一部のケースでシーケンスが誤って複製されるバグを修正[#4552](https://github.com/pingcap/tiflow/issues/4552)
         - `Canal-JSON` `string` を誤って処理した場合に発生する可能性のある TiCDC panic問題を修正しました [#4635](https://github.com/pingcap/tiflow/issues/4635)
         - PDリーダーが強制終了した際にTiCDCノードが異常終了するバグを修正[#4248](https://github.com/pingcap/tiflow/issues/4248)
-        - MySQLシンクが`batch-replace-enable`無効になっているときに重複した`replace` SQL文を生成するバグを修正[#4501](https://github.com/pingcap/tiflow/issues/4501)
+        - MySQLシンクが`batch-replace-enable`が無効になっているときに重複した`replace` SQL文を生成するバグを修正[#4501](https://github.com/pingcap/tiflow/issues/4501)
         - `rename tables` DDL によって発生した DML 構造エラーを修正 [#5059](https://github.com/pingcap/tiflow/issues/5059)
         - 所有者が変更され、新しいスケジューラが有効になっている場合（デフォルトでは無効）に、まれにレプリケーションが停止する可能性がある問題を修正しました[#4963](https://github.com/pingcap/tiflow/issues/4963)
         - 新しいスケジューラが有効になっているときにエラー ErrProcessorDuplicateOperations が報告される問題を修正しました (デフォルトでは無効) [#4769](https://github.com/pingcap/tiflow/issues/4769)
@@ -157,7 +157,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
 
     - TiDB Lightning
 
-        - チェックサムエラー「GCの有効期間がトランザクション期間より短い」を修正[#32733](https://github.com/pingcap/tidb/issues/32733)
+        - チェックサムエラー「GC life time is shorter than transaction duration」を修正[#32733](https://github.com/pingcap/tidb/issues/32733)
         - 空のテーブルチェックに失敗した場合、 TiDB Lightning が停止する問題を修正しました。 [#31797](https://github.com/pingcap/tidb/issues/31797)
         - 一部のインポートタスクにソースファイルが含まれていない場合にTiDB Lightningがメタデータスキーマを削除しない可能性があるバグを修正しました[#28144](https://github.com/pingcap/tidb/issues/28144)
         - 事前チェックでローカルディスクリソースとクラスターの可用性がチェックされない問題を修正[#34213](https://github.com/pingcap/tidb/issues/34213)

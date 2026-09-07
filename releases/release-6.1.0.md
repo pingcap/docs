@@ -319,7 +319,7 @@ TiDB バージョン: 6.1.0
 
 - ダッシュボード ページはDM WebUIから削除されます。
 
-- `dispatchers.topic`と`dispatchers.partition`有効になっている場合、TiCDC を v6.1.0 より前のバージョンにダウングレードすることはできません。
+- `dispatchers.topic`と`dispatchers.partition`が有効になっている場合、TiCDC を v6.1.0 より前のバージョンにダウングレードすることはできません。
 
 - Avro プロトコルを使用するTiCDC Changefeed は、v6.1.0 より前のバージョンにダウングレードできません。
 
