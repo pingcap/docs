@@ -56,7 +56,7 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 - ブートストラップのための初期クラスタ構成
 - デフォルト値: `"{name}=http://{advertise-peer-url}"`
-- たとえば、 `name`が「pd」、 `advertise-peer-urls`が`"http://192.168.100.113:2380"`の場合、 `initial-cluster`は`"pd=http://192.168.100.113:2380"`なります。
+- たとえば、 `name`が"pd"、 `advertise-peer-urls`が`"http://192.168.100.113:2380"`の場合、 `initial-cluster`は`"pd=http://192.168.100.113:2380"`なります。
 - 3 つの PD サーバーを起動する必要がある場合、 `initial-cluster`は次のようになります。
 
     ```
