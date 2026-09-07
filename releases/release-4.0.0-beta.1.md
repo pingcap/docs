@@ -20,7 +20,7 @@ TiDB Ansible バージョン: 4.0.0-beta.1
     - PDから読み取った設定項目の動的な変更または更新をサポート [#14750](https://github.com/pingcap/tidb/pull/14750) [#14303](https://github.com/pingcap/tidb/pull/14303) [#14830](https://github.com/pingcap/tidb/pull/14830)
 
 - TiKV
-    - ポイントクエリがコプロセッサーと同じスレッドを使用するかどうかを制御するために、 `readpool.unify-read-pool`設定項目（デフォルトでは`True` ）を追加します。 [#6375](https://github.com/tikv/tikv/pull/6375) [#6401](https://github.com/tikv/tikv/pull/6401) [#6534](https://github.com/tikv/tikv/pull/6534) [#6582](https://github.com/tikv/tikv/pull/6582) [#6585](https://github.com/tikv/tikv/pull/6585) [#6593](https://github.com/tikv/tikv/pull/6593) [#6597](https://github.com/tikv/tikv/pull/6597) [#6677](https://github.com/tikv/tikv/pull/6677)
+    - ポイントクエリがコプロセッサーと同じスレッドを使用するかどうかを制御するために、 `readpool.unify-read-pool`設定項目（デフォルトでは`True`）を追加します。 [#6375](https://github.com/tikv/tikv/pull/6375) [#6401](https://github.com/tikv/tikv/pull/6401) [#6534](https://github.com/tikv/tikv/pull/6534) [#6582](https://github.com/tikv/tikv/pull/6582) [#6585](https://github.com/tikv/tikv/pull/6585) [#6593](https://github.com/tikv/tikv/pull/6593) [#6597](https://github.com/tikv/tikv/pull/6597) [#6677](https://github.com/tikv/tikv/pull/6677)
 
 - PD
     - HTTP APIを最適化して構成マネージャーと互換性を持たせる [#2080](https://github.com/pingcap/pd/pull/2080)
@@ -43,12 +43,12 @@ TiDB Ansible バージョン: 4.0.0-beta.1
     - `Sequence`関数をサポート [#14731](https://github.com/pingcap/tidb/pull/14731) [#14589](https://github.com/pingcap/tidb/pull/14589) [#14674](https://github.com/pingcap/tidb/pull/14674) [#14442](https://github.com/pingcap/tidb/pull/14442) [#14303](https://github.com/pingcap/tidb/pull/14303) [#14830](https://github.com/pingcap/tidb/pull/14830)
     - PDから読み取った設定項目の動的な変更または更新をサポート [#14750](https://github.com/pingcap/tidb/pull/14750) [#14303](https://github.com/pingcap/tidb/pull/14303) [#14830](https://github.com/pingcap/tidb/pull/14830)
     - 負荷分散ポリシーに従って異なるロールからデータを自動的に読み取る機能を追加し、この機能を有効にするために`leader-and-follower`システム変数を追加します[#14761](https://github.com/pingcap/tidb/pull/14761)
-    - `Coercibility`関数追加する [#14739](https://github.com/pingcap/tidb/pull/14739)
-    - パーティションテーブル[#14735](https://github.com/pingcap/tidb/pull/14735) でのTiFlashレプリカの設定をサポート [#14644](https://github.com/pingcap/tidb/pull/14644) [#14713](https://github.com/pingcap/tidb/pull/14713)
+    - `Coercibility`関数を追加する [#14739](https://github.com/pingcap/tidb/pull/14739)
+    - パーティションテーブルでのTiFlashレプリカの設定をサポート [#14735](https://github.com/pingcap/tidb/pull/14735) [#14713](https://github.com/pingcap/tidb/pull/14713) [#14644](https://github.com/pingcap/tidb/pull/14644)
     - `SLOW_QUERY`テーブルの権限チェックを改善 [#14451](https://github.com/pingcap/tidb/pull/14451)
     - SQL結合を使用する際にメモリが不足している場合、中間結果をディスクファイルに自動的に書き込む機能をサポート[#14708](https://github.com/pingcap/tidb/pull/14708) [#14279](https://github.com/pingcap/tidb/pull/14279)
     - `information_schema.PARTITIONS`システムテーブルをクエリしてテーブルパーティションのチェックをサポート [#14347](https://github.com/pingcap/tidb/pull/14347)
-    - `json_objectagg`集計関数追加する [#11154](https://github.com/pingcap/tidb/pull/11154)
+    - `json_objectagg`集計関数を追加する [#11154](https://github.com/pingcap/tidb/pull/11154)
     - 監査ログに拒否された接続試行を記録することをサポート[#14594](https://github.com/pingcap/tidb/pull/14594)
     - 1つのサーバーへの接続数を制御するために、 `max-server-connections`設定項目（デフォルトでは`4096` ）を追加します[#14409](https://github.com/pingcap/tidb/pull/14409)
     - サーバーレベルで複数のストレージエンジンを指定して分離読み取りをサポート [#14440](https://github.com/pingcap/tidb/pull/14440)
@@ -83,7 +83,7 @@ TiDB Ansible バージョン: 4.0.0-beta.1
     - `plan cache`が有効になっている場合の`BatchPointGet`の誤った結果を修正[#14855](https://github.com/pingcap/tidb/pull/14855)
     - タイムゾーンを変更した後にデータが間違ったパーティションテーブルに挿入される問題を修正[#14370](https://github.com/pingcap/tidb/pull/14370)
     - 外部結合の簡素化中に`IsTrue`関数の無効な名前を使用して式を再構築するときに発生するpanicを修正しました [#14515](https://github.com/pingcap/tidb/pull/14515)
-    - `show binding`文不正な権限チェックを修正 [#14443](https://github.com/pingcap/tidb/pull/14443)
+    - `show binding`文の不正な権限チェックを修正 [#14443](https://github.com/pingcap/tidb/pull/14443)
 
 - TiKV
     - TiDBとTiKVの`CAST`関数の不一致な動作を修正[#6463](https://github.com/tikv/tikv/pull/6463) [#6461](https://github.com/tikv/tikv/pull/6461) [#6459](https://github.com/tikv/tikv/pull/6459) [#6474](https://github.com/tikv/tikv/pull/6474) [#6492](https://github.com/tikv/tikv/pull/6492) [#6569](https://github.com/tikv/tikv/pull/6569)

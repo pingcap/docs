@@ -270,7 +270,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/changefeeds?state=normal
 上記の返された結果のフィールドは次のように説明されます。
 
 - id: レプリケーションタスクの ID。
-- 状態: レプリケーションタスクの現在の状態[州](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer) 。
+- 状態: レプリケーションタスクの現在の[状態](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer)。
 - checkpoint_tso: レプリケーションタスクの現在のチェックポイントの TSO 表現。
 - checkpoint_time: レプリケーションタスクの現在のチェックポイントのフォーマットされた時間表現。
 - error: レプリケーションタスクのエラー情報。
