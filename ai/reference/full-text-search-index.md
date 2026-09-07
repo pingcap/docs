@@ -1,7 +1,6 @@
 ---
 title: Full-Text Search Index
 summary: Learn how to create and manage full-text indexes in TiDB, including syntax modes, column attributes, parsers, and DDL restrictions.
-aliases: ['/tidb/stable/full-text-search-index/','/tidbcloud/full-text-search-index/']
 ---
 
 # Full-Text Search Index

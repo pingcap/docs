@@ -1,7 +1,6 @@
 ---
 title: Full-Text Search Limitations
 summary: Learn the limitations of full-text search in TiDB, including index definition, filter pushdown, query syntax, and DDL restrictions.
-aliases: ['/tidb/stable/full-text-search-limitations/','/tidbcloud/full-text-search-limitations/']
 ---
 
 # Full-Text Search Limitations

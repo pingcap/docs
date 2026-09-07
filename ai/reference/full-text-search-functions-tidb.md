@@ -1,10 +1,9 @@
 ---
-title: Full-Text Search Functions
+title: TiDB Full-Text Search Functions
 summary: Learn the full-text search functions in TiDB, including query syntax, multi-column search, parser selection, and index selection hints.
-aliases: ['/tidb/stable/full-text-search-functions/','/tidbcloud/full-text-search-functions/']
 ---
 
-# Full-Text Search Functions
+# TiDB Full-Text Search Functions
 
 This document describes the `FTS_MATCH_WORD()` function for full-text search in TiDB, including multi-column search, query semantics with different parsers, parser selection, and index selection hints.
 
