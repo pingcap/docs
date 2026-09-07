@@ -30,7 +30,7 @@ summary: このドキュメントを115～145文字で要約してください�
 
 ここで基本的な動作原理を説明したり、その原理を上記のコンポーネント紹介に統合したりすることもできます。
 
-### L3 見出し（オプション、例："xxxコンポーネント"） {#l3-heading-optional-e-g-xxx-component}
+### L3 見出し（オプション、例：「xxxコンポーネント」） {#l3-heading-optional-e-g-xxx-component}
 
 コンポーネントが複雑な場合は、このように別のセクションで詳しく説明できます。
 
@@ -38,7 +38,7 @@ summary: このドキュメントを115～145文字で要約してください�
 
 xxx
 
-## L2 見出し (オプション、例:"主な機能/制限事項") {#l2-heading-optional-e-g-key-features-limitations}
+## L2 見出し (オプション、例:「主な機能/制限事項」) {#l2-heading-optional-e-g-key-features-limitations}
 
 2 番目の L2 見出しでは、主な機能、使用シナリオ、制限など、ユーザーが事前に知っておく必要のある基本情報を紹介します。
 
