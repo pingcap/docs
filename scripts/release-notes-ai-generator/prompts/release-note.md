@@ -31,7 +31,7 @@ Return a no-release-note verdict for internal-only changes, including:
 
 If a PR is mostly internal but the outcome is user-visible, describe the outcome and omit implementation details. If the only user-facing effect is indirect or speculative, lean toward `not_needed`.
 
-Do not classify a security dependency update as internal-only solely because it changes only dependency manifests or lockfiles. Return `not_needed` if the dependency is used only by tests, development or build tooling, or other unshipped code, or if the vulnerability does not affect the shipped component.
+Do not classify a security dependency update as internal-only solely because it changes only dependency manifests or lockfiles. Return `not_needed` if the dependency is used only by tests or other unshipped code, or if the vulnerability does not affect the shipped component.
 
 First, use all available context to decide whether the change needs a release note. If it does, classify it as follows:
 
