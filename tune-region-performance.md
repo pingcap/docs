@@ -11,7 +11,7 @@ summary: リージョンサイズを調整してリージョンのパフォー�
 
 TiKVは自動的に[最下層のデータを分割する](/best-practices/tidb-best-practices.md#data-sharding)データをキー範囲に基づいて複数のリージョンに分割します。リージョンのサイズがしきい値を超えると、TiKVはそれを2つ以上のリージョンに分割します。
 
-大規模なデータセットが関係するシナリオでは、リージョンサイズが比較的小さい場合、TiKV のリージョンが多すぎる可能性があり、リソースの消費量が増加し、 [パフォーマンスの回帰](/best-practices/massive-regions-best-practices.md#performance-problem)発生します。
+大規模なデータセットが関係するシナリオでは、リージョンサイズが比較的小さい場合、TiKV のリージョンが多すぎる可能性があり、リソースの消費量が増加し、 [パフォーマンスの回帰](/best-practices/massive-regions-best-practices.md#performance-problem)が発生します。
 
 > **Note:**
 >

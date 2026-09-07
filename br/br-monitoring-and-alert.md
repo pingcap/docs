@@ -33,7 +33,7 @@ summary: このドキュメントでは、ログバックアップの監視、�
 | **tikv_log_backup_initial_scan_reason**                | カウンタ   | 初期スキャンがトリガーされた理由の統計。主な理由は、リーダーの交代またはリージョンバージョンの変更です。<br/> `reason :: {"leader-changed", "region-changed", "retry"}`                        |
 | **tikv_log_backup_event_handle_duration_sec**          | ヒストグラム | KVイベントの処理時間`tikv_log_backup_on_event_duration_seconds`と比較すると、この指標には内部変換の期間も含まれます。<br/> `stage :: {"to_stream_event", "save_to_temp_file"}` |
 | **tikv_log_backup_handle_kv_batch**                    | ヒストグラム | Raftstoreによって送信された KV ペア バッチのサイズのリージョンレベルの統計。                                                                                                 |
-| **tikv_log_backup_initial_scan_disk_read**             | カウンタ   | 初期スキャン中にディスクから読み取られたデータのサイズ。Linuxでは、この情報はprocfsから取得され、ブロックデバイスから実際に読み取られたデータのサイズです。このメトリックには、設定項目`initial-scan-rate-limit`適用されます。          |
+| **tikv_log_backup_initial_scan_disk_read**             | カウンタ   | 初期スキャン中にディスクから読み取られたデータのサイズ。Linuxでは、この情報はprocfsから取得され、ブロックデバイスから実際に読み取られたデータのサイズです。このメトリックには、設定項目`initial-scan-rate-limit`が適用されます。          |
 | **tikv_log_backup_incremental_scan_bytes**             | ヒストグラム | 初期スキャン中に実際に生成されたKVペアのサイズ。圧縮とリードアンプリフィケーションのため、この値は`tikv_log_backup_initial_scan_disk_read`と異なる場合があります。                                     |
 | **tikv_log_backup_skip_kv_count**                      | カウンタ   | バックアップに役立たないため、ログバックアップ中にスキップされるRaftイベントの数。                                                                                               |
 | **tikv_log_backup_errors**                             | カウンタ   | ログバックアップ中に再試行または無視できるエラー。<br/> `type :: ErrorType`                                                                                        |

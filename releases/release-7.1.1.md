@@ -61,7 +61,7 @@ TiDB バージョン: 7.1.1
     - メモリトラッカーの潜在的なメモリリーク問題を修正 [#44612](https://github.com/pingcap/tidb/issues/44612) @[wshwsh12](https://github.com/wshwsh12)
     - バッチコプロセッサの再試行によって誤ったリージョン情報が生成される可能性があり、クエリが失敗する問題を修正しました[#44622](https://github.com/pingcap/tidb/issues/44622) @[windtalker](https://github.com/windtalker)
     - インデックススキャンにおける潜在的なデータ競合問題を修正 [#45126](https://github.com/pingcap/tidb/issues/45126) @[wshwsh12](https://github.com/wshwsh12)
-    - `tidb_enable_parallel_apply`有効になっている場合、MPP モードでのクエリ結果が正しくない問題を修正[#45299](https://github.com/pingcap/tidb/issues/45299) @[windtalker](https://github.com/windtalker)
+    - `tidb_enable_parallel_apply`が有効になっている場合、MPP モードでのクエリ結果が正しくない問題を修正[#45299](https://github.com/pingcap/tidb/issues/45299) @[windtalker](https://github.com/windtalker)
     - `indexMerge`のクエリが強制終了されたときに発生するハングアップの問題を修正しました [#45279](https://github.com/pingcap/tidb/issues/45279) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - 統計情報におけるSQL実行詳細のメモリ消費量が多すぎると、極端なケースでTiDB OOMが発生する問題を修正[#44047](https://github.com/pingcap/tidb/issues/44047) @[wshwsh12](https://github.com/wshwsh12)
     - `FormatSQL()`メソッドが入力の非常に長い SQL 文を適切に切り捨てることができない問題を修正しました。 [#44542](https://github.com/pingcap/tidb/issues/44542) @[hawkingrei](https://github.com/hawkingrei)
@@ -94,7 +94,7 @@ TiDB バージョン: 7.1.1
     - `PREPARE stmt FROM "ANALYZE TABLE xxx"` `tidb_mem_quota_query` で殺される可能性がある問題を修正 [#44320](https://github.com/pingcap/tidb/issues/44320) @[chrysan](https://github.com/chrysan)
     - 空の`processInfo` によって引き起こされるpanic問題を修正 [#43829](https://github.com/pingcap/tidb/issues/43829) @[zimulala](https://github.com/zimulala)
     - `ON UPDATE`文が主キーを正しく更新しない場合にデータとインデックスが不整合になる問題を修正しました [#44565](https://github.com/pingcap/tidb/issues/44565) @[zyguan](https://github.com/zyguan)
-    - `tidb_opt_agg_push_down`有効になっている場合にクエリが誤った結果を返す可能性がある問題を修正[#44795](https://github.com/pingcap/tidb/issues/44795) @[AilinKid](https://github.com/AilinKid)
+    - `tidb_opt_agg_push_down`が有効になっている場合にクエリが誤った結果を返す可能性がある問題を修正[#44795](https://github.com/pingcap/tidb/issues/44795) @[AilinKid](https://github.com/AilinKid)
     - CTEと相関サブクエリを同時に使用すると、クエリ結果が不正確になったり、panicが発生する可能性がある問題を修正[#44649](https://github.com/pingcap/tidb/issues/44649) [#38170](https://github.com/pingcap/tidb/issues/38170) [#44774](https://github.com/pingcap/tidb/issues/44774) @[winoros](https://github.com/winoros) @[guo-shaoge](https://github.com/guo-shaoge)
     - ロールバック状態でDDLタスクをキャンセルすると、関連するメタデータにエラーが発生する問題を修正しました [#44143](https://github.com/pingcap/tidb/issues/44143) @[wjhuang2016](https://github.com/wjhuang2016)
     - `UPDATE`文を実行すると外部キー制約のチェックによりエラーが発生する問題を修正しました [#44848](https://github.com/pingcap/tidb/issues/44848) @[crazycs520](https://github.com/crazycs520)
@@ -136,3 +136,22 @@ TiDB バージョン: 7.1.1
     - TiDB Data Migration (DM)
 
         - 移行対象のテーブル内の一意インデックスに空の列が含まれている場合にDM-masterが異常終了する問題を修正[#9247](https://github.com/pingcap/tiflow/issues/9247) @[lance6716](https://github.com/lance6716)
+
+    - TiDB Lightning
+
+        - TiDB LightningとPD間の接続失敗を再試行できない問題を修正し、インポート成功率を向上 [#43400](https://github.com/pingcap/tidb/issues/43400) @[lichunzhu](https://github.com/lichunzhu)
+        - TiKV にデータを書き込むときに、スペース不足エラーが返されるときに、 TiDB Lightning がエラーメッセージを正しく表示しない問題を修正しました。 [#44733](https://github.com/pingcap/tidb/issues/44733) @[lance6716](https://github.com/lance6716)
+        - チェックサム操作中に`Region is unavailable`エラーが報告される問題を修正 [#45462](https://github.com/pingcap/tidb/issues/45462) @[D3Hunter](https://github.com/D3Hunter)
+        - `experimental.allow-expression-index`が有効でデフォルト値が UUID の場合に発生するTiDB Lightning panic問題を修正しました [#44497](https://github.com/pingcap/tidb/issues/44497) @[lichunzhu](https://github.com/lichunzhu)
+        - 競合条件によりディスククォータが不正確になる可能性がある問題を修正 [#44867](https://github.com/pingcap/tidb/issues/44867) @[D3Hunter](https://github.com/D3Hunter)
+        - 論理インポートモードで、インポート中に下流のテーブルを削除すると、 TiDB Lightningメタデータが時間で更新されない可能性がある問題を修正しました。 [#44614](https://github.com/pingcap/tidb/issues/44614) @[dsdashun](https://github.com/dsdashun)
+
+    - Dumpling
+
+        - クエリ結果セット`--sql`が空の場合にDumpling が異常終了する問題を修正[#45200](https://github.com/pingcap/tidb/issues/45200) @[D3Hunter](https://github.com/D3Hunter)
+
+    - TiDB Binlog
+
+        - PDアドレスの完全な変更後、TiDBが`SHOW PUMP STATUS`または`SHOW DRAINER STATUS`経由でBinlogノードステータスを正しく照会できない問題を修正しました。 [#42643](https://github.com/pingcap/tidb/issues/42643) @[lichunzhu](https://github.com/lichunzhu)
+        - PD アドレスの完全な変更後に TiDB がバイナリログを書き込めなくなる問題を修正しました [#42643](https://github.com/pingcap/tidb/issues/42643) @[lance6716](https://github.com/lance6716)
+        - etcdクライアントが初期化中に最新のノード情報を自動的に同期しない問題を修正[#1236](https://github.com/pingcap/tidb-binlog/issues/1236) @[lichunzhu](https://github.com/lichunzhu)

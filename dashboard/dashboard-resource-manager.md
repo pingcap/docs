@@ -57,7 +57,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
     - 時間ウィンドウの範囲が 10分から 24時間の範囲外の場合、次のエラーが表示されます`ERROR 1105 (HY000): the duration of calibration is too short, which could lead to inaccurate output. Please make the duration between 10m0s and 24h0m0s` 。
 
-    - [実際の作業負荷に基づく容量推定](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)機能の監視メトリックには、 `tikv_cpu_quota` 、 `tidb_server_maxprocs` 、 `resource_manager_resource_unit` 、 `process_cpu_usage`含まれます。CPUクォータ監視データが空の場合、対応する監視メトリック名（例： `Error 1105 (HY000): There is no CPU quota metrics, metrics 'tikv_cpu_quota' is empty` ）にエラーが発生します。
+    - [実際の作業負荷に基づく容量推定](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)機能の監視メトリックには、 `tikv_cpu_quota` 、 `tidb_server_maxprocs` 、 `resource_manager_resource_unit` 、 `process_cpu_usage`が含まれます。CPUクォータ監視データが空の場合、対応する監視メトリック名（例： `Error 1105 (HY000): There is no CPU quota metrics, metrics 'tikv_cpu_quota' is empty` ）にエラーが発生します。
 
     - 時間枠内のワークロードが低すぎる場合、または`resource_manager_resource_unit`と`process_cpu_usage`監視データが欠落している場合は、エラーが報告されます`Error 1105 (HY000): The workload in selected time window is too low, with which TiDB is unable to reach a capacity estimation; please select another time window with higher workload, or calibrate resource by hardware instead`また、TiKVはmacOSのCPU使用率を監視しないため、実際のワークロードに基づく容量推定をサポートしておらず、このエラーも報告されます。
 

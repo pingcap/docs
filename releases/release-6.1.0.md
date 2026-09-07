@@ -319,7 +319,7 @@ TiDB バージョン: 6.1.0
 
 - ダッシュボード ページはDM WebUIから削除されます。
 
-- `dispatchers.topic`と`dispatchers.partition`有効になっている場合、TiCDC を v6.1.0 より前のバージョンにダウングレードすることはできません。
+- `dispatchers.topic`と`dispatchers.partition`が有効になっている場合、TiCDC を v6.1.0 より前のバージョンにダウングレードすることはできません。
 
 - Avro プロトコルを使用するTiCDC Changefeed は、v6.1.0 より前のバージョンにダウングレードできません。
 
@@ -428,3 +428,11 @@ TiDB バージョン: 6.1.0
         - DM WebUI のオフライン オプションとその他の使用上の問題を修正しました [#4993](https://github.com/pingcap/tiflow/issues/4993)
         - アップストリームでGTIDが空の場合に増分タスクの開始に失敗する問題を修正 [#3731](https://github.com/pingcap/tiflow/issues/3731)
         - 空の設定により dm-master がpanicを起こす可能性がある問題を修正[#3732](https://github.com/pingcap/tiflow/issues/3732)
+
+    - TiDB Lightning
+
+        - 事前チェックでローカルディスクリソースとクラスターの可用性がチェックされない問題を修正[#34213](https://github.com/pingcap/tidb/issues/34213)
+        - スキーマルーティングが正しくない問題を修正しました [#33381](https://github.com/pingcap/tidb/issues/33381)
+        - TiDB LightningがパニックになったときにPD構成が正しく復元されない問題を修正[#31733](https://github.com/pingcap/tidb/issues/31733)
+        - `auto_increment`列の範囲外のデータによって Local-backend のインポートが失敗する問題を修正しました [#27937](https://github.com/pingcap/tidb/issues/27937)
+        - `auto_random`または`auto_increment`列が null の場合に local backend のインポートが失敗する問題を修正しました [#34208](https://github.com/pingcap/tidb/issues/34208)

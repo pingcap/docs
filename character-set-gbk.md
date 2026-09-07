@@ -7,7 +7,7 @@ summary: このドキュメントでは、GBK 文字セットの TiDB サポー�
 
 TiDBはv5.4.0以降、GBK文字セットをサポートしています。このドキュメントでは、TiDBのGBK文字セットのサポートと互換性に関する情報を提供します。
 
-TiDB v6.0.0以降、デフォルトで[照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)有効になります。TiDB GBK文字セットのデフォルトの照合照合順序は`gbk_chinese_ci`で、これはMySQLと一致しています。
+TiDB v6.0.0以降、デフォルトで[照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)が有効になります。TiDB GBK文字セットのデフォルトの照合照合順序は`gbk_chinese_ci`で、これはMySQLと一致しています。
 
 ```sql
 SHOW CHARACTER SET WHERE CHARSET = 'gbk';

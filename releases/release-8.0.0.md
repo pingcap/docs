@@ -517,7 +517,7 @@ TiDB バージョン: 8.0.0
         - 一部の極端なケースでフルバックアップがピアを見つけられなかった際にTiKVがパニックを起こす問題を修正 [#16394](https://github.com/tikv/tikv/issues/16394) @[Leavrth](https://github.com/Leavrth)
         - 同じノード上の TiKV IP アドレスを変更した後にログのバックアップが停止する問題を修正 [#50445](https://github.com/pingcap/tidb/issues/50445) @[3pointer](https://github.com/3pointer)
         - S3からファイルコンテンツを読み取る際にエラーが発生した場合にBRが再試行できない問題を修正 [#49942](https://github.com/pingcap/tidb/issues/49942) @[Leavrth](https://github.com/Leavrth)
-        - データ復元失敗後にチェックポイントから再開するとエラー`the target cluster is not fresh`発生する問題を修正 [#50232](https://github.com/pingcap/tidb/issues/50232) @[Leavrth](https://github.com/Leavrth)
+        - データ復元失敗後にチェックポイントから再開するとエラー`the target cluster is not fresh`が発生する問題を修正 [#50232](https://github.com/pingcap/tidb/issues/50232) @[Leavrth](https://github.com/Leavrth)
         - ログバックアップタスクを停止すると TiDB がクラッシュする問題を修正 [#50839](https://github.com/pingcap/tidb/issues/50839) @[YuJuncen](https://github.com/YuJuncen)
         - TiKVノードにリーダーがいないためにデータ復元が遅くなる問題を修正 [#50566](https://github.com/pingcap/tidb/issues/50566) @[Leavrth](https://github.com/Leavrth)
         - `--filter`オプションを指定した後でも完全復元ではターゲットクラスターが空である必要がある問題を修正 [#51009](https://github.com/pingcap/tidb/issues/51009) @[3pointer](https://github.com/3pointer)

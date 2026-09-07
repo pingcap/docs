@@ -67,10 +67,10 @@ TiDBバージョン: 6.5.12
     - TiDBの内部コルーチンで発生する可能性のあるデータ競合問題を修正しました [#56053](https://github.com/pingcap/tidb/issues/56053) @[fishiu](https://github.com/fishiu) [#57798](https://github.com/pingcap/tidb/issues/57798) @[tiancaiamao](https://github.com/tiancaiamao)
     - クエリに利用可能なインデックスマージ実行計画がある場合に`read_from_storage`ヒントが有効にならない可能性がある問題を修正しました [#56217](https://github.com/pingcap/tidb/issues/56217) @[AilinKid](https://github.com/AilinKid)
     - エイリアスを持つマルチテーブル`DELETE`文に対して実行計画 バインディングを作成できない問題を修正しました。 [#56726](https://github.com/pingcap/tidb/issues/56726) @[hawkingrei](https://github.com/hawkingrei)
-    - 異常終了時に`INDEX_HASH_JOIN`がパニックを起こす可能性がある問題を修正しました [#54055](https://github.com/pingcap/tidb/issues/54055) @[wshwsh12](https://github.com/wshwsh12)
+    - 異常終了時に`INDEX_HASH_JOIN`がハングアップする可能性がある問題を修正しました [#54055](https://github.com/pingcap/tidb/issues/54055) @[wshwsh12](https://github.com/wshwsh12)
     - 2人のDDL所有者が同時に存在する可能性がある問題を修正[#54689](https://github.com/pingcap/tidb/issues/54689) @[joccau](https://github.com/joccau)
     - `information_schema.cluster_slow_query`テーブルをクエリするときに、時間フィルターが追加されていない場合、最新のスローログファイルのみがクエリされる問題を修正しました[#56100](https://github.com/pingcap/tidb/issues/56100) @[crazycs520](https://github.com/crazycs520)
-    - 一意インデックスを追加するときに`duplicate entry`発生する可能性がある問題を修正 [#56161](https://github.com/pingcap/tidb/issues/56161) @[tangenta](https://github.com/tangenta)
+    - 一意インデックスを追加するときに`duplicate entry`が発生する可能性がある問題を修正 [#56161](https://github.com/pingcap/tidb/issues/56161) @[tangenta](https://github.com/tangenta)
     - 特定の型変換エラーでエラーメッセージが正しく表示されない問題を修正 [#41730](https://github.com/pingcap/tidb/issues/41730) @[hawkingrei](https://github.com/hawkingrei)
     - `VIEW`で定義されたCTEが誤ってインライン化される問題を修正[#56582](https://github.com/pingcap/tidb/issues/56582) @[elsa0520](https://github.com/elsa0520)
     - `UPDATE`文が`ENUM`型の値を誤って更新する問題を修正しました [#56832](https://github.com/pingcap/tidb/issues/56832) @[xhebox](https://github.com/xhebox)
@@ -170,3 +170,16 @@ TiDBバージョン: 6.5.12
         - 複数の DM-masterノードが同時にリーダーになり、データの不整合が発生する可能性がある問題を修正しました[#11602](https://github.com/pingcap/tiflow/issues/11602) @[GMHDBJD](https://github.com/GMHDBJD)
         - パスワードの長さが19文字を超えるとMySQL 8.0への接続に失敗する問題を修正[#11603](https://github.com/pingcap/tiflow/issues/11603) @[fishiu](https://github.com/fishiu)
         - TLSと`shard-mode`の両方が設定されている場合に`start-task`の事前チェックが失敗する問題を修正 [#11842](https://github.com/pingcap/tiflow/issues/11842) @[sunxiaoguang](https://github.com/sunxiaoguang)
+
+    - TiDB Lightning
+
+        - ログが適切に感度調整されない問題を修正[#59086](https://github.com/pingcap/tidb/issues/59086) @[GMHDBJD](https://github.com/GMHDBJD)
+        - エンコードフェーズでのキャッシュ不足によりパフォーマンスが低下する問題を修正[#56705](https://github.com/pingcap/tidb/issues/56705) @[OliverS929](https://github.com/OliverS929)
+        - 高同時実行シナリオでクラウドストレージからデータをインポートするときにパフォーマンスが低下する問題を修正[#57413](https://github.com/pingcap/tidb/issues/57413) @[xuanyu66](https://github.com/xuanyu66)
+        - メタデータ更新中に`Lock wait timeout`エラーが発生した場合にTiDB Lightning が自動的に再試行しない問題を修正しました[#53042](https://github.com/pingcap/tidb/issues/53042) @[guoshouyan](https://github.com/guoshouyan)
+        - TiDB LightningがTiKV から送信されたサイズ超過のメッセージを受信できない問題を修正しました [#56114](https://github.com/pingcap/tidb/issues/56114) @[fishiu](https://github.com/fishiu)
+        - TiDB Lightning を使用してデータをインポートするときにエラーレポートの出力が切り捨てられる問題を修正しました [#58085](https://github.com/pingcap/tidb/issues/58085) @[lance6716](https://github.com/lance6716)
+
+    - Dumpling
+
+        - Google Cloud Storage (GCS) から 503 エラーを受信したときにDumpling が適切に再試行できない問題を修正しました [#56127](https://github.com/pingcap/tidb/issues/56127) @[OliverS929](https://github.com/OliverS929)

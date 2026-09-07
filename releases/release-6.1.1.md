@@ -117,7 +117,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 - PD
 
     - クラスタノードのラベル構成が無効な場合にオンラインの進行状況が不正確になる問題を修正[#5234](https://github.com/tikv/pd/issues/5234) @[rleungx](https://github.com/rleungx)
-    - `enable-forwarding`有効になっているときに gRPC がエラーを不適切に処理する問題によって発生する PD パニックを修正[#5373](https://github.com/tikv/pd/issues/5373) @[bufferflies](https://github.com/bufferflies)
+    - `enable-forwarding`が有効になっているときに gRPC がエラーを不適切に処理する問題によって発生する PD パニックを修正[#5373](https://github.com/tikv/pd/issues/5373) @[bufferflies](https://github.com/bufferflies)
     - `/regions/replicated`間違ったステータスを返す可能性がある問題を修正しました [#5095](https://github.com/tikv/pd/issues/5095) @[rleungx](https://github.com/rleungx)
 
 - TiFlash
@@ -149,3 +149,30 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
         - リレーがエラーに遭遇したときの goroutine リークを修正 [#6193](https://github.com/pingcap/tiflow/issues/6193) @[lance6716](https://github.com/lance6716)
         - DB Conn を取得する際に DM-workerがスタックする可能性がある問題を修正しました [#3733](https://github.com/pingcap/tiflow/issues/3733) @[lance6716](https://github.com/lance6716)
         - TiDBがIPv6ホストを使用するとDMが起動に失敗する問題を修正 [#6249](https://github.com/pingcap/tiflow/issues/6249) @[D3Hunter](https://github.com/D3Hunter)
+
+    - TiCDC
+
+        - 互換性のある最大バージョン番号の誤りを修正 [#6039](https://github.com/pingcap/tiflow/issues/6039) @[Rustin170506](https://github.com/Rustin170506)
+        - cdc サーバーが完全に起動する前に HTTP リクエストを受信した場合にpanicを引き起こす可能性があるバグを修正しました [#5639](https://github.com/pingcap/tiflow/issues/5639) @[asddongmen](https://github.com/asddongmen)
+        - チェンジフィード同期ポイントが有効な場合の DDL シンクpanic問題を修正[#4934](https://github.com/pingcap/tiflow/issues/4934) @[asddongmen](https://github.com/asddongmen)
+        - 同期ポイントが有効な場合に、一部のシナリオでチェンジフィードがスタックする問題を修正[#6827](https://github.com/pingcap/tiflow/issues/6827) @[hicqu](https://github.com/hicqu)
+        - CDCサーバーの再起動後にchangefeed APIが正常に動作しないバグを修正[#5837](https://github.com/pingcap/tiflow/issues/5837) @[asddongmen](https://github.com/asddongmen)
+        - ブラックホールシンクのデータ競合問題を修正 [#6206](https://github.com/pingcap/tiflow/issues/6206) @[asddongmen](https://github.com/asddongmen)
+        - `enable-old-value = false`を設定すると TiCDC panic問題を修正しました [#6198](https://github.com/pingcap/tiflow/issues/6198) @[Rustin170506](https://github.com/Rustin170506)
+        - 再実行ログ機能が有効になっている場合のデータ一貫性の問題を修正[#6189](https://github.com/pingcap/tiflow/issues/6189) [#6368](https://github.com/pingcap/tiflow/issues/6368) [#6277](https://github.com/pingcap/tiflow/issues/6277) [#6456](https://github.com/pingcap/tiflow/issues/6456) [#6695](https://github.com/pingcap/tiflow/issues/6695) [#6764](https://github.com/pingcap/tiflow/issues/6764) [#6859](https://github.com/pingcap/tiflow/issues/6859) @[asddongmen](https://github.com/asddongmen)
+        - 非同期的に再実行イベントを書き込むことで、再実行ログのパフォーマンス低下を修正[#6011](https://github.com/pingcap/tiflow/issues/6011) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - MySQLシンクがIPv6アドレスに接続できない問題を修正 [#6135](https://github.com/pingcap/tiflow/issues/6135) @[Rustin170506](https://github.com/Rustin170506)
+
+    - Backup & Restore (BR)
+
+        - RawKVモードでBRが`ErrRestoreTableIDMismatch`報告するバグを修正 [#35279](https://github.com/pingcap/tidb/issues/35279) @[3pointer](https://github.com/3pointer)
+        - 大規模クラスタバックアップでの S3 レート制限によるバックアップ失敗を修正するために、バックアップデータディレクトリ構造を調整します。 [#30087](https://github.com/pingcap/tidb/issues/30087) @[MoCuishle28](https://github.com/MoCuishle28)
+        - サマリーログのバックアップ時間の誤りを修正 [#35553](https://github.com/pingcap/tidb/issues/35553) @[ixuh12](https://github.com/ixuh12)
+
+    - Dumpling
+
+        - GetDSNがIPv6 をサポートしない問題を修正 [#36112](https://github.com/pingcap/tidb/issues/36112) @[D3Hunter](https://github.com/D3Hunter)
+
+    - TiDB Binlog
+
+        - `compressor` `gzip` に設定されている場合に、 Drainer がPumpにリクエストを正しく送信できないバグを修正しました。 [#1152](https://github.com/pingcap/tidb-binlog/issues/1152) @[lichunzhu](https://github.com/lichunzhu)

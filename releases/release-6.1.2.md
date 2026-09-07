@@ -82,3 +82,16 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
         - 高速/完全バリデータで DM タスクを実行した後に DM-workerがデッドロックエラーをトリガーする問題を修正しました [#7241](https://github.com/pingcap/tiflow/issues/7241) @[buchuitoudegou](https://github.com/buchuitoudegou)
         - DMが`Specified key was too long`エラーを報告する問題を修正 [#5315](https://github.com/pingcap/tiflow/issues/5315) @[lance6716](https://github.com/lance6716)
         - レプリケーション中に latin1 データが破損する可能性がある問題を修正しました [#7028](https://github.com/pingcap/tiflow/issues/7028) @[lance6716](https://github.com/lance6716)
+
+    - TiCDC
+
+        - CDCサーバーが完全に起動する前に HTTP 要求を受信すると、CDCサーバーがpanicする可能性がある問題を修正しました[#6838](https://github.com/pingcap/tiflow/issues/6838) @[asddongmen](https://github.com/asddongmen)
+        - アップグレード中のログ フラッディング問題を修正 [#7235](https://github.com/pingcap/tiflow/issues/7235) @[Rustin170506](https://github.com/Rustin170506)
+        - changefeed の redo ログファイルが誤って削除される可能性がある問題を修正[#6413](https://github.com/pingcap/tiflow/issues/6413) @[Rustin170506](https://github.com/Rustin170506)
+        - etcdトランザクションでコミットされる操作が多すぎるとTiCDCが利用できなくなる問題を修正[#7131](https://github.com/pingcap/tiflow/issues/7131) @[Rustin170506](https://github.com/Rustin170506)
+        - REDOログ内の非再入可能DDL文が2回実行されるとデータの不整合が発生する可能性がある問題を修正[#6927](https://github.com/pingcap/tiflow/issues/6927) @[hicqu](https://github.com/hicqu)
+
+    - Backup & Restore (BR)
+
+        - 復元中に同時実行が大きすぎる設定になっているため、リージョンのバランスが取れていない問題を修正しました[#37549](https://github.com/pingcap/tidb/issues/37549) @[3pointer](https://github.com/3pointer)
+        - 外部ストレージの認証キーに特殊文字が含まれている場合にバックアップと復元が失敗する可能性がある問題を修正しました [#37469](https://github.com/pingcap/tidb/issues/37469) @[MoCuishle28](https://github.com/MoCuishle28)

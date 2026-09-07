@@ -138,7 +138,7 @@ TiDB バージョン: 7.1.6
     - TiDBの同期的な統計読み込みメカニズムが空の統計の読み込みを無期限に再試行し、 `fail to get stats version for this histogram` log を出力問題を修正しました。 [#52657](https://github.com/pingcap/tidb/issues/52657) @[hawkingrei](https://github.com/hawkingrei)
     - 最初の引数が`month`で、2番目の引数が負の場合に`TIMESTAMPADD()`関数が無限ループに入る問題を修正しました。 [#54908](https://github.com/pingcap/tidb/issues/54908) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - `tidb_mem_quota_analyze`が有効になっていて、統計の更新に使用されるメモリがの制限を超えると、TiDB がクラッシュする可能性がある問題を修正しました。 [#52601](https://github.com/pingcap/tidb/issues/52601) @[hawkingrei](https://github.com/hawkingrei)
-    - 一意インデックスを追加するときに`duplicate entry`発生する可能性がある問題を修正 [#56161](https://github.com/pingcap/tidb/issues/56161) @[tangenta](https://github.com/tangenta)
+    - 一意インデックスを追加するときに`duplicate entry`が発生する可能性がある問題を修正 [#56161](https://github.com/pingcap/tidb/issues/56161) @[tangenta](https://github.com/tangenta)
     - 情報スキーマキャッシュミスにより、古い読み取りのクエリレイテンシーが増加する問題を修正しました。 [#53428](https://github.com/pingcap/tidb/issues/53428) @[crazycs520](https://github.com/crazycs520)
     - GlobalStatsの`Distinct_count`情報が正しくない可能性がある問題を修正しました[#53752](https://github.com/pingcap/tidb/issues/53752) @[hawkingrei](https://github.com/hawkingrei)
     - `SELECT DISTINCT CAST(col AS DECIMAL), CAST(col AS SIGNED) FROM ...`クエリを実行すると誤った結果が返される可能性がある問題を修正[#53726](https://github.com/pingcap/tidb/issues/53726) @[hawkingrei](https://github.com/hawkingrei)
@@ -284,3 +284,20 @@ TiDB バージョン: 7.1.6
         - `go-mysql` にアップグレードして接続ブロックの問題を修正しました [#11041](https://github.com/pingcap/tiflow/issues/11041) @[D3Hunter](https://github.com/D3Hunter)
         - インデックスの長さがデフォルト値の`max-index-length` を超えるとデータレプリケーションが中断される問題を修正しました [#11459](https://github.com/pingcap/tiflow/issues/11459) @[michaelmdeng](https://github.com/michaelmdeng)
         - LISTパーティションテーブルの`ALTER TABLE ... DROP PARTITION`文を複製するときにDMがエラーを返す問題を修正しました。 [#54760](https://github.com/pingcap/tidb/issues/54760) @[lance6716](https://github.com/lance6716)
+
+    - TiDB Lightning
+
+        - TiDB LightningがTiKV から送信されたサイズ超過のメッセージを受信できない問題を修正しました [#56114](https://github.com/pingcap/tidb/issues/56114) @[fishiu](https://github.com/fishiu)
+        - TiDB Lightning のインポートモードを無効にした後にデータをインポートすると TiKV データが破損する可能性がある問題を修正しました [#47694](https://github.com/pingcap/tidb/issues/47694) @[lance6716](https://github.com/lance6716) [#15003](https://github.com/tikv/tikv/issues/15003)
+        - TiDB Lightning を使用してデータのインポート中にトランザクションの競合が発生する問題を修正しました [#49826](https://github.com/pingcap/tidb/issues/49826) @[lance6716](https://github.com/lance6716)
+        - EBS BRが実行されているときにTiDB Lightningがデータのインポートに失敗する可能性がある問題を修正しました [#49517](https://github.com/pingcap/tidb/issues/49517) @[mittalrishabh](https://github.com/mittalrishabh)
+        - 2つのインスタンスが同時に並列インポートタスクを開始し、同じタスクID が割り当てられている場合に、 TiDB Lightningが`verify allocator base failed`エラーを報告する問題を修正しました。 [#55384](https://github.com/pingcap/tidb/issues/55384) @[ei-sugimoto](https://github.com/ei-sugimoto)
+        - PDLeaderを強制終了すると、 TiDB Lightningがデータインポート中に`invalid store ID 0`エラーを報告する問題を修正しました。 [#50501](https://github.com/pingcap/tidb/issues/50501) @[Leavrth](https://github.com/Leavrth)
+
+    - Dumpling
+
+        - テーブルとビューを同時にエクスポートするとDumpling がエラーを報告する問題を修正[#53682](https://github.com/pingcap/tidb/issues/53682) @[tangenta](https://github.com/tangenta)
+
+    - TiDB Binlog
+
+        - TiDB Binlogが有効な場合、 `ADD COLUMN`の実行中に行を削除するとエラー`data and columnID count not match`が報告される可能性がある問題を修正しました[#53133](https://github.com/pingcap/tidb/issues/53133) @[tangenta](https://github.com/tangenta)

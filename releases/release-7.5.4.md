@@ -49,7 +49,7 @@ TiDB バージョン: 7.5.4
 
 - TiDB
 
-    - データベースに多くのテーブルが存在する場合に`FLASHBACK DATABASE`失敗する問題を修正[#54415](https://github.com/pingcap/tidb/issues/54415) @[lance6716](https://github.com/lance6716)
+    - データベースに多くのテーブルが存在する場合に`FLASHBACK DATABASE`が失敗する問題を修正[#54415](https://github.com/pingcap/tidb/issues/54415) @[lance6716](https://github.com/lance6716)
     - 厳密に自己増分ではないRANGEパーティションテーブルが作成できる問題を修正 [#54829](https://github.com/pingcap/tidb/issues/54829) @[Defined2014](https://github.com/Defined2014)
     - `UNION`を含むクエリステートメントが誤った結果を返す可能性がある問題を修正しました [#52985](https://github.com/pingcap/tidb/issues/52985) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - SQLが異常中断されたときに`INDEX_HASH_JOIN`正常に終了できない問題を修正[#54688](https://github.com/pingcap/tidb/issues/54688) @[wshwsh12](https://github.com/wshwsh12)
@@ -68,7 +68,7 @@ TiDB バージョン: 7.5.4
     - `StreamAggExec`の`groupOffset`が空の場合に TiDB がpanicを起こす可能性がある問題を修正しました [#53867](https://github.com/pingcap/tidb/issues/53867) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - copタスク構築中にTiDBクエリをキャンセルできない問題を修正[#55957](https://github.com/pingcap/tidb/issues/55957) @[yibin87](https://github.com/yibin87)
     - 整数型の列に小さい表示幅が指定された場合、 `out of range`エラーが発生する可能性がある問題を修正しました。 [#55837](https://github.com/pingcap/tidb/issues/55837) @[windtalker](https://github.com/windtalker)
-    - 一意インデックスを追加するときに`duplicate entry`発生する可能性がある問題を修正 [#56161](https://github.com/pingcap/tidb/issues/56161) @[tangenta](https://github.com/tangenta)
+    - 一意インデックスを追加するときに`duplicate entry`が発生する可能性がある問題を修正 [#56161](https://github.com/pingcap/tidb/issues/56161) @[tangenta](https://github.com/tangenta)
     - `IMPORT INTO`文を使用して一時テーブルをインポートするときに TiDB がパニックになる問題を修正しました [#55970](https://github.com/pingcap/tidb/issues/55970) @[D3Hunter](https://github.com/D3Hunter)
     - インデックス追加中の再試行によって発生するデータインデックスの不整合の問題を修正しました [#55808](https://github.com/pingcap/tidb/issues/55808) @[lance6716](https://github.com/lance6716)
 
@@ -119,3 +119,7 @@ TiDB バージョン: 7.5.4
         - インデックスの長さがデフォルト値の`max-index-length` を超えるとデータレプリケーションが中断される問題を修正しました [#11459](https://github.com/pingcap/tiflow/issues/11459) @[michaelmdeng](https://github.com/michaelmdeng)
         - DMが`ALTER DATABASE`文を処理するときにデフォルトのデータベースを設定せず、レプリケーションエラーが発生する問題を修正しました。 [#11503](https://github.com/pingcap/tiflow/issues/11503) @[lance6716](https://github.com/lance6716)
         - 複数の DM-masterノードが同時にリーダーになり、データの不整合が発生する可能性がある問題を修正しました[#11602](https://github.com/pingcap/tiflow/issues/11602) @[GMHDBJD](https://github.com/GMHDBJD)
+
+    - TiDB Lightning
+
+        - TiDB Lightning を使用してデータのインポート中にトランザクションの競合が発生する問題を修正しました [#49826](https://github.com/pingcap/tidb/issues/49826) @[lance6716](https://github.com/lance6716)

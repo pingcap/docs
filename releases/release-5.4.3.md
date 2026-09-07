@@ -89,3 +89,16 @@ TiDB バージョン: 5.4.3
         - TiDBがIPv6ホストを使用しているときにDMが起動に失敗する問題を修正[#6249](https://github.com/pingcap/tiflow/issues/6249)
         - `query-status`で起こりうるデータ競合の問題を修正[#4811](https://github.com/pingcap/tiflow/issues/4811)
         - リレーがエラーに遭遇したときの goroutine リークを修正[#6193](https://github.com/pingcap/tiflow/issues/6193)
+
+    - TiCDC
+
+        - `enable-old-value = false`を設定すると TiCDC がpanicする問題を修正[#6198](https://github.com/pingcap/tiflow/issues/6198)
+
+    - Backup & Restore (BR)
+
+        - 外部ストレージの認証キーに特殊文字が含まれている場合にバックアップと復元が失敗する可能性がある問題を修正しました[#37469](https://github.com/pingcap/tidb/issues/37469)
+        - 復元中に同時実行が大きすぎる設定になっているためにリージョンのバランスが取れていない問題を修正[#37549](https://github.com/pingcap/tidb/issues/37549)
+
+    - Dumpling
+
+        - GetDSNがIPv6をサポートしていない問題を修正[#36112](https://github.com/pingcap/tidb/issues/36112)
