@@ -338,40 +338,40 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 31 rows in set (0.00 sec)
 ```
 
-### 変更する {#alter}
+### ALTER {#alter}
 
 - `ALTER`文すべてにおいて、ユーザーは対応するテーブルに対する`ALTER`権限を持っている必要があります。
 - `ALTER...DROP`および`ALTER...RENAME TO`以外のステートメントについては、ユーザーは対応するテーブルに対して`INSERT`および`CREATE`の権限を持っている必要があります。
 - `ALTER...DROP`文を使用するには、ユーザーは対応するテーブルに対して`DROP`権限を持っている必要があります。
-- `ALTER...RENAME TO`ステートメントを実行するには、ユーザーは名前変更前にテーブルに対する`DROP`権限を持ち、名前変更後にテーブルに対する`CREATE`および`INSERT`権限ている必要があります。
+- `ALTER...RENAME TO`ステートメントを実行するには、ユーザーは名前変更前にテーブルに対する`DROP`権限を持ち、名前変更後にテーブルに対する`CREATE`および`INSERT`権限を持っている必要があります。
 
 > **Note:**
 >
 > MySQL 5.7のドキュメントでは、テーブルに対して`INSERT`操作を実行するには、 `CREATE`および`ALTER`の権限であるとされています。しかし、実際にはMySQL 5.7では、この場合`ALTER`権限のみが必要です。現在、TiDB の`ALTER`権限は、MySQL の実際の動作と一致しています。
 
-### バックアップ {#backup}
+### BACKUP {#backup}
 
 `SUPER`または`BACKUP_ADMIN`の権限が必要です。
 
-### インポートジョブをキャンセルする {#cancel-import-job}
+### CANCEL IMPORT JOB {#cancel-import-job}
 
 他のユーザーが作成したジョブをキャンセルするには`SUPER`権限が必要です。それ以外の場合は、現在のユーザーが作成したジョブのみキャンセルできます。
 
-### データベースの作成 {#create-database}
+### CREATE DATABASE {#create-database}
 
 データベースに対する`CREATE`権限が必要です。
 
-### インデックスを作成する {#create-index}
+### CREATE INDEX {#create-index}
 
 テーブルに対する`INDEX`権限が必要です。
 
-### テーブルを作成する {#create-table}
+### CREATE TABLE {#create-table}
 
 テーブルに対する`CREATE`権限が必要です。
 
 `CREATE TABLE...LIKE...`ステートメントを実行するには、テーブルに対する`SELECT`権限が必要です。
 
-### ビューの作成 {#create-view}
+### CREATE VIEW {#create-view}
 
 `CREATE VIEW`権限が必要です。
 
@@ -379,53 +379,53 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 >
 > 現在のユーザーがビューを作成したユーザーでない場合、 `CREATE VIEW`と`SUPER`の両方の権限が必要です。
 
-### データベースの削除 {#drop-database}
+### DROP DATABASE {#drop-database}
 
 データベースに対する`DROP`権限が必要です。
 
-### インデックスを削除 {#drop-index}
+### DROP INDEX {#drop-index}
 
 テーブルに対する`INDEX`権限が必要です。
 
-### テーブルを削除する {#drop-tables}
+### DROP TABLES {#drop-tables}
 
 テーブルに対する`DROP`権限が必要です。
 
-### インポート先 {#import-into}
+### IMPORT INTO {#import-into}
 
 対象テーブルに対して`SELECT` 、 `UPDATE` 、 `INSERT` 、 `DELETE` 、および`ALTER`の権限が必要です。TiDBにローカルに保存されているファイルをインポートするには、 `FILE`権限も必要です。
 
-### データの読み込み {#load-data}
+### LOAD DATA {#load-data}
 
 テーブルに対して`INSERT`権限が必要です。 `REPLACE INTO`を使用する場合は、 `DELETE`権限も必要です。
 
-### テーブルを切り捨てる {#truncate-table}
+### TRUNCATE TABLE {#truncate-table}
 
 テーブルに対する`DROP`権限が必要です。
 
-### テーブル名の変更 {#rename-table}
+### RENAME TABLE {#rename-table}
 
-テーブル名を変更する前に、 `ALTER`および`DROP`の権限が必要であり、テーブル名を変更する後には`CREATE`および`INSERT`の権限。
+テーブル名を変更する前に、 `ALTER`および`DROP`の権限が必要であり、テーブル名を変更した後には`CREATE`および`INSERT`の権限が必要です。
 
-### 表の分析 {#analyze-table}
-
-テーブルに対する`INSERT`および`SELECT`の権限が必要です。
-
-### ロック統計 {#lock-stats}
+### ANALYZE TABLE {#analyze-table}
 
 テーブルに対する`INSERT`および`SELECT`の権限が必要です。
 
-### 統計情報をアンロックする {#unlock-stats}
+### LOCK STATS {#lock-stats}
 
 テーブルに対する`INSERT`および`SELECT`の権限が必要です。
 
-### 見せる {#show}
+### UNLOCK STATS {#unlock-stats}
 
-`SHOW CREATE TABLE`テーブルに対する単一の権限を必要とします。
+テーブルに対する`INSERT`および`SELECT`の権限が必要です。
+
+### SHOW {#show}
+
+`SHOW CREATE TABLE`は、テーブルに対する単一の権限を必要とします。
 
 `SHOW CREATE VIEW`には`SHOW VIEW`の権限が必要です。
 
-`SHOW GRANTS`は`SELECT`データベースへの`mysql`権限を必要とします。対象ユーザーが現在のユーザーである場合、 `SHOW GRANTS`権限を必要としません。
+`SHOW GRANTS`は`mysql`データベースへの`SELECT`権限を必要とします。対象ユーザーが現在のユーザーである場合、 `SHOW GRANTS`は権限を必要としません。
 
 `SHOW PROCESSLIST`は、他のユーザーに属する接続を表示するために`PROCESS`の権限を必要とします。
 
@@ -433,45 +433,45 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 
 `SHOW STATS_LOCKED`は`mysql.stats_table_locked`テーブルに対する`SELECT`権限を必要とします。
 
-### ロール/ユーザーの作成 {#create-role-user}
+### CREATE ROLE/USER {#create-role-user}
 
 `CREATE ROLE`には`CREATE ROLE`の権限が必要です。
 
 `CREATE USER`には`CREATE USER`の権限が必要です。
 
-### ロール/ユーザーを削除する {#drop-role-user}
+### DROP ROLE/USER {#drop-role-user}
 
 `DROP ROLE`には`DROP ROLE`の権限が必要です。
 
 `DROP USER`には`CREATE USER`の権限が必要です。
 
-### ユーザーの変更 {#alter-user}
+### ALTER USER {#alter-user}
 
-`CREATE USER`権限が必要です。
+`CREATE USER`の権限が必要です。
 
-### 付与 {#grant}
+### GRANT {#grant}
 
-`GRANT`によって付与された権限を持つ`GRANT`権限が必要です。
+`GRANT`権限と、 `GRANT`によって付与される権限が必要です。
 
 ユーザーを暗黙的に作成するには、追加の`CREATE USER`権限が必要です。
 
 `GRANT ROLE`には`SUPER`または`ROLE_ADMIN`権限が必要です。
 
-### 取り消す {#revoke}
+### REVOKE {#revoke}
 
 `GRANT`権限と、 `REVOKE`文で指定されている権限が必要です。
 
 `REVOKE ROLE`には`SUPER`または`ROLE_ADMIN`権限が必要です。
 
-### グローバル設定 {#set-global}
+### SET GLOBAL {#set-global}
 
 グローバル変数を設定するには、 `SUPER`または`SYSTEM_VARIABLES_ADMIN`の権限が必要です。
 
-### 管理者 {#admin}
+### ADMIN {#admin}
 
 `SUPER`の権限が必要です。
 
-### デフォルトロールを設定する {#set-default-role}
+### SET DEFAULT ROLE {#set-default-role}
 
 `SUPER`の権限が必要です。
 
@@ -479,25 +479,25 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 
 他のユーザーセッションを終了するには、 `SUPER`または`CONNECTION_ADMIN`の権限が必要です。
 
-### リソースグループを作成する {#create-resource-group}
+### CREATE RESOURCE GROUP {#create-resource-group}
 
 `SUPER`または`RESOURCE_GROUP_ADMIN`の権限が必要です。
 
-### アルターリソースグループ {#alter-resource-group}
+### ALTER RESOURCE GROUP {#alter-resource-group}
 
 `SUPER`または`RESOURCE_GROUP_ADMIN`の権限が必要です。
 
-### リソースグループを削除する {#drop-resource-group}
+### DROP RESOURCE GROUP {#drop-resource-group}
 
 `SUPER`または`RESOURCE_GROUP_ADMIN`の権限が必要です。
 
-### リソースの校正 {#calibrate-resource}
+### CALIBRATE RESOURCE {#calibrate-resource}
 
 `SUPER`または`RESOURCE_GROUP_ADMIN`の権限が必要です。
 
-### リソースグループを設定する {#set-resource-group}
+### SET RESOURCE GROUP {#set-resource-group}
 
-システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) `ON`に設定されている場合、このステートメントを実行するには`SUPER`または`RESOURCE_GROUP_ADMIN`または`RESOURCE_GROUP_USER`の権限が必要です。
+システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820)が`ON`に設定されている場合、このステートメントを実行するには`SUPER`または`RESOURCE_GROUP_ADMIN`または`RESOURCE_GROUP_USER`の権限が必要です。
 
 ## 特権システムの導入 {#implementation-of-the-privilege-system}
 
@@ -539,7 +539,7 @@ SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 
 ユーザーの識別は、接続を開始するホスト`Host`とユーザー名`User`の2つの情報に基づいています。ユーザー名が空でない場合、指定されたユーザー名と完全に一致する必要があります。
 
-`User` + `Host` `user`テーブルの複数の行に一致する可能性があります。このシナリオに対処するため、 `user`テーブルの行はソートされます。クライアントが接続すると、テーブルの行が 1つずつチェックされ、最初に一致した行が検証に使用されます。ソート時には、ホストがユーザーよりも優先されます。
+`User`+`Host`は、 `user`テーブルの複数の行に一致する可能性があります。このシナリオに対処するため、 `user`テーブルの行はソートされます。クライアントが接続すると、テーブルの行が 1つずつチェックされ、最初に一致した行が検証に使用されます。ソート時には、ホストがユーザーよりも優先されます。
 
 ### リクエストの確認 {#request-verification}
 
@@ -547,16 +547,16 @@ SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 
 データベース関連のリクエスト（ `INSERT` 、 `UPDATE` ）の場合、リクエスト検証プロセスではまず`mysql.user`テーブルでユーザーのグローバル権限を確認します。権限が付与されている場合は、直接アクセスできます。付与されていない場合は、 `mysql.db`テーブルを確認します。
 
-`user`テーブルは、デフォルトのデータベースに関係なく、グローバルな権限を持ちます。たとえば、 `DELETE`の`user`権限は、任意の行、テーブル、またはデータベースに適用できます。
+`user`テーブルは、デフォルトのデータベースに関係なく、グローバルな権限を持ちます。たとえば、 `user`の`DELETE`権限は、任意の行、テーブル、またはデータベースに適用できます。
 
 `db`テーブルでは、空のユーザーは匿名ユーザー名に一致します。 `User`列ではワイルドカードは使用できません。 `Host`列と`Db`列の値には、パターンマッチングを使用できる`%`と`_`を使用できます。
 
 `user`および`db`テーブルのデータも、メモリにロードされるときにソートされます。
 
-`%`と`tables_priv`における`columns_priv`の使用方法は似ていますが、 `Db` 、 `Table_name` 、 `Column_name`の列値には`%`を含めることはできません。読み込み時のソートも同様です。
+`tables_priv`と`columns_priv`における`%`の使用方法は似ていますが、 `Db` 、 `Table_name` 、 `Column_name`の列値には`%`を含めることはできません。読み込み時のソートも同様です。
 
 ### 有効期間 {#time-of-effect}
 
-TiDB が起動すると、いくつかの権限チェックテーブルがメモリにロードされ、キャッシュされたデータを使用して権限が検証されます。 `GRANT` 、 `REVOKE` 、 `CREATE USER` 、 `DROP USER`権限管理ステートメントを実行すると、すぐに反映されます。
+TiDB が起動すると、いくつかの権限チェックテーブルがメモリにロードされ、キャッシュされたデータを使用して権限が検証されます。 `GRANT` 、 `REVOKE` 、 `CREATE USER` 、 `DROP USER`などの権限管理ステートメントを実行すると、すぐに反映されます。
 
-`mysql.user`などのテーブルを`INSERT` 、 `DELETE` 、 `UPDATE`手動で編集しても、すぐに反映されません。この動作は MySQL と互換性があり、権限キャッシュは[`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)ステートメントで更新できます。
+`mysql.user`などのテーブルを`INSERT` 、 `DELETE` 、 `UPDATE`などのステートメントで手動編集しても、すぐに反映されません。この動作は MySQL と互換性があり、権限キャッシュは[`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)ステートメントで更新できます。

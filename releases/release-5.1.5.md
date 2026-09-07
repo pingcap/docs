@@ -23,7 +23,7 @@ TiDBバージョン：5.1.5
 
     - ウィンドウ関数がエラーを報告する代わりにTiDBをpanicにする問題を修正しました [#30326](https://github.com/pingcap/tidb/issues/30326)
     - TiFlashのパーティションテーブルで動的モードを有効にした際に発生する誤った結果を修正します [#37254](https://github.com/pingcap/tidb/issues/37254)
-    - 符号なしの`GREATEST`引数を渡した場合の`LEAST`と`BIGINT`の誤った結果を修正 [#30101](https://github.com/pingcap/tidb/issues/30101)
+    - 符号なしの`BIGINT`引数を渡した場合の`GREATEST`と`LEAST`の誤った結果を修正 [#30101](https://github.com/pingcap/tidb/issues/30101)
     - `left join`を使用して複数のテーブルのデータを削除する際の誤った結果を修正 [#31321](https://github.com/pingcap/tidb/issues/31321)
     - TiDB における`concat(ifnull(time(3)))`の結果が MySQL における結果と異なる問題を修正しました [#29498](https://github.com/pingcap/tidb/issues/29498)
     - `cast(integer as char) union string`を含むSQL文が誤った結果を返す問題を修正しました [#29513](https://github.com/pingcap/tidb/issues/29513)
