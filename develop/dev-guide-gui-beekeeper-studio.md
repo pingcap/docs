@@ -50,13 +50,13 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
     >
     > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
 
-5. Launch Beekeeper Studio. On the connections screen, click **New Connection**, select **TiDB** from the **Connection Type** list, and fill in the connection form: copy the **Host** and **Port** from the TiDB Cloud connection dialog, and enter the **User** and **Password** from steps 3 and 4.
+5. Launch Beekeeper Studio. On the connections screen, click **New Connection**, select **TiDB** from the **Connection Type** list, and fill in the connection form: copy the **Host**, **Port**, and **User** exactly as shown in the TiDB Cloud connection dialog (the **User** value includes an instance-specific prefix, such as `2iYY8v31zGuWG83.root`, not just `root`), and enter the **Password** from step 4.
 
     ![Beekeeper Studio: configure a TiDB connection](/media/develop/beekeeper-studio-connection-settings.png)
 
 6. Turn on the **Enable SSL** toggle, since {{{ .starter }}} and Essential require an encrypted connection.
 
-    Unlike some GUI clients, Beekeeper Studio does not require you to manually download or select a CA certificate here — by default it trusts the server's certificate, so enabling SSL is enough.
+    By default, Beekeeper Studio trusts the server's certificate without requiring you to download or select a CA certificate, which is convenient for a quick connection. For stronger protection against man-in-the-middle attacks, you can instead click **CA Cert** in the TiDB Cloud connection dialog to download the certificate, and select the downloaded file in Beekeeper Studio's **CA Cert (optional)** field to verify the server's identity.
 
 7. Click **Test** to validate the connection to your target {{{ .starter }}} or Essential instance.
 
@@ -85,7 +85,7 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
 
 7. Launch Beekeeper Studio. On the connections screen, click **New Connection**, select **TiDB** from the **Connection Type** list, and fill in the connection form: copy and paste the **Host**, **Port**, and **Username** from the connection dialog, and enter the password of the {{{ .premium }}} instance.
 
-    Leave **Enable SSL** off.
+    Turn on **Enable SSL**. To verify the server's identity, click **CA Cert** in the connection dialog to download the certificate, and select the downloaded file in Beekeeper Studio's **CA Cert (optional)** field.
 
 8. Click **Test** to validate the connection to the {{{ .premium }}} instance.
 
