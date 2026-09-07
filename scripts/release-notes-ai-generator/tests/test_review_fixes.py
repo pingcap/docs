@@ -20,6 +20,7 @@ ai_client = importlib.import_module("release-notes-ai-generator.ai_client")
 cli = importlib.import_module("release-notes-ai-generator.cli")
 excel_workbook = importlib.import_module("release-notes-ai-generator.excel_workbook")
 github_client = importlib.import_module("release-notes-ai-generator.github_client")
+models = importlib.import_module("release-notes-ai-generator.models")
 scope_filter = importlib.import_module("release-notes-ai-generator.scope_filter")
 
 
@@ -198,6 +199,93 @@ class WorkbookCopyTest(unittest.TestCase):
         self.assertEqual("value-b", target.cell(2, header["b"]).value)
         self.assertEqual("value-c", target.cell(2, header["c"]).value)
         self.assertEqual("already published", target.cell(2, header["reason"]).value)
+
+
+class UniversalIssueTest(unittest.TestCase):
+    universal_issue = "https://github.com/tikv/tikv/issues/15990"
+
+    def create_sheet(self):
+        workbook = Workbook()
+        sheet = workbook.active
+        sheet.append(
+            [
+                "component",
+                "pr_author",
+                "pr_link",
+                "pr_title",
+                "formated_release_note",
+                "issue_type",
+            ]
+        )
+        return workbook, sheet
+
+    def test_universal_issue_is_not_a_same_series_duplicate(self):
+        reason = excel_workbook.same_series_issue_reason(
+            [self.universal_issue],
+            {self.universal_issue: ["release-8.5.0.md"]},
+        )
+
+        self.assertIsNone(reason)
+
+    def test_universal_issue_is_not_reused_as_a_historical_duplicate(self):
+        _workbook, sheet = self.create_sheet()
+        sheet.append(
+            [
+                "tikv",
+                "contributor",
+                "https://github.com/tikv/tikv/pull/20000",
+                "New chore",
+                f"- Improve something new [#15990]({self.universal_issue})",
+                "improvement",
+            ]
+        )
+        header = excel_workbook.prepare_sheet_columns(sheet)
+        existing_note = models.ExistingNote(
+            url=self.universal_issue,
+            line=(
+                f"- Fix an older issue [#15990]({self.universal_issue}) "
+                "@[contributor](https://github.com/contributor)"
+            ),
+            file_name="release-8.5.0.md",
+            note_level="> Bug fixes> TiKV",
+            authors=["contributor"],
+            note_type="bug_fix",
+            component="TiKV",
+        )
+
+        excel_workbook.update_pr_authors_and_dup_notes(
+            sheet,
+            header,
+            [existing_note],
+            mock.Mock(),
+        )
+
+        self.assertIsNone(
+            sheet.cell(row=2, column=header["published_release_notes"]).value
+        )
+
+    def test_universal_issue_rows_are_not_merged(self):
+        _workbook, sheet = self.create_sheet()
+        for number, author in ((20001, "alice"), (20002, "bob")):
+            sheet.append(
+                [
+                    "tikv",
+                    author,
+                    f"https://github.com/tikv/tikv/pull/{number}",
+                    f"Independent chore {number}",
+                    f"- Improve chore {number} [#15990]({self.universal_issue})",
+                    "improvement",
+                ]
+            )
+        header = excel_workbook.prepare_sheet_columns(sheet)
+
+        excel_workbook.merge_rows_by_issue_and_component(sheet, header)
+
+        self.assertEqual(3, sheet.max_row)
+        self.assertEqual(
+            "https://github.com/tikv/tikv/pull/20002",
+            sheet.cell(row=3, column=header["pr_link"]).value,
+        )
 
 
 class GitHubClientTest(unittest.TestCase):

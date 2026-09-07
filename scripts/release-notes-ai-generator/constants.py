@@ -38,6 +38,15 @@ PR_URL_RE = re.compile(
 )
 AUTHOR_RE = re.compile(r"@\[([^\]]+)\]")
 
+# Universal issues are generic catch-all issues that engineers use to
+# associate small PRs without creating a dedicated issue.  Because the same
+# universal issue URL may legitimately appear across many release notes, it
+# must not be treated as a unique identifier for quarantine, duplicate reuse,
+# or row merging.
+UNIVERSAL_ISSUES: set[str] = {
+    "https://github.com/tikv/tikv/issues/15990",
+}
+
 TOP_LEVEL_COMPONENTS = ["TiDB", "TiKV", "PD", "TiFlash", "TiProxy"]
 TOOL_COMPONENTS = [
     "Backup & Restore (BR)",
