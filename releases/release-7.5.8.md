@@ -47,5 +47,5 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
     + TiCDC
 
-        - Fix the issue that TiCDC Kafka changefeeds leak Kafka client resources when retrying DDL sink operations, which causes memory usage to increase over time [#12666](https://github.com/pingcap/tiflow/issues/12666) @[3AceShowHand](https://github.com/3AceShowHand) <!-- component: cdc --> <!-- pr: https://github.com/pingcap/tiflow/pull/12678 -->
+        - Fix the issue that TiCDC Kafka changefeeds might leak Kafka client instances when sending DDL events or checkpoints fails and TiCDC retries the operation, causing memory usage to keep increasing [#12666](https://github.com/pingcap/tiflow/issues/12666) @[3AceShowHand](https://github.com/3AceShowHand) <!-- component: cdc --> <!-- pr: https://github.com/pingcap/tiflow/pull/12678 -->
         - Fix the issue that TiCDC Kafka sink retries might leak Sarama client connections and background goroutines when Kafka admin or producer initialization fails, or when closing wrapped clients [#12572](https://github.com/pingcap/tiflow/issues/12572) @[wlwilliamx](https://github.com/wlwilliamx) <!-- component: cdc --> <!-- pr: https://github.com/pingcap/tiflow/pull/12592 -->
