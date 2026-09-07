@@ -84,37 +84,6 @@ The following parsers are accepted in the `WITH PARSER <PARSER_NAME>` clause:
 
 - `NGRAM`: builds character-level n-grams so that queries can match prefixes and substrings. See [The NGRAM parser](/ai/reference/full-text-search-index.md#the-ngram-parser) for parameters.
 
-### Manage full-text indexes
-
-When creating a full-text index, specifying an index name is optional. If you do not specify one, TiDB uses the name of the first indexed column as the index name by default.
-
-```sql
--- Without specifying an index name, TiDB uses the first indexed column name ("title") as the index name
-ALTER TABLE stock_items ADD FULLTEXT INDEX (title) WITH PARSER MULTILINGUAL;
-
--- Specifying an index name
-ALTER TABLE stock_items ADD FULLTEXT INDEX ft_title (title) WITH PARSER MULTILINGUAL;
-```
-
-**View the existing index names:**
-
-```sql
--- The Key_name column shows the index name
-SHOW INDEX FROM stock_items;
-
--- Or query INFORMATION_SCHEMA
-SELECT INDEX_NAME, COLUMN_NAME, INDEX_TYPE
-FROM INFORMATION_SCHEMA.STATISTICS
-WHERE TABLE_SCHEMA = 'your_database' AND TABLE_NAME = 'stock_items';
-```
-
-**Drop a full-text index:**
-
-```sql
--- Use SHOW INDEX to confirm the index name first
-ALTER TABLE stock_items DROP INDEX title;
-```
-
 #### Specify an index name
 
 In both `CREATE TABLE` and `ALTER TABLE` statements, you can specify an index name after `FULLTEXT INDEX` or `FULLTEXT KEY`:
@@ -134,7 +103,7 @@ ALTER TABLE users ADD FULLTEXT INDEX ft_name (name) WITH PARSER STANDARD;
 CREATE FULLTEXT INDEX ft_name ON users (name) WITH PARSER STANDARD;
 ```
 
-### Create a multi-column full-text index
+#### Create a multi-column full-text index
 
 A full-text index can contain multiple scored columns. Searching across them in one query fuses the BM25 scores at the index level, which replaces scanning one single-column index per column and merging results with `UNION ALL`.
 
@@ -147,46 +116,6 @@ SELECT * FROM articles
 ```
 
 Columns in one call are combined with OR semantics: a document matches if any of the columns matches the query. For AND semantics and more details, see [Multi-column search](/ai/reference/full-text-search-functions-tidb.md#multi-column-search).
-
-### Filter pushdown
-
-Besides scored columns, a full-text index can contain filter columns. Filter conditions on these columns are evaluated during the index scan, so you get correct scoped Top-K results instead of filtering after a global Top-K. Filter columns are defined with the column-property syntax:
-
-```sql
-ALTER TABLE files ADD FULLTEXT INDEX idx_fts (
-    content_text WITH (multilingual),
-    path         WITH (exact, path_hierarchy),
-    ext          WITH (exact)
-);
-
-SELECT * FROM files
-    WHERE fts_match_word('database', content_text)
-      AND path LIKE '/src/%'
-      AND ext IN ('go', 'rs')
-    ORDER BY fts_match_word('database', content_text) DESC LIMIT 10;
-```
-
-- The `exact` attribute supports `=` and `IN` matching during the index scan. It is suitable for tenant IDs, status, tags, and other low-cardinality columns.
-- The `path_hierarchy` attribute supports hierarchical prefix matching such as `path LIKE '/src/%'`, where the prefix aligns with the `/` delimiter boundary.
-
-For the full attribute reference, syntax rules, and pushdown limitations, see [Full-Text Search Index](/ai/reference/full-text-search-index.md) and [Filter pushdown limitations](/ai/reference/full-text-search-limitations.md#filter-pushdown-limitations).
-
-### Substring matching with the NGRAM parser
-
-The `STANDARD` and `MULTILINGUAL` parsers match complete tokens only. For partial-recall scenarios such as code search, create a full-text index with the `NGRAM` parser to match prefixes and substrings:
-
-```sql
-ALTER TABLE code_files ADD FULLTEXT INDEX idx_fts_ngram (content_text)
-    WITH PARSER NGRAM(min_gram=3, max_gram=3);
-
--- Matches HandleRequest, RequestHandler, and handle_error
-SELECT /*+ USE_INDEX(code_files, idx_fts_ngram) */ *
-FROM code_files
-    WHERE fts_match_word('handle', content_text)
-    ORDER BY fts_match_word('handle', content_text) DESC LIMIT 10;
-```
-
-A table can have multiple full-text indexes, and the same column can participate in several of them with different parsers. Use the `USE_INDEX` hint to select an index at query time, or let the optimizer choose automatically. For parameters and query semantics, see [The NGRAM parser](/ai/reference/full-text-search-index.md#the-ngram-parser) and [Choose a full-text index at query time](/ai/reference/full-text-search-functions-tidb.md#choose-a-full-text-index-at-query-time).
 
 ### Insert text data
 
@@ -293,7 +222,45 @@ A common misconception is that `fts_match_word('Alice X', name)` treats `"Alice 
 
 #### Prefix and substring search
 
-To match prefixes or substrings, use a full-text index with the `NGRAM` parser. See [Substring matching with the NGRAM parser](#substring-matching-with-the-ngram-parser). To match path prefixes such as `/src/`, use a filter column with the `path_hierarchy` attribute. See [Filter pushdown](#filter-pushdown).
+To match prefixes or substrings, use a full-text index with the `NGRAM` parser. To match path prefixes such as `/src/`, use a filter column with the `path_hierarchy` attribute. See [Filter pushdown](#filter-pushdown).
+
+The `STANDARD` and `MULTILINGUAL` parsers match complete tokens only. For partial-recall scenarios such as code search, create a full-text index with the `NGRAM` parser to match prefixes and substrings:
+
+```sql
+ALTER TABLE code_files ADD FULLTEXT INDEX idx_fts_ngram (content_text)
+    WITH PARSER NGRAM(min_gram=3, max_gram=3);
+
+-- Matches HandleRequest, RequestHandler, and handle_error
+SELECT /*+ USE_INDEX(code_files, idx_fts_ngram) */ *
+FROM code_files
+    WHERE fts_match_word('handle', content_text)
+    ORDER BY fts_match_word('handle', content_text) DESC LIMIT 10;
+```
+
+A table can have multiple full-text indexes, and the same column can participate in several of them with different parsers. Use the `USE_INDEX` hint to select an index at query time, or let the optimizer choose automatically. For parameters and query semantics, see [The NGRAM parser](/ai/reference/full-text-search-index.md#the-ngram-parser) and [Choose a full-text index at query time](/ai/reference/full-text-search-functions-tidb.md#choose-a-full-text-index-at-query-time).
+
+#### Filter pushdown
+
+In addition to scored columns, a full-text index can contain filter columns. Filter conditions on these columns are evaluated during the index scan, so you get correct scoped Top-K results instead of filtering after a global Top-K. Filter columns are defined with the column-property syntax:
+
+```sql
+ALTER TABLE files ADD FULLTEXT INDEX idx_fts (
+    content_text WITH (multilingual),
+    path         WITH (exact, path_hierarchy),
+    ext          WITH (exact)
+);
+
+SELECT * FROM files
+    WHERE fts_match_word('database', content_text)
+      AND path LIKE '/src/%'
+      AND ext IN ('go', 'rs')
+    ORDER BY fts_match_word('database', content_text) DESC LIMIT 10;
+```
+
+- The `exact` attribute supports `=` and `IN` matching during the index scan. It is suitable for tenant IDs, status, tags, and other low-cardinality columns.
+- The `path_hierarchy` attribute supports hierarchical prefix matching such as `path LIKE '/src/%'`, where the prefix aligns with the `/` delimiter boundary.
+
+For the full attribute reference, syntax rules, and pushdown limitations, see [Full-Text Search Index](/ai/reference/full-text-search-index.md) and [Filter pushdown limitations](/ai/reference/full-text-search-limitations.md#filter-pushdown-limitations).
 
 #### Effect of repeated terms on relevance scores
 
@@ -330,6 +297,37 @@ Where:
 TiDB's implementation uses fixed values of `k1 = 1.2` and `b = 0.75`, which are the standard defaults for BM25 in information retrieval.
 
 The returned score is a non-negative floating-point number. A higher value indicates higher relevance to the query. Scores are not directly comparable across different datasets.
+
+## Manage full-text indexes
+
+When creating a full-text index, specifying an index name is optional. If you do not specify one, TiDB uses the name of the first indexed column as the index name by default.
+
+```sql
+-- Without specifying an index name, TiDB uses the first indexed column name ("title") as the index name
+ALTER TABLE stock_items ADD FULLTEXT INDEX (title) WITH PARSER MULTILINGUAL;
+
+-- Specifying an index name
+ALTER TABLE stock_items ADD FULLTEXT INDEX ft_title (title) WITH PARSER MULTILINGUAL;
+```
+
+### View existing index names
+
+```sql
+-- The Key_name column shows the index name
+SHOW INDEX FROM stock_items;
+
+-- Or query INFORMATION_SCHEMA
+SELECT INDEX_NAME, COLUMN_NAME, INDEX_TYPE
+FROM INFORMATION_SCHEMA.STATISTICS
+WHERE TABLE_SCHEMA = 'your_database' AND TABLE_NAME = 'stock_items';
+```
+
+### Drop a full-text index
+
+```sql
+-- Use SHOW INDEX to confirm the index name first
+ALTER TABLE stock_items DROP INDEX title;
+```
 
 ## Advanced example: Join search results with other tables
 
