@@ -84,7 +84,7 @@ TiFlashレプリカの設定方法の詳細については、 [TiFlashレプリ�
 
 パブリックエンドポイント経由で接続する場合、接続は様々なネットワークプロバイダーや中間デバイスを経由します。これらのデバイスにはそれぞれ短いアイドルタイムアウトが設定されている場合があり、接続が途中で中断される可能性があります。詳しくは[接続制限](/tidb-cloud/serverless-limitations.md#connection)ご覧ください。
 
-### 「接続制限を超えました」というエラーが表示されるのはなぜですか? {#why-did-i-receive-a-connection-limit-exceeded-error}
+### 「Connection limit exceeded」というエラーが表示されるのはなぜですか? {#why-did-i-receive-a-connection-limit-exceeded-error}
 
 このエラーは、クラスターが最大同時接続数を超えた場合に発生します。詳細については、 [接続制限](/tidb-cloud/serverless-limitations.md#connection)を参照してください。
 
