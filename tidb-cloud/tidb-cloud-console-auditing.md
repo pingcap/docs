@@ -82,95 +82,95 @@ TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー�
 
 | コンソール監査イベントタイプ         | 説明                                                                   |
 | ---------------------- | -------------------------------------------------------------------- |
-| 組織の作成                  | 組織を作成する                                                              |
-| ログイン組織                 | 組織にログインする                                                            |
-| スイッチ組織                 | 現在の組織から別の組織に切り替える                                                    |
-| ログアウト組織                | 組織からログアウトする                                                          |
-| 組織にユーザーを招待             | ユーザーを組織に招待する                                                         |
-| 組織への招待の削除              | 組織への参加を希望するユーザーの招待を削除する                                              |
-| 組織への招待状を再送信            | 組織に参加するためのユーザーへの招待状を再送信する                                            |
-| 組織への参加を確認              | 招待されたユーザーが組織への参加を確認する                                                |
-| 組織からユーザーを削除            | 組織に参加しているユーザーを削除する                                                   |
-| 組織内のユーザーロールの更新         | 組織内のユーザーの役割を更新する                                                     |
-| APIキーの作成               | APIキーを作成する                                                           |
-| APIキー編集                | APIキーを編集する                                                           |
-| APIキーの削除               | APIキーを削除する                                                           |
-| タイムゾーンの更新              | 組織のタイムゾーンを更新する                                                       |
-| ショービル                  | 組織の請求書を表示                                                            |
-| ビルをダウンロード              | 組織法案をダウンロード                                                          |
-| クレジットを表示               | 組織のクレジットを表示                                                          |
-| ペイメントカードを追加            | 支払いカードを追加する                                                          |
-| ペイメントカードの更新            | 支払いカードを更新する                                                          |
-| ペイメントカードの削除            | 支払いカードを削除する                                                          |
-| デフォルトの支払いカードを設定する      | デフォルトの支払いカードを設定する                                                    |
-| 請求プロファイルの編集            | 請求プロファイル情報を編集する                                                      |
-| 契約アクション                | 契約関連活動を整理する                                                          |
-| コンソール監査ログを有効にする        | コンソール監査ログを有効にする                                                      |
-| コンソール監査ログの表示           | コンソール監査ログを表示する                                                       |
-| プロジェクトにユーザーを招待         | ユーザーをプロジェクトに招待する                                                     |
-| プロジェクトへの招待の削除          | プロジェクトへのユーザーの招待を削除する                                                 |
-| プロジェクトへの招待状を再送信        | ユーザーにプロジェクトへの参加を依頼する招待状を再送信する                                        |
-| プロジェクト参加の確認            | 招待されたユーザーがプロジェクトへの参加を確認する                                            |
-| プロジェクトからユーザーを削除        | プロジェクトに参加しているユーザーを削除する                                               |
-| プロジェクトの作成              | プロジェクトを作成する                                                          |
-| プロジェクトCIDRの作成          | 新しいプロジェクトCIDRを作成する                                                   |
-| AWSVPCPeeringの作成       | AWS VPCピアリングを作成する                                                    |
-| AWSVPCPeering の削除      | AWS VPCピアリングを削除する                                                    |
-| GCPVPPCピアリングの作成        | Google Cloud VPC ピアリングを作成する                                          |
-| GCPVPCピアリングの削除         | Google Cloud VPC ピアリングを削除する                                          |
-| プライベートエンドポイントサービスの作成   | プライベートエンドポイントサービスを作成する                                               |
-| プライベートエンドポイントサービスの削除   | プライベートエンドポイントサービスを削除する                                               |
-| AWSプライベートエンドポイントの作成    | AWSプライベートエンドポイントを作成する                                                |
-| AWSプライベートエンドポイントの削除    | AWSプライベートエンドポイントを削除する                                                |
-| アラートを購読する              | アラートを購読する                                                            |
-| アラートの購読解除              | アラートの購読解除                                                            |
-| Datadog統合の作成           | Datadog統合を作成する                                                       |
-| DatadogIntegration の削除 | Datadog統合を削除する                                                       |
-| VercelIntegrationの作成   | vercel統合を作成する                                                        |
-| VercelIntegration の削除  | vercel統合を削除                                                          |
-| Prometheus統合の作成        | Prometheus統合を作成する                                                    |
-| Prometheus統合の削除        | Prometheus統合を削除する                                                    |
-| クラスターの作成               | クラスターを作成する                                                           |
-| クラスターの削除               | クラスターを削除する                                                           |
-| 一時停止クラスター              | クラスターを一時停止する                                                         |
-| クラスターの再開               | クラスターを再開する                                                           |
-| スケールクラスター              | クラスターをスケールする                                                         |
-| TiDBClusterCA をダウンロード  | CA証明書をダウンロード                                                         |
-| オープンWebSQLコンソール        | Web SQL 経由で TiDB クラスターに接続する                                          |
-| ルートパスワードの設定            | TiDBクラスタのルートパスワードを設定する                                               |
-| IPアクセスリストの更新           | TiDB クラスタの IP アクセス リストを更新する                                          |
-| 自動バックアップの設定            | TiDBクラスタの自動バックアップメカニズムを設定する                                          |
-| 手動バックアップ               | TiDBクラスタの手動バックアップを実行する                                               |
-| バックアップ完了               | バックアップタスクが完了しました                                                     |
-| バックアップタスクの削除           | バックアップタスクを削除する                                                       |
-| バックアップの削除              | バックアップファイルを削除する                                                      |
-| バックアップからの復元            | バックアップファイルに基づいてTiDBクラスタに復元する                                         |
-| ゴミ箱から復元                | ゴミ箱内のバックアップファイルに基づいてTiDBクラスタに復元する                                    |
-| AWSからのデータのインポート        | AWSからデータをインポートする                                                     |
-| GCPからのデータのインポート        | Google Cloud からデータをインポートする                                           |
-| ローカルからのデータのインポート       | ローカルディスクからデータをインポートする                                                |
-| 移行ジョブの作成               | 移行ジョブを作成する                                                           |
-| 移行ジョブの一時停止             | 移行ジョブを一時停止する                                                         |
-| 移行ジョブの再開               | 移行ジョブを再開する                                                           |
-| 移行ジョブの削除               | 移行ジョブを削除する                                                           |
-| 表示診断                   | 診断情報を表示                                                              |
-| DB監査ログアクション            | データベース監査ログのアクティビティを設定する                                              |
-| DB監査フィルターの追加           | データベース監査ログフィルタを追加する                                                  |
-| DB監査フィルターの削除           | データベース監査ログフィルタを削除する                                                  |
-| プロジェクトの編集              | プロジェクトの情報を編集する                                                       |
-| プロジェクトの削除              | プロジェクトを削除する                                                          |
-| BindSupportPlan        | サポートプランを締結する                                                         |
-| サポートプランのキャンセル          | サポートプランをキャンセルする                                                      |
-| 組織名の更新                 | 組織名を更新する                                                             |
-| 支出制限の設定                | TiDB Cloud Starter クラスターの支出制限を編集する                                   |
-| メンテナンスウィンドウの更新         | メンテナンスウィンドウの開始時刻を変更する                                                |
-| メンテナンスタスクの延期           | メンテナンスタスクを延期する                                                       |
-| ブランチの作成                | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチを作成する           |
-| ブランチの削除                | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチを削除します          |
-| ブランチルートパスワードの設定        | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチのルートパスワードを設定する |
-| 接続ブランチGitHub           | クラスターをGitHubリポジトリに接続してブランチ統合を有効にする                                   |
-| ブランチを切断GitHub          | ブランチ統合を無効にするには、クラスターを GitHub リポジトリから切断します。                           |
-| 認証方法の更新                | Cloud Organization SSO の認証方法を更新する                                    |
+| CreateOrganization | 組織を作成する                                                              |
+| LoginOrganization | 組織にログインする                                                            |
+| SwitchOrganization | 現在の組織から別の組織に切り替える                                                    |
+| LogoutOrganization | 組織からログアウトする                                                          |
+| InviteUserToOrganization | ユーザーを組織に招待する                                                         |
+| DeleteInvitationToOrganization | 組織への参加を希望するユーザーの招待を削除する                                              |
+| ResendInvitationToOrganization | 組織に参加するためのユーザーへの招待状を再送信する                                            |
+| ConfirmJoinOrganization | 招待されたユーザーが組織への参加を確認する                                                |
+| DeleteUserFromOrganization | 組織に参加しているユーザーを削除する                                                   |
+| UpdateUserRoleInOrganization | 組織内のユーザーの役割を更新する                                                     |
+| CreateAPIKey | APIキーを作成する                                                           |
+| EditAPIKey | APIキーを編集する                                                           |
+| DeleteAPIKey | APIキーを削除する                                                           |
+| UpdateTimezone | 組織のタイムゾーンを更新する                                                       |
+| ShowBill | 組織の請求書を表示                                                            |
+| DownloadBill | 組織法案をダウンロード                                                          |
+| ShowCredits | 組織のクレジットを表示                                                          |
+| AddPaymentCard | 支払いカードを追加する                                                          |
+| UpdatePaymentCard | 支払いカードを更新する                                                          |
+| DeletePaymentCard | 支払いカードを削除する                                                          |
+| SetDefaultPaymentCard | デフォルトの支払いカードを設定する                                                    |
+| EditBillingProfile | 請求プロファイル情報を編集する                                                      |
+| ContractAction | 契約関連活動を整理する                                                          |
+| EnableConsoleAuditLog | コンソール監査ログを有効にする                                                      |
+| ShowConsoleAuditLog | コンソール監査ログを表示する                                                       |
+| InviteUserToProject | ユーザーをプロジェクトに招待する                                                     |
+| DeleteInvitationToProject | プロジェクトへのユーザーの招待を削除する                                                 |
+| ResendInvitationToProject | ユーザーにプロジェクトへの参加を依頼する招待状を再送信する                                        |
+| ConfirmJoinProject | 招待されたユーザーがプロジェクトへの参加を確認する                                            |
+| DeleteUserFromProject | プロジェクトに参加しているユーザーを削除する                                               |
+| CreateProject | プロジェクトを作成する                                                          |
+| CreateProjectCIDR | 新しいプロジェクトCIDRを作成する                                                   |
+| CreateAWSVPCPeering | AWS VPCピアリングを作成する                                                    |
+| DeleteAWSVPCPeering | AWS VPCピアリングを削除する                                                    |
+| CreateGCPVPCPeering | Google Cloud VPC ピアリングを作成する                                          |
+| DeleteGCPVPCPeering | Google Cloud VPC ピアリングを削除する                                          |
+| CreatePrivateEndpointService | プライベートエンドポイントサービスを作成する                                               |
+| DeletePrivateEndpointService | プライベートエンドポイントサービスを削除する                                               |
+| CreateAWSPrivateEndPoint | AWSプライベートエンドポイントを作成する                                                |
+| DeleteAWSPrivateEndPoint | AWSプライベートエンドポイントを削除する                                                |
+| SubscribeAlerts | アラートを購読する                                                            |
+| UnsubscribeAlerts | アラートの購読解除                                                            |
+| CreateDatadogIntegration | Datadog統合を作成する                                                       |
+| DeleteDatadogIntegration | Datadog統合を削除する                                                       |
+| CreateVercelIntegration | vercel統合を作成する                                                        |
+| DeleteVercelIntegration | vercel統合を削除                                                          |
+| CreatePrometheusIntegration | Prometheus統合を作成する                                                    |
+| DeletePrometheusIntegration | Prometheus統合を削除する                                                    |
+| CreateCluster | クラスターを作成する                                                           |
+| DeleteCluster | クラスターを削除する                                                           |
+| PauseCluster | クラスターを一時停止する                                                         |
+| ResumeCluster | クラスターを再開する                                                           |
+| ScaleCluster | クラスターをスケールする                                                         |
+| DownloadTiDBClusterCA | CA証明書をダウンロード                                                         |
+| OpenWebSQLConsole | Web SQL 経由で TiDB クラスターに接続する                                          |
+| SetRootPassword | TiDBクラスタのルートパスワードを設定する                                               |
+| UpdateIPAccessList | TiDB クラスタの IP アクセス リストを更新する                                          |
+| SetAutoBackup | TiDBクラスタの自動バックアップメカニズムを設定する                                          |
+| DoManualBackup | TiDBクラスタの手動バックアップを実行する                                               |
+| BackupCompleted | バックアップタスクが完了しました                                                     |
+| DeleteBackupTask | バックアップタスクを削除する                                                       |
+| DeleteBackup | バックアップファイルを削除する                                                      |
+| RestoreFromBackup | バックアップファイルに基づいてTiDBクラスタに復元する                                         |
+| RestoreFromTrash | ゴミ箱内のバックアップファイルに基づいてTiDBクラスタに復元する                                    |
+| ImportDataFromAWS | AWSからデータをインポートする                                                     |
+| ImportDataFromGCP | Google Cloud からデータをインポートする                                           |
+| ImportDataFromLocal | ローカルディスクからデータをインポートする                                                |
+| CreateMigrationJob | 移行ジョブを作成する                                                           |
+| SuspendMigrationJob | 移行ジョブを一時停止する                                                         |
+| ResumeMigrationJob | 移行ジョブを再開する                                                           |
+| DeleteMigrationJob | 移行ジョブを削除する                                                           |
+| ShowDiagnose | 診断情報を表示                                                              |
+| DBAuditLogAction | データベース監査ログのアクティビティを設定する                                              |
+| AddDBAuditFilter | データベース監査ログフィルタを追加する                                                  |
+| DeleteDBAuditFilter | データベース監査ログフィルタを削除する                                                  |
+| EditProject | プロジェクトの情報を編集する                                                       |
+| DeleteProject | プロジェクトを削除する                                                          |
+| BindSupportPlan | サポートプランを締結する                                                         |
+| CancelSupportPlan | サポートプランをキャンセルする                                                      |
+| UpdateOrganizationName | 組織名を更新する                                                             |
+| SetSpendLimit | TiDB Cloud Starter クラスターの支出制限を編集する                                   |
+| UpdateMaintenanceWindow | メンテナンスウィンドウの開始時刻を変更する                                                |
+| DeferMaintenanceTask | メンテナンスタスクを延期する                                                       |
+| CreateBranch | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチを作成する           |
+| DeleteBranch | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチを削除します          |
+| SetBranchRootPassword | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチのルートパスワードを設定する |
+| ConnectBranchGitHub | クラスターをGitHubリポジトリに接続してブランチ統合を有効にする                                   |
+| DisconnectBranchGitHub | ブランチ統合を無効にするには、クラスターを GitHub リポジトリから切断します。                           |
+| UpdateAuthenticationMethod | Cloud Organization SSO の認証方法を更新する                                    |
 
 ## コンソール監査ログフィールド {#console-audit-log-fields}
 
