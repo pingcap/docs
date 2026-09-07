@@ -31,8 +31,8 @@ CSVファイルにはスキーマ情報が含まれていないため、CSVフ�
 
     必要なDDL文を含むSQLファイルを作成します。
 
-    - `CREATE DATABASE`ファイルに`${db_name}-schema-create.sql` } ステートメントを追加します。
-    - `CREATE TABLE`ファイルに`${db_name}.${table_name}-schema.sql` } ステートメントを追加します。
+    - `${db_name}-schema-create.sql`ファイルに`CREATE DATABASE`ステートメントを追加します。
+    - `${db_name}.${table_name}-schema.sql`ファイルに`CREATE TABLE`ステートメントを追加します。
 
 - **方法2** ：対象テーブルのスキーマを手動で作成します。
 
@@ -107,7 +107,7 @@ TiDB Lightningは、サイズが約256MiBの均一なCSVファイルからデー
 - 区切り文字が空です。
 - 各フィールドには CR ( `\r` ) または LF ( `\n` ) は含まれていません。
 
-`terminator` `strict-format` } を明示的に指定する必要があります。
+`strict-format`のCSVファイルでは、行終端記号`terminator`を明示的に指定する必要があります。
 
 CSVファイルが上記の要件を満たしている場合は、次のように`strict-format`モードを有効にすることでインポートを高速化できます。
 

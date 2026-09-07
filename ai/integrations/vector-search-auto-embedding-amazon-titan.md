@@ -78,7 +78,7 @@ LIMIT 2;
 
 ## オプション {#options}
 
-`additional_json_options` `EMBED_TEXT()` } パラメータを使用して、以下のオプションを指定できます。
+`EMBED_TEXT()`関数の`additional_json_options`パラメータを使用して、以下のオプションを指定できます。
 
 - `normalize` (オプション): 出力埋め込みを正規化するかどうか。デフォルトは`true`です。
 - `dimensions` (オプション): 出力埋め込みの次元数。サポートされている値: `1024` (デフォルト)、 `512` 、および`256` 。

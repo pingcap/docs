@@ -269,7 +269,7 @@ SELECT /*+ AGG_TO_COP() */ COUNT(*) FROM CLUSTER_SLOW_QUERY GROUP BY user;
 
 ## 実行情報を確認する {#view-execution-information}
 
-`SLOW_QUERY`テーブルに対して[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)クエリを実行すると、データベースがスロークエリ情報をどのように取得しているかについての詳細情報を取得できます。ただし、 `EXPLAIN ANALYZE`テーブルに対して`CLUSTER_SLOW_QUERY` } を実行しても、この情報は取得**できません**。
+`SLOW_QUERY`テーブルに対して[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)クエリを実行すると、データベースがスロークエリ情報をどのように取得しているかについての詳細情報を取得できます。ただし、 `CLUSTER_SLOW_QUERY`テーブルに対して`EXPLAIN ANALYZE`を実行しても、この情報は取得**できません**。
 
 例：
 

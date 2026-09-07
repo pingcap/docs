@@ -190,8 +190,8 @@ v7.5.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
     - 非整数クラスター化インデックスでの分割テーブル操作を禁止 [#47350](https://github.com/pingcap/tidb/issues/47350) @[tangenta](https://github.com/tangenta)
     - タイムゾーン情報が間違っているタイムフィールドのエンコード問題を修正 [#46033](https://github.com/pingcap/tidb/issues/46033) @[tangenta](https://github.com/tangenta)
     - Sort オペレーターがスピル プロセス中に TiDB をクラッシュさせる可能性がある問題を修正 [#47538](https://github.com/pingcap/tidb/issues/47538) @[windtalker](https://github.com/windtalker)
-    - TiDB が`Can't find column`を使用したクエリに対して`GROUP_CONCAT`を返す問題を修正 [#41957](https://github.com/pingcap/tidb/issues/41957) @[AilinKid](https://github.com/AilinKid)
-    - `batch-client`の`client-go`のpanic問題を修正 [#47691](https://github.com/pingcap/tidb/issues/47691) @[crazycs520](https://github.com/crazycs520)
+    - TiDB が`GROUP_CONCAT`を使用したクエリに対して`Can't find column`を返す問題を修正 [#41957](https://github.com/pingcap/tidb/issues/41957) @[AilinKid](https://github.com/AilinKid)
+    - `client-go`の`batch-client`のpanic問題を修正 [#47691](https://github.com/pingcap/tidb/issues/47691) @[crazycs520](https://github.com/crazycs520)
     - `INDEX_LOOKUP_HASH_JOIN` のメモリ使用量推定の誤りを修正 [#47788](https://github.com/pingcap/tidb/issues/47788) @[SeaRise](https://github.com/SeaRise)
     - 長期間オフラインだったTiFlashノードの再参加によって生じる不均一なワークロードの問題を修正 [#35418](https://github.com/pingcap/tidb/issues/35418) @[windtalker](https://github.com/windtalker)
     - HashJoin オペレーターがプローブを実行する際にチャンクを再利用できない問題を修正します [#48082](https://github.com/pingcap/tidb/issues/48082) @[wshwsh12](https://github.com/wshwsh12)
@@ -202,7 +202,7 @@ v7.5.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
     - ウィンドウ関数によって導入されたソートを削減するために、オプティマイザが誤って IndexFullScan を選択する問題を修正しました [#46177](https://github.com/pingcap/tidb/issues/46177) @[qw4990](https://github.com/qw4990)
     - CTEの条件プッシュダウンにより、複数のCTE参照によって誤った結果が生じる問題を修正 [#47881](https://github.com/pingcap/tidb/issues/47881) @[winoros](https://github.com/winoros)
     - MySQLの圧縮プロトコルが大量のデータ（&gt;=16M）を処理できない問題を修正[#47152](https://github.com/pingcap/tidb/issues/47152) [#47157](https://github.com/pingcap/tidb/issues/47157) [#47161](https://github.com/pingcap/tidb/issues/47161) @[dveeden](https://github.com/dveeden)
-    - TiDBが`cgroup`で起動されたときに`systemd`のリソース制限を読み取らない問題を修正 [#47442](https://github.com/pingcap/tidb/issues/47442) @[hawkingrei](https://github.com/hawkingrei)
+    - TiDBが`systemd`で起動されたときに`cgroup`のリソース制限を読み取らない問題を修正 [#47442](https://github.com/pingcap/tidb/issues/47442) @[hawkingrei](https://github.com/hawkingrei)
 
 - TiKV
 
