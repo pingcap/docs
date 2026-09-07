@@ -12,6 +12,8 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | SQL Statement                                                                      | Description                                                                                            |
 | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)                | Modifies a database.                                                                                   |
+| [`ALTER MATERIALIZED VIEW`](/sql-statements/sql-statement-alter-materialized-view.md) | Modifies a materialized view.                                                                         |
+| [`ALTER MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-alter-materialized-view-log.md) | Modifies a materialized view log.                                                               |
 | [`ALTER SEQUENCE`](/sql-statements/sql-statement-alter-sequence.md)                | Modifies a sequence.                                                                                   |
 | [`ALTER TABLE ... ADD COLUMN`](/sql-statements/sql-statement-add-column.md)        | Adds a column to an existing table.                                                                    |
 | [`ALTER TABLE ... ADD INDEX`](/sql-statements/sql-statement-add-index.md)          | Adds an index to an existing table.                                                                    |
@@ -24,12 +26,16 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)                      | Changes a table definition.                                                                            |
 | [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)              | Creates a new database.                                                                                |
 | [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md)                    | Creates a new index on a table.                                                                        |
+| [`CREATE MATERIALIZED VIEW`](/sql-statements/sql-statement-create-materialized-view.md) | Creates a materialized view.                                                                      |
+| [`CREATE MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-create-materialized-view-log.md) | Creates a materialized view log.                                                                |
 | [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)              | Creates a new sequence object.                                                                         |
 | [`CREATE TABLE LIKE`](/sql-statements/sql-statement-create-table-like.md)          | Copies the definition of an existing table, without copying any data.                                  |
 | [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)                    | Creates a new table.                                                                                   |
 | [`CREATE VIEW`](/sql-statements/sql-statement-create-view.md)                      | Creates a new view.                                                                                    |
 | [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md)                  | Drops an existing database.                                                                            |
 | [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)                        | Drops an index from a table.                                                                           |
+| [`DROP MATERIALIZED VIEW`](/sql-statements/sql-statement-drop-materialized-view.md) | Drops a materialized view.                                                                             |
+| [`DROP MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-drop-materialized-view-log.md) | Drops a materialized view log.                                                                   |
 | [`DROP SEQUENCE`](/sql-statements/sql-statement-drop-sequence.md)                  | Drops a sequence object.                                                                               |
 | [`DROP TABLE`](/sql-statements/sql-statement-drop-table.md)                        | Drops an existing table.                                                                               |
 | [`DROP VIEW`](/sql-statements/sql-statement-drop-view.md)                          | Drops an existing view.                                                                                |
