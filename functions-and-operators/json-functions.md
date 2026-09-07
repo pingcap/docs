@@ -151,7 +151,7 @@ JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを�
 - `JSON_TABLE()`
 - `JSON_VALUE()`
 
-詳細については[＃14486](https://github.com/pingcap/tidb/issues/14486)を参照してください。
+詳細については[#14486](https://github.com/pingcap/tidb/issues/14486)を参照してください。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 

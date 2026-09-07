@@ -153,7 +153,7 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
 1 rows in set (1.30 sec)
 ```
 
-`BACKGROUND`リソースグループの`default` } オプションを変更します。
+`default`リソースグループの`BACKGROUND`オプションを変更します。
 
 ```sql
 ALTER RESOURCE GROUP default BACKGROUND = (TASK_TYPES = "br,ddl", UTILIZATION_LIMIT=30);

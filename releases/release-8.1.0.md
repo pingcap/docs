@@ -23,7 +23,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 ### 信頼性 {#reliability}
 
-- 予想よりも多くのリソースを消費するクエリの管理をサポート (GA) [＃43691](https://github.com/pingcap/tidb/issues/43691) @[nolouch](https://github.com/nolouch)
+- 予想よりも多くのリソースを消費するクエリの管理をサポート (GA) [#43691](https://github.com/pingcap/tidb/issues/43691) @[nolouch](https://github.com/nolouch)
 
     突発的なSQLクエリパフォーマンスの問題は、データベース全体のパフォーマンス低下を引き起こす可能性があり、これはデータベースの安定性における最も一般的な課題です。これらの問題の原因は、テストされていない新しいSQL文、データ量の急激な変化、実行計画の突然の変更など、多岐にわたります。これらの問題をソースコードで完全に回避することは困難です。TiDB v7.2.0では、予想以上にリソースを消費するクエリを管理し、突発的なクエリパフォーマンスの問題の影響を迅速に軽減する機能が導入されました。この機能はv8.1.0で一般提供が開始されます。
 
@@ -37,7 +37,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 ### SQL {#sql}
 
-- テーブルの作成時にデフォルトの列値を設定するためのより多くの式の使用をサポート (GA) [＃50936](https://github.com/pingcap/tidb/issues/50936) @[zimulala](https://github.com/zimulala)
+- テーブルの作成時にデフォルトの列値を設定するためのより多くの式の使用をサポート (GA) [#50936](https://github.com/pingcap/tidb/issues/50936) @[zimulala](https://github.com/zimulala)
 
     バージョン8.0.0より前のバージョンでは、テーブル作成時の列のデフォルト値は文字列、数値、日付、および特定の式に制限されていました。バージョン8.0.0以降では、より多くの式をデフォルトの列値として使用できるようになります。例えば、列のデフォルト値を`DATE_FORMAT`に設定できます。この機能により、より多様な要件に対応できるようになります。バージョン8.1.0では、この機能がGAになります。
 
@@ -47,7 +47,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 ### DB操作 {#db-operations}
 
-- デフォルトで TiDB 分散実行フレームワーク (DXF) を有効にして、 `ADD INDEX`または`IMPORT INTO`タスクの並列実行のパフォーマンスと安定性を向上させます。 [＃52441](https://github.com/pingcap/tidb/issues/52441) @[D3Hunter](https://github.com/D3Hunter)
+- デフォルトで TiDB 分散実行フレームワーク (DXF) を有効にして、 `ADD INDEX`または`IMPORT INTO`タスクの並列実行のパフォーマンスと安定性を向上させます。 [#52441](https://github.com/pingcap/tidb/issues/52441) @[D3Hunter](https://github.com/D3Hunter)
 
     DXFはv7.5.0で一般提供（GA）されますが、デフォルトでは無効になっています。つまり、 `ADD INDEX`または`IMPORT INTO`タスクは、デフォルトでは1つのTiDBノードによってのみ実行されます。
 
@@ -57,7 +57,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 ### セキュリティ {#security}
 
-- TiDB ログの秘匿化 (GA) を強化 [＃52364](https://github.com/pingcap/tidb/issues/52364) @[xhebox](https://github.com/xhebox)
+- TiDB ログの秘匿化 (GA) を強化 [#52364](https://github.com/pingcap/tidb/issues/52364) @[xhebox](https://github.com/xhebox)
 
     強化された TiDB ログの秘匿化は、ログファイル内の SQL テキスト情報をマークすることで実装され、ユーザーがログを表示するときに機密データを削除することをサポートします。ログ情報をマークするかどうかを制御することで、さまざまなシナリオで TiDB ログを安全に使用でき、ログ秘匿化を使用する際のセキュリティと柔軟性が向上します。この機能を使用するには、システム変数`tidb_redact_log`を`MARKER`に設定すると、TiDB のランタイムログ内の SQL テキストがマークされます。さらに、TiDBサーバーで`collect-log`サブコマンドを使用して、マークされた機密データをログから削除し、ログを安全な方法で表示できます。すべてのマーカーを削除して通常のログを取得することもできます。この機能は、v8.1.0 で一般提供されました。
 
@@ -65,15 +65,15 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 ### データ移行 {#data-migration}
 
-- `IMPORT INTO ... FROM SELECT`構文（GA） をサポート [＃49883](https://github.com/pingcap/tidb/issues/49883) @[D3Hunter](https://github.com/D3Hunter)
+- `IMPORT INTO ... FROM SELECT`構文（GA） をサポート [#49883](https://github.com/pingcap/tidb/issues/49883) @[D3Hunter](https://github.com/D3Hunter)
 
-    v8.0.0より前では、クエリ結果をターゲットテーブルにインポートするには`INSERT INTO ... SELECT`文しか使用できませんでしたが、これは大規模データセットを扱うシナリオによっては比較的非効率的でした。v8.0.0では、TiDBは実験的機能として`IMPORT INTO ... FROM SELECT`導入し、 `SELECT`のクエリ結果を空のTiDBターゲットテーブルにインポートできるようになりました。これにより、 `INSERT INTO ... SELECT`の最大8倍のパフォーマンスを実現し、インポート時間を大幅に短縮できます。さらに、 `IMPORT INTO ... FROM SELECT`を使用して、 [`AS OF TIMESTAMP`](/as-of-timestamp.md)でクエリされた履歴データをインポートすることもできます。
+    v8.0.0より前では、クエリ結果をターゲットテーブルにインポートするには`INSERT INTO ... SELECT`文しか使用できませんでしたが、これは大規模データセットを扱うシナリオによっては比較的非効率的でした。v8.0.0では、TiDBは実験的機能として`IMPORT INTO ... FROM SELECT`を導入し、 `SELECT`のクエリ結果を空のTiDBターゲットテーブルにインポートできるようになりました。これにより、 `INSERT INTO ... SELECT`の最大8倍のパフォーマンスを実現し、インポート時間を大幅に短縮できます。さらに、 `IMPORT INTO ... FROM SELECT`を使用して、 [`AS OF TIMESTAMP`](/as-of-timestamp.md)でクエリされた履歴データをインポートすることもできます。
 
     v8.1.0 では、 `IMPORT INTO ... FROM SELECT`構文が一般公開 (GA) され、 `IMPORT INTO`文の機能シナリオが充実します。
 
     詳細については[ドキュメント](/sql-statements/sql-statement-import-into.md)を参照してください。
 
-- TiDB Lightningは競合解決戦略を簡素化し、 `replace`戦略（GA） を使用して競合するデータの処理をサポートします。 [＃51036](https://github.com/pingcap/tidb/issues/51036) @[lyzx2001](https://github.com/lyzx2001)
+- TiDB Lightningは競合解決戦略を簡素化し、 `replace`戦略（GA） を使用して競合するデータの処理をサポートします。 [#51036](https://github.com/pingcap/tidb/issues/51036) @[lyzx2001](https://github.com/lyzx2001)
 
     v8.0.0 より前のTiDB Lightningには、論理インポートモードが[1つのデータ競合解決戦略](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md#conflict-detection) 、物理インポートモードが[2つのデータ競合解決戦略](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection)があり、理解して構成するのは簡単ではありません。
 
@@ -81,9 +81,9 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
     詳細については[ドキュメント](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
-- TiCDCはクライアント認証をサポートします [＃10636](https://github.com/pingcap/tiflow/issues/10636) @[CharlesCheung96](https://github.com/CharlesCheung96)
+- TiCDCはクライアント認証をサポートします [#10636](https://github.com/pingcap/tiflow/issues/10636) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
-    v8.1.0では、TiCDC CLIまたはOpenAPIを使用する際に、TiCDCはクライアント認証をサポートします。この機能により、クライアント証明書を用いたクライアント認証を要求するようにTiCDCを設定でき、相互トランスポート層Security（mTLS）を確立できます。さらに、TiDBのユーザー名とパスワードに基づく認証も設定できます。
+    v8.1.0では、TiCDC CLIまたはOpenAPIを使用する際に、TiCDCはクライアント認証をサポートします。この機能により、クライアント証明書を用いたクライアント認証を要求するようにTiCDCを設定でき、相互トランスポート層セキュリティ（mTLS）を確立できます。さらに、TiDBのユーザー名とパスワードに基づく認証も設定できます。
 
     詳細については[ドキュメント](/ticdc/ticdc-client-authentication.md)を参照してください。
 
@@ -143,146 +143,146 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 - TiDB
 
-    - `SHOW CREATE TABLE` の出力に表示される外部キーのMySQL互換性を改善 [＃51837](https://github.com/pingcap/tidb/issues/51837) @[negachov](https://github.com/negachov)
-    - `SHOW CREATE TABLE` の出力に表示される式のデフォルト値のMySQL互換性を改善しました [＃52939](https://github.com/pingcap/tidb/issues/52939) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    - 取り込みモードで複数のインデックスを同時に追加できるようになりました [＃52596](https://github.com/pingcap/tidb/issues/52596) @[lance6716](https://github.com/lance6716)
-    - システム変数`tidb_service_scope`さまざまな値で構成することをサポートし、分散実行フレームワーク（DXF） の利用率を高めます。 [＃52441](https://github.com/pingcap/tidb/issues/52441) @[ywqzzy](https://github.com/ywqzzy)
-    - 常に`false`である DNF 項目の処理を強化し、そのようなフィルタ条件を直接無視することで、不要なテーブル全体のスキャンを回避します[＃40997](https://github.com/pingcap/tidb/issues/40997) @[Rustin170506](https://github.com/Rustin170506)
-    - オプティマイザがクエリに対して単一インデックススキャン方式 (フルテーブルスキャン以外) を選択できる場合、オプティマイザがクエリに対してインデックスマージを自動的に選択しないという制限を削除するために、オプティマイザ修正コントロールの使用をサポートします。 [＃52869](https://github.com/pingcap/tidb/issues/52869) @[time-and-fate](https://github.com/time-and-fate)
-    - コプロセッサー演算子の列`execution info`に`total_kv_read_wall_time`メトリックを追加します。 [＃28937](https://github.com/pingcap/tidb/issues/28937) @[cfzjywxk](https://github.com/cfzjywxk)
-    - リソースコントロールダッシュボードに`RU (max)`メトリックを追加する[＃49318](https://github.com/pingcap/tidb/issues/49318) @[nolouch](https://github.com/nolouch)
-    - リソースロック（RLock）が内に解放されない問題を回避するために、LDAP認証にタイムアウトメカニズムを追加します@[YangKeao](https://github.com/YangKeao) [＃51883](https://github.com/pingcap/tidb/issues/51883)
+    - `SHOW CREATE TABLE` の出力に表示される外部キーのMySQL互換性を改善 [#51837](https://github.com/pingcap/tidb/issues/51837) @[negachov](https://github.com/negachov)
+    - `SHOW CREATE TABLE` の出力に表示される式のデフォルト値のMySQL互換性を改善しました [#52939](https://github.com/pingcap/tidb/issues/52939) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - 取り込みモードで複数のインデックスを同時に追加できるようになりました [#52596](https://github.com/pingcap/tidb/issues/52596) @[lance6716](https://github.com/lance6716)
+    - システム変数`tidb_service_scope`をさまざまな値で構成することをサポートし、分散実行フレームワーク（DXF） の利用率を高めます。 [#52441](https://github.com/pingcap/tidb/issues/52441) @[ywqzzy](https://github.com/ywqzzy)
+    - 常に`false`である DNF 項目の処理を強化し、そのようなフィルタ条件を直接無視することで、不要なテーブル全体のスキャンを回避します[#40997](https://github.com/pingcap/tidb/issues/40997) @[Rustin170506](https://github.com/Rustin170506)
+    - オプティマイザがクエリに対して単一インデックススキャン方式 (フルテーブルスキャン以外) を選択できる場合、オプティマイザがクエリに対してインデックスマージを自動的に選択しないという制限を削除するために、オプティマイザ修正コントロールの使用をサポートします。 [#52869](https://github.com/pingcap/tidb/issues/52869) @[time-and-fate](https://github.com/time-and-fate)
+    - コプロセッサー演算子の列`execution info`に`total_kv_read_wall_time`メトリックを追加します。 [#28937](https://github.com/pingcap/tidb/issues/28937) @[cfzjywxk](https://github.com/cfzjywxk)
+    - リソースコントロールダッシュボードに`RU (max)`メトリックを追加する[#49318](https://github.com/pingcap/tidb/issues/49318) @[nolouch](https://github.com/nolouch)
+    - リソースロック（RLock）が時間内に解放されない問題を回避するために、LDAP認証にタイムアウトメカニズムを追加します@[YangKeao](https://github.com/YangKeao) [#51883](https://github.com/pingcap/tidb/issues/51883)
 
 - TiKV
 
-    - TiKV の安定性を向上させるために、 Raftstoreスレッドでスナップショットファイルに対する IO 操作を実行しないようにします[＃16564](https://github.com/tikv/tikv/issues/16564) @[Connor1996](https://github.com/Connor1996)
-    - TiKV のシャットダウン速度を加速 [＃16680](https://github.com/tikv/tikv/issues/16680) @[LykxSassinator](https://github.com/LykxSassinator)
-    - スレッドごとのメモリ使用量のメトリックを追加します。 [＃15927](https://github.com/tikv/tikv/issues/15927) @[Connor1996](https://github.com/Connor1996)
+    - TiKV の安定性を向上させるために、 Raftstoreスレッドでスナップショットファイルに対する IO 操作を実行しないようにします[#16564](https://github.com/tikv/tikv/issues/16564) @[Connor1996](https://github.com/Connor1996)
+    - TiKV のシャットダウン速度を加速 [#16680](https://github.com/tikv/tikv/issues/16680) @[LykxSassinator](https://github.com/LykxSassinator)
+    - スレッドごとのメモリ使用量のメトリックを追加します。 [#15927](https://github.com/tikv/tikv/issues/15927) @[Connor1996](https://github.com/Connor1996)
 
 - PD
 
-    - `OperatorController`のロジックを最適化して競合ロックのオーバーヘッドを削減します [＃7897](https://github.com/tikv/pd/issues/7897) @[nolouch](https://github.com/nolouch)
+    - `OperatorController`のロジックを最適化して競合ロックのオーバーヘッドを削減します [#7897](https://github.com/tikv/pd/issues/7897) @[nolouch](https://github.com/nolouch)
 
 - TiFlash
 
-    - TLS を有効にした後に証明書を更新することでTiFlash がpanicする可能性がある問題を軽減します[＃8535](https://github.com/pingcap/tiflash/issues/8535) @[windtalker](https://github.com/windtalker)
+    - TLS を有効にした後に証明書を更新することでTiFlash がpanicする可能性がある問題を軽減します[#8535](https://github.com/pingcap/tiflash/issues/8535) @[windtalker](https://github.com/windtalker)
 
 - ツール
 
     - Backup & Restore (BR)
 
-        - ログバックアップの互換性テストとインデックスアクセラレーションをカバーするPITR統合テストケースを追加します。 [＃51987](https://github.com/pingcap/tidb/issues/51987) @[Leavrth](https://github.com/Leavrth)
-        - ログバックアップの開始時にアクティブなDDLジョブの無効な検証を削除します[＃52733](https://github.com/pingcap/tidb/issues/52733) @[Leavrth](https://github.com/Leavrth)
-        - PITR とインデックス追加機能の高速化の互換性をテストするためのテストケースを追加します。 [＃51988](https://github.com/pingcap/tidb/issues/51988) @[Leavrth](https://github.com/Leavrth)
-        - BRはデータ復旧中に空のSSTファイルをクリーンアップします[＃16005](https://github.com/tikv/tikv/issues/16005) @[Leavrth](https://github.com/Leavrth)
+        - ログバックアップの互換性テストとインデックスアクセラレーションをカバーするPITR統合テストケースを追加します。 [#51987](https://github.com/pingcap/tidb/issues/51987) @[Leavrth](https://github.com/Leavrth)
+        - ログバックアップの開始時にアクティブなDDLジョブの無効な検証を削除します[#52733](https://github.com/pingcap/tidb/issues/52733) @[Leavrth](https://github.com/Leavrth)
+        - PITR とインデックス追加機能の高速化の互換性をテストするためのテストケースを追加します。 [#51988](https://github.com/pingcap/tidb/issues/51988) @[Leavrth](https://github.com/Leavrth)
+        - BRはデータ復旧中に空のSSTファイルをクリーンアップします[#16005](https://github.com/tikv/tikv/issues/16005) @[Leavrth](https://github.com/Leavrth)
 
     - TiCDC
 
-        - REDOログを使用してデータリカバリ中のメモリの安定性を向上させ、OOM の確率を低減します。 [＃10900](https://github.com/pingcap/tiflow/issues/10900) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - トランザクション競合シナリオにおけるデータレプリケーションの安定性が大幅に向上し、パフォーマンスが最大10倍向上します[＃10896](https://github.com/pingcap/tiflow/issues/10896) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - REDOログを使用してデータリカバリ中のメモリの安定性を向上させ、OOM の確率を低減します。 [#10900](https://github.com/pingcap/tiflow/issues/10900) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - トランザクション競合シナリオにおけるデータレプリケーションの安定性が大幅に向上し、パフォーマンスが最大10倍向上します[#10896](https://github.com/pingcap/tiflow/issues/10896) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
 ## バグ修正 {#bug-fixes}
 
 - TiDB
 
-    - 複数値インデックスを持つテーブルを含むSQL文を実行すると、 `Can't find a proper physical plan for this query`エラーが返される可能性がある問題を修正しました。 [＃49438](https://github.com/pingcap/tidb/issues/49438) @[qw4990](https://github.com/qw4990)
-    - OOMエラー発生後に自動統計収集が停止する問題を修正[＃51993](https://github.com/pingcap/tidb/issues/51993) @[Rustin170506](https://github.com/Rustin170506)
-    - BRを使用して統計情報のないテーブルを復元した後、そのテーブルの統計の健全性が 100% のままになる問題を修正しました。 [＃29769](https://github.com/pingcap/tidb/issues/29769) @[winoros](https://github.com/winoros)
-    - アップグレード中に TiDB がシステムテーブルの統計を作成する問題を修正しました [＃52040](https://github.com/pingcap/tidb/issues/52040) @[Rustin170506](https://github.com/Rustin170506)
-    - 統計の初期化が完了する前に自動統計収集がトリガーされる問題を修正[＃52346](https://github.com/pingcap/tidb/issues/52346) @[Rustin170506](https://github.com/Rustin170506)
-    - `tidb_mem_quota_analyze`が有効になっていて、統計の更新に使用されるメモリが制限を超えると TiDB がクラッシュする可能性がある問題を修正しました。 [＃52601](https://github.com/pingcap/tidb/issues/52601) @[hawkingrei](https://github.com/hawkingrei)
-    - TiDBの同期的な統計読み込みメカニズムが空の統計の読み込みを無期限に再試行し、 `fail to get stats version for this histogram` log を出力問題を修正しました。 [＃52657](https://github.com/pingcap/tidb/issues/52657) @[hawkingrei](https://github.com/hawkingrei)
-    - 照合順序の新しいフレームワークが無効になっているときに、異なる照合順序を含む式によってクエリがpanicになる可能性がある問題を修正しました[＃52772](https://github.com/pingcap/tidb/issues/52772) @[wjhuang2016](https://github.com/wjhuang2016)
-    - `CPS by type`メトリックに誤った値が表示される問題を修正しました [＃52605](https://github.com/pingcap/tidb/issues/52605) @[nolouch](https://github.com/nolouch)
-    - `INFORMATION_SCHEMA.TIKV_REGION_STATUS` をクエリすると nil ポインタエラーが発生する問題を修正しました [＃52013](https://github.com/pingcap/tidb/issues/52013) @[JmPotato](https://github.com/JmPotato)
-    - 列に無効なデフォルト値が指定されたときに表示される誤ったエラーメッセージを修正しました。 [＃51592](https://github.com/pingcap/tidb/issues/51592) @[danqixu](https://github.com/danqixu)
-    - 取り込みモードでインデックスを追加すると、一部のコーナーケースでデータインデックスの不整合が発生する可能性がある問題を修正[＃51954](https://github.com/pingcap/tidb/issues/51954) @[lance6716](https://github.com/lance6716)
-    - 外部キーを持つテーブルを復元するときに DDL 操作が停止する問題を修正しました [＃51838](https://github.com/pingcap/tidb/issues/51838) @[YangKeao](https://github.com/YangKeao)
-    - TiDBネットワークが分離されているときにインデックスの追加が失敗する問題を修正 [＃51846](https://github.com/pingcap/tidb/issues/51846) @[ywqzzy](https://github.com/ywqzzy)
-    - インデックス名を変更した後に同じ名前のインデックスを追加するとエラーが発生する問題を修正[＃51431](https://github.com/pingcap/tidb/issues/51431) @[lance6716](https://github.com/lance6716)
-    - インデックス追加中にクラスターのアップグレードによって発生するデータインデックスの不整合の問題を修正しました。 [＃52411](https://github.com/pingcap/tidb/issues/52411) @[tangenta](https://github.com/tangenta)
-    - 分散実行フレームワーク (DXF) を有効にした後に、大きなテーブルにインデックスを追加できない問題を修正しました。 [＃52640](https://github.com/pingcap/tidb/issues/52640) @[tangenta](https://github.com/tangenta)
-    - インデックスを同時に追加するとエラー`no such file or directory` が報告される問題を修正しました [＃52475](https://github.com/pingcap/tidb/issues/52475) @[tangenta](https://github.com/tangenta)
-    - インデックスの追加が失敗した後に一時データをクリーンアップできない問題を修正[＃52639](https://github.com/pingcap/tidb/issues/52639) @[lance6716](https://github.com/lance6716)
-    - プランキャッシュシナリオでメタデータロックがDDL操作の実行を阻止できない問題を修正 [＃51407](https://github.com/pingcap/tidb/issues/51407) @[wjhuang2016](https://github.com/wjhuang2016)
-    - 大量のデータをインポートするときに`IMPORT INTO`操作が停止する問題を修正[＃52884](https://github.com/pingcap/tidb/issues/52884) @[lance6716](https://github.com/lance6716)
-    - gRPC エラーをログに記録するときに TiDB が予期せず再起動する問題を修正しました [＃51301](https://github.com/pingcap/tidb/issues/51301) @[guo-shaoge](https://github.com/guo-shaoge)
-    - IndexHashJoin が Anti Left Outer Semi Join を計算するときに冗長なデータを出力する問題を修正しました。 [＃52923](https://github.com/pingcap/tidb/issues/52923) @[yibin87](https://github.com/yibin87)
-    - 相関サブクエリにおける TopN オペレーターの誤った結果を修正 [＃52777](https://github.com/pingcap/tidb/issues/52777) @[yibin87](https://github.com/yibin87)
-    - HashJoinプローブの不正確な実行時間統計を修正 [＃52222](https://github.com/pingcap/tidb/issues/52222) @[windtalker](https://github.com/windtalker)
-    - 静的パーティションプルーニングモードで`TABLESAMPLE`を使用すると誤った結果が返される問題を修正（ `tidb_partition_prune_mode='static'` ） [＃52282](https://github.com/pingcap/tidb/issues/52282) @[tangenta](https://github.com/tangenta)
-    - 夏時間でTTLが1時間ずれる問題を修正 [＃51675](https://github.com/pingcap/tidb/issues/51675) @[lcwangchao](https://github.com/lcwangchao)
-    - TiDB Dashboardのモニタリングページにおける接続数（接続数）の計算と表示が誤っていた問題を修正しました。 [＃51889](https://github.com/pingcap/tidb/issues/51889) @[YangKeao](https://github.com/YangKeao)
-    - パーティションDDLタスクをロールバックするときにステータスが停止する問題を修正しました [＃51090](https://github.com/pingcap/tidb/issues/51090) @[jiyfhust](https://github.com/jiyfhust)
-    - `EXPLAIN ANALYZE` を実行したときに`max_remote_stream`の値が正しくない問題を修正しました [＃52646](https://github.com/pingcap/tidb/issues/52646) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - `TIDB_HOT_REGIONS`テーブルをクエリすると、誤って`INFORMATION_SCHEMA`テーブルが返される可能性がある問題を修正しました。 [＃50810](https://github.com/pingcap/tidb/issues/50810) @[Defined2014](https://github.com/Defined2014)
-    - 特定の列の統計情報が完全にロードされていない場合に、 `EXPLAIN`文の結果に誤った列 ID が表示される可能性がある問題を修正しました[＃52207](https://github.com/pingcap/tidb/issues/52207) @[time-and-fate](https://github.com/time-and-fate)
-    - `IFNULL`関数によって返される型が MySQL と一致しない問題を修正しました [＃51765](https://github.com/pingcap/tidb/issues/51765) @[YangKeao](https://github.com/YangKeao)
-    - 一意インデックスを追加するとTiDBがpanicする可能性がある問題を修正[＃52312](https://github.com/pingcap/tidb/issues/52312) @[wjhuang2016](https://github.com/wjhuang2016)
+    - 複数値インデックスを持つテーブルを含むSQL文を実行すると、 `Can't find a proper physical plan for this query`エラーが返される可能性がある問題を修正しました。 [#49438](https://github.com/pingcap/tidb/issues/49438) @[qw4990](https://github.com/qw4990)
+    - OOMエラー発生後に自動統計収集が停止する問題を修正[#51993](https://github.com/pingcap/tidb/issues/51993) @[Rustin170506](https://github.com/Rustin170506)
+    - BRを使用して統計情報のないテーブルを復元した後、そのテーブルの統計の健全性が 100% のままになる問題を修正しました。 [#29769](https://github.com/pingcap/tidb/issues/29769) @[winoros](https://github.com/winoros)
+    - アップグレード中に TiDB がシステムテーブルの統計を作成する問題を修正しました [#52040](https://github.com/pingcap/tidb/issues/52040) @[Rustin170506](https://github.com/Rustin170506)
+    - 統計の初期化が完了する前に自動統計収集がトリガーされる問題を修正[#52346](https://github.com/pingcap/tidb/issues/52346) @[Rustin170506](https://github.com/Rustin170506)
+    - `tidb_mem_quota_analyze`が有効になっていて、統計の更新に使用されるメモリが制限を超えると TiDB がクラッシュする可能性がある問題を修正しました。 [#52601](https://github.com/pingcap/tidb/issues/52601) @[hawkingrei](https://github.com/hawkingrei)
+    - TiDBの同期的な統計読み込みメカニズムが空の統計の読み込みを無期限に再試行し、 `fail to get stats version for this histogram` log を出力する問題を修正しました。 [#52657](https://github.com/pingcap/tidb/issues/52657) @[hawkingrei](https://github.com/hawkingrei)
+    - 照合順序の新しいフレームワークが無効になっているときに、異なる照合順序を含む式によってクエリがpanicになる可能性がある問題を修正しました[#52772](https://github.com/pingcap/tidb/issues/52772) @[wjhuang2016](https://github.com/wjhuang2016)
+    - `CPS by type`メトリックに誤った値が表示される問題を修正しました [#52605](https://github.com/pingcap/tidb/issues/52605) @[nolouch](https://github.com/nolouch)
+    - `INFORMATION_SCHEMA.TIKV_REGION_STATUS` をクエリすると nil ポインタエラーが発生する問題を修正しました [#52013](https://github.com/pingcap/tidb/issues/52013) @[JmPotato](https://github.com/JmPotato)
+    - 列に無効なデフォルト値が指定されたときに表示される誤ったエラーメッセージを修正しました。 [#51592](https://github.com/pingcap/tidb/issues/51592) @[danqixu](https://github.com/danqixu)
+    - 取り込みモードでインデックスを追加すると、一部のコーナーケースでデータインデックスの不整合が発生する可能性がある問題を修正[#51954](https://github.com/pingcap/tidb/issues/51954) @[lance6716](https://github.com/lance6716)
+    - 外部キーを持つテーブルを復元するときに DDL 操作が停止する問題を修正しました [#51838](https://github.com/pingcap/tidb/issues/51838) @[YangKeao](https://github.com/YangKeao)
+    - TiDBネットワークが分離されているときにインデックスの追加が失敗する問題を修正 [#51846](https://github.com/pingcap/tidb/issues/51846) @[ywqzzy](https://github.com/ywqzzy)
+    - インデックス名を変更した後に同じ名前のインデックスを追加するとエラーが発生する問題を修正[#51431](https://github.com/pingcap/tidb/issues/51431) @[lance6716](https://github.com/lance6716)
+    - インデックス追加中にクラスターのアップグレードによって発生するデータインデックスの不整合の問題を修正しました。 [#52411](https://github.com/pingcap/tidb/issues/52411) @[tangenta](https://github.com/tangenta)
+    - 分散実行フレームワーク (DXF) を有効にした後に、大きなテーブルにインデックスを追加できない問題を修正しました。 [#52640](https://github.com/pingcap/tidb/issues/52640) @[tangenta](https://github.com/tangenta)
+    - インデックスを同時に追加するとエラー`no such file or directory` が報告される問題を修正しました [#52475](https://github.com/pingcap/tidb/issues/52475) @[tangenta](https://github.com/tangenta)
+    - インデックスの追加が失敗した後に一時データをクリーンアップできない問題を修正[#52639](https://github.com/pingcap/tidb/issues/52639) @[lance6716](https://github.com/lance6716)
+    - プランキャッシュシナリオでメタデータロックがDDL操作の実行を阻止できない問題を修正 [#51407](https://github.com/pingcap/tidb/issues/51407) @[wjhuang2016](https://github.com/wjhuang2016)
+    - 大量のデータをインポートするときに`IMPORT INTO`操作が停止する問題を修正[#52884](https://github.com/pingcap/tidb/issues/52884) @[lance6716](https://github.com/lance6716)
+    - gRPC エラーをログに記録するときに TiDB が予期せず再起動する問題を修正しました [#51301](https://github.com/pingcap/tidb/issues/51301) @[guo-shaoge](https://github.com/guo-shaoge)
+    - IndexHashJoin が Anti Left Outer Semi Join を計算するときに冗長なデータを出力する問題を修正しました。 [#52923](https://github.com/pingcap/tidb/issues/52923) @[yibin87](https://github.com/yibin87)
+    - 相関サブクエリにおける TopN オペレーターの誤った結果を修正 [#52777](https://github.com/pingcap/tidb/issues/52777) @[yibin87](https://github.com/yibin87)
+    - HashJoinプローブの不正確な実行時間統計を修正 [#52222](https://github.com/pingcap/tidb/issues/52222) @[windtalker](https://github.com/windtalker)
+    - 静的パーティションプルーニングモードで`TABLESAMPLE`を使用すると誤った結果が返される問題を修正（ `tidb_partition_prune_mode='static'` ） [#52282](https://github.com/pingcap/tidb/issues/52282) @[tangenta](https://github.com/tangenta)
+    - 夏時間でTTLが1時間ずれる問題を修正 [#51675](https://github.com/pingcap/tidb/issues/51675) @[lcwangchao](https://github.com/lcwangchao)
+    - TiDB Dashboardのモニタリングページにおける接続数（接続数）の計算と表示が誤っていた問題を修正しました。 [#51889](https://github.com/pingcap/tidb/issues/51889) @[YangKeao](https://github.com/YangKeao)
+    - パーティションDDLタスクをロールバックするときにステータスが停止する問題を修正しました [#51090](https://github.com/pingcap/tidb/issues/51090) @[jiyfhust](https://github.com/jiyfhust)
+    - `EXPLAIN ANALYZE` を実行したときに`max_remote_stream`の値が正しくない問題を修正しました [#52646](https://github.com/pingcap/tidb/issues/52646) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - `TIDB_HOT_REGIONS`テーブルをクエリすると、誤って`INFORMATION_SCHEMA`テーブルが返される可能性がある問題を修正しました。 [#50810](https://github.com/pingcap/tidb/issues/50810) @[Defined2014](https://github.com/Defined2014)
+    - 特定の列の統計情報が完全にロードされていない場合に、 `EXPLAIN`文の結果に誤った列 ID が表示される可能性がある問題を修正しました[#52207](https://github.com/pingcap/tidb/issues/52207) @[time-and-fate](https://github.com/time-and-fate)
+    - `IFNULL`関数によって返される型が MySQL と一致しない問題を修正しました [#51765](https://github.com/pingcap/tidb/issues/51765) @[YangKeao](https://github.com/YangKeao)
+    - 一意インデックスを追加するとTiDBがpanicする可能性がある問題を修正[#52312](https://github.com/pingcap/tidb/issues/52312) @[wjhuang2016](https://github.com/wjhuang2016)
 
 - TiKV
 
-    - 古いリージョンピアがGCメッセージを無視するとresolve-tsがブロックされる問題を修正しました [＃16504](https://github.com/tikv/tikv/issues/16504) @[crazycs520](https://github.com/crazycs520)
-    - RocksDB の非アクティブな Write Ahead Logs (WAL) によってデータが破損する可能性がある問題を修正しました[＃16705](https://github.com/tikv/tikv/issues/16705) @[Connor1996](https://github.com/Connor1996)
+    - 古いリージョンピアがGCメッセージを無視するとresolve-tsがブロックされる問題を修正しました [#16504](https://github.com/tikv/tikv/issues/16504) @[crazycs520](https://github.com/crazycs520)
+    - RocksDB の非アクティブな Write Ahead Logs (WAL) によってデータが破損する可能性がある問題を修正しました[#16705](https://github.com/tikv/tikv/issues/16705) @[Connor1996](https://github.com/Connor1996)
 
 - PD
 
-    - PD マイクロサービスモードのオン/オフを切り替えるときに TSO が停止する可能性がある問題を修正[＃7849](https://github.com/tikv/pd/issues/7849) @[JmPotato](https://github.com/JmPotato)
-    - DR自動同期の`State`監視メトリックにデータが表示されない問題を修正[＃7974](https://github.com/tikv/pd/issues/7974) @[lhy1024](https://github.com/lhy1024)
-    - バイナリバージョンのチェックでPD panicが発生する可能性がある問題を修正 [＃7978](https://github.com/tikv/pd/issues/7978) @[JmPotato](https://github.com/JmPotato)
-    - TTLパラメータを解析する際に発生する型変換エラーを修正[＃7980](https://github.com/tikv/pd/issues/7980) @[HuSharp](https://github.com/HuSharp)
-    - デプロイされた2つのデータセンター間でリーダーを切り替えるとLeaderが失敗する問題を修正[＃7992](https://github.com/tikv/pd/issues/7992) @[TonsnakeLin](https://github.com/TonsnakeLin)
-    - pd-ctl の`PrintErrln`が`stderr` にエラーメッセージを出力できない問題を修正しました [＃8022](https://github.com/tikv/pd/issues/8022) @[HuSharp](https://github.com/HuSharp)
-    - `Merge`スケジュールを生成する際にPDがpanicする可能性がある問題を修正 [＃8049](https://github.com/tikv/pd/issues/8049) @[nolouch](https://github.com/nolouch)
-    - `GetAdditionalInfo` によって引き起こされるpanic問題を修正 [＃8079](https://github.com/tikv/pd/issues/8079) @[HuSharp](https://github.com/HuSharp)
-    - PDの`Filter target`監視メトリックが散布範囲情報を提供しない問題を修正[＃8125](https://github.com/tikv/pd/issues/8125) @[HuSharp](https://github.com/HuSharp)
-    - クエリ結果`SHOW CONFIG`に非推奨の設定項目`trace-region-flow` が含まれる問題を修正しました [＃7917](https://github.com/tikv/pd/issues/7917) @[rleungx](https://github.com/rleungx)
-    - スケーリングの進行状況が正しく表示されない問題を修正[＃7726](https://github.com/tikv/pd/issues/7726) @[CabinfeverB](https://github.com/CabinfeverB)
+    - PD マイクロサービスモードのオン/オフを切り替えるときに TSO が停止する可能性がある問題を修正[#7849](https://github.com/tikv/pd/issues/7849) @[JmPotato](https://github.com/JmPotato)
+    - DR自動同期の`State`監視メトリックにデータが表示されない問題を修正[#7974](https://github.com/tikv/pd/issues/7974) @[lhy1024](https://github.com/lhy1024)
+    - バイナリバージョンのチェックでPD panicが発生する可能性がある問題を修正 [#7978](https://github.com/tikv/pd/issues/7978) @[JmPotato](https://github.com/JmPotato)
+    - TTLパラメータを解析する際に発生する型変換エラーを修正[#7980](https://github.com/tikv/pd/issues/7980) @[HuSharp](https://github.com/HuSharp)
+    - デプロイされた2つのデータセンター間でリーダーを切り替えるとLeaderが失敗する問題を修正[#7992](https://github.com/tikv/pd/issues/7992) @[TonsnakeLin](https://github.com/TonsnakeLin)
+    - pd-ctl の`PrintErrln`が`stderr` にエラーメッセージを出力できない問題を修正しました [#8022](https://github.com/tikv/pd/issues/8022) @[HuSharp](https://github.com/HuSharp)
+    - `Merge`スケジュールを生成する際にPDがpanicする可能性がある問題を修正 [#8049](https://github.com/tikv/pd/issues/8049) @[nolouch](https://github.com/nolouch)
+    - `GetAdditionalInfo` によって引き起こされるpanic問題を修正 [#8079](https://github.com/tikv/pd/issues/8079) @[HuSharp](https://github.com/HuSharp)
+    - PDの`Filter target`監視メトリックが散布範囲情報を提供しない問題を修正[#8125](https://github.com/tikv/pd/issues/8125) @[HuSharp](https://github.com/HuSharp)
+    - クエリ結果`SHOW CONFIG`に非推奨の設定項目`trace-region-flow` が含まれる問題を修正しました [#7917](https://github.com/tikv/pd/issues/7917) @[rleungx](https://github.com/rleungx)
+    - スケーリングの進行状況が正しく表示されない問題を修正[#7726](https://github.com/tikv/pd/issues/7726) @[CabinfeverB](https://github.com/CabinfeverB)
 
 - TiFlash
 
-    - 非厳密モードの`sql_mode` で無効なデフォルト値を持つ列にデータを挿入するとTiFlash がpanicする可能性がある問題を修正しました [＃8803](https://github.com/pingcap/tiflash/issues/8803) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - TiFlash が高同時実行読み取りシナリオで一時的に誤った結果を返す可能性がある問題を修正[＃8845](https://github.com/pingcap/tiflash/issues/8845) @[JinheLin](https://github.com/JinheLin)
-    - 分散ストレージおよびコンピューティングアーキテクチャで、 TiFlashコンピューティングノードの`storage.remote.cache.capacity`設定項目の値を変更した後、Grafanaに表示されるディスク`used_size`メトリックが正しくないという問題を修正しました。 [＃8920](https://github.com/pingcap/tiflash/issues/8920) @[JinheLin](https://github.com/JinheLin)
-    - クラスタをv6.5.0より前のバージョンからv6.5.0以降にアップグレードするときに、 TiFlashメタデータが破損してプロセスがpanicになる可能性がある問題を修正しました[＃9039](https://github.com/pingcap/tiflash/issues/9039) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 分散ストレージとコンピューティングアーキテクチャで、コンピューティングノードのプロセスが停止するとTiFlash がpanicする可能性がある問題を修正しました[＃8860](https://github.com/pingcap/tiflash/issues/8860) @[guo-shaoge](https://github.com/guo-shaoge)
-    - 仮想生成列を含むクエリを実行するとTiFlash がエラーを返す可能性がある問題を修正しました [＃8787](https://github.com/pingcap/tiflash/issues/8787) @[guo-shaoge](https://github.com/guo-shaoge)
+    - 非厳密モードの`sql_mode` で無効なデフォルト値を持つ列にデータを挿入するとTiFlash がpanicする可能性がある問題を修正しました [#8803](https://github.com/pingcap/tiflash/issues/8803) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - TiFlash が高同時実行読み取りシナリオで一時的に誤った結果を返す可能性がある問題を修正[#8845](https://github.com/pingcap/tiflash/issues/8845) @[JinheLin](https://github.com/JinheLin)
+    - 分散ストレージおよびコンピューティングアーキテクチャで、 TiFlashコンピューティングノードの`storage.remote.cache.capacity`設定項目の値を変更した後、Grafanaに表示されるディスク`used_size`メトリックが正しくないという問題を修正しました。 [#8920](https://github.com/pingcap/tiflash/issues/8920) @[JinheLin](https://github.com/JinheLin)
+    - クラスタをv6.5.0より前のバージョンからv6.5.0以降にアップグレードするときに、 TiFlashメタデータが破損してプロセスがpanicになる可能性がある問題を修正しました[#9039](https://github.com/pingcap/tiflash/issues/9039) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - 分散ストレージとコンピューティングアーキテクチャで、コンピューティングノードのプロセスが停止するとTiFlash がpanicする可能性がある問題を修正しました[#8860](https://github.com/pingcap/tiflash/issues/8860) @[guo-shaoge](https://github.com/guo-shaoge)
+    - 仮想生成列を含むクエリを実行するとTiFlash がエラーを返す可能性がある問題を修正しました [#8787](https://github.com/pingcap/tiflash/issues/8787) @[guo-shaoge](https://github.com/guo-shaoge)
 
 - ツール
 
     - Backup & Restore (BR)
 
-        - BRが`AUTO_RANDOM`列を含むユニオンクラスター化インデックスの`AUTO_RANDOM` ID割り当ての進行状況をバックアップできない問題を修正しました。 [＃52255](https://github.com/pingcap/tidb/issues/52255) @[Leavrth](https://github.com/Leavrth)
-        - ログバックアップタスクを一時停止後に削除しても、GCセーフポイントがすぐに復元されない問題を修正しました。 [＃52082](https://github.com/pingcap/tidb/issues/52082) @[3pointer](https://github.com/3pointer)
-        - 特別なイベントタイミングにより、ログバックアップでデータ損失が発生する可能性があるという稀な問題を修正しました。 [＃16739](https://github.com/tikv/tikv/issues/16739) @[YuJuncen](https://github.com/YuJuncen)
-        - TiKV の再起動により、ログバックアップのグローバルチェックポイントが実際のバックアップファイルの書き込みポイントよりも先に進められ、少量のバックアップデータが失われる可能性がある問題を修正しました[＃16809](https://github.com/tikv/tikv/issues/16809) @[YuJuncen](https://github.com/YuJuncen)
-        - フルバックアップ中に`--concurrency`に関連する紛らわしい情報がログに表示される問題を修正 [＃50837](https://github.com/pingcap/tidb/issues/50837) @[BornChanger](https://github.com/BornChanger)
-        - BRを使用してデータを復元する場合、または物理インポートモードでTiDB Lightningを使用してデータをインポートする場合に、PD から取得されたリージョンにLeaderがない問題を修正しました[＃51124](https://github.com/pingcap/tidb/issues/51124) [＃50501](https://github.com/pingcap/tidb/issues/50501) @[Leavrth](https://github.com/Leavrth)
-        - ログバックアップタスクを一時停止、停止、再構築した後、タスクの状態は正常であるが、チェックポイントが進まない問題を修正しました。 [＃53047](https://github.com/pingcap/tidb/issues/53047) @[RidRisR](https://github.com/RidRisR)
-        - 不安定なテストケース`TestClearCache` を修正 [＃51671](https://github.com/pingcap/tidb/issues/51671) @[zxc111](https://github.com/zxc111)
-        - 不安定なテストケース`TestGetMergeRegionSizeAndCount` を修正 [＃52095](https://github.com/pingcap/tidb/issues/52095) @[3pointer](https://github.com/3pointer)
-        - 不安定な統合テストを修正`br_tikv_outage` [＃52673](https://github.com/pingcap/tidb/issues/52673) @[Leavrth](https://github.com/Leavrth)
-        - テストケース`TestGetTSWithRetry`実行に時間がかかりすぎる問題を修正[＃52547](https://github.com/pingcap/tidb/issues/52547) @[Leavrth](https://github.com/Leavrth)
-        - PD へのネットワーク接続が不安定な状態で一時停止中のログバックアップタスクを再開すると TiKV がpanicする可能性がある問題を修正しました [＃17020](https://github.com/tikv/tikv/issues/17020) @[YuJuncen](https://github.com/YuJuncen)
+        - BRが`AUTO_RANDOM`列を含むユニオンクラスター化インデックスの`AUTO_RANDOM` ID割り当ての進行状況をバックアップできない問題を修正しました。 [#52255](https://github.com/pingcap/tidb/issues/52255) @[Leavrth](https://github.com/Leavrth)
+        - ログバックアップタスクを一時停止後に削除しても、GCセーフポイントがすぐに復元されない問題を修正しました。 [#52082](https://github.com/pingcap/tidb/issues/52082) @[3pointer](https://github.com/3pointer)
+        - 特別なイベントタイミングにより、ログバックアップでデータ損失が発生する可能性があるという稀な問題を修正しました。 [#16739](https://github.com/tikv/tikv/issues/16739) @[YuJuncen](https://github.com/YuJuncen)
+        - TiKV の再起動により、ログバックアップのグローバルチェックポイントが実際のバックアップファイルの書き込みポイントよりも先に進められ、少量のバックアップデータが失われる可能性がある問題を修正しました[#16809](https://github.com/tikv/tikv/issues/16809) @[YuJuncen](https://github.com/YuJuncen)
+        - フルバックアップ中に`--concurrency`に関連する紛らわしい情報がログに表示される問題を修正 [#50837](https://github.com/pingcap/tidb/issues/50837) @[BornChanger](https://github.com/BornChanger)
+        - BRを使用してデータを復元する場合、または物理インポートモードでTiDB Lightningを使用してデータをインポートする場合に、PD から取得されたリージョンにLeaderがない問題を修正しました[#51124](https://github.com/pingcap/tidb/issues/51124) [#50501](https://github.com/pingcap/tidb/issues/50501) @[Leavrth](https://github.com/Leavrth)
+        - ログバックアップタスクを一時停止、停止、再構築した後、タスクの状態は正常であるが、チェックポイントが進まない問題を修正しました。 [#53047](https://github.com/pingcap/tidb/issues/53047) @[RidRisR](https://github.com/RidRisR)
+        - 不安定なテストケース`TestClearCache` を修正 [#51671](https://github.com/pingcap/tidb/issues/51671) @[zxc111](https://github.com/zxc111)
+        - 不安定なテストケース`TestGetMergeRegionSizeAndCount` を修正 [#52095](https://github.com/pingcap/tidb/issues/52095) @[3pointer](https://github.com/3pointer)
+        - 不安定な統合テストを修正`br_tikv_outage` [#52673](https://github.com/pingcap/tidb/issues/52673) @[Leavrth](https://github.com/Leavrth)
+        - テストケース`TestGetTSWithRetry`実行に時間がかかりすぎる問題を修正[#52547](https://github.com/pingcap/tidb/issues/52547) @[Leavrth](https://github.com/Leavrth)
+        - PD へのネットワーク接続が不安定な状態で一時停止中のログバックアップタスクを再開すると TiKV がpanicする可能性がある問題を修正しました [#17020](https://github.com/tikv/tikv/issues/17020) @[YuJuncen](https://github.com/YuJuncen)
 
     - TiCDC
 
-        - TiCDC所有者ノードを退去させるAPI（ `/api/v2/owner/resign` ）を呼び出すと、TiCDCタスクが予期せず再起動する問題を修正しました[＃10781](https://github.com/pingcap/tiflow/issues/10781) @[sdojjy](https://github.com/sdojjy)
-        - 下流の Pulsar が停止しているときに、changefeed を削除すると通常の TiCDC プロセスが停止し、他の changefeed プロセスも停止するという問題を修正しました[＃10629](https://github.com/pingcap/tiflow/issues/10629) @[asddongmen](https://github.com/asddongmen)
-        - Grafana の**所有権履歴**パネルが不安定になる問題を修正[＃10796](https://github.com/pingcap/tiflow/issues/10796) @[hongyunyan](https://github.com/hongyunyan)
-        - PDを再起動するとTiCDCノードがエラーで再起動する可能性がある問題を修正しました [＃10799](https://github.com/pingcap/tiflow/issues/10799) @[3AceShowHand](https://github.com/3AceShowHand)
-        - PDディスクI/Oの高レイテンシーによりデータレプリケーションで深刻なレイテンシーが発生する問題を修正 [＃9054](https://github.com/pingcap/tiflow/issues/9054) @[asddongmen](https://github.com/asddongmen)
-        - `TIMEZONE`種類のデフォルト値が正しいタイムゾーンに従って設定されない問題を修正 [＃10931](https://github.com/pingcap/tiflow/issues/10931) @[3AceShowHand](https://github.com/3AceShowHand)
-        - `DROP PRIMARY KEY`と`DROP UNIQUE KEY`文が正しく複製されない問題を修正[＃10890](https://github.com/pingcap/tiflow/issues/10890) @[asddongmen](https://github.com/asddongmen)
-        - TiCDC が上流に書き込まれた後に下流の`Exchange Partition ... With Validation` DDL の実行に失敗し、変更フィードが停止する問題を修正しました。 [＃10859](https://github.com/pingcap/tiflow/issues/10859) @[hongyunyan](https://github.com/hongyunyan)
+        - TiCDC所有者ノードを退去させるAPI（ `/api/v2/owner/resign` ）を呼び出すと、TiCDCタスクが予期せず再起動する問題を修正しました[#10781](https://github.com/pingcap/tiflow/issues/10781) @[sdojjy](https://github.com/sdojjy)
+        - 下流の Pulsar が停止しているときに、changefeed を削除すると通常の TiCDC プロセスが停止し、他の changefeed プロセスも停止するという問題を修正しました[#10629](https://github.com/pingcap/tiflow/issues/10629) @[asddongmen](https://github.com/asddongmen)
+        - Grafana の**所有権履歴**パネルが不安定になる問題を修正[#10796](https://github.com/pingcap/tiflow/issues/10796) @[hongyunyan](https://github.com/hongyunyan)
+        - PDを再起動するとTiCDCノードがエラーで再起動する可能性がある問題を修正しました [#10799](https://github.com/pingcap/tiflow/issues/10799) @[3AceShowHand](https://github.com/3AceShowHand)
+        - PDディスクI/Oの高レイテンシーによりデータレプリケーションで深刻なレイテンシーが発生する問題を修正 [#9054](https://github.com/pingcap/tiflow/issues/9054) @[asddongmen](https://github.com/asddongmen)
+        - `TIMEZONE`種類のデフォルト値が正しいタイムゾーンに従って設定されない問題を修正 [#10931](https://github.com/pingcap/tiflow/issues/10931) @[3AceShowHand](https://github.com/3AceShowHand)
+        - `DROP PRIMARY KEY`と`DROP UNIQUE KEY`文が正しく複製されない問題を修正[#10890](https://github.com/pingcap/tiflow/issues/10890) @[asddongmen](https://github.com/asddongmen)
+        - TiCDC が上流に書き込まれた後に下流の`Exchange Partition ... With Validation` DDL の実行に失敗し、変更フィードが停止する問題を修正しました。 [#10859](https://github.com/pingcap/tiflow/issues/10859) @[hongyunyan](https://github.com/hongyunyan)
 
     - TiDB Lightning
 
-        - ソースファイル内の互換性のない SQL文が原因で、TiDB Lightning がデータインポート中に`no database selected`を報告する問題を修正しました。 [＃51800](https://github.com/pingcap/tidb/issues/51800) @[lance6716](https://github.com/lance6716)
-        - TiDB Lightningがサーバーモードでログに機密情報を出力する可能性がある問題を修正しました [＃36374](https://github.com/pingcap/tidb/issues/36374) @[kennytm](https://github.com/kennytm)
-        - PDLeaderを強制終了すると、 TiDB Lightningがデータインポート中に`invalid store ID 0`エラーを報告する問題を修正しました。 [＃50501](https://github.com/pingcap/tidb/issues/50501) @[Leavrth](https://github.com/Leavrth)
-        - TiDB Lightningが`replace`戦略を使用して競合するデータを処理するときに`Unknown column in where clause`エラーを報告する問題を修正しました [＃52886](https://github.com/pingcap/tidb/issues/52886) @[lyzx2001](https://github.com/lyzx2001)
-        - Parquet 形式の空のテーブルをインポートするときにTiDB Lightning がパニックになる問題を修正しました [＃52518](https://github.com/pingcap/tidb/issues/52518) @[kennytm](https://github.com/kennytm)
+        - ソースファイル内の互換性のない SQL文が原因で、TiDB Lightning がデータインポート中に`no database selected`を報告する問題を修正しました。 [#51800](https://github.com/pingcap/tidb/issues/51800) @[lance6716](https://github.com/lance6716)
+        - TiDB Lightningがサーバーモードでログに機密情報を出力する可能性がある問題を修正しました [#36374](https://github.com/pingcap/tidb/issues/36374) @[kennytm](https://github.com/kennytm)
+        - PDLeaderを強制終了すると、 TiDB Lightningがデータインポート中に`invalid store ID 0`エラーを報告する問題を修正しました。 [#50501](https://github.com/pingcap/tidb/issues/50501) @[Leavrth](https://github.com/Leavrth)
+        - TiDB Lightningが`replace`戦略を使用して競合するデータを処理するときに`Unknown column in where clause`エラーを報告する問題を修正しました [#52886](https://github.com/pingcap/tidb/issues/52886) @[lyzx2001](https://github.com/lyzx2001)
+        - Parquet 形式の空のテーブルをインポートするときにTiDB Lightning がパニックになる問題を修正しました [#52518](https://github.com/pingcap/tidb/issues/52518) @[kennytm](https://github.com/kennytm)
 
 ## パフォーマンステスト {#performance-test}
 

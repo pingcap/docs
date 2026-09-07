@@ -91,7 +91,7 @@ systemctl start docker
 - MySQL Shellをダウンロードしてインストールしてください。
 
     1. [MySQL Community Server のダウンロード](https://dev.mysql.com/downloads/mysql/)ページから MySQL インストーラーの ZIP ファイルをダウンロードします。
-    2. ファイルを解凍し、 `mysql.exe`フォルダ内の`bin` } を探します。Git Bash で`bin`フォルダのパスをシステム変数に追加し、 `PATH`変数に設定する必要があります。
+    2. ファイルを解凍し、 `bin`フォルダ内の`mysql.exe`を探します。Git Bash で`bin`フォルダのパスをシステム変数に追加し、 `PATH`変数に設定する必要があります。
 
         ```bash
         echo 'export PATH="(your bin folder)":$PATH' >>~/.bash_profile
