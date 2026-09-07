@@ -15,11 +15,11 @@ TiUPはDM v2.0以降のバージョンの導入をサポートしています。
 
 ## 前提条件 {#prerequisites}
 
-- DMが完全なデータレプリケーションタスクを実行する場合、DMワーカーは1つの上流データベースのみにバインドされます。DMワーカーはまずローカルで全データをエクスポートし、その後、下流データベースにインポートします。そのため、ワーカーのホスト領域には、エクスポートするすべての上流テーブルを保存できる十分な大きさが必要です。ストレージパスは、タスク作成時に後で指定します。
+- DMが完全なデータレプリケーションタスクを実行する場合、DM-workerは1つの上流データベースのみにバインドされます。DM-workerはまずローカルで全データをエクスポートし、その後、下流データベースにインポートします。そのため、ワーカーのホスト領域には、エクスポートするすべての上流テーブルを保存できる十分な大きさが必要です。ストレージパスは、タスク作成時に後で指定します。
 
 - DM クラスターをデプロイする場合は、 [ハードウェアとソフトウェアの要件](/dm/dm-hardware-and-software-requirements.md)を満たす必要があります。
 
-- v8.0.0 以降、 [データベースのパスワードを暗号化する](/dm/dm-manage-source.md#encrypt-the-database-password)必要な場合は、事前に[データベースのパスワードを暗号化および復号化するために使用されるキーファイル](/dm/dm-customized-secret-key.md)を DM マスターに保存し、 `dmctl encrypt`コマンドを使用する前に[`secret-key-path`](/dm/dm-master-configuration-file.md)を DM マスターに設定する必要があります。
+- v8.0.0 以降、 [データベースのパスワードを暗号化する](/dm/dm-manage-source.md#encrypt-the-database-password)必要な場合は、事前に[データベースのパスワードを暗号化および復号化するために使用されるキーファイル](/dm/dm-customized-secret-key.md)を DM-masterに保存し、 `dmctl encrypt`コマンドを使用する前に[`secret-key-path`](/dm/dm-master-configuration-file.md)を DM-masterに設定する必要があります。
 
 ## ステップ1: 制御マシンにTiUPをインストールする {#step-1-install-tiup-on-the-control-machine}
 
@@ -47,7 +47,7 @@ TiUPはDM v2.0以降のバージョンの導入をサポートしています。
 
 コマンド`tiup dm template > topology.yaml`を使用すると、構成ファイル テンプレートをすばやく生成できます。
 
-3 つの DM マスター、3つの DM ワーカー、および 1つの監視コンポーネントインスタンスをデプロイする構成は次のとおりです。
+3 つの DM-master、3つの DM-worker、および 1つの監視コンポーネントインスタンスをデプロイする構成は次のとおりです。
 
 ```yaml
 # The global variables apply to all other components in the configuration. If one specific value is missing in the component instance, the corresponding global variable serves as the default value.
@@ -132,14 +132,14 @@ alertmanager_servers:
 
 > **Note:**
 >
-> - 1台のホストで多数のDMワーカーを実行することは推奨されません。各DMワーカーには、少なくとも2コアのCPUと4GiBのメモリを割り当てる必要があります。
+> - 1台のホストで多数のDM-workerを実行することは推奨されません。各DM-workerには、少なくとも2コアのCPUと4GiBのメモリを割り当てる必要があります。
 >
 > - 次のコンポーネント間のポートが相互接続されていることを確認します。
->     - DM マスターノードのうち`peer_port` (デフォルトでは`8291` ) が相互接続されています。
->     - 各 DM マスターノードは、すべての DM ワーカーノードの`port` (デフォルトでは`8262` ) に接続できます。
->     - 各 DM ワーカーノードは、すべての DM マスターノードの`port` (デフォルトでは`8261` ) に接続できます。
->     - TiUPノードは、すべての DM マスターノードの`port` (デフォルトでは`8261` ) に接続できます。
->     - TiUPノードは、すべての DM ワーカーノードの`port` (デフォルトでは`8262` ) に接続できます。
+>     - DM-masterノードのうち`peer_port` (デフォルトでは`8291` ) が相互接続されています。
+>     - 各 DM-masterノードは、すべての DM-workerノードの`port` (デフォルトでは`8262` ) に接続できます。
+>     - 各 DM-workerノードは、すべての DM-masterノードの`port` (デフォルトでは`8261` ) に接続できます。
+>     - TiUPノードは、すべての DM-masterノードの`port` (デフォルトでは`8261` ) に接続できます。
+>     - TiUPノードは、すべての DM-workerノードの`port` (デフォルトでは`8262` ) に接続できます。
 
 `master_servers.host.config`パラメータの詳細については[マスターパラメータ](https://github.com/pingcap/tiflow/blob/release-8.5/dm/master/dm-master.toml)を参照してください。`worker_servers.host.config`のパラメータの詳細については[ワーカーパラメータ](https://github.com/pingcap/tiflow/blob/release-8.5/dm/worker/dm-worker.toml)を参照してください。
 

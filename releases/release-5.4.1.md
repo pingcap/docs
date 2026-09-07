@@ -43,7 +43,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
 
     - TiDB Data Migration (DM)
 
-        - `/tmp`ではなく DM ワーカーの作業ディレクトリを使用して内部ファイルを書き込み、タスクが停止した後にディレクトリを消去する Syncer のサポート[#4107](https://github.com/pingcap/tiflow/issues/4107)
+        - `/tmp`ではなく DM-workerの作業ディレクトリを使用して内部ファイルを書き込み、タスクが停止した後にディレクトリを消去する Syncer のサポート[#4107](https://github.com/pingcap/tiflow/issues/4107)
 
 ## バグ修正 {#bug-fixes}
 
@@ -67,7 +67,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
     - v4.0 からアップグレードされたクラスターで`all`権限の付与が失敗する可能性がある問題を修正しました [#33588](https://github.com/pingcap/tidb/issues/33588)
     - MySQLバイナリプロトコルでテーブルスキーマを変更した後にプリペアドステートメントを実行するときに発生するセッションpanicを修正しました [#33509](https://github.com/pingcap/tidb/issues/33509)
     - `tidb_enable_vectorized_expression`が有効になっている`compress()`式を持つ SQL 文を実行すると失敗する問題を修正しました[#33397](https://github.com/pingcap/tidb/issues/33397)
-    - `reArrangeFallback`機能によるCPU使用率の高騰の問題を修正 [#30353](https://github.com/pingcap/tidb/issues/30353)
+    - `reArrangeFallback`関数によるCPU使用率の高騰の問題を修正 [#30353](https://github.com/pingcap/tidb/issues/30353)
     - 新しいパーティションが追加されたときにテーブル属性がインデックスされない問題と、パーティションが変更されたときにテーブル範囲情報が更新されない問題を修正しました[#33929](https://github.com/pingcap/tidb/issues/33929)
     - 初期化中のテーブルの`TopN`情報が正しくソートされないバグを修正しました[#34216](https://github.com/pingcap/tidb/issues/34216)
     - 識別できないテーブル属性をスキップして、テーブル`INFORMATION_SCHEMA.ATTRIBUTES`からの読み取り時に発生するエラーを修正します [#33665](https://github.com/pingcap/tidb/issues/33665)
@@ -166,8 +166,8 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
 
         - ログに「チェックポイントに変更はありません。同期フラッシュチェックポイントをスキップしてください」というメッセージが数百件出力され、レプリケーションが非常に遅くなる問題を修正しました[#4619](https://github.com/pingcap/tiflow/issues/4619)
         - 長いvarcharsがエラーを報告するバグを修正`Column length too big` [#4637](https://github.com/pingcap/tiflow/issues/4637)
-        - セーフモードでの更新ステートメントの実行エラーにより、DMワーカーがpanicになる可能性がある問題を修正しました[#4317](https://github.com/pingcap/tiflow/issues/4317)
+        - セーフモードでの更新ステートメントの実行エラーにより、DM-workerがpanicになる可能性がある問題を修正しました[#4317](https://github.com/pingcap/tiflow/issues/4317)
         - 下流でフィルタリングされたDDLを手動で実行すると、タスク再開が失敗する場合がある問題を修正しました[#5272](https://github.com/pingcap/tiflow/issues/5272)
         - アップストリームでbinlogが有効になっていない場合に`query-status`コマンドでデータが返されないバグを修正 [#5121](https://github.com/pingcap/tiflow/issues/5121)
-        - `SHOW CREATE TABLE`文によって返されるインデックスの先頭に主キーがない場合に発生する DM ワーカーpanicの問題を修正しました。 [#5159](https://github.com/pingcap/tiflow/issues/5159)
+        - DM-workerが、`SHOW CREATE TABLE`文によって返されるインデックスの先頭に主キーがない場合にpanicする問題を修正しました。 [#5159](https://github.com/pingcap/tiflow/issues/5159)
         - GTID が有効になっているときやタスクが自動的に再開されたときに CPU 使用率が上昇し、大量のログが出力される問題を修正しました[#5063](https://github.com/pingcap/tiflow/issues/5063)

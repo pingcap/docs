@@ -33,7 +33,7 @@ MySQL シャードのデータサイズが 1 TiB 未満の場合は、[小規模
 - [Dumplingに必要なターゲットデータベース権限](/dumpling-overview.md#export-data-from-tidb-or-mysql)
 - [TiDB Lightningに必要なターゲットデータベース権限](/tidb-lightning/tidb-lightning-requirements.md)
 - [TiDB Lightningのダウンストリームストレージスペース](/tidb-lightning/tidb-lightning-requirements.md)
-- [DMワーカーに必要な権限](/dm/dm-worker-intro.md)
+- [DM-workerに必要な権限](/dm/dm-worker-intro.md)
 
 ### シャーディングされたテーブルの競合をチェックする {#check-conflicts-for-sharded-tables}
 
@@ -248,7 +248,7 @@ tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 
 | パラメータ                   | 説明                                                                |
 | ----------------------- | ----------------------------------------------------------------- |
-| `--master-addr`         | dmctlが接続するクラスタ内の任意のDMマスターノードの{advertise-addr}。例：172.16.10.71:8261 |
+| `--master-addr`         | dmctlが接続するクラスタ内の任意のDM-masterノードの{advertise-addr}。例：172.16.10.71:8261 |
 | `operate-source create` | データソースをDMクラスターにロードします。                                            |
 
 上記の手順を繰り返して、すべてのMySQL上流インスタンスをデータソースとしてDMに追加します。
@@ -338,7 +338,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 
 | パラメータ      | 説明                                                                |
 | ---------- | ----------------------------------------------------------------- |
-| --master-addr | dmctlが接続するクラスタ内の任意のDMマスターノードの{advertise-addr}。例：172.16.10.71:8261 |
+| --master-addr | dmctlが接続するクラスタ内の任意のDM-masterノードの{advertise-addr}。例：172.16.10.71:8261 |
 | タスクの開始     | データ移行タスクを開始します。                                                   |
 
 タスクの開始に失敗した場合は、返された結果のプロンプト メッセージに従って構成を変更し、次に`start-task task.yaml`の`tiup dmctl`サブコマンドを実行してタスクを再開します。問題が発生した場合は、[エラーを処理する](/dm/dm-error-handling.md)および[TiDB Data Migrationに関するFAQ](/dm/dm-faq.md)を参照してください。
