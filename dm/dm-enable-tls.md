@@ -5,17 +5,17 @@ summary: DM 接続で TLS を有効にする方法を学習します。
 
 # DM接続にTLSを有効にする {#enable-tls-for-dm-connections}
 
-このドキュメントでは、DM マスター、DM ワーカー、dmctl コンポーネント間の接続、および DM と上流または下流データベース間の接続を含む、DM 接続の暗号化されたデータ転送を有効にする方法について説明します。
+このドキュメントでは、DM-master、DM-worker、dmctl コンポーネント間の接続、および DM と上流または下流データベース間の接続を含む、DM 接続の暗号化されたデータ転送を有効にする方法について説明します。
 
-## DMマスター、DMワーカー、dmctl間の暗号化されたデータ転送を有効にする {#enable-encrypted-data-transmission-between-dm-master-dm-worker-and-dmctl}
+## DM-master、DM-worker、dmctl間の暗号化されたデータ転送を有効にする {#enable-encrypted-data-transmission-between-dm-master-dm-worker-and-dmctl}
 
-このセクションでは、DM マスター、DM ワーカー、dmctl 間の暗号化されたデータ転送を有効にする方法を紹介します。
+このセクションでは、DM-master、DM-worker、dmctl 間の暗号化されたデータ転送を有効にする方法を紹介します。
 
 ### 暗号化されたデータ転送を設定して有効にする {#configure-and-enable-encrypted-data-transmission}
 
 1. 証明書を準備します。
 
-    DMマスターとDMワーカーそれぞれにサーバー証明書を別々に用意することをお勧めします。2つのコンポーネントが相互に認証できることを確認してください。dmctlでは1つのクライアント証明書を共有することもできます。
+    DM-masterとDM-workerそれぞれにサーバー証明書を別々に用意することをお勧めします。2つのコンポーネントが相互に認証できることを確認してください。dmctlでは1つのクライアント証明書を共有することもできます。
 
     自己署名証明書を生成するには、 `openssl` 、 `cfssl` 、および`easy-rsa`などの`openssl`に基づいたその他のツールを使用できます。
 
@@ -27,7 +27,7 @@ summary: DM 接続で TLS を有効にする方法を学習します。
     >
     > DM-master、DM-worker、および dmctl が同じ証明書セットを使用するように構成できます。
 
-    - DMマスター
+    - DM-master
 
         設定ファイルまたはコマンドライン引数で設定します。
 
@@ -37,7 +37,7 @@ summary: DM 接続で TLS を有効にする方法を学習します。
         ssl-key = "/path/to/master-key.pem"
         ```
 
-    - DMワーカー
+    - DM-worker
 
         設定ファイルまたはコマンドライン引数で設定します。
 
@@ -61,7 +61,7 @@ summary: DM 接続で TLS を有効にする方法を学習します。
 
 コンポーネントの呼び出し元の ID を確認するには、証明書を生成するときに`Common Name` (CN) を使用して証明書のユーザー ID をマークし、呼び出し先の`Common Name`リストを構成して呼び出し元の ID を確認する必要があります。
 
-- DMマスター
+- DM-master
 
     設定ファイルまたはコマンドライン引数で設定します。
 
@@ -69,7 +69,7 @@ summary: DM 接続で TLS を有効にする方法を学習します。
     cert-allowed-cn = ["dm"]
     ```
 
-- DMワーカー
+- DM-worker
 
     設定ファイルまたはコマンドライン引数で設定します。
 
@@ -95,7 +95,7 @@ summary: DM 接続で TLS を有効にする方法を学習します。
 
     > **Note:**
     >
-    > すべての DM マスターおよび DM ワーカー コンポーネントが指定されたパスを介して証明書とキー ファイルを読み取ることができることを確認します。
+    > すべての DM-masterおよび DM-worker コンポーネントが指定されたパスを介して証明書とキー ファイルを読み取ることができることを確認します。
 
     ```yaml
     from:
@@ -113,7 +113,7 @@ summary: DM 接続で TLS を有効にする方法を学習します。
 
     > **Note:**
     >
-    > すべての DM マスターおよび DM ワーカー コンポーネントが指定されたパスを介して証明書とキー ファイルを読み取ることができることを確認します。
+    > すべての DM-masterおよび DM-worker コンポーネントが指定されたパスを介して証明書とキー ファイルを読み取ることができることを確認します。
 
     ```yaml
     target-database:

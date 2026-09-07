@@ -29,7 +29,7 @@ summary: シャードの小さなデータセットを MySQL から TiDB に移�
 移行を開始する前に、次のタスクが完了していることを確認してください。
 
 - [TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)
-- [DMワーカーに必要な権限](/dm/dm-worker-intro.md)
+- [DM-workerに必要な権限](/dm/dm-worker-intro.md)
 
 ### シャードテーブルの競合をチェックする {#check-conflicts-for-the-sharded-tables}
 
@@ -89,7 +89,7 @@ tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 
 | パラメータ                   | 説明                                                                 |
 | ----------------------- | ------------------------------------------------------------------ |
-| `--master-addr`         | dmctlが接続するクラスタ内の任意のDMマスターノードの`{advertise-addr}`例：172.16.10.71:8261 |
+| `--master-addr`         | dmctlが接続するクラスタ内の任意のDM-masterノードの`{advertise-addr}`例：172.16.10.71:8261 |
 | `operate-source create` | データソースを DM クラスターにロードします。                                          |
 
 すべてのデータソースが DM クラスターに追加されるまで、上記の手順を繰り返します。
@@ -191,7 +191,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 
 | パラメータ           | 説明                                                                 |
 | --------------- | ------------------------------------------------------------------ |
-| `--master-addr` | dmctlが接続するクラスタ内の任意のDMマスターノードの`{advertise-addr}`例：172.16.10.71:8261 |
+| `--master-addr` | dmctlが接続するクラスタ内の任意のDM-masterノードの`{advertise-addr}`例：172.16.10.71:8261 |
 | `start-task`    | データ移行タスクを開始します。                                                    |
 
 移行タスクの開始に失敗した場合は、エラー情報に従って構成情報を変更し、手順`start-task task.yaml`再度実行して移行タスクを開始してください。問題が発生した場合は、 [エラーの処理](/dm/dm-error-handling.md)と[FAQ](/dm/dm-faq.md)を参照してください。
@@ -218,8 +218,8 @@ Grafana またはログを通じて、移行タスクの履歴と内部運用メ
 
     DM の実行中、DM-master、DM-worker、dmctl は、移行タスクに関する情報を含むログを出力します。各コンポーネントのログディレクトリは以下のとおりです。
 
-    - DMマスターログディレクトリ：DMマスタープロセスパラメータ`--log-file`で指定されます。DMがTiUPを使用してデプロイされている場合、ログディレクトリは`/dm-deploy/dm-master-8261/log/`です。
-    - DMワーカーログディレクトリ：DMワーカープロセスパラメータ`--log-file`で指定します。DMがTiUPを使用してデプロイされている場合、ログディレクトリは`/dm-deploy/dm-worker-8262/log/`です。
+    - DM-masterログディレクトリ：DM-masterプロセスパラメータ`--log-file`で指定されます。DMがTiUPを使用してデプロイされている場合、ログディレクトリは`/dm-deploy/dm-master-8261/log/`です。
+    - DM-workerログディレクトリ：DM-workerプロセスパラメータ`--log-file`で指定します。DMがTiUPを使用してデプロイされている場合、ログディレクトリは`/dm-deploy/dm-worker-8262/log/`です。
 
 ## 参照 {#see-also}
 
