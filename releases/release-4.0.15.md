@@ -91,7 +91,7 @@ TiDB バージョン: 4.0.15
 
     - 範囲構築するときにバイナリリテラルの照合順序順序が誤って設定されるバグを修正しました [#23672](https://github.com/pingcap/tidb/issues/23672)
 
-    - に`GROUP BY`と`UNION`両方が含まれている場合に発生する"index out of range"というエラーを修正しました。 [#26553](https://github.com/pingcap/tidb/pull/26553)
+    - クエリに`GROUP BY`と`UNION`の両方が含まれている場合に発生する"index out of range"というエラーを修正しました。 [#26553](https://github.com/pingcap/tidb/pull/26553)
 
     - TiKVにtombstoneストアがある場合、TiDBがリクエストの送信に失敗する可能性がある問題を修正[#23676](https://github.com/pingcap/tidb/issues/23676) [#24648](https://github.com/pingcap/tidb/issues/24648)
 
