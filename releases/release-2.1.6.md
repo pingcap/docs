@@ -10,31 +10,31 @@ summary: TiDB 2.1.6およびTiDB Ansible 2.1.6は、2019年3月15日にリリー
 ## TiDB {#tidb}
 
 - SQL オプティマイザ/エグゼキューター
-    - `TIDB_INLJ` のヒントで両方のテーブルが指定されている場合、コストに基づいて外側のテーブルを選択するようにプランナーを最適化します。 [＃9615](https://github.com/pingcap/tidb/pull/9615)
-    - `IndexScan`正しく選択されない場合がある問題を修正[＃9587](https://github.com/pingcap/tidb/pull/9587)
-    - サブクエリの`agg`関数のチェックにおけるMySQLとの非互換性を修正 [＃9551](https://github.com/pingcap/tidb/pull/9551)
-    - パニックを回避するために、 `show stats_histograms`有効な列のみを出力する[＃9502](https://github.com/pingcap/tidb/pull/9502)
+    - `TIDB_INLJ` のヒントで両方のテーブルが指定されている場合、コストに基づいて外側のテーブルを選択するようにプランナーを最適化します。 [#9615](https://github.com/pingcap/tidb/pull/9615)
+    - `IndexScan`正しく選択されない場合がある問題を修正[#9587](https://github.com/pingcap/tidb/pull/9587)
+    - サブクエリの`agg`関数のチェックにおけるMySQLとの非互換性を修正 [#9551](https://github.com/pingcap/tidb/pull/9551)
+    - パニックを回避するために、 `show stats_histograms`有効な列のみを出力する[#9502](https://github.com/pingcap/tidb/pull/9502)
 
 - サーバ
-    - Binlog 有効/無効にする`log_bin`変数をサポートします [＃9634](https://github.com/pingcap/tidb/pull/9634)
-    - 誤ったトランザクションコミットを回避するためにトランザクションの健全性チェックを追加する[＃9559](https://github.com/pingcap/tidb/pull/9559)
-    - 変数を設定するとpanicが発生する可能性がある問題を修正[＃9539](https://github.com/pingcap/tidb/pull/9539)
+    - Binlog 有効/無効にする`log_bin`変数をサポートします [#9634](https://github.com/pingcap/tidb/pull/9634)
+    - 誤ったトランザクションコミットを回避するためにトランザクションの健全性チェックを追加する[#9559](https://github.com/pingcap/tidb/pull/9559)
+    - 変数を設定するとpanicが発生する可能性がある問題を修正[#9539](https://github.com/pingcap/tidb/pull/9539)
 
 - DDL
-    - `Create Table Like`文が場合によってはpanicを引き起こす問題を修正[＃9652](https://github.com/pingcap/tidb/pull/9652)
-    - 場合によってはTiDBとetcd間の接続の問題を回避するためにetcdクライアントの`AutoSync`機能を有効にする[＃9600](https://github.com/pingcap/tidb/pull/9600)
+    - `Create Table Like`文が場合によってはpanicを引き起こす問題を修正[#9652](https://github.com/pingcap/tidb/pull/9652)
+    - 場合によってはTiDBとetcd間の接続の問題を回避するためにetcdクライアントの`AutoSync`機能を有効にする[#9600](https://github.com/pingcap/tidb/pull/9600)
 
 ## TiKV {#tikv}
 
-- `protobuf`解析失敗により、場合によっては`StoreNotMatch`エラーが発生する問題を修正しました [＃4303](https://github.com/tikv/tikv/pull/4303)
+- `protobuf`解析失敗により、場合によっては`StoreNotMatch`エラーが発生する問題を修正しました [#4303](https://github.com/tikv/tikv/pull/4303)
 
 ## ツール {#tools}
 
 - Lightning
-    - インポーターのデフォルト`region-split-size` 512 MiB に変更 [＃4369](https://github.com/tikv/tikv/pull/4369)
-    - メモリ使用量を削減するために、以前にメモリにキャッシュされた中間SSTをローカルディスクに保存します[＃4369](https://github.com/tikv/tikv/pull/4369)
-    - RocksDB のメモリ使用量を制限する [＃4369](https://github.com/tikv/tikv/pull/4369)
-    - スケジュールが完了する前にリージョンが分散される問題を修正[＃4369](https://github.com/tikv/tikv/pull/4369)
-    - 大規模なテーブルのデータとインデックスを個別にインポートすることで、バッチインポート時の時間消費を効果的に削減します[＃132](https://github.com/pingcap/tidb-lightning/pull/132)
-    - CSV サポート [＃111](https://github.com/pingcap/tidb-lightning/pull/111)
-    - スキーマ名に英数字以外の文字が含まれているためにインポートが失敗するエラーを修正[＃9547](https://github.com/pingcap/tidb/pull/9547)
+    - インポーターのデフォルト`region-split-size` 512 MiB に変更 [#4369](https://github.com/tikv/tikv/pull/4369)
+    - メモリ使用量を削減するために、以前にメモリにキャッシュされた中間SSTをローカルディスクに保存します[#4369](https://github.com/tikv/tikv/pull/4369)
+    - RocksDB のメモリ使用量を制限する [#4369](https://github.com/tikv/tikv/pull/4369)
+    - スケジュールが完了する前にリージョンが分散される問題を修正[#4369](https://github.com/tikv/tikv/pull/4369)
+    - 大規模なテーブルのデータとインデックスを個別にインポートすることで、バッチインポート時の時間消費を効果的に削減します[#132](https://github.com/pingcap/tidb-lightning/pull/132)
+    - CSV サポート [#111](https://github.com/pingcap/tidb-lightning/pull/111)
+    - スキーマ名に英数字以外の文字が含まれているためにインポートが失敗するエラーを修正[#9547](https://github.com/pingcap/tidb/pull/9547)

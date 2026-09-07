@@ -636,7 +636,7 @@ I/Oレートリミッターに関連するコンフィグレーション項目�
 
 ### `max-bytes-per-sec` {#max-bytes-per-sec}
 
-- サーバーがディスクに書き込んだり、ディスクから読み取ったりできる最大I/Oバイト数を1秒間に制限します（この制限値は、下記の`mode`設定項目で決定されます）。この制限に達すると、TiKVはフォアグラウンド操作よりもバックグラウンド操作を優先的にスロットリングします。この設定項目の値は、ディスクの最適なI/O帯域幅（例えば、クラウドディスクベンダーが指定する最大I/O帯域幅）に設定する必要があります。この設定値をゼロに設定すると、ディスクI/O操作は制限されません。
+- サーバーがディスクに書き込んだり、ディスクから読み取ったりできる最大I/Oバイト数を1秒間に制限します（この制限値は、下記の`mode`設定項目で決定されます）。この制限に達すると、TiKVはフォアグラウンド操作よりもバックグラウンド操作を優先的にスロットリングします。この設定項目の値は、ディスクの最適なI/O帯域幅（例えば、クラウドディスクベンダーが指定する最大I/O帯域幅）に設定することを推奨します。この設定値をゼロに設定すると、ディスクI/O操作は制限されません。
 - デフォルト値: `"0MiB"`
 
 ### `mode` {#mode}
@@ -1697,7 +1697,7 @@ Titanに関連するコンフィグレーション項目。
 - `lockcf`のデフォルト値: `"128MiB"`
 - 最小値: `0`
 - 単位：KiB｜MiB｜GiB
-- 不要な圧縮を減らすため、 `max-bytes-for-level-base`の値は L0 のデータ量とほぼ等しく設定することをお勧めします。たとえば、圧縮方法が "no:no:lz4:lz4:lz4:lz4:lz4" の場合、L0 と L1 は圧縮されず、L0 の圧縮のトリガー条件は SST ファイルの数が 4 (デフォルト値) に達することであるため、 `max-bytes-for-level-base`の値は`write-buffer-size * 4`にする必要があります。L0 と L1 の両方で圧縮を採用する場合は、RocksDB ログを分析して、memtable から圧縮された SST ファイルのサイズを把握する必要があります。例えば、ファイルサイズが 32 MiB の場合、 `max-bytes-for-level-base`の値を 128 MiB ( `32 MiB * 4` ) に設定することをお勧めします。
+- 不要な圧縮を減らすため、 `max-bytes-for-level-base`の値は L0 のデータ量とほぼ等しく設定することをお勧めします。たとえば、圧縮方法が "no:no:lz4:lz4:lz4:lz4:lz4" の場合、L0 と L1 は圧縮されず、L0 の圧縮のトリガー条件は SST ファイルの数が 4 (デフォルト値) に達することであるため、 `max-bytes-for-level-base`の値は`write-buffer-size * 4`にすることを推奨します。L0 と L1 の両方で圧縮を採用する場合は、RocksDB ログを分析して、memtable から圧縮された SST ファイルのサイズを把握する必要があります。例えば、ファイルサイズが 32 MiB の場合、 `max-bytes-for-level-base`の値を 128 MiB ( `32 MiB * 4` ) に設定することをお勧めします。
 
 ### `target-file-size-base` {#target-file-size-base}
 
@@ -1775,7 +1775,7 @@ Titanに関連するコンフィグレーション項目。
 
 - 保留中の圧縮バイト数のソフトリミット。
 - v8.5.4 以前のバージョンでは、フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`の場合)、この設定項目は[`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)によって直接上書きされます。
-- バージョン 8.5.5 以降: フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`の場合)、この設定項目は、 [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)値が`storage.flow-control.soft-pending-compaction-bytes-limit`より大きい場合にのみ上書きされます。この動作により、フロー制御しきい値を上げた際に RocksDB の圧縮高速化メカニズムが弱まるのを防ぎます。
+- バージョン 8.5.5 以降: フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`の場合)、この設定項目は、その値が`storage.flow-control.soft-pending-compaction-bytes-limit`より大きい場合にのみ、 [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)によって上書きされます。この動作により、フロー制御しきい値を上げた際に RocksDB の圧縮高速化メカニズムが弱まるのを防ぎます。
 - デフォルト値: `"192GiB"`
 - 単位：KiB｜MiB｜GiB
 
@@ -2422,7 +2422,7 @@ BRバックアップに関連するコンフィグレーション項目。
 ### `sst-max-size` {#sst-max-size}
 
 - バックアップSSTファイルのサイズのしきい値。TiKVリージョン内のバックアップファイルのサイズがこのしきい値を超えると、TiKVリージョンが複数のリージョン範囲に分割され、ファイルは複数のファイルにバックアップされます。分割されたリージョン内の各ファイルは、 `sst-max-size`と同じサイズ（またはわずかに大きいサイズ）です。
-- 例えば、 `[a,e)`リージョンのバックアップファイルのサイズが`sst-max-size`より大きい場合、そのファイルは { `[a,b)` 、 `[b,c)`および`[c,d)` `[d,e)` } の領域を持つ複数のファイルにバックアップされ、 `[a,b)` 、 `[b,c)` 、 `[c,d)`のサイズは`sst-max-size`と同じ (またはわずかに大きい) です。
+- 例えば、 `[a,e)`リージョンのバックアップファイルのサイズが`sst-max-size`より大きい場合、そのファイルは`[a,b)` 、 `[b,c)` 、 `[c,d)`および`[d,e)`のリージョンを持つ複数のファイルにバックアップされ、 `[a,b)` 、 `[b,c)` 、 `[c,d)`のサイズは`sst-max-size`と同じ (またはわずかに大きい) です。
 - デフォルト値: `"384MiB"` 。v8.4.0 より前のバージョンでは、デフォルト値は`"144MiB"`です。
 
 ### `enable-auto-tune` <span class="version-mark">v5.4.0の新機能</span> {#enable-auto-tune-new-in-v540}
@@ -2702,7 +2702,7 @@ TiKV API V2 が有効になっている場合にタイムスタンプを取得�
 ### `renew-interval` {#renew-interval}
 
 - ローカルにキャッシュされたタイムスタンプが更新される間隔。
-- `renew-interval`の間隔で、TiKV はタイムスタンプの更新バッチを開始し、前の期間のタイムスタンプ消費量と[`alloc-ahead-buffer`](#alloc-ahead-buffer-new-in-v640)の設定に応じてキャッシュされたタイムスタンプの数を調整します。このパラメータを大きすぎる値に設定すると、最新の TiKV ワークロードの変更がタイムリーに反映されません。このパラメータを小さすぎる値に設定すると、PD の負荷が増加します。書き込みトラフィックが大きく変動し、タイムスタンプが頻繁に枯渇し、書き込みレイテンシーが増加する場合は、このパラメータを小さめの値に設定できます。同時に、PD の負荷も考慮する必要があります。
+- `renew-interval`の間隔で、TiKV はタイムスタンプの更新バッチを開始し、前の期間のタイムスタンプ消費量と[`alloc-ahead-buffer`](#alloc-ahead-buffer-new-in-v640)の設定に応じてキャッシュされたタイムスタンプの数を調整します。このパラメータを大きすぎる値に設定すると、最新の TiKV ワークロードの変更がタイムリーに反映されません。このパラメータを小さすぎる値に設定すると、PD の負荷が増加します。書き込みトラフィックが大きく変動し、タイムスタンプが頻繁に枯渇し、書き込みレイテンシーが増加する場合は、このパラメータを小さめの値に設定できます。同時に、PD の負荷も考慮することを推奨します。
 - デフォルト値: `"100ms"`
 
 ### `renew-batch-min-size` {#renew-batch-min-size}

@@ -267,7 +267,7 @@ TiDB バージョン: 8.2.0
     - `YEAR`型の列を範囲外の符号なし整数と比較すると誤った結果が生じる問題を修正しました [#50235](https://github.com/pingcap/tidb/issues/50235) @[qw4990](https://github.com/qw4990)
     - TiDBを再起動した後に、主キー列統計のヒストグラムとTopNが読み込まれない問題を修正しました [#37548](https://github.com/pingcap/tidb/issues/37548) @[hawkingrei](https://github.com/hawkingrei)
     - `final` AggMode と`non-final` AggMode が大規模並列処理 (MPP) で共存できない問題を修正します [#51362](https://github.com/pingcap/tidb/issues/51362) @[AilinKid](https://github.com/AilinKid)
-    - 述語が常に`SHOW ERRORS`である`true`ステートメントを実行すると TiDB がパニックを起こす問題を修正します [#46962](https://github.com/pingcap/tidb/issues/46962) @[elsa0520](https://github.com/elsa0520)
+    - 述語が常に`true`である`SHOW ERRORS`ステートメントを実行すると TiDB がパニックを起こす問題を修正します [#46962](https://github.com/pingcap/tidb/issues/46962) @[elsa0520](https://github.com/elsa0520)
     - ビューの使用が再帰的CTEで機能しない問題を修正 [#49721](https://github.com/pingcap/tidb/issues/49721) @[hawkingrei](https://github.com/hawkingrei)
     - TiDB が起動時に統計をロードするときに GC が原因でエラーを報告する可能性がある問題を修正 [#53592](https://github.com/pingcap/tidb/issues/53592) @[you06](https://github.com/you06)
     - `PREPARE` / `EXECUTE`文で`CONV`式に`?`引数が含まれている場合、複数回実行するとクエリ結果が正しくない可能性がある問題を修正します。 [#53505](https://github.com/pingcap/tidb/issues/53505) @[qw4990](https://github.com/qw4990)
@@ -275,7 +275,7 @@ TiDB バージョン: 8.2.0
     - TiDBが外部キーを持つテーブルを作成する際に、対応する統計メタデータ（ `stats_meta` ）を作成しない問題を修正 [#53652](https://github.com/pingcap/tidb/issues/53652) @[hawkingrei](https://github.com/hawkingrei)
     - クエリ内の特定のフィルタ条件によってプランナーモジュールが`invalid memory address or nil pointer dereference`エラーを報告する可能性がある問題を修正しました[#53582](https://github.com/pingcap/tidb/issues/53582) [#53580](https://github.com/pingcap/tidb/issues/53580) [#53594](https://github.com/pingcap/tidb/issues/53594) [#53603](https://github.com/pingcap/tidb/issues/53603) @[YangKeao](https://github.com/YangKeao)
     - `CREATE OR REPLACE VIEW`を同時に実行すると`table doesn't exist`エラーが発生する可能性がある問題を修正しました [#53673](https://github.com/pingcap/tidb/issues/53673) @[tangenta](https://github.com/tangenta)
-    - `STATE`フィールドの`INFORMATION_SCHEMA.TIDB_TRX`が定義されていないため、 `size`テーブルの`STATE`フィールドが空になる問題を修正しました。 [#53026](https://github.com/pingcap/tidb/issues/53026) @[cfzjywxk](https://github.com/cfzjywxk)
+    - `STATE`フィールドのうち`size`が定義されていないため、 `INFORMATION_SCHEMA.TIDB_TRX`テーブルの`STATE`フィールドが空になる問題を修正しました。 [#53026](https://github.com/pingcap/tidb/issues/53026) @[cfzjywxk](https://github.com/cfzjywxk)
     - `Distinct_count`が無効になっている場合、グローバル統計の`tidb_enable_async_merge_global_stats`情報が正しくない可能性がある問題を修正しました [#53752](https://github.com/pingcap/tidb/issues/53752) @[hawkingrei](https://github.com/hawkingrei)
     - オプティマイザヒント使用時の警告情報の誤りを修正 [#53767](https://github.com/pingcap/tidb/issues/53767) @[hawkingrei](https://github.com/hawkingrei)
     - 時間型を否定すると誤った値になる問題を修正 [#52262](https://github.com/pingcap/tidb/issues/52262) @[solotzg](https://github.com/solotzg)
@@ -295,7 +295,7 @@ TiDB バージョン: 8.2.0
     - `REFERENCED_TABLE_SCHEMA`テーブルの`INFORMATION_SCHEMA.KEY_COLUMN_USAGE`フィールドが正しくない問題を修正します [#52350](https://github.com/pingcap/tidb/issues/52350) @[wd0517](https://github.com/wd0517)
     - `AUTO_ID_CACHE=1`の場合に、単一のステートメントで複数の行を挿入すると`AUTO_INCREMENT`列が不連続になる問題を修正しました。 [#52465](https://github.com/pingcap/tidb/issues/52465) @[tiancaiamao](https://github.com/tiancaiamao)
     - 非推奨警告のフォーマットを修正 [#52515](https://github.com/pingcap/tidb/issues/52515) @[dveeden](https://github.com/dveeden)
-    - `TRACE`で`copr.buildCopTasks`コマンドが欠落している問題を修正 [#53085](https://github.com/pingcap/tidb/issues/53085) @[time-and-fate](https://github.com/time-and-fate)
+    - `copr.buildCopTasks`で`TRACE`コマンドが欠落している問題を修正 [#53085](https://github.com/pingcap/tidb/issues/53085) @[time-and-fate](https://github.com/time-and-fate)
     - `memory_quota`ヒントがサブクエリで機能しない可能性がある問題を修正しました [#53834](https://github.com/pingcap/tidb/issues/53834) @[qw4990](https://github.com/qw4990)
     - メタデータロックの不適切な使用により、特定の状況下でプランキャッシュを使用する際に異常なデータが書き込まれる可能性がある問題を修正しました [#53634](https://github.com/pingcap/tidb/issues/53634) @[zimulala](https://github.com/zimulala)
     - トランザクション内のステートメントがメモリ不足で強制終了された後、TiDB が同じトランザクション内の次のステートメントの実行を継続すると、 `Trying to start aggressive locking while it's already started`エラーが発生し、panicが発生する可能性がある問題を修正しました。 [#53540](https://github.com/pingcap/tidb/issues/53540) @[MyonKeminta](https://github.com/MyonKeminta)
@@ -310,7 +310,7 @@ TiDB バージョン: 8.2.0
     - 監視ダッシュボードで**gRPC リクエストソースの期間**メトリクスが正しく表示されない問題を修正 [#17133](https://github.com/tikv/tikv/issues/17133) @[King-Dylan](https://github.com/King-Dylan)
     - TiKVからTiDBに送信されるメッセージに対して`grpc-compression-type`を介してgRPCメッセージ圧縮方法を設定しても効果がない問題を修正しました [#17176](https://github.com/tikv/tikv/issues/17176) @[ekexium](https://github.com/ekexium)
     - tikv-ctl の`raft region`コマンドの出力にリージョンステータス情報が含まれていない問題を修正 [#17037](https://github.com/tikv/tikv/issues/17037) @[glorv](https://github.com/glorv)
-    - CDCとlog-backupが`check_leader`構成を使用して`advance-ts-interval` のタイムアウトを制限しないため、場合によってはTiKVが正常に再起動した際に`resolved_ts`のラグが大きくなりすぎる問題を修正しました。 [#17107](https://github.com/tikv/tikv/issues/17107) @[MyonKeminta](https://github.com/MyonKeminta)
+    - CDCとlog-backupが`advance-ts-interval`構成を使用して`check_leader` のタイムアウトを制限しないため、場合によってはTiKVが正常に再起動した際に`resolved_ts`のラグが大きくなりすぎる問題を修正しました。 [#17107](https://github.com/tikv/tikv/issues/17107) @[MyonKeminta](https://github.com/MyonKeminta)
 
 - PD
 

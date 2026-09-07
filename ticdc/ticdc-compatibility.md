@@ -81,7 +81,7 @@ TiCDC クラシック アーキテクチャと新しいアーキテクチャの�
 
 - TiCDC v4.0.0では、 `ignore-txn-commit-ts`が削除され、 `ignore-txn-start-ts`が追加されました。これは`start_ts`を使用してトランザクションをフィルタリングします。
 - TiCDC v4.0.2 では、 `db-dbs` / `db-tables` / `ignore-dbs` / `ignore-tables`が削除され、 `rules`が追加されました。これは、データベースとテーブルに新しいフィルタルールを使用します。フィルタ構文の詳細については、[テーブルフィルター](/table-filter.md)を参照してください。
-- TiCDC v6.2.0 以降、 `cdc cli`は TiCDC Open API を介して TiCDCサーバーと直接やり取りし、PD へのアクセスは不要です。 `--pd`サブコマンドの`cdc cli`パラメータは非推奨となり、TiCDCサーバーアドレスを指定するために`--server`パラメータが追加されました。 `--server` `--pd` } を使用してください。
+- TiCDC v6.2.0 以降、 `cdc cli`は TiCDC Open API を介して TiCDCサーバーと直接やり取りし、PD へのアクセスは不要です。 `cdc cli`サブコマンドの`--pd`パラメータは非推奨となり、TiCDCサーバーアドレスを指定するために`--server`パラメータが追加されました。 `--pd`の代わりに`--server`を使用してください。
 - バージョン6.4.0以降、 `SYSTEM_VARIABLES_ADMIN`または`SUPER`の権限を持つチェンジフィードのみがTiCDC Syncpoint機能を使用できます。
 
 ## 互換性の問題に対処する {#handle-compatibility-issues}

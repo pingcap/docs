@@ -393,7 +393,7 @@ TiDBバージョン: 6.4.0-DMR
 
     - 新しいインデックスを作成した後に発生する可能性のあるインデックスの不整合の問題を修正します [#38165](https://github.com/pingcap/tidb/issues/38165) @[tangenta](https://github.com/tangenta)
     - `INFORMATION_SCHEMA.TIKV_REGION_STATUS`テーブルの権限の問題を修正しました [#38407](https://github.com/pingcap/tidb/issues/38407) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    - `grantor`テーブルに`mysql.tables_priv`フィールドが欠落している問題を修正します [#38293](https://github.com/pingcap/tidb/issues/38293) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - `mysql.tables_priv`テーブルに`grantor`フィールドが欠落している問題を修正します [#38293](https://github.com/pingcap/tidb/issues/38293) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - 共通テーブル式の結合結果が間違っている可能性がある問題を修正 [#38170](https://github.com/pingcap/tidb/issues/38170) @[wjhuang2016](https://github.com/wjhuang2016)
     - 共通テーブル式の和集合の結果が間違っている可能性がある問題を修正 [#37928](https://github.com/pingcap/tidb/issues/37928) @[YangKeao](https://github.com/YangKeao)
     - **トランザクション領域番号**監視パネルの情報が正しくない問題を修正 [#38139](https://github.com/pingcap/tidb/issues/38139) @[jackysp](https://github.com/jackysp)
@@ -435,7 +435,7 @@ TiDBバージョン: 6.4.0-DMR
 
     - TiCDC
 
-        - `sasl-password`の結果で`changefeed query`がマスクされない問題を修正 [#7182](https://github.com/pingcap/tiflow/issues/7182) @[dveeden](https://github.com/dveeden)
+        - `changefeed query`の結果で`sasl-password`がマスクされない問題を修正 [#7182](https://github.com/pingcap/tiflow/issues/7182) @[dveeden](https://github.com/dveeden)
         - etcdトランザクションで操作が多すぎるとTiCDCが利用できなくなる可能性がある問題を修正 [#7131](https://github.com/pingcap/tiflow/issues/7131) @[asddongmen](https://github.com/asddongmen)
         - リドゥログが正しく削除されない可能性がある問題を修正 [#6413](https://github.com/pingcap/tiflow/issues/6413) @[asddongmen](https://github.com/asddongmen)
         - Kafka Sink V2 でワイドテーブルを複製するときのパフォーマンスの低下を修正 [#7344](https://github.com/pingcap/tiflow/issues/7344) @[Rustin170506](https://github.com/Rustin170506)
@@ -452,7 +452,7 @@ TiDBバージョン: 6.4.0-DMR
         - チェックポイントの更新時に大きなトランザクションが発生する可能性がある問題を修正しました [#5010](https://github.com/pingcap/tiflow/issues/5010) @[lance6716](https://github.com/lance6716)
         - フルタスクモードで、タスクが同期段階に入ってすぐに失敗した場合、DMがアップストリームのテーブルスキーマ情報を失う可能性がある問題を修正します [#7159](https://github.com/pingcap/tiflow/issues/7159) @[lance6716](https://github.com/lance6716)
         - 整合性チェックが有効になっている場合にデッドロックが発生する可能性がある問題を修正 [#7241](https://github.com/pingcap/tiflow/issues/7241) @[buchuitoudegou](https://github.com/buchuitoudegou)
-        - タスクの事前チェックで`SELECT`テーブルに対する`INFORMATION_SCHEMA`権限が必要になる問題を修正します。 [#7317](https://github.com/pingcap/tiflow/issues/7317) @[lance6716](https://github.com/lance6716)
+        - タスクの事前チェックで`INFORMATION_SCHEMA`テーブルに対する`SELECT`権限が必要になる問題を修正します。 [#7317](https://github.com/pingcap/tiflow/issues/7317) @[lance6716](https://github.com/lance6716)
         - TLS設定が空の場合にエラーが発生する問題を修正しました [#7384](https://github.com/pingcap/tiflow/issues/7384) @[liumengya94](https://github.com/liumengya94)
 
     - TiDB Lightning
