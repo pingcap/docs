@@ -96,6 +96,8 @@ ALTER TABLE stock_items ADD FULLTEXT INDEX (title) WITH PARSER MULTILINGUAL;
 ALTER TABLE stock_items ADD FULLTEXT INDEX ft_title (title) WITH PARSER MULTILINGUAL;
 ```
 
+**View the existing index names:**
+
 ```sql
 -- The Key_name column shows the index name
 SHOW INDEX FROM stock_items;
