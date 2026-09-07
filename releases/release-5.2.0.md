@@ -77,7 +77,7 @@ TiDB バージョン: 5.2.0
 
     [ユーザー向けドキュメント](/sql-statements/sql-statement-create-index.md)、 [#25150](https://github.com/pingcap/tidb/issues/25150)
 
-- **Oracleの`translate`機能をサポートする**
+- **Oracleの`translate`関数をサポートする**
 
     `translate`関数は、文字列内のすべての文字を他の文字に置き換えます。TiDB では、この関数は Oracle のように空文字列を`NULL`として扱いません。
 

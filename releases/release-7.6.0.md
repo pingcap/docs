@@ -55,7 +55,7 @@ TiDB バージョン: 7.6.0
 
     詳細については、[ドキュメント](/storage-engine/titan-overview.md)を参照してください。
 
-- 以下の文字列関数をTiKVにプッシュダウンするサポート [#48170](https://github.com/pingcap/tidb/issues/48170) @[gengliqi](https://github.com/gengliqi)
+- 以下の文字列関数のTiKVへのプッシュダウンをサポート [#48170](https://github.com/pingcap/tidb/issues/48170) @[gengliqi](https://github.com/gengliqi)
 
     - `LOWER()`
     - `UPPER()`

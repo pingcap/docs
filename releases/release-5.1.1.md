@@ -32,7 +32,7 @@ TiDB バージョン: 5.1.1
 
 - TiFlash
 
-    - DAGリクエストの`HAVING()`機能をサポートする
+    - DAGリクエストの`HAVING()`関数をサポートする
 
 ## 改善点 {#improvements}
 
