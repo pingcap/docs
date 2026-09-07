@@ -45,7 +45,7 @@ TiDB Cloud Starterは、フルマネージド型のマルチテナント対応Ti
 
 - **ストレージ**：初期容量として、行ベースのストレージが5 GiB、列指向のストレージが5 GiB提供されます。
 
-- **Request Units**: データベース操作の 5,000 万[要求単位（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)が含まれます。
+- **Request Units**: データベース操作の 5,000 万[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)が含まれます。
 
 ### 使用クォータ {#usage-quota}
 
@@ -55,7 +55,7 @@ TiDB Cloudでは、組織ごとにデフォルトで最大5つのTiDB Cloud Star
 
 - 行ベースストレージ：5 GiB
 - 列指向ストレージ：5 GiB
-- 要求単位（RU）：月間5,000万RU
+- リクエストユニット（RU）：月間5,000万RU
 
 リクエストユニット（RU）とは、データベースへの単一のリクエストによって消費されるリソース量を表す単位です。リクエストによって消費されるRUの量は、操作の種類や取得または変更されるデータの量など、さまざまな要因によって異なります。
 

@@ -229,7 +229,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
     - v6.5からv7.5以降にアップグレードしたクラスターで、既存のTTLタスクが予期せず頻繁に実行される問題を修正します [#56539](https://github.com/pingcap/tidb/issues/56539) @[lcwangchao](https://github.com/lcwangchao)
     - `INSERT ... ON DUPLICATE KEY`ステートメントが`mysql_insert_id`と互換性がない問題を修正 [#55965](https://github.com/pingcap/tidb/issues/55965) @[tiancaiamao](https://github.com/tiancaiamao)
     - TiKVをストレージエンジンとして選択しない場合、TTLが失敗する可能性がある問題を修正 [#56402](https://github.com/pingcap/tidb/issues/56402) @[YangKeao](https://github.com/YangKeao)
-    - `AUTO_INCREMENT`ステートメントを使用してデータをインポートした後、 `IMPORT INTO`フィールドが正しく設定されない問題を修正します [#56476](https://github.com/pingcap/tidb/issues/56476) @[D3Hunter](https://github.com/D3Hunter)
+    - `IMPORT INTO`ステートメントを使用してデータをインポートした後、 `AUTO_INCREMENT`フィールドが正しく設定されない問題を修正します [#56476](https://github.com/pingcap/tidb/issues/56476) @[D3Hunter](https://github.com/D3Hunter)
     - TiDBが`ADD INDEX`を実行する際にインデックス長の制限をチェックしない問題を修正しました。 [#56930](https://github.com/pingcap/tidb/issues/56930) @[fzzf678](https://github.com/fzzf678)
     - `RECOVER TABLE BY JOB JOB_ID;`を実行すると TiDB がpanicを起こす可能性がある問題を修正しました [#55113](https://github.com/pingcap/tidb/issues/55113) @[crazycs520](https://github.com/crazycs520)
     - 古い読み取りが読み取り操作のタイムスタンプを厳密に検証しないため、TSOと実際の物理時間の間にオフセットが存在する場合にトランザクションの一貫性に影響を与える可能性がわずかにある問題を修正しました [#56809](https://github.com/pingcap/tidb/issues/56809) @[MyonKeminta](https://github.com/MyonKeminta)

@@ -368,7 +368,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
     - クエリに`(... AND ...) OR (... AND ...) ...`のようなフィルタ条件が含まれている場合、オプティマイザが行数推定に最適な複数列統計情報を使用しない問題を修正します [#54323](https://github.com/pingcap/tidb/issues/54323) @[time-and-fate](https://github.com/time-and-fate)
     - クエリに利用可能なインデックスマージ実行計画がある場合、 `read_from_storage`ヒントが有効にならない可能性がある問題を修正 [#56217](https://github.com/pingcap/tidb/issues/56217) @[AilinKid](https://github.com/AilinKid)
     - `IndexNestedLoopHashJoin` のデータ競合問題を修正 [#49692](https://github.com/pingcap/tidb/issues/49692) @[solotzg](https://github.com/solotzg)
-    - `SUB_PART`テーブル内の`INFORMATION_SCHEMA.STATISTICS`の値が`NULL`になっている問題を修正します [#55812](https://github.com/pingcap/tidb/issues/55812) @[Defined2014](https://github.com/Defined2014)
+    - `INFORMATION_SCHEMA.STATISTICS`テーブル内の`SUB_PART`の値が`NULL`になっている問題を修正します [#55812](https://github.com/pingcap/tidb/issues/55812) @[Defined2014](https://github.com/Defined2014)
     - DML文にネストされた生成列が含まれている場合にエラーが発生する問題を修正しました [#53967](https://github.com/pingcap/tidb/issues/53967) @[wjhuang2016](https://github.com/wjhuang2016)
     - 除算演算において最小表示長の整数型データを使用すると除算結果がオーバーフローする場合がある問題を修正 [#55837](https://github.com/pingcap/tidb/issues/55837) @[windtalker](https://github.com/windtalker)
     - TopN オペレーターに続くオペレーターがメモリ制限を超えた場合にフォールバックアクションをトリガーできない問題を修正しました [#56185](https://github.com/pingcap/tidb/issues/56185) @[xzhangxian1008](https://github.com/xzhangxian1008)

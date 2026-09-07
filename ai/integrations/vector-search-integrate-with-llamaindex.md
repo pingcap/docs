@@ -156,7 +156,7 @@ TiDBクラスタに合わせて、接続文字列のパラメータを変更す�
 
 #### ステップ4.2 ドキュメントを読み込む {#step-4-2-load-the-document}
 
-`data/paul_graham/paul_graham_essay.txt`クラスを使用して、 `SimpleDirectoryReader` } からサンプル ドキュメントを読み込みます。
+`SimpleDirectoryReader`クラスを使用して、 `data/paul_graham/paul_graham_essay.txt`からサンプルドキュメントを読み込みます。
 
 ```python
 documents = SimpleDirectoryReader("./data/paul_graham").load_data()

@@ -320,7 +320,7 @@ TiDBとJavaScript間の型マッピングは以下のとおりです。
 >
 > TiDB Cloud Serverless Driverのデータ型マッピングの変更点：
 >
-> - v0.1.0: `BINARY` 、 `VARBINARY` 、 `TINYBLOB` 、 `BLOB` 、 `MEDIUMBLOB` 、 `LONGBLOB` 、および`BIT`型は、 `Uint8Array`ではなく、 `string` }として返されるようになりました。
+> - v0.1.0: `BINARY` 、 `VARBINARY` 、 `TINYBLOB` 、 `BLOB` 、 `MEDIUMBLOB` 、 `LONGBLOB` 、および`BIT`型は、 `string`ではなく、 `Uint8Array`として返されるようになりました。
 
 ### ORM連携 {#orm-integrations}
 
