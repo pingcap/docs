@@ -96,7 +96,7 @@ TiDBバージョン: 6.5.11
     - `CAST()`関数を使用して文字列をタイムゾーンまたは無効な文字を含む日付時刻に変換すると、結果が正しくなくなる問題を修正しました[#8754](https://github.com/pingcap/tiflash/issues/8754) @[solotzg](https://github.com/solotzg)
     - データベースが作成直後に削除されるとTiFlash がpanicする可能性がある問題を修正[#9266](https://github.com/pingcap/tiflash/issues/9266) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - TiFlashで SSL 証明書の構成を空の文字列に設定すると、誤って TLS が有効になり、 TiFlash が起動しなくなる問題を修正しました[#9235](https://github.com/pingcap/tiflash/issues/9235) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - TiFlashとPD間のネットワークパーティション（ネットワーク切断）により、読み取り要求タイムアウトエラーが発生する可能性がある問題を修正しました。 [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - TiFlashとPD間のネットワークパーティション（ネットワーク切断）により、読み取りリクエストタイムアウトエラーが発生する可能性がある問題を修正しました。 [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - 外部結合を含むクエリの実行中にエラーが発生した場合にTiFlashがクラッシュする可能性がある問題を修正しました。 [#9190](https://github.com/pingcap/tiflash/issues/9190) @[windtalker](https://github.com/windtalker)
     - データ型を`DECIMAL`に変換すると、一部のコーナーケースで誤ったクエリ結果が発生する可能性がある問題を修正しました[#53892](https://github.com/pingcap/tidb/issues/53892) @[guo-shaoge](https://github.com/guo-shaoge)
     - クラスタ内で長期間にわたって頻繁に`EXCHANGE PARTITION`と`DROP TABLE`操作を行うと、 TiFlashテーブルメタデータのレプリケーションが遅くなり、クエリパフォーマンスが低下する可能性がある問題を修正しました[#9227](https://github.com/pingcap/tiflash/issues/9227) @[JaySon-Huang](https://github.com/JaySon-Huang)

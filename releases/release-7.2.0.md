@@ -26,7 +26,7 @@ TiDB バージョン: 7.2.0
 
 - TiFlashはパイプライン実行モデルをサポートします（実験的） [#6518](https://github.com/pingcap/tiflash/issues/6518) @[SeaRise](https://github.com/SeaRise)
 
-    バージョン7.2.0より前は、 TiFlashエンジン内の各タスクは実行時に個別にスレッドリソースを要求する必要がありました。TiFlashはタスク数を制御することでスレッドリソースの使用量を制限し、過剰使用を防いでいましたが、この問題を完全に解消することはできませんでした。この問題に対処するため、バージョン7.2.0以降、 TiFlashはパイプライン実行モデルを導入しました。このモデルでは、すべてのスレッドリソースを一元的に管理し、タスクの実行を均一にスケジュールすることで、リソースの過剰使用を回避しながらスレッドリソースの利用率を最大化します。パイプライン実行モデルを有効または無効にするには、システム変数[`tidb_enable_tiflash_pipeline_model`](https://docs-archive.pingcap.com/tidb/v7.2/system-variables/#tidb_enable_tiflash_pipeline_model-new-in-v720)を変更してください。
+    バージョン7.2.0より前は、 TiFlashエンジン内の各タスクは実行時に個別にスレッドリソースをリクエストする必要がありました。TiFlashはタスク数を制御することでスレッドリソースの使用量を制限し、過剰使用を防いでいましたが、この問題を完全に解消することはできませんでした。この問題に対処するため、バージョン7.2.0以降、 TiFlashはパイプライン実行モデルを導入しました。このモデルでは、すべてのスレッドリソースを一元的に管理し、タスクの実行を均一にスケジュールすることで、リソースの過剰使用を回避しながらスレッドリソースの利用率を最大化します。パイプライン実行モデルを有効または無効にするには、システム変数[`tidb_enable_tiflash_pipeline_model`](https://docs-archive.pingcap.com/tidb/v7.2/system-variables/#tidb_enable_tiflash_pipeline_model-new-in-v720)を変更してください。
 
     詳細については、[ドキュメント](/tiflash/tiflash-pipeline-model.md)を参照してください。
 
@@ -191,7 +191,7 @@ TiDB バージョン: 7.2.0
 
 - TiKV
 
-    - `pd.retry-interval`を使用した接続要求失敗などのシナリオで PD 接続の再試行間隔を設定することをサポートします [#14964](https://github.com/tikv/tikv/issues/14964) @[rleungx](https://github.com/rleungx)
+    - `pd.retry-interval`を使用した接続リクエスト失敗などのシナリオで PD 接続の再試行間隔を設定することをサポートします [#14964](https://github.com/tikv/tikv/issues/14964) @[rleungx](https://github.com/rleungx)
     - グローバルなリソース使用状況を組み込むことで、リソース制御スケジューリングアルゴリズムを最適化する [#14604](https://github.com/tikv/tikv/issues/14604) @[Connor1996](https://github.com/Connor1996)
     - `check_leader`リクエストに gzip 圧縮を使用してトラフィックを削減します [#14553](https://github.com/tikv/tikv/issues/14553) @[you06](https://github.com/you06)
     - `check_leader`リクエストに関連するメトリクスを追加 [#14658](https://github.com/tikv/tikv/issues/14658) @[you06](https://github.com/you06)

@@ -73,7 +73,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 
     - `LIMIT` と併用すると`INL_HASH_JOIN`がハングする可能性がある問題を修正しました [#35638](https://github.com/pingcap/tidb/issues/35638) @[guo-shaoge](https://github.com/guo-shaoge)
     - `UPDATE`文の実行時に TiDB がpanicする可能性がある問題を修正しました [#32311](https://github.com/pingcap/tidb/issues/32311) @[Yisaer](https://github.com/Yisaer)
-    - `SHOW COLUMNS`文を実行するときに TiDB がコプロセッサ要求を送信する可能性があるバグを修正しました。 [#36496](https://github.com/pingcap/tidb/issues/36496) @[tangenta](https://github.com/tangenta)
+    - `SHOW COLUMNS`文を実行するときに TiDB がコプロセッサリクエストを送信する可能性があるバグを修正しました。 [#36496](https://github.com/pingcap/tidb/issues/36496) @[tangenta](https://github.com/tangenta)
     - TiDBが`SHOW WARNINGS`文を実行するときに`invalid memory address or nil pointer dereference`エラーを返す可能性があるバグを修正しました [#31569](https://github.com/pingcap/tidb/issues/31569) @[zyguan](https://github.com/zyguan)
     - 静的パーティションプルーニングモードで、テーブルが空の場合に集計条件を含むSQL文が間違った結果を返す可能性があるバグを修正[#35295](https://github.com/pingcap/tidb/issues/35295) @[tiancaiamao](https://github.com/tiancaiamao)
     - Join Reorder 操作がその Outer Join 条件を誤ってプッシュダウンする問題を修正しました [#37238](https://github.com/pingcap/tidb/issues/37238) @[winoros](https://github.com/winoros)

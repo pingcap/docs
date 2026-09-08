@@ -33,7 +33,7 @@ TiDB バージョン: 7.5.4
 
     - `LENGTH()`と`ASCII()`関数の実行効率を最適化 [#9344](https://github.com/pingcap/tiflash/issues/9344) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - TLS を有効にした後に証明書を更新することでTiFlash がpanicする可能性がある問題を軽減します[#8535](https://github.com/pingcap/tiflash/issues/8535) @[windtalker](https://github.com/windtalker)
-    - JOIN演算子のキャンセルメカニズムを改善し、JOIN演算子がキャンセル要求にタイムリーに応答できるようにします[#9430](https://github.com/pingcap/tiflash/issues/9430) @[windtalker](https://github.com/windtalker)
+    - JOIN演算子のキャンセルメカニズムを改善し、JOIN演算子がキャンセルリクエストにタイムリーに応答できるようにします[#9430](https://github.com/pingcap/tiflash/issues/9430) @[windtalker](https://github.com/windtalker)
 
 - ツール
 
@@ -93,7 +93,7 @@ TiDB バージョン: 7.5.4
 - TiFlash
 
     - 分散ストレージおよびコンピューティングアーキテクチャでTiFlash書き込みノードが再起動に失敗する可能性がある問題を修正しました [#9282](https://github.com/pingcap/tiflash/issues/9282) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - TiFlashとPD間のネットワークパーティション（ネットワーク切断）により、読み取り要求タイムアウトエラーが発生する可能性がある問題を修正しました。 [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - TiFlashとPD間のネットワークパーティション（ネットワーク切断）により、読み取りリクエストタイムアウトエラーが発生する可能性がある問題を修正しました。 [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - `CAST()`関数を使用して文字列をタイムゾーンまたは無効な文字を含む日付時刻に変換すると、結果が正しくなくなる問題を修正しました[#8754](https://github.com/pingcap/tiflash/issues/8754) @[solotzg](https://github.com/solotzg)
     - 分散ストレージおよびコンピューティングアーキテクチャで、 TiFlash書き込みノードの読み取りスナップショットがタイムリーにリリースされない問題を修正しました。 [#9298](https://github.com/pingcap/tiflash/issues/9298) @[JinheLin](https://github.com/JinheLin)
     - テーブルに無効な文字を含むデフォルト値を持つビット型の列が含まれている場合、 TiFlash がテーブルスキーマを解析できない問題を修正しました。 [#9461](https://github.com/pingcap/tiflash/issues/9461) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)

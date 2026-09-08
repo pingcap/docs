@@ -121,7 +121,7 @@ TiDB 7.5.0は長期サポートリリース（LTS）です。
 
 | コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                    | 変更の種類  | 説明                                                                                                                                      |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| TiDB           | [`tikv-client.copr-req-timeout`](/tidb-configuration-file.md#copr-req-timeout-new-in-v750)                                         | 新しく追加された | 単一のコプロセッサー要求のタイムアウトを設定します。                                                                                                              |
+| TiDB           | [`tikv-client.copr-req-timeout`](/tidb-configuration-file.md#copr-req-timeout-new-in-v750)                                         | 新しく追加された | 単一のコプロセッサーリクエストのタイムアウトを設定します。                                                                                                              |
 | TiKV           | [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)                                                       | 変更     | 低速ノード検出の感度を向上させるためにアルゴリズムを最適化した後、デフォルト値を`500ms`から`100ms`に変更します。                                                                         |
 | TiKV           | [`raftstore.region-compact-min-redundant-rows`](/tikv-configuration-file.md#region-compact-min-redundant-rows-new-in-v710)         | 変更     | RocksDB の圧縮をトリガーするために必要な冗長 MVCC 行の数を設定します。v7.5.0 以降、この設定項目は`"raft-kv"`ストレージエンジンに対して有効になります。                                           |
 | TiKV           | [`raftstore.region-compact-redundant-rows-percent`](/tikv-configuration-file.md#region-compact-redundant-rows-percent-new-in-v710) | 変更     | RocksDB の圧縮をトリガーするために必要な冗長 MVCC 行の割合を設定します。v7.5.0 以降、この設定項目は`"raft-kv"`ストレージエンジンに対して有効になります。                                          |
@@ -206,7 +206,7 @@ v7.5.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
 
 - TiKV
 
-    - 悲観的トランザクションモードでのプリライト要求の再試行が、まれにデータ不整合のリスクを引き起こす可能性がある問題を修正しました [#11187](https://github.com/tikv/tikv/issues/11187) @[MyonKeminta](https://github.com/MyonKeminta)
+    - 悲観的トランザクションモードでのプリライトリクエストの再試行が、まれにデータ不整合のリスクを引き起こす可能性がある問題を修正しました [#11187](https://github.com/tikv/tikv/issues/11187) @[MyonKeminta](https://github.com/MyonKeminta)
 
 - PD
 

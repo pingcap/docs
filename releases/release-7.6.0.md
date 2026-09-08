@@ -23,7 +23,7 @@ TiDB バージョン: 7.6.0
 
     リージョン数の多いTiDBクラスタでは、ハートビート処理やタスクスケジューリングに伴うオーバーヘッドが増加するため、PDリーダーのCPU負荷が高くなる可能性があります。クラスタにTiDBインスタンスが多数存在し、リージョン情報へのリクエストが同時に多数発生すると、PDリーダーのCPU負荷はさらに高まり、PDサービスが利用できなくなる恐れがあります。
 
-    高可用性を確保するため、TiDB v7.6.0 では、PD のリージョン情報クエリサービスの拡張性を向上させる Active PD Follower機能をサポートしています。Active PD Follower機能は、システム変数[`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760) `ON`に設定することで有効にできます。この機能を有効にすると、TiDB はリージョン情報要求をすべての PD サーバーに均等に分散し、PD フォロワーもリージョン要求を処理できるようになるため、PD リーダーの CPU 負荷が軽減されます。
+    高可用性を確保するため、TiDB v7.6.0 では、PD のリージョン情報クエリサービスの拡張性を向上させる Active PD Follower機能をサポートしています。Active PD Follower機能は、システム変数[`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760) `ON`に設定することで有効にできます。この機能を有効にすると、TiDB はリージョン情報リクエストをすべての PD サーバーに均等に分散し、PD フォロワーもリージョンリクエストを処理できるようになるため、PD リーダーの CPU 負荷が軽減されます。
 
     詳細については、 [ドキュメント](/tune-region-performance.md#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service)を参照してください。
 
@@ -239,7 +239,7 @@ TiDB バージョン: 7.6.0
 | [`tidb_ignore_inlist_plan_digest`](/system-variables.md#tidb_ignore_inlist_plan_digest-new-in-v760)                 | 新しく追加された | プランダイジェストを生成する際に、TiDB が異なるクエリ間で`IN`リスト内の要素の差異を無視するかどうかを制御します。デフォルト値`OFF`は、差異を無視しないことを意味します。                                                                                                                                                                                                                             |
 | [`tidb_opt_enable_fuzzy_binding`](/system-variables.md#tidb_opt_enable_fuzzy_binding-new-in-v760)                   | 新しく追加された | クロスデータベースバインディング機能を有効にするかどうかを制御します。デフォルト値`OFF`は、クロスデータベースバインディングが無効であることを意味します。                                                                                                                                                                                                                                         |
 | [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760)                           | 新しく追加された | TiDB 設定項目[`performance.txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)を動的に変更します。これは、TiDB 内の単一行のデータのサイズを制限します。この変数のデフォルト値は`0`です。これは、TiDB がデフォルトで設定項目`txn-entry-size-limit`の値を使用することを意味します。この変数がゼロ以外の値に設定されている場合、 `txn-entry-size-limit`も同じ値に設定されます。                       |
-| [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)             | 新しく追加された | 有効にするかどうかを制御します[アクティブなPDFollower](/tune-region-performance.md#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service)機能 (実験的)。値が`OFF`の場合、TiDB は PD リーダーからのみリージョン情報を取得します。値が`ON`の場合、TiDB はリージョン情報の要求をすべての PD サーバーに均等に分散し、PD フォロワーもリージョン要求を処理できるため、PD リーダーの CPU 負荷が軽減されます。 |
+| [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)             | 新しく追加された | 有効にするかどうかを制御します[アクティブなPDFollower](/tune-region-performance.md#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service)機能 (実験的)。値が`OFF`の場合、TiDB は PD リーダーからのみリージョン情報を取得します。値が`ON`の場合、TiDB はリージョン情報のリクエストをすべての PD サーバーに均等に分散し、PD フォロワーもリージョンリクエストを処理できるため、PD リーダーの CPU 負荷が軽減されます。 |
 
 ### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
 

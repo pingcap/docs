@@ -64,7 +64,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 
 - TiFlash
 
-    - I/O リミッターがバルク書き込み後のクエリ要求の I/O スループットを誤って抑制し、クエリのパフォーマンスが低下する問題を修正しました[#5801](https://github.com/pingcap/tiflash/issues/5801) @[JinheLin](https://github.com/JinheLin)
+    - I/O リミッターがバルク書き込み後のクエリリクエストの I/O スループットを誤って抑制し、クエリのパフォーマンスが低下する問題を修正しました[#5801](https://github.com/pingcap/tiflash/issues/5801) @[JinheLin](https://github.com/JinheLin)
     - クエリがキャンセルされたときにウィンドウ関数によってTiFlashがクラッシュする可能性がある問題を修正[#5814](https://github.com/pingcap/tiflash/issues/5814) @[SeaRise](https://github.com/SeaRise)
     - `NULL`値を含む列でプライマリインデックスを作成した後に発生するpanicを修正しました。 [#5859](https://github.com/pingcap/tiflash/issues/5859) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
@@ -85,7 +85,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 
     - TiCDC
 
-        - CDCサーバーが完全に起動する前に HTTP 要求を受信すると、CDCサーバーがpanicする可能性がある問題を修正しました[#6838](https://github.com/pingcap/tiflow/issues/6838) @[asddongmen](https://github.com/asddongmen)
+        - CDCサーバーが完全に起動する前に HTTP リクエストを受信すると、CDCサーバーがpanicする可能性がある問題を修正しました[#6838](https://github.com/pingcap/tiflow/issues/6838) @[asddongmen](https://github.com/asddongmen)
         - アップグレード中のログ フラッディング問題を修正 [#7235](https://github.com/pingcap/tiflow/issues/7235) @[Rustin170506](https://github.com/Rustin170506)
         - changefeed の redo ログファイルが誤って削除される可能性がある問題を修正[#6413](https://github.com/pingcap/tiflow/issues/6413) @[Rustin170506](https://github.com/Rustin170506)
         - etcdトランザクションでコミットされる操作が多すぎるとTiCDCが利用できなくなる問題を修正[#7131](https://github.com/pingcap/tiflow/issues/7131) @[Rustin170506](https://github.com/Rustin170506)

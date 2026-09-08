@@ -159,7 +159,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
 
 - TiFlash
 
-    - TiFlashとPD間のネットワークパーティション（ネットワーク切断）により、読み取り要求タイムアウトエラーが発生する可能性がある問題を修正しました。 [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - TiFlashとPD間のネットワークパーティション（ネットワーク切断）により、読み取りリクエストタイムアウトエラーが発生する可能性がある問題を修正しました。 [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - `SUBSTRING_INDEX()`関数が一部のコーナーケースでTiFlash のクラッシュを引き起こす可能性がある問題を修正[#9116](https://github.com/pingcap/tiflash/issues/9116) @[wshwsh12](https://github.com/wshwsh12)
     - BRまたはTiDB Lightning 経由でデータをインポートした後、FastScanモードで多数の重複行が読み取られる可能性がある問題を修正しました。 [#9118](https://github.com/pingcap/tiflash/issues/9118) @[JinheLin](https://github.com/JinheLin)
     - データベースが作成直後に削除されるとTiFlash がpanicする可能性がある問題を修正[#9266](https://github.com/pingcap/tiflash/issues/9266) @[JaySon-Huang](https://github.com/JaySon-Huang)
