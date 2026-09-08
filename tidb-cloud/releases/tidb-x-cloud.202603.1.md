@@ -44,7 +44,7 @@ In `TiDB-X-CLOUD.202603.1`:
 
 ### Observability
 
-* Support defining multi-dimensional, fine-grained trigger rules for slow query logs [#62959](https://github.com/pingcap/tidb/issues/62959), [#64010](https://github.com/pingcap/tidb/issues/64010) @[zimulala](https://github.com/zimulala) <!-- (dup): release-8.5.6.md > Features > Observability --> <!-- miss issue https://github.com/pingcap/tidb/issues/64010 in release-8.5.6.md --> <!-- pr: https://github.com/pingcap/tidb/pull/66132, https://github.com/pingcap/tidb/pull/66064, https://github.com/pingcap/tidb/pull/65086 -->
+* Support defining multi-dimensional, fine-grained trigger rules for slow queries [#62959](https://github.com/pingcap/tidb/issues/62959), [#64010](https://github.com/pingcap/tidb/issues/64010) @[zimulala](https://github.com/zimulala) <!-- (dup): release-8.5.6.md > Features > Observability --> <!-- miss issue https://github.com/pingcap/tidb/issues/64010 in release-8.5.6.md --> <!-- pr: https://github.com/pingcap/tidb/pull/66132, https://github.com/pingcap/tidb/pull/66064, https://github.com/pingcap/tidb/pull/65086 -->
 
     In TiDB Cloud, SQL queries that take more than 300 milliseconds are considered slow queries by default. You can view slow queries on the [**Slow Query**](/tidb-cloud/tune-performance.md#slow-query) tab of the [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) page in the [TiDB Cloud console](/tidb-cloud/index.md).
 
