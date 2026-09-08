@@ -6341,7 +6341,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF`
+- Default value: `OFF` for TiDB Self-Managed and TiDB Cloud Dedicated/Starter, `ON` for TiDB Cloud Essentia and TiDB Cloud Premium
 - This variable controls whether to include the user who executes SQL statements as an aggregation dimension in [statement summary tables](/statement-summary-tables.md). When this variable is set to `OFF`, TiDB aggregates the same SQL digest executed by different users into the same row, and the `SAMPLE_USER` field displays one sampled user. When this variable is set to `ON`, TiDB aggregates the same SQL digest executed by different users into separate rows, and the `SAMPLE_USER` field of each row indicates the user who executed the statement.
 - Modifying this variable clears the current in-memory statement summary data because data before and after the modification uses different aggregation dimensions. This does not affect historical data persisted to the disk.
 - After you enable this variable, the number of statement summary records might increase with the number of different execution users for the same SQL digest, which increases memory usage.
