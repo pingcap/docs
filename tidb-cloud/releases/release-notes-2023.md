@@ -249,7 +249,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)では基本認証がサポートされるようになりました。
 
-    ["Basic" HTTP認証](https://datatracker.ietf.org/doc/html/rfc7617)を使用したリクエストでは、公開鍵をユーザー名として、秘密鍵をパスワードとして提供できます。ダイジェスト認証と比較して、基本認証はよりシンプルで、Data Serviceエンドポイントを呼び出す際に簡単に使用できます。
+    ['Basic' HTTP認証](https://datatracker.ietf.org/doc/html/rfc7617)を使用したリクエストでは、公開鍵をユーザー名として、秘密鍵をパスワードとして提供できます。ダイジェスト認証と比較して、基本認証はよりシンプルで、Data Serviceエンドポイントを呼び出す際に簡単に使用できます。
 
     詳細については[エンドポイントを呼び出す](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint)を参照してください。
 
@@ -478,7 +478,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - 簡素化と明確化を目指し、製品名を更新しました。
 
-    - 「TiDB Cloud Serverless Tier」は「TiDB Cloud Serverless」という名前になりました。
+    - "TiDB Cloud Serverless Tier"は"TiDB Cloud Serverless"という名前になりました。
     - "TiDB Cloud Dedicated Tier"は"TiDB Cloud Dedicated"という名前になりました。
     - "TiDB On-Premises"は"TiDB Self-Managed"という名前になりました。
 

@@ -1,6 +1,6 @@
 ---
 title: tiup cluster display
-summary: tiup cluster displayコマンドは、クラスタ内の各コンポーネントの動作状況を効率的に表示します。ダッシュボード情報、ノードステータス、CPUおよびメモリ使用率などを表示するオプションが用意されています。出力には、クラスタ名、バージョン、SSHクライアントの種類、ダッシュボードアドレス、ノードの詳細を含む表が含まれます。ノードのサービスステータスは、"Up"、"Down"、"Tombstone"、"Pending Offline"、"Unknown"のいずれかになります。
+summary: tiup cluster displayコマンドは、クラスタ内の各コンポーネントの動作状況を効率的に表示します。ダッシュボード情報、ノードステータス、CPUおよびメモリ使用率などを表示するオプションが用意されています。出力には、クラスタ名、バージョン、SSHクライアントの種類、ダッシュボードアドレス、ノードの詳細を含む表が含まれます。ノードのサービスステータスは、Up、Down、Tombstone、Pending Offline、Unknownのいずれかになります。
 ---
 
 # tiup cluster display {#tiup-cluster-display}

@@ -6951,7 +6951,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `SYSTEM`
-- この変数は現在のタイムゾーンを返します。値は、"-8:00"のようなオフセット、または"America/Los_Angeles"のような名前付きゾーンのいずれかで指定できます。
+- この変数は現在のタイムゾーンを返します。値は、'-8:00'のようなオフセット、または'America/Los_Angeles'のような名前付きゾーンのいずれかで指定できます。
 - 値`SYSTEM`は、タイムゾーンがシステムホストと同じである必要があることを意味します。システムホストのタイムゾーンは、 [`system_time_zone`](#system_time_zone)変数で取得できます。
 
 ### timestamp
@@ -7103,7 +7103,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - 適用範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `8.0.11-TiDB-` (tidb バージョン)
-- この変数は、MySQLのバージョンに続いてTiDBのバージョンを返します。例えば、"8.0.11-TiDB-v8.5.4"のようになります。
+- この変数は、MySQLのバージョンに続いてTiDBのバージョンを返します。例えば、'8.0.11-TiDB-v8.5.4'のようになります。
 
 ### version_comment
 

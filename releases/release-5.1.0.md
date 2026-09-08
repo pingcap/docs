@@ -65,7 +65,7 @@ TiDB バージョン: 5.1.0
 - TiDB のローリングアップグレード中は`alter table ... modify column`や`alter table ... change column`のようなステートメントを実行しないでください。
 - バージョン5.1以降、各テーブルのTiFlashレプリカを作成する際に、システムテーブルのレプリカを設定する機能はサポートされなくなりました。クラスタをアップグレードする前に、関連するシステムテーブルのレプリカをクリアする必要があります。クリアしないと、アップグレードは失敗します。
 - TiCDC の`cdc cli changefeed`コマンドの`--sort-dir`は非推奨です。代わりに、 `cdc server`コマンドで`--sort-dir` を設定できます。 [#1795](https://github.com/pingcap/tiflow/pull/1795)
-- TiDB 5.1 にアップグレードした後、TiDB が「function READ ONLY has only noop implementation」というエラーを返す場合、 [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)の値を`ON`に設定することで、TiDB がこのエラーを無視するようにできます。これは、MySQL の`read_only`変数が TiDB ではまだ有効になっていないためです (TiDB では'noop'動作です)。したがって、この変数が TiDB で設定されていても、TiDB クラスタにデータを書き込むことができます。
+- TiDB 5.1 にアップグレードした後、TiDB が"function READ ONLY has only noop implementation"というエラーを返す場合、 [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)の値を`ON`に設定することで、TiDB がこのエラーを無視するようにできます。これは、MySQL の`read_only`変数が TiDB ではまだ有効になっていないためです (TiDB では'noop'動作です)。したがって、この変数が TiDB で設定されていても、TiDB クラスタにデータを書き込むことができます。
 
 ## 新機能 {#new-features}
 
