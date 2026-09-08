@@ -40,7 +40,7 @@ In `TiDB-X-CLOUD.202603.1`:
 
     Note that the preceding test results are based on the condition that no data truncation occurs during the DDL execution. The optimizations do not apply to conversions between signed and unsigned integer types, conversions between character sets, or tables with TiFlash replicas.
 
-    For more information, see [documentation](/sql-statements/sql-statement-modify-column.md).
+    For more information, see [documentation](https://docs.pingcap.com/tidbcloud/sql-statement-modify-column/?plan=premium).
 
 ### Observability
 
@@ -50,7 +50,7 @@ In `TiDB-X-CLOUD.202603.1`:
 
     Starting from v8.5.6, TiDB enhances slow query log control. You can use the [`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules-new-in-v856) system variable to define multi-dimensional slow query log output rules at the instance, session, and SQL levels, based on conditions such as `Query_time`, `Digest`, `Mem_max`, and `KV_total`. You can use [`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec-new-in-v856) to limit the number of log entries written per second, and use the [`WRITE_SLOW_LOG`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints) hint to force slow query logging for specific SQL statements. This enables more flexible and fine-grained control over slow query logs.
 
-    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/identify-slow-queries).
+    For more information, see [documentation](https://docs.pingcap.com/tidbcloud/config-slow-query-trigger-rules/?plan=premium).
 
 ### SQL
 
@@ -60,7 +60,7 @@ In `TiDB-X-CLOUD.202603.1`:
 
     Now TiDB supports using table aliases in the `FOR UPDATE OF` clause. TiDB can now correctly resolve locking targets from the `FROM` clause, including aliased tables, ensuring that row locks take effect as expected. This improves MySQL compatibility and makes `SELECT ... FOR UPDATE OF` statements more stable and reliable in queries that use table aliases.
 
-    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/sql-statement-select).
+    For more information, see [documentation](https://docs.pingcap.com/tidbcloud/sql-statement-modify-column/?plan=premium).
 
 * Support partial indexes to reduce index storage and DML maintenance overhead [#62664](https://github.com/pingcap/tidb/issues/62664) [#62761](https://github.com/pingcap/tidb/issues/62761) [#62758](https://github.com/pingcap/tidb/issues/62758) [#63447](https://github.com/pingcap/tidb/issues/63447) [#64344](https://github.com/pingcap/tidb/issues/64344) @[YangKeao](https://github.com/YangKeao) @[winoros](https://github.com/winoros) @[wjhuang2016](https://github.com/wjhuang2016) <!-- (dup): release-8.5.7.md > Features > SQL --> <!-- miss issue https://github.com/pingcap/tidb/issues/63447 in release-8.5.7.md --> <!-- exclude author wjhuang2016 in release-8.5.7.md --> <!-- pr: https://github.com/pingcap/tidb/pull/64434, https://github.com/pingcap/tidb/pull/62762, https://github.com/pingcap/tidb/pull/62759, https://github.com/pingcap/tidb/pull/65051 -->
 
@@ -70,7 +70,7 @@ In `TiDB-X-CLOUD.202603.1`:
 
     To use partial indexes effectively, define a predicate that matches the filters in your common queries. TiDB selects a partial index only when the query predicates match or imply the partial index predicate. Currently, partial index predicates support basic comparison operators (`=`, `!=`, `<`, `<=`, `>`, `>=`), `IS NULL`, `IS NOT NULL`, and `IN` predicates with constant values.
 
-    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/sql-statement-create-index#partial-indexes).
+    For more information, see [documentation](https://docs.pingcap.com/tidbcloud/sql-statement-create-index/?plan=premium#partial-indexes-new-in-v857).
 
 ## Compatibility changes
 
