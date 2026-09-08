@@ -139,7 +139,7 @@ SELECT * FROM authors WHERE birth_year = 1998;
 </div>
 <div label="Java" value="java">
 
-Javaでは、同じSQLを使用して、動的なパラメータを持つデータクエリ要求を処理できます。
+Javaでは、同じSQLを使用して、動的なパラメータを持つデータクエリリクエストを処理できます。
 
 これは、パラメータを SQL文に連結することで実行できます。ただし、この方法では、アプリケーションのセキュリティに[SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)インジェクションの潜在的なリスクが生じます。
 
