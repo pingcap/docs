@@ -127,4 +127,4 @@ Use "tiup [command] --help" for more information about a command.
 
 TiUPコマンドは TiUP の内部コードに実装され、パッケージ管理操作に使用されますが、 TiUPコンポーネントはTiUPコマンドによってインストールされる独立したコンポーネントパッケージです。
 
-たとえば、 `tiup list`コマンドを実行すると、 TiUP は独自の内部コードを直接実行します。`tiup playground`コマンドを実行すると、 TiUP は「playground」という名前のローカル パッケージがあるかどうかを確認し、ない場合はミラーからパッケージをダウンロードして実行します。
+たとえば、 `tiup list`コマンドを実行すると、 TiUP は独自の内部コードを直接実行します。`tiup playground`コマンドを実行すると、 TiUP は"playground"という名前のローカル パッケージがあるかどうかを確認し、ない場合はミラーからパッケージをダウンロードして実行します。

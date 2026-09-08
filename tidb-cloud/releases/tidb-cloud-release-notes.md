@@ -684,7 +684,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         詳細については、[クラウドストレージからサンプルデータ（SQLファイル）をインポートする](/tidb-cloud/import-sample-data.md)、[クラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)、および[クラウドストレージからApache Parquetファイルをインポートする](/tidb-cloud/import-parquet-files.md)を参照してください。
 
-    - セキュリティ追跡を強化するため、 TiDB Cloudのコンソール監査ログに「パブリックエンドポイントの有効化/無効化」イベントを追加します。
+    - セキュリティ追跡を強化するため、 TiDB Cloudのコンソール監査ログに"Enable/Disable Public Endpoint"イベントを追加します。
 
 ## 2026年2月3日 {#february-3-2026}
 

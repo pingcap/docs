@@ -50,9 +50,9 @@ TiDB は、MySQL 8.0 で利用可能な[日付と時刻関数](https://dev.mysql
 | [`MONTHNAME()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_monthname)                                       | 月の名前を返す                                            |
 | [`NOW()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_now)                                                   | 現在の日付と時刻を返す                                        |
 | [`PERIOD_ADD()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_period-add)                                     | 年月にピリオドを追加する                                       |
-| [`PERIOD_DIFF()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_period-diff)                                   | 期間間の月数を返す                                          |
+| [`PERIOD_DIFF()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_period-diff)                                   | 2つの期間間の月数を返す                                          |
 | [`QUARTER()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_quarter)                                           | 日付引数から四半期を返す                                       |
-| [`SEC_TO_TIME()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_sec-to-time)                                   | 秒を「HH:MM:SS」形式に変換します                               |
+| [`SEC_TO_TIME()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_sec-to-time)                                   | 秒を'HH:MM:SS'形式に変換します                               |
 | [`SECOND()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_second)                                             | 秒を返す（0～59）                                         |
 | [`STR_TO_DATE()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_str-to-date)                                   | 文字列を日付に変換する                                        |
 | [`SUBDATE()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_subdate)                                           | 3つの引数で呼び出された場合のDATE_SUB()の同義語                      |
@@ -85,15 +85,15 @@ TiDB は、MySQL 8.0 で利用可能な[日付と時刻関数](https://dev.mysql
 
 | 形式             | 説明                                                 |
 | -------------- | -------------------------------------------------- |
-| 「%a」           | 曜日の略称（日～土）                                         |
-| 「%D」           | 英語の接尾辞付きの月日（0日、1日、2日、3日）                           |
-| 「%U」           | 週（00..53）、日曜日が週の最初の日です。WEEK() モード 0                |
-| "%u" | 週（00..53）、月曜日が週の最初の日です。WEEK() モード 1                |
-| 「%V」           | 週（01..53）、日曜日が週の最初の日です。WEEK() モード 2。%X とともに使用されます。 |
-| 「%v」           | 週（01..53）、月曜日が週の最初の日です。WEEK() モード 3。%x とともに使用されます。 |
-| 「%W」           | 曜日名（日曜日..土曜日）                                      |
+| "%a"           | 曜日の略称（日～土）                                         |
+| "%D"           | 英語の接尾辞付きの月日（0日、1日、2日、3日）                           |
+| "%U"           | 週（00..53）、日曜日を週の最初の日とする、WEEK() モード 0                |
+| "%u" | 週（00..53）、月曜日を週の最初の日とする、WEEK() モード 1                |
+| "%V"           | 週（01..53）、日曜日を週の最初の日とする、WEEK() モード 2、%X とともに使用 |
+| "%v"           | 週（01..53）、月曜日を週の最初の日とする、WEEK() モード 3、%x とともに使用 |
+| "%W"           | 曜日名（日曜日..土曜日）                                      |
 | "%w" | 曜日（0=日曜日、6=土曜日）                                    |
-| 「%X」           | 日曜日を週の最初の日とする週の年を 4 桁の数字で表します。                     |
+| "%X"           | 日曜日を週の最初の日とする週の年を 4 桁の数字で表します。                     |
 | "%x" | 週の年。月曜日を週の最初の日とする、数字 4 桁。                          |
 
 詳細は[問題 #30082](https://github.com/pingcap/tidb/issues/30082)ご覧ください。

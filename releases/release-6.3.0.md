@@ -324,7 +324,7 @@ TiDBバージョン: 6.3.0-DMR
     - TiDB Data Migration (DM)
 
         - MySQL 8.0をデータソースとして使用する際の互換性を向上させる [#6448](https://github.com/pingcap/tiflow/issues/6448) @[lance6716](https://github.com/lance6716)
-        - 「無効な接続」が発生した場合にDDLを非同期で実行することでDDLを最適化する [#4689](https://github.com/pingcap/tiflow/issues/4689) @[lyzx2001](https://github.com/lyzx2001)
+        - "invalid connection"が発生した場合にDDLを非同期で実行することでDDLを最適化する [#4689](https://github.com/pingcap/tiflow/issues/4689) @[lyzx2001](https://github.com/lyzx2001)
 
     - TiDB Lightning
 

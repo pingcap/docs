@@ -210,7 +210,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set enable-one-way-merge true  // Enables one-way merging.
     ```
 
-- `enable-cross-table-merge`は 、テーブル間のリージョンのマージを有効にするために使用されます。`false`に設定すると、PD は異なるテーブルのリージョンをマージしません。このオプションは、キータイプが「テーブル」の場合にのみ機能します。
+- `enable-cross-table-merge`は 、テーブル間のリージョンのマージを有効にするために使用されます。`false`に設定すると、PD は異なるテーブルのリージョンをマージしません。このオプションは、キータイプが"table"の場合にのみ機能します。
 
     ```bash
     config set enable-cross-table-merge true  // Enable cross table merge.
@@ -218,8 +218,8 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 - `key-type`はクラスターで使用されるキーエンコーディングの種類を指定します。サポートされているオプションは ["table", "raw", "txn"] で、デフォルト値は "table" です。
 
-    - クラスター内に TiDB インスタンスが存在しない場合は、 `key-type` 「raw」または「txn」になり、PD は`enable-cross-table-merge`設定に関係なくテーブル間でリージョンをマージできます。
-    - クラスター内にTiDBインスタンスが存在する場合、 `key-type`は 「table」である必要があります。PDがテーブル間でリージョンをマージできるかどうかは、 `enable-cross-table-merge`によって決まります。`key-type`が 「raw」の場合、配置ルールは機能しません。
+    - クラスター内に TiDB インスタンスが存在しない場合は、 `key-type` "raw"または"txn"になり、PD は`enable-cross-table-merge`設定に関係なくテーブル間でリージョンをマージできます。
+    - クラスター内にTiDBインスタンスが存在する場合、 `key-type`は "table"である必要があります。PDがテーブル間でリージョンをマージできるかどうかは、 `enable-cross-table-merge`によって決まります。`key-type`が "raw"の場合、配置ルールは機能しません。
 
     ```bash
     config set key-type raw  // Enable cross table merge.

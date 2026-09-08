@@ -126,7 +126,7 @@ SELECT * FROM `users`;
 
 ## トランザクション分離レベル {#transaction-isolation-levels}
 
-トランザクション分離レベルは、データベースのトランザクション処理の基礎となります。**ACID**の「I」（Isolation）は、トランザクションの分離を意味します。
+トランザクション分離レベルは、データベースのトランザクション処理の基礎となります。**ACID**の"I"（Isolation）は、トランザクションの分離を意味します。
 
 SQL-92 標準では、次の4つの分離レベルが定義されています。
 
@@ -159,7 +159,7 @@ mysql> SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 ERROR 8048 (HY000): The isolation level 'SERIALIZABLE' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error
 ```
 
-TiDBは、MySQLとの整合性を確保するために、スナップショット分離（SI）レベルの整合性（「repeatable read」とも呼ばれます）を実装しています。この分離レベルは[ANSI Repeatable Read Isolation Level](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read)および[MySQL Repeatable Read Isolation Level](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)とは異なります。詳細については、 [TiDBトランザクション分離レベル](/transaction-isolation-levels.md)を参照してください。
+TiDBは、MySQLとの整合性を確保するために、スナップショット分離（SI）レベルの整合性（"repeatable read"とも呼ばれます）を実装しています。この分離レベルは[ANSI Repeatable Read Isolation Level](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read)および[MySQL Repeatable Read Isolation Level](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)とは異なります。詳細については、 [TiDBトランザクション分離レベル](/transaction-isolation-levels.md)を参照してください。
 
 ## ヘルプが必要ですか? {#need-help}
 

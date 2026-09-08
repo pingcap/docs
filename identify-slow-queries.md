@@ -5,7 +5,7 @@ summary: スロークエリログを使用して、問題のあるSQL文を特�
 
 # スロークエリを特定する {#identify-slow-queries}
 
-ユーザーがスロークエリを特定し、SQL実行のパフォーマンスを分析および改善できるように、TiDBは実行時間が[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) （デフォルト値は300ミリ秒）を超えるステートメントを[スロークエリファイル](/tidb-configuration-file.md#slow-query-file)ファイル（デフォルト値は「tidb-slow.log」）に出力します。
+ユーザーがスロークエリを特定し、SQL実行のパフォーマンスを分析および改善できるように、TiDBは実行時間が[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) （デフォルト値は300ミリ秒）を超えるステートメントを[スロークエリファイル](/tidb-configuration-file.md#slow-query-file)ファイル（デフォルト値は"tidb-slow.log"）に出力します。
 
 TiDBはデフォルトでスロークエリログを有効にしています。システム変数[`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log)を変更することで、この機能を有効または無効にできます。
 

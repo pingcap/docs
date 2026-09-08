@@ -131,8 +131,8 @@ TiDB バージョン: 5.1.1
     - 集計関数`COUNT`または`COUNT DISTINCT`を実行するときに予期しない結果が発生する問題を修正しました
     - 複数のディスクにデプロイされたときにTiFlash がデータを復元できない潜在的なバグを修正しました
     - TiDB DashboardがTiFlashのディスク情報を正しく表示できない問題を修正
-    - 解体時に発生する可能性のあるpanic問題を修正`SharedQueryBlockInputStream`
-    - 解体時に発生する可能性のあるpanic問題を修正`MPPTask`
+    - `SharedQueryBlockInputStream`の破棄時に発生する可能性のあるpanic問題を修正
+    - `MPPTask`の破棄時に発生する可能性のあるpanic問題を修正
     - スナップショット経由でデータを同期した後に発生する可能性のあるデータの不整合の問題を修正
 
 - ツール
