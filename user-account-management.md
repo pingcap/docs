@@ -42,7 +42,7 @@ CREATE USER [IF NOT EXISTS] user [IDENTIFIED BY 'auth_string'];
 CREATE USER 'test'@'127.0.0.1' IDENTIFIED BY 'xxx';
 ```
 
-TiDBアカウント名はユーザー名とホスト名で構成されます。アカウント名の構文は「user_name@host_name」です。
+TiDBアカウント名はユーザー名とホスト名で構成されます。アカウント名の構文は'user_name'@'host_name'です。
 
 - `user_name`は大文字と小文字が区別されます。
 

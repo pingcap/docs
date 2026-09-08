@@ -110,7 +110,7 @@ TiDB バージョン: 4.0.14
     - リージョンハートビートにより、TiKV が特定の状況で大規模なリージョンを分割できない問題を修正[#10111](https://github.com/tikv/tikv/issues/10111)
     - TiKVとTiDB 間のCMスケッチの形式の不一致によって発生した誤った統計を修正しました [#25638](https://github.com/pingcap/tidb/issues/25638)
     - `apply wait duration`メトリックの誤った統計を修正 [#9893](https://github.com/tikv/tikv/issues/9893)
-    - Titan で`delete_files_in_range`を使用した後に発生する「Missing Blob」エラーを修正 [#10232](https://github.com/tikv/tikv/pull/10232)
+    - Titan で`delete_files_in_range`を使用した後に発生する"Missing Blob"エラーを修正 [#10232](https://github.com/tikv/tikv/pull/10232)
 
 - PD
 
@@ -124,8 +124,8 @@ TiDB バージョン: 4.0.14
 - TiDB Dashboard
 
     - **プロファイリング**UIがすべてのTiDBインスタンスをプロファイリングできない問題を修正[#944](https://github.com/pingcap/tidb-dashboard/pull/944)
-    - **Statements**UIに「プラン数」が表示されない問題を修正しました[#939](https://github.com/pingcap/tidb-dashboard/pull/939)
-    - クラスタアップグレード後に**Slow Query**UIに「unknown field」エラーが表示される問題を修正しました [#902](https://github.com/pingcap/tidb-dashboard/issues/902)
+    - **Statements**UIに"Plan Count"が表示されない問題を修正しました[#939](https://github.com/pingcap/tidb-dashboard/pull/939)
+    - クラスタアップグレード後に**Slow Query**UIに"unknown field"エラーが表示される問題を修正しました [#902](https://github.com/pingcap/tidb-dashboard/issues/902)
 
 - TiFlash
 

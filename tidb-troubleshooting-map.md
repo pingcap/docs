@@ -109,7 +109,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
         - `dmesg -T | grep tidb-server`を実行してください。結果として、エラーが発生した時点付近の OOM-killer ログが表示されます。
 
-        - エラーが発生した時点（つまり、tidb-serverが再起動した時点）の前後の`tidb.log`にある「Welcome to TiDB」ログをgrepします。
+        - エラーが発生した時点（つまり、tidb-serverが再起動した時点）の前後の`tidb.log`にある"Welcome to TiDB"ログをgrepします。
 
         - `fatal error: runtime: out of memory`または`cannot allocate memory` `tidb_stderr.log`内で検索します。
 
@@ -119,7 +119,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
 - 3.2.2 OOMを引き起こすSQL文を特定します。（現在、TiDBのすべてのバージョンではSQL文を正確に特定できません。SQL文を特定した後、OOMがそのSQL文によって引き起こされているかどうかを分析する必要があります。）
 
-    - バージョン3.0.0以降の場合、 `tidb.log`内の「expensive_query」をgrepしてください。このログメッセージには、タイムアウトした、またはメモリ割り当て量を超過したSQLクエリが記録されています。
+    - バージョン3.0.0以降の場合、 `tidb.log`内の"expensive_query"をgrepしてください。このログメッセージには、タイムアウトした、またはメモリ割り当て量を超過したSQLクエリが記録されています。
 
     - バージョンが v3.0.0 未満の場合、 `tidb.log`で "メモリ exceeded quota" を grep して、メモリクォータを超える SQL クエリを特定します。
 
@@ -466,7 +466,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     - 原因3：データソースがマシンによって生成され、 [Dumpling](/dumpling-overview.md)によってバックアップされていない場合は、テーブルの制約を遵守していることを確認してください。例：
 
-        - `AUTO_INCREMENT`列は正の値である必要があり、「0」という値を含んではいけません。
+        - `AUTO_INCREMENT`列は正の値である必要があり、"0"という値を含んではいけません。
         - UNIQUEキーとPRIMARYキーには重複するエントリがあってはなりません。
 
     - 解決策: [トラブルシューティングソリューション](/tidb-lightning/troubleshoot-tidb-lightning.md#checksum-failed-checksum-mismatched-remote-vs-local)を参照してください。

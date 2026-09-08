@@ -55,8 +55,8 @@ TiDB バージョン: 5.2.0
 | TiKV設定ファイル     | [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)                                                           | 新しく追加された | フロー制御メカニズムを有効にするかどうかを決定します。デフォルト値は`true`です。                                                                                     |
 | TiKV設定ファイル     | [`storage.flow-control.memtables-threshold`](/tikv-configuration-file.md#memtables-threshold)                                 | 新しく追加された | kvDB の memtable の数がこのしきい値に達すると、フロー制御メカニズムが動作を開始します。デフォルト値は`5`です。                                                                |
 | TiKV設定ファイル     | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)                                   | 新しく追加された | kvDB L0 ファイルの数がこのしきい値に達すると、フロー制御メカニズムが動作を開始します。デフォルト値は`9`です。                                                                    |
-| TiKV設定ファイル     | [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) | 新しく追加された | KvDB の保留中の圧縮バイト数がこのしきい値に達すると、フロー制御メカニズムは一部の書き込み要求を拒否し、 `ServerIsBusy`エラーを報告します。デフォルト値は「192GB」です。                                |
-| TiKV設定ファイル     | [`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit) | 新しく追加された | KvDB の保留中の圧縮バイト数がこのしきい値に達すると、フロー制御メカニズムはすべての書き込み要求を拒否し、 `ServerIsBusy`エラーを報告します。デフォルト値は「1024GB」です。                              |
+| TiKV設定ファイル     | [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) | 新しく追加された | KvDB の保留中の圧縮バイト数がこのしきい値に達すると、フロー制御メカニズムは一部の書き込み要求を拒否し、 `ServerIsBusy`エラーを報告します。デフォルト値は"192GB"です。                                |
+| TiKV設定ファイル     | [`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit) | 新しく追加された | KvDB の保留中の圧縮バイト数がこのしきい値に達すると、フロー制御メカニズムはすべての書き込み要求を拒否し、 `ServerIsBusy`エラーを報告します。デフォルト値は"1024GB"です。                              |
 
 ### その他 {#others}
 
@@ -208,7 +208,7 @@ Apple M1チップを搭載したMacコンピュータで`tiup playground`コマ�
     - アップグレード後に既存のバインディングをキャッシュにロードできない問題を修正しました [#23295](https://github.com/pingcap/tidb/pull/23295)
     - `SHOW BINDINGS`の結果を ( `original_sql` 、 `update_time` ) で並べ替えることをサポートする [#26139](https://github.com/pingcap/tidb/pull/26139)
     - バインディングが存在する場合のクエリ最適化ロジックを改善し、クエリの最適化時間を短縮する [#26141](https://github.com/pingcap/tidb/pull/26141)
-    - 「削除済み」ステータスのバインディングに対してガベージコレクションを自動的に完了する機能をサポートする [#26206](https://github.com/pingcap/tidb/pull/26206)
+    - "deleted"ステータスのバインディングに対してガベージコレクションを自動的に完了する機能をサポートする [#26206](https://github.com/pingcap/tidb/pull/26206)
     - `EXPLAIN VERBOSE`の結果で、バインディングがクエリ最適化に使用されているかどうかを表示する機能のサポート [#26930](https://github.com/pingcap/tidb/pull/26930)
     - 現在の TiDB インスタンスのバインディング キャッシュに対応するタイムスタンプを表示するための新しいステータス バリエーション`last_plan_binding_update_time`を追加します [#26340](https://github.com/pingcap/tidb/pull/26340)
     - バインディング進化の開始時、またはベースライン進化を禁止する`admin evolve bindings`実行時にエラーを報告する機能をサポートする（現在、実験的機能であるため、TiDB Self-Managed バージョンでは無効になっている）。これにより、他の機能に影響が出る。 [#26333](https://github.com/pingcap/tidb/pull/26333)

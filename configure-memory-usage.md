@@ -165,7 +165,7 @@ TiDBは、実行演算子のディスクへの書き込みをサポートして�
     [tidb]> explain analyze select /*+ HASH_AGG() */ count(*) from t t1 join t t2 join t t3 group by t1.a, t2.a, t3.a;
     ```
 
-    この SQL文を実行するとメモリが大量に消費されるため、次の「メモリクォータ不足」エラーメッセージが返されます。
+    この SQL文を実行するとメモリが大量に消費されるため、次の"Out of Memory Quota"エラーメッセージが返されます。
 
     ```sql
     ERROR 1105 (HY000): Out Of Memory Quota![conn_id=3]

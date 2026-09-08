@@ -5,7 +5,7 @@ summary: シャードマージのシナリオにおけるデータ移行のベ�
 
 # シャード統合シナリオにおけるデータ移行のベストプラクティス {#best-practices-of-data-migration-in-the-shard-merge-scenario}
 
-このドキュメントでは、シャードマージ シナリオにおける[TiDB Data Migration (DM)](/dm/dm-overview.md)の機能と制限について説明し、アプリケーションのデータ移行のベストプラクティス ガイドを提供します (デフォルトの「悲観的」モードが使用されます)。
+このドキュメントでは、シャードマージ シナリオにおける[TiDB Data Migration (DM)](/dm/dm-overview.md)の機能と制限について説明し、アプリケーションのデータ移行のベストプラクティス ガイドを提供します (デフォルトの"pessimistic"モードが使用されます)。
 
 ## 別のデータ移行タスクを使用する {#use-a-separate-data-migration-task}
 

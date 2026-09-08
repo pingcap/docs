@@ -14,7 +14,7 @@ TiDB Ansible バージョン: 3.0.2
 ## TiDB {#tidb}
 
 - SQLオプティマイザ
-    - クエリ内で同じテーブルが複数回出現し、論理的にクエリ結果が常に空になる場合に「スキーマ内に列が見つかりません」というメッセージが報告される問題を修正しました[#11247](https://github.com/pingcap/tidb/pull/11247)
+    - クエリ内で同じテーブルが複数回出現し、論理的にクエリ結果が常に空になる場合に"Can't find column in schema"というメッセージが報告される問題を修正しました[#11247](https://github.com/pingcap/tidb/pull/11247)
     - `TIDB_INLJ`ヒントが一部のケース（ `explain select /*+ TIDB_INLJ(t1) */ t1.b, t2.a from t t1, t t2 where t1.b = t2.a`など）で正しく機能しないことが原因でクエリプランが期待どおりに動作しない問題を修正しました[#11362](https://github.com/pingcap/tidb/pull/11362)
     - クエリ結果の列名が場合によっては間違っている問題を修正しました（ `SELECT IF(1,c,c) FROM t`など） [#11379](https://github.com/pingcap/tidb/pull/11379)
     - `SELECT 0 LIKE 'a string'`ようなクエリが`TRUE`返す問題を修正しました。これは、 `LIKE`式が暗黙的に0に変換される場合があるためです[#11411](https://github.com/pingcap/tidb/pull/11411)

@@ -158,7 +158,7 @@ insert into t(a) values(12);
 insert into t(a) values(10),(11),(12);
 ```
 
-`INSERT`文の書き換えは、複数の「values」キーワードの後の値を連結して 1つの SQL文にするものであることに注意してください。 `INSERT`文に他の違いがある場合、書き換えることはできません。たとえば、次のようになります。
+`INSERT`文の書き換えは、複数の"values"キーワードの後の値を連結して 1つの SQL文にするものであることに注意してください。 `INSERT`文に他の違いがある場合、書き換えることはできません。たとえば、次のようになります。
 
 ```sql
 insert into t (a) values (10) on duplicate key update a = 10;
@@ -319,7 +319,7 @@ MyBatis Mapperは2つのパラメータをサポートしています。
 </insert>
 ```
 
-このマッパーは`insert on duplicate key update`文を生成します。 `(?,?,?)`に続く「値」の数は、渡されたリストの数によって決まります。最終的な効果は`rewriteBatchStatements=true`を使用した場合と同様で、クライアントと TiDB 間の通信オーバーヘッドを効果的に削減します。
+このマッパーは`insert on duplicate key update`文を生成します。 `(?,?,?)`に続く"values"の数は、渡されたリストの数によって決まります。最終的な効果は`rewriteBatchStatements=true`を使用した場合と同様で、クライアントと TiDB 間の通信オーバーヘッドを効果的に削減します。
 
 前述のとおり、プリペアドステートメントの最大長が`prepStmtCacheSqlLimit`の値を超えると、キャッシュされないことにも注意する必要があります。
 

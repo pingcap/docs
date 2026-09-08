@@ -1,6 +1,6 @@
 ---
 title: tiup mirror
-summary: TiUPミラーはTiUPの重要な概念であり、ローカルおよびリモートミラーリングをサポートします。「tiup mirror」コマンドは、ミラーの管理、コンポーネントの作成、配布、キーの管理を行います。構文は「tiup mirror <コマンド> [フラグ]」です。サポートされているサブコマンドには、genkey、sign、init、set、grant、publish、modify、rotate、clone、mergeなどがあります。
+summary: TiUPミラーはTiUPの重要な概念であり、ローカルおよびリモートミラーリングをサポートします。'tiup mirror'コマンドは、ミラーの管理、コンポーネントの作成、配布、キーの管理を行います。構文は'tiup mirror <command> [flags]'です。サポートされているサブコマンドには、genkey、sign、init、set、grant、publish、modify、rotate、clone、mergeなどがあります。
 ---
 
 # tiup mirror {#tiup-mirror}

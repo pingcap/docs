@@ -5,7 +5,7 @@ summary: TiDBは、実行時間またはメモリ使用量のしきい値を超�
 
 # コストの高いクエリを特定する {#identify-expensive-queries}
 
-TiDBを使用すると、SQL実行中に高負荷なクエリを特定できるため、SQL実行のパフォーマンスを診断・改善できます。具体的には、実行時間が[`tidb_expensive_query_time_threshold`](/system-variables.md#tidb_expensive_query_time_threshold) （デフォルトでは60秒）を超える、またはメモリ使用量が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) （デフォルトでは1GB）を超えるステートメントに関する情報が、 [tidb-server ログファイル](/tidb-configuration-file.md#logfile) （デフォルトでは「tidb.log」）に出力されます。
+TiDBを使用すると、SQL実行中に高負荷なクエリを特定できるため、SQL実行のパフォーマンスを診断・改善できます。具体的には、実行時間が[`tidb_expensive_query_time_threshold`](/system-variables.md#tidb_expensive_query_time_threshold) （デフォルトでは60秒）を超える、またはメモリ使用量が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) （デフォルトでは1GB）を超えるステートメントに関する情報が、 [tidb-server ログファイル](/tidb-configuration-file.md#logfile) （デフォルトでは"tidb.log"）に出力されます。
 
 > **Note:**
 >

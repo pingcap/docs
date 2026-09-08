@@ -134,7 +134,7 @@ ALTER TABLE t1 ADD INDEX (c1), ALGORITHM=INSTANT;
 ERROR 1846 (0A000): ALGORITHM=INSTANT is not supported. Reason: Cannot alter table by INSTANT. Try ALGORITHM=INPLACE.
 ```
 
-ただし、 `ALGORITHM=COPY`アサーションを`INPLACE`操作に使用すると、エラーではなく警告が生成されます。これは、TiDB がアサーションを「*このアルゴリズム以上」*と解釈するためです。TiDB が使用するアルゴリズムは MySQL と異なる可能性があるため、この動作の違いは MySQL との互換性を保つために役立ちます。
+ただし、 `ALGORITHM=COPY`アサーションを`INPLACE`操作に使用すると、エラーではなく警告が生成されます。これは、TiDB がアサーションを_このアルゴリズムまたはそれ以上_と解釈するためです。TiDB が使用するアルゴリズムは MySQL と異なる可能性があるため、この動作の違いは MySQL との互換性を保つために役立ちます。
 
 ```sql
 ALTER TABLE t1 ADD INDEX (c1), ALGORITHM=COPY;

@@ -264,7 +264,7 @@ INSERT INTO `t` (`a`) VALUES(12);
 INSERT INTO `t` (`a`) values(10),(11),(12);
 ```
 
-`INSERT`のステートメントの書き換えは、複数の「values」キーワードの後の値を連結して、1つのSQL文にすることです。`INSERT`のステートメントに他の違いがある場合は、書き換えることはできません。たとえば、次のようになります。
+`INSERT`のステートメントの書き換えは、複数の"values"キーワードの後の値を連結して、1つのSQL文にすることです。`INSERT`のステートメントに他の違いがある場合は、書き換えることはできません。たとえば、次のようになります。
 
 ```sql
 INSERT INTO `t` (`a`) VALUES (10) ON DUPLICATE KEY UPDATE `a` = 10;

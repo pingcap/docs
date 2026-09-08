@@ -41,7 +41,7 @@ TiDB バージョン: 6.1.4
     - テーブルを作成するときに、列のデフォルト値とタイプが一致せず、自動的に修正されない問題を修正しました[#34881](https://github.com/pingcap/tidb/issues/34881) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger) @[mjonss](https://github.com/mjonss)
     - `LazyTxn.LockKeys`関数のデータ競合問題を修正 [#40355](https://github.com/pingcap/tidb/issues/40355) @[HuSharp](https://github.com/HuSharp)
     - 長いセッション接続で`INSERT`または`REPLACE`文がpanicする可能性がある問題を修正しました [#40351](https://github.com/pingcap/tidb/issues/40351) @[fanrenhoo](https://github.com/fanrenhoo)
-    - 「カーソル読み取り」メソッドを使用してデータを読み取ると、GC のためにエラーが返される可能性がある問題を修正しました。 [#39447](https://github.com/pingcap/tidb/issues/39447) @[zyguan](https://github.com/zyguan)
+    - "cursor read"メソッドを使用してデータを読み取ると、GC のためにエラーが返される可能性がある問題を修正しました。 [#39447](https://github.com/pingcap/tidb/issues/39447) @[zyguan](https://github.com/zyguan)
     - [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600)設定項目がPointGetクエリで有効にならない問題を修正しました [#39928](https://github.com/pingcap/tidb/issues/39928) @[zyguan](https://github.com/zyguan)
     - `INFORMATION_SCHEMA.TIKV_REGION_STATUS`テーブルをクエリすると誤った結果が返される問題を修正[#37436](https://github.com/pingcap/tidb/issues/37436) @[zimulala](https://github.com/zimulala)
     - 一部のパターンの`IN`と`NOT IN`サブクエリが`Can't find column`エラーを報告する問題を修正しました [#37032](https://github.com/pingcap/tidb/issues/37032) @[AilinKid](https://github.com/AilinKid) @[lance6716](https://github.com/lance6716)
@@ -88,9 +88,9 @@ TiDB バージョン: 6.1.4
     - TiDB Data Migration (DM)
 
         - `SHOW GRANTS`の下流データベース名にワイルドカード ("*") が含まれている場合に、DM が事前チェック中にエラーを発生させる可能性があるバグを修正しました[`#7645`](https://github.com/pingcap/tiflow/issues/7645) @[lance6716](https://github.com/lance6716)
-        - binlogログクエリイベントの「COMMIT」によって DM がログを過剰に出力する問題を修正しました [`#7525`](https://github.com/pingcap/tiflow/issues/7525) @[liumengya94](https://github.com/liumengya94)
+        - binlogログクエリイベントの"COMMIT"によって DM がログを過剰に出力する問題を修正しました [`#7525`](https://github.com/pingcap/tiflow/issues/7525) @[liumengya94](https://github.com/liumengya94)
         - SSL が`ssl-ca`しか設定されていない場合に DM タスクが起動に失敗する問題を修正しました [#7941](https://github.com/pingcap/tiflow/issues/7941) @[liumengya94](https://github.com/liumengya94)
-        - 1つのテーブルに「更新」と「非更新」の両方の式フィルタが指定されている場合、すべての`UPDATE`文がスキップされるバグを修正しました[#7831](https://github.com/pingcap/tiflow/issues/7831) @[lance6716](https://github.com/lance6716)
+        - 1つのテーブルに"update"と"non-update"の両方の式フィルタが指定されている場合、すべての`UPDATE`文がスキップされるバグを修正しました[#7831](https://github.com/pingcap/tiflow/issues/7831) @[lance6716](https://github.com/lance6716)
         - テーブルに`update-old-value-expr`または`update-new-value-expr`のいずれか一方のみが設定されている場合に、フィルタルールが有効にならないか、DM がパニックになるバグを修正しました。 [#7774](https://github.com/pingcap/tiflow/issues/7774) @[lance6716](https://github.com/lance6716)
 
     - TiDB Lightning

@@ -227,16 +227,16 @@ DM移行タスクのステータスは、DM-workerに割り当てられた各サ
     - `sourceStatus` : アップストリーム MySQL データベースの情報。
     - `subTaskStatus` : アップストリーム MySQL データベースのすべてのサブタスクの情報。各サブタスクには以下のフィールドが含まれる場合があります。
         - `name` : サブタスクの名前。
-        - `stage` : サブタスクのステータス。「sources」の「subTaskStatus」の「stage」のステータスの説明とステータスの切り替え関係については、 [サブタスクのステータス](#subtask-status)を参照してください。
-        - `unit` : 「チェック」、「ダンプ」、「ロード」、「同期」を含む DM の処理単位。
+        - `stage` : サブタスクのステータス。"sources"の"subTaskStatus"の"stage"のステータスの説明とステータスの切り替え関係については、 [サブタスクのステータス](#subtask-status)を参照してください。
+        - `unit` : "Check"、"Dump"、"Load"、"Sync"を含む DM の処理単位。
         - `result` : サブタスクが失敗した場合にエラー情報を表示します。
-        - `unresolvedDDLLockID` : シャーディングDDLロックID。異常状態におけるシャーディングDDLロックを手動で処理するために使用されます。「sources」の「subTaskStatus」の「unresolvedDDLLockID」の動作の詳細については、 [シャーディング DDL ロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を参照してください。
+        - `unresolvedDDLLockID` : シャーディングDDLロックID。異常状態におけるシャーディングDDLロックを手動で処理するために使用されます。"sources"の"subTaskStatus"の"unresolvedDDLLockID"の動作の詳細については、 [シャーディング DDL ロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を参照してください。
         - `sync` ： `Sync`処理ユニットの複製情報。この情報は、現在の処理ユニットと同じコンポーネントに関するものです。
             - `masterBinlog` : アップストリーム データベース内のbinlog の位置。
             - `masterBinlogGtid` : アップストリーム データベース内の GTID 情報。
             - `syncerBinlog` : `Sync`処理単位で複製されたbinlogの位置。
             - `syncerBinlogGtid` : GTID を使用して複製されたbinlogの位置。
-            - `blockingDDLs` : 現在ブロックされているDDLリスト。このDM-workerのすべての上流テーブルが「同期済み」ステータスにある場合にのみ空になります。この場合、実行されるかスキップされるシャーディングDDL文を示します。
+            - `blockingDDLs` : 現在ブロックされているDDLリスト。このDM-workerのすべての上流テーブルが"synced"ステータスにある場合にのみ空になります。この場合、実行されるかスキップされるシャーディングDDL文を示します。
             - `unresolvedGroups` : 解決されていないシャーディンググループ。各グループには以下のフィールドが含まれます。
                 - `target` : 複製されるダウンストリームデータベーステーブル。
                 - `DDLs` : DDL文のリスト。

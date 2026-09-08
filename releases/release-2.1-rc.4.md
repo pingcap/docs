@@ -28,7 +28,7 @@ summary: TiDB 2.1 RC4は2018年10月23日にリリースされ、安定性、SQL
     - ラッチをリファクタリングしてトランザクションの競合の誤判断を回避し、同時トランザクションの実行パフォーマンスを向上させる[#7711](https://github.com/pingcap/tidb/pull/7711)
     - 一部のケースでスロークエリを収集することによって発生するpanic問題を修正[#7874](https://github.com/pingcap/tidb/pull/7847)
     - `LOAD DATA`文で`ESCAPED BY`が空文字列の場合のpanic問題を修正 [#8005](https://github.com/pingcap/tidb/pull/8005)
-    - 「コプロセッサエラー」ログ情報を完了する [#8006](https://github.com/pingcap/tidb/pull/8006)
+    - "coprocessor error"ログの情報を拡充する [#8006](https://github.com/pingcap/tidb/pull/8006)
 - 互換性
     - クエリが空の場合、 `SHOW PROCESSLIST`結果の`Command`フィールドを`Sleep`に設定します[#7839](https://github.com/pingcap/tidb/pull/7839)
 - 表現
@@ -51,4 +51,4 @@ summary: TiDB 2.1 RC4は2018年10月23日にリリースされ、安定性、SQL
 - スナップショット適用によって発生するRocksDB書き込み停止問題を最適化 [#3606](https://github.com/tikv/tikv/pull/3606)
 - raftstore `tick`メトリックを追加 [#3657](https://github.com/tikv/tikv/pull/3657)
 - RocksDBをアップグレードし、書き込みブロックの問題を修正し、 `IngestExternalFile` を実行するときに書き込み操作によってソースファイルが破損する可能性がある問題を修正しました。 [#3661](https://github.com/tikv/tikv/pull/3661)
-- grpcio をアップグレードし、「ping が多すぎる」と誤って報告される問題を修正しました[#3650](https://github.com/tikv/tikv/pull/3650)
+- grpcio をアップグレードし、"too many pings"と誤って報告される問題を修正しました[#3650](https://github.com/tikv/tikv/pull/3650)

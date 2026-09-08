@@ -9,7 +9,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
 >
 > この機能は、[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)クラスターでは利用できません。
 
-ランナウェイクエリとは、予想よりも多くの時間やリソースを消費するクエリです。以下では、ランナウェイクエリを管理する機能を説明するために「ランナ**ウェイクエリ」という**用語を使用します。
+ランナウェイクエリとは、予想よりも多くの時間やリソースを消費するクエリです。以下では、ランナウェイクエリを管理する機能を説明するために**ランナウェイクエリ**という用語を使用します。
 
 - バージョン7.2.0以降、リソース制御機能にランナウェイクエリの管理機能が導入されました。リソースグループに対してランナウェイクエリを特定するための条件を設定し、ランナウェイクエリによるリソースの枯渇や他のクエリへの影響を防ぐためのアクションを自動的に実行できます。[`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md)または[`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)に`QUERY_LIMIT`フィールドを含めることで、リソースグループのランナウェイクエリを管理できます。
 - バージョン7.3.0以降、リソース制御機能にランナウェイウォッチの手動管理が導入され、特定のSQL文またはダイジェストに対するランナウェイクエリを迅速に特定できるようになりました。ステートメント[`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)を実行することで、リソースグループ内のランナウェイクエリウォッチリストを手動で管理できます。

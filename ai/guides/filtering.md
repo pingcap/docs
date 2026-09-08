@@ -174,7 +174,7 @@ results = table.query(
 ).to_list()
 ```
 
-**例: JSONフィールド`meta.category`が「tech」に等しいレコードをフィルタリングする**
+**例: JSONフィールド`meta.category`が'tech'に等しいレコードをフィルタリングする**
 
 ```python
 results = table.query(

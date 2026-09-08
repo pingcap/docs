@@ -93,7 +93,7 @@ TiDB v7.4.0以降、 `GROUP BY`句は`WITH ROLLUP`修飾子をサポートしま
 
 ## SQLモードのサポート {#sql-mode-support}
 
-TiDBはSQLモード`ONLY_FULL_GROUP_BY`をサポートしており、有効にすると、曖昧な非集計列を含むクエリを拒否します。例えば、次のクエリは`ONLY_FULL_GROUP_BY`が有効になっていると無効になります。`SELECT`のリストにある非集計列「b」が`GROUP BY`ステートメントに含まれていないためです。
+TiDBはSQLモード`ONLY_FULL_GROUP_BY`をサポートしており、有効にすると、曖昧な非集計列を含むクエリを拒否します。例えば、次のクエリは`ONLY_FULL_GROUP_BY`が有効になっていると無効になります。`SELECT`のリストにある非集計列"b"が`GROUP BY`ステートメントに含まれていないためです。
 
 ```sql
 drop table if exists t;
@@ -121,7 +121,7 @@ TiDB は現在、デフォルトで[`ONLY_FULL_GROUP_BY`](/mysql-compatibility.m
 
 ### MySQLとの違い {#differences-from-mysql}
 
-`ONLY_FULL_GROUP_BY`の現在の実装は、 MySQL 5.7の実装よりも厳密ではありません。例えば、結果が「c」で順序付けられることを期待して、次のクエリを実行するとします。
+`ONLY_FULL_GROUP_BY`の現在の実装は、 MySQL 5.7の実装よりも厳密ではありません。例えば、結果が"c"で順序付けられることを期待して、次のクエリを実行するとします。
 
 ```sql
 drop table if exists t;
@@ -130,7 +130,7 @@ insert into t values(1, 2, 1), (1, 2, 2), (1, 3, 1), (1, 3, 2);
 select distinct a, b from t order by c;
 ```
 
-結果を順序付けるには、まず重複を排除する必要があります。しかし、そのためにはどの行を保持すべきでしょうか？ この選択は「c」の保持値に影響し、さらに順序付けにも影響を与え、結果的に順序付けを恣意的なものにしてしまいます。
+結果を順序付けるには、まず重複を排除する必要があります。しかし、そのためにはどの行を保持すべきでしょうか？ この選択は"c"の保持値に影響し、さらに順序付けにも影響を与え、結果的に順序付けを恣意的なものにしてしまいます。
 
 MySQL では、 `DISTINCT`と`ORDER BY`含むクエリは、 `ORDER BY`式のいずれかが以下の条件の少なくとも 1つを満たしていない場合、無効として拒否されます。
 
@@ -139,7 +139,7 @@ MySQL では、 `DISTINCT`と`ORDER BY`含むクエリは、 `ORDER BY`式のい
 
 しかし、TiDB では上記のクエリは有効です。詳細については、 [#4254](https://github.com/pingcap/tidb/issues/4254)を参照してください。
 
-標準SQLに対するTiDBのもう一つの拡張機能は、 `HAVING`句で`SELECT`リスト内のエイリアス式を参照することを許可します。例えば、次のクエリはテーブル「orders」に一度だけ出現する「name」の値を返します。
+標準SQLに対するTiDBのもう一つの拡張機能は、 `HAVING`句で`SELECT`リスト内のエイリアス式を参照することを許可します。例えば、次のクエリはテーブル"orders"に一度だけ出現する"name"の値を返します。
 
 ```sql
 select name, count(name) from orders
@@ -155,7 +155,7 @@ group by name
 having c = 1;
 ```
 
-標準 SQL では、 `GROUP BY`句で列式のみが許可されるため、次のようなステートメントは、「FLOOR(value/100)」が非列式であるため無効です。
+標準 SQL では、 `GROUP BY`句で列式のみが許可されるため、次のようなステートメントは、"FLOOR(value/100)"が非列式であるため無効です。
 
 ```sql
 select id, floor(value/100)
