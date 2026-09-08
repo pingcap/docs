@@ -304,7 +304,7 @@ TiDB Cloudがデータベース監査ログを書き込む宛先として、組�
 
 > **Note:**
 >
-> 監査ログファイルをTiDB Cloudに保存することを要求して選択した場合は、**Database Audit Logging**ページの**Audit Log Access**セクションからダウンロードできます。
+> 監査ログファイルをTiDB Cloudに保存することをリクエストして選択した場合は、**Database Audit Logging**ページの**Audit Log Access**セクションからダウンロードできます。
 
 TiDB Cloud監査ログは、クラスター ID、ノード ID、およびログ作成日が完全修飾ファイルパスに組み込まれた読み取り可能なテキストファイルです。
 

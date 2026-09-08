@@ -42,7 +42,7 @@ TiDB Grafana パネルで、 **KV エラー**の下にある次の監視メト�
     - `wait_expired` 、トランザクションがロックの有効期限が切れるまで待機する必要があることを示します。
     - `expired`ロックのTTLが期限切れであることを示します。その後、競合トランザクションはこのロックを解決できます。
 
-- **KV 再試行期間は、** KV 要求を再送信する期間を示します。
+- **KV 再試行期間は、** KV リクエストを再送信する期間を示します。
 
     ![kv-retry-duration](/media/troubleshooting-write-conflict-kv-retry-duration.png)
 

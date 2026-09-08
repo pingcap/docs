@@ -33,7 +33,7 @@ tiup cluster tls <cluster-name> <enable/disable> [flags]
 - クラスターの現在のTLSステータスに関係なく、TLSを強制的に有効または無効にします。
 - データタイプ: `BOOLEAN`
 - デフォルト: `false`
-- このオプションを指定しない場合、クラスターが既に要求された状態にある場合は、操作はスキップされます。
+- このオプションを指定しない場合、クラスターが既にリクエストされた状態にある場合は、操作はスキップされます。
 
 ### --reload-certificate {#reload-certificate}
 

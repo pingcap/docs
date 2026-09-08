@@ -118,7 +118,7 @@ TiProxy の負荷分散ポリシーの構成。
 
 - デフォルト値: `""`
 - ホットリロードのサポート: はい
-- [ラベルベースの負荷分散](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing)に使用するラベル名を指定します。TiProxy は、このラベル名に基づいて TiDB サーバーのラベル値を照合し、自分と同じラベル値を持つ TiDB サーバーへのルーティング要求を優先します。
+- [ラベルベースの負荷分散](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing)に使用するラベル名を指定します。TiProxy は、このラベル名に基づいて TiDB サーバーのラベル値を照合し、自分と同じラベル値を持つ TiDB サーバーへのルーティングリクエストを優先します。
 - デフォルト値の`label-name`は空文字列で、ラベルベースの負荷分散が使用されないことを示します。この負荷分散ポリシーを有効にするには、この設定項目を空でない文字列に設定し、TiProxy で[`labels`](#labels) 、TiDB で[`labels`](/tidb-configuration-file.md#labels)の両方を設定する必要があります。詳細については、 [ラベルベースの負荷分散](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing)を参照してください。
 
 #### `policy` {#policy}

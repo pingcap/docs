@@ -69,7 +69,7 @@ SET GLOBAL tidb_opt_fix_control = '44262:ON,44389:ON,44823:10000,44830:ON,44855:
 | [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720)                                                                                         | TiFlashへの非再帰的な[共通テーブル式（CTE）](/sql-statements/sql-statement-with.md)プッシュダウンを有効にします。                              | これは実験的機能です。                                                                             |
 | [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)                                                                                                                               | Read Committed分離レベルの場合、この変数を有効にすると、グローバルタイムスタンプを取得する際のレイテンシーとコストが回避され、トランザクションレベルの読み取りレイテンシーが最適化されます。                 | この機能は、Repeatable Read分離レベルとは互換性がありません。                                                        |
 | [`tidb_guarantee_linearizability`](/system-variables.md#tidb_guarantee_linearizability-new-in-v50)                                                                                                              | PDサーバーからのコミットタイムスタンプの取得をスキップすることでパフォーマンスを向上させます。                                                                | これは、線形化可能性を犠牲にしてパフォーマンスを優先するものです。因果的一貫性のみが保証されます。厳密な線形化可能性が求められるシナリオには適していません。          |
-| [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)                                                                                                         | PDFollower機能を有効にすると、PDフォロワーがリージョン要求を処理できるようになります。これにより、すべてのPDサーバーに負荷が均等に分散され、PDリーダーのCPU負荷が軽減されます。               | 該当なし                                                                                    |
+| [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)                                                                                                         | PDFollower機能を有効にすると、PDフォロワーがリージョンリクエストを処理できるようになります。これにより、すべてのPDサーバーに負荷が均等に分散され、PDリーダーのCPU負荷が軽減されます。               | 該当なし                                                                                    |
 | [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)                                                                                                                        | 高度なクエリ最適化戦略を有効にすることで、追加の最適化ルールとヒューリスティックを通じてパフォーマンスを向上させることができます。                                               | ワークロードによってパフォーマンスの向上度合いが異なるため、ご使用の環境で十分にテストを行ってください。                                    |
 
 以下では、追加の最適化を可能にするオプティマイザ制御構成について説明します。
@@ -121,7 +121,7 @@ soft-pending-compaction-bytes-limit = "192GiB"
 | [`concurrent-send-snap-limit`](/tikv-configuration-file.md#concurrent-send-snap-limit) [`concurrent-recv-snap-limit`](/tikv-configuration-file.md#concurrent-recv-snap-limit) [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec)                   | TiKVのスケーリング操作中に、同時スナップショット転送量とI/O帯域幅の制限を設定します。制限値を高く設定すると、データ移行が高速化され、スケーリング時間が短縮されます。                                                                                       | これらの制限を調整すると、スケーリング速度とオンライントランザクションパフォーマンスのトレードオフに影響します。                                                                                                                       |
 | [`rocksdb.max-manifest-file-size`](/tikv-configuration-file.md#max-manifest-file-size)                                                                                                                                                                                               | RocksDB マニフェストファイルの最大サイズを設定します。このファイルには、SST ファイルとデータベースの状態変更に関するメタデータが記録されます。このサイズを大きくすると、マニフェストファイルの書き換え頻度が減り、フォアグラウンド書き込みパフォーマンスへの影響を最小限に抑えることができます。                       | デフォルト値は`128MiB`です。SSTファイルが多数存在する環境（例えば、数十万個）では、マニフェストファイルの書き換えが頻繁に行われると、書き込みパフォーマンスが低下する可能性があります。このパラメータを`256MiB`以上の値に調整することで、最適なパフォーマンスを維持できます。                         |
 | [`rocksdb.titan`](/tikv-configuration-file.md#rocksdbtitan) [`rocksdb.defaultcf.titan`](/tikv-configuration-file.md#rocksdbdefaultcftitan) [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression) | Titanストレージエンジンを有効にすることで、書き込み増幅を低減し、ディスクI/Oのボトルネックを緩和できます。特に、RocksDBの圧縮処理が書き込みワークロードに追いつかず、圧縮待ちバイトが蓄積される場合に有効です。                                                            | 書き込み増幅が主なボトルネックである場合に有効にします。トレードオフは以下のとおりです。<ul><li>主キー範囲スキャンにおけるパフォーマンスへの影響の可能性。</li><li>空間増幅率の向上（最悪の場合、最大2倍）。</li><li>ブロブキャッシュのための追加メモリ使用量。</li></ul>              |
-| [`storage.scheduler-pending-write-threshold`](/tikv-configuration-file.md#scheduler-pending-write-threshold)                                                                                                                                                                         | TiKVスケジューラで書き込みキューの最大サイズを設定します。保留中の書き込みタスクの合計サイズがこのしきい値を超えると、TiKVは新規書き込み要求に対してエラーコード`Server Is Busy`を返します。                                                                   | デフォルト値は`100MiB`です。書き込み同時実行数が多い場合や、一時的な書き込みスパイクが発生する場合は、このしきい値を上げる（例えば`512MiB`にする）ことで負荷に対応できます。ただし、書き込みキューが継続的に蓄積され、このしきい値を超える場合は、根本的なパフォーマンスの問題が発生している可能性があり、さらに調査が必要です。 |
+| [`storage.scheduler-pending-write-threshold`](/tikv-configuration-file.md#scheduler-pending-write-threshold)                                                                                                                                                                         | TiKVスケジューラで書き込みキューの最大サイズを設定します。保留中の書き込みタスクの合計サイズがこのしきい値を超えると、TiKVは新規書き込みリクエストに対してエラーコード`Server Is Busy`を返します。                                                                   | デフォルト値は`100MiB`です。書き込み同時実行数が多い場合や、一時的な書き込みスパイクが発生する場合は、このしきい値を上げる（例えば`512MiB`にする）ことで負荷に対応できます。ただし、書き込みキューが継続的に蓄積され、このしきい値を超える場合は、根本的なパフォーマンスの問題が発生している可能性があり、さらに調査が必要です。 |
 | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)                                                                                                                                                                                          | kvDB L0ファイルの数に基づいて、書き込みフロー制御がトリガーされるタイミングを制御します。しきい値を上げると、書き込み負荷が高い場合の書き込み停止が減少します。                                                                                          | しきい値を高く設定すると、L0ファイルが多数存在する場合に、より積極的な圧縮処理が行われる可能性があります。                                                                                                                   |
 | [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)                                                                                                                                                        | 書き込みフロー制御を管理するために、保留中の圧縮バイトのしきい値を制御します。ソフトリミットを設定すると、部分的な書き込み拒否が発生します。                                                                                                       | デフォルトのソフトリミットは`192GiB`です。書き込み負荷の高いシナリオでは、圧縮処理が追いつかない場合、保留中の圧縮バイトが蓄積され、フロー制御がトリガーされる可能性があります。リミットを調整することでバッファ領域を増やすことができますが、蓄積が続く場合は、さらなる調査が必要な根本的な問題があることを示しています。        |
 | [`rocksdb.(defaultcf|writecf|lockcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger)と[`rocksdb.(defaultcf|writecf|lockcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1)      | `level0-slowdown-writes-trigger`と`soft-pending-compaction-bytes-limit`デフォルト値に手動で設定する必要があります。こうすることで、フロー制御パラメータの影響を受けなくなります。さらに、Rocksdbパラメータを設定して、デフォルトパラメータと同じ圧縮効率を維持してください。 | 詳細については、 [第18708号](https://github.com/tikv/tikv/issues/18708)を参照してください。                                                                                                   |
@@ -145,7 +145,7 @@ soft-pending-compaction-bytes-limit = "192GiB"
 
 > **Note:**
 >
-> TiKVは、システムの安定性を確保するために、スケジューラレイヤーでフロー制御を実装しています。保留中の圧縮バイト数や書き込みキューサイズなどの重要なしきい値を超えると、TiKVは書き込み要求を拒否し、ServerIsBusyエラーを返します。このエラーは、バックグラウンドの圧縮プロセスがフォアグラウンドの書き込み操作の現在の速度に追いつけないことを示しています。フロー制御が有効になると、通常、レイテンシーの急増とクエリスループットの低下（QPSの低下）が発生します。これらのパフォーマンス低下を防ぐには、包括的なキャパシティプランニングと、圧縮パラメータおよびストレージ設定の適切な構成が不可欠です。
+> TiKVは、システムの安定性を確保するために、スケジューラレイヤーでフロー制御を実装しています。保留中の圧縮バイト数や書き込みキューサイズなどの重要なしきい値を超えると、TiKVは書き込みリクエストを拒否し、ServerIsBusyエラーを返します。このエラーは、バックグラウンドの圧縮プロセスがフォアグラウンドの書き込み操作の現在の速度に追いつけないことを示しています。フロー制御が有効になると、通常、レイテンシーの急増とクエリスループットの低下（QPSの低下）が発生します。これらのパフォーマンス低下を防ぐには、包括的なキャパシティプランニングと、圧縮パラメータおよびストレージ設定の適切な構成が不可欠です。
 
 ### TiFlash -ラーナー向け設定 {#tiflash-learner-configurations}
 
@@ -333,10 +333,10 @@ go-ycsb run mysql -P /ycsb/workloads/workloada -p {host} -p mysql.port={port} -p
 
 #### トラブルシューティング {#troubleshooting}
 
-ワークロードに頻繁に発生する小規模なトランザクションや、タイムスタンプを頻繁に要求するクエリが含まれる場合、 [TSO（タイムスタンプオラクル）](/glossary.md#timestamp-oracle-tso)がパフォーマンスのボトルネックになる可能性があります。TSO の待機時間がシステムに影響を与えているかどうかを確認するには、 [**パフォーマンス概要 &gt; SQL実行時間概要**](/grafana-performance-overview-dashboard.md#sql-execute-time-overview)パネルを確認してください。TSO の待機時間が SQL 実行時間の大部分を占める場合は、次の最適化を検討してください。
+ワークロードに頻繁に発生する小規模なトランザクションや、タイムスタンプを頻繁にリクエストするクエリが含まれる場合、 [TSO（タイムスタンプオラクル）](/glossary.md#timestamp-oracle-tso)がパフォーマンスのボトルネックになる可能性があります。TSO の待機時間がシステムに影響を与えているかどうかを確認するには、 [**パフォーマンス概要 &gt; SQL実行時間概要**](/grafana-performance-overview-dashboard.md#sql-execute-time-overview)パネルを確認してください。TSO の待機時間が SQL 実行時間の大部分を占める場合は、次の最適化を検討してください。
 
 - 厳密な一貫性を必要としない読み取り操作には、低精度TSO（ [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso)を有効にする）を使用します。詳細については、 [解決策1：低精度TSOを使用する](#solution-1-low-precision-tso)を参照してください。
-- 可能な場合は、小さなトランザクションをまとめて大きなトランザクションにします。詳細については、 [解決策2：TSO要求の並列モード](#solution-2-parallel-mode-for-tso-requests)を参照してください。
+- 可能な場合は、小さなトランザクションをまとめて大きなトランザクションにします。詳細については、 [解決策2：TSOリクエストの並列モード](#solution-2-parallel-mode-for-tso-requests)を参照してください。
 
 #### 解決策1：低精度TSO {#solution-1-low-precision-tso}
 
@@ -350,7 +350,7 @@ go-ycsb run mysql -P /ycsb/workloads/workloada -p {host} -p mysql.port={port} -p
 
 メリットとデメリット：
 
-- キャッシュされたTSOを使用して古いデータの読み取りを有効にすることで、クエリのレイテンシーを削減し、新しいタイムスタンプを要求する必要性をなくします。
+- キャッシュされたTSOを使用して古いデータの読み取りを有効にすることで、クエリのレイテンシーを削減し、新しいタイムスタンプをリクエストする必要性をなくします。
 - パフォーマンスとデータの一貫性のバランスを取る：この機能は、古い読み取りデータが許容されるシナリオにのみ適しています。厳密なデータの一貫性が求められる場合には、使用を推奨しません。
 
 この最適化を有効にするには：
@@ -359,7 +359,7 @@ go-ycsb run mysql -P /ycsb/workloads/workloada -p {host} -p mysql.port={port} -p
 SET GLOBAL tidb_low_resolution_tso=ON;
 ```
 
-#### 解決策2：TSO要求の並列モード {#solution-2-parallel-mode-for-tso-requests}
+#### 解決策2：TSOリクエストの並列モード {#solution-2-parallel-mode-for-tso-requests}
 
 システム変数[`tidb_tso_client_rpc_mode`](/system-variables.md#tidb_tso_client_rpc_mode-new-in-v840)は、TiDBがPDにTSO RPCリクエストを送信するモードを切り替えます。デフォルト値は`DEFAULT`です。以下の条件を満たす場合、パフォーマンス向上の可能性を考慮して、この変数を`PARALLEL`または`PARALLEL-FAST`に切り替えることを検討してください。
 
