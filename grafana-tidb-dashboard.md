@@ -146,7 +146,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 
 - Load Schema Duration: TiDBがTiKVからスキーマを取得するのにかかる時間
 - Load Schema OPS: TiDBがTiKVから1秒あたりに取得するスキーマの統計
-- Schema Lease Error OPM: スキーマ リース エラーには、 `change`と`outdate` 2つのタイプがあります。 `change`スキーマが変更されたことを意味し、 `outdate`スキーマを更新できないことを意味します。これはより重大なエラーであり、アラートをトリガーします。
+- Schema Lease Error OPM: スキーマ リース エラーには、 `change`と`outdate` 2つのタイプがあります。 `change`は、スキーマが変更されたことを意味し、 `outdate`は、スキーマを更新できないことを意味します。これはより重大なエラーであり、アラートをトリガーします。
 - Load Privilege OPS: TiDBがTiKVから1秒あたりに取得した権限情報の件数の統計
 
 ### DDL {#ddl}
