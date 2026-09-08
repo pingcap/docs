@@ -151,11 +151,11 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 
 ### DDL {#ddl}
 
-- DDL Duration 95: DDL文の処理時間の 95% 分位
+- DDL Duration 95: DDL文の処理時間の95パーセンタイル
 - Batch Add Index Duration 100: 各バッチがインデックス作成に費やした最大時間の統計
 - DDL Waiting Jobs Count: 待機中のDDLタスクの数
 - DDL META OPM: DDLが1分間にMETAを取得する回数
-- DDL Worker Duration 99: 各DDLワーカーの実行時間の99%分位
+- DDL Worker Duration 99: 各DDLワーカーの実行時間の99パーセンタイル
 - Deploy Syncer Duration: Schema Version Syncer の初期化、再起動、およびクリア操作にかかる時間
 - Owner Handle Syncer Duration: DDL所有者がスキーマバージョンを更新、取得、および確認するのにかかる時間
 - Update Self Version Duration: Schema Version Syncerのバージョン情報の更新にかかる時間
