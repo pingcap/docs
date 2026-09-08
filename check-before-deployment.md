@@ -522,13 +522,18 @@ The steps to check and configure these parameters are as follows:
         2. Create a new tuned profile:
 
             ```bash
+            # For TuneD earlier than v2.23.0
+            mkdir -p /etc/tuned/balanced-tidb-optimal/
+            vi /etc/tuned/balanced-tidb-optimal/tuned.conf
+
+            # For TuneD v2.23.0 and later
             mkdir -p /etc/tuned/profiles/balanced-tidb-optimal/
             vi /etc/tuned/profiles/balanced-tidb-optimal/tuned.conf
             ```
 
             > **Note:**
             >
-            > TuneD v2.23.0 and later stores user-defined profiles under `/etc/tuned/profiles/<profile_name>/`. If you place the profile directly under `/etc/tuned/<profile_name>/`, TuneD cannot detect it.
+            > TuneD earlier than v2.23.0 uses `/etc/tuned/<profile_name>/tuned.conf`. TuneD v2.23.0 and later uses `/etc/tuned/profiles/<profile_name>/tuned.conf`. These path formats are version-specific and are not recognized by the other version range.
 
             ```
             [main]
