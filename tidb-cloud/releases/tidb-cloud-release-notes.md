@@ -10,15 +10,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## September 8, 2026
 
-**API changes**
+**Console changes**
 
-- **TiDB Cloud Premium**
+- **TiDB Cloud Essential**
 
-    - Introduce the changefeed API endpoints for TiDB Cloud Premium, providing programmatic management of change data capture (CDC) changefeeds.
+    - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances that include the enhancements announced on [June 30, 2026](#june-30-2026) now display CLOUD.202603.x as their version on the instance overview page in the TiDB Cloud console.
 
-        You can use these endpoints to create, list, get, delete, pause, resume, and scale changefeeds for real-time data replication to downstream systems, including Apache Kafka, MySQL, Amazon S3, and Alibaba Cloud OSS.
-
-        For more information, see Changefeed API v1beta2 Reference.
+        For more information about these enhancements, see [release notes of June 30, 2026](#june-30-2026).
 
 ## September 1, 2026
 
