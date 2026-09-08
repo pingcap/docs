@@ -65,7 +65,7 @@ TiDB バージョン: 4.0.7
     - copタスクストアが異なるタイプであってもプランダイジェストが同じになる問題を修正[#20076](https://github.com/pingcap/tidb/pull/20076)
     - `!= any()`関数の誤った動作を修正 [#20062](https://github.com/pingcap/tidb/pull/20062)
     - `slow-log`ファイルが存在しない場合に発生するクエリエラーを修正[#20051](https://github.com/pingcap/tidb/pull/20051)
-    - コンテキストがキャンセルされたときにリージョン要求が再試行され続ける問題を修正[#20031](https://github.com/pingcap/tidb/pull/20031)
+    - コンテキストがキャンセルされたときにリージョンリクエストが再試行され続ける問題を修正[#20031](https://github.com/pingcap/tidb/pull/20031)
     - ストリーミングリクエストで`cluster_slow_query`のテーブルの時間型をクエリするとエラーが発生する可能性がある問題を修正しました[#19943](https://github.com/pingcap/tidb/pull/19943)
     - `case when`を使用する DML文がスキーマ変更を引き起こす可能性がある問題を修正しました [#20095](https://github.com/pingcap/tidb/pull/20095)
     - スローログの`prev_stmt`情報が秘匿化されない問題を修正[#20048](https://github.com/pingcap/tidb/pull/20048)

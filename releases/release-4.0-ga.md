@@ -96,7 +96,7 @@ TiDB バージョン: 4.0.0
 
     - BR を使用してバックアップするときに発生する`DefaultNotFound`エラーを修正します [#7937](https://github.com/tikv/tikv/pull/7937)
     - 順序が乱れた`ReadIndex`パケットによるシステムパニックを修正 [#7930](https://github.com/tikv/tikv/pull/7930)
-    - 読み取り要求コールバック関数が呼び出されないために予期しないエラーが返される問題を修正[#7921](https://github.com/tikv/tikv/pull/7921)
+    - 読み取りリクエストコールバック関数が呼び出されないために予期しないエラーが返される問題を修正[#7921](https://github.com/tikv/tikv/pull/7921)
     - TiKV の再起動時にスナップショットファイルを誤って削除することで発生するシステムパニックを修正[#7927](https://github.com/tikv/tikv/pull/7927)
     - ストレージ暗号化処理ロジックが正しくないため、 `master key`が回転できない問題を修正しました [#7898](https://github.com/tikv/tikv/pull/7898)
     - ストレージ暗号化が有効になっているときに、スナップショットの受信ファイル`lock cf`が暗号化されない問題を修正しました[#7922](https://github.com/tikv/tikv/pull/7922)

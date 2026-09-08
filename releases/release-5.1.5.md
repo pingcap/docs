@@ -45,7 +45,7 @@ TiDBバージョン：5.1.5
     - TiKVとTiFlashが論理演算を照会した際に異なる結果を返す問題を修正しました [#37258](https://github.com/pingcap/tidb/issues/37258)
     - `EXECUTE`文が特定のシナリオで予期しないエラーを発生させる可能性がある問題を修正しました [#37187](https://github.com/pingcap/tidb/issues/37187)
     - `tidb_opt_agg_push_down`と`tidb_enforce_mpp`が有効になっている場合に発生するプランナーの誤った動作を修正します [#34465](https://github.com/pingcap/tidb/issues/34465)
-    - TiDBが`SHOW COLUMNS`ステートメントを実行する際にコプロセッサ要求を送信する可能性があるバグを修正しました [#36496](https://github.com/pingcap/tidb/issues/36496)
+    - TiDBが`SHOW COLUMNS`ステートメントを実行する際にコプロセッサリクエストを送信する可能性があるバグを修正しました [#36496](https://github.com/pingcap/tidb/issues/36496)
     - `lock tables`フラグが有効になっていない場合に、 `unlock tables`と`enable-table-lock`に対する警告を追加する [#28967](https://github.com/pingcap/tidb/issues/28967)
     - 範囲パーティションで複数の`MAXVALUE`パーティションが許可される問題を修正 [#36329](https://github.com/pingcap/tidb/issues/36329)
 
@@ -72,7 +72,7 @@ TiDBバージョン：5.1.5
     - PDリーダーの移籍後に削除されたtombstoneストアが再び表示される問題を修正しました[#4941](https://github.com/tikv/pd/issues/4941)
     - PDリーダーの転送後すぐにスケジューリングを開始できない問題を修正します [#4769](https://github.com/tikv/pd/issues/4769)
     - `not leader` の誤ったステータスコードを修正します。 [#4797](https://github.com/tikv/pd/issues/4797)
-    - PDがダッシュボードプロキシ要求を正しく処理できない問題を修正 [#5321](https://github.com/tikv/pd/issues/5321)
+    - PDがダッシュボードプロキシリクエストを正しく処理できない問題を修正 [#5321](https://github.com/tikv/pd/issues/5321)
     - TSOフォールバックの特定の特殊ケースにおけるバグを修正 [#4884](https://github.com/tikv/pd/issues/4884)
     - 特定のシナリオでTiFlashラーナーレプリカが作成されない可能性がある問題を修正しました [#5401](https://github.com/tikv/pd/issues/5401)
     - ラベル分布にメトリクスに残余ラベルが含まれる問題を修正 [#4825](https://github.com/tikv/pd/issues/4825)
