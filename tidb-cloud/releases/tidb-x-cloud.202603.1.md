@@ -42,16 +42,6 @@ In `TiDB-X-CLOUD.202603.1`:
 
     For more information, see [documentation](/sql-statements/sql-statement-modify-column.md).
 
-* Support pushing index lookups down to TiKV to improve query performance [#62575](https://github.com/pingcap/tidb/issues/62575) @[lcwangchao](https://github.com/lcwangchao) <!-- (dup): release-8.5.5.md > Features > Performance --> <!-- pr: https://github.com/pingcap/tidb/pull/65167, https://github.com/pingcap/tidb/pull/64932, https://github.com/pingcap/tidb/pull/65001, https://github.com/pingcap/tidb/pull/64839, https://github.com/pingcap/tidb/pull/64732, https://github.com/pingcap/tidb/pull/62615, https://github.com/pingcap/tidb/pull/64704 -->
-
-    Now TiDB supports using [optimizer hints](/optimizer-hints.md) to push the `IndexLookUp` operator down to TiKV nodes. This reduces the number of remote procedure calls (RPCs) and can improve query performance. The actual performance improvement varies depending on the specific workload and requires testing for verification.
-
-    To explicitly instruct the optimizer to push index lookups down to TiKV for a specific table, you can use the [`INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...])`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855) hint. It is recommended to combine this hint with the table's AFFINITY attribute. For example, set `AFFINITY="table"` for regular tables and `AFFINITY="partition"` for partitioned tables.
-
-    To disable index lookup pushdown to TiKV for a specific table, use the [`NO_INDEX_LOOKUP_PUSHDOWN(t1_name)`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#no_index_lookup_pushdownt1_name-new-in-v855) hint.
-
-    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855).
-
 ### Observability
 
 * Support defining multi-dimensional, fine-grained trigger rules for slow query logs [#62959](https://github.com/pingcap/tidb/issues/62959), [#64010](https://github.com/pingcap/tidb/issues/64010) @[zimulala](https://github.com/zimulala) <!-- (dup): release-8.5.6.md > Features > Observability --> <!-- miss issue https://github.com/pingcap/tidb/issues/64010 in release-8.5.6.md --> <!-- pr: https://github.com/pingcap/tidb/pull/66132, https://github.com/pingcap/tidb/pull/66064, https://github.com/pingcap/tidb/pull/65086 -->
