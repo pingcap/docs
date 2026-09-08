@@ -32,6 +32,7 @@
     - [Superset](/tidb-cloud-lake/guides/superset.md)
   - Network Access
     - [Connect with AWS PrivateLink](/tidb-cloud-lake/guides/connect-with-aws-privatelink.md)
+    - [Connect with Alibaba Cloud PrivateLink](/tidb-cloud-lake/guides/connect-with-alibaba-cloud-privatelink.md)
 - Manage Resources
   - [Dashboards](/tidb-cloud-lake/guides/dashboards.md)
   - [Task Flow](/tidb-cloud-lake/guides/task-flow.md)
