@@ -102,7 +102,7 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 
 ### Batch PointGet {#batch-point-get}
 
-`Batch_Point_Get`オペレーターの実行情報は`Point_Get`オペレーターと似ていますが、 `Batch_Point_Get`通常、データを読み取りするために`BatchGet` RPC リクエストを TiKV に送信します。
+`Batch_Point_Get`オペレーターの実行情報は`Point_Get`オペレーターと似ていますが、 `Batch_Point_Get`は通常、データを読み取るために`BatchGet` RPC リクエストを TiKV に送信します。
 
 `BatchGet:{num_rpc:2, total_time:83.13µs}` : TiKVに送信された`BatchGet`タイプのRPCリクエストの数( `num_rpc` )とすべてのRPCリクエストに費やされた合計時間( `total_time` )。
 
