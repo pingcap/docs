@@ -170,7 +170,7 @@ TiDBバージョン: 6.2.0-DMR
 
 - トランザクションにおけるセーブポイントの設定をサポートする
 
-    トランザクションとは、データベースがACID特性を保証する一連の連続した操作の論理的な集合です。複雑なアプリケーションシナリオでは、トランザクション内で多数の操作を管理する必要があり、場合によってはトランザクション内の操作をロールバックする必要が生じることもあります。"Savepoint"は、トランザクションの内部実装のための名前付きメカニズムです。このメカニズムを使用することで、トランザクション内のロールバックポイントを柔軟に制御でき、より複雑なトランザクションを管理し、多様なアプリケーション設計においてより自由度を高めることができます。
+    トランザクションとは、データベースがACID特性を保証する一連の連続した操作の論理的な集合です。複雑なアプリケーションシナリオでは、トランザクション内で多数の操作を管理する必要があり、場合によってはトランザクション内の操作をロールバックする必要が生じることもあります。「セーブポイント」は、トランザクションの内部実装のための名前付きメカニズムです。このメカニズムを使用することで、トランザクション内のロールバックポイントを柔軟に制御でき、より複雑なトランザクションを管理し、多様なアプリケーション設計においてより自由度を高めることができます。
 
     [ユーザー向けドキュメント](/sql-statements/sql-statement-savepoint.md) [#6840](https://github.com/pingcap/tidb/issues/6840) @[crazycs520](https://github.com/crazycs520)
 
@@ -224,7 +224,7 @@ TiDBバージョン: 6.2.0-DMR
 
     [ユーザー向けドキュメント](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import) [#35148](https://github.com/pingcap/tidb/issues/35148) @[sleepymole](https://github.com/sleepymole)
 
-- [TiDB Lightningのユーザー向けドキュメント](/tidb-lightning/tidb-lightning-overview.md)ドキュメントをリファクタリングして、その構造をより合理的かつ明確にします。 "backend"の用語も、新規ユーザーの理解の障壁を下げるために変更されています。
+- [TiDB Lightningのユーザー向けドキュメント](/tidb-lightning/tidb-lightning-overview.md)ドキュメントをリファクタリングして、その構造をより合理的かつ明確にします。 「バックエンド」の用語も、新規ユーザーの理解の障壁を下げるために変更されています。
 
     - "local backend"を"physical import mode"に置き換えてください。
     - "tidb backend"を"logical import mode"に置き換えてください。

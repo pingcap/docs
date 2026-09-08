@@ -212,7 +212,7 @@ dmctl は 3つのエラー処理コマンドを提供します。
       -h, --help   help for clear-error
     ```
 
-- `ignore-error` : エラー行を無視します。このエラー行は"ignored"としてマークされます。
+- `ignore-error` : エラー行を無視します。このエラー行は「無視」としてマークされます。
 
     ```
     Usage:
@@ -223,7 +223,7 @@ dmctl は 3つのエラー処理コマンドを提供します。
       -h, --help   help for ignore-error
     ```
 
-- `resolve-error` : エラー行は手動で処理され、"resolved"としてマークされます。
+- `resolve-error` : エラー行は手動で処理され、「解決済み」としてマークされます。
 
     ```
     Usage:

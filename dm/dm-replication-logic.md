@@ -16,7 +16,7 @@ summary: DM のコア処理ユニット Sync が DML文を複製する方法に�
 2. データソースから読み取ったbinlogイベントを変換します。
 
     1. [Binlogフィルター](/dm/dm-binlog-event-filter.md) : `filters`で設定されたbinlog式に従ってbinlogイベントをフィルタリングします。
-    2. [テーブルルーティング](/dm/dm-table-routing.md) : `routes`で設定された"database/table"ルーティングルールに従って"database/table"名を変換します。
+    2. [テーブルルーティング](/dm/dm-table-routing.md) : `routes`で設定された「データベース/テーブル」ルーティングルールに従って「データベース/テーブル」名を変換します。
     3. [表現フィルター](/filter-dml-event.md) : `expression-filter`で設定された SQL 式に従ってbinlogイベントをフィルタリングします。
 
 3. DML 実行計画を最適化します。

@@ -19,7 +19,7 @@ backend = "local"
 
 ## 実装 {#implementation}
 
-1. TiDB Lightningは、データをインポートする前に、TiKVノードを自動的に"import mode"に切り替えます。これにより、書き込みパフォーマンスが向上し、自動コンパクションが停止します。TiDB Lightningは、 TiDB Lightningのバージョンに応じて、グローバルスケジューリングを一時停止するかどうかを決定します。
+1. TiDB Lightningは、データをインポートする前に、TiKVノードを自動的に「インポートモード」に切り替えます。これにより、書き込みパフォーマンスが向上し、自動コンパクションが停止します。TiDB Lightningは、 TiDB Lightningのバージョンに応じて、グローバルスケジューリングを一時停止するかどうかを決定します。
 
     - v7.1.0 以降では、 TiDB Lightningパラメータ[`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)を使用して、一時停止スケジュールの範囲を制御できます。
     - TiDB Lightningバージョン v6.2.0 から v7.0.0 の場合、グローバルスケジューリングの一時停止の動作は TiDB クラスタのバージョンによって異なります。TiDB クラスタが v6.1.0 以上の場合、 TiDB Lightning はターゲットテーブルデータが格納されているリージョンのスケジューリングを一時停止します。インポートが完了すると、 TiDB Lightning はスケジューリングを回復します。その他のバージョンの場合、 TiDB Lightning はグローバルスケジューリングを一時停止します。
@@ -31,7 +31,7 @@ backend = "local"
 
 3. 各テーブルは複数の連続した**ブロック**に分割されるため、 TiDB Lightning は大規模なテーブル (200 GB 以上) からデータを並列にインポートできます。
 
-4. TiDB Lightningは、キーと値のペアを処理するために、各ブロックごとに"engine file"を用意します。TiDB LightningはSQLダンプを並列に読み取り、データソースをTiDBと同じエンコーディングでキーと値のペアに変換し、キーと値のペアをソートしてローカルの一時ストレージファイルに書き込みます。
+4. TiDB Lightningは、キーと値のペアを処理するために、各ブロックごとに「エンジンファイル」を用意します。TiDB LightningはSQLダンプを並列に読み取り、データソースをTiDBと同じエンコーディングでキーと値のペアに変換し、キーと値のペアをソートしてローカルの一時ストレージファイルに書き込みます。
 
 5. エンジンファイルが書き込まれると、 TiDB Lightning はターゲット TiKV クラスター上のデータの分割とスケジュールを開始し、その後、データを TiKV クラスターにインポートします。
 
@@ -43,7 +43,7 @@ backend = "local"
 
     AUTO_INCREMENT IDは行数の**上限**に基づいて推定され、テーブルデータファイルの合計サイズに比例します。そのため、AUTO_INCREMENT IDは通常、実際の行数よりも大きくなります。これは、AUTO_INCREMENT IDが[必ずしも連続しているわけではない](/mysql-compatibility.md#auto-increment-id)ため、正常な動作です。
 
-7. すべての手順が完了すると、 TiDB Lightningは自動的にTiKVノードを"normal mode"に切り替えます。グローバルスケジューリングが一時停止されている場合、 TiDB Lightningはグローバルスケジューリングも回復します。その後、TiDBクラスタは通常通りサービスを提供できるようになります。
+7. すべての手順が完了すると、 TiDB Lightningは自動的にTiKVノードを「通常モード」に切り替えます。グローバルスケジューリングが一時停止されている場合、 TiDB Lightningはグローバルスケジューリングも回復します。その後、TiDBクラスタは通常通りサービスを提供できるようになります。
 
 ## 要件と制限 {#requirements-and-restrictions}
 
