@@ -72,7 +72,7 @@ TiDB バージョン: 4.0.9
 
 - TiDB Dashboard
 
-    - SQL文の"Expand"をクリックすると展開を続ける [#775](https://github.com/pingcap/tidb-dashboard/pull/775)
+    - SQL文で"Expand"をクリックした後も展開状態を維持する [#775](https://github.com/pingcap/tidb-dashboard/pull/775)
     - **SQL Statements**と**Slow Queries**の詳細ページを新しいウィンドウで開く [#816](https://github.com/pingcap/tidb-dashboard/pull/816)
     - **Slow Queries**の詳細における時間関連フィールドの説明の改善 [#817](https://github.com/pingcap/tidb-dashboard/pull/817)
     - 詳細なエラーメッセージを表示する[#794](https://github.com/pingcap/tidb-dashboard/pull/794)
