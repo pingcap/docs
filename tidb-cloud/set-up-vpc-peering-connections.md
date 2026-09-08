@@ -201,7 +201,7 @@ AWS CLI または AWS ダッシュボードを使用して、VPC ピアリング
 
 AWS ダッシュボードを使用して VPC ピアリング接続を構成することもできます。
 
-1. [AWS マネジメントコンソール](https://console.aws.amazon.com/)でピア接続要求を受け入れることを確認します。
+1. [AWS マネジメントコンソール](https://console.aws.amazon.com/)でピア接続リクエストを受け入れることを確認します。
 
     1. [AWS マネジメントコンソール](https://console.aws.amazon.com/)にサインインし、上部のメニューバーで**Services**をクリックします。検索ボックスに`VPC`と入力して、VPC サービスページに移動します。
 
