@@ -31,45 +31,45 @@ cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://ro
 
 TiCDC の新しいアーキテクチャの監視ダッシュボードには、主に次のセクションが含まれます。
 
-- [**まとめ**](#summary) : TiCDCクラスターの概要情報
-- [**サーバ**](#server) : TiDBクラスタ内のTiKVノードとTiCDCノードの概要情報
+- [**Summary**](#summary) : TiCDCクラスターの概要情報
+- [**Server**](#server) : TiDBクラスタ内のTiKVノードとTiCDCノードの概要情報
 - [**Log Puller**](#log-puller) : TiCDC Log Pullerモジュールの詳細情報
-- [**イベントストア**](#event-store) : TiCDCイベントストアモジュールの詳細情報
-- [**シンク**](#sink) : TiCDCシンクモジュールの詳細情報
+- [**Event Store**](#event-store) : TiCDCイベントストアモジュールの詳細情報
+- [**Sink**](#sink) : TiCDCシンクモジュールの詳細情報
 
-### まとめ {#summary}
+### Summary {#summary}
 
-以下は**概要**パネルの例です。
+以下は**Summary**パネルの例です。
 
 ![Summary](/media/ticdc/ticdc-new-arch-metric-summary.png)
 
-**概要**パネルの各メトリックの説明は次のとおりです。
+**Summary**パネルの各メトリックの説明は次のとおりです。
 
-- チェンジフィードチェックポイントラグ: 下流と上流の間のレプリケーションタスクのラグ
+- Changefeed Checkpoint Lag: 下流と上流の間のレプリケーションタスクのラグ
 - Changefeed ResolvedTs Lag: TiCDCノードの内部処理の進行と上流データベース間の遅延
-- アップストリーム書き込みバイト/秒:アップストリームデータベースの書き込みスループット
-- TiCDC入力バイト/秒: TiCDCがアップストリームから1秒あたりに受信するデータ量
-- シンクイベント行数/秒: TiCDCが1秒あたりにダウンストリームに書き込む行数
-- シンク書き込みバイト/秒: TiCDCが1秒あたりにダウンストリームに書き込むデータの量
-- チェンジフィードのステータス: 各チェンジフィードのステータス
-- テーブルディスパッチャ数: 各チェンジフィードに対応するディスパッチャの数
-- メモリクォータ: イベントコレクタのメモリクォータと使用量。使用量が多すぎるとスロットリングが発生する可能性があります。
+- Upstream Write Bytes/s:アップストリームデータベースの書き込みスループット
+- TiCDC Input Bytes/s: TiCDCがアップストリームから1秒あたりに受信するデータ量
+- Sink Event Row Count/s: TiCDCが1秒あたりにダウンストリームに書き込む行数
+- Sink Write Bytes/s: TiCDCが1秒あたりにダウンストリームに書き込むデータの量
+- The Status of Changefeeds: 各チェンジフィードのステータス
+- Table Dispatcher Count: 各チェンジフィードに対応するディスパッチャの数
+- Memory Quota: イベントコレクタのメモリクォータと使用量。使用量が多すぎるとスロットリングが発生する可能性があります。
 
-### サーバ {#server}
+### Server {#server}
 
-以下は**サーバー**パネルの例です。
+以下は**Server**パネルの例です。
 
 ![Server](/media/ticdc/ticdc-new-arch-metric-server.png)
 
-**サーバー**パネルの各メトリックの説明は次のとおりです。
+**Server**パネルの各メトリックの説明は次のとおりです。
 
-- 稼働時間: TiKVノードとTiCDCノードが稼働している時間
-- Goroutine 数: TiCDC ノード上の Goroutine の数
-- オープンFD数: TiCDCノードによって開かれたファイルハンドルの数
-- CPU使用率: TiCDCノードのCPU使用率
-- メモリ使用量: TiCDCノードのメモリ使用量
-- 所有権履歴: TiCDC クラスター内の所有者ノードの履歴記録
-- PD Leader履歴:上流TiDBクラスタ内のPD Leaderノードの履歴記録
+- Uptime: TiKVノードとTiCDCノードが稼働している時間
+- Goroutine Count: TiCDC ノード上の Goroutine の数
+- Open FD Count: TiCDCノードによって開かれたファイルハンドルの数
+- CPU Usage: TiCDCノードのCPU使用率
+- Memory Usage: TiCDCノードのメモリ使用量
+- Ownership History: TiCDC クラスター内の所有者ノードの履歴記録
+- PD Leader History:上流TiDBクラスタ内のPD Leaderノードの履歴記録
 
 ### Log Puller {#log-puller}
 
@@ -79,51 +79,51 @@ TiCDC の新しいアーキテクチャの監視ダッシュボードには、�
 
 **Log Puller**パネルの各メトリックの説明は次のとおりです。
 
-- 入力イベント数/秒: TiCDCが1秒あたりに受信するイベント数
-- 未解決のリージョンリクエスト数: TiCDC が送信したがまだ完了していないリージョン増分スキャンリクエストの数
-- リージョンリクエスト終了スキャン所要時間:リージョン増分スキャンにかかる時間
-- 登録済みリージョン数: 登録済みリージョンの総数
-- メモリクォータ: Log Puller のメモリクォータと使用量。過剰な使用はスロットリングを引き起こす可能性があります。
-- 解決済みTsバッチサイズ（リージョン）: 1つの解決済みTsイベントに含まれるリージョンの数
+- Input Events/s: TiCDCが1秒あたりに受信するイベント数
+- Unresolved Region Request Count: TiCDC が送信したがまだ完了していないリージョン増分スキャンリクエストの数
+- Region Request Finish Scan Duration:リージョン増分スキャンにかかる時間
+- Subscribed Region Count: 登録済みリージョンの総数
+- Memory Quota: Log Puller のメモリクォータと使用量。過剰な使用はスロットリングを引き起こす可能性があります。
+- Resolved Ts Batch Size (Regions): 1つの解決済みTsイベントに含まれるリージョンの数
 
-### イベントストア {#event-store}
+### Event Store {#event-store}
 
-以下は、**イベントストア**パネルの例です。
+以下は、**Event Store**パネルの例です。
 
 ![Event Store](/media/ticdc/ticdc-new-arch-metric-event-store.png)
 
-**イベントストア**パネルの各メトリックの説明は次のとおりです。
+**Event Store**パネルの各メトリックの説明は次のとおりです。
 
-- 解決されたTsラグ: イベントストアの処理の進行と上流データベース間のラグ
-- レジスタディスパッチャStartTsラグ:ディスパッチャ登録StartTsと現在の時刻のラグ
-- サブスクリプション解決Tsラグ: サブスクリプション処理の進行と上流データベース間のラグ
-- サブスクリプションデータGCラグ: サブスクリプションデータGCの進行状況と現在の時刻の間のラグ
-- 入力イベント数/秒: イベントストアが1秒あたりに処理するイベントの数
-- 入力バイト/秒: イベントストアが1秒あたりに処理するデータ量
-- 書き込みリクエスト数/秒: イベントストアが1秒あたりに実行する書き込みリクエストの数
-- 書き込みワーカービジー率: イベントストア書き込みスレッドの合計実行時間に対するI/O時間の比率
-- 圧縮行数/秒: イベントストアで 1秒あたりに圧縮された行数 (行サイズがしきい値を超えた場合にのみトリガーされます)
-- 書き込み時間: イベントストアの書き込み操作にかかる時間
-- 書き込みバッチサイズ: 1回の書き込み操作のバッチサイズ
-- 書き込みバッチイベント数: 1回の書き込みバッチに含まれる行変更イベントの数
-- ディスク上のデータサイズ: イベントストアがディスク上で占める合計データサイズ
-- メモリ内のデータサイズ: イベントストアがメモリ内で占める合計データサイズ
-- スキャンリクエスト数/秒: イベントストアが1秒あたりに実行するスキャンリクエストの数
-- スキャンバイト数/秒: イベントストアが1秒あたりにスキャンするデータの量
+- Resolved Ts Lag: イベントストアの処理の進行と上流データベース間のラグ
+- Register Dispatcher StartTs Lag:ディスパッチャ登録StartTsと現在の時刻のラグ
+- Subscriptions Resolved Ts Lag: サブスクリプション処理の進行と上流データベース間のラグ
+- Subscriptions Data GC Lag: サブスクリプションデータGCの進行状況と現在の時刻の間のラグ
+- Input Event Count/s: イベントストアが1秒あたりに処理するイベントの数
+- Input Bytes/s: イベントストアが1秒あたりに処理するデータ量
+- Write Requests/s: イベントストアが1秒あたりに実行する書き込みリクエストの数
+- Write Worker Busy Ratio: イベントストア書き込みスレッドの合計実行時間に対するI/O時間の比率
+- Compressed Rows/s: イベントストアで 1秒あたりに圧縮された行数 (行サイズがしきい値を超えた場合にのみトリガーされます)
+- Write Duration: イベントストアの書き込み操作にかかる時間
+- Write Batch Size: 1回の書き込み操作のバッチサイズ
+- Write Batch Event Count: 1回の書き込みバッチに含まれる行変更イベントの数
+- Data Size On Disk: イベントストアがディスク上で占める合計データサイズ
+- Data Size In Memory: イベントストアがメモリ内で占める合計データサイズ
+- Scan Requests/s: イベントストアが1秒あたりに実行するスキャンリクエストの数
+- Scan Bytes/s: イベントストアが1秒あたりにスキャンするデータの量
 
-### シンク {#sink}
+### Sink {#sink}
 
-以下は**シンク**パネルの例です。
+以下は**Sink**パネルの例です。
 
 ![Sink](/media/ticdc/ticdc-new-arch-metric-sink.png)
 
-**シンク**パネルの各メトリックの説明は次のとおりです。
+**Sink**パネルの各メトリックの説明は次のとおりです。
 
-- 出力行バッチ数: シンクモジュールによって書き込まれたDMLバッチあたりの平均行数
-- 出力行数（1秒あたり）: 1秒あたりに下流に書き込まれるDML行数
-- 出力DDL実行時間: 現在のノードの変更フィードのDDLイベントの実行に費やされた時間
-- シンクエラー数 / 分: シンクモジュールによって1分あたりに報告されたエラーの数
-- 出力DDL数/分: 現在のノードの変更フィードに対して1分あたりに実行されたDDLの数
+- Output Row Batch Count: シンクモジュールによって書き込まれたDMLバッチあたりの平均行数
+- Output Row Count (per second): 1秒あたりに下流に書き込まれるDML行数
+- Output DDL Executing Duration: 現在のノードの変更フィードのDDLイベントの実行に費やされた時間
+- Sink Error Count / m: シンクモジュールによって1分あたりに報告されたエラーの数
+- Output DDL Count / Minutes: 現在のノードの変更フィードに対して1分あたりに実行されたDDLの数
 
 ## クラシックアーキテクチャにおける TiCDC のメトリクス {#metrics-for-ticdc-in-the-classic-architecture}
 
@@ -131,86 +131,86 @@ TiUPを使用して TiDB クラスターをデプロイすると、TiDB と同�
 
 各パネルの説明は次のとおりです。
 
-- [**サーバ**](#server) : TiDBクラスタ内のTiKVノードとTiCDCノードの概要情報
-- [**チェンジフィード**](#changefeed) : TiCDCレプリケーションタスクの詳細情報
-- [**イベント**](#events) : TiCDCクラスタ内のデータフローに関する詳細情報
+- [**Server**](#server) : TiDBクラスタ内のTiKVノードとTiCDCノードの概要情報
+- [**Changefeed**](#changefeed) : TiCDCレプリケーションタスクの詳細情報
+- [**Events**](#events) : TiCDCクラスタ内のデータフローに関する詳細情報
 - [**TiKV**](#tikv) : TiCDCに関連するTiKV情報
 
-### サーバ {#server}
+### Server {#server}
 
-以下は**サーバー**パネルの例です。
+以下は**Server**パネルの例です。
 
 ![TiCDC Dashboard - Server metrics](/media/ticdc/ticdc-dashboard-server.png)
 
-**サーバー**パネルの各メトリックの説明は次のとおりです。
+**Server**パネルの各メトリックの説明は次のとおりです。
 
-- 稼働時間: TiKVノードとTiCDCノードが稼働している時間
-- ゴルーチン数: TiCDCノードのゴルーチンの数
-- オープンFD数: TiCDCノードによって開かれたファイルハンドルの数
-- 所有権: TiCDC クラスター内のノードの現在のステータス
-- 所有権の履歴: TiCDCクラスターの所有権の履歴
-- CPU使用率: TiCDCノードのCPU使用率
-- メモリ使用量: TiCDCノードのメモリ使用量
+- Uptime: TiKVノードとTiCDCノードが稼働している時間
+- Goroutine count: TiCDCノードのゴルーチンの数
+- Open FD count: TiCDCノードによって開かれたファイルハンドルの数
+- Ownership: TiCDC クラスター内のノードの現在のステータス
+- Ownership history: TiCDCクラスターの所有権の履歴
+- CPU usage: TiCDCノードのCPU使用率
+- Memory usage: TiCDCノードのメモリ使用量
 
-### チェンジフィード {#changefeed}
+### Changefeed {#changefeed}
 
 以下は**Changefeed**パネルの例です。
 
 ![TiCDC Dashboard - Changefeed metrics 1](/media/ticdc/ticdc-dashboard-changefeed-1.png)
 
-- チェンジフィードテーブル数: 各 TiCDC ノードがレプリケーションタスクで複製する必要があるテーブルの数
-- プロセッサ解決ts: TiCDCクラスタで解決されたタイムスタンプ
-- テーブル解決ts: レプリケーションタスク内の各テーブルのレプリケーションの進行状況
-- チェンジフィードチェックポイント：下流へのデータ複製の進行状況。通常、緑色のバーは黄色の線とつながっています。
-- PD etcdリクエスト数/秒: TiCDCノードがPDに送信するリクエスト数（1秒あたり）
-- 終了エラー数/分: 1分あたりにレプリケーションタスクを中断するエラーの数
-- チェンジフィードチェックポイントラグ:上流と下流間のデータ複製の進行ラグ(単位は秒)
-- プロセッサ解決tsラグ:上流ノードとTiCDCノード間のデータ複製の進行ラグ（単位は秒）
+- Changefeed table count: 各 TiCDC ノードがレプリケーションタスクで複製する必要があるテーブルの数
+- Processor resolved ts: TiCDCクラスタで解決されたタイムスタンプ
+- Table resolved ts: レプリケーションタスク内の各テーブルのレプリケーションの進行状況
+- Changefeed checkpoint：下流へのデータ複製の進行状況。通常、緑色のバーは黄色の線とつながっています。
+- PD etcd requests/s: TiCDCノードがPDに送信するリクエスト数（1秒あたり）
+- Exit error count/m: 1分あたりにレプリケーションタスクを中断するエラーの数
+- Changefeed checkpoint lag:上流と下流間のデータ複製の進行ラグ(単位は秒)
+- Processor resolved ts lag:上流ノードとTiCDCノード間のデータ複製の進行ラグ（単位は秒）
 
 ![TiCDC Dashboard - Changefeed metrics 2](/media/ticdc/ticdc-dashboard-changefeed-2.png)
 
-- シンク書き込み時間: TiCDCがトランザクションの変更をダウンストリームに書き込むのに費やした時間のヒストグラム
-- シンク書き込み期間パーセンタイル: TiCDC が 1秒以内にトランザクションの変更をダウンストリームに書き込むのに費やした時間 (P95、P99、および P999)
-- フラッシュシンク期間: TiCDC が非同期的にデータを下流にフラッシュするのにかかった時間のヒストグラム
-- フラッシュシンク期間パーセンタイル: TiCDC が 1秒以内にデータを非同期にダウンストリームにフラッシュするのにかかる時間 (P95、P99、および P999)
+- Sink write duration: TiCDCがトランザクションの変更をダウンストリームに書き込むのに費やした時間のヒストグラム
+- Sink write duration percentile: TiCDC が 1秒以内にトランザクションの変更をダウンストリームに書き込むのに費やした時間 (P95、P99、および P999)
+- Flush sink duration: TiCDC が非同期的にデータを下流にフラッシュするのにかかった時間のヒストグラム
+- Flush sink duration percentile: TiCDC が 1秒以内にデータを非同期にダウンストリームにフラッシュするのにかかる時間 (P95、P99、および P999)
 
 ![TiCDC Dashboard - Changefeed metrics 3](/media/ticdc/ticdc-dashboard-changefeed-3.png)
 
-- MySQLシンク競合検出期間: MySQLシンク競合の検出に費やされた時間のヒストグラム
-- MySQLシンク競合検出期間パーセンタイル: 1秒以内にMySQLシンク競合を検出するのに費やされた時間(P95、P99、P999)
-- MySQLシンクワーカーの負荷: TiCDCノードのMySQLシンクワーカーのワークロード
+- MySQL sink conflict detect duration: MySQLシンク競合の検出に費やされた時間のヒストグラム
+- MySQL sink conflict detect duration percentile: 1秒以内にMySQLシンク競合を検出するのに費やされた時間(P95、P99、P999)
+- MySQL sink worker load: TiCDCノードのMySQLシンクワーカーのワークロード
 
 ![TiCDC Dashboard - Changefeed metrics 4](/media/ticdc/ticdc-dashboard-changefeed-4.png)
 
-- Changefeed キャッチアップ ETA: レプリケーションタスクが上流のクラスタデータに追いつくのに必要な推定時間です。上流の書き込み速度が TiCDC のレプリケーション速度よりも速い場合、この指標は非常に大きくなる可能性があります。TiCDC のレプリケーション速度は多くの要因に左右されるため、この指標は参考値であり、実際のレプリケーション時間とは異なる可能性があります。
+- Changefeed catch-up ETA: レプリケーションタスクが上流のクラスタデータに追いつくのに必要な推定時間です。上流の書き込み速度が TiCDC のレプリケーション速度よりも速い場合、この指標は非常に大きくなる可能性があります。TiCDC のレプリケーション速度は多くの要因に左右されるため、この指標は参考値であり、実際のレプリケーション時間とは異なる可能性があります。
 
-### イベント {#events}
+### Events {#events}
 
-以下は**イベント**パネルの例です。
+以下は**Events**パネルの例です。
 
 ![TiCDC Dashboard - Events metrics 2](/media/ticdc/ticdc-dashboard-events-1.png) ![TiCDC Dashboard - Events metrics 2](/media/ticdc/ticdc-dashboard-events-2.png) ![TiCDC Dashboard - Events metrics 2](/media/ticdc/ticdc-dashboard-events-3.png)
 
-**イベント**パネルの各メトリックの説明は次のとおりです。
+**Events**パネルの各メトリックの説明は次のとおりです。
 
-- イベントフィード数: TiCDCノードのイベントフィードRPCリクエストの数
-- イベントサイズのパーセンタイル: TiCDCがTiKVから1秒以内に受信するイベントサイズ（P95、P99、P999）
-- イベントフィードエラー/分: TiCDCノードのイベントフィードRPCリクエストによって1分あたりに報告されたエラーの数
-- KVクライアント受信イベント数/秒: TiCDCノードのKVクライアントモジュールがTiKVから1秒あたりに受信するイベント数
-- プラー受信イベント数/秒: TiCDCノードのプラーモジュールがKVクライアントから1秒あたりに受信するイベント数
-- プラー出力イベント数/秒: TiCDCノードのプラーモジュールがソーターモジュールに送信するイベント数/秒
-- シンクフラッシュ行数/秒: TiCDCノードが1秒あたりにダウンストリームに書き込むイベント数
-- プラーバッファサイズ: TiCDCノードがプラーモジュールにキャッシュするイベントの数
-- エントリソーターバッファサイズ: TiCDCノードがソーターモジュールにキャッシュするイベントの数
-- プロセッサ/マウントバッファサイズ: TiCDCノードがプロセッサモジュールとマウントモジュールにキャッシュするイベントの数
-- シンク行バッファサイズ: TiCDCノードがシンクモジュールにキャッシュするイベントの数
-- エントリソーターのソート期間: TiCDCノードがイベントをソートするのにかかった時間のヒストグラム
-- エントリーソーターのソート所要時間パーセンタイル: TiCDCのソートイベントが1秒間に要した時間(P95、P99、P999)
-- エントリソーターのマージ期間: TiCDCノードがソートされたイベントをマージするのにかかった時間のヒストグラム
-- エントリソーターのマージ所要時間パーセンタイル: TiCDCがソートされたイベントを1秒以内にマージするのにかかる時間(P95、P99、P999)
-- マウンターのアンマーシャリング期間: TiCDCノードがイベントをアンマーシャリングするのにかかった時間のヒストグラム
-- マウンターのアンマーシャリング期間のパーセンタイル: TiCDC アンマーシャリング イベントが 1秒間に要した時間 (P95、P99、および P999)
-- KVクライアントディスパッチイベント数/秒: KVクライアントモジュールがTiCDCノード間でディスパッチするイベント数
-- KVクライアントのバッチ解決サイズ: TiKVがTiCDCに送信する解決済みタイムスタンプメッセージのバッチサイズ
+- Eventfeed count: TiCDCノードのイベントフィードRPCリクエストの数
+- Event size percentile: TiCDCがTiKVから1秒以内に受信するイベントサイズ（P95、P99、P999）
+- Eventfeed error/m: TiCDCノードのイベントフィードRPCリクエストによって1分あたりに報告されたエラーの数
+- KV client receive events/s: TiCDCノードのKVクライアントモジュールがTiKVから1秒あたりに受信するイベント数
+- Puller receive events/s: TiCDCノードのプラーモジュールがKVクライアントから1秒あたりに受信するイベント数
+- Puller output events/s: TiCDCノードのプラーモジュールがソーターモジュールに送信するイベント数/秒
+- Sink flush rows/s: TiCDCノードが1秒あたりにダウンストリームに書き込むイベント数
+- Puller buffer size: TiCDCノードがプラーモジュールにキャッシュするイベントの数
+- Entry sorter buffer size: TiCDCノードがソーターモジュールにキャッシュするイベントの数
+- Processor/Mounter buffer size: TiCDCノードがプロセッサモジュールとマウントモジュールにキャッシュするイベントの数
+- Sink row buffer size: TiCDCノードがシンクモジュールにキャッシュするイベントの数
+- Entry sorter sort duration: TiCDCノードがイベントをソートするのにかかった時間のヒストグラム
+- Entry sorter sort duration percentile: TiCDCのソートイベントが1秒間に要した時間(P95、P99、P999)
+- Entry sorter merge duration: TiCDCノードがソートされたイベントをマージするのにかかった時間のヒストグラム
+- Entry sorter merge duration percentile: TiCDCがソートされたイベントを1秒以内にマージするのにかかる時間(P95、P99、P999)
+- Mounter unmarshal duration: TiCDCノードがイベントをアンマーシャリングするのにかかった時間のヒストグラム
+- Mounter unmarshal duration percentile: TiCDC アンマーシャリング イベントが 1秒間に要した時間 (P95、P99、および P999)
+- KV client dispatch events/s: KVクライアントモジュールがTiCDCノード間でディスパッチするイベント数
+- KV client batch resolved size: TiKVがTiCDCに送信する解決済みタイムスタンプメッセージのバッチサイズ
 
 ### TiKV {#tikv}
 
@@ -220,13 +220,13 @@ TiUPを使用して TiDB クラスターをデプロイすると、TiDB と同�
 
 **TiKV**パネルの各メトリックの説明は次のとおりです。
 
-- CDCエンドポイントCPU: TiKVノード上のCDCエンドポイントスレッドのCPU使用率
-- CDCワーカーCPU: TiKVノード上のCDCワーカースレッドのCPU使用率
-- 最小解決タイムスタンプ: TiKVノード上の最小解決タイムスタンプ
-- 最小解決リージョン: TiKVノード上の最小解決タイムスタンプのリージョンID
-- 解決されたTSラグ期間パーセンタイル: TiKVノード上の最小解決タイムスタンプと現在の時刻の間のラグ
-- 初期スキャン期間: TiKVノードがTiCDCノードに接続する際の増分スキャンに費やされた時間のヒストグラム
-- 初期スキャン所要時間パーセンタイル: 1秒以内にTiKVノードの増分スキャンに費やされた時間(P95、P99、P999)
-- ブロックキャッシュなしのメモリ: RocksDBブロックキャッシュを除いたTiKVノードのメモリ使用量
-- メモリ内のCDC保留バイト数: TiKVノード上のCDCモジュールのメモリ使用量
-- キャプチャされたリージョンの数: TiKVノード上のイベントキャプチャリージョンの数
+- CDC endpoint CPU: TiKVノード上のCDCエンドポイントスレッドのCPU使用率
+- CDC worker CPU: TiKVノード上のCDCワーカースレッドのCPU使用率
+- Min resolved ts: TiKVノード上の最小解決タイムスタンプ
+- Min resolved region: TiKVノード上の最小解決タイムスタンプのリージョンID
+- Resolved ts lag duration percentile: TiKVノード上の最小解決タイムスタンプと現在の時刻の間のラグ
+- Initial scan duration: TiKVノードがTiCDCノードに接続する際の増分スキャンに費やされた時間のヒストグラム
+- Initial scan duration percentile: 1秒以内にTiKVノードの増分スキャンに費やされた時間(P95、P99、P999)
+- Memory without block cache: RocksDBブロックキャッシュを除いたTiKVノードのメモリ使用量
+- CDC pending bytes in memory: TiKVノード上のCDCモジュールのメモリ使用量
+- Captured region count: TiKVノード上のイベントキャプチャリージョンの数
