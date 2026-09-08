@@ -132,8 +132,8 @@ PD ダッシュボード メトリック項目の説明は次のとおりです�
 
 ## TiDB {#tidb}
 
-- PD Server TSO handle time and Client recv time: PDがTSO要求を受信してからPDクライアントがTSO応答を受信するまでの時間
-- Handle requests count: TiDB 要求の数
+- PD Server TSO handle time and Client recv time: PDがTSOリクエストを受信してからPDクライアントがTSO応答を受信するまでの時間
+- Handle requests count: TiDB リクエストの数
 - Handle requests duration: TiDBリクエストの処理に要した時間。(P99) は`100ms`未満である必要があります。
 
 ![PD Dashboard - TiDB metrics](/media/pd-dashboard-tidb-v4.png)
