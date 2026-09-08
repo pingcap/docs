@@ -52,15 +52,6 @@ In `TiDB-X-CLOUD.202603.1`:
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855).
 
-* Support table-level data affinity to improve query performance (experimental) [#9764](https://github.com/tikv/pd/issues/9764) @[lhy1024](https://github.com/lhy1024) <!-- (dup): release-8.5.5.md > Features > Performance --> <!-- pr: https://github.com/tikv/pd/pull/10157, https://github.com/tikv/pd/pull/10042, https://github.com/tikv/pd/pull/10103, https://github.com/tikv/pd/pull/10091, https://github.com/tikv/pd/pull/10080, https://github.com/tikv/pd/pull/10081, https://github.com/tikv/pd/pull/10043, https://github.com/tikv/pd/pull/10040, https://github.com/tikv/pd/pull/10041, https://github.com/tikv/pd/pull/10050, https://github.com/tikv/pd/pull/10038, https://github.com/tikv/pd/pull/9999, https://github.com/tikv/pd/pull/9998, https://github.com/tikv/pd/pull/9997, https://github.com/tikv/pd/pull/9993 -->
-
-    Now you can configure the `AFFINITY` table option as `table` or `partition` when creating or altering a table. When this option is enabled, PD groups Regions that belong to the same table or the same partition into a single affinity group. During scheduling, PD prioritizes placing the Leaders and Voter replicas of these Regions on the same subset of a few TiKV nodes. In this scenario, by using the [`INDEX_LOOKUP_PUSHDOWN`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855) hint in queries, you can explicitly instruct the optimizer to push index lookups down to TiKV, reducing the latency caused by cross-node scattered queries and improving query performance.
-
-    Note that this feature is currently experimental and is disabled by default. To enable it, set the PD configuration item [`schedule.affinity-schedule-limit`](https://docs.pingcap.com/tidb/v8.5/pd-configuration-file#affinity-schedule-limit-new-in-v855) to a value greater than `0`. This configuration item controls the maximum number of affinity scheduling tasks that PD can perform concurrently.
-
-    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/table-affinity).
-
-
 ### Stability
 
 * The feature of setting the maximum limit on resource usage for background tasks of resource control becomes generally available (GA) [#56019](https://github.com/pingcap/tidb/issues/56019) @[glorv](https://github.com/glorv) <!-- (dup): release-8.5.6.md > Features > Stability --> <!-- pr: https://github.com/pingcap/tidb/pull/66381 -->
