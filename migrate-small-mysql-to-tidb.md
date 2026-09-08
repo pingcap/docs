@@ -5,7 +5,7 @@ summary: 小さなデータセットを MySQL から TiDB に移行する方法�
 
 # 小規模データセットをMySQLからTiDBに移行する {#migrate-small-datasets-from-mysql-to-tidb}
 
-このドキュメントでは、TiDB Data Migration (DM) を使用して、MySQL から TiDB へ小規模データセットを移行する方法について説明します。移行モードは完全移行モードと増分レプリケーションモードです。このドキュメントにおける"Small datasets"とは、1 TiB 未満のデータサイズを指します。
+このドキュメントでは、TiDB Data Migration (DM) を使用して、MySQL から TiDB へ小規模データセットを移行する方法について説明します。移行モードは完全移行モードと増分レプリケーションモードです。このドキュメントにおける「小規模データセット」とは、1 TiB 未満のデータサイズを指します。
 
 移行速度は、テーブルスキーマ内のインデックスの数、ハードウェア、ネットワーク環境などの複数の要因に応じて、30 GB/時間から 50 GB/時間まで変化します。<!--The migration process using DM is shown in the figure below.-->
 
