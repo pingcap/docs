@@ -164,7 +164,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 
 ### Statistics {#statistics}
 
-- Auto Analyze Duration 95: 自動分析にかかる時間`ANALYZE`
+- Auto Analyze Duration 95: 自動`ANALYZE`にかかる時間
 - Auto Analyze QPS：自動`ANALYZE`の統計
 - Stats Inaccuracy Rate: 統計不正確率の情報
 - Pseudo Estimation OPS: 疑似統計を使用して最適化されたSQL文の数
