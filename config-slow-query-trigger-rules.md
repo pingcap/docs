@@ -35,7 +35,7 @@ By default, SQL queries that take more than 300 milliseconds are considered as s
     SET SESSION tidb_slow_log_rules = 'Query_time: 0.5, Is_internal: false';
     ```
 
-- Invalid format (`SESSION` scope does not support `Conn_ID`):
+- Invalid `SESSION` rule (`SESSION` scope does not support `Conn_ID`):
 
     ```sql
     SET SESSION tidb_slow_log_rules = 'Conn_ID: 12, Query_time: 0.5, Is_internal: false';
