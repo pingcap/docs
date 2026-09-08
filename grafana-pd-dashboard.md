@@ -95,7 +95,7 @@ PD ダッシュボード メトリック項目の説明は次のとおりです�
 ## Scheduler {#scheduler}
 
 - Scheduler is running: 現在実行中のスケジューラ
-- Balance leader movement: TiKVインスタンス間のリーダーの動きの詳細
+- Balance leader movement: TiKVインスタンス間のリーダーの移動の詳細
 - Balance Region movement: TiKVインスタンス間のリージョン移動の詳細
 - Balance leader event:バランスリーダーイベントの数
 - Balance Region event: バランスリージョンイベントの数
@@ -113,7 +113,7 @@ PD ダッシュボード メトリック項目の説明は次のとおりです�
 ## gRPC {#grpc}
 
 - Completed commands rate: gRPC コマンドが完了するコマンド タイプごとの率
-- 99% Completed commands duration: gRPC コマンドが完了するコマンド タイプごとの割合 (P99)
+- 99% Completed commands duration: gRPC コマンドが完了するコマンド タイプごとの率 (P99)
 
 ![PD Dashboard - gRPC metrics](/media/pd-dashboard-grpc-v2.png)
 
