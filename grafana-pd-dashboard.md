@@ -25,7 +25,7 @@ PD ダッシュボード メトリック項目の説明は次のとおりです�
 
 ## 主要な指標の説明 {#key-metrics-description}
 
-## クラスタ {#cluster}
+## Cluster {#cluster}
 
 - PD scheduler config: PDスケジューラ設定のリスト
 - Cluster ID: クラスターの一意の識別子
@@ -37,7 +37,7 @@ PD ダッシュボード メトリック項目の説明は次のとおりです�
 
 ![PD Dashboard - Cluster metrics](/media/pd-dashboard-cluster-v4.png)
 
-## オペレーター {#operator}
+## Operator {#operator}
 
 - **Schedule operator create**: タイプごとに新しく作成されるオペレーターの数
 - **Schedule operator check**: 種類ごとにチェックされるオペレーターの数。主に現在のステップが完了したかどうかをチェックし、完了している場合は次に実行するステップを返します。
@@ -50,7 +50,7 @@ PD ダッシュボード メトリック項目の説明は次のとおりです�
 
 ![PD Dashboard - Operator metrics](/media/pd-dashboard-operator-v4.png)
 
-## 統計- バランス {#statistics-balance}
+## Statistics - Balance {#statistics-balance}
 
 - Store capacity: TiKVインスタンスあたりの容量サイズ
 - Store available: TiKVインスタンスあたりの利用可能な容量サイズ
@@ -66,7 +66,7 @@ PD ダッシュボード メトリック項目の説明は次のとおりです�
 
 ![PD Dashboard - Balance metrics](/media/pd-dashboard-balance-v4.png)
 
-## 統計- ホットライト {#statistics-hot-write}
+## Statistics - hot write {#statistics-hot-write}
 
 - Hot Region's leader distribution: 各 TiKV インスタンスで書き込みホットスポットとなったリーダーリージョンの合計数
 - Total written bytes on hot leader Regions: 各 TiKV インスタンスで書き込みホットスポットとなったリーダーリージョンによる合計書き込みバイト数
@@ -81,7 +81,7 @@ PD ダッシュボード メトリック項目の説明は次のとおりです�
 
 ![PD Dashboard - Hot write metrics](/media/pd-dashboard-hotwrite-v4.png)
 
-## 統計- ホットリード {#statistics-hot-read}
+## Statistics - hot read {#statistics-hot-read}
 
 - Hot Region's peer distribution: 各 TiKV インスタンスで読み取りホットスポットとなったピアリージョンの合計数
 - Total read bytes on hot peer Regions: 各 TiKV インスタンスで読み取りホットスポットとなったピアの合計読み取りバイト数
@@ -92,7 +92,7 @@ PD ダッシュボード メトリック項目の説明は次のとおりです�
 
 ![PD Dashboard - Hot read metrics](/media/pd-dashboard-hotread-v4.png)
 
-## スケジューラ {#scheduler}
+## Scheduler {#scheduler}
 
 - Scheduler is running: 現在実行中のスケジューラ
 - Balance leader movement: TiKVインスタンス間のリーダーの動きの詳細
@@ -138,7 +138,7 @@ PD ダッシュボード メトリック項目の説明は次のとおりです�
 
 ![PD Dashboard - TiDB metrics](/media/pd-dashboard-tidb-v4.png)
 
-## ハートビート {#heartbeat}
+## Heartbeat {#heartbeat}
 
 - Heartbeat region event QPS: キャッシュの更新やデータの永続化を含むハートビートメッセージの処理のQPS
 - Region heartbeat report: インスタンスごとにPDに報告されたハートビートの数
@@ -149,7 +149,7 @@ PD ダッシュボード メトリック項目の説明は次のとおりです�
 
 ![PD Dashboard - Heartbeat metrics](/media/pd-dashboard-heartbeat-v4.png)
 
-## リージョンストレージ {#region-storage}
+## Region storage {#region-storage}
 
 - Syncer Index: リーダーによって記録されたリージョン変更履歴の最大インデックス
 - history last index:リージョン変更履歴がフォロワーと正常に同期された最後のインデックス

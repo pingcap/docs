@@ -18,7 +18,7 @@ Grafanaダッシュボードは、概要、PD、TiDB、TiKV、Node_exporter、�
 
 TiDB ダッシュボードに表示される主要なメトリックを理解するには、次のセクションを確認してください。
 
-### クエリの概要 {#query-summary}
+### Query Summary {#query-summary}
 
 - Duration: 実行時間
     - クライアントのネットワーク要求がTiDBに送信されてから、TiDBがそれを実行した後にクライアントに返される`COM_STMT_FETCH`の時間。通常、クライアント要求はSQL文の形式で送信されますが、 `COM_PING`、`COM_SLEEP`、`COM_STMT_FETCH`、`COM_SEND_LONG_DATA`などのコマンドの実行時間も含まれる場合があります
@@ -31,13 +31,13 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 - Connection Idle Duration: アイドル接続の期間
 - 999/99/95/80 Duration: 異なる種類のSQL文の実行時間の統計（異なるパーセンタイル）
 
-### クエリの詳細 {#query-detail}
+### Query Detail {#query-detail}
 
 - Duration 80/95/99/999 By Instance: 各 TiDB インスタンスでの SQL 文の実行時間の統計 (異なるパーセンタイル)
 - Failed Query OPM Detail: 各 TiDB インスタンスで 1分あたりに SQL文を実行したときに発生したエラーに応じたエラーの種類 (構文エラーや主キーの競合など) の統計
 - Internal SQL OPS: TiDBクラスタ全体で1秒あたりに実行された内部SQL文の数。内部SQL文は内部的に実行され、通常はユーザーのSQL文または内部的にスケジュールされたタスクによってトリガーされます。
 
-### サーバ {#server}
+### Server {#server}
 
 - Uptime: 各 TiDB インスタンスの実行時間
 - Memory Usage: 各 TiDB インスタンスのメモリ使用量の統計。プロセスが占有するメモリと、ヒープ上でGolangによって適用されるメモリに分かれています。
@@ -55,7 +55,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 - Skip Binlog Count: TiDB のbinlog書き込み失敗数。v8.4.0 以降では TiDB Binlogが削除され、このメトリックには値がありません。
 - Client Data Traffic: TiDBとクライアントのデータトラフィック統計
 
-### トランザクション {#transaction}
+### Transaction {#transaction}
 
 - Transaction OPS: 1秒あたりに実行されるトランザクションの数
 - Duration: トランザクションの実行期間
@@ -80,7 +80,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 - Pessimistic Statement Retry OPS：悲観的ステートメントの再試行回数。ステートメントがロックを追加しようとすると、書き込み競合が発生する可能性があります。この場合、ステートメントは新しいスナップショットを取得し、再度ロックを追加します。
 - Transaction Types Per Seconds: 2フェーズコミット (2PC)、非同期コミット、および1フェーズコミット (1PC) メカニズムを使用して1秒あたりにコミットされたトランザクションの数 (成功トランザクションと失敗トランザクションの両方を含む)
 
-### 執行者 {#executor}
+### Executor {#executor}
 
 - Parse Duration: SQL文の解析時間の統計
 - Compile Duration: 解析されたSQL ASTを実行計画にコンパイルする時間の統計
@@ -91,7 +91,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 - Plan Cache Memory Usage: 各 TiDB インスタンスにキャッシュされた実行計画によって消費されるメモリの合計
 - Plan Cache Plan Num: 各 TiDB インスタンスにキャッシュされた実行計画の総数
 
-### ディストリビューションSQL {#distsql}
+### Distsql {#distsql}
 
 - Distsql Duration: Distsql ステートメントの処理時間
 - Distsql QPS: Distsql ステートメントの統計
@@ -100,7 +100,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 - Scan Keys Partial Num: 各部分結果がスキャンするキーの数
 - Partial Num: 各SQL文の部分結果の数
 
-### KVエラー {#kv-errors}
+### KV Errors {#kv-errors}
 
 - KV Backoff Duration: KV再試行リクエストの合計継続時間。TiDBはTiKVへのリクエスト送信時にエラーが発生する可能性があります。TiDBはTiKVへのすべてのリクエストに対して再試行メカニズムを備えています。この`KV Backoff Duration`項目は、リクエストの再試行の合計時間を記録します。
 - TiClient Region Error OPS: TiKV によって返されたリージョン関連のエラーメッセージの数
@@ -108,7 +108,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 - Lock Resolve OPS: ロックを解決するためのTiDB操作の数。TiDBの読み取りまたは書き込み要求がロックに遭遇すると、ロックを解決しようとします。
 - Other Errors OPS: ロックのクリアや`SafePoint`の更新など、その他の種類のエラーの数
 
-### KVリクエスト {#kv-request}
+### KV Request {#kv-request}
 
 以下のメトリックは、TiKV に送信されたリクエストに関連します。再試行リクエストは複数回カウントされます。
 
@@ -132,7 +132,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
     - **follower-local** : ローカルゾーンでのFollower Read処理による読み取り要求によって生成されるトラフィック
     - **follower-cross-zone** : リモートゾーンでのFollower Read処理による読み取り要求によって生成されるトラフィック
 
-### PDクライアント {#pd-client}
+### PD Client {#pd-client}
 
 - PD Client CMD OPS: PD クライアントが 1秒あたりに実行したコマンドの統計
 - PD Client CMD Duration:PDクライアントがコマンドを実行するのにかかる時間
@@ -142,7 +142,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 - PD TSO RPC duration: TiDB が TSO を取得するために PD に gRPC 要求を送信してから TiDB が PD から gRPC 応答を受信するまでの期間
 - Async TSO Duration: TiDBがTSOを取得する準備をする時間から、TiDBが実際にPDがTSOを返すのを待ち始める時間までの期間
 
-### スキーマロード {#schema-load}
+### Schema Load {#schema-load}
 
 - Load Schema Duration: TiDBがTiKVからスキーマを取得するのにかかる時間
 - Load Schema OPS: TiDBがTiKVから1秒あたりに取得するスキーマの統計
@@ -162,7 +162,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 - DDL OPM: 1秒あたりのDDL実行回数
 - DDL backfill progress in percentage：DDL タスクのバックフィルの進行状況
 
-### 統計 {#statistics}
+### Statistics {#statistics}
 
 - Auto Analyze Duration 95: 自動分析にかかる時間`ANALYZE`
 - Auto Analyze QPS：自動`ANALYZE`の統計
@@ -173,12 +173,12 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 - Significant Feedback: 統計情報を更新する重要なフィードバックの数
 - Update Stats OPS: フィードバックによる統計更新操作の数
 
-### 所有者 {#owner}
+### Owner {#owner}
 
 - New ETCD Session Duration 95: 新しいetcdセッションの作成にかかる時間。TiDBはetcdクライアントを介してPD内のetcdに接続し、メタデータ情報を保存/読み取ります。これはセッションの作成に要した時間を記録します。
 - Owner Watcher OPS: DDLオーナーウォッチPDのetcdメタデータの1秒あたりのGoroutine操作の数
 
-### メタ {#meta}
+### Meta {#meta}
 
 - AutoID QPS: 3つの操作 (グローバル ID 割り当て、単一テーブルの AutoID 割り当て、単一テーブルの AutoID リベース) を含む AutoID 関連の統計
 - AutoID Duration: AutoID 関連の操作に費やされた時間
@@ -197,7 +197,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 - Delete Range Task Status: `Delete Range`のタスクステータス（完了、失敗を含む）
 - Push Task Duration 95: GC サブタスクを GC ワーカーにプッシュするのにかかった時間
 
-### バッチクライアント {#batch-client}
+### Batch Client {#batch-client}
 
 - Pending Request Count by TiKV: 処理が保留中のバッチメッセージの数
 - Batch Client Unavailable Duration 95: バッチクライアントが利用できない時間
