@@ -100,7 +100,7 @@ tiup dmctl check-task ./task.yaml
 
 - 下流データベース内の空のリージョン
 
-    - 空のリージョンの数が`max(1000, 3 * the number of tables)` ("1000"と「テーブル数の 3 倍」の大きい方) より大きい場合、事前チェックは警告を返します。関連する PD パラメータを調整して、空のリージョンの結合を高速化し、空のリージョンの数が減少するのを待つことができます。 [PDスケジューリングのベストプラクティス - 低速リージョンマージ](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow)を参照。
+    - 空のリージョンの数が`max(1000, 3 * the number of tables)` (「1000」と「テーブル数の 3 倍」の大きい方) より大きい場合、事前チェックは警告を返します。関連する PD パラメータを調整して、空のリージョンの結合を高速化し、空のリージョンの数が減少するのを待つことができます。 [PDスケジューリングのベストプラクティス - 低速リージョンマージ](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow)を参照。
 
 - 下流データベースにおけるリージョン分布
 
