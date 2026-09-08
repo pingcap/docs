@@ -5402,6 +5402,8 @@ SHOW WARNINGS;
 - Range: `[0, 2147483647]`
 - This variable controls the iteration of the optimizer's estimation logic. After changing the value of this variable, the estimation logic of the optimizer will change greatly. Currently, `0` is the only valid value. It is not recommended to set it to other values.
 
+<CustomContent platform="tidb-cloud">
+
 ### `tidb_paging_size_bytes` <span class="version-mark">New in TiDB-X-CLOUD.202603</span>
 
 > **Note:**
@@ -5417,6 +5419,8 @@ SHOW WARNINGS;
 - Unit: bytes
 - Controls the maximum size, in bytes, of a single paged response in the coprocessor protocol, providing an additional response-size-based pagination mechanism alongside the row-based pagination controlled by [`tidb_max_paging_size`](#tidb_max_paging_size-new-in-v630). The default value of this variable is `0`, which disables byte-based pagination. To enable this feature, consider setting the variable to `4194304` (4 MiB).
 - This variable is an internal TiDB variable. It is **not recommended** to modify its value.
+
+</CustomContent>
 
 ### tidb_partition_prune_mode <span class="version-mark">New in v5.1</span>
 
