@@ -95,15 +95,41 @@ The fields in the following table follow the general matching and type rules des
 
 ## Effective behavior and matching order
 
-- Rule update behavior: every execution of `SET [SESSION|GLOBAL] tidb_slow_log_rules = '...'` overwrites the existing rules in that scope instead of appending to them.
-- Rule clearing behavior: `SET [SESSION|GLOBAL] tidb_slow_log_rules = ''` clears the rules in the corresponding scope.
-- If the current session has any applicable `tidb_slow_log_rules`, such as `SESSION` rules, `GLOBAL` rules for the current `Conn_ID`, or generic global rules without `Conn_ID`, the output of slow query logs is determined by rule matching results, and `tidb_slow_log_threshold` is no longer used.
-- If the current session has no applicable rules, for example when both `SESSION` and `GLOBAL` rules are empty, or only `GLOBAL` rules that do not match the current `Conn_ID` are configured, slow query logging still depends on `tidb_slow_log_threshold`. Note that the unit is milliseconds.
+- Setting `tidb_slow_log_rules` overwrites the existing rules in the specified scope instead of appending new rules.
+- Setting `tidb_slow_log_rules` to an empty string clears the rules in the specified scope.
+- Multiple rules are combined with `OR`, while multiple field conditions within a single rule are combined with `AND`.
 - If you still want to use SQL execution time as a condition for writing slow query logs, use `Query_time` in the rule and note that the unit is seconds.
-- Rule matching logic:
-    - Multiple rules are combined with `OR`, while multiple field conditions within a single rule are combined with `AND`.
-    - `SESSION`-scope rules are matched first. If none matches, TiDB then matches `GLOBAL` rules for the current `Conn_ID`, followed by generic `GLOBAL` rules without `Conn_ID`.
+
+<CustomContent platform="tidb">
+
+TiDB Self-Managed supports both `SESSION` and `GLOBAL` rules for `tidb_slow_log_rules`.
+
+- If the current session has any applicable rules, such as `SESSION` rules, `GLOBAL` rules for the current `Conn_ID`, or generic `GLOBAL` rules without `Conn_ID`, slow query log output is determined by the rule matching results, and `tidb_slow_log_threshold` is ignored.
+- If the current session has no applicable rules, for example, when both `SESSION` and `GLOBAL` rules are empty or only `GLOBAL` rules that do not match the current `Conn_ID` are configured, slow query logging still depends on `tidb_slow_log_threshold`. The unit of `tidb_slow_log_threshold` is milliseconds.
+- TiDB matches `SESSION` rules first. If none matches, TiDB then matches `GLOBAL` rules for the current `Conn_ID`, followed by generic `GLOBAL` rules without `Conn_ID`.
 - `SHOW VARIABLES LIKE 'tidb_slow_log_rules'` and `SELECT @@SESSION.tidb_slow_log_rules` return the `SESSION` rule text, or an empty string if unset. `SELECT @@GLOBAL.tidb_slow_log_rules` returns the `GLOBAL` rule text.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud" plan="dedicated">
+
+TiDB Cloud Dedicated supports both `SESSION` and `GLOBAL` rules for `tidb_slow_log_rules`.
+
+- If the current session has any applicable rules, such as `SESSION` rules, `GLOBAL` rules for the current `Conn_ID`, or generic `GLOBAL` rules without `Conn_ID`, slow query log output is determined by the rule matching results.
+- If the current session has no applicable rules, for example, when both `SESSION` and `GLOBAL` rules are empty or only `GLOBAL` rules that do not match the current `Conn_ID` are configured, the rules for slow query logging fall back to the default one: SQL queries that take more than 300 milliseconds are considered as slow queries.
+- TiDB matches `SESSION` rules first. If none matches, TiDB then matches `GLOBAL` rules for the current `Conn_ID`, followed by generic `GLOBAL` rules without `Conn_ID`.
+- `SHOW VARIABLES LIKE 'tidb_slow_log_rules'` and `SELECT @@SESSION.tidb_slow_log_rules` return the `SESSION` rule text, or an empty string if unset. `SELECT @@GLOBAL.tidb_slow_log_rules` returns the `GLOBAL` rule text.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud" plan="essential,premium">
+
+TiDB Cloud Essential and TiDB Cloud Premium support only `SESSION` rules for `tidb_slow_log_rules`.
+
+- If the current session has any `SESSION` rules, slow query log output is determined by the rule matching results.
+- `SHOW VARIABLES LIKE 'tidb_slow_log_rules'` and `SELECT @@SESSION.tidb_slow_log_rules` return the `SESSION` rule text, or an empty string if unset.
+
+</CustomContent>
 
 ## Examples
 
