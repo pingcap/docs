@@ -113,7 +113,7 @@ PD ダッシュボード メトリック項目の説明は次のとおりです�
 ## gRPC {#grpc}
 
 - Completed commands rate: gRPC コマンドが完了するコマンド タイプごとの率
-- 99% Completed commands duration: gRPC コマンドが完了するコマンド タイプごとの率 (P99)
+- 99% Completed commands duration: gRPC コマンドが完了するコマンド タイプごとの所要時間 (P99)
 
 ![PD Dashboard - gRPC metrics](/media/pd-dashboard-grpc-v2.png)
 
