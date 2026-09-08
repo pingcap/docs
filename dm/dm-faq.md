@@ -147,7 +147,7 @@ You need to check the error message and log files to further analyze this error.
 Check the configuration items `block-allow-list` and `table-route`:
 
 - You need to configure the names of upstream databases and tables under `block-allow-list`. You can add "~" before `do-tables` to use regular expressions to match names.
-- `table-route` uses wildcard characters instead of regular expressions to match table names. For example, `table_parttern_[0-63]` only matches 7 tables, from `table_parttern_0` to `table_pattern_6`.
+- `table-route` uses wildcard characters instead of regular expressions to match table names. For example, `table_pattern_[0-63]` only matches 7 tables, from `table_pattern_0` to `table_pattern_6`.
 
 ## Why does the `replicate lag` monitor metric show no data when DM is not replicating from upstream?
 
