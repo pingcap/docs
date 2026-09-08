@@ -209,7 +209,7 @@ TiDBはv5.0以降、 TiFlashノードを介して大規模並列処理（MPP）�
 
 ### 元の値（Old value） {#old-value}
 
-TiCDCが出力する増分変更ログにおける"original value"。TiCDCが出力する増分変更ログに"original value"を含めるかどうかを指定できます。
+TiCDCが出力する増分変更ログにおける「元の値」。TiCDCが出力する増分変更ログに「元の値」を含めるかどうかを指定できます。
 
 ### オンライン分析処理（OLAP） {#online-analytical-processing-olap}
 
