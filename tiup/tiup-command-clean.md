@@ -1,6 +1,6 @@
 ---
 title: tiup clean
-summary: "tiup clean"コマンドは、コンポーネント操作中に生成されたデータを消去します。構文は"tiup clean [name] [flags]"で、すべての操作記録を消去するには"--all"オプションを使用します。
+summary: この「tiup clean」コマンドは、コンポーネント操作中に生成されたデータを消去します。構文は「tiup clean [name] [flags]」で、すべての操作記録を消去するには「--all」オプションを使用します。
 ---
 
 # tiup clean {#tiup-clean}
