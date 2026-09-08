@@ -52,16 +52,6 @@ In `TiDB-X-CLOUD.202603.1`:
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855).
 
-### Stability
-
-* The feature of setting the maximum limit on resource usage for background tasks of resource control becomes generally available (GA) [#56019](https://github.com/pingcap/tidb/issues/56019) @[glorv](https://github.com/glorv) <!-- (dup): release-8.5.6.md > Features > Stability --> <!-- pr: https://github.com/pingcap/tidb/pull/66381 -->
-
-    TiDB resource control can identify and lower the priority of background tasks. In certain scenarios, you might want to limit the resource consumption of background tasks, even when resources are available. Starting from v8.4.0, you can use the `UTILIZATION_LIMIT` parameter to set the maximum percentage of resources that background tasks can consume. Each node will keep the resource usage of all background tasks below this percentage. This feature enables precise control over resource consumption for background tasks, further enhancing cluster stability.
-
-    Now this feature is generally available (GA).
-
-    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/tidb-resource-control-background-tasks).
-
 ### Observability
 
 * Support defining multi-dimensional, fine-grained trigger rules for slow query logs [#62959](https://github.com/pingcap/tidb/issues/62959), [#64010](https://github.com/pingcap/tidb/issues/64010) @[zimulala](https://github.com/zimulala) <!-- (dup): release-8.5.6.md > Features > Observability --> <!-- miss issue https://github.com/pingcap/tidb/issues/64010 in release-8.5.6.md --> <!-- pr: https://github.com/pingcap/tidb/pull/66132, https://github.com/pingcap/tidb/pull/66064, https://github.com/pingcap/tidb/pull/65086 -->
