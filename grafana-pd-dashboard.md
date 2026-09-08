@@ -55,8 +55,8 @@ PD ダッシュボード メトリック項目の説明は次のとおりです�
 - Store capacity: TiKVインスタンスあたりの容量サイズ
 - Store available: TiKVインスタンスあたりの利用可能な容量サイズ
 - Store used: TiKVインスタンスごとの使用済み容量サイズ
-- Size amplification: TiKVインスタンスあたりのサイズ増幅率。これは、(ストアリージョンサイズ)/(ストア使用容量サイズ)に等しくなります。
-- Size available ratio: TiKVインスタンスあたりの利用可能なサイズ比率。これは、(ストアの利用可能な容量サイズ)/(ストアの容量サイズ)に等しくなります。
+- Size amplification: TiKVインスタンスあたりのサイズ増幅率。これは、(Store Region size)/(Store used capacity size)に等しくなります。
+- Size available ratio: TiKVインスタンスあたりの利用可能なサイズ比率。これは、(Store available capacity size)/(Store capacity size)に等しくなります。
 - Store leader score: TiKVインスタンスごとのリーダースコア
 - Store Region score: TiKVインスタンスごとのリージョンスコア
 - Store leader size: TiKVインスタンスあたりのリーダーサイズの合計
