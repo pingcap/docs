@@ -32,7 +32,7 @@ TiDB バージョン: 5.0.4
         - プレフィックスインデックスのクエリ範囲に関するバグを修正 [#26029](https://github.com/pingcap/tidb/issues/26029)
         - `LOAD DATA`文が非 UTF8 データを異常にインポートする可能性がある問題を修正[#25979](https://github.com/pingcap/tidb/issues/25979)
         - `insert ignore on duplicate update`セカンダリインデックスに主キーと同じ列がある場合に間違ったデータが挿入される可能性がある問題を修正[#25809](https://github.com/pingcap/tidb/issues/25809)
-        - パーティションテーブルにクラスター化インデックスがある場合に間違ったデータが挿入される可能性が`insert ignore duplicate update`問題を修正しました[#25846](https://github.com/pingcap/tidb/issues/25846)
+        - パーティションテーブルにクラスター化インデックスがある場合に`insert ignore duplicate update`が間違ったデータを挿入する可能性がある問題を修正しました[#25846](https://github.com/pingcap/tidb/issues/25846)
         - PointGetまたはバッチPointGetでキーが`ENUM`型の場合にクエリ結果が間違っている可能性がある問題を修正しました [#24562](https://github.com/pingcap/tidb/issues/24562)
         - `BIT`型の値を割ったときに発生する誤った結果を修正しました [#23479](https://github.com/pingcap/tidb/issues/23479)
         - `prepared`ステートメントと直接クエリの結果が矛盾する可能性がある問題を修正[#22949](https://github.com/pingcap/tidb/issues/22949)
@@ -129,7 +129,7 @@ TiDB バージョン: 5.0.4
     - 射影演算子を実行するときに TiDB がパニックを起こす問題を修正しました [#24264](https://github.com/pingcap/tidb/issues/24264)
     - 統計情報によりクエリがpanicになる可能性がある問題を修正[#24061](https://github.com/pingcap/tidb/pull/24061)
     - `BIT`列で`approx_percentile`関数を使用するとpanicする可能性がある問題を修正しました[#23662](https://github.com/pingcap/tidb/issues/23662)
-    - Grafanaの**コプロセッサー Cache**パネルのメトリックが間違っている問題を修正しました[#26338](https://github.com/pingcap/tidb/issues/26338)
+    - Grafanaの**Coprocessor Cache**パネルのメトリックが間違っている問題を修正しました[#26338](https://github.com/pingcap/tidb/issues/26338)
     - 同じパーティションを同時に切り捨てるとDDL文がスタックする問題を修正しました[#26229](https://github.com/pingcap/tidb/issues/26229)
     - セッション変数を`GROUP BY`項目として使用した場合に発生する誤ったクエリ結果の問題を修正しました [#27106](https://github.com/pingcap/tidb/issues/27106)
     - テーブルを結合する際の`VARCHAR`とタイムスタンプ間の誤った暗黙的な変換を修正しました [#25902](https://github.com/pingcap/tidb/issues/25902)
@@ -161,8 +161,8 @@ TiDB バージョン: 5.0.4
     - 集計関数`COUNT`または`COUNT DISTINCT`を実行するときに予期しない結果が発生する問題を修正しました
     - MPPタスク実行時に発生する可能性のあるpanic問題を修正
     - 複数のディスクにデプロイされたときにTiFlash がデータを復元できない潜在的なバグを修正しました
-    - 解体時に発生する可能性のあるpanic問題を修正`SharedQueryBlockInputStream`
-    - 解体時に発生する可能性のあるpanic問題を修正`MPPTask`
+    - `SharedQueryBlockInputStream`の解体時に発生する可能性のあるpanic問題を修正
+    - `MPPTask`の解体時に発生する可能性のあるpanic問題を修正
     - TiFlash がMPP 接続を確立できなかった場合に予期しない結果が発生する問題を修正しました
     - ロックを解決する際に発生する可能性のあるpanic問題を修正
     - 書き込みが集中するとメトリクスのストアサイズが不正確になる問題を修正しました
