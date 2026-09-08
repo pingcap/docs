@@ -81,8 +81,8 @@ TiDB Dashboardにログイン後、左側のナビゲーション メニュー�
 
 しかし、 `tidb_kv_request`の持続時間が`tidb_cop`にどれだけ含まれているかを判断することは困難です。
 
-- `tidb_kv_request.Get` : TiDB が`Get`種類のキー値リクエストを送信する期間。
-- `tidb_kv_request.Cop` : TiDB が`Cop`種類のキー値リクエストを送信する期間。
+- `tidb_kv_request.Get` : TiDB が`Get`型のキー値リクエストを送信する期間。
+- `tidb_kv_request.Cop` : TiDB が`Cop`型のキー値リクエストを送信する期間。
 
 `tidb_kv_request`子ノードとして`tidb_kv_request.Get`と`tidb_kv_request.Cop`ノードを含みませんが、後者の2つのノードで構成されます。子ノードの名前プレフィックスは親ノードの名前に`.xxx`を加えたもので、これは子ノードが親ノードのサブクラスであることを意味します。このケースは次のように理解できます。
 
