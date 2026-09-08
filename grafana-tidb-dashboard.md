@@ -45,7 +45,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 - Connection Count: 各 TiDB インスタンスに接続されているクライアントの数
 - Open FD Count: 各TiDBインスタンスのオープンファイルディスクリプタの統計
 - Disconnection Count: 各 TiDB インスタンスから切断されたクライアントの数
-- Events OPM: 「開始」、「終了」、「正常シャットダウン」、「強制終了」、「ハング」などの主要なイベントの統計
+- Events OPM: "start"、"close"、"graceful-shutdown"、"kill"、"hang"などの主要なイベントの統計
 - Goroutine Count: 各 TiDB インスタンス上の Goroutine の数
 - Prepare Statement Count: 各 TiDB インスタンスで実行される`Prepare`のステートメントの数とその合計数
 - Keep Alive OPM: 各TiDBインスタンスで毎分メトリクスが更新される回数。通常は注意する必要はありません。
@@ -85,7 +85,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 - Parse Duration: SQL文の解析時間の統計
 - Compile Duration: 解析されたSQL ASTを実行計画にコンパイルする時間の統計
 - Execution Duration: SQL文の実行時間の統計
-- Expensive Executor OPS: 1秒あたりに多くのシステムリソースを消費するオペレーターの統計`Merge Join` `Hash Join` `Index Look Up Join` `Hash Agg` `Stream Agg` `Sort` `TopN`
+- Expensive Executor OPS: 1秒あたりに多くのシステムリソースを消費するオペレーター（`Merge Join`、`Hash Join`、`Index Look Up Join`、`Hash Agg`、`Stream Agg`、`Sort`、`TopN`を含む）の統計
 - Queries Using Plan Cache OPS: プランキャッシュを使用したクエリの1秒あたりの統計
 - Plan Cache Miss OPS: 1秒あたりにプランキャッシュがミスされた回数の統計
 - Plan Cache Memory Usage: 各 TiDB インスタンスにキャッシュされた実行計画によって消費されるメモリの合計
