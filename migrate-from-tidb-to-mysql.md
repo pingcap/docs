@@ -168,7 +168,7 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
     - `--server` : TiCDC クラスター内の任意のノードの IP アドレス
     - `--sink-uri` : 下流クラスタのURI
     - `--changefeed-id` : チェンジフィードID、正規表現の形式でなければなりません、 `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`
-    - `--start-ts` : 変更フィードの開始タイムスタンプ。バックアップ時刻である必要があります (または[ステップ2. 全データの移行](#step-2-migrate-full-data)の"Back up data"セクションの BackupTS)
+    - `--start-ts` : 変更フィードの開始タイムスタンプ。バックアップ時刻である必要があります (または[ステップ2. 全データの移行](#step-2-migrate-full-data)の「データのバックアップ」セクションの BackupTS)
 
     changefeed 構成の詳細については、 [タスク設定ファイル](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
