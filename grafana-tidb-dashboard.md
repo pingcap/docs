@@ -95,10 +95,10 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 
 - Distsql Duration: Distsql ステートメントの処理時間
 - Distsql QPS: Distsql ステートメントの統計
-- Distsql Partial QPS: 1秒あたりの部分結果の数
+- Distsql Partial QPS: 1秒あたりの`Partial Result`の数
 - Scan Keys Num: 各クエリがスキャンするキーの数
-- Scan Keys Partial Num: 各部分結果がスキャンするキーの数
-- Partial Num: 各SQL文の部分結果の数
+- Scan Keys Partial Num: 各`Partial Result`がスキャンするキーの数
+- Partial Num: 各SQL文の`Partial Result`の数
 
 ### KV Errors {#kv-errors}
 
