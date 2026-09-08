@@ -557,7 +557,7 @@
   - [Server Status Variables](/status-variables.md)
   - [Table Filter](/table-filter.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
-  - [Configure Trigger Rules for Slow Queries](/define-slow-query-trigger-rules.md)
+  - [Configure Trigger Rules for Slow Queries](/config-slow-query-trigger-rules.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Notifications](/tidb-cloud/notifications.md)
   - [Project API Migration Guide for {{{ .starter }}} and Essential](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md)

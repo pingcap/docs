@@ -213,7 +213,7 @@
   - Issue Scenarios
     - Slow Queries
       - [Identify Slow Queries](/identify-slow-queries.md)
-      - [Configure Trigger Rules for Slow Queries](/define-slow-query-trigger-rules.md)
+      - [Configure Trigger Rules for Slow Queries](/config-slow-query-trigger-rules.md)
       - [Analyze Slow Queries](/analyze-slow-queries.md)
     - [TiDB OOM](/troubleshoot-tidb-oom.md)
     - [Hotspot](/troubleshoot-hot-spot-issues.md)

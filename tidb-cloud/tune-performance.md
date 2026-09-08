@@ -50,7 +50,7 @@ By default, SQL queries that take more than 300 milliseconds are considered as s
 
 > **Note:**
 >
-> You can also configure trigger rules for slow queries to filter target statements based on specific metric combinations. For more information, see [Configure Trigger Rules for Slow Queries](/define-slow-query-trigger-rules.md).
+> You can also configure trigger rules for slow queries to filter target statements based on specific metric combinations. For more information, see [Configure Trigger Rules for Slow Queries](/config-slow-query-trigger-rules.md).
 
 </CustomContent>
 

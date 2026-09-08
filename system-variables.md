@@ -6002,14 +6002,14 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 > **Tip:**
 >
 > - When enabling `tidb_slow_log_rules` in a production environment, it is recommended to also configure [`tidb_slow_log_max_per_sec`](#tidb_slow_log_max_per_sec-new-in-v856) to avoid excessively frequent slow query log printing.
-> - It is recommended to start with stricter conditions and gradually relax them based on troubleshooting needs. For more information on performance impact, see [Recommendations](/identify-slow-queries.md#recommendations).
+> - It is recommended to start with stricter conditions and gradually relax them based on troubleshooting needs. For more information on performance impact, see [Recommendations](/config-slow-query-trigger-rules.md#recommendations).
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
 > **Tip:**
 >
-> It is recommended to start with stricter conditions and gradually relax them based on troubleshooting needs. For more information on performance impact, see [Recommendations](/identify-slow-queries.md#recommendations).
+> It is recommended to start with stricter conditions and gradually relax them based on troubleshooting needs. For more information on performance impact, see [Recommendations](/config-slow-query-trigger-rules.md#recommendations).
 
 </CustomContent>
 
