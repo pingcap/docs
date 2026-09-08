@@ -14,7 +14,7 @@ This document describes how to use the [`tidb_slow_log_rules`](/system-variables
 For TiDB Self-Managed, the triggering behavior of slow query logs depends on the configuration of `tidb_slow_log_rules`:
 
 - If `tidb_slow_log_rules` is not set, slow query log triggering still relies on [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) (in milliseconds).
-- If `tidb_slow_log_rules` is set, the configured rules take precedence, and [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) will be ignored.
+- If `tidb_slow_log_rules` is set and the configured rules match the current session, the configured rules take precedence, and [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) will be ignored.
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
