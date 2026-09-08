@@ -21,7 +21,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 ### Query Summary {#query-summary}
 
 - Duration: 実行時間
-    - クライアントのネットワーク要求がTiDBに送信されてから、TiDBがそれを実行した後にクライアントに返される`COM_STMT_FETCH`の時間。通常、クライアント要求はSQL文の形式で送信されますが、 `COM_PING`、`COM_SLEEP`、`COM_STMT_FETCH`、`COM_SEND_LONG_DATA`などのコマンドの実行時間も含まれる場合があります
+    - クライアントのネットワーク要求がTiDBに送信されてから、TiDBがそれを実行した後にクライアントに返されるまでの時間。通常、クライアント要求はSQL文の形式で送信されますが、 `COM_PING`、`COM_SLEEP`、`COM_STMT_FETCH`、`COM_SEND_LONG_DATA`などのコマンドの実行時間も含まれる場合があります
     - TiDBはマルチクエリをサポートしているため、 `select 1; select 1; select 1;`ような複数のSQL文を一度に送信できます。この場合、このクエリの合計実行時間には、すべてのSQL文の実行時間が含まれます。
 - Command Per Second: コマンド実行結果の成功または失敗に応じて分類される、TiDBによって1秒あたりに処理されるコマンドの数
 - QPS: すべての TiDB インスタンスで秒あたりに実行される SQL文の数。`SELECT` 、 `INSERT` 、 `UPDATE`およびその他のタイプの文に従ってカウントされます
@@ -76,7 +76,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 - Transaction Write Size Bytes: トランザクションで書き込まれたデータのサイズ
 - Acquire Pessimistic Locks Duration: ロックの追加にかかる時間
 - TTL Lifetime Reach Counter: TTL の上限に達したトランザクションの数。TTL 上限のデフォルト値は 1時間です。これは、悲観的トランザクションの最初のロック、または楽観的トランザクションの最初の事前書き込みから 1時間が経過したことを意味します。TTL 上限のデフォルト値は 1時間です。TTL 寿命の上限は、TiDB 設定ファイルで`max-txn-TTL`を変更することで変更できます。
-- Load Safepoint OPS: `Safepoint`がロードされる回数。`Safepoint`は 、トランザクションがデータを読み取る際に`Safepoint`より前のデータが読み込まれないようにすることで、データの安全性を確保するためのものです`Safepoint`より前のデータはGCによってクリーンアップされる可能性があります。
+- Load Safepoint OPS: `Safepoint`がロードされる回数。`Safepoint`は、トランザクションがデータを読み取る際に`Safepoint`より前のデータが読み込まれないようにすることで、データの安全性を確保するためのものです。`Safepoint`より前のデータはGCによってクリーンアップされる可能性があります。
 - Pessimistic Statement Retry OPS：悲観的ステートメントの再試行回数。ステートメントがロックを追加しようとすると、書き込み競合が発生する可能性があります。この場合、ステートメントは新しいスナップショットを取得し、再度ロックを追加します。
 - Transaction Types Per Seconds: 2フェーズコミット (2PC)、非同期コミット、および1フェーズコミット (1PC) メカニズムを使用して1秒あたりにコミットされたトランザクションの数 (成功トランザクションと失敗トランザクションの両方を含む)
 
