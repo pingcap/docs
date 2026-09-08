@@ -29,9 +29,28 @@ By default, SQL queries that take more than 300 milliseconds are considered as s
 
 ## Unified rule syntax and type constraints
 
-- Rule capacity and separation: `SESSION` and `GLOBAL` each support a maximum of 10 rules. A single session can have up to 20 active rules. Rules are separated by `;`.
+- Rule capacity and separation: each supported scope can contain a maximum of 10 rules. Rules are separated by `;`.
 - Condition format: each condition uses the format `field_name:value`. Multiple conditions within a single rule are separated by `,`.
-- Field and scope: field names are case-insensitive (underscores and other characters are preserved). `SESSION` rules do not support `Conn_ID`. Only `GLOBAL` rules support `Conn_ID`.
+- Field names are case-insensitive. Underscores and other characters in field names are preserved.
+
+<CustomContent platform="tidb">
+
+TiDB Self-Managed supports both `SESSION` and `GLOBAL` rules for `tidb_slow_log_rules`. A single session can have up to 20 active rules across the two scopes. `SESSION` rules do not support `Conn_ID`; only `GLOBAL` rules support this field.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud" plan="dedicated">
+
+TiDB Cloud Dedicated supports both `SESSION` and `GLOBAL` rules for `tidb_slow_log_rules`. A single session can have up to 20 active rules across the two scopes. `SESSION` rules do not support `Conn_ID`; only `GLOBAL` rules support this field.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud" plan="essential,premium">
+
+TiDB Cloud Essential and TiDB Cloud Premium support only `SESSION` rules for `tidb_slow_log_rules`. Therefore, `Conn_ID`, which is available only in `GLOBAL` rules, is not supported.
+
+</CustomContent>
+
 - Matching semantics:
     - Numeric fields are matched using `>=`. String and boolean fields are matched using equality (`=`).
     - Matching for `DB` and `Resource_group` is case-insensitive.
