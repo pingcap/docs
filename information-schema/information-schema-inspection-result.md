@@ -214,7 +214,7 @@ select * from information_schema.inspection_rules where type='inspection';
 
 - 以下の設定項目の値が期待どおりであるかどうかを確認します。
 
-    | コンポーネント   | コンフィグレーション項目       | 期待値      |
+    | コンポーネント   | コンフィグレーション項目       | しきい値      |
     | ---- | ------------------ | -------- |
     | TiDB | log.slow-threshold | `0`より大きい |
 
@@ -259,7 +259,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
 `threshold-check`診断ルールは、メトリックスキーマ内の関連する監視システムテーブルを照会して、クラスター内の次のメトリックがしきい値を超えているかどうかを確認します。
 
-| コンポーネント   | 監視メトリック              | 監視テーブル                              | 期待値       | 説明                                                                                                               |
+| コンポーネント   | 監視メトリック              | 監視テーブル                              | しきい値       | 説明                                                                                                               |
 | :--- | :------------------- | :---------------------------------- | :-------- | :--------------------------------------------------------------------------------------------------------------- |
 | TiDB | tso-duration              | pd_tso_wait_duration                | 50ミリ秒未満   | トランザクションの TSO を取得するまでの待機時間。                                                                                      |
 | TiDB | get-token-duration        | tidb_get_token_duration             | 1ミリ秒未満    | トークンの取得にかかる時間を照会します。関連するTiDB設定項目は[`token-limit`](/command-line-flags-for-tidb-configuration.md#--token-limit)です。 |
