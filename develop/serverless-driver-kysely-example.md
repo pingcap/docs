@@ -11,7 +11,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 - サーバーレス環境におけるパフォーマンスの向上。
 - Kyselyをエッジ環境で使用できる機能。
 
-このチュートリアルでは、Node.js環境およびエッジ環境で、 TiDB Cloud Serverless DriverをKyselyと組み合わせて使用​​する方法について説明します。
+このチュートリアルでは、Node.js環境およびエッジ環境で、 TiDB Cloud Serverless DriverをKyselyと組み合わせて使用する方法について説明します。
 
 ## Node.js環境でTiDB Cloud Kysely方言を使用する {#use-tidb-cloud-kysely-dialect-in-node-js-environments}
 

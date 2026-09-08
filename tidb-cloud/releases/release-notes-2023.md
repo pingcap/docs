@@ -695,7 +695,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     詳細については[TiDB Cloud組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md)を参照してください。
 
-- TiDB Cloudのヘルプ関連の情報とアクションを 1 か所に統合​​します。
+- TiDB Cloudのヘルプ関連の情報とアクションを 1 か所に統合します。
 
     これで、 [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**[?]**をクリックして、 [TiDB Cloudヘルプ情報](/tidb-cloud/tidb-cloud-support.md)をすべて取得し、サポートに問い合わせることができます。
 

@@ -69,7 +69,7 @@ Data Service のエンドポイントは、SQL文を実行するようにカス�
 
 ### 全文検索 {#full-text-search}
 
-意味的な類似性に焦点を当てる[ベクトル検索](/ai/concepts/vector-search-overview.md)とは異なり、全文検索では正確なキーワードに基づいて文書を取得できます。検索拡張生成（RAG）シナリオでは、全文検索とベクトル検索を組み合わせて使用​​することで、検索品質を向上させることができます。
+意味的な類似性に焦点を当てる[ベクトル検索](/ai/concepts/vector-search-overview.md)とは異なり、全文検索では正確なキーワードに基づいて文書を取得できます。検索拡張生成（RAG）シナリオでは、全文検索とベクトル検索を組み合わせて使用することで、検索品質を向上させることができます。
 
 詳細については、 [SQLによる全文検索](/ai/guides/vector-search-full-text-search-sql.md)および[Pythonによる全文検索](/ai/guides/vector-search-full-text-search-python.md)を参照してください。
 

@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Introduction
-summary: TiDB Dashboardは、TiDBクラスタの監視、診断、管理のためのWeb UIです。クラスタ全体の稼働状況、コンポーネントとホストのステータス、トラフィック分布、SQL文の実行情報、スロークエリ、クラスタ診​​断、ログ検索、リソース制御、プロファイリングデータ収集などを表示します。
+summary: TiDB Dashboardは、TiDBクラスタの監視、診断、管理のためのWeb UIです。クラスタ全体の稼働状況、コンポーネントとホストのステータス、トラフィック分布、SQL文の実行情報、スロークエリ、クラスタ診断、ログ検索、リソース制御、プロファイリングデータ収集などを表示します。
 ---
 
 # TiDB Dashboardの紹介 {#tidb-dashboard-introduction}
@@ -51,7 +51,7 @@ TiDB DashboardのSlow Queriesページには、実行に時間のかかるすべ
 
 TiDB Dashboardの診断機能は、クラスター内に一般的なリスク (不一致な構成など) や問題が存在するかどうかを自動的に判断し、レポートを生成して操作の提案を行ったり、異なる時間範囲で各クラスター メトリックの状態を比較して、起こりうる問題を分析したりします。
 
-詳細は[TiDB Dashboardのクラスタ診​​断ページ](/dashboard/dashboard-diagnostics-access.md)参照。
+詳細は[TiDB Dashboardのクラスタ診断ページ](/dashboard/dashboard-diagnostics-access.md)参照。
 
 ## すべてのコンポーネントのクエリログ {#query-logs-of-all-components}
 

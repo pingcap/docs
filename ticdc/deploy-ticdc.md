@@ -7,7 +7,7 @@ summary: TiCDCの導入と実行に関するハードウェアおよびソフト
 
 このドキュメントでは、ハードウェアとソフトウェアに関する推奨事項を含め、TiCDCクラスタのデプロイと保守方法について説明します。TiCDCは、新しいTiDBクラスタと同時にデプロイすることも、既存のTiDBクラスタにTiCDCコンポーネントを追加することもできます。
 
-## ソフトウェアとハ​​ードウェアの推奨事項 {#software-and-hardware-recommendations}
+## ソフトウェアとハードウェアの推奨事項 {#software-and-hardware-recommendations}
 
 本番環境におけるTiCDCの推奨ハードウェア構成は以下のとおりです。
 

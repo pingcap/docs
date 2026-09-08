@@ -152,7 +152,7 @@ AWSインターフェースエンドポイントを作成した後、対象のTi
 1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックすると、その概要ページに移動します。
 2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 3. **Connection Type**ドロップダウンリストで、 **Private Endpoint**を選択します。
-4. **Connect With**ドロップダウンリストから、希望する接続方法を選択してください。対応する接続​​文字列がダイアログの下部に表示されます。
+4. **Connect With**ドロップダウンリストから、希望する接続方法を選択してください。対応する接続文字列がダイアログの下部に表示されます。
 5. 接続文字列を使用して、 TiDB Cloud StarterまたはEssentialインスタンスに接続します。
 
 > **Tip:**

@@ -40,7 +40,7 @@ TiDBバージョン：8.5.3
     - フォアグラウンド書き込みをブロックせずにSSTファイルを取り込むことをサポートし、レイテンシーの影響を軽減します [#18081](https://github.com/tikv/tikv/issues/18081) @[hhwyt](https://github.com/hhwyt)
     - フローコントローラによって引き起こされるパフォーマンスのジッターを軽減します [#18625](https://github.com/tikv/tikv/issues/18625) @[hhwyt](https://github.com/hhwyt)
     - TiDB での`ADD INDEX`操作中のテールレイテンシーを最適化 [#18081](https://github.com/tikv/tikv/issues/18081) @[overvenus](https://github.com/overvenus)
-    - Raftstoreでの`CompactedEvent`の処理を​​最適化し`split-check`ワーカーに移動することで、メインのRaftstoreスレッドでのブロッキングを軽減します [#18532](https://github.com/tikv/tikv/issues/18532) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Raftstoreでの`CompactedEvent`の処理を最適化し`split-check`ワーカーに移動することで、メインのRaftstoreスレッドでのブロッキングを軽減します [#18532](https://github.com/tikv/tikv/issues/18532) @[LykxSassinator](https://github.com/LykxSassinator)
     - SST の取り込みが遅すぎる場合のみ`SST ingest is experiencing slowdowns`をログに記録し、パフォーマンスのジッターを回避するために`get_sst_key_ranges`の呼び出しをスキップします [#18549](https://github.com/tikv/tikv/issues/18549) @[LykxSassinator](https://github.com/LykxSassinator)
     - KvDBとRaftDBが別々のマウントパスを使用する場合のKvDBディスクのI/Oジッター検出メカニズムを最適化する [#18463](https://github.com/tikv/tikv/issues/18463) @[LykxSassinator](https://github.com/LykxSassinator)
     - Raft Engineの`fetch_entries_to`のパフォーマンスを最適化して競合を減らし、混合ワークロード下でのパフォーマンスを向上させます [#18605](https://github.com/tikv/tikv/issues/18605) @[LykxSassinator](https://github.com/LykxSassinator)

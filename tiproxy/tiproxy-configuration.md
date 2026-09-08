@@ -147,7 +147,7 @@ server_configs:
     ha.interface: "eth0"
 ```
 
-TiProxy v1.3.1以降、複数の仮想IPアドレスの設定がサポートされます。コンピューティングレイヤーのリソースを分離する必要がある場合は、複数の仮想IPアドレスを設定し、 [ラベルベースの負荷分散](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing)組み合わせて使用​​できます。設定例については、 [ラベルベースの負荷分散](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing)を参照してください。
+TiProxy v1.3.1以降、複数の仮想IPアドレスの設定がサポートされます。コンピューティングレイヤーのリソースを分離する必要がある場合は、複数の仮想IPアドレスを設定し、 [ラベルベースの負荷分散](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing)組み合わせて使用できます。設定例については、 [ラベルベースの負荷分散](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing)を参照してください。
 
 > **Note:**
 >

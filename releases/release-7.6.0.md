@@ -136,7 +136,7 @@ TiDB バージョン: 7.6.0
 
 - `FLASHBACK CLUSTER`は、正確な TSO の指定をサポートしています [#48372](https://github.com/pingcap/tidb/issues/48372) @[BornChanger](https://github.com/BornChanger)
 
-    TiDB v7.6.0 では、フラッシュバック機能がより強力かつ正確になりました。クラスタを指定した履歴タイムスタンプにロールバックできるだけでなく、 `FLASHBACK CLUSTER TO TSO`を使用して正確なリカバリ[TSO](/tso.md)を指定できるため、データリカバリの柔軟性が向上します。たとえば、この機能を TiCDC と組み合わせて使用​​できます。ダウンストリームの TiDB クラスタでデータレプリケーションを一時停止し、オンライン前の読み書きテストを実行した後、この機能を使用すると、クラスタは一時停止した TSO にスムーズかつ迅速にロールバックし、TiCDC を使用してデータのレプリケーションを再開できます。これにより、オンライン前の検証プロセスが効率化され、データ管理が簡素化されます。
+    TiDB v7.6.0 では、フラッシュバック機能がより強力かつ正確になりました。クラスタを指定した履歴タイムスタンプにロールバックできるだけでなく、 `FLASHBACK CLUSTER TO TSO`を使用して正確なリカバリ[TSO](/tso.md)を指定できるため、データリカバリの柔軟性が向上します。たとえば、この機能を TiCDC と組み合わせて使用できます。ダウンストリームの TiDB クラスタでデータレプリケーションを一時停止し、オンライン前の読み書きテストを実行した後、この機能を使用すると、クラスタは一時停止した TSO にスムーズかつ迅速にロールバックし、TiCDC を使用してデータのレプリケーションを再開できます。これにより、オンライン前の検証プロセスが効率化され、データ管理が簡素化されます。
 
     ```sql
     FLASHBACK CLUSTER TO TSO 445494839813079041;
@@ -278,7 +278,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
 
 ## 非推奨機能 {#deprecated-features}
 
-- TiDB v7.6.0ではTLSv1.0およびTLSv1.1プロトコルのサポートは非​​推奨となり、v8.0.0で削除されます。TLSv1.2またはTLSv1.3にアップグレードしてください。
+- TiDB v7.6.0ではTLSv1.0およびTLSv1.1プロトコルのサポートは非推奨となり、v8.0.0で削除されます。TLSv1.2またはTLSv1.3にアップグレードしてください。
 - 実行計画の [ベースラインの進化](/sql-plan-management.md#baseline-evolution)機能は、TiDB v8.0.0 で非推奨になります。同等の機能は後続のバージョンで再設計される予定です。
 - TiDB v8.0.0では、システム変数[`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry)が非推奨となります。それ以降、TiDBは楽観的トランザクションの自動再試行をサポートしなくなります。
 
@@ -363,7 +363,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     - 非厳格モード ( `sql_mode = ''` ) で`INSERT`実行中に切り捨てが発生し、エラーが報告される問題を修正しました [#49369](https://github.com/pingcap/tidb/issues/49369) @[tiancaiamao](https://github.com/tiancaiamao)
     - CTEクエリが再試行処理中にエラー`type assertion for CTEStorageMap failed`を報告する可能性がある問題を修正 [#46522](https://github.com/pingcap/tidb/issues/46522) @[tiancaiamao](https://github.com/tiancaiamao)
     - `LIMIT`と`ORDER BY`がネストされた`UNION`クエリで無効になる可能性がある問題を修正 [#49377](https://github.com/pingcap/tidb/issues/49377) @[AilinKid](https://github.com/AilinKid)
-    - `ENUM`または`SET`型の無効な値を解析すると、SQL文エラーが直接発​​生する問題を修正しました [#49487](https://github.com/pingcap/tidb/issues/49487) @[winoros](https://github.com/winoros)
+    - `ENUM`または`SET`型の無効な値を解析すると、SQL文エラーが直接発生する問題を修正しました [#49487](https://github.com/pingcap/tidb/issues/49487) @[winoros](https://github.com/winoros)
     - Golangの暗黙的な型変換アルゴリズムが原因で統計構築時に発生する過剰な統計誤差の問題を修正 [#49801](https://github.com/pingcap/tidb/issues/49801) @[qw4990](https://github.com/qw4990)
     - 一部のタイムゾーンでサマータイムが正しく表示されない問題を修正 [#49586](https://github.com/pingcap/tidb/issues/49586) @[overvenus](https://github.com/overvenus)
     - `AUTO_ID_CACHE=1`を含むテーブルが多数存在する場合に gRPC クライアントのリークを引き起こす可能性がある問題を修正しました [#48869](https://github.com/pingcap/tidb/issues/48869) @[tiancaiamao](https://github.com/tiancaiamao)

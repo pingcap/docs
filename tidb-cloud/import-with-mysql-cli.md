@@ -28,7 +28,7 @@ TiDB Cloud Dedicatedクラスターに接続してください。
 
 5. 右上隅にある**Connect**をクリックすると、接続情報ダイアログが開きます。
 
-    接続文字列を取得する方法の詳細については、 [パブリック接続経由​​でTiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
+    接続文字列を取得する方法の詳細については、 [パブリック接続経由でTiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
 
 ## ステップ2：テーブルを定義し、サンプルデータを挿入する {#step-2-define-the-table-and-insert-sample-data}
 

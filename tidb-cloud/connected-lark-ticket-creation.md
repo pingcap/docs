@@ -9,7 +9,7 @@ TiDB Cloud **Enterprise** [サポートプラン](/tidb-cloud/connected-care-det
 
 > **Note:**
 >
-> Larkのチケットサポート機能はリクエストに応じてご利用いただけます。この機能をご利用になりたい場合は、 TiDB Cloudサポート（ <a href="mailto:support@pingcap.com">[support@pi​​ngcap.com](mailto:support@pingcap.com)</a>までご連絡いただくか、担当のテクニカルアカウントマネージャー（TAM）までご連絡ください。
+> Larkのチケットサポート機能はリクエストに応じてご利用いただけます。この機能をご利用になりたい場合は、 TiDB Cloudサポート（ <a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>までご連絡いただくか、担当のテクニカルアカウントマネージャー（TAM）までご連絡ください。
 
 ## サポートチケットを作成する {#create-a-support-ticket}
 
@@ -41,4 +41,4 @@ TiDB Cloud **Enterprise** [サポートプラン](/tidb-cloud/connected-care-det
 
 ## サポートにお問い合わせください {#contact-support}
 
-ヘルプや質問がある場合は、サポートチーム<a href="mailto:support@pingcap.com">[support@pi​​ngcap.com](mailto:support@pingcap.com)</a>にお問い合わせください。
+ヘルプや質問がある場合は、サポートチーム<a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>にお問い合わせください。

@@ -169,7 +169,7 @@ TiDBバージョン：5.2.4
         - シーケンスが一部のケースで誤って複製されるバグを修正しました [#4552](https://github.com/pingcap/tiflow/issues/4552)
         - PDリーダーが強制終了された際にTiCDCノードが異常終了するバグを修正しました [#4248](https://github.com/pingcap/tiflow/issues/4248)
         - `replace`が無効になっている場合に、MySQLシンクが重複した`batch-replace-enable` SQL文を生成するバグを修正しました [#4501](https://github.com/pingcap/tiflow/issues/4501)
-        - デフォルト列値を出力する際に​​発生するpanicとデータ不整合の問題を修正しました [#3929](https://github.com/pingcap/tiflow/issues/3929)
+        - デフォルト列値を出力する際に発生するpanicとデータ不整合の問題を修正しました [#3929](https://github.com/pingcap/tiflow/issues/3929)
         - `mq sink write row`に監視データがない問題を修正 [#3431](https://github.com/pingcap/tiflow/issues/3431)
         - `min.insync.replicas`が`replication-factor`より小さい場合にレプリケーションが実行できない問題を修正します [#3994](https://github.com/pingcap/tiflow/issues/3994)
         - レプリケーションタスクが削除された際に発生する可能性のあるpanic問題を修正 [#3128](https://github.com/pingcap/tiflow/issues/3128)

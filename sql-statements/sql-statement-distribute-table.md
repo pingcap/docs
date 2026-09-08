@@ -1,6 +1,6 @@
 ---
 title: DISTRIBUTE TABLE
-summary: TiDBデータベースにおけるDISTRIBUTE T​​ABLEの使用方法の概要。
+summary: TiDBデータベースにおけるDISTRIBUTE TABLEの使用方法の概要。
 ---
 
 # DISTRIBUTE TABLE <span class="version-mark">New in v8.5.4 and v9.0.0</span> {#distribute-table-new-in-v854}

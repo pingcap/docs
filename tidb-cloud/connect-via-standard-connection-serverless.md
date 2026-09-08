@@ -18,7 +18,7 @@ TiDB Cloudプランに応じて、適切なエンドポイントモデルを選�
 
 > **Tip:**
 >
-> パブリックエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [パブリック接続経由​​でTiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
+> パブリックエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [パブリック接続経由でTiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
 
 共有モデルを使用してパブリックエンドポイント経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続するには、以下の手順を実行してください。
 
@@ -26,7 +26,7 @@ TiDB Cloudプランに応じて、適切なエンドポイントモデルを選�
 
 2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
-3. ダイアログでは、接続タイプのデフォルト設定を`Public`のままにして、希望する接続方法とオペレーティングシステムを選択して、対応する接続​​文字列を取得します。
+3. ダイアログでは、接続タイプのデフォルト設定を`Public`のままにして、希望する接続方法とオペレーティングシステムを選択して、対応する接続文字列を取得します。
 
     <CustomContent language="en,zh">
 

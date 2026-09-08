@@ -15,7 +15,7 @@ TiDB Cloudの各組織につき、最大 5つの [無料のTiDB Cloud Starterイ
 
 ## 使用クォータ {#usage-quota}
 
-組織内の最初の 5つのTiDB Cloud Starterインスタンス（無料版かスケーラブル版かを問わず）については、 TiDB Cloud はそれぞれに以下の無料使用クォ​​ータを提供します。
+組織内の最初の 5つのTiDB Cloud Starterインスタンス（無料版かスケーラブル版かを問わず）については、 TiDB Cloud はそれぞれに以下の無料使用クォータを提供します。
 
 - 行ベースストレージ：5 GiB
 - 列指向ストレージ：5 GiB

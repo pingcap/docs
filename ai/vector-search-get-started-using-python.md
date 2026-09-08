@@ -165,7 +165,7 @@ vector_store = TiDBVectorClient(
 )
 ```
 
-### ステップ6．テキス​​トデータを埋め込み、ベクトルを保存する {#step-6-embed-text-data-and-store-the-vectors}
+### ステップ6．テキストデータを埋め込み、ベクトルを保存する {#step-6-embed-text-data-and-store-the-vectors}
 
 このステップでは、"dog"、"fish"、"tree"などの単語を含むサンプル文書を準備します。以下のコードは`text_to_embedding()`関数を使用してこれらのテキスト文書をベクトル埋め込みに変換し、ベクトルストアに挿入します。
 
