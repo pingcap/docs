@@ -112,8 +112,8 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 
 以下のメトリックは、TiKV に送信されたリクエストに関連します。再試行リクエストは複数回カウントされます。
 
-- KV Request OPS: TiKVに従って表示されるKVリクエストの実行時間
-- KV Request Duration 99 by store: TiKVに従って表示されるKVリクエストの実行時間
+- KV Request OPS: TiKVに応じて表示されるKVリクエストの実行時間
+- KV Request Duration 99 by store: TiKVに応じて表示されるKVリクエストの実行時間
 - KV Request Duration 99 by type: リクエストタイプに応じて表示される KV リクエストの実行時間
 - Stale Read Hit/Miss Ops
     - **hit**: 古い読み取りを正常に実行した 1秒あたりのリクエスト数
