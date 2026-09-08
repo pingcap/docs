@@ -7,8 +7,6 @@ summary: Returns upstream or downstream lineage for a table, view, stage, or col
 
 Returns upstream or downstream lineage for a table, view, stage, or column. Each returned row represents one source-to-target relationship in the lineage path.
 
-Before using this function in a self-hosted deployment, enable lineage in `lake-query.toml`. See [Data Lineage](/tidb-cloud-lake/guides/data-lineage.md#enable-data-lineage).
-
 ## Syntax
 
 ```sql

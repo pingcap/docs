@@ -17,20 +17,7 @@ Data lineage shows how data moves from source objects to target objects. Use it 
 
 ## Enable Data Lineage
 
-{{{ .lake }}} manages lineage configuration for warehouses that provide the **Lineage (Data &gt; Databases &gt; databaseName &gt; tableName)** tab. For a self-hosted deployment, add the following section to `lake-query.toml` on every Query node, then restart the nodes:
-
-```toml
-[lineage]
-on = true
-```
-
-Lineage history is retained permanently by default. To retain it for a fixed number of hours, set `retention`, for example:
-
-```toml
-[lineage]
-on = true
-retention = 720
-```
+{{{ .lake }}} manages lineage configuration for warehouses that support the **Lineage** tab (**Data** > **Databases** > **databaseName** > **tableName**).
 
 ## Generate Lineage
 
