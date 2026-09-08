@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Essential**
 
-    - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances that include the enhancements announced on [June 30, 2026](#june-30-2026) now display CLOUD.202603.x as their TiDB version on the instance overview page in the TiDB Cloud console.
+    - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances that include the enhancements announced on [June 30, 2026](#june-30-2026) now display `CLOUD.202603.x` as their TiDB version on the instance overview page in the TiDB Cloud console.
 
         For more information about these enhancements, see the [June 30, 2026 release notes](#june-30-2026).
 
