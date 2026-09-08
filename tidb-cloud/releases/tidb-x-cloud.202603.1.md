@@ -60,13 +60,6 @@ In `TiDB-X-CLOUD.202603.1`:
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/table-affinity).
 
-* Foreign key checks now support shared locks [#66154](https://github.com/pingcap/tidb/issues/66154) @[you06](https://github.com/you06) <!-- (dup): release-8.5.6.md > Features > Performance --> <!-- pr: https://github.com/pingcap/tidb/pull/69167, https://github.com/pingcap/tidb/pull/65752 -->
-
-    In pessimistic transactions, when you run `INSERT` or `UPDATE` on a child table with foreign key constraints, foreign key checks lock the corresponding parent table rows with exclusive locks by default. In high-concurrency write scenarios on the child table, if many transactions access the same parent table rows, severe lock contention can occur.
-
-    Now you can set the [`tidb_foreign_key_check_in_shared_lock`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_foreign_key_check_in_shared_lock-new-in-v856) system variable to `ON` to let foreign key checks use shared locks on the parent table, thereby reducing lock contention and improving concurrent write performance on the child table.
-
-    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/foreign-key#locking).
 
 ### Stability
 
