@@ -79,7 +79,7 @@ GRANT 'app_read', 'app_write' TO 'rw_user1'@'localhost';
 
 ユーザーにロールを付与しても、そのロールがすぐに有効になるわけではありません。ロールの有効化は別の操作です。
 
-次の操作は"relation loop"を形成する可能性があります。
+次の操作は「関係ループ」を形成する可能性があります。
 
 ```sql
 CREATE USER 'u1', 'u2';
