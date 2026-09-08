@@ -5,6 +5,8 @@ summary: Configure an Alibaba Cloud private endpoint, enable its custom domain n
 
 # Connect to TiDB Cloud Lake with Alibaba Cloud PrivateLink
 
+This document describes how to configure an Alibaba Cloud private endpoint, enable its custom domain name, and verify private connectivity to TiDB Cloud Lake.
+
 ## Set up Alibaba Cloud PrivateLink
 
 1. Get the endpoint service name from the **Connect to {{{ .lake }}}** dialog.
