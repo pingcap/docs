@@ -18,7 +18,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         You can use these endpoints to create, list, get, delete, pause, resume, and scale changefeeds for real-time data replication to downstream systems, including Apache Kafka, MySQL, Amazon S3, and Alibaba Cloud OSS.
 
-        For more information, see Changefeed API v1beta1 Reference.
+        For more information, see Changefeed API v1beta2 Reference.
 
 ## September 1, 2026
 
