@@ -213,7 +213,7 @@ CREATE TABLE `sbtest` (
 
 `k`に関連するクエリ（例えば`SELECT * FROM sbtest WHERE k > 1`を実行すると、ローカルインデックス`idx`は5つの個別の範囲を生成しますが、グローバルインデックス`global_idx`は1つの範囲のみを生成します。TiDBの各範囲は1つ以上のRPCリクエストに対応するため、グローバルインデックスを使用することでRPCリクエストの数を数倍削減でき、インデックスクエリのパフォーマンスが向上します。
 
-次の図は、 `idx`と`global_idx`という 2つの異なるインデックスを使用して`SELECT * FROM sbtest WHERE k > 1`ステートメントを実行した場合の RPC 要求とデータフローの違いを示しています。
+次の図は、 `idx`と`global_idx`という 2つの異なるインデックスを使用して`SELECT * FROM sbtest WHERE k > 1`ステートメントを実行した場合の RPC リクエストとデータフローの違いを示しています。
 
 ![Mechanism of Global Indexes](/media/global-index-mechanism.png)
 

@@ -264,7 +264,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 | TiDB | tso-duration              | pd_tso_wait_duration                | 50ミリ秒未満   | トランザクションの TSO を取得するまでの待機時間。                                                                                      |
 | TiDB | get-token-duration        | tidb_get_token_duration             | 1ミリ秒未満    | トークンの取得にかかる時間を照会します。関連するTiDB設定項目は[`token-limit`](/command-line-flags-for-tidb-configuration.md#--token-limit)です。 |
 | TiDB | load-schema-duration      | tidb_load_schema_duration           | 1秒未満      | TiDB がスキーマ メタデータを更新するのにかかる時間。                                                                                    |
-| TiKV | scheduler-cmd-duration    | tikv_scheduler_command_duration     | 0.1秒未満    | TiKV が KV `cmd`要求を実行するのにかかる時間。                                                                                   |
+| TiKV | scheduler-cmd-duration    | tikv_scheduler_command_duration     | 0.1秒未満    | TiKV が KV `cmd`リクエストを実行するのにかかる時間。                                                                                   |
 | TiKV | handle-snapshot-duration  | tikv_handle_snapshot_duration       | 30秒未満     | TiKV がスナップショットを処理するのにかかる時間。                                                                                      |
 | TiKV | storage-write-duration    | tikv_storage_async_request_duration | 0.1秒未満    | TiKV の書き込みレイテンシー。                                                                                                |
 | TiKV | storage-snapshot-duration | tikv_storage_async_request_duration | 50ミリ秒未満   | TiKV がスナップショットを取得するのにかかる時間。                                                                                      |

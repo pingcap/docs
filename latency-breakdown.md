@@ -609,10 +609,10 @@ Diagram(
 ```
 
 - リクエストの送信にかかる全体的な所要時間は`tidb_tikvclient_request_seconds`と測定されます。
-- RPC クライアントは各ストアへの接続プール (ConnArray という名前) を維持し、各プールにはバッチ要求 (送信) チャネルを持つ BatchConn があります。
+- RPC クライアントは各ストアへの接続プール (ConnArray という名前) を維持し、各プールにはバッチリクエスト (送信) チャネルを持つ BatchConn があります。
 - ストアが TiKV であり、バッチサイズが正の場合、バッチが有効になります。これはほとんどの場合に当てはまります。
-- バッチ要求チャネルのサイズは[`tikv-client.max-batch-size`](/tidb-configuration-file.md#max-batch-size) (デフォルトは`128` ) で、エンキューの期間は`tidb_tikvclient_batch_wait_duration`として観測されます。
-- ストリーム要求には`CmdBatchCop` 、 `CmdCopStream` 、 `CmdMPPConn` 3種類があり、ストリームから最初の応答を取得するために追加の`recv()`呼び出しが必要になります。
+- バッチリクエストチャネルのサイズは[`tikv-client.max-batch-size`](/tidb-configuration-file.md#max-batch-size) (デフォルトは`128` ) で、エンキューの期間は`tidb_tikvclient_batch_wait_duration`として観測されます。
+- ストリームリクエストには`CmdBatchCop` 、 `CmdCopStream` 、 `CmdMPPConn` 3種類があり、ストリームから最初の応答を取得するために追加の`recv()`呼び出しが必要になります。
 
 まだいくらかのレイテンシーが観測されていますが、 `tidb_tikvclient_request_seconds`は次のように概算できます。
 

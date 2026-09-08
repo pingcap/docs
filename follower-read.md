@@ -28,7 +28,7 @@ Follower Read を実行する際、TiDB はトポロジ情報に基づいて適�
 
 Follower Read は次のシナリオに適しています。
 
-- 読み取り要求が集中するアプリケーション、または読み取りホットスポットが顕著なアプリケーション。
+- 読み取りリクエストが集中するアプリケーション、または読み取りホットスポットが顕著なアプリケーション。
 - ローカルレプリカからの読み取りを優先して、AZ 間の帯域幅使用量を削減するマルチ AZ デプロイ。
 - 全体的な読み取りパフォーマンスをさらに向上させたい読み取り/書き込み分離アーキテクチャ。
 
@@ -79,8 +79,8 @@ set [session | global] tidb_replica_read = '<target value>';
 
 - `tidb_replica_read`の値が`closest-adaptive`に設定されている場合:
 
-    - 読み取り要求の推定結果が[`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)以上の値である場合、TiDB は読み取り操作に同じアベイラビリティゾーン内のレプリカを選択することを優先します。 アベイラビリティゾーン間で読み取りトラフィックの不均衡な分散を回避するために、TiDB はすべてのオンライン TiDB および TiKV ノードのアベイラビリティゾーンの分散を動的に検出します。各アベイラビリティゾーンでは、 `closest-adaptive`構成が有効になる TiDB ノードの数は制限されており、これは常に TiDB ノードが最も少ないアベイラビリティゾーン内の TiDB ノードの数と同じであり、その他の TiDB ノードは自動的にリーダーレプリカから読み取ります。たとえば、TiDB ノードが 3つのアベイラビリティゾーン (A、B、C) に分散されていて、A と B にそれぞれ 3つの TiDB ノードが含まれ、C には 2つの TiDB ノードのみが含まれる場合、各アベイラビリティゾーンで`closest-adaptive`構成が有効になる TiDB ノードの数は 2 であり、A および B アベイラビリティゾーンのそれぞれのその他の TiDB ノードは読み取り操作にリーダーレプリカを自動的に選択します。
-    - 読み取り要求の推定結果が[`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)の値未満の場合、TiDB は読み取り操作に対してリーダーレプリカのみを選択できます。
+    - 読み取りリクエストの推定結果が[`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)以上の値である場合、TiDB は読み取り操作に同じアベイラビリティゾーン内のレプリカを選択することを優先します。 アベイラビリティゾーン間で読み取りトラフィックの不均衡な分散を回避するために、TiDB はすべてのオンライン TiDB および TiKV ノードのアベイラビリティゾーンの分散を動的に検出します。各アベイラビリティゾーンでは、 `closest-adaptive`構成が有効になる TiDB ノードの数は制限されており、これは常に TiDB ノードが最も少ないアベイラビリティゾーン内の TiDB ノードの数と同じであり、その他の TiDB ノードは自動的にリーダーレプリカから読み取ります。たとえば、TiDB ノードが 3つのアベイラビリティゾーン (A、B、C) に分散されていて、A と B にそれぞれ 3つの TiDB ノードが含まれ、C には 2つの TiDB ノードのみが含まれる場合、各アベイラビリティゾーンで`closest-adaptive`構成が有効になる TiDB ノードの数は 2 であり、A および B アベイラビリティゾーンのそれぞれのその他の TiDB ノードは読み取り操作にリーダーレプリカを自動的に選択します。
+    - 読み取りリクエストの推定結果が[`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)の値未満の場合、TiDB は読み取り操作に対してリーダーレプリカのみを選択できます。
 
 - `tidb_replica_read`を`learner`に設定すると、TiDB はラーナーレプリカからデータを読み取ります。現在のリージョンで利用可能なラーナーレプリカがない場合、TiDB は利用可能なリーダーレプリカまたはフォロワーレプリカからデータを読み取ります。
 
@@ -101,7 +101,7 @@ set [session | global] tidb_replica_read = '<target value>';
 
 ## 基本的な監視 {#basic-monitoring}
 
-[**TiDB** &gt; **KV 要求**&gt;**読み取り要求トラフィック**パネル (v8.5.4 の新機能)](/grafana-tidb-dashboard.md#kv-request)をチェックして、 Follower Read を有効にするかどうかを決定し、有効にした後のトラフィック削減効果を確認できます。
+[**TiDB** &gt; **KV リクエスト**&gt;**読み取りリクエストトラフィック**パネル (v8.5.4 の新機能)](/grafana-tidb-dashboard.md#kv-request)をチェックして、 Follower Read を有効にするかどうかを決定し、有効にした後のトラフィック削減効果を確認できます。
 
 </CustomContent>
 
@@ -113,7 +113,7 @@ Follower Read には、TiKV 読み取りリクエストをリーダーレプリ�
 
 ### 強力な一貫性のある読み取り {#strongly-consistent-reads}
 
-フォロワーノードが読み取り要求を処理する際、まずRaftプロトコルの`ReadIndex`を使用してリージョンのリーダーとやり取りし、現在のRaftグループの最新のコミットインデックスを取得します。リーダーの最新のコミットインデックスがフォロワーにローカルに適用された後、読み取り要求の処理が開始されます。
+フォロワーノードが読み取りリクエストを処理する際、まずRaftプロトコルの`ReadIndex`を使用してリージョンのリーダーとやり取りし、現在のRaftグループの最新のコミットインデックスを取得します。リーダーの最新のコミットインデックスがフォロワーにローカルに適用された後、読み取りリクエストの処理が開始されます。
 
 ![read-index-flow](/media/follower-read/read-index.png)
 

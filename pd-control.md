@@ -442,7 +442,7 @@ config set service-middleware grpc-rate-limit GetRegion qps 0
 config set service-middleware grpc-rate-limit GetRegion concurrency 0
 ```
 
-`service-middleware rate-limit`は、次の HTTP API 要求の最大レートと同時実行性を制御します。
+`service-middleware rate-limit`は、次の HTTP API リクエストの最大レートと同時実行性を制御します。
 
 - `GetRegion` : 指定されたリージョンに関する情報を取得する
 - `GetStore` : 指定されたストアの情報を取得する
