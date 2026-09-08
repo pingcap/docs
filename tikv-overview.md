@@ -25,7 +25,7 @@ TiKVは、クラスター内の各リージョンの適切なサイズを維持�
 
 PD がレプリカをある TiKV ノードから別の TiKV ノードに移動する場合、まずターゲットノードにLearnerレプリカを追加し、 LearnerレプリカのデータがLeaderレプリカのデータとほぼ同じになったら、PD はそれをFollowerレプリカに変更し、ソース ノードのFollowerレプリカを削除します。
 
-Leaderレプリカをあるノードから別のノードに移動させる場合も同様のメカニズムが採用されます。違いは、LearnerレプリカがFollowerレプリカになった後、"Leader Transfer"処理が実行され、Followerレプリカが自らをLeaderに選出するための選挙を積極的に提案することです。最終的に、新しいLeaderはソースノードから古いLeaderレプリカを削除します。
+Leaderレプリカをあるノードから別のノードに移動させる場合も同様のメカニズムが採用されます。違いは、LearnerレプリカがFollowerレプリカになった後、「Leader移行」処理が実行され、Followerレプリカが自らをLeaderに選出するための選挙を積極的に提案することです。最終的に、新しいLeaderはソースノードから古いLeaderレプリカを削除します。
 
 ## 分散トランザクション {#distributed-transaction}
 
