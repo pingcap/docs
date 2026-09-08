@@ -50,7 +50,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 - Prepare Statement Count: 各 TiDB インスタンスで実行される`Prepare`のステートメントの数とその合計数
 - Keep Alive OPM: 各TiDBインスタンスで毎分メトリクスが更新される回数。通常は注意する必要はありません。
 - Panic And Critical Error: TiDB で発生したパニックと重大なエラーの数
-- Time Jump Back OPS: 各 TiDB インスタンスでオペレーティングシステムが毎秒巻き戻す回数
+- Time Jump Back OPS: 各 TiDB インスタンスでオペレーティングシステムの時刻が毎秒巻き戻る回数
 - Get Token Duration: 各接続でトークンを取得するのにかかる時間コスト
 - Skip Binlog Count: TiDB のbinlog書き込み失敗数。v8.4.0 以降では TiDB Binlogが削除され、このメトリックには値がありません。
 - Client Data Traffic: TiDBとクライアントのデータトラフィック統計
