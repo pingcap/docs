@@ -533,7 +533,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     詳細な手順については、 [ノードサイズを変更する](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)を参照してください。
 
-- 圧縮ファイルのインポートをサポートします。CSVファイルとSQLファイルの形式は、 `.gzip` `.zst` 。この機能`.gz` `.zstd`より効率的かつコスト効率の高いデータインポートが可能になり、データ転送コスト`.snappy`削減できます。
+- 圧縮ファイルのインポートをサポートします。CSVファイルとSQLファイルを`.gzip`、 `.gz`、 `.zstd`、 `.zst`、および`.snappy`形式でインポートできます。この機能により、より効率的かつコスト効率の高いデータインポートが可能になり、データ転送コストを削減できます。
 
     詳細については、 [クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)および[サンプルデータのインポート](/tidb-cloud/import-sample-data.md)を参照してください。
 
