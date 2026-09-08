@@ -104,7 +104,7 @@ TiDB Cloud Essential and TiDB Cloud Premium support only `SESSION` rules for `ti
 
 Type constraints are as follows:
 
-- Numeric types (`int64`, `uint64`, `float64`) uniformly require `>= 0`. Negative values will result in a parsing error.
+- Numeric types (`int64`, `uint64`, `float64`) require values greater than or equal to `0`. Negative values result in a parsing error.
     - `int64`: the maximum value is `2^63-1`.
     - `uint64`: the maximum value is `2^64-1`.
     - `float64`: the general upper limit is approximately `1.79e308`. Currently, parsing is done using Go's `ParseFloat`. While `NaN`/`Inf` can be parsed, they might lead to rules that are always true or always false. It is not recommended to use them.
