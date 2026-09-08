@@ -73,7 +73,7 @@ IAMロールが存在しない場合は、 [Amazon S3 アクセスを構成す�
 
 IAMユーザーの AWS アクセスキーを使用して Amazon S3 バケットにアクセスすると、次のエラーが発生する場合があります。
 
-- アクセスキーID'{access_key_id}'とシークレットアクセスキー'{secret_access_key}'を使用したソース'{bucket_uri}'へのアクセスが拒否されました。
+- "アクセスキーID'{access_key_id}'とシークレットアクセスキー'{secret_access_key}'を使用したソース'{bucket_uri}'へのアクセスが拒否されました"
 
 これは、権限不足のため、 TiDB Cloud がAmazon S3 バケットにアクセスできなかったことを示しています。Amazon S3 バケットにアクセスするには、以下の権限が必要です。
 
