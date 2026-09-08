@@ -27,6 +27,52 @@ By default, SQL queries that take more than 300 milliseconds are considered as s
 
 </CustomContent>
 
+## Examples
+
+- Standard format (`SESSION` scope):
+
+    ```sql
+    SET SESSION tidb_slow_log_rules = 'Query_time: 0.5, Is_internal: false';
+    ```
+
+- Invalid format (`SESSION` scope does not support `Conn_ID`):
+
+    ```sql
+    SET SESSION tidb_slow_log_rules = 'Conn_ID: 12, Query_time: 0.5, Is_internal: false';
+    ```
+
+<CustomContent platform="tidb">
+
+- Global rule (applies to all connections):
+
+    ```sql
+    SET GLOBAL tidb_slow_log_rules = 'Query_time: 0.5, Is_internal: false';
+    ```
+
+- Global rules for specific connections (applied separately to the two connections `Conn_ID:11` and `Conn_ID:12`):
+
+    ```sql
+    SET GLOBAL tidb_slow_log_rules = 'Conn_ID: 11, Query_time: 0.5, Is_internal: false; Conn_ID: 12, Query_time: 0.6, Process_time: 0.3, DB: db1';
+    ```
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud" plan="dedicated">
+
+- Global rule (applies to all connections):
+
+    ```sql
+    SET GLOBAL tidb_slow_log_rules = 'Query_time: 0.5, Is_internal: false';
+    ```
+
+- Global rules for specific connections (applied separately to the two connections `Conn_ID:11` and `Conn_ID:12`):
+
+    ```sql
+    SET GLOBAL tidb_slow_log_rules = 'Conn_ID: 11, Query_time: 0.5, Is_internal: false; Conn_ID: 12, Query_time: 0.6, Process_time: 0.3, DB: db1';
+    ```
+
+</CustomContent>
+
 ## Unified rule syntax and type constraints
 
 - Rule capacity and separation: each supported scope can contain a maximum of 10 rules. Rules are separated by `;`.
@@ -147,52 +193,6 @@ TiDB Cloud Essential and TiDB Cloud Premium support only `SESSION` rules for `ti
 
 - If the current session has any `SESSION` rules, slow query log output is determined by the rule matching results.
 - `SHOW VARIABLES LIKE 'tidb_slow_log_rules'` and `SELECT @@SESSION.tidb_slow_log_rules` return the `SESSION` rule text, or an empty string if unset.
-
-</CustomContent>
-
-## Examples
-
-- Standard format (`SESSION` scope):
-
-    ```sql
-    SET SESSION tidb_slow_log_rules = 'Query_time: 0.5, Is_internal: false';
-    ```
-
-- Invalid format (`SESSION` scope does not support `Conn_ID`):
-
-    ```sql
-    SET SESSION tidb_slow_log_rules = 'Conn_ID: 12, Query_time: 0.5, Is_internal: false';
-    ```
-
-<CustomContent platform="tidb">
-
-- Global rule (applies to all connections):
-
-    ```sql
-    SET GLOBAL tidb_slow_log_rules = 'Query_time: 0.5, Is_internal: false';
-    ```
-
-- Global rules for specific connections (applied separately to the two connections `Conn_ID:11` and `Conn_ID:12`):
-
-    ```sql
-    SET GLOBAL tidb_slow_log_rules = 'Conn_ID: 11, Query_time: 0.5, Is_internal: false; Conn_ID: 12, Query_time: 0.6, Process_time: 0.3, DB: db1';
-    ```
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud" plan="dedicated">
-
-- Global rule (applies to all connections):
-
-    ```sql
-    SET GLOBAL tidb_slow_log_rules = 'Query_time: 0.5, Is_internal: false';
-    ```
-
-- Global rules for specific connections (applied separately to the two connections `Conn_ID:11` and `Conn_ID:12`):
-
-    ```sql
-    SET GLOBAL tidb_slow_log_rules = 'Conn_ID: 11, Query_time: 0.5, Is_internal: false; Conn_ID: 12, Query_time: 0.6, Process_time: 0.3, DB: db1';
-    ```
 
 </CustomContent>
 
