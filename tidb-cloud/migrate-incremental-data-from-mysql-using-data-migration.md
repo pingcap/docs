@@ -222,7 +222,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
     <CustomContent plan="premium">
 
-    - 接続方法として**パブリックを**使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
+    - 接続方法として**パブリック**を使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
     - **Private Link**を使用しており、選択したプライベートエンドポイントがAWSでまだ承認されていない場合は、 [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)で、エンドポイントサービスを作成したAWSリージョンに切り替え、 **Endpoint services**をクリックして、 TiDB Cloudからのエンドポイント接続要求を承認してください。
 
     </CustomContent>

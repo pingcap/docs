@@ -217,7 +217,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)開発エクスペリエンスを向上させるために`GET`リクエストのページ分割をサポートします。
 
-    `GET`リクエストの場合、**アドバンスプロパティ**で**ページネーションを**有効にし、エンドポイントを呼び出す際にクエリパラメータとして`page`と`page_size`を指定することで、結果をページ分けできます。例えば、1 ページあたり 10 項目の 2 ページ目を取得するには、次のコマンドを使用します。
+    `GET`リクエストの場合、**アドバンスプロパティ**で**ページネーション**を有効にし、エンドポイントを呼び出す際にクエリパラメータとして`page`と`page_size`を指定することで、結果をページ分けできます。例えば、1 ページあたり 10 項目の 2 ページ目を取得するには、次のコマンドを使用します。
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
@@ -275,7 +275,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     TiDB Cloud Dedicated クラスターで**Pause**をクリックすると、クラスターはまず**Pausing**状態になります。一時停止操作が完了すると、クラスターのステータスは**Paused**に変わります。
 
-    クラスターは、ステータスが**[一時停止]**に遷移した後にのみ再開できます。これにより、 **[一時停止]**と**[再開] を**素早くクリックすることで発生する異常な再開の問題が解決されます。
+    クラスターは、ステータスが**[一時停止]**に遷移した後にのみ再開できます。これにより、 **[一時停止]**と**[再開]** を素早くクリックすることで発生する異常な再開の問題が解決されます。
 
     詳細については[TiDB Cloud Dedicated クラスターを一時停止または再開する](/tidb-cloud/pause-or-resume-tidb-cluster.md)を参照してください。
 
@@ -296,9 +296,9 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     詳細については[プロパティを構成する](/tidb-cloud/data-service-manage-endpoint.md#configure-properties)を参照してください。
 
-- TiDB Cloud [Data Service](https://tidbcloud.com/project/data-service)で`POST` `PUT`リクエストメソッドの**バッチ操作を**`DELETE`します。
+- TiDB Cloud [Data Service](https://tidbcloud.com/project/data-service)で`POST` `PUT`リクエストメソッドの**バッチ操作**を`DELETE`します。
 
-    エンドポイントで**バッチ操作を**有効にすると、単一のリクエストで複数の行に対する操作を実行できるようになります。例えば、単一のリクエスト`POST`で複数行のデータを挿入できます。
+    エンドポイントで**バッチ操作**を有効にすると、単一のリクエストで複数の行に対する操作を実行できるようになります。例えば、単一のリクエスト`POST`で複数行のデータを挿入できます。
 
     詳細については[高度なプロパティ](/tidb-cloud/data-service-manage-endpoint.md#advanced-properties)を参照してください。
 
@@ -496,7 +496,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - [**イベント**](/tidb-cloud/tidb-cloud-events.md)ページに新しいイベントタイプ（ `ImportData` ）を追加します。
 
-- TiDB Cloudコンソールから**Playground を**削除します。
+- TiDB Cloudコンソールから**Playground** を削除します。
 
     最適化されたエクスペリエンスを備えた新しいスタンドアロン Playgroundにご期待ください。
 
@@ -820,7 +820,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     SQL診断を使用すると、SQL関連の実行時ステータスに関する詳細な分析情報を取得できるため、SQLパフォーマンスチューニングの効率が向上します。現在、Serverless TierのSQL診断機能は、スロークエリデータのみを提供しています。
 
-    SQL 診断を使用するには、 Serverless Tierクラスター ページの左側のナビゲーションバーで**[SQL 診断] を**クリックします。
+    SQL 診断を使用するには、 Serverless Tierクラスター ページの左側のナビゲーションバーで**[SQL 診断]** をクリックします。
 
 **コンソールの変更**
 
@@ -969,13 +969,13 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     Chat2Query では、AI に SQL クエリを自動的に生成させたり、SQL クエリを手動で記述したり、ターミナルなしでデータベースに対して SQL クエリを実行したりできます。
 
-    Chat2Query にアクセスするには、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、クラスター名をクリックして、左側のナビゲーションペインで**Chat2Query を**クリックします。
+    Chat2Query にアクセスするには、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、クラスター名をクリックして、左側のナビゲーションペインで**Chat2Query** をクリックします。
 
 ## 2023年1月4日 {#january-4-2023}
 
 **一般的な変更**
 
-- AWS でホストされ、2022年 12月 31日以降に作成されたTiDB Cloud Dedicated クラスターの**ノードサイズ (vCPU + RAM) を**増やすことで、TiDB、TiKV、およびTiFlashノードのスケールアップをサポートします。
+- AWS でホストされ、2022年 12月 31日以降に作成されたTiDB Cloud Dedicated クラスターの**ノードサイズ (vCPU + RAM)** を増やすことで、TiDB、TiKV、およびTiFlashノードのスケールアップをサポートします。
 
     ノードサイズを[TiDB Cloudコンソールを使用する](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)または[TiDB Cloud API（ベータ版）を使用する](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)増やすことができます。
 

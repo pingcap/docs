@@ -178,7 +178,7 @@ TiDB Cloud Essentialのデータ移行機能は、以下のデータソースと
 
 <CustomContent plan="premium">
 
-TiDB Cloud Premium の場合、データ移行機能は次の MySQL 互換ソースデータベースをサポートしており、 **MySQL は**移行ジョブウィザードで使用できる唯一のデータソース タイプです。サポートされている接続方法については、[ネットワーク接続を確保する](#ensure-network-connectivity)を参照してください。
+TiDB Cloud Premium の場合、データ移行機能は次の MySQL 互換ソースデータベースをサポートしており、 **MySQL**は移行ジョブウィザードで使用できる唯一のデータソース タイプです。サポートされている接続方法については、[ネットワーク接続を確保する](#ensure-network-connectivity)を参照してください。
 
 | データソース                             | サポートされているバージョン |
 | :--------------------------------- | :------------- |
@@ -780,7 +780,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
     </CustomContent>
     <CustomContent plan="premium">
 
-    - 接続方法として**パブリックを**使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
+    - 接続方法として**パブリック**を使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
     - **Private Link**を使用しており、選択したプライベートエンドポイントがAWSでまだ承認されていない場合は、 [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)でエンドポイントサービスを作成したAWSリージョンに切り替え、 **Endpoint services**を選択し、 TiDB Cloudからのエンドポイント接続要求を承認してください。
 
     </CustomContent>

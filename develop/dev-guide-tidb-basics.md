@@ -15,7 +15,7 @@ TiDB を使い始める前に、TiDB がどのように動作するかに関す�
 
 TiDBは分散トランザクションをサポートし、モード[楽観的トランザクション](/optimistic-transaction.md)とモード[悲観的トランザクション](/pessimistic-transaction.md)の両方を提供しています。現在のバージョンのTiDBでは、デフォルトで**悲観的トランザクション**モードが採用されており、従来のモノリシックデータベース（MySQLなど）と同様にTiDBでトランザクションを実行できます。
 
-[`BEGIN`](/sql-statements/sql-statement-begin.md)でトランザクションを開始するか、 `BEGIN PESSIMISTIC`で**悲観的トランザクションを**明示的に指定するか、 `BEGIN OPTIMISTIC`で**楽観的トランザクション**を明示的に指定することができます。その後、トランザクションをコミット（ [`COMMIT`](/sql-statements/sql-statement-commit.md) ）またはロールバック（ [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) ）することができます。
+[`BEGIN`](/sql-statements/sql-statement-begin.md)でトランザクションを開始するか、 `BEGIN PESSIMISTIC`で**悲観的トランザクション**を明示的に指定するか、 `BEGIN OPTIMISTIC`で**楽観的トランザクション**を明示的に指定することができます。その後、トランザクションをコミット（ [`COMMIT`](/sql-statements/sql-statement-commit.md) ）またはロールバック（ [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) ）することができます。
 
 TiDBは、 `BEGIN`の開始から`COMMIT`または`ROLLBACK`の終了までのすべてのステートメントのアトミック性を保証します。つまり、この期間中に実行されるすべてのステートメントは、全体として成功するか失敗するかのいずれかになります。これは、アプリケーション開発に必要なデータの一貫性を確保するために使用されます。
 
