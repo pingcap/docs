@@ -173,7 +173,7 @@ tiup cluster check <cluster-name> --cluster
 コマンドが実行されると、"Region status"のチェック結果が出力されます。
 
 - 結果が"All Regions are healthy"であれば、現在のクラスター内のすべてのリージョンは正常であり、アップグレードを続行できます。
-- 結果が「リージョンが完全に正常ではありません：m個のミスピア、n個の保留ピア」で、「他の操作を行う前に、異常なリージョンを修正してください。」というメッセージが表示される場合、現在のクラスタ内の一部のリージョンに異常があります。チェック結果が"All Regions are healthy"になるまで、異常のトラブルシューティングを行う必要があります。その後、アップグレードを続行できます。
+- 結果が"Regions are not fully healthy: m miss-peer, n pending-peer"で、"Please fix unhealthy regions before other operations."というメッセージが表示される場合、現在のクラスタ内の一部のリージョンに異常があります。チェック結果が"All Regions are healthy"になるまで、異常のトラブルシューティングを行う必要があります。その後、アップグレードを続行できます。
 
 ## TiDBクラスタをアップグレードする {#upgrade-the-tidb-cluster}
 
