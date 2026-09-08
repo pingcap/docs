@@ -60,7 +60,7 @@ In `TiDB-X-CLOUD.202603.1`:
 
     Now TiDB supports using table aliases in the `FOR UPDATE OF` clause. TiDB can now correctly resolve locking targets from the `FROM` clause, including aliased tables, ensuring that row locks take effect as expected. This improves MySQL compatibility and makes `SELECT ... FOR UPDATE OF` statements more stable and reliable in queries that use table aliases.
 
-    For more information, see [documentation](https://docs.pingcap.com/tidbcloud/sql-statement-modify-column/?plan=premium).
+    For more information, see [documentation](https://docs.pingcap.com/tidbcloud/sql-statement-select/?plan=premium).
 
 * Support partial indexes to reduce index storage and DML maintenance overhead [#62664](https://github.com/pingcap/tidb/issues/62664) [#62761](https://github.com/pingcap/tidb/issues/62761) [#62758](https://github.com/pingcap/tidb/issues/62758) [#63447](https://github.com/pingcap/tidb/issues/63447) [#64344](https://github.com/pingcap/tidb/issues/64344) @[YangKeao](https://github.com/YangKeao) @[winoros](https://github.com/winoros) @[wjhuang2016](https://github.com/wjhuang2016) <!-- (dup): release-8.5.7.md > Features > SQL --> <!-- miss issue https://github.com/pingcap/tidb/issues/63447 in release-8.5.7.md --> <!-- exclude author wjhuang2016 in release-8.5.7.md --> <!-- pr: https://github.com/pingcap/tidb/pull/64434, https://github.com/pingcap/tidb/pull/62762, https://github.com/pingcap/tidb/pull/62759, https://github.com/pingcap/tidb/pull/65051 -->
 
