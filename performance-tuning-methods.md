@@ -95,10 +95,8 @@ TiDBは、SQL処理パスとデータベース時間を継続的に測定・収�
     >
     > - `execute`実行時間は、KVリクエストの合計時間と`tso_wait`の実行時間の合計よりも大幅に長くなる可能性があります。これは、SQL実行時間のほとんどがTiDBエグゼキュータ内で費やされていることを意味します。以下に、よくある2つの例を示します。
     >
-    > ```
-    > - Example 1: After TiDB executor reads a large amount of data from TiKV, it needs to do complex join and aggregation inside TiDB, which consumes a lot of time.
-    > - Example 2: The application experiences serious write statement lock conflicts. Frequent lock retries result in long `Retried execution time`.
-    > ```
+    > - 例1: TiDBエグゼキュータがTiKVから大量のデータを読み取った後、TiDB内部で複雑な結合や集計を行う必要があり、多くの時間を消費します。
+    > - 例2: アプリケーションで深刻な書き込み文のロック競合が発生しています。頻繁なロック再試行により、 `Retried execution time`が長くなります。
 
 **例2: OLTP読み取り中心のワークロード**
 
