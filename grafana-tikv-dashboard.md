@@ -156,7 +156,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 ### Raft admin {#raft-admin}
 
-- Admin proposals：1秒あたりの管理者提案数
+- Admin proposals：1秒あたりの管理提案数
 - Admin apply: 1秒あたりに処理される適用コマンドの数
 - Check split：1秒あたりのRaftstore分割チェックコマンドの数
 - 99.99% Check split duration: 分割チェックコマンドの実行に要した時間 (P99.99)
