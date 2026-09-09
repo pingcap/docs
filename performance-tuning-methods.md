@@ -194,7 +194,7 @@ TPC-C ワークロードは主に`UPDATE` 、 `SELECT` 、 `INSERT`文です。�
 
 #### KV/TSO Request OPS and KV Request Time By Source {#kv-tso-request-ops-and-kv-request-time-by-source}
 
-- KV/TSOリクエストOPSパネルでは、1秒あたりのKVおよびTSOリクエストの統計情報を確認できます。統計情報のうち、 `kv request total`は TiDBからTiKVへのすべてのリクエストの合計を表します。TiDBからPDおよびTiKVへのリクエストの種類を観察することで、クラスター内のワークロードプロファイルを把握できます。
+- KV/TSO Request OPSパネルでは、1秒あたりのKVおよびTSOリクエストの統計情報を確認できます。統計情報のうち、 `kv request total`は TiDBからTiKVへのすべてのリクエストの合計を表します。TiDBからPDおよびTiKVへのリクエストの種類を観察することで、クラスター内のワークロードプロファイルを把握できます。
 - KV Request Time By Source パネルでは、各 KV リクエストタイプとすべてのリクエストソースの時間比率を表示できます。
     - kv リクエスト合計時間: 1秒あたりの KV およびTiFlashリクエストの処理時間の合計。
     - 各 KV リクエストと対応するリクエストソースは積み上げ棒グラフを形成し、 `external`は通常のビジネスリクエストを識別し、 `internal`は内部アクティビティリクエスト (DDL やauto analyzeリクエストなど) を識別します。
