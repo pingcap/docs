@@ -5404,11 +5404,11 @@ SHOW WARNINGS;
 
 <CustomContent platform="tidb-cloud">
 
-### `tidb_paging_size_bytes` <span class="version-mark">New in CLOUD.202603</span>
+### `tidb_paging_size_bytes` <span class="version-mark">New in CLOUD.202603.1</span>
 
 > **Note:**
 >
-> This variable is only available on TiDB Cloud Essential and Premium, whose kernel version is TiDB-X-CLOUD.202603 or later.
+> This variable is only available on TiDB Cloud Essential and Premium, whose kernel version is TiDB-X-CLOUD.202603.1 or later.
 
 - Scope: SESSION
 - Persists to cluster: Yes
