@@ -78,7 +78,7 @@ useServerPrepStmts=false
 
 ### アプリケーション構成 {#application-configuration}
 
-シナリオ1では、アプリケーションはJDBC接続文字列に新しいパラメータ`useConfigs=maxPerformance`を追加します。このパラメータを使用することで、JDBCからデータベースに送信されるSQL文（例： `select @@session.transaction_read_only` ）を削減できます。完全な設定は次のとおりです。
+シナリオ1では、アプリケーションはJDBC接続文字列に新しいパラメータ`useConfigs=maxPerformance`を追加します。このパラメータを使用することで、JDBCからデータベースに送信されるSQL文（例： `select @@session.transaction_read_only` ）を排除できます。完全な設定は次のとおりです。
 
 ```
 useServerPrepStmts=false&useConfigs=maxPerformance
@@ -206,7 +206,7 @@ TiDB の平均 CPU 使用率は 874% から 936% に増加します。
 
 #### TiDB Dashboard {#tidb-dashboard}
 
-TiDB CPU 使用率のフレーム チャートから、 `CompileExecutePreparedStmt`と`Optimize` CPU 消費量が大幅に増加していないことがわかります。CPU の 25% は`Prepare`コマンドによって消費されており、これには`PlanBuilder`や`parseSQL`などの Prepare の解析関連の関数が含まれています。
+TiDB CPU 使用率のフレーム チャートから、 `CompileExecutePreparedStmt`と`Optimize`のCPU消費量がごくわずかであることがわかります。CPU の 25% は`Prepare`コマンドによって消費されており、これには`PlanBuilder`や`parseSQL`などの Prepare の解析関連の関数が含まれています。
 
 PreparseStmt CPU = 25% CPU 時間 = 12.75秒
 
@@ -243,7 +243,7 @@ PreparseStmt CPU = 25% CPU 時間 = 12.75秒
 
 シナリオ3と比較すると、シナリオ4でも3種類のコマンドが使用されます。違いは、シナリオ4では実行プランキャッシュが使用されるため、コンパイル時間が大幅に短縮され、クエリの実行時間も短縮され、QPSが向上することです。
 
-`StmtPrepare`と`StmtClose`コマンドはデータベース処理時間を大量に消費し、アプリケーションがSQL文を実行するたびにアプリケーションとTiDB間のやり取りの回数を増加させます。次のシナリオでは、JDBC設定を通じてこれらの2つのコマンドの呼び出しを削減することで、パフォーマンスをさらにチューニングします。
+`StmtPrepare`と`StmtClose`コマンドはデータベース処理時間を大量に消費し、アプリケーションがSQL文を実行するたびにアプリケーションとTiDB間のやり取りの回数を増加させます。次のシナリオでは、JDBC設定を通じてこれらの2つのコマンドの呼び出しを排除することで、パフォーマンスをさらにチューニングします。
 
 ## シナリオ5. クライアント側で準備されたオブジェクトをキャッシュする {#scenario-5-cache-prepared-objects-on-the-client-side}
 
@@ -365,7 +365,7 @@ RC Read を`set global tidb_rc_read_check_ts=on;`で有効にした後、RC Read
 
 ### アプリケーション構成 {#application-configuration}
 
-シナリオ6と比較して、アプリケーション構成は同じです。唯一の違いは、シナリオ7では、ビジネス用に読み取り専用テーブルをキャッシュするために、 `alter table t1 cache;`ようなSQL文を使用する点です。
+シナリオ6と比較して、アプリケーション構成は同じです。唯一の違いは、シナリオ7では、ビジネス用に読み取り専用テーブルをキャッシュするために、 `alter table t1 cache;`のようなSQL文を使用する点です。
 
 ### パフォーマンス分析 {#performance-analysis}
 
