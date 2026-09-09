@@ -98,7 +98,7 @@ FROM
 
 ![QPS3](/media/best-practices/QPS3.png)
 
-[RaftストアCPU](/grafana-tikv-dashboard.md)はスレッド`raftstore`のCPU使用率で、通常は書き込み負荷を表します。このシナリオでは、 `tikv-3`がこのRaftグループのLeader、 `tikv-0`と`tikv-1`フォロワーです。他のノードの負荷はほぼ空です。
+[Raft store CPU](/grafana-tikv-dashboard.md)はスレッド`raftstore`のCPU使用率で、通常は書き込み負荷を表します。このシナリオでは、 `tikv-3`がこのRaftグループのLeader、 `tikv-0`と`tikv-1`がフォロワーです。他のノードの負荷はほぼ空です。
 
 PD の監視メトリックでも、ホットスポットが発生したことが確認されます。
 
