@@ -174,7 +174,7 @@ Fields related to storage engines:
 
 ## Related system variables
 
-* [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-new-in-v856): see [`tidb_slow_log_rules` recommendations](/config-slow-query-trigger-rules.md#recommendations)
+* [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules): see [`tidb_slow_log_rules` recommendations](/config-slow-query-trigger-rules.md#recommendations)
 
 * [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold): sets the threshold for slow query logging. SQL statements whose execution time exceeds this threshold are recorded in the slow query log. The default value is `300ms` (milliseconds).
 
@@ -182,7 +182,7 @@ Fields related to storage engines:
     >
     > Time-related fields in `tidb_slow_log_rules`, such as `Query_time` and `Process_time`, use seconds as the unit and can include decimals, while [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) uses milliseconds.
 
-* [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v856): sets the maximum number of slow query log entries that can be written per second. The default value is `0`. This variable is introduced in v8.5.6.
+* [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec): sets the maximum number of slow query log entries that can be written per second. The default value is `0`. This variable is introduced in v8.5.6.
     * A value of `0` means there is no limit on the number of slow query log entries written per second.
     * A value greater than `0` means TiDB writes at most the specified number of slow query log entries per second. Any excess log entries are discarded and not written to the slow query log file.
     * It is recommended to set this variable after enabling `tidb_slow_log_rules` to prevent rule-based slow query logging from being triggered too frequently.
