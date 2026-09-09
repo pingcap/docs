@@ -104,7 +104,7 @@ TiDBは、SQL処理パスとデータベース時間を継続的に測定・収�
 
 ![OLTP](/media/performance/oltp_normal_db_time.png)
 
-- Database Time by SQL Type: 時間のかかる主なステートメントは`SELECT` 、 `COMMIT` 、 `UPDATE` 、 `INSERT`で、その中で`SELECT`最も多くのデータベース時間を消費します。
+- Database Time by SQL Type: 時間のかかる主なステートメントは`SELECT` 、 `COMMIT` 、 `UPDATE` 、 `INSERT`で、その中で`SELECT`が最も多くのデータベース時間を消費します。
 - Database Time by SQL Phase: ほとんどの時間は緑色の`execute`フェーズで消費されます。
 - SQL Execute Time Overview: SQL 実行フェーズでは、濃い茶色の`pd tso_wait` 、青色の`KV Get` 、緑色の`Prewrite`と`Commit`時間がかかっています。
 
