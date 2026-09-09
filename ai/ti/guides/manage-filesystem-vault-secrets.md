@@ -5,7 +5,7 @@ summary: Learn how to store, read, delegate, inject, audit, revoke, and mount se
 
 # Manage TiDB Cloud Filesystem Vault Secrets
 
-Use `ti fs-vault` to manage secrets and give users or agents narrowly scoped, time-limited access.
+This document describes how to use `ti fs-vault` commands in the TiDB Cloud CLI to manage secrets and give users or agents narrowly scoped, time-limited access.
 
 ## Prerequisites
 

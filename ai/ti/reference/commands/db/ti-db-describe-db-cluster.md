@@ -5,7 +5,7 @@ summary: Describe a TiDB Cloud Starter cluster.
 
 # ti db describe-db-cluster
 
-Describes one TiDB Cloud Starter instance. Use `--view FULL` to request expanded fields. The command rejects the cluster if its API metadata does not verify it as Starter.
+Get information about a TiDB Cloud Starter instance. Use `--view FULL` to request expanded fields. The command rejects the cluster if its API metadata does not verify it as Starter.
 
 > **Note:**
 >
@@ -32,10 +32,10 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 
 ## Examples
 
-- Describe a cluster:
+- Get information about a TiDB Cloud Starter instance:
 
     ```bash
-    # Return the cluster state, placement, and connection metadata.
+    # Return the instance state, placement, and connection metadata.
     ti db describe-db-cluster --db-cluster-id "<cluster-id>" --view FULL
     ```
 

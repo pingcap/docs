@@ -5,7 +5,7 @@ summary: Learn how to inspect and configure media extraction and embedding provi
 
 # Configure TiDB Cloud Filesystem AI Providers
 
-Configure optional media extraction and embedding providers when applications need a Filesystem to process or embed stored content.
+This document describes how to configure optional media extraction and embedding providers when applications need a Filesystem to process or embed stored content.
 
 ## Prerequisites
 

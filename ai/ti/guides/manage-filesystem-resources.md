@@ -5,7 +5,7 @@ summary: Learn how to safely create, inspect, check, select, and delete TiDB Clo
 
 # Manage TiDB Cloud Filesystem Resources
 
-Use `ti fs` to provision TiDB Cloud Filesystem resources and inspect their remote metadata and access status.
+This document describes how to use `ti fs` commands in TiDB Cloud CLI to provision TiDB Cloud Filesystem resources and inspect their remote metadata and access status.
 
 ## Prerequisites
 

@@ -5,7 +5,7 @@ summary: Learn how to import, generate, scope, inspect, disable, refresh, and re
 
 # Manage TiDB Cloud Filesystem Tokens
 
-Use Filesystem tokens to give users or automation access to a TiDB Cloud Filesystem without sharing TiDB Cloud API credentials.
+You can use Filesystem tokens to give users or automation access to a TiDB Cloud Filesystem without sharing TiDB Cloud API credentials.
 
 ## Prerequisites
 

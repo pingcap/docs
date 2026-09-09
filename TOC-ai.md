@@ -12,7 +12,7 @@
 ## GUIDES
 
 - [Connect to TiDB via Python](/ai/guides/connect.md)
-- Search Features
+- Search & Retrieval
   - Vector Search
     - [Overview](/ai/concepts/vector-search-overview.md)
     - [Vector Search Guide](/ai/guides/vector-search.md)

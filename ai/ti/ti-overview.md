@@ -60,42 +60,14 @@ Drive9 is the data-plane runtime used by TiDB Cloud Filesystem. The TiDB Cloud C
 
 The `ti` executable owns profile selection, TiDB Cloud credentials, region and Filesystem selection, output formatting, and CLI error behavior. The bundled runtime implements Filesystem data-plane semantics, FUSE and WebDAV mounts, layers, pack and unpack, Git workspace acceleration, journals, and vault operations. You do not need to configure or invoke `ti-drive9` separately for normal TiDB Cloud CLI workflows.
 
-## Find the right documentation
+## Get started
 
-Follow the [Quick Start](/ai/ti/ti-quick-start.md) to install the TiDB Cloud CLI and complete your first Starter or Filesystem workflow. Use these guides for task-oriented instructions:
+If you have not used the TiDB Cloud CLI before, follow the [Quick Start](/ai/ti/ti-quick-start.md) to install `ti`, configure a profile, and run your first Starter or Filesystem command.
 
-- [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md)
-- [TiDB Cloud Starter CLI Command Reference](/ai/ti/reference/ti-starter-database.md)
-- [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)
-- [TiDB Cloud Filesystem Git CLI Command Reference](/ai/ti/reference/ti-filesystem-git.md)
-- [TiDB Cloud Filesystem Journal CLI Command Reference](/ai/ti/reference/ti-filesystem-journal.md)
-- [TiDB Cloud Filesystem Vault CLI Command Reference](/ai/ti/reference/ti-filesystem-vault.md)
-- [Troubleshoot TiDB Cloud CLI](/ai/ti/reference/ti-troubleshooting.md)
+After the Quick Start, choose a path based on what you want to do:
 
-### Scenario references
-
-Use scenarios to follow a complete workflow that combines multiple commands and features:
-
-For users and automation:
-
-- [Run a Daily TiDB Cloud CLI Workflow](/ai/ti/reference/ti-daily-workflow-example.md)
-- [Query SQL with Explicit Roles](/ai/ti/reference/ti-query-sql-with-roles-example.md)
-- [Share a Filesystem Across Machines](/ai/ti/reference/ti-share-filesystem-across-machines-example.md)
-- [Hand Off CI Artifacts Between Jobs](/ai/ti/reference/ti-ci-artifact-handoff-example.md)
-
-For AI agents:
-
-- [Use a Filesystem in an Agent Sandbox](/ai/ti/reference/ti-agent-sandbox-example.md)
-- [Persist Agent State Across Sandboxes](/ai/ti/reference/ti-persistent-agent-state-example.md)
-- [Share a Read-Only Dataset Across Parallel Agents](/ai/ti/reference/ti-parallel-agent-dataset-example.md)
-- [Prepare a Git Workspace for Agents](/ai/ti/reference/ti-git-workspace-for-agents-example.md)
-- [Record an Agent Workflow in a Journal](/ai/ti/reference/ti-journal-agent-workflow-example.md)
-- [Delegate Secrets to an Agent](/ai/ti/reference/ti-vault-agent-secrets-example.md)
-
-### Reference
-
-- [TiDB Cloud CLI Command Reference](/ai/ti/reference/ti-cli-reference.md)
-- [TiDB Cloud CLI Configuration and Credentials](/ai/ti/reference/ti-configuration-and-credentials.md)
-- [TiDB Cloud CLI Regions, Security, and Limitations](/ai/ti/reference/ti-regions-security-and-limitations.md)
-
-To report a problem or suggest an improvement, create an issue in the [TiDB Cloud CLI GitHub repository](https://github.com/tidbcloud/ti-cli/issues).
+- **Manage Starter databases** — [Manage TiDB Cloud Starter Instances](/ai/ti/guides/manage-starter-instances.md)
+- **Work with Filesystem storage** — [Manage Filesystem Resources](/ai/ti/guides/manage-filesystem-resources.md)
+- **See end-to-end workflows** — Browse the Scenarios for Users and Automation or Scenarios for AI Agents sections in the sidebar.
+- **Look up a specific command** — [TiDB Cloud CLI Command Reference](/ai/ti/reference/ti-cli-reference.md)
+- **Report a problem** — Create an issue in the [TiDB Cloud CLI GitHub repository](https://github.com/tidbcloud/ti-cli/issues).

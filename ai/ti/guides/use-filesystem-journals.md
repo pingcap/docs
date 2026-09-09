@@ -5,7 +5,7 @@ summary: Learn how to create, append, read, search, and verify append-only journ
 
 # Use TiDB Cloud Filesystem Journals
 
-Use `ti fs-journal` to record ordered workflow events in an append-only journal with a verifiable hash chain.
+This document describes how to use `ti fs-journal` commands in the TiDB Cloud CLI to record ordered workflow events in an append-only journal with a verifiable hash chain.
 
 ## Prerequisites
 

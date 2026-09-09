@@ -5,28 +5,30 @@ summary: Learn how to use TiDB Cloud CLI to create and manage Starter instances,
 
 # Manage TiDB Cloud Starter Instances
 
-Use `ti db` to manage TiDB Cloud Starter instances, branches, and SQL access from a terminal or automation workflow.
+This document describes how to use `ti db` commands in the TiDB Cloud CLI to manage TiDB Cloud Starter instances, branches, and SQL access from a terminal or automation workflow.
 
 ## Prerequisites
 
 - [Install and configure TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
 - Configure a profile with credentials that can access TiDB Cloud Starter.
 
-## Create and inspect an instance
+## Create a TiDB Cloud Starter instance
 
-Create a Starter instance and wait until it becomes active:
+Create a TiDB Cloud Starter instance and wait until it becomes active:
 
 ```shell
 ti db create-db-cluster --db-cluster-type starter --db-cluster-name app-db --wait
 ```
 
-List Starter instances in the effective region:
+## List instances
+
+List TiDB Cloud Starter instances in the effective region:
 
 ```shell
 ti db list-db-clusters --db-cluster-type starter --output text
 ```
 
-To inspect one instance, pass its ID to [`describe-db-cluster`](/ai/ti/reference/commands/db/ti-db-describe-db-cluster.md).
+To get information about a TiDB Cloud Starter instance, pass its ID to [`describe-db-cluster`](/ai/ti/reference/commands/db/ti-db-describe-db-cluster.md).
 
 ## Manage branches
 
