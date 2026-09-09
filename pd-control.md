@@ -43,7 +43,7 @@ PD Controlを使用するには、 `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd
 tiup ctl:v<CLUSTER_VERSION> pd store -u http://127.0.0.1:2379
 ```
 
-インタラクティブモード:
+対話モード:
 
 ```bash
 tiup ctl:v<CLUSTER_VERSION> pd -i -u http://127.0.0.1:2379

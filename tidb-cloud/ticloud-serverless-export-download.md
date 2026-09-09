@@ -13,7 +13,7 @@ ticloud serverless export download [flags]
 
 ## 例 {#examples}
 
-エクスポートされたデータをインタラクティブモードでダウンロードします。
+エクスポートされたデータを対話モードでダウンロードします。
 
 ```shell
 ticloud serverless export download
