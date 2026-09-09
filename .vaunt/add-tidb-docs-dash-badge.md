@@ -60,11 +60,11 @@ You can use additional Vaunt features to showcase your contributions to other op
 
     The community boards provide community statistics, repository insights, and a view into repository achievements.
 
-    [![VauntCommunity](https://api.vaunt.dev/v1/github/entities/pingcap/badges/community)](https://community.vaunt.dev/board/pingcap)
+    [![VauntCommunity](https://api.vaunt.dev/v1/github/entities/pingcap/badges/community)](https://docs.vaunt.dev/developers/vaunt_open_source_community/)
 
     - Explore [your own community boards](https://community.vaunt.dev/).
     - Add the following code to your README file and replace `{{github_username}}` with your username:
 
     ```Markdown
-    [![VauntCommunity](https://api.vaunt.dev/v1/github/entities/{{github_username}}/badges/community)](https://community.vaunt.dev/board/{{github_username}})
+    [![VauntCommunity](https://api.vaunt.dev/v1/github/entities/{{github_username}}/badges/community)](https://docs.vaunt.dev/developers/vaunt_open_source_community/)
     ```
