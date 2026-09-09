@@ -7,7 +7,7 @@ summary: Learn about the features for the TiDB-X-CLOUD.202603.1 kernel.
 
 **Release date**: July 16, 2026
 
-**Applicable TiDB Cloud plan**: {{{ .premium }}}
+**Applicable TiDB Cloud plan**: {{{ .essential }}} and {{{ .premium }}}
 
 **TiDB X kernel version**: `TiDB-X-CLOUD.202603.1`
 
