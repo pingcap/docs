@@ -58,11 +58,11 @@ useServerPrepStmts=false
 
 ![performance-overview-1-for-query-interface](/media/performance/j-1.png)
 
-- SQL タイプ別のデータベース時間: `Select`文 タイプがほとんどの時間を費やします。
-- SQL フェーズ別のデータベース時間: `execute`フェーズと`compile`フェーズにほとんどの時間がかかります。
-- SQL 実行時間の概要: `Get`、`Cop`、および`tso wait`がほとんどの時間を費やします。
-- タイプ別 CPS: `Query`コマンドのみが使用されます。
-- プランキャッシュ OPS を使用したクエリ: データなしは、実行計画 キャッシュがヒットしていないことを示します。
+- Database Time by SQL Type: `Select`文 タイプがほとんどの時間を費やします。
+- Database Time by SQL Phase: `execute`フェーズと`compile`フェーズにほとんどの時間がかかります。
+- SQL Execute Time Overview: `Get`、`Cop`、および`tso wait`がほとんどの時間を費やします。
+- CPS By Type: `Query`コマンドのみが使用されます。
+- Queries Using Plan Cache OPS: データなしは、実行計画 キャッシュがヒットしていないことを示します。
 - クエリ期間では、`execute`と`compile`のレイテンシーの割合が最も高くなります。
 - 平均QPS = 56.8k
 
@@ -106,11 +106,11 @@ useServerPrepStmts=false&useConfigs=maxPerformance
 
 ![performance-overview-1-for-maxPerformance](/media/performance/j-2.png)
 
-- SQL タイプ別のデータベース時間: `Select`文 タイプがほとんどの時間を費やします。
-- SQL フェーズ別のデータベース時間: `execute`フェーズと`compile`フェーズにほとんどの時間がかかります。
-- SQL 実行時間の概要: `Get`、`Cop`、`Prewrite`、および`tso wait`がほとんどの時間を費やします。
+- Database Time by SQL Type: `Select`文 タイプがほとんどの時間を費やします。
+- Database Time by SQL Phase: `execute`フェーズと`compile`フェーズにほとんどの時間がかかります。
+- SQL Execute Time Overview: `Get`、`Cop`、`Prewrite`、および`tso wait`がほとんどの時間を費やします。
 - データベース時間では、`execute`と`compile`のレイテンシーの割合が最も高くなります。
-- タイプ別 CPS: `Query`コマンドのみが使用されます。
+- CPS By Type: `Query`コマンドのみが使用されます。
 - 平均QPS = 24.2k (56.3kから24.2k)
 - 実行計画 キャッシュにヒットしません。
 
@@ -162,12 +162,12 @@ Prepared Statement インターフェイスを使用した後、データベー�
 
 ![performance-overview-1-for-PrepStmts](/media/performance/j-3.png)
 
-QPSは24.4kから19.7kに低下しています。データベース時間の概要を見ると、アプリケーションが3種類のPreparedコマンドを使用しており、 `general`ステートメントタイプ（ `StmtPrepare`や`StmtClose`などのコマンドの実行時間を含む）がSQLタイプ別のデータベース時間で2番目に多いことがわかります。これは、Prepared Statementインターフェースを使用しても、実行プランキャッシュにヒットしていないことを示しています。これは、 `StmtClose`コマンド実行時に、TiDBが内部処理でSQL文の実行プランキャッシュをクリアするためです。
+QPSは24.4kから19.7kに低下しています。データベース時間の概要を見ると、アプリケーションが3種類のPreparedコマンドを使用しており、 `general`ステートメントタイプ（ `StmtPrepare`や`StmtClose`などのコマンドの実行時間を含む）がDatabase Time by SQL Typeで2番目に多いことがわかります。これは、Prepared Statementインターフェースを使用しても、実行プランキャッシュにヒットしていないことを示しています。これは、 `StmtClose`コマンド実行時に、TiDBが内部処理でSQL文の実行プランキャッシュをクリアするためです。
 
-- SQL タイプ別のデータベース時間: `Select`文 タイプが最も時間がかかり、次に`general`ステートメントが続きます。
-- SQL フェーズ別のデータベース時間: `execute`フェーズと`compile`フェーズにほとんどの時間がかかります。
-- SQL 実行時間の概要: `Get`、`Cop`、`Prewrite`、および`tso wait`がほとんどの時間を費やします。
-- タイプ別 CPS: 3種類のコマンド（`StmtPrepare`、`StmtExecute`、`StmtClose`）が使用されます。
+- Database Time by SQL Type: `Select`文 タイプが最も時間がかかり、次に`general`ステートメントが続きます。
+- Database Time by SQL Phase: `execute`フェーズと`compile`フェーズにほとんどの時間がかかります。
+- SQL Execute Time Overview: `Get`、`Cop`、`Prewrite`、および`tso wait`がほとんどの時間を費やします。
+- CPS By Type: 3種類のコマンド（`StmtPrepare`、`StmtExecute`、`StmtClose`）が使用されます。
 - 平均QPS = 19.7k (24.4kから19.7k)
 - 実行計画 キャッシュにヒットしません。
 
@@ -218,11 +218,11 @@ PreparseStmt CPU = 25% CPU 時間 = 12.75秒
 
 ![performance-overview-1-for-3-commands](/media/performance/j-4.png)
 
-- SQL タイプ別のデータベース時間: `Select`文 タイプが最も時間がかかります。
-- SQL フェーズ別のデータベース時間: `execute`フェーズがほとんどの時間を費やします。
-- SQL 実行時間の概要: `tso wait`、`Get`、および`Cop`がほとんどの時間を費やします。
-- 実行プランキャッシュがヒットしました。プランキャッシュを使用するクエリのOPSの値は、1秒あたり約`StmtExecute`です。
-- CPSタイプ別: 3種類のコマンド（シナリオ3と同じ）
+- Database Time by SQL Type: `Select`文 タイプが最も時間がかかります。
+- Database Time by SQL Phase: `execute`フェーズがほとんどの時間を費やします。
+- SQL Execute Time Overview: `tso wait`、`Get`、および`Cop`がほとんどの時間を費やします。
+- 実行プランキャッシュがヒットしました。Queries Using Plan Cache OPSの値は、1秒あたり約`StmtExecute`です。
+- CPS By Type: 3種類のコマンド（シナリオ3と同じ）
 - シナリオ 3 と比較すると、QPS が増加したため、 `general`ステートメントで消費される時間が長くなります。
 - 平均QPS = 22.1k (19.7kから22.1k)
 
@@ -277,11 +277,11 @@ useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSize=1000&prepStmtCache
 
 ![performance-overview-for-1-command](/media/performance/j-5.png)
 
-- SQL タイプ別のデータベース時間: `Select`文 タイプが最も多くの時間を費やし、 `general`ステートメント タイプは消えます。
-- SQL フェーズ別のデータベース時間: `execute`フェーズがほとんどの時間を費やします。
-- SQL 実行時間の概要: `tso wait`、`Get`、および`Cop`がほとんどの時間を費やします。
-- 実行プランキャッシュがヒットしました。プランキャッシュを使用するクエリのOPSの値は、1秒あたり約`StmtExecute`です。
-- タイプ別 CPS: `StmtExecute`コマンドのみが使用されます。
+- Database Time by SQL Type: `Select`文 タイプが最も多くの時間を費やし、 `general`ステートメント タイプは消えます。
+- Database Time by SQL Phase: `execute`フェーズがほとんどの時間を費やします。
+- SQL Execute Time Overview: `tso wait`、`Get`、および`Cop`がほとんどの時間を費やします。
+- 実行プランキャッシュがヒットしました。Queries Using Plan Cache OPSの値は、1秒あたり約`StmtExecute`です。
+- CPS By Type: `StmtExecute`コマンドのみが使用されます。
 - 平均QPS = 30.9k (22.1kから30.9k)
 
 TiDBの平均CPU使用率は827%から577%に低下しました。QPSが増加すると、TiKVの平均CPU使用率は313%に増加しました。
@@ -303,7 +303,7 @@ TiDBの平均CPU使用率は827%から577%に低下しました。QPSが増加�
 
 - シナリオ 4 と比較すると、シナリオ 5 の**CPS By Type**ペインには`StmtExecute`コマンドのみがあり、これにより 2回のネットワーク ラウンド トリップが回避され、システム全体の QPS が向上します。
 - QPSが増加すると、解析時間、コンパイル時間、実行時間の観点からレイテンシーは減少しますが、クエリ時間は増加します。これは、TiDBが`StmtPrepare`と`StmtClose`を非常に高速に処理するため、これら2つのコマンドタイプを削除すると平均クエリ時間が増加するためです。
-- SQLフェーズ別データベース時間では、 `execute`が最も時間がかかり、データベース時間とほぼ一致しています。一方、SQL実行時間の概要では、 `tso wait`が最も時間がかかり、 `execute`の4分の1以上がTSOの待機に費やされています。
+- Database Time by SQL Phaseでは、 `execute`が最も時間がかかり、データベース時間とほぼ一致しています。一方、SQL Execute Time Overviewでは、 `tso wait`が最も時間がかかり、 `execute`の4分の1以上がTSOの待機に費やされています。
 - 1秒あたりの`tso wait`実行時間の合計は5.46秒です。`tso wait`の実行時間の平均は196マイクロ秒、1秒あたりの`tso cmd`実行回数は28,000回で、QPSの30,900に非常に近い値です。これは、TiDBの分離レベル`read committed`の実装により、トランザクション内のすべてのSQL文がPDにTSOを要求する必要があるためです。
 
 TiDB v6.0 は`rc read`を提供します。これは`tso cmd`を削減することで`read committed`分離レベルを最適化します。この機能はグローバル変数`set global tidb_rc_read_check_ts=on;`によって制御されます。この変数を有効にすると、TiDB のデフォルトの動作は`repeatable-read`分離レベルと同じように動作し、PD から取得する必要があるのは`start-ts`と`commit-ts`です。トランザクション内のステートメントは、最初に`start-ts`を使用して TiKV からデータを読み取ります。TiKV から読み取られたデータが`start-ts`より前の場合、データは直接返されます。TiKV から読み取られたデータが`start-ts`より後の場合、データは破棄されます。TiDB は PD から TSO を要求し、読み取りを再試行します。後続のステートメントの`for update ts`では、最新の PD TSO が使用されます。
@@ -330,11 +330,11 @@ RC 読み取りを使用した後、QPS は 30.9k から 34.9k に増加し、 `
 
 ![performance-overview-1-for-rc-read](/media/performance/j-6.png)
 
-- SQL タイプ別のデータベース時間: `Select`文 タイプがほとんどの時間を費やします。
-- SQL フェーズ別のデータベース時間: `execute`フェーズがほとんどの時間を費やします。
-- SQL 実行時間の概要: `Get`、`Cop`、および`Prewrite`がほとんどの時間を費やします。
-- 実行プランキャッシュがヒットしました。プランキャッシュを使用するクエリのOPSの値は、1秒あたり約`StmtExecute`です。
-- タイプ別 CPS: `StmtExecute`コマンドのみが使用されます。
+- Database Time by SQL Type: `Select`文 タイプがほとんどの時間を費やします。
+- Database Time by SQL Phase: `execute`フェーズがほとんどの時間を費やします。
+- SQL Execute Time Overview: `Get`、`Cop`、および`Prewrite`がほとんどの時間を費やします。
+- 実行プランキャッシュがヒットしました。Queries Using Plan Cache OPSの値は、1秒あたり約`StmtExecute`です。
+- CPS By Type: `StmtExecute`コマンドのみが使用されます。
 - 平均QPS = 34.9k (30.9kから34.9k)
 
 1秒あたり`tso cmd`は28.3kから2.7kに減少します。
@@ -381,11 +381,11 @@ QPSは34.9kから40.9kに増加し、最も時間がかかるKVリクエスト�
 
 ![performance-overview-1-for-table-cache](/media/performance/j-7.png)
 
-- SQL タイプ別のデータベース時間: `Select`文 タイプがほとんどの時間を費やします。
-- SQL フェーズ別のデータベース時間: `execute`フェーズと`compile`フェーズにほとんどの時間がかかります。
-- SQL 実行時間の概要: `Prewrite`、`Commit`、および`Get`がほとんどの時間を費やします。
-- 実行プランキャッシュがヒットしました。プランキャッシュを使用するクエリのOPSの値は、1秒あたり約`StmtExecute`です。
-- タイプ別 CPS: `StmtExecute`コマンドのみが使用されます。
+- Database Time by SQL Type: `Select`文 タイプがほとんどの時間を費やします。
+- Database Time by SQL Phase: `execute`フェーズと`compile`フェーズにほとんどの時間がかかります。
+- SQL Execute Time Overview: `Prewrite`、`Commit`、および`Get`がほとんどの時間を費やします。
+- 実行プランキャッシュがヒットしました。Queries Using Plan Cache OPSの値は、1秒あたり約`StmtExecute`です。
+- CPS By Type: `StmtExecute`コマンドのみが使用されます。
 - 平均QPS = 40.9k (34.9kから40.9k)
 
 平均 TiDB CPU 使用率は 603% から 478% に低下し、平均 TiKV CPU 使用率は 346% から 256% に低下します。
