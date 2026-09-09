@@ -459,7 +459,7 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
 - 支持将 [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) 连接到 GitHub。
 
-    [连接 Data App 到 GitHub](/tidb-cloud/data-service-manage-github-connection.md) 后，你可以将 Data App 的所有配置作为 [代码文件](/tidb-cloud/data-service-app-config-files.md) 管理，实现 TiDB Cloud Data Service 与系统架构和 DevOps 流程的无缝集成。
+    [连接 Data App 到 GitHub](/tidb-cloud/data-service-manage-github-connection.md) 后，你可以将 Data App 的所有配置作为 [代码文件](/tidb-cloud/data-service-app-config-files.md) 在 GitHub 上管理，实现 TiDB Cloud Data Service 与系统架构和 DevOps 流程的无缝集成。
 
     该功能可帮助你轻松完成以下任务，提升 Data App 开发的 CI/CD 体验：
 

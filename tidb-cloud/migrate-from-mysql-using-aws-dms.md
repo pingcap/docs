@@ -19,7 +19,7 @@ AWS DMS 是一项云服务，可以轻松迁移关系型数据库、数据仓库
 
 - 如果源数据库为 Amazon RDS 或 Amazon Aurora，需要将 `binlog_format` 参数设置为 `ROW`。如果数据库使用的是默认参数组，则 `binlog_format` 参数默认为 `MIXED`，且无法修改。此时，你需要[创建一个新的参数组](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.Prerequisites.html#CHAP_GettingStarted.Prerequisites.params)，例如 `newset`，并将其 `binlog_format` 设置为 `ROW`。然后，[将默认参数组修改为 `newset`](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithDBInstanceParamGroups.html#USER_WorkingWithParamGroups.Modifying)。注意，修改参数组会重启数据库。
 - 检查并确保源数据库使用的排序规则（collation）与 TiDB 兼容。TiDB 中 utf8mb4 字符集的默认排序规则为 `utf8mb4_bin`，但在 MySQL 8.0 中，默认排序规则为 `utf8mb4_0900_ai_ci`。如果上游 MySQL 使用默认排序规则，由于 TiDB 不兼容 `utf8mb4_0900_ai_ci`，AWS DMS 无法在 TiDB 中创建目标表，也无法迁移数据。为解决此问题，你需要在迁移前将源数据库的排序规则修改为 `utf8mb4_bin`。TiDB 支持的字符集和排序规则完整列表请参见 [Character Set and Collation](https://docs.pingcap.com/tidb/stable/character-set-and-collation)。
-- TiDB 默认包含以下系统数据库：`INFORMATION_SCHEMA`、`PERFORMANCE_SCHEMA`、`mysql`、`sys` 和 `test`。创建 AWS DMS 迁移任务时，需要过滤掉这些系统数据库，不能使用默认的 `%` 选择迁移对象。否则，AWS DMS 会尝试将这些系统数据库从源数据库迁移到目标 TiDB，导致任务失败。为避免此问题，建议填写具体的数据库和表名。
+- 创建 AWS DMS 迁移任务时，不要使用默认的 `%` 通配符来选择数据库。而是仅显式指定要迁移的数据库和表。否则，AWS DMS 可能会尝试将源 MySQL 数据库中的 `INFORMATION_SCHEMA`、`PERFORMANCE_SCHEMA`、`mysql` 和 `sys` 等系统数据库迁移到 TiDB，这可能会导致迁移任务失败。
 - 将 AWS DMS 的公网和私网 IP 地址添加到源数据库和目标数据库的 IP 访问列表中。否则，在某些场景下网络连接可能会失败。
 - 使用 [VPC Peerings](/tidb-cloud/set-up-vpc-peering-connections.md#set-up-vpc-peering-on-aws) 或 [Private Endpoint connections](/tidb-cloud/set-up-private-endpoint-connections.md) 连接 AWS DMS 和 TiDB 集群。
 - 建议 AWS DMS 和 TiDB 集群使用同一区域，以获得更好的数据写入性能。

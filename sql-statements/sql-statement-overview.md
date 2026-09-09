@@ -278,7 +278,7 @@ TiDB 使用的 SQL 语句旨在遵循 ISO/IEC SQL 标准，并在必要时扩展
 | [`CREATE USER`](/sql-statements/sql-statement-create-user.md) | 创建新用户。 |
 | [`DROP ROLE`](/sql-statements/sql-statement-drop-role.md) | 删除已有角色。 |
 | [`DROP USER`](/sql-statements/sql-statement-drop-user.md) | 删除已有用户。 |
-| [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md) | 重新加载权限表中的权限到内存副本。 |
+| [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md) | 刷新权限表中的内存权限缓存。 |
 | [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md) | 授予权限。 |
 | [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md) | 授予角色。 |
 | [`RENAME USER`](/sql-statements/sql-statement-rename-user.md) | 重命名已有用户。 |

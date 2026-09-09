@@ -5,7 +5,7 @@ summary: 关于在 TiDB 数据库中使用 FLUSH PRIVILEGES 的概述。
 
 # FLUSH PRIVILEGES
 
-语句 `FLUSH PRIVILEGES` 指示 TiDB 重新加载权限表中的权限到内存副本中。你必须在手动编辑诸如 `mysql.user` 之类的表后执行此语句。然而，在使用 `GRANT` 或 `REVOKE` 等权限语句后，执行此语句不是必需的。要执行此语句，需具备 `RELOAD` 权限。
+`FLUSH PRIVILEGES` 语句会从权限表刷新 TiDB 的内存权限缓存。你必须在手动编辑诸如 `mysql.user` 之类的权限表后执行此语句。然而，在使用 `GRANT` 或 `REVOKE` 等权限语句后，执行此语句不是必需的。要执行此语句，需具备 `RELOAD` 权限。
 
 ## 语法简介
 
