@@ -4136,6 +4136,13 @@ Referenced in:
 - [TiDB 7.1.6 Release Notes](/releases/release-7.1.6.md)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 
+### tidb_ttl_enable_index_scan
+
+Referenced in:
+
+- [Periodically Delete Expired Data Using TTL (Time to Live)](/time-to-live.md)
+- [System Variables](/system-variables.md#tidb_ttl_enable_index_scan)
+
 ### tidb_ttl_job_enable
 
 Referenced in:

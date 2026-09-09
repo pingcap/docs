@@ -6725,6 +6725,19 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Range: `[1, 256]`
 - This variable is used to set the maximum concurrency of TTL jobs on each TiDB node. For more information, refer to [Time to Live](/time-to-live.md).
 
+### tidb_ttl_enable_index_scan
+
+> **Note:**
+>
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Default value: `ON`
+- Type: Boolean
+- This variable controls whether newly created TTL jobs can use an eligible secondary index or nonclustered primary index that starts with the TTL column. When this variable is set to `OFF`, new TTL jobs scan in table-key order. Changing this variable does not change the scan path of running TTL tasks. For index eligibility and rolling-upgrade behavior, see [Scan expired rows using an index](/time-to-live.md#scan-expired-rows-using-an-index).
+
 ### tidb_ttl_job_enable <span class="version-mark">New in v6.5.0</span>
 
 > **Note:**
