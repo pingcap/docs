@@ -49,8 +49,8 @@ useServerPrepStmts=false
 ![flame-graph-for-query-interface](/media/performance/7.1.png)
 
 - ExecuteStmt CPU = 38% CPU時間 = 23.84秒
-- コンパイルCPU = 27% CPU時間 = 17.17秒
-- CPUを最適化 = 26%、CPU時間 = 16.41秒
+- Compile CPU = 27% CPU時間 = 17.17秒
+- Optimize CPU = 26%、CPU時間 = 16.41秒
 
 #### パフォーマンス概要ダッシュボード {#performance-overview-dashboard}
 
@@ -97,8 +97,8 @@ useServerPrepStmts=false&useConfigs=maxPerformance
 ![flame-graph-for-maxPerformance](/media/performance/20220507-145257.jpg)
 
 - ExecuteStmt CPU = 43% CPU時間 =35.84秒
-- コンパイルCPU = 31% CPU時間 = 25.61秒
-- CPUを最適化 = 30% CPU時間 = 24.74秒
+- Compile CPU = 31% CPU時間 = 25.61秒
+- Optimize CPU = 30% CPU時間 = 24.74秒
 
 #### パフォーマンス概要ダッシュボード {#performance-overview-dashboard}
 
@@ -154,7 +154,7 @@ useServerPrepStmts=true&useConfigs=maxPerformance"
 - ExecutePreparedStmt CPU = 31% CPU時間 = 23.10秒
 - preparedStmtExec CPU = 30% CPU時間 = 22.92秒
 - CompileExecutePreparedStmt CPU = 24% CPU時間 = 17.83秒
-- CPUを最適化 = 23% CPU時間 = 17.29秒
+- Optimize CPU = 23% CPU時間 = 17.29秒
 
 #### パフォーマンス概要ダッシュボード {#performance-overview-dashboard}
 
