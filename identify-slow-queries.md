@@ -174,7 +174,7 @@ Fields related to storage engines:
 
 ## Related system variables
 
-* [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules): see [`tidb_slow_log_rules` recommendations](/config-slow-query-trigger-rules.md#recommendations)
+* [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules): defines the trigger rules for slow query logs. For more information, see [Configure Trigger Rules for Slow Queries](/config-slow-query-trigger-rules.md).
 
 * [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold): sets the threshold for slow query logging. SQL statements whose execution time exceeds this threshold are recorded in the slow query log. The default value is `300ms` (milliseconds).
 
