@@ -20,7 +20,7 @@ TiKVのストレージエンジンである[RocksDB](https://rocksdb.org/) 、�
 
 [Titan](/storage-engine/titan-overview.md)は、キーと値の分離のための高性能な[RocksDB](https://github.com/facebook/rocksdb)プラグインであり、大きな値が使用されるときに RocksDB での書き込み増幅を減らすことができます。
 
-平均行サイズが 512 バイトより大きい場合は、次のように`min-blob-size` `"512B"`または`"1KB"`に設定し、 `blob-file-compression`を`"zstd"`に設定して、Titan による圧縮 I/O フローの削減を有効にすることができます。
+平均行サイズが 512 バイトより大きい場合は、次のように`min-blob-size`を`"512B"`または`"1KB"`に設定し、 `blob-file-compression`を`"zstd"`に設定して、Titan による圧縮 I/O フローの削減を有効にすることができます。
 
 ```toml
 [rocksdb.titan]
