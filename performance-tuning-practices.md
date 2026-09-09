@@ -265,7 +265,7 @@ useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSize=1000&prepStmtCache
 
 #### TiDB Dashboard {#tidb-dashboard}
 
-次の TiDB のフレーム チャートから、コマンド`Prepare`の高い CPU 消費がなくなったことがわかります。
+次の TiDB のフレーム チャートから、`Prepare`コマンドの高い CPU 消費がなくなったことがわかります。
 
 - ExecutePreparedStmt CPU = 22% CPU時間 = 8.4秒
 
