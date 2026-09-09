@@ -39,6 +39,7 @@
 | breakpoint | 断点 |  |
 | breakpoint resume | 断点续传 |  |
 | Bring Your Own Key (BYOK) | Bring Your Own Key（BYOK，由用户自行提供 API 密钥） |  |
+| bucket | 存储桶 |  |
 | business continuity | 业务可持续性 |  |
 | cache | 缓存 |  |
 | cache miss | 缓存未命中 |  |
@@ -56,6 +57,7 @@
 | client library | 客户端库 |   |
 | cluster | 集群 |  |
 | cluster functionality | 集群功能 |  |
+| cluster key | cluster key | A feature in TiDB Cloud Lake to improve query performance on large tables. |
 | clustered index | 聚簇索引 |  |
 | coarse-grained | 粗粒度的 |  |
 | code comment | 代码注释 |  |
@@ -103,6 +105,7 @@
 | data dissemination | 数据分发 |  |
 | data engine | 数据引擎 |  |
 | data hub | 数据中台 |  |
+| data integration | 数据集成 |  |
 | Data Manipulation Language (DML) | 数据操纵语言 |  |
 | data race | 数据竞争 |  |
 | database administrator (DBA) | 数据库管理员 |  |
@@ -141,7 +144,9 @@
 | extendible hashing | 可扩充散列 |  |
 | external interface | 对外接口 |  |
 | eventual consistency | 最终一致性 |  |
+| Fail-Safe | Fail-Safe | In TiDB Cloud Lake, it refers to mechanisms aimed at recovering lost or accidentally deleted data from object storage. |
 | fault-tolerant design | 容错设计 |  |
+| FeiShuBot | FeiShuBot | A data source |
 | fetch data | 获取数据 |  |
 | field | 字段 |  |
 | file descriptor | 文件描述符 |  |
@@ -227,6 +232,8 @@
 | key-value pair(s) / KV pair(s) | 键值对 |  |
 | keyword | 关键字 |  |
 | Kubernetes (K8s) | Kubernetes (K8s) |  |
+| lakehouse | lakehouse |  |
+| LakeSQL | LakeSQL |  |
 | latch contention | 锁竞争 |  |
 | latency | 延时 |  |
 | later version | 以上版本 |  |
@@ -382,6 +389,7 @@
 | scalability | 扩展性 |  |
 | scenario | 场景 |  |
 | schedule | 调度 |  |
+| Schema Evolution | Schema Evolution | A feature in TiDB Cloud Lake. |
 | scope | 作用域 |  |
 | secondary indices | 次级索引 |  |
 | see also | 另请参阅 |  |
@@ -408,6 +416,7 @@
 | source end | 源端 |  |
 | split | 切分 |  |
 | stack | 堆栈 |  |
+| stage | stage | In TiDB Cloud Lake docs, keep it in English because it is a concept that refers to a virtual location where data files reside. In other contexts, it may be translated as "阶段". |
 | startup parameter | 启动参数 |  |
 | stateful | 有状态的 |  |
 | stateless | 无状态的 |  |
@@ -430,6 +439,7 @@
 | system variable | 系统变量 |  |
 | table schema | 表结构 |  |
 | target machine | （部署）目标机器 |  |
+| task flow | 任务流 | Keep both the English and Chinese terms "任务流 (Task Flow)" when it first appears in a document. |
 | technology stack | 技术栈 |  |
 | test | 测试 |  |
 | configuration file | 配置文件 |  |
@@ -482,8 +492,10 @@
 | verification | 验证 |  |
 | verify | 验证 |  |
 | Vertical Pod Autoscaling (VPA) | Pod 自动垂直扩容 | TiDB on Kubernetes |
+| Warehouse | 计算集群 | Keep both the English and Chinese terms "计算集群 (Warehouse)" when it first appears in a document. |
 | wildcard | 通配符 |  |
 | work queue(s) | 工作队列 |  |
+| Worksheet | 工作区 | Keep both the English and Chinese terms "工作区 (Worksheet)" when it first appears in a document. |
 | wrapper | 封装器 |  |
 | write amplification (WA) | 写放大 |  |
 | write buffer | 写缓冲器 |  |
