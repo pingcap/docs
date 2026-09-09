@@ -377,7 +377,7 @@ TiDB CPU のフレーム チャートには大きな変化はありません。
 
 #### パフォーマンス概要ダッシュボード {#performance-overview-dashboard}
 
-QPSは34.9kから40.9kに増加し、KVリクエストタイプは`execute`フェーズから`Prewrite`フェーズと`Commit`フェーズへの変更で最も時間がかかります。1秒あたり`Get`のデータベース処理時間は5.33秒から1.75秒に短縮され、1秒あたり`Cop`のデータベース処理時間は3.87秒から1.09秒に短縮されます。
+QPSは34.9kから40.9kに増加し、最も時間がかかるKVリクエストタイプが`execute`フェーズから`Prewrite`フェーズと`Commit`フェーズに変わりました。1秒あたり`Get`のデータベース処理時間は5.33秒から1.75秒に短縮され、1秒あたり`Cop`のデータベース処理時間は3.87秒から1.09秒に短縮されます。
 
 ![performance-overview-1-for-table-cache](/media/performance/j-7.png)
 
