@@ -29,7 +29,7 @@ summary: パフォーマンス概要ダッシュボードにTiFlashメトリッ�
 
 - MPP クエリ数: 各TiFlashインスタンスの MPP クエリ数の瞬間値。TiFlashで処理する必要がある現在の MPP クエリ数 (処理中のクエリとスケジュール待ちのクエリを含む) を反映します。
 - リクエスト QPS: すべてのTiFlashインスタンスによって受信されたコプロセッサリクエストの数。
-    - `run_mpp_task` 、および`mpp_establish_conn` `dispatch_mpp_task` MPP リクエストです。
+    - `run_mpp_task`、`dispatch_mpp_task`、および`mpp_establish_conn`はMPPリクエストです。
     - `batch` : バッチリクエストの数。
     - `cop` : コプロセッサ インターフェイスを介して直接送信されるコプロセッサリクエストの数。
     - `cop_execution` : 現在実行中のコプロセッサリクエストの数。

@@ -2784,7 +2784,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `ON`
 - 値のオプション: `OFF` 、 `ON`
-- この変数は、TiDB がチャンク オブジェクトのキャッシュを有効にするかどうかを制御します。値が`ON` `OFF`の場合、TiDB はシステムから直接チャンク オブジェクトをリクエストします。
+- この変数は、TiDB がチャンク オブジェクトのキャッシュを有効にするかどうかを制御します。値が`ON`の場合、TiDB はキャッシュされたチャンク オブジェクトの使用を優先し、要求されたオブジェクトがキャッシュにない場合のみシステムにリクエストします。値が`OFF`の場合、TiDB はシステムから直接チャンク オブジェクトをリクエストします。
 
 ### tidb_enable_shared_lock_promotion <span class="version-mark">New in v8.3.0</span>
 
