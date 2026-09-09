@@ -142,7 +142,7 @@ TiDBは、SQL処理パスとデータベース時間を継続的に測定・収�
 
 - QPS: Query Per Second（1秒あたりのクエリ数）の略。アプリケーションによって実行されたSQL文の数を示します。
 - CPS By Type: Command Per Secondの略。コマンドはMySQLプロトコル固有のコマンドを示します。クエリ文は、クエリコマンドまたはプリペアドステートメントのいずれかによってTiDBに送信できます。
-- Queries Using Plan Cache OPS: `avg-hit` 、TiDB クラスターで 1秒あたりに実行計画 キャッシュを使用するクエリの数であり、 `avg-miss` 、TiDB クラスターで 1秒あたりに実行計画 キャッシュを使用しないクエリの数です。
+- Queries Using Plan Cache OPS: `avg-hit`は、TiDB クラスターで 1秒あたりに実行計画 キャッシュを使用するクエリの数であり、 `avg-miss`は、TiDB クラスターで 1秒あたりに実行計画 キャッシュを使用しないクエリの数です。
 
     `avg-hit + avg-miss`は`StmtExecute`に等しく、これは1秒あたりに実行される全クエリ数です。TiDBでプリペアドプランキャッシュを有効にすると、以下の3つのシナリオが発生します。
 
@@ -219,9 +219,9 @@ TPC-C ワークロードは主に`UPDATE` 、 `SELECT` 、 `INSERT`文です。�
 
 #### CPUとメモリの使用量 {#cpu-and-memory-usage}
 
-TiDB、TiKV、PDのCPU/メモリパネルでは、平均CPU、最大CPU、デルタCPU（最大CPU使用率から最小CPU使用率を引いた値）、CPUクォータ、最大メモリ使用量など、それぞれの論理CPU使用率とメモリメモリ量を監視できます。これらの指標に基づいて、TiDB、TiKV、PDの全体的なリソース使用状況を把握できます。
+TiDB、TiKV、PDのCPU/メモリパネルでは、平均CPU、最大CPU、デルタCPU（最大CPU使用率から最小CPU使用率を引いた値）、CPUクォータ、最大メモリ使用量など、それぞれの論理CPU使用率とメモリ使用量を監視できます。これらの指標に基づいて、TiDB、TiKV、PDの全体的なリソース使用状況を把握できます。
 
-- `delta`値に基づいて、TiDB または TiKV の CPU 使用率が不均衡かどうかを判断できます。TiDB の場合、 `delta`高い場合、通常、TiDB インスタンス間のアプリケーション接続が不均衡であることを意味します。TiKV の場合、 `delta`が高い場合、通常、クラスター内に読み取り/書き込みのホットスポットがあることを意味します。
+- `delta`値に基づいて、TiDB または TiKV の CPU 使用率が不均衡かどうかを判断できます。TiDB の場合、 `delta`が高い場合、通常、TiDB インスタンス間のアプリケーション接続が不均衡であることを意味します。TiKV の場合、 `delta`が高い場合、通常、クラスター内に読み取り/書き込みのホットスポットがあることを意味します。
 - TiDB、TiKV、PD のリソース使用状況の概要を把握することで、クラスター内にリソースのボトルネックがあるかどうか、TiKV、TiDB、PD にスケールアウトまたはスケールアップが必要かどうかをすぐに判断できます。
 
 **例1: TiKVリソースの使用率が高い**
@@ -251,7 +251,7 @@ TiDB、TiKV、PDのCPU/メモリパネルでは、平均CPU、最大CPU、デル
     - `TiDB -> TiKV: general` : フォアグラウンドトランザクションが TiDB から TiKV に書き込まれる速度
     - `TiDB -> TiKV: internal` : 内部トランザクションが TiDB から TiKV に書き込まれる速度
     - `TiKV -> Rocksdb` : TiKVからRocksDBへの書き込み操作の流れ
-    - `RocksDB Compaction` : RocksDBの圧縮操作によって生成される読み取りおよび書き込みI/Oフローの合計。`RocksDB Compaction` `TiKV -> Rocksdb`よりも大幅に大きく、平均行サイズが512バイトを超える場合は、min-blob-sizeを`"512B"`または`"1KB"`に設定し、blob-file-compressionを`"zstd"`に設定することで、Titanによる圧縮I/Oフローを削減できます。
+    - `RocksDB Compaction` : RocksDBの圧縮操作によって生成される読み取りおよび書き込みI/Oフローの合計。`RocksDB Compaction`が`TiKV -> Rocksdb`よりも大幅に大きく、平均行サイズが512バイトを超える場合は、min-blob-sizeを`"512B"`または`"1KB"`に設定し、blob-file-compressionを`"zstd"`に設定することで、Titanによる圧縮I/Oフローを削減できます。
 
         ```toml
         [rocksdb.titan]
@@ -268,7 +268,7 @@ TiDB、TiKV、PDのCPU/メモリパネルでは、平均CPU、最大CPU、デル
 - トラフィックを読み取る
 
     - `TiDB -> Client` : 14.2 MB/秒
-    - `Rocksdb -> TiKV` : 469 MB/秒。読み取り操作（ `SELECT`文）と書き込み操作（ `INSERT` 、および`DELETE`文）の両方で`UPDATE`トランザクションをコミットする前にRocksDBからTiKVにデータを読み込む必要があることに注意してください。
+    - `Rocksdb -> TiKV` : 469 MB/秒。読み取り操作（ `SELECT`文）と書き込み操作（ `INSERT` 、 `UPDATE` 、および`DELETE`文）の両方で、トランザクションをコミットする前にRocksDBからTiKVにデータを読み込む必要があることに注意してください。
 
 - トラフィックを書き込む
 
@@ -355,13 +355,13 @@ TiDB、TiKV、PDのCPU/メモリパネルでは、平均CPU、最大CPU、デル
 
 ![TiDB is not Bottleneck](/media/performance/cloud_query_long_idle.png)
 
-このワークロードでは、平均クエリレイテンシーは 1.69 ミリ秒、 `avg-in-txn` 18 ミリ秒です。これは、TiDB がトランザクション内の SQL文を処理するために平均 1.69 ミリ秒を費やし、その後、次のステートメントを受信するために 18 ミリ秒待機する必要があることを示しています。
+このワークロードでは、平均クエリレイテンシーは 1.69 ミリ秒、 `avg-in-txn`は 18 ミリ秒です。これは、TiDB がトランザクション内の SQL文を処理するために平均 1.69 ミリ秒を費やし、その後、次のステートメントを受信するために 18 ミリ秒待機する必要があることを示しています。
 
 平均クエリレイテンシーは`avg-in-txn`を大幅に下回っています。ユーザー応答時間のボトルネックはTiDBではありません。この例はパブリッククラウド環境におけるもので、アプリケーションとデータベースが同じリージョンにないため、アプリケーションとデータベース間のネットワークレイテンシーが高く、接続アイドル時間が非常に長くなります。
 
 #### Parse, Compile, and Execute Duration {#parse-compile-and-execute-duration}
 
-TiDB では、クエリステートメントの送信から結果の返送までに[典型的な処理フロー](/sql-optimization-concepts.md)かかります。
+TiDB では、クエリステートメントの送信から結果の返送までに[典型的な処理フロー](/sql-optimization-concepts.md)があります。
 
 TiDB での SQL 処理は、 `get token` 、 `parse` 、 `compile` 、 `execute` 4つのフェーズで構成されます。
 
@@ -402,8 +402,8 @@ TiDB は`execute`フェーズで PD および TiKV と連携します。次の�
 
 TSO待機時間は`TSO WAIT`と記録され、TSOリクエストのネットワーク時間は`TSO RPC`と記録されます。TSO待機が完了すると、TiDBエグゼキューターは通常、TiKVに読み取りまたは書き込みリクエストを送信します。
 
-- 一般的な KV 読み取りリクエスト: `Get` `BatchGet`および`Cop`
-- 一般的な KV 書き込みリクエスト: 2フェーズコミットの`PessimisticLock` `Prewrite`および`Commit`
+- 一般的な KV 読み取りリクエスト: `Get`、 `BatchGet`および`Cop`
+- 一般的な KV 書き込みリクエスト: 2フェーズコミットの`PessimisticLock`、 `Prewrite`および`Commit`
 
 ![Execute](/media/performance/execute_phase.png)
 
@@ -447,18 +447,18 @@ Avg TiDB KV Request Duration = Avg TiKV GRPC Duration + Network latency between 
 TiKV は次の手順で書き込みリクエストを処理します。
 
 - `scheduler worker`は書き込みリクエストを処理し、トランザクションの一貫性チェックを実行し、書き込みリクエストを`raftstore`モジュールに送信するキーと値のペアに変換します。
-- TiKV コンセンサス モジュール`raftstore` 、 Raftコンセンサス アルゴリズムを適用して、ストレージレイヤー(複数の TiKV で構成) をフォールト トレラントにします。
+- TiKV コンセンサス モジュール`raftstore`は、 Raftコンセンサス アルゴリズムを適用して、ストレージレイヤー(複数の TiKV で構成) をフォールト トレラントにします。
 
     Raftstore は`Store`スレッドと`Apply`スレッドで構成されています。
 
-    - `Store`スレッドはRaftメッセージと新しい`proposals`を処理します。新しい`proposals`を受信すると、リーダーノードの`Store`スレッドはローカルRaft DBに書き込み、メッセージを複数のフォロワーノードにコピーします。ほとんどの場合、この`proposals`正常に永続化されると、 `proposals`が正常にコミットされます。
+    - `Store`スレッドはRaftメッセージと新しい`proposals`を処理します。新しい`proposals`を受信すると、リーダーノードの`Store`スレッドはローカルRaft DBに書き込み、メッセージを複数のフォロワーノードにコピーします。ほとんどの場合、この`proposals`が正常に永続化されると、 `proposals`が正常にコミットされます。
     - `Apply`スレッドはコミットされた`proposals`データをKV DBに書き込みます。データがKV DBに正常に書き込まれると、 `Apply`スレッドは書き込みリクエストが完了したことを外部に通知します。
 
 ![TiKV Write](/media/performance/store_apply.png)
 
 `Storage Async Write Duration`のメトリックは、書き込みリクエストがraftstoreに入った後のレイテンシーを記録します。データはリクエストごとに収集されます。
 
-`Storage Async Write Duration`メトリックは`Store Duration`と`Apply Duration` 2つの部分で構成されます。次の式を使用して、書き込みリクエストのボトルネックが`Store`または`Apply`どちらのステップにあるかを判断できます。
+`Storage Async Write Duration`メトリックは`Store Duration`と`Apply Duration`の2つの部分で構成されます。次の式を使用して、書き込みリクエストのボトルネックが`Store`または`Apply`どちらのステップにあるかを判断できます。
 
 ```
 avg Storage Async Write Duration = avg Store Duration + avg Apply Duration
@@ -466,7 +466,7 @@ avg Storage Async Write Duration = avg Store Duration + avg Apply Duration
 
 > **Note:**
 >
-> `Store Duration`と`Apply Duration` v5.3.0 以降でサポートされています。
+> `Store Duration`と`Apply Duration`は v5.3.0 以降でサポートされています。
 
 **例1: v5.3.0とv5.4.0での同じOLTPワークロードの比較**
 
@@ -475,7 +475,7 @@ avg Storage Async Write Duration = avg Store Duration + avg Apply Duration
 - v5.3.0: 24.4 ミリ秒 ~= 17.7 ミリ秒 + 6.59 ミリ秒
 - v5.4.0: 21.4 ミリ秒 ~= 14.0 ミリ秒 + 7.33 ミリ秒
 
-v5.4.0 では、gPRC モジュールが最適化され、 Raftログのレプリケーションが高速化され、v5.3.0 と比較して`Store Duration`削減されました。
+v5.4.0 では、gPRC モジュールが最適化され、 Raftログのレプリケーションが高速化され、v5.3.0 と比較して`Store Duration`が削減されました。
 
 バージョン5.3.0:
 
@@ -522,7 +522,7 @@ v5.4.0では、書き込み中心のOLTPワークロードのQPSがv5.3.0と比�
 | Commit Log Duration | 13           | 8.68         |
 | Apply Log Duration | 0.457        | 0.514        |
 
-v5.4.0 では、gPRC モジュールが最適化され、 Raftログのレプリケーションが高速化され、v5.3.0 と比較して`Commit Log Duration`と`Store Duration`削減されました。
+v5.4.0 では、gPRC モジュールが最適化され、 Raftログのレプリケーションが高速化され、v5.3.0 と比較して`Commit Log Duration`と`Store Duration`が削減されました。
 
 バージョン5.3.0:
 
@@ -548,6 +548,6 @@ v5.4.0 では、gPRC モジュールが最適化され、 Raftログのレプリ
 
 ## TiDB のバージョンが v6.1.0 より前の場合、パフォーマンス概要ダッシュボードを使用するにはどうすればよいですか? {#if-my-tidb-version-is-earlier-than-v6-1-0-what-should-i-do-to-use-the-performance-overview-dashboard}
 
-Grafana v6.1.0以降、デフォルトでパフォーマンス概要ダッシュボードが組み込まれています。このダッシュボードはTiDB v4.xおよびv5.xバージョンと互換性があります。TiDBがv6.1.0より前の場合は、次の図に示すように、 [`performance_overview.json`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/metrics/grafana/performance_overview.json)手動でインポートする必要があります。
+Grafana v6.1.0以降、デフォルトでパフォーマンス概要ダッシュボードが組み込まれています。このダッシュボードはTiDB v4.xおよびv5.xバージョンと互換性があります。TiDBがv6.1.0より前の場合は、次の図に示すように、 [`performance_overview.json`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/metrics/grafana/performance_overview.json)を手動でインポートする必要があります。
 
 ![Store](/media/performance/import_dashboard.png)
