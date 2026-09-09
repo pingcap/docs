@@ -112,17 +112,17 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 ### Raft process {#raft-process}
 
-- Ready handled: 1秒あたり、タイプごとに処理された準備完了操作の数
-    - count: 1秒あたりに処理された準備完了操作の数
-    - has_ready_region: 1秒あたりに準備完了状態にあるリージョンの数
-    - pending_region: 準備完了状態かどうかを確認しているリージョンの1秒あたりの操作数。このメトリックはv3.0.0以降非推奨です。
-    - message: 準備完了操作が1秒あたりに含むメッセージの数
-    - append: 準備完了操作が1秒あたりに含むRaftログエントリの数
-    - commit: 準備完了操作が1秒あたりにコミットするRaftログエントリの数
-    - snapshot: 準備完了操作が1秒あたりに保持するスナップショットの数
+- Ready handled: 1秒あたり、タイプごとに処理されたready操作の数
+    - count: 1秒あたりに処理されたready操作の数
+    - has_ready_region: 1秒あたりにreadyを持つリージョンの数
+    - pending_region: readyを持つかどうかを確認しているリージョンの1秒あたりの操作数。このメトリックはv3.0.0以降非推奨です。
+    - message: ready操作が1秒あたりに含むメッセージの数
+    - append: ready操作が1秒あたりに含むRaftログエントリの数
+    - commit: ready操作が1秒あたりにコミットするRaftログエントリの数
+    - snapshot: ready操作が1秒あたりに保持するスナップショットの数
 - 0.99 Duration of Raft store events：Raftstoreイベントにかかる時間（P99）
-- Process ready duration： Raftでプロセスが準備完了になるまでにかかる時間
-- Process ready duration per server：TiKVインスタンスごとに、 Raftでピアプロセスが準備完了になるまでにかかる時間。2秒未満（P99.99）である必要があります。
+- Process ready duration： Raftでプロセスがreadyになるまでにかかる時間
+- Process ready duration per server：TiKVインスタンスごとに、 Raftでピアプロセスがreadyになるまでにかかる時間。2秒未満（P99.99）である必要があります。
 - Max Duration of Raft store events：最も遅いRaftstoreイベントにかかる時間。
 - Replica read lock checking duration：レプリカ読み取り処理時にロックをチェックするのに要する時間。
 - Peer msg length distribution：各TiKVインスタンスの各リージョンで同時に処理されるメッセージ数。メッセージ数が多いほど、ピアの処理負荷が高くなります。
@@ -142,7 +142,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 ### Raft propose {#raft-propose}
 
-- Raft apply proposals per ready: 提案適用中に、各準備完了操作がバッチ内に含める提案数のヒストグラム。
+- Raft apply proposals per ready: 提案適用中に、各ready操作がバッチ内に含める提案数のヒストグラム。
 - Raft read/write proposals：1秒あたりのタイプ別提案数
 - Raft read proposals per server：各TiKVインスタンスが1秒あたりに行う読み取り提案の数
 - Raft write proposals per server：各TiKVインスタンスが1秒あたりに行う書き込み提案の数
