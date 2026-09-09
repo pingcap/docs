@@ -146,7 +146,7 @@
 | eventual consistency | 最终一致性 |  |
 | Fail-Safe | Fail-Safe | In TiDB Cloud Lake, it refers to mechanisms aimed at recovering lost or accidentally deleted data from object storage. |
 | fault-tolerant design | 容错设计 |  |
-| FeiShuBot | FeiShuBot | A data source |
+| FeiShuBot | FeiShuBot | A data source in TiDB Cloud Lake |
 | fetch data | 获取数据 |  |
 | field | 字段 |  |
 | file descriptor | 文件描述符 |  |
@@ -389,7 +389,7 @@
 | scalability | 扩展性 |  |
 | scenario | 场景 |  |
 | schedule | 调度 |  |
-| Schema Evolution | Schema Evolution | A feature in TiDB Cloud Lake. |
+| Schema Evolution | Schema Evolution | A feature that allows TiDB Cloud Lake to automatically add columns that exist in source files but are missing from the target table during `COPY INTO` operations.  |
 | scope | 作用域 |  |
 | secondary indices | 次级索引 |  |
 | see also | 另请参阅 |  |
