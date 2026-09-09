@@ -395,7 +395,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - Blob iter operations：Titan Blobでイテレーション操作を実行する際に消費される時間
 - Blob seek duration：Titan Blobでシーク操作を実行する際に消費される時間
 - Blob next duration: Titan Blob で次の操作を実行する際に消費される時間
-- Blob prev duration: Titan Blob で prev 操作を実行するのに要した時間
+- Blob prev duration: Titan Blob で前の操作を実行するのに要した時間
 - Blob keys flow：Titan Blobキーに対する操作のフローレート
 - Blob bytes flow：Titan Blobキー上のバイトフローレート
 - Blob file read duration：Titan Blobファイルの読み取りに要した時間
@@ -443,7 +443,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 - Lock Manager Thread CPU：ロックマネージャスレッドのCPU使用率
 - Lock Manager Handled tasks：ロックマネージャが処理したタスクの数
-- Waiter lifetime duration：トランザクションがロックを解除するまでの待機時間
+- Waiter lifetime duration：ロックが解放されるまでのトランザクションの待機時間
 - Wait table：待機テーブルの状態情報。ロックの数や、ロックを待っているトランザクションの数などが含まれます。
 - Deadlock detect duration：デッドロックを検出するのに要した時間
 - Detect error: デッドロック検出時に発生したエラーの数（デッドロックの数を含む）
@@ -459,7 +459,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - Max gap of resolved-ts：このTiKV内のすべてのアクティブなリージョンのresolved-tsと現在時刻との間の最大時間差
 - Max gap of safe-ts: この TiKV 内のすべてのアクティブなリージョンのsafe-tsと現在時刻との間の最大時間差
 - Min Resolved TS Region：resolved-tsが最小であるリージョンのID
-- Min Safe TS Region：安全TSが最小であるリージョンのID
+- Min Safe TS Region：safe-tsが最小であるリージョンのID
 - Check Leader Duration：リーダー要求の処理に費やされた時間の分布。処理時間は、要求の送信からリーダーでの応答の受信までの時間です。
 - Max gap of resolved-ts in Region leaders：このTiKV内のすべてのアクティブなリージョンのresolved-tsと現在時刻との間の最大時間差（リージョンリーダーのみ）。
 - Min Leader Resolved TS Region :resolved-tsが最小値であるリージョンのID （リージョンリーダーのみ）。
@@ -467,7 +467,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 ### Memory {#memory}
 
-- Allocator Stats:メモリ割り当ての統計情報
+- Allocator Stats:メモリアロケータの統計情報
 
 ### Backup {#backup}
 
@@ -491,7 +491,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 ### Log Backup {#log-backup}
 
 - Handle Event Rate：書き込みイベントの処理速度
-- Initial Scan Generate Event Throughput：新しいリスナーストリームを生成する際の、段階的なスキャン速度
+- Initial Scan Generate Event Throughput：新しいリスナーストリームを生成する際の増分スキャン速度
 - Abnormal Checkpoint TS Lag：各タスクの現在のチェックポイントTSと現在時刻とのラグ
 - Memory Of Events：増分スキャンによって生成された一時データが占めるメモリの推定量
 - Observed Region Count：現在監視されているリージョンの数
@@ -514,7 +514,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 > **Note:**
 >
-> 以下の監視メトリクスはすべてTiDBノードをデータソースとして使用しますが、ログバックアッププロセスに多少の影響を与えます。そのため、参照しやすいように**TiKVの詳細**ダッシュボードに配置されています。TiKVはほとんどの場合、進捗状況を積極的にプッシュしますが、以下の監視メトリクスの一部でサンプリングされたデータが一時的に取得されないのは正常な動作です。
+> 以下の監視メトリクスはすべてTiDBノードをデータソースとして使用しますが、ログバックアッププロセスに多少の影響を与えます。そのため、参照しやすいように**TiKV-Details**ダッシュボードに配置されています。TiKVはほとんどの場合、進捗状況を積極的にプッシュしますが、以下の監視メトリクスの一部でサンプリングされたデータが一時的に取得されないのは正常な動作です。
 
 - Request Checkpoint Batch Size：ログバックアップコーディネーターが各TiKVのチェックポイント情報を要求する際のリクエストバッチサイズ
 - Tick Duration [P99|P90]: コーディネーター内のティックにかかる時間
