@@ -13,20 +13,30 @@ The blocklist of optimization rules is one way to tune optimization rules, mainl
 
 ### Important optimization rules
 
+The following table lists common optimization rules that can be controlled by the blocklist and their corresponding rule names.
+
+Not every rule applies to every query. Some rules are effective only for specific query patterns, SQL features, hints, or session variables.
+
 |**Optimization Rule**|**Rule Name**|**Description**|
 | :--- | :--- | :--- |
-| Column pruning | column_prune | One operator will prune the column if it is not needed by the upper executor. |
-| Decorrelate subquery | decorrelate | Tries to rewrite the correlated subquery to non-correlated join or aggregation. |
-| Aggregation elimination | aggregation_eliminate | Tries to remove unnecessary aggregation operators from the execution plan. |
+| Generated column substitution | generate_column_substitute | Replaces eligible expressions with equivalent indexed virtual generated columns so that expression indexes can be used. |
+| Column pruning | column_prune | Removes columns that are not needed by upper operators. |
+| Decorrelate subquery | decorrelate | Rewrites correlated subqueries to non-correlated joins or aggregations when possible. |
+| Semi join rewrite | semi_join_rewrite | Rewrites eligible `EXISTS` semi joins to inner joins with aggregation when the related hint or session variable is enabled. |
+| Aggregation elimination | aggregation_eliminate | Removes unnecessary aggregation operators from the execution plan. |
+| Skew distinct aggregation rewrite | skew_distinct_agg_rewrite | Rewrites eligible skewed distinct aggregations into two-level aggregations when the rule is enabled. |
 | Projection elimination | projection_eliminate | Removes unnecessary projection operators from the execution plan. |
-| Max/Min elimination | max_min_eliminate | Rewrites some max/min functions in aggregation to the `order by` + `limit 1` form. |
-| Predicate pushdown | predicate_push_down | Tries to push predicates down to the operator that is closer to the data source. |
-| Outer join elimination | outer_join_eliminate | Tries to remove the unnecessary left join or right join from the execution plan. |
-| Partition pruning | partition_processor | Prunes partitions which are rejected by the predicates and rewrite partitioned table query to the `UnionAll + Partition Datasource` form. |
-| Aggregation pushdown | aggregation_push_down | Tries to push aggregations down to their children. |
-| TopN pushdown | topn_push_down | Tries to push the TopN operator to the place closer to the data source. |
+| Max/Min elimination | max_min_eliminate | Rewrites some `MAX()` or `MIN()` aggregations to the `ORDER BY` + `LIMIT 1` form. |
+| Constant propagation | constant_propagation | Propagates constant predicates across query blocks and join boundaries. |
+| Convert outer joins to inner joins | convert_outer_to_inner_joins | Converts outer joins to inner joins when predicates filter out unmatched rows. |
+| Predicate pushdown | predicate_push_down | Pushes predicates down to the operators that are closer to the data source. |
+| Outer join elimination | outer_join_eliminate | Removes unnecessary left joins or right joins from the execution plan. |
+| Aggregation pushdown | aggregation_push_down | Pushes aggregations down to their children. |
+| Derive TopN or Limit from window functions | derive_topn_from_window | Derives `TopN` or `Limit` operators from window functions. |
+| Predicate simplification | predicate_simplification | Simplifies predicates by consolidating ranges and removing impossible branches. |
+| TopN pushdown | topn_push_down | Pushes the `TopN` operator closer to the data source. |
 | Join reorder | join_reorder | Decides the order of multi-table joins. |
-| Derive TopN or Limit from window functions | derive_topn_from_window | Derives the TopN or Limit operator from window functions. |
+| Outer join to semi join rewrite | outer_join_to_semi_join | Rewrites eligible outer join plus `IS NULL` patterns to anti semi joins. |
 
 ### Disable optimization rules
 
@@ -36,7 +46,7 @@ You can use the blocklist of optimization rules to disable some of them if some 
 
 > **Note:**
 >
-> All the following operations need the `super privilege` privilege of the database. Each optimization rule has a name. For example, the name of column pruning is `column_prune`. The names of all optimization rules can be found in the second column of the table [Important Optimization Rules](#important-optimization-rules).
+> All the following operations need the `super privilege` privilege of the database. Each optimization rule has a name. For example, the name of column pruning is `column_prune`. The rule names listed in [Important optimization rules](#important-optimization-rules) are shown in the second column.
 
 - If you want to disable some rules, write its name to the `mysql.opt_rule_blacklist` table. For example:
 
