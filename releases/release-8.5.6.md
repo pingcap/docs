@@ -107,7 +107,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------- |
 | TiKV                     | [`gc.auto-compaction.mvcc-read-aware-enabled`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-aware-enabled-new-in-v856) | 新しく追加された | MVCC読み取り対応の圧縮を有効にするかどうかを制御します。デフォルト値は`false`です。                                  |
 | TiKV                     | [`gc.auto-compaction.mvcc-read-weight`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-weight-new-in-v856)               | 新しく追加された | リージョンの圧縮優先度スコアを計算する際に、MVCC 読み取りアクティビティに適用される重み乗数。デフォルト値は`3.0`です。                 |
-| TiKV                     | [`gc.auto-compaction.mvcc-scan-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-scan-threshold-new-in-v856)         | 新しく追加された | リージョンを圧縮候補としてマークするために、読み取り要求ごとにスキャンされる MVCC バージョンの最小数。デフォルト値は`1000`です。           |
+| TiKV                     | [`gc.auto-compaction.mvcc-scan-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-scan-threshold-new-in-v856)         | 新しく追加された | リージョンを圧縮候補としてマークするために、読み取りリクエストごとにスキャンされる MVCC バージョンの最小数。デフォルト値は`1000`です。           |
 | TiCDC                    | [`sink.csv.output-field-header`](https://docs.pingcap.com/tidb/v8.5/ticdc-csv#use-csv)                                                         | 新しく追加された | CSVファイルにヘッダー行を出力するかどうかを制御します。デフォルト値は`false`です。このパラメータはTiCDCの新しいアーキテクチャにのみ適用されます。 |
 
 ### システムテーブルの変更 {#system-table-changes}
@@ -163,10 +163,10 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
     - クロスビームスキップリストのメモリリーク問題を修正 [#19285](https://github.com/tikv/tikv/issues/19285) @[ekexium](https://github.com/ekexium)
     - パーティションテーブルの一意でない列のグローバルインデックスが、場合によっては不整合になり、誤った結果を返す可能性がある問題を修正しました [#19262](https://github.com/tikv/tikv/issues/19262) @[mjonss](https://github.com/mjonss)
     - コプロセッサのスナップショット取得が停止すると、リクエストの期限が切れるまで統合リードプールワーカーが占有され、他のリードリクエストが遅延する問題を修正しました [#18491](https://github.com/tikv/tikv/issues/18491) @[AndreMouche](https://github.com/AndreMouche)
-    - ディスクがいっぱいの TiKV ノードでフォロワーの読み取りがブロックされたままになる可能性がある問題を修正するため、ディスクがいっぱいのフォロワーで読み取りインデックス要求を拒否します [#19201](https://github.com/tikv/tikv/issues/19201) @[glorv](https://github.com/glorv)
+    - ディスクがいっぱいの TiKV ノードでフォロワーの読み取りがブロックされたままになる可能性がある問題を修正するため、ディスクがいっぱいのフォロワーで読み取りインデックスリクエストを拒否します [#19201](https://github.com/tikv/tikv/issues/19201) @[glorv](https://github.com/glorv)
     - resolved-tsワーカーがビジー状態のときに、 resolved-tsタスクのバックログによって OOM が発生する可能性がある問題を修正 [#18359](https://github.com/tikv/tikv/issues/18359) @[overvenus](https://github.com/overvenus)
-    - リーダー転送中にロングテールフォロワーの読み取りレイテンシーが発生する可能性がある問題を修正するため、読み取りインデックス要求をより早く再試行し、専用の再試行間隔設定を追加しました [#18417](https://github.com/tikv/tikv/issues/18417) @[gengliqi](https://github.com/gengliqi)
-    - 悲観的トランザクションでプリライト要求を再試行する際に発生するまれなデータ不整合の問題を修正 [#11187](https://github.com/tikv/tikv/issues/11187) @[wk989898](https://github.com/wk989898)
+    - リーダー転送中にロングテールフォロワーの読み取りレイテンシーが発生する可能性がある問題を修正するため、読み取りインデックスリクエストをより早く再試行し、専用の再試行間隔設定を追加しました [#18417](https://github.com/tikv/tikv/issues/18417) @[gengliqi](https://github.com/gengliqi)
+    - 悲観的トランザクションでプリライトリクエストを再試行する際に発生するまれなデータ不整合の問題を修正 [#11187](https://github.com/tikv/tikv/issues/11187) @[wk989898](https://github.com/wk989898)
 
 - PD
 

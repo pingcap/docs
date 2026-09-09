@@ -333,7 +333,7 @@ TiDBバージョン：8.3.0
 - PD
 
     - リソースグループにロールをバインドする際にエラーが報告されない問題を修正 [#54417](https://github.com/pingcap/tidb/issues/54417) @[JmPotato](https://github.com/JmPotato)
-    - リソースグループが500ミリ秒以上トークンを要求するとクォータ制限に遭遇する問題を修正 [#8349](https://github.com/tikv/pd/issues/8349) @[nolouch](https://github.com/nolouch)
+    - リソースグループが500ミリ秒以上トークンをリクエストするとクォータ制限に遭遇する問題を修正 [#8349](https://github.com/tikv/pd/issues/8349) @[nolouch](https://github.com/nolouch)
     - `INFORMATION_SCHEMA.RUNAWAY_WATCHES`テーブル内の時間データ型が正しくない問題を修正 [#54770](https://github.com/pingcap/tidb/issues/54770) @[HuSharp](https://github.com/HuSharp)
     - リソースグループが高同時実行時にリソース使用量を効果的に制限できない問題を修正 [#8435](https://github.com/tikv/pd/issues/8435) @[nolouch](https://github.com/nolouch)
     - テーブル属性を取得する際に誤ったPD APIが呼び出される問題を修正 [#55188](https://github.com/pingcap/tidb/issues/55188) @[JmPotato](https://github.com/JmPotato)

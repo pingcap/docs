@@ -102,7 +102,7 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 
 ### Batch PointGet {#batch-point-get}
 
-`Batch_Point_Get`オペレーターの実行情報は`Point_Get`オペレーターと似ていますが、 `Batch_Point_Get`通常、データを読み取りするために`BatchGet` RPC リクエストを TiKV に送信します。
+`Batch_Point_Get`オペレーターの実行情報は`Point_Get`オペレーターと似ていますが、 `Batch_Point_Get`は通常、データを読み取るために`BatchGet` RPC リクエストを TiKV に送信します。
 
 `BatchGet:{num_rpc:2, total_time:83.13µs}` : TiKVに送信された`BatchGet`タイプのRPCリクエストの数( `num_rpc` )とすべてのRPCリクエストに費やされた合計時間( `total_time` )。
 
@@ -117,7 +117,7 @@ cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.0758
 - `cop_task` : `cop`のタスクの実行情報が含まれます。例:
     - `num` : cop タスクの数。
     - `max` 、 `min` 、 `avg` 、 `p95` : cop タスクの実行に費やされた実行時間の最大値、最小値、平均値、および P95 値。
-    - `max_proc_keys`と`p95_proc_keys` ：TiKVがすべてのcopタスクでスキャンしたキーバリューの数の最大値とP95値。最大値とP95値の差が大きい場合、データ分布が不均衡になる可能性があります。
+    - `max_proc_keys`と`p95_proc_keys` ：TiKVがすべてのcopタスクでスキャンしたキー値の数の最大値とP95値。最大値とP95値の差が大きい場合、データ分布が不均衡になる可能性があります。
     - `copr_cache_hit_ratio` : `cop`タスクリクエストに対するコプロセッサーキャッシュのヒット率。
 - `rpc_info` : リクエストタイプ別に集計された、TiKV に送信された RPC リクエストの合計数と合計時間。
 - `backoff` : さまざまなタイプのバックオフとバックオフの合計待機時間が含まれます。

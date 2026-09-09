@@ -21,7 +21,7 @@ TiDB バージョン: 8.4.0
 
 - TSOリクエストに並列バッチモードを導入し、TSO取得のレイテンシーを削減する[#54960](https://github.com/pingcap/tidb/issues/54960) [#8432](https://github.com/tikv/pd/issues/8432) @[MyonKeminta](https://github.com/MyonKeminta)
 
-    バージョン8.4.0より前では、TiDBはPDから[TSO](/tso.md)要求する際に、特定の期間に複数のTSO要求を収集し、それらをバッチ処理で順次処理することで、リモートプロシージャコール（RPC）要求の数を減らし、PDのワークロードを軽減していました。しかし、レイテンシーに敏感なシナリオでは、この逐次バッチ処理モードのパフォーマンスは理想的ではありませんでした。
+    バージョン8.4.0より前では、TiDBはPDから[TSO](/tso.md)をリクエストする際に、特定の期間に複数のTSOリクエストを収集し、それらをバッチ処理で順次処理することで、リモートプロシージャコール（RPC）リクエストの数を減らし、PDのワークロードを軽減していました。しかし、レイテンシーに敏感なシナリオでは、この逐次バッチ処理モードのパフォーマンスは理想的ではありませんでした。
 
     TiDB v8.4.0では、異なる同時実行能力を持つTSOリクエスト用の並列バッチモードが導入されました。並列モードはTSO取得のレイテンシーを短縮しますが、PDのワークロードが増加する可能性があります。TSO取得に並列RPCモードを設定するには、 [`tidb_tso_client_rpc_mode`](/system-variables.md#tidb_tso_client_rpc_mode-new-in-v840)システム変数を構成してください。
 
@@ -339,9 +339,9 @@ TiDB をアップグレードする前に、オペレーティングシステム
 - TiFlash
 
     - `LENGTH()`および`ASCII()`関数の実行効率を最適化する [#9344](https://github.com/pingcap/tiflash/issues/9344) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - TiFlashが分散ストレージとコンピューティング要求を処理する際に作成する必要のあるスレッド数を減らし、そのような要求を多数処理する際のTiFlashコンピューティングノードのクラッシュを回避するのに役立ちます [#9334](https://github.com/pingcap/tiflash/issues/9334) @[JinheLin](https://github.com/JinheLin)
+    - TiFlashが分散ストレージとコンピューティングリクエストを処理する際に作成する必要のあるスレッド数を減らし、そのようなリクエストを多数処理する際のTiFlashコンピューティングノードのクラッシュを回避するのに役立ちます [#9334](https://github.com/pingcap/tiflash/issues/9334) @[JinheLin](https://github.com/JinheLin)
     - パイプライン実行モデルにおけるタスク待機メカニズムの強化 [#8869](https://github.com/pingcap/tiflash/issues/8869) @[SeaRise](https://github.com/SeaRise)
-    - JOIN オペレーターがキャンセル要求にタイムリーに応答できるように、JOIN オペレーターのキャンセル メカニズムを改善 [#9430](https://github.com/pingcap/tiflash/issues/9430) @[windtalker](https://github.com/windtalker)
+    - JOIN オペレーターがキャンセルリクエストにタイムリーに応答できるように、JOIN オペレーターのキャンセル メカニズムを改善 [#9430](https://github.com/pingcap/tiflash/issues/9430) @[windtalker](https://github.com/windtalker)
 
 - ツール
 
@@ -374,7 +374,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
     - TopN オペレーターに続くオペレーターがメモリ制限を超えた場合にフォールバックアクションをトリガーできない問題を修正しました [#56185](https://github.com/pingcap/tidb/issues/56185) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - ソートオペレーターの`ORDER BY`列に定数が含まれている場合に、列が固定されてしまう問題を修正しました。 [#55344](https://github.com/pingcap/tidb/issues/55344) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - インデックスを追加する際に、PDリーダーを終了させた後に`8223 (HY000)`エラーが発生し、テーブル内のデータが不整合になる問題を修正しました [#55488](https://github.com/pingcap/tidb/issues/55488) @[tangenta](https://github.com/tangenta)
-    - DDL履歴ジョブが多すぎると、履歴DDLジョブに関する情報を要求するとOOMが発生する問題を修正 [#55711](https://github.com/pingcap/tidb/issues/55711) @[joccau](https://github.com/joccau)
+    - DDL履歴ジョブが多すぎると、履歴DDLジョブに関する情報をリクエストするとOOMが発生する問題を修正 [#55711](https://github.com/pingcap/tidb/issues/55711) @[joccau](https://github.com/joccau)
     - グローバルソートが有効で、リージョンサイズが96 MiBを超える場合に`IMPORT INTO`の実行が停止する問題を修正しました。 [#55374](https://github.com/pingcap/tidb/issues/55374) @[lance6716](https://github.com/lance6716)
     - 一時テーブルで`IMPORT INTO`を実行すると TiDB がクラッシュする問題を修正しました [#55970](https://github.com/pingcap/tidb/issues/55970) @[D3Hunter](https://github.com/D3Hunter)
     - 一意インデックスを追加すると`duplicate entry`エラーが発生する問題を修正 [#56161](https://github.com/pingcap/tidb/issues/56161) @[tangenta](https://github.com/tangenta)

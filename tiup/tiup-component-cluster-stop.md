@@ -1,6 +1,6 @@
 ---
 title: tiup cluster stop
-summary: この「tiup cluster stop」コマンドは、指定されたクラスターのすべてまたは一部のサービスを停止するために使用されます。コアサービスが停止すると、クラスターはサービスを提供できなくなります。コマンド構文は「tiup cluster stop <cluster-name> [flags]」です。オプションには、停止するノードを指定する -N/--node、停止するノードの役割を指定する -R/--role、ヘルプ情報を表示する -h/--help があります。出力は、サービスの停止に関するログです。
+summary: "tiup cluster stop"コマンドは、指定されたクラスターのすべてまたは一部のサービスを停止するために使用されます。コアサービスが停止すると、クラスターはサービスを提供できなくなります。コマンド構文は"tiup cluster stop <cluster-name> [flags]"です。オプションには、停止するノードを指定する -N/--node、停止するノードの役割を指定する -R/--role、ヘルプ情報を表示する -h/--help があります。出力は、サービスの停止に関するログです。
 ---
 
 # tiup cluster stop {#tiup-cluster-stop}

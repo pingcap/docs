@@ -60,7 +60,7 @@ TiDB バージョン: 7.1.5
     - `TIDB_HOT_REGIONS`テーブルをクエリすると、誤って`INFORMATION_SCHEMA`テーブルが返される可能性がある問題を修正しました。 [#50810](https://github.com/pingcap/tidb/issues/50810) @[Defined2014](https://github.com/Defined2014)
     - `IFNULL`関数によって返される型が MySQL と一致しない問題を修正しました [#51765](https://github.com/pingcap/tidb/issues/51765) @[YangKeao](https://github.com/YangKeao)
     - TTL 機能により、データ範囲の分割が不正確になり、場合によってはでデータ ホットスポットが発生する問題を修正しました。 [#51527](https://github.com/pingcap/tidb/issues/51527) @[lcwangchao](https://github.com/lcwangchao)
-    - TiDBがオフラインになっているTiFlashノードにプローブ要求を送信し続ける問題を修正[#46602](https://github.com/pingcap/tidb/issues/46602) @[zyguan](https://github.com/zyguan)
+    - TiDBがオフラインになっているTiFlashノードにプローブリクエストを送信し続ける問題を修正[#46602](https://github.com/pingcap/tidb/issues/46602) @[zyguan](https://github.com/zyguan)
     - AutoIDLeaderの変更により、 `AUTO_ID_CACHE=1` の場合にAUTO_INCREMENT列の値が減少する可能性がある問題を修正しました。 [#52600](https://github.com/pingcap/tidb/issues/52600) @[tiancaiamao](https://github.com/tiancaiamao)
     - `INSERT IGNORE`を実行すると、一意インデックスとデータの間に不整合が発生する可能性がある問題を修正しました。 [#51784](https://github.com/pingcap/tidb/issues/51784) @[wjhuang2016](https://github.com/wjhuang2016)
     - 一意インデックスを追加するとTiDBがpanicする可能性がある問題を修正[#52312](https://github.com/pingcap/tidb/issues/52312) @[wjhuang2016](https://github.com/wjhuang2016)

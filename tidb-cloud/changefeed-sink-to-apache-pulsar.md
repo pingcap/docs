@@ -97,7 +97,7 @@ Apache PulsarサービスにパブリックIPアクセスを提供する場合�
     - **Connectivity Method**：Pulsarエンドポイントへの接続方法に応じて、 **VPC Peering**または**Public**を選択してください。
     - **Pulsar Broker** : Pulsar Broker のエンドポイントを入力します。ポートとドメインまたは IP アドレスはコロンで区切ります。例`example.org:6650` 。
 
-3. **Authentication**セクションで、Pulsarの認証設定に応じて**Auth Type**オプションを選択します。選択したオプションに基づいて、要求された認証情報を入力します。
+3. **Authentication**セクションで、Pulsarの認証設定に応じて**Auth Type**オプションを選択します。選択したオプションに基づいて、リクエストされた認証情報を入力します。
 
 4. オプション：**Advanced Settings**セクションで、追加設定を構成します。
 

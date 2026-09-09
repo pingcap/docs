@@ -16,7 +16,7 @@ TiDB バージョン: 6.5.5
 - TiDB
 
     - [`NO_MERGE_JOIN()`](/optimizer-hints.md#no_merge_joint1_name--tl_name-)、[`NO_INDEX_JOIN()`](/optimizer-hints.md#no_index_joint1_name--tl_name-)、[`NO_INDEX_MERGE_JOIN()`](/optimizer-hints.md#no_index_merge_joint1_name--tl_name-)、[`NO_HASH_JOIN()`](/optimizer-hints.md#no_hash_joint1_name--tl_name-)、[`NO_INDEX_HASH_JOIN()`](/optimizer-hints.md#no_index_hash_joint1_name--tl_name-)を含む新しいオプティマイザヒントを追加 [#45520](https://github.com/pingcap/tidb/issues/45520) @[qw4990](https://github.com/qw4990)
-    - コプロセッサに関連する要求元情報を追加します [#46514](https://github.com/pingcap/tidb/issues/46514) @[you06](https://github.com/you06)
+    - コプロセッサに関連するリクエスト元情報を追加します [#46514](https://github.com/pingcap/tidb/issues/46514) @[you06](https://github.com/you06)
 
 - TiKV
 

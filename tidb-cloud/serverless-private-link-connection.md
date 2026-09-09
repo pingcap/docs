@@ -71,7 +71,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
 5. **Create**をクリックします。
 
-6. [AWSコンソール](https://console.aws.amazon.com)のエンドポイントサービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を承認します。
+6. [AWSコンソール](https://console.aws.amazon.com)のエンドポイントサービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続リクエストを承認します。
 
 </div>
 
@@ -85,7 +85,7 @@ TiDB Cloud CLI を使用してプライベートリンク接続を作成する�
     ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type AWS_ENDPOINT_SERVICE --aws.endpoint-service-name <endpoint-service-name>
     ```
 
-2. [AWSコンソール](https://console.aws.amazon.com)のエンドポイントサービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を承認します。
+2. [AWSコンソール](https://console.aws.amazon.com)のエンドポイントサービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続リクエストを承認します。
 
 </div>
 </SimpleTab>
@@ -161,7 +161,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
 5. **Create**をクリックします。
 
-6. [Alibaba Cloudコンソール](https://console.alibabacloud.com)のエンドポイントサービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を許可します。
+6. [Alibaba Cloudコンソール](https://console.alibabacloud.com)のエンドポイントサービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続リクエストを許可します。
 
 </div>
 
@@ -175,7 +175,7 @@ TiDB Cloud CLI を使用してプライベートリンク接続を作成する�
     ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type ALICLOUD_ENDPOINT_SERVICE --alicloud.endpoint-service-name <endpoint-service-name>
     ```
 
-2. [Alibaba Cloudコンソール](https://console.alibabacloud.com)のエンドポイントサービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続要求を許可します。
+2. [Alibaba Cloudコンソール](https://console.alibabacloud.com)のエンドポイントサービスの詳細ページに移動します。**Endpoint Connections**タブで、 TiDB Cloudからのエンドポイント接続リクエストを許可します。
 
 </div>
 </SimpleTab>

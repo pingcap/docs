@@ -114,7 +114,7 @@ TiDB バージョン: 7.5.7
     - CPUプロファイリング中にデッドロックが発生する可能性がある問題を修正 [#18474](https://github.com/tikv/tikv/issues/18474) @[YangKeao](https://github.com/YangKeao)
     - 特定のTiFlashレプリカによってオンライン アンセーフ リカバリがブロックされ、コミット インデックスが進まなくなる問題を修正しました。 [#18197](https://github.com/tikv/tikv/issues/18197) @[v01dstar](https://github.com/v01dstar)
     - TiKVがクライアントがデコードできない圧縮アルゴリズムを使用する可能性がある問題を修正しました [#18079](https://github.com/tikv/tikv/issues/18079) @[ekexium](https://github.com/ekexium)
-    - TiKV が高同時実行で過剰な SST 取り込み要求を許可する問題を修正 [#18452](https://github.com/tikv/tikv/issues/18452) @[hbisheng](https://github.com/hbisheng)
+    - TiKV が高同時実行で過剰な SST 取り込みリクエストを許可する問題を修正 [#18452](https://github.com/tikv/tikv/issues/18452) @[hbisheng](https://github.com/hbisheng)
     - Grafana の TiKV ダッシュボードで`Ingestion picked level`と`Compaction Job Size(files)`が誤って表示される問題を修正しました [#15990](https://github.com/tikv/tikv/issues/15990) @[Connor1996](https://github.com/Connor1996)
     - TiKV が再起動した後に予期しない`Server is busy`エラーが発生する問題を修正しました [#18233](https://github.com/tikv/tikv/issues/18233) @[LykxSassinator](https://github.com/LykxSassinator)
     - TiKVがブラジルとエジプトのタイムゾーンを誤って変換する問題を修正[#16220](https://github.com/tikv/tikv/issues/16220) @[overvenus](https://github.com/overvenus)

@@ -391,7 +391,7 @@ TiDBサーバーに関連するフィールド：
 
 TiKVコプロセッサータスクに関連するフィールド：
 
-- `SUM_COP_TASK_NUM` : 送信されたコプロセッサー要求の総数。
+- `SUM_COP_TASK_NUM` : 送信されたコプロセッサーリクエストの総数。
 - `MAX_COP_PROCESS_TIME` :コプロセッサータスクの最大実行時間。
 - `MAX_COP_PROCESS_ADDRESS` : 実行時間が最大となるコプロセッサータスクのアドレス。
 - `MAX_COP_WAIT_TIME` :コプロセッサータスクの最大待機時間。
