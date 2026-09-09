@@ -142,27 +142,19 @@ TiDB also limits the number of concurrent TTL tasks at the cluster level. You ca
 
 ### Scan expired rows using an index
 
-By default, TiDB uses an eligible index that starts with the TTL column to scan expired rows. Compared with scanning in table-key order, scanning in TTL-column order avoids repeatedly scanning unexpired index entries. TiDB splits the job according to the TiKV Regions of the selected index, and Regions that are entirely after the expiration-time boundary do not participate in the job.
+By default, TiDB uses an eligible index that starts with the TTL column to scan expired rows. This avoids scanning unexpired index entries. TiDB splits the job by the Regions of the selected index and does not create tasks for Regions entirely after the expiration-time boundary.
 
 This behavior is controlled by the [`tidb_ttl_enable_index_scan`](/system-variables.md#tidb_ttl_enable_index_scan) global variable, which is enabled by default. When this variable is disabled or no eligible index is available, TiDB falls back to scanning in table-key order and prevents the optimizer from selecting a secondary index for that scan.
 
-An index must meet all of the following requirements to be used by a TTL job:
+An eligible index must meet the following requirements:
 
-- It is a public, visible, local secondary index or nonclustered primary index. Clustered primary indexes, global indexes, multi-valued indexes, columnar indexes, and conditional indexes are not eligible.
-- Its first column is the TTL column, and every indexed column stores the full value of a visible table column. Prefix indexes and indexes on hidden expression columns are not eligible.
-- It provides a stable, unique pagination order. For a unique composite index, every indexed column other than the TTL column must be `NOT NULL`. For a non-unique index, the declared index columns must contain either the entire table key or none of it. If they contain none of the table key, TiDB appends the implicit table key to the pagination order when that physical order is supported.
-- The final pagination columns do not contain `SET`, `FLOAT`, or `DOUBLE` columns.
+- It is a visible secondary index or nonclustered primary index, and its first column is the TTL column.
+- Each index column indexes the full column value. Prefix indexes and expression indexes are not supported.
+- In a unique composite index, all columns except the TTL column are `NOT NULL`.
+- For a non-unique index, TiDB must be able to append the table row identifier to the scan order. Including all primary key columns in the index ensures this requirement; including only some columns of a composite primary key is not supported.
+- The columns used to identify a row do not use the `SET`, `FLOAT`, or `DOUBLE` data type.
 
-Here, the table key is the clustered primary key, or `_tidb_rowid` for a table without a clustered primary key. A non-unique index that contains only part of a composite table key is not eligible. An unsigned integer clustered primary key and a common handle with a prefix primary-key column cannot be used as an implicit suffix, but the index can still be eligible if it explicitly contains the complete table key.
-
-If multiple indexes are eligible, TiDB prefers a single-column index on the TTL column, then an index that explicitly contains the complete table key, and then the index with the shortest pagination tuple. If pagination tuples have the same length, TiDB prefers the index that requires reading fewer columns.
-
-> **Note:**
->
-> - During a rolling upgrade, if a table would use an index scan but the TiDB server builds in the cluster do not match, TiDB does not create a new TTL job for that table. The scheduler retries after the TiDB server builds become consistent. To keep creating jobs using table-key scans during the upgrade, temporarily disable `tidb_ttl_enable_index_scan`.
-> - If TiDB cannot obtain or compare server information, it creates the job using a table-key scan instead.
-> - If the selected index is dropped after a TTL job is created, the affected task reports an error. A later TTL job can select another eligible index or fall back to a table-key scan.
-> - Each scan page is a separate SQL statement. If an indexed value changes during a scan, the current job might skip the row or observe it again. Before deletion, TiDB checks the expiration condition again, so a row that is no longer expired is not deleted. An expired row skipped by the current job remains eligible for a later TTL job.
+TTL jobs do not use clustered primary indexes, partial indexes, global indexes, multi-valued indexes, columnar indexes, or invisible indexes.
 
 To disable the execution of TTL jobs, in addition to setting the `TTL_ENABLE='OFF'` table option, you can also disable the execution of TTL jobs in the entire cluster by setting the [`tidb_ttl_job_enable`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) global variable:
 
