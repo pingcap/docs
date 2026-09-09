@@ -49,7 +49,7 @@ This document describes how to configure an Alibaba Cloud private endpoint, enab
 
     3. In the Alibaba Cloud VPC console, open the endpoint details page and find the private IP addresses assigned to the endpoint elastic network interfaces (ENIs). Confirm that every IPv4 address returned by `getent ahostsv4` is an endpoint ENI private IP address and that `remote_ip` matches one of those addresses. This confirms that the tested connection to TiDB Cloud Lake uses Alibaba Cloud PrivateLink and does not traverse the public Internet. A `tls_verify=0` result indicates that the HTTPS certificate verification succeeded.
 
-    4. For the Japan (Tokyo) example in this document, check the health of the regional gateway:
+    4. Check the health of the regional gateway. Take the Japan (Tokyo) region as an example:
 
         ```shell
         curl --noproxy '*' -sS \
