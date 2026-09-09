@@ -1,6 +1,6 @@
 ---
 title: ti db create-db-sql-users
-summary: Create TiDB Cloud CLI-managed SQL users for a Starter cluster.
+summary: Create TiDB Cloud CLI-managed SQL users for a TiDB Cloud Starter instance.
 ---
 
 # ti db create-db-sql-users

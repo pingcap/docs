@@ -181,7 +181,7 @@ Removing binaries preserves profiles, credentials, Filesystem registrations, DB 
 rm -rf "$HOME/.ti"
 ```
 
-Deleting local state does not delete remote Starter clusters or Filesystem resources.
+Deleting local state does not delete remote TiDB Cloud Starter instances or Filesystem resources.
 
 ## What's next
 

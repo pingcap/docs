@@ -5,7 +5,7 @@ summary: Update a TiDB Cloud Starter cluster.
 
 # ti db update-db-cluster
 
-Updates the display name or monthly spending limit of one Starter cluster. The command verifies the service plan before sending the update and rejects non-Starter or unverifiable clusters without sending `PATCH`.
+Updates the display name or monthly spending limit of one TiDB Cloud Starter instance. The command verifies the service plan before sending the update and rejects non-Starter or unverifiable clusters without sending `PATCH`.
 
 > **Note:**
 >
@@ -39,7 +39,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 - Rename a cluster:
 
     ```bash
-    # Change the Starter cluster display name without recreating it.
+    # Change the TiDB Cloud Starter instance display name without recreating it.
     ti db update-db-cluster --db-cluster-id "<cluster-id>" --db-cluster-name app-db-v2
     ```
 

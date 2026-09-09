@@ -74,7 +74,7 @@ Command flags, environment inputs, saved configuration, and command defaults are
 
 ## Starter project placement
 
-The TiDB Cloud CLI does not accept or store a project selector. Starter cluster creation omits project placement and lets TiDB Cloud select its server-side default project. Project fields and labels returned by TiDB Cloud remain visible as resource metadata and are not reused for later requests.
+The TiDB Cloud CLI does not accept or store a project selector. TiDB Cloud Starter instance creation omits project placement and lets TiDB Cloud select its server-side default project. Project fields and labels returned by TiDB Cloud remain visible as resource metadata and are not reused for later requests.
 
 ## Filesystem credentials and remote inventory
 

@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Starter CLI Command Reference
-summary: Reference every `ti db` command for Starter clusters, branches, SQL users, connection strings, and SQL execution.
+summary: Reference every `ti db` command for TiDB Cloud Starter instances, branches, SQL users, connection strings, and SQL execution.
 ---
 
 # TiDB Cloud Starter CLI Command Reference
@@ -33,8 +33,8 @@ ti db
 
 | Command | Purpose and key inputs | Example |
 | --- | --- | --- |
-| `create-db-cluster` | Creates a Starter cluster. Requires `--db-cluster-type starter` and `--db-cluster-name`. Use `--wait` for an `ACTIVE` result. | `ti db create-db-cluster --db-cluster-type starter --db-cluster-name app-db --wait` |
-| `list-db-clusters` | Lists Starter clusters in the effective region. Requires `--db-cluster-type starter` and supports pagination, filtering, ordering, and queries. | `ti db list-db-clusters --db-cluster-type starter --query 'clusters[].{id:id,name:display_name}'` |
+| `create-db-cluster` | Creates a TiDB Cloud Starter instance. Requires `--db-cluster-type starter` and `--db-cluster-name`. Use `--wait` for an `ACTIVE` result. | `ti db create-db-cluster --db-cluster-type starter --db-cluster-name app-db --wait` |
+| `list-db-clusters` | Lists TiDB Cloud Starter instances in the effective region. Requires `--db-cluster-type starter` and supports pagination, filtering, ordering, and queries. | `ti db list-db-clusters --db-cluster-type starter --query 'clusters[].{id:id,name:display_name}'` |
 | `describe-db-cluster` | Reads one cluster by `--db-cluster-id`; `--view FULL` requests expanded fields. | `ti db describe-db-cluster --db-cluster-id "<cluster-id>" --view FULL` |
 | `update-db-cluster` | Changes the name or monthly spending limit of one cluster. Supports `--dry-run`. | `ti db update-db-cluster --db-cluster-id "<cluster-id>" --db-cluster-name app-db-v2` |
 | `delete-db-cluster` | Deletes one cluster by ID. Use `--wait` to wait until deletion is observable. | `ti db delete-db-cluster --db-cluster-id "<cluster-id>" --wait` |
@@ -49,12 +49,12 @@ ti db
 ## Prerequisites
 
 - Configure `ti` with `ti configure`.
-- Ensure the API key can manage Starter clusters in the selected project.
+- Ensure the API key can manage TiDB Cloud Starter instances in the selected project.
 - Use synthetic names in automation so cleanup can identify only resources created by that run.
 
 ## Manage clusters
 
-Preview and create a Starter cluster:
+Preview and create a TiDB Cloud Starter instance:
 
 ```bash
 ti db create-db-cluster \
@@ -78,7 +78,7 @@ ti db list-db-clusters --db-cluster-type starter --query 'clusters[].{id:id,name
 ti --region aws-us-west-2 db list-db-clusters --db-cluster-type starter
 ```
 
-The list command also accepts `--page-token` and `--filter`. It always scopes the API request to the effective region, which resolves from global `--region`, then `TI_REGION_CODE`, then the selected profile. The shared TiDB Cloud API can return multiple service plans or unverifiable resources, so the TiDB Cloud CLI scans upstream pages and incrementally fills a ti result page with verified Starter clusters in that region. Its opaque `next_page_token` binds the profile, type, region, filter, and ordering; it omits `total_size`, because the server total can include clusters outside the verified result. A user `--filter` is combined with the mandatory region filter and cannot expand the result to another region.
+The list command also accepts `--page-token` and `--filter`. It always scopes the API request to the effective region, which resolves from global `--region`, then `TI_REGION_CODE`, then the selected profile. The shared TiDB Cloud API can return multiple service plans or unverifiable resources, so the TiDB Cloud CLI scans upstream pages and incrementally fills a ti result page with verified TiDB Cloud Starter instances in that region. Its opaque `next_page_token` binds the profile, type, region, filter, and ordering; it omits `total_size`, because the server total can include clusters outside the verified result. A user `--filter` is combined with the mandatory region filter and cannot expand the result to another region.
 
 Describe and update a cluster:
 

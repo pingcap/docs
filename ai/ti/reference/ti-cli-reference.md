@@ -223,7 +223,7 @@ The following task-oriented guides explain how commands work together. They are 
 | Guide | Purpose |
 | --- | --- |
 | [Install, Configure, and Update](/ai/ti/reference/ti-install-configure-update.md) | Install releases, configure profiles, update, and uninstall `ti` |
-| [Starter Databases and SQL](/ai/ti/reference/ti-starter-database.md) | Manage Starter clusters, branches, and SQL |
+| [Starter Databases and SQL](/ai/ti/reference/ti-starter-database.md) | Manage TiDB Cloud Starter instances, branches, and SQL |
 | [Filesystem](/ai/ti/reference/ti-filesystem.md) | Manage Filesystems, files, layers, packs, and mounts |
 | [Filesystem Git Workspaces](/ai/ti/reference/ti-filesystem-git.md) | Manage Git workspaces on mounted Filesystems |
 | [Filesystem Journals](/ai/ti/reference/ti-filesystem-journal.md) | Manage verifiable journals |

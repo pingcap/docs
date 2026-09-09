@@ -1,6 +1,6 @@
 ---
 title: Run a Daily TiDB Cloud CLI Workflow
-summary: Inspect resources, manage a Starter cluster and Filesystem, check for TiDB Cloud CLI updates, and clean up resources.
+summary: Inspect resources, manage a TiDB Cloud Starter instance and Filesystem, check for TiDB Cloud CLI updates, and clean up resources.
 ---
 
 # Run a Daily TiDB Cloud CLI Workflow
@@ -14,7 +14,7 @@ This example follows a typical operator workflow across TiDB Cloud Starter and T
 ## Prerequisites
 
 - Install `ti` and run `ti configure`.
-- Ensure your organization has capacity for one Starter cluster and one Filesystem.
+- Ensure your organization has capacity for one TiDB Cloud Starter instance and one Filesystem.
 
 ## Step 1. Inspect current resources
 
@@ -23,7 +23,7 @@ ti db list-db-clusters --db-cluster-type starter --output text
 ti fs list-file-systems --output text
 ```
 
-## Step 2. Create a Starter cluster
+## Step 2. Create a TiDB Cloud Starter instance
 
 ```bash
 ti db create-db-cluster \

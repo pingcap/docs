@@ -5,7 +5,7 @@ summary: Create a TiDB Cloud Starter cluster.
 
 # ti db create-db-cluster
 
-Creates a Starter cluster. The required `--db-cluster-type` must be `starter`; there is no implicit type. `--wait` waits for the cluster to become `ACTIVE`. The request omits project selection and lets TiDB Cloud select its server-side default project. The TiDB Cloud CLI validates the returned service plan; if verification fails after creation is accepted, it reports the cluster ID and retains the cluster for inspection.
+Creates a TiDB Cloud Starter instance. The required `--db-cluster-type` must be `starter`; there is no implicit type. `--wait` waits for the cluster to become `ACTIVE`. The request omits project selection and lets TiDB Cloud select its server-side default project. The TiDB Cloud CLI validates the returned service plan; if verification fails after creation is accepted, it reports the cluster ID and retains the cluster for inspection.
 
 > **Note:**
 >
@@ -41,7 +41,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 - Create a cluster and wait until it is active:
 
     ```bash
-    # Wait until the new Starter cluster reaches the ACTIVE state.
+    # Wait until the new TiDB Cloud Starter instance reaches the ACTIVE state.
     ti db create-db-cluster --db-cluster-type starter --db-cluster-name app-db --wait
     ```
 
@@ -62,7 +62,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 - Set a monthly spending limit:
 
     ```bash
-    # Create a paid Starter cluster with a monthly limit expressed in US dollar cents.
+    # Create a paid TiDB Cloud Starter instance with a monthly limit expressed in US dollar cents.
     ti db create-db-cluster --db-cluster-type starter --db-cluster-name production-db --monthly-spending-limit-usd-cents 1000 --wait
     ```
 

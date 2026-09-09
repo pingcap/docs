@@ -26,7 +26,7 @@ TiDB supports SQL privileges, but a conventional client session uses the privile
 ## Prerequisites
 
 - Configure `ti`.
-- Select an active Starter cluster ID.
+- Select an active TiDB Cloud Starter instance ID.
 
 ## Step 1. Prepare users
 

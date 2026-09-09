@@ -5,7 +5,7 @@ summary: List branches for a TiDB Cloud Starter cluster.
 
 # ti db list-db-cluster-branches
 
-Lists branches for one Starter cluster, with optional pagination. The command verifies that the parent cluster is Starter before listing branches.
+Lists branches for one TiDB Cloud Starter instance, with optional pagination. The command verifies that the parent cluster is Starter before listing branches.
 
 > **Note:**
 >
@@ -37,7 +37,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 - List cluster branches:
 
     ```bash
-    # Return all branches that belong to the selected Starter cluster.
+    # Return all branches that belong to the selected TiDB Cloud Starter instance.
     ti db list-db-cluster-branches --db-cluster-id "<cluster-id>"
     ```
 

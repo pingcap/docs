@@ -111,7 +111,7 @@ unset TI_FS_FILE_SYSTEM_ID
 
 ### Option B: Query a Starter database
 
-Create a Starter cluster and save its ID:
+Create a TiDB Cloud Starter instance and save its ID:
 
 ```bash
 export TI_DB_CLUSTER_ID="$(ti db create-db-cluster \

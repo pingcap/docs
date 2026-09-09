@@ -40,7 +40,7 @@ New Starter and Filesystem automation should use the TiDB Cloud CLI. Use `ticlou
 
 The TiDB Cloud CLI covers the following functional areas:
 
-- Starter cluster and branch lifecycle operations;
+- TiDB Cloud Starter instance and branch lifecycle operations;
 - read-only, read-write, and admin SQL users, connection strings, and one-statement SQL execution;
 - Filesystem provisioning, direct file operations, and FUSE or WebDAV mounts;
 - Filesystem layers, packs, Git workspaces, journals, and vault operations;

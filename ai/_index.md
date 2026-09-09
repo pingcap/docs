@@ -107,7 +107,7 @@ The command reference follows the two-level `ti` command tree. Every command has
 
 | Document | Description |
 | --- | --- |
-| [Daily Workflow](/ai/ti/reference/ti-daily-workflow-example.md) | Manage one Starter cluster and Filesystem in a routine operator flow. |
+| [Daily Workflow](/ai/ti/reference/ti-daily-workflow-example.md) | Manage one TiDB Cloud Starter instance and Filesystem in a routine operator flow. |
 | [Query SQL with Roles](/ai/ti/reference/ti-query-sql-with-roles-example.md) | Use explicit read-only, read-write, and admin SQL roles. |
 | [Share a Filesystem Across Machines](/ai/ti/reference/ti-share-filesystem-across-machines-example.md) | Transfer an owner token securely and verify cross-machine visibility. |
 | [Hand Off CI Artifacts Between Jobs](/ai/ti/reference/ti-ci-artifact-handoff-example.md) | Persist build output across isolated jobs without copying a complete TiDB Cloud CLI profile. |

@@ -5,7 +5,7 @@ summary: List TiDB Cloud Starter clusters.
 
 # ti db list-db-clusters
 
-Lists verified Starter clusters in the effective region with pagination, filtering, ordering, and JMESPath projection. The required `--db-cluster-type` must be `starter`. Cross-region, non-Starter, and unverifiable clusters are omitted. The command incrementally fills each result page from TiDB Cloud API pages and returns an opaque ti `next_page_token`; it omits the server `total_size`, which can include resources outside the verified result.
+Lists verified TiDB Cloud Starter instances in the effective region with pagination, filtering, ordering, and JMESPath projection. The required `--db-cluster-type` must be `starter`. Cross-region, non-Starter, and unverifiable clusters are omitted. The command incrementally fills each result page from TiDB Cloud API pages and returns an opaque ti `next_page_token`; it omits the server `total_size`, which can include resources outside the verified result.
 
 > **Note:**
 >
@@ -41,7 +41,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 - List clusters:
 
     ```bash
-    # Return Starter clusters in the profile's configured region as structured JSON.
+    # Return TiDB Cloud Starter instances in the profile's configured region as structured JSON.
     ti db list-db-clusters --db-cluster-type starter
     ```
 

@@ -5,7 +5,7 @@ summary: Delete a branch from a TiDB Cloud Starter cluster.
 
 # ti db delete-db-cluster-branch
 
-Deletes one branch from a Starter cluster. The command verifies that the parent cluster is Starter before reading or deleting the branch.
+Deletes one branch from a TiDB Cloud Starter instance. The command verifies that the parent cluster is Starter before reading or deleting the branch.
 
 > **Note:**
 >
@@ -37,7 +37,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 - Delete a branch:
 
     ```bash
-    # Delete only the selected branch from its parent Starter cluster.
+    # Delete only the selected branch from its parent TiDB Cloud Starter instance.
     ti db delete-db-cluster-branch --db-cluster-id "<cluster-id>" --db-cluster-branch-id "<branch-id>"
     ```
 
