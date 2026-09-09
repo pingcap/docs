@@ -52,7 +52,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - CF size：各カラムファミリーのサイズ
 - Store size：TiKVインスタンスごとのストレージサイズ
 - Channel full: TiKV インスタンスごとのチャネル満杯エラーの数。通常の場合は`0`になります。
-- Active written leaders: 各 TiKV インスタンスで執筆されているリーダーの数
+- Active written leaders: 各 TiKV インスタンスで書き込みが行われているリーダーの数
 - Approximate Region size：おおよそのリージョンサイズ
 - Approximate Region size Histogram：各おおよそのリージョンサイズのヒストグラム
 - Region average written keys：TiKVインスタンスごとにリージョンに書き込まれたキーの平均数
@@ -76,7 +76,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 - Raft store CPU: `raftstore`スレッドの CPU 使用率。通常の場合、CPU 使用率は 80% * `raftstore.store-pool-size`未満である必要があります。
 - Async apply CPU: `async apply`スレッドのCPU使用率。通常の場合、CPU使用率は90% * `raftstore.apply-pool-size`未満である必要があります。
-- Store writer CPU: 非同期IOスレッドのCPU使用率。通常の場合`raftstore.store-io-pool-size` CPU使用率は90%未満である必要があります。
+- Store writer CPU: 非同期IOスレッドのCPU使用率。通常の場合、CPU使用率は90% * `raftstore.store-io-pool-size`未満である必要があります。
 - gRPC poll CPU: `gRPC`スレッドの CPU 使用率。通常の場合、CPU 使用率は 80% * `server.grpc-concurrency`未満である必要があります。
 - Scheduler worker CPU: `scheduler worker`スレッドの CPU 使用率。通常の場合、CPU 使用率は 90% * `storage.scheduler-worker-pool-size`未満である必要があります。
 - Storage ReadPool CPU: `storage read pool`スレッドの CPU 使用率
@@ -289,7 +289,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 ### Coprocessor Overview {#coprocessor-overview}
 
-- Request duration：コプロセッサからのリクエストを受信して​​から、リクエストの処理が完了するまでの合計時間
+- Request duration：コプロセッサからのリクエストを受信してから、リクエストの処理が完了するまでの合計時間
 - Total Requests：1秒あたりのリクエストの種類別数
 - Handle duration：コプロセッサ要求を実際に処理した時間（1分あたり）のヒストグラム
 - Total Request Errors：コプロセッサーが1秒あたりに発生させたリクエストエラーの数。短時間に多数のエラーが発生するべきではありません。
@@ -305,10 +305,10 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - Wait duration: コプロセッサ要求が処理されるのを待っている間に消費される時間。 `10s` (P99.99) 未満である必要があります。
 - 95% Wait duration by store：コプロセッサ要求が処理待ち状態にある時間（TiKVインスタンスごと、1秒あたり）（P95）
 - Total DAG Requests：1秒あたりのDAGリクエストの総数
-- Total DAG Executors：1秒あたりのDAG実行者の総数
+- Total DAG Executors：1秒あたりのDAG Executorの総数
 - Total Ops Details (Table Scan)：コプロセッサでselectスキャンを実行する際の、1秒あたりのRocksDB内部操作数
 - Total Ops Details (Index Scan)：コプロセッサでインデックススキャンを実行する際の、1秒あたりのRocksDB内部操作の数
-- Total Ops Details by CF (Table Scan)：コプロセッサで選択スキャンを実行する際の、各CFにおける1秒あたりのRocksDB内部操作の数
+- Total Ops Details by CF (Table Scan)：コプロセッサでselectスキャンを実行する際の、各CFにおける1秒あたりのRocksDB内部操作の数
 - Total Ops Details by CF (Index Scan)：コプロセッサでインデックススキャンを実行する際の、各CFにおける1秒あたりのRocksDB内部操作の数
 
 ### Threads {#threads}
@@ -329,17 +329,17 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - WAL sync operations：1秒あたりのWAL同期操作の回数
 - Write WAL duration：WALの書き込みに要した時間
 - WAL sync duration：WAL同期操作の実行に要する時間
-- Compaction operations：1秒あたりの圧縮および洗浄作業の回数
-- Compaction duration：圧縮および洗浄作業の実行に要する時間
+- Compaction operations：1秒あたりの圧縮およびフラッシュ作業の回数
+- Compaction duration：圧縮およびフラッシュ作業の実行に要する時間
 - SST read duration：SSTファイルの読み込みに要する時間
-- Write stall duration: 停止時間を書き込む。通常の場合は`0`となるはずです。
+- Write stall duration: 書き込みストールの継続時間。通常の場合は`0`となるはずです。
 - Memtable size：各カラムファミリーのmemtableサイズ
 - Memtable hit：memtableのヒット率
 - Block cache size：ブロックキャッシュのサイズ。共有ブロックキャッシュが無効になっている場合は、カラムファミリーごとに内訳が表示されます。
 - Block cache hit：ブロックキャッシュのヒット率
 - Block cache flow：タイプごとのブロックキャッシュ操作のフローレート
 - Block cache operations: タイプごとのブロックキャッシュ操作の回数
-- Keys flow：キーの種類ごとの操作フローレート
+- Keys flow：タイプごとのキー操作のフローレート
 - Total keys：各カラムファミリー内のキーの数
 - Read flow：タイプごとの読み取り操作のフローレート
 - Bytes / Read：読み取り操作1回あたりのバイト数
@@ -351,7 +351,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - Read amplification: TiKVインスタンスごとのリード増幅率
 - Compression ratio：各レベルの圧縮率
 - Number of snapshots：TiKVインスタンスごとのスナップショット数
-- Oldest snapshots duration：最も古い未公開のスナップショットが存続している期間
+- Oldest snapshots duration：最も古い未解放のスナップショットが存続している期間
 - Number files at each level：各レベルにおける異なる列ファミリーのSSTファイルの数
 - Ingest SST duration seconds：SSTファイルの取り込みにかかる時間
 - Stall conditions changed of each CF：各カラムファミリーの失速条件が変更されました
@@ -384,23 +384,23 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 - Blob file count：Titan Blobファイルの数
 - Blob file size：Titan Blobファイルの合計サイズ
-- Live blob size：有効なブロブレコードの合計サイズ
+- Live blob size：有効なBlobレコードの合計サイズ
 - Blob cache hit：Titanブロックキャッシュのヒット率
-- Iter touched blob file count：単一のイテレータに関係するブロブファイルの数
-- Blob file discardable ratio distribution：BLOBファイルのBLOBレコード障害率分布
-- Blob key size：Titanブロブキーのサイズ
+- Iter touched blob file count：単一のイテレータに関係するBlobファイルの数
+- Blob file discardable ratio distribution：BlobファイルのBlobレコード障害率分布
+- Blob key size：Titan Blobキーのサイズ
 - Blob value size：Titan Blob値のサイズ
 - Blob get operations: Titan Blobにおける取得操作の回数
 - Blob get duration：Titan Blobで取得操作を実行する際に消費される時間
 - Blob iter operations：Titan Blobでイテレーション操作を実行する際に消費される時間
-- Blob seek duration：Titanブロブでシーク操作を実行する際に消費される時間
+- Blob seek duration：Titan Blobでシーク操作を実行する際に消費される時間
 - Blob next duration: Titan Blob で次の操作を実行する際に消費される時間
-- Blob prev duration: Titan blob で prev 操作を実行するのに要した時間
-- Blob keys flow：Titanブロブキーに対する操作のフローレート
+- Blob prev duration: Titan Blob で prev 操作を実行するのに要した時間
+- Blob keys flow：Titan Blobキーに対する操作のフローレート
 - Blob bytes flow：Titan Blobキー上のバイトフローレート
 - Blob file read duration：Titan Blobファイルの読み取りに要した時間
 - Blob file write duration：Titan Blobファイルの書き込みに要した時間
-- Blob file sync operations: ブロブファイル同期操作の回数
+- Blob file sync operations: Blobファイル同期操作の回数
 - Blob file sync duration：Blobファイルの同期にかかる時間
 - Blob GC action：Titan GCアクションの回数
 - Blob GC duration: Titan GC 期間
@@ -456,8 +456,8 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - Resolved-TS worker CPU：resolved-tsワーカースレッドのCPU使用率
 - Advance-TS worker CPU：Advance-TSワーカースレッドのCPU使用率
 - Scan lock worker CPU：スキャンロックワーカースレッドのCPU使用率
-- Max gap of resolved-ts：このTiKV内のすべてのアクティブ領域のresolved-tsと現在時刻との間の最大時間差
-- Max gap of safe-ts: この TiKV 内のすべてのアクティブな領域の安全時刻と現在時刻との間の最大時間差
+- Max gap of resolved-ts：このTiKV内のすべてのアクティブなリージョンのresolved-tsと現在時刻との間の最大時間差
+- Max gap of safe-ts: この TiKV 内のすべてのアクティブなリージョンのsafe-tsと現在時刻との間の最大時間差
 - Min Resolved TS Region：resolved-tsが最小であるリージョンのID
 - Min Safe TS Region：安全TSが最小であるリージョンのID
 - Check Leader Duration：リーダー要求の処理に費やされた時間の分布。処理時間は、要求の送信からリーダーでの応答の受信までの時間です。
@@ -494,7 +494,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - Initial Scan Generate Event Throughput：新しいリスナーストリームを生成する際の、段階的なスキャン速度
 - Abnormal Checkpoint TS Lag：各タスクの現在のチェックポイントTSと現在時刻とのラグ
 - Memory Of Events：増分スキャンによって生成された一時データが占めるメモリの推定量
-- Observed Region Count：現在視聴されているリージョンの数
+- Observed Region Count：現在監視されているリージョンの数
 - Errors：再試行可能なエラーおよび致命的ではないエラーの数と種類
 - Fatal Errors：発生した致命的なエラーの数と種類。通常、致命的なエラーが発生すると、タスクは一時停止します。
 - Checkpoint TS of Tasks：各タスクのチェックポイントTS
