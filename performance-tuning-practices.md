@@ -40,7 +40,7 @@ useServerPrepStmts=false
 
 #### TiDB Dashboard {#tidb-dashboard}
 
-下記のTiDB Dashboardの「Top SQL」ページを見ると、非ビジネスSQLタイプ`SELECT @@session.tx_isolation`最も多くのリソースを消費していることがわかります。TiDBはこれらのタイプのSQL文を迅速に処理しますが、実行回数が最も多く、全体的なCPU消費時間も最も高くなります。
+下記のTiDB Dashboardの「Top SQL」ページを見ると、非ビジネスSQLタイプ`SELECT @@session.tx_isolation`が最も多くのリソースを消費していることがわかります。TiDBはこれらのタイプのSQL文を迅速に処理しますが、実行回数が最も多く、全体的なCPU消費時間も最も高くなります。
 
 ![dashboard-for-query-interface](/media/performance/case1.png)
 
@@ -88,7 +88,7 @@ useServerPrepStmts=false&useConfigs=maxPerformance
 
 #### TiDB Dashboard {#tidb-dashboard}
 
-下記の TiDB DashboardのTop SQLページを見ると、最も多くのリソースを消費していた`SELECT @@session.tx_isolation`消えていることがわかります。
+下記の TiDB DashboardのTop SQLページを見ると、最も多くのリソースを消費していた`SELECT @@session.tx_isolation`が消えていることがわかります。
 
 ![dashboard-for-maxPerformance](/media/performance/case2.png)
 
@@ -303,7 +303,7 @@ TiDBの平均CPU使用率は827%から577%に低下しました。QPSが増加�
 
 - シナリオ 4 と比較すると、シナリオ 5 の**CPS By Type**ペインには`StmtExecute`コマンドのみがあり、これにより 2回のネットワーク ラウンド トリップが回避され、システム全体の QPS が向上します。
 - QPSが増加すると、解析時間、コンパイル時間、実行時間の観点からレイテンシーは減少しますが、クエリ時間は増加します。これは、TiDBが`StmtPrepare`と`StmtClose`非常に高速に処理するため、これら2つのコマンドタイプを削除すると平均クエリ時間が増加するためです。
-- SQLフェーズ別データベース時間では、 `execute`最も時間がかかり、データベース時間とほぼ一致しています。一方、SQL実行時間の概要では、 `tso wait`最も時間がかかり、 `execute`の4分の1以上がTSOの待機に費やされています。
+- SQLフェーズ別データベース時間では、 `execute`が最も時間がかかり、データベース時間とほぼ一致しています。一方、SQL実行時間の概要では、 `tso wait`が最も時間がかかり、 `execute`の4分の1以上がTSOの待機に費やされています。
 - 1秒あたり`tso wait`回の実行時間の合計は5.46秒です。`tso wait`実行時間の平均は196マイクロ秒、1秒あたり`tso cmd`回の実行時間は28,000回で、QPSの30,900に非常に近い値です。これは、TiDBの分離レベル`read committed`の実装により、トランザクション内のすべてのSQL文がPDにTSOを要求する必要があるためです。
 
 TiDB v6.0 は`rc read`を提供します。これは`tso cmd`を削減することで`read committed`分離レベルを最適化します。この機能はグローバル変数`set global tidb_rc_read_check_ts=on;`によって制御されます。この変数を有効にすると、TiDB のデフォルトの動作は`repeatable-read`分離レベルと同じように動作し、PD から取得する必要があるのは`start-ts`と`commit-ts`です。トランザクション内のステートメントは、最初に`start-ts`を使用して TiKV からデータを読み取ります。TiKV から読み取られたデータが`start-ts`より前の場合、データは直接返されます。TiKV から読み取られたデータが`start-ts`より後の場合、データは破棄されます。TiDB は PD から TSO を要求し、読み取りを再試行します。後続のステートメントの`for update ts`では、最新の PD TSO が使用されます。
