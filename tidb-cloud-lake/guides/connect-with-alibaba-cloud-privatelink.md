@@ -31,7 +31,7 @@ This document describes how to configure an Alibaba Cloud private endpoint, enab
 
 5. Verify the endpoint connection from an ECS instance in your VPC.
 
-    1. On the {{{ .lake }}} home page, click **Connect**. In the **Connect to TiDB Cloud** dialog, copy the **Host** value under **Connection Information**.
+    1. On the TiDB Cloud Lake home page, click **Connect**. In the **Connect to TiDB Cloud** dialog, copy the **Host** value under **Connection Information**.
 
         ![Copy the TiDB Cloud Lake host from the connection information](/media/tidb-cloud-lake/alibaba-privatelink-connection-host.png)
 
