@@ -72,7 +72,7 @@ TiDB Ansible バージョン: 3.1.0 GA
 
     - レプリカ読み取り によって発生するpanic問題を修正 [#7369](https://github.com/tikv/tikv/pull/7369) [#7418](https://github.com/tikv/tikv/pull/7418)
     - 復元プロセスで空のリージョンが作成される問題を修正しました [#7419](https://github.com/tikv/tikv/pull/7419)
-    - 繰り返しのロック解決要求が悲観的トランザクションの原子性を損なう可能性がある問題を修正[#7389](https://github.com/tikv/tikv/pull/7389)
+    - 繰り返しのロック解決リクエストが悲観的トランザクションの原子性を損なう可能性がある問題を修正[#7389](https://github.com/tikv/tikv/pull/7389)
 
 - TiFlash
 

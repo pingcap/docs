@@ -74,7 +74,7 @@ insert into t select * from t;
 - `Backoff_time` : ステートメントが再試行を必要とするエラーに遭遇した場合の、再試行までの待機時間。このような一般的なエラーには、 `lock occurs` 、 `Region split` 、および`tikv server is busy`などがあります。
 - `Plan` : ステートメントの実行計画。 `SELECT tidb_decode_plan('xxx...')`ステートメントを実行して、具体的な実行計画を解析します。
 - `Binary_plan` : バイナリエンコードされたステートメントの実行計画。特定の実行計画を解析するには、 [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan)ステートメントを実行します。 `Plan`および`Binary_plan`フィールドには同じ情報が含まれています。ただし、これら2つのフィールドから解析される実行計画の形式は異なります。
-- `Prepared` : このステートメントが`Prepare`または`Execute`の要求であるかどうか。
+- `Prepared` : このステートメントが`Prepare`または`Execute`のリクエストであるかどうか。
 - `Plan_from_cache` : このステートメントが実行プランキャッシュにヒットするかどうか。
 - `Plan_from_binding` : このステートメントがバインドされた実行計画を使用するかどうか。
 - `Has_more_results` : このステートメントには、ユーザーが取得できる結果がさらにあるかどうか。
@@ -120,7 +120,7 @@ insert into t select * from t;
 
 TiKVコプロセッサータスクフィールド：
 
-- `Request_count` : ステートメントが送信するコプロセッサー要求の数。
+- `Request_count` : ステートメントが送信するコプロセッサーリクエストの数。
 - `Total_keys` :コプロセッサーがスキャンしたキーの数。
 - `Process_time` : TiKV における SQL文の合計処理時間。データは TiKV に同時送信されるため、この値は`Query_time`を超える場合があります。
 - `Wait_time` : TiKV におけるステートメントの合計待機時間。TiKV のコプロセッサーは限られた数のスレッドを実行するため、コプロセッサーのすべてのスレッドが動作している場合、リクエストがキューに蓄積される可能性があります。キュー内のリクエストの処理に時間がかかると、後続のリクエストの待機時間が増加します。

@@ -17,7 +17,7 @@ summary: TiDB 2.1 RC3は2018年9月29日にリリースされ、安定性、互�
     - 定数畳み込みの最適化ルールの強化[#7696](https://github.com/pingcap/tidb/pull/7696)
     - テーブルデュアルへの伝播後にフィルターがnullになるデータソースを最適化します [#7756](https://github.com/pingcap/tidb/pull/7756)
 - SQL実行エンジン
-    - トランザクションにおける読み取り要求のパフォーマンスを最適化する [#7717](https://github.com/pingcap/tidb/pull/7717)
+    - トランザクションにおける読み取りリクエストのパフォーマンスを最適化する [#7717](https://github.com/pingcap/tidb/pull/7717)
     - 一部のエグゼキュータにおけるChunkメモリの割り当てコストを最適化する[#7540](https://github.com/pingcap/tidb/pull/7540)
     - ポイントクエリですべての NULL 値が取得される列によって発生する"index out of range"panicを修正[#7790](https://github.com/pingcap/tidb/pull/7790)
 - サーバ
@@ -51,7 +51,7 @@ summary: TiDB 2.1 RC3は2018年9月29日にリリースされ、安定性、互�
 ## TiKV {#tikv}
 
 - パフォーマンス
-    - コプロセッサ要求の同時実行を最適化する[#3515](https://github.com/tikv/tikv/pull/3515)
+    - コプロセッサリクエストの同時実行を最適化する[#3515](https://github.com/tikv/tikv/pull/3515)
 - 新機能
     - ログ関数のサポートを追加[#3603](https://github.com/tikv/tikv/pull/3603)
     - `sha1`関数サポートを追加 [#3612](https://github.com/tikv/tikv/pull/3612)

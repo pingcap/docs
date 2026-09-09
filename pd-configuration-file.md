@@ -566,12 +566,12 @@ pd-server関連のコンフィグレーション項目
 
 #### `read-base-cost` {#read-base-cost}
 
-- 読み取り要求からRUへの変換の基礎係数
+- 読み取りリクエストからRUへの変換の基礎係数
 - デフォルト値: 0.125
 
 #### `write-base-cost` {#write-base-cost}
 
-- 書き込み要求からRUへの変換の基礎係数
+- 書き込みリクエストからRUへの変換の基礎係数
 - デフォルト値: 1
 
 #### `read-cost-per-byte` {#read-cost-per-byte}

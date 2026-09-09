@@ -35,7 +35,7 @@ v5.3 の主な新機能または改善点は次のとおりです。
 | [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)                        | 変更     | 一時テーブルが TiDB でサポートされるようになったため、 `CREATE TEMPORARY TABLE`と`DROP TEMPORARY TABLE` `tidb_enable_noop_functions`を有効にする必要がなくなりました。                                                                                                                                                   |
 | [`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530) | 新しく追加された | テーブルの統計情報が期限切れになった場合のオプティマイザの動作を制御します。デフォルト値は`ON`です。テーブル内の変更された行数が総行数の80%を超える場合（この比率は設定[`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio)で調整できます）、オプティマイザは総行数以外の統計情報は信頼できないと判断し、代わりに疑似統計情報を使用します。値を`OFF`に設定すると、統計情報が期限切れになってもオプティマイザは引き続きそれらを使用します。 |
 | [`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530)               | 新しく追加された | TSOFollowerプロキシ機能を有効または無効にします。デフォルト値は`OFF`で、これはTSOFollowerプロキシ機能が無効であることを意味します。この場合、TiDBはPDリーダーからのみTSOを取得します。この機能を有効にすると、TiDBはTSOを取得する際にすべてのPDノードに均等にリクエストを送信します。PDフォロワーはTSOリクエストを転送することで、PDリーダーのCPU負荷を軽減します。                                                                 |
-| [`tidb_tso_client_batch_max_wait_time`](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v530)     | 新しく追加された | TiDBがPDにTSOを要求した際に、バッチ保存操作の最大待機時間を設定します。デフォルト値は`0`で、追加の待機時間はありません。                                                                                                                                                                                                            |
+| [`tidb_tso_client_batch_max_wait_time`](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v530)     | 新しく追加された | TiDBがPDにTSOをリクエストした際に、バッチ保存操作の最大待機時間を設定します。デフォルト値は`0`で、追加の待機時間はありません。                                                                                                                                                                                                            |
 | [`tidb_tmp_table_max_size`](/system-variables.md#tidb_tmp_table_max_size-new-in-v530)                             | 新しく追加された | [一時テーブル](/temporary-tables.md)個の最大サイズを制限します。一時テーブルがこのサイズを超えるとエラーが発生します。                                                                                                                                                                                                       |
 
 ### コンフィグレーションファイルのパラメータ {#configuration-file-parameters}
@@ -144,7 +144,7 @@ v5.3 の主な新機能または改善点は次のとおりです。
 
 - **PDのタイムスタンプ処理フローを最適化**
 
-    TiDBは、PDFollowerプロキシを有効にし、PDクライアントがTSOをバッチで要求する際に必要なバッチ待機時間を変更することで、タイムスタンプ処理フローを最適化し、PDのタイムスタンプ処理負荷を軽減します。これにより、システム全体のスケーラビリティが向上します。
+    TiDBは、PDFollowerプロキシを有効にし、PDクライアントがTSOをバッチでリクエストする際に必要なバッチ待機時間を変更することで、タイムスタンプ処理フローを最適化し、PDのタイムスタンプ処理負荷を軽減します。これにより、システム全体のスケーラビリティが向上します。
 
     - システム変数[`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530)を介して PDFollowerプロキシの有効化/無効化をサポートします。PD の TSO リクエスト負荷が高すぎる場合、PD フォロワープロキシを有効にすると、フォロワーのリクエストサイクル中に収集された TSO リクエストをリーダーノードに一括転送できます。このソリューションにより、クライアントとリーダー間の直接的なインタラクション数を効果的に削減し、リーダーへの負荷を軽減し、TiDB 全体のパフォーマンスを向上させることができます。
 
@@ -156,7 +156,7 @@ v5.3 の主な新機能または改善点は次のとおりです。
 
     > **Note:**
     >
-    > TSO 要求負荷が高くない場合は、この変数値を変更することはお勧めしません。
+    > TSO リクエスト負荷が高くない場合は、この変数値を変更することはお勧めしません。
 
     [ユーザードキュメント](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v530) [#3149](https://github.com/tikv/pd/issues/3149)
 
@@ -385,7 +385,7 @@ TiCDC v5.3.0以降、TiDBクラスター間の循環レプリケーション機�
     - `resolved_ts` で一部のコルーチンがリークする問題を修正 [#10965](https://github.com/tikv/tikv/issues/10965)
     - 応答サイズが4 GiBを超えるとコプロセッサに発生するpanic問題を修正[#9012](https://github.com/tikv/tikv/issues/9012)
     - スナップショットファイルがガベージコレクションできない場合に、スナップショット ガベージコレクション (GC) で GC スナップショットファイルが失われる問題を修正しました[#10813](https://github.com/tikv/tikv/issues/10813)
-    - コプロセッサー要求の処理中にタイムアウトによって発生するpanic問題を修正[#10852](https://github.com/tikv/tikv/issues/10852)
+    - コプロセッサーリクエストの処理中にタイムアウトによって発生するpanic問題を修正[#10852](https://github.com/tikv/tikv/issues/10852)
     - 統計スレッドの監視データによって発生するメモリリークを修正しました [#11195](https://github.com/tikv/tikv/issues/11195)
     - 一部のプラットフォームから cgroup 情報を取得する際に発生するpanic問題を修正[#10980](https://github.com/tikv/tikv/pull/10980)
     - MVCC 削除バージョンが圧縮フィルタ GC によって削除されないため、スキャンパフォーマンスが低下する問題を修正しました。 [#11248](https://github.com/tikv/tikv/pull/11248)

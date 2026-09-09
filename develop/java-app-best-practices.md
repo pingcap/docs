@@ -14,7 +14,7 @@ JavaアプリケーションでTiDBデータベースと連携する一般的な
 
 - ネットワーク プロトコル: クライアントは、標準の[MySQLプロトコル](https://dev.mysql.com/doc/dev/mysql-server/latest/PAGE_PROTOCOL.html)を介して TiDBサーバーと対話します。
 - JDBC APIとJDBCドライバ： Javaアプリケーションは通常、標準の[JDBC（Javaデータベース接続）](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) APIを使用してデータベースにアクセスします。TiDBに接続するには、JDBC APIを介してMySQLプロトコルを実装するJDBCドライバを使用できます。MySQL用の一般的なJDBCドライバには[MySQL Connector/J](https://github.com/mysql/mysql-connector-j)や[MariaDB Connector/J](https://mariadb.com/docs/connectors/mariadb-connector-j/about-mariadb-connector-j#about-mariadb-connectorj)などがあります。
-- データベース接続プール：アプリケーションは通常、接続要求のたびに接続を作成するオーバーヘッドを削減するために、接続プールを使用して接続をキャッシュし、再利用します。JDBCData [データソース](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html)接続プールAPIを定義しています。必要に応じて、さまざまなオープンソースの接続プール実装から選択できます。
+- データベース接続プール：アプリケーションは通常、接続リクエストのたびに接続を作成するオーバーヘッドを削減するために、接続プールを使用して接続をキャッシュし、再利用します。JDBCData [データソース](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html)接続プールAPIを定義しています。必要に応じて、さまざまなオープンソースの接続プール実装から選択できます。
 - データアクセスフレームワーク: アプリケーションは通常、 [MyBatis](https://mybatis.org/mybatis-3/index.html)や[Hibernate](https://hibernate.org/)などのデータアクセスフレームワークを使用して、データベースアクセス操作をさらに簡素化および管理します。
 - アプリケーションの実装: アプリケーションロジックは、いつどのコマンドをデータベースに送信するかを制御します。一部のアプリケーションは[春のトランザクション](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html)アスペクトを使用して、トランザクションの開始およびコミットのロジックを管理します。
 
@@ -60,7 +60,7 @@ OLTP (オンライントランザクション処理) シナリオの場合、プ
 
 #### `StreamingResult`を使用して実行結果を取得します。 {#use-streamingresult-to-get-the-execution-result}
 
-ほとんどのシナリオでは、実行効率を向上させるために、JDBCはデフォルトでクエリ結果を事前に取得し、クライアントのメモリに保存します。しかし、クエリが非常に大きな結果セットを返す場合、クライアントはデータベースサーバーに一度に返されるレコード数を減らし、クライアントのメモリが準備できるまで待機し、次のバッチを要求することがよくあります。
+ほとんどのシナリオでは、実行効率を向上させるために、JDBCはデフォルトでクエリ結果を事前に取得し、クライアントのメモリに保存します。しかし、クエリが非常に大きな結果セットを返す場合、クライアントはデータベースサーバーに一度に返されるレコード数を減らし、クライアントのメモリが準備できるまで待機し、次のバッチをリクエストすることがよくあります。
 
 JDBCでは通常、以下の2つの処理方法が使用されます。
 

@@ -14,7 +14,7 @@ TiDB バージョン: 5.1.4
 - TiDB
 
     - システム変数[`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)のデフォルト値を`2`から`1`に変更します[#31748](https://github.com/pingcap/tidb/issues/31748)
-    - v5.1.4以降、TiKVが`storage.enable-ttl = true`に設定されている場合、TiKVのTTL機能は[RawKVモード](https://tikv.org/docs/5.1/concepts/explore-tikv-features/ttl/) のみをサポートしているため、TiDBからの要求は拒否されます。 [#27303](https://github.com/pingcap/tidb/issues/27303)
+    - v5.1.4以降、TiKVが`storage.enable-ttl = true`に設定されている場合、TiKVのTTL機能は[RawKVモード](https://tikv.org/docs/5.1/concepts/explore-tikv-features/ttl/) のみをサポートしているため、TiDBからのリクエストは拒否されます。 [#27303](https://github.com/pingcap/tidb/issues/27303)
 
 - ツール
 
@@ -91,7 +91,7 @@ TiDB バージョン: 5.1.4
     - 新しい選出が終了した後に`Prepare Merge`トリガーされたが、分離されたピアに通知されない場合のメタデータ破損の問題を修正しました[#11526](https://github.com/tikv/tikv/issues/11526)
     - コルーチンの実行速度が速すぎる場合に時々発生するデッドロックの問題を修正しました[#11549](https://github.com/tikv/tikv/issues/11549)
     - フレームグラフのプロファイリング時に発生する可能性のあるデッドロックとメモリリークの問題を修正[#11108](https://github.com/tikv/tikv/issues/11108)
-    - 悲観的トランザクションで事前書き込み要求を再試行するときにまれに発生するデータの不整合の問題を修正[#11187](https://github.com/tikv/tikv/issues/11187)
+    - 悲観的トランザクションで事前書き込みリクエストを再試行するときにまれに発生するデータの不整合の問題を修正[#11187](https://github.com/tikv/tikv/issues/11187)
     - 設定`resource-metering.enabled`が動作しないバグを修正[#11235](https://github.com/tikv/tikv/issues/11235)
     - `resolved_ts` で一部のコルーチンがリークする問題を修正 [#10965](https://github.com/tikv/tikv/issues/10965)
     - 書き込みフローが低い場合に"GC can not work"という誤った警告が報告される問題を修正[#9910](https://github.com/tikv/tikv/issues/9910)

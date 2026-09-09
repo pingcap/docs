@@ -238,7 +238,7 @@ summary: TiDB 2.1 GA は 2018年 11月 30日にリリースされ、安定性、
 
     - RocksDBの停止を回避するためにスナップショット書き込みプロセスを改善しました
 
-    - [読み取り要求を処理するための`LocalReader`スレッドを追加し、読み取り要求の遅延を削減します](https://github.com/tikv/rfcs/pull/17)
+    - [読み取りリクエストを処理するための`LocalReader`スレッドを追加し、読み取りリクエストの遅延を削減します](https://github.com/tikv/rfcs/pull/17)
 
     - [大量の書き込みによる大きなリージョンを回避するために、 `BatchSplit`サポートします](https://github.com/tikv/rfcs/pull/6)
 

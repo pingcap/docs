@@ -351,7 +351,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
     - 多くのキー範囲を持つバッチに対するRaftstoreのサンプリング精度を向上[#12327](https://github.com/tikv/tikv/issues/12327)
     - `debug/pprof/profile`に正しい"Content-Type"を追加して、プロファイルをより簡単に識別できるようにします[#11521](https://github.com/tikv/tikv/issues/11521)
-    - Raftstore がハートビートを持っているときや読み取り要求を処理しているときにリーダーのリースの時間を無期限に更新し、レイテンシージッターを削減します[#11579](https://github.com/tikv/tikv/issues/11579)
+    - Raftstore がハートビートを持っているときや読み取りリクエストを処理しているときにリーダーのリースの時間を無期限に更新し、レイテンシージッターを削減します[#11579](https://github.com/tikv/tikv/issues/11579)
     - リーダーを切り替える際にコストが最も低いストアを選択すると、パフォーマンスの安定性が向上します[#10602](https://github.com/tikv/tikv/issues/10602)
     - Raftログを非同期に取得することで、 Raftstore をブロックすることで発生するパフォーマンスジッターを軽減します。 [#11320](https://github.com/tikv/tikv/issues/11320)
     - ベクトル計算の`QUARTER`関数をサポート [#5751](https://github.com/tikv/tikv/issues/5751)
