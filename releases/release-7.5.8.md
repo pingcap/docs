@@ -40,7 +40,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
 + TiFlash
 
-    - Fix the issue that TiFlash might return results inconsistent with TiKV after a column is modified from `NOT NULL` to `NULL` [#10680](https://github.com/pingcap/tiflash/issues/10680) @[JaySon-Huang](https://github.com/JaySon-Huang) <!-- component: storage --> <!-- pr: https://github.com/pingcap/tiflash/pull/10690 -->
+    - Fix a potential data inconsistency issue between TiFlash and TiKV after executing a DDL statement to remove the `NOT NULL` constraint of a column [#10680](https://github.com/pingcap/tiflash/issues/10680) @[JaySon-Huang](https://github.com/JaySon-Huang) <!-- component: storage --> <!-- pr: https://github.com/pingcap/tiflash/pull/10690 -->
 
 + Tools
 
