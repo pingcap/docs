@@ -26,7 +26,7 @@ TiDB バージョン: 7.5.5
 
     - Raftと RocksDB が異なるディスクにデプロイされている場合、RocksDB が配置されているディスクでは低速ディスク検出が機能しない問題を修正[#17884](https://github.com/tikv/tikv/issues/17884) @[LykxSassinator](https://github.com/LykxSassinator)
     - ピアのスローログを追加し、メッセージを保存します。 [#16600](https://github.com/tikv/tikv/issues/16600) @[Connor1996](https://github.com/Connor1996)
-    - ログの適用を待つために TiKV を再起動するときに発生する不安定なアクセス遅延を最適化し、TiKV の安定性を向上しました。 [#15874](https://github.com/tikv/tikv/issues/15874) @[LykxSassinator](https://github.com/LykxSassinator)
+    - ログのapplyを待つために TiKV を再起動するときに発生する不安定なアクセス遅延を最適化し、TiKV の安定性を向上しました。 [#15874](https://github.com/tikv/tikv/issues/15874) @[LykxSassinator](https://github.com/LykxSassinator)
 
 - TiFlash
 

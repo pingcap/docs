@@ -513,7 +513,7 @@ TiKV の設定ファイルは、コマンドラインパラメータよりも多
 
 ### `enable-async-apply-prewrite` {#enable-async-apply-prewrite}
 
-- 非同期コミットトランザクションが、プリライト要求を適用する前にTiKVクライアントに応答するかどうかを決定します。この設定項目を有効にすると、適用時間が長い場合はレイテンシーを容易に短縮でき、適用時間が不安定な場合は遅延ジッターを低減できます。
+- 非同期コミットトランザクションが、プリライト要求をapplyする前にTiKVクライアントに応答するかどうかを決定します。この設定項目を有効にすると、apply時間が長い場合はレイテンシーを容易に短縮でき、apply時間が不安定な場合は遅延ジッターを低減できます。
 - デフォルト値: `false`
 
 ### `reserve-space` {#reserve-space}
@@ -845,10 +845,10 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### `max-apply-unpersisted-log-limit` <span class="version-mark">v8.1.0で追加</span> {#max-apply-unpersisted-log-limit-new-in-v810}
 
-- 適用可能な、コミット済みだが永続化されていないRaftログの最大数。
+- applyできる、コミット済みだが永続化されていないRaftログの最大数。
 
-    - この設定項目を`0`より大きい値に設定すると、TiKVノードはコミット済みだが永続化されていないRaftログを事前に適用できるようになり、そのノードでのIOジッターによって発生するロングテールレイテンシーを効果的に削減できます。ただし、TiKVのメモリ使用量とRaftログが占めるディスク容量が増加する可能性もあります。
-    - この設定項目を`0`に設定すると、この機能が無効になります。つまり、TiKV はRaftログがコミットされ、かつ永続化されるまで待機してから適用する必要があります。この動作は、v8.2.0 より前のバージョンの動作と一致しています。
+    - この設定項目を`0`より大きい値に設定すると、TiKVノードはコミット済みだが永続化されていないRaftログを事前にapplyできるようになり、そのノードでのIOジッターによって発生するロングテールレイテンシーを効果的に削減できます。ただし、TiKVのメモリ使用量とRaftログが占めるディスク容量が増加する可能性もあります。
+    - この設定項目を`0`に設定すると、この機能が無効になります。つまり、TiKV はRaftログがコミットされ、かつ永続化されるまで待機してからapplyする必要があります。この動作は、v8.2.0 より前のバージョンの動作と一致しています。
 
 - デフォルト値: `1024`
 
@@ -1121,7 +1121,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### `apply-pool-size` {#apply-pool-size}
 
-- データをディスクにフラッシュするプール内のスレッドの許容数。これは、適用スレッドプールのサイズです。このスレッドプールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
+- データをディスクにフラッシュするプール内のスレッドの許容数。これは、Applyスレッドプールのサイズです。このスレッドプールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
 - デフォルト値: `2`
 - 値の範囲: `[1, CPU * 10]` 。 `CPU`はCPU コアの数を表します。
 
@@ -1210,7 +1210,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### `min-pending-apply-region-count` <span class="version-mark">v8.0.0で追加</span> {#min-pending-apply-region-count-new-in-v800}
 
-- TiKV起動時にRaftログ適用中のビジー状態にあるリージョンの最大数。Raftstoreは、このようなリージョンの数がこの値以下の場合にのみリーダー転送を受け入れ、ローリング再起動時の可用性低下を軽減します。
+- TiKV起動時にRaftログapply中のビジー状態にあるリージョンの最大数。Raftstoreは、このようなリージョンの数がこの値以下の場合にのみリーダー転送を受け入れ、ローリング再起動時の可用性低下を軽減します。
 - デフォルト値: `10`
 
 ### `request-voter-replicated-index-interval` <span class="version-mark">v6.6.0で追加</span> {#request-voter-replicated-index-interval-new-in-v660}

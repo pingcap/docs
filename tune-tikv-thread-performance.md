@@ -19,7 +19,7 @@ TiKVスレッドプールは、主にgRPC、Scheduler、UnifyReadPool、 Raftsto
 
     - すべてのRaftメッセージと新しいログを追加する提案を処理します。
     - Raftログをディスクに書き込みます。[`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)の値が`0`の場合、 Raftstoreスレッドはログをディスクに書き込みます。値が`0`でない場合、 RaftstoreスレッドはログをStoreWriterスレッドに送信します。
-    - 大部分のレプリカのRaftログが整合している場合、 Raftstoreスレッドはログを適用スレッドに送信します。
+    - 大部分のレプリカのRaftログが整合している場合、 RaftstoreスレッドはログをApplyスレッドに送信します。
 
 - StoreWriter スレッドプール: すべてのRaftログをディスクに書き込み、結果をRaftstoreスレッドに返します。
 

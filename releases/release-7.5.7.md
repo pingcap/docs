@@ -41,7 +41,7 @@ TiDB バージョン: 7.5.7
     - Raftstoreの`CompactedEvent`処理を`split-check`ワーカーに移動して最適化し、メインのRaftstoreスレッドのブロッキングを削減します。 [#18532](https://github.com/tikv/tikv/issues/18532) @[LykxSassinator](https://github.com/LykxSassinator)
     - スレッドごとのメモリ使用量のメトリックを追加します。 [#15927](https://github.com/tikv/tikv/issues/15927) @[Connor1996](https://github.com/Connor1996)
     - SST の取り込みが遅すぎる場合は`SST ingest is experiencing slowdowns`のみをログに記録し、パフォーマンスのジッターを回避するために`get_sst_key_ranges`呼び出しをスキップします[#18549](https://github.com/tikv/tikv/issues/18549) @[LykxSassinator](https://github.com/LykxSassinator)
-    - ログの適用を待つために TiKV を再起動するときに発生する不安定なアクセス遅延を最適化し、TiKV の安定性を向上しました。 [#15874](https://github.com/tikv/tikv/issues/15874) @[LykxSassinator](https://github.com/LykxSassinator)
+    - ログのapplyを待つために TiKV を再起動するときに発生する不安定なアクセス遅延を最適化し、TiKV の安定性を向上しました。 [#15874](https://github.com/tikv/tikv/issues/15874) @[LykxSassinator](https://github.com/LykxSassinator)
     - 残留データのクリーンアップメカニズムを最適化して、リクエストのレイテンシーへの影響を軽減します。 [#18107](https://github.com/tikv/tikv/issues/18107) @[LykxSassinator](https://github.com/LykxSassinator)
     - Raft Engineの`fetch_entries_to`のパフォーマンスを最適化して競合を減らし、混合ワークロードでのパフォーマンスを向上します。 [#18605](https://github.com/tikv/tikv/issues/18605) @[LykxSassinator](https://github.com/LykxSassinator)
     - 書き込み操作のフロー制御構成の動的な変更をサポート[#17395](https://github.com/tikv/tikv/issues/17395) @[glorv](https://github.com/glorv)

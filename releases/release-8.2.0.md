@@ -162,7 +162,7 @@ TiDB バージョン: 8.2.0
 | TiDB           | [`concurrently-init-stats`](/tidb-configuration-file.md#concurrently-init-stats-new-in-v810-and-v752)        | 変更    | 統計情報の初期化にかかる時間を短縮するため、デフォルト値を`false`から`true`に変更します。この設定項目は、 [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) `false`に設定されている場合にのみ有効になります。 |
 | TiDB           | [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)                   | 変更    | デフォルト値を`5`から`0`に変更し、最小値を`1`から`0`に変更します。値`0`は自動モードを意味し、サーバーの設定に基づいて同時実行数を自動的に調整します。                                                                                    |
 | TiDB           | [`token-limit`](/tidb-configuration-file.md#token-limit)                                                     | 変更    | TiDB Server のメモリ不足エラー (OOM) が発生するのを避けるため、最大値を`18446744073709551615` (64 ビット プラットフォーム) および`4294967295` `1048576`に変更します。これにより、同時にリクエストを実行できるセッション数は最大`1048576`まで設定できます。 |
-| TiKV           | [`max-apply-unpersisted-log-limit`](/tikv-configuration-file.md#max-apply-unpersisted-log-limit-new-in-v810) | 変更    | TiKVノードのI/Oジッターによって発生するロングテールレイテンシーを削減するため、デフォルト値を`0`から`1024`に変更します。これは、コミット済みだが永続化されていないRaftログの最大適用数が、デフォルトでは`1024`であることを意味します。                                      |
+| TiKV           | [`max-apply-unpersisted-log-limit`](/tikv-configuration-file.md#max-apply-unpersisted-log-limit-new-in-v810) | 変更    | TiKVノードのI/Oジッターによって発生するロングテールレイテンシーを削減するため、デフォルト値を`0`から`1024`に変更します。これは、applyできる、コミット済みだが永続化されていないRaftログの最大数が、デフォルトでは`1024`であることを意味します。                                      |
 | TiKV           | [`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)                          | 変更    | この設定項目では、TiKVからTiDBに送信される応答メッセージの圧縮アルゴリズムも制御できるようになりました。圧縮を有効にすると、CPUリソースの消費量が増加する可能性があります。                                                                           |
 | TiFlash        | [`security.redact_info_log`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)               | 変更    | 新しい値オプション`marker`が導入されました。値を`marker`に設定すると、ログ内のすべてのユーザーデータが`‹ ›`で囲まれます。                                                                                               |
 
@@ -212,11 +212,11 @@ TiDB バージョン: 8.2.0
 - TiKV
 
     - 単一の圧縮ジョブに関係する SST ファイルの数を表示する**圧縮ジョブサイズ (ファイル)**メトリックを追加します [#16837](https://github.com/tikv/tikv/issues/16837) @[zhangjinpeng87](https://github.com/zhangjinpeng87)
-    - [早期応募](/tikv-configuration-file.md#max-apply-unpersisted-log-limit-new-in-v810)をデフォルトで有効にします。この機能を有効にすると、 Raftリーダーは、クォーラム ピアがログを永続化した後、リーダー自身がログを永続化するのを待たずにログを適用できるため、少数の TiKV ノードでのジッターが書き込みリクエストのレイテンシーに与える影響が軽減されます。 [#16717](https://github.com/tikv/tikv/issues/16717) @[glorv](https://github.com/glorv)
+    - [早期apply](/tikv-configuration-file.md#max-apply-unpersisted-log-limit-new-in-v810)をデフォルトで有効にします。この機能を有効にすると、 Raftリーダーは、クォーラム ピアがログを永続化した後、リーダー自身がログを永続化するのを待たずにログをapplyできるため、少数の TiKV ノードでのジッターが書き込みリクエストのレイテンシーに与える影響が軽減されます。 [#16717](https://github.com/tikv/tikv/issues/16717) @[glorv](https://github.com/glorv)
     - **Raftのドロップメッセージ**の可視性を向上させ、書き込み速度低下の根本原因を特定する [#17093](https://github.com/tikv/tikv/issues/17093) @[Connor1996](https://github.com/Connor1996)
     - クラスターのレイテンシーの問題をトラブルシューティングするために、ファイル取り込みレイテンシーの可視性を向上させる [#17078](https://github.com/tikv/tikv/issues/17078) @[LykxSassinator](https://github.com/LykxSassinator)
     - リージョンレプリカのクリーンアップに別のスレッドを使用して、重要なRaftの読み取りと書き込みのレイテンシーを安定させる [#16001](https://github.com/tikv/tikv/issues/16001) @[hbisheng](https://github.com/hbisheng)
-    - 適用されるスナップショットの数の可視性を向上させる [#17078](https://github.com/tikv/tikv/issues/17078) @[hbisheng](https://github.com/hbisheng)
+    - applyされるスナップショットの数の可視性を向上させる [#17078](https://github.com/tikv/tikv/issues/17078) @[hbisheng](https://github.com/hbisheng)
 
 - PD
 

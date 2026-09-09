@@ -726,7 +726,7 @@ async write duration(async io enabled) =
 
 - 提案
 - コミット
-- 適用：上記の式に`tikv_raftstore_apply_wait_time_duration_secs + tikv_raftstore_apply_log_duration_seconds`を代入する
+- Apply：上記の式に`tikv_raftstore_apply_wait_time_duration_secs + tikv_raftstore_apply_log_duration_seconds`を代入する
 
 提案フェーズの期間は次のように計算されます。
 
@@ -855,7 +855,7 @@ tikv_raftstore_apply_log_duration_seconds =
     tikv_raftstore_apply_perf_context_time_duration_secs{type="write_memtable_time"}
 ```
 
-非同期書き込みプロセスでは、コミットされたログをKV DBに適用する必要があります。適用時間はRocksDBのパフォーマンスコンテキストから計算できます。
+非同期書き込みプロセスでは、コミットされたログをKV DBにapplyする必要があります。apply時間はRocksDBのパフォーマンスコンテキストから計算できます。
 
 ## 診断のユースケース {#diagnosis-use-cases}
 

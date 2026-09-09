@@ -122,7 +122,7 @@ show warnings;
 | `raftstore.raft-max-size-per-msg`                         | 生成できる単一のメッセージパケットのサイズのソフト制限                                                                                                                |
 | `raftstore.raft-entry-max-size`                           | 単一のRaftログの最大サイズに対するハード制限                                                                                                                   |
 | `raftstore.raft-entry-cache-life-time`                    | メモリ内のログキャッシュに許容される最大残り時間                                                                                                                   |
-| `raftstore.max-apply-unpersisted-log-limit`               | コミットされたが永続化されないRaftログの最大数を適用できます                                                                                                           |
+| `raftstore.max-apply-unpersisted-log-limit`               | コミットされたが永続化されないRaftログの最大数をapplyできます                                                                                                           |
 | `raftstore.split-region-check-tick-interval`              | リージョン分割が必要かどうかを確認する時間間隔                                                                                                                    |
 | `raftstore.region-split-check-diff`                       | リージョン分割前にリージョンデータが超過できる最大値                                                                                                                 |
 | `raftstore.pd-heartbeat-tick-interval`                    | PDへのリージョンのハートビートがトリガーされる時間間隔                                                                                                               |
@@ -141,9 +141,9 @@ show warnings;
 | `raftstore.merge-check-tick-interval`                     | マージチェックの時間間隔                                                                                                                               |
 | `raftstore.cleanup-import-sst-interval`                   | 期限切れのSSTファイルをチェックする時間間隔                                                                                                                    |
 | `raftstore.local-read-batch-size`                         | 1バッチで処理される読み取り要求の最大数                                                                                                                       |
-| `raftstore.apply-yield-write-size`                        | 適用スレッドが各ラウンドで1つのFSM（有限状態機械）に書き込むことができる最大バイト数                                                                                               |
+| `raftstore.apply-yield-write-size`                        | Applyスレッドが各ラウンドで1つのFSM（有限状態機械）に書き込むことができる最大バイト数                                                                                               |
 | `raftstore.hibernate-timeout`                             | 起動時に休止状態に入るまでの最短待機時間。この時間内は、TiKV は休止状態になりません（解放されません）。                                                                                     |
-| `raftstore.apply-pool-size`                               | ディスクにデータをフラッシュするプール内のスレッドの数。これは適用スレッドプールのサイズです。                                                                                           |
+| `raftstore.apply-pool-size`                               | ディスクにデータをフラッシュするプール内のスレッドの数。これはApplyスレッドプールのサイズです。                                                                                           |
 | `raftstore.store-pool-size`                               | Raftを処理するプール内のスレッドの数。これはRaftstoreスレッドプールのサイズです。                                                                                            |
 | `raftstore.apply-max-batch-size`                          | Raftステートマシンは、BatchSystemによってデータ書き込みリクエストをバッチ処理します。この設定項目は、1バッチでリクエストを実行できるRaftステートマシンの最大数を指定します。                                           |
 | `raftstore.store-max-batch-size`                          | Raftステートマシンは、BatchSystemによってログをディスクにフラッシュするリクエストをバッチ処理します。この設定項目は、1回のバッチでリクエストを処理できるRaftステートマシンの最大数を指定します。                                 |

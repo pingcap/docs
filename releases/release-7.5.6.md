@@ -27,7 +27,7 @@ TiDB バージョン: 7.5.6
 
     - 無効な`max_ts`更新の検出メカニズムを追加[#17916](https://github.com/tikv/tikv/issues/17916) @[ekexium](https://github.com/ekexium)
     - ピアのスローログを追加し、メッセージを保存します [#16600](https://github.com/tikv/tikv/issues/16600) @[Connor1996](https://github.com/Connor1996)
-    - ログの適用を待つために TiKV を再起動するときに発生する不安定なアクセス遅延を最適化し、TiKV の安定性を向上しました。 [#15874](https://github.com/tikv/tikv/issues/15874) @[LykxSassinator](https://github.com/LykxSassinator)
+    - ログのapplyを待つために TiKV を再起動するときに発生する不安定なアクセス遅延を最適化し、TiKV の安定性を向上しました。 [#15874](https://github.com/tikv/tikv/issues/15874) @[LykxSassinator](https://github.com/LykxSassinator)
 
 - TiFlash
 

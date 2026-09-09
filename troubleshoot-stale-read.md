@@ -17,21 +17,21 @@ summary: TiKV のステイル読み取りと safe-ts の原則を紹介し、 �
 
 ### safe-tsとは何ですか? {#what-is-safe-ts}
 
-safe-ts は、リージョン内の各ピアが保持するタイムスタンプです。この値より小さいタイムスタンプを持つすべてのトランザクションがローカルに適用されていることを保証し、ローカルステイル読み取りを可能にします。
+safe-ts は、リージョン内の各ピアが保持するタイムスタンプです。この値より小さいタイムスタンプを持つすべてのトランザクションがローカルにapplyされていることを保証し、ローカルステイル読み取りを可能にします。
 
 ### resolved-tsとは何ですか？ {#what-is-resolved-ts}
 
-resolved-ts は、この値より小さいタイムスタンプを持つすべてのトランザクションがリーダーによって適用済みであることを保証するタイムスタンプです。ピア概念であるsafe-tsとは異なり、resolved-ts はリージョンリーダーによってのみ管理されます。フォロワーの適用インデックスはリーダーよりも小さい場合があるため、resolved-tsをフォロワー内で直接safe-tsとして扱うことはできません。
+resolved-ts は、この値より小さいタイムスタンプを持つすべてのトランザクションがリーダーによってapply済みであることを保証するタイムスタンプです。ピア概念であるsafe-tsとは異なり、resolved-ts はリージョンリーダーによってのみ管理されます。フォロワーのapplyインデックスはリーダーよりも小さい場合があるため、resolved-tsをフォロワー内で直接safe-tsとして扱うことはできません。
 
 ### safe-tsの維持 {#the-maintenance-of-safe-ts}
 
-`RegionReadProgress`モジュールは safe-ts を管理します。リージョンリーダーはresolved-tsを管理し、定期的に、 resolved-ts、このresolved-tsを検証するための最低限必要な適用インデックス、そしてリージョン自体を、CheckLeader RPC を介して全レプリカの`RegionReadProgerss`モジュールに送信します。
+`RegionReadProgress`モジュールは safe-ts を管理します。リージョンリーダーはresolved-tsを管理し、定期的に、 resolved-ts、このresolved-tsを検証するための最低限必要なapplyインデックス、そしてリージョン自体を、CheckLeader RPC を介して全レプリカの`RegionReadProgerss`モジュールに送信します。
 
-ピアがデータを適用すると、適用インデックスが更新され、保留中のresolved-ts が新しい safe-ts になるかどうかがチェックされます。
+ピアがデータをapplyすると、applyインデックスが更新され、保留中のresolved-ts が新しい safe-ts になるかどうかがチェックされます。
 
 ### resolved-tsの維持 {#the-maintenance-of-resolved-ts}
 
-リージョンリーダーは、resolved-ts を管理するためにリゾルバを使用します。このリゾルバは、 Raft適用時に変更ログを受信することで、LOCK CF（カラムファミリー）内のロックを追跡します。初期化されると、リゾルバはリージョン全体をスキャンしてロックを追跡します。
+リージョンリーダーは、resolved-ts を管理するためにリゾルバを使用します。このリゾルバは、 Raftのapply時に変更ログを受信することで、LOCK CF（カラムファミリー）内のロックを追跡します。初期化されると、リゾルバはリージョン全体をスキャンしてロックを追跡します。
 
 ## ステイル読み取りの問題を診断する {#diagnose-stale-read-issues}
 
@@ -97,7 +97,7 @@ Resolver:
 上記の出力は、次のことを判断するのに役立ちます。
 
 - ロックがresolved-tsをブロックしているかどうか。
-- 適用インデックスが小さすぎて safe-ts を更新できないかどうか。
+- applyインデックスが小さすぎて safe-ts を更新できないかどうか。
 - フォロワー ピアが存在する場合に、リーダーが十分に更新されたresolved-tsを送信しているかどうか。
 
 ### ログを使用して診断する {#use-logs-to-diagnose}
