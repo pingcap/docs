@@ -59,7 +59,7 @@ useServerPrepStmts=false
 ![performance-overview-1-for-query-interface](/media/performance/j-1.png)
 
 - SQL タイプ別のデータベース時間: `Select`文 タイプがほとんどの時間を費やします。
-- SQL フェーズ別のデータベース時間: フェーズ`execute`と`compile`にほとんどの時間がかかります。
+- SQL フェーズ別のデータベース時間: `execute`フェーズと`compile`フェーズにほとんどの時間がかかります。
 - SQL 実行時間の概要: `Get` 、および`tso wait` `Cop`ほとんどの時間がかかります。
 - タイプ別 CPS: `Query`コマンドのみが使用されます。
 - プランキャッシュ OPS を使用したクエリ: データなしは、実行計画 キャッシュがヒットしていないことを示します。
@@ -107,7 +107,7 @@ useServerPrepStmts=false&useConfigs=maxPerformance
 ![performance-overview-1-for-maxPerformance](/media/performance/j-2.png)
 
 - SQL タイプ別のデータベース時間: `Select`文 タイプがほとんどの時間を費やします。
-- SQL フェーズ別のデータベース時間: フェーズ`execute`と`compile`にほとんどの時間がかかります。
+- SQL フェーズ別のデータベース時間: `execute`フェーズと`compile`フェーズにほとんどの時間がかかります。
 - SQL 実行時間の概要: `Get` `Prewrite`および`tso wait` `Cop`ほとんどの時間がかかります。
 - データベース時間では、レイテンシー`execute`と`compile`割合が最も高くなります。
 - タイプ別 CPS: `Query`コマンドのみが使用されます。
@@ -165,7 +165,7 @@ Prepared Statement インターフェイスを使用した後、データベー�
 QPSは24.4kから19.7kに低下しています。データベース時間の概要を見ると、アプリケーションが3種類のPreparedコマンドを使用しており、 `general`ステートメントタイプ（ `StmtPrepare`や`StmtClose`などのコマンドの実行時間を含む）がSQLタイプ別のデータベース時間で2番目に多いことがわかります。これは、Prepared Statementインターフェースを使用しても、実行プランキャッシュにヒットしていないことを示しています。これは、 `StmtClose`コマンド実行時に、TiDBが内部処理でSQL文の実行プランキャッシュをクリアするためです。
 
 - SQL タイプ別のデータベース時間: `Select`文 タイプが最も時間がかかり、次に`general`ステートメントが続きます。
-- SQL フェーズ別のデータベース時間: フェーズ`execute`と`compile`にほとんどの時間がかかります。
+- SQL フェーズ別のデータベース時間: `execute`フェーズと`compile`フェーズにほとんどの時間がかかります。
 - SQL 実行時間の概要: `Get` `Prewrite`および`tso wait` `Cop`ほとんどの時間がかかります。
 - タイプ別 CPS: 3種類のコマンド（`StmtPrepare`、`StmtExecute`、`StmtClose`）が使用されます。
 - 平均QPS = 19.7k (24.4kから19.7k)
@@ -214,12 +214,12 @@ PreparseStmt CPU = 25% CPU 時間 = 12.75秒
 
 #### パフォーマンス概要ダッシュボード {#performance-overview-dashboard}
 
-パフォーマンス概要ダッシュボードで最も顕著な変化は、フェーズ`compile`の平均時間です。シナリオ3の8.95秒/秒から1.18秒/秒に短縮されています。実行プランキャッシュを使用するクエリの数は、 `StmtExecute`の値とほぼ等しくなります。QPSの増加に伴い、1秒あたり`Select`文のデータベース消費時間は減少し、1秒あたり`general`ステートメントのデータベース消費時間は増加しています。
+パフォーマンス概要ダッシュボードで最も顕著な変化は、`compile`フェーズの平均時間です。シナリオ3の8.95秒/秒から1.18秒/秒に短縮されています。実行プランキャッシュを使用するクエリの数は、 `StmtExecute`の値とほぼ等しくなります。QPSの増加に伴い、1秒あたり`Select`文のデータベース消費時間は減少し、1秒あたり`general`ステートメントのデータベース消費時間は増加しています。
 
 ![performance-overview-1-for-3-commands](/media/performance/j-4.png)
 
 - SQL タイプ別のデータベース時間: `Select`文 タイプが最も時間がかかります。
-- SQL フェーズ別のデータベース時間: フェーズ`execute`がほとんどの時間を費やします。
+- SQL フェーズ別のデータベース時間: `execute`フェーズがほとんどの時間を費やします。
 - SQL 実行時間の概要: `tso wait` 、および`Cop` `Get`ほとんどの時間がかかります。
 - 実行プランキャッシュがヒットしました。プランキャッシュを使用するクエリのOPSの値は、1秒あたり約`StmtExecute`です。
 - CPSタイプ別: 3種類のコマンド（シナリオ3と同じ）
@@ -278,7 +278,7 @@ useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSize=1000&prepStmtCache
 ![performance-overview-for-1-command](/media/performance/j-5.png)
 
 - SQL タイプ別のデータベース時間: `Select`文 タイプが最も多くの時間を費やし、 `general`ステートメント タイプは消えます。
-- SQL フェーズ別のデータベース時間: フェーズ`execute`がほとんどの時間を費やします。
+- SQL フェーズ別のデータベース時間: `execute`フェーズがほとんどの時間を費やします。
 - SQL 実行時間の概要: `tso wait` 、および`Cop` `Get`ほとんどの時間がかかります。
 - 実行プランキャッシュがヒットしました。プランキャッシュを使用するクエリのOPSの値は、1秒あたり約`StmtExecute`です。
 - タイプ別 CPS: `StmtExecute`コマンドのみが使用されます。
@@ -331,7 +331,7 @@ RC 読み取りを使用した後、QPS は 30.9k から 34.9k に増加し、 `
 ![performance-overview-1-for-rc-read](/media/performance/j-6.png)
 
 - SQL タイプ別のデータベース時間: `Select`文 タイプがほとんどの時間を費やします。
-- SQL フェーズ別のデータベース時間: フェーズ`execute`がほとんどの時間を費やします。
+- SQL フェーズ別のデータベース時間: `execute`フェーズがほとんどの時間を費やします。
 - SQL 実行時間の概要: `Get` 、および`Prewrite` `Cop`ほとんどの時間がかかります。
 - 実行プランキャッシュがヒットしました。プランキャッシュを使用するクエリのOPSの値は、1秒あたり約`StmtExecute`です。
 - タイプ別 CPS: `StmtExecute`コマンドのみが使用されます。
@@ -359,7 +359,7 @@ RC 読み取りを使用した後、QPS は 30.9k から 34.9k に増加し、 `
 
 RC Read を`set global tidb_rc_read_check_ts=on;`で有効にした後、RC Read によって`tso cmd`の時間が大幅に短縮され、 `tso wait`と平均クエリ期間が短縮され、QPS が向上しました。
 
-現在のデータベース時間とレイテンシーの両方のボトルネックはフェーズ`execute`にあり、このフェーズでは`Get`と`Cop`の読み取りリクエストが最も高い割合を占めています。このワークロードのテーブルのほとんどは読み取り専用か、ほとんど変更されないため、TiDB v6.0.0以降でサポートされている小さなテーブルのキャッシュ機能を使用して、これらの小さなテーブルのデータをキャッシュすることで、KV読み取りリクエストの待機時間とリソース消費を削減できます。
+現在のデータベース時間とレイテンシーの両方のボトルネックは`execute`フェーズにあり、このフェーズでは`Get`と`Cop`の読み取りリクエストが最も高い割合を占めています。このワークロードのテーブルのほとんどは読み取り専用か、ほとんど変更されないため、TiDB v6.0.0以降でサポートされている小さなテーブルのキャッシュ機能を使用して、これらの小さなテーブルのデータをキャッシュすることで、KV読み取りリクエストの待機時間とリソース消費を削減できます。
 
 ## シナリオ7: 小さなテーブルキャッシュを使用する {#scenario-7-use-the-small-table-cache}
 
@@ -377,12 +377,12 @@ TiDB CPU のフレーム チャートには大きな変化はありません。
 
 #### パフォーマンス概要ダッシュボード {#performance-overview-dashboard}
 
-QPSは34.9kから40.9kに増加し、KVリクエストタイプはフェーズ`execute`からフェーズ`Prewrite`とフェーズ`Commit`への変更で最も時間がかかります。1秒あたり`Get`のデータベース処理時間は5.33秒から1.75秒に短縮され、1秒あたり`Cop`のデータベース処理時間は3.87秒から1.09秒に短縮されます。
+QPSは34.9kから40.9kに増加し、KVリクエストタイプは`execute`フェーズから`Prewrite`フェーズと`Commit`フェーズへの変更で最も時間がかかります。1秒あたり`Get`のデータベース処理時間は5.33秒から1.75秒に短縮され、1秒あたり`Cop`のデータベース処理時間は3.87秒から1.09秒に短縮されます。
 
 ![performance-overview-1-for-table-cache](/media/performance/j-7.png)
 
 - SQL タイプ別のデータベース時間: `Select`文 タイプがほとんどの時間を費やします。
-- SQL フェーズ別のデータベース時間: フェーズ`execute`と`compile`にほとんどの時間がかかります。
+- SQL フェーズ別のデータベース時間: `execute`フェーズと`compile`フェーズにほとんどの時間がかかります。
 - SQL 実行時間の概要: `Prewrite` 、および`Get` `Commit`ほとんどの時間がかかります。
 - 実行プランキャッシュがヒットしました。プランキャッシュを使用するクエリのOPSの値は、1秒あたり約`StmtExecute`です。
 - タイプ別 CPS: `StmtExecute`コマンドのみが使用されます。
