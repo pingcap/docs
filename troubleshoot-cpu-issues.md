@@ -3,7 +3,7 @@ title: Troubleshoot Increased Read and Write Latency
 summary: 読み取りおよび書き込みのレイテンシーが長くなる問題のトラブルシューティング方法を学びます。
 ---
 
-# 読み取りおよび書き込みレイテンシの増加のトラブルシューティング {#troubleshoot-increased-read-and-write-latency}
+# 読み取りおよび書き込みレイテンシーの増加のトラブルシューティング {#troubleshoot-increased-read-and-write-latency}
 
 このドキュメントでは、読み取りおよび書き込みのレイテンシーとジッターの考えられる原因と、これらの問題のトラブルシューティング方法について説明します。
 

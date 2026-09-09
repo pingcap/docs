@@ -36,7 +36,7 @@ summary: パフォーマンス概要ダッシュボードにTiFlashメトリッ�
     - `remote_read` `remote_read_sent`リモート読み取り関連のメトリックです。リモート読み取りの増加は通常`remote_read_constructed`システムに問題があることを示しています。
 - Executor QPS: すべてのTiFlashインスタンスが受信したリクエスト内の各タイプの DAG オペレーターの数。`table_scan`はテーブルスキャンオペレーター、 `selection`は選択オペレーター、 `aggregation`は集約オペレーター、 `top_n`は TopN オペレーター、 `limit`は制限オペレーター、 `join`は結合オペレーター、 `exchange_sender`はデータ送信オペレーター、 `exchange_receiver`はデータ受信オペレーターです。
 
-### レイテンシメトリクス {#latency-metrics}
+### レイテンシーメトリクス {#latency-metrics}
 
 次のメトリックを使用して、 TiFlashのレイテンシーを取得できます。
 
@@ -50,7 +50,7 @@ summary: パフォーマンス概要ダッシュボードにTiFlashメトリッ�
 
 - 要求期間: すべてのTiFlashインスタンス内の各 MPP およびコプロセッサ要求タイプの合計処理期間。これには平均レイテンシーと p99レイテンシーが含まれます。
 
-- リクエスト処理時間: `cop`と`batch cop`リクエストの実行開始から完了までの時間（待機時間を除く）。この指標は、平均レイテンシとP99レイテンシーを含む、 `cop`と`batch cop`リクエストにのみ適用されます。
+- リクエスト処理時間: `cop`と`batch cop`リクエストの実行開始から完了までの時間（待機時間を除く）。この指標は、平均レイテンシーとP99レイテンシーを含む、 `cop`と`batch cop`リクエストにのみ適用されます。
 
 例1: TiFlash MPPリクエストの処理時間の概要
 

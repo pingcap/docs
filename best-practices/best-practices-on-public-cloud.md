@@ -94,8 +94,8 @@ AWS は、20 GB [gp3](https://aws.amazon.com/ebs/general-purpose/)ボリュー�
 | メトリック            | 共有Raft Engineディスク | 専用Raft Engineディスク | 違い （％） |
 | ---------------- | ----------------- | ----------------- | ------ |
 | QPS（K/秒）         | 8.0               | 9.4               | 17.5   |
-| 平均挿入レイテンシ（ミリ秒）   | 11.3              | 9.2               | -18.7  |
-| P99 挿入レイテンシ (ms) | 29.4              | 16.0              | -45.6  |
+| 平均挿入レイテンシー（ミリ秒）   | 11.3              | 9.2               | -18.7  |
+| P99 挿入レイテンシー (ms) | 29.4              | 16.0              | -45.6  |
 
 ### 例 2: Azure で TPC-C/Sysbench ワークロードを実行する {#example-2-run-tpc-c-sysbench-workload-on-azure}
 
@@ -108,8 +108,8 @@ Azure 上のRaft Engineに専用の 32 GB [Ultra Disk](https://learn.microsoft.c
 | ------------ | ------------------------ | ----------------- | ----------------- | ------ |
 | QPS（K/秒）     | Sysbench`oltp_read_write` | 60.7              | 71.5              | 17.8   |
 | QPS（K/秒）     | TPC-C                    | 23.9              | 30.5              | 27.6   |
-| 平均レイテンシ（ミリ秒） | Sysbench`oltp_read_write` | 4.5               | 3.8               | -15.6  |
-| 平均レイテンシ（ミリ秒） | TPC-C                    | 3.9               | 3.0               | -23.1  |
+| 平均レイテンシー（ミリ秒） | Sysbench`oltp_read_write` | 4.5               | 3.8               | -15.6  |
+| 平均レイテンシー（ミリ秒） | TPC-C                    | 3.9               | 3.0               | -23.1  |
 
 ### 例 3: TiKV マニフェストのRaft Engine用に Google Cloud に専用の pd-ssd ディスクを接続する {#example-3-attach-a-dedicated-pd-ssd-disk-on-google-cloud-for-raft-engine-on-tikv-manifest}
 

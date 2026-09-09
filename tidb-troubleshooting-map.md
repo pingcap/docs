@@ -32,7 +32,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 - 2.1.1 TiDB の実行計画が間違っているとレイテンシーが増加します[3.3](#33-wrong-execution-plan)を参照してください。
 - 2.1.2 PD Leader選挙問題またはOOM。5.2および[5.2](#52-pd-election) [5.3](#53-pd-oom)を参照してください。
 - 2.1.3 一部のTiKVインスタンスでLeaderが多数ドロップする[4.4](#44-some-tikv-nodes-drop-leader-frequently)を参照。
-- 2.1.4 他の原因については、[読み取り/書き込みレイテンシの増加に関するトラブルシューティング](/troubleshoot-cpu-issues.md)を参照してください。
+- 2.1.4 他の原因については、[読み取り/書き込みレイテンシーの増加に関するトラブルシューティング](/troubleshoot-cpu-issues.md)を参照してください。
 
 ### 2.2 持続的かつ著しい増加 {#22-persistent-and-significant-increase}
 
@@ -48,7 +48,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
 - 2.2.4 TiDB の実行計画が間違っています[3.3](#33-wrong-execution-plan)を参照してください。
 
-- 2.2.5 他の原因については、[読み取り/書き込みレイテンシの増加に関するトラブルシューティング](/troubleshoot-cpu-issues.md)を参照してください。
+- 2.2.5 他の原因については、[読み取り/書き込みレイテンシーの増加に関するトラブルシューティング](/troubleshoot-cpu-issues.md)を参照してください。
 
 ## 3. TiDBの問題 {#3-tidb-issues}
 

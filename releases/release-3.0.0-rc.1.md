@@ -143,5 +143,5 @@ TiDB Ansible バージョン: 3.0.0-rc.1
 - 冗長な TiKV 監視メトリックを削除し、トラブルシューティング用の新しいメトリックを追加します[#735](https://github.com/pingcap/tidb-ansible/pull/735)
 - `table-regions.py`スクリプトを最適化して、表のリーダー分布を表示する [#739](https://github.com/pingcap/tidb-ansible/pull/739)
 - Drainer の設定ファイルを更新します [#745](https://github.com/pingcap/tidb-ansible/pull/745)
-- SQL カテゴリ別にレイテンシを表示する新しいパネルで TiDB モニタリングを最適化[#747](https://github.com/pingcap/tidb-ansible/pull/747)
+- SQL カテゴリ別にレイテンシーを表示する新しいパネルで TiDB モニタリングを最適化[#747](https://github.com/pingcap/tidb-ansible/pull/747)
 - Lightning設定ファイルを更新し、 `tidb_lightning_ctl`スクリプト[#1e946f8](https://github.com/pingcap/tidb-ansible/commit/1e946f89908e8fd6ef84128c6da3064ddfccf6a8)を追加します。
