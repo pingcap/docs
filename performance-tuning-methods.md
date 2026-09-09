@@ -60,21 +60,21 @@ TiDBは、SQL処理パスとデータベース時間を継続的に測定・収�
 
 パフォーマンス概要ダッシュボードには、以下の3つの積み上げ面グラフが表示されます。これらのグラフは、データベースのワークロードプロファイルを把握し、SQL実行中のステートメント、SQLフェーズ、TiKVまたはPDリクエストタイプの観点からボトルネックの原因を迅速に特定するのに役立ちます。
 
-- Database Time by SQL Type
-- Database Time by SQL Phase
+- Database Time By SQL Type
+- Database Time By SQL Phase
 - SQL Execute Time Overview
 
 #### 色で調整 {#tune-by-color}
 
 データベース時間の内訳と実行時間の概要を示す図は、予想通りの時間消費と予想外の時間消費の両方を直感的に示します。そのため、パフォーマンスのボトルネックを迅速に特定し、ワークロードのプロファイルを把握できます。緑色と青色の領域は、通常の時間消費とリクエスト数を表します。これらの2つの図で、緑色または青色以外の領域が大きな割合を占めている場合、データベース時間の配分は不適切です。
 
-- Database Time by SQL Type:
+- Database Time By SQL Type:
 
     - 青： `Select`文
     - 緑: `Update`、 `Insert`、 `Commit`などのDML文
     - 赤: `StmtPrepare`、 `StmtReset`、 `StmtFetch`、 `StmtClose`などの一般的なSQLタイプ
 
-- Database Time by SQL Phase：SQL実行フェーズは緑色で、その他のフェーズは赤色で表示されます。緑色以外の領域が大きい場合は、実行フェーズ以外のフェーズでデータベース時間が大量に消費されていることを意味し、さらなる原因分析が必要です。よくあるシナリオとしては、プリペアドプランキャッシュが利用できないために、オレンジ色で表示されるコンパイルフェーズで大きな領域が消費されているケースが挙げられます。
+- Database Time By SQL Phase：SQL実行フェーズは緑色で、その他のフェーズは赤色で表示されます。緑色以外の領域が大きい場合は、実行フェーズ以外のフェーズでデータベース時間が大量に消費されていることを意味し、さらなる原因分析が必要です。よくあるシナリオとしては、プリペアドプランキャッシュが利用できないために、オレンジ色で表示されるコンパイルフェーズで大きな領域が消費されているケースが挙げられます。
 
 - SQL Execute Time Overview：緑のメトリックは一般的なKV書き込みリクエスト（ `Prewrite`や`Commit`など）、青のメトリックは一般的なKV読み取りリクエスト（CopやGetなど）、紫のメトリックはTiFlash MPPリクエストを表します。その他の色のメトリックは、注意が必要な予期しない状況を表します。例えば、悲観的ロックKVリクエストは赤で、TSO待機は濃い茶色でマークされています。青や緑以外の領域が大きい場合、SQL実行中にボトルネックが発生していることを意味します。例：
 
@@ -85,8 +85,8 @@ TiDBは、SQL処理パスとデータベース時間を継続的に測定・収�
 
 ![TPC-C](/media/performance/tpcc_db_time.png)
 
-- Database Time by SQL Type: 最も時間のかかるステートメントは、 `commit` 、 `update` 、 `select` 、および`insert`文です。
-- Database Time by SQL Phase: 最も時間のかかるフェーズは緑色で表示される SQL 実行です。
+- Database Time By SQL Type: 最も時間のかかるステートメントは、 `commit` 、 `update` 、 `select` 、および`insert`文です。
+- Database Time By SQL Phase: 最も時間のかかるフェーズは緑色で表示される SQL 実行です。
 - SQL Execute Time Overview: SQL 実行で最も時間のかかる KV リクエストは、緑色の`Prewrite`と`Commit`です。
 
     > **Note:**
@@ -102,16 +102,16 @@ TiDBは、SQL処理パスとデータベース時間を継続的に測定・収�
 
 ![OLTP](/media/performance/oltp_normal_db_time.png)
 
-- Database Time by SQL Type: 時間のかかる主なステートメントは`SELECT` 、 `COMMIT` 、 `UPDATE` 、 `INSERT`で、その中で`SELECT`が最も多くのデータベース時間を消費します。
-- Database Time by SQL Phase: ほとんどの時間は緑色の`execute`フェーズで消費されます。
+- Database Time By SQL Type: 時間のかかる主なステートメントは`SELECT` 、 `COMMIT` 、 `UPDATE` 、 `INSERT`で、その中で`SELECT`が最も多くのデータベース時間を消費します。
+- Database Time By SQL Phase: ほとんどの時間は緑色の`execute`フェーズで消費されます。
 - SQL Execute Time Overview: SQL 実行フェーズでは、濃い茶色の`pd tso_wait` 、青色の`KV Get` 、緑色の`Prewrite`と`Commit`時間がかかっています。
 
 **例3: 読み取り専用OLTPワークロード**
 
 ![OLTP](/media/performance/oltp_long_compile_db_time.png)
 
-- Database Time by SQL Type: 主に`SELECT`文です。
-- Database Time by SQL Phase：時間のかかる主なフェーズは、オレンジ色の`compile`フェーズと緑色の`execute`フェーズです。`compile`フェーズのレイテンシーが最も高く、TiDBが実行計画の生成に時間がかかりすぎていることを示しています。その後のパフォーマンスデータに基づいて根本原因をさらに特定する必要があります。
+- Database Time By SQL Type: 主に`SELECT`文です。
+- Database Time By SQL Phase：時間のかかる主なフェーズは、オレンジ色の`compile`フェーズと緑色の`execute`フェーズです。`compile`フェーズのレイテンシーが最も高く、TiDBが実行計画の生成に時間がかかりすぎていることを示しています。その後のパフォーマンスデータに基づいて根本原因をさらに特定する必要があります。
 - SQL Execute Time Overview: 青色の KV BatchGet リクエストは、SQL 実行中に最も多くの時間を消費します。
 
 > **Note:**
@@ -122,16 +122,16 @@ TiDBは、SQL処理パスとデータベース時間を継続的に測定・収�
 
 ![OLTP](/media/performance/oltp_lock_contention_db_time.png)
 
-- Database Time by SQL Type: 主に`UPDATE`文です。
-- Database Time by SQL Phase: ほとんどの時間は緑色の実行フェーズで消費されます。
+- Database Time By SQL Type: 主に`UPDATE`文です。
+- Database Time By SQL Phase: ほとんどの時間は緑色の実行フェーズで消費されます。
 - SQL Execute Time Overview：赤で示されているKVリクエストPessimisticLockは、SQL実行中に最も多くの時間を消費しており、実行時間はKVリクエストの合計時間よりも明らかに長くなっています。これは、書き込みステートメントにおける深刻なロック競合と頻繁なロック再試行によって`Retried execution time`が長くなっていることが原因です。現在、TiDBは`Retried execution time`を測定していません。
 
 **例5: HTAP CH-ベンチマークワークロード**
 
 ![HTAP](/media/performance/htap_tiflash_mpp.png)
 
-- Database Time by SQL Type: 主に`SELECT`文です。
-- Database Time by SQL Phase: ほとんどの時間は緑色の実行フェーズで消費されます。
+- Database Time By SQL Type: 主に`SELECT`文です。
+- Database Time By SQL Phase: ほとんどの時間は緑色の実行フェーズで消費されます。
 - SQL Execute Time Overview: 紫色で表示される`tiflash_mpp`のリクエストは、SQL 実行中に最も多くの時間を消費します。次に、青色の`Cop`のリクエストを含む KV リクエストと、緑色の`Prewrite`リクエストと`Commit`リクエストが続きます。
 
 ### TiDB の主要メトリクスとクラスタリソースの使用率 {#tidb-key-metrics-and-cluster-resource-utilization}
