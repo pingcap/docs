@@ -73,7 +73,7 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
 - tso - cmd: TiDB がすべての TiDB インスタンスの PD に送信する 1秒あたりの gRPC リクエストの数。各 gRPC リクエストには、TSO リクエストのバッチが含まれます。
 - tso - request: すべての TiDB インスタンスにおける 1秒あたりの TSO リクエスト数
 
-通常、 `tso - request` `tso - cmd`で割った値が、1秒あたりの TSO リクエストバッチの平均サイズになります。
+通常、 `tso - request`を`tso - cmd`で割った値が、1秒あたりの TSO リクエストバッチの平均サイズになります。
 
 ### Connection Count {#connection-count}
 

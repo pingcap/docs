@@ -36,9 +36,9 @@ Load Base Splitによって分割されたリージョンは、すぐにはマ�
 
 リージョンが10秒連続して次のいずれかの条件を満たした場合、TiKV はリージョンを分割しようとします。
 
-- 読み取りリクエストの合計が`split.qps-threshold`超えます。
-- トラフィックが`split.byte-threshold`超えています。
-- 統合読み取りプール内の CPU 使用率が`split.region-cpu-overload-threshold-ratio`超えています。
+- 読み取りリクエストの合計が`split.qps-threshold`を超えます。
+- トラフィックが`split.byte-threshold`を超えています。
+- 統合読み取りプール内の CPU 使用率が`split.region-cpu-overload-threshold-ratio`を超えています。
 
 ロードベーススプリットはデフォルトで有効になっていますが、パラメータがかなり高い値に設定されています。この機能を無効にするには、 `split.qps-threshold`と`split.byte-threshold`十分に高い値に設定し、同時に`split.region-cpu-overload-threshold-ratio`を`0`に設定してください。
 

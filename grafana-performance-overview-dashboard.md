@@ -206,7 +206,7 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
     - 4: 完了
     - -1: 不明
 - Puller output events/s: TiCDC ノードの Puller モジュールが Sorter モジュールに 1秒あたりに送信する行数。
-- Sorter output events/s: TiCDC ノードのソーターモジュールがマウント モジュールに 1秒あたりに送信する行数。
+- Sorter output events/s: TiCDC ノードのソーターモジュールがマウンター モジュールに 1秒あたりに送信する行数。
 - Mounter output events/s: TiCDC ノードのマウンター モジュールがシンク モジュールに 1秒あたりに送信する行数。
 - Table sink output events/s: TiCDC ノードのテーブル ソーターモジュールがシンク モジュールに 1秒あたりに送信する行数。
 - SinkV2 - Sink flush rows/s: TiCDC ノードのシンク モジュールがダウンストリームに 1秒あたりに送信する行数。
