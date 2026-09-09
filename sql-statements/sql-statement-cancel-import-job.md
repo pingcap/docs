@@ -39,4 +39,5 @@ This statement is a TiDB extension to MySQL syntax.
 ## See also
 
 * [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
-* [`SHOW IMPORT JOB`](/sql-statements/sql-statement-show-import-job.md)
+* [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)
+* [`SHOW IMPORT GROUP(s)`](/sql-statements/sql-statement-show-import-group.md)
