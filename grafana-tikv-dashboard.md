@@ -101,8 +101,8 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 ### Raft IO {#raft-io}
 
-- Apply log duration： Raftがログを適用するのにかかる時間
-- Apply log duration per server： RaftがTiKVインスタンスごとにログを適用するのにかかる時間
+- Apply log duration： Raftがログをapplyするのにかかる時間
+- Apply log duration per server： RaftがTiKVインスタンスごとにログをapplyするのにかかる時間
 - Append log duration： Raftがログを追加するのにかかる時間
 - Append log duration per server： RaftがTiKVインスタンスごとにログを追加するのにかかる時間
 - Commit log duration： Raftがログをコミットするのに要する時間
@@ -142,14 +142,14 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 ### Raft propose {#raft-propose}
 
-- Raft apply proposals per ready: 提案適用中に、各ready操作がバッチ内に含める提案数のヒストグラム。
+- Raft apply proposals per ready: 提案をapplyする際に、各ready操作がバッチ内に含める提案数のヒストグラム。
 - Raft read/write proposals：1秒あたりのタイプ別提案数
 - Raft read proposals per server：各TiKVインスタンスが1秒あたりに行う読み取り提案の数
 - Raft write proposals per server：各TiKVインスタンスが1秒あたりに行う書き込み提案の数
 - Propose wait duration：各提案の待ち時間のヒストグラム
 - Propose wait duration per server：TiKVインスタンスごとの各提案の待ち時間のヒストグラム
-- Apply wait duration：各提案の適用時間のヒストグラム
-- Apply wait duration per server：TiKVインスタンスごとの各提案の適用時間のヒストグラム
+- Apply wait duration：各提案のapply時間のヒストグラム
+- Apply wait duration per server：TiKVインスタンスごとの各提案のapply時間のヒストグラム
 - Raft log speed：ピアがログを提案する平均レート
 
 ![TiKV Dashboard - Raft propose metrics](/media/tikv-dashboard-raft-propose.png)
@@ -157,7 +157,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 ### Raft admin {#raft-admin}
 
 - Admin proposals：1秒あたりの管理提案数
-- Admin apply: 1秒あたりに処理される適用コマンドの数
+- Admin apply: 1秒あたりに処理されるapplyコマンドの数
 - Check split：1秒あたりのRaftstore分割チェックコマンドの数
 - 99.99% Check split duration: 分割チェックコマンドの実行に要した時間 (P99.99)
 
@@ -370,7 +370,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - Write Duration Breakdown (99%)
     - wal: Raft Engine WAL の書き込みレイテンシー
     - wait: 書き始める前の待ち時間
-    - apply:メモリにデータを適用するのにかかる時間
+    - apply:メモリにデータをapplyするのにかかる時間
 - Bytes/Written: Raft Engineが毎回書き込むバイト数
 - WAL Duration Breakdown (P99%): Raft Engine WAL 作成の各段階に要した時間
 - File Count
@@ -551,11 +551,11 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - Overall RPC Duration：RPC呼び出しに費やされた時間。
 - Read File into Memory Duration: 外部ストレージからファイルをダウンロードしてメモリに読み込むのにかかる時間。
 - Queuing Time：スレッドにスケジュールされるのを待つ時間。
-- Apply Request Throughput：リクエストを適用する速度（バイト単位）。
+- Apply Request Throughput：リクエストをapplyする速度（バイト単位）。
 - Downloaded File Size：ダウンロードされたファイルのサイズ（バイト単位）。
-- Apply Batch Size：1回のバッチでRaftストアに適用するバイト数。
+- Apply Batch Size：1回のバッチでRaftストアにapplyするバイト数。
 - Blocked by Concurrency Time：並行処理の制約により実行を待機するのに費やされた時間。
-- Apply Request Speed： Raftストアへのリクエスト適用速度。
+- Apply Request Speed： Raftストアへのリクエストapply速度。
 - Cached File in Memory：SSTインポーターのリクエストによってキャッシュされたファイル。
 - Engine Requests Unfinished: Raftストアへの保留中のリクエスト数。
 - Apply Time： Raftストアにデータを書き込むのに費やされた時間。
