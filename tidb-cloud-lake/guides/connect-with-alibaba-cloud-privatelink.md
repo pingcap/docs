@@ -29,7 +29,7 @@ This document describes how to configure an Alibaba Cloud private endpoint, enab
 
     ![Enable the custom domain name](/media/tidb-cloud-lake/alibaba-privatelink-custom-domain-name.png)
 
-5. Verify the endpoint connection from an ECS instance in your VPC.
+5. Verify the endpoint connection from an Elastic Compute Service (ECS) instance in your VPC.
 
     1. On the TiDB Cloud Lake home page, click **Connect**. In the **Connect to TiDB Cloud** dialog, copy the **Host** value under **Connection Information**.
 
@@ -47,9 +47,9 @@ This document describes how to configure an Alibaba Cloud private endpoint, enab
           "https://$LAKE_HOST"
         ```
 
-    3. In the Alibaba Cloud VPC console, open the endpoint details page and find the private IP addresses assigned to the endpoint elastic network interfaces (ENIs). If the hostname resolves to one or more of these addresses and `remote_ip` matches one of them, traffic to TiDB Cloud Lake is routed through Alibaba Cloud PrivateLink without traversing the public Internet. `tls_verify=0` indicates that the HTTPS certificate was verified successfully.
+    3. In the Alibaba Cloud VPC console, open the endpoint details page and find the private IP addresses assigned to the endpoint elastic network interfaces (ENIs). Confirm that every IPv4 address returned by `getent ahostsv4` is an endpoint ENI private IP address and that `remote_ip` matches one of those addresses. This confirms that the tested connection to TiDB Cloud Lake uses Alibaba Cloud PrivateLink and does not traverse the public Internet. A `tls_verify=0` result indicates that the HTTPS certificate verification succeeded.
 
-    4. Check the health of the regional gateway:
+    4. For the Japan (Tokyo) example in this document, check the health of the regional gateway:
 
         ```shell
         curl --noproxy '*' -sS \
