@@ -142,19 +142,17 @@ TiDB also limits the number of concurrent TTL tasks at the cluster level. You ca
 
 ### Scan expired rows using an index
 
-By default, TiDB uses an eligible index that starts with the TTL column to scan expired rows. This avoids scanning unexpired index entries. TiDB splits the job by the Regions of the selected index and does not create tasks for Regions entirely after the expiration-time boundary.
+By default, TiDB uses an eligible index that starts with the TTL column to scan expired rows. This avoids scanning unexpired index entries.
 
 This behavior is controlled by the [`tidb_ttl_enable_index_scan`](/system-variables.md#tidb_ttl_enable_index_scan) global variable, which is enabled by default. When this variable is disabled or no eligible index is available, TiDB falls back to scanning in table-key order and prevents the optimizer from selecting a secondary index for that scan.
 
 An eligible index must meet the following requirements:
 
-- It is a visible secondary index or nonclustered primary index, and its first column is the TTL column.
-- Each index column indexes the full column value. Prefix indexes and expression indexes are not supported.
+- It is a visible secondary index or nonclustered primary index, rather than a partial, global, multi-valued, or columnar index.
+- Its first column is the TTL column, and each index column indexes the full column value. Prefix indexes and expression indexes are not supported.
 - In a unique composite index, all columns except the TTL column are `NOT NULL`.
-- For a non-unique index, TiDB must be able to append the table row identifier to the scan order. Including all primary key columns in the index ensures this requirement; including only some columns of a composite primary key is not supported.
+- A non-unique index includes either all primary key columns or none of them.
 - The columns used to identify a row do not use the `SET`, `FLOAT`, or `DOUBLE` data type.
-
-TTL jobs do not use clustered primary indexes, partial indexes, global indexes, multi-valued indexes, columnar indexes, or invisible indexes.
 
 To disable the execution of TTL jobs, in addition to setting the `TTL_ENABLE='OFF'` table option, you can also disable the execution of TTL jobs in the entire cluster by setting the [`tidb_ttl_job_enable`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) global variable:
 
