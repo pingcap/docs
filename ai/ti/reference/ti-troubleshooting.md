@@ -197,7 +197,7 @@ mkdir -p "$HOME/workspace"
 ti fs mount-file-system --mount-path "$HOME/workspace"
 ```
 
-Changing the owner or mode of `/workspace` does not bypass AppArmor. If the path cannot change, add explicit `/workspace` mount and unmount rules to `/etc/apparmor.d/local/fusermount3` as described in [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md#ubuntu-2604-mount-paths).
+Changing the owner or mode of `/workspace` does not bypass AppArmor. If the path cannot change, add explicit `/workspace` mount and unmount rules to `/etc/apparmor.d/local/fusermount3` as described in [Mount a TiDB Cloud Filesystem](/ai/ti/guides/mount-filesystem.md#ubuntu-2604-mount-paths).
 
 ## Mount becomes stale after a process crash
 

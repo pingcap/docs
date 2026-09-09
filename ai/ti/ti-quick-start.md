@@ -21,37 +21,50 @@ Before you begin, obtain a TiDB Cloud API public key and private key from the [T
 
 ## Step 1. Install TiDB Cloud CLI
 
-On macOS or Linux, run the installer:
+Depending on your operating system, take the following steps to install TiDB Cloud CLI.
 
-```bash
-curl -fsSL https://github.com/tidbcloud/ti-cli/releases/latest/download/install.sh | sh -s -- --yes
-```
+<SimpleTab>
 
-After installation, add `ti` to the current shell and verify it:
+<div label="macOS or Linux">
 
-```bash
-export PATH="$HOME/.ti/bin:$PATH"
-ti --version
-```
+1. On macOS or Linux, run the installer:
 
-Add `export PATH="$HOME/.ti/bin:$PATH"` to your shell profile to keep `ti` available in new terminals.
+    ```bash
+    curl -fsSL https://github.com/tidbcloud/ti-cli/releases/latest/download/install.sh | sh -s -- --yes
+    ```
 
-On Windows PowerShell, run the installer:
+2. After installation, add `ti` to the current shell and verify it:
 
-```powershell
-$script = "$env:TEMP\install-ti.ps1"
-iwr https://github.com/tidbcloud/ti-cli/releases/latest/download/install.ps1 -OutFile $script
-powershell -ExecutionPolicy Bypass -File $script -Yes
-```
+    ```bash
+    export PATH="$HOME/.ti/bin:$PATH"
+    ti --version
+    ```
 
-After installation, add `ti` to the current PowerShell session and verify it:
+3. Add `export PATH="$HOME/.ti/bin:$PATH"` to your shell profile to keep `ti` available in new terminals.
 
-```powershell
-$env:Path = "$HOME\.ti\bin;$env:Path"
-ti --version
-```
+</div>
 
-Add `$HOME\.ti\bin` to your user `PATH` to keep `ti` available in new PowerShell sessions.
+<div label="Windows PowerShell">
+
+1. On Windows PowerShell, run the installer:
+
+    ```powershell
+    $script = "$env:TEMP\install-ti.ps1"
+    iwr https://github.com/tidbcloud/ti-cli/releases/latest/download/install.ps1 -OutFile $script
+    powershell -ExecutionPolicy Bypass -File $script -Yes
+    ```
+
+2. After installation, add `ti` to the current PowerShell session and verify it:
+
+    ```powershell
+    $env:Path = "$HOME\.ti\bin;$env:Path"
+    ti --version
+    ```
+
+3. Add `$HOME\.ti\bin` to your user `PATH` to keep `ti` available in new PowerShell sessions.
+
+</div>
+</SimpleTab>
 
 ## Step 2. Configure TiDB Cloud CLI
 

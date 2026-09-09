@@ -41,9 +41,20 @@
   - [RAG Example](/ai/examples/rag-with-pytidb.md)
   - [Conversational Memory Example](/ai/examples/memory-with-pytidb.md)
   - [Text-to-SQL Example](/ai/examples/text2sql-with-pytidb.md)
-- Use TiDB Cloud CLI
-  - [TiDB Cloud CLI Overview](/ai/ti/ti-overview.md)
+- TiDB Cloud CLI
+  - [Overview](/ai/ti/ti-overview.md)
   - [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md)
+  - [Manage TiDB Cloud Starter Instances](/ai/ti/guides/manage-starter-instances.md)
+  - Manage TiDB Cloud Filesystem
+    - [Manage Filesystem Resources](/ai/ti/guides/manage-filesystem-resources.md)
+    - [Configure Filesystem AI Providers](/ai/ti/guides/configure-filesystem-ai-providers.md)
+    - [Manage Filesystem Tokens](/ai/ti/guides/manage-filesystem-tokens.md)
+    - [Work with Filesystem Data](/ai/ti/guides/work-with-filesystem-data.md)
+    - [Manage Filesystem Layers and Checkpoints](/ai/ti/guides/manage-filesystem-layers.md)
+    - [Mount a TiDB Cloud Filesystem](/ai/ti/guides/mount-filesystem.md)
+    - [Manage Git Workspaces](/ai/ti/guides/manage-git-workspaces.md)
+    - [Use Filesystem Journals](/ai/ti/guides/use-filesystem-journals.md)
+    - [Manage Filesystem Vault Secrets](/ai/ti/guides/manage-filesystem-vault-secrets.md)
   - Scenarios for Users and Automation
     - [Run a Daily TiDB Cloud CLI Workflow](/ai/ti/reference/ti-daily-workflow-example.md)
     - [Query TiDB Cloud Starter with Explicit SQL Roles](/ai/ti/reference/ti-query-sql-with-roles-example.md)
@@ -56,55 +67,12 @@
     - [Prepare a Git Workspace for Agents on TiDB Cloud Filesystem](/ai/ti/reference/ti-git-workspace-for-agents-example.md)
     - [Record an Agent Workflow in a TiDB Cloud Filesystem Journal](/ai/ti/reference/ti-journal-agent-workflow-example.md)
     - [Delegate TiDB Cloud Filesystem Vault Secrets to an Agent](/ai/ti/reference/ti-vault-agent-secrets-example.md)
-
-## INTEGRATIONS
-
-- [Integration Overview](/ai/integrations/vector-search-integration-overview.md)
-- Auto Embedding
-  - [Overview](/ai/integrations/vector-search-auto-embedding-overview.md)
-  - [OpenAI](/ai/integrations/vector-search-auto-embedding-openai.md)
-  - [OpenAI Compatible](/ai/integrations/embedding-openai-compatible.md)
-  - [Jina AI](/ai/integrations/vector-search-auto-embedding-jina-ai.md)
-  - [Cohere](/ai/integrations/vector-search-auto-embedding-cohere.md)
-  - [Google Gemini](/ai/integrations/vector-search-auto-embedding-gemini.md)
-  - [Hugging Face](/ai/integrations/vector-search-auto-embedding-huggingface.md)
-  - [NVIDIA NIM](/ai/integrations/vector-search-auto-embedding-nvidia-nim.md)
-  - [Amazon Titan](/ai/integrations/vector-search-auto-embedding-amazon-titan.md)
-- AI Frameworks
-  - [LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md)
-- ORM Libraries
-  - [SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)
-  - [Django ORM](/ai/integrations/vector-search-integrate-with-django-orm.md)
-  - [Peewee](/ai/integrations/vector-search-integrate-with-peewee.md)
-- Cloud Services
-  - [Jina AI Embedding](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)
-  - [Amazon Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md)
-- MCP Server
-  - [Overview](/ai/integrations/tidb-mcp-server.md)
-  - [Claude Code](/ai/integrations/tidb-mcp-claude-code.md)
-  - [Claude Desktop](/ai/integrations/tidb-mcp-claude-desktop.md)
-  - [Cursor](/ai/integrations/tidb-mcp-cursor.md)
-  - [VS Code](/ai/integrations/tidb-mcp-vscode.md)
-  - [Windsurf](/ai/integrations/tidb-mcp-windsurf.md)
-
-## REFERENCE
-
-- [Vector Data Types](/ai/reference/vector-search-data-types.md)
-- [Vector Functions and Operators](/ai/reference/vector-search-functions-and-operators.md)
-- [Vector Search Index](/ai/reference/vector-search-index.md)
-- [Vector Search Performance Tuning](/ai/reference/vector-search-improve-performance.md)
-- [Vector Search Limitations](/ai/reference/vector-search-limitations.md)
-- TiDB Cloud CLI Reference
-  - [Overview](/ai/ti/reference/ti-cli-reference.md)
-  - [TiDB Cloud Starter CLI Command Reference (`ti db`)](/ai/ti/reference/ti-starter-database.md)
-  - [TiDB Cloud Filesystem CLI Command Reference (`ti fs`)](/ai/ti/reference/ti-filesystem.md)
-  - [TiDB Cloud Filesystem Git CLI Command Reference (`ti fs-git`)](/ai/ti/reference/ti-filesystem-git.md)
-  - [TiDB Cloud Filesystem Journal CLI Command Reference (`ti fs-journal`)](/ai/ti/reference/ti-filesystem-journal.md)
-  - [TiDB Cloud Filesystem Vault CLI Command Reference (`ti fs-vault`)](/ai/ti/reference/ti-filesystem-vault.md)
-  - Commands
+  - Command Reference
+    - [Overview](/ai/ti/reference/ti-cli-reference.md)
     - [configure](/ai/ti/reference/commands/ti/ti-configure.md)
     - [update](/ai/ti/reference/commands/ti/ti-update.md)
-    - `ti db` commands
+    - `ti db` commands for managing TiDB Cloud Starter instances
+      - [Overview](/ai/ti/reference/ti-starter-database.md)
       - [create-db-cluster](/ai/ti/reference/commands/db/ti-db-create-db-cluster.md)
       - [list-db-clusters](/ai/ti/reference/commands/db/ti-db-list-db-clusters.md)
       - [describe-db-cluster](/ai/ti/reference/commands/db/ti-db-describe-db-cluster.md)
@@ -117,7 +85,8 @@
       - [create-db-sql-users](/ai/ti/reference/commands/db/ti-db-create-db-sql-users.md)
       - [format-db-connection-string](/ai/ti/reference/commands/db/ti-db-format-db-connection-string.md)
       - [execute-sql-statement](/ai/ti/reference/commands/db/ti-db-execute-sql-statement.md)
-    - `ti fs` commands
+    - `ti fs` commands for managing TiDB Cloud Filesystems
+      - [Overview](/ai/ti/reference/ti-filesystem.md)
       - [create-file-system](/ai/ti/reference/commands/fs/ti-fs-create-file-system.md)
       - [import-file-system-token](/ai/ti/reference/commands/fs/ti-fs-import-file-system-token.md)
       - [generate-file-system-token](/ai/ti/reference/commands/fs/ti-fs-generate-file-system-token.md)
@@ -162,18 +131,21 @@
       - [mount-file-system](/ai/ti/reference/commands/fs/ti-fs-mount-file-system.md)
       - [drain-file-system](/ai/ti/reference/commands/fs/ti-fs-drain-file-system.md)
       - [unmount-file-system](/ai/ti/reference/commands/fs/ti-fs-unmount-file-system.md)
-    - `ti fs-git` commands
+    - `ti fs-git` commands for managing TiDB Cloud Filesystem Git workspaces
+      - [Overview](/ai/ti/reference/ti-filesystem-git.md)
       - [clone-git-workspace](/ai/ti/reference/commands/fs-git/ti-fs-git-clone-git-workspace.md)
       - [hydrate-git-workspace](/ai/ti/reference/commands/fs-git/ti-fs-git-hydrate-git-workspace.md)
       - [add-git-worktree](/ai/ti/reference/commands/fs-git/ti-fs-git-add-git-worktree.md)
       - [remove-git-worktree](/ai/ti/reference/commands/fs-git/ti-fs-git-remove-git-worktree.md)
-    - `ti fs-journal` commands
+    - `ti fs-journal` commands for managing TiDB Cloud Filesystem journals
+      - [Overview](/ai/ti/reference/ti-filesystem-journal.md)
       - [create-journal](/ai/ti/reference/commands/fs-journal/ti-fs-journal-create-journal.md)
       - [append-journal-entries](/ai/ti/reference/commands/fs-journal/ti-fs-journal-append-journal-entries.md)
       - [read-journal-entries](/ai/ti/reference/commands/fs-journal/ti-fs-journal-read-journal-entries.md)
       - [search-journal-entries](/ai/ti/reference/commands/fs-journal/ti-fs-journal-search-journal-entries.md)
       - [verify-journal](/ai/ti/reference/commands/fs-journal/ti-fs-journal-verify-journal.md)
-    - `ti fs-vault` commands
+    - `ti fs-vault` commands for managing TiDB Cloud Filesystem vault secrets
+      - [Overview](/ai/ti/reference/ti-filesystem-vault.md)
       - [create-secret](/ai/ti/reference/commands/fs-vault/ti-fs-vault-create-secret.md)
       - [replace-secret](/ai/ti/reference/commands/fs-vault/ti-fs-vault-replace-secret.md)
       - [read-secret](/ai/ti/reference/commands/fs-vault/ti-fs-vault-read-secret.md)
@@ -188,3 +160,41 @@
   - [TiDB Cloud CLI Configuration and Credentials](/ai/ti/reference/ti-configuration-and-credentials.md)
   - [TiDB Cloud CLI Regions, Security, and Limitations](/ai/ti/reference/ti-regions-security-and-limitations.md)
   - [Troubleshoot TiDB Cloud CLI](/ai/ti/reference/ti-troubleshooting.md)
+
+## INTEGRATIONS
+
+- [Integration Overview](/ai/integrations/vector-search-integration-overview.md)
+- Auto Embedding
+  - [Overview](/ai/integrations/vector-search-auto-embedding-overview.md)
+  - [OpenAI](/ai/integrations/vector-search-auto-embedding-openai.md)
+  - [OpenAI Compatible](/ai/integrations/embedding-openai-compatible.md)
+  - [Jina AI](/ai/integrations/vector-search-auto-embedding-jina-ai.md)
+  - [Cohere](/ai/integrations/vector-search-auto-embedding-cohere.md)
+  - [Google Gemini](/ai/integrations/vector-search-auto-embedding-gemini.md)
+  - [Hugging Face](/ai/integrations/vector-search-auto-embedding-huggingface.md)
+  - [NVIDIA NIM](/ai/integrations/vector-search-auto-embedding-nvidia-nim.md)
+  - [Amazon Titan](/ai/integrations/vector-search-auto-embedding-amazon-titan.md)
+- AI Frameworks
+  - [LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md)
+- ORM Libraries
+  - [SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)
+  - [Django ORM](/ai/integrations/vector-search-integrate-with-django-orm.md)
+  - [Peewee](/ai/integrations/vector-search-integrate-with-peewee.md)
+- Cloud Services
+  - [Jina AI Embedding](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)
+  - [Amazon Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md)
+- MCP Server
+  - [Overview](/ai/integrations/tidb-mcp-server.md)
+  - [Claude Code](/ai/integrations/tidb-mcp-claude-code.md)
+  - [Claude Desktop](/ai/integrations/tidb-mcp-claude-desktop.md)
+  - [Cursor](/ai/integrations/tidb-mcp-cursor.md)
+  - [VS Code](/ai/integrations/tidb-mcp-vscode.md)
+  - [Windsurf](/ai/integrations/tidb-mcp-windsurf.md)
+
+## REFERENCE
+
+- [Vector Data Types](/ai/reference/vector-search-data-types.md)
+- [Vector Functions and Operators](/ai/reference/vector-search-functions-and-operators.md)
+- [Vector Search Index](/ai/reference/vector-search-index.md)
+- [Vector Search Performance Tuning](/ai/reference/vector-search-improve-performance.md)
+- [Vector Search Limitations](/ai/reference/vector-search-limitations.md)
