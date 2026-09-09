@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Monitoring Page
-summary: TiDB Dashboardのモニタリングページでは、パフォーマンスを効率的に分析し、データベースのボトルネックを特定できます。主要なメトリクスには、データベース時間、SQL実行時間、QPS、接続数、TiDBおよびTiKVのCPU使用率、接続アイドル時間、解析・コンパイル・実行時間、TiDB KVリクエスト時間、TiKV gRPC時間、PD TSO待機/RPC時間、ストレージ非同期書き込み時間、保存時間、apply時間、ログ追加時間、ログコミット時間、ログapply時間などがあります。
+summary: TiDB Dashboardのモニタリングページでは、パフォーマンスを効率的に分析し、データベースのボトルネックを特定できます。主要なメトリクスには、データベース時間、SQL実行時間、QPS、接続数、TiDBおよびTiKVのCPU使用率、接続アイドル時間、解析・コンパイル・実行時間、TiDB KVリクエスト時間、TiKV gRPC時間、PD TSO待機/RPC時間、ストレージ非同期書き込み時間、保存時間、適用時間、ログ追加時間、ログコミット時間、ログ適用時間などがあります。
 ---
 
 # TiDB Dashboard監視ページ {#tidb-dashboard-monitoring-page}
@@ -165,16 +165,16 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
 
 - `Storage Async Write Duration` : 非同期書き込みにかかった時間
 - `Store Duration` : 非同期書き込み中のストアループで消費された時間
-- `Apply Duration` : 非同期書き込み中のapplyループで消費された時間
+- `Apply Duration` : 非同期書き込み中の適用ループで消費された時間
 
 これら3つのメトリックにはすべて、すべての TiKV インスタンスの平均期間と P99 期間が含まれます。
 
-平均ストレージ非同期書き込み時間 = 平均保存時間 + 平均apply時間
+平均ストレージ非同期書き込み時間 = 平均保存時間 + 平均適用時間
 
 ### Append Log Duration, Commit Log Duration, and Apply Log Duration {#append-log-duration-commit-log-duration-and-apply-log-duration}
 
 - `Append Log Duration` : Raftがログを追加するのにかかった時間
 - `Commit Log Duration` : Raftがログをコミットするのにかかる時間
-- `Apply Log Duration` : Raftがログをapplyするのに要した時間
+- `Apply Log Duration` : Raftがログを適用するのに要した時間
 
 これら3つのメトリックにはすべて、すべての TiKV インスタンスの平均期間と P99 期間が含まれます。

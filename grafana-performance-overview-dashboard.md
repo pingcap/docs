@@ -149,17 +149,17 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
 
 - Storage Async Write Duration: 非同期書き込みにかかる時間
 - Store Duration: 非同期書き込み中にストアループで消費される時間
-- Apply Duration: 非同期書き込み中のapplyループで消費された時間
+- Apply Duration: 非同期書き込み中の適用ループで消費された時間
 
 これら3つのメトリックにはすべて、すべての TiKV インスタンスの平均期間と P99 期間が含まれます。
 
-平均ストレージ非同期書き込み時間 = 平均保存時間 + 平均apply時間
+平均ストレージ非同期書き込み時間 = 平均保存時間 + 平均適用時間
 
 ### Append Log Duration, Commit Log Duration, and Apply Log Duration {#append-log-duration-commit-log-duration-and-apply-log-duration}
 
 - Append Log Duration: Raftがログを追加するのにかかる時間
 - Commit Log Duration: Raftがログをコミットするのにかかる時間
-- Apply Log Duration: Raftがログをapplyするのにかかる時間
+- Apply Log Duration: Raftがログを適用するのにかかる時間
 
 これら3つのメトリックにはすべて、すべての TiKV インスタンスの平均期間と P99 期間が含まれます。
 
@@ -186,7 +186,7 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
 - Request Handle Duration：すべてのTiFlashインスタンスにおける各MPPおよびコプロセッサリクエストタイプの実際の処理時間。コプロセッサリクエストの実行開始から完了までの時間であり、平均レイテンシーとp99レイテンシーが含まれます。
 - Raft Wait Index Duration: すべてのTiFlashインスタンスに対して`wait_index`が使用する時間。つまり、 `read_index`リクエストを受信してから、リージョンインデックスが`read_index`になるまで待機する時間です。
 - Raft Batch Read Index Duration: すべてのTiFlashインスタンスの`read_index`が使用する時間。ほとんどの時間は、リージョンリーダーとのやり取りと再試行に使用されます。
-- Write Throughput By Instance：インスタンスごとの書き込みスループット。Raft書き込みコマンドとRaftスナップショットをapplyした場合のスループットも含まれます。
+- Write Throughput By Instance：インスタンスごとの書き込みスループット。Raft書き込みコマンドとRaftスナップショットを適用した場合のスループットも含まれます。
 - Write flow: すべてのTiFlashインスタンスによるディスク書き込みのトラフィック。
 - Read flow: すべてのTiFlashインスタンスによるディスク読み取りのトラフィック。
 
