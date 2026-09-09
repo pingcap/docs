@@ -451,7 +451,7 @@ TiKV は次の手順で書き込みリクエストを処理します。
 
     Raftstore は`Store`スレッドと`Apply`スレッドで構成されています。
 
-    - `Store`スレッドはRaftメッセージと新しい`proposals`を処理します。新しい`proposals`を受信すると、リーダーノードの`Store`スレッドはローカルRaft DBに書き込み、メッセージを複数のフォロワーノードにコピーします。ほとんどの場合、この`proposals`が正常に永続化されると、 `proposals`が正常にコミットされます。
+    - `Store`スレッドはRaftメッセージと新しい`proposals`を処理します。新しい`proposals`を受信すると、リーダーノードの`Store`スレッドはローカルRaft DBに書き込み、メッセージを複数のフォロワーノードにコピーします。ほとんどのインスタンスでこの`proposals`が正常に永続化されると、 `proposals`が正常にコミットされます。
     - `Apply`スレッドはコミットされた`proposals`データをKV DBに書き込みます。データがKV DBに正常に書き込まれると、 `Apply`スレッドは書き込みリクエストが完了したことを外部に通知します。
 
 ![TiKV Write](/media/performance/store_apply.png)
