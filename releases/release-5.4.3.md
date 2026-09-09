@@ -63,7 +63,7 @@ TiDB version: 5.4.3
 + PD
 
     - Fix the issue that PD cannot correctly handle dashboard proxy requests [#5321](https://github.com/tikv/pd/issues/5321)
-    - Fix the issue that a removed tombstone store appears again after the PD leader transfer ​​[#4941](https://github.com/tikv/pd/issues/4941)
+    - Fix the issue that a removed tombstone store appears again after the PD leader transfer [#4941](https://github.com/tikv/pd/issues/4941)
     - Fix the issue that the TiFlash learner replica might not be created [#5401](https://github.com/tikv/pd/issues/5401)
 
 + TiFlash
