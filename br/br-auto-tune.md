@@ -30,7 +30,7 @@ TiKV supports dynamically configuring the auto-tune feature. You can enable or d
 {{< copyable "shell-regular" >}}
 
 ```shell
-tikv-ctl modify-tikv-config -n backup.enable-auto-tune -v <true|false>
+tikv-ctl --host=<tikv-ip:port> modify-tikv-config -n backup.enable-auto-tune -v <true|false>
 ```
 
 When you perform backup tasks on an offline cluster, to speed up the backup, you can modify the value of `backup.num-threads` to a larger number using `tikv-ctl`.

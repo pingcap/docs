@@ -140,4 +140,4 @@ When DM merges and migrates tables in pessimistic or optimistic mode, the behavi
 
 ## Online DDL
 
-The Online DDL feature also handles DDL events in a special way. For details, refer to [Migrate from Databases that Use GH-ost/PT-osc](/dm/feature-online-ddl.md).
+The Online DDL feature also handles DDL events in a special way. For details, refer to [Migrate from Databases that Use gh-ost/pt-osc](/dm/feature-online-ddl.md).

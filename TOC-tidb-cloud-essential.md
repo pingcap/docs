@@ -54,6 +54,7 @@
     - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
     - [Built-in Metrics](/tidb-cloud/built-in-monitoring.md)
     - [Top RU](/tidb-cloud/top-ru.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+    - [Statement Insight](/tidb-cloud/statement-insight.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
     - [Integrate TiDB Cloud with Prometheus and Grafana](/tidb-cloud/prometheus-grafana-integration.md)
     - Subscribe to Alert Notifications
@@ -63,11 +64,13 @@
       - [Subscribe via Flashduty](/tidb-cloud/monitor-alert-flashduty.md)
       - [Subscribe via PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)
       - [Subscribe via Webhook](/tidb-cloud/monitor-alert-webhook.md)
+      - [Subscribe via Lark](/tidb-cloud/monitor-alert-lark.md)
     - [Events](/tidb-cloud/tidb-cloud-events.md)
     - [Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [Analyze Performance](/tidb-cloud/tune-performance.md)
+    - [Use Plan Replayer to Troubleshoot SQL Performance](/tidb-cloud/plan-replayer.md)
     - SQL Tuning
       - [Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
       - Understanding the Query Execution Plan
@@ -568,6 +571,7 @@
       - [Subscribe via Flashduty](/tidb-cloud/monitor-alert-flashduty.md)
       - [Subscribe via PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)
       - [Subscribe via Webhook](/tidb-cloud/monitor-alert-webhook.md)
+      - [Subscribe via Lark](/tidb-cloud/monitor-alert-lark.md)
     - Connected: IM Ticket Creation and Update Subscription
       - [Create Tickets and Subscribe to Ticket Updates via Slack](/tidb-cloud/connected-slack-ticket-creation.md)
       - [Create Tickets and Subscribe to Ticket Updates via Lark](/tidb-cloud/connected-lark-ticket-creation.md)

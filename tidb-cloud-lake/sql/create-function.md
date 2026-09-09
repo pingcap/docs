@@ -38,16 +38,16 @@ This example walks through a complete end-to-end setup for an external function 
 
 ### Step 1: Set Up the Python UDF Server
 
-Install the `databend-udf` package:
+Install the `tidbcloudlake-udf` package:
 
 ```bash
-pip install databend-udf
+pip install tidbcloudlake-udf
 ```
 
 Create a file `udf_server.py` with the following content:
 
 ```python
-from databend_udf import udf, UDFServer
+from tidbcloudlake_udf import udf, UDFServer
 
 @udf(
     input_types=["INT", "INT"],
@@ -78,7 +78,7 @@ CREATE FUNCTION gcd AS (INT, INT)
     RETURNS INT
     LANGUAGE python
     HANDLER = 'gcd'
-    ADDRESS = 'http://localhost:8815';
+    ADDRESS = 'https://udf.example.com';
 ```
 
 ### Step 3: Call the Function

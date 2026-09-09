@@ -84,8 +84,8 @@ This document provides detailed information about the [Connected Care](/tidb-clo
   <tr>
     <td>-</td>
     <td>-</td>
-    <td>Connected: IM subscription for TiDB Cloud alerts (via <a href="/tidbcloud/monitor-alert-slack">Slack</a>, <a href="/tidbcloud/monitor-alert-zoom">Zoom</a>, <a href="/tidbcloud/monitor-alert-flashduty">Flashduty</a>, <a href="/tidbcloud/monitor-alert-pagerduty">PagerDuty</a>, or <a href="/tidbcloud/monitor-alert-webhook">Webhook</a>)</td>
-    <td>Connected: IM subscription for TiDB Cloud alerts (via <a href="/tidbcloud/monitor-alert-slack">Slack</a>, <a href="/tidbcloud/monitor-alert-zoom">Zoom</a>, <a href="/tidbcloud/monitor-alert-flashduty">Flashduty</a>, <a href="/tidbcloud/monitor-alert-pagerduty">PagerDuty</a>, or <a href="/tidbcloud/monitor-alert-webhook">Webhook</a>)</td>
+    <td>Connected: IM subscription for TiDB Cloud alerts (via <a href="/tidbcloud/monitor-alert-slack">Slack</a>, <a href="/tidbcloud/monitor-alert-zoom">Zoom</a>, <a href="/tidbcloud/monitor-alert-flashduty">Flashduty</a>, <a href="/tidbcloud/monitor-alert-pagerduty">PagerDuty</a>, <a href="/tidbcloud/monitor-alert-webhook">Webhook</a>, or <a href="/tidbcloud/monitor-alert-lark">Lark</a>)</td>
+    <td>Connected: IM subscription for TiDB Cloud alerts (via <a href="/tidbcloud/monitor-alert-slack">Slack</a>, <a href="/tidbcloud/monitor-alert-zoom">Zoom</a>, <a href="/tidbcloud/monitor-alert-flashduty">Flashduty</a>, <a href="/tidbcloud/monitor-alert-pagerduty">PagerDuty</a>, <a href="/tidbcloud/monitor-alert-webhook">Webhook</a>, or <a href="/tidbcloud/monitor-alert-lark">Lark</a>)</td>
   </tr>
   <tr>
     <td>-</td>

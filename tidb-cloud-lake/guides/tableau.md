@@ -1,9 +1,9 @@
 ---
-title: Tableau
+title: Connect to TiDB Cloud Lake with Tableau
 summary: Tableau is a visual analytics platform transforming the way we use data to solve problems. You can connect Tableau to TiDB Cloud Lake through Tableau's Other Databases (JDBC) interface by using the lake-jdbc driver.
 ---
 
-# Tableau
+# Connect to TiDB Cloud Lake with Tableau
 
 [Tableau](https://www.tableau.com/) is a visual analytics platform transforming the way we use data to solve problems. You can connect Tableau to {{{ .lake }}} through Tableau's **Other Databases (JDBC)** interface by using the [lake-jdbc driver](https://github.com/tidbcloud/lake-jdbc).
 

@@ -272,7 +272,7 @@ To specify auditing filter rules for a cluster, take the following steps:
 2. In the **Add Filter Rule** dialog, configure the following items:
 
     - **Filter Name**: Enter a name for the filter rule.
-    - **SQL User**: Enter the SQL user in the `<user>@<host>` format. The username and hostname can use `%` to match any value or `_` to match any single character. The `@` symbol and `<host>` are optional.
+    - **SQL User**: Enter the SQL user in the `<user>@<host>` format. The username and hostname can use `%` to match zero or more characters or `_` to match exactly one character. The `@` symbol and `<host>` are optional.
     - **Filter Events**: Select the events to log. For the supported filter events, see [Audit Filter Events](#audit-filter-events).
 
 3. Click **Confirm** to add the filter rule.

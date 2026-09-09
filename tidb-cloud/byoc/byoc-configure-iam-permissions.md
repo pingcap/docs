@@ -23,7 +23,6 @@ Use the table below to map the required parameters for the script:
 | `<ControlPlaneAccountId>` | **TiDB Support** | The AWS Account ID of the TiDB Control Plane. |
 | `<ClinicAccountId>` | **TiDB Support** | The AWS Account ID for the TiDB Clinic service. |
 | `<TidbHostedZoneId>` | [Required information](/tidb-cloud/byoc/byoc-prepare-environment-aws.md#summary-required-information) | The ID of the TiDB Cluster Hosted Zone you created. |
-| `<O11yHostedZoneId>` | [Required information](/tidb-cloud/byoc/byoc-prepare-environment-aws.md#summary-required-information) | The ID of the Observability Hosted Zone you created. |
 | `<TidbPCAArn>` | [Required information](/tidb-cloud/byoc/byoc-prepare-environment-aws.md#summary-required-information) | The ARN of the Private CA you created. |
 
 ## Execute bootstrapping script
@@ -37,7 +36,6 @@ Use the table below to map the required parameters for the script:
         --control-plane-id <ControlPlaneAccountId> \
         --clinic-id <ClinicAccountId> \
         --tidb-hz-id <TidbHostedZoneId> \
-        --o11y-hz-id <O11yHostedZoneId> \
         --pca-arn <TidbPCAArn>
     ```
 

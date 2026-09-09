@@ -70,6 +70,8 @@ In TiDB Cloud, you can subscribe to alert notifications via one of the following
 - [Zoom](/tidb-cloud/monitor-alert-zoom.md)
 - [Flashduty](/tidb-cloud/monitor-alert-flashduty.md)
 - [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)
+- [Webhook](/tidb-cloud/monitor-alert-webhook.md)
+- [Lark](/tidb-cloud/monitor-alert-lark.md)
 
 ## TiDB Cloud built-in alert conditions
 

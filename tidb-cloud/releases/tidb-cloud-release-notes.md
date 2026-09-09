@@ -8,6 +8,144 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes','/ai/v
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## September 1, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - TiDB Cloud Essential now lets you temporarily authorize TiDB Cloud Support to access Plan Replayer files for SQL performance troubleshooting.
+
+        You can choose the access duration, extend it if needed, or revoke access at any time. Access is automatically revoked when the authorization expires.
+
+        Plan Replayer files contain SQL text, table schemas, and optimizer statistics, but no actual table row data.
+
+        For more information, see [Use Plan Replayer to Troubleshoot SQL Performance](https://docs.pingcap.com/tidbcloud/plan-replayer/?plan=essential).
+
+- **TiDB Cloud Premium**
+
+    - The **Events** page is now available for TiDB Cloud Premium instances.
+
+        You can view historical events that record changes to your Premium instance on this page, along with information such as the event type, status, message, trigger time, and trigger user. Event data is retained for 7 days.
+
+        For more information, see [Events](https://docs.pingcap.com/tidbcloud/tidb-cloud-events/?plan=premium).
+
+    - TiDB Cloud Premium now lets you configure filter rules for database audit logging.
+
+        You can filter audit events by SQL user, event class, table, and execution status to control which database activities are logged, helping you focus on relevant events for security auditing and compliance.
+
+        For more information, see [Specify audit filter rules](https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing-premium/?plan=premium#specify-audit-filter-rules).
+
+    - TiDB Cloud Premium now lets you temporarily authorize TiDB Cloud Support to access Plan Replayer files for SQL performance troubleshooting.
+
+        You can choose the access duration, extend it if needed, or revoke access at any time. Access is automatically revoked when the authorization expires.
+
+        Plan Replayer files contain SQL text, table schemas, and optimizer statistics, but no actual table row data.
+
+        For more information, see [Use Plan Replayer to Troubleshoot SQL Performance](https://docs.pingcap.com/tidbcloud/plan-replayer/?plan=premium).
+
+**Billing adjustments**
+
+- **TiDB Cloud Essential**
+
+    - Starting September 1, 2026, billing for backup usage and network egress on [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances is gradually taking effect.
+
+        Network egress is billed as a separate line item rather than being included in RCU charges.
+
+        For more information, see [TiDB Cloud Essential Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
+
+## August 28, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v8.5.7](https://docs.pingcap.com/tidb/stable/release-8.5.7/) to [v8.5.8](https://docs.pingcap.com/tidb/stable/release-8.5.8/).
+
+## August 25, 2026
+
+**General changes**
+
+- **TiDB Cloud Premium**
+
+    - TiDB Cloud Premium now supports streaming changefeed data directly to Amazon S3 and Alibaba Cloud Object Storage Service (OSS).
+
+        This feature enables you to archive change data to cloud storage for downstream analytics and long-term retention, while reducing costs by eliminating the need for intermediate message queues.
+
+        For more information, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium).
+
+## August 18, 2026
+
+**General changes**
+
+- **TiDB Cloud Premium**
+
+    - Introduce **Statement Insight** (PREVIEW) for TiDB Cloud Premium instances.
+
+        This feature provides an actionable view into SQL resource consumption in your TiDB Cloud Premium instances.
+
+        Now you can analyze RU consumption, latency, and execution counts of SQL statements in multiple dimensions, such as DB User, SQL type, DB, table, or SQL digest. In addition, you can see top contributors at a glance, making it easier to identify the sources of high resource consumption or slowdowns.
+
+        Currently, this feature is in public preview and available only for a limited number of TiDB Cloud Premium instances created on or after August 19.
+
+        For more information, see [Statement Insight (PREVIEW)](https://docs.pingcap.com/tidbcloud/statement-insight/?plan=premium).
+
+- **TiDB Cloud Lake**
+
+    - [TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/) is now available on Alibaba Cloud in Japan (Tokyo) (`ap-northeast-1`). 
+
+        For more supported regions, see [Platforms & Regions](https://docs.pingcap.com/tidbcloudlake/platforms-regions/).
+
+    - Expand Python extensibility and analytics engineering workflows for TiDB Cloud Lake with the new external Python UDF SDK and dbt adapter.
+
+        - With the new external Python UDF SDK, you can implement custom scalar and table functions in Python, deploy them on a UDF server, register the endpoint in TiDB Cloud Lake, and call the functions directly from SQL. The SDK supports common and complex data types, NULL handling, I/O parallelism, and per-function concurrency controls.
+        - With the new dbt adapter, you can connect dbt to TiDB Cloud Lake to build, test, and document data transformation workflows. The adapter supports table, view, and incremental materializations, as well as seeds, sources, custom data tests, documentation generation, snapshots, and connection retries.
+
+      For more information, see the following documentation:
+
+        - [External Function](https://docs.pingcap.com/tidbcloudlake/external-function/)
+        - [Choose a User-Defined Function Type](https://docs.pingcap.com/tidbcloudlake/choose-a-udf-type/)
+        - [Load Data with dbt](https://docs.pingcap.com/tidbcloudlake/load-with-dbt/)
+
+## August 11, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential, Premium, and Dedicated**
+
+    - Support subscribing to alert notifications from TiDB Cloud via [Lark](https://www.larksuite.com/).
+
+        If the [support plan](/tidb-cloud/connected-care-overview.md#connected-care) of your organization is **Enterprise** or **Premium**, you can now receive alert notifications via Lark.
+
+        For more information, see the following documentation:
+
+        - TiDB Cloud Essential: [Subscribe via Lark](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/?plan=essential)
+        - TiDB Cloud Premium: [Subscribe via Lark](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/?plan=premium)
+        - TiDB Cloud Dedicated: [Subscribe via Lark](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/)
+
+- **TiDB Cloud Lake**
+
+    - Expand AI, Python, and BI integrations for [TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/) with the new MCP server and SQLAlchemy dialect.
+
+        - With the new MCP server, you can now connect MCP-compatible AI tools to explore database objects, inspect table schemas, and run SQL using natural-language instructions. Built-in session sandbox protection is enabled by default, keeping production objects read-only while restricting writes to session-specific sandbox objects.
+        - With the new SQLAlchemy dialect, you can connect Python applications and SQLAlchemy-compatible tools to TiDB Cloud Lake through the dialect. You can use tools such as Jupyter Notebook for querying and visualizing data, and Apache Superset for building charts and dashboards.
+
+      For more information, see the following documentation:
+
+        - [TiDB Cloud Lake MCP Server](https://docs.pingcap.com/tidbcloudlake/mcp-server)
+        - [Connect AI Tools to TiDB Cloud Lake Using MCP](https://docs.pingcap.com/tidbcloudlake/mcp-client-integration)
+        - [Connect to TiDB Cloud Lake with Jupyter Notebook](https://docs.pingcap.com/tidbcloudlake/jupyter-notebook)
+        - [Connect to TiDB Cloud Lake with Apache Superset](https://docs.pingcap.com/tidbcloudlake/superset)
+
+**Console changes**
+
+- Improve the networking experience across TiDB Cloud plans with the following updates in the [TiDB Cloud console](https://tidbcloud.com/):
+
+    - The **Networking** page now uses more consistent naming for endpoint configurations across TiDB Cloud plans.
+    - For endpoint types with no configured endpoints, the **Networking** page now displays only the corresponding action button instead of an empty table.
+    - For TiDB Cloud Starter and Essential instances, you can now click **Connect** in the upper-right corner of the **Networking** page to connect to your instance after configuring network access.
+    - For TiDB Cloud Essential, Premium, and Dedicated, managing allowed IP addresses for public endpoints is now more intuitive. You can click **Add IP Address** to add an IP address, or click **...** for an existing IP address to edit or delete it.
+
 ## August 5, 2026
 
 **General changes**

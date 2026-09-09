@@ -1,9 +1,9 @@
 ---
-title: LakeSQL
+title: Connect to TiDB Cloud Lake with LakeSQL
 summary: LakeSQL is a command line tool that has been designed specifically for {{{ .lake }}}. It allows users to establish a connection with {{{ .lake }}} and execute queries directly from a CLI window.
 ---
 
-# LakeSQL
+# Connect to TiDB Cloud Lake with LakeSQL
 
 [LakeSQL](https://github.com/tidbcloud/lakesql) is a command line tool that has been designed specifically for {{{ .lake }}}. It allows users to establish a connection with {{{ .lake }}} and execute queries directly from a CLI window.
 

@@ -40,6 +40,10 @@
   - [Joint Validation](/tidb-cloud/byoc/joint-validation.md)
   - [Security Hardening](/tidb-cloud/byoc/security-hardening.md)
   - [Multi-Region Deployment](/tidb-cloud/byoc/multi-region-deployment.md)
+- Manage Resources
+  - Resource Pools
+    - [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md)
+    - [Manage Resource Pools](/tidb-cloud/byoc/manage-resource-pools-byoc.md)
 - Manage Instances
   - [Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)
   - Connect to Your {{{ .byoc }}} Instance
@@ -62,6 +66,7 @@
   - Monitor and Alert
     - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
     - [Built-in Metrics](/tidb-cloud/premium/built-in-monitoring-premium.md)
+    - [Statement Insight](/tidb-cloud/statement-insight.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
     - Subscribe to Alert Notifications
       - [Subscribe via Email](/tidb-cloud/monitor-alert-email.md)

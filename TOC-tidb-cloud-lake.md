@@ -21,11 +21,18 @@
     - [Node.js](/tidb-cloud-lake/guides/connect-using-node-js.md)
     - [Python](/tidb-cloud-lake/guides/connect-using-python.md)
     - [Rust](/tidb-cloud-lake/guides/connect-using-rust.md)
+  - AI Tools
+    - [External AI Functions](/tidb-cloud-lake/guides/external-ai-functions.md)
+    - [MCP Client Integration](/tidb-cloud-lake/guides/mcp-client-integration.md)
+    - [MCP Server](/tidb-cloud-lake/guides/mcp-server.md)
   - Visualization
     - [Tableau](/tidb-cloud-lake/guides/tableau.md)
     - [Deepnote](/tidb-cloud-lake/guides/deepnote.md)
+    - [Jupyter Notebook](/tidb-cloud-lake/guides/jupyter-notebook.md)
+    - [Superset](/tidb-cloud-lake/guides/superset.md)
   - Network Access
     - [Connect with AWS PrivateLink](/tidb-cloud-lake/guides/connect-with-aws-privatelink.md)
+    - [Connect with Alibaba Cloud PrivateLink](/tidb-cloud-lake/guides/connect-with-alibaba-cloud-privatelink.md)
 - Manage Resources
   - [Dashboards](/tidb-cloud-lake/guides/dashboards.md)
   - [Task Flow](/tidb-cloud-lake/guides/task-flow.md)
@@ -59,6 +66,8 @@
     - [Load from Bucket](/tidb-cloud-lake/guides/load-from-bucket.md)
     - [Load from Local File](/tidb-cloud-lake/guides/load-from-local-file.md)
     - [Load from Remote File](/tidb-cloud-lake/guides/load-from-remote-file.md)
+  - Load with Platforms
+    - [Load with dbt](/tidb-cloud-lake/guides/load-with-dbt.md)
   - Load Semi-structured Data
     - [Overview](/tidb-cloud-lake/guides/load-semi-structured-data.md)
     - [Load Parquet](/tidb-cloud-lake/guides/load-parquet.md)
@@ -126,6 +135,7 @@
   - [Manage Costs](/tidb-cloud-lake/guides/manage-costs.md)
   - [Monitor Usage](/tidb-cloud-lake/guides/monitor-usage.md)
   - [Data Lifecycle](/tidb-cloud-lake/guides/data-lifecycle.md)
+  - [Data Lineage](/tidb-cloud-lake/guides/data-lineage.md)
   - [Data Protection](/tidb-cloud-lake/guides/data-protection.md)
   - [Data Purge and Recycle](/tidb-cloud-lake/guides/data-purge-and-recycle.md)
 - [Pricing & Billing](/tidb-cloud-lake/guides/pricing-billing.md)
@@ -250,11 +260,12 @@
         - [SHOW TABLES](/tidb-cloud-lake/sql/show-tables.md)
       - View
         - [Overview](/tidb-cloud-lake/sql/ddl-view-overview.md)
-        - [ALTER VIEW](/tidb-cloud-lake/sql/alter-view.md)
         - [CREATE VIEW](/tidb-cloud-lake/sql/create-view.md)
-        - [DROP VIEW](/tidb-cloud-lake/sql/drop-view.md)
+        - [ALTER VIEW](/tidb-cloud-lake/sql/alter-view.md)
         - [DESC VIEW](/tidb-cloud-lake/sql/desc-view.md)
         - [SHOW VIEWS](/tidb-cloud-lake/sql/show-views.md)
+        - [DROP VIEW](/tidb-cloud-lake/sql/drop-view.md)
+        - [REFRESH LINEAGE](/tidb-cloud-lake/sql/refresh-lineage.md)
       - User & Role
         - [Overview](/tidb-cloud-lake/sql/user-role.md)
         - [CREATE USER](/tidb-cloud-lake/sql/create-user.md)
@@ -363,6 +374,7 @@
         - [SHOW VIRTUAL COLUMNS](/tidb-cloud-lake/sql/show-virtual-columns.md)
       - User-Defined Function
         - [User-Defined Function](/tidb-cloud-lake/sql/user-defined-function.md)
+        - [Choose a User-Defined Function Type](/tidb-cloud-lake/guides/choose-a-udf-type.md)
         - [ALTER FUNCTION](/tidb-cloud-lake/sql/alter-function.md)
         - [CREATE AGGREGATE FUNCTION](/tidb-cloud-lake/sql/create-aggregate-function.md)
         - [CREATE SCALAR FUNCTION](/tidb-cloud-lake/sql/create-scalar-function.md)
@@ -370,9 +382,10 @@
         - [DROP FUNCTION](/tidb-cloud-lake/sql/drop-function.md)
         - [SHOW USER FUNCTIONS](/tidb-cloud-lake/sql/show-user-functions.md)
       - External Function
+        - [External Function](/tidb-cloud-lake/sql/external-function.md)
+        - [CREATE FUNCTION](/tidb-cloud-lake/sql/create-function.md)
         - [ALTER FUNCTION](/tidb-cloud-lake/sql/alter-function-sql.md)
         - [DROP FUNCTION](/tidb-cloud-lake/sql/drop-function-sql.md)
-        - [External Function](/tidb-cloud-lake/sql/external-function.md)
       - Masking Policy
         - [Overview](/tidb-cloud-lake/sql/masking-policy-sql.md)
         - [CREATE MASKING POLICY](/tidb-cloud-lake/sql/create-masking-policy.md)
@@ -1179,6 +1192,7 @@
       - [FLATTEN](/tidb-cloud-lake/sql/flatten.md)
       - [SYSTEM$FUSE_AMEND](/tidb-cloud-lake/sql/system-fuse-amend.md)
       - [FUSE_VACUUM_TEMPORARY_TABLE](/tidb-cloud-lake/sql/fuse-vacuum-temporary-table.md)
+      - [GET_LINEAGE](/tidb-cloud-lake/sql/get-lineage.md)
       - [ICEBERG_MANIFEST](/tidb-cloud-lake/sql/iceberg-manifest.md)
       - [ICEBERG_SNAPSHOT](/tidb-cloud-lake/sql/iceberg-snapshot.md)
       - [POLICY_REFERENCES](/tidb-cloud-lake/sql/policy-references.md)

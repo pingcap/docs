@@ -164,7 +164,7 @@ You need to first check and confirm the following things:
 - The data is not inserted manually or by other replication programs.
 - No DML filter associated with this table is configured.
 
-To facilitate troubleshooting, you can first collect general log files of the downstream TiDB instance and then ask for technical support at [TiDB Community slack channel](https://tidbcommunity.slack.com/archives/CH7TTLL7P). The following example shows how to collect general log files:
+To facilitate troubleshooting, you can first collect general log files of the downstream TiDB instance and then ask for technical support at [TiDB Community Slack channel](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=docs). The following example shows how to collect general log files:
 
 ```bash
 # Enable general log collection

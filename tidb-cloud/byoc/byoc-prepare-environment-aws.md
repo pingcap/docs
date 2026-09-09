@@ -37,52 +37,26 @@ TiDB is a distributed database that requires specific infrastructure for high av
 
     - **Option B: POC / Cost Optimization (Single-AZ).** Select exactly **1 AZ**. For example, `us-west-2a`.
 
-        > **Note:**
-        >
-        > Multi-AZ deployment functionality is disabled for this configuration.
+The availability zones prepared for the BYOC region determine where TiDB Cloud places resource pools. When creating a resource pool, you select either **Zonal** or **Regional** high availability. A zonal resource pool is placed in one availability zone. A regional resource pool requires at least three eligible availability zones in the region.
 
-## Step 4. Create hosted zones for TiDB and observability (O11Y)
+If a BYOC region is initially prepared with a single availability zone, TiDB Cloud uses that availability zone for zonal resource pools. You can create a regional resource pool only when two additional eligible availability zones are available. If you plan to use regional resource pools, confirm during environment preparation that the region provides at least three eligible availability zones.
 
-You need to create two separate **public hosted zones** in Amazon Route 53.
+## Step 4. Create a hosted zone for TiDB
 
-1. **Create the Zones.**
+Create one Amazon Route 53 hosted zone for TiDB service DNS. You do not need to provide a hosted zone for observability (O11Y).
 
-    Follow the [Creating a public hosted zone in AWS documentation](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingHostedZone.html) to create the following:
+Choose one of the following hosted zone types:
 
-    - **TiDB Cluster Zone:** Manages DNS for the TiDB Service.
+- **Public hosted zone:** supports public and private connections to TiDB. Follow [Creating a public hosted zone in AWS documentation](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingHostedZone.html).
+- **Private hosted zone:** supports private connections only. If you choose a private hosted zone, public connection is not available for the BYOC environment. Follow [Working with private hosted zones](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html).
 
-        * Naming Constraint: Max 38 characters.
-        * Example: `byoc.cluster.example.com`.
+For the TiDB hosted zone, use a name of no more than 38 characters. For example, `byoc.cluster.example.com`.
 
-    - **Observability (O11y) Zone:** Manages DNS for monitoring tools (Grafana/Prometheus).
+For a public hosted zone, delegate the zone from its parent domain by adding the Route 53 name server (NS) records to the parent DNS configuration. For a private hosted zone, associate the hosted zone with the VPCs that require DNS resolution.
 
-        * Naming Constraint: Max 34 characters.
-        * Example: `o11y.cluster.example.com`.
-
-2. **Delegate DNS.**
-
-    > **Important:**
-    >
-    > **DNS Delegation Required.** After creating the hosted zones, you **must** add Route 53 Name Servers (NS records) to your parent domain's DNS configuration (for example, in your corporate DNS or parent AWS zone).
-
-    - **Action:** Copy the 4 NS records from your new Route 53 zones and add them to the parent domain.
-    - **Result:** Without this, internal service discovery will fail.
-
-3. **Verify the DNS delegation.**
-
-    Verify the DNS delegation by running `nslookup` or `dig` from any internet-connected command-line environment. The domain must resolve correctly.
-
-    ```bash
-    nslookup -type=ns {hosted_zone_name}
-    nslookup -type=ns byoc-tidb.cluster.example.com
-    nslookup -type=ns o11y.cluster.example.com
-    ```
-
-    <!--To confirm: whether to add image-->
-
-    > **Note:**
-    >
-    > If you plan to deploy TiDB Cloud BYOC in **multiple AWS regions**, the same hosted zones can be shared across all regions, or you can choose to create dedicated hosted zones per region. See [Multi-Region Deployment](/tidb-cloud/byoc/multi-region-deployment.md) for detailed multi-region architecture configurations.
+> **Note:**
+>
+> If you plan to deploy TiDB Cloud BYOC in multiple AWS regions, you can share the same TiDB hosted zone across all regions or use a dedicated hosted zone for each region. See [Multi-Region Deployment](/tidb-cloud/byoc/multi-region-deployment.md) for details.
 
 ## Step 5. Set up private certificate authority (PCA)
 
@@ -117,33 +91,35 @@ Perform the following steps:
 
 ## Step 6. Plan network CIDR ranges
 
-Before starting the BYOC deployment, plan dedicated CIDR ranges for the TiDB cluster and observability (O11Y) infrastructure. This planning must be evaluated on a **per-region** basis.
+Before starting the BYOC deployment, plan dedicated private CIDR ranges for observability (O11Y) infrastructure and resource pools. Use a prefix length between `/16` and `/22`.
 
-The CIDR ranges will be used by TiDB Cloud to provision the required AWS networking resources for the BYOC environment.
+Each BYOC deployment region has one O11Y CIDR. Resource pool CIDR is configured for each resource pool when you create it. Plan these CIDR ranges before deployment so that the BYOC environment and future resource pools can be provisioned without network conflicts.
 
 Prepare the following information:
 
 | Item | Description | Example |
 | ----- | ----- | ----- |
-| TiDB Cluster CIDR | CIDR range reserved for TiDB cluster and dataplane resources. | `10.10.0.0/16` |
-| O11Y CIDR | CIDR range reserved for observability infrastructure and related services. | `10.20.0.0/16` |
+| O11Y CIDR | CIDR range reserved for observability infrastructure and related services in the deployment region. | `10.1.0.0/22` |
+| Resource pool CIDR | CIDR range reserved for a resource pool. Each resource pool has its own CIDR, which cannot be modified after the resource pool is created. | `10.10.0.0/16` |
 
-When planning the CIDR ranges, ensure that:
+**CIDR planning rules & constraints**
 
-**CIDR Planning Rules & Constraints:** When planning the CIDR ranges, ensure you strictly follow these connectivity rules:
+When planning CIDR ranges, make sure to comply with the following connectivity rules:
 
-1. **Internal Isolation:** The TiDB Cluster CIDR and O11Y CIDR within the same environment must not overlap with each other.
+- **Internal isolation:** In the same region, resource pool CIDRs must not overlap with the O11Y CIDR or with one another.
 
-2. **VPC Peering Rule:**
+- **VPC peering rule:**
 
-    * **Cannot Overlap:** Anything that will be peered *cannot* overlap. If you plan to establish VPC Peering between the TiDB Cluster VPC and your existing application VPCs, on-premises networks, or VPNs, the CIDR ranges must be strictly de-conflicted.
-    * **Can Overlap:** Things that will *never* be peered can safely overlap with the TiDB Cloud BYOC environment.
+    * **Cannot overlap:** The O11Y CIDR and any resource pool CIDR must not overlap with your existing application VPCs, on-premises networks, or VPN networks.
+    * **Customer responsibility:** TiDB Cloud cannot detect conflicts with customer-managed networks. You are responsible for planning and verifying these CIDR ranges before deployment or before creating a resource pool.
 
-3. **Cross-Cluster Replication (Critical):** If you plan to deploy multiple TiDB clusters (whether in the same region or across different regions) and eventually want to **replicate data between them** (for example, using TiCDC for Disaster Recovery or data consolidation), their respective TiDB Cluster CIDR ranges **must be de-conflicted**.
+- **Cross-region CIDR planning:** Resource pool CIDRs in different regions can overlap. However, use non-overlapping CIDRs for resource pools that require cross-region connectivity or replication.
+
+- **Cross-resource pool replication (critical):** If you plan to deploy multiple resource pools and might need to **replicate data between instances in different resource pools** (for example, using TiCDC for disaster recovery or data consolidation), their respective resource pool CIDR ranges **must not overlap**.
 
 Provide the planned CIDR ranges to your TiDB Cloud representative before the automated region deployment starts.
 
-## Summary: Required information
+## Summary: required information
 
 Fill out the table below with the information gathered in steps above and share it with your TiDB Cloud representative to initiate the deployment.
 
@@ -156,8 +132,8 @@ Fill out the table below with the information gathered in steps above and share 
 | **AWS Region** | Region selected for deployment | `us-west-2`, `us-east-1`, `us-east-2` | Step 3. For multi-region deployment, list all regions. |
 | **Availability Zones** | 3 AZs or single AZ per region (specify names and ID) | **Us-east-1:** `us-east-1a`, `use1-az1`, `us-east-1b`, `use1-az2`, `us-east-1c`, `use1-az4`; **Us-east-2:** `us-east-2a`, `use2-az1`, `us-east-2b`, `use2-az2`, `us-east-2c`, `use2-az3`; **Us-west-2:** `us-west-2a`, `usw2-az1` | Step 3. Note to meet the AZ quantity requirement for **each** selected region. |
 | **Subordinate CA ARN** | AWS ACM Private CA ARN | `arn:aws:acm-pca:us-west-2:123456789012:ca/abcd-1234` | Step 5. The ARN can be shared across multiple regions. |
-| **Hosted Zone Names & Host Zone ID** | TiDB Cluster Zone, Observability (O11Y) Zone | **Hosted TiDB cluster zone name:** `clusters.byoc-0929.pingcap.net`; **Hosted TiDB cluster zone ID:** `Z1039122VAY4T8UNWR8E`. **Hosted O11Y zone name:** `o11y.byoc-0929.pingcap.net`; **Hosted O11Y zone ID:** `Z10389823CTXFNM7VG79P`. | Step 4. The zone names and IDs can be shared across multiple regions. |
-| **CIDR** | Customer-planned CIDR range for the TiDB cluster, Customer-planned CIDR range for the O11Y cluster | **TiDB cluster CIDR:** `10.10.0.0/16`; **O11Y cluster CIDR:** `10.20.0.0/16` | Step 6 |
+| **Hosted Zone Name & Hosted Zone ID** | TiDB hosted zone. You can provide either a public or private hosted zone. | **Hosted TiDB zone name:** `clusters.byoc-0929.pingcap.net`; **Hosted TiDB zone ID:** `Z1039122VAY4T8UNWR8E`. | Step 4. The hosted zone can be shared across multiple regions. |
+| **CIDR** | Customer-planned CIDR ranges for O11Y infrastructure and resource pools | **O11Y CIDR:** `10.1.0.0/22`; **Resource pool CIDR:** `10.10.0.0/16` | Step 6 |
 | **Image Sync Region** | Region ID chosen for image synchronization | `us-west-2` | Refer to [image synchronization](/tidb-cloud/byoc/byoc-automated-deployment.md#step-1-image-synchronization) for details. |
 
 ## Review and increase AWS service quotas

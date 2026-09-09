@@ -16,6 +16,12 @@ A TiDB Cloud resource is a deployable unit that you can manage. It can be one of
 - A TiDB X instance, which is a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md), such as a {{{ .starter }}}, Essential, Premium<CustomContent plan="byoc">, or BYOC</CustomContent> instance
 - A {{{ .dedicated }}} cluster
 
+<CustomContent plan="byoc">
+
+In {{{ .byoc }}}, a resource pool is an organization-level BYOC resource that provides the underlying physical resources, network, and capacity for BYOC instances. Resource pools are managed from **BYOC Management** > **Resource Pools** and are not associated with projects. For more information, see [Manage Resource Pools](/tidb-cloud/byoc/manage-resource-pools-byoc.md).
+
+</CustomContent>
+
 ### TiDB Cloud projects
 
 In TiDB Cloud, you can use [projects](/tidb-cloud/tidb-cloud-glossary.md#project) to organize and manage your TiDB Cloud resources.
