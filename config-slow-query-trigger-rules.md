@@ -13,8 +13,8 @@ This document describes how to use the [`tidb_slow_log_rules`](/system-variables
 
 For TiDB Self-Managed, the triggering behavior of slow query logs depends on the configuration of `tidb_slow_log_rules`:
 
-- If `tidb_slow_log_rules` is not set, slow query log triggering still relies on [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) (in milliseconds).
-- If `tidb_slow_log_rules` is set and the configured rules match the current session, the configured rules take precedence, and [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) will be ignored.
+- If the current session has no applicable `tidb_slow_log_rules` rule (either because this variable is not set or because none of the configured rules apply to the session), slow query logging still relies on [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) (in milliseconds).
+- If the current session has any applicable `tidb_slow_log_rules` rules, slow query logging is determined by the rule matching results, and [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) is ignored.
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
@@ -107,7 +107,7 @@ Type constraints are as follows:
 - Numeric types (`int64`, `uint64`, `float64`) require values greater than or equal to `0`. Negative values result in a parsing error.
     - `int64`: the maximum value is `2^63-1`.
     - `uint64`: the maximum value is `2^64-1`.
-    - `float64`: the general upper limit is approximately `1.79e308`. Currently, parsing is done using Go's `ParseFloat`. While `NaN`/`Inf` can be parsed, they might lead to rules that are always true or always false. It is not recommended to use them.
+    - `float64`: values must be finite and non-negative. The maximum value is approximately `1.79e308`. `NaN` and infinite values such as `Inf` and `-Inf` are invalid and result in an error.
 - `bool`: supports `true`/`false`, `1`/`0`, and `t`/`f` (case-insensitive).
 - `string`: currently does not support strings containing the separators `,` (condition separator) or `;` (rule separator), even with quotes (single or double). Escaping is not supported.
 - Duplicate fields: if the same field is specified multiple times in a single rule, the last occurrence takes effect.
