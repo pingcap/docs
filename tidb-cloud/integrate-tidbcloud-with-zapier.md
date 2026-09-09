@@ -31,7 +31,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 ### ステップ1：テンプレートを入手する {#step-1-get-the-template}
 
-[TiDB CloudアプリをZapierで利用](https://zapier.com/apps/tidb-cloud/integrations)へ。 **[Add new Github global events to TiDB rows]**テンプレートを選択し、 **[Try it]**をクリックします。次に、エディターページに入ります。
+[TiDB CloudアプリをZapierで利用](https://zapier.com/apps/tidb-cloud/integrations)へ。 **[Add new Github global events to TiDB rows]**テンプレートを選択し、 **[Try it]**をクリックします。これにより、エディターページが開きます。
 
 ### ステップ2：トリガーを設定する {#step-2-set-up-the-trigger}
 

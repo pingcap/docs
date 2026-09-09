@@ -22,7 +22,7 @@ Gitpodは、コードを直接記述する開発環境向けのオープンソ�
 
     - URL内で環境変数を設定できます。例： `https://gitpod.io/#targetFile=spring-jpa-hibernate_Makefile,targetMode=spring-jpa-hibernate/https://github.com/pingcap-inc/tidb-example-java` 。
 
-3. ログインし、リストされているプロバイダーのいずれかを使用してワークスペースを起動します。例： `Github` 。
+3. ログインし、リストされているプロバイダーのいずれかを使用してワークスペースを起動します。例： `GitHub` 。
 
 ## デフォルトのGitpod設定と環境を使用する {#use-the-default-gitpod-configuration-and-environment}
 

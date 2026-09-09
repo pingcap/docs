@@ -145,7 +145,7 @@ TiDB Operator を使用して v8.5.4 以降の新しい TiDB クラスタをデ�
 spec:
   ticdc:
     baseImage: pingcap/ticdc
-    version: v8.5.4
+    version: v{{{ .ticdc-version }}}
     replicas: 3
     config:
       newarch = true
@@ -169,10 +169,10 @@ TiUPを使用して新しいアーキテクチャにTiCDCノードをデプロ�
 
     ダウンロードリンクは次の形式に従います: `https://tiup-mirrors.pingcap.com/cdc-${version}-${os}-${arch}.tar.gz` 。ここで、 `${version}`は TiCDC バージョン (利用可能なバージョン[TiCDCが新アーキテクチャ向けにリリース](https://github.com/pingcap/ticdc/releases)方向へのリリースを参照)、 `${os}`はオペレーティングシステムです。 `${arch}`は、コンポーネントが実行されるプラットフォーム ( `amd64`または`arm64` ) です。
 
-    例えば、Linux (x86-64) 用の TiCDC v8.5.4-release.1 のバイナリパッケージをダウンロードするには、次のコマンドを実行します。
+    例えば、Linux (x86-64) 用の TiCDC v{{{ .ticdc-version }}} のバイナリパッケージをダウンロードするには、次のコマンドを実行します。
 
     ```shell
-    wget https://tiup-mirrors.pingcap.com/cdc-v8.5.4-release.1-linux-amd64.tar.gz
+    wget https://tiup-mirrors.pingcap.com/cdc-v{{{ .ticdc-version }}}-linux-amd64.tar.gz
     ```
 
 3. TiDB クラスターで実行中のチェンジフィードがある場合は、 [レプリケーションタスクを一時停止する](/ticdc/ticdc-manage-changefeed.md#pause-a-replication-task)を参照して、チェンジフィードのすべてのレプリケーションタスクを一時停止します。
@@ -185,7 +185,7 @@ TiUPを使用して新しいアーキテクチャにTiCDCノードをデプロ�
 4. [`tiup cluster patch`](/tiup/tiup-component-cluster-patch.md)コマンドを使用して、ダウンロードした TiCDC バイナリファイルを TiDB クラスタにパッチ適用します。
 
     ```shell
-    tiup cluster patch <cluster-name> ./cdc-v8.5.4-release.1-linux-amd64.tar.gz -R cdc --overwrite
+    tiup cluster patch <cluster-name> ./cdc-v{{{ .ticdc-version }}}-linux-amd64.tar.gz -R cdc --overwrite
     ```
 
 5. 新しいアーキテクチャを有効にするには、[`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md)コマンドを使用して TiCDC の設定を更新してください。
@@ -220,7 +220,7 @@ TiDB Operatorを使用して既存のTiDBクラスタに新しいアーキテク
     spec:
       ticdc:
         baseImage: pingcap/ticdc
-        version: v8.5.4-release.1
+        version: v{{{ .ticdc-version }}}
         replicas: 3
         config:
           newarch = true
@@ -249,7 +249,7 @@ TiDB Operatorを使用して既存のTiDBクラスタに新しいアーキテク
         spec:
           ticdc:
             baseImage: pingcap/ticdc
-            version: v8.5.4-release.1
+            version: v{{{ .ticdc-version }}}
             replicas: 3
         ```
 

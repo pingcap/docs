@@ -5,7 +5,7 @@ summary: "`USER_ATTRIBUTES` INFORMATION_SCHEMA テーブルについて学習し
 
 # USER_ATTRIBUTES {#user-attributes}
 
-`USER_PRIVILEGES`テーブルは、ユーザーのコメントとユーザー属性に関する情報を提供します。この情報は`mysql.user`システムテーブルから取得されます。
+`USER_ATTRIBUTES`テーブルは、ユーザーのコメントとユーザー属性に関する情報を提供します。この情報は`mysql.user`システムテーブルから取得されます。
 
 ```sql
 USE information_schema;
