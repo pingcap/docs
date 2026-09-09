@@ -113,7 +113,7 @@ TiDBは、SQL処理パスとデータベース時間を継続的に測定・収�
 ![OLTP](/media/performance/oltp_long_compile_db_time.png)
 
 - Database Time by SQL Type: 主に`SELECT`文です。
-- Database Time by SQL Phase：時間のかかる主なフェーズは、オレンジ色の`compile`フェーズと緑色の`execute`フェーズです。`compile`フェーズのレイテンシが最も高く、TiDBが実行計画の生成に時間がかかりすぎていることを示しています。その後のパフォーマンスデータに基づいて根本原因をさらに特定する必要があります。
+- Database Time by SQL Phase：時間のかかる主なフェーズは、オレンジ色の`compile`フェーズと緑色の`execute`フェーズです。`compile`フェーズのレイテンシーが最も高く、TiDBが実行計画の生成に時間がかかりすぎていることを示しています。その後のパフォーマンスデータに基づいて根本原因をさらに特定する必要があります。
 - SQL Execute Time Overview: 青色の KV BatchGet リクエストは、SQL 実行中に最も多くの時間を消費します。
 
 > **Note:**
@@ -348,7 +348,7 @@ TiDB、TiKV、PDのCPU/メモリパネルでは、平均CPU、最大CPU、デル
 
 この TPC-C ワークロードでは、
 
-- すべてのSQL文の平均レイテンシーとP99レイテンシーはそれぞれ477マイクロ秒と3.13ミリ秒です。コミット文、挿入文、クエリ文の平均レイテンシはそれぞれ2.02ミリ秒、609マイクロ秒、468マイクロ秒です。
+- すべてのSQL文の平均レイテンシーとP99レイテンシーはそれぞれ477マイクロ秒と3.13ミリ秒です。コミット文、挿入文、クエリ文の平均レイテンシーはそれぞれ2.02ミリ秒、609マイクロ秒、468マイクロ秒です。
 - トランザクション`avg-in-txn`の平均接続アイドル時間は 171 マイクロ秒です。
 
 平均クエリレイテンシーは`avg-in-txn`よりも大幅に大きいため、トランザクションの主なボトルネックはデータベース内にあることを意味します。
@@ -495,7 +495,7 @@ v5.4.0 では、gPRC モジュールが最適化され、 Raftログのレプリ
 
 #### Commit Log Duration, Append Log Duration, and Apply Log Duration {#commit-log-duration-append-log-duration-and-apply-log-duration}
 
-`Commit Log Duration`、 `Append Log Duration`、 `Apply Log Duration`は、raftstore内の主要な操作のレイテンシー指標です。これらのレイテンシはバッチ操作レベルで計測され、各操作は複数の書き込みリクエストを組み合わせます。したがって、これらのレイテンシは前述の`Store Duration`と`Apply Duration`に直接対応するものではありません。
+`Commit Log Duration`、 `Append Log Duration`、 `Apply Log Duration`は、raftstore内の主要な操作のレイテンシー指標です。これらのレイテンシーはバッチ操作レベルで計測され、各操作は複数の書き込みリクエストを組み合わせます。したがって、これらのレイテンシーは前述の`Store Duration`と`Apply Duration`に直接対応するものではありません。
 
 - `Commit Log Duration`と`Append Log Duration`は 、 `Store`スレッドで実行された操作時間を記録します。`Commit Log Duration`は、 Raftログを他の TiKV ノードにコピーする時間が含まれます (raft-log の永続性を確保するため)。`Commit Log Duration`は通常、リーダー用とフォロワー用の 2つの`Append Log Duration`操作が含まれます。`Commit Log Duration`は、通常、 `Append Log Duration`よりも大幅に大きくなります。これは、前者には、ネットワークを介してRaftログを他の TiKV ノードにコピーする時間が含まれるためです。
 - `Apply Log Duration`は、`Apply`スレッドによるRaftログの適用レイテンシーを記録します。
@@ -516,9 +516,9 @@ v5.4.0 では、gPRC モジュールが最適化され、 Raftログのレプリ
 
 **例1: v5.3.0とv5.4.0での同じOLTPワークロードの比較**
 
-v5.4.0では、書き込み中心のOLTPワークロードのQPSがv5.3.0と比較して14%向上しました。次の表は、3つの主要なレイテンシを比較したものです。
+v5.4.0では、書き込み中心のOLTPワークロードのQPSがv5.3.0と比較して14%向上しました。次の表は、3つの主要なレイテンシーを比較したものです。
 
-| 平均期間      | v5.3.0 (ミリ秒) | v5.4.0 (ミリ秒) |
+| Avg Duration | v5.3.0 (ミリ秒) | v5.4.0 (ミリ秒) |
 | :-------- | :----------- | :----------- |
 | Append Log Duration    | 0.27         | 0.303        |
 | Commit Log Duration | 13           | 8.68         |
