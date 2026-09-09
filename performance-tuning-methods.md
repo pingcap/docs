@@ -410,7 +410,7 @@ TSO待機時間は`TSO WAIT`と記録され、TSOリクエストのネットワ�
 このセクションのインジケーターは、次の3つのパネルに対応しています。
 
 - Avg TiDB KV Request Duration: TiDB によって測定された KV リクエストの平均レイテンシー
-- Avg TiKV GRPC Duration: TiKV での gPRC メッセージの処理にかかる平均レイテンシー
+- Avg TiKV GRPC Duration: TiKV での gRPC メッセージの処理にかかる平均レイテンシー
 - PD TSO Wait/RPC Duration: TiDB エグゼキュータの TSO 待機時間と TSO リクエスト (RPC) のネットワークレイテンシー
 
 `Avg TiDB KV Request Duration`と`Avg TiKV GRPC Duration`の関係は以下のとおりです。
@@ -458,7 +458,7 @@ TiKV は次の手順で書き込みリクエストを処理します。
 
 `Storage Async Write Duration`のメトリックは、書き込みリクエストがraftstoreに入った後のレイテンシーを記録します。データはリクエストごとに収集されます。
 
-`Storage Async Write Duration`メトリックは`Store Duration`と`Apply Duration`の2つの部分で構成されます。次の式を使用して、書き込みリクエストのボトルネックが`Store`または`Apply`どちらのステップにあるかを判断できます。
+`Storage Async Write Duration`メトリックは`Store Duration`と`Apply Duration`の2つの部分で構成されます。次の式を使用して、書き込みリクエストのボトルネックが`Store`または`Apply`のどちらのステップにあるかを判断できます。
 
 ```
 avg Storage Async Write Duration = avg Store Duration + avg Apply Duration
@@ -475,7 +475,7 @@ avg Storage Async Write Duration = avg Store Duration + avg Apply Duration
 - v5.3.0: 24.4 ミリ秒 ~= 17.7 ミリ秒 + 6.59 ミリ秒
 - v5.4.0: 21.4 ミリ秒 ~= 14.0 ミリ秒 + 7.33 ミリ秒
 
-v5.4.0 では、gPRC モジュールが最適化され、 Raftログのレプリケーションが高速化され、v5.3.0 と比較して`Store Duration`が削減されました。
+v5.4.0 では、gRPC モジュールが最適化され、 Raftログのレプリケーションが高速化され、v5.3.0 と比較して`Store Duration`が削減されました。
 
 バージョン5.3.0:
 
@@ -522,7 +522,7 @@ v5.4.0では、書き込み中心のOLTPワークロードのQPSがv5.3.0と比�
 | Commit Log Duration | 13           | 8.68         |
 | Apply Log Duration | 0.457        | 0.514        |
 
-v5.4.0 では、gPRC モジュールが最適化され、 Raftログのレプリケーションが高速化され、v5.3.0 と比較して`Commit Log Duration`と`Store Duration`が削減されました。
+v5.4.0 では、gRPC モジュールが最適化され、 Raftログのレプリケーションが高速化され、v5.3.0 と比較して`Commit Log Duration`と`Store Duration`が削減されました。
 
 バージョン5.3.0:
 
