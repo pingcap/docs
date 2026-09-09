@@ -52,7 +52,6 @@ Complete code examples and demos showcasing TiDB's AI capabilities.
 
 | Document | Description |
 | --- | --- |
-| [Basic CRUD Operations](/ai/examples/basic-with-pytidb.md) | Fundamental table operations with `pytidb`. |
 | [Vector Search](/ai/examples/vector-search-with-pytidb.md) | Semantic similarity search example. |
 | [RAG Application](/ai/examples/rag-with-pytidb.md) | Build a Retrieval-Augmented Generation application. |
 | [Image Search](/ai/examples/image-search-with-pytidb.md) | Multimodal image search with Jina AI embeddings. |

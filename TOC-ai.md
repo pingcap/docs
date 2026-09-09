@@ -18,33 +18,32 @@
 - [Connect to TiDB](/ai/guides/connect.md)
 - [Working with Tables](/ai/guides/tables.md)
 - Search Features
-  - [Vector Search](/ai/guides/vector-search.md)
+  - Vector Search
+    - [Vector Search Usage](/ai/guides/vector-search.md)
+    - [Vector Search Example](/ai/examples/vector-search-with-pytidb.md)
   - Full-Text Search
     - [Full-Text Search via Python](/ai/guides/vector-search-full-text-search-python.md)
     - [Full-Text Search via SQL](/ai/guides/vector-search-full-text-search-sql.md)
-  - [Hybrid Search](/ai/guides/vector-search-hybrid-search.md)
-  - [Image Search](/ai/guides/image-search.md)
+    - [Full-Text Search Example](/ai/examples/fulltext-search-with-pytidb.md)
+  - Hybrid Search
+    - [Hybrid Search Usage](/ai/guides/vector-search-hybrid-search.md)
+    - [Hybrid Search Example](/ai/examples/hybrid-search-with-pytidb.md)
+  - Image Search
+    - [Image Search Usage](/ai/guides/image-search.md)
+    - [Image Search with pytidb](/ai/examples/image-search-with-pytidb.md)
 - Advanced Search Features
-  - [Auto Embedding](/ai/guides/auto-embedding.md)
+  - Auto Embedding
+    - [Auto Embedding Usage](/ai/guides/auto-embedding.md)
+    - [Auto Embedding Example](/ai/examples/auto-embedding-with-pytidb.md)
   - [Filtering](/ai/guides/filtering.md)
   - [Reranking](/ai/guides/reranking.md)
   - [Join Queries](/ai/guides/join-queries.md)
   - [Raw SQL Queries](/ai/guides/raw-queries.md)
   - [Transactions](/ai/guides/transactions.md)
-
-## EXAMPLES
-
-- [Basic CRUD Operations](/ai/examples/basic-with-pytidb.md)
-- [Auto Embedding](/ai/examples/auto-embedding-with-pytidb.md)
-- Search & Retrieval
-  - [Vector Search](/ai/examples/vector-search-with-pytidb.md)
-  - [Full-Text Search](/ai/examples/fulltext-search-with-pytidb.md)
-  - [Hybrid Search](/ai/examples/hybrid-search-with-pytidb.md)
-  - [Image Search](/ai/examples/image-search-with-pytidb.md)
-- AI Applications
-  - [RAG Application](/ai/examples/rag-with-pytidb.md)
-  - [Conversational Memory](/ai/examples/memory-with-pytidb.md)
-  - [Text-to-SQL](/ai/examples/text2sql-with-pytidb.md)
+- Build AI Applications
+  - [RAG with pytidb](/ai/examples/rag-with-pytidb.md)
+  - [Conversational Memory with pytidb](/ai/examples/memory-with-pytidb.md)
+  - [Text-to-SQL with pytidb](/ai/examples/text2sql-with-pytidb.md)
 
 ## INTEGRATIONS
 
