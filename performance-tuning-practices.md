@@ -129,7 +129,7 @@ useServerPrepStmts=false&useConfigs=maxPerformance
 
 ### 分析の結論 {#analysis-conclusion}
 
-シナリオ1と比較して、シナリオ2のQPSは大幅に減少しました。平均クエリ実行時間と、 `parse` `compile` `execute`実行時間が大幅に増加しました。これは、シナリオ1の`select @@session.transaction_read_only`のような、実行回数が多く処理時間が短いSQL文が平均パフォーマンスデータを低下させたためです。シナリオ2ではこれらのSQL文がブロックされ、業務関連のSQL文のみが残るため、平均実行時間が増加します。
+シナリオ1と比較して、シナリオ2のQPSは大幅に減少しました。平均クエリ実行時間と、平均`parse`、 `compile`、 `execute`実行時間が大幅に増加しました。これは、シナリオ1の`select @@session.transaction_read_only`のような、実行回数が多く処理時間が短いSQL文が平均パフォーマンスデータを低下させたためです。シナリオ2ではこれらのSQL文がブロックされ、業務関連のSQL文のみが残るため、平均実行時間が増加します。
 
 アプリケーションがクエリインターフェースを使用する場合、TiDBは実行プランキャッシュを使用できないため、実行計画のコンパイルに多くのリソースを消費します。このような場合は、TiDBの実行プランキャッシュを使用するPrepared Statementインターフェースの使用をお勧めします。Prepared Statementインターフェースは、実行計画のコンパイルによるTiDBのCPU消費量を削減し、レイテンシーを短縮します。
 
