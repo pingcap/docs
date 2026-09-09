@@ -124,7 +124,7 @@ TiDBは、SQL処理パスとデータベース時間を継続的に測定・収�
 
 - Database Time by SQL Type: 主に`UPDATE`文です。
 - Database Time by SQL Phase: ほとんどの時間は緑色の実行フェーズで消費されます。
-- SQL Execute Time Overview：赤で示されているKVリクエストPessimisticLockは、SQL実行中に最も多くの時間を消費しており、実行時間はKVリクエストの合計時間よりも明らかに長くなっています。これは、書き込みステートメントにおける深刻なロック競合と頻繁なロック再試行によって`Retried execution time`長くなっていることが原因です。現在、TiDBは`Retried execution time`測定していません。
+- SQL Execute Time Overview：赤で示されているKVリクエストPessimisticLockは、SQL実行中に最も多くの時間を消費しており、実行時間はKVリクエストの合計時間よりも明らかに長くなっています。これは、書き込みステートメントにおける深刻なロック競合と頻繁なロック再試行によって`Retried execution time`が長くなっていることが原因です。現在、TiDBは`Retried execution time`を測定していません。
 
 **例5: HTAP CH-ベンチマークワークロード**
 
