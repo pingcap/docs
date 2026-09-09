@@ -368,7 +368,7 @@ See [Index Selection - Use multi-valued indexes](/choose-index.md#use-multi-valu
 
 ## Partial indexes
 
-<span class="version-mark">New in v8.5.7 for TiDB Self-Managed and TiDB Cloud Dedicated, and CLOUD.202603.1 for TiDB Cloud Essential and Premium</span>
+<span class="version-mark">New in v8.5.7 for TiDB Self-Managed and TiDB Cloud Dedicated, and in CLOUD.202603.1 for TiDB Cloud Essential and Premium</span>
 
 A partial index is an index built on a subset of rows in a table. When creating a partial index, you can specify a conditional expression, also known as a predicate, to define that subset of rows. The index contains entries only for the rows that satisfy the predicate.
 
