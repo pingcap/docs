@@ -104,7 +104,7 @@
   - Commands
     - [configure](/ai/ti/reference/commands/ti/ti-configure.md)
     - [update](/ai/ti/reference/commands/ti/ti-update.md)
-    - `ti db`
+    - `ti db` commands
       - [create-db-cluster](/ai/ti/reference/commands/db/ti-db-create-db-cluster.md)
       - [list-db-clusters](/ai/ti/reference/commands/db/ti-db-list-db-clusters.md)
       - [describe-db-cluster](/ai/ti/reference/commands/db/ti-db-describe-db-cluster.md)
@@ -117,7 +117,7 @@
       - [create-db-sql-users](/ai/ti/reference/commands/db/ti-db-create-db-sql-users.md)
       - [format-db-connection-string](/ai/ti/reference/commands/db/ti-db-format-db-connection-string.md)
       - [execute-sql-statement](/ai/ti/reference/commands/db/ti-db-execute-sql-statement.md)
-    - `ti fs`
+    - `ti fs` commands
       - [create-file-system](/ai/ti/reference/commands/fs/ti-fs-create-file-system.md)
       - [import-file-system-token](/ai/ti/reference/commands/fs/ti-fs-import-file-system-token.md)
       - [generate-file-system-token](/ai/ti/reference/commands/fs/ti-fs-generate-file-system-token.md)
@@ -162,18 +162,18 @@
       - [mount-file-system](/ai/ti/reference/commands/fs/ti-fs-mount-file-system.md)
       - [drain-file-system](/ai/ti/reference/commands/fs/ti-fs-drain-file-system.md)
       - [unmount-file-system](/ai/ti/reference/commands/fs/ti-fs-unmount-file-system.md)
-    - `ti fs-git`
+    - `ti fs-git` commands
       - [clone-git-workspace](/ai/ti/reference/commands/fs-git/ti-fs-git-clone-git-workspace.md)
       - [hydrate-git-workspace](/ai/ti/reference/commands/fs-git/ti-fs-git-hydrate-git-workspace.md)
       - [add-git-worktree](/ai/ti/reference/commands/fs-git/ti-fs-git-add-git-worktree.md)
       - [remove-git-worktree](/ai/ti/reference/commands/fs-git/ti-fs-git-remove-git-worktree.md)
-    - `ti fs-journal`
+    - `ti fs-journal` commands
       - [create-journal](/ai/ti/reference/commands/fs-journal/ti-fs-journal-create-journal.md)
       - [append-journal-entries](/ai/ti/reference/commands/fs-journal/ti-fs-journal-append-journal-entries.md)
       - [read-journal-entries](/ai/ti/reference/commands/fs-journal/ti-fs-journal-read-journal-entries.md)
       - [search-journal-entries](/ai/ti/reference/commands/fs-journal/ti-fs-journal-search-journal-entries.md)
       - [verify-journal](/ai/ti/reference/commands/fs-journal/ti-fs-journal-verify-journal.md)
-    - `ti fs-vault`
+    - `ti fs-vault` commands
       - [create-secret](/ai/ti/reference/commands/fs-vault/ti-fs-vault-create-secret.md)
       - [replace-secret](/ai/ti/reference/commands/fs-vault/ti-fs-vault-replace-secret.md)
       - [read-secret](/ai/ti/reference/commands/fs-vault/ti-fs-vault-read-secret.md)
