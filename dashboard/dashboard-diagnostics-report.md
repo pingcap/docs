@@ -125,7 +125,7 @@ In the table above,
 
 > **Note:**
 >
-> `CURRENT_CONFIG_VALUE` is the value when the report is generated, not the value within the time range of this report. Currently, some configuration values ​​of historical time cannot be obtained.
+> `CURRENT_CONFIG_VALUE` is the value when the report is generated, not the value within the time range of this report. Currently, some configuration values of historical time cannot be obtained.
 
 #### `TiDB/PD Goroutines Count`
 
@@ -233,7 +233,7 @@ This table shows transaction-related monitoring metrics.
 
 ![Transaction report](/media/dashboard/dashboard-diagnostics-tidb-txn.png)
 
-* `TOTAL_VALUE`: The sum of all values ​​(SUM) during the report time range.
+* `TOTAL_VALUE`: The sum of all values (SUM) during the report time range.
 * `TOTAL_COUNT`: The total number of occurrences of this monitoring metric.
 * `P999`: The maximum P999 value of this monitoring metric.
 * `P99`: The maximum P99 value of this monitoring metric.
@@ -242,7 +242,7 @@ This table shows transaction-related monitoring metrics.
 
 Example:
 
-In the table above, within the report time range, `tidb_txn_kv_write_size`: a total of about 181,296 transactions of KV writes, and the total KV write size is 266.772 MB, of which the maximum P999, P99, P90, P80 values for a single transaction of KV writes ​​are 116.913 KB, 1.996 KB, 1.905 KB, and 1.805 KB.
+In the table above, within the report time range, `tidb_txn_kv_write_size`: a total of about 181,296 transactions of KV writes, and the total KV write size is 266.772 MB, of which the maximum P999, P99, P90, P80 values for a single transaction of KV writes are 116.913 KB, 1.996 KB, 1.905 KB, and 1.805 KB.
 
 ##### DDL Owner
 
@@ -341,7 +341,7 @@ This section introduces `DIFF_RATIO` using the `Instance CPU Usage` table as an 
 ![Compare Instance CPU Usage report](/media/dashboard/dashboard-diagnostics-compare-instance-cpu-usage.png)
 
 * `t1.AVG`, `t1.MAX`, `t1.Min` are the average value, maximum value, and minimum value of CPU usage in the `t1`.
-* `t2.AVG`, `t2.MAX`, and `t2.Min` are the average value, maximum value, and minimum value ​​of CPU usage during `t2`.
+* `t2.AVG`, `t2.MAX`, and `t2.Min` are the average value, maximum value, and minimum value of CPU usage during `t2`.
 * `AVG_DIFF_RATIO` is `DIFF_RATIO` of the average values during `t1` and `t2`.
 * `MAX_DIFF_RATIO` is `DIFF_RATIO` of the maximum values during `t1` and `t2`.
 * `MIN_DIFF_RATIO` is `DIFF_RATIO` of the minimum values during `t1` and `t2`.

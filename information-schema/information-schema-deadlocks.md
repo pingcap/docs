@@ -71,7 +71,7 @@ The `KEY_INFO` column shows the detailed information of the `KEY` column. The in
 * `"table_name"`: The name of the table to which the key belongs.
 * `"partition_id"`: The ID of the partition where the key is located.
 * `"partition_name"`: The name of the partition where the key is located.
-* `"handle_type"`: The handle type of the row key (that is, the key that stores a row of data). The possible values ​​are as follows:
+* `"handle_type"`: The handle type of the row key (that is, the key that stores a row of data). The possible values are as follows:
     * `"int"`: The handle type is int, which means that the handle is the row ID.
     * `"common"`: The handle type is not int64. This type is shown in the non-int primary key when clustered index is enabled.
     * `"unknown"`: The handle type is currently not supported.

@@ -69,7 +69,7 @@ Quick access: [Quick start](https://docs-archive.pingcap.com/tidb/v5.1/quick-sta
 
 + PD
 
-    - Fix the issue that a removed tombstone store appears again after the PD leader transfer ​​[#4941](https://github.com/tikv/pd/issues/4941)
+    - Fix the issue that a removed tombstone store appears again after the PD leader transfer [#4941](https://github.com/tikv/pd/issues/4941)
     - Fix the issue that scheduling cannot start immediately after the PD leader transfer [#4769](https://github.com/tikv/pd/issues/4769)
     - Fix the wrong status code of `not leader` [#4797](https://github.com/tikv/pd/issues/4797)
     - Fix the issue that PD cannot correctly handle dashboard proxy requests [#5321](https://github.com/tikv/pd/issues/5321)
