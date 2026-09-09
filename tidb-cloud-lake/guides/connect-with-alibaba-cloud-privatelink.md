@@ -42,7 +42,7 @@ This document describes how to configure an Alibaba Cloud private endpoint, enab
 
         getent ahostsv4 "$LAKE_HOST"
 
-        curl --noproxy '*' -sS -o /dev/null \
+        curl --noproxy '*' -4 -sS -o /dev/null \
           -w 'remote_ip=%{remote_ip}\ntls_verify=%{ssl_verify_result}\n' \
           "https://$LAKE_HOST"
         ```
@@ -53,7 +53,7 @@ This document describes how to configure an Alibaba Cloud private endpoint, enab
 
         ```shell
         curl --noproxy '*' -sS \
-          https://gw.aliyun-ap-northeast-1.default.lake.tidbcloud.com/status | jq
+          https://gw.aliyun-ap-northeast-1.default.lake.tidbcloud.com/status
         ```
 
         If the response contains `"status": "ok"`, the regional gateway is available.
