@@ -145,7 +145,7 @@ When deploying a new TiDB cluster of v8.5.4 or later using TiDB Operator, you ca
 spec:
   ticdc:
     baseImage: pingcap/ticdc
-    version: v8.5.4
+    version: v{{{ .ticdc-version }}}
     replicas: 3
     config:
       newarch = true
@@ -169,10 +169,10 @@ To deploy TiCDC nodes in the new architecture using TiUP, take the following ste
 
     The download link follows this format: `https://tiup-mirrors.pingcap.com/cdc-${version}-${os}-${arch}.tar.gz`, where `${version}` is the TiCDC version (see [TiCDC releases for the new architecture](https://github.com/pingcap/ticdc/releases) for available versions), `${os}` is your operating system, and `${arch}` is the platform the component runs on (`amd64` or `arm64`).
 
-    For example, to download the binary package of TiCDC v8.5.4-release.1 for Linux (x86-64), run the following command:
+    For example, to download the binary package of TiCDC v{{{ .ticdc-version }}} for Linux (x86-64), run the following command:
 
     ```shell
-    wget https://tiup-mirrors.pingcap.com/cdc-v8.5.4-release.1-linux-amd64.tar.gz
+    wget https://tiup-mirrors.pingcap.com/cdc-v{{{ .ticdc-version }}}-linux-amd64.tar.gz
     ```
 
 3. If your TiDB cluster has running changefeeds, refer to [Pause a replication task](/ticdc/ticdc-manage-changefeed.md#pause-a-replication-task) to pause all replication tasks of the changefeeds.
@@ -185,7 +185,7 @@ To deploy TiCDC nodes in the new architecture using TiUP, take the following ste
 4. Patch the downloaded TiCDC binary file to your TiDB cluster using the [`tiup cluster patch`](/tiup/tiup-component-cluster-patch.md) command:
 
     ```shell
-    tiup cluster patch <cluster-name> ./cdc-v8.5.4-release.1-linux-amd64.tar.gz -R cdc --overwrite
+    tiup cluster patch <cluster-name> ./cdc-v{{{ .ticdc-version }}}-linux-amd64.tar.gz -R cdc --overwrite
     ```
 
 5. Update the TiCDC configuration using the [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md) command to enable the new architecture:
@@ -220,7 +220,7 @@ To deploy TiCDC nodes in the new architecture in an existing TiDB cluster using 
     spec:
       ticdc:
         baseImage: pingcap/ticdc
-        version: v8.5.4-release.1
+        version: v{{{ .ticdc-version }}}
         replicas: 3
         config:
           newarch = true
@@ -249,7 +249,7 @@ To deploy TiCDC nodes in the new architecture in an existing TiDB cluster using 
         spec:
           ticdc:
             baseImage: pingcap/ticdc
-            version: v8.5.4-release.1
+            version: v{{{ .ticdc-version }}}
             replicas: 3
         ```
 

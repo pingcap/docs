@@ -32,6 +32,7 @@
     - [Superset](/tidb-cloud-lake/guides/superset.md)
   - Network Access
     - [Connect with AWS PrivateLink](/tidb-cloud-lake/guides/connect-with-aws-privatelink.md)
+    - [Connect with Alibaba Cloud PrivateLink](/tidb-cloud-lake/guides/connect-with-alibaba-cloud-privatelink.md)
 - Manage Resources
   - [Dashboards](/tidb-cloud-lake/guides/dashboards.md)
   - [Task Flow](/tidb-cloud-lake/guides/task-flow.md)
@@ -134,6 +135,7 @@
   - [Manage Costs](/tidb-cloud-lake/guides/manage-costs.md)
   - [Monitor Usage](/tidb-cloud-lake/guides/monitor-usage.md)
   - [Data Lifecycle](/tidb-cloud-lake/guides/data-lifecycle.md)
+  - [Data Lineage](/tidb-cloud-lake/guides/data-lineage.md)
   - [Data Protection](/tidb-cloud-lake/guides/data-protection.md)
   - [Data Purge and Recycle](/tidb-cloud-lake/guides/data-purge-and-recycle.md)
 - [Pricing & Billing](/tidb-cloud-lake/guides/pricing-billing.md)
@@ -264,6 +266,7 @@
         - [SHOW VIEWS](/tidb-cloud-lake/sql/show-views.md)
         - [DROP VIEW](/tidb-cloud-lake/sql/drop-view.md)
         - [Materialized View](/tidb-cloud-lake/sql/materialized-view.md)
+        - [REFRESH LINEAGE](/tidb-cloud-lake/sql/refresh-lineage.md)
       - User & Role
         - [Overview](/tidb-cloud-lake/sql/user-role.md)
         - [CREATE USER](/tidb-cloud-lake/sql/create-user.md)
@@ -1190,6 +1193,7 @@
       - [FLATTEN](/tidb-cloud-lake/sql/flatten.md)
       - [SYSTEM$FUSE_AMEND](/tidb-cloud-lake/sql/system-fuse-amend.md)
       - [FUSE_VACUUM_TEMPORARY_TABLE](/tidb-cloud-lake/sql/fuse-vacuum-temporary-table.md)
+      - [GET_LINEAGE](/tidb-cloud-lake/sql/get-lineage.md)
       - [ICEBERG_MANIFEST](/tidb-cloud-lake/sql/iceberg-manifest.md)
       - [ICEBERG_SNAPSHOT](/tidb-cloud-lake/sql/iceberg-snapshot.md)
       - [POLICY_REFERENCES](/tidb-cloud-lake/sql/policy-references.md)
