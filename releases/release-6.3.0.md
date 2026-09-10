@@ -266,7 +266,7 @@ TiDBバージョン: 6.3.0-DMR
 
 ## 削除された機能 {#removed-feature}
 
-バージョン6.3.0以降、TiCDCはPulsarシンクの設定をサポートしなくなりました。StreamNativeが提供する[コップ](https://github.com/streamnative/kop)代替として使用できます。
+バージョン6.3.0以降、TiCDCはPulsarシンクの設定をサポートしなくなりました。StreamNativeが提供する[kop](https://github.com/streamnative/kop)を代替として使用できます。
 
 ## 改善点 {#improvements}
 

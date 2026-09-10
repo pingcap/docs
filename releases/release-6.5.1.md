@@ -127,7 +127,7 @@ TiDB バージョン: 6.5.1
     - 解決されたTSによりネットワークトラフィックが増加する問題を修正[#14092](https://github.com/tikv/tikv/issues/14092) @[overvenus](https://github.com/overvenus)
     - 悲観的DML 失敗後のDML実行中にTiDBとTiKV間のネットワーク障害によって発生するデータの不整合の問題を修正しました。 [#14038](https://github.com/tikv/tikv/issues/14038) @[MyonKeminta](https://github.com/MyonKeminta)
     - `const Enum`型を他の型にキャストするときに発生するエラーを修正しました [#14156](https://github.com/tikv/tikv/issues/14156) @[wshwsh12](https://github.com/wshwsh12)
-    - 警官タスクのページングが不正確になる問題を修正[#14254](https://github.com/tikv/tikv/issues/14254) @[you06](https://github.com/you06)
+    - Cop タスクのページングが不正確になる問題を修正[#14254](https://github.com/tikv/tikv/issues/14254) @[you06](https://github.com/you06)
     - `batch_cop`モードで`scan_detail`フィールドが不正確になる問題を修正 [#14109](https://github.com/tikv/tikv/issues/14109) @[you06](https://github.com/you06)
     - Raft Engineの潜在的なエラーを修正しました。このエラーにより、TiKV がRaftデータの破損を検出し、TiKV の再起動に失敗する可能性があります。 [`#14338`](https://github.com/tikv/tikv/issues/14338) @[tonyxuqqi](https://github.com/tonyxuqqi)
 
