@@ -31,7 +31,7 @@ summary: 了解如何通过 Zapier 将 TiDB Cloud 连接到 5000+ 应用。
 
 ### 步骤 1：获取模板
 
-访问 [TiDB Cloud App on Zapier](https://zapier.com/apps/tidb-cloud/integrations)。选择 **Add new Github global events to TiDB rows** 模板并点击 **Try it**。这将打开编辑页面。
+访问 [TiDB Cloud App on Zapier](https://zapier.com/apps/tidb-cloud/integrations)。选择 **Add new Github global events to TiDB rows** 模板并点击 **Try it**，以进入编辑页面。
 
 ### 步骤 2：设置触发器
 
