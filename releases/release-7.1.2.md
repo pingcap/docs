@@ -29,7 +29,7 @@ TiDB バージョン: 7.1.2
 - TiDB
 
     - [`NO_MERGE_JOIN()`](/optimizer-hints.md#no_merge_joint1_name--tl_name-)、[`NO_INDEX_JOIN()`](/optimizer-hints.md#no_index_joint1_name--tl_name-)、[`NO_INDEX_MERGE_JOIN()`](/optimizer-hints.md#no_index_merge_joint1_name--tl_name-)、[`NO_HASH_JOIN()`](/optimizer-hints.md#no_hash_joint1_name--tl_name-)、[`NO_INDEX_HASH_JOIN()`](/optimizer-hints.md#no_index_hash_joint1_name--tl_name-)を含む新しいオプティマイザヒントを追加 [#45520](https://github.com/pingcap/tidb/issues/45520) @[qw4990](https://github.com/qw4990)
-    - コプロセッサに関連する要求元情報を追加します [#46514](https://github.com/pingcap/tidb/issues/46514) @[you06](https://github.com/you06)
+    - コプロセッサに関連するリクエスト元情報を追加します [#46514](https://github.com/pingcap/tidb/issues/46514) @[you06](https://github.com/you06)
     - TiDBノードのアップグレードステータスの開始と終了をマークするために`/upgrade/start`と`upgrade/finish` APIを追加します。 [#47172](https://github.com/pingcap/tidb/issues/47172) @[zimulala](https://github.com/zimulala)
 
 - TiKV
@@ -44,7 +44,7 @@ TiDB バージョン: 7.1.2
 
 - PD
 
-    - PD 呼び出し元のバックオフ メカニズムを最適化して、呼び出しが失敗したときの RPC 要求の頻度を減らします[#6556](https://github.com/tikv/pd/issues/6556) @[nolouch](https://github.com/nolouch) @[rleungx](https://github.com/rleungx) @[HuSharp](https://github.com/HuSharp)
+    - PD 呼び出し元のバックオフ メカニズムを最適化して、呼び出しが失敗したときの RPC リクエストの頻度を減らします[#6556](https://github.com/tikv/pd/issues/6556) @[nolouch](https://github.com/nolouch) @[rleungx](https://github.com/rleungx) @[HuSharp](https://github.com/HuSharp)
     - 発信者が切断されたときにCPUとメモリを時間内に解放するために、 `GetRegions`インターフェースにキャンセルメカニズムを導入する[#6835](https://github.com/tikv/pd/issues/6835) @[lhy1024](https://github.com/lhy1024)
 
 - TiFlash
@@ -132,7 +132,7 @@ TiDB バージョン: 7.1.2
     - オンラインアンセーフリカバリがタイムアウトで中止されない問題を修正 [#15346](https://github.com/tikv/tikv/issues/15346) @[Connor1996](https://github.com/Connor1996)
     - 暗号化により部分書き込み中にデータ破損が発生する可能性がある問題を修正 [#15080](https://github.com/tikv/tikv/issues/15080) @[tabokie](https://github.com/tabokie)
     - リージョンのメタデータが正しくないことによって引き起こされるTiKV panic問題を修正しました [#13311](https://github.com/tikv/tikv/issues/13311) @[cfzjywxk](https://github.com/cfzjywxk)
-    - オンラインワークロードがある場合にTiDB Lightningチェックサムコプロセッサの要求がタイムアウトする問題を修正しました [#15565](https://github.com/tikv/tikv/issues/15565) @[lance6716](https://github.com/lance6716)
+    - オンラインワークロードがある場合にTiDB Lightningチェックサムコプロセッサのリクエストがタイムアウトする問題を修正しました [#15565](https://github.com/tikv/tikv/issues/15565) @[lance6716](https://github.com/lance6716)
     - ピアを移動するとFollower Readのパフォーマンスが低下する可能性がある問題を修正[#15468](https://github.com/tikv/tikv/issues/15468) @[YuJuncen](https://github.com/YuJuncen)
 
 - PD

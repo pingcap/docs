@@ -100,7 +100,7 @@ TiDB バージョン: 6.5.6
 
     - ピアを移動するとFollower Readのパフォーマンスが低下する可能性がある問題を修正[#15468](https://github.com/tikv/tikv/issues/15468) @[YuJuncen](https://github.com/YuJuncen)
     - raftstore-applys が継続的に増加するデータエラーを修正しました [#15371](https://github.com/tikv/tikv/issues/15371) @[Connor1996](https://github.com/Connor1996)
-    - オンラインワークロードがある場合にTiDB Lightningチェックサムコプロセッサの要求がタイムアウトする問題を修正しました [#15565](https://github.com/tikv/tikv/issues/15565) @[lance6716](https://github.com/lance6716)
+    - オンラインワークロードがある場合にTiDB Lightningチェックサムコプロセッサのリクエストがタイムアウトする問題を修正しました [#15565](https://github.com/tikv/tikv/issues/15565) @[lance6716](https://github.com/lance6716)
     - `lz4-sys`のバージョンを 1.9.4 にアップグレードしてセキュリティ問題を修正しました [#15621](https://github.com/tikv/tikv/issues/15621) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
     - バージョン`tokio`を 6.5 にアップグレードしてセキュリティ問題を修正しました [#15621](https://github.com/tikv/tikv/issues/15621) @[LykxSassinator](https://github.com/LykxSassinator)
     - `flatbuffer` を削除してセキュリティ問題を修正 [#15621](https://github.com/tikv/tikv/issues/15621) @[tonyxuqqi](https://github.com/tonyxuqqi)

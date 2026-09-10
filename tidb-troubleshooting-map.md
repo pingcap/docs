@@ -239,13 +239,13 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 - 4.3.1 TiKV RocksDB は`write stall`を検出します。
 
-    TiKV インスタンスには 2つの RocksDB インスタンスがあり、1つは`data/raft`にありRaftログを格納し、もう 1つは`data/db`にあり実際のデータを格納します。ログで`grep "Stalling" RocksDB`を実行すると、停止の具体的な原因を確認できます。RocksDB ログは`LOG`で始まるファイルで、 `LOG`が現在のログです。 `write stall`は RocksDB にネイティブに組み込まれたパフォーマンス低下メカニズムです。RocksDB で`write stall`が発生すると、システムのパフォーマンスが大幅に低下します。バージョン 5.2.0 より前のバージョンでは、TiDB は`ServerIsBusy`に遭遇すると、 `write stall`エラーをクライアントに直接返すことで、すべての書き込み要求をブロックしようとしますが、これにより QPS パフォーマンスが急激に低下する可能性があります。バージョン 5.2.0 以降、TiKV は、スケジューリングレイヤーで書き込み要求を動的に遅延させることで書き込みを抑制する新しいフロー制御メカニズムを導入し、 `server is busy`が発生したときにクライアントに`write stall`を返す以前のメカニズムに取って代わります。新しいフロー制御メカニズムはデフォルトで有効になっており、TiKV は`write stall`および`KvDB` (memtable を除く) の`RaftDB`メカニズムを自動的に無効にします。ただし、保留中のリクエスト数が一定のしきい値を超えると、フロー制御メカニズムは引き続き有効になり、一部またはすべての書き込みリクエストを拒否し、 `server is busy`エラーをクライアントに返します。詳細な説明としきい値については、 [フロー制御構成](/tikv-configuration-file.md#storageflow-control)を参照してください。
+    TiKV インスタンスには 2つの RocksDB インスタンスがあり、1つは`data/raft`にありRaftログを格納し、もう 1つは`data/db`にあり実際のデータを格納します。ログで`grep "Stalling" RocksDB`を実行すると、停止の具体的な原因を確認できます。RocksDB ログは`LOG`で始まるファイルで、 `LOG`が現在のログです。 `write stall`は RocksDB にネイティブに組み込まれたパフォーマンス低下メカニズムです。RocksDB で`write stall`が発生すると、システムのパフォーマンスが大幅に低下します。バージョン 5.2.0 より前のバージョンでは、TiDB は`ServerIsBusy`に遭遇すると、 `write stall`エラーをクライアントに直接返すことで、すべての書き込みリクエストをブロックしようとしますが、これにより QPS パフォーマンスが急激に低下する可能性があります。バージョン 5.2.0 以降、TiKV は、スケジューリングレイヤーで書き込みリクエストを動的に遅延させることで書き込みを抑制する新しいフロー制御メカニズムを導入し、 `server is busy`が発生したときにクライアントに`write stall`を返す以前のメカニズムに取って代わります。新しいフロー制御メカニズムはデフォルトで有効になっており、TiKV は`write stall`および`KvDB` (memtable を除く) の`RaftDB`メカニズムを自動的に無効にします。ただし、保留中のリクエスト数が一定のしきい値を超えると、フロー制御メカニズムは引き続き有効になり、一部またはすべての書き込みリクエストを拒否し、 `server is busy`エラーをクライアントに返します。詳細な説明としきい値については、 [フロー制御構成](/tikv-configuration-file.md#storageflow-control)を参照してください。
 
     - `server is busy`エラーが、保留中の圧縮バイト数が多すぎるために発生する場合は、 [`soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)および[`hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit)パラメータの値を増やすことで、この問題を軽減できます。
 
-        - 保留中の圧縮バイト数が`soft-pending-compaction-bytes-limit`パラメータの値 (デフォルトでは`192GiB` ) に達すると、フロー制御メカニズムは一部の書き込み要求を拒否し始めます ( `ServerIsBusy`をクライアントに返します)。この場合、このパラメータの値を増やすことができます。たとえば、 `[storage.flow-control] soft-pending-compaction-bytes-limit = "384GiB"`のようにです。
+        - 保留中の圧縮バイト数が`soft-pending-compaction-bytes-limit`パラメータの値 (デフォルトでは`192GiB` ) に達すると、フロー制御メカニズムは一部の書き込みリクエストを拒否し始めます ( `ServerIsBusy`をクライアントに返します)。この場合、このパラメータの値を増やすことができます。たとえば、 `[storage.flow-control] soft-pending-compaction-bytes-limit = "384GiB"`のようにです。
 
-        - 保留中の圧縮バイト数が`hard-pending-compaction-bytes-limit`パラメータの値 (デフォルトでは`1024GiB` ) に達すると、フロー制御メカニズムはすべての書き込み要求を拒否し始めます ( `ServerIsBusy`をクライアントに返します)。フロー制御メカニズムは`soft-pending-compaction-bytes-limit`のしきい値に達した後に書き込み速度を遅くするため、このシナリオが発生する可能性は低くなります。発生した場合は、このパラメータの値を増やすことができます (たとえば`[storage.flow-control] hard-pending-compaction-bytes-limit = "2048GiB"`など)。
+        - 保留中の圧縮バイト数が`hard-pending-compaction-bytes-limit`パラメータの値 (デフォルトでは`1024GiB` ) に達すると、フロー制御メカニズムはすべての書き込みリクエストを拒否し始めます ( `ServerIsBusy`をクライアントに返します)。フロー制御メカニズムは`soft-pending-compaction-bytes-limit`のしきい値に達した後に書き込み速度を遅くするため、このシナリオが発生する可能性は低くなります。発生した場合は、このパラメータの値を増やすことができます (たとえば`[storage.flow-control] hard-pending-compaction-bytes-limit = "2048GiB"`など)。
 
         - ディスクのI/O容量が長時間にわたって書き込み速度に追いつかない場合は、ディスクの容量を増やすことをお勧めします。ディスクのスループットが上限に達し、書き込みが停止する場合（例えば、SATA SSDはNVMe SSDよりも大幅に低い）、CPUリソースが十分であれば、より高い圧縮率の圧縮アルゴリズムを適用することができます。こうすることで、CPUリソースをディスクリソースに振り向け、ディスクへの負荷を軽減できます。
 
@@ -501,7 +501,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 - 7.1.2 `coprocessor.go`は`request outdated`を報告します。
 
-    このエラーは、TiKVに送信されたコプロセッサ要求がTiKVのキューで60秒以上待機した場合に返されます。
+    このエラーは、TiKVに送信されたコプロセッサリクエストがTiKVのキューで60秒以上待機した場合に返されます。
 
     TiKVコプロセッサが長いキューに入っている理由を調査する必要があります。
 
@@ -528,7 +528,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 - 7.2.1 `key is locked` 。
 
-    読み取りと書き込みが競合しています。読み取り要求は、コミットされていないデータに遭遇したため、データがコミットされるまで待機する必要があります。
+    読み取りと書き込みが競合しています。読み取りリクエストは、コミットされていないデータに遭遇したため、データがコミットされるまで待機する必要があります。
 
     このエラーの発生件数が少ない場合は業務に影響はありませんが、発生件数が多い場合は、業務において読み書きの競合が深刻であることを示しています。
 

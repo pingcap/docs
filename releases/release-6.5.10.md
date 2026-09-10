@@ -76,7 +76,7 @@ TiDB バージョン: 6.5.10
     - `LEADING`ヒントがブロックエイリアスのクエリをサポートしない問題を修正しました [#44645](https://github.com/pingcap/tidb/issues/44645) @[qw4990](https://github.com/qw4990)
     - 相関サブクエリにおける TopN オペレーターの誤った結果を修正 [#52777](https://github.com/pingcap/tidb/issues/52777) @[yibin87](https://github.com/yibin87)
     - 列の不安定な一意のIDにより、 `UPDATE`文がエラーを返す可能性がある問題を修正しました。 [#53236](https://github.com/pingcap/tidb/issues/53236) @[winoros](https://github.com/winoros)
-    - TiDBがオフラインになっているTiFlashノードにプローブ要求を送信し続ける問題を修正[#46602](https://github.com/pingcap/tidb/issues/46602) @[zyguan](https://github.com/zyguan)
+    - TiDBがオフラインになっているTiFlashノードにプローブリクエストを送信し続ける問題を修正[#46602](https://github.com/pingcap/tidb/issues/46602) @[zyguan](https://github.com/zyguan)
     - `YEAR`型の列を範囲外の符号なし整数と比較すると誤った結果が発生する問題を修正[#50235](https://github.com/pingcap/tidb/issues/50235) @[qw4990](https://github.com/qw4990)
     - AutoIDLeaderの変更により、 `AUTO_ID_CACHE=1` の場合にAUTO_INCREMENT列の値が減少する可能性がある問題を修正しました。 [#52600](https://github.com/pingcap/tidb/issues/52600) @[tiancaiamao](https://github.com/tiancaiamao)
     - BIGINT 以外の符号なし整数が文字列/小数点と比較されたときに誤った結果を生成する可能性がある問題を修正しました [#41736](https://github.com/pingcap/tidb/issues/41736) @[LittleFall](https://github.com/LittleFall)

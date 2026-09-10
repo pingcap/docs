@@ -32,10 +32,10 @@ TiFlash のバージョンを確認するには、次の2つの方法があり�
 | ログ情報                                                                                                                                 | ログの説明                                             |
 | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------- |
 | `[INFO] [<unknown>] ["KVStore: Start to persist [region 47, applied: term 6 index 10]"] [thread_id=23]`                              | データの複製が開始されます（ログの先頭の角括弧内の数字はスレッドIDを表します）          |
-| `[DEBUG] [<unknown>] ["CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute(): Handling DAG request"] [thread_id=30]`    | DAG要求の処理、つまりTiFlashがコプロセッサー要求の処理を開始する             |
-| `[DEBUG] [<unknown>] ["CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute(): Handle DAG request done"] [thread_id=30]` | DAG要求の処理が完了しました。つまり、 TiFlashがコプロセッサー要求の処理を完了しました。 |
+| `[DEBUG] [<unknown>] ["CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute(): Handling DAG request"] [thread_id=30]`    | DAGリクエストの処理、つまりTiFlashがコプロセッサーリクエストの処理を開始する             |
+| `[DEBUG] [<unknown>] ["CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute(): Handle DAG request done"] [thread_id=30]` | DAGリクエストの処理が完了しました。つまり、 TiFlashがコプロセッサーリクエストの処理を完了しました。 |
 
-コプロセッサー要求の開始または終了を見つけ、ログの先頭に印刷されているスレッド ID を通じてコプロセッサー要求の関連ログを見つけることができます。
+コプロセッサーリクエストの開始または終了を見つけ、ログの先頭に印刷されているスレッド ID を通じてコプロセッサーリクエストの関連ログを見つけることができます。
 
 ## TiFlashシステムテーブル {#tiflash-system-table}
 

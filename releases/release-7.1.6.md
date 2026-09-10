@@ -14,7 +14,7 @@ TiDB バージョン: 7.1.6
 ## 互換性の変更 {#compatibility-changes}
 
 - [TiDB HTTP API](https://github.com/pingcap/tidb/blob/release-7.1/docs/tidb_http_api.md)から取得される DDL 履歴タスクのデフォルトの制限を2048に設定して、過剰な履歴タスクによる OOM の問題を防止します。 [#55711](https://github.com/pingcap/tidb/issues/55711) @[joccau](https://github.com/joccau)
-- 以前のバージョンでは、 `UPDATE`変更を含むトランザクションを処理する際に、 `UPDATE`目のイベントで主キーまたは非NULLの一意インデックス値が変更されると、TiCDCはこのイベントを`DELETE`目と`INSERT`目のイベントに分割していました。v7.1.6以降では、MySQLシンクを使用する場合、 `UPDATE`の変更のトランザクション`commitTS` TiCDC `thresholdTS` （TiCDCが対応するテーブルをダウンストリームに複製し始める際にPDから取得する現在のタイムスタンプ）より小さい場合、TiCDCは`UPDATE`件目のイベントを`DELETE`目と`INSERT`件目のイベントに分割します。この動作変更は、TiCDCが受信した`UPDATE`目のイベントの順序が誤っている可能性があり、その結果、分割された`DELETE`と`INSERT`目のイベントの順序が誤っている可能性があることで発生するダウンストリームデータの不整合の問題を解決します。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v7.1/ticdc-split-update-behavior#split-update-events-for-mysql-sinks) してください@[lidezhu](https://github.com/lidezhu) [#10918](https://github.com/pingcap/tiflow/issues/10918)
+- 以前のバージョンでは、 `UPDATE`変更を含むトランザクションを処理する際に、 `UPDATE`イベントで主キーまたは非NULLの一意インデックス値が変更されると、TiCDCはこのイベントを`DELETE`と`INSERT`イベントに分割していました。v7.1.6以降では、MySQLシンクを使用する場合、 `UPDATE`の変更のトランザクション`commitTS`がTiCDCの`thresholdTS` （TiCDCが対応するテーブルをダウンストリームに複製し始める際にPDから取得する現在のタイムスタンプ）より小さい場合、TiCDCは`UPDATE`イベントを`DELETE`と`INSERT`イベントに分割します。この動作変更は、TiCDCが受信した`UPDATE`イベントの順序が誤っている可能性があり、その結果、分割された`DELETE`と`INSERT`イベントの順序が誤っている可能性があることで発生するダウンストリームデータの不整合の問題を解決します。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v7.1/ticdc-split-update-behavior#split-update-events-for-mysql-sinks)を参照してください。@[lidezhu](https://github.com/lidezhu) [#10918](https://github.com/pingcap/tiflow/issues/10918)
 - TiDB Lightning `strict-format`を使用して CSV ファイルをインポートする場合は、行末文字を設定する必要があります[#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
 - TiKV設定項目[`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)のスコープを変更します。
 
@@ -42,7 +42,7 @@ TiDB バージョン: 7.1.6
 
     - `LENGTH()`と`ASCII()`関数の実行効率を最適化 [#9344](https://github.com/pingcap/tiflash/issues/9344) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - TLS を有効にした後に証明書を更新することでTiFlash がpanicする可能性がある問題を軽減します[#8535](https://github.com/pingcap/tiflash/issues/8535) @[windtalker](https://github.com/windtalker)
-    - JOIN演算子のキャンセルメカニズムを改善し、JOIN演算子がキャンセル要求にタイムリーに応答できるようにします[#9430](https://github.com/pingcap/tiflash/issues/9430) @[windtalker](https://github.com/windtalker)
+    - JOIN演算子のキャンセルメカニズムを改善し、JOIN演算子がキャンセルリクエストにタイムリーに応答できるようにします[#9430](https://github.com/pingcap/tiflash/issues/9430) @[windtalker](https://github.com/windtalker)
     - 同時実行性の高いデータ読み取り操作におけるロック競合を減らし、短いクエリのパフォーマンスを最適化します[#9125](https://github.com/pingcap/tiflash/issues/9125) @[JinheLin](https://github.com/JinheLin)
     - クラスター化インデックスを持つテーブルで、バックグラウンドでの古いデータのガベージコレクションの速度が向上しました。 [#9529](https://github.com/pingcap/tiflash/issues/9529) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
@@ -195,7 +195,7 @@ TiDB バージョン: 7.1.6
     - `DECIMAL`型の小数点部分がの場合に正しくない問題を修正しました [#16913](https://github.com/tikv/tikv/issues/16913) @[gengliqi](https://github.com/gengliqi)
     - クエリ内の`CONV()`関数が数値システム変換中にオーバーフローし、TiKV panicが発生する問題を修正しました。 [#16969](https://github.com/tikv/tikv/issues/16969) @[gengliqi](https://github.com/gengliqi)
     - 古いレプリカがRaftスナップショットを処理するときに、遅い分割操作と新しいレプリカの即時削除によってトリガーされ、TiKV がpanicになる可能性がある問題を修正しました。 [#17469](https://github.com/tikv/tikv/issues/17469) @[hbisheng](https://github.com/hbisheng)
-    - 同時実行性の高いコプロセッサー要求により TiKV OOM が発生する可能性がある問題を修正しました [#16653](https://github.com/tikv/tikv/issues/16653) @[overvenus](https://github.com/overvenus)
+    - 同時実行性の高いコプロセッサーリクエストにより TiKV OOM が発生する可能性がある問題を修正しました [#16653](https://github.com/tikv/tikv/issues/16653) @[overvenus](https://github.com/overvenus)
     - マスターキーがキー管理サービス (KMS) に保存されているときにマスターキーのローテーションを妨げる問題を修正しました [#17410](https://github.com/tikv/tikv/issues/17410) @[hhwyt](https://github.com/hhwyt)
     - tikv-ctlの`raft region`コマンドの出力にリージョンステータス情報が含まれていない問題を修正しました [#17037](https://github.com/tikv/tikv/issues/17037) @[glorv](https://github.com/glorv)
     - Grafana の TiKV パネルの**ストレージ非同期書き込み期間の**監視メトリックが不正確であるという問題を修正しました[#17579](https://github.com/tikv/tikv/issues/17579) @[overvenus](https://github.com/overvenus)
@@ -233,7 +233,7 @@ TiDB バージョン: 7.1.6
     - 遅延マテリアライゼーションが有効になっている場合に一部のクエリでエラーが報告される可能性がある問題を修正[#9472](https://github.com/pingcap/tiflash/issues/9472) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - TiFlashでサポートされていない一部の JSON関数がTiFlash にプッシュダウンされる問題を修正しました [#9444](https://github.com/pingcap/tiflash/issues/9444) @[windtalker](https://github.com/windtalker)
     - TiFlashで SSL 証明書の構成を空の文字列に設定すると、誤って TLS が有効になり、 TiFlash が起動しなくなる問題を修正しました[#9235](https://github.com/pingcap/tiflash/issues/9235) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - TiFlashとPD間のネットワークパーティション（ネットワーク切断）により、読み取り要求タイムアウトエラーが発生する可能性がある問題を修正しました。 [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - TiFlashとPD間のネットワークパーティション（ネットワーク切断）により、読み取りリクエストタイムアウトエラーが発生する可能性がある問題を修正しました。 [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - BRまたはTiDB Lightning 経由でデータをインポートした後、FastScanモードで多数の重複行が読み取られる可能性がある問題を修正しました。 [#9118](https://github.com/pingcap/tiflash/issues/9118) @[JinheLin](https://github.com/JinheLin)
     - テーブルに無効な文字を含むデフォルト値を持つビット型の列が含まれている場合、 TiFlash がテーブルスキーマを解析できない問題を修正しました。 [#9461](https://github.com/pingcap/tiflash/issues/9461) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - 遅延マテリアライゼーションが有効になった後、仮想生成列を含むクエリが誤った結果を返す可能性がある問題を修正[#9188](https://github.com/pingcap/tiflash/issues/9188) @[JinheLin](https://github.com/JinheLin)

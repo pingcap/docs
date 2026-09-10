@@ -304,7 +304,7 @@ TiDB バージョン: 8.2.0
 
     - `JSON_ARRAY_APPEND()`関数を TiKV にプッシュダウンすると TiKV がpanicを起こす問題を修正しました [#16930](https://github.com/tikv/tikv/issues/16930) @[dbsid](https://github.com/dbsid)
     - リーダーが失敗したスナップショットファイルを時間内にクリーンアップしない問題を修正 [#16976](https://github.com/tikv/tikv/issues/16976) @[hbisheng](https://github.com/hbisheng)
-    - 高度な同時コプロセッサー要求が TiKV OOM を引き起こす可能性がある問題を修正 [#16653](https://github.com/tikv/tikv/issues/16653) @[overvenus](https://github.com/overvenus)
+    - 同時実行性の高いコプロセッサーリクエストが TiKV OOM を引き起こす可能性がある問題を修正 [#16653](https://github.com/tikv/tikv/issues/16653) @[overvenus](https://github.com/overvenus)
     - `raftstore.periodic-full-compact-start-times`設定項目をオンラインで変更すると TiKV がpanicを引き起こす可能性がある問題を修正 [#17066](https://github.com/tikv/tikv/issues/17066) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
     - `make docker`と`make docker_test`の不具合を修正 [#17075](https://github.com/tikv/tikv/issues/17075) @[shunki-fujita](https://github.com/shunki-fujita)
     - 監視ダッシュボードで**gRPC リクエストソースの期間**メトリクスが正しく表示されない問題を修正 [#17133](https://github.com/tikv/tikv/issues/17133) @[King-Dylan](https://github.com/King-Dylan)

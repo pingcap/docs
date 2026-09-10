@@ -59,14 +59,14 @@ v1.14.0以降、 TiUPはこの機能を自動的にサポートします。つ�
 
 You can take the following steps to upgrade TiDB manually or by using a script:
 
-1. クラスター内の任意の TiDB ノードに HTTP アップグレード開始要求を送信します`curl -X POST http://{TiDBIP}:10080/upgrade/start` .
+1. クラスター内の任意の TiDB ノードに HTTP アップグレード開始リクエストを送信します`curl -X POST http://{TiDBIP}:10080/upgrade/start` .
     - The TiDB cluster enters the **Upgrading** state.
     - The DDL operations to be performed are paused.
 
 2. Replace the TiDB binary and perform a rolling upgrade. This process is the same as the original upgrade process.
     - システム DDL 操作はアップグレードプロセス中に実行されます。
 
-3. クラスター内のすべての TiDB ノードが正常にアップグレードされたら、任意の TiDB ノードに HTTP アップグレード完了要求を送信します`curl -X POST http://{TiDBIP}:10080/upgrade/finish` .
+3. クラスター内のすべての TiDB ノードが正常にアップグレードされたら、任意の TiDB ノードに HTTP アップグレード完了リクエストを送信します`curl -X POST http://{TiDBIP}:10080/upgrade/finish` .
     - ユーザーの一時停止された DDL 操作が再開されます。
 
 ## Limitations {#limitations}

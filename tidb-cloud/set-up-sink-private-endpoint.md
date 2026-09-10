@@ -110,7 +110,7 @@ changefeed ダウンストリーム サービスが Azure でホストされて�
 
 2. **Create Private Endpoint for External Services**ダイアログで、プライベートエンドポイントの名前を入力します。
 
-3. リマインダーに従って、 TiDB Cloudの[Google Cloud プロジェクト](https://cloud.google.com/resource-manager/docs/creating-managing-projects)にエンドポイントの作成を事前承認するよう許可するか、エンドポイント接続要求を受け取ったら手動で承認します。
+3. リマインダーに従って、 TiDB Cloudの[Google Cloud プロジェクト](https://cloud.google.com/resource-manager/docs/creating-managing-projects)にエンドポイントの作成を事前承認するよう許可するか、エンドポイント接続リクエストを受け取ったら手動で承認します。
 
 4. セクション[ネットワーク](#network)で収集した**Service Attachment**を入力します。
 

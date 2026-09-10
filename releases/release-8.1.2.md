@@ -36,8 +36,8 @@ TiDB バージョン: 8.1.2
 
     - クラスター化インデックスを持つテーブルで、バックグラウンドでの古いデータのガベージコレクションの速度が向上しました。 [#9529](https://github.com/pingcap/tiflash/issues/9529) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - TLS を有効にした後に証明書を更新することでTiFlash がpanicする可能性がある問題を軽減します[#8535](https://github.com/pingcap/tiflash/issues/8535) @[windtalker](https://github.com/windtalker)
-    - 分散ストレージとコンピューティング要求を処理するときにTiFlash が作成する必要があるスレッドの数を減らし、大量のそのような要求を処理するときにTiFlashコンピューティングノードのクラッシュを回避するのに役立ちます[#9334](https://github.com/pingcap/tiflash/issues/9334) @[JinheLin](https://github.com/JinheLin)
-    - JOIN演算子のキャンセルメカニズムを改善し、JOIN演算子がキャンセル要求にタイムリーに応答できるようにします[#9430](https://github.com/pingcap/tiflash/issues/9430) @[windtalker](https://github.com/windtalker)
+    - 分散ストレージリクエストとコンピューティングリクエストを処理するときにTiFlash が作成する必要があるスレッドの数を減らし、大量のそのようなリクエストを処理するときにTiFlashコンピューティングノードのクラッシュを回避するのに役立ちます[#9334](https://github.com/pingcap/tiflash/issues/9334) @[JinheLin](https://github.com/JinheLin)
+    - JOIN演算子のキャンセルメカニズムを改善し、JOIN演算子がキャンセルリクエストにタイムリーに応答できるようにします[#9430](https://github.com/pingcap/tiflash/issues/9430) @[windtalker](https://github.com/windtalker)
     - `LENGTH()`と`ASCII()`関数の実行効率を最適化 [#9344](https://github.com/pingcap/tiflash/issues/9344) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - 分散ストレージおよびコンピューティングアーキテクチャ内のTiFlashコンピューティングノードの再試行戦略を最適化して、Amazon S3 からファイルをダウンロードする際の例外を処理します。 [#9695](https://github.com/pingcap/tiflash/issues/9695) @[JinheLin](https://github.com/JinheLin)
 

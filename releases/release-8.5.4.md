@@ -42,7 +42,7 @@ TiDBバージョン：8.5.4
 
 - TiFlashの正常なシャットダウンをサポート [#10266](https://github.com/pingcap/tiflash/issues/10266) @[gengliqi](https://github.com/gengliqi)
 
-    TiFlashサーバーをシャットダウンする際、 TiFlashは現在実行中のMPPタスクを構成可能なタイムアウト時間だけ継続させ、新しいMPPタスク要求を拒否するようになりました。デフォルトのタイムアウト時間は600秒で、 [`flash.graceful_wait_shutdown_timeout`](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854)設定項目を使用して調整できます。
+    TiFlashサーバーをシャットダウンする際、 TiFlashは現在実行中のMPPタスクを構成可能なタイムアウト時間だけ継続させ、新しいMPPタスクリクエストを拒否するようになりました。デフォルトのタイムアウト時間は600秒で、 [`flash.graceful_wait_shutdown_timeout`](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854)設定項目を使用して調整できます。
 
     - 実行中のすべてのMPPタスクがタイムアウト期間内に終了した場合、 TiFlashは直ちにシャットダウンします。
     - タイムアウト期間が経過しても未完了のMPPタスクが残っている場合、 TiFlashは強制的にシャットダウンします。

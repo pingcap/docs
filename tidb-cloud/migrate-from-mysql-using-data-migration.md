@@ -432,7 +432,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
     mysql -h <private‑host> -P 3306 -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
     ```
 
-5. 後ほど、 TiDB Cloud DMをPrivateLink経由で接続するように設定する際には、AWSコンソールに戻り、 TiDB Cloudからこのプライベートエンドポイントへの保留中の接続要求を承認する必要があります。
+5. 後ほど、 TiDB Cloud DMをPrivateLink経由で接続するように設定する際には、AWSコンソールに戻り、 TiDB Cloudからこのプライベートエンドポイントへの保留中の接続リクエストを承認する必要があります。
 
 </details>
 
@@ -458,7 +458,7 @@ Azure Database for MySQL - Flexible Server は、ネイティブのプライベ�
 
 4. [Azureポータル](https://portal.azure.com/)の で、MySQL Flexible Server インスタンスの概要ページ (プライベートエンドポイント オブジェクトではありません) に戻り、 **[Essentials]**セクションで**[JSON ビュー]**をクリックして、後で使用するためにリソース ID をコピーします。リソース ID は`/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>`形式です。このリソース ID (プライベートエンドポイント ID ではありません) を使用して、 TiDB Cloud DM を構成します。
 
-5. 後ほど、 TiDB Cloud DMをPrivateLink経由で接続するように構成する際には、Azureポータルに戻り、 TiDB Cloudからこのプライベートエンドポイントへの保留中の接続要求を承認する必要があります。
+5. 後ほど、 TiDB Cloud DMをPrivateLink経由で接続するように構成する際には、Azureポータルに戻り、 TiDB Cloudからこのプライベートエンドポイントへの保留中の接続リクエストを承認する必要があります。
 
 </details>
 
@@ -517,7 +517,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
     mysql -h <private‑host> -P 3306 -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
     ```
 
-5. 後ほど、 TiDB Cloud DMをPrivateLink経由で接続するように設定する際には、AWSコンソールに戻り、 TiDB Cloudからこのプライベートエンドポイントへの保留中の接続要求を承認する必要があります。
+5. 後ほど、 TiDB Cloud DMをPrivateLink経由で接続するように設定する際には、AWSコンソールに戻り、 TiDB Cloudからこのプライベートエンドポイントへの保留中の接続リクエストを承認する必要があります。
 
 </details>
 
@@ -768,9 +768,9 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
     <CustomContent plan="dedicated">
 
     - 接続方法として**Public IP**または**VPC Peering**を使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
-    - 接続方法として**Private Link**を使用する場合、エンドポイント要求を承認するよう求められます。
+    - 接続方法として**Private Link**を使用する場合、エンドポイントリクエストを承認するよう求められます。
         - AWSの場合： [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)で、エンドポイントサービスを作成したAWSリージョンに切り替え、 **Endpoint services**をクリックし、 TiDB Cloudからのエンドポイントリクエストを承認します。
-        - Azure の場合: [Azureポータル](https://portal.azure.com)に移動し、MySQL Flexible Server を名前で検索し、左側のナビゲーションペインで**Setting** &gt; **Networking**をクリックし、右側の**Private endpoint**セクションを見つけて、 TiDB Cloudからの保留中の接続要求を承認します。
+        - Azure の場合: [Azureポータル](https://portal.azure.com)に移動し、MySQL Flexible Server を名前で検索し、左側のナビゲーションペインで**Setting** &gt; **Networking**をクリックし、右側の**Private endpoint**セクションを見つけて、 TiDB Cloudからの保留中の接続リクエストを承認します。
 
     </CustomContent>
     <CustomContent plan="essential">
@@ -781,7 +781,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
     <CustomContent plan="premium">
 
     - 接続方法として**パブリック**を使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
-    - **Private Link**を使用しており、選択したプライベートエンドポイントがAWSでまだ承認されていない場合は、 [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)でエンドポイントサービスを作成したAWSリージョンに切り替え、 **Endpoint services**を選択し、 TiDB Cloudからのエンドポイント接続要求を承認してください。
+    - **Private Link**を使用しており、選択したプライベートエンドポイントがAWSでまだ承認されていない場合は、 [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)でエンドポイントサービスを作成したAWSリージョンに切り替え、 **Endpoint services**を選択し、 TiDB Cloudからのエンドポイント接続リクエストを承認してください。
 
     </CustomContent>
 

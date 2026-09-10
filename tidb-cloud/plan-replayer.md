@@ -48,7 +48,7 @@ SELECT * FROM orders WHERE customer_id = 1001;
 
 ### 履歴統計情報を使用する {#use-historical-statistics}
 
-履歴統計情報が有効になっており、パフォーマンスの問題が特定の時刻に発生した場合は、`WITH STATS AS OF TIMESTAMP` を使用して、その時点で利用可能だった統計情報を要求します。TiDB は、指定したタイムスタンプより前に利用可能な最新の履歴統計情報を使用します。
+履歴統計情報が有効になっており、パフォーマンスの問題が特定の時刻に発生した場合は、`WITH STATS AS OF TIMESTAMP` を使用して、その時点で利用可能だった統計情報をリクエストします。TiDB は、指定したタイムスタンプより前に利用可能な最新の履歴統計情報を使用します。
 
 ```sql
 PLAN REPLAYER DUMP WITH STATS AS OF TIMESTAMP

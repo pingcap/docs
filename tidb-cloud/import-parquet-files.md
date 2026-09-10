@@ -239,13 +239,13 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
 4. **Next**をクリックしてください。
 
-    接続方法として**Private Link**を選択した場合、 TiDB Cloudはストレージアカウント用のプライベートエンドポイントを作成します。ウィザードを続行するには、Azureポータルでこのエンドポイント要求を承認する必要があります。
+    接続方法として**Private Link**を選択した場合、 TiDB Cloudはストレージアカウント用のプライベートエンドポイントを作成します。ウィザードを続行するには、Azureポータルでこのエンドポイントリクエストを承認する必要があります。
 
     1. [Azureポータル](https://portal.azure.com/)に移動し、ストレージアカウントに移動します。
 
     2. **Networking** &gt; **Private endpoint connections**をクリックします。
 
-    3. TiDB Cloudからの保留中の接続要求を見つけて、 **Approve**をクリックします。
+    3. TiDB Cloudからの保留中の接続リクエストを見つけて、 **Approve**をクリックします。
 
     4. [TiDB Cloudコンソール](https://tidbcloud.com/)に戻ります。エンドポイントが承認されると、インポート ウィザードが自動的に続行されます。
 
