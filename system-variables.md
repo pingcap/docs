@@ -5985,7 +5985,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
     - A value greater than `0` means TiDB writes at most the specified number of slow query log entries per second. Any excess log entries are discarded and not written to the slow query log file.
 - This variable is often used with [`tidb_slow_log_rules`](#tidb_slow_log_rules) to prevent excessive slow query logs from being generated under high-workload conditions.
 
-### tidb_slow_log_rules <span class="version-mark">New in v8.5.6 and CLOUD.202603.1</span> {#tidb_slow_log_rule}
+### tidb_slow_log_rules <span class="version-mark">New in v8.5.6 and CLOUD.202603.1</span> {#tidb_slow_log_rules}
 
 >**Note:**
 >
