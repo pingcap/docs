@@ -61,7 +61,7 @@ v7.0.0以降、 TiUPを使用してGrafanaをデプロイすると、TiCDCサマ
 
 ![TiCDC Summary Dashboard - Sink metrics](/media/ticdc/ticdc-summary-monitor-dataflow-sink.png)
 
-- **Sink flush rows/s**: TiCDCノードにおいて、シンクモジュールが下流へ1秒あたりに出力するデータ変更の数。この指標は、データ変更が下流へ複製される速度を表します。**シンクフラッシュ行数/秒**が**プルラー出力イベント数/秒**よりも低い場合、レプリケーションのレイテンシーが増加する可能性があります。
+- **Sink flush rows/s**: TiCDCノードにおいて、シンクモジュールが下流へ1秒あたりに出力するデータ変更の数。この指標は、データ変更が下流へ複製される速度を表します。**Sink flush rows/s**が**Puller output events/s**よりも低い場合、レプリケーションのレイテンシーが増加する可能性があります。
 
 - **Sink flush rows**: シンク モジュールによって TiCDC ノードの下流に出力されたデータ変更の合計数。
 
