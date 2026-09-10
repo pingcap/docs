@@ -82,7 +82,7 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
     - TiKV は OOM であり、再起動を引き起こします。
     - `THP` (Transparent Hugepage) を動的に調整しているため、TiKV がハングします。
 
-- モニターを確認してください：TiKV RocksDB が書き込みストールに遭遇し、再選出が行われます。モニター**Grafana** -&gt; **TiKV-details** -&gt; **errors**に`server is busy`が表示されているかどうかを確認してください。
+- モニターを確認してください：TiKV RocksDB が書き込みストールに遭遇し、再選出が行われます。モニター**Grafana** -&gt; **TiKV-Details** -&gt; **errors**に`server is busy`が表示されているかどうかを確認してください。
 
 - ネットワーク分離のため再選。
 
@@ -95,7 +95,7 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 TiKV にはボトルネックになる可能性のある単一スレッドがいくつかあります。
 
 - TiKVインスタンス内のリージョンが多すぎると、単一のgRPCスレッドがボトルネックになります（ **Grafana** -&gt; **TiKV-Details**-&gt;**スレッドCPU/gRPC CPU Per Thread**メトリックを確認してください）。v3.x以降のバージョンでは、 `Hibernate Region`を有効にするとこの問題を解決できます。
-- v3.0 より前のバージョンでは、raftstore スレッドまたは apply スレッドがボトルネックになる場合 ( **Grafana** -&gt; **TiKV-details** -&gt; **Thread CPU/raft store CPU**および**Async apply CPU**メトリックが`80%`超える)、TiKV (v2.x) インスタンスをスケールアウトするか、マルチスレッド対応の v3.x にアップグレードできます。
+- v3.0 より前のバージョンでは、raftstore スレッドまたは apply スレッドがボトルネックになる場合 ( **Grafana** -&gt; **TiKV-Details** -&gt; **Thread CPU/raft store CPU**および**Async apply CPU**メトリックが`80%`超える)、TiKV (v2.x) インスタンスをスケールアウトするか、マルチスレッド対応の v3.x にアップグレードできます。
 
 ### CPU負荷が増加する {#cpu-load-increases}
 

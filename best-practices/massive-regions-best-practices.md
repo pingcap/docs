@@ -37,7 +37,7 @@ Raftstore のワークフロー図から、各リージョンのメッセージ�
 
 Grafana の**TiKV Dashboard**では、次の監視メトリックを確認できます。
 
-- **Thread-CPU**パネルの`Raft store CPU`
+- **Thread CPU**パネルの`Raft store CPU`
 
     基準値： `raftstore.store-pool-size * 85%`未満。
 

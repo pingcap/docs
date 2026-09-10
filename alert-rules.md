@@ -537,7 +537,7 @@ summary: TiDB クラスターのアラートルールについて学習します
 
 - 解決：
 
-    1. [**TiKV-Details**&gt; **Raft propose**ダッシュボード](/grafana-tikv-dashboard.md#raft-propose)を監視し、アラート対象の TiKV ノードの**サーバーあたりの 99% Propose 待機期間**メトリックが他の TiKV ノードと比べて大幅に高いかどうかを確認します。高い場合、この TiKV ノードにホットスポットが存在することを示し、ホットスポットのスケジューリングが適切に機能しているかどうかを確認する必要があります。
+    1. [**TiKV-Details**&gt; **Raft Propose**ダッシュボード](/grafana-tikv-dashboard.md#raft-propose)を監視し、アラート対象の TiKV ノードの**サーバーあたりの 99% Propose 待機期間**メトリックが他の TiKV ノードと比べて大幅に高いかどうかを確認します。高い場合、この TiKV ノードにホットスポットが存在することを示し、ホットスポットのスケジューリングが適切に機能しているかどうかを確認する必要があります。
     2. [**TiKV-Details**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)を監視し、レイテンシーが増加していないか確認してください。レイテンシーが高い場合は、ディスクにボトルネックが発生している可能性があります。
     3. アラート対象の TiKV ノードのパフォーマンスの問題とチューニング方法の詳細な分析については、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration)を参照してください。
 
