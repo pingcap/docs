@@ -274,7 +274,7 @@ TiDB バージョン: 7.2.0
 
     - TiCDC
 
-        - 解決済みTSが一部のケースで正しく進まない問題を修正 [#8963](https://github.com/pingcap/tiflow/issues/8963) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Resolved TSが一部のケースで正しく進まない問題を修正 [#8963](https://github.com/pingcap/tiflow/issues/8963) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Avro または CSV プロトコルが使用されている場合、 `UPDATE`オペレーションが古い値を出力できない問題を修正 [#9086](https://github.com/pingcap/tiflow/issues/9086) @[3AceShowHand](https://github.com/3AceShowHand)
         - Kafkaへのデータ複製時にダウンストリームメタデータを頻繁に読み取ることで発生する、ダウンストリームへの過剰な負荷の問題を修正します [#8959](https://github.com/pingcap/tiflow/issues/8959) @[Rustin170506](https://github.com/Rustin170506)
         - TiDBまたはMySQLへのデータ複製時に、下流の双方向レプリケーション関連変数を頻繁に設定することで発生する、下流ログが多すぎる問題を修正しました [#9180](https://github.com/pingcap/tiflow/issues/9180) @[asddongmen](https://github.com/asddongmen)

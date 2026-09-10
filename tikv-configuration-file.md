@@ -963,7 +963,7 @@ Raftstoreに関連するコンフィグレーション項目。
 >
 > この設定項目は、 [`report-min-resolved-ts-interval`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file/#report-min-resolved-ts-interval-new-in-v600)から名前が変更されました。v7.6.0 以降、 `report-min-resolved-ts-interval`は無効になりました。
 
-- TiKVが解決済みTSをPDリーダーに報告する最小間隔を指定します。これを`0`に設定すると、報告が無効になります。
+- TiKVがResolved TSをPDリーダーに報告する最小間隔を指定します。これを`0`に設定すると、報告が無効になります。
 - デフォルト値: `"1s"`は、最小の正の値です。v6.3.0 より前のバージョンでは、デフォルト値は`"0s"`でした。
 - 最小値: `0`
 - 単位：秒
@@ -2517,7 +2517,7 @@ TiCDCに関連するコンフィグレーション項目。
 
 ### `min-ts-interval` {#min-ts-interval}
 
-- 解決済みTSが計算され、転送される間隔。
+- Resolved TSが計算され、転送される間隔。
 - デフォルト値: `"1s"` 。
 
 > **Note:**
@@ -2558,16 +2558,16 @@ TiCDCに関連するコンフィグレーション項目。
 
 ## resolved-ts {#resolved-ts}
 
-ステイル読み取りリクエストを処理するために、解決済みのTSを維持することに関連するコンフィグレーション項目。
+ステイル読み取りリクエストを処理するために、Resolved TSを維持することに関連するコンフィグレーション項目。
 
 ### `enable` {#enable}
 
-- すべてのリージョンに対して解決済みTSを維持するかどうかを決定します。
+- すべてのリージョンに対してResolved TSを維持するかどうかを決定します。
 - デフォルト値: `true`
 
 ### `advance-ts-interval` {#advance-ts-interval}
 
-- 解決済みTSが計算され、転送される間隔。
+- Resolved TSが計算され、転送される間隔。
 - デフォルト値: `"20s"`
 
 ### `scan-lock-pool-size` {#scan-lock-pool-size}

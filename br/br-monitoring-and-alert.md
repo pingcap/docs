@@ -9,7 +9,7 @@ summary: このドキュメントでは、ログバックアップの監視、�
 
 ## スナップショットのバックアップと復元の監視 {#snapshot-backup-and-restore-monitoring}
 
-スナップショットのバックアップと復元のメトリックを表示するには、Grafana の[**TiKV詳細**&gt;**バックアップとインポート**ダッシュボード](/grafana-tikv-dashboard.md#backup--import)に移動します。
+スナップショットのバックアップと復元のメトリックを表示するには、Grafana の[**TiKV-Details**&gt;**バックアップとインポート**ダッシュボード](/grafana-tikv-dashboard.md#backup--import)に移動します。
 
 ## ログバックアップ監視 {#log-backup-monitoring}
 
@@ -40,8 +40,8 @@ summary: このドキュメントでは、ログバックアップの監視、�
 | **tikv_log_backup_fatal_errors**                       | カウンタ   | ログバックアップ中に再試行または無視できないエラー。このタイプのエラーが発生すると、ログバックアップは一時停止されます。<br/> `type :: ErrorType`                                                      |
 | **tikv_log_backup_heap_memory**                        | ゲージ    | ログバックアップ中の初期スキャンで検出された、消費されていないイベントによって占有されているメモリ。                                                                                        |
 | **tikv_log_backup_on_event_duration_seconds**          | ヒストグラム | KV イベントを一時ファイルに保存する期間。<br/> `stage :: {"write_to_tempfile", "syscall_write"}`                                                              |
-| **tikv_log_backup_store_checkpoint_ts**                | ゲージ    | ストアレベルのチェックポイントTSは非推奨です。現在のストアによって登録されたGCセーフポイントに近いです。<br/> `task :: string`                                                               |
-| **tidb_log_backup_last_checkpoint**                    | ゲージ    | グローバルチェックポイントTS。ログデータがバックアップされている時点です。<br/> `task :: string`                                                                               |
+| **tikv_log_backup_store_checkpoint_ts**                | ゲージ    | ストアレベルのcheckpoint TSは非推奨です。現在のストアによって登録されたGCセーフポイントに近いです。<br/> `task :: string`                                                               |
+| **tidb_log_backup_last_checkpoint**                    | ゲージ    | グローバルcheckpoint TS。ログデータがバックアップされている時点です。<br/> `task :: string`                                                                               |
 | **tikv_log_backup_flush_duration_sec**                 | ヒストグラム | ローカルの一時ファイルを外部ストレージに移動する時間。<br/> `stage :: {"generate_metadata", "save_files", "clear_temp_files"}`                                      |
 | **tikv_log_backup_flush_file_size**                    | ヒストグラム | バックアップ中に生成されたファイルのサイズの統計。                                                                                                                  |
 | **tikv_log_backup_initial_scan_duration_sec**          | ヒストグラム | 初期スキャンの全体的な所要時間の統計。                                                                                                                        |

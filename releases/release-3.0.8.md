@@ -109,4 +109,4 @@ TiDB Ansible バージョン: 3.0.8
 - ローリングアップデートを実行する際にTiDBのバージョンをチェックするロジックを最適化します[#1056](https://github.com/pingcap/tidb-ansible/pull/1056)
 - TiSparkをv2.1.8にアップグレード[#1061](https://github.com/pingcap/tidb-ansible/pull/1061)
 - Grafana で PD ロール監視項目が誤って表示される問題を修正 [#1065](https://github.com/pingcap/tidb-ansible/pull/1065)
-- Grafana のTiKV詳細ページで監視項目`Thread Voluntary Context Switches`と`Thread Nonvoluntary Context Switches`最適化 [#1071](https://github.com/pingcap/tidb-ansible/pull/1071)
+- Grafana のTiKV-Detailsページで監視項目`Thread Voluntary Context Switches`と`Thread Nonvoluntary Context Switches`最適化 [#1071](https://github.com/pingcap/tidb-ansible/pull/1071)

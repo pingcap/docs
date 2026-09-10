@@ -46,7 +46,7 @@ TiDBの以前のリリースでは、ガベージコレクションは`mysql.tid
 
 ## TiDB 6.1.0 の変更点 {#changes-in-tidb-6-1-0}
 
-TiDB v6.1.0より前のバージョンでは、TiDBのトランザクションはGCセーフポイントに影響を与えませんでした。v6.1.0以降では、GCセーフポイントを計算する際にトランザクションの開始TSを考慮するようになりました。これにより、アクセス対象のデータがクリアされてしまうという問題が解決されます。トランザクションが長すぎると、セーフポイントが長時間ブロックされ、アプリケーションのパフォーマンスに影響を及ぼします。
+TiDB v6.1.0より前のバージョンでは、TiDBのトランザクションはGCセーフポイントに影響を与えませんでした。v6.1.0以降では、GCセーフポイントを計算する際にトランザクションのstartTSを考慮するようになりました。これにより、アクセス対象のデータがクリアされてしまうという問題が解決されます。トランザクションが長すぎると、セーフポイントが長時間ブロックされ、アプリケーションのパフォーマンスに影響を及ぼします。
 
 TiDB v6.1.0では、アクティブなトランザクションがGCセーフポイントをブロックする最大時間を制御するためのシステム変数[`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)が導入されました。この値を超えると、GCセーフポイントは強制的に転送されます。
 
@@ -104,7 +104,7 @@ show config where type = 'tikv' and name like '%enable-compaction-filter%';
 
 > **Note:**
 >
-> 圧縮フィルター機構を使用すると、GCの進行が遅れる可能性があり、TiKVスキャンのパフォーマンスに影響する可能性があります。ワークロードに多数のコプロセッサリクエストが含まれており、パネル[**TiKV詳細 &gt;コプロセッサー詳細**](/grafana-tikv-dashboard.md#coprocessor-detail)で**Total Ops Details**の呼び出し回数が`next()`または`prev()`で、呼び出し回数が`processed_keys`回の3倍を大幅に超えている場合は、以下の対策を講じることができます。
+> 圧縮フィルター機構を使用すると、GCの進行が遅れる可能性があり、TiKVスキャンのパフォーマンスに影響する可能性があります。ワークロードに多数のコプロセッサリクエストが含まれており、パネル[**TiKV-Details &gt;コプロセッサー詳細**](/grafana-tikv-dashboard.md#coprocessor-detail)で**Total Ops Details**の呼び出し回数が`next()`または`prev()`で、呼び出し回数が`processed_keys`回の3倍を大幅に超えている場合は、以下の対策を講じることができます。
 >
 > - v7.1.3 より前の TiDB バージョンでは、GC を高速化するために Compaction Filter を無効にすることをお勧めします。
 > - TiDBバージョンv7.1.3からv7.5.6およびv7.6.0からv8.5.3では、TiDBは各リージョン[`region-compact-min-redundant-rows`](/tikv-configuration-file.md#region-compact-min-redundant-rows-new-in-v710)の冗長バージョンの数と冗長バージョン[`region-compact-redundant-rows-percent`](/tikv-configuration-file.md#region-compact-redundant-rows-percent-new-in-v710)の割合に基づいて自動的にコンパクションをトリガーし、コンパクションフィルタGCのパフォーマンスを向上させます。この場合、コンパクションフィルタを無効にするのではなく、これらの設定項目を調整してください。

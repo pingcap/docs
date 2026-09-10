@@ -30,7 +30,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 
     - TiCDC
 
-        - 解決されたTSをバッチで処理することにより、リージョンワーカーのパフォーマンスを向上させます。 [#7078](https://github.com/pingcap/tiflow/issues/7078) @[sdojjy](https://github.com/sdojjy)
+        - resolved TSをバッチで処理することにより、リージョンワーカーのパフォーマンスを向上させます。 [#7078](https://github.com/pingcap/tiflow/issues/7078) @[sdojjy](https://github.com/sdojjy)
 
 ## バグ修正 {#bug-fixes}
 

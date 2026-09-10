@@ -124,7 +124,7 @@ TiDB バージョン: 6.5.1
 
 - TiKV
 
-    - 解決されたTSによりネットワークトラフィックが増加する問題を修正[#14092](https://github.com/tikv/tikv/issues/14092) @[overvenus](https://github.com/overvenus)
+    - Resolved TSによりネットワークトラフィックが増加する問題を修正[#14092](https://github.com/tikv/tikv/issues/14092) @[overvenus](https://github.com/overvenus)
     - 悲観的DML 失敗後のDML実行中にTiDBとTiKV間のネットワーク障害によって発生するデータの不整合の問題を修正しました。 [#14038](https://github.com/tikv/tikv/issues/14038) @[MyonKeminta](https://github.com/MyonKeminta)
     - `const Enum`型を他の型にキャストするときに発生するエラーを修正しました [#14156](https://github.com/tikv/tikv/issues/14156) @[wshwsh12](https://github.com/wshwsh12)
     - Cop タスクのページングが不正確になる問題を修正[#14254](https://github.com/tikv/tikv/issues/14254) @[you06](https://github.com/you06)

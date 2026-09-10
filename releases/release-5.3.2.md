@@ -137,7 +137,7 @@ TiDB バージョン: 5.3.2
 
         - 所有者の変更によって生じた誤ったメトリクスを修正[#4774](https://github.com/pingcap/tiflow/issues/4774)
         - ログを書き込む前にREDOログマネージャがログをフラッシュするバグを修正[#5486](https://github.com/pingcap/tiflow/issues/5486)
-        - 一部のテーブルがREDOライターによってメンテナンスされていない場合に、解決されたTSが速すぎる動きをするバグを修正しました[#5486](https://github.com/pingcap/tiflow/issues/5486)
+        - 一部のテーブルがREDOライターによってメンテナンスされていない場合に、resolved tsが速すぎる動きをするバグを修正しました[#5486](https://github.com/pingcap/tiflow/issues/5486)
         - ファイル名の競合によりデータ損失が発生する可能性がある問題を修正するために、REDOログファイル名にUUIDサフィックスを追加します[#5486](https://github.com/pingcap/tiflow/issues/5486)
         - MySQL Sink が間違ったチェックポイントを保存する可能性があるバグを修正しました[#5107](https://github.com/pingcap/tiflow/issues/5107)
         - アップグレード後に TiCDC クラスターがpanicになる可能性がある問題を修正[#5266](https://github.com/pingcap/tiflow/issues/5266)

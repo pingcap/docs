@@ -55,7 +55,7 @@ TiDB Cloud ClinicはGrafanaを使用して、TiDBクラスターの包括的な�
 - TiDB
 - TiDB リソース制御
 - TiFlash-概要
-- TiKV詳細
+- TiKV-Details
 - TiProxy-概要
 - ユーザーノード情報
 

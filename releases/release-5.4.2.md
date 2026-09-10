@@ -94,7 +94,7 @@ TiDB バージョン: 5.4.2
 
         - 特別な増分スキャンシナリオで発生するデータ損失を修正[#5468](https://github.com/pingcap/tiflow/issues/5468)
         - ログを書き込む前にREDOログマネージャがログをフラッシュするバグを修正[#5486](https://github.com/pingcap/tiflow/issues/5486)
-        - 一部のテーブルがREDOライターによってメンテナンスされていない場合に、解決されたTSが速すぎる動きをするバグを修正しました[#5486](https://github.com/pingcap/tiflow/issues/5486)
+        - 一部のテーブルがREDOライターによってメンテナンスされていない場合に、resolved tsが速すぎる動きをするバグを修正しました[#5486](https://github.com/pingcap/tiflow/issues/5486)
         - ファイル名の競合によりデータ損失が発生する可能性がある問題を修正[#5486](https://github.com/pingcap/tiflow/issues/5486)
         - リージョンリーダーが見つからず、再試行が制限を超えた場合に発生するレプリケーション中断を修正[#5230](https://github.com/pingcap/tiflow/issues/5230)
         - MySQL Sink が間違ったチェックポイントを保存する可能性があるバグを修正しました[#5107](https://github.com/pingcap/tiflow/issues/5107)

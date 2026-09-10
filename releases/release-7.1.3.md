@@ -92,7 +92,7 @@ TiDB バージョン: 7.1.3
 - TiKV
 
     - TiKV の実行速度が非常に遅い場合、リージョンのマージ後にpanicする可能性がある問題を修正しました。 [#16111](https://github.com/tikv/tikv/issues/16111) @[overvenus](https://github.com/overvenus)
-    - 解決済みのTSが2時間ブロックされる可能性がある問題を修正[#15520](https://github.com/tikv/tikv/issues/15520) [#39130](https://github.com/pingcap/tidb/issues/39130) @[overvenus](https://github.com/overvenus)
+    - Resolved TSが2時間ブロックされる可能性がある問題を修正[#15520](https://github.com/tikv/tikv/issues/15520) [#39130](https://github.com/pingcap/tidb/issues/39130) @[overvenus](https://github.com/overvenus)
     - TiKVがraft log を追加できないため`ServerIsBusy`エラーを報告する問題を修正しました。 [#15800](https://github.com/tikv/tikv/issues/15800) @[tonyxuqqi](https://github.com/tonyxuqqi)
     - BRがクラッシュしたときにスナップショットの復元が停止する可能性がある問題を修正しました [#15684](https://github.com/tikv/tikv/issues/15684) @[YuJuncen](https://github.com/YuJuncen)
     - 大規模なトランザクションを追跡するときに、古い読み取りの解決済み TS が TiKV OOM 問題を引き起こす可能性がある問題を修正しました [#14864](https://github.com/tikv/tikv/issues/14864) @[overvenus](https://github.com/overvenus)
