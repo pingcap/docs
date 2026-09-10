@@ -131,7 +131,7 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
 
 ### Connection Idle Duration {#connection-idle-duration}
 
-接続アイドル期間は、接続がアイドル状態にある期間を示します。
+Connection Idle Duration は、接続がアイドル状態にある期間を示します。
 
 - `avg-in-txn` : 接続がトランザクション内にあるときの平均接続アイドル期間
 - `avg-not-in-txn` : 接続がトランザクション内にない場合の平均接続アイドル期間
