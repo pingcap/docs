@@ -23,25 +23,25 @@ TiDBクラスターをTiUPを使用してデプロイした場合、Grafanaで�
 
 - **Overview**：データベース時間とSQL実行時間の概要。概要で異なる色を確認することで、データベースのワークロードプロファイルとパフォーマンスのボトルネックを素早く特定できます。
 
-- **負荷プロファイル**: データベース QPS、接続情報、アプリケーションが TiDB と対話する MySQL コマンド タイプ、データベース内部 TSO および KV 要求 OPS、TiKV および TiDB のリソース使用量など、主要なメトリックとリソース使用量。
+- **負荷プロファイル**: データベース QPS、接続情報、アプリケーションが TiDB と対話する MySQL コマンド タイプ、データベース内部 TSO および KV リクエスト OPS、TiKV および TiDB のリソース使用量など、主要なメトリックとリソース使用量。
 
-- **トップダウンのレイテンシーの内訳**: クエリレイテンシーと接続アイドル時間の比率、クエリレイテンシーの内訳、実行中の TSO/KV 要求レイテンシー、TiKV 内の書き込みレイテンシーの内訳。
+- **トップダウンのレイテンシーの内訳**: クエリレイテンシーと接続アイドル時間の比率、クエリレイテンシーの内訳、実行中の TSO/KV リクエストレイテンシー、TiKV 内の書き込みレイテンシーの内訳。
 
 次のセクションでは、パフォーマンス概要ダッシュボードのメトリックについて説明します。
 
-### SQLタイプ別のデータベース時間 {#database-time-by-sql-type}
+### Database Time by SQL Type {#database-time-by-sql-type}
 
 - `database time` : 1秒あたりの合計データベース時間
 - `sql_type` : 各タイプのSQL文が1秒あたりに消費するデータベース時間
 
-### SQLフェーズ別のデータベース時間 {#database-time-by-sql-phase}
+### Database Time by SQL Phase {#database-time-by-sql-phase}
 
 - `database time` : 1秒あたりの合計データベース時間
 - `get token/parse/compile/execute` : 4つのSQL処理フェーズで消費されたデータベース時間
 
 SQL実行フェーズは緑色で、その他のフェーズは全体的に赤色で表示されます。緑色以外の領域が大きい場合は、実行フェーズ以外のフェーズでデータベース時間が大量に消費されていることを意味し、さらなる原因分析が必要です。
 
-### SQL実行時間の概要 {#sql-execute-time-overview}
+### SQL Execute Time Overview {#sql-execute-time-overview}
 
 - `execute time` : SQL実行中に1秒あたりに消費されたデータベース時間
 - `tso_wait` : SQL実行中の1秒あたりの同時TSO待機時間
@@ -56,32 +56,32 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
 
 ### QPS {#qps}
 
-すべて`UPDATE` TiDB インスタンスで 1秒あたりに実行された SQL 文の数 (タイプ別: `SELECT`など`INSERT`
+すべての TiDB インスタンスで 1秒あたりに実行された SQL 文の数（タイプ別に収集: `SELECT`、`INSERT`、`UPDATE`など）
 
-### CPSタイプ別 {#cps-by-type}
+### CPS By Type {#cps-by-type}
 
 タイプに基づいて、すべての TiDB インスタンスによって 1秒あたりに処理されるコマンドの数
 
-### プランキャッシュOPSを使用したクエリ {#queries-using-plan-cache-ops}
+### Queries Using Plan Cache OPS {#queries-using-plan-cache-ops}
 
 すべての TiDB インスタンスにおける 1秒あたりのプランキャッシュを使用するクエリの数
 
-### KV/TSO リクエスト OPS {#kv-tso-request-ops}
+### KV/TSO Request OPS {#kv-tso-request-ops}
 
-- kvリクエスト合計: すべてのTiDBインスタンスにおける1秒あたりのKVリクエストの合計数
-- タイプ別の KV リクエスト数: `Get`など`Commit`タイプに基づいて`Prewrite`すべての TiDB インスタンスでの 1秒あたりの KV リクエスト数
+- kv request total: すべてのTiDBインスタンスにおける1秒あたりのKVリクエストの合計数
+- kv request by type: `Get`、`Prewrite`、`Commit`などのタイプに基づいて、すべての TiDB インスタンスでの 1秒あたりの KV リクエスト数
 - tso - cmd: TiDB がすべての TiDB インスタンスの PD に送信する 1秒あたりの gRPC リクエストの数。各 gRPC リクエストには、TSO リクエストのバッチが含まれます。
-- tso - リクエスト: すべての TiDB インスタンスにおける 1秒あたりの TSO リクエスト数
+- tso - request: すべての TiDB インスタンスにおける 1秒あたりの TSO リクエスト数
 
-通常、 `tso - request` `tso - cmd`で割った値が、1秒あたりの TSO 要求バッチの平均サイズになります。
+通常、 `tso - request`を`tso - cmd`で割った値が、1秒あたりの TSO リクエストバッチの平均サイズになります。
 
-### 接続数 {#connection-count}
+### Connection Count {#connection-count}
 
 - `total` : すべてのTiDBインスタンスへの接続数
 - `active connections` : すべてのTiDBインスタンスへのアクティブな接続の数
 - 各TiDBインスタンスへの接続数
 
-### TiDB CPU/メモリ {#tidb-cpu-memory}
+### TiDB CPU/Memory {#tidb-cpu-memory}
 
 - `CPU-Avg` : すべての TiDB インスタンスの平均 CPU 使用率
 - `CPU-Delta` : すべての TiDB インスタンスの最大 CPU 使用率からすべての TiDB インスタンスの最小 CPU 使用率を引いた値
@@ -89,7 +89,7 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
 - `CPU-Quota` : TiDBが使用できるCPUコアの数
 - `Mem-Max` : すべての TiDB インスタンスの最大メモリ使用率
 
-### TiKV CPU/メモリ {#tikv-cpu-memory}
+### TiKV CPU/Memory {#tikv-cpu-memory}
 
 - `CPU-Avg` : すべての TiKV インスタンスの平均 CPU 使用率
 - `CPU-Delta` : すべての TiKV インスタンスの最大 CPU 使用率からすべての TiKV インスタンスの最小 CPU 使用率を引いた値
@@ -97,18 +97,18 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
 - `CPU-Quota` : TiKVが使用できるCPUコアの数
 - `Mem-Max` : すべての TiKV インスタンスの最大メモリ使用率
 
-### PD CPU/メモリ {#pd-cpu-memory}
+### PD CPU/Memory {#pd-cpu-memory}
 
 - `CPU-Max` : すべてのPDインスタンスの最大CPU使用率
 - `CPU-Quota` : PDが使用できるCPUコアの数
 - `Mem-Max` : すべてのPDインスタンスの最大メモリ使用率
 
-### トラフィックを読む {#read-traffic}
+### Read Traffic {#read-traffic}
 
 - `TiDB -> Client` : TiDBからクライアントへの送信トラフィック統計
 - `Rocksdb -> TiKV` :ストレージレイヤー内での読み取り操作中に TiKV が RocksDB から取得するデータフロー
 
-### 書き込みトラフィック {#write-traffic}
+### Write Traffic {#write-traffic}
 
 - `Client -> TiDB` : クライアントから TiDB への受信トラフィック統計
 - `TiDB -> TiKV: general` : フォアグラウンドトランザクションが TiDB から TiKV に書き込まれる速度
@@ -116,7 +116,7 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
 - `TiKV -> Rocksdb` : TiKVからRocksDBへの書き込み操作の流れ
 - `RocksDB Compaction` : RocksDBの圧縮操作によって生成された合計読み取りおよび書き込みI/Oフロー
 
-### 間隔 {#duration}
+### Duration {#duration}
 
 - `Duration` : 実行時間
 
@@ -127,9 +127,9 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
 
 - `99` : すべてのリクエストを実行するためのP99期間
 
-- `avg by type` : すべての TiDB インスタンス内のすべてのリクエストを実行するのにかかった平均時間 (タイプ別`UPDATE`収集`INSERT` : `SELECT`
+- `avg by type` : すべての TiDB インスタンス内のすべてのリクエストを実行するのにかかった平均時間（タイプ別に収集: `SELECT`、`INSERT`、`UPDATE`）
 
-### 接続アイドル時間 {#connection-idle-duration}
+### Connection Idle Duration {#connection-idle-duration}
 
 接続アイドル期間は、接続がアイドル状態にある期間を示します。
 
@@ -138,7 +138,7 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
 - `99-in-txn` : 接続がトランザクション内にある場合の P99 接続アイドル期間
 - `99-not-in-txn` : 接続がトランザクション内にない場合の P99 接続アイドル期間
 
-### 解析期間、コンパイル期間、実行期間 {#parse-duration-compile-duration-and-execute-duration}
+### Parse Duration, Compile Duration, and Execute Duration {#parse-duration-compile-duration-and-execute-duration}
 
 - `Parse Duration` : SQL文の解析に要した時間
 - `Compile Duration` : 解析されたSQL ASTを実行計画にコンパイルするのにかかる時間
@@ -146,22 +146,22 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
 
 これら3つのメトリックにはすべて、すべての TiDB インスタンスの平均期間と 99 パーセンタイル期間が含まれます。
 
-### 平均 TiDB KV リクエスト期間 {#avg-tidb-kv-request-duration}
+### Avg TiDB KV Request Duration {#avg-tidb-kv-request-duration}
 
-`Get` 、 `Prewrite` 、 `Commit`を含むタイプに基づいて、すべての TiDB インスタンスでの KV 要求の実行に費やされた平均時間。
+`Get` 、 `Prewrite` 、 `Commit`を含むタイプに基づいて、すべての TiDB インスタンスでの KV リクエストの実行に費やされた平均時間。
 
-### 平均 TiKV GRPC 期間 {#avg-tikv-grpc-duration}
+### Avg TiKV GRPC Duration {#avg-tikv-grpc-duration}
 
 `kv_get` 、 `kv_prewrite` 、 `kv_commit`を含むタイプに基づいて、すべての TiKV インスタンスでの gRPC リクエストの実行に費やされた平均時間。
 
-### PD TSO 待機/RPC 期間 {#pd-tso-wait-rpc-duration}
+### PD TSO Wait/RPC Duration {#pd-tso-wait-rpc-duration}
 
 - `wait - avg` : すべての TiDB インスタンスで PD が TSO を返すのを待つ平均時間
 - `rpc - avg` : PDにTSOリクエストを送信してからすべてのTiDBインスタンスでTSOを受信するまでの平均時間
 - `wait - 99` : すべての TiDB インスタンスで PD が TSO を返すのを待つ P99時間
 - `rpc - 99` : PDにTSOリクエストを送信してからすべてのTiDBインスタンスでTSOを受信するまでのP99時間
 
-### ストレージ非同期書き込み期間、保存期間、適用期間 {#storage-async-write-duration-store-duration-and-apply-duration}
+### Storage Async Write Duration, Store Duration, and Apply Duration {#storage-async-write-duration-store-duration-and-apply-duration}
 
 - `Storage Async Write Duration` : 非同期書き込みにかかった時間
 - `Store Duration` : 非同期書き込み中のストアループで消費された時間
@@ -171,7 +171,7 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
 
 平均ストレージ非同期書き込み時間 = 平均保存時間 + 平均適用時間
 
-### 追加ログ期間、コミットログ期間、適用ログ期間 {#append-log-duration-commit-log-duration-and-apply-log-duration}
+### Append Log Duration, Commit Log Duration, and Apply Log Duration {#append-log-duration-commit-log-duration-and-apply-log-duration}
 
 - `Append Log Duration` : Raftがログを追加するのにかかった時間
 - `Commit Log Duration` : Raftがログをコミットするのにかかる時間

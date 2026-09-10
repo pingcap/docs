@@ -140,7 +140,7 @@ show warnings;
 | `raftstore.raft-store-max-leader-lease`                   | Raftリーダーの最も長い信頼期間                                                                                                                          |
 | `raftstore.merge-check-tick-interval`                     | マージチェックの時間間隔                                                                                                                               |
 | `raftstore.cleanup-import-sst-interval`                   | 期限切れのSSTファイルをチェックする時間間隔                                                                                                                    |
-| `raftstore.local-read-batch-size`                         | 1バッチで処理される読み取り要求の最大数                                                                                                                       |
+| `raftstore.local-read-batch-size`                         | 1バッチで処理される読み取りリクエストの最大数                                                                                                                       |
 | `raftstore.apply-yield-write-size`                        | 適用スレッドが各ラウンドで1つのFSM（有限状態機械）に書き込むことができる最大バイト数                                                                                               |
 | `raftstore.hibernate-timeout`                             | 起動時に休止状態に入るまでの最短待機時間。この時間内は、TiKV は休止状態になりません（解放されません）。                                                                                     |
 | `raftstore.apply-pool-size`                               | ディスクにデータをフラッシュするプール内のスレッドの数。これは適用スレッドプールのサイズです。                                                                                           |
@@ -149,7 +149,7 @@ show warnings;
 | `raftstore.store-max-batch-size`                          | Raftステートマシンは、BatchSystemによってログをディスクにフラッシュするリクエストをバッチ処理します。この設定項目は、1回のバッチでリクエストを処理できるRaftステートマシンの最大数を指定します。                                 |
 | `raftstore.store-io-pool-size`                            | Raft I/Oタスクを処理するスレッドの数。これは StoreWriter スレッドプールのサイズでもあります (この値を 0 以外の値から 0 に、または 0 から 0 以外の値に変更**しないでください**)                               |
 | `raftstore.periodic-full-compact-start-max-cpu`           | 完全圧縮が有効な場合に TiKV が定期的に完全圧縮を実行する CPU 使用率のしきい値                                                                                               |
-| `readpool.unified.max-thread-count`                       | 読み取り要求を均一に処理するスレッドプール内のスレッドの最大数。これは UnifyReadPool スレッドプールのサイズです。                                                                         |
+| `readpool.unified.max-thread-count`                       | 読み取りリクエストを均一に処理するスレッドプール内のスレッドの最大数。これは UnifyReadPool スレッドプールのサイズです。                                                                         |
 | `readpool.unified.max-tasks-per-worker`                   | 統合読み取りプール内の 1つのスレッドに許可されるタスクの最大数。値を超えると`Server Is Busy`エラーが返されます。                                                                         |
 | `readpool.unified.auto-adjust-pool-size`                  | UnifyReadPool スレッドプールのサイズを自動的に調整するかどうかを決定します                                                                                              |
 | `resource-control.priority-ctl-strategy`                  | 低優先度タスクのフロー制御戦略を構成します。                                                                                                                     |
@@ -165,14 +165,14 @@ show warnings;
 | `pessimistic-txn.in-memory`                               | メモリ内の悲観的ロックを有効にするかどうかを決定します                                                                                                                |
 | `pessimistic-txn.in-memory-peer-size-limit`               | リージョン内のメモリ内悲観的ロックのメモリ使用量制限を制御します                                                                                                           |
 | `pessimistic-txn.in-memory-instance-size-limit`           | TiKVインスタンス内のメモリ内悲観的ロックのメモリ使用量制限を制御します                                                                                                      |
-| `quota.foreground-cpu-time`                               | TiKVフォアグラウンドが読み取りおよび書き込み要求を処理するために使用するCPUリソースのソフト制限                                                                                        |
+| `quota.foreground-cpu-time`                               | TiKVフォアグラウンドが読み取りおよび書き込みリクエストを処理するために使用するCPUリソースのソフト制限                                                                                        |
 | `quota.foreground-write-bandwidth`                        | フォアグラウンドトランザクションがデータを書き込む帯域幅のソフト制限                                                                                                         |
 | `quota.foreground-read-bandwidth`                         | フォアグラウンドトランザクションとコプロセッサーがデータを読み取る帯域幅のソフト制限                                                                                                 |
-| `quota.background-cpu-time`                               | TiKV バックグラウンドで読み取りおよび書き込み要求を処理するために使用する CPU リソースのソフト制限                                                                                     |
+| `quota.background-cpu-time`                               | TiKV バックグラウンドで読み取りおよび書き込みリクエストを処理するために使用する CPU リソースのソフト制限                                                                                     |
 | `quota.background-write-bandwidth`                        | バックグラウンドトランザクションがデータを書き込む帯域幅のソフト制限                                                                                                         |
 | `quota.background-read-bandwidth`                         | バックグラウンドトランザクションとコプロセッサーがデータを読み取る帯域幅のソフト制限                                                                                                 |
 | `quota.enable-auto-tune`                                  | クォータの自動調整を有効にするかどうか。この設定項目を有効にすると、TiKV インスタンスの負荷に基づいて、バックグラウンドリクエストのクォータが動的に調整されます。                                                        |
-| `quota.max-delay-duration`                                | 単一の読み取りまたは書き込み要求がフォアグラウンドで処理されるまでに強制的に待機される最大時間                                                                                            |
+| `quota.max-delay-duration`                                | 単一の読み取りまたは書き込みリクエストがフォアグラウンドで処理されるまでに強制的に待機される最大時間                                                                                            |
 | `gc.ratio-threshold`                                      | リージョンGCをスキップするしきい値（GCのバージョン数/キーの数）                                                                                                   |
 | `gc.batch-keys`                                           | 1バッチで処理されるキーの数                                                                                                                             |
 | `gc.max-write-bytes-per-sec`                              | RocksDBに1秒あたり書き込める最大バイト数                                                                                                                   |
@@ -220,10 +220,10 @@ show warnings;
 | storage.flow-control.enable                                          | フロー制御メカニズムを有効にするかどうかを決定します                                                                                                                 |
 | storage.flow-control.memtables-threshold                         | フロー制御をトリガーするkvDB memtablesの最大数                                                                                                             |
 | storage.flow-control.l0-files-threshold                   | フロー制御をトリガーするkvDB L0ファイルの最大数                                                                                                                |
-| storage.flow-control.soft-pending-compaction-bytes-limit  | フロー制御メカニズムが一部の書き込み要求を拒否するトリガーとなる、kvDB保留圧縮バイトのしきい値                                                                                          |
-| storage.flow-control.hard-pending-compaction-bytes-limit                                | フロー制御メカニズムがすべての書き込み要求を拒否するトリガーとなる、kvDB保留圧縮バイトのしきい値                                                                                         |
+| storage.flow-control.soft-pending-compaction-bytes-limit  | フロー制御メカニズムが一部の書き込みリクエストを拒否するトリガーとなる、kvDB保留圧縮バイトのしきい値                                                                                          |
+| storage.flow-control.hard-pending-compaction-bytes-limit                                | フロー制御メカニズムがすべての書き込みリクエストを拒否するトリガーとなる、kvDB保留圧縮バイトのしきい値                                                                                         |
 | `storage.scheduler-worker-pool-size`                      | スケジューラスレッドプール内のスレッド数                                                                                                                       |
-| `import.num-threads`                                      | 復元またはインポート RPC 要求を処理するスレッドの数 (動的な変更は v8.1.2 以降でサポートされます)                                                                                   |
+| `import.num-threads`                                      | 復元またはインポート RPC リクエストを処理するスレッドの数 (動的な変更は v8.1.2 以降でサポートされます)                                                                                   |
 | `backup.num-threads`                                      | バックアップ スレッドの数 (v4.0.3 以降でサポート)                                                                                                             |
 | `split.qps-threshold`                                     | リージョンで`load-base-split`を実行するためのしきい値。リージョンの読み取りリクエストのQPSが10秒連続で`qps-threshold`を超える場合、このリージョンは分割される必要があります。                                    |
 | `split.byte-threshold`                                    | リージョンで`load-base-split`を実行するためのしきい値。リージョンの読み取りリクエストのトラフィックが10秒間連続して`byte-threshold`を超える場合、このリージョンは分割されます。                                   |
@@ -376,7 +376,7 @@ select @@tidb_slow_log_threshold;
 
 ### TiFlash構成を動的に変更する {#modify-tiflash-configuration-dynamically}
 
-現在、システム変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)を使用してTiFlash構成`max_threads`を変更できます。この変数は、 TiFlashが要求を実行するための最大同時実行性を指定します。
+現在、システム変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)を使用してTiFlash構成`max_threads`を変更できます。この変数は、 TiFlashがリクエストを実行するための最大同時実行性を指定します。
 
 `tidb_max_tiflash_threads`のデフォルト値は`-1`で、このシステム変数は無効であり、 TiFlash設定ファイルの設定に依存することを示します。 `tidb_max_tiflash_threads`を使用すると、 `max_threads`を10に設定できます。
 

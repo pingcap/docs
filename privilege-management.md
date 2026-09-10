@@ -525,7 +525,7 @@ SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 1 row in set (0.00 sec)
 ```
 
-このレコードでは、 `Host`と`User`は`root`ユーザーから任意のホスト ( `%` ) から送信された接続要求を受け入れることができると判断します。 `Select_priv`と`Insert_priv`は、ユーザーがグローバルな`Select`および`Insert`権限を持っていることを意味します。 `mysql.user`テーブルの有効範囲はグローバルです。
+このレコードでは、 `Host`と`User`は`root`ユーザーから任意のホスト ( `%` ) から送信された接続リクエストを受け入れることができると判断します。 `Select_priv`と`Insert_priv`は、ユーザーがグローバルな`Select`および`Insert`権限を持っていることを意味します。 `mysql.user`テーブルの有効範囲はグローバルです。
 
 `Host`内の`User`と`mysql.db`は、ユーザーがアクセスできるデータベースを決定します。有効な範囲はデータベースです。
 
@@ -535,7 +535,7 @@ SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 
 ### 接続確認 {#connection-verification}
 
-クライアントが接続要求を送信すると、TiDBサーバーはログイン操作を検証します。TiDBサーバーは最初に`mysql.user`テーブルをチェックします。 `User`と`Host`のレコードが接続要求と一致する場合、TiDBサーバーは`authentication_string`を検証します。
+クライアントが接続リクエストを送信すると、TiDBサーバーはログイン操作を検証します。TiDBサーバーは最初に`mysql.user`テーブルをチェックします。 `User`と`Host`のレコードが接続リクエストと一致する場合、TiDBサーバーは`authentication_string`を検証します。
 
 ユーザーの識別は、接続を開始するホスト`Host`とユーザー名`User`の2つの情報に基づいています。ユーザー名が空でない場合、指定されたユーザー名と完全に一致する必要があります。
 
@@ -543,7 +543,7 @@ SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 
 ### リクエストの確認 {#request-verification}
 
-接続が成功すると、要求検証プロセスによって、その操作に権限があるかどうかがチェックされます。
+接続が成功すると、リクエスト検証プロセスによって、その操作に権限があるかどうかがチェックされます。
 
 データベース関連のリクエスト（ `INSERT` 、 `UPDATE` ）の場合、リクエスト検証プロセスではまず`mysql.user`テーブルでユーザーのグローバル権限を確認します。権限が付与されている場合は、直接アクセスできます。付与されていない場合は、 `mysql.db`テーブルを確認します。
 

@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0 RC.1 Release Notes
-summary: TiDB 4.0 RC.1は2020年4月28日にリリースされました。このリリースには、TiKV、TiDB、 TiFlash、TiCDC、バックアップ＆リストア（BR）、Placement Driver（PD）の互換性変更、重要なバグ修正、新機能、バグ修正が含まれています。バグ修正では、データの不整合、デッドロック、レプリケーションの失敗などの問題が修正されています。新機能には、コプロセッサー要求をTiFlashにバッチ送信する機能のサポートと、負荷ベースのリージョン分割操作の有効化が含まれます。さらに、 TiFlashはfromUnixTime関数とdateFormat関数のプッシュダウンをサポートするようになりました。
+summary: TiDB 4.0 RC.1は2020年4月28日にリリースされました。このリリースには、TiKV、TiDB、 TiFlash、TiCDC、バックアップ＆リストア（BR）、Placement Driver（PD）の互換性変更、重要なバグ修正、新機能、バグ修正が含まれています。バグ修正では、データの不整合、デッドロック、レプリケーションの失敗などの問題が修正されています。新機能には、コプロセッサーリクエストをTiFlashにバッチ送信する機能のサポートと、負荷ベースのリージョン分割操作の有効化が含まれます。さらに、 TiFlashはfromUnixTime関数とdateFormat関数のプッシュダウンをサポートするようになりました。
 ---
 
 # TiDB 4.0 RC.1 リリースノート {#tidb-4-0-rc-1-release-notes}
@@ -29,7 +29,7 @@ TiDB バージョン: 4.0.0-rc.1
 
 - TiKV
 
-    - TiDB からのプローブ要求によって発生するデッドロックの問題を修正 [#7540](https://github.com/tikv/tikv/pull/7540)
+    - TiDB からのプローブリクエストによって発生するデッドロックの問題を修正 [#7540](https://github.com/tikv/tikv/pull/7540)
     - トランザクションの最小コミットタイムスタンプがオーバーフローし、データの正確性に影響する可能性がある問題を修正しました[#7638](https://github.com/tikv/tikv/pull/7638)
 
 - TiFlash
@@ -59,7 +59,7 @@ TiDB バージョン: 4.0.0-rc.1
 
 - TiDB
 
-    - コプロセッサー要求をTiFlashにバッチで送信する機能をサポート[#16226](https://github.com/pingcap/tidb/pull/16226)
+    - コプロセッサーリクエストをTiFlashにバッチで送信する機能をサポート[#16226](https://github.com/pingcap/tidb/pull/16226)
     - コプロセッサーキャッシュ機能をデフォルトで有効にする[#16710](https://github.com/pingcap/tidb/pull/16710)
     - SQL文の特別なコメントに登録されたセクションのみを解析する [#16157](https://github.com/pingcap/tidb/pull/16157)
     - PDおよびTiKVインスタンスの構成を表示するための`SHOW CONFIG`構文の使用をサポート [#16475](https://github.com/pingcap/tidb/pull/16475)
@@ -79,7 +79,7 @@ TiDB バージョン: 4.0.0-rc.1
 - TiFlash
 
     - DeltaTreeエンジンの読み取りおよび書き込みワークロードに関連するメトリックレポートを追加します
-    - `handle`目と`version`列をキャッシュして、単一の読み取りまたは書き込み要求のディスクI/Oを削減します。
+    - `handle`列と`version`列をキャッシュして、単一の読み取りまたは書き込みリクエストのディスクI/Oを削減します。
     - `fromUnixTime`と`dateFormat`プッシュダウン関数をサポート
     - 最初のディスクに従ってグローバル状態を評価し、この評価を報告する
     - DeltaTreeエンジンの読み取りおよび書き込みワークロードに関連するグラフィックスをGrafanaに追加します

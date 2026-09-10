@@ -478,7 +478,7 @@ EXPLAIN SELECT /*+ INDEX_LOOKUP_PUSHDOWN(t1, a) */ a, b FROM t1;
 - [Follower Read](/follower-read.md)はサポートされていません。
 - [ステイル読み取り](/stale-read.md)と[`tidb_snapshot`を使用して履歴データを読み取る](/read-historical-data.md)はサポートされていません。
 - プッシュダウンされた`LocalIndexLookUp`演算子は`keep order`をサポートしていません。実行計画にインデックス列に基づく`ORDER BY`が含まれている場合、クエリは通常の`IndexLookUp`にフォールバックします。
-- プッシュダウンされた`LocalIndexLookUp`演算子は、ページング モードでのコプロセッサー要求の送信をサポートしていません。
+- プッシュダウンされた`LocalIndexLookUp`演算子は、ページング モードでのコプロセッサーリクエストの送信をサポートしていません。
 - プッシュダウンされた`LocalIndexLookUp`演算子は[コプロセッサーキャッシュ](/coprocessor-cache.md)をサポートしません。
 
 ### NO_INDEX_LOOKUP_PUSHDOWN(t1_name)<span class="version-mark">バージョン8.5.5の新機能</span> {#no_index_lookup_pushdownt1_name-new-in-v855}

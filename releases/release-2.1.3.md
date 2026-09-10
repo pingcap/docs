@@ -47,7 +47,7 @@ summary: TiDB 2.1.3 および TiDB Ansible 2.1.3 がリリースされ、シス�
 
 - HTTPメソッドを使用した監視情報の取得をサポート [#3855](https://github.com/tikv/tikv/pull/3855)
 - `data_format` のNULL問題を修正 [#4075](https://github.com/tikv/tikv/pull/4075)
-- スキャン要求の範囲の検証を追加[#4124](https://github.com/tikv/tikv/pull/4124)
+- スキャンリクエストの範囲の検証を追加[#4124](https://github.com/tikv/tikv/pull/4124)
 
 ## ツール {#tools}
 

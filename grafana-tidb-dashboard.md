@@ -21,7 +21,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 ### Query Summary {#query-summary}
 
 - Duration: 実行時間
-    - クライアントのネットワーク要求がTiDBに送信されてから、TiDBがそれを実行した後にクライアントに返されるまでの時間。通常、クライアント要求はSQL文の形式で送信されますが、 `COM_PING`、`COM_SLEEP`、`COM_STMT_FETCH`、`COM_SEND_LONG_DATA`などのコマンドの実行時間も含まれる場合があります
+    - クライアントのネットワークリクエストがTiDBに送信されてから、TiDBがそれを実行した後にクライアントに返されるまでの時間。通常、クライアントリクエストはSQL文の形式で送信されますが、 `COM_PING`、`COM_SLEEP`、`COM_STMT_FETCH`、`COM_SEND_LONG_DATA`などのコマンドの実行時間も含まれる場合があります
     - TiDBはマルチクエリをサポートしているため、 `select 1; select 1; select 1;`ような複数のSQL文を一度に送信できます。この場合、このクエリの合計実行時間には、すべてのSQL文の実行時間が含まれます。
 - Command Per Second: コマンド実行結果の成功または失敗に応じて分類される、TiDBによって1秒あたりに処理されるコマンドの数
 - QPS: すべての TiDB インスタンスで秒あたりに実行される SQL文の数。`SELECT` 、 `INSERT` 、 `UPDATE`およびその他のタイプの文に従ってカウントされます
@@ -105,7 +105,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 - KV Backoff Duration: KV再試行リクエストの合計継続時間。TiDBはTiKVへのリクエスト送信時にエラーが発生する可能性があります。TiDBはTiKVへのすべてのリクエストに対して再試行メカニズムを備えています。この`KV Backoff Duration`項目は、リクエストの再試行の合計時間を記録します。
 - TiClient Region Error OPS: TiKV によって返されたリージョン関連のエラーメッセージの数
 - KV Backoff OPS: TiKVによって返されたエラーメッセージの数
-- Lock Resolve OPS: ロックを解決するためのTiDB操作の数。TiDBの読み取りまたは書き込み要求がロックに遭遇すると、ロックを解決しようとします。
+- Lock Resolve OPS: ロックを解決するためのTiDB操作の数。TiDBの読み取りまたは書き込みリクエストがロックに遭遇すると、ロックを解決しようとします。
 - Other Errors OPS: ロックのクリアや`SafePoint`の更新など、その他の種類のエラーの数
 
 ### KV Request {#kv-request}
@@ -122,15 +122,15 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
     - **cross-zone**: リモートゾーンでステイル読み取りを試みる 1秒あたりのリクエスト数
     - **local**: ローカルゾーンでステイル読み取りを試みる1秒あたりのリクエスト数
 - Stale Read Req Traffic:
-    - **cross-zone-in**: リモートゾーンでステイル読み取りを試みる要求に対する応答の着信トラフィック
-    - **cross-zone-out**: リモートゾーンでステイル読み取りを試みる要求に対する応答の送信トラフィック
-    - **local-in** : ローカルゾーンでステイル読み取りを試みる要求に対する応答の着信トラフィック
-    - **local-out** : ローカルゾーンでステイル読み取りを試みる要求の送信トラフィック
+    - **cross-zone-in**: リモートゾーンでステイル読み取りを試みるリクエストに対する応答の着信トラフィック
+    - **cross-zone-out**: リモートゾーンでステイル読み取りを試みるリクエストに対する応答の送信トラフィック
+    - **local-in** : ローカルゾーンでステイル読み取りを試みるリクエストに対する応答の着信トラフィック
+    - **local-out** : ローカルゾーンでステイル読み取りを試みるリクエストの送信トラフィック
 - Read Req Traffic
-    - **leader-local** : ローカルゾーンでのLeader読み取り処理の読み取り要求によって生成されたトラフィック
-    - **leader-cross-zone** : リモートゾーンでのLeader読み取り処理の読み取り要求によって生成されるトラフィック
-    - **follower-local** : ローカルゾーンでのFollower Read処理による読み取り要求によって生成されるトラフィック
-    - **follower-cross-zone** : リモートゾーンでのFollower Read処理による読み取り要求によって生成されるトラフィック
+    - **leader-local** : ローカルゾーンでのLeader読み取り処理の読み取りリクエストによって生成されたトラフィック
+    - **leader-cross-zone** : リモートゾーンでのLeader読み取り処理の読み取りリクエストによって生成されるトラフィック
+    - **follower-local** : ローカルゾーンでのFollower Read処理による読み取りリクエストによって生成されるトラフィック
+    - **follower-cross-zone** : リモートゾーンでのFollower Read処理による読み取りリクエストによって生成されるトラフィック
 
 ### PD Client {#pd-client}
 
@@ -139,7 +139,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 - PD Client CMD Fail OPS: PD クライアントによって 1秒あたりに実行された失敗したコマンドの統計
 - PD TSO OPS: TiDBがPDに送信する1秒あたりのgRPCリクエスト数（cmd）とTSOリクエスト数（request）。各gRPCリクエストには、TSOリクエストのバッチが含まれています。
 - PD TSO Wait Duration: TiDB が PD から TSO が返されるまで待機する時間
-- PD TSO RPC duration: TiDB が TSO を取得するために PD に gRPC 要求を送信してから TiDB が PD から gRPC 応答を受信するまでの期間
+- PD TSO RPC duration: TiDB が TSO を取得するために PD に gRPC リクエストを送信してから TiDB が PD から gRPC 応答を受信するまでの期間
 - Async TSO Duration: TiDBがTSOを取得する準備をする時間から、TiDBが実際にPDがTSOを返すのを待ち始める時間までの期間
 
 ### Schema Load {#schema-load}

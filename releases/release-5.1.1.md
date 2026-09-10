@@ -56,7 +56,7 @@ TiDB バージョン: 5.1.1
 
     - 未確定エラーの可能性を減らすために、事前書き込みリクエストを可能な限りべき等にします[#10586](https://github.com/tikv/tikv/pull/10586)
     - 多数の期限切れコマンドを処理する際のスタックオーバーフローのリスクを防ぐ[#10502](https://github.com/tikv/tikv/pull/10502)
-    - `max_ts` を更新するためにステイル読み取り要求の`start_ts`を使用しないことで、コミット要求の過度な再試行を回避します。 [#10451](https://github.com/tikv/tikv/pull/10451)
+    - `max_ts` を更新するためにステイル読み取りリクエストの`start_ts`を使用しないことで、コミットリクエストの過度な再試行を回避します。 [#10451](https://github.com/tikv/tikv/pull/10451)
     - 読み取り準備と書き込み準備は別々に処理して読み取りレイテンシーを削減する[#10592](https://github.com/tikv/tikv/pull/10592)
     - I/Oレート制限が有効になっている場合のデータインポート速度への影響を軽減します[#10390](https://github.com/tikv/tikv/pull/10390)
     - Raft gRPC接続間の負荷分散を改善する[#10495](https://github.com/tikv/tikv/pull/10495)

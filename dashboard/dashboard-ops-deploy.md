@@ -107,7 +107,7 @@ Dashboard is not started.
 
 ## TiDB Dashboardを再度有効にする {#re-enable-tidb-dashboard}
 
-TiUPを使用してデプロイされた実行中のクラスターの場合は、 `tiup ctl:v<CLUSTER_VERSION> pd`コマンドを使用して、PD にインスタンスの再ネゴシエートを要求し、TiDB Dashboardを実行します ( `127.0.0.1:2379`任意の PD インスタンスの IP とポートに置き換えます)。
+TiUPを使用してデプロイされた実行中のクラスターの場合は、 `tiup ctl:v<CLUSTER_VERSION> pd`コマンドを使用して、PD にインスタンスの再ネゴシエーションをリクエストし、TiDB Dashboardを実行します ( `127.0.0.1:2379`任意の PD インスタンスの IP とポートに置き換えます)。
 
 ```bash
 tiup ctl:v<CLUSTER_VERSION> pd -u http://127.0.0.1:2379 config set dashboard-address auto

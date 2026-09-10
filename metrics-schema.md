@@ -112,7 +112,7 @@ SELECT * FROM information_schema.metrics_tables WHERE table_name='tidb_query_dur
 フィールドの説明:
 
 - `TABLE_NAME` : `metrics_schema`のテーブル名に対応します。この例では、テーブル名は`tidb_query_duration`です。
-- `PROMQL` : 監視テーブルの動作原理は、まずSQL文を`PromQL`にマッピングし、次にPrometheusにデータを要求し、Prometheusの結果をSQLクエリ結果に変換することです。このフィールドは`PromQL`の式テンプレートです。監視テーブルのデータをクエリすると、クエリ条件を使用してこのテンプレート内の変数が書き換えられ、最終的なクエリ式が生成されます。
+- `PROMQL` : 監視テーブルの動作原理は、まずSQL文を`PromQL`にマッピングし、次にPrometheusにデータをリクエストし、Prometheusの結果をSQLクエリ結果に変換することです。このフィールドは`PromQL`の式テンプレートです。監視テーブルのデータをクエリすると、クエリ条件を使用してこのテンプレート内の変数が書き換えられ、最終的なクエリ式が生成されます。
 - `LABELS` : 監視項目のラベル。`tidb_query_duration`は`instance`と`sql_type`の 2つのラベルがあります。
 - `QUANTILE` : パーセンタイル。ヒストグラム型の監視データの場合、デフォルトのパーセンタイルが指定されます。このフィールドの値が`0`の場合、監視テーブルに対応する監視項目はヒストグラムではないことを意味します。
 - `COMMENT` : 監視テーブルの説明。`tidb_query_duration`テーブルは、TiDBクエリ実行のパーセンタイル時間（P999/P99/P90のクエリ時間など）を照会するために使用されていることがわかります。単位は秒です。

@@ -14,7 +14,7 @@ TiDB バージョン: 4.0.0-rc.2
 - TiDB
 
     - TiDB Binlogが有効な場合、単一トランザクションのサイズ制限（100 MB）が削除されました。現在、トランザクションのサイズ制限は 10 GB です。ただし、TiDB Binlogが有効で、ダウンストリームが Kafka の場合は、Kafka のメッセージサイズ制限である 1 GB に合わせて`txn-total-size-limit`パラメータを設定してください。 [#16941](https://github.com/pingcap/tidb/pull/16941)
-    - `CLUSTER_LOG`テーブル照会するときに時間範囲が指定されていない場合は、デフォルトの時間範囲を照会するのではなく、エラーを返して指定された時間範囲を要求するように動作を変更します。 [#17003](https://github.com/pingcap/tidb/pull/17003)
+    - `CLUSTER_LOG`テーブル照会するときに時間範囲が指定されていない場合は、デフォルトの時間範囲を照会するのではなく、エラーを返して時間範囲の指定をリクエストするように動作を変更します。 [#17003](https://github.com/pingcap/tidb/pull/17003)
     - `CREATE TABLE`文を使用してパーティションテーブルを作成するときに、サポートされていない`sub-partition`または`linear hash`オプションが指定された場合、オプションが無視されたパーティションテーブルではなく、通常のテーブルが作成されます[#17197](https://github.com/pingcap/tidb/pull/17197)
 
 - TiKV

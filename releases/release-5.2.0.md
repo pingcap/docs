@@ -55,8 +55,8 @@ TiDB バージョン: 5.2.0
 | TiKV設定ファイル     | [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)                                                           | 新しく追加された | フロー制御メカニズムを有効にするかどうかを決定します。デフォルト値は`true`です。                                                                                     |
 | TiKV設定ファイル     | [`storage.flow-control.memtables-threshold`](/tikv-configuration-file.md#memtables-threshold)                                 | 新しく追加された | kvDB の memtable の数がこのしきい値に達すると、フロー制御メカニズムが動作を開始します。デフォルト値は`5`です。                                                                |
 | TiKV設定ファイル     | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)                                   | 新しく追加された | kvDB L0 ファイルの数がこのしきい値に達すると、フロー制御メカニズムが動作を開始します。デフォルト値は`9`です。                                                                    |
-| TiKV設定ファイル     | [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) | 新しく追加された | KvDB の保留中の圧縮バイト数がこのしきい値に達すると、フロー制御メカニズムは一部の書き込み要求を拒否し、 `ServerIsBusy`エラーを報告します。デフォルト値は"192GB"です。                                |
-| TiKV設定ファイル     | [`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit) | 新しく追加された | KvDB の保留中の圧縮バイト数がこのしきい値に達すると、フロー制御メカニズムはすべての書き込み要求を拒否し、 `ServerIsBusy`エラーを報告します。デフォルト値は"1024GB"です。                              |
+| TiKV設定ファイル     | [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) | 新しく追加された | KvDB の保留中の圧縮バイト数がこのしきい値に達すると、フロー制御メカニズムは一部の書き込みリクエストを拒否し、 `ServerIsBusy`エラーを報告します。デフォルト値は"192GB"です。                                |
+| TiKV設定ファイル     | [`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit) | 新しく追加された | KvDB の保留中の圧縮バイト数がこのしきい値に達すると、フロー制御メカニズムはすべての書き込みリクエストを拒否し、 `ServerIsBusy`エラーを報告します。デフォルト値は"1024GB"です。                              |
 
 ### その他 {#others}
 

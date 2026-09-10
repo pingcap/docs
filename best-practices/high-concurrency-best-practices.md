@@ -18,7 +18,7 @@ aliases: ['/ja/tidb/stable/high-concurrency-best-practices/','/ja/tidb/dev/high-
 
 ## 同時書き込みの多いシナリオ {#highly-concurrent-write-intensive-scenario}
 
-高度な同時書き込みシナリオは、決済や清算などのアプリケーションでバッチタスクを実行する際によく発生します。このシナリオには、次のような特徴があります。
+同時実行性の高い書き込みシナリオは、決済や清算などのアプリケーションでバッチタスクを実行する際によく発生します。このシナリオには、次のような特徴があります。
 
 - 膨大な量のデータ
 - 履歴データを短時間でデータベースにインポートする必要性
@@ -98,7 +98,7 @@ FROM
 
 ![QPS3](/media/best-practices/QPS3.png)
 
-[RaftストアCPU](/grafana-tikv-dashboard.md)はスレッド`raftstore`のCPU使用率で、通常は書き込み負荷を表します。このシナリオでは、 `tikv-3`がこのRaftグループのLeader、 `tikv-0`と`tikv-1`フォロワーです。他のノードの負荷はほぼ空です。
+[Raft store CPU](/grafana-tikv-dashboard.md)はスレッド`raftstore`のCPU使用率で、通常は書き込み負荷を表します。このシナリオでは、 `tikv-3`がこのRaftグループのLeader、 `tikv-0`と`tikv-1`がフォロワーです。他のノードの負荷はほぼ空です。
 
 PD の監視メトリックでも、ホットスポットが発生したことが確認されます。
 

@@ -38,7 +38,7 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
     - 根本的な問題を回避するために分離レベル`Read Committed`を禁止する [#7211](https://github.com/pingcap/tidb/pull/7211)
     - いくつかのケースで`LTRIM` / `RTRIM` / `TRIM`の誤った結果を修正[#7291](https://github.com/pingcap/tidb/pull/7291)
     - `MaxOneRow`演算子が返される結果が 1 行を超えないことを保証できない問題を修正しました[#7375](https://github.com/pingcap/tidb/pull/7375)
-    - コプロセッサー要求を範囲が多すぎる場合に分割する[#7454](https://github.com/pingcap/tidb/pull/7454)
+    - コプロセッサーリクエストを範囲が多すぎる場合に分割する[#7454](https://github.com/pingcap/tidb/pull/7454)
 - 統計
     - 統計動的収集のメカニズムの最適化[#6796](https://github.com/pingcap/tidb/pull/6796)
     - データが頻繁に更新されると`Auto Analyze`が機能しない問題を修正[#7022](https://github.com/pingcap/tidb/pull/7022)

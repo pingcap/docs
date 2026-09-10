@@ -102,6 +102,6 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
 - バッチでのRaftメッセージの受信と送信をサポート [#3931](https://github.com/tikv/tikv/pull/3913)
 - 新しいストレージエンジン Titan を導入 [#3985](https://github.com/tikv/tikv/pull/3985)
 - gRPCをv1.17.2にアップグレード[#4023](https://github.com/tikv/tikv/pull/4023)
-- バッチでクライアント要求を受信し、応答を送信することをサポートします。 [#4043](https://github.com/tikv/tikv/pull/4043)
+- バッチでクライアントリクエストを受信し、応答を送信することをサポートします。 [#4043](https://github.com/tikv/tikv/pull/4043)
 - マルチスレッド対応適用 [#4044](https://github.com/tikv/tikv/pull/4044)
 - マルチスレッドRaftstore サポート [#4066](https://github.com/tikv/tikv/pull/4066)
