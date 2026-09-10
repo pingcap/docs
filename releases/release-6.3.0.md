@@ -38,7 +38,7 @@ TiDBバージョン: 6.3.0-DMR
 
 - 範囲COLUMNSパーティショニングは、複数の列の定義をサポートします [#36636](https://github.com/pingcap/tidb/issues/36636) @[mjonss](https://github.com/mjonss)
 
-    TiDB は[レンジ列によるパーティション分割（列リスト）](/partitioned-table.md#range-columns-partitioning)をサポートしています。 `column_list`は単一列に制限されなくなりました。基本的な機能はMySQLと同じです。
+    TiDB は[レンジCOLUMNSによるパーティション分割（列リスト）](/partitioned-table.md#range-columns-partitioning)をサポートしています。 `column_list`は単一列に制限されなくなりました。基本的な機能はMySQLと同じです。
 
 - [パーティション交換](/partitioned-table.md#partition-management)が GA になりました [#35996](https://github.com/pingcap/tidb/issues/35996) @[ymkzpx](https://github.com/ymkzpx)
 

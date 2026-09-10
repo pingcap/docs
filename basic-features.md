@@ -189,8 +189,8 @@ summary: TiDBの機能概要について学びましょう。
 | [ハッシュパーティショニング](/partitioned-table.md#hash-partitioning)                                                     |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [キーパーティショニング](/partitioned-table.md#key-partitioning)                                                        |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
 | [リストパーティショニング](/partitioned-table.md#list-partitioning)                                                    |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |
-| [リスト列パーティショニング](/partitioned-table.md)                                                              |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |
-| [リストおよびリスト列パーティションテーブルのデフォルトパーティション](/partitioned-table.md#default-list-partition)                           |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |
+| [リストCOLUMNSパーティショニング](/partitioned-table.md)                                                              |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |
+| [リストおよびリストCOLUMNSパーティションテーブルのデフォルトパーティション](/partitioned-table.md#default-list-partition)                           |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |
 | [`EXCHANGE PARTITION`](/partitioned-table.md)                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |  E  |
 | [`REORGANIZE PARTITION`](/partitioned-table.md#reorganize-partitions)                                        |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
 | [`COALESCE PARTITION`](/partitioned-table.md#decrease-the-number-of-partitions)                              |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
