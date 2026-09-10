@@ -98,7 +98,7 @@ TiDB Cloud Essential and TiDB Cloud Premium support only `SESSION` rules for `ti
 </CustomContent>
 
 - Matching semantics:
-    - Numeric fields are matched using `>=`. String and boolean fields are matched using equality (`=`).
+    - Numeric fields except `Conn_ID` are matched using `>=`. `Conn_ID`, string fields, and boolean fields are matched using equality (`=`).
     - Matching for `DB` and `Resource_group` is case-insensitive.
     - Explicit operators such as `>`, `<`, and `!=` are not supported.
 
@@ -118,7 +118,7 @@ The fields in the following table follow the general matching and type rules des
 
 | Field name | Type | Unit | Description |
 | --- | --- | --- | --- |
-| `Conn_ID` | `uint` | count | The connection ID (session ID). For example, you can use `Conn_ID:3` to match logs whose session ID is `3`. This field is supported only in `GLOBAL` rules. |
+| `Conn_ID` | `uint` | count | The connection ID (session ID). This field uses exact matching. For example, `Conn_ID:3` matches only logs whose session ID is `3`. This field is supported only in `GLOBAL` rules. |
 | `Session_alias` | `string` | none | The alias of the current session. |
 | `DB` | `string` | none | The current database. Matching is case-insensitive. |
 | `Exec_retry_count` | `uint` | count | The retry times of this statement. This field is usually for pessimistic transactions in which the statement is retried when the lock fails. |
@@ -139,14 +139,6 @@ The fields in the following table follow the general matching and type rules des
 | `Resource_group` | `string` | none | The resource group that the statement is bound to. Matching is case-insensitive. |
 | `KV_total` | `float` | second | The time spent on all the RPC requests to TiKV or TiFlash by this statement. |
 | `PD_total` | `float` | second | The time spent on all the RPC requests to PD by this statement. |
-| `Unpacked_bytes_sent_tikv_total` | `int` | bytes | The total amount of uncompressed data sent to TiKV by this statement. |
-| `Unpacked_bytes_received_tikv_total` | `int` | bytes | The total amount of uncompressed data received from TiKV by this statement. |
-| `Unpacked_bytes_sent_tikv_cross_zone` | `int` | bytes | The amount of uncompressed data sent to TiKV across availability zones by this statement. |
-| `Unpacked_bytes_received_tikv_cross_zone` | `int` | bytes | The amount of uncompressed data received from TiKV across availability zones by this statement. |
-| `Unpacked_bytes_sent_tiflash_total` | `int` | bytes | The total amount of uncompressed data sent to TiFlash by this statement. |
-| `Unpacked_bytes_received_tiflash_total` | `int` | bytes | The total amount of uncompressed data received from TiFlash by this statement. |
-| `Unpacked_bytes_sent_tiflash_cross_zone` | `int` | bytes | The amount of uncompressed data sent to TiFlash across availability zones by this statement. |
-| `Unpacked_bytes_received_tiflash_cross_zone` | `int` | bytes | The amount of uncompressed data received from TiFlash across availability zones by this statement. |
 | `Process_time` | `float` | second | The total processing time of a SQL statement in TiKV. Because data is sent to TiKV concurrently, this value might exceed `Query_time`. |
 | `Backoff_time` | `float` | second | The waiting time before retrying when a statement encounters errors that require a retry. Common errors include lock conflicts, Region splits, and busy TiKV servers. |
 | `Total_keys` | `uint` | count | The number of keys that Coprocessor has scanned. |
