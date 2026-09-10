@@ -32,7 +32,7 @@ TiDBバージョン: 6.3.0-DMR
 
 ### SQL {#sql}
 
-- レンジパーティション定義を簡素化するための新しい構文糖衣（レンジINTERVALパーティショニング）を追加（実験的） [#35683](https://github.com/pingcap/tidb/issues/35683) @[mjonss](https://github.com/mjonss)
+- レンジパーティション定義を簡素化するための新しい構文糖衣（レンジ INTERVAL パーティショニング）を追加（実験的） [#35683](https://github.com/pingcap/tidb/issues/35683) @[mjonss](https://github.com/mjonss)
 
     TiDBは、レンジパーティションを定義する新しい方法として、 [区間分割](/partitioned-table.md#range-interval-partitioning)を提供します。すべてのパーティションを列挙する必要がないため、レンジパーティショニングのDDL文の長さが大幅に短縮されます。構文は、従来のレンジパーティショニングと同じです。
 

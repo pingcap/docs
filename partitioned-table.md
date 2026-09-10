@@ -701,7 +701,7 @@ TiDBでは`NULL`パーティショニング式の計算結果として使用す�
 
 > **Note:**
 >
-> `NULL`整数ではありません。TiDB のパーティショニング実装では`NULL`は、 `ORDER BY`と同様に、他のどの整数値よりも小さい値として扱われます。
+> `NULL`は整数ではありません。TiDB のパーティショニング実装では`NULL`は、 `ORDER BY`と同様に、他のどの整数値よりも小さい値として扱われます。
 
 #### レンジパーティショニングによるNULL値の処理 {#handling-of-null-with-range-partitioning}
 
