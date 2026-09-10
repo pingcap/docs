@@ -23,7 +23,7 @@ TiDB バージョン: 4.0.10
 
 - TiDB
 
-    - `txn-entry-size-limit` を使用してトランザクション内のキー値エントリのサイズ制限を設定可能にする [#21843](https://github.com/pingcap/tidb/pull/21843)
+    - `txn-entry-size-limit` を使用してトランザクション内のキーバリューエントリのサイズ制限を設定可能にする [#21843](https://github.com/pingcap/tidb/pull/21843)
 
 - PD
 

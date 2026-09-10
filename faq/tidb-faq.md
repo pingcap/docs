@@ -55,7 +55,7 @@ GoogleのPercolatorに着想を得たTiDBのトランザクションモデルは
 
 MySQL クライアントまたはドライバーでサポートされている任意の言語。
 
-### TiDB で他のキー値ストレージエンジンを使用できますか? {#can-i-use-other-key-value-storage-engines-with-tidb}
+### TiDB で他のキーバリューストレージエンジンを使用できますか? {#can-i-use-other-key-value-storage-engines-with-tidb}
 
 はい。TiDBはTiKVに加えて、UniStoreやMockTiKVなどのスタンドアロンストレージエンジンをサポートしています。ただし、今後のTiDBリリースでは、MockTiKVはサポートされなくなる可能性がありますのでご注意ください。
 

@@ -524,7 +524,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 
 - TiDBにおける単一行データのサイズ制限。
 - デフォルト値: `6291456` (バイト単位)
-- トランザクション内の単一のキー値レコードのサイズ制限。サイズ制限を超えると、TiDB は`entry too large`エラーを返します。この設定項目の最大値は`125829120` (120 MB) を超えません。
+- トランザクション内の単一のキーバリューレコードのサイズ制限。サイズ制限を超えると、TiDB は`entry too large`エラーを返します。この設定項目の最大値は`125829120` (120 MB) を超えません。
 - バージョン7.6.0以降では、システム変数[`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760)を使用して、この設定項目の値を動的に変更できます。
 - TiKVにも同様の制限があることに注意してください。単一の書き込みリクエストのデータサイズが、デフォルトで8MBに設定されている[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)を超えると、TiKVはこのリクエストの処理を拒否します。テーブルに大きな行がある場合は、両方の設定を同時に変更する必要があります。
 - [`max_allowed_packet`](/system-variables.md#max_allowed_packet-new-in-v610) （MySQLプロトコルのパケットの最大サイズ）のデフォルト値は67108864（64 MiB）です。行が`max_allowed_packet`より大きい場合、行は切り捨てられます。

@@ -90,21 +90,21 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 
 ## オペレーターの実行情報 {#execution-information-of-operators}
 
-基本的な`time`と`loop`実行情報に加えて、 `execution info`はオペレーター固有の実行情報も含まれます。これには主に、オペレーターが RPC 要求を送信するのにかかった時間やその他のステップの実行時間が含まれます。
+基本的な`time`と`loop`実行情報に加えて、 `execution info`はオペレーター固有の実行情報も含まれます。これには主に、オペレーターが RPC リクエストを送信するのにかかった時間やその他のステップの実行時間が含まれます。
 
 ### PointGet {#point-get}
 
 `Point_Get`オペレーターからの実行情報には通常、次の情報が含まれます。
 
-- `Get:{num_rpc:1, total_time:697.051µs}` ：TiKVに送信された`Get` RPC要求の数（ `num_rpc` ）とすべてのRPC要求の合計期間（ `total_time` ）。
+- `Get:{num_rpc:1, total_time:697.051µs}` ：TiKVに送信された`Get` RPCリクエストの数（ `num_rpc` ）とすべてのRPCリクエストの合計期間（ `total_time` ）。
 - `ResolveLock:{num_rpc:1, total_time:12.117495ms}` ：TiDBはデータの読み取り時にロックに遭遇した場合、まずロックを解決する必要があります。これは通常、読み取り/書き込み競合のシナリオで発生します。この情報は、ロック解決にかかる時間を示します。
 - `regionMiss_backoff:{num:11, total_time:2010 ms},tikvRPC_backoff:{num:11, total_time:10691 ms}` : RPCリクエストが失敗した場合、TiDBはリクエストを再試行する前にバックオフ時間だけ待機します。バックオフ統計には、バックオフの種類（ `regionMiss` `tikvRPC` ）、合計待機時間（ `total_time` ）、バックオフの合計回数（ `num` ）が含まれます。
 
 ### Batch PointGet {#batch-point-get}
 
-`Batch_Point_Get`オペレーターの実行情報は`Point_Get`オペレーターと似ていますが、 `Batch_Point_Get`通常、データを読み取りするために`BatchGet` RPC 要求を TiKV に送信します。
+`Batch_Point_Get`オペレーターの実行情報は`Point_Get`オペレーターと似ていますが、 `Batch_Point_Get`通常、データを読み取りするために`BatchGet` RPC リクエストを TiKV に送信します。
 
-`BatchGet:{num_rpc:2, total_time:83.13µs}` : TiKVに送信された`BatchGet`タイプのRPC要求の数( `num_rpc` )とすべてのRPC要求に費やされた合計時間( `total_time` )。
+`BatchGet:{num_rpc:2, total_time:83.13µs}` : TiKVに送信された`BatchGet`タイプのRPCリクエストの数( `num_rpc` )とすべてのRPCリクエストに費やされた合計時間( `total_time` )。
 
 ### TableReader {#tablereader}
 
@@ -116,10 +116,10 @@ cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.0758
 
 - `cop_task` : `cop`のタスクの実行情報が含まれます。例:
     - `num` : cop タスクの数。
-    - `max` `p95` cop タスク`min`実行に費やされた実行時間の最大値、最小値、平均値、および P95 `avg` 。
-    - `max_proc_keys`と`p95_proc_keys` ：TiKVがすべてのcopタスクでスキャンしたキー値の最大値とP95値。最大値とP95値の差が大きい場合、データ分布が不均衡になる可能性があります。
-    - `copr_cache_hit_ratio` : `cop`タスク要求に対するコプロセッサーキャッシュのヒット率。
-- `rpc_info` : 要求タイプ別に集計された、TiKV に送信された RPC 要求の合計数と合計時間。
+    - `max` 、 `min` 、 `avg` 、 `p95` : cop タスクの実行に費やされた実行時間の最大値、最小値、平均値、および P95 値。
+    - `max_proc_keys`と`p95_proc_keys` ：TiKVがすべてのcopタスクでスキャンしたキーバリューの数の最大値とP95値。最大値とP95値の差が大きい場合、データ分布が不均衡になる可能性があります。
+    - `copr_cache_hit_ratio` : `cop`タスクリクエストに対するコプロセッサーキャッシュのヒット率。
+- `rpc_info` : リクエストタイプ別に集計された、TiKV に送信された RPC リクエストの合計数と合計時間。
 - `backoff` : さまざまなタイプのバックオフとバックオフの合計待機時間が含まれます。
 
 ### Insert {#insert}
@@ -135,9 +135,9 @@ prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878
     - `total_time` : ステップ`check_insert`に費やされた合計時間。
     - `mem_insert_time` : TiDB トランザクション キャッシュにデータを書き込むのにかかる時間。
     - `prefetch` : TiKVから競合チェックが必要なデータを取得する時間。このステップでは、データを取得するために`Batch_Get` RPCリクエストをTiKVに送信します。
-    - `rpc` : TiKV への RPC 要求の送信に費やされた合計時間。これには通常、 `BatchGet`と`Get` 2種類の RPC 時間が含まれます。
-        - `prefetch`ステップで`BatchGet` RPC 要求が送信されます。
-        - `insert on duplicate`ステートメントが実行されると、 `Get` `duplicate update` RPC 要求が送信されます。
+    - `rpc` : TiKV への RPC リクエストの送信に費やされた合計時間。これには通常、 `BatchGet`と`Get` 2種類の RPC 時間が含まれます。
+        - `prefetch`ステップで`BatchGet` RPC リクエストが送信されます。
+        - `insert on duplicate`ステートメントが`duplicate update`を実行すると、 `Get` RPC リクエストが送信されます。
 - `backoff` : さまざまなタイプのバックオフとバックオフの合計待機時間が含まれます。
 
 ### IndexJoin {#indexjoin}
@@ -253,7 +253,7 @@ lock_keys: {time:94.096168ms, region:6, keys:8, lock_rpc:274.503214ms, rpc_count
 - `region` : `lock_keys`操作の実行に関係する領域の数。
 - `keys` : `Lock`必要な`Key`の数。
 - `lock_rpc` ：タイプ`Lock`のRPCリクエストをTiKVに送信するのに費やされた合計時間。複数のRPCリクエストが並行して送信される可能性があるため、RPCの合計消費時間はタイプ`lock_keys`操作の合計消費時間よりも長くなる可能性があります。
-- `rpc_count` : TiKV に送信された`Lock`タイプの RPC 要求の合計数。
+- `rpc_count` : TiKV に送信された`Lock`タイプの RPC リクエストの合計数。
 
 ### commit_txn実行情報 {#commit-txn-execution-information}
 

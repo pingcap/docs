@@ -118,7 +118,7 @@ sequenceDiagram
 4. TiKVはデータを復元します。
 
     - **SSTファイルのダウンロード**：復元ワーカーは、ストレージパスから対応するSSTファイルをローカルディレクトリにダウンロードします。
-    - **KVの書き換え**：復元ワーカーは、新しいテーブルIDに基づいてKVデータを書き換えます。つまり、 [キー値](/tidb-computing.md#mapping-table-data-to-key-value)内の元のテーブルIDを新しいテーブルIDに置き換えます。復元ワーカーは、インデックスIDも同様に書き換えます。
+    - **KVの書き換え**：復元ワーカーは、新しいテーブルIDに基づいてKVデータを書き換えます。つまり、 [キーバリュー](/tidb-computing.md#mapping-table-data-to-key-value)内の元のテーブルIDを新しいテーブルIDに置き換えます。復元ワーカーは、インデックスIDも同様に書き換えます。
     - **SSTの取り込み**: リストアワーカーは、処理済みの SST ファイルを RocksDB に取り込みます。
     - **復元結果の報告**: 復元ワーカーは復元結果をBRに報告します。
 
@@ -160,7 +160,7 @@ sequenceDiagram
 ### SSTファイルの保存形式 {#storage-format-of-sst-files}
 
 - SST ファイルのストレージ形式の詳細については、 [RocksDBブロックベーステーブル形式](https://github.com/facebook/rocksdb/wiki/Rocksdb-BlockBasedTable-Format)を参照してください。
-- SST ファイルのバックアップデータのエンコード形式の詳細については、[テーブルデータのキー値へのマッピング](/tidb-computing.md#mapping-table-data-to-key-value)を参照してください。
+- SST ファイルのバックアップデータのエンコード形式の詳細については、[テーブルデータのキーバリューへのマッピング](/tidb-computing.md#mapping-table-data-to-key-value)を参照してください。
 
 ### バックアップファイルの構造 {#structure-of-backup-files}
 
