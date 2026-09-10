@@ -59,8 +59,8 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
 
 ### Queries Using Plan Cache OPS {#queries-using-plan-cache-ops}
 
-- avg-hit: すべての TiDB インスタンスで 1秒あたりに実行計画 キャッシュを使用するクエリの数
-- avg-miss: すべての TiDB インスタンスにおける、実行計画 キャッシュを使用していないクエリの数 (1秒あたり)
+- avg-hit: すべての TiDB インスタンスで 1秒あたりに実行プランキャッシュを使用するクエリの数
+- avg-miss: すべての TiDB インスタンスにおける、実行プランキャッシュを使用していないクエリの数 (1秒あたり)
 
 `avg-hit + avg-miss`は`StmtExecute`に等しく、これは 1秒あたりに実行されるすべてのクエリの数です。
 

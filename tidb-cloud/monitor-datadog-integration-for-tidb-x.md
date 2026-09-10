@@ -106,7 +106,7 @@ Datadog は、<CustomContent plan="essential">{{{ .essential }}}</CustomContent>
 | `tidb_cloud.db_query_per_second` | gauge | `type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 文の種類ごとに集計された、1秒あたりに実行された SQL 文の数 |
 | `tidb_cloud.db_failed_queries` | gauge | `type: planner:xxx\|executor:2345\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | SQL 文の実行時に 1秒あたりに発生したエラー種別（構文エラーや主キー競合など）の統計 |
 | `tidb_cloud.db_command_per_second` | gauge | `type: Query\|Ping\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB が 1秒あたりに処理したコマンド数 |
-| `tidb_cloud.db_queries_using_plan_cache_ops` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | 1秒あたりに実行計画キャッシュにヒットしたクエリ数 |
+| `tidb_cloud.db_queries_using_plan_cache_ops` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | 1秒あたりに実行プランキャッシュにヒットしたクエリ数 |
 | `tidb_cloud.db_average_query_duration` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | ネットワークリクエストが TiDB に送信されてから、レスポンスがクライアントに返されるまでの時間 |
 | `tidb_cloud.db_transaction_per_second` | gauge | `type: Commit\|Rollback\|...`<br/>`txn_mode: optimistic\|pessimistic`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 1秒あたりに実行されたトランザクション数 |
 | `tidb_cloud.db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | {{{ .essential }}} インスタンスの行ベースストレージサイズ（バイト） |
@@ -126,7 +126,7 @@ Datadog は、<CustomContent plan="essential">{{{ .essential }}}</CustomContent>
 | `tidb_cloud.db_query_per_second` | gauge | `type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 文の種類ごとに集計された、1秒あたりに実行された SQL 文の数 |
 | `tidb_cloud.db_failed_queries` | gauge | `type: planner:xxx\|executor:2345\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | SQL 文の実行時に 1秒あたりに発生したエラー種別（構文エラーや主キー競合など）の統計 |
 | `tidb_cloud.db_command_per_second` | gauge | `type: Query\|Ping\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB が 1秒あたりに処理したコマンド数 |
-| `tidb_cloud.db_queries_using_plan_cache_ops` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | 1秒あたりに実行計画キャッシュにヒットしたクエリ数 |
+| `tidb_cloud.db_queries_using_plan_cache_ops` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | 1秒あたりに実行プランキャッシュにヒットしたクエリ数 |
 | `tidb_cloud.db_average_query_duration` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | ネットワークリクエストが TiDB に送信されてから、レスポンスがクライアントに返されるまでの時間 |
 | `tidb_cloud.db_transaction_per_second` | gauge | `type: Commit\|Rollback\|...`<br/>`txn_mode: optimistic\|pessimistic`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 1秒あたりに実行されたトランザクション数 |
 | `tidb_cloud.db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | {{{ .premium }}} インスタンスの行ベースストレージサイズ（バイト） |
