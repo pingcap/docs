@@ -1348,7 +1348,7 @@ Referenced in:
 
 Referenced in:
 
-- [System Variables](/system-variables.md#tidb_dml_max_execution_time-new-in-v900)
+- [System Variables](/system-variables.md#tidb_dml_max_execution_time-new-in-v859-and-v900)
 - [Timeouts in TiDB](/develop/dev-guide-timeouts-in-tidb.md)
 
 ### tidb_dml_type

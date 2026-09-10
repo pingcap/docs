@@ -1945,7 +1945,7 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 >
 > Starting from v7.0.0, `tidb_dml_batch_size` no longer takes effect on the [`LOAD DATA` statement](/sql-statements/sql-statement-load-data.md).
 
-### tidb_dml_max_execution_time <span class="version-mark">New in v9.0.0</span>
+### tidb_dml_max_execution_time <span class="version-mark">New in v8.5.9 and v9.0.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
