@@ -6736,7 +6736,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `ON`
 - Type: Boolean
-- This variable controls whether TTL jobs can use an eligible secondary index or non-clustered primary key that starts with the TTL column. When this variable is set to `OFF`, TTL jobs scan in table-key order. For index eligibility, see [Scan expired rows using an index](/time-to-live.md#scan-expired-rows-using-an-index).
+- This variable controls whether TTL jobs can use an eligible secondary index or non-clustered primary key index that starts with the TTL column. When this variable is set to `OFF`, TTL jobs scan in table-key order. For index eligibility, see [Scan expired rows using an index](/time-to-live.md#scan-expired-rows-using-an-index).
 
 ### tidb_ttl_job_enable <span class="version-mark">New in v6.5.0</span>
 

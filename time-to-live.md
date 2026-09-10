@@ -142,14 +142,14 @@ TiDB also limits the number of concurrent TTL tasks at the cluster level. You ca
 
 ### Scan expired rows using an index
 
-By default, TiDB uses an eligible index that starts with the TTL column to scan expired rows. This avoids scanning unexpired index entries.
+To use an index scan, the TTL column must be the first column of the index. This allows TiDB to scan the index range that can contain expired rows without scanning unexpired index entries.
 
-This behavior is controlled by the [`tidb_ttl_enable_index_scan`](/system-variables.md#tidb_ttl_enable_index_scan) global variable, which is enabled by default. When this variable is disabled or no eligible index is available, TiDB falls back to scanning in table-key order and prevents the optimizer from selecting a secondary index for that scan.
+By default, TiDB automatically selects an eligible index for this scan. This behavior is controlled by the [`tidb_ttl_enable_index_scan`](/system-variables.md#tidb_ttl_enable_index_scan) global variable, which is enabled by default. When this variable is disabled or no eligible index is available, TiDB falls back to scanning in table-key order and prevents the optimizer from selecting a secondary index for that scan. For a table with a clustered primary key, the table-key scan uses that primary key.
 
-An eligible index must meet the following requirements:
+In addition to starting with the TTL column, an eligible index must meet the following requirements:
 
-- It is a secondary index or a non-clustered primary key. TiDB does not use a clustered primary key, partial index, global index, multi-valued index, vector search index, full-text index, or invisible index for this scan.
-- Its first column is the TTL column, and each index column indexes the full column value. Prefix indexes and expression indexes are not supported.
+- It is a visible secondary index or a non-clustered primary key index. It is not a partial index, global index, multi-valued index, vector search index, or full-text index.
+- Each index column indexes the full column value. Prefix indexes and expression indexes are not supported.
 - For a unique index that contains multiple columns, all columns except the TTL column are `NOT NULL`.
 - A non-unique index meets the following requirements:
     - It includes either all primary key columns or none of them. It cannot include only some columns of a composite primary key.
@@ -224,7 +224,7 @@ In addition, TiDB provides three tables to obtain more information about TTL job
 
     The columns `{last, current}_job_{start_time, finish_time, ttl_expire}` describe respectively the start time, finish time, and expiration time used by the TTL job of the last or current execution. The `last_job_summary` column describes the execution status of the last TTL task, including the total number of rows, the number of successful rows, and the number of failed rows.
 
-+ The `mysql.tidb_ttl_task` table contains information about the ongoing TTL subtasks. A TTL job is split into many subtasks, and this table records the subtasks that are currently being executed. The `scan_index_id` column indicates the scan path selected when the job was created. A non-`NULL` value is the ID of the selected index, and `NULL` means that the task scans in table-key order.
++ The `mysql.tidb_ttl_task` table contains information about the ongoing TTL subtasks. A TTL job is split into subtasks, and this table records the subtasks that are currently being executed. The `scan_index_id` column indicates the scan path selected when the job was created. A non-`NULL` value is the ID of the selected index, and `NULL` means that the task scans in table-key order.
 + The `mysql.tidb_ttl_job_history` table contains information about the TTL jobs that have been executed. The record of TTL job history is kept for 90 days.
 
     ```sql
