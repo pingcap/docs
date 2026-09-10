@@ -639,7 +639,7 @@ mysql> SELECT FROM_BASE64('MTIzNDU2');
 
 > **Note:**
 >
-> MySQLクライアントでは、インタラクティブモードではデフォルトで[`--binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex)オプションが有効になっており、不明な文字セットを持つデータは[16進数リテラル](https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html)として表示されます。この動作を無効にするには、 `--skip-binary-as-hex`オプションを使用します。
+> MySQLクライアントでは、対話モードではデフォルトで[`--binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex)オプションが有効になっており、不明な文字セットを持つデータは[16進数リテラル](https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html)として表示されます。この動作を無効にするには、 `--skip-binary-as-hex`オプションを使用します。
 
 例（ `mysql --skip-binary-as-hex` ）:
 
@@ -2259,7 +2259,7 @@ SELECT UCASE('bigdata') AS result_upper, UCASE(null) AS result_null;
 > **Note:**
 >
 > - 引数は`0` ～ `9` 、 `A` ～ `F` 、または`a` ～ `f`を含む有効な16進数値でなければなりません。引数が`NULL`またはこの範囲外の場合、関数は`NULL`を返します。
-> - MySQLクライアントでは、インタラクティブモードではデフォルトで[`--binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex)オプションが有効になっており、不明な文字セットを持つデータは[16進数リテラル](https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html)として表示されます。この動作を無効にするには、 `--skip-binary-as-hex`オプションを使用します。
+> - MySQLクライアントでは、対話モードではデフォルトで[`--binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex)オプションが有効になっており、不明な文字セットを持つデータは[16進数リテラル](https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html)として表示されます。この動作を無効にするには、 `--skip-binary-as-hex`オプションを使用します。
 
 例：
 

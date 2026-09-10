@@ -99,6 +99,6 @@ TiUPバージョン: 0.0.3
     - TiCDC
 
         - MySQLシンクがDDL文を実行する際に下流に`test`スキーマが存在しない場合エラーが返される問題を修正 [#353](https://github.com/pingcap/tiflow/pull/353)
-        - CDC cli のリアルタイムインタラクティブモードをサポート [#351](https://github.com/pingcap/tiflow/pull/351)
+        - CDC cli のリアルタイム対話モードをサポート [#351](https://github.com/pingcap/tiflow/pull/351)
         - データレプリケーション中に上流のテーブルが複製可能かどうかのチェックをサポート[#368](https://github.com/pingcap/tiflow/pull/368)
         - Kafka への非同期書き込みをサポート [#344](https://github.com/pingcap/tiflow/pull/344)
