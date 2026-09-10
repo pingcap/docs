@@ -1,6 +1,6 @@
 ---
 title: tiup mirror merge
-summary: `tiup mirror merge`コマンドは、1つまたは複数のミラーを現在のミラーにマージします。実行条件には、既存の所有者IDと対応する秘密鍵が含まれます。
+summary: "`tiup mirror merge`コマンドは、1つまたは複数のミラーを現在のミラーにマージします。実行条件には、既存の所有者IDと対応する秘密鍵が含まれます。"
 ---
 
 # tiup mirror merge {#tiup-mirror-merge}

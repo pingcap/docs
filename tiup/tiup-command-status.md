@@ -1,6 +1,6 @@
 ---
 title: tiup status
-summary: `tiup status`コマンドは、`tiup <component>`コマンドでコンポーネントを実行した後、そのコンポーネントの動作情報を確認するために使用します。このコマンドは、動作中のコンポーネントの名前、コンポーネント名、PID、ステータス、作成時刻、ディレクトリ、バイナリ、引数を表示します。コンポーネントのステータスは、Up、Down、Tombstone、Pending Offline、Unknownのいずれかになります。ステータスはPDのスケジュール情報から取得されます。
+summary: "`tiup status`コマンドは、`tiup <component>`コマンドでコンポーネントを実行した後、そのコンポーネントの動作情報を確認するために使用します。このコマンドは、動作中のコンポーネントの名前、コンポーネント名、PID、ステータス、作成時刻、ディレクトリ、バイナリ、引数を表示します。コンポーネントのステータスは、Up、Down、Tombstone、Pending Offline、Unknownのいずれかになります。ステータスはPDのスケジュール情報から取得されます。"
 ---
 
 # tiup status {#tiup-status}
