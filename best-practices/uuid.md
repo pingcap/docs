@@ -30,9 +30,9 @@ UUID を主キーとして使用すると、 [`AUTO_INCREMENT`](/auto-increment.
 
 [ホットスポット](/best-practices/high-concurrency-best-practices.md)回避するために、 TiDB で`swap_flag`設定しないことをお勧めします。
 
-ホットスポットを回避するために、UUID ベースの主キーに[`CLUSTERED`オプション](/clustered-indexes.md)明示的に設定することもできます。
+ホットスポットを回避するために、UUID ベースの主キーに[`CLUSTERED`オプション](/clustered-indexes.md)を明示的に設定することもできます。
 
-`swap_flag`の効果を示すために、同じ構造を持つ2つのテーブルを示します。違いは、 `uuid_demo_1`に挿入されたデータは`UUID_TO_BIN(?, 0)`を使用し、 `uuid_demo_2` `UUID_TO_BIN(?, 1)`を使用していることです。
+`swap_flag`の効果を示すために、同じ構造を持つ2つのテーブルを示します。違いは、 `uuid_demo_1`への挿入には`UUID_TO_BIN(?, 0)`を使用し、 `uuid_demo_2`への挿入には`UUID_TO_BIN(?, 1)`を使用している点です。
 
 以下の Key Visualizer のスクリーンショットでは、バイナリ形式でフィールドの順序が入れ替わった`uuid_demo_2`テーブルの 1つのリージョンに書き込みが集中していることがわかります。
 
