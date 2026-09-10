@@ -181,7 +181,7 @@ For more information about troubleshooting OOM, see [Troubleshoot TiDB OOM Issue
 
         The multiplication of `Decimal` does not have this issue, because the out-of-bounds is bypassed, and the precision is set to the maximum precision limit.
 
-    - Solution: You can bypass this issue by manually adding `Cast(xx as decimal(a, b))`, in which `a` and `b` are the target precisions.
+    - Solution: You can bypass this issue by manually adding `Cast(xx as decimal(a, b))`, in which `a` is the target precision and `b` is the target scale.
 
 ### 3.5 Slow query issues
 
