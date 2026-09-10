@@ -8,6 +8,26 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 9 月 8 日 {#september-8-2026}
+
+**控制台变更**
+
+- **TiDB Cloud Essential**
+
+    - 对于 [2026 年 6 月 30 日](#june-30-2026)发布的包含增强功能的 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 实例，TiDB Cloud 控制台现在会在实例概览页面中显示其 TiDB 版本为 `CLOUD.202603.x`。
+
+        有关这些增强功能的更多信息，请参阅 [2026 年 6 月 30 日发布说明](#june-30-2026)。
+
+**API 变更**
+
+- **TiDB Cloud Premium**
+
+    - 为 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) 引入 changefeed API 端点，以提供对变更数据捕获（CDC）changefeed 的编程管理。
+
+        你可以使用这些端点创建、列出、获取、删除、暂停、恢复和扩展 changefeed，以便将实时数据复制到下游系统，包括 Apache Kafka、MySQL、Amazon S3 和 Alibaba Cloud OSS。
+
+        更多信息，请参阅 [Changefeed API v1beta2 Reference](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Changefeed)。
+
 ## 2026 年 9 月 1 日 {#september-1-2026}
 
 **常规变更**
