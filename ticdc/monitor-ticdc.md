@@ -31,11 +31,11 @@ cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://ro
 
 TiCDC の新しいアーキテクチャの監視ダッシュボードには、主に次のセクションが含まれます。
 
-- [**Summary**](#summary) : TiCDCクラスターの概要情報
-- [**Server**](#server) : TiDBクラスタ内のTiKVノードとTiCDCノードの概要情報
-- [**Log Puller**](#log-puller) : TiCDC Log Pullerモジュールの詳細情報
-- [**Event Store**](#event-store) : TiCDCイベントストアモジュールの詳細情報
-- [**Sink**](#sink) : TiCDCシンクモジュールの詳細情報
+- [**Summary**](#summary): TiCDCクラスターの概要情報
+- [**Server**](#server): TiDBクラスタ内のTiKVノードとTiCDCノードの概要情報
+- [**Log Puller**](#log-puller): TiCDC Log Pullerモジュールの詳細情報
+- [**Event Store**](#event-store): TiCDCイベントストアモジュールの詳細情報
+- [**Sink**](#sink): TiCDCシンクモジュールの詳細情報
 
 ### Summary {#summary}
 
@@ -131,10 +131,10 @@ TiUPを使用して TiDB クラスターをデプロイすると、TiDB と同�
 
 各パネルの説明は次のとおりです。
 
-- [**Server**](#server) : TiDBクラスタ内のTiKVノードとTiCDCノードの概要情報
-- [**Changefeed**](#changefeed) : TiCDCレプリケーションタスクの詳細情報
-- [**Events**](#events) : TiCDCクラスタ内のデータフローに関する詳細情報
-- [**TiKV**](#tikv) : TiCDCに関連するTiKV情報
+- [**Server**](#server): TiDBクラスタ内のTiKVノードとTiCDCノードの概要情報
+- [**Changefeed**](#changefeed): TiCDCレプリケーションタスクの詳細情報
+- [**Events**](#events): TiCDCクラスタ内のデータフローに関する詳細情報
+- [**TiKV**](#tikv): TiCDCに関連するTiKV情報
 
 ### Server {#server}
 
