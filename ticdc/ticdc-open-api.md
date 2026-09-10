@@ -556,7 +556,7 @@ curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v1
 | :---------- | :---------- |
 | `log_level` | 設定するログレベル。 |
 
-`log_level` 、「debug」、「info」、「warn」、「error」、「dpanic」、「panic」、「fatal」の[zapが提供するログレベル](https://godoc.org/go.uber.org/zap#UnmarshalText)サポートします。
+`log_level` 、"debug"、"info"、"warn"、"error"、"dpanic"、"panic"、"fatal"の[zapが提供するログレベル](https://godoc.org/go.uber.org/zap#UnmarshalText)をサポートします。
 
 ### 例 {#example}
 

@@ -88,7 +88,7 @@ TiCDC は DML イベントを Kafka イベントに変換し、イベントの�
 
 デフォルトでは、AvroはDMLイベント内の変更された行のデータのみを収集し、データ変更の種類やTiDB固有のCommitTS（トランザクションの一意の識別子）は収集しません。この問題に対処するため、TiCDCはAvroプロトコルメッセージに以下の3つのTiDB拡張フィールドを導入しています。`sink-uri`で`enable-tidb-extension`を`true` （デフォルトは`false` ）に設定すると、TiCDCはメッセージ生成時にこれらの3つのフィールドをAvroメッセージに追加します。
 
-- `_tidb_op` : DML タイプ。「c」は挿入を示し、「u」は更新を示します。
+- `_tidb_op` : DML タイプ。"c"は挿入を示し、"u"は更新を示します。
 - `_tidb_commit_ts` : トランザクションの一意の識別子。
 - `_tidb_commit_physical_time` : トランザクション識別子内の物理的なタイムスタンプ。
 

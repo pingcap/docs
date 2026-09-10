@@ -19,7 +19,7 @@ summary: TiDB 2.1 RC3は2018年9月29日にリリースされ、安定性、互�
 - SQL実行エンジン
     - トランザクションにおける読み取り要求のパフォーマンスを最適化する [#7717](https://github.com/pingcap/tidb/pull/7717)
     - 一部のエグゼキュータにおけるChunkメモリの割り当てコストを最適化する[#7540](https://github.com/pingcap/tidb/pull/7540)
-    - ポイントクエリですべての NULL 値が取得される列によって発生する「インデックス範囲外」panicを修正[#7790](https://github.com/pingcap/tidb/pull/7790)
+    - ポイントクエリですべての NULL 値が取得される列によって発生する"index out of range"panicを修正[#7790](https://github.com/pingcap/tidb/pull/7790)
 - サーバ
     - 設定ファイル内のメモリクォータが有効にならない問題を修正[#7729](https://github.com/pingcap/tidb/pull/7729)
     - 各ステートメントの実行優先度を設定するためのシステム変数`tidb_force_priority`を追加します。 [#7694](https://github.com/pingcap/tidb/pull/7694)

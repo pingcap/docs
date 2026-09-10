@@ -72,7 +72,7 @@ TiDB Cloudクラスターでエラーが発生した場合は、ドキュメン�
 
 このエラーは、ソースデータベースへの接続に失敗したことを意味します。ソースデータベースが起動しており、指定されたパラメータを使用して接続できるかどうかを確認してください。ソースデータベースが利用可能であることを確認したら、 **Restart**をクリックしてタスクの復旧を試みてください。
 
-### 移行タスクが中断され、「ドライバー: 接続不良」または「無効な接続」というエラーが含まれています。 {#the-migration-task-is-interrupted-and-contains-the-error-driver-bad-connection-or-invalid-connection}
+### 移行タスクが中断され、"driver: bad connection"または"invalid connection"というエラーが含まれています。 {#the-migration-task-is-interrupted-and-contains-the-error-driver-bad-connection-or-invalid-connection}
 
 このエラーは、ダウンストリームの TiDB クラスタへの接続に失敗したことを意味します。ダウンストリームの TiDB クラスタが正常な状態（ `Available`および`Modifying`を含む）であり、ジョブで指定されたユーザー名とパスワードで接続できるかどうかを確認してください。ダウンストリームの TiDB クラスタが利用可能であることを確認したら、 **Restart**をクリックしてタスクを再開してみてください。
 

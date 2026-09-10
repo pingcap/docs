@@ -402,7 +402,7 @@ WHERE t.c1 IS NULL;
 
 </CustomContent>
 
-### 非トランザクション`DELETE` 、通常の`DELETE`と同等ではない「例外的な」動作をします。 {#non-transactional-delete-has-exceptional-behavior-that-is-not-equivalent-to-ordinary-delete}
+### 非トランザクション`DELETE`は、通常の`DELETE`と同等ではない「例外的な」動作をします。 {#non-transactional-delete-has-exceptional-behavior-that-is-not-equivalent-to-ordinary-delete}
 
 非トランザクション DML文は、この DML文の元の形式と同等ではありません。次のような理由が考えられます。
 

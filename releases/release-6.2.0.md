@@ -226,8 +226,8 @@ TiDBバージョン: 6.2.0-DMR
 
 - [TiDB Lightningのユーザー向けドキュメント](/tidb-lightning/tidb-lightning-overview.md)ドキュメントをリファクタリングして、その構造をより合理的かつ明確にします。 「バックエンド」の用語も、新規ユーザーの理解の障壁を下げるために変更されています。
 
-    - 「ローカルバックエンド」を「物理インポートモード」に置き換えてください。
-    - 「tidb backend」を「logical import mode」に置き換えてください。
+    - "local backend"を"physical import mode"に置き換えてください。
+    - "tidb backend"を"logical import mode"に置き換えてください。
 
 ### TiDBデータ共有サブスクリプション {#tidb-data-share-subscription}
 
@@ -403,7 +403,7 @@ TiDB v6.2.0以降、 BRを使用したRawKVのバックアップと復元は非�
     - テーブル作成時に、デフォルト値と列の型が一致せず、自動的に修正されない問題を修正しました [#34881](https://github.com/pingcap/tidb/issues/34881) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - `mysql.columns_priv`を実行した後、 `DROP USER`テーブルのデータが同期的に削除されない問題を修正しました [#35059](https://github.com/pingcap/tidb/issues/35059) @[lcwangchao](https://github.com/lcwangchao)
     - 一部のシステムのスキーマ内でテーブルを作成することを禁止することで、DDL ジャムの問題を修正します [#35205](https://github.com/pingcap/tidb/issues/35205) @[tangenta](https://github.com/tangenta)
-    - パーティション化されたテーブルをクエリした際に、場合によっては「index-out-of-range」および「non used index」エラーが報告される問題を修正しました [#35181](https://github.com/pingcap/tidb/issues/35181) @[mjonss](https://github.com/mjonss)
+    - パーティション化されたテーブルをクエリした際に、場合によっては"index-out-of-range"および"non used index"エラーが報告される問題を修正しました [#35181](https://github.com/pingcap/tidb/issues/35181) @[mjonss](https://github.com/mjonss)
     - `INTERVAL expr unit + expr`がエラーを報告する可能性がある問題を修正 [#30253](https://github.com/pingcap/tidb/issues/30253) @[mjonss](https://github.com/mjonss)
     - トランザクション内で作成された一時テーブルが見つからないバグを修正 [#35644](https://github.com/pingcap/tidb/issues/35644) @[djshow832](https://github.com/djshow832)
     - `ENUM`列に照合順序を設定する際に発生するpanic問題を修正しました [#31637](https://github.com/pingcap/tidb/issues/31637) @[wjhuang2016](https://github.com/wjhuang2016)

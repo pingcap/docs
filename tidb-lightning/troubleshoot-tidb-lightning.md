@@ -27,7 +27,7 @@ TiDB Lightning が遅くなる理由はいくつかあります。
 
 TiDB Lightningは、データソースを256MB程度の複数のファイルに分割し、並列処理することで最適に動作します。各ファイルのサイズが大きすぎると、 TiDB Lightningが応答しない場合があります。
 
-データソースが CSV であり、すべての CSV ファイルに改行制御文字 (U+000A および U+000D) を含むフィールドがない場合は、「厳密な形式」をオンにして、 TiDB Lightning が大きなファイルを自動的に分割するようにすることができます。
+データソースが CSV であり、すべての CSV ファイルに改行制御文字 (U+000A および U+000D) を含むフィールドがない場合は、"strict format"をオンにして、 TiDB Lightning が大きなファイルを自動的に分割するようにすることができます。
 
 ```toml
 [mydumper]
@@ -48,17 +48,17 @@ strict-format = true
 
 コマンドラインで直接`nohup`を使用して`tidb-lightning`を起動することは推奨されません。スクリプトを実行することで[`tidb-lightning`を起動する](/get-started-with-tidb-lightning.md#step-4-start-tidb-lightning)ことができます。
 
-また、 TiDB Lightningの最後のログに「Context cancellation」というエラーが表示されている場合は、最初の「ERROR」レベルのログを探す必要があります。この「ERROR」レベルのログには通常、「got signal to exit」が続きます。これは、 TiDB Lightningが割り込み信号を受信して終了したことを示しています。
+また、 TiDB Lightningの最後のログに"Context canceled"というエラーが表示されている場合は、最初の"ERROR"レベルのログを探す必要があります。この"ERROR"レベルのログには通常、"got signal to exit"が続きます。これは、 TiDB Lightningが割り込み信号を受信して終了したことを示しています。
 
 ## TiDB クラスターは多くの CPU リソースを消費し、 TiDB Lightningを使用すると非常に遅くなります。 {#the-tidb-cluster-uses-lots-of-cpu-resources-and-runs-very-slowly-after-using-tidb-lightning}
 
-`tidb-lightning`異常終了した場合、クラスターは本番には適さない「インポートモード」で停止している可能性があります。現在のモードは次のコマンドで取得できます。
+`tidb-lightning`異常終了した場合、クラスターは本番には適さない"import mode"で停止している可能性があります。現在のモードは次のコマンドで取得できます。
 
 ```sh
 tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 ```
 
-次のコマンドを使用して、クラスターを強制的に「通常モード」に戻すことができます。
+次のコマンドを使用して、クラスターを強制的に"normal mode"に戻すことができます。
 
 ```sh
 tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode

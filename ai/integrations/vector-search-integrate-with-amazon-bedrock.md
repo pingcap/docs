@@ -261,7 +261,7 @@ def save_entities_with_embedding(session, contents):
 
 ### ステップ8．アプリケーションを実行する {#step-8-run-the-application}
 
-1. `demo.py`に、データベースセッションを確立し、埋め込みを TiDB に保存し、例となる質問 (「TiDB とは何ですか？」など) を尋ね、モデルから結果を生成するための以下のコードを追加します。
+1. `demo.py`に、データベースセッションを確立し、埋め込みを TiDB に保存し、例となる質問 ("What is TiDB?"など) を尋ね、モデルから結果を生成するための以下のコードを追加します。
 
     ```python
     if __name__ == "__main__":

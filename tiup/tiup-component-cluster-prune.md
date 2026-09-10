@@ -1,6 +1,6 @@
 ---
 title: tiup cluster prune
-summary: クラスターをスケールアウトする際、 TiUP は一部のコンポーネントのサービスを即時に停止したり、データを削除したりしません。データのスケジューリングが完了するまで待ってから、「tiup cluster prune」コマンドを手動で実行してクリーンアップする必要があります。構文は「tiup cluster prune <cluster-name> [flags]」です。オプション「-h, --help」を指定するとヘルプ情報が出力、クリーンアッププロセスのログが出力されます。
+summary: クラスターをスケールアウトする際、 TiUP は一部のコンポーネントのサービスを即時に停止したり、データを削除したりしません。データのスケジューリングが完了するまで待ってから、'tiup cluster prune'コマンドを手動で実行してクリーンアップする必要があります。構文は'tiup cluster prune <cluster-name> [flags]'です。オプション'-h, --help'を指定するとヘルプ情報が出力、クリーンアッププロセスのログが出力されます。
 ---
 
 # tiup cluster prune {#tiup-cluster-prune}

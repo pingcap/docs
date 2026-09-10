@@ -479,20 +479,20 @@
       - [日々のチェック](/dm/dm-daily-check.md)
     - 参照
       - アーキテクチャ
-        - [DMワーカー](/dm/dm-worker-intro.md)
+        - [DM-worker](/dm/dm-worker-intro.md)
         - [セーフモード](/dm/dm-safe-mode.md)
         - [リレーログ](/dm/relay-log.md)
         - [DDL処理](/dm/dm-ddl-compatible.md)
       - 機構
         - [DML複製メカニズム](/dm/dm-replication-logic.md)
       - コマンドライン
-        - [DMマスター＆DMワーカー](/dm/dm-command-line-flags.md)
+        - [DM-master＆DM-worker](/dm/dm-command-line-flags.md)
       - コンフィグレーションファイル
         - [概要](/dm/dm-config-overview.md)
         - [上流データベース構成](/dm/dm-source-configuration-file.md)
         - [タスク構成](/dm/task-configuration-file-full.md)
-        - [DMマスターコンフィグレーション](/dm/dm-master-configuration-file.md)
-        - [DMワーカーのコンフィグレーション](/dm/dm-worker-configuration-file.md)
+        - [DM-masterコンフィグレーション](/dm/dm-master-configuration-file.md)
+        - [DM-workerのコンフィグレーション](/dm/dm-worker-configuration-file.md)
         - [テーブルセレクター](/dm/table-selector.md)
       - [OpenAPI](/dm/dm-open-api.md)
       - [互換性カタログ](/dm/dm-compatibility-catalog.md)

@@ -1,6 +1,6 @@
 ---
 title: Deploy TiDB Dashboard
-summary: TiDB Dashboardは、v4.0以降のPDに組み込まれています。追加のデプロイメントは不要です。Kubernetes上に独立してデプロイすることも可能です。複数のPDインスタンスがデプロイされている場合、ダッシュボードとして機能するのは1つだけです。「tiup cluster display」コマンドを使用して、ダッシュボードの機能を確認してください。ダッシュボードの無効化と有効化は「tiup ctl」コマンドを使用して行うことができます。
+summary: TiDB Dashboardは、v4.0以降のPDに組み込まれています。追加のデプロイメントは不要です。Kubernetes上に独立してデプロイすることも可能です。複数のPDインスタンスがデプロイされている場合、ダッシュボードとして機能するのは1つだけです。`tiup cluster display`コマンドを使用して、ダッシュボードの機能を確認してください。ダッシュボードの無効化と有効化は`tiup ctl`コマンドを使用して行うことができます。
 ---
 
 # TiDB Dashboardをデプロイ {#deploy-tidb-dashboard}

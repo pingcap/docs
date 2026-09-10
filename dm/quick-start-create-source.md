@@ -31,7 +31,7 @@ summary: データ移行 (DM) のデータソースを作成する方法を学�
 
 2. データソースの設定ファイルを書き込む
 
-    データソースごとに、個別の設定ファイルを作成する必要があります。以下の例に従って、IDが「mysql-01」のデータソースを作成します。まず、設定ファイル`./source-mysql-01.yaml`を作成します。
+    データソースごとに、個別の設定ファイルを作成する必要があります。以下の例に従って、IDが"mysql-01"のデータソースを作成します。まず、設定ファイル`./source-mysql-01.yaml`を作成します。
 
     ```yaml
     source-id: "mysql-01"    # The ID of the data source, you can refer this source-id in the task configuration and dmctl command to associate the corresponding data source.

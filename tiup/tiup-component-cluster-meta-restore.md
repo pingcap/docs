@@ -1,6 +1,6 @@
 ---
 title: tiup cluster meta restore
-summary: TiUPメタファイルを復元するには、クラスター名とバックアップファイルのパスを指定して「tiup cluster meta restore」コマンドを使用します。復元操作は現在のメタファイルを上書きするため、ファイルが失われた場合にのみ実行してください。「-h」または「--help」オプションを指定するとヘルプ情報が出力。出力には、 tiup-clusterの実行ログが含まれます。
+summary: TiUPメタファイルを復元するには、クラスター名とバックアップファイルのパスを指定して`tiup cluster meta restore`コマンドを使用します。復元操作は現在のメタファイルを上書きするため、ファイルが失われた場合にのみ実行してください。`-h`または`--help`オプションを指定するとヘルプ情報が出力。出力には、 tiup-clusterの実行ログが含まれます。
 ---
 
 # tiup cluster meta restore {#tiup-cluster-meta-restore}

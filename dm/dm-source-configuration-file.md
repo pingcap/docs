@@ -87,8 +87,8 @@ from:
 
 #### `relay-binlog-gtid` {#relay-binlog-gtid}
 
-- DMワーカーがbinlogのプルを開始するGTIDを指定します。例： `"e9a1fc22-ec08-11e9-b2ac-0242ac110003:1-7849"` 。
-- [`enable-gtid`](#enable-gtid)が`true`の場合にのみ機能します。このパラメータが指定されていない場合、DMワーカーはレプリケーション中の最新のGTIDからプルを開始します。通常、手動設定は必要ありません。
+- DM-workerがbinlogのプルを開始するGTIDを指定します。例： `"e9a1fc22-ec08-11e9-b2ac-0242ac110003:1-7849"` 。
+- [`enable-gtid`](#enable-gtid)が`true`の場合にのみ機能します。このパラメータが指定されていない場合、DM-workerはレプリケーション中の最新のGTIDからプルを開始します。通常、手動設定は必要ありません。
 
 #### `relay-dir` {#relay-dir}
 

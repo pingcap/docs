@@ -35,12 +35,12 @@ TiDB Ansible バージョン: 4.0.0-beta.1
 ## 新機能 {#new-features}
 
 - TiDB
-    - `SLOW_QUERY / CLUSTER_SLOW_QUERY`システムテーブル の任意の時点のスローログのクエリをサポート [#14878](https://github.com/pingcap/tidb/pull/14878) [#14840](https://github.com/pingcap/tidb/pull/14840)
+    - `SLOW_QUERY / CLUSTER_SLOW_QUERY`システムテーブル の任意の時点のスローログのクエリをサポート [#14840](https://github.com/pingcap/tidb/pull/14840) [#14878](https://github.com/pingcap/tidb/pull/14878)
     - SQLパフォーマンス診断をサポート
         - [#14843](https://github.com/pingcap/tidb/pull/14843) [#14810](https://github.com/pingcap/tidb/pull/14810) [#14835](https://github.com/pingcap/tidb/pull/14835) [#14801](https://github.com/pingcap/tidb/pull/14801) [#14743](https://github.com/pingcap/tidb/pull/14743)
         - [#14718](https://github.com/pingcap/tidb/pull/14718) [#14721](https://github.com/pingcap/tidb/pull/14721) [#14670](https://github.com/pingcap/tidb/pull/14670) [#14663](https://github.com/pingcap/tidb/pull/14663) [#14668](https://github.com/pingcap/tidb/pull/14668)
         - [#14896](https://github.com/pingcap/tidb/pull/14896)
-    - `Sequence`機能をサポート [#14731](https://github.com/pingcap/tidb/pull/14731) [#14589](https://github.com/pingcap/tidb/pull/14589) [#14674](https://github.com/pingcap/tidb/pull/14674) [#14442](https://github.com/pingcap/tidb/pull/14442) [#14303](https://github.com/pingcap/tidb/pull/14303) [#14830](https://github.com/pingcap/tidb/pull/14830)
+    - `Sequence`関数をサポート [#14731](https://github.com/pingcap/tidb/pull/14731) [#14589](https://github.com/pingcap/tidb/pull/14589) [#14674](https://github.com/pingcap/tidb/pull/14674) [#14442](https://github.com/pingcap/tidb/pull/14442) [#14303](https://github.com/pingcap/tidb/pull/14303) [#14830](https://github.com/pingcap/tidb/pull/14830)
     - PDから読み取った設定項目の動的な変更または更新をサポート [#14750](https://github.com/pingcap/tidb/pull/14750) [#14303](https://github.com/pingcap/tidb/pull/14303) [#14830](https://github.com/pingcap/tidb/pull/14830)
     - 負荷分散ポリシーに従って異なるロールからデータを自動的に読み取る機能を追加し、この機能を有効にするために`leader-and-follower`システム変数を追加します[#14761](https://github.com/pingcap/tidb/pull/14761)
     - `Coercibility`関数を追加する [#14739](https://github.com/pingcap/tidb/pull/14739)

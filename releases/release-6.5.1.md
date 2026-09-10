@@ -91,7 +91,7 @@ TiDB バージョン: 6.5.1
     - 一意インデックスを追加するときに TiDB がパニックを起こす問題を修正しました [#40592](https://github.com/pingcap/tidb/issues/40592) @[tangenta](https://github.com/tangenta)
     - 同じテーブルを同時に切り捨てるときに、一部の切り捨て操作が MDL によってブロックされない問題を修正[#40484](https://github.com/pingcap/tidb/issues/40484) @[wjhuang2016](https://github.com/wjhuang2016)
     - 動的トリミングモードでパーティションテーブルにグローバルバインディングが作成された後にTiDBが再起動できない問題を修正しました [#40368](https://github.com/pingcap/tidb/issues/40368) @[Yisaer](https://github.com/Yisaer)
-    - 「カーソル読み取り」メソッドを使用してデータを読み取ると、GC のためにエラーが返される可能性がある問題を修正しました。 [#39447](https://github.com/pingcap/tidb/issues/39447) @[zyguan](https://github.com/zyguan)
+    - "cursor read"メソッドを使用してデータを読み取ると、GC のためにエラーが返される可能性がある問題を修正しました。 [#39447](https://github.com/pingcap/tidb/issues/39447) @[zyguan](https://github.com/zyguan)
     - `SHOW PROCESSLIST` の結果で`EXECUTE`情報が null になる問題を修正しました [#41156](https://github.com/pingcap/tidb/issues/41156) @[YangKeao](https://github.com/YangKeao)
     - `globalMemoryControl`クエリを強制終了しているときに、 `KILL`操作が終了しない可能性がある問題を修正しました [#41057](https://github.com/pingcap/tidb/issues/41057) @[wshwsh12](https://github.com/wshwsh12)
     - `indexMerge`エラーに遭遇した後に TiDB がpanicする可能性がある問題を修正[#41047](https://github.com/pingcap/tidb/issues/41047) [#40877](https://github.com/pingcap/tidb/issues/40877) @[guo-shaoge](https://github.com/guo-shaoge) @[windtalker](https://github.com/windtalker)
@@ -182,7 +182,7 @@ TiDB バージョン: 6.5.1
 
         - `binlog-schema delete`コマンドが実行に失敗する問題を修正 [#7373](https://github.com/pingcap/tiflow/issues/7373) @[liumengya94](https://github.com/liumengya94)
         - 最後のbinlogがスキップされたDDL の場合にチェックポイントが進まない問題を修正しました [#8175](https://github.com/pingcap/tiflow/issues/8175) @[D3Hunter](https://github.com/D3Hunter)
-        - 1つのテーブルに「更新」と「非更新」の両方の式フィルタが指定されている場合、すべての`UPDATE`文がスキップされるバグを修正しました[#7831](https://github.com/pingcap/tiflow/issues/7831) @[lance6716](https://github.com/lance6716)
+        - 1つのテーブルに"update"と"non-update"の両方の式フィルタが指定されている場合、すべての`UPDATE`文がスキップされるバグを修正しました[#7831](https://github.com/pingcap/tiflow/issues/7831) @[lance6716](https://github.com/lance6716)
 
     - TiDB Lightning
 

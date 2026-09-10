@@ -372,7 +372,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 
 | パラメータ名             | 説明                                                                                            |
 | :----------------- | :-------------------------------------------------------------------------------------------- |
-| `output_old_value` | `BOOLEAN`型。行データが変更される前の値を出力するかどうかを制御します。デフォルト値はtrueです。無効にすると、UPDATEイベントは「before」フィールドを出力しません。 |
+| `output_old_value` | `BOOLEAN`型。行データが変更される前の値を出力するかどうかを制御します。デフォルト値はtrueです。無効にすると、UPDATEイベントは"before"フィールドを出力しません。 |
 
 ### 例 {#example}
 
@@ -1060,7 +1060,7 @@ curl -X POST http://127.0.0.1:8300/api/v2/owner/resign
 | :---------- | :---------- |
 | `log_level` | 設定するログレベル。 |
 
-`log_level` 、「debug」、「info」、「warn」、「error」、「dpanic」、「panic」、「fatal」の[zapが提供するログレベル](https://godoc.org/go.uber.org/zap#UnmarshalText)サポートします。
+`log_level` 、"debug"、"info"、"warn"、"error"、"dpanic"、"panic"、"fatal"の[zapが提供するログレベル](https://godoc.org/go.uber.org/zap#UnmarshalText)をサポートします。
 
 ### 例 {#example}
 

@@ -374,9 +374,9 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
 - **TiDB Cloud Starter**
 
-    - 「TiDB Cloud Serverless」の名前を「TiDB Cloud Starter」に変更します。
+    - "TiDB Cloud Serverless"の名前を"TiDB Cloud Starter"に変更します。
 
-        オートスケーリングのエントリープランは、新規ユーザーにとっての役割をより明確にするため、「TiDB Cloud Starter」に名称が変更されました。すべての機能、料金、無料利用枠に変更はありません。
+        オートスケーリングのエントリープランは、新規ユーザーにとっての役割をより明確にするため、"TiDB Cloud Starter"に名称が変更されました。すべての機能、料金、無料利用枠に変更はありません。
 
         2025年8月12日（PDT）より、既存のServerless クラスターは[TiDB Cloudコンソール](https://tidbcloud.com)にStarterとして表示されます。接続文字列、エンドポイント、データは変更されないため、コードを変更したり、ダウンタイムをスケジュールしたりする必要はありません。
 
@@ -416,9 +416,9 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
 - **TiDB Cloud Starter**
 
-    「TiDB Cloud Serverless」の名前を「TiDB Cloud Starter」に変更します。
+    "TiDB Cloud Serverless"の名前を"TiDB Cloud Starter"に変更します。
 
-    オートスケーリングのエントリープランは、新規ユーザーにとっての役割をより明確にするため、「TiDB Cloud Starter」に名称が変更されました。すべての機能、料金、無料利用枠に変更はありません。
+    オートスケーリングのエントリープランは、新規ユーザーにとっての役割をより明確にするため、"TiDB Cloud Starter"に名称が変更されました。すべての機能、料金、無料利用枠に変更はありません。
 
     2025年8月12日（PDT）より、既存のServerless クラスターは[TiDB Cloudコンソール](https://tidbcloud.com)にStarterとして表示されます。接続文字列、エンドポイント、データは変更されないため、コードを変更したり、ダウンタイムをスケジュールしたりする必要はありません。
 

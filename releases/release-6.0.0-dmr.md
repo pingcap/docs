@@ -130,7 +130,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 - MPPエンジンの計算パフォーマンスを向上させる
 
-    - より多くの関数と演算子をMPPエンジンにプッシュダウンするサポート
+    - より多くの関数と演算子のMPPエンジンへのプッシュダウンをサポート
 
         - 論理関数`IS NOT` `IS`
         - 文字列関数: `REGEXP()` , `NOT REGEXP()`
@@ -213,7 +213,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 - 指定した時間から移行タスクを開始することをサポート
 
-    移行タスクに新しいパラメータ`--start-time`が追加されました。「2021-10-21 00:01:00」または「2021-10-21T00:01:00」の形式で時間を定義できます。
+    移行タスクに新しいパラメータ`--start-time`が追加されました。'2021-10-21 00:01:00'または'2021-10-21T00:01:00'の形式で時間を定義できます。
 
     この機能は、シャードMySQLインスタンスから増分データを移行およびマージするシナリオで特に役立ちます。具体的には、増分移行タスクで各ソースにbinlog開始ポイントを設定する必要はありません。代わりに、 `safe-mode`の`--start-time`パラメータを使用することで、増分移行タスクを迅速に作成できます。
 
@@ -330,12 +330,12 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     - ベースラインキャプチャブロックリストをユーザー名でフィルタリングする機能をサポート[#32558](https://github.com/pingcap/tidb/issues/32558)
     - ベースラインキャプチャブロックリストでのワイルドカードの使用をサポート [#32714](https://github.com/pingcap/tidb/issues/32714)
     - `ADMIN SHOW DDL JOBS`と`SHOW TABLE STATUS`ステートメントの結果を、現在の`time_zone` に応じて時間を表示することで最適化します。 [#26642](https://github.com/pingcap/tidb/issues/26642)
-    - `DAYNAME()`と`MONTHNAME()`関数をTiFlash にプッシュダウンするサポート [#32594](https://github.com/pingcap/tidb/issues/32594)
-    - `REGEXP`機能をTiFlash にプッシュダウンするサポート [#32637](https://github.com/pingcap/tidb/issues/32637)
-    - `DAYOFMONTH()`と`LAST_DAY()`関数をTiFlash にプッシュダウンするサポート [#33012](https://github.com/pingcap/tidb/issues/33012)
-    - `DAYOFWEEK()`と`DAYOFYEAR()`関数をTiFlash にプッシュダウンするサポート [#33130](https://github.com/pingcap/tidb/issues/33130)
-    - `IS_TRUE`、`IS_FALSE`、`IS_TRUE_WITH_NULL`関数をTiFlash にプッシュダウンする機能をサポート [#33047](https://github.com/pingcap/tidb/issues/33047)
-    - `GREATEST`と`LEAST`関数をTiFlash にプッシュダウンするサポート [#32787](https://github.com/pingcap/tidb/issues/32787)
+    - `DAYNAME()`と`MONTHNAME()`関数のTiFlashへのプッシュダウンをサポート [#32594](https://github.com/pingcap/tidb/issues/32594)
+    - `REGEXP`関数のTiFlashへのプッシュダウンをサポート [#32637](https://github.com/pingcap/tidb/issues/32637)
+    - `DAYOFMONTH()`と`LAST_DAY()`関数のTiFlashへのプッシュダウンをサポート [#33012](https://github.com/pingcap/tidb/issues/33012)
+    - `DAYOFWEEK()`と`DAYOFYEAR()`関数のTiFlashへのプッシュダウンをサポート [#33130](https://github.com/pingcap/tidb/issues/33130)
+    - `IS_TRUE`、`IS_FALSE`、`IS_TRUE_WITH_NULL`関数のTiFlashへのプッシュダウンをサポート [#33047](https://github.com/pingcap/tidb/issues/33047)
+    - `GREATEST`と`LEAST`関数のTiFlashへのプッシュダウンをサポート [#32787](https://github.com/pingcap/tidb/issues/32787)
     - `UnionScan`オペレーターの実行の追跡をサポート [#32631](https://github.com/pingcap/tidb/issues/32631)
     - `_tidb_rowid`列列を読み取るクエリにPointGetプランの使用をサポート [#31543](https://github.com/pingcap/tidb/issues/31543)
     - `EXPLAIN`文の出力で、名前を小文字に変換せずに元のパーティション名を表示することをサポート[#32719](https://github.com/pingcap/tidb/issues/32719)
@@ -350,13 +350,13 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 - TiKV
 
     - 多くのキー範囲を持つバッチに対するRaftstoreのサンプリング精度を向上[#12327](https://github.com/tikv/tikv/issues/12327)
-    - `debug/pprof/profile`に正しい「Content-Type」を追加して、プロファイルをより簡単に識別できるようにします[#11521](https://github.com/tikv/tikv/issues/11521)
+    - `debug/pprof/profile`に正しい"Content-Type"を追加して、プロファイルをより簡単に識別できるようにします[#11521](https://github.com/tikv/tikv/issues/11521)
     - Raftstore がハートビートを持っているときや読み取り要求を処理しているときにリーダーのリースの時間を無期限に更新し、レイテンシージッターを削減します[#11579](https://github.com/tikv/tikv/issues/11579)
     - リーダーを切り替える際にコストが最も低いストアを選択すると、パフォーマンスの安定性が向上します[#10602](https://github.com/tikv/tikv/issues/10602)
     - Raftログを非同期に取得することで、 Raftstore をブロックすることで発生するパフォーマンスジッターを軽減します。 [#11320](https://github.com/tikv/tikv/issues/11320)
     - ベクトル計算の`QUARTER`関数をサポート [#5751](https://github.com/tikv/tikv/issues/5751)
     - `BIT`データ型を TiKV にプッシュダウンする機能をサポート [#30738](https://github.com/pingcap/tidb/issues/30738)
-    - `MOD`関数と`SYSDATE`関数をTiKV にプッシュダウンするサポート [#11916](https://github.com/tikv/tikv/issues/11916)
+    - `MOD`関数と`SYSDATE`関数のTiKVへのプッシュダウンをサポート [#11916](https://github.com/tikv/tikv/issues/11916)
     - 解決ロックのステップを必要とする領域の数を減らすことで、TiCDCの回復時間を短縮します。 [#11993](https://github.com/tikv/tikv/issues/11993)
     - `raftstore.raft-max-inflight-msgs` の動的変更をサポート [#11865](https://github.com/tikv/tikv/issues/11865)
     - 動的プルーニングモードを有効にするには`EXTRA_PHYSICAL_TABLE_ID_COL_ID`をサポート [#11888](https://github.com/tikv/tikv/issues/11888)
@@ -407,7 +407,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
         - 上流のテーブルスキーマが不整合で楽観的モードの場合のタスクの開始をサポート[#3629](https://github.com/pingcap/tiflow/issues/3629) [#3708](https://github.com/pingcap/tiflow/issues/3708) [#3786](https://github.com/pingcap/tiflow/issues/3786)
         - `stopped`状態でのタスク作成をサポート [#4484](https://github.com/pingcap/tiflow/issues/4484)
-        - `/tmp`ではなく DM ワーカーの作業ディレクトリを使用して内部ファイルを書き込み、タスクが停止した後にディレクトリを消去する Syncer をサポートします[#4107](https://github.com/pingcap/tiflow/issues/4107)
+        - `/tmp`ではなく DM-workerの作業ディレクトリを使用して内部ファイルを書き込み、タスクが停止した後にディレクトリを消去する Syncer をサポートします[#4107](https://github.com/pingcap/tiflow/issues/4107)
         - 事前チェックが改善されました。重要なチェックが省略されなくなりました[#3608](https://github.com/pingcap/tiflow/issues/3608)
 
     - TiDB Lightning
@@ -531,9 +531,9 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     - TiDB Data Migration (DM)
 
         - ステータスを照会するときにのみ同期メトリックが更新される問題を修正しました [#4281](https://github.com/pingcap/tiflow/issues/4281)
-        - セーフモードでの更新ステートメントの実行エラーにより、DMワーカーがpanicになる可能性がある問題を修正しました[#4317](https://github.com/pingcap/tiflow/issues/4317)
+        - セーフモードでの更新ステートメントの実行エラーにより、DM-workerがpanicになる可能性がある問題を修正しました[#4317](https://github.com/pingcap/tiflow/issues/4317)
         - 長いvarcharsが`Column length too big`エラーを報告するバグを修正 [#4637](https://github.com/pingcap/tiflow/issues/4637)
-        - 複数の DM ワーカーが同じアップストリームからデータを書き込むことで発生する競合の問題を修正しました。 [#3737](https://github.com/pingcap/tiflow/issues/3737)
+        - 複数の DM-workerが同じアップストリームからデータを書き込むことで発生する競合の問題を修正しました。 [#3737](https://github.com/pingcap/tiflow/issues/3737)
         - ログに「チェックポイントに変更がないため、同期フラッシュチェックポイントをスキップします」というメッセージが数百件出力され、レプリケーションが非常に遅くなる問題を修正しました[#4619](https://github.com/pingcap/tiflow/issues/4619)
         - 悲観的モードでシャードをマージし、上流から増分データを複製する際のDML損失の問題を修正しました。 [#5002](https://github.com/pingcap/tiflow/issues/5002)
 

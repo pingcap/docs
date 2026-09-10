@@ -198,7 +198,7 @@ parallel-import = true
 
 - ソースファイル内の無効なデータを示すチェックサムの不一致など、データの不正確さにつながるエラーがログに記録されている場合は、次の手順を実行してこの問題を解決できます。
 
-    1. 成功したノードを含むすべてのLightningノードで[`checkpoint-error-destroy`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-destroy)コマンドを実行します。このコマンドは、失敗したテーブルからインポートされたデータを削除し、これらのテーブルのチェックポイントステータスを「未開始」にリセットします。
+    1. 成功したノードを含むすべてのLightningノードで[`checkpoint-error-destroy`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-destroy)コマンドを実行します。このコマンドは、失敗したテーブルからインポートされたデータを削除し、これらのテーブルのチェックポイントステータスを"not yet started"にリセットします。
 
     2. 正常に終了するノードを含むすべてのTiDB Lightningノードで[`filter`](/table-filter.md)パラメータを使用して、失敗したテーブルのデータを再構成してインポートします。
 

@@ -197,7 +197,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 
 - TCP4のみでのリスニングを有効または無効にします。
 - デフォルト値: `false`
-- [TCPヘッダーからの実際のクライアントIP](https://github.com/alibaba/LVS/tree/master/kernel/net/toa)が「tcp4」プロトコルで正しく解析できるため、ロードバランシングのために TiDB を LVS とともに使用する場合、このオプションを有効にすると便利です。
+- [TCPヘッダーからの実際のクライアントIP](https://github.com/alibaba/LVS/tree/master/kernel/net/toa)が"tcp4"プロトコルで正しく解析できるため、ロードバランシングのために TiDB を LVS とともに使用する場合、このオプションを有効にすると便利です。
 
 ### `enable-enum-length-limit` <span class="version-mark">v5.0で追加</span> {#enable-enum-length-limit-new-in-v50}
 
@@ -899,7 +899,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 
 - TiDBがデータを読み取ることを許可するエンジンを制御します。
 - デフォルト値: ["tikv", "tiflash", "tidb"]。これは、エンジンがオプティマイザによって自動的に選択されることを示します。
-- 値のオプション: 「tikv」、「tiflash」、「tidb」の任意の組み合わせ。例: ["tikv", "tidb"] または ["tiflash", "tidb"]
+- 値のオプション: "tikv"、"tiflash"、"tidb"の任意の組み合わせ。例: ["tikv", "tidb"] または ["tiflash", "tidb"]
 
 ## instance {#instance}
 

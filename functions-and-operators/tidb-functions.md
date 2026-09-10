@@ -59,7 +59,7 @@ summary: TiDB 固有の関数の使用法について学習します。
 
 ## 現在のリソースグループ {#current_resource_group}
 
-`CURRENT_RESOURCE_GROUP()`機能は、現在のセッションがバインドされているリソースグループ名を表示するために使用されます。[リソース管理](/tidb-resource-control-ru-groups.md)機能を有効にすると、SQL文で使用できるリソースは、バインドされているリソースグループのリソースクォータによって制限されます。
+`CURRENT_RESOURCE_GROUP()`関数は、現在のセッションがバインドされているリソースグループ名を表示するために使用されます。[リソース管理](/tidb-resource-control-ru-groups.md)機能を有効にすると、SQL文で使用できるリソースは、バインドされているリソースグループのリソースクォータによって制限されます。
 
 セッションが確立されると、TiDB はログインユーザーがデフォルトでバインドされているリソースグループにセッションをバインドします。ユーザーがどのリソースグループにもバインドされていない場合、セッションは`default`リソースグループにバインドされます。セッションが確立されると、ユーザーのバインドされているリソースグループが[ユーザーにバインドされたリソースグループを変更する](/sql-statements/sql-statement-alter-user.md#modify-basic-user-information)で変更されても、バインドされているリソースグループはデフォルトで変更されません。現在のセッションのバインドされているリソースグループを変更するには、 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)を使用します。
 

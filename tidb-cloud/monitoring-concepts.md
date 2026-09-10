@@ -32,7 +32,7 @@ TiDB Cloudのモニタリング機能は、TiDBのパフォーマンスを監視
 
 - 変更フィードアラート
 
-TiDB Cloudコンソールの「アラート」ページでは、 TiDB Cloud EssentialインスタンスまたはTiDB Cloud Dedicatedクラスタのアラートを表示したり、アラートルールを編集したり、アラート通知メールを購読したりできます。
+TiDB Cloudコンソールの**Alerts**ページでは、 TiDB Cloud EssentialインスタンスまたはTiDB Cloud Dedicatedクラスタのアラートを表示したり、アラートルールを編集したり、アラート通知メールを購読したりできます。
 
 詳細については、 [TiDB Cloudの組み込みアラート機能](/tidb-cloud/monitor-built-in-alerting.md)を参照してください。
 
