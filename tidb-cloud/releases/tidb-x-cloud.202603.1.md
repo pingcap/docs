@@ -74,6 +74,16 @@ In `TiDB-X-CLOUD.202603.1`:
 
 ## Compatibility changes
 
+### System variables
+
+| Variable name | Change type | Description |
+|--------|------------------------------|------|
+| [`tidb_paging_size_bytes`](https://docs.pingcap.com/tidbcloud/system-variables#tidb_paging_size_bytes) | Newly added | Controls the maximum size, in bytes, of a single paged response in the coprocessor protocol. The default value is `0`, which disables byte-based pagination. This variable is for internal TiDB use, and it is not recommended to modify its value. | <!-- tw:qiancai; pr: https://github.com/pingcap/docs/pull/23681/files -->
+| [`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidbcloud/system-variables#tidb_slow_log_max_per_sec) | Newly added | Controls the maximum number of slow query log entries that can be written per TiDB node per second. <ul><li>A value of `0` (the default) means there is no limit on the number of slow query log entries written per second.</li><li>A value greater than `0` means TiDB writes at most the specified number of slow query log entries per second. Any excess log entries are discarded and not written to the slow query log file.</li></ul> This variable is read-only for TiDB Cloud. | <!-- tw:qiancai; pr: https://github.com/pingcap/docs/pull/23767/files -->
+| [`tidb_slow_log_rules`](https://docs.pingcap.com/tidbcloud/system-variables#tidb_slow_log_rules) | Newly added | Defines the triggering rules for slow queries. | <!-- tw:qiancai; pr: https://github.com/pingcap/docs/pull/23767/files -->
+| [`tidb_stmt_summary_group_by_user`](https://docs.pingcap.com/tidbcloud/system-variables#tidb_stmt_summary_group_by_user) | Newly added | Controls whether to include the user who executes SQL statements as an aggregation dimension in statement summary tables. The default value is `ON` for TiDB Cloud Essential and Premium, and this variable is read-only. | <!-- tw:qiancai; pr: https://github.com/pingcap/docs/pull/23001/files -->
+| [`tidb_stmt_summary_persist_evicted`](https://docs.pingcap.com/tidbcloud/system-variables#tidb_stmt_summary_persist_evicted) | Newly added | Controls whether to write statement summary records evicted by LRU to the statement summary log after statement summary persistence is enabled. The default value is `OFF`, and this variable is read-only for TiDB Cloud Essential and Premium. | <!-- tw:qiancai; pr: https://github.com/pingcap/docs/pull/23001/files -->
+
 ### MySQL compatibility
 
 * Dumpling supports exporting data from MySQL 8.4 by adapting to the updated MySQL binary log naming. [#53082](https://github.com/pingcap/tidb/issues/53082) @[dveeden](https://github.com/dveeden) <!-- (dup): release-8.5.6.md > Compatibility changes > MySQL compatibility --> <!-- pr: https://github.com/pingcap/tidb/pull/66704 -->
