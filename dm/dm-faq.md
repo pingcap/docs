@@ -146,7 +146,7 @@ DM v2.0 以降、増分データレプリケーションを続行するために
 設定項目`block-allow-list`と`table-route`を確認します。
 
 - `block-allow-list`の下にある上流のデータベースとテーブルの名前を設定する必要があります。`do-tables`の前に"~"を追加すると、正規表現を使用して名前を一致させることができます。
-- `table-route` 、テーブル名の一致に正規表現ではなくワイルドカード文字を使用します。例えば、 `table_parttern_[0-63]` `table_parttern_0`から`table_pattern_6`までの 7つのテーブルのみに一致します。
+- `table-route`は、テーブル名の一致に正規表現ではなくワイルドカード文字を使用します。例えば、 `table_parttern_[0-63]`は、 `table_parttern_0`から`table_pattern_6`までの 7つのテーブルのみに一致します。
 
 ## DM がアップストリームからレプリケートしていないのに、 `replicate lag`モニター メトリックにデータが表示されないのはなぜですか? {#why-does-the-replicate-lag-monitor-metric-show-no-data-when-dm-is-not-replicating-from-upstream}
 
