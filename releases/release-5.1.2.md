@@ -39,7 +39,7 @@ TiDB バージョン: 5.1.2
 - TiKV
 
     - TiCDC 構成の動的な変更をサポート[#10645](https://github.com/tikv/tikv/issues/10645)
-    - ネットワーク帯域幅を節約するために、解決されたTSメッセージのサイズを縮小します[#2448](https://github.com/pingcap/tiflow/issues/2448)
+    - ネットワーク帯域幅を節約するために、Resolved TSメッセージのサイズを縮小します[#2448](https://github.com/pingcap/tiflow/issues/2448)
     - 単一のストアから報告されるハートビートメッセージ内のピア統計の数を制限する[#10621](https://github.com/tikv/tikv/pull/10621)
 
 - PD

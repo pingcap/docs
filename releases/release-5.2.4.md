@@ -106,7 +106,7 @@ TiDBバージョン：5.2.4
     - フロー制御が有効で、 `level0_slowdown_trigger`が明示的に設定されている場合にQPSが低下する問題を修正します [#11424](https://github.com/tikv/tikv/issues/11424)
     - cgroupコントローラがマウントされていない場合に発生するpanic問題を修正 [#11569](https://github.com/tikv/tikv/issues/11569)
     - 遅延しているリージョンピアでのリージョンマージによって発生する可能性のあるメタデータ破損を修正 [#11526](https://github.com/tikv/tikv/issues/11526)
-    - TiKVの動作停止後に解決済みTSのレイテンシーが増加する問題を修正 [#11351](https://github.com/tikv/tikv/issues/11351)
+    - TiKVの動作停止後にResolved TSのレイテンシーが増加する問題を修正 [#11351](https://github.com/tikv/tikv/issues/11351)
     - 極端な状況下でリージョンマージ、ConfChange、スナップショットが同時に発生した際に発生するpanic問題を修正します [#11475](https://github.com/tikv/tikv/issues/11475)
     - tikv-ctlが正しいリージョン関連情報を返せないバグを修正 [#11393](https://github.com/tikv/tikv/issues/11393)
     - 小数除算の結果がゼロの場合に負の符号が発生する問題を修正 [#29586](https://github.com/pingcap/tidb/issues/29586)

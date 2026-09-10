@@ -44,7 +44,7 @@ TiDB バージョン: 4.0.15
     - 読み取り準備と書き込み準備は別々に処理して読み取りレイテンシーを削減する[#10475](https://github.com/tikv/tikv/issues/10475)
     - TiKVコプロセッサのスローログは、リクエストの処理に費やされた時間のみを考慮します[#10841](https://github.com/tikv/tikv/issues/10841)
     - スロガースレッドが過負荷になりキューがいっぱいになったときに、スレッドをブロックする代わりにログをドロップする[#10841](https://github.com/tikv/tikv/issues/10841)
-    - ネットワーク帯域幅を節約するために、解決されたTSメッセージのサイズを縮小します[#2448](https://github.com/pingcap/tiflow/issues/2448)
+    - ネットワーク帯域幅を節約するために、Resolved TSメッセージのサイズを縮小します[#2448](https://github.com/pingcap/tiflow/issues/2448)
 
 - PD
 

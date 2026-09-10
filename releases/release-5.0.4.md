@@ -78,7 +78,7 @@ TiDB バージョン: 5.0.4
 - TiKV
 
     - 読み取り準備と書き込み準備は別々に処理して読み取りレイテンシーを削減する[#10475](https://github.com/tikv/tikv/issues/10475)
-    - ネットワーク帯域幅を節約するために、解決されたTSメッセージのサイズを縮小します[#2448](https://github.com/pingcap/tiflow/issues/2448)
+    - ネットワーク帯域幅を節約するために、Resolved TSメッセージのサイズを縮小します[#2448](https://github.com/pingcap/tiflow/issues/2448)
     - スロガースレッドが過負荷になりキューがいっぱいになったときに、スレッドをブロックする代わりにログをドロップする[#10841](https://github.com/tikv/tikv/issues/10841)
     - TiKVコプロセッサのスローログに、リクエスト処理に費やされた時間のみを考慮するようにする [#10841](https://github.com/tikv/tikv/issues/10841)
     - 未確定エラーの可能性を減らすために、できるだけべき等な事前書き込みを行う[#10587](https://github.com/tikv/tikv/pull/10587)

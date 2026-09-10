@@ -168,7 +168,7 @@ TiDB バージョン: 7.5.1
     - 破損したSSTファイルが他のTiKVノードに広がる可能性がある問題を修正 [#15986](https://github.com/tikv/tikv/issues/15986) @[Connor1996](https://github.com/Connor1996)
     - TiKV の実行速度が非常に遅い場合、リージョンと[金星の上](https://github.com/overvenus)マージ後にpanicする可能性がある問題を修正しました。 [#16111](https://github.com/tikv/tikv/issues/16111)
     - にスケールアウトするときに DR 自動同期のジョイント状態がタイムアウトする可能性がある問題を修正しました [#15817](https://github.com/tikv/tikv/issues/15817) @[Connor1996](https://github.com/Connor1996)
-    - 解決済みのTSが2時間ブロックされる可能性がある問題を修正[#11847](https://github.com/tikv/tikv/issues/11847) [#15520](https://github.com/tikv/tikv/issues/15520) [#39130](https://github.com/pingcap/tidb/issues/39130) @[overvenus](https://github.com/overvenus)
+    - Resolved TSが2時間ブロックされる可能性がある問題を修正[#11847](https://github.com/tikv/tikv/issues/11847) [#15520](https://github.com/tikv/tikv/issues/15520) [#39130](https://github.com/pingcap/tidb/issues/39130) @[overvenus](https://github.com/overvenus)
     - `cast_duration_as_time`誤った結果を返す可能性がある問題を修正[#16211](https://github.com/tikv/tikv/issues/16211) @[gengliqi](https://github.com/gengliqi)
     - コーナーケース（ディスクI/O操作がブロックされている場合など）でTiKVがハングし、可用性に影響する問題を修正しました。 [#16368](https://github.com/tikv/tikv/issues/16368) @[LykxSassinator](https://github.com/LykxSassinator)
 
