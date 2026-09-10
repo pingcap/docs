@@ -97,7 +97,7 @@ MySQL [test]> select @@last_plan_from_cache;
 1 row in set (0.00 sec)
 ```
 
-実行プランキャッシュが原因で、特定の`Prepare` / `Execute`のセットで予期しない動作が発生する場合は、SQLヒント`ignore_plan_cache()`を使用して、現在のステートメントの実行プランキャッシュの使用をスキップできます。ただし、前述のステートメントを例として挙げます。
+実行プランキャッシュが原因で、特定の`Prepare` / `Execute`のセットで予期しない動作が発生する場合は、SQLヒント`ignore_plan_cache()`を使用して、現在のステートメントの実行プランキャッシュの使用をスキップできます。ここでも、前述のステートメントを例として挙げます。
 
 ```sql
 MySQL [test]> prepare stmt from 'select /*+ ignore_plan_cache() */ * from t where a = ?';
