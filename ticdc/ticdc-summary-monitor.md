@@ -99,7 +99,7 @@ v7.0.0以降、 TiUPを使用してGrafanaをデプロイすると、TiCDCサマ
 
 ![TiCDC Summary Dashboard - Transaction Sink metrics](/media/ticdc/ticdc-summary-monitor-redo.png)
 
-- **Redo Write rows/s**: Redo モジュールによって1秒あたりに書き込まれる行数。Redo 機能が有効になっている場合、レプリケーションタスクのレイテンシーが増加すると、このメトリックと Puller 出力イベント数/秒の値に大きな差があるかどうかを確認できます。差がある場合、レイテンシーの増加は Redo モジュールの書き込み容量不足が原因である可能性があります。
+- **Redo Write rows/s**: Redo モジュールによって1秒あたりに書き込まれる行数。Redo 機能が有効になっている場合、レプリケーションタスクのレイテンシーが増加すると、このメトリックと**Puller output events/s**の値に大きな差があるかどうかを確認できます。差がある場合、レイテンシーの増加は Redo モジュールの書き込み能力不足が原因である可能性があります。
 - **Redo Write byte/s**: Redo モジュールによって 1秒あたりにデータが書き込まれる速度。
 - **Redo flush log duration**：Redoモジュールがデータを下流にフラッシュするのにかかる時間。このメトリック値が高い場合、この操作はレプリケーション速度に影響を与える可能性があります。
 - **Redo flushall duration**: データの変更が Redo モジュールに留まる合計時間。
