@@ -84,7 +84,7 @@ TiDB バージョン: 5.0.0
 
 ### SQL {#sql}
 
-#### List パーティショニング（**Experimental**） {#list-partitioning-experimental}
+#### リストパーティショニング（**Experimental**） {#list-partitioning-experimental}
 
 [ユーザー向けドキュメント](/partitioned-table.md#list-partitioning)
 
@@ -94,13 +94,13 @@ TiDB バージョン: 5.0.0
 
 リストパーティショニングを有効にするには、セッション変数[`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50) `ON`に設定します。
 
-#### List COLUMNS パーティショニング（**Experimental**） {#list-columns-partitioning-experimental}
+#### リスト列パーティショニング（**Experimental**） {#list-columns-partitioning-experimental}
 
 [ユーザー向けドキュメント](/partitioned-table.md#list-columns-partitioning)
 
-List COLUMNS パーティショニングは、リストパーティショニングの一種です。複数の列をパーティションキーとして使用できます。整数データ型の他に、文字列、 `DATE` 、および`DATETIME`データ型の列もパーティション列として使用できます。
+リスト列パーティショニングは、リストパーティショニングの一種です。複数の列をパーティションキーとして使用できます。整数データ型の他に、文字列、 `DATE` 、および`DATETIME`データ型の列もパーティション列として使用できます。
 
-List COLUMNS パーティショニングを有効にするには、セッション変数[`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50) `ON`に設定します。
+リスト列パーティショニングを有効にするには、セッション変数[`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50) `ON`に設定します。
 
 #### 不可視インデックス {#invisible-indexes}
 

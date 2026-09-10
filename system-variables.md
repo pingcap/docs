@@ -2434,7 +2434,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - 型: Boolean
 - デフォルト値: `ON`
 - この変数は`LIST (COLUMNS) TABLE PARTITION`機能を有効にするかどうかを設定するために使用されます。
-- この変数はv8.4.0以降非推奨です。その値はデフォルト値`ON`に固定されます。つまり、 [List パーティショニング](/partitioned-table.md#list-partitioning)はデフォルトで有効になります。
+- この変数はv8.4.0以降非推奨です。その値はデフォルト値`ON`に固定されます。つまり、 [リストパーティショニング](/partitioned-table.md#list-partitioning)はデフォルトで有効になります。
 
 ### tidb_enable_local_txn
 
