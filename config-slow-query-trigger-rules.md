@@ -19,7 +19,7 @@ For TiDB Self-Managed, the triggering behavior of slow query logs depends on the
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-In the [TiDB Cloud console](/tidb-cloud/index.md), you can view slow queries on the [**Slow Query**](/tidb-cloud/tune-performance.md#slow-query) tab of the [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) page.
+In the [TiDB Cloud console](https://tidbcloud.com/), you can view slow queries on the [**Slow Query**](/tidb-cloud/tune-performance.md#slow-query) tab of the [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) page.
 
 By default, SQL queries that take more than 300 milliseconds are considered as slow queries. To configure the trigger rules for slow queries, you can modify the [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules) system variable.
 
