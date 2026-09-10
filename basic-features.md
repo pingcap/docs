@@ -194,9 +194,9 @@ summary: TiDBの機能概要について学びましょう。
 | [`EXCHANGE PARTITION`](/partitioned-table.md)                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |  E  |
 | [`REORGANIZE PARTITION`](/partitioned-table.md#reorganize-partitions)                                        |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
 | [`COALESCE PARTITION`](/partitioned-table.md#decrease-the-number-of-partitions)                              |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
-| [動的剪定](/partitioned-table.md#dynamic-pruning-mode)                                                           |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |
-| [レンジ列パーティショニング](/partitioned-table.md#range-columns-partitioning)                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |  N  |
-| [レンジ INTERVAL 分割](/partitioned-table.md#range-interval-partitioning)                                          |  Y  |  Y  |  Y  |  Y  |  E  |  N  |  N  |
+| [動的プルーニング](/partitioned-table.md#dynamic-pruning-mode)                                                           |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |
+| [レンジCOLUMNSパーティショニング](/partitioned-table.md#range-columns-partitioning)                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |  N  |
+| [レンジ INTERVAL パーティショニング](/partitioned-table.md#range-interval-partitioning)                                          |  Y  |  Y  |  Y  |  Y  |  E  |  N  |  N  |
 | [パーティションテーブルを非パーティションテーブルに変換する](/partitioned-table.md#convert-a-partitioned-table-to-a-non-partitioned-table) |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |
 | [既存のテーブルをパーティション分割する](/partitioned-table.md#partition-an-existing-table)                                     |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |
 | [グローバルインデックス](/global-indexes.md)                                                                            |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |
@@ -214,7 +214,7 @@ summary: TiDBの機能概要について学びましょう。
 | [拡張統計](/extended-statistics.md)                                                           | E                | E                | E                | E                | E                | E                | E                |
 | 統計フィードバック                                                                                 | N                | N                | N                | N                | N                | 非推奨              | 非推奨              |
 | [統計情報を自動的に更新する](/statistics.md#automatic-update)                                          | Y                | Y                | Y                | Y                | Y                | Y                | Y                |
-| [動的剪定](/partitioned-table.md#dynamic-pruning-mode)                                        | Y                | Y                | Y                | Y                | Y                | Y                | E                |
+| [動的プルーニング](/partitioned-table.md#dynamic-pruning-mode)                                        | Y                | Y                | Y                | Y                | Y                | Y                | E                |
 | [`PREDICATE COLUMNS`の統計情報を収集する](/statistics.md#collect-statistics-on-some-columns)        | Y                | E                | E                | E                | E                | E                | E                |
 | [統計情報を収集するためのメモリ割り当て量を制御する](/statistics.md#the-memory-quota-for-collecting-statistics)    | E                | E                | E                | E                | E                | E                | N                |
 | [約10000行のデータをランダムにサンプリングして、統計情報を素早く構築します](/system-variables.md#tidb_enable_fast_analyze) | 非推奨              | 非推奨              | 非推奨              | E                | E                | E                | E                |

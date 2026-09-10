@@ -295,7 +295,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
 - 今後のリリースでは [実行プランバインディングの自動進化](/sql-plan-management.md#baseline-evolution)が再設計される予定であり、関連する変数と動作が変更されます。
 - バージョン8.0.0では、TiDBが並列ハッシュアグリゲーションアルゴリズムのディスクスピルをサポートするかどうかを制御するシステム変数[`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800)が導入されました。今後のバージョンでは、 [`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800)システム変数は非推奨となります。
 - TiDB Lightning のパラメータ[`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) 、今後のリリースで非推奨となり、その後削除されます。このパラメータは[`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)に置き換えられます。これは、競合するレコードの最大数が、単一のインポートタスクで許容できる競合レコードの最大数と一致することを意味します。
-- バージョン6.3.0以降、パーティションテーブルはデフォルトで [動的剪定モード](/partitioned-table.md#dynamic-pruning-mode)を使用します。静的剪定モードと比較して、動的剪定モードはIndexJoinやプランキャッシュなどの機能をサポートし、パフォーマンスが向上しています。そのため、静的剪定モードは非推奨となります。
+- バージョン6.3.0以降、パーティションテーブルはデフォルトで [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)を使用します。静的プルーニングモードと比較して、動的プルーニングモードはIndexJoinやプランキャッシュなどの機能をサポートし、パフォーマンスが向上しています。そのため、静的プルーニングモードは非推奨となります。
 
 ## 改善点 {#improvements}
 
