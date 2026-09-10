@@ -152,7 +152,7 @@ An eligible index must meet the following requirements:
 - Its first column is the TTL column, and each index column indexes the full column value. Prefix indexes and expression indexes are not supported.
 - In a unique composite index, all columns except the TTL column are `NOT NULL`.
 - A non-unique index includes either all primary key columns or none of them.
-- The columns used to identify a row do not use the `SET`, `FLOAT`, or `DOUBLE` data type.
+- Index columns cannot use the `SET`, `FLOAT`, or `DOUBLE` data type. For a non-unique index that does not include primary key columns, the primary key columns cannot use these data types either.
 
 To disable the execution of TTL jobs, in addition to setting the `TTL_ENABLE='OFF'` table option, you can also disable the execution of TTL jobs in the entire cluster by setting the [`tidb_ttl_job_enable`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) global variable:
 
