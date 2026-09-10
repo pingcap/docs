@@ -284,7 +284,7 @@ TTL=`expire_time` + INTERVAL 0 DAY TTL_ENABLE='ON'
 TTL_JOB_INTERVAL='10m';
 ```
 
-次の例は、Range INTERVAL パーティション化を使用するパーティションテーブルを示しています。
+次の例は、レンジ INTERVAL パーティショニングを使用するパーティションテーブルを示しています。
 
 ```sql
 CREATE TABLE `ad_cache` (
