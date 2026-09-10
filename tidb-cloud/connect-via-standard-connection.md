@@ -3,13 +3,13 @@ title: Connect to TiDB Cloud Dedicated via Public Connection
 summary: パブリック接続を使用してTiDB Cloudクラスターに接続する方法を学びましょう。
 ---
 
-# パブリック接続経由​​でTiDB Cloud Dedicatedに接続します {#connect-to-tidb-cloud-dedicated-via-public-connection}
+# パブリック接続経由でTiDB Cloud Dedicatedに接続します {#connect-to-tidb-cloud-dedicated-via-public-connection}
 
 このドキュメントでは、パブリック接続を介してTiDB Cloud Dedicatedクラスターに接続する方法について説明します。パブリック接続では、トラフィックフィルタを備えたパブリックエンドポイントが公開されるため、ラップトップから SQL クライアントを使用してTiDB Cloud Dedicatedクラスターに接続できます。
 
 > **Tip:**
 >
-> パブリック接続経由​​でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、 [パブリックエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/connect-via-standard-connection-serverless.md)を参照してください。
+> パブリック接続経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、 [パブリックエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/connect-via-standard-connection-serverless.md)を参照してください。
 
 ## 前提条件：IPアクセスリストの設定 {#prerequisite-configure-ip-access-list}
 

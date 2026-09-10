@@ -7,15 +7,15 @@ summary: TiDB のデプロイメントに関連する FAQ について説明し�
 
 このドキュメントでは、TiDB のデプロイメントに関連する FAQ をまとめています。
 
-## ソフトウェアとハ​​ードウェアの要件 {#software-and-hardware-requirements}
+## ソフトウェアとハードウェアの要件 {#software-and-hardware-requirements}
 
 ### TiDB はどのオペレーティングシステムをサポートしていますか? {#what-operating-systems-does-tidb-support}
 
-TiDB がサポートするオペレーティングシステムについては、 [ソフトウェアとハ​​ードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
+TiDB がサポートするオペレーティングシステムについては、 [ソフトウェアとハードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
 
 ### 開発、テスト、または本番環境における TiDB クラスターの推奨ハードウェア構成は何ですか? {#what-is-the-recommended-hardware-configuration-for-a-tidb-cluster-in-the-development-test-or-production-environment}
 
-TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェアサーバープラットフォーム、またはARMアーキテクチャのハードウェアサーバープラットフォームに導入および実行できます。開発環境、テスト環境、および本番環境におけるサーバーハードウェア構成の要件と推奨事項については、 [ソフトウェアとハ​​ードウェアの推奨事項 - サーバー要件](/hardware-and-software-requirements.md#server-requirements)を参照してください。
+TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェアサーバープラットフォーム、またはARMアーキテクチャのハードウェアサーバープラットフォームに導入および実行できます。開発環境、テスト環境、および本番環境におけるサーバーハードウェア構成の要件と推奨事項については、 [ソフトウェアとハードウェアの推奨事項 - サーバー要件](/hardware-and-software-requirements.md#server-requirements)を参照してください。
 
 ### 10 ギガビットのネットワークカード 2枚の目的は何ですか? {#whats-the-purposes-of-2-network-cards-of-10-gigabit}
 
@@ -28,10 +28,10 @@ TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェ�
 ### TiDB コンポーネントの推奨構成は何ですか? {#whats-the-recommended-configuration-of-tidb-components}
 
 - TiDB は CPU とメモリに対して高い要件があります。
-- PDはクラスタのメタデータを保存し、頻繁に読み取りおよび書き込みリクエストが発生します。そのため、高いI/Oディスクを必要とします。ディスクパフォ​​ーマンスが低いと、クラスタ全体のパフォーマンスに影響します。SSDディスクの使用をお勧めします。また、リージョン数が多いほど、CPUとメモリの要件が高くなります。
+- PDはクラスタのメタデータを保存し、頻繁に読み取りおよび書き込みリクエストが発生します。そのため、高いI/Oディスクを必要とします。ディスクパフォーマンスが低いと、クラスタ全体のパフォーマンスに影響します。SSDディスクの使用をお勧めします。また、リージョン数が多いほど、CPUとメモリの要件が高くなります。
 - TiKVはCPU、メモリ、ディスクに対する要件が厳しく、SSDの使用が必須です。
 
-詳細は[ソフトウェアとハ​​ードウェアの推奨事項](/hardware-and-software-requirements.md)参照。
+詳細は[ソフトウェアとハードウェアの推奨事項](/hardware-and-software-requirements.md)参照。
 
 ## インストールとデプロイ {#installation-and-deployment}
 

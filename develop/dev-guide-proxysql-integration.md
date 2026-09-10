@@ -635,7 +635,7 @@ MySQL クライアントをダウンロードしてインストールします�
 
 ProxySQLは様々なプラットフォームにインストールできます。以下ではCentOSを例として説明します。
 
-サポートされているプラ​​ットフォームと対応するバージョン要件の完全なリストについては、 [ProxySQLのドキュメント](https://proxysql.com/documentation/installing-proxysql/)を参照してください。
+サポートされているプラットフォームと対応するバージョン要件の完全なリストについては、 [ProxySQLのドキュメント](https://proxysql.com/documentation/installing-proxysql/)を参照してください。
 
 #### ステップ1. TiDB Cloud Dedicatedクラスタを作成する {#step-1-create-a-tidb-cloud-dedicated-cluster}
 
@@ -667,7 +667,7 @@ ProxySQLは様々なプラットフォームにインストールできます。
     systemctl start proxysql
     ```
 
-ProxySQL のサポートされているプラ​​ットフォームとそのインストールの詳細については、 [ProxySQL README](https://github.com/sysown/proxysql#installation)または[ProxySQLのインストール手順書](https://proxysql.com/documentation/installing-proxysql/)を参照してください。
+ProxySQL のサポートされているプラットフォームとそのインストールの詳細については、 [ProxySQL README](https://github.com/sysown/proxysql#installation)または[ProxySQLのインストール手順書](https://proxysql.com/documentation/installing-proxysql/)を参照してください。
 
 #### ステップ3. ProxySQLの設定 {#step-3-configure-proxysql}
 

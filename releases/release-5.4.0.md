@@ -65,7 +65,7 @@ TiDB バージョン: 5.4.0
 
 - TiDBとPDの間にインターフェースが追加されました。 `information_schema.TIDB_HOT_REGIONS_HISTORY`システムテーブルを使用する場合、TiDBは対応するバージョンのPDを使用する必要があります。
 - TiDB サーバー、PD サーバー、および TiKV サーバーは、ログ名、出力形式、ローテーションと有効期限のルールを管理するために、ログ関連パラメーターに統一された命名方法を使用し始めます。詳しくは[TiKV設定ファイル - ログ](/tikv-configuration-file.md#log-new-in-v540)をご覧ください。
-- バージョン5.4.0以降、プランキャッシュによってキャッシュされた実行計画に対してSQLバインディングを作成すると、対応するクエリに対して既にキャッシュされているプラ​​ンが無効化されます。この新しいバインディングは、バージョン5.4.0より前にキャッシュされた実行計画には影響しません。
+- バージョン5.4.0以降、プランキャッシュによってキャッシュされた実行計画に対してSQLバインディングを作成すると、対応するクエリに対して既にキャッシュされているプランが無効化されます。この新しいバインディングは、バージョン5.4.0より前にキャッシュされた実行計画には影響しません。
 - v5.3 以前のバージョンでは、 [TiDB Data Migration (DM)](https://docs.pingcap.com/tidb-data-migration/v5.3/)ドキュメントは TiDB ドキュメントから独立しています。 v5.4 以降、DM ドキュメントは同じバージョンの TiDB ドキュメントに統合されています。 DM ドキュメント サイトにアクセスせずに、 [DMドキュメント](/dm/dm-overview.md)を直接読むことができます。
 - ポイントインタイムリカバリ（PITR）の実験的機能をcdclogとともに削除しました。バージョン5.4.0以降、cdclogベースのPITRおよびcdclogはサポートされなくなりました。
 - システム変数を"DEFAULT"に設定する動作をMySQLとの互換性を高める [#29680](https://github.com/pingcap/tidb/pull/29680)
@@ -404,7 +404,7 @@ TiDB バージョン: 5.4.0
         - `mq sink write row`に監視データがない問題を修正 [#3431](https://github.com/pingcap/tiflow/issues/3431)
         - `sql mode`の互換性の問題を修正しました [#3810](https://github.com/pingcap/tiflow/issues/3810)
         - レプリケーションタスクが削除された際に発生する可能性のあるpanic問題を修正 [#3128](https://github.com/pingcap/tiflow/issues/3128)
-        - デフォルト列値を出力する際に​​発生するpanicとデータ不整合の問題を修正しました [#3929](https://github.com/pingcap/tiflow/issues/3929)
+        - デフォルト列値を出力する際に発生するpanicとデータ不整合の問題を修正しました [#3929](https://github.com/pingcap/tiflow/issues/3929)
         - デフォルト値が複製できない問題を修正 [#3793](https://github.com/pingcap/tiflow/issues/3793)
         - デッドロックによってレプリケーションタスクが停止する可能性のある問題を修正します [#4055](https://github.com/pingcap/tiflow/issues/4055)
         - ディスクへの書き込みが完了した際にログが出力されない問題を修正 [#3362](https://github.com/pingcap/tiflow/issues/3362)

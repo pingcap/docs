@@ -47,4 +47,4 @@ Prometheusとの連携を移行するには、以下の手順を実行してく�
 
 ## サポートにお問い合わせください {#contact-support}
 
-サポートが必要な場合は、 TiDB Cloudサポートまでお問い合わせください。<a href="mailto:support@pingcap.com"></a> [support@pi​​ngcap.com](mailto:support@pingcap.com)でお問い合わせいただくか、テクニカルアカウントマネージャー（TAM）までご連絡ください。
+サポートが必要な場合は、 TiDB Cloudサポートまでお問い合わせください。<a href="mailto:support@pingcap.com"></a> [support@pingcap.com](mailto:support@pingcap.com)でお問い合わせいただくか、テクニカルアカウントマネージャー（TAM）までご連絡ください。

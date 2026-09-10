@@ -116,7 +116,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 **一般的な変更**
 
-- Amazon Aurora MySQL、Amazon Relational Database Service (RDS) MySQL、またはセルフホスト型 MySQL 互換データベースからTiDB Cloud online (ベータ版) への​​データの直接移行をサポートします。
+- Amazon Aurora MySQL、Amazon Relational Database Service (RDS) MySQL、またはセルフホスト型 MySQL 互換データベースからTiDB Cloud online (ベータ版) へのデータの直接移行をサポートします。
 
     これまでは、業務を一時停止してオフラインでデータをインポートするか、サードパーティ製のツールを使用してTiDB Cloudにデータを移行する必要があり、これは煩雑でした。しかし、**データ移行**機能を使用すると、 TiDB Cloudコンソールで操作するだけで、最小限のダウンタイムで安全にデータをTiDB Cloudに移行できます。
 

@@ -68,7 +68,7 @@ airbyte-server      | --------------------------------------
 
 ![TiDB source configuration](/media/tidb-cloud/integration-airbyte-parameters.jpg)
 
-TiDBからSnowflakeへの転送や、CSVファイルからTiDBへの転送など、ソースと宛先を自由に組み合わせて使用​​できます。
+TiDBからSnowflakeへの転送や、CSVファイルからTiDBへの転送など、ソースと宛先を自由に組み合わせて使用できます。
 
 TiDB コネクタの詳細については、 [TiDBソース](https://docs.airbyte.com/integrations/sources/tidb)と[TiDB宛先](https://docs.airbyte.com/integrations/destinations/tidb)を参照してください。
 

@@ -57,7 +57,7 @@ TiDB バージョン: 7.5.1
 - TiFlash
 
     - RU値をより安定させるために[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)計算方法を改善する[#8391](https://github.com/pingcap/tiflash/issues/8391) @[guo-shaoge](https://github.com/guo-shaoge)
-    - ディスクパフォ​​ーマンスジッターによる読み取りレイテンシーへの影響を軽減[#8583](https://github.com/pingcap/tiflash/issues/8583) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - ディスクパフォーマンスジッターによる読み取りレイテンシーへの影響を軽減[#8583](https://github.com/pingcap/tiflash/issues/8583) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - バックグラウンド GC タスクによる読み取りおよび書き込みタスクのレイテンシーへの影響を軽減します[#8650](https://github.com/pingcap/tiflash/issues/8650) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 - ツール

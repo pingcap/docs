@@ -34,7 +34,7 @@ TiDBバージョン: 7.1.4
 - TiFlash
 
     - バックグラウンド GC タスクによる読み取りおよび書き込みタスクのレイテンシーへの影響を軽減します[#8650](https://github.com/pingcap/tiflash/issues/8650) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - ディスクパフォ​​ーマンスジッターによる読み取りレイテンシーへの影響を軽減[#8583](https://github.com/pingcap/tiflash/issues/8583) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - ディスクパフォーマンスジッターによる読み取りレイテンシーへの影響を軽減[#8583](https://github.com/pingcap/tiflash/issues/8583) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 - ツール
 

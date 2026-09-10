@@ -9,7 +9,7 @@ summary: サポートチケットのLarkインタラクションに関する詳�
 
 > **Note:**
 >
-> Larkのチケットサポート機能はリクエストに応じてご利用いただけます。この機能をご利用になりたい場合は、 TiDB Cloudサポート（ <a href="mailto:support@pingcap.com">[support@pi​​ngcap.com](mailto:support@pingcap.com)</a>までご連絡いただくか、担当のテクニカルアカウントマネージャー（TAM）までご連絡ください。
+> Larkのチケットサポート機能はリクエストに応じてご利用いただけます。この機能をご利用になりたい場合は、 TiDB Cloudサポート（ <a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>までご連絡いただくか、担当のテクニカルアカウントマネージャー（TAM）までご連絡ください。
 
 ## サポートチケットでやり取りする {#interact-with-support-tickets}
 
@@ -33,4 +33,4 @@ Lark の**PingCAP Support Group**に[サポートチケットを作成する](/t
 
 ## サポートにお問い合わせください {#contact-support}
 
-ヘルプや質問がある場合は、サポートチーム<a href="mailto:support@pingcap.com">[support@pi​​ngcap.com](mailto:support@pingcap.com)</a>にお問い合わせください。
+ヘルプや質問がある場合は、サポートチーム<a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>にお問い合わせください。

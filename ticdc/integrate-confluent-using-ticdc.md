@@ -156,7 +156,7 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
 
     ![Confluent topics](/media/integrate/confluent-topics.png)
 
-    Confluent Cloud コンソールで、 **Topics**をクリックします。対象のトピックが作成され、データを受信して​​いることがわかります。この時点で、TiDB データベースの増分データが Confluent Cloud に正常に複製されています。
+    Confluent Cloud コンソールで、 **Topics**をクリックします。対象のトピックが作成され、データを受信していることがわかります。この時点で、TiDB データベースの増分データが Confluent Cloud に正常に複製されています。
 
 ## Snowflakeとデータを統合する {#integrate-data-with-snowflake}
 

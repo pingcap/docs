@@ -422,4 +422,4 @@ TiDBに切り替えるには、以下の手順を実行する必要がありま�
 
 ## データの検証 {#validate-data}
 
-[sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用して、MariaDB と TiDB のデータが同一で​​あるかどうかを検証できます。
+[sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用して、MariaDB と TiDB のデータが同一であるかどうかを検証できます。

@@ -94,7 +94,7 @@ TiDB Cloud CLI を使用してプライベートリンク接続を作成する�
 
 TiDB Cloudコンソールを使用して、Amazon MSK プロビジョニングされたプライベートリンク接続を作成できます。
 
-Amazon MSK プロビジョニングプライベートリンク接続を作成する前に、Amazon MSK プロビジョニングクラスターでマルチVPC接続が有効になっていることを確認してください。詳細については、 [プライベートリンク接続経由​​でプロビジョニングされた Amazon MSK に接続する](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)を参照してください。
+Amazon MSK プロビジョニングプライベートリンク接続を作成する前に、Amazon MSK プロビジョニングクラスターでマルチVPC接続が有効になっていることを確認してください。詳細については、 [プライベートリンク接続経由でプロビジョニングされた Amazon MSK に接続する](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)を参照してください。
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
@@ -324,8 +324,8 @@ ticloud serverless private-link-connection delete -c <cluster-id> --private-link
 ## 参照 {#see-also}
 
 - [プライベートリンク接続を介してConfluent Cloudに接続する](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
-- [プライベートリンク接続経由​​で Amazon RDS に接続する](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md)
-- [プライベートリンク接続経由​​でプロビジョニングされた Amazon MSK に接続する](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)
+- [プライベートリンク接続経由で Amazon RDS に接続する](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md)
+- [プライベートリンク接続経由でプロビジョニングされた Amazon MSK に接続する](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)
 - [プライベートリンク接続を介して Alibaba Cloud ApsaraDB RDS for MySQL に接続する](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md)
 - [プライベートリンク接続を介して AWS セルフホスト Kafka に接続する](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
 - [プライベートリンク接続を介して Alibaba Cloud Self-Hosted Kafka に接続する](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)

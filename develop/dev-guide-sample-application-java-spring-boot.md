@@ -8,7 +8,7 @@ aliases: ['/ja/tidbcloud/dev-guide-sample-application-spring-boot','/ja/tidb/dev
 
 [Spring](https://spring.io/)は Java用の人気のあるオープンソースコンテナフレームワークです。TiDBはMySQL互換データベースで、このドキュメントでは Spring の使用方法として[Spring Boot](https://spring.io/projects/spring-boot)を使用します。
 
-このチュートリアルでは、TiDBを[Spring Data JPA](https://spring.io/projects/spring-data-jpa)およびJPAプロバイダとしての[Hibernate](https://hibernate.org/orm/)と組み合わせて使用​​し、以下のタスクを実行する方法を学びます。
+このチュートリアルでは、TiDBを[Spring Data JPA](https://spring.io/projects/spring-data-jpa)およびJPAプロバイダとしての[Hibernate](https://hibernate.org/orm/)と組み合わせて使用し、以下のタスクを実行する方法を学びます。
 
 - 環境をセットアップしてください。
 - HibernateとSpring Data JPAを使用してTiDBに接続します。
@@ -82,7 +82,7 @@ cd tidb-java-springboot-jpa-quickstart
     cp env.sh.example env.sh
     ```
 
-6. 対応する接続​​文字列`env.sh`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+6. 対応する接続文字列`env.sh`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
@@ -127,7 +127,7 @@ cd tidb-java-springboot-jpa-quickstart
     cp env.sh.example env.sh
     ```
 
-8. 対応する接続​​文字列`env.sh`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+8. 対応する接続文字列`env.sh`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -161,7 +161,7 @@ cd tidb-java-springboot-jpa-quickstart
     cp env.sh.example env.sh
     ```
 
-5. 対応する接続​​文字列`env.sh`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+5. 対応する接続文字列`env.sh`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -185,7 +185,7 @@ cd tidb-java-springboot-jpa-quickstart
     cp env.sh.example env.sh
     ```
 
-2. 対応する接続​​文字列`env.sh`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+2. 対応する接続文字列`env.sh`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'

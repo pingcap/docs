@@ -15,7 +15,7 @@ TiDB は、MySQL 8.0 で利用可能な[JSONスキーマ検証関数](https://de
 
 `JSON_SCHEMA_VALID(schema, json_doc)`関数は、JSON ドキュメントをスキーマに対して検証し、データの整合性と一貫性を確保します。
 
-これは[チェック](/constraints.md#check)制約と組み合わせて使用​​することで、テーブルが変更されたときにスキーマの自動検証を行うことができます。
+これは[チェック](/constraints.md#check)制約と組み合わせて使用することで、テーブルが変更されたときにスキーマの自動検証を行うことができます。
 
 この関数は[JSONスキーマ仕様](https://json-schema.org/specification)に準拠しています。
 
@@ -43,7 +43,7 @@ TiDB は、MySQL 8.0 で利用可能な[JSONスキーマ検証関数](https://de
 | `minItems`             | `array`              | 配列内の項目数が指定された値以上であるかどうかをテストします。               |
 | `uniqueItems`          | `array`              | 配列内の項目が一意であるかどうかをテストします。 `true` / `false`     |
 | `contains`             | `array`              | 配列に含まれる項目のスキーマを設定します。                         |
-| `maxContains`          | `array`              | `contains`と組み合わせて使用​​し、アイテムが存在できる最大回数をテストします。 |
+| `maxContains`          | `array`              | `contains`と組み合わせて使用し、アイテムが存在できる最大回数をテストします。 |
 | `minContains`          | `array`              | `contains`と併用して、アイテムが存在できる最小回数をテストします。        |
 | `properties`           | `object`             | オブジェクトのプロパティに適用するスキーマ                         |
 | `patternProperties`    | `object`             | プロパティ名のパターンマッチングに基づいて特定のプロパティに適用するスキーマ        |

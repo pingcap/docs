@@ -57,7 +57,7 @@ TiDBバージョン：8.5.2
     - `information_schema`のパフォーマンスと安定性が特定のシナリオで影響を受ける問題を修正しました[#58142](https://github.com/pingcap/tidb/issues/58142) [#58363](https://github.com/pingcap/tidb/issues/58363) [#58712](https://github.com/pingcap/tidb/issues/58712) @[tiancaiamao](https://github.com/tiancaiamao)
     - 分散実行フレームワーク（DXF）が有効になっている場合、内部TiDBセッションで`tidb_txn_entry_size_limit`を動的に調整できない問題を修正します [#59506](https://github.com/pingcap/tidb/issues/59506) @[D3Hunter](https://github.com/D3Hunter)
     - `IMPORT INTO`機能がグローバルソートが有効になっている場合に一意キーの競合を適切に処理できない問題を修正します [#59650](https://github.com/pingcap/tidb/issues/59650) @[lance6716](https://github.com/lance6716)
-    - グローバルソートデ​​ータパスにネットワークレイテンシーエラーを注入すると、 `IMPORT INTO`操作が失敗する問題を修正 [#50451](https://github.com/pingcap/tidb/issues/50451) @[D3Hunter](https://github.com/D3Hunter)
+    - グローバルソートデータパスにネットワークレイテンシーエラーを注入すると、 `IMPORT INTO`操作が失敗する問題を修正 [#50451](https://github.com/pingcap/tidb/issues/50451) @[D3Hunter](https://github.com/D3Hunter)
     - `ADD UNIQUE INDEX`の実行時にデータ不整合が発生する可能性がある問題を修正 [#60339](https://github.com/pingcap/tidb/issues/60339) @[tangenta](https://github.com/tangenta)
     - `LABELS`をクエリした際に`BINLOG_STATUS`列の値が誤って表示される問題を修正しました`INFORMATION_SCHEMA.TIDB_SERVERS_INFO` [#59245](https://github.com/pingcap/tidb/issues/59245) @[lance6716](https://github.com/lance6716)
     - インデックス作成中にPD Leaderの強制終了エラーを注入するとデータ不整合が発生する可能性がある問題を修正 [#59701](https://github.com/pingcap/tidb/issues/59701) @[tangenta](https://github.com/tangenta)

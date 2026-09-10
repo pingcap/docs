@@ -443,7 +443,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
         - 物理インポートモードはキースペースをサポートします [#40531](https://github.com/pingcap/tidb/issues/40531) @[iosmanthus](https://github.com/iosmanthus)
         - `lightning.max-error`による競合の最大数設定のサポート [#40743](https://github.com/pingcap/tidb/issues/40743) @[dsdashun](https://github.com/dsdashun)
         - BOMヘッダー付きCSVデータファイルのインポートをサポート [#40744](https://github.com/pingcap/tidb/issues/40744) @[dsdashun](https://github.com/dsdashun)
-        - TiKVフロー制限エラーが発生した場合の処理​​ロジックを最適化し、代わりに他の利用可能な領域を試す [#40205](https://github.com/pingcap/tidb/issues/40205) @[lance6716](https://github.com/lance6716)
+        - TiKVフロー制限エラーが発生した場合の処理ロジックを最適化し、代わりに他の利用可能な領域を試す [#40205](https://github.com/pingcap/tidb/issues/40205) @[lance6716](https://github.com/lance6716)
         - インポート中のテーブル外部キーのチェックを無効にする [#40027](https://github.com/pingcap/tidb/issues/40027) @[sleepymole](https://github.com/sleepymole)
 
     - Dumpling
@@ -538,7 +538,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
     - TiCDC
 
         - `transaction_atomicity`と`protocol`が設定ファイル経由で更新できない問題を修正しました [#7935](https://github.com/pingcap/tiflow/issues/7935) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - リドゥログのストレージパスで事前チェ​​ックが実行されない問題を修正 [#6335](https://github.com/pingcap/tiflow/issues/6335) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - リドゥログのストレージパスで事前チェックが実行されない問題を修正 [#6335](https://github.com/pingcap/tiflow/issues/6335) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - S3ストレージ障害時にリドゥログが許容できる期間が不十分であるという問題を修正 [#8089](https://github.com/pingcap/tiflow/issues/8089) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - TiKVまたはTiCDCノードのスケールインまたはスケールアウト時などの特殊なシナリオでchangefeedが停止する可能性がある問題を修正しました [#8174](https://github.com/pingcap/tiflow/issues/8174) @[hicqu](https://github.com/hicqu)
         - TiKV ノード間のトラフィックが多すぎる問題を修正 [#14092](https://github.com/tikv/tikv/issues/14092) @[overvenus](https://github.com/overvenus)

@@ -94,7 +94,7 @@ npm install
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **Reset Password**をクリックして新しいパスワードを作成できます。
 
-5. 対応する接続​​文字列をコピーして`env.json`に貼り付けてください。以下に例を示します。
+5. 対応する接続文字列をコピーして`env.json`に貼り付けてください。以下に例を示します。
 
     ```json
     {
@@ -133,7 +133,7 @@ npm install
     - サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
     - **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
-7. 対応する接続​​文字列をコピーして`env.json`に貼り付けてください。以下に例を示します。
+7. 対応する接続文字列をコピーして`env.json`に貼り付けてください。以下に例を示します。
 
     ```json
     {
@@ -153,7 +153,7 @@ npm install
 
 <div label="TiDB Self-Managed" value="tidb">
 
-対応する接続​​文字列をコピーして`env.json`に貼り付けてください。以下に例を示します。
+対応する接続文字列をコピーして`env.json`に貼り付けてください。以下に例を示します。
 
 ```json
 {
@@ -283,7 +283,7 @@ AWS Lambda関数は、 [SAM CLI](#sam-cli-deployment-recommended)または[AWS L
 
 4. [Lambda デプロイメントパッケージ](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip)の手順に従って、 `dist/index.zip`ファイルをアップロードします。
 
-5. Lambda 関数で[対応する接続​​文字列をコピーして設定します](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)
+5. Lambda 関数で[対応する接続文字列をコピーして設定します](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)
 
     1. Lambda コンソールの[Functions](https://console.aws.amazon.com/lambda/home#/functions)ページで、 **Configuration**タブを選択し、 **Environment variables**を選択します。
     2. **Edit**を選択してください。

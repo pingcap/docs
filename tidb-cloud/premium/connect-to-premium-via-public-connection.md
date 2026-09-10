@@ -3,7 +3,7 @@ title: Connect to TiDB Cloud Premium via Public Connection
 summary: パブリック接続を介してTiDB Cloud Premiumに接続する方法を学びましょう。
 ---
 
-# パブリック接続経由​​でTiDB Cloud Premiumに接続します {#connect-to-tidb-cloud-premium-via-public-connection}
+# パブリック接続経由でTiDB Cloud Premiumに接続します {#connect-to-tidb-cloud-premium-via-public-connection}
 
 このドキュメントでは、パブリック接続を使用して {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスに接続する方法について説明します。パブリック接続では、トラフィックフィルタを備えたパブリックエンドポイントが公開されるため、ラップトップから SQL クライアントを介して {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスに接続できます。
 
@@ -17,8 +17,8 @@ summary: パブリック接続を介してTiDB Cloud Premiumに接続する方�
 
 > **Tip:**
 >
-> - パブリック接続経由​​でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、 [パブリックエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/connect-via-standard-connection-serverless.md)を参照してください。
-> - パブリックエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [パブリック接続経由​​でTiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
+> - パブリック接続経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、 [パブリックエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/connect-via-standard-connection-serverless.md)を参照してください。
+> - パブリックエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [パブリック接続経由でTiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
 
 ## 前提条件：IPアクセスリストの設定 {#prerequisite-configure-ip-access-list}
 

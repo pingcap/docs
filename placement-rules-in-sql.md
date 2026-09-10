@@ -436,7 +436,7 @@ CREATE TABLE t1 (a INT) PLACEMENT POLICY=eastandwest;
 
 ## データ分離の例 {#data-isolation-examples}
 
-次の例のように、配置ポ​​リシーを作成する際に、各ポリシーに対して制約を設定できます。この制約では、指定された`app`ラベルを持つ TiKV ノードにデータを配置する必要があります。
+次の例のように、配置ポリシーを作成する際に、各ポリシーに対して制約を設定できます。この制約では、指定された`app`ラベルを持つ TiKV ノードにデータを配置する必要があります。
 
 ```sql
 CREATE PLACEMENT POLICY app_order CONSTRAINTS="[+app=order]";

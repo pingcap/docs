@@ -78,7 +78,7 @@ TTLは、オンラインの読み取りおよび書き込みワークロード�
 
 ### TTLとデータ型のデフォルト値 {#ttl-and-the-default-values-of-data-types}
 
-TTL は[データ型のデフォルト値](/data-type-default-values.md)と組み合わせて使用​​できます。以下に一般的な使用例を2つ示します。
+TTL は[データ型のデフォルト値](/data-type-default-values.md)と組み合わせて使用できます。以下に一般的な使用例を2つ示します。
 
 - 列のデフォルト値を現在の作成時刻に指定し、この列をTTLタイムスタンプ列として使用するには、 `DEFAULT CURRENT_TIMESTAMP`を使用します。3か月前に作成されたレコードは期限切れです。
 
@@ -100,7 +100,7 @@ TTL は[データ型のデフォルト値](/data-type-default-values.md)と組�
 
 ### TTLと生成列 {#ttl-and-generated-columns}
 
-TTLと[生成列](/generated-columns.md)を組み合わせて使用​​すると、複雑な有効期限ルールを設定できます。例：
+TTLと[生成列](/generated-columns.md)を組み合わせて使用すると、複雑な有効期限ルールを設定できます。例：
 
 ```sql
 CREATE TABLE message (

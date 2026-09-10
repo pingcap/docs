@@ -3,7 +3,7 @@ title: Connect to Amazon MSK Provisioned via a Private Link Connection
 summary: Amazon MSK プロビジョニングされたプライベートリンク接続を使用して Amazon MSK プロビジョニングされたクラスターに接続する方法を学習します。
 ---
 
-# プライベートリンク接続経由​​でプロビジョニングされた Amazon MSK に接続する {#connect-to-amazon-msk-provisioned-via-a-private-link-connection}
+# プライベートリンク接続経由でプロビジョニングされた Amazon MSK に接続する {#connect-to-amazon-msk-provisioned-via-a-private-link-connection}
 
 このドキュメントでは、 [Amazon MSK プロビジョニングされたプライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection)を使用してTiDB Cloud Essentialクラスターを[Amazon MSK プロビジョニング](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html)クラスターに接続する方法について説明します。
 

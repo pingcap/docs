@@ -178,7 +178,7 @@ TiDB では、次の方法でもこれを修正します。
 - `FULLTEXT` 、 `HASH` 、 `SPATIAL`インデックスはサポートされていません。
 - `sequelize.queryInterface.showIndex(Model.tableName);`はサポートされていません。
 - `sequelize.options.databaseVersion`はサポートされていません。
-- [`queryInterface.addColumn`](https://sequelize.org/api/v6/class/src/dialects/abstract/query-interface.js~queryinterface#instance-method-addColumn)を使用した外部キ​​ー参照の追加はサポートされていません。
+- [`queryInterface.addColumn`](https://sequelize.org/api/v6/class/src/dialects/abstract/query-interface.js~queryinterface#instance-method-addColumn)を使用した外部キー参照の追加はサポートされていません。
 
 ### 整数主キーの変更はサポートされていません {#modification-of-integer-primary-key-is-not-supported}
 

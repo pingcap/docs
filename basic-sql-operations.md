@@ -189,7 +189,7 @@ DQLは、テーブルまたは複数のテーブルから目的のデータ行�
 SELECT * FROM person;
 ```
 
-特定の列をクエリするには、 `SELECT`キーワードの後に​​列名を追加します。
+特定の列をクエリするには、 `SELECT`キーワードの後に列名を追加します。
 
 ```sql
 SELECT name FROM person;

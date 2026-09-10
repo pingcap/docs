@@ -241,7 +241,7 @@ target-file-size-base = "32MiB"
 
 ## TiKVメモリ使用量 {#tikv-memory-usage}
 
-システムメモリを占有する`block cache`と`write buffer`他に、次のシナリオでもシステムメモリが占​​有されます。
+システムメモリを占有する`block cache`と`write buffer`他に、次のシナリオでもシステムメモリが占有されます。
 
 - メモリの一部はシステムのページ キャッシュとして予約されています。
 

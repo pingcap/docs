@@ -39,7 +39,7 @@ summary: 2020年のTiDB Cloudのリリースノートについて説明します
 
 ## 2020年10月12日 {#october-12-2020}
 
-- SQL Webshel​​lクライアントをOracle MySQLクライアントから`usql`クライアントに変更します
+- SQL WebshellクライアントをOracle MySQLクライアントから`usql`クライアントに変更します
 - デフォルトの TiDB バージョンを 4.0.7 にアップグレードします
 - 手動バックアップの保持期間を7日から30日に延長
 
