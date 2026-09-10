@@ -1,9 +1,9 @@
 ---
 title: SQL Prepared Execution Plan Cache
-summary: TiDB の SQL プリペアドプランキャッシュについて学習します。
+summary: TiDB の SQL プリペアド実行プランキャッシュについて学習します。
 ---
 
-# SQL プリペアドプランキャッシュ {#sql-prepared-execution-plan-cache}
+# SQL プリペアド実行プランキャッシュ {#sql-prepared-execution-plan-cache}
 
 TiDBは、 `Prepare`と`Execute`クエリの実行計画のキャッシュをサポートしています。これには、以下の2つの形式のプリペアドステートメントが含まれます。
 

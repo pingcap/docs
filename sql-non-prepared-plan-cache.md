@@ -1,9 +1,9 @@
 ---
 title: SQL Non-Prepared Execution Plan Cache
-summary: TiDB の SQL 非プリペアドプランキャッシュの原理、使用法、および例について学習します。
+summary: TiDB の SQL 非プリペアド実行プランキャッシュの原理、使用法、および例について学習します。
 ---
 
-# SQL Non-Prepared Execution Plan Cache {#sql-non-prepared-execution-plan-cache}
+# SQL 非プリペアド実行プランキャッシュ {#sql-non-prepared-execution-plan-cache}
 
 TiDBは、 [ステートメント`Prepare` / `Execute`](/sql-prepared-plan-cache.md)と同様に、一部の`PREPARE`以外のステートメントに対して実行計画のキャッシュをサポートしています。この機能により、これらのステートメントは最適化フェーズをスキップし、パフォーマンスを向上させることができます。
 
