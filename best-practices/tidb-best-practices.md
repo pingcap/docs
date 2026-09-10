@@ -95,7 +95,7 @@ Lots of MySQL experience is also applicable to TiDB. It is noted that TiDB has i
 
     As is mentioned above, index is important but the number of indexes should be proper. You must create appropriate indexes according to the application characteristics. In principle, you need to create an index on the columns involved in the query to improve the performance. The following are situations that need to create indexes:
 
-    - For columns with a high degree of differentiation, filtered rows are remarkably reduced through indexes.
+    - For columns with high selectivity, filtered rows are remarkably reduced through indexes.
     - If there are multiple query criteria, you can choose composite indexes. Note to put the columns with the equivalent condition before composite indexes.
 
     For example, if a commonly used query is `select * from t where c1 = 10 and c2 = 100 and c3 > 10`, you can create a composite index `Index cidx (c1, c2, c3)`. In this way, you can use the query condition to create an index prefix and then scan.
