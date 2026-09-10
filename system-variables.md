@@ -3719,8 +3719,8 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - デフォルト値: ""
 - 型: String
 - これは読み取り専用変数です。TiDB内部で、現在のセッションにおける最後のDDL操作の情報を取得するために使用されます。
-    - 「query」：最後のDDLクエリ文字列。
-    - 「seq_num」：各DDL操作のシーケンス番号。DDL操作の順序を識別するために使用されます。
+    - "query"：最後のDDLクエリ文字列。
+    - "seq_num"：各DDL操作のシーケンス番号。DDL操作の順序を識別するために使用されます。
 
 ### tidb_last_query_info <span class="version-mark">New in v4.0.14</span>
 
@@ -5493,7 +5493,7 @@ SHOW WARNINGS;
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - デフォルト値： `2097152` （2 MiB）
-- 範囲: `[0, 9223372036854775807]` 、バイト単位。単位が「KiB|MiB|GiB|TiB」のメモリ形式もサポートされています。 `0`は制限なしを意味します。
+- 範囲: `[0, 9223372036854775807]` 、バイト単位。単位が"KiB|MiB|GiB|TiB"のメモリ形式もサポートされています。 `0`は制限なしを意味します。
 - この変数は、プリペアドプランキャッシュまたは非プリペアドプランキャッシュにキャッシュできるプランの最大サイズを制御します。プランのサイズがこの値を超える場合、プランはキャッシュされません。詳細については、 [プリペアドプランキャッシュのメモリ管理](/sql-prepared-plan-cache.md#memory-management-of-prepared-plan-cache)と[非プリペアドプランキャッシュ](/sql-plan-management.md#usage)を参照してください。
 
 ### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
@@ -5832,7 +5832,7 @@ SHOW WARNINGS;
 - デフォルト値: `80%`
 - 範囲：
     - 値をパーセンテージ形式で設定できます。これは、メモリ使用量が総メモリに対して占める割合を意味します。値の範囲は`[1%, 99%]`です。
-    - メモリサイズの値も設定できます。値の範囲はバイト単位で`0`から`[536870912, 9223372036854775807]`です。単位が「KiB|MiB|GiB|TiB」または「KB|MB|GB|TB」のメモリ形式もサポートされており、たとえば `90GiB` のように指定できます（数値と単位の間にスペースは入れません）。 `0`はメモリ制限なしを意味します。
+    - メモリサイズの値も設定できます。値の範囲はバイト単位で`0`から`[536870912, 9223372036854775807]`です。単位が"KiB|MiB|GiB|TiB"または"KB|MB|GB|TB"のメモリ形式もサポートされており、たとえば `90GiB` のように指定できます（数値と単位の間にスペースは入れません）。 `0`はメモリ制限なしを意味します。
     - この変数に 512 MiB 未満だが`0`ではないメモリサイズが設定されている場合、TiDB は 512 MiB を実際のサイズとして使用します。
 - この変数は、TiDBインスタンスのメモリ制限を指定します。TiDBのメモリ使用量がこの制限に達すると、TiDBは現在実行中のSQL文のうち、最もメモリ使用量の多い文をキャンセルします。SQL文が正常にキャンセルされた後、TiDBはGolangのガベージコレクション（GC）を呼び出してメモリを解放し、メモリ負荷をできるだけ早く軽減しようとします。
 - [`tidb_server_memory_limit_sess_min_size`](/system-variables.md#tidb_server_memory_limit_sess_min_size-new-in-v640)の制限を超えるメモリ使用量を持つ SQL文のみが、最初にキャンセルされる SQL文として選択されます。
@@ -5861,7 +5861,7 @@ SHOW WARNINGS;
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値： `134217728` （128 MiB）
-- 範囲： `[128, 9223372036854775807]` （バイト単位）。単位が「KiB|MiB|GiB|TiB」または「KB|MB|GB|TB」のメモリ形式もサポートされており、たとえば `130MiB` のように指定できます（数値と単位の間にスペースは入れません）。
+- 範囲： `[128, 9223372036854775807]` （バイト単位）。単位が"KiB|MiB|GiB|TiB"または"KB|MB|GB|TB"のメモリ形式もサポートされており、たとえば `130MiB` のように指定できます（数値と単位の間にスペースは入れません）。
 - メモリ制限を有効にすると、TiDB は現在のインスタンス上でメモリ使用量が最も高い SQL文を終了します。この変数は、終了する SQL文の最小メモリ使用量を指定します。メモリ使用量が低いセッションが多すぎるために TiDB インスタンスのメモリ使用量が制限を超えている場合は、この変数の値を適切に下げることで、より多くのセッションをキャンセルできるようになります。
 
 ### tidb_service_scope <span class="version-mark">New in v7.4.0</span>
@@ -6037,7 +6037,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - 範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
-- `INFORMATION_SCHEMA.SLOW_QUERY`が照会されると、設定ファイル`slow-query-file`で設定されたスロークエリログ名のみが解析されます。デフォルトのスロークエリログ名は「tidb-slow.log」です。他のログを解析するには、 `tidb_slow_query_file`セッション変数を特定のファイルパスに設定し、 `INFORMATION_SCHEMA.SLOW_QUERY`を照会して、設定したファイルパスに基づいてスロークエリログを解析します。
+- `INFORMATION_SCHEMA.SLOW_QUERY`が照会されると、設定ファイル`slow-query-file`で設定されたスロークエリログ名のみが解析されます。デフォルトのスロークエリログ名は"tidb-slow.log"です。他のログを解析するには、 `tidb_slow_query_file`セッション変数を特定のファイルパスに設定し、 `INFORMATION_SCHEMA.SLOW_QUERY`を照会して、設定したファイルパスに基づいてスロークエリログを解析します。
 
 <CustomContent platform="tidb">
 
@@ -6060,7 +6060,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - 範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
-- この変数は、セッションがデータを読み取る時点を設定するために使用されます。たとえば、変数を「2017-11-11 20:20:20」または「400036290571534337」のようなTSO番号に設定すると、現在のセッションはこの時点のデータを読み取ります。
+- この変数は、セッションがデータを読み取る時点を設定するために使用されます。たとえば、変数を"2017-11-11 20:20:20"または"400036290571534337"のようなTSO番号に設定すると、現在のセッションはこの時点のデータを読み取ります。
 
 ### tidb_source_id <span class="version-mark">New in v6.5.0</span>
 
@@ -6774,7 +6774,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - 指定可能な値: `pessimistic` 、 `optimistic`
 - この変数はトランザクションモードを設定するために使用されます。 TiDB 3.0 は悲観的トランザクションをサポートします。 TiDB 3.0.8 以降、[悲観的トランザクションモード](/pessimistic-transaction.md)はデフォルトで有効になっています。
 - TiDBをv3.0.7以前のバージョンからv3.0.8以降のバージョンにアップグレードしても、デフォルトのトランザクションモードは変更されません。**新しく作成されたクラスタのみが、デフォルトで悲観的トランザクションモードを使用します**。
-- この変数が「楽観的」または「」に設定されている場合、TiDB は[楽観的トランザクションモード](/optimistic-transaction.md)を使用します。
+- この変数が"optimistic"または""に設定されている場合、TiDB は[楽観的トランザクションモード](/optimistic-transaction.md)を使用します。
 
 ### tidb_use_plan_baselines <span class="version-mark">New in v4.0</span>
 
@@ -6951,7 +6951,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `SYSTEM`
-- この変数は現在のタイムゾーンを返します。値は、「-8:00」のようなオフセット、または「America/Los_Angeles」のような名前付きゾーンのいずれかで指定できます。
+- この変数は現在のタイムゾーンを返します。値は、'-8:00'のようなオフセット、または'America/Los_Angeles'のような名前付きゾーンのいずれかで指定できます。
 - 値`SYSTEM`は、タイムゾーンがシステムホストと同じである必要があることを意味します。システムホストのタイムゾーンは、 [`system_time_zone`](#system_time_zone)変数で取得できます。
 
 ### timestamp
@@ -7103,7 +7103,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - 適用範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `8.0.11-TiDB-` (tidb バージョン)
-- この変数は、MySQLのバージョンに続いてTiDBのバージョンを返します。例えば、「8.0.11-TiDB-v8.5.4」のようになります。
+- この変数は、MySQLのバージョンに続いてTiDBのバージョンを返します。例えば、'8.0.11-TiDB-v8.5.4'のようになります。
 
 ### version_comment
 

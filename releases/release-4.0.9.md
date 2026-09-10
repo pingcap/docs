@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.9 Release Notes
-summary: TiDB 4.0.9は2020年12月21日にリリースされました。このリリースには、互換性の変更、新機能、改善、バグ修正、そしてTiKV、TiDB Dashboard、PD、 TiFlash 、そして各種ツールのアップデートが含まれています。注目すべき変更点としては、TiDBにおける「enable-streaming」設定項目の廃止、 TiFlashにおけるストレージエンジンの最新データを複数のディスクに保存する機能のサポート、そしてTiDBとTiKVにおける各種バグ修正などが挙げられます。
+summary: TiDB 4.0.9は2020年12月21日にリリースされました。このリリースには、互換性の変更、新機能、改善、バグ修正、そしてTiKV、TiDB Dashboard、PD、 TiFlash 、そして各種ツールのアップデートが含まれています。注目すべき変更点としては、TiDBにおける`enable-streaming`設定項目の廃止、 TiFlashにおけるストレージエンジンの最新データを複数のディスクに保存する機能のサポート、そしてTiDBとTiKVにおける各種バグ修正などが挙げられます。
 ---
 
 # TiDB 4.0.9 リリースノート {#tidb-4-0-9-release-notes}
@@ -72,7 +72,7 @@ TiDB バージョン: 4.0.9
 
 - TiDB Dashboard
 
-    - SQL文の「展開」をクリックすると展開を続ける [#775](https://github.com/pingcap/tidb-dashboard/pull/775)
+    - SQL文で"Expand"をクリックした後も展開状態を維持する [#775](https://github.com/pingcap/tidb-dashboard/pull/775)
     - **SQL Statements**と**Slow Queries**の詳細ページを新しいウィンドウで開く [#816](https://github.com/pingcap/tidb-dashboard/pull/816)
     - **Slow Queries**の詳細における時間関連フィールドの説明の改善 [#817](https://github.com/pingcap/tidb-dashboard/pull/817)
     - 詳細なエラーメッセージを表示する[#794](https://github.com/pingcap/tidb-dashboard/pull/794)
@@ -113,7 +113,7 @@ TiDB バージョン: 4.0.9
         - デフォルトですべてのシステムスキーマを除外する[#459](https://github.com/pingcap/tidb-lightning/pull/459)
         - ローカルバックエンドまたはインポーターバックエンドのAUTO_RANDOM主キーのデフォルト値の設定をサポート [#457](https://github.com/pingcap/tidb-lightning/pull/457)
         - 範囲プロパティを使用して、Local-backend で範囲分割をより正確にします。 [#422](https://github.com/pingcap/tidb-lightning/pull/422)
-        - `tikv-importer.region-split-size` `mydumper.batch-size`人間が形式（「2.5 GiB」など） `mydumper.read-block-size`サポートする`mydumper.max-region-size` [#471](https://github.com/pingcap/tidb-lightning/pull/471)
+        - `tikv-importer.region-split-size` `mydumper.batch-size`人間が形式（"2.5 GiB"など） `mydumper.read-block-size`サポートする`mydumper.max-region-size` [#471](https://github.com/pingcap/tidb-lightning/pull/471)
 
     - TiDB Binlog
 

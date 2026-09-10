@@ -43,7 +43,7 @@ summary: TiDB Cloud StarterまたはTiDB Cloud EssentialにUI経由でサンプ�
 
 TiDB Cloud StarterまたはEssentialインスタンスに接続した後、ターミナルでいくつかのクエリを実行して結果を確認できます。例：
 
-1. 「12th &amp; U St NW」から始まる旅行記録を取得してください。
+1. "12th & U St NW"から始まる旅行記録を取得してください。
 
     ```sql
     use bikeshare;

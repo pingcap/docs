@@ -58,7 +58,7 @@ SQL ポートのコンフィグレーション。
 - デフォルト値: `0`
 - ホットリロードのサポート: はい
 - 単位: 秒
-- TiProxyがシャットダウンすると、HTTPステータスは「unhealthy」を返しますが、SQLポートは`graceful-wait-before-shutdown`秒間は新規接続を受け付けます。その後、新規接続は拒否され、クライアントの負荷が増大します。クライアントとTiProxyの間に他のプロキシ（NLBなど）が存在しない場合は、この値を`0`に設定することをお勧めします。
+- TiProxyがシャットダウンすると、HTTPステータスはunhealthyを返しますが、SQLポートは`graceful-wait-before-shutdown`秒間は新規接続を受け付けます。その後、新規接続は拒否され、クライアントの負荷が増大します。クライアントとTiProxyの間に他のプロキシ（NLBなど）が存在しない場合は、この値を`0`に設定することをお勧めします。
 
 #### `graceful-close-conn-timeout` {#graceful-close-conn-timeout}
 

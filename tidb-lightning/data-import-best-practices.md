@@ -19,7 +19,7 @@ TiDB Lightning （ [物理インポートモード](/tidb-lightning/tidb-lightni
 - [ソースファイルの準備](#prepare-source-files)
 - [ストレージスペースの見積もり](#estimate-storage-space)
 - [設定パラメータを変更する](#change-configuration-parameters)
-- [「checksum mismatch」エラーを解決する](#resolve-the-checksum-mismatch-error)
+- ["checksum mismatch"エラーを解決する](#resolve-the-checksum-mismatch-error)
 - [チェックポイントを有効にする](#enable-checkpoint)
 - [トラブルシューティング](#troubleshooting)
 
@@ -97,9 +97,9 @@ TiDB Lightning （ [物理インポートモード](/tidb-lightning/tidb-lightni
 
 TiDB Lightningパラメータの詳細については、 [TiDB Lightning設定パラメータ](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
-## 「checksum mismatch」エラーを解決する {#resolve-the-checksum-mismatch-error}
+## "checksum mismatch"エラーを解決する {#resolve-the-checksum-mismatch-error}
 
-データ検証中に競合が発生する可能性があります。エラーメッセージは「checksum mismatch」です。この問題を解決するには、必要に応じて以下の手順を実行してください。
+データ検証中に競合が発生する可能性があります。エラーメッセージは"checksum mismatch"です。この問題を解決するには、必要に応じて以下の手順を実行してください。
 
 1. ソースデータで主キーまたは一意キーの競合がないか確認し、再インポート前に競合を解決してください。ほとんどの場合、これが最も一般的な原因です。
 2. テーブルの主キーまたは一意キーの定義が適切かどうかを確認してください。適切でない場合は、テーブル定義を修正してデータを再インポートしてください。

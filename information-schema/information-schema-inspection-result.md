@@ -107,7 +107,7 @@ DETAILS   | max duration of 172.16.5.40:20151 tikv rocksdb-write-duration was to
 - 2 行目は、クラスター内に 2つの異なる TiDB バージョンが存在することを示します。
 - 3行目と4行目は、TiKVの書き込み遅延が長すぎることを示しています。予想される遅延は0.1秒以内ですが、実際の遅延は予想よりもはるかに長くなっています。
 
-「2020-03-26 00:03:00」から「2020-03-26 00:08:00」までなど、指定した範囲内にある問題を診断することもできます。時間範囲を指定するには、SQLヒントに`/*+ time_range() */`を指定します。次のクエリ例をご覧ください。
+"2020-03-26 00:03:00"から"2020-03-26 00:08:00"までなど、指定した範囲内にある問題を診断することもできます。時間範囲を指定するには、SQLヒントに`/*+ time_range() */`を指定します。次のクエリ例をご覧ください。
 
 ```sql
 select /*+ time_range("2020-03-26 00:03:00", "2020-03-26 00:08:00") */ * from information_schema.inspection_result\G
@@ -214,7 +214,7 @@ select * from information_schema.inspection_rules where type='inspection';
 
 - 以下の設定項目の値が期待どおりであるかどうかを確認します。
 
-    | コンポーネント   | コンフィグレーション項目       | 期待値      |
+    | コンポーネント   | コンフィグレーション項目       | しきい値      |
     | ---- | ------------------ | -------- |
     | TiDB | log.slow-threshold | `0`より大きい |
 
@@ -246,12 +246,12 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
     | コンポーネント   | エラー名                    | 監視テーブル                             | エラーの説明                                       |
     | ---- | ----------------------- | ---------------------------------- | -------------------------------------------- |
-    | TiDB | パニックカウント                | tidb_panic_count_total_count       | TiDB でパニックが発生します。                            |
-    | TiKV | 重大なエラー                  | tikv_critical_error_total_count    | TiKV の重大なエラー。                                |
-    | TiKV | スケジューラがビジー状態            | tikv_scheduler_is_busy_total_count | TiKV スケジューラがビジー状態のため、TiKV が一時的に使用できなくなっています。 |
-    | TiKV | コプロセッサがビジー状態            | tikv_コプロセッサがビジー状態の合計数              | TiKVコプロセッサーがビジー状態です。                         |
-    | TiKV | チャネルがいっぱいです             | tikv_チャンネルの合計数                     | TiKV で「チャネルがいっぱいです」というエラーが発生します。             |
-    | TiKV | tikv_engine_write_stall | tikv_engine_write_stall            | TiKV で「ストール」エラーが発生します。                       |
+    | TiDB | panic-count             | tidb_panic_count_total_count       | TiDB でパニックが発生します。                            |
+    | TiKV | critical-error          | tikv_critical_error_total_count    | TiKV の重大なエラー。                                |
+    | TiKV | scheduler-is-busy       | tikv_scheduler_is_busy_total_count | TiKV スケジューラがビジー状態のため、TiKV が一時的に使用できなくなっています。 |
+    | TiKV | coprocessor-is-busy     | tikv_coprocessor_is_busy_total_count | TiKVコプロセッサーがビジー状態です。                         |
+    | TiKV | channel-is-full         | tikv_channel_full_total_count      | TiKV で"channel full"というエラーが発生します。             |
+    | TiKV | tikv_engine_write_stall | tikv_engine_write_stall            | TiKV で"stall"エラーが発生します。                       |
 
 - `metrics_schema.up`監視テーブルと`CLUSTER_LOG`システムテーブルを照会して、コンポーネントが再起動されているかどうかを確認します。
 
@@ -259,27 +259,27 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
 `threshold-check`診断ルールは、メトリックスキーマ内の関連する監視システムテーブルを照会して、クラスター内の次のメトリックがしきい値を超えているかどうかを確認します。
 
-| コンポーネント   | 監視メトリック              | 監視テーブル                              | 期待値       | 説明                                                                                                               |
+| コンポーネント   | 監視メトリック              | 監視テーブル                              | しきい値       | 説明                                                                                                               |
 | :--- | :------------------- | :---------------------------------- | :-------- | :--------------------------------------------------------------------------------------------------------------- |
-| TiDB | tso期間                | pd_tso_wait_duration                | 50ミリ秒未満   | トランザクションの TSO を取得するまでの待機時間。                                                                                      |
-| TiDB | トークン取得期間             | tidb_get_token_duration             | 1ミリ秒未満    | トークンの取得にかかる時間を照会します。関連するTiDB設定項目は[`token-limit`](/command-line-flags-for-tidb-configuration.md#--token-limit)です。 |
-| TiDB | ロードスキーマ期間            | tidb_load_schema_duration           | 1秒未満      | TiDB がスキーマ メタデータを更新するのにかかる時間。                                                                                    |
-| TiKV | スケジューラコマンド期間         | tikv_scheduler_command_duration     | 0.1秒未満    | TiKV が KV `cmd`要求を実行するのにかかる時間。                                                                                   |
-| TiKV | ハンドルスナップショット期間       | tikv_handle_snapshot_duration       | 30代未満     | TiKV がスナップショットを処理するのにかかる時間。                                                                                      |
-| TiKV | ストレージ書き込み時間          | tikv_storage_async_request_duration | 0.1秒未満    | TiKV の書き込みレイテンシー。                                                                                                |
-| TiKV | ストレージスナップショットの期間     | tikv_storage_async_request_duration | 50ミリ秒未満   | TiKV がスナップショットを取得するのにかかる時間。                                                                                      |
-| TiKV | rocksdb書き込み時間        | tikv_engine_write_duration          | 100ミリ秒未満  | TiKV RocksDB の書き込みレイテンシー。                                                                                        |
+| TiDB | tso-duration              | pd_tso_wait_duration                | 50ミリ秒未満   | トランザクションの TSO を取得するまでの待機時間。                                                                                      |
+| TiDB | get-token-duration        | tidb_get_token_duration             | 1ミリ秒未満    | トークンの取得にかかる時間を照会します。関連するTiDB設定項目は[`token-limit`](/command-line-flags-for-tidb-configuration.md#--token-limit)です。 |
+| TiDB | load-schema-duration      | tidb_load_schema_duration           | 1秒未満      | TiDB がスキーマ メタデータを更新するのにかかる時間。                                                                                    |
+| TiKV | scheduler-cmd-duration    | tikv_scheduler_command_duration     | 0.1秒未満    | TiKV が KV `cmd`要求を実行するのにかかる時間。                                                                                   |
+| TiKV | handle-snapshot-duration  | tikv_handle_snapshot_duration       | 30秒未満     | TiKV がスナップショットを処理するのにかかる時間。                                                                                      |
+| TiKV | storage-write-duration    | tikv_storage_async_request_duration | 0.1秒未満    | TiKV の書き込みレイテンシー。                                                                                                |
+| TiKV | storage-snapshot-duration | tikv_storage_async_request_duration | 50ミリ秒未満   | TiKV がスナップショットを取得するのにかかる時間。                                                                                      |
+| TiKV | rocksdb-write-duration    | tikv_engine_write_duration          | 100ミリ秒未満  | TiKV RocksDB の書き込みレイテンシー。                                                                                        |
 | TiKV | rocksdb-get-duration | tikv_engine_max_get_duration        | 50ミリ秒未満   | TiKV RocksDB の読み取りレイテンシー。                                                                                        |
-| TiKV | rocksdbシーク時間         | tikv_engine_max_seek_duration       | 50ミリ秒未満   | TiKV RocksDB の実行レイテンシーは`seek` 。                                                                                  |
-| TiKV | スケジューラ保留コマンドカウント     | tikv_scheduler_pending_commands     | 1000未満    | TiKV で停止したコマンドの数。                                                                                                |
-| TiKV | インデックスブロックキャッシュヒット   | tikv_block_index_cache_hit          | 0.95      | TiKV のインデックスブロックキャッシュのヒット率。                                                                                      |
-| TiKV | フィルターブロックキャッシュヒット    | tikv_block_filter_cache_hit         | 0.95      | TiKV のフィルターブロックキャッシュのヒット率。                                                                                       |
-| TiKV | データブロックキャッシュヒット      | tikv_block_data_cache_hit           | 0.80      | TiKV のデータブロックキャッシュのヒット率。                                                                                         |
-| TiKV | リーダースコアバランス          | pd_scheduler_store_status           | &lt; 0.05 | 各TiKVインスタンスのリーダースコアが均衡しているかどうかを確認します。インスタンス間の期待される差は5%未満です。                                                      |
-| TiKV | リージョンスコアバランス            | pd_scheduler_store_status           | &lt; 0.05 | 各TiKVインスタンスのリージョンスコアが均衡しているかどうかを確認します。インスタンス間の期待される差は5%未満です。                                                     |
-| TiKV | ストア利用可能バランス             | pd_scheduler_store_status           | &lt; 0.2  | 各TiKVインスタンスの利用可能なストレージのバランスを確認します。インスタンス間の差は20%未満であることが想定されています。                                                 |
-| TiKV | リージョン数                  | pd_scheduler_store_status           | 20000未満   | 各 TiKV インスタンスのリージョン数を確認します。1つのインスタンスあたりのリージョン数は 20,000 未満と想定されています。                                               |
-| PD   | リージョンの健康                | pd_region_health                    | 100未満     | クラスター内でスケジュール処理中のリージョンの数を検出します。想定される数は合計で100未満です。                                                                |
+| TiKV | rocksdb-seek-duration     | tikv_engine_max_seek_duration       | 50ミリ秒未満   | TiKV RocksDB の実行レイテンシーは`seek` 。                                                                                  |
+| TiKV | scheduler-pending-cmd-coun | tikv_scheduler_pending_commands     | 1000未満    | TiKV で停止したコマンドの数。                                                                                                |
+| TiKV | index-block-cache-hit     | tikv_block_index_cache_hit          | 0.95      | TiKV のインデックスブロックキャッシュのヒット率。                                                                                      |
+| TiKV | filter-block-cache-hit    | tikv_block_filter_cache_hit         | 0.95      | TiKV のフィルターブロックキャッシュのヒット率。                                                                                       |
+| TiKV | data-block-cache-hit      | tikv_block_data_cache_hit           | 0.80      | TiKV のデータブロックキャッシュのヒット率。                                                                                         |
+| TiKV | leader-score-balance      | pd_scheduler_store_status           | &lt; 0.05 | 各TiKVインスタンスのリーダースコアが均衡しているかどうかを確認します。インスタンス間の期待される差は5%未満です。                                                      |
+| TiKV | region-score-balance      | pd_scheduler_store_status           | &lt; 0.05 | 各TiKVインスタンスのリージョンスコアが均衡しているかどうかを確認します。インスタンス間の期待される差は5%未満です。                                                     |
+| TiKV | store-available-balance   | pd_scheduler_store_status           | &lt; 0.2  | 各TiKVインスタンスの利用可能なストレージのバランスを確認します。インスタンス間の差は20%未満であることが想定されています。                                                 |
+| TiKV | region-count              | pd_scheduler_store_status           | 20000未満   | 各 TiKV インスタンスのリージョン数を確認します。1つのインスタンスあたりのリージョン数は 20,000 未満と想定されています。                                               |
+| PD   | region-health             | pd_region_health                    | 100未満     | クラスター内でスケジュール処理中のリージョンの数を検出します。想定される数は合計で100未満です。                                                                |
 
 さらに、このルールは、TiKV インスタンス内の次のスレッドの CPU 使用率が高すぎるかどうかもチェックします。
 

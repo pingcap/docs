@@ -110,7 +110,7 @@ public List<Author> getTop50EldestAuthorInfoByCTE() throws SQLException {
 </div>
 </SimpleTab>
 
-著者「Ray Macejkovic」は4冊の本を執筆していることがわかります。CTEクエリを使用すると、これらの4冊の本の順序と評価情報を次のように取得できます。
+著者"Ray Macejkovic"は4冊の本を執筆していることがわかります。CTEクエリを使用すると、これらの4冊の本の順序と評価情報を次のように取得できます。
 
 ```sql
 WITH books_authored_by_rm AS (

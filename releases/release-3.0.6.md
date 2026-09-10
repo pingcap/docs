@@ -91,8 +91,8 @@ TiDB Ansible バージョン: 3.0.6
 ## ツール {#tools}
 
 - TiDB Binlog
-    - Drainer で`initial-commit-ts` 「-1」に設定されている場合にPDから初期レプリケーションタイムスタンプを取得します。 [#788](https://github.com/pingcap/tidb-binlog/pull/788)
-    - Drainerの`Checkpoint`ストレージを下流から分離し、MySQLまたはローカルファイルへの保存`Checkpoint`サポートします。 [#790](https://github.com/pingcap/tidb-binlog/pull/790)
+    - Drainer で`initial-commit-ts`が"-1"に設定されている場合にPDから初期レプリケーションタイムスタンプを取得します。 [#788](https://github.com/pingcap/tidb-binlog/pull/788)
+    - Drainerの`Checkpoint`ストレージを下流から分離し、MySQLまたはローカルファイルへの`Checkpoint`の保存をサポートします。 [#790](https://github.com/pingcap/tidb-binlog/pull/790)
     - レプリケーションデータベース/テーブルフィルタリングを構成する際に空の値を使用することで発生するDrainer panicの問題を修正しました[#801](https://github.com/pingcap/tidb-binlog/pull/801)
     - Drainer が下流にbinlogファイルを適用できないためにpanicが発生した後、プロセスが終了せずにデッドロック状態になる問題を修正しました[#807](https://github.com/pingcap/tidb-binlog/pull/807)
     - gRPC の`GracefulStop` が原因で、Pumpが終了時にブロックされる問題を修正しました。 [#817](https://github.com/pingcap/tidb-binlog/pull/817)

@@ -119,4 +119,4 @@ TiDB Ansible バージョン: 3.0.0-rc.3
 
 ## TiDB Ansible {#tidb-ansible}
 
-- クラスターの最大QPS値を予測するための監視項目を追加する（デフォルトでは「非表示」） [#f5cfa4d](https://github.com/pingcap/tidb-ansible/commit/f5cfa4d903bbcd77e01eddc8d31eabb6e6157f73)
+- クラスターの最大QPS値を予測するための監視項目を追加する（デフォルトでは"hide"） [#f5cfa4d](https://github.com/pingcap/tidb-ansible/commit/f5cfa4d903bbcd77e01eddc8d31eabb6e6157f73)

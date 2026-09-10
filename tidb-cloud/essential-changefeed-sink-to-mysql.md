@@ -13,7 +13,7 @@ summary: このドキュメントでは、Sink to MySQL changefeed を使用し�
 >
 > 1. [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**?**をクリックします。
 > 2. **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。
-> 3. チケットを作成します。「説明」欄に「changefeedへの申請」と入力します。
+> 3. チケットを作成します。"Description"欄に"Apply for changefeed"と入力します。
 > 4. **Submit**をクリックしてください。
 
 ## 制限 {#restrictions}

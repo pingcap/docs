@@ -15,7 +15,7 @@ TiDB Ansible バージョン: 2.1.12
 
 - インデックスクエリフィードバックを使用する際に、一致しないデータ型によって発生する問題を修正しました [#10755](https://github.com/pingcap/tidb/pull/10755)
 - 一部のケースで文字セットの変更により BLOB 列がテキスト列に変更される問題を修正[#10745](https://github.com/pingcap/tidb/pull/10745)
-- トランザクション内の`GRANT`の操作が、場合によっては「重複エントリ」を誤って報告する問題を修正しました[#10739](https://github.com/pingcap/tidb/pull/10739)
+- トランザクション内の`GRANT`の操作が、場合によっては"Duplicate Entry"を誤って報告する問題を修正しました[#10739](https://github.com/pingcap/tidb/pull/10739)
 - 以下の機能のMySQLとの互換性を向上
     - `DAYNAME`関数[#10732](https://github.com/pingcap/tidb/pull/10732)
     - `MONTHNAME`関数[#10733](https://github.com/pingcap/tidb/pull/10733)

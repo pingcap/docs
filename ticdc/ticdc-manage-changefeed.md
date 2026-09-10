@@ -289,7 +289,7 @@ v4.0.13 以降に`cdc cli`を使用して作成された changefeed の場合、
 cdc cli --server="http://10.0.10.25:8300" changefeed query --changefeed-id=simple-replication-task | grep 'sort_engine'
 ```
 
-上記のコマンドの出力で、値`sort_engine`が「unified」の場合、変更フィードで Unified Sorter が有効になっていることを意味します。
+上記のコマンドの出力で、値`sort_engine`が"unified"の場合、変更フィードで Unified Sorter が有効になっていることを意味します。
 
 > **Note:**
 >

@@ -223,29 +223,29 @@ TiDB クラスター内の読み取り/書き込み競合は、次の方法で�
 
 ### KeyIsLockedエラー {#keyislocked-error}
 
-トランザクションのPrewriteフェーズでは、TiDBは書き込み競合の有無を確認し、対象キーが他のトランザクションによってロックされているかどうかを確認します。キーがロックされている場合、TiKVサーバーは「KeyIsLocked」エラーを出力します。現在、このエラーメッセージはTiDBとTiKVのログには出力されません。読み取り競合と同様に、「KeyIsLocked」エラーが発生した場合、TiDBは自動的にトランザクションのバックオフと再試行を実行します。
+トランザクションのPrewriteフェーズでは、TiDBは書き込み競合の有無を確認し、対象キーが他のトランザクションによってロックされているかどうかを確認します。キーがロックされている場合、TiKVサーバーは"KeyIsLocked"エラーを出力します。現在、このエラーメッセージはTiDBとTiKVのログには出力されません。読み取り競合と同様に、"KeyIsLocked"エラーが発生した場合、TiDBは自動的にトランザクションのバックオフと再試行を実行します。
 
-Grafana の TiDB モニタリングで「KeyIsLocked」エラーがあるかどうかを確認できます。
+Grafana の TiDB モニタリングで"KeyIsLocked"エラーがあるかどうかを確認できます。
 
-TiDBダッシュボードの`KV Errors`パネルには、トランザクションによって発生した書き込み競合を確認するための2つの監視メトリック`Lock Resolve OPS`と`KV Backoff OPS`あります。`Lock Resolve OPS`の`resolve`の項目と`KV Backoff OPS`の`txnLock`の項目に明らかな上昇傾向が見られる場合、「KeyIsLocked」エラーが発生します。`resolve`はロックを解除しようとする操作を指し、`txnLock`は書き込み競合を表します。
+TiDBダッシュボードの`KV Errors`パネルには、トランザクションによって発生した書き込み競合を確認するための2つの監視メトリック`Lock Resolve OPS`と`KV Backoff OPS`あります。`Lock Resolve OPS`の`resolve`の項目と`KV Backoff OPS`の`txnLock`の項目に明らかな上昇傾向が見られる場合、"KeyIsLocked"エラーが発生します。`resolve`はロックを解除しようとする操作を指し、`txnLock`は書き込み競合を表します。
 
 ![KV-backoff-txnLockFast-optimistic-01](/media/troubleshooting-lock-pic-07.png) ![KV-Errors-resolve-optimistic-01](/media/troubleshooting-lock-pic-08.png)
 
 解決策:
 
 - 監視中にtxnLockが少量発生しても、あまり気にする必要はありません。バックオフとリトライはバックグラウンドで自動的に実行されます。リトライの初回は100ミリ秒、最大1回のリトライ時間は3000ミリ秒です。
-- `KV Backoff OPS`に「txnLock」操作が多すぎる場合は、アプリケーション側から書き込み競合の原因を分析することをお勧めします。
+- `KV Backoff OPS`に"txnLock"操作が多すぎる場合は、アプリケーション側から書き込み競合の原因を分析することをお勧めします。
 - アプリケーションで書き込み-書き込み競合が発生するシナリオの場合は、悲観的トランザクションモードを使用することを強くお勧めします。
 
 ### LockNotFoundエラー {#locknotfound-error}
 
-「TxnLockNotFound」というエラーログは、トランザクションのコミット時間がTTL時間よりも長く、トランザクションをコミットしようとした際に、そのロックが他のトランザクションによってロールバックされたことを意味します。TiDBサーバーがトランザクションコミットの再試行を有効にしている場合、このトランザクションは[tidb_retry_limit](/system-variables.md#tidb_retry_limit)に従って再実行されます。（明示的トランザクションと暗黙的トランザクションの違いに注意してください。）
+"TxnLockNotFound"というエラーログは、トランザクションのコミット時間がTTL時間よりも長く、トランザクションをコミットしようとした際に、そのロックが他のトランザクションによってロールバックされたことを意味します。TiDBサーバーがトランザクションコミットの再試行を有効にしている場合、このトランザクションは[tidb_retry_limit](/system-variables.md#tidb_retry_limit)に従って再実行されます。（明示的トランザクションと暗黙的トランザクションの違いに注意してください。）
 
-「LockNotFound」エラーがあるかどうかは、次の方法で確認できます。
+"LockNotFound"エラーがあるかどうかは、次の方法で確認できます。
 
 1. TiDBサーバーのログを確認する
 
-    「TxnLockNotFound」エラーが発生した場合、TiDB ログ メッセージは次のようになります。
+    "TxnLockNotFound"エラーが発生した場合、TiDB ログ メッセージは次のようになります。
 
     ```log
     [WARN] [session.go:446] ["commit failed"] [conn=149370] ["finished txn"="Txn{state=invalid}"] [error="[kv:6]Error: KV error safe to retry tikv restarts txn: Txn(Mvcc(TxnLockNotFound{ start_ts: 412720515987275779, commit_ts: 412720519984971777, key: [116, 128, 0, 0, 0, 0, 1, 111, 16, 95, 114, 128, 0, 0, 0, 0, 0, 0, 2] })) [try again later]"]
@@ -256,7 +256,7 @@ TiDBダッシュボードの`KV Errors`パネルには、トランザクショ�
 
 2. TiKVサーバーのログを確認する
 
-    「TxnLockNotFound」エラーが発生した場合、TiKV ログ メッセージは次のようになります。
+    "TxnLockNotFound"エラーが発生した場合、TiKV ログ メッセージは次のようになります。
 
     ```log
     Error: KV error safe to retry restarts txn: Txn(Mvcc(TxnLockNotFound)) [ERROR [Kv.rs:708] ["KvService::batch_raft send response fail"] [err=RemoteStoped]

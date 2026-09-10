@@ -138,7 +138,7 @@ TiCDC は、DML データ変更イベントの行を次のようにエンコー�
 
 TiCDCは、 `enable-tidb-extension`を`true`に設定した場合のみ、WATERMARKイベントを送信します。 `type`フィールドの値は`TIDB_WATERMARK`です。イベントには`_tidb`フィールドが含まれており、このフィールドにはパラメータ`watermarkTs`のみが含まれます。 `watermarkTs`の値は、イベント送信時に記録されるTSOです。
 
-このタイプのイベントを受信すると、 `commitTs`が`watermarkTs`より小さいすべてのイベントが送信されています。TiCDC は「少なくとも 1回」のセマンティクスを提供するため、データが繰り返し送信される可能性があります。その後に`commitTs`が`watermarkTs`より小さいイベントを受信した場合は、このイベントを無視しても問題ありません。
+このタイプのイベントを受信すると、 `commitTs`が`watermarkTs`より小さいすべてのイベントが送信されています。TiCDC は"At Least Once"のセマンティクスを提供するため、データが繰り返し送信される可能性があります。その後に`commitTs`が`watermarkTs`より小さいイベントを受信した場合は、このイベントを無視しても問題ありません。
 
 以下は WATERMARK イベントの例です。
 

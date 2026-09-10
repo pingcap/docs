@@ -449,7 +449,7 @@ summary: TiDB クラスターのアラートルールについて学習します
 
     1. `SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME = "tikv_gc_leader_desc"`を実行して、GC リーダーに対応する`tidb-server`を見つけます。
     2. `tidb-server`のログを確認し、`grep gc_worker tidb.log` を実行します。
-    3. この時間中にGCワーカーがロックを解決中（最後のログは「start resolve locks」）または範囲を削除中（最後のログは「start delete {number} ranges」）であることが確認された場合、GCプロセスは正常に動作していることを意味します。それ以外の場合は、PingCAPまたはコミュニティから[サポートを受けて](/support.md)ください。
+    3. この時間中にGCワーカーがロックを解決中（最後のログは"start resolve locks"）または範囲を削除中（最後のログは"start delete {number} ranges"）であることが確認された場合、GCプロセスは正常に動作していることを意味します。それ以外の場合は、PingCAPまたはコミュニティから[サポートを受けて](/support.md)ください。
 
 ### 重大レベルのアラート {#critical-level-alerts-3}
 
@@ -886,11 +886,11 @@ TiCDC アラートルールの詳細な説明については、 [TiCDCアラー�
 
 - 説明：
 
-    マシン上には「確立」ステータスの TCP リンクが 50,000 個以上あります。
+    マシン上には"establish"ステータスの TCP リンクが 50,000 個以上あります。
 
 - 解決：
 
-    - マシンにログインし、 `ss -s`を実行して、現在のシステムで「estab」ステータスにある TCP リンクの数を確認します。
+    - マシンにログインし、 `ss -s`を実行して、現在のシステムで"estab"ステータスにある TCP リンクの数を確認します。
     - `netstat`を実行して異常なリンクがないか確認します。
 
 #### `NODE_disk_read_latency_more_than_32ms` {#node_disk_read_latency_more_than_32ms}
