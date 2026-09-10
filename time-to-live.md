@@ -148,10 +148,14 @@ This behavior is controlled by the [`tidb_ttl_enable_index_scan`](/system-variab
 
 An eligible index must meet the following requirements:
 
-- It is a visible secondary index or nonclustered primary index, rather than a partial, global, multi-valued, or columnar index.
+- It is a secondary index or a non-clustered primary key. TiDB does not use a clustered primary key, partial index, global index, multi-valued index, vector search index, full-text index, or invisible index for this scan.
 - Its first column is the TTL column, and each index column indexes the full column value. Prefix indexes and expression indexes are not supported.
-- In a unique composite index, all columns except the TTL column are `NOT NULL`.
-- A non-unique index includes either all primary key columns or none of them.
+- For a unique index that contains multiple columns, all columns except the TTL column are `NOT NULL`.
+- A non-unique index meets the following requirements:
+    - It includes either all primary key columns or none of them. It cannot include only some columns of a composite primary key.
+    - If the table has a clustered primary key consisting of a single unsigned integer column, the index includes that primary key column.
+    - If any column of the clustered primary key is defined with a prefix length, the index includes all primary key columns.
+    - If the [new collation framework](/character-set-and-collation.md#new-framework-for-collations) is enabled, for a table created by an earlier TiDB version whose clustered primary key contains non-binary string columns, include all primary key columns to avoid compatibility restrictions.
 - Index columns cannot use the `SET`, `FLOAT`, or `DOUBLE` data type. For a non-unique index that does not include primary key columns, the primary key columns cannot use these data types either.
 
 To disable the execution of TTL jobs, in addition to setting the `TTL_ENABLE='OFF'` table option, you can also disable the execution of TTL jobs in the entire cluster by setting the [`tidb_ttl_job_enable`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) global variable:
