@@ -194,7 +194,7 @@ PARTITION BY RANGE COLUMNS(name, valid_until)
 
 ### レンジ INTERVAL パーティショニング {#range-interval-partitioning}
 
-レンジパーティショニング（INTERVALパーティショニング）は、レンジパーティショニングの拡張機能であり、指定した間隔のパーティションを簡単に作成できます。バージョン6.3.0以降、TIDBでは構文糖衣としてINTERVALパーティショニングが導入されています。
+レンジパーティショニング（INTERVAL パーティショニング）は、レンジパーティショニングの拡張機能であり、指定した間隔のパーティションを簡単に作成できます。バージョン6.3.0以降、TIDBでは構文糖衣としてINTERVAL パーティショニングが導入されています。
 
 構文は以下のとおりです。
 
@@ -280,7 +280,7 @@ PARTITION BY RANGE COLUMNS(`report_date`)
 
 #### ALTER INTERVAL パーティションテーブル {#alter-interval-partitioned-tables}
 
-INTERVALパーティショニングでは、パーティションの追加と削除のための構文もよりシンプルになります。
+INTERVAL パーティショニングでは、パーティションの追加と削除のための構文もよりシンプルになります。
 
 次のステートメントは、最初のパーティションを変更します。指定された式よりも小さい値を持つすべてのパーティションを削除し、一致したパーティションを新しい最初のパーティションにします。NULL パーティションには影響しません。
 
@@ -294,9 +294,9 @@ ALTER TABLE table_name FIRST PARTITION LESS THAN (<expression>)
 ALTER TABLE table_name LAST PARTITION LESS THAN (<expression>)
 ```
 
-#### INTERVALパーティショニングの詳細と制限事項 {#interval-partitioning-details-and-limitations}
+#### INTERVAL パーティショニングの詳細と制限事項 {#interval-partitioning-details-and-limitations}
 
-- INTERVALパーティショニング機能は、 `CREATE/ALTER TABLE`構文のみを使用します。メタデータに変更はないため、新しい構文で作成または変更されたテーブルは引き続きMySQLと互換性があります。
+- INTERVAL パーティショニング機能は、 `CREATE/ALTER TABLE`構文のみを使用します。メタデータに変更はないため、新しい構文で作成または変更されたテーブルは引き続きMySQLと互換性があります。
 - MySQLとの互換性を維持するため、 `SHOW CREATE TABLE`の出力形式に変更はありません。
 - 新しい`ALTER`構文は、INTERVAL に準拠する既存のテーブルに適用されます。これらのテーブルを`INTERVAL`構文で作成する必要はありません。
 - `INTERVAL`パーティショニングに`RANGE COLUMNS`構文を使用する場合、パーティショニングキーとして指定できる列は`INTEGER` 、 `DATE` 、または`DATETIME`型の単一の列のみです。
@@ -348,7 +348,7 @@ PARTITION BY LIST (store_id) (
 
 #### デフォルトリストパーティション {#default-list-partition}
 
-バージョン7.3.0以降では、リストまたはリストCOLUMNSでパーティションテーブルにデフォルトパーティションを追加できます。デフォルトパーティションはフォールバックパーティションとして機能し、どのパーティションの値セットにも一致しない行を配置できます。
+バージョン7.3.0以降では、リストまたはリストCOLUMNSパーティションテーブルにデフォルトパーティションを追加できます。デフォルトパーティションはフォールバックパーティションとして機能し、どのパーティションの値セットにも一致しない行を配置できます。
 
 > **Note:**
 >
