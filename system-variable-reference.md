@@ -899,7 +899,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [システム変数](/system-variables.md#tidb_auto_analyze_end_time)
 - [TiDB トラブルシューティング マップ](/tidb-troubleshooting-map.md)
-- [読み取りおよび書き込みレイテンシの増加のトラブルシューティング](/troubleshoot-cpu-issues.md)
+- [読み取りおよび書き込みレイテンシーの増加のトラブルシューティング](/troubleshoot-cpu-issues.md)
 - [TiDB 5.3 リリースノート](/releases/release-5.3.0.md)
 
 ### tidb_auto_analyze_partition_batch_size
@@ -923,7 +923,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 - [SQLに関するよくある質問](/faq/sql-faq.md)
 - [システム変数](/system-variables.md#tidb_auto_analyze_ratio)
 - [TiDB トラブルシューティング マップ](/tidb-troubleshooting-map.md)
-- [読み取りおよび書き込みレイテンシの増加のトラブルシューティング](/troubleshoot-cpu-issues.md)
+- [読み取りおよび書き込みレイテンシーの増加のトラブルシューティング](/troubleshoot-cpu-issues.md)
 - [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)
 - [TiDB 8.1.0 リリースノート](/releases/release-8.1.0.md)
 - [TiDB 2.0.1 リリースノート](/releases/release-2.0.1.md)
@@ -937,7 +937,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [システム変数](/system-variables.md#tidb_auto_analyze_start_time)
 - [TiDB トラブルシューティング マップ](/tidb-troubleshooting-map.md)
-- [読み取りおよび書き込みレイテンシの増加のトラブルシューティング](/troubleshoot-cpu-issues.md)
+- [読み取りおよび書き込みレイテンシーの増加のトラブルシューティング](/troubleshoot-cpu-issues.md)
 - [TiDB 5.3 リリースノート](/releases/release-5.3.0.md)
 
 ### tidb_auto_build_stats_concurrency
@@ -1225,7 +1225,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 - [SQLに関するよくある質問](/faq/sql-faq.md)
 - [システム変数](/system-variables.md#tidb_ddl_reorg_batch_size)
 - [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)
-- [読み取りおよび書き込みレイテンシの増加のトラブルシューティング](/troubleshoot-cpu-issues.md)
+- [読み取りおよび書き込みレイテンシーの増加のトラブルシューティング](/troubleshoot-cpu-issues.md)
 - [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)
 - [TiDB 8.5.0 リリースノート](/releases/release-8.5.0.md)
 - [TiDB 8.3.0 リリースノート](/releases/release-8.3.0.md)
@@ -1253,7 +1253,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 - [SQLに関するよくある質問](/faq/sql-faq.md)
 - [システム変数](/system-variables.md#tidb_ddl_reorg_priority)
 - [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)
-- [読み取りおよび書き込みレイテンシの増加のトラブルシューティング](/troubleshoot-cpu-issues.md)
+- [読み取りおよび書き込みレイテンシーの増加のトラブルシューティング](/troubleshoot-cpu-issues.md)
 - [TiDB 2.1 RC1 リリースノート](/releases/release-2.1-rc.1.md)
 
 ### tidb_ddl_reorg_worker_cnt
@@ -1271,7 +1271,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 - [SQLに関するよくある質問](/faq/sql-faq.md)
 - [システム変数](/system-variables.md#tidb_ddl_reorg_worker_cnt)
 - [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)
-- [読み取りおよび書き込みレイテンシの増加のトラブルシューティング](/troubleshoot-cpu-issues.md)
+- [読み取りおよび書き込みレイテンシーの増加のトラブルシューティング](/troubleshoot-cpu-issues.md)
 - [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)
 - [TiDB 8.5.0 リリースノート](/releases/release-8.5.0.md)
 - [TiDB 8.3.0 リリースノート](/releases/release-8.3.0.md)

@@ -216,7 +216,7 @@
       - [スロークエリを分析する](/analyze-slow-queries.md)
     - [TiDB メモリ不足](/troubleshoot-tidb-oom.md)
     - [ホットスポット](/troubleshoot-hot-spot-issues.md)
-    - [読み書きレイテンシの増加](/troubleshoot-cpu-issues.md)
+    - [読み書きレイテンシーの増加](/troubleshoot-cpu-issues.md)
     - [楽観的トランザクションにおける書き込み競合](/troubleshoot-write-conflicts.md)
     - [ディスクI/O使用率が高い](/troubleshoot-high-disk-io.md)
     - [ロックの競合](/troubleshoot-lock-conflicts.md)

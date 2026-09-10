@@ -203,7 +203,7 @@ TiDBバージョン: 6.3.0-DMR
 
 - TiCDC はグレースフル アップグレードをサポート [#4757](https://github.com/pingcap/tiflow/issues/4757) @[overvenus](https://github.com/overvenus)@[3AceShowHand](https://github.com/3AceShowHand)
 
-    TiCDCを[TiUP](/ticdc/deploy-ticdc.md#upgrade-cautions) （&gt;=v1.11.0）または[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.3/configure-a-tidb-cluster#configure-graceful-upgrade-for-ticdc-cluster) （&gt;=v1.3.8）を使用してデプロイする場合、TiCDCクラスタをスムーズにアップグレードできます。アップグレード中は、データレプリケーションのレイテンシーが30秒以下に抑えられます。これにより安定性が向上し、TiCDCはレイテンシに敏感なアプリケーションをより適切にサポートできるようになります。
+    TiCDCを[TiUP](/ticdc/deploy-ticdc.md#upgrade-cautions) （&gt;=v1.11.0）または[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.3/configure-a-tidb-cluster#configure-graceful-upgrade-for-ticdc-cluster) （&gt;=v1.3.8）を使用してデプロイする場合、TiCDCクラスタをスムーズにアップグレードできます。アップグレード中は、データレプリケーションのレイテンシーが30秒以下に抑えられます。これにより安定性が向上し、TiCDCはレイテンシーに敏感なアプリケーションをより適切にサポートできるようになります。
 
 ## 互換性の変更 {#compatibility-changes}
 
