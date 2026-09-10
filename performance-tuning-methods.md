@@ -14,7 +14,7 @@ summary: データベース時間に基づいてデータベースシステム�
 TiDBは、SQL処理パスとデータベース時間を継続的に測定・収集します。そのため、TiDBではデータベースパフォーマンスのボトルネックを容易に特定できます。データベース時間メトリクスに基づいて、ユーザー応答時間のデータがない場合でも、次の2つの目標を達成できます。
 
 - トランザクション内の平均 SQL 処理レイテンシーと TiDB 接続のアイドル時間を比較して、ボトルネックが TiDB にあるかどうかを判断します。
-- ボトルネックが TiDB にある場合は、データベース時間の概要、色ベースのパフォーマンスデータ、主要なメトリック、リソース使用率、トップレイテンシーのレイテンシの内訳に基づいて、分散システム内の正確なモジュールをさらに特定します。
+- ボトルネックが TiDB にある場合は、データベース時間の概要、色ベースのパフォーマンスデータ、主要なメトリック、リソース使用率、トップダウンのレイテンシーの内訳に基づいて、分散システム内の正確なモジュールをさらに特定します。
 
 ### TiDB がボトルネックですか? {#is-tidb-the-bottleneck}
 
@@ -50,33 +50,33 @@ TiDBは、SQL処理パスとデータベース時間を継続的に測定・収�
 
 パフォーマンス概要ダッシュボードは、TiDB、PD、および TiKV のメトリックを調整し、それぞれを次のセクションで表示します。
 
-- データベース時間と SQL 実行時間の概要: 色分けされた SQL タイプ、SQL 実行フェーズ別のデータベース時間、およびさまざまな要求のデータベース時間により、データベースのワークロード特性とパフォーマンスのボトルネックを迅速に特定できます。
-- 主要なメトリックとリソース使用率: データベース QPS、接続情報、アプリケーションとデータベース間の要求コマンド タイプ、データベース内部 TSO および KV 要求 OPS、および TiDB/TiKV リソースの使用率が含まれます。
-- トップダウンのレイテンシーの内訳: クエリレイテンシーと接続アイドル時間の比較、クエリレイテンシーの内訳、SQL 実行における TSO 要求と KV 要求のレイテンシー、および TiKV 内部書き込みレイテンシーの内訳が含まれます。
+- データベース時間と SQL 実行時間の概要: 色分けされた SQL タイプ、SQL 実行フェーズ別のデータベース時間、およびさまざまなリクエストのデータベース時間により、データベースのワークロード特性とパフォーマンスのボトルネックを迅速に特定できます。
+- 主要なメトリックとリソース使用率: データベース QPS、接続情報、アプリケーションとデータベース間のリクエストコマンド タイプ、データベース内部 TSO および KV リクエスト OPS、および TiDB/TiKV リソースの使用率が含まれます。
+- トップダウンのレイテンシーの内訳: クエリレイテンシーと接続アイドル時間の比較、クエリレイテンシーの内訳、SQL 実行における TSO リクエストと KV リクエストのレイテンシー、および TiKV 内部書き込みレイテンシーの内訳が含まれます。
 
 ### データベース時間とSQL実行時間の概要 {#database-time-and-sql-execution-time-overview}
 
-データベース時間メトリックは、TiDB が 1秒あたりに SQL を処理するレイテンシーの合計であり、これは TiDB が 1秒あたりにアプリケーションの SQL 要求を同時に処理する合計時間でもあります (アクティブな接続の数に等しい)。
+データベース時間メトリックは、TiDB が 1秒あたりに SQL を処理するレイテンシーの合計であり、これは TiDB が 1秒あたりにアプリケーションの SQL リクエストを同時に処理する合計時間でもあります (アクティブな接続の数に等しい)。
 
 パフォーマンス概要ダッシュボードには、以下の3つの積み上げ面グラフが表示されます。これらのグラフは、データベースのワークロードプロファイルを把握し、SQL実行中のステートメント、SQLフェーズ、TiKVまたはPDリクエストタイプの観点からボトルネックの原因を迅速に特定するのに役立ちます。
 
-- SQLタイプ別のデータベース時間
-- SQLフェーズ別データベース時間
-- SQL実行時間の概要
+- Database Time By SQL Type
+- Database Time By SQL Phase
+- SQL Execute Time Overview
 
 #### 色で調整 {#tune-by-color}
 
 データベース時間の内訳と実行時間の概要を示す図は、予想通りの時間消費と予想外の時間消費の両方を直感的に示します。そのため、パフォーマンスのボトルネックを迅速に特定し、ワークロードのプロファイルを把握できます。緑色と青色の領域は、通常の時間消費とリクエスト数を表します。これらの2つの図で、緑色または青色以外の領域が大きな割合を占めている場合、データベース時間の配分は不適切です。
 
-- SQL タイプ別のデータベース時間:
+- Database Time By SQL Type:
 
     - 青： `Select`文
     - 緑: `Update`、 `Insert`、 `Commit`などのDML文
     - 赤: `StmtPrepare`、 `StmtReset`、 `StmtFetch`、 `StmtClose`などの一般的なSQLタイプ
 
-- SQLフェーズ別データベース時間：SQL実行フェーズは緑色で、その他のフェーズは赤色で表示されます。緑色以外の領域が大きい場合は、実行フェーズ以外のフェーズでデータベース時間が大量に消費されていることを意味し、さらなる原因分析が必要です。よくあるシナリオとしては、プリペアドプランキャッシュが利用できないために、オレンジ色で表示されるコンパイルフェーズで大きな領域が消費されているケースが挙げられます。
+- Database Time By SQL Phase：SQL実行フェーズは緑色で、その他のフェーズは赤色で表示されます。緑色以外の領域が大きい場合は、実行フェーズ以外のフェーズでデータベース時間が大量に消費されていることを意味し、さらなる原因分析が必要です。よくあるシナリオとしては、プリペアドプランキャッシュが利用できないために、オレンジ色で表示されるコンパイルフェーズで大きな領域が消費されているケースが挙げられます。
 
-- SQL実行時間の概要：緑のメトリックは一般的なKV書き込みリクエスト（ `Prewrite`や`Commit`など）、青のメトリックは一般的なKV読み取りリクエスト（CopやGetなど）、紫のメトリックはTiFlash MPPリクエストを表します。その他の色のメトリックは、注意が必要な予期しない状況を表します。例えば、悲観的ロックKVリクエストは赤で、TSO待機は濃い茶色でマークされています。青や緑以外の領域が大きい場合、SQL実行中にボトルネックが発生していることを意味します。例：
+- SQL Execute Time Overview：緑のメトリックは一般的なKV書き込みリクエスト（ `Prewrite`や`Commit`など）、青のメトリックは一般的なKV読み取りリクエスト（CopやGetなど）、紫のメトリックはTiFlash MPPリクエストを表します。その他の色のメトリックは、注意が必要な予期しない状況を表します。例えば、悲観的ロックKVリクエストは赤で、TSO待機は濃い茶色でマークされています。青や緑以外の領域が大きい場合、SQL実行中にボトルネックが発生していることを意味します。例：
 
     - 重大なロック競合が発生した場合、赤色の領域が大きな割合を占めることになります。
     - TSO の待ち時間に過度に時間がかかってしまうと、濃い茶色の領域が大きな割合を占めることになります。
@@ -85,36 +85,34 @@ TiDBは、SQL処理パスとデータベース時間を継続的に測定・収�
 
 ![TPC-C](/media/performance/tpcc_db_time.png)
 
-- SQL タイプ別のデータベース時間: 最も時間のかかるステートメントは、 `commit` 、 `update` 、 `select` 、および`insert`文です。
-- SQL フェーズ別のデータベース時間: 最も時間のかかるフェーズは緑色で表示される SQL 実行です。
-- SQL 実行時間の概要: SQL 実行で最も時間のかかる KV 要求は、緑色の`Prewrite`と`Commit`です。
+- Database Time By SQL Type: 最も時間のかかるステートメントは、 `commit` 、 `update` 、 `select` 、および`insert`文です。
+- Database Time By SQL Phase: 最も時間のかかるフェーズは緑色で表示される SQL 実行です。
+- SQL Execute Time Overview: SQL 実行で最も時間のかかる KV リクエストは、緑色の`Prewrite`と`Commit`です。
 
     > **Note:**
     >
-    > KVリクエストの合計時間が実行時間よりも長くなるのは正常です。これは、TiDBエグゼキューターが複数のTiKVに同時にKVリクエストを送信する可能性があるためです。その結果、KVリクエストの合計待機時間が実行時間よりも長くなります。前述のTPC-Cワークロードでは、トランザクションがコミットされる際に、TiDBは`Prewrite`つと`Commit`リクエストを複数のTiKVに同時に送信します。したがって、この例では、 `Prewrite` 、 `Commit` 、 `PessimisticLock`リクエストの合計時間は明らかに実行時間よりも長くなります。
+    > KVリクエストの合計時間が実行時間よりも長くなるのは正常です。これは、TiDBエグゼキューターが複数のTiKVに同時にKVリクエストを送信する可能性があるためです。その結果、KVリクエストの合計待機時間が実行時間よりも長くなります。前述のTPC-Cワークロードでは、トランザクションがコミットされる際に、TiDBは`Prewrite`と`Commit`リクエストを複数のTiKVに同時に送信します。したがって、この例では、 `Prewrite` 、 `Commit` 、 `PessimisticLock`リクエストの合計時間は明らかに実行時間よりも長くなります。
     >
-    > - `execute`実行時間は、KVリクエストの合計時間と`tso_wait`目の実行時間の合計よりも大幅に長くなる可能性があります。これは、SQL実行時間のほとんどがTiDBエグゼキュータ内で費やされていることを意味します。以下に、よくある2つの例を示します。
+    > - `execute`実行時間は、KVリクエストの合計時間と`tso_wait`の実行時間の合計よりも大幅に長くなる可能性があります。これは、SQL実行時間のほとんどがTiDBエグゼキュータ内で費やされていることを意味します。以下に、よくある2つの例を示します。
     >
-    > ```
-    > - Example 1: After TiDB executor reads a large amount of data from TiKV, it needs to do complex join and aggregation inside TiDB, which consumes a lot of time.
-    > - Example 2: The application experiences serious write statement lock conflicts. Frequent lock retries result in long `Retried execution time`.
-    > ```
+    > - 例1: TiDBエグゼキュータがTiKVから大量のデータを読み取った後、TiDB内部で複雑な結合や集計を行う必要があり、多くの時間を消費します。
+    > - 例2: アプリケーションで深刻な書き込み文のロック競合が発生しています。頻繁なロック再試行により、 `Retried execution time`が長くなります。
 
 **例2: OLTP読み取り中心のワークロード**
 
 ![OLTP](/media/performance/oltp_normal_db_time.png)
 
-- SQL タイプ別のデータベース時間: 時間のかかる主なステートメントは`SELECT` 、 `COMMIT` 、 `UPDATE` 、 `INSERT`で、その中で`SELECT`最も多くのデータベース時間を消費します。
-- SQL フェーズ別のデータベース時間: ほとんどの時間は緑色のフェーズ`execute`で消費されます。
-- SQL 実行時間の概要: SQL 実行フェーズでは、濃い茶色の`pd tso_wait` 、青色の`KV Get` 、緑色の`Prewrite`と`Commit`時間がかかっています。
+- Database Time By SQL Type: 時間のかかる主なステートメントは`SELECT` 、 `COMMIT` 、 `UPDATE` 、 `INSERT`で、その中で`SELECT`が最も多くのデータベース時間を消費します。
+- Database Time By SQL Phase: ほとんどの時間は緑色の`execute`フェーズで消費されます。
+- SQL Execute Time Overview: SQL 実行フェーズでは、濃い茶色の`pd tso_wait` 、青色の`KV Get` 、緑色の`Prewrite`と`Commit`時間がかかっています。
 
 **例3: 読み取り専用OLTPワークロード**
 
 ![OLTP](/media/performance/oltp_long_compile_db_time.png)
 
-- SQL タイプ別のデータベース時間: 主に`SELECT`文です。
-- SQLフェーズ別データベース時間：時間のかかる主なフェーズは、オレンジ色のフェーズ`compile`と緑色のフェーズ`execute`です。フェーズ`compile`のレイテンシが最も高く、TiDBが実行計画の生成に時間がかかりすぎていることを示しています。その後のパフォーマンスデータに基づいて根本原因をさらに特定する必要があります。
-- SQL 実行時間の概要: 青色の KV BatchGet 要求は、SQL 実行中に最も多くの時間を消費します。
+- Database Time By SQL Type: 主に`SELECT`文です。
+- Database Time By SQL Phase：時間のかかる主なフェーズは、オレンジ色の`compile`フェーズと緑色の`execute`フェーズです。`compile`フェーズのレイテンシーが最も高く、TiDBが実行計画の生成に時間がかかりすぎていることを示しています。その後のパフォーマンスデータに基づいて根本原因をさらに特定する必要があります。
+- SQL Execute Time Overview: 青色の KV BatchGet リクエストは、SQL 実行中に最も多くの時間を消費します。
 
 > **Note:**
 >
@@ -124,27 +122,27 @@ TiDBは、SQL処理パスとデータベース時間を継続的に測定・収�
 
 ![OLTP](/media/performance/oltp_lock_contention_db_time.png)
 
-- SQL タイプ別のデータベース時間: 主に`UPDATE`文です。
-- SQL フェーズ別のデータベース時間: ほとんどの時間は緑色の実行フェーズで消費されます。
-- SQL実行時間の概要：赤で示されているKVリクエストPessimisticLockは、SQL実行中に最も多くの時間を消費しており、実行時間はKVリクエストの合計時間よりも明らかに長くなっています。これは、書き込みステートメントにおける深刻なロック競合と頻繁なロック再試行によって`Retried execution time`長くなっていることが原因です。現在、TiDBは`Retried execution time`測定していません。
+- Database Time By SQL Type: 主に`UPDATE`文です。
+- Database Time By SQL Phase: ほとんどの時間は緑色の実行フェーズで消費されます。
+- SQL Execute Time Overview：赤で示されているKVリクエストPessimisticLockは、SQL実行中に最も多くの時間を消費しており、実行時間はKVリクエストの合計時間よりも明らかに長くなっています。これは、書き込みステートメントにおける深刻なロック競合と頻繁なロック再試行によって`Retried execution time`が長くなっていることが原因です。現在、TiDBは`Retried execution time`を測定していません。
 
 **例5: HTAP CH-ベンチマークワークロード**
 
 ![HTAP](/media/performance/htap_tiflash_mpp.png)
 
-- SQL タイプ別のデータベース時間: 主に`SELECT`文です。
-- SQL フェーズ別のデータベース時間: ほとんどの時間は緑色の実行フェーズで消費されます。
-- SQL 実行時間の概要: 紫色で表示される`tiflash_mpp`のリクエストは、SQL 実行中に最も多くの時間を消費します。次に、青色の`Cop`のリクエストを含む KV リクエストと、緑色の`Prewrite`リクエストと`Commit`リクエストが続きます。
+- Database Time By SQL Type: 主に`SELECT`文です。
+- Database Time By SQL Phase: ほとんどの時間は緑色の実行フェーズで消費されます。
+- SQL Execute Time Overview: 紫色で表示される`tiflash_mpp`のリクエストは、SQL 実行中に最も多くの時間を消費します。次に、青色の`Cop`のリクエストを含む KV リクエストと、緑色の`Prewrite`リクエストと`Commit`リクエストが続きます。
 
 ### TiDB の主要メトリクスとクラスタリソースの使用率 {#tidb-key-metrics-and-cluster-resource-utilization}
 
-#### 1秒あたりのクエリ数、1秒あたりのコマンド数、プリペアドプランキャッシュ {#query-per-second-command-per-second-and-prepared-plan-cache}
+#### Query Per Second, Command Per Second, and Prepared-Plan-Cache {#query-per-second-command-per-second-and-prepared-plan-cache}
 
 パフォーマンス概要の次の3つのパネルを確認することで、アプリケーションのワークロード タイプ、アプリケーションが TiDB と対話する方法、アプリケーションが TiDB [プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)を最大限に活用しているかどうかを知ることができます。
 
 - QPS: Query Per Second（1秒あたりのクエリ数）の略。アプリケーションによって実行されたSQL文の数を示します。
-- CPSタイプ別：Command Per Secondの略。コマンドはMySQLプロトコル固有のコマンドを示します。クエリ文は、クエリコマンドまたはプリペアドステートメントのいずれかによってTiDBに送信できます。
-- Queries Using Plan Cache OPS: `avg-hit` 、TiDB クラスターで 1秒あたりに実行計画 キャッシュを使用するクエリの数であり、 `avg-miss` 、TiDB クラスターで 1秒あたりに実行計画 キャッシュを使用しないクエリの数です。
+- CPS By Type: Command Per Secondの略。コマンドはMySQLプロトコル固有のコマンドを示します。クエリ文は、クエリコマンドまたはプリペアドステートメントのいずれかによってTiDBに送信できます。
+- Queries Using Plan Cache OPS: `avg-hit`は、TiDB クラスターで 1秒あたりに実行計画 キャッシュを使用するクエリの数であり、 `avg-miss`は、TiDB クラスターで 1秒あたりに実行計画 キャッシュを使用しないクエリの数です。
 
     `avg-hit + avg-miss`は`StmtExecute`に等しく、これは1秒あたりに実行される全クエリ数です。TiDBでプリペアドプランキャッシュを有効にすると、以下の3つのシナリオが発生します。
 
@@ -161,7 +159,7 @@ TPC-C ワークロードは主に`UPDATE` 、 `SELECT` 、 `INSERT`文です。�
 
 ![TPC-C](/media/performance/tpcc_qps.png)
 
-**例 2: プリペアドプランキャッシュは読み取り専用 OLTP ワークロードのクエリ コマンドには使用できません**
+**例2: プリペアドプランキャッシュは読み取り専用 OLTP ワークロードのクエリ コマンドには使用できません**
 
 このワークロードでは、 `Commit QPS` = `Rollback QPS` = `Select QPS` 。アプリケーションは自動コミット同時実行を有効にしており、接続プールから接続がフェッチされるたびにロールバックが実行されます。その結果、これら3つの文は同じ回数実行されます。
 
@@ -192,14 +190,14 @@ TPC-C ワークロードは主に`UPDATE` 、 `SELECT` 、 `INSERT`文です。�
 
 - QPSパネルでは、赤い太線が失敗したクエリの数を示し、右側のY軸がその数値の座標値を示しています。この例では、1秒あたりの失敗したクエリの数は74.6です。
 - CPS By Type パネルでは、1秒あたり`StmtPrepare`コマンドの数が 1秒あたり`StmtClose`コマンドの数よりはるかに多く、プリペアドステートメントのアプリケーションでオブジェクト リークが発生していることを示しています。
-- Queries Using Plan Cache OPS パネルでは、 `avg-miss`がタイプ別 CPS パネルの`StmtExecute`とほぼ等しく、ほとんどすべての SQL 実行で実行計画 キャッシュが失われていることを示しています。
+- Queries Using Plan Cache OPS パネルでは、 `avg-miss`が CPS By Type パネルの`StmtExecute`とほぼ等しく、ほとんどすべての SQL 実行で実行計画 キャッシュが失われていることを示しています。
 
-#### KV/TSO 要求 OPS とソース別の KV 要求時間 {#kv-tso-request-ops-and-kv-request-time-by-source}
+#### KV/TSO Request OPS and KV Request Time By Source {#kv-tso-request-ops-and-kv-request-time-by-source}
 
-- KV/TSOリクエストOPSパネルでは、1秒あたりのKVおよびTSOリクエストの統計情報を確認できます。統計情報のうち、 `kv request total` TiDBからTiKVへのすべてのリクエストの合計を表します。TiDBからPDおよびTiKVへのリクエストの種類を観察することで、クラスター内のワークロードプロファイルを把握できます。
-- KV リクエスト時間 (ソース別) パネルでは、各 KV リクエストタイプとすべてのリクエストソースの時間比率を表示できます。
-    - kv 要求合計時間: 1秒あたりの KV およびTiFlash要求の処理時間の合計。
-    - 各 KV リクエストと対応するリクエストソースは積み上げ棒グラフを形成し、 `external`通常のビジネスリクエストを識別し、 `internal`内部アクティビティリクエスト (DDL やauto analyzeリクエストなど) を識別します。
+- KV/TSO Request OPSパネルでは、1秒あたりのKVおよびTSOリクエストの統計情報を確認できます。統計情報のうち、 `kv request total`は TiDBからTiKVへのすべてのリクエストの合計を表します。TiDBからPDおよびTiKVへのリクエストの種類を観察することで、クラスター内のワークロードプロファイルを把握できます。
+- KV Request Time By Source パネルでは、各 KV リクエストタイプとすべてのリクエストソースの時間比率を表示できます。
+    - kv リクエスト合計時間: 1秒あたりの KV およびTiFlashリクエストの処理時間の合計。
+    - 各 KV リクエストと対応するリクエストソースは積み上げ棒グラフを形成し、 `external`は通常のビジネスリクエストを識別し、 `internal`は内部アクティビティリクエスト (DDL やauto analyzeリクエストなど) を識別します。
 
 **例1: 忙しい作業負荷**
 
@@ -207,8 +205,8 @@ TPC-C ワークロードは主に`UPDATE` 、 `SELECT` 、 `INSERT`文です。�
 
 この TPC-C ワークロードでは、
 
-- 1秒あたりのKVリクエストの総数は79,700です。リクエスト数の多い順に、リクエストタイプ`BatchGet` `Prewrite` `Commit` `PessimisticLock`
-- KV 処理時間のほとんどは`Commit-external_Commit`と`Prewrite-external_Commit`に費やされており、最も時間のかかる KV 要求は外部コミット ステートメントからの`Commit`と`Prewrite`あることがわかります。
+- 1秒あたりのKVリクエストの総数は79,700です。リクエスト数の多い順に、リクエストタイプは`Prewrite`、 `Commit`、 `PessimisticLock`、 `BatchGet`です。
+- KV 処理時間のほとんどは`Commit-external_Commit`と`Prewrite-external_Commit`に費やされており、最も時間のかかる KV リクエストは外部コミット ステートメントからの`Commit`と`Prewrite`であることがわかります。
 
 **例2: ワークロードを分析する**
 
@@ -217,13 +215,13 @@ TPC-C ワークロードは主に`UPDATE` 、 `SELECT` 、 `INSERT`文です。�
 このワークロードでは、クラスター内で実行されているステートメントは`ANALYZE`だけです。
 
 - 1 秒あたりの KV リクエストの合計数は 35.5 で、1秒あたりの Cop リクエストの数は 9.3 です。
-- KV 処理時間のほとんどは`Cop-internal_stats`に費やされており、最も時間のかかる KV 要求は内部`ANALYZE`操作のうちの`Cop`であることを示しています。
+- KV 処理時間のほとんどは`Cop-internal_stats`に費やされており、最も時間のかかる KV リクエストは内部`ANALYZE`操作のうちの`Cop`であることを示しています。
 
 #### CPUとメモリの使用量 {#cpu-and-memory-usage}
 
-TiDB、TiKV、PDのCPU/メモリパネルでは、平均CPU、最大CPU、デルタCPU（最大CPU使用率から最小CPU使用率を引いた値）、CPUクォータ、最大メモリ使用量など、それぞれの論理CPU使用率とメモリメモリ量を監視できます。これらの指標に基づいて、TiDB、TiKV、PDの全体的なリソース使用状況を把握できます。
+TiDB、TiKV、PDのCPU/メモリパネルでは、平均CPU、最大CPU、デルタCPU（最大CPU使用率から最小CPU使用率を引いた値）、CPUクォータ、最大メモリ使用量など、それぞれの論理CPU使用率とメモリ使用量を監視できます。これらの指標に基づいて、TiDB、TiKV、PDの全体的なリソース使用状況を把握できます。
 
-- `delta`値に基づいて、TiDB または TiKV の CPU 使用率が不均衡かどうかを判断できます。TiDB の場合、 `delta`高い場合、通常、TiDB インスタンス間のアプリケーション接続が不均衡であることを意味します。TiKV の場合、 `delta`が高い場合、通常、クラスター内に読み取り/書き込みのホットスポットがあることを意味します。
+- `delta`値に基づいて、TiDB または TiKV の CPU 使用率が不均衡かどうかを判断できます。TiDB の場合、 `delta`が高い場合、通常、TiDB インスタンス間のアプリケーション接続が不均衡であることを意味します。TiKV の場合、 `delta`が高い場合、通常、クラスター内に読み取り/書き込みのホットスポットがあることを意味します。
 - TiDB、TiKV、PD のリソース使用状況の概要を把握することで、クラスター内にリソースのボトルネックがあるかどうか、TiKV、TiDB、PD にスケールアウトまたはスケールアップが必要かどうかをすぐに判断できます。
 
 **例1: TiKVリソースの使用率が高い**
@@ -253,7 +251,7 @@ TiDB、TiKV、PDのCPU/メモリパネルでは、平均CPU、最大CPU、デル
     - `TiDB -> TiKV: general` : フォアグラウンドトランザクションが TiDB から TiKV に書き込まれる速度
     - `TiDB -> TiKV: internal` : 内部トランザクションが TiDB から TiKV に書き込まれる速度
     - `TiKV -> Rocksdb` : TiKVからRocksDBへの書き込み操作の流れ
-    - `RocksDB Compaction` : RocksDBの圧縮操作によって生成される読み取りおよび書き込みI/Oフローの合計。`RocksDB Compaction` `TiKV -> Rocksdb`よりも大幅に大きく、平均行サイズが512バイトを超える場合は、min-blob-sizeを`"512B"`または`"1KB"`に設定し、blob-file-compressionを`"zstd"`に設定することで、Titanによる圧縮I/Oフローを削減できます。
+    - `RocksDB Compaction` : RocksDBの圧縮操作によって生成される読み取りおよび書き込みI/Oフローの合計。`RocksDB Compaction`が`TiKV -> Rocksdb`よりも大幅に大きく、平均行サイズが512バイトを超える場合は、min-blob-sizeを`"512B"`または`"1KB"`に設定し、blob-file-compressionを`"zstd"`に設定することで、Titanによる圧縮I/Oフローを削減できます。
 
         ```toml
         [rocksdb.titan]
@@ -270,13 +268,13 @@ TiDB、TiKV、PDのCPU/メモリパネルでは、平均CPU、最大CPU、デル
 - トラフィックを読み取る
 
     - `TiDB -> Client` : 14.2 MB/秒
-    - `Rocksdb -> TiKV` : 469 MB/秒。読み取り操作（ `SELECT`文）と書き込み操作（ `INSERT` 、および`DELETE`文）の両方で`UPDATE`トランザクションをコミットする前にRocksDBからTiKVにデータを読み込む必要があることに注意してください。
+    - `Rocksdb -> TiKV` : 469 MB/秒。読み取り操作（ `SELECT`文）と書き込み操作（ `INSERT` 、 `UPDATE` 、および`DELETE`文）の両方で、トランザクションをコミットする前にRocksDBからTiKVにデータを読み込む必要があることに注意してください。
 
 - トラフィックを書き込む
 
     - `Client -> TiDB` : 5.05 MB/秒
     - `TiDB -> TiKV: general` : 13.1 MB/秒
-    - `TiDB -> TiKV` : 内部: 5.07 KB/秒
+    - `TiDB -> TiKV: internal` : 5.07 KB/秒
     - `TiKV -> Rocksdb` : 109 MB/秒
     - `RocksDB Compaction` : 567 MB/秒
 
@@ -310,9 +308,9 @@ TiDB、TiKV、PDのCPU/メモリパネルでは、平均CPU、最大CPU、デル
 
 レイテンシーパネルには平均値と99パーセンタイルが表示されます。平均値は全体的なボトルネックの特定に役立ち、99パーセンタイル、999パーセンタイル、または999パーセンタイルは、レイテンシージッターの顕著な変化の有無を判断するのに役立ちます。
 
-#### 期間、接続アイドル期間、接続数 {#duration-connection-idle-duration-and-connection-count}
+#### Duration, Connection Idle Duration, and Connection Count {#duration-connection-idle-duration-and-connection-count}
 
-「期間」パネルには、すべてのステートメントの平均レイテンシー、および各SQLタイプの平均レイテンシーが表示されます。「接続アイドル期間」パネルには、平均およびP99接続アイドル期間が表示されます。接続アイドル期間には、以下の2つの状態が含まれます。
+`Duration` パネルには、すべてのステートメントの平均レイテンシー、および各SQLタイプの平均レイテンシーが表示されます。`Connection Idle Duration` パネルには、平均およびP99接続アイドル期間が表示されます。接続アイドル期間には、以下の2つの状態が含まれます。
 
 - in-txn: 接続がトランザクション内にある場合、前の SQL を処理してから次の SQL文を受信するまでの間隔。
 - not-in-txn: 接続がトランザクション内にない場合に、前の SQL を処理してから次の SQL文を受信するまでの間隔。
@@ -330,7 +328,7 @@ TiDB、TiKV、PDのCPU/メモリパネルでは、平均CPU、最大CPU、デル
 - アプリケーションサーバーからデータベースへのネットワークレイテンシーが高いです。例えば、パブリッククラウド環境では、アプリケーションとTiDBクラスタが同じリージョンに存在しない、またはDNSワークロードバランサとTiDBクラスタが同じリージョンに存在しない場合、ネットワークレイテンシーが高くなります。
 - ボトルネックとなっているのはクライアントアプリケーションです。アプリケーションサーバーのCPUコアとNumaリソースを最大限に活用できていません。例えば、TiDBへの数千ものJDBC接続を確立するのに、たった1つのJVMしか使用されていません。
 
-「接続数」パネルでは、総接続数と各TiDBノードの接続数を確認できます。これにより、総接続数が正常かどうか、また各TiDBノードの接続数が不均衡かどうかを確認できます。`active connections`はアクティブな接続数を示し、これは1秒あたりのデータベース時間に相当します。右側のY軸（ `disconnection/s` ）は、クラスター内の1秒あたりの切断数を示しており、アプリケーションが短い接続を使用しているかどうかを判断するのに役立ちます。
+`Connection Count` パネルでは、総接続数と各TiDBノードの接続数を確認できます。これにより、総接続数が正常かどうか、また各TiDBノードの接続数が不均衡かどうかを確認できます。`active connections`はアクティブな接続数を示し、これは1秒あたりのデータベース時間に相当します。右側のY軸（ `disconnection/s` ）は、クラスター内の1秒あたりの切断数を示しており、アプリケーションが短い接続を使用しているかどうかを判断するのに役立ちます。
 
 **例1: 切断回数が多すぎる**
 
@@ -348,7 +346,7 @@ TiDB、TiKV、PDのCPU/メモリパネルでは、平均CPU、最大CPU、デル
 
 この TPC-C ワークロードでは、
 
-- すべてのSQL文の平均レイテンシーとP99レイテンシーはそれぞれ477マイクロ秒と3.13ミリ秒です。コミット文、挿入文、クエリ文の平均レイテンシはそれぞれ2.02ミリ秒、609マイクロ秒、468マイクロ秒です。
+- すべてのSQL文の平均レイテンシーとP99レイテンシーはそれぞれ477マイクロ秒と3.13ミリ秒です。コミット文、挿入文、クエリ文の平均レイテンシーはそれぞれ2.02ミリ秒、609マイクロ秒、468マイクロ秒です。
 - トランザクション`avg-in-txn`の平均接続アイドル時間は 171 マイクロ秒です。
 
 平均クエリレイテンシーは`avg-in-txn`よりも大幅に大きいため、トランザクションの主なボトルネックはデータベース内にあることを意味します。
@@ -357,13 +355,13 @@ TiDB、TiKV、PDのCPU/メモリパネルでは、平均CPU、最大CPU、デル
 
 ![TiDB is not Bottleneck](/media/performance/cloud_query_long_idle.png)
 
-このワークロードでは、平均クエリレイテンシーは 1.69 ミリ秒、 `avg-in-txn` 18 ミリ秒です。これは、TiDB がトランザクション内の SQL文を処理するために平均 1.69 ミリ秒を費やし、その後、次のステートメントを受信するために 18 ミリ秒待機する必要があることを示しています。
+このワークロードでは、平均クエリレイテンシーは 1.69 ミリ秒、 `avg-in-txn`は 18 ミリ秒です。これは、TiDB がトランザクション内の SQL文を処理するために平均 1.69 ミリ秒を費やし、その後、次のステートメントを受信するために 18 ミリ秒待機する必要があることを示しています。
 
 平均クエリレイテンシーは`avg-in-txn`を大幅に下回っています。ユーザー応答時間のボトルネックはTiDBではありません。この例はパブリッククラウド環境におけるもので、アプリケーションとデータベースが同じリージョンにないため、アプリケーションとデータベース間のネットワークレイテンシーが高く、接続アイドル時間が非常に長くなります。
 
-#### 解析、コンパイル、実行時間 {#parse-compile-and-execute-duration}
+#### Parse, Compile, and Execute Duration {#parse-compile-and-execute-duration}
 
-TiDB では、クエリステートメントの送信から結果の返送までに[典型的な処理フロー](/sql-optimization-concepts.md)かかります。
+TiDB では、クエリステートメントの送信から結果の返送までに[典型的な処理フロー](/sql-optimization-concepts.md)があります。
 
 TiDB での SQL 処理は、 `get token` 、 `parse` 、 `compile` 、 `execute` 4つのフェーズで構成されます。
 
@@ -380,40 +378,40 @@ avg Query Duration = avg Get Token + avg Parse Duration + avg Compile Duration +
 
 通常、 `query`レイテンシーのうち、`execute`フェーズが大部分を占めます。ただし、以下の場合には、`parse`フェーズと`compile`フェーズも大きな割合を占めることがあります。
 
-- フェーズ`parse`での長いレイテンシー: たとえば、ステートメント`query`が長い場合、SQL テキストを解析するために多くの CPU が消費されます。
+- `parse`フェーズでの長いレイテンシー: たとえば、ステートメント`query`が長い場合、SQL テキストを解析するために多くの CPU が消費されます。
 - `compile`フェーズでの長いレイテンシー：プリペアドプランキャッシュにヒットしない場合、TiDBはSQL実行ごとに実行計画をコンパイルする必要があります。`compile`フェーズのレイテンシーは数ミリ秒から数十ミリ秒、あるいはそれ以上になる場合があります。プリペアドプランキャッシュにヒットしない場合、`compile`フェーズで論理的および物理的な最適化が行われ、CPUとメモリを大量に消費し、Goランタイム（TiDBは[`Go`](https://go.dev/)で記述されています）に負担がかかり、他のTiDBコンポーネントのパフォーマンスに影響を与えます。プリペアドプランキャッシュは、TiDBにおけるOLTPワークロードの効率的な処理に重要です。
 
 **例1: `compile`フェーズにおけるデータベースのボトルネック**
 
 ![Compile](/media/performance/long_compile.png)
 
-上の図では、 `execute` `parse`の平均時間はそれぞれ 17.1 `compile`秒、729 マイクロ秒、681 マイクロ秒です。フェーズ`compile`レイテンシーが高いのは、アプリケーションが`query`コマンドインターフェースを使用しており、プリペアドプランキャッシュを使用できないためです。
+上の図では、 `parse` 、 `compile` 、 `execute`フェーズの平均時間はそれぞれ17.1マイクロ秒、729マイクロ秒、681マイクロ秒です。`compile`のレイテンシーが高いのは、アプリケーションが`query`コマンドインターフェースを使用しており、プリペアドプランキャッシュを使用できないためです。
 
 **例2: `execute`フェーズにおけるデータベースのボトルネック**
 
 ![Execute](/media/performance/long_execute.png)
 
-このTPC-Cワークロードでは、 `parse` 、 `compile` 、`execute`フェーズの平均時間はそれぞれ7.39マイクロ秒、38.1マイクロ秒、12.8ミリ秒です。`execute`フェーズが`query`レイテンシーのレイテンシのボトルネックとなっています。
+このTPC-Cワークロードでは、 `parse` 、 `compile` 、`execute`フェーズの平均時間はそれぞれ7.39マイクロ秒、38.1マイクロ秒、12.8ミリ秒です。`execute`フェーズが`query`レイテンシーのボトルネックとなっています。
 
-#### KVおよびTSOリクエスト期間 {#kv-and-tso-request-duration}
+#### KV and TSO Request Duration {#kv-and-tso-request-duration}
 
-TiDB はフェーズ`execute`で PD および TiKV と連携します。次の図に示すように、SQL 要求を処理する際、TiDB はフェーズ`parse`および`compile`入る前に TSO を要求します。PD クライアントは呼び出し元をブロックせず、 `TSFuture`を返し、バックグラウンドで非同期的に TSO 要求を送受信します。PD クライアントは TSO 要求の処理を完了すると、 `TSFuture`を返します。 `TSFuture`の所有者は、最後の TSO を取得するために Wait メソッドを呼び出す必要があります。TiDB はフェーズ`parse`および`compile`を完了するとフェーズ`execute`に入り、このフェーズでは次の2つの状況が発生する可能性があります。
+TiDB は`execute`フェーズで PD および TiKV と連携します。次の図に示すように、SQL リクエストを処理する際、TiDB は`parse`および`compile`フェーズに入る前に TSO をリクエストします。PD クライアントは呼び出し元をブロックせず、`TSFuture`を返し、バックグラウンドで非同期に TSO リクエストを送受信します。TSO リクエストの処理が完了すると、結果はただちに`TSFuture`に返されます。`TSFuture`の所有者は、最後の TSO を取得するために Wait メソッドを呼び出す必要があります。TiDB は`parse`および`compile`フェーズを完了すると`execute`フェーズに入り、このフェーズでは次の2つの状況が発生する可能性があります。
 
-- TSO要求が完了した場合、Waitメソッドは利用可能なTSOまたはエラーを直ちに返します。
-- TSO 要求がまだ完了していない場合、TSO が利用可能になるかエラーが表示されるまで (gRPC 要求は送信されたが結果が返されず、ネットワークレイテンシーが高くなる)、Wait メソッドはブロックされます。
+- TSOリクエストが完了した場合、Waitメソッドは利用可能なTSOまたはエラーを直ちに返します。
+- TSO リクエストがまだ完了していない場合、TSO が利用可能になるかエラーが表示されるまで (gRPC リクエストは送信されたが結果が返されず、ネットワークレイテンシーが高くなる)、Wait メソッドはブロックされます。
 
-TSO待機時間は`TSO WAIT`と記録され、TSO要求のネットワーク時間は`TSO RPC`と記録されます。TSO待機が完了すると、TiDBエグゼキューターは通常、TiKVに読み取りまたは書き込み要求を送信します。
+TSO待機時間は`TSO WAIT`と記録され、TSOリクエストのネットワーク時間は`TSO RPC`と記録されます。TSO待機が完了すると、TiDBエグゼキューターは通常、TiKVに読み取りまたは書き込みリクエストを送信します。
 
-- 一般的な KV 読み取り要求: `Get` `BatchGet`および`Cop`
-- 一般的な KV 書き込み要求: 2フェーズコミットの`PessimisticLock` `Prewrite`および`Commit`
+- 一般的な KV 読み取りリクエスト: `Get`、 `BatchGet`および`Cop`
+- 一般的な KV 書き込みリクエスト: 2フェーズコミットの`PessimisticLock`、 `Prewrite`および`Commit`
 
 ![Execute](/media/performance/execute_phase.png)
 
 このセクションのインジケーターは、次の3つのパネルに対応しています。
 
-- 平均 TiDB KV リクエスト期間: TiDB によって測定された KV リクエストの平均レイテンシー
-- 平均 TiKV GRPC 期間: TiKV での gPRC メッセージの処理にかかる平均レイテンシー
-- PD TSO 待機/RPC 期間: TiDB エグゼキュータの TSO 待機時間と TSO 要求 (RPC) のネットワークレイテンシー
+- Avg TiDB KV Request Duration: TiDB によって測定された KV リクエストの平均レイテンシー
+- Avg TiKV GRPC Duration: TiKV での gRPC メッセージの処理にかかる平均レイテンシー
+- PD TSO Wait/RPC Duration: TiDB エグゼキュータの TSO 待機時間と TSO リクエスト (RPC) のネットワークレイテンシー
 
 `Avg TiDB KV Request Duration`と`Avg TiKV GRPC Duration`の関係は以下のとおりです。
 
@@ -444,23 +442,23 @@ Avg TiDB KV Request Duration = Avg TiKV GRPC Duration + Network latency between 
 
 この例では、TiDBクラスタは同一リージョン内の異なるデータセンターにデプロイされており、TiDBネットワークとCPUリソースが深刻な過負荷状態にあります。TiDBの平均`BatchGet`レイテンシーは38.6ms、TiKV内部の平均`kv_batch_get`処理レイテンシーは6.15msです。その差は32ms以上で、正常値を大幅に上回っています。平均TSO待機レイテンシーは9.45ms、RPC時間は14.3msです。
 
-#### ストレージ非同期書き込み期間、保存期間、適用期間 {#storage-async-write-duration-store-duration-and-apply-duration}
+#### Storage Async Write Duration, Store Duration, and Apply Duration {#storage-async-write-duration-store-duration-and-apply-duration}
 
-TiKV は次の手順で書き込み要求を処理します。
+TiKV は次の手順で書き込みリクエストを処理します。
 
-- `scheduler worker`書き込み要求を処理し、トランザクションの一貫性チェックを実行し、書き込み要求を`raftstore`モジュールに送信するキーと値のペアに変換します。
-- TiKV コンセンサス モジュール`raftstore` 、 Raftコンセンサス アルゴリズムを適用して、ストレージレイヤー(複数の TiKV で構成) をフォールト トレラントにします。
+- `scheduler worker`は書き込みリクエストを処理し、トランザクションの一貫性チェックを実行し、書き込みリクエストを`raftstore`モジュールに送信するキーと値のペアに変換します。
+- TiKV コンセンサス モジュール`raftstore`は、 Raftコンセンサス アルゴリズムを適用して、ストレージレイヤー(複数の TiKV で構成) をフォールト トレラントにします。
 
     Raftstore は`Store`スレッドと`Apply`スレッドで構成されています。
 
-    - `Store`スレッドはRaftメッセージと新しい`proposals`を処理します。新しい`proposals`を受信すると、リーダーノードの`Store`スレッドはローカルRaft DBに書き込み、メッセージを複数のフォロワーノードにコピーします。ほとんどの場合、この`proposals`正常に永続化されると、 `proposals`が正常にコミットされます。
-    - `Apply`スレッドはコミットされた`proposals`データをKV DBに書き込みます。データがKV DBに正常に書き込まれると、 `Apply`スレッドは書き込み要求が完了したことを外部に通知します。
+    - `Store`スレッドはRaftメッセージと新しい`proposals`を処理します。新しい`proposals`を受信すると、リーダーノードの`Store`スレッドはローカルRaft DBに書き込み、メッセージを複数のフォロワーノードにコピーします。ほとんどのインスタンスでこの`proposals`が正常に永続化されると、 `proposals`が正常にコミットされます。
+    - `Apply`スレッドはコミットされた`proposals`データをKV DBに書き込みます。データがKV DBに正常に書き込まれると、 `Apply`スレッドは書き込みリクエストが完了したことを外部に通知します。
 
 ![TiKV Write](/media/performance/store_apply.png)
 
 `Storage Async Write Duration`のメトリックは、書き込みリクエストがraftstoreに入った後のレイテンシーを記録します。データはリクエストごとに収集されます。
 
-`Storage Async Write Duration`メトリックは`Store Duration`と`Apply Duration` 2つの部分で構成されます。次の式を使用して、書き込みリクエストのボトルネックが`Store`または`Apply`どちらのステップにあるかを判断できます。
+`Storage Async Write Duration`メトリックは`Store Duration`と`Apply Duration`の2つの部分で構成されます。次の式を使用して、書き込みリクエストのボトルネックが`Store`または`Apply`のどちらのステップにあるかを判断できます。
 
 ```
 avg Storage Async Write Duration = avg Store Duration + avg Apply Duration
@@ -468,7 +466,7 @@ avg Storage Async Write Duration = avg Store Duration + avg Apply Duration
 
 > **Note:**
 >
-> `Store Duration`と`Apply Duration` v5.3.0 以降でサポートされています。
+> `Store Duration`と`Apply Duration`は v5.3.0 以降でサポートされています。
 
 **例1: v5.3.0とv5.4.0での同じOLTPワークロードの比較**
 
@@ -477,7 +475,7 @@ avg Storage Async Write Duration = avg Store Duration + avg Apply Duration
 - v5.3.0: 24.4 ミリ秒 ~= 17.7 ミリ秒 + 6.59 ミリ秒
 - v5.4.0: 21.4 ミリ秒 ~= 14.0 ミリ秒 + 7.33 ミリ秒
 
-v5.4.0 では、gPRC モジュールが最適化され、 Raftログのレプリケーションが高速化され、v5.3.0 と比較して`Store Duration`削減されました。
+v5.4.0 では、gRPC モジュールが最適化され、 Raftログのレプリケーションが高速化され、v5.3.0 と比較して`Store Duration`が削減されました。
 
 バージョン5.3.0:
 
@@ -487,18 +485,18 @@ v5.4.0 では、gPRC モジュールが最適化され、 Raftログのレプリ
 
 ![v5.4.0](/media/performance/v5.4.0_store_apply.png)
 
-**例2: 保存期間がボトルネック**
+**例2: Store Duration がボトルネック**
 
-上記の式を適用します：10.1 ms ~= 9.81 ms + 0.304 ms。この結果は、書き込み要求のレイテンシーのボトルネックが`Store Duration`にあることを示しています。
+上記の式を適用します：10.1 ms ~= 9.81 ms + 0.304 ms。この結果は、書き込みリクエストのレイテンシーのボトルネックが`Store Duration`にあることを示しています。
 
 ![Store](/media/performance/cloud_store_apply.png)
 
-#### コミットログ期間、追加ログ期間、適用ログ期間 {#commit-log-duration-append-log-duration-and-apply-log-duration}
+#### Commit Log Duration, Append Log Duration, and Apply Log Duration {#commit-log-duration-append-log-duration-and-apply-log-duration}
 
-`Commit Log Duration` `Apply Log Duration` 、raftstore内の主要な操作のレイテンシー指標です。これらのレイテンシはバッチ操作レベルで計測され、各操作は複数の書き込みリクエストを組み合わせます。したがって、これら`Append Log Duration`レイテンシは前述の`Store Duration`と`Apply Duration`に直接対応するものではありません。
+`Commit Log Duration`、 `Append Log Duration`、 `Apply Log Duration`は、raftstore内の主要な操作のレイテンシー指標です。これらのレイテンシーはバッチ操作レベルで計測され、各操作は複数の書き込みリクエストを組み合わせます。したがって、これらのレイテンシーは前述の`Store Duration`と`Apply Duration`に直接対応するものではありません。
 
 - `Commit Log Duration`と`Append Log Duration`は 、 `Store`スレッドで実行された操作時間を記録します。`Commit Log Duration`は、 Raftログを他の TiKV ノードにコピーする時間が含まれます (raft-log の永続性を確保するため)。`Commit Log Duration`は通常、リーダー用とフォロワー用の 2つの`Append Log Duration`操作が含まれます。`Commit Log Duration`は、通常、 `Append Log Duration`よりも大幅に大きくなります。これは、前者には、ネットワークを介してRaftログを他の TiKV ノードにコピーする時間が含まれるためです。
-- `Apply Log Duration` `Apply`スレッドによる`apply` Raftログのレイテンシーを記録します。
+- `Apply Log Duration`は、`Apply`スレッドによるRaftログの適用レイテンシーを記録します。
 
 `Commit Log Duration`が長い場合の一般的なシナリオ:
 
@@ -516,15 +514,15 @@ v5.4.0 では、gPRC モジュールが最適化され、 Raftログのレプリ
 
 **例1: v5.3.0とv5.4.0での同じOLTPワークロードの比較**
 
-v5.4.0では、書き込み中心のOLTPワークロードのQPSがv5.3.0と比較して14%向上しました。次の表は、3つの主要なレイテンシを比較したものです。
+v5.4.0では、書き込み中心のOLTPワークロードのQPSがv5.3.0と比較して14%向上しました。次の表は、3つの主要なレイテンシーを比較したものです。
 
-| 平均期間      | v5.3.0 (ミリ秒) | v5.4.0 (ミリ秒) |
+| Avg Duration | v5.3.0 (ミリ秒) | v5.4.0 (ミリ秒) |
 | :-------- | :----------- | :----------- |
-| ログ追加期間    | 0.27         | 0.303        |
-| コミットログの期間 | 13           | 8.68         |
-| ログ期間を適用する | 0.457        | 0.514        |
+| Append Log Duration    | 0.27         | 0.303        |
+| Commit Log Duration | 13           | 8.68         |
+| Apply Log Duration | 0.457        | 0.514        |
 
-v5.4.0 では、gPRC モジュールが最適化され、 Raftログのレプリケーションが高速化され、v5.3.0 と比較して`Commit Log Duration`と`Store Duration`削減されました。
+v5.4.0 では、gRPC モジュールが最適化され、 Raftログのレプリケーションが高速化され、v5.3.0 と比較して`Commit Log Duration`と`Store Duration`が削減されました。
 
 バージョン5.3.0:
 
@@ -534,7 +532,7 @@ v5.4.0 では、gPRC モジュールが最適化され、 Raftログのレプリ
 
 ![v5.4.0](/media/performance/v5.4.0_commit_append_apply.png)
 
-**例2: コミットログ期間がボトルネック**
+**例2: Commit Log Duration がボトルネック**
 
 ![Store](/media/performance/cloud_append_commit_apply.png)
 
@@ -550,6 +548,6 @@ v5.4.0 では、gPRC モジュールが最適化され、 Raftログのレプリ
 
 ## TiDB のバージョンが v6.1.0 より前の場合、パフォーマンス概要ダッシュボードを使用するにはどうすればよいですか? {#if-my-tidb-version-is-earlier-than-v6-1-0-what-should-i-do-to-use-the-performance-overview-dashboard}
 
-Grafana v6.1.0以降、デフォルトでパフォーマンス概要ダッシュボードが組み込まれています。このダッシュボードはTiDB v4.xおよびv5.xバージョンと互換性があります。TiDBがv6.1.0より前の場合は、次の図に示すように、 [`performance_overview.json`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/metrics/grafana/performance_overview.json)手動でインポートする必要があります。
+Grafana v6.1.0以降、デフォルトでパフォーマンス概要ダッシュボードが組み込まれています。このダッシュボードはTiDB v4.xおよびv5.xバージョンと互換性があります。TiDBがv6.1.0より前の場合は、次の図に示すように、 [`performance_overview.json`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/metrics/grafana/performance_overview.json)を手動でインポートする必要があります。
 
 ![Store](/media/performance/import_dashboard.png)
