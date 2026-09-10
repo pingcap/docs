@@ -470,7 +470,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
     - デプロイメント履歴を確認し、障害が発生した場合に必要なアクションを実行します。
     - コミットを再デプロイして、以前のデプロイにロールバックします。
 
-    詳細については[GitHub でデータアプリを自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください.
+    詳細については[GitHub でデータアプリを自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
 
 ## 2023年6月2日 {#june-2-2023}
 
