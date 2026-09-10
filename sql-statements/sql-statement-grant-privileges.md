@@ -83,12 +83,8 @@ mysql> SHOW GRANTS FOR 'newuser';
 ## MySQL compatibility
 
 * Similar to MySQL, the `USAGE` privilege denotes the ability to log into a TiDB server.
-<<<<<<< HEAD
 * Column level privileges are not currently supported.
-=======
 * Unlike MySQL, TiDB does not support `GRANT PROXY`.
-* Starting from v8.5.6, TiDB supports a MySQL-compatible column-level privilege management mechanism. You can grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges on specific columns in a specified table. For more information, see [Column-Level Privilege Management](/column-privilege-management.md).
->>>>>>> 8d85871d64 (sql: document unsupported GRANT PROXY in MySQL compatibility (#23742))
 * Similar to MySQL, when the `NO_AUTO_CREATE_USER` sql mode is not present, the `GRANT` statement will automatically create a new user with an empty password when a user does not exist. Removing this sql-mode (it is enabled by default) presents a security risk.
 * In TiDB, after the `GRANT <privileges>` statement is executed successfully, the execution result takes effect immediately on the current connection. Whereas [in MySQL, for some privileges, the execution results take effect only on subsequent connections](https://dev.mysql.com/doc/refman/8.0/en/privilege-changes.html). See [TiDB #39356](https://github.com/pingcap/tidb/issues/39356) for details.
 
