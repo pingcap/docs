@@ -79,6 +79,11 @@
 
 - [Vector Data Types](/ai/reference/vector-search-data-types.md)
 - [Vector Functions and Operators](/ai/reference/vector-search-functions-and-operators.md)
-- [Vector Search Index](/ai/reference/vector-search-index.md)
-- [Vector Search Performance Tuning](/ai/reference/vector-search-improve-performance.md)
-- [Vector Search Limitations](/ai/reference/vector-search-limitations.md)
+- Vector Search
+  - [Vector Search Index](/ai/reference/vector-search-index.md)
+  - [Vector Search Performance Tuning](/ai/reference/vector-search-improve-performance.md)
+  - [Vector Search Limitations](/ai/reference/vector-search-limitations.md)
+- Full-Text Search
+  - [Full-Text Search Index](/ai/reference/full-text-search-index.md)
+  - [Full-Text Search Functions](/ai/reference/full-text-search-functions-tidb.md)
+  - [Full-Text Search Limitations](/ai/reference/full-text-search-limitations.md)
