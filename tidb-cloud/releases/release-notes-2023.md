@@ -459,7 +459,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - [データアプリ](/tidb-cloud/tidb-cloud-glossary.md#data-app) GitHub に接続することをサポートします。
 
-    [データアプリをGitHubに接続する](/tidb-cloud/data-service-manage-github-connection.md)により、データアプリのすべての構成を Github 上の[コードファイル](/tidb-cloud/data-service-app-config-files.md)として管理できるようになり、 TiDB Cloud Data Service がシステムアーキテクチャおよび DevOps プロセスとシームレスに統合されます。
+    [データアプリをGitHubに接続する](/tidb-cloud/data-service-manage-github-connection.md)により、データアプリのすべての構成を GitHub 上の[コードファイル](/tidb-cloud/data-service-app-config-files.md)として管理できるようになり、 TiDB Cloud Data Service がシステムアーキテクチャおよび DevOps プロセスとシームレスに統合されます。
 
     この機能を使用すると、次のタスクを簡単に実行できるため、データアプリ開発の CI/CD エクスペリエンスが向上します。
 

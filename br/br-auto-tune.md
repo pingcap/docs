@@ -28,7 +28,7 @@ TiDB v5.4.0より前のバージョンでは、バックアップ＆リストア
 TiKVは自動チューニング機能の動的な設定をサポートしています。この機能は、クラスターを再起動せずに有効化または無効化できます。自動チューニング機能を動的に有効化または無効化するには、次のコマンドを実行します。
 
 ```shell
-tikv-ctl modify-tikv-config -n backup.enable-auto-tune -v <true|false>
+tikv-ctl --host=<tikv-ip:port> modify-tikv-config -n backup.enable-auto-tune -v <true|false>
 ```
 
 オフライン クラスターでバックアップタスクを実行する場合、バックアップを高速化するために、 `tikv-ctl`を使用して`backup.num-threads`の値をより大きな数値に変更できます。
