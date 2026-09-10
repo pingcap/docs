@@ -73,6 +73,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `ALTER INSTANCE` | Not supported | Not supported |
 | `ALTER INSTANCE RELOAD TLS` | Not supported | {{{ .starter }}} and {{{ .essential }}} automatically refresh the TLS certificate. |
 | `ALTER TABLE ... ATTRIBUTES` | Not supported | Not supported |
+| `ALTER TABLE ... EXCHANGE PARTITION` | Not supported | Not supported |
 | `CHANGE DRAINER` | Not supported [^7] | Not supported [^7] |
 | `CHANGE PUMP` | Not supported [^7] | Not supported [^7] |
 | `FLASHBACK CLUSTER` | Not supported [^3] | Not supported [^3] |
