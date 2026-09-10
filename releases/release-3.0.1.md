@@ -87,5 +87,5 @@ TiDB Lightning
 - ansibleコマンドとその`jmespath`および`jinja2`依存パッケージの事前チェック機能を追加します[#813](https://github.com/pingcap/tidb-ansible/pull/813) [#803](https://github.com/pingcap/tidb-ansible/pull/803)
 - Pumpに`stop-write-at-available-space`パラメータ（デフォルトでは10 GiB）を追加して、使用可能なディスク容量がパラメータ値より少ない場合にPumpでbinlogファイルの書き込みを停止します。 [#806](https://github.com/pingcap/tidb-ansible/pull/806)
 - TiKV監視情報のI/O監視項目を更新し、新しいバージョンの監視コンポーネントと互換性を持たせます。 [#820](https://github.com/pingcap/tidb-ansible/pull/820)
-- PD 監視情報を更新し、ディスク パフォーマンス ダッシュボードでディスク レイテンシーが空になる異常を修正しました。 [#817](https://github.com/pingcap/tidb-ansible/pull/817)
-- TiKV詳細ダッシュボードにTitanの監視項目を追加する [#824](https://github.com/pingcap/tidb-ansible/pull/824)
+- PD 監視情報を更新し、ディスク パフォーマンス ダッシュボードでディスク レイテンシが空になる異常を修正しました。 [#817](https://github.com/pingcap/tidb-ansible/pull/817)
+- TiKV-DetailsダッシュボードにTitanの監視項目を追加する [#824](https://github.com/pingcap/tidb-ansible/pull/824)

@@ -88,13 +88,13 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 
 - `block-cache`設定が大きすぎる場合、TiKV OOM が発生する可能性があります。問題の原因を確認するには、 **Grafana**モニターで該当するインスタンスを選択し、RocksDB の`block cache size`を確認してください。同時に、 `[storage.block-cache] capacity = # "1GB"`パラメータが正しく設定されているかどうかを確認してください。デフォルトでは、 **TiKV**の`block-cache`マシンの総メモリの`45%`に設定されています。コンテナに TiKV をデプロイする際には、このパラメータを明示的に指定する必要があります。TiKV は物理マシンのメモリを取得するため、コンテナのメモリ制限を超える可能性があります。
 
-- コプロセッサーは大量の大きなクエリを受信し、大量のデータを返します。gRPCはコプロセッサがデータを返すのに間に合うようにデータを送信できず、OOMが発生します。原因を確認するには、モニター**Grafana** -&gt; **TiKV詳細**-&gt;**コプロセッサ概要**で、 `response size` `network outbound`トラフィックを超えているかどうかを確認してください。
+- コプロセッサーは大量の大きなクエリを受信し、大量のデータを返します。gRPCはコプロセッサがデータを返すのに間に合うようにデータを送信できず、OOMが発生します。原因を確認するには、モニター**Grafana** -&gt; **TiKV-Details**-&gt;**コプロセッサ概要**で、 `response size` `network outbound`トラフィックを超えているかどうかを確認してください。
 
 ### 単一の TiKV スレッドのボトルネック {#bottleneck-of-a-single-tikv-thread}
 
 TiKV にはボトルネックになる可能性のある単一スレッドがいくつかあります。
 
-- TiKVインスタンス内のリージョンが多すぎると、単一のgRPCスレッドがボトルネックになります（ **Grafana** -&gt; **TiKV詳細**-&gt;**スレッドCPU/gRPC CPU Per Thread**メトリックを確認してください）。v3.x以降のバージョンでは、 `Hibernate Region`を有効にするとこの問題を解決できます。
+- TiKVインスタンス内のリージョンが多すぎると、単一のgRPCスレッドがボトルネックになります（ **Grafana** -&gt; **TiKV-Details**-&gt;**スレッドCPU/gRPC CPU Per Thread**メトリックを確認してください）。v3.x以降のバージョンでは、 `Hibernate Region`を有効にするとこの問題を解決できます。
 - v3.0 より前のバージョンでは、raftstore スレッドまたは apply スレッドがボトルネックになる場合 ( **Grafana** -&gt; **TiKV-details** -&gt; **Thread CPU/raft store CPU**および**Async apply CPU**メトリックが`80%`超える)、TiKV (v2.x) インスタンスをスケールアウトするか、マルチスレッド対応の v3.x にアップグレードできます。
 
 ### CPU負荷が増加する {#cpu-load-increases}

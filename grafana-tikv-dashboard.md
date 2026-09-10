@@ -11,7 +11,7 @@ Grafanaダッシュボードは、概要、PD、TiDB、TiKV、Node_exporter、�
 
 ## TiKV-Detailsダッシュボード {#tikv-details-dashboard}
 
-TiKVコンポーネントのステータス概要は、主要な指標が表示される**TiKV詳細**ダッシュボードで確認できます。
+TiKVコンポーネントのステータス概要は、主要な指標が表示される**TiKV-Details**ダッシュボードで確認できます。
 
 このセクションでは、**TiKV-Details**ダッシュボード上のこれらの主要指標について詳しく説明します。
 
