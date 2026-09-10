@@ -185,7 +185,7 @@ summary: TiDBの機能概要について学びましょう。
 
 | パーティショニング                                                                                                    | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ------------------------------------------------------------------------------------------------------------ | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| [レンジ分割](/partitioned-table.md#range-partitioning)                                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [レンジパーティショニング](/partitioned-table.md#range-partitioning)                                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [ハッシュパーティショニング](/partitioned-table.md#hash-partitioning)                                                     |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [キーパーティショニング](/partitioned-table.md#key-partitioning)                                                        |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
 | [リストパーティショニング](/partitioned-table.md#list-partitioning)                                                    |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |

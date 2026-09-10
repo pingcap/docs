@@ -9,12 +9,12 @@ summary: TiDBにおけるパーティショニングの使い方を学びまし�
 
 ## パーティショニングの種類 {#partitioning-types}
 
-このセクションでは、TiDB のパーティショニングの種類を紹介します。現在、TiDB は[レンジ分割](#range-partitioning)、[レンジ列パーティショニング](#range-columns-partitioning)、[リストパーティショニング](#list-partitioning)、[リスト列パーティショニング](#list-columns-partitioning)、[ハッシュパーティショニング](#hash-partitioning)、および[キーパーティショニング](#key-partitioning)をサポートしています。
+このセクションでは、TiDB のパーティショニングの種類を紹介します。現在、TiDB は[レンジパーティショニング](#range-partitioning)、[レンジ列パーティショニング](#range-columns-partitioning)、[リストパーティショニング](#list-partitioning)、[リスト列パーティショニング](#list-columns-partitioning)、[ハッシュパーティショニング](#hash-partitioning)、および[キーパーティショニング](#key-partitioning)をサポートしています。
 
 - レンジパーティショニング、レンジ列パーティショニング、リストパーティショニング、およびリスト列パーティショニングは、アプリケーション内での大量の削除によって引き起こされるパフォーマンスの問題を解決し、パーティションを迅速に削除するために使用されます。
 - ハッシュパーティショニングとキーパーティショニングは、書き込み回数が多いシナリオでデータを分散するために使用されます。ハッシュパーティショニングと比較して、キーパーティショニングは複数の列のデータ分散と、非整数列によるパーティショニングをサポートします。
 
-### レンジ分割 {#range-partitioning}
+### レンジパーティショニング {#range-partitioning}
 
 テーブルが範囲によってパーティション分割されている場合、各パーティションには、パーティション式値が指定された範囲内にある行が含まれます。範囲は連続している必要がありますが、重複してはなりません。これは`VALUES LESS THAN`を使用して定義できます。
 
@@ -146,7 +146,7 @@ PARTITION BY RANGE ( UNIX_TIMESTAMP(report_updated) ) (
 
 タイムスタンプ列を含む他のパーティショニング式を使用することは許可されていません。
 
-レンジ分割は、以下の条件の1つ以上が満たされる場合に特に有効です。
+レンジパーティショニングは、以下の条件の1つ以上が満たされる場合に特に有効です。
 
 - 古いデータを削除したい場合、前の例の`employees` `ALTER TABLE employees DROP PARTITION p0;` `DELETE FROM employees WHERE YEAR(separated) <= 1990;`操作を実行するよりも高速です。
 - 時刻や日付の値を含む列、または他の系列から得られた値を含む列を使用したい場合。
@@ -274,7 +274,7 @@ PARTITION BY RANGE COLUMNS(`report_date`)
  PARTITION `P_LT_2025-01-01` VALUES LESS THAN ('2025-01-01'))
 ```
 
-オプションのパラメータ`NULL PARTITION` 、 `PARTITION P_NULL VALUES LESS THAN (<minimum value of the column type>)`として定義されたパーティションを作成します。パーティション式が`NULL`と評価される場合にのみ一致します。 `NULL`が他の値より小さいとみなされることを説明する [レンジ分割によるNULL値の処理](#handling-of-null-with-range-partitioning)を参照してください。
+オプションのパラメータ`NULL PARTITION` 、 `PARTITION P_NULL VALUES LESS THAN (<minimum value of the column type>)`として定義されたパーティションを作成します。パーティション式が`NULL`と評価される場合にのみ一致します。 `NULL`が他の値より小さいとみなされることを説明する [レンジパーティショニングによるNULL値の処理](#handling-of-null-with-range-partitioning)を参照してください。
 
 オプションパラメータ`MAXVALUE PARTITION`最後のパーティションを`PARTITION P_MAXVALUE VALUES LESS THAN (MAXVALUE)`として作成します。
 
@@ -703,7 +703,7 @@ TiDBでは`NULL`パーティショニング式の計算結果として使用す�
 >
 > `NULL`整数ではありません。TiDB のパーティショニング実装では`NULL`は、 `ORDER BY`と同様に、他のどの整数値よりも小さい値として扱われます。
 
-#### レンジ分割によるNULL値の処理 {#handling-of-null-with-range-partitioning}
+#### レンジパーティショニングによるNULL値の処理 {#handling-of-null-with-range-partitioning}
 
 範囲でパーティション分けされたテーブルに行を挿入し、パーティションを決定するために使用される列の値が`NULL`の場合、この行は最も低いパーティションに挿入されます。
 
@@ -827,7 +827,7 @@ Empty set (0.00 sec)
 >
 > この場合、TiDBの実際の動作はこの文書の説明と一致しています。
 
-#### キー分割によるNULLの処理 {#handling-of-null-with-key-partitioning}
+#### キーパーティショニングによるNULLの処理 {#handling-of-null-with-key-partitioning}
 
 キーパーティショニングの場合、 `NULL`値の処理方法はハッシュパーティショニングと同様です。パーティショニングフィールドの値が`NULL`の場合、 `0`として扱われます。
 
