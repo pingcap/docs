@@ -51,7 +51,7 @@ TiDBバージョン：8.5.4
 
 - パフォーマンス、拡張性、安定性を向上させるための新しいTiCDCアーキテクチャオプションを導入 [#442](https://github.com/pingcap/ticdc/issues/442) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
-    この新しいアーキテクチャは[従来のTiCDCアーキテクチャ](/ticdc/ticdc-classic-architecture.md)アーキテクチャの構成、使用法、API との互換性を維持しながら、TiCDC コア コンポーネントを再設計し、そのデータ処理ワークフローを最適化します。
+    この新しいアーキテクチャは[従来のTiCDCアーキテクチャ](/ticdc/ticdc-classic-architecture.md)の構成、使用法、API との互換性を維持しながら、TiCDC コア コンポーネントを再設計し、そのデータ処理ワークフローを最適化します。
 
     この新しいアーキテクチャを使用するように構成すると、TiCDC はほぼ線形のスケーラビリティを実現し、より低いリソース消費で数百万のテーブルを複製できます。また、変更フィードのレイテンシーを削減し、書き込みワークロードが高いシナリオ、頻繁な DDL 操作、クラスタのスケーリングにおいて、より安定したパフォーマンスを提供します。なお、この新しいアーキテクチャには現在、いくつか[初期の制約](https://docs.pingcap.com/tidb/v8.5/ticdc-architecture#limitations)があります。
 
