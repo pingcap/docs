@@ -3955,7 +3955,7 @@ Referenced in:
 
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [Statement Summary Tables](/statement-summary-tables.md)
-- [System Variables](/system-variables.md#tidb_stmt_summary_group_by_user-new-in-v857)
+- [System Variables](/system-variables.md#tidb_stmt_summary_group_by_user)
 
 ### tidb_stmt_summary_history_size
 
@@ -4006,7 +4006,7 @@ Referenced in:
 
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [Statement Summary Tables](/statement-summary-tables.md)
-- [System Variables](/system-variables.md#tidb_stmt_summary_persist_evicted-new-in-v857)
+- [System Variables](/system-variables.md#tidb_stmt_summary_persist_evicted)
 
 ### tidb_stmt_summary_refresh_interval
 

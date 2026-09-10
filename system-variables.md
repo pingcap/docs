@@ -6330,7 +6330,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 </CustomContent>
 
-### tidb_stmt_summary_group_by_user <span class="version-mark">New in v9.0.0 and CLOUD.202603.1</span>
+### tidb_stmt_summary_group_by_user <span class="version-mark">New in v9.0.0 and CLOUD.202603.1</span> {#tidb_stmt_summary_group_by_user}
 
 > **Note:**
 >
@@ -6421,7 +6421,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 </CustomContent>
 
-### tidb_stmt_summary_persist_evicted <span class="version-mark">New in v9.0.0 and CLOUD.202603.1</span>
+### tidb_stmt_summary_persist_evicted <span class="version-mark">New in v9.0.0 and CLOUD.202603.1</span> {#tidb_stmt_summary_persist_evicted}
 
 > **Note:**
 >
