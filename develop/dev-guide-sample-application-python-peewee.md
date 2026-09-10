@@ -93,7 +93,7 @@ peeweeは、複数のデータベースを扱うORMライブラリです。デ�
     cp .env.example .env
     ```
 
-6. 対応する接続文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+6. 対応する接続文字列を`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```dotenv
     TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
@@ -136,7 +136,7 @@ peeweeは、複数のデータベースを扱うORMライブラリです。デ�
     cp .env.example .env
     ```
 
-8. 対応する接続文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+8. 対応する接続文字列を`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```dotenv
     TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -169,7 +169,7 @@ peeweeは、複数のデータベースを扱うORMライブラリです。デ�
     cp .env.example .env
     ```
 
-5. 対応する接続文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+5. 対応する接続文字列を`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```dotenv
     TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -193,7 +193,7 @@ peeweeは、複数のデータベースを扱うORMライブラリです。デ�
     cp .env.example .env
     ```
 
-2. 対応する接続文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+2. 対応する接続文字列を`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```dotenv
     TIDB_HOST='{tidb_server_host}'

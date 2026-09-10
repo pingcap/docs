@@ -100,7 +100,7 @@ npm install
     Copy-Item ".env.example" -Destination ".env"
     ```
 
-6. 対応する接続文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+6. 対応する接続文字列を`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```bash
     TIDB_HOST='{gateway-region}.aws.tidbcloud.com'
@@ -150,7 +150,7 @@ npm install
     Copy-Item ".env.example" -Destination ".env"
     ```
 
-8. 対応する接続文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+8. 対応する接続文字列を`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```bash
     TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -181,7 +181,7 @@ npm install
     Copy-Item ".env.example" -Destination ".env"
     ```
 
-2. 対応する接続文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+2. 対応する接続文字列を`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```bash
     TIDB_HOST='{tidb_server_host}'

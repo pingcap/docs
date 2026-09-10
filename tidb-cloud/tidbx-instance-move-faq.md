@@ -140,4 +140,4 @@ TiDB Cloud API を使用してインスタンスを管理する場合は、 [TiD
 
 ## どこで助けを得られますか？ {#where-can-i-get-help}
 
-自動化、統合、またはData Serviceの設定が元のプロジェクトIDに依存しているかどうか不明な場合は、移行を開始する前に、 TiDB Cloudサポート（ [support@pingcap.com](mailto:support@pingcap.com)にお問い合わせください。
+自動化、統合、またはData Serviceの設定が元のプロジェクトIDに依存しているかどうか不明な場合は、移行を開始する前に、 TiDB Cloudサポート（ [support@pingcap.com](mailto:support@pingcap.com)）にお問い合わせください。

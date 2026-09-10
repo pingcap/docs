@@ -74,7 +74,7 @@ TiDB Cloud StarterへのWordPressデータベース接続を設定します。
     cp .env.example .env
     ```
 
-6. 対応する接続文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+6. 対応する接続文字列を`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```dotenv
     TIDB_HOST='{HOST}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
