@@ -1945,6 +1945,29 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 >
 > Starting from v7.0.0, `tidb_dml_batch_size` no longer takes effect on the [`LOAD DATA` statement](/sql-statements/sql-statement-load-data.md).
 
+### tidb_dml_max_execution_time <span class="version-mark">New in v9.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 2147483647]`
+- Unit: Milliseconds
+- This variable limits the maximum execution time of transactional `INSERT`, `REPLACE`, `UPDATE`, and `DELETE` statements, and `COMMIT` statements. The default value `0` means no limit from this variable.
+- For an autocommit DML statement, the limit includes the time spent committing the transaction. In an explicit transaction, the limit applies separately to each DML statement and to `COMMIT`, rather than to the total duration of the transaction.
+- This variable does not apply to the following operations:
+    - [Non-transactional DML statements](/non-transactional-dml.md).
+    - DML statements executed using the deprecated batch-dml feature, or DML and `COMMIT` statements when [`tidb_batch_commit`](#tidb_batch_commit) is enabled.
+    - Statements executed using [Pipelined DML](/pipelined-dml.md). If `tidb_dml_type = 'bulk'` is set but the statement falls back to ordinary DML execution, this variable still applies.
+    - `EXPLAIN ANALYZE` statements and statement types other than those listed above, such as `LOAD DATA` and `IMPORT INTO`.
+- To limit the execution time of `SELECT` statements, use [`max_execution_time`](#max_execution_time) or the [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen) hint. These settings do not override `tidb_dml_max_execution_time` for DML statements.
+
+> **Note:**
+>
+> - The precision of timeout detection is roughly 100ms. A statement might not be terminated at the exact time specified by this variable.
+> - Set a value that allows sufficient time for normal DML execution. After TiDB interrupts a statement, requests already sent to TiKV might continue running. An excessively short timeout combined with frequent application retries might increase cluster load.
+
 ### tidb_dml_type <span class="version-mark">New in v8.0.0</span>
 
 > **Warning:**
