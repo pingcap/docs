@@ -23,7 +23,7 @@ TiDBバージョン: 6.3.0-DMR
 - JSONデータ型と関数が一般提供（GA）されます。
 - TiDBは、NULL値を考慮したアンチジョインをサポートしています。
 - TiDBは、より詳細な粒度で実行時間メトリクスを提供します。
-- 範囲パーティションの定義を簡素化するために、新しい構文糖衣が追加されました。
+- レンジパーティションの定義を簡素化するために、新しい構文糖衣が追加されました。
 - 範囲COLUMNSパーティショニングは、複数の列を定義することをサポートしています。
 - インデックス追加時のパフォーマンスが3倍に向上しました。
 - リソースを大量に消費するクエリが、軽量クエリの応答時間に与える影響を50%以上削減します。
@@ -32,13 +32,13 @@ TiDBバージョン: 6.3.0-DMR
 
 ### SQL {#sql}
 
-- 範囲パーティション定義を簡素化するための新しい構文糖衣（範囲INTERVALパーティショニング）を追加（実験的） [#35683](https://github.com/pingcap/tidb/issues/35683) @[mjonss](https://github.com/mjonss)
+- レンジパーティション定義を簡素化するための新しい構文糖衣（レンジINTERVALパーティショニング）を追加（実験的） [#35683](https://github.com/pingcap/tidb/issues/35683) @[mjonss](https://github.com/mjonss)
 
-    TiDBは、範囲パーティションを定義する新しい方法として、 [区間分割](/partitioned-table.md#range-interval-partitioning)を提供します。すべてのパーティションを列挙する必要がないため、範囲パーティショニングのDDL文の長さが大幅に短縮されます。構文は、従来の範囲パーティショニングと同じです。
+    TiDBは、レンジパーティションを定義する新しい方法として、 [区間分割](/partitioned-table.md#range-interval-partitioning)を提供します。すべてのパーティションを列挙する必要がないため、レンジパーティショニングのDDL文の長さが大幅に短縮されます。構文は、従来のレンジパーティショニングと同じです。
 
 - 範囲COLUMNSパーティショニングは、複数の列の定義をサポートします [#36636](https://github.com/pingcap/tidb/issues/36636) @[mjonss](https://github.com/mjonss)
 
-    TiDB は[範囲列によるパーティション分割（列リスト）](/partitioned-table.md#range-columns-partitioning)をサポートしています。 `column_list`は単一列に制限されなくなりました。基本的な機能はMySQLと同じです。
+    TiDB は[レンジ列によるパーティション分割（列リスト）](/partitioned-table.md#range-columns-partitioning)をサポートしています。 `column_list`は単一列に制限されなくなりました。基本的な機能はMySQLと同じです。
 
 - [パーティション交換](/partitioned-table.md#partition-management)が GA になりました [#35996](https://github.com/pingcap/tidb/issues/35996) @[ymkzpx](https://github.com/ymkzpx)
 

@@ -160,7 +160,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     詳細については[ドキュメント](/partitioned-table.md#manage-hash-and-key-partitions)を参照してください。
 
-- 範囲INTERVALパーティションの構文が一般公開（GA） になります [#35683](https://github.com/pingcap/tidb/issues/35683) @[mjonss](https://github.com/mjonss)
+- レンジINTERVALパーティションの構文が一般公開（GA） になります [#35683](https://github.com/pingcap/tidb/issues/35683) @[mjonss](https://github.com/mjonss)
 
     バージョン6.3.0で導入されたRange INTERVALパーティショニングの構文がGAになりました。この構文を使用すると、すべてのパーティションを列挙することなく、任意の間隔でRangeパーティショニングを定義できるため、RangeパーティショニングのDDL文の長さが大幅に短縮されます。この構文は、従来のRangeパーティショニングの構文と同等です。
 

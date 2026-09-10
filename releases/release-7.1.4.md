@@ -101,7 +101,7 @@ TiDBバージョン: 7.1.4
     - ネットワークが不安定な場合にインデックスを追加するとインデックスデータの不整合が発生する可能性がある問題を修正[#49773](https://github.com/pingcap/tidb/issues/49773) @[tangenta](https://github.com/tangenta)
     - DDLジョブの実行順序を修正して、TiCDCが順序どおりに動作しないDDL を受信しないようにします。 [#49498](https://github.com/pingcap/tidb/issues/49498) @[tangenta](https://github.com/tangenta)
     - `tidb_server_memory_limit`変数が変更された後、 `tidb_gogc_tuner_threshold`システム変数がそれに応じて調整されない問題を修正しました [#48180](https://github.com/pingcap/tidb/issues/48180) @[hawkingrei](https://github.com/hawkingrei)
-    - 誤ったパーティションプルーニングが原因で、範囲パーティションテーブルのクエリ結果が間違っている場合がある問題を修正しました。 [#50082](https://github.com/pingcap/tidb/issues/50082) @[Defined2014](https://github.com/Defined2014)
+    - 誤ったパーティションプルーニングが原因で、レンジパーティションテーブルのクエリ結果が間違っている場合がある問題を修正しました。 [#50082](https://github.com/pingcap/tidb/issues/50082) @[Defined2014](https://github.com/Defined2014)
     - `CREATE TABLE`文に特定のパーティションまたは制約が含まれている場合に、テーブル名の変更などの DDL 操作が停止する問題を修正しました[#50972](https://github.com/pingcap/tidb/issues/50972) @[lcwangchao](https://github.com/lcwangchao)
     - 列のデフォルト値が削除されている場合に列のデフォルト値を取得するとエラーが返される問題を修正[#50043](https://github.com/pingcap/tidb/issues/50043) [#51324](https://github.com/pingcap/tidb/issues/51324) @[crazycs520](https://github.com/crazycs520)
     - Grafana の監視メトリック`tidb_statistics_auto_analyze_total`が整数として表示されない問題を修正しました [#51051](https://github.com/pingcap/tidb/issues/51051) @[hawkingrei](https://github.com/hawkingrei)

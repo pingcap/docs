@@ -185,7 +185,7 @@ summary: TiDBの機能概要について学びましょう。
 
 | パーティショニング                                                                                                    | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ------------------------------------------------------------------------------------------------------------ | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| [範囲分割](/partitioned-table.md#range-partitioning)                                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [レンジ分割](/partitioned-table.md#range-partitioning)                                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [ハッシュパーティショニング](/partitioned-table.md#hash-partitioning)                                                     |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [キーパーティショニング](/partitioned-table.md#key-partitioning)                                                        |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
 | [List パーティショニング](/partitioned-table.md#list-partitioning)                                                    |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |
@@ -195,8 +195,8 @@ summary: TiDBの機能概要について学びましょう。
 | [`REORGANIZE PARTITION`](/partitioned-table.md#reorganize-partitions)                                        |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
 | [`COALESCE PARTITION`](/partitioned-table.md#decrease-the-number-of-partitions)                              |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
 | [動的剪定](/partitioned-table.md#dynamic-pruning-mode)                                                           |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |
-| [範囲列パーティショニング](/partitioned-table.md#range-columns-partitioning)                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |  N  |
-| [範囲 INTERVAL 分割](/partitioned-table.md#range-interval-partitioning)                                          |  Y  |  Y  |  Y  |  Y  |  E  |  N  |  N  |
+| [レンジ列パーティショニング](/partitioned-table.md#range-columns-partitioning)                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |  N  |
+| [レンジ INTERVAL 分割](/partitioned-table.md#range-interval-partitioning)                                          |  Y  |  Y  |  Y  |  Y  |  E  |  N  |  N  |
 | [パーティションテーブルを非パーティションテーブルに変換する](/partitioned-table.md#convert-a-partitioned-table-to-a-non-partitioned-table) |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |
 | [既存のテーブルをパーティション分割する](/partitioned-table.md#partition-an-existing-table)                                     |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |
 | [グローバルインデックス](/global-indexes.md)                                                                            |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |

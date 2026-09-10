@@ -70,7 +70,7 @@ TiDB バージョン: 7.1.1
     - MySQLカーソルフェッチプロトコル使用時に、結果セットのメモリ消費量が`tidb_mem_quota_query`上限を超え、TiDBのメモリオーバーフローが発生する問題を修正しました。修正後、TiDBは結果セットを自動的にディスクに書き込み、メモリを解放します[#43233](https://github.com/pingcap/tidb/issues/43233) @[YangKeao](https://github.com/YangKeao)
     - 権限がなくてもユーザーが`INFORMATION_SCHEMA.TIFLASH_REPLICA`テーブルの情報を表示できる問題を修正 [#45320](https://github.com/pingcap/tidb/issues/45320) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - `ADMIN SHOW DDL JOBS`文によって返される`ROW_COUNT`不正確である問題を修正[#44044](https://github.com/pingcap/tidb/issues/44044) @[tangenta](https://github.com/tangenta)
-    - 範囲列パーティションテーブルをクエリするとエラーが発生する可能性がある問題を修正しました [#43459](https://github.com/pingcap/tidb/issues/43459) @[mjonss](https://github.com/mjonss)
+    - レンジ列パーティションテーブルをクエリするとエラーが発生する可能性がある問題を修正しました [#43459](https://github.com/pingcap/tidb/issues/43459) @[mjonss](https://github.com/mjonss)
     - 一時停止中の DDL タスクの再開が失敗する問題を修正[#44217](https://github.com/pingcap/tidb/issues/44217) @[dhysum](https://github.com/dhysum)
     - メモリ内の悲観的ロックが`FLASHBACK`障害と[#44292](https://github.com/pingcap/tidb/issues/44292) [Jmポテト](https://github.com/JmPotato)の不整合を引き起こす問題を修正しました。
     - 削除されたテーブルが`INFORMATION_SCHEMA` から引き続き読み取ることができる問題を修正しました [#43714](https://github.com/pingcap/tidb/issues/43714) @[tangenta](https://github.com/tangenta)
