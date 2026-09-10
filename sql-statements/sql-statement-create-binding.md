@@ -5,7 +5,7 @@ summary: TiDB データベースでの CREATE BINDING の使用。
 
 # CREATE [GLOBAL|SESSION] BINDING {#create-global-session-binding}
 
-このステートメントは、TiDB に新しい実行計画 バインディングを作成します。バインディングを使用すると、基になるクエリを変更することなく、ステートメントにヒントを挿入できます。
+このステートメントは、TiDB に新しい実行プランバインディングを作成します。バインディングを使用すると、基になるクエリを変更することなく、ステートメントにヒントを挿入できます。
 
 `BINDING` `GLOBAL`または`SESSION`基準で表されます。デフォルトは`SESSION`です。
 

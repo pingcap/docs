@@ -133,7 +133,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
     - `ADMIN SHOW TELEMETRY`構文は削除されます。
     - キーワード`TELEMETRY`と`TELEMETRY_ID`は削除されます。
 
-- 以降のリリースでは[実行計画バインディングの自動進化](/sql-plan-management.md#baseline-evolution)再設計する予定であり、関連する変数と動作が変更されます。
+- 以降のリリースでは[実行プランバインディングの自動進化](/sql-plan-management.md#baseline-evolution)を再設計する予定であり、関連する変数と動作が変更されます。
 
 - TiDB Lightningパラメータ[`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)将来のリリースで廃止される予定であり、その後削除されます。このパラメータは`conflict.threshold`に置き換えられます。これは、競合レコードの最大数が、単一のインポートタスクで許容される競合レコードの最大数と一致することを意味します。
 

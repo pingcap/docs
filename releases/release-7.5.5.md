@@ -61,7 +61,7 @@ TiDB バージョン: 7.5.5
     - ストレージエンジンとしてTiKVが選択されていない場合にTTLが失敗する可能性がある問題を修正 [#56402](https://github.com/pingcap/tidb/issues/56402) @[YangKeao](https://github.com/YangKeao)
     - `ADD INDEX` を実行するときに TiDB がインデックスの長さ制限をチェックしない問題を修正しました [#56930](https://github.com/pingcap/tidb/issues/56930) @[fzzf678](https://github.com/fzzf678)
     - TTLタスクをキャンセルした際に、対応するSQLが強制終了されない問題を修正[#56511](https://github.com/pingcap/tidb/issues/56511) @[lcwangchao](https://github.com/lcwangchao)
-    - エイリアスを持つマルチテーブル`DELETE`文に対して実行計画 バインディングを作成できない問題を修正しました。 [#56726](https://github.com/pingcap/tidb/issues/56726) @[hawkingrei](https://github.com/hawkingrei)
+    - エイリアスを持つマルチテーブル`DELETE`文に対して実行プランバインディングを作成できない問題を修正しました。 [#56726](https://github.com/pingcap/tidb/issues/56726) @[hawkingrei](https://github.com/hawkingrei)
     - `ANALYZE`を使用してテーブルの統計情報を収集するときに、テーブルに仮想生成列の式インデックスが含まれていると、実行時にエラーが報告される問題を修正しました。 [#57079](https://github.com/pingcap/tidb/issues/57079) @[hawkingrei](https://github.com/hawkingrei)
     - 配置ルールを含むテーブル構造をインポートするときに Plan Replayer がエラーを報告する可能性がある問題を修正しました。 [#54961](https://github.com/pingcap/tidb/issues/54961) @[hawkingrei](https://github.com/hawkingrei)
     - CTE でデータベース名を解析するときに間違ったデータベース名が返される問題を修正しました [#54582](https://github.com/pingcap/tidb/issues/54582) @[hawkingrei](https://github.com/hawkingrei)
