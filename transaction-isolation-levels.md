@@ -36,7 +36,7 @@ TiDB 实现了 Snapshot Isolation (SI) 一致性，出于兼容 MySQL 的考虑�
 
 ## Repeatable Read 隔离级别
 
-Repeatable Read 隔离级别只会看到事务开始之前已提交的数据，且永远不会看到未提交的数据或在事务执行期间由并发事务提交的变更。然而，事务中的语句会看到在其自身事务内执行的先前更新的效果，即使这些更新尚未提交。
+Repeatable Read 隔离级别只会看到事务开始之前已提交的数据，且永远不会看到未提交的数据或在事务执行期间由并发事务提交的变更。然而，事务中的某个语句可以看到同一事务中先前语句所做的更改，即使这些更改尚未提交。
 
 对于在不同节点上运行的事务，开始和提交的顺序取决于从 PD 获取时间戳的顺序。
 
@@ -55,7 +55,7 @@ commit;                         |
 
 ### Difference between TiDB and ANSI Repeatable Read
 
-TiDB 的 Repeatable Read 隔离级别与 ANSI Repeatable Read 隔离级别不同，尽管它们共享相同的名称。根据 [A Critique of ANSI SQL Isolation Levels](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf) 论文中的标准，TiDB 实现的是 Snapshot Isolation 级别。该隔离级别不允许严格的幻读（A3），但允许宽泛的幻读（P3）和写偏差。相比之下，ANSI Repeatable Read 允许幻读，但不允许写偏差。
+TiDB 的 Repeatable Read 隔离级别与 ANSI Repeatable Read 隔离级别不同，尽管它们名称相同。根据 [A Critique of ANSI SQL Isolation Levels](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf) 论文中的标准，TiDB 实现的是 Snapshot Isolation 级别。该隔离级别不允许严格的幻读（A3），但允许宽泛的幻读（P3）和写偏差。相比之下，ANSI Repeatable Read 允许幻读，但不允许写偏差。
 
 ### Difference between TiDB and MySQL Repeatable Read
 

@@ -5,7 +5,7 @@ summary: 了解 `USER_ATTRIBUTES` INFORMATION_SCHEMA 表。
 
 # USER_ATTRIBUTES
 
-`USER_PRIVILEGES` 表提供关于用户注释和用户属性的信息。这些信息来自 `mysql.user` 系统表。
+`USER_ATTRIBUTES` 表提供关于用户注释和用户属性的信息。这些信息来自 `mysql.user` 系统表。
 
 ```sql
 USE information_schema;
