@@ -78,7 +78,7 @@ tikv-ctl --host=<tikv-ip:port> modify-tikv-config -n backup.enable-auto-tune -v 
 |^^^^**--| Because the cluster workload gets higher, auto-tune adjusts the size of the thread pool to `2`. After that, the cluster still has 2 idle CPU cores.
 ```
 
-**バックアップ CPU 使用率**パネルでは、自動調整によって調整されたスレッドプールのサイズを確認できます。
+**Backup CPU Utilization**パネルでは、自動調整によって調整されたスレッドプールのサイズを確認できます。
 
 ![Grafana dashboard example of backup auto-tune metrics](/media/br/br-auto-throttle.png)
 
