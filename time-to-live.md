@@ -155,7 +155,6 @@ An eligible index must meet the following requirements:
     - It includes either all primary key columns or none of them. It cannot include only some columns of a composite primary key.
     - If the table has a clustered primary key consisting of a single unsigned integer column, the index includes that primary key column.
     - If any column of the clustered primary key is defined with a prefix length, the index includes all primary key columns.
-    - For a table created by an earlier TiDB version whose clustered primary key contains non-binary string columns, the index includes all primary key columns.
 - Index columns cannot use the `SET`, `FLOAT`, or `DOUBLE` data type. For a non-unique index that does not include primary key columns, the primary key columns cannot use these data types either.
 
 To disable the execution of TTL jobs, in addition to setting the `TTL_ENABLE='OFF'` table option, you can also disable the execution of TTL jobs in the entire cluster by setting the [`tidb_ttl_job_enable`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) global variable:
