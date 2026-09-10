@@ -127,7 +127,7 @@ TiCDC の新しいアーキテクチャの監視ダッシュボードには、�
 
 ## クラシックアーキテクチャにおける TiCDC のメトリクス {#metrics-for-ticdc-in-the-classic-architecture}
 
-TiUPを使用して TiDB クラスターをデプロイすると、TiDB と同時にデプロイされる TiCDC のサブダッシュボードが Grafana の[古典アーキテクチャ](/ticdc/ticdc-classic-architecture.md)に表示されます。
+TiUPを使用して TiDB クラスターをデプロイすると、TiDB と同時にデプロイされる TiCDC のサブダッシュボードが Grafana の[クラシックアーキテクチャ](/ticdc/ticdc-classic-architecture.md)に表示されます。
 
 各パネルの説明は次のとおりです。
 

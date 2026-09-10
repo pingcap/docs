@@ -1563,7 +1563,7 @@ Titanに関連するコンフィグレーション項目。
 
 ### `max-background-gc` {#max-background-gc}
 
-- TitanにおけるGCスレッドの最大数。TiKV**の詳細** > **スレッドCPU** > **RocksDB CPU**パネルで、Titan GCスレッドが長時間フル稼働状態にあることが確認された場合は、Titan GCスレッドプールのサイズを増やすことを検討してください。
+- TitanにおけるGCスレッドの最大数。**TiKV Details** > **Thread CPU** > **RocksDB CPU**パネルで、Titan GCスレッドが長時間フル稼働状態にあることが確認された場合は、Titan GCスレッドプールのサイズを増やすことを検討してください。
 - デフォルト値: `1` 。v8.0.0 より前のバージョンでは、デフォルト値は`4`です。
 - 最小値: `1`
 

@@ -35,9 +35,9 @@ Raftstore のワークフロー図から、各リージョンのメッセージ�
 
 ### パフォーマンス監視 {#performance-monitoring}
 
-Grafana の**TiKV ダッシュボード**では、次の監視メトリックを確認できます。
+Grafana の**TiKV Dashboard**では、次の監視メトリックを確認できます。
 
-- **スレッドCPU**パネルの`Raft store CPU`
+- **Thread-CPU**パネルの`Raft store CPU`
 
     基準値： `raftstore.store-pool-size * 85%`未満。
 
