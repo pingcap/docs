@@ -1,11 +1,11 @@
 ---
 title: TiCDC Classic Architecture
-summary: TiCDC の従来のアーキテクチャと動作原理を学びます。
+summary: TiCDC のクラシックアーキテクチャと動作原理を学びます。
 ---
 
 # TiCDC クラシックアーキテクチャ {#ticdc-classic-architecture}
 
-このドキュメントでは、TiCDC の従来のアーキテクチャと動作原理について説明します。
+このドキュメントでは、TiCDC のクラシックアーキテクチャと動作原理について説明します。
 
 > **Note:**
 >
