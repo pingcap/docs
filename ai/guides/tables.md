@@ -1,6 +1,7 @@
 ---
 title: Working with Tables
 summary: Learn how to work with tables in TiDB.
+aliases: ['/ai/basic-with-pytidb/']
 ---
 
 # Working with Tables
@@ -12,10 +13,6 @@ A table can contain multiple columns of different data types. Supported data typ
 This document shows how to work with tables using [`pytidb`](https://github.com/pingcap/pytidb).
 
 `pytidb` is the official Python SDK for TiDB, designed to help developers build AI applications efficiently.
-
-> **Note:**
->
-> For a complete working example, see the [basic example](https://github.com/pingcap/pytidb/tree/main/examples/basic) in our repository.
 
 ## Create a table
 
@@ -446,3 +443,51 @@ SHOW TABLES;
 
 </div>
 </SimpleTab>
+
+## Run the complete `pytidb` CRUD example
+
+The `pytidb` repository provides a complete example that connects to TiDB, creates a table with text, vector, and JSON columns, and performs CRUD operations.
+
+Before you begin, make sure you have:
+
+- Python 3.10 or later.
+- A {{{ .starter }}} instance. You can create one on [TiDB Cloud](https://tidbcloud.com/free-trial).
+
+To run the example:
+
+1. Clone the `pytidb` repository and go to the example directory:
+
+    ```bash
+    git clone https://github.com/pingcap/pytidb.git
+    cd pytidb/examples/basic/
+    ```
+
+2. Create and activate a virtual environment, and then install the required packages:
+
+    ```bash
+    python -m venv .venv
+    source .venv/bin/activate
+    pip install -r reqs.txt
+    ```
+
+3. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your {{{ .starter }}} instance, and then click **Connect** in the upper-right corner to get the connection parameters.
+
+4. Create a `.env` file and set the connection parameters:
+
+    ```bash
+    cat > .env <<EOF
+    TIDB_HOST={gateway-region}.prod.aws.tidbcloud.com
+    TIDB_PORT=4000
+    TIDB_USERNAME={prefix}.root
+    TIDB_PASSWORD={password}
+    TIDB_DATABASE=test
+    EOF
+    ```
+
+5. Run the example:
+
+    ```bash
+    python main.py
+    ```
+
+The example prints the results of each CRUD operation and drops the example table when it finishes. To inspect the implementation, see the [`pytidb` basic example](https://github.com/pingcap/pytidb/tree/main/examples/basic).
