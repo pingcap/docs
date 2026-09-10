@@ -14,7 +14,7 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 - **TiDB Cloud Essential**
 
-    - 包含 [2026 年 6 月 30 日](#june-30-2026)发布的增强功能的 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 实例，现在会在 TiDB Cloud 控制台的实例概览页面中将其 TiDB 版本显示为 `CLOUD.202603.x`。
+    - 对于 [2026 年 6 月 30 日](#june-30-2026)发布的包含增强功能的 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 实例，TiDB Cloud 控制台现在会在实例概览页面中显示其 TiDB 版本为 `CLOUD.202603.x`。
 
         有关这些增强功能的更多信息，请参阅 [2026 年 6 月 30 日发布说明](#june-30-2026)。
 
