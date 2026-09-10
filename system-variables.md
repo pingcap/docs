@@ -5968,7 +5968,11 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 >
 > If the character check is skipped, TiDB might fail to detect invalid UTF-8 characters written by the application, cause decoding errors when `ANALYZE` is executed, and introduce other unknown encoding issues. If your application cannot guarantee the validity of the written string, it is not recommended to skip the character check.
 
-### tidb_slow_log_max_per_sec <span class="version-mark">New in v8.5.6</span>
+### tidb_slow_log_max_per_sec <span class="version-mark">New in v8.5.6 and CLOUD.202603.1</span> {#tidb_slow_log_max_per_sec}
+
+>**Note:**
+>
+> This variable is read-only for TiDB Cloud.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5979,22 +5983,39 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - This variable controls the maximum number of slow query log entries that can be written per TiDB node per second.
     - A value of `0` means there is no limit on the number of slow query log entries written per second.
     - A value greater than `0` means TiDB writes at most the specified number of slow query log entries per second. Any excess log entries are discarded and not written to the slow query log file.
-- This variable is often used with [`tidb_slow_log_rules`](#tidb_slow_log_rules-new-in-v856) to prevent excessive slow query logs from being generated under high-workload conditions.
+- This variable is often used with [`tidb_slow_log_rules`](#tidb_slow_log_rules) to prevent excessive slow query logs from being generated under high-workload conditions.
 
-### tidb_slow_log_rules <span class="version-mark">New in v8.5.6</span>
+### tidb_slow_log_rules <span class="version-mark">New in v8.5.6 and CLOUD.202603.1</span> {#tidb_slow_log_rules}
 
-- Scope: SESSION | GLOBAL
+>**Note:**
+>
+> This variable is not supported on TiDB Cloud Starter.
+
+- Scope
+    - TiDB Self-Managed and TiDB Cloud Dedicated: SESSION | GLOBAL
+    - TiDB Cloud Essential and Premium: SESSION
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - Type: String
 - This variable defines the triggering rules for slow query logs. It supports combining multi-dimensional metrics to provide more flexible and fine-grained logging.
-- For more information about how to use this system variable, see [Use `tidb_slow_log_rules`](/identify-slow-queries.md#use-tidb_slow_log_rules).
+- For more information about how to use this system variable, see [Configure Trigger Rules for Slow Queries](/config-slow-query-trigger-rules.md).
+
+<CustomContent platform="tidb">
 
 > **Tip:**
 >
-> - When enabling `tidb_slow_log_rules` in a production environment, it is recommended to also configure [`tidb_slow_log_max_per_sec`](#tidb_slow_log_max_per_sec-new-in-v856) to avoid excessively frequent slow query log printing.
-> - It is recommended to start with stricter conditions and gradually relax them based on troubleshooting needs. For more information on performance impact, see [Recommendations](/identify-slow-queries.md#recommendations).
+> - When enabling `tidb_slow_log_rules` in a production environment, it is recommended to also configure [`tidb_slow_log_max_per_sec`](#tidb_slow_log_max_per_sec) to avoid excessively frequent slow query log printing.
+> - It is recommended to start with stricter conditions and gradually relax them based on troubleshooting needs. For more information on performance impact, see [Recommendations](/config-slow-query-trigger-rules.md#recommendations).
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
+> **Tip:**
+>
+> It is recommended to start with stricter conditions and gradually relax them based on troubleshooting needs. For more information on performance impact, see [Recommendations](/config-slow-query-trigger-rules.md#recommendations).
+
+</CustomContent>
 
 ### tidb_slow_log_threshold
 
