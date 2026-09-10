@@ -350,14 +350,14 @@ v8.0.0 以降、TiCDC はSimple メッセージ エンコーディング プロ�
 
 ##### `output-old-value` {#output-old-value}
 
-- 行データが変更される前に値を出力するかどうかを制御します。デフォルト値は true です。無効にすると、 `UPDATE`イベントは「p」フィールドを出力しません。
+- 行データが変更される前に値を出力するかどうかを制御します。デフォルト値は true です。無効にすると、 `UPDATE`イベントは"p"フィールドを出力しません。
 - デフォルト値: `true`
 
 #### sink.debezium {#sink-debezium}
 
 ##### `output-old-value` {#output-old-value}
 
-- 行データが変更される前の値を出力するかどうかを制御します。デフォルト値は true です。無効にすると、 `UPDATE`イベントは「変更前」フィールドを出力しません。
+- 行データが変更される前の値を出力するかどうかを制御します。デフォルト値は true です。無効にすると、 `UPDATE`イベントは"before"フィールドを出力しません。
 - デフォルト値: `true`
 
 ### consistent {#consistent}

@@ -87,7 +87,7 @@ TiDB Lightning は、10 ギガビット ネットワークカードで使用す�
 
 ## TiDB Lightning がターゲット TiKV クラスターにこれほど多くの空き容量を必要とするのはなぜですか? {#why-tidb-lightning-requires-so-much-free-space-in-the-target-tikv-cluster}
 
-デフォルト設定のレプリカ数3の場合、ターゲットTiKVクラスターに必要な容量はデータソースの6倍になります。「2」という倍数は、以下の要素がデータソースに反映されていないため、控えめな見積もりです。
+デフォルト設定のレプリカ数3の場合、ターゲットTiKVクラスターに必要な容量はデータソースの6倍になります。"2"という倍数は、以下の要素がデータソースに反映されていないため、控えめな見積もりです。
 
 - インデックスが占めるスペース
 - RocksDBにおける空間増幅
@@ -153,7 +153,7 @@ CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east" REGIONS="us-east,us-west";
 
 ![TiDB Lightning FAQ - situation 1](/media/lightning-faq-situation-1.jpg)
 
-**状況2：**ターゲットクラスタがフォロワーレプリカを「us-mid」リージョン内の別のTiKVノードに配置しており、トポロジ内に「us-west」リージョンが含まれていない場合。このような場合、ターゲットクラスタで配置ポリシーを作成すると、 TiDB Lightningはエラーを報告します。
+**状況2：**ターゲットクラスタがフォロワーレプリカを"us-mid"リージョン内の別のTiKVノードに配置しており、トポロジ内に"us-west"リージョンが含まれていない場合。このような場合、ターゲットクラスタで配置ポリシーを作成すると、 TiDB Lightningはエラーを報告します。
 
 ![TiDB Lightning FAQ - situation 2](/media/lightning-faq-situation-2.jpg)
 

@@ -37,13 +37,13 @@ TiDB DashboardのKey Visualizer機能は、クラスター全体の読み取り/
 
 ## すべてのSQL文の実行情報のリストを表示します {#show-a-list-of-execution-information-of-all-sql-statements}
 
-すべてのSQL文の実行情報は、「SQL文」ページに表示されます。このページでは、すべてのステージにおける実行時間と合計実行回数を確認できます。これにより、最もリソースを消費しているSQLクエリを分析して特定し、クラスター全体のパフォーマンスを向上させることができます。
+すべてのSQL文の実行情報は、SQL Statementsページに表示されます。このページでは、すべてのステージにおける実行時間と合計実行回数を確認できます。これにより、最もリソースを消費しているSQLクエリを分析して特定し、クラスター全体のパフォーマンスを向上させることができます。
 
 詳細は[TiDB DashboardのSQL Statementsページ](/dashboard/dashboard-statement-list.md)参照。
 
 ## スロークエリの詳細な実行情報を知る {#learn-the-detailed-execution-information-of-slow-queries}
 
-TiDB Dashboardの「スロークエリ」ページには、実行に時間のかかるすべてのSQL文のリスト（SQLテキストと実行情報を含む）が表示されます。このページは、スロークエリやパフォーマンスジッターの原因を特定するのに役立ちます。
+TiDB DashboardのSlow Queriesページには、実行に時間のかかるすべてのSQL文のリスト（SQLテキストと実行情報を含む）が表示されます。このページは、スロークエリやパフォーマンスジッターの原因を特定するのに役立ちます。
 
 詳細は[スロークエリページ](/dashboard/dashboard-slow-query.md)を参照。
 

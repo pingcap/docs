@@ -20,7 +20,7 @@ summary: TiDBデータベースにおけるBACKUPの使用方法の概要。
 
 `BACKUP`および[`RESTORE`](/sql-statements/sql-statement-restore.md)タスクは、一度に 1つしか実行できません。 `BACKUP`または`RESTORE`文が同じ TiDBサーバーで既に実行されている場合、新しい`BACKUP`の実行は、以前のすべてのタスクが完了するまで待機します。
 
-`BACKUP` 「tikv」ストレージエンジンでのみ使用できます。「unistore」エンジンで`BACKUP`を使用すると失敗します。
+`BACKUP` "tikv"ストレージエンジンでのみ使用できます。"unistore"エンジンで`BACKUP`を使用すると失敗します。
 
 ## 概要 {#synopsis}
 

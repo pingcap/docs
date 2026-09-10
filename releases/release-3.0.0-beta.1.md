@@ -67,7 +67,7 @@ TiDB Ansible バージョン: 3.0.0-beta.1
     - 統計に基づいて実際のデータ量と推定データ量の差を記録するための監視項目`high_error_rate_feedback_total`を追加します。 [#9209](https://github.com/pingcap/tidb/pull/9209)
     - データベースディメンションにQPS監視項目を追加します。これは、設定項目を使用して有効にできます。 [#9151](https://github.com/pingcap/tidb/pull/9151)
 - DDL
-    - DDLタスクの再試行回数を制限するために、 `ddl_error_count_limit`グローバル変数（デフォルトでは「512」）を追加します（この回数が制限を超えると、DDLタスクはキャンセルされます） [#9295](https://github.com/pingcap/tidb/pull/9295)
+    - DDLタスクの再試行回数を制限するために、 `ddl_error_count_limit`グローバル変数（デフォルトでは"512"）を追加します（この回数が制限を超えると、DDLタスクはキャンセルされます） [#9295](https://github.com/pingcap/tidb/pull/9295)
     - ALTER ALGORITHM `INPLACE` / `INSTANT` をサポート [#8811](https://github.com/pingcap/tidb/pull/8811)
     - `SHOW CREATE VIEW`文をサポートする [#9309](https://github.com/pingcap/tidb/pull/9309)
     - `SHOW CREATE USER`文をサポートする [#9240](https://github.com/pingcap/tidb/pull/9240)
@@ -108,7 +108,7 @@ TiDB Ansible バージョン: 3.0.0-beta.1
     - 生成列の複製をサポート
 - Lightning
     - TiKVの定期的なレベル1圧縮を無効にすることをサポートし、TiKVクラスタバージョンが2.1.4以降の場合、レベル1圧縮はインポートモードで自動的に実行されます[#4199](https://github.com/tikv/tikv/pull/4199) [#119](https://github.com/pingcap/tidb-lightning/pull/119)
-    - `table_concurrency`設定項目を追加して、インポートエンジンの数（デフォルトでは「16」）を制限し、インポーターのディスクスペース過剰な使用を回避します。 [#119](https://github.com/pingcap/tidb-lightning/pull/119)
+    - `table_concurrency`設定項目を追加して、インポートエンジンの数（デフォルトでは"16"）を制限し、インポーターのディスクスペース過剰な使用を回避します。 [#119](https://github.com/pingcap/tidb-lightning/pull/119)
     - メモリ使用量を削減するために、中間状態SSTをディスクに保存することをサポート[#4369](https://github.com/tikv/tikv/pull/4369)
     - TiKV-Importer のインポートパフォーマンスを最適化し、大規模なテーブルのデータとインデックスの個別インポートをサポートします[#132](https://github.com/pingcap/tidb-lightning/pull/132)
     - CSVファイルのインポートをサポート[#111](https://github.com/pingcap/tidb-lightning/pull/111)

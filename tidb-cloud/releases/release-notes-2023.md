@@ -249,7 +249,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)では基本認証がサポートされるようになりました。
 
-    [「基本」HTTP認証](https://datatracker.ietf.org/doc/html/rfc7617)を使用したリクエストでは、公開鍵をユーザー名として、秘密鍵をパスワードとして提供できます。ダイジェスト認証と比較して、基本認証はよりシンプルで、Data Serviceエンドポイントを呼び出す際に簡単に使用できます。
+    ['Basic' HTTP認証](https://datatracker.ietf.org/doc/html/rfc7617)を使用したリクエストでは、公開鍵をユーザー名として、秘密鍵をパスワードとして提供できます。ダイジェスト認証と比較して、基本認証はよりシンプルで、Data Serviceエンドポイントを呼び出す際に簡単に使用できます。
 
     詳細については[エンドポイントを呼び出す](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint)を参照してください。
 
@@ -478,9 +478,9 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - 簡素化と明確化を目指し、製品名を更新しました。
 
-    - 「TiDB Cloud Serverless Tier」は「TiDB Cloud Serverless」という名前になりました。
-    - 「TiDB Cloud Dedicated Tier」は「TiDB Cloud Dedicated」という名前になりました。
-    - 「TiDB On-Premises」は「TiDB Self-Managed」という名前になりました。
+    - "TiDB Cloud Serverless Tier"は"TiDB Cloud Serverless"という名前になりました。
+    - "TiDB Cloud Dedicated Tier"は"TiDB Cloud Dedicated"という名前になりました。
+    - "TiDB On-Premises"は"TiDB Self-Managed"という名前になりました。
 
     刷新された名前でも、変わらぬ素晴らしいパフォーマンスをお楽しみください。お客様の体験こそが私たちの最優先事項です。
 
@@ -533,7 +533,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     詳細な手順については、 [ノードサイズを変更する](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)を参照してください。
 
-- 圧縮ファイルのインポートをサポートします。CSVファイルとSQLファイルの形式は、 `.gzip` `.zst` 。この機能`.gz` `.zstd`より効率的かつコスト効率の高いデータインポートが可能になり、データ転送コスト`.snappy`削減できます。
+- 圧縮ファイルのインポートをサポートします。CSVファイルとSQLファイルを`.gzip`、 `.gz`、 `.zstd`、 `.zst`、および`.snappy`形式でインポートできます。この機能により、より効率的かつコスト効率の高いデータインポートが可能になり、データ転送コストを削減できます。
 
     詳細については、 [クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)および[サンプルデータのインポート](/tidb-cloud/import-sample-data.md)を参照してください。
 

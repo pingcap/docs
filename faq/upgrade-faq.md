@@ -102,7 +102,7 @@ alter table t change column a a varchar(22) character set utf8;
 
 - ポイント 1 によると、列の文字セットを指定しない場合はデフォルトで UTF8MB4 が使用されるため、元の文字セットと一致するように列の文字セットを指定する必要があります。
 
-- ポイント 2 によれば、HTTP API を介してテーブルのメタデータを取得し、列名とキーワード「Charset」を検索することで列の文字セットを見つけることができます。
+- ポイント 2 によれば、HTTP API を介してテーブルのメタデータを取得し、列名とキーワード"Charset"を検索することで列の文字セットを見つけることができます。
 
     ```sh
     curl "http://$IP:10080/schema/test/t" | python -m json.tool

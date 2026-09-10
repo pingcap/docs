@@ -346,7 +346,7 @@ mysql> select @@last_plan_from_cache;       -- Reuse the last plan
 
 <CustomContent platform="tidb">
 
-TiDBページの**Executor**セクションの[Grafanaダッシュボード](/grafana-tidb-dashboard.md)には、「プランキャッシュOPSを使用するクエリ」と「プランキャッシュミスOPS」のグラフがあります。これらのグラフは、TiDBとアプリケーションの両方がSQLプランキャッシュが正しく動作するように正しく設定されているかどうかを確認できます。同じページの**Server**セクションには、「プリペアドステートメント数」のグラフがあります。アプリケーションがプリペアドステートメントを使用している場合、このグラフは0以外の値を示します。これはSQLプランキャッシュが正しく機能するために必要なものです。
+TiDBページの**Executor**セクションの[Grafanaダッシュボード](/grafana-tidb-dashboard.md)には、"Queries Using Plan Cache OPS"と"Plan Cache Miss OPS"のグラフがあります。これらのグラフは、TiDBとアプリケーションの両方がSQLプランキャッシュが正しく動作するように正しく設定されているかどうかを確認できます。同じページの**Server**セクションには、"Prepared Statement Count"のグラフがあります。アプリケーションがプリペアドステートメントを使用している場合、このグラフは0以外の値を示します。これはSQLプランキャッシュが正しく機能するために必要なものです。
 
 ![sql\_plan\_cache](/media/performance/sql_plan_cache.png)
 

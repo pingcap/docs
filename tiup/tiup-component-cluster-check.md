@@ -1,6 +1,6 @@
 ---
 title: tiup cluster check
-summary: TiUP クラスタは、ハードウェアとソフトウェア環境が本番の要件を満たしていることを確認するための「check」コマンドを提供します。OSバージョン、CPUサポート、時刻同期、システム制限などをチェックします。オプションには、自動修復や、CPUコア数、メモリサイズ、ディスクパフォーマンスのチェックの有効化などがあります。チェックを実行するには、「tiup cluster check <topology.yml | cluster-name> [flags]」コマンドを使用します。自動修復を試行するには、「--apply」を使用します。チェックするノードとロールを指定するには、「-N, --node」および「-R, --role」を使用します。特定のチェックを有効にするには、「--enable-cpu」、「--enable-disk」、「--enable-mem」を使用します。
+summary: TiUP クラスタは、ハードウェアとソフトウェア環境が本番の要件を満たしていることを確認するための`check`コマンドを提供します。OSバージョン、CPUサポート、時刻同期、システム制限などをチェックします。オプションには、自動修復や、CPUコア数、メモリサイズ、ディスクパフォーマンスのチェックの有効化などがあります。チェックを実行するには、`tiup cluster check <topology.yml | cluster-name> [flags]`コマンドを使用します。自動修復を試行するには、`--apply`を使用します。チェックするノードとロールを指定するには、`-N, --node`および`-R, --role`を使用します。特定のチェックを有効にするには、`--enable-cpu`、`--enable-disk`、`--enable-mem`を使用します。
 ---
 
 # tiup cluster check {#tiup-cluster-check}

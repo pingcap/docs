@@ -127,7 +127,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
         ![connect to salesforce](/media/develop/aws-appflow-step-connect-to-salesforce.png)
 
-    2. 「許可」をクリックして、AWSがSalesforceデータを読み取ることを**許可する**ことを確認してください。
+    2. **Allow**をクリックして、AWSがSalesforceデータを読み取ることを許可することを確認してください。
 
         ![allow salesforce](/media/develop/aws-appflow-step-allow-salesforce.png)
 

@@ -10,7 +10,7 @@ summary: TiDB 2.0.6は、システムの互換性と安定性の向上を伴い�
 ## TiDB {#tidb}
 
 - 改善点
-    - ディスク容量を節約するために「システム変数の設定」ログを短くする[#7031](https://github.com/pingcap/tidb/pull/7031)
+    - ディスク容量を節約するために"set system variable"ログを短くする[#7031](https://github.com/pingcap/tidb/pull/7031)
     - `ADD INDEX`の実行中に遅い操作をログに記録して、トラブルシューティングを容易にします[#7083](https://github.com/pingcap/tidb/pull/7083)
     - 統計情報の更新時にトランザクションの競合を減らす[#7138](https://github.com/pingcap/tidb/pull/7138)
     - 推定待ちの値が統計範囲を超える場合の行数推定の精度を向上 [#7185](https://github.com/pingcap/tidb/pull/7185)

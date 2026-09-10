@@ -40,7 +40,7 @@ TiDB Ansible バージョン: 2.1.17
     - `unaryMinus`関数によって返される結果が MySQL と互換性がない問題を修正しました。これは、整数結果がオーバーフローしたときに非小数点結果になるためです。 [#11990](https://github.com/pingcap/tidb/pull/11990)
     - `LOAD DATA`文の実行時にカウント順序が原因で`last_insert_id()`間違っている可能性がある問題を修正しました[#11994](https://github.com/pingcap/tidb/pull/11994)
     - ユーザーがAUTO_INCREMENT列データを明示的・暗黙的に混合して書き込む場合に`last_insert_id()`間違っている可能性がある問題を修正[#12001](https://github.com/pingcap/tidb/pull/12001)
-    - 関数`JSON_UNQUOTE`引用符の過剰使用に関するバグを修正しました。二重引用符で囲まれた値 ( `"` ) のみ引用符で囲まないようにします。例えば、「 `SELECT JSON_UNQUOTE("\\\\")` 」の結果は「 `\\` 」（変更なし）になります[#12096](https://github.com/pingcap/tidb/pull/12096)
+    - 関数`JSON_UNQUOTE`引用符の過剰使用に関するバグを修正しました。二重引用符で囲まれた値 ( `"` ) のみ引用符で囲まないようにします。例えば、 "`SELECT JSON_UNQUOTE("\\\\")`" の結果は "`\\`" （変更なし）になります[#12096](https://github.com/pingcap/tidb/pull/12096)
 - サーバ
     - TiDBトランザクション再試行する際、最後の再試行時刻から最初の実行時刻までの変更`start ts`スロークエリログに記録される [#11878](https://github.com/pingcap/tidb/pull/11878)
     - `LockResolver`のトランザクションのキーの数を追加して、リージョン全体のスキャン操作を回避し、キーの数が減ったときにロックを解決するコストを削減します[#11889](https://github.com/pingcap/tidb/pull/11889)

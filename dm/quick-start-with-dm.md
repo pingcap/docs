@@ -53,7 +53,7 @@ summary: TiUP Playground を使用してデータ移行環境をすばやくセ�
 
 4. 現在のターミナルで`tiup playground`を実行したままにして、次の手順のために新しいターミナルを開きます。
 
-    このPlayground環境は、ターゲットTiDBデータベースとレプリケーションエンジン（DMマスターとDMワーカー）の実行プロセスを提供します。MySQL（ソース）→ DM（レプリケーションエンジン）→ TiDB（ターゲット）というデータフローを処理します。
+    このPlayground環境は、ターゲットTiDBデータベースとレプリケーションエンジン（DM-masterとDM-worker）の実行プロセスを提供します。MySQL（ソース）→ DM（レプリケーションエンジン）→ TiDB（ターゲット）というデータフローを処理します。
 
 ## ステップ2: ソースデータベースを準備する（オプション） {#step-2-prepare-a-source-database-optional}
 

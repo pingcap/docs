@@ -54,7 +54,7 @@ v5.3 の主な新機能または改善点は次のとおりです。
 | PD             | [`patrol-region-interval`](/pd-configuration-file.md#patrol-region-interval)                       | 変更     | replicaChecker がリージョンのヘルス状態をチェックする実行頻度を制御します。この値が小さいほど、replicaChecker の実行速度が速くなります。通常、このパラメータを調整する必要はありません。デフォルト値は`100ms`から`10ms`に変更されています。                                                   |
 | PD             | [`max-snapshot-count`](/pd-configuration-file.md#max-snapshot-count)                               | 変更     | 単一のストアが同時に受信または送信するスナップショットの最大数を制御します。PDスケジューラは、この設定に基づいて、通常のトラフィックに使用されるリソースがプリエンプトされるのを防ぎます。デフォルト値は`3`から`64`に変更されました。                                                                       |
 | PD             | [`max-pending-peer-count`](/pd-configuration-file.md#max-pending-peer-count)                       | 変更     | 単一ストア内の保留中のピアの最大数を制御します。PDスケジューラはこの設定に依存して、一部のノードで古いログを持つリージョンが過剰に生成されるのを防ぎます。デフォルト値は`16`から`64`に変更されました。                                                                                      |
-| TiDB Lightning      | `meta-schema-name`                                                                                 | 新しく追加された | ターゲットクラスター内の各TiDB Lightningインスタンスのメタ情報が格納されるスキーマ名。デフォルト値は「lightning_metadata」です。                                                                                                              |
+| TiDB Lightning      | `meta-schema-name`                                                                                 | 新しく追加された | ターゲットクラスター内の各TiDB Lightningインスタンスのメタ情報が格納されるスキーマ名。デフォルト値は"lightning_metadata"です。                                                                                                              |
 
 ### その他 {#others}
 
@@ -81,7 +81,7 @@ v5.3 の主な新機能または改善点は次のとおりです。
 
 - プラグインのデフォルトのストレージディレクトリが`""`から`/data/deploy/plugin`に変更されます。
 
-- DMコードは[TiCDCコードリポジトリのフォルダ「dm」](https://github.com/pingcap/tiflow/tree/release-5.3/dm)に移行されました。DMのバージョン番号はTiDBに準じます。v2.0.xの次に新しいDMバージョンはv5.3.0となり、v2.0.xからv5.3.0へのアップグレードはリスクなしで行えます。
+- DMコードは[TiCDCコードリポジトリのフォルダ"dm"](https://github.com/pingcap/tiflow/tree/release-5.3/dm)に移行されました。DMのバージョン番号はTiDBに準じます。v2.0.xの次に新しいDMバージョンはv5.3.0となり、v2.0.xからv5.3.0へのアップグレードはリスクなしで行えます。
 
 - Prometheusのデフォルトのデプロイバージョンは、v2.8.1から2021年5月にリリースされる[バージョン2.27.1](https://github.com/prometheus/prometheus/releases/tag/v2.27.1)にアップグレードされました。このバージョンでは、より多くの機能が提供され、セキュリティ問題が修正されています。Prometheus v2.8.1と比較して、v2.27.1ではアラートの時刻表示がUnixタイムスタンプからUTCに変更されました。詳細は[Prometheusコミット](https://github.com/prometheus/prometheus/commit/7646cbca328278585be15fa615e22f2a50b47d06)を参照してください。
 

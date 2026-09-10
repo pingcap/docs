@@ -59,7 +59,7 @@ log  : Restored /home/dvaneeden/tidb_cs/tidb_cs.csproj (in 551 ms).
 
 ## ステップ3. コードを更新する {#step-3-update-the-code}
 
-`Program.cs`内の「Hello World」の例を次のコードに置き換えてください。
+`Program.cs`内の"Hello World"の例を次のコードに置き換えてください。
 
 ```cs
 using System;

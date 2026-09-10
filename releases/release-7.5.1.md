@@ -237,4 +237,4 @@ TiDB バージョン: 7.5.1
     - TiDB Data Migration (DM)
 
         - 下流のテーブル構造に`shard_row_id_bits` が含まれている場合に移行タスクエラーが発生する問題を修正しました [#10308](https://github.com/pingcap/tiflow/issues/10308) @[GMHDBJD](https://github.com/GMHDBJD)
-        - DM が「イベントタイプ切り捨てが無効です」というエラーに遭遇し、アップグレードが失敗する問題を修正しました[#10282](https://github.com/pingcap/tiflow/issues/10282) @[GMHDBJD](https://github.com/GMHDBJD)
+        - DM が"event type truncate not valid"というエラーに遭遇し、アップグレードが失敗する問題を修正しました[#10282](https://github.com/pingcap/tiflow/issues/10282) @[GMHDBJD](https://github.com/GMHDBJD)

@@ -73,7 +73,7 @@ IAMロールが存在しない場合は、 [Amazon S3 アクセスを構成す�
 
 IAMユーザーの AWS アクセスキーを使用して Amazon S3 バケットにアクセスすると、次のエラーが発生する場合があります。
 
-- アクセスキーID「{access_key_id}」とシークレットアクセスキー「{secret_access_key}」を使用したソース「{bucket_uri}」へのアクセスが拒否されました。
+- "アクセスキーID'{access_key_id}'とシークレットアクセスキー'{secret_access_key}'を使用したソース'{bucket_uri}'へのアクセスが拒否されました"
 
 これは、権限不足のため、 TiDB Cloud がAmazon S3 バケットにアクセスできなかったことを示しています。Amazon S3 バケットにアクセスするには、以下の権限が必要です。
 
@@ -200,11 +200,11 @@ IAMユーザーのポリシーを確認するには、次の手順を実行し�
 
 1. AWS マネジメントコンソールで Amazon S3 コンソールを開き、 **Buckets**ページに移動します。バケットのリストが表示されます。
 2. バケットのリストで、対象のバケットを見つけてクリックします。バケット情報ページが表示されます。
-3. バケット情報ページで**Permissions**タブをクリックし、 **Object Ownership**領域までスクロールダウンします。「Object Ownership」設定が「Bucket owner enforced」になっていることを確認してください。
+3. バケット情報ページで**Permissions**タブをクリックし、 **Object Ownership**領域までスクロールダウンします。"Object Ownership"設定が"Bucket owner enforced"になっていることを確認してください。
 
-    設定が「Bucket owner enforced」ではない場合、アカウントにこのバケット内のすべてのオブジェクトに対する十分な権限がないため、エラー`AccessDenied`が発生します。
+    設定が"Bucket owner enforced"ではない場合、アカウントにこのバケット内のすべてのオブジェクトに対する十分な権限がないため、エラー`AccessDenied`が発生します。
 
-このエラーに対処するには、Object Ownership領域の右上にある**Edit**をクリックし、所有権を「Bucket owner enforced」に変更してください。ただし、このバケットを使用している他のアプリケーションに影響する可能性がありますのでご注意ください。
+このエラーに対処するには、Object Ownership領域の右上にある**Edit**をクリックし、所有権を"Bucket owner enforced"に変更してください。ただし、このバケットを使用している他のアプリケーションに影響する可能性がありますのでご注意ください。
 
 ### バケットの暗号化タイプを確認してください {#check-your-bucket-encryption-type}
 

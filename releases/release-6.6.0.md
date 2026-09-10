@@ -478,7 +478,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
     - JSON の not 演算子の実装が MySQL の実装と互換性がない問題を修正しました [#40683](https://github.com/pingcap/tidb/issues/40683) @[YangKeao](https://github.com/YangKeao)
     - 同時ビューがDDL操作をブロックする可能性がある問題を修正 [#40352](https://github.com/pingcap/tidb/issues/40352) @[zeminzhou](https://github.com/zeminzhou)
     - パーティションテーブルの列を変更するDDL文を同時に実行することによって発生するデータの不整合を修正 [#40620](https://github.com/pingcap/tidb/issues/40620) @[mjonss](https://github.com/mjonss)@[mjonss](https://github.com/mjonss)
-    - `caching_sha2_password`を認証に使用し、パスワードを指定しない場合に「不正なパケット」が報告される問題を修正 [#40831](https://github.com/pingcap/tidb/issues/40831) @[dveeden](https://github.com/dveeden)
+    - `caching_sha2_password`を認証に使用し、パスワードを指定しない場合に"Malformed packet"が報告される問題を修正 [#40831](https://github.com/pingcap/tidb/issues/40831) @[dveeden](https://github.com/dveeden)
     - テーブルの主キーに`ENUM`列が含まれている場合に TTL タスクが失敗する問題を修正しました [#40456](https://github.com/pingcap/tidb/issues/40456) @[lcwangchao](https://github.com/lcwangchao)
     - `mysql.tidb_mdl_view`で、MDLによってブロックされた一部のDDL操作をクエリできない問題を修正します。 [#40838](https://github.com/pingcap/tidb/issues/40838) @[YangKeao](https://github.com/YangKeao)
     - DDL取り込み中にデータ競合が発生する可能性がある問題を修正 [#40970](https://github.com/pingcap/tidb/issues/40970) @[tangenta](https://github.com/tangenta)
@@ -548,7 +548,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
         - `binlog-schema delete`コマンドの実行に失敗する問題を修正しました [#7373](https://github.com/pingcap/tiflow/issues/7373) @[liumengya94](https://github.com/liumengya94)
         - 最後のbinlogがスキップされたDDLである場合にチェックポイントが進まない問題を修正 [#8175](https://github.com/pingcap/tiflow/issues/8175) @[D3Hunter](https://github.com/D3Hunter)
-        - 1 つのテーブルで「更新」タイプと「非更新」タイプの両方の式フィルターが指定されている場合、すべての`UPDATE`文がスキップされるバグを修正しました [#7831](https://github.com/pingcap/tiflow/issues/7831) @[lance6716](https://github.com/lance6716)
+        - 1 つのテーブルで"update"タイプと"non-update"タイプの両方の式フィルターが指定されている場合、すべての`UPDATE`文がスキップされるバグを修正しました [#7831](https://github.com/pingcap/tiflow/issues/7831) @[lance6716](https://github.com/lance6716)
         - テーブルに`update-old-value-expr`または`update-new-value-expr`のいずれか一方のみが設定されている場合、フィルタルールが有効にならないか、DM がパニックを起こすバグを修正しました。 [#7774](https://github.com/pingcap/tiflow/issues/7774) @[lance6716](https://github.com/lance6716)
 
     - TiDB Lightning

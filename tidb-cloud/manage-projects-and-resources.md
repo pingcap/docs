@@ -1,6 +1,6 @@
 ---
 title: Manage TiDB Cloud Resources and Projects
-summary: TiDB Cloudのリソースとプロジェクトの管理方法については、「マイTiDB」ページをご覧ください。
+summary: TiDB Cloudのリソースとプロジェクトの管理方法については、My TiDBページをご覧ください。
 ---
 
 # TiDB Cloudのリソースとプロジェクトを管理する {#manage-tidb-cloud-resources-and-projects}

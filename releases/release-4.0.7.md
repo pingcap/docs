@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.7 Release Notes
-summary: TiDB 4.0.7は2020年9月29日にリリースされました。新機能には、PDクライアントへの「GetAllMembers」関数の追加と、TiDB Dashboardでのメトリクス関係グラフの生成のサポートが含まれます。TiDB、TiKV、PD、 TiFlash、および各種ツールに改善が行われました。また、TiDB、TiKV、PD、 TiFlash、およびBackup & RestoreやDumplingなどのツールのバグ修正も実装されました。
+summary: TiDB 4.0.7は2020年9月29日にリリースされました。新機能には、PDクライアントへの`GetAllMembers`関数の追加と、TiDB Dashboardでのメトリクス関係グラフの生成のサポートが含まれます。TiDB、TiKV、PD、 TiFlash、および各種ツールに改善が行われました。また、TiDB、TiKV、PD、 TiFlash、およびBackup & RestoreやDumplingなどのツールのバグ修正も実装されました。
 ---
 
 # TiDB 4.0.7 リリースノート {#tidb-4-0-7-release-notes}
@@ -13,7 +13,7 @@ TiDB バージョン: 4.0.7
 
 - PD
 
-    - PDクライアントにPDメンバー情報を取得する`GetAllMembers`機能を追加する[#2980](https://github.com/pingcap/pd/pull/2980)
+    - PDクライアントにPDメンバー情報を取得する`GetAllMembers`関数を追加する[#2980](https://github.com/pingcap/pd/pull/2980)
 
 - TiDB Dashboard
 
@@ -25,7 +25,7 @@ TiDB バージョン: 4.0.7
 
     - `join`演算子の実行時情報を追加します [#20093](https://github.com/pingcap/tidb/pull/20093)
     - `EXPLAIN ANALYZE` にコプロセッサキャッシュのヒット率情報を追加 [#19972](https://github.com/pingcap/tidb/pull/19972)
-    - `ROUND`機能をTiFlash にプッシュダウンするサポート [#19967](https://github.com/pingcap/tidb/pull/19967)
+    - `ROUND`関数のTiFlashへのプッシュダウンをサポート [#19967](https://github.com/pingcap/tidb/pull/19967)
     - `ANALYZE` にデフォルト値`CMSketch`を追加します [#19927](https://github.com/pingcap/tidb/pull/19927)
     - エラーメッセージの感度調整[#20004](https://github.com/pingcap/tidb/pull/20004)
     - MySQL 8.0 のコネクタを使用してクライアントからの接続を受け入れる [#19959](https://github.com/pingcap/tidb/pull/19959)
