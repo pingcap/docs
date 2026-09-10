@@ -265,6 +265,7 @@
         - [DESC VIEW](/tidb-cloud-lake/sql/desc-view.md)
         - [SHOW VIEWS](/tidb-cloud-lake/sql/show-views.md)
         - [DROP VIEW](/tidb-cloud-lake/sql/drop-view.md)
+        - [Materialized View](/tidb-cloud-lake/sql/materialized-view.md)
         - [REFRESH LINEAGE](/tidb-cloud-lake/sql/refresh-lineage.md)
       - User & Role
         - [Overview](/tidb-cloud-lake/sql/user-role.md)
