@@ -5404,7 +5404,7 @@ SHOW WARNINGS;
 
 <CustomContent platform="tidb-cloud">
 
-### `tidb_paging_size_bytes` <span class="version-mark">New in CLOUD.202603.1</span>
+### `tidb_paging_size_bytes` <span class="version-mark">New in CLOUD.202603.1</span> {#tidb_paging_size_bytes}
 
 > **Note:**
 >
