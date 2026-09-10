@@ -46,7 +46,7 @@ TiDB、TiKV、PD はすべてデフォルトの[TiDB Operator](https://github.co
 
 ### Sysbenchを使用したオンラインワークロードシミュレーション {#online-workloads-simulation-using-sysbench}
 
-Sysbench を使用して、 **2,000,000 行のデータを含むテーブルを**Kubernetes クラスターにインポートします。
+Sysbench を使用して、 **2,000,000 行のデータを含むテーブル**をKubernetes クラスターにインポートします。
 
 データをインポートするには、次のコマンドを実行します。
 

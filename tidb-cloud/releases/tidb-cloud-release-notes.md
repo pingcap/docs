@@ -585,7 +585,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - **インスタンスレベルのロール**：ロールの割り当てを個々のTiDB Xインスタンスにスコープ設定できるようになり、プロジェクト内でのきめ細かなアクセス制御が可能になります。
 
-    - **用語の更新**： TiDB Cloud StarterおよびEssential**クラスターは**、コンソール全体でTiDB Cloud StarterおよびEssential**インスタンス**に名称変更されました。
+    - **用語の更新**： TiDB Cloud StarterおよびEssential**クラスター**は、コンソール全体でTiDB Cloud StarterおよびEssential**インスタンス**に名称変更されました。
 
     - **変更案内ツアー**：既存ユーザー向けに、構造変更について説明するガイド付きウォークスルーを実施し、移行期間中の混乱を軽減します。
 

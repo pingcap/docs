@@ -68,7 +68,7 @@ GTIDはMySQLまたはMariaDBのグローバルトランザクションIDです�
 
 ### 移行/移行 {#migrate-migration}
 
-TiDB データ移行ツールを使用して、アップストリーム データベースの**完全なデータを**ダウンストリームデータベースにコピーするプロセス。
+TiDB データ移行ツールを使用して、アップストリーム データベースの**完全なデータ**をダウンストリームデータベースにコピーするプロセス。
 
 "full"と明記している場合、"full or incremental"とは明記していない場合、"full + incremental"と明記している場合は、replicate/replication ではなく migrate/migration を使用します。
 
@@ -86,7 +86,7 @@ TiDB データ移行ツールを使用して、アップストリーム デー�
 
 ### 複製/レプリケーション {#replicate-replication}
 
-TiDB データ移行ツールを使用して、上流データベースの**増分データを**下流データベースにコピーするプロセス。
+TiDB データ移行ツールを使用して、上流データベースの**増分データ**を下流データベースにコピーするプロセス。
 
 "incremental"を明確に記載する場合は、 migrate/migration ではなく、replicate/replication を使用します。
 
