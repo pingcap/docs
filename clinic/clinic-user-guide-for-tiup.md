@@ -218,7 +218,7 @@ The collected data is stored in separate subdirectories based on its data source
 - List of kernel parameters: in `sysctl.conf`
 - Kernel logs: in `dmesg.log`
 - Network connection during data collection: in `ss.txt`
-- Configuration data: in the `config.json` directory of each node
+- Configuration data: in the `config.json` file under each node's directory
 - Meta-information for the cluster itself: in `meta.yaml` (this file is located at the top level of the directory that stores collected data)
 - Monitoring data: in the `/monitor` file directory. The monitoring data is compressed by default and cannot be viewed directly. To directly view the JSON files with monitoring data, disable compression with the `--compress-metrics=false` parameter when collecting data.
 
