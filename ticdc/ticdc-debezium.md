@@ -27,9 +27,11 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-
 
 The Debezium output format contains the schema information of the current row so that downstream consumers can better understand the data structure of the current row. For scenarios where schema information is unnecessary, you can also disable the schema output by setting the `debezium-disable-schema` parameter to `true` in the changefeed configuration file or `sink-uri`.
 
-In addition, the original Debezium format does not include important fields such as the unique transaction identifier of the `CommitTS` in TiDB. To ensure data integrity, TiCDC adds two fields, `CommitTs` and `ClusterID`, to the Debezium format to identify the relevant information of TiDB data changes.
+TiCDC extends the Debezium `source` metadata with `commit_ts` and `cluster_id` to identify the commit timestamp and the source cluster of each change.
 
-### Include the transaction start TSO <span class="version-mark">New in v8.5.9</span>
+### Include the transaction start TSO
+
+This option requires the [new TiCDC architecture](/ticdc/ticdc-architecture.md).
 
 By default, Debezium JSON DML messages include `source.commit_ts` but not the transaction start TSO. You can optionally include `source.start_ts` (the original PD TSO when the source transaction started) on DML row events only. This option is disabled by default.
 
@@ -37,7 +39,7 @@ You can enable it in either of the following ways:
 
 - In `sink-uri`:
 
-    ```
+    ```text
     kafka://127.0.0.1:9092/topic-name?protocol=debezium&debezium-include-start-ts=true
     ```
 
@@ -52,21 +54,23 @@ An explicit URI value takes precedence over the configuration file, including `d
 
 When this option is enabled:
 
-- DML value messages add integer `source.start_ts` next to `commit_ts`, and the JSON schema declares the field as `int64`.
-- DDL events, WATERMARK/checkpoint events, key messages, and Debezium Avro are unchanged. Setting this option with the Debezium Avro protocol is rejected.
-- To roll back, disable the option. Messages produced while it is off stay byte-compatible with the previous format.
+- DML value messages add the JSON integer `source.start_ts` alongside `source.commit_ts`. When schema output is enabled, the JSON schema declares `source.start_ts` as `int64`.
+- DDL events, WATERMARK/checkpoint events, and key messages do not include `start_ts`. Enabling this option with any protocol other than `debezium`, including `debezium-avro`, is rejected.
+- To stop including `start_ts`, disable the option. Messages produced after the option is disabled omit the field and its schema declaration.
 
 > **Note:**
 >
-> `start_ts` is the original uint64 PD TSO, not a millisecond timestamp. Consumers must treat it as a 64-bit integer or a decimal string. Do not parse it as a JavaScript `Number` or IEEE-754 `float64`, which cannot represent an 18-digit TSO exactly.
+> `start_ts` is the original PD TSO, encoded as a JSON integer, not a millisecond timestamp. TiCDC stores TSOs as `uint64`; the Debezium schema declares `int64`, so consumers that enforce the schema are limited to the signed 64-bit range (up to `9223372036854775807`). Parse the JSON integer directly with an integer-preserving parser, or retain its decimal digits as a string. Do not first convert it to JavaScript `Number` or IEEE 754 `float64`: integers greater than `2^53 - 1` can lose precision.
 
 When the option is enabled, the `source` block looks like the following:
 
 ```json
-"source": {
-    "commit_ts": 447507027004751877,
-    "start_ts": 447507027004751800,
-    "cluster_id": "default"
+{
+    "source": {
+        "commit_ts": 447507027004751877,
+        "start_ts": 447507027004751800,
+        "cluster_id": "default"
+    }
 }
 ```
 
@@ -613,7 +617,7 @@ The key fields of the preceding JSON data are explained as follows:
 | `payload.before`    | JSON   | The data value before the change event of a statement. For `"c"` events, the value of the `before` field is `null`.     |
 | `payload.after`     | JSON   | The data value after the change event of a statement. For `"d"` events, the value of the `after` field is `null`.     |
 | `payload.source.commit_ts`     | Number  | The `CommitTs` value of the event.       |
-| `payload.source.start_ts`      | Number  | The start TSO of the source transaction. Present only when `debezium-include-start-ts` or `[sink.debezium] include-start-ts` is enabled. Original uint64 PD TSO, not a millisecond timestamp. |
+| `payload.source.start_ts` | JSON integer (`int64` in the schema) | The original PD TSO of the source transaction. Present only when `debezium-include-start-ts` or `[sink.debezium] include-start-ts` is enabled. Preserve integer precision when parsing; see [Include the transaction start TSO](#include-the-transaction-start-tso). |
 | `payload.source.db`     | String   | The name of the database where the event occurs.    |
 | `payload.source.table`     | String  |  The name of the table where the event occurs.   |
 | `schema.fields`     | JSON   | The type information of each field in the payload, including the schema information of the row data before and after the change.   |

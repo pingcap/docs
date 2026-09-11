@@ -317,6 +317,7 @@ The `sink` parameters are described as follows:
 | `cloud_storage_config` | The storage sink configuration. (Optional) |
 | `open`                        | The Open Protocol configuration. (Optional)                                                                             |
 | `debezium`                    | The Debezium Protocol configuration. (Optional)                                                                             |
+| `simple` | The Simple protocol configuration. (Optional) |
 
 `sink.column_selectors` is an array. The parameters are described as follows:
 
@@ -373,7 +374,13 @@ The `sink.csv` parameters are described as follows:
 | Parameter name     | Description                                                                                                                                                                   |
 |:-------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `output_old_value` | `BOOLEAN` type. It controls whether to output the value before the row data changes. The default value is true. When it is disabled, the UPDATE event does not output the "before" field. |
-| `include_start_ts` | `BOOLEAN` type. New in v8.5.9. It controls whether Debezium JSON DML messages include `source.start_ts` (the original PD TSO of the source transaction). The default value is `false`. |
+| `include_start_ts` | `BOOLEAN` type. Defaults to `false`. Requires the new TiCDC architecture and an MQ sink with `protocol=debezium`. When enabled, Debezium JSON DML messages include `source.start_ts`. An explicit `debezium-include-start-ts` URI value takes precedence, including `false` overriding `true`. Enabling it with another protocol, including `debezium-avro`, is rejected. |
+
+`sink.simple` parameters are described as follows:
+
+| Parameter name | Description |
+|:---------------|:------------|
+| `include_start_ts` | `BOOLEAN` type. Defaults to `false`. Requires the new TiCDC architecture and an MQ sink with `protocol=simple` and JSON encoding. When enabled, DML messages include the top-level integer `startTs`. An explicit `simple-include-start-ts` URI value takes precedence, including `false` overriding `true`. Enabling it with another protocol or `encoding-format=avro` is rejected. |
 
 ### Example
 
