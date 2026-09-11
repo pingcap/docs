@@ -82,7 +82,7 @@ TiDB クラスターへの接続に失敗しました。TiDB クラスターが�
 
 ### エラーメッセージ："TiDB cluster storage is not enough. Please increase the node storage of TiKV." {#error-message-tidb-cluster-storage-is-not-enough-please-increase-the-node-storage-of-tikv}
 
-TiDB クラスターのストレージが不足しています。 [TiKVノードのストレージを増やす](/tidb-cloud/scale-tidb-cluster.md#change-storage)から、 **Restart**をクリックしてタスクを再開することをお勧めします。
+TiDB クラスターのストレージが不足しています。 [TiKVノードのストレージを増やして](/tidb-cloud/scale-tidb-cluster.md#change-storage)から、 **Restart**をクリックしてタスクを再開することをお勧めします。
 
 ### エラーメッセージ："Failed to connect to the source database. Please check whether the database is available or the maximum connections have been reached." {#error-message-failed-to-connect-to-the-source-database-please-check-whether-the-database-is-available-or-the-maximum-connections-have-been-reached}
 
