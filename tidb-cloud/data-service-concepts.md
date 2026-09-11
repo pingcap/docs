@@ -37,11 +37,11 @@ TiDB Cloudの Chat2Query API は、AI が指示を与えることで SQL 文を�
 
 詳細については[データアプリをサードパーティツールと統合する](/tidb-cloud/data-service-integrations.md)を参照してください。
 
-## コードとしてのコンフィグレーション {#configuration-as-code}
+## コードとしての設定 {#configuration-as-code}
 
-TiDB Cloud は、 JSON 構文を使用してデータアプリの構成全体をコードとして表現する、 コンフィグレーション as Code (CaC) アプローチを提供します。
+TiDB Cloud は、 JSON 構文を使用してデータアプリの設定全体をコードとして表現する、 設定 as Code (CaC) アプローチを提供します。
 
-データアプリを GitHub に接続することで、 TiDB Cloud はCaC アプローチを使用して、データアプリの構成を[設定ファイル](/tidb-cloud/data-service-app-config-files.md)として優先 GitHub リポジトリおよびブランチにプッシュできます。
+データアプリを GitHub に接続することで、 TiDB Cloud はCaC アプローチを使用して、データアプリの設定を[設定ファイル](/tidb-cloud/data-service-app-config-files.md)として優先 GitHub リポジトリおよびブランチにプッシュできます。
 
 GitHub接続で自動同期とデプロイが有効になっている場合は、GitHub上の設定ファイルを更新することでデータアプリを変更することもできます。設定ファイルの変更をGitHubにプッシュすると、新しい設定がTiDB Cloudに自動的にデプロイされます。
 

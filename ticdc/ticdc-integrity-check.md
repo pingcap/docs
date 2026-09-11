@@ -43,7 +43,7 @@ TiCDCはデフォルトでデータ整合性検証を無効にしています。
 
 TiCDC disables data integrity validation by default. To disable this feature after enabling it, perform the following steps:
 
-1. [Update task configuration](/ticdc/ticdc-manage-changefeed.md#update-task-configuration)で説明した`Pause Task -> Modify Configuration -> Resume Task`プロセスに従い、changefeed の`--config`パラメータで指定された構成ファイル内の`[integrity]`構成をすべて削除します。
+1. [Update task configuration](/ticdc/ticdc-manage-changefeed.md#update-task-configuration)で説明した`Pause Task -> Modify Configuration -> Resume Task`プロセスに従い、changefeed の`--config`パラメータで指定された設定ファイル内の`[integrity]`構成をすべて削除します。
 
     ```toml
     [integrity]

@@ -3,7 +3,7 @@ title: Topology Configuration File for DM Cluster Deployment Using TiUP
 summary: TiUPを使用して TiDB Data Migration (DM) クラスターをデプロイまたは拡張するには、クラスターのグローバル設定、サーバー設定、マスターサーバー、ワーカーサーバー、モニタリングサーバー、Grafana サーバー、および Alertmanager サーバーを記述するトポロジファイルが必要です。各セクションには、設定用の特定のフィールドが含まれています。トポロジファイルの構造は、global、server_configs、master_servers、worker_servers、monitoring_servers、grafana_servers、およびalertmanager_servers で構成されます。各セクションには、デプロイと設定のための独自の設定可能なフィールドセットがあります。
 ---
 
-# TiUPを使用した DMクラスタデプロイのトポロジコンフィグレーションファイル {#topology-configuration-file-for-dm-cluster-deployment-using-tiup}
+# TiUPを使用した DMクラスタデプロイのトポロジ設定ファイル {#topology-configuration-file-for-dm-cluster-deployment-using-tiup}
 
 TiDB Data Migration (DM)クラスターをデプロイまたは拡張するには、クラスタートポロジを記述するトポロジファイル（ [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml) ）を提供する必要があります。
 
@@ -11,7 +11,7 @@ TiDB Data Migration (DM)クラスターをデプロイまたは拡張するに�
 
 ## ファイル構造 {#file-structure}
 
-TiUPを使用した DM クラスターのデプロイメントのトポロジ構成ファイルには、次のセクションが含まれる場合があります。
+TiUPを使用した DM クラスターのデプロイメントのトポロジ設定ファイルには、次のセクションが含まれる場合があります。
 
 - [グローバル](#global) : クラスターのグローバル設定。一部の設定項目はクラスターのデフォルト値を使用しますが、インスタンスごとに個別に設定できます。
 - [サーバー構成](#server_configs) : コンポーネントのグローバル設定。各コンポーネントを個別に設定できます。インスタンスに同じキーの設定項目がある場合、そのインスタンスの設定項目が有効になります。
@@ -65,8 +65,8 @@ global:
 
 `server_configs`は、サービスの設定と各コンポーネントの設定ファイルの生成に使用されます。`global`セクションと同様に、 `server_configs`セクションの設定は、インスタンス内の同じキーを持つ設定によって上書きできます。`server_configs`には主に以下のフィールドが含まれます。
 
-- `master` : DM-masterサービスに関連する設定。サポートされているすべての設定項目については、 [DM-masterコンフィグレーションファイル](/dm/dm-master-configuration-file.md)を参照してください。
-- `worker` : DM-workerサービスに関連する構成。サポートされているすべての設定項目については、 [DM-workerコンフィグレーションファイル](/dm/dm-worker-configuration-file.md)を参照してください。
+- `master` : DM-masterサービスに関連する設定。サポートされているすべての設定項目については、 [DM-master設定ファイル](/dm/dm-master-configuration-file.md)を参照してください。
+- `worker` : DM-workerサービスに関連する構成。サポートされているすべての設定項目については、 [DM-worker設定ファイル](/dm/dm-worker-configuration-file.md)を参照してください。
 
 `server_configs`構成の例は次のとおりです。
 
@@ -98,7 +98,7 @@ server_configs:
 - `os` : `host`のフィールドで指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`os`値です。
 - `arch` : `host`のフィールドで指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`arch`値になります。
 - `resource_control` : このサービスにおけるリソース制御。このフィールドが指定された場合、このフィールドの設定はセクション`global`の`resource_control`の設定とマージされ（2つのフィールドが重複している場合は、このフィールドの設定が有効になります）、systemdの設定ファイルが生成され、セクション`host`で指定されたマシンに配布されます。このフィールドの設定ルールは、セクション`global`の`resource_control`の設定ルールと同じです。
-- `v1_source_path` : v1.0.x からアップグレードする場合、このフィールドに V1 ソースの構成ファイルが配置されているディレクトリを指定できます。
+- `v1_source_path` : v1.0.x からアップグレードする場合、このフィールドに V1 ソースの設定ファイルが配置されているディレクトリを指定できます。
 
 `master_servers`セクションでは、デプロイメントが完了した後は、次のフィールドを変更することはできません。
 

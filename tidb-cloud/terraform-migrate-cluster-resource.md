@@ -63,9 +63,9 @@ terraform state rm ${your_target_cluster_resource}
     }
     ```
 
-## ステップ5. 新しい構成ファイルを生成する {#step-5-generate-the-new-configuration-file}
+## ステップ5. 新しい設定ファイルを生成する {#step-5-generate-the-new-configuration-file}
 
-インポート ブロックに従って、新しいサーバーレスまたは専用クラスター リソースの新しい構成ファイルを生成します。
+インポート ブロックに従って、新しいサーバーレスまたは専用クラスター リソースの新しい設定ファイルを生成します。
 
 ```shell
 terraform plan -generate-config-out=generated.tf
@@ -73,9 +73,9 @@ terraform plan -generate-config-out=generated.tf
 
 上記のコマンドでは、既存の`.tf`名を指定しないでください。指定した場合、Terraform はエラーを返します。
 
-## ステップ6. 生成された構成を確認して適用する {#step-6-review-and-apply-the-generated-configuration}
+## ステップ6. 生成された設定を確認して適用する {#step-6-review-and-apply-the-generated-configuration}
 
-生成された構成ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
+生成された設定ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
 
 次に、 `terraform apply`を実行してインフラストラクチャをインポートします。適用後の出力例は次のとおりです。
 

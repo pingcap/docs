@@ -25,7 +25,7 @@ TiCDCは、指定されたタイムスタンプ以降に発生した増分デー
 
     2. changefeed を作成する際、上流クラスターの changefeed の`--start-ts`を対応する`tso`に設定します。つまり、上流クラスターが TiDB 1 の場合は`--start-ts=1` 、下流クラスターが TiDB 2 の場合は`--start-ts=2`を設定します。
 
-4. `--config`パラメータで指定された構成ファイルに、次の構成を追加します。
+4. `--config`パラメータで指定された設定ファイルに、次の設定を追加します。
 
     ```toml
     # Whether to enable the bidirectional replication mode

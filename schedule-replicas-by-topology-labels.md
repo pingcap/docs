@@ -160,11 +160,11 @@ tiflash_servers:
 >
 > 設定ファイルで`replication.location-labels`設定されていない場合、このトポロジファイルを使用してクラスタをデプロイするとエラーが発生する可能性があります。クラスタをデプロイする前に、設定ファイルで`replication.location-labels`が設定されていることを確認することをお勧めします。
 
-### コマンドラインまたは構成ファイルを使用してクラスターを構成する {#configure-a-cluster-using-command-lines-or-configuration-files}
+### コマンドラインまたは設定ファイルを使用してクラスターを構成する {#configure-a-cluster-using-command-lines-or-configuration-files}
 
 #### TiKVとTiFlashの`labels`を設定する {#configure-labels-for-tikv-and-tiflash}
 
-コマンドラインフラグを使用するか、TiKVまたはTiFlash構成ファイルを設定すると、キーと値のペアの形式でいくつかの属性をバインドできます。これらの属性は`labels`呼ばれます。TiKVとTiFlashは起動後、PDに`labels`報告し、ユーザーがTiKVノードとTiFlashノードの位置を特定できるようにします。
+コマンドラインフラグを使用するか、TiKVまたはTiFlash設定ファイルを編集すると、キーと値のペアの形式でいくつかの属性をバインドできます。これらの属性は`labels`と呼ばれます。TiKVとTiFlashは起動後、PDに`labels`を報告し、ユーザーがTiKVノードとTiFlashノードの位置を特定できるようにします。
 
 トポロジがゾーン &gt; データセンター（DC） &gt; ラック &gt; ホストの4層で構成されており、これらのラベル（ゾーン、DC、ラック、ホスト）を使用してTiKVとTiFlashの位置を設定できます。TiKVとTiFlashのラベルを設定するには、次のいずれかの方法を使用します。
 
@@ -174,7 +174,7 @@ tiflash_servers:
     tikv-server --labels zone=<zone>,dc=<dc>,rack=<rack>,host=<host>
     ```
 
-- TiKV 構成ファイルで構成します。
+- TiKV 設定ファイルで構成します。
 
     ```toml
     [server]
@@ -200,7 +200,7 @@ host = "<host>"
 
 [Follower Read](/follower-read.md)が有効になっている場合、TiDB が同じリージョンからのデータを優先的に読み取るようにするには、TiDB ノードに対して`labels`を設定する必要があります。
 
-構成ファイルを使用して、TiDB に`labels`を設定できます。
+設定ファイルを使用して、TiDB に`labels`を設定できます。
 
 ```toml
 [labels]
@@ -229,7 +229,7 @@ host = "<host>"
 
 `location-labels`を構成するには、クラスターの状況に応じて次のいずれかの方法を選択します。
 
-- PD クラスターが初期化されていない場合は、PD 構成ファイルで`location-labels`を構成します。
+- PD クラスターが初期化されていない場合は、PD 設定ファイルで`location-labels`を構成します。
 
     ```toml
     [replication]

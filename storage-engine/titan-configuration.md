@@ -3,7 +3,7 @@ title: Titan Configuration
 summary: Titan の設定方法を学びます。
 ---
 
-# Titanのコンフィグレーション {#titan-configuration}
+# Titanの設定 {#titan-configuration}
 
 このドキュメントでは、対応する設定項目、データ変換メカニズム、関連パラメータ、およびレベルマージ機能を使用して[Titan](/storage-engine/titan-overview.md)有効または無効にする方法を紹介します。
 
@@ -17,7 +17,7 @@ summary: Titan の設定方法を学びます。
 
 TitanはRocksDBと互換性があるため、RocksDBを使用する既存のTiKVインスタンスでTitanを直接有効化できます。Titanを有効化するには、以下のいずれかの方法があります。
 
-- 方法 1: TiUPを使用してクラスターをデプロイした場合は、次の例に示すように、 `tiup cluster edit-config ${cluster-name}`コマンドを実行して TiKV 構成ファイルを編集できます。
+- 方法 1: TiUPを使用してクラスターをデプロイした場合は、次の例に示すように、 `tiup cluster edit-config ${cluster-name}`コマンドを実行して TiKV 設定ファイルを編集できます。
 
     ```shell
     tikv:
@@ -32,14 +32,14 @@ TitanはRocksDBと互換性があるため、RocksDBを使用する既存のTiKV
 
     詳細なコマンドについては[TiUPを使用して構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 
-- 方法 2: TiKV 構成ファイルを直接編集して Titan を有効にします (本番環境では推奨さ**れません**)。
+- 方法 2: TiKV 設定ファイルを直接編集して Titan を有効にします (本番環境では推奨さ**れません**)。
 
     ```toml
     [rocksdb.titan]
     enabled = true
     ```
 
-- 方法3: TiDB Operatorの`${cluster_name}/tidb-cluster.yaml`構成ファイルを編集します。
+- 方法3: TiDB Operatorの`${cluster_name}/tidb-cluster.yaml`設定ファイルを編集します。
 
     ```yaml
     spec:
@@ -144,7 +144,7 @@ Titanを無効にするには、オプション`rocksdb.defaultcf.titan.blob-run
 
     - `tiup cluster edit-config`を実行し、設定ファイルを編集して`tiup cluster reload -R tikv`を実行します。
 
-    - 構成ファイルを手動で更新し、TiKV を再起動します。
+    - 設定ファイルを手動で更新し、TiKV を再起動します。
 
         ```toml
         [rocksdb.defaultcf.titan]

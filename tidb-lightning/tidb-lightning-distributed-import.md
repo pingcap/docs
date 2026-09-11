@@ -82,7 +82,7 @@ Dumpling を使用してデータをエクスポートする方法の詳細に�
 
 ### ステップ2: TiDB Lightningデータソースを構成する {#step-2-configure-tidb-lightning-data-sources}
 
-構成ファイル`tidb-lightning.toml`を作成し、次のコンテンツを追加します。
+設定ファイル`tidb-lightning.toml`を作成し、次のコンテンツを追加します。
 
 ```
 [lightning]
