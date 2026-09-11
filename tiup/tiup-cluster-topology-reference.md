@@ -3,7 +3,7 @@ title: Topology Configuration File for TiDB Deployment Using TiUP
 summary: TiUPは、トポロジファイルを使用してTiDBのクラスタートポロジをデプロイまたは変更します。また、Prometheus、Grafana、Alertmanagerなどの監視サーバーもデプロイします。トポロジファイルには、グローバル設定、監視サービス、コンポーネントバージョンなどのセクションが含まれています。各セクションでは、対応するサービスがデプロイされるマシンとその設定を指定します。
 ---
 
-# TiUPを使用した TiDB デプロイメントのトポロジコンフィグレーションファイル {#topology-configuration-file-for-tidb-deployment-using-tiup}
+# TiUPを使用した TiDB デプロイメントのトポロジ設定ファイル {#topology-configuration-file-for-tidb-deployment-using-tiup}
 
 TiUPを使用して TiDB をデプロイまたは拡張するには、クラスター トポロジを記述するトポロジファイル ( [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml) ) を提供する必要があります。
 
@@ -13,7 +13,7 @@ TiUPを使用して TiDB クラスターをデプロイすると、Prometheus、
 
 ## ファイル構造 {#file-structure}
 
-TiUPを使用した TiDB デプロイメントのトポロジ構成ファイルには、次のセクションが含まれる場合があります。
+TiUPを使用した TiDB デプロイメントのトポロジ設定ファイルには、次のセクションが含まれる場合があります。
 
 - [グローバル](#global) : クラスターのグローバル設定。一部の設定項目はデフォルト値を使用しますが、インスタンスごとに個別に設定できます。
 - [監視](#monitored) : 監視サービス（blackbox_exporterと`node_exporter`のコンフィグレーション。各マシンに`node_exporter`と`blackbox_exporter`がデプロイされています。
@@ -131,7 +131,7 @@ monitored:
 
 `server_configs`は、サービスの設定と各コンポーネントの設定ファイルの生成に使用されます。`global`と同様に、このセクションの設定は、インスタンス内の同名の設定によって上書きできます。`server_configs`は主に以下のフィールドが含まれます。
 
-- `tidb` : TiDBサービス関連の設定。詳細な設定については[TiDB構成ファイル](/tidb-configuration-file.md)を参照してください。
+- `tidb` : TiDBサービス関連の設定。詳細な設定については[TiDB設定ファイル](/tidb-configuration-file.md)を参照してください。
 
 - `tikv` : TiKVサービス関連の設定。詳細な設定については[TiKV設定ファイル](/tikv-configuration-file.md)を参照してください。
 
@@ -145,7 +145,7 @@ monitored:
 
 - `cdc` : TiCDCサービス関連の設定。詳細な設定については[TiCDCをデプロイ](/ticdc/deploy-ticdc.md)を参照してください。
 
-- `tso` : `tso`マイクロサービス関連の設定。完全な設定については[TSO構成ファイル](/tso-configuration-file.md)を参照してください。
+- `tso` : `tso`マイクロサービス関連の設定。完全な設定については[TSO設定ファイル](/tso-configuration-file.md)を参照してください。
 
 - `scheduling` : `scheduling`マイクロサービス関連の設定。完全な設定については[スケジュール設定ファイル](/scheduling-configuration-file.md)を参照してください。
 
@@ -494,7 +494,7 @@ tiproxy_servers:
 
 - `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例："0,1"）です。
 
-- `config` : TiKV-CDC が使用する構成ファイルのアドレス (オプション)。
+- `config` : TiKV-CDC が使用する設定ファイルのアドレス (オプション)。
 
 - `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
 

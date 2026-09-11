@@ -7,9 +7,9 @@ summary: コマンドラインオプションに関係しない、TiDB設定フ�
 
 <!-- markdownlint-disable MD024 -->
 
-# TiDBコンフィグレーションファイル {#tidb-configuration-file}
+# TiDB設定ファイル {#tidb-configuration-file}
 
-TiDB 構成ファイルは、コマンドラインパラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example)をダウンロードし、その名前を`config.toml`に変更できます。本書では[コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係のないオプションのみを説明します。
+TiDB 設定ファイルは、コマンドラインパラメーターよりも多くのオプションをサポートしています。デフォルトの設定ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example)をダウンロードし、その名前を`config.toml`に変更できます。本書では[コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係のないオプションのみを説明します。
 
 > **Tip:**
 >
@@ -90,7 +90,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 - `compatible-kill-query`は、[`enable-global-kill`](#enable-global-kill-new-in-v610)が`false`に設定されている場合にのみ有効になります。
 - [`enable-global-kill`](#enable-global-kill-new-in-v610)が`false`の場合、 `compatible-kill-query`は、クエリを強制終了する際に`TIDB`キーワードを追加する必要があるかどうかを制御します。
     - `compatible-kill-query`が`false`の場合、TiDB での`KILL xxx`の動作は MySQL とは異なります。TiDB でクエリを強制終了するには、 `TIDB`のように`KILL TIDB xxx`キーワードを追加する必要があります。
-    - `compatible-kill-query`が`true`の場合、TiDB でクエリを強制終了するには、 `TIDB`キーワードを追加する必要はありません。クライアントが**常に同じ TiDB インスタンスに接続されることが確実でない限り**、構成ファイルで`compatible-kill-query`を`true`に設定することは強くお勧めしません。これは、デフォルトの MySQL クライアントで<kbd>Control</kbd> + <kbd>C</kbd>を押すと`KILL`が実行される新しい接続が開かれるためです。クライアントと TiDB クラスタの間にプロキシがある場合、新しい接続は別の TiDB インスタンスにルーティングされる可能性があり、誤って別のセッションが強制終了される可能性があります。
+    - `compatible-kill-query`が`true`の場合、TiDB でクエリを強制終了するには、 `TIDB`キーワードを追加する必要はありません。クライアントが**常に同じ TiDB インスタンスに接続されることが確実でない限り**、設定ファイルで`compatible-kill-query`を`true`に設定することは強くお勧めしません。これは、デフォルトの MySQL クライアントで<kbd>Control</kbd> + <kbd>C</kbd>を押すと`KILL`が実行される新しい接続が開かれるためです。クライアントと TiDB クラスタの間にプロキシがある場合、新しい接続は別の TiDB インスタンスにルーティングされる可能性があり、誤って別のセッションが強制終了される可能性があります。
 - [`enable-global-kill`](#enable-global-kill-new-in-v610)が`true`の場合、 `KILL xxx`と`KILL TIDB xxx`は同じ効果を持ちます。
 - `KILL`文の詳細については、[KILL [TIDB]](/sql-statements/sql-statement-kill.md)を参照してください。
 

@@ -26,7 +26,7 @@ TiDB Ansible バージョン: 4.0.0-beta.1
     - HTTP APIを最適化して構成マネージャーと互換性を持たせる [#2080](https://github.com/pingcap/pd/pull/2080)
 
 - TiDB Lightning
-    - 構成ファイルで設定されていない特定の項目については、ドキュメントで指定されたデフォルト設定を使用します。 [#255](https://github.com/pingcap/tidb-lightning/pull/255)
+    - 設定ファイルで設定されていない特定の項目については、ドキュメントで指定されたデフォルト設定を使用します。 [#255](https://github.com/pingcap/tidb-lightning/pull/255)
 
 - TiDB Ansible
     - `theflash`を`tiflash` に名前変更 [#1130](https://github.com/pingcap/tidb-ansible/pull/1130)

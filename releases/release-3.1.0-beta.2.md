@@ -19,7 +19,7 @@ TiDB Ansible バージョン: 3.1.0-beta.2
 
 - ツール
     - TiDB Lightning
-        - 構成ファイルで設定されていない特定の項目については、 [TiDB Lightningコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)で指定されたデフォルト設定を使用します。 [#255](https://github.com/pingcap/tidb-lightning/pull/255)
+        - 設定ファイルで設定されていない特定の項目については、 [TiDB Lightningコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)で指定されたデフォルト設定を使用します。 [#255](https://github.com/pingcap/tidb-lightning/pull/255)
         - TiDBパスワードを設定するための`--tidb-password` CLIパラメータを追加する[#253](https://github.com/pingcap/tidb-lightning/pull/253)
 
 ## 新機能 {#new-features}

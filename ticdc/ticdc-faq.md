@@ -208,7 +208,7 @@ TiCDC がサービス GC セーフポイントに設定するデフォルトの 
 > - `--tz`利用できない場合、TiCDC は`TZ`環境変数を使用してタイムゾーン セットを読み取ろうとします。
 > - `TZ`環境変数が使用できない場合、TiCDC はマシンのデフォルトのタイムゾーンを使用します。
 
-## `--config`で構成ファイルを指定せずにレプリケーションタスクを作成した場合、TiCDC のデフォルトの動作はどうなりますか? {#what-is-the-default-behavior-of-ticdc-if-i-create-a-replication-task-without-specifying-the-configuration-file-in---config}
+## `--config`で設定ファイルを指定せずにレプリケーションタスクを作成した場合、TiCDC のデフォルトの動作はどうなりますか? {#what-is-the-default-behavior-of-ticdc-if-i-create-a-replication-task-without-specifying-the-configuration-file-in---config}
 
 `-config`パラメータを指定せずに`cdc cli changefeed create`コマンドを使用すると、TiCDC は次のデフォルト動作でレプリケーションタスクを作成します。
 
@@ -385,7 +385,7 @@ TiDB Lightning物理インポートモードを使用してインポートされ
     cdc cli changefeed create -c "upstream-to-downstream-some-tables" --start-ts=431434047157698561 --sink-uri="mysql://root@127.0.0.1:4000?time-zone="
     ```
 
-TiDB Lightning物理インポートモードによってインポートされたテーブルが、どの変更フィードによっても監視されるテーブルと重複しない場合は、TiDB Lightning構成ファイルで[`check-requirements`](/tidb-lightning/tidb-lightning-configuration.md#check-requirements)を`false`に設定して、データのインポートを強制できます。
+TiDB Lightning物理インポートモードによってインポートされたテーブルが、どの変更フィードによっても監視されるテーブルと重複しない場合は、TiDB Lightning設定ファイルで[`check-requirements`](/tidb-lightning/tidb-lightning-configuration.md#check-requirements)を`false`に設定して、データのインポートを強制できます。
 
 ## BRと TiCDC 間の互換性の制限は何ですか? {#what-are-the-compatibility-limitations-between-br-and-ticdc}
 
@@ -421,7 +421,7 @@ TiCDC v6.5.2より前のバージョンでは、TiCDCをダウンストリーム
 
 ## 単一テーブルのレプリケーションは単一のTiCDCノードでのみ実行できます。複数のTiCDCノードを使用して複数テーブルのデータをレプリケーションすることは可能ですか？ {#replication-of-a-single-table-can-only-be-run-on-a-single-ticdc-node-will-it-be-possible-to-use-multiple-ticdc-nodes-to-replicate-data-of-multiple-tables}
 
-v7.1.0以降、TiCDCはMQシンクをサポートし、TiKVリージョンの粒度でデータ変更ログを複製します。これによりスケーラブルな処理能力が実現され、TiCDCは単一のテーブルを多数のリージョンに複製できます。この機能を有効にするには、 [TiCDC チェンジフィード構成ファイル](/ticdc/ticdc-changefeed-config.md)で以下のパラメータを設定します。
+v7.1.0以降、TiCDCはMQシンクをサポートし、TiKVリージョンの粒度でデータ変更ログを複製します。これによりスケーラブルな処理能力が実現され、TiCDCは単一のテーブルを多数のリージョンに複製できます。この機能を有効にするには、 [TiCDC チェンジフィード設定ファイル](/ticdc/ticdc-changefeed-config.md)で以下のパラメータを設定します。
 
 ```toml
 [scheduler]

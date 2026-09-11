@@ -147,7 +147,7 @@ TiDB バージョン: 6.1.0
 
     以前のバージョンのTiDBでは、設定項目を変更した後、変更を有効にするにはクラスタを再起動する必要がありました。これにより、オンラインサービスが中断される可能性がありました。この問題に対処するため、TiDB v6.1.0では動的設定機能が導入され、クラスタを再起動せずにパラメータ変更を検証できるようになりました。具体的な最適化は以下の通りです。
 
-    - TiDBの一部の設定項目をシステム変数に変換し、動的に変更・保存できるようにします。変換後は元の設定項目は非推奨となることに注意してください。変換後の設定項目の詳細なリストについては、 [コンフィグレーションファイルのパラメータ](#configuration-file-parameters)を参照してください。
+    - TiDBの一部の設定項目をシステム変数に変換し、動的に変更・保存できるようにします。変換後は元の設定項目は非推奨となることに注意してください。変換後の設定項目の詳細なリストについては、 [設定ファイルのパラメータ](#configuration-file-parameters)を参照してください。
     - Support configuring some TiKV parameters online. For a detailed list of the parameters, see [その他](#others).
     - TiFlash設定項目`max_threads`をシステム変数`tidb_max_tiflash_threads`に変換し、構成を動的に変更して永続化できるようにします。変換後も元の設定項目は保持されることに注意してください。
 
@@ -252,9 +252,9 @@ TiDB バージョン: 6.1.0
 | [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)                             | 新しく追加された    | この設定は以前は`tidb.toml`オプション ( `prepared-plan-cache.capacity` ) でしたが、TiDB v6.1.0 以降ではシステム変数に変更されました。                                             |
 | [`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610)                                   | 新しく追加された    | この変数は、TiDB 統計キャッシュのメモリクォータを設定します。                                                                                                            |
 
-### コンフィグレーションファイルのパラメータ {#configuration-file-parameters}
+### 設定ファイルのパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーション                                                                                                                                                                                             | タイプを変更   | 説明                                                                                                                                            |
+| 設定ファイル | コンフィグレーション                                                                                                                                                                                             | タイプを変更   | 説明                                                                                                                                            |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | `committer-concurrency`                                                                                                                                                                                | 削除済み     | システム変数`tidb_committer_concurrency`に置き換えられました。この設定項目は無効になりました。値を変更する場合は、対応するシステム変数を変更する必要があります。                                                |
 | TiDB           | `lower-case-table-names`                                                                                                                                                                               | 削除済み     | 現在、TiDBは`lower_case_table_name=2`のみをサポートしています。別の値が設定されている場合は、クラスターをv6.1.0にアップグレードした後にその値は失われます。                                               |
@@ -286,10 +286,10 @@ TiDB バージョン: 6.1.0
 | TiCDC          | [`dispatchers.partition`](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink)                                                                         | 新しく追加された | `dispatchers.partition`は`dispatchers.dispatcher`の別名です。TiCDC が増分データを Kafka パーティションに送信する方法を制御します。                                               |
 | TiCDC          | [`schema-registry`](/ticdc/ticdc-sink-to-kafka.md#integrate-ticdc-with-kafka-connect-confluent-platform)                                                                                               | 新しく追加された | Avro スキーマを保存するスキーマレジストリ エンドポイントを指定します。                                                                                                       |
 | DM             | `dmctl start-relay`コマンドの`worker`                                                                                                                                                                       | 削除済み     | このパラメータの使用は推奨されません。よりシンプルな実装を提供します。                                                                                                           |
-| DM             | `relay-dir` in the source configuration file                                                                                                                                                           | 削除済み     | ワーカー構成ファイル内の同じ設定項目に置き換えられます。                                                                                                                  |
+| DM             | `relay-dir` in the source configuration file                                                                                                                                                           | 削除済み     | ワーカー設定ファイル内の同じ設定項目に置き換えられます。                                                                                                                  |
 | DM             | タスク設定ファイル内の`is-sharding`                                                                                                                                                                               | 削除済み     | `shard-mode`設定項目に置き換えられました。                                                                                                                   |
 | DM             | タスク設定ファイル内の`auto-fix-gtid`                                                                                                                                                                             | 削除済み     | v5.x では非推奨となり、v6.1.0 では正式に削除されました。                                                                                                            |
-| DM             | ソース構成ファイルの`meta-dir`と`charset`                                                                                                                                                                         | 削除済み     | Deprecated in v5.x and officially deleted in v6.1.0.                                                                                          |
+| DM             | ソース設定ファイルの`meta-dir`と`charset`                                                                                                                                                                         | 削除済み     | Deprecated in v5.x and officially deleted in v6.1.0.                                                                                          |
 
 ### その他 {#others}
 
@@ -312,7 +312,7 @@ TiDB バージョン: 6.1.0
     - `server.max-grpc-send-msg-len`
     - `server.raft-msg-max-batch-size`
 
-- v6.1.0では、一部の構成ファイルパラメータがシステム変数に変換されます。以前のバージョンからv6.1.0クラスターにアップグレード（オンラインおよびオフラインアップグレードを含む）する場合は、以下の点にご注意ください。
+- v6.1.0では、一部の設定ファイルパラメータがシステム変数に変換されます。以前のバージョンからv6.1.0クラスターにアップグレード（オンラインおよびオフラインアップグレードを含む）する場合は、以下の点にご注意ください。
 
     - アップグレード前に設定ファイルに指定された設定項目が既に存在する場合、TiDBはアップグレードプロセス中に、設定された項目の値を対応するシステム変数の値に自動的に更新します。これにより、パラメータの最適化により、アップグレード後もシステムの動作は変わりません。
     - 上記の自動更新はアップグレード中に1回のみ実行されます。アップグレード後は、廃止された設定項目は無効になります。

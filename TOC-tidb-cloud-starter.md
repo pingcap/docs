@@ -152,7 +152,7 @@
   - [Postmanで実行](/tidb-cloud/data-service-postman-integration.md)
   - [GitHubで自動デプロイ](/tidb-cloud/data-service-manage-github-connection.md)
   - [Next.jsでOpenAPI仕様を使用する](/tidb-cloud/data-service-oas-with-nextjs.md)
-  - [データアプリコンフィグレーションファイル](/tidb-cloud/data-service-app-config-files.md)
+  - [データアプリ設定ファイル](/tidb-cloud/data-service-app-config-files.md)
   - [応答とステータスコード](/tidb-cloud/data-service-response-and-status-code.md)
 - セキュリティ
   - [セキュリティ概要](/tidb-cloud/security-overview.md)

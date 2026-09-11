@@ -96,7 +96,7 @@ tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 
 ## ステップ2. 移行タスクを構成する {#step-2-configure-the-migration-task}
 
-`task1.yaml`という名前のタスク構成ファイルを作成し、次の内容を書き込みます。
+`task1.yaml`という名前のタスク設定ファイルを作成し、次の内容を書き込みます。
 
 ```yaml
 name: "shard_merge"               # The name of the task. Should be globally unique.
@@ -166,7 +166,7 @@ block-allow-list:           # filter or only migrate all operations of some data
     do-dbs: ["store_*"]     # The allow list of the schemas to be migrated, similar to replicate-do-db in MySQL.
 ```
 
-上記の例は、移行タスクを実行するための最小限の構成です。詳細については、 [DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
+上記の例は、移行タスクを実行するための最小限の構成です。詳細については、 [DM 高度なタスク設定ファイル](/dm/task-configuration-file-full.md)を参照してください。
 
 タスク ファイル内の`routes` 、およびその他`filters`構成の詳細については、次のドキュメントを参照してください。
 

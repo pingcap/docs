@@ -1,9 +1,9 @@
 ---
 title: Scheduling Configuration File
-summary: スケジューリング構成ファイルには、ノード名、データ パス、ノード URL などの複数の設定項目が含まれています。
+summary: スケジューリング設定ファイルには、ノード名、データ パス、ノード URL などの複数の設定項目が含まれています。
 ---
 
-# スケジュールコンフィグレーションファイル {#scheduling-configuration-file}
+# スケジュール設定ファイル {#scheduling-configuration-file}
 
 <!-- markdownlint-disable MD001 -->
 

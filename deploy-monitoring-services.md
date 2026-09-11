@@ -48,7 +48,7 @@ $ ./node_exporter --web.listen-address=":9100" \
 
 ### ステップ3: Node1でPrometheusを起動する {#step-3-start-prometheus-on-node1}
 
-Prometheus 構成ファイルを編集します。
+Prometheus 設定ファイルを編集します。
 
 ```bash
 cd prometheus-2.49.1.linux-amd64 &&
@@ -103,7 +103,7 @@ scrape_configs:
 ...
 ```
 
-TiDB、PD、TiKV などのコンポーネントのアラーム ルールを有効にするには、対応するコンポーネントのアラーム ルール ファイルを個別にダウンロードし、アラーム ルール ファイルの構成を Prometheus 構成ファイルに追加します。
+TiDB、PD、TiKV などのコンポーネントのアラーム ルールを有効にするには、対応するコンポーネントのアラーム ルール ファイルを個別にダウンロードし、アラーム ルール ファイルの構成を Prometheus 設定ファイルに追加します。
 
 - TiDB: [`tidb.rules.yml`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/metrics/alertmanager/tidb.rules.yml)
 - PD: [`pd.rules.yml`](https://github.com/tikv/pd/blob/release-8.5/metrics/alertmanager/pd.rules.yml)
@@ -137,7 +137,7 @@ $ ./prometheus \
 
 ### ステップ 4: Node1 で Grafana を開始する {#step-4-start-grafana-on-node1}
 
-Grafana 構成ファイルを編集します。
+Grafana 設定ファイルを編集します。
 
 ```ini
 cd grafana-7.5.17 &&
@@ -231,7 +231,7 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
 
 2. サイドバー メニューで、 **[ダッシュボード]** -&gt; **[インポート]**をクリックして、 **[ダッシュボードのインポート]**ウィンドウを開きます。
 
-3. **Upload .json File**をクリックして JSON ファイルをアップロードします ( [pingcap/tidb](https://github.com/pingcap/tidb/tree/release-8.5/pkg/metrics/grafana) [tikv/tikv](https://github.com/tikv/tikv/tree/release-8.5/metrics/grafana)、および[tikv/pd](https://github.com/tikv/pd/tree/release-8.5/metrics/grafana)から TiDB Grafana 構成ファイルをダウンロードします)。
+3. **Upload .json File**をクリックして JSON ファイルをアップロードします ( [pingcap/tidb](https://github.com/pingcap/tidb/tree/release-8.5/pkg/metrics/grafana) [tikv/tikv](https://github.com/tikv/tikv/tree/release-8.5/metrics/grafana)、および[tikv/pd](https://github.com/tikv/pd/tree/release-8.5/metrics/grafana)から TiDB Grafana 設定ファイルをダウンロードします)。
 
     > **Note:**
     >

@@ -130,7 +130,7 @@ systemctl start docker
     1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックすると、その概要ページに移動します。
     2. 概要ページで、 **[接続]**ペインを見つけて、 `Endpoint` 、 `Port` 、および`User`フィールドをコピーします。ここで`Endpoint`はTiDB Cloud Starterインスタンスのホスト名です。
 
-#### ステップ2. ProxySQL構成ファイルを生成する {#step-2-generate-proxysql-configuration-files}
+#### ステップ2. ProxySQL設定ファイルを生成する {#step-2-generate-proxysql-configuration-files}
 
 1. TiDB および ProxySQL 用の[統合例のコードリポジトリ](https://github.com/pingcap-inc/tidb-proxysql-integration)クローンを作成します。
 
@@ -192,7 +192,7 @@ systemctl start docker
 
      </SimpleTab>
 
-3. `proxysql-config.py`を実行してProxySQL構成ファイルを生成します。
+3. `proxysql-config.py`を実行してProxySQL設定ファイルを生成します。
 
      <SimpleTab groupId="os">
 

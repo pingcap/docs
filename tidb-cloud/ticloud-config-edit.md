@@ -5,13 +5,13 @@ summary: ticloud config edit` のリファレンス。
 
 # ticloud config edit {#ticloud-config-edit}
 
-macOS または Linux を使用している場合は、デフォルトのテキスト エディターでプロファイル構成ファイルを開くことができます。
+macOS または Linux を使用している場合は、デフォルトのテキスト エディターでプロファイル設定ファイルを開くことができます。
 
 ```shell
 ticloud config edit [flags]
 ```
 
-Windows を使用している場合は、上記のコマンドを実行すると、代わりにプロファイル構成ファイルのパスが出力されます。
+Windows を使用している場合は、上記のコマンドを実行すると、代わりにプロファイル設定ファイルのパスが出力されます。
 
 > **Note:**
 >
@@ -19,7 +19,7 @@ Windows を使用している場合は、上記のコマンドを実行すると
 
 ## 例 {#examples}
 
-プロファイル構成ファイルを編集します。
+プロファイル設定ファイルを編集します。
 
 ```shell
 ticloud config edit

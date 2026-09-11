@@ -3,7 +3,7 @@ title: DM Advanced Task Configuration File
 summary: このドキュメントでは、データ移行（DM）の高度なタスク設定ファイルについて、グローバル設定とインスタンス設定の両面から解説します。グローバル設定には基本設定と機能設定が含まれ、インスタンス設定では、上流側の1つまたは複数のMySQLインスタンスから下流側の同じインスタンスへのデータ移行のためのサブタスクを定義します。
 ---
 
-# DM 高度タスクコンフィグレーションファイル {#dm-advanced-task-configuration-file}
+# DM 高度タスク設定ファイル {#dm-advanced-task-configuration-file}
 
 このドキュメントでは[インスタンス構成](#instance-configuration)[グローバル設定](#global-configuration)とインスタンス構成を含む、データ移行 (DM) の高度なタスク設定ファイルを紹介します。
 
@@ -13,7 +13,7 @@ summary: このドキュメントでは、データ移行（DM）の高度なタ
 
 ## タスク設定ファイルテンプレート（上級者向け） {#task-configuration-file-template-advanced}
 
-以下は、**高度な**データ移行タスクを実行できるタスク構成ファイルのテンプレートです。
+以下は、**高度な**データ移行タスクを実行できるタスク設定ファイルのテンプレートです。
 
 ```yaml
 ---

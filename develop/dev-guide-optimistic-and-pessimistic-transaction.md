@@ -106,7 +106,7 @@ func (tx *TiDBSqlTx) Rollback() error {
 
 <div label="Java" value="java">
 
-**コンフィグレーションファイル**
+**設定ファイル**
 
 Mavenを使用してパッケージを管理する場合は、 `pom.xml`の`<dependencies>`ノードに以下の依存関係を追加して`HikariCP`インポートし、パッケージ化ターゲットとJARパッケージのメインクラスを起動するように設定します。以下は`pom.xml`の例です。
 

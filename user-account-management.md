@@ -174,7 +174,7 @@ TiDBはパスワードを[`mysql.user`](/mysql-schema/mysql-schema-user.md)シ�
 1. 設定ファイルを変更します。
 
     1. tidb-server インスタンスの 1つが配置されているマシンにログインします。
-    2. TiDB ノードのデプロイメントディレクトリの下の`conf`ディレクトリに入り、 `tidb.toml`構成ファイルを見つけます。
+    2. TiDB ノードのデプロイメントディレクトリの下の`conf`ディレクトリに入り、 `tidb.toml`設定ファイルを見つけます。
     3. 設定ファイルの[`security`](/tidb-configuration-file.md#security)セクションに設定項目[`skip-grant-table`](/tidb-configuration-file.md)を追加します。`security`がない場合は、 `tidb.toml`設定ファイルの末尾に次の2行を追加します。
 
         ```
@@ -211,7 +211,7 @@ TiDBはパスワードを[`mysql.user`](/mysql-schema/mysql-schema-user.md)シ�
         mysql -h 127.0.0.1 -P 4000 -u root
         ```
 
-4. `run_tidb.sh`スクリプトの実行を停止し、手順 1 で TiDB 構成ファイルに追加された内容を削除し、tidb-server が自動的に起動するのを待ちます。
+4. `run_tidb.sh`スクリプトの実行を停止し、手順 1 で TiDB 設定ファイルに追加された内容を削除し、tidb-server が自動的に起動するのを待ちます。
 
 ## `FLUSH PRIVILEGES` {#flush-privileges}
 

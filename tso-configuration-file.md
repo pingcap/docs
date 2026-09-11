@@ -1,9 +1,9 @@
 ---
 title: TSO Configuration File
-summary: TSO 構成ファイルには、ノード名、データ パス、ノード URL などの複数の設定項目が含まれています。
+summary: TSO 設定ファイルには、ノード名、データ パス、ノード URL などの複数の設定項目が含まれています。
 ---
 
-# TSOコンフィグレーションファイル {#tso-configuration-file}
+# TSO設定ファイル {#tso-configuration-file}
 
 <!-- markdownlint-disable MD001 -->
 

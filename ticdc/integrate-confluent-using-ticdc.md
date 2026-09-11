@@ -83,7 +83,7 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
 
 ### ステップ3. Kafkaの変更フィードを作成する {#step-3-create-a-kafka-changefeed}
 
-1. changefeed 構成ファイルを作成します。
+1. changefeed 設定ファイルを作成します。
 
     AvroおよびConfluent Connectorの要件に従い、各テーブルの増分データは独立したトピックに送信され、イベントごとに主キーの値に基づいてパーティションがディスパッチされる必要があります。そのため、以下の内容を含むchangefeed設定ファイル`changefeed.conf`を作成する必要があります。
 

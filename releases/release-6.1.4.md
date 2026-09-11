@@ -78,7 +78,7 @@ TiDB バージョン: 6.1.4
     - TiCDC
 
         - TiCDC が過度に多数のテーブルを複製するとチェックポイントが進めなくなる問題を修正しました [#8004](https://github.com/pingcap/tiflow/issues/8004) @[asddongmen](https://github.com/asddongmen)
-        - `transaction-atomicity`と`protocol`構成ファイル経由で更新できない問題を修正 [#7935](https://github.com/pingcap/tiflow/issues/7935) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - `transaction-atomicity`と`protocol`設定ファイル経由で更新できない問題を修正 [#7935](https://github.com/pingcap/tiflow/issues/7935) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - TiFlashのバージョンがTiCDCのバージョンより新しい場合にTiCDCが誤ってエラーを報告する問題を修正しました [#7744](https://github.com/pingcap/tiflow/issues/7744) @[overvenus](https://github.com/overvenus)
         - TiCDCが大規模なトランザクションを複製するときにOOMが発生する問題を修正 [#7913](https://github.com/pingcap/tiflow/issues/7913) @[overvenus](https://github.com/overvenus)
         - TiCDCが大きなトランザクションを分割せずにデータを複製するとコンテキスト期限が超過するバグを修正 [#7982](https://github.com/pingcap/tiflow/issues/7982) @[Rustin170506](https://github.com/Rustin170506)

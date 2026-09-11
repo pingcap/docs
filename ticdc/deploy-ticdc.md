@@ -19,7 +19,7 @@ summary: TiCDCの導入と実行に関するハードウェアおよびソフト
 
 ## TiUPを使用してTiCDCを含む新しいTiDBクラスタをデプロイ {#deploy-a-new-tidb-cluster-that-includes-ticdc-using-tiup}
 
-TiUPを使用して新しい TiDB クラスタをデプロイする場合、同時に TiCDC もデプロイできます。TiUPが TiUPクラスタの起動に使用する構成ファイルに`cdc_servers`セクションを追加するだけで済みます。以下に例を示します。
+TiUPを使用して新しい TiDB クラスタをデプロイする場合、同時に TiCDC もデプロイできます。TiUPが TiUPクラスタの起動に使用する設定ファイルに`cdc_servers`セクションを追加するだけで済みます。以下に例を示します。
 
 ```shell
 cdc_servers:
@@ -96,7 +96,7 @@ tiup cluster upgrade <cluster-name> <version> --transfer-timeout 600
 
 TiCDCクラスタをアップグレードする際には、以下の点に注意してください。
 
-- TiCDC v4.0.2 は`changefeed`を再構成しました。詳細については、 [コンフィグレーションファイルの互換性に関する注意事項](/ticdc/ticdc-compatibility.md#cli-and-configuration-file-compatibility)を参照してください。
+- TiCDC v4.0.2 は`changefeed`を再構成しました。詳細については、 [設定ファイルの互換性に関する注意事項](/ticdc/ticdc-compatibility.md#cli-and-configuration-file-compatibility)を参照してください。
 - アップグレード中に問題が発生した場合は、解決策について[アップグレードに関するよくある質問](/upgrade-tidb-using-tiup.md#faq)を参照してください。
 - v6.3.0 以降、TiCDC はローリングアップグレードをサポートしています。マイナーバージョン間のローリングアップグレードを直接実行できます (たとえば、v8.5.0 -&gt; v8.5.3 はマイナーバージョン アップグレードであり、v8.1.x -&gt; v8.5.x はメジャーバージョン アップグレードです)。 TiCDC クラシックアーキテクチャの場合、メジャーバージョン間のアップグレード中に変更フィードを実行しないでください。クラシックアーキテクチャをアップグレードする前に、変更フィードを一時停止してください。新しい TiCDCアーキテクチャは、ローリングアップグレードプロセス中の変更フィードの実行をサポートします。詳細については、 [以前のTiCDCバージョンからのローリングアップグレードに関する互換性に関する注意事項](/ticdc/ticdc-compatibility.md#compatibility-notes-for-upgrading-from-earlier-versions)を参照してください。次の条件が満たされる場合、ローリングアップグレードは自動的に有効になります。
 

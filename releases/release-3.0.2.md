@@ -129,8 +129,8 @@ TiDB Lightning
 
 - ディスクパフォーマンスモニターが秒をミリ秒として扱う単位エラーを修正[#840](https://github.com/pingcap/tidb-ansible/pull/840)
 - Spark に`log4j`設定ファイルを追加する [#841](https://github.com/pingcap/tidb-ansible/pull/841)
-- Binlogが有効で Kafka または ZooKeeper が構成されている場合に Prometheus 構成ファイルが間違った形式で生成される問題を修正[#844](https://github.com/pingcap/tidb-ansible/pull/844)
-- 生成されたTiDB構成ファイルで`pessimistic-txn`設定パラメータが省略される問題を修正 [#850](https://github.com/pingcap/tidb-ansible/pull/850)
+- Binlogが有効で Kafka または ZooKeeper が構成されている場合に Prometheus 設定ファイルが間違った形式で生成される問題を修正[#844](https://github.com/pingcap/tidb-ansible/pull/844)
+- 生成されたTiDB設定ファイルで`pessimistic-txn`設定パラメータが省略される問題を修正 [#850](https://github.com/pingcap/tidb-ansible/pull/850)
 - TiDB Dashboardのメトリックを追加して最適化する [#853](https://github.com/pingcap/tidb-ansible/pull/853)
 - TiDB Dashboardの各監視項目の説明を追加します [#854](https://github.com/pingcap/tidb-ansible/pull/854)
 - TiDB サマリーダッシュボードを追加して、クラスターのステータスをより適切に表示し、問題をトラブルシューティングします[#855](https://github.com/pingcap/tidb-ansible/pull/855)

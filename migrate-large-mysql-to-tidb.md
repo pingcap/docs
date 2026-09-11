@@ -232,7 +232,7 @@ LIMIT
     #     safe-mode: true # If this field is set to true, DM changes INSERT of the data source to REPLACE for the target database, and changes UPDATE of the data source to DELETE and REPLACE for the target database. This is to ensure that when the table schema contains a primary key or unique index, DML statements can be imported repeatedly. In the first minute of starting or resuming an incremental replication task, DM automatically enables the safe mode.
     ```
 
-    上記の YAML は、移行タスクに必要な最小構成です。その他の設定項目については、 [DM 高度タスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
+    上記の YAML は、移行タスクに必要な最小構成です。その他の設定項目については、 [DM 高度タスク設定ファイル](/dm/task-configuration-file-full.md)を参照してください。
 
     移行作業を開始する前に、エラーの可能性を減らすため、 `check-task`コマンドを実行して、構成が DM の要件を満たしていることを確認することをお勧めします。
 

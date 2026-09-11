@@ -1,9 +1,9 @@
 ---
 title: PD Configuration File
-summary: PD 構成ファイルについて学習します。
+summary: PD 設定ファイルについて学習します。
 ---
 
-# PDコンフィグレーションファイル {#pd-configuration-file}
+# PD設定ファイル {#pd-configuration-file}
 
 <!-- markdownlint-disable MD001 -->
 
@@ -278,7 +278,7 @@ pd-server関連のコンフィグレーション項目
 >
 > `schedule`に関連するこれらの PD 設定項目を変更するには、クラスターのステータスに基づいて次のいずれかの方法を選択します。
 >
-> - 新しくデプロイするクラスターの場合は、PD 構成ファイルを直接変更できます。
+> - 新しくデプロイするクラスターの場合は、PD 設定ファイルを直接変更できます。
 > - 既存のクラスターの場合は、コマンドラインツール[PD Control](/pd-control.md)を使用して変更を加えてください。設定ファイル内の`schedule`に関連するPD設定項目を直接変更しても、既存のクラスターには反映されません。
 
 ### `max-merge-region-size` {#max-merge-region-size}

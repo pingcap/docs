@@ -316,9 +316,9 @@
   - PDマイクロサービスを使用する
     - [PDマイクロサービスの概要](/pd-microservices.md)
     - [TiUPを使用してPDマイクロサービスノードをスケーリングする](/scale-microservices-using-tiup.md)
-    - [TSOコンフィグレーションファイル](/tso-configuration-file.md)
+    - [TSO設定ファイル](/tso-configuration-file.md)
     - [TSOコンフィグレーションフラグ](/command-line-flags-for-tso-configuration.md)
-    - [スケジュールコンフィグレーションファイル](/scheduling-configuration-file.md)
+    - [スケジュール設定ファイル](/scheduling-configuration-file.md)
     - [スケジューリングコンフィグレーションフラグ](/command-line-flags-for-scheduling-configuration.md)
 - TiDBツール
   - [概要](/ecosystem-tool-user-guide.md)
@@ -487,7 +487,7 @@
         - [DML複製メカニズム](/dm/dm-replication-logic.md)
       - コマンドライン
         - [DM-master＆DM-worker](/dm/dm-command-line-flags.md)
-      - コンフィグレーションファイル
+      - 設定ファイル
         - [概要](/dm/dm-config-overview.md)
         - [上流データベース構成](/dm/dm-source-configuration-file.md)
         - [タスク構成](/dm/task-configuration-file-full.md)
@@ -541,7 +541,7 @@
     - [エラー解決](/tidb-lightning/tidb-lightning-error-resolution.md)
     - [トラブルシューティング](/tidb-lightning/troubleshoot-tidb-lightning.md)
     - 参照
-      - [コンフィグレーションファイル](/tidb-lightning/tidb-lightning-configuration.md)
+      - [設定ファイル](/tidb-lightning/tidb-lightning-configuration.md)
       - [コマンドラインフラグ](/tidb-lightning/tidb-lightning-command-line-full.md)
       - [監視](/tidb-lightning/monitor-tidb-lightning.md)
       - [ウェブインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)
@@ -602,7 +602,7 @@
   - [システム変数](/system-variables.md)
   - [システム変数リファレンス](/system-variable-reference.md)
   - [サーバーステータス変数](/status-variables.md)
-  - コンフィグレーションファイルパラメータ
+  - 設定ファイルパラメータ
     - [tidb-server](/tidb-configuration-file.md)
     - [tikvサーバー](/tikv-configuration-file.md)
     - [tiflash-server](/tiflash/tiflash-configuration.md)

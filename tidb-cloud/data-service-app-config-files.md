@@ -1,13 +1,13 @@
 ---
 title: Data App Configuration Files
-summary: このドキュメントでは、TiDB Cloudのデータアプリの構成ファイルについて説明します。
+summary: このドキュメントでは、TiDB Cloudのデータアプリの設定ファイルについて説明します。
 ---
 
-# データアプリコンフィグレーションファイル {#data-app-configuration-files}
+# データアプリ設定ファイル {#data-app-configuration-files}
 
-このドキュメントでは、TiDB Cloudの[データアプリ](/tidb-cloud/tidb-cloud-glossary.md#data-app)の構成ファイルについて説明します。
+このドキュメントでは、TiDB Cloudの[データアプリ](/tidb-cloud/tidb-cloud-glossary.md#data-app)の設定ファイルについて説明します。
 
-データ[データアプリをGitHubに接続しました](/tidb-cloud/data-service-manage-github-connection.md)た場合は、次のように GitHub の指定したディレクトリでデータアプリの構成ファイルを見つけることができます。
+データ[データアプリをGitHubに接続しました](/tidb-cloud/data-service-manage-github-connection.md)た場合は、次のように GitHub の指定したディレクトリでデータアプリの設定ファイルを見つけることができます。
 
 ```
 ├── <Your Data App directory>

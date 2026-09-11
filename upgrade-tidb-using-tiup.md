@@ -132,7 +132,7 @@ tiup update cluster
 
 これでオフラインミラーのアップグレードは正常に完了しました。上書き後にTiUP操作中にエラーが発生した場合は、 `manifest`が更新されていない可能性があります。TiUPを再度実行する前に、 `rm -rf ~/.tiup/manifests/*`を試してみてください。
 
-### ステップ3： TiUPトポロジー構成ファイルを編集する {#step-3-edit-tiup-topology-configuration-file}
+### ステップ3： TiUPトポロジー設定ファイルを編集する {#step-3-edit-tiup-topology-configuration-file}
 
 > **Note:**
 >

@@ -110,7 +110,7 @@ MCPクライアントでSSEモードを使用してTiDB MCPサーバーを設定
     uvx --from "pytidb[mcp]" tidb-mcp-server --transport sse
     ```
 
-6. `TiDB` MCPサーバー構成を、AIアプリケーション構成ファイルの`mcpServers`セクションに追加します。
+6. `TiDB` MCPサーバー構成を、AIアプリケーション設定ファイルの`mcpServers`セクションに追加します。
 
     ```json
     {

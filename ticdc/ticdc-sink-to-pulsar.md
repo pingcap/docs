@@ -252,7 +252,7 @@ tls-key-file-path="/data/pulsar/tls-key-file"
 
 ### Matcherのマッチングルール {#matching-rules-for-matcher}
 
-次のサンプル構成ファイルの`dispatchers`設定項目を例に挙げます。
+次のサンプル設定ファイルの`dispatchers`設定項目を例に挙げます。
 
 ```toml
 [sink]
