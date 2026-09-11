@@ -274,7 +274,7 @@ TiFlashノードをデプロイし、 `ALTER TABLE ... SET TIFLASH REPLICA ...`�
 
 2. TiFlashの負荷を調整します。
 
-    TiFlashへの負荷が高すぎると、レプリケーションが遅くなる場合があります。Grafanaの**TiFlash -Summary**パネルで、 TiFlashインジケーターの負荷を確認できます。
+    TiFlashへの負荷が高すぎると、レプリケーションが遅くなる場合があります。Grafanaの**TiFlash-Summary**パネルで、 TiFlashインジケーターの負荷を確認できます。
 
     - `Applying snapshots Count` ： `TiFlash-summary` &gt; `raft` &gt; `Applying snapshots Count`
     - `Snapshot Predecode Duration` ： `TiFlash-summary` &gt; `raft` &gt; `Snapshot Predecode Duration`

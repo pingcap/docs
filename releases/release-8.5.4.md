@@ -51,7 +51,7 @@ TiDBバージョン：8.5.4
 
 - パフォーマンス、拡張性、安定性を向上させるための新しいTiCDCアーキテクチャオプションを導入 [#442](https://github.com/pingcap/ticdc/issues/442) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
-    この新しいアーキテクチャは[従来のTiCDCアーキテクチャ](/ticdc/ticdc-classic-architecture.md)アーキテクチャの構成、使用法、API との互換性を維持しながら、TiCDC コア コンポーネントを再設計し、そのデータ処理ワークフローを最適化します。
+    この新しいアーキテクチャは[TiCDCクラシックアーキテクチャ](/ticdc/ticdc-classic-architecture.md)の構成、使用法、API との互換性を維持しながら、TiCDC コア コンポーネントを再設計し、そのデータ処理ワークフローを最適化します。
 
     この新しいアーキテクチャを使用するように構成すると、TiCDC はほぼ線形のスケーラビリティを実現し、より低いリソース消費で数百万のテーブルを複製できます。また、変更フィードのレイテンシーを削減し、書き込みワークロードが高いシナリオ、頻繁な DDL 操作、クラスタのスケーリングにおいて、より安定したパフォーマンスを提供します。なお、この新しいアーキテクチャには現在、いくつか[初期の制約](https://docs.pingcap.com/tidb/v8.5/ticdc-architecture#limitations)があります。
 
@@ -102,7 +102,7 @@ TiDBバージョン：8.5.4
     - 一意の値の数が少ない列（NDV）のクエリ推定ロジックを最適化する [#61792](https://github.com/pingcap/tidb/issues/61792) @[terry1purcell](https://github.com/terry1purcell)
     - `LIMIT OFFSET`を含む Index Join クエリの推定戦略を最適化する [#45077](https://github.com/pingcap/tidb/issues/45077) @[qw4990](https://github.com/qw4990)
     - 統計情報が時間内に収集されない場合の範囲外推定戦略を最適化する [#58068](https://github.com/pingcap/tidb/issues/58068) @[terry1purcell](https://github.com/terry1purcell)
-    - Grafana の**パフォーマンス概要**&gt; **SQL 実行時間概要**パネルに`backoff`メトリックを追加してデバッグを容易にします [#61441](https://github.com/pingcap/tidb/issues/61441) @[dbsid](https://github.com/dbsid)
+    - Grafana の**Performance Overview** > **SQL Execute Time Overview**パネルに`backoff`メトリックを追加してデバッグを容易にします [#61441](https://github.com/pingcap/tidb/issues/61441) @[dbsid](https://github.com/dbsid)
     - 監査ログ プラグインにステートメント ID 情報を追加 [#63525](https://github.com/pingcap/tidb/issues/63525) @[YangKeao](https://github.com/YangKeao)
 
 - TiKV

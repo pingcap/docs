@@ -9,7 +9,7 @@ summary: このドキュメントでは、ログバックアップの監視、�
 
 ## スナップショットのバックアップと復元の監視 {#snapshot-backup-and-restore-monitoring}
 
-スナップショットのバックアップと復元のメトリックを表示するには、Grafana の[**TiKV-Details**&gt;**バックアップとインポート**ダッシュボード](/grafana-tikv-dashboard.md#backup--import)に移動します。
+スナップショットのバックアップと復元のメトリックを表示するには、Grafana の[**TiKV-Details**&gt;**Backup & Import**ダッシュボード](/grafana-tikv-dashboard.md#backup--import)に移動します。
 
 ## ログバックアップ監視 {#log-backup-monitoring}
 
@@ -22,8 +22,8 @@ summary: このドキュメントでは、ログバックアップの監視、�
 
 ### Grafanaの設定 {#grafana-configuration}
 
-- TiUPを使用してデプロイされたクラスターの場合、ダッシュボード[Grafana](https://grafana.com/)にポイントインタイムリカバリ (PITR) パネルが表示されます。TiKV-Details ダッシュボードの**バックアップログ**パネルが PITR パネルです。
-- 手動でデプロイされたクラスターの場合は、 [Grafanaダッシュボードをインポートする](/deploy-monitoring-services.md#step-2-import-a-grafana-dashboard)を参照し、 [tikv_詳細](https://github.com/tikv/tikv/blob/release-8.5/metrics/grafana/tikv_details.json) JSON ファイルを Grafana にアップロードしてください。その後、TiKV-Details ダッシュボードの**バックアップログ**パネルを見つけてください。
+- TiUPを使用してデプロイされたクラスターの場合、ダッシュボード[Grafana](https://grafana.com/)にポイントインタイムリカバリ (PITR) パネルが表示されます。TiKV-Details ダッシュボードの**Backup Log**パネルが PITR パネルです。
+- 手動でデプロイされたクラスターの場合は、 [Grafanaダッシュボードをインポートする](/deploy-monitoring-services.md#step-2-import-a-grafana-dashboard)を参照し、 [tikv_details](https://github.com/tikv/tikv/blob/release-8.5/metrics/grafana/tikv_details.json) JSON ファイルを Grafana にアップロードしてください。その後、TiKV-Details ダッシュボードの**Backup Log**パネルを見つけてください。
 
 ### 監視メトリクス {#monitoring-metrics}
 
