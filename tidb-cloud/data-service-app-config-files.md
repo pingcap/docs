@@ -7,7 +7,7 @@ summary: このドキュメントでは、TiDB Cloudのデータアプリの設�
 
 このドキュメントでは、TiDB Cloudの[データアプリ](/tidb-cloud/tidb-cloud-glossary.md#data-app)の設定ファイルについて説明します。
 
-データ[データアプリをGitHubに接続しました](/tidb-cloud/data-service-manage-github-connection.md)た場合は、次のように GitHub の指定したディレクトリでデータアプリの設定ファイルを見つけることができます。
+[データアプリをGitHubに接続した](/tidb-cloud/data-service-manage-github-connection.md)場合は、次のように GitHub の指定したディレクトリでデータアプリの設定ファイルを見つけることができます。
 
 ```
 ├── <Your Data App directory>

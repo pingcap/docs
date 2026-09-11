@@ -2278,7 +2278,7 @@ Raft Engineに関連する設定項目。
 ### `enable-file-dictionary-log` {#enable-file-dictionary-log}
 
 - TiKVが暗号化メタデータを管理する際に、I/Oとミューテックスの競合を軽減するための最適化を有効にします。
-- この設定パラメータが (デフォルトで) 有効になっている場合に発生する可能性のある互換性の問題を回避するには、詳細については[保存時の暗号化- TiKVバージョン間の互換性](/encryption-at-rest.md#compatibility-between-tikv-versions)を参照してください。
+- この設定パラメータがデフォルトで有効になっている場合に発生する可能性のある互換性の問題を回避する方法については、[保存時の暗号化- TiKVバージョン間の互換性](/encryption-at-rest.md#compatibility-between-tikv-versions)を参照してください。
 - デフォルト値: `true`
 
 ### `master-key` {#master-key}

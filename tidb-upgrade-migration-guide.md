@@ -74,7 +74,7 @@ SET GLOBAL tidb_gc_life_time=60h;
     - バックアップ速度: 8つのスレッドで TiKV ノードごとに 1 TiB のデータのバックアップに約1時間かかります。
     - 復元速度: TiKV ノードごとに 1 TiB のデータの復元には約20分かかります。
 
-- **設定の整合性**：古いクラスタと新しいクラスタの構成が[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)であることを確認してください。同一でない場合、 BRの復元は失敗します。
+- **設定の整合性**：古いクラスタと新しいクラスタで、[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)の設定値が同一であることを確認してください。同一でない場合、BRの復元は失敗します。
 
 - **システムテーブルの復元**: BR復元中に`--with-sys-table`オプションを使用して、システムテーブルデータを復元します。
 

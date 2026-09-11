@@ -164,7 +164,7 @@ tiflash_servers:
 
 #### TiKVとTiFlashの`labels`を設定する {#configure-labels-for-tikv-and-tiflash}
 
-コマンドラインフラグを使用するか、TiKVまたはTiFlash設定ファイルを設定すると、キーと値のペアの形式でいくつかの属性をバインドできます。これらの属性は`labels`呼ばれます。TiKVとTiFlashは起動後、PDに`labels`報告し、ユーザーがTiKVノードとTiFlashノードの位置を特定できるようにします。
+コマンドラインフラグを使用するか、TiKVまたはTiFlash設定ファイルを編集すると、キーと値のペアの形式でいくつかの属性をバインドできます。これらの属性は`labels`と呼ばれます。TiKVとTiFlashは起動後、PDに`labels`を報告し、ユーザーがTiKVノードとTiFlashノードの位置を特定できるようにします。
 
 トポロジがゾーン &gt; データセンター（DC） &gt; ラック &gt; ホストの4層で構成されており、これらのラベル（ゾーン、DC、ラック、ホスト）を使用してTiKVとTiFlashの位置を設定できます。TiKVとTiFlashのラベルを設定するには、次のいずれかの方法を使用します。
 

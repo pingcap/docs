@@ -66,7 +66,7 @@ URI で設定可能なパラメータは次のとおりです。
 | `pulsar`                      | 下流Pulsarのスキーム。値は`pulsar` 、 `pulsar+ssl` 、 `pulsar+http` 、 `pulsar+https`のいずれかで、v8.2.0以降では`pulsar+http`と`pulsar+https`がサポートされています。                                       |
 | `127.0.0.1`                   | ダウンストリーム Pulsar がサービスを提供する IP アドレス。                                                                                                                                   |
 | `6650`                        | 下流 Pulsar の接続ポート。                                                                                                                                                     |
-| `persistent://abc/def/yktest` | 前の構成例 1 に示されているように、このパラメータは Pulsar のテナント、名前空間、トピックを指定するために使用されます。                                                                                                     |
+| `persistent://abc/def/yktest` | 前の設定例1に示されているように、このパラメータは Pulsar のテナント、名前空間、トピックを指定するために使用されます。                                                                                                     |
 | `yktest`                      | 上記の設定例 2 に示すように、指定したいトピックがPulsarのデフォルトテナント`public`のデフォルト名前空間`default`にある場合、トピック名のみ（例： `yktest` ）でURIを設定できます。これは、トピックを`persistent://public/default/yktest`と指定するのと同じです。 |
 
 ### Changefeed 設定パラメータ {#changefeed-config-parameters}

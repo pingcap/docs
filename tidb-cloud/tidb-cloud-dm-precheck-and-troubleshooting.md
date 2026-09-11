@@ -16,14 +16,14 @@ summary: データ移行時に発生する事前チェックエラー、移行�
 ### エラーメッセージ: mysql server_id が 0 より大きいかどうかを確認してください {#error-message-check-whether-mysql-server-id-has-been-greater-than-0}
 
 - Amazon Aurora MySQL または Amazon RDS: `server_id`はデフォルトで設定されています。設定する必要はありません。フルデータ移行と増分データ移行の両方をサポートするには、Amazon Aurora MySQL ライターインスタンスを使用していることを確認してください。
-- MySQL: MySQL 用に`server_id`を構成するには、 [レプリケーションソース設定の設定](https://dev.mysql.com/doc/refman/8.0/en/replication-howto-masterbaseconfig.html)を参照してください。
+- MySQL: MySQL 用に`server_id`を構成するには、 [レプリケーションソースの設定](https://dev.mysql.com/doc/refman/8.0/en/replication-howto-masterbaseconfig.html)を参照してください。
 
 ### エラーメッセージ: mysql binlogが有効になっているか確認してください {#error-message-check-whether-mysql-binlog-is-enabled}
 
 - Amazon Aurora MySQL: [Amazon Aurora MySQL互換クラスターでバイナリログを有効にするにはどうすればよいですか？](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls)を参照してください。完全データ移行と増分データ移行の両方をサポートするには、Amazon Aurora MySQL ライター インスタンスを使用していることを確認してください。
 - Amazon RDS: [MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
 - Google Cloud SQL for MySQL: Google は、MySQL マスター データベースのポイントインタイムリカバリを通じてバイナリ ロギングを可能にします。 [特定時点へのリカバリを有効にする](https://cloud.google.com/sql/docs/mysql/backup-recovery/pitr#enablingpitr)を参照してください。
-- MySQL: [レプリケーションソース設定の設定](https://dev.mysql.com/doc/refman/8.0/en/replication-howto-masterbaseconfig.html)を参照してください。
+- MySQL: [レプリケーションソースの設定](https://dev.mysql.com/doc/refman/8.0/en/replication-howto-masterbaseconfig.html)を参照してください。
 
 ### エラーメッセージ: mysql binlog_format が ROW かどうか確認してください {#error-message-check-whether-mysql-binlog-format-is-row}
 
