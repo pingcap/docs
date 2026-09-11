@@ -268,7 +268,7 @@ SELECT JSON_SCHEMA_VALID('{"type": "string", "pattern": "^Ti"}', '"PingCAP"');
 1 row in set (0.00 sec)
 ```
 
-値が特定の名前付きフォーマットに一致するかどうかを確認できます。検証可能なフォーマットには、 `ipv4` 、 `ipv6` 、 `time` 、 `date` 、 `duration` 、 `email` 、 `hostname` 、 `uuid` 、および`uri` 。
+値が特定の名前付きフォーマットに一致するかどうかを確認できます。検証可能なフォーマットには、 `ipv4` 、 `ipv6` 、 `time` 、 `date` 、 `duration` 、 `email` 、 `hostname` 、 `uuid` 、および`uri`が含まれます。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"format": "ipv4"}', '"127.0.0.1"');
