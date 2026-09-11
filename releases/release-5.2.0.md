@@ -42,7 +42,7 @@ TiDB バージョン: 5.2.0
 
 ### 設定ファイルパラメータ {#configuration-file-parameters}
 
-| 設定ファイル | 設定アイテム                                                                                                                | 変更の種類  | 説明                                                                                                                              |
+| 設定ファイル | 設定項目                                                                                                                | 変更の種類  | 説明                                                                                                                              |
 | :------------- | :---------------------------------------------------------------------------------------------------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------ |
 | TiDB設定ファイル     | [`pessimistic-txn.deadlock-history-collect-retryable`](/tidb-configuration-file.md#deadlock-history-collect-retryable)        | 新しく追加された | [`INFORMATION\_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルが再試行可能なデッドロックエラーメッセージを収集するかどうかを制御します。 |
 | TiDB設定ファイル     | [`security.auto-tls`](/tidb-configuration-file.md#auto-tls)                                                                   | 新しく追加された | 起動時にTLS証明書を自動的に生成するかどうかを決定します。デフォルト値は`false`です。                                                                                 |
