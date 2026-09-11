@@ -55,7 +55,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
     - ハッシュパーティション式と関数の制限を修正 [#10273](https://github.com/pingcap/tidb/pull/10273)
     - パーティションを含むテーブルにインデックスを追加すると、場合によっては TiDB panicが発生する問題を修正しました[#10475](https://github.com/pingcap/tidb/pull/10475)
     - 無効なテーブルスキーマを回避するために、DDLを実行する前にテーブル情報を検証します[#10464](https://github.com/pingcap/tidb/pull/10464)
-    - デフォルトでハッシュパーティションを有効にし、パーティション定義に列が1つしかない場合はレンジCOLUMNSパーティションを有効にします[#9936](https://github.com/pingcap/tidb/pull/9936)
+    - デフォルトでハッシュパーティショニングを有効にし、パーティション定義に列が1つしかない場合はレンジCOLUMNSパーティショニングを有効にします[#9936](https://github.com/pingcap/tidb/pull/9936)
 
 ## PD {#pd}
 
