@@ -148,12 +148,12 @@ TiDB バージョン: 6.1.0
     以前のバージョンのTiDBでは、設定項目を変更した後、変更を有効にするにはクラスタを再起動する必要がありました。これにより、オンラインサービスが中断される可能性がありました。この問題に対処するため、TiDB v6.1.0では動的設定機能が導入され、クラスタを再起動せずにパラメータ変更を検証できるようになりました。具体的な最適化は以下の通りです。
 
     - TiDBの一部の設定項目をシステム変数に変換し、動的に変更・保存できるようにします。変換後は元の設定項目は非推奨となることに注意してください。変換後の設定項目の詳細なリストについては、 [コンフィグレーションファイルのパラメータ](#configuration-file-parameters)を参照してください。
-    - Support configuring some TiKV parameters online. For a detailed list of the parameters, see [その他](#others).
+    - 一部のTiKVパラメータのオンライン設定をサポートします。パラメータの詳細なリストについては、 [その他](#others)を参照してください。
     - TiFlash設定項目`max_threads`をシステム変数`tidb_max_tiflash_threads`に変換し、構成を動的に変更して永続化できるようにします。変換後も元の設定項目は保持されることに注意してください。
 
     以前のバージョンからアップグレードされた v6.1.0 クラスター (オンライン アップグレードとオフライン アップグレードを含む) については、次の点に注意してください。
 
-    - If the configuration items specified in the configuration file before the upgrade already exist, TiDB will automatically update the values of the configured items to those of the corresponding system variables during the upgrade process. In this way, after the upgrade, the system behavior is not affected by parameter optimization.
+    - アップグレード前に設定ファイルに指定された設定項目が既に存在する場合、TiDBはアップグレードプロセス中に、設定された項目の値を対応するシステム変数の値に自動的に更新します。これにより、パラメータの最適化により、アップグレード後もシステムの動作は変わりません。
     - 上記の自動更新はアップグレード中に1回のみ実行されます。アップグレード後は、廃止された設定項目は無効になります。
 
     この機能により、システムを再起動したりサービスを中断したりすることなく、パラメータを動的に変更し、検証して永続化することができます。これにより、日々のメンテナンスが容易になります。
