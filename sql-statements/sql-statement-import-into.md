@@ -121,7 +121,11 @@ It specifies the storage location of the data file, which can be an Amazon S3 or
 >
 > If [SEM](/system-variables.md#tidb_enable_enhanced_security) is enabled in the target cluster, the `fileLocation` cannot be specified as a local file path.
 
-In the `fileLocation` parameter, you can specify a single file, or use the `*` and `[]` wildcards to match multiple files for import. Note that the wildcard can only be used in the file name, because it does not match directories or recursively match files in subdirectories. Taking files stored on Amazon S3 as examples, you can configure the parameter as follows:
+In the `fileLocation` parameter, you can specify a single file or use the `*` and `[]` wildcards to match multiple files for import. TiDB treats `?` as a literal character, not a wildcard. The `[]` wildcard is supported starting from TiDB v8.0.0.
+
+For files in Amazon S3 or GCS, wildcards can appear in multiple fixed-depth path components. A wildcard matches characters only within one `/`-separated component and does not cross `/`. Recursive matching across an arbitrary number of directory levels, such as with `**`, is not supported. For files in TiDB local storage, the directory path must be exact, and wildcards can appear only in the file name.
+
+Taking files stored on Amazon S3 as examples, you can configure the parameter as follows:
 
 - Import a single file: `s3://<bucket-name>/path/to/data/foo.csv`
 - Import all files in a specified path: `s3://<bucket-name>/path/to/data/*`
@@ -129,6 +133,7 @@ In the `fileLocation` parameter, you can specify a single file, or use the `*` a
 - Import all files with the `foo` prefix in a specified path: `s3://<bucket-name>/path/to/data/foo*`
 - Import all files with the `foo` prefix and the `.csv` suffix in a specified path: `s3://<bucket-name>/path/to/data/foo*.csv`
 - Import `1.csv` and `2.csv` in a specified path: `s3://<bucket-name>/path/to/data/[12].csv`
+- Import all CSV files from fixed-depth subdirectories whose names start with `data-`: `s3://<bucket-name>/path/to/data-*/*.csv`
 
 ### Format
 
