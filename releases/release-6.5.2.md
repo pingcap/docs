@@ -26,7 +26,7 @@ TiDB バージョン: 6.5.2
     - プリペアドプランキャッシュで`BatchPointGet`実行計画のキャッシュをサポート [#42125](https://github.com/pingcap/tidb/issues/42125) @[qw4990](https://github.com/qw4990)
     - インデックス結合より多くの SQL 形式をサポート [#40505](https://github.com/pingcap/tidb/issues/40505) @[Yisaer](https://github.com/Yisaer)
     - 一部のインデックスマージリーダーのログレベルを`"info"`から`"debug"` に変更します [#41949](https://github.com/pingcap/tidb/issues/41949) @[yibin87](https://github.com/yibin87)
-    - 範囲パーティションテーブルに Limit を設定した`distsql_concurrency`設定を最適化して、クエリのレイテンシーを削減します。 [#41480](https://github.com/pingcap/tidb/issues/41480) @[you06](https://github.com/you06)
+    - レンジパーティションテーブルに Limit を設定した`distsql_concurrency`設定を最適化して、クエリのレイテンシーを削減します。 [#41480](https://github.com/pingcap/tidb/issues/41480) @[you06](https://github.com/you06)
 
 - TiFlash
 

@@ -111,7 +111,7 @@ TiDB バージョン: 4.0.5
     - SQL文の`unknown column error` `select a from t having t.a` のように修正する [#18434](https://github.com/pingcap/tidb/pull/18434)
     - パーティションキーが整数型の場合、64 ビットの符号なし型をハッシュパーティションテーブルに書き込むとオーバーフローが発生し、予期しない負の数になるというpanic問題を修正しました。 [#18186](https://github.com/pingcap/tidb/pull/18186)
     - `char`関数の誤った動作を修正 [#18122](https://github.com/pingcap/tidb/pull/18122)
-    - `ADMIN REPAIR TABLE`文が範囲パーティション式内の整数を解析できない問題を修正しました [#17988](https://github.com/pingcap/tidb/pull/17988)
+    - `ADMIN REPAIR TABLE`文がレンジパーティション式内の整数を解析できない問題を修正しました [#17988](https://github.com/pingcap/tidb/pull/17988)
     - `SET CHARSET`文の誤った動作を修正する [#17289](https://github.com/pingcap/tidb/pull/17289)
     - 間違った照合順序設定によって関数`collation`の間違った結果が発生するバグを修正しました[#17231](https://github.com/pingcap/tidb/pull/17231)
     - `STR_TO_DATE`のフォーマットトークン '%r'、 '%h' の処理が MySQL と矛盾している問題を修正しました。 [#18727](https://github.com/pingcap/tidb/pull/18727)

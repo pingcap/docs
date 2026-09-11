@@ -23,8 +23,8 @@ TiDBバージョン: 6.3.0-DMR
 - JSONデータ型と関数が一般提供（GA）されます。
 - TiDBは、NULL値を考慮したアンチジョインをサポートしています。
 - TiDBは、より詳細な粒度で実行時間メトリクスを提供します。
-- 範囲パーティションの定義を簡素化するために、新しい構文糖衣が追加されました。
-- 範囲COLUMNSパーティショニングは、複数の列を定義することをサポートしています。
+- レンジパーティションの定義を簡素化するために、新しい構文糖衣が追加されました。
+- レンジCOLUMNSパーティショニングは、複数の列を定義することをサポートしています。
 - インデックス追加時のパフォーマンスが3倍に向上しました。
 - リソースを大量に消費するクエリが、軽量クエリの応答時間に与える影響を50%以上削減します。
 
@@ -32,13 +32,13 @@ TiDBバージョン: 6.3.0-DMR
 
 ### SQL {#sql}
 
-- 範囲パーティション定義を簡素化するための新しい構文糖衣（範囲INTERVALパーティショニング）を追加（実験的） [#35683](https://github.com/pingcap/tidb/issues/35683) @[mjonss](https://github.com/mjonss)
+- レンジパーティション定義を簡素化するための新しい構文糖衣（レンジ INTERVAL パーティショニング）を追加（実験的） [#35683](https://github.com/pingcap/tidb/issues/35683) @[mjonss](https://github.com/mjonss)
 
-    TiDBは、範囲パーティションを定義する新しい方法として、 [区間分割](/partitioned-table.md#range-interval-partitioning)を提供します。すべてのパーティションを列挙する必要がないため、範囲パーティショニングのDDL文の長さが大幅に短縮されます。構文は、従来の範囲パーティショニングと同じです。
+    TiDBは、レンジパーティションを定義する新しい方法として、 [区間分割](/partitioned-table.md#range-interval-partitioning)を提供します。すべてのパーティションを列挙する必要がないため、レンジパーティショニングのDDL文の長さが大幅に短縮されます。構文は、従来のレンジパーティショニングと同じです。
 
-- 範囲COLUMNSパーティショニングは、複数の列の定義をサポートします [#36636](https://github.com/pingcap/tidb/issues/36636) @[mjonss](https://github.com/mjonss)
+- レンジCOLUMNSパーティショニングは、複数の列の定義をサポートします [#36636](https://github.com/pingcap/tidb/issues/36636) @[mjonss](https://github.com/mjonss)
 
-    TiDB は[範囲列によるパーティション分割（列リスト）](/partitioned-table.md#range-columns-partitioning)をサポートしています。 `column_list`は単一列に制限されなくなりました。基本的な機能はMySQLと同じです。
+    TiDB は[レンジCOLUMNSによるパーティション分割（列リスト）](/partitioned-table.md#range-columns-partitioning)をサポートしています。 `column_list`は単一列に制限されなくなりました。基本的な機能はMySQLと同じです。
 
 - [パーティション交換](/partitioned-table.md#partition-management)が GA になりました [#35996](https://github.com/pingcap/tidb/issues/35996) @[ymkzpx](https://github.com/ymkzpx)
 
@@ -232,7 +232,7 @@ TiDBバージョン: 6.3.0-DMR
 | [tidb_max_paging_size](/system-variables.md#tidb_max_paging_size-new-in-v630)                                               | 新しく追加された | この変数は、コプロセッサのページングリクエスト処理中に最小行数を設定するために使用されます。                                                                                                                                                                                          |
 | [`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-new-in-v630)                                   | 新しく追加された | セッション全体の共通テーブル式 (CTE) をインライン化するかどうかを制御します。デフォルト値は`OFF`で、これはデフォルトでは CTE のインライン化が強制されないことを意味します。                                                                                                                                       |
 | [`tidb_opt_three_stage_distinct_agg`](/system-variables.md#tidb_opt_three_stage_distinct_agg-new-in-v630)                   | 新しく追加された | `COUNT(DISTINCT)`集計を MPP モードで 3 段階集計に書き換えるかどうかを指定します。デフォルト値は`ON`です。                                                                                                                                                                  |
-| [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51)                                    | 変更     | 動的剪定を有効にするかどうかを指定します。v6.3.0 以降、デフォルト値は`dynamic`に変更されます。                                                                                                                                                                              |
+| [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51)                                    | 変更     | 動的プルーニングを有効にするかどうかを指定します。v6.3.0 以降、デフォルト値は`dynamic`に変更されます。                                                                                                                                                                              |
 | [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)                                           | 変更     | タイムスタンプの取得を最適化するために使用され、read-committed分離レベルのシナリオ（読み取りと書き込みの競合がまれなシナリオ）に適しています。この機能は特定のサービスワークロード向けに設計されており、他のシナリオではパフォーマンスが低下する可能性があります。そのため、v6.3.0以降、この変数の適用範囲が`GLOBAL \| SESSION`から`INSTANCE`に変更されました。つまり、特定のTiDBインスタンスに対してこの機能を有効にできます。 |
 | [`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630)                                         | 新しく追加された | タイムスタンプの取得を最適化するために使用され、悲観的トランザクションのRC分離レベルにおいてポイント書き込み競合が少ないシナリオに適しています。この変数を有効にすると、ポイント書き込みステートメントの実行中にグローバルタイムスタンプを取得する際に発生するレイテンシーとオーバーヘッドを回避できます。                                                                                 |
 | [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)                                                     | 新しく追加された | FastScanを有効にするかどうかを制御します。FastScan[ファストスキャン](/tiflash/use-fastscan.md)が有効になっている場合（ `ON`に設定）、 TiFlashはより効率的なクエリパフォーマンスを提供しますが、クエリ結果の正確性やデータの一貫性は保証されません。                                                                                |

@@ -169,7 +169,7 @@ TiDBバージョン: 6.4.0-DMR
 
 - 線形ハッシュパーティショニング構文との互換性を確保する [#38450](https://github.com/pingcap/tidb/issues/38450) @[mjonss](https://github.com/mjonss)
 
-    以前のバージョンでは、TiDB はハッシュ、レンジ、List パーティショニングをサポートしていました。 v6.4.0 以降、TiDB は[MySQL 線形ハッシュパーティショニング](https://dev.mysql.com/doc/refman/5.7/en/partitioning-linear-hash.html)の構文とも互換性があります。
+    以前のバージョンでは、TiDB はハッシュ、レンジ、リストパーティショニングをサポートしていました。 v6.4.0 以降、TiDB は[MySQL 線形ハッシュパーティショニング](https://dev.mysql.com/doc/refman/5.7/en/partitioning-linear-hash.html)の構文とも互換性があります。
 
     TiDBでは、MySQLのリニアハッシュパーティションの既存のDDL文を直接実行でき、TiDBは対応するハッシュパーティションテーブルを作成します（TiDB内部にはリニアハッシュパーティションは存在しません）。また、MySQLのリニアハッシュパーティションの既存のDML文を直接実行することもでき、TiDBは対応するTiDBハッシュパーティションのクエリ結果を正常に返します。この機能により、TiDBの構文とMySQLのリニアハッシュパーティションとの互換性が確保され、MySQLベースのアプリケーションからTiDBへのスムーズな移行が可能になります。
 

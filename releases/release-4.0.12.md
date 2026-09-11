@@ -86,7 +86,7 @@ TiDB バージョン: 4.0.12
     - IndexMerge プランでテーブルフィルターが間違っている可能性がある問題を修正しました [#23165](https://github.com/pingcap/tidb/pull/23165)
     - `NULL`定数の戻り値の型で予期しない`NotNullFlag`が発生する問題を修正 [#23135](https://github.com/pingcap/tidb/pull/23135)
     - テキストタイプで照合順序が処理されない可能性があるバグを修正 [#23092](https://github.com/pingcap/tidb/pull/23092)
-    - 範囲パーティションが`IN`式を誤って処理する可能性がある問題を修正しました [#23074](https://github.com/pingcap/tidb/pull/23074)
+    - レンジパーティションが`IN`式を誤って処理する可能性がある問題を修正しました [#23074](https://github.com/pingcap/tidb/pull/23074)
     - TiKVストアをtombstoneとしてマークした後、同じIPアドレスとポートで異なるStoreIDを持つ新しいTiKVストアを開始すると、 `StoreNotMatch`エラーが返され続ける問題を修正しました。 [#23071](https://github.com/pingcap/tidb/pull/23071)
     - `INT`型は`NULL`で`YEAR` を比較すると調整しない [#22844](https://github.com/pingcap/tidb/pull/22844)
     - `auto_random`列列のテーブルにデータをロードする際に接続が失われる問題を修正しました [#22736](https://github.com/pingcap/tidb/pull/22736)

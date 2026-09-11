@@ -13,7 +13,7 @@ TiDB バージョン: 6.1.0
 
 6.1.0 の主な新機能または改善点は次のとおりです。
 
-- List パーティショニングとリスト COLUMNS パーティショニングが GA になり、 MySQL 5.7と互換性があります
+- リストパーティショニングとリストCOLUMNSパーティショニングが GA になり、 MySQL 5.7と互換性があります
 - TiFlashパーティションテーブル（動的プルーニング）が GA になりました
 - ユーザーレベルのロック管理をサポートし、MySQLと互換性があります
 - 非トランザクションDML文をサポート（ `DELETE`のみサポート）
@@ -27,9 +27,9 @@ TiDB バージョン: 6.1.0
 
 ### SQL {#sql}
 
-- List パーティショニングとリストCOLUMNSパーティショニングがGAになりました。どちらもMySQL 5.7と互換性があります。
+- リストパーティショニングとリストCOLUMNSパーティショニングがGAになりました。どちらもMySQL 5.7と互換性があります。
 
-    ユーザー[List COLUMNS partitioning](/partitioned-table.md#list-columns-partitioning) : [List パーティショニング](/partitioned-table.md#list-partitioning)
+    ユーザードキュメント: [リストパーティショニング](/partitioned-table.md#list-partitioning)、[リストCOLUMNSパーティショニング](/partitioned-table.md#list-columns-partitioning)
 
 - TiFlash は、コンパクト コマンドの開始をサポートしています。(実験的)
 
