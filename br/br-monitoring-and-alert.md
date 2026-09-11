@@ -18,7 +18,7 @@ summary: このドキュメントでは、ログバックアップの監視、�
 ### 監視構成 {#monitoring-configuration}
 
 - TiUPを使用してデプロイされたクラスターの場合、Prometheus は監視メトリックを自動的に収集します。
-- 手動でデプロイされたクラスターの場合は、 [TiDBクラスタ監視のデプロイ](/deploy-monitoring-services.md)の手順に従って、Prometheus 構成ファイルの`scrape_configs`セクションに TiKV 関連のジョブを追加します。
+- 手動でデプロイされたクラスターの場合は、 [TiDBクラスタ監視のデプロイ](/deploy-monitoring-services.md)の手順に従って、Prometheus 設定ファイルの`scrape_configs`セクションに TiKV 関連のジョブを追加します。
 
 ### Grafanaの設定 {#grafana-configuration}
 
@@ -61,7 +61,7 @@ summary: このドキュメントでは、ログバックアップの監視、�
 PITR でアラート項目を構成するには、次の手順に従います。
 
 1. Prometheusが配置されているノードのアラートルール用の設定ファイル（例： `pitr.rules.yml` ）を作成します。このファイルには、 [Prometheusのドキュメント](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/) 、以下の推奨アラート項目、および設定サンプルに従ってアラートルールを記述します。
-2. Prometheus 構成ファイルの`rule_files`フィールドに、アラートルール ファイルのパスを追加します。
+2. Prometheus 設定ファイルの`rule_files`フィールドに、アラートルール ファイルのパスを追加します。
 3. Prometheusプロセスにシグナル`SIGHUP`を送信するか（ `kill -HUP pid` ）、HTTPリクエスト`POST`を`http://prometheus-addr/-/reload`に送信します（HTTPリクエストを送信する前に、Prometheusの起動時にパラメータ`--web.enable-lifecycle`を追加します）。
 
 推奨されるアラート項目は次のとおりです。

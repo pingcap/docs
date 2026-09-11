@@ -9,7 +9,7 @@ DM は、 [dmctlツール](/dm/dmctl-introduction.md)の機能と同様に、DM 
 
 OpenAPI を有効にするには、次のいずれかの操作を実行します。
 
-- DM クラスターがバイナリを使用して直接デプロイされている場合は、DM-master構成ファイルに次の構成を追加します。
+- DM クラスターがバイナリを使用して直接デプロイされている場合は、DM-master設定ファイルに次の構成を追加します。
 
     ```toml
     openapi = true

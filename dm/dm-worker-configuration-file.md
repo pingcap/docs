@@ -3,13 +3,13 @@ title: DM-worker Configuration File
 summary: DM-worker の設定ファイルについて学習します。
 ---
 
-# DM-workerコンフィグレーションファイル {#dm-worker-configuration-file}
+# DM-worker設定ファイル {#dm-worker-configuration-file}
 
-このドキュメントでは、構成ファイル テンプレートと、このファイル内の各設定パラメータの説明を含む、DM-workerの構成について説明します。
+このドキュメントでは、設定ファイル テンプレートと、このファイル内の各設定パラメータの説明を含む、DM-workerの構成について説明します。
 
-## コンフィグレーションファイルテンプレート {#configuration-file-template}
+## 設定ファイルテンプレート {#configuration-file-template}
 
-以下は、DM-workerの構成ファイル テンプレートです。
+以下は、DM-workerの設定ファイル テンプレートです。
 
 ```toml
 # Worker Configuration.
@@ -34,7 +34,7 @@ ssl-key = "/path/to/key.pem"
 cert-allowed-cn = ["dm"]
 ```
 
-## コンフィグレーションパラメータ {#configuration-parameters}
+## 設定パラメータ {#configuration-parameters}
 
 ### グローバル {#global}
 
@@ -62,7 +62,7 @@ cert-allowed-cn = ["dm"]
 
 #### `join` {#join}
 
-- DM-master構成ファイル内の 1つ以上の[`master-addr`](/dm/dm-master-configuration-file.md#global-configuration)に対応します。
+- DM-master設定ファイル内の 1つ以上の[`master-addr`](/dm/dm-master-configuration-file.md#global-configuration)に対応します。
 
 #### `keepalive-ttl` {#keepalive-ttl}
 

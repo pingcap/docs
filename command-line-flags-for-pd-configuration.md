@@ -3,7 +3,7 @@ title: PD Configuration Flags
 summary: PD のいくつかの構成フラグについて学習します。
 ---
 
-# PDコンフィグレーションフラグ {#pd-configuration-flags}
+# PD設定フラグ {#pd-configuration-flags}
 
 PD は、コマンドラインフラグと環境変数を使用して構成できます。
 
@@ -77,7 +77,7 @@ PD は、コマンドラインフラグと環境変数を使用して構成で�
 
 - ログローテーションを有効または無効にするには
 - デフォルト: `true`
-- 値が true の場合、PD 構成ファイルの`[log.file]`に従います。
+- 値が true の場合、PD 設定ファイルの`[log.file]`に従います。
 
 ## `--name` {#name}
 

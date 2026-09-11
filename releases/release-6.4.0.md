@@ -61,7 +61,7 @@ TiDBバージョン: 6.4.0-DMR
 
 - TiFlashは保存時の暗号化にSM4アルゴリズムをサポートしています [#5953](https://github.com/pingcap/tiflash/issues/5953) @[lidezhu](https://github.com/lidezhu)
 
-    TiFlashの保存時暗号化にSM4アルゴリズムを追加します。保存時暗号化を設定する際に、 `data-encryption-method`構成ファイル内の`sm4-ctr` 構成の値を`tiflash-learner.toml`暗号化機能を有効にできます。
+    TiFlashの保存時暗号化にSM4アルゴリズムを追加します。保存時暗号化を設定する際に、`tiflash-learner.toml`設定ファイル内の`data-encryption-method`設定の値を`sm4-ctr`に設定することで、暗号化機能を有効にできます。
 
     詳細については、[ユーザー向けドキュメント](/encryption-at-rest.md#tiflash)を参照してください。
 
@@ -254,7 +254,7 @@ TiDBバージョン: 6.4.0-DMR
 
     バージョン6.4.0以降では、binlogの位置やGTIDを指定せずに、増分移行を直接実行できます。DMは、タスク開始後にアップストリームから生成されたbinlogファイルを自動的に取得し、これらの増分データをダウンストリームに移行します。これにより、ユーザーは面倒な理解や複雑な設定から解放されます。
 
-    詳細については、 [DM 高度タスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
+    詳細については、 [DM 高度タスク設定ファイル](/dm/task-configuration-file-full.md)を参照してください。
 
 - DMが移行タスクのステータスインジケーターを追加 [#7343](https://github.com/pingcap/tiflow/issues/7343) @[okJiang](https://github.com/okJiang)
 
@@ -304,9 +304,9 @@ TiDBバージョン: 6.4.0-DMR
 | [`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)                       | 新しく追加された | TiDB が GC をトリガーしようとするしきい値を制御します (実験的)。デフォルト値は`70%`です。                                                                                                                                                                               |
 | [`tidb_server_memory_limit_sess_min_size`](/system-variables.md#tidb_server_memory_limit_sess_min_size-new-in-v640)                 | 新しく追加された | メモリ制限を有効にすると、TiDB は現在のインスタンスで最もメモリ使用量の多い SQL文を終了します。この変数は、終了する SQL文の最小メモリ使用量を指定します。デフォルト値は`134217728` (128 MiB) です。                                                                                                   |
 
-### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
+### 設定ファイルパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                                   | 変更の種類  | 説明                                                                                                                                                                      |
+| 設定ファイル | 設定パラメータ                                                                                                                                   | 変更の種類  | 説明                                                                                                                                                                      |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | `tidb_memory_usage_alarm_ratio`                                                                                                                   | 削除済み     | この設定項目は無効になりました。                                                                                                                                                        |
 | TiDB           | `memory-usage-alarm-ratio`                                                                                                                        | 削除済み     | システム変数[`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)に置き換えられました。この設定項目が TiDB バージョン v6.4.0 より前のバージョンで設定されていた場合、アップグレード後には有効になりません。 |

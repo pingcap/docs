@@ -9,7 +9,7 @@ TiDB Data Migration (DM) は、特定のスキーマまたはテーブルのbinl
 
 ## binlogイベントフィルターを構成する {#configure-the-binlog-event-filter}
 
-タスク構成ファイルに次の構成を追加します。
+タスク設定ファイルに次の構成を追加します。
 
 ```yaml
 filters:
@@ -21,7 +21,7 @@ filters:
     ​action: Ignore
 ```
 
-DM v2.0.2以降では、ソース設定ファイルでbinlogイベントフィルターを設定できます。詳細については、 [上流データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
+DM v2.0.2以降では、ソース設定ファイルでbinlogイベントフィルターを設定できます。詳細については、 [上流データベース設定ファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
 一致するスキーマとテーブルにワイルドカードを使用する場合は、次の点に注意してください。
 

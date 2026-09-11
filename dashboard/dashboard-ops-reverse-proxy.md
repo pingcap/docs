@@ -127,7 +127,7 @@ server_configs:
 
 デプロイされたクラスターの場合:
 
-1. クラスターの構成ファイルを編集モードで開きます ( `CLUSTER_NAME`をクラスター名に置き換えます)。
+1. クラスターの設定ファイルを編集モードで開きます ( `CLUSTER_NAME`をクラスター名に置き換えます)。
 
     ```shell
     tiup cluster edit-config CLUSTER_NAME
@@ -146,7 +146,7 @@ server_configs:
       ...
     ```
 
-    変更後の構成ファイルは次のファイルのようになります。
+    変更後の設定ファイルは次のファイルのようになります。
 
     ```yaml
     server_configs:
