@@ -49,13 +49,13 @@ TiDB バージョン: 8.4.0
     - 冗長性を排除し、同じメモリ消費量でより多くの実行計画をキャッシュします。
     - インスタンスに固定サイズのメモリを割り当て、メモリ使用量をより効果的に制限します。
 
-    v8.4.0 では、インスタンスレベルの実行計画 キャッシュはクエリ実行計画のキャッシュのみをサポートしており、デフォルトでは無効になっています。 [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840)を使用してこの機能を有効にし、 [`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840)を使用して最大メモリ使用量を設定できます。この機能を有効にする前に、[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)と[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)を無効にしてください。
+    v8.4.0 では、インスタンスレベルの実行プランキャッシュはクエリ実行計画のキャッシュのみをサポートしており、デフォルトでは無効になっています。 [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840)を使用してこの機能を有効にし、 [`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840)を使用して最大メモリ使用量を設定できます。この機能を有効にする前に、[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)と[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)を無効にしてください。
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840)を参照してください。
 
 - TiDB Lightningの論理インポートモードは、プリペアドステートメントとクライアントステートメントキャッシュをサポートします [#54850](https://github.com/pingcap/tidb/issues/54850) @[dbsid](https://github.com/dbsid)
 
-    `logical-import-prep-stmt`設定項目を有効にすると、TiDB Lightning の論理インポートモードで実行される SQL文は、プリペアドステートメントとクライアント ステートメントキャッシュを使用します。これにより、 TiDB SQLの解析とコンパイルのコストが削減され、SQL の実行効率が向上し、実行計画 キャッシュへのアクセス確率が高まるため、論理インポートが高速化されます。
+    `logical-import-prep-stmt`設定項目を有効にすると、TiDB Lightning の論理インポートモードで実行される SQL文は、プリペアドステートメントとクライアント ステートメントキャッシュを使用します。これにより、 TiDB SQLの解析とコンパイルのコストが削減され、SQL の実行効率が向上し、実行プランキャッシュへのアクセス確率が高まるため、論理インポートが高速化されます。
 
     詳細については、 [ドキュメント](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 

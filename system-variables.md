@@ -2332,7 +2332,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Warning:**
 >
-> DML文用の非プリペアド実行計画 キャッシュは実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> DML文用の非プリペアドプランキャッシュは実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
 - 範囲: セッション | グローバル
 - クラスターに保持される: はい
@@ -2569,7 +2569,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、インスタンスプランキャッシュ機能を有効にするかどうかを制御します。この機能はインスタンスレベルの実行計画 キャッシュを実装しており、同じ TiDB インスタンス内のすべてのセッションが実行計画 キャッシュを共有できるため、メモリ使用率が向上します。インスタンスプランキャッシュを有効にする前に、セッションレベル[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)と[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)を無効にすることをお勧めします。
+- この変数は、インスタンスプランキャッシュ機能を有効にするかどうかを制御します。この機能はインスタンスレベルの実行プランキャッシュを実装しており、同じ TiDB インスタンス内のすべてのセッションが実行プランキャッシュを共有できるため、メモリ使用率が向上します。インスタンスプランキャッシュを有効にする前に、セッションレベル[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)と[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)を無効にすることをお勧めします。
 
 ### tidb_enable_ordered_result_mode
 

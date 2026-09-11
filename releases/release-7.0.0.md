@@ -61,13 +61,13 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 - 非プリペアドステートメントの実行計画のキャッシュをサポートする（実験的） [#36598](https://github.com/pingcap/tidb/issues/36598) @[qw4990](https://github.com/qw4990)
 
-    実行プランキャッシュは同時実行 OLTP の処理能力を向上させるために重要であり、TiDB はすでに[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)をサポートしています。 v7.0.0 では、TiDB は非 Prepare文の実行計画をキャッシュすることもできるため、実行計画 キャッシュの範囲が拡張され、TiDB の同時処理能力が向上します。
+    実行プランキャッシュは同時実行 OLTP の処理能力を向上させるために重要であり、TiDB はすでに[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)をサポートしています。 v7.0.0 では、TiDB は非 Prepare文の実行計画をキャッシュすることもできるため、実行プランキャッシュの範囲が拡張され、TiDB の同時処理能力が向上します。
 
     この機能はデフォルトでは無効になっています。システム変数[`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)を`ON`に設定することで有効にできます。安定性のため、TiDB v7.0.0 では非プリペアド実行計画をキャッシュするための新しい領域が割り当てられ、システム変数[`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)を使用してキャッシュサイズを設定できます。さらに、この機能には SQL文に関する特定の制限があります。詳細については、 [制限](/sql-non-prepared-plan-cache.md#restrictions)を参照してください。
 
     詳細については、[ドキュメント](/sql-non-prepared-plan-cache.md)を参照してください。
 
-- TiDB がサブクエリの実行計画 キャッシュ制約を削除 [#40219](https://github.com/pingcap/tidb/issues/40219) @[fzzf678](https://github.com/fzzf678)
+- TiDB がサブクエリの実行プランキャッシュ制約を削除 [#40219](https://github.com/pingcap/tidb/issues/40219) @[fzzf678](https://github.com/fzzf678)
 
     TiDB v7.0.0 では、サブクエリに対する実行プランキャッシュの制約が解除されました。これにより、 `SELECT * FROM t WHERE a > (SELECT ...)`のようにサブクエリを含む SQL文の実行計画をキャッシュできるようになりました。この機能により、実行プランキャッシュの適用範囲がさらに拡大し、SQL クエリの実行効率が向上します。
 
