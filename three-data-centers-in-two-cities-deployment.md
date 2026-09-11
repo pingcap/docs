@@ -55,7 +55,7 @@ AZ1のrac1では、1台のサーバーにTiDBとPDサービスがデプロイさ
 
 TiDBサーバー、制御マシン、監視サーバーはrac3上に配置されています。TiDBサーバーは定期メンテナンスとバックアップ用に導入されています。Prometheus、Grafana、およびリストアツールは制御マシンと監視マシンに導入されています。
 
-## コンフィグレーション {#configuration}
+## 設定 {#configuration}
 
 ### 例 {#example}
 

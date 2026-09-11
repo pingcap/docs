@@ -111,7 +111,7 @@
     - [コプロセッサーキャッシュ](/coprocessor-cache.md)
     - ガベージコレクション（GC）
       - [概要](/garbage-collection-overview.md)
-      - [コンフィグレーション](/garbage-collection-configuration.md)
+      - [設定](/garbage-collection-configuration.md)
     - [TiFlashのパフォーマンスをチューニング](/tiflash/tune-tiflash-performance.md)
   - [TiDBのバージョンをアップグレードする](/tidb-cloud/upgrade-tidb-cluster.md)
   - [TiDB Cloud Starterインスタンスを削除する](/tidb-cloud/delete-tidb-cluster.md)

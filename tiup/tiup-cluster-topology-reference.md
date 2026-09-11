@@ -16,7 +16,7 @@ TiUPを使用して TiDB クラスターをデプロイすると、Prometheus、
 TiUPを使用した TiDB デプロイメントのトポロジ設定ファイルには、次のセクションが含まれる場合があります。
 
 - [グローバル](#global) : クラスターのグローバル設定。一部の設定項目はデフォルト値を使用しますが、インスタンスごとに個別に設定できます。
-- [監視](#monitored) : 監視サービス（blackbox_exporterと`node_exporter`のコンフィグレーション。各マシンに`node_exporter`と`blackbox_exporter`がデプロイされています。
+- [監視](#monitored) : 監視サービス（blackbox_exporterと`node_exporter`の設定。各マシンに`node_exporter`と`blackbox_exporter`がデプロイされています。
 - [サーバー構成](#server_configs) : コンポーネントのグローバル設定。各コンポーネントを個別に設定できます。インスタンスに同じ名前の設定項目がある場合は、インスタンスの設定項目が有効になります。
 - [コンポーネントバージョン](#component_versions) : コンポーネントバージョン。コンポーネントがクラスタバージョンを使用しない場合に設定します。このセクションはtiup-cluster v1.14.0で導入されました。
 - [pd_servers](#pd_servers) : PDインスタンスの構成。この構成では、PDコンポーネントがデプロイされるマシンを指定します。

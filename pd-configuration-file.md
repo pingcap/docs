@@ -127,7 +127,7 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 ## pd-server {#pd-server}
 
-pd-server関連のコンフィグレーション項目
+pd-server関連の設定項目
 
 ### `server-memory-limit` <span class="version-mark">v6.6.0 の新機能</span> {#server-memory-limit-new-in-v660}
 
@@ -193,7 +193,7 @@ pd-server関連のコンフィグレーション項目
 
 ## security {#security}
 
-セキュリティ関連のコンフィグレーション項目
+セキュリティ関連の設定項目
 
 ### `cacert-path` {#cacert-path}
 
@@ -219,7 +219,7 @@ pd-server関連のコンフィグレーション項目
 
 ## `log` {#log}
 
-ログ関連のコンフィグレーション項目
+ログ関連の設定項目
 
 ### `level` {#level}
 
@@ -240,7 +240,7 @@ pd-server関連のコンフィグレーション項目
 
 ## `log.file` {#log-file}
 
-ログファイルに関連するコンフィグレーション項目
+ログファイルに関連する設定項目
 
 ### `max-size` {#max-size}
 
@@ -263,7 +263,7 @@ pd-server関連のコンフィグレーション項目
 
 ## `metric` {#metric}
 
-監視に関連するコンフィグレーション項目
+監視に関連する設定項目
 
 ### `interval` {#interval}
 
@@ -272,7 +272,7 @@ pd-server関連のコンフィグレーション項目
 
 ## `schedule` {#schedule}
 
-スケジュールに関連するコンフィグレーション項目
+スケジュールに関連する設定項目
 
 > **Note:**
 >
@@ -458,7 +458,7 @@ pd-server関連のコンフィグレーション項目
 
 ## `replication` {#replication}
 
-レプリカに関連するコンフィグレーション項目
+レプリカに関連する設定項目
 
 ### `max-replicas` {#max-replicas}
 
@@ -490,7 +490,7 @@ pd-server関連のコンフィグレーション項目
 
 ## `label-property` （非推奨） {#label-property-deprecated}
 
-ラベルに関連するコンフィグレーション項目`reject-leader`型のみをサポートします。
+ラベルに関連する設定項目`reject-leader`型のみをサポートします。
 
 > **Note:**
 >
@@ -508,7 +508,7 @@ pd-server関連のコンフィグレーション項目
 
 ## `dashboard` {#dashboard}
 
-[TiDB Dashboard](/dashboard/dashboard-intro.md)内蔵 PD に関するコンフィグレーション項目です。
+[TiDB Dashboard](/dashboard/dashboard-intro.md)内蔵 PD に関する設定項目です。
 
 ### `disable-custom-prom-addr` {#disable-custom-prom-addr}
 
@@ -548,7 +548,7 @@ pd-server関連のコンフィグレーション項目
 
 ## `replication-mode` {#replication-mode}
 
-全リージョンのレプリケーションモードに関するコンフィグレーション項目です。詳細は[DR自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)ご覧ください。
+全リージョンのレプリケーションモードに関する設定項目です。詳細は[DR自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)ご覧ください。
 
 ## controller {#controller}
 

@@ -134,7 +134,7 @@ LIMIT
     pd-addr = "${ip}:${port}"     # The address of the PD cluster, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
     ```
 
-    TiDB Lightning構成の詳細については、 [TiDB Lightning のコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+    TiDB Lightning構成の詳細については、 [TiDB Lightning の設定](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 2. `tidb-lightning`を実行してインポートを開始します。コマンドラインでプログラムを直接起動すると、SIGHUP シグナルを受信した後にプロセスが予期せず終了する可能性があります。 `nohup`を使用してコマンドラインからプロセスを直接起動することは推奨されません。代わりに、次のスクリプトの内容を編集してください。例:
 
@@ -283,5 +283,5 @@ DMが実行されている間、DM-worker、DM-master、およびdmctlは関連�
 - [データ移行タスクを一時停止する](/dm/dm-pause-task.md)
 - [データ移行タスクを再開する](/dm/dm-resume-task.md)
 - [データ移行タスクを停止する](/dm/dm-stop-task.md)
-- [クラスターのデータソースのエクスポートとインポート、およびタスクコンフィグレーション](/dm/dm-export-import-config.md)
+- [クラスターのデータソースのエクスポートとインポート、およびタスク設定](/dm/dm-export-import-config.md)
 - [失敗したDDL文を処理する](/dm/handle-failed-ddl-statements.md)

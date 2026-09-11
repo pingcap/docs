@@ -3,7 +3,7 @@ title: Configuration Options
 summary: TiDB の設定オプションについて学習します。
 ---
 
-# コンフィグレーションオプション {#configuration-options}
+# 設定オプション {#configuration-options}
 
 TiDBクラスタを起動する際には、コマンドラインオプションまたは環境変数を使用して設定できます。このドキュメントでは、TiDBのコマンドオプションについて説明します。デフォルトのTiDBポートは、クライアントリクエスト用に`4000` 、ステータスレポート用に`10080`です。
 

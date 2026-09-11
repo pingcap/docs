@@ -3,7 +3,7 @@ title: TiDB Environment and System Configuration Check
 summary: TiDB をデプロイする前に環境チェック操作について学習します。
 ---
 
-# TiDB環境とシステムコンフィグレーションのチェック {#tidb-environment-and-system-configuration-check}
+# TiDB環境とシステム設定のチェック {#tidb-environment-and-system-configuration-check}
 
 このドキュメントでは、TiDB をデプロイする前に行う環境チェック手順について説明します。以下の手順は優先度順に説明されています。
 

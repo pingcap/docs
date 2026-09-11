@@ -39,7 +39,7 @@ skip-ca = true
 
 ### プロキシ {#proxy}
 
-SQL ポートのコンフィグレーション。
+SQL ポートの設定。
 
 #### `addr` {#addr}
 

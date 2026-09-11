@@ -69,7 +69,7 @@ MySQL 8.xクライアントには、このパラメータに加えて2つのSSL�
 
 MySQL 5.7および MariaDB クライアント以前のバージョンでは、 `--ssl-verify-server-cert`を使用してサーバー証明書の検証を有効にできます。
 
-詳細については、「MySQL の[暗号化接続のためのクライアント側コンフィグレーション](https://dev.mysql.com/doc/refman/8.0/en/using-encrypted-connections.html#using-encrypted-connections-client-side-configuration)を参照してください。
+詳細については、「MySQL の[暗号化接続のためのクライアント側設定](https://dev.mysql.com/doc/refman/8.0/en/using-encrypted-connections.html#using-encrypted-connections-client-side-configuration)を参照してください。
 
 ## 認証を有効にする {#enable-authentication}
 

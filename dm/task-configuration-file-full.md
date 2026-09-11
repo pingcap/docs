@@ -239,7 +239,7 @@ mysql-instances:
     syncer-thread: 16                               # The number of threads that the sync processing unit uses for replicating incremental data. `syncer-thread` corresponds to the `worker-count` configuration item of the syncers configuration. `syncer-thread` has overriding priority when the two items are both configured. When multiple instances are migrating data to TiDB at the same time, reduce the value according to the load.
 ```
 
-## コンフィグレーション順序 {#configuration-order}
+## 設定順序 {#configuration-order}
 
 サンプル設定ファイルから、設定ファイルが`Global configuration`と`Instance configuration`の 2つの部分から構成されていることがわかります。ここで、 `Global configuration`には`Basic configuration`と`Feature configuration set`が含まれています。設定順序は次のとおりです。
 
@@ -276,15 +276,15 @@ mysql-instances:
 
 #### `mydumpers` {#mydumpers}
 
-- ダンプ処理ユニットのコンフィグレーション引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `mydumper-thread`のみを使用して`thread`を設定することもできます。
+- ダンプ処理ユニットの設定引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `mydumper-thread`のみを使用して`thread`を設定することもできます。
 
 #### `loaders` {#loaders}
 
-- 負荷処理ユニットのコンフィグレーション引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `loader-thread`のみを使用して`pool-size`を設定することもできます。
+- 負荷処理ユニットの設定引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `loader-thread`のみを使用して`pool-size`を設定することもできます。
 
 #### `syncers` {#syncers}
 
-- 同期処理ユニットのコンフィグレーション引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `syncer-thread`のみを使用して`worker-count`を設定することもできます。
+- 同期処理ユニットの設定引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `syncer-thread`のみを使用して`worker-count`を設定することもできます。
 
 ## インスタンス構成 {#instance-configuration}
 

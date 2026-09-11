@@ -12,7 +12,7 @@ summary: データを移行するときにbinlogイベントをフィルター�
 - [小さなデータセットの MySQL シャードを TiDB に移行してマージする](/migrate-small-mysql-shards-to-tidb.md)
 - [大規模データセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
 
-## コンフィグレーション {#configuration}
+## 設定 {#configuration}
 
 binlogイベントフィルターを使用するには、以下に示すように、DM のタスク設定ファイルに`filter`を追加します。
 

@@ -131,7 +131,7 @@
     - [コプロセッサーキャッシュ](/coprocessor-cache.md)
     - ガベージコレクション（GC）
       - [概要](/garbage-collection-overview.md)
-      - [コンフィグレーション](/garbage-collection-configuration.md)
+      - [設定](/garbage-collection-configuration.md)
     - [TiFlashのパフォーマンスをチューニング](/tiflash/tune-tiflash-performance.md)
   - リソース割り当ての最適化
     - [リソース割り当ての概要](/tidb-cloud/optimize-resource-allocation.md)

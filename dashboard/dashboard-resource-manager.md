@@ -23,7 +23,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
 リソースマネージャー ページには、次の3つのセクションがあります。
 
-- コンフィグレーション: このセクションには、TiDBの`RESOURCE_GROUPS`テーブルから取得したデータが表示されます。すべてのリソースグループに関する情報が含まれています。詳細については、 [`RESOURCE_GROUPS`](/information-schema/information-schema-resource-groups.md)を参照してください。
+- 設定: このセクションには、TiDBの`RESOURCE_GROUPS`テーブルから取得したデータが表示されます。すべてのリソースグループに関する情報が含まれています。詳細については、 [`RESOURCE_GROUPS`](/information-schema/information-schema-resource-groups.md)を参照してください。
 
 - 容量の見積もり：リソース計画を立てる前に、クラスター全体の容量を把握する必要があります。以下のいずれかの方法を使用できます。
 

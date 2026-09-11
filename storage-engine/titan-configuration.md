@@ -3,7 +3,7 @@ title: Titan Configuration
 summary: Titan の設定方法を学びます。
 ---
 
-# Titanのコンフィグレーション {#titan-configuration}
+# Titanの設定 {#titan-configuration}
 
 このドキュメントでは、対応する設定項目、データ変換メカニズム、関連パラメータ、およびレベルマージ機能を使用して[Titan](/storage-engine/titan-overview.md)有効または無効にする方法を紹介します。
 

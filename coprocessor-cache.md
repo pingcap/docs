@@ -7,7 +7,7 @@ summary: コプロセッサーキャッシュの機能について学習しま�
 
 v4.0 以降、TiDB インスタンスは TiKV (コプロセッサーキャッシュ機能) にプッシュダウンされる計算結果のキャッシュをサポートしており、これにより一部のシナリオで計算プロセスを高速化できます。
 
-## コンフィグレーション {#configuration}
+## 設定 {#configuration}
 
 <CustomContent platform="tidb">
 

@@ -274,7 +274,7 @@ TiDB 設定ファイルは、コマンドラインパラメーターよりも多
 
 ## log {#log}
 
-ログに関連するコンフィグレーション項目。
+ログに関連する設定項目。
 
 ### `level` {#level}
 
@@ -353,7 +353,7 @@ TiDB 設定ファイルは、コマンドラインパラメーターよりも多
 
 ### log.file {#logfile}
 
-ログファイルに関連するコンフィグレーション項目。
+ログファイルに関連する設定項目。
 
 #### `filename` {#filename}
 
@@ -389,7 +389,7 @@ TiDB 設定ファイルは、コマンドラインパラメーターよりも多
 
 ## security {#security}
 
-セキュリティに関連するコンフィグレーション項目。
+セキュリティに関連する設定項目。
 
 ### `enable-sem` {#enable-sem}
 
@@ -489,7 +489,7 @@ TiDB 設定ファイルは、コマンドラインパラメーターよりも多
 
 ## performance {#performance}
 
-パフォーマンスに関連するコンフィグレーション項目。
+パフォーマンスに関連する設定項目。
 
 ### `max-procs` {#max-procs}
 
@@ -646,7 +646,7 @@ TiDB 設定ファイルは、コマンドラインパラメーターよりも多
 
 ## opentracing {#opentracing}
 
-OpenTracingに関連するコンフィグレーション項目。
+OpenTracingに関連する設定項目。
 
 ### `enable` {#enable}
 
@@ -660,7 +660,7 @@ OpenTracingに関連するコンフィグレーション項目。
 
 ### opentracing.sampler {#opentracingsampler}
 
-opentracing.sampler に関連するコンフィグレーション項目。
+opentracing.sampler に関連する設定項目。
 
 #### `type` {#type}
 
@@ -694,7 +694,7 @@ opentracing.sampler に関連するコンフィグレーション項目。
 
 ### opentracing.reporter {#opentracingreporter}
 
-opentracing.reporter に関連するコンフィグレーション項目。
+opentracing.reporter に関連する設定項目。
 
 #### `queue-size` {#queue-size}
 
@@ -825,7 +825,7 @@ opentracing.reporter に関連するコンフィグレーション項目。
 
 ## txn-local-latches {#txn-local-latches}
 
-トランザクションラッチに関連するコンフィグレーション項目。これらの設定項目は将来的に非推奨となる可能性があります。使用は推奨されません。
+トランザクションラッチに関連する設定項目。これらの設定項目は将来的に非推奨となる可能性があります。使用は推奨されません。
 
 ### `enabled` {#enabled}
 
@@ -839,7 +839,7 @@ opentracing.reporter に関連するコンフィグレーション項目。
 
 ## status {#status}
 
-TiDBサービスの状態に関するコンフィグレーション。
+TiDBサービスの状態に関する設定。
 
 ### `report-status` {#report-status}
 
@@ -893,7 +893,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 
 ## isolation-read {#isolation-read}
 
-読み取り分離に関連するコンフィグレーション項目。
+読み取り分離に関連する設定項目。
 
 ### `engines` {#engines}
 
@@ -1041,7 +1041,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 
 ## proxy-protocol {#proxy-protocol}
 
-PROXYプロトコルに関連するコンフィグレーション項目。
+PROXYプロトコルに関連する設定項目。
 
 ### `networks` {#networks}
 

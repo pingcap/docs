@@ -38,7 +38,7 @@ TiProxy のテンプレートの詳細については、 [TiProxyトポロジの
 ### 主なパラメータ {#key-parameters}
 
 - `tiproxy_servers`のインスタンスレベル`"-host"`構成では、ドメイン名ではなく IP のみがサポートされます。
-- TiProxyパラメータの詳細な説明については、 [TiProxy のコンフィグレーション](/tiproxy/tiproxy-configuration.md)を参照してください。
+- TiProxyパラメータの詳細な説明については、 [TiProxy の設定](/tiproxy/tiproxy-configuration.md)を参照してください。
 
 > **Note:**
 >
