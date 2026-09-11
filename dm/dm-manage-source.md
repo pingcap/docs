@@ -63,7 +63,7 @@ Global Flags:
 
 ### Usage example
 
-Use the following `operate-source` command to create a source configuration file:
+Use the following `operate-source` command to create a data source:
 
 {{< copyable "" >}}
 
