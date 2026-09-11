@@ -196,9 +196,9 @@ TiUPを使用して TiDB クラスターをデプロイすると、TiDB と同�
 - Event size percentile: TiCDCがTiKVから1秒以内に受信するイベントサイズ（P95、P99、P999）
 - Eventfeed error/m: TiCDCノードのイベントフィードRPCリクエストによって1分あたりに報告されたエラーの数
 - KV client receive events/s: TiCDCノードのKVクライアントモジュールがTiKVから1秒あたりに受信するイベント数
-- Puller receive events/s: TiCDCノードのプラーモジュールがKVクライアントから1秒あたりに受信するイベント数
-- Puller output events/s: TiCDCノードのプラーモジュールがソーターモジュールに送信するイベント数/秒
-- Sink flush rows/s: TiCDCノードが1秒あたりにダウンストリームに書き込むイベント数
+- Puller receive events/s: TiCDCノードのPullerモジュールがKVクライアントから1秒あたりに受信するイベント数
+- Puller output events/s: TiCDCノードのPullerモジュールがソーターモジュールに送信するイベント数/秒
+- Sink flush rows/s: TiCDCノードが1秒あたりにダウンストリームに書き込む行数
 - Puller buffer size: TiCDCノードがプラーモジュールにキャッシュするイベントの数
 - Entry sorter buffer size: TiCDCノードがソーターモジュールにキャッシュするイベントの数
 - Processor/Mounter buffer size: TiCDCノードがプロセッサモジュールとマウントモジュールにキャッシュするイベントの数
@@ -209,7 +209,7 @@ TiUPを使用して TiDB クラスターをデプロイすると、TiDB と同�
 - Entry sorter merge duration percentile: TiCDCがソートされたイベントを1秒以内にマージするのにかかる時間(P95、P99、P999)
 - Mounter unmarshal duration: TiCDCノードがイベントをアンマーシャリングするのにかかった時間のヒストグラム
 - Mounter unmarshal duration percentile: TiCDC アンマーシャリング イベントが 1秒間に要した時間 (P95、P99、および P999)
-- KV client dispatch events/s: KVクライアントモジュールがTiCDCノード間でディスパッチするイベント数
+- KV client dispatch events/s: KVクライアントモジュールがTiCDCノード間で1秒あたりにディスパッチするイベント数
 - KV client batch resolved size: TiKVがTiCDCに送信する解決済みタイムスタンプメッセージのバッチサイズ
 
 ### TiKV {#tikv}
