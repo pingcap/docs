@@ -108,7 +108,7 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
 
 ### Connection Idle Duration {#connection-idle-duration}
 
-接続アイドル期間は、接続がアイドル状態にある期間を示します。
+Connection Idle Duration は、接続がアイドル状態にある期間を示します。
 
 - avg-in-txn: トランザクション内の接続の平均アイドル時間
 - avg-not-in-txn: 接続がトランザクション内にない場合の平均接続アイドル期間
@@ -126,7 +126,7 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
 
 - Parse Duration: SQL文の解析にかかった時間
 - Compile Duration: 解析されたSQL ASTを実行計画にコンパイルするのにかかる時間
-- Execution Duration: SQL文の実行計画の実行に要した時間
+- Execute Duration: SQL文の実行計画の実行に要した時間
 
 これら3つのメトリックにはすべて、すべての TiDB インスタンスの平均期間と 99 パーセンタイル期間が含まれます。
 
