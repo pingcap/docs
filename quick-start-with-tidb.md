@@ -338,7 +338,7 @@ TiDBクラスタの最小トポロジーは、以下のインスタンスで構�
 
 6. クラスターを作成して起動します。
 
-    次のテンプレートに従って[トポロジー構成ファイル](/tiup/tiup-cluster-topology-reference.md)を作成および編集し、 `topo.yaml`という名前を付けます。
+    次のテンプレートに従って[トポロジー設定ファイル](/tiup/tiup-cluster-topology-reference.md)を作成および編集し、 `topo.yaml`という名前を付けます。
 
     ```yaml
     # # Global variables are applied to all deployments and used as the default value of

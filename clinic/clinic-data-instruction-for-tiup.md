@@ -33,7 +33,7 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 | エラーログ          | `tidb_stderr.log`     | `--include=log`           |
 | スローログ          | `tidb_slow_query.log` | `--include=log`           |
 | 監査ログ           | `tidb-audit.log.json` | `--include=log`           |
-| コンフィグレーションファイル | `tidb.toml`           | `--include=config`        |
+| 設定ファイル | `tidb.toml`           | `--include=config`        |
 | リアルタイム構成       | `config.json`         | `--include=config`        |
 
 ### TiKV診断データ {#tikv-diagnostic-data}
@@ -42,7 +42,7 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 | :------------- | :---------------- | :------------------------ |
 | ログ             | `tikv.log`        | `--include=log`           |
 | エラーログ          | `tikv_stderr.log` | `--include=log`           |
-| コンフィグレーションファイル | `tikv.toml`       | `--include=config`        |
+| 設定ファイル | `tikv.toml`       | `--include=config`        |
 | リアルタイム構成       | `config.json`     | `--include=config`        |
 
 ### PD診断データ {#pd-diagnostic-data}
@@ -51,7 +51,7 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 | :--------------------------------------------------------------------------------------------- | :-------------------- | :------------------------ |
 | ログ                                                                                             | `pd.log`              | `--include=log`           |
 | エラーログ                                                                                          | `pd_stderr.log`       | `--include=log`           |
-| コンフィグレーションファイル                                                                                 | `pd.toml`             | `--include=config`        |
+| 設定ファイル                                                                                 | `pd.toml`             | `--include=config`        |
 | リアルタイム構成                                                                                       | `config.json`         | `--include=config`        |
 | コマンド`tiup ctl:v<CLUSTER_VERSION> pd -u http://${pd IP}:${PORT} store`の出力                       | `store.json`          | `--include=config`        |
 | コマンド`tiup ctl:v<CLUSTER_VERSION> pd -u http://${pd IP}:${PORT} config placement-rules show`の出力 | `placement-rule.json` | `--include=config`        |
@@ -62,7 +62,7 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 | :------------- | :---------------------------------------------------------------- | :------------------------ |
 | ログ             | `tiflash.log`                                                     | `--include=log`           |
 | エラーログ          | `tiflash_stderr.log`                                              | `--include=log`           |
-| コンフィグレーションファイル | `tiflash-learner.toml` `tiflash-preprocessed.toml` `tiflash.toml` | `--include=config`        |
+| 設定ファイル | `tiflash-learner.toml` `tiflash-preprocessed.toml` `tiflash.toml` | `--include=config`        |
 | リアルタイム構成       | `config.json`                                                     | `--include=config`        |
 
 ### TiCDC診断データ {#ticdc-diagnostic-data}
@@ -71,7 +71,7 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 | :------------- | :------------------------------------------------------------------------ | :------------------------------------------------ |
 | ログ             | `ticdc.log`                                                               | `--include=log`                                   |
 | エラーログ          | `ticdc_stderr.log`                                                        | `--include=log`                                   |
-| コンフィグレーションファイル | `ticdc.toml`                                                              | `--include=config`                                |
+| 設定ファイル | `ticdc.toml`                                                              | `--include=config`                                |
 | デバッグデータ        | `info.txt` `status.txt` `changefeeds.txt` `captures.txt` `processors.txt` | `--include=debug` (Diag はデフォルトではこのデータタイプを収集しません) |
 
 ### Prometheus監視データ {#prometheus-monitoring-data}
@@ -115,7 +115,7 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 | :------------- | :--------------------- | :------------------------ |
 | ログ             | `dm-master.log`        | `--include=log`           |
 | エラーログ          | `dm-master_stderr.log` | `--include=log`           |
-| コンフィグレーションファイル | `dm-master.toml`       | `--include=config`        |
+| 設定ファイル | `dm-master.toml`       | `--include=config`        |
 
 ### dm-worker診断データ {#dm-worker-diagnostic-data}
 
@@ -123,7 +123,7 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 | :------------- | :--------------------- | :------------------------ |
 | ログ             | `dm-worker.log`        | `--include=log`           |
 | エラーログ          | `dm-worker_stderr.log` | `--include=log`           |
-| コンフィグレーションファイル | `dm-work.toml`         | `--include=config`        |
+| 設定ファイル | `dm-work.toml`         | `--include=config`        |
 
 ### Prometheus監視データ {#prometheus-monitoring-data}
 

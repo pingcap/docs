@@ -29,7 +29,7 @@ summary: TiDB クラスターのハイブリッド展開トポロジについて
 - [ハイブリッドデプロイのためのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-multi-instance.yaml)
 - [ハイブリッドデプロイのための複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-multi-instance.yaml)
 
-上記の TiDB クラスター トポロジファイルの設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジファイルの設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジ設定ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 ### 主なパラメータ {#key-parameters}
 
@@ -99,7 +99,7 @@ summary: TiDB クラスターのハイブリッド展開トポロジについて
 
 > **Note:**
 >
-> - 構成ファイル テンプレートを編集するときは、必要なパラメータ、IP、ポート、およびディレクトリを変更します。
+> - 設定ファイル テンプレートを編集するときは、必要なパラメータ、IP、ポート、およびディレクトリを変更します。
 > - 各コンポーネントでは、グローバルポートの`<deploy_dir>/<components_name>-<port>`がデフォルトの`deploy_dir`として使用されます。例えば、TiDBにポート`4001`を指定した場合、そのポートの`deploy_dir`はデフォルトで`/tidb-deploy/tidb-4001`になります。したがって、マルチインスタンスのシナリオでは、デフォルト以外のポートを指定する場合でも、ディレクトリを再度指定する必要はありません。
 > - 設定ファイルに`tidb`ユーザーを手動で作成する必要はありません。TiUPTiUPコンポーネントは、ターゲットマシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、コントロールマシンと同じユーザーを維持することもできます。
 > - デプロイメントディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。

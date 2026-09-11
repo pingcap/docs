@@ -24,7 +24,7 @@ TiDB Ansible バージョン: 3.0.4
     - デフォルト値の`txn-local-latches.enable`を`false`に更新して、TiDB のローカルトランザクションの競合をチェックするデフォルトの動作を無効にします。
     - TiDBにグローバルスコープのシステム変数を`tidb_txn_mode`追加し、悲観的ロックの使用を許可します。ただし、TiDBはデフォルトで依然として楽観的ロックを採用していることに注意してください。
     - TiDB スロークエリログの`Index_ids`フィールドを`Index_names`に置き換えて、スロークエリログの使いやすさを向上させます。
-    - TiDB構成ファイルに`split-region-max-num`パラメータを追加して、 `SPLIT TABLE`構文で許可されるリージョンの最大数を変更します。
+    - TiDB設定ファイルに`split-region-max-num`パラメータを追加して、 `SPLIT TABLE`構文で許可されるリージョンの最大数を変更します。
     - SQL実行がメモリ制限を超えたときにリンクを切断する代わりに`Out Of Memory Quota`エラーを返します
     - 誤操作を避けるため、TiDBの列の`AUTO_INCREMENT`の属性の削除を禁止します。この属性を削除するには、 `tidb_allow_remove_auto_inc`のシステム変数を変更します。
 - 修正された問題
@@ -126,4 +126,4 @@ TiDB Ansible バージョン: 3.0.4
 - パスワードの有効期限が切れた場合などに発生する長い待機時間に対処するために、rawモジュールをシェルモジュールに置き換えます[#949](https://github.com/pingcap/tidb-ansible/pull/949)
 - TiDB設定項目`txn_local_latches`のデフォルト値を`false`に更新します
 - Grafanaダッシュボードの監視メトリックとアラートルールを最適化する[#962](https://github.com/pingcap/tidb-ansible/pull/962) [#963](https://github.com/pingcap/tidb-ansible/pull/963) [#969](https://github.com/pingcap/tidb-ansible/pull/963)
-- デプロイおよびアップグレードの前に構成ファイルを確認する[#934](https://github.com/pingcap/tidb-ansible/pull/934) [#972](https://github.com/pingcap/tidb-ansible/pull/972)
+- デプロイおよびアップグレードの前に設定ファイルを確認する[#934](https://github.com/pingcap/tidb-ansible/pull/934) [#972](https://github.com/pingcap/tidb-ansible/pull/972)

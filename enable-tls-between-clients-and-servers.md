@@ -42,7 +42,7 @@ MySQLと同様に、TiDBは同じTCPポート上でTLS接続と非TLS接続の�
 
 `auto-tls`は安全な接続を可能にしますが、クライアント証明書の検証は提供しません。証明書の検証、および証明書の生成方法を制御するには、以下の`ssl-cert` 、 `ssl-key` 、および`ssl-ca`変数の設定に関するアドバイスを参照してください。
 
-TiDBサーバーで独自の証明書を使用して安全な接続を有効にするには、TiDBサーバーを起動する際に、構成ファイルで`ssl-cert`と`ssl-key`両方のパラメータを指定する必要があります。サーバー認証のために`ssl-ca`パラメータを指定することもできます（[認証を有効にする](#enable-authentication)）。
+TiDBサーバーで独自の証明書を使用して安全な接続を有効にするには、TiDBサーバーを起動する際に、設定ファイルで`ssl-cert`と`ssl-key`両方のパラメータを指定する必要があります。サーバー認証のために`ssl-ca`パラメータを指定することもできます（[認証を有効にする](#enable-authentication)）。
 
 パラメータで指定されるファイルはすべてPEM（Privacy Enhanced Mail）形式です。現在、TiDBはパスワードで保護された秘密鍵のインポートをサポートしていないため、パスワードなしの秘密鍵ファイルを提供する必要があります。証明書または秘密鍵が無効な場合、TiDBサーバーは通常どおり起動しますが、クライアントはTLS接続を介してTiDBサーバーに接続できません。
 
@@ -69,7 +69,7 @@ MySQL 8.xクライアントには、このパラメータに加えて2つのSSL�
 
 MySQL 5.7および MariaDB クライアント以前のバージョンでは、 `--ssl-verify-server-cert`を使用してサーバー証明書の検証を有効にできます。
 
-詳細については、「MySQL の[暗号化接続のためのクライアント側コンフィグレーション](https://dev.mysql.com/doc/refman/8.0/en/using-encrypted-connections.html#using-encrypted-connections-client-side-configuration)を参照してください。
+詳細については、「MySQL の[暗号化接続のためのクライアント側設定](https://dev.mysql.com/doc/refman/8.0/en/using-encrypted-connections.html#using-encrypted-connections-client-side-configuration)を参照してください。
 
 ## 認証を有効にする {#enable-authentication}
 

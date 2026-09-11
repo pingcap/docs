@@ -3,7 +3,7 @@ title: DM Advanced Task Configuration File
 summary: このドキュメントでは、データ移行（DM）の高度なタスク設定ファイルについて、グローバル設定とインスタンス設定の両面から解説します。グローバル設定には基本設定と機能設定が含まれ、インスタンス設定では、上流側の1つまたは複数のMySQLインスタンスから下流側の同じインスタンスへのデータ移行のためのサブタスクを定義します。
 ---
 
-# DM 高度タスクコンフィグレーションファイル {#dm-advanced-task-configuration-file}
+# DM 高度タスク設定ファイル {#dm-advanced-task-configuration-file}
 
 このドキュメントでは[インスタンス構成](#instance-configuration)[グローバル設定](#global-configuration)とインスタンス構成を含む、データ移行 (DM) の高度なタスク設定ファイルを紹介します。
 
@@ -13,7 +13,7 @@ summary: このドキュメントでは、データ移行（DM）の高度なタ
 
 ## タスク設定ファイルテンプレート（上級者向け） {#task-configuration-file-template-advanced}
 
-以下は、**高度な**データ移行タスクを実行できるタスク構成ファイルのテンプレートです。
+以下は、**高度な**データ移行タスクを実行できるタスク設定ファイルのテンプレートです。
 
 ```yaml
 ---
@@ -239,7 +239,7 @@ mysql-instances:
     syncer-thread: 16                               # The number of threads that the sync processing unit uses for replicating incremental data. `syncer-thread` corresponds to the `worker-count` configuration item of the syncers configuration. `syncer-thread` has overriding priority when the two items are both configured. When multiple instances are migrating data to TiDB at the same time, reduce the value according to the load.
 ```
 
-## コンフィグレーション順序 {#configuration-order}
+## 設定順序 {#configuration-order}
 
 サンプル設定ファイルから、設定ファイルが`Global configuration`と`Instance configuration`の 2つの部分から構成されていることがわかります。ここで、 `Global configuration`には`Basic configuration`と`Feature configuration set`が含まれています。設定順序は次のとおりです。
 
@@ -276,15 +276,15 @@ mysql-instances:
 
 #### `mydumpers` {#mydumpers}
 
-- ダンプ処理ユニットのコンフィグレーション引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `mydumper-thread`のみを使用して`thread`を設定することもできます。
+- ダンプ処理ユニットの設定引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `mydumper-thread`のみを使用して`thread`を設定することもできます。
 
 #### `loaders` {#loaders}
 
-- 負荷処理ユニットのコンフィグレーション引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `loader-thread`のみを使用して`pool-size`を設定することもできます。
+- 負荷処理ユニットの設定引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `loader-thread`のみを使用して`pool-size`を設定することもできます。
 
 #### `syncers` {#syncers}
 
-- 同期処理ユニットのコンフィグレーション引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `syncer-thread`のみを使用して`worker-count`を設定することもできます。
+- 同期処理ユニットの設定引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `syncer-thread`のみを使用して`worker-count`を設定することもできます。
 
 ## インスタンス構成 {#instance-configuration}
 

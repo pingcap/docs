@@ -66,11 +66,11 @@ source /home/tidb/.bash_profile
 
 ミラーを別のディレクトリに切り替えるには、 `tiup mirror set <mirror-dir>`コマンドを手動で実行します。公式ミラーに戻すには、 `tiup mirror set https://tiup-mirrors.pingcap.com`を実行します。
 
-## ステップ3: 初期化構成ファイルを編集する {#step-3-edit-the-initialization-configuration-file}
+## ステップ3: 初期化設定ファイルを編集する {#step-3-edit-the-initialization-configuration-file}
 
-さまざまなクラスター トポロジに応じて、クラスター初期化構成ファイルを編集する必要があります。
+さまざまなクラスター トポロジに応じて、クラスター初期化設定ファイルを編集する必要があります。
 
-完全な構成テンプレートについては、「 [TiUP設定パラメータ テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml) . 構成ファイルを作成する」 `topology.yaml`を参照してください。その他の複合シナリオでは、テンプレートに従って必要に応じて構成ファイルを編集します。
+完全な構成テンプレートについては、「 [TiUP設定パラメータ テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml) . 設定ファイルを作成する」 `topology.yaml`を参照してください。その他の複合シナリオでは、テンプレートに従って必要に応じて設定ファイルを編集します。
 
 3 つの DM-master、3つの DM-worker、および 1つの監視コンポーネントインスタンスをデプロイする構成は次のとおりです。
 
@@ -109,7 +109,7 @@ alertmanager_servers:
 >
 > - DM クラスターの高可用性を確保するには、3つの DM-masterノードをデプロイすることをお勧めします。また、デプロイする DM-workerノードの数は、移行するアップストリーム MySQL/MariaDB インスタンスの数より多くする必要があります (たとえば、DM-workerノードの数は、アップストリーム インスタンスの数より 2つ多くなります)。
 >
-> - グローバルに有効にする必要があるパラメータについては、構成ファイルの`server_configs`セクションで対応するコンポーネントのこれらのパラメータを構成します。
+> - グローバルに有効にする必要があるパラメータについては、設定ファイルの`server_configs`セクションで対応するコンポーネントのこれらのパラメータを構成します。
 >
 > - 特定のノードで有効にするパラメータについては、このノードの`config`でこれらのパラメータを設定します。
 >
@@ -142,7 +142,7 @@ tiup dm deploy dm-test ${version} ./topology.yaml --user root [-p] [-i /home/roo
 
 - デプロイされた DM クラスターの名前は`dm-test`です。
 - DMクラスタのバージョンは`${version}`です。TiUPでサポートされている最新バージョンを確認するには、 `tiup list dm-master`を実行します。
-- 初期化構成ファイルは`topology.yaml`です。
+- 初期化設定ファイルは`topology.yaml`です。
 - `--user root` : `root`キーを使用してターゲットマシンにログインし、クラスターのデプロイを完了するか、 `ssh`および`sudo`権限を持つ他のユーザーを使用してデプロイを完了することができます。
 - `[-i]`と`[-p]` : オプション。ターゲットマシンへのログインをパスワードなしで設定している場合、これらのパラメータは不要です。そうでない場合は、2つのパラメータのいずれかを選択してください。`[-i]`は、ターゲットマシンにアクセスできる`root`ユーザー（または`--user`で指定された他のユーザー）の秘密鍵です。`[-p]`は、ユーザーパスワードを対話的に入力するために使用されます。
 - TiUP DMは組み込みのSSHクライアントを使用します。制御マシンシステムにネイティブのSSHクライアントを使用する場合は、 [システムのネイティブSSHクライアントを使用してクラスターに接続する](/dm/maintain-dm-using-tiup.md#use-the-systems-native-ssh-client-to-connect-to-cluster)に従って設定を編集してください。

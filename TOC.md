@@ -16,7 +16,7 @@
   - [サンプルデータベースのインポート](/import-example-data.md)
 - デプロイ
   - [ソフトウェアおよびハードウェアの要件](/hardware-and-software-requirements.md)
-  - [環境コンフィグレーションチェックリスト](/check-before-deployment.md)
+  - [環境設定チェックリスト](/check-before-deployment.md)
   - プランクラスタトポロジ
     - [最小トポロジー](/minimal-deployment-topology.md)
     - [TiFlashトポロジー](/tiflash-deployment-topology.md)
@@ -161,7 +161,7 @@
   - [毎日のチェックリスト](/daily-check.md)
   - [TiFlashの管理](/tiflash/maintain-tiflash.md)
   - [TiUPを使用してTiDBを管理](/maintain-tidb-using-tiup.md)
-  - [コンフィグレーションを動的に変更する](/dynamic-config.md)
+  - [設定を動的に変更する](/dynamic-config.md)
   - [オンラインの安全でない復旧](/online-unsafe-recovery.md)
   - [プライマリクラスタとセカンダリクラスタ間でデータを複製する](/replicate-between-primary-and-secondary-clusters.md)
 - 監視と警告
@@ -196,7 +196,7 @@
     - インスタンスプロファイリング
       - [手動プロファイリング](/dashboard/dashboard-profiling.md)
       - [継続的なプロファイリング](/dashboard/continuous-profiling.md)
-    - セッション管理とコンフィグレーション
+    - セッション管理と設定
       - [セッションを共有](/dashboard/dashboard-session-share.md)
       - [SSOの設定](/dashboard/dashboard-session-sso.md)
     - [FAQ](/dashboard/dashboard-faq.md)
@@ -240,7 +240,7 @@
       - [TiFlashの性能分析方法](/tiflash-performance-tuning-methods.md)
       - [TiCDCの性能分析方法](/ticdc-performance-tuning-methods.md)
       - [レイテンシーの内訳](/latency-breakdown.md)
-  - コンフィグレーション調整
+  - 設定調整
     - [オペレーティングシステムのパフォーマンスを調整します](/tune-operating-system.md)
     - [TiDBメモリのチューニング](/configure-memory-usage.md)
     - [TiKVスレッドを調整](/tune-tikv-thread-performance.md)
@@ -252,7 +252,7 @@
     - [コプロセッサーキャッシュ](/coprocessor-cache.md)
     - ガベージコレクション（GC）
       - [概要](/garbage-collection-overview.md)
-      - [コンフィグレーション](/garbage-collection-configuration.md)
+      - [設定](/garbage-collection-configuration.md)
   - SQLチューニング
     - [概要](/sql-tuning-overview.md)
     - クエリ実行計画の理解
@@ -316,10 +316,10 @@
   - PDマイクロサービスを使用する
     - [PDマイクロサービスの概要](/pd-microservices.md)
     - [TiUPを使用してPDマイクロサービスノードをスケーリングする](/scale-microservices-using-tiup.md)
-    - [TSOコンフィグレーションファイル](/tso-configuration-file.md)
-    - [TSOコンフィグレーションフラグ](/command-line-flags-for-tso-configuration.md)
-    - [スケジュールコンフィグレーションファイル](/scheduling-configuration-file.md)
-    - [スケジューリングコンフィグレーションフラグ](/command-line-flags-for-scheduling-configuration.md)
+    - [TSO設定ファイル](/tso-configuration-file.md)
+    - [TSO設定フラグ](/command-line-flags-for-tso-configuration.md)
+    - [スケジュール設定ファイル](/scheduling-configuration-file.md)
+    - [スケジューリング設定フラグ](/command-line-flags-for-scheduling-configuration.md)
 - TiDBツール
   - [概要](/ecosystem-tool-user-guide.md)
   - [ユースケース](/ecosystem-tool-user-case.md)
@@ -487,12 +487,12 @@
         - [DML複製メカニズム](/dm/dm-replication-logic.md)
       - コマンドライン
         - [DM-master＆DM-worker](/dm/dm-command-line-flags.md)
-      - コンフィグレーションファイル
+      - 設定ファイル
         - [概要](/dm/dm-config-overview.md)
         - [上流データベース構成](/dm/dm-source-configuration-file.md)
         - [タスク構成](/dm/task-configuration-file-full.md)
-        - [DM-masterコンフィグレーション](/dm/dm-master-configuration-file.md)
-        - [DM-workerのコンフィグレーション](/dm/dm-worker-configuration-file.md)
+        - [DM-master設定](/dm/dm-master-configuration-file.md)
+        - [DM-workerの設定](/dm/dm-worker-configuration-file.md)
         - [テーブルセレクター](/dm/table-selector.md)
       - [OpenAPI](/dm/dm-open-api.md)
       - [互換性カタログ](/dm/dm-compatibility-catalog.md)
@@ -541,7 +541,7 @@
     - [エラー解決](/tidb-lightning/tidb-lightning-error-resolution.md)
     - [トラブルシューティング](/tidb-lightning/troubleshoot-tidb-lightning.md)
     - 参照
-      - [コンフィグレーションファイル](/tidb-lightning/tidb-lightning-configuration.md)
+      - [設定ファイル](/tidb-lightning/tidb-lightning-configuration.md)
       - [コマンドラインフラグ](/tidb-lightning/tidb-lightning-command-line-full.md)
       - [監視](/tidb-lightning/monitor-tidb-lightning.md)
       - [ウェブインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)
@@ -562,7 +562,7 @@
     - [概要](/tiproxy/tiproxy-overview.md)
     - [負荷分散ポリシー](/tiproxy/tiproxy-load-balance.md)
     - [交通情報リプレイ](/tiproxy/tiproxy-traffic-replay.md)
-    - [コンフィグレーション](/tiproxy/tiproxy-configuration.md)
+    - [設定](/tiproxy/tiproxy-configuration.md)
     - [コマンドラインパラメータ](/tiproxy/tiproxy-command-line-flags.md)
     - [モニタリング指標](/tiproxy/tiproxy-grafana.md)
     - [API](/tiproxy/tiproxy-api.md)
@@ -602,7 +602,7 @@
   - [システム変数](/system-variables.md)
   - [システム変数リファレンス](/system-variable-reference.md)
   - [サーバーステータス変数](/status-variables.md)
-  - コンフィグレーションファイルパラメータ
+  - 設定ファイルパラメータ
     - [tidb-server](/tidb-configuration-file.md)
     - [tikvサーバー](/tikv-configuration-file.md)
     - [tiflash-server](/tiflash/tiflash-configuration.md)

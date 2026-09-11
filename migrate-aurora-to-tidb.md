@@ -109,7 +109,7 @@ nohup tiup tidb-lightning -config tidb-lightning-schema.toml > nohup.out 2>&1 &
 
 2. Amazon Auroraスナップショットをエクスポートします。詳細な手順については、 [DBスナップショットデータをAmazon S3にエクスポートする](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html)を参照してください。binlogの位置を取得したら、5分以内にスナップショットをエクスポートします。そうしないと、記録されたbinlogの位置が古くなり、増分レプリケーション中にデータの競合が発生する可能性があります。
 
-#### 2.2 データファイル用のTiDB Lightning構成ファイルを作成する {#2-2-create-the-tidb-lightning-configuration-file-for-the-data-file}
+#### 2.2 データファイル用のTiDB Lightning設定ファイルを作成する {#2-2-create-the-tidb-lightning-configuration-file-for-the-data-file}
 
 新しい`tidb-lightning-data.toml`設定ファイルを作成し、以下の内容をファイルにコピーして、対応する内容を置き換えます。
 
@@ -253,7 +253,7 @@ mysql-instances:
    #     safe-mode: true  # If this field is set to true, DM changes INSERT of the data source to REPLACE for the target database, and changes UPDATE of the data source to DELETE and REPLACE for the target database. This is to ensure that when the table schema contains a primary key or unique index, DML statements can be imported repeatedly. In the first minute of starting or resuming an incremental replication task, DM automatically enables the safe mode.
 ```
 
-上記の YAML ファイルは、移行タスクに必要な最小構成です。その他の設定項目については、 [DM 高度タスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
+上記の YAML ファイルは、移行タスクに必要な最小構成です。その他の設定項目については、 [DM 高度タスク設定ファイル](/dm/task-configuration-file-full.md)を参照してください。
 
 ### ステップ3. マイグレーションタスクを実行する {#step-3-run-the-migration-task}
 

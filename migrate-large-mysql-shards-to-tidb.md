@@ -255,7 +255,7 @@ tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 
 ### レプリケーションタスクを作成する {#create-a-replication-task}
 
-`task.yaml`という名前のタスク構成ファイルを編集して、各データソースの増分レプリケーションモードとレプリケーション開始点を設定します。
+`task.yaml`という名前のタスク設定ファイルを編集して、各データソースの増分レプリケーションモードとレプリケーション開始点を設定します。
 
 ```yaml
 name: task-test               # The name of the task. Should be globally unique.
@@ -320,7 +320,7 @@ mysql-instances:
 #    safe-mode: true
 ```
 
-その他の構成については、 [DM 高度タスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
+その他の構成については、 [DM 高度タスク設定ファイル](/dm/task-configuration-file-full.md)を参照してください。
 
 データ移行タスクを開始する前に、 `check-task`の`tiup dmctl`サブコマンドを使用して、構成が DM 構成要件を満たしているかどうかを確認することをお勧めします。
 
@@ -376,6 +376,6 @@ tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 - [データ移行タスクを一時停止する](/dm/dm-pause-task.md)
 - [データ移行タスクを再開する](/dm/dm-resume-task.md)
 - [データ移行タスクを停止する](/dm/dm-stop-task.md)
-- [クラスターのデータソースのエクスポートとインポート、およびタスクコンフィグレーション](/dm/dm-export-import-config.md)
+- [クラスターのデータソースのエクスポートとインポート、およびタスク設定](/dm/dm-export-import-config.md)
 - [失敗したDDL文を処理する](/dm/handle-failed-ddl-statements.md)
 - [エラーを処理する](/dm/dm-error-handling.md)

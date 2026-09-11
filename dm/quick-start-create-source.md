@@ -55,7 +55,7 @@ summary: データ移行 (DM) のデータソースを作成する方法を学�
 tiup dmctl --master-addr <master-addr> operate-source create ./source-mysql-01.yaml
 ```
 
-その他の設定パラメータについては[上流データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
+その他の設定パラメータについては[上流データベース設定ファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
 返される結果は次のとおりです。
 

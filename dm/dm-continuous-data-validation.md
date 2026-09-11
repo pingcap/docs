@@ -19,12 +19,12 @@ summary: 継続的なデータ検証の使用方法と継続的なデータ検�
 
 次のいずれかの方法を使用して、継続的なデータ検証を有効にすることができます。
 
-- タスク構成ファイルで有効にします。
+- タスク設定ファイルで有効にします。
 - dmctl を使用して有効にします。
 
 ### 方法1: タスク設定ファイルで有効にする {#method-1-enable-in-the-task-configuration-file}
 
-継続的なデータ検証を有効にするには、タスク構成ファイルに次の設定項目を追加します。
+継続的なデータ検証を有効にするには、タスク設定ファイルに次の設定項目を追加します。
 
 ```yaml
 # Add the following configuration items to the upstream database that needs to be validated:
@@ -48,7 +48,7 @@ validators:
 - `worker-count` : バックグラウンドで実行される検証ワーカーの数。各ワーカーはゴルーチンです。
 - `row-error-delay` : 指定された時間内に行が検証に合格できない場合、エラー行としてマークされます。デフォルト値は30分です。
 
-完全な構成については、 [DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
+完全な構成については、 [DM 高度なタスク設定ファイル](/dm/task-configuration-file-full.md)を参照してください。
 
 ### 方法2: dmctlを使用して有効にする {#method-2-enable-using-dmctl}
 

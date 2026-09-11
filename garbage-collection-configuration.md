@@ -3,7 +3,7 @@ title: Garbage Collection Configuration
 summary: GC 設定パラメータについて学習します。
 ---
 
-# ガベージコレクションのコンフィグレーション {#garbage-collection-configuration}
+# ガベージコレクションの設定 {#garbage-collection-configuration}
 
 次のシステム変数を使用してガベージコレクション(GC) を構成できます。
 
@@ -62,7 +62,7 @@ TiDB v6.1.0では、アクティブなトランザクションがGCセーフポ�
 
 </CustomContent>
 
-次の例は、TiKV 構成ファイルでメカニズムを有効にする方法を示しています。
+次の例は、TiKV 設定ファイルでメカニズムを有効にする方法を示しています。
 
 ```toml
 [gc]

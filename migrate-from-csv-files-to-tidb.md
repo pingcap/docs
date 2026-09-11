@@ -90,7 +90,7 @@ status-port = "${status-port}" # During the import, TiDB Lightning needs to obta
 pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
 ```
 
-設定ファイルの詳細については、 [TiDB Lightning のコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+設定ファイルの詳細については、 [TiDB Lightning の設定](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 ## ステップ4．インポートパフォーマンスの調整（オプション） {#step-4-tune-the-import-performance-optional}
 

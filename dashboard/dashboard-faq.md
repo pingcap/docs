@@ -86,7 +86,7 @@ Web ページに`required component NgMonitoring is not started`が表示され�
 
 ステップ2. TiUPを使用して、コントロールマシンにng_port設定項目を追加します。その後、Prometheusをリロードします。
 
-1. クラスター構成ファイルを編集モードで開きます。
+1. クラスター設定ファイルを編集モードで開きます。
 
     ```shell
     tiup cluster edit-config ${cluster-name}

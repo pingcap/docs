@@ -3,13 +3,13 @@ title: Upstream Database Configuration File of TiDB Data Migration
 summary: アップストリームデータベースの設定ファイルを学ぶ
 ---
 
-# TiDB データ移行の上流データベースコンフィグレーションファイル {#upstream-database-configuration-file-of-tidb-data-migration}
+# TiDB データ移行の上流データベース設定ファイル {#upstream-database-configuration-file-of-tidb-data-migration}
 
-このドキュメントでは、アップストリーム データベースの構成ファイルについて紹介します。これには、構成ファイル テンプレートと、このファイル内の各設定パラメータの説明が含まれます。
+このドキュメントでは、アップストリーム データベースの設定ファイルについて紹介します。これには、設定ファイル テンプレートと、このファイル内の各設定パラメータの説明が含まれます。
 
-## コンフィグレーションファイルテンプレート {#configuration-file-template}
+## 設定ファイルテンプレート {#configuration-file-template}
 
-以下は、アップストリーム データベースの構成ファイル テンプレートです。
+以下は、アップストリーム データベースの設定ファイル テンプレートです。
 
 ```yaml
 source-id: "mysql-replica-01"
@@ -59,9 +59,9 @@ from:
 >
 > DM v2.0.1では、 `enable-gtid`と`enable-relay`を同時に`true`に設定しないでください。そうしないと、増分データが失われる可能性があります。
 
-## コンフィグレーションパラメータ {#configuration-parameters}
+## 設定パラメータ {#configuration-parameters}
 
-このセクションでは、構成ファイル内の各設定パラメータについて説明します。
+このセクションでは、設定ファイル内の各設定パラメータについて説明します。
 
 ### グローバル構成 {#global-configuration}
 
@@ -160,7 +160,7 @@ DMは定期的に現在のタスクステータスとエラーメッセージを
 
 ### Binlogイベントフィルター {#binlog-event-filter}
 
-DM v2.0.2 以降では、ソース構成ファイルでbinlogイベントフィルターを構成できます。
+DM v2.0.2 以降では、ソース設定ファイルでbinlogイベントフィルターを構成できます。
 
 #### `case-sensitive` {#case-sensitive}
 

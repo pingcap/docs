@@ -21,11 +21,11 @@ TiDB DM ツールを v1.0.x から v2.0+ に自動的にアップグレードす
 
 ## ステップ1：v2.0+設定ファイルを準備する {#step-1-prepare-v20-configuration-file}
 
-バージョン2.0以降で準備された構成ファイルには、上流データベースの構成ファイルとデータ移行タスクの構成ファイルが含まれています。
+バージョン2.0以降で準備された設定ファイルには、上流データベースの設定ファイルとデータ移行タスクの設定ファイルが含まれています。
 
-### アップストリームデータベース構成ファイル {#upstream-database-configuration-file}
+### アップストリームデータベース設定ファイル {#upstream-database-configuration-file}
 
-v2.0以降では、[アップストリームデータベース構成ファイル](/dm/dm-source-configuration-file.md)がDM-workerのプロセス構成から分離されているため、 [v1.0.x DM-worker設定](/dm/dm-worker-configuration-file.md)をベースにしたソース構成を取得する必要があります。
+v2.0以降では、[アップストリームデータベース設定ファイル](/dm/dm-source-configuration-file.md)がDM-workerのプロセス構成から分離されているため、 [v1.0.x DM-worker設定](/dm/dm-worker-configuration-file.md)をベースにしたソース構成を取得する必要があります。
 
 > **Note:**
 >
@@ -96,7 +96,7 @@ from:
   password: "VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU="   # Corresponds to the original `from.password`.
 ```
 
-### データ移行タスク構成ファイル {#data-migration-task-configuration-file}
+### データ移行タスク設定ファイル {#data-migration-task-configuration-file}
 
 [データ移行タスク構成ガイド](/dm/dm-task-configuration-guide.md)については、v2.0+ は基本的に v1.0.x と互換性があります。 v1.0.x の設定を直接コピーできます。
 
@@ -133,9 +133,9 @@ from:
         +------------------+-------------------------+------------+
         ```
 
-3. 新しいv2.0以降のデータ移行タスクを開始するには、v1.0.xのデータ移行タスク構成ファイルを更新してください。
+3. 新しいv2.0以降のデータ移行タスクを開始するには、v1.0.xのデータ移行タスク設定ファイルを更新してください。
 
-    - v1.0.x のデータ移行タスク構成ファイルが`task_v1.yaml`の場合、それをコピーして`task_v2.yaml`に名前を変更します。
+    - v1.0.x のデータ移行タスク設定ファイルが`task_v1.yaml`の場合、それをコピーして`task_v2.yaml`に名前を変更します。
     - `task_v2.yaml`に対して以下の変更を行ってください。
         - `name`を`task_v2`などの新しい名前に変更します。
         - `task-mode`を`incremental`に変更します。
@@ -158,7 +158,7 @@ from:
             >
             > ソース構成で`enable-gtid`が有効になっている場合、現在、binlogまたはリレーログファイルを解析して、binlogの位置に対応する GTID セットを取得し、それを`meta`の`binlog-gtid`に設定する必要があります。
 
-4. [`start-task`](/dm/dm-create-task.md)コマンドを使用して、v2.0以降のデータ移行タスク構成ファイルからアップグレードされたデータ移行タスクを開始します。
+4. [`start-task`](/dm/dm-create-task.md)コマンドを使用して、v2.0以降のデータ移行タスク設定ファイルからアップグレードされたデータ移行タスクを開始します。
 
 5. [`query-status`](/dm/dm-query-status.md)コマンドを使用して、データ移行タスクが正常に実行されているかどうかを確認してください。
 

@@ -7,7 +7,7 @@ summary: DM リレーログのディレクトリ構造、初期移行ルール�
 
 データ移行 (DM) リレーログは、データベースの変更を記述するイベントを含む番号付きファイルの複数のセットと、使用されたすべてのリレーログファイルの名前を含むインデックスファイルで構成されます。
 
-リレーログを有効にすると、DM-workerはアップストリームのbinlogをローカル設定ディレクトリに自動的に移行します（DMがTiUPを使用してデプロイされている場合、デフォルトの移行ディレクトリは`<deploy_dir>/<relay_log>`です）。デフォルト値は`<relay_log>`で、 `relay-dir`に設定されていますが、 [上流データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)で変更できます。v5.4.0以降では、 [DM-worker構成ファイル](/dm/dm-worker-configuration-file.md)の`relay-dir`でローカル設定ディレクトリを設定できます。これは、アップストリームデータベースの設定ファイルよりも優先されます。
+リレーログを有効にすると、DM-workerはアップストリームのbinlogをローカル設定ディレクトリに自動的に移行します（DMがTiUPを使用してデプロイされている場合、デフォルトの移行ディレクトリは`<deploy_dir>/<relay_log>`です）。デフォルト値は`<relay_log>`で、 `relay-dir`に設定されていますが、 [上流データベース設定ファイル](/dm/dm-source-configuration-file.md)で変更できます。v5.4.0以降では、 [DM-worker設定ファイル](/dm/dm-worker-configuration-file.md)の`relay-dir`でローカル設定ディレクトリを設定できます。これは、アップストリームデータベースの設定ファイルよりも優先されます。
 
 ## ユーザーシナリオ {#user-scenarios}
 
@@ -37,7 +37,7 @@ MySQLではストレージ容量が限られているため、最大保存期間
 
 v5.4.0以降のバージョンでは、 `enable-relay`を`true`に設定することでリレーログを有効にできます。v5.4.0以降では、上流データソースをバインドする際に、DM-workerはデータソースの設定で`enable-relay`をチェックします。 `enable-relay`が`true`の場合、このデータソースに対してリレーログ機能が有効になります。
 
-詳しい設定方法については[上流データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
+詳しい設定方法については[上流データベース設定ファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
 さらに、 `start-relay`または`stop-relay`コマンドを使用してデータソースの`enable-relay`構成を動的に調整し、リレーログイン時間を有効または無効にすることもできます。
 
@@ -98,7 +98,7 @@ stop-relay -s mysql-replica-01 worker1 worker2
 
 DM バージョン 2.0.2 より前のバージョン（v2.0.2 は含まない）では、DM-workerを上流データソースにバインドする際に、ソース設定ファイルの設定項目`enable-relay`がチェックされます。`enable-relay`が`true`に設定されている場合、DM はデータソースのリレーログ機能を有効にします。
 
-設定項目`enable-relay`の設定方法については[上流データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
+設定項目`enable-relay`の設定方法については[上流データベース設定ファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
 </div>
 </SimpleTab>
@@ -232,7 +232,7 @@ DM では、リレーログをパージする方法として、手動パージ�
 >
 > - アクティブリレーログ：リレーログはデータ移行タスクによって使用されています。アクティブリレーログは現在、Syncerユニット内でのみ更新および書き込みされます。「すべて」モードのデータ移行タスクが、データソースのパージで設定された有効期限よりも長い時間、フルエクスポート/インポートを実行した場合でも、リレーログはパージされます。
 >
-> - 期限切れのリレーログ: リレーログファイルの最終変更時刻と現在の時刻の差が、構成ファイルの`expires`フィールドの値よりも大きくなっています。
+> - 期限切れのリレーログ: リレーログファイルの最終変更時刻と現在の時刻の差が、設定ファイルの`expires`フィールドの値よりも大きくなっています。
 
 #### 自動パージ {#automatic-purge}
 
@@ -362,12 +362,12 @@ deb76a2b-09cc-11e9-9129-5242cf3bb246.000003
 
 - ローカルリレーログが有効な場合、つまりリレーログに有効な`server-uuid.index` 、 `subdir` 、 `relay.meta`ファイルが含まれている場合、DM-worker は`relay.meta`に記録された位置から移行を回復します。
 
-- 有効なローカルリレーログが存在しないが、アップストリームデータソース構成ファイルで`relay-binlog-name`または`relay-binlog-gtid`が指定されている場合:
+- 有効なローカルリレーログが存在しないが、アップストリームデータソース設定ファイルで`relay-binlog-name`または`relay-binlog-gtid`が指定されている場合:
 
     - 非 GTID モードでは、 `relay-binlog-name`を指定すると、DM-workerは指定されたbinlogファイルから移行を開始します。
     - GTID モードでは、 `relay-binlog-gtid`を指定すると、DM-workerは指定された GTID から移行を開始します。
 
-- 有効なローカルリレーログがなく、DM 構成ファイルに`relay-binlog-name`または`relay-binlog-gtid`が指定されていない場合:
+- 有効なローカルリレーログがなく、DM 設定ファイルに`relay-binlog-name`または`relay-binlog-gtid`が指定されていない場合:
 
     - 非 GTID モードでは、DM-workerは、各サブタスクが移行している最も古いbinlogから移行を開始し、最新のbinlogが移行されるまで続けます。
 
