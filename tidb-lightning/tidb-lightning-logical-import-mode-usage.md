@@ -43,7 +43,7 @@ password = ""
 log-level = "error"
 ```
 
-完全な設定ファイルについては、 [TiDB Lightning のコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+完全な設定ファイルについては、 [TiDB Lightning の設定](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 ## 競合検出 {#conflict-detection}
 

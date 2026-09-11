@@ -284,7 +284,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `config` {#config}
 
-- プロキシの構成ファイルパス。
+- プロキシの設定ファイルパス。
 
 <!-- Example: `"/tidb-deploy/tiflash-9000/conf/tiflash-learner.toml"` -->
 

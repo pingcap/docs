@@ -3,7 +3,7 @@ title: TiKV Configuration File
 summary: TiKVの設定ファイルについて学びましょう。
 ---
 
-# TiKVコンフィグレーションファイル {#tikv-configuration-file}
+# TiKV設定ファイル {#tikv-configuration-file}
 
 <!-- markdownlint-disable MD001 -->
 
@@ -52,7 +52,7 @@ TiKV の設定ファイルは、コマンドラインパラメータよりも多
 
 ## log <span class="version-mark">New in v5.4.0</span> {#log-new-in-v540}
 
-- ログに関連するコンフィグレーション項目。
+- ログに関連する設定項目。
 
 - バージョン 5.4.0 以降、TiKV と TiDB のログ設定項目を統一するため、TiKV は以前の設定項目`log-rotation-timespan`を非推奨とし、 `log-level` 、 `log-format` 、 `log-file` 、 `log-rotation-size`を以下の項目に変更します。古い設定項目のみを設定し、その値をデフォルト値以外に設定した場合、古い項目は新しい項目と互換性があります。古い設定項目と新しい設定項目の両方を設定した場合、新しい項目が有効になります。
 
@@ -76,7 +76,7 @@ TiKV の設定ファイルは、コマンドラインパラメータよりも多
 
 ## log.file <span class="version-mark">v5.4.0で追加</span> {#logfile-new-in-v540}
 
-- ログファイルに関連するコンフィグレーション項目。
+- ログファイルに関連する設定項目。
 
 ### `filename` <span class="version-mark">v5.4.0 で追加</span> {#filename-new-in-v540}
 
@@ -106,7 +106,7 @@ TiKV の設定ファイルは、コマンドラインパラメータよりも多
 
 ## server {#server}
 
-- サーバーに関連するコンフィグレーション項目。
+- サーバーに関連する設定項目。
 
 ### `addr` {#addr}
 
@@ -311,7 +311,7 @@ TiKV の設定ファイルは、コマンドラインパラメータよりも多
 
 ## readpool.unified {#readpoolunified}
 
-読み取りリクエストを処理するシングルスレッドプールに関連するコンフィグレーション項目。このスレッドプールは、バージョン4.0以降、従来のストレージスレッドプールとコプロセッサスレッドプールに取って代わるものです。
+読み取りリクエストを処理するシングルスレッドプールに関連する設定項目。このスレッドプールは、バージョン4.0以降、従来のストレージスレッドプールとコプロセッサスレッドプールに取って代わるものです。
 
 ### `min-thread-count` {#min-thread-count}
 
@@ -365,7 +365,7 @@ TiKV の設定ファイルは、コマンドラインパラメータよりも多
 
 ## readpool.storage {#readpoolstorage}
 
-ストレージスレッドプールに関連するコンフィグレーション項目。
+ストレージスレッドプールに関連する設定項目。
 
 ### `use-unified-pool` {#use-unified-pool-1}
 
@@ -419,7 +419,7 @@ TiKV の設定ファイルは、コマンドラインパラメータよりも多
 
 ## `readpool.coprocessor` {#readpoolcoprocessor}
 
-コプロセッサースレッドプールに関連するコンフィグレーション項目。
+コプロセッサースレッドプールに関連する設定項目。
 
 ### `use-unified-pool` {#use-unified-pool}
 
@@ -473,7 +473,7 @@ TiKV の設定ファイルは、コマンドラインパラメータよりも多
 
 ## storage {#storage}
 
-ストレージに関連するコンフィグレーション項目。
+ストレージに関連する設定項目。
 
 ### `data-dir` {#data-dir}
 
@@ -573,7 +573,7 @@ TiKV の設定ファイルは、コマンドラインパラメータよりも多
 
 ## storage.block-cache {#storageblock-cache}
 
-複数の RocksDBカラムファミリー (CF) 間でブロックキャッシュを共有することに関連するコンフィグレーション項目。
+複数の RocksDBカラムファミリー (CF) 間でブロックキャッシュを共有することに関連する設定項目。
 
 ### `capacity` {#capacity-1}
 
@@ -593,7 +593,7 @@ TiKV の設定ファイルは、コマンドラインパラメータよりも多
 
 ## storage.flow-control {#storageflow-control}
 
-TiKVにおけるフロー制御メカニズムに関連するコンフィグレーション項目。このメカニズムはRocksDBの書き込み停止メカニズムに代わるもので、スケジューラレイヤーでのフローを制御することで、 RaftstoreやApplyスレッドの停止によって引き起こされる二次的な障害を回避します。
+TiKVにおけるフロー制御メカニズムに関連する設定項目。このメカニズムはRocksDBの書き込み停止メカニズムに代わるもので、スケジューラレイヤーでのフローを制御することで、 RaftstoreやApplyスレッドの停止によって引き起こされる二次的な障害を回避します。
 
 ### `enable` {#enable-1}
 
@@ -632,7 +632,7 @@ TiKVにおけるフロー制御メカニズムに関連するコンフィグレ�
 
 ## storage.io-rate-limit {#storageio-rate-limit}
 
-I/Oレートリミッターに関連するコンフィグレーション項目。
+I/Oレートリミッターに関連する設定項目。
 
 ### `max-bytes-per-sec` {#max-bytes-per-sec}
 
@@ -706,7 +706,7 @@ I/Oレートリミッターに関連するコンフィグレーション項目�
 
 ## raftstore {#raftstore}
 
-Raftstoreに関連するコンフィグレーション項目。
+Raftstoreに関連する設定項目。
 
 ### `prevote` {#prevote}
 
@@ -1230,7 +1230,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ## coprocessor {#coprocessor}
 
-コプロセッサーに関連するコンフィグレーション項目。
+コプロセッサーに関連する設定項目。
 
 ### `split-region-on-table` {#split-region-on-table}
 
@@ -1301,7 +1301,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ## rocksdb {#rocksdb}
 
-RocksDBに関連するコンフィグレーション項目
+RocksDBに関連する設定項目
 
 ### `max-background-jobs` {#max-background-jobs-1}
 
@@ -1538,7 +1538,7 @@ RocksDBに関連するコンフィグレーション項目
 
 ## rocksdb.titan {#rocksdbtitan}
 
-Titanに関連するコンフィグレーション項目。
+Titanに関連する設定項目。
 
 ### `enabled` {#enabled}
 
@@ -1569,7 +1569,7 @@ Titanに関連するコンフィグレーション項目。
 
 ## rocksdb.defaultcf | rocksdb.writecf | rocksdb.lockcf | rocksdb.raftcf {#rocksdbdefaultcf--rocksdbwritecf--rocksdblockcf--rocksdbraftcf}
 
-`rocksdb.defaultcf` 、 `rocksdb.writecf` 、および`rocksdb.lockcf`に関連するコンフィグレーション項目。
+`rocksdb.defaultcf` 、 `rocksdb.writecf` 、および`rocksdb.lockcf`に関連する設定項目。
 
 ### `block-size` {#block-size}
 
@@ -1841,7 +1841,7 @@ Titanに関連するコンフィグレーション項目。
 >
 > Titan は`rocksdb.defaultcf`でのみ有効にできます。 `rocksdb.writecf`では Titan の有効化はサポートされていません。
 
-`rocksdb.defaultcf.titan`に関連するコンフィグレーション項目。
+`rocksdb.defaultcf.titan`に関連する設定項目。
 
 ### `min-blob-size` {#min-blob-size}
 
@@ -1946,7 +1946,7 @@ Titanに関連するコンフィグレーション項目。
 
 ## raftdb {#raftdb}
 
-`raftdb`に関連するコンフィグレーション項目
+`raftdb`に関連する設定項目
 
 ### `max-background-jobs` {#max-background-jobs}
 
@@ -2101,7 +2101,7 @@ Titanに関連するコンフィグレーション項目。
 
 ## Raft Engine {#raft-engine}
 
-Raft Engineに関連するコンフィグレーション項目。
+Raft Engineに関連する設定項目。
 
 > **Note:**
 >
@@ -2228,7 +2228,7 @@ Raft Engineに関連するコンフィグレーション項目。
 
 ## 安全 {#security}
 
-セキュリティに関連するコンフィグレーション項目。
+セキュリティに関連する設定項目。
 
 ### `ca-path` {#ca-path}
 
@@ -2261,7 +2261,7 @@ Raft Engineに関連するコンフィグレーション項目。
 
 ## セキュリティ暗号化 {#securityencryption}
 
-[保存時の暗号化](/encryption-at-rest.md)(TDE)に関するコンフィグレーション項目。
+[保存時の暗号化](/encryption-at-rest.md)(TDE)に関する設定項目。
 
 ### `data-encryption-method` {#data-encryption-method}
 
@@ -2278,7 +2278,7 @@ Raft Engineに関連するコンフィグレーション項目。
 ### `enable-file-dictionary-log` {#enable-file-dictionary-log}
 
 - TiKVが暗号化メタデータを管理する際に、I/Oとミューテックスの競合を軽減するための最適化を有効にします。
-- この設定パラメーターが (デフォルトで) 有効になっている場合に発生する可能性のある互換性の問題を回避するには、詳細については[保存時の暗号化- TiKVバージョン間の互換性](/encryption-at-rest.md#compatibility-between-tikv-versions)を参照してください。
+- この設定パラメータが (デフォルトで) 有効になっている場合に発生する可能性のある互換性の問題を回避するには、詳細については[保存時の暗号化- TiKVバージョン間の互換性](/encryption-at-rest.md#compatibility-between-tikv-versions)を参照してください。
 - デフォルト値: `true`
 
 ### `master-key` {#master-key}
@@ -2291,7 +2291,7 @@ Raft Engineに関連するコンフィグレーション項目。
 
 ## インポート {#import}
 
-TiDB LightningのインポートおよびBR復元に関連するコンフィグレーション項目。
+TiDB LightningのインポートおよびBR復元に関連する設定項目。
 
 ### `num-threads` {#num-threads-1}
 
@@ -2405,7 +2405,7 @@ TiKVの自動圧縮の動作を設定します。
 
 ## バックアップ {#backup}
 
-BRバックアップに関連するコンフィグレーション項目。
+BRバックアップに関連する設定項目。
 
 ### `num-threads` {#num-threads}
 
@@ -2463,7 +2463,7 @@ BRバックアップに関連するコンフィグレーション項目。
 
 ## ログバックアップ {#log-backup}
 
-ログバックアップに関連するコンフィグレーション項目。
+ログバックアップに関連する設定項目。
 
 ### <span class="version-mark">v6.2.0で</span>`enable` {#enable-new-in-v620}
 
@@ -2513,7 +2513,7 @@ BRバックアップに関連するコンフィグレーション項目。
 
 ## CDC {#cdc}
 
-TiCDCに関連するコンフィグレーション項目。
+TiCDCに関連する設定項目。
 
 ### `min-ts-interval` {#min-ts-interval}
 
@@ -2558,7 +2558,7 @@ TiCDCに関連するコンフィグレーション項目。
 
 ## resolved-ts {#resolved-ts}
 
-ステイル読み取りリクエストを処理するために、Resolved TSを維持することに関連するコンフィグレーション項目。
+ステイル読み取りリクエストを処理するために、Resolved TSを維持することに関連する設定項目。
 
 ### `enable` {#enable}
 
@@ -2615,7 +2615,7 @@ TiCDCに関連するコンフィグレーション項目。
 
 ## クォータ {#quota}
 
-クォータリミッターに関連するコンフィグレーション項目。
+クォータリミッターに関連する設定項目。
 
 ### `max-delay-duration` <span class="version-mark">v6.0.0で追加</span> {#max-delay-duration-new-in-v600}
 
@@ -2625,7 +2625,7 @@ TiCDCに関連するコンフィグレーション項目。
 
 ### フォアグラウンドクォータリミッター {#foreground-quota-limiter}
 
-フォアグラウンドのクォータリミッターに関連するコンフィグレーション項目。
+フォアグラウンドのクォータリミッターに関連する設定項目。
 
 TiKV がデプロイされているマシンにリソースが限られている場合、たとえば、CPU が 4V、メモリが16GB しかないとします。このような状況では、TiKV のフォアグラウンドが読み書きリクエストを過剰に処理し、バックグラウンドで使用される CPU リソースがこれらのリクエストの処理に占有され、TiKV のパフォーマンスの安定性に影響する可能性があります。この状況を回避するには、フォアグラウンドのクォータ関連の設定項目を使用して、フォアグラウンドで使用される CPU リソースを制限できます。リクエストがクォータ リミッターをトリガーすると、リクエストは TiKV が CPU リソースを解放するまでしばらく待機させられます。正確な待機時間はリクエストの数によって異なり、最大待機時間は[`max-delay-duration`](#max-delay-duration-new-in-v600)の値を超えません。
 
@@ -2650,7 +2650,7 @@ TiKV がデプロイされているマシンにリソースが限られている
 
 ### バックグラウンドクォータリミッター {#background-quota-limiter}
 
-バックグラウンドクォータリミッターに関連するコンフィグレーション項目。
+バックグラウンドクォータリミッターに関連する設定項目。
 
 TiKV がデプロイされているマシンにリソースが限られている場合、たとえば CPU が 4V、メモリが16GB しかない場合を考えてみましょう。このような状況では、TiKV のバックグラウンドで計算や読み書きリクエストが多すぎると、フォアグラウンドで使用される CPU リソースがこれらのリクエストの処理に占有され、TiKV のパフォーマンスの安定性に影響します。この状況を回避するには、バックグラウンドのクォータ関連の設定項目を使用して、バックグラウンドで使用される CPU リソースを制限できます。リクエストがクォータ リミッターをトリガーすると、TiKV が CPU リソースを解放するまで、リクエストはしばらく待機させられます。正確な待機時間はリクエストの数によって異なり、最大待機時間は[`max-delay-duration`](#max-delay-duration-new-in-v600)の値を超えません。
 
@@ -2682,7 +2682,7 @@ TiKV がデプロイされているマシンにリソースが限られている
 
 ## causal-ts <span class="version-mark">v6.1.0の新機能</span> {#causal-ts-new-in-v610}
 
-TiKV API V2 が有効になっている場合にタイムスタンプを取得することに関連するコンフィグレーション項目 ( `storage.api-version = 2` )。
+TiKV API V2 が有効になっている場合にタイムスタンプを取得することに関連する設定項目 ( `storage.api-version = 2` )。
 
 書き込みレイテンシーを低減するため、TiKVは定期的にタイムスタンプのバッチをローカルに取得してキャッシュします。キャッシュされたタイムスタンプは、PDへの頻繁なアクセスを回避し、TSOサービスの一時的な障害を許容するのに役立ちます。
 
@@ -2737,7 +2737,7 @@ TiKV API V2 が有効になっている場合にタイムスタンプを取得�
 
 ## resource-control {#resource-control}
 
-TiKVストレージレイヤーのリソース制御に関連するコンフィグレーション項目。
+TiKVストレージレイヤーのリソース制御に関連する設定項目。
 
 ### `enabled` <span class="version-mark">（v6.6.0で新規追加）</span> {#enabled-new-in-v660}
 
@@ -2819,7 +2819,7 @@ TiKVストレージレイヤーのリソース制御に関連するコンフィ�
 
 ## スプリット {#split}
 
-[ロードベース分割](/configure-load-base-split.md)に関するコンフィグレーション項目。
+[ロードベース分割](/configure-load-base-split.md)に関する設定項目。
 
 ### `byte-threshold` <span class="version-mark">v5.0 で追加</span> {#byte-threshold-new-in-v50}
 

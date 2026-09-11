@@ -28,13 +28,13 @@ TiFlashは列指向型ストレージエンジンであり、徐々に標準的�
 - [TiFlashトポロジのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiflash.yaml)
 - [TiFlashトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)
 
-上記の TiDB クラスター トポロジファイルの設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジファイルの設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジ設定ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 ### 主なパラメータ {#key-parameters}
 
 - PD の[配置ルール](/configure-placement-rules.md)機能を有効にするには、構成テンプレートの`replication.enable-placement-rules`の値を`true`に設定します。
 - `tiflash_servers`のインスタンスレベル`"-host"`構成では、ドメイン名ではなく IP のみがサポートされます。
-- TiFlashパラメータの詳細な説明については、 [TiFlashコンフィグレーション](/tiflash/tiflash-configuration.md)を参照してください。
+- TiFlashパラメータの詳細な説明については、 [TiFlash設定](/tiflash/tiflash-configuration.md)を参照してください。
 
 > **Note:**
 >

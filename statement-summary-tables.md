@@ -239,7 +239,7 @@ select * from information_schema.statements_summary_evicted;
 
 </CustomContent>
 
-ステートメントのサマリーを永続化するには、TiDB構成ファイルに次の設定項目を追加します。
+ステートメントのサマリーを永続化するには、TiDB設定ファイルに次の設定項目を追加します。
 
 ```toml
 [instance]

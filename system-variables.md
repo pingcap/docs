@@ -959,7 +959,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 <CustomContent platform="tidb">
 
-- この変数を有効にし、TiDB Data Migration (DM) を使用してデータを移行している場合は、 [DMタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)ファイルの`session`部分に`sql_require_ primary_key`を追加し、それを`OFF`に設定することをお勧めします。そうしないと、DM がタスクを作成できなくなります。
+- この変数を有効にし、TiDB Data Migration (DM) を使用してデータを移行している場合は、 [DMタスク設定ファイル](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)ファイルの`session`部分に`sql_require_ primary_key`を追加し、それを`OFF`に設定することをお勧めします。そうしないと、DM がタスクを作成できなくなります。
 
 </CustomContent>
 
@@ -2156,7 +2156,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 <CustomContent platform="tidb">
 
 - デフォルト値: `OFF`
-- この変数は、接続先の TiDBサーバーでセキュリティ強化モード (SEM) が有効になっているかどうかを示します。この値を変更するには、TiDBサーバー構成ファイル内の`enable-sem`の値を変更し、TiDBサーバーを再起動する必要があります。
+- この変数は、接続先の TiDBサーバーでセキュリティ強化モード (SEM) が有効になっているかどうかを示します。この値を変更するには、TiDBサーバー設定ファイル内の`enable-sem`の値を変更し、TiDBサーバーを再起動する必要があります。
 
 </CustomContent>
 
@@ -4044,7 +4044,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 > **Note:**
 >
-> `auto_analyze`は、TiDB 起動構成ファイルで`run-auto-analyze`が有効になっている場合にのみ、TiDB クラスタでトリガーされます。
+> `auto_analyze`は、TiDB 起動設定ファイルで`run-auto-analyze`が有効になっている場合にのみ、TiDB クラスタでトリガーされます。
 
 ### tidb_mem_quota_apply_cache <span class="version-mark">New in v5.0</span>
 

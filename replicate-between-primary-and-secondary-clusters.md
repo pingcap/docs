@@ -179,7 +179,7 @@ summary: プライマリクラスタからセカンダリクラスタへデー�
     sync_diff_inspector -C ./config.yaml
     ```
 
-    sync-diff-inspector の設定方法の詳細については、 [コンフィグレーションファイルの説明](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description)を参照してください。このドキュメントでは、構成は次のようになります。
+    sync-diff-inspector の設定方法の詳細については、 [設定ファイルの説明](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description)を参照してください。このドキュメントでは、構成は次のようになります。
 
     ```shell
     # Diff Configuration.

@@ -1,9 +1,9 @@
 ---
 title: TSO Configuration File
-summary: TSO 構成ファイルには、ノード名、データ パス、ノード URL などの複数の設定項目が含まれています。
+summary: TSO 設定ファイルには、ノード名、データ パス、ノード URL などの複数の設定項目が含まれています。
 ---
 
-# TSOコンフィグレーションファイル {#tso-configuration-file}
+# TSO設定ファイル {#tso-configuration-file}
 
 <!-- markdownlint-disable MD001 -->
 
@@ -58,7 +58,7 @@ TSOノードは、PD用の`tso`マイクロサービスを提供するために�
 
 ## security {#security}
 
-セキュリティ関連のコンフィグレーション項目
+セキュリティ関連の設定項目
 
 ### `cacert-path` {#cacert-path}
 
@@ -83,7 +83,7 @@ TSOノードは、PD用の`tso`マイクロサービスを提供するために�
 
 ## log {#log}
 
-ログに関するコンフィグレーション項目。
+ログに関する設定項目。
 
 ### `level` {#level}
 
@@ -104,7 +104,7 @@ TSOノードは、PD用の`tso`マイクロサービスを提供するために�
 
 ## log.file {#log-file}
 
-ログファイルに関連するコンフィグレーション項目
+ログファイルに関連する設定項目
 
 ### `max-size` {#max-size}
 
@@ -127,7 +127,7 @@ TSOノードは、PD用の`tso`マイクロサービスを提供するために�
 
 ## metric {#metric}
 
-監視に関連するコンフィグレーション項目
+監視に関連する設定項目
 
 ### `interval` {#interval}
 

@@ -7,9 +7,9 @@ summary: コマンドラインオプションに関係しない、TiDB設定フ�
 
 <!-- markdownlint-disable MD024 -->
 
-# TiDBコンフィグレーションファイル {#tidb-configuration-file}
+# TiDB設定ファイル {#tidb-configuration-file}
 
-TiDB 構成ファイルは、コマンドラインパラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example)をダウンロードし、その名前を`config.toml`に変更できます。本書では[コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係のないオプションのみを説明します。
+TiDB 設定ファイルは、コマンドラインパラメーターよりも多くのオプションをサポートしています。デフォルトの設定ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example)をダウンロードし、その名前を`config.toml`に変更できます。本書では[コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係のないオプションのみを説明します。
 
 > **Tip:**
 >
@@ -90,7 +90,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 - `compatible-kill-query`は、[`enable-global-kill`](#enable-global-kill-new-in-v610)が`false`に設定されている場合にのみ有効になります。
 - [`enable-global-kill`](#enable-global-kill-new-in-v610)が`false`の場合、 `compatible-kill-query`は、クエリを強制終了する際に`TIDB`キーワードを追加する必要があるかどうかを制御します。
     - `compatible-kill-query`が`false`の場合、TiDB での`KILL xxx`の動作は MySQL とは異なります。TiDB でクエリを強制終了するには、 `TIDB`のように`KILL TIDB xxx`キーワードを追加する必要があります。
-    - `compatible-kill-query`が`true`の場合、TiDB でクエリを強制終了するには、 `TIDB`キーワードを追加する必要はありません。クライアントが**常に同じ TiDB インスタンスに接続されることが確実でない限り**、構成ファイルで`compatible-kill-query`を`true`に設定することは強くお勧めしません。これは、デフォルトの MySQL クライアントで<kbd>Control</kbd> + <kbd>C</kbd>を押すと`KILL`が実行される新しい接続が開かれるためです。クライアントと TiDB クラスタの間にプロキシがある場合、新しい接続は別の TiDB インスタンスにルーティングされる可能性があり、誤って別のセッションが強制終了される可能性があります。
+    - `compatible-kill-query`が`true`の場合、TiDB でクエリを強制終了するには、 `TIDB`キーワードを追加する必要はありません。クライアントが**常に同じ TiDB インスタンスに接続されることが確実でない限り**、設定ファイルで`compatible-kill-query`を`true`に設定することは強くお勧めしません。これは、デフォルトの MySQL クライアントで<kbd>Control</kbd> + <kbd>C</kbd>を押すと`KILL`が実行される新しい接続が開かれるためです。クライアントと TiDB クラスタの間にプロキシがある場合、新しい接続は別の TiDB インスタンスにルーティングされる可能性があり、誤って別のセッションが強制終了される可能性があります。
 - [`enable-global-kill`](#enable-global-kill-new-in-v610)が`true`の場合、 `KILL xxx`と`KILL TIDB xxx`は同じ効果を持ちます。
 - `KILL`文の詳細については、[KILL [TIDB]](/sql-statements/sql-statement-kill.md)を参照してください。
 
@@ -274,7 +274,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 
 ## log {#log}
 
-ログに関連するコンフィグレーション項目。
+ログに関連する設定項目。
 
 ### `level` {#level}
 
@@ -353,7 +353,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 
 ### log.file {#logfile}
 
-ログファイルに関連するコンフィグレーション項目。
+ログファイルに関連する設定項目。
 
 #### `filename` {#filename}
 
@@ -389,7 +389,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 
 ## security {#security}
 
-セキュリティに関連するコンフィグレーション項目。
+セキュリティに関連する設定項目。
 
 ### `enable-sem` {#enable-sem}
 
@@ -489,7 +489,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 
 ## performance {#performance}
 
-パフォーマンスに関連するコンフィグレーション項目。
+パフォーマンスに関連する設定項目。
 
 ### `max-procs` {#max-procs}
 
@@ -646,7 +646,7 @@ TiDB 構成ファイルは、コマンドラインパラメーターよりも多
 
 ## opentracing {#opentracing}
 
-OpenTracingに関連するコンフィグレーション項目。
+OpenTracingに関連する設定項目。
 
 ### `enable` {#enable}
 
@@ -660,7 +660,7 @@ OpenTracingに関連するコンフィグレーション項目。
 
 ### opentracing.sampler {#opentracingsampler}
 
-opentracing.sampler に関連するコンフィグレーション項目。
+opentracing.sampler に関連する設定項目。
 
 #### `type` {#type}
 
@@ -694,7 +694,7 @@ opentracing.sampler に関連するコンフィグレーション項目。
 
 ### opentracing.reporter {#opentracingreporter}
 
-opentracing.reporter に関連するコンフィグレーション項目。
+opentracing.reporter に関連する設定項目。
 
 #### `queue-size` {#queue-size}
 
@@ -825,7 +825,7 @@ opentracing.reporter に関連するコンフィグレーション項目。
 
 ## txn-local-latches {#txn-local-latches}
 
-トランザクションラッチに関連するコンフィグレーション項目。これらの設定項目は将来的に非推奨となる可能性があります。使用は推奨されません。
+トランザクションラッチに関連する設定項目。これらの設定項目は将来的に非推奨となる可能性があります。使用は推奨されません。
 
 ### `enabled` {#enabled}
 
@@ -839,7 +839,7 @@ opentracing.reporter に関連するコンフィグレーション項目。
 
 ## status {#status}
 
-TiDBサービスの状態に関するコンフィグレーション。
+TiDBサービスの状態に関する設定。
 
 ### `report-status` {#report-status}
 
@@ -893,7 +893,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 
 ## isolation-read {#isolation-read}
 
-読み取り分離に関連するコンフィグレーション項目。
+読み取り分離に関連する設定項目。
 
 ### `engines` {#engines}
 
@@ -1041,7 +1041,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 
 ## proxy-protocol {#proxy-protocol}
 
-PROXYプロトコルに関連するコンフィグレーション項目。
+PROXYプロトコルに関連する設定項目。
 
 ### `networks` {#networks}
 

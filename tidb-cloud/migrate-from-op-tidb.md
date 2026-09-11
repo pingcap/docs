@@ -319,7 +319,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
     - `--start-ts` : 変更フィードの開始TSOを指定します。TiCDCクラスタはこのTSOからデータの取得を開始します。デフォルト値は現在時刻です。
 
-    詳細については、 [TiCDC ChangefeedsのCLIとコンフィグレーションパラメータ](https://docs.pingcap.com/tidb/dev/ticdc-changefeed-config)を参照してください。
+    詳細については、 [TiCDC ChangefeedsのCLIと設定パラメータ](https://docs.pingcap.com/tidb/dev/ticdc-changefeed-config)を参照してください。
 
 5. アップストリームクラスタでGCメカニズムを再度有効にします。増分レプリケーションでエラーや遅延が検出されない場合は、GCメカニズムを有効にして、アップストリームクラスタのガベージコレクションを再開します。
 

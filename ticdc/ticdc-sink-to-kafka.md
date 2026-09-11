@@ -29,7 +29,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 - `--sink-uri` : レプリケーションタスクのダウンストリームアドレス。詳細は[`kafka`でシンクURIを設定する](#configure-sink-uri-for-kafka)を参照してください。
 - `--start-ts` : チェンジフィードの開始TSOを指定します。このTSOから、TiCDCクラスターはデータのプルを開始します。デフォルト値は現在時刻です。
 - `--target-ts` : チェンジフィードの終了TSOを指定します。このTSOまで、TiCDCクラスターはデータのプルを停止します。デフォルト値は空で、TiCDCはデータのプルを自動的に停止しません。
-- `--config` : changefeed設定ファイルを指定します。詳細は[TiCDC Changefeedコンフィグレーションパラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
+- `--config` : changefeed設定ファイルを指定します。詳細は[TiCDC Changefeed設定パラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 ## サポートされているKafkaのバージョン {#supported-kafka-versions}
 

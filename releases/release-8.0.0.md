@@ -192,7 +192,7 @@ TiDB バージョン: 8.0.0
 
     TiKVは、保存データの暗号化技術を用いてデータのセキュリティを確保します。セキュリティのための保存データ暗号化の中核となるのは鍵管理です。バージョン8.0.0以降では、Google Cloud KMSを使用してTiKVのマスターキーを管理し、Cloud KMSに基づいた保存データ暗号化機能を確立することで、ユーザーデータのセキュリティを強化できます。
 
-    Google Cloud KMS に基づく保存時の暗号化を有効にするには、Google Cloud でキーを作成し、TiKV 構成ファイルの`[security.encryption.master-key]`セクションを構成する必要があります。
+    Google Cloud KMS に基づく保存時の暗号化を有効にするには、Google Cloud でキーを作成し、TiKV 設定ファイルの`[security.encryption.master-key]`セクションを構成する必要があります。
 
     詳細については、 [ドキュメント](/encryption-at-rest.md#tikv-encryption-at-rest)を参照してください。
 
@@ -285,9 +285,9 @@ TiDB バージョン: 8.0.0
 | [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)                       | 新しく追加された | オプティマイザが現在のセッションでクエリ最適化のために[不可視インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択できるかどうかを制御します。変数が`ON`に設定されている場合、オプティマイザはセッション内のクエリ最適化のために不可視インデックスを選択できます。                                   |
 | [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)                                       | 新しく追加された | スキーマ情報のキャッシュに使用できるメモリの上限を制御し、メモリの過剰使用を防ぎます。この機能を有効にすると、LRUアルゴリズムを使用して必要なテーブルをキャッシュし、スキーマ情報によって占有されるメモリを効果的に削減します。                                                                                                          |
 
-### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
+### 設定ファイルパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                                               | 変更の種類  | 説明                                                                                                                                                                                                          |
+| 設定ファイル | 設定パラメータ                                                                                                                                               | 変更の種類  | 説明                                                                                                                                                                                                          |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`instance.tidb_enable_collect_execution_info`](/tidb-configuration-file.md#tidb_enable_collect_execution_info)                                               | 変更     | [インデックスの使用統計](/information-schema/information-schema-tidb-index-usage.md)を記録するかどうかのコントロールを追加します。デフォルト値は`true`です。                                                                                            |
 | TiDB           | [`tls-version`](/tidb-configuration-file.md#tls-version)                                                                                                      | 変更     | このパラメータは`"TLSv1.0"`と`"TLSv1.1"`をサポートしなくなりました。現在は`"TLSv1.2"`と`"TLSv1.3"`のみをサポートしています。                                                                                                                        |

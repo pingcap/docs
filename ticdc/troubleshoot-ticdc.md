@@ -45,9 +45,9 @@ cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id 28c43ffc
     - このシナリオでは、TiCDCはタスク情報を保存します。TiCDCはPDにサービスGCセーフポイントを設定しているため、タスクチェックポイント以降のデータは有効期間`gc-ttl`内にTiKV GCによってクリーンアップされません。
     - 取り扱い手順:
         1. `cdc cli changefeed query`コマンドを使用してレプリケーションタスクのステータス情報を照会し、 `checkpoint-ts`の値を記録します。
-        2. 新しいタスク構成ファイルを使用して`ignore-txn-start-ts`パラメータを追加し、指定された`start-ts`に対応するトランザクションをスキップします。
+        2. 新しいタスク設定ファイルを使用して`ignore-txn-start-ts`パラメータを追加し、指定された`start-ts`に対応するトランザクションをスキップします。
         3. `cdc cli changefeed pause -c <changefeed-id>`を実行してレプリケーションタスクを一時停止します。
-        4. `cdc cli changefeed update -c <changefeed-id> --config <config-file-path>`を実行して新しいタスク構成ファイルを指定します。
+        4. `cdc cli changefeed update -c <changefeed-id> --config <config-file-path>`を実行して新しいタスク設定ファイルを指定します。
         5. `cdc cli changefeed resume -c <changefeed-id>`を実行してレプリケーションタスクを再開します。
 
 ### タスク中断後に TiCDC を再起動した後で発生する OOM を処理するにはどうすればよいですか? {#what-should-i-do-to-handle-the-oom-that-occurs-after-ticdc-is-restarted-after-a-task-interruption}
@@ -76,7 +76,7 @@ Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skippin
 
 `mysql`と`tidb`シンクを使用する場合は、タイムゾーンを明示的に指定することをお勧めします（例： `time-zone="Asia/Shanghai"` 。また、TiCDCサーバー構成で指定する`tz`とシンクURIで指定する`time-zone`が、下流データベースのタイムゾーン設定と一致していることを確認してください。これにより、タイムゾーンの不一致によるデータの不整合を防ぐことができます。
 
-## TiCDC のアップグレードによって発生した構成ファイルの非互換性の問題をどのように処理すればよいですか? {#how-do-i-handle-the-incompatibility-issue-of-configuration-files-caused-by-ticdc-upgrade}
+## TiCDC のアップグレードによって発生した設定ファイルの非互換性の問題をどのように処理すればよいですか? {#how-do-i-handle-the-incompatibility-issue-of-configuration-files-caused-by-ticdc-upgrade}
 
 [互換性に関する注意事項](/ticdc/ticdc-compatibility.md)を参照してください。
 

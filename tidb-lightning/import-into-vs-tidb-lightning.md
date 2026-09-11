@@ -47,7 +47,7 @@ You can directly write SQL statements to submit import tasks, which are easy to 
 
 #### TiDB Lightning {#tidb-lightning}
 
-対照的に、 TiDB Lightning[タスク設定ファイル](/tidb-lightning/tidb-lightning-configuration.md)を記述する必要があります。これらの構成ファイルは複雑であり、サードパーティが簡単に呼び出すことはできません。
+対照的に、 TiDB Lightning[タスク設定ファイル](/tidb-lightning/tidb-lightning-configuration.md)を記述する必要があります。これらの設定ファイルは複雑であり、サードパーティが簡単に呼び出すことはできません。
 
 ### タスクのスケジュール {#task-scheduling}
 
