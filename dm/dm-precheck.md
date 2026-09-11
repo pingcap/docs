@@ -184,7 +184,7 @@ tiup dmctl check-task ./task.yaml
 
 移行タスクの事前チェックは並列処理に対応しています。シャーディングされたテーブルの行数が100万行に達した場合でも、事前チェックは数分で完了します。
 
-事前チェックのスレッド数を指定するには、移行タスク設定ファイルの`threads`フィールドの`mydumpers`引数を設定します。
+事前チェックのスレッド数を指定するには、移行タスク設定ファイルの`mydumpers`設定項目にある`threads`フィールドを設定します。
 
 ```yaml
 mydumpers:                           # Configuration arguments of the dump processing unit

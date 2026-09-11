@@ -61,7 +61,7 @@ TiDBバージョン: 6.4.0-DMR
 
 - TiFlashは保存時の暗号化にSM4アルゴリズムをサポートしています [#5953](https://github.com/pingcap/tiflash/issues/5953) @[lidezhu](https://github.com/lidezhu)
 
-    TiFlashの保存時暗号化にSM4アルゴリズムを追加します。保存時暗号化を設定する際に、 `data-encryption-method`設定ファイル内の`sm4-ctr` 構成の値を`tiflash-learner.toml`暗号化機能を有効にできます。
+    TiFlashの保存時暗号化にSM4アルゴリズムを追加します。保存時暗号化を設定する際に、`tiflash-learner.toml`設定ファイル内の`data-encryption-method`設定の値を`sm4-ctr`に設定することで、暗号化機能を有効にできます。
 
     詳細については、[ユーザー向けドキュメント](/encryption-at-rest.md#tiflash)を参照してください。
 

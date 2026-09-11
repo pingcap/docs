@@ -70,7 +70,7 @@ source /home/tidb/.bash_profile
 
 さまざまなクラスター トポロジに応じて、クラスター初期化設定ファイルを編集する必要があります。
 
-完全な構成テンプレートについては、「 [TiUP設定パラメータ テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml) . 設定ファイルを作成する」 `topology.yaml`を参照してください。その他の複合シナリオでは、テンプレートに従って必要に応じて設定ファイルを編集します。
+完全な設定テンプレートについては、[TiUP設定パラメータテンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。`topology.yaml`という設定ファイルを作成し、その他の複合シナリオでは、テンプレートに従って必要に応じて設定ファイルを編集してください。
 
 3 つの DM-master、3つの DM-worker、および 1つの監視コンポーネントインスタンスをデプロイする構成は次のとおりです。
 
