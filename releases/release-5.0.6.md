@@ -158,7 +158,7 @@ TiDB version: 5.0.6
         - Fix the issue that `tikv_cdc_min_resolved_ts_no_change_for_1m` keeps alerting when there is no changefeed [#11017](https://github.com/tikv/tikv/issues/11017)
         - Fix the TiCDC panic issue that occurs when manually cleaning the task status in etcd [#2980](https://github.com/pingcap/tiflow/issues/2980)
         - Fix the issue that changefeed does not fail fast enough when the ErrGCTTLExceeded error occurs [#3111](https://github.com/pingcap/ticdc/issues/3111)
-        - Fix the issue that scanning stock data might fail due to TiKV performing GC when scanning stock data takes too long [#2470](https://github.com/pingcap/tiflow/issues/2470)
+        - Fix the issue that scanning existing data might fail due to TiKV performing GC when the scan takes too long [#2470](https://github.com/pingcap/tiflow/issues/2470)
         - Fix OOM in container environments [#1798](https://github.com/pingcap/ticdc/issues/1798)
 
     + Backup & Restore (BR)
