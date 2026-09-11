@@ -195,7 +195,7 @@ TiDB Cloud Premium の場合、データ移行機能は次の MySQL 互換ソー
 
 DM を使用して、ソースの MySQL 互換データベースからターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>に増分変更を継続的にレプリケートするには、ソースデータベースでバイナリログを有効にするために次の構成が必要です。
 
-| 設定                       | 必要値                              | なぜ                                        |
+| 設定                       | 必須値                              | 理由                                        |
 | :------------------------------- | :------------------------------- | :---------------------------------------- |
 | `log_bin`                        | `ON`                             | DMがTiDBへの変更を複製するために使用するバイナリログを有効にします。     |
 | `binlog_format`                  | `ROW`                            | すべてのデータ変更を正確に記録します（他の形式では例外的なケースを見落とします）。 |
