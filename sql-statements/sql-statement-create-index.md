@@ -511,7 +511,7 @@ TiDB v8.0.0以降では、システム変数[`tidb_opt_use_invisible_indexes`](/
 
 ## 関連するシステム変数 {#associated-system-variables}
 
-`CREATE INDEX`文に関連付けられているシステム変数は、 `tidb_ddl_enable_fast_reorg` 、 `tidb_ddl_reorg_worker_cnt` 、 `tidb_ddl_reorg_batch_size` 、 `tidb_enable_auto_increment_in_generated` 、および`tidb_ddl_reorg_priority`です。 詳細[システム変数](/system-variables.md#tidb_ddl_reorg_worker_cnt)を参照してください。
+`CREATE INDEX`文に関連付けられているシステム変数は、 `tidb_ddl_enable_fast_reorg` 、 `tidb_ddl_reorg_worker_cnt` 、 `tidb_ddl_reorg_batch_size` 、 `tidb_enable_auto_increment_in_generated` 、および`tidb_ddl_reorg_priority`です。詳細については、[システム変数](/system-variables.md#tidb_ddl_reorg_worker_cnt)を参照してください。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
