@@ -22,8 +22,8 @@ region_code = "aws-us-east-1"
 ```toml
 # ~/.ti/credentials
 [default]
-ti_public_key = "..."
-ti_private_key = "..."
+tidb_cloud_public_key = "..."
+tidb_cloud_private_key = "..."
 ```
 
 The credentials file uses owner-only permissions where the platform supports POSIX modes.
@@ -59,7 +59,7 @@ An explicit empty profile is invalid.
 
 Credential selection is:
 
-1. `TI_PUBLIC_KEY` and `TI_PRIVATE_KEY`, when either is set;
+1. `TIDB_CLOUD_PUBLIC_KEY` and `TIDB_CLOUD_PRIVATE_KEY`, when either is set;
 2. the selected section of `~/.ti/credentials`.
 
 Both environment values are required together. `ti` never mixes one environment half with one file half.

@@ -227,7 +227,7 @@ List resources and identify only those created by your workflow. Use describe be
 
 ```bash
 ti db describe-db-cluster --db-cluster-id "<cluster-id>"
-ti fs describe-file-system --file-system-id "<filesystem-name>"
+ti fs describe-file-system --file-system-id "<file-system-id>"
 ```
 
 Preview supported cleanup:
@@ -235,7 +235,7 @@ Preview supported cleanup:
 ```bash
 ti db delete-db-cluster --db-cluster-id "<cluster-id>" --dry-run
 ti fs delete-file-system \
-  --file-system-id "<filesystem-name>" \
+  --file-system-id "<file-system-id>" \
   --dry-run
 ```
 
