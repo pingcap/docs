@@ -1,6 +1,6 @@
 ---
 title: Improve Vector Search Performance
-summary: TiDBベクトル検索 のパフォーマンスを向上させるためのベストプラクティスを学びます。
+summary: TiDBベクトル検索のパフォーマンスを向上させるためのベストプラクティスを学びます。
 aliases: ['/ja/tidb/stable/vector-search-improve-performance/','/ja/tidbcloud/vector-search-improve-performance/']
 ---
 
