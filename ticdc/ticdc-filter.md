@@ -50,6 +50,7 @@ ignore-delete-value-expr = "name = 'john'" # Ignore delete DMLs that contain the
 ignore-insert-value-expr = "id >= 100" # Ignore insert DMLs that contain the condition "id >= 100".
 ignore-update-old-value-expr = "age < 18 or name = 'lili'" # Ignore update DMLs whose old value contains "age < 18" or "name = 'lili'".
 ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DMLs whose new value contains "gender = 'male'" and "age > 18".
+ignore-update-only-columns = ["version", "updated_at"] # Ignore update DMLs if every changed column is either version or updated_at.
 ```
 
 Description of configuration parameters:
@@ -122,6 +123,14 @@ Description of configuration parameters:
 - `ignore-insert-value-expr`: this parameter accepts a SQL expression that follows the default SQL mode, used to filter out the `INSERT` type of DML events with a specified value.
 - `ignore-update-old-value-expr`: this parameter accepts a SQL expression that follows the default SQL mode, used to filter out the `UPDATE` type of DML events with a specified old value.
 - `ignore-update-new-value-expr`: this parameter accepts a SQL expression that follows the default SQL mode, used to filter out the `UPDATE` DML events with a specified new value.
+- `ignore-update-only-columns`: specifies a set of column names. Introduced in v8.5.9. For tables matching `matcher`, if all columns whose values are changed in an `UPDATE` event are included in this list, TiCDC filters out the event. If any changed column is not included in the list, TiCDC sends the event to the downstream. This configuration applies only to Kafka downstreams and does not affect `INSERT` or `DELETE` events.
+
+    When using this configuration, note the following:
+
+    - TiCDC does not filter out an `UPDATE` event if it changes a primary key or unique key column, even if the column is included in the list.
+    - The `case-sensitive` changefeed configuration item controls whether column name matching is case-sensitive.
+    - If a column in the list does not exist in a matching table, TiCDC outputs a warning log and ignores the column. Other valid columns in the list are still used to determine whether to filter out the event.
+    - For non-Kafka downstreams, TiCDC accepts this configuration but does not filter events based on it.
 
 > **Note:**
 >
