@@ -199,7 +199,7 @@ vector_store.insert(
 )
 ```
 
-### ステップ7．意味検索を実行する {#step-7-perform-semantic-search}
+### ステップ7．セマンティック検索を実行する {#step-7-perform-semantic-search}
 
 このステップでは、"a swimming animal"という単語を検索しますが、既存の文書にはこの単語と直接一致するものはありません。
 

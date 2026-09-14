@@ -9,7 +9,7 @@ summary: ベクトル埋め込みを用いたセマンティック検索を実�
 
 このアプリケーションは、ローカル埋め込み生成に[Ollama](https://ollama.com/download)、Web UI に[Streamlit](https://streamlit.io/)、および RAG パイプラインを構築するために[`pytidb`](https://github.com/pingcap/pytidb) (TiDB 用の公式 Python SDK) を使用します。
 
-<p align="center"><img width="700" alt="ベクトル埋め込みを用いた意味検索" src="https://docs-download.pingcap.com/media/images/docs/ai/semantic-search-with-vector-embeddings.png" /><p align="center"><i>ベクトル埋め込みを用いた意味検索</i></p></p>
+<p align="center"><img width="700" alt="ベクトル埋め込みを用いたセマンティック検索" src="https://docs-download.pingcap.com/media/images/docs/ai/semantic-search-with-vector-embeddings.png" /><p align="center"><i>ベクトル埋め込みを用いたセマンティック検索</i></p></p>
 
 ## 前提条件 {#prerequisites}
 
