@@ -115,7 +115,7 @@ The following are billing explanations related to storage:
 
     > **Note:**
     >
-    > Infrequent Access is currently in private preview for {{{ .essential }}} and is only available upon request.
+    > Infrequent Access is currently in private preview and is only available upon request.
 
 - **Columnar storage**: Columnar storage is powered by the **TiFlash** engine. <!--**Use case:** Online analytical processing (OLAP) workloads that benefit from real-time columnar acceleration without requiring additional ETL.-->
 
