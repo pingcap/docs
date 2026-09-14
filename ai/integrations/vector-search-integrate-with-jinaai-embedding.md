@@ -4,7 +4,7 @@ summary: TiDB Vector SearchをJina AI Embeddings APIと統合して、埋め込�
 aliases: ['/ja/tidb/stable/vector-search-integrate-with-jinaai-embedding/','/ja/tidb/dev/vector-search-integrate-with-jinaai-embedding/','/ja/tidbcloud/vector-search-integrate-with-jinaai-embedding/']
 ---
 
-# TiDBベクトル検索をJina AI埋め込みAPIと統合する {#integrate-tidb-vector-search-with-jina-ai-embeddings-api}
+# TiDB Vector SearchをJina AI埋め込みAPIと統合する {#integrate-tidb-vector-search-with-jina-ai-embeddings-api}
 
 このチュートリアルでは[Jina AI](https://jina.ai/)を使用してテキスト埋め込みを生成し、TiDBに保存し、埋め込みに基づいて類似のテキストを検索する方法を順を追って説明します。
 

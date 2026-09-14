@@ -731,8 +731,8 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 - [PyMySQLでTiDBに接続する](/develop/dev-guide-sample-application-python-pymysql.md)
 - [SQLAlchemy で TiDB に接続する](/develop/dev-guide-sample-application-python-sqlalchemy.md)
 - [peeweeでTiDBに接続する](/develop/dev-guide-sample-application-python-peewee.md)
-- [TiDBベクトル検索をJina AI Embeddings APIと統合する](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)
-- [TiDBベクトル検索をSQLAlchemyと統合する](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)
+- [TiDB Vector SearchをJina AI Embeddings APIと統合する](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)
+- [TiDB Vector SearchをSQLAlchemyと統合する](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)
 - [LlamaIndexとベクトル検索を統合する](/ai/integrations/vector-search-integrate-with-llamaindex.md)
 - [システム変数](/system-variables.md#ssl_ca)
 

@@ -4,9 +4,9 @@ summary: TiDB Vector SearchをSQLAlchemyと統合して、埋め込みデータ�
 aliases: ['/ja/tidb/stable/vector-search-integrate-with-sqlalchemy/','/ja/tidb/dev/vector-search-integrate-with-sqlalchemy/','/ja/tidbcloud/vector-search-integrate-with-sqlalchemy/']
 ---
 
-# TiDBベクトル検索をSQLAlchemyと統合する {#integrate-tidb-vector-search-with-sqlalchemy}
+# TiDB Vector SearchをSQLAlchemyと統合する {#integrate-tidb-vector-search-with-sqlalchemy}
 
-このチュートリアルでは、 [SQLAlchemy](https://www.sqlalchemy.org/)を使用して[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)と対話し、埋め込みを保存し、ベクトル検索クエリを実行する方法を説明します。
+このチュートリアルでは、 [SQLAlchemy](https://www.sqlalchemy.org/)を使用して[TiDB Vector Search](/ai/concepts/vector-search-overview.md)と対話し、埋め込みを保存し、ベクトル検索クエリを実行する方法を説明します。
 
 > **Note:**
 >

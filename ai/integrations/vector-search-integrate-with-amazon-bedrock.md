@@ -10,7 +10,7 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 >
 > このドキュメントはTiDB Cloudにのみ適用され、TiDB Self-Managedには適用されません。
 
-このチュートリアルでは[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)と[Amazon Bedrock](https://aws.amazon.com/bedrock/)を統合して、検索拡張生成 (RAG) Q&amp;A ボットを構築する方法を説明します。
+このチュートリアルでは[TiDB Vector Search](/ai/concepts/vector-search-overview.md)と[Amazon Bedrock](https://aws.amazon.com/bedrock/)を統合して、検索拡張生成 (RAG) Q&amp;A ボットを構築する方法を説明します。
 
 > **Note:**
 >

@@ -4,9 +4,9 @@ summary: TiDB Vector Searchをpeeweeと統合して、埋め込みデータを�
 aliases: ['/ja/tidb/stable/vector-search-integrate-with-peewee/','/ja/tidb/dev/vector-search-integrate-with-peewee/','/ja/tidbcloud/vector-search-integrate-with-peewee/']
 ---
 
-# TiDBベクトル検索をpeeweeと統合する {#integrate-tidb-vector-search-with-peewee}
+# TiDB Vector Searchをpeeweeと統合する {#integrate-tidb-vector-search-with-peewee}
 
-このチュートリアルでは[Peewee](https://docs.peewee-orm.com/)を使用して[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)と対話し、埋め込みを保存し、ベクトル検索クエリを実行する方法を説明します。
+このチュートリアルでは[Peewee](https://docs.peewee-orm.com/)を使用して[TiDB Vector Search](/ai/concepts/vector-search-overview.md)と対話し、埋め込みを保存し、ベクトル検索クエリを実行する方法を説明します。
 
 > **Note:**
 >
