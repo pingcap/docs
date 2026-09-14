@@ -1961,12 +1961,12 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
     - DML statements executed using the deprecated batch-dml feature, or DML and `COMMIT` statements when [`tidb_batch_commit`](#tidb_batch_commit) is enabled.
     - Statements executed using [Pipelined DML](/pipelined-dml.md). If `tidb_dml_type = 'bulk'` is set but the statement falls back to ordinary DML execution, this variable still applies.
     - `EXPLAIN ANALYZE` statements and statement types other than those listed above, such as `LOAD DATA` and `IMPORT INTO`.
-- To limit the execution time of `SELECT` statements, use [`max_execution_time`](#max_execution_time) or the [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen) hint. These settings do not override `tidb_dml_max_execution_time` for DML statements.
 
 > **Note:**
 >
-> - The precision of timeout detection is roughly 100ms. A statement might not be terminated at the exact time specified by this variable.
-> - Set a value that allows sufficient time for normal DML execution. After TiDB interrupts a statement, requests already sent to TiKV might continue running. An excessively short timeout combined with frequent application retries might increase cluster load.
+> - The statement might finish later than the configured timeout.
+> - For `COMMIT` and autocommit DML statements, if the statement times out and TiDB cannot determine whether the transaction has committed, it closes the client connection. The client might receive a connection error instead of a statement timeout error. A connection loss does not mean that the transaction has been rolled back; the transaction might have committed.
+> - When enabling this variable, it is recommended to set a relatively long timeout and allow sufficient headroom for normal DML execution and transaction commits. After TiDB interrupts a statement, requests already sent to TiKV might continue running or remain queued. An excessively short timeout combined with frequent application retries might cause retries to overlap with unfinished requests, increasing TiKV load and worsening request buildup during a failure. If your application retries an operation, use exponential backoff with jitter to reduce the additional load on TiKV.
 
 ### tidb_dml_type <span class="version-mark">New in v8.0.0</span>
 
