@@ -52,9 +52,9 @@ TiDBベクトル検索 を ORM ライブラリと統合して、TiDB データ�
 
 | 言語    | ORM/クライアント       | インストール方法                    | チュートリアル |
 |---------|--------------------|-----------------------------------|--------------|
-| Python   | SQLAlchemy         | `pip install tidb-vector`         | [Integrate TiDBベクトル検索 with SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md) |
-| Python   | peewee             | `pip install tidb-vector`         | [Integrate TiDBベクトル検索 with peewee](/ai/integrations/vector-search-integrate-with-peewee.md) |
-| Python   | Django             | `pip install django-tidb[vector]` | [Integrate TiDBベクトル検索 with Django](/ai/integrations/vector-search-integrate-with-django-orm.md) |
+| Python   | SQLAlchemy         | `pip install tidb-vector`         | [Integrate TiDB Vector Search with SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md) |
+| Python   | peewee             | `pip install tidb-vector`         | [Integrate TiDB Vector Search with peewee](/ai/integrations/vector-search-integrate-with-peewee.md) |
+| Python   | Django             | `pip install django-tidb[vector]` | [Integrate TiDB Vector Search with Django](/ai/integrations/vector-search-integrate-with-django-orm.md) |
 
 ## クラウドサービス {#cloud-services}
 
@@ -65,7 +65,7 @@ TiDBベクトル検索 を ORM ライブラリと統合して、TiDB データ�
 | クラウドサービス | ガイド |
 |----------------|---------------------------------------------------------------------------------------------------------------------------|
 | Jina AI        | [Integrate Vector Search with Jina AI Embeddings API](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)  |
-| Amazon Bedrock | [Integrate TiDBベクトル検索 with Amazon Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md)       |
+| Amazon Bedrock | [Integrate TiDB Vector Search with Amazon Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md)       |
 
 ## MCP サーバー {#mcp-server}
 
