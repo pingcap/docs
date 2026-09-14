@@ -83,7 +83,7 @@ CentOS Linux 7はサポート終了（EOL）を迎えたため、今後のTiDB�
 
     - GBK/GB18030でエンコードされたデータを処理する際にエンコードが失敗する可能性がある問題を修正しました [#17618](https://github.com/tikv/tikv/issues/17618) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - TiKV MVCC In-Memory Engine (IME) がレプリカをプリロードするときに初期化されていないレプリカが原因で TiKV パニックが発生する問題を修正 [#18046](https://github.com/tikv/tikv/issues/18046) @[overvenus](https://github.com/overvenus)
-    - リージョン分割後にリーダーが迅速に選出されない問題を修正 [#17602](https://github.com/tikv/tikv/issues/17602) @[LykxSassinator](https://github.com/LykxSassinator)
+    - リージョンスプリット後にリーダーが迅速に選出されない問題を修正 [#17602](https://github.com/tikv/tikv/issues/17602) @[LykxSassinator](https://github.com/LykxSassinator)
     - ディスクがスタックしているときに TiKV が PD にハートビートを報告できない問題を修正 [#17939](https://github.com/tikv/tikv/issues/17939) @[LykxSassinator](https://github.com/LykxSassinator)
 
 - PD

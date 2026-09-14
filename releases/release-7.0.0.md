@@ -426,7 +426,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     - Backup & Restore (BR)
 
-        - PITRリカバリプロセス中のリージョン分割再試行の待機時間が不十分な問題を修正 [#42001](https://github.com/pingcap/tidb/issues/42001) @[joccau](https://github.com/joccau)
+        - PITRリカバリプロセス中のリージョンスプリット再試行の待機時間が不十分な問題を修正 [#42001](https://github.com/pingcap/tidb/issues/42001) @[joccau](https://github.com/joccau)
         - PITRリカバリプロセス中に発生した`memory is limited`エラーによるリカバリ失敗の問題を修正 [#41983](https://github.com/pingcap/tidb/issues/41983) @[joccau](https://github.com/joccau)
         - PD ノードがダウンしているときに PITR ログのバックアップの進行状況が進まない問題を修正 [#14184](https://github.com/tikv/tikv/issues/14184) @[YuJuncen](https://github.com/YuJuncen)
         - リージョンリーダーシップの移行時にPITRログバックアップのレイテンシーが増加する問題を軽減する [#13638](https://github.com/tikv/tikv/issues/13638) @[YuJuncen](https://github.com/YuJuncen)

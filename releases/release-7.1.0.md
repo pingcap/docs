@@ -129,9 +129,9 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     v7.1.0 以降、 TiDB Lightning には、TiB レベルのデータをインポートする際の安定性を向上させるために 4つの設定項目が追加されました。
 
-    - `tikv-importer.region-split-batch-size`バッチでリージョンを分割する際のリージョンの数を制御します。デフォルト値は`4096`です。
-    - `tikv-importer.region-split-concurrency`リージョン分割時の同時実行を制御します。デフォルト値は CPU コアの数です。
-    - `tikv-importer.region-check-backoff-limit` 、分割および分散処理後にリージョンがオンラインになるまでの再試行回数を制御します。デフォルト値は`1800`で、最大再試行間隔は 2秒です。再試行の間にいずれかのリージョンがオンラインになった場合、再試行回数は増加しません。
+    - `tikv-importer.region-split-batch-size`バッチでリージョンをスプリットする際のリージョンの数を制御します。デフォルト値は`4096`です。
+    - `tikv-importer.region-split-concurrency`リージョンスプリット時の同時実行を制御します。デフォルト値は CPU コアの数です。
+    - `tikv-importer.region-check-backoff-limit` 、スプリットおよび分散処理後にリージョンがオンラインになるまでの再試行回数を制御します。デフォルト値は`1800`で、最大再試行間隔は 2秒です。再試行の間にいずれかのリージョンがオンラインになった場合、再試行回数は増加しません。
     - `tikv-importer.pause-pd-scheduler-scope` TiDB Lightning がPD スケジューリングを一時停止する範囲を制御します。値のオプションは`"table"`と`"global"`です。デフォルト値は`"table"`です。v6.1.0 より前のバージョンの TiDB では、データインポート中にグローバルスケジューリングを一時停止する`"global"`オプションのみを設定できます。v6.1.0 以降では、ターゲットテーブルデータが格納されているリージョンのスケジューリングのみを一時停止する`"table"`オプションがサポートされています。データ量が多いシナリオでは、安定性を向上させるために、この設定項目を`"global"`に設定することをお勧めします。
 
     詳細については[ドキュメント](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
@@ -295,9 +295,9 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 | PD             | [`schedule.enable-diagnostic`](/pd-configuration-file.md#enable-diagnostic-new-in-v630)                                        | 変更     | デフォルト値を`false`から`true`に変更します。これは、スケジューラの診断機能がデフォルトで有効であることを意味します。                                                                                                                  |
 | TiFlash        | `http_port`                                                                                                                    | 削除済み     | HTTP サービス ポート (デフォルト`8123` ) を廃止します。                                                                                                                                               |
 | TiDB Lightning | [`tikv-importer.pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)                                    | 新しく追加された | TiDB LightningがPDスケジュールを一時停止する範囲を制御します。デフォルト値は`"table"`で、値のオプションは`"global"`と`"table"`です。                                                                                           |
-| TiDB Lightning | [`tikv-importer.region-check-backoff-limit`](/tidb-lightning/tidb-lightning-configuration.md)                                  | 新しく追加された | 分割および分散処理後にリージョンがオンラインになるまでの再試行回数を制御します。デフォルト値は`1800`です。最大再試行間隔は 2秒です。再試行の間にいずれかのリージョンがオンラインになった場合、再試行回数は増加しません。                                                                  |
-| TiDB Lightning | [`tikv-importer.region-split-batch-size`](/tidb-lightning/tidb-lightning-configuration.md)                                     | 新しく追加された | バッチでリージョンを分割する際のリージョン数を制御します。デフォルト値は`4096`です。                                                                                                                                      |
-| TiDB Lightning | [`tikv-importer.region-split-concurrency`](/tidb-lightning/tidb-lightning-configuration.md)                                    | 新しく追加された | リージョンを分割する際の同時実行を制御します。デフォルト値はCPUコアの数です。                                                                                                                                           |
+| TiDB Lightning | [`tikv-importer.region-check-backoff-limit`](/tidb-lightning/tidb-lightning-configuration.md)                                  | 新しく追加された | スプリットおよび分散処理後にリージョンがオンラインになるまでの再試行回数を制御します。デフォルト値は`1800`です。最大再試行間隔は 2秒です。再試行の間にいずれかのリージョンがオンラインになった場合、再試行回数は増加しません。                                                                  |
+| TiDB Lightning | [`tikv-importer.region-split-batch-size`](/tidb-lightning/tidb-lightning-configuration.md)                                     | 新しく追加された | バッチでリージョンをスプリットする際のリージョン数を制御します。デフォルト値は`4096`です。                                                                                                                                      |
+| TiDB Lightning | [`tikv-importer.region-split-concurrency`](/tidb-lightning/tidb-lightning-configuration.md)                                    | 新しく追加された | リージョンをスプリットする際の同時実行を制御します。デフォルト値はCPUコアの数です。                                                                                                                                           |
 | TiCDC          | [`insecure-skip-verify`](/ticdc/ticdc-sink-to-kafka.md)                                                                        | 新しく追加された | Kafka にデータを複製するシナリオで TLS が有効になっている場合に認証アルゴリズムを設定するかどうかを制御します。                                                                                                                      |
 | TiCDC          | [`integrity.corruption-handle-level`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | 新しく追加された | 単一行データのチェックサム検証に失敗した場合のChangefeedのログレベルを指定します。デフォルト値は`"warn"`です。値のオプションは`"warn"`と`"error"`です。                                                                                      |
 | TiCDC          | [`integrity.integrity-check-level`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds)   | 新しく追加された | 単一行データのチェックサム検証を有効にするかどうかを制御します。デフォルト値は`"none"`で、この機能は無効です。                                                                                                                        |
@@ -316,7 +316,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 - TiKV
 
-    - パーティション化されたRaft KV を使用する場合、分割操作による書き込み QPS への影響を軽減します。 [#14447](https://github.com/tikv/tikv/issues/14447) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
+    - パーティション化されたRaft KV を使用する場合、スプリット操作による書き込み QPS への影響を軽減します。 [#14447](https://github.com/tikv/tikv/issues/14447) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
     - パーティション化されたRaft KV を使用するときにスナップショットが占めるスペースを最適化します [#14581](https://github.com/tikv/tikv/issues/14581) @[bufferflies](https://github.com/bufferflies)
     - TiKV でリクエストの処理の各段階のより詳細な時間情報を提供します [#12362](https://github.com/tikv/tikv/issues/12362) @[cfzjywxk](https://github.com/cfzjywxk)
     - ログバックアップで PD をメタストアとして使用します [#13867](https://github.com/tikv/tikv/issues/13867) @[YuJuncen](https://github.com/YuJuncen)
@@ -382,7 +382,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     - `Limit` を使用してパーティションテーブルをクエリしたときに返される誤った値を修正しました [#24636](https://github.com/pingcap/tidb/issues/24636)
     - IPv6環境で誤ったTiDBアドレスが表示される問題を修正[#43260](https://github.com/pingcap/tidb/issues/43260) @[nexustar](https://github.com/nexustar)
     - システム変数`tidb_enable_tiflash_read_for_write_stmt`と`tidb_enable_exchange_partition` に誤った値が表示される問題を修正しました [#43281](https://github.com/pingcap/tidb/issues/43281) @[gengliqi](https://github.com/gengliqi)
-    - `tidb_scatter_region`を有効にすると、パーティションが切り捨てられた後にリージョンが自動的に分割されない問題を修正しました[#43174](https://github.com/pingcap/tidb/issues/43174) [#43028](https://github.com/pingcap/tidb/issues/43028) @[jiyfhust](https://github.com/jiyfhust)
+    - `tidb_scatter_region`を有効にすると、パーティションが切り捨てられた後にリージョンが自動的にスプリットされない問題を修正しました[#43174](https://github.com/pingcap/tidb/issues/43174) [#43028](https://github.com/pingcap/tidb/issues/43028) @[jiyfhust](https://github.com/jiyfhust)
     - 生成列を持つテーブルにチェックを追加し、これらの列でサポートされていない DDL 操作のエラーを報告します[#38988](https://github.com/pingcap/tidb/issues/38988) [#24321](https://github.com/pingcap/tidb/issues/24321) @[tiancaiamao](https://github.com/tiancaiamao)
     - 特定の型変換エラーでエラーメッセージが正しく表示されない問題を修正 [#41730](https://github.com/pingcap/tidb/issues/41730) @[hawkingrei](https://github.com/hawkingrei)
     - TiDBノードが正常にシャットダウンした後、このノードでトリガーされたDDLタスクがキャンセルされる問題を修正しました[#43854](https://github.com/pingcap/tidb/issues/43854) @[zimulala](https://github.com/zimulala)

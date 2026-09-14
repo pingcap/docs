@@ -48,7 +48,7 @@ TiDB バージョン: 4.0.14
     - 最初にステータスサーバーをシャットダウンして、クライアントがシャットダウンステータス正しく確認できることを確認します。 [#10504](https://github.com/tikv/tikv/pull/10504)
     - 古いピアには常に応答して、これらのピアがより早くクリアされるようにします[#10400](https://github.com/tikv/tikv/pull/10400)
     - TiCDCシンクのメモリ消費を制限する[#10147](https://github.com/tikv/tikv/pull/10147)
-    - リージョンが大きすぎる場合は、均等分割を使用して分割プロセスを高速化します[#10275](https://github.com/tikv/tikv/pull/10275)
+    - リージョンが大きすぎる場合は、均等スプリットを使用してスプリットプロセスを高速化します[#10275](https://github.com/tikv/tikv/pull/10275)
 
 - PD
 
@@ -106,8 +106,8 @@ TiDB バージョン: 4.0.14
     - コプロセッサの関数`json_unquote()`の間違った引数の型を修正 [#10176](https://github.com/tikv/tikv/issues/10176)
     - シャットダウン時の疑わしい警告とRaftstore からの非決定的な応答の問題を修正しました [#10307](https://github.com/tikv/tikv/issues/10307) [#10353](https://github.com/tikv/tikv/issues/10353)
     - バックアップスレッドリークの問題を修正[#10287](https://github.com/tikv/tikv/issues/10287)
-    - 分割プロセスが遅すぎてリージョンのマージが進行中の場合、リージョン分割がpanicてメタデータが破損する可能性がある問題を修正しました[#8456](https://github.com/tikv/tikv/issues/8456) [#8783](https://github.com/tikv/tikv/issues/8783)
-    - リージョンハートビートにより、TiKV が特定の状況で大規模なリージョンを分割できない問題を修正[#10111](https://github.com/tikv/tikv/issues/10111)
+    - スプリットプロセスが遅すぎてリージョンのマージが進行中の場合、リージョンスプリットがpanicてメタデータが破損する可能性がある問題を修正しました[#8456](https://github.com/tikv/tikv/issues/8456) [#8783](https://github.com/tikv/tikv/issues/8783)
+    - リージョンハートビートにより、TiKV が特定の状況で大規模なリージョンをスプリットできない問題を修正[#10111](https://github.com/tikv/tikv/issues/10111)
     - TiKVとTiDB 間のCMスケッチの形式の不一致によって発生した誤った統計を修正しました [#25638](https://github.com/pingcap/tidb/issues/25638)
     - `apply wait duration`メトリックの誤った統計を修正 [#9893](https://github.com/tikv/tikv/issues/9893)
     - Titan で`delete_files_in_range`を使用した後に発生する"Missing Blob"エラーを修正 [#10232](https://github.com/tikv/tikv/pull/10232)

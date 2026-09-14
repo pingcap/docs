@@ -310,7 +310,7 @@
       - [`tidb_external_ts`を使用してステイル読み取りを実行する](/tidb-external-ts.md)
     - [`tidb_snapshot`システム変数を使用する](/read-historical-data.md)
   - [配置ルールを使用する](/configure-placement-rules.md)
-  - [ロードベース分割を使用する](/configure-load-base-split.md)
+  - [ロードベーススプリットを使用する](/configure-load-base-split.md)
   - [店舗利用制限](/configure-store-limit.md)
   - [バッチ処理](/batch-processing.md)
   - PDマイクロサービスを使用する
@@ -580,7 +580,7 @@
     - [RocksDBの概要](/storage-engine/rocksdb-overview.md)
     - [Titanの概要](/storage-engine/titan-overview.md)
     - [Titan Configuration](/storage-engine/titan-configuration.md)
-    - [分割されたRaftKV](/partitioned-raft-kv.md)
+    - [パーティション化されたRaft KV](/partitioned-raft-kv.md)
   - ストレージエンジン - TiFlash
     - [概要](/tiflash/tiflash-overview.md)
     - [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)

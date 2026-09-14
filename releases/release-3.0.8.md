@@ -30,7 +30,7 @@ TiDB Ansible バージョン: 3.0.8
     - `ExplainExec` の保証されていない`close()`呼び出しによって発生する`EXPLAIN ANALYZE`文の実行時のゴルーチン リークの問題を修正しました。 [#14226](https://github.com/pingcap/tidb/pull/14226)
 - DDL
     - `change column`のエラーメッセージ出力`modify column`最適化して理解しやすくする[#13796](https://github.com/pingcap/tidb/pull/13796)
-    - パーティションテーブルリージョン分割をサポートするために`SPLIT PARTITION TABLE`構文を追加します [#13929](https://github.com/pingcap/tidb/pull/13929)
+    - パーティションテーブルリージョンスプリットをサポートするために`SPLIT PARTITION TABLE`構文を追加します [#13929](https://github.com/pingcap/tidb/pull/13929)
     - インデックス作成時にインデックスの長さが正しくチェックされないため、インデックスの長さが3072バイトを超えてもエラーが報告されない問題を修正しました[#13779](https://github.com/pingcap/tidb/pull/13779)
     - パーティションテーブルにインデックスを追加するのに時間がかかりすぎるため、 `GC life time is shorter than transaction duration`エラーメッセージが報告される可能性がある問題を修正しました。 [#14132](https://github.com/pingcap/tidb/pull/14132)
     - `DROP COLUMN` / `MODIFY COLUMN` / `CHANGE COLUMN`実行時に外部キーがチェックされないため、 `SELECT * FROM information_schema.KEY_COLUMN_USAGE`実行時にpanicする問題を修正しました[#14105](https://github.com/pingcap/tidb/pull/14105)
@@ -80,7 +80,7 @@ TiDB Ansible バージョン: 3.0.8
     - 統計サンプリングデータの更新動作を、行を直接更新するのではなく、挿入前に削除するように変更し、tidb-server の更新動作との一貫性を保ちます。 [#6069](https://github.com/tikv/tikv/pull/6096)
 - Raftstore
     - `destroy`メッセージを`peerfsm`に繰り返し送信し、 `peerfsm`複数回破棄されることによって引き起こされるpanicを修正[#6297](https://github.com/tikv/tikv/pull/6297)
-    - デフォルト値`split-region-on-table`を`true`から`false`に更新して、デフォルトでテーブルごとにリージョンを分割しないようにします[#6253](https://github.com/tikv/tikv/pull/6253)
+    - デフォルト値`split-region-on-table`を`true`から`false`に更新して、デフォルトでテーブルごとにリージョンをスプリットしないようにします[#6253](https://github.com/tikv/tikv/pull/6253)
 - エンジン
     - 極端な状況でRocksDBイテレータエラーが正しく処理されないため、空のデータが返される可能性がある問題を修正しました[#6326](https://github.com/tikv/tikv/pull/6326)
 - トランザクション

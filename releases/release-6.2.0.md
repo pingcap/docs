@@ -360,7 +360,7 @@ TiDB v6.2.0以降、 BRを使用したRawKVのバックアップと復元は非�
 
 - PD
 
-    - リージョンのCPU使用率の統計的側面をサポートし、ロードベース分割の使用シナリオを強化する [#12063](https://github.com/tikv/tikv/issues/12063) @[JmPotato](https://github.com/JmPotato)
+    - リージョンのCPU使用率の統計的側面をサポートし、ロードベーススプリットの使用シナリオを強化する [#12063](https://github.com/tikv/tikv/issues/12063) @[JmPotato](https://github.com/JmPotato)
 
 - TiFlash
 
@@ -429,7 +429,7 @@ TiDB v6.2.0以降、 BRを使用したRawKVのバックアップと復元は非�
     - `DATETIME`の値に小数が含まれている場合と`Z`の値が含まれている場合に発生する時間解析エラーの問題を修正しました [#12739](https://github.com/tikv/tikv/issues/12739) @[gengliqi](https://github.com/gengliqi)
     - Apply オペレーターが TiKV RocksDB に書き込む perf コンテキストが粗粒度である問題を修正 [#11044](https://github.com/tikv/tikv/issues/11044) @[LykxSassinator](https://github.com/LykxSassinator)
     - [バックアップ](/tikv-configuration-file.md#backup)/[インポート](/tikv-configuration-file.md#import)/ [CDC](/tikv-configuration-file.md#cdc)の設定が無効な場合にTiKVが起動できない問題を修正 [#12771](https://github.com/tikv/tikv/issues/12771) @[3pointer](https://github.com/3pointer)
-    - ピアが分割され、同時に破棄される際に発生する可能性のあるpanic問題を修正 [#12825](https://github.com/tikv/tikv/issues/12825) @[BusyJay](https://github.com/BusyJay)
+    - ピアがスプリットされ、同時に破棄される際に発生する可能性のあるpanic問題を修正 [#12825](https://github.com/tikv/tikv/issues/12825) @[BusyJay](https://github.com/BusyJay)
     - リージョンマージプロセスでソースピアがスナップショットによってログを追いついたときに発生する可能性のpanic問題を修正 [#12663](https://github.com/tikv/tikv/issues/12663) @[BusyJay](https://github.com/BusyJay)
     - `max_sample_size`が`0`に設定されている場合に統計分析で発生するpanic問題を修正 [#11192](https://github.com/tikv/tikv/issues/11192) @[LykxSassinator](https://github.com/LykxSassinator)
     - Raft Engineが有効になっているときに暗号化キーがクリーンアップされない問題を修正 [#12890](https://github.com/tikv/tikv/issues/12890) @[tabokie](https://github.com/tabokie)

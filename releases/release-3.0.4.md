@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.4 Release Notes
-summary: TiDB 3.0.4は2019年10月8日にリリースされました。SQLパフォーマンスの問題をトラブルシューティングするためのシステムテーブル、分割パフォーマンスと逆スキャンの改善、スロークエリログとデータレプリケーションに関連する問題の修正などの新機能が含まれています。また、コミュニティからの貢献と、TiDB、TiKV、PD、TiDB Ansibleのアップデートも含まれています。
+summary: TiDB 3.0.4は2019年10月8日にリリースされました。SQLパフォーマンスの問題をトラブルシューティングするためのシステムテーブル、スプリットパフォーマンスと逆スキャンの改善、スロークエリログとデータレプリケーションに関連する問題の修正などの新機能が含まれています。また、コミュニティからの貢献と、TiDB、TiKV、PD、TiDB Ansibleのアップデートも含まれています。
 ---
 
 # TiDB 3.0.4 リリースノート {#tidb-3-0-4-release-notes}
@@ -16,7 +16,7 @@ TiDB Ansible バージョン: 3.0.4
     - TiDBの`SHOW TABLE REGIONS`構文に`WHERE`句を追加する
     - Reparoに`worker-count`と`txn-batch`設定項目を追加して回復速度を制御します
 - 改善点
-    - TiKV でバッチリージョン分割コマンドと空分割コマンドをサポートし、分割パフォーマンスを向上
+    - TiKV でバッチリージョンスプリットコマンドと空スプリットコマンドをサポートし、スプリットパフォーマンスを向上
     - TiKV で RocksDB の二重リンクリストをサポートし、逆スキャンのパフォーマンスを向上
     - クラスタの状態をより適切に診断するために、TiDB Ansibleに2つのperfツール`iosnoop`と`funcslower`を追加します。
     - 冗長なフィールドを削除して、TiDB のスロークエリログの出力を最適化します。
@@ -42,7 +42,7 @@ TiDB Ansible バージョン: 3.0.4
 ## TiDB {#tidb}
 
 - SQLオプティマイザ
-    - フィードバックで分割すると無効なクエリ範囲が生成される可能性がある問題を修正しました [#12170](https://github.com/pingcap/tidb/pull/12170)
+    - フィードバックでスプリットすると無効なクエリ範囲が生成される可能性がある問題を修正しました [#12170](https://github.com/pingcap/tidb/pull/12170)
     - 結果に無効なキーが含まれている場合はエラーを返すのではなく、 `SHOW STATS_BUCKETS`のステートメントの返されたエラーを16進数で表示します。 [#12094](https://github.com/pingcap/tidb/pull/12094)
     - クエリに`SLEEP`関数（たとえば`select 1 from (select sleep(1)) t;)` ）が含まれている場合、列プルーニングによってクエリ中に無効な`sleep(1)`が発生する問題を修正しました。 [#11953](https://github.com/pingcap/tidb/pull/11953)
     - クエリがテーブルデータではなく列数のみに関係する場合は、インデックススキャンを使用してIOを削減します[#12112](https://github.com/pingcap/tidb/pull/12112)
@@ -80,7 +80,7 @@ TiDB Ansible バージョン: 3.0.4
     - `tidb_allow_remove_auto_inc`変数を追加します。列の`AUTO INCREMENT`属性の削除はデフォルトで無効になっています[#12145](https://github.com/pingcap/tidb/pull/12145)
     - コメントされていない TiDB 固有の構文`PRE_SPLIT_REGIONS`データ複製中に下流データベースでエラーを引き起こす可能性がある問題を修正しました [#12120](https://github.com/pingcap/tidb/pull/12120)
     - 設定ファイルに`split-region-max-num`変数を追加して、リージョンの最大許容数を調整できるようにします[#12097](https://github.com/pingcap/tidb/pull/12079)
-    - リージョンを複数のリージョンに分割する機能をサポートし、リージョン分散中のタイムアウトの問題を修正しました[#12343](https://github.com/pingcap/tidb/pull/12343)
+    - リージョンを複数のリージョンにスプリットする機能をサポートし、リージョン分散中のタイムアウトの問題を修正しました[#12343](https://github.com/pingcap/tidb/pull/12343)
     - 2つのインデックスによって参照される`AUTO_INCREMENT`列を含むインデックスの場合に`drop index`文が失敗する問題を修正 [#12344](https://github.com/pingcap/tidb/pull/12344)
 - モニター
     - `tikvclient` の gRPC 接続エラーの数をカウントする`connection_transient_failure_count`監視メトリックを追加します。 [#12093](https://github.com/pingcap/tidb/pull/12093)
@@ -90,7 +90,7 @@ TiDB Ansible バージョン: 3.0.4
 - Raftstore
     - Raftstore が空のリージョンのキーの数を不正確にカウントする問題を修正しました [#5414](https://github.com/tikv/tikv/pull/5414)
     - RocksDB の二重リンクリストをサポートし、逆スキャンのパフォーマンスを向上しました。 [#5368](https://github.com/tikv/tikv/pull/5368)
-    - 分割パフォーマンスを向上させるために、バッチリージョン分割コマンドと空分割コマンドをサポートします[#5470](https://github.com/tikv/tikv/pull/5470)
+    - スプリットパフォーマンスを向上させるために、バッチリージョンスプリットコマンドと空スプリットコマンドをサポートします[#5470](https://github.com/tikv/tikv/pull/5470)
 - サーバ
     - `-V`コマンドの出力形式が2.X の形式と一致しない問題を修正 [#5501](https://github.com/tikv/tikv/pull/5501)
     - Titanを3.0ブランチの最新バージョンにアップグレードします [#5517](https://github.com/tikv/tikv/pull/5517)

@@ -281,7 +281,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
     - リソース制御のバックグラウンドタスクのCPU使用率が二重にカウントされる問題を修正 [#17603](https://github.com/tikv/tikv/issues/17603) @[glorv](https://github.com/glorv)
     - CDC内部タスクの蓄積によりTiKV OOMが発生する可能性がある問題を修正 [#17696](https://github.com/tikv/tikv/issues/17696) @[3AceShowHand](https://github.com/3AceShowHand)
     - `raft-entry-max-size`設定が高すぎる場合に大規模なバッチ書き込みによってパフォーマンスのジッターが発生する問題を修正 [#17701](https://github.com/tikv/tikv/issues/17701) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
-    - リージョン分割後にリーダーが迅速に選出されない問題を修正 [#17602](https://github.com/tikv/tikv/issues/17602) @[LykxSassinator](https://github.com/LykxSassinator)
+    - リージョンスプリット後にリーダーが迅速に選出されない問題を修正 [#17602](https://github.com/tikv/tikv/issues/17602) @[LykxSassinator](https://github.com/LykxSassinator)
     - `RADIANS()`または`DEGREES()`関数を含むクエリを実行する際に TiKV がpanicする可能性がある問題を修正 [#17852](https://github.com/tikv/tikv/issues/17852) @[gengliqi](https://github.com/gengliqi)
     - 休止状態のすべてのリージョンが起動されたときに書き込みジッターが発生する可能性がある問題を修正 [#17101](https://github.com/tikv/tikv/issues/17101) @[hhwyt](https://github.com/hhwyt)
 

@@ -355,13 +355,13 @@ TiKVで大量のデータを書き込んだり読み込んだりすると、I/O�
 
 いいえ。OLTPシナリオでは、TiDBはデータアクセスと操作に高I/Oディスクを必要とします。TiDBは強力な一貫性を備えた分散データベースであり、レプリカレプリケーションやボトムレイヤーストレージの圧縮など、書き込み増幅機能を備えています。そのため、TiDBのベストプラクティスでは、ストレージディスクとしてNVMe SSDの使用を推奨しています。TiKVとPDの混在デプロイはサポートされていません。
 
-### キーデータテーブルの範囲は、データアクセス前に分割されますか？ {#is-the-range-of-the-key-data-table-divided-before-data-access}
+### キーデータテーブルの範囲は、データアクセス前にスプリットされますか？ {#is-the-range-of-the-key-data-table-divided-before-data-access}
 
-いいえ。これはMySQLのテーブル分割ルールとは異なります。TiKVでは、テーブルRangeはリージョンのサイズに基づいて動的に分割されます。
+いいえ。これはMySQLのテーブルスプリットルールとは異なります。TiKVでは、テーブルRangeはリージョンのサイズに基づいて動的にスプリットされます。
 
-### リージョンはどのように分割されますか？ {#how-does-region-split}
+### リージョンはどのようにスプリットされますか？ {#how-does-region-split}
 
-リージョンは事前に分割されるのではなく、リージョン分割メカニズムに従って分割されます。リージョンサイズが`region-max-size`または`region-max-keys`パラメータの値を超えると、分割がトリガーされます。分割後、その情報がPDに報告されます。
+リージョンは事前にスプリットされるのではなく、リージョンスプリットメカニズムに従ってスプリットされます。リージョンサイズが`region-max-size`または`region-max-keys`パラメータの値を超えると、スプリットがトリガーされます。スプリット後、その情報がPDに報告されます。
 
 ### TiKVには、MySQLのようにデータのセキュリティを保証するための`innodb_flush_log_trx_commit`パラメータはありますか？ {#does-tikv-have-the-innodb-flush-log-trx-commit-parameter-like-mysql-to-guarantee-the-security-of-data}
 

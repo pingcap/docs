@@ -171,7 +171,7 @@ summary: TiDB 2.1 GA は 2018年 11月 30日にリリースされ、安定性、
 
     - `TiDB reverse scan`機能をサポートするには[`GetPrevRegion`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L40)を追加します
 
-    - [`BatchSplitRegion`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L54)を追加すると TiKVリージョン分割が高速化されます
+    - [`BatchSplitRegion`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L54)を追加すると TiKVリージョンスプリットが高速化されます
 
     - TiDBで分散GCをサポートするには[`GCSafePoint`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L64-L66)を追加します
 
@@ -180,7 +180,7 @@ summary: TiDB 2.1 GA は 2018年 11月 30日にリリースされ、安定性、
     <!---->
 
     - pd-ctl は以下をサポートします:
-        - [リージョン分割の統計情報を使用する](/pd-control.md#operator-check--show--add--remove)
+        - [リージョンスプリットの統計情報を使用する](/pd-control.md#operator-check--show--add--remove)
 
         - [`jq`を呼び出してJSON出力をフォーマットする](/pd-control.md#jq-formatted-json-output-usage)
 

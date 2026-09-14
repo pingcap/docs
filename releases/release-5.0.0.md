@@ -276,7 +276,7 @@ CREATE TABLE `t` (`a` VARCHAR(255) PRIMARY KEY CLUSTERED, `b` INT);
 
 `delete from table where id <? limit ?`ステートメントの p99 パフォーマンスは 4 倍向上しました。
 
-### ロードベース分割戦略を最適化し、一部の小規模テーブルホットスポット読み取りシナリオでデータが分割できないというパフォーマンス問題を解決します。 {#optimize-load-base-split-strategy-to-solve-the-performance-problem-that-data-cannot-be-split-in-some-small-table-hotspot-read-scenarios}
+### ロードベーススプリット戦略を最適化し、一部の小規模テーブルホットスポット読み取りシナリオでデータをスプリットできないというパフォーマンス問題を解決します。 {#optimize-load-base-split-strategy-to-solve-the-performance-problem-that-data-cannot-be-split-in-some-small-table-hotspot-read-scenarios}
 
 [#18005](https://github.com/pingcap/tidb/issues/18005)
 

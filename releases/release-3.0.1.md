@@ -14,11 +14,11 @@ TiDB Ansible バージョン: 3.0.1
 ## TiDB {#tidb}
 
 - `MAX_EXECUTION_TIME`機能のサポートを追加 [#11026](https://github.com/pingcap/tidb/pull/11026)
-- リージョンを分割する際のバックオフ時間を制御するために、 `tidb_wait_split_region_finish_backoff`セッション変数を追加します。 [#11166](https://github.com/pingcap/tidb/pull/11166)
+- リージョンをスプリットする際のバックオフ時間を制御するために、 `tidb_wait_split_region_finish_backoff`セッション変数を追加します。 [#11166](https://github.com/pingcap/tidb/pull/11166)
 - 負荷に応じてAUTO_INCREMENT IDで割り当てられた増分ギャップを自動的に調整することをサポートし、増分ギャップの自動調整範囲は1000〜2000000です[#11006](https://github.com/pingcap/tidb/pull/11006)
 - プラグイン`ADMIN PLUGINS DISABLE` `ADMIN PLUGINS ENABLE`ステートメントを追加する[#11157](https://github.com/pingcap/tidb/pull/11157)
 - 監査プラグインにセッション接続情報を追加する [#11013](https://github.com/pingcap/tidb/pull/11013)
-- リージョン分割期間中のデフォルトの動作を変更し、PD がスケジュールを完了するまで待機します。 [#11166](https://github.com/pingcap/tidb/pull/11166)
+- リージョンスプリット期間中のデフォルトの動作を変更し、PD がスケジュールを完了するまで待機します。 [#11166](https://github.com/pingcap/tidb/pull/11166)
 - 一部のケースで誤った結果を回避するために、ウィンドウ関数がプリペアドプランキャッシュにキャッシュされることを禁止します[#11048](https://github.com/pingcap/tidb/pull/11048)
 - `ALTER`文が保存生成列の定義を変更することを禁止する[#11068](https://github.com/pingcap/tidb/pull/11068)
 - 仮想生成列を保存生成列に変更することを禁止する[#11068](https://github.com/pingcap/tidb/pull/11068)

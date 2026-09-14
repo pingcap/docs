@@ -23,7 +23,7 @@ TiDB バージョン: 7.5.7
 
 - TiDB
 
-    - データインポート中のリージョン分割とデータ取り込みのためのフロー制御インターフェースを追加します [#61553](https://github.com/pingcap/tidb/issues/61553) @[tangenta](https://github.com/tangenta)
+    - データインポート中のリージョンスプリットとデータ取り込みのためのフロー制御インターフェースを追加します [#61553](https://github.com/pingcap/tidb/issues/61553) @[tangenta](https://github.com/tangenta)
     - 大容量データを持つテーブルに対して単純なクエリを実行する際に、データ分布情報を取得するパフォーマンスを最適化します[#53850](https://github.com/pingcap/tidb/issues/53850) @[you06](https://github.com/you06)
     - インデックス追加中の TiKV への書き込み速度を観察するための監視メトリックを追加します。 [#60925](https://github.com/pingcap/tidb/issues/60925) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - DDL実行中のDMLのロックロジックを最適化し、DMLとDDL間のロック競合を軽減することで、一部のシナリオでDDLのパフォーマンスが向上します。ただし、セカンダリインデックスのロック操作が追加されるため、DMLのパフォーマンスがわずかに低下する可能性があります[#62337](https://github.com/pingcap/tidb/issues/62337) @[lcwangchao](https://github.com/lcwangchao)

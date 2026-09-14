@@ -78,7 +78,7 @@ TiDBバージョン：8.5.2
     - GCワーカーに高負荷がかかっているときにデッドロックが発生する可能性がある問題を修正 [#18214](https://github.com/tikv/tikv/issues/18214) @[zyguan](https://github.com/zyguan)
     - タイムロールバックが異常な RocksDB フロー制御を引き起こし、パフォーマンスのジッターにつながる可能性がある問題を修正しました [#17995](https://github.com/tikv/tikv/issues/17995) @[LykxSassinator](https://github.com/LykxSassinator)
     - CDC接続で例外が発生した際にリソースリークが発生する可能性がある問題を修正 [#18245](https://github.com/tikv/tikv/issues/18245) @[wlwilliamx](https://github.com/wlwilliamx)
-    - リージョン分割後にリーダーが迅速に選出されない問題を修正 [#17602](https://github.com/tikv/tikv/issues/17602) @[LykxSassinator](https://github.com/LykxSassinator)
+    - リージョンスプリット後にリーダーが迅速に選出されない問題を修正 [#17602](https://github.com/tikv/tikv/issues/17602) @[LykxSassinator](https://github.com/LykxSassinator)
     - 1フェーズコミット（1PC）のみが有効で非同期コミットが有効になっていない場合に、最新の書き込みデータが読み取れない可能性がある問題を修正しました [#18117](https://github.com/tikv/tikv/issues/18117) @[zyguan](https://github.com/zyguan)
     - GCワーカーが予期せずエラーログを出力問題を修正 [#18213](https://github.com/tikv/tikv/issues/18213) @[ekexium](https://github.com/ekexium)
 

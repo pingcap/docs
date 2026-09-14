@@ -196,12 +196,12 @@ v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以�
     - ディスク I/O ハングを検出した TiKV ノードが自動的に fail-fast で終了するようにし、応答しないストアからのリカバリを高速化しました。[#19626](https://github.com/tikv/tikv/issues/19626) @[hbisheng](https://github.com/hbisheng)
     - TiKV 8.5 向けに脆弱なサードパーティ依存関係をアップグレードし、必要な互換性修正を upstream と整合させることで、TiKV の安定性とセキュリティを向上しました。[#19713](https://github.com/tikv/tikv/issues/19713) @[LykxSassinator](https://github.com/LykxSassinator)
     - truncate key 式を使用するクエリで、より正確な結果を返すために、TiKV で rank ベースの limit 処理をサポートしました。[#19388](https://github.com/tikv/tikv/issues/19388) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - デフォルトの split しきい値を緩和し、split key 選択および CPU フォールバック判断の可観測性を追加することで、TiKV の負荷ベースリージョン分割を改善しました。これにより、運用者はホットリージョンをより効果的に処理できます。[#18932](https://github.com/tikv/tikv/issues/18932) @[lhy1024](https://github.com/lhy1024)
+    - デフォルトの split しきい値を緩和し、split key 選択および CPU フォールバック判断の可観測性を追加することで、TiKV の負荷ベースリージョンスプリットを改善しました。これにより、運用者はホットリージョンをより効果的に処理できます。[#18932](https://github.com/tikv/tikv/issues/18932) @[lhy1024](https://github.com/lhy1024)
 
 + PD
 
     - PD のメンテナンス用エンドポイントと `pd-ctl` コマンドを追加し、TiKV のメンテナンスタスクを直列化できるようにしました。これにより、一度に 1つのメンテナンスタスクのみを有効にして Raft クォーラム喪失を防ぎます。[#9477](https://github.com/tikv/pd/issues/9477) @[SerjKol80](https://github.com/SerjKol80) @[HaoW30](https://github.com/HaoW30)
-    -リージョン分割後の予期しないスケジューリングを避けるため、PD で split scatter をデフォルトで無効にしました。引き続き `schedule.split-scatter-schedule-limit` を正の値に設定することで有効化できます。[#10592](https://github.com/tikv/pd/issues/10592) @[lhy1024](https://github.com/lhy1024)
+    -リージョンスプリット後の予期しないスケジューリングを避けるため、PD で split scatter をデフォルトで無効にしました。引き続き `schedule.split-scatter-schedule-limit` を正の値に設定することで有効化できます。[#10592](https://github.com/tikv/pd/issues/10592) @[lhy1024](https://github.com/lhy1024)
     - unsafe recovery の empty-region プラン生成を最適化し、多数のリージョンとギャップを持つ大規模クラスターでパフォーマンスを向上し、タイムアウトリスクを低減しました。[#10638](https://github.com/tikv/pd/issues/10638) @[Connor1996](https://github.com/Connor1996)
     - PD のトランザクション継続時間メトリクスを改善し、本番環境のレイテンシー分布をより適切に反映できるようにして、ダッシュボードとアラートでの可観測性を向上しました。[#10705](https://github.com/tikv/pd/issues/10705) @[bufferflies](https://github.com/bufferflies)
 

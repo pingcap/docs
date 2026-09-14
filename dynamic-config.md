@@ -123,8 +123,8 @@ show warnings;
 | `raftstore.raft-entry-max-size`                           | 単一のRaftログの最大サイズに対するハード制限                                                                                                                   |
 | `raftstore.raft-entry-cache-life-time`                    | メモリ内のログキャッシュに許容される最大残り時間                                                                                                                   |
 | `raftstore.max-apply-unpersisted-log-limit`               | コミットされたが永続化されないRaftログの最大数を適用できます                                                                                                           |
-| `raftstore.split-region-check-tick-interval`              | リージョン分割が必要かどうかを確認する時間間隔                                                                                                                    |
-| `raftstore.region-split-check-diff`                       | リージョン分割前にリージョンデータが超過できる最大値                                                                                                                 |
+| `raftstore.split-region-check-tick-interval`              | リージョンスプリットが必要かどうかを確認する時間間隔                                                                                                                    |
+| `raftstore.region-split-check-diff`                       | リージョンスプリット前にリージョンデータが超過できる最大値                                                                                                                 |
 | `raftstore.pd-heartbeat-tick-interval`                    | PDへのリージョンのハートビートがトリガーされる時間間隔                                                                                                               |
 | `raftstore.pd-store-heartbeat-tick-interval`              | ストアのPDへのハートビートがトリガーされる時間間隔                                                                                                                  |
 | `raftstore.snap-mgr-gc-tick-interval`                     | 期限切れのスナップショットファイルのリサイクルがトリガーされる時間間隔                                                                                                        |
@@ -153,12 +153,12 @@ show warnings;
 | `readpool.unified.max-tasks-per-worker`                   | 統合読み取りプール内の 1つのスレッドに許可されるタスクの最大数。値を超えると`Server Is Busy`エラーが返されます。                                                                         |
 | `readpool.unified.auto-adjust-pool-size`                  | UnifyReadPool スレッドプールのサイズを自動的に調整するかどうかを決定します                                                                                              |
 | `resource-control.priority-ctl-strategy`                  | 低優先度タスクのフロー制御戦略を構成します。                                                                                                                     |
-| `coprocessor.split-region-on-table`                       | テーブルごとにリージョンを分割できます                                                                                                                        |
-| `coprocessor.batch-split-limit`                           | バッチでのリージョン分割のしきい値                                                                                                                          |
+| `coprocessor.split-region-on-table`                       | テーブルごとにリージョンをスプリットできます                                                                                                                        |
+| `coprocessor.batch-split-limit`                           | バッチでのリージョンスプリットのしきい値                                                                                                                          |
 | `coprocessor.region-max-size`                             | リージョンの最大サイズ                                                                                                                                |
-| `coprocessor.region-split-size`                           | 新しく分割されたリージョンのサイズ                                                                                                                          |
+| `coprocessor.region-split-size`                           | 新しくスプリットされたリージョンのサイズ                                                                                                                          |
 | `coprocessor.region-max-keys`                             | リージョンで許可されるキーの最大数                                                                                                                          |
-| `coprocessor.region-split-keys`                           | 新しく分割されたリージョン内のキーの数                                                                                                                        |
+| `coprocessor.region-split-keys`                           | 新しくスプリットされたリージョン内のキーの数                                                                                                                        |
 | `pessimistic-txn.wait-for-lock-timeout`                   | 悲観的トランザクションがロックを待つ最長時間                                                                                                                     |
 | `pessimistic-txn.wake-up-delay-duration`                  | 悲観的トランザクションが起動されるまでの期間                                                                                                                     |
 | `pessimistic-txn.pipelined`                               | パイプライン化された悲観的ロック処理を有効にするかどうかを決定します                                                                                                         |
@@ -225,11 +225,11 @@ show warnings;
 | `storage.scheduler-worker-pool-size`                      | スケジューラスレッドプール内のスレッド数                                                                                                                       |
 | `import.num-threads`                                      | 復元またはインポート RPC リクエストを処理するスレッドの数 (動的な変更は v8.1.2 以降でサポートされます)                                                                                   |
 | `backup.num-threads`                                      | バックアップ スレッドの数 (v4.0.3 以降でサポート)                                                                                                             |
-| `split.qps-threshold`                                     | リージョンで`load-base-split`を実行するためのしきい値。リージョンの読み取りリクエストのQPSが10秒連続で`qps-threshold`を超える場合、このリージョンは分割される必要があります。                                    |
-| `split.byte-threshold`                                    | リージョンで`load-base-split`を実行するためのしきい値。リージョンの読み取りリクエストのトラフィックが10秒間連続して`byte-threshold`を超える場合、このリージョンは分割されます。                                   |
-| `split.region-cpu-overload-threshold-ratio`               | リージョンで`load-base-split`を実行するためのしきい値。リージョンの統合読み取りプールのCPU使用率が10秒連続で`region-cpu-overload-threshold-ratio`を超えた場合、このリージョンは分割されます。(v6.2.0以降でサポート) |
-| `split.split-balance-score`                               | `load-base-split`というパラメータは、2つの分割されたリージョンの負荷が可能な限り均等になるようにします。値が小さいほど、負荷は均等になります。ただし、値が小さすぎると分割が失敗する可能性があります。                               |
-| `split.split-contained-score`                             | パラメータは`load-base-split`です。値が小さいほど、リージョン分割後のリージョン間アクセス数が少なくなります。                                                                                 |
+| `split.qps-threshold`                                     | リージョンで`load-base-split`を実行するためのしきい値。リージョンの読み取りリクエストのQPSが10秒連続で`qps-threshold`を超える場合、このリージョンはスプリットされる必要があります。                                    |
+| `split.byte-threshold`                                    | リージョンで`load-base-split`を実行するためのしきい値。リージョンの読み取りリクエストのトラフィックが10秒間連続して`byte-threshold`を超える場合、このリージョンはスプリットされます。                                   |
+| `split.region-cpu-overload-threshold-ratio`               | リージョンで`load-base-split`を実行するためのしきい値。リージョンの統合読み取りプールのCPU使用率が10秒連続で`region-cpu-overload-threshold-ratio`を超えた場合、このリージョンはスプリットされます。(v6.2.0以降でサポート) |
+| `split.split-balance-score`                               | `load-base-split`というパラメータは、2つのスプリットされたリージョンの負荷が可能な限り均等になるようにします。値が小さいほど、負荷は均等になります。ただし、値が小さすぎるとスプリットが失敗する可能性があります。                               |
+| `split.split-contained-score`                             | パラメータは`load-base-split`です。値が小さいほど、リージョンスプリット後のリージョン間アクセス数が少なくなります。                                                                                 |
 | `cdc.min-ts-interval`                                     | Resolved TSが転送される時間間隔                                                                                                                          |
 | `cdc.old-value-cache-memory-quota`                        | TiCDC 古い値のエントリが占有するメモリの上限                                                                                                                  |
 | `cdc.sink-memory-quota`                                   | TiCDCデータ変更イベントが占有するメモリの上限                                                                                                                  |
@@ -270,7 +270,7 @@ Query OK, 0 rows affected (0.01 sec)
 | `schedule.max-merge-region-size`                     | `Region Merge` （MiB）のサイズ制限を制御します                           |
 | `schedule.max-merge-region-keys`                     | `Region Merge`キーの最大数を指定します                                 |
 | `schedule.patrol-region-interval`                    | チェッカーがリージョンのヘルス状態を検査する頻度を決定します                             |
-| `schedule.split-merge-interval`                      | 同じリージョンで分割および結合操作を実行する時間間隔を決定します                           |
+| `schedule.split-merge-interval`                      | 同じリージョンでスプリットおよび結合操作を実行する時間間隔を決定します                           |
 | `schedule.max-snapshot-count`                        | 1つのストアが同時に送信または受信できるスナップショットの最大数を決定します。                   |
 | `schedule.max-pending-peer-count`                    | 単一ストア内の保留中のピアの最大数を決定します                                    |
 | `schedule.max-store-down-time`                       | PDが切断されたストアを回復できないと判断するまでのダウンタイム                           |
@@ -327,7 +327,7 @@ Query OK, 0 rows affected (0.01 sec)
 | `replication-mode.dr-auto-sync.dr-replicas`          | 災害復旧（DR）AZ内の投票者レプリカの数                                      |
 | `replication-mode.dr-auto-sync.wait-store-timeout`   | ネットワークの分離や障害が発生したときに非同期レプリケーションモードに切り替えるまでの待機時間            |
 | `replication-mode.dr-auto-sync.wait-recover-timeout` | ネットワークが回復した後、 `sync-recover`状態に戻るまでの待機時間                   |
-| `replication-mode.dr-auto-sync.pause-region-split`   | `async_wait`と`async`ステータスでリージョン分割操作を一時停止するかどうかを制御します       |
+| `replication-mode.dr-auto-sync.pause-region-split`   | `async_wait`と`async`ステータスでリージョンスプリット操作を一時停止するかどうかを制御します       |
 
 詳細なパラメータの説明については[PDコンフィグレーションファイル](/pd-configuration-file.md)を参照してください。
 

@@ -100,10 +100,10 @@ TiDB バージョン: 8.1.2
     - リージョンをマージすると稀に TiKV がpanicを起こす可能性がある問題を修正[#17840](https://github.com/tikv/tikv/issues/17840) @[glorv](https://github.com/glorv)
     - ディスクがスタックしているときに TiKV が PD にハートビートを報告できない問題を修正しました [#17939](https://github.com/tikv/tikv/issues/17939) @[LykxSassinator](https://github.com/LykxSassinator)
     - Raftと RocksDB が異なるディスクにデプロイされている場合、RocksDB が配置されているディスクでは低速ディスク検出が機能しない問題を修正[#17884](https://github.com/tikv/tikv/issues/17884) @[LykxSassinator](https://github.com/LykxSassinator)
-    - 古いレプリカがRaftスナップショットを処理するときに、遅い分割操作と新しいレプリカの即時削除によってトリガーされ、TiKV がpanicになる可能性がある問題を修正しました。 [#17469](https://github.com/tikv/tikv/issues/17469) @[hbisheng](https://github.com/hbisheng)
+    - 古いレプリカがRaftスナップショットを処理するときに、遅いスプリット操作と新しいレプリカの即時削除によってトリガーされ、TiKV がpanicになる可能性がある問題を修正しました。 [#17469](https://github.com/tikv/tikv/issues/17469) @[hbisheng](https://github.com/hbisheng)
     - `RADIANS()`または`DEGREES()`関数を含むクエリを実行するとTiKVがpanicする可能性がある問題を修正しました[#17852](https://github.com/tikv/tikv/issues/17852) @[gengliqi](https://github.com/gengliqi)
     - 多数のトランザクションが同じキーのロック解除待ち行列に入っていて、キーが頻繁に更新される場合、デッドロック検出への過度の圧力によって TiKV OOM 問題が発生する可能性がある問題を修正しました [#17394](https://github.com/tikv/tikv/issues/17394) @[MyonKeminta](https://github.com/MyonKeminta)
-    - リージョンを分割した後、リーダーをすぐに選出できない問題を修正しました [#17602](https://github.com/tikv/tikv/issues/17602) @[LykxSassinator](https://github.com/LykxSassinator)
+    - リージョンをスプリットした後、リーダーをすぐに選出できない問題を修正しました [#17602](https://github.com/tikv/tikv/issues/17602) @[LykxSassinator](https://github.com/LykxSassinator)
     - 読み取りスレッドがRaft EngineのMemTable内の古いインデックスにアクセスしたときに発生するpanic問題を修正しました。 [#17383](https://github.com/tikv/tikv/issues/17383) @[LykxSassinator](https://github.com/LykxSassinator)
     - 大きなテーブルやパーティションを削除した後に発生する可能性のあるフロー制御の問題を修正しました [#17304](https://github.com/tikv/tikv/issues/17304) @[Connor1996](https://github.com/Connor1996)
 
@@ -149,7 +149,7 @@ TiDB バージョン: 8.1.2
     - TiCDC
 
         - PullerモジュールのResolved TSレイテンシーモニタリングで誤った値が表示される問題を修正しました [#11561](https://github.com/pingcap/tiflow/issues/11561) @[wlwilliamx](https://github.com/wlwilliamx)
-        - `enable-table-across-nodes`を有効にすると、リージョン分割中にテーブルの一部のスパン レプリケーションタスクが失われる可能性がある問題を修正しました。 [#11675](https://github.com/pingcap/tiflow/issues/11675) @[wk989898](https://github.com/wk989898)
+        - `enable-table-across-nodes`を有効にすると、リージョンスプリット中にテーブルの一部のスパン レプリケーションタスクが失われる可能性がある問題を修正しました。 [#11675](https://github.com/pingcap/tiflow/issues/11675) @[wk989898](https://github.com/wk989898)
         - やり直しモジュールがエラーを正しく報告できない問題を修正しました [#11744](https://github.com/pingcap/tiflow/issues/11744) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - TiDB DDL 所有者の変更中に DDL タスクのスキーマバージョンが非増分になったときに、TiCDC が誤って DDL タスクを破棄する問題を修正[#11714](https://github.com/pingcap/tiflow/issues/11714) @[wlwilliamx](https://github.com/wlwilliamx)
         - チェンジフィードチェックポイントの**barrier-ts**監視メトリックが不正確になる可能性がある問題を修正しました[#11553](https://github.com/pingcap/tiflow/issues/11553) @[3AceShowHand](https://github.com/3AceShowHand)
