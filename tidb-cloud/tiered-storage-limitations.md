@@ -24,6 +24,8 @@ This document describes the current limitations and operational impact of Infreq
 | Cache level scope | The IA cache level applies to the whole cluster. You cannot set a different cache level for an individual table or partition |
 | Segment size adjustment | `kvengine.ia.segment-size` can be changed only on {{{ .byoc }}}, and takes effect only after a rolling restart of the TiKV nodes |
 | Cache level provisioning | A cache level change takes effect as a hot update, but the underlying resources are provisioned automatically by TiDB Cloud, which might take some time |
+| Transition progress visibility | A row in `INFORMATION_SCHEMA.TIKV_STORAGE_CLASS_TRANSITIONS` is visible only if you have the `ALL` privilege on the table. Rows for tables that you cannot access are skipped without an error |
+| Transition progress freshness | Conversion progress is collected every 10 seconds, so the values in `INFORMATION_SCHEMA.TIKV_STORAGE_CLASS_TRANSITIONS` are not real-time |
 
 ## Access throttling constraints
 
@@ -82,7 +84,7 @@ If issues arise with IA tables, you and the TiDB Cloud team can use the followin
 |-|-|-|-|
 | IA → Standard switch-back | You find performance unacceptable | **Your primary choice** | System reloads data locally, bypassing the remote path |
 | **Flow Control (already available)** | Control traffic between IA tables and object storage | TiDB Cloud team's choice | Rate-limiting protects cluster stability; managed by the TiDB Cloud team |
-| Contact TiDB Cloud Support | A storage class conversion is stuck: `DURATION` keeps growing while `COMPLETED_REPLICAS` does not increase | Required | You cannot resolve a stuck conversion yourself. For how to detect it, see [Tiered Storage Observability](/tidb-cloud/tiered-storage-observability.md) |
+| Contact TiDB Cloud Support | A storage class conversion is stuck: `DURATION` keeps growing while `COMPLETED_REPLICAS` does not increase, or `LAST_UPDATE_TIME` stops advancing | Required | You cannot resolve a stuck conversion yourself. For how to detect it, see [Tiered Storage Observability](/tidb-cloud/tiered-storage-observability.md) |
 
 ## IA local cache and query performance uncertainty
 

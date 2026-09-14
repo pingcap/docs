@@ -319,7 +319,7 @@ Benchmark with your own workload before you change this parameter, and perform t
 - IA → Standard conversion downloads all data from object storage, generating significant cold storage bandwidth usage
 - Monitor bandwidth usage to ensure smooth operation; if necessary, **contact the TiDB Cloud team in advance** for joint monitoring
 - Business SQL reads/writes are not affected during conversion, but performance (e.g., QPS/TPS) may have minor impact — test environment shows less than 5%
-- Before you start, query `mysql.tidb_storage_class_transition_history` for the duration of similar past conversions on your cluster, filtered on `STATE = 'COMPLETED'`, to estimate the change window
+- Before you start, query `mysql.tidb_storage_class_transition_history` for the duration of similar past conversions on your cluster, filtered on `state = 'COMPLETED'`, to estimate the change window
 - During the conversion, run `SHOW STORAGE_CLASS TRANSITIONS` to track progress and detect a stuck conversion
 
 ### Configuration stability
