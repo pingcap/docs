@@ -68,7 +68,7 @@ TiDBは、ベクトル検索機能を統合したリレーショナルデータ�
 
 ## 関連項目 {#see-also}
 
-TiDB Vector Searchの利用を開始するには、以下のドキュメントを参照してください。
+TiDBベクトル検索の利用を開始するには、以下のドキュメントを参照してください。
 
 - [Pythonを使ったベクトル検索を始めましょう](/ai/quickstart-via-python.md)
 - [SQL を使用したベクトル検索を始めましょう](/ai/quickstart-via-sql.md)

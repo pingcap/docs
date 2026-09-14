@@ -17,7 +17,7 @@ aliases: ['/ja/tidb/stable/vector-search-integration-overview/','/ja/tidb/dev/ve
 
 [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) 機能を使用すると、プレーンテキストを使って直接ベクトル検索を実行できます。TiDB がバックグラウンドで自動的にテキストをベクトルに変換するため、自分で埋め込みを生成または管理する必要はありません。
 
-TiDB Vector Search は最大 16383 次元のベクトルの保存をサポートしており、ほとんどの埋め込みモデルに対応できます。
+TiDBベクトル検索 は最大 16383 次元のベクトルの保存をサポートしており、ほとんどの埋め込みモデルに対応できます。
 
 ベクトルの生成には、自前でデプロイしたオープンソースの埋め込みモデル、またはサードパーティの埋め込みAPIのいずれかを使用できます。
 
@@ -36,7 +36,7 @@ TiDB Vector Search は最大 16383 次元のベクトルの保存をサポート
 
 ## AI フレームワーク {#ai-frameworks}
 
-TiDB は次の AI フレームワークを公式にサポートしており、このフレームワークで開発した AI アプリケーションを TiDB Vector Search に簡単に統合できます。
+TiDB は次の AI フレームワークを公式にサポートしており、このフレームワークで開発した AI アプリケーションを TiDBベクトル検索 に簡単に統合できます。
 
 | AI フレームワーク | チュートリアル                                                        |
 |---------------|---------------------------------------------------------------------------------------------------|
@@ -46,15 +46,15 @@ TiDB は次の AI フレームワークを公式にサポートしており、�
 
 ## ORM ライブラリ {#orm-libraries}
 
-TiDB Vector Search を ORM ライブラリと統合して、TiDB データベースを操作できます。
+TiDBベクトル検索 を ORM ライブラリと統合して、TiDB データベースを操作できます。
 
 次の表は、サポートされている ORM ライブラリと対応する統合チュートリアルを示しています。
 
 | 言語    | ORM/クライアント       | インストール方法                    | チュートリアル |
 |---------|--------------------|-----------------------------------|--------------|
-| Python   | SQLAlchemy         | `pip install tidb-vector`         | [Integrate TiDB Vector Search with SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md) |
-| Python   | peewee             | `pip install tidb-vector`         | [Integrate TiDB Vector Search with peewee](/ai/integrations/vector-search-integrate-with-peewee.md) |
-| Python   | Django             | `pip install django-tidb[vector]` | [Integrate TiDB Vector Search with Django](/ai/integrations/vector-search-integrate-with-django-orm.md) |
+| Python   | SQLAlchemy         | `pip install tidb-vector`         | [Integrate TiDBベクトル検索 with SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md) |
+| Python   | peewee             | `pip install tidb-vector`         | [Integrate TiDBベクトル検索 with peewee](/ai/integrations/vector-search-integrate-with-peewee.md) |
+| Python   | Django             | `pip install django-tidb[vector]` | [Integrate TiDBベクトル検索 with Django](/ai/integrations/vector-search-integrate-with-django-orm.md) |
 
 ## クラウドサービス {#cloud-services}
 
@@ -65,7 +65,7 @@ TiDB Vector Search を ORM ライブラリと統合して、TiDB データベー
 | クラウドサービス | ガイド |
 |----------------|---------------------------------------------------------------------------------------------------------------------------|
 | Jina AI        | [Integrate Vector Search with Jina AI Embeddings API](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)  |
-| Amazon Bedrock | [Integrate TiDB Vector Search with Amazon Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md)       |
+| Amazon Bedrock | [Integrate TiDBベクトル検索 with Amazon Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md)       |
 
 ## MCP サーバー {#mcp-server}
 
