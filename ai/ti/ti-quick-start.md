@@ -1,13 +1,13 @@
 ---
 title: Get Started with TiDB Cloud CLI
-summary: Install and configure the TiDB Cloud CLI, then complete a first TiDB Cloud Starter database or Filesystem operation.
+summary: Install and configure TiDB Cloud CLI, then create and use a TiDB Cloud Filesystem or query a TiDB Cloud Starter database.
 ---
 
 # Get Started with TiDB Cloud CLI
 
 [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is a command-line tool for managing TiDB Cloud Starter instances and TiDB Cloud Filesystems. It supports both interactive use and automation, with JSON as the default output format for commands.
 
-This guide walks you through installing `ti`, configuring a profile, and running your first command with TiDB Cloud Starter or TiDB Cloud Filesystem. For an overview of the CLI, its capabilities, and supported workflows, see [TiDB Cloud Command Line Interface Overview](/ai/ti/ti-overview.md).
+This guide walks you through installing and configuring TiDB Cloud CLI (`ti`), and then completing a basic workflow with TiDB Cloud Starter or TiDB Cloud Filesystem. For an overview of the CLI, its capabilities, and supported workflows, see [TiDB Cloud Command Line Interface Overview](/ai/ti/ti-overview.md).
 
 > **Note:**
 >
@@ -25,7 +25,7 @@ Depending on your operating system, take the following steps to install TiDB Clo
 
 <div label="macOS or Linux">
 
-1. On macOS or Linux, run the installer:
+1. On macOS or Linux, run the following command to install TiDB Cloud CLI:
 
     ```bash
     curl -fsSL https://github.com/tidbcloud/ti-cli/releases/latest/download/install.sh | sh -s -- --yes
@@ -40,11 +40,18 @@ Depending on your operating system, take the following steps to install TiDB Clo
 
 3. Add `export PATH="$HOME/.ti/bin:$PATH"` to your shell profile to keep `ti` available in new terminals.
 
+    For example, if you use `zsh`, run the following command:
+
+    ```bash
+    echo 'export PATH="$HOME/.ti/bin:$PATH"' >> ~/.zshrc
+    source ~/.zshrc
+    ```
+
 </div>
 
 <div label="Windows PowerShell">
 
-1. On Windows PowerShell, run the installer:
+1. On Windows PowerShell, run the following command to install TiDB Cloud CLI:
 
     ```powershell
     $script = "$env:TEMP\install-ti.ps1"
@@ -59,7 +66,12 @@ Depending on your operating system, take the following steps to install TiDB Clo
     ti --version
     ```
 
-3. Add `$HOME\.ti\bin` to your user `PATH` to keep `ti` available in new PowerShell sessions.
+3. Add `$HOME\.ti\bin` to your user `PATH` to keep `ti` available in new PowerShell sessions:
+
+    ```powershell
+    $tiBin = "$HOME\.ti\bin"
+    [Environment]::SetEnvironmentVariable("Path", "$tiBin;$([Environment]::GetEnvironmentVariable('Path', 'User'))", "User")
+    ```
 
 </div>
 </SimpleTab>
@@ -72,22 +84,35 @@ Depending on your operating system, take the following steps to install TiDB Clo
     ti configure
     ```
 
-2. Enter your TiDB Cloud API public key, private key, and a canonical region code such as `aws-us-east-1`.
+2. Provide the following information:
 
-3. Run a read-only command to verify the saved credentials and selected region:
+    - A default region for CLI operations, specified as a region code (such as `aws-us-east-1`). For a list of regions that are supported by TiDB Cloud CLI, see [Supported regions](/ai/ti/reference/ti-regions-security-and-limitations.md#supported-regions).
+    - Your TiDB Cloud API public key and private key.
+
+3. Run a read-only command to verify that the CLI can access TiDB Cloud using the saved credentials:
 
     ```bash
     ti db list-db-clusters --db-cluster-type starter --output text
     ```
 
-## Step 3. Choose a first workflow
+    Expected output:
 
-Complete either the Filesystem workflow or the Starter database workflow.
+    ```bash
+    {
+      "profile": "default",
+      "region_code": "aws-us-east-1",
+      "credentials_stored": true
+    }
+    ```
 
-- [Option A: Write and read a file](/ai/ti/ti-quick-start.md#option-a-write-and-read-a-file)
-- [Option B: Query a Starter database](/ai/ti/ti-quick-start.md#option-b-query-a-starter-database)
+## Step 3. Choose a workflow
 
-### Option A: Write and read a file
+Complete either of the following workflows.
+
+- [Option A: Create and use a Filesystem](/ai/ti/ti-quick-start.md#option-a-create-and-use-a-filesystem)
+- [Option B: Create a TiDB Cloud Starter instance and query the database](/ai/ti/ti-quick-start.md#option-b-create-a-tidb-cloud-starter-instance-and-query-the-database)
+
+### Option A: Create and use a Filesystem
 
 1. Create a Filesystem, wait until it is ready, and save its server-assigned ID:
 
@@ -98,9 +123,9 @@ Complete either the Filesystem workflow or the Starter database workflow.
       --output text)"
     ```
 
-    `ti` stores the Filesystem credential locally.
+    `ti` stores the Filesystem credential locally, so you do not need to provide it for subsequent file operations.
 
-2. Write and read a file directly:
+2. Write a file to the Filesystem, and then read the file:
 
     ```bash
     printf 'hello from ti\n' | ti fs copy-file \
@@ -125,7 +150,7 @@ Complete either the Filesystem workflow or the Starter database workflow.
     unset TI_FS_FILE_SYSTEM_ID
     ```
 
-### Option B: Query a Starter database
+### Option B: Create a TiDB Cloud Starter instance and query the database
 
 1. Create a TiDB Cloud Starter instance and save its ID:
 
@@ -151,7 +176,7 @@ Complete either the Filesystem workflow or the Starter database workflow.
       --output text
     ```
 
-    The command executes one statement through the HTTPS SQL API and returns a result containing `ready = 1`.
+    The `ti db execute-sql-statement` command executes the query through the HTTPS SQL API. The output includes `ready = 1`.
 
 3. Delete the TiDB Cloud Starter instance:
 

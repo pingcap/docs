@@ -11,33 +11,24 @@ This reference describes current placement, authentication, platform, and previe
 >
 > The TiDB Cloud Command Line Interface — `ti` — is currently in preview. Its features and command-line interface might change without prior notice.
 
-## TiDB Cloud regions
+## Supported regions
 
-The TiDB Cloud CLI accepts one canonical region code:
+When using TiDB Cloud CLI, you need to configure a default region for CLI operations.
 
-| Canonical code | Provider | Location |
-| --- | --- | --- |
-| `aws-us-east-1` | AWS | N. Virginia |
-| `aws-us-west-2` | AWS | Oregon |
-| `aws-eu-central-1` | AWS | Frankfurt |
-| `aws-ap-northeast-1` | AWS | Tokyo |
-| `aws-ap-southeast-1` | AWS | Singapore |
-| `alicloud-ap-southeast-1` | Alibaba Cloud | Singapore |
+The following table lists the supported regions for TiDB Cloud CLI and shows which TiDB Cloud CLI services are available in each region.
 
-Alibaba Cloud currently supports only the Singapore region in the TiDB Cloud CLI. Users cannot configure raw service URLs.
+| Provider | Location | Canonical region code | TiDB Cloud Starter | TiDB Cloud Filesystem |
+| --- | --- | --- | --- | --- |
+| AWS | N. Virginia | `aws-us-east-1` | Supported | Supported |
+| AWS | Oregon | `aws-us-west-2` | Supported | Supported |
+| AWS | Singapore | `aws-ap-southeast-1` | Supported | Supported |
+| AWS | Frankfurt | `aws-eu-central-1` | Supported | Not supported |
+| AWS | Tokyo | `aws-ap-northeast-1` | Supported | Not supported |
+| Alibaba Cloud | Singapore | `alicloud-ap-southeast-1` | Supported | Supported |
 
-## Filesystem regions
+If your configured region supports TiDB Cloud Starter but not TiDB Cloud Filesystem, you can manage Starter instances in that region. Filesystem commands fail with an `unsupported endpoint` error.
 
-The TiDB Cloud CLI includes endpoint mappings for the following TiDB Cloud Filesystem regions:
-
-| Cloud provider | Canonical region code |
-| --- | --- |
-| AWS | `aws-ap-southeast-1` |
-| AWS | `aws-us-east-1` |
-| AWS | `aws-us-west-2` |
-| Alibaba Cloud | `alicloud-ap-southeast-1` |
-
-The TiDB Cloud CLI does not download a Drive9 region manifest at runtime. A profile in another TiDB Cloud region can manage Starter databases but receives an unsupported Filesystem endpoint error until that placement is included in a TiDB Cloud CLI release.
+Supported Filesystem regions are built into each `ti` release. To use Filesystem in a region added after your installed version was released, upgrade `ti`. You cannot enable an unsupported region by specifying a service URL.
 
 ## Credential requirements
 
