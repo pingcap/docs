@@ -167,7 +167,7 @@ INSERT/UPDATE/DELETE
 
 ## Conversion efficiency
 
-The `ALTER TABLE ... STORAGE_CLASS` statement itself completes within seconds because it only updates the schema metadata. The region-level data migration then runs asynchronously in TiKV, so the total duration depends on the data volume and the conversion direction.
+An `ALTER TABLE` statement that changes the storage class, in either the `STORAGE_CLASS` or the `ENGINE_ATTRIBUTE` form, completes within seconds because it only updates the schema metadata. The region-level data migration then runs asynchronously in TiKV, so the total duration depends on the data volume and the conversion direction.
 
 ### Standard → IA
 

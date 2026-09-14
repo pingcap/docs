@@ -15,7 +15,15 @@ This document describes how to monitor Infrequent Access (IA) storage, including
 
 This section describes how to track the progress of a storage class conversion and how to review past conversions.
 
-`ALTER TABLE ... STORAGE_CLASS` updates the schema metadata within seconds. The region-level data migration runs asynchronously in TiKV and is decoupled from the DDL lifecycle, so `ADMIN SHOW DDL JOBS` does not report its progress. Use `SHOW STORAGE_CLASS TRANSITIONS` to track a conversion in progress, and query `mysql.tidb_storage_class_transition_history` to review conversions that have reached a final state.
+Conversion progress is tracked the same way whichever form you use to change the storage class:
+
+- The `STORAGE_CLASS` syntactic sugar, for example `ALTER TABLE t1 STORAGE_CLASS='IA'`
+- The `ENGINE_ATTRIBUTE` form, for example `ALTER TABLE t1 ENGINE_ATTRIBUTE='{"storage_class":"IA"}'`
+- A partition-level change made with `ENGINE_ATTRIBUTE`
+
+Partitioned tables support only `ENGINE_ATTRIBUTE`, so partition conversions appear in the same views as table-level conversions. A table or partition that is created directly in the IA storage class has no data to migrate, so it does not appear in these views.
+
+The `ALTER TABLE` statement itself updates the schema metadata within seconds. The region-level data migration then runs asynchronously in TiKV and is decoupled from the DDL lifecycle, so `ADMIN SHOW DDL JOBS` does not report its progress. Use `SHOW STORAGE_CLASS TRANSITIONS` to track a conversion in progress, and query `mysql.tidb_storage_class_transition_history` to review conversions that have reached a final state.
 
 ### View in-progress transitions
 
