@@ -360,7 +360,7 @@ TiDB v6.2.0以降、 BRを使用したRawKVのバックアップと復元は非�
 
 - PD
 
-    - リージョンのCPU使用率の統計的側面をサポートし、ロードベース分割の使用シナリオを強化する [#12063](https://github.com/tikv/tikv/issues/12063) @[JmPotato](https://github.com/JmPotato)
+    - リージョンのCPU使用率の統計的側面をサポートし、ロードベーススプリットの使用シナリオを強化する [#12063](https://github.com/tikv/tikv/issues/12063) @[JmPotato](https://github.com/JmPotato)
 
 - TiFlash
 

@@ -310,7 +310,7 @@
       - [`tidb_external_ts`を使用してステイル読み取りを実行する](/tidb-external-ts.md)
     - [`tidb_snapshot`システム変数を使用する](/read-historical-data.md)
   - [配置ルールを使用する](/configure-placement-rules.md)
-  - [ロードベース分割を使用する](/configure-load-base-split.md)
+  - [ロードベーススプリットを使用する](/configure-load-base-split.md)
   - [店舗利用制限](/configure-store-limit.md)
   - [バッチ処理](/batch-processing.md)
   - PDマイクロサービスを使用する
