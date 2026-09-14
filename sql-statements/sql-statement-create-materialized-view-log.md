@@ -67,4 +67,5 @@ CREATE MATERIALIZED VIEW LOG ON t (a)
 
 - [Materialized Views](/materialized-views.md)
 - [`ALTER MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-alter-materialized-view-log.md)
+- [`PURGE MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-purge-materialized-view-log.md)
 - [`DROP MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-drop-materialized-view-log.md)

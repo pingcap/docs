@@ -3877,6 +3877,60 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable is used to set the update interval of the cached timestamp used in the low-precision TSO feature, in milliseconds.
 - This variable is only available when [`tidb_low_resolution_tso`](#tidb_low_resolution_tso) is enabled.
 
+### tidb_mlog_log_slow_purge
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether TiDB records materialized view log purge statements in the slow query log.
+
+### tidb_mlog_purge_batch_size
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `10000`
+- Range: `[1, 1000000]`
+- Unit: Rows
+- This variable sets the maximum number of materialized view log rows deleted in each batch of a `PURGE MATERIALIZED VIEW LOG` statement.
+
+### tidb_mlog_purge_delete_tiflash_threads
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 256]`
+- Unit: Threads
+- This variable sets the TiFlash thread count used by the `DELETE` statements of a materialized view log purge. A value of `0` uses the current value of [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610).
+
+### tidb_mlog_purge_min_rate
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `2000`
+- Range: `[1, 2147483647]`
+- Unit: Rows per second
+- This variable sets the lower bound of the target delete rate for adaptive materialized view log purge throttling. TiDB calculates the target rate from the number of pending rows and the configured delete time budget. If the calculated rate is lower than this value, TiDB uses this value as the target rate instead.
+- Increasing this value can cause a purge with a small backlog to delete rows faster and consume more resources. Decreasing this value does not reduce the target rate when the current backlog needs a higher rate to meet the configured delete time budget. For the calculation, see [Purge throttling](/materialized-views.md#purge-throttling).
+
+### tidb_mlog_purge_rate_budget_ratio
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Float
+- Default value: `0.5`
+- Range: `(0, 1]`
+- This variable sets the fraction of the time before the purge deadline that TiDB uses as the initial delete time budget. For example, the default value `0.5` gives a purge half of the available time to delete its pending rows.
+- A smaller value shortens the delete time budget, which increases the calculated target delete rate and can increase resource usage. A larger value gives TiDB more time to delete rows, which lowers the calculated target rate. For the calculation, see [Purge throttling](/materialized-views.md#purge-throttling).
+
 ### tidb_mview_enable
 
 - Scope: SESSION | GLOBAL

@@ -2617,6 +2617,41 @@ Referenced in:
 - [System Variables](/system-variables.md#tidb_low_resolution_tso_update_interval-new-in-v800)
 - [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
 
+### tidb_mlog_log_slow_purge
+
+Referenced in:
+
+- [Materialized Views](/materialized-views.md)
+- [System Variables](/system-variables.md#tidb_mlog_log_slow_purge)
+
+### tidb_mlog_purge_batch_size
+
+Referenced in:
+
+- [Materialized Views](/materialized-views.md)
+- [System Variables](/system-variables.md#tidb_mlog_purge_batch_size)
+
+### tidb_mlog_purge_delete_tiflash_threads
+
+Referenced in:
+
+- [Materialized Views](/materialized-views.md)
+- [System Variables](/system-variables.md#tidb_mlog_purge_delete_tiflash_threads)
+
+### tidb_mlog_purge_min_rate
+
+Referenced in:
+
+- [Materialized Views](/materialized-views.md)
+- [System Variables](/system-variables.md#tidb_mlog_purge_min_rate)
+
+### tidb_mlog_purge_rate_budget_ratio
+
+Referenced in:
+
+- [Materialized Views](/materialized-views.md)
+- [System Variables](/system-variables.md#tidb_mlog_purge_rate_budget_ratio)
+
 ### tidb_mview_enable
 
 Referenced in:

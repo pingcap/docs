@@ -7,6 +7,8 @@ summary: Learn about the materialized view log purge history table in the `mysql
 
 The `mysql.tidb_mlog_purge_hist` table stores the purge history of materialized view logs. You can query this table to review purge jobs, their duration and status, the number of purged rows, and failure information.
 
+Use the value in the `PURGE_JOB_ID` column with [`CANCEL MATERIALIZED VIEW LOG PURGE JOB`](/sql-statements/sql-statement-cancel-materialized-view-log-purge-job.md) to cancel a purge job.
+
 To view the structure of the table, use the following SQL statement:
 
 ```sql
@@ -46,4 +48,6 @@ ORDER BY PURGE_START_TIME DESC;
 ## See also
 
 - [Materialized Views](/materialized-views.md)
+- [`PURGE MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-purge-materialized-view-log.md)
+- [`CANCEL MATERIALIZED VIEW LOG PURGE JOB`](/sql-statements/sql-statement-cancel-materialized-view-log-purge-job.md)
 - [`mysql.tidb_mview_refresh_hist`](/mysql-schema/mysql-schema-tidb-mview-refresh-hist.md)
