@@ -199,7 +199,7 @@ TiUPを使用して TiDB クラスターをデプロイすると、TiDB と同�
 - Puller receive events/s: TiCDCノードのPullerモジュールがKVクライアントから1秒あたりに受信するイベント数
 - Puller output events/s: TiCDCノードのPullerモジュールがソーターモジュールに送信するイベント数/秒
 - Sink flush rows/s: TiCDCノードが1秒あたりにダウンストリームに書き込む行数
-- Puller buffer size: TiCDCノードがプラーモジュールにキャッシュするイベントの数
+- Puller buffer size: TiCDCノードがPullerモジュールにキャッシュするイベントの数
 - Entry sorter buffer size: TiCDCノードがソーターモジュールにキャッシュするイベントの数
 - Processor/Mounter buffer size: TiCDCノードがプロセッサモジュールとマウントモジュールにキャッシュするイベントの数
 - Sink row buffer size: TiCDCノードがシンクモジュールにキャッシュするイベントの数
