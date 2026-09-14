@@ -1,25 +1,27 @@
 ---
 title: TiDB for AI
-summary: Build modern AI applications with TiDB's integrated vector search, full-text search, and seamless Python SDK.
+summary: Build AI applications and agent workflows with TiDB using SQL, integrated search, TiDB Cloud Starter, and persistent shared Filesystems.
 ---
 
 # TiDB for AI
 
-TiDB is a distributed SQL database designed for modern AI applications, offering integrated vector search, full-text search, and hybrid search capabilities. This document provides an overview of the AI features and tools available for building AI-powered applications with TiDB.
+TiDB provides data and workspace capabilities for building AI applications and running AI agent workflows.
 
-## Quick start
+- For application development, you can use SQL or [Python SDK for TiDB AI (`pytidb`)](https://github.com/pingcap/pytidb) with structured data, vector search, full-text search, hybrid search, and AI-powered retrieval.
+- For AI agents and automation, you can use [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) to manage TiDB Cloud Starter instances and SQL workflows, and use TiDB Cloud Filesystems as persistent, shared storage across local machines, CI jobs, and ephemeral agent sandboxes. Filesystems also support mounted workspaces, Git workflows, journals, and delegated secrets.
 
-Get up and running quickly with TiDB's AI capabilities.
+## Get started
 
-| Document | Description |
+Choose a path based on what you want to build:
+
+| Goal | Start here |
 | --- | --- |
-| [Get Started with Vector Search via Python](/ai/quickstart-via-python.md) | Build your first AI application with TiDB in minutes using Python. |
-| [Get Started with Vector Search via SQL](/ai/quickstart-via-sql.md) | Quick start guide for vector search using SQL. |
-| [Get Started with TiDB Cloud CLI](/ai/ti/ti-quick-start.md) | Install and configure the TiDB Cloud CLI, then complete a first database or Filesystem operation. |
+| Build an AI application with vector search | [Get Started with Vector Search via Python](/ai/quickstart-via-python.md) or [Get Started with Vector Search via SQL](/ai/quickstart-via-sql.md) |
+| Build agent and automation workflows with TiDB Cloud | [Get Started with TiDB Cloud CLI](/ai/ti/ti-quick-start.md) |
 
-## Guides
+## Build AI applications with TiDB
 
-Step-by-step guides for building AI applications with TiDB using the [`pytidb`](https://github.com/pingcap/pytidb) SDK or SQL.
+Use the [`pytidb`](https://github.com/pingcap/pytidb) SDK or SQL to connect to TiDB, search and retrieve data, and build AI-powered applications.
 
 ### Connect to TiDB
 
@@ -82,7 +84,7 @@ Step-by-step guides for building AI applications with TiDB using the [`pytidb`](
 | [Raw SQL Queries](/ai/guides/raw-queries.md) | Execute raw SQL queries directly. |
 | [Transactions](/ai/guides/transactions.md) | Use transactions for data consistency. |
 
-### Build AI applications
+### Application examples
 
 | Document | Description |
 | --- | --- |
@@ -90,119 +92,32 @@ Step-by-step guides for building AI applications with TiDB using the [`pytidb`](
 | [Conversational Memory Example](/ai/examples/memory-with-pytidb.md) | Persistent memory for AI agents and chatbots. |
 | [Text-to-SQL Example](/ai/examples/text2sql-with-pytidb.md) | Convert natural language to SQL queries. |
 
-### TiDB Cloud CLI
+## Build agent and automation workflows with TiDB Cloud CLI
 
-| Document | Description |
+The TiDB Cloud CLI (`ti`) lets users, scripts, CI jobs, and AI agents manage TiDB Cloud from a terminal. Use it to automate TiDB Cloud Starter and SQL operations or to keep files and workspaces available independently of the machines and sandboxes that use them.
+
+| What you want to do | Start here |
 | --- | --- |
-| [TiDB Cloud CLI Overview](/ai/ti/ti-overview.md) | Learn when to use the TiDB Cloud CLI, how it differs from the `ticloud` CLI and TiDB Cloud console, and which Starter and Filesystem workflows it supports. |
-| [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md) | Install, configure profiles, and keep the CLI up to date. |
-| [Manage TiDB Cloud Starter Instances](/ai/ti/guides/manage-starter-instances.md) | Create, list, branch, query, and delete Starter instances. |
-
-#### Manage TiDB Cloud Filesystem
-
-| Document | Description |
-| --- | --- |
-| [Manage Filesystem Resources](/ai/ti/guides/manage-filesystem-resources.md) | Create, list, check, and delete Filesystems. |
-| [Configure Filesystem AI Providers](/ai/ti/guides/configure-filesystem-ai-providers.md) | Set up extract and embedding configurations for AI-powered pipelines. |
-| [Manage Filesystem Tokens](/ai/ti/guides/manage-filesystem-tokens.md) | Generate, import, enable, disable, and refresh Filesystem tokens. |
-| [Work with Filesystem Data](/ai/ti/guides/work-with-filesystem-data.md) | Copy, read, list, move, and delete files and directories. |
-| [Manage Filesystem Layers and Checkpoints](/ai/ti/guides/manage-filesystem-layers.md) | Create, fork, diff, commit, and roll back layers. |
-| [Mount a TiDB Cloud Filesystem](/ai/ti/guides/mount-filesystem.md) | Mount, drain, pack, and unpack Filesystems. |
-| [Manage Git Workspaces](/ai/ti/guides/manage-git-workspaces.md) | Clone Git repositories and manage worktrees on Filesystems. |
-| [Use Filesystem Journals](/ai/ti/guides/use-filesystem-journals.md) | Create journals, append and search entries, and verify hash chains. |
-| [Manage Filesystem Vault Secrets](/ai/ti/guides/manage-filesystem-vault-secrets.md) | Store, grant, mount, and audit secrets in a Filesystem vault. |
-
-#### Scenarios for users and automation
-
-| Document | Description |
-| --- | --- |
-| [Daily Workflow](/ai/ti/reference/ti-daily-workflow-example.md) | Manage one TiDB Cloud Starter instance and Filesystem in a routine operator flow. |
-| [Query SQL with Roles](/ai/ti/reference/ti-query-sql-with-roles-example.md) | Use explicit read-only, read-write, and admin SQL roles. |
-| [Share a Filesystem Across Machines](/ai/ti/reference/ti-share-filesystem-across-machines-example.md) | Transfer an owner token securely and verify cross-machine visibility. |
-| [Hand Off CI Artifacts Between Jobs](/ai/ti/reference/ti-ci-artifact-handoff-example.md) | Persist build output across isolated jobs without copying a complete TiDB Cloud CLI profile. |
-
-#### Scenarios for AI agents
-
-| Document | Description |
-| --- | --- |
-| [Agent Sandbox](/ai/ti/reference/ti-agent-sandbox-example.md) | Give a clean sandbox Filesystem access without TiDB Cloud API keys. |
-| [Persistent Agent State](/ai/ti/reference/ti-persistent-agent-state-example.md) | Preserve plans, checkpoints, and results across disposable sandboxes. |
-| [Parallel Agent Dataset](/ai/ti/reference/ti-parallel-agent-dataset-example.md) | Give multiple agents read-only access to one shared unstructured dataset. |
-| [Git Workspace for Agents](/ai/ti/reference/ti-git-workspace-for-agents-example.md) | Prepare a mounted Git workspace and isolated linked worktree. |
-| [Journal an Agent Workflow](/ai/ti/reference/ti-journal-agent-workflow-example.md) | Record structured events and verify their hash chain. |
-| [Delegate Vault Secrets](/ai/ti/reference/ti-vault-agent-secrets-example.md) | Grant an agent temporary access to one secret field. |
-
-#### Command reference
-
-The command reference follows the `ti` command tree. Every command has a dedicated page with its syntax and examples.
-
-| Document | Description |
-| --- | --- |
-| [TiDB Cloud CLI Command Reference](/ai/ti/reference/ti-cli-reference.md) | Command tree, global flags, output, queries, dry-run, help, errors, aliases, and links to command pages. |
-| [`ti configure`](/ai/ti/reference/commands/ti/ti-configure.md) | Configure a local profile interactively or non-interactively. |
-| [`ti update`](/ai/ti/reference/commands/ti/ti-update.md) | Check for and install release updates. |
-| [`ti db` commands](/ai/ti/reference/ti-starter-database.md) | Commands for managing TiDB Cloud Starter instances. |
-| [`ti fs` commands](/ai/ti/reference/ti-filesystem.md) | Commands for managing TiDB Cloud Filesystems. |
-| [`ti fs-git` commands](/ai/ti/reference/ti-filesystem-git.md) | Commands for managing TiDB Cloud Filesystem Git workspaces. |
-| [`ti fs-journal` commands](/ai/ti/reference/ti-filesystem-journal.md) | Commands for managing TiDB Cloud Filesystem journals. |
-| [`ti fs-vault` commands](/ai/ti/reference/ti-filesystem-vault.md) | Commands for managing TiDB Cloud Filesystem vault secrets. |
-| [TiDB Cloud CLI Configuration and Credentials](/ai/ti/reference/ti-configuration-and-credentials.md) | Profiles, precedence, local state, credentials, mount locators, and logs. |
-| [TiDB Cloud CLI Regions, Security, and Limitations](/ai/ti/reference/ti-regions-security-and-limitations.md) | Placement, authentication boundaries, platforms, durability, and preview constraints. |
-| [Troubleshoot TiDB Cloud CLI](/ai/ti/reference/ti-troubleshooting.md) | Diagnose authentication, quota, SQL, companion, selection, and mount failures. |
+| Understand what `ti` manages and when to use it | [TiDB Cloud CLI Overview](/ai/ti/ti-overview.md) |
+| Install and configure `ti`, then complete a first workflow | [Get Started with TiDB Cloud CLI](/ai/ti/ti-quick-start.md) |
+| Automate TiDB Cloud Starter instance, branch, and SQL operations | [Manage TiDB Cloud Starter Instances](/ai/ti/guides/manage-starter-instances.md) |
+| Persist and share files across machines, CI jobs, and sandboxes | [Manage Filesystem Resources](/ai/ti/guides/manage-filesystem-resources.md) and [Work with Filesystem Data](/ai/ti/guides/work-with-filesystem-data.md) |
+| Use mounted workspaces, Git workspaces, journals, or delegated secrets | [Mount a Filesystem](/ai/ti/guides/mount-filesystem.md), [Manage Git Workspaces](/ai/ti/guides/manage-git-workspaces.md), [Use Filesystem Journals](/ai/ti/guides/use-filesystem-journals.md), and [Manage Filesystem Vault Secrets](/ai/ti/guides/manage-filesystem-vault-secrets.md) |
+| Follow an end-to-end automation or agent example | [Run a Daily TiDB Cloud CLI Workflow](/ai/ti/reference/ti-daily-workflow-example.md) or [Use TiDB Cloud Filesystem in an Agent Sandbox](/ai/ti/reference/ti-agent-sandbox-example.md) |
+| Look up commands, global options, output behavior, and errors | [TiDB Cloud CLI Command Reference](/ai/ti/reference/ti-cli-reference.md) |
 
 ## Integrations
 
-Integrate TiDB with popular AI frameworks, embedding providers, and development tools.
+Connect TiDB to embedding providers, AI frameworks, application libraries, cloud services, and AI development tools.
 
-| Document | Description |
+| Integration area | Start here |
 | --- | --- |
-| [Integration Overview](/ai/integrations/vector-search-integration-overview.md) | Overview of all available integrations. |
-
-### Auto embedding
-
-| Document | Description |
-| --- | --- |
-| [Auto Embedding Overview](/ai/integrations/vector-search-auto-embedding-overview.md) | Unified interface for embedding models in TiDB. |
-| [OpenAI](/ai/integrations/vector-search-auto-embedding-openai.md) | Integrate OpenAI embedding models. |
-| [OpenAI Compatible](/ai/integrations/embedding-openai-compatible.md) | Integrate OpenAI-compatible embedding providers. |
-| [Jina AI](/ai/integrations/vector-search-auto-embedding-jina-ai.md) | Integrate Jina AI embedding models. |
-| [Cohere](/ai/integrations/vector-search-auto-embedding-cohere.md) | Integrate Cohere embedding models. |
-| [Google Gemini](/ai/integrations/vector-search-auto-embedding-gemini.md) | Integrate Google Gemini embedding models. |
-| [Hugging Face](/ai/integrations/vector-search-auto-embedding-huggingface.md) | Integrate Hugging Face embedding models. |
-| [NVIDIA NIM](/ai/integrations/vector-search-auto-embedding-nvidia-nim.md) | Integrate NVIDIA NIM embedding models. |
-| [Amazon Titan](/ai/integrations/vector-search-auto-embedding-amazon-titan.md) | Integrate Amazon Titan embedding models. |
-
-### AI frameworks
-
-| Document | Description |
-| --- | --- |
-| [LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md) | Use TiDB as a vector store with LlamaIndex. |
-
-### ORM libraries
-
-| Document | Description |
-| --- | --- |
-| [SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md) | Use TiDB vector search with SQLAlchemy ORM. |
-| [Django ORM](/ai/integrations/vector-search-integrate-with-django-orm.md) | Use TiDB vector search with Django ORM. |
-| [Peewee](/ai/integrations/vector-search-integrate-with-peewee.md) | Use TiDB vector search with Peewee ORM. |
-
-### Cloud services
-
-| Document | Description |
-| --- | --- |
-| [Jina AI Embedding](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md) | Use Jina AI embedding API with TiDB. |
-| [Amazon Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md) | Use Amazon Bedrock with TiDB. |
-
-### MCP server
-
-| Document | Description |
-| --- | --- |
-| [MCP Server Overview](/ai/integrations/tidb-mcp-server.md) | Connect TiDB to AI-powered IDEs using the TiDB MCP server. |
-| [Claude Code](/ai/integrations/tidb-mcp-claude-code.md) | Set up TiDB MCP server with Claude Code. |
-| [Claude Desktop](/ai/integrations/tidb-mcp-claude-desktop.md) | Set up TiDB MCP server with Claude Desktop. |
-| [Cursor](/ai/integrations/tidb-mcp-cursor.md) | Set up TiDB MCP server with Cursor. |
-| [VS Code](/ai/integrations/tidb-mcp-vscode.md) | Set up TiDB MCP server with VS Code. |
-| [Windsurf](/ai/integrations/tidb-mcp-windsurf.md) | Set up TiDB MCP server with Windsurf. |
+| All integrations | [AI Integrations for TiDB](/ai/integrations/vector-search-integration-overview.md) |
+| Auto Embedding providers | [Auto Embedding Overview](/ai/integrations/vector-search-auto-embedding-overview.md) |
+| AI frameworks | [LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md) |
+| ORM libraries | [SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md), [Django ORM](/ai/integrations/vector-search-integrate-with-django-orm.md), and [Peewee](/ai/integrations/vector-search-integrate-with-peewee.md) |
+| Cloud embedding services | [Jina AI Embedding](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md) and [Amazon Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md) |
+| MCP clients and AI development tools | [TiDB MCP Server](/ai/integrations/tidb-mcp-server.md) |
 
 ## Reference
 
