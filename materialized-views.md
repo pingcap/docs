@@ -62,6 +62,37 @@ For the syntax of this statement, see [`ALTER MATERIALIZED VIEW`](/sql-statement
 
 For the syntax of this statement, see [`ALTER MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-alter-materialized-view-log.md).
 
+### Purge a materialized view log
+
+To manually purge a materialized view log, use [`PURGE MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-purge-materialized-view-log.md). To cancel a purge job, use [`CANCEL MATERIALIZED VIEW LOG PURGE JOB`](/sql-statements/sql-statement-cancel-materialized-view-log-purge-job.md).
+
+#### Purge throttling
+
+TiDB uses adaptive throttling to spread materialized view log purge work across an available time window. Before deleting rows, TiDB counts the rows eligible for purge and calculates a purge deadline. For a scheduled purge, the deadline does not extend beyond the next scheduled run. For a manually triggered purge, TiDB uses an internal bounded time window, shortened when an earlier next scheduled run exists.
+
+TiDB uses the following calculation to determine the target delete rate:
+
+```text
+delete time budget = time until deadline * tidb_mlog_purge_rate_budget_ratio
+target delete rate = max(pending rows / delete time budget, tidb_mlog_purge_min_rate)
+```
+
+The target delete rate is measured in rows per second. TiDB deletes rows in batches and waits between batches when deletion has progressed ahead of the target rate. This keeps the average delete rate close to the calculated target.
+
+For example, assume that 120,000 rows are pending, there are 60 seconds until the deadline, `tidb_mlog_purge_rate_budget_ratio` is `0.5`, and `tidb_mlog_purge_min_rate` is `2000`. TiDB uses 30 seconds as the delete time budget and sets the target delete rate to 4,000 rows per second. If only 20,000 rows are pending under the same settings, the calculated rate is about 667 rows per second, so TiDB uses the 2,000 rows-per-second minimum target instead.
+
+> **Note:**
+>
+> Adaptive throttling is best effort. TiDB uses a preliminary TiFlash query to count pending rows and calculate the plan. If TiDB cannot obtain the pending-row statistics, throttling configuration, or purge deadline, it continues with normal unthrottled batched deletion instead of failing the purge.
+
+You can configure materialized view log purge jobs using the following system variables:
+
+- [`tidb_mlog_purge_batch_size`](/system-variables.md#tidb_mlog_purge_batch_size): Sets the maximum number of rows deleted in each purge batch.
+- [`tidb_mlog_purge_min_rate`](/system-variables.md#tidb_mlog_purge_min_rate): Sets the lower bound of the adaptive purge target delete rate.
+- [`tidb_mlog_purge_rate_budget_ratio`](/system-variables.md#tidb_mlog_purge_rate_budget_ratio): Sets the fraction of the available time before the purge deadline that TiDB targets for deletion.
+- [`tidb_mlog_purge_delete_tiflash_threads`](/system-variables.md#tidb_mlog_purge_delete_tiflash_threads): Sets the TiFlash thread count used by purge `DELETE` statements.
+- [`tidb_mlog_log_slow_purge`](/system-variables.md#tidb_mlog_log_slow_purge): Controls whether TiDB records purge statements in the slow query log.
+
 ### Drop a materialized view
 
 For the syntax of these statements, see [`DROP MATERIALIZED VIEW`](/sql-statements/sql-statement-drop-materialized-view.md) and [`DROP MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-drop-materialized-view-log.md).

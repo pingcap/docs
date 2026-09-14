@@ -39,6 +39,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`DROP SEQUENCE`](/sql-statements/sql-statement-drop-sequence.md)                  | Drops a sequence object.                                                                               |
 | [`DROP TABLE`](/sql-statements/sql-statement-drop-table.md)                        | Drops an existing table.                                                                               |
 | [`DROP VIEW`](/sql-statements/sql-statement-drop-view.md)                          | Drops an existing view.                                                                                |
+| [`PURGE MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-purge-materialized-view-log.md) | Manually purges a materialized view log.                                                   |
 | [`RENAME TABLE`](/sql-statements/sql-statement-rename-table.md)                    | Renames a table.                                                                                       |
 | [`SHOW COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)          | Shows the columns from a table.                                                                        |
 | [`SHOW CREATE DATABASE`](/sql-statements/sql-statement-show-create-database.md)    | Shows the CREATE statement for a database.                                                             |
@@ -101,6 +102,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)                  | Resumes DDL operations.                                                                         |
 | [`ADMIN SHOW DDL [JOBS\|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)  | Shows DDL jobs or job queries.                                                                  |
 | [`ADMIN`](/sql-statements/sql-statement-admin.md)                                        | Performs various administrative tasks.                                                          |
+| [`CANCEL MATERIALIZED VIEW LOG PURGE JOB`](/sql-statements/sql-statement-cancel-materialized-view-log-purge-job.md) | Cancels a materialized view log purge job.                                      |
 | [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md)                          | Included for [MySQL compatibility](/mysql-compatibility.md). It has no effective usage in TiDB. |
 | [`SET <variable>`](/sql-statements/sql-statement-set-variable.md)                        | Modifies a system variable or user variable.                                                    |
 | [`SET [NAMES\|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)               | Set a character set and collation.                                                              |
@@ -122,6 +124,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)                  | Resumes DDL operations.                                                                         |
 | [`ADMIN SHOW DDL [JOBS\|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)  | Shows DDL jobs or job queries.                                                                  |
 | [`ADMIN`](/sql-statements/sql-statement-admin.md)                                        | Performs various administrative tasks.                                                          |
+| [`CANCEL MATERIALIZED VIEW LOG PURGE JOB`](/sql-statements/sql-statement-cancel-materialized-view-log-purge-job.md) | Cancels a materialized view log purge job.                                      |
 | [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md)                          | Included for [MySQL compatibility](/mysql-compatibility.md). It has no effective usage in TiDB. |
 | [`SET <variable>`](/sql-statements/sql-statement-set-variable.md)                        | Modifies a system variable or user variable.                                                    |
 | [`SET [NAMES\|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)               | Set a character set and collation.                                                              |
