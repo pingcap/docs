@@ -5,84 +5,110 @@ summary: Install TiDB Cloud CLI releases, configure profiles, check versions, ap
 
 # Install, Configure, and Update TiDB Cloud CLI
 
-This reference documents the supported release installers, top-level configuration and update commands, help and version behavior, and uninstallation.
+Use this guide to install and configure TiDB Cloud CLI (`ti`), check for and apply updates, and uninstall the CLI when needed.
 
 > **Note:**
 >
 > The TiDB Cloud Command Line Interface — `ti` — is currently in preview. Its features and command-line interface might change without prior notice.
 
-## Command tree
+## Prerequisites
 
-```text
-ti
-├── configure
-└── update
-```
+To configure TiDB Cloud CLI, obtain a TiDB Cloud API public key and private key from the [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) page in the TiDB Cloud console first.
 
-| Command | Required inputs | Main optional inputs | Example |
-| --- | --- | --- | --- |
-| `ti configure` | Interactive input, or region and TiDB Cloud API keys in non-interactive mode | `--profile`, `--non-interactive`, `--region-code`, key flags | `ti configure --profile staging` |
-| `ti update` | None | `--check`, `--fail-if-update-available`, `--dry-run`, `--target-version` | `ti update --check` |
-
-Run `ti configure help` or `ti update help` for the complete generated flag list.
+> **Note:**
+>
+> If you previously used TiDB Cloud CLI `tdc` v0.1.x, unmount any Filesystem or Vault mounts started by `tdc`, and read [Migrate from tdc to TiDB Cloud CLI](/ai/ti/reference/ti-migrate-from-tdc.md) before installing `ti`.
 
 ## Install TiDB Cloud CLI
 
-### macOS and Linux
+Depending on your operating system, follow the steps below to install the TiDB Cloud CLI.
 
-Run the installer:
+<SimpleTab groupId="operating-systems">
 
-```bash
-curl -fsSL https://github.com/tidbcloud/ti-cli/releases/latest/download/install.sh | sh -s -- --yes
-```
+<div label="macOS or Linux" value="macos-or-linux">
 
-After installation, add `ti` to the current shell and verify it:
+1. On macOS or Linux, run the following command to install the TiDB Cloud CLI:
 
-```bash
-export PATH="$HOME/.ti/bin:$PATH"
-ti --version
-```
+    ```bash
+    curl -fsSL https://github.com/tidbcloud/ti-cli/releases/latest/download/install.sh | sh -s -- --yes
+    ```
 
-The installer places `ti` and its `ti-drive9` companion in `~/.ti/bin`. Add the `PATH` export to your shell profile. The installer does not require `sudo` and does not write credentials.
+2. Add `ti` to the current shell and verify it:
 
-After installation, the installer displays the anonymous telemetry fields, prohibited data, persistent opt-out path, and process-scoped `TI_TELEMETRY=off` override. It does not prompt for a telemetry choice or create the optional preferences file.
+    ```bash
+    export PATH="$HOME/.ti/bin:$PATH"
+    ti --version
+    ```
 
-### Windows
+3. To keep `ti` available in new terminal sessions, add it to your shell profile. For example, if you use `zsh`, run the following commands:
 
-Run the installer:
+    ```bash
+    echo 'export PATH="$HOME/.ti/bin:$PATH"' >> ~/.zshrc
+    source ~/.zshrc
+    ```
 
-```powershell
-$script = "$env:TEMP\install-ti.ps1"
-iwr https://github.com/tidbcloud/ti-cli/releases/latest/download/install.ps1 -OutFile $script
-powershell -ExecutionPolicy Bypass -File $script -Yes
-```
+    If you use Bash, add the same `export` command to the startup file used by your terminal, commonly `~/.bashrc` on Linux or `~/.bash_profile` on macOS.
 
-After installation, add `ti` to the current PowerShell session and verify it:
+</div>
 
-```powershell
-$env:Path = "$HOME\.ti\bin;$env:Path"
-ti --version
-```
+<div label="Windows PowerShell" value="windows-powershell">
 
-Add `$HOME\.ti\bin` to your user `PATH` to keep `ti` available in new PowerShell sessions.
+1. On Windows PowerShell, run the following command to install the TiDB Cloud CLI:
 
-The Windows installer displays the same anonymous telemetry and opt-out notice without creating a preference or installation identity.
+    ```powershell
+    $script = "$env:TEMP\install-ti.ps1"
+    iwr https://github.com/tidbcloud/ti-cli/releases/latest/download/install.ps1 -OutFile $script
+    powershell -ExecutionPolicy Bypass -File $script -Yes
+    ```
+
+2. Add `ti` to the current PowerShell session and verify it:
+
+    ```powershell
+    $env:Path = "$HOME\.ti\bin;$env:Path"
+    ti --version
+    ```
+
+3. Add `$HOME\.ti\bin` to your user `PATH` to keep `ti` available in new PowerShell sessions:
+
+    ```powershell
+    $tiBin = "$HOME\.ti\bin"
+    [Environment]::SetEnvironmentVariable("Path", "$tiBin;$([Environment]::GetEnvironmentVariable('Path', 'User'))", "User")
+    ```
+
+</div>
+</SimpleTab>
+
+The installer writes to your home directory and does not require elevated privileges.
+
+The installer also displays a notice about anonymous usage telemetry and how to opt out. Installation does not require you to make a telemetry choice. For details, see [Anonymous telemetry](/ai/ti/reference/ti-configuration-and-credentials.md#anonymous-telemetry).
 
 ## Configure a profile
 
-Interactive configuration is the only TiDB Cloud CLI workflow that prompts:
+A profile is a named set of TiDB Cloud API public key, private key, and region code.
+
+This section describes how to configure a profile for the TiDB Cloud CLI.
+
+### Configure interactively
+
+By default, `ti configure` prompts you for the information required to configure a profile:
 
 ```bash
 ti configure
 ```
 
-The TiDB Cloud CLI requests a TiDB Cloud API public key, private key, and canonical region code, validates those values locally, and stores the selected profile. Configuration makes no network request. The first remote command reports authentication or authorization errors for the permission it requires.
+`ti configure` prompts you for your TiDB Cloud API public key and private key, and a default region code. The CLI uses this region for commands unless you override it for an individual command. For available regions, see [Supported regions](/ai/ti/reference/ti-regions-security-and-limitations.md#supported-regions).
 
-Configure a named profile:
+The command validates the input format locally and saves the profile without making a request to TiDB Cloud. Your credentials are verified when you run a command that accesses TiDB Cloud. To change the default profile, run `ti configure` again. To change a named profile, include its name, for example, `ti configure --profile staging`.
+
+### Configure a named profile
+
+Pass `--profile` to configure a named profile:
 
 ```bash
 ti configure --profile staging
 ```
+
+### Configure for automation
 
 For CI or another non-interactive environment, prefer environment variables:
 
@@ -95,25 +121,27 @@ ti configure --profile ci --non-interactive
 
 You can also provide `--tidb-cloud-public-key`, `--tidb-cloud-private-key`, and `--region-code`, but secret flags can remain in shell history or process listings.
 
-Configuration precedence is command flag, environment variable, then saved profile. The global `--region` overrides only the placement for the current command:
+## Select a profile and override its region
+
+To use a named profile and override its default region for one command, use the global `--profile` and `--region` options:
 
 ```bash
-ti db list-db-clusters --db-cluster-type starter --profile staging --region aws-us-west-2
+ti --profile staging --region aws-us-west-2 db list-db-clusters --db-cluster-type starter
 ```
 
-## Get help and version information
+For detailed profile, credential, and region precedence rules, see [TiDB Cloud CLI Configuration and Credentials](/ai/ti/reference/ti-configuration-and-credentials.md).
 
-All command levels support `help`, `--help`, and `--version`:
+## Get help and check the version
+
+Use `help` or `--help` to inspect commands and `--version` to check the installed version:
 
 ```bash
 ti help
 ti fs help
-ti db create-db-cluster help
 ti --version
-ti fs --version
 ```
 
-Required flags appear before optional flags in generated usage. The TiDB Cloud CLI supports long flags only.
+For the complete command tree and CLI conventions, see [TiDB Cloud CLI Command Reference](/ai/ti/reference/ti-cli-reference.md).
 
 ## Update TiDB Cloud CLI
 
@@ -123,67 +151,132 @@ Check without changing files:
 ti update --check
 ```
 
-In automation, fail when an update exists:
+In automation, return exit code `1` when a newer version is available:
 
 ```bash
 ti update --check --fail-if-update-available
 ```
 
-Preview and apply an update:
+Preview an update:
 
 ```bash
 ti update --dry-run
+```
+
+> **Note:**
+>
+> If you have an active Filesystem or Vault mount, stop writers and unmount it before updating so that `ti` and the Filesystem runtime are updated together. For example:
+>
+> ```bash
+> ti fs unmount-file-system --mount-path <mount-path>
+> ```
+>
+> For a Vault mount, use `ti fs-vault unmount-vault --mount-path <mount-path>`. For details, see [Mount a TiDB Cloud Filesystem](/ai/ti/guides/mount-filesystem.md) and [Manage Filesystem Vault Secrets](/ai/ti/guides/manage-filesystem-vault-secrets.md).
+
+Apply the latest update:
+
+```bash
 ti update
 ```
 
-Install a specific TiDB Cloud CLI release:
+Install a specific release:
 
 ```bash
-ti update --target-version v0.1.2
+ti update --target-version <version>
 ```
 
-The update command replaces both binaries in the user-owned install directory. An active Filesystem mount keeps running the already loaded companion process. To avoid mixing the old mount runtime with new CLI commands, stop writers and unmount before updating. Graceful unmount automatically flushes and drains pending FUSE work:
-
-```bash
-ti fs unmount-file-system --mount-path /path/to/workspace
-ti update
-```
-
-For WebDAV, close writers and unmount. Use the FUSE-only drain command separately only when you need a durability barrier without unmounting. Installations in protected or package-manager-owned locations are not modified. Run the installer once to migrate an older `/usr/local/bin` installation to `~/.ti/bin`.
+The update command replaces both `ti` and `ti-drive9` in a user-owned installation. It does not modify installations in protected or package-manager-owned locations. To migrate an older `/usr/local/bin` installation to `~/.ti/bin`, run the installer once.
 
 ## Migrate from tdc v0.1.x
 
-The `ti` installer and the first non-update `ti` command migrate supported local state from `~/.tdc/` to `~/.ti/` when `~/.tdc/` exists and `~/.ti/` does not. The migration includes profiles, TiDB Cloud API credentials, global preferences, the telemetry installation identity, DB SQL credentials, and Filesystem registrations and credentials. It preserves `~/.tdc/` as a rollback copy and does not copy binaries, logs, caches, local overlays, mount locators, or companion runtime state. A hidden owner-only marker under `~/.ti/` records that the old and new directories coexist because migration completed successfully.
+If you have never used `tdc` v0.1.x, skip this section.
 
-Before installing `ti`, unmount active tdc Filesystem and Vault mounts. The migration refuses to proceed while an old mount is active because copying runtime state cannot transfer a live FUSE or WebDAV process safely.
+If you previously used `tdc` v0.1.x, `ti` can migrate supported local profiles, credentials, preferences, and Filesystem state from `~/.tdc/` to `~/.ti/`. Before installing `ti`, unmount any Filesystem or Vault mounts started by `tdc`.
 
-If both directories were created independently, or the migration marker is absent, invalid, or points to a different source, `ti` stops without merging or overwriting either directory. Move or remove the directory that is not your intended source of truth, and then run the command again. Do not combine credential or Filesystem registry directories manually.
-
-During the v0.2.x transition, `ti` accepts legacy `TDC_*` environment variables only when the corresponding canonical variable is absent. If both forms are set to different values, the command fails before changing local or remote state. New automation should use `TI_*` and `TIDB_CLOUD_*` variables. Legacy environment variable support is removed in v0.3.0.
+For the complete migration procedure, including migrated and excluded state, directory conflict resolution, and legacy environment variable compatibility, see [Migrate from tdc to TiDB Cloud CLI](/ai/ti/reference/ti-migrate-from-tdc.md).
 
 ## Uninstall TiDB Cloud CLI
 
-Remove only the binaries:
+Before uninstalling, stop writers and unmount any active Filesystem or Vault mounts.
+
+For example, run the command that corresponds to the type of mount:
 
 ```bash
-rm -f "$HOME/.ti/bin/ti" "$HOME/.ti/bin/ti-drive9"
+# Filesystem mount
+ti fs unmount-file-system --mount-path <filesystem-mount-path>
+
+# Vault mount
+ti fs-vault unmount-vault --mount-path <vault-mount-path>
 ```
 
-On Windows:
+For details, see [Mount a TiDB Cloud Filesystem](/ai/ti/guides/mount-filesystem.md) and [Manage Filesystem Vault Secrets](/ai/ti/guides/manage-filesystem-vault-secrets.md).
 
-```powershell
-Remove-Item "$HOME\.ti\bin\ti.exe", "$HOME\.ti\bin\ti-drive9.exe"
-```
+<SimpleTab groupId="operating-systems">
 
-Removing binaries preserves profiles, credentials, Filesystem registrations, DB SQL credentials, logs, and mount locators. Remove `~/.ti/` only when you intend to delete all local TiDB Cloud CLI state:
+<div label="macOS or Linux" value="macos-or-linux">
+
+1. Remove the binaries:
+
+    ```bash
+    rm -f "$HOME/.ti/bin/ti" "$HOME/.ti/bin/ti-drive9"
+    ```
+
+2. Remove the `~/.ti/bin` entry that you added to your shell profile during installation.
+
+</div>
+
+<div label="Windows PowerShell" value="windows-powershell">
+
+1. Remove the binaries:
+
+    ```powershell
+    Remove-Item "$HOME\.ti\bin\ti.exe", "$HOME\.ti\bin\ti-drive9.exe"
+    ```
+
+2. Remove `$HOME\.ti\bin` from your user `PATH`:
+
+    ```powershell
+    $tiBin = "$HOME\.ti\bin"
+    $userPath = [Environment]::GetEnvironmentVariable("Path", "User")
+    $newPath = (($userPath -split ";") | Where-Object { $_ -and $_ -ne $tiBin }) -join ";"
+    [Environment]::SetEnvironmentVariable("Path", $newPath, "User")
+    ```
+
+</div>
+</SimpleTab>
+
+### Remove local state
+
+Removing binaries preserves profiles, credentials, Filesystem registrations, DB SQL credentials, logs, and mount locators.
+
+> **Note:**
+>
+> Remove `~/.ti/` only when you intend to permanently delete all local TiDB Cloud CLI state. Deleting local state does not delete remote TiDB Cloud Starter instances or Filesystem resources.
+
+<SimpleTab groupId="operating-systems">
+
+<div label="macOS or Linux" value="macos-or-linux">
+
+On macOS or Linux:
 
 ```bash
 rm -rf "$HOME/.ti"
 ```
 
-Deleting local state does not delete remote TiDB Cloud Starter instances or Filesystem resources.
+</div>
 
-## What's next
+<div label="Windows PowerShell" value="windows-powershell">
+
+On Windows PowerShell:
+
+```powershell
+Remove-Item "$HOME\.ti" -Recurse -Force
+```
+
+</div>
+</SimpleTab>
+
+## See also
 
 - [TiDB Cloud CLI Configuration and Credentials](/ai/ti/reference/ti-configuration-and-credentials.md)
 - [TiDB Cloud Starter CLI Command Reference](/ai/ti/reference/ti-starter-database.md)

@@ -159,6 +159,7 @@
       - [unmount-vault](/ai/ti/reference/commands/fs-vault/ti-fs-vault-unmount-vault.md)
   - [TiDB Cloud CLI Configuration and Credentials](/ai/ti/reference/ti-configuration-and-credentials.md)
   - [TiDB Cloud CLI Regions, Security, and Limitations](/ai/ti/reference/ti-regions-security-and-limitations.md)
+  - [Migrate from tdc to TiDB Cloud CLI](/ai/ti/reference/ti-migrate-from-tdc.md)
   - [Troubleshoot TiDB Cloud CLI](/ai/ti/reference/ti-troubleshooting.md)
 
 ## INTEGRATIONS
