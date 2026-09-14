@@ -36,7 +36,7 @@
   - [概要](/migration-overview.md)
   - [移行ツール](/migration-tools.md)
   - [ベストプラクティスの導入](/tidb-lightning/data-import-best-practices.md)
-  - 移住シナリオ
+  - 移行シナリオ
     - [Auroraから移行する](/migrate-aurora-to-tidb.md)
     - [MySQLから小規模データセットを移行する](/migrate-small-mysql-to-tidb.md)
     - [MySQLから大規模データセットを移行する](/migrate-large-mysql-to-tidb.md)
