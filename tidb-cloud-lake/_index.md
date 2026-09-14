@@ -1,13 +1,13 @@
 ---
-title: TiDB Cloud Lake Documentation
+title: TiDB Cloud Lake 文档
 hide_sidebar: true
 hide_commit: true
-summary: TiDB Cloud Lake is a cloud-native data warehouse service for analytics workloads. It separates compute and storage, and supports ANSI SQL, semi-structured data processing, and AI-oriented workflows.
+summary: TiDB Cloud Lake 是一项面向分析型工作负载的云原生数据仓库服务。它采用计算与存储分离架构，并支持 ANSI SQL、半结构化数据处理和面向 AI 的工作流。
 ---
 
-<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Lake" subTitle="TiDB Cloud Lake is a cloud-native data warehouse service for analytics workloads. It separates compute and storage, and supports ANSI SQL, semi-structured data processing, and AI-oriented workflows.">
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Lake" subTitle="TiDB Cloud Lake 是一项面向分析型工作负载的云原生数据仓库服务。它采用计算与存储分离架构，并支持 ANSI SQL、半结构化数据处理和面向 AI 的工作流。">
 
-<LearningPath label="Learn" icon="cloud1">
+<LearningPath label="学习" icon="cloud1">
 
 [TiDB Cloud Lake 概览](https://docs.pingcap.com/zh/tidbcloudlake/lake-overview/)
 
@@ -17,7 +17,7 @@ summary: TiDB Cloud Lake is a cloud-native data warehouse service for analytics 
 
 </LearningPath>
 
-<LearningPath label="Try" icon="cloud5">
+<LearningPath label="试用" icon="cloud5">
 
 [快速入门](https://docs.pingcap.com/zh/tidbcloudlake/lake-quick-start/)
 
@@ -27,7 +27,7 @@ summary: TiDB Cloud Lake is a cloud-native data warehouse service for analytics 
 
 </LearningPath>
 
-<LearningPath label="Connect" icon="doc8">
+<LearningPath label="连接" icon="doc8">
 
 [连接概览](https://docs.pingcap.com/zh/tidbcloudlake/connection-overview/)
 
@@ -43,7 +43,7 @@ summary: TiDB Cloud Lake is a cloud-native data warehouse service for analytics 
 
 </LearningPath>
 
-<LearningPath label="Integrate" icon="cloud4">
+<LearningPath label="集成" icon="cloud4">
 
 [数据集成概览](https://docs.pingcap.com/zh/tidbcloudlake/data-integration-overview/)
 
@@ -53,7 +53,7 @@ summary: TiDB Cloud Lake is a cloud-native data warehouse service for analytics 
 
 </LearningPath>
 
-<LearningPath label="Load" icon="cloud3">
+<LearningPath label="加载" icon="cloud3">
 
 [Stage 概述](https://docs.pingcap.com/zh/tidbcloudlake/stage-overview/)
 
@@ -65,7 +65,7 @@ summary: TiDB Cloud Lake is a cloud-native data warehouse service for analytics 
 
 </LearningPath>
 
-<LearningPath label="Analyze" icon="cloud6">
+<LearningPath label="分析" icon="cloud6">
 
 [多模态数据分析](https://docs.pingcap.com/zh/tidbcloudlake/multimodal-data-analytics/)
 
@@ -75,7 +75,7 @@ summary: TiDB Cloud Lake is a cloud-native data warehouse service for analytics 
 
 </LearningPath>
 
-<LearningPath label="Operate" icon="tidb-cloud-tune">
+<LearningPath label="运维" icon="tidb-cloud-tune">
 
 [管理成本](https://docs.pingcap.com/zh/tidbcloudlake/manage-costs/)
 
@@ -89,7 +89,7 @@ summary: TiDB Cloud Lake is a cloud-native data warehouse service for analytics 
 
 </LearningPath>
 
-<LearningPath label="Security" icon="users">
+<LearningPath label="安全" icon="users">
 
 [安全性与可靠性](https://docs.pingcap.com/zh/tidbcloudlake/security-reliability/)
 
@@ -103,7 +103,7 @@ summary: TiDB Cloud Lake is a cloud-native data warehouse service for analytics 
 
 </LearningPath>
 
-<LearningPath label="Reference" icon="cloud-dev">
+<LearningPath label="参考" icon="cloud-dev">
 
 [SQL 语句概览](https://docs.pingcap.com/zh/tidbcloudlake/sql-statements-overview/)
 

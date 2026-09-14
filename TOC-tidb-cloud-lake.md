@@ -297,7 +297,7 @@
         - [DESC SEQUENCE](/tidb-cloud-lake/sql/desc-sequence.md)
         - [DROP SEQUENCE](/tidb-cloud-lake/sql/drop-sequence.md)
         - [SHOW SEQUENCES](/tidb-cloud-lake/sql/show-sequences.md)
-      - 流
+      - Stream
         - [概览](/tidb-cloud-lake/sql/stream.md)
         - [CREATE STREAM](/tidb-cloud-lake/sql/create-stream.md)
         - [DESC STREAM](/tidb-cloud-lake/sql/desc-stream.md)
@@ -1230,7 +1230,7 @@
 - 常规参考
   - [架构](/tidb-cloud-lake/guides/tidb-cloud-lake-architecture.md)
   - 实现原理深入解析
-    - [Fuse Engine 的工作原理](/tidb-cloud-lake/guides/how-fuse-engine-works.md)
+    - [Fuse Engine](/tidb-cloud-lake/guides/how-fuse-engine-works.md)
     - [优化器](/tidb-cloud-lake/guides/how-optimizer-works.md)
     - [JSON](/tidb-cloud-lake/guides/how-json-variant-works.md)
     - [数据共享](/tidb-cloud-lake/guides/how-data-sharing-works.md)
