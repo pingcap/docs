@@ -7,64 +7,120 @@ summary: Reference every `ti fs` command for Filesystem resources, files, layers
 
 Use `ti fs` to provision TiDB Cloud Filesystem resources and access their data from commands or local mounts.
 
+In command syntax, square brackets (`[]`) enclose optional items. Parentheses group required choices, and a vertical bar (`|`) separates alternatives. For example, `(--ttl <duration> | --no-expiration)` means that you must specify exactly one of the two options.
+
 ## Resource and token commands
 
-- [`create-file-system`](/ai/ti/reference/commands/fs/ti-fs-create-file-system.md)
-- [`list-file-systems`](/ai/ti/reference/commands/fs/ti-fs-list-file-systems.md)
-- [`describe-file-system`](/ai/ti/reference/commands/fs/ti-fs-describe-file-system.md)
-- [`check-file-system`](/ai/ti/reference/commands/fs/ti-fs-check-file-system.md)
-- [`delete-file-system`](/ai/ti/reference/commands/fs/ti-fs-delete-file-system.md)
-- [`import-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-import-file-system-token.md)
-- [`generate-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-generate-file-system-token.md)
-- [`generate-file-system-scoped-token`](/ai/ti/reference/commands/fs/ti-fs-generate-file-system-scoped-token.md)
-- [`list-file-system-tokens`](/ai/ti/reference/commands/fs/ti-fs-list-file-system-tokens.md)
-- [`enable-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-enable-file-system-token.md)
-- [`disable-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-disable-file-system-token.md)
-- [`delete-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-delete-file-system-token.md)
-- [`refresh-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-refresh-file-system-token.md)
+| Command | Description |
+| --- | --- |
+| [`create-file-system`](/ai/ti/reference/commands/fs/ti-fs-create-file-system.md) | Creates a Filesystem and its initial owner token. |
+| [`list-file-systems`](/ai/ti/reference/commands/fs/ti-fs-list-file-systems.md) | Lists Filesystems in the effective region. |
+| [`describe-file-system`](/ai/ti/reference/commands/fs/ti-fs-describe-file-system.md) | Describes one Filesystem by ID. |
+| [`check-file-system`](/ai/ti/reference/commands/fs/ti-fs-check-file-system.md) | Checks Filesystem selection, routing, credentials, and data-plane access. |
+| [`delete-file-system`](/ai/ti/reference/commands/fs/ti-fs-delete-file-system.md) | Permanently deletes a Filesystem. |
+| [`import-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-import-file-system-token.md) | Imports and selects an existing Filesystem token locally. |
+| [`generate-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-generate-file-system-token.md) | Generates an additional owner token. |
+| [`generate-file-system-scoped-token`](/ai/ti/reference/commands/fs/ti-fs-generate-file-system-scoped-token.md) | Generates a token limited by path, operation, and lifetime. |
+| [`list-file-system-tokens`](/ai/ti/reference/commands/fs/ti-fs-list-file-system-tokens.md) | Lists non-secret token metadata. |
+| [`enable-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-enable-file-system-token.md) | Re-enables a disabled token. |
+| [`disable-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-disable-file-system-token.md) | Temporarily disables a token. |
+| [`delete-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-delete-file-system-token.md) | Permanently revokes a token. |
+| [`refresh-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-refresh-file-system-token.md) | Rotates a token and returns its replacement once. |
+
+### Token-management authorization
+
+When an owner token authorizes token management, it can list tokens, create scoped tokens, and revoke either owner or scoped tokens. It can enable or disable scoped tokens only. TiDB Cloud API credentials can enable, disable, or revoke either token kind.
 
 ## AI provider configuration commands
 
-- [`describe-file-system-extract-configuration`](/ai/ti/reference/commands/fs/ti-fs-describe-file-system-extract-configuration.md)
-- [`update-file-system-extract-configuration`](/ai/ti/reference/commands/fs/ti-fs-update-file-system-extract-configuration.md)
-- [`describe-file-system-embedding-configuration`](/ai/ti/reference/commands/fs/ti-fs-describe-file-system-embedding-configuration.md)
-- [`update-file-system-embedding-configuration`](/ai/ti/reference/commands/fs/ti-fs-update-file-system-embedding-configuration.md)
+These commands configure optional providers for extracting content from media files and generating embeddings. Ordinary Filesystem resource and file operations do not require AI provider configuration.
+
+| Command | Description |
+| --- | --- |
+| [`describe-file-system-extract-configuration`](/ai/ti/reference/commands/fs/ti-fs-describe-file-system-extract-configuration.md) | Describes the media extraction provider configuration. |
+| [`update-file-system-extract-configuration`](/ai/ti/reference/commands/fs/ti-fs-update-file-system-extract-configuration.md) | Updates the provider used to extract media content. |
+| [`describe-file-system-embedding-configuration`](/ai/ti/reference/commands/fs/ti-fs-describe-file-system-embedding-configuration.md) | Describes the embedding provider configuration. |
+| [`update-file-system-embedding-configuration`](/ai/ti/reference/commands/fs/ti-fs-update-file-system-embedding-configuration.md) | Updates the provider used to generate embeddings. |
 
 ## Data and namespace commands
 
-- [`copy-file`](/ai/ti/reference/commands/fs/ti-fs-copy-file.md)
-- [`read-file`](/ai/ti/reference/commands/fs/ti-fs-read-file.md)
-- [`list-files`](/ai/ti/reference/commands/fs/ti-fs-list-files.md)
-- [`describe-file`](/ai/ti/reference/commands/fs/ti-fs-describe-file.md)
-- [`move-file`](/ai/ti/reference/commands/fs/ti-fs-move-file.md)
-- [`delete-file`](/ai/ti/reference/commands/fs/ti-fs-delete-file.md)
-- [`create-directory`](/ai/ti/reference/commands/fs/ti-fs-create-directory.md)
-- [`chmod-file`](/ai/ti/reference/commands/fs/ti-fs-chmod-file.md)
-- [`create-symlink`](/ai/ti/reference/commands/fs/ti-fs-create-symlink.md)
-- [`create-hardlink`](/ai/ti/reference/commands/fs/ti-fs-create-hardlink.md)
-- [`search-file-content`](/ai/ti/reference/commands/fs/ti-fs-search-file-content.md)
-- [`find-files`](/ai/ti/reference/commands/fs/ti-fs-find-files.md)
+| Command | Description |
+| --- | --- |
+| [`copy-file`](/ai/ti/reference/commands/fs/ti-fs-copy-file.md) | Copies files between local storage and a Filesystem, or within a Filesystem. |
+| [`read-file`](/ai/ti/reference/commands/fs/ti-fs-read-file.md) | Reads a remote file or byte range. |
+| [`list-files`](/ai/ti/reference/commands/fs/ti-fs-list-files.md) | Lists entries under a remote path. |
+| [`describe-file`](/ai/ti/reference/commands/fs/ti-fs-describe-file.md) | Describes a remote file or directory. |
+| [`move-file`](/ai/ti/reference/commands/fs/ti-fs-move-file.md) | Moves or renames a remote path. |
+| [`delete-file`](/ai/ti/reference/commands/fs/ti-fs-delete-file.md) | Deletes a remote file or directory. |
+| [`create-directory`](/ai/ti/reference/commands/fs/ti-fs-create-directory.md) | Creates a remote directory. |
+| [`chmod-file`](/ai/ti/reference/commands/fs/ti-fs-chmod-file.md) | Changes POSIX-style mode metadata. |
+| [`create-symlink`](/ai/ti/reference/commands/fs/ti-fs-create-symlink.md) | Creates a symbolic link. |
+| [`create-hardlink`](/ai/ti/reference/commands/fs/ti-fs-create-hardlink.md) | Creates a hard link. |
+| [`search-file-content`](/ai/ti/reference/commands/fs/ti-fs-search-file-content.md) | Searches extracted file content and descriptions. |
+| [`find-files`](/ai/ti/reference/commands/fs/ti-fs-find-files.md) | Finds files by name, tag, date, size, or type. |
 
 ## Layer and portability commands
 
-- [`create-layer`](/ai/ti/reference/commands/fs/ti-fs-create-layer.md)
-- [`list-layers`](/ai/ti/reference/commands/fs/ti-fs-list-layers.md)
-- [`fork-layer`](/ai/ti/reference/commands/fs/ti-fs-fork-layer.md)
-- [`list-layer-chain`](/ai/ti/reference/commands/fs/ti-fs-list-layer-chain.md)
-- [`describe-layer`](/ai/ti/reference/commands/fs/ti-fs-describe-layer.md)
-- [`diff-layer`](/ai/ti/reference/commands/fs/ti-fs-diff-layer.md)
-- [`create-layer-checkpoint`](/ai/ti/reference/commands/fs/ti-fs-create-layer-checkpoint.md)
-- [`delete-layer`](/ai/ti/reference/commands/fs/ti-fs-delete-layer.md)
-- [`rollback-layer`](/ai/ti/reference/commands/fs/ti-fs-rollback-layer.md)
-- [`commit-layer`](/ai/ti/reference/commands/fs/ti-fs-commit-layer.md)
-- [`pack-file-system`](/ai/ti/reference/commands/fs/ti-fs-pack-file-system.md)
-- [`unpack-file-system`](/ai/ti/reference/commands/fs/ti-fs-unpack-file-system.md)
+| Command | Description |
+| --- | --- |
+| [`create-layer`](/ai/ti/reference/commands/fs/ti-fs-create-layer.md) | Creates an isolated writable layer. |
+| [`list-layers`](/ai/ti/reference/commands/fs/ti-fs-list-layers.md) | Lists layers in a Filesystem. |
+| [`fork-layer`](/ai/ti/reference/commands/fs/ti-fs-fork-layer.md) | Forks a child layer from a parent tip or checkpoint. |
+| [`list-layer-chain`](/ai/ti/reference/commands/fs/ti-fs-list-layer-chain.md) | Lists the pinned ancestry of a layer. |
+| [`describe-layer`](/ai/ti/reference/commands/fs/ti-fs-describe-layer.md) | Describes a layer by ID. |
+| [`diff-layer`](/ai/ti/reference/commands/fs/ti-fs-diff-layer.md) | Lists changes recorded in a layer. |
+| [`create-layer-checkpoint`](/ai/ti/reference/commands/fs/ti-fs-create-layer-checkpoint.md) | Creates a durable checkpoint in a layer. |
+| [`delete-layer`](/ai/ti/reference/commands/fs/ti-fs-delete-layer.md) | Logically abandons a layer. |
+| [`rollback-layer`](/ai/ti/reference/commands/fs/ti-fs-rollback-layer.md) | Rolls a layer back without committing its changes. |
+| [`commit-layer`](/ai/ti/reference/commands/fs/ti-fs-commit-layer.md) | Applies a layer's changes to the base Filesystem. |
+| [`pack-file-system`](/ai/ti/reference/commands/fs/ti-fs-pack-file-system.md) | Archives selected local overlay state to the Filesystem. |
+| [`unpack-file-system`](/ai/ti/reference/commands/fs/ti-fs-unpack-file-system.md) | Restores local overlay state from an archive. |
+
+### Layer references
+
+A layer reference can be a layer ID, a unique layer name, or a tag reference in the form `tag:<key>=<value>`, for example `tag:run=123`. Because names and tag references can be ambiguous, use layer IDs in automation.
+
+### Mount profiles and local overlays
+
+A local overlay stores files that a mount profile keeps on the local machine instead of in the remote namespace. Mount profiles define which paths use that overlay:
+
+| Mount profile | Behavior |
+| --- | --- |
+| `coding-agent` | Keeps version-control metadata, dependency directories, caches, build output, and common temporary paths in the local overlay. It does not select automatic pack paths. |
+| `portable` | Uses the same local-path rules as `coding-agent` and packs or unpacks the complete overlay by default, so you can move it between machines or sandbox sessions. |
+| `none` | Disables local-overlay path routing and automatic pack or unpack behavior. |
 
 ## Mount commands
 
-- [`mount-file-system`](/ai/ti/reference/commands/fs/ti-fs-mount-file-system.md)
-- [`drain-file-system`](/ai/ti/reference/commands/fs/ti-fs-drain-file-system.md)
-- [`unmount-file-system`](/ai/ti/reference/commands/fs/ti-fs-unmount-file-system.md)
+| Command | Description |
+| --- | --- |
+| [`mount-file-system`](/ai/ti/reference/commands/fs/ti-fs-mount-file-system.md) | Mounts a Filesystem at a local path. |
+| [`drain-file-system`](/ai/ti/reference/commands/fs/ti-fs-drain-file-system.md) | Flushes pending writes from a live FUSE mount. |
+| [`unmount-file-system`](/ai/ti/reference/commands/fs/ti-fs-unmount-file-system.md) | Flushes and unmounts a Filesystem. |
+
+## Command aliases
+
+The following `ti fs` commands have Unix-style aliases. For example, `ti fs cp` is equivalent to `ti fs copy-file`. Commands not listed in the table, including `pack-file-system` and `unpack-file-system`, do not have aliases.
+
+| Alias | Canonical command |
+| --- | --- |
+| `cp` | `copy-file` |
+| `cat` | `read-file` |
+| `ls` | `list-files` |
+| `stat` | `describe-file` |
+| `mv` | `move-file` |
+| `rm` | `delete-file` |
+| `mkdir` | `create-directory` |
+| `chmod` | `chmod-file` |
+| `symlink` | `create-symlink` |
+| `hardlink` | `create-hardlink` |
+| `grep` | `search-file-content` |
+| `find` | `find-files` |
+| `mount` | `mount-file-system` |
+| `drain` | `drain-file-system` |
+| `umount` | `unmount-file-system` |
+
+Aliases use the same options, authentication, output, query, and error behavior as canonical commands.
 
 ## See also
 

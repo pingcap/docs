@@ -7,7 +7,11 @@ summary: Mount a TiDB Cloud Filesystem.
 
 Mounts a Filesystem through automatic, FUSE, or WebDAV mode. The command alias is `ti fs mount`.
 
-The command starts the mount runtime in the background, waits for the mount to become ready, and then prints the TiDB Cloud CLI mount result. It suppresses companion startup messages, including Drive9-specific unmount guidance. If startup fails, the error includes the companion log path for diagnosis. Use `ti fs unmount-file-system` to end the mount.
+The command starts the mount process in the background, waits for the mount to become ready, and then prints the result. If startup fails, the error includes a log path for diagnosis. Use `ti fs unmount-file-system` to end the mount.
+
+> **Important:**
+>
+> Layer and checkpoint mounts require FUSE. On macOS, where automatic selection normally uses WebDAV, install macFUSE and specify `--driver fuse`. Checkpoint mounts are always read-only.
 
 > **Note:**
 >
@@ -51,9 +55,9 @@ ti fs mount-file-system
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TI_FS_TOKEN`.
 - `--help`: Display help information.
-- `--layer-ref <string>`: Mount through a writable layer ID, unique name, or supported tag reference. Requires FUSE.
+- `--layer-ref <string>`: Mount through a writable layer ID, unique name, or [tag reference](/ai/ti/reference/ti-filesystem.md#layer-references). Requires FUSE.
 - `--local-root <string>`: Local overlay root. If omitted, uses `~/.ti/local/fs/<mount-hash>`.
-- `--mount-profile <string>`: Mount profile: `coding-agent`, `portable`, or `none`. If omitted, uses `none`.
+- `--mount-profile <string>`: Select a [mount profile](/ai/ti/reference/ti-filesystem.md#mount-profiles-and-local-overlays): `coding-agent`, `portable`, or `none`. If omitted, uses `none`.
 - `--no-auto-unpack`: Skip default auto-unpack for portable mount profile before mounting.
 - `--pack-path <string>`: Local overlay path included by automatic or manual pack. Repeatable.
 - `--read-cache-max-file-mb <int64>`: Maximum file size admitted to the FUSE read cache in MiB. 0 uses the default. \[default: 4]
@@ -64,7 +68,7 @@ ti fs mount-file-system
 - `--remote-path <string>`: The TiDB Cloud file system root path to mount. \[default: /]
 - `--unpack-archive-path <string>`: Restore the pack archive before mounting.
 - `--version`: Display version information.
-- `--write-back-cache`: Persist FUSE writes locally before writing them to the file system on flush. Unavailable for checkpoint mounts, which are always read-only. \[default: true]
+- `--write-back-cache`: Persist FUSE writes locally before writing them to the file system on flush. This behavior is enabled by default; specify `--write-back-cache=false` to disable it. Unavailable for checkpoint mounts, which are always read-only. \[default: true]
 
 For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli-reference.md#global-options).
 

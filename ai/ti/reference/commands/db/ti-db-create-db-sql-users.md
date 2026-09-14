@@ -7,6 +7,18 @@ summary: Create TiDB Cloud CLI-managed SQL users for a TiDB Cloud Starter instan
 
 Idempotently creates or repairs the read-only, read-write, and admin SQL users managed by `ti`. The command verifies that the cluster is Starter before calling SQL-user APIs or writing local credentials.
 
+The users map to TiDB Cloud built-in database roles:
+
+| `ti` access mode | TiDB Cloud built-in role | Intended use |
+| --- | --- | --- |
+| `read_only` | `role_readonly` | Query and verify data without modifying it |
+| `read_write` | `role_readwrite` | Query and modify application data |
+| `admin` | `role_admin` | Make schema changes and manage privileges |
+
+For the TiDB Cloud role model, see [Manage Database Users and Roles](/tidb-cloud/configure-sql-users.md).
+
+`ti` stores the generated usernames and passwords in `~/.ti/db_users/<cluster-id>/credentials`, with separate TOML sections for the three access modes. On systems that support POSIX permissions, the credentials file is readable and writable only by its owner.
+
 > **Note:**
 >
 > The TiDB Cloud Command Line Interface — `ti` — is currently in preview. Its features and command-line interface might change without prior notice.

@@ -28,7 +28,7 @@ ti db delete-db-cluster
 - `--dry-run`: Validate the request without applying changes.
 - `--help`: Display help information.
 - `--version`: Display version information.
-- `--wait`: Wait until the deleted cluster reaches `DELETED` or is no longer accessible.
+- `--wait`: After TiDB Cloud accepts the deletion request, poll until the instance reaches `DELETED`. A subsequent `not found` or `permission denied` response is also treated as completed deletion because the instance is no longer readable.
 
 For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli-reference.md#global-options).
 

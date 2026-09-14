@@ -33,8 +33,8 @@ ti fs unmount-file-system
 - `--force`: Kill the mount process if graceful unmount times out.
 - `--help`: Display help information.
 - `--ignore-absent`: Return success when no file system mount state exists for the specified path.
-- `--no-auto-pack`: Skip the portable mount profile's default auto-pack action.
-- `--pack-archive-path <string>`: Pack archive to write after unmount.
+- `--no-auto-pack`: Skip the default auto-pack action configured by the mount. The built-in `portable` profile enables this action by selecting `/` as its pack path.
+- `--pack-archive-path <string>`: After unmounting, pack the mount's local overlay to this remote archive path. Specifying this option requests a pack even when the mount profile has no default pack paths.
 - `--timeout <duration>`: Time to wait for the mount process to exit. \[default: `30s`]
 - `--version`: Display version information.
 

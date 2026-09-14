@@ -141,7 +141,7 @@ ti fs help
 ti --version
 ```
 
-For the complete command tree and CLI conventions, see [TiDB Cloud CLI Command Reference](/ai/ti/reference/ti-cli-reference.md).
+For command groups and CLI conventions, see [TiDB Cloud CLI Command Reference](/ai/ti/reference/ti-cli-reference.md).
 
 ## Update TiDB Cloud CLI
 

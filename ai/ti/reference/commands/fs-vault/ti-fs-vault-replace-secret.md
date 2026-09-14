@@ -27,7 +27,7 @@ ti fs-vault replace-secret
 ## Options
 
 - `--from-directory <string>`: Directory whose files become secret fields. \[required]
-- `--secret-path <string>`: Vault path in the form `/n/vault/<secret>`. \[required]
+- `--secret-path <string>`: Canonical Vault path in the form `/n/vault/<secret-name>`. For example, the secret created as `db-prod` has the path `/n/vault/db-prod`. \[required]
 - `--dry-run`: Validate the request without applying changes.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TI_FS_TOKEN`.

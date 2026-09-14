@@ -26,7 +26,7 @@ ti fs delete-layer
 
 ## Options
 
-- `--layer-ref <string>`: Layer ID, unique name, or supported tag reference. \[required]
+- `--layer-ref <string>`: Layer ID, unique name, or [tag reference](/ai/ti/reference/ti-filesystem.md#layer-references). \[required]
 - `--cascade`: Abandon live descendants before abandoning the selected layer.
 - `--dry-run`: Validate the request without applying changes.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.

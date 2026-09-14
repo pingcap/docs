@@ -33,7 +33,7 @@ ti fs create-layer
 - `--base-root-path <string>`: Base root path in the TiDB Cloud file system. \[required]
 - `--actor-id <string>`: Actor ID identifying the layer owner (for example, the agent name).
 - `--dry-run`: Validate the request without applying changes.
-- `--durability-mode <string>`: Layer durability mode; must be `restore-safe`.
+- `--durability-mode <string>`: Set the layer durability mode. The only explicitly supported value is `restore-safe`, which preserves changes in the remote layer so the layer can be restored after the local environment ends. If omitted, the service uses `restore-safe`.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TI_FS_TOKEN`.
 - `--help`: Display help information.

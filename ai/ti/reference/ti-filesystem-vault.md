@@ -7,6 +7,8 @@ summary: Reference every `ti fs-vault` command for secrets, delegated access, au
 
 Use `ti fs-vault` to manage secrets and delegated access in TiDB Cloud Filesystem.
 
+Most secret-management commands identify a secret by its name, such as `db-prod`. `replace-secret` and `run-with-secret` instead require its canonical Vault path, `/n/vault/<secret-name>`. `/n/vault/` is the root of the Vault namespace, so `/n/vault/db-prod` and the secret name `db-prod` identify the same secret.
+
 ## Commands
 
 | Command | Description |

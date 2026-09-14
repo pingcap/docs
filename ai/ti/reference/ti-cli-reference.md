@@ -1,11 +1,11 @@
 ---
-title: TiDB Cloud CLI Command Reference
-summary: Reference global options, output and query behavior, dry-run rules, help forms, errors, command families, and Filesystem aliases.
+title: TiDB Cloud CLI (`ti`) Command Reference
+summary: Reference TiDB Cloud CLI command groups, syntax, global options, output, dry-run behavior, help forms, and errors.
 ---
 
-# TiDB Cloud CLI Command Reference
+# TiDB Cloud CLI (`ti`) Command Reference
 
-This reference describes behavior shared across the `ti` command surface.
+This page describes the command structure and behavior shared by TiDB Cloud CLI `ti` commands. For the syntax and options of an individual command, select its command group or use the documentation navigation.
 
 > **Note:**
 >
@@ -14,99 +14,20 @@ This reference describes behavior shared across the `ti` command surface.
 ## Syntax
 
 ```text
-ti <command> [subcommand] [required options] [optional options] [global options]
+ti <command> [options] [global options]
+ti <command-group> <command> [options] [global options]
 ```
 
-The `ti` executable accepts long flags only. A one-letter flag such as `-p` is rejected.
+For example:
 
-## Command tree
-
-```text
-ti
-├── configure
-├── update
-├── db
-│   ├── create-db-cluster
-│   ├── list-db-clusters
-│   ├── describe-db-cluster
-│   ├── update-db-cluster
-│   ├── delete-db-cluster
-│   ├── create-db-cluster-branch
-│   ├── list-db-cluster-branches
-│   ├── describe-db-cluster-branch
-│   ├── delete-db-cluster-branch
-│   ├── create-db-sql-users
-│   ├── format-db-connection-string
-│   └── execute-sql-statement
-├── fs
-│   ├── create-file-system
-│   ├── import-file-system-token
-│   ├── generate-file-system-token
-│   ├── generate-file-system-scoped-token
-│   ├── list-file-system-tokens
-│   ├── enable-file-system-token
-│   ├── disable-file-system-token
-│   ├── delete-file-system-token
-│   ├── refresh-file-system-token
-│   ├── list-file-systems
-│   ├── describe-file-system
-│   ├── check-file-system
-│   ├── delete-file-system
-│   ├── copy-file
-│   ├── read-file
-│   ├── list-files
-│   ├── describe-file
-│   ├── move-file
-│   ├── delete-file
-│   ├── create-directory
-│   ├── chmod-file
-│   ├── create-symlink
-│   ├── create-hardlink
-│   ├── search-file-content
-│   ├── find-files
-│   ├── create-layer
-│   ├── list-layers
-│   ├── fork-layer
-│   ├── list-layer-chain
-│   ├── describe-layer
-│   ├── diff-layer
-│   ├── create-layer-checkpoint
-│   ├── delete-layer
-│   ├── rollback-layer
-│   ├── commit-layer
-│   ├── pack-file-system
-│   ├── unpack-file-system
-│   ├── mount-file-system
-│   ├── drain-file-system
-│   └── unmount-file-system
-├── fs-git
-│   ├── clone-git-workspace
-│   ├── hydrate-git-workspace
-│   ├── add-git-worktree
-│   └── remove-git-worktree
-├── fs-journal
-│   ├── create-journal
-│   ├── append-journal-entries
-│   ├── read-journal-entries
-│   ├── search-journal-entries
-│   └── verify-journal
-└── fs-vault
-    ├── create-secret
-    ├── replace-secret
-    ├── read-secret
-    ├── list-secrets
-    ├── delete-secret
-    ├── create-grant
-    ├── delete-grant
-    ├── list-audit-events
-    ├── run-with-secret
-    ├── mount-vault
-    └── unmount-vault
+```bash
+ti configure --profile staging
+ti db list-db-clusters --db-cluster-type starter
 ```
 
-Every operation has a dedicated command page with syntax and examples. Expand **Command Reference** in the documentation navigation and select a command under `ti`, `db`, `fs`, `fs-git`, `fs-journal`, or `fs-vault`.
+The `ti` executable accepts long options only. A one-letter option such as `-p` is rejected.
 
-Required options appear before optional options in generated usage. Optional options are enclosed in brackets:
+In generated usage, specify required options before optional options, and use square brackets to enclose optional options:
 
 ```text
 ti db describe-db-cluster
@@ -115,12 +36,28 @@ ti db describe-db-cluster
   [--view <string>]
 ```
 
-In command help, value types are enclosed in angle brackets and required options include `(required)` after the option name and type:
+Value types are enclosed in angle brackets. In command help, `(required)` follows the name and type of each required option:
 
 ```text
 --db-cluster-name <string> (required)   Starter DB cluster display name
 --wait                                  Wait until the created cluster is active
 ```
+
+## Commands and command groups
+
+Use the following table to find the reference for a top-level command or command group. Each command page includes its syntax, options, and examples.
+
+| Command or command group | Purpose | Reference |
+| --- | --- | --- |
+| `configure` | Configure local profiles, API keys, and the default region. | [`ti configure`](/ai/ti/reference/commands/ti/ti-configure.md) |
+| `update` | Check for and install TiDB Cloud CLI updates. | [`ti update`](/ai/ti/reference/commands/ti/ti-update.md) |
+| `db` | Manage TiDB Cloud Starter instances, branches, SQL users, connections, and SQL statements. | [`ti db` commands](/ai/ti/reference/ti-starter-database.md) |
+| `fs` | Manage Filesystem resources, AI providers, tokens, data, layers, and mounts. | [`ti fs` commands](/ai/ti/reference/ti-filesystem.md) |
+| `fs-git` | Manage Git workspaces on mounted Filesystems. | [`ti fs-git` commands](/ai/ti/reference/ti-filesystem-git.md) |
+| `fs-journal` | Manage verifiable Filesystem journals. | [`ti fs-journal` commands](/ai/ti/reference/ti-filesystem-journal.md) |
+| `fs-vault` | Manage Filesystem Vault secrets and delegated access. | [`ti fs-vault` commands](/ai/ti/reference/ti-filesystem-vault.md) |
+
+To list available commands in the terminal, run `ti help` or `ti <command-group> help`.
 
 ## Global options
 
@@ -128,19 +65,19 @@ In command help, value types are enclosed in angle brackets and required options
 - `--output <string>`: Set the output format to `json` or `text`. \[default: json]
 - `--profile <string>`: Select a local profile. \[default: default]
 - `--query <string>`: Apply a JMESPath expression before rendering the output.
-- `--region <string>`: Override the profile's canonical region code for the current command, for example, `aws-us-east-1`.
+- `--region <string>`: Override the profile's default region code for the current command, for example, `aws-us-east-1`.
 
 Command pages document `--help`, `--version`, and all command-specific options separately.
 
 ## Output
 
-Structured control-plane commands return JSON by default:
+Commands that return structured data use JSON by default:
 
 ```bash
 ti db list-db-clusters --db-cluster-type starter
 ```
 
-Use text output for terminal inspection:
+Use text output for a human-readable representation:
 
 ```bash
 ti db list-db-clusters --db-cluster-type starter --output text
@@ -162,7 +99,7 @@ An invalid expression fails without replacing the command result with partial ou
 
 ## Dry-run
 
-Mutating control-plane commands declare `--dry-run`. The command validates local flags, profile, credentials, region, and request shape, then reports a plan without making the remote mutation.
+Mutating control-plane commands that support `--dry-run` validate local options, the profile, credentials, the region, and the request shape, and then report a plan without making the remote mutation.
 
 ```bash
 ti db delete-db-cluster \
@@ -170,7 +107,7 @@ ti db delete-db-cluster \
   --dry-run
 ```
 
-Read-only commands reject `--dry-run`. Dry-run is not a general global simulation flag and is available only where shown in command help.
+Read-only commands reject `--dry-run`. The option is not a global simulation option and is available only where shown in command help.
 
 ## Help and version forms
 
@@ -189,20 +126,17 @@ To see help information, you can run:
   ti <command> <subcommand> help
 ```
 
-Use an explicit help form to display commands and flags:
+Use an explicit help form to display commands and options:
 
 ```bash
 ti help
 ti db help
 ti db create-db-cluster help
 ti --help
-ti db --help
-ti db create-db-cluster --help
 ti --version
-ti fs --version
 ```
 
-`help` is a command for navigating the command tree. `--help` is the conventional flag on each command; both intentionally coexist.
+`help` is a command for navigating the command hierarchy. `--help` is available on each command; both forms intentionally coexist. The `--version` option is also available at each command level and reports the version of the same `ti` executable.
 
 ## Errors and exit behavior
 
@@ -216,49 +150,14 @@ Errors are written to stderr and successful command output is written to stdout.
 
 `--debug` can show redacted request and resolution context. It must not show API keys, FS tokens, DB passwords, SQL text, file contents, or connection strings.
 
-## Feature guides
-
-The following task-oriented guides explain how commands work together. They are separate from the per-command reference pages.
-
-| Guide | Purpose |
-| --- | --- |
-| [Install, Configure, and Update](/ai/ti/reference/ti-install-configure-update.md) | Install releases, configure profiles, update, and uninstall `ti` |
-| [Starter Databases and SQL](/ai/ti/reference/ti-starter-database.md) | Manage TiDB Cloud Starter instances, branches, and SQL |
-| [Filesystem](/ai/ti/reference/ti-filesystem.md) | Manage Filesystems, files, layers, packs, and mounts |
-| [Filesystem Git Workspaces](/ai/ti/reference/ti-filesystem-git.md) | Manage Git workspaces on mounted Filesystems |
-| [Filesystem Journals](/ai/ti/reference/ti-filesystem-journal.md) | Manage verifiable journals |
-| [Filesystem Vault](/ai/ti/reference/ti-filesystem-vault.md) | Manage secrets and delegated access |
-
-For complete commands and options, run:
-
-```bash
-ti <family> help
-ti <family> <command> help
-```
-
-## Filesystem alias mapping
-
-| Alias | Canonical command |
-| --- | --- |
-| `cp` | `copy-file` |
-| `cat` | `read-file` |
-| `ls` | `list-files` |
-| `stat` | `describe-file` |
-| `mv` | `move-file` |
-| `rm` | `delete-file` |
-| `mkdir` | `create-directory` |
-| `chmod` | `chmod-file` |
-| `symlink` | `create-symlink` |
-| `hardlink` | `create-hardlink` |
-| `grep` | `search-file-content` |
-| `find` | `find-files` |
-| `mount` | `mount-file-system` |
-| `drain` | `drain-file-system` |
-| `umount` | `unmount-file-system` |
-
-Aliases use the same long flags, authentication, output, query, and error behavior as canonical commands.
-
 ## Related documentation
 
-- [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md)
-- [TiDB Cloud CLI Configuration and Credentials](/ai/ti/reference/ti-configuration-and-credentials.md)
+For configuration, security, compatibility, and troubleshooting details, see the following documents:
+
+| Document | Purpose |
+| --- | --- |
+| [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md) | Install releases, configure profiles, update, and uninstall `ti` |
+| [TiDB Cloud CLI Configuration and Credentials](/ai/ti/reference/ti-configuration-and-credentials.md) | Understand profiles, precedence rules, credentials, and local state |
+| [TiDB Cloud CLI Regions, Security, and Limitations](/ai/ti/reference/ti-regions-security-and-limitations.md) | Review supported regions, credential boundaries, platform support, and limitations |
+| [Migrate from `tdc` to TiDB Cloud CLI](/ai/ti/reference/ti-migrate-from-tdc.md) | Migrate local state and environment variables from `tdc` v0.1.x |
+| [Troubleshoot TiDB Cloud CLI](/ai/ti/reference/ti-troubleshooting.md) | Diagnose configuration, authentication, routing, and command failures |

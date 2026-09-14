@@ -66,9 +66,21 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 - Use the MySQL fallback transport:
 
     ```bash
-    # Open a one-shot MySQL connection when the HTTPS SQL API is unsuitable.
+    # Open a direct TLS MySQL connection when the workflow requires the MySQL protocol.
     ti db execute-sql-statement --db-cluster-id "<cluster-id>" --transport mysql --sql "SELECT CURRENT_TIMESTAMP"
     ```
+
+## Choose a transport
+
+The default `https` transport sends the statement to the TiDB Cloud HTTPS SQL API. The `mysql` transport opens a direct TLS MySQL connection to the instance, executes the statement once, and closes the connection. Use `mysql` only when your network or workflow specifically requires the MySQL protocol.
+
+The CLI does not automatically fall back from `https` to `mysql` or retry a statement through the other transport. This prevents a write statement from being executed twice after an ambiguous failure.
+
+## Output
+
+JSON output contains `fields`, `rows`, `row_count`, `rows_affected` when applicable, `last_insert_id` when applicable, `transport`, `access_mode`, and `cluster_id`. Each item in `rows` is an object keyed by column name.
+
+With `--output text`, query results are rendered as a table with column headings and a row count. Statements that do not return rows produce a `Query OK` message with the affected-row count and, when available, the last insert ID.
 
 ## Related documentation
 

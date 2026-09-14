@@ -7,6 +7,8 @@ summary: Mount a read-only Filesystem Vault view.
 
 Mounts readable vault fields as a local read-only FUSE filesystem.
 
+On Linux, install FUSE3 and make `/dev/fuse` available. On macOS, install macFUSE and approve its system extension. Vault mounts are not supported on Windows; use `read-secret`, `list-secrets`, or `run-with-secret` instead.
+
 > **Note:**
 >
 > The TiDB Cloud Command Line Interface — `ti` — is currently in preview. Its features and command-line interface might change without prior notice.

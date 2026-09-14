@@ -5,7 +5,7 @@ summary: Describe a TiDB Cloud Starter cluster.
 
 # ti db describe-db-cluster
 
-Get information about a TiDB Cloud Starter instance. Use `--view FULL` to request expanded fields. The command rejects the cluster if its API metadata does not verify it as Starter.
+Gets information about a TiDB Cloud Starter instance. The default `BASIC` view returns basic instance information. Use `--view FULL` to request the complete details available from the TiDB Cloud API. The command rejects the cluster if its API metadata does not verify it as Starter.
 
 > **Note:**
 >
@@ -26,7 +26,7 @@ ti db describe-db-cluster
 - `--db-cluster-id <string>`: Starter DB cluster ID. \[required]
 - `--help`: Display help information.
 - `--version`: Display version information.
-- `--view <string>`: Detail level: `BASIC` or `FULL`.
+- `--view <string>`: Detail level: `BASIC` or `FULL`. If omitted, the TiDB Cloud API uses `BASIC`.
 
 For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli-reference.md#global-options).
 

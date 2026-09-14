@@ -5,7 +5,7 @@ summary: Pack local Filesystem overlay state.
 
 # ti fs pack-file-system
 
-Packs selected local overlay state into a remote archive.
+Packs selected [local overlay state](/ai/ti/reference/ti-filesystem.md#mount-profiles-and-local-overlays) into a remote archive.
 
 > **Note:**
 >
@@ -37,7 +37,7 @@ ti fs pack-file-system
 - `--help`: Display help information.
 - `--local-root <string>`: Local overlay root containing the overlay directory.
 - `--mount-path <string>`: The local mounted path.
-- `--mount-profile <string>`: The mount profile: `coding-agent`, `portable`, or `none`. If omitted, uses `none`.
+- `--mount-profile <string>`: Select a [mount profile](/ai/ti/reference/ti-filesystem.md#mount-profiles-and-local-overlays): `coding-agent`, `portable`, or `none`. If omitted, uses `none`.
 - `--path <string>`: Local overlay path for packing; repeatable.
 - `--remote-root <string>`: The TiDB Cloud file system root represented by the local overlay. \[default: /]
 - `--version`: Display version information.
@@ -57,7 +57,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 
     ```bash
     # Create a portable archive from selected local and remote roots.
-    ti fs pack-file-system --file-system-id <file-system-id> --local-root ./overlay --remote-root /workspace --mount-profile portable
+    ti fs pack-file-system --file-system-id <file-system-id> --local-root /path/to/local-root --remote-root /workspace --mount-profile portable
     ```
 
 ## Related documentation

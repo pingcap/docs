@@ -43,6 +43,13 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
     ti update --check
     ```
 
+- Fail a CI job when an update is available:
+
+    ```bash
+    # Exit with code 1 when a newer release is available, without changing files.
+    ti update --check --fail-if-update-available
+    ```
+
 - Preview an update:
 
     ```bash

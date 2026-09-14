@@ -29,7 +29,7 @@ ti fs diff-layer
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TI_FS_TOKEN`.
 - `--help`: Display help information.
-- `--max-seq <int64>`: The highest layer sequence to include; 0 includes all layers.
+- `--max-seq <int64>`: The highest layer sequence to include; 0 includes all sequences.
 - `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli-reference.md#global-options).

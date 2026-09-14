@@ -24,7 +24,7 @@ ti fs list-layer-chain
 
 ## Options
 
-- `--layer-ref <string>`: Layer ID, unique name, or supported tag reference. \[required]
+- `--layer-ref <string>`: Layer ID, unique name, or [tag reference](/ai/ti/reference/ti-filesystem.md#layer-references). \[required]
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TI_FS_TOKEN`.
 - `--help`: Display help information.

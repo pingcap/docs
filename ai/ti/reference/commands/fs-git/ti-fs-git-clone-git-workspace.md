@@ -35,7 +35,7 @@ ti fs-git clone-git-workspace
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TI_FS_TOKEN`.
 - `--help`: Display help information.
-- `--hydrate <string>`: Blobless hydrate mode: `auto`, `background`, `sync`, or `off`. \[default: auto]
+- `--hydrate <string>`: Clean-data hydration mode: `auto`, `background`, `sync`, or `off`. With `auto`, a blobless clone hydrates in the background, while a non-blobless clone does not run a separate hydration step. `background` and `sync` require `--blobless`; `off` skips hydration. \[default: auto]
 - `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli-reference.md#global-options).

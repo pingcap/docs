@@ -7,6 +7,8 @@ summary: Run a process with a Filesystem Vault secret.
 
 Runs a command with one secret injected into its environment. Arguments after `--` are passed to the child command.
 
+Each secret field name becomes an environment variable with the same name in the child process. Field names must match `[A-Z_][A-Z0-9_]*`, so create fields that you intend to inject with uppercase names. The command rejects the entire injection if any field name, including a name that contains lowercase letters, does not match this pattern or if a value contains an unsupported control character.
+
 > **Note:**
 >
 > The TiDB Cloud Command Line Interface — `ti` — is currently in preview. Its features and command-line interface might change without prior notice.
@@ -25,7 +27,7 @@ ti fs-vault run-with-secret
 
 ## Options
 
-- `--secret-path <string>`: Vault path in the form `/n/vault/<secret>`. \[required]
+- `--secret-path <string>`: Canonical Vault path in the form `/n/vault/<secret-name>`. For example, the secret created as `db-prod` has the path `/n/vault/db-prod`. \[required]
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TI_FS_TOKEN`.
 - `--help`: Display help information.
@@ -39,15 +41,15 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 - Run a process with secret fields:
 
     ```bash
-    # Inject all fields into the child process environment without printing them.
-    ti fs-vault run-with-secret --file-system-id <file-system-id> --secret-path /n/vault/db-prod -- env
+    # Verify that the child process receives DB_URL without printing its value.
+    ti fs-vault run-with-secret --file-system-id <file-system-id> --secret-path /n/vault/db-prod -- sh -c 'test -n "$DB_URL" && printf "DB_URL is set\n"'
     ```
 
-- Use an injected field in a shell command:
+- Run an application with injected fields:
 
     ```bash
-    # Verify that the child process receives DB_URL without exposing its value.
-    ti fs-vault run-with-secret --file-system-id <file-system-id> --secret-path /n/vault/db-prod -- sh -c 'test -n "$DB_URL"'
+    # Make all fields available only to the child process and its descendants.
+    ti fs-vault run-with-secret --file-system-id <file-system-id> --secret-path /n/vault/db-prod -- ./deploy.sh
     ```
 
 ## Related documentation

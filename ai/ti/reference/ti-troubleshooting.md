@@ -18,14 +18,14 @@ Symptoms include missing credentials, Digest authentication failure, or permissi
 Check that both environment values are set together:
 
 ```bash
-test -n "$TI_PUBLIC_KEY"
-test -n "$TI_PRIVATE_KEY"
+test -n "$TIDB_CLOUD_PUBLIC_KEY"
+test -n "$TIDB_CLOUD_PRIVATE_KEY"
 ```
 
 If you intend to use saved credentials, unset both variables and verify the profile:
 
 ```bash
-unset TI_PUBLIC_KEY TI_PRIVATE_KEY
+unset TIDB_CLOUD_PUBLIC_KEY TIDB_CLOUD_PRIVATE_KEY
 ti db list-db-clusters --db-cluster-type starter --profile default
 ```
 
@@ -76,7 +76,7 @@ ti fs list-file-system-tokens \
 
 Token names are not unique. Use the immutable `token_id` from this output for enable, disable, or delete operations. Old credentials created or imported without token lifecycle metadata can remain valid, but `ti` cannot safely identify their list row and never guesses a match.
 
-After enable, disable, delete, or refresh, allow approximately 10 seconds for authentication caches to converge. If refresh reports `fs.token_refresh_ambiguous`, the server might have rotated the token even though the response was lost. Do not retry with the old token. Generate another owner token through TiDB Cloud credentials.
+After enable, disable, delete, or refresh, allow approximately 10 seconds for authentication caches to converge. If refresh reports `fs.token_refresh_ambiguous`, the server might have rotated the token even though the response was lost. The outcome is unknown: the old token might still work if the refresh did not commit, or it might already be invalid. The replacement token from a committed refresh cannot be recovered because its response was lost. Do not retry the refresh with the old token. Instead, use TiDB Cloud credentials to generate an independent owner token.
 
 If token mutation reports `fs.token_mount_active`, use the exact mount path in the error:
 
@@ -106,11 +106,11 @@ The TiDB Cloud CLI intentionally does not infer a Filesystem from local credenti
 
 ## Filesystem region is unsupported
 
-The configured TiDB Cloud region might not be one of the Filesystem endpoints built into the installed TiDB Cloud CLI release. Compare it with [current Filesystem regions](/ai/ti/reference/ti-regions-security-and-limitations.md#filesystem-regions). Change placement with a valid profile or command-scoped `--region`; do not configure a raw server URL.
+The configured TiDB Cloud region might not be one of the Filesystem endpoints built into the installed TiDB Cloud CLI release. Compare it with [current Filesystem regions](/ai/ti/reference/ti-regions-security-and-limitations.md#supported-regions). Change placement with a valid profile or command-scoped `--region`; do not configure a raw server URL.
 
 ## Companion is missing or incompatible
 
-The release installer places `ti-drive9` next to `ti`. Re-run the current installer when the TiDB Cloud CLI reports a missing companion:
+The release installer places `ti-drive9`, the companion runtime for Filesystem commands, next to `ti`. You do not invoke `ti-drive9` directly. Re-run the current installer when the TiDB Cloud CLI reports a missing companion:
 
 ```bash
 curl -fsSL https://github.com/tidbcloud/ti-cli/releases/latest/download/install.sh | sh -s -- --yes
@@ -173,7 +173,7 @@ ti fs mount-file-system \
   --driver fuse
 ```
 
-Linux needs FUSE3 and access to `/dev/fuse`. Windows WebDAV needs the WebClient service and a drive letter such as `X:`.
+Linux needs FUSE3 and access to `/dev/fuse`. Filesystem and Vault mounts are not supported on Windows; use `ti fs` data-plane commands or non-mount Vault commands instead.
 
 ## Ubuntu 26.04 rejects a FUSE mount under `/workspace`
 

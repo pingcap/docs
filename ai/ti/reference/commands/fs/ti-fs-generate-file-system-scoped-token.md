@@ -9,6 +9,20 @@ Uses an owner Filesystem token to generate a finite `fs_scoped` token. The plain
 
 Scoped tokens support ordinary file, upload, Layer, and mount operations only when the requested paths and operations are covered. `chmod`, Git workspace APIs, Journal, Vault, SQL, fork, event, and token-management operations are not available to scoped tokens. Scoped tokens can refresh themselves without changing their scopes.
 
+The operations have the following meanings. A command can require more than one operation, such as `read` on a copy source and `write` on its destination.
+
+| Operation | Allows |
+| --- | --- |
+| `read` | Reading file content and metadata. |
+| `list` | Listing entries under a directory. |
+| `search` | Searching or finding files under the prefix. Requires `read`. |
+| `write` | Creating or changing files, directories, links, and copy destinations. |
+| `delete` | Deleting a path or removing a source path during a move. |
+
+> **Important:**
+>
+> Include both `search` and `read` in the same `--allow` value when permitting searches. The CLI rejects a scope that includes `search` without `read`.
+
 > **Note:**
 >
 > The TiDB Cloud Command Line Interface — `ti` — is currently in preview. Its features and command-line interface might change without prior notice.
@@ -25,6 +39,8 @@ ti fs generate-file-system-scoped-token
   [--store-locally]
   [--replace]
   [--dry-run]
+  [--help]
+  [--version]
 ```
 
 ## Options
@@ -37,6 +53,8 @@ ti fs generate-file-system-scoped-token
 - `--store-locally`: Store and select the generated scoped token for this profile and Filesystem.
 - `--replace`: Replace an existing selected local token. Requires `--store-locally` and does not revoke the previous remote token.
 - `--dry-run`: Validate the owner credential, region, lifetime, scopes, and local storage preconditions without generating a token.
+- `--help`: Display help information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli-reference.md#global-options).
 

@@ -7,6 +7,8 @@ summary: List remote TiDB Cloud Filesystems in a region.
 
 Lists every Filesystem that the selected TiDB Cloud credentials can access in the effective region. Results include authoritative display metadata, quota and usage, and `has_local_token`, which indicates whether this machine has a matching data-plane token. Quota data includes media and video extraction limits and counters when returned by the service. Tokens are never returned.
 
+The CLI retrieves every service page automatically and returns one complete, sorted result, so this command has no pagination options.
+
 > **Note:**
 >
 > The TiDB Cloud Command Line Interface — `ti` — is currently in preview. Its features and command-line interface might change without prior notice.

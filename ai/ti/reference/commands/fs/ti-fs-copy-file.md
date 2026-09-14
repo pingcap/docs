@@ -7,6 +7,18 @@ summary: Copy files to, from, or within a TiDB Cloud Filesystem.
 
 Copies files between local paths, remote paths, stdin, and stdout. The command alias is `ti fs cp`.
 
+Specify exactly one of the following source and destination pairs:
+
+| Source | Destination |
+| --- | --- |
+| `--from-local` | `--to-remote` |
+| `--from-stdin` | `--to-remote` |
+| `--from-remote` | `--to-local` |
+| `--from-remote` | `--to-stdout` |
+| `--from-remote` | `--to-remote` |
+
+`--append` supports only `--from-local` with `--to-remote`. It does not support standard input or remote sources.
+
 > **Note:**
 >
 > The TiDB Cloud Command Line Interface — `ti` — is currently in preview. Its features and command-line interface might change without prior notice.

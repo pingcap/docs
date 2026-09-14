@@ -26,7 +26,7 @@ ti db list-db-cluster-branches
 
 - `--db-cluster-id <string>`: Starter DB cluster ID. \[required]
 - `--help`: Display help information.
-- `--page-size <int32>`: Number of branches to request; 0 uses the API default.
+- `--page-size <int32>`: Number of branches to request. If omitted or set to `0`, the API returns at most `10`. The API maximum is `100`; values greater than `100` are set to `100`.
 - `--page-token <string>`: Page token returned by a previous list-db-cluster-branches call.
 - `--version`: Display version information.
 

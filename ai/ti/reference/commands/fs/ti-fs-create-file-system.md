@@ -5,7 +5,13 @@ summary: Create a TiDB Cloud Filesystem.
 
 # ti fs create-file-system
 
-Creates a Filesystem with a server-assigned ID and optional organization-visible display metadata. The response contains the owner `fs_token` once. `--wait` waits until data-plane access is ready.
+Creates a Filesystem with a server-assigned ID and optional organization-visible display metadata. The response contains the owner `fs_token` once, and the CLI stores and selects the token in the current profile. `--wait` waits until data-plane access is ready.
+
+The display name and labels appear in `list-file-systems` and `describe-file-system` output. They do not select the Filesystem in later commands.
+
+> **Important:**
+>
+> The service does not reveal the initial owner token again. If the CLI warns that it could not store the token, save the returned value before closing the terminal. If the local credential is later lost, use TiDB Cloud API credentials with [`ti fs generate-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-generate-file-system-token.md) to create a replacement owner token.
 
 > **Note:**
 >
@@ -25,7 +31,7 @@ ti fs create-file-system
 
 ## Options
 
-- `--display-name <string>`: Set a 4–64 character display name for the remote inventory. The value does not select the Filesystem in later commands.
+- `--display-name <string>`: Set a 4–64 character display name shown by Filesystem inventory commands. The value does not select the Filesystem in later commands.
 - `--dry-run`: Validate the request without applying changes.
 - `--help`: Display help information.
 - `--label <string>`: Add an organization-visible `key=value` label. Repeat this option to add up to 30 labels. Do not put secrets or personal data in labels.

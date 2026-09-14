@@ -191,5 +191,5 @@ Complete either of the following workflows.
 
 - Read the [TiDB Cloud Command Line Interface Overview](/ai/ti/ti-overview.md) to understand what `ti` manages and when to use it.
 - Follow the task guides to manage [TiDB Cloud Starter instances](/ai/ti/guides/manage-starter-instances.md) or [Filesystem resources](/ai/ti/guides/manage-filesystem-resources.md).
-- Explore the [TiDB Cloud CLI Command Reference](/ai/ti/reference/ti-cli-reference.md) for the full command list.
+- Explore the [TiDB Cloud CLI Command Reference](/ai/ti/reference/ti-cli-reference.md) for command groups, global options, and shared CLI behavior.
 - Learn about [TiDB Cloud CLI Configuration and Credentials](/ai/ti/reference/ti-configuration-and-credentials.md) to set up multiple profiles or non-interactive authentication.

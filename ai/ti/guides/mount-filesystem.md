@@ -1,6 +1,6 @@
 ---
 title: Mount a TiDB Cloud Filesystem
-summary: Learn how to safely mount, use, drain, and unmount a TiDB Cloud Filesystem on macOS, Linux, Windows, or in a container.
+summary: Learn how to safely mount, use, drain, and unmount a TiDB Cloud Filesystem on macOS, Linux, or in a container.
 ---
 
 # Mount a TiDB Cloud Filesystem
@@ -13,21 +13,16 @@ In TiDB Cloud CLI, you can mount a TiDB Cloud Filesystem when an application nee
 - Select a Filesystem by passing `--file-system-id`, setting `TI_FS_FILE_SYSTEM_ID`, or supplying an FS token that identifies the Filesystem.
 - Provide an FS token through `--fs-token`, `TI_FS_TOKEN`, or the local credential stored for the selected Filesystem.
 - On Linux, install FUSE3 and provide access to `/dev/fuse`.
-- On Windows, enable the Windows WebClient service.
 
 ## Choose a mount driver
 
 | Platform | `--driver auto` | Notes |
 |---|---|---|
 | macOS | WebDAV | Install macFUSE and select `--driver fuse` for FUSE support. |
-| Linux | FUSE | Install `davfs2` to select WebDAV explicitly. |
-| Windows | WebDAV | Use a drive letter such as `X:`. FUSE is unavailable. |
+| Linux | FUSE | WebDAV mounting is not supported. |
+| Windows | Not supported | Use `ti fs` data-plane commands without a mount. |
 
 ## Mount the Filesystem
-
-<SimpleTab>
-
-<div label="macOS or Linux">
 
 On macOS or Linux, create a local path and mount the Filesystem in the background:
 
@@ -39,21 +34,6 @@ ti fs mount-file-system \
 ```
 
 The CLI starts a background mount process and writes a local mount locator so that the drain and unmount commands can find the correct process.
-
-</div>
-
-<div label="Windows">
-
-On Windows, use an available drive letter as the mount path:
-
-```powershell
-ti fs mount-file-system `
-  --file-system-id "<file-system-id>" `
-  --mount-path X:
-```
-
-</div>
-</SimpleTab>
 
 Use `--remote-path` to expose a subtree or `--read-only` to prevent writes. To mount a layer or checkpoint, select the FUSE driver and pass the appropriate layer options described in the [`mount-file-system` reference](/ai/ti/reference/commands/fs/ti-fs-mount-file-system.md).
 

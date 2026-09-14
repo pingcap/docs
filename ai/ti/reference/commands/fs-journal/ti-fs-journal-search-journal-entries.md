@@ -35,7 +35,7 @@ ti fs-journal search-journal-entries
 ## Options
 
 - `--actor <string>`: Actor in the form `type:id`.
-- `--cursor <string>`: Pagination cursor.
+- `--cursor <string>`: Cursor returned by a previous page. When continuing, repeat the filters from the original request.
 - `--entry-type <string>`: Entry type filter.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TI_FS_TOKEN`.
@@ -44,10 +44,10 @@ ti fs-journal search-journal-entries
 - `--journal-kind <string>`: Journal kind filter.
 - `--label <string>`: Label filter `key=value`; repeatable.
 - `--limit <int32>`: Maximum matches to read. \[default: 100]
-- `--since <string>`: Relative duration or RFC3339 lower time bound.
+- `--since <string>`: Lower time bound as a relative duration, such as `24h`, or an RFC3339 timestamp.
 - `--status <string>`: Entry status filter.
 - `--subject <string>`: Subject filter; repeatable.
-- `--until <string>`: RFC3339 upper time bound.
+- `--until <string>`: Upper time bound as an RFC3339 timestamp. Relative durations are not accepted.
 - `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli-reference.md#global-options).

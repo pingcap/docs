@@ -5,7 +5,7 @@ summary: Restore local Filesystem overlay state.
 
 # ti fs unpack-file-system
 
-Restores local overlay state from a remote archive.
+Restores [local overlay state](/ai/ti/reference/ti-filesystem.md#mount-profiles-and-local-overlays) from a remote archive.
 
 > **Note:**
 >
@@ -37,7 +37,7 @@ ti fs unpack-file-system
 - `--help`: Display help information.
 - `--local-root <string>`: The local overlay root to restore into.
 - `--mount-path <string>`: The local mounted path.
-- `--mount-profile <string>`: Mount profile: `coding-agent`, `portable`, or `none`. If omitted, uses `none`.
+- `--mount-profile <string>`: Select a [mount profile](/ai/ti/reference/ti-filesystem.md#mount-profiles-and-local-overlays): `coding-agent`, `portable`, or `none`. If omitted, uses `none`.
 - `--no-replace`: Merge archive entries instead of replacing them.
 - `--remote-root <string>`: Find the packed archive under the specified root path when `--archive-path` is omitted. \[default: /]
 - `--version`: Display version information.
@@ -57,7 +57,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 
     ```bash
     # Restore missing files while preserving existing destination entries.
-    ti fs unpack-file-system --file-system-id <file-system-id> --local-root ./overlay --remote-root /workspace --mount-profile portable --no-replace
+    ti fs unpack-file-system --file-system-id <file-system-id> --local-root /path/to/local-root --remote-root /workspace --mount-profile portable --no-replace
     ```
 
 ## Related documentation

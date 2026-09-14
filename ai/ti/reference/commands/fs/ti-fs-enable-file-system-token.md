@@ -19,6 +19,8 @@ ti fs enable-file-system-token
   [--file-system-id <string>]
   [--fs-token <string>]
   [--dry-run]
+  [--help]
+  [--version]
 ```
 
 ## Options
@@ -27,6 +29,8 @@ ti fs enable-file-system-token
 - `--token-id <string>`: Specify the immutable token ID returned by the list command. This option is required.
 - `--fs-token <string>`: Authorize the request with an owner FS token. Defaults to `TI_FS_TOKEN`; when neither is present, the command uses configured TiDB Cloud API keys.
 - `--dry-run`: Validate the request without changing remote token state.
+- `--help`: Display help information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli-reference.md#global-options).
 
@@ -51,5 +55,6 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 
 ## Related documentation
 
+- [Token-management authorization](/ai/ti/reference/ti-filesystem.md#token-management-authorization)
 - [`ti fs list-file-system-tokens`](/ai/ti/reference/commands/fs/ti-fs-list-file-system-tokens.md)
 - [`ti fs disable-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-disable-file-system-token.md)

@@ -64,11 +64,11 @@ TiDB Cloud API calls use Digest authentication. SQL HTTPS execution uses generat
 
 ## Mount platform limitations
 
-| Platform | Default | Limitations |
-| --- | --- | --- |
-| macOS | WebDAV | Install macFUSE and explicitly use `--driver fuse` for FUSE caches, drain, and complete POSIX-oriented behavior |
-| Linux | FUSE | Requires FUSE3 and `/dev/fuse`; explicit WebDAV requires `davfs2` |
-| Windows | WebDAV | Requires the WebClient service and a drive-letter mount path; FUSE and vault mount are unavailable |
+| Platform | Filesystem mount | Vault mount | Requirements and alternatives |
+| --- | --- | --- | --- |
+| macOS | WebDAV by default; FUSE with explicit `--driver fuse` | FUSE | The built-in WebDAV helper supports Filesystem mounts. Install macFUSE and approve its system extension for FUSE or Vault mounts. |
+| Linux | FUSE | FUSE | Install FUSE3 and provide access to `/dev/fuse`. WebDAV mounting is not supported. |
+| Windows | Not supported | Not supported | Use `ti fs` data-plane commands and non-mount Vault commands instead. |
 
 FUSE and WebDAV are implemented by the bundled [Drive9](https://github.com/mem9-ai/drive9) companion. The TiDB Cloud CLI does not fall back to a separate native mount implementation.
 
@@ -97,7 +97,7 @@ Ubuntu 26.04 additionally confines `fusermount3` with AppArmor. Use a mount path
 - OpenAI provider interfaces are supported for embedding and image, audio, and video extraction. Alibaba Cloud Model Studio Qwen ASR is supported only for audio extraction. Other vendors are conditionally compatible only through the exact OpenAI-compatible contract; native Anthropic, Gemini, Vertex AI, Bedrock, and Azure OpenAI interfaces are not supported.
 - App-managed embedding requires a provider model that returns exactly 1024 dimensions. Filesystems that report `source=database_auto` use database-managed embedding and reject app-managed configuration.
 - Telemetry management commands are intentionally not implemented. Control telemetry through `~/.ti/.preferences` or `TI_TELEMETRY`; serverless-function deployment, Homebrew, and Scoop distribution are not implemented.
-- The TiDB Cloud CLI depends on its installed `ti-drive9` companion for all public Filesystem runtime behavior.
+- The TiDB Cloud CLI depends on its installed `ti-drive9` companion for all public Filesystem runtime behavior, including direct file operations, layers, mounts, Git workspaces, journals, and Vault operations.
 
 ## Related documentation
 

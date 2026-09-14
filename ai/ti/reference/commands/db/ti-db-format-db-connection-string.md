@@ -5,7 +5,7 @@ summary: Format a connection string for a TiDB Cloud CLI-managed SQL user.
 
 # ti db format-db-connection-string
 
-Formats stored SQL credentials for read-write, read-only, or admin access. The command verifies that the cluster is Starter before loading its local SQL credentials.
+Formats stored SQL credentials for read-write, read-only, or admin access. If you do not specify a role option, the command uses `read_write`. The command verifies that the cluster is Starter before loading its local SQL credentials.
 
 > **Note:**
 >
@@ -71,7 +71,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 
     ```bash
     # Emit both component variables and a conventional DATABASE_URL value.
-    ti db format-db-connection-string --db-cluster-id "<cluster-id>" --format env --env-include-database-url
+    ti db format-db-connection-string --db-cluster-id "<cluster-id>" --read-write --format env --env-include-database-url
     ```
 
 ## Related documentation

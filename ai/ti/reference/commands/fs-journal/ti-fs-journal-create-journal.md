@@ -29,13 +29,13 @@ ti fs-journal create-journal
 
 ## Options
 
-- `--actor <string>`: Actor in the form `type:id`.
+- `--actor <string>`: Actor in the form `type:id`. Both parts are user-defined non-empty strings; the CLI converts `type` to lowercase.
 - `--dry-run`: Validate the request without applying changes.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TI_FS_TOKEN`.
 - `--help`: Display help information.
 - `--journal-id <string>`: Journal ID; generated when omitted.
-- `--journal-kind <string>`: Journal kind. \[default: agent]
+- `--journal-kind <string>`: User-defined journal category. It must contain 1 to 64 characters, start with a lowercase letter, and use only lowercase letters, digits, underscores (`_`), periods (`.`), or hyphens (`-`). \[default: agent]
 - `--label <string>`: Journal label `key=value`; repeatable.
 - `--title <string>`: Journal title.
 - `--version`: Display version information.

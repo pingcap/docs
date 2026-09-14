@@ -26,7 +26,7 @@ ti fs-vault create-secret
 
 ## Options
 
-- `--field <string>`: Secret field assignment `key=value`, `key=@file`, or `key=-`; repeatable. \[required]
+- `--field <string>`: Secret field assignment `key=value`, `key=@file`, or `key=-`; repeatable. `key=-` reads standard input. If more than one field uses `-`, each receives the same standard input value. \[required]
 - `--secret-name <string>`: Vault secret name. \[required]
 - `--dry-run`: Validate the request without applying changes.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.

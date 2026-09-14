@@ -29,7 +29,7 @@ ti fs fork-layer
 
 ## Options
 
-- `--parent-layer-ref <string>`: Parent layer ID, unique name, or supported tag reference. \[required]
+- `--parent-layer-ref <string>`: Parent layer ID, unique name, or [tag reference](/ai/ti/reference/ti-filesystem.md#layer-references). \[required]
 - `--actor-id <string>`: Actor ID identifying the child owner.
 - `--checkpoint-id <string>`: Pin the child to this checkpoint of the parent. If omitted, pins the serialized parent tip.
 - `--dry-run`: Validate the request without applying changes.
@@ -58,7 +58,9 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
     ti fs fork-layer --file-system-id <file-system-id> --parent-layer-ref research-base --checkpoint-id seed --layer-name experiment-b --actor-id agent-b
     ```
 
-Layer names remain visible after logical deletion and can become ambiguous. Automation should capture and use the returned layer ID.
+> **Note:**
+>
+> Layer names remain visible after logical deletion and can become ambiguous. Automation should capture and use the returned layer ID.
 
 ## Related documentation
 

@@ -31,8 +31,8 @@ ti fs-vault create-grant
 ## Options
 
 - `--agent-id <string>`: Agent ID for the delegated grant. \[required]
-- `--permission <string>`: Grant permission: `read` or `write`. \[required]
-- `--scope <string>`: Vault scope such as secret or secret/field; repeatable. \[required]
+- `--permission <string>`: Grant permission: `read` or `write`. For the current permission behavior, see [Grant permissions](#grant-permissions). \[required]
+- `--scope <string>`: Secret scope in the form `<secret-name>` for all fields or `<secret-name>/<field-name>` for one field; repeatable. The equivalent canonical Vault paths `/n/vault/<secret-name>` and `/n/vault/<secret-name>/<field-name>` are also accepted. \[required]
 - `--ttl <duration>`: Grant time to live, for example, `1h`. \[required]
 - `--dry-run`: Validate the request without applying changes.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
@@ -43,6 +43,13 @@ ti fs-vault create-grant
 - `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli-reference.md#global-options).
+
+## Grant permissions
+
+| Permission | Current `ti` behavior |
+| --- | --- |
+| `read` | Allows delegated `list-secrets`, `read-secret`, `run-with-secret`, and `mount-vault` operations within the grant scopes. |
+| `write` | The service accepts this permission, but it does not include read authority. The current `ti` command surface does not expose an operation that writes a secret with a delegated token. |
 
 ## Examples
 

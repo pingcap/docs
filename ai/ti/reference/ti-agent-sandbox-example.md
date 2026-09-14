@@ -46,7 +46,7 @@ TI_FS_TOKEN=<owner-token>
 TI_REGION_CODE=aws-us-east-1
 ```
 
-The sandbox does not need `TI_PUBLIC_KEY`, `TI_PRIVATE_KEY`, `ti configure`, or files copied from `~/.ti/`.
+The sandbox does not need `TIDB_CLOUD_PUBLIC_KEY`, `TIDB_CLOUD_PRIVATE_KEY`, `ti configure`, or files copied from `~/.ti/`.
 
 ## Step 3. Verify direct access
 
