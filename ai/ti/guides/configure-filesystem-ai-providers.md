@@ -5,15 +5,19 @@ summary: Learn how to inspect and configure media extraction and embedding provi
 
 # Configure TiDB Cloud Filesystem AI Providers
 
-This document describes how to configure optional media extraction and embedding providers when applications need a Filesystem to process or embed stored content.
+A TiDB Cloud Filesystem can optionally extract text from media files and generate embeddings for stored content. To enable these capabilities, you can configure one or more AI providers through the CLI.
 
 ## Prerequisites
 
 - [Install and configure TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
 - Obtain the target Filesystem ID.
-- Obtain the credentials required by your selected provider.
+- Obtain the API key required by your selected AI provider.
 
-The configuration commands require TiDB Cloud API credentials and an explicit Filesystem ID. Set the provider key through `TI_FS_AI_PROVIDER_API_KEY`; the CLI does not persist it locally. Provider validation can send a small built-in request and incur a provider charge.
+The configuration commands require TiDB Cloud API credentials and an explicit Filesystem ID. Set the provider key through `TI_FS_AI_PROVIDER_API_KEY`. The CLI does not persist the key locally. The Filesystem service stores it encrypted and returns only a masked value in subsequent configuration output.
+
+> **Note:**
+>
+> When you enable, re-enable, or replace a provider configuration, the Filesystem service sends a small built-in request to the provider endpoint to validate the credentials, connectivity, and model response. This validation request might incur a provider charge. A disable-only or prompt-only update does not make a validation request.
 
 ## Inspect media extraction configuration
 
@@ -39,6 +43,8 @@ ti fs update-file-system-extract-configuration \
   --provider-model "<vision-model>" \
   --provider-protocol openai
 ```
+
+The `openai` protocol supports image, audio, and video extraction. The `qwen-asr` protocol is supported only for audio extraction through Alibaba Cloud Model Studio. An endpoint from another provider might work if it implements the required OpenAI-compatible API contract. Native interfaces for Anthropic, Gemini, Vertex AI, Amazon Bedrock, and Azure OpenAI are not supported.
 
 To disable extraction for a media type:
 
@@ -71,6 +77,8 @@ ti fs update-file-system-embedding-configuration \
   --provider-model text-embedding-3-small
 ```
 
+Application-managed embeddings require an OpenAI-compatible endpoint that returns 1024-dimensional vectors. They are available for Shared Filesystems and Native Filesystems whose effective embedding mode is `fts_only`. If a Native Filesystem uses database-managed automatic embeddings, the service rejects this update and reports `source=database_auto`.
+
 To disable that configuration:
 
 ```shell
@@ -79,7 +87,11 @@ ti fs update-file-system-embedding-configuration \
   --enabled false
 ```
 
-After extraction is enabled, Filesystem media content is sent to the selected extraction provider. Text or extracted descriptions are sent to the embedding provider. Choose provider accounts and retention policies appropriate for your data.
+## Data flow after configuration
+
+After you enable extraction, the Filesystem service sends media content to the configured extraction provider. It sends the extracted text or descriptions to the configured embedding provider. Choose provider accounts and retention policies appropriate for your data.
+
+If an update fails because of a timeout, lost response, or another ambiguous network error, run the matching `describe-file-system-*-configuration` command before retrying. The provider validation request might have succeeded and incurred a charge even if the CLI did not receive the response.
 
 ## What's next
 

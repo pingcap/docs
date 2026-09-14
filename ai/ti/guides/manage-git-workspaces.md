@@ -9,9 +9,10 @@ Use `ti fs-git` to accelerate Git workspace setup on a mounted TiDB Cloud Filesy
 
 ## Prerequisites
 
-- Mount a Filesystem through FUSE.
+- [Install and configure TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
+- [Mount a TiDB Cloud Filesystem](/ai/ti/guides/mount-filesystem.md) through FUSE.
+- Select the mounted Filesystem by passing `--file-system-id`, setting `TI_FS_FILE_SYSTEM_ID`, or supplying an FS token that identifies it. Provide an FS token with Git workspace permissions.
 - Install Git and configure repository credentials independently.
-- Ensure that the selected profile or Filesystem owner token can access the Filesystem.
 
 ## Clone a workspace
 
@@ -21,9 +22,11 @@ ti fs-git clone-git-workspace \
   --target-path /path/to/workspace/tidb
 ```
 
-For a large repository, add `--blobless --hydrate background` to expose the tree while clean content and Git objects hydrate in the background. Use synchronous hydration when a caller must wait for deterministic completion.
+For a large repository, add `--blobless --hydrate background` to make the directory tree available immediately. The CLI starts a background process that downloads clean file content and Git objects after the clone command returns. Use `--hydrate sync` when your workflow requires hydration to finish before the command returns.
 
 ## Hydrate an existing workspace
+
+If a workspace was cloned with `--blobless`, you can explicitly fetch the missing Git objects by running `hydrate-git-workspace`:
 
 ```shell
 ti fs-git hydrate-git-workspace \
@@ -31,7 +34,7 @@ ti fs-git hydrate-git-workspace \
   --timeout 30m
 ```
 
-Hydration materializes clean Git data and does not discard working-tree changes.
+Hydration fetches missing blob data from the remote repository without discarding your working-tree changes.
 
 ## Add and use a linked worktree
 
@@ -51,9 +54,11 @@ ti fs-git remove-git-worktree \
   --worktree-path /path/to/workspace/tidb-feature
 ```
 
-The command rejects a dirty worktree by default. Use `--force` only after deciding that its local changes can be discarded.
+The CLI checks for uncommitted changes and rejects the removal if the worktree is dirty. Use `--force` only after you decide that local changes in the worktree can be discarded.
 
-Before terminating an ephemeral machine, preserve required changes, remove unused worktrees, and gracefully unmount the Filesystem.
+> **Note:**
+>
+> Before terminating an ephemeral machine, preserve required changes, remove unused worktrees, and gracefully unmount the Filesystem.
 
 ## What's next
 

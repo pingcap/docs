@@ -1,15 +1,17 @@
 ---
-title: Manage Filesystem Layers and Checkpoints
+title: Manage TiDB Cloud Filesystem Layers and Checkpoints
 summary: Learn how to safely create, inspect, fork, checkpoint, roll back, commit, pack, and restore TiDB Cloud Filesystem layers.
 ---
 
-# Manage Filesystem Layers and Checkpoints
+# Manage TiDB Cloud Filesystem Layers and Checkpoints
 
 Use layers to record isolated changes over a Filesystem base path before you commit or discard them.
 
 ## Prerequisites
 
-- Obtain access to a TiDB Cloud Filesystem.
+- [Install and configure TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
+- Select a Filesystem by passing `--file-system-id`, setting `TI_FS_FILE_SYSTEM_ID`, or supplying an FS token that identifies the Filesystem.
+- Provide an FS token with the required read or write permission by using `--fs-token`, `TI_FS_TOKEN`, or the local credential stored for the selected Filesystem.
 - Choose the base path whose data the layer overlays.
 
 ## Create and inspect a layer
@@ -34,7 +36,11 @@ ti fs describe-layer --layer-id "<layer-id>"
 ti fs diff-layer --layer-id "<layer-id>"
 ```
 
-Recursive copy and `--layer-id` are mutually exclusive. To seed a directory tree, use a writable FUSE layer mount.
+> **Note:**
+>
+> `copy-file` with `--layer-id` does not support recursive copy. To seed a directory tree into a layer, mount the layer as a writable FUSE mount and copy files through the mount path.
+
+Do not mount the same writable layer at multiple local paths concurrently. Reuse its existing mount, or unmount it before mounting the layer elsewhere.
 
 ## Create a checkpoint and fork a layer
 
@@ -50,32 +56,59 @@ ti fs fork-layer \
   --checkpoint-id seed
 ```
 
-Use `list-layer-chain` to inspect the pinned ancestry of the fork.
+Use `list-layer-chain` to inspect the pinned ancestry of the fork:
+
+```shell
+ti fs list-layer-chain --layer-ref experiment
+```
+
+A checkpoint mount is read-only. To continue working from a checkpoint, fork a new writable layer from it.
 
 ## Finish work in a layer
 
-Drain and unmount a writable layer before creating a checkpoint, rolling it back, or committing it. Then choose one outcome:
+> **Warning:**
+>
+> Before you create a checkpoint for a layer with a writable FUSE mount, run [`drain-file-system`](/ai/ti/guides/mount-filesystem.md#drain-or-unmount). A checkpoint includes only changes that have reached the service. Before you roll back or commit the layer, drain and then [`unmount-file-system`](/ai/ti/guides/mount-filesystem.md#drain-or-unmount). The CLI does not perform these steps automatically.
+
+Choose one outcome for a layer:
+
+- Roll back the layer to discard its changes:
+
+    ```shell
+    ti fs rollback-layer --layer-id "<layer-id>"
+    ```
+
+- Commit the layer to apply its changes to the base path:
+
+    ```shell
+    ti fs commit-layer --layer-id "<layer-id>"
+    ```
+
+> **Note:**
+>
+> Do not run both `rollback-layer` and `commit-layer` in sequence for the same layer.
+
+## Move local state to another machine
+
+When a FUSE mount uses write-back cache, some data can remain in its local overlay directory. To move this local state to another machine, pack it to an explicit remote archive path:
 
 ```shell
-ti fs rollback-layer --layer-id "<layer-id>"
+ti fs pack-file-system \
+  --mount-path /path/to/workspace \
+  --archive-path /workspace-overlay.tar.gz
 ```
 
-Or:
+On the destination machine, restore the archive into a local overlay root:
 
 ```shell
-ti fs commit-layer --layer-id "<layer-id>"
+ti fs unpack-file-system \
+  --local-root /path/to/local-overlay \
+  --remote-root /workspace \
+  --mount-profile portable \
+  --archive-path /workspace-overlay.tar.gz
 ```
 
-Do not run both commands in sequence for the same work.
-
-## Move local overlay state
-
-Pack selected local overlay paths before moving work to another machine, and unpack them at the destination:
-
-```shell
-ti fs pack-file-system --mount-path /path/to/workspace
-ti fs unpack-file-system --mount-path /path/to/workspace
-```
+Use the same local overlay root when you mount the Filesystem on the destination machine. For all pack and unpack options, see the [`pack-file-system`](/ai/ti/reference/commands/fs/ti-fs-pack-file-system.md) and [`unpack-file-system`](/ai/ti/reference/commands/fs/ti-fs-unpack-file-system.md) references.
 
 ## What's next
 

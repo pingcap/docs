@@ -5,11 +5,17 @@ summary: Learn how to store, read, delegate, inject, audit, revoke, and mount se
 
 # Manage TiDB Cloud Filesystem Vault Secrets
 
-This document describes how to use `ti fs-vault` commands in the TiDB Cloud CLI to manage secrets and give users or agents narrowly scoped, time-limited access.
+TiDB Cloud Filesystem Vault lets you store secrets, delegate narrowly scoped and time-limited access to users or agents, and inject credentials into processes without writing plaintext to disk.
 
 ## Prerequisites
 
-Select a Filesystem through a profile or Filesystem environment variables. Never print, log, or commit owner or delegated tokens.
+- [Install and configure TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
+- Select a Filesystem by passing `--file-system-id`, setting `TI_FS_FILE_SYSTEM_ID`, or supplying an FS token that identifies the Filesystem.
+- For owner operations, provide an owner FS token through `--fs-token`, `TI_FS_TOKEN`, or the local credential stored for the selected Filesystem.
+
+> **Note:**
+>
+> To avoid security risks, never print, log, or commit owner or delegated tokens.
 
 ## Create and read a secret
 
@@ -22,7 +28,9 @@ ti fs-vault create-secret \
 ti fs-vault read-secret --secret-name db-prod
 ```
 
-Raw and environment output contains plaintext. Direct it only to the intended process.
+> **Note:**
+>
+> All `read-secret` output formats, including the default JSON format, contain plaintext secret values. Direct the output only to the intended process.
 
 ## Delegate limited access
 
@@ -40,6 +48,8 @@ export TI_VAULT_TOKEN="$(ti fs-vault create-grant \
 Prefer `TI_VAULT_TOKEN` to a command-line token because command-line values can remain in process listings or shell history.
 
 ## Inject a secret into a process
+
+The CLI can inject secret fields as environment variables into a child process without writing plaintext to disk. When you run the following command, the CLI reads the secret, sets each field as an environment variable (for example, `DB_URL`, `PASSWORD`), removes its own credential environment variables from the child, and then executes the specified command:
 
 ```shell
 ti fs-vault run-with-secret --secret-path /n/vault/db-prod -- <command>
@@ -66,7 +76,7 @@ Revocation prevents new authorized operations but cannot erase a value that a pr
 
 ## Mount a read-only Vault view
 
-On macOS or Linux with FUSE support:
+On macOS or Linux with FUSE support, you can mount a read-only FUSE view of Vault secrets. The CLI creates the mount and serves secret fields as files under the mount path (for example, `/path/to/vault/db-prod/DB_URL`):
 
 ```shell
 mkdir -p /path/to/vault
@@ -75,7 +85,7 @@ ti fs-vault mount-vault \
   --vault-token "$TI_VAULT_TOKEN"
 ```
 
-Stop processes that use the mount before unmounting it:
+Stop any processes that use the mount before you unmount it:
 
 ```shell
 ti fs-vault unmount-vault --mount-path /path/to/vault

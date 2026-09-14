@@ -5,12 +5,13 @@ summary: Learn how to copy, read, organize, search, and inspect files and direct
 
 # Work with TiDB Cloud Filesystem Data
 
-Use `ti fs` commands to transfer data between local storage and TiDB Cloud Filesystem and to manage its remote namespace.
+In TiDB Cloud CLI, you can use [`ti fs` commands](/ai/ti/reference/ti-filesystem.md) to transfer data between local storage and TiDB Cloud Filesystem and to manage its remote namespace.
 
 ## Prerequisites
 
 - [Install and configure TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
-- Obtain access to a Filesystem and select it by ID when necessary.
+- [Create a Filesystem](/ai/ti/guides/manage-filesystem-resources.md) or obtain access to an existing one.
+- Select the Filesystem by passing `--file-system-id`, setting `TI_FS_FILE_SYSTEM_ID`, or supplying an FS token that identifies it. Provide an FS token with the permissions required for each operation.
 
 ## Copy data
 
@@ -42,12 +43,16 @@ ti fs describe-file --path /reports/report.md
 Create a directory, move a file, and remove data with the corresponding commands:
 
 ```shell
-ti fs create-directory --path /reports/archive --mode 0755
+ti fs create-directory --path /reports/archive
 ti fs move-file --from-remote /draft.md --to-remote /reports/final.md
 ti fs delete-file --path /scratch --recursive
 ```
 
 You can also use `chmod-file`, `create-symlink`, and `create-hardlink` to manage POSIX-style metadata and links.
+
+> **Warning:**
+>
+> `delete-file --recursive` permanently deletes the target directory and its contents. Verify the remote path before you run the command.
 
 ## Search for data
 
@@ -65,6 +70,6 @@ ti fs find-files --path /reports --file-name-pattern "*.md" --tag stage=review
 
 ## What's next
 
-- [Manage Filesystem Layers and Checkpoints](/ai/ti/guides/manage-filesystem-layers.md)
+- [Manage TiDB Cloud Filesystem Layers and Checkpoints](/ai/ti/guides/manage-filesystem-layers.md)
 - [Mount a TiDB Cloud Filesystem](/ai/ti/guides/mount-filesystem.md)
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)

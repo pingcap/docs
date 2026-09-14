@@ -5,11 +5,13 @@ summary: Learn how to create, append, read, search, and verify append-only journ
 
 # Use TiDB Cloud Filesystem Journals
 
-This document describes how to use `ti fs-journal` commands in the TiDB Cloud CLI to record ordered workflow events in an append-only journal with a verifiable hash chain.
+Journals provide append-only, hash-chained event logs for agent workflows and automation pipelines running on a TiDB Cloud Filesystem. Use [`ti fs-journal` commands](/ai/ti/reference/ti-filesystem-journal.md) to create a journal, append ordered events, search or read them, and verify the hash chain.
 
 ## Prerequisites
 
-Select a Filesystem through a profile or Filesystem environment variables.
+- [Install and configure TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
+- Select a Filesystem by passing `--file-system-id`, setting `TI_FS_FILE_SYSTEM_ID`, or supplying an FS token that identifies the Filesystem.
+- Provide an FS token with journal permissions through `--fs-token`, `TI_FS_TOKEN`, or the local credential stored for the selected Filesystem.
 
 ## Create a journal
 

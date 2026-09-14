@@ -5,7 +5,7 @@ summary: Learn how to safely create, inspect, check, select, and delete TiDB Clo
 
 # Manage TiDB Cloud Filesystem Resources
 
-This document describes how to use `ti fs` commands in TiDB Cloud CLI to provision TiDB Cloud Filesystem resources and inspect their remote metadata and access status.
+In TiDB Cloud CLI, you can use [`ti fs` commands](/ai/ti/reference/ti-filesystem.md) to create, inspect, select, and delete Filesystem resources.
 
 ## Prerequisites
 
@@ -15,7 +15,7 @@ This document describes how to use `ti fs` commands in TiDB Cloud CLI to provisi
 
 ## Create a Filesystem
 
-Create a Filesystem, wait until data-plane access is ready, and save the returned ID and one-time owner token in a file that is not world-readable:
+Create a Filesystem and save the returned ID and one-time owner token in a file that is not world-readable. The `--wait` flag tells the CLI to poll until data-plane access is ready before returning:
 
 ```shell
 umask 077
@@ -28,7 +28,13 @@ export TI_FS_FILE_SYSTEM_ID="$(jq -r '.file_system_id' ./filesystem.json)"
 export TI_FS_TOKEN="$(jq -r '.fs_token' ./filesystem.json)"
 ```
 
-The JSON response includes `fs_token` only once. Store it in a secret manager, and then delete `filesystem.json`. Do not put credentials, connection strings, private paths, or personal data in Filesystem labels.
+> **Warning:**
+>
+> The JSON response includes `fs_token` only once. The CLI also stores this token in its local credential directory automatically. However, if the local storage is lost, you cannot retrieve the token again. Store a backup copy in a secret manager, and then delete `filesystem.json`.
+
+> **Note:**
+>
+> Do not put credentials, connection strings, private paths, or personal data in Filesystem labels.
 
 ## List and inspect Filesystems
 
@@ -44,7 +50,7 @@ Read authoritative metadata for one Filesystem:
 ti fs describe-file-system --file-system-id "<file-system-id>"
 ```
 
-When you can access more than one Filesystem, pass `--file-system-id` explicitly or set `TI_FS_FILE_SYSTEM_ID`. The CLI does not infer a Filesystem from the number of locally stored credentials.
+If you have access to more than one Filesystem, pass `--file-system-id` explicitly or set the `TI_FS_FILE_SYSTEM_ID` environment variable. The CLI does not automatically select a Filesystem for you.
 
 ## Check access
 
@@ -56,13 +62,17 @@ ti fs check-file-system --file-system-id "<file-system-id>"
 
 ## Delete a Filesystem
 
+> **Warning:**
+>
+> Before deleting a Filesystem, drain and unmount any active local mounts for it. The CLI does not do this automatically.
+
 Delete a Filesystem by explicit ID:
 
 ```shell
 ti fs delete-file-system --file-system-id "<file-system-id>"
 ```
 
-Filesystem deletion is asynchronous. The CLI removes a matching local credential after the service accepts the request.
+Filesystem deletion is asynchronous. After the service accepts the request, the CLI reports the Filesystem status as `deleting` and removes the matching local credential. This output does not mean that remote deletion has finished.
 
 ## What's next
 
