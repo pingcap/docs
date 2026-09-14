@@ -61,7 +61,7 @@ When you calculate conversion duration statistics, filter on `state = 'COMPLETED
 
 Yes. Select a higher IA cache level in **Overview** > **Capacity** > **Update Capacity** > **Storage Acceleration**. The available levels are **Economy**, **Default**, **Balanced**, and **Deep**. A higher level caches more IA data on local disks, which improves cold-read performance.
 
-It does cost more. On {{{ .premium }}}, a higher cache level increases the billed IA storage amount. On {{{ .byoc }}}, the additional resources are provisioned in your own cloud account and are billed by your cloud provider. The change is a hot update and does not require a restart.
+It does cost more. On {{{ .premium }}}, each cache level has an IA storage equivalent coefficient, from 0.9x for **Economy** to 1.8x for **Deep**, which is applied to your reported IA storage usage when the bill is calculated. On {{{ .byoc }}}, no coefficient applies: the additional resources are provisioned in your own cloud account and are billed by your cloud provider. The change is a hot update and does not require a restart. For the coefficient of each level, see [TiDB Cloud Billing](/tidb-cloud/tidb-cloud-billing.md).
 
 ## Does changing the cache level or the segment size rewrite data in object storage?
 

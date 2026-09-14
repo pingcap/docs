@@ -20,7 +20,7 @@ From the application’s perspective, an IA table behaves like a standard table.
 Key features:
 
 - **Transparent semantics**: All SQL operations, including `SELECT`, `INSERT`, `UPDATE`, and `DELETE`, behave the same as on standard tables.
-- **Lower storage cost**: Data is stored in low-cost object storage, while only hot data is cached locally. In typical scenarios, storage costs can be reduced by approximately 50%.
+- **Lower storage cost**: Data is stored in low-cost object storage, while only hot data is cached locally. In typical scenarios, storage costs can be reduced by approximately 50%. The exact reduction depends on the IA cache level that you select. For details, see [TiDB Cloud Billing](/tidb-cloud/tidb-cloud-billing.md).
 - **Fine-grained control**: Supports both table-level and partition-level storage tiering. Partition-level settings take precedence over table-level settings.
 - **Flexible conversion**: Supports bidirectional conversion between IA and standard storage classes without data loss.
 - **Seamless integration**: Fully integrated with Raft Regions, MVCC, BR backup and restore, TiCDC, and other TiDB components.
@@ -164,6 +164,8 @@ INSERT/UPDATE/DELETE
 - L1+ files matching IA conditions are opened in IA mode after reload/compaction
 - Hot write paths like `memtable` and `L0` do not directly enter IA
 - The primary IA target is the Write CF L1+ layer
+
+This also explains why the storage cost reduction is approximate rather than exact. IA storage space covers only the L1 and deeper layers of a table. The memtable and L0 files remain on local disk and are not counted as IA storage, so the total space of a table is the sum of its memtable, L0, and L1+ data. How much of a table has actually moved to IA storage depends on the write rate and on compaction progress.
 
 ## Conversion efficiency
 

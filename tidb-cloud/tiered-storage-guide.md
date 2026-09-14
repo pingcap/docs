@@ -199,15 +199,19 @@ View in TiDB Cloud console:
 
 - Path: **Overview** > **Monitoring** > **Metrics** > **Instance Overview** (or **Overview** > **Core Metrics**)
 - New metrics:
-    - `Row-based IA Storage` — Total IA table space
+    - `Row-based IA Storage` — The storage space of data in the IA storage class
     - `Row-based Standard Storage` — Total Standard table space
 - Relationship: `Row-based Storage` = `Row-based IA Storage` + `Row-based Standard Storage`
+
+> **Note:**
+>
+> IA storage space counts only the L1 and deeper layers of a table. The memtable and L0 files remain on local disk and are not counted as IA storage. For why this is the case, see [LSM-Tree write path](/tidb-cloud/tiered-storage-overview.md#lsm-tree-write-path).
 
 The single-table space query method remains unchanged:
 
 > **Note:**
 >
-> This method depends on table statistics and may have significant estimation errors.
+> This method depends on table statistics and may have significant estimation errors. It also covers the whole table, so the result is not directly comparable with `Row-based IA Storage`.
 
 ```sql
 SELECT TABLE_NAME,
@@ -239,7 +243,7 @@ To change the cache level:
 
 The change takes effect without a restart, usually within one minute. TiDB Cloud automatically provisions the underlying resources, so you do not need to check available space or choose a scaling method. Provisioning might take some time.
 
-On {{{ .premium }}}, a higher cache level increases the billed IA storage amount. On {{{ .byoc }}}, the additional local cache resources are provisioned in your own cloud account and are billed by your cloud provider. For details, see [TiDB Cloud Billing](/tidb-cloud/tidb-cloud-billing.md).
+On {{{ .premium }}}, each cache level has an IA storage equivalent coefficient that is applied to your reported IA storage usage when the bill is calculated, so a higher level costs more. On {{{ .byoc }}}, no coefficient applies: the additional local cache resources are provisioned in your own cloud account and are billed by your cloud provider. For the coefficient of each level, see [TiDB Cloud Billing](/tidb-cloud/tidb-cloud-billing.md).
 
 ### Adjust the IA segment size (BYOC only)
 

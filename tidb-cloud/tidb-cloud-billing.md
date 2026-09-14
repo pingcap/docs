@@ -122,7 +122,32 @@ ALTER TABLE t1 STORAGE_CLASS='IA';
 
 > **Note:**
 >
-> IA data is cached on local disks to accelerate cold reads. You can select an IA cache level in **Overview** > **Capacity** > **Update Capacity** > **Storage Acceleration**. A higher cache level improves cold-read performance and increases cost: on {{{ .premium }}}, it increases the billed IA storage amount, and on {{{ .byoc }}}, the additional local cache resources are provisioned in your own cloud account and are billed by your cloud provider. For details, see [Configure and Manage Tiered Storage](/tidb-cloud/tiered-storage-guide.md).
+> IA data is cached on local disks to accelerate cold reads. You can select an IA cache level in **Overview** > **Capacity** > **Update Capacity** > **Storage Acceleration**. A higher cache level improves cold-read performance and increases cost. For how to change the cache level, see [Configure and Manage Tiered Storage](/tidb-cloud/tiered-storage-guide.md).
+
+**How the cache level affects billing on {{{ .premium }}}**
+
+Changing the cache level does not change the IA storage usage that your cluster reports. What changes is the coefficient that is applied to that usage when your bill is calculated. The IA storage unit price is 50% of the Standard storage unit price, and each cache level has a fixed coefficient on top of that base:
+
+| Cache level | IA storage equivalent coefficient | Effective IA price relative to Standard storage |
+|-|-|-|
+| **Economy** | 0.9x | 45% |
+| **Default** | 1.0x | 50% |
+| **Balanced** | 1.5x | 75% |
+| **Deep** | 1.8x | 90% |
+
+The billed IA storage amount is calculated as follows:
+
+```
+Billed IA storage = Reported IA storage × Coefficient × IA storage unit price
+```
+
+For example, a cluster with 1 TiB of IA data is billed for `1024 GiB × 1.5 × IA unit price` at the **Balanced** level, and for `1024 GiB × 1.0 × IA unit price` at the **Default** level. Selecting **Balanced** therefore costs 50% more than **Default** for the same amount of data.
+
+The coefficient applies to the IA storage space that your cluster reports, which covers only the L1 and deeper layers of a table. The memtable and L0 files remain on local disk and are not counted as IA storage, so the reduction in your total storage bill depends on how much of your data has moved to IA storage. For details, see [Tiered Storage Overview](/tidb-cloud/tiered-storage-overview.md).
+
+Before you confirm the change, the **Summary** pane on the **Update Capacity** page shows the current coefficient and the new one. For the IA storage unit price, see [{{{ .premium }}} Pricing Details](https://www.pingcap.com/tidb-cloud-premium-pricing-details/).
+
+On {{{ .byoc }}}, no coefficient applies. The additional local cache resources that a higher cache level requires are provisioned in your own cloud account and are billed by your cloud provider.
 
 ### Columnar storage
 
