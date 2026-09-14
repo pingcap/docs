@@ -5,23 +5,15 @@ summary: Create a journal, append structured agent events, search the workflow, 
 
 # Record an Agent Workflow in a TiDB Cloud Filesystem Journal
 
-This example records an agent task as a structured, ordered, and verifiable event history.
+This workflow records planning, tool calls, tests, retries, and handoffs as a structured, ordered, and verifiable event history. Use it when operators need to reconstruct what happened across workers instead of relying on scattered console output or a mutable status file that shows only the latest state.
 
 > **Note:**
 >
 > The TiDB Cloud Command Line Interface — `ti` — is currently in preview. Its features and command-line interface might change without prior notice.
 
-## The agent problem
+## How it works
 
-An agent task can span planning, tool calls, tests, retries, and handoffs between workers. When the task fails, operators need to know which events happened and in what order. Plain console output is often scattered across processes, while a mutable status file shows only the latest state.
-
-## Limitations of appending to a normal file
-
-A text file can be edited or truncated after an event is written, has no intrinsic sequence or hash chain, and requires every producer to invent parsing and concurrency rules. Retrying an append can also create duplicate events unless the application builds its own idempotency layer.
-
-## How TiDB Cloud CLI changes the workflow
-
-A Filesystem journal stores structured append-only entries with sequence information, searchable fields, optional idempotency keys, and hash-chain verification. Agents append semantic events such as `task.started` and `test.finished`; operators can query the workflow and verify the stored chain without treating a mutable log file as evidence.
+A Filesystem journal stores structured append-only entries with sequence information, searchable fields, optional idempotency keys, and hash-chain verification. Unlike a normal text file, journal entries cannot be edited or truncated after they are written, and producers do not need to implement their own parsing, concurrency, or retry-deduplication mechanism. Agents append semantic events such as `task.started` and `test.finished`; operators can query the workflow and verify the stored chain.
 
 ## Prerequisites
 
@@ -53,6 +45,8 @@ ti fs-journal append-journal-entries \
   --entry-json '{"type":"task.finished","status":"completed"}'
 ```
 
+Specify an idempotency key when the workflow might retry the same append, and reuse that key for every retry of that logical operation. The service then avoids storing duplicate entries. When you omit the option, a new key is generated, which is appropriate for an append that you do not intend to retry.
+
 ## Step 3. Read and search
 
 ```bash
@@ -71,6 +65,8 @@ ti fs-journal search-journal-entries \
 
 The ordered result should include the start, test, and completion events.
 
+The `--entry-type` and `--status` filters match the `type` and `status` fields in each `--entry-json` object. In this example, they select the entry whose payload contains `"type":"task.finished"` and `"status":"completed"`.
+
 ## Step 4. Verify integrity
 
 ```bash
@@ -83,9 +79,9 @@ A successful result confirms the stored sequence and hash chain are consistent.
 
 ## Cleanup
 
-Journals are append-only and currently have no delete command in the public `ti` command surface. Use a synthetic journal ID and retain it as workflow evidence. Delete the containing Filesystem only when its complete contents are no longer needed.
+Journals are append-only and currently have no delete command in the public `ti` command surface. For experiments that create disposable journals, use a dedicated test Filesystem and unique journal IDs such as `jrn-test-<run-id>`. Delete the containing Filesystem only when none of its files or journals are still needed.
 
-## Security notes
+## Security and operational notes
 
 - Do not put API keys, passwords, SQL text containing secrets, or raw file contents in journal payloads.
 - Hash-chain verification detects stored-chain inconsistency; it does not prove the original event was truthful.

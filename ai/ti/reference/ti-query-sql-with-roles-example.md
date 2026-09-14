@@ -5,30 +5,28 @@ summary: Prepare TiDB Cloud CLI-managed SQL users and run read-only, read-write,
 
 # Query TiDB Cloud Starter with Explicit SQL Roles
 
-This example lets an agent perform schema, data, and verification work while making the required privilege level explicit for every statement.
+This workflow prepares three SQL roles once and then explicitly selects the least-privileged role for each statement. Use it for interactive or automated schema, data, and verification work without handling database passwords in every command.
 
 > **Note:**
 >
 > The TiDB Cloud Command Line Interface — `ti` — is currently in preview. Its features and command-line interface might change without prior notice.
 
-## The agent problem
+## How it works
 
-An agent that can inspect data often also needs to apply a migration or update a row. Giving it one administrator connection for the complete task is convenient, but a mistaken statement during an inspection step then has the authority to change or delete data. Giving it only a read-only connection prevents legitimate write and schema work.
+A conventional database connection uses one credential and retains that credential's privileges for the session. By contrast, `ti db create-db-sql-users` creates three stable identities and stores their credentials locally. Each `execute-sql-statement` invocation selects one identity and executes one statement, so an inspection step does not need to retain write or administrator privileges.
 
-## Limitations of one native database connection
-
-TiDB supports SQL privileges, but a conventional client session uses the privileges of the one credential used to connect. Users must create, store, and switch among credentials themselves, and an agent can silently keep using an overly privileged connection across task phases.
-
-## How TiDB Cloud CLI changes the workflow
-
-`ti db create-db-sql-users` creates stable read-only, read-write, and admin identities and stores their credentials locally. Each `execute-sql-statement` invocation selects one role explicitly, uses the corresponding credential, and executes one statement. The agent can therefore use admin for schema changes, read-write for data changes, and read-only for verification without handling passwords directly.
+| Role | Use it for |
+| --- | --- |
+| `admin` | Schema changes and privilege management |
+| `read-write` | Application data changes |
+| `read-only` | Queries and verification |
 
 ## Prerequisites
 
 - Configure `ti`.
 - Select an active TiDB Cloud Starter instance ID.
 
-## Step 1. Prepare users
+## Step 1. Prepare SQL users
 
 ```bash
 ti db create-db-sql-users \
@@ -91,6 +89,8 @@ ti db format-db-connection-string \
 
 Do not commit `.env.tidb`.
 
+With `--format env`, the command writes separate `TIDB_` connection variables such as `TIDB_HOST`, `TIDB_USER`, and `TIDB_PASSWORD`. The `--env-include-database-url` option also adds a `DATABASE_URL` value for applications that accept a single MySQL connection URL.
+
 ## Cleanup
 
 ```bash
@@ -106,7 +106,7 @@ rm -f .env.tidb
 
 - Use the least privileged explicit role for each statement.
 - `ti` accepts one SQL statement per invocation.
-- HTTPS is the default transport; `--transport mysql` is an explicit fallback.
+- HTTPS is the default SQL execution transport. To open a direct TLS MySQL connection instead, specify `--transport mysql`; the CLI does not switch transports automatically.
 - Connection strings and environment output contain credentials.
 
 ## What's next

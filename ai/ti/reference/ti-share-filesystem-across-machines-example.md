@@ -5,28 +5,29 @@ summary: Create one Filesystem, securely access it from a second machine, and ve
 
 # Share a TiDB Cloud Filesystem Across Machines
 
-This example gives agents or users on two machines one shared workspace without copying files between machine-local disks.
+This workflow gives users, automation, or agents on two machines one shared workspace. Use it when changes must remain visible from both machines without exchanging point-in-time copies through `scp` or archive uploads.
 
 > **Note:**
 >
 > The TiDB Cloud Command Line Interface — `ti` — is currently in preview. Its features and command-line interface might change without prior notice.
 
-## The agent problem
+## How it works
 
-An agent can prepare source files or artifacts on machine A and continue the task on machine B, but each machine normally sees only its own disk. Copying a snapshot before every handoff adds latency, and changes made after the copy are invisible to the other machine. Concurrent handoffs can also create conflicting copies with no clear source of truth.
+Machine A creates the Filesystem and generates a separate owner token for machine B. Both machines then access the same remote namespace through data-plane commands or a mounted directory, so writes become visible through either interface after they are flushed. This provides shared-directory behavior without manual snapshot synchronization or object-storage-specific transfer logic.
 
-## Limitations of native local disks and manual synchronization
+| Participant | Credentials | Role in the workflow |
+| --- | --- | --- |
+| Machine A | Configured `ti` profile and its FS owner token | Creates and manages the Filesystem, writes initial data, and generates the token for machine B |
+| Machine B | Its own FS owner token and the Filesystem region code | Accesses the Filesystem without TiDB Cloud API keys or a copied profile |
+| TiDB Cloud Filesystem | Not applicable | Provides the shared remote namespace used by both machines |
 
-Local disks do not provide a shared namespace. Commands such as `scp` and archive upload transfer point-in-time copies rather than live state, while object storage does not by itself behave like the mounted directory expected by editors, build tools, and agents.
-
-## How TiDB Cloud CLI changes the workflow
-
-Both machines select the same TiDB Cloud Filesystem with separate owner tokens. Data-plane commands and the mounted path address one remote namespace, so a write from either interface becomes visible through the other after it is flushed. Machine B needs only its Filesystem token and region code; the token identifies the Filesystem, so it does not need TiDB Cloud API keys or a copied profile. Separate tokens let you revoke machine B without interrupting machine A.
+Using a separate token for each machine lets you revoke machine B without interrupting machine A. Because both tokens grant owner access, transfer and store them as secrets.
 
 ## Prerequisites
 
 - Machine A has configured `ti`.
 - Both machines have `ti` installed.
+- Machine A has `jq` installed.
 - You have a secure secret-transfer channel.
 
 ## Step 1. Create the Filesystem on machine A
@@ -53,10 +54,10 @@ Transfer the `fs_token` from `machine-b-token.json` through a secret manager and
 
 ```bash
 export TI_FS_TOKEN="<owner-token-from-secret-manager>"
-export TI_REGION_CODE="aws-us-east-1"
+export TI_REGION_CODE="<filesystem-region-code>"
 ```
 
-No `ti configure` is required.
+Set `TI_REGION_CODE` to the region where the Filesystem was created. No `ti configure` is required.
 
 ## Step 3. Verify direct visibility on machine B
 
@@ -81,6 +82,8 @@ The first read proves data-plane writes are visible through the mount. The final
 
 ## Cleanup
 
+### On machine B
+
 Stop writers and unmount either driver. A graceful FUSE unmount automatically drains pending work:
 
 ```bash
@@ -88,9 +91,11 @@ ti fs unmount-file-system --mount-path /path/to/shared-workspace
 unset TI_FS_TOKEN TI_REGION_CODE
 ```
 
-On machine A:
+### On machine A
 
 ```bash
+rm -f ./filesystem.json ./machine-b-token.json
+
 ti fs list-file-system-tokens --file-system-id "$FILE_SYSTEM_ID" --output text
 ti fs delete-file-system-token \
   --file-system-id "$FILE_SYSTEM_ID" \

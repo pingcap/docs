@@ -5,27 +5,24 @@ summary: Store a secret, grant one field to an agent, inject it into a process, 
 
 # Delegate TiDB Cloud Filesystem Vault Secrets to an Agent
 
-This example gives an agent temporary access to one secret field without sharing the Filesystem owner token or the complete secret.
+This workflow gives an agent temporary access to one secret field without sharing the Filesystem owner token or the complete secret. Use it when an agent needs a credential for one task but should not retain that value in a prompt, `.env` file, or sandbox image.
 
 > **Note:**
 >
 > The TiDB Cloud Command Line Interface — `ti` — is currently in preview. Its features and command-line interface might change without prior notice.
 
-## The agent problem
-
-An agent might need one API endpoint or token to complete a short task. Putting the complete secret in a prompt, `.env` file, or sandbox image exposes it beyond the process and lifetime that need it. Sharing the Filesystem owner token also grants broader access than one secret field requires.
-
-## Limitations of ordinary environment variables and files
-
-Environment variables and files can deliver a secret, but they do not create a scoped, expiring delegation or an access audit trail. A separate cloud secret manager can provide those controls, but it requires another identity, policy, and integration path for every sandbox.
-
-## How TiDB Cloud CLI changes the workflow
+## How it works
 
 The Filesystem owner stores the secret once and creates a short-lived grant scoped to the required field. The agent receives only the delegated vault token and can inject the allowed value into a child process. The owner can inspect audit events and revoke the grant without rotating or exposing the Filesystem owner credential.
+
+## Why use this approach
+
+Ordinary environment variables and files can deliver a secret, but they do not create a scoped, expiring delegation or an access audit trail. Sharing the Filesystem owner token also grants broader access than one secret field requires. A separate cloud secret manager can provide similar controls, but it requires another identity, policy, and integration path for every sandbox.
 
 ## Prerequisites
 
 - Select a Filesystem with owner access.
+- Install `jq`.
 - Store the source secret value in a protected file.
 
 ## Step 1. Create a secret
@@ -40,16 +37,19 @@ ti fs-vault create-secret \
 ## Step 2. Create a narrow grant
 
 ```bash
-export TI_VAULT_TOKEN="$(ti fs-vault create-grant \
+umask 077
+ti fs-vault create-grant \
   --agent-id example-agent \
   --scope service-demo/ENDPOINT \
   --permission read \
   --ttl 10m \
-  --label-hint example \
-  --token-only)"
+  --label-hint example > ./vault-grant.json
+
+export TI_VAULT_TOKEN="$(jq -r '.token' ./vault-grant.json)"
+export GRANT_ID="$(jq -r '.grant_id' ./vault-grant.json)"
 ```
 
-Record the returned grant ID from the structured create result in a real workflow. The token is captured and not printed.
+The protected file captures both one-time values without printing the token. Store the token in a secret manager and retain `GRANT_ID` so that you can revoke the grant.
 
 ## Step 3. Use the delegated field
 
@@ -68,7 +68,7 @@ ti fs-vault run-with-secret \
   -- sh -c 'test -n "$ENDPOINT"'
 ```
 
-The process exits successfully when the permitted field is present. Do not use commands that print all environment values.
+The `/n/vault/` prefix identifies the Vault namespace for commands that accept a full secret path; `service-demo` refers to the secret created in Step 1. `run-with-secret` reads the permitted fields, sets them as environment variables in the child process, and then runs the command after `--`. This test exits successfully when `ENDPOINT` is present without printing its value. Do not use commands that print all environment values.
 
 ## Step 4. Audit and revoke
 
@@ -79,7 +79,7 @@ ti fs-vault list-audit-events \
   --limit 20
 
 ti fs-vault delete-grant \
-  --grant-id "<grant-id>" \
+  --grant-id "$GRANT_ID" \
   --revoked-by operator \
   --reason task-complete
 ```
@@ -94,10 +94,10 @@ unset TI_VAULT_TOKEN
 
 ```bash
 ti fs-vault delete-secret --secret-name service-demo
-rm -f ./api-token.txt
+rm -f ./api-token.txt ./vault-grant.json
 ```
 
-## Security notes
+## Security and operational notes
 
 - Scope grants to the smallest set of fields and shortest useful TTL.
 - A revoked token cannot authorize new reads, but it cannot erase a value already read by a process.

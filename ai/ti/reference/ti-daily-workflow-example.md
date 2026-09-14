@@ -31,26 +31,28 @@ ti db create-db-cluster \
   --db-cluster-name daily-demo \
   --dry-run
 
-ti db create-db-cluster \
+export DB_CLUSTER_ID="$(ti db create-db-cluster \
   --db-cluster-type starter \
   --db-cluster-name daily-demo \
-  --wait
+  --wait \
+  --query id \
+  --output text)"
 ```
 
-Record the returned cluster ID. Because `--wait` was set, the create command returns after the cluster is active. You can inspect it again later:
+The command saves the returned cluster ID in `DB_CLUSTER_ID`. Because `--wait` was set, the create command returns after the cluster is active. You can inspect it again later:
 
 ```bash
 ti db describe-db-cluster \
-  --db-cluster-id "<cluster-id>" \
+  --db-cluster-id "$DB_CLUSTER_ID" \
   --output text
 ```
 
 ## Step 3. Verify SQL access
 
 ```bash
-ti db create-db-sql-users --db-cluster-id "<cluster-id>"
+ti db create-db-sql-users --db-cluster-id "$DB_CLUSTER_ID"
 ti db execute-sql-statement \
-  --db-cluster-id "<cluster-id>" \
+  --db-cluster-id "$DB_CLUSTER_ID" \
   --read-only \
   --sql "SELECT CURRENT_TIMESTAMP AS checked_at" \
   --output text
@@ -74,16 +76,23 @@ The file in `/notes/today.txt` verifies that the explicitly selected resource is
 
 ## Step 5. Check for updates
 
-Unmount active filesystems before applying an update. A check is always non-mutating:
+Check whether a newer version is available without changing the installed version:
 
 ```bash
 ti update --check
 ```
 
-Apply an update when appropriate:
+Preview an update:
 
 ```bash
 ti update --dry-run
+```
+
+If another workflow has an active Filesystem or Vault mount, stop writers and unmount it before applying the update so that `ti` and the Filesystem runtime are updated together. For instructions, see [Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md#update-tidb-cloud-cli).
+
+Apply the update when appropriate:
+
+```bash
 ti update
 ```
 
@@ -94,10 +103,12 @@ ti fs delete-file-system \
   --file-system-id "$TI_FS_FILE_SYSTEM_ID"
 
 ti db delete-db-cluster \
-  --db-cluster-id "<cluster-id>"
+  --db-cluster-id "$DB_CLUSTER_ID"
 ```
 
-Deleting local TiDB Cloud CLI configuration is not a substitute for deleting remote resources.
+> **Note:**
+>
+> Deleting local TiDB Cloud CLI configuration does not delete remote resources.
 
 ## Security notes
 

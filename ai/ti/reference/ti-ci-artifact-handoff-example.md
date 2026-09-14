@@ -5,23 +5,19 @@ summary: Persist build output in TiDB Cloud Filesystem and consume it from a lat
 
 # Hand Off CI Artifacts Between Isolated Jobs with TiDB Cloud Filesystem
 
-This scenario uses a Filesystem as a durable handoff point between isolated CI jobs or runners.
+This workflow uses a Filesystem as a durable handoff point between isolated CI jobs or runners. Use it when build output must survive the producer job and become available to a later consumer without adding a provider-specific artifact API, retention model, and download workflow.
 
 > **Note:**
 >
 > The TiDB Cloud Command Line Interface — `ti` — is currently in preview. Its features and command-line interface might change without prior notice.
 
-## The problem
+## How it works
 
-Build and verification jobs often run on different ephemeral machines. Local output disappears with the producer, while provider-specific artifact services add another upload API, retention model, and download step to agent automation.
-
-## How TiDB Cloud CLI changes the workflow
-
-The pipeline injects one Filesystem token and region into both jobs. The token identifies the Filesystem. The producer uploads output under a run-specific path, and the consumer downloads or streams that exact path. Neither job needs TiDB Cloud API keys or a copied `~/.ti/` directory.
+The pipeline injects one Filesystem token and region into both jobs. The token identifies the Filesystem. The producer uploads output under a run-specific path such as `/ci/${RUN_ID}/`, and the consumer downloads or streams data from that exact path on another runner. Neither job needs TiDB Cloud API keys or a copied `~/.ti/` directory.
 
 ## Prerequisites
 
-Provision a Filesystem on a trusted machine and store these values as protected CI secrets or variables:
+[Create a Filesystem](/ai/ti/guides/manage-filesystem-resources.md#create-a-filesystem) on a trusted machine, and store these values as protected CI secrets or variables:
 
 ```text
 TI_FS_TOKEN
@@ -73,7 +69,7 @@ ti fs delete-file --path "/ci/${RUN_ID}" --recursive
 
 Use unique run IDs and do not delete the whole Filesystem from an individual job. Filesystem deletion requires the trusted control-plane configuration and should remain a separate owner operation.
 
-## Related reference
+## What's next
 
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)
 - [TiDB Cloud CLI Configuration and Credentials](/ai/ti/reference/ti-configuration-and-credentials.md)

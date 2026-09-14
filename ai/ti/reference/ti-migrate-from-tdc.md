@@ -15,11 +15,14 @@ This migration applies only if you previously used `tdc` v0.1.x. New TiDB Cloud 
 
 - Stop writers and unmount every Filesystem and Vault mount started by `tdc`. Migration stops if an old mount is still active because it cannot transfer a running FUSE or WebDAV process.
 
-    For a FUSE Filesystem mount, run `drain-file-system` to flush pending writes, and then run `unmount-file-system` to detach the mount. For a WebDAV Filesystem mount, stop writers and run only `unmount-file-system`. A Vault mount only requires `unmount-vault`.
+    Run the commands that match each active mount. For a FUSE Filesystem mount, run `drain-file-system` to flush pending writes, and then run `unmount-file-system` to detach the mount. For a WebDAV Filesystem mount, stop writers and run only `unmount-file-system`. A Vault mount only requires `unmount-vault`.
 
     ```bash
     # FUSE Filesystem mount
     tdc fs drain-file-system --mount-path <filesystem-mount-path>
+    tdc fs unmount-file-system --mount-path <filesystem-mount-path>
+
+    # WebDAV Filesystem mount
     tdc fs unmount-file-system --mount-path <filesystem-mount-path>
 
     # Vault mount

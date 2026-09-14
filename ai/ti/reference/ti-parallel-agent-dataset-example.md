@@ -5,19 +5,22 @@ summary: Upload one unstructured dataset and expose the same read-only mounted n
 
 # Share a Read-Only Dataset Across Parallel Agents with TiDB Cloud Filesystem
 
-This scenario gives multiple short-lived workers one shared corpus without copying it into every sandbox.
+This workflow gives multiple short-lived workers one shared corpus without downloading a separate copy into every sandbox. Use it when parallel document-processing or evaluation agents need consistent access to the same PDFs, images, logs, or model artifacts.
 
 > **Note:**
 >
 > The TiDB Cloud Command Line Interface — `ti` — is currently in preview. Its features and command-line interface might change without prior notice.
 
-## The problem
+## How it works
 
-Parallel document-processing or evaluation agents often need the same PDFs, images, logs, or model artifacts. Downloading the complete corpus into every worker delays startup, duplicates storage, and leaves each worker with a different point-in-time copy.
+An owner uploads the corpus once. Every worker selects the same Filesystem and mounts it read-only, so ordinary tools can traverse one common namespace without a storage SDK. This reduces startup time and avoids independent point-in-time copies. Workers write results to separate task paths or a different output Filesystem.
 
-## How TiDB Cloud CLI changes the workflow
+## Prerequisites
 
-An owner uploads the corpus once. Every worker selects the same Filesystem and mounts it read-only, so ordinary tools can traverse a common namespace. Workers write results to separate task paths or a different output Filesystem.
+- Install and configure the TiDB Cloud CLI on a trusted machine.
+- Install the TiDB Cloud CLI and the required mount dependencies in each worker.
+- Install `jq` on the trusted machine.
+- Use a secure secret manager or encrypted worker input for token transfer.
 
 ## Step 1. Upload the corpus
 
@@ -44,6 +47,10 @@ Transfer the FS token and canonical region code through a secret manager. Delete
 
 ## Step 2. Mount in each worker
 
+> **Warning:**
+>
+> `--read-only` prevents writes only through that mount. The FS owner token remains an owner credential and can authorize writes through direct `ti fs` commands. Do not treat a read-only mount as a read-only security credential.
+
 Inject `TI_FS_TOKEN` and `TI_REGION_CODE` into each worker, then run:
 
 ```bash
@@ -60,20 +67,28 @@ The worker can use standard tools without a storage SDK:
 find "$HOME/corpus" -type f -name '*.pdf' -print
 ```
 
-Unmount before terminating the worker:
+## Cleanup
+
+Unmount the Filesystem in every worker before terminating it:
 
 ```bash
 ti fs unmount-file-system --mount-path "$HOME/corpus"
 ```
 
-## Operational notes
+After all workers have unmounted the Filesystem, delete it from the trusted machine if you no longer need the dataset:
 
-- `--read-only` prevents writes through that mount. The underlying FS owner token remains an owner credential and is not a read-only security token.
+```bash
+rm -f ./filesystem.json
+ti fs delete-file-system --file-system-id "$TI_FS_FILE_SYSTEM_ID"
+```
+
+## Security and operational notes
+
 - Do not let workers use direct mutating `ti fs` commands when the workflow requires read-only behavior.
 - Partition result paths by agent or run ID if workers write to the same output Filesystem.
 - On platforms where FUSE or WebDAV mounting is unavailable, use `read-file`, `find-files`, and `copy-file --to-local` directly.
 
-## Related reference
+## What's next
 
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)
 - [Use a Filesystem in an Agent Sandbox](/ai/ti/reference/ti-agent-sandbox-example.md)

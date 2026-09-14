@@ -5,32 +5,25 @@ summary: Provision a Filesystem on a trusted machine and give a clean agent sand
 
 # Use TiDB Cloud Filesystem in an Agent Sandbox
 
-> **Note:**
->
-> For a hands-on version of this workflow, open the [TiDB Cloud Filesystem for Agent Sandbox Lab](https://labs.tidb.io/labs/demo_901). This interactive Lab Guide walks you through using a persistent Filesystem in an agent sandbox.
-
-This example gives an ephemeral coding agent a durable workspace without copying a user's complete TiDB Cloud CLI configuration into the sandbox.
+This workflow gives an ephemeral coding agent a durable, shared workspace without copying a user's complete TiDB Cloud CLI configuration into the sandbox. Use it when the sandbox's local disk is disposable but the agent needs artifacts, repository state, or files from previous sessions or other workers without rebuilding that state for every sandbox.
 
 > **Note:**
 >
 > The TiDB Cloud Command Line Interface — `ti` — is currently in preview. Its features and command-line interface might change without prior notice.
 
-## The agent problem
+> **Note:**
+>
+> For a hands-on version of this workflow, open the [TiDB Cloud Filesystem for Agent Sandbox Lab](https://labs.tidb.io/labs/demo_901). This interactive Lab Guide walks you through using a persistent Filesystem in an agent sandbox.
 
-Coding agents often start in clean, short-lived sandboxes. The local disk disappears when the sandbox is replaced, but the agent still needs previous artifacts, repository state, and files produced by other workers. Rebuilding that state wastes task time, while copying `~/.ti/` or injecting TiDB Cloud API keys gives the sandbox control-plane credentials it does not need.
+## How it works
 
-## Limitations of local storage and full cloud credentials
-
-A sandbox-local directory is fast but not durable or shared. Generic object-storage APIs require application-specific download and upload logic instead of ordinary file operations. Giving every sandbox the user's complete cloud credentials solves access at the cost of a broader security boundary.
-
-## How TiDB Cloud CLI changes the workflow
-
-A trusted machine provisions the Filesystem once. The sandbox receives only the Filesystem owner token and region code, and can immediately use data-plane, mount, Git, journal, and vault workflows without `ti configure`. The token identifies the Filesystem. When an agent needs only selected secrets, use a delegated vault token instead of the owner token.
+A trusted machine provisions the Filesystem once. The sandbox receives only the Filesystem owner token and region code, so it can use ordinary file operations and data-plane, mount, Git, journal, and vault workflows without `ti configure`, a copied `~/.ti/` directory, or TiDB Cloud API keys. This also avoids the application-specific upload and download logic required by generic object-storage APIs. The token identifies the Filesystem. When an agent needs only selected secrets, use a delegated vault token instead of the owner token.
 
 ## Prerequisites
 
 - Install and configure the TiDB Cloud CLI on a trusted machine.
-- Install the TiDB Cloud CLI in the sandbox. The release installer includes `ti-drive9`.
+- Install the TiDB Cloud CLI in the sandbox by using the release installer.
+- Install `jq` on the trusted machine.
 - Use a secure secret manager or encrypted sandbox input for token transfer.
 
 ## Step 1. Provision on the trusted machine
@@ -86,7 +79,7 @@ ti fs mount-file-system \
 cat "$HOME/workspace/sandbox/status.txt"
 ```
 
-Using a path under `$HOME` also avoids the default `fusermount3` AppArmor mount-path restriction on Ubuntu 26.04. On macOS, omit `--driver fuse` to use the default WebDAV path. Use FUSE only after installing macFUSE.
+On macOS, omit `--driver fuse` to use WebDAV, which requires no FUSE installation. Install macFUSE and select FUSE when you need FUSE-specific capabilities such as Git workspaces, layers, or online drain. For platform requirements and mount-path restrictions, see [Mount a TiDB Cloud Filesystem](/ai/ti/guides/mount-filesystem.md).
 
 After mounting, you can use `ti fs-git`, `ti fs-journal`, and owner-authorized `ti fs-vault` commands with the same FS environment. Give agents a delegated `TI_VAULT_TOKEN` instead of the owner token when they need only selected secret fields.
 
@@ -98,14 +91,14 @@ Stop writers and unmount. A graceful FUSE unmount automatically flushes and drai
 ti fs unmount-file-system --mount-path "$HOME/workspace"
 ```
 
-Use `ti fs drain-file-system --mount-path "$HOME/workspace"` separately when you need to verify remote durability while keeping the mount online. Back on the trusted machine:
+Use `ti fs drain-file-system --mount-path "$HOME/workspace"` separately when you need to verify remote durability while keeping the mount online. For more information, see [Drain or unmount](/ai/ti/guides/mount-filesystem.md#drain-or-unmount). Back on the trusted machine:
 
 ```bash
 ti fs delete-file-system \
   --file-system-id "$FILE_SYSTEM_ID"
 ```
 
-## Security notes
+## Security and operational notes
 
 - Treat `TI_FS_TOKEN` as an owner credential.
 - Do not place it in an image, repository, command flag, or operation log.

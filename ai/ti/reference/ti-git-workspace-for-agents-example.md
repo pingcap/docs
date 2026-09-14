@@ -5,28 +5,20 @@ summary: Make a large Git workspace visible quickly, hydrate clean objects in th
 
 # Prepare a Git Workspace for Agents on TiDB Cloud Filesystem
 
-This example removes a large repository clone from the critical path of starting an agent task.
+This workflow removes a large repository clone from the critical path of starting an agent task. Use it when an ephemeral agent needs to inspect or change a large repository before a complete download would finish.
 
 > **Note:**
 >
 > The TiDB Cloud Command Line Interface — `ti` — is currently in preview. Its features and command-line interface might change without prior notice.
 
-## The agent problem
+## How it works
 
-An ephemeral agent normally waits for `git clone` and checkout to download a repository before it can inspect the tree or begin work. For a large monorepo, that startup delay is paid again for every replacement sandbox. The agent appears idle even when its first task needs only a small part of the repository.
-
-## Limitations of a normal clone or partial clone
-
-A normal clone blocks until the initial object transfer and checkout finish. A native blobless partial clone reduces the first transfer, but later Git commands and file reads can still trigger repeated on-demand fetches on the agent's critical path. Neither approach by itself provides a shared Filesystem workspace that can be restored across agent runtimes.
-
-## How TiDB Cloud CLI changes the workflow
-
-`ti fs-git clone-git-workspace --blobless --hydrate background` registers the Git workspace and exposes its file tree before all clean blobs finish downloading. The command returns so the agent can inspect paths and start working while `ti` hydrates the clean tree and local Git object database in the background. Reads that arrive before hydration completes fall back to Git's lazy fetch for correctness. Ordinary Git remains responsible for edits, commits, fetches, and pushes.
+`ti fs-git clone-git-workspace --blobless --hydrate background` registers a Git workspace that can be shared across replacement agent runtimes and exposes its file tree before all clean blobs finish downloading. The command returns so the agent can inspect paths and start working while `ti` hydrates the clean tree and local Git object database in the background. Unlike a normal clone, the initial object transfer does not block the complete workflow. Unlike a native blobless partial clone alone, background hydration reduces repeated on-demand fetches on the agent's critical path. Reads that arrive before hydration completes still fall back to Git's lazy fetch for correctness. Ordinary Git remains responsible for edits, commits, fetches, and pushes.
 
 ## Prerequisites
 
 - Select a Filesystem.
-- Use Linux FUSE or macOS with macFUSE and explicit `--driver fuse`.
+- Use Linux FUSE or macOS with macFUSE and explicit `--driver fuse`. Git workspaces rely on FUSE to combine the remote Git tree and workspace changes into the mounted path; WebDAV mounts do not provide this integration.
 - Install Git and configure repository authentication.
 
 ## Step 1. Mount a workspace
@@ -35,7 +27,8 @@ A normal clone blocks until the initial object transfer and checkout finish. A n
 mkdir -p /path/to/workspace
 ti fs mount-file-system \
   --mount-path /path/to/workspace \
-  --driver fuse
+  --driver fuse \
+  --mount-profile coding-agent
 ```
 
 ## Step 2. Create the workspace and hydrate in the background
@@ -91,11 +84,11 @@ ti fs unmount-file-system --mount-path /path/to/workspace
 
 Use `--force` for worktree removal only when uncommitted changes can be discarded. Filesystem unmount performs a graceful drain automatically; use `ti fs drain-file-system` separately only when you need to flush remote work without unmounting.
 
-## Security and durability notes
+## Security and operational notes
 
 - Repository credentials are managed by Git, not `ti`.
-- The coding-agent profile keeps `.git` and ignored generated files locally for performance.
-- Preserve or pack local overlay state before deleting an ephemeral machine when it cannot be rebuilt.
+- The `coding-agent` mount profile keeps Git metadata, dependency directories, caches, build output, and other generated files on the local machine for performance.
+- Files kept locally by the `coding-agent` profile disappear with an ephemeral machine. Commit or push required Git changes, and use [`pack-file-system`](/ai/ti/reference/commands/fs/ti-fs-pack-file-system.md) with explicit `--path` values to preserve other local files that cannot be rebuilt.
 
 ## What's next
 
