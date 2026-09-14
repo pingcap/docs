@@ -1,74 +1,74 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# Table of Contents
+# 目录
 
-## Get Started
+## 开始使用
 
 - [概览](/tidb-cloud-lake/lake-overview.md)
 - [快速入门](/tidb-cloud-lake/lake-quick-start.md)
 
-## Guides
+## 指南
 
-- Connect
+- 连接
   - [概览](/tidb-cloud-lake/guides/connection-overview.md)
-  - SQL Clients
+  - SQL 客户端
     - [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md)
-  - Drivers
+  - 驱动
     - [概览](/tidb-cloud-lake/guides/driver-overview.md)
     - [Golang](/tidb-cloud-lake/guides/connect-using-golang.md)
     - [Java](/tidb-cloud-lake/guides/connect-using-java.md)
     - [Node.js](/tidb-cloud-lake/guides/connect-using-node-js.md)
     - [Python](/tidb-cloud-lake/guides/connect-using-python.md)
     - [Rust](/tidb-cloud-lake/guides/connect-using-rust.md)
-  - AI Tools
+  - AI 工具
     - [外部 AI 函数](/tidb-cloud-lake/guides/external-ai-functions.md)
     - [MCP 客户端集成](/tidb-cloud-lake/guides/mcp-client-integration.md)
     - [MCP 服务器](/tidb-cloud-lake/guides/mcp-server.md)
-  - Visualization
+  - 可视化
     - [Tableau](/tidb-cloud-lake/guides/tableau.md)
     - [Deepnote](/tidb-cloud-lake/guides/deepnote.md)
     - [Jupyter Notebook](/tidb-cloud-lake/guides/jupyter-notebook.md)
     - [Superset](/tidb-cloud-lake/guides/superset.md)
-  - Network Access
+  - 网络访问
     - [使用 AWS PrivateLink 连接](/tidb-cloud-lake/guides/connect-with-aws-privatelink.md)
     - [使用 Alibaba Cloud PrivateLink 连接](/tidb-cloud-lake/guides/connect-with-alibaba-cloud-privatelink.md)
-- Manage Resources
+- 管理资源
   - [仪表板](/tidb-cloud-lake/guides/dashboards.md)
   - [任务流 (Task Flow)](/tidb-cloud-lake/guides/task-flow.md)
   - [计算集群](/tidb-cloud-lake/guides/warehouse.md)
   - [工作区](/tidb-cloud-lake/guides/worksheet.md)
-- Data Integration
+- 数据集成
   - [概览](/tidb-cloud-lake/guides/data-integration-overview.md)
-  - Data Sources
+  - 数据源
     - [概览](/tidb-cloud-lake/guides/data-sources.md)
     - [Amazon S3 - 凭证](/tidb-cloud-lake/guides/aws-credentials.md)
     - [Amazon SQS (S3) - IAM 角色](/tidb-cloud-lake/guides/amazon-sqs-s3-iam-role.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
-    - [MySQL - Credentials](/tidb-cloud-lake/guides/mysql-credentials.md)
-    - [PostgreSQL - Credentials](/tidb-cloud-lake/guides/postgresql-credentials.md)
+    - [MySQL - 凭证](/tidb-cloud-lake/guides/mysql-credentials.md)
+    - [PostgreSQL - 凭证](/tidb-cloud-lake/guides/postgresql-credentials.md)
     - [FeiShuBot](/tidb-cloud-lake/guides/feishubot.md)
     - [Kafka - 凭证](/tidb-cloud-lake/guides/kafka-credentials.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
-  - Integration Tasks
+  - 集成任务
     - [概览](/tidb-cloud-lake/guides/integration-tasks.md)
     - [任务管理](/tidb-cloud-lake/guides/task-management.md)
     - [Amazon S3 集成任务](/tidb-cloud-lake/guides/integrate-with-amazon-s3.md)
     - [Amazon SQS (S3) 集成任务](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
-    - [MySQL Integration Task](/tidb-cloud-lake/guides/integrate-with-mysql.md)
+    - [MySQL 集成任务](/tidb-cloud-lake/guides/integrate-with-mysql.md)
     - [PostgreSQL 集成任务](/tidb-cloud-lake/guides/integrate-with-postgresql.md)
     - [Kafka Consumer 集成任务](/tidb-cloud-lake/guides/integrate-with-kafka.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
-- Load Data
-  - Work with Stages
+- 加载数据
+  - 使用 Stage
     - [Stage 概述](/tidb-cloud-lake/guides/stage-overview.md)
     - [上传到 Stage](/tidb-cloud-lake/guides/upload-to-stage.md)
-  - Load from Files
+  - 从文件加载
     - [概览](/tidb-cloud-lake/guides/load-from-files.md)
     - [从 Stage 加载](/tidb-cloud-lake/guides/load-from-stage.md)
     - [从存储桶加载](/tidb-cloud-lake/guides/load-from-bucket.md)
     - [从本地文件加载](/tidb-cloud-lake/guides/load-from-local-file.md)
     - [从远程文件加载](/tidb-cloud-lake/guides/load-from-remote-file.md)
-  - Load with Platforms
+  - 使用平台加载
     - [使用 dbt 加载](/tidb-cloud-lake/guides/load-with-dbt.md)
-  - Load Semi-structured Data
+  - 加载半结构化数据
     - [概览](/tidb-cloud-lake/guides/load-semi-structured-data.md)
     - [加载 Parquet](/tidb-cloud-lake/guides/load-parquet.md)
     - [加载 CSV](/tidb-cloud-lake/guides/load-csv.md)
@@ -76,7 +76,7 @@
     - [加载 NDJSON](/tidb-cloud-lake/guides/load-ndjson.md)
     - [加载 ORC](/tidb-cloud-lake/guides/load-orc.md)
     - [加载 Avro](/tidb-cloud-lake/guides/load-avro.md)
-  - Query & Transform
+  - 查询与转换
     - [概览](/tidb-cloud-lake/guides/query-stage.md)
     - [查询 Parquet 文件](/tidb-cloud-lake/guides/query-parquet-files-in-stage.md)
     - [查询 CSV 文件](/tidb-cloud-lake/guides/query-csv-files-in-stage.md)
@@ -86,25 +86,25 @@
     - [查询暂存的 ORC 文件](/tidb-cloud-lake/guides/query-staged-orc-files-in-stage.md)
     - [加载时转换数据](/tidb-cloud-lake/guides/transform-data-on-load.md)
     - [Schema Evolution](/tidb-cloud-lake/guides/schema-evolution.md)
-  - Continuous Data Pipelines
+  - 持续数据管道
     - [概览](/tidb-cloud-lake/guides/continuous-data-pipelines.md)
     - [通过 Streams 跟踪和转换数据](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md)
     - [使用任务自动化数据加载](/tidb-cloud-lake/guides/automate-data-loading-with-tasks.md)
-- Unload Data
+- 卸载数据
   - [概览](/tidb-cloud-lake/guides/unload-data.md)
   - [卸载 Parquet 文件](/tidb-cloud-lake/guides/unload-parquet-file.md)
   - [卸载 CSV 文件](/tidb-cloud-lake/guides/unload-csv-file.md)
   - [卸载 TSV 文件](/tidb-cloud-lake/guides/unload-tsv-file.md)
   - [卸载 NDJSON 文件](/tidb-cloud-lake/guides/unload-ndjson-file.md)
   - [卸载 Lance 数据集](/tidb-cloud-lake/guides/unload-lance-dataset.md)
-- Multimodal Data Analytics
+- 多模态数据分析
   - [概览](/tidb-cloud-lake/guides/multimodal-data-analytics.md)
   - [SQL 分析](/tidb-cloud-lake/guides/sql-analytics.md)
-  - [JSON & Search](/tidb-cloud-lake/guides/json-search.md)
+  - [JSON 与搜索](/tidb-cloud-lake/guides/json-search.md)
   - [向量搜索](/tidb-cloud-lake/guides/vector-search-guide.md)
   - [地理空间分析](/tidb-cloud-lake/guides/geo-analytics.md)
   - [Lakehouse ETL](/tidb-cloud-lake/guides/lakehouse-etl.md)
-- Performance Tuning
+- 性能优化
   - [概览](/tidb-cloud-lake/guides/performance-optimization.md)
   - [Cluster Key](/tidb-cloud-lake/guides/cluster-key-performance.md)
   - [虚拟列](/tidb-cloud-lake/guides/virtual-column.md)
@@ -112,14 +112,14 @@
   - [全文索引](/tidb-cloud-lake/guides/full-text-index.md)
   - [Ngram 索引](/tidb-cloud-lake/guides/ngram-index.md)
   - [查询结果缓存](/tidb-cloud-lake/guides/query-result-cache.md)
-- Security & Reliability
+- 安全性与可靠性
   - [概览](/tidb-cloud-lake/guides/security-reliability.md)
-  - Access Control
+  - 访问控制
     - [概览](/tidb-cloud-lake/guides/access-control.md)
     - [权限](/tidb-cloud-lake/guides/privileges.md)
     - [角色](/tidb-cloud-lake/guides/roles.md)
     - [所有权](/tidb-cloud-lake/guides/ownership.md)
-  - Data Protection Policies
+  - 数据保护策略
     - [概览](/tidb-cloud-lake/guides/data-protection-policies.md)
     - [脱敏策略](/tidb-cloud-lake/guides/masking-policy.md)
     - [行访问策略](/tidb-cloud-lake/guides/row-access-policy.md)
@@ -130,7 +130,7 @@
   - [合规与安全](/tidb-cloud-lake/guides/compliance-security.md)
   - [Fail-Safe](/tidb-cloud-lake/guides/fail-safe.md)
   - [从操作错误中恢复](/tidb-cloud-lake/guides/recovery-from-operational-errors.md)
-- Management
+- 管理
   - [AI 驱动功能](/tidb-cloud-lake/guides/ai-powered-features.md)
   - [管理成本](/tidb-cloud-lake/guides/manage-costs.md)
   - [监控使用情况](/tidb-cloud-lake/guides/monitor-usage.md)
@@ -141,19 +141,19 @@
 - [价格与计费](/tidb-cloud-lake/guides/pricing-billing.md)
 - [故障排查](/tidb-cloud-lake/guides/troubleshooting.md)
 
-## Tutorials
+## 教程
 
-- Ingest & Stream Data
+- 导入与流式处理数据
   - [使用 Vector 导入 JSON 日志（Cloud）](/tidb-cloud-lake/tutorials/ingest-json-logs-with-vector-cloud.md)
-- Migrate Data
+- 迁移数据
   - [从 Snowflake 迁移](/tidb-cloud-lake/tutorials/migrate-from-snowflake.md)
 
-## Reference
+## 参考
 
-- SQL Reference
+- SQL 参考
   - [概览](/tidb-cloud-lake/sql/sql-statements-overview.md)
-  - SQL General
-    - Data Types
+  - SQL 通用
+    - 数据类型
       - [概览](/tidb-cloud-lake/sql/data-types.md)
       - [数组](/tidb-cloud-lake/sql/array.md)
       - [Binary](/tidb-cloud-lake/sql/binary.md)
@@ -176,13 +176,13 @@
       - [information_schema.schemata](/tidb-cloud-lake/sql/information-schema-schemata-sql.md)
       - [information_schema.tables](/tidb-cloud-lake/sql/information-schema-tables-sql.md)
       - [information_schema.views](/tidb-cloud-lake/sql/information-schema-views-sql.md)
-    - Table Engines
+    - 表引擎
       - [概览](/tidb-cloud-lake/sql/table-engines.md)
       - [Fuse Engine 表](/tidb-cloud-lake/sql/fuse-engine-tables.md)
       - [Apache Iceberg™ Tables](/tidb-cloud-lake/sql/apache-icebergtm-tables.md)
       - [Apache Hive Tables](/tidb-cloud-lake/sql/apache-hive-tables.md)
       - [Delta Lake Engine](/tidb-cloud-lake/sql/delta-lake-engine.md)
-    - System Tables
+    - 系统表
       - [概览](/tidb-cloud-lake/sql/system-tables.md)
       - [system.build_options](/tidb-cloud-lake/sql/system-build-options.md)
       - [system.caches](/tidb-cloud-lake/sql/system-caches.md)
@@ -210,7 +210,7 @@
       - [system.user_functions](/tidb-cloud-lake/sql/system-user-functions.md)
       - [system.views](/tidb-cloud-lake/sql/system-views.md)
       - [system.virtual_columns](/tidb-cloud-lake/sql/system-virtual-columns.md)
-    - System History Tables
+    - 系统历史表
       - [system_history.access_history](/tidb-cloud-lake/sql/system-history-access-history.md)
       - [system_history.log_history](/tidb-cloud-lake/sql/system-history-log-history.md)
       - [system_history.login_history](/tidb-cloud-lake/sql/system-history-login-history.md)
@@ -220,11 +220,11 @@
     - [输入与输出文件格式](/tidb-cloud-lake/sql/input-output-file-formats.md)
     - [连接参数](/tidb-cloud-lake/sql/connection-parameters.md)
     - [SQL 方言与一致性](/tidb-cloud-lake/sql/sql-dialects-conformance.md)
-  - SQL Statements
+  - SQL 语句
     - [概览](/tidb-cloud-lake/sql/sql-statements-reference.md)
-    - DDL Commands
+    - DDL 命令
       - [DDL 概览](/tidb-cloud-lake/sql/ddl.md)
-      - Database
+      - 数据库
         - [概览](/tidb-cloud-lake/sql/ddl-database-overview.md)
         - [CREATE DATABASE](/tidb-cloud-lake/sql/create-database.md)
         - [SHOW CREATE DATABASE](/tidb-cloud-lake/sql/show-create-database.md)
@@ -234,7 +234,7 @@
         - [DROP DATABASE](/tidb-cloud-lake/sql/drop-database.md)
         - [SHOW DROP DATABASES](/tidb-cloud-lake/sql/show-drop-databases.md)
         - [UNDROP DATABASE](/tidb-cloud-lake/sql/undrop-database.md)
-      - Table
+      - 表
         - [概览](/tidb-cloud-lake/sql/ddl-table-overview.md)
         - [CREATE TABLE](/tidb-cloud-lake/sql/create-table.md)
         - [CREATE EXTERNAL TABLE](/tidb-cloud-lake/sql/create-external-table.md)
@@ -258,7 +258,7 @@
         - [SHOW STATISTICS](/tidb-cloud-lake/sql/show-statistics.md)
         - [SHOW TABLE STATUS](/tidb-cloud-lake/sql/show-table-status.md)
         - [SHOW TABLES](/tidb-cloud-lake/sql/show-tables.md)
-      - View
+      - 视图
         - [概览](/tidb-cloud-lake/sql/ddl-view-overview.md)
         - [CREATE VIEW](/tidb-cloud-lake/sql/create-view.md)
         - [ALTER VIEW](/tidb-cloud-lake/sql/alter-view.md)
@@ -267,7 +267,7 @@
         - [DROP VIEW](/tidb-cloud-lake/sql/drop-view.md)
         - [物化视图](/tidb-cloud-lake/sql/materialized-view.md)
         - [REFRESH LINEAGE](/tidb-cloud-lake/sql/refresh-lineage.md)
-      - User & Role
+      - 用户和角色
         - [概览](/tidb-cloud-lake/sql/user-role.md)
         - [CREATE USER](/tidb-cloud-lake/sql/create-user.md)
         - [DESC USER](/tidb-cloud-lake/sql/desc-user.md)
@@ -291,19 +291,19 @@
         - [REMOVE STAGE FILES](/tidb-cloud-lake/sql/remove-stage-files.md)
         - [SHOW STAGES](/tidb-cloud-lake/sql/show-stages.md)
         - [PRESIGN](/tidb-cloud-lake/sql/presign.md)
-      - Sequence
+      - 序列
         - [概览](/tidb-cloud-lake/sql/sequence.md)
         - [CREATE SEQUENCE](/tidb-cloud-lake/sql/create-sequence.md)
         - [DESC SEQUENCE](/tidb-cloud-lake/sql/desc-sequence.md)
         - [DROP SEQUENCE](/tidb-cloud-lake/sql/drop-sequence.md)
         - [SHOW SEQUENCES](/tidb-cloud-lake/sql/show-sequences.md)
-      - Stream
+      - 流
         - [概览](/tidb-cloud-lake/sql/stream.md)
         - [CREATE STREAM](/tidb-cloud-lake/sql/create-stream.md)
         - [DESC STREAM](/tidb-cloud-lake/sql/desc-stream.md)
         - [DROP STREAM](/tidb-cloud-lake/sql/drop-stream.md)
         - [SHOW STREAMS](/tidb-cloud-lake/sql/show-streams.md)
-      - Task
+      - 任务
         - [概览](/tidb-cloud-lake/sql/task.md)
         - [CREATE TASK](/tidb-cloud-lake/sql/create-task.md)
         - [ALTER TASK](/tidb-cloud-lake/sql/alter-task.md)
@@ -311,19 +311,19 @@
         - [EXECUTE TASK](/tidb-cloud-lake/sql/execute-task.md)
         - [SHOW TASKS](/tidb-cloud-lake/sql/show-tasks.md)
         - [TASK ERROR NOTIFICATION PAYLOAD](/tidb-cloud-lake/sql/task-error-notification-payload.md)
-      - Notification
+      - 通知
         - [概览](/tidb-cloud-lake/sql/notification.md)
         - [CREATE NOTIFICATION INTEGRATION](/tidb-cloud-lake/sql/create-notification-integration.md)
         - [ALTER NOTIFICATION INTEGRATION](/tidb-cloud-lake/sql/alter-notification-integration.md)
         - [DROP NOTIFICATION INTEGRATION](/tidb-cloud-lake/sql/drop-notification-integration.md)
         - [DESCRIBE NOTIFICATION INTEGRATION](/tidb-cloud-lake/sql/describe-notification-integration.md)
-      - Tag
+      - 标签
         - [概览](/tidb-cloud-lake/sql/tag-overview.md)
         - [CREATE TAG](/tidb-cloud-lake/sql/create-tag.md)
         - [DROP TAG](/tidb-cloud-lake/sql/drop-tag.md)
         - [SHOW TAGS](/tidb-cloud-lake/sql/show-tags.md)
         - [SET TAG](/tidb-cloud-lake/sql/set-tag.md)
-      - Connection
+      - 连接
         - [概览](/tidb-cloud-lake/sql/connection.md)
         - [CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md)
         - [DESC CONNECTION](/tidb-cloud-lake/sql/desc-connection.md)
@@ -333,7 +333,7 @@
         - [概览](/tidb-cloud-lake/sql/catalog.md)
         - [SHOW CATALOGS](/tidb-cloud-lake/sql/show-catalogs.md)
         - [SHOW CREATE CATALOG](/tidb-cloud-lake/sql/show-create-catalog.md)
-      - File Format
+      - 文件格式
         - [概览](/tidb-cloud-lake/sql/file-format.md)
         - [CREATE FILE FORMAT](/tidb-cloud-lake/sql/create-file-format.md)
         - [DROP FILE FORMAT](/tidb-cloud-lake/sql/drop-file-format.md)
@@ -344,12 +344,12 @@
         - [RECLUSTER TABLE](/tidb-cloud-lake/sql/recluster-table.md)
         - [SET CLUSTER KEY](/tidb-cloud-lake/sql/set-cluster-key.md)
         - [Cluster Key](/tidb-cloud-lake/sql/cluster-key.md)
-      - Aggregating Index
+      - 聚合索引
         - [CREATE AGGREGATING INDEX](/tidb-cloud-lake/sql/create-aggregating-index.md)
         - [DROP AGGREGATING INDEX](/tidb-cloud-lake/sql/drop-aggregating-index.md)
         - [聚合索引](/tidb-cloud-lake/sql/aggregating-index-sql.md)
         - [REFRESH AGGREGATING INDEX](/tidb-cloud-lake/sql/refresh-aggregating-index.md)
-      - Inverted Index
+      - 倒排索引
         - [CREATE INVERTED INDEX](/tidb-cloud-lake/sql/create-inverted-index.md)
         - [DROP INVERTED INDEX](/tidb-cloud-lake/sql/drop-inverted-index.md)
         - [倒排索引](/tidb-cloud-lake/sql/inverted-index.md)
@@ -359,7 +359,7 @@
         - [DROP NGRAM INDEX](/tidb-cloud-lake/sql/drop-ngram-index.md)
         - [Ngram 索引](/tidb-cloud-lake/sql/ngram-index-sql.md)
         - [REFRESH NGRAM INDEX](/tidb-cloud-lake/sql/refresh-ngram-index.md)
-      - Spatial Index
+      - 空间索引
         - [空间索引](/tidb-cloud-lake/sql/spatial-index-overview.md)
         - [CREATE SPATIAL INDEX](/tidb-cloud-lake/sql/create-spatial-index.md)
         - [REFRESH SPATIAL INDEX](/tidb-cloud-lake/sql/refresh-spatial-index.md)
@@ -373,7 +373,7 @@
         - [虚拟列](/tidb-cloud-lake/sql/virtual-column-overview.md)
         - [REFRESH VIRTUAL COLUMN](/tidb-cloud-lake/sql/refresh-virtual-column.md)
         - [SHOW VIRTUAL COLUMNS](/tidb-cloud-lake/sql/show-virtual-columns.md)
-      - User-Defined Function
+      - 用户定义函数
         - [用户定义函数](/tidb-cloud-lake/sql/user-defined-function.md)
         - [选择用户定义函数类型](/tidb-cloud-lake/guides/choose-a-udf-type.md)
         - [ALTER FUNCTION](/tidb-cloud-lake/sql/alter-function.md)
@@ -382,36 +382,36 @@
         - [CREATE TABLE FUNCTION](/tidb-cloud-lake/sql/create-table-function.md)
         - [DROP FUNCTION](/tidb-cloud-lake/sql/drop-function.md)
         - [SHOW USER FUNCTIONS](/tidb-cloud-lake/sql/show-user-functions.md)
-      - External Function
+      - 外部函数
         - [外部函数](/tidb-cloud-lake/sql/external-function.md)
         - [CREATE FUNCTION](/tidb-cloud-lake/sql/create-function.md)
         - [ALTER FUNCTION](/tidb-cloud-lake/sql/alter-function-sql.md)
         - [DROP FUNCTION](/tidb-cloud-lake/sql/drop-function-sql.md)
-      - Masking Policy
+      - 脱敏策略
         - [概览](/tidb-cloud-lake/sql/masking-policy-sql.md)
         - [CREATE MASKING POLICY](/tidb-cloud-lake/sql/create-masking-policy.md)
         - [DESC MASKING POLICY](/tidb-cloud-lake/sql/desc-masking-policy.md)
         - [DROP MASKING POLICY](/tidb-cloud-lake/sql/drop-masking-policy.md)
-      - Network Policy
+      - 网络策略
         - [ALTER NETWORK POLICY](/tidb-cloud-lake/sql/alter-network-policy.md)
         - [CREATE NETWORK POLICY](/tidb-cloud-lake/sql/create-network-policy.md)
         - [DESC NETWORK POLICY](/tidb-cloud-lake/sql/desc-network-policy.md)
         - [DROP NETWORK POLICY](/tidb-cloud-lake/sql/drop-network-policy.md)
         - [SHOW NETWORK POLICIES](/tidb-cloud-lake/sql/show-network-policies.md)
         - [网络策略](/tidb-cloud-lake/sql/network-policy-sql.md)
-      - Password Policy
+      - 密码策略
         - [ALTER PASSWORD POLICY](/tidb-cloud-lake/sql/alter-password-policy.md)
         - [CREATE PASSWORD POLICY](/tidb-cloud-lake/sql/create-password-policy.md)
         - [DESC PASSWORD POLICY](/tidb-cloud-lake/sql/desc-password-policy.md)
         - [DROP PASSWORD POLICY](/tidb-cloud-lake/sql/drop-password-policy.md)
         - [密码策略](/tidb-cloud-lake/sql/password-policy-sql.md)
         - [SHOW PASSWORD POLICIES](/tidb-cloud-lake/sql/show-password-policies.md)
-      - Row Access Policy
+      - 行访问策略
         - [概览](/tidb-cloud-lake/sql/row-access-policy-overview.md)
         - [CREATE ROW ACCESS POLICY](/tidb-cloud-lake/sql/create-row-access-policy.md)
         - [DESC ROW ACCESS POLICY](/tidb-cloud-lake/sql/desc-row-access-policy.md)
         - [DROP ROW ACCESS POLICY](/tidb-cloud-lake/sql/drop-row-access-policy.md)
-      - Dictionary
+      - 字典
         - [概览](/tidb-cloud-lake/sql/dictionary.md)
         - [CREATE DICTIONARY](/tidb-cloud-lake/sql/create-dictionary.md)
         - [DROP DICTIONARY](/tidb-cloud-lake/sql/drop-dictionary.md)
@@ -423,7 +423,7 @@
         - [CREATE PIPE](/tidb-cloud-lake/sql/create-pipe.md)
         - [DESCRIBE PIPE](/tidb-cloud-lake/sql/describe-pipe.md)
         - [DROP PIPE](/tidb-cloud-lake/sql/drop-pipe.md)
-      - Transaction
+      - 事务
         - [BEGIN](/tidb-cloud-lake/sql/begin.md)
         - [COMMIT](/tidb-cloud-lake/sql/commit.md)
         - [事务](/tidb-cloud-lake/sql/transaction.md)
@@ -434,7 +434,7 @@
         - [SET VARIABLE](/tidb-cloud-lake/sql/set-variable.md)
         - [SHOW VARIABLES](/tidb-cloud-lake/sql/show-variables.md)
         - [UNSET VARIABLE](/tidb-cloud-lake/sql/unset-variable.md)
-      - Stored Procedure
+      - 存储过程
         - [CALL PROCEDURE](/tidb-cloud-lake/sql/call-procedure.md)
         - [CREATE PROCEDURE](/tidb-cloud-lake/sql/create-procedure.md)
         - [DESC PROCEDURE](/tidb-cloud-lake/sql/desc-procedure.md)
@@ -465,11 +465,11 @@
         - [DROP WORKLOAD GROUP](/tidb-cloud-lake/sql/drop-workload-group.md)
         - [RENAME WORKLOAD GROUP](/tidb-cloud-lake/sql/rename-workload-group.md)
         - [SHOW WORKLOAD GROUPS](/tidb-cloud-lake/sql/show-workload-groups.md)
-      - Table Versioning
+      - 表版本控制
         - [概览](/tidb-cloud-lake/sql/table-versioning.md)
         - [CREATE SNAPSHOT TAG](/tidb-cloud-lake/sql/create-snapshot-tag.md)
         - [DROP SNAPSHOT TAG](/tidb-cloud-lake/sql/drop-snapshot-tag.md)
-    - DML Commands
+    - DML 命令
       - [DML 概览](/tidb-cloud-lake/sql/dml.md)
       - [`COPY INTO <location>`](/tidb-cloud-lake/sql/copy-into-location.md)
       - [`COPY INTO <table>`](/tidb-cloud-lake/sql/copy-into-table.md)
@@ -479,7 +479,7 @@
       - [MERGE](/tidb-cloud-lake/sql/merge.md)
       - [REPLACE](/tidb-cloud-lake/sql/replace.md)
       - [UPDATE](/tidb-cloud-lake/sql/update.md)
-    - Query Syntax
+    - 查询语法
       - [概览](/tidb-cloud-lake/sql/query-syntax.md)
       - [SELECT](/tidb-cloud-lake/sql/select.md)
       - [AT](/tidb-cloud-lake/sql/at.md)
@@ -495,7 +495,7 @@
       - [WITH 子句](/tidb-cloud-lake/sql/clause.md)
       - [WITH CONSUME](/tidb-cloud-lake/sql/with-consume.md)
       - [WITH Stream Hints](/tidb-cloud-lake/sql/stream-hints.md)
-    - Query Operators
+    - 查询运算符
       - [算术运算符](/tidb-cloud-lake/sql/arithmetic-operators.md)
       - [比较运算符](/tidb-cloud-lake/sql/comparison-operators.md)
       - [查询运算符](/tidb-cloud-lake/sql/query-operators.md)
@@ -503,7 +503,7 @@
       - [逻辑运算符](/tidb-cloud-lake/sql/logical-operators.md)
       - [集合运算符](/tidb-cloud-lake/sql/set-operators-sql.md)
       - [子查询运算符](/tidb-cloud-lake/sql/subquery-operators.md)
-    - Explain Commands
+    - EXPLAIN 命令
       - [概览](/tidb-cloud-lake/sql/explain-commands.md)
       - [EXPLAIN](/tidb-cloud-lake/sql/explain.md)
       - [EXPLAIN ANALYZE](/tidb-cloud-lake/sql/explain-analyze.md)
@@ -512,7 +512,7 @@
       - [EXPLAIN PERF](/tidb-cloud-lake/sql/explain-perf.md)
       - [EXPLAIN RAW](/tidb-cloud-lake/sql/explain-raw.md)
       - [EXPLAIN SYNTAX](/tidb-cloud-lake/sql/explain-syntax.md)
-    - Administration Commands
+    - 管理命令
       - [概览](/tidb-cloud-lake/sql/administration-commands.md)
       - [KILL](/tidb-cloud-lake/sql/kill.md)
       - [SET](/tidb-cloud-lake/sql/set.md)
@@ -532,9 +532,9 @@
       - [EXECUTE IMMEDIATE](/tidb-cloud-lake/sql/execute-immediate.md)
       - [SYSTEM FLUSH PRIVILEGES](/tidb-cloud-lake/sql/system-flush-privileges.md)
       - [SYSTEM ENABLE / DISABLE EXCEPTION_BACKTRACE](/tidb-cloud-lake/sql/system-enable-disable-exception-backtrace.md)
-  - SQL Functions
+  - SQL 函数
     - [SQL 函数参考](/tidb-cloud-lake/sql/sql-function-reference.md)
-    - Bitmap Functions
+    - Bitmap 函数
       - [BITMAP_AND](/tidb-cloud-lake/sql/bitmap-and.md)
       - [BITMAP_AND_COUNT](/tidb-cloud-lake/sql/bitmap-and-count.md)
       - [BITMAP_AND_NOT](/tidb-cloud-lake/sql/bitmap-and-not.md)
@@ -559,7 +559,7 @@
       - [Bitmap 函数](/tidb-cloud-lake/sql/bitmap-functions.md)
       - [INTERSECT_COUNT](/tidb-cloud-lake/sql/intersect-count.md)
       - [SUB_BITMAP](/tidb-cloud-lake/sql/sub-bitmap.md)
-    - Conversion Functions
+    - 转换函数
       - [BUILD_BITMAP](/tidb-cloud-lake/sql/build-bitmap.md)
       - [CAST::](/tidb-cloud-lake/sql/cast.md)
       - [转换函数](/tidb-cloud-lake/sql/conversion-functions.md)
@@ -584,7 +584,7 @@
       - [TO_VARIANT](/tidb-cloud-lake/sql/to-variant.md)
       - [TRY_CAST](/tidb-cloud-lake/sql/try-cast.md)
       - [TRY_TO_BINARY](/tidb-cloud-lake/sql/try-to-binary.md)
-    - Conditional Functions
+    - 条件函数
       - [概览](/tidb-cloud-lake/sql/conditional-functions.md)
       - [[ NOT ] BETWEEN](/tidb-cloud-lake/sql/between.md)
       - [CASE](/tidb-cloud-lake/sql/case.md)
@@ -607,7 +607,7 @@
       - [NULLIF](/tidb-cloud-lake/sql/nullif.md)
       - [NVL](/tidb-cloud-lake/sql/nvl.md)
       - [NVL2](/tidb-cloud-lake/sql/nvl2.md)
-    - Numeric Functions
+    - 数值函数
       - [概览](/tidb-cloud-lake/sql/numeric-functions.md)
       - [ABS](/tidb-cloud-lake/sql/abs.md)
       - [ACOS](/tidb-cloud-lake/sql/acos.md)
@@ -655,7 +655,7 @@
       - [TAN](/tidb-cloud-lake/sql/tan.md)
       - [TRUNC](/tidb-cloud-lake/sql/trunc.md)
       - [TRUNCATE](/tidb-cloud-lake/sql/truncate.md)
-    - Date & Time Functions
+    - 日期与时间函数
       - [概览](/tidb-cloud-lake/sql/date-time-functions.md)
       - [ADD_MONTHS](/tidb-cloud-lake/sql/add-months.md)
       - [ADD TIME INTERVAL](/tidb-cloud-lake/sql/add-interval.md)
@@ -729,7 +729,7 @@
       - [YEAR](/tidb-cloud-lake/sql/year.md)
       - [YEARWEEK](/tidb-cloud-lake/sql/yearweek.md)
       - [YESTERDAY](/tidb-cloud-lake/sql/yesterday.md)
-    - Interval Functions
+    - 间隔函数
       - [概览](/tidb-cloud-lake/sql/interval-functions.md)
       - [EPOCH](/tidb-cloud-lake/sql/epoch.md)
       - [TO_CENTURIES](/tidb-cloud-lake/sql/to-centuries.md)
@@ -744,7 +744,7 @@
       - [TO_SECONDS](/tidb-cloud-lake/sql/seconds.md)
       - [TO_WEEKS](/tidb-cloud-lake/sql/weeks.md)
       - [TO_YEARS](/tidb-cloud-lake/sql/years.md)
-    - String Functions
+    - 字符串函数
       - [概览](/tidb-cloud-lake/sql/string-functions-overview.md)
       - [ASCII](/tidb-cloud-lake/sql/ascii.md)
       - [BIN](/tidb-cloud-lake/sql/bin.md)
@@ -810,7 +810,7 @@
       - [UCASE](/tidb-cloud-lake/sql/ucase.md)
       - [UNHEX](/tidb-cloud-lake/sql/unhex.md)
       - [UPPER](/tidb-cloud-lake/sql/upper.md)
-    - Aggregate Functions
+    - 聚合函数
       - [概览](/tidb-cloud-lake/sql/aggregate-functions.md)
       - [ANY_VALUE](/tidb-cloud-lake/sql/any-value.md)
       - [APPROX_COUNT_DISTINCT](/tidb-cloud-lake/sql/approx-count-distinct.md)
@@ -862,7 +862,7 @@
       - [VARIANCE_POP](/tidb-cloud-lake/sql/variance-pop.md)
       - [VARIANCE_SAMP](/tidb-cloud-lake/sql/variance-samp.md)
       - [WINDOW_FUNNEL](/tidb-cloud-lake/sql/window-funnel.md)
-    - Window Functions
+    - 窗口函数
       - [概览](/tidb-cloud-lake/sql/window-functions-overview.md)
       - [CUME_DIST](/tidb-cloud-lake/sql/cume-dist.md)
       - [DENSE_RANK](/tidb-cloud-lake/sql/dense-rank.md)
@@ -879,7 +879,7 @@
       - [RANK](/tidb-cloud-lake/sql/rank.md)
       - [ROW_NUMBER](/tidb-cloud-lake/sql/row-number.md)
       - [ROWS BETWEEN](/tidb-cloud-lake/sql/rows-between.md)
-    - Geospatial Functions
+    - 地理空间函数
       - [概览](/tidb-cloud-lake/sql/geospatial-functions.md)
       - [GEO_DISTANCE](/tidb-cloud-lake/sql/geo-distance.md)
       - [GEO_TO_H3](/tidb-cloud-lake/sql/geo-to-h3.md)
@@ -1009,14 +1009,14 @@
       - [TO_GEOGRAPHY](/tidb-cloud-lake/sql/to-geography.md)
       - [TO_GEOMETRY](/tidb-cloud-lake/sql/geometry.md)
       - [TO_STRING](/tidb-cloud-lake/sql/string-geospatial.md)
-    - Full-Text Search Functions
+    - 全文搜索函数
       - [概览](/tidb-cloud-lake/sql/full-text-search-functions.md)
       - [MATCH](/tidb-cloud-lake/sql/match.md)
       - [QUERY](/tidb-cloud-lake/sql/query.md)
       - [SCORE](/tidb-cloud-lake/sql/score.md)
-    - Structured & Semi-Structured
+    - 结构化与半结构化
       - [结构化与半结构化函数](/tidb-cloud-lake/sql/structured-semi-structured-functions.md)
-      - JSON Functions
+      - JSON 函数
         - [概览](/tidb-cloud-lake/sql/json-functions-overview.md)
         - [CHECK_JSON](/tidb-cloud-lake/sql/check-json.md)
         - [GET](/tidb-cloud-lake/sql/get.md)
@@ -1040,7 +1040,7 @@
         - [JSON_TYPEOF](/tidb-cloud-lake/sql/json-typeof.md)
         - [PARSE_JSON](/tidb-cloud-lake/sql/parse-json.md)
         - [STRIP_NULL_VALUE](/tidb-cloud-lake/sql/strip-null-value.md)
-      - Array Functions
+      - 数组函数
         - [概览](/tidb-cloud-lake/sql/array-functions.md)
         - [ARRAY](/tidb-cloud-lake/sql/array-sql.md)
         - [ARRAY_AGGREGATE](/tidb-cloud-lake/sql/array-aggregate.md)
@@ -1089,7 +1089,7 @@
         - [RANGE](/tidb-cloud-lake/sql/range.md)
         - [SLICE](/tidb-cloud-lake/sql/slice.md)
         - [UNNEST](/tidb-cloud-lake/sql/unnest.md)
-      - Object Functions
+      - 对象函数
         - [对象函数](/tidb-cloud-lake/sql/object-functions.md)
         - [OBJECT_CONSTRUCT](/tidb-cloud-lake/sql/object-construct.md)
         - [OBJECT_CONSTRUCT_KEEP_NULL](/tidb-cloud-lake/sql/object-construct-keep-null.md)
@@ -1110,7 +1110,7 @@
         - [MAP_TRANSFORM_KEYS](/tidb-cloud-lake/sql/map-transform-keys.md)
         - [MAP_TRANSFORM_VALUES](/tidb-cloud-lake/sql/map-transform-values.md)
         - [MAP_VALUES](/tidb-cloud-lake/sql/map-values.md)
-      - Type Conversion
+      - 类型转换
         - [AS_ARRAY](/tidb-cloud-lake/sql/as-array.md)
         - [AS_BINARY](/tidb-cloud-lake/sql/as-binary.md)
         - [AS_BOOLEAN](/tidb-cloud-lake/sql/as-boolean.md)
@@ -1121,7 +1121,7 @@
         - [AS_OBJECT](/tidb-cloud-lake/sql/as-object.md)
         - [AS_STRING](/tidb-cloud-lake/sql/as-string.md)
         - [类型转换函数](/tidb-cloud-lake/sql/type-conversion-functions.md)
-      - Type Predicate
+      - 类型谓词
         - [类型谓词函数](/tidb-cloud-lake/sql/type-predicate-functions.md)
         - [IS_ARRAY](/tidb-cloud-lake/sql/is-array.md)
         - [IS_BOOLEAN](/tidb-cloud-lake/sql/is-boolean.md)
@@ -1130,7 +1130,7 @@
         - [IS_NULL_VALUE](/tidb-cloud-lake/sql/is-null-value.md)
         - [IS_OBJECT](/tidb-cloud-lake/sql/is-object.md)
         - [IS_STRING](/tidb-cloud-lake/sql/is-string.md)
-    - Vector Functions
+    - 向量函数
       - [COSINE_DISTANCE](/tidb-cloud-lake/sql/cosine-distance.md)
       - [L2_DISTANCE](/tidb-cloud-lake/sql/l2-distance.md)
       - [L1_DISTANCE](/tidb-cloud-lake/sql/l1-distance.md)
@@ -1138,7 +1138,7 @@
       - [VECTOR_DIMS](/tidb-cloud-lake/sql/vector-dims.md)
       - [VECTOR_NORM](/tidb-cloud-lake/sql/vector-norm.md)
       - [向量函数](/tidb-cloud-lake/sql/vector-functions.md)
-    - Hash Functions
+    - 散列函数
       - [BLAKE3](/tidb-cloud-lake/sql/blake.md)
       - [CITY64WITHSEED](/tidb-cloud-lake/sql/city-withseed.md)
       - [散列函数](/tidb-cloud-lake/sql/hash-functions.md)
@@ -1150,12 +1150,12 @@
       - [SIPHASH64](/tidb-cloud-lake/sql/siphash-sql.md)
       - [XXHASH32](/tidb-cloud-lake/sql/xxhash.md)
       - [XXHASH64](/tidb-cloud-lake/sql/xxhash-sql.md)
-    - UUID Functions
+    - UUID 函数
       - [概览](/tidb-cloud-lake/sql/uuid-functions.md)
       - [GEN_RANDOM_UUID](/tidb-cloud-lake/sql/gen-random-uuid.md)
       - [UUID](/tidb-cloud-lake/sql/uuid-sql.md)
-    - IP Address Functions
-      - [IP Address Functions](/tidb-cloud-lake/sql/ip-address-functions.md)
+    - IP 地址函数
+      - [IP 地址函数](/tidb-cloud-lake/sql/ip-address-functions.md)
       - [INET_ATON](/tidb-cloud-lake/sql/inet-aton.md)
       - [INET_NTOA](/tidb-cloud-lake/sql/inet-ntoa.md)
       - [IPV4_NUM_TO_STRING](/tidb-cloud-lake/sql/ipv4-num-to-string.md)
@@ -1164,7 +1164,7 @@
       - [TRY_INET_NTOA](/tidb-cloud-lake/sql/try-inet-ntoa.md)
       - [TRY_IPV4_NUM_TO_STRING](/tidb-cloud-lake/sql/try-ipv4-num-to-string.md)
       - [TRY_IPV4_STRING_TO_NUM](/tidb-cloud-lake/sql/try-ipv4-string-to-num.md)
-    - Context Functions
+    - 上下文函数
       - [CONNECTION_ID](/tidb-cloud-lake/sql/connection-id.md)
       - [CURRENT_CATALOG](/tidb-cloud-lake/sql/current-catalog.md)
       - [CURRENT_USER](/tidb-cloud-lake/sql/current-user.md)
@@ -1172,7 +1172,7 @@
       - [上下文函数](/tidb-cloud-lake/sql/context-functions.md)
       - [LAST_QUERY_ID](/tidb-cloud-lake/sql/last-query-id.md)
       - [VERSION](/tidb-cloud-lake/sql/version.md)
-    - System Functions
+    - 系统函数
       - [CLUSTERING_INFORMATION](/tidb-cloud-lake/sql/clustering-information.md)
       - [FUSE_BLOCK](/tidb-cloud-lake/sql/fuse-block.md)
       - [FUSE_COLUMN](/tidb-cloud-lake/sql/fuse-column.md)
@@ -1184,7 +1184,7 @@
       - [FUSE_TIME_TRAVEL_SIZE](/tidb-cloud-lake/sql/fuse-time-travel-size.md)
       - [FUSE_VIRTUAL_COLUMN](/tidb-cloud-lake/sql/fuse-virtual-column.md)
       - [系统函数](/tidb-cloud-lake/sql/system-functions-sql.md)
-    - Table Functions
+    - 表函数
       - [概览](/tidb-cloud-lake/sql/table-functions.md)
       - [INFER_SCHEMA](/tidb-cloud-lake/sql/infer-schema.md)
       - [INSPECT_PARQUET](/tidb-cloud-lake/sql/inspect-parquet.md)
@@ -1204,18 +1204,18 @@
       - [STREAM_STATUS](/tidb-cloud-lake/sql/stream-status.md)
       - [TAG_REFERENCES](/tidb-cloud-lake/sql/tag-references.md)
       - [TASK_HISTORY](/tidb-cloud-lake/sql/task-history.md)
-    - Sequence Functions
+    - 序列函数
       - [概览](/tidb-cloud-lake/sql/sequence-functions-overview.md)
       - [NEXTVAL](/tidb-cloud-lake/sql/nextval.md)
-    - Data Anonymization Functions
+    - 数据匿名化函数
       - [FEISTEL_OBFUSCATE](/tidb-cloud-lake/sql/feistel-obfuscate.md)
       - [数据匿名化函数](/tidb-cloud-lake/sql/data-anonymization-functions.md)
       - [MARKOV_GENERATE](/tidb-cloud-lake/sql/markov-generate.md)
       - [OBFUSCATE](/tidb-cloud-lake/sql/obfuscate.md)
-    - Test Functions
+    - 测试函数
       - [测试函数](/tidb-cloud-lake/sql/test-functions.md)
       - [SLEEP](/tidb-cloud-lake/sql/sleep.md)
-    - Other Functions
+    - 其他函数
       - [概览](/tidb-cloud-lake/sql/other-functions.md)
       - [ASSUME_NOT_NULL](/tidb-cloud-lake/sql/assume-not-null.md)
       - [EXISTS](/tidb-cloud-lake/sql/exists.md)
@@ -1227,16 +1227,16 @@
       - [TO_NULLABLE](/tidb-cloud-lake/sql/nullable.md)
       - [TYPEOF](/tidb-cloud-lake/sql/typeof.md)
   - [存储过程与脚本](/tidb-cloud-lake/sql/stored-procedure-scripting.md)
-- General Reference
+- 常规参考
   - [架构](/tidb-cloud-lake/guides/tidb-cloud-lake-architecture.md)
-  - Implementation Deep Dives
-    - [Fuse Engine](/tidb-cloud-lake/guides/how-fuse-engine-works.md)
+  - 实现原理深入解析
+    - [Fuse Engine 的工作原理](/tidb-cloud-lake/guides/how-fuse-engine-works.md)
     - [优化器](/tidb-cloud-lake/guides/how-optimizer-works.md)
     - [JSON](/tidb-cloud-lake/guides/how-json-variant-works.md)
     - [数据共享](/tidb-cloud-lake/guides/how-data-sharing-works.md)
   - [版本](/tidb-cloud-lake/guides/editions.md)
   - [平台与 Region](/tidb-cloud-lake/guides/platforms-regions.md)
-  - Benchmarks
+  - 基准测试
     - [数据摄取基准测试](/tidb-cloud-lake/guides/benchmark-data-ingestion.md)
     - [TPC-H SF100 基准测试](/tidb-cloud-lake/guides/benchmark-tpch-sf100.md)
     - [TPC-H SF1000 基准测试](/tidb-cloud-lake/guides/benchmark-tpch-sf1000.md)
