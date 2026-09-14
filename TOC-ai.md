@@ -161,6 +161,7 @@
   - [TiDB Cloud CLI Regions, Security, and Limitations](/ai/ti/reference/ti-regions-security-and-limitations.md)
   - [Migrate from tdc to TiDB Cloud CLI](/ai/ti/reference/ti-migrate-from-tdc.md)
   - [Troubleshoot TiDB Cloud CLI](/ai/ti/reference/ti-troubleshooting.md)
+  - [TiDB Cloud CLI Release Notes](/ai/ti/ti-release-notes.md)
 
 ## INTEGRATIONS
 

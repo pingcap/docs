@@ -105,6 +105,7 @@ The TiDB Cloud CLI (`ti`) lets users, scripts, CI jobs, and AI agents manage TiD
 | Use mounted workspaces, Git workspaces, journals, or delegated secrets | [Mount a Filesystem](/ai/ti/guides/mount-filesystem.md), [Manage Git Workspaces](/ai/ti/guides/manage-git-workspaces.md), [Use Filesystem Journals](/ai/ti/guides/use-filesystem-journals.md), and [Manage Filesystem Vault Secrets](/ai/ti/guides/manage-filesystem-vault-secrets.md) |
 | Follow an end-to-end automation or agent example | [Run a Daily TiDB Cloud CLI Workflow](/ai/ti/reference/ti-daily-workflow-example.md) or [Use TiDB Cloud Filesystem in an Agent Sandbox](/ai/ti/reference/ti-agent-sandbox-example.md) |
 | Look up commands, global options, output behavior, and errors | [TiDB Cloud CLI Command Reference](/ai/ti/reference/ti-cli-reference.md) |
+| Review version changes and upgrade compatibility | [TiDB Cloud CLI Release Notes](/ai/ti/ti-release-notes.md) |
 
 ## Integrations
 
