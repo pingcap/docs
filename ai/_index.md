@@ -8,7 +8,7 @@ summary: Build AI applications and agent workflows with TiDB using SQL, integrat
 TiDB provides data and workspace capabilities for building AI applications and running AI agent workflows.
 
 - For application development, you can use SQL or [Python SDK for TiDB AI (`pytidb`)](https://github.com/pingcap/pytidb) with structured data, vector search, full-text search, hybrid search, and AI-powered retrieval.
-- For AI agents and automation, you can use [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) to manage TiDB Cloud Starter instances and SQL workflows, and use TiDB Cloud Filesystems as persistent, shared storage across local machines, CI jobs, and ephemeral agent sandboxes. Filesystems also support mounted workspaces, Git workflows, journals, and delegated secrets.
+- For AI agents and automation, you can use [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) to manage TiDB Cloud Starter instances and SQL workflows, and use [TiDB Cloud Filesystems](/tidb-cloud-filesystem/_index.md) as persistent, shared storage across local machines, CI jobs, and ephemeral agent sandboxes. Filesystems also support mounted workspaces, Git workflows, journals, and delegated secrets.
 
 ## Get started
 
