@@ -5,7 +5,7 @@ summary: Permanently revoke a TiDB Cloud Filesystem token.
 
 # ti fs delete-file-system-token
 
-Permanently revokes a token by immutable token ID. Revocation is terminal and the service does not return revoked tokens in later list results. An owner token can revoke either token kind in the same Filesystem; a scoped token cannot use this command.
+Permanently revokes a Filesystem token. The token stops authenticating after the change propagates and no longer appears in list results. An owner token can revoke either token kind in the same Filesystem; a scoped token cannot use this command.
 
 > **Note:**
 >

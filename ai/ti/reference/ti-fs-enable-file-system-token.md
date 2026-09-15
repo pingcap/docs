@@ -5,7 +5,7 @@ summary: Enable a disabled TiDB Cloud Filesystem token.
 
 # ti fs enable-file-system-token
 
-Changes a disabled token to active by immutable token ID. Authentication caches can take approximately 10 seconds to converge. When `--fs-token` or `TI_FS_TOKEN` supplies owner Bearer authentication, the target must be an `fs_scoped` token. Configured TiDB Cloud API keys can enable either token kind.
+Re-enables a disabled Filesystem token. The token can take approximately 10 seconds to become usable. With owner token authentication, only scoped tokens can be enabled; TiDB Cloud API keys can enable either token kind.
 
 > **Note:**
 >

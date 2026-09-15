@@ -5,7 +5,7 @@ summary: Abandon a TiDB Cloud Filesystem layer.
 
 # ti fs delete-layer
 
-Logically abandons a layer. The command does not physically erase layer history and never enables cascade implicitly.
+Abandons a layer without erasing its history. If the layer has live descendants, the command fails unless you specify `--cascade`, which abandons the descendants first.
 
 > **Note:**
 >

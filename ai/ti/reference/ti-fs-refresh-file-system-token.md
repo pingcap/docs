@@ -5,7 +5,7 @@ summary: Rotate one TiDB Cloud Filesystem token and return its replacement plain
 
 # ti fs refresh-file-system-token
 
-Rotates the supplied bearer token in place.
+Rotates the supplied Filesystem token and returns its replacement value once. The previous value stops working after authentication changes propagate, which can take approximately 10 seconds.
 
 > **Warning:**
 >

@@ -5,7 +5,7 @@ summary: Fork a copy-on-write child layer in a TiDB Cloud Filesystem.
 
 # ti fs fork-layer
 
-Forks a writable child timeline from a parent layer tip or one parent checkpoint. Forking pins the parent overlay without copying its file tree.
+Creates a writable child layer from the current state of a parent layer or from one of its checkpoints. Changes to the child layer do not modify the parent layer.
 
 > **Note:**
 >

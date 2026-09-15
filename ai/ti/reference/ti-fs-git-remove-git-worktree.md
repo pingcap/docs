@@ -5,7 +5,7 @@ summary: Remove a linked Git worktree from a mounted TiDB Cloud Filesystem.
 
 # ti fs-git remove-git-worktree
 
-Removes a linked worktree without recursively deleting shared clean-tree data.
+Removes a linked Git worktree while preserving the shared Git data used by other worktrees.
 
 > **Note:**
 >

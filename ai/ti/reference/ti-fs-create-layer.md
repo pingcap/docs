@@ -5,7 +5,7 @@ summary: Create a layer in a TiDB Cloud Filesystem.
 
 # ti fs create-layer
 
-Creates an isolated change layer over a base root. If `--layer-id` is omitted, the service generates one.
+Creates a layer for recording isolated changes over a Filesystem base path. If `--layer-id` is omitted, the service generates one.
 
 > **Note:**
 >

@@ -5,9 +5,9 @@ summary: Create TiDB Cloud CLI-managed SQL users for a TiDB Cloud Starter instan
 
 # ti db create-db-sql-users
 
-Idempotently creates or repairs the read-only, read-write, and admin SQL users managed by `ti`. The command verifies that the cluster is Starter before calling SQL-user APIs or writing local credentials.
+Creates or repairs three `ti`-managed SQL users for a TiDB Cloud Starter instance: read-only, read-write, and admin. It stores their credentials locally so that later commands can select the appropriate user with `--read-only`, `--read-write`, or `--admin`.
 
-The users map to TiDB Cloud built-in database roles:
+These users have the following predefined access levels and built-in TiDB Cloud roles:
 
 | `ti` access mode | TiDB Cloud built-in role | Intended use |
 | --- | --- | --- |

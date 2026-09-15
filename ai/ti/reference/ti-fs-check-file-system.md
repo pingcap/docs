@@ -5,7 +5,7 @@ summary: Check TiDB Cloud Filesystem connectivity.
 
 # ti fs check-file-system
 
-Checks Filesystem selection, endpoint resolution, credentials, and Filesystem data-plane access.
+Verifies that the selected Filesystem is correctly configured and accessible, including its region, credentials, and file access.
 
 > **Note:**
 >

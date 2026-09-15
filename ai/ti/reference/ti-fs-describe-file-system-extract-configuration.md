@@ -5,7 +5,7 @@ summary: Describe media extraction configuration for a TiDB Cloud Filesystem.
 
 # ti fs describe-file-system-extract-configuration
 
-Describes the effective image, audio, or video extraction configuration for one Filesystem. This optional configuration does not affect normal Filesystem operations when it is not customized. The command requires TiDB Cloud API credentials and does not use an FS token.
+Shows the image, audio, or video extraction configuration for a Filesystem. This configuration is optional and does not affect normal Filesystem operations when it is not customized. This command requires TiDB Cloud API credentials and does not use a Filesystem token.
 
 > **Note:**
 >

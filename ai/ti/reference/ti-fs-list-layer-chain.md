@@ -5,7 +5,7 @@ summary: List the ancestry chain for a TiDB Cloud Filesystem layer.
 
 # ti fs list-layer-chain
 
-Lists the pinned ancestry from the root layer to a selected child, including each frame's sequence boundary.
+Lists the parent-child layer chain from the root layer to a selected child layer, including each layer's sequence boundary.
 
 > **Note:**
 >

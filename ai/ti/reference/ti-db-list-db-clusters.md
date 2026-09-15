@@ -5,9 +5,7 @@ summary: List TiDB Cloud Starter clusters.
 
 # ti db list-db-clusters
 
-Lists verified TiDB Cloud Starter instances in the effective region with pagination, filtering, ordering, and JMESPath projection. The required `--db-cluster-type` must be `starter`. Cross-region and non-Starter instances are omitted. An instance is also omitted when its API response has missing or conflicting service-plan or region metadata, because `ti` cannot verify that the instance is Starter and belongs to the effective region.
-
-The command incrementally fills each result page from TiDB Cloud API pages and returns an opaque `ti` `next_page_token`. It omits the server `total_size`, which can include resources outside the verified result.
+Lists TiDB Cloud Starter instances in the selected region, with optional pagination, filtering, ordering, and JMESPath projection. The required `--db-cluster-type` must be `starter`.
 
 > **Note:**
 >
@@ -72,11 +70,15 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 
 The effective region resolves from global `--region`, then `TI_REGION_CODE`, then the selected profile's `region_code`. User-supplied `--filter` expressions are combined with this mandatory region scope and cannot expand the result to other regions.
 
+Cross-region and non-Starter instances are omitted. An instance is also omitted if missing or conflicting service-plan or region information prevents `ti` from verifying that it is a Starter instance in the selected region.
+
 ## Filter and ordering behavior
 
 `ti` passes the user-supplied filter and ordering expressions to the TiDB Cloud Starter API. Invalid or unsupported expressions are rejected by the API. For the API contract, see [TiDB Cloud API v1beta1 Overview](/api/tidb-cloud-api-v1beta1.md).
 
 ## Page token reuse
+
+The command can retrieve multiple TiDB Cloud API pages to fill one result page and returns a `ti` `next_page_token`. It omits the API `total_size`, which can include resources outside the verified result.
 
 A page token can be reused only with the same profile, cluster type, region, filter, and ordering. If its replay page changed, restart the listing without `--page-token`.
 

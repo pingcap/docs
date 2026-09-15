@@ -5,7 +5,7 @@ summary: Temporarily disable a TiDB Cloud Filesystem token.
 
 # ti fs disable-file-system-token
 
-Disables an active token by immutable token ID without revoking it. A token used by a known local mount must be drained and unmounted first. When `--fs-token` or `TI_FS_TOKEN` supplies owner Bearer authentication, the target must be an `fs_scoped` token. Configured TiDB Cloud API keys can disable either token kind.
+Temporarily disables a Filesystem token without revoking it. You can re-enable the token later with [`ti fs enable-file-system-token`](/ai/ti/reference/ti-fs-enable-file-system-token.md). A token used by a known local mount must be drained and unmounted first. With owner token authentication, only scoped tokens can be disabled; TiDB Cloud API keys can disable either token kind.
 
 > **Note:**
 >

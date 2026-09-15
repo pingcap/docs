@@ -5,7 +5,7 @@ summary: Delete a TiDB Cloud Starter cluster.
 
 # ti db delete-db-cluster
 
-Deletes one TiDB Cloud Starter instance. `--wait` waits until deletion is observable. The command verifies the service plan before sending the delete request and rejects non-Starter or unverifiable clusters without sending `DELETE`.
+Deletes a TiDB Cloud Starter instance. Use `--wait` to wait until deletion completes. This command only accepts TiDB Cloud Starter instances and rejects other cluster types.
 
 > **Note:**
 >

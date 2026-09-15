@@ -5,7 +5,7 @@ summary: List token metadata for one TiDB Cloud Filesystem.
 
 # ti fs list-file-system-tokens
 
-Lists non-secret token metadata for one Filesystem. The response never contains token plaintext.
+Lists tokens for a Filesystem. Token values are never included in the output.
 
 > **Note:**
 >

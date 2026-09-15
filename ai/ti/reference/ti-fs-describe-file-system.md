@@ -5,7 +5,9 @@ summary: Describe a remote TiDB Cloud Filesystem.
 
 # ti fs describe-file-system
 
-Describes one remote Filesystem by its server-assigned ID. The response includes its authoritative display name, labels, placement, status, quota and usage, and the non-secret `has_local_token` hint. Quota data includes media and video extraction limits and counters when returned by the service. The command requires TiDB Cloud API credentials and does not use an FS token for authorization.
+Shows detailed information about a Filesystem, including its display name, labels, placement, status, quota, and usage. This command requires TiDB Cloud API credentials and does not use a Filesystem token.
+
+The output includes `has_local_token`, which indicates whether this machine has a matching local token. When available, quota data includes media and video extraction limits and usage.
 
 > **Note:**
 >

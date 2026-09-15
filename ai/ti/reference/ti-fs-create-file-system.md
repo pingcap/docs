@@ -5,9 +5,9 @@ summary: Create a TiDB Cloud Filesystem.
 
 # ti fs create-file-system
 
-Creates a Filesystem with a server-assigned ID and optional organization-visible display metadata. The response contains the owner `fs_token` once, and the CLI stores and selects the token in the current profile. `--wait` waits until data-plane access is ready.
+Creates a Filesystem and returns its ID and owner token. The CLI stores and selects the token in the current profile. Use `--wait` to wait until the Filesystem is ready for use.
 
-The display name and labels appear in `list-file-systems` and `describe-file-system` output. They do not select the Filesystem in later commands.
+You can optionally set a display name and labels. These values appear in `list-file-systems` and `describe-file-system` output but do not select the Filesystem in later commands.
 
 > **Important:**
 >

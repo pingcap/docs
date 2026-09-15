@@ -5,7 +5,7 @@ summary: Read a file from a TiDB Cloud Filesystem.
 
 # ti fs read-file
 
-Writes a remote file or byte range to stdout. The command alias is `ti fs cat`.
+Reads a remote file or byte range and outputs it to stdout. The command alias is `ti fs cat`.
 
 > **Note:**
 >

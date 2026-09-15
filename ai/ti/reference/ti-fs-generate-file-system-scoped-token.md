@@ -5,7 +5,7 @@ summary: Generate a path-and-operation-limited token for one TiDB Cloud Filesyst
 
 # ti fs generate-file-system-scoped-token
 
-Uses an owner Filesystem token to generate a finite `fs_scoped` token. The plaintext `fs_token` appears only in the successful response. A scoped token can access only its allowed path prefixes and operations.
+Generates a scoped token with limited path and operation access from an owner token. The token value appears only in the command output and cannot be retrieved later. A scoped token can access only its allowed path prefixes and operations.
 
 Scoped tokens support ordinary file, upload, Layer, and mount operations only when the requested paths and operations are covered. `chmod`, Git workspace APIs, Journal, Vault, SQL, fork, event, and token-management operations are not available to scoped tokens. Scoped tokens can refresh themselves without changing their scopes.
 
