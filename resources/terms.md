@@ -73,7 +73,7 @@
 | columnar storage engine | 列式存储引擎 |  |
 | combinatorial test | 组合测试 |  |
 | combined table | 总表 |   |
-| commit (Filesystem layer) | 提交 | Use this term for applying a TiDB Cloud Filesystem layer's changes to the base Filesystem. |
+| commit | 提交 | In TiDB Cloud Filesystem docs, use this term for applying a layer's changes to the base Filesystem. |
 | communicate | 通信 |  |
 | communication | 通信 |  |
 | comparison operation | 比较运算 |  |
@@ -140,7 +140,7 @@
 | earlier version | 以下版本 |  |
 | edit | 修改/编辑（如：修改 ini 文件） |  |
 | elect | 选举 |  |
-| embedding (vector representation) | 向量嵌入 | Use this term when "embedding" refers to a vector representation. For combinations such as "embedding model" or "embedding API", use "嵌入模型" or "嵌入 API". |
+| embedding | 向量嵌入 | Use this term when "embedding" refers to a vector representation. For combinations such as "embedding model" or "embedding API", use "嵌入模型" or "嵌入 API". |
 | engine file | 引擎文件 |  |
 | environment variable | 环境变量 |  |
 | equivalent/equal condition | 等值条件 |  |
@@ -152,7 +152,7 @@
 | expire | 过期 |  |
 | explicit transaction | 显式事务 |  |
 | expression | 表达式 |  |
-| extraction (media) | 媒体内容提取 | In TiDB Cloud Filesystem AI provider docs, it refers to extracting content from image, audio, or video files. |
+| extraction | 媒体内容提取 | In TiDB Cloud Filesystem AI provider docs, use this term when it refers to extracting content from image, audio, or video files. |
 | extendible hashing | 可扩充散列 |  |
 | external interface | 对外接口 |  |
 | eventual consistency | 最终一致性 |  |
@@ -172,7 +172,7 @@
 | float | float | |  |
 | Follower | Follower | A role in the Raft consensus algorithm |
 | force upgrade | 强制升级 |  |
-| fork (Filesystem layer) | 派生 | Use this term for creating a child layer from a parent layer or checkpoint. |
+| fork | 派生 | In TiDB Cloud Filesystem docs, use this term for creating a child layer from a parent layer or checkpoint. |
 | foundation class | 基础类库 |  |
 | framework | 框架 |  |
 | full backup | 全量备份 |  |
@@ -193,7 +193,7 @@
 | goroutine | 协程 | It also can be "coroutine". But it is suggested using "goroutine". |
 | graceful | 优雅的 |  |
 | granularity | 粒度 |  |
-| grant (Vault) | 授权 | In TiDB Cloud Filesystem Vault docs, it refers to a delegated access grant. |
+| grant | 授权 | In TiDB Cloud Filesystem Vault docs, it refers to a delegated access grant. |
 | grid computing | 网格计算 |  |
 | HA policy | 高可用策略 |  |
 | handle | 句柄 |  |
@@ -247,7 +247,7 @@
 | isolation | 隔离 |  |
 | isolation level | 隔离级别 |  |
 | Java DataBase Connectivity (JDBC) | Java 数据库连接 |  |
-| journal (Filesystem) | 日志（Journal） | In TiDB Cloud Filesystem Journal docs, keep the English term in parentheses on first use to distinguish it from a generic log file. |
+| journal | 日志（Journal） | In TiDB Cloud Filesystem Journal docs, keep the English term in parentheses on first use to distinguish it from a generic log file. |
 | kernel version | 内核版本 |  |
 | key-value pair(s) / KV pair(s) | 键值对 |  |
 | keyword | 关键字 |  |
@@ -257,7 +257,7 @@
 | latch contention | 锁竞争 |  |
 | latency | 延时 |  |
 | later version | 以上版本 |  |
-| layer (Filesystem) | 层 | In TiDB Cloud Filesystem docs, it refers to an isolated writable layer, similar to a Docker image layer. |
+| layer | 层 | In TiDB Cloud Filesystem docs, it refers to an isolated writable layer, similar to a Docker image layer. |
 | Leader | Leader | A role in the Raft consensus algorithm |
 | leak | 泄漏 |  |
 | least recently used (LRU) | 近期最少使用法 |  |
@@ -362,7 +362,7 @@
 | production environment | 生产环境 |  |
 | proof of concept (PoC) | 概念验证 |  |
 | process injection | 向子进程注入 Secret | In TiDB Cloud Filesystem Vault docs, it refers to setting permitted secret fields as environment variables before starting a child process through `run-with-secret`. Do not translate it as "进程注入". |
-| profile (CLI) | 配置（Profile） | In TiDB Cloud CLI docs, it refers to a named CLI configuration set, not a standalone configuration file. Keep the English term in parentheses on first use if needed. |
+| profile | 配置（Profile） | In TiDB Cloud CLI docs, it refers to a named CLI configuration set, not a standalone configuration file. Keep the English term in parentheses on first use if needed. |
 | public cloud | 公有云 |  |
 | public key | 公钥 |  |
 | pure virtual function | 纯虚函数 |  |
@@ -404,7 +404,7 @@
 | revoke | （权限）回收 |  |
 | rewind | 回退 |  |
 | rolling update | 滚动升级 |  |
-| rollback (Filesystem layer) | 回滚 | Use this term for rolling a TiDB Cloud Filesystem layer back without committing its changes. |
+| rollback | 回滚 | In TiDB Cloud Filesystem docs, use this term for rolling a layer back without committing its changes. |
 | rotate | 轮转 |  |
 | rough set | 粗糙集 |  |
 | routine | 例程 |  |
@@ -424,7 +424,7 @@
 | secondary indices | 次级索引 |  |
 | see also | 另请参阅 |  |
 | seed | 数据填充 |  |
-| secret (Vault) | Secret | In TiDB Cloud Filesystem Vault docs, it refers to a sensitive information object stored in Vault, not necessarily a cryptographic key. |
+| secret | Secret | In TiDB Cloud Filesystem Vault docs, it refers to a sensitive information object stored in Vault, not necessarily a cryptographic key. |
 | sequential flooding | 顺序泛洪 |  |
 | service | 服务 |  |
 | session | 会话 |  |
