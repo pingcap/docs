@@ -67,7 +67,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     - 後続のリクエストをブロックしないように、失敗する可能性のある"propose"および"read"リクエストを迅速にドロップすることをサポートします。
     - リースのデッドロック問題を修正
 - ホットストアがキーの統計情報を正しく生成しない問題を修正 [#1487](https://github.com/pingcap/pd/pull/1487)
-- 単一のPDノードからPDクラスターを強制的に再構築することをサポート [#1485](https://github.com/pingcap/pd/pull/1485)
+- 単一のPDノードからPDクラスターを強制的に再構築をサポート [#1485](https://github.com/pingcap/pd/pull/1485)
 - `regionScatterer`が無効な`OperatorStep` を生成する可能性がある問題を修正 [#1482](https://github.com/pingcap/pd/pull/1482)
 - `MergeRegion`オペレーターの短すぎるタイムアウト問題を修正 [#1495](https://github.com/pingcap/pd/pull/1495)
 - ホットリージョンのスケジュールに高い優先度を与えるサポート[#1492](https://github.com/pingcap/pd/pull/1492)
