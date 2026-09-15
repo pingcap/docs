@@ -159,7 +159,7 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer
     ```
 
-    > 上記のコマンドでは、 `v<CLUSTER_VERSION>`実際のクラスターバージョン（ `v8.5.3`など）に置き換え、 `<PD_ADDRESS>:2379`任意の PD ノードのアドレスに置き換える必要があります。例:
+    > 上記のコマンドでは、 `v<CLUSTER_VERSION>`を実際のクラスターバージョン（ `v8.5.3`など）に置き換え、 `<PD_ADDRESS>:2379`を任意の PD ノードのアドレスに置き換える必要があります。例:
     >
     > ```shell
     > tiup ctl:v8.5.3 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
@@ -245,7 +245,7 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
     ALTER TABLE t SET TIFLASH REPLICA 2;
     ```
 
-3. PDは、 TiFlashノードの`learner_config` `server.labels`と、テーブルのレプリカ数（ `count` ）に基づいて、テーブル`t`のレプリカを異なるアベイラビリティゾーンにスケジュールし、可用性を確保します。詳細については、 [トポロジラベルによるレプリカのスケジュール](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels/)を参照してください。次のSQL文を使用して、 TiFlashノード間のテーブルのリージョンの分散を確認できます。
+3. PDは、 TiFlashノードの`learner_config`の`server.labels`と、テーブルのレプリカ数（ `count` ）に基づいて、テーブル`t`のレプリカを異なるアベイラビリティゾーンにスケジュールし、可用性を確保します。詳細については、 [トポロジラベルによるレプリカのスケジュール](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels/)を参照してください。次のSQL文を使用して、 TiFlashノード間のテーブルのリージョンの分散を確認できます。
 
     ```sql
     -- Non-partitioned table

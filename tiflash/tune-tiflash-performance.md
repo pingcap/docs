@@ -129,7 +129,7 @@ mysql> explain analyze select count(*) from t1 join t2 where t1.a = t2.b group b
 13 rows in set (2.15 sec)
 ```
 
-有効化`tidb_opt_agg_push_down` :
+`tidb_opt_agg_push_down`を有効にする:
 
 ```sql
 mysql> set @@tidb_opt_agg_push_down = ON;
@@ -192,7 +192,7 @@ mysql> explain analyze select count(distinct a) from test.t;
 4 rows in set, 2 warnings (2 min 23.21 sec)
 ```
 
-有効化`tidb_opt_distinct_agg_push_down` :
+`tidb_opt_distinct_agg_push_down`を有効にする:
 
 ```sql
 mysql> set @@tidb_opt_distinct_agg_push_down = ON;
