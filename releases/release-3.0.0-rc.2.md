@@ -23,7 +23,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
     - 単調に増加するインデックス列に対する増分`Analyze`操作をサポートする [#10355](https://github.com/pingcap/tidb/pull/10355)
     - `Order By`節のNULL値は無視する [#10488](https://github.com/pingcap/tidb/pull/10488)
     - 列情報を簡素化する際の`UnionAll`論理演算子の誤ったスキーマ情報計算を修正 [#10384](https://github.com/pingcap/tidb/pull/10384)
-    - `Not`演算子プッシュダウンするときに元の式を変更しないでください [#10363](https://github.com/pingcap/tidb/pull/10363/files)
+    - `Not`演算子をプッシュダウンするときに元の式を変更しないようにします [#10363](https://github.com/pingcap/tidb/pull/10363/files)
     - ヒストグラムの`dump`相関`load`サポート [#10573](https://github.com/pingcap/tidb/pull/10573)
 
 - 実行エンジン
