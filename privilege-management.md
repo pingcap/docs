@@ -274,6 +274,7 @@ Dynamic privileges include:
 * `SYSTEM_VARIABLES_ADMIN`
 * `ROLE_ADMIN`
 * `CONNECTION_ADMIN`
+* `APPLICATION_PASSWORD_ADMIN` allows privilege owners to use the `RETAIN CURRENT PASSWORD` and `DISCARD OLD PASSWORD` clauses on their own account. For details, see [Dual password policy](/password-management.md#dual-password-policy).
 * `PLACEMENT_ADMIN` allows privilege owners to create, modify, and remove placement policies.
 * `DASHBOARD_CLIENT` allows privilege owners to log in to TiDB Dashboard.
 * `RESTRICTED_TABLES_ADMIN` allows privilege owners to view system tables when SEM is enabled.
