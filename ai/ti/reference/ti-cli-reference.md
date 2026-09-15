@@ -161,3 +161,7 @@ For configuration, security, compatibility, and troubleshooting details, see the
 | [TiDB Cloud CLI Regions, Security, and Limitations](/ai/ti/reference/ti-regions-security-and-limitations.md) | Review supported regions, credential boundaries, platform support, and limitations |
 | [Migrate from `tdc` to TiDB Cloud CLI](/ai/ti/reference/ti-migrate-from-tdc.md) | Migrate local state and environment variables from `tdc` v0.1.x |
 | [Troubleshoot TiDB Cloud CLI](/ai/ti/reference/ti-troubleshooting.md) | Diagnose configuration, authentication, routing, and command failures |
+
+## Release notes
+
+For the latest changes to TiDB Cloud CLI (`ti`), see the [TiDB Cloud CLI (`ti`) Release Notes](https://github.com/tidbcloud/ti-cli/releases).
