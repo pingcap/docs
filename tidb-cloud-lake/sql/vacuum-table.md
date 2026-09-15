@@ -24,7 +24,7 @@ The command does not return a result set.
 
 Cleanup respects `data_retention_time_in_days` (1 day by default). Historical data that has been removed cannot be queried through Time Travel or restored with Flashback.
 
-Snapshots referenced by unexpired [snapshot tags](../21-table-versioning/01-create-snapshot-tag.md), including tags without an expiration time, and the data they reference are protected from cleanup. Expired tags no longer protect their snapshots. VACUUM attempts to remove expired tags; a failure to delete an expired tag does not stop cleanup.
+Snapshots referenced by unexpired [snapshot tags](/tidb-cloud-lake/sql/create-snapshot-tag.md), including tags without an expiration time, and the data they reference are protected from cleanup. Expired tags no longer protect their snapshots. VACUUM attempts to remove expired tags; a failure to delete an expired tag does not stop cleanup.
 
 Use a session setting to adjust the retention period for subsequent cleanup operations:
 

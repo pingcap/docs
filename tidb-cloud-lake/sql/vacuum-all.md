@@ -21,7 +21,7 @@ VACUUM ALL
 
 Requires global `SUPER` privilege. There is no database filter or command option. The command does not return a result set.
 
-A failure that propagates from one step stops execution before the following steps. Per-table errors handled by batch cleanup retain the behavior described in [VACUUM TABLES](09-vacuum-tables.md). Cleanup already completed is not rolled back.
+A failure that propagates from one step stops execution before the following steps. Per-table errors handled by batch cleanup retain the behavior described in [VACUUM TABLES](/tidb-cloud-lake/sql/vacuum-tables.md). Cleanup already completed is not rolled back.
 
 ## Example
 
