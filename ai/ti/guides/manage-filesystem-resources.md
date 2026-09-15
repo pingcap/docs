@@ -5,7 +5,11 @@ summary: Learn how to safely create, inspect, check, select, and delete TiDB Clo
 
 # Manage TiDB Cloud Filesystem Resources
 
-In TiDB Cloud CLI, you can use [`ti fs` commands](/ai/ti/reference/ti-filesystem.md) to create, inspect, select, and delete Filesystem resources.
+TiDB Cloud Filesystem is a serverless distributed file system designed for AI agents and automation workloads. It provides a persistent, shareable file namespace that remains available independently of the local machine, sandbox, or CI runner that accesses it.
+
+You can access files directly through TiDB Cloud CLI commands or mount a Filesystem into a supported environment and work with it like a local file system. This makes it useful for preserving agent state, sharing files across isolated environments, handing off CI artifacts, and maintaining reusable workspaces.
+
+This document describes how to use [`ti fs` commands](/ai/ti/reference/ti-filesystem.md) to create, inspect, select, and delete Filesystem resources.
 
 ## Prerequisites
 

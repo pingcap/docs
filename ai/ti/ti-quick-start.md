@@ -114,6 +114,8 @@ Complete either of the following workflows.
 
 ### Option A: Create and use a Filesystem
 
+A TiDB Cloud Filesystem is a persistent, shareable cloud file system that you can use across local machines, CI jobs, sandboxes, and other ephemeral environments.
+
 1. Create a Filesystem, wait until it is ready, and save its server-assigned ID:
 
     ```bash
