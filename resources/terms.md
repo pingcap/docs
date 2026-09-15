@@ -35,7 +35,7 @@
 | binary literal | 二进制字面值 |  |
 | bit | 位 |  |
 | Bloom filter | 布隆过滤器 |  |
-| blobless clone | 无 Blob 克隆 | In Git workspace docs, it refers to a Git clone that uses `--filter=blob:none`. |
+| blobless clone | 无 blob 克隆 | In Git workspace docs, it refers to a Git clone that uses `--filter=blob:none`. |
 | boolean operation | 布尔运算 |  |
 | bootstrap | 启动/引导程序 |  |
 | breakpoint | 断点 |  |
@@ -77,7 +77,7 @@
 | communicate | 通信 |  |
 | communication | 通信 |  |
 | comparison operation | 比较运算 |  |
-| companion runtime | 伴生运行时 | In TiDB Cloud CLI docs, it refers to `ti-drive9`. |
+| companion runtime | 配套运行时 | In TiDB Cloud CLI docs, it refers to `ti-drive9`. |
 | compatible | 兼容 |  |
 | compile | 编译 |  |
 | composite index | 组合索引 |  |
@@ -123,7 +123,7 @@
 | decompress | 解压缩 |  |
 | dependency/dependencies | 依赖包 |  |
 | dependency | 依赖关系 |  |
-| delegated Vault token | 委托令牌 | In TiDB Cloud Filesystem Vault docs, it refers to a temporary token created from a grant. |
+| delegated Vault token | Vault 委派令牌 | In TiDB Cloud Filesystem Vault docs, it refers to a temporary token created from a grant. |
 | deploy | 部署 |  |
 | deployment | 部署 |  |
 | destroy the cluster | 销毁集群 |  |
@@ -140,7 +140,7 @@
 | earlier version | 以下版本 |  |
 | edit | 修改/编辑（如：修改 ini 文件） |  |
 | elect | 选举 |  |
-| embedding | 向量嵌入 | Use this term for AI embeddings. |
+| embedding (vector representation) | 向量嵌入 | Use this term when "embedding" refers to a vector representation. For combinations such as "embedding model" or "embedding API", use "嵌入模型" or "嵌入 API". |
 | engine file | 引擎文件 |  |
 | environment variable | 环境变量 |  |
 | equivalent/equal condition | 等值条件 |  |
@@ -213,7 +213,7 @@
 | hotfix | 热修复 |  |
 | hybrid deployment | 混合部署 |  |
 | Hybrid Transactional and Analytical Processing (HTAP) | HTAP (Hybrid Transactional and Analytical Processing) | 一般写英文形式 |
-| hydrate / hydration | 补全 | In TiDB Cloud Filesystem Git workspace docs, it means materializing missing clean Git data for a blobless clone. Keep command names, option values, and flags such as `hydrate-git-workspace` and `--hydrate` unchanged. |
+| hydrate / hydration | 补全 | In TiDB Cloud Filesystem Git workspace docs, it means materializing missing clean Git data for a blobless clone. On first use in body text, prefer "补全（hydrate）Git 数据" or "补全 Git 数据". Keep command names, option values, and flags such as `hydrate-git-workspace` and `--hydrate` unchanged. |
 | idempotent (idempotence) | 幂等 |  |
 | image | 镜像 |  |
 | image tag error | 镜像 tag 错误 |  |
@@ -302,8 +302,8 @@
 | monotone increasing | 单调递增 |  |
 | mount option(s) | 挂载参数 |  |
 | mount/mounting | 挂载 |  |
-| mount locator | 挂载定位器 | In TiDB Cloud CLI docs, it refers to a non-secret local metadata file used to find the background mount process. |
-| mount profile | 挂载配置 | In TiDB Cloud Filesystem docs, it refers to presets such as `coding-agent`, `portable`, and `none`. |
+| mount locator | 挂载定位文件 | In TiDB Cloud CLI docs, it refers to a non-secret local metadata file used to find the background mount process. |
+| mount profile | 挂载预设 | In TiDB Cloud Filesystem docs, it refers to presets such as `coding-agent`, `portable`, and `none`. |
 | multi-node | 多节点 |  |
 | multi-tenancy | 多租户技术 |  |
 | Multi-Version Concurrency Control (MVCC) | 多版本并发控制 |  |
@@ -361,8 +361,8 @@
 | privilege | 权限 |  |
 | production environment | 生产环境 |  |
 | proof of concept (PoC) | 概念验证 |  |
-| process injection | 进程注入 | In TiDB Cloud Filesystem Vault docs, it refers to injecting a secret into a child process through `run-with-secret`. |
-| profile (CLI) | 配置文件（Profile） | In TiDB Cloud CLI docs, it refers to a named CLI configuration set. Keep the English term in parentheses on first use if needed. |
+| process injection | 向子进程注入 Secret | In TiDB Cloud Filesystem Vault docs, it refers to setting permitted secret fields as environment variables before starting a child process through `run-with-secret`. Do not translate it as "进程注入". |
+| profile (CLI) | 配置（Profile） | In TiDB Cloud CLI docs, it refers to a named CLI configuration set, not a standalone configuration file. Keep the English term in parentheses on first use if needed. |
 | public cloud | 公有云 |  |
 | public key | 公钥 |  |
 | pure virtual function | 纯虚函数 |  |
@@ -420,11 +420,11 @@
 | schedule | 调度 |  |
 | Schema Evolution | Schema Evolution | A feature that allows TiDB Cloud Lake to automatically add columns that exist in source files but are missing from the target table during `COPY INTO` file loads when `ENABLE_SCHEMA_EVOLUTION` is enabled. |
 | scope | 作用域 |  |
-| scoped token | 限定范围令牌 | In TiDB Cloud Filesystem docs, it refers to a token limited by path, operation, and lifetime. |
+| scoped token | 范围受限令牌 | In TiDB Cloud Filesystem docs, it refers to a token limited by path, operation, and lifetime. |
 | secondary indices | 次级索引 |  |
 | see also | 另请参阅 |  |
 | seed | 数据填充 |  |
-| secret (Vault) | 密钥 | In TiDB Cloud Filesystem Vault docs, it refers to secret data stored in Vault. |
+| secret (Vault) | Secret | In TiDB Cloud Filesystem Vault docs, it refers to a sensitive information object stored in Vault, not necessarily a cryptographic key. |
 | sequential flooding | 顺序泛洪 |  |
 | service | 服务 |  |
 | session | 会话 |  |
