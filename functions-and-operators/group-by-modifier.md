@@ -170,7 +170,7 @@ SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(
 
 ## ROLLUP実行計画の解釈方法 {#how-to-interpret-the-rollup-execution-plan}
 
-多次元データ集約では、 `Expand`の演算子を用いてデータをコピーすることで、多次元グループ化のニーズに対応します。各データコピーは、特定の次元のグループ化に対応します。MPPモードでは、 `Expand`演算子はデータシャッフルを容易にし、複数のノード間で大量のデータを迅速に再編成・計算することで、各ノードの計算能力を最大限に活用します。TiFlashノードのないTiFlashクラスターでは、 `Expand`演算子は単一のTiDBノードでのみ実行されるため、次元グループ化の数（ `grouping set` ）が増えるにつれてデータの冗長性が向上します。
+多次元データ集約では、 `Expand`の演算子を用いてデータをコピーすることで、多次元グループ化のニーズに対応します。各データコピーは、特定の次元のグループ化に対応します。MPPモードでは、 `Expand`演算子はデータシャッフルを容易にし、複数のノード間で大量のデータを迅速に再編成・計算することで、各ノードの計算能力を最大限に活用します。TiFlashノードのないTiDBクラスターでは、 `Expand`演算子は単一のTiDBノードでのみ実行されるため、次元グループ化の数（ `grouping set` ）が増えるにつれてデータの冗長性が向上します。
 
 `Expand`オペレーターの実装は`Projection`オペレーターと似ています。違いは、 `Expand`は多階層の`Projection`であり、複数階層の射影演算式を含むことです。生データの各行に対して、 `Projection`オペレーターは結果に 1 行のみを生成しますが、 `Expand`オペレーターは結果に複数行を生成します（行数は射影演算式のレベル数に等しくなります）。
 
@@ -214,9 +214,9 @@ EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS prof
 
 この実行計画の例では、 `Expand_20`行の`operator info`列に`Expand`演算子の複数レベルの式が表示されています。これは2次元の式で構成されており、行末の`schema: [test.bank.profit, Column#6, Column#7, gid]`に`Expand`演算子のスキーマ情報が表示されています。
 
-`Expand`演算子のスキーマ情報では、 `GID`追加列として生成されます。その値は、 `Expand`演算子によって異なる次元のグループ化ロジックに基づいて計算され、現在のデータレプリカと`grouping set`関係を反映します。ほとんどの場合、 `Expand`演算子はBit-And演算を使用し、ROLLUPのグループ化項目の組み合わせを63通り表現でき、64次元のグループ化に対応します。このモードでは、TiDBは現在のデータレプリカを複製する際に、必要な次元の`grouping set`グループ化式が含まれているかどうかに応じて`GID`値を生成し、グループ化する列の順序で64ビットのUINT64値を埋めます。
+`Expand`演算子のスキーマ情報では、 `GID`が追加列として生成されます。その値は、 `Expand`演算子によって異なる次元のグループ化ロジックに基づいて計算され、現在のデータレプリカと`grouping set`関係を反映します。ほとんどの場合、 `Expand`演算子はBit-And演算を使用し、ROLLUPのグループ化項目の組み合わせを63通り表現でき、64次元のグループ化に対応します。このモードでは、TiDBは現在のデータレプリカを複製する際に、必要な次元の`grouping set`グループ化式が含まれているかどうかに応じて`GID`値を生成し、グループ化する列の順序で64ビットのUINT64値を埋めます。
 
-上の例では、グループ化リスト内の列の順序は`[year, month]`で、 ROLLUP 構文によって生成されるディメンショングループは`{year, month}` 、 `{year}` 、 `{}`です。ディメンショングループ`{year, month}`では、 `year`と`month`両方が必須列であるため、TiDBはそれらのビット位置にそれぞれ 1 と 1 を設定します。これにより、UINT64 の`11...0`形成され、これは10進数では 3 です。したがって、射影式は`[test.bank.profit, Column#6, Column#7, 3->gid]`となります（ `column#6` `year`に、 `column#7` `month`に対応します）。
+上の例では、グループ化リスト内の列の順序は`[year, month]`で、 ROLLUP 構文によって生成されるディメンショングループは`{year, month}` 、 `{year}` 、 `{}`です。ディメンショングループ`{year, month}`では、 `year`と`month`両方が必須列であるため、TiDBはそれらのビット位置にそれぞれ 1 と 1 を設定します。これにより、UINT64 の`11...0`が形成され、これは10進数では 3 です。したがって、射影式は`[test.bank.profit, Column#6, Column#7, 3->gid]`となります（ `column#6`は`year`に、 `column#7`は`month`に対応します）。
 
 以下は生データの行の例です。
 
@@ -242,4 +242,4 @@ EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS prof
 +------------+------+-------+-----+
 ```
 
-クエリ内の`SELECT`句は`GROUPING`関数を使用していることに注意してください。 `GROUPING`関数が`SELECT` 、 `HAVING` 、または`ORDER BY`句で使用されている場合、TiDB は論理最適化フェーズでそれを書き換え、 `GROUPING`関数と`GROUP BY`項目の関係をディメンショングループ（ `grouping set`とも呼ばれます）のロジックに関連する`GID`に変換し、この`GID`新しい`GROUPING`関数にメタデータとして入力します。
+クエリ内の`SELECT`句は`GROUPING`関数を使用していることに注意してください。 `GROUPING`関数が`SELECT` 、 `HAVING` 、または`ORDER BY`句で使用されている場合、TiDB は論理最適化フェーズでそれを書き換え、 `GROUPING`関数と`GROUP BY`項目の関係をディメンショングループ（ `grouping set`とも呼ばれます）のロジックに関連する`GID`に変換し、この`GID`を新しい`GROUPING`関数にメタデータとして入力します。

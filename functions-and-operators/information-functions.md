@@ -5,7 +5,7 @@ summary: 情報関数について学習します。
 
 # 情報関数 {#information-functions}
 
-TiDB は、MySQL 8.0 で利用可能な[情報関数](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html)ほとんどをサポートしています。
+TiDB は、MySQL 8.0 で利用可能な[情報関数](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html)のほとんどをサポートしています。
 
 ## TiDB がサポートする MySQL関数 {#tidb-supported-mysql-functions}
 
@@ -218,7 +218,7 @@ TABLE t1;
 >
 > - 上の例ではIDが2ずつ増加しますが、MySQLでは同じシナリオでIDが1ずつ増加します。互換性に関する詳細は[AUTO_INCREMENT ID](/mysql-compatibility.md#auto-increment-id)を参照してください。
 
-`LAST_INSERT_ID(expr)`関数は式を引数として受け取り、その値を`LAST_INSERT_ID()`次回呼び出し時に保存します。MySQL互換のシーケンス生成メソッドとして使用できます。TiDBは[シーケンス関数](/functions-and-operators/sequence-functions.md)もサポートしています。
+`LAST_INSERT_ID(expr)`関数は式を引数として受け取り、その値を`LAST_INSERT_ID()`の次回呼び出し時に保存します。MySQL互換のシーケンス生成メソッドとして使用できます。TiDBは[シーケンス関数](/functions-and-operators/sequence-functions.md)もサポートしています。
 
 ### ROW_COUNT() {#row_count}
 

@@ -5,7 +5,7 @@ summary: JSON 値を作成する JSON関数について学習します。
 
 # JSON値を作成するJSON関数 {#json-functions-that-create-json-values}
 
-TiDB は、MySQL 8.0 で利用可能な[JSON値を作成するJSON関数](https://dev.mysql.com/doc/refman/8.0/en/json-creation-functions.html)すべてをサポートします。
+TiDB は、MySQL 8.0 で利用可能な[JSON値を作成するJSON関数](https://dev.mysql.com/doc/refman/8.0/en/json-creation-functions.html)のすべてをサポートします。
 
 ## `JSON_ARRAY()` {#json_array}
 
