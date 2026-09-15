@@ -241,4 +241,4 @@ ti fs delete-file-system \
 
 ## Report a problem
 
-Include the TiDB Cloud CLI version, OS and architecture, command name, stable error code, and redacted logs. Never include API keys, FS or vault tokens, DB passwords, SQL containing private data, or file contents. Report issues at [github.com/tidbcloud/ti/issues](https://github.com/tidbcloud/ti/issues).
+Include the TiDB Cloud CLI version, OS and architecture, command name, stable error code, and redacted logs. Never include API keys, FS or vault tokens, DB passwords, SQL containing private data, or file contents. Report issues at [github.com/tidbcloud/ti-cli/issues](https://github.com/tidbcloud/ti-cli/issues).
