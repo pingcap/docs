@@ -1,0 +1,24 @@
+---
+title: JSON Operators
+summary: 本页介绍 TiDB Cloud Lake 中的 JSON 运算符。
+---
+
+# JSON 运算符
+
+| 运算符    | 描述                                                                 | 示例                                                                                                                                                                                   | 结果                       |
+| ----------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| `->`        | 使用索引或键检索 JSON 数组或对象，并返回一个 JSON 对象。             | - **Using a key**:<br/>`SELECT '{"Datalake": "Cloud Native Warehouse"}'::JSON -> 'Datalake'`<br/>- **Using an index**:<br/>`SELECT '["Datalake", "Cloud Native Warehouse"]'::JSON -> 1`   | `"Cloud Native Warehouse"` |
+| `->>`       | 使用索引或键检索 JSON 数组或对象，并返回一个字符串。                 | - **Using a key**:<br/>`SELECT '{"Datalake": "Cloud Native Warehouse"}'::JSON ->> 'Datalake'`<br/>- **Using an index**:<br/>`SELECT '["Datalake", "Cloud Native Warehouse"]'::JSON ->> 1` | `Cloud Native Warehouse`   |
+| `#>`        | 通过指定键路径检索 JSON 数组或对象，并返回一个 JSON 对象。           | `SELECT '{"example": {"Datalake": "Cloud Native Warehouse"}}'::JSON #> '{example, Datalake}'`                                                                                             | `"Cloud Native Warehouse"` |
+| `#>>`       | 通过指定键路径检索 JSON 数组或对象，并返回一个字符串。               | `SELECT '{"example": {"Datalake": "Cloud Native Warehouse"}}'::JSON #>> '{example, Datalake}'`                                                                                            | `Cloud Native Warehouse`   |
+| `?`         | 检查给定字符串是否作为键存在于 JSON 对象中，或是否存在于数组中；若为真则返回 1，否则返回 0。 | `SELECT '{"a":1,"b":2,"c":3}'::JSON ? 'b'`                                                                                                                                                | `true`                     |
+| `?\|`       | 检查给定数组中的任意字符串是否存在为键或数组元素；若为真则返回 1，否则返回 0。 | `SELECT '{"a":1,"b":2,"c":3}'::JSON ?\|` ['b','e']                                                                                                                                        | `true`                     |
+| `?&`        | 检查给定数组中的每个字符串是否都存在为键或数组元素；若为真则返回 1，否则返回 0。 | `SELECT '{"a":1,"b":2,"c":3}'::JSON ?& ['b','e']`                                                                                                                                         | `false`                    |
+| `@>`        | 检查左侧 JSON 表达式是否包含右侧 JSON 表达式中的所有键值对；若为真则返回 1，否则返回 0。 | `SELECT '{"name":"Alice","age":30}'::JSON @> '{"name":"Alice"}'::JSON`                                                                                                                    | `true`                     |
+| `<@`        | 检查左侧 JSON 表达式是否为右侧 JSON 表达式的子集；若为真则返回 1，否则返回 0。 | `SELECT '{"name":"Alice"}'::JSON <@ '{"name":"Bob"}'::JSON`                                                                                                                               | `false`                    |
+| `@@`        | 检查指定的 JSON 路径表达式是否与 JSON 数据中的某些条件匹配；若为真则返回 1，否则返回 0。 | `SELECT '{"a":1,"b":[1,2,3]}'::JSON @@ '$.a == 1'`                                                                                                                                        | `true`                     |
+| `@?`        | 检查针对指定 JSON 值的 JSON 路径表达式是否返回任意项；若为真则返回 1，否则返回 0。 | `SELECT '{"a":1,"b":[1,2,3]}'::JSON @? '$.b[3]'`                                                                                                                                          | `false`                    |
+| `- '<key>'` | 从 JSON 对象中删除一个键值对。                                       | `SELECT '{"a":1,"b":2}'::JSON - 'a'`                                                                                                                                                      | `{"b":2}`                  |
+| `- <index>` | 从数组中删除指定索引处的元素（负整数表示从末尾开始计数）。           | `SELECT '[1,2,3]'::JSON - 2`                                                                                                                                                              | `[1,2]`                    |
+| `#-`        | 通过键和/或索引删除一个键值对或数组元素。                            | `SELECT '{"a":1,"b":[1,2,3]}'::JSON #- '{b,2}'`                                                                                                                                           | `{"a":1,"b":[1,2]}`        |
+| \|\|        | 将多个 JSON 对象合并为一个对象。 | `SELECT '{"a": 1}'::JSON` \|\| `{"B": 1}'::JSON;` | `{"B":1,"a":1}`|
