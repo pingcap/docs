@@ -105,7 +105,7 @@ print(int.from_bytes(data[:4], byteorder='little'))  # 3
 print(zlib.decompress(data[4:]))  # b'ABC'
 ```
 
-短い文字列の場合、 `COMPRESS()`は入力よりも多くのバイト数を返す可能性があります。次の例では、 `a`が100文字の文字列が19バイトに圧縮されることを示しています。
+短い文字列の場合、 `COMPRESS()`は入力よりも多くのバイト数を返す可能性があります。次の例では、 `a`を100文字並べた文字列が19バイトに圧縮されることを示しています。
 
 ```sql
 WITH x AS (SELECT REPEAT('a',100) 'a')
