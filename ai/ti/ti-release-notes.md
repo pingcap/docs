@@ -83,7 +83,7 @@ If you use `tdc` v0.1.x, install `ti` directly instead of using `tdc update`. Re
 **New features**
 
 - Read Filesystem inventory from the service using TiDB Cloud API keys instead of listing only locally registered resources. Local credentials are indexed by the server-assigned Filesystem ID.
-- Add `ti fs import-file-system-token` to import an existing owner token on another machine. Data-access and mount commands can also infer the Filesystem ID from a supplied token, so a clean sandbox needs only `TI_FS_TOKEN` and `TI_REGION_CODE`. For more information, see [Use TiDB Cloud Filesystem in an Agent Sandbox](/ai/ti/reference/ti-agent-sandbox-example.md).
+- Add `ti fs import-file-system-token` to import an existing owner token on another machine. Data-access and mount commands can also infer the Filesystem ID from a supplied token, so a clean sandbox needs only `TI_FS_TOKEN` and `TI_REGION_CODE`. For more information, see [Use TiDB Cloud Filesystem in an Agent Sandbox](/ai/ti/guides/ti-agent-sandbox-example.md).
 
 **Compatibility changes**
 

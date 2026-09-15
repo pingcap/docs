@@ -108,7 +108,7 @@ ti fs unpack-file-system \
   --archive-path /workspace-overlay.tar.gz
 ```
 
-Use the same local overlay root when you mount the Filesystem on the destination machine. For all pack and unpack options, see the [`pack-file-system`](/ai/ti/reference/commands/fs/ti-fs-pack-file-system.md) and [`unpack-file-system`](/ai/ti/reference/commands/fs/ti-fs-unpack-file-system.md) references.
+Use the same local overlay root when you mount the Filesystem on the destination machine. For all pack and unpack options, see the [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) and [`unpack-file-system`](/ai/ti/reference/ti-fs-unpack-file-system.md) references.
 
 ## What's next
 

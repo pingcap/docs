@@ -55,4 +55,4 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 ## Related documentation
 
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)
-- [`ti fs list-layer-chain`](/ai/ti/reference/commands/fs/ti-fs-list-layer-chain.md)
+- [`ti fs list-layer-chain`](/ai/ti/reference/ti-fs-list-layer-chain.md)

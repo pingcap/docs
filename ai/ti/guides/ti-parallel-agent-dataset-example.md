@@ -98,5 +98,5 @@ ti fs delete-file-system --file-system-id "$TI_FS_FILE_SYSTEM_ID"
 ## What's next
 
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)
-- [Use a Filesystem in an Agent Sandbox](/ai/ti/reference/ti-agent-sandbox-example.md)
+- [Use a Filesystem in an Agent Sandbox](/ai/ti/guides/ti-agent-sandbox-example.md)
 - [TiDB Cloud CLI Regions, Security, and Limitations](/ai/ti/reference/ti-regions-security-and-limitations.md)

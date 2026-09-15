@@ -65,4 +65,4 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 ## Related documentation
 
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)
-- [`ti fs mount-file-system`](/ai/ti/reference/commands/fs/ti-fs-mount-file-system.md)
+- [`ti fs mount-file-system`](/ai/ti/reference/ti-fs-mount-file-system.md)

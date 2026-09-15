@@ -88,7 +88,7 @@ Use `--force` for worktree removal only when uncommitted changes can be discarde
 
 - Repository credentials are managed by Git, not `ti`.
 - The `coding-agent` mount profile keeps Git metadata, dependency directories, caches, build output, and other generated files on the local machine for performance.
-- Files kept locally by the `coding-agent` profile disappear with an ephemeral machine. Commit or push required Git changes, and use [`pack-file-system`](/ai/ti/reference/commands/fs/ti-fs-pack-file-system.md) with explicit `--path` values to preserve other local files that cannot be rebuilt.
+- Files kept locally by the `coding-agent` profile disappear with an ephemeral machine. Commit or push required Git changes, and use [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) with explicit `--path` values to preserve other local files that cannot be rebuilt.
 
 ## What's next
 

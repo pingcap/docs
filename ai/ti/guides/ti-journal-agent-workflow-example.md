@@ -93,4 +93,4 @@ Journals are append-only and currently have no delete command in the public `ti`
 ## What's next
 
 - [TiDB Cloud Filesystem Journal CLI Command Reference](/ai/ti/reference/ti-filesystem-journal.md)
-- [Delegate Secrets to an Agent](/ai/ti/reference/ti-vault-agent-secrets-example.md)
+- [Delegate Secrets to an Agent](/ai/ti/guides/ti-vault-agent-secrets-example.md)

@@ -115,4 +115,4 @@ ti fs delete-file-system \
 ## What's next
 
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)
-- [Use a Filesystem in an Agent Sandbox](/ai/ti/reference/ti-agent-sandbox-example.md)
+- [Use a Filesystem in an Agent Sandbox](/ai/ti/guides/ti-agent-sandbox-example.md)

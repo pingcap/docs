@@ -79,5 +79,5 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 
 ## Related documentation
 
-- [`ti fs generate-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-generate-file-system-token.md)
+- [`ti fs generate-file-system-token`](/ai/ti/reference/ti-fs-generate-file-system-token.md)
 - [Troubleshoot TiDB Cloud CLI](/ai/ti/reference/ti-troubleshooting.md)

@@ -6,7 +6,7 @@ aliases: ['/tidb/stable/vector-search-integrate-with-django-orm/','/tidb/dev/vec
 
 # Integrate TiDB Vector Search with Django ORM
 
-This tutorial walks you through how to use the [Django](https://www.djangoproject.com/) ORM to interact with [TiDB Vector Search](/ai/concepts/vector-search-overview.md), store embeddings, and perform vector search queries.
+This tutorial walks you through how to use the [Django](https://www.djangoproject.com/) ORM to interact with [TiDB Vector Search](/ai/guides/vector-search-overview.md), store embeddings, and perform vector search queries.
 
 > **Note:**
 >

@@ -11,7 +11,7 @@ The display name and labels appear in `list-file-systems` and `describe-file-sys
 
 > **Important:**
 >
-> The service does not reveal the initial owner token again. If the CLI warns that it could not store the token, save the returned value before closing the terminal. If the local credential is later lost, use TiDB Cloud API credentials with [`ti fs generate-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-generate-file-system-token.md) to create a replacement owner token.
+> The service does not reveal the initial owner token again. If the CLI warns that it could not store the token, save the returned value before closing the terminal. If the local credential is later lost, use TiDB Cloud API credentials with [`ti fs generate-file-system-token`](/ai/ti/reference/ti-fs-generate-file-system-token.md) to create a replacement owner token.
 
 > **Note:**
 >

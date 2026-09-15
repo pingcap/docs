@@ -49,8 +49,8 @@ Use the following table to find the reference for a top-level command or command
 
 | Command or command group | Purpose | Reference |
 | --- | --- | --- |
-| `configure` | Configure local profiles, API keys, and the default region. | [`ti configure`](/ai/ti/reference/commands/ti/ti-configure.md) |
-| `update` | Check for and install TiDB Cloud CLI updates. | [`ti update`](/ai/ti/reference/commands/ti/ti-update.md) |
+| `configure` | Configure local profiles, API keys, and the default region. | [`ti configure`](/ai/ti/reference/ti-configure.md) |
+| `update` | Check for and install TiDB Cloud CLI updates. | [`ti update`](/ai/ti/reference/ti-update.md) |
 | `db` | Manage TiDB Cloud Starter instances, branches, SQL users, connections, and SQL statements. | [`ti db` commands](/ai/ti/reference/ti-starter-database.md) |
 | `fs` | Manage Filesystem resources, AI providers, tokens, data, layers, and mounts. | [`ti fs` commands](/ai/ti/reference/ti-filesystem.md) |
 | `fs-git` | Manage Git workspaces on mounted Filesystems. | [`ti fs-git` commands](/ai/ti/reference/ti-filesystem-git.md) |

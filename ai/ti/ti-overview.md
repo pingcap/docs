@@ -83,6 +83,6 @@ Then continue based on what you want to do:
 
 - [Manage TiDB Cloud Starter Instances](/ai/ti/guides/manage-starter-instances.md)
 - [Manage TiDB Cloud Filesystems](/ai/ti/guides/manage-filesystem-resources.md)
-- **See end-to-end workflows**: Start with [Run a Daily TiDB Cloud CLI Workflow](/ai/ti/reference/ti-daily-workflow-example.md) or [Use TiDB Cloud Filesystem in an Agent Sandbox](/ai/ti/reference/ti-agent-sandbox-example.md)
+- **See end-to-end workflows**: Start with [Run a Daily TiDB Cloud CLI Workflow](/ai/ti/guides/ti-daily-workflow-example.md) or [Use TiDB Cloud Filesystem in an Agent Sandbox](/ai/ti/guides/ti-agent-sandbox-example.md)
 - **Look up a specific command**: Check the [TiDB Cloud CLI Command Reference](/ai/ti/reference/ti-cli-reference.md)
 - **Report a problem**: Create an issue in the [TiDB Cloud CLI GitHub repository](https://github.com/tidbcloud/ti-cli/issues).

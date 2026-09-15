@@ -35,7 +35,7 @@ ti fs mount-file-system \
 
 The CLI starts a background mount process and writes a local mount locator so that the drain and unmount commands can find the correct process.
 
-Use `--remote-path` to expose a subtree or `--read-only` to prevent writes. To mount a layer or checkpoint, select the FUSE driver and pass the appropriate layer options described in the [`mount-file-system` reference](/ai/ti/reference/commands/fs/ti-fs-mount-file-system.md).
+Use `--remote-path` to expose a subtree or `--read-only` to prevent writes. To mount a layer or checkpoint, select the FUSE driver and pass the appropriate layer options described in the [`mount-file-system` reference](/ai/ti/reference/ti-fs-mount-file-system.md).
 
 ## Mount in a container
 

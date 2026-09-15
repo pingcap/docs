@@ -90,5 +90,5 @@ A Filesystem whose `source` is `database_auto` uses database-managed embedding a
 
 ## Related documentation
 
-- [`ti fs describe-file-system-embedding-configuration`](/ai/ti/reference/commands/fs/ti-fs-describe-file-system-embedding-configuration.md)
+- [`ti fs describe-file-system-embedding-configuration`](/ai/ti/reference/ti-fs-describe-file-system-embedding-configuration.md)
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)

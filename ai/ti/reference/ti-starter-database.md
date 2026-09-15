@@ -13,20 +13,20 @@ A branch is a separate TiDB Cloud Starter instance that contains a diverged copy
 
 | Command | Description |
 |---|---|
-| [`create-db-cluster`](/ai/ti/reference/commands/db/ti-db-create-db-cluster.md) | Creates a TiDB Cloud Starter instance. |
-| [`list-db-clusters`](/ai/ti/reference/commands/db/ti-db-list-db-clusters.md) | Lists Starter instances in the effective region. |
-| [`describe-db-cluster`](/ai/ti/reference/commands/db/ti-db-describe-db-cluster.md) | Describes a TiDB Cloud Starter instance. |
-| [`update-db-cluster`](/ai/ti/reference/commands/db/ti-db-update-db-cluster.md) | Updates a TiDB Cloud Starter instance. |
-| [`delete-db-cluster`](/ai/ti/reference/commands/db/ti-db-delete-db-cluster.md) | Deletes a TiDB Cloud Starter instance. |
-| [`create-db-cluster-branch`](/ai/ti/reference/commands/db/ti-db-create-db-cluster-branch.md) | Creates a branch for a TiDB Cloud Starter instance. |
-| [`list-db-cluster-branches`](/ai/ti/reference/commands/db/ti-db-list-db-cluster-branches.md) | Lists branches for a TiDB Cloud Starter instance. |
-| [`describe-db-cluster-branch`](/ai/ti/reference/commands/db/ti-db-describe-db-cluster-branch.md) | Describes a branch for a TiDB Cloud Starter instance. |
-| [`delete-db-cluster-branch`](/ai/ti/reference/commands/db/ti-db-delete-db-cluster-branch.md) | Deletes a branch from a TiDB Cloud Starter instance. |
-| [`create-db-sql-users`](/ai/ti/reference/commands/db/ti-db-create-db-sql-users.md) | Creates or repairs role-based SQL users. |
-| [`format-db-connection-string`](/ai/ti/reference/commands/db/ti-db-format-db-connection-string.md) | Formats stored SQL credentials as a connection string. |
-| [`execute-sql-statement`](/ai/ti/reference/commands/db/ti-db-execute-sql-statement.md) | Executes one SQL statement. |
+| [`create-db-cluster`](/ai/ti/reference/ti-db-create-db-cluster.md) | Creates a TiDB Cloud Starter instance. |
+| [`list-db-clusters`](/ai/ti/reference/ti-db-list-db-clusters.md) | Lists Starter instances in the effective region. |
+| [`describe-db-cluster`](/ai/ti/reference/ti-db-describe-db-cluster.md) | Describes a TiDB Cloud Starter instance. |
+| [`update-db-cluster`](/ai/ti/reference/ti-db-update-db-cluster.md) | Updates a TiDB Cloud Starter instance. |
+| [`delete-db-cluster`](/ai/ti/reference/ti-db-delete-db-cluster.md) | Deletes a TiDB Cloud Starter instance. |
+| [`create-db-cluster-branch`](/ai/ti/reference/ti-db-create-db-cluster-branch.md) | Creates a branch for a TiDB Cloud Starter instance. |
+| [`list-db-cluster-branches`](/ai/ti/reference/ti-db-list-db-cluster-branches.md) | Lists branches for a TiDB Cloud Starter instance. |
+| [`describe-db-cluster-branch`](/ai/ti/reference/ti-db-describe-db-cluster-branch.md) | Describes a branch for a TiDB Cloud Starter instance. |
+| [`delete-db-cluster-branch`](/ai/ti/reference/ti-db-delete-db-cluster-branch.md) | Deletes a branch from a TiDB Cloud Starter instance. |
+| [`create-db-sql-users`](/ai/ti/reference/ti-db-create-db-sql-users.md) | Creates or repairs role-based SQL users. |
+| [`format-db-connection-string`](/ai/ti/reference/ti-db-format-db-connection-string.md) | Formats stored SQL credentials as a connection string. |
+| [`execute-sql-statement`](/ai/ti/reference/ti-db-execute-sql-statement.md) | Executes one SQL statement. |
 
 ## See also
 
 - [Manage TiDB Cloud Starter Instances](/ai/ti/guides/manage-starter-instances.md)
-- [Query TiDB Cloud Starter with Explicit SQL Roles](/ai/ti/reference/ti-query-sql-with-roles-example.md)
+- [Query TiDB Cloud Starter with Explicit SQL Roles](/ai/ti/guides/ti-query-sql-with-roles-example.md)

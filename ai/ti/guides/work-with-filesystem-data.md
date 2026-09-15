@@ -21,7 +21,7 @@ Upload a local file to a remote path:
 ti fs copy-file --from-local ./report.md --to-remote /reports/report.md
 ```
 
-[`copy-file`](/ai/ti/reference/commands/fs/ti-fs-copy-file.md) also supports downloads, streaming, appending, resuming, and recursive copies.
+[`copy-file`](/ai/ti/reference/ti-fs-copy-file.md) also supports downloads, streaming, appending, resuming, and recursive copies.
 
 ## Read and inspect data
 

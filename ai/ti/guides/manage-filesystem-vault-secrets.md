@@ -104,5 +104,5 @@ Vault mounts are unavailable on Windows. Direct secret reads and process injecti
 
 ## What's next
 
-- [Delegate TiDB Cloud Filesystem Vault Secrets to an Agent](/ai/ti/reference/ti-vault-agent-secrets-example.md)
+- [Delegate TiDB Cloud Filesystem Vault Secrets to an Agent](/ai/ti/guides/ti-vault-agent-secrets-example.md)
 - [TiDB Cloud Filesystem Vault CLI Command Reference](/ai/ti/reference/ti-filesystem-vault.md)

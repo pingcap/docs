@@ -56,17 +56,17 @@ List non-secret token metadata:
 ti fs list-file-system-tokens --file-system-id "<file-system-id>"
 ```
 
-Use [`disable-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-disable-file-system-token.md) to suspend a token temporarily and [`enable-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-enable-file-system-token.md) to restore it.
+Use [`disable-file-system-token`](/ai/ti/reference/ti-fs-disable-file-system-token.md) to suspend a token temporarily and [`enable-file-system-token`](/ai/ti/reference/ti-fs-enable-file-system-token.md) to restore it.
 
 ## Rotate or revoke a token
 
-Use [`refresh-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-refresh-file-system-token.md) to rotate a token. When you refresh the locally stored token, the CLI automatically updates the local credential file. When you refresh a token provided through `--fs-token` or `TI_FS_TOKEN`, the CLI returns the new token in the command output without storing it.
+Use [`refresh-file-system-token`](/ai/ti/reference/ti-fs-refresh-file-system-token.md) to rotate a token. When you refresh the locally stored token, the CLI automatically updates the local credential file. When you refresh a token provided through `--fs-token` or `TI_FS_TOKEN`, the CLI returns the new token in the command output without storing it.
 
 > **Note:**
 >
 > Refresh is non-idempotent. If a request might have succeeded but its response was lost, do not retry with the old token. Instead, generate a new owner token using TiDB Cloud credentials.
 
-Use [`delete-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-delete-file-system-token.md) to revoke a token permanently. If the deleted token matches the locally stored token, the CLI automatically removes the local credential.
+Use [`delete-file-system-token`](/ai/ti/reference/ti-fs-delete-file-system-token.md) to revoke a token permanently. If the deleted token matches the locally stored token, the CLI automatically removes the local credential.
 
 > **Note:**
 >
@@ -74,6 +74,6 @@ Use [`delete-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-delete-file-
 
 ## What's next
 
-- [Share a TiDB Cloud Filesystem Across Machines](/ai/ti/reference/ti-share-filesystem-across-machines-example.md)
-- [Use TiDB Cloud Filesystem in an Agent Sandbox](/ai/ti/reference/ti-agent-sandbox-example.md)
+- [Share a TiDB Cloud Filesystem Across Machines](/ai/ti/guides/ti-share-filesystem-across-machines-example.md)
+- [Use TiDB Cloud Filesystem in an Agent Sandbox](/ai/ti/guides/ti-agent-sandbox-example.md)
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)

@@ -32,7 +32,7 @@ ti fs-journal append-journal-entries \
   --entry-json '{"type":"review_started"}'
 ```
 
-For supported input forms and entry fields, see the [`append-journal-entries` reference](/ai/ti/reference/commands/fs-journal/ti-fs-journal-append-journal-entries.md).
+For supported input forms and entry fields, see the [`append-journal-entries` reference](/ai/ti/reference/ti-fs-journal-append-journal-entries.md).
 
 ## Read and search entries
 
@@ -60,5 +60,5 @@ ti fs-journal verify-journal --journal-id "<journal-id>"
 
 ## What's next
 
-- [Record an Agent Workflow in a TiDB Cloud Filesystem Journal](/ai/ti/reference/ti-journal-agent-workflow-example.md)
+- [Record an Agent Workflow in a TiDB Cloud Filesystem Journal](/ai/ti/guides/ti-journal-agent-workflow-example.md)
 - [TiDB Cloud Filesystem Journal CLI Command Reference](/ai/ti/reference/ti-filesystem-journal.md)

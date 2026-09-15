@@ -106,5 +106,5 @@ In CI, inject `TI_FS_AI_PROVIDER_API_KEY` from a masked secret. Unset the variab
 
 ## Related documentation
 
-- [`ti fs describe-file-system-extract-configuration`](/ai/ti/reference/commands/fs/ti-fs-describe-file-system-extract-configuration.md)
+- [`ti fs describe-file-system-extract-configuration`](/ai/ti/reference/ti-fs-describe-file-system-extract-configuration.md)
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)

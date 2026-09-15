@@ -95,5 +95,5 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 ## Related documentation
 
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)
-- [`ti fs generate-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-generate-file-system-token.md)
-- [`ti fs refresh-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-refresh-file-system-token.md)
+- [`ti fs generate-file-system-token`](/ai/ti/reference/ti-fs-generate-file-system-token.md)
+- [`ti fs refresh-file-system-token`](/ai/ti/reference/ti-fs-refresh-file-system-token.md)

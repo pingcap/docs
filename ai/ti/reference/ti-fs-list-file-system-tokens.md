@@ -67,6 +67,6 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 
 ## Related documentation
 
-- [`ti fs generate-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-generate-file-system-token.md)
-- [`ti fs generate-file-system-scoped-token`](/ai/ti/reference/commands/fs/ti-fs-generate-file-system-scoped-token.md)
+- [`ti fs generate-file-system-token`](/ai/ti/reference/ti-fs-generate-file-system-token.md)
+- [`ti fs generate-file-system-scoped-token`](/ai/ti/reference/ti-fs-generate-file-system-scoped-token.md)
 - [TiDB Cloud CLI Regions, Security, and Limitations](/ai/ti/reference/ti-regions-security-and-limitations.md)

@@ -6,7 +6,7 @@ aliases: ['/tidb/stable/vector-search-get-started-using-python/','/tidb/dev/vect
 
 # Get Started with TiDB + AI via Python
 
-This document demonstrates how to get started with [Vector Search](/ai/concepts/vector-search-overview.md) in TiDB using Python SDK. Follow along to build your first AI application working with TiDB.
+This document demonstrates how to get started with [Vector Search](/ai/guides/vector-search-overview.md) in TiDB using Python SDK. Follow along to build your first AI application working with TiDB.
 
 By following this document, you will learn how to:
 
@@ -108,7 +108,7 @@ Once connected, you can use the `client` object to operate tables, query data, a
 
 ## Create an embedding function
 
-When working with [embedding models](/ai/concepts/vector-search-overview.md#embedding-model), you can leverage the embedding function to automatically vectorize your data at both insertion and query stages. It natively supports popular embedding models like OpenAI, Jina AI, Hugging Face, Sentence Transformers, and others.
+When working with [embedding models](/ai/guides/vector-search-overview.md#embedding-model), you can leverage the embedding function to automatically vectorize your data at both insertion and query stages. It natively supports popular embedding models like OpenAI, Jina AI, Hugging Face, Sentence Transformers, and others.
 
 <SimpleTab>
 <div label="OpenAI">

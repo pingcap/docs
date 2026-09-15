@@ -247,7 +247,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - Programming language support for Python: [SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md), [Peewee](/ai/integrations/vector-search-integrate-with-peewee.md), and [Django ORM](/ai/integrations/vector-search-integrate-with-django-orm.md).
     - Sample applications and tutorials: perform semantic searches for documents using [Python](/ai/quickstart-via-python.md) or [SQL](/ai/quickstart-via-sql.md).
 
-  For more information, see [Vector search (beta) overview](/ai/concepts/vector-search-overview.md).
+  For more information, see [Vector search (beta) overview](/ai/guides/vector-search-overview.md).
 
 - [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) now offers weekly email reports for organization owners.
 

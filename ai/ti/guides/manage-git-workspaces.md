@@ -62,5 +62,5 @@ The CLI checks for uncommitted changes and rejects the removal if the worktree i
 
 ## What's next
 
-- [Prepare a Git Workspace for Agents on TiDB Cloud Filesystem](/ai/ti/reference/ti-git-workspace-for-agents-example.md)
+- [Prepare a Git Workspace for Agents on TiDB Cloud Filesystem](/ai/ti/guides/ti-git-workspace-for-agents-example.md)
 - [TiDB Cloud Filesystem Git CLI Command Reference](/ai/ti/reference/ti-filesystem-git.md)

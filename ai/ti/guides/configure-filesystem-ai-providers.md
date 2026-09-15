@@ -42,7 +42,7 @@ ti fs describe-file-system-extract-configuration \
 
 ## Update media extraction configuration
 
-Use [`update-file-system-extract-configuration`](/ai/ti/reference/commands/fs/ti-fs-update-file-system-extract-configuration.md) to enable, update, or disable image, audio, or video extraction. For example, configure image extraction through an OpenAI-compatible provider:
+Use [`update-file-system-extract-configuration`](/ai/ti/reference/ti-fs-update-file-system-extract-configuration.md) to enable, update, or disable image, audio, or video extraction. For example, configure image extraction through an OpenAI-compatible provider:
 
 ```shell
 ti fs update-file-system-extract-configuration \
@@ -76,7 +76,7 @@ ti fs describe-file-system-embedding-configuration \
 
 ## Update embedding configuration
 
-Use [`update-file-system-embedding-configuration`](/ai/ti/reference/commands/fs/ti-fs-update-file-system-embedding-configuration.md) to update the optional application-managed embedding configuration. For example:
+Use [`update-file-system-embedding-configuration`](/ai/ti/reference/ti-fs-update-file-system-embedding-configuration.md) to update the optional application-managed embedding configuration. For example:
 
 ```shell
 ti fs update-file-system-embedding-configuration \

@@ -28,7 +28,7 @@ List TiDB Cloud Starter instances in the effective region:
 ti db list-db-clusters --db-cluster-type starter --output text
 ```
 
-To get information about a TiDB Cloud Starter instance, pass its ID to [`describe-db-cluster`](/ai/ti/reference/commands/db/ti-db-describe-db-cluster.md).
+To get information about a TiDB Cloud Starter instance, pass its ID to [`describe-db-cluster`](/ai/ti/reference/ti-db-describe-db-cluster.md).
 
 ## Manage branches
 
@@ -71,7 +71,7 @@ ti db execute-sql-statement \
   --sql "SELECT 1"
 ```
 
-For a workflow that separates read-only, read-write, and administrative operations, see [Query TiDB Cloud Starter with Explicit SQL Roles](/ai/ti/reference/ti-query-sql-with-roles-example.md).
+For a workflow that separates read-only, read-write, and administrative operations, see [Query TiDB Cloud Starter with Explicit SQL Roles](/ai/ti/guides/ti-query-sql-with-roles-example.md).
 
 ## Delete an instance
 
@@ -84,4 +84,4 @@ ti db delete-db-cluster --db-cluster-id "<instance-id>" --wait
 ## What's next
 
 - [TiDB Cloud Starter CLI Command Reference](/ai/ti/reference/ti-starter-database.md)
-- [Run a Daily TiDB Cloud CLI Workflow](/ai/ti/reference/ti-daily-workflow-example.md)
+- [Run a Daily TiDB Cloud CLI Workflow](/ai/ti/guides/ti-daily-workflow-example.md)

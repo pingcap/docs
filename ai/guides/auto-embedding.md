@@ -9,7 +9,7 @@ The Auto Embedding feature automatically generates vector embeddings for your te
 
 > **Note:**
 >
-> For a complete example of auto embedding, see [Auto Embedding Example](/ai/examples/auto-embedding-with-pytidb.md).
+> For a complete example of auto embedding, see [Auto Embedding Example](/ai/guides/auto-embedding-with-pytidb.md).
 
 ## Basic usage
 

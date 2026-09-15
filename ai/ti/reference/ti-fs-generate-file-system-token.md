@@ -77,4 +77,4 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 ## Related documentation
 
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)
-- [`ti fs list-file-system-tokens`](/ai/ti/reference/commands/fs/ti-fs-list-file-system-tokens.md)
+- [`ti fs list-file-system-tokens`](/ai/ti/reference/ti-fs-list-file-system-tokens.md)

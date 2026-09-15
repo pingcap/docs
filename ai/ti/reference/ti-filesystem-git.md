@@ -11,12 +11,12 @@ summary: Reference every `ti fs-git` command for cloning, hydrating, and managin
 
 | Command | Description |
 |---|---|
-| [`clone-git-workspace`](/ai/ti/reference/commands/fs-git/ti-fs-git-clone-git-workspace.md) | Clones a repository into a mounted Filesystem path. |
-| [`hydrate-git-workspace`](/ai/ti/reference/commands/fs-git/ti-fs-git-hydrate-git-workspace.md) | Materializes clean Git data for an existing fast or blobless workspace. |
-| [`add-git-worktree`](/ai/ti/reference/commands/fs-git/ti-fs-git-add-git-worktree.md) | Creates a linked worktree from a base workspace. |
-| [`remove-git-worktree`](/ai/ti/reference/commands/fs-git/ti-fs-git-remove-git-worktree.md) | Removes a linked worktree. |
+| [`clone-git-workspace`](/ai/ti/reference/ti-fs-git-clone-git-workspace.md) | Clones a repository into a mounted Filesystem path. |
+| [`hydrate-git-workspace`](/ai/ti/reference/ti-fs-git-hydrate-git-workspace.md) | Materializes clean Git data for an existing fast or blobless workspace. |
+| [`add-git-worktree`](/ai/ti/reference/ti-fs-git-add-git-worktree.md) | Creates a linked worktree from a base workspace. |
+| [`remove-git-worktree`](/ai/ti/reference/ti-fs-git-remove-git-worktree.md) | Removes a linked worktree. |
 
 ## See also
 
 - [Manage Git Workspaces on TiDB Cloud Filesystem](/ai/ti/guides/manage-git-workspaces.md)
-- [Prepare a Git Workspace for Agents on TiDB Cloud Filesystem](/ai/ti/reference/ti-git-workspace-for-agents-example.md)
+- [Prepare a Git Workspace for Agents on TiDB Cloud Filesystem](/ai/ti/guides/ti-git-workspace-for-agents-example.md)
