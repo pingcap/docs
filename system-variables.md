@@ -2790,9 +2790,9 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 
 ### tidb_enable_shared_lock_upgrade
 
-> **Warning:**
+> **Note:**
 >
-> Shared lock upgrade is an experimental feature that can only be enabled on TiDB X. It is not recommended that you enable this feature in production environments.
+> Shared lock upgrade can only be enabled on TiDB X.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -3191,9 +3191,9 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_foreign_key_check_in_shared_lock <span class="version-mark">New in v8.5.6</span>
 
-> **Warning:**
+> **Note:**
 >
-> On TiDB X, using shared locks for foreign key checks is an experimental feature. It is not recommended that you use this feature in production environments. Before setting this variable to `ON`, you must set [`experimental.allow-enable-foreign-key-check-in-shared-lock`](/tidb-configuration-file.md#allow-enable-foreign-key-check-in-shared-lock) to `true`. When this configuration item is `false`, TiDB rejects attempts to set this variable to `ON`, but an `ON` value that has already been persisted or restored continues to take effect.
+> On TiDB X, before setting this variable to `ON`, you must set [`experimental.allow-enable-foreign-key-check-in-shared-lock`](/tidb-configuration-file.md#allow-enable-foreign-key-check-in-shared-lock) to `true`. When this configuration item is `false`, TiDB rejects attempts to set this variable to `ON`, but an `ON` value that has already been persisted or restored continues to take effect.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes

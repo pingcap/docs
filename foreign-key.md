@@ -187,9 +187,9 @@ If a pessimistic transaction needs to update or delete a parent table row after 
 
 Shared locks are not supported in aggressive locking mode or fair locking mode. Transactions that hold shared locks do not support one-phase commit (1PC) or Async Commit.
 
-> **Warning:**
+> **Note:**
 >
-> On TiDB X, using shared locks for foreign key checks is an experimental feature. It is not recommended that you use this feature in production environments. Before setting `tidb_foreign_key_check_in_shared_lock` to `ON`, you must set [`experimental.allow-enable-foreign-key-check-in-shared-lock`](/tidb-configuration-file.md#allow-enable-foreign-key-check-in-shared-lock) to `true`.
+> On TiDB X, before setting `tidb_foreign_key_check_in_shared_lock` to `ON`, you must set [`experimental.allow-enable-foreign-key-check-in-shared-lock`](/tidb-configuration-file.md#allow-enable-foreign-key-check-in-shared-lock) to `true`.
 
 ## Definition and metadata of foreign keys
 
