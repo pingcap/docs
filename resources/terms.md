@@ -106,6 +106,7 @@
 | data engine | 数据引擎 |  |
 | data hub | 数据中台 |  |
 | data integration | 数据集成 |  |
+| data lineage | 数据血缘 |  |
 | Data Manipulation Language (DML) | 数据操纵语言 |  |
 | data race | 数据竞争 |  |
 | database administrator (DBA) | 数据库管理员 |  |
