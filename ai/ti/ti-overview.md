@@ -12,7 +12,7 @@ With `ti`, you can manage TiDB Cloud Starter instances and use TiDB Cloud Filesy
 > **Note:**
 >
 > - TiDB Cloud CLI (`ti`) is currently in public preview. Its features and command-line interface might change without prior notice.
-> - For differences between TiDB Cloud CLI (`ti`) and TiDB Cloud CLI (`ticloud`), see [Differences between `ti` and `ticloud`](#differences-between-ti-and-ticloud).
+> - TiDB Cloud currently provides two CLIs with different scopes: [`ti`](https://github.com/tidbcloud/ti-cli) and [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli). To learn when to use `ti` or `ticloud`, see [Differences between `ti` and `ticloud`](#differences-between-ti-and-ticloud) and [When to use TiDB Cloud CLI (`ti`)](#when-to-use-tidb-cloud-cli-ti).
 
 ## When to use TiDB Cloud CLI (`ti`)
 
@@ -59,19 +59,21 @@ You can also use the top-level `ti configure` and `ti update` commands to config
 
 ## Differences between `ti` and `ticloud`
 
-Currently, TiDB Cloud provides two CLIs with different scopes: TiDB Cloud CLI (`ti`) and [TiDB Cloud CLI (`ticloud`)](/tidb-cloud/cli-reference.md).
+TiDB Cloud currently provides two CLIs with different scopes: `ti` and [`ticloud`](/tidb-cloud/cli-reference.md).
 
-| Interface | Best for | Key characteristics |
+`ti` is designed for automation with TiDB Cloud Starter and for managing TiDB Cloud Filesystems, while `ticloud` continues to support TiDB Cloud Essential and additional TiDB Cloud operations that are not available in `ti`.
+
+| CLI | Best for | Key characteristics |
 | --- | --- | --- |
-| `ti` | TiDB Cloud Filesystems and supported TiDB Cloud Starter workflows | JSON output by default; commands support non-interactive workflows, and `ti configure` can also prompt interactively |
-| `ticloud` | TiDB Cloud Essential and operations not available in `ti`, such as import, export, and audit-log commands | Supports both interactive and non-interactive modes |
+| `ti` | Supported TiDB Cloud Starter automation workflows and TiDB Cloud Filesystems | Designed for automation; outputs JSON by default; commands support non-interactive workflows, while `ti configure` can also prompt interactively |
+| `ticloud` | TiDB Cloud Essential, existing TiDB Cloud Starter workflows, and operations not available in `ti` (such as data import, data export, and audit log operations) | Supports additional TiDB Cloud operations that are not available in `ti`, and both interactive and non-interactive modes |
 
-`ti` does not replace `ticloud`.
+`ti` does not replace `ticloud`. Choose the CLI based on the resource and operation you need:
 
-- For automation of new TiDB Cloud Starter instances, it is recommended that you use `ti` when it supports the operations you need.
-- For management of TiDB Cloud Filesystems, you can only use `ti`.
-- If you have existing `ticloud` workflows of TiDB Cloud Starter or Essential instances, they still work.
-- For TiDB Cloud Essential or for operations that are not available in `ti`, use [TiDB Cloud CLI (`ticloud`)](/tidb-cloud/cli-reference.md).
+- For new automation workflows with TiDB Cloud Starter, use `ti` when it supports the operations you need.
+- For managing TiDB Cloud Filesystems, use `ti`.
+- If you have existing `ticloud` workflows for TiDB Cloud Starter or TiDB Cloud Essential, you can continue to use them.
+- For TiDB Cloud Essential or operations not available in `ti` (such as data import, data export, and audit log operations), use [`ticloud`](/tidb-cloud/cli-reference.md).
 
 ## Next steps
 
