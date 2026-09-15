@@ -87,11 +87,11 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Password Authentication](https://docs.pingcap.com/tidbcloud/tidb-cloud-password-authentication/?plan=premium)
 
-[User Roles](https://docs.pingcap.com/tidbcloud/manage-user-access/?plan=premium/#user-roles)
+[User Roles](https://docs.pingcap.com/tidbcloud/manage-user-access/?plan=premium#user-roles)
 
-[Manage User Profiles](https://docs.pingcap.com/tidbcloud/manage-user-access/?plan=premium/#manage-user-profiles)
+[Manage User Profiles](https://docs.pingcap.com/tidbcloud/manage-user-access/?plan=premium#manage-user-profiles)
 
-[Manage Organization Access](https://docs.pingcap.com/tidbcloud/manage-user-access/?plan=premium/#manage-organization-access)
+[Manage Organization Access](https://docs.pingcap.com/tidbcloud/manage-user-access/?plan=premium#manage-organization-access)
 
 [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list-premium/?plan=premium)
 
@@ -99,11 +99,11 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 <LearningPath label="Billing" icon="cloud2">
 
-[Pricing](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing/?plan=premium/#pricing-for-premium)
+[Pricing](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing/?plan=premium#pricing-for-premium)
 
-[Invoices](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing/?plan=premium/#invoices)
+[Invoices](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing/?plan=premium#invoices)
 
-[Credits](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing/?plan=premium/#credits)
+[Credits](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing/?plan=premium#credits)
 
 </LearningPath>
 

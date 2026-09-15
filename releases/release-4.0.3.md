@@ -1,6 +1,7 @@
 ---
 title: TiDB 4.0.3 Release Notes
 summary: TiDB 4.0.3 was released on July 24, 2020. New features include TiDB Dashboard improvements, TiFlash file encryption, and support for various tools. Improvements were made to TiDB, TiKV, PD, and TiDB Dashboard. Bug fixes were also implemented for TiDB, TiKV, PD, TiDB Dashboard, TiFlash, TiCDC, Backup & Restore, Dumpling, TiDB Lightning, and TiDB Binlog.
+aliases: ['/tidb/dev/release-4.0.3/','/tidb/v4.0/release-4.0.3','/tidb/v5.4/release-4.0.3','/tidb/v6.1/release-4.0.3','/tidb/v6.5/release-4.0.3','/tidb/v7.1/release-4.0.3','/tidb/v7.5/release-4.0.3','/tidb/v8.1/release-4.0.3']
 ---
 
 # TiDB 4.0.3 Release Notes

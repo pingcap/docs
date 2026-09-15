@@ -9,7 +9,7 @@ You can create TiDB node groups for [TiDB Cloud Dedicated](/tidb-cloud/select-cl
 
 With TiDB node groups, you can divide computing nodes into multiple TiDB node groups based on business requirements and configure unique connection endpoints for each TiDB node group. Your applications connect to the cluster through their respective endpoints, and requests route to the corresponding node group for processing. This ensures that resource overuse in one group does not affect other groups.
 
-> **Note**:
+> **Note:**
 >
 > The TiDB Node Group feature is **NOT** available for {{{ .starter }}} and {{{ .essential }}} instances.
 

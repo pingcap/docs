@@ -28,7 +28,7 @@ summary: "{{{ .lake }}} is built with security at its core, providing comprehens
 
 ### Secure Connectivity
 
-**AWS PrivateLink**: Enables private connections between your VPC and {{{ .lake }}} without exposing traffic to the public internet. Currently available on AWS only.
+**PrivateLink**: Enables private connections between your VPC and {{{ .lake }}} without exposing traffic to the public internet. For setup instructions, see [Connect with AWS PrivateLink](/tidb-cloud-lake/guides/connect-with-aws-privatelink.md) or [Connect with Alibaba Cloud PrivateLink](/tidb-cloud-lake/guides/connect-with-alibaba-cloud-privatelink.md).
 
 ## Encryption
 

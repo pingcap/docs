@@ -40,6 +40,8 @@ Grab the PrivateLink service name from the **Connect to {{{ .lake }}}** dialog, 
 
    ![Create Endpoint Button](/media/tidb-cloud-lake/create-endpoint-1.png)
 
+   ![Create Endpoint Sheet](/media/tidb-cloud-lake/create-endpoint-2.png)
+
    Select the previously created security group `HTTPS`:
 
    ![Create Endpoint SG](/media/tidb-cloud-lake/create-endpoint-3.png)

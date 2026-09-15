@@ -11,7 +11,7 @@ This document provides an overview of AI integrations for TiDB, including Auto E
 > **Note:**
 >
 > - The vector search feature in public preview. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - The vector search feature is available on [TiDB Self-Managed](/overview.md) and [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter). For TiDB Self-Managed, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> - The vector search feature is available on [TiDB Self-Managed](/overview.md) and [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter). For TiDB Self-Managed, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 ## Auto Embedding
 
@@ -36,11 +36,10 @@ The following table lists the supported embedding providers. For details on how 
 
 ## AI frameworks
 
-TiDB provides official support for the following AI frameworks, enabling you to easily integrate AI applications developed with these frameworks into TiDB Vector Search.
+TiDB provides official support for the following AI framework, enabling you to easily integrate AI applications developed with this framework into TiDB Vector Search.
 
 | AI framework | Tutorial                                                                                          |
 |---------------|---------------------------------------------------------------------------------------------------|
-| LangChain     | [Integrate Vector Search with LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)   |
 | LlamaIndex    | [Integrate Vector Search with LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md) |
 
 You can also use TiDB for various tasks such as document storage and knowledge graph storage for AI applications.

@@ -1,6 +1,7 @@
 ---
 title: TiDB 2.1.19 Release Notes
 summary: TiDB 2.1.19 was released on December 27, 2019. It includes various fixes and optimizations for SQL optimizer, SQL execution engine, server, DDL, TiKV, PD, and TiDB Ansible. Some notable fixes include resolving incorrect query results, memory overhead reduction, and fixing issues related to timezone, data duplication, and panic occurrences. The release also includes upgrades and optimizations for TiDB Binlog and TiDB Ansible.
+aliases: ['/tidb/dev/release-2.1.19/','/tidb/v2.1/release-2.1.19','/docs/dev/releases/release-2.1.19/','/docs/dev/releases/2.1.19/','/tidb/v5.4/release-2.1.19','/tidb/v6.1/release-2.1.19','/tidb/v6.5/release-2.1.19','/tidb/v7.1/release-2.1.19','/tidb/v7.5/release-2.1.19','/tidb/v8.1/release-2.1.19']
 ---
 
 # TiDB 2.1.19 Release Notes

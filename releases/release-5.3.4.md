@@ -1,6 +1,7 @@
 ---
 title: TiDB 5.3.4 Release Notes
 summary: TiDB 5.3.4 was released on November 24, 2022. The release includes improvements to TiKV and bug fixes for TiDB, PD, TiFlash, Dumpling, and TiCDC. Some of the key bug fixes include issues related to TLS certificate reloading, Region cache cleanup, wrong data writing, database-level privileges, and authentication failures. Other fixes address issues with logical operators, stream timeout, leader switchover, and data dumping.
+aliases: ['/tidb/dev/release-5.3.4/','/tidb/v5.3/release-5.3.4','/tidb/v5.4/release-5.3.4','/tidb/v6.1/release-5.3.4','/tidb/v6.5/release-5.3.4','/tidb/v7.1/release-5.3.4','/tidb/v7.5/release-5.3.4','/tidb/v8.1/release-5.3.4']
 ---
 
 # TiDB 5.3.4 Release Notes

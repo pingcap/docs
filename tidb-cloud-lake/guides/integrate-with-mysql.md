@@ -26,7 +26,7 @@ Before setting up MySQL data integration, ensure your MySQL instance meets the f
 
 ### Enable Binlog
 
-MySQL binlog must be enabled with ROW format for CDC and Snapshot + CDC modes:
+For all sync modes, enable MySQL binary logging. For **CDC Only** and **Snapshot + CDC**, the binary log **must** use `ROW` format and `FULL` row images:
 
 ```ini title='my.cnf'
 [mysqld]

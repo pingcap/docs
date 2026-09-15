@@ -46,9 +46,13 @@ This document lists the feature support status for TiDB Cloud BYOC.
     <td style="text-align:center;">🚧</td>
   </tr>
   <tr>
-    <td rowspan="8" style="background-color: white;">Resource management</td>
+    <td rowspan="9" style="background-color: white;">Resource management</td>
     <td>Pay as you use</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
+  </tr>
+  <tr>
+    <td>Resource pool management</td>
+    <td style="text-align:center;">🔒</td>
   </tr>
   <tr>
     <td>Automatic scaling based on workload</td>

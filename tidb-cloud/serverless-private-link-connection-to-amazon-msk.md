@@ -17,7 +17,7 @@ This document describes how to connect a {{{ .essential }}} instance to an [Amaz
 To view the AWS account ID and availability zones:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), go to the overview page of your {{{ .essential }}} instance, and then click **Settings** > **Networking** in the left navigation pane.
-2. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
+2. In the **AWS Private Endpoints for External Services** area, click **Create Private Endpoint for External Services**.
 3. In the dialog, note the AWS account ID and availability zones.
 
 ## Prerequisites for the Amazon MSK Provisioned cluster

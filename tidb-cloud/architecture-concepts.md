@@ -104,12 +104,15 @@ BYOC provides the following features:
 
 To meet different workload requirements, TiDB Cloud BYOC supports both Single-AZ and Multi-AZ deployments, enabling you to choose between lower-latency zonal deployment and higher-resilience deployment across multiple availability zones.
 
+You can set the high availability mode for each resource pool to **Zonal** or **Regional** when you [create the pool](/tidb-cloud/byoc/create-resource-pool-byoc.md). A zonal resource pool is deployed in a single availability zone, while a regional resource pool is deployed across multiple availability zones. TiDB Cloud determines the availability zone placement based on the BYOC region configuration and available cloud resources. TiDB Cloud BYOC instances created or restored in a resource pool inherit the high availability mode of the pool. After a resource pool is created, you cannot change its high availability mode or availability zone placement.
+
 ![TiDB Cloud BYOC Architecture](/media/tidb-cloud/byoc-architecture.png)
 
 A TiDB Cloud BYOC deployment includes the following major components:
 
 - **TiDB Cloud control plane**: provides the TiDB Cloud console, organization and project management, billing, lifecycle orchestration, monitoring views, alerting, and maintenance workflows.
 - **BYOC data plane**: runs the TiDB service and related infrastructure in your cloud account. TiDB Cloud operates this environment based on the permissions granted during BYOC onboarding.
+- **Resource pool**: defines the underlying physical resource, network, and capacity boundary for one or more {{{ .byoc }}} instances. Each resource pool has its own capacity configuration, resource pool CIDR, high availability mode, and AWS resource tags.
 - **TiDB service VPC**: hosts TiDB service components that serve application traffic.
 - **Observability service VPC**: hosts observability components used to collect metrics, logs, and operational data for the BYOC deployment.
 - **Application VPC**: hosts your applications. You manage this VPC and configure network connectivity to access the BYOC TiDB service.
@@ -127,6 +130,14 @@ TiDB Cloud Dedicated is designed for mission-critical businesses, offering high 
 Built on isolated cloud resources such as VPCs, VMs, managed Kubernetes services, and cloud storage, it leverages the infrastructure of major cloud providers. TiDB Cloud Dedicated clusters support the complete TiDB feature set, enabling rapid scaling, reliable backups, deployment within specific VPCs, and geographic-level disaster recovery.
 
 ![TiDB Cloud Dedicated Architecture](/media/tidb-cloud/tidb-cloud-dedicated-architecture.png)
+
+## {{{ .lake }}} {#lake}
+
+TiDB Cloud Lake is a cloud-native data warehouse service for analytics workloads. It separates compute and storage, allowing you to provision warehouses independently, scale with workload changes, and store data cost-effectively in object storage.
+
+TiDB Cloud Lake supports ANSI SQL, semi-structured data processing, vector search, and AI-oriented workflows in one platform. It is designed for teams that want a managed analytics experience without operating the underlying infrastructure themselves.
+
+For more details, see [TiDB Cloud Lake Overview](https://docs.pingcap.com/tidbcloudlake/lake-overview/).
 
 ## TiDB Cloud console
 

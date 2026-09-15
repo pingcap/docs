@@ -91,9 +91,9 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Password Authentication](https://docs.pingcap.com/tidbcloud/tidb-cloud-password-authentication/?plan=essential)
 
-[User Roles](https://docs.pingcap.com/tidbcloud/manage-user-access#user-roles/?plan=essential)
+[User Roles](https://docs.pingcap.com/tidbcloud/manage-user-access/?plan=essential#user-roles)
 
-[Manage User Profiles](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles/?plan=essential)
+[Manage User Profiles](https://docs.pingcap.com/tidbcloud/manage-user-access/?plan=essential#manage-user-profiles)
 
 [Manage Organization Access](https://docs.pingcap.com/tidbcloud/manage-user-access/?plan=essential#manage-organization-access)
 
@@ -107,9 +107,9 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Pricing](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)
 
-[Invoices](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#invoices/?plan=essential)
+[Invoices](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing/?plan=essential#invoices)
 
-[Credits](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#credits/?plan=essential)
+[Credits](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing/?plan=essential#credits)
 
 </LearningPath>
 

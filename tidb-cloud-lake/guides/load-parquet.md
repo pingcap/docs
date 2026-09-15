@@ -69,7 +69,7 @@ Result:
 
 More details about unload data to stage can be found in [COPY INTO location](/tidb-cloud-lake/sql/copy-into-location.md).
 
-### Step 3: Create Target Table
+### Step 3. Create Target Table
 
 ```sql
 CREATE TABLE books
@@ -100,7 +100,7 @@ Result:
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Step 5 (Option). Using SELECT to Copy Data
+### Step 5 (Optional). Using SELECT to Copy Data
 
 For more control, like transforming data while copying, use the SELECT statement. Learn more at [`SELECT from Parquet`](/tidb-cloud-lake/guides/query-parquet-files-in-stage.md)
 

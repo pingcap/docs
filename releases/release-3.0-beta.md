@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0 Beta Release Notes
 summary: TiDB 3.0 Beta, released on January 19, 2019, focuses on stability, SQL optimizer, statistics, and execution engine. New features include support for views, window functions, range partitioning, and hash partitioning. The SQL optimizer has been enhanced with various optimizations, including support for index join in transactions, constant propagation optimization, and support for subqueries in the DO statement. The SQL executor has also been optimized for better performance. Privilege management, server, compatibility, and DDL have all been improved. TiDB Lightning now supports batch import for a single table, while PD and TiKV have also received various enhancements and new features.
+aliases: ['/tidb/dev/release-3.0-beta/','/tidb/v3.0/release-3.0-beta','/docs/dev/releases/release-3.0-beta/','/docs/dev/releases/3.0beta/','/tidb/v5.4/release-3.0-beta','/tidb/v6.1/release-3.0-beta','/tidb/v6.5/release-3.0-beta','/tidb/v7.1/release-3.0-beta','/tidb/v7.5/release-3.0-beta','/tidb/v8.1/release-3.0-beta']
 ---
 
 # TiDB 3.0 Beta Release Notes

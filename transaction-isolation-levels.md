@@ -36,7 +36,7 @@ TiDB implements Snapshot Isolation (SI) consistency, which it advertises as `REP
 
 ## Repeatable Read isolation level
 
-The Repeatable Read isolation level only sees data committed before the transaction begins, and it never sees either uncommitted data or changes committed during transaction execution by concurrent transactions. However, the transaction statement does see the effects of previous updates executed within its own transaction, even though they are not yet committed.
+The Repeatable Read isolation level only sees data committed before the transaction begins, and it never sees either uncommitted data or changes committed during transaction execution by concurrent transactions. However, a statement within the transaction can see changes made by previous statements in the same transaction, even if those changes are not yet committed.
 
 For transactions running on different nodes, the start and commit order depends on the order that the timestamp is obtained from PD.
 
@@ -55,7 +55,7 @@ commit;                         |
 
 ### Difference between TiDB and ANSI Repeatable Read
 
-The Repeatable Read isolation level in TiDB differs from ANSI Repeatable Read isolation level, though they sharing the same name. According to the standard described in the [A Critique of ANSI SQL Isolation Levels](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf) paper, TiDB implements the Snapshot Isolation level. This isolation level does not allow strict phantoms (A3) but allows broad phantoms (P3) and write skews. In contrast, the ANSI Repeatable Read isolation level allows phantom reads but does not allow write skews.
+The Repeatable Read isolation level in TiDB differs from the ANSI Repeatable Read isolation level, though they share the same name. According to the standard described in the [A Critique of ANSI SQL Isolation Levels](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf) paper, TiDB implements the Snapshot Isolation level. This isolation level does not allow strict phantoms (A3) but allows broad phantoms (P3) and write skews. In contrast, the ANSI Repeatable Read isolation level allows phantom reads but does not allow write skews.
 
 ### Difference between TiDB and MySQL Repeatable Read
 

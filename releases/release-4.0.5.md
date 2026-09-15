@@ -1,6 +1,7 @@
 ---
 title: TiDB 4.0.5 Release Notes
 summary: TiDB 4.0.5 was released on August 31, 2020. The new version includes compatibility changes, new features, improvements, bug fixes, and updates to TiKV, TiFlash, Tools, PD, and TiDB Lightning. Some notable changes include support for the unified log format with TiDB, optimization of performance, bug fixes for various issues, and support for encryption at rest for data storage in TiFlash.
+aliases: ['/tidb/dev/release-4.0.5/','/tidb/v4.0/release-4.0.5','/tidb/v5.4/release-4.0.5','/tidb/v6.1/release-4.0.5','/tidb/v6.5/release-4.0.5','/tidb/v7.1/release-4.0.5','/tidb/v7.5/release-4.0.5','/tidb/v8.1/release-4.0.5']
 ---
 
 # TiDB 4.0.5 Release Notes

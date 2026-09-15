@@ -9,7 +9,9 @@ Set a cluster key when creating a table.
 
 Cluster key is intended to improve query performance by physically clustering data together. For example, when you set a column as your cluster key for a table, the table data will be physically sorted by the column you set. This will maximize the query performance if your most queries are filtered by the column.
 
-> **Note:** For String column, the cluster statistics uses only the first 8 bytes. You can use a substring to provide sufficient cardinality.
+> **Note:**
+>
+> For String column, the cluster statistics uses only the first 8 bytes. You can use a substring to provide sufficient cardinality.
 
 See also:
 

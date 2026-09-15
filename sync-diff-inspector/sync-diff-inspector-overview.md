@@ -69,7 +69,7 @@ To access table schemas and query data, sync-diff-inspector requires specific da
 - `RELOAD`: required to view table schemas.
 - `PROCESS`: required when both the upstream and downstream are TiDB clusters. It is used to query the `INFORMATION_SCHEMA.CLUSTER_INFO` table.
 
-> **Note**:
+> **Note:**
 > 
 > - **DO NOT** grant the [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md) privilege on all databases (`*.*`). Otherwise, sync-diff-inspector will attempt to access inaccessible databases, which causes errors.
 > - For MySQL data sources, ensure that the [`skip_show_database`](https://dev.mysql.com/doc/refman/8.4/en/server-system-variables.html#sysvar_skip_show_database) system variable is set to `OFF`. If this variable is set to `ON`, the check might fail.

@@ -13,7 +13,7 @@ Syncpoint uses the snapshot feature provided by TiDB and enables TiCDC to mainta
 
 After enabling the Syncpoint feature, you can use [Consistent snapshot read](#consistent-snapshot-read) and [Data consistency validation](#data-consistency-validation).
 
-To enable the Syncpoint feature, set the value of the TiCDC configuration item `enable-sync-point` to `true` when creating a replication task. After enabling Syncpoint, TiCDC writes the following information to the downstream TiDB cluster:
+To enable the Syncpoint feature, set the value of the changefeed configuration item `enable-sync-point` to `true` when creating a replication task. After enabling Syncpoint, TiCDC writes the following information to the downstream TiDB cluster:
 
 1. During the replication, TiCDC periodically (configured by `sync-point-interval`) aligns snapshots between the upstream and downstream and saves the upstream and downstream TSO correspondences in the downstream `tidb_cdc.syncpoint_v1` table.
 2. During the replication, TiCDC also periodically (configured by `sync-point-interval`) executes `SET GLOBAL tidb_external_ts = @@tidb_current_ts`, which sets a consistent snapshot point that has been replicated in backup clusters.
@@ -94,7 +94,7 @@ Here is a configuration example of the `Datasource config` section:
 
 ## Notes
 
-- Before TiCDC creates a changefeed, make sure that the value of the TiCDC configuration item `enable-sync-point` is set to `true`. Only in this way, Syncpoint is enabled and the `ts-map` is saved in the downstream. The default format of the configuration item `sync-point-interval` is `"h m s"`, for example `"1h30m30s"`, and the minimum value is `"30s"`. For the complete configuration information, see [TiCDC task configuration file](/ticdc/ticdc-changefeed-config.md).
+- Before you create a changefeed, make sure that the value of the changefeed configuration item `enable-sync-point` is set to `true`. Only in this way, Syncpoint is enabled and the `ts-map` is saved in the downstream. The default format of the configuration item `sync-point-interval` is `"h m s"`, for example `"1h30m30s"`, and the minimum value is `"30s"`. For the complete configuration information, see [TiCDC task configuration file](/ticdc/ticdc-changefeed-config.md).
 - When you perform data validation using Syncpoint, you need to modify the Garbage Collection (GC) time of TiKV to ensure that the historical data corresponding to snapshot is not collected by GC during the data check. It is recommended that you modify the GC time to 1 hour and recover the setting after the check.
 - The above example only shows the section of `Datasource config`. For complete configuration, refer to [sync-diff-inspector User Guide](/sync-diff-inspector/sync-diff-inspector-overview.md).
 - Starting from v6.4.0, only the changefeed with the `SYSTEM_VARIABLES_ADMIN` or `SUPER` privilege can use the TiCDC Syncpoint feature.

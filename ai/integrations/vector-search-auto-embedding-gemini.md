@@ -282,6 +282,6 @@ For all available options, see [Gemini documentation](https://ai.google.dev/gemi
 ## See also
 
 - [Auto Embedding Overview](/ai/integrations/vector-search-auto-embedding-overview.md)
-- [Vector Search](/ai/concepts/vector-search-overview.md)
+- [Vector Search](/ai/guides/vector-search-overview.md)
 - [Vector Functions and Operators](/ai/reference/vector-search-functions-and-operators.md)
 - [Hybrid Search](/ai/guides/vector-search-hybrid-search.md)

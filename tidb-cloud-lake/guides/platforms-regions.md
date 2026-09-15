@@ -5,14 +5,16 @@ summary: Learn about the supported cloud platforms and regions for TiDB Cloud La
 
 # Platforms & Regions
 
-{{{ .lake }}} is a cloud-native solution that currently supports [Amazon S3](https://aws.amazon.com/s3/) in the following regions:
+{{{ .lake }}} is a cloud-native solution that currently supports the following cloud providers and regions:
 
-| Platform                     | Region ID      |
-| ---------------------------- | -------------- |
-| AWS US West (Oregon)         | us-west-2      |
-| AWS Asia Pacific (Tokyo)     | ap-northeast-1 |
-| AWS US East (N. Virginia)    | us-east-1      |
-| AWS Asia Pacific (Singapore) | ap-southeast-1 |
+| Cloud Provider | Region Name              | Region ID      |
+|----------------|--------------------------|----------------|
+| AWS            | US West (Oregon)         | us-west-2      |
+| AWS            | Asia Pacific (Tokyo)     | ap-northeast-1 |
+| AWS            | US East (N. Virginia)    | us-east-1      |
+| AWS            | Asia Pacific (Singapore) | ap-southeast-1 |
+| AWS            | Asia Pacific (Mumbai)    | ap-south-1     |
+| Alibaba Cloud  | Japan (Tokyo)            | ap-northeast-1 |
 
 > **Note:**
 >

@@ -517,7 +517,7 @@ The system variables associated with the `CREATE INDEX` statement are `tidb_ddl_
 
 * TiDB Self-Managed and TiDB Cloud Dedicated support parsing the `FULLTEXT` syntax but do not support using the `FULLTEXT`, `HASH`, and `SPATIAL` indexes.
 
-    >**Note:**
+    > **Note:**
     >
     > Currently, only {{{ .starter }}} instances in certain AWS regions support [`FULLTEXT` syntax and indexes](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql).
 

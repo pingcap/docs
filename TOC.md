@@ -454,7 +454,7 @@
         - [Pessimistic Mode](/dm/feature-shard-merge-pessimistic.md)
         - [Optimistic Mode](/dm/feature-shard-merge-optimistic.md)
         - [Manually Handle Sharding DDL Lock](/dm/manually-handling-sharding-ddl-locks.md)
-      - [Migrate from MySQL Databases that Use GH-ost/PT-osc](/dm/feature-online-ddl.md)
+      - [Migrate from MySQL Databases that Use gh-ost/pt-osc](/dm/feature-online-ddl.md)
       - [Migrate Data to a Downstream TiDB Table with More Columns](/migrate-with-more-columns-downstream.md)
       - [Continuous Data Validation](/dm/dm-continuous-data-validation.md)
     - Maintain
@@ -720,6 +720,7 @@
       - [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)
       - [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)
       - [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)
+      - [`FLUSH STATS_DELTA`](/sql-statements/sql-statement-flush-stats-delta.md)
       - [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md)
       - [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md)
       - [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)

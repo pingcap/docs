@@ -22,3 +22,7 @@ Once all validation items are marked as **Pass**:
 
 1. The deployment is officially considered **Complete**.
 2. You can proceed with data migration or application integration.
+
+## What's next
+
+After the {{{ .byoc }}} deployment is validated, you can connect your applications to the instance, migrate data, or continue configuring operational capabilities such as monitoring, backup, and security. To further reduce the permissions granted during deployment, see [TiDB Cloud BYOC Security Hardening](/tidb-cloud/byoc/security-hardening.md).

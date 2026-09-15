@@ -1,6 +1,7 @@
 ---
 title: TiDB 2.1.17 Release Notes
 summary: "TiDB 2.1.17 Release Notes: New features include `WHERE` clause in `SHOW TABLE REGIONS`, `config-check` feature in TiKV and PD, `remove-tombstone` command in pd-ctl, and `worker-count` and `txn-batch` configuration items in Reparo. Improvements in PD's scheduling process and TiKV's starting process. Changed behaviors in TiDB slow query logs and configuration files. Fixes and optimizations in SQL Optimizer, SQL Execution Engine, Server, DDL, Monitor, TiKV, PD, TiDB Binlog, TiDB Lightning, and TiDB Ansible."
+aliases: ['/tidb/dev/release-2.1.17/','/tidb/v2.1/release-2.1.17','/docs/dev/releases/release-2.1.17/','/docs/dev/releases/2.1.17/','/tidb/v5.4/release-2.1.17','/tidb/v6.1/release-2.1.17','/tidb/v6.5/release-2.1.17','/tidb/v7.1/release-2.1.17','/tidb/v7.5/release-2.1.17','/tidb/v8.1/release-2.1.17']
 ---
 
 # TiDB 2.1.17 Release Notes

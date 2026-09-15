@@ -98,7 +98,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 * `SPATIAL` indexes are not supported.
 * TiDB Self-Managed and TiDB Cloud Dedicated supports parsing the `FULLTEXT` syntax but does not support using the `FULLTEXT` indexes.
 
-    >**Note:**
+    > **Note:**
     >
     > Currently, only {{{ .starter }}} instances in certain AWS regions support [`FULLTEXT` syntax and indexes](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql).
 

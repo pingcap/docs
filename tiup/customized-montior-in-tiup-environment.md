@@ -72,6 +72,30 @@ After the preceding configuration is done, when you deploy, scale out, scale in,
 
 After the preceding configuration is done, when you deploy, scale out, scale in, or reload a TiDB cluster, TiUP adds the content of the `additional_scrape_conf` field to the corresponding parameters of the Prometheus configuration file.
 
+### Customize Prometheus external labels
+
+Starting from TiUP v1.17.0, you can configure Prometheus global `external_labels` in the topology file.
+
+1. Open the `topology.yaml` file of the TiDB cluster.
+
+2. In the `monitoring_servers` configuration, add the `external_labels` field.
+
+    The following is a configuration example of `monitoring_servers` in the `topology.yaml` file:
+
+    ```yaml
+    monitoring_servers:
+    - host: xxxxxxx
+      external_labels:
+        environment: production
+        region: us-east-1
+    ```
+
+3. Do not configure the reserved labels `cluster` or `monitor`, and do not use label names that start with `__`. All label names must conform to the Prometheus label naming rules.
+
+After completing the preceding configuration, when you deploy, scale out, scale in, or reload a TiDB cluster, TiUP renders the `external_labels` field into the Prometheus global `external_labels` configuration.
+
+If you use an earlier version of TiUP that does not support this field to open the topology file, TiUP fails to parse the topology instead of ignoring the field.
+
 ## Customize Grafana configurations
 
 Currently, TiUP supports customizing Grafana Dashboard and other configurations.

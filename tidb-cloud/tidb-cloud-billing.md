@@ -25,6 +25,18 @@ For {{{ .essential }}}, you are charged based on the number of provisioned Reque
 
 For {{{ .premium }}}, you are billed based on the actual [Request Capacity Unit (RCU)](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu) consumption and the storage that you actually use, rather than the underlying backend nodes or provisioned disk size. See [{{{ .premium }}} Pricing Details](https://www.pingcap.com/tidb-cloud-premium-pricing-details/).
 
+<CustomContent plan="byoc">
+
+### Pricing for {{{ .byoc }}} {#pricing-for-byoc}
+
+For pricing information about {{{ .byoc }}}, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+</CustomContent>
+
+### Pricing for {{{ .lake }}} {#pricing-for-lake}
+
+For TiDB Cloud Lake, your costs consist of warehouse, storage, and cloud service fees. For details, see [TiDB Cloud Lake Pricing & Billing](https://docs.pingcap.com/tidbcloudlake/pricing-billing/).
+
 ## Invoices
 
 If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can manage the invoice information of TiDB Cloud. Otherwise, skip this section.
@@ -91,39 +103,23 @@ The **Bills** tab shows the billing summary by projects & instances and the bill
 
 > **Note:**
 >
-> The total amount in the monthly bill might differ from that in the daily usage details due to differences in precision:
+> Your **Bills** data and the data in **Cost Explorer** or **Usage Details** CSV download are processed and presented at different levels of granularity. **Bills** data is calculated for monthly settlement, while **Cost Explorer** and **Usage Details** CSV download provide more granular breakdowns, such as by day, service, project, cluster, or resource. As a result, the totals might vary slightly due to rounding at different aggregation levels.
 >
-> - The total amount in the monthly bill is rounded off to the 2nd decimal place.
-> - The total amount in the daily usage details is accurate to the 6th decimal place.
+> **Cost Explorer** and **Usage Details** CSV download are intended for usage and cost analysis. If these data sources differ, the amount shown on your invoice is the final amount you owe.
 
-### Row-based storage
+The following are billing explanations related to storage:
 
-TiDB tables use row-based storage by default, with data stored in **TiKV**.
+- **Row-based storage**: TiDB tables use row-based storage by default, with data stored in **TiKV**. <!--**Use case:** Core online transactional processing (OLTP) workloads that require low-latency reads and writes.-->
 
-<!--**Use case:** Core online transactional processing (OLTP) workloads that require low-latency reads and writes.-->
+- **Row-based storage with IA**: Row-based storage with Infrequent Access (IA) stores data in **remote object storage**, designed for data that is rarely accessed but still needs to be available for online queries. <!--**Use case:** Historical or archival data that is accessed infrequently but still needs to remain queryable while reducing storage costs.-->
 
-### Row-based storage with IA
-
-Row-based storage with Infrequent Access (IA) stores data in **remote object storage**. You can set the table's **Storage Class** to `IA` using the following SQL statement:
-
-```sql
-ALTER TABLE t1 STORAGE_CLASS='IA';
-```
-
-> **Warning:**
->
-> Infrequent Access is in **Private Preview** and is available only in selected regions for {{{ .premium }}} and {{{ .byoc }}}.
-
-<!--**Use case:** Historical or archival data that is accessed infrequently but still needs to remain queryable while reducing storage costs.-->
-
-> **Note:**
->
-> Infrequent Access is designed for data that is rarely accessed but still needs to be available for online queries.
+    > **Note:**
+    >
+    > Infrequent Access is currently in private preview and is only available upon request.
 
 > **Note:**
 >
 > IA data is cached on local disks to accelerate cold reads. You can select an IA cache level in **Overview** > **Capacity** > **Update Capacity** > **Storage Acceleration**. A higher cache level improves cold-read performance and increases cost. For how to change the cache level, see [Configure and Manage Tiered Storage](/tidb-cloud/tiered-storage-guide.md).
-
 **How the cache level affects billing on {{{ .premium }}}**
 
 Changing the cache level does not change the IA storage usage that your cluster reports. What changes is the coefficient that is applied to that usage when your bill is calculated. The IA storage unit price is 50% of the Standard storage unit price, and each cache level has a fixed coefficient on top of that base:
@@ -149,22 +145,12 @@ Before you confirm the change, the **Summary** pane on the **Update Capacity** p
 
 On {{{ .byoc }}}, no coefficient applies. The additional local cache resources that a higher cache level requires are provisioned in your own cloud account and are billed by your cloud provider.
 
-### Columnar storage
+- **Columnar storage**: Columnar storage is powered by the **TiFlash** engine. <!--**Use case:** Online analytical processing (OLAP) workloads that benefit from real-time columnar acceleration without requiring additional ETL.-->
 
-Columnar storage is powered by the **TiFlash** engine. To enable columnar storage for a table, add a TiFlash replica using the following SQL statement:
+- **Dual-layer encryption**: Both row-based storage and columnar storage support dual-layer encryption. This mechanism protects your data with two independent layers of encryption, ensuring that data remains protected even if one layer is compromised.
 
-```sql
-ALTER TABLE table_name SET TIFLASH REPLICA n;
-```
-
-<!--**Use case:** Online analytical processing (OLAP) workloads that benefit from real-time columnar acceleration without requiring additional ETL.-->
-
-### Dual-layer encryption
-
-Both **row-based storage** and **columnar storage** support dual-layer encryption. This mechanism protects your data with two independent layers of encryption, ensuring that data remains protected even if one layer is compromised.
-
-- **Infrastructure-level encryption:** The underlying cloud provider encrypts all data at rest using its native storage encryption mechanism.
-- **TiDB Cloud-level encryption:** On top of the cloud provider's encryption, TiDB Cloud automatically applies a second layer of encryption using either a customer-managed encryption key (CMEK) or an escrow key.
+    - Storage-layer encryption: The underlying cloud provider encrypts all data at rest using its native storage encryption mechanism.
+    - Database-layer encryption: On top of the cloud provider's encryption, TiDB Cloud automatically applies a second layer of encryption using either a customer-managed encryption key (CMEK) or an escrow key.
 
 <!--**Use case:** Workloads with strict security and compliance requirements, such as those in the financial services, government, and healthcare industries.-->
 

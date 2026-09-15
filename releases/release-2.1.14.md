@@ -1,6 +1,7 @@
 ---
 title: TiDB 2.1.14 Release Notes
 summary: TiDB 2.1.14 was released on July 04, 2019. It includes various bug fixes and improvements, such as fixing wrong query results, adding new system variables, optimizing memory usage, and adding new configuration items for TiDB Binlog and TiDB Ansible. Additionally, there are optimizations for TiKV and PD.
+aliases: ['/tidb/dev/release-2.1.14/','/tidb/v2.1/release-2.1.14','/docs/dev/releases/release-2.1.14/','/docs/dev/releases/2.1.14/','/tidb/v5.4/release-2.1.14','/tidb/v6.1/release-2.1.14','/tidb/v6.5/release-2.1.14','/tidb/v7.1/release-2.1.14','/tidb/v7.5/release-2.1.14','/tidb/v8.1/release-2.1.14']
 ---
 
 # TiDB 2.1.14 Release Notes

@@ -46,7 +46,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 + User-defined functions
 + `FULLTEXT` syntax and indexes [#1793](https://github.com/pingcap/tidb/issues/1793)
 
-    >**Note:**
+    > **Note:**
     >
     > Currently, only {{{ .starter }}} instances in certain AWS regions support [`FULLTEXT` syntax and indexes](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql). TiDB Self-Managed and TiDB Cloud Dedicated support parsing the `FULLTEXT` syntax but do not support using the `FULLTEXT` indexes.
 

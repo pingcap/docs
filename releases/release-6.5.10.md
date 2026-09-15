@@ -1,6 +1,7 @@
 ---
 title: TiDB 6.5.10 Release Notes
 summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.5.10.
+aliases: ['/tidb/dev/release-6.5.10/','/tidb/v6.5/release-6.5.10','/tidb/v5.4/release-6.5.10','/tidb/v6.1/release-6.5.10','/tidb/v7.1/release-6.5.10','/tidb/v7.5/release-6.5.10','/tidb/v8.1/release-6.5.10']
 ---
 
 # TiDB 6.5.10 Release Notes

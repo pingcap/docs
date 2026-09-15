@@ -1,6 +1,7 @@
 ---
 title: TiDB 2.0.9 Release Notes
 summary: TiDB 2.0.9 was released on November 19, 2018, with significant improvements in system compatibility and stability. The release includes fixes for various issues, such as empty statistics histogram, panic issue with UNION ALL statement, stack overflow issue, and support for specifying utf8mb4 character set. PD and TiKV also received fixes for issues related to server startup failure and interface limits.
+aliases: ['/tidb/dev/release-2.0.9/','/tidb/v2.0/release-2.0.9','/docs/dev/releases/release-2.0.9/','/docs/dev/releases/209/','/tidb/v5.4/release-2.0.9','/tidb/v6.1/release-2.0.9','/tidb/v6.5/release-2.0.9','/tidb/v7.1/release-2.0.9','/tidb/v7.5/release-2.0.9','/tidb/v8.1/release-2.0.9']
 ---
 
 # TiDB 2.0.9 Release Notes

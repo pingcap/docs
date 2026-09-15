@@ -101,7 +101,7 @@ A new TiDB Cloud dashboard will be available in New Relic after the pending [PR]
         ],
         ```
 
-        > **Note**:
+        > **Note:**
         >
         > To avoid integration errors, make sure your account ID is added in all `"accountIds"` fields in the JSON file.
 

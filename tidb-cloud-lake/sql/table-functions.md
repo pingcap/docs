@@ -43,6 +43,7 @@ This page provides reference information for the table functions in {{{ .lake }}
 | [TASK_HISTROY](/tidb-cloud-lake/sql/task-history.md) | Shows task execution history | `SELECT * FROM TASK_HISTROY('mytask')` |
 | [POLICY_REFERENCES](/tidb-cloud-lake/sql/policy-references.md) | Returns associations between security policies and tables/views | `SELECT * FROM POLICY_REFERENCES(POLICY_NAME => 'mypolicy')` |
 | [TAG_REFERENCES](/tidb-cloud-lake/sql/tag-references.md) | Returns tags assigned to a database object | `SELECT * FROM TAG_REFERENCES('mydb.mytable', 'TABLE')` |
+| [GET_LINEAGE](/tidb-cloud-lake/sql/get-lineage.md) | Returns upstream or downstream object and column lineage | `SELECT * FROM GET_LINEAGE('mydb.mytable', 'TABLE', 'UPSTREAM')` |
 
 ## Storage Engine Functions
 

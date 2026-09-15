@@ -6,7 +6,7 @@ aliases: ['/tidb/stable/vector-search-full-text-search-python/','/tidbcloud/vect
 
 # Full-Text Search with Python
 
-Unlike [Vector Search](/ai/concepts/vector-search-overview.md), which focuses on semantic similarity, full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
+Unlike [Vector Search](/ai/guides/vector-search-overview.md), which focuses on semantic similarity, full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
 
 The full-text search feature in TiDB provides the following capabilities:
 

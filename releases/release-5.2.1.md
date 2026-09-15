@@ -1,6 +1,7 @@
 ---
 title: TiDB 5.2.1 Release Notes
 summary: TiDB 5.2.1 was released on September 9, 2021. Bug fixes include resolving an error in TiDB caused by a wrong execution plan and fixing the issue of unavailable TiKV caused by Raftstore deadlock when migrating Regions.
+aliases: ['/tidb/dev/release-5.2.1/','/tidb/v5.2/release-5.2.1','/tidb/v5.4/release-5.2.1','/tidb/v6.1/release-5.2.1','/tidb/v6.5/release-5.2.1','/tidb/v7.1/release-5.2.1','/tidb/v7.5/release-5.2.1','/tidb/v8.1/release-5.2.1']
 ---
 
 # TiDB 5.2.1 Release Notes
