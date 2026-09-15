@@ -13,7 +13,7 @@ TiDB では、次のシステム変数を使用してウィンドウ関数を制
 - [`tidb_enable_pipelined_window_function`](/system-variables.md#tidb_enable_pipelined_window_function) : この変数を使用して、ウィンドウ関数のパイプライン実行アルゴリズムを無効にすることができます。
 - [`windowing_use_high_precision`](/system-variables.md#windowing_use_high_precision) : この変数を使用して、ウィンドウ関数の高精度モードを無効にすることができます。
 
-ウィンドウ関数[ここに記載](/tiflash/tiflash-supported-pushdown-calculations.md) TiFlashにプッシュダウンできます。
+[ここに記載されている](/tiflash/tiflash-supported-pushdown-calculations.md)ウィンドウ関数は、TiFlashにプッシュダウンできます。
 
 TiDBは、 `GROUP_CONCAT()`と`APPROX_PERCENTILE()`を除く[`GROUP BY`集計関数](/functions-and-operators/aggregate-group-by-functions.md)すべてをウィンドウ関数として使用できます。さらに、TiDBは以下のウィンドウ関数もサポートしています。
 

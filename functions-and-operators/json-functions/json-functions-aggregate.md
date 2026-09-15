@@ -7,7 +7,7 @@ summary: JSON 値を集約する JSON関数について学習します。
 
 このページにリストされている関数は、TiDB がサポートする[集計関数](/functions-and-operators/aggregate-group-by-functions.md)の一部ですが、JSON の操作に特化しています。
 
-TiDB は MySQL 8.0 で利用可能な[2つの集計JSON関数](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html)サポートします。
+TiDB は MySQL 8.0 で利用可能な[2つの集計JSON関数](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html)をサポートします。
 
 ## `JSON_ARRAYAGG()` {#json_arrayagg}
 
