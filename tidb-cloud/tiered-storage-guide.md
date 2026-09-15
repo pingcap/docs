@@ -9,7 +9,7 @@ This document explains how to configure and manage Infrequent Access (IA) storag
 
 > **Note:**
 >
-> Tiered storage is in **Private Preview** for {{{ .premium }}} and {{{ .byoc }}}. The behavior described on this page reflects the current preview implementation and might change before general availability (GA).
+> Tiered storage is in **private preview** for {{{ .premium }}} and {{{ .byoc }}}. The behavior described on this page reflects the current preview implementation and might change before general availability (GA).
 
 ## How to use
 

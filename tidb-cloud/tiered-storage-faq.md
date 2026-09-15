@@ -9,7 +9,7 @@ This document answers common questions about Infrequent Access (IA) storage, inc
 
 > **Note:**
 >
-> Tiered storage is in **Private Preview** for {{{ .premium }}} and {{{ .byoc }}}. The behavior described on this page reflects the current preview implementation and might change before general availability (GA).
+> Tiered storage is in **private preview** for {{{ .premium }}} and {{{ .byoc }}}. The behavior described on this page reflects the current preview implementation and might change before general availability (GA).
 
 ## Can IA tables execute `UPDATE`/`DELETE`?
 
