@@ -8,7 +8,7 @@ aliases: ['/tidbcloudlake/vacuum-table-sql/']
 
 The `VACUUM TABLE` command permanently removes eligible historical snapshots and their unneeded segments, blocks, and related files from a FUSE table to reclaim storage. The table and its current data remain available.
 
-See also: [VACUUM TABLES](/tidb-cloud-lake/sql/09-vacuum-tables.md), [VACUUM DROPPED OBJECTS](/tidb-cloud-lake/sql/vacuum-dropped-objects.md), [VACUUM ALL](/tidb-cloud-lake/sql/vacuum-all.md).
+See also: [VACUUM TABLES](/tidb-cloud-lake/sql/vacuum-tables.md), [VACUUM DROPPED OBJECTS](/tidb-cloud-lake/sql/vacuum-dropped-objects.md), [VACUUM ALL](/tidb-cloud-lake/sql/vacuum-all.md).
 
 ## Syntax
 
