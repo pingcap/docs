@@ -12,13 +12,20 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-* **TiDB Cloud CLI**
+- **TiDB Cloud Starter**
 
-  [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is now available in public preview for managing [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) instances and TiDB Cloud Filesystems. A TiDB Cloud Filesystem is a serverless distributed file system designed for AI agents and automation workloads.
+    - Extend the full-text search capabilities for TiDB Cloud Starter.
 
-  You can use `ti` directly or let your scripts, CI jobs, and AI agents run it to automate TiDB Cloud workflows. With `ti`, you can create and manage TiDB Cloud Starter instances, execute SQL statements, and create and access persistent Filesystem workspaces through file commands or supported mounts. JSON output by default, JMESPath output queries, and support for `--wait` and `--dry-run` on applicable commands simplify automation.
+        Previously, a table could have only one `MULTILINGUAL` or `STANDARD` full-text index, with a single scored column and no filter pushdown.
 
-  For more information, see [Get Started with TiDB Cloud CLI](/ai/ti/ti-quick-start.md) and [TiDB Cloud CLI (`ti`) Overview](/ai/ti/ti-overview.md).
+        Now you can:
+
+        - **Push metadata filters into full-text index scans.** In column-property mode (`col WITH (...)`), the `exact` attribute supports `=` and `IN`, while `path_hierarchy` supports path-prefix `LIKE` and `UNDER` conditions during the index scan, without accessing table rows.
+        - **Match prefixes and substrings with the `NGRAM` parser.** `WITH PARSER NGRAM(min_gram, max_gram, granularity, lower_case)` builds character-level n-grams, so a query such as `handle` can match `HandleRequest`, `RequestHandler`, and `handle_error`.
+        - **Search multiple columns with a single full-text index.** `FTS_MATCH_WORD('query', col1, col2)` searches multiple scored columns in one scan and fuses their BM25 scores at the index level, replacing separate index scans and `UNION ALL` merging.
+        - **Create multiple full-text indexes on the same table.** The same column can use different parsers across indexes. You can use `USE_INDEX` or `IGNORE_INDEX` to control index selection, `WITH PARSER` in `FTS_MATCH_WORD()` to select a parser, or let the optimizer choose automatically.
+
+      For more information, see [Full-Text Search with SQL](/ai/guides/vector-search-full-text-search-sql.md).
 
 ## September 8, 2026
 
