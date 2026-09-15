@@ -41,8 +41,8 @@ summary: データ移行時に発生する事前チェックエラー、移行�
 
 アップストリーム データベースでbinlogが有効になっていることを確認してください。 [MySQLのbinlogが有効になっているか確認してください](#error-message-check-whether-mysql-binlog-is-enabled)その後、表示されるメッセージに従って問題を解決します。
 
-- メッセージが`These dbs xxx are not in binlog_do_db xxx`に似ている場合は、移行したいすべてのデータベースがリストに含まれていることを確認してください。-- [--binlog-do-db=db_name](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_binlog-do-db)を参照してください。
-- メッセージが`These dbs xxx are in binlog_ignore_db xxx`に似ている場合は、移行したいすべてのデータベースが無視リストに含まれていないことを確認してください。-- [--binlog-ignore-db=db_name](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_binlog-ignore-db)を参照してください。
+- メッセージが`These dbs xxx are not in binlog_do_db xxx`に類似している場合は、移行したいすべてのデータベースがリストに含まれていることを確認してください。 [--binlog-do-db=db_name](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_binlog-do-db)を参照してください。
+- メッセージが`These dbs xxx are in binlog_ignore_db xxx`に類似している場合は、移行したいすべてのデータベースが無視リストに含まれていないことを確認してください。 [--binlog-ignore-db=db_name](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_binlog-ignore-db)を参照してください。
 
 Amazon Aurora MySQL の場合、この事前チェック項目はエラーになりません。完全データ移行と増分データ移行の両方をサポートするために、Amazon Aurora MySQL ライターインスタンスを使用していることを確認してください。
 
