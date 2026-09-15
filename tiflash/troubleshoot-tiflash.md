@@ -71,7 +71,7 @@ TiFlashのワークロードが大きすぎてTiFlashデータのレプリケー
 
     > **Note:**
     >
-    > テーブルのTiFlashレプリケーション ルールを手動で削除した後、このテーブルに対して`RECOVER TABLE` 、または`FLASHBACK DATABASE` `FLASHBACK TABLE`を実行すると、このテーブルのTiFlashレプリカは復元されません。
+    > テーブルのTiFlashレプリケーション ルールを手動で削除した後、このテーブルに対して`RECOVER TABLE`、 `FLASHBACK TABLE`、または`FLASHBACK DATABASE`操作を実行すると、このテーブルのTiFlashレプリカは復元されません。
 
     1. 現在の PD インスタンス内のTiFlashに関連するすべてのデータ複製ルールを表示します。
 
@@ -144,7 +144,7 @@ TiDB クラスターをデプロイした後、 TiFlashレプリカの作成が�
     - `true`が返された場合は、次のステップに進みます。
     - `false`が返された場合は[配置ルール機能を有効にする](/configure-placement-rules.md#enable-placement-rules)を実行してから次のステップに進みます。
 
-2. **TiFlash -Summary** Grafana パネルの**UpTime**メトリックをチェックして、 TiFlashプロセスが正常に動作しているかどうかを確認します。
+2. **TiFlash-Summary** Grafana パネルの**UpTime**メトリックをチェックして、 TiFlashプロセスが正常に動作しているかどうかを確認します。
 
 3. TiFlashとPD間の接続が正常かどうかを確認します。
 
@@ -152,7 +152,7 @@ TiDB クラスターをデプロイした後、 TiFlashレプリカの作成が�
     tiup ctl:nightly pd -u http://${pd-ip}:${pd-port} store
     ```
 
-    TiFlashの`store.labels` `{"key": "engine", "value": "tiflash"}`のような情報が含まれています。この情報を確認することで、 TiFlashのインスタンスを確認できます。
+    TiFlashの`store.labels`には、 `{"key": "engine", "value": "tiflash"}`のような情報が含まれています。この情報を確認することで、 TiFlashのインスタンスを確認できます。
 
 4. `default` ID を持つ配置ルールの`count`が正しいかどうかを確認します。
 
@@ -166,7 +166,7 @@ TiDB クラスターをデプロイした後、 TiFlashレプリカの作成が�
 
     > **Note:**
     >
-    > デフォルト値は`count`で、 `3`です。本番環境では、通常、この値は TiKV ノードの数よりも小さくなります。テスト環境で、リージョンレプリカが 1つだけで問題ない場合は、この値を`1`に設定できます。
+    > `count`のデフォルト値は`3`です。本番環境では、通常、この値は TiKV ノードの数よりも小さくなります。テスト環境で、リージョンレプリカが 1つだけで問題ない場合は、この値を`1`に設定できます。
 
     ```shell
         curl -X POST -d '{
@@ -196,7 +196,7 @@ TiDB クラスターをデプロイした後、 TiFlashレプリカの作成が�
 
         - 新しいTiFlashノードをスケールアウトします。PD はTiFlashノード間でリージョンのバランスを自動的に取り、十分なディスク容量を持つTiFlashノードへのリージョンのスケジュールを再開します。
 
-        - TiFlashノードディスクから、ログファイルやディレクトリ`${data}/flash/`の`space_placeholder_file`ファイルなどの不要なファイルを削除します。必要に応じて、 `tiflash-learner.toml` ～ `0MB`の`storage.reserve-space`を同時に設定し、 TiFlashサービスを一時的に再開します。
+        - TiFlashノードディスクから、ログファイルやディレクトリ`${data}/flash/`の`space_placeholder_file`ファイルなどの不要なファイルを削除します。必要に応じて、 `tiflash-learner.toml`の`storage.reserve-space`を`0MB`に設定し、 TiFlashサービスを一時的に再開します。
 
     ディスク使用量が`low-space-ratio`未満の場合は、ディスク容量が通常通り利用可能であることを示します。次の手順に進みます。
 
@@ -223,8 +223,8 @@ TiFlashノードをデプロイし、 `ALTER TABLE ... SET TIFLASH REPLICA ...`�
 1. `ALTER TABLE ... SET TIFLASH REPLICA ...<num>`を実行してレプリケーションが成功したかどうかを確認し、出力を確認します。
 
     - クエリがブロックされている場合は、 `SELECT * FROM information_schema.tiflash_replica`ステートメントを実行して、 TiFlashレプリカが作成されたかどうかを確認します。
-        - [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)を通じて、DDL 文が期待どおりに実行されているかどうかを確認します。TiFlash レプリカ文のTiFlashをブロックする可能性のある他の DDL 文 ( `ADD INDEX`など) が実行中かどうかを確認します。
-        - 実行中のTiFlashレプリカ ステートメントの変更をブロックする[`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md)を通じて、同じテーブルで DML文が実行されているかどうかを確認します。
+        - [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)を通じて、DDL 文が期待どおりに実行されているかどうかを確認します。TiFlashレプリカを変更する文の実行をブロックする可能性のある他の DDL 文 ( `ADD INDEX`など) が実行中かどうかを確認します。
+        - 同じテーブルで、TiFlashレプリカを変更する文の実行をブロックするDML文が実行されているかどうかを、 [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md)を通じて確認します。
     - ブロッキングステートメントが完了するかキャンセルされるまで待ってから、 TiFlashレプリカの設定を再度試してください。問題が発生しない場合は、次の手順に進みます。
 
 2. TiFlashリージョンレプリケーションが正しく実行されているかどうかを確認します。
@@ -259,10 +259,10 @@ TiFlashノードをデプロイし、 `ALTER TABLE ... SET TIFLASH REPLICA ...`�
 
 5. PD が適切にスケジュールされているかどうかを確認します。
 
-    `pd.log`ファイルで`table-<table_id>-r`というキーワードを検索し、 `add operator`ようなスケジューリングログを見つけてください。または、Grafana の PD ダッシュボードの**Operator/Schedule operator create**パネルで、 `add-rule-peer`オペレーターが存在するかどうかを確認してください。また、Grafana の PD ダッシュボードで**Scheduler/Patrol リージョン時間の**値を確認することもできます。**Patrol リージョン時間**は、PD がすべてのリージョンをスキャンしてスケジューリング操作を生成するまでの所要時間です。値が大きいと、スケジューリングに遅延が発生する可能性があります。
+    `pd.log`ファイルで`table-<table_id>-r`というキーワードと`add operator`のようなスケジューリングログを検索してください。または、Grafana の PD ダッシュボードの**Operator/Schedule operator create**パネルで、 `add-rule-peer`オペレーターが存在するかどうかを確認してください。また、Grafana の PD ダッシュボードで**Scheduler/Patrol Region time**の値を確認することもできます。**Patrol Region time**は、PD がすべてのリージョンをスキャンしてスケジューリング操作を生成するまでの所要時間です。値が大きいと、スケジューリングに遅延が発生する可能性があります。
 
-    - `pd.log`キーワード`table-<table_id>-r`と`add operator`スケジュール ログが含まれている場合、または**Scheduler/Patrol リージョン時間**パネルの期間値が正常に表示される場合は、PD スケジュールが適切に機能していることを示します。
-    - `add-rule-peer`スケジュールログが見つからない場合、または**パトロールリージョンの時間**が30分を超える場合、PD はスケジュールを正しく実行していないか、スケジュールの実行に時間がかかっています。TiDB、PD、およびTiFlash のログファイルを収集し、[サポートを受けて](/support.md)ください。
+    - `pd.log`に`table-<table_id>-r`というキーワードと`add operator`スケジュールログが含まれている場合、または**Scheduler/Patrol Region time**パネルの期間値が正常に表示される場合は、PD スケジュールが適切に機能していることを示します。
+    - `add-rule-peer`スケジュールログが見つからない場合、または**Patrol Region time**が30分を超える場合、PD はスケジュールを正しく実行していないか、スケジュールの実行に時間がかかっています。TiDB、PD、およびTiFlash のログファイルを収集し、[サポートを受けて](/support.md)ください。
 
 上記の方法で問題を解決できない場合は、TiDB、PD、およびTiFlashログファイルを収集し、PingCAP またはコミュニティから[サポートを受けて](/support.md)ください。
 
