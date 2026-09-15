@@ -68,7 +68,7 @@ If a numeric expression contains strings, the strings are converted to double-pr
 Inserts into numeric columns are affected by the SQL mode. The following discussions mention strict mode and `ERROR_FOR_DIVISION_BY_ZERO`. To turn on all the restrictions, you can simply use the `TRADITIONAL` mode, which includes both strict mode values and `ERROR_FOR_DIVISION_BY_ZERO`:
 
 ```sql
-SET sql_mode = 'TRADITIONAL`;
+SET sql_mode = 'TRADITIONAL';
 ```
 
 If a number is inserted into an exact type column (DECIMAL or integer), it is inserted with its exact value if it is within the column range. For this number:
