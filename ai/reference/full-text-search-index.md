@@ -50,11 +50,8 @@ Syntax sugar mode is equivalent to column-property mode with a single parser att
 
 > **Note:**
 >
-> In syntax sugar mode, specifying an index name is optional for the `MULTILINGUAL` parser. If you use the `NGRAM` parser or column-property mode, you must specify an index name explicitly. See [Index naming](#index-naming).
-
-> **Note:**
->
-> The `ADD_COLUMNAR_REPLICA_ON_DEMAND` clause is optional. When specified, TiDB creates a TiFlash replica for the table on demand. If you omit it, make sure that a TiFlash replica is already created for the table before you use full-text search.
+> - In syntax sugar mode, specifying an index name is optional for the `MULTILINGUAL` parser. If you use the `NGRAM` parser or column-property mode, you must specify an index name explicitly. See [Index naming](#index-naming).
+> - The `ADD_COLUMNAR_REPLICA_ON_DEMAND` clause is optional. When specified, TiDB creates a TiFlash replica for the table on demand. If you omit it, make sure that a TiFlash replica is already created for the table before you use full-text search.
 
 ### Column-property mode
 
