@@ -133,7 +133,7 @@ TiDB バージョン: 8.4.0
 
     ベクトル検索は、データの意味論に基づいた検索手法であり、より関連性の高い検索結果を提供します。AIや大規模言語モデル（LLM）の中核関数の一つとして、ベクトル検索は、検索拡張生成（RAG）、意味検索、推薦システムなど、さまざまなシナリオで活用できます。
 
-    v8.4.0 以降、TiDB は [ベクトルデータ型](/ai/reference/vector-search-data-types.md)と[ベクトル検索インデックス](/ai/reference/vector-search-index.md)をサポートし、強力なベクトル検索機能を提供します。 TiDB ベクトルデータタイプは、最大 16,383 次元をサポートし、L2 距離 (ユークリッド距離)、コサイン距離、負の内積、L1 距離 (マンハッタン距離) を含むさまざまな[距離関数](/ai/reference/vector-search-functions-and-operators.md#vector-functions)をサポートします。
+    v8.4.0 以降、TiDB は [ベクトルデータ型](/ai/reference/vector-search-data-types.md)と[ベクトル検索インデックス](/ai/reference/vector-search-index.md)をサポートし、強力なベクトル検索機能を提供します。 TiDB ベクトルデータ型は、最大 16,383 次元をサポートし、L2 距離 (ユークリッド距離)、コサイン距離、負の内積、L1 距離 (マンハッタン距離) を含むさまざまな[距離関数](/ai/reference/vector-search-functions-and-operators.md#vector-functions)をサポートします。
 
     ベクトル検索を開始するには、ベクトルデータ型のテーブルを作成し、ベクトルデータを挿入し、ベクトルデータに対するクエリを実行するだけで済みます。ベクトルデータと従来の関係データを組み合わせたクエリを実行することも可能です。
 
