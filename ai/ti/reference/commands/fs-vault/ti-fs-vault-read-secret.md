@@ -31,7 +31,7 @@ ti fs-vault read-secret
 - `--field <string>`: Optional field name to read.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
 - `--format <string>`: Read output format: `json`, `raw`, or `env`. \[default: json]
-- `--fs-token <string>`: Set the file system user token. If omitted, uses `TI_FS_TOKEN`.
+- `--fs-token <string>`: Set the owner Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem. For delegated authentication, use `--vault-token` or `TI_VAULT_TOKEN` instead.
 - `--help`: Display help information.
 - `--vault-token <string>`: Delegated `ti fs-vault` token; prefer `TI_VAULT_TOKEN`.
 - `--version`: Display version information.
@@ -57,8 +57,15 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 - Read with a delegated Vault token:
 
     ```bash
-    # Access only the scope granted to an agent without using the owner token.
-    ti fs-vault read-secret --file-system-id <file-system-id> --secret-name db-prod --field DB_URL --vault-token "$TI_VAULT_TOKEN" --format raw
+    # Read the delegated token without echoing it or storing it in shell history.
+    printf 'Delegated Vault token: ' >&2
+    read -r -s TI_VAULT_TOKEN
+    printf '\n' >&2
+    export TI_VAULT_TOKEN
+
+    # Access only the field allowed by the delegated token.
+    ti fs-vault read-secret --file-system-id <file-system-id> --secret-name db-prod --field DB_URL --format raw
+    unset TI_VAULT_TOKEN
     ```
 
 ## Related documentation

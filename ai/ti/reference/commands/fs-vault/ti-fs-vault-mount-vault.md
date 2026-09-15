@@ -32,7 +32,7 @@ ti fs-vault mount-vault
 - `--mount-path <string>`: Local mount path. \[required]
 - `--dry-run`: Validate the request without applying changes.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the file system user token. If omitted, uses `TI_FS_TOKEN`.
+- `--fs-token <string>`: Set the owner Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem. For delegated authentication, use `--vault-token` or `TI_VAULT_TOKEN` instead.
 - `--help`: Display help information.
 - `--ready-timeout <duration>`: Time to wait for a background mount to become ready. \[default: `30s`]
 - `--vault-token <string>`: Delegated `ti fs-vault` token; prefer `TI_VAULT_TOKEN`.
@@ -42,11 +42,22 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 
 ## Examples
 
+Before running either example, inject a delegated Vault token. In an interactive shell, read and export it without placing it in shell history:
+
+```bash
+printf 'Delegated Vault token: ' >&2
+read -r -s TI_VAULT_TOKEN
+printf '\n' >&2
+export TI_VAULT_TOKEN
+```
+
+When the mount is no longer needed, unmount it and run `unset TI_VAULT_TOKEN`.
+
 - Mount a delegated Vault view:
 
     ```bash
-    # Expose only the paths allowed by the delegated Vault token.
-    ti fs-vault mount-vault --file-system-id <file-system-id> --mount-path ./vault --vault-token "$TI_VAULT_TOKEN"
+    # Expose only the paths allowed by TI_VAULT_TOKEN.
+    ti fs-vault mount-vault --file-system-id <file-system-id> --mount-path ./vault
     ```
 
 - Allow more time for the Vault mount to become ready:

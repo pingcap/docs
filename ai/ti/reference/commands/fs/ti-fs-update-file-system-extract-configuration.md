@@ -46,13 +46,23 @@ The provider API key is accepted only from `TI_FS_AI_PROVIDER_API_KEY`. It is se
 
 Do not retry an update blindly after a timeout or lost response. The provider might already have charged for validation and the backend might have saved the configuration. Run the matching describe command first.
 
+Before enabling a provider in an interactive shell, read and export its API key without placing it in shell history:
+
+```bash
+printf 'Provider API key: ' >&2
+read -r -s TI_FS_AI_PROVIDER_API_KEY
+printf '\n' >&2
+export TI_FS_AI_PROVIDER_API_KEY
+```
+
+In CI, inject `TI_FS_AI_PROVIDER_API_KEY` from a masked secret. Unset the variable after the command finishes.
+
 ## Examples
 
 - Enable image extraction with an OpenAI-compatible provider:
 
     ```bash
-    # Supply the secret through the environment so it is not written to shell arguments.
-    TI_FS_AI_PROVIDER_API_KEY="<provider-api-key>" \
+    # Configure extraction using the provider key from TI_FS_AI_PROVIDER_API_KEY.
     ti fs update-file-system-extract-configuration \
       --file-system-id <file-system-id> \
       --media-type image \
@@ -65,7 +75,6 @@ Do not retry an update blindly after a timeout or lost response. The provider mi
 
     ```bash
     # Use the DashScope OpenAI-compatible endpoint with the qwen-asr protocol.
-    TI_FS_AI_PROVIDER_API_KEY="<dashscope-api-key>" \
     ti fs update-file-system-extract-configuration \
       --file-system-id <file-system-id> \
       --media-type audio \

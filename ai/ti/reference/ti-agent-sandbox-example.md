@@ -35,7 +35,7 @@ export FILE_SYSTEM_ID="$(jq -r '.file_system_id' ./filesystem.json)"
 export TI_FS_TOKEN="$(jq -r '.fs_token' ./filesystem.json)"
 ```
 
-Store the token in a secret manager, record `FILE_SYSTEM_ID` for control-plane cleanup, and record the canonical region code used by the profile, for example `aws-us-east-1`. Delete `filesystem.json` after storing the token securely.
+Store the token in a secret manager, record `FILE_SYSTEM_ID` for control-plane cleanup, and record the region code used to create the Filesystem. Delete `filesystem.json` after storing the token securely.
 
 ## Step 2. Inject the minimum sandbox environment
 
@@ -43,7 +43,7 @@ Configure the sandbox secret/environment mechanism with:
 
 ```bash
 TI_FS_TOKEN=<owner-token>
-TI_REGION_CODE=aws-us-east-1
+TI_REGION_CODE=<filesystem-region-code>
 ```
 
 The sandbox does not need `TIDB_CLOUD_PUBLIC_KEY`, `TIDB_CLOUD_PRIVATE_KEY`, `ti configure`, or files copied from `~/.ti/`.
@@ -91,7 +91,7 @@ Stop writers and unmount. A graceful FUSE unmount automatically flushes and drai
 ti fs unmount-file-system --mount-path "$HOME/workspace"
 ```
 
-Use `ti fs drain-file-system --mount-path "$HOME/workspace"` separately when you need to verify remote durability while keeping the mount online. For more information, see [Drain or unmount](/ai/ti/guides/mount-filesystem.md#drain-or-unmount). Back on the trusted machine:
+For a FUSE mount, use `ti fs drain-file-system --mount-path "$HOME/workspace"` separately when you need to verify remote durability while keeping the mount online. `drain-file-system` is not supported for WebDAV. For more information, see [Drain or unmount](/ai/ti/guides/mount-filesystem.md#drain-or-unmount). Back on the trusted machine:
 
 ```bash
 ti fs delete-file-system \

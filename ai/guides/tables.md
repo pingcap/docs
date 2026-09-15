@@ -475,7 +475,7 @@ To run the example:
 4. Create a `.env` file and set the connection parameters:
 
     ```bash
-    cat > .env <<EOF
+    cat > .env <<'EOF'
     TIDB_HOST={gateway-region}.prod.aws.tidbcloud.com
     TIDB_PORT=4000
     TIDB_USERNAME={prefix}.root

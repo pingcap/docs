@@ -45,26 +45,38 @@ A Filesystem whose `source` is `database_auto` uses database-managed embedding a
 - Enable app-managed embedding:
 
     ```bash
+    # Read the provider key without echoing it or storing it in shell history.
+    printf 'Provider API key: ' >&2
+    read -r -s TI_FS_AI_PROVIDER_API_KEY
+    printf '\n' >&2
+    export TI_FS_AI_PROVIDER_API_KEY
+
     # Configure a model that returns exactly 1024 dimensions.
-    TI_FS_AI_PROVIDER_API_KEY="<provider-api-key>" \
     ti fs update-file-system-embedding-configuration \
       --file-system-id <file-system-id> \
       --enabled true \
       --provider-api-base https://api.openai.com/v1 \
       --provider-model text-embedding-3-small
+    unset TI_FS_AI_PROVIDER_API_KEY
     ```
 
 - Preview enablement without validating or saving the provider:
 
     ```bash
+    # Read the provider key without echoing it or storing it in shell history.
+    printf 'Provider API key: ' >&2
+    read -r -s TI_FS_AI_PROVIDER_API_KEY
+    printf '\n' >&2
+    export TI_FS_AI_PROVIDER_API_KEY
+
     # Validate local inputs and show a redacted request plan.
-    TI_FS_AI_PROVIDER_API_KEY="<provider-api-key>" \
     ti fs update-file-system-embedding-configuration \
       --file-system-id <file-system-id> \
       --enabled true \
       --provider-api-base https://api.openai.com/v1 \
       --provider-model text-embedding-3-small \
       --dry-run
+    unset TI_FS_AI_PROVIDER_API_KEY
     ```
 
 - Disable app-managed embedding:

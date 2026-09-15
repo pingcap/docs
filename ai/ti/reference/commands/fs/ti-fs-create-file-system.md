@@ -31,7 +31,7 @@ ti fs create-file-system
 
 ## Options
 
-- `--display-name <string>`: Set a 4–64 character display name shown by Filesystem inventory commands. The value does not select the Filesystem in later commands.
+- `--display-name <string>`: Set a display name between 4 and 64 characters shown by Filesystem inventory commands. The value does not select the Filesystem in later commands.
 - `--dry-run`: Validate the request without applying changes.
 - `--help`: Display help information.
 - `--label <string>`: Add an organization-visible `key=value` label. Repeat this option to add up to 30 labels. Do not put secrets or personal data in labels.

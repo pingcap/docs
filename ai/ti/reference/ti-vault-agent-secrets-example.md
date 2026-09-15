@@ -38,12 +38,14 @@ ti fs-vault create-secret \
 
 ```bash
 umask 077
+set -o noclobber
 ti fs-vault create-grant \
   --agent-id example-agent \
   --scope service-demo/ENDPOINT \
   --permission read \
   --ttl 10m \
   --label-hint example > ./vault-grant.json
+set +o noclobber
 
 export TI_VAULT_TOKEN="$(jq -r '.token' ./vault-grant.json)"
 export GRANT_ID="$(jq -r '.grant_id' ./vault-grant.json)"

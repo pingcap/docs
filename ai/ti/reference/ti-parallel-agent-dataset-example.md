@@ -13,7 +13,7 @@ This workflow gives multiple short-lived workers one shared corpus without downl
 
 ## How it works
 
-An owner uploads the corpus once. Every worker selects the same Filesystem and mounts it read-only, so ordinary tools can traverse one common namespace without a storage SDK. This reduces startup time and avoids independent point-in-time copies. Workers write results to separate task paths or a different output Filesystem.
+An owner uploads the corpus once and creates a scoped, read-only Filesystem token for each worker. Every worker selects the same Filesystem and mounts the corpus read-only, so ordinary tools can traverse one common namespace without a storage SDK. This reduces startup time and avoids independent point-in-time copies. If workers produce results, they write them to separate paths in a different, writable output Filesystem, not to the dataset Filesystem.
 
 ## Prerequisites
 
@@ -41,17 +41,24 @@ ti fs find-files \
   --path /datasets/corpus \
   --file-name-pattern "*.pdf" \
   --output text
+
+# Create one short-lived, read-only scoped token per worker.
+ti fs generate-file-system-scoped-token \
+  --file-system-id "$TI_FS_FILE_SYSTEM_ID" \
+  --subject worker-1 \
+  --ttl 24h \
+  --allow /datasets/corpus:read,list > ./worker-1-token.json
 ```
 
-Transfer the FS token and canonical region code through a secret manager. Delete `filesystem.json` after storing the token securely.
+Transfer the `fs_token` from `worker-1-token.json` and the Filesystem region code through a secret manager. Repeat the token-generation command with a unique subject for each worker. Keep the owner token only on the trusted machine, and delete the JSON files after storing the tokens securely.
 
 ## Step 2. Mount in each worker
 
 > **Warning:**
 >
-> `--read-only` prevents writes only through that mount. The FS owner token remains an owner credential and can authorize writes through direct `ti fs` commands. Do not treat a read-only mount as a read-only security credential.
+> Give each worker a scoped token that permits only `read` and `list` under the corpus path. The `--read-only` mount option prevents accidental writes through the mount, but it does not change a token's permissions.
 
-Inject `TI_FS_TOKEN` and `TI_REGION_CODE` into each worker, then run:
+Inject the worker's scoped token as `TI_FS_TOKEN` and set `TI_REGION_CODE` to the Filesystem region, then run:
 
 ```bash
 mkdir -p "$HOME/corpus"
@@ -78,13 +85,13 @@ ti fs unmount-file-system --mount-path "$HOME/corpus"
 After all workers have unmounted the Filesystem, delete it from the trusted machine if you no longer need the dataset:
 
 ```bash
-rm -f ./filesystem.json
+rm -f ./filesystem.json ./worker-*-token.json
 ti fs delete-file-system --file-system-id "$TI_FS_FILE_SYSTEM_ID"
 ```
 
 ## Security and operational notes
 
-- Do not let workers use direct mutating `ti fs` commands when the workflow requires read-only behavior.
+- Do not distribute the owner token to workers. Generate a separate, short-lived scoped token for each worker so that read-only access is enforced by the credential.
 - Partition result paths by agent or run ID if workers write to the same output Filesystem.
 - On platforms where FUSE or WebDAV mounting is unavailable, use `read-file`, `find-files`, and `copy-file --to-local` directly.
 

@@ -50,19 +50,31 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 - Refresh a token supplied by a secret manager:
 
     ```bash
+    # Read the current token without echoing it or storing it in shell history.
+    printf 'Current FS token: ' >&2
+    read -r -s TI_FS_TOKEN
+    printf '\n' >&2
+    export TI_FS_TOKEN
+
     # Capture the one-time replacement and update the external secret manager yourself.
-    TI_FS_TOKEN="<current-token>" \
     TI_REGION_CODE="aws-us-east-1" \
     ti fs refresh-file-system-token > ./refreshed-token.json
+    unset TI_FS_TOKEN
     ```
 
 - Change the token lifetime during refresh:
 
     ```bash
+    # Read the current token without echoing it or storing it in shell history.
+    printf 'Current FS token: ' >&2
+    read -r -s TI_FS_TOKEN
+    printf '\n' >&2
+    export TI_FS_TOKEN
+
     # Rotate the token and set its new lifetime to 30 days.
-    TI_FS_TOKEN="<current-token>" \
     TI_REGION_CODE="aws-us-east-1" \
     ti fs refresh-file-system-token --ttl 720h
+    unset TI_FS_TOKEN
     ```
 
 ## Related documentation

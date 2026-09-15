@@ -57,6 +57,8 @@ ti fs-vault run-with-secret --secret-path /n/vault/db-prod -- <command>
 
 Prefer process injection to writing plaintext to disk.
 
+Field names injected by `run-with-secret` must match `[A-Z_][A-Z0-9_]*`. The command rejects the entire injection if any field name does not match this pattern or any field value contains an unsupported control character. Use uppercase environment-variable-style names when creating fields that you plan to inject.
+
 ## Audit and revoke access
 
 ```shell
@@ -78,11 +80,12 @@ Revocation prevents new authorized operations but cannot erase a value that a pr
 
 On macOS or Linux with FUSE support, you can mount a read-only FUSE view of Vault secrets. The CLI creates the mount and serves secret fields as files under the mount path (for example, `/path/to/vault/db-prod/DB_URL`):
 
+Before mounting, set `TI_VAULT_TOKEN` to a delegated Vault token, such as the token created in [Delegate limited access](#delegate-limited-access). The mount command requires either `TI_VAULT_TOKEN` or `--vault-token`.
+
 ```shell
 mkdir -p /path/to/vault
 ti fs-vault mount-vault \
-  --mount-path /path/to/vault \
-  --vault-token "$TI_VAULT_TOKEN"
+  --mount-path /path/to/vault
 ```
 
 Stop any processes that use the mount before you unmount it:

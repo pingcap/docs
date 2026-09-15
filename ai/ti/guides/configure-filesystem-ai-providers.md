@@ -15,6 +15,17 @@ A TiDB Cloud Filesystem can optionally extract text from media files and generat
 
 The configuration commands require TiDB Cloud API credentials and an explicit Filesystem ID. Set the provider key through `TI_FS_AI_PROVIDER_API_KEY`. The CLI does not persist the key locally. The Filesystem service stores it encrypted and returns only a masked value in subsequent configuration output.
 
+For an interactive shell, read and export the provider key without placing it in shell history:
+
+```bash
+printf 'Provider API key: ' >&2
+read -r -s TI_FS_AI_PROVIDER_API_KEY
+printf '\n' >&2
+export TI_FS_AI_PROVIDER_API_KEY
+```
+
+In CI, inject `TI_FS_AI_PROVIDER_API_KEY` from a masked secret. Unset the variable after you finish configuring providers.
+
 > **Note:**
 >
 > When you enable, re-enable, or replace a provider configuration, the Filesystem service sends a small built-in request to the provider endpoint to validate the credentials, connectivity, and model response. This validation request might incur a provider charge. A disable-only or prompt-only update does not make a validation request.
@@ -34,7 +45,6 @@ ti fs describe-file-system-extract-configuration \
 Use [`update-file-system-extract-configuration`](/ai/ti/reference/commands/fs/ti-fs-update-file-system-extract-configuration.md) to enable, update, or disable image, audio, or video extraction. For example, configure image extraction through an OpenAI-compatible provider:
 
 ```shell
-TI_FS_AI_PROVIDER_API_KEY="<provider-api-key>" \
 ti fs update-file-system-extract-configuration \
   --file-system-id "<file-system-id>" \
   --media-type image \
@@ -69,7 +79,6 @@ ti fs describe-file-system-embedding-configuration \
 Use [`update-file-system-embedding-configuration`](/ai/ti/reference/commands/fs/ti-fs-update-file-system-embedding-configuration.md) to update the optional application-managed embedding configuration. For example:
 
 ```shell
-TI_FS_AI_PROVIDER_API_KEY="<provider-api-key>" \
 ti fs update-file-system-embedding-configuration \
   --file-system-id "<file-system-id>" \
   --enabled true \
@@ -78,6 +87,12 @@ ti fs update-file-system-embedding-configuration \
 ```
 
 Application-managed embeddings require an OpenAI-compatible endpoint that returns 1024-dimensional vectors. They are available for Shared Filesystems and Native Filesystems whose effective embedding mode is `fts_only`. If a Native Filesystem uses database-managed automatic embeddings, the service rejects this update and reports `source=database_auto`.
+
+After you finish configuring providers, remove the key from the current shell:
+
+```shell
+unset TI_FS_AI_PROVIDER_API_KEY
+```
 
 To disable that configuration:
 

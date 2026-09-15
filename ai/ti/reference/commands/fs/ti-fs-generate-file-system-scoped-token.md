@@ -48,7 +48,7 @@ ti fs generate-file-system-scoped-token
 - `--ttl <duration>`: Set a finite positive token lifetime that resolves to whole seconds. This option is required.
 - `--allow <prefix:ops>`: Allow operations under one remote path prefix. Repeat this option for multiple prefixes. Operations are `read`, `list`, `search`, `write`, and `delete`; `search` requires `read`. This option is required.
 - `--file-system-id <string>`: Assert the Filesystem ID embedded in the owner token. This option is required only when loading a locally stored owner token.
-- `--fs-token <string>`: Supply the owner token. Defaults to `TI_FS_TOKEN`, then the selected local credential.
+- `--fs-token <string>`: Supply the owner Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
 - `--subject <string>`: Set an optional server-side audit label of at most 64 bytes. It is not a unique selector.
 - `--store-locally`: Store and select the generated scoped token for this profile and Filesystem.
 - `--replace`: Replace an existing selected local token. Requires `--store-locally` and does not revoke the previous remote token.
@@ -63,8 +63,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 - Give a sandbox read and write access to one workspace:
 
     ```bash
-    # Use an owner token to create a 24-hour token limited to /workspace.
-    export TI_FS_TOKEN="<owner-fs-token>"
+    # Inject the owner TI_FS_TOKEN from a secret manager, then create a token limited to /workspace.
     ti fs generate-file-system-scoped-token \
       --subject sandbox-agent \
       --ttl 24h \
@@ -74,9 +73,8 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 - Separate writable workspace data from read-only artifacts:
 
     ```bash
-    # Repeat --allow to assign different operations to independent prefixes.
+    # Inject the owner TI_FS_TOKEN from a secret manager. Repeat --allow to assign different operations to independent prefixes.
     ti fs generate-file-system-scoped-token \
-      --fs-token "<owner-fs-token>" \
       --ttl 8h \
       --allow /workspace:read,list,write,delete \
       --allow /artifacts:read,list

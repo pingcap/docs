@@ -75,6 +75,9 @@ ti fs mount-file-system \
 
 cat /path/to/shared-workspace/shared/origin.txt
 printf 'written through mount\n' > /path/to/shared-workspace/shared/mounted.txt
+
+# Graceful unmount flushes pending writes before the data-plane read.
+ti fs unmount-file-system --mount-path /path/to/shared-workspace
 ti fs read-file --path /shared/mounted.txt
 ```
 
@@ -84,10 +87,9 @@ The first read proves data-plane writes are visible through the mount. The final
 
 ### On machine B
 
-Stop writers and unmount either driver. A graceful FUSE unmount automatically drains pending work:
+After the graceful unmount in Step 4, remove the credentials from the current shell:
 
 ```bash
-ti fs unmount-file-system --mount-path /path/to/shared-workspace
 unset TI_FS_TOKEN TI_REGION_CODE
 ```
 

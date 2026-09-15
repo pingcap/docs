@@ -58,7 +58,7 @@ ti fs copy-file
 - `--from-local <string>`: The local source path.
 - `--from-remote <string>`: The source path in the TiDB Cloud file system.
 - `--from-stdin`: Read from stdin and write to `--to-remote`.
-- `--fs-token <string>`: Set the file system user token. If omitted, uses `TI_FS_TOKEN`.
+- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
 - `--help`: Display help information.
 - `--layer-id <string>`: Write one copied file into a file system layer instead of the base file system. Cannot be combined with `--recursive`.
 - `--overwrite`: Replace an existing destination file.

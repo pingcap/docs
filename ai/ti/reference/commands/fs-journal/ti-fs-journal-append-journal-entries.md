@@ -36,7 +36,7 @@ ti fs-journal append-journal-entries
 - `--entry-json <string>`: One JSON journal entry object; repeatable. For the supported fields, see [Entry JSON format](#entry-json-format).
 - `--entry-type <string>`: Entry type to use when an input object omits `type`. An explicit `type` in an input object takes precedence.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the file system user token. If omitted, uses `TI_FS_TOKEN`.
+- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
 - `--help`: Display help information.
 - `--idempotency-key <string>`: Key used to deduplicate retries of the same append request. If omitted, each invocation receives a new key.
 - `--json-array`: Read a JSON array from stdin instead of JSONL.
@@ -76,7 +76,7 @@ If you specify `--source`, it replaces the `source` value in every input object.
 - Append one JSON entry:
 
     ```bash
-    # Record an event object exactly as supplied on the command line.
+    # Record an event object and let the CLI or service apply default metadata.
     ti fs-journal append-journal-entries --file-system-id <file-system-id> --journal-id jrn-demo --entry-json '{"type":"task.started"}'
     ```
 
@@ -84,7 +84,7 @@ If you specify `--source`, it replaces the `source` value in every input object.
 
     ```bash
     # Prevent retries from recording the same completion event twice.
-    ti fs-journal append-journal-entries --file-system-id <file-system-id> --journal-id jrn-demo --entry-type task.completed --subject issue-42 --idempotency-key issue-42-complete
+    ti fs-journal append-journal-entries --file-system-id <file-system-id> --journal-id jrn-demo --entry-type task.completed --subject issue:42 --idempotency-key issue-42-complete
     ```
 
 - Append a JSON array from standard input:

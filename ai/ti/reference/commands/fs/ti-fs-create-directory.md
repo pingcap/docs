@@ -29,7 +29,7 @@ ti fs create-directory
 - `--path <string>`: The file system path of the directory to create. \[required]
 - `--dry-run`: Validate the request without applying changes.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the file system user token. If omitted, uses `TI_FS_TOKEN`.
+- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
 - `--help`: Display help information.
 - `--mode <string>`: The directory mode as an octal value such as 0755.
 - `--version`: Display version information.

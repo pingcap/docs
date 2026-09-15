@@ -5,7 +5,7 @@ summary: Generate an additional owner token for one TiDB Cloud Filesystem.
 
 # ti fs generate-file-system-token
 
-Generates an owner token for one Filesystem by using TiDB Cloud API credentials. An existing FS token cannot authorize owner-token generation. The plaintext `fs_token` appears only in the successful response and cannot be recovered through the list command.
+Generates an owner token for one Filesystem by using TiDB Cloud API credentials. An existing FS token cannot authorize owner-token generation. The service returns the plaintext `fs_token` only in the successful response. With `--store-locally`, `ti` also saves the token in the owner-only local credential store. The token cannot be recovered through the list command.
 
 > **Note:**
 >

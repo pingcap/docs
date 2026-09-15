@@ -63,7 +63,11 @@ ti fs-journal search-journal-entries \
   --include-entries
 ```
 
-The ordered result should include the start, test, and completion events.
+The ordered `read-journal-entries` result for `jrn-agent-demo` should include the start, test, and completion events.
+
+> **Note:**
+>
+> `search-journal-entries` searches all journals in the selected Filesystem because it does not accept a journal ID. Another journal with the same labels and event fields can also match the search in this example.
 
 The `--entry-type` and `--status` filters match the `type` and `status` fields in each `--entry-json` object. In this example, they select the entry whose payload contains `"type":"task.finished"` and `"status":"completed"`.
 

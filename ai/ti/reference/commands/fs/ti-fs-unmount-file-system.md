@@ -30,7 +30,7 @@ ti fs unmount-file-system
 
 - `--mount-path <string>`: The local mounted path. \[required]
 - `--dry-run`: Validate the request without applying changes.
-- `--force`: Kill the mount process if graceful unmount times out.
+- `--force`: Kill the mount process if graceful unmount times out. This can lose uncommitted in-memory or write-back state.
 - `--help`: Display help information.
 - `--ignore-absent`: Return success when no file system mount state exists for the specified path.
 - `--no-auto-pack`: Skip the default auto-pack action configured by the mount. The built-in `portable` profile enables this action by selecting `/` as its pack path.
