@@ -19,7 +19,7 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 
 次のセクションでは、**TiFlash-Summary**のデフォルトの監視情報を紹介します。
 
-## サーバ {#server}
+## Server {#server}
 
 - Store size: 各TiFlashインスタンスで使用されるストレージサイズ。
 - Available size: 各TiFlashインスタンスで使用可能なストレージサイズ。
@@ -35,7 +35,7 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 >
 > Store size、FSync OPS、File Open OPS、および Opened File Count は、現在、 TiFlashストレージレイヤーの監視情報のみをカバーしており、 TiFlash-Proxy ではカバーしていません。
 
-## コプロセッサー {#coprocessor}
+## Coprocessor {#coprocessor}
 
 - Request QPS: すべてのTiFlashインスタンスによって受信されたコプロセッサリクエストの数。`batch`はバッチリクエストの数です。`batch_cop`はバッチリクエスト内のコプロセッサリクエストの数です。`cop`はコプロセッサ インターフェイスを介して直接送信されたコプロセッサリクエストの数です。`cop_dag`はすべてのコプロセッサリクエスト内の DAG リクエストの数です。`super_batch`はスーパー バッチ機能を有効にするためのリクエストの数です。
 - Executor QPS: すべてのTiFlashインスタンスが受信したリクエスト内の各タイプの DAG Executor の数。`table_scan`はテーブルスキャン Executor です。`selection`は選択 Executor です。`aggregation`は集約 Executor です。`top_n`は`TopN` Executor です。`limit`は制限 Executor です。
