@@ -61,7 +61,10 @@ ti db execute-sql-statement \
 ## Step 4. Create and use a Filesystem
 
 ```bash
-export TI_FS_FILE_SYSTEM_ID="$(ti fs create-file-system --query file_system_id --output text)"
+export TI_FS_FILE_SYSTEM_ID="$(ti fs create-file-system \
+  --wait \
+  --query file_system_id \
+  --output text)"
 
 printf 'daily workflow\n' | ti fs copy-file \
   --from-stdin \
