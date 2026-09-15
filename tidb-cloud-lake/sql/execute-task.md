@@ -1,6 +1,6 @@
 ---
 title: EXECUTE TASK
-summary: `EXECUTE TASK` 语句用于手动执行一个现有任务。
+summary: "`EXECUTE TASK` 语句用于手动执行一个现有任务。"
 ---
 
 # EXECUTE TASK

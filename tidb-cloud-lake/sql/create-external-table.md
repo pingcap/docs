@@ -1,6 +1,6 @@
 ---
 title: CREATE EXTERNAL TABLE
-summary: `CREATE TABLE... CONNECTION = (...)` 语句用于创建表，并指定一个兼容 S3 的存储桶来存储数据，而不是使用默认的本地存储。
+summary: "`CREATE TABLE... CONNECTION = (...)` 语句用于创建表，并指定一个兼容 S3 的存储桶来存储数据，而不是使用默认的本地存储。"
 ---
 
 # CREATE EXTERNAL TABLE

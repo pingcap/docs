@@ -1,6 +1,6 @@
 ---
 title: PIVOT
-summary: {{{ .lake }}} 中的 PIVOT 操作允许你通过旋转表并基于指定列聚合结果来转换表。
+summary: "{{{ .lake }}} 中的 PIVOT 操作允许你通过旋转表并基于指定列聚合结果来转换表。"
 ---
 
 # PIVOT

@@ -1,6 +1,6 @@
 ---
 title: SHOW PROCESSLIST
-summary: {{{ .lake }}} 进程列表显示了服务器内已执行线程集合当前正在执行的操作。
+summary: "{{{ .lake }}} 进程列表显示了服务器内已执行线程集合当前正在执行的操作。"
 ---
 
 # SHOW PROCESSLIST

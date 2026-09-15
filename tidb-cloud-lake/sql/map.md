@@ -1,6 +1,6 @@
 ---
 title: Map
-summary: `MAP(K, V)` 以 `ARRAY(TUPLE(key, value))` 的形式在内部存储键值对。需要预先定义键类型 `K`（Boolean、numeric、decimal、string、date 或 timestamp）。键必须为非空且唯一；值可以是任意类型，包括嵌套结构。可以使用 map 字面量（`{key: value}`）或 `MAP(keys, values)` 函数来构建 map 表达式。
+summary: "`MAP(K, V)` 以 `ARRAY(TUPLE(key, value))` 的形式在内部存储键值对。需要预先定义键类型 `K`（Boolean、numeric、decimal、string、date 或 timestamp）。键必须为非空且唯一；值可以是任意类型，包括嵌套结构。可以使用 map 字面量（`{key: value}`）或 `MAP(keys, values)` 函数来构建 map 表达式。"
 ---
 
 # Map

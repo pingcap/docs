@@ -1,6 +1,6 @@
 ---
 title: QUANTILE_CONT
-summary: `QUANTILE_CONT()` 函数用于计算数值数据序列的插值分位数。
+summary: "`QUANTILE_CONT()` 函数用于计算数值数据序列的插值分位数。"
 ---
 
 # QUANTILE_CONT
