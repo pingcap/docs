@@ -1,6 +1,6 @@
 ---
 title: TRY_TO_TIMESTAMP
-summary: {{{ .lake }}} 中 [TO_TIMESTAMP] 的一个变体。它在将输入表达式转换为时间戳时执行与 TO_TIMESTAMP 相同的转换，但增加了错误处理支持：如果转换失败，则返回 NULL，而不是报错。
+summary: "{{{ .lake }}} 中 [TO_TIMESTAMP] 的一个变体。它在将输入表达式转换为时间戳时执行与 TO_TIMESTAMP 相同的转换，但增加了错误处理支持：如果转换失败，则返回 NULL，而不是报错。"
 ---
 
 # TRY_TO_TIMESTAMP

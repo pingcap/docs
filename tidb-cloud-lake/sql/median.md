@@ -1,6 +1,6 @@
 ---
 title: MEDIAN
-summary: `MEDIAN()` 函数。
+summary: "`MEDIAN()` 函数。"
 ---
 
 # MEDIAN

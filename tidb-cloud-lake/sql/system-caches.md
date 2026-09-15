@@ -1,6 +1,6 @@
 ---
 title: system.caches
-summary: {{{ .lake }}} 中管理的各种缓存概览。
+summary: "{{{ .lake }}} 中管理的各种缓存概览。"
 ---
 
 # system.caches

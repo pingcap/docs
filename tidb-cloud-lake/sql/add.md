@@ -1,6 +1,6 @@
 ---
 title: ADD
-summary: [PLUS](/tidb-cloud-lake/sql/plus.md) 的别名。
+summary: "[PLUS](/tidb-cloud-lake/sql/plus.md) 的别名。"
 ---
 
 # ADD

@@ -1,6 +1,6 @@
 ---
 title: REFRESH VIRTUAL COLUMN
-summary: {{{ .lake }}} 中的 `REFRESH VIRTUAL COLUMN` 命令用于显式触发为现有表创建虚拟列。虽然 {{{ .lake }}} 会自动管理新数据的虚拟列，但在某些特定场景下，仍需要手动刷新才能充分利用此功能。
+summary: "{{{ .lake }}} 中的 `REFRESH VIRTUAL COLUMN` 命令用于显式触发为现有表创建虚拟列。虽然 {{{ .lake }}} 会自动管理新数据的虚拟列，但在某些特定场景下，仍需要手动刷新才能充分利用此功能。"
 ---
 
 # REFRESH VIRTUAL COLUMN

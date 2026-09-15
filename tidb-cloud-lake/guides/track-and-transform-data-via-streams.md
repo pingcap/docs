@@ -1,6 +1,6 @@
 ---
 title: 通过 Streams 跟踪和转换数据
-summary: {{{ .lake }}} 中的 stream 是一种始终开启的变更表：每个已提交的 INSERT、UPDATE 或 DELETE 都会被捕获，直到你将其消费。本页保持简洁——先快速概览，再通过一个包含真实输出的实验帮助你直观了解 stream 的实际效果。
+summary: "{{{ .lake }}} 中的 stream 是一种始终开启的变更表：每个已提交的 INSERT、UPDATE 或 DELETE 都会被捕获，直到你将其消费。本页保持简洁——先快速概览，再通过一个包含真实输出的实验帮助你直观了解 stream 的实际效果。"
 ---
 
 # 通过 Streams 跟踪和转换数据

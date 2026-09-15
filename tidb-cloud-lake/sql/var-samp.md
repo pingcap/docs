@@ -1,6 +1,6 @@
 ---
 title: VAR_SAMP
-summary: `COVAR_SAMP` 的别名。
+summary: "`COVAR_SAMP` 的别名。"
 ---
 
 # VAR_SAMP

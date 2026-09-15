@@ -1,6 +1,6 @@
 ---
 title: ST_GEOGFROMWKT
-summary: `ST_GEOGRAPHYFROMWKT` 的别名。
+summary: "`ST_GEOGRAPHYFROMWKT` 的别名。"
 ---
 
 # ST_GEOGFROMWKT

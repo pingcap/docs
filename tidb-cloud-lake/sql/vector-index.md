@@ -1,6 +1,6 @@
 ---
 title: 向量索引
-summary: {{{ .lake }}} 中的向量索引使用 HNSW（Hierarchical Navigable Small World）算法，可对高维向量数据进行高效的相似度搜索。它支持语义搜索、推荐系统和 AI 应用等使用场景。
+summary: "{{{ .lake }}} 中的向量索引使用 HNSW（Hierarchical Navigable Small World）算法，可对高维向量数据进行高效的相似度搜索。它支持语义搜索、推荐系统和 AI 应用等使用场景。"
 ---
 
 # 向量索引

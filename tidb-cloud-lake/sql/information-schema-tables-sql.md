@@ -1,6 +1,6 @@
 ---
 title: information_schema.tables
-summary: `information_schema.tables` 系统表是一个视图，用于提供所有数据库中所有表的元信息，包括其 schema、类型、引擎以及创建详情。它还包含诸如数据长度、索引长度和行数等存储指标信息，帮助了解表结构和使用情况。
+summary: "`information_schema.tables` 系统表是一个视图，用于提供所有数据库中所有表的元信息，包括其 schema、类型、引擎以及创建详情。它还包含诸如数据长度、索引长度和行数等存储指标信息，帮助了解表结构和使用情况。"
 ---
 
 # information_schema.tables
