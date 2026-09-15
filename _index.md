@@ -51,7 +51,7 @@ summary: TiDBは、ハイブリッドトランザクションおよび分析処�
 
 [TiUPを使用して TiDBクラスタをデプロイ](https://docs.pingcap.com/ja/tidb/stable/production-deployment-using-tiup)
 
-[Kubernetes に TiDBクラスタをデプロイ](https://docs.pingcap.com/ja/tidb-in-kubernetes/stable)
+[Kubernetes に TiDBクラスタをデプロイ](https://docs.pingcap.com/ja/tidb/stable/tidb-in-kubernetes/)
 
 </LearningPath>
 
