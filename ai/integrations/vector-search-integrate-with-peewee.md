@@ -6,7 +6,7 @@ aliases: ['/tidb/stable/vector-search-integrate-with-peewee/','/tidb/dev/vector-
 
 # Integrate TiDB Vector Search with peewee
 
-This tutorial walks you through how to use [peewee](https://docs.peewee-orm.com/) to interact with [TiDB Vector Search](/ai/concepts/vector-search-overview.md), store embeddings, and perform vector search queries.
+This tutorial walks you through how to use [peewee](https://docs.peewee-orm.com/) to interact with [TiDB Vector Search](/ai/guides/vector-search-overview.md), store embeddings, and perform vector search queries.
 
 > **Note:**
 >

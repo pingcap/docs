@@ -111,7 +111,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 | Advanced SQL features | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| [Vector search](/ai/concepts/vector-search-overview.md) |  E |  N |  N  | N | N | N | N |
+| [Vector search](/ai/guides/vector-search-overview.md) |  E |  N |  N  | N | N | N | N |
 | [Prepared statement cache](/sql-prepared-plan-cache.md) | Y | Y | Y | Y | Y | Y | Y |
 | [Non-prepared statement cache](/sql-non-prepared-plan-cache.md) | Y | Y | Y | E | N | N | N |
 | [Instance-level execution plan cache](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) | E | N | N | N | N | N | N |

@@ -6,7 +6,7 @@ aliases: ['/tidb/stable/vector-search-index/','/tidb/dev/vector-search-index/','
 
 # Vector Search Index
 
-As described in the [Vector Search](/ai/concepts/vector-search-overview.md) document, vector search identifies the Top K-Nearest Neighbors (KNN) to a given vector by calculating the distance between the given vector and all vectors stored in the database. While this approach provides accurate results, it can be slow when the table contains a large number of vectors because it involves a full table scan. [^1]
+As described in the [Vector Search](/ai/guides/vector-search-overview.md) document, vector search identifies the Top K-Nearest Neighbors (KNN) to a given vector by calculating the distance between the given vector and all vectors stored in the database. While this approach provides accurate results, it can be slow when the table contains a large number of vectors because it involves a full table scan. [^1]
 
 To improve search efficiency, you can create vector search indexes in TiDB for approximate KNN (ANN) search. When using vector indexes for vector search, TiDB can greatly improve query performance with only a slight reduction in accuracy, generally maintaining a search recall rate above 90%.
 

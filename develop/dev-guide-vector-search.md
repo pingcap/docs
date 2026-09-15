@@ -5,7 +5,7 @@ summary: Introduce the vector search feature in TiDB for developers, including c
 
 # Vector Search
 
-[Vector search](/ai/concepts/vector-search-overview.md) enables semantic similarity searches across diverse data types such as documents, images, audio, and video. By leveraging your MySQL expertise, you can build scalable AI applications with advanced search functionality.
+[Vector search](/ai/guides/vector-search-overview.md) enables semantic similarity searches across diverse data types such as documents, images, audio, and video. By leveraging your MySQL expertise, you can build scalable AI applications with advanced search functionality.
 
 ## Get started
 

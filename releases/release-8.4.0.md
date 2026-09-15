@@ -207,7 +207,7 @@ Quick access: [Quick start](https://docs-archive.pingcap.com/tidb/v8.4/quick-sta
 
     To enhance the performance of vector search, you can create and use [vector search indexes](/ai/reference/vector-search-index.md). Note that TiDB vector search indexes rely on TiFlash. Before using vector search indexes, make sure that TiFlash nodes are deployed in your TiDB cluster.
 
-    For more information, see [documentation](/ai/concepts/vector-search-overview.md).
+    For more information, see [documentation](/ai/guides/vector-search-overview.md).
 
 ### DB operations
 
