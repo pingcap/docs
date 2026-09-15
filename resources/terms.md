@@ -16,6 +16,7 @@
 | algorithm | 算法 |  |
 | anonymous | 匿名 |  |
 | appendix | 附录 |  |
+| append-only | 仅追加 | In TiDB Cloud Filesystem Journal docs, it describes the write behavior of journals. |
 | Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): | 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制： |  |
 | architecture | 架构 |  |
 | arithmetic operation | 数值运算/算术运算 |  |
@@ -34,6 +35,7 @@
 | binary literal | 二进制字面值 |  |
 | bit | 位 |  |
 | Bloom filter | 布隆过滤器 |  |
+| blobless clone | 无 Blob 克隆 | In Git workspace docs, it refers to a Git clone that uses `--filter=blob:none`. |
 | boolean operation | 布尔运算 |  |
 | bootstrap | 启动/引导程序 |  |
 | breakpoint | 断点 |  |
@@ -51,6 +53,7 @@
 | CRUD | 增删改查 |  |
 | Custom Resource Definition (CRD) | 自定义资源类型 |  |
 | checksum | 校验和 |  |
+| checkpoint | 检查点 | In TiDB Cloud Filesystem docs, it refers to a durable snapshot point in a layer. |
 | circular dependency | 循环依赖 |  |
 | class | 类 |  |
 | client | 客户端 |  |
@@ -70,9 +73,11 @@
 | columnar storage engine | 列式存储引擎 |  |
 | combinatorial test | 组合测试 |  |
 | combined table | 总表 |   |
+| commit (Filesystem layer) | 提交 | Use this term for applying a TiDB Cloud Filesystem layer's changes to the base Filesystem. |
 | communicate | 通信 |  |
 | communication | 通信 |  |
 | comparison operation | 比较运算 |  |
+| companion runtime | 伴生运行时 | In TiDB Cloud CLI docs, it refers to `ti-drive9`. |
 | compatible | 兼容 |  |
 | compile | 编译 |  |
 | composite index | 组合索引 |  |
@@ -88,6 +93,7 @@
 | constraint | 约束 |  |
 | container technology | 容器技术 |  |
 | Control Machine | 中控机 |  |
+| control plane | 控制面 | In TiDB Cloud Filesystem docs, use this term in contrast with "data plane". |
 | converge | 收敛 |  |
 | Coprocessor | Coprocessor | 无需翻译；是否大写首字母看上下文 |
 | correctness | 正确性 |  |
@@ -96,6 +102,7 @@
 | CPU-bound | CPU 密集型 |  |
 | cross-datacenter | 跨数据中心 |  |
 | cross-row transaction | 跨行事务 |  |
+| credential(s) | 凭据 | In TiDB Cloud CLI docs, it can refer to TiDB Cloud API credentials or Filesystem credentials. |
 | custom schedulers | 自定义调度器 |  |
 | daily full synchronization | 每日全量同步 |  |
 | data abstraction | 数据抽象 |  |
@@ -106,6 +113,7 @@
 | data engine | 数据引擎 |  |
 | data hub | 数据中台 |  |
 | data integration | 数据集成 |  |
+| data plane | 数据面 | In TiDB Cloud Filesystem docs, use this term in contrast with "control plane". |
 | Data Manipulation Language (DML) | 数据操纵语言 |  |
 | data race | 数据竞争 |  |
 | database administrator (DBA) | 数据库管理员 |  |
@@ -115,6 +123,7 @@
 | decompress | 解压缩 |  |
 | dependency/dependencies | 依赖包 |  |
 | dependency | 依赖关系 |  |
+| delegated Vault token | 委托令牌 | In TiDB Cloud Filesystem Vault docs, it refers to a temporary token created from a grant. |
 | deploy | 部署 |  |
 | deployment | 部署 |  |
 | destroy the cluster | 销毁集群 |  |
@@ -122,6 +131,7 @@
 | disaster recovery | 容灾 |  |
 | disparate data source | 异构数据源 |  |
 | distributed database | 分布式数据库 |  |
+| drain | 刷写 | In TiDB Cloud Filesystem mount docs, it means flushing pending FUSE writes to the remote Filesystem while keeping the mount online. Do not translate it as "排空". |
 | driving table | 驱动表 |  |
 | dummy data | 假数据 |  |
 | dynamic | 动态 |  |
@@ -130,6 +140,7 @@
 | earlier version | 以下版本 |  |
 | edit | 修改/编辑（如：修改 ini 文件） |  |
 | elect | 选举 |  |
+| embedding | 向量嵌入 | Use this term for AI embeddings. |
 | engine file | 引擎文件 |  |
 | environment variable | 环境变量 |  |
 | equivalent/equal condition | 等值条件 |  |
@@ -141,6 +152,7 @@
 | expire | 过期 |  |
 | explicit transaction | 显式事务 |  |
 | expression | 表达式 |  |
+| extraction (media) | 媒体内容提取 | In TiDB Cloud Filesystem AI provider docs, it refers to extracting content from image, audio, or video files. |
 | extendible hashing | 可扩充散列 |  |
 | external interface | 对外接口 |  |
 | eventual consistency | 最终一致性 |  |
@@ -151,12 +163,16 @@
 | field | 字段 |  |
 | file descriptor | 文件描述符 |  |
 | file handle | 文件句柄 |  |
+| file system | 文件系统 | Use this translation only for the generic computing concept. For the TiDB Cloud product name, use "Filesystem". |
+| Filesystem | Filesystem | In TiDB Cloud Filesystem docs, keep it in English when capitalized and used as a shortened product name. |
+| Filesystem token | Filesystem 访问令牌 | In TiDB Cloud Filesystem docs, it refers to an access token for a Filesystem. |
 | fill-factor | 填充因子 |  |
 | fine-grained | 细粒度 |  |
 | flag | （命令行）标记/参数 |  |
 | float | float | |  |
 | Follower | Follower | A role in the Raft consensus algorithm |
 | force upgrade | 强制升级 |  |
+| fork (Filesystem layer) | 派生 | Use this term for creating a child layer from a parent layer or checkpoint. |
 | foundation class | 基础类库 |  |
 | framework | 框架 |  |
 | full backup | 全量备份 |  |
@@ -177,12 +193,14 @@
 | goroutine | 协程 | It also can be "coroutine". But it is suggested using "goroutine". |
 | graceful | 优雅的 |  |
 | granularity | 粒度 |  |
+| grant (Vault) | 授权 | In TiDB Cloud Filesystem Vault docs, it refers to a delegated access grant. |
 | grid computing | 网格计算 |  |
 | HA policy | 高可用策略 |  |
 | handle | 句柄 |  |
 | hang | 假死 |  |
 | hard limit | 硬限制 |  |
 | hash function | 散列函数 |  |
+| hash chain | 哈希链 | In TiDB Cloud Filesystem Journal docs, it refers to chained hash verification for journal entries. |
 | hash join | 哈希连接 |  |
 | hash partitioned table | hash 分区表 |  |
 | high availability | 高可用 |  |
@@ -195,6 +213,7 @@
 | hotfix | 热修复 |  |
 | hybrid deployment | 混合部署 |  |
 | Hybrid Transactional and Analytical Processing (HTAP) | HTAP (Hybrid Transactional and Analytical Processing) | 一般写英文形式 |
+| hydrate / hydration | 补全 | In TiDB Cloud Filesystem Git workspace docs, it means materializing missing clean Git data for a blobless clone. Keep command names, option values, and flags such as `hydrate-git-workspace` and `--hydrate` unchanged. |
 | idempotent (idempotence) | 幂等 |  |
 | image | 镜像 |  |
 | image tag error | 镜像 tag 错误 |  |
@@ -228,6 +247,7 @@
 | isolation | 隔离 |  |
 | isolation level | 隔离级别 |  |
 | Java DataBase Connectivity (JDBC) | Java 数据库连接 |  |
+| journal (Filesystem) | 日志（Journal） | In TiDB Cloud Filesystem Journal docs, keep the English term in parentheses on first use to distinguish it from a generic log file. |
 | kernel version | 内核版本 |  |
 | key-value pair(s) / KV pair(s) | 键值对 |  |
 | keyword | 关键字 |  |
@@ -237,6 +257,7 @@
 | latch contention | 锁竞争 |  |
 | latency | 延时 |  |
 | later version | 以上版本 |  |
+| layer (Filesystem) | 层 | In TiDB Cloud Filesystem docs, it refers to an isolated writable layer, similar to a Docker image layer. |
 | Leader | Leader | A role in the Raft consensus algorithm |
 | leak | 泄漏 |  |
 | least recently used (LRU) | 近期最少使用法 |  |
@@ -251,6 +272,7 @@
 | load | 负载 |  |
 | load | 加载 |  |
 | Local Persistent Volume(s)/LPV(s) | 本地持久化卷 |  |
+| local overlay | 本地叠加层 | In TiDB Cloud Filesystem mount docs, it refers to files that a mount profile keeps on the local machine instead of in the remote namespace. |
 | locality | 局部性 |  |
 | localization (L10N) | 本地化 |  |
 | lock | 锁 |  |
@@ -280,6 +302,8 @@
 | monotone increasing | 单调递增 |  |
 | mount option(s) | 挂载参数 |  |
 | mount/mounting | 挂载 |  |
+| mount locator | 挂载定位器 | In TiDB Cloud CLI docs, it refers to a non-secret local metadata file used to find the background mount process. |
+| mount profile | 挂载配置 | In TiDB Cloud Filesystem docs, it refers to presets such as `coding-agent`, `portable`, and `none`. |
 | multi-node | 多节点 |  |
 | multi-tenancy | 多租户技术 |  |
 | Multi-Version Concurrency Control (MVCC) | 多版本并发控制 |  |
@@ -312,6 +336,8 @@
 | outer join | 外连接 |  |
 | outer join simplification | 外连化简 |  |
 | overhead | 开销 |  |
+| owner token | 所有者令牌 | In TiDB Cloud Filesystem docs, it refers to a Filesystem token with owner-level permissions. |
+| pack / unpack | 打包 / 解包 | In TiDB Cloud Filesystem docs, it refers to archiving and restoring local overlay state. |
 | parallel replication | 并行复制 |  |
 | parameter | 参数 |  |
 | parse | 解析 |  |
@@ -335,6 +361,8 @@
 | privilege | 权限 |  |
 | production environment | 生产环境 |  |
 | proof of concept (PoC) | 概念验证 |  |
+| process injection | 进程注入 | In TiDB Cloud Filesystem Vault docs, it refers to injecting a secret into a child process through `run-with-secret`. |
+| profile (CLI) | 配置文件（Profile） | In TiDB Cloud CLI docs, it refers to a named CLI configuration set. Keep the English term in parentheses on first use if needed. |
 | public cloud | 公有云 |  |
 | public key | 公钥 |  |
 | pure virtual function | 纯虚函数 |  |
@@ -376,6 +404,7 @@
 | revoke | （权限）回收 |  |
 | rewind | 回退 |  |
 | rolling update | 滚动升级 |  |
+| rollback (Filesystem layer) | 回滚 | Use this term for rolling a TiDB Cloud Filesystem layer back without committing its changes. |
 | rotate | 轮转 |  |
 | rough set | 粗糙集 |  |
 | routine | 例程 |  |
@@ -391,9 +420,11 @@
 | schedule | 调度 |  |
 | Schema Evolution | Schema Evolution | A feature that allows TiDB Cloud Lake to automatically add columns that exist in source files but are missing from the target table during `COPY INTO` file loads when `ENABLE_SCHEMA_EVOLUTION` is enabled. |
 | scope | 作用域 |  |
+| scoped token | 限定范围令牌 | In TiDB Cloud Filesystem docs, it refers to a token limited by path, operation, and lifetime. |
 | secondary indices | 次级索引 |  |
 | see also | 另请参阅 |  |
 | seed | 数据填充 |  |
+| secret (Vault) | 密钥 | In TiDB Cloud Filesystem Vault docs, it refers to secret data stored in Vault. |
 | sequential flooding | 顺序泛洪 |  |
 | service | 服务 |  |
 | session | 会话 |  |
@@ -451,6 +482,10 @@
 | TiDB Cloud | TiDB Cloud |  |
 | TiDB Cloud Dedicated | TiDB Cloud Dedicated |  |
 | TiDB Cloud Essential | TiDB Cloud Essential |  |
+| TiDB Cloud CLI (`ti`) | TiDB Cloud CLI (`ti`) | Keep it in English as the product name. |
+| TiDB Cloud Filesystem | TiDB Cloud Filesystem | Keep it in English as the product feature name. |
+| TiDB Cloud Filesystem Journal | TiDB Cloud Filesystem Journal | Keep it in English as a feature name. |
+| TiDB Cloud Filesystem Vault | TiDB Cloud Filesystem Vault | Keep it in English as a feature name. |
 | TiDB Cloud Lake | TiDB Cloud Lake |  |
 | TiDB Cloud on Kubernetes | TiDB Cloud on Kubernetes |  |
 | TiDB Cloud Premium | TiDB Cloud Premium |  |
@@ -488,12 +523,14 @@
 | user identification | 用户标识 |  |
 | user privilege | 用户权限 |  |
 | variable | 变量 |  |
+| Vault | Vault | In TiDB Cloud Filesystem docs, keep it in English as the name of the secret-management subsystem. |
 | vector search | 向量搜索 |  |
 | verification | 验证 |  |
 | verify | 验证 |  |
 | Vertical Pod Autoscaling (VPA) | Pod 自动垂直扩容 | TiDB on Kubernetes |
 | Warehouse | 计算集群 | Keep both the English and Chinese terms "计算集群 (Warehouse)" when it first appears in a document. |
 | wildcard | 通配符 |  |
+| worktree | 工作树 | In Git workspace docs, it refers to a Git linked worktree. |
 | work queue(s) | 工作队列 |  |
 | Worksheet | 工作区 | Keep both the English and Chinese terms "工作区 (Worksheet)" when it first appears in a document. |
 | wrapper | 封装器 |  |
