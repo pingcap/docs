@@ -11,7 +11,7 @@ TiDB 関連の用語と定義については、 [TiDB用語集](/glossary.md)を
 
 <!-- A -->
 
-## あ {#a}
+## A {#a}
 
 ### 分析する {#analyze}
 
@@ -109,13 +109,13 @@ TiDB Lightningは、エンジンを介してTiKV Importerにデータを転送�
 
 <!-- I -->
 
-## 私 {#i}
+## I {#i}
 
 ### インポートモード {#import-mode}
 
 読み取り速度とスペース使用量を犠牲にして、書き込み用に TiKV を最適化する構成。
 
-TiDB Lightningは実行中に自動的にインポートモードを切り替えます。ただし、TiKVがインポートモードで停止した場合は、 `tidb-lightning-ctl` ～ [強制的に元に戻す](/tidb-lightning/troubleshoot-tidb-lightning.md#the-tidb-cluster-uses-lots-of-cpu-resources-and-runs-very-slowly-after-using-tidb-lightning) ～ [通常モード](/tidb-lightning/tidb-lightning-glossary.md#normal-mode)を使用してください。
+TiDB Lightningは実行中に自動的にインポートモードを切り替えます。ただし、TiKVがインポートモードで停止した場合は、 `tidb-lightning-ctl`を使用して[通常モード](/tidb-lightning/tidb-lightning-glossary.md#normal-mode)に[強制的に元に戻して](/tidb-lightning/troubleshoot-tidb-lightning.md#the-tidb-cluster-uses-lots-of-cpu-resources-and-runs-very-slowly-after-using-tidb-lightning)ください。
 
 ### インデックスエンジン {#index-engine}
 
@@ -155,7 +155,7 @@ KV ペアを TiKV Importer に送信する前に、 TiDB Lightning自体によ�
 
 <!-- N -->
 
-## 北 {#n}
+## N {#n}
 
 ### 通常モード {#normal-mode}
 
@@ -167,7 +167,7 @@ KV ペアを TiKV Importer に送信する前に、 TiDB Lightning自体によ�
 
 ### 後処理 {#post-processing}
 
-データソース全体が解析され、TiKV Importer に送信された後の期間。TiDB Lightning はTiKV Importer のアップロードを待機し、 [SST ファイル](/tidb-lightning/tidb-lightning-glossary.md#sst-file)を[取り込み](/tidb-lightning/tidb-lightning-glossary.md#ingest) 。
+データソース全体が解析され、TiKV Importer に送信された後の期間。TiDB Lightning は、TiKV Importer が[SST ファイル](/tidb-lightning/tidb-lightning-glossary.md#sst-file)をアップロードして[取り込む](/tidb-lightning/tidb-lightning-glossary.md#ingest)のを待機します。
 
 <!-- R -->
 

@@ -52,7 +52,7 @@ strict-format = true
 
 ## TiDB クラスターは多くの CPU リソースを消費し、 TiDB Lightningを使用すると非常に遅くなります。 {#the-tidb-cluster-uses-lots-of-cpu-resources-and-runs-very-slowly-after-using-tidb-lightning}
 
-`tidb-lightning`異常終了した場合、クラスターは本番には適さない"import mode"で停止している可能性があります。現在のモードは次のコマンドで取得できます。
+`tidb-lightning`が異常終了した場合、クラスターは本番には適さない"import mode"で停止している可能性があります。現在のモードは次のコマンドで取得できます。
 
 ```sh
 tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
@@ -120,7 +120,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 1. ファイル全体が UTF-8 または GB-18030 になるようにスキーマを修正します。
 
-2. ターゲットデータベース内の影響を受けるテーブルを手動で`CREATE` 。
+2. ターゲットデータベース内の影響を受けるテーブルを手動で`CREATE`してください。
 
 3. `[mydumper] character-set = "binary"`を設定するとチェックをスキップします。ただし、これにより対象データベースに文字化けが発生する可能性があります。
 
@@ -154,7 +154,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 ### TiDB Lightningがモードを切り替えるときに、 `rpc error: code = Unimplemented ...` {#encounter-rpc-error-code--unimplemented--when-tidb-lightning-switches-the-mode}
 
-**原因**: クラスタ内の一部のノードが`switch-mode`サポートしていません。例えば、 TiFlash のバージョンが`v4.0.0-rc.2` 、 [`switch-mode`はサポートされていません](https://github.com/pingcap/tidb-lightning/issues/273)より前の場合などです。
+**原因**: クラスタ内の一部のノードが`switch-mode`をサポートしていません。例えば、 TiFlash のバージョンが`v4.0.0-rc.2`より前の場合、 [`switch-mode`はサポートされていません](https://github.com/pingcap/tidb-lightning/issues/273)。
 
 **ソリューション**：
 
@@ -182,7 +182,7 @@ TiDBはMySQLのすべての文字セットをサポートしているわけで�
 
 ### `invalid compression type ...` {#invalid-compression-type-}
 
-- TiDB Lightning v6.4.0以降のバージョンでは、 `gzip` `snappy`圧縮データファイルのみがサポートされています。その他の種類の圧縮ファイルを使用するとエラーが発生します。ソースデータファイルが保存されているディレクトリにサポートされていない圧縮ファイルが存在する場合、タスクがエラーを報告します。このようなエラーを回避するには、サポートされていないファイルをインポートデータディレクトリから移動してください。詳細については、 [圧縮ファイル](/tidb-lightning/tidb-lightning-data-source.md#compressed-files)を参照してください。
+- TiDB Lightning v6.4.0以降のバージョンでは、 `gzip` 、 `snappy` 、および`zstd`圧縮データファイルのみがサポートされています。その他の種類の圧縮ファイルを使用するとエラーが発生します。ソースデータファイルが保存されているディレクトリにサポートされていない圧縮ファイルが存在する場合、タスクがエラーを報告します。このようなエラーを回避するには、サポートされていないファイルをインポートデータディレクトリから移動してください。詳細については、 [圧縮ファイル](/tidb-lightning/tidb-lightning-data-source.md#compressed-files)を参照してください。
 
 > **Note:**
 >

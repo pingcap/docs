@@ -10,13 +10,13 @@ v5.4.0以降、 TiDB Lightningを設定して、無効な型変換や一意キ�
 このドキュメントでは、TiDB Lightning のエラーの種類、エラーのクエリ方法、および例を紹介します。以下の設定項目が関係します。
 
 - `lightning.max-error` : 型エラーの許容閾値
-- `conflict.strategy` : 競合`conflict.max-record-rows` `conflict.threshold`に関連する構成
+- `conflict.strategy`、 `conflict.threshold`、および`conflict.max-record-rows`: 競合するデータに関連する設定
 - `tikv-importer.duplicate-resolution` (v8.0.0 で非推奨となり、将来のリリースで削除される予定): 物理インポートモードでのみ使用できる競合処理構成
 - `lightning.task-info-schema-name` : TiDB Lightningが競合を検出したときに競合するデータが格納されるデータベース
 
 詳細については[TiDB Lightning （タスク）](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)を参照してください。
 
-## 入力エラー {#type-error}
+## 型エラー {#type-error}
 
 `lightning.max-error`設定を使用すると、データ型に関連するエラーの許容範囲を広げることができます。この設定を*N*に設定すると、 TiDB Lightning はデータソースから最大*N*個のエラーを許容し、データソースが存在する前にスキップします。デフォルト値の`0`は、エラーが許容されないことを意味します。
 
@@ -57,7 +57,7 @@ TiDB Lightning がインポート中にエラーに遭遇した場合、終了�
 
     |   | エラーの種類 | エラー数 | エラーデータテーブル                            |
     | - | ------ | ---- | ------------------------------------- |
-    | 1 | データ型   | 1000 | `lightning_task_info` `type_error_v1` |
+    | 1 | データ型   | 1000 | `lightning_task_info`.`type_error_v1` |
 
 - TiDB Lightningログファイル内のエラーレポートは次のとおりです。
 
@@ -130,7 +130,7 @@ CREATE VIEW conflict_view AS
 
 `conflict_view`ビューは、インポート前とインポート後の競合検出の両方で検出された競合を記録します。これらの競合は、論理インポートモードと物理インポートモードの両方で`conflict`設定グループによって管理されます。このビューは、 `conflict_error_v3`テーブルと`conflict_records`テーブルに対して`UNION`操作を実行することで作成されます。
 
-| カラム     | 構文 | タイプ | 対立 | 説明                                                                          |
+| カラム     | 構文 | タイプ | 競合 | 説明                                                                          |
 | ------- | -- | --- | -- | --------------------------------------------------------------------------- |
 | task_id | ✓  | ✓   | ✓  | このエラーを生成するTiDB Lightningタスク ID                                              |
 | create_time | ✓  | ✓   | ✓  | エラーが記録された時刻                                                                 |

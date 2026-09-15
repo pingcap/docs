@@ -7,7 +7,7 @@ summary: TiDB Lightningの物理インポートモードの使い方を学びま
 
 このドキュメントでは、 TiDB Lightningの[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)の使用方法について説明します。具体的には、設定ファイルの作成、パフォーマンスのチューニング、ディスククォータの設定などが含まれます。
 
-物理インポートモードには制限があります。物理インポートモードを使用する前に、 [制限事項](/tidb-lightning/tidb-lightning-physical-import-mode.md#limitations)必ずお読みください。
+物理インポートモードには制限があります。物理インポートモードを使用する前に、 [制限事項](/tidb-lightning/tidb-lightning-physical-import-mode.md#limitations)を必ずお読みください。
 
 ## 物理インポートモードを設定して使用する {#configure-and-use-the-physical-import-mode}
 
@@ -124,7 +124,7 @@ analyze = "optional"
 >
 > TiDB Lightningの内部実装と制限により、物理インポートモードでの競合検出結果は、SQLベースのインポート結果と異なる場合があります。
 
-戦略が`"error"`で競合データが検出された場合、 TiDB Lightning はエラーを報告してインポートを終了します。戦略が`"replace"`の場合、競合データは[競合エラー](/tidb-lightning/tidb-lightning-error-resolution.md#conflict-errors)として扱われます。conflict.threshold [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)値が`0`より大きい場合、 TiDB Lightning は指定された数の競合エラーを許容します。デフォルト値は`9223372036854775807`で、これはほぼすべてのエラーが許容されることを意味します。詳細については、を参照してください。 [エラー解決](/tidb-lightning/tidb-lightning-error-resolution.md)。
+戦略が`"error"`で競合データが検出された場合、 TiDB Lightning はエラーを報告してインポートを終了します。戦略が`"replace"`の場合、競合データは[競合エラー](/tidb-lightning/tidb-lightning-error-resolution.md#conflict-errors)として扱われます。 [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)の値が`0`より大きい場合、 TiDB Lightning は指定された数の競合エラーを許容します。デフォルト値は`9223372036854775807`で、これはほぼすべてのエラーが許容されることを意味します。詳細については、 [エラー解決](/tidb-lightning/tidb-lightning-error-resolution.md)を参照してください。
 
 新しいバージョンの競合検出機能には、以下の制限事項があります。
 
@@ -135,15 +135,15 @@ analyze = "optional"
 
 ### 旧バージョンの競合検出機能（v8.0.0で非推奨） {#the-old-version-of-conflict-detection-deprecated-in-v800}
 
-バージョン 8.0.0 以降、競合検出の旧バージョン ( `tikv-importer.duplicate-resolution` ) は非推奨となります。 `tikv-importer.duplicate-resolution`パラメータは今後のリリースで削除されます。 `tikv-importer.duplicate-resolution`が`remove`であり、 `conflict.strategy`が設定されていない場合、 TiDB Lightning は`conflict.strategy`の値`"replace"` 。 `tikv-importer.duplicate-resolution`と`conflict.strategy`は同時に設定できません。同時に設定するとエラーが発生しますのでご注意ください。
+バージョン 8.0.0 以降、競合検出の旧バージョン ( `tikv-importer.duplicate-resolution` ) は非推奨となります。 `tikv-importer.duplicate-resolution`パラメータは今後のリリースで削除されます。 `tikv-importer.duplicate-resolution`が`remove`であり、 `conflict.strategy`が設定されていない場合、 TiDB Lightning は自動的に`conflict.strategy`の値を`"replace"`に割り当てることで、新しいバージョンの競合検出を有効にします。 `tikv-importer.duplicate-resolution`と`conflict.strategy`は同時に設定できません。同時に設定するとエラーが発生しますのでご注意ください。
 
-- バージョン v7.3.0 から v7.6.0 の間では、 `tikv-importer.duplicate-resolution`空文字列でない場合、 TiDB Lightning は古いバージョンの競合検出を有効にします。
+- バージョン v7.3.0 から v7.6.0 の間では、 `tikv-importer.duplicate-resolution`が空文字列でない場合、 TiDB Lightning は古いバージョンの競合検出を有効にします。
 - TiDB Lightningは、v7.2.0以前のバージョンでは、古いバージョンの競合検出のみをサポートしています。
 
 旧バージョンの競合検出では、 TiDB Lightningは2つの戦略を提供していました。
 
 - `remove` (推奨): ターゲット TiDB の一貫した状態を確保するために、ターゲットテーブルから競合するすべてのレコードを記録して削除します。
-- `none` : 重複レコードを検出しません。 `none` 2つの戦略の中で最も優れたパフォーマンスを発揮しますが、ターゲット TiDB のデータに不整合が生じる可能性があります。
+- `none` : 重複レコードを検出しません。 `none`は2つの戦略の中で最も優れたパフォーマンスを発揮しますが、ターゲット TiDB のデータに不整合が生じる可能性があります。
 
 バージョン5.3より前のTiDB Lightningは、競合検出をサポートしていません。競合データが存在する場合、インポート処理はチェックサムの段階で失敗します。競合検出が有効になっている場合、競合データが存在すると、 TiDB Lightningはチェックサムの段階をスキップします（常に失敗するため）。
 
@@ -264,7 +264,7 @@ io-concurrency = 5
 
 インポート処理中、各テーブルはインデックスを格納するための「インデックスエンジン」1つと、行データを格納するための複数の「データエンジン」に分割されます。
 
-`index-concurrency`インデックスエンジンの最大同時実行数を制御します。 `index-concurrency`を調整する際は、CPU が最大限に活用されるように`index-concurrency * the number of source files of each table > region-concurrency`も必ず調整してください。比率は通常 1.5 ～ 2 です。 `index-concurrency`を高く設定しすぎたり、2 (デフォルト値) より低く設定したりしないでください。 `index-concurrency`高すぎると、パイプラインが多数構築され、インデックスエンジンのインポートステージが滞留します。
+`index-concurrency`はインデックスエンジンの最大同時実行数を制御します。 `index-concurrency`を調整する際は、CPU が最大限に活用されるように`index-concurrency * the number of source files of each table > region-concurrency`も必ず調整してください。比率は通常 1.5 ～ 2 です。 `index-concurrency`を高く設定しすぎたり、2 (デフォルト値) より低く設定したりしないでください。 `index-concurrency`が高すぎると、パイプラインが多数構築され、インデックスエンジンのインポートステージが滞留します。
 
 `table-concurrency`についても同様です。 `table-concurrency * the number of source files of each table > region-concurrency`がCPUをフル活用していることを確認してください。推奨値は`region-concurrency * 4 / the number of source files of each table`前後で、4を下回らないようにしてください。
 
@@ -272,11 +272,11 @@ io-concurrency = 5
 
 `index-concurrency`と`table-concurrency`はインポート速度にほとんど影響を与えません。デフォルト値のままで問題ありません。
 
-`io-concurrency`ファイル読み取りの同時実行数を制御します。デフォルト値は 5 です。常に 5つのハンドルのみが読み取り操作を実行します。ファイル読み取り速度は通常ボトルネックにならないため、この設定はデフォルト値のままにしておくことができます。
+`io-concurrency`はファイル読み取りの同時実行数を制御します。デフォルト値は 5 です。常に 5つのハンドルのみが読み取り操作を実行します。ファイル読み取り速度は通常ボトルネックにならないため、この設定はデフォルト値のままにしておくことができます。
 
 ファイルデータが読み込まれた後、Lightning はデータのエンコードやローカルでのソートなどの後処理を行う必要があります。これらの操作の同時実行は`region-concurrency`によって制御されます。デフォルト値は CPU コア数です。この設定はデフォルト値のままにしておくことができます。Lightning は他のコンポーネントとは別のサーバーにデプロイすることをお勧めします。Lightning を他のコンポーネントと一緒にデプロイする必要がある場合は、負荷に応じて`region-concurrency`の値を下げる必要があります。
 
-TiKV の[`num-threads`](/tikv-configuration-file.md#num-threads)設定もパフォーマンスに影響を与える可能性があります。新しいクラスターの場合は、 `num-threads` CPU コア数に設定することをお勧めします。
+TiKV の[`num-threads`](/tikv-configuration-file.md#num-threads)設定もパフォーマンスに影響を与える可能性があります。新しいクラスターの場合は、 `num-threads`をCPU コア数に設定することをお勧めします。
 
 ## ディスククォータの設定<span class="version-mark">（v6.2.0の新機能）</span> {#configure-disk-quota-new-in-v620}
 
@@ -297,6 +297,6 @@ backend = "local"
 check-disk-quota = "30s"
 ```
 
-`disk-quota` TiDB Lightningが使用するストレージ容量を制限します。デフォルト値は MaxInt64 で、9223372036854775807 バイトです。この値はインポートに必要なディスク容量よりもはるかに大きいため、デフォルト値のままにしておくことは、ディスククォータを設定しないことと同じです。
+`disk-quota`はTiDB Lightningが使用するストレージ容量を制限します。デフォルト値は MaxInt64 で、9223372036854775807 バイトです。この値はインポートに必要なディスク容量よりもはるかに大きいため、デフォルト値のままにしておくことは、ディスククォータを設定しないことと同じです。
 
 `check-disk-quota`は、ディスククォータをチェックする間隔です。デフォルト値は 60秒です。TiDB Lightning がディスククォータをチェックすると、関連データに対して排他ロックを取得し、すべてのインポートスレッドをブロックします。そのため、 TiDB Lightning が書き込みの前に毎回ディスククォータをチェックすると、書き込み効率が大幅に低下します (シングルスレッド書き込みと同じくらい遅くなります)。効率的な書き込みを実現するために、ディスククォータは書き込みの前に毎回チェックされません。代わりに、 TiDB Lightning はすべてのインポートスレッドを一時停止し、 `check-disk-quota`間隔ごとにディスククォータをチェックします。つまり、 `check-disk-quota`の値を大きな値に設定すると、 TiDB Lightningが使用するディスク領域が設定したディスククォータを超える可能性があり、ディスククォータが無効になります。したがって、 `check-disk-quota`の値は小さい値に設定することをお勧めします。この項目の具体的な値は、 TiDB Lightningが実行される環境によって決まります。TiDB Lightning は、環境によって一時ファイルの書き込み速度が異なります。理論的には、書き込み速度が速いほど、 `check-disk-quota`の値は小さくする必要があります。
