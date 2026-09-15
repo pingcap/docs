@@ -174,7 +174,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、[ドキュメント](/partitioned-table.md#reorganize-partitions)を参照してください。
 
-- キー分割をサポート [#41364](https://github.com/pingcap/tidb/issues/41364) @[TonsnakeLin](https://github.com/TonsnakeLin)
+- キーパーティショニングをサポート [#41364](https://github.com/pingcap/tidb/issues/41364) @[TonsnakeLin](https://github.com/TonsnakeLin)
 
     TiDBはキーパーティショニングをサポートするようになりました。キーパーティショニングとハッシュパーティショニングはどちらも、データを一定数のパーティションに均等に分散できます。違いは、ハッシュパーティショニングは指定された整数式または整数列に基づいてのみデータを分散できるのに対し、キーパーティショニングは列リストに基づいてデータを分散できる点です。また、キーパーティショニングのパーティション列は整数型に限定されません。
 

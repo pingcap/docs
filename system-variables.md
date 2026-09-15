@@ -2434,7 +2434,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - 型: Boolean
 - デフォルト値: `ON`
 - この変数は`LIST (COLUMNS) TABLE PARTITION`機能を有効にするかどうかを設定するために使用されます。
-- この変数はv8.4.0以降非推奨です。その値はデフォルト値`ON`に固定されます。つまり、 [List パーティショニング](/partitioned-table.md#list-partitioning)はデフォルトで有効になります。
+- この変数はv8.4.0以降非推奨です。その値はデフォルト値`ON`に固定されます。つまり、 [リストパーティショニング](/partitioned-table.md#list-partitioning)はデフォルトで有効になります。
 
 ### tidb_enable_local_txn
 
@@ -5966,7 +5966,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
-- パーティション [動的剪定モード](/partitioned-table.md#dynamic-pruning-mode)でパーティションテーブルにアクセスする場合、TiDB は各パーティションの統計情報を集約してグローバル統計情報を生成します。この変数は、パーティション統計情報が欠落している場合にグローバル統計情報を生成するかどうかを制御します。
+- [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)でパーティションテーブルにアクセスする場合、TiDB は各パーティションの統計情報を集約してグローバル統計情報を生成します。この変数は、パーティション統計情報が欠落している場合にグローバル統計情報を生成するかどうかを制御します。
 
     - この変数が`ON`の場合、TiDB はグローバル統計を生成する際に不足しているパーティション統計をスキップするため、グローバル統計の生成には影響しません。
     - この変数が`OFF`の場合、TiDB は欠落しているパーティション統計を検出すると、グローバル統計の生成を停止します。

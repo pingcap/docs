@@ -25,7 +25,7 @@ TiDB Ansible バージョン: 3.0.8
     - `HashAgg` Executor の同時実行値が正しく初期化されていないために集計操作の効率が低下することがある問題を修正しました[#13811](https://github.com/pingcap/tidb/pull/13811)
     - `group by item`節が括弧内にある場合に実行時にエラーが報告される問題を修正[#13658](https://github.com/pingcap/tidb/pull/13658)
     - TiDBが`group by item` を誤って計算するため、 `OUTER JOIN`の実行でエラーが報告される可能性がある問題を修正しました。 [#14014](https://github.com/pingcap/tidb/pull/14014)
-    - 範囲を超えるデータが範囲パーティションテーブルに書き込まれたときにエラーメッセージが不正確になる問題を修正[#14107](https://github.com/pingcap/tidb/pull/14107)
+    - 範囲を超えるデータがレンジパーティションテーブルに書き込まれたときにエラーメッセージが不正確になる問題を修正[#14107](https://github.com/pingcap/tidb/pull/14107)
     - MySQL 8では`PadCharToFullLength`すぐに破棄されることを考慮して、特殊なケースで予期しないクエリ結果を回避するために[PR #10124](https://github.com/pingcap/tidb/pull/10124)元に戻し、 `PadCharToFullLength`効果をキャンセルします[#14157](https://github.com/pingcap/tidb/pull/14157)
     - `ExplainExec` の保証されていない`close()`呼び出しによって発生する`EXPLAIN ANALYZE`文の実行時のゴルーチン リークの問題を修正しました。 [#14226](https://github.com/pingcap/tidb/pull/14226)
 - DDL
