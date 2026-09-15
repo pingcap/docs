@@ -37,8 +37,8 @@ env:
   SOURCE_BRANCH: release-8.5
   TERMS_BRANCH: master
   CN_CLOUD_BRANCH: i18n-zh-release-8.5
-  CLOUD_TOC_FILES: TOC-tidb-cloud.md,TOC-tidb-cloud-starter.md,TOC-tidb-cloud-essential.md,TOC-tidb-cloud-premium.md,TOC-tidb-cloud-releases.md
-  CLOUD_INDEX_FILES: tidb-cloud/dedicated/_index.md,tidb-cloud/essential/_index.md,tidb-cloud/premium/_index.md,tidb-cloud/releases/_index.md,tidb-cloud/starter/_index.md
+  CLOUD_TOC_FILES: TOC-tidb-cloud.md,TOC-tidb-cloud-starter.md,TOC-tidb-cloud-essential.md,TOC-tidb-cloud-premium.md,TOC-tidb-cloud-releases.md,TOC-tidb-cloud-lake.md
+  CLOUD_INDEX_FILES: tidb-cloud/dedicated/_index.md,tidb-cloud/essential/_index.md,tidb-cloud/premium/_index.md,tidb-cloud/releases/_index.md,tidb-cloud/starter/_index.md,tidb-cloud-lake/_index.md
   AI_TRANSLATOR_REPO: qiancai/ai-markdown-translator
   AI_TRANSLATOR_REF: main
   # Manual all-updated runs use the same global cursor behavior as scheduled runs.
@@ -169,6 +169,7 @@ jobs:
           BASE_REF: ${{ steps.commits.outputs.base_ref }}
           HEAD_REF: ${{ steps.commits.outputs.head_ref }}
           DOCS_SOURCE_PATH: ${{ github.workspace }}/docs-source
+          DOCS_TARGET_PATH: ${{ github.workspace }}/docs
           CLOUD_TOC_FILES: ${{ env.CLOUD_TOC_FILES }}
           CLOUD_INDEX_FILES: ${{ env.CLOUD_INDEX_FILES }}
         run: |
@@ -191,6 +192,7 @@ jobs:
           SOURCE_HEAD_REF: ${{ steps.commits.outputs.head_ref }}
           SOURCE_FOLDER: ""
           SOURCE_FILES: ${{ steps.source_files.outputs.files }}
+          SOURCE_FULL_FILES: ${{ steps.source_files.outputs.full_files }}
           SOURCE_FILES_TRANSLATION_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.translation_scope == 'Translate only specified files' && inputs.source_files_translation_mode || 'incremental' }}
           SOURCE_LANGUAGE: English
           TARGET_LANGUAGE: Chinese
