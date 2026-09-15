@@ -12,7 +12,7 @@
 - Get Started
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
-  - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
+  - [Try Out TiDB Cloud CLI (ticloud)](/tidb-cloud/get-started-with-cli.md)
 - Key Concepts
   - [Overview](/tidb-cloud/key-concepts.md)
   - [Architecture](/tidb-cloud/architecture-concepts.md)
@@ -70,6 +70,7 @@
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [Analyze Performance](/tidb-cloud/tune-performance.md)
+    - [Use Plan Replayer to Troubleshoot SQL Performance](/tidb-cloud/plan-replayer.md)
     - SQL Tuning
       - [Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
       - Understanding the Query Execution Plan
@@ -462,7 +463,7 @@
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [Metadata Lock](/metadata-lock.md)
   - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
-- CLI Reference ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+- TiDB Cloud CLI (ticloud) Reference ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/tidb-cloud/cli-reference.md)
   - auth
     - [login](/tidb-cloud/ticloud-auth-login.md)

@@ -8,6 +8,92 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes','/ai/v
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## September 15, 2026
+
+**General changes**
+
+* **TiDB Cloud CLI**
+
+  [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is now available in public preview for managing [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) instances and TiDB Cloud Filesystems. A TiDB Cloud Filesystem is a serverless distributed file system designed for AI agents and automation workloads.
+
+  You can use `ti` directly or let your scripts, CI jobs, and AI agents run it to automate TiDB Cloud workflows. With `ti`, you can create and manage TiDB Cloud Starter instances, execute SQL statements, and create and access persistent Filesystem workspaces through file commands or supported mounts. JSON output by default, JMESPath output queries, and support for `--wait` and `--dry-run` on applicable commands simplify automation.
+
+  For more information, see [Get Started with TiDB Cloud CLI](/ai/ti/ti-quick-start.md) and [TiDB Cloud CLI (`ti`) Overview](/ai/ti/ti-overview.md).
+
+## September 8, 2026
+
+**Console changes**
+
+- **TiDB Cloud Essential**
+
+    - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances that include the enhancements announced on [June 30, 2026](#june-30-2026) now display `CLOUD.202603.x` as their TiDB version on the instance overview page in the TiDB Cloud console.
+
+        For more information about these enhancements, see the [June 30, 2026 release notes](#june-30-2026).
+
+**API changes**
+
+- **TiDB Cloud Premium**
+
+    - Introduce the changefeed API endpoints for [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium), providing programmatic management of change data capture (CDC) changefeeds.
+
+        You can use these endpoints to create, list, get, delete, pause, resume, and scale changefeeds for real-time data replication to downstream systems, including Apache Kafka, MySQL, Amazon S3, and Alibaba Cloud OSS.
+
+        For more information, see [Changefeed API v1beta2 Reference](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Changefeed).
+
+## September 1, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - TiDB Cloud Essential now lets you temporarily authorize TiDB Cloud Support to access Plan Replayer files for SQL performance troubleshooting.
+
+        You can choose the access duration, extend it if needed, or revoke access at any time. Access is automatically revoked when the authorization expires.
+
+        Plan Replayer files contain SQL text, table schemas, and optimizer statistics, but no actual table row data.
+
+        For more information, see [Use Plan Replayer to Troubleshoot SQL Performance](https://docs.pingcap.com/tidbcloud/plan-replayer/?plan=essential).
+
+- **TiDB Cloud Premium**
+
+    - The **Events** page is now available for TiDB Cloud Premium instances.
+
+        You can view historical events that record changes to your Premium instance on this page, along with information such as the event type, status, message, trigger time, and trigger user. Event data is retained for 7 days.
+
+        For more information, see [Events](https://docs.pingcap.com/tidbcloud/tidb-cloud-events/?plan=premium).
+
+    - TiDB Cloud Premium now lets you configure filter rules for database audit logging.
+
+        You can filter audit events by SQL user, event class, table, and execution status to control which database activities are logged, helping you focus on relevant events for security auditing and compliance.
+
+        For more information, see [Specify audit filter rules](https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing-premium/?plan=premium#specify-audit-filter-rules).
+
+    - TiDB Cloud Premium now lets you temporarily authorize TiDB Cloud Support to access Plan Replayer files for SQL performance troubleshooting.
+
+        You can choose the access duration, extend it if needed, or revoke access at any time. Access is automatically revoked when the authorization expires.
+
+        Plan Replayer files contain SQL text, table schemas, and optimizer statistics, but no actual table row data.
+
+        For more information, see [Use Plan Replayer to Troubleshoot SQL Performance](https://docs.pingcap.com/tidbcloud/plan-replayer/?plan=premium).
+
+**Billing adjustments**
+
+- **TiDB Cloud Essential**
+
+    - Starting September 1, 2026, billing for backup usage and network egress on [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances is gradually taking effect.
+
+        Network egress is billed as a separate line item rather than being included in RCU charges.
+
+        For more information, see [TiDB Cloud Essential Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
+
+## August 28, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v8.5.7](https://docs.pingcap.com/tidb/stable/release-8.5.7/) to [v8.5.8](https://docs.pingcap.com/tidb/stable/release-8.5.8/).
+
 ## August 25, 2026
 
 **General changes**

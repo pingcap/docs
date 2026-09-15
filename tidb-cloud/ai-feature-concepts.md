@@ -23,7 +23,7 @@ Unlike traditional full-text search, which relies on exact keyword matching and 
 
 Even when the search terms do not exactly match the content in the database, vector search can still provide results that align with the user's intent by analyzing the semantics of the data. For example, a full-text search for "a swimming animal" only returns results containing these exact keywords. In contrast, vector search can return results for other swimming animals, such as fish or ducks, even if these results do not contain the exact keywords.
 
-For more information, see [Vector Search (PREVIEW) Overview](/ai/concepts/vector-search-overview.md).
+For more information, see [Vector Search (PREVIEW) Overview](/ai/guides/vector-search-overview.md).
 
 ## AI integrations
 
@@ -37,7 +37,7 @@ For a list of supported AI frameworks, see [AI Integrations for TiDB](/ai/integr
 
 A vector embedding, also known as an embedding, is a sequence of numbers that represents real-world objects in a high-dimensional space. It captures the meaning and context of unstructured data, such as documents, images, audio, and videos.
 
-Embedding models are algorithms that transform data into [vector embeddings](/ai/concepts/vector-search-overview.md#vector-embedding). The choice of an appropriate embedding model is crucial for ensuring the accuracy and relevance of semantic search results.
+Embedding models are algorithms that transform data into [vector embeddings](/ai/guides/vector-search-overview.md#vector-embedding). The choice of an appropriate embedding model is crucial for ensuring the accuracy and relevance of semantic search results.
 
 TiDB Vector Search supports storing vectors of up to 16383 dimensions, which accommodates most embedding models. For unstructured text data, you can find top-performing text embedding models on the [Massive Text Embedding Benchmark (MTEB) Leaderboard](https://huggingface.co/spaces/mteb/leaderboard).
 

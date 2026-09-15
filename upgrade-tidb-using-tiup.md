@@ -73,6 +73,7 @@ The following provides release notes you need to know when you upgrade from v8.4
 - TiDB v8.5.5 [compatibility changes](https://docs.pingcap.com/tidb/stable/release-8.5.5/#compatibility-changes)
 - TiDB v8.5.6 [compatibility changes](https://docs.pingcap.com/tidb/stable/release-8.5.6/#compatibility-changes)
 - TiDB v8.5.7 [compatibility changes](https://docs.pingcap.com/tidb/stable/release-8.5.7/#compatibility-changes)
+- TiDB v8.5.8 [release notes](/releases/release-8.5.8.md)
 
 ### Step 2: Upgrade TiUP or TiUP offline mirror
 

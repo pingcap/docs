@@ -69,7 +69,7 @@ For more information, see [Manage an endpoint](/tidb-cloud/data-service-manage-e
 
 ### Full-text search
 
-Unlike [Vector Search](/ai/concepts/vector-search-overview.md), which focuses on semantic similarity, full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
+Unlike [Vector Search](/ai/guides/vector-search-overview.md), which focuses on semantic similarity, full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
 
 For more information, see [Full-Text Search with SQL](/ai/guides/vector-search-full-text-search-sql.md) and [Full-Text Search with Python](/ai/guides/vector-search-full-text-search-python.md).
 
@@ -193,6 +193,10 @@ For TiDB Cloud Dedicated and TiDB Self-Managed, a Request Unit (RU) is a resourc
 
 In TiDB Cloud, a cluster is a dedicated cloud deployment of TiDB that includes explicit infrastructure details such as node topology (where you can specify the number of [TiDB](/tidb-computing.md) nodes, [TiKV](/tidb-storage.md) nodes, and [TiFlash](/tiflash/tiflash-overview.md) nodes), storage configuration, and scaling model.
 
+### TiDB Cloud Filesystem
+
+A TiDB Cloud Filesystem is a serverless distributed file system designed for AI agents and automation workloads. It provides a persistent, shareable file namespace that stays available independently of the local machine, sandbox, or CI runner that accesses it, making it useful for persistent storage, shared workspaces, and AI agent workflows.
+
 ### TiDB node
 
 The computing node that aggregates data from queries returned from transactional or analytical stores. Increasing the number of TiDB nodes will increase the number of concurrent queries that the {{{ .dedicated }}} cluster can handle.
@@ -232,7 +236,7 @@ A list of IP addresses and Classless Inter-Domain Routing (CIDR) addresses that 
 
 ### Vector search
 
-[Vector search](/ai/concepts/vector-search-overview.md) is a search method that prioritizes the meaning of your data to deliver relevant results. Unlike traditional full-text search, which relies on exact keyword matching and word frequency, vector search converts various data types (such as text, images, or audio) into high-dimensional vectors and queries based on the similarity between these vectors. This search method captures the semantic meaning and contextual information of the data, leading to a more precise understanding of user intent. Even when the search terms do not exactly match the content in the database, vector search can still provide results that align with the user's intent by analyzing the semantics of the data.
+[Vector search](/ai/guides/vector-search-overview.md) is a search method that prioritizes the meaning of your data to deliver relevant results. Unlike traditional full-text search, which relies on exact keyword matching and word frequency, vector search converts various data types (such as text, images, or audio) into high-dimensional vectors and queries based on the similarity between these vectors. This search method captures the semantic meaning and contextual information of the data, leading to a more precise understanding of user intent. Even when the search terms do not exactly match the content in the database, vector search can still provide results that align with the user's intent by analyzing the semantics of the data.
 
 ### Virtual Private Cloud
 
