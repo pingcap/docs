@@ -9,6 +9,10 @@ This document describes the `FTS_MATCH_WORD()` function for full-text search in 
 
 For how to create the full-text indexes that these functions use, see [Full-Text Search Index](/ai/reference/full-text-search-index.md).
 
+> **Note:**
+>
+> - Currently, full-text search is available only on {{{ .starter }}} in [select regions](/ai/guides/vector-search-full-text-search-sql.md#get-started).
+
 ## FTS_MATCH_WORD()
 
 `FTS_MATCH_WORD()` performs a keyword search against one or more scored columns of a full-text index and returns a BM25 relevance score.
