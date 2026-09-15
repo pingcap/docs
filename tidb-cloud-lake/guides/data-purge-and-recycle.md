@@ -17,9 +17,9 @@ Deleting rows or dropping a table does not necessarily release its storage immed
 |---------|---------------|--------|
 | [VACUUM TABLE](/tidb-cloud-lake/sql/vacuum-table.md) | One writable FUSE table | Removes eligible history while preserving the table and current data. |
 | [VACUUM TABLES](/tidb-cloud-lake/sql/vacuum-tables.md) | Writable FUSE tables in a specified database, or all non-system databases in the current catalog | Performs the same historical cleanup in bulk. |
-| [VACUUM DROPPED OBJECTS](/sql/sql-commands/ddl/table/vacuum-dropped-objects) | Dropped objects in a specified database, or all databases in the current catalog, including dropped databases | Removes eligible dropped objects, their storage, and their metadata. |
-| [VACUUM TEMPORARY FILES](/sql/sql-commands/administration-cmds/vacuum-temp-files) | Tenant temporary spill files and inactive temporary-table sessions | Cleans temporary storage. |
-| [VACUUM ALL](/sql/sql-commands/administration-cmds/vacuum-all) | Table history, dropped objects, then temporary files | Runs the three cleanup steps in order using their respective retention rules. |
+| [VACUUM DROPPED OBJECTS](/tidb-cloud-lake/sql/vacuum-dropped-objects.md) | Dropped objects in a specified database, or all databases in the current catalog, including dropped databases | Removes eligible dropped objects, their storage, and their metadata. |
+| [VACUUM TEMPORARY FILES](/tidb-cloud-lake/sql/vacuum-temporary-files.md) | Tenant temporary spill files and inactive temporary-table sessions | Cleans temporary storage. |
+| [VACUUM ALL](/tidb-cloud-lake/sql/vacuum-all.md) | Table history, dropped objects, then temporary files | Runs the three cleanup steps in order using their respective retention rules. |
 
 Single-table cleanup requires `SUPER` access to the table. Database-scoped batch or dropped-object cleanup requires `SUPER` access to that database. Batch table and dropped-object cleanup without FROM, VACUUM ALL, and temporary-file cleanup require global `SUPER` privilege.
 

@@ -156,7 +156,7 @@ OPTIMIZE TABLE [database.]table_name COMPACT [LIMIT <segment_count>]
 
 Compacts the table data by merging small blocks and segments into larger ones.
 
-- This command creates a new snapshot (along with compacted segments and blocks) of the most recent table data without affecting the existing storage files, so reclaim storage from eligible historical data with [VACUUM TABLE](/tidb-cloud-lake/sql/vacuum-table.md) after compaction.
+- This command creates a new snapshot (along with compacted segments and blocks) of the most recent table data without affecting the existing storage files. To reclaim storage from eligible historical data, run [`VACUUM TABLE`](/tidb-cloud-lake/sql/vacuum-table.md) after compaction.
 
 - Depending on the size of the given table, it may take quite a while to complete the execution.
 
