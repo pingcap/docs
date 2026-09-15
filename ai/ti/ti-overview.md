@@ -5,7 +5,7 @@ summary: Learn when to use the TiDB Cloud CLI (`ti`) to manage TiDB Cloud Starte
 
 # TiDB Cloud CLI (`ti`) Overview
 
-[TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is a CLI for managing [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) instances and [TiDB Cloud Filesystems](#tidb-cloud-filesystem). It is designed for both interactive use and automation, with structured JSON output by default.
+[TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is a CLI for managing [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) instances and [TiDB Cloud Filesystems](#tidb-cloud-filesystem). It is designed for both interactive use and automation, with structured JSON output by default.
 
 > **Note:**
 >
