@@ -5,7 +5,7 @@ summary: Reference TiDB Cloud CLI command groups, syntax, global options, output
 
 # TiDB Cloud CLI (`ti`) Command Reference
 
-This page describes the command structure and behavior shared by TiDB Cloud CLI `ti` commands. For the syntax and options of an individual command, select its command group or use the documentation navigation.
+This page describes the command structure and behavior shared by [TiDB Cloud CLI (`ti`)](/ai/ti/ti-overview.md) commands. For the syntax and options of an individual command, select its command group or use the documentation navigation.
 
 > **Note:**
 >

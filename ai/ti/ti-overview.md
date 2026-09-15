@@ -5,9 +5,7 @@ summary: Learn when to use the TiDB Cloud CLI (`ti`) to manage TiDB Cloud Starte
 
 # TiDB Cloud CLI (`ti`) Overview
 
-The [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is a CLI for managing TiDB Cloud Starter instances and TiDB Cloud Filesystems. It is designed for both interactive use and automation, with structured JSON output by default.
-
-With `ti`, you can manage [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) instances and TiDB Cloud Filesystems. A TiDB Cloud Filesystem is a serverless distributed file system designed for AI agents and automation workloads. It provides a persistent, shareable file namespace that stays available independently of the local machine, sandbox, or CI runner that accesses it, making it useful for persistent storage, shared workspaces, and AI agent workflows.
+[TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is a CLI for managing [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) instances and [TiDB Cloud Filesystems](/tidb-cloud/tidb-cloud-glossary.md#tidb-cloud-filesystem). It is designed for both interactive use and automation, with structured JSON output by default.
 
 > **Note:**
 >
