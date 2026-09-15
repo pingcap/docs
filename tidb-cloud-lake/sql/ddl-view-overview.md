@@ -3,7 +3,7 @@ title: 视图
 summary: 本页按功能分类，全面概述了 {{{ .lake }}} 中的视图操作，便于快速查阅。
 ---
 
-# 视图
+# 视图 <!--Corresponding EN commit: fb0ce721ecedde2feb16086efcae0f885d20c9b2-->
 
 本页按功能分类，全面概述了 {{{ .lake }}} 中的视图操作，便于快速查阅。
 

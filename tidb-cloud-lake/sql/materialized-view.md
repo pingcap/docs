@@ -3,7 +3,7 @@ title: 物化视图
 summary: 物化视图会将查询结果以物理方式存储。在创建物化视图时，TiDB Cloud Lake 会对源表启用变更跟踪。
 ---
 
-# 物化视图
+# 物化视图 <!--Corresponding EN commit: fb0ce721ecedde2feb16086efcae0f885d20c9b2-->
 
 物化视图会将查询结果以物理方式存储。它定义在 `default` catalog 中的一张持久化 FUSE 表之上。在创建物化视图时，{{{ .lake }}} 会对源表启用变更跟踪。
 
