@@ -5,12 +5,16 @@ summary: Learn when to use the TiDB Cloud CLI (`ti`) to manage TiDB Cloud Starte
 
 # TiDB Cloud CLI (`ti`) Overview
 
-[TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is a CLI for managing [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) instances and [TiDB Cloud Filesystems](/tidb-cloud/tidb-cloud-glossary.md#tidb-cloud-filesystem). It is designed for both interactive use and automation, with structured JSON output by default.
+[TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is a CLI for managing [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) instances and [TiDB Cloud Filesystems](#tidb-cloud-filesystem). It is designed for both interactive use and automation, with structured JSON output by default.
 
 > **Note:**
 >
 > - TiDB Cloud CLI (`ti`) is currently in public preview. Its features and command-line interface might change without prior notice.
 > - TiDB Cloud currently provides two CLIs with different scopes: [`ti`](https://github.com/tidbcloud/ti-cli) and [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli). To learn when to use `ti` or `ticloud`, see [Differences between `ti` and `ticloud`](#differences-between-ti-and-ticloud) and [When to use TiDB Cloud CLI (`ti`)](#when-to-use-tidb-cloud-cli-ti).
+
+## TiDB Cloud Filesystem
+
+A TiDB Cloud Filesystem is a serverless distributed file system designed for AI agents and automation workloads. It provides a persistent, shareable file namespace that stays available independently of the local machine, sandbox, or CI runner that accesses it, making it useful for persistent storage, shared workspaces, and AI agent workflows.
 
 ## When to use TiDB Cloud CLI (`ti`)
 
