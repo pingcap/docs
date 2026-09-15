@@ -9,9 +9,9 @@ This document describes how to create and manage full-text indexes in TiDB, incl
 
 To run full-text queries against a full-text index, see [Full-Text Search Functions](/ai/reference/full-text-search-functions-tidb.md).
 
-## Restrictions
+## Prerequisites
 
-Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, full-text search is only available on {{{ .starter }}} in the following regions:
+Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, full-text search is **available only on {{{ .starter }}}** in the following regions:
 
 - AWS: `Oregon (us-west-2)`, `N. Virginia (us-east-1)`, `Tokyo (ap-northeast-1)`, `Frankfurt (eu-central-1)`, and `Singapore (ap-southeast-1)`
 
