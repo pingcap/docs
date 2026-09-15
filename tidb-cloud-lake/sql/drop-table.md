@@ -21,13 +21,13 @@ DROP TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
 
 This command only marks the table schema as deleted in the metadata service, ensuring that the actual data remains intact. If you need to recover the deleted table schema, you can use the [UNDROP TABLE](/tidb-cloud-lake/sql/undrop-table.md) command.
 
-For completely removing a table along with its data files, consider using the [VACUUM DROP TABLE](/tidb-cloud-lake/sql/vacuum-drop-table.md) command.
+For completely removing a table along with its data files, consider using the [VACUUM DROP TABLE](/tidb-cloud-lake/sql/vacuum-dropped-objects.md) command.
 
 ## Examples
 
 ### Deleting a Table
 
-This example highlights the use of the DROP TABLE command to delete the "test" table. After dropping the table, any attempt to SELECT from it results in an "Unknown table" error. It also demonstrates how to recover the dropped "test" table using the UNDROP TABLE command, allowing you to SELECT data from it again.
+This example highlights the use of the DROP TABLE command to delete the "test" table. After dropping the table, any attempt to SELECT from it results in an "Unknown table" error. It also demonstrates how to recover the dropped "test" table using the `UNDROP TABLE` command, allowing you to SELECT data from it again.
 
 ```sql
 CREATE TABLE test(a INT, b VARCHAR);
