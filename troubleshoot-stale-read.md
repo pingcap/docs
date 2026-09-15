@@ -170,9 +170,9 @@ CheckLeader の問題に対処するには、 [**TiKV-Details**&gt;**Resolved-TS
 
 ![Example: Stale Read OPS](/media/stale-read/example-ops.png)
 
-まず、次の[**TiKV-Details**&gt;**Resolved-TS**ダッシュボード](/grafana-tikv-dashboard.md#resolved-ts)の**Max Resolved TS gap**と**Min Resolved TS Region**メトリックを確認します。
+まず、次の[**TiKV-Details**&gt;**Resolved-TS**ダッシュボード](/grafana-tikv-dashboard.md#resolved-ts)の**Max gap of resolved-ts**と**Min Resolved TS Region**メトリックを確認します。
 
-![Example: Max Resolved TS gap](/media/stale-read/example-ts-gap.png)
+![Example: Max gap of resolved-ts](/media/stale-read/example-ts-gap.png)
 
 上記のメトリックから、リージョン`3121`と他のいくつかのリージョンが、resolved-ts を時間内に更新していないことがわかります。
 
