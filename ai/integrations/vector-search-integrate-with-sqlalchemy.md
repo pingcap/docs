@@ -1,12 +1,12 @@
 ---
 title: Integrate TiDB Vector Search with SQLAlchemy
-summary: TiDB Vector SearchをSQLAlchemyと統合して、埋め込みデータを保存し、セマンティック検索を実行する方法を学びましょう。
+summary: TiDBベクトル検索をSQLAlchemyと統合して、埋め込みデータを保存し、セマンティック検索を実行する方法を学びましょう。
 aliases: ['/ja/tidb/stable/vector-search-integrate-with-sqlalchemy/','/ja/tidb/dev/vector-search-integrate-with-sqlalchemy/','/ja/tidbcloud/vector-search-integrate-with-sqlalchemy/']
 ---
 
 # TiDBベクトル検索をSQLAlchemyと統合する {#integrate-tidb-vector-search-with-sqlalchemy}
 
-このチュートリアルでは、 [SQLAlchemy](https://www.sqlalchemy.org/)を使用して[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)と対話し、埋め込みを保存し、ベクトル検索クエリを実行する方法を説明します。
+このチュートリアルでは、 [SQLAlchemy](https://www.sqlalchemy.org/)を使用して[TiDBベクトル検索](/ai/concepts/vector-search-overview.md)と対話し、埋め込みを保存し、ベクトル検索クエリを実行する方法を説明します。
 
 > **Note:**
 >
@@ -28,7 +28,7 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-sqlalchemy/','/ja/tidb/d
 
 ## サンプルアプリを実行します {#run-the-sample-app}
 
-以下の手順に従うことで、TiDB Vector SearchをSQLAlchemyと統合する方法をすぐに習得できます。
+以下の手順に従うことで、TiDBベクトル検索をSQLAlchemyと統合する方法をすぐに習得できます。
 
 ### ステップ1. リポジトリをクローンする {#step-1-clone-the-repository}
 

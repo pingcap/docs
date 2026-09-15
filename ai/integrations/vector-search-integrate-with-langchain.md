@@ -1,12 +1,12 @@
 ---
 title: Integrate Vector Search with LangChain
-summary: TiDB Vector SearchをLangChainと統合する方法を学びましょう。
+summary: TiDBベクトル検索をLangChainと統合する方法を学びましょう。
 aliases: ['/ja/tidb/stable/vector-search-integrate-with-langchain/','/ja/tidb/dev/vector-search-integrate-with-langchain/','/ja/tidbcloud/vector-search-integrate-with-langchain/']
 ---
 
 # ベクトル検索をLangChainと統合する {#integrate-vector-search-with-langchain}
 
-このチュートリアルでは、[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)を[LangChain](https://python.langchain.com/)と統合する方法を説明します。
+このチュートリアルでは、[TiDBベクトル検索](/ai/concepts/vector-search-overview.md)を[LangChain](https://python.langchain.com/)と統合する方法を説明します。
 
 > **Note:**
 >
@@ -33,7 +33,7 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-langchain/','/ja/tidb/de
 
 ## さあ始めましょう {#get-started}
 
-このセクションでは、TiDB Vector SearchをLangChainと統合して意味検索を実行するための手順を段階的に説明します。
+このセクションでは、TiDBベクトル検索をLangChainと統合して意味検索を実行するための手順を段階的に説明します。
 
 ### ステップ1. 新しいJupyter Notebookファイルを作成する {#step-1-create-a-new-jupyter-notebook-file}
 
