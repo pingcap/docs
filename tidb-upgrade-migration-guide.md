@@ -74,7 +74,7 @@ SET GLOBAL tidb_gc_life_time=60h;
     - バックアップ速度: 8つのスレッドで TiKV ノードごとに 1 TiB のデータのバックアップに約1時間かかります。
     - 復元速度: TiKV ノードごとに 1 TiB のデータの復元には約20分かかります。
 
-- **コンフィグレーションの整合性**：古いクラスタと新しいクラスタの構成が[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)であることを確認してください。同一でない場合、 BRの復元は失敗します。
+- **設定の整合性**：古いクラスタと新しいクラスタで、[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)の設定値が同一であることを確認してください。同一でない場合、BRの復元は失敗します。
 
 - **システムテーブルの復元**: BR復元中に`--with-sys-table`オプションを使用して、システムテーブルデータを復元します。
 
@@ -184,7 +184,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 この移行手順では、 BR `--with-sys-table`オプションを使用して一部のシステムテーブルデータを復元します。対象範囲に含まれないテーブルについては、手動で復元する必要があります。確認および補足すべき一般的な項目は次のとおりです。
 
 - ユーザー権限： `mysql.user`テーブルを比較します。
-- コンフィグレーション設定: 設定項目とシステム変数が一貫していることを確認します。
+- 設定: 設定項目とシステム変数が一貫していることを確認します。
 - AUTO_INCREMENT列: 新しいクラスター内のAUTO_INCREMENT ID キャッシュをクリアします。
 - 統計: 統計を手動で収集するか、新しいクラスターで自動収集を有効にします。
 

@@ -122,7 +122,7 @@ TiUPまたはTiDB Operatorを使用して、新しいアーキテクチャにTiC
 <SimpleTab>
 <div label="TiUP">
 
-TiUPを使用して v8.5.4 以降の新しい TiDB クラスタをデプロイする場合、新しいアーキテクチャで TiCDC ノードも同時にデプロイできます。そのためには、 TiUP がTiDB クラスタの起動に使用する構成ファイルに TiCDC 関連のセクションを追加し、 `newarch: true`を設定するだけです。以下に例を示します。
+TiUPを使用して v8.5.4 以降の新しい TiDB クラスタをデプロイする場合、新しいアーキテクチャで TiCDC ノードも同時にデプロイできます。そのためには、 TiUP がTiDB クラスタの起動に使用する設定ファイルに TiCDC 関連のセクションを追加し、 `newarch: true`を設定するだけです。以下に例を示します。
 
 ```yaml
 cdc_servers:
@@ -139,7 +139,7 @@ TiCDC デプロイメントの詳細については、 [TiUPを使用してTiCDC
 </div>
 <div label="TiDB Operator">
 
-TiDB Operator を使用して v8.5.4 以降の新しい TiDB クラスタをデプロイする場合、新しいアーキテクチャで TiCDC ノードを同時にデプロイすることもできます。そのためには、クラスタ構成ファイルに TiCDC 関連のセクションを追加し、 `newarch = true`を設定するだけです。以下に例を示します。
+TiDB Operator を使用して v8.5.4 以降の新しい TiDB クラスタをデプロイする場合、新しいアーキテクチャで TiCDC ノードを同時にデプロイすることもできます。そのためには、クラスタ設定ファイルに TiCDC 関連のセクションを追加し、 `newarch = true`を設定するだけです。以下に例を示します。
 
 ```yaml
 spec:
@@ -212,7 +212,7 @@ TiUPを使用して新しいアーキテクチャにTiCDCノードをデプロ�
 
 TiDB Operatorを使用して既存のTiDBクラスタに新しいアーキテクチャでTiCDCノードをデプロイするには、次の手順を実行します。
 
-- TiDB クラスターに TiCDCコンポーネントが含まれていない場合は、 [既存のTiDBクラスタにTiCDCを追加する](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-ticdc/#add-ticdc-to-an-existing-tidb-cluster)を参照して、新しい TiCDC ノードを追加します。その際、クラスター構成ファイルで TiCDC イメージのバージョンを新しいアーキテクチャのバージョンとして指定します。利用可能なバージョンについては、 [TiCDCが新アーキテクチャ向けにリリース](https://github.com/pingcap/ticdc/releases)を参照してください。
+- TiDB クラスターに TiCDCコンポーネントが含まれていない場合は、 [既存のTiDBクラスタにTiCDCを追加する](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-ticdc/#add-ticdc-to-an-existing-tidb-cluster)を参照して、新しい TiCDC ノードを追加します。その際、クラスター設定ファイルで TiCDC イメージのバージョンを新しいアーキテクチャのバージョンとして指定します。利用可能なバージョンについては、 [TiCDCが新アーキテクチャ向けにリリース](https://github.com/pingcap/ticdc/releases)を参照してください。
 
     例えば：
 
@@ -239,7 +239,7 @@ TiDB Operatorを使用して既存のTiDBクラスタに新しいアーキテク
         /cdc cli changefeed pause --server=http://127.0.0.1:8301 --changefeed-id <changefeed-name>
         ```
 
-    2. クラスタ構成ファイル内のTiCDCイメージバージョンを新しいアーキテクチャバージョンに更新してください。
+    2. クラスタ設定ファイル内のTiCDCイメージバージョンを新しいアーキテクチャバージョンに更新してください。
 
         ```shell
         kubectl edit tc ${cluster_name} -n ${namespace}

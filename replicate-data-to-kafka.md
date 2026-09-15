@@ -41,7 +41,7 @@ summary: TiCDC を使用して TiDB データを Apache Kafka および Apache F
 
 ## ステップ2. Kafka の変更フィードを作成する {#step-2-create-a-kafka-changefeed}
 
-1. changefeed 構成ファイルを作成します。
+1. changefeed 設定ファイルを作成します。
 
     Flinkの要件に従い、各テーブルの増分データは独立したトピックに送信され、イベントごとに主キーの値に基づいてパーティションがディスパッチされる必要があります。そのため、以下の内容のchangefeed設定ファイル`changefeed.conf`を作成する必要があります。
 

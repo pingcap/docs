@@ -127,9 +127,9 @@ TiDB 8.5.0は長期サポートリリース（LTS）です。
 | [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)                  | 変更     | さらにテストを行った後、デフォルト値を`OFF`から`ON`に変更します。これは、[テーブル作成の高速化](/accelerated-table-creation.md)機能がデフォルトで有効になることを意味します。                                                                                                      |
 | [`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850) | 新しく追加された | 各 TiKV ノードの書き込み帯域幅を制限し、インデックス作成の高速化が有効になっている場合（ [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)変数で制御）にのみ有効になります。たとえば、この変数を`200MiB`に設定すると、最大書き込み速度が 200 MiB/s に制限されます。 |
 
-### コンフィグレーションパラメータ {#configuration-parameters}
+### 設定パラメータ {#configuration-parameters}
 
-| コンフィグレーションファイルまたはコンポーネント | コンフィグレーションパラメータ                                                                                                         | 変更の種類  | 説明                                                                                                                                                 |
+| 設定ファイルまたはコンポーネント | 設定パラメータ                                                                                                         | 変更の種類  | 説明                                                                                                                                                 |
 | ------------------------ | ----------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB                     | [`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length)                      | 変更     | バージョン8.5.0以降、整数表示幅機能は非推奨となりました。この設定項目のデフォルト値は`false`から`true`に変更されました。                                                                              |
 | TiKV                     | [`raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size)                                          | 変更     | デフォルト値を`8192`から`16384`に変更します。                                                                                                                      |

@@ -3,7 +3,7 @@ title: TiProxy Configuration File
 summary: TiProxy を構成する方法を学びます。
 ---
 
-# TiProxyコンフィグレーションファイル {#tiproxy-configuration-file}
+# TiProxy設定ファイル {#tiproxy-configuration-file}
 
 このドキュメントでは、 TiProxyの導入と使用に関連する設定パラメータについて説明します。TiUP導入トポロジの設定については、 [tiproxy-servers の設定](/tiup/tiup-cluster-topology-reference.md#tiproxy_servers)を参照してください。
 
@@ -39,7 +39,7 @@ skip-ca = true
 
 ### プロキシ {#proxy}
 
-SQL ポートのコンフィグレーション。
+SQL ポートの設定。
 
 #### `addr` {#addr}
 

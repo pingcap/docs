@@ -1,9 +1,9 @@
 ---
 title: Scheduling Configuration File
-summary: スケジューリング構成ファイルには、ノード名、データ パス、ノード URL などの複数の設定項目が含まれています。
+summary: スケジューリング設定ファイルには、ノード名、データ パス、ノード URL などの複数の設定項目が含まれています。
 ---
 
-# スケジュールコンフィグレーションファイル {#scheduling-configuration-file}
+# スケジュール設定ファイル {#scheduling-configuration-file}
 
 <!-- markdownlint-disable MD001 -->
 
@@ -50,7 +50,7 @@ summary: スケジューリング構成ファイルには、ノード名、デ�
 
 ## security {#security}
 
-セキュリティ関連のコンフィグレーション項目
+セキュリティ関連の設定項目
 
 ### `cacert-path` {#cacert-path}
 
@@ -75,7 +75,7 @@ summary: スケジューリング構成ファイルには、ノード名、デ�
 
 ## log {#log}
 
-ログに関するコンフィグレーション項目。
+ログに関する設定項目。
 
 ### `level` {#level}
 
@@ -96,7 +96,7 @@ summary: スケジューリング構成ファイルには、ノード名、デ�
 
 ## log.file {#log-file}
 
-ログファイルに関連するコンフィグレーション項目
+ログファイルに関連する設定項目
 
 ### `max-size` {#max-size}
 
@@ -119,7 +119,7 @@ summary: スケジューリング構成ファイルには、ノード名、デ�
 
 ## metric {#metric}
 
-監視に関連するコンフィグレーション項目
+監視に関連する設定項目
 
 ### `interval` {#interval}
 

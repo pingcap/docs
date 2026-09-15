@@ -131,11 +131,11 @@ TiProxyが適しているシナリオではTiProxyを使用し、アプリケー
 
     - ワークロードの種類と最大 QPS に基づいて、TiProxy インスタンスのモデルと数を選択します。詳細については、 [TiProxyのパフォーマンステストレポート](/tiproxy/tiproxy-performance-test.md)を参照してください。
     - TiProxyインスタンスは通常TiDBサーバーインスタンスよりも少ないため、TiProxyのネットワーク帯域幅がボトルネックになりやすくなります。たとえば、AWSでは、同じシリーズのEC2インスタンスのベースラインネットワーク帯域幅はCPUコア数に比例しません。ネットワーク帯域幅がボトルネックになった場合は、TiProxyインスタンスをより多くの小さなインスタンスに分割してQPSを向上させることができます。詳細については、 [ネットワーク仕様](https://docs.aws.amazon.com/ec2/latest/instancetypes/co.html#co_network)を参照してください。
-    - トポロジ構成ファイルでTiProxyのバージョンを指定することをお勧めします。これにより、TiDBクラスタをアップグレードするためにコマンド[`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md)を実行した際にTiProxyが自動的にアップグレードされるのを防ぎ、TiProxyのアップグレードによってクライアント接続が切断されるのを防止できます。
+    - トポロジ設定ファイルでTiProxyのバージョンを指定することをお勧めします。これにより、TiDBクラスタをアップグレードするためにコマンド[`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md)を実行した際にTiProxyが自動的にアップグレードされるのを防ぎ、TiProxyのアップグレードによってクライアント接続が切断されるのを防止できます。
 
     TiProxy のテンプレートの詳細については、 [TiProxyトポロジーのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiproxy.yaml)を参照してください。
 
-    TiDBクラスタトポロジファイル内の設定項目の詳細については、 [TiUPを使用したTiDBデプロイメントのトポロジーコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+    TiDBクラスタトポロジファイル内の設定項目の詳細については、 [TiUPを使用したTiDBデプロイメントのトポロジー設定ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
     設定例は以下のとおりです。
 
