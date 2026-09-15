@@ -113,8 +113,9 @@
 | data engine | 数据引擎 |  |
 | data hub | 数据中台 |  |
 | data integration | 数据集成 |  |
-| data plane | 数据面 | In TiDB Cloud Filesystem docs, use this term in contrast with "control plane". |
+| data lineage | 数据血缘 |  |
 | Data Manipulation Language (DML) | 数据操纵语言 |  |
+| data plane | 数据面 | In TiDB Cloud Filesystem docs, use this term in contrast with "control plane". |
 | data race | 数据竞争 |  |
 | database administrator (DBA) | 数据库管理员 |  |
 | database kernel | 数据库内核 | 内核是 kernel，不是 core |
