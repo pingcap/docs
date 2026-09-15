@@ -1,6 +1,7 @@
 ---
 title: VACUUM TABLE
 summary: Permanently removes eligible historical snapshots and their unneeded segments, blocks, and related files from a FUSE table to reclaim storage.
+aliases: ['/tidbcloudlake/vacuum-table-sql/']
 ---
 
 # VACUUM TABLE
