@@ -89,11 +89,11 @@ set global tidb_disable_txn_auto_retry=0;
 
 ## テスト計画 {#test-plan}
 
-1. TiUPを使用して TiDB v4.0 および v3.0をデプロイ。
+1. TiUPを使用して TiDB v4.0 および v3.0をデプロイします。
 2. Sysbench を使用して、各テーブルに 1,000 万行のデータが含まれる 16 個のテーブルをインポートします。
 3. 各テーブルに対して`analyze table`文を実行します。
 4. さまざまな同時実行テストの前に、復元に使用するデータをバックアップします。これにより、各テストのデータの一貫性が確保されます。
-5. Sysbenchクライアントを起動して`update_index` `update_non_index` `point_select` `read_write`を実行します。AWS NLB経由でTiDBのストレステストを実行します。各テストのウォームアップには1分、テストには5分かかります。
+5. Sysbenchクライアントを起動して`point_select`、 `read_write`、 `update_index`、および`update_non_index`のテストを実行します。AWS NLB経由でTiDBのストレステストを実行します。各テストのウォームアップには1分、テストには5分かかります。
 6. 各タイプのテストが完了したら、クラスターを停止し、手順 4 のバックアップデータでクラスターを上書きして、クラスターを再起動します。
 
 ### テストデータを準備する {#prepare-test-data}
@@ -147,7 +147,7 @@ v3.0 と比較して、TiDB v4.0 の Point Select パフォーマンスは 14% �
 
 ![Point Select](/media/sysbench-v4vsv3-point-select.png)
 
-### 非インデックスパフォーマンスの更新 {#update-non-index-performance}
+### 非インデックス更新パフォーマンス {#update-non-index-performance}
 
 | スレッド | v3.0 QPS    | v3.0 95%レイテンシー(ms) | v4.0 QPS    | v4.0 95%レイテンシー(ms) | QPSの改善 |
 | :--- | :---------- | :----------------- | :---------- | :----------------- | :----- |
@@ -162,7 +162,7 @@ v3.0 と比較して、TiDB v4.0 の非インデックス更新パフォーマ�
 
 ![Update Non-index](/media/sysbench-v4vsv3-update-non-index.png)
 
-### インデックスのパフォーマンスを更新 {#update-index-performance}
+### インデックス更新パフォーマンス {#update-index-performance}
 
 | スレッド | v3.0 QPS    | v3.0 95%レイテンシー(ms) | v4.0 QPS    | v4.0 95%レイテンシー(ms) | QPSの改善 |
 | :--- | :---------- | :----------------- | :---------- | :----------------- | :----- |

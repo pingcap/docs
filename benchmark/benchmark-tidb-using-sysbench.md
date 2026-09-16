@@ -75,7 +75,7 @@ report-interval=10
 db-driver=mysql
 ```
 
-上記のパラメータは、実際のニーズに合わせて調整できます。`TIDB_HOST`はTiDBサーバーのIPアドレス（設定ファイルに複数のアドレスを含めることはできないため）、 `threads`はテストにおける同時接続数で、"8, 16, 32, 64, 128, 256"の範囲で調整できます。データをインポートする際は、threads = 8または16に設定することをお勧めします`threads`を調整したら、 **config**というファイルを保存します。
+上記のパラメータは、実際のニーズに合わせて調整できます。`TIDB_HOST`はTiDBサーバーのIPアドレス（設定ファイルに複数のアドレスを含めることはできないため）、 `threads`はテストにおける同時接続数で、"8, 16, 32, 64, 128, 256"の範囲で調整できます。データをインポートする際は、threads = 8または16に設定することをお勧めします。 `threads`を調整したら、 **config**というファイルを保存します。
 
 サンプル**config**ファイルとして以下を参照してください。
 
@@ -95,7 +95,7 @@ db-driver=mysql
 
 > **Note:**
 >
-> 楽観的トランザクションモデルを有効にすると（TiDBはデフォルトで悲観的トランザクションモードを使用します）、同時実行の競合が検出されるとTiDBはトランザクションをロールバックします。1～ `tidb_disable_txn_auto_retry`を`off`に設定すると、トランザクションの競合が発生した後に自動再試行メカニズムが有効になり、トランザクション競合エラーによってSysbenchが終了するのを防ぐことができます。
+> 楽観的トランザクションモデルを有効にすると（TiDBはデフォルトで悲観的トランザクションモードを使用します）、同時実行の競合が検出されるとTiDBはトランザクションをロールバックします。 `tidb_disable_txn_auto_retry`を`off`に設定すると、トランザクションの競合が発生した後に自動再試行メカニズムが有効になり、トランザクション競合エラーによってSysbenchが終了するのを防ぐことができます。
 
 データをインポートする前に、TiDBにいくつかの設定を行う必要があります。MySQLクライアントで以下のコマンドを実行してください。
 
@@ -114,7 +114,7 @@ create database sbtest;
 Sysbench スクリプトがインデックスを作成する順序を調整します。Sysbench は「テーブルの作成 -&gt; データの挿入 -&gt; インデックスの作成」という順序でデータをインポートするため、TiDB によるデータのインポートに時間がかかります。ユーザーはこの順序を調整することで、データのインポートを高速化できます。Sysbench バージョン[1.0.20](https://github.com/akopytov/sysbench/tree/1.0.20)を使用している場合、順序は次の2つの方法で調整できます。
 
 - TiDB 用に変更された[oltp_common.lua](https://raw.githubusercontent.com/pingcap/tidb-bench/master/sysbench/sysbench-patch/oltp_common.lua)ファイルをダウンロードし、 `/usr/share/sysbench/oltp_common.lua`ファイルをそれで上書きします。
-- `/usr/share/sysbench/oltp_common.lua`で、行[235-240](https://github.com/akopytov/sysbench/blob/1.0.20/src/lua/oltp_common.lua#L235-L240)行 198 のすぐ後ろに移動します。
+- `/usr/share/sysbench/oltp_common.lua`で、行[235-240](https://github.com/akopytov/sysbench/blob/1.0.20/src/lua/oltp_common.lua#L235-L240)を行198のすぐ後ろに移動します。
 
 > **Note:**
 >
@@ -172,4 +172,4 @@ TiKV 全体の CPU 使用率は低いですが、クラスター内の一部の�
 
 NUMAアーキテクチャのCPUは、一部のハイエンド機器で使用されています。これらの機器では、リモートメモリへのCPU間アクセスによってパフォーマンスが大幅に低下します。デフォルトでは、TiDBはサーバーのすべてのCPUを使用するため、goroutineスケジューリングによって必然的にCPU間メモリアクセスが発生します。
 
-したがって、NUMAアーキテクチャのサーバーに*n 個の*TiDB ( *n*は NUMA CPU の数) をデプロイし、同時に TiDB パラメータ`max-procs` NUMA CPU コアの数と同じ値に設定することをお勧めします。
+したがって、NUMAアーキテクチャのサーバーに*n 個の*TiDB ( *n*は NUMA CPU の数) をデプロイし、同時に TiDB パラメータ`max-procs`をNUMA CPU コアの数と同じ値に設定することをお勧めします。

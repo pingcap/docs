@@ -9,7 +9,7 @@ summary: TiDB で CH-benCHmark テストを実行する方法を学びます。
 
 CH-benCHmarkは、テスト[TPC-C](http://www.tpc.org/tpcc/)とテスト[TPC-H](http://www.tpc.org/tpch/)両方を含む混合ワークロードです。HTAPシステムのテストで最も一般的なワークロードです。詳細については、 [混合ワークロードCH-benCHmark](https://dl.acm.org/doi/10.1145/1988842.1988850)を参照してください。
 
-CH-benCHmarkテストを実行する前に、まずTiDBのHTAPコンポーネントである[TiFlash](/tiflash/tiflash-overview.md)導入する必要があります。TiFlashと[TiFlashレプリカを作成する](#create-tiflash-replicas)TiFlashすると、TiKVがTPC-Cオンライントランザクションの最新データをTiFlashにリアルタイムで複製し、TiDBオプティマイザがTPC-HワークロードからTiFlashのMPPエンジンにOLAPクエリを自動的にプッシュダウンして効率的に実行します。
+CH-benCHmarkテストを実行する前に、まずTiDBのHTAPコンポーネントである[TiFlash](/tiflash/tiflash-overview.md)を導入する必要があります。TiFlashを導入し、[TiFlashレプリカを作成する](#create-tiflash-replicas)と、TiKVがTPC-Cオンライントランザクションの最新データをTiFlashにリアルタイムで複製し、TiDBオプティマイザがTPC-HワークロードからTiFlashのMPPエンジンにOLAPクエリを自動的にプッシュダウンして効率的に実行します。
 
 このドキュメントのCH-benCHmarkテストは[ゴーTPC](https://github.com/pingcap/go-tpc)に基づいて実装されています。テストプログラムは以下の[TiUP](/tiup/tiup-overview.md)のコマンドでダウンロードできます。
 
@@ -25,7 +25,7 @@ TiUP Benchコンポーネントの詳細な使用方法については、 [TiUP 
 
 **データのロードは通常、TPC-C テスト全体の中で最も時間がかかり、問題が発生する段階です。**
 
-1,000個のウェアハウスを例に挙げると、以下のTiUPコマンドをシェルで実行してデータのロードとテストを行うことができます。なお、このドキュメントの`172.16.5.140`と`4000` 、実際のTiDBのホストとポートの値に置き換えてください。
+1,000個のウェアハウスを例に挙げると、以下のTiUPコマンドをシェルで実行してデータのロードとテストを行うことができます。なお、このドキュメントの`172.16.5.140`と`4000`を、実際のTiDBのホストとポートの値に置き換えてください。
 
 ```shell
 tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 1000 prepare -T 32
@@ -33,7 +33,7 @@ tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 1000 prepare -T 32
 
 マシンの構成によっては、この読み込みプロセスに数時間かかる場合があります。クラスターサイズが小さい場合は、テストに小さいウェアハウス値を使用できます。
 
-After the data is loaded, you can execute the `tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 1000 check` command to validate the data correctness.
+データのロードが完了したら、 `tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 1000 check`コマンドを実行してデータの正確性を検証できます。
 
 ### TPC-Hに必要な追加のテーブルとビューをロードします {#load-additional-tables-and-views-required-for-tpc-h}
 
@@ -79,7 +79,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'tpcc';
 
 ## 統計を収集する {#collect-statistics}
 
-TiDBオプティマイザが最適な実行計画を生成できるようにするには、事前に以下のSQL文を実行して統計情報を収集してください。tidb_analyze_column_options **<a href="/system-variables.md#tidb_analyze_column_options-new-in-v830">`tidb_analyze_column_options`</a> `ALL`に設定してください。設定しないと、統計情報を収集するとクエリのパフォーマンスが大幅に低下する可能性があります。**
+TiDBオプティマイザが最適な実行計画を生成できるようにするには、事前に以下のSQL文を実行して統計情報を収集してください。**必ず[`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)を`ALL`に設定してください。設定しないと、統計情報を収集するとクエリのパフォーマンスが大幅に低下する可能性があります。**
 
 ```
 set global tidb_analyze_column_options='ALL';
