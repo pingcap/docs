@@ -12,9 +12,9 @@ aliases: ['/ja/tidb/stable/best-practices-on-public-cloud/']
 
 ## KV RocksDB の圧縮 I/O フローを削減 {#reduce-compaction-i-o-flow-in-kv-rocksdb}
 
-TiKVのストレージエンジンである[RocksDB](https://rocksdb.org/) 、ユーザーデータの保存に使用されます。クラウドEBSのプロビジョニングされたIOスループットは通常、コスト上の理由から制限されているため、RocksDBは書き込み増幅率が高くなり、ディスクスループットがワークロードのボトルネックになる可能性があります。その結果、保留中のコンパクションバイトの総数は時間の経過とともに増加し、フロー制御がトリガーされます。これは、TiKVがフォアグラウンド書き込みフローに対応するための十分なディスク帯域幅を欠いていることを示しています。
+TiKVのストレージエンジンである[RocksDB](https://rocksdb.org/)は、ユーザーデータの保存に使用されます。クラウドEBSのプロビジョニングされたIOスループットは通常、コスト上の理由から制限されているため、RocksDBは書き込み増幅率が高くなり、ディスクスループットがワークロードのボトルネックになる可能性があります。その結果、保留中のコンパクションバイトの総数は時間の経過とともに増加し、フロー制御がトリガーされます。これは、TiKVがフォアグラウンド書き込みフローに対応するための十分なディスク帯域幅を欠いていることを示しています。
 
-ディスクスループットの制限によるボトルネックを軽減するには、パフォーマンスを[Titanを有効にする](#enable-titan)向上させることができます。平均行サイズが 512 バイト未満の場合は、Titan は適用できません。この場合、パフォーマンスを[すべての圧縮レベルを上げる](#increase-all-the-compression-levels)向上させることができます。
+ディスクスループットの制限によるボトルネックを軽減するには、 [Titanを有効にする](#enable-titan)ことでパフォーマンスを向上させることができます。平均行サイズが 512 バイト未満の場合は、Titan は適用できません。この場合、 [すべての圧縮レベルを上げる](#increase-all-the-compression-levels)ことでパフォーマンスを向上させることができます。
 
 ### Titanを有効にする {#enable-titan}
 
@@ -65,11 +65,11 @@ sdd           1033.00   4132.00   1141.33  31685.33   571.00    0.94 100.00
 
 さまざまなパブリッククラウドに推奨されるミドルレンジ ディスクは次のとおりです。
 
-- AWSでは[gp3](https://aws.amazon.com/ebs/general-purpose/)推奨されます。gp3ボリュームは、ボリュームサイズに関係なく、3000 IOPSと125 MB/秒のスループットを無料で割り当てることができ、通常はRaft Engineに十分な値です。
+- AWSでは[gp3](https://aws.amazon.com/ebs/general-purpose/)が推奨されます。gp3ボリュームは、ボリュームサイズに関係なく、3000 IOPSと125 MB/秒のスループットを無料で割り当てることができ、通常はRaft Engineに十分な値です。
 
 - Google Cloudでは[pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/)が推奨されています。IOPSとMBPSは割り当てられたディスクサイズによって異なります。パフォーマンス要件を満たすには、 Raft Engineに200GBを割り当てることを推奨します。Raft Engineはそれほど大きな容量を必要としませんが、最適なパフォーマンスを確保できます。
 
-- Azureでは[プレミアム SSD v2](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2)推奨されます。AWS gp3と同様に、Premium SSD v2はボリュームサイズに関係なく、3000 IOPSと125 MB/秒のスループットを無料で割り当てることができ、通常はRaft Engineに十分です。
+- Azureでは[プレミアム SSD v2](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2)が推奨されます。AWS gp3と同様に、Premium SSD v2はボリュームサイズに関係なく、3000 IOPSと125 MB/秒のスループットを無料で割り当てることができ、通常はRaft Engineに十分です。
 
 #### ハイエンドディスク {#high-end-disk}
 
@@ -77,7 +77,7 @@ Raft Engineのレイテンシーをさらに低減したい場合は、ハイエ
 
 - AWSでは[io2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html)が推奨されます。ディスクサイズとIOPSは、お客様の特定の要件に応じてプロビジョニングできます。
 
-- Google Cloud では[pd-extreme](https://cloud.google.com/compute/docs/disks#disk-types/)推奨されます。ディスクサイズ、IOPS、MBPS をプロビジョニングできますが、64 個以上の CPU コアを持つインスタンスでのみ利用可能です。
+- Google Cloud では[pd-extreme](https://cloud.google.com/compute/docs/disks#disk-types/)が推奨されます。ディスクサイズ、IOPS、MBPS をプロビジョニングできますが、64 個以上の CPU コアを持つインスタンスでのみ利用可能です。
 
 - Azure では[Ultra Disk](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#ultra-disks)が推奨されます。ディスクサイズ、IOPS、MBPS は、お客様の特定の要件に応じてプロビジョニングできます。
 
