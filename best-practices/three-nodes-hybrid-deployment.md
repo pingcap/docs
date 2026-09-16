@@ -82,14 +82,14 @@ TiKVはフォアグラウンドタスクに加えて、バックグラウンド�
 
 #### `rocksdb.max-background-jobs`と`rocksdb.max-sub-compactions` {#rocksdb-max-background-jobs-and-rocksdb-max-sub-compactions}
 
-RocksDBスレッドプールは、コンパクションジョブとフラッシュジョブを実行するために使用されます。デフォルト値は`rocksdb.max-background-jobs`ですが、 `8`に設定されており、明らかに必要なリソースを超えています。したがって、リソース使用量を制限するために値を調整する必要があります。
+RocksDBスレッドプールは、コンパクションジョブとフラッシュジョブを実行するために使用されます。 `rocksdb.max-background-jobs`のデフォルト値は`8`であり、明らかに必要なリソースを超えています。したがって、リソース使用量を制限するために値を調整する必要があります。
 
-`rocksdb.max-sub-compactions` 、単一の圧縮ジョブで許可される同時サブタスクの数を示します。デフォルトは`3`です。書き込みトラフィックが多くない場合は、この値を下げることができます。
+`rocksdb.max-sub-compactions`は、単一の圧縮ジョブで許可される同時サブタスクの数を示します。デフォルトは`3`です。書き込みトラフィックが多くない場合は、この値を下げることができます。
 
 このテストでは、 `rocksdb.max-background-jobs`の値は`3`に、 `rocksdb.max-sub-compactions`の値は`1`に設定されています。TPC-C負荷での12時間テスト中、書き込みストールは発生しませんでした。実際の負荷に応じて2つのパラメータ値を最適化する際には、監視指標に基づいて値を徐々に下げることができます。
 
-- 書き込み停止が発生する場合は、値を`rocksdb.max-background-jobs`増やします。
-- 書き込み停止が続く場合は、値`rocksdb.max-sub-compactions`を`2`または`3`に設定します。
+- 書き込み停止が発生する場合は、 `rocksdb.max-background-jobs`の値を増やします。
+- 書き込み停止が続く場合は、 `rocksdb.max-sub-compactions`の値を`2`または`3`に設定します。
 
 #### `rocksdb.rate-bytes-per-sec` {#rocksdb-rate-bytes-per-sec}
 
