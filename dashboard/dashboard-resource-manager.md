@@ -47,7 +47,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
     ![Calibrate by Hardware](/media/dashboard/dashboard-resource-manager-calibrate-by-hardware.png)
 
-    **ユーザーリソースグループの合計RUは**、 `default`リソースグループを除くすべてのユーザーリソースグループのRUの合計量を表します。この値が推定容量を超えると、システムはアラートをトリガーします。デフォルトでは、システムは定義済みの`default`リソースグループに無制限の使用量を割り当てます。すべてのユーザーが`default`リソースグループに属している場合、リソースはリソース制御が無効になっている場合と同じように割り当てられます。
+    **ユーザーリソースグループの合計RU**は、 `default`リソースグループを除くすべてのユーザーリソースグループのRUの合計量を表します。この値が推定容量を超えると、システムはアラートをトリガーします。デフォルトでは、システムは定義済みの`default`リソースグループに無制限の使用量を割り当てます。すべてのユーザーが`default`リソースグループに属している場合、リソースはリソース制御が無効になっている場合と同じように割り当てられます。
 
 - [実際の作業負荷に基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
 
@@ -65,7 +65,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
 > **Note:**
 >
-> 容量推定機能を使用するには、現在のログインユーザーが権限`SUPER`または`RESOURCE_GROUP_ADMIN` 、および一部のシステムテーブルに対する権限`SELECT`持っている必要があります。この機能を使用する前に、現在のユーザーがこれらの権限を持っていることを確認してください。権限がない場合、一部の機能が正しく動作しない可能性があります。詳細については、 [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#privileges)を参照してください。
+> 容量推定機能を使用するには、現在のログインユーザーが権限`SUPER`または`RESOURCE_GROUP_ADMIN` 、および一部のシステムテーブルに対する権限`SELECT`を持っている必要があります。この機能を使用する前に、現在のユーザーがこれらの権限を持っていることを確認してください。権限がない場合、一部の機能が正しく動作しない可能性があります。詳細については、 [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#privileges)を参照してください。
 
 ## メトリクス {#metrics}
 
