@@ -181,9 +181,9 @@ KV ペアを TiKV Importer に送信する前に、 TiDB Lightning自体によ�
 
 ## S {#s}
 
-### Scattering {#scattering}
+### 散布 {#scattering}
 
-[リージョン](/glossary.md#regionpeerraft-group)のリーダーとピアをランダムに再割り当てする操作。Scatteringにより、インポートされたデータが TiKV ストア間で均等に分散されます。これにより、PD への負荷が軽減されます。
+[リージョン](/glossary.md#regionpeerraft-group)のリーダーとピアをランダムに再割り当てする操作。散布により、インポートされたデータが TiKV ストア間で均等に分散されます。これにより、PD への負荷が軽減されます。
 
 ### 分割 {#splitting}
 
