@@ -31,7 +31,7 @@ TiDBクラスターの増分データは、期間の開始スナップショッ�
 LAST_BACKUP_TS=`tiup br validate decode --field="end-version" --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}"| tail -n1`
 ```
 
-次のコマンドは、 `(LAST_BACKUP_TS, current PD timestamp]`とこの期間中に生成された DDL 間の増分データをバックアップします。
+次のコマンドは、 `(LAST_BACKUP_TS, current PD timestamp]`の間の増分データと、この期間中に生成された DDL をバックアップします。
 
 ```shell
 tiup br backup full --pd "${PD_IP}:2379" \
