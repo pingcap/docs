@@ -33,7 +33,7 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-langchain/','/ja/tidb/de
 
 ## さあ始めましょう {#get-started}
 
-このセクションでは、TiDBベクトル検索をLangChainと統合して意味検索を実行するための手順を段階的に説明します。
+このセクションでは、TiDBベクトル検索をLangChainと統合してセマンティック検索を実行するための手順を段階的に説明します。
 
 ### ステップ1. 新しいJupyter Notebookファイルを作成する {#step-1-create-a-new-jupyter-notebook-file}
 
@@ -465,7 +465,7 @@ TiDB Vector offers advanced, high-speed vector processing capabilities, enhancin
 
 このプロセスは主に2つのステップから構成されます。
 
-1. 空港レビュー全体を対象に意味検索を行い、希望する設備に一致する空港コードを特定します。
+1. 空港レビュー全体を対象にセマンティック検索を行い、希望する設備に一致する空港コードを特定します。
 2. SQLクエリを実行してこれらのコードをルート情報と統合し、ユーザーの好みに合致する航空会社と目的地を強調表示します。
 
 ### データの準備 {#prepare-data}
