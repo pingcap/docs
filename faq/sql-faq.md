@@ -128,7 +128,7 @@ TiDB では、システム変数[`tidb_enable_ordered_result_mode`](/system-vari
 
 はい。悲観的ロック（TiDB v3.0.8以降のデフォルト）を使用する場合、 `SELECT FOR UPDATE`実行はMySQLと同様に動作します。
 
-楽観的ロックを使用する場合、 `SELECT FOR UPDATE`はトランザクションの開始時にはデータをロックしませんが、トランザクションのコミット時に競合をチェックします。チェックで競合が見つかった場合、コミットしたトランザクションはロールバックされます。
+楽観的ロックを使用する場合、 `SELECT FOR UPDATE`はトランザクションの開始時にはデータをロックしませんが、トランザクションのコミット時に競合をチェックします。競合が見つかった場合、トランザクションはロールバックされます。
 
 詳細は[`SELECT`構文要素の説明](/sql-statements/sql-statement-select.md#description-of-the-syntax-elements)を参照してください。
 
@@ -291,9 +291,9 @@ v6.4.0 以降、TiDB は[メタデータロックメカニズム](/metadata-lock
 
 > **Note:**
 >
-> - 現在、TiDB はバージョン`schema`の変更をすべてキャッシュするわけではありません。
+> - 現在、TiDB は`schema`バージョンの変更をすべてキャッシュするわけではありません。
 > - 各 DDL 操作では、 `schema`バージョンの変更の数は、対応する`schema state`バージョンの変更の数と同じです。
-> - DDL操作によって、バージョン`schema`の変更回数は異なります。例えば、 `CREATE TABLE`文ではバージョン`schema`変更が1回発生しますが、 `ADD COLUMN`文ではバージョン`schema`の変更が4回発生します。
+> - DDL操作によって、`schema`バージョンの変更回数は異なります。例えば、 `CREATE TABLE`文では`schema`バージョンが1回変更されますが、 `ADD COLUMN`文では`schema`バージョンが4回変更されます。
 
 ### 「Information schema is out of date」というエラーの原因は何ですか? {#what-are-the-causes-of-the-information-schema-is-out-of-date-error}
 
