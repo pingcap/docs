@@ -40,7 +40,7 @@ scrape_configs:
 ![Panels in first row](/media/lightning-grafana-row-1.png)
 
 | パネル | シリーズ | 説明 |
-| :-------- | :------------------- | :---------------------------------------------------------------- |
+| :--- | :--- | :--- |
 | Import speed | write from TiDB Lightning | TiDB Lightningから TiKV Importer への KV の送信速度。これは各テーブルの複雑さによって異なります。 |
 | Import speed | upload to tikv | TiKVインポーターからすべてのTiKVレプリカへの合計アップロード速度 |
 | Chunk process duration | | 単一のデータファイルを完全にエンコードするのにかかる平均時間 |
@@ -52,7 +52,7 @@ scrape_configs:
 ![Panels in second row](/media/lightning-grafana-row-2.png)
 
 | パネル | 説明 |
-| :---------- | :--------------------------- |
+| :--- | :--- |
 | Import progress | これまでにエンコードされたデータファイルの割合 |
 | Checksum progress | 正常にインポートされたことが検証されたテーブルの割合 |
 | Failures | 障害が発生したテーブルの数と障害発生ポイント（通常は空） |
@@ -62,7 +62,7 @@ scrape_configs:
 ![Panels in third row](/media/lightning-grafana-row-3.png)
 
 | パネル | 説明 |
-| :------------------------- | :------------------------------------ |
+| :--- | :--- |
 | Memory usage | 各サービスが占有するメモリ量 |
 | Number of TiDB Lightning Goroutines | TiDB Lightningで使用される実行中の goroutine の数 |
 | CPU% | 各サービスで使用される論理CPUコアの数 |
@@ -72,7 +72,7 @@ scrape_configs:
 ![Panels in fourth row](/media/lightning-grafana-row-4.png)
 
 | パネル | シリーズ | 説明 |
-| :----------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| :--- | :--- | :--- |
 | Idle workers | io | 未使用の数は`io-concurrency` 、通常は設定された値（デフォルトは5）に近いですが、0に近い場合はディスクが遅すぎることを意味します。 |
 | Idle workers | closed-engine | 閉じられているがまだクリーンアップされていないエンジンの数。通常はインデックス + テーブル同時実行性（デフォルトは 8）に近い。0 に近い場合は、 TiDB Lightning がTiKV Importer よりも高速であることを意味し、 TiDB Lightning が停止する原因になります。 |
 | Idle workers | table | 未使用の数は`table-concurrency` 、通常はプロセス終了まで 0 |
@@ -86,7 +86,7 @@ scrape_configs:
 ![Panels in fifth row](/media/lightning-grafana-row-5.png)
 
 | パネル | シリーズ | 説明 |
-| :------------------- | :-------- | :---------------------------------- |
+| :--- | :--- | :--- |
 | Chunk parser read block duration | read block | 解析の準備のために1ブロックのバイトを読み取るのにかかる時間 |
 | Chunk parser read block duration | apply worker | アイドル状態のIO同時実行を待つのにかかった時間 |
 | SQL process duration | row encode | 1行の解析とエンコードにかかる時間 |
@@ -99,7 +99,7 @@ scrape_configs:
 ![Panels in sixth row](/media/lightning-grafana-row-6.png)
 
 | パネル | シリーズ | 説明 |
-| :------ | :----------- | :----------------------------------------- |
+| :--- | :--- | :--- |
 | SQL process rate | data deliver rate | TiKVインポーターへのデータKVペアの配信速度 |
 | SQL process rate | index deliver rate | TiKVインポーターへのインデックスKVペアの配信速度 |
 | SQL process rate | total deliver rate | 上記の2つのレートの合計 |
@@ -113,7 +113,7 @@ scrape_configs:
 ![Panels in seventh row](/media/lightning-grafana-row-7.png)
 
 | パネル | シリーズ | 説明 |
-| :------------ | :-------- | :----------------------------------- |
+| :--- | :--- | :--- |
 | Delivery duration | Range delivery | TiKV クラスターに KV ペアの範囲をアップロードするのにかかる時間 |
 | Delivery duration | SST delivery | SST ファイルを TiKV クラスターにアップロードするのにかかる時間 |
 | SST process duration | Split SST | KVペアのストリームをSSTファイルに分割するのにかかる時間 |
