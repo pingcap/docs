@@ -203,7 +203,7 @@ TiDB 4.0 以降、TiDB は使いやすさを向上させるために[TiDB Dashbo
 
 TiDB には、中国語と英語の両方で多数の公式文書があります。問題が発生した場合は、 [FAQ](/faq/tidb-faq.md)と[TiDB クラスタトラブルシューティングガイド](/troubleshoot-tidb-cluster.md)から始めることができます。 [TiDBリポジトリ（GitHub）](https://github.com/pingcap/tidb)でIssueリストを検索したり、Issueを作成したりすることもできます。
 
-TiDB には便利な移行ツールも多数あります。詳細については、[移行ツールの概要](/ecosystem-tool-user-guide.md)ご覧ください。
+TiDB には便利な移行ツールも多数あります。詳細については、[移行ツールの概要](/ecosystem-tool-user-guide.md)をご覧ください。
 
 TiDB の技術的な詳細に関する記事については、 [PingCAP公式ブログサイト](https://pingcap.com/blog/)を参照してください。
 
