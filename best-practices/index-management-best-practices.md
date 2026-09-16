@@ -179,7 +179,7 @@ ORDER BY total_queries DESC;
 
 ### `schema_unused_indexes`の仕組み {#how-schema-unused-indexes-works}
 
-`schema_unused_indexes`ビューは`TIDB_INDEX_USAGE`から派生しており、最後の TiDB 再起動以降にクエリ アクティビティが 0 個記録されたインデックスを自動的に除外することを意味します。
+`schema_unused_indexes`ビューは`TIDB_INDEX_USAGE`から派生しており、最後の TiDB 再起動以降にクエリアクティビティが 0 回記録されたインデックスを自動的に抽出することを意味します。
 
 未使用のインデックスのリストを取得するには、次の SQL文を実行します。
 
