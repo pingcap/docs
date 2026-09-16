@@ -69,7 +69,7 @@ sdd           1033.00   4132.00   1141.33  31685.33   571.00    0.94 100.00
 
 - Google Cloudでは[pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/)が推奨されています。IOPSとMBPSは割り当てられたディスクサイズによって異なります。パフォーマンス要件を満たすには、 Raft Engineに200GBを割り当てることを推奨します。Raft Engineはそれほど大きな容量を必要としませんが、最適なパフォーマンスを確保できます。
 
-- Azureでは[プレミアム SSD v2](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2)が推奨されます。AWS gp3と同様に、Premium SSD v2はボリュームサイズに関係なく、3000 IOPSと125 MB/秒のスループットを無料で割り当てることができ、通常はRaft Engineに十分です。
+- Azureでは[Premium SSD v2](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2)が推奨されます。AWS gp3と同様に、Premium SSD v2はボリュームサイズに関係なく、3000 IOPSと125 MB/秒のスループットを無料で割り当てることができ、通常はRaft Engineに十分です。
 
 #### ハイエンドディスク {#high-end-disk}
 
