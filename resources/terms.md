@@ -53,7 +53,7 @@
 | CRUD | 增删改查 |  |
 | Custom Resource Definition (CRD) | 自定义资源类型 |  |
 | checksum | 校验和 |  |
-| checkpoint | 检查点 | In TiDB Cloud Filesystem docs, it refers to a durable snapshot point in a layer. |
+| checkpoint | checkpoint | In TiDB Cloud Filesystem docs, it refers to a durable snapshot point in a layer. |
 | circular dependency | 循环依赖 |  |
 | class | 类 |  |
 | client | 客户端 |  |
@@ -258,7 +258,7 @@
 | latch contention | 锁竞争 |  |
 | latency | 延时 |  |
 | later version | 以上版本 |  |
-| layer | 层 | In TiDB Cloud Filesystem docs, it refers to an isolated writable layer, similar to a Docker image layer. |
+| layer | layer | In TiDB Cloud Filesystem docs, it refers to an isolated writable layer, similar to a Docker image layer. |
 | Leader | Leader | A role in the Raft consensus algorithm |
 | leak | 泄漏 |  |
 | least recently used (LRU) | 近期最少使用法 |  |
