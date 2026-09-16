@@ -40,7 +40,7 @@ TiDB バージョン: 5.3.2
 
     - TiDB Lightning
 
-        - 散布リージョンをバッチモードに最適化して、散布リージョンプロセスの安定性を向上させます[#33618](https://github.com/pingcap/tidb/issues/33618)
+        - Scatter Regionをバッチモードに最適化して、Scatter Regionプロセスの安定性を向上させます[#33618](https://github.com/pingcap/tidb/issues/33618)
 
 ## バグ修正 {#bug-fixes}
 
