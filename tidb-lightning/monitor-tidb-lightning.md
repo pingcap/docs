@@ -140,10 +140,10 @@ scrape_configs:
     アイドル状態のワーカーをカウントします。ラベル:
 
     - **name**:
-        - `table` : 未使用の数は`table-concurrency` 、通常はプロセス終了まで 0 です。
-        - `index` : 未使用の数は`index-concurrency` 、通常はプロセス終了まで 0 です。
-        - `region` : 未使用の数は`region-concurrency` 、通常はプロセス終了まで 0 です。
-        - `io` : 未使用の数は`io-concurrency` 、通常は設定された値（デフォルトは5）に近いですが、0に近い場合はディスクが遅すぎることを意味します。
+        - `table` : `table-concurrency`の余り。通常はプロセス終了まで 0 です。
+        - `index` : `index-concurrency`の余り。通常はプロセス終了まで 0 です。
+        - `region` : `region-concurrency`の余り。通常はプロセス終了まで 0 です。
+        - `io` : `io-concurrency`の余り。通常は設定された値（デフォルトは 5）に近い。0 に近い場合はディスクが遅すぎることを意味する。
         - `closed-engine` : 終了したがまだクリーンアップされていないエンジンの数。通常はインデックス + テーブル同時実行数（デフォルトは8）に近い値です。0に近い値は、TiDB LightningがTiKV Importerよりも高速であることを意味し、 TiDB Lightningが停止する可能性があります。
 
 - **`lightning_kv_encoder`** (カウンター)
