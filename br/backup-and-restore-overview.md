@@ -93,7 +93,7 @@ TiDB BRは以下の機能を提供します。
 #### 復元のパフォーマンスとTiDBクラスターへの影響 {#restore-performance-and-impact-on-tidb-clusters}
 
 - データの復元はスケーラブルな速度で実行されます。通常、速度は TiKV ノードあたり 1 GiB/秒です。詳細については、 [復元のパフォーマンスと影響](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore)をご覧ください。
-- 各 TiKV ノードでは、PITR は 30 GiB/h でログデータを復元できます。詳細については、 [PITRのパフォーマンスと影響](/br/br-pitr-guide.md#performance-capabilities-of-pitr)をご覧ください。
+- 各 TiKV ノードでは、PITR は 30 GiB/時間でログデータを復元できます。詳細については、 [PITRのパフォーマンスと影響](/br/br-pitr-guide.md#performance-capabilities-of-pitr)をご覧ください。
 
 ## バックアップストレージ {#backup-storage}
 
