@@ -35,7 +35,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 + PD
 
     - Fix the issue that PD might experience a goroutine surge and become unstable when TiDB Lightning concurrently calls `SetRegionLabelRule` during import [#9854](https://github.com/tikv/pd/issues/9854) @[lhy1024](https://github.com/lhy1024) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/9897 -->
-    - Fix the issue that stale `pd_cluster_status` metrics of removed stores might remain after TiKV scale-in [#9942](https://github.com/tikv/pd/issues/9942) @[okJiang](https://github.com/okJiang) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/10188 -->
+    - Fix the issue that stale `pd_cluster_status` metrics of removed stores might remain after TiKV scale-in [#9942](https://github.com/tikv/pd/issues/9942) @[okJiang](https://github.com/okJiang) <!-- pr: https://github.com/tikv/pd/pull/10188 -->
 
 + TiFlash
 
@@ -45,7 +45,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
     + BR
 
-        - Fix the issue that BR leaves stale GC service safepoints after a log backup task is stopped, which might block GC from progressing as expected [#19832](https://github.com/tikv/tikv/issues/19832) @[Leavrth](https://github.com/Leavrth) <!-- component: br --> <!-- pr: https://github.com/tikv/tikv/pull/19913 -->
+        - Fix the issue that BR leaves stale GC service safepoints after a log backup task is stopped, which might block GC from progressing as expected [#19832](https://github.com/tikv/tikv/issues/19832) @[Leavrth](https://github.com/Leavrth) <!-- pr: https://github.com/tikv/tikv/pull/19913 -->
 
     + TiCDC
 
