@@ -295,7 +295,7 @@ v6.4.0 以降、TiDB は[メタデータロックメカニズム](/metadata-lock
 > - 各 DDL 操作では、 `schema`バージョンの変更の数は、対応する`schema state`バージョンの変更の数と同じです。
 > - DDL操作によって、`schema`バージョンの変更回数は異なります。例えば、 `CREATE TABLE`文では`schema`バージョンが1回変更されますが、 `ADD COLUMN`文では`schema`バージョンが4回変更されます。
 
-### 「Information schema is out of date」というエラーの原因は何ですか? {#what-are-the-causes-of-the-information-schema-is-out-of-date-error}
+### `Information schema is out of date`というエラーの原因は何ですか? {#what-are-the-causes-of-the-information-schema-is-out-of-date-error}
 
 DML文の実行時に、TiDBがDDLリース（デフォルトでは45秒）内に最新のスキーマをロードできない場合、エラー`Information schema is out of date`が発生する可能性があります。考えられる原因は以下のとおりです。
 
@@ -345,7 +345,7 @@ JDBC URL に`connectionCollation`が設定されていない場合、次の2つ�
 **シナリオ 1** : JDBC URL に`connectionCollation`も`characterEncoding`も設定されていない
 
 - Connector/J 8.0.25以前のバージョンでは、JDBCドライバはサーバーのデフォルトの文字セットを使用しようとします。TiDBのデフォルトの文字セットは`utf8mb4`であるため、ドライバは接続照合順序として`utf8mb4_bin`を使用します。
-- Connector/J 8.0.26 以降のバージョンでは、JDBC ドライバーは`utf8mb4`文字セットを使用し、戻り値`SELECT VERSION()`に基づいて照合順序を自動的に選択します。
+- Connector/J 8.0.26 以降のバージョンでは、JDBC ドライバーは`utf8mb4`文字セットを使用し、 `SELECT VERSION()`の戻り値に基づいて照合順序を自動的に選択します。
 
     - 戻り値が`8.0.1`未満の場合、ドライバは接続照合順序として`utf8mb4_general_ci`を使用します。TiDB はドライバに従い、照合順序として`utf8mb4_general_ci`を使用します。
     - 戻り値が`8.0.1`以上の場合、ドライバは接続照合順序として`utf8mb4_0900_ai_ci`を使用します。TiDB v7.4.0 以降のバージョンではドライバに従い、照合順序として`utf8mb4_0900_ai_ci`を使用しますが、TiDB v7.4.0 より前のバージョンでは`utf8mb4_0900_ai_ci`照合順序がサポートされていないため、デフォルトの照合順序`utf8mb4_bin`が使用されます。
