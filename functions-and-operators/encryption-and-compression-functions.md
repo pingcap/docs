@@ -3,7 +3,7 @@ title: Encryption and Compression Functions
 summary: 暗号化と圧縮の関数について学びます。
 ---
 
-# 暗号化と圧縮機能 {#encryption-and-compression-functions}
+# 暗号化と圧縮関数 {#encryption-and-compression-functions}
 
 TiDB は、MySQL 8.0 で利用可能な[暗号化および圧縮関数](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html)のほとんどをサポートしています。
 
@@ -27,7 +27,7 @@ TiDB は、MySQL 8.0 で利用可能な[暗号化および圧縮関数](https://
 
 ### `AES_DECRYPT()` {#aes_decrypt}
 
-`AES_DECRYPT(data, key [,iv])`関数は、同じ`key`を使用して[`AES_ENCRYPT()`](#aes_encrypt)関数を使用して以前に暗号化された`data`復号化します。
+`AES_DECRYPT(data, key [,iv])`関数は、同じ`key`を使用して[`AES_ENCRYPT()`](#aes_encrypt)関数を使用して以前に暗号化された`data`を復号化します。
 
 [`block_encryption_mode`](/system-variables.md#block_encryption_mode)システム変数を使用して[高度暗号化規格（AES）](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)暗号化モードを選択できます。
 
@@ -48,7 +48,7 @@ SELECT AES_DECRYPT(0x28409970815CD536428876175F1A4923, 'secret');
 
 ### `AES_ENCRYPT()` {#aes_encrypt}
 
-`AES_ENCRYPT(data, key [,iv])`関数は、 [高度暗号化規格（AES）](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)アルゴリズムを使用して`data` `key`で暗号化します。
+`AES_ENCRYPT(data, key [,iv])`関数は、 [高度暗号化規格（AES）](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)アルゴリズムを使用して`data`を`key`で暗号化します。
 
 [`block_encryption_mode`](/system-variables.md#block_encryption_mode)システム変数を使用して、AES 暗号化モードを選択できます。
 
@@ -92,7 +92,7 @@ SELECT COMPRESS(0x414243);
 1 row in set (0.00 sec)
 ```
 
-この出力では、 `0x03000000`圧縮されていない長さ (3) を表し、 `0x789C72747206040000FFFF018D00C7` zlib で圧縮されたデータを表します。
+この出力では、 `0x03000000`は圧縮されていない長さ (3) を表し、 `0x789C72747206040000FFFF018D00C7`は zlib で圧縮されたデータを表します。
 
 Python を使用して TiDB の外部でこれをデコードする例:
 
@@ -105,7 +105,7 @@ print(int.from_bytes(data[:4], byteorder='little'))  # 3
 print(zlib.decompress(data[4:]))  # b'ABC'
 ```
 
-短い文字列の場合、 `COMPRESS()`入力よりも多くのバイト数を返す可能性があります。次の例では、 `a`文字の文字列が19バイトに圧縮されることを示しています。
+短い文字列の場合、 `COMPRESS()`は入力よりも多くのバイト数を返す可能性があります。次の例では、 `a`を100文字並べた文字列が19バイトに圧縮されることを示しています。
 
 ```sql
 WITH x AS (SELECT REPEAT('a',100) 'a')
@@ -327,7 +327,7 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
     8 rows in set (0.01 sec)
     ```
 
-- 空の文字列のパスワード強度をチェックします`0`が返されます。
+- 空の文字列のパスワード強度をチェックすると、 `0`が返されます。
 
     ```sql
     SELECT VALIDATE_PASSWORD_STRENGTH('');

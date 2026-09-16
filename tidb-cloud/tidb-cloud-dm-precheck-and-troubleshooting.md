@@ -16,14 +16,14 @@ summary: データ移行時に発生する事前チェックエラー、移行�
 ### エラーメッセージ: mysql server_id が 0 より大きいかどうかを確認してください {#error-message-check-whether-mysql-server-id-has-been-greater-than-0}
 
 - Amazon Aurora MySQL または Amazon RDS: `server_id`はデフォルトで設定されています。設定する必要はありません。フルデータ移行と増分データ移行の両方をサポートするには、Amazon Aurora MySQL ライターインスタンスを使用していることを確認してください。
-- MySQL: MySQL 用に`server_id`を構成するには、 [レプリケーションソースコンフィグレーションの設定](https://dev.mysql.com/doc/refman/8.0/en/replication-howto-masterbaseconfig.html)を参照してください。
+- MySQL: MySQL 用に`server_id`を構成するには、 [レプリケーションソースの設定](https://dev.mysql.com/doc/refman/8.0/en/replication-howto-masterbaseconfig.html)を参照してください。
 
 ### エラーメッセージ: mysql binlogが有効になっているか確認してください {#error-message-check-whether-mysql-binlog-is-enabled}
 
 - Amazon Aurora MySQL: [Amazon Aurora MySQL互換クラスターでバイナリログを有効にするにはどうすればよいですか？](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls)を参照してください。完全データ移行と増分データ移行の両方をサポートするには、Amazon Aurora MySQL ライター インスタンスを使用していることを確認してください。
 - Amazon RDS: [MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
 - Google Cloud SQL for MySQL: Google は、MySQL マスター データベースのポイントインタイムリカバリを通じてバイナリ ロギングを可能にします。 [特定時点へのリカバリを有効にする](https://cloud.google.com/sql/docs/mysql/backup-recovery/pitr#enablingpitr)を参照してください。
-- MySQL: [レプリケーションソースコンフィグレーションの設定](https://dev.mysql.com/doc/refman/8.0/en/replication-howto-masterbaseconfig.html)を参照してください。
+- MySQL: [レプリケーションソースの設定](https://dev.mysql.com/doc/refman/8.0/en/replication-howto-masterbaseconfig.html)を参照してください。
 
 ### エラーメッセージ: mysql binlog_format が ROW かどうか確認してください {#error-message-check-whether-mysql-binlog-format-is-row}
 
@@ -41,8 +41,8 @@ summary: データ移行時に発生する事前チェックエラー、移行�
 
 アップストリーム データベースでbinlogが有効になっていることを確認してください。 [MySQLのbinlogが有効になっているか確認してください](#error-message-check-whether-mysql-binlog-is-enabled)その後、表示されるメッセージに従って問題を解決します。
 
-- メッセージが`These dbs xxx are not in binlog_do_db xxx`に似ている場合は、移行したいすべてのデータベースがリストに含まれていることを確認してください。-- [--binlog-do-db=db_name](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_binlog-do-db)を参照してください。
-- メッセージが`These dbs xxx are in binlog_ignore_db xxx`に似ている場合は、移行したいすべてのデータベースが無視リストに含まれていないことを確認してください。-- [--binlog-ignore-db=db_name](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_binlog-ignore-db)を参照してください。
+- メッセージが`These dbs xxx are not in binlog_do_db xxx`に類似している場合は、移行したいすべてのデータベースがリストに含まれていることを確認してください。 [--binlog-do-db=db_name](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_binlog-do-db)を参照してください。
+- メッセージが`These dbs xxx are in binlog_ignore_db xxx`に類似している場合は、移行したいすべてのデータベースが無視リストに含まれていないことを確認してください。 [--binlog-ignore-db=db_name](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_binlog-ignore-db)を参照してください。
 
 Amazon Aurora MySQL の場合、この事前チェック項目はエラーになりません。完全データ移行と増分データ移行の両方をサポートするために、Amazon Aurora MySQL ライターインスタンスを使用していることを確認してください。
 
@@ -62,13 +62,13 @@ TiDB Cloudクラスターでエラーが発生した場合は、ドキュメン�
 
 このセクションでは、移行中に発生する可能性のある問題とその解決策について説明します。これらのエラーメッセージは、**Migration Job Details**ページに表示されます。
 
-### エラーメッセージ：「移行に必要なバイナリログがソースデータベースに存在しません。移行が成功するためには、バイナリログファイルが十分な期間保持されていることを確認してください。」 {#error-message-the-required-binary-log-for-migration-no-longer-exists-on-the-source-database-please-make-sure-binary-log-files-are-kept-for-long-enough-time-for-migration-to-succeed}
+### エラーメッセージ："The required binary log for migration no longer exists on the source database. Please make sure binary log files are kept for long enough time for migration to succeed." {#error-message-the-required-binary-log-for-migration-no-longer-exists-on-the-source-database-please-make-sure-binary-log-files-are-kept-for-long-enough-time-for-migration-to-succeed}
 
 このエラーは、移行対象のバイナリログが既にクリーンアップされており、新しいタスクを作成することによってのみ復元できることを意味します。
 
 増分移行に必要なバイナリログが存在することを確認してください。バイナリログの保存期間を延長するために、 `expire_logs_days`を設定することをお勧めします。移行ジョブでバイナリログのクリーンアップが必要な場合は、 `purge binary log`を使用してバイナリログをクリーンアップしないでください。
 
-### エラーメッセージ：「指定されたパラメータを使用してソースデータベースに接続できませんでした。ソースデータベースが稼働しており、指定されたパラメータを使用して接続できることを確認してください。」 {#error-message-failed-to-connect-to-the-source-database-using-given-parameters-please-make-sure-the-source-database-is-up-and-can-be-connected-using-the-given-parameters}
+### エラーメッセージ："Failed to connect to the source database using given parameters. Please make sure the source database is up and can be connected using the given parameters." {#error-message-failed-to-connect-to-the-source-database-using-given-parameters-please-make-sure-the-source-database-is-up-and-can-be-connected-using-the-given-parameters}
 
 このエラーは、ソースデータベースへの接続に失敗したことを意味します。ソースデータベースが起動しており、指定されたパラメータを使用して接続できるかどうかを確認してください。ソースデータベースが利用可能であることを確認したら、 **Restart**をクリックしてタスクの復旧を試みてください。
 
@@ -76,25 +76,25 @@ TiDB Cloudクラスターでエラーが発生した場合は、ドキュメン�
 
 このエラーは、ダウンストリームの TiDB クラスタへの接続に失敗したことを意味します。ダウンストリームの TiDB クラスタが正常な状態（ `Available`および`Modifying`を含む）であり、ジョブで指定されたユーザー名とパスワードで接続できるかどうかを確認してください。ダウンストリームの TiDB クラスタが利用可能であることを確認したら、 **Restart**をクリックしてタスクを再開してみてください。
 
-### エラーメッセージ：「指定されたユーザー名とパスワードを使用してTiDBクラスタに接続できませんでした。TiDBクラスタが起動しており、指定されたユーザー名とパスワードで接続できることを確認してください。」 {#error-message-failed-to-connect-to-the-tidb-cluster-using-the-given-user-and-password-please-make-sure-tidb-cluster-is-up-and-can-be-connected-to-using-the-given-user-and-password}
+### エラーメッセージ："Failed to connect to the TiDB cluster using the given user and password. Please make sure TiDB Cluster is up and can be connected to using the given user and password." {#error-message-failed-to-connect-to-the-tidb-cluster-using-the-given-user-and-password-please-make-sure-tidb-cluster-is-up-and-can-be-connected-to-using-the-given-user-and-password}
 
 TiDB クラスターへの接続に失敗しました。TiDB クラスターが正常な状態（ `Available`および`Modifying`を含む）であるかどうかを確認することをお勧めします。ジョブで指定されたユーザー名とパスワードを使用して接続できます。TiDB クラスターが利用可能であることを確認したら、 **Restart**をクリックしてタスクを再開してみてください。
 
-### エラーメッセージ：「TiDBクラスタのストレージが不足しています。TiKVのノードストレージを増やしてください。」 {#error-message-tidb-cluster-storage-is-not-enough-please-increase-the-node-storage-of-tikv}
+### エラーメッセージ："TiDB cluster storage is not enough. Please increase the node storage of TiKV." {#error-message-tidb-cluster-storage-is-not-enough-please-increase-the-node-storage-of-tikv}
 
-TiDB クラスターのストレージが不足しています。 [TiKVノードのストレージを増やす](/tidb-cloud/scale-tidb-cluster.md#change-storage)から、 **Restart**をクリックしてタスクを再開することをお勧めします。
+TiDB クラスターのストレージが不足しています。 [TiKVノードのストレージを増やして](/tidb-cloud/scale-tidb-cluster.md#change-storage)から、 **Restart**をクリックしてタスクを再開することをお勧めします。
 
-### エラーメッセージ：「ソースデータベースへの接続に失敗しました。データベースが利用可能か、または最大接続数に達していないかを確認してください。」 {#error-message-failed-to-connect-to-the-source-database-please-check-whether-the-database-is-available-or-the-maximum-connections-have-been-reached}
+### エラーメッセージ："Failed to connect to the source database. Please check whether the database is available or the maximum connections have been reached." {#error-message-failed-to-connect-to-the-source-database-please-check-whether-the-database-is-available-or-the-maximum-connections-have-been-reached}
 
 ソースデータベースへの接続に失敗しました。ソースデータベースが起動しているか、データベース接続数が上限に達していないか、ジョブで指定されたパラメータを使用して接続できるかを確認してください。ソースデータベースが利用可能であることを確認したら、 **Restart**をクリックしてジョブを再開してください。
 
-### エラーメッセージ：「エラー 1273: 新しい照合順序が有効になっている場合、サポートされていない照合順序です: 'utf8mb4_0900_ai_ci'」 {#error-message-error-1273-unsupported-collation-when-new-collation-is-enabled-utf8mb4-0900-ai-ci}
+### エラーメッセージ："Error 1273: Unsupported collation when new collation is enabled: 'utf8mb4_0900_ai_ci'" {#error-message-error-1273-unsupported-collation-when-new-collation-is-enabled-utf8mb4-0900-ai-ci}
 
 ダウンストリームのTiDBクラスタでスキーマを作成できませんでした。このエラーは、アップストリームのMySQLで使用されている照合順序がTiDBクラスタでサポートされていないことを意味します。
 
 この問題を解決するには、 [サポートされている照合順序](/character-set-and-collation.md#character-sets-and-collations-supported-by-tidb)に基づいて TiDB クラスターにスキーマを作成し、 **Restart**をクリックしてタスクを再開します。
 
-### エラーメッセージ：「LOCK TABLES ... アクセスが拒否されました」 {#error-message-lock-tables-access-denied}
+### エラーメッセージ："LOCK TABLES ... Access denied" {#error-message-lock-tables-access-denied}
 
 ソースデータベースユーザーに`LOCK TABLES`権限がないため、データの完全なエクスポートが失敗します。このエラーは通常、マネージド MySQL サービス (Amazon RDS、 Aurora、ApsaraDB RDS for MySQL、Azure Database for MySQL、Google Cloud SQL など) から移行する場合に発生します。これらのサービスでは、クラウドプロバイダーによって`FLUSH TABLES WITH READ LOCK` (FTWRL) が許可されていません。このシナリオでは、DM はデフォルトの`consistency=auto`モードを使用し、完全なエクスポート中にデータの一貫性を確保するために`LOCK TABLES`にフォールバックします。この操作には`LOCK TABLES`権限が必要です。
 

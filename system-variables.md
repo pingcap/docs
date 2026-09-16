@@ -959,7 +959,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 <CustomContent platform="tidb">
 
-- この変数を有効にし、TiDB Data Migration (DM) を使用してデータを移行している場合は、 [DMタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)ファイルの`session`部分に`sql_require_ primary_key`を追加し、それを`OFF`に設定することをお勧めします。そうしないと、DM がタスクを作成できなくなります。
+- この変数を有効にし、TiDB Data Migration (DM) を使用してデータを移行している場合は、 [DMタスク設定ファイル](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)ファイルの`session`部分に`sql_require_ primary_key`を追加し、それを`OFF`に設定することをお勧めします。そうしないと、DM がタスクを作成できなくなります。
 
 </CustomContent>
 
@@ -2156,7 +2156,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 <CustomContent platform="tidb">
 
 - デフォルト値: `OFF`
-- この変数は、接続先の TiDBサーバーでセキュリティ強化モード (SEM) が有効になっているかどうかを示します。この値を変更するには、TiDBサーバー構成ファイル内の`enable-sem`の値を変更し、TiDBサーバーを再起動する必要があります。
+- この変数は、接続先の TiDBサーバーでセキュリティ強化モード (SEM) が有効になっているかどうかを示します。この値を変更するには、TiDBサーバー設定ファイル内の`enable-sem`の値を変更し、TiDBサーバーを再起動する必要があります。
 
 </CustomContent>
 
@@ -2332,7 +2332,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Warning:**
 >
-> DML文用の非プリペアド実行計画 キャッシュは実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> DML文用の非プリペアドプランキャッシュは実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
 - 範囲: セッション | グローバル
 - クラスターに保持される: はい
@@ -2434,7 +2434,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - 型: Boolean
 - デフォルト値: `ON`
 - この変数は`LIST (COLUMNS) TABLE PARTITION`機能を有効にするかどうかを設定するために使用されます。
-- この変数はv8.4.0以降非推奨です。その値はデフォルト値`ON`に固定されます。つまり、 [List パーティショニング](/partitioned-table.md#list-partitioning)はデフォルトで有効になります。
+- この変数はv8.4.0以降非推奨です。その値はデフォルト値`ON`に固定されます。つまり、 [リストパーティショニング](/partitioned-table.md#list-partitioning)はデフォルトで有効になります。
 
 ### tidb_enable_local_txn
 
@@ -2569,7 +2569,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、インスタンスプランキャッシュ機能を有効にするかどうかを制御します。この機能はインスタンスレベルの実行計画 キャッシュを実装しており、同じ TiDB インスタンス内のすべてのセッションが実行計画 キャッシュを共有できるため、メモリ使用率が向上します。インスタンスプランキャッシュを有効にする前に、セッションレベル[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)と[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)を無効にすることをお勧めします。
+- この変数は、インスタンスプランキャッシュ機能を有効にするかどうかを制御します。この機能はインスタンスレベルの実行プランキャッシュを実装しており、同じ TiDB インスタンス内のすべてのセッションが実行プランキャッシュを共有できるため、メモリ使用率が向上します。インスタンスプランキャッシュを有効にする前に、セッションレベル[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)と[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)を無効にすることをお勧めします。
 
 ### tidb_enable_ordered_result_mode
 
@@ -4044,7 +4044,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 > **Note:**
 >
-> `auto_analyze`は、TiDB 起動構成ファイルで`run-auto-analyze`が有効になっている場合にのみ、TiDB クラスタでトリガーされます。
+> `auto_analyze`は、TiDB 起動設定ファイルで`run-auto-analyze`が有効になっている場合にのみ、TiDB クラスタでトリガーされます。
 
 ### tidb_mem_quota_apply_cache <span class="version-mark">New in v5.0</span>
 
@@ -5966,7 +5966,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
-- パーティション [動的剪定モード](/partitioned-table.md#dynamic-pruning-mode)でパーティションテーブルにアクセスする場合、TiDB は各パーティションの統計情報を集約してグローバル統計情報を生成します。この変数は、パーティション統計情報が欠落している場合にグローバル統計情報を生成するかどうかを制御します。
+- [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)でパーティションテーブルにアクセスする場合、TiDB は各パーティションの統計情報を集約してグローバル統計情報を生成します。この変数は、パーティション統計情報が欠落している場合にグローバル統計情報を生成するかどうかを制御します。
 
     - この変数が`ON`の場合、TiDB はグローバル統計を生成する際に不足しているパーティション統計をスキップするため、グローバル統計の生成には影響しません。
     - この変数が`OFF`の場合、TiDB は欠落しているパーティション統計を検出すると、グローバル統計の生成を停止します。
@@ -6554,8 +6554,8 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
     - PDにおけるTSOの割り当ては、まだボトルネックに達していません。
     - PDノードとTiDBノードは十分なCPUリソースを備えている。
     - TiDBとPD間のネットワークレイテンシーは、PDがTSOを割り当てるのにかかる時間よりもかなり長い（つまり、TSO RPCの実行時間の大部分はネットワークレイテンシーによるものである）。
-        - TSO RPCリクエストの所要時間を取得するには、Grafana TiDBダッシュボードのPDクライアントセクションにある**PD TSO RPC所要時間**パネルを確認してください。
-        - PD TSO割り当ての期間を確認するには、Grafana PDダッシュボードのTiDBセクションにある**PDサーバーTSOハンドル期間**パネルを確認してください。
+        - TSO RPCリクエストの所要時間を取得するには、Grafana TiDBダッシュボードのPDクライアントセクションにある**PD TSO RPC Duration**パネルを確認してください。
+        - PD TSO割り当ての期間を確認するには、Grafana PDダッシュボードのTiDBセクションにある**PD server TSO handle duration**パネルを確認してください。
     - TiDBとPD間のTSO RPCリクエストの増加（ `PARALLEL`の場合は2倍、 `PARALLEL-FAST`の場合は4倍）によって生じる追加のネットワークトラフィックは許容範囲内です。
 
 > **Note:**

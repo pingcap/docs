@@ -23,7 +23,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
     - 単調に増加するインデックス列に対する増分`Analyze`操作をサポートする [#10355](https://github.com/pingcap/tidb/pull/10355)
     - `Order By`節のNULL値は無視する [#10488](https://github.com/pingcap/tidb/pull/10488)
     - 列情報を簡素化する際の`UnionAll`論理演算子の誤ったスキーマ情報計算を修正 [#10384](https://github.com/pingcap/tidb/pull/10384)
-    - `Not`演算子プッシュダウンするときに元の式を変更しないでください [#10363](https://github.com/pingcap/tidb/pull/10363/files)
+    - `Not`演算子をプッシュダウンするときに元の式を変更しないようにします [#10363](https://github.com/pingcap/tidb/pull/10363/files)
     - ヒストグラムの`dump`相関`load`サポート [#10573](https://github.com/pingcap/tidb/pull/10573)
 
 - 実行エンジン
@@ -55,7 +55,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
     - ハッシュパーティション式と関数の制限を修正 [#10273](https://github.com/pingcap/tidb/pull/10273)
     - パーティションを含むテーブルにインデックスを追加すると、場合によっては TiDB panicが発生する問題を修正しました[#10475](https://github.com/pingcap/tidb/pull/10475)
     - 無効なテーブルスキーマを回避するために、DDLを実行する前にテーブル情報を検証します[#10464](https://github.com/pingcap/tidb/pull/10464)
-    - デフォルトでハッシュパーティションを有効にし、パーティション定義に列が1つしかない場合は範囲列パーティションを有効にします[#9936](https://github.com/pingcap/tidb/pull/9936)
+    - デフォルトでハッシュパーティショニングを有効にし、パーティション定義に列が1つしかない場合はレンジCOLUMNSパーティショニングを有効にします[#9936](https://github.com/pingcap/tidb/pull/9936)
 
 ## PD {#pd}
 

@@ -1,6 +1,6 @@
 ---
 title: Get Started with TiDB + AI via Python
-summary: PythonとTiDB Vector Searchを使用して、セマンティック検索を実行するAIアプリケーションを迅速に開発する方法を学びましょう。
+summary: PythonとTiDBベクトル検索を使用して、セマンティック検索を実行するAIアプリケーションを迅速に開発する方法を学びましょう。
 aliases: ['/ja/tidb/stable/vector-search-get-started-using-python/','/ja/tidb/dev/vector-search-get-started-using-python/','/ja/tidbcloud/vector-search-get-started-using-python/']
 ---
 
@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/vector-search-get-started-using-python/','/ja/tidb/de
 
 このチュートリアルでは、**セマンティック検索**機能を提供するシンプルなAIアプリケーションの開発方法を説明します。従来のキーワード検索とは異なり、セマンティック検索はクエリの背後にある意味をインテリジェントに理解し、最も関連性の高い結果を返します。たとえば、"dog"、"fish"、"tree"というタイトルの文書があり、"a swimming animal"を検索すると、アプリケーションは"fish"を最も関連性の高い結果として識別します。
 
-このチュートリアルでは、 [TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)、Python、 [TiDB Vector SDK for Python](https://github.com/pingcap/tidb-vector-python) 、および AI モデルを使用して、この AI アプリケーションを開発します。
+このチュートリアルでは、 [TiDBベクトル検索](/ai/concepts/vector-search-overview.md)、Python、 [TiDB Vector SDK for Python](https://github.com/pingcap/tidb-vector-python) 、および AI モデルを使用して、この AI アプリケーションを開発します。
 
 > **Note:**
 >

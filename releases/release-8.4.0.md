@@ -49,13 +49,13 @@ TiDB バージョン: 8.4.0
     - 冗長性を排除し、同じメモリ消費量でより多くの実行計画をキャッシュします。
     - インスタンスに固定サイズのメモリを割り当て、メモリ使用量をより効果的に制限します。
 
-    v8.4.0 では、インスタンスレベルの実行計画 キャッシュはクエリ実行計画のキャッシュのみをサポートしており、デフォルトでは無効になっています。 [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840)を使用してこの機能を有効にし、 [`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840)を使用して最大メモリ使用量を設定できます。この機能を有効にする前に、[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)と[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)を無効にしてください。
+    v8.4.0 では、インスタンスレベルの実行プランキャッシュはクエリ実行計画のキャッシュのみをサポートしており、デフォルトでは無効になっています。 [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840)を使用してこの機能を有効にし、 [`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840)を使用して最大メモリ使用量を設定できます。この機能を有効にする前に、[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)と[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)を無効にしてください。
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840)を参照してください。
 
 - TiDB Lightningの論理インポートモードは、プリペアドステートメントとクライアントステートメントキャッシュをサポートします [#54850](https://github.com/pingcap/tidb/issues/54850) @[dbsid](https://github.com/dbsid)
 
-    `logical-import-prep-stmt`設定項目を有効にすると、TiDB Lightning の論理インポートモードで実行される SQL文は、プリペアドステートメントとクライアント ステートメントキャッシュを使用します。これにより、 TiDB SQLの解析とコンパイルのコストが削減され、SQL の実行効率が向上し、実行計画 キャッシュへのアクセス確率が高まるため、論理インポートが高速化されます。
+    `logical-import-prep-stmt`設定項目を有効にすると、TiDB Lightning の論理インポートモードで実行される SQL文は、プリペアドステートメントとクライアント ステートメントキャッシュを使用します。これにより、 TiDB SQLの解析とコンパイルのコストが削減され、SQL の実行効率が向上し、実行プランキャッシュへのアクセス確率が高まるため、論理インポートが高速化されます。
 
     詳細については、 [ドキュメント](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
@@ -133,11 +133,11 @@ TiDB バージョン: 8.4.0
 
     ベクトル検索は、データの意味論に基づいた検索手法であり、より関連性の高い検索結果を提供します。AIや大規模言語モデル（LLM）の中核関数の一つとして、ベクトル検索は、検索拡張生成（RAG）、意味検索、推薦システムなど、さまざまなシナリオで活用できます。
 
-    v8.4.0 以降、TiDB は [ベクトルデータ型](/ai/reference/vector-search-data-types.md)と[ベクトル検索インデックス](/ai/reference/vector-search-index.md)をサポートし、強力なベクトル検索機能を提供します。 TiDB ベクトルデータタイプは、最大 16,383 次元をサポートし、L2 距離 (ユークリッド距離)、コサイン距離、負の内積、L1 距離 (マンハッタン距離) を含むさまざまな[距離関数](/ai/reference/vector-search-functions-and-operators.md#vector-functions)をサポートします。
+    v8.4.0 以降、TiDB は [ベクトルデータ型](/ai/reference/vector-search-data-types.md)と[ベクトル検索インデックス](/ai/reference/vector-search-index.md)をサポートし、強力なベクトル検索機能を提供します。 TiDB ベクトルデータ型は、最大 16,383 次元をサポートし、L2 距離 (ユークリッド距離)、コサイン距離、負の内積、L1 距離 (マンハッタン距離) を含むさまざまな[距離関数](/ai/reference/vector-search-functions-and-operators.md#vector-functions)をサポートします。
 
     ベクトル検索を開始するには、ベクトルデータ型のテーブルを作成し、ベクトルデータを挿入し、ベクトルデータに対するクエリを実行するだけで済みます。ベクトルデータと従来の関係データを組み合わせたクエリを実行することも可能です。
 
-    ベクトル検索のパフォーマンスを向上させるために、[ベクトル検索インデックス](/ai/reference/vector-search-index.md)を作成して使用できます。 TiDB ベクトル検索インデックスはTiFlashに依存していることに注意してください。ベクトル検索インデックスを使用する前に、 TiFlashノードが TiDB クラスターにデプロイされていることを確認してください。
+    ベクトル検索のパフォーマンスを向上させるために、[ベクトル検索インデックス](/ai/reference/vector-search-index.md)を作成して使用できます。 TiDBベクトル検索インデックスはTiFlashに依存していることに注意してください。ベクトル検索インデックスを使用する前に、 TiFlashノードが TiDB クラスターにデプロイされていることを確認してください。
 
     詳細については、[ドキュメント](/ai/concepts/vector-search-overview.md)を参照してください。
 
@@ -216,7 +216,7 @@ TiDB バージョン: 8.4.0
 | `log_bin`                                                                                                                       | 削除済み     | バージョン8.4.0では、 [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/)が削除されました。この変数はTiDB Binlogが使用されているかどうかを示し、バージョン8.4.0以降は削除されます。                                                                                                                                    |
 | `sql_log_bin`                                                                                                                   | 削除済み     | バージョン8.4.0では、 [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/)が削除されました。この変数は、変更内容をTiDB Binlogに書き込むかどうかを示すもので、バージョン8.4.0以降は削除されます。                                                                                                                              |
 | [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760)                                         | 非推奨      | v8.4.0 では、この変数は非推奨です。その値はデフォルト値`ON`に固定されます。つまり、[グローバルインデックス](/global-indexes.md)はデフォルトで有効になっています。 `CREATE TABLE`または`ALTER TABLE`を実行してグローバルインデックスを作成する際に、対応する列にキーワード`GLOBAL`を追加するだけで済みます。                                                                                                     |
-| [`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50)                                      | 非推奨      | バージョン8.4.0では、この変数は非推奨となります。その値はデフォルト値`ON`に固定され、[リスト分割](/partitioned-table.md#list-partitioning)がデフォルトで有効になります。                                                                                                                                                                               |
+| [`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50)                                      | 非推奨      | バージョン8.4.0では、この変数は非推奨となります。その値はデフォルト値`ON`に固定され、[リストパーティショニング](/partitioned-table.md#list-partitioning)がデフォルトで有効になります。                                                                                                                                                                               |
 | [`tidb_enable_table_partition`](/system-variables.md#tidb_enable_table_partition)                                               | 非推奨      | v8.4.0 では、この変数は非推奨になりました。その値はデフォルト値`ON`に固定されます。つまり、[テーブルパーティショニング](/partitioned-table.md)はデフォルトで有効になります。                                                                                                                                                                                     |
 | [`tidb_analyze_partition_concurrency`](/system-variables.md#tidb_analyze_partition_concurrency)                                 | 変更     | 値の範囲を`[1, 18446744073709551615]`から`[1, 128]`に変更します。                                                                                                                                                                                                                                          |
 | [`tidb_enable_inl_join_inner_multi_pattern`](/system-variables.md#tidb_enable_inl_join_inner_multi_pattern-new-in-v700)         | 変更     | デフォルト値を`OFF`から`ON`に変更します。v8.4.0 以降、内部テーブルに`Selection` 、 `Aggregation` 、または`Projection`オペレーターがある場合、Index Join がデフォルトでサポートされます。                                                                                                                                                              |
@@ -233,9 +233,9 @@ TiDB バージョン: 8.4.0
 | [`tidb_shard_row_id_bits`](/system-variables.md#tidb_shard_row_id_bits-new-in-v840)                                             | 新しく追加された | バージョン 8.4.0 より前では、新しく作成されたテーブルの行 ID のスライス数のデフォルト設定を行うには、 `CREATE TABLE`または`ALTER TABLE` SQL文ごとに`SHARD_ROW_ID_BITS`を宣言する必要がありましたが、多数のテーブルを同様に構成する必要がある場合は複雑でした。この変数は、このような問題を解決するために導入されました。使いやすさを向上させるために、このシステム変数を`GLOBAL`または`SESSION`レベルで設定できます。                                     |
 | [`tidb_tso_client_rpc_mode`](/system-variables.md#tidb_tso_client_rpc_mode-new-in-v840)                                         | 新しく追加された | TiDBがPDにTSO RPCリクエストを送信するモードを切り替えます。このモードによって、TSO RPCリクエストを並列処理できるかどうかが決まり、各TS取得操作のバッチ待機時間に影響するため、特定のシナリオにおけるクエリ実行中のTS取得の待機時間を短縮できます。                                                                                                                                                        |
 
-### コンフィグレーションパラメータ {#configuration-parameters}
+### 設定パラメータ {#configuration-parameters}
 
-| コンフィグレーションファイルまたはコンポーネント | コンフィグレーションパラメータ                                                                                                          | 変更の種類  | 説明                                                                                                                                                                                      |
+| 設定ファイルまたはコンポーネント | 設定パラメータ                                                                                                          | 変更の種類  | 説明                                                                                                                                                                                      |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB                     | [`grpc-keepalive-time`](/tidb-configuration-file.md#grpc-keepalive-time)                                                 | 変更     | `1`の最小値を追加します。                                                                                                                                                                          |
 | TiDB                     | [`grpc-keepalive-timeout`](/tidb-configuration-file.md#grpc-keepalive-timeout)                                           | 変更     | バージョン 8.4.0 より前は、このパラメータのデータ型は INT で、最小値は`1`でした。バージョン 8.4.0 以降では、データ型が FLOAT64 に変更され、最小値は`0.05`になります。ネットワークのジッターが頻繁に発生するシナリオでは、値を小さく設定して再試行間隔を短くすることで、ネットワークのジッターがパフォーマンスに与える影響を軽減できます。 |
@@ -295,7 +295,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
 - 今後のリリースでは [実行プランバインディングの自動進化](/sql-plan-management.md#baseline-evolution)が再設計される予定であり、関連する変数と動作が変更されます。
 - バージョン8.0.0では、TiDBが並列ハッシュアグリゲーションアルゴリズムのディスクスピルをサポートするかどうかを制御するシステム変数[`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800)が導入されました。今後のバージョンでは、 [`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800)システム変数は非推奨となります。
 - TiDB Lightning のパラメータ[`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) 、今後のリリースで非推奨となり、その後削除されます。このパラメータは[`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)に置き換えられます。これは、競合するレコードの最大数が、単一のインポートタスクで許容できる競合レコードの最大数と一致することを意味します。
-- バージョン6.3.0以降、パーティションテーブルはデフォルトで [動的剪定モード](/partitioned-table.md#dynamic-pruning-mode)を使用します。静的剪定モードと比較して、動的剪定モードはIndexJoinやプランキャッシュなどの機能をサポートし、パフォーマンスが向上しています。そのため、静的剪定モードは非推奨となります。
+- バージョン6.3.0以降、パーティションテーブルはデフォルトで [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)を使用します。静的プルーニングモードと比較して、動的プルーニングモードはIndexJoinやプランキャッシュなどの機能をサポートし、パフォーマンスが向上しています。そのため、静的プルーニングモードは非推奨となります。
 
 ## 改善点 {#improvements}
 

@@ -39,14 +39,14 @@ PD ダッシュボード メトリック項目の説明は次のとおりです�
 
 ## Operator {#operator}
 
-- **Schedule operator create**: タイプごとに新しく作成されるオペレーターの数
-- **Schedule operator check**: 種類ごとにチェックされるオペレーターの数。主に現在のステップが完了したかどうかをチェックし、完了している場合は次に実行するステップを返します。
-- **Schedule operator finish**: タイプごとに終了したオペレーターの数
-- **Schedule operator timeout**: タイプごとのタイムアウトオペレーターの数
-- **Schedule operator replaced or canceled**: タイプごとに交代またはキャンセルされたオペレーターの数
-- **Schedule operators count by state**: 状態ごとのオペレーター数
-- **Operator finish duration**: 終了したオペレーターの最大時間
-- **Operator step duration**: 完了したオペレーターステップの最大所要時間
+- Schedule operator create: タイプごとに新しく作成されるオペレーターの数
+- Schedule operator check: 種類ごとにチェックされるオペレーターの数。主に現在のステップが完了したかどうかをチェックし、完了している場合は次に実行するステップを返します。
+- Schedule operator finish: タイプごとに終了したオペレーターの数
+- Schedule operator timeout: タイプごとのタイムアウトオペレーターの数
+- Schedule operator replaced or canceled: タイプごとに交代またはキャンセルされたオペレーターの数
+- Schedule operators count by state: 状態ごとのオペレーター数
+- Operator finish duration: 終了したオペレーターの最大時間
+- Operator step duration: 完了したオペレーターステップの最大所要時間
 
 ![PD Dashboard - Operator metrics](/media/pd-dashboard-operator-v4.png)
 

@@ -26,7 +26,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     - 論理最適化フェーズで集計関数を削除するときに、誤った実行を防ぐために`GROUP_CONCAT`特別に処理します[#9967](https://github.com/pingcap/tidb/pull/9967)
     - フィルタが定数の場合、結合オペレーターの子ノードにフィルタを適切にプッシュダウンします。 [#9848](https://github.com/pingcap/tidb/pull/9848)
     - MySQL との非互換性を防ぐために、論理最適化フェーズで列をプルーニングするときに`RAND()`などのいくつかの関数を特別に処理します。 [#10064](https://github.com/pingcap/tidb/pull/10064)
-    - `FAST ANALYZE`サポートします。これは、領域全体をスキャンするのではなく、領域をサンプリングすることで統計収集を高速化します。この機能は変数`tidb_enable_fast_analyze`によって制御されます[#10258](https://github.com/pingcap/tidb/pull/10258)
+    - `FAST ANALYZE`をサポートします。これは、領域全体をスキャンするのではなく、領域をサンプリングすることで統計収集を高速化します。この機能は変数`tidb_enable_fast_analyze`によって制御されます[#10258](https://github.com/pingcap/tidb/pull/10258)
     - SQL文の実行計画のバインドを実行することで実行の安定性を確保するSQL計画管理をサポートします。この機能は現在ベータ版であり、SELECT文のバインド実行計画のみをサポートします。本番環境での使用は推奨されません[#10284](https://github.com/pingcap/tidb/pull/10284)
 
 - 実行エンジン
@@ -67,7 +67,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     - 後続のリクエストをブロックしないように、失敗する可能性のある"propose"および"read"リクエストを迅速にドロップすることをサポートします。
     - リースのデッドロック問題を修正
 - ホットストアがキーの統計情報を正しく生成しない問題を修正 [#1487](https://github.com/pingcap/pd/pull/1487)
-- 単一のPDノードからPDクラスターを強制的に再構築するサポート [#1485](https://github.com/pingcap/pd/pull/1485)
+- 単一のPDノードからPDクラスターを強制的に再構築をサポート [#1485](https://github.com/pingcap/pd/pull/1485)
 - `regionScatterer`が無効な`OperatorStep` を生成する可能性がある問題を修正 [#1482](https://github.com/pingcap/pd/pull/1482)
 - `MergeRegion`オペレーターの短すぎるタイムアウト問題を修正 [#1495](https://github.com/pingcap/pd/pull/1495)
 - ホットリージョンのスケジュールに高い優先度を与えるサポート[#1492](https://github.com/pingcap/pd/pull/1492)

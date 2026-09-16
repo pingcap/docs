@@ -69,7 +69,7 @@ TiFlash Proxyはv6.1.0（TiKV v6.0.0と連動）にアップグレードされ�
 
 対象のTiFlashノードを強制的にスケールインし、TiKVからデータを再度複製することができます。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 
-### 動的剪定 {#dynamic-pruning}
+### 動的プルーニング {#dynamic-pruning}
 
 [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)を有効にせず、今後も使用しない場合は、このセクションをスキップできます。
 
@@ -81,7 +81,7 @@ TiFlash Proxyはv6.1.0（TiKV v6.0.0と連動）にアップグレードされ�
 
 ## v5.x または v6.0 から v6.2 へ {#from-v5-x-or-v6-0-to-v6-2}
 
-TiDB v6.2では、 TiFlashのデータストレージフォーマットがV3にアップグレードされ、ライトアンプリフィケーションの低減とTiFlashの安定性向上が図られています。v5.x、v6.0、またはv6.1からv6.2以降のバージョンにアップグレードする場合は、 [TiFlashプロキシ](#tiflash-proxy)と[動的剪定](#dynamic-pruning)の機能変更に加えて、PageStorageの機能変更にも注意する必要があります。
+TiDB v6.2では、 TiFlashのデータストレージフォーマットがV3にアップグレードされ、ライトアンプリフィケーションの低減とTiFlashの安定性向上が図られています。v5.x、v6.0、またはv6.1からv6.2以降のバージョンにアップグレードする場合は、 [TiFlashプロキシ](#tiflash-proxy)と[動的プルーニング](#dynamic-pruning)の機能変更に加えて、PageStorageの機能変更にも注意する必要があります。
 
 ### ページストレージ {#pagestorage}
 

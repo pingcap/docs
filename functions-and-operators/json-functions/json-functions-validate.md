@@ -32,7 +32,7 @@ TiDB は、MySQL 8.0 で利用可能な[JSONスキーマ検証関数](https://de
 | `maximum`              | `number` / `integer` | 値が最大値（含む）を下回っているかどうかをテストします。                  |
 | `exclusiveMaximum`     | `number` / `integer` | 値が最大値（排他的）を下回っているかどうかをテストします。                 |
 | `minimum`              | `number` / `integer` | 値が最小値（含む）以上かどうかをテストします。                       |
-| `exclusiveMinimum`     | `number` / `integer` | 値が最小値以上かどうかをテストします（最小値以外）。                    |
+| `exclusiveMinimum`     | `number` / `integer` | 値が最小値（排他的）を上回っているかどうかをテストします。                    |
 | `maxlength`            | `string`             | 値の長さが指定された値を超えていないかどうかをテストします。                |
 | `minLength`            | `string`             | 値の長さが指定された値以上であるかどうかをテストします。                  |
 | `format`               | `string`             | 文字列が指定された形式に一致するかどうかをテストします。                  |
@@ -268,7 +268,7 @@ SELECT JSON_SCHEMA_VALID('{"type": "string", "pattern": "^Ti"}', '"PingCAP"');
 1 row in set (0.00 sec)
 ```
 
-値が特定の名前付きフォーマットに一致するかどうかを確認できます。検証可能なフォーマットには、 `ipv4` 、 `ipv6` 、 `time` 、 `date` 、 `duration` 、 `email` 、 `hostname` 、 `uuid` 、および`uri` 。
+値が特定の名前付きフォーマットに一致するかどうかを確認できます。検証可能なフォーマットには、 `ipv4` 、 `ipv6` 、 `time` 、 `date` 、 `duration` 、 `email` 、 `hostname` 、 `uuid` 、および`uri`があります。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"format": "ipv4"}', '"127.0.0.1"');

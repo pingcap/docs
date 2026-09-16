@@ -46,18 +46,18 @@ TiDB Cloud ClinicはGrafanaを使用して、TiDBクラスターの包括的な�
 
 ダッシュボードとその内容は変更される場合があります。現在、以下のダッシュボードをご利用いただけます。
 
-- バックアップとインポート
-- DMプロフェッショナル
-- DM標準
+- Backup & Import
+- DM-Professional
+- DM-Standard
 - Lightning
-- パフォーマンス概要
-- TiCDC-概要
+- Performance-Overview
+- TiCDC-Summary
 - TiDB
-- TiDB リソース制御
-- TiFlash-概要
+- TiDB-Resource-Control
+- TiFlash-Summary
 - TiKV-Details
-- TiProxy-概要
-- ユーザーノード情報
+- TiProxy-Summary
+- User-Node-Info
 
 ## スロークエリ上位を分析する {#analyze-top-slow-queries}
 

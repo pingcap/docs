@@ -1,6 +1,6 @@
 ---
 title: Vector Search Changelogs
-summary: TiDB ベクトル検索機能の新機能、互換性の変更、改善、バグ修正について説明します。
+summary: TiDBベクトル検索機能の新機能、互換性の変更、改善、バグ修正について説明します。
 aliases: ['/ja/tidbcloud/vector-search-changelogs/']
 ---
 
@@ -8,12 +8,12 @@ aliases: ['/ja/tidbcloud/vector-search-changelogs/']
 
 ## 2025年7月15日 {#july-15-2025}
 
-- TiDB Vector Search (ベータ版) が、 TiDB Cloud Dedicated (TiDB &gt;= v8.4) クラスターで利用できるようになりました。
+- TiDBベクトル検索(ベータ版) が、 TiDB Cloud Dedicated (TiDB &gt;= v8.4) クラスターで利用できるようになりました。
 
 ## 2024年6月25日 {#june-25-2024}
 
-- TiDB Vector Search (ベータ版) が、すべてのリージョンのすべてのユーザー向けにTiDB Cloud Starter クラスターで利用できるようになりました。
+- TiDBベクトル検索(ベータ版) が、すべてのリージョンのすべてのユーザー向けにTiDB Cloud Starter クラスターで利用できるようになりました。
 
 ## 2024年4月1日 {#april-1-2024}
 
-- TiDB Vector Search (ベータ版) が、招待されたユーザー向けに EU リージョンのTiDB Cloud Starter クラスターで利用できるようになりました。
+- TiDBベクトル検索(ベータ版) が、招待されたユーザー向けに EU リージョンのTiDB Cloud Starter クラスターで利用できるようになりました。

@@ -159,9 +159,9 @@ Terraform によって管理されていないTiDB Cloud Dedicated プライベ�
     }
     ```
 
-2. 新しい構成ファイルを生成します。
+2. 新しい設定ファイルを生成します。
 
-    インポート ブロックに従って、新しい`tidbcloud_dedicated_private_endpoint_connection`リソースの新しい構成ファイルを生成します。
+    インポート ブロックに従って、新しい`tidbcloud_dedicated_private_endpoint_connection`リソースの新しい設定ファイルを生成します。
 
     ```shell
     terraform plan -generate-config-out=generated.tf
@@ -173,7 +173,7 @@ Terraform によって管理されていないTiDB Cloud Dedicated プライベ�
 
 3. 生成された構成を確認して適用します。
 
-    生成された構成ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
+    生成された設定ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
 
     次に、 `terraform apply`を実行してインフラストラクチャをインポートします。適用後の出力例は次のとおりです。
 

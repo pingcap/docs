@@ -26,7 +26,7 @@ TiDB バージョン: 5.1.4
 
 - TiDB
 
-    - 範囲パーティションテーブルの組み込み式`IN`のパーティションプルーニングをサポート [#26739](https://github.com/pingcap/tidb/issues/26739)
+    - レンジパーティションテーブルの組み込み式`IN`のパーティションプルーニングをサポート [#26739](https://github.com/pingcap/tidb/issues/26739)
     - `IndexJoin`実行時のメモリ使用量の追跡精度を向上[#28650](https://github.com/pingcap/tidb/issues/28650)
 
 - TiKV
