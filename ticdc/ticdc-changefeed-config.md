@@ -353,6 +353,24 @@ The following configuration parameters control the sending behavior of bootstrap
 - Controls whether to output the value before the row data changes. The default value is true. When it is disabled, the `UPDATE` event does not output the "before" field.
 - Default value: `true`
 
+##### `include-start-ts`
+
+- Controls whether Debezium JSON DML messages include `source.start_ts` (the original PD TSO of the source transaction).
+- Default value: `false`
+- Requires the [new TiCDC architecture](/ticdc/ticdc-architecture.md). This parameter takes effect only for MQ sinks with `protocol = "debezium"`. Enabling it with another protocol, including `debezium-avro`, is rejected.
+- You can also set the equivalent URI parameter `debezium-include-start-ts`. An explicit URI value takes precedence over this configuration item, including `debezium-include-start-ts=false` overriding `[sink.debezium] include-start-ts = true`.
+- For the message format and consumer precision requirements, see [TiCDC Debezium Protocol](/ticdc/ticdc-debezium.md#include-the-transaction-start-tso).
+
+#### sink.simple
+
+##### `include-start-ts`
+
+- Controls whether Simple JSON DML messages include the top-level `startTs` field (the original PD TSO of the source transaction).
+- Default value: `false`
+- Requires the [new TiCDC architecture](/ticdc/ticdc-architecture.md). This parameter takes effect only for MQ sinks with `protocol = "simple"` and JSON encoding. Enabling it with another protocol or with `encoding-format = "avro"` is rejected.
+- An explicit URI parameter `simple-include-start-ts` takes precedence, including `simple-include-start-ts=false` overriding `[sink.simple] include-start-ts = true`.
+- For configuration examples and integer precision requirements, see [TiCDC Simple Protocol](/ticdc/ticdc-simple-protocol.md#include-the-transaction-start-tso).
+
 ### consistent
 
 Specifies the replication consistency configurations for a changefeed when using the redo log. For more information, see [Eventually consistent replication in disaster scenarios](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios).
