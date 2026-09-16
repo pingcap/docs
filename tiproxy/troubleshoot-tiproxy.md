@@ -25,8 +25,8 @@ summary: TiProxy の一般的な問題、原因、および解決策について
 
 次の手順に従って、問題をトラブルシューティングできます。
 
-1. [TiProxyの制限](/tiproxy/tiproxy-overview.md#limitations)満たされていないかどうか。TiProxy ログを確認することで、これをさらに確認できます。
-2. [`security.session-token-signing-cert`](/tidb-configuration-file.md#session-token-signing-cert-new-in-v640) [`security.session-token-signing-key`](/tidb-configuration-file.md#session-token-signing-key-new-in-v640) [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50)で正しく構成されているかどうか。
+1. [TiProxyの制限](/tiproxy/tiproxy-overview.md#limitations)が満たされていないかどうか。TiProxy ログを確認することで、これをさらに確認できます。
+2. [`security.session-token-signing-cert`](/tidb-configuration-file.md#session-token-signing-cert-new-in-v640)、 [`security.session-token-signing-key`](/tidb-configuration-file.md#session-token-signing-key-new-in-v640)、 [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50)がTiDBで正しく構成されているかどうか。
 
 ## TiDBサーバーの CPU 使用率が不均衡 {#unbalanced-cpu-usage-on-tidb-server}
 

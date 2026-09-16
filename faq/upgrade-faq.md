@@ -29,7 +29,7 @@ TiDBサービスにローリングアップデートを適用すると、実行�
 
 ### バイナリを使用して TiDB をアップグレードするにはどうすればよいですか? {#how-to-upgrade-tidb-using-the-binary}
 
-バイナリを使用してTiDBをアップグレードすることは推奨されません。代わりに、バージョンの一貫性と互換性を確保するために、バージョン[TiUPを使用して TiDB をアップグレードする](/upgrade-tidb-using-tiup.md)または[Kubernetes上のTiDBクラスターをアップグレードする](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)へのアップグレードをお勧めします。
+バイナリを使用してTiDBをアップグレードすることは推奨されません。代わりに、バージョンの一貫性と互換性を確保するために、[TiUPを使用して TiDB をアップグレードする](/upgrade-tidb-using-tiup.md)または[Kubernetes上のTiDBクラスターをアップグレードする](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)ことをお勧めします。
 
 ## アップグレード後のFAQ {#after-upgrade-faqs}
 

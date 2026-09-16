@@ -88,7 +88,7 @@ Db2 または Oracle から TiDB にすべてのデータを移行するか、�
 
 現在はOGGの使用が推奨されています。
 
-### エラー: java.sql.BatchUpdateException: Sqoop を使用して TiDB にデータを`batches`で書き込むときに`java.sql.BatchUpdateException:statement count 5001 exceeds the transaction limitation` {#error-javasqlbatchupdateexceptionstatement-count-5001-exceeds-the-transaction-limitation-while-using-sqoop-to-write-data-into-tidb-in-batches}
+### エラー: Sqoop を使用して TiDB にデータを`batches`で書き込むときに`java.sql.BatchUpdateException:statement count 5001 exceeds the transaction limitation` {#error-javasqlbatchupdateexceptionstatement-count-5001-exceeds-the-transaction-limitation-while-using-sqoop-to-write-data-into-tidb-in-batches}
 
 Sqoopでは、 `--batch`各バッチで100個の`statement`文をコミットすることを意味しますが、デフォルトでは各`statement`に100個のSQL文が含まれます。つまり、100 * 100 = 10000個のSQL文となり、単一のTiDBトランザクションで許可される最大SQL文数である5000を超えてしまいます。
 

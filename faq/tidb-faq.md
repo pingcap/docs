@@ -21,7 +21,7 @@ summary: TiDB に関するよくある質問 (FAQ) について説明します�
 
 -->
 
-TiDB [TiDB](https://github.com/pingcap/tidb)は、ハイブリッドトランザクションおよび分析処理（HTAP）ワークロードをサポートするオープンソースの分散SQLデータベースです。MySQLと互換性があり、水平スケーラビリティ、強力な一貫性、高可用性を備えています。TiDBの目標は、OLTP（オンライントランザクション処理）、OLAP（オンライン分析処理）、そしてHTAPサービスをカバーするワンストップデータベースソリューションをユーザーに提供することです。TiDBは、大規模データで高可用性と強力な一貫性が求められる様々なユースケースに適しています。
+[TiDB](https://github.com/pingcap/tidb)は、ハイブリッドトランザクションおよび分析処理（HTAP）ワークロードをサポートするオープンソースの分散SQLデータベースです。MySQLと互換性があり、水平スケーラビリティ、強力な一貫性、高可用性を備えています。TiDBの目標は、OLTP（オンライントランザクション処理）、OLAP（オンライン分析処理）、そしてHTAPサービスをカバーするワンストップデータベースソリューションをユーザーに提供することです。TiDBは、大規模データで高可用性と強力な一貫性が求められる様々なユースケースに適しています。
 
 ### TiDB のアーキテクチャとは何ですか? {#what-is-tidb-s-architecture}
 
@@ -118,12 +118,12 @@ TiFlashはデフォルトで強力なデータ整合性を維持します。Raft
 
 ### データストレージ用のTiKV {#tikv-for-data-storage}
 
-[TiDB 内部 (I) - データストレージ](https://www.pingcap.com/blog/tidb-internal-data-storage/?from=en)参照。
+[TiDB 内部 (I) - データストレージ](https://www.pingcap.com/blog/tidb-internal-data-storage/?from=en)を参照してください。
 
 ### データコンピューティングのためのTiDB {#tidb-for-data-computing}
 
-[TiDB 内部 (II) - コンピューティング](https://www.pingcap.com/blog/tidb-internal-computing/?from=en)参照。
+[TiDB 内部 (II) - コンピューティング](https://www.pingcap.com/blog/tidb-internal-computing/?from=en)を参照してください。
 
 ### スケジュールのPD {#pd-for-scheduling}
 
-[TiDB内部（III） - スケジューリング](https://www.pingcap.com/blog/tidb-internal-scheduling/?from=en)参照。
+[TiDB内部（III） - スケジューリング](https://www.pingcap.com/blog/tidb-internal-scheduling/?from=en)を参照してください。

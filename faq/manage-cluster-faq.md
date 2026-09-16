@@ -128,11 +128,11 @@ TiDBは、ビジネスの成長に合わせて拡張できます。
 
 ### なぜトランザクションは非同期コミットまたはワンフェーズコミット機能を使用しないのですか？ {#why-does-the-transaction-not-use-the-async-commit-or-the-one-phase-commit-feature}
 
-TiDB は、トランザクションで書き込まれるキーと値のペアが 256 個以下で、キーの合計サイズが 4 KB 以下の場合にのみ、非同期コミットまたはワンフェーズコミット機能を使用します。それ以外の場合は、システム変数を使用して 機能と[非同期コミット](/system-variables.md#tidb_enable_async_commit-new-in-v50)機能を有効にしても、TiDB はこれらの機能を使用しません。これは、大量のデータを書き込むトランザクションでは、非同期コミットを使用して[ワンフェーズコミット](/system-variables.md#tidb_enable_1pc-new-in-v50)パフォーマンスが大幅に向上しないためです。
+TiDB は、トランザクションで書き込まれるキーと値のペアが 256 個以下で、キーの合計サイズが 4 KB 以下の場合にのみ、非同期コミットまたはワンフェーズコミット機能を使用します。それ以外の場合は、システム変数を使用して[非同期コミット](/system-variables.md#tidb_enable_async_commit-new-in-v50)機能と[ワンフェーズコミット](/system-variables.md#tidb_enable_1pc-new-in-v50)機能を有効にしても、TiDB はこれらの機能を使用しません。これは、大量のデータを書き込むトランザクションでは、非同期コミットを使用してもパフォーマンスが大幅に向上しないためです。
 
 ## PD管理 {#pd-management}
 
-このセクションでは、PD（パーキンソン病）の管理中に遭遇する可能性のある一般的な問題、その原因、および解決策について説明します。
+このセクションでは、PD 管理中に遭遇する可能性のある一般的な問題、その原因、および解決策について説明します。
 
 ### PDにアクセスすると、 `TiKV cluster is not bootstrapped`メッセージが表示されます。 {#the-tikv-cluster-is-not-bootstrapped-message-is-displayed-when-i-access-pd}
 
@@ -231,7 +231,7 @@ TiClientリージョンエラーインジケータは、TiDBサーバーがク�
 
 ### テーブルの作成時刻を確認するにはどうすればよいですか？ {#how-to-view-the-creation-time-of-a-table}
 
-`create_time`内のテーブルの`information_schema`は作成時刻です。
+`information_schema`内のテーブルの`create_time`は作成時刻です。
 
 ### TiDBログにおける`EXPENSIVE_QUERY`の意味は何ですか？ {#what-is-the-meaning-of-expensive-query-in-the-tidb-log}
 
@@ -345,7 +345,7 @@ TiKVはRocksDBのカラムファミリー（CF）機能を実装しています�
 
 ### ノードがダウンした場合、サービスに影響はありますか？影響がある場合、どのくらいの期間影響しますか？ {#if-a-node-is-down-will-the-service-be-affected-if-yes-how-long}
 
-TiKVはRaftを使用して、複数のレプリカ間でデータを複製します（デフォルトでは、各リージョンにつき3つのレプリカ）。1つのレプリカに障害が発生した場合でも、他のレプリカがデータのRaft性を保証します。Raftプロトコルに基づき、ノードのダウンにより単一のリーダーが故障した場合、別のノードのフォロワーがリース時間（10秒）の2倍の時間が経過すると、リージョンのリーダーとして選出されます。
+TiKVはRaftを使用して、複数のレプリカ間でデータを複製します（デフォルトでは、各リージョンにつき3つのレプリカ）。1つのレプリカに障害が発生した場合でも、他のレプリカがデータの安全性を保証します。Raftプロトコルに基づき、ノードのダウンにより単一のリーダーが故障した場合、別のノードのフォロワーがリース時間（10秒）の2倍の時間が経過すると、リージョンのリーダーとして選出されます。
 
 ### TiKVにおいて、I/O、メモリ、CPUを大量に消費し、パラメータ設定を超えるシナリオとはどのようなものですか？ {#what-are-the-tikv-scenarios-that-take-up-high-i-o-memory-cpu-and-exceed-the-parameter-configuration}
 
