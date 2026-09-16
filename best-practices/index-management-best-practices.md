@@ -167,7 +167,7 @@ ORDER BY total_queries DESC;
 
 ## `schema_unused_indexes`を使用して未使用のインデックスを識別する {#identify-unused-indexes-using-schema-unused-indexes}
 
-インデックス使用状況データを手動で分析するのは時間がかかります。このプロセスを簡素化するために、TiDBは[`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)提供しています。これは、データベースの最後の再起動以降に使用されていないインデックスを一覧表示するシステムビューです。
+インデックス使用状況データを手動で分析するのは時間がかかります。このプロセスを簡素化するために、TiDBは[`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)を提供しています。これは、データベースの最後の再起動以降に使用されていないインデックスを一覧表示するシステムビューです。
 
 これにより、次の操作を簡単に実行できるようになります。
 
