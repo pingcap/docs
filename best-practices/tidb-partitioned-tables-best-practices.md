@@ -599,7 +599,7 @@ SHOW TABLE employees PARTITION (p4) regions;
 
 #### ベストプラクティス {#best-practices}
 
-新しいレンジパーティションによって発生するホットスポットの問題を軽減するには、 [非クラスター化パーティションテーブルのベストプラクティス](#best-practices)手順に従います。
+新しいレンジパーティションによって発生するホットスポットの問題を軽減するには、 [非クラスター化パーティションテーブルのベストプラクティス](#best-practices)の手順に従います。
 
 ### クラスター化された非パーティションテーブルのソリューション {#solutions-for-clustered-non-partitioned-tables}
 
