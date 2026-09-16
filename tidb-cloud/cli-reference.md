@@ -1,15 +1,24 @@
 ---
-title: TiDB Cloud CLI 参考（PREVIEW）
-summary: 提供 TiDB Cloud CLI 的概览。
+title: TiDB Cloud CLI (ticloud) 参考（PREVIEW）
+summary: 提供适用于 TiDB Cloud Starter 和 Essential 的 ticloud CLI 概览。
 ---
 
-# TiDB Cloud CLI 参考（PREVIEW）
+# TiDB Cloud CLI (ticloud) 参考（PREVIEW）
 
 > **Note:**
 >
-> 目前，TiDB Cloud CLI 处于公开预览阶段，暂不适用于 TiDB Cloud Dedicated 集群。
+> TiDB Cloud 当前提供两个作用域不同的 CLI：[`ti`](https://github.com/tidbcloud/ti-cli) 和 [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli)。
+>
+> - 当 `ti` 支持你所需的操作时，建议将其用于 TiDB Cloud Starter 的新自动化工作流。你也可以使用 `ti` 管理 TiDB Cloud Filesystem。要开始使用，请参见 [TiDB Cloud CLI (`ti`) 快速开始](/ai/ti/ti-quick-start.md)。
+> - `ticloud` 仍然是适用于 TiDB Cloud Essential 以及 [`ti`](/ai/ti/ti-overview.md) 尚不支持的操作（例如数据导入、数据导出和审计日志操作）的 CLI。
+>
+> 有关何时使用 `ti` 或 `ticloud` 的更多信息，请参见 [`ti` 与 `ticloud` 的区别](/ai/ti/ti-overview.md#differences-between-ti-and-ticloud)。
 
-TiDB Cloud CLI 是一个命令行界面，允许你通过几行命令在终端中操作 TiDB Cloud。在 TiDB Cloud CLI 中，你可以轻松管理 {{{ .starter }}} 和 Essential 实例、向实例导入数据以及执行更多操作。
+`ticloud` CLI 是一个命令行接口，让你可以通过终端操作 TiDB Cloud。它可管理 {{{ .starter }}} 和 Essential 实例、导入和导出数据，并支持其他 CLI 工作流。
+
+> **Note:**
+>
+> `ticloud` CLI 当前处于公开预览阶段，不支持 TiDB Cloud Dedicated 集群。
 
 ## 开始之前
 

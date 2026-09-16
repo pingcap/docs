@@ -13,7 +13,7 @@
   - [试用 TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [试用 TiDB + AI 工具](/tidb-cloud/use-tidb-cloud-with-ai-tools.md)
   - [试用 HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
-  - [试用 TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
+  - [试用 TiDB Cloud CLI (ticloud, Legacy)](/tidb-cloud/get-started-with-cli.md)
 - 关键概念
   - [概览](/tidb-cloud/key-concepts.md)
   - [架构](/tidb-cloud/architecture-concepts.md)
@@ -461,7 +461,7 @@
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [元数据锁](/metadata-lock.md)
   - [TiDB 加速建表](/accelerated-table-creation.md)
-- CLI 参考 ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+- TiDB Cloud CLI (ticloud, Legacy) 参考 ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [概述](/tidb-cloud/cli-reference.md)
   - auth
     - [login](/tidb-cloud/ticloud-auth-login.md)

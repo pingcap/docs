@@ -479,6 +479,7 @@
   - [表库过滤](/table-filter.md)
   - [外部存储服务的 URI 格式](/external-storage-uri.md)
   - [内嵌于 DDL 的 Analyze](/ddl_embedded_analyze.md)
+  - [配置慢查询的触发规则](/config-slow-query-trigger-rules.md)
   - [数据索引不一致报错](/troubleshoot-data-inconsistency-errors.md)
   - [通知](/tidb-cloud/notifications.md)
 - 支持计划
