@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/high-concurrency-best-practices/','/ja/tidb/dev/high-
 
 ## 対象読者 {#target-audience}
 
-このドキュメントは、読者がTiDBの基礎を理解していることを前提としています。まず、TiDBの基礎を解説した以下の3つのブログ記事と、 [TiDB ベストプラクティス](https://www.pingcap.com/blog/tidb-best-practice/)読みいただくことをお勧めします。
+このドキュメントは、読者がTiDBの基礎を理解していることを前提としています。まず、TiDBの基礎を解説した以下の3つのブログ記事と、 [TiDB ベストプラクティス](https://www.pingcap.com/blog/tidb-best-practice/)を読みいただくことをお勧めします。
 
 - [データストレージ](https://www.pingcap.com/blog/tidb-internal-data-storage/)
 - [コンピューティング](https://www.pingcap.com/blog/tidb-internal-computing/)
