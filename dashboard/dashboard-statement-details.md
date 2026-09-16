@@ -9,7 +9,7 @@ summary: TiDB Dashboardは、SQLテンプレートの概要、実行計画一覧
 
 - SQL 文の概要。これには、SQL テンプレート、SQL テンプレート ID、表示されている SQL 実行の現在の時間範囲、実行計画の数、SQL 文が実行されるデータベース、および高速プランバインディング機能が含まれます (次の図の領域 1)。
 - 実行計画リスト：SQL文に複数の実行計画がある場合、このリストが表示されます。実行計画のテキスト情報に加え、TiDB v6.2.0ではビジュアル実行計画が導入され、文の各オペレーターや詳細情報をより直感的に把握できるようになりました。複数の実行計画を選択すると、選択したプランの詳細がリストの下に表示されます（下図の領域2）。
-- プランの実行詳細。選択した実行計画の詳細情報が表示されます。1（下図の領域3） [実行計画の詳細](#execution-details-of-plans)を参照してください。
+- プランの実行詳細。選択した実行計画の詳細情報が表示されます。 [実行計画の詳細](#execution-details-of-plans)を参照してください（下図の領域3）。
 
 ![Details](/media/dashboard/dashboard-statement-detail-v660.png)
 
@@ -39,7 +39,7 @@ TiDB v6.6.0以降、高速プランバインディング機能が導入されま
 
     ![Fast plan binding - bound - entry](/media/dashboard/dashboard-quick-binding-entry-bound.png)
 
-2. **［ドロップ］を**クリックします。
+2. **Drop**をクリックします。
 
     ![Fast plan binding - popup - bound](/media/dashboard/dashboard-quick-binding-popup-bound.png)
 
@@ -51,7 +51,7 @@ TiDB v6.6.0以降、高速プランバインディング機能が導入されま
 
 現在、高速プランバインディング機能では、次の種類の SQL文はサポートされていません。
 
-- `SELECT` `INSERT` `UPDATE` `REPLACE` `DELETE`
+- `SELECT`、 `DELETE`、 `UPDATE`、 `INSERT`、 `REPLACE`のいずれでもないステートメント
 - サブクエリを含むクエリ
 - TiFlashにアクセスするクエリ
 - 3つ以上のテーブルを結合するクエリ
