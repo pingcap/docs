@@ -482,6 +482,7 @@
 | throughput | 吞吐 |  |
 | TiDB | TiDB |  |
 | TiDB Cloud | TiDB Cloud |  |
+| TiDB Cloud BYOC | TiDB Cloud BYOC |  |
 | TiDB Cloud Dedicated | TiDB Cloud Dedicated |  |
 | TiDB Cloud Essential | TiDB Cloud Essential |  |
 | TiDB Cloud CLI (`ti`) | TiDB Cloud CLI (`ti`) | Keep it in English as the product name. |
