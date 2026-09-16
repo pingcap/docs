@@ -97,7 +97,7 @@ SQL ユーザーが前述の権限要件を満たしていない場合、以下�
     GRANT SUPER ON *.* TO 'dashboardAdmin'@'%';    
     ```
 
-2. `dashboard_access`ロールを他のユーザーに付与し、 `dashboard_access`デフォルトのロールとして設定します。
+2. `dashboard_access`ロールを他のユーザーに付与し、 `dashboard_access`をデフォルトのロールとして設定します。
 
     ```sql
     CREATE USER 'dashboardAdmin'@'%' IDENTIFIED BY '<YOUR_PASSWORD>';
