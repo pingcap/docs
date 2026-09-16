@@ -179,7 +179,7 @@ By using `schema_unused_indexes`, you can quickly identify unnecessary indexes a
 
 ### How `schema_unused_indexes` works
 
-The `schema_unused_indexes` view is derived from `TIDB_INDEX_USAGE`, meaning it automatically filters out indexes that have recorded zero query activity since the last TiDB restart.
+The `schema_unused_indexes` view is derived from `CLUSTER_TIDB_INDEX_USAGE`, meaning it automatically extracts indexes that have not been accessed on any TiDB instance since that instance's last restart.
 
 To retrieve a list of unused indexes, run the following SQL statement:
 
