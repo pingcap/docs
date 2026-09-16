@@ -310,7 +310,7 @@ FIRST PARTITION LESS THAN ('2025-02-19 18:00:00')
 LAST PARTITION LESS THAN ('2025-02-19 20:00:00');
 ```
 
-`FIRST PARTITION`と`LAST PARTITION`定期的に更新するには、次のようなDDL文を実行します。これらの文は古いパーティションを削除し、新しいパーティションを作成します。
+`FIRST PARTITION`と`LAST PARTITION`を定期的に更新するには、次のようなDDL文を実行します。これらの文は古いパーティションを削除し、新しいパーティションを作成します。
 
 ```sql
 ALTER TABLE ad_cache FIRST PARTITION LESS THAN ("${nextTimestamp}");
@@ -428,7 +428,7 @@ PARTITION BY KEY (id) PARTITIONS 16;
     SELECT * FROM server_info WHERE `serial_no` = ?;
     ```
 
-- パーティションキーを使用しないクエリのスキャンオーバーヘッドを削減するには、グローバルインデックスを作成する必要があります。グローバルインデックスは`DROP PARTITION`操作を遅くする可能性がありますが、ハッシュおよびキーパーティションテーブルは`DROP PARTITION`サポートしていません。したがって、これらのパーティションはほとんど切り捨てられないため、グローバルインデックスは実用的なソリューションです。例：
+- パーティションキーを使用しないクエリのスキャンオーバーヘッドを削減するには、グローバルインデックスを作成する必要があります。グローバルインデックスは`DROP PARTITION`操作を遅くする可能性がありますが、ハッシュおよびキーパーティションテーブルは`DROP PARTITION`をサポートしていません。したがって、これらのパーティションはほとんど切り捨てられないため、グローバルインデックスは実用的なソリューションです。例：
 
     ```sql
     ALTER TABLE server_info ADD UNIQUE INDEX(serial_no, id) GLOBAL;
