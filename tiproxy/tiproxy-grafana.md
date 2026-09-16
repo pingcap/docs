@@ -30,7 +30,7 @@ TiProxy には 4つのパネルグループがあります。これらのパネ�
     - client network break: クライアントが切断前に`QUIT`コマンドを送信しません。ネットワークの問題やクライアントのシャットダウンによっても発生する可能性があります。
     - client handshake fail: クライアントがTiProxyとのハンドシェイクに失敗しました
     - auth fail: TiDBによってアクセスが拒否されました
-    - SQL error: TiDB は他の SQL エラーを返します
+    - SQL error: TiDB はその他の SQL エラーを返します
     - proxy shutdown: TiProxy はシャットダウンしています
     - malformed packet: TiProxy は MySQL パケットを解析できません
     - get backend fail: TiProxy は接続に利用可能なバックエンドを見つけることができません
