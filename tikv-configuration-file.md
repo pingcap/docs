@@ -2820,7 +2820,7 @@ TiKVストレージレイヤーのリソース制御に関連する設定項目�
 
 ## スプリット {#split}
 
-[ロードベース分割](/configure-load-base-split.md)に関する設定項目。
+[ロードベーススプリット](/configure-load-base-split.md)に関する設定項目。
 
 ### `byte-threshold` <span class="version-mark">v5.0 で追加</span> {#byte-threshold-new-in-v50}
 
