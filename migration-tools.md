@@ -83,7 +83,7 @@ This document introduces the user scenarios, supported upstreams and downstreams
 - **Advantages**: Can be used to repair data in the scenario where a small amount of data is inconsistent
 - **Limitation**:
     - Online check is not supported for data migration between MySQL and TiDB.
-    - JSON, BIT, BINARY, BLOB and other types of data are not supported.
+    - Data type support varies by type. JSON, BLOB/VARBINARY, and BIT are supported. For FLOAT/DOUBLE and collation-related considerations, see [Restrictions of sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md).
 
 ## Install tools using TiUP
 
