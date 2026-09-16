@@ -6254,7 +6254,9 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 </CustomContent>
 
-### tidb_stmt_summary_group_by_user <span class="version-mark">New in v9.0.0 and CLOUD.202603.1</span> {#tidb_stmt_summary_group_by_user}
+<CustomContent platform="tidb-cloud">
+
+### tidb_stmt_summary_group_by_user <span class="version-mark">New in CLOUD.202603.1</span> {#tidb_stmt_summary_group_by_user}
 
 > **Note:**
 >
@@ -6265,10 +6267,12 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF` for TiDB Self-Managed and TiDB Cloud Dedicated; `ON` for TiDB Cloud Essential and TiDB Cloud Premium
+- Default value: `ON` for TiDB Cloud Essential and TiDB Cloud Premium
 - This variable controls whether to include the user who executes SQL statements as an aggregation dimension in [statement summary tables](/statement-summary-tables.md). When this variable is set to `OFF`, TiDB aggregates the same SQL digest executed by different users into the same row, and the `SAMPLE_USER` field displays one sampled user. When this variable is set to `ON`, TiDB aggregates the same SQL digest executed by different users into separate rows, and the `SAMPLE_USER` field of each row indicates the user who executed the statement.
 - Modifying this variable clears the current in-memory statement summary data because data before and after the modification is aggregated using different dimensions. This does not affect historical data persisted to disk.
 - After you enable this variable, the number of statement summary records might increase with the number of different execution users for the same SQL digest, which increases memory usage.
+
+</CustomContent>
 
 ### tidb_stmt_summary_history_size <span class="version-mark">New in v4.0</span>
 
@@ -6345,7 +6349,9 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 </CustomContent>
 
-### tidb_stmt_summary_persist_evicted <span class="version-mark">New in v9.0.0 and CLOUD.202603.1</span> {#tidb_stmt_summary_persist_evicted}
+<CustomContent platform="tidb-cloud">
+
+### tidb_stmt_summary_persist_evicted <span class="version-mark">New in CLOUD.202603.1</span> {#tidb_stmt_summary_persist_evicted}
 
 > **Note:**
 >
@@ -6360,6 +6366,8 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - This variable controls whether to write statement summary records evicted by LRU to the statement summary log after you enable [statements summary persistence](/statement-summary-tables.md#persist-statements-summary). TiDB marks these JSON records with `"evicted": true` so that downstream log consumers can identify them.
 - This variable takes effect only when [tidb_stmt_summary_enable_persistent](/system-variables.md#tidb_stmt_summary_enable_persistent-new-in-v660) is enabled. TiDB does not return records marked with `"evicted": true` as query results from `statements_summary_history` or `cluster_statements_summary_history`.
 - After you enable this variable, the log volume increases as LRU evictions become more frequent. TiDB writes evicted records using an asynchronous buffer mechanism. When the buffer queue is full, TiDB might drop new evicted records.
+
+</CustomContent>
 
 ### tidb_stmt_summary_refresh_interval <span class="version-mark">New in v4.0</span>
 
