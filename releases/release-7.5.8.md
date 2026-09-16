@@ -36,6 +36,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 + PD
 
     - Fix the issue that PD might experience a goroutine surge and become unstable when TiDB Lightning concurrently calls `SetRegionLabelRule` during import [#9854](https://github.com/tikv/pd/issues/9854) @[lhy1024](https://github.com/lhy1024) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/9897 -->
+    - Fix the issue that stale `pd_cluster_status` metrics of removed stores might remain in monitoring after scale-in, causing deleted stores to still appear in cluster status metrics [#9942](https://github.com/tikv/pd/issues/9942) @[okJiang](https://github.com/okJiang) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/10188 -->
 
 + TiFlash
 
