@@ -77,7 +77,7 @@ TiDB version: 8.5.7
 
 ## 互換性の変更 {#compatibility-changes}
 
-v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以前のバージョンからアップグレードされたものではない v8.5.6 クラスター）の場合、v8.5.7 にスムーズにアップグレードできます。v8.5.7 の変更の大部分は通常のアップグレードに対して安全ですが、このリリースにはいくつかの動作変更、MySQL 互換性の変更、システム変数の更新、設定パラメーターの更新、および非推奨機能も含まれています。アップグレード前に、このセクションを必ず注意深く確認してください。
+v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以前のバージョンからアップグレードされたものではない v8.5.6 クラスター）の場合、v8.5.7 にスムーズにアップグレードできます。v8.5.7 の変更の大部分は通常のアップグレードに対して安全ですが、このリリースにはいくつかの動作変更、MySQL 互換性の変更、システム変数の更新、設定パラメータの更新、および非推奨機能も含まれています。アップグレード前に、このセクションを必ず注意深く確認してください。
 
 ### 動作変更 {#behavior-changes}
 
@@ -108,9 +108,9 @@ v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以�
 | [`tidb_opt_enable_alternative_logical_plans`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_enable_alternative_logical_plans-new-in-v857) | 新しく追加された | 相関サブクエリの decorrelation シナリオにおいて、optimizer が decorrelate しない論理候補プランも追加で構築するかどうかを制御します。デフォルト値は `OFF` です。|
 | [`tidb_opt_partial_ordered_index_for_topn`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_partial_ordered_index_for_topn-new-in-v857) | 新しく追加された | クエリに `ORDER BY ... LIMIT` が含まれる場合に、optimizer がインデックスの部分的な順序性を利用して TopN 計算を最適化できるかどうかを制御します。デフォルト値は `DISABLE` で、この最適化が無効であることを意味します。|
 
-### 設定パラメーター {#configuration-parameters}
+### 設定パラメータ {#configuration-parameters}
 
-| コンフィグレーションファイルまたはコンポーネント | コンフィグレーションパラメータ | 変更の種類 | 説明 |
+| 設定ファイルまたはコンポーネント | 設定パラメータ | 変更の種類 | 説明 |
 | -------- | -------- | -------- | -------- |
 | TiDB | [`enable-telemetry`](https://docs.pingcap.com/tidb/v8.5/tidb-configuration-file#enable-telemetry-new-in-v402) | 非推奨 | v8.5.7 以降、TiDB はこの設定項目とテレメトリ機能を非推奨とします。この項目は互換性のためにのみ保持されており、今後の使用は推奨されません。|
 | TiKV | [`raftdb.compaction-readahead-size`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#compaction-readahead-size-1) | 変更 | デフォルト値を `0`（無効）から `2MiB` に変更し、圧縮中の読み取りパフォーマンスを向上させます。 |

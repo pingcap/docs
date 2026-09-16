@@ -74,7 +74,7 @@ TiDB v8.5.6以降の場合：
 > - すべてのデータベースに対して[`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)権限を付与**しないでください**( `*.*` )。そうしないと、sync-diff-inspector がアクセスできないデータベースにアクセスしようとしてエラーが発生します。
 > - MySQLデータソースの場合、 [`skip_show_database`](https://dev.mysql.com/doc/refman/8.4/en/server-system-variables.html#sysvar_skip_show_database)システム変数が`OFF`に設定されていることを確認してください。この変数が`ON`に設定されている場合、チェックが失敗する可能性があります。
 
-## コンフィグレーションファイルの説明 {#configuration-file-description}
+## 設定ファイルの説明 {#configuration-file-description}
 
 sync-diff-inspectorの設定は、以下の部分から構成されます。
 

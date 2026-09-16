@@ -36,7 +36,7 @@
   - [概要](/migration-overview.md)
   - [移行ツール](/migration-tools.md)
   - [ベストプラクティスの導入](/tidb-lightning/data-import-best-practices.md)
-  - 移住シナリオ
+  - 移行シナリオ
     - [Auroraから移行する](/migrate-aurora-to-tidb.md)
     - [MySQLから小規模データセットを移行する](/migrate-small-mysql-to-tidb.md)
     - [MySQLから大規模データセットを移行する](/migrate-large-mysql-to-tidb.md)
@@ -119,7 +119,7 @@
     - [TiDB スムーズアップグレード](/smooth-upgrade-tidb.md)
     - [TiDBクラスタの移行とアップグレード](/tidb-upgrade-migration-guide.md)
     - [TiFlashアップグレードガイド](/tiflash-upgrade-guide.md)
-  - 規模
+  - スケール
     - [TiUPを使用する（推奨）](/scale-tidb-using-tiup.md)
     - [TiDB Operatorを使用する](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
   - バックアップと復元
@@ -188,7 +188,7 @@
     - [スロークエリページ](/dashboard/dashboard-slow-query.md)
     - クラスタ診断
       - [クラスタ診断ページにアクセス](/dashboard/dashboard-diagnostics-access.md)
-      - [診断レポートをビュー](/dashboard/dashboard-diagnostics-report.md)
+      - [診断レポートを表示する](/dashboard/dashboard-diagnostics-report.md)
       - [診断機能を使用する](/dashboard/dashboard-diagnostics-usage.md)
     - [監視ページ](/dashboard/dashboard-monitoring.md)
     - [検索ログページ](/dashboard/dashboard-log-search.md)
@@ -311,7 +311,7 @@
     - [`tidb_snapshot`システム変数を使用する](/read-historical-data.md)
   - [配置ルールを使用する](/configure-placement-rules.md)
   - [ロードベース分割を使用する](/configure-load-base-split.md)
-  - [店舗利用制限](/configure-store-limit.md)
+  - [ストア制限を使用する](/configure-store-limit.md)
   - [バッチ処理](/batch-processing.md)
   - PDマイクロサービスを使用する
     - [PDマイクロサービスの概要](/pd-microservices.md)
@@ -359,7 +359,7 @@
       - TiUPクラスタコマンド
         - [概要](/tiup/tiup-component-cluster.md)
         - [tiup cluster audit](/tiup/tiup-component-cluster-audit.md)
-        - [tiup cluster auditクリーンアップ](/tiup/tiup-component-cluster-audit-cleanup.md)
+        - [tiup cluster audit cleanup](/tiup/tiup-component-cluster-audit-cleanup.md)
         - [tiup cluster check](/tiup/tiup-component-cluster-check.md)
         - [tiup cluster clean](/tiup/tiup-component-cluster-clean.md)
         - [tiup cluster deploy](/tiup/tiup-component-cluster-deploy.md)
@@ -371,8 +371,8 @@
         - [tiup cluster help](/tiup/tiup-component-cluster-help.md)
         - [tiup cluster import](/tiup/tiup-component-cluster-import.md)
         - [tiup cluster list](/tiup/tiup-component-cluster-list.md)
-        - [tiup クラスターメタバックアップ](/tiup/tiup-component-cluster-meta-backup.md)
-        - [tiup クラスターメタ復元](/tiup/tiup-component-cluster-meta-restore.md)
+        - [tiup cluster meta backup](/tiup/tiup-component-cluster-meta-backup.md)
+        - [tiup cluster meta restore](/tiup/tiup-component-cluster-meta-restore.md)
         - [tiup cluster patch](/tiup/tiup-component-cluster-patch.md)
         - [tiup cluster prune](/tiup/tiup-component-cluster-prune.md)
         - [tiup cluster reload](/tiup/tiup-component-cluster-reload.md)
@@ -384,17 +384,17 @@
         - [tiup cluster start](/tiup/tiup-component-cluster-start.md)
         - [tiup cluster stop](/tiup/tiup-component-cluster-stop.md)
         - [tiup cluster template](/tiup/tiup-component-cluster-template.md)
-        - [TIUP クラスター TLS](/tiup/tiup-component-cluster-tls.md)
+        - [tiup cluster tls](/tiup/tiup-component-cluster-tls.md)
         - [tiup cluster upgrade](/tiup/tiup-component-cluster-upgrade.md)
       - TiUP DMコマンド
         - [概要](/tiup/tiup-component-dm.md)
         - [tiup dm audit](/tiup/tiup-component-dm-audit.md)
-        - [tiup dm デプロイ](/tiup/tiup-component-dm-deploy.md)
+        - [tiup dm deploy](/tiup/tiup-component-dm-deploy.md)
         - [tiup dm destroy](/tiup/tiup-component-dm-destroy.md)
-        - [tiup dm 無効化](/tiup/tiup-component-dm-disable.md)
+        - [tiup dm disable](/tiup/tiup-component-dm-disable.md)
         - [tiup dm display](/tiup/tiup-component-dm-display.md)
         - [tiup dm edit-config](/tiup/tiup-component-dm-edit-config.md)
-        - [tiup dm を有効にする](/tiup/tiup-component-dm-enable.md)
+        - [tiup dm enable](/tiup/tiup-component-dm-enable.md)
         - [tiup dm help](/tiup/tiup-component-dm-help.md)
         - [tiup dm import](/tiup/tiup-component-dm-import.md)
         - [tiup dm list](/tiup/tiup-component-dm-list.md)
@@ -405,8 +405,8 @@
         - [tiup dm restart](/tiup/tiup-component-dm-restart.md)
         - [tiup dm scale-in](/tiup/tiup-component-dm-scale-in.md)
         - [tiup dm scale-out](/tiup/tiup-component-dm-scale-out.md)
-        - [tiup dm 開始](/tiup/tiup-component-dm-start.md)
-        - [tiup dm 停止](/tiup/tiup-component-dm-stop.md)
+        - [tiup dm start](/tiup/tiup-component-dm-start.md)
+        - [tiup dm stop](/tiup/tiup-component-dm-stop.md)
         - [tiup dm template](/tiup/tiup-component-dm-template.md)
         - [tiup dm upgrade](/tiup/tiup-component-dm-upgrade.md)
     - [TiDBクラスタトポロジーリファレンス](/tiup/tiup-cluster-topology-reference.md)
@@ -561,7 +561,7 @@
   - TiProxy
     - [概要](/tiproxy/tiproxy-overview.md)
     - [負荷分散ポリシー](/tiproxy/tiproxy-load-balance.md)
-    - [交通情報リプレイ](/tiproxy/tiproxy-traffic-replay.md)
+    - [トラフィックリプレイ](/tiproxy/tiproxy-traffic-replay.md)
     - [コンフィグレーション](/tiproxy/tiproxy-configuration.md)
     - [コマンドラインパラメータ](/tiproxy/tiproxy-command-line-flags.md)
     - [モニタリング指標](/tiproxy/tiproxy-grafana.md)
@@ -604,7 +604,7 @@
   - [サーバーステータス変数](/status-variables.md)
   - コンフィグレーションファイルパラメータ
     - [tidb-server](/tidb-configuration-file.md)
-    - [tikvサーバー](/tikv-configuration-file.md)
+    - [tikv-server](/tikv-configuration-file.md)
     - [tiflash-server](/tiflash/tiflash-configuration.md)
     - [pd-server](/pd-configuration-file.md)
   - CLI
@@ -614,7 +614,7 @@
     - [pd-recover](/pd-recover.md)
   - コマンドラインフラグ
     - [tidb-server](/command-line-flags-for-tidb-configuration.md)
-    - [tikvサーバー](/command-line-flags-for-tikv-configuration.md)
+    - [tikv-server](/command-line-flags-for-tikv-configuration.md)
     - [tiflash-server](/tiflash/tiflash-command-line-flags.md)
     - [pd-server](/command-line-flags-for-pd-configuration.md)
   - 主要監視指標

@@ -26,7 +26,7 @@ JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを�
 | [-&gt;&gt;](/functions-and-operators/json-functions/json-functions-search.md#--1)                           | 評価パスの後のJSON列から値を返し、結果を引用符で囲まない`JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))`の別名。 |
 | [JSON_KEYS()](/functions-and-operators/json-functions/json-functions-search.md#json_keys)                   | JSONオブジェクトの最上位レベルの値からキーをJSON配列として返します。パス引数が指定されている場合は、選択したパスから最上位レベルのキーを返します。     |
 | [JSON_SEARCH()](/functions-and-operators/json-functions/json-functions-search.md#json_search)               | JSONドキュメントで文字列の1つまたはすべてに一致するものを検索する                                               |
-| [メンバー()](/functions-and-operators/json-functions/json-functions-search.md#member-of)                        | 渡された値が JSON 配列の要素である場合は 1 を返します。それ以外の場合は 0 を返します。                                 |
+| [MEMBER OF()](/functions-and-operators/json-functions/json-functions-search.md#member-of)                        | 渡された値が JSON 配列の要素である場合は 1 を返します。それ以外の場合は 0 を返します。                                 |
 | [JSON_OVERLAPS()](/functions-and-operators/json-functions/json-functions-search.md#json_overlaps)           | 2つのJSONドキュメントに重複部分があるかどうかを示します。重複している場合は1を、重複していない場合は0を返します。                      |
 
 ## JSON値を変更する関数 {#functions-that-modify-json-values}
@@ -50,7 +50,7 @@ JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを�
 | 関数名                                                                                         | 説明                                                |
 | ------------------------------------------------------------------------------------------- | ------------------------------------------------- |
 | [JSON_DEPTH()](/functions-and-operators/json-functions/json-functions-return.md#json_depth) | JSONドキュメントの最大深度を返します                              |
-| [JSON_長さ()](/functions-and-operators/json-functions/json-functions-return.md#json_length)   | JSONドキュメントの長さを返します。パス引数が指定されている場合は、パス内の値の長さを返します。 |
+| [JSON_LENGTH()](/functions-and-operators/json-functions/json-functions-return.md#json_length)   | JSONドキュメントの長さを返します。パス引数が指定されている場合は、パス内の値の長さを返します。 |
 | [JSON_TYPE()](/functions-and-operators/json-functions/json-functions-return.md#json_type)   | JSON値の型を示す文字列を返します                                |
 | [JSON_VALID()](/functions-and-operators/json-functions/json-functions-return.md#json_valid) | json_doc が有効な JSON であるかどうかを確認します。                 |
 
@@ -155,4 +155,4 @@ JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを�
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
-- TiDB は、MySQL 8.0 で利用可能な[JSON関数](https://dev.mysql.com/doc/refman/8.0/en/json-functions.html)ほとんどをサポートしています。
+- TiDB は、MySQL 8.0 で利用可能な[JSON関数](https://dev.mysql.com/doc/refman/8.0/en/json-functions.html)のほとんどをサポートしています。

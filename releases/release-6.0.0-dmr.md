@@ -322,7 +322,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     - `FLASHBACK`または`RECOVER`ステートメントを使用してテーブルを復元した後、テーブルの配置ルール設定を自動的にクリアします[#31668](https://github.com/pingcap/tidb/issues/31668)
     - パフォーマンス概要ダッシュボードを追加して、一般的なクリティカルパスのコアパフォーマンスメトリックを表示し、TiDB でのメトリック分析を容易にします[#31676](https://github.com/pingcap/tidb/issues/31676)
     - `LOAD DATA LOCAL INFILE`ステートメントで`REPLACE`キーワードの使用をサポート [#24515](https://github.com/pingcap/tidb/issues/24515)
-    - 範囲パーティションテーブルの組み込み式`IN`のパーティションプルーニングをサポート [#26739](https://github.com/pingcap/tidb/issues/26739)
+    - レンジパーティションテーブルの組み込み式`IN`のパーティションプルーニングをサポート [#26739](https://github.com/pingcap/tidb/issues/26739)
     - MPP 集計クエリで冗長な Exchange 操作を排除することでクエリ効率を向上[#31762](https://github.com/pingcap/tidb/issues/31762)
     - `TRUNCATE PARTITION`と`DROP PARTITION`ステートメントで重複したパーティション名を許可することでMySQLとの互換性を向上させます[#31681](https://github.com/pingcap/tidb/issues/31681)
     - `ADMIN SHOW DDL JOBS`文の結果に`CREATE_TIME`情報を表示することをサポートします [#23494](https://github.com/pingcap/tidb/issues/23494)

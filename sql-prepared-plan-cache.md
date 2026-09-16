@@ -47,7 +47,7 @@ LRUリンクリストは、 `Prepare` / `Execute`セッションをまたいで�
 
 前述の情報に変更がある場合 (たとえば、データベースの切り替え、 `Prepare`文の名前変更、DDL 文の実行、SQL mode/ `time_zone`の値の変更)、または LRU キャッシュ削除メカニズムにより、実行時に実行計画のキャッシュ ミスが発生します。
 
-実行計画キャッシュがキャッシュから取得された後、TiDBはまず実行計画がまだ有効かどうかを確認します。現在の`Execute`文が明示的なトランザクションで実行され、参照先のテーブルがトランザクションの事前順序付け文で変更された場合、このテーブルにアクセスするキャッシュされた実行計画に`UnionScan`オペレーターが含まれていないため、実行できません。
+実行プランがキャッシュから取得された後、TiDBはまず実行計画がまだ有効かどうかを確認します。現在の`Execute`文が明示的なトランザクションで実行され、参照先のテーブルがトランザクションの事前順序付け文で変更された場合、このテーブルにアクセスするキャッシュされた実行計画に`UnionScan`オペレーターが含まれていないため、実行できません。
 
 検証テストに合格すると、実行計画のスキャン範囲が現在のパラメータ値に応じて調整され、データクエリの実行に使用されます。
 
@@ -97,7 +97,7 @@ MySQL [test]> select @@last_plan_from_cache;
 1 row in set (0.00 sec)
 ```
 
-実行計画キャッシュが原因で、特定の`Prepare` / `Execute`のセットで予期しない動作が発生する場合は、SQLヒント`ignore_plan_cache()`を使用して、現在のステートメントの実行計画キャッシュの使用をスキップできます。ただし、前述のステートメントを例として挙げます。
+実行プランキャッシュが原因で、特定の`Prepare` / `Execute`のセットで予期しない動作が発生する場合は、SQLヒント`ignore_plan_cache()`を使用して、現在のステートメントの実行プランキャッシュの使用をスキップできます。ここでも、前述のステートメントを例として挙げます。
 
 ```sql
 MySQL [test]> prepare stmt from 'select /*+ ignore_plan_cache() */ * from t where a = ?';
@@ -195,7 +195,7 @@ LIMIT 10;
 >
 > Golangのメモリ回収メカニズムと一部の非カウントメモリ構造のため、Grafanaに表示されるメモリは実際のヒープメモリ使用量と一致しません。Grafanaに表示されるメモリと実際のヒープメモリ使用量の間には、約±20%の誤差があることがテストで確認されています。
 
-各 TiDB インスタンスにキャッシュされている実行計画の合計数を表示するには、Grafana の[**プランキャッシュプラン番号**パネル](/grafana-tidb-dashboard.md)を使用できます。
+各 TiDB インスタンスにキャッシュされている実行計画の合計数を表示するには、Grafana の[**Plan Cache Plan Num**パネル](/grafana-tidb-dashboard.md)を使用できます。
 
 以下は、Grafana の**Plan Cache Memory Usage**パネルと**Plan Cache Plan Num**パネルの例です。
 
@@ -236,7 +236,7 @@ TiDBサーバーの未使用メモリが一定のしきい値を下回ると、�
 
 </CustomContent>
 
-## 実行計画のキャッシュをクリアする {#clear-execution-plan-cache}
+## 実行プランキャッシュをクリアする {#clear-execution-plan-cache}
 
 `ADMIN FLUSH [SESSION | INSTANCE] PLAN_CACHE`ステートメントを実行すると、実行プランキャッシュをクリアできます。
 
@@ -280,7 +280,7 @@ MySQL [test]> select @@last_plan_from_cache; -- The cached plan cannot be select
 1 row in set (0.00 sec)
 ```
 
-現在、TiDBは`GLOBAL`実行計画キャッシュのクリアをサポートしていません。つまり、TiDBクラスタ全体のキャッシュされた計画をクリアすることはできません。`GLOBAL`実行計画キャッシュをクリアしようとすると、以下のエラーが報告されます。
+現在、TiDBは`GLOBAL`実行プランキャッシュのクリアをサポートしていません。つまり、TiDBクラスタ全体のキャッシュされた実行プランをクリアすることはできません。`GLOBAL`実行プランキャッシュをクリアしようとすると、以下のエラーが報告されます。
 
 ```sql
 MySQL [test]> admin flush global plan_cache;
