@@ -35,7 +35,7 @@ TiFlashはTiDBと互換性があります。TiDBをTiFlashの計算エンジン�
 
 ワークロードの分離を確保するため、 TiFlash をTiKV とは別のノードにデプロイすることをお勧めします。業務上の分離が不要な場合は、 TiFlashと TiKV を同じノードにデプロイすることも可能です。
 
-現在、 TiFlashに直接データを書き込むことはできません。TiKV は TiDB クラスターにLearnerロールとして接続するため、 TiFlashにデータを書き込み、それを複製する必要があります。TiFlashはテーブル単位でのデータ複製をサポートしていますが、デプロイ後、デフォルトではデータは複製されません。指定したテーブルのデータを複製するには、 [テーブルのTiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md#create-tiflash-replicas-for-tables)を参照してください。
+現在、 TiFlashに直接データを書き込むことはできません。TiKVにデータを書き込み、それをTiFlashに複製する必要があります。これは、 TiFlashがLearnerロールとして TiDB クラスターに接続するためです。TiFlashはテーブル単位でのデータ複製をサポートしていますが、デプロイ後、デフォルトではデータは複製されません。指定したテーブルのデータを複製するには、 [テーブルのTiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md#create-tiflash-replicas-for-tables)を参照してください。
 
 TiFlashは、列指向ストレージコンポーネントとTiFlashプロキシコンポーネントという2つの主要コンポーネントで構成されています。TiFlashコンポーネントは、Multi-Raftコンセンサスアルゴリズムを用いた通信を担います。
 

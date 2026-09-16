@@ -47,7 +47,7 @@ TiDBバージョン：5.1.5
     - `tidb_opt_agg_push_down`と`tidb_enforce_mpp`が有効になっている場合に発生するプランナーの誤った動作を修正します [#34465](https://github.com/pingcap/tidb/issues/34465)
     - TiDBが`SHOW COLUMNS`ステートメントを実行する際にコプロセッサリクエストを送信する可能性があるバグを修正しました [#36496](https://github.com/pingcap/tidb/issues/36496)
     - `lock tables`フラグが有効になっていない場合に、 `unlock tables`と`enable-table-lock`に対する警告を追加する [#28967](https://github.com/pingcap/tidb/issues/28967)
-    - 範囲パーティションで複数の`MAXVALUE`パーティションが許可される問題を修正 [#36329](https://github.com/pingcap/tidb/issues/36329)
+    - レンジパーティションで複数の`MAXVALUE`パーティションが許可される問題を修正 [#36329](https://github.com/pingcap/tidb/issues/36329)
 
 - TiKV
 

@@ -195,7 +195,7 @@ Here is an example for Header:
 
 TiDB Self-Managed ユーザーの認証方法として`tidb_auth_token`を設定して使用するには、次の手順を実行します。
 
-1. Configure [`auth-token-jwks`](/tidb-configuration-file.md#auth-token-jwks-new-in-v640) and [`auth-token-refresh-interval`](/tidb-configuration-file.md#auth-token-refresh-interval-new-in-v640) in the TiDB configuration file.
+1. TiDB設定ファイルで[`auth-token-jwks`](/tidb-configuration-file.md#auth-token-jwks-new-in-v640)と[`auth-token-refresh-interval`](/tidb-configuration-file.md#auth-token-refresh-interval-new-in-v640)を設定します。
 
     たとえば、次のコマンドを使用して JWKS の例を取得できます。
 

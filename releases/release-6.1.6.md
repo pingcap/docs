@@ -40,7 +40,7 @@ TiDB バージョン: 6.1.6
     - IndexMerge プランが SET 型の列に誤った範囲を生成する可能性がある問題を修正しました [#41273](https://github.com/pingcap/tidb/issues/41273) [#41293](https://github.com/pingcap/tidb/issues/41293) @[time-and-fate](https://github.com/time-and-fate)
     - 符号なしの`TINYINT` / `SMALLINT` / `INT`値を`0`より小さい`DECIMAL` / `FLOAT` / `DOUBLE`値と比較するときに誤った結果になる可能性がある問題を修正しました。 [#41736](https://github.com/pingcap/tidb/issues/41736) @[LittleFall](https://github.com/LittleFall)
     - `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルへのクエリ実行時に TiDBサーバーのメモリが発生する問題を修正しました。この問題は、Grafana ダッシュボードでスロークエリを確認した場合に発生する可能性があります。 [#33893](https://github.com/pingcap/tidb/issues/33893) @[crazycs520](https://github.com/crazycs520)
-    - 範囲パーティションで複数の`MAXVALUE`パーティションが許可される問題を修正しました [#36329](https://github.com/pingcap/tidb/issues/36329) @[u5surf](https://github.com/u5surf)
+    - レンジパーティションで複数の`MAXVALUE`パーティションが許可される問題を修正しました [#36329](https://github.com/pingcap/tidb/issues/36329) @[u5surf](https://github.com/u5surf)
     - プランキャッシュがシャッフル演算子をキャッシュし、誤った結果を返す可能性がある問題を修正[#38335](https://github.com/pingcap/tidb/issues/38335) @[qw4990](https://github.com/qw4990)
     - タイムゾーンでのデータ競合によりデータインデックスの不整合が発生する可能性がある問題を修正[#40710](https://github.com/pingcap/tidb/issues/40710) @[wjhuang2016](https://github.com/wjhuang2016)
     - `indexMerge`で goroutine リークが発生する可能性がある問題を修正しました [#41545](https://github.com/pingcap/tidb/issues/41545) [#41605](https://github.com/pingcap/tidb/issues/41605) @[guo-shaoge](https://github.com/guo-shaoge) @[guo-shaoge](https://github.com/guo-shaoge)

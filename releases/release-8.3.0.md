@@ -194,9 +194,9 @@ TiDBバージョン：8.3.0
 | [`tidb_enable_shared_lock_promotion`](/system-variables.md#tidb_enable_shared_lock_promotion-new-in-v830)     | 新しく追加された | 共有ロックを排他ロックにアップグレードする機能を有効にするかどうかを制御します。この変数のデフォルト値は`OFF`であり、これは共有ロックを排他ロックにアップグレードする機能が無効になっていることを意味します。                                                                                                                                                                                                |
 | [`tiflash_hashagg_preaggregation_mode`](/system-variables.md#tiflash_hashagg_preaggregation_mode-new-in-v830) | 新しく追加された | TiFlashにプッシュダウンされる2段階または3段階のHashAgg操作の最初の段階で使用される事前集計戦略を制御します。                                                                                                                                                                                                                                           |
 
-### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
+### 設定ファイルパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                        | 変更の種類  | 説明                                                                                                                                                      |
+| 設定ファイル | 設定パラメータ                                                                                        | 変更の種類  | 説明                                                                                                                                                      |
 | -------------- | ------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`tikv-client.batch-policy`](/tidb-configuration-file.md#batch-policy-new-in-v830)                     | 新しく追加された | TiDBからTiKVへのリクエストのバッチ処理戦略を制御します。                                                                                                                        |
 | PD             | [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50)                     | 変更     | PD設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークできます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。                    |
@@ -252,7 +252,7 @@ TiDBバージョン：8.3.0
 - PD
 
     - `pd-ctl`を介して`evict-leader-scheduler`の`batch`構成を変更してリーダー退去プロセスを加速するサポート [#8265](https://github.com/tikv/pd/issues/8265) @[rleungx](https://github.com/rleungx)
-    - Grafana の**クラスタ &gt; Label 配信**パネルに`store_id`モニタリングメトリックを追加して、異なるラベルに対応するストア ID を表示します [#8337](https://github.com/tikv/pd/issues/8337) @[HuSharp](https://github.com/HuSharp)
+    - Grafana の**Cluster > Label distribution**パネルに`store_id`モニタリングメトリックを追加して、異なるラベルに対応するストア ID を表示します [#8337](https://github.com/tikv/pd/issues/8337) @[HuSharp](https://github.com/HuSharp)
     - 指定されたリソースグループが存在しない場合、デフォルトのリソースグループへのフォールバックをサポートする [#8388](https://github.com/tikv/pd/issues/8388) @[JmPotato](https://github.com/JmPotato)
     - `pd-ctl`の`region`コマンドが出力するリージョン情報に`approximate_kv_size`フィールドを追加します。 [#8412](https://github.com/tikv/pd/issues/8412) @[zeminzhou](https://github.com/zeminzhou)
     - PD APIを呼び出してTTL設定を削除したときに返されるメッセージを最適化します [#8450](https://github.com/tikv/pd/issues/8450) @[lhy1024](https://github.com/lhy1024)

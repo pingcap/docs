@@ -47,13 +47,13 @@ Sink URI を使用して TiCDC ターゲット システムの接続情報を指
 [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
 ```
 
-コンフィグレーション例1:
+設定例1:
 
 ```shell
 --sink-uri="pulsar://127.0.0.1:6650/persistent://abc/def/yktest?protocol=canal-json"
 ```
 
-コンフィグレーション例2:
+設定例2:
 
 ```shell
 --sink-uri="pulsar://127.0.0.1:6650/yktest?protocol=canal-json"
@@ -66,7 +66,7 @@ URI で設定可能なパラメータは次のとおりです。
 | `pulsar`                      | 下流Pulsarのスキーム。値は`pulsar` 、 `pulsar+ssl` 、 `pulsar+http` 、 `pulsar+https`のいずれかで、v8.2.0以降では`pulsar+http`と`pulsar+https`がサポートされています。                                       |
 | `127.0.0.1`                   | ダウンストリーム Pulsar がサービスを提供する IP アドレス。                                                                                                                                   |
 | `6650`                        | 下流 Pulsar の接続ポート。                                                                                                                                                     |
-| `persistent://abc/def/yktest` | 前の構成例 1 に示されているように、このパラメータは Pulsar のテナント、名前空間、トピックを指定するために使用されます。                                                                                                     |
+| `persistent://abc/def/yktest` | 前の設定例1に示されているように、このパラメータは Pulsar のテナント、名前空間、トピックを指定するために使用されます。                                                                                                     |
 | `yktest`                      | 上記の設定例 2 に示すように、指定したいトピックがPulsarのデフォルトテナント`public`のデフォルト名前空間`default`にある場合、トピック名のみ（例： `yktest` ）でURIを設定できます。これは、トピックを`persistent://public/default/yktest`と指定するのと同じです。 |
 
 ### Changefeed 設定パラメータ {#changefeed-config-parameters}
@@ -151,7 +151,7 @@ TiCDCはv7.5.1およびv8.0.0以降、PulsarのTLS暗号化通信をサポート
 --sink-uri="pulsar+ssl://127.0.0.1:6651/persistent://public/default/yktest?protocol=canal-json"
 ```
 
-コンフィグレーション：
+設定：
 
 ```toml
 [sink.pulsar-config]
@@ -252,7 +252,7 @@ tls-key-file-path="/data/pulsar/tls-key-file"
 
 ### Matcherのマッチングルール {#matching-rules-for-matcher}
 
-次のサンプル構成ファイルの`dispatchers`設定項目を例に挙げます。
+次のサンプル設定ファイルの`dispatchers`設定項目を例に挙げます。
 
 ```toml
 [sink]
